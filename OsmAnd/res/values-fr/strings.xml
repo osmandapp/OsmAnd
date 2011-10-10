@@ -216,8 +216,6 @@ Le point de destination est largement utilisé pour mesurer la distance et la na
 <string name="map_index">Carte</string>
 <string name="voice">Voix</string>
 <string name="no_vector_map_loaded">Aucune carte vectorielle n\'a été chargée</string>
-<string name="gpx_reverse_route">Itinéraire de retour</string>
-<string name="gpx_direct_route">Itinéraire d\'aller</string>
 <string name="map_route_by_gpx">Itinéraires GPX enregistrés</string>
 <string name="gpx_files_not_found">Aucun fichier GPX n\'a été trouvé dans le dossier /osmand/tracks</string>
 <string name="layer_gpx_layer">Traces GPX...</string>
@@ -476,7 +474,7 @@ Le point de destination est largement utilisé pour mesurer la distance et la na
 <string name="settings_activity">Paramètres</string>
 <string name="show_gps_coordinates_text">Afficher les coordonnées GPS sur la carte</string>
 <string name="use_internet_to_download_tile">Utiliser internet pour télécharger les carreaux manquantes</string>
-<string name="app_name">OsmAnd</string>
+<string name="app_name">OsmAndAccess</string>
 <string name="app_description">Application de navigation</string>
 <string name="exit_Button">Quitter</string>
 <string name="map_Button">Carte</string>
@@ -582,5 +580,4 @@ navigate_point_format_D, DM & DMS
 <string name="edit_filter_delete_message">Filtre {0} effacé</string>
 <string name="edit_filter_create_message">Le filtre {0} a été créé</string>
 <string name="default_buttons_selectall">Tout sélectionner</string>
-<string name="daynight_none_descr">Sélectionner le moteur de rendu équivalent pour la nuit</string>
 </resources>

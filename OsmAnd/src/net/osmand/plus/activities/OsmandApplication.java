@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.Algoritms;
 import net.osmand.FavouritePoint;
 import net.osmand.LogUtil;
@@ -343,7 +344,7 @@ public class OsmandApplication extends Application {
 		uiHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				Toast.makeText(uiContext, b.toString(), Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(uiContext, b.toString(), Toast.LENGTH_LONG).show();
 			}
 		});
 	}

@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.MessageFormat;
 
 import net.osmand.Version;
+import net.osmand.access.AccessibleActivity;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -35,7 +36,7 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 
-public class MainMenuActivity extends Activity {
+public class MainMenuActivity extends AccessibleActivity {
 
 	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
 	private static final String TIPS_SHOW = "TIPS_SHOW"; //$NON-NLS-1$
@@ -57,15 +58,15 @@ public class MainMenuActivity extends Activity {
 			if (size != file.length() && !firstTime) {
 				String msg = MessageFormat.format(getString(R.string.previous_run_crashed), OsmandApplication.EXCEPTION_PATH);
 				Builder builder = new AlertDialog.Builder(MainMenuActivity.this);
-				builder.setMessage(msg).setNeutralButton(getString(R.string.close), null);
+				builder.setView(accessibleMessage(msg)).setNeutralButton(getString(R.string.close), null);
 				builder.setPositiveButton(R.string.send_report, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Intent intent = new Intent(Intent.ACTION_SEND);
-						intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "osmand.app@gmail.com" }); //$NON-NLS-1$
+						intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "poretsky@mlbox.ru" }); //$NON-NLS-1$
 						intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
 						intent.setType("vnd.android.cursor.dir/email"); //$NON-NLS-1$
-						intent.putExtra(Intent.EXTRA_SUBJECT, "OsmAnd bug"); //$NON-NLS-1$
+						intent.putExtra(Intent.EXTRA_SUBJECT, "OsmAndAccess bug"); //$NON-NLS-1$
 						StringBuilder text = new StringBuilder();
 						text.append("\nDevice : ").append(Build.DEVICE); //$NON-NLS-1$
 						text.append("\nBrand : ").append(Build.BRAND); //$NON-NLS-1$
@@ -155,6 +156,9 @@ public class MainMenuActivity extends Activity {
 				dlg.show();
 			}
 		});
+
+		// Provide on-touch accessible exploration.
+		takeCareOf(window);
 	}
 	
 	
@@ -247,12 +251,12 @@ public class MainMenuActivity extends Activity {
 			
 			if(netOsmandWasInstalled){
 				Builder builder = new AlertDialog.Builder(this);
-				builder.setMessage(R.string.osmand_net_previously_installed);
+				builder.setView(accessibleMessage(R.string.osmand_net_previously_installed));
 				builder.setPositiveButton(R.string.default_buttons_ok, null);
 				builder.show();
 			} else {
 				Builder builder = new AlertDialog.Builder(this);
-				builder.setMessage(R.string.first_time_msg);
+				builder.setView(accessibleMessage(R.string.first_time_msg));
 				builder.setPositiveButton(R.string.first_time_download, new DialogInterface.OnClickListener() {
 
 					@Override

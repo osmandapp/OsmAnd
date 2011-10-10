@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.Base64;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
@@ -126,7 +127,7 @@ public class EditingPOIActivity {
 			dlg.setTitle(R.string.poi_edit_title);
 			showDialog(n, a.getType(), a.getSubType());
 		} else {
-			Toast.makeText(ctx, ctx.getString(R.string.poi_error_poi_not_found), Toast.LENGTH_SHORT).show();
+			AccessibleToast.makeText(ctx, ctx.getString(R.string.poi_error_poi_not_found), Toast.LENGTH_SHORT).show();
 		}
 	}
 	
@@ -141,7 +142,7 @@ public class EditingPOIActivity {
 	public void showDeleteDialog(Amenity a){
 		final Node n = loadNode(a);
 		if(n == null){
-			Toast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
 			return;
 		}
 		
@@ -159,7 +160,7 @@ public class EditingPOIActivity {
 				commitNode(DELETE_ACTION, n, entityInfo, c, new Runnable(){
 					@Override
 					public void run() {
-						Toast.makeText(ctx, ctx.getResources().getString(R.string.poi_remove_success), Toast.LENGTH_LONG).show();
+						AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.poi_remove_success), Toast.LENGTH_LONG).show();
 						if(view != null){
 							view.refreshMap();
 						}						
@@ -316,7 +317,7 @@ public class EditingPOIActivity {
 				commitNode(action, n, entityInfo, commentText.getText().toString(), new Runnable() {
 					@Override
 					public void run() {
-						Toast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_action_succeded_template), msg),
+						AccessibleToast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_action_succeded_template), msg),
 								Toast.LENGTH_LONG).show();
 						if (view != null) {
 							view.refreshMap();
@@ -354,7 +355,7 @@ public class EditingPOIActivity {
 		view.post(new Runnable(){
 			@Override
 			public void run() {
-				Toast.makeText(ctx, msg, Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(ctx, msg, Toast.LENGTH_LONG).show();
 			}
 			
 		});
@@ -381,7 +382,7 @@ public class EditingPOIActivity {
 		
 		
 		if(time == null){
-			Toast.makeText(ctx, ctx.getString(R.string.opening_hours_not_supported), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(ctx, ctx.getString(R.string.opening_hours_not_supported), Toast.LENGTH_LONG).show();
 			return;
 		}
 		
@@ -637,7 +638,7 @@ public class EditingPOIActivity {
 	
 	public void commitNode(final String action, final Node n, final EntityInfo info, final String comment, final Runnable successAction) {
 		if (info == null && !CREATE_ACTION.equals(action)) {
-			Toast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();
 			return;
 		}
 		final ProgressDialog progress = ProgressDialog.show(ctx, ctx.getString(R.string.uploading), ctx.getString(R.string.uploading_data));
@@ -753,10 +754,10 @@ public class EditingPOIActivity {
 			
 		} catch (IOException e) {
 			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
-			Toast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
 		} catch (SAXException e) {
 			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
-			Toast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
 		}
 		return null;
 	}

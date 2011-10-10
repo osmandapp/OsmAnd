@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.data.Amenity;
@@ -100,7 +101,7 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 			if(n.getSite() != null){
 				format += "\n" + view.getContext().getString(R.string.website) +" : "+ n.getSite(); //$NON-NLS-1$ //$NON-NLS-2$
 			}
-			Toast.makeText(view.getContext(), format, Toast.LENGTH_SHORT).show();
+			AccessibleToast.makeText(view.getContext(), format, Toast.LENGTH_SHORT).show();
 			return true;
 		}
 		return false;
@@ -225,7 +226,7 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 						view.getContext().startActivity(intent);
 					} catch (RuntimeException e) {
 						log.error("Failed to invoke call", e); //$NON-NLS-1$
-						Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+						AccessibleToast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
 					}
 				} else if (which == siteIndex) {
 					try {
@@ -234,7 +235,7 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 						view.getContext().startActivity(intent);
 					} catch (RuntimeException e) {
 						log.error("Failed to invoke call", e); //$NON-NLS-1$
-						Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+						AccessibleToast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
 					}
 				} else {
 				}

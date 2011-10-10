@@ -96,8 +96,6 @@
 	<string name="map_index">Mapa</string>
 	<string name="voice">Vozes</string>
 	<string name="no_vector_map_loaded">Nenhum mapa vetorial foi carregado</string>
-	<string name="gpx_reverse_route">Caminho reverso</string>
-	<string name="gpx_direct_route">Caminho direto</string>
 	<string name="map_route_by_gpx">Navegar usando GPX</string>
 	<string name="gpx_files_not_found">Nenhum arquivo GPX encontrado no diretório /tracks</string>
 	<string name="layer_gpx_layer">Rotas GPX...</string>
@@ -361,7 +359,7 @@
 	<string name="settings_activity">Configurações</string>
 	<string name="show_gps_coordinates_text">Mostrar as coordenadas GPS no mapa</string>
 	<string name="use_internet_to_download_tile">Use a Internet para baixar as imagens que faltam</string>
-	<string name="app_name">OsmAnd</string>
+	<string name="app_name">OsmAndAccess</string>
 	<string name="app_description">Aplicação de navegação</string>
 	<string name="exit_Button">Sair</string>
 	<string name="map_Button">Mapa</string>

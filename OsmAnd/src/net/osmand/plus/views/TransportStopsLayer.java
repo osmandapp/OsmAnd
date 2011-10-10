@@ -3,6 +3,7 @@ package net.osmand.plus.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
@@ -71,7 +72,7 @@ public class TransportStopsLayer implements OsmandMapLayer, ContextMenuLayer.ICo
 	public boolean onTouchEvent(PointF point) {
 		TransportStop n = getFromPoint(point);
 		if(n != null){
-			Toast.makeText(view.getContext(), getStopDescription(n, true), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(view.getContext(), getStopDescription(n, true), Toast.LENGTH_LONG).show();
 			return true;
 		}
 		return false;

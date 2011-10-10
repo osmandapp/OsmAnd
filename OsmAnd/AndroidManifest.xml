@@ -52,10 +52,9 @@
 </application>
 
 
-<!--  comment change build properties for release & set targetSdkVersion="7", build and  reverse changes-->
 <!--  <uses-sdk android:minSdkVersion="3"/> -->
 <!--   uncomment it to allow different screen supports (large/small)-->
-<uses-sdk android:minSdkVersion="3" android:targetSdkVersion="4"/>  
+<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="7"/>  
 
 
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>

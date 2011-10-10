@@ -3,6 +3,7 @@ package net.osmand.plus.activities;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.LogUtil;
 import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
@@ -48,11 +49,11 @@ public class DownloadTilesDialog {
 	public void openDialog(){
 		BaseMapLayer mainLayer = mapView.getMainLayer();
 		if(!(mainLayer instanceof MapTileLayer) || !((MapTileLayer) mainLayer).isVisible()){
-			Toast.makeText(ctx, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
+			AccessibleToast.makeText(ctx, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
 		}
 		final ITileSource mapSource = ((MapTileLayer) mainLayer).getMap();
 		if(mapSource == null || !mapSource.couldBeDownloadedFromInternet()){
-			Toast.makeText(ctx, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
+			AccessibleToast.makeText(ctx, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
 			return;
 		}
 		final int max = mapSource.getMaximumZoomSupported();

@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.NavigationService;
@@ -465,7 +466,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			if (boolPref.getId().equals(osmandSettings.MAP_VECTOR_DATA.getId())) {
 				MapRenderRepositories r = ((OsmandApplication)getApplication()).getResourceManager().getRenderer();
 				if(r.isEmpty()){
-					Toast.makeText(this, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(this, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
 					return false;
 				}
 			}
@@ -504,9 +505,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			}
 			if (listPref.getId().equals(osmandSettings.RENDERER.getId())) {
 				if(changed){
-					Toast.makeText(this, R.string.renderer_load_sucess, Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(this, R.string.renderer_load_sucess, Toast.LENGTH_SHORT).show();
 				} else {
-					Toast.makeText(this, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(this, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 				}
 			}
 		} else if(preference == applicationDir){
@@ -557,7 +558,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		File path = new File(newDir);
 		path.mkdirs();
 		if(!path.canRead() || !path.exists()){
-			Toast.makeText(this, R.string.specified_dir_doesnt_exist, Toast.LENGTH_LONG).show()	;
+			AccessibleToast.makeText(this, R.string.specified_dir_doesnt_exist, Toast.LENGTH_LONG).show()	;
 			return;
 		}
 		
@@ -624,7 +625,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-					Toast.makeText(SettingsActivity.this, b.toString(), Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(SettingsActivity.this, b.toString(), Toast.LENGTH_LONG).show();
 
 				}
 			});
@@ -682,12 +683,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		final OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
 		final Map<String, String> entriesMap = settings.getTileSourceEntries();
 		if(!settings.isInternetConnectionAvailable(true)){
-			Toast.makeText(activity, R.string.internet_not_available, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(activity, R.string.internet_not_available, Toast.LENGTH_LONG).show();
 			return;
 		}
 		final List<TileSourceTemplate> downloaded = TileSourceManager.downloadTileSourceTemplates();
 		if(downloaded == null || downloaded.isEmpty()){
-			Toast.makeText(activity, R.string.error_io_error, Toast.LENGTH_SHORT).show();
+			AccessibleToast.makeText(activity, R.string.error_io_error, Toast.LENGTH_SHORT).show();
 			return;
 		}
 		Builder builder = new AlertDialog.Builder(activity);
@@ -702,7 +703,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 				selected[which] = isChecked;
 				if(entriesMap.containsKey(downloaded.get(which).getName()) && isChecked){
-					Toast.makeText(activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
 				}
 			}
 		});

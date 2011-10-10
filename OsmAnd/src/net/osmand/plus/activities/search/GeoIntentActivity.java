@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.OsmAndFormatter;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
@@ -103,7 +104,7 @@ public class GeoIntentActivity extends ListActivity {
 			@Override
 			public void run() {
 				if (places == null) {
-					Toast.makeText(GeoIntentActivity.this, getString(warning),
+					AccessibleToast.makeText(GeoIntentActivity.this, getString(warning),
 							Toast.LENGTH_LONG).show();
 				} else {
 					setListAdapter(new MapObjectAdapter(places));
@@ -324,7 +325,7 @@ public class GeoIntentActivity extends ListActivity {
 				} catch (NumberFormatException e) {
 					runOnUiThread(new Runnable() {
 						public void run() {
-							Toast.makeText(GeoIntentActivity.this,
+							AccessibleToast.makeText(GeoIntentActivity.this,
 									getString(R.string.search_offline_geo_error, geo),
 									Toast.LENGTH_LONG);
 						}

@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.FavouritePoint;
 import net.osmand.LogUtil;
 import net.osmand.data.Amenity;
@@ -70,13 +71,13 @@ public class MapActivityActions {
 					public void onClick(DialogInterface dialog, int which) {
 						FavouritePoint fv = helper.getFavoritePointByName(ar[which]);
 						if(helper.editFavourite(fv, latitude, longitude)){
-							Toast.makeText(mapActivity, getString(R.string.fav_points_edited), Toast.LENGTH_SHORT).show();
+							AccessibleToast.makeText(mapActivity, getString(R.string.fav_points_edited), Toast.LENGTH_SHORT).show();
 						}
 						mapActivity.getMapView().refreshMap();
 					}
 				});
 				if(ar.length == 0){
-					Toast.makeText(mapActivity, getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(mapActivity, getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
 					helper.close();
 				}  else {
 					b.show();
@@ -91,7 +92,7 @@ public class MapActivityActions {
 				p.setName(editText.getText().toString());
 				boolean added = helper.addFavourite(p);
 				if (added) {
-					Toast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_favorite_dialog_favourite_added_template), p.getName()), Toast.LENGTH_SHORT)
+					AccessibleToast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_favorite_dialog_favourite_added_template), p.getName()), Toast.LENGTH_SHORT)
 							.show();
 				}
 				mapActivity.getMapView().refreshMap();
@@ -112,7 +113,7 @@ public class MapActivityActions {
 			public void onClick(DialogInterface dialog, int which) {
 				String name = editText.getText().toString();
 				savingTrackHelper.insertPointData(latitude, longitude, System.currentTimeMillis(), name);
-				Toast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_waypoint_dialog_added), name), Toast.LENGTH_SHORT)
+				AccessibleToast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_waypoint_dialog_added), name), Toast.LENGTH_SHORT)
 							.show();
 			}
 		});
@@ -129,12 +130,12 @@ public class MapActivityActions {
 			public void onClick(DialogInterface dialog, int which) {
 				BaseMapLayer mainLayer = mapView.getMainLayer();
 				if(!(mainLayer instanceof MapTileLayer) || !((MapTileLayer) mainLayer).isVisible()){
-					Toast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
 					return;
 				}
 				final ITileSource mapSource = ((MapTileLayer) mainLayer).getMap();
 				if(mapSource == null || !mapSource.couldBeDownloadedFromInternet()){
-					Toast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
 					return;
 				}
 				Rect pixRect = new Rect(0, 0, mapView.getWidth(), mapView.getHeight());
@@ -172,13 +173,13 @@ public class MapActivityActions {
     
     protected void updatePoiDb(int zoom, double latitude, double longitude){
     	if(zoom < 15){
-    		Toast.makeText(mapActivity, getString(R.string.update_poi_is_not_available_for_zoom), Toast.LENGTH_SHORT).show();
+    		AccessibleToast.makeText(mapActivity, getString(R.string.update_poi_is_not_available_for_zoom), Toast.LENGTH_SHORT).show();
     		return;
     	}
     	final List<AmenityIndexRepository> repos = ((OsmandApplication) mapActivity.getApplication()).
     								getResourceManager().searchAmenityRepositories(latitude, longitude);
     	if(repos.isEmpty()){
-    		Toast.makeText(mapActivity, getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_SHORT).show();
+    		AccessibleToast.makeText(mapActivity, getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_SHORT).show();
     		return;
     	}
     	final OsmandMapTileView mapView = mapActivity.getMapView();
@@ -229,7 +230,7 @@ public class MapActivityActions {
     	mapActivity.runOnUiThread(new Runnable(){
 			@Override
 			public void run() {
-				Toast.makeText(mapActivity, msg, Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(mapActivity, msg, Toast.LENGTH_LONG).show();
 			}
     	});
     }

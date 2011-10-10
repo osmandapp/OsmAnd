@@ -269,8 +269,6 @@
 	<string name="map_index">Karte</string>
 	<string name="voice">Ansagen</string>
 	<string name="no_vector_map_loaded">Offline-Daten wurden nicht geladen</string>
-	<string name="gpx_reverse_route">Umgekehrte Richtung</string>
-	<string name="gpx_direct_route">Original-Richtung</string>
 	<string name="map_route_by_gpx">Route mittels GPX</string>
 	<string name="gpx_files_not_found">Keine GPX Dateien gefunden in /tracks-Ordner</string>
 	<string name="layer_gpx_layer">GPX Tracks...</string>
@@ -533,7 +531,7 @@
     <string name="settings_activity">Einstellungen</string>
     <string name="show_gps_coordinates_text">GPS-Koordinaten auf der Karte anzeigen</string>
     <string name="use_internet_to_download_tile">Fehlende Kartenteile aus dem Internet nachladen</string>
-    <string name="app_name">OsmAnd</string>
+    <string name="app_name">OsmAndAccess</string>
     <string name="app_description">Navigationsanwendung OsmAnd</string>
 
 <string name="exit_Button">Beenden</string>

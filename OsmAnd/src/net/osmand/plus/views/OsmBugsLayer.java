@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.LogUtil;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandSettings;
@@ -213,7 +214,7 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 		OpenStreetBug bug = getBugFromPoint(point);
 		if(bug != null){
 			String format = view.getContext().getString(R.string.osb_bug_name)+ " : " + bug.getName(); //$NON-NLS-1$
-			Toast.makeText(view.getContext(), format, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(view.getContext(), format, Toast.LENGTH_LONG).show();
 			return true;
 		}
 		return false;
@@ -331,13 +332,13 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 				OsmandSettings.getOsmandSettings(ctx).USER_OSM_BUG_NAME.set(author);
 				boolean bug = createNewBug(latitude, longitude, text, author);
 		    	if (bug) {
-		    		Toast.makeText(ctx, ctx.getResources().getString(R.string.osb_add_dialog_success), Toast.LENGTH_LONG).show();
+		    		AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.osb_add_dialog_success), Toast.LENGTH_LONG).show();
 					clearCache();
 					if (mapView.getLayers().contains(OsmBugsLayer.this)) {
 						mapView.refreshMap();
 					}
 				} else {
-					Toast.makeText(ctx, ctx.getResources().getString(R.string.osb_add_dialog_error), Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.osb_add_dialog_error), Toast.LENGTH_LONG).show();
 					openBugAlertDialog(ctx, layoutInflater, mapView, latitude, longitude, text, author);
 				}
 			}
@@ -365,13 +366,13 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 				OsmandSettings.getOsmandSettings(ctx).USER_OSM_BUG_NAME.set(author);
 				boolean added = addingComment(bug.getId(), text, author);
 		    	if (added) {
-		    		Toast.makeText(ctx, ctx.getResources().getString(R.string.osb_comment_dialog_success), Toast.LENGTH_LONG).show();
+		    		AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.osb_comment_dialog_success), Toast.LENGTH_LONG).show();
 					clearCache();
 					if (OsmBugsLayer.this.view.getLayers().contains(OsmBugsLayer.this)) {
 						OsmBugsLayer.this.view.refreshMap();
 					}
 				} else {
-					Toast.makeText(ctx, ctx.getResources().getString(R.string.osb_comment_dialog_error), Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.osb_comment_dialog_error), Toast.LENGTH_LONG).show();
 				}
 			}
 		});
@@ -387,13 +388,13 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 			public void onClick(DialogInterface dialog, int which) {
 				boolean closed = closingBug(bug.getId());
 		    	if (closed) {
-		    		Toast.makeText(ctx, ctx.getResources().getString(R.string.osb_close_dialog_success), Toast.LENGTH_LONG).show();
+		    		AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.osb_close_dialog_success), Toast.LENGTH_LONG).show();
 					clearCache();
 					if (OsmBugsLayer.this.view.getLayers().contains(OsmBugsLayer.this)) {
 						OsmBugsLayer.this.view.refreshMap();
 					}
 				} else {
-					Toast.makeText(ctx, ctx.getResources().getString(R.string.osb_close_dialog_error), Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.osb_close_dialog_error), Toast.LENGTH_LONG).show();
 				}
 			}
 		});

@@ -3,6 +3,7 @@ package net.osmand.plus.activities.search;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
@@ -19,7 +20,7 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 		super.onCreate(savedInstanceState);
 		((TextView)findViewById(R.id.Label)).setText(R.string.choose_available_region);
 		if(((OsmandApplication)getApplication()).getResourceManager().getAddressRepositories().isEmpty()){
-			Toast.makeText(this, R.string.none_region_found, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(this, R.string.none_region_found, Toast.LENGTH_LONG).show();
 		}
 	}
 	

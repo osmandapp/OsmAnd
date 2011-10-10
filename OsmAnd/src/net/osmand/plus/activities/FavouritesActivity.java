@@ -11,6 +11,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
 import net.osmand.OsmAndFormatter;
@@ -169,7 +170,7 @@ public class FavouritesActivity extends ListActivity {
 				public void onClick(DialogInterface dialog, int which) {
 					boolean deleted = helper.deleteFavourite(point);
 					if (deleted) {
-						Toast.makeText(FavouritesActivity.this,
+						AccessibleToast.makeText(FavouritesActivity.this,
 								MessageFormat.format(resources.getString(R.string.favourites_remove_dialog_success), point.getName()),
 								Toast.LENGTH_SHORT).show();
 						favouritesAdapter.remove(point);
@@ -198,9 +199,9 @@ public class FavouritesActivity extends ListActivity {
 		if(item.getItemId() == EXPORT_ID){
 			File appDir = OsmandSettings.getOsmandSettings(this).extendOsmandPath(ResourceManager.APP_DIR);
 			if(favouritesAdapter.isEmpty()){
-				Toast.makeText(this, R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(this, R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
 			} else if(!appDir.exists()){
-				Toast.makeText(this, R.string.sd_dir_not_accessible, Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(this, R.string.sd_dir_not_accessible, Toast.LENGTH_LONG).show();
 			} else {
 				File f = new File(appDir, FILE_TO_SAVE);
 				GPXFile gpx = new GPXFile();
@@ -214,17 +215,17 @@ public class FavouritesActivity extends ListActivity {
 				}
 				String warning = GPXUtilities.writeGpxFile(f, gpx, this);
 				if(warning == null){
-					Toast.makeText(this, MessageFormat.format(getString(R.string.fav_saved_sucessfully), f.getAbsolutePath()), 
+					AccessibleToast.makeText(this, MessageFormat.format(getString(R.string.fav_saved_sucessfully), f.getAbsolutePath()), 
 							Toast.LENGTH_LONG).show();
 				} else {
-					Toast.makeText(this, warning, Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(this, warning, Toast.LENGTH_LONG).show();
 				}
 			}
 		} else if(item.getItemId() == IMPORT_ID){
 			File appDir = OsmandSettings.getOsmandSettings(this).extendOsmandPath(ResourceManager.APP_DIR);
 			File f = new File(appDir, FILE_TO_SAVE);
 			if(!f.exists()){
-				Toast.makeText(this, MessageFormat.format(getString(R.string.fav_file_to_load_not_found), f.getAbsolutePath()), Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(this, MessageFormat.format(getString(R.string.fav_file_to_load_not_found), f.getAbsolutePath()), Toast.LENGTH_LONG).show();
 			} else {
 				Set<String> existedPoints = new LinkedHashSet<String>();
 				if(!favouritesAdapter.isEmpty()){
@@ -243,9 +244,9 @@ public class FavouritesActivity extends ListActivity {
 							}
 						}
 					}
-					Toast.makeText(this, R.string.fav_imported_sucessfully, Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(this, R.string.fav_imported_sucessfully, Toast.LENGTH_SHORT).show();
 				} else {
-					Toast.makeText(this, res.error, Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(this, res.error, Toast.LENGTH_LONG).show();
 				}
 			}
 		} else {

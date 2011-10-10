@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/layout"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical" android:background="@color/color_light_gray">
+
+	<TextView android:id="@+id/message" android:focusable="true"
+		android:layout_marginLeft="4dp" android:layout_marginRight="4dp"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:textColor="@color/color_black" android:textSize="18sp" android:gravity="fill_horizontal"/>
+
+</LinearLayout>

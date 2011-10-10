@@ -219,8 +219,6 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="map_index">Térkép</string>
 	<string name="voice">Hang</string>
 	<string name="no_vector_map_loaded">Nincs betöltött vektor térkép</string>
-	<string name="gpx_reverse_route">Útvonal visszafelé</string>
-	<string name="gpx_direct_route">Útvonal előrefelé</string>
 	<string name="map_route_by_gpx">Útvonal GPX alapján</string>
 	<string name="gpx_files_not_found">Nem található GPX fálj /osmand/tracks könyvtárban</string>
 	<string name="layer_gpx_layer">GPX nyomok...</string>
@@ -483,7 +481,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
     <string name="settings_activity">Beállítások</string>
     <string name="show_gps_coordinates_text">GPS koordináták mutatása a térképen</string>
     <string name="use_internet_to_download_tile">Internet használata a hiányzó térképszeletek letöltésére</string>
-    <string name="app_name">OsmAnd</string>
+    <string name="app_name">OsmAndAccess</string>
     <string name="app_description">Navigációs alkalmazás</string>
 
 <string name="exit_Button">Kilép</string>

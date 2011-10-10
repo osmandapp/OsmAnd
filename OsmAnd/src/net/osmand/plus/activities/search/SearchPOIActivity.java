@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
@@ -123,12 +124,12 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 				if(isNameFinderFilter()){
 					String query = searchFilter.getText().toString();
 					if(query.length() == 0){
-						Toast.makeText(SearchPOIActivity.this, R.string.poi_namefinder_query_empty, Toast.LENGTH_LONG).show();
+						AccessibleToast.makeText(SearchPOIActivity.this, R.string.poi_namefinder_query_empty, Toast.LENGTH_LONG).show();
 						return;
 					}
 					String res = ((NameFinderPoiFilter) filter).searchOnline(location.getLatitude(), location.getLongitude(), query);
 					if(res != null){
-						Toast.makeText(SearchPOIActivity.this, res, Toast.LENGTH_LONG).show();
+						AccessibleToast.makeText(SearchPOIActivity.this, res, Toast.LENGTH_LONG).show();
 					}
 					amenityAdapter.setNewModel(((NameFinderPoiFilter) filter).getSearchedAmenities(), "");
 					showOnMap.setEnabled(amenityAdapter.getCount() > 0);
@@ -218,7 +219,6 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 				if (amenity.getOpeningHours() != null) {
 					format += "  "+getString(R.string.opening_hours) + " : " + amenity.getOpeningHours(); //$NON-NLS-1$ //$NON-NLS-2$
 				}
-//				Toast.makeText(v.getContext(), format, Toast.LENGTH_LONG).show();
 				AlertDialog.Builder builder = new AlertDialog.Builder(SearchPOIActivity.this);
 				builder.setTitle(format);
 				builder.setItems(new String[]{getString(R.string.show_poi_on_map), getString(R.string.navigate_to)}, new DialogInterface.OnClickListener(){

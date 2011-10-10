@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.Algoritms;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
@@ -196,7 +197,7 @@ public class MapActivityLayers {
 		ResourceManager rm = app.getResourceManager();
 		if(vectorData && !app.isApplicationInitializing()){
 			if(rm.getRenderer().isEmpty()){
-				Toast.makeText(activity, activity.getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(activity, activity.getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
 				vectorData = false;
 			}
 		}
@@ -378,7 +379,7 @@ public class MapActivityLayers {
 		}
 		
 		if(list.isEmpty()){
-			Toast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
 		} else {
 			Builder builder = new AlertDialog.Builder(activity);
 			builder.setItems(list.toArray(new String[list.size()]), new DialogInterface.OnClickListener() {
@@ -397,7 +398,7 @@ public class MapActivityLayers {
 								activity.runOnUiThread(new Runnable() {
 									@Override
 									public void run() {
-										Toast.makeText(activity, res.error, Toast.LENGTH_LONG).show();
+										AccessibleToast.makeText(activity, res.error, Toast.LENGTH_LONG).show();
 									}
 								});
 
@@ -483,7 +484,7 @@ public class MapActivityLayers {
 				if (which == 0) {
 					MapRenderRepositories r = ((OsmandApplication) getApplication()).getResourceManager().getRenderer();
 					if (r.isEmpty()) {
-						Toast.makeText(activity, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
+						AccessibleToast.makeText(activity, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
 						return;
 					} else {
 						settings.MAP_VECTOR_DATA.set(true);

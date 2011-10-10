@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
@@ -510,7 +511,7 @@ public class RoutingHelper {
 				@Override
 				public void run() {
 					if(uiActivity != null){
-						Toast.makeText(uiActivity, msg, length).show();
+						AccessibleToast.makeText(uiActivity, msg, length).show();
 					}
 				}
 			});

@@ -1,6 +1,6 @@
 package net.osmand.plus;
 
-
+import net.osmand.access.AccessibleToast;
 import net.osmand.Version;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.activities.RoutingHelper;
@@ -178,7 +178,7 @@ public class NavigationService extends Service implements LocationListener {
 
 	@Override
 	public void onProviderDisabled(String provider) {
-		Toast.makeText(this, getString(R.string.off_router_service_no_gps_available), Toast.LENGTH_LONG).show();
+		AccessibleToast.makeText(this, getString(R.string.off_router_service_no_gps_available), Toast.LENGTH_LONG).show();
 	}
 
 

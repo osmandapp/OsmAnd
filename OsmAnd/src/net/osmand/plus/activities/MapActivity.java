@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import net.osmand.access.AccessibleActivity;
+import net.osmand.access.AccessibleToast;
 import net.osmand.Algoritms;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.GPXFileResult;
@@ -77,7 +79,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-public class MapActivity extends Activity implements IMapLocationListener, SensorEventListener {
+public class MapActivity extends AccessibleActivity implements IMapLocationListener, SensorEventListener {
 
 	private static final String GPS_STATUS_ACTIVITY = "com.eclipsim.gpsstatus2.GPSStatus"; //$NON-NLS-1$
 	private static final String GPS_STATUS_COMPONENT = "com.eclipsim.gpsstatus2"; //$NON-NLS-1$
@@ -165,7 +167,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			public void onDismiss(DialogInterface dialog) {
 				OsmandApplication app = ((OsmandApplication) getApplication());
 				if (settings.MAP_VECTOR_DATA.get() && app.getResourceManager().getRenderer().isEmpty()) {
-					Toast.makeText(MapActivity.this, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(MapActivity.this, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
 				}
 			}
 		});
@@ -267,7 +269,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			}
 			
 		});
-		
+
+		accessibleViews.add(backToLocation);
 	}
 
 	private OsmandApplication getMyApplication() {
@@ -488,7 +491,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			}
 		}
 		if(locationLayer.getLastKnownLocation() == null){
-			Toast.makeText(this, R.string.unknown_location, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(this, R.string.unknown_location, Toast.LENGTH_LONG).show();
 		}
 	}
     
@@ -874,9 +877,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		if(Environment.MEDIA_MOUNTED.equals(state)){
 			// ok
 		} else if(Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)){
-			Toast.makeText(this, R.string.sd_mounted_ro, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(this, R.string.sd_mounted_ro, Toast.LENGTH_LONG).show();
 		} else {
-			Toast.makeText(this, R.string.sd_unmounted, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(this, R.string.sd_unmounted, Toast.LENGTH_LONG).show();
 		}
 	}
 	
@@ -1078,7 +1081,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     
     protected void getDirections(final double lat, final double lon, boolean followEnabled){
     	if(mapLayers.getNavigationLayer().getPointToNavigate() == null){
-			Toast.makeText(this, R.string.mark_final_location_first, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(this, R.string.mark_final_location_first, Toast.LENGTH_LONG).show();
 			return;
 		}
     	Builder builder = new AlertDialog.Builder(this);

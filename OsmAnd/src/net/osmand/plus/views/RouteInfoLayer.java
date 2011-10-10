@@ -2,6 +2,7 @@ package net.osmand.plus.views;
 
 import java.util.List;
 
+import net.osmand.access.AccessibleActivity;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.RoutingHelper;
 import net.osmand.plus.activities.ShowRouteInfoActivity;
@@ -60,6 +61,7 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 		routingHelper.addListener(this);
 		attachListeners();
 		updateVisibility();
+		AccessibleActivity.takeCareOf(layout);
 	}
 	
 	private void attachListeners() {

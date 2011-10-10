@@ -2,6 +2,7 @@ package net.osmand.plus.views;
 
 import java.util.List;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.FavouritePoint;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.FavouritesDbHelper;
@@ -155,7 +156,7 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 		FavouritePoint fav = getFavoriteFromPoint(point);
 		if(fav != null){
 			String format = view.getContext().getString(R.string.favorite) + " : " + fav.getName();  //$NON-NLS-1$
-			Toast.makeText(view.getContext(), format, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(view.getContext(), format, Toast.LENGTH_LONG).show();
 			return true;
 		}
 		return false;

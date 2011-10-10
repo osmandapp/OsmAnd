@@ -34,6 +34,7 @@ import java.util.Map.Entry;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
 import net.osmand.data.IndexConstants;
@@ -184,7 +185,7 @@ public class DownloadIndexActivity extends ListActivity {
 						entriesToDownload.put(es.getFileName(), createDownloadEntry(es));
 					}
 				}
-				Toast.makeText(this, MessageFormat.format(getString(R.string.items_were_selected), selected), Toast.LENGTH_SHORT).show();
+				AccessibleToast.makeText(this, MessageFormat.format(getString(R.string.items_were_selected), selected), Toast.LENGTH_SHORT).show();
 				listAdapter.notifyDataSetInvalidated();
 				if(selected > 0){
 					findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
@@ -240,7 +241,7 @@ public class DownloadIndexActivity extends ListActivity {
 						if (indexFiles != null) {
 							uiActivity.setListAdapter(uiActivity.new DownloadIndexAdapter(indexFiles));
 						} else {
-							Toast.makeText(uiActivity, R.string.list_index_files_was_not_loaded, Toast.LENGTH_LONG).show();
+							AccessibleToast.makeText(uiActivity, R.string.list_index_files_was_not_loaded, Toast.LENGTH_LONG).show();
 						}
 					}
 				});
@@ -383,7 +384,7 @@ public class DownloadIndexActivity extends ListActivity {
 		}
 		final DownloadEntry entry;
 		if(parent == null || !parent.exists()){
-			Toast.makeText(DownloadIndexActivity.this, getString(R.string.sd_dir_not_accessible), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(DownloadIndexActivity.this, getString(R.string.sd_dir_not_accessible), Toast.LENGTH_LONG).show();
 			entry = null;
 		} else {
 			entry = new DownloadEntry();
@@ -715,7 +716,7 @@ public class DownloadIndexActivity extends ListActivity {
 		runOnUiThread(new Runnable(){
 			@Override
 			public void run() {
-				Toast.makeText(DownloadIndexActivity.this, messages, Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(DownloadIndexActivity.this, messages, Toast.LENGTH_LONG).show();
 			}
 			
 		});

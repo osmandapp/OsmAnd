@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapDataObject;
@@ -427,7 +428,7 @@ public class MapRenderRepositories {
 				handler.post(new Runnable(){
 					@Override
 					public void run() {
-						Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+						AccessibleToast.makeText(context, msg, Toast.LENGTH_LONG).show();
 					}
 				});
 			}
@@ -436,7 +437,7 @@ public class MapRenderRepositories {
 			handler.post(new Runnable(){
 				@Override
 				public void run() {
-					Toast.makeText(context, R.string.rendering_exception, Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(context, R.string.rendering_exception, Toast.LENGTH_SHORT).show();
 				}
 			});
 		} catch (OutOfMemoryError e) {
@@ -446,7 +447,7 @@ public class MapRenderRepositories {
 			handler.post(new Runnable(){
 				@Override
 				public void run() {
-					Toast.makeText(context, R.string.rendering_out_of_memory, Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(context, R.string.rendering_out_of_memory, Toast.LENGTH_SHORT).show();
 				}
 			});
 			

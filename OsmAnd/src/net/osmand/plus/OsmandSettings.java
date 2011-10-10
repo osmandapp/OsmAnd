@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -632,7 +633,7 @@ public class OsmandSettings {
 		} else if (dir.isDirectory() && !dir.getName().startsWith(".")) {
 			TileSourceTemplate t = TileSourceManager.createTileSourceTemplate(dir);
 			if (warnWhenSelected && !t.isRuleAcceptable()) {
-				Toast.makeText(ctx, ctx.getString(R.string.warning_tile_layer_not_downloadable, dir.getName()), Toast.LENGTH_SHORT).show();
+				AccessibleToast.makeText(ctx, ctx.getString(R.string.warning_tile_layer_not_downloadable, dir.getName()), Toast.LENGTH_SHORT).show();
 			}
 			if (!TileSourceManager.isTileSourceMetaInfoExist(dir)) {
 				TileSourceTemplate ret = checkAmongAvailableTileSources(dir, knownTemplates);

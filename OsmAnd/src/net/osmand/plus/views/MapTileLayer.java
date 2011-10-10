@@ -1,5 +1,6 @@
 package net.osmand.plus.views;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -208,7 +209,7 @@ public class MapTileLayer extends BaseMapLayer {
 		
 		if(mainMap && !oneTileShown && !useInternet && warningToSwitchMapShown < 3){
 			if(resourceManager.getRenderer().containsLatLonMapData(view.getLatitude(), view.getLongitude(), nzoom)){
-				Toast.makeText(view.getContext(), R.string.switch_to_vector_map_to_see, Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(view.getContext(), R.string.switch_to_vector_map_to_see, Toast.LENGTH_LONG).show();
 				warningToSwitchMapShown++;
 			}
 		}

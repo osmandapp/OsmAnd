@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
@@ -157,7 +158,7 @@ public class SearchAddressOnlineActivity extends ListActivity {
 			@Override
 			public void run() {
 				if(places == null){
-					Toast.makeText(SearchAddressOnlineActivity.this, getString(warning), Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(SearchAddressOnlineActivity.this, getString(warning), Toast.LENGTH_LONG).show();
 				} else {
 					lastResult = new PlacesAdapter(places);
 					setListAdapter(lastResult);

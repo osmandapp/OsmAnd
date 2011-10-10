@@ -15,9 +15,9 @@
 	<string name="installing_new_resources">Распаковываются новые данные...</string>
 	<string name="internet_connection_required_for_online_route">Вы собираетесь использовать интернет роутинг, но у вас нет активного интернет соединения. Вы можете попытаться использовать (экспериментальный) OsmAnd offline роутинг ( \'Настройки\' -> \'Навигация\') на короткие расстояния.</string>
 	<string name="tts_language_not_supported_title">Язык не поддерживается</string>
-	<string name="tts_language_not_supported">Выбранный язык не поддерживается Android TTS (text-to-speech). Хотите найти в маркте другой TTS? Иначе язык TTS по умолчанию будет использован.</string>
+	<string name="tts_language_not_supported">Выбранный язык не поддерживается Android TTS (text-to-speech). Хотите найти в маркете другой TTS? Иначе язык TTS по умолчанию будет использован.</string>
 	<string name="tts_missing_language_data_title">Данные отсутсвуют</string>
-	<string name="tts_missing_language_data">Для данного языка отсутсвуют TTS данные. Вы хотите загрузить их из Маркета?</string>
+	<string name="tts_missing_language_data">Для данного языка отсутствуют TTS данные. Вы хотите загрузить их из Маркета?</string>
 
 	<string name="gpx_option_reverse_route">Выбрать обратное направление пути</string>
 	<string name="gpx_option_destination_point">Использовать текущую точку назначения</string>
@@ -227,8 +227,6 @@
 	<string name="map_index">Карта</string>
 	<string name="voice">Голосовые данные</string>
 	<string name="no_vector_map_loaded">Векторные карты не загружены в приложение</string>
-	<string name="gpx_reverse_route">Обратный путь</string>
-	<string name="gpx_direct_route">Прямой путь</string>
 	<string name="map_route_by_gpx">Навигация по GPX</string>
 	<string name="gpx_files_not_found">GPX файлы были не найдены в /osmand/tracks директории</string>
 	<string name="layer_gpx_layer">GPX треки...</string>
@@ -420,6 +418,7 @@
 	<string name="invalid_locations">Координаты неправильные</string>
 	<string name="go_back_to_osmand">Вернуться к OsmAnd карте</string>
 	<string name="close">Закрыть</string>
+	<string name="help">Помощь</string>
 	<string name="loading_data">Загрузка данных</string>
 	<string name="reading_indexes">Чтение индексов...</string>
 	<string name="previous_run_crashed">Предыдущий запуск приложения был неудачен. Лог файл в {0}.  Пожалуйста откройте баг и присоедините лог файл.</string>
