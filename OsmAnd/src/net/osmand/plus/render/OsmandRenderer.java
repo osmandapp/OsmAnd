@@ -358,9 +358,12 @@ public class OsmandRenderer {
 
 			for (int k = 0; k < keys.length; k++) {
 
+				if(repeat == true && shadowarray[shadownum] != k && shadowarray[shadownum] != -1  && keys[k] < 58){
+					continue;
+				}
+				
 				if(repeat == true && shadowarray[shadownum] == k){
 					shadownum++;
-					continue;
 				}
 
 				TIntArrayList list = orderMap.get(keys[k]);
@@ -388,7 +391,7 @@ public class OsmandRenderer {
 				if(keys[k] > 57 && repeat == false && shadow > 1){
 					shadow = 0;
 					shadownum = 0;
-					k = shadowarray[0];
+					k = shadowarray[0]-1;
 					repeat = true;
 				}
 			}
@@ -928,7 +931,7 @@ public class OsmandRenderer {
 
 		// no shadow
 		if(shadow == 0){
-			paint.setShadowLayer(0, 0, 0, 0);
+			paint.clearShadowLayer();
 			canvas.drawPath(path, paint);
 		}
 
@@ -942,15 +945,18 @@ public class OsmandRenderer {
 			if(paint.getPathEffect() == null) paint.setColor(0xffffffff);
 			canvas.drawPath(path, paint);
 		}
+		else if(shadow == 2) canvas.drawPath(path, paint);
 
 		// option shadow = 3 with solid border
 		if(shadow == 3 && shadowRadius > 0){
-			paint.setShadowLayer(0, 0, 0, 0);
+			if(paint.getPathEffect() == null){
+			paint.clearShadowLayer();
 			paint.setStrokeWidth(paint.getStrokeWidth() + 2);
-			if(paint.getPathEffect() == null) paint.setColor(0xffbababa);
+			paint.setColor(0xffbababa);
+			}
 			canvas.drawPath(path, paint);
 		}
-
+		else if(shadow == 3) canvas.drawPath(path, paint);
 
 		//check for shadow and save index in array
 		if(shadowRadius > 0 && shadow > 1){
