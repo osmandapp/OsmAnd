@@ -68,6 +68,7 @@ do
         mv bin/OsmAnd-debug.apk "$BUILD_DIR/OsmAnd-$BRANCH-nb-$DATE.apk"
 
 	#clear success status
+        # what is it?
 	rm -f $DIRECTORY/$BRANCH.fixed
         #put the log to std out
 	cat $DIRECTORY/build.log
