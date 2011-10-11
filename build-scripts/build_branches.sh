@@ -85,4 +85,4 @@ do
   fi
 done
 
-exit BRANCHES_CHANGED
+exit $BRANCHES_CHANGED
