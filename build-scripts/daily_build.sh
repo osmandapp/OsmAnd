@@ -11,7 +11,7 @@ mkdir -p $LOG_DIR
 echo > $LOG_FILE
 touch  $CLOG_FILE
 
-cd "{$DIRECTORY}"
+cd "${DIRECTORY}"
 git pull --rebase 2>&1 >>$LOG_FILE
 
 # 1. Update git directory
