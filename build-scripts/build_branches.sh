@@ -58,7 +58,7 @@ do
         if [ ! -d assets ]; then
           mkdir assets
         fi
-        ant clean debug &> "${DIRECTORY}/build.log"
+        ant clean debug
 	if [ "$BRANCH" = "release" ]; then
            cp bin/OsmAnd-debug.apk "$LATESTS_DIR/OsmAnd-stable.apk"
         elif [ "$BRANCH" = "master" ]; then
