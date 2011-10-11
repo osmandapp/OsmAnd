@@ -931,7 +931,7 @@ public class OsmandRenderer {
 
 		// no shadow
 		if(shadow == 0){
-			paint.setShadowLayer(0, 0, 0, 0);
+			paint.clearShadowLayer();
 			canvas.drawPath(path, paint);
 		}
 
@@ -945,12 +945,15 @@ public class OsmandRenderer {
 			if(paint.getPathEffect() == null) paint.setColor(0xffffffff);
 			canvas.drawPath(path, paint);
 		}
+		else if(shadow == 2) canvas.drawPath(path, paint);
 
 		// option shadow = 3 with solid border
 		if(shadow == 3 && shadowRadius > 0){
-			paint.setShadowLayer(0, 0, 0, 0);
+			if(paint.getPathEffect() == null){
+			paint.clearShadowLayer();
 			paint.setStrokeWidth(paint.getStrokeWidth() + 2);
-			if(paint.getPathEffect() == null) paint.setColor(0xffbababa);
+			paint.setColor(0xffbababa);
+			}
 			canvas.drawPath(path, paint);
 		}
 		else if(shadow == 3) canvas.drawPath(path, paint);
