@@ -12,7 +12,7 @@ echo > $LOG_FILE
 touch  $CLOG_FILE
 
 cd "${DIRECTORY}"
-git pull --rebase 2>&1 >>$LOG_FILE
+git pull --rebase >>$LOG_FILE 2>&1
 
 # 1. Update git directory
 "${DIRECTORY}/update_git.sh" >>$LOG_FILE 2>&1
@@ -21,9 +21,9 @@ git pull --rebase 2>&1 >>$LOG_FILE
 "${DIRECTORY}/build_branches.sh" >>$LOG_FILE 2>&1
 
 # exit if nothing was changed
- if [ $? = 0 ]; then
-   exit 0
- fi
+# if [ $? = 0 ]; then
+#   exit 0
+# fi
 
 # 3. upload to ftp server 
 #"${DIRECTORY}/upload_ftp.sh" 2>&1 >>$LOG_FILE
