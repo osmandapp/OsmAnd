@@ -174,6 +174,8 @@ package net.osmand;
 // Import required classes and packages
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.text.NumberFormat;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -602,6 +604,15 @@ public class SunriseSunset
 	
 			// Load dateSunrise with data
 			dfmtDateTime = new SimpleDateFormat( "d M yyyy HH:mm z" );
+
+			// Timezone signal is reversed in SunriseSunset class
+			String tz_signal = origTimeZone <= 0?"+":"-";
+			double abs_tz = Math.abs(origTimeZone);
+			NumberFormat formatter = new DecimalFormat("00");
+
+			String tz_offset_hours = formatter.format((int)abs_tz);
+			String tz_offset_minutes = formatter.format((int)(60 * (abs_tz - (int)abs_tz)));
+
 			if( bSunriseToday )
 			{
 				dateSunrise = dfmtDateTime.parse( iDay 
@@ -609,7 +620,9 @@ public class SunriseSunset
 										+ " " + iYear 
 										+ " " + (int)dfHourRise
 										+ ":" + (int)dfMinRise 
-										+ " GMT+"+origTimeZone );
+										+ " GMT"
+									    + tz_signal + tz_offset_hours
+										+":" + tz_offset_minutes );
 			}
 		
 			// Load dateSunset with data
@@ -620,7 +633,9 @@ public class SunriseSunset
 										+ " " + iYear 
 										+ " " + (int)dfHourSet
 										+ ":" + (int)dfMinSet 
-										+ " GMT+"+origTimeZone );
+										+ " GMT"
+									    + tz_signal + tz_offset_hours
+										+":" + tz_offset_minutes );
 			}
 		} // end of try
 
