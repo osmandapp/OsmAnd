@@ -1,6 +1,7 @@
 #!/bin/sh
 DIRECTORY=$(cd `dirname $0` && pwd)
 
+BRANCHES_CHANGED=0
 GIT_DIR="$DIRECTORY"/osmand-git
 GIT_ORIGIN_NAME=origin
 BUILD_DIR="$DIRECTORY"/builds
@@ -25,14 +26,12 @@ do
   ch=$(expr index "$i" ">")
   if [ $ch = 0 ]; then 
      BRANCH=${i#"$GIT_ORIGIN_NAME/"}
-     
-     echo "Checking if there are changes : $BRANCH - $GIT_ORIGIN_NAME/$BRANCH"
-	  
      git diff --exit-code "$BRANCH" "$GIT_ORIGIN_NAME/$BRANCH" --quiet
      RES_DIFF=$?	  
      if [ $RES_DIFF != 0 ]; then
         echo "Checkouting branch and create build for $BRANCH"
         ## reset all previous changes in working tree
+        BRANCHES_CHANGED=1  
         git checkout . 
         git reset HEAD --hard
         git checkout -f $BRANCH
@@ -58,7 +57,7 @@ do
         if [ ! -d assets ]; then
           mkdir assets
         fi
-        ant clean debug &> "$DIRECTORY/build.log"
+        ant clean debug
 
 	if [ "$BRANCH" = "release" ]; then
            cp bin/OsmAnd-debug.apk "$LATESTS_DIR/OsmAnd-stable.apk"
@@ -85,3 +84,5 @@ do
      fi
   fi
 done
+
+exit $BRANCHES_CHANGED
