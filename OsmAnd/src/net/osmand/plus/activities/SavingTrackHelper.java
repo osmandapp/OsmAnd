@@ -136,15 +136,15 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				collectDBTracks(db, data);
 
 				// save file
-				for (String f : data.keySet()) {
+				for (final String f : data.keySet()) {
 
 					File fout = new File(dir, f + ".gpx"); //$NON-NLS-1$
 					if (fout.exists() && !data.get(f).isEmpty()) {
-						f = f + "_" + new SimpleDateFormat("HH-mm.EEEE").format(new Date(data.get(f).findPointToShow().time)); //$NON-NLS-1$
-						fout = new File(dir, f + ".gpx"); //$NON-NLS-1$
+						String fileName = f + "_" + new SimpleDateFormat("HH-mm-ss_EEEE").format(new Date(data.get(f).findPointToShow().time)); //$NON-NLS-1$
+						fout = new File(dir, fileName + ".gpx"); //$NON-NLS-1$
 						int ind = 1;
 						while (fout.exists()) {
-							fout = new File(dir, f + "_" + (++ind) + ".gpx"); //$NON-NLS-1$ //$NON-NLS-2$
+							fout = new File(dir, fileName + "_" + (++ind) + ".gpx"); //$NON-NLS-1$ //$NON-NLS-2$
 						}
 					}
 
