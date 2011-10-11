@@ -21,7 +21,7 @@ git pull --rebase 2>&1 >>$LOG_FILE
 "${DIRECTORY}/build_branches.sh" >>$LOG_FILE 2>&1
 # exit if nothing was changed
 if [ $? == 0 ]; then
-   exit
+   exit 0
 fi
 
 # 3. upload to ftp server 
