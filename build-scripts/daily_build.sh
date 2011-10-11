@@ -11,13 +11,17 @@ mkdir -p $LOG_DIR
 echo > $LOG_FILE
 touch  $CLOG_FILE
 
-#git pull --rebase 2>&1 >>$LOG_FILE
+git pull --rebase 2>&1 >>$LOG_FILE
 
 # 1. Update git directory
 "${DIRECTORY}/update_git.sh" >>$LOG_FILE 2>&1
 
 # 2. Go through branches and generates builds
 "${DIRECTORY}/build_branches.sh" >>$LOG_FILE 2>&1
+# exit if nothing was changed
+if [ $? != 0 ]; then
+   exit
+fi
 
 # 3. upload to ftp server 
 #"${DIRECTORY}/upload_ftp.sh" 2>&1 >>$LOG_FILE
