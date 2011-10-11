@@ -434,8 +434,8 @@ public class MapRenderRepositories {
 				this.bmp = bmp;
 				this.bmpLocation = tileRect;
 			} else {
-				this.prevBmpLocation = null;
 				this.prevBmp = null;
+				this.prevBmpLocation = null;
 			}
 			if(prefs.DEBUG_RENDERING_INFO.get()){
 				String timeInfo = "Search done in "+ searchTime+" ms";    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
