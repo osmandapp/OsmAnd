@@ -19,10 +19,11 @@ git pull --rebase 2>&1 >>$LOG_FILE
 
 # 2. Go through branches and generates builds
 "${DIRECTORY}/build_branches.sh" >>$LOG_FILE 2>&1
+
 # exit if nothing was changed
-if [ $? == 0 ]; then
+ if [ $? == 0 ]; then
    exit 0
-fi
+ fi
 
 # 3. upload to ftp server 
 #"${DIRECTORY}/upload_ftp.sh" 2>&1 >>$LOG_FILE
