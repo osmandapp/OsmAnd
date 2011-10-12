@@ -196,6 +196,9 @@ public class MapRenderRepositories {
 	}
 	
 	public void interruptLoadingMap(){
+		if (requestedBox != null) {
+			requestedBox.renderingInterrupted();
+		}
 		interrupted = true;
 		if(currentRenderingContext != null){
 			currentRenderingContext.interrupted = true;
@@ -207,6 +210,9 @@ public class MapRenderRepositories {
 	
 	private boolean checkWhetherInterrupted(){
 		if(interrupted || (currentRenderingContext != null && currentRenderingContext.interrupted)){
+			if (requestedBox != null) {
+				requestedBox.renderingInterrupted();
+			}
 			requestedBox = bmpLocation;
 			return true;
 		}
@@ -356,6 +362,10 @@ public class MapRenderRepositories {
 			currentRenderingContext = null;
 		}
 		try {
+			// prevent editing
+			requestedBox = new RotatedTileBox(tileRect);
+			requestedBox.rendering();
+			
 			// find selected rendering type
 			OsmandApplication app = ((OsmandApplication)context.getApplicationContext());
 			Boolean renderDay = app.getDaynightHelper().getDayNightRenderer();
@@ -363,9 +373,6 @@ public class MapRenderRepositories {
 			// boolean moreDetail = prefs.SHOW_MORE_MAP_DETAIL.get();
 			BaseOsmandRender renderingType = app.getRendererRegistry().getCurrentSelectedRenderer();
 			
-			// prevent editing
-			requestedBox = new RotatedTileBox(tileRect);
-
 			// calculate data box
 			RectF dataBox = requestedBox.calculateLatLonBox(new RectF());
 			long now = System.currentTimeMillis();
@@ -419,7 +426,6 @@ public class MapRenderRepositories {
 			}
 			
 			
-			
 			renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, 
 					prefs.USE_ENGLISH_NAMES.get(), renderingType, stepByStep ? notifyList : null);
 			String renderingDebugInfo = currentRenderingContext.renderingDebugInfo;
@@ -468,9 +474,11 @@ public class MapRenderRepositories {
 					Toast.makeText(context, R.string.rendering_out_of_memory, Toast.LENGTH_SHORT).show();
 				}
 			});
-			
+		} finally {
+			if (requestedBox != null) {
+				requestedBox.rendered();
+			}
 		}
-		
 	}
 	
 	public Bitmap getBitmap() {
