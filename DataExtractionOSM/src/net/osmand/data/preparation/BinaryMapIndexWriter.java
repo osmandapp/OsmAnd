@@ -23,13 +23,11 @@ import net.osmand.Algoritms;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.OsmandOdb;
 import net.osmand.binary.OsmandOdb.CityIndex;
-import net.osmand.binary.OsmandOdb.InteresectedStreets;
 import net.osmand.binary.OsmandOdb.MapEncodingRule;
 import net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom;
 import net.osmand.binary.OsmandOdb.OsmAndTransportIndex;
-import net.osmand.binary.OsmandOdb.PostcodeIndex;
 import net.osmand.binary.OsmandOdb.StreetIndex;
 import net.osmand.binary.OsmandOdb.StreetIntersection;
 import net.osmand.binary.OsmandOdb.TransportRoute;
@@ -132,21 +130,29 @@ public class BinaryMapIndexWriter {
 	
 
 	private long preserveInt32Size() throws IOException {
-		codedOutStream.flush();
-		long filePointer = raf.getFilePointer();
+		long filePointer = getFilePointer();
 		stackSizes.push(filePointer);
 		codedOutStream.writeFixed32NoTag(0);
 		return filePointer + 4;
 	}
 	
+	public long getFilePointer() throws IOException {
+//		codedOutStream.flush();
+//		return raf.getFilePointer();
+		return codedOutStream.getWrittenBytes();
+	}
+	
+	private void writeFixed32(long posToWrite, int value, long currentPosition) throws IOException {
+		raf.seek(posToWrite);
+		raf.writeInt(value);
+		raf.seek(currentPosition);
+	}
+	
 	private int writeInt32Size() throws IOException{
-		codedOutStream.flush();
-		long filePointer = raf.getFilePointer();
+		long filePointer = getFilePointer();
 		Long old = stackSizes.pop();
 		int length = (int) (filePointer - old - 4);
-		raf.seek(old);
-		raf.writeInt(length);
-		raf.seek(filePointer);
+		writeFixed32(old, length, filePointer);
 		return length;
 	}
 	
@@ -190,8 +196,7 @@ public class BinaryMapIndexWriter {
 	
 	public void writeMapEncodingRules(Map<String, MapRulType> types) throws IOException{
 		checkPeekState(MAP_INDEX_INIT);
-		codedOutStream.flush();
-		long fp = raf.getFilePointer();
+		long fp = getFilePointer();
 		MapEncodingRule.Builder builder = OsmandOdb.MapEncodingRule.newBuilder(); 
 		for(String tag : types.keySet()){
 			MapRulType rule = types.get(tag);
@@ -215,9 +220,8 @@ public class BinaryMapIndexWriter {
 			}
 			
 		}
-		codedOutStream.flush();
-		long newfp = raf.getFilePointer();
-		log.info("RENDERING SCHEMA takes " + (newfp - fp));
+		long newfp = getFilePointer();
+		System.out.println("RENDERING SCHEMA takes " + (newfp - fp));
 	}
 	
 	
@@ -422,6 +426,10 @@ public class BinaryMapIndexWriter {
 		preserveInt32Size();
 		
 		codedOutStream.writeString(OsmandOdb.OsmAndAddressIndex.NAME_FIELD_NUMBER, name);
+		
+		
+		codedOutStream.writeFixed32(OsmandOdb.OsmAndAddressIndex.SHIFTTONAMEINDEX_FIELD_NUMBER, name);
+		// skip boundaries 
 		
 	}
 	
@@ -672,9 +680,8 @@ public class BinaryMapIndexWriter {
 			}
 		}
 		codedOutStream.writeTag(OsmandOdb.TransportRoutes.ROUTES_FIELD_NUMBER, FieldType.MESSAGE.getWireType());
-		codedOutStream.flush();
 		if(transportRoutesRegistry != null){
-			transportRoutesRegistry.put(idRoute, raf.getFilePointer());
+			transportRoutesRegistry.put(idRoute, getFilePointer());
 		}
 		codedOutStream.writeMessageNoTag(tRoute.build());
 	}
@@ -712,11 +719,6 @@ public class BinaryMapIndexWriter {
 		writeInt32Size();
 	}
 	
-	public long getFilePointer() throws IOException {
-		codedOutStream.flush();
-		return raf.getFilePointer();
-	}
-	
 	public void writeTransportStop(long id, int x24, int y24, String name, String nameEn, 
 			Map<String, Integer> stringTable, List<Long> routes) throws IOException {
 		checkPeekState(TRANSPORT_STOPS_TREE);
@@ -727,8 +729,7 @@ public class BinaryMapIndexWriter {
 			stackBaseIds.push(id);
 		}
 		codedOutStream.writeTag(OsmandOdb.TransportStopsTree.LEAFS_FIELD_NUMBER, WireFormat.FieldType.MESSAGE.getWireType());
-		codedOutStream.flush();
-		long fp = raf.getFilePointer();
+		long fp = getFilePointer();
 		
 		OsmandOdb.TransportStop.Builder ts = OsmandOdb.TransportStop.newBuilder();
 		ts.setName(registerString(stringTable, name));
@@ -862,8 +863,7 @@ public class BinaryMapIndexWriter {
 			}
 		}
 		writeIndexedTable(OsmandOdb.OsmAndPoiNameIndex.TABLE_FIELD_NUMBER, indexedTable);
-		codedOutStream.flush();
-		long l = raf.getFilePointer();
+		long l = getFilePointer();
 		for (TLongList es : fpToWriteSeeks.values()) {
 			for (int i = 0; i < es.size(); i++) {
 				es.set(i, es.get(i) + l);
@@ -974,9 +974,9 @@ public class BinaryMapIndexWriter {
 		stackBounds.push(new Bounds(tileX, zoom, tileY, 0 ));
 		
 		if (end) {
-			codedOutStream.writeFixed32(OsmandOdb.OsmAndPoiBox.SHIFTTODATA_FIELD_NUMBER, 0);
-			codedOutStream.flush();
-			long filePointer = raf.getFilePointer() - 4;
+			codedOutStream.writeTag(OsmandOdb.OsmAndPoiBox.SHIFTTODATA_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+			long filePointer = getFilePointer();
+			codedOutStream.writeFixed32NoTag(0);
 			return filePointer;
 		}
 		return 0;

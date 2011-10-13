@@ -44,6 +44,9 @@ public class BinaryInspector {
 		// test cases show info
 //		inspector(new String[]{"/home/victor/projects/OsmAnd/temp/Belarus_europe.obf"});
 //		inspector(new String[]{"-v","C:\\Users\\tpd\\osmand\\Housenumbers.obf"});
+		//inspector(new String[]{"/home/victor/projects/OsmAnd/data/osm-gen/saved/Belarus-newzooms-new-rt.obf"});
+//		inspector(new String[]{"/home/victor/projects/OsmAnd/download/spain/Spain_europe_1_small.obf"});
+		inspector(new String[]{"/home/victor/projects/OsmAnd/download/spain/Spain_europe_1.obf"});
 		
 		
 		// test case extract parts
@@ -526,6 +529,7 @@ public class BinaryInspector {
 		println("  Example : inspector -c output_file input_file -2,3\n\tExtracts all  parts excluding 2, 3");
 		println("  Example : inspector -c output_file input_file1 input_file2 input_file3\n\tSimply combine 3 files");
 		println("  Example : inspector -c output_file input_file1 input_file2 -4\n\tCombine all parts of 1st file and all parts excluding 4th part of 2nd file");
+
 		
 	}
 

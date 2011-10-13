@@ -52,6 +52,8 @@ public final class CodedOutputStream {
   private final byte[] buffer;
   private final int limit;
   private int position;
+  // + Change 
+  private long writtenBytes = 0;
 
   private final OutputStream output;
 
@@ -801,6 +803,7 @@ public final class CodedOutputStream {
     // Since we have an output stream, this is our buffer
     // and buffer offset == 0
     output.write(buffer, 0, position);
+    writtenBytes += position;
     position = 0;
   }
 
@@ -812,6 +815,13 @@ public final class CodedOutputStream {
     if (output != null) {
       refreshBuffer();
     }
+  }
+  
+  /**
+   * @return current offset in the output file
+   */
+  public long getWrittenBytes() {
+	return writtenBytes + position;
   }
 
   /**
@@ -902,6 +912,7 @@ public final class CodedOutputStream {
       } else {
         // Write is very big.  Let's do it all at once.
         output.write(value, offset, length);
+        writtenBytes += length;
       }
     }
   }

@@ -31,6 +31,14 @@ message OsmAndStructure {
    required uint32 versionConfirm = 32;
 }
 
+message OsmAndTileBox {
+    // everything is encoded as 31 tile zoom
+    required uint32 left = 1;
+    required uint32 right = 2;
+    required uint32 top = 3;
+    required uint32 bottom = 4;
+}
+
 /** 
   String table, contains the common strings in each block.
  */
@@ -123,25 +131,32 @@ message OsmAndAddressIndex {
 	required string name = 1;
 	optional string name_en = 2;
 	
-	// encoded as fixed32 length delimited
-	optional OsmAndAddressNameIndexData nameIndex = 3;
+	optional OsmAndTileBox boundaries = 3;
+	
+	// from OsmAndAddressIndex
+	optional fixed32 shiftToNameIndex = 4;
 	
 	// encoded as fixed32 length delimited
 	// 1) cities and towns - type 1,  2) postcodes - type 2, 3) villages - type 3
-	repeated CitiesIndex cities = 5;  
+	repeated CitiesIndex cities = 6;
+	
+	// encoded as fixed32 length delimited
+	optional OsmAndAddressNameIndexData nameIndex = 7;  
 }
 
 message OsmAndAddressNameIndexData {
+
+    required fixed32 shiftToStringTable = 2;
+   
+    repeated AddressNameIndexData data = 5;
+    
     // shift to data starting from first AddressNameIndexData message
     // encoded as fixed32 length delimited
     required IndexedStringTable table = 4;
-   
-    repeated AddressNameIndexData data = 5;
 }
 
 message AddressNameIndexData {
-
-    repeated AddressNameIndexDataAtom = 4; 
+    repeated AddressNameIndexDataAtom atom = 4; 
 }
 
 message AddressNameIndexDataAtom {
@@ -150,10 +165,11 @@ message AddressNameIndexDataAtom {
      // 1 - city, 2 - postcode, 3 - village,  4 - street
      required uint32 type = 3; 
 
+     // mixed 
      // shift from start AddressNameIndexDataAtom to ...Index      
-     repeated uint32 shiftToIndex;
+     repeated fixed32 shiftToIndex = 5;
      // optional used in case of type=street
-     repeated string shiftToCityIndex; 
+     repeated fixed32 shiftToCityIndex = 6; 
 }
 
 
@@ -161,6 +177,7 @@ message CitiesIndex {
     // cities and towns - type 1,  postcodes - type 2, villages - type 3
     required uint32 type = 2;
     
+    // not mixed
     // the list cities and blocks are synchronized by order (so even empty block will be written)
     repeated CityIndex cities = 5;
     
@@ -186,6 +203,9 @@ message CityIndex {
 }
 
 message CityBlockIndex {
+
+    // shift from start cityBlockIndex to CityIndex 
+	optional fixed32 shiftToCityIndex = 4;
 
 	// buildings that doesn't belong to the street
 	repeated BuildingIndex buildings = 16;
@@ -309,16 +329,6 @@ message OsmAndTransportIndex {
 	
 	
 	required StringTable stringTable = 9;
-	
-}
-
-message OsmAndTileBox {
-    // everything is encoded as 31 tile zoom
-    required uint32 left = 1;
-    required uint32 right = 2;
-    required uint32 top = 3;
-    required uint32 bottom = 4;
-
 }
 
 message OsmAndPoiIndex {
@@ -341,12 +351,14 @@ message OsmAndPoiIndex {
 }
 
 message OsmAndPoiNameIndex {
-
-   // shift to data starting from first OsmAndPoiNameIndexData message
-   // encoded as fixed32 length delimited
-   required IndexedStringTable table = 2;
+   
+   required fixed32 shiftToStringTable = 2;
    
    repeated OsmAndPoiNameIndexData data = 5;
+   
+   // shift to data starting from first OsmAndPoiNameIndexData message
+   // encoded as fixed32 length delimited
+   required IndexedStringTable table = 8;
 }
 
 message OsmAndPoiNameIndexData {
