@@ -81,7 +81,7 @@
 	<string name="route_head">Andare</string>
 	<string name="first_time_continue">Continuare</string>
 	<string name="first_time_download">Download indici</string>
-	<string name="first_time_msg">Grazie per aver scelto OsmAnd. \nPer utilizzare tutte le caratteristiche dell\'applicazione sono necessari i file di indice, che possono essere scaricati (Impostazioni/Dati) o creati da voi. Sara\' poi possibile :cercare indirizzi, POI, trasporti pubblici.</string>
+	<string name="first_time_msg">Grazie per aver scelto OsmAndAccess. \nPer utilizzare tutte le caratteristiche dell\'applicazione sono necessari i file di indice, che possono essere scaricati (Impostazioni/Dati) o creati da voi. Sara\' poi possibile :cercare indirizzi, POI, trasporti pubblici.</string>
 	<string name="search_poi_location">Ricerca posizione POI...</string>
 	<string name="search_near_map">Ricerca vicino all\'ultima posizione sulla mappa</string>
 	<string name="search_nearby">Ricerca vicino</string>
@@ -110,7 +110,7 @@
 	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">Visualizzare le fermate di trasporto pubblico sulla mappa</string>
 	<string name="show_transport_over_map">Visualizza le fermate</string>
-	<string name="hello">Applicazione di navigazione OsmAnd</string>
+	<string name="hello">Applicazione di navigazione OsmAndAccess</string>
 	<string name="update_poi_success">I dati POI sono stati aggiornati ({0} caricati)</string>
 	<string name="update_poi_error_local">Errore nell\'aggiornamento delgi indici locali</string>
 	<string name="update_poi_error_loading">Errore durante il caricamento dati dal server</string>

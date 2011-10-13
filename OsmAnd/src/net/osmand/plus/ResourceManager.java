@@ -34,6 +34,7 @@ import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.render.BaseOsmandRender;
+import net.osmand.plus.render.MapExplorerRepositories;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.views.POIMapLayer;
 
@@ -103,12 +104,15 @@ public class ResourceManager {
 	
 	protected boolean internetIsNotAccessible = false;
 	
+	protected final MapExplorerRepositories explorer;
 	
 	public ResourceManager(OsmandApplication context) {
 		this.context = context;
 		this.renderer = new MapRenderRepositories(context);
 		asyncLoadingTiles.start();
 		resetStoreDirectory();
+		
+		this.explorer = new MapExplorerRepositories(context);
 	}
 
 	public void resetStoreDirectory() {
@@ -367,6 +371,7 @@ public class ResourceManager {
 		// indexingImageTiles(progress);
 		warnings.addAll(indexingPoi(progress));
 		warnings.addAll(indexingMaps(progress));
+		warnings.addAll(initializeMapExplorer(progress));
 		return warnings;
 	}
 	
@@ -493,6 +498,35 @@ public class ResourceManager {
 //									warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
 //								}
 							}
+						}
+					} catch (SQLiteException e) {
+						log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
+						warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
+					} catch (OutOfMemoryError oome) {
+						log.error("Exception reading " + f.getAbsolutePath(), oome); //$NON-NLS-1$
+						warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_big_for_memory), f.getName()));
+					}
+				} else if(f.getName().endsWith(".map.odb")){ //$NON-NLS-1$
+					warnings.add(MessageFormat.format(context.getString(R.string.old_map_index_is_not_supported), f.getName())); //$NON-NLS-1$
+				}
+			}
+		}
+		return warnings;
+	}
+	
+	public List<String> initializeMapExplorer(final IProgress progress) {
+		File file = context.getSettings().extendOsmandPath(MAPS_PATH);
+		file.mkdirs();
+		List<String> warnings = new ArrayList<String>();
+		explorer.clearAllResources();
+		if (file.exists() && file.canRead()) {
+			for (File f : file.listFiles()) {
+				if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+					progress.startTask("Идет инициализация проводника " + f.getName(), -1); //$NON-NLS-1$
+					try {
+						BinaryMapIndexReader index = explorer.initializeNewResource(progress, f);
+						if (index == null) {
+							warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 						}
 					} catch (SQLiteException e) {
 						log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
@@ -657,6 +691,10 @@ public class ResourceManager {
 		return renderer;
 	}
 	
+	public MapExplorerRepositories getExplorer() {
+		return explorer;
+	}
+	
 	////////////////////////////////////////////// Closing methods ////////////////////////////////////////////////
 	
 	public void closeAmenities(){
@@ -692,6 +730,7 @@ public class ResourceManager {
 		imagesOnFS.clear();
 		indexFileNames.clear();
 		renderer.clearAllResources();
+		explorer.clearAllResources();
 		closeAmenities();
 		closeRouteFiles();
 		closeAddresses();

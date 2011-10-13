@@ -13,7 +13,11 @@
 	<string name="voice_not_use">Не использовать</string>
 	<string name="voice_not_specified">Нету</string>
 	<string name="installing_new_resources">Распаковываются новые данные...</string>
-	<string name="internet_connection_required_for_online_route">Вы собираетесь использовать интернет роутинг, но у вас нет активного интернет соединения. Вы можете попытаться использовать (экспериментальный) OsmAnd offline роутинг ( \'Настройки\' -> \'Навигация\') на короткие расстояния.</string>
+	<string
+	name="internet_connection_required_for_online_route">Вы
+	собираетесь использовать интернет маршрутизацию, но у вас нет
+	активного интернет соединения. Вы можете попытаться
+	использовать (экспериментальный) автономный маршрутизатор OsmAnd ( \'Настройки\' -> \'Навигация\') на короткие расстояния.</string>
 	<string name="tts_language_not_supported_title">Язык не поддерживается</string>
 	<string name="tts_language_not_supported">Выбранный язык не поддерживается Android TTS (text-to-speech). Хотите найти в маркете другой TTS? Иначе язык TTS по умолчанию будет использован.</string>
 	<string name="tts_missing_language_data_title">Данные отсутсвуют</string>
@@ -56,7 +60,7 @@
 	<string name="tip_osm_improve">Улучшить Openstreetmap</string>
 	<string name="tip_osm_improve_t">OsmAnd использует данные Openstreetmap.org data и имеет возможности улучшения этих данных. Вы можете добавить POI или сообщить о неточности на карте !
 \nПрежде всего необходимо ввести свои инициалы  \'Меню\'->\'Настройки\'->\'OSM\'.
-\n\tДля добавления POI используйет \'Добавить POI\' в контекстном меню карты.
+\n\tДля добавления POI используйте \'Добавить POI\' в контекстном меню карты.
 \n\tЕсли вы нашли неточность на карте, вы можете сообщить об этом Openstreetmap сообществу.
 \n\tНе забывайте, что для этих функций вам понадобится интернет!</string>
 	<string name="create_poi_link_to_osm_doc"><u>Интернет OSM</u> классификация</string>
@@ -69,7 +73,7 @@
 	<string name="tip_map_switch">Источник карты</string>
 	<string name="tip_map_switch_t">Наиболее быстрый способ изменить источник карты и слои \'Меню\'->\'Слои\'.
 \n\tПод \'Карта источник...\' вы можете выбрать из предопределенных типов или собственных, созданных OsmAndMapCreator на PC.
-\n\tOsmAnd поддерживает custom источники.</string>
+\n\tOsmAnd поддерживает пользовательские источники.</string>
 	<string name="tip_app_mode">Режим работы</string>
 	<string name="tip_app_mode_t">OsmAnd поддерживает различные типовые режимы отображения карты.
 \n\tВы можете изменить режим в \'Меню\'->\'Настройки\'->\'Режим работы\', при этом меняется большинство настроек карты.</string>
@@ -91,7 +95,7 @@
 \n\tЭто кнопка доступна во всех поисках, в контекстном меню карты и при долгом нажатии на избранных, POI. 
 Эту точку можно использовать, чтобы измерять расстояние и для простой навигации.</string>
 	<string name="tip_initial">Советы по использованию</string>
-	<string name="tip_initial_t">\tOsmAnd - навигационное приложение с большим количеством функций. 
+	<string name="tip_initial_t">\tOsmAndAccess - навигационное приложение с большим количеством функций. 
 \n\tЧтобы использовать его как можно лучше, следуйте советам по ссылке вверху меню.</string>
 	<string name="next_button">Следующий</string>
 	<string name="previous_button">Предыдущий</string>
@@ -154,9 +158,9 @@
 	<string name="version_index_is_not_supported">Версия индекса \'\'{0}\'\' не поддерживается</string>
 	
 	
-	<string name="use_osmand_routing_service">OsmAnd offline навигация</string>
+	<string name="use_osmand_routing_service">Автономная навигация OsmAnd</string>
 	<string name="use_osmand_routing_service_descr">Использовать offline навигацию на длинные расстояние (экспериментально)</string>
-	<string name="osmand_routing_experimental">OsmAnd offline навигация является экспериментальной и не работает на расстояния более 20 километров.\n В этом случае автоматически переключается на Cloudmade.</string>
+	<string name="osmand_routing_experimental">Автономная навигация OsmAnd является экспериментальной и не работает на расстояния более 20 километров.\n В этом случае автоматически переключается на Cloudmade.</string>
 	<string name="specified_dir_doesnt_exist">Невозможно найти указанную директорию.</string>
 	<string name="application_dir">Директория приложения</string>
 	<string name="application_dir_change_warning">Изменение директории не переносит файлы автоматически. Вы должны это сделать самостоятельно. Продолжить?</string>
@@ -164,10 +168,10 @@
 	<string name="osmand_net_previously_installed">У вас имеется предыдущая версия OsmAnd. Все офлайн данные поддерживаются новым приложением. Избранные точки можно экспортировать в старом и импортировать в новом.</string>
 	<string name="build_installed">Сборка {0} успешно установлена ({1}).</string>
 	<string name="downloading_build">Загружается сборка...</string>
-	<string name="install_selected_build">Вы уверены, что хотите установить OsmAnd - {0} от {1} {2} MB.</string>
-	<string name="loading_builds_failed">Не удалось получить список OsmAnd сборок</string>
-	<string name="loading_builds">Загружаются сборки OsmAnd...</string>
-	<string name="select_build_to_install">Выберите одну из OsmAnd сборок для установки</string>
+	<string name="install_selected_build">Вы уверены, что хотите установить OsmAndAccess - {0} от {1} {2} MB.</string>
+	<string name="loading_builds_failed">Не удалось получить список сборок OsmAndAccess</string>
+	<string name="loading_builds">Загружаются сборки OsmAndAccess...</string>
+	<string name="select_build_to_install">Выберите одну из сборок OsmAndAccess для установки</string>
 	
 	<string name="voice_is_not_available_msg">Голосовая навигация не доступна. Перейдите в настройки и укажите голосовые данные или загрузите их.</string>
 	<string name="voice_is_not_available_title">Голосовые данные не найдены</string>
@@ -193,7 +197,7 @@
     <string name="index_settings_descr">Загрузить и обновить данные для офлайн использования</string>
     <string name="index_settings">Данные</string>
 	<string name="osmand_service">Фоновый режим</string>
-	<string name="osmand_service_descr">Запустить OsmAnd в фоновом режиме для записи трека и навигации</string>
+	<string name="osmand_service_descr">Запустить OsmAndAccess в фоновом режиме для записи трека и навигации</string>
 	<string name="fast_route_mode">Наибыстрейший маршрут</string>
 	<string name="fast_route_mode_descr">Включите опцию для расчета наибыстрейшего маршрута или отключите для расчета кратчайшего.</string>
 	<string name="tiles_to_download_estimated_size">На масштабе {0} загрузить {1} тайлов ({2} Mb )</string>
@@ -283,7 +287,7 @@
 	<string name="background_service_provider">Источник позиционирования</string>
 	<string name="background_router_service_descr">Включить фоновый сервис для обновления через долгий период времени</string>
 	<string name="background_router_service">Сервис навигации</string>
-	<string name="off_router_service_no_gps_available">Сервис маршрутизации OsmAnd включен, отключив позиционирование, он перестает вести по маршруту.</string>
+	<string name="off_router_service_no_gps_available">Сервис маршрутизации OsmAnd включен, если отключить позиционирование, он перестанет вести по маршруту.</string>
 	<string name="routing_settings_descr">Изменить настройки навигации</string>
 	<string name="routing_settings">Навигация</string>
 	<string name="hide_poi_filter">Скрыть фильтр</string>
@@ -311,7 +315,7 @@
 	<string name="route_head">Двигайтесь</string>
 	<string name="first_time_continue">Продолжить</string>
 	<string name="first_time_download">Загрузить индексы</string>
-	<string name="first_time_msg">Спасибо за то, что выбрали OsmAnd. \n
+	<string name="first_time_msg">Спасибо за то, что выбрали OsmAndAccess. \n
 Для полноценного использования приложения вам потребуются файлы индексы, которые необходимо загрузить (Настройки/Данные) или подготовить. После загрузки вам будет доступен : поиск по адресу, поиск POI, поиск транспорта.</string>
 	<string name="search_poi_location">Поиск сигнала...</string>
 	<string name="search_near_map">Искать вокруг выбранного центра карты</string>
@@ -340,7 +344,7 @@
 	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">Показать остановки транспорта на карте</string>
 	<string name="show_transport_over_map">Показать транспорт</string>
-	<string name="hello">Навигационное приложение OsmAnd</string>
+	<string name="hello">Навигационное приложение OsmAndAccess</string>
 	<string name="update_poi_success">Данные POI были успешно обновлены ({0} объектов загружено)</string>
 	<string name="update_poi_error_local">Ошибка сохранения POI в локальный индекс</string>
 	<string name="update_poi_error_loading">Ошибка загрузки данных с сервера</string>
@@ -416,7 +420,7 @@
 	<string name="new_route_calculated_dist">Проложен новый путь, расстояние</string>
 	<string name="arrived_at_destination">Вы прибыли в пункт назначения</string>
 	<string name="invalid_locations">Координаты неправильные</string>
-	<string name="go_back_to_osmand">Вернуться к OsmAnd карте</string>
+	<string name="go_back_to_osmand">Вернуться к карте OsmAnd</string>
 	<string name="close">Закрыть</string>
 	<string name="help">Помощь</string>
 	<string name="loading_data">Загрузка данных</string>
@@ -598,4 +602,14 @@
 	<string name="edit_filter_delete_message">Фильтр {0} удален</string>
 	<string name="edit_filter_create_message">Фильтр {0} создан</string>
 	<string name="default_buttons_selectall">Выделить все</string>
+
+	<string name="backToMenu">Главное меню</string>
+	<string name="zoomOut">Уменьшить масштаб</string>
+	<string name="zoomIn">Увеличить масштаб</string>
+	<string name="zoomIs">Масштаб </string>
+	<string name="look_forward">Смотреть вперед</string>
+	<string name="look_right">Смотреть вправо</string>
+	<string name="look_left">Смотреть влево</string>
+	<string name="look_back">Смотреть назад</string>
+	<string name="look_menu_button">Меню обзора</string> 
 </resources>

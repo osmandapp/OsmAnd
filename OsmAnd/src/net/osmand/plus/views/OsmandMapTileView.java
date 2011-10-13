@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.LogUtil;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
@@ -14,6 +15,7 @@ import net.osmand.map.IMapLocationListener;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 
@@ -29,6 +31,7 @@ import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
@@ -36,10 +39,13 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.SurfaceHolder.Callback;
+import android.view.accessibility.AccessibilityEvent;
+import android.widget.Toast;
 
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback {
 
@@ -57,6 +63,20 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	public interface OnClickListener {
 		public boolean onPressEvent(PointF point);
+	}
+
+	public interface OnPointTouchListener {
+		public boolean onPointTouchEvent(PointF point);
+	}
+	
+	public interface OnTouchEventListener {
+		public boolean onTouchEvent(MotionEvent event);
+	}
+	public interface OnGetTouchEventListener {
+		public OnTouchEventListener onGetTouchEventListener(MotionEvent event);
+	}
+	public interface TouchViewFinder {
+		public View findTouchView(MotionEvent event);
 	}
 
 	protected static final Log log = LogUtil.getLog(OsmandMapTileView.class);
@@ -84,6 +104,12 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	private OnClickListener onClickListener;
 
+	private OnPointTouchListener onPointTouchListener;
+	
+	private List<OnGetTouchEventListener> getTouchEventListeners = new ArrayList<OnGetTouchEventListener>();
+	
+	private List<TouchViewFinder> touchViewFinders = new ArrayList<TouchViewFinder>();
+
 	private OnTrackBallListener trackBallDelegate;
 
 	private List<OsmandMapLayer> layers = new ArrayList<OsmandMapLayer>();
@@ -95,6 +121,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	// UI Part
 	// handler to refresh map (in ui thread - ui thread is not necessary, but msg queue is required).
 	protected Handler handler = new Handler();
+
+	protected Handler accessibilityHandler = new Handler();
 
 	private AnimateDraggingMapThread animatedDraggingThread;
 
@@ -159,7 +187,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		animatedDraggingThread = new AnimateDraggingMapThread(this);
 		gestureDetector = new GestureDetector(getContext(), new MapTileViewOnGestureListener());
 		multiTouchSupport = new MultiTouchSupport(getContext(), new MapTileViewMultiTouchZoomListener());
-		gestureDetector.setOnDoubleTapListener(new MapTileViewOnDoubleTapListener());
 
 		WindowManager mgr = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
 		dm = new DisplayMetrics();
@@ -262,7 +289,14 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 	}
 
-	
+	public void setAccessibleZoom(float zoom) {
+		if (mainLayer != null && zoom <= mainLayer.getMaximumShownMapZoom() && zoom >= mainLayer.getMinimumShownMapZoom()) {
+			animatedDraggingThread.stopAnimating();
+			this.zoom = zoom;
+			setExploreInfo(getContext().getString(R.string.zoomIs) + String.valueOf(zoom));
+			refreshMap();
+		}
+	}
 
 	public void setRotate(float rotate) {
 		float diff = MapUtils.unifyRotationDiff(rotate, this.rotate);
@@ -639,14 +673,81 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	}
 
+	private OnTouchEventListener touchListener = null;
+	
+	private View findTouchView(MotionEvent event) {
+        View touchedView;
+        for (TouchViewFinder f : touchViewFinders) {
+           	touchedView = f.findTouchView(event);
+           	if (touchedView != null) return touchedView;
+        }
+        return null;
+	}
+	
+	private View touchedView; 
+	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
+		if (event.getAction() == MotionEvent.ACTION_CANCEL)
+			return true;
+
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
-			animatedDraggingThread.stopAnimating();
+			touchedView = findTouchView(event);
+			if (touchedView != null)
+				touchedView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED); 
+			else
+				this.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);                	
 		}
-		if (!multiTouchSupport.onTouchEvent(event)) {
-			/* return */gestureDetector.onTouchEvent(event);
+
+		View currentTouchedView = findTouchView(event);  
+
+		if (currentTouchedView == null) {
+			if (touchedView != null && event.getAction() == MotionEvent.ACTION_MOVE) {
+				float x = event.getX();
+			       	float y = event.getY();
+
+			        this.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
+				if (log.isDebugEnabled())
+					log.debug("Touch Map Event x: " + x + ", y: " + y);
+
+				touchedView = null;
 		}
+			
+			if (onPointTouchListener != null) {
+				PointF point = new PointF(event.getX(), event.getY());
+				onPointTouchListener.onPointTouchEvent(point);
+			}				
+		} else if (event.getAction() == MotionEvent.ACTION_MOVE && (currentTouchedView != touchedView)) {
+			if (currentTouchedView.isClickable()) {
+				float x = event.getX();
+			       	float y = event.getY();
+			       	float pressure = event.getPressure();
+			        float size = event.getSize();
+			        int metaState = event.getMetaState();
+			        float xPrecision = event.getXPrecision();
+			        float yPrecision = event.getYPrecision();
+			        int deviceId = event.getDeviceId();
+			        int edgeFlags = event.getEdgeFlags();
+			        event.setAction(MotionEvent.ACTION_CANCEL);
+			        super.onTouchEvent(event);
+			        long now = SystemClock.uptimeMillis();
+			        event.recycle();
+			        event = MotionEvent.obtain(now, now, MotionEvent.ACTION_DOWN, x, y, pressure, size,
+			        			metaState, xPrecision, yPrecision, deviceId, edgeFlags);
+			}
+			currentTouchedView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
+			if (log.isDebugEnabled())
+				log.debug("Touch Button Event x: " + event.getX() + ", y: " + event.getY());
+
+		        touchedView = currentTouchedView;
+		}
+
+		if (event.getAction() == MotionEvent.ACTION_UP) {
+			touchedView = findTouchView(event);
+			if (touchedView != null && touchedView.isClickable())
+				touchedView.performClick();
+		}
+
 		return true;
 	}
 
@@ -670,6 +771,17 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		this.onClickListener = l;
 	}
 
+	public void setOnPointTouchListener(OnPointTouchListener l) {
+		this.onPointTouchListener = l;
+	}
+	
+	public void addOnGetTouchEventListener(OnGetTouchEventListener l) {
+		getTouchEventListeners.add(l);
+	}
+
+	public void addTouchViewFinder(TouchViewFinder f) {
+		touchViewFinders.add(f);
+	}
 
 		public LatLon getLatLonFromScreenPoint(float x, float y) {
 		float dx = x - getCenterPointX();
@@ -698,7 +810,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		public void onZoomEnded(float distance, float relativeToStart) {
 			float dz = (float) (Math.log(relativeToStart) / Math.log(2) * 1.5);
 			float calcZoom = initialMultiTouchZoom + dz;
-			setZoom(Math.round(calcZoom));
+			setAccessibleZoom(Math.round(calcZoom));
 			zoomPositionChanged(getZoom());
 		}
 
@@ -744,12 +856,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-			if (Math.abs(e1.getX() - e2.getX()) + Math.abs(e1.getX() - e2.getX()) > 50 * dm.density) {
-				animatedDraggingThread.startDragging(velocityX, velocityY, 
-						e1.getX(), e1.getY(), e2.getX(), e2.getY(), true);
-			} else {
 				onScroll(e1, e2, e1.getX() - e2.getX(), e1.getY() - e2.getY());
-			}
+			
 			return true;
 		}
 
@@ -774,7 +882,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 		@Override
 		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-			dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
+			if (onPointTouchListener != null) {
+				PointF point = new PointF(e2.getX(), e2.getY());
+				onPointTouchListener.onPointTouchEvent(point);
+			}
 			return true;
 		}
 
@@ -820,4 +931,72 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 	}
 
+	public int getMapXForTile(float tileX) {
+		return (int) ((tileX - getXTile()) * getTileSize() + getCenterPointX());
+}
+
+	public int getMapYForTile(float tileY) {
+		return (int) ((tileY - getYTile()) * getTileSize() + getCenterPointY());
+	}
+
+	public int getTileXForMapPoint(float mapX) {
+		return (int) ((mapX - getCenterPointX()) / getTileSize() + getXTile());
+	}
+
+	public int getTileYForMapPoint(float mapY) {
+		return (int) ((mapY - getCenterPointY()) / getTileSize() + getYTile());
+	}
+
+	// Explored information 
+	private String exploredInfoText = "";
+
+	public String getExploreInfo() {
+		return exploredInfoText;
+	}
+
+	public void setExploreInfo(String info) {
+		if (exploredInfoText.compareToIgnoreCase(info) != 0) {
+			exploredInfoText = info;
+
+			if (!accessibilityHandler.hasMessages(1)) {
+				Message msg = Message.obtain(accessibilityHandler, new Runnable() {
+					@Override
+					public void run() {
+						synchronized (OsmandMapTileView.this) {
+							sendAccessibilityEvent(AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED);
+						}					
+					}
+				});
+				msg.what = 1;
+				accessibilityHandler.sendMessageDelayed(msg, 10);
+			}
+		}
+	}
+
+	@Override
+	public boolean dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
+		super.dispatchPopulateAccessibilityEvent(event);
+		if (!isShown() || exploredInfoText == null || exploredInfoText == "") {
+			return false;
+		}
+		CharSequence text = String.valueOf(exploredInfoText);
+		if (text.length() > AccessibilityEvent.MAX_TEXT_LENGTH) {
+			text = text.subSequence(0, AccessibilityEvent.MAX_TEXT_LENGTH);
+		}
+
+		event.getText().clear();
+		event.getText().add(text);
+
+		if (log.isDebugEnabled())
+			log.debug("Accessibility Event: " + text);
+		return true;
+	}
+
+	public boolean onSuperTouchEvent(MotionEvent event) {
+		return super.onTouchEvent(event);
+	}
+
+	public void zoomInfo(int newZoom) {
+		setExploreInfo(getContext().getString(R.string.zoomIs) + String.valueOf(newZoom));
+	}
 }

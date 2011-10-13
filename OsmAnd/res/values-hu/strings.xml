@@ -86,7 +86,7 @@
 \n\tEz a lehetőség minden keresésnél elérhető vagy a \'Térkép menü\'-ből vagy a térkép objektum hosszú megnyomásával.
 A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanavigáláshoz.</string>
 <string name="tip_initial">Tippek és trükkök</string>
-<string name="tip_initial_t">\tAz OsmAnd navigációs alkalmazás sok lehetőséggel rendelkezik.
+<string name="tip_initial_t">\tAz OsmAndAccess navigációs alkalmazás sok lehetőséggel rendelkezik.
 \n\tA gyorsabb megértés érdekében ajánlott a tippek és trükkök elolvasása ami egy linken keresztül elérhető a főmenüből.</string>
 <string name="next_button">Következő</string>
 <string name="previous_button">Előző</string>
@@ -151,10 +151,10 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="osmand_net_previously_installed">Ön már telepített egy korbábbi OsmAnd verziót. Minden Internettől független adat használható az új alkalmazással. A Kedvenc pontokat a régi alkalmazásból érdemes kimenteni és az újba betölteni</string>
 	<string name="build_installed">OsmAnd verzió {0} sikeresen telepítve ({1}).</string>
 	<string name="downloading_build">OsmAnd verzió letöltése...</string>
-	<string name="install_selected_build">Biztos hogy telepíti az OsmAnd alkalmazást - {0} innen: {1} {2} MB.</string>
-	<string name="loading_builds_failed">OsmAnd verziók listájának letöltése nem sikerült </string>
-	<string name="loading_builds">OsmAnd verziók töltése...</string>
-	<string name="select_build_to_install">Select one of the OsmAnd build to install</string>
+	<string name="install_selected_build">Biztos hogy telepíti az OsmAndAccess alkalmazást - {0} innen: {1} {2} MB.</string>
+	<string name="loading_builds_failed">OsmAndAccess verziók listájának letöltése nem sikerült </string>
+	<string name="loading_builds">OsmAndAccess verziók töltése...</string>
+	<string name="select_build_to_install">Select one of the OsmAndAccess build to install</string>
 	<string name="contribution_activity">Special activity for contribution version</string>
 	
 	<string name="gps_status_app_not_found">"GPS status" alkalmazás nincs telepítve. Megkeresi a Market-en?</string>
@@ -307,7 +307,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="route_head">Előre</string>
 	<string name="first_time_continue">Tovább</string>
 	<string name="first_time_download">Index adatok letöltése</string>
-	<string name="first_time_msg">Köszönjük, hogy az OsmAndot választotta. \nHogy a program minden lehetőségét kihasználhassa index állományokra lesz szüksége amiket az Internetről letölthet (Beállítások -&gt; Adat) vagy előállíthat magának. Ezt követően képes lesz: címre keresni, POI-ra keresni és tömegközékedési eszközre keresni.</string>
+	<string name="first_time_msg">Köszönjük, hogy az OsmAndAccess választotta. \nHogy a program minden lehetőségét kihasználhassa index állományokra lesz szüksége amiket az Internetről letölthet (Beállítások -&gt; Adat) vagy előállíthat magának. Ezt követően képes lesz: címre keresni, POI-ra keresni és tömegközékedési eszközre keresni.</string>
 	<string name="search_poi_location">Kereső jelzés...</string>
 	<string name="search_near_map">Keresés az utolsó térkép pozíció közelében</string>
 	<string name="search_nearby">Keresés a közelben</string>
@@ -334,7 +334,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">Tömegközlekedési megállok mutatása a térképen</string>
 	<string name="show_transport_over_map">Tömegközlekedési megállok mutatása</string>
-	<string name="hello">OsmAnd navigációs alkalmazás</string>
+	<string name="hello">OsmAndAccess navigációs alkalmazás</string>
 	<string name="update_poi_success">POI adatok sikeresen frissítve ({0} db betöltve)</string>
 	<string name="update_poi_error_local">Hiba a helyi index állományok frissítésénél</string>
 	<string name="update_poi_error_loading">Hiba az adatok szerverről való letöltésekor</string>

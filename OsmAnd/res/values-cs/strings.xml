@@ -49,10 +49,10 @@
   </string>
   <string name="build_installed">Balíček {0} úspěšně instalován ({1}).</string>
   <string name="downloading_build">Stahuji balíček...</string>
-  <string name="install_selected_build">Opravdu chcete instalovat OsmAnd - {0} z {1} {2} MB.</string>
+  <string name="install_selected_build">Opravdu chcete instalovat OsmAndAccess - {0} z {1} {2} MB.</string>
   <string name="loading_builds_failed">Stahování seznamu balíčků selhalo.</string>
   <string name="loading_builds">Načítám balíčky...</string>
-  <string name="select_build_to_install">Vyberte balíček OsmAnd k nainstalování</string>
+  <string name="select_build_to_install">Vyberte balíček OsmAndAccess k nainstalování</string>
   <string name="contribution_activity">Speciální aktivita pro vývojovou verzi</string>
 
   <string name="tip_update_index">Aktualizace dat</string>
@@ -432,7 +432,7 @@
   <string name="tip_initial_t">
     \t
 
-    OsmAnd je navigační aplikace s řadou funkcí.
+    OsmAndAccess je navigační aplikace s řadou funkcí.
 
     \n\t
 
@@ -626,7 +626,7 @@
   <string name="first_time_continue">Pokračujte</string>
   <string name="first_time_download">Stáhnout regiony</string>
   <string name="first_time_msg">
-    Děkujeme, že jste si zvolili OsmAnd.
+    Děkujeme, že jste si zvolili OsmAndAccess.
 
     \n
 
@@ -661,7 +661,7 @@
   <string name="default_buttons_ok">OK</string>
   <string name="show_transport_over_map_description">Zobrazit v mapě zastávky veřejné dopravy</string>
   <string name="show_transport_over_map">Zobrazit zastávky</string>
-  <string name="hello">Navigační aplikace OsmAnd</string>
+  <string name="hello">Navigační aplikace OsmAndAccess</string>
   <string name="update_poi_success">Data POI byla úspěšně aktualizována ({0} načteno)</string>
   <string name="update_poi_error_local">Chyba při aktualizaci lokálních indexů</string>
   <string name="update_poi_error_loading">Chyba při načítání dat ze serveru</string>

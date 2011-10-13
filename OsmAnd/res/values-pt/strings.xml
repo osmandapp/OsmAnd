@@ -63,7 +63,7 @@
 	<string name="index_settings_descr">Obter ou atualizar dados para uso offline</string>
 	<string name="index_settings">Dados offline</string>
 	<string name="osmand_service">Serviço de segundo plano</string>
-	<string name="osmand_service_descr">Executar o serviço de segundo plano para usar Osmand enquanto a tela está desligada</string>
+	<string name="osmand_service_descr">Executar o serviço de segundo plano para usar OsmAndAccess enquanto a tela está desligada</string>
 	<string name="fast_route_mode">Caminho mais rápido</string>
 	<string name="fast_route_mode_descr">Ative para calcular a rota mais rápida ou desative para calcular a rota mais curta</string>
 	<string name="tiles_to_download_estimated_size">O zoom {0} baixa {1} azulejos ({2} MB )</string>
@@ -182,7 +182,7 @@
 	<string name="route_head">Vá</string>
 	<string name="first_time_continue">Continuar</string>
 	<string name="first_time_download">Download de regiões</string>
-	<string name="first_time_msg">Obrigado por escolher Osmand. \nPara utilizar todos os recursos do aplicativo, você necessidade de alguns dados regionais,  que você pode baixar (Configurações -&gt; Dados) ou preparar você mesmo. Depois, Você poderá procurar por um endereço, um Ponto de Interesse (POI), um meio de transporte ... </string>
+	<string name="first_time_msg">Obrigado por escolher OsmAndAccess. \nPara utilizar todos os recursos do aplicativo, você necessidade de alguns dados regionais,  que você pode baixar (Configurações -&gt; Dados) ou preparar você mesmo. Depois, Você poderá procurar por um endereço, um Ponto de Interesse (POI), um meio de transporte ... </string>
 	<string name="search_poi_location">Procurando um sinal...</string>
 	<string name="search_near_map">Procure perto do último local conhecido</string>
 	<string name="search_nearby">Busca nas proximidades</string>
@@ -209,7 +209,7 @@
 	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">Ver as paradas de transportes públicos no mapa</string>
 	<string name="show_transport_over_map">Mostrar paradas de transportes</string>
-	<string name="hello">Aplicação de navegação OsmAnd</string>
+	<string name="hello">Aplicação de navegação OsmAndAccess</string>
 	<string name="update_poi_success">Atualização com sucesso dos POI ({0} foram carregados)</string>
 	<string name="update_poi_error_local">Erro ao atualizar o índice local</string>
 	<string name="update_poi_error_loading">Erro ao carregar dados do servidor</string>

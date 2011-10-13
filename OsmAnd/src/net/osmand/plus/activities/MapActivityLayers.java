@@ -26,6 +26,7 @@ import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.ContextMenuLayer;
+import net.osmand.plus.views.ExploreInfoLayer;
 import net.osmand.plus.views.FavoritesLayer;
 import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.MapControlsLayer;
@@ -46,6 +47,7 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.Toast;
 
 /**
@@ -71,6 +73,7 @@ public class MapActivityLayers {
 	private PointNavigationLayer navigationLayer;
 	private MapInfoLayer mapInfoLayer;
 	private ContextMenuLayer contextMenuLayer;
+	private ExploreInfoLayer exploreInfoLayer;
 	private RouteInfoLayer routeInfoLayer;
 	private MapControlsLayer mapControlsLayer;
 
@@ -131,8 +134,11 @@ public class MapActivityLayers {
 		mapInfoLayer = new MapInfoLayer(activity, routeLayer);
 		mapView.addLayer(mapInfoLayer, 8);
 		// 9. context menu layer 
-		contextMenuLayer = new ContextMenuLayer(activity);
-		mapView.addLayer(contextMenuLayer, 9);
+//		contextMenuLayer = new ContextMenuLayer(activity);
+//		mapView.addLayer(contextMenuLayer, 9);
+		// 9.2. explore info layer 
+		exploreInfoLayer = new ExploreInfoLayer(activity);
+		mapView.addLayer(exploreInfoLayer, 9);
 		// 10. route info layer
 		routeInfoLayer = new RouteInfoLayer(routingHelper, (LinearLayout) activity.findViewById(R.id.RouteLayout));
 		mapView.addLayer(routeInfoLayer, 10);
@@ -141,6 +147,7 @@ public class MapActivityLayers {
 		mapControlsLayer = new MapControlsLayer(activity);
 		mapView.addLayer(mapControlsLayer, 11);
 
+		LinearLayout rl = (LinearLayout) activity.findViewById(R.id.RouteLayout);
 	}
 	
 	
@@ -557,6 +564,10 @@ public class MapActivityLayers {
 	
 	public ContextMenuLayer getContextMenuLayer() {
 		return contextMenuLayer;
+	}
+	
+	public ExploreInfoLayer getExploreInfoLayer() {
+		return exploreInfoLayer;
 	}
 	
 	public FavoritesLayer getFavoritesLayer() {

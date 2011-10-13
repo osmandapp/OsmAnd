@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="observe_list_array">
+	    <item>Look forward</item>
+	    <item>Look right</item>
+	    <item>Look left</item>
+	    <item>Look back</item>
+	</string-array> 
+</resources>

@@ -28,6 +28,7 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointLocationLayer;
+import net.osmand.plus.views.MapControlsLayer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -63,6 +64,8 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -74,12 +77,13 @@ import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-public class MapActivity extends AccessibleActivity implements IMapLocationListener, SensorEventListener {
+public class MapActivity extends /*Accessible*/Activity implements IMapLocationListener, SensorEventListener {
 
 	private static final String GPS_STATUS_ACTIVITY = "com.eclipsim.gpsstatus2.GPSStatus"; //$NON-NLS-1$
 	private static final String GPS_STATUS_COMPONENT = "com.eclipsim.gpsstatus2"; //$NON-NLS-1$
@@ -270,7 +274,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			
 		});
 
-		accessibleViews.add(backToLocation);
+//		accessibleViews.add(backToLocation);
 	}
 
 	private OsmandApplication getMyApplication() {
@@ -288,6 +292,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
     public void changeZoom(int newZoom){
     	boolean changeLocation = settings.AUTO_ZOOM_MAP.get();
 		mapView.getAnimatedDraggingThread().startZooming(newZoom, changeLocation);
+
+		mapView.setExploreInfo(getBaseContext().getString(R.string.zoomIs) + String.valueOf(newZoom));
 		showAndHideMapPosition();
     }
     
@@ -488,6 +494,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
 				int fZoom = mapView.getZoom() < 14 ? 14 : mapView.getZoom();
 				thread.startMoving( lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), fZoom, false);
+
+				mapLayers.getExploreInfoLayer().whereAmI(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), fZoom);
 			}
 		}
 		if(locationLayer.getLastKnownLocation() == null){
@@ -547,7 +555,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	    				// prevent ui hysterisis (check time interval for autozoom)
 	    				if(Math.abs(mapView.getZoom() - z) > 1 || (lastTimeAutoZooming - now) > 6500){
 	    					lastTimeAutoZooming = now;
-	    					mapView.setZoom(z);
+	    					mapView.setAccessibleZoom(z);
 	    				}
 	    			}
 	    		}
@@ -946,6 +954,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		if(settings.SHOW_VIEW_ANGLE.get().booleanValue()){
 			if(mapLayers.getLocationLayer().getHeading() == null || Math.abs(mapLayers.getLocationLayer().getHeading() - val) > 10){
 				mapLayers.getLocationLayer().setHeading(val);
+				mapLayers.getExploreInfoLayer().setHeading(val);
 			}
 		}
 		
@@ -1376,4 +1385,61 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		return location;
 	}
 
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.explore_map_menu, menu);
+}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		
+		switch (item.getItemId()) {
+			case R.id.look_forward:
+				mapLayers.getExploreInfoLayer().LookForward();
+				return true;
+			case R.id.look_right:
+				mapLayers.getExploreInfoLayer().LookRight();
+				return true;
+			case R.id.look_left:
+				mapLayers.getExploreInfoLayer().LookLeft();
+				return true;
+			case R.id.look_back:
+				mapLayers.getExploreInfoLayer().LookBack();
+				return true;
+			default:
+				return super.onContextItemSelected(item);
+		}
+	}
+
+	@Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+    	switch(requestCode) {
+    	case MapControlsLayer.OBSERVE_LIST_MENU: 
+            if (resultCode == RESULT_OK) {
+                int menu_index = data.getIntExtra("SelectedItem", -1);
+                switch (menu_index) {
+	                case 0: 
+	    				mapLayers.getExploreInfoLayer().LookForward();
+	    				break;
+	    			case 1:
+	    				mapLayers.getExploreInfoLayer().LookRight();
+	    				break;
+	    			case 2:
+	    				mapLayers.getExploreInfoLayer().LookLeft();
+	    				break;
+	    			case 3:
+	    				mapLayers.getExploreInfoLayer().LookBack();
+	    				break;
+    				default:
+    					break;
+                }
+                break;
+            }
+    	}
+ 
+	}
 }

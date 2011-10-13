@@ -1,14 +1,23 @@
 package net.osmand.plus.views;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.logging.Log;
+
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
+import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.SlideListActivity;
+import net.osmand.plus.views.OsmandMapTileView.OnTouchEventListener;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -16,19 +25,23 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.TouchDelegate;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
-public class MapControlsLayer implements OsmandMapLayer {
+public class MapControlsLayer implements OsmandMapLayer, OsmandMapTileView.TouchViewFinder {
 
 	private static final int SHOW_SEEKBAR_MSG_ID = 2;
 	private static final int SHOW_SEEKBAR_DELAY = 7000;
@@ -37,6 +50,9 @@ public class MapControlsLayer implements OsmandMapLayer {
 	private static final int SHOW_ZOOM_LEVEL_MSG_ID = 3;
 	private static final int SHOW_ZOOM_LEVEL_DELAY = 2000;
 	
+	public static final int OBSERVE_LIST_MENU = 1;
+	public static final int LIST_MENU_2 = 2;
+	public static final int LIST_MENU_3 = 3;
 
 	private OsmandMapTileView view;
 	private DisplayMetrics dm;
@@ -45,14 +61,13 @@ public class MapControlsLayer implements OsmandMapLayer {
 	
 	private boolean showZoomLevel = false;
 	
-	
-	private Button zoomInButton;
-	private Button zoomOutButton;
+	private ImageButton zoomInButton;
+	private ImageButton zoomOutButton;
 	
 	private TextPaint zoomTextPaint;
 	private Drawable zoomShadow;
 	
-	private Button backToMenuButton;
+	private ImageButton backToMenuButton;
 	private Drawable modeShadow;
 	
 	private Drawable rulerDrawable;
@@ -63,6 +78,9 @@ public class MapControlsLayer implements OsmandMapLayer {
 	private BaseMapLayer[] transparencyLayers;
 	private float scaleCoefficient;
 	
+	private ImageButton lookMenuButton;
+	
+	private final List<View> buttons = new ArrayList<View>(); 
 
 	public MapControlsLayer(MapActivity activity){
 		this.activity = activity;
@@ -92,10 +110,13 @@ public class MapControlsLayer implements OsmandMapLayer {
 
 		initBackToMenuButton(view, parent);
 		
+		initMenuButtons(view, parent);
+		
 		initRuler(view, parent);
 		
 		initTransparencyBar(view, parent);
 		
+		view.addTouchViewFinder(this);
 	}
 
 	@Override
@@ -230,7 +251,9 @@ public class MapControlsLayer implements OsmandMapLayer {
 	
 	private void initBackToMenuButton(final OsmandMapTileView view, FrameLayout parent) {
 		android.widget.FrameLayout.LayoutParams params;
-		backToMenuButton = new Button(view.getContext());
+		Context ctx = view.getContext();
+		backToMenuButton = new ImageButton(ctx);
+		backToMenuButton.setContentDescription(ctx.getString(R.string.backToMenu));
 		backToMenuButton.setBackgroundResource(R.drawable.map_btn_menu);
 		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 					Gravity.BOTTOM | Gravity.LEFT);
@@ -246,6 +269,17 @@ public class MapControlsLayer implements OsmandMapLayer {
 				activity.backToMainMenu();
 			}
 		});
+		Rect bounds = new Rect();
+		view.getGlobalVisibleRect(bounds);
+		backToMenuButton.setTouchDelegate(new TouchDelegate(bounds, view) {
+			@Override
+			public boolean onTouchEvent(MotionEvent event) {
+				event.setLocation(event.getX() + backToMenuButton.getLeft(), event.getY() + backToMenuButton.getTop());
+				return view.dispatchTouchEvent(event);
+			}
+		});
+		
+		buttons.add(backToMenuButton);
 	}
 	
 	private void initRuler(OsmandMapTileView view, FrameLayout parent) {
@@ -260,7 +294,8 @@ public class MapControlsLayer implements OsmandMapLayer {
 	private void initZoomButtons(final OsmandMapTileView view, FrameLayout parent) {
 		int minimumWidth = view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumWidth();
 		
-		ImageView bottomShadow = new ImageView(view.getContext());
+		Context ctx = view.getContext();
+		ImageView bottomShadow = new ImageView(ctx);
 		bottomShadow.setBackgroundResource(R.drawable.bottom_shadow);
 		android.widget.FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT,
 					Gravity.BOTTOM);
@@ -274,21 +309,27 @@ public class MapControlsLayer implements OsmandMapLayer {
 		
 		zoomShadow = view.getResources().getDrawable(R.drawable.zoom_background);
 		
-		zoomInButton = new Button(view.getContext());
+		zoomInButton = new ImageButton(ctx);
 		zoomInButton.setBackgroundResource(R.drawable.map_zoom_in);
 		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 					Gravity.BOTTOM | Gravity.RIGHT);
 		params.setMargins(0, 0, 0, 0);
+		zoomInButton.setContentDescription(ctx.getString(R.string.zoomIn));
+		zoomInButton.setFocusable(true);
 		parent.addView(zoomInButton, params);
 		
 		
-		zoomOutButton = new Button(view.getContext());
+		zoomOutButton = new ImageButton(ctx);
 		zoomOutButton.setBackgroundResource(R.drawable.map_zoom_out);
 		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 					Gravity.BOTTOM | Gravity.RIGHT);
-		
 		params.setMargins(0, 0, minimumWidth , 0);
+		zoomOutButton.setContentDescription(ctx.getString(R.string.zoomOut));
+		zoomOutButton.setFocusable(true);
 		parent.addView(zoomOutButton, params);
+		
+		buttons.add(zoomInButton);
+		buttons.add(zoomOutButton);
 		
 		zoomInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -301,6 +342,15 @@ public class MapControlsLayer implements OsmandMapLayer {
 				
 			}
 		});
+		Rect bounds = new Rect();
+		view.getGlobalVisibleRect(bounds);
+		zoomInButton.setTouchDelegate(new TouchDelegate(bounds, view) {
+			@Override
+			public boolean onTouchEvent(MotionEvent event) {
+				event.setLocation(event.getX() + zoomInButton.getLeft(), event.getY() + zoomInButton.getTop());
+				return view.dispatchTouchEvent(event);
+			}
+		});
 		
 		zoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -309,9 +359,50 @@ public class MapControlsLayer implements OsmandMapLayer {
 				
 			}
 		});
+		zoomOutButton.setTouchDelegate(new TouchDelegate(bounds, view) {
+			@Override
+			public boolean onTouchEvent(MotionEvent event) {
+				event.setLocation(event.getX() + zoomOutButton.getLeft(), event.getY() + zoomOutButton.getTop());
+				return view.dispatchTouchEvent(event);
+			}
+		});
 	}
 	
+	private void initMenuButtons(final OsmandMapTileView view, FrameLayout parent) {
+		android.widget.FrameLayout.LayoutParams params;
+		Context ctx = view.getContext();
 
+		lookMenuButton = new ImageButton(ctx);
+
+		lookMenuButton.setContentDescription(ctx.getString(R.string.look_menu_button));
+		lookMenuButton.setBackgroundResource(R.drawable.map_btn_menu);
+		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
+					Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL);
+		parent.addView(lookMenuButton, params);
+		lookMenuButton.setEnabled(true);
+		activity.registerForContextMenu(lookMenuButton);
+		
+		lookMenuButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent listIntent = new Intent(activity, SlideListActivity.class);
+				String[] content = activity.getResources().getStringArray(R.array.observe_list_array);
+				listIntent.putExtra("Content", content);
+        		activity.startActivityForResult(listIntent, OBSERVE_LIST_MENU);			}
+		});
+		
+		Rect bounds = new Rect();
+		view.getGlobalVisibleRect(bounds);
+		lookMenuButton.setTouchDelegate(new TouchDelegate(bounds, view) {
+			@Override
+			public boolean onTouchEvent(MotionEvent event) {
+				event.setLocation(event.getX() + lookMenuButton.getLeft(), event.getY() + lookMenuButton.getTop());
+				return view.dispatchTouchEvent(event);
+			}
+		});
+		
+		buttons.add(lookMenuButton);
+	}
 
 
 	/////////////////  Transparency bar /////////////////////////
@@ -418,6 +509,20 @@ public class MapControlsLayer implements OsmandMapLayer {
 	}
 
 
+    public View findTouchView(MotionEvent event) {
+        int x = (int)event.getX();
+        int y = (int)event.getY();
+        Rect bounds = new Rect();
+        for (View v : buttons)
+            if (v.getVisibility() != View.INVISIBLE) {
+            	v.getDrawingRect(bounds);
+            	bounds.offsetTo(v.getLeft(), v.getTop());
+            	if (bounds.contains(x, y)) return v;
+            }
+        return null;
+    }
 	
+    private View nowTouched;
+	protected static final Log log = LogUtil.getLog(MapControlsLayer.class);
 
 }
