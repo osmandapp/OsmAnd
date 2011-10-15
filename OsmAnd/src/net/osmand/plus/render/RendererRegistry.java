@@ -38,6 +38,7 @@ public class RendererRegistry {
 		internalRenderers.put("all-purpose (more detail)", "all-purpose.render.xml"); //$NON-NLS-1$
 		internalRenderers.put("bicycle (more detail)", "bicycle-all.render.xml"); //$NON-NLS-1$
 		internalRenderers.put("pedestrian (more detail)", "pedestrian-all.render.xml"); //$NON-NLS-1$
+		internalRenderers.put("hiking (elevation lines)", "hiking.render.xml"); //$NON-NLS-1$
 	}
 	
 	private BaseOsmandRender defaultRender = null;
