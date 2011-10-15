@@ -4,21 +4,20 @@ import java.io.File;
 import java.util.List;
 import java.util.Stack;
 
-import org.apache.commons.logging.Log;
-
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
-
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapTileDownloader;
-import net.osmand.data.TransportStop;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
+import net.osmand.data.TransportStop;
 import net.osmand.map.ITileSource;
+
+import org.apache.commons.logging.Log;
+
+import android.os.Handler;
+import android.os.HandlerThread;
 
 /**
  * Thread to load map objects (POI, transport stops )async

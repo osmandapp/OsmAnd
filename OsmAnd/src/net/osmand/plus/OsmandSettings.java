@@ -751,7 +751,8 @@ public class OsmandSettings {
 	public static final String LAST_KNOWN_MAP_LAT = "last_known_map_lat"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_LON = "last_known_map_lon"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_ZOOM = "last_known_map_zoom"; //$NON-NLS-1$
-	
+
+	public static final String MAP_LABEL_TO_SHOW = "map_label_to_show"; //$NON-NLS-1$
 	public static final String MAP_LAT_TO_SHOW = "map_lat_to_show"; //$NON-NLS-1$
 	public static final String MAP_LON_TO_SHOW = "map_lon_to_show"; //$NON-NLS-1$
 	public static final String MAP_ZOOM_TO_SHOW = "map_zoom_to_show"; //$NON-NLS-1$
@@ -766,14 +767,7 @@ public class OsmandSettings {
 		return globalPreferences.contains(LAST_KNOWN_MAP_LAT);
 	}
 
-	public void setMapLocationToShow(double latitude, double longitude) {
-		setMapLocationToShow(latitude, longitude, getLastKnownMapZoom(), null);
-	}
-	
-	public void setMapLocationToShow(double latitude, double longitude, int zoom) {
-		setMapLocationToShow(latitude, longitude, null);
-	}
-	
+		
 	public LatLon getAndClearMapLocationToShow(){
 		if(!globalPreferences.contains(MAP_LAT_TO_SHOW)){
 			return null;
@@ -784,14 +778,26 @@ public class OsmandSettings {
 		return new LatLon(lat, lon);
 	}
 	
+	public String getAndClearMapLabelToShow(){
+		String label = globalPreferences.getString(MAP_LABEL_TO_SHOW, null);
+		globalPreferences.edit().remove(MAP_LABEL_TO_SHOW).commit();
+		return label;
+	}
+	
 	public int getMapZoomToShow() {
 		return globalPreferences.getInt(MAP_ZOOM_TO_SHOW, 5);
 	}
 	
-	public void setMapLocationToShow(double latitude, double longitude, int zoom, String historyDescription) {
+	public void setMapLocationToShow(double latitude, double longitude, int zoom, String historyDescription,
+			String labelToShow) {
 		Editor edit = globalPreferences.edit();
 		edit.putFloat(MAP_LAT_TO_SHOW, (float) latitude);
 		edit.putFloat(MAP_LON_TO_SHOW, (float) longitude);
+		if (labelToShow != null) {
+			edit.putString(MAP_LABEL_TO_SHOW, labelToShow);
+		} else {
+			edit.remove(MAP_LABEL_TO_SHOW);
+		}
 		edit.putInt(MAP_ZOOM_TO_SHOW, zoom);
 		edit.commit();
 		if(historyDescription != null){
@@ -799,8 +805,12 @@ public class OsmandSettings {
 		}
 	}
 	
-	public void setMapLocationToShow(double latitude, double longitude, String historyDescription) {
-		setMapLocationToShow(latitude, longitude, getLastKnownMapZoom(), historyDescription);
+	public void setMapLocationToShow(double latitude, double longitude, int zoom) {
+		setMapLocationToShow(latitude, longitude, zoom,  null, null);
+	}
+
+	public void setMapLocationToShow(double latitude, double longitude, int zoom, String historyDescription){
+		setMapLocationToShow(latitude, longitude, zoom, historyDescription, historyDescription);
 	}
 
 	// Do not use that method if you want to show point on map. Use setMapLocationToShow

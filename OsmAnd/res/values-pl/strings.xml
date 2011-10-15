@@ -3,7 +3,7 @@
 
 <string name="data_to_search_poi_not_available">Brak danych lokalnych do wyszukania POI</string>
 <string name="poi_filter_by_name">Szukaj wg nazwy</string>
-<string name="old_poi_file_should_be_deleted">Plik \'%1$s\' z danymi POI jest przestarzały i należy go usunąć.</string>
+<string name="old_poi_file_should_be_deleted">Plik \'%1$s\' z danymi POI jest nadmiarowy i można go usunąć.</string>
 <string name="update_poi_file_not_found">Nie znaleziono lokalnego pliku z POI i nie może on zostać utworzony.</string>
 <string name="update_poi_does_not_change_indexes">Zmiana POI w aplikacji nie powoduje zmian w mapie, a jedynie jest zapisywana w pliku lokalnym.</string>
 <string name="button_upgrade_osmandplus">Uaktualnij Osmand+</string>
@@ -15,9 +15,9 @@
 <string name="choose_auto_follow_route">Autostart nawigatora</string>
 <string name="choose_auto_follow_route_descr">Ustaw czas, po którym nastąpi automatyczne uruchomienie nawigatora</string>
 <string name="search_select_point">Wybierz</string>
-<string name="local_index_description">Pobierz nowe, zarchiwizuj lub usuń istniejące dane. \nIstniejące dane offline na urządzeniu (%1$s jest dostępny):</string>
+<string name="local_index_description">Pobierz nowe, zarchiwizuj lub usuń istniejące dane. \nIstniejące dane offline na urządzeniu (%1$s jest dostępne):</string>
 <string name="search_position_current_location_search">Ustal pozycję GPS...</string>
-<string name="search_position_current_location_found">Pozycja [Ustalono]</string>
+<string name="search_position_current_location_found">Pozycja [ustalona]</string>
 <string name="search_position_address">Adres...</string>
 <string name="search_position_favorites">Ulubione...</string>
 <string name="search_position_undefined">Niezdefiniowane</string>
@@ -181,8 +181,8 @@
 \n\tNastępnie wybierz sposób udostępnienia. Do wyboru jest e-mail, SMS lub zwykłe skopiowanie koordynat do schowka.</string>
 
 <string name="tip_favorites">Ulubione punkty</string>
-<string name="tip_favorites_t">\tCzęsto używane punkty mogą zostać zapisane jako Ulubione.
-\n\tAby zapisać punkt jako Ulubiony przejdź do menu kontekstowego, wybierz \'Opcje punktu\' -&gt; \'Dodaj do ulubionych\' i wprowadź jego nazwę. Po zapisaniu, punkt będzie można znaleźć w głównym menu -&gt; \'Ulubione\'.
+<string name="tip_favorites_t">\tCzęsto używane punkty mogą zostać zapisane jako ulubione.
+\n\tAby zapisać punkt jako ulubiony przejdź do menu kontekstowego, wybierz \'Opcje punktu\' -&gt; \'Dodaj do ulubionych\' i wprowadź jego nazwę. Po zapisaniu, punkt będzie można znaleźć w głównym menu -&gt; \'Ulubione\'.
 \n\tDłuższe naciśnięcie pozycji w \'Ulubionych\' pokaże opcje dotyczące tego punktu.
 \n\tAby wyświetlić wszystkie ulubione punkty bezpośrednio na mapie, włącz warstwę \'Ulubione\' w \'Zdefiniuj widok\'.</string>
 
@@ -306,7 +306,7 @@
 
 <string name="gps_status_app_not_found">GPS Status application not installed. Search in Market?</string>
 
-<string name="voice_is_not_available_msg">Voice guidance is not available. Please go to settings, choose preferred voice data package, and download it.</string>
+<string name="voice_is_not_available_msg">Głos nawigatora nie jest dostępny. Przejdź do ustawień, wybierz ulubiony zestaw i zainstaluj go.</string>
 <string name="voice_is_not_available_title">Nie wybrano głosu nawigatora</string>
 <string name="daynight_mode_day">Dzień</string>
 <string name="daynight_mode_night">Noc</string>
@@ -373,7 +373,7 @@
 
 <string name="vector_data">Mapy wektorowe offline</string>
 <string name="transport_context_menu">Search transport at stop</string>
-<string name="point_on_map">Punkt na mapie:\n Lat {0,number,#.####}\n Lon {1,number,#.####}</string>
+<string name="point_on_map">Punkt na mapie:\n Szer. {0,number,#.####}\n Dł. {1,number,#.####}</string>
 <string name="osb_bug_name">Błąd</string>
 <string name="poi_context_menu_modify">Modyfikuj POI</string>
 <string name="poi_context_menu_delete">Usuń POI</string>
@@ -405,7 +405,7 @@
 <string name="layer_poi">POI...</string>
 <string name="layer_map">Źródło mapy...</string>
 <string name="menu_layers">Zdefiniuj widok</string>
-<string name="continue_follow_previous_route">Previous route was unfinished. Continue following it?</string>
+<string name="continue_follow_previous_route">Poprzednia trasa nie została ukończona. Czy chcesz kontynuować?</string>
 <string name="context_menu_item_search_poi">Szukaj POI</string>
 <string name="context_menu_item_show_route">Trasa z</string>
 <string name="use_trackball_descr">Użyj trackballa do przesuwania mapy</string>
@@ -426,13 +426,13 @@
 <string name="background_router_service_descr">Enable background service to track position over long time periods</string>
 <string name="background_router_service">Użyj usługi w tle</string>
 <string name="off_router_service_no_gps_available">The background routing service requires a location source to be turned on.</string>
-<string name="routing_settings_descr">Specify routing options</string>
+<string name="routing_settings_descr">Skonfiguruj opcje routingu</string>
 <string name="routing_settings">Nawigacja</string>
 <string name="hide_poi_filter">Ukryj filtr</string>
 <string name="show_poi_filter">Pokaż filtr</string>
 <string name="search_poi_filter">Filtr</string>
-<string name="menu_mute_off">Dźwięk włączony</string>
-<string name="menu_mute_on">Dźwięk wyłączony</string>
+<string name="menu_mute_off">Wył. dźwięk</string>
+<string name="menu_mute_on">Wł. dźwięk</string>
 <string name="voice_provider_descr">Wybierz głos nawigatora</string>
 <string name="voice_provider">Głos nawigatora</string>
 <string name="voice_data_initializing">Inicjalizacja danych głosowych...</string>
@@ -478,8 +478,8 @@
 <string name="transport_route_distance">Długość trasy</string>
 <string name="transport">Transport</string>
 <string name="default_buttons_ok">OK</string>
-<string name="show_transport_over_map_description">Show public transport stops on map</string>
-<string name="show_transport_over_map">Show transport stops</string>
+<string name="show_transport_over_map_description">Pokaż na mapie przystanki transportu publicznego</string>
+<string name="show_transport_over_map">Pokaż przystanki</string>
 <string name="hello">Program do nawigacji satelitarnej OsmAnd</string>
 <string name="update_poi_success">POI data was updated successfully ({0} were loaded)</string>
 <string name="update_poi_error_local">Error updating local POI list</string>
@@ -495,7 +495,7 @@
 <string name="search_history_navigate_to">Naviguj do szer. = {0}, dł. = {1}</string>
 <string name="favorite">Ulubione</string>
 <string name="clear_all">Wyczyść wszystko</string>
-<string name="history">History</string>
+<string name="history">Historia</string>
 <string name="uploading_data">Wysyłanie danych...</string>
 <string name="uploading">Wysyłanie...</string>
 <string name="search_nothing_found">Nic nie znaleziono</string>
@@ -505,7 +505,7 @@
 <string name="hint_search_online">Numer domu, ulica, miejscowość</string>
 <string name="search_offline_address">Offline</string>
 <string name="search_online_address">Internet</string>
-<string name="max_level_download_tile">Max. online zoom</string>
+<string name="max_level_download_tile">Maks. zoom online</string>
 <string name="max_level_download_tile_descr">Choose maximum zoom level to download for online map tiles</string>
 <string name="route_about">O trasie</string>
 <string name="route_general_information">Dystans całkowity {0}, czas podróży {1} h {2} m.</string>
@@ -540,7 +540,7 @@
 <string name="loading_poi_obj">Wczytywanie POI...</string>
 <string name="auth_failed">Autoryzacja nie powiodła się</string>
 <string name="failed_op">nie powiodło się</string>
-<string name="converting_names">Konwertowanie Converting native/English names...</string>
+<string name="converting_names">Konwertowanie natywnych/angielskich nazw...</string>
 <string name="loading_streets_buildings">Wczytywanie ulic/budynków...</string>
 <string name="loading_postcodes">Wczytywanie kodów pocztowych...</string>
 <string name="loading_streets">Wczytywanie ulic...</string>
@@ -569,16 +569,16 @@
 <string name="use_online_routing">Użyj routingu online</string>
 <string name="user_password_descr">Twoje hasło do konta OSM</string>
 <string name="user_password">Hasło do konta OSM</string>
-<string name="osm_settings_descr">Specify Openstreetmap.org (OSM) settings needed for OSM submissions</string>
-<string name="monitor_preferences_descr">Specify tracking settings</string>
+<string name="osm_settings_descr">Skonfiguruj ustawienia dotyczące potrzebne do wysyłania danych do Openstreetmap.org (OSM)</string>
+<string name="monitor_preferences_descr">Skonfiguruj zapisywanie śladów GPX</string>
 <string name="data_settings_descr">Ustaw język, pobierz/przeładuj dane</string>
 <string name="data_settings">Dane</string>
-<string name="map_preferences_descr">Specify map settings: map source, rotation, marker position, screen orientation</string>
+<string name="map_preferences_descr">Zmień ustawienia mapy: źródło mapy, obracanie, pozycję markera, orientację ekranu</string>
 <string name="osm_settings">OSM</string>
 <string name="auto_zoom_map_descr">Dostosuj zoom mapy do Twojej prędkości</string>
 <string name="auto_zoom_map">Autozoom mapy</string>
 <string name="additional_settings">Ustawienia dodatkowe</string>
-<string name="settings_preset_descr">Wybierz profil. (Ustawienia każdego profilu mogą być zmieniane poniżej.)</string>
+<string name="settings_preset_descr">Wybierz profil nawigacji (ustawienia każdego profilu mogą być zmieniane poniżej).</string>
 <string name="settings_preset">Tryb programu</string>
 <string name="settings">Ustawienia</string>
 <string name="save_current_track_descr">Zapisz bieżący ślad do karty SD</string>
@@ -596,10 +596,10 @@
 <string name="mark_point">Cel</string>
 <string name="show_osm_bugs_descr">Pokaż OpenStreetBugs na mapie</string>
 <string name="show_osm_bugs">Pokaż OpenStreetBugs</string>
-<string name="favourites_activity">List of favorite points</string>
-<string name="add_to_favourite">Add to Favorites</string>
-<string name="use_english_names_descr">Select between native and English names</string>
-<string name="use_english_names">Use english names</string>
+<string name="favourites_activity">Lista ulubionych punktów</string>
+<string name="add_to_favourite">Dodaj do ulubionych</string>
+<string name="use_english_names_descr">Zaznacz, jeśli chcesz używać angielskich nazw zamiast natywnych</string>
+<string name="use_english_names">Używaj angielskich nazw</string>
 <string name="app_settings">Ustawienia programu</string>
 <string name="search_address">Szukaj adresu</string>
 <string name="choose_building">Wybierz nr domu</string>
@@ -616,7 +616,7 @@
 <string name="map_view_3d_descr">Włącz widok 3D mapy</string>
 <string name="map_view_3d">Widok 3D mapy</string>
 
-<string name="show_poi_over_map_description">Show POI over map (use last chosen filter)</string>
+<string name="show_poi_over_map_description">Pokaż POI na mapie (używa ostatnio wybranego filtru)</string>
 <string name="show_poi_over_map">Pokaż POI</string>
 <string name="map_tile_source_descr">Wybierz źródło mapy kafelkowej (online lub offline): </string>
 <string name="map_tile_source">Źródło mapy kafelkowej</string>
@@ -672,7 +672,7 @@
 <string name="search_address_building_option">Budynek</string>
 <string name="search_address_street_option">Przecinająca ulica (przecznica)</string>
 
-<string name="search_tabs_location">Pozycja</string>
+<string name="search_tabs_location">Pozycja GPS</string>
 
 <string name="context_menu_item_navigate_point">Nawiguj do punktu</string>
 <string name="context_menu_item_add_favorite">Dodaj do ulubionych</string>
@@ -695,26 +695,26 @@
 <string name="favourites_context_menu_delete">Usuń</string>
 <string name="favourites_edit_dialog_title">Zmień nazwę</string>
 
-<string name="favourites_remove_dialog_title">Are you sure to remove favorite point?</string>
-<string name="favourites_remove_dialog_success">Favorite point {0} was succesfully deleted.</string>
+<string name="favourites_remove_dialog_title">Czy na pewno chcesz usunąć ulubiony punkt?</string>
+<string name="favourites_remove_dialog_success">Ulubiony punkt {0} został usunięty.</string>
 
 <string name="osb_add_dialog_title">Wprowadź opis błędu</string>
-<string name="osb_add_dialog_success">Błąd złoszony</string>
+<string name="osb_add_dialog_success">Błąd został zgłoszony</string>
 <string name="osb_add_dialog_error">Wystąpił błąd, zgłoszenie nie zostało utworzone</string>
 
 <string name="osb_comment_menu_item">Dodaj komentarz</string>
 <string name="osb_comment_dialog_message">Wiadomość</string>
 <string name="osb_comment_dialog_author">Author name</string>
-<string name="osb_comment_dialog_title">Adding comment to bug</string>
+<string name="osb_comment_dialog_title">Dodaj komentarz do błędu</string>
 <string name="osb_comment_dialog_add_button">Dodaj komentarz</string>
 <string name="osb_comment_dialog_success">Dodano komentarz</string>
 <string name="osb_comment_dialog_error">Wystąpił błąd, komentarz nie został dodany</string>
 
-<string name="osb_close_menu_item">Close bug</string>
-<string name="osb_close_dialog_title">Closing bug</string>
-<string name="osb_close_dialog_close_button">Close bug</string>
-<string name="osb_close_dialog_success">Bug was successfully closed</string>
-<string name="osb_close_dialog_error">Exception occured: bug was not closed</string>
+<string name="osb_close_menu_item">Zamknij błąd</string>
+<string name="osb_close_dialog_title">Zamykanie błędu</string>
+<string name="osb_close_dialog_close_button">Zamknij błąd</string>
+<string name="osb_close_dialog_success">Błąd został zamknięty</string>
+<string name="osb_close_dialog_error">Wystąpił problem, błąd nie został zamknięty</string>
 
 <string name="poi_edit_title">Edytuj POI</string>
 <string name="poi_create_title">Dodaj POI</string>
@@ -745,5 +745,27 @@
 <string name="edit_filter_delete_message">Filtr {0} został usunięty</string>
 <string name="edit_filter_create_message">Filtr {0} został utworzony</string>
 <string name="default_buttons_selectall">Zaznacz wszystko</string>
+
+<string name="layer_poi_label">Etykiety POI</string>
+<string name="auto_follow_route_navigation_descr">Włącz autostart nawigatora tylko w trybie nawigacji.</string>
+<string name="auto_follow_route_navigation">Autostart nawigatora</string>
+<string name="auto_follow_location_enabled">Autostart nawigatora jest włączony.</string>
+<string name="animate_route_off">Wył. animacje</string>
+<string name="animate_route">Wł. animacje</string>
+
+<string name="tip_recent_changes_0_6_8_t">Zmiany w wersji 0.6.8:
+\n\t- całkowicie przeprojektowano wyszukiwanie (POI, adresy) - teraz jest szysbsze i bardziej responsywne
+\n\t- zaimplementowano wyszukiwanie POI po nazwie na dużych obszarach (krajach)  
+\n\t- naprawiono migotanie ekranu na tabletach (zgłoszenie nr 641)
+\n\t- dodano opcję autostartu nawigacji (zgłoszenie nr 356)
+\n\t- nawigacja wg śladu GPX przeniesiona została do menu \'Nawigacja\'
+\n\t- dane POI teraz są w plikach .obf  
+\n\t- poprawiono błedy komunikatów głosowych (ustalenie pozycji GPS, pomijanie pierwszej komendy) 
+\n\t- naprawiono inne, drobne błędy
+</string>
+
+<string name="file_can_not_be_renamed">Nazwa pliku nie może zostać zmieniona.</string>
+<string name="file_with_name_already_exists">Plik o takiej nazwie już istnieje.</string>
+<string name="gpx_navigation">Trasa GPX</string>
 
 </resources>

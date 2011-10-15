@@ -154,7 +154,8 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 						if (info != null && info.getGpxFile() != null) {
 							WptPt loc = info.getGpxFile().findPointToShow();
 							if (loc != null) {
-								OsmandSettings.getOsmandSettings(LocalIndexesActivity.this).setMapLocationToShow(loc.lat, loc.lon);
+								OsmandSettings settings = OsmandSettings.getOsmandSettings(LocalIndexesActivity.this);
+								settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
 							}
 							((OsmandApplication) getApplication()).setGpxFileToDisplay(info.getGpxFile());
 							MapActivity.launchMapActivityMoveToTop(LocalIndexesActivity.this);

@@ -123,6 +123,10 @@ public class ContextMenuLayer implements OsmandMapLayer {
 	public void setLocation(LatLon loc, String description){
 		latLon = loc;
 		if(latLon != null){
+			if(description == null || description.length() == 0){
+				description = MessageFormat.format(view.getContext().getString(R.string.point_on_map), 
+						latLon.getLatitude(), latLon.getLongitude());
+			}
 			textView.setText(description);
 		} else {
 			textView.setText(""); //$NON-NLS-1$
@@ -151,8 +155,7 @@ public class ContextMenuLayer implements OsmandMapLayer {
 		}
 		
 		LatLon latLon = view.getLatLonFromScreenPoint(point.x, point.y);
-		String description = MessageFormat.format(view.getContext().getString(R.string.point_on_map), 
-				latLon.getLatitude(), latLon.getLongitude()); 
+		String description = ""; 
 		
 		if(selectedObject != null){
 			description = selectedContextProvider.getObjectDescription(selectedObject);

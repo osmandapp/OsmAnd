@@ -229,8 +229,10 @@ public class FavouritesActivity extends ExpandableListActivity {
 			}
 		} else {
 			FavouritePoint point = (FavouritePoint) favouritesAdapter.getChild(groupPosition, childPosition);
-			OsmandSettings.getOsmandSettings(this).SHOW_FAVORITES.set( true);
-			OsmandSettings.getOsmandSettings(this).setMapLocationToShow(point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName()); //$NON-NLS-1$
+			OsmandSettings settings = OsmandSettings.getOsmandSettings(this);
+			settings.SHOW_FAVORITES.set(true);
+			settings.setMapLocationToShow(point.getLatitude(), point.getLongitude(), 
+					Math.max(12, settings.getLastKnownMapZoom()), null, getString(R.string.favorite)+" : " + point.getName());
 			MapActivity.launchMapActivityMoveToTop(FavouritesActivity.this);
 		}
 		return true;
@@ -244,8 +246,10 @@ public class FavouritesActivity extends ExpandableListActivity {
 		int group = ExpandableListView.getPackedPositionGroup(((ExpandableListContextMenuInfo)menuInfo).packedPosition);
 		final FavouritePoint point = (FavouritePoint) favouritesAdapter.getChild(group, child);
 		if (aItem.getItemId() == SHOW_ON_MAP) {
-			OsmandSettings.getOsmandSettings(this).SHOW_FAVORITES.set( true);
-			OsmandSettings.getOsmandSettings(this).setMapLocationToShow(point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName());
+			OsmandSettings settings = OsmandSettings.getOsmandSettings(this);
+			settings.SHOW_FAVORITES.set(true);
+			settings.setMapLocationToShow(point.getLatitude(), point.getLongitude(), 
+					Math.max(12, settings.getLastKnownMapZoom()), null, getString(R.string.favorite)+" : " + point.getName());
 			MapActivity.launchMapActivityMoveToTop(this);
 		} else if (aItem.getItemId() == NAVIGATE_TO) {
 			OsmandSettings.getOsmandSettings(this).setPointToNavigate(point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName());
