@@ -83,7 +83,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-public class MapActivity extends /*Accessible*/Activity implements IMapLocationListener, SensorEventListener {
+public class MapActivity extends AccessibleActivity implements IMapLocationListener, SensorEventListener {
 
 	private static final String GPS_STATUS_ACTIVITY = "com.eclipsim.gpsstatus2.GPSStatus"; //$NON-NLS-1$
 	private static final String GPS_STATUS_COMPONENT = "com.eclipsim.gpsstatus2"; //$NON-NLS-1$
@@ -274,7 +274,7 @@ public class MapActivity extends /*Accessible*/Activity implements IMapLocationL
 			
 		});
 
-//		accessibleViews.add(backToLocation);
+		accessibleViews.add(backToLocation);
 	}
 
 	private OsmandApplication getMyApplication() {
