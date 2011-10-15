@@ -83,6 +83,7 @@
 			<filter tag="railway" order="58" />
 
 			<!-- over buildings -->
+			<filter tag="countour" order="15" />
 			<filter tag="aerialway" order="68" />
 			<filter tag="power" order="68" />
 			<filter tag="administrative" order="62" />
@@ -419,6 +420,8 @@
 		<filter minzoom="4" textSize="14" textColor="#9d6c9d" textWrapWidth="20" tag="place" value="state" />
 		<filter minzoom="4" textSize="14" textColor="#9d6c9d" textWrapWidth="20" tag="place" value="region" />
 
+		<filter minzoom="13" maxzoom="16" textSize="12" textOnPath="true" tag="contour"/>
+		
 		<switch>
 			<case nightMode="true" textColor="#ffffff"/>
 			<case nightMode="false"/>
@@ -1309,5 +1312,8 @@
 		<filter minzoom="17" color="#800080" strokeWidth="2" pathEffect="3_2" tag="admin_level" value="10" />
 		<filter minzoom="7" maxzoom="9" color="#a009dd09" strokeWidth="1.5" pathEffect="4_2" tag="boundary" value="national_park" />
 		<filter minzoom="10" color="#a009dd09" strokeWidth="3" pathEffect="6_2" tag="boundary" value="national_park" />
+		
+		<!-- elevation lines -->
+		<filter minzoom="13" color="#ff4900" strokeWidth="1" tag="contour" value="elevation" />
 	</line>
 </renderer>
