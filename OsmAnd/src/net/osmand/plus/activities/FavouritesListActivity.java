@@ -124,8 +124,9 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if (which == 0) {
-					OsmandSettings.getOsmandSettings(FavouritesListActivity.this).setMapLocationToShow(entry.getLatitude(),
-							entry.getLongitude());
+					OsmandSettings settings = OsmandSettings.getOsmandSettings(FavouritesListActivity.this);
+					settings.setMapLocationToShow(entry.getLatitude(), entry.getLongitude(),  settings.getLastKnownMapZoom(), 
+							 null, getString(R.string.favorite)+" : " + entry.getName()); //$NON-NLS-1$
 				} else if (which == 1) {
 					OsmandSettings.getOsmandSettings(FavouritesListActivity.this).setPointToNavigate(entry.getLatitude(),
 							entry.getLongitude(), getString(R.string.favorite) + " : " + entry.getName());
@@ -140,10 +141,13 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		if(!isSelectFavoriteMode()) {
+		
+		if (!isSelectFavoriteMode()) {
+			OsmandSettings settings = OsmandSettings.getOsmandSettings(this);
 			FavouritePoint point = favouritesAdapter.getItem(position);
-			OsmandSettings.getOsmandSettings(this).SHOW_FAVORITES.set( true);
-			OsmandSettings.getOsmandSettings(this).setMapLocationToShow(point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName()); //$NON-NLS-1$
+			settings.SHOW_FAVORITES.set(true);
+			settings.setMapLocationToShow(point.getLatitude(), point.getLongitude(), settings.getLastKnownMapZoom(), null,
+					getString(R.string.favorite) + " : " + point.getName()); //$NON-NLS-1$
 			MapActivity.launchMapActivityMoveToTop(FavouritesListActivity.this);
 		} else {
 			Intent intent = getIntent();

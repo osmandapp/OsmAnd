@@ -18,6 +18,7 @@ import net.osmand.data.Street;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
 import net.osmand.plus.ResourceManager;
@@ -154,11 +155,10 @@ public class GeoIntentActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		MapObject item = ((MapObjectAdapter) getListAdapter())
-				.getItem(position);
-		getMyApplication().getSettings().setMapLocationToShow(item.getLocation()
-				.getLatitude(), item.getLocation().getLongitude(),
-				getString(R.string.address) + " : " + item.toString()); //$NON-NLS-1$
+		MapObject item = ((MapObjectAdapter) getListAdapter()).getItem(position);
+		OsmandSettings settings = getMyApplication().getSettings();
+		settings.setMapLocationToShow(item.getLocation().getLatitude(), item.getLocation().getLongitude(), 
+				settings.getLastKnownMapZoom(), getString(R.string.address) + " : " + item.toString()); //$NON-NLS-1$
 		MapActivity.launchMapActivityMoveToTop(this);
 	}
 

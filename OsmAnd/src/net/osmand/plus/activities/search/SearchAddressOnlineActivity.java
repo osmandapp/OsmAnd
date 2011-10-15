@@ -209,7 +209,9 @@ public class SearchAddressOnlineActivity extends ListActivity implements SearchA
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		Place item = ((PlacesAdapter) getListAdapter()).getItem(position);
-		OsmandSettings.getOsmandSettings(this).setMapLocationToShow(item.lat, item.lon, getString(R.string.address)+ " : " + item.displayName); //$NON-NLS-1$
+		OsmandSettings settings = OsmandSettings.getOsmandSettings(this);
+		settings.setMapLocationToShow(item.lat, item.lon,
+				Math.max(15, settings.getLastKnownMapZoom()), getString(R.string.address)+ " : " + item.displayName); //$NON-NLS-1$
 		MapActivity.launchMapActivityMoveToTop(this);
 	}
 	
