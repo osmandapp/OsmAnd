@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="delete_confirmation_title">Mazanie</string>
+	<string name="delete_confirmation_msg">Naozaj chcete zmazať %1$s?</string>
+	<string name="city_type_suburb">Mestská časť</string>
+	<string name="city_type_hamlet">Osada</string>
+	<string name="city_type_village">Obec</string>
+	<string name="city_type_town">Mesto</string>
+	<string name="city_type_city">Veľkomesto</string>
 	<string name="layer_poi_label">POI popisy</string>
 	<string name="auto_follow_route_navigation_descr">Povoliť autom. nasledovanie pozície iba v režime navigácie.</string>
 	<string name="auto_follow_route_navigation">Autom. nasledovanie pri navigácii</string>
