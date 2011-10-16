@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.LogUtil;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
@@ -45,7 +44,6 @@ import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.SurfaceHolder.Callback;
 import android.view.accessibility.AccessibilityEvent;
-import android.widget.Toast;
 
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback {
 
@@ -917,28 +915,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 	}
 
-	public int getMapXForTile(float tileX) {
-		return (int) ((tileX - getXTile()) * getTileSize() + getCenterPointX());
-}
-
-	public int getMapYForTile(float tileY) {
-		return (int) ((tileY - getYTile()) * getTileSize() + getCenterPointY());
-	}
-
-	public int getTileXForMapPoint(float mapX) {
-		return (int) ((mapX - getCenterPointX()) / getTileSize() + getXTile());
-	}
-
-	public int getTileYForMapPoint(float mapY) {
-		return (int) ((mapY - getCenterPointY()) / getTileSize() + getYTile());
-	}
-
 	// Explored information 
 	private String exploredInfoText = "";
-
-	public String getExploreInfo() {
-		return exploredInfoText;
-	}
 
 	public void setExploreInfo(String info) {
 		if (exploredInfoText.compareToIgnoreCase(info) != 0) {
