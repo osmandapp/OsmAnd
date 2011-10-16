@@ -13,9 +13,6 @@ public class RotatedTileBox {
 	private int zoom;
 	private float rotateCos;
 	private float rotateSin;
-	private RectF latLon;
-	private boolean rendering;
-	private RotatedTileBox parent;
 
 	public RotatedTileBox(float leftTileX, float topTileY, float tileWidth, float tileHeight, float rotate, int zoom) {
 		set(leftTileX, topTileY, tileWidth, tileHeight, rotate, zoom);
@@ -23,9 +20,6 @@ public class RotatedTileBox {
 	
 	public RotatedTileBox(RotatedTileBox r){
 		set(r.leftTileX, r.topTileY, r.tileWidth, r.tileHeight, r.rotate, r.zoom);
-		this.latLon = r.latLon;
-		this.rendering = r.rendering;
-		this.parent = r;
 	}
 
 	private void init() {
@@ -172,61 +166,6 @@ public class RotatedTileBox {
 		return calcPointTileY(tileWidth, tileHeight);
 	}
 
-	/**
-	 * the lat lon bounds
-	 * @param latLonBounds
-	 */
-	public void setLatLon(RectF latLonBounds) {
-		//on new latLonBounds reset rendering info and latLonBounds....
-		if (!latLonBounds.equals(this.latLon)) {
-			this.rendering = false;
-			this.latLon = latLonBounds;
-		}
-	}
-
-	/**
-	 * @return true if rendering is in progress
-	 */
-	public boolean isRendering() {
-		return rendering;
-	}
-
-	/**
-	 * Say we are rendering this box
-	 */
-	public void rendering() {
-		rendering = true;
-		if (parent != null) {
-			parent.rendering(latLon);
-		}
-	}
-
-	/**
-	 * Say we are rendering this box for this coordinates
-	 * 
-	 * @param aLatLon
-	 */
-	private void rendering(RectF aLatLon) {
-		if (aLatLon.equals(latLon)) {
-			rendering = true;
-		}
-	}
-
-	/**
-	 * all if rendering was interrupted
-	 */
-	public void renderingInterrupted() {
-		rendered();
-	}
-
-	/**
-	 * Call if rendering is finished
-	 */
-	public void rendered() {
-		rendering = false;
-		if (parent != null) {
-			parent.rendered();
-		}
-	}
+	
 
 }
