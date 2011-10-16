@@ -108,6 +108,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		updateDescriptionTextWithSize();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -165,7 +166,17 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 					} else if (resId == R.string.local_index_mi_restore) {
 						new LocalIndexOperationTask(RESTORE_OPERATION).execute(info);
 					} else if (resId == R.string.local_index_mi_delete) {
-						new LocalIndexOperationTask(DELETE_OPERATION).execute(info);
+						Builder confirm = new AlertDialog.Builder(LocalIndexesActivity.this);
+						confirm.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								new LocalIndexOperationTask(DELETE_OPERATION).execute(info);	
+							}
+						});
+						confirm.setNegativeButton(R.string.default_buttons_no, null);
+						confirm.setTitle(R.string.delete_confirmation_title);
+						confirm.setMessage(getString(R.string.delete_confirmation_msg, info.getFileName()));
+						confirm.show();
 					} else if (resId == R.string.local_index_mi_backup) {
 						new LocalIndexOperationTask(BACKUP_OPERATION).execute(info);
 					} else if (resId == R.string.local_index_mi_upload_gpx) {
