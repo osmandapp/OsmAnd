@@ -1416,28 +1416,24 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		switch(requestCode) {
-			case MapControlsLayer.OBSERVE_LIST_MENU:
-				if (resultCode == RESULT_OK) {
-					int menu_index = data.getIntExtra("SelectedItem", -1);
-					switch (menu_index) {
-						case 0: 
-							mapLayers.getExploreInfoLayer().LookForward();
-							break;
-						case 1:
-							mapLayers.getExploreInfoLayer().LookRight();
-							break;
-						case 2:
-							mapLayers.getExploreInfoLayer().LookLeft();
-							break;
-						case 3:
-							mapLayers.getExploreInfoLayer().LookBack();
-							break;
-						default:
-							break;
-					}
+		if ((requestCode == MapControlsLayer.OBSERVE_LIST_MENU) && (resultCode == RESULT_OK)) {
+			int menu_index = data.getIntExtra("SelectedItem", -1);
+			switch (menu_index) {
+				case 0: 
+					mapLayers.getExploreInfoLayer().LookForward();
 					break;
-				}
+				case 1:
+					mapLayers.getExploreInfoLayer().LookRight();
+					break;
+				case 2:
+					mapLayers.getExploreInfoLayer().LookLeft();
+					break;
+				case 3:
+					mapLayers.getExploreInfoLayer().LookBack();
+					break;
+				default:
+					break;
+			}
 		}
 	}
 
