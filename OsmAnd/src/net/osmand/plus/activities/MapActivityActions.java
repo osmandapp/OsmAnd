@@ -402,16 +402,22 @@ public class MapActivityActions implements DialogProvider {
 		return builder.create();
     }
     
-    protected void getDirections(final double lat, final double lon, boolean followEnabled){
+    private boolean checkPointToNavigate(){
     	MapActivityLayers mapLayers = mapActivity.getMapLayers();
-    	final OsmandSettings settings = OsmandSettings.getOsmandSettings(mapActivity);
-    	final RoutingHelper routingHelper = mapActivity.getRoutingHelper();
     	if(mapLayers.getNavigationLayer().getPointToNavigate() == null){
 			Toast.makeText(mapActivity, R.string.mark_final_location_first, Toast.LENGTH_LONG).show();
-			return;
+			return false;
 		}
+    	return true;
+    }
+    
+    protected void getDirections(final double lat, final double lon, boolean followEnabled){
+    	
+    	final OsmandSettings settings = OsmandSettings.getOsmandSettings(mapActivity);
+    	final RoutingHelper routingHelper = mapActivity.getRoutingHelper();
     	
     	Builder builder = new AlertDialog.Builder(mapActivity);
+    	
     	
     	View view = mapActivity.getLayoutInflater().inflate(R.layout.calculate_route, null);
     	final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
@@ -419,7 +425,7 @@ public class MapActivityActions implements DialogProvider {
     	buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
     	buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
     	ApplicationMode appMode = settings.getApplicationMode();
-    	for(int i=0; i< buttons.length; i++){
+		for (int i = 0; i < buttons.length; i++) {
     		if(buttons[i] != null){
     			final int ind = i;
     			ToggleButton b = buttons[i];
@@ -460,6 +466,9 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				ApplicationMode mode = getAppMode(buttons, settings);
+				if(!checkPointToNavigate()){
+					return;
+				}
 				Location location = new Location("map"); //$NON-NLS-1$
 				location.setLatitude(lat);
 				location.setLongitude(lon);
@@ -474,6 +483,9 @@ public class MapActivityActions implements DialogProvider {
     	DialogInterface.OnClickListener followCall = new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				if(!checkPointToNavigate()){
+					return;
+				}
 				ApplicationMode mode = getAppMode(buttons, settings);
 				// change global settings
 				boolean changed = settings.APPLICATION_MODE.set(mode);
