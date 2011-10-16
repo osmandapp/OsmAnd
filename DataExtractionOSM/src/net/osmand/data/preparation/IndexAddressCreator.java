@@ -552,6 +552,8 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				//by default write city with cityPart of the city
 				long streetId = streetDAO.insertStreet(name, nameEn, location, city, cityPart);
 				values.add(streetId);
+			} else {
+				values.add(foundStreet.getId());
 			}
 		}
 		return values;

@@ -608,6 +608,8 @@ public class IndexCreator {
 				// do not delete first db connection
 				if (dbConn != null) {
 					dialect.commitDatabase(dbConn);
+					dialect.closeDatabase(dbConn);
+					dbConn = null;
 				}
 				if (deleteOsmDB) {
 					if (DBDialect.DERBY == dialect) {

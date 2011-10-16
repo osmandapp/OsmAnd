@@ -18,6 +18,7 @@ import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.MapRoot;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
+import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.Street;
 import net.osmand.osm.MapUtils;
@@ -34,7 +35,7 @@ public class BinaryInspector {
 		inspector(args);
 		// test cases show info
 		//inspector(new String[]{"/home/victor/projects/OsmAnd/data/osm-gen/saved/Belarus-newzooms-new-rt.obf"});
-		//inspector(new String[]{"-v","C:\\Users\\tpd\\osmand\\Slovakia.obf"});
+//		inspector(new String[]{"-v","C:\\Users\\tpd\\osmand\\Housenumbers.obf"});
 		
 		
 		// test case extract parts
@@ -338,7 +339,17 @@ public class BinaryInspector {
 							index.preloadStreets(c, null);
 							System.out.println("\t\tCity:" + c.getName());
 							for (Street t : c.getStreets()) {
-								System.out.println("\t\t\t" + t.getName());	
+								System.out.print("\t\t\t" + t.getName());
+								index.preloadBuildings(t, null);
+								List<Building> buildings = t.getBuildings();
+								if (buildings != null && !buildings.isEmpty()) {
+									System.out.print(" (");
+									for (Building b : buildings) {
+										System.out.print(b.getName() + ",");
+									}
+									System.out.print(")");
+								}
+								System.out.println();
 							}
 						}
 						for (City c : index.getVillages(region, null,null,false)) {
