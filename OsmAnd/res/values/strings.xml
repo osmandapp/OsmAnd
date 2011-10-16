@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="city_type_suburb">Suburb</string>
+	<string name="city_type_hamlet">Hamlet</string>
+	<string name="city_type_village">Village</string>
+	<string name="city_type_town">Town</string>
+	<string name="city_type_city">City</string>
 	<string name="layer_poi_label">POI labels</string>
 	<string name="auto_follow_route_navigation_descr">Enable auto follow position only in navigation mode.</string>
 	<string name="auto_follow_route_navigation">Auto follow navigation</string>
