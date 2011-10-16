@@ -15,7 +15,6 @@ import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SlideListActivity;
-import net.osmand.plus.views.OsmandMapTileView.OnTouchEventListener;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;

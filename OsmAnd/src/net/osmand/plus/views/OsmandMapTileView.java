@@ -68,13 +68,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	public interface OnPointTouchListener {
 		public boolean onPointTouchEvent(PointF point);
 	}
-	
-	public interface OnTouchEventListener {
-		public boolean onTouchEvent(MotionEvent event);
-	}
-	public interface OnGetTouchEventListener {
-		public OnTouchEventListener onGetTouchEventListener(MotionEvent event);
-	}
+
 	public interface TouchViewFinder {
 		public View findTouchView(MotionEvent event);
 	}
@@ -105,9 +99,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private OnClickListener onClickListener;
 
 	private OnPointTouchListener onPointTouchListener;
-	
-	private List<OnGetTouchEventListener> getTouchEventListeners = new ArrayList<OnGetTouchEventListener>();
-	
+
 	private List<TouchViewFinder> touchViewFinders = new ArrayList<TouchViewFinder>();
 
 	private OnTrackBallListener trackBallDelegate;
@@ -673,8 +665,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	}
 
-	private OnTouchEventListener touchListener = null;
-	
 	private View findTouchView(MotionEvent event) {
         View touchedView;
         for (TouchViewFinder f : touchViewFinders) {
@@ -773,10 +763,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	public void setOnPointTouchListener(OnPointTouchListener l) {
 		this.onPointTouchListener = l;
-	}
-	
-	public void addOnGetTouchEventListener(OnGetTouchEventListener l) {
-		getTouchEventListeners.add(l);
 	}
 
 	public void addTouchViewFinder(TouchViewFinder f) {
