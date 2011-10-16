@@ -2,8 +2,8 @@
 <resources>
 	<string name="layer_poi_label">POI popisy</string>
 	<string name="auto_follow_route_navigation_descr">Povoliť autom. nasledovanie pozície iba v režime navigácie.</string>
-	<string name="auto_follow_route_navigation">Autom nasledovanie pri navigácii</string>
-	<string name="auto_follow_location_enabled">Nastavenia autom. nasledovania sú povolené.</string>
+	<string name="auto_follow_route_navigation">Autom. nasledovanie pri navigácii</string>
+	<string name="auto_follow_location_enabled">Automatické nasledovanie je povolené.</string>
 	<string name="animate_route_off">Vypnúť animáciu</string>
 	<string name="animate_route">Zapnúť animáciu</string>
 	
