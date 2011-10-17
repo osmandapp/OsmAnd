@@ -940,7 +940,7 @@
 				<switch>
 					<case nightMode="false" color="#000000" />
 					<case nightMode="true" color="#ffffff" />
-					<filter layer="1" cap="BUTT" cap_2="SQUARE">
+					<filter layer="1" cap="BUTT" cap_2="ROUND">
 					<filter minzoom="13" maxzoom="14" strokeWidth="12" strokeWidth_2="10" />
 					<filter minzoom="13" maxzoom="15" strokeWidth="14" strokeWidth_2="12" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="17" strokeWidth_2="15" />
@@ -975,7 +975,7 @@
 				<switch>
 					<case nightMode="false" color="#000000" />
 					<case nightMode="true" color="#ffffff" />
-					<filter layer="1" cap="BUTT" cap_2="SQUARE" >
+					<filter layer="1" cap="BUTT" cap_2="ROUND" >
 						<filter minzoom="13" maxzoom="14" strokeWidth="8" strokeWidth_2="6" />
 						<filter minzoom="15" maxzoom="15" strokeWidth="10" strokeWidth_2="8" />
 						<filter minzoom="16" maxzoom="16" strokeWidth="12" strokeWidth_2="10" />
@@ -1015,7 +1015,7 @@
 			<switch>
 				<case nightMode="false" color="#000000" color_2="#ffffff" shadowColor="#464646" />
 				<case nightMode="true" color="#ffffff" color_2="#9F9F9F" shadowColor="#666666" />
-				<filter layer="1" cap="BUTT" cap_2="SQUARE" >
+				<filter layer="1" cap="BUTT" cap_2="ROUND" >
 					<filter minzoom="13" maxzoom="14" strokeWidth="8" strokeWidth_2="6" />
 					<filter minzoom="15" maxzoom="15" strokeWidth="10" strokeWidth_2="8" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="12" strokeWidth_2="10" />
@@ -1047,7 +1047,7 @@
 			<switch>
 				<case nightMode="false" color="#000000" />
 				<case nightMode="true" color="#000000" />
-				<filter layer="1" cap="BUTT" cap_2="SQUARE">
+				<filter layer="1" cap="BUTT" cap_2="ROUND">
 					<!--ZM	<filter minzoom="13" maxzoom="14" strokeWidth="5" strokeWidth_2="3" /> -->
 					<filter minzoom="15" maxzoom="15" strokeWidth="6" strokeWidth_2="4" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="7" strokeWidth_2="5" />
