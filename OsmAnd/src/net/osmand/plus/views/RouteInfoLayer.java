@@ -1,6 +1,5 @@
 package net.osmand.plus.views;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.access.AccessibleActivity;
@@ -32,7 +31,7 @@ import android.widget.TextView;
 import android.widget.FrameLayout.LayoutParams;
 
 
-public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener, OsmandMapTileView.TouchViewFinder {
+public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener {
 
 	private static final int BASE_TEXT_SIZE = 150;
 	private int textSize = BASE_TEXT_SIZE;
@@ -56,8 +55,6 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 
 	private DisplayMetrics dm;
 	
-	private final List<View> buttons = new ArrayList<View>(); 
-
 	public RouteInfoLayer(RoutingHelper routingHelper, LinearLayout layout){
 		this.routingHelper = routingHelper;
 		this.layout = layout;
@@ -67,11 +64,7 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 		routingHelper.addListener(this);
 		attachListeners();
 		updateVisibility();
-//		AccessibleActivity.takeCareOf(layout);
-		
-		buttons.add(prev);
-		buttons.add(next);
-		buttons.add(info);
+		AccessibleActivity.takeCareOf(layout);
 	}
 	
 	private void attachListeners() {
@@ -127,33 +120,6 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 		
 	}
 
-	private void attachTouchListeners() {
-		Rect bounds = new Rect(0,0,0,0);
-		view.getGlobalVisibleRect(bounds);
-		
-		prev.setTouchDelegate(new TouchDelegate(bounds, view) {
-			@Override
-			public boolean onTouchEvent(MotionEvent event) {
-				event.setLocation(event.getX() + prev.getLeft(), event.getY() + prev.getTop());
-				return view.dispatchTouchEvent(event);
-			}
-		});
-		next.setTouchDelegate(new TouchDelegate(bounds, view) {
-			@Override
-			public boolean onTouchEvent(MotionEvent event) {
-				event.setLocation(event.getX() + next.getLeft(), event.getY() + next.getTop());
-				return view.dispatchTouchEvent(event);
-			}
-		});
-		info.setTouchDelegate(new TouchDelegate(bounds, view) {
-			@Override
-			public boolean onTouchEvent(MotionEvent event) {
-				event.setLocation(event.getX() + info.getLeft(), event.getY() + info.getTop());
-				return view.dispatchTouchEvent(event);
-			}
-		});
-	}
-	
 	public boolean isVisible(){
 		return visible && routingHelper.isRouteCalculated() && !routingHelper.isFollowingMode();
 	}
@@ -197,8 +163,6 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 		textView.setMaxLines(4);
 		textView.setGravity(Gravity.CENTER_HORIZONTAL);
 		textBorder = new RectF(-2, -1, textSize + 2, 0);
-
-		attachTouchListeners();
 	}
 
 	public final int shiftCenter = 55;
@@ -288,20 +252,6 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 				updateVisibility();
 			}
 		});
-	}
-	
-	@Override
-	public View findTouchView(MotionEvent event) {
-        int x = (int)event.getX();
-        int y = (int)event.getY();
-        Rect bounds = new Rect();
-        for (View v : buttons)
-            if (v.getVisibility() != View.INVISIBLE) {
-            	v.getDrawingRect(bounds);
-            	bounds.offsetTo(v.getLeft(), v.getTop());
-            	if (bounds.contains(x, y)) return v;
-            }
-        return null;
 	}
 	
 	

@@ -40,7 +40,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
-public class MapControlsLayer implements OsmandMapLayer, OsmandMapTileView.TouchViewFinder {
+public class MapControlsLayer implements OsmandMapLayer {
 
 	private static final int SHOW_SEEKBAR_MSG_ID = 2;
 	private static final int SHOW_SEEKBAR_DELAY = 7000;
@@ -78,8 +78,6 @@ public class MapControlsLayer implements OsmandMapLayer, OsmandMapTileView.Touch
 	private float scaleCoefficient;
 	
 	private ImageButton lookMenuButton;
-	
-	private final List<View> buttons = new ArrayList<View>(); 
 
 	public MapControlsLayer(MapActivity activity){
 		this.activity = activity;
@@ -115,7 +113,6 @@ public class MapControlsLayer implements OsmandMapLayer, OsmandMapTileView.Touch
 		
 		initTransparencyBar(view, parent);
 		
-		view.addTouchViewFinder(this);
 	}
 
 	@Override
@@ -268,17 +265,8 @@ public class MapControlsLayer implements OsmandMapLayer, OsmandMapTileView.Touch
 				activity.backToMainMenu();
 			}
 		});
-		Rect bounds = new Rect();
-		view.getGlobalVisibleRect(bounds);
-		backToMenuButton.setTouchDelegate(new TouchDelegate(bounds, view) {
-			@Override
-			public boolean onTouchEvent(MotionEvent event) {
-				event.setLocation(event.getX() + backToMenuButton.getLeft(), event.getY() + backToMenuButton.getTop());
-				return view.dispatchTouchEvent(event);
-			}
-		});
 		
-		buttons.add(backToMenuButton);
+		activity.accessibleViews.add(backToMenuButton);
 	}
 	
 	private void initRuler(OsmandMapTileView view, FrameLayout parent) {
@@ -322,13 +310,14 @@ public class MapControlsLayer implements OsmandMapLayer, OsmandMapTileView.Touch
 		zoomOutButton.setBackgroundResource(R.drawable.map_zoom_out);
 		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 					Gravity.BOTTOM | Gravity.RIGHT);
+		
 		params.setMargins(0, 0, minimumWidth , 0);
 		zoomOutButton.setContentDescription(ctx.getString(R.string.zoomOut));
 		zoomOutButton.setFocusable(true);
 		parent.addView(zoomOutButton, params);
 		
-		buttons.add(zoomInButton);
-		buttons.add(zoomOutButton);
+		activity.accessibleViews.add(zoomInButton);
+		activity.accessibleViews.add(zoomOutButton);
 		
 		zoomInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -341,28 +330,12 @@ public class MapControlsLayer implements OsmandMapLayer, OsmandMapTileView.Touch
 				
 			}
 		});
-		Rect bounds = new Rect();
-		view.getGlobalVisibleRect(bounds);
-		zoomInButton.setTouchDelegate(new TouchDelegate(bounds, view) {
-			@Override
-			public boolean onTouchEvent(MotionEvent event) {
-				event.setLocation(event.getX() + zoomInButton.getLeft(), event.getY() + zoomInButton.getTop());
-				return view.dispatchTouchEvent(event);
-			}
-		});
 		
 		zoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				activity.changeZoom(view.getZoom() - 1);
 				
-			}
-		});
-		zoomOutButton.setTouchDelegate(new TouchDelegate(bounds, view) {
-			@Override
-			public boolean onTouchEvent(MotionEvent event) {
-				event.setLocation(event.getX() + zoomOutButton.getLeft(), event.getY() + zoomOutButton.getTop());
-				return view.dispatchTouchEvent(event);
 			}
 		});
 	}
@@ -390,17 +363,7 @@ public class MapControlsLayer implements OsmandMapLayer, OsmandMapTileView.Touch
         		activity.startActivityForResult(listIntent, OBSERVE_LIST_MENU);			}
 		});
 		
-		Rect bounds = new Rect();
-		view.getGlobalVisibleRect(bounds);
-		lookMenuButton.setTouchDelegate(new TouchDelegate(bounds, view) {
-			@Override
-			public boolean onTouchEvent(MotionEvent event) {
-				event.setLocation(event.getX() + lookMenuButton.getLeft(), event.getY() + lookMenuButton.getTop());
-				return view.dispatchTouchEvent(event);
-			}
-		});
-		
-		buttons.add(lookMenuButton);
+		activity.accessibleViews.add(lookMenuButton);
 	}
 
 
@@ -508,20 +471,6 @@ public class MapControlsLayer implements OsmandMapLayer, OsmandMapTileView.Touch
 	}
 
 
-    public View findTouchView(MotionEvent event) {
-        int x = (int)event.getX();
-        int y = (int)event.getY();
-        Rect bounds = new Rect();
-        for (View v : buttons)
-            if (v.getVisibility() != View.INVISIBLE) {
-            	v.getDrawingRect(bounds);
-            	bounds.offsetTo(v.getLeft(), v.getTop());
-            	if (bounds.contains(x, y)) return v;
-            }
-        return null;
-    }
-	
-    private View nowTouched;
 	protected static final Log log = LogUtil.getLog(MapControlsLayer.class);
 
 }

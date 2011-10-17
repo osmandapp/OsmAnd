@@ -30,7 +30,7 @@ public class AccessibleActivity extends Activity {
     // available controls. Lift finger up on a control to make click.
     //
     // Use this list to improve accessibility for individual elements.
-    protected final List<View> accessibleViews = new ArrayList<View>();
+    public final List<View> accessibleViews = new ArrayList<View>();
 
     private final Rect testFrame = new Rect();
     private View nowTouched;

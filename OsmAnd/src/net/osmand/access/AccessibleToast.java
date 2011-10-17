@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 // Use this class instead of regular Toast to have
-// accessibility feedback on toast essages.
+// accessibility feedback on toast messages.
 public class AccessibleToast extends Toast {
 
     public AccessibleToast(Context context) {

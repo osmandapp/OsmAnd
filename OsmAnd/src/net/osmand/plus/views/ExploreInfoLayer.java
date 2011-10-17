@@ -31,7 +31,7 @@ import android.widget.TextView;
 import android.widget.FrameLayout.LayoutParams;
 
 // Map layer provides capabilities of exploration mode
-public class ExploreInfoLayer extends BaseMapLayer implements OsmandMapTileView.OnPointTouchListener {
+public class ExploreInfoLayer extends BaseMapLayer {
 
 	private TextView textView;
 	private DisplayMetrics dm;
@@ -84,8 +84,6 @@ public class ExploreInfoLayer extends BaseMapLayer implements OsmandMapTileView.
 		textView.setMinLines(1);
 		textView.setGravity(Gravity.CENTER_HORIZONTAL);
 		textBorder = new RectF(-2, -1, textSize + 2, 0);
-
-		view.setOnPointTouchListener(this);
 	}
 
 	@Override
@@ -152,10 +150,8 @@ public class ExploreInfoLayer extends BaseMapLayer implements OsmandMapTileView.
 		latLon = loc;
 		if(latLon != null){
 			textView.setText(info);
-			view.setExploreInfo(info);
 		} else {
 			textView.setText(""); //$NON-NLS-1$
-			view.setExploreInfo("");
 		}
 		textView.layout(0, 0, textSize, (int) ((textView.getPaint().getTextSize()+4) * textView.getLineCount()));
 	}
@@ -226,27 +222,6 @@ public class ExploreInfoLayer extends BaseMapLayer implements OsmandMapTileView.
 			}
 		}
 		return d;
-	}
-
-	@Override
-	public boolean onPointTouchEvent(PointF point) {
-		handler.removeMessages(1);
-
-		final int z = view.getZoom() > 15 ? view.getZoom() : 8;
-		final PointF p = point;
-		final LatLon leftTop = view.getLatLonFromScreenPoint(p.x - dm.density * z, p.y - dm.density * z);
-		final LatLon rightBottom = view.getLatLonFromScreenPoint(p.x + dm.density * z, p.y + dm.density * z);
-
-		Message msg = Message.obtain(handler, new Runnable() {
-			@Override
-			public void run() {
-				exploreMap(p, leftTop, rightBottom);
-			}
-		});
-		msg.what = 1;
-		handler.sendMessageDelayed(msg, 10);
-
-		return true; 
 	}
 
 	// Angle distance between 2 points
