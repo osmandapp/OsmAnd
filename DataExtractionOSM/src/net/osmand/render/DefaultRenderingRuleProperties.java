@@ -5,6 +5,9 @@ import java.util.Map;
 
 public class DefaultRenderingRuleProperties {
 
+	private static final String TEXT_LENGTH = "textLength";
+	private static final String REF = "ref";
+	private static final String TEXT_SHIELD = "textShield";
 	private static final String SHADOW_RADIUS = "shadowRadius";
 	private static final String SHADOW_COLOR = "shadowColor";
 	private static final String SHADER = "shader";
@@ -50,7 +53,7 @@ public class DefaultRenderingRuleProperties {
 		
 		// order - no sense to make it float
 		registerRule(map, RenderingRuleProperty.createOutputIntProperty(ORDER));
-		registerRule(map, RenderingRuleProperty.createInputStringProperty(ORDER));
+		registerRule(map, RenderingRuleProperty.createInputStringProperty(ORDER_TYPE));
 		
 		// text properties
 		registerRule(map, RenderingRuleProperty.createOutputIntProperty(TEXT_WRAP_WIDTH));
@@ -59,6 +62,11 @@ public class DefaultRenderingRuleProperties {
 		registerRule(map, RenderingRuleProperty.createOutputIntProperty(TEXT_SIZE));
 		registerRule(map, RenderingRuleProperty.createOutputIntProperty(TEXT_ORDER));
 		registerRule(map, RenderingRuleProperty.createOutputIntProperty(TEXT_MIN_DISTANCE));
+		registerRule(map, RenderingRuleProperty.createOutputIntProperty(TEXT_LENGTH));
+		registerRule(map, RenderingRuleProperty.createOutputStringProperty(TEXT_SHIELD));
+		registerRule(map, RenderingRuleProperty.createOutputStringProperty(REF));
+		
+		
 		
 		registerRule(map, RenderingRuleProperty.createOutputColorProperty(TEXT_COLOR));
 		

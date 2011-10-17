@@ -54,6 +54,10 @@ public class RenderingRuleProperty {
 		return type == INT_TYPE;
 	}
 	
+	public boolean isColor() {
+		return type == COLOR_TYPE;
+	}
+	
 	public boolean isString() {
 		return type == STRING_TYPE;
 	}
@@ -91,7 +95,7 @@ public class RenderingRuleProperty {
 			return -1;
 		} else if(type == COLOR_TYPE){
 			try {
-				return Integer.parseInt(value);
+				return parseColor(value);
 			} catch (RuntimeException e) {
 				log.error("Rendering parse " + e.getMessage());
 			}
@@ -199,5 +203,13 @@ public class RenderingRuleProperty {
         }
         throw new IllegalArgumentException("Unknown color" + colorString); //$NON-NLS-1$
     }
+    
+    public static String colorToString(int color) {
+		if ((0xFF000000 & color) == 0xFF000000) {
+			return "#" + Integer.toHexString(color & 0x00FFFFFF); //$NON-NLS-1$
+		} else {
+			return "#" + Integer.toHexString(color); //$NON-NLS-1$
+		}
+	}
 
 }

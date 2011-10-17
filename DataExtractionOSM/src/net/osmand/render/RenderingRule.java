@@ -1,6 +1,7 @@
 package net.osmand.render;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,8 @@ public class RenderingRule {
 	private List<RenderingRuleProperty> properties;
 	private int[] intProperties;
 	private float[] floatProperties;
+	private List<RenderingRule> ifElseChildren;
+	private List<RenderingRule> ifChildren;
 	
 	private final RenderingRulesStorage storage;
 	
@@ -30,6 +33,7 @@ public class RenderingRule {
 			RenderingRuleProperty property = storage.getProperty(e.getKey());
 			if (property != null) {
 				properties.add(property);
+				
 				if (property.isString()) {
 					intProperties[i] = storage.getDictionaryValue(e.getValue());
 				} else if (property.isFloat()) {
@@ -41,9 +45,81 @@ public class RenderingRule {
 				} else {
 					intProperties[i] = property.parseIntValue(e.getValue());
 				}
+				i++;
 			}
-			i++;
+			
 		}
+	}
+	
+	private int getPropertyIndex(String property){
+		for (int i = 0; i < properties.size(); i++) {
+			RenderingRuleProperty prop = properties.get(i);
+			if (prop.getAttrName().equals(property)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	public String getStringPropertyValue(String property) {
+		int i = getPropertyIndex(property);
+		if(i >= 0){
+			return storage.getStringValue(intProperties[i]);
+		}
+		
+		return null;
+	}
+	
+	public float getFloatPropertyValue(String property) {
+		int i = getPropertyIndex(property);
+		if(i >= 0){
+			return floatProperties[i];
+		}
+		return 0;
+	}
+	
+	public String getColorPropertyValue(String property) {
+		int i = getPropertyIndex(property);
+		if(i >= 0){
+			return RenderingRuleProperty.colorToString(intProperties[i]);
+		}
+		return null;
+	}
+	
+	public int getIntPropertyValue(String property) {
+		int i = getPropertyIndex(property);
+		if(i >= 0){
+			return intProperties[i];
+		}
+		return -1;
+	}
+	
+	public List<RenderingRuleProperty> getProperties() {
+		return properties;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<RenderingRule> getIfChildren() {
+		return ifChildren != null ? ifChildren : Collections.EMPTY_LIST ;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<RenderingRule> getIfElseChildren() {
+		return ifElseChildren != null ? ifElseChildren : Collections.EMPTY_LIST ;
+	}
+	
+	public void addIfChildren(RenderingRule rr){
+		if(ifChildren == null){
+			ifChildren = new ArrayList<RenderingRule>();
+		}
+		ifChildren.add(rr);
+	}
+	
+	public void addIfElseChildren(RenderingRule rr){
+		if(ifElseChildren == null){
+			ifElseChildren = new ArrayList<RenderingRule>();
+		}
+		ifElseChildren.add(rr);
 	}
 
 }
