@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+<string name="delete_confirmation_title">Usuwanie</string>
+﻿<string name="delete_confirmation_msg">Na pewno usunąć %1$s?</string>
+﻿<string name="city_type_suburb">Dzielnica</string>
+﻿<string name="city_type_hamlet">Przysiółek</string>
+﻿<string name="city_type_village">Wieś</string>
+﻿<string name="city_type_town">Miasteczko</string>
+﻿<string name="city_type_city">Miasto</string>
+
+<string name="layer_poi_label">Etykiety POI</string>
+<string name="auto_follow_route_navigation_descr">Włącz autostart nawigatora tylko w trybie nawigacji.</string>
+<string name="auto_follow_route_navigation">Autostart nawigatora</string>
+<string name="auto_follow_location_enabled">Autostart nawigatora jest włączony.</string>
+<string name="animate_route_off">Wył. animacje</string>
+<string name="animate_route">Wł. animacje</string>
+<string name="tip_recent_changes_0_6_8_t">Zmiany w wersji 0.6.8:
+\n\t- całkowicie przeprojektowano wyszukiwanie (POI, adresy) - teraz jest szybsze i bardziej responsywne
+\n\t- zaimplementowano wyszukiwanie POI po nazwie na dużych obszarach (krajach)
+\n\t- naprawiono migotanie ekranu na tabletach (zgłoszenie nr 641)
+\n\t- dodano opcję autostartu nawigacji (zgłoszenie nr 356)
+\n\t- nawigacja wg śladu GPX przeniesiona została do menu \'Nawigacja\'
+\n\t- dane POI teraz są w plikach .obf
+\n\t- poprawiono błedy komunikatów głosowych (ustalenie pozycji GPS, pomijanie pierwszej komendy) 
+\n\t- naprawiono inne, drobne błędy
+</string>
+<string name="file_can_not_be_renamed">Nazwa pliku nie może zostać zmieniona.</string>
+<string name="file_with_name_already_exists">Plik o takiej nazwie już istnieje.</string>
+<string name="gpx_navigation">Trasa GPX</string>
 <string name="data_to_search_poi_not_available">Brak danych lokalnych do wyszukania POI</string>
 <string name="poi_filter_by_name">Szukaj wg nazwy</string>
 <string name="old_poi_file_should_be_deleted">Plik \'%1$s\' z danymi POI jest nadmiarowy i można go usunąć.</string>
@@ -157,7 +184,7 @@
 
 <string name="tip_update_index">Aktualizacja danych offline</string>
 <string name="tip_update_index_t">\tPosiadanie aktualnych danych to podstawa. Osmand posiada menedżera pobierania danych offline, który może sprawdzić i pobrać dostępne aktualizacje.
-\n\tAby sprawdzić aktualizacje:  \'Ustawienia\' -&gt; \'Dane offline\' -&gt; \'Pobierz\'
+\n\tAby sprawdzić aktualizacje:\'Ustawienia\' -&gt; \'Dane offline\' -&gt; \'Pobierz\'
 \n\tDostępność aktualizacji jest opisana przez następujące kolory:
 \n\t\'Zielony\' - oznacza dane nieposiadające aktualizacji na serwerze
 \n\t\'Niebieski\' - oznacza dane do ewentualnej aktualizacji</string>
@@ -168,7 +195,7 @@
 <string name="tip_day_night_mode">Tryb dzień/noc</string>
 <string name="tip_day_night_mode_t">\tWygląd mapy wektorowej może zmieniać się w zależności od pory dnia.
 \n\tNocne kolory są bezpieczniejsze dla podróży po zmroku.
-\n\tMożesz zdefiniować kryterium przełączania trybu dzień/noc w \'Ustawiania\' -&gt; \'Wygląd mapy\' -&gt;\'Tryb dzień/noc\'.
+\n\tMożesz zdefiniować kryterium przełączania trybu dzień/noc w \'Ustawienia\' -&gt; \'Wygląd mapy\' -&gt;\'Tryb dzień/noc\'.
 \n\tDo wyboru jest:
 \n\t\'Wschód/zachód\' - tryb automatyczny, bazujący na pozycji słońca (domyślny)
 \n\t\'Dzień\' - zawsze używa trybu dziennego
@@ -249,7 +276,7 @@
 <string name="context_menu_item_add_waypoint">Dodaj punkt do GPX</string>
 <string name="amenity_type_administrative">Administracja</string>
 <string name="amenity_type_barrier">Bariery</string>
-<string name="amenity_type_education">Education</string>
+<string name="amenity_type_education">Szkoły</string>
 <string name="amenity_type_emergency">Służby ratunkowe</string>
 <string name="amenity_type_entertainment">Rozrywka</string>
 <string name="amenity_type_finance">Finanse</string>
@@ -265,7 +292,7 @@
 <string name="amenity_type_other">Inne</string>
 <string name="amenity_type_shop">Sklepy</string>
 <string name="amenity_type_sport">Sport</string>
-<string name="amenity_type_sustenance">Sustenance</string>
+<string name="amenity_type_sustenance">Jedzenie</string>
 <string name="amenity_type_tourism">Turystyka</string>
 <string name="amenity_type_transportation">Transport publiczny</string>
 <string name="indexing_address">Indeksowanie adresów...</string>
@@ -558,7 +585,7 @@
 <string name="close">Zamknij</string>
 <string name="loading_data">Ładowanie danych...</string>
 <string name="reading_indexes">Wczytywanie danych lokalnych...</string>
-<string name="previous_run_crashed">Program poprzednio uległ awarii. Plik  Log file is at {0}. Please report the issue and attach log file.</string>
+<string name="previous_run_crashed">Program poprzednio uległ awarii. PlikLog file is at {0}. Please report the issue and attach log file.</string>
 <string name="saving_gpx_tracks">Zapisywanie śladów GPX do karty SD...</string>
 <string name="finished_task">Zakończono</string>
 <string name="reload_indexes_descr">Wczytaj ponownie dane wektorowe map i inne dane z karty SD</string>
@@ -745,27 +772,4 @@
 <string name="edit_filter_delete_message">Filtr {0} został usunięty</string>
 <string name="edit_filter_create_message">Filtr {0} został utworzony</string>
 <string name="default_buttons_selectall">Zaznacz wszystko</string>
-
-<string name="layer_poi_label">Etykiety POI</string>
-<string name="auto_follow_route_navigation_descr">Włącz autostart nawigatora tylko w trybie nawigacji.</string>
-<string name="auto_follow_route_navigation">Autostart nawigatora</string>
-<string name="auto_follow_location_enabled">Autostart nawigatora jest włączony.</string>
-<string name="animate_route_off">Wył. animacje</string>
-<string name="animate_route">Wł. animacje</string>
-
-<string name="tip_recent_changes_0_6_8_t">Zmiany w wersji 0.6.8:
-\n\t- całkowicie przeprojektowano wyszukiwanie (POI, adresy) - teraz jest szysbsze i bardziej responsywne
-\n\t- zaimplementowano wyszukiwanie POI po nazwie na dużych obszarach (krajach)  
-\n\t- naprawiono migotanie ekranu na tabletach (zgłoszenie nr 641)
-\n\t- dodano opcję autostartu nawigacji (zgłoszenie nr 356)
-\n\t- nawigacja wg śladu GPX przeniesiona została do menu \'Nawigacja\'
-\n\t- dane POI teraz są w plikach .obf  
-\n\t- poprawiono błedy komunikatów głosowych (ustalenie pozycji GPS, pomijanie pierwszej komendy) 
-\n\t- naprawiono inne, drobne błędy
-</string>
-
-<string name="file_can_not_be_renamed">Nazwa pliku nie może zostać zmieniona.</string>
-<string name="file_with_name_already_exists">Plik o takiej nazwie już istnieje.</string>
-<string name="gpx_navigation">Trasa GPX</string>
-
 </resources>
