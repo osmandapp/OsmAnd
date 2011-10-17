@@ -1,6 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-<string name="layer_poi_label">POI felirat</string>
+<string name="delete_confirmation_title">Törlés</string>
+<string name="delete_confirmation_msg">Biztosan törlöd: %1$s?</string>
+<string name="city_type_suburb">településrész</string>
+<string name="city_type_hamlet">falucska</string>
+<string name="city_type_village">község</string>
+<string name="city_type_town">város</string>
+<string name="city_type_city">város</string>
+<string name="layer_poi_label">POI feliratok</string>
 <string name="auto_follow_route_navigation_descr">Csak navigáció közben követi automatikusan a pozíciódat.</string>
 <string name="auto_follow_route_navigation">Automatikus követés navigáláskor</string>
 <string name="auto_follow_location_enabled">Automatikus követés engedélyezve.</string>
