@@ -344,7 +344,6 @@ public class MapControlsLayer implements OsmandMapLayer {
 					Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL);
 		parent.addView(lookMenuButton, params);
 		lookMenuButton.setEnabled(true);
-		activity.registerForContextMenu(lookMenuButton);
 		
 		lookMenuButton.setOnClickListener(new View.OnClickListener() {
 			@Override
