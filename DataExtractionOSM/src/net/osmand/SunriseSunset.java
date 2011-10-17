@@ -260,15 +260,15 @@ public class SunriseSunset
 				  double dfLatIn,				// latitude 
 				  double dfLonIn,				// longitude 
 				  Date	 dateInputIn,			// date
-				  double dfTimeZoneIn			// time zone
+				  int    dfTimeZoneIn			// time zone
 				  ) 
 	{
 		// Copy values supplied as agruments to local variables.
 		dfLat 		= dfLatIn;
 		dfLon 		= dfLonIn;
 		dateInput 	= dateInputIn;
-		dfTimeZone 	= dfTimeZoneIn;
-		origTimeZone 	= dfTimeZoneIn;
+		dfTimeZone 	= 1.0 * dfTimeZoneIn / 60;
+		origTimeZone 	= 1.0 * dfTimeZoneIn / 60;
 		
 		// Call the method to do the calculations.
 		doCalculations();
