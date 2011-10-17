@@ -1,8 +1,5 @@
 package net.osmand.plus.views;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 
 import net.londatiga.android.ActionItem;
@@ -24,17 +21,13 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
-import android.view.MotionEvent;
-import android.view.TouchDelegate;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.view.accessibility.AccessibilityEvent;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -50,8 +43,6 @@ public class MapControlsLayer implements OsmandMapLayer {
 	private static final int SHOW_ZOOM_LEVEL_DELAY = 2000;
 	
 	public static final int OBSERVE_LIST_MENU = 1;
-	public static final int LIST_MENU_2 = 2;
-	public static final int LIST_MENU_3 = 3;
 
 	private OsmandMapTileView view;
 	private DisplayMetrics dm;
@@ -59,6 +50,7 @@ public class MapControlsLayer implements OsmandMapLayer {
 	private Handler showUIHandler;
 	
 	private boolean showZoomLevel = false;
+	
 	
 	private ImageButton zoomInButton;
 	private ImageButton zoomOutButton;
@@ -471,6 +463,7 @@ public class MapControlsLayer implements OsmandMapLayer {
 	}
 
 
+	
 	protected static final Log log = LogUtil.getLog(MapControlsLayer.class);
 
 }

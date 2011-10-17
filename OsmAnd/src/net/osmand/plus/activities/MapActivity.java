@@ -292,8 +292,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
     public void changeZoom(int newZoom){
     	boolean changeLocation = settings.AUTO_ZOOM_MAP.get();
 		mapView.getAnimatedDraggingThread().startZooming(newZoom, changeLocation);
-
-		AccessibleToast.makeText(this, getBaseContext().getString(R.string.zoomIs) + String.valueOf(newZoom), Toast.LENGTH_SHORT).show();
+		AccessibleToast.makeText(this, getString(R.string.zoomIs) + String.valueOf(newZoom), Toast.LENGTH_SHORT).show();
 		showAndHideMapPosition();
     }
     
@@ -494,7 +493,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
 				int fZoom = mapView.getZoom() < 14 ? 14 : mapView.getZoom();
 				thread.startMoving( lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), fZoom, false);
-
 				mapLayers.getExploreInfoLayer().whereAmI(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), fZoom);
 			}
 		}

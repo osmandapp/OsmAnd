@@ -31,7 +31,6 @@ import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
@@ -39,12 +38,10 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 import android.view.WindowManager;
 import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.SurfaceHolder.Callback;
-import android.view.accessibility.AccessibilityEvent;
 import android.widget.Toast;
 
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback {
@@ -267,6 +264,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			refreshMap();
 		}
 	}
+
+	
 
 	public void setRotate(float rotate) {
 		float diff = MapUtils.unifyRotationDiff(rotate, this.rotate);
@@ -673,6 +672,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	public void setOnClickListener(OnClickListener l) {
 		this.onClickListener = l;
 	}
+
 
 		public LatLon getLatLonFromScreenPoint(float x, float y) {
 		float dx = x - getCenterPointX();
