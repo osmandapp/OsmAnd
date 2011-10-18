@@ -260,16 +260,21 @@ public class SunriseSunset
 				  double dfLatIn,				// latitude 
 				  double dfLonIn,				// longitude 
 				  Date	 dateInputIn,			// date
-				  int    dfTimeZoneIn			// time zone
-				  ) 
+				  TimeZone tzIn			        // time zone
+				  )
 	{
+		// Calculate internal representation of timezone offset as fraction of hours from GMT
+		// Our calculations consider offsets to the West as positive, so we must invert
+		// the signal of the values provided by the standard library
+		double dfTimeZoneIn = -1.0 * tzIn.getOffset(dateInputIn) / 3600000;
+
 		// Copy values supplied as agruments to local variables.
 		dfLat 		= dfLatIn;
 		dfLon 		= dfLonIn;
 		dateInput 	= dateInputIn;
-		dfTimeZone 	= 1.0 * dfTimeZoneIn / 60;
-		origTimeZone 	= 1.0 * dfTimeZoneIn / 60;
-		
+		dfTimeZone 	= dfTimeZoneIn;
+		origTimeZone= dfTimeZoneIn;
+
 		// Call the method to do the calculations.
 		doCalculations();
 
