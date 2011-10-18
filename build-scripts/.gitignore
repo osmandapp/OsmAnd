@@ -1,5 +1,11 @@
 builds/
+latests/
 logs/
 osmand-git/
 osmand-hg/
 local.properties
+*.fixed
+*.lock
+*.stillfailing
+*.failed
+*.log

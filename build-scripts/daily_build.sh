@@ -6,6 +6,12 @@ LOG_DIR="$DIRECTORY"/logs
 DATE=$(date +%d-%m-%y)
 CLOG_FILE="$LOG_DIR/${DATE}.log"
 LOG_FILE="$LOG_DIR/tmp.log"
+LOCK_FILE="$DIRECTORY"/build.lock
+
+if [ -f $LOCK_FILE ]; then
+  exit
+fi
+touch $LOCK_FILE
 
 mkdir -p $LOG_DIR
 echo > $LOG_FILE
@@ -43,9 +49,11 @@ if [ ! $BUILD -eq 0 ]; then
   # if some status change, print out complete log
   echo "Builds status changed"
   echo "-------------"
-  echo `ls *.fixed *.failed`
+  echo `ls *.fixed *.failed 2> /dev/null`
   echo "-------------"
   echo "Complete log file:"
   echo "-------------"
   cat $LOG_FILE
 fi
+
+rm -f $LOCK_FILE
