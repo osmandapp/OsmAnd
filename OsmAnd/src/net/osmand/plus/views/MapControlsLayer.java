@@ -1,19 +1,14 @@
 package net.osmand.plus.views;
 
-import org.apache.commons.logging.Log;
-
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
-import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SlideListActivity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -28,8 +23,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
@@ -42,7 +37,6 @@ public class MapControlsLayer implements OsmandMapLayer {
 	private static final int SHOW_ZOOM_LEVEL_MSG_ID = 3;
 	private static final int SHOW_ZOOM_LEVEL_DELAY = 2000;
 	
-	public static final int OBSERVE_LIST_MENU = 1;
 
 	private OsmandMapTileView view;
 	private DisplayMetrics dm;
@@ -52,13 +46,13 @@ public class MapControlsLayer implements OsmandMapLayer {
 	private boolean showZoomLevel = false;
 	
 	
-	private ImageButton zoomInButton;
-	private ImageButton zoomOutButton;
+	private Button zoomInButton;
+	private Button zoomOutButton;
 	
 	private TextPaint zoomTextPaint;
 	private Drawable zoomShadow;
 	
-	private ImageButton backToMenuButton;
+	private Button backToMenuButton;
 	private Drawable modeShadow;
 	
 	private Drawable rulerDrawable;
@@ -69,7 +63,6 @@ public class MapControlsLayer implements OsmandMapLayer {
 	private BaseMapLayer[] transparencyLayers;
 	private float scaleCoefficient;
 	
-	private ImageButton lookMenuButton;
 
 	public MapControlsLayer(MapActivity activity){
 		this.activity = activity;
@@ -98,8 +91,6 @@ public class MapControlsLayer implements OsmandMapLayer {
 		initZoomButtons(view, parent);
 
 		initBackToMenuButton(view, parent);
-		
-		initMenuButtons(view, parent);
 		
 		initRuler(view, parent);
 		
@@ -240,7 +231,7 @@ public class MapControlsLayer implements OsmandMapLayer {
 	private void initBackToMenuButton(final OsmandMapTileView view, FrameLayout parent) {
 		android.widget.FrameLayout.LayoutParams params;
 		Context ctx = view.getContext();
-		backToMenuButton = new ImageButton(ctx);
+		backToMenuButton = new Button(ctx);
 		backToMenuButton.setContentDescription(ctx.getString(R.string.backToMenu));
 		backToMenuButton.setBackgroundResource(R.drawable.map_btn_menu);
 		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
@@ -288,24 +279,22 @@ public class MapControlsLayer implements OsmandMapLayer {
 		
 		zoomShadow = view.getResources().getDrawable(R.drawable.zoom_background);
 		
-		zoomInButton = new ImageButton(ctx);
+		zoomInButton = new Button(ctx);
 		zoomInButton.setBackgroundResource(R.drawable.map_zoom_in);
 		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 					Gravity.BOTTOM | Gravity.RIGHT);
 		params.setMargins(0, 0, 0, 0);
 		zoomInButton.setContentDescription(ctx.getString(R.string.zoomIn));
-		zoomInButton.setFocusable(true);
 		parent.addView(zoomInButton, params);
 		
 		
-		zoomOutButton = new ImageButton(ctx);
+		zoomOutButton = new Button(ctx);
 		zoomOutButton.setBackgroundResource(R.drawable.map_zoom_out);
 		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 					Gravity.BOTTOM | Gravity.RIGHT);
 		
 		params.setMargins(0, 0, minimumWidth , 0);
 		zoomOutButton.setContentDescription(ctx.getString(R.string.zoomOut));
-		zoomOutButton.setFocusable(true);
 		parent.addView(zoomOutButton, params);
 		
 		activity.accessibleViews.add(zoomInButton);
@@ -332,30 +321,7 @@ public class MapControlsLayer implements OsmandMapLayer {
 		});
 	}
 	
-	private void initMenuButtons(final OsmandMapTileView view, FrameLayout parent) {
-		android.widget.FrameLayout.LayoutParams params;
-		Context ctx = view.getContext();
 
-		lookMenuButton = new ImageButton(ctx);
-
-		lookMenuButton.setContentDescription(ctx.getString(R.string.look_menu_button));
-		lookMenuButton.setBackgroundResource(R.drawable.map_btn_menu);
-		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
-					Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL);
-		parent.addView(lookMenuButton, params);
-		lookMenuButton.setEnabled(true);
-		
-		lookMenuButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent listIntent = new Intent(activity, SlideListActivity.class);
-				String[] content = activity.getResources().getStringArray(R.array.observe_list_array);
-				listIntent.putExtra("Content", content);
-        		activity.startActivityForResult(listIntent, OBSERVE_LIST_MENU);			}
-		});
-		
-		activity.accessibleViews.add(lookMenuButton);
-	}
 
 
 	/////////////////  Transparency bar /////////////////////////
@@ -463,6 +429,5 @@ public class MapControlsLayer implements OsmandMapLayer {
 
 
 	
-	protected static final Log log = LogUtil.getLog(MapControlsLayer.class);
 
 }
