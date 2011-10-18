@@ -139,7 +139,7 @@ public class MapActivityLayers {
 		exploreInfoLayer = new ExploreInfoLayer(activity);
 		mapView.addLayer(exploreInfoLayer, 9);
 		// 10. route info layer
-		routeInfoLayer = new RouteInfoLayer(routingHelper, (LinearLayout) activity.findViewById(R.id.RouteLayout));
+		routeInfoLayer = new RouteInfoLayer(routingHelper, activity);
 		mapView.addLayer(routeInfoLayer, 10);
 		
 		// 11. route info layer

@@ -2,8 +2,8 @@ package net.osmand.plus.views;
 
 import java.util.List;
 
-import net.osmand.access.AccessibleActivity;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RoutingHelper;
 import net.osmand.plus.activities.ShowRouteInfoActivity;
 import net.osmand.plus.activities.RoutingHelper.IRouteInformationListener;
@@ -52,16 +52,19 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 
 	private DisplayMetrics dm;
 	
-	public RouteInfoLayer(RoutingHelper routingHelper, LinearLayout layout){
+	public RouteInfoLayer(RoutingHelper routingHelper, MapActivity activity){
 		this.routingHelper = routingHelper;
-		this.layout = layout;
+		this.layout = (LinearLayout) activity.findViewById(R.id.RouteLayout);
 		prev = (Button) layout.findViewById(R.id.PreviousButton);
 		next = (Button) layout.findViewById(R.id.NextButton);
 		info = (Button) layout.findViewById(R.id.InfoButton);
 		routingHelper.addListener(this);
 		attachListeners();
 		updateVisibility();
-		AccessibleActivity.takeCareOf(layout);
+
+		activity.accessibleViews.add(prev);
+		activity.accessibleViews.add(next);
+		activity.accessibleViews.add(info);
 	}
 	
 	private void attachListeners() {
