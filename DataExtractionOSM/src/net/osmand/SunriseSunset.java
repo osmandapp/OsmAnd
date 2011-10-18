@@ -266,7 +266,7 @@ public class SunriseSunset
 		// Calculate internal representation of timezone offset as fraction of hours from GMT
 		// Our calculations consider offsets to the West as positive, so we must invert
 		// the signal of the values provided by the standard library
-		double dfTimeZoneIn = -1.0 * tzIn.getOffset(dateInputIn) / 3600000;
+		double dfTimeZoneIn = -1.0 * tzIn.getOffset(dateInputIn.getTime()) / 3600000;
 
 		// Copy values supplied as agruments to local variables.
 		dfLat 		= dfLatIn;
