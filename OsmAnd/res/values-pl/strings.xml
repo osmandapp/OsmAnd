@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="delete_confirmation_title">About to delete</string>
-<string name="delete_confirmation_msg">Are you sure about deleting %1$s?</string>
-<string name="city_type_suburb">Suburb</string>
-<string name="city_type_hamlet">Hamlet</string>
-<string name="city_type_village">Village</string>
-<string name="city_type_town">Town</string>
-<string name="city_type_city">City</string>
+<string name="delete_confirmation_title">Usuwanie</string>
+<string name="delete_confirmation_msg">Czy na pewno usunąć %1$s?</string>
+<string name="city_type_suburb">Dzielnica</string>
+<string name="city_type_hamlet">Przysiółek</string>
+<string name="city_type_village">Wieś</string>
+<string name="city_type_town">Miasteczko</string>
+<string name="city_type_city">Miasto</string>
 
 <string name="layer_poi_label">Etykiety POI</string>
 <string name="auto_follow_route_navigation_descr">Włącz autostart nawigatora tylko w trybie nawigacji.</string>
@@ -183,7 +183,7 @@
 
 <string name="tip_update_index">Aktualizacja danych offline</string>
 <string name="tip_update_index_t">\tPosiadanie aktualnych danych to podstawa. Osmand posiada menedżera pobierania danych offline, który może sprawdzić i pobrać dostępne aktualizacje.
-\n\tAby sprawdzić aktualizacje:\'Ustawienia\' -&gt; \'Dane offline\' -&gt; \'Pobierz\'
+\n\tAby sprawdzić aktualizacje: \'Ustawienia\' -&gt; \'Dane offline\' -&gt; \'Pobierz\'
 \n\tDostępność aktualizacji jest opisana przez następujące kolory:
 \n\t\'Zielony\' - oznacza dane nieposiadające aktualizacji na serwerze
 \n\t\'Niebieski\' - oznacza dane do ewentualnej aktualizacji</string>
@@ -584,7 +584,7 @@
 <string name="close">Zamknij</string>
 <string name="loading_data">Ładowanie danych...</string>
 <string name="reading_indexes">Wczytywanie danych lokalnych...</string>
-<string name="previous_run_crashed">Program poprzednio uległ awarii. PlikLog file is at {0}. Please report the issue and attach log file.</string>
+<string name="previous_run_crashed">Program poprzednio uległ awarii. Log z informacjami jest w {0}. Wyślij zgłoszenie i załącz ten plik.</string>
 <string name="saving_gpx_tracks">Zapisywanie śladów GPX do karty SD...</string>
 <string name="finished_task">Zakończono</string>
 <string name="reload_indexes_descr">Wczytaj ponownie dane wektorowe map i inne dane z karty SD</string>
