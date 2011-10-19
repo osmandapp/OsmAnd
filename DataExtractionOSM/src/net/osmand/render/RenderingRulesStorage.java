@@ -17,6 +17,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import net.osmand.LogUtil;
+import net.osmand.osm.MapRenderingTypes;
 
 import org.apache.commons.logging.Log;
 import org.xml.sax.Attributes;
@@ -27,9 +28,10 @@ public class RenderingRulesStorage {
 
 	private final static Log log = LogUtil.getLog(RenderingRulesStorage.class);
 	
-	public final static int POINT_RULES = 1;
-	public final static int LINE_RULES = 2;
-	public final static int POLYGON_RULES = 3;
+	// keep sync !
+	public final static int POINT_RULES = MapRenderingTypes.POINT_TYPE;
+	public final static int LINE_RULES = MapRenderingTypes.POLYLINE_TYPE;
+	public final static int POLYGON_RULES = MapRenderingTypes.POLYGON_TYPE;
 	public final static int TEXT_RULES = 4;
 	public final static int ORDER_RULES = 5;
 	private final static int LENGTH_RULES = 6;
@@ -83,6 +85,10 @@ public class RenderingRulesStorage {
 		return bgNightColor;
 	}
 	
+	public int getBgColor(boolean nightMode){
+		return nightMode ? bgNightColor : bgColor;
+	}
+	
 	public String getDepends() {
 		return depends;
 	}
@@ -107,6 +113,8 @@ public class RenderingRulesStorage {
 	
 	@SuppressWarnings("unchecked")
 	private void registerGlobalRule(RenderingRule rr, int state, Map<String, String> attrsMap) throws SAXException {
+		
+		
 		int tag = rr.getIntPropertyValue(RenderingRuleStorageProperties.TAG);
 		if(tag == -1){
 			throw new SAXException("Attribute tag should be specified for root filter " + attrsMap.toString());
@@ -167,8 +175,6 @@ public class RenderingRulesStorage {
 		public RenderingRulesHandler(SAXParser parser){
 			this.parser = parser;
 		}
-		
-		
 		
 		@Override
 		public void startElement(String uri, String localName, String name, Attributes attributes) throws SAXException {
@@ -272,6 +278,12 @@ public class RenderingRulesStorage {
 			
 		}
 		
+		@Override
+		public void endDocument() throws SAXException {
+			super.endDocument();
+			System.out.println(""+stack);
+		}
+		
 		private Map<String, String> parseAttributes(Attributes attributes, Map<String, String> m) {
 			for (int i = 0; i < attributes.getLength(); i++) {
 				String name = parser.isNamespaceAware() ? attributes.getLocalName(i) : attributes.getQName(i);
@@ -353,19 +365,19 @@ public class RenderingRulesStorage {
 	public static void main(String[] args) throws SAXException, IOException {
 		RenderingRulesStorage storage = new RenderingRulesStorage();
 		storage.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream("new_default.render.xml"));
-//		storage.printDebug(TEXT_RULES, System.out);
+//		storage.printDebug(POLYGON_RULES, System.out);
 		
 		RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(storage);
-		searchRequest.setStringFilter(storage.PROPS.R_TAG, "highway");
-		searchRequest.setStringFilter(storage.PROPS.R_VALUE, "motorway");
-		searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
-		searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 14);
-		searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 14);
-		searchRequest.setStringFilter(storage.PROPS.R_ORDER_TYPE, "line");
-		searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
+		searchRequest.setStringFilter(storage.PROPS.R_TAG, "landuse");
+		searchRequest.setStringFilter(storage.PROPS.R_VALUE, "grass");
+//		searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
+		searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 17);
+		searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 17);
+//		searchRequest.setStringFilter(storage.PROPS.R_ORDER_TYPE, "line");
+//		searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
 //		searchRequest.setBooleanFilter(storage.PROPS.get("hmRendered"), true);
 		
-		searchRequest.search(LINE_RULES);
+		searchRequest.search(POLYGON_RULES);
 		printResult(searchRequest, System.out);
 	}
 

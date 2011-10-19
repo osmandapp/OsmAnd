@@ -15,9 +15,9 @@ import net.osmand.osm.LatLon;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.activities.search.SearchHistoryHelper;
-import net.osmand.plus.render.BaseOsmandRender;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.render.RenderingRulesStorage;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -143,7 +143,7 @@ public class OsmandSettings {
 		}
 		// update vector renderer 
 		RendererRegistry registry = ctx.getRendererRegistry();
-		BaseOsmandRender newRenderer = registry.getRenderer(RENDERER.get());
+		RenderingRulesStorage newRenderer = registry.getRenderer(RENDERER.get());
 		if (newRenderer == null) {
 			newRenderer = registry.defaultRender();
 		}
@@ -1001,7 +1001,7 @@ public class OsmandSettings {
 			if(val == null){
 				val = RendererRegistry.DEFAULT_RENDER;
 			}
-			BaseOsmandRender loaded = ctx.getRendererRegistry().getRenderer(val);
+			RenderingRulesStorage loaded = ctx.getRendererRegistry().getRenderer(val);
 			if (loaded != null) {
 				ctx.getRendererRegistry().setCurrentSelectedRender(loaded);
 				super.setValue(prefs, val);
@@ -1011,10 +1011,12 @@ public class OsmandSettings {
 			return false;
 		};
 	};
+	
+	public final CommonPreference<String> RENDERER_APP_NAME = new StringPreference("renderer_appName", "", false);
 	{
-		RENDERER.setModeDefaultValue(ApplicationMode.CAR, RendererRegistry.CAR_RENDER);
-		RENDERER.setModeDefaultValue(ApplicationMode.PEDESTRIAN, RendererRegistry.PEDESTRIAN_RENDER);
-		RENDERER.setModeDefaultValue(ApplicationMode.BICYCLE, RendererRegistry.BICYCLE_RENDER);
+		RENDERER.setModeDefaultValue(ApplicationMode.CAR, "car");
+		RENDERER.setModeDefaultValue(ApplicationMode.PEDESTRIAN, "pedestrian");
+		RENDERER.setModeDefaultValue(ApplicationMode.BICYCLE, "bicycle");
 	}
 	
 	

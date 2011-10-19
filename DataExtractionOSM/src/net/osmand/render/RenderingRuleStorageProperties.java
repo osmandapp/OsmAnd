@@ -94,11 +94,12 @@ public class RenderingRuleStorageProperties {
 		R_MAXZOOM = registerRule(RenderingRuleProperty.createInputLessIntProperty(MAXZOOM));
 		R_NIGHT_MODE = registerRule(RenderingRuleProperty.createInputBooleanProperty(NIGHT_MODE));
 		R_LAYER = registerRule(RenderingRuleProperty.createInputIntProperty(LAYER));
-		R_ORDER_TYPE = registerRule(RenderingRuleProperty.createInputStringProperty(ORDER_TYPE));
+		R_ORDER_TYPE = registerRule(RenderingRuleProperty.createInputIntProperty(ORDER_TYPE));
+		R_TEXT_LENGTH = registerRule(RenderingRuleProperty.createInputIntProperty(TEXT_LENGTH));
+		R_REF = registerRule(RenderingRuleProperty.createInputBooleanProperty(REF));
 
 		// order - no sense to make it float
 		R_ORDER = registerRule(RenderingRuleProperty.createOutputIntProperty(ORDER));
-
 
 		// text properties
 		R_TEXT_WRAP_WIDTH = registerRule(RenderingRuleProperty.createOutputIntProperty(TEXT_WRAP_WIDTH));
@@ -107,9 +108,8 @@ public class RenderingRuleStorageProperties {
 		R_TEXT_SIZE = registerRule(RenderingRuleProperty.createOutputIntProperty(TEXT_SIZE));
 		R_TEXT_ORDER = registerRule(RenderingRuleProperty.createOutputIntProperty(TEXT_ORDER));
 		R_TEXT_MIN_DISTANCE = registerRule(RenderingRuleProperty.createOutputIntProperty(TEXT_MIN_DISTANCE));
-		R_TEXT_LENGTH = registerRule(RenderingRuleProperty.createOutputIntProperty(TEXT_LENGTH));
 		R_TEXT_SHIELD = registerRule(RenderingRuleProperty.createOutputStringProperty(TEXT_SHIELD));
-		R_REF = registerRule(RenderingRuleProperty.createOutputStringProperty(REF));
+		
 
 		R_TEXT_COLOR = registerRule(RenderingRuleProperty.createOutputColorProperty(TEXT_COLOR));
 

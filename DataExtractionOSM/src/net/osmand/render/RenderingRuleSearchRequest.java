@@ -14,9 +14,12 @@ public class RenderingRuleSearchRequest {
 	float[] savedFvalues;
 	
 	private List<RenderingRule> searchedScope = new ArrayList<RenderingRule>();
+	
+	public final RenderingRuleStorageProperties ALL;
 
 	public RenderingRuleSearchRequest(RenderingRulesStorage storage) {
 		this.storage = storage;
+		this.ALL = storage.PROPS;
 		props = storage.PROPS.getPoperties();
 		values = new int[props.length];
 		for (int i = 0; i < props.length; i++) {
@@ -53,6 +56,14 @@ public class RenderingRuleSearchRequest {
 	public void clearState() {
 		System.arraycopy(savedValues, 0, values, 0, values.length);
 		System.arraycopy(savedFvalues, 0, fvalues, 0, fvalues.length);
+	}
+	
+	public void setInitialTagValueZoom(String tag, String val, int zoom){
+		clearState();
+		setIntFilter(ALL.R_MINZOOM, zoom);
+		setIntFilter(ALL.R_MAXZOOM, zoom);
+		setStringFilter(ALL.R_TAG, tag);
+		setStringFilter(ALL.R_VALUE, val);
 	}
 	
 	public boolean isFound() {
@@ -172,6 +183,11 @@ public class RenderingRuleSearchRequest {
 	
 	public int getIntPropertyValue(RenderingRuleProperty property) {
 		return values[property.getId()];
+	}
+	
+	public int getIntPropertyValue(RenderingRuleProperty property, int defValue) {
+		int val = values[property.getId()];
+		return val == -1 ? defValue : val;
 	}
 
 }

@@ -160,7 +160,7 @@ public class DownloadFileHelper {
 							fs = toIndex;
 							first = false;
 						} else {
-							String name = entry.getAttrName();
+							String name = entry.getName();
 							// small simplification
 							int ind = name.lastIndexOf('_');
 							if (ind > 0) {
@@ -174,7 +174,7 @@ public class DownloadFileHelper {
 							toIndex = fs;
 						}
 					} else {
-						fs = new File(fileToUnZip, entry.getAttrName());
+						fs = new File(fileToUnZip, entry.getName());
 					}
 					out = new FileOutputStream(fs);
 					int read;
