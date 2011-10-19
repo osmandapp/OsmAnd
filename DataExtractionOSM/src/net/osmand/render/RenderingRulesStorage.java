@@ -27,7 +27,6 @@ public class RenderingRulesStorage {
 
 	private final static Log log = LogUtil.getLog(RenderingRulesStorage.class);
 	
-	
 	public final static int POINT_RULES = 1;
 	public final static int LINE_RULES = 2;
 	public final static int POLYGON_RULES = 3;
@@ -39,10 +38,11 @@ public class RenderingRulesStorage {
 	
 	List<String> dictionary = new ArrayList<String>();
 	Map<String, Integer> dictionaryMap = new LinkedHashMap<String, Integer>();
-	final Map<String, RenderingRuleProperty> properties;
 	
+	public final RenderingRuleStorageProperties PROPS = new RenderingRuleStorageProperties();
+
 	@SuppressWarnings("unchecked")
-	private TIntObjectHashMap<RenderingRule>[] tagValueGlobalRules = new TIntObjectHashMap[LENGTH_RULES];
+	protected TIntObjectHashMap<RenderingRule>[] tagValueGlobalRules = new TIntObjectHashMap[LENGTH_RULES];
 	
 	private int bgColor = 0;
 	private int bgNightColor = 0;
@@ -53,7 +53,6 @@ public class RenderingRulesStorage {
 	public RenderingRulesStorage(){
 		// register empty string as 0
 		getDictionaryValue("");
-		properties = DefaultRenderingRuleProperties.createDefaultRenderingRuleProperties();
 	}
 	
 	public int getDictionaryValue(String val) {
@@ -71,9 +70,6 @@ public class RenderingRulesStorage {
 		return dictionary.get(i);
 	}
 	
-	public RenderingRuleProperty getProperty(String name){
-		return properties.get(name);
-	}
 	
 	public String getName() {
 		return renderingName;
@@ -111,11 +107,11 @@ public class RenderingRulesStorage {
 	
 	@SuppressWarnings("unchecked")
 	private void registerGlobalRule(RenderingRule rr, int state, Map<String, String> attrsMap) throws SAXException {
-		int tag = rr.getIntPropertyValue(DefaultRenderingRuleProperties.TAG);
+		int tag = rr.getIntPropertyValue(RenderingRuleStorageProperties.TAG);
 		if(tag == -1){
 			throw new SAXException("Attribute tag should be specified for root filter " + attrsMap.toString());
 		}
-		int value = rr.getIntPropertyValue(DefaultRenderingRuleProperties.VALUE);
+		int value = rr.getIntPropertyValue(RenderingRuleStorageProperties.VALUE);
 		if(value == -1){
 			throw new SAXException("Attribute tag should be specified for root filter " + attrsMap.toString());
 		}
@@ -123,8 +119,12 @@ public class RenderingRulesStorage {
 		RenderingRule toInsert = rr;
 		RenderingRule previous = tagValueGlobalRules[state].get(key);
 		if(previous != null){
-			toInsert = new RenderingRule(Collections.EMPTY_MAP, RenderingRulesStorage.this);
-			toInsert.addIfElseChildren(previous);
+			if(previous.getProperties().size() != 0){
+				toInsert = new RenderingRule(Collections.EMPTY_MAP, RenderingRulesStorage.this);
+				toInsert.addIfElseChildren(previous);
+			} else {
+				toInsert = previous; 
+			}
 			toInsert.addIfElseChildren(rr);
 		}
 		tagValueGlobalRules[state].put(key, toInsert);			
@@ -195,6 +195,7 @@ public class RenderingRulesStorage {
 				stack.push(renderingRule);
 			} else if("groupFilter".equals(name)){ //$NON-NLS-1$
 				attrsMap.clear();
+				parseAttributes(attributes, attrsMap);
 				RenderingRule renderingRule = new RenderingRule(attrsMap, RenderingRulesStorage.this);
 				if (stack.size() > 0 && stack.peek() instanceof GroupRules) {
 					GroupRules parent = ((GroupRules) stack.peek());
@@ -229,6 +230,23 @@ public class RenderingRulesStorage {
 			} else if("polygon".equals(name)){ //$NON-NLS-1$
 				state = POLYGON_RULES;
 				stateChanged = true;
+			} else if("renderingProperty".equals(name)){ //$NON-NLS-1$
+				String attr = attributes.getValue("attr");
+				RenderingRuleProperty prop;
+				String type = attributes.getValue("type");
+				if("boolean".equalsIgnoreCase(type)){
+					prop = RenderingRuleProperty.createInputBooleanProperty(attr);
+				} else if("string".equalsIgnoreCase(type)){
+					prop = RenderingRuleProperty.createInputStringProperty(attr);
+				} else {
+					prop = RenderingRuleProperty.createInputIntProperty(attr);
+				}
+				prop.setDescription(attributes.getValue("description"));
+				prop.setName(attributes.getValue("name"));
+				if(attributes.getValue("possibleValues") != null){
+					prop.setPossibleValues(attributes.getValue("possibleValues").split(","));
+				}
+				PROPS.registerRule(prop);
 			} else if("renderingStyle".equals(name)){ //$NON-NLS-1$
 				String dc = attributes.getValue("defaultColor");
 				int defaultColor = 0;
@@ -294,8 +312,15 @@ public class RenderingRulesStorage {
 		return getStringValue(tagValueKey >> SHIFT_TAG_VAL); 
 	}
 	
+	protected RenderingRule getRule(int state, int itag, int ivalue){
+		if(tagValueGlobalRules[state] != null){
+			return tagValueGlobalRules[state].get((itag << SHIFT_TAG_VAL) | ivalue);
+		}
+		return null;
+	}
 	
-	private void printDebug(int state, PrintStream out){
+	
+	public void printDebug(int state, PrintStream out){
 		for(int key : tagValueGlobalRules[state].keys()) {
 			RenderingRule rr = tagValueGlobalRules[state].get(key);
 			out.print("\n\n"+getTagString(key) + " : " + getValueString(key));
@@ -303,7 +328,7 @@ public class RenderingRulesStorage {
 		}
 	}
 	
-	private void printRenderingRule(String indent, RenderingRule rr, PrintStream out){
+	private static void printRenderingRule(String indent, RenderingRule rr, PrintStream out){
 		indent += "   ";
 		out.print("\n"+indent);
 		for(RenderingRuleProperty p : rr.getProperties()){
@@ -324,9 +349,46 @@ public class RenderingRulesStorage {
 		
 	}
 	
+	
 	public static void main(String[] args) throws SAXException, IOException {
 		RenderingRulesStorage storage = new RenderingRulesStorage();
 		storage.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream("new_default.render.xml"));
-		storage.printDebug(TEXT_RULES, System.out);
+//		storage.printDebug(TEXT_RULES, System.out);
+		
+		RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(storage);
+		searchRequest.setStringFilter(storage.PROPS.R_TAG, "highway");
+		searchRequest.setStringFilter(storage.PROPS.R_VALUE, "motorway");
+		searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
+		searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 14);
+		searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 14);
+		searchRequest.setStringFilter(storage.PROPS.R_ORDER_TYPE, "line");
+		searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
+//		searchRequest.setBooleanFilter(storage.PROPS.get("hmRendered"), true);
+		
+		searchRequest.search(LINE_RULES);
+		printResult(searchRequest, System.out);
+	}
+
+	private static void printResult(RenderingRuleSearchRequest searchRequest, PrintStream out) {
+		if(searchRequest.isFound()){
+			out.print(" Found : ");
+			for (RenderingRuleProperty rp : searchRequest.getProperties()) {
+				if(rp.isOutputProperty() && searchRequest.isSpecified(rp)){
+					out.print(" " + rp.getAttrName() + "= ");
+					if(rp.isString()){
+						out.print("\"" + searchRequest.getStringPropertyValue(rp) + "\"");
+					} else if(rp.isFloat()){
+						out.print(searchRequest.getFloatPropertyValue(rp));
+					} else if(rp.isColor()){
+						out.print(searchRequest.getColorStringPropertyValue(rp));
+					} else if(rp.isIntParse()){
+						out.print(searchRequest.getIntPropertyValue(rp));
+					}
+				}
+			}
+		} else {
+			out.println("Not found");
+		}
+		
 	}
 }

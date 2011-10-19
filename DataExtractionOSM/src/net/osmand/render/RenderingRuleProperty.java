@@ -1,6 +1,5 @@
 package net.osmand.render;
 
-import java.util.List;
 
 import net.osmand.LogUtil;
 
@@ -22,11 +21,13 @@ public class RenderingRuleProperty {
 	protected final int type;
 	protected final boolean input;
 	protected final String attrName;
+	
+	protected int id = -1;
 
 	// use for custom rendering rule properties
 	protected String name;
 	protected String description;
-	protected List<String> possibleValues;
+	protected String[] possibleValues;
 	
 	private RenderingRuleProperty(String attrName, int type, boolean input){
 		this.attrName = attrName;
@@ -42,8 +43,31 @@ public class RenderingRuleProperty {
 		return !input;
 	}
 	
+	public void setId(int id) {
+		if (this.id != -1) {
+			throw new IllegalArgumentException();
+		}
+		this.id = id;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
 	public String getAttrName() {
 		return attrName;
+	}
+	
+	protected void setName(String name) {
+		this.name = name;
+	}
+	
+	protected void setDescription(String description) {
+		this.description = description;
+	}
+	
+	protected void setPossibleValues(String[] possibleValues) {
+		this.possibleValues = possibleValues;
 	}
 	
 	public boolean isFloat() {
@@ -79,6 +103,12 @@ public class RenderingRuleProperty {
 		}
 		return ruleValue == renderingProperty;
 	}
+	
+	@Override
+	public String toString() {
+		return "#RenderingRuleProperty " + getAttrName();
+	}
+	
 	
 	public int parseIntValue(String value){
 		if(type == INT_TYPE){
@@ -160,7 +190,7 @@ public class RenderingRuleProperty {
 		return new RenderingRuleProperty(name, INT_TYPE, true) {
 			@Override
 			public boolean accept(int ruleValue, int renderingProperty) {
-				if((type != INT_TYPE  || type != STRING_TYPE) && input){
+				if(!isIntParse() || !input){
 					return false;
 				}
 				return ruleValue >= renderingProperty;

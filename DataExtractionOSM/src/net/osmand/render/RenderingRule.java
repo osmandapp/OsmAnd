@@ -30,7 +30,7 @@ public class RenderingRule {
 		Iterator<Entry<String, String>> it = attributes.entrySet().iterator();
 		while (it.hasNext()) {
 			Entry<String, String> e = it.next();
-			RenderingRuleProperty property = storage.getProperty(e.getKey());
+			RenderingRuleProperty property = storage.PROPS.get(e.getKey());
 			if (property != null) {
 				properties.add(property);
 				
@@ -92,6 +92,14 @@ public class RenderingRule {
 			return intProperties[i];
 		}
 		return -1;
+	}
+	
+	protected int getIntProp(int ind){
+		return intProperties[ind];
+	}
+	
+	protected float getFloatProp(int ind){
+		return floatProperties[ind];
 	}
 	
 	public List<RenderingRuleProperty> getProperties() {

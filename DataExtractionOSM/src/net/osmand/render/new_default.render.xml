@@ -51,6 +51,10 @@
 		laundry, copyshop 
 	-->
 
+	<!-- types : string, int, boolean; possibleValues comma separated possible values for int/string -->
+	<renderingProperty attr="hmRendered" name="All-Purpose Renderer" description="All-Purpose Renderer by Hardy"
+		type="boolean" possibleValues=""/>
+		
 	<!-- input exact layer, orderType check tag, value -->
 	<order>
 		<!-- point has order 128 -->
@@ -70,7 +74,7 @@
 
 			<filter tag="power" value="" order="4" />
 
-			<filter tag="natural" value="coastline" order="0.5" />
+			<filter tag="natural" value="coastline" order="1" />
 			<filter tag="natural" value="" order="1" />
 		</group>
 		
@@ -116,6 +120,7 @@
 			<filter tag="highway" value="bridleway" order="35" />
 		</group>
 		
+		<filter tag="" value="" order="128" orderType="point"/>
 		<filter tag="" value="" layer="-1" order="1" orderType="polygon"/>
 		<filter tag="" value="" layer="1" order="64" orderType="polygon"/>
 		<filter tag="" value="" order="1" orderType="polygon"/>
@@ -124,7 +129,6 @@
 		<filter tag="" value="" layer="1" order="67" orderType="line"/>
 		<filter tag="" value="" order="11" orderType="line"/>
 		
-		<filter tag="" value="" order="128" orderType="point"/>
 	</order>
 
 
@@ -1124,7 +1128,6 @@
 		
 		
 		<filter tag="highway" value="bridleway">
-			<filter layer="1" minzoom="14" maxzoom="14" color="#00ff00" strokeWidth="1" pathEffect="2_2" />
 			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="2" color_2="#00ff00" strokeWidth_2="2" pathEffect_2="2_2" />
 			<filter minzoom="12" maxzoom="12"  hmRendered="true" color="#00ff00" strokeWidth="0.5" pathEffect="2_2" />
 			<filter minzoom="13" color="#00ff00" strokeWidth="1" pathEffect="2_2" />
