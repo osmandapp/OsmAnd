@@ -437,26 +437,20 @@
 		<filter minzoom="4" textSize="14" textColor="#9d6c9d" textWrapWidth="20" tag="place" value="state" />
 		<filter minzoom="4" textSize="14" textColor="#9d6c9d" textWrapWidth="20" tag="place" value="region" />
 
-		<group>
+		<group textColor="#000000">
 			<filter minzoom="4" textSize="20" textDy="1" textBold="true" textWrapWidth="20" tag="place" value="city" textOrder="4"/>
 			<filter minzoom="6" textSize="16" textDy="1" textBold="true" textWrapWidth="20" tag="place" value="town" textOrder="5"/>
 			<filter minzoom="11" textSize="14" tag="place" value="village" textOrder="10"/>
-			<groupFilter>
-				<filter nightMode="true" textColor="#ffffff"/>
-				<filter nightMode="false"/>
-			</groupFilter>
+			<groupFilter nightMode="true" textColor="#ffffff"/>
 		</group>
 
-		<group>
+		<group textColor="#777777">
 			<filter minzoom="11" textSize="13" tag="place" value="hamlet" textOrder="12"/>
 			<filter minzoom="11" textSize="14" tag="place" value="suburb" textOrder="12"/>
 			<filter minzoom="11" textSize="13" tag="place" value="locality" textOrder="15"/>
 			<filter minzoom="11" textSize="14" tag="place" value="island" textOrder="10"/>
 			<filter minzoom="10" textSize="14" textBold="true" textColor="#99cc99" textWrapWidth="14" tag="boundary" value="national_park" textOrder="10"/>
-			<groupFilter>
-				<filter nightMode="true" textColor="#D7D7D7"/>
-				<filter nightMode="false" textColor="#777777"/>
-			</groupFilter>
+			<groupFilter nightMode="true" textColor="#D7D7D7"/>
 		</group>
 	</text>
 

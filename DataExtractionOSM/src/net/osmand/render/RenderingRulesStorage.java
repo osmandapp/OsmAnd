@@ -368,8 +368,8 @@ public class RenderingRulesStorage {
 //		storage.printDebug(LINE_RULES, System.out);
 		
 		RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(storage);
-		searchRequest.setStringFilter(storage.PROPS.R_TAG, "highway");
-		searchRequest.setStringFilter(storage.PROPS.R_VALUE, "tertiary");
+		searchRequest.setStringFilter(storage.PROPS.R_TAG, "place");
+		searchRequest.setStringFilter(storage.PROPS.R_VALUE, "hamlet");
 //		searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
 		searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 14);
 		searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 14);
@@ -377,7 +377,7 @@ public class RenderingRulesStorage {
 //		searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
 //		searchRequest.setBooleanFilter(storage.PROPS.get("hmRendered"), true);
 		
-		searchRequest.search(LINE_RULES);
+		searchRequest.search(TEXT_RULES);
 		printResult(searchRequest, System.out);
 	}
 

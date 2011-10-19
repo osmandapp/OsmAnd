@@ -257,11 +257,15 @@ public class MapRenderRepositories {
 						int mask = type & 3;
 						TagValuePair pair = root.decodeType(type);
 						if (pair != null) {
+							if(mask == MapRenderingTypes.MULTY_POLYGON_TYPE){
+								mask = RenderingRulesStorage.POLYGON_RULES;
+							}
 							renderingReq.setInitialTagValueZoom(pair.tag, pair.value, zoom);
 							if (renderingReq.search(mask, false)) {
 								return true;
 							}
 							if (mask == RenderingRulesStorage.POINT_RULES) {
+								renderingReq.setInitialTagValueZoom(pair.tag, pair.value, zoom);
 								if (renderingReq.search(RenderingRulesStorage.TEXT_RULES, false)) {
 									return true;
 								}
