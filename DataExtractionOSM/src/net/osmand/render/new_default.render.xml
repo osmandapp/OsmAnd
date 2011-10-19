@@ -1060,7 +1060,7 @@
 					<filter minzoom="18" strokeWidth="14" strokeWidth_2="12" />
 					<groupFilter nightMode="true" color="#000000"/>
 			 	</filter>
-				<filter shadowRadius="1" color="#ffffff" color_2="#ffffff" shadowColor="#464646">
+				<filter shadowRadius="1">
 					<filter minzoom="15" maxzoom="15" strokeWidth="4" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="5" />
 					<filter minzoom="17" maxzoom="17" strokeWidth="8" />

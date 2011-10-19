@@ -247,7 +247,7 @@ public class OsmandRenderer {
 							render.setIntFilter(render.ALL.R_LAYER, layer);
 							render.setIntFilter(render.ALL.R_ORDER_TYPE, mask);
 							if(render.search(RenderingRulesStorage.ORDER_RULES)) {
-								put(orderMap, render.getIntPropertyValue(render.ALL.R_ORDER), sh, init);
+								put(orderMap, render.getIntPropertyValue(render.ALL.R_ORDER), sh + j, init);
 							}
 						}
 
