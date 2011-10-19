@@ -258,11 +258,11 @@ public class MapRenderRepositories {
 						TagValuePair pair = root.decodeType(type);
 						if (pair != null) {
 							renderingReq.setInitialTagValueZoom(pair.tag, pair.value, zoom);
-							if (renderingReq.search(mask)) {
+							if (renderingReq.search(mask, false)) {
 								return true;
 							}
 							if (mask == RenderingRulesStorage.POINT_RULES) {
-								if (renderingReq.search(RenderingRulesStorage.TEXT_RULES)) {
+								if (renderingReq.search(RenderingRulesStorage.TEXT_RULES, false)) {
 									return true;
 								}
 

@@ -816,19 +816,23 @@ public class OsmandRenderer {
 			render.setIntFilter(render.ALL.R_TEXT_LENGTH, ref.length());
 			render.setBooleanFilter(render.ALL.R_REF, true);
 			if(render.search(RenderingRulesStorage.TEXT_RULES)){
-				TextDrawInfo text = new TextDrawInfo(ref);
-				text.fillProperties(render, xText, yText);
-				rc.textToDraw.add(text);
+				if(render.getIntPropertyValue(render.ALL.R_TEXT_SIZE) > 0){
+					TextDrawInfo text = new TextDrawInfo(ref);
+					text.fillProperties(render, xText, yText);
+					rc.textToDraw.add(text);
+				}
 			}
 
 		}
 		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
 		render.setIntFilter(render.ALL.R_TEXT_LENGTH, name.length());
-		render.setBooleanFilter(render.ALL.R_REF, true);
-		if(render.search(RenderingRulesStorage.TEXT_RULES)){
-			TextDrawInfo info = new TextDrawInfo(name);
-			info.fillProperties(render, xText, yText);
-			rc.textToDraw.add(info);
+		render.setBooleanFilter(render.ALL.R_REF, false);
+		if(render.search(RenderingRulesStorage.TEXT_RULES) ){
+			if(render.getIntPropertyValue(render.ALL.R_TEXT_SIZE) > 0){
+				TextDrawInfo info = new TextDrawInfo(name);
+				info.fillProperties(render, xText, yText);
+				rc.textToDraw.add(info);
+			}
 		}
 	}
 	
@@ -972,10 +976,12 @@ public class OsmandRenderer {
 					render.setIntFilter(render.ALL.R_TEXT_LENGTH, ref.length());
 					render.setBooleanFilter(render.ALL.R_REF, true);
 					if(render.search(RenderingRulesStorage.TEXT_RULES)){
-						TextDrawInfo text = new TextDrawInfo(ref);
-						text.fillProperties(render, middlePoint.x, middlePoint.y);
-						text.pathRotate = pathRotate;
-						rc.textToDraw.add(text);
+						if(render.getIntPropertyValue(render.ALL.R_TEXT_SIZE) > 0){
+							TextDrawInfo text = new TextDrawInfo(ref);
+							text.fillProperties(render, middlePoint.x, middlePoint.y);
+							text.pathRotate = pathRotate;
+							rc.textToDraw.add(text);
+						}
 					}
 					
 				}
@@ -984,7 +990,7 @@ public class OsmandRenderer {
 					render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
 					render.setIntFilter(render.ALL.R_TEXT_LENGTH, name.length());
 					render.setBooleanFilter(render.ALL.R_REF, false);
-					if (render.search(RenderingRulesStorage.TEXT_RULES)) {
+					if (render.search(RenderingRulesStorage.TEXT_RULES) && render.getIntPropertyValue(render.ALL.R_TEXT_SIZE) > 0) {
 						TextDrawInfo text = new TextDrawInfo(name);
 						if (render.getIntPropertyValue(render.ALL.R_TEXT_ON_PATH, 0) == 0) {
 							text.fillProperties(render, middlePoint.x, middlePoint.y);

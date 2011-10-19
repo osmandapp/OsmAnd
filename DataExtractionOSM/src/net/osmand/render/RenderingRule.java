@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 
 public class RenderingRule {
 	
-	private List<RenderingRuleProperty> properties;
+	private RenderingRuleProperty[] properties;
 	private int[] intProperties;
 	private float[] floatProperties;
 	private List<RenderingRule> ifElseChildren;
@@ -19,12 +19,11 @@ public class RenderingRule {
 	
 	public RenderingRule(Map<String, String> attributes, RenderingRulesStorage storage){
 		this.storage = storage;
-		this.properties = new ArrayList<RenderingRuleProperty>();
 		process(attributes);
 	}
 
 	private void process(Map<String, String> attributes) {
-		properties = new ArrayList<RenderingRuleProperty>(attributes.size());
+		ArrayList<RenderingRuleProperty> props = new ArrayList<RenderingRuleProperty>(attributes.size());
 		intProperties = new int[attributes.size()];
 		int i = 0;
 		Iterator<Entry<String, String>> it = attributes.entrySet().iterator();
@@ -32,7 +31,7 @@ public class RenderingRule {
 			Entry<String, String> e = it.next();
 			RenderingRuleProperty property = storage.PROPS.get(e.getKey());
 			if (property != null) {
-				properties.add(property);
+				props.add(property);
 				
 				if (property.isString()) {
 					intProperties[i] = storage.getDictionaryValue(e.getValue());
@@ -47,13 +46,13 @@ public class RenderingRule {
 				}
 				i++;
 			}
-			
 		}
+		properties = props.toArray(new RenderingRuleProperty[props.size()]);
 	}
 	
 	private int getPropertyIndex(String property){
-		for (int i = 0; i < properties.size(); i++) {
-			RenderingRuleProperty prop = properties.get(i);
+		for (int i = 0; i < properties.length; i++) {
+			RenderingRuleProperty prop = properties[i];
 			if (prop.getAttrName().equals(property)) {
 				return i;
 			}
@@ -102,7 +101,7 @@ public class RenderingRule {
 		return floatProperties[ind];
 	}
 	
-	public List<RenderingRuleProperty> getProperties() {
+	public RenderingRuleProperty[] getProperties() {
 		return properties;
 	}
 	

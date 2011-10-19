@@ -13,7 +13,7 @@ public class RenderingRuleSearchRequest {
 	int[] savedValues;
 	float[] savedFvalues;
 	
-	private List<RenderingRule> searchedScope = new ArrayList<RenderingRule>();
+	boolean searchResult = false;
 	
 	public final RenderingRuleStorageProperties ALL;
 
@@ -67,82 +67,88 @@ public class RenderingRuleSearchRequest {
 	}
 	
 	public boolean isFound() {
-		return searchedScope.size() > 0;
+		return searchResult;
 	}
 	
 	public boolean search(int state) {
+		return search(state, true);
+	}
+	
+	public boolean search(int state, boolean loadOutput) {
+		searchResult = false;
 		int tagKey = values[storage.PROPS.R_TAG.getId()];
 		int valueKey = values[storage.PROPS.R_VALUE.getId()];
-		boolean result = search(state, tagKey, valueKey);
+		boolean result = searchInternal(state, tagKey, valueKey, loadOutput);
 		if (result) {
+			searchResult = true;
 			return true;
 		}
-		result = search(state, tagKey, 0);
+		result = searchInternal(state, tagKey, 0, loadOutput);
 		if (result) {
+			searchResult = true;
 			return true;
 		}
-		result = search(state, 0, 0);
+		result = searchInternal(state, 0, 0, loadOutput);
 		if (result) {
+			searchResult = true;
 			return true;
 		}
 		return false;
 	}
 
-	private boolean search(int state, int tagKey, int valueKey) {
-		searchedScope.clear();
+
+	private boolean searchInternal(int state, int tagKey, int valueKey, boolean loadOutput) {
 		values[storage.PROPS.R_TAG.getId()] = tagKey;
 		values[storage.PROPS.R_VALUE.getId()] = valueKey;
 		RenderingRule accept = storage.getRule(state, tagKey, valueKey);
 		if (accept == null) {
 			return false;
 		}
-		boolean match = visitRule(accept);
+		boolean match = visitRule(accept, loadOutput);
 		return match;
 	}
 
-	private boolean visitRule(RenderingRule rule) {
-		boolean empty = true;
-		int ind = 0;
-		for(RenderingRuleProperty rp : rule.getProperties()){
-			if(rp.isInputProperty()){
+	private boolean visitRule(RenderingRule rule, boolean loadOutput) {
+		RenderingRuleProperty[] properties = rule.getProperties();
+		for (int i = 0; i < properties.length; i++) {
+			RenderingRuleProperty rp = properties[i];
+			if (rp.isInputProperty()) {
 				boolean match;
-				if(rp.isFloat()){
-					match = rp.accept(rule.getFloatProp(ind), fvalues[rp.getId()]);
+				if (rp.isFloat()) {
+					match = rp.accept(rule.getFloatProp(i), fvalues[rp.getId()]);
 				} else {
-					match = rp.accept(rule.getIntProp(ind), values[rp.getId()]);
+					match = rp.accept(rule.getIntProp(i), values[rp.getId()]);
 				}
-				if(!match){
+				if (!match) {
 					return false;
 				}
 			}
-			ind ++;
+		}
+		if (!loadOutput) {
+			return true;
 		}
 		// accept it
-		ind = 0;
-		for(RenderingRuleProperty rp : rule.getProperties()){
-			if(rp.isOutputProperty()){
-				empty = false;
-				if(rp.isFloat()){
-					fvalues[rp.getId()] = rule.getFloatProp(ind);
+		for (int i = 0; i < properties.length; i++) {
+			RenderingRuleProperty rp = properties[i];
+			if (rp.isOutputProperty()) {
+				searchResult = true;
+				if (rp.isFloat()) {
+					fvalues[rp.getId()] = rule.getFloatProp(i);
 				} else {
-					values[rp.getId()] = rule.getIntProp(ind);
+					values[rp.getId()] = rule.getIntProp(i);
 				}
 			}
-			ind++;
-		}
-		if(!empty) {
-			searchedScope.add(rule);
 		}
 		
 		for (RenderingRule rr : rule.getIfElseChildren()) {
-			boolean match = visitRule(rr);
+			boolean match = visitRule(rr, loadOutput);
 			if (match) {
 				break;
 			}
 		}
 		
 		for(RenderingRule rr : rule.getIfChildren()){
-			visitRule(rr);
+			visitRule(rr, loadOutput);
 		}
 		return true;
 		

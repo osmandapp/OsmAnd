@@ -127,7 +127,7 @@ public class RenderingRulesStorage {
 		RenderingRule toInsert = rr;
 		RenderingRule previous = tagValueGlobalRules[state].get(key);
 		if(previous != null){
-			if(previous.getProperties().size() != 0){
+			if(previous.getProperties().length != 0){
 				toInsert = new RenderingRule(Collections.EMPTY_MAP, RenderingRulesStorage.this);
 				toInsert.addIfElseChildren(previous);
 			} else {
@@ -365,19 +365,19 @@ public class RenderingRulesStorage {
 	public static void main(String[] args) throws SAXException, IOException {
 		RenderingRulesStorage storage = new RenderingRulesStorage();
 		storage.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream("new_default.render.xml"));
-//		storage.printDebug(POLYGON_RULES, System.out);
+//		storage.printDebug(LINE_RULES, System.out);
 		
 		RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(storage);
-		searchRequest.setStringFilter(storage.PROPS.R_TAG, "landuse");
-		searchRequest.setStringFilter(storage.PROPS.R_VALUE, "grass");
+		searchRequest.setStringFilter(storage.PROPS.R_TAG, "highway");
+		searchRequest.setStringFilter(storage.PROPS.R_VALUE, "tertiary");
 //		searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
-		searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 17);
-		searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 17);
+		searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 14);
+		searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 14);
 //		searchRequest.setStringFilter(storage.PROPS.R_ORDER_TYPE, "line");
 //		searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
 //		searchRequest.setBooleanFilter(storage.PROPS.get("hmRendered"), true);
 		
-		searchRequest.search(POLYGON_RULES);
+		searchRequest.search(LINE_RULES);
 		printResult(searchRequest, System.out);
 	}
 
