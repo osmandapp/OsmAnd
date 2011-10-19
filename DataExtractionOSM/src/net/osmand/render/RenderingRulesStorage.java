@@ -4,6 +4,7 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,6 +51,7 @@ public class RenderingRulesStorage {
 	private int bgNightColor = 0;
 	private String renderingName;
 	private String depends;
+	private RenderingRulesStorage dependsStorage;
 	
 	
 	public RenderingRulesStorage(){
@@ -93,6 +95,14 @@ public class RenderingRulesStorage {
 		return depends;
 	}
 	
+	public RenderingRulesStorage getDependsStorage() {
+		return dependsStorage;
+	}
+	
+	public void setDependsStorage(RenderingRulesStorage dependsStorage) {
+		this.dependsStorage = dependsStorage;
+	}
+	
 	
 	public void parseRulesFromXmlInputStream(InputStream is) throws SAXException, IOException {
 		try {
@@ -113,8 +123,6 @@ public class RenderingRulesStorage {
 	
 	@SuppressWarnings("unchecked")
 	private void registerGlobalRule(RenderingRule rr, int state, Map<String, String> attrsMap) throws SAXException {
-		
-		
 		int tag = rr.getIntPropertyValue(RenderingRuleStorageProperties.TAG);
 		if(tag == -1){
 			throw new SAXException("Attribute tag should be specified for root filter " + attrsMap.toString());
@@ -278,12 +286,6 @@ public class RenderingRulesStorage {
 			
 		}
 		
-		@Override
-		public void endDocument() throws SAXException {
-			super.endDocument();
-			System.out.println(""+stack);
-		}
-		
 		private Map<String, String> parseAttributes(Attributes attributes, Map<String, String> m) {
 			for (int i = 0; i < attributes.getLength(); i++) {
 				String name = parser.isNamespaceAware() ? attributes.getLocalName(i) : attributes.getQName(i);
@@ -366,19 +368,28 @@ public class RenderingRulesStorage {
 		RenderingRulesStorage storage = new RenderingRulesStorage();
 		storage.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream("new_default.render.xml"));
 //		storage.printDebug(LINE_RULES, System.out);
-		
-		RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(storage);
-		searchRequest.setStringFilter(storage.PROPS.R_TAG, "place");
-		searchRequest.setStringFilter(storage.PROPS.R_VALUE, "hamlet");
-//		searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
-		searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 14);
-		searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 14);
-//		searchRequest.setStringFilter(storage.PROPS.R_ORDER_TYPE, "line");
-//		searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
-//		searchRequest.setBooleanFilter(storage.PROPS.get("hmRendered"), true);
-		
-		searchRequest.search(TEXT_RULES);
-		printResult(searchRequest, System.out);
+		long tm = System.nanoTime();
+		int count = 100000;
+		for (int i = 0; i < count; i++) {
+			RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(storage);
+			searchRequest.setStringFilter(storage.PROPS.R_TAG, "highway");
+			searchRequest.setStringFilter(storage.PROPS.R_VALUE, "motorway");
+			// searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
+			searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 14);
+			searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 14);
+			// searchRequest.setStringFilter(storage.PROPS.R_ORDER_TYPE, "line");
+			// searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
+			// searchRequest.setBooleanFilter(storage.PROPS.get("hmRendered"), true);
+
+			searchRequest.search(ORDER_RULES);
+			printResult(searchRequest, new PrintStream(new OutputStream() {
+				@Override
+				public void write(int b) throws IOException {
+					
+				}
+			}));
+		}
+		System.out.println((System.nanoTime()- tm)/ (1e6f * count) );
 	}
 
 	private static void printResult(RenderingRuleSearchRequest searchRequest, PrintStream out) {

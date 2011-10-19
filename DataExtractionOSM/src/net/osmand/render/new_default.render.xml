@@ -52,10 +52,10 @@
 	-->
 
 	<!-- types : string, int, boolean; possibleValues comma separated possible values for int/string -->
-	<renderingProperty attr="hmRendered" name="All-Purpose Renderer" description="All-Purpose Renderer by Hardy"
+	<renderingProperty attr="hmRendered" name="Show more map details" description="Show some vector map detail (roads etc.) at lower zooms already"
 		type="boolean" possibleValues=""/>
 	<renderingProperty attr="appMode" name="Rendering mode" description="Select rendering specific mode"
-		type="string" possibleValues=",car,bicycle,pedestrian"/>	
+		type="string" possibleValues="default,car,bicycle,pedestrian"/>	
 		
 	<!-- input exact layer, orderType check tag, value -->
 	<!-- point = 1, line = 2, polygon = 3 -->
@@ -115,12 +115,21 @@
 			<filter tag="highway" value="primary_link" order="42" />
 			<filter tag="highway" value="secondary_link" order="41" />
 
+			<filter appMode="pedestrian" tag="highway" value="pedestrian" order="60" />
+			<filter appMode="pedestrian" tag="highway" value="cycleway" order="45" />
+			<filter appMode="pedestrian" tag="highway" value="byway" order="62" />
+			<filter appMode="pedestrian" tag="highway" value="footway" order="65" />
+			<filter appMode="pedestrian" tag="highway" value="steps" order="66" />
+			<filter appMode="pedestrian" tag="highway" value="bridleway" order="59" />
+
 			<filter tag="highway" value="pedestrian" order="40" />
+			<filter appMode="bicycle" tag="highway" value="cycleway" order="59" />
 			<filter tag="highway" value="cycleway" order="39" />
 			<filter tag="highway" value="byway" order="38" />
 			<filter tag="highway" value="footway" order="37" />
 			<filter tag="highway" value="steps" order="36" />
 			<filter tag="highway" value="bridleway" order="35" />
+			
 		</group>
 		
 		<filter tag="" value="" order="128" orderType="1"/>
@@ -256,6 +265,7 @@
 			</groupFilter>
 		</group>
 
+		<filter appMode="car" minzoom="14" textSize="14" textBold="true" textWrapWidth="12" textMinDistance="20" tag="highway" value="motorway_junction" textOrder="12"/>
 		<filter minzoom="15" textSize="14" textBold="true" textWrapWidth="12" textMinDistance="20" tag="highway" value="motorway_junction" textOrder="12"/>
 		
 		<!-- Natural -->
@@ -456,9 +466,11 @@
 
 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
 	<point>
+		
 		<filter minzoom="13" icon="highway_ford" tag="highway" value="ford" />
 		<filter minzoom="15" icon="mini_roundabout" tag="highway" value="mini_roundabout" />
 		<filter minzoom="15" icon="helipad" tag="aeroway" value="helipad" />
+		<filter appMode="car" minzoom="16" icon="traffic_light" tag="highway" value="traffic_signals" /> <!-- Default value: 17 -->
 		<filter minzoom="17" icon="traffic_light" tag="highway" value="traffic_signals" />
 		<filter minzoom="16" maxzoom="16" icon="bus_stop_small" tag="highway" value="bus_stop" />
 		<filter minzoom="17" icon="bus_stop" tag="highway" value="bus_stop" />
@@ -523,6 +535,7 @@
 		<filter minzoom="17" icon="bicycle_rental" tag="amenity" value="bicycle_rental" />
 		<filter minzoom="14" icon="bus_station" tag="amenity" value="bus_station" />
 		<filter minzoom="16" icon="car_sharing" tag="amenity" value="car_sharing" />
+		<filter appMode="car" minzoom="16" icon="atm" tag="amenity" value="atm" /> <!-- 17 -->
 		<filter minzoom="17" icon="atm" tag="amenity" value="atm" />
 		<filter minzoom="16" icon="bank" tag="amenity" value="bank" />
 		<filter minzoom="16" icon="pharmacy" tag="amenity" value="pharmacy" />
@@ -543,6 +556,15 @@
 		<filter minzoom="17" icon="telephone" tag="amenity" value="telephone" />
 		<filter minzoom="16" icon="toilets" tag="amenity" value="toilets" />
 		<filter minzoom="16" icon="place_of_worship" tag="amenity" value="place_of_worship" />
+		
+		<filter appMode="car" minzoom="15" icon="shop_bakery" tag="shop" value="bakery" /> <!-- 17 -->
+		<filter appMode="car" minzoom="16" icon="shop_butcher" tag="shop" value="butcher" /> <!-- 17 -->
+		<filter appMode="car" minzoom="15" icon="shop_clothes" tag="shop" value="clothes" /> <!-- 16 -->		
+		<filter appMode="car" minzoom="15" icon="shop_clothes" tag="shop" value="fashion" /> <!-- 16 -->		
+		<filter appMode="car" minzoom="15" icon="shop_convenience" tag="shop" value="convenience" /> <!-- 17 -->
+		<filter appMode="car" minzoom="15" icon="shop_supermarket" tag="shop" value="general" /> <!-- 16 -->			
+		<filter appMode="car" minzoom="15" icon="shop_supermarket" tag="shop" value="supermarket" /> <!-- 16 -->
+		
 		<filter minzoom="17" icon="shop_bakery" tag="shop" value="bakery" />
 		<filter minzoom="17" icon="shop_butcher" tag="shop" value="butcher" />
 		<filter minzoom="16" icon="shop_clothes" tag="shop" value="clothes" />
@@ -1012,11 +1034,11 @@
 			<filter tag="highway" value="road" />
 			<filter tag="highway" value="unclassified" />
 			<filter tag="highway" value="residential" />
-			<groupFilter>
+			<groupFilter color="#ffffff" color_2="#ffffff" shadowColor="#464646">
 				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="3" /> 
 				<filter minzoom="13" maxzoom="13" strokeWidth="4" />
 				<!-- bridge --> 
-				<filter  layer="1" cap_2="SQUARE" color="#000000" color_2="#ffffff" shadowColor="#464646" >
+				<filter  layer="1" cap_2="SQUARE">
 					<filter minzoom="14" maxzoom="14" strokeWidth="8" strokeWidth_2="6" />
 					<filter minzoom="15" maxzoom="15" strokeWidth="10" strokeWidth_2="8" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="12" strokeWidth_2="10" />
@@ -1024,7 +1046,7 @@
 					<filter minzoom="18" strokeWidth="20" strokeWidth_2="18" />
 					<groupFilter nightMode="true" color="#ffffff" color_2="#9F9F9F" shadowColor="#666666" />
 			 	</filter>
-				<filter shadowRadius="1" color="#ffffff" color_2="#ffffff" shadowColor="#464646">
+				<filter  shadowRadius="1">
 					<filter minzoom="14" maxzoom="14" strokeWidth="6" />
 					<filter minzoom="15" maxzoom="15" strokeWidth="8" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="10" />
@@ -1064,50 +1086,59 @@
 				</filter>
 			</groupFilter>
 		</group>
-
+		
 		<filter tag="highway" value="cycleway">
+			<filter appMode="bicycle" minzoom="14" color="#0000ff" strokeWidth="2" pathEffect="10_3" />
+			<filter appMode="pedestrian" minzoom="14" color="#0000ff" strokeWidth="2" pathEffect="10_3" />
 			<filter layer="1" minzoom="14" maxzoom="15" color="#0000ff" strokeWidth="1" pathEffect="2_2" />
 			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="2" color_2="#0000ff" strokeWidth_2="2" pathEffect_2="2_2" />	
 			<filter minzoom="12" maxzoom="12" hmRendered="true" color="#0000ff" strokeWidth="0.5" pathEffect="2_2" />
 			<filter minzoom="13" color="#0000ff" strokeWidth="1" pathEffect="2_2" />
 		</filter>
-
+		
 		<filter tag="highway" value="byway">
 			<filter layer="1" minzoom="14" maxzoom="14" color="#ffcc00" strokeWidth="2" pathEffect="4_3" />
 			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="4" color_2="#ffcc00" strokeWidth_2="2" pathEffect_2="4_3" />
+			<filter appMode="pedestrian" minzoom="14" color="#ffcc00" strokeWidth="2" pathEffect="10_3" />
 			<filter minzoom="11" hmRendered="true" color="#ffcc00" strokeWidth="1" pathEffect="4_3" />
 			<filter minzoom="12" color="#ffcc00" strokeWidth="1" pathEffect="4_3" />
 		</filter>
 
 		<filter pathEffect="6_3" tag="highway" value="path" color="#000000">
+			<filter appMode="pedestrian" minzoom="14" color="#000000" strokeWidth="2" pathEffect="10_3" />
 			<filter minzoom="12" maxzoom="12" hmRendered="true" strokeWidth="0.5"  />
 			<filter minzoom="13" strokeWidth="1"/> 
 			<groupFilter nightMode="true" color="#787878"/>
 		</filter>
 
+		<filter appMode="pedestrian" tag="highway" value="track" minzoom="14" color="#996600" strokeWidth="2" pathEffect="10_3" />
 		<filter minzoom="12" maxzoom="12" hmRendered="true" color="#996600" strokeWidth="0.5" pathEffect="4_3" tag="highway" value="track" />
 		<filter minzoom="13" color="#996600" strokeWidth="1" pathEffect="4_3" tag="highway" value="track" />
+		
 
-		<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="4" color_2="#fa8073" strokeWidth_2="2" pathEffect_2="2_2" tag="highway" value="footway" />
-		<filter minzoom="12" maxzoom="12" hmRendered="true" color="#fa8073" strokeWidth="0.5" pathEffect="2_2" tag="highway" value="footway" />
-		<filter minzoom="13" maxzoom="14" hmRendered="true" color="#fa8073" strokeWidth="1" pathEffect="2_2" tag="highway" value="footway" />
-		<filter minzoom="15" color="#fa8073" strokeWidth="1" pathEffect="2_2" tag="highway" value="footway" />
+		<filter  tag="highway" value="footway">
+			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="4" color_2="#fa8073" strokeWidth_2="2" pathEffect_2="2_2" />
+			<filter appMode="pedestrian" minzoom="14" color="#fa8073" strokeWidth="2" pathEffect="10_3" />
+			<filter minzoom="12" maxzoom="12" hmRendered="true" color="#fa8073" strokeWidth="0.5" pathEffect="2_2" />
+			<filter minzoom="13" maxzoom="14" hmRendered="true" color="#fa8073" strokeWidth="1" pathEffect="2_2" />
+			<filter minzoom="15" color="#fa8073" strokeWidth="1" pathEffect="2_2"  />
+		</filter>
 		
 		<filter tag="highway" value="steps">
 			<filter minzoom="15" layer="1" color="#88ffffff" strokeWidth="7" color_2="#fa8073" strokeWidth_2="5" pathEffect_2="1_2"/>
+			<filter appMode="pedestrian" minzoom="14" color="#fa8073" strokeWidth="4" pathEffect="1_2" />
+			<filter hmRendered="true" minzoom="14" color="#fa8073" strokeWidth="4" pathEffect="1_2"/>
 			<filter minzoom="15" color="#fa8073" strokeWidth="4" pathEffect="1_2"/>
-			<filter minzoom="14" hmRendered="true" color="#fa8073" strokeWidth="4" pathEffect="1_2"/>
 		</filter>
 		
 		
 		<filter tag="highway" value="bridleway">
 			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="2" color_2="#00ff00" strokeWidth_2="2" pathEffect_2="2_2" />
+			<filter appMode="pedestrian" minzoom="14" color="#00ff00" strokeWidth="2" pathEffect="10_3" />
 			<filter minzoom="12" maxzoom="12"  hmRendered="true" color="#00ff00" strokeWidth="0.5" pathEffect="2_2" />
 			<filter minzoom="13" color="#00ff00" strokeWidth="1" pathEffect="2_2" />
 		</filter>
 		
-		
-
 		<filter minzoom="14" color="#000000" strokeWidth="2" tag="highway" value="services" />
 
 		<filter minzoom="14" color="#000000" strokeWidth="2" tag="highway" value="ford" />

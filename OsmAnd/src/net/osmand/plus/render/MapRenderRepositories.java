@@ -32,10 +32,12 @@ import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.MultyPolygon;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 
@@ -371,10 +373,23 @@ public class MapRenderRepositories {
 			// boolean moreDetail = prefs.SHOW_MORE_MAP_DETAIL.get();
 			RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
 			RenderingRuleSearchRequest renderingReq = new RenderingRuleSearchRequest(storage);
-			// TODO pass all global parameters
 			renderingReq.setBooleanFilter(renderingReq.ALL.R_NIGHT_MODE, nightMode);
-			if (renderingReq.ALL.get("appName") != null && !Algoritms.isEmpty(app.getSettings().RENDERER_APP_NAME.get())) {
-				renderingReq.setStringFilter(renderingReq.ALL.get("appName"), app.getSettings().RENDERER_APP_NAME.get());
+			for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
+				CommonPreference<String> settings = app.getSettings().getCustomRenderProperty(customProp.getAttrName());
+				String res = settings.get();
+				if (!Algoritms.isEmpty(res)) {
+					if (customProp.isString()) {
+						renderingReq.setStringFilter(customProp, res);
+					} else if (customProp.isBoolean()) {
+						renderingReq.setBooleanFilter(customProp, "true".equalsIgnoreCase(res));
+					} else {
+						try {
+							renderingReq.setIntFilter(customProp, Integer.parseInt(res));
+						} catch (NumberFormatException e) {
+							e.printStackTrace();
+						}
+					}
+				}
 			}
 			renderingReq.saveState();
 
@@ -423,17 +438,14 @@ public class MapRenderRepositories {
 
 			Bitmap bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.RGB_565);
 
-			boolean stepByStep = prefs.USE_STEP_BY_STEP_RENDERING.get();
 			// 1. generate image step by step
-			if (stepByStep) {
-				this.prevBmp = this.bmp;
-				this.prevBmpLocation = this.bmpLocation;
-				this.bmp = bmp;
-				this.bmpLocation = tileRect;
-			}
+			this.prevBmp = this.bmp;
+			this.prevBmpLocation = this.bmpLocation;
+			this.bmp = bmp;
+			this.bmpLocation = tileRect;
 
 			renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, prefs.USE_ENGLISH_NAMES.get(), renderingReq,
-					stepByStep ? notifyList : null, storage.getBgColor(nightMode));
+					notifyList, storage.getBgColor(nightMode));
 			String renderingDebugInfo = currentRenderingContext.renderingDebugInfo;
 			if (checkWhetherInterrupted()) {
 				currentRenderingContext = null;
@@ -442,13 +454,8 @@ public class MapRenderRepositories {
 			currentRenderingContext = null;
 
 			// 2. replace whole image
-			if (!stepByStep) {
-				this.bmp = bmp;
-				this.bmpLocation = tileRect;
-			} else {
-				this.prevBmp = null;
-				this.prevBmpLocation = null;
-			}
+			this.prevBmp = null;
+			this.prevBmpLocation = null;
 			if (prefs.DEBUG_RENDERING_INFO.get()) {
 				String timeInfo = "Search done in " + searchTime + " ms"; //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 				if (renderingDebugInfo != null) {

@@ -565,18 +565,6 @@ public class OsmandSettings {
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> SHOW_MORE_MAP_DETAIL = new BooleanPreference("show_more_map_detail", false, true);
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Boolean> USE_STEP_BY_STEP_RENDERING = new BooleanPreference("use_step_by_step_rendering",
-			true, false);
-	{
-		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.CAR, true);
-		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.BICYCLE, true);
-		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
-	}
-	
-	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> MAP_VECTOR_DATA = new BooleanPreference("map_vector_data",
 			false, true);
 	
@@ -1012,13 +1000,19 @@ public class OsmandSettings {
 		};
 	};
 	
-	public final CommonPreference<String> RENDERER_APP_NAME = new StringPreference("renderer_appName", "", false);
-	{
-		RENDERER.setModeDefaultValue(ApplicationMode.CAR, "car");
-		RENDERER.setModeDefaultValue(ApplicationMode.PEDESTRIAN, "pedestrian");
-		RENDERER.setModeDefaultValue(ApplicationMode.BICYCLE, "bicycle");
+	Map<String, CommonPreference<String>> customRendersProps = new LinkedHashMap<String, OsmandSettings.CommonPreference<String>>();
+	public CommonPreference<String> getCustomRenderProperty(String attrName){
+		if(!customRendersProps.containsKey(attrName)){
+			customRendersProps.put(attrName, new StringPreference("renderer_"+attrName, "", false));
+		}
+		return customRendersProps.get(attrName);
 	}
-	
+	{
+		CommonPreference<String> pref = getCustomRenderProperty("appMode");
+		pref.setModeDefaultValue(ApplicationMode.CAR, "car");
+		pref.setModeDefaultValue(ApplicationMode.PEDESTRIAN, "pedestrian");
+		pref.setModeDefaultValue(ApplicationMode.BICYCLE, "bicycle");
+	}
 	
 	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference("voice_mute", false, true);
 	

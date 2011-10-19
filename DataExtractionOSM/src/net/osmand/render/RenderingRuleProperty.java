@@ -58,6 +58,14 @@ public class RenderingRuleProperty {
 		return attrName;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
 	protected void setName(String name) {
 		this.name = name;
 	}
@@ -68,6 +76,17 @@ public class RenderingRuleProperty {
 	
 	protected void setPossibleValues(String[] possibleValues) {
 		this.possibleValues = possibleValues;
+	}
+	
+	public String[] getPossibleValues() {
+		if (isBoolean()) {
+			return new String[] { "true", "false" };
+		}
+		return possibleValues;
+	}
+	
+	public boolean isBoolean() {
+		return type == BOOLEAN_TYPE;
 	}
 	
 	public boolean isFloat() {

@@ -81,22 +81,22 @@ public class RendererRegistry {
 		} else {
 			throw new IllegalArgumentException("Not found " + name); //$NON-NLS-1$
 		}
-		RenderingRulesStorage b = new RenderingRulesStorage();
-		b.parseRulesFromXmlInputStream(is);
+		RenderingRulesStorage main = new RenderingRulesStorage();
+		main.parseRulesFromXmlInputStream(is);
 		loadedRenderers.add(name);
-		if(!Algoritms.isEmpty(b.getDepends())){
-			if (loadedRenderers.contains(b.getDepends())) {
+		if(!Algoritms.isEmpty(main.getDepends())){
+			if (loadedRenderers.contains(main.getDepends())) {
 				log.warn("Circular dependencies found " + name); //$NON-NLS-1$
 			} else {
-				RenderingRulesStorage dep = getRenderer(b.getDepends(), loadedRenderers);
+				RenderingRulesStorage dep = getRenderer(main.getDepends(), loadedRenderers);
 				if (dep == null) {
 					log.warn("Dependent renderer not found : "  + name); //$NON-NLS-1$
 				}
-				// TODO set dependent renders
+				main.setDependsStorage(dep);
 			}
 		}
-		renderers.put(name, b);
-		return b;
+		renderers.put(name, main);
+		return main;
 	}
 	
 	

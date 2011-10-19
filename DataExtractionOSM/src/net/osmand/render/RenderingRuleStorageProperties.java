@@ -2,6 +2,7 @@ package net.osmand.render;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class RenderingRuleStorageProperties {
@@ -81,62 +82,63 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_TEXT_WRAP_WIDTH;
 
 	final Map<String, RenderingRuleProperty> properties = new LinkedHashMap<String, RenderingRuleProperty>();
-	final java.util.List<RenderingRuleProperty> rules = new ArrayList<RenderingRuleProperty>();
+	final List<RenderingRuleProperty> rules = new ArrayList<RenderingRuleProperty>();
+	final List<RenderingRuleProperty> customRules = new ArrayList<RenderingRuleProperty>();
 	
 	public RenderingRuleStorageProperties() {
 		createDefaultRenderingRuleProperties();
 	}
 
 	public void createDefaultRenderingRuleProperties() {
-		R_TAG = registerRule(RenderingRuleProperty.createInputStringProperty(TAG));
-		R_VALUE = registerRule(RenderingRuleProperty.createInputStringProperty(VALUE));
-		R_MINZOOM = registerRule(RenderingRuleProperty.createInputGreaterIntProperty(MINZOOM));
-		R_MAXZOOM = registerRule(RenderingRuleProperty.createInputLessIntProperty(MAXZOOM));
-		R_NIGHT_MODE = registerRule(RenderingRuleProperty.createInputBooleanProperty(NIGHT_MODE));
-		R_LAYER = registerRule(RenderingRuleProperty.createInputIntProperty(LAYER));
-		R_ORDER_TYPE = registerRule(RenderingRuleProperty.createInputIntProperty(ORDER_TYPE));
-		R_TEXT_LENGTH = registerRule(RenderingRuleProperty.createInputIntProperty(TEXT_LENGTH));
-		R_REF = registerRule(RenderingRuleProperty.createInputBooleanProperty(REF));
+		R_TAG = registerRuleInternal(RenderingRuleProperty.createInputStringProperty(TAG));
+		R_VALUE = registerRuleInternal(RenderingRuleProperty.createInputStringProperty(VALUE));
+		R_MINZOOM = registerRuleInternal(RenderingRuleProperty.createInputGreaterIntProperty(MINZOOM));
+		R_MAXZOOM = registerRuleInternal(RenderingRuleProperty.createInputLessIntProperty(MAXZOOM));
+		R_NIGHT_MODE = registerRuleInternal(RenderingRuleProperty.createInputBooleanProperty(NIGHT_MODE));
+		R_LAYER = registerRuleInternal(RenderingRuleProperty.createInputIntProperty(LAYER));
+		R_ORDER_TYPE = registerRuleInternal(RenderingRuleProperty.createInputIntProperty(ORDER_TYPE));
+		R_TEXT_LENGTH = registerRuleInternal(RenderingRuleProperty.createInputIntProperty(TEXT_LENGTH));
+		R_REF = registerRuleInternal(RenderingRuleProperty.createInputBooleanProperty(REF));
 
 		// order - no sense to make it float
-		R_ORDER = registerRule(RenderingRuleProperty.createOutputIntProperty(ORDER));
+		R_ORDER = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ORDER));
 
 		// text properties
-		R_TEXT_WRAP_WIDTH = registerRule(RenderingRuleProperty.createOutputIntProperty(TEXT_WRAP_WIDTH));
-		R_TEXT_DY = registerRule(RenderingRuleProperty.createOutputIntProperty(TEXT_DY));
-		R_TEXT_HALO_RADIUS = registerRule(RenderingRuleProperty.createOutputIntProperty(TEXT_HALO_RADIUS));
-		R_TEXT_SIZE = registerRule(RenderingRuleProperty.createOutputIntProperty(TEXT_SIZE));
-		R_TEXT_ORDER = registerRule(RenderingRuleProperty.createOutputIntProperty(TEXT_ORDER));
-		R_TEXT_MIN_DISTANCE = registerRule(RenderingRuleProperty.createOutputIntProperty(TEXT_MIN_DISTANCE));
-		R_TEXT_SHIELD = registerRule(RenderingRuleProperty.createOutputStringProperty(TEXT_SHIELD));
+		R_TEXT_WRAP_WIDTH = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(TEXT_WRAP_WIDTH));
+		R_TEXT_DY = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(TEXT_DY));
+		R_TEXT_HALO_RADIUS = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(TEXT_HALO_RADIUS));
+		R_TEXT_SIZE = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(TEXT_SIZE));
+		R_TEXT_ORDER = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(TEXT_ORDER));
+		R_TEXT_MIN_DISTANCE = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(TEXT_MIN_DISTANCE));
+		R_TEXT_SHIELD = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(TEXT_SHIELD));
 		
 
-		R_TEXT_COLOR = registerRule(RenderingRuleProperty.createOutputColorProperty(TEXT_COLOR));
+		R_TEXT_COLOR = registerRuleInternal(RenderingRuleProperty.createOutputColorProperty(TEXT_COLOR));
 
-		R_TEXT_BOLD = registerRule(RenderingRuleProperty.createOutputBooleanProperty(TEXT_BOLD));
-		R_TEXT_ON_PATH = registerRule(RenderingRuleProperty.createOutputBooleanProperty(TEXT_ON_PATH));
+		R_TEXT_BOLD = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(TEXT_BOLD));
+		R_TEXT_ON_PATH = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(TEXT_ON_PATH));
 
 		// point
-		R_ICON = registerRule(RenderingRuleProperty.createOutputStringProperty(ICON));
+		R_ICON = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(ICON));
 
 		// polygon/way
-		R_COLOR = registerRule(RenderingRuleProperty.createOutputColorProperty(COLOR));
-		R_COLOR_2 = registerRule(RenderingRuleProperty.createOutputColorProperty(COLOR_2));
-		R_COLOR_3 = registerRule(RenderingRuleProperty.createOutputColorProperty(COLOR_3));
-		R_STROKE_WIDTH = registerRule(RenderingRuleProperty.createOutputFloatProperty(STROKE_WIDTH));
-		R_STROKE_WIDTH_2 = registerRule(RenderingRuleProperty.createOutputFloatProperty(STROKE_WIDTH_2));
-		R_STROKE_WIDTH_3 = registerRule(RenderingRuleProperty.createOutputFloatProperty(STROKE_WIDTH_3));
+		R_COLOR = registerRuleInternal(RenderingRuleProperty.createOutputColorProperty(COLOR));
+		R_COLOR_2 = registerRuleInternal(RenderingRuleProperty.createOutputColorProperty(COLOR_2));
+		R_COLOR_3 = registerRuleInternal(RenderingRuleProperty.createOutputColorProperty(COLOR_3));
+		R_STROKE_WIDTH = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(STROKE_WIDTH));
+		R_STROKE_WIDTH_2 = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(STROKE_WIDTH_2));
+		R_STROKE_WIDTH_3 = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(STROKE_WIDTH_3));
 
-		R_PATH_EFFECT = registerRule(RenderingRuleProperty.createOutputStringProperty(PATH_EFFECT));
-		R_PATH_EFFECT_2 = registerRule(RenderingRuleProperty.createOutputStringProperty(PATH_EFFECT_2));
-		R_PATH_EFFECT_3 = registerRule(RenderingRuleProperty.createOutputStringProperty(PATH_EFFECT_3));
-		R_CAP = registerRule(RenderingRuleProperty.createOutputStringProperty(CAP));
-		R_CAP_2 = registerRule(RenderingRuleProperty.createOutputStringProperty(CAP_2));
-		R_CAP_3 = registerRule(RenderingRuleProperty.createOutputStringProperty(CAP_3));
-		R_SHADER = registerRule(RenderingRuleProperty.createOutputStringProperty(SHADER));
+		R_PATH_EFFECT = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(PATH_EFFECT));
+		R_PATH_EFFECT_2 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(PATH_EFFECT_2));
+		R_PATH_EFFECT_3 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(PATH_EFFECT_3));
+		R_CAP = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(CAP));
+		R_CAP_2 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(CAP_2));
+		R_CAP_3 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(CAP_3));
+		R_SHADER = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(SHADER));
 
-		R_SHADOW_COLOR = registerRule(RenderingRuleProperty.createOutputColorProperty(SHADOW_COLOR));
-		R_SHADOW_RADIUS = registerRule(RenderingRuleProperty.createOutputIntProperty(SHADOW_RADIUS));
+		R_SHADOW_COLOR = registerRuleInternal(RenderingRuleProperty.createOutputColorProperty(SHADOW_COLOR));
+		R_SHADOW_RADIUS = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(SHADOW_RADIUS));
 	}
 
 	public RenderingRuleProperty get(String name) {
@@ -145,13 +147,22 @@ public class RenderingRuleStorageProperties {
 	
 	public RenderingRuleProperty[] getPoperties() {
 		return rules.toArray(new RenderingRuleProperty[rules.size()]);
-
 	}
-
-	public RenderingRuleProperty registerRule(RenderingRuleProperty p) {
+	
+	public List<RenderingRuleProperty> getCustomRules() {
+		return customRules;
+	}
+	
+	private RenderingRuleProperty registerRuleInternal(RenderingRuleProperty p) {
 		properties.put(p.getAttrName(), p);
 		p.setId(rules.size());
 		rules.add(p);
+		return p;
+	}
+
+	public RenderingRuleProperty registerRule(RenderingRuleProperty p) {
+		registerRuleInternal(p);
+		customRules.add(p);
 		return p;
 	}
 }
