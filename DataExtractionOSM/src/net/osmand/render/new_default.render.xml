@@ -1,17 +1,16 @@
 <renderingStyle name="default" depends="" defaultColor="#f1eee8" defaultNightColor="#003333" version="1">
 
-    <!-- Simple rule definition : 
-         - "filter" is analogue of If(...) Else. So if one "filter" passes other neighboors will not be checked.
-         - "group" is tag to combine many filters and define common inner filter for them as "groupFilter"
-         - inner "filter" is kind of inner If(..) { If(...) Else ... } Else...
-         - ! All top level filters should have "tag" and "value" attributes to proper indexing them
-            -->
+	<!-- Simple rule definition : 
+		- "filter" is analogue of If(...) Else. So if one "filter" passes other neighbors will not be checked.
+		- "group" is tag to combine many filters and define common inner filter for them as "groupFilter"
+		- inner "filter" is kind of inner If(..) { If(...) Else ... } Else...
+		- ! All top level filters should have "tag" and "value" attributes to proper indexing them
+	-->
 
 	<!--
-		Based on All-Purpose Renderer (by Hardy Mueller), v017, but with the following differences:
-		- slightly less detail, some roads only rendered at higher zooms (see ZMxx comments) than described below for all-purpose renderer
-		- different motorway/trunk colors
-		- shadowRadius suppressed for white roads from z16, but this decreases visibility in some surroundings (reverted again later, due to bad visibility on some backgrounds)
+		Based on All-Purpose Renderer (by Hardy Mueller), v023:
+		- with ShowMoreMapDetails some roads already rendered at lower zooms than old default
+		- with ShowMoreMapDetails different motorway/trunk colors
 
 		All-Purpose Renderer: Map rendering aligned to typical map use for all zoom levels/scales, hence always yields a complete and reliable map.
 		All features displayed at each zoom level (zX) are those for its typical use:
@@ -33,7 +32,7 @@
 		- forest: 000034
 		- other 'green' landuse: 004333
 		- water: 330099
-		- 'white' roads: 9F9F9F to darken high density areas sufficiently
+		- 'white' roads: 9F9F9F with shadow 666666 to darken high density areas sufficiently
 		- leave other road colors like day, for easy recognition
 	--> 
 
@@ -52,9 +51,9 @@
 	-->
 
 	<!-- types : string, int, boolean; possibleValues comma separated possible values for int/string -->
-	<renderingProperty attr="hmRendered" name="Show more map details" description="Show some vector map detail (roads etc.) at lower zooms already"
+	<renderingProperty attr="hmRendered" name="Show more map detail" description="Default renderer: Increase amount of map detail shown"
 		type="boolean" possibleValues=""/>
-	<renderingProperty attr="appMode" name="Rendering mode" description="Select rendering specific mode"
+	<renderingProperty attr="appMode" name="Rendering mode" description="Default renderer: Adjust rendering for specific purpose"
 		type="string" possibleValues="default,car,bicycle,pedestrian"/>	
 		
 	<!-- input exact layer, orderType check tag, value -->
