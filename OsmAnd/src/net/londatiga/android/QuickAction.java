@@ -75,6 +75,7 @@ public class QuickAction extends CustomPopupWindow {
 		mTrackAnim 	= AnimationUtils.loadAnimation(anchor.getContext(), R.anim.rail);
 		
 		mTrackAnim.setInterpolator(new Interpolator() {
+			@Override
 			public float getInterpolation(float t) {
 	              // Pushes past the target area, then snaps back into place.
 	                // Equation for graphing: 1.2-((x*1.6)-1.1)^2

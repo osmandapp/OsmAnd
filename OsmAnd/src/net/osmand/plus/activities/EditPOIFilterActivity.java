@@ -107,6 +107,7 @@ public class EditPOIFilterActivity extends ListActivity {
 	}
 
 
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.edit_filter_menu, menu);
@@ -244,6 +245,7 @@ public class EditPOIFilterActivity extends ListActivity {
 			super(EditPOIFilterActivity.this, R.layout.editing_poi_filter_list, amenityTypes);
 		}
 
+		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			LayoutInflater inflater = getLayoutInflater();
 			View row = convertView;

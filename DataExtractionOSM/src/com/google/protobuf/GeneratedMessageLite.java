@@ -63,7 +63,8 @@ public abstract class GeneratedMessageLite extends AbstractMessageLite {
     public abstract BuilderType mergeFrom(MessageType message);
 
     // Defined here for return type covariance.
-    public abstract MessageType getDefaultInstanceForType();
+    @Override
+	public abstract MessageType getDefaultInstanceForType();
 
     /**
      * Get the message being built.  We don't just pass this to the
@@ -446,37 +447,45 @@ public abstract class GeneratedMessageLite extends AbstractMessageLite {
     private final boolean isRepeated;
     private final boolean isPacked;
 
-    public int getNumber() {
+    @Override
+	public int getNumber() {
       return number;
     }
 
-    public WireFormat.FieldType getLiteType() {
+    @Override
+	public WireFormat.FieldType getLiteType() {
       return type;
     }
 
-    public WireFormat.JavaType getLiteJavaType() {
+    @Override
+	public WireFormat.JavaType getLiteJavaType() {
       return type.getJavaType();
     }
 
-    public boolean isRepeated() {
+    @Override
+	public boolean isRepeated() {
       return isRepeated;
     }
 
-    public boolean isPacked() {
+    @Override
+	public boolean isPacked() {
       return isPacked;
     }
 
-    public Internal.EnumLiteMap<?> getEnumType() {
+    @Override
+	public Internal.EnumLiteMap<?> getEnumType() {
       return enumTypeMap;
     }
 
-    @SuppressWarnings("unchecked")
+    @Override
+	@SuppressWarnings("unchecked")
     public MessageLite.Builder internalMergeFrom(
         MessageLite.Builder to, MessageLite from) {
       return ((Builder) to).mergeFrom((GeneratedMessageLite) from);
     }
 
-    public int compareTo(ExtensionDescriptor other) {
+    @Override
+	public int compareTo(ExtensionDescriptor other) {
       return number - other.number;
     }
   }

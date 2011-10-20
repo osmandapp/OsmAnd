@@ -42,7 +42,8 @@ public interface ProtocolMessageEnum extends Internal.EnumLite {
   /**
    * Return the value's numeric value as defined in the .proto file.
    */
-  int getNumber();
+  @Override
+int getNumber();
 
   /**
    * Return the value's descriptor, which contains information such as

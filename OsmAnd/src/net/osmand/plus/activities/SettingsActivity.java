@@ -15,6 +15,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.DayNightMode;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
@@ -22,8 +23,11 @@ import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.views.SeekBarPreference;
+import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRulesStorage;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -43,6 +47,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
@@ -160,12 +165,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	    registerBooleanPreference(osmandSettings.USE_TRACKBALL_FOR_MOVEMENTS,screen); 
 	    registerBooleanPreference(osmandSettings.USE_HIGH_RES_MAPS,screen); 
 	    registerBooleanPreference(osmandSettings.USE_ENGLISH_NAMES,screen); 
-	    registerBooleanPreference(osmandSettings.SHOW_MORE_MAP_DETAIL,screen); 
 	    registerBooleanPreference(osmandSettings.AUTO_ZOOM_MAP,screen); 
 	    registerBooleanPreference(osmandSettings.AUTO_FOLLOW_ROUTE_NAV,screen);
 	    registerBooleanPreference(osmandSettings.SAVE_TRACK_TO_GPX,screen); 
 	    registerBooleanPreference(osmandSettings.DEBUG_RENDERING_INFO,screen); 
-	    registerBooleanPreference(osmandSettings.USE_STEP_BY_STEP_RENDERING,screen); 
 	    registerBooleanPreference(osmandSettings.FAST_ROUTE_MODE,screen);
 	    registerBooleanPreference(osmandSettings.USE_OSMAND_ROUTING_SERVICE_ALWAYS,screen); 
 	    registerBooleanPreference(osmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES,screen);
@@ -284,6 +287,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		entries = (String[]) rendererNames.toArray(new String[rendererNames.size()]);
 		registerListPreference(osmandSettings.RENDERER, screen, entries, entries);
 		
+		createCustomRenderingProperties();
+		
 		tileSourcePreference = (ListPreference) screen.findPreference(osmandSettings.MAP_TILE_SOURCES.getId());
 		tileSourcePreference.setOnPreferenceChangeListener(this);
 		overlayPreference = (ListPreference) screen.findPreference(osmandSettings.MAP_OVERLAY.getId());
@@ -302,6 +307,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		routeServiceEnabled.setOnPreferenceChangeListener(this);
 		applicationDir = (EditTextPreference) screen.findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
 		applicationDir.setOnPreferenceChangeListener(this);
+		
 		
 		
 		broadcastReceiver = new BroadcastReceiver(){
@@ -333,6 +339,35 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			}
 		}
     }
+
+	private void createCustomRenderingProperties() {
+		RenderingRulesStorage renderer = getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
+		PreferenceCategory cat = (PreferenceCategory) findPreference("custom_vector_rendering");
+		cat.removeAll();
+		if(renderer != null){
+			for(RenderingRuleProperty p : renderer.PROPS.getCustomRules()){
+				CommonPreference<String> custom = getMyApplication().getSettings().getCustomRenderProperty(p.getAttrName());
+				ListPreference lp = new ListPreference(this);
+				lp.setOnPreferenceChangeListener(this);
+				lp.setKey(custom.getId());
+				lp.setTitle(p.getName());
+				lp.setSummary(p.getDescription());
+				cat.addPreference(lp);
+				
+				
+				LinkedHashMap<String, Object> vals = new LinkedHashMap<String, Object>();
+				screenPreferences.put(custom.getId(), lp);
+				listPreferences.put(custom.getId(), custom);
+				listPrefValues.put(custom.getId(), vals);
+				String[] names = p.getPossibleValues();
+				for(int i=0; i<names.length; i++){
+					vals.put(names[i], names[i]);
+				}
+				
+			}
+		}
+		
+	}
 
 	private void reloadVoiceListPreference(PreferenceScreen screen) {
 		String[] entries;
@@ -516,6 +551,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				} else {
 					Toast.makeText(this, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 				}
+				createCustomRenderingProperties();
 			}
 		} else if(preference == applicationDir){
 			warnAboutChangingStorage((String) newValue);

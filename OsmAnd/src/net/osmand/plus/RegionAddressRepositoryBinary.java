@@ -45,6 +45,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		this.postCodes = new TreeMap<String, PostCode>(collator);
 	}
 	
+	@Override
 	public void close(){
 		this.file = null;
 	}
@@ -64,6 +65,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		}
 	}
 
+	@Override
 	public synchronized void preloadBuildings(Street street, ResultMatcher<Building> resultMatcher) {
 		if(street.getBuildings().isEmpty()){
 			try {
@@ -80,10 +82,12 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		cities.put(city.getId(), city);
 	}
 	
+	@Override
 	public synchronized List<MapObject> getLoadedCities(){
 		return new ArrayList<MapObject>(cities.values());
 	}
 	
+	@Override
 	public synchronized void preloadStreets(MapObject o, ResultMatcher<Street> resultMatcher) {
 		assert o instanceof PostCode || o instanceof City;
 		Collection<Street> streets = o instanceof PostCode ? ((PostCode) o).getStreets() : ((City) o).getStreets();

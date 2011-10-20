@@ -32,11 +32,13 @@ public class PairElmt extends Pair
     this.rtElmt = rtElmt;
   }
   
-  public long getLtPtr()
+  @Override
+public long getLtPtr()
   {
     return ltElmt.getPtr();
   }
-  public long getRtPtr()
+  @Override
+public long getRtPtr()
   {
     return rtElmt.getPtr();
   }
@@ -49,7 +51,8 @@ public class PairElmt extends Pair
   {
     return rtElmt;
   }
-  public Pair paired(Element ltElmt, Element rtElmt)
+  @Override
+public Pair paired(Element ltElmt, Element rtElmt)
   {
     return new PairElmt(ltElmt, rtElmt);
   }

@@ -51,7 +51,8 @@ public abstract class Element implements Cloneable, java.io.Serializable
   //throws IllegalValueException;
   public abstract void setPtr(long ptr);
   public abstract int getElementType(); 
-  public String toString()
+  @Override
+public String toString()
   {
     return Rectangle.toString();
   }

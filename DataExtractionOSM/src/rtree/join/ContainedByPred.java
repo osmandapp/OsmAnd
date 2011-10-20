@@ -22,7 +22,8 @@ public class ContainedByPred extends Predicate
 {
   public ContainedByPred(){}
 
-  public void relate(Element event, int from, Element[] others, List pairs, int evtSide)
+  @Override
+public void relate(Element event, int from, Element[] others, List pairs, int evtSide)
   {
     //System.out.println("SweepLine.internalLoop : before pairs size : " + pairs.size());
     if(evtSide == Join.RIGHT){
@@ -48,7 +49,8 @@ public class ContainedByPred extends Predicate
   /**
      @param side The side of <code>elmt1</code>.
   */
-  public boolean relateMismatch(Element elmt1, Element elmt2, int side)
+  @Override
+public boolean relateMismatch(Element elmt1, Element elmt2, int side)
   {
     try{
       if(elmt1 instanceof NonLeafElement || elmt2 instanceof NonLeafElement)

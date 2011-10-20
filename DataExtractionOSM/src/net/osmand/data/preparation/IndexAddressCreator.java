@@ -535,14 +535,14 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			String cityPart = null;
 			SimpleStreet foundStreet = streetDAO.findStreet(name, city);
 			if (foundStreet != null) {
-				//oops, same street name within one city!
-				if (foundStreet.getCityPart() == null) {
-					//we need to update the city part first 
-					String aCityPart = findCityPart(foundStreet.getLocation(), city);
-					foundStreet = streetDAO.updateStreetCityPart(foundStreet, city, aCityPart != null ? aCityPart : city.getName());
-				}
 				//matching the nodes is done somewhere else. This is just a simple check if the streets are really close to each other
 				if (MapUtils.getDistance(location, foundStreet.getLocation()) > 500) { 
+					//oops, same street name within one city!
+					if (foundStreet.getCityPart() == null) {
+						//we need to update the city part first 
+						String aCityPart = findCityPart(foundStreet.getLocation(), city);
+						foundStreet = streetDAO.updateStreetCityPart(foundStreet, city, aCityPart != null ? aCityPart : city.getName());
+					}
 					//now, try to find our cityPart again
 					cityPart = findCityPart(location, city);
 					foundStreet = streetDAO.findStreet(name, city, cityPart);
@@ -552,6 +552,8 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				//by default write city with cityPart of the city
 				long streetId = streetDAO.insertStreet(name, nameEn, location, city, cityPart);
 				values.add(streetId);
+			} else {
+				values.add(foundStreet.getId());
 			}
 		}
 		return values;

@@ -15,9 +15,9 @@ import net.osmand.osm.LatLon;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.activities.search.SearchHistoryHelper;
-import net.osmand.plus.render.BaseOsmandRender;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.render.RenderingRulesStorage;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -99,6 +99,7 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<ApplicationMode> APPLICATION_MODE = new OsmandPreference<ApplicationMode>(){
+		@Override
 		public String getId() {
 			return "application_mode";
 		};
@@ -142,7 +143,7 @@ public class OsmandSettings {
 		}
 		// update vector renderer 
 		RendererRegistry registry = ctx.getRendererRegistry();
-		BaseOsmandRender newRenderer = registry.getRenderer(RENDERER.get());
+		RenderingRulesStorage newRenderer = registry.getRenderer(RENDERER.get());
 		if (newRenderer == null) {
 			newRenderer = registry.defaultRender();
 		}
@@ -413,6 +414,9 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_POI_OVER_MAP =
 		new BooleanPreference("show_poi_over_map", false, true);
 	
+	public final OsmandPreference<Boolean> SHOW_POI_LABEL =
+		new BooleanPreference("show_poi_label", false, true);
+	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SHOW_TRANSPORT_OVER_MAP = 
 		new BooleanPreference("show_transport_over_map", false, true);
@@ -437,6 +441,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<DayNightMode> DAYNIGHT_MODE = 
 		new EnumIntPreference<DayNightMode>("daynight_mode", DayNightMode.AUTO, false, DayNightMode.values()) {
+		@Override
 		protected boolean setValue(SharedPreferences prefs, DayNightMode val) {
 			ctx.getDaynightHelper().setDayNightMode(val);
 			return super.setValue(prefs, val);
@@ -557,18 +562,6 @@ public class OsmandSettings {
 	
 	public boolean usingEnglishNames(){
 		return USE_ENGLISH_NAMES.get();
-	}
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> SHOW_MORE_MAP_DETAIL = new BooleanPreference("show_more_map_detail", false, true);
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Boolean> USE_STEP_BY_STEP_RENDERING = new BooleanPreference("use_step_by_step_rendering",
-			true, false);
-	{
-		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.CAR, true);
-		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.BICYCLE, true);
-		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
@@ -746,7 +739,8 @@ public class OsmandSettings {
 	public static final String LAST_KNOWN_MAP_LAT = "last_known_map_lat"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_LON = "last_known_map_lon"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_ZOOM = "last_known_map_zoom"; //$NON-NLS-1$
-	
+
+	public static final String MAP_LABEL_TO_SHOW = "map_label_to_show"; //$NON-NLS-1$
 	public static final String MAP_LAT_TO_SHOW = "map_lat_to_show"; //$NON-NLS-1$
 	public static final String MAP_LON_TO_SHOW = "map_lon_to_show"; //$NON-NLS-1$
 	public static final String MAP_ZOOM_TO_SHOW = "map_zoom_to_show"; //$NON-NLS-1$
@@ -761,14 +755,7 @@ public class OsmandSettings {
 		return globalPreferences.contains(LAST_KNOWN_MAP_LAT);
 	}
 
-	public void setMapLocationToShow(double latitude, double longitude) {
-		setMapLocationToShow(latitude, longitude, getLastKnownMapZoom(), null);
-	}
-	
-	public void setMapLocationToShow(double latitude, double longitude, int zoom) {
-		setMapLocationToShow(latitude, longitude, null);
-	}
-	
+		
 	public LatLon getAndClearMapLocationToShow(){
 		if(!globalPreferences.contains(MAP_LAT_TO_SHOW)){
 			return null;
@@ -779,14 +766,26 @@ public class OsmandSettings {
 		return new LatLon(lat, lon);
 	}
 	
+	public String getAndClearMapLabelToShow(){
+		String label = globalPreferences.getString(MAP_LABEL_TO_SHOW, null);
+		globalPreferences.edit().remove(MAP_LABEL_TO_SHOW).commit();
+		return label;
+	}
+	
 	public int getMapZoomToShow() {
 		return globalPreferences.getInt(MAP_ZOOM_TO_SHOW, 5);
 	}
 	
-	public void setMapLocationToShow(double latitude, double longitude, int zoom, String historyDescription) {
+	public void setMapLocationToShow(double latitude, double longitude, int zoom, String historyDescription,
+			String labelToShow) {
 		Editor edit = globalPreferences.edit();
 		edit.putFloat(MAP_LAT_TO_SHOW, (float) latitude);
 		edit.putFloat(MAP_LON_TO_SHOW, (float) longitude);
+		if (labelToShow != null) {
+			edit.putString(MAP_LABEL_TO_SHOW, labelToShow);
+		} else {
+			edit.remove(MAP_LABEL_TO_SHOW);
+		}
 		edit.putInt(MAP_ZOOM_TO_SHOW, zoom);
 		edit.commit();
 		if(historyDescription != null){
@@ -794,8 +793,12 @@ public class OsmandSettings {
 		}
 	}
 	
-	public void setMapLocationToShow(double latitude, double longitude, String historyDescription) {
-		setMapLocationToShow(latitude, longitude, getLastKnownMapZoom(), historyDescription);
+	public void setMapLocationToShow(double latitude, double longitude, int zoom) {
+		setMapLocationToShow(latitude, longitude, zoom,  null, null);
+	}
+
+	public void setMapLocationToShow(double latitude, double longitude, int zoom, String historyDescription){
+		setMapLocationToShow(latitude, longitude, zoom, historyDescription, historyDescription);
 	}
 
 	// Do not use that method if you want to show point on map. Use setMapLocationToShow
@@ -981,11 +984,12 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> RENDERER = new StringPreference("renderer", RendererRegistry.DEFAULT_RENDER, false) {
+		@Override
 		protected boolean setValue(SharedPreferences prefs, String val) {
 			if(val == null){
 				val = RendererRegistry.DEFAULT_RENDER;
 			}
-			BaseOsmandRender loaded = ctx.getRendererRegistry().getRenderer(val);
+			RenderingRulesStorage loaded = ctx.getRendererRegistry().getRenderer(val);
 			if (loaded != null) {
 				ctx.getRendererRegistry().setCurrentSelectedRender(loaded);
 				super.setValue(prefs, val);
@@ -995,12 +999,20 @@ public class OsmandSettings {
 			return false;
 		};
 	};
-	{
-		RENDERER.setModeDefaultValue(ApplicationMode.CAR, RendererRegistry.CAR_RENDER);
-		RENDERER.setModeDefaultValue(ApplicationMode.PEDESTRIAN, RendererRegistry.PEDESTRIAN_RENDER);
-		RENDERER.setModeDefaultValue(ApplicationMode.BICYCLE, RendererRegistry.BICYCLE_RENDER);
-	}
 	
+	Map<String, CommonPreference<String>> customRendersProps = new LinkedHashMap<String, OsmandSettings.CommonPreference<String>>();
+	public CommonPreference<String> getCustomRenderProperty(String attrName){
+		if(!customRendersProps.containsKey(attrName)){
+			customRendersProps.put(attrName, new StringPreference("renderer_"+attrName, "", false));
+		}
+		return customRendersProps.get(attrName);
+	}
+	{
+		CommonPreference<String> pref = getCustomRenderProperty("appMode");
+		pref.setModeDefaultValue(ApplicationMode.CAR, "car");
+		pref.setModeDefaultValue(ApplicationMode.PEDESTRIAN, "pedestrian");
+		pref.setModeDefaultValue(ApplicationMode.BICYCLE, "bicycle");
+	}
 	
 	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference("voice_mute", false, true);
 	

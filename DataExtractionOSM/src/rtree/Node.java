@@ -257,7 +257,8 @@ public class Node implements Cloneable //can be made abstract if leaf and non le
       e.printStackTrace();
     }
   }
-  public Object clone()
+  @Override
+public Object clone()
   {
     return new Node(file,fileName,nodeIndex, sorted, elements, fileHdr,totalElements,
                     parent, elementSize, elementType, dirty, nodeMBR);//remove
@@ -1372,7 +1373,8 @@ public class Node implements Cloneable //can be made abstract if leaf and non le
   /**
      Obvious, isn't it?
   */
-  public String toString()
+  @Override
+public String toString()
   {
     String ret = "\n\t***Node at Index: "+Long.toString(nodeIndex)+"***";
     ret += "\nLocal Variables-";

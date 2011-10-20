@@ -76,7 +76,8 @@ public final class UnknownFieldSet implements MessageLite {
   public static UnknownFieldSet getDefaultInstance() {
     return defaultInstance;
   }
-  public UnknownFieldSet getDefaultInstanceForType() {
+  @Override
+public UnknownFieldSet getDefaultInstanceForType() {
     return defaultInstance;
   }
   private static final UnknownFieldSet defaultInstance =
@@ -125,7 +126,8 @@ public final class UnknownFieldSet implements MessageLite {
   }
 
   /** Serializes the set and writes it to {@code output}. */
-  public void writeTo(final CodedOutputStream output) throws IOException {
+  @Override
+public void writeTo(final CodedOutputStream output) throws IOException {
     for (final Map.Entry<Integer, Field> entry : fields.entrySet()) {
       entry.getValue().writeTo(entry.getKey(), output);
     }
@@ -145,7 +147,8 @@ public final class UnknownFieldSet implements MessageLite {
    * Serializes the message to a {@code ByteString} and returns it. This is
    * just a trivial wrapper around {@link #writeTo(CodedOutputStream)}.
    */
-  public ByteString toByteString() {
+  @Override
+public ByteString toByteString() {
     try {
       final ByteString.CodedBuilder out =
         ByteString.newCodedBuilder(getSerializedSize());
@@ -162,7 +165,8 @@ public final class UnknownFieldSet implements MessageLite {
    * Serializes the message to a {@code byte} array and returns it.  This is
    * just a trivial wrapper around {@link #writeTo(CodedOutputStream)}.
    */
-  public byte[] toByteArray() {
+  @Override
+public byte[] toByteArray() {
     try {
       final byte[] result = new byte[getSerializedSize()];
       final CodedOutputStream output = CodedOutputStream.newInstance(result);
@@ -180,13 +184,15 @@ public final class UnknownFieldSet implements MessageLite {
    * Serializes the message and writes it to {@code output}.  This is just a
    * trivial wrapper around {@link #writeTo(CodedOutputStream)}.
    */
-  public void writeTo(final OutputStream output) throws IOException {
+  @Override
+public void writeTo(final OutputStream output) throws IOException {
     final CodedOutputStream codedOutput = CodedOutputStream.newInstance(output);
     writeTo(codedOutput);
     codedOutput.flush();
   }
 
-  public void writeDelimitedTo(OutputStream output) throws IOException {
+  @Override
+public void writeDelimitedTo(OutputStream output) throws IOException {
     final CodedOutputStream codedOutput = CodedOutputStream.newInstance(output);
     codedOutput.writeRawVarint32(getSerializedSize());
     writeTo(codedOutput);
@@ -194,7 +200,8 @@ public final class UnknownFieldSet implements MessageLite {
   }
 
   /** Get the number of bytes required to encode this set. */
-  public int getSerializedSize() {
+  @Override
+public int getSerializedSize() {
     int result = 0;
     for (final Map.Entry<Integer, Field> entry : fields.entrySet()) {
       result += entry.getValue().getSerializedSize(entry.getKey());
@@ -227,7 +234,8 @@ public final class UnknownFieldSet implements MessageLite {
     return result;
   }
 
-  public boolean isInitialized() {
+  @Override
+public boolean isInitialized() {
     // UnknownFieldSets do not have required fields, so they are always
     // initialized.
     return true;
@@ -257,11 +265,13 @@ public final class UnknownFieldSet implements MessageLite {
     return newBuilder().mergeFrom(input).build();
   }
 
-  public Builder newBuilderForType() {
+  @Override
+public Builder newBuilderForType() {
     return newBuilder();
   }
 
-  public Builder toBuilder() {
+  @Override
+public Builder toBuilder() {
     return newBuilder().mergeFrom(this);
   }
 
@@ -328,7 +338,8 @@ public final class UnknownFieldSet implements MessageLite {
      * in undefined behavior and can cause a {@code NullPointerException} to be
      * thrown.
      */
-    public UnknownFieldSet build() {
+    @Override
+	public UnknownFieldSet build() {
       getFieldBuilder(0);  // Force lastField to be built.
       final UnknownFieldSet result;
       if (fields.isEmpty()) {
@@ -340,7 +351,8 @@ public final class UnknownFieldSet implements MessageLite {
       return result;
     }
 
-    public UnknownFieldSet buildPartial() {
+    @Override
+	public UnknownFieldSet buildPartial() {
       // No required fields, so this is the same as build().
       return build();
     }
@@ -352,7 +364,8 @@ public final class UnknownFieldSet implements MessageLite {
           new UnknownFieldSet(fields));
     }
 
-    public UnknownFieldSet getDefaultInstanceForType() {
+    @Override
+	public UnknownFieldSet getDefaultInstanceForType() {
       return UnknownFieldSet.getDefaultInstance();
     }
 
@@ -363,7 +376,8 @@ public final class UnknownFieldSet implements MessageLite {
     }
 
     /** Reset the builder to an empty set. */
-    public Builder clear() {
+    @Override
+	public Builder clear() {
       reinitialize();
       return this;
     }
@@ -455,7 +469,8 @@ public final class UnknownFieldSet implements MessageLite {
      * Parse an entire message from {@code input} and merge its fields into
      * this set.
      */
-    public Builder mergeFrom(final CodedInputStream input) throws IOException {
+    @Override
+	public Builder mergeFrom(final CodedInputStream input) throws IOException {
       while (true) {
         final int tag = input.readTag();
         if (tag == 0 || !mergeFieldFrom(tag, input)) {
@@ -504,7 +519,8 @@ public final class UnknownFieldSet implements MessageLite {
      * set being built.  This is just a small wrapper around
      * {@link #mergeFrom(CodedInputStream)}.
      */
-    public Builder mergeFrom(final ByteString data)
+    @Override
+	public Builder mergeFrom(final ByteString data)
         throws InvalidProtocolBufferException {
       try {
         final CodedInputStream input = data.newCodedInput();
@@ -525,7 +541,8 @@ public final class UnknownFieldSet implements MessageLite {
      * set being built.  This is just a small wrapper around
      * {@link #mergeFrom(CodedInputStream)}.
      */
-    public Builder mergeFrom(final byte[] data)
+    @Override
+	public Builder mergeFrom(final byte[] data)
         throws InvalidProtocolBufferException {
       try {
         final CodedInputStream input = CodedInputStream.newInstance(data);
@@ -546,14 +563,16 @@ public final class UnknownFieldSet implements MessageLite {
      * set being built.  This is just a small wrapper around
      * {@link #mergeFrom(CodedInputStream)}.
      */
-    public Builder mergeFrom(final InputStream input) throws IOException {
+    @Override
+	public Builder mergeFrom(final InputStream input) throws IOException {
       final CodedInputStream codedInput = CodedInputStream.newInstance(input);
       mergeFrom(codedInput);
       codedInput.checkLastTagWas(0);
       return this;
     }
 
-    public boolean mergeDelimitedFrom(InputStream input)
+    @Override
+	public boolean mergeDelimitedFrom(InputStream input)
         throws IOException {
       final int firstByte = input.read();
       if (firstByte == -1) {
@@ -565,21 +584,24 @@ public final class UnknownFieldSet implements MessageLite {
       return true;
     }
 
-    public boolean mergeDelimitedFrom(
+    @Override
+	public boolean mergeDelimitedFrom(
         InputStream input,
         ExtensionRegistryLite extensionRegistry) throws IOException {
       // UnknownFieldSet has no extensions.
       return mergeDelimitedFrom(input);
     }
 
-    public Builder mergeFrom(
+    @Override
+	public Builder mergeFrom(
         CodedInputStream input,
         ExtensionRegistryLite extensionRegistry) throws IOException {
       // UnknownFieldSet has no extensions.
       return mergeFrom(input);
     }
 
-    public Builder mergeFrom(
+    @Override
+	public Builder mergeFrom(
         ByteString data,
         ExtensionRegistryLite extensionRegistry)
         throws InvalidProtocolBufferException {
@@ -587,7 +609,8 @@ public final class UnknownFieldSet implements MessageLite {
       return mergeFrom(data);
     }
 
-    public Builder mergeFrom(byte[] data, int off, int len)
+    @Override
+	public Builder mergeFrom(byte[] data, int off, int len)
         throws InvalidProtocolBufferException {
       try {
         final CodedInputStream input =
@@ -604,7 +627,8 @@ public final class UnknownFieldSet implements MessageLite {
       }
     }
 
-    public Builder mergeFrom(
+    @Override
+	public Builder mergeFrom(
         byte[] data,
         ExtensionRegistryLite extensionRegistry)
         throws InvalidProtocolBufferException {
@@ -612,7 +636,8 @@ public final class UnknownFieldSet implements MessageLite {
       return mergeFrom(data);
     }
 
-    public Builder mergeFrom(
+    @Override
+	public Builder mergeFrom(
         byte[] data, int off, int len,
         ExtensionRegistryLite extensionRegistry)
         throws InvalidProtocolBufferException {
@@ -620,14 +645,16 @@ public final class UnknownFieldSet implements MessageLite {
       return mergeFrom(data, off, len);
     }
 
-    public Builder mergeFrom(
+    @Override
+	public Builder mergeFrom(
         InputStream input,
         ExtensionRegistryLite extensionRegistry) throws IOException {
       // UnknownFieldSet has no extensions.
       return mergeFrom(input);
     }
 
-    public boolean isInitialized() {
+    @Override
+	public boolean isInitialized() {
       // UnknownFieldSets do not have required fields, so they are always
       // initialized.
       return true;

@@ -102,7 +102,8 @@ abstract public class TPrimitiveHash extends THash {
      *
      * @return the physical capacity of the hash table.
      */
-    public int capacity() {
+    @Override
+	public int capacity() {
         return _states.length;
     }
 
@@ -112,7 +113,8 @@ abstract public class TPrimitiveHash extends THash {
      *
      * @param index an <code>int</code> value
      */
-    protected void removeAt( int index ) {
+    @Override
+	protected void removeAt( int index ) {
         _states[index] = REMOVED;
         super.removeAt( index );
     }
@@ -125,7 +127,8 @@ abstract public class TPrimitiveHash extends THash {
      * @param initialCapacity an <code>int</code> value
      * @return the actual capacity chosen
      */
-    protected int setUp( int initialCapacity ) {
+    @Override
+	protected int setUp( int initialCapacity ) {
         int capacity;
 
         capacity = super.setUp( initialCapacity );

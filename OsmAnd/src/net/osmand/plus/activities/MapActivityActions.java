@@ -77,7 +77,8 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	protected void addFavouritePoint(final double latitude, final double longitude){
-		mapActivity.showDialog(DIALOG_ADD_FAVORITE,enhance(dialogBundle,latitude,longitude));
+		enhance(dialogBundle,latitude,longitude);
+		mapActivity.showDialog(DIALOG_ADD_FAVORITE);
 	}
 	
 	private Bundle enhance(Bundle aBundle, double latitude,	double longitude) {
@@ -119,7 +120,7 @@ public class MapActivityActions implements DialogProvider {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				mapActivity.showDialog(DIALOG_REPLACE_FAVORITE, dialogBundle);
+				mapActivity.showDialog(DIALOG_REPLACE_FAVORITE);
 			}
 			
 		});
@@ -179,7 +180,8 @@ public class MapActivityActions implements DialogProvider {
 	}
 	
     protected void addWaypoint(final double latitude, final double longitude){
-    	mapActivity.showDialog(DIALOG_ADD_WAYPOINT, enhance(dialogBundle,latitude,longitude));
+    	enhance(dialogBundle,latitude,longitude);
+    	mapActivity.showDialog(DIALOG_ADD_WAYPOINT);
     }
     
     private Dialog createAddWaypointDialog(final Bundle args) {
@@ -204,7 +206,8 @@ public class MapActivityActions implements DialogProvider {
     }
     
     protected void reloadTile(final int zoom, final double latitude, final double longitude){
-    	mapActivity.showDialog(DIALOG_RELOAD_TITLE, enhance(enhance(dialogBundle,latitude,longitude),zoom));
+    	enhance(enhance(dialogBundle,latitude,longitude),zoom);
+    	mapActivity.showDialog(DIALOG_RELOAD_TITLE);
     }
 
     
@@ -322,7 +325,8 @@ public class MapActivityActions implements DialogProvider {
     }
     
     protected void shareLocation(final double latitude, final double longitude, int zoom){
-    	mapActivity.showDialog(DIALOG_SHARE_LOCATION, enhance(enhance(dialogBundle,latitude,longitude),zoom));
+    	enhance(enhance(dialogBundle,latitude,longitude),zoom);
+    	mapActivity.showDialog(DIALOG_SHARE_LOCATION);
     }
     
     private Dialog createShareLocationDialog(final Bundle args) {
@@ -367,7 +371,7 @@ public class MapActivityActions implements DialogProvider {
     }
     
     protected void aboutRoute() {
-    	mapActivity.showDialog(DIALOG_ABOUT_ROUTE,dialogBundle);
+    	mapActivity.showDialog(DIALOG_ABOUT_ROUTE);
     }
     
     private void prepareAboutRouteDialog(Dialog dlg, Bundle args) {
@@ -398,16 +402,22 @@ public class MapActivityActions implements DialogProvider {
 		return builder.create();
     }
     
-    protected void getDirections(final double lat, final double lon, boolean followEnabled){
+    private boolean checkPointToNavigate(){
     	MapActivityLayers mapLayers = mapActivity.getMapLayers();
-    	final OsmandSettings settings = OsmandSettings.getOsmandSettings(mapActivity);
-    	final RoutingHelper routingHelper = mapActivity.getRoutingHelper();
     	if(mapLayers.getNavigationLayer().getPointToNavigate() == null){
 			Toast.makeText(mapActivity, R.string.mark_final_location_first, Toast.LENGTH_LONG).show();
-			return;
+			return false;
 		}
+    	return true;
+    }
+    
+    protected void getDirections(final double lat, final double lon, boolean followEnabled){
+    	
+    	final OsmandSettings settings = OsmandSettings.getOsmandSettings(mapActivity);
+    	final RoutingHelper routingHelper = mapActivity.getRoutingHelper();
     	
     	Builder builder = new AlertDialog.Builder(mapActivity);
+    	
     	
     	View view = mapActivity.getLayoutInflater().inflate(R.layout.calculate_route, null);
     	final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
@@ -415,7 +425,7 @@ public class MapActivityActions implements DialogProvider {
     	buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
     	buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
     	ApplicationMode appMode = settings.getApplicationMode();
-    	for(int i=0; i< buttons.length; i++){
+		for (int i = 0; i < buttons.length; i++) {
     		if(buttons[i] != null){
     			final int ind = i;
     			ToggleButton b = buttons[i];
@@ -456,6 +466,9 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				ApplicationMode mode = getAppMode(buttons, settings);
+				if(!checkPointToNavigate()){
+					return;
+				}
 				Location location = new Location("map"); //$NON-NLS-1$
 				location.setLatitude(lat);
 				location.setLongitude(lon);
@@ -470,6 +483,9 @@ public class MapActivityActions implements DialogProvider {
     	DialogInterface.OnClickListener followCall = new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				if(!checkPointToNavigate()){
+					return;
+				}
 				ApplicationMode mode = getAppMode(buttons, settings);
 				// change global settings
 				boolean changed = settings.APPLICATION_MODE.set(mode);
@@ -607,7 +623,7 @@ public class MapActivityActions implements DialogProvider {
     }
 
 	public void saveDirections() {
-		mapActivity.showDialog(DIALOG_SAVE_DIRECTIONS,dialogBundle);
+		mapActivity.showDialog(DIALOG_SAVE_DIRECTIONS);
 	}
 	
 	private Dialog createSaveDirections() {
@@ -674,7 +690,9 @@ public class MapActivityActions implements DialogProvider {
 		
 	}
 
-	public Dialog onCreateDialog(int id, Bundle args) {
+	@Override
+	public Dialog onCreateDialog(int id) {
+		Bundle args = dialogBundle;
 		switch (id) {
 			case DIALOG_ADD_FAVORITE:
 				return createAddFavouriteDialog(args);
@@ -694,7 +712,9 @@ public class MapActivityActions implements DialogProvider {
 		return null;
 	}
 
-	public void onPrepareDialog(int id, Dialog dialog, Bundle args) {
+	@Override
+	public void onPrepareDialog(int id, Dialog dialog) {
+		Bundle args = dialogBundle;
 		switch (id) {
 			case DIALOG_ADD_FAVORITE:
 				prepareAddFavouriteDialog(dialog,args);

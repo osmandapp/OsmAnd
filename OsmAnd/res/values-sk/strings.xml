@@ -1,5 +1,20 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="pref_vector_rendering">Vektorové vykresľovanie</string>
+	<string name="pref_overlay">Prekrývacia/podkladová</string>
+	<string name="pref_raster_map">Rastrová mapa</string>
+	<string name="pref_vector_map">Vektorová mapa</string>
+	<string name="delete_confirmation_title">Mazanie</string>
+	<string name="delete_confirmation_msg">Naozaj chcete zmazať %1$s?</string>
+	<string name="city_type_suburb">Mestská časť</string>
+	<string name="city_type_hamlet">Osada</string>
+	<string name="city_type_village">Obec</string>
+	<string name="city_type_town">Mesto</string>
+	<string name="city_type_city">Veľkomesto</string>
+	<string name="layer_poi_label">POI popisy</string>
+	<string name="auto_follow_route_navigation_descr">Povoliť autom. nasledovanie pozície iba v režime navigácie.</string>
+	<string name="auto_follow_route_navigation">Autom. nasledovanie pri navigácii</string>
+	<string name="auto_follow_location_enabled">Automatické nasledovanie je povolené.</string>
 	<string name="animate_route_off">Vypnúť animáciu</string>
 	<string name="animate_route">Zapnúť animáciu</string>
 	
@@ -30,8 +45,8 @@
 	
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="auto_follow_route_never">Nikdy</string>
-	<string name="choose_auto_follow_route">Vybrať nastavenia automatického nasledovania</string>
-	<string name="choose_auto_follow_route_descr">Výber časového intervalu na nasledovanie pozície na mape</string>
+	<string name="choose_auto_follow_route">Nastavenia autom. nasledovania</string>
+	<string name="choose_auto_follow_route_descr">Výber časového intervalu pre nasledovanie pozície na mape</string>
 	<string name="search_select_point">Vybrať</string>
 	<string name="local_index_description">Stiahnite nové, zálohujte alebo zmažte existujúce údaje. \nAktuálne offline údaje v zariadení (%1$s dostupných):</string>
 	<string name="search_position_current_location_search">Hľadám umiestnenie...</string>

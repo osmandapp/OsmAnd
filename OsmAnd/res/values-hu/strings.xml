@@ -1,7 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-<string name="animate_route_off">Animate off</string>
-<string name="animate_route">Animate on</string>
+<string name="delete_confirmation_title">Törlés</string>
+<string name="delete_confirmation_msg">Biztosan törlöd: %1$s?</string>
+<string name="city_type_suburb">településrész</string>
+<string name="city_type_hamlet">falucska</string>
+<string name="city_type_village">község</string>
+<string name="city_type_town">város</string>
+<string name="city_type_city">város</string>
+<string name="layer_poi_label">POI feliratok</string>
+<string name="auto_follow_route_navigation_descr">Csak navigáció közben követi automatikusan a pozíciódat.</string>
+<string name="auto_follow_route_navigation">Automatikus követés navigáláskor</string>
+<string name="auto_follow_location_enabled">Automatikus követés engedélyezve.</string>
+<string name="animate_route_off">Szimuláció ki</string>
+<string name="animate_route">Szimuláció be</string>
 	
 <string name="tip_recent_changes_0_6_8_t">A 0.6.8 verzió változásai:
 \n\t- Teljesen újratervezett kereső (POI, cím)! Az új kereső sokkal gyorsabb és lehetőséget ad különféle kiindulópontok szerinti kereséshez.
@@ -418,13 +429,13 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="use_trackball">Trackball használata</string>
 	<string name="background_service_wait_int_descr">Idő amíg a sikeres helymeghatározásra várhatunk, ez után a helymeghatározó szolgáltatás újraindul.</string>
 	<string name="background_service_wait_int">Helymeghatározási időtúllépés</string>
-	<string name="service_stop_background_service">Háttér navigációs szolgáltatás kikapcsolása</string>
+	<string name="service_stop_background_service">Navigációs háttérszolgáltatás kikapcsolása</string>
 	<string name="where_am_i">Hol vagyok?</string>
 	<string name="process_navigation_service">OsmAnd navigációs szolgáltatás</string>
 	<string name="network_provider">Hálózat</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">másodperc</string>
-	<string name="int_min">min.</string>
+	<string name="int_min">perc</string>
 	<string name="background_service_int_descr">Helymeghatározási időköz megadása a háttérszolgáltatásnak</string>
 	<string name="background_service_int">Helymeghatározási időköz</string>
 	<string name="background_service_provider_descr">Helymeghatározási szolgáltatás kiválasztása a háttérszolgáltatáshoz</string>
@@ -577,7 +588,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
     <string name="user_password_descr">OSM jelszó</string>
     <string name="user_password">Felhasználói jelszó</string>
     <string name="osm_settings_descr">OSM beállítás: OSM bejelentkezés</string>
-    <string name="monitor_preferences_descr">Nyomvonal beállítás: útvonal mentése</string>
+    <string name="monitor_preferences_descr">Rögzített útvonal mentése</string>
     <string name="data_settings_descr">Nyelv kiválasztása, letölti/újraolvassa az adatokat</string>
     <string name="map_preferences_descr">Térkép beállítás: térkép forrása, forgatás, középpont, kijelző helyzete</string>
     <string name="data_settings">Adat</string>
@@ -591,8 +602,8 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
     <string name="save_current_track_descr">Jelenlegi útvonal SD kártyára mentése</string>
     <string name="save_current_track">Jelenlegi útvonal mentése</string>
     <string name="save_track_interval_descr">Időintervallum választás az útvonal mentéshez</string>
-    <string name="save_track_interval">Útvonal mentés intervalluma</string>
-    <string name="monitor_preferences">Nyomvonalak</string>
+    <string name="save_track_interval">Útvonalmentés intervalluma</string>
+    <string name="monitor_preferences">Útvonalrögzítés</string>
     <string name="save_track_to_gpx_descrp">Az útvonalak napi csoportosításban kerülnek mentésre a track könyvtárba</string>
     <string name="save_track_to_gpx">Útvonal mentése GPX-be</string>
     <string name="navigate_to">Vezess ide</string>

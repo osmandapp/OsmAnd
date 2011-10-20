@@ -20,7 +20,8 @@ import rtree.*;
 */
 public class CompElmtX implements Comparator
 {
-  public int compare(Object o1, Object o2)
+  @Override
+public int compare(Object o1, Object o2)
   {
     if(o1 instanceof Element && o2 instanceof Element){
       Rect r1 = ((Element)o1).getRect();
@@ -45,7 +46,8 @@ public class CompElmtX implements Comparator
                                    +o1.getClass().getName() + " o2 " + o2.getClass().getName());
     }
   }
-  public boolean equals(Object o)
+  @Override
+public boolean equals(Object o)
   {
     return true;
   }

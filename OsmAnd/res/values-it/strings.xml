@@ -1,10 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="layer_poi_label">POI labels</string>
+	<string name="auto_follow_route_navigation_descr">Abilita l\'auto-follow solo durante la navigazione.</string>
+	<string name="auto_follow_route_navigation">Navigazione auto-follow</string>
+	<string name="auto_follow_location_enabled">Auto follow e\' attivo.</string>
+	<string name="animate_route_off">Animazione off</string>
+	<string name="animate_route">Animazione on</string>
+
+	<string name="tip_recent_changes_0_6_8_t">Modifiche 0.6.8 :
+\n\t- Ridisegnato il menu\' ricerca (PDI, Indirizzi)! Ora la ricerca dei civici e\' molto piu\' veloce.
+\n\t- Inserita la ricerda PDI per nome in vaste aree (paesi)  
+\n\t- Fix map screen per tablets (Issue 641)
+\n\t- Opzione Auto-follow percorso (Issue 356)
+\n\t- Navigazione GPX spostata in \'Percorsi\' e \'Salva direzioni\' spostato in \'Sul percorso\'
+\n\t- i dati PDI ora sono inseriti nel file .obf (scaricati dopo l\' 01/10/11) 
+\n\t- Fix Voce (consigliato l\'uso di it-tts al posto di it-chiara) 
+\n\t- Piccole migliorie
+	</string>
+	<string name="file_can_not_be_renamed">Il file non puo\' essere rinominato.</string>
+	<string name="file_with_name_already_exists">Esiste gia\' un file con lo stesso nome.</string>
+	<string name="gpx_navigation">Percorso GPX</string>
+	<string name="poi_query_by_name_matches_categories">Trovate delle categorie pdi che rispecchiano la ricerca :</string>
+	<string name="data_to_search_poi_not_available">Dati locali contenenti PDI non presenti.</string>
+	<string name="poi_filter_by_name">Ricerca per nome</string>
+	<string name="old_poi_file_should_be_deleted">Il file dati PDI \'%1$s\' non e\' piu\' in uso e puo\' essere cancellato.</string>
+	<string name="update_poi_file_not_found">File per registrare i cambiamenti ai PDI non e\' stato trovato ne\' creato.</string>
+	<string name="update_poi_does_not_change_indexes">Cambiare PDI nell\'applicazione non modifica i file scaricati, ma le modifiche sono salvate in un file apposito.</string>
+
+	<string name="button_upgrade_osmandplus">Aggiorna Osmand+</string>
+	<string name="map_version_changed_info">Sul server ci sono file mappa incompatibili con l\'attuale versione utilizzata. Per scaricarli ed utilizzarli aggiorna l\'applicazione.</string>
+
+	<string name="local_index_mi_rename">Rinomina</string>
+	<string name="show_gpx_route">Visualizza</string>
+	<string name="poi_filter_nominatim">Online Nominatim</string>
+	<string name="auto_follow_route_never">Mai</string>
+	<string name="choose_auto_follow_route">Impostazioni auto-follow</string>
+	<string name="choose_auto_follow_route_descr">Scegli intervallo di tempo per seguire automaticamente la posizione attuale</string>
 	<string name="search_select_point">Seleziona</string>
 	<string name="local_index_description">Scarica nuovi dati, sposta, salva o cancella dati esistenti. \nDati attualmente nel dispositivo (%1$s disponibile):</string>
 	<string name="search_position_current_location_search">Cerca posizione...</string>
 	<string name="search_position_current_location_found">Posizione [Trovata]</string>
-	<string name="search_position_address">Address...</string>
+	<string name="search_position_address">Indirizzi...</string>
 	<string name="search_position_favorites">Favoriti...</string>
 	<string name="search_position_undefined">Non definito</string>
 	<string name="search_position_fixed">Punto</string>
@@ -199,7 +235,7 @@
 \n\tPuoi cambiare i profili su \'Menu\' -> \'Impostazioni\' -> \'Modo applicazione\', o mentre crei un percorso.</string>
 
 	<string name="tip_navigation">Navigazione</string>
-	<string name="tip_navigation_t">\tPrima di iniziare la navigazione (routing) devi selezionare un punto di destinazione. Dopo averlo selezionato premi \'Menu\' -> \'Direzioni\' sulla mappa e seleziona il tipo di navigazione.</string>
+	<string name="tip_navigation_t">\tPrima di iniziare la navigazione (routing) devi selezionare un punto di destinazione. Dopo averlo selezionato premi \'Menu\' -> \'Percorsi\' sulla mappa e seleziona il tipo di navigazione.</string>
 
 	<string name="tip_select_destination_point">Seleziona Punto Destinazione</string>
 	<string name="tip_select_destination_point_t">\tPuoi selezionare un punto di destinazione direttamente sulla mappa (menu contestuale, poi \'Naviga verso\'), o in qualsiasi ricerca.
@@ -324,7 +360,7 @@
     <string name="index_settings_descr">Download/gestione mappe e dati offline</string>
     <string name="index_settings">Dati offline</string>
 	<string name="osmand_service">Servizio in background</string>
-	<string name="osmand_service_descr">Attiva il servizio in background service per usare OsmAnd a schermo spento</string>
+	<string name="osmand_service_descr">Attiva il servizio in background per usare OsmAnd a schermo spento</string>
 	<string name="fast_route_mode">Percorso più Veloce</string>
 	<string name="fast_route_mode_descr">Abilita per calc. il percorso più veloce; disabilita per il percorso più corto</string>
 	<string name="tiles_to_download_estimated_size">Per lo zoom {0} download {1} tiles ({2} MB)</string>
@@ -445,7 +481,7 @@
 	<string name="route_tshl">Svoltare stretto a sinistra e continuare</string>
 	<string name="route_tsll">Svoltare leggermente a sinistra e continuare</string>
 	<string name="route_tu">Fare inversione a U e continuare</string>
-	<string name="route_head">Andare</string>
+	<string name="route_head">Andare dritto per</string>
 	<string name="first_time_continue">Continuare</string>
 	<string name="first_time_download">Download indici</string>
 	<string name="first_time_msg">Grazie per aver scelto OsmAnd. \nPer utilizzare tutte le caratteristiche dell\'applicazione sono necessari i file di indice, che possono essere scaricati (Impostazioni/Dati) o creati da voi. Sara\' poi possibile :cercare indirizzi, PDI, trasporti pubblici.</string>
@@ -526,7 +562,7 @@
 	<string name="recalculate_route_to_your_location">Ricalcolo del percorso relativamente alla vostra posizione</string>
 	<string name="follow_route">Seguire il percorso</string>
 	<string name="mark_final_location_first">Selezionare prima una destinazione</string>
-	<string name="get_directions">Itinerari</string>
+	<string name="get_directions">Percorsi</string>
     <string name="show_gps_status">Visualizzare lo stato del gps</string>
 	<string name="opening_hours">Orari di apertura</string>
 	<string name="opening_changeset">Apertura...</string>
@@ -565,7 +601,7 @@
     <string name="user_password_descr">Inserire password OSM</string>
     <string name="user_password">Password utente</string>
     <string name="osm_settings_descr">Specificare impostazioni openstreetmap.org: osm login</string>
-    <string name="monitor_preferences_descr">Specificare impostazioni monitor: salvare la traccia</string>
+    <string name="monitor_preferences_descr">Specificare impostazioni per tracce GPX: salvare la traccia</string>
     <string name="data_settings_descr">Specificare impostazioni dati: lingua, aggiorna dati</string>
     <string name="data_settings">Dati</string>
     <string name="map_preferences_descr">Specificare impostazioni mappa: fonte, rotazione, posizione marker, orientazione schermo</string>
@@ -578,10 +614,10 @@
     <string name="settings">Impostazioni</string>
     <string name="save_current_track_descr">Salvare la traccia corrente sulla scheda SD</string>
     <string name="save_current_track">Salvare la traccia corrente</string>
-    <string name="save_track_interval_descr">Scegliere l\'intervallo di tempo per salvare le traccie</string>
-    <string name="save_track_interval">Salvare intervallo traccie</string>
+    <string name="save_track_interval_descr">Scegliere l\'intervallo di tempo per salvare le tracce</string>
+    <string name="save_track_interval">Intervallo di salvataggio</string>
     <string name="monitor_preferences">Monitoraggio</string>
-    <string name="save_track_to_gpx_descrp">Le traccie saranno salvate nella directory traccie divise per giorno</string>
+    <string name="save_track_to_gpx_descrp">Le tracce saranno salvate nella directory tracce divise per giorno</string>
     <string name="save_track_to_gpx">Salva traccia in GPX</string>
     <string name="navigate_to">Naviga verso</string>
     <string name="update_tile">Aggiorna mappa</string>

@@ -6,18 +6,30 @@ LOG_DIR="$DIRECTORY"/logs
 DATE=$(date +%d-%m-%y)
 CLOG_FILE="$LOG_DIR/${DATE}.log"
 LOG_FILE="$LOG_DIR/tmp.log"
+LOCK_FILE="$DIRECTORY"/build.lock
+
+if [ -f $LOCK_FILE ]; then
+  exit
+fi
+touch $LOCK_FILE
 
 mkdir -p $LOG_DIR
 echo > $LOG_FILE
 touch  $CLOG_FILE
 
-#git pull --rebase 2>&1 >>$LOG_FILE
+cd "${DIRECTORY}"
+git pull --rebase >>$LOG_FILE 2>&1
 
 # 1. Update git directory
 "${DIRECTORY}/update_git.sh" >>$LOG_FILE 2>&1
 
 # 2. Go through branches and generates builds
 "${DIRECTORY}/build_branches.sh" >>$LOG_FILE 2>&1
+
+# exit if nothing was changed
+# if [ $? = 0 ]; then
+#   exit 0
+# fi
 
 # 3. upload to ftp server 
 #"${DIRECTORY}/upload_ftp.sh" 2>&1 >>$LOG_FILE
@@ -32,16 +44,16 @@ touch  $CLOG_FILE
 "${DIRECTORY}/update_site.sh" >>$LOG_FILE 2>&1
 
 cat $LOG_FILE >> $CLOG_FILE
-BUILD=`grep FAILED $LOG_FILE | wc -l`
+BUILD=`ls *.fixed *.failed 2> /dev/null | wc -l`
 if [ ! $BUILD -eq 0 ]; then
-  # if some failure, print out complete log
-  echo "BUILD FAILED:"
+  # if some status change, print out complete log
+  echo "Builds status changed"
+  echo "-------------"
+  echo `ls *.fixed *.failed 2> /dev/null`
+  echo "-------------"
+  echo "Complete log file:"
   echo "-------------"
   cat $LOG_FILE
-  touch last_build_failed
-else
-  if [ -f last_build_failed ]; then
-     echo "Build fixed"
-     rm last_build_failed
-  fi
 fi
+
+rm -f $LOCK_FILE

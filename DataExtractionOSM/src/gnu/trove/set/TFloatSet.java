@@ -53,7 +53,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      *
      * @return the value that represents null
      */
-    float getNoEntryValue();
+    @Override
+	float getNoEntryValue();
 
 
     /**
@@ -63,7 +64,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      *
      * @return the number of elements in this set (its cardinality)
      */
-    int size();
+    @Override
+	int size();
 
     
     /**
@@ -71,7 +73,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      *
      * @return <tt>true</tt> if this set contains no elements
      */
-    boolean isEmpty();
+    @Override
+	boolean isEmpty();
 
 
     /**
@@ -80,7 +83,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      * @param entry an <code>float</code> value
      * @return true if the set contains the specified element.
      */
-    boolean contains( float entry );
+    @Override
+	boolean contains( float entry );
 
 
     /**
@@ -89,7 +93,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      *
      * @return an <code>TFloatIterator</code> value
      */
-    TFloatIterator iterator();
+    @Override
+	TFloatIterator iterator();
 
 
     /**
@@ -108,7 +113,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      *
      * @return an array containing all the elements in this set
      */
-    float[] toArray();
+    @Override
+	float[] toArray();
 
 
     /**
@@ -134,7 +140,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      * @return an <tt>float[]</tt> containing all the elements in this set
      * @throws NullPointerException if the specified array is null
      */
-    float[] toArray( float[] dest );
+    @Override
+	float[] toArray( float[] dest );
 
 
     /**
@@ -143,7 +150,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      * @param entry a <code>float</code> value
      * @return true if the set was modified by the add operation
      */
-    boolean add( float entry );
+    @Override
+	boolean add( float entry );
 
 
     /**
@@ -152,7 +160,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      * @param entry an <code>float</code> value
      * @return true if the set was modified by the remove operation.
      */
-    boolean remove( float entry );
+    @Override
+	boolean remove( float entry );
 
 
     /**
@@ -162,7 +171,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      * @param collection a <code>Collection</code> value
      * @return true if all elements were present in the set.
      */
-    boolean containsAll( Collection<?> collection );
+    @Override
+	boolean containsAll( Collection<?> collection );
 
 
     /**
@@ -172,7 +182,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      * @param collection a <code>TFloatCollection</code> value
      * @return true if all elements were present in the set.
      */
-    boolean containsAll( TFloatCollection collection );
+    @Override
+	boolean containsAll( TFloatCollection collection );
 
 
     /**
@@ -182,7 +193,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      * @param array as <code>array</code> of float primitives.
      * @return true if all elements were present in the set.
      */
-    boolean containsAll( float[] array );
+    @Override
+	boolean containsAll( float[] array );
 
 
     /**
@@ -191,7 +203,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      * @param collection a <code>Collection</code> value
      * @return true if the set was modified by the add all operation.
      */
-    boolean addAll( Collection<? extends Float> collection );
+    @Override
+	boolean addAll( Collection<? extends Float> collection );
 
 
     /**
@@ -200,7 +213,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      * @param collection a <code>TFloatCollection</code> value
      * @return true if the set was modified by the add all operation.
      */
-    boolean addAll( TFloatCollection collection );
+    @Override
+	boolean addAll( TFloatCollection collection );
 
 
     /**
@@ -209,7 +223,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      * @param array a <code>array</code> of float primitives.
      * @return true if the set was modified by the add all operation.
      */
-    boolean addAll( float[] array );
+    @Override
+	boolean addAll( float[] array );
 
 
     /**
@@ -219,7 +234,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      * @param collection a <code>Collection</code> value
      * @return true if the set was modified by the retain all operation
      */
-    boolean retainAll( Collection<?> collection );
+    @Override
+	boolean retainAll( Collection<?> collection );
 
 
     /**
@@ -229,7 +245,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      * @param collection a <code>TFloatCollection</code> value
      * @return true if the set was modified by the retain all operation
      */
-    boolean retainAll( TFloatCollection collection );
+    @Override
+	boolean retainAll( TFloatCollection collection );
 
 
     /**
@@ -239,7 +256,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      * @param array an <code>array</code> of float primitives.
      * @return true if the set was modified by the retain all operation
      */
-    boolean retainAll( float[] array );
+    @Override
+	boolean retainAll( float[] array );
 
 
     /**
@@ -248,7 +266,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      * @param collection a <code>Collection</code> value
      * @return true if the set was modified by the remove all operation.
      */
-    boolean removeAll( Collection<?> collection );
+    @Override
+	boolean removeAll( Collection<?> collection );
 
 
     /**
@@ -257,7 +276,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      * @param collection a <code>TFloatCollection</code> value
      * @return true if the set was modified by the remove all operation.
      */
-    boolean removeAll( TFloatCollection collection );
+    @Override
+	boolean removeAll( TFloatCollection collection );
 
 
     /**
@@ -266,13 +286,15 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      * @param array an <code>array</code> of float primitives.
      * @return true if the set was modified by the remove all operation.
      */
-    public boolean removeAll( float[] array );
+    @Override
+	public boolean removeAll( float[] array );
 
 
     /**
      * Empties the set.
      */
-    void clear();
+    @Override
+	void clear();
 
 
     /**
@@ -282,7 +304,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      * @return false if the loop over the set terminated because
      * the procedure returned false for some value.
      */
-    boolean forEach( TFloatProcedure procedure );
+    @Override
+	boolean forEach( TFloatProcedure procedure );
 
 
     // Comparison and hashing
@@ -299,7 +322,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      * @param o object to be compared for equality with this set
      * @return <tt>true</tt> if the specified object is equal to this set
      */
-    boolean equals( Object o );
+    @Override
+	boolean equals( Object o );
 
 
     /**
@@ -314,7 +338,8 @@ public interface TFloatSet extends TFloatCollection, Serializable {
      * @see Object#equals(Object)
      * @see Set#equals(Object)
      */
-    int hashCode();
+    @Override
+	int hashCode();
 
 
 } // THashSet

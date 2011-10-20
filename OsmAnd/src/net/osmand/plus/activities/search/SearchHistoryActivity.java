@@ -1,6 +1,5 @@
 package net.osmand.plus.activities.search;
 
-
 import java.util.List;
 
 import net.osmand.OsmAndFormatter;
@@ -38,12 +37,11 @@ public class SearchHistoryActivity extends ListActivity implements SearchActivit
 		super.onCreate(savedInstanceState);
 		ListView lv = new ListView(this);
 		lv.setId(android.R.id.list);
-		
+
 		setContentView(lv);
-		
+
 		helper = SearchHistoryHelper.getInstance();
-		
-		
+
 		clearButton = new Button(this);
 		clearButton.setText(R.string.clear_all);
 		clearButton.setOnClickListener(new View.OnClickListener() {
@@ -61,39 +59,40 @@ public class SearchHistoryActivity extends ListActivity implements SearchActivit
 
 		});
 	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
 		Intent intent = getIntent();
-		if(intent != null){
+		if (intent != null) {
 			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
 			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
-			if(lat != 0 || lon != 0){
+			if (lat != 0 || lon != 0) {
 				location = new LatLon(lat, lon);
 			}
 		}
-		if(location == null && getParent() instanceof SearchActivity){
+		if (location == null && getParent() instanceof SearchActivity) {
 			location = ((SearchActivity) getParent()).getSearchPoint();
 		}
 		if (location == null) {
 			location = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
 		}
-		
+
 		List<HistoryEntry> historyEntries = helper.getHistoryEntries(this);
-		
+
 		getListView().removeFooterView(clearButton);
 		if (!historyEntries.isEmpty()) {
 			getListView().addFooterView(clearButton);
 		}
 		setListAdapter(new HistoryAdapter(historyEntries));
 	}
-	
+
 	@Override
 	public void locationUpdate(LatLon l) {
 		location = l;
 		((HistoryAdapter) getListAdapter()).notifyDataSetChanged();
 	}
-	
+
 	private boolean onItemLongClick(int pos) {
 		final HistoryEntry entry = ((HistoryAdapter) getListAdapter()).getItem(pos);
 		AlertDialog.Builder builder = new AlertDialog.Builder(SearchHistoryActivity.this);
@@ -104,8 +103,9 @@ public class SearchHistoryActivity extends ListActivity implements SearchActivit
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						if (which == 0) {
-							OsmandSettings.getOsmandSettings(SearchHistoryActivity.this).setMapLocationToShow(entry.getLat(),
-									entry.getLon());
+							OsmandSettings settings = OsmandSettings.getOsmandSettings(SearchHistoryActivity.this);
+							settings.setMapLocationToShow(entry.getLat(), entry.getLon(), settings.getLastKnownMapZoom(), null, entry
+									.getName());
 						} else if (which == 1) {
 							OsmandSettings.getOsmandSettings(SearchHistoryActivity.this).setPointToNavigate(entry.getLat(), entry.getLon(),
 									null);
@@ -117,27 +117,26 @@ public class SearchHistoryActivity extends ListActivity implements SearchActivit
 		builder.show();
 		return true;
 	}
-	
-	
+
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		HistoryEntry model = ((HistoryAdapter)getListAdapter()).getItem(position);
+		HistoryEntry model = ((HistoryAdapter) getListAdapter()).getItem(position);
 		selectModel(model);
 	}
 
 	private void selectModel(HistoryEntry model) {
 		helper.selectEntry(model, this);
-		OsmandSettings.getOsmandSettings(SearchHistoryActivity.this).setMapLocationToShow(model.getLat(), model.getLon());
+		OsmandSettings settings = OsmandSettings.getOsmandSettings(SearchHistoryActivity.this);
+		settings.setMapLocationToShow(model.getLat(), model.getLon(), settings.getLastKnownMapZoom(), null, model.getName());
 		MapActivity.launchMapActivityMoveToTop(this);
 	}
-	
-	
+
 	class HistoryAdapter extends ArrayAdapter<HistoryEntry> {
 
 		public HistoryAdapter(List<HistoryEntry> list) {
 			super(SearchHistoryActivity.this, R.layout.search_history_list_item, list);
 		}
-		
+
 		@Override
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			View row = convertView;
@@ -149,28 +148,28 @@ public class SearchHistoryActivity extends ListActivity implements SearchActivit
 			TextView distanceLabel = (TextView) row.findViewById(R.id.distance_label);
 			ImageButton icon = (ImageButton) row.findViewById(R.id.remove);
 			final HistoryEntry model = getItem(position);
-			if(location != null){
+			if (location != null) {
 				int dist = (int) (MapUtils.getDistance(location, model.lat, model.lon));
 				distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist, SearchHistoryActivity.this));
 			} else {
 				distanceLabel.setText(""); //$NON-NLS-1$
 			}
 			label.setText(model.name);
-			icon.setOnClickListener(new View.OnClickListener(){
+			icon.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					helper.remove(model, SearchHistoryActivity.this);
 					setListAdapter(new HistoryAdapter(helper.getHistoryEntries(SearchHistoryActivity.this)));
 				}
-				
+
 			});
-			View.OnClickListener clickListener = new View.OnClickListener(){
+			View.OnClickListener clickListener = new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					selectModel(model);
 				}
 			};
-			
+
 			View.OnLongClickListener longClickListener = new View.OnLongClickListener() {
 				@Override
 				public boolean onLongClick(View v) {

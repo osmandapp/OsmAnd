@@ -102,6 +102,7 @@ public class TileSourceManager {
 			return tileSize;
 		}
 
+		@Override
 		public String getTileFormat() {
 			return ext;
 		}

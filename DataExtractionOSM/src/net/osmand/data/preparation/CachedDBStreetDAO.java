@@ -9,7 +9,6 @@ import java.util.Set;
 
 import net.osmand.data.Building;
 import net.osmand.data.City;
-import net.osmand.data.preparation.DBStreetDAO.SimpleStreet;
 import net.osmand.osm.Entity;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.Way;
@@ -25,6 +24,7 @@ public class CachedDBStreetDAO extends DBStreetDAO
 		return addressStreetLocalMap.get(createStreetUniqueName(name, city, cityPart)); //$NON-NLS-1$
 	}
 
+	@Override
 	public SimpleStreet findStreet(String name, City city) {
 		return addressStreetLocalMap.get(createStreetUniqueName(name, city)); //$NON-NLS-1$
 	}

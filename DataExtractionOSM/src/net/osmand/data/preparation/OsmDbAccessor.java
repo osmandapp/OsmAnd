@@ -111,6 +111,7 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		return allWays;
 	}
 	
+	@Override
 	public void loadEntityData(Entity e) throws SQLException {
 		if (e.isDataLoaded()) { //data was already loaded, nothing to do
 			return;

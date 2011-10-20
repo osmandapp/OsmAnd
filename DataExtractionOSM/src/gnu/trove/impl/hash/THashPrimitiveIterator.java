@@ -98,7 +98,8 @@ public abstract class THashPrimitiveIterator implements TPrimitiveIterator {
      *
      * @return a <code>boolean</code> value
      */
-    public boolean hasNext() {
+    @Override
+	public boolean hasNext() {
         return nextIndex() >= 0;
     }
 
@@ -109,7 +110,8 @@ public abstract class THashPrimitiveIterator implements TPrimitiveIterator {
      * will leave the underlying data structure in a confused
      * state.
      */
-    public void remove() {
+    @Override
+	public void remove() {
         if (_expectedSize != _hash.size()) {
             throw new ConcurrentModificationException();
         }

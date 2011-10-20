@@ -169,7 +169,9 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 					OsmandMapTileView v = activity.getMapView();
 					v.getAnimatedDraggingThread().startMoving(lat, lon, v.getZoom(), true);
 				} else {
-					OsmandSettings.getOsmandSettings(this).setMapLocationToShow(lat, lon, MessageFormat.format(getString(R.string.search_history_navigate_to), lat, lon));
+					OsmandSettings settings = OsmandSettings.getOsmandSettings(this);
+					settings.setMapLocationToShow(lat, lon, Math.max(12, settings.getLastKnownMapZoom()), 
+							MessageFormat.format(getString(R.string.search_history_navigate_to), lat, lon));
 				}
 			}
 			close();

@@ -152,6 +152,7 @@ public class Amenity extends MapObject {
 	}
 	
 	
+	@Override
 	public void doDataPreparation() {
 		
 	}

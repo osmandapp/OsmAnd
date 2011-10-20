@@ -25,7 +25,8 @@ public class EqualsPred extends Predicate
   //  {
   //    super(p);
   //  }
-  public void relate(Element event, int from, Element[] others, List pairs, int evtSide)
+  @Override
+public void relate(Element event, int from, Element[] others, List pairs, int evtSide)
   {
     //System.out.println("SweepLine.internalLoop : before pairs size : " + pairs.size());
     for(int i=from; 
@@ -54,7 +55,8 @@ public class EqualsPred extends Predicate
   //      return false;
   //    }
   //}
-  public boolean relateMismatch(Element elmt1, Element elmt2, int side)
+  @Override
+public boolean relateMismatch(Element elmt1, Element elmt2, int side)
   {
     try{
       if(elmt1 instanceof NonLeafElement || elmt2 instanceof NonLeafElement)

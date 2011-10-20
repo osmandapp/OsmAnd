@@ -5,27 +5,31 @@
 
 
 	<PreferenceScreen android:key="map_settings" android:title="@string/rendering_settings" android:summary="@string/rendering_settings_descr">
-		<CheckBoxPreference android:summary="@string/map_vector_data_descr" android:title="@string/map_vector_data"
-			android:key="map_vector_data"></CheckBoxPreference>
-		<ListPreference android:title="@string/map_tile_source" android:summary="@string/map_tile_source_descr" android:key="map_tile_sources"></ListPreference>
-		<CheckBoxPreference android:summary="@string/use_english_names_descr" android:title="@string/use_english_names"
-			android:key="use_english_names"></CheckBoxPreference>
-		<CheckBoxPreference android:key="show_more_map_detail" android:title="@string/show_more_map_detail"
-			android:summary="@string/show_more_map_detail_descr"></CheckBoxPreference>
-		<ListPreference android:key="renderer" android:title="@string/renderers" android:summary="@string/renderers_descr"></ListPreference>
-		<ListPreference android:key="daynight_mode" android:title="@string/daynight" android:summary="@string/daynight_descr"></ListPreference>
-		<ListPreference android:title="@string/level_to_switch_vector_raster" android:summary="@string/level_to_switch_vector_raster_descr"
-			android:key="level_to_switch_vector_raster"></ListPreference>
-		<ListPreference android:title="@string/map_overlay" android:summary="@string/map_overlay_descr" android:key="map_overlay"></ListPreference>
-		<net.osmand.plus.views.SeekBarPreference android:key="overlay_transparency" android:defaultValue="0" android:max="255" 
-			android:dialogMessage="@string/modify_transparency" android:title="@string/overlay_transparency" android:summary="@string/overlay_transparency_descr"/>
-		<ListPreference android:title="@string/map_underlay" android:summary="@string/map_underlay_descr" android:key="map_underlay"></ListPreference>
-		<net.osmand.plus.views.SeekBarPreference android:key="map_transparency" android:defaultValue="0" android:max="255" 
-			android:dialogMessage="@string/modify_transparency" android:title="@string/map_transparency" android:summary="@string/map_transparency_descr"/>
-		<CheckBoxPreference android:summary="@string/continuous_rendering_descr" android:title="@string/continuous_rendering"
-			android:key="use_step_by_step_rendering" />
-		<ListPreference android:key="map_text_size" android:title="@string/map_text_size" android:summary="@string/map_text_size_descr"/>
+		<PreferenceCategory android:title="@string/pref_raster_map">
+			<ListPreference android:title="@string/map_tile_source" android:summary="@string/map_tile_source_descr" android:key="map_tile_sources"></ListPreference>
+			<CheckBoxPreference android:key="use_internet_to_download_tiles" android:title="@string/use_internet" android:summary="@string/use_internet_to_download_tile"></CheckBoxPreference>
+			<ListPreference android:title="@string/max_level_download_tile" android:summary="@string/max_level_download_tile_descr"
+				android:key="max_level_download_tile"></ListPreference>
+		</PreferenceCategory>
+		<PreferenceCategory android:title="@string/pref_vector_map">
+			<CheckBoxPreference android:summary="@string/map_vector_data_descr" android:title="@string/map_vector_data"
+				android:key="map_vector_data"></CheckBoxPreference>
+			<ListPreference android:key="renderer" android:title="@string/renderers" android:summary="@string/renderers_descr"></ListPreference>
+			<ListPreference android:title="@string/level_to_switch_vector_raster" android:summary="@string/level_to_switch_vector_raster_descr"
+				android:key="level_to_switch_vector_raster"></ListPreference>
+			<ListPreference android:key="map_text_size" android:title="@string/map_text_size" android:summary="@string/map_text_size_descr"/>
+		</PreferenceCategory>
 		<CheckBoxPreference android:key="use_high_res_maps" android:title="@string/use_high_res_maps" android:summary="@string/use_high_res_maps_descr"></CheckBoxPreference>
+		<PreferenceCategory android:title="@string/pref_overlay">
+			<ListPreference android:title="@string/map_overlay" android:summary="@string/map_overlay_descr" android:key="map_overlay"></ListPreference>
+			<net.osmand.plus.views.SeekBarPreference android:key="overlay_transparency" android:defaultValue="0" android:max="255" 
+				android:dialogMessage="@string/modify_transparency" android:title="@string/overlay_transparency" android:summary="@string/overlay_transparency_descr"/>
+			<ListPreference android:title="@string/map_underlay" android:summary="@string/map_underlay_descr" android:key="map_underlay"></ListPreference>
+			<net.osmand.plus.views.SeekBarPreference android:key="map_transparency" android:defaultValue="0" android:max="255" 
+				android:dialogMessage="@string/modify_transparency" android:title="@string/map_transparency" android:summary="@string/map_transparency_descr"/>
+		</PreferenceCategory>
+		<PreferenceCategory android:title="@string/pref_vector_rendering" android:key="custom_vector_rendering">
+		</PreferenceCategory>
 		
 	</PreferenceScreen>
 
@@ -57,30 +61,29 @@
 		<CheckBoxPreference android:summary="@string/fast_route_mode_descr" android:title="@string/fast_route_mode"
 			android:key="fast_route_mode"></CheckBoxPreference>
 		<ListPreference android:title="@string/voice_provider" android:key="voice_provider" android:summary="@string/voice_provider_descr"></ListPreference>
-		<ListPreference android:key="auto_follow_route" android:title="@string/choose_auto_follow_route"
-			android:summary="@string/choose_auto_follow_route_descr"></ListPreference>
-			
-		<CheckBoxPreference android:summary="@string/auto_follow_route_navigation_descr" android:title="@string/auto_follow_route_navigation"
-			android:key="auto_follow_route_navigation"></CheckBoxPreference>
 		<ListPreference android:key="audio_stream" android:title="@string/choose_audio_stream"
 			android:summary="@string/choose_audio_stream_descr"></ListPreference>
+		<CheckBoxPreference android:summary="@string/auto_follow_route_navigation_descr" android:title="@string/auto_follow_route_navigation"
+			android:key="auto_follow_route_navigation"></CheckBoxPreference>
+		<ListPreference android:key="auto_follow_route" android:title="@string/choose_auto_follow_route"
+			android:summary="@string/choose_auto_follow_route_descr"></ListPreference>
 		<CheckBoxPreference android:summary="@string/use_osmand_routing_service_descr" android:title="@string/use_osmand_routing_service"
 			android:key="use_osmand_routing_service"></CheckBoxPreference>	
 	</PreferenceScreen>
 
 	
 	<PreferenceScreen android:key="general_settings" android:title="@string/general_settings" android:summary="@string/general_settings_descr">
-		<CheckBoxPreference android:key="use_internet_to_download_tiles" android:title="@string/use_internet" android:summary="@string/use_internet_to_download_tile"></CheckBoxPreference>
-		<ListPreference android:title="@string/max_level_download_tile" android:summary="@string/max_level_download_tile_descr"
-			android:key="max_level_download_tile"></ListPreference>
+		<CheckBoxPreference android:summary="@string/use_english_names_descr" android:title="@string/use_english_names"
+			android:key="use_english_names"></CheckBoxPreference>
+		<ListPreference android:key="map_screen_orientation" android:title="@string/map_screen_orientation" android:summary="@string/map_screen_orientation_descr"></ListPreference>
+		<ListPreference android:key="daynight_mode" android:title="@string/daynight" android:summary="@string/daynight_descr"></ListPreference>
 		<CheckBoxPreference android:title="@string/auto_zoom_map" android:summary="@string/auto_zoom_map_descr" android:key="auto_zoom_map"></CheckBoxPreference>
 		<CheckBoxPreference android:key="show_view_angle" android:title="@string/show_view_angle" android:summary="@string/show_view_angle_descr"></CheckBoxPreference>
 		<ListPreference android:key="rotate_map" android:title="@string/rotate_map_to_bearing" android:summary="@string/rotate_map_to_bearing_descr"></ListPreference>
-		<ListPreference android:key="map_screen_orientation" android:title="@string/map_screen_orientation" android:summary="@string/map_screen_orientation_descr"></ListPreference>
+		<ListPreference android:key="preferred_locale" android:title="@string/preferred_locale" android:summary="@string/preferred_locale_descr"></ListPreference>
 		<ListPreference android:key="default_metric_system" android:title="@string/unit_of_length" android:summary="@string/unit_of_length_descr"></ListPreference>
 		<ListPreference android:key="position_on_map" android:title="@string/position_on_map" android:summary="@string/position_on_map_descr"></ListPreference>
 		<CheckBoxPreference android:key="use_trackball_for_movements" android:title="@string/use_trackball" android:summary="@string/use_trackball_descr"></CheckBoxPreference>
-		<ListPreference android:key="preferred_locale" android:title="@string/preferred_locale" android:summary="@string/preferred_locale_descr"></ListPreference>
 		<EditTextPreference android:title="@string/application_dir" android:key="external_storage_dir"></EditTextPreference>
 	</PreferenceScreen>
 	

@@ -1,64 +1,76 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="pref_vector_rendering">Vector rendering</string>
+	<string name="pref_overlay">Overlay/underlay</string>
+	<string name="pref_raster_map">Raster map</string>
+	<string name="pref_vector_map">Vector map</string>
+	<string name="delete_confirmation_title">About to delete</string>
+	<string name="delete_confirmation_msg">Are you sure about deleting %1$s?</string>
+	<string name="city_type_suburb">Suburb</string>
+	<string name="city_type_hamlet">Hamlet</string>
+	<string name="city_type_village">Village</string>
+	<string name="city_type_town">Town</string>
+	<string name="city_type_city">City</string>
+	<string name="layer_poi_label">POI labels</string>
 	<string name="auto_follow_route_navigation_descr">Enable auto follow position only in navigation mode.</string>
 	<string name="auto_follow_route_navigation">Auto follow navigation</string>
-	<string name="auto_follow_location_enabled">Auto follow settings are enabled.</string>
+	<string name="auto_follow_location_enabled">Auto follow setting is enabled.</string>
 	<string name="animate_route_off">Animate off</string>
 	<string name="animate_route">Animate on</string>
 	
 	<string name="tip_recent_changes_0_6_8_t">Changes in 0.6.8 :
-\n\t- Completely redesigned search (POI, Address)! Make address search much faster and responsiveness. Leave one search with many different search aspects.
-\n\t- Implement search POI by name big areas (countries)  
-\n\t- Fix flickering map screen for tablets(Issue 641)
-\n\t- Autofollow route option (Issue 356)
+\n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
+\n\t- Implement POI search by name in big areas (countries)  
+\n\t- Fix flickering map screen for tablets (Issue 641)
+\n\t- Auto follow route option (Issue 356)
 \n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\'
-\n\t- POI data is inside .obf file (download index after 01/10/11) 
-\n\t- Voice prompt fixes (about GPS location and about first omitting command) 
+\n\t- POI data included in .obf file (all download indexes after 01/10/11) 
+\n\t- Voice prompt fixes (GPS position fix, omitting first command) 
 \n\t- Small improvements
 	</string>
 	<string name="file_can_not_be_renamed">File can not be renamed.</string>
 	<string name="file_with_name_already_exists">File with that name already exists.</string>
 	<string name="gpx_navigation">GPX route</string>
-	<string name="poi_query_by_name_matches_categories">Some poi categories matching to the query were found :</string>
+	<string name="poi_query_by_name_matches_categories">Several POI categories found matching the query :</string>
 	<string name="data_to_search_poi_not_available">Local data to search POI is not present.</string>
 	<string name="poi_filter_by_name">Search by name</string>
-	<string name="old_poi_file_should_be_deleted">The poi data file \'%1$s\' is deprecated and can be deleted.</string>
-	<string name="update_poi_file_not_found">Local file to maintain poi changes not found and could not be created.</string>
-	<string name="update_poi_does_not_change_indexes">Changing poi inside application doesn\'t affect map files you downloaded but collects all changes in local file.</string>
+	<string name="old_poi_file_should_be_deleted">The POI data file \'%1$s\' is redundant and can be deleted.</string>
+	<string name="update_poi_file_not_found">Local file to maintain POI changes not found and could not be created.</string>
+	<string name="update_poi_does_not_change_indexes">POI Changes inside application do not affect downloaded map files, changes are saved to local file instead.</string>
 
 	<string name="button_upgrade_osmandplus">Upgrade Osmand+</string>
-	<string name="map_version_changed_info">On server are map files incompatible with your current version of application. To download and use them, please upgrade the application to newer version.</string>
+	<string name="map_version_changed_info">Server contains map files not compatible with your current version of the application. To download and use them, please upgrade the application to newer version.</string>
 	
 	<string name="local_index_mi_rename">Rename</string>
 	<string name="show_gpx_route">Show on map</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="auto_follow_route_never">Never</string>
-	<string name="choose_auto_follow_route">Choose auto follow settings </string>
-	<string name="choose_auto_follow_route_descr">Choose time interval to continue map following at the location</string>
+	<string name="choose_auto_follow_route">Auto follow settings</string>
+	<string name="choose_auto_follow_route_descr">Choose time interval to continue map following at the position</string>
 	<string name="search_select_point">Select</string>
-	<string name="local_index_description">Download new, or move to backup or delete existing data. \nCurrent offline data on device (%1$s is available):</string>
-	<string name="search_position_current_location_search">Search location...</string>
-	<string name="search_position_current_location_found">Location [Found]</string>
+	<string name="local_index_description">Download new, or move to backup or delete existing data. \nCurrent offline data on device (%1$s free space):</string>
+	<string name="search_position_current_location_search">Searching position...</string>
+	<string name="search_position_current_location_found">Position (Found)</string>
 	<string name="search_position_address">Address...</string>
 	<string name="search_position_favorites">Favorites...</string>
 	<string name="search_position_undefined">Undefined</string>
 	<string name="search_position_fixed">Fixed</string>
-	<string name="search_position_current_location">Current location...</string>
+	<string name="search_position_current_location">Current position...</string>
 	<string name="search_position_map_view">Last map view</string>
 	
-	<string name="select_search_position">Search around :</string>
+	<string name="select_search_position">Search near :</string>
 	<string name="context_menu_item_search">Search</string>
 	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7 :
 \n\t- Offline data manager (download, delete, backup offline data directly in Osmand)
 \n\t- Favorite points and groups (categorize, delete, manage favorites)
-\n\t- GPX Explorer in application (see tracks, distance, average speed, elevation, etc.)
-\n\t- GPX navigation (useful options, continue navigation after crash, supports roundabouts)
-\n\t- Function to save route as GPX track to use it offline
+\n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.)
+\n\t- GPX navigation (more options, continue navigation after crash, support roundabouts)
+\n\t- Function to save route as GPX track for offline use
 \n\t- Improve GPX monitoring  (filter some inaccurate location and save accuracy/elevation/speed)
-\n\t- Upload GPX for OSM community (http://download.osmand.net/gpx/)
+\n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/)
 \n\t- Improve vector rendering
-\n\t- Improvement of TTS engine (pronounce exact distance, enable miles)
-\n\t- Bug fixing
+\n\t- Improvement of TTS engine (announce exact distance, enable miles)
+\n\t- Bug fixes
 	</string>
 	<string name="save_route_dialog_title">Save route as GPX track</string>
 	<string name="route_successfully_saved_at">Route successfully saved as \'%1$s\'.</string>
@@ -84,7 +96,7 @@
 	<string name="vector_map_not_needed">Not needed</string>
 	<string name="basemap_missing">Base world map (covering whole world at small zooms) is missing. Please consider downloading World_basemap_x.obf for a complete environment.</string>
 	<string name="vector_data_missing">On board (\'offline\') data is missing on SD card. Please consider to download it in order to use maps offline.</string>
-	<string name="local_index_gpx_info_show">\n\nLong click to show on map</string>
+	<string name="local_index_gpx_info_show">\n\nLong click for more options</string>
 	<string name="local_index_gpx_info_speed">\nAverage speed : %1$s \nMaximum speed : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nAverage altitude : %1$.0f m\nMinimum altitude : %2$.0f m\nMaximum altitude : %3$.0f m\nAscents : %4$.0f m\nDescents : %5$.0f m</string>
 	<string name="local_index_gpx_info">Subtracks : %1$d\nTotal points : %2$d\nWay points : %3$d\nTotal distance : %4$s\nStart time : %5$tD %5$tR\nEnd time : %6$tD %6$tR</string>

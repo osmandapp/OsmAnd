@@ -137,10 +137,12 @@ public class MapVectorLayer extends BaseMapLayer {
 			float y1 = MapUtils.calcDiffPixelY(sin, cos, dleftX1, dtopY1, view.getTileSize()) + view.getCenterPointY();
 			
 			canvas.rotate(-rot, view.getCenterPointX(), view.getCenterPointY());
-			destImage.set(x1, y1, x1 + bmpLoc.getTileWidth() * mult * view.getTileSize(), y1 + bmpLoc.getTileHeight() * mult * view.getTileSize());
+			destImage.set(x1, y1, x1 + bmpLoc.getTileWidth() * mult * view.getTileSize(), y1 + bmpLoc.getTileHeight() * mult
+					* view.getTileSize());
 			if(!bmp.isRecycled()){
 				canvas.drawBitmap(bmp, null, destImage, paintImg);
 			}
+			canvas.rotate(rot, view.getCenterPointX(), view.getCenterPointY());
 		}
 	}
 

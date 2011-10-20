@@ -60,6 +60,7 @@
 			<filter tag="landuse" value="reservoir" order="5" />
 			<filter tag="landuse" value="water" order="5" />
 			<filter tag="natural" value="water" order="5" />
+			<filter tag="natural" value="bay" order="5" />
 			<filter tag="waterway" order="5" />
 
 			<filter tag="leisure" order="2" />
@@ -277,11 +278,11 @@
 		</switch>
 
 		<filter minzoom="14" maxzoom="14" textSize="12" textBold="true" textColor="#6666ff" textDy="7" tag="railway" value="station" />
-		<filter minzoom="15" textSize="13" textBold="true" textColor="#6666ff" textDy="7" tag="railway" value="station" />
+		<filter minzoom="15" textSize="13" textHaloRadius="1" textBold="true" textColor="#6666ff" textDy="7" tag="railway" value="station" />
 		<filter minzoom="14" maxzoom="14" textSize="12" textColor="#6666ff" textDy="7" tag="railway" value="halt" />
-		<filter minzoom="15" textSize="12" textColor="#6666ff" textDy="7" tag="railway" value="halt" />
+		<filter minzoom="15" textSize="12" textHaloRadius="1"  textColor="#6666ff" textDy="7" tag="railway" value="halt" />
 		<filter minzoom="14" maxzoom="14" textSize="12" textColor="#6666ff" textDy="7" tag="railway" value="tram_stop" />
-		<filter minzoom="15" textSize="12" textColor="#6666ff" textDy="7" tag="railway" value="tram_stop" />
+		<filter minzoom="15" textSize="12" textHaloRadius="1" textColor="#6666ff" textDy="7" tag="railway" value="tram_stop" />
 
 		<filter minzoom="10" textSize="12" textColor="#6692da" textDy="7" tag="aeroway" value="aerodrome" />
 		<filter minzoom="15" textSize="12" textColor="#333333" textOnPath="true" textMinDistance="50" tag="aeroway" value="runway" ref="true" />
@@ -295,6 +296,7 @@
 		<filter minzoom="16" maxzoom="16" textSize="13" textColor="#444444" textWrapWidth="16" textMinDistance="40" tag="building" />
 		<filter minzoom="17" maxzoom="17" textSize="13" textColor="#444444" textWrapWidth="16" tag="building" />
 		<filter minzoom="18" textSize="15" textColor="#444444" textWrapWidth="16" tag="building" />
+		<filter minzoom="18" textSize="15" textColor="#444444" textWrapWidth="16" tag="addr:housenumber" />
 
 		<filter minzoom="15" textSize="12" textColor="#000033" textDy="7" textWrapWidth="12" tag="man_made" value="lighthouse" />
 		<filter minzoom="17" textSize="12" textColor="#734a08" textDy="7" textWrapWidth="20" tag="man_made" value="windmill" />
@@ -693,6 +695,7 @@
 			<filter minzoom="1" tag="natural" value="coastline" />
 			<filter minzoom="4" tag="natural" value="water" />
 			<filter minzoom="4" tag="natural" value="lake" />
+			<filter minzoom="4" tag="natural" value="bay" />
 		</switch>
 	<!-- ZM 12 -->
 		<filter minzoom="11" shader="beach" tag="natural" value="beach" />

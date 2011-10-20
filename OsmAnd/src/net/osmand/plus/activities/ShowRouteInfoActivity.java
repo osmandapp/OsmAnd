@@ -70,6 +70,7 @@ public class ShowRouteInfoActivity extends ListActivity {
 		setListAdapter(new RouteInfoAdapter(((OsmandApplication)getApplication()).getRoutingHelper().getRouteDirections()));
 	}
 
+	@Override
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		if(position == 0){
 			return;
@@ -77,7 +78,9 @@ public class ShowRouteInfoActivity extends ListActivity {
 		RouteDirectionInfo item = ((RouteInfoAdapter)getListAdapter()).getItem(position - 1);
 		Location loc = helper.getLocationFromRouteDirection(item);
 		if(loc != null){
-			OsmandSettings.getOsmandSettings(this).setMapLocationToShow(loc.getLatitude(),loc.getLongitude());
+			OsmandSettings settings = OsmandSettings.getOsmandSettings(this);
+			settings.setMapLocationToShow(loc.getLatitude(),loc.getLongitude(),
+					Math.max(13, settings.getLastKnownMapZoom()));
 			MapActivity.launchMapActivityMoveToTop(this);
 		}
 	}
@@ -138,6 +141,7 @@ public class ShowRouteInfoActivity extends ListActivity {
 		}
 
 
+		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {

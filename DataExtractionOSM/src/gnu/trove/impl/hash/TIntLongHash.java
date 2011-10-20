@@ -157,7 +157,8 @@ abstract public class TIntLongHash extends TPrimitiveHash {
      * @param initialCapacity an <code>int</code> value
      * @return the actual capacity chosen
      */
-    protected int setUp( int initialCapacity ) {
+    @Override
+	protected int setUp( int initialCapacity ) {
         int capacity;
 
         capacity = super.setUp( initialCapacity );
@@ -201,7 +202,8 @@ abstract public class TIntLongHash extends TPrimitiveHash {
      *
      * @param index an <code>int</code> value
      */
-    protected void removeAt( int index ) {
+    @Override
+	protected void removeAt( int index ) {
         _set[index] = no_entry_key;
         super.removeAt( index );
     }
@@ -309,7 +311,8 @@ abstract public class TIntLongHash extends TPrimitiveHash {
 
 
     /** {@inheritDoc} */
-    public void writeExternal( ObjectOutput out ) throws IOException {
+    @Override
+	public void writeExternal( ObjectOutput out ) throws IOException {
         // VERSION
     	out.writeByte( 0 );
 
@@ -325,7 +328,8 @@ abstract public class TIntLongHash extends TPrimitiveHash {
 
 
     /** {@inheritDoc} */
-    public void readExternal( ObjectInput in ) throws IOException, ClassNotFoundException {
+    @Override
+	public void readExternal( ObjectInput in ) throws IOException, ClassNotFoundException {
         // VERSION
     	in.readByte();
 

@@ -151,13 +151,15 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public TIntIterator iterator() {
+    @Override
+	public TIntIterator iterator() {
         return new TIntHashIterator( this );
     }
 
 
     /** {@inheritDoc} */
-    public int[] toArray() {
+    @Override
+	public int[] toArray() {
         int[] result = new int[ size() ];
         int[] set = _set;
         byte[] states = _states;
@@ -172,7 +174,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public int[] toArray( int[] dest ) {
+    @Override
+	public int[] toArray( int[] dest ) {
         int[] set = _set;
         byte[] states = _states;
 
@@ -190,7 +193,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean add( int val ) {
+    @Override
+	public boolean add( int val ) {
         int index = insertionIndex(val);
 
         if ( index < 0 ) {
@@ -207,7 +211,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean remove( int val ) {
+    @Override
+	public boolean remove( int val ) {
         int index = index(val);
         if ( index >= 0 ) {
             removeAt( index );
@@ -218,7 +223,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean containsAll( Collection<?> collection ) {
+    @Override
+	public boolean containsAll( Collection<?> collection ) {
         for ( Object element : collection ) {
             if ( element instanceof Integer ) {
                 int c = ( ( Integer ) element ).intValue();
@@ -235,7 +241,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean containsAll( TIntCollection collection ) {
+    @Override
+	public boolean containsAll( TIntCollection collection ) {
         TIntIterator iter = collection.iterator();
         while ( iter.hasNext() ) {
             int element = iter.next();
@@ -248,7 +255,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean containsAll( int[] array ) {
+    @Override
+	public boolean containsAll( int[] array ) {
         for ( int i = array.length; i-- > 0; ) {
             if ( ! contains( array[i] ) ) {
                 return false;
@@ -259,7 +267,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean addAll( Collection<? extends Integer> collection ) {
+    @Override
+	public boolean addAll( Collection<? extends Integer> collection ) {
         boolean changed = false;
         for ( Integer element : collection ) {
             int e = element.intValue();
@@ -272,7 +281,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean addAll( TIntCollection collection ) {
+    @Override
+	public boolean addAll( TIntCollection collection ) {
         boolean changed = false;
         TIntIterator iter = collection.iterator();
         while ( iter.hasNext() ) {
@@ -286,7 +296,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean addAll( int[] array ) {
+    @Override
+	public boolean addAll( int[] array ) {
         boolean changed = false;
         for ( int i = array.length; i-- > 0; ) {
             if ( add( array[i] ) ) {
@@ -298,7 +309,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"SuspiciousMethodCalls"})
+    @Override
+	@SuppressWarnings({"SuspiciousMethodCalls"})
     public boolean retainAll( Collection<?> collection ) {
         boolean modified = false;
 	    TIntIterator iter = iterator();
@@ -313,7 +325,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean retainAll( TIntCollection collection ) {
+    @Override
+	public boolean retainAll( TIntCollection collection ) {
         if ( this == collection ) {
             return false;
         }
@@ -330,7 +343,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean retainAll( int[] array ) {
+    @Override
+	public boolean retainAll( int[] array ) {
         boolean changed = false;
         Arrays.sort( array );
         int[] set = _set;
@@ -347,7 +361,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean removeAll( Collection<?> collection ) {
+    @Override
+	public boolean removeAll( Collection<?> collection ) {
         boolean changed = false;
         for ( Object element : collection ) {
             if ( element instanceof Integer ) {
@@ -362,7 +377,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean removeAll( TIntCollection collection ) {
+    @Override
+	public boolean removeAll( TIntCollection collection ) {
         boolean changed = false;
         TIntIterator iter = collection.iterator();
         while ( iter.hasNext() ) {
@@ -376,7 +392,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean removeAll( int[] array ) {
+    @Override
+	public boolean removeAll( int[] array ) {
         boolean changed = false;
         for ( int i = array.length; i-- > 0; ) {
             if ( remove(array[i]) ) {
@@ -388,7 +405,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void clear() {
+    @Override
+	public void clear() {
         super.clear();
         int[] set = _set;
         byte[] states = _states;
@@ -401,7 +419,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    protected void rehash( int newCapacity ) {
+    @Override
+	protected void rehash( int newCapacity ) {
         int oldCapacity = _set.length;
         
         int oldSet[] = _set;
@@ -422,7 +441,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean equals( Object other ) {
+    @Override
+	public boolean equals( Object other ) {
         if ( ! ( other instanceof TIntSet ) ) {
             return false;
         }
@@ -442,7 +462,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public int hashCode() {
+    @Override
+	public int hashCode() {
         int hashcode = 0;
         for ( int i = _states.length; i-- > 0; ) {
             if ( _states[i] == FULL ) {
@@ -454,7 +475,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public String toString() {
+    @Override
+	public String toString() {
         StringBuilder buffy = new StringBuilder( _size * 2 + 2 );
         buffy.append("{");
         for ( int i = _states.length, j = 1; i-- > 0; ) {
@@ -482,7 +504,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
         }
 
         /** {@inheritDoc} */
-        public int next() {
+        @Override
+		public int next() {
             moveToNextIndex();
             return _hash._set[_index];
         }
@@ -490,7 +513,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void writeExternal( ObjectOutput out ) throws IOException {
+    @Override
+	public void writeExternal( ObjectOutput out ) throws IOException {
 
     	// VERSION
     	out.writeByte( 1 );
@@ -517,7 +541,8 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void readExternal( ObjectInput in )
+    @Override
+	public void readExternal( ObjectInput in )
     	throws IOException, ClassNotFoundException {
 
     	// VERSION

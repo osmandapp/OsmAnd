@@ -1,5 +1,7 @@
 package net.osmand.plus.views;
 
+import gnu.trove.set.hash.TIntHashSet;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -9,6 +11,7 @@ import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.data.Amenity;
 import net.osmand.osm.LatLon;
+import net.osmand.osm.MapUtils;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -35,7 +38,8 @@ import android.widget.Toast;
 
 public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMenuProvider {
 	private static final int startZoom = 10;
-	public static final int TEXT_WRAP = 30;
+	public static final int TEXT_WRAP = 15;
+	public static final int TEXT_LINES = 3;
 	public static final org.apache.commons.logging.Log log = LogUtil.getLog(POIMapLayer.class);
 	
 	
@@ -174,8 +178,8 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 			resourceManager.searchAmenitiesAsync(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, view.getZoom(), filter, objects);
 			int r = getRadiusPoi(view.getZoom());
 			for (Amenity o : objects) {
-				int x = view.getMapXForPoint(o.getLocation().getLongitude());
-				int y = view.getMapYForPoint(o.getLocation().getLatitude());
+				int x = view.getRotatedMapXForPoint(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+				int y = view.getRotatedMapYForPoint(o.getLocation().getLatitude(), o.getLocation().getLongitude());
 				canvas.drawCircle(x, y, r, pointAltUI);
 				canvas.drawCircle(x, y, r, point);
 				String id = null;
@@ -190,25 +194,52 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 					if(bmp != null){
 						canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintIcon);
 					}
+				}
+			}
+			
+			if (view.getSettings().SHOW_POI_LABEL.get()) {
+				TIntHashSet set = new TIntHashSet();
+				for (Amenity o : objects) {
+					int x = view.getRotatedMapXForPoint(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+					int y = view.getRotatedMapYForPoint(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+					int tx = view.getMapXForPoint(o.getLocation().getLongitude());
+					int ty = view.getMapYForPoint(o.getLocation().getLatitude());
 					String name = o.getName(view.getSettings().USE_ENGLISH_NAMES.get());
-					if(name != null && name.length() > 0){
-						// TODO cache list
-						// 1. Draw over in 2 phases over all circles
-						// 2. Draw without rotation and icons (!)
-						// 3. Omit highdensity icons
-//						drawWrappedText(canvas, name, paintTextIcon.getTextSize(), 
-//								x + bmp.getWidth() / 2, y + bmp.getHeight() / 2 + 
-//								paintTextIcon.getTextSize() / 2);
-						
+					if (name != null && name.length() > 0) {
+						int lines = 0;
+						while (lines < TEXT_LINES) {
+							if (set.contains(division(tx, ty, 0, lines)) ||
+									set.contains(division(tx, ty, -1, lines)) || set.contains(division(tx, ty, +1, lines))) {
+								break;
+							}
+							lines++;
+						}
+						if (lines == 0) {
+							// drawWrappedText(canvas, "...", paintTextIcon.getTextSize(), x, y + r + 2 + paintTextIcon.getTextSize() / 2, 1);
+						} else {
+							drawWrappedText(canvas, name, paintTextIcon.getTextSize(), x, y + r + 2 + paintTextIcon.getTextSize() / 2,
+									lines);
+							while (lines > 0) {
+								set.add(division(tx, ty, 1, lines - 1));
+								set.add(division(tx, ty, -1, lines - 1));
+								set.add(division(tx, ty, 0, lines - 1));
+								lines--;
+							}
+						}
+
 					}
 				}
-				
 			}
 
 		}
 	}
 	
-	private void drawWrappedText(Canvas cv, String text, float textSize, float x, float y) {
+	private int division(int x, int y, int sx, int sy) {
+		// make numbers positive
+		return ((((x + 10000) >> 4) + sx) << 16) | (((y + 10000) >> 4) + sy);
+	}
+	
+	private void drawWrappedText(Canvas cv, String text, float textSize, float x, float y, int lines) {
 		if(text.length() > TEXT_WRAP){
 			int start = 0;
 			int end = text.length();
@@ -216,7 +247,7 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 			int line = 0;
 			int pos = 0;
 			int limit = 0;
-			while(pos < end){
+			while(pos < end && (line < lines)){
 				lastSpace = -1;
 				limit += TEXT_WRAP;
 				while(pos < limit && pos < end){
@@ -230,12 +261,17 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 					start = pos;
 				} else {
 					String subtext = text.substring(start, lastSpace);
+					if (line + 1 == lines) {
+						subtext += "..";
+					}
 					drawShadowText(cv, subtext, x, y + line * (textSize + 2));
 					
 					start = lastSpace + 1;
 					limit += (start - pos) - 1;
 				}
+				
 				line++;
+				
 				
 			}
 		} else {
@@ -263,7 +299,7 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 
 	@Override
 	public boolean drawInScreenPixels() {
-		return false;
+		return true;
 	}
 
 	@Override

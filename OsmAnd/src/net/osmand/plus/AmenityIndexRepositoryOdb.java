@@ -43,6 +43,7 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 	
 	
 	private final String[] columns = new String[]{"id", "x", "y", "name", "name_en", "type", "subtype", "opening_hours", "phone", "site"};        //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$//$NON-NLS-5$//$NON-NLS-6$//$NON-NLS-7$//$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$
+	@Override
 	public List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom, PoiFilter filter, 
 			List<Amenity> amenities, ResultMatcher<Amenity> matcher){
 		long now = System.currentTimeMillis();
@@ -97,6 +98,7 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 	}
 	
 	
+	@Override
 	public synchronized void clearCache(){
 		super.clearCache();
 		cFilterId = null;
@@ -124,6 +126,7 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 		}
 	}
 
+	@Override
 	public synchronized boolean checkCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, String filterId, List<Amenity> toFill, boolean fillFound){
 		if (db == null) {
 			return true;

@@ -45,7 +45,8 @@ public interface TIntList extends TIntCollection, Serializable {
      *
      * @return the value that represents null
      */
-    public int getNoEntryValue();
+    @Override
+	public int getNoEntryValue();
 
 
     /**
@@ -53,7 +54,8 @@ public interface TIntList extends TIntCollection, Serializable {
      *
      * @return the number of values in the list.
      */
-    public int size();
+    @Override
+	public int size();
 
 
     /**
@@ -61,7 +63,8 @@ public interface TIntList extends TIntCollection, Serializable {
      *
      * @return true if the list is empty.
      */
-    public boolean isEmpty();
+    @Override
+	public boolean isEmpty();
 
 
     /**
@@ -70,7 +73,8 @@ public interface TIntList extends TIntCollection, Serializable {
      * @param val an <code>int</code> value
      * @return true if the list was modified by the add operation 
      */
-    public boolean add(int val);
+    @Override
+	public boolean add(int val);
 
 
     /**
@@ -187,7 +191,8 @@ public interface TIntList extends TIntCollection, Serializable {
      * Flushes the internal state of the list, resetting the capacity
      * to the default.
      */
-    public void clear();
+    @Override
+	public void clear();
 
 
     /**
@@ -196,7 +201,8 @@ public interface TIntList extends TIntCollection, Serializable {
      * @param value an <code>int</code> value
      * @return true if the list was modified by the remove operation.
      */
-    public boolean remove( int value );
+    @Override
+	public boolean remove( int value );
 
 
     /**
@@ -268,7 +274,8 @@ public interface TIntList extends TIntCollection, Serializable {
      *
      * @return an <code>int[]</code> value
      */
-    public int[] toArray();
+    @Override
+	public int[] toArray();
 
 
     /**
@@ -298,7 +305,8 @@ public interface TIntList extends TIntCollection, Serializable {
      * @param dest the array to copy into.
      * @return the array passed in.
      */
-    public int[] toArray( int[] dest );
+    @Override
+	public int[] toArray( int[] dest );
 
 
     /**
@@ -331,7 +339,8 @@ public interface TIntList extends TIntCollection, Serializable {
      * @param procedure a <code>TIntProcedure</code> value
      * @return true if the procedure did not terminate prematurely.
      */
-    public boolean forEach( TIntProcedure procedure );
+    @Override
+	public boolean forEach( TIntProcedure procedure );
 
 
     /**
@@ -466,7 +475,8 @@ public interface TIntList extends TIntCollection, Serializable {
      * @param value an <code>int</code> value
      * @return true if value is in the list.
      */
-    public boolean contains( int value );
+    @Override
+	public boolean contains( int value );
 
 
     /**

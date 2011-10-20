@@ -51,6 +51,7 @@ public class CarRouter extends VehicleRouter {
 		autoPriorityValues.put("living_street", 0.1d);
 	}
 
+	@Override
 	public boolean acceptLine(TagValuePair pair) {
 		if (pair.tag.equals("highway")) {
 			return autoNotDefinedValues.containsKey(pair.value);
@@ -58,6 +59,7 @@ public class CarRouter extends VehicleRouter {
 		return false;
 	}
 
+	@Override
 	public boolean acceptPoint(TagValuePair pair) {
 		if (pair.tag.equals("traffic_calming")) {
 			return true;
@@ -80,6 +82,7 @@ public class CarRouter extends VehicleRouter {
 	/**
 	 * return delay in seconds
 	 */
+	@Override
 	public double defineObstacle(BinaryMapDataObject road, int point) {
 		if ((road.getTypes()[0] & 3) == MapRenderingTypes.POINT_TYPE) {
 			// possibly not only first type needed ?
@@ -118,6 +121,7 @@ public class CarRouter extends VehicleRouter {
 		}
 	}
 	
+	@Override
 	public double getRoadPriorityToCalculateRoute(BinaryMapDataObject road) {
 		TagValuePair pair = road.getTagValue(0);
 		boolean highway = "highway".equals(pair.tag);
@@ -135,6 +139,7 @@ public class CarRouter extends VehicleRouter {
 	/**
 	 * return speed in m/s
 	 */
+	@Override
 	public double defineSpeed(BinaryMapDataObject road) {
 		TagValuePair pair = road.getTagValue(0);
 		double speed = MapRenderingTypes.getMaxSpeedIfDefined(road.getHighwayAttributes()) / 3.6d;
@@ -155,6 +160,7 @@ public class CarRouter extends VehicleRouter {
 	 * 
 	 * @return minimal speed at road
 	 */
+	@Override
 	public double getMinDefaultSpeed() {
 		return 9;
 	}
@@ -164,6 +170,7 @@ public class CarRouter extends VehicleRouter {
 	 * 
 	 * @return maximum speed to calculate shortest distance
 	 */
+	@Override
 	public double getMaxDefaultSpeed() {
 		return 30;
 	}
@@ -198,6 +205,7 @@ public class CarRouter extends VehicleRouter {
 		}
 	}
 
+	@Override
 	public double calculateTurnTime(RouteSegment segment, RouteSegment next, int segmentEnd) {
 		boolean end = (segmentEnd == segment.road.getPointsLength() - 1 || segmentEnd == 0);
 		boolean start = next.segmentStart == 0 || next.segmentStart == next.getRoad().getPointsLength() - 1;

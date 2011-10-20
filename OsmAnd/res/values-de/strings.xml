@@ -1,5 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="layer_poi_label">POI Namen</string>
+	<string name="auto_follow_route_navigation_descr">Auto follow Position nur im Navigationsmodus.</string>
+	<string name="auto_follow_route_navigation">Auto follow Navigation</string>
+	<string name="auto_follow_location_enabled">Auto follow setting aktiviert.</string>
+	<string name="animate_route_off">Animation aus</string>
+	<string name="animate_route">Animation an</string>
+	
+	<string name="tip_recent_changes_0_6_8_t">Änderungen in v0.6.8 :
+\n\t- Völlig neu entwickelte Suche (POI, Addressen)! Adress-Suche wesentlich beschleunigt. Einheitliche Suche mit vielen Optionen.
+\n\t- POI namentliche Suche in großen Regionen / Ländern  
+\n\t- Flackernde Kartenanzeige für Tablets behoben (Issue 641)
+\n\t- Auto follow route Option (Issue 356)
+\n\t- GPX Navigation verschoben zu \'Route\' und \'Route speichern\' verschoben zu \'Routeninformationen\'
+\n\t- POI Daten sind nun in .obf-Datei enthalten (alle Indexes ab 01/10/11) 
+\n\t- Sprachansagen verbessert (GPS Positions-Bestimmung, keine Auslassung des ersten Komanndos) 
+\n\t- Kleinere Verbesserungen
+	</string>
+	<string name="file_can_not_be_renamed">Datei kann nicht umbenannt werden.</string>
+	<string name="file_with_name_already_exists">Datei mit diesem Namen existiert bereits.</string>
+	<string name="gpx_navigation">GPX Route</string>
+	<string name="poi_query_by_name_matches_categories">Mehrere passende POI Kategorien gefunden :</string>
+	<string name="data_to_search_poi_not_available">Lokale Daten für POI-Suche nicht vorhanden.</string>
+	<string name="poi_filter_by_name">Nach Name suchen</string>
+	<string name="old_poi_file_should_be_deleted">Die POI Datei \'%1$s\' wird nicht mehr benötigt und kann gelöscht werden.</string>
+	<string name="update_poi_file_not_found">Lokale Datei für POI Änderungen nicht gefunden und konnte nicht erstellt werden.</string>
+	<string name="update_poi_does_not_change_indexes">POI Änderungen in der Applikation beeinflussen die herunergeladenen Kartendateien nicht, sondern werden in einer lokalen Datei gespeichert.</string>
+
+	<string name="button_upgrade_osmandplus">Osmand+ aktualisieren</string>
+	<string name="map_version_changed_info">Der Server enthält Karten nicht kompatibel mit ihrer derzeitigen Applikationsversion. Um sie zu laden und zu verwenden, aktualisieren Sie bitte auf die neueste Version.</string>
+	
+	<string name="local_index_mi_rename">Umbenennen</string>
+	<string name="show_gpx_route">Auf Karte anzeigen</string>
+	<string name="poi_filter_nominatim">Online Nominatim</string>
+	<string name="auto_follow_route_never">Nie</string>
+	<string name="choose_auto_follow_route">Auto follow Einstellungen</string>
+	<string name="choose_auto_follow_route_descr">Choose time interval to continue map following at the position</string>
+	<string name="search_select_point">Select</string>
+	<string name="search_position_current_location_search">Suche Position...</string>
+	<string name="search_position_current_location_found">Position (gefunden)</string>
+	<string name="search_position_address">Addresse...</string>
+	<string name="search_position_favorites">Favoriten...</string>
+	<string name="search_position_undefined">Undefiniert</string>
+	<string name="search_position_fixed">Festgelegt</string>
+	<string name="search_position_current_location">Aktuelle Position...</string>
+	<string name="search_position_map_view">Letzte Kartenposition</string>
+	
+	<string name="select_search_position">Suche nahe :</string>
+	<string name="context_menu_item_search">Suche</string>
 	<string name="tip_recent_changes_0_6_7_t">Verbesserungen in 0.6.7 :
 \n\t- Offline-Daten Manager (Herunterladen, Löschen und Verschieben nach Backup von Offline-Daten direkt in Osmand)
 \n\t- Favoriten und Favoritengruppen (Kategorisieren, Löschen, Managen von Favoriten)
@@ -35,7 +83,7 @@
 	<string name="vector_map_not_needed">Nicht verwendet</string>
 	<string name="basemap_missing">Offline Weltkarte für kleine Vergrößerungen noch nicht vorhanden. Bitte ggfls. World_basemap_x.obf herunterladen.</string>
 	<string name="vector_data_missing">Keine Offline-Daten vorhanden (SD-Karte). Bitte ggfls. herunterladen, damit Karten offline verwendet werden können.</string>
-	<string name="local_index_gpx_info_show">\n\nLang klicken für Anzeige in Karte</string>
+	<string name="local_index_gpx_info_show">\n\nLang klicken für mehr Optionen</string>
 	<string name="local_index_gpx_info_speed">\nDurchschn.geschw. : %1$s \nMax. Geschw. : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nDurchschn.höhe : %1$.0f m\nMinimalhöhe : %2$.0f m\nMaximalhöhe : %3$.0f m\nAufstiege : %4$.0f m\nAbstiege : %5$.0f m</string>
 	<string name="local_index_gpx_info">Subtracks : %1$d\nPunkte insgesamt : %2$d\nWegpunkte : %3$d\nGesamtstrecke : %4$s\nStartzeit : %5$tD %5$tR\nEndzeit : %6$tD %6$tR</string>

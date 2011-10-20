@@ -30,6 +30,7 @@ public class TransportInfoLayer implements OsmandMapLayer {
 		this.routeHelper = routeHelper;
 	}
 	
+	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 		dm = new DisplayMetrics();

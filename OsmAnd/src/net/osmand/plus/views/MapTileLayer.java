@@ -219,6 +219,7 @@ public class MapTileLayer extends BaseMapLayer {
 	}
 	
 	
+	@Override
 	public int getMaximumShownMapZoom(){
 		if(map == null){
 			return 20;
@@ -227,6 +228,7 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 	}
 	
+	@Override
 	public int getMinimumShownMapZoom(){
 		if(map == null){
 			return 1;

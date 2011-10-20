@@ -54,6 +54,7 @@ public class PointLocationLayer implements OsmandMapLayer {
 		
 	}
 	
+	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 		initUI();

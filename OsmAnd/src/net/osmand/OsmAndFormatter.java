@@ -4,6 +4,7 @@ import java.text.MessageFormat;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
+import net.osmand.data.City.CityType;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
@@ -92,6 +93,22 @@ public class OsmAndFormatter {
 		}
 	}
 	
+	
+	public static String toPublicString(CityType t, Context ctx) {
+		switch (t) {
+		case CITY:
+			return ctx.getString(R.string.city_type_city);
+		case HAMLET:
+			return ctx.getString(R.string.city_type_hamlet);
+		case TOWN:
+			return ctx.getString(R.string.city_type_town);
+		case VILLAGE:
+			return ctx.getString(R.string.city_type_village);
+		case SUBURB:
+			return ctx.getString(R.string.city_type_suburb);
+		}
+		return "";
+	}
 	public static String toPublicString(AmenityType t, Context ctx) {
 		switch (t) {
 		case SUSTENANCE:

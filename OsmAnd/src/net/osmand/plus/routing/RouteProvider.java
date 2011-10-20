@@ -3,6 +3,7 @@ package net.osmand.plus.routing;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -15,9 +16,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -58,7 +56,7 @@ public class RouteProvider {
 	private static final String OSMAND_ROUTER = "OsmandRouter";
 	
 	public enum RouteService {
-		CLOUDMADE("CloudMade"), YOURS("YOURS"), ORS("OpenRouteService"),  OSMAND("OsmAnd (offline)"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		CLOUDMADE("CloudMade"), YOURS("YOURS"), ORS("OpenRouteService"), OSMAND("OsmAnd (offline)"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		private final String name;
 		private RouteService(String name){
 			this.name = name;
@@ -815,76 +813,20 @@ public class RouteProvider {
 			rpref = "Shortest";
 		}
 
-		DocumentBuilder dom = DocumentBuilderFactory.newInstance()
-				.newDocumentBuilder();
-		Document doc = dom.newDocument();
-		Element e = (Element) doc.appendChild(doc.createElement("xls:XLS"));
-		e.setAttribute("xmlns:xls", "http://www.opengis.net/xls");
-		e.setAttribute("xmlns:sch", "http://www.ascc.net/xml/schematron");
-		e.setAttribute("xmlns:gml", "http://www.opengis.net/gml");
-		e.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
-		e.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-		e.setAttribute("xsi:schemaLocation",
-				"http://schemas.opengis.net/ols/1.1.0/RouteService.xsd");
-		e.setAttribute("xls:lang", "de");
-		e.setAttribute("version", "1.1");
-		e.appendChild(doc.createElement("xls:RequestHeader"));
-
-		e = (Element) e.appendChild(doc.createElement("xls:Request"));
-		e.setAttribute("methodName", "RouteRequest");
-		e.setAttribute("requestID", "123456789");
-		e.setAttribute("version", "1.1");
-		e = (Element) e.appendChild(doc
-				.createElement("xls:DetermineRouteRequest"));
-		e.setAttribute("distanceUnit", "KM");
-		e = (Element) e.appendChild(doc.createElement("xls:RoutePlan"));
-		e = (Element) e.appendChild(doc.createElement("xls:RoutePreference"));
-		e.appendChild(doc.createTextNode(rpref));
-
-		Element wpl = (Element) e.getParentNode().appendChild(
-				doc.createElement("xls:WayPointList"));
-		e = (Element) wpl.appendChild(doc.createElement("xls:StartPoint"));
-		e = (Element) e.appendChild(doc.createElement("xls:Position"));
-		e = (Element) e.appendChild(doc.createElement("gml:Point"));
-		e.setAttribute("srsName", "EPSG:4326");
-		e = (Element) e.appendChild(doc.createElement("gml:pos"));
-		e.appendChild(doc.createTextNode(start.getLongitude() + " "
-				+ start.getLatitude()));
-
-		e = (Element) wpl.appendChild(doc.createElement("xls:EndPoint"));
-		e = (Element) e.appendChild(doc.createElement("xls:Position"));
-		e = (Element) e.appendChild(doc.createElement("gml:Point"));
-		e.setAttribute("srsName", "EPSG:4326");
-		e = (Element) e.appendChild(doc.createElement("gml:pos"));
-		e.appendChild(doc.createTextNode(end.getLongitude() + " "
-				+ end.getLatitude()));
-
-		e = (Element) wpl.getParentNode().appendChild(
-				doc.createElement("xls:AvoidList"));
-
-		Element dRR = (Element) wpl.getParentNode().getParentNode();
-		// e = (Element) dRR.appendChild("xls:RouteInstructionsRequest");
-		// e.setAttribute("provideGeometry", "true");
-		e = (Element) dRR.appendChild(doc
-				.createElement("xls:RouteGeometryRequest"));
-
-		StringBuilder uri = new StringBuilder();
-		uri.append("http://openls.geog.uni-heidelberg.de/osm/eu/routing"); //$NON-NLS-1$
-		URL url = new URL(uri.toString());
+		StringBuilder request = new StringBuilder();
+		request.append("http://openls.geog.uni-heidelberg.de/osm/eu/routing?")
+		.append("start=").append(start.getLongitude()).append(',').append(start.getLatitude())
+		.append("&end=").append(end.getLongitude()).append(',').append(end.getLatitude())
+		.append("&preference=").append(rpref);
+		//TODO if we would get instructions from the service, we could use this language setting
+		//.append("&language=").append(Locale.getDefault().getLanguage());
+		
+		URI uri = URI.create(request.toString());
+		URL url = uri.toURL(); 
 		URLConnection connection = url.openConnection();
-		connection.setDoOutput(true);
 
-		try {
-			TransformerFactory
-					.newInstance()
-					.newTransformer()
-					.transform(new DOMSource(doc),
-							new StreamResult(connection.getOutputStream()));
-		} catch (Exception te) {
-		}
-
-		dom = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		doc = dom.parse(new InputSource(new InputStreamReader(connection
+		DocumentBuilder dom = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		Document doc = dom.parse(new InputSource(new InputStreamReader(connection
 				.getInputStream())));
 		NodeList list = doc.getElementsByTagName("xls:RouteGeometry"); //$NON-NLS-1$
 		for (int i = 0; i < list.getLength(); i++) {

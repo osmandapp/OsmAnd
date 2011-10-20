@@ -193,12 +193,16 @@ public class BinaryMapIndexWriter {
 			MapRulType rule = types.get(tag);
 			int type = rule.getType(null);
 			int subType = rule.getSubType(null);
+			Collection<String> valuesSet = types.get(tag).getValuesSet();
 			if(type != 0 && subType != 0){
-				builder.setTag(tag).setType(type).setSubtype(subType).setMinZoom(rule.getMinZoom(null));
+				builder.setTag(tag).setValue("").setType(type).setSubtype(subType).setMinZoom(rule.getMinZoom(null));
+				if (valuesSet.isEmpty()) {
+					codedOutStream.writeMessage(OsmandOdb.OsmAndMapIndex.RULES_FIELD_NUMBER, builder.build());
+				}
 				builder = OsmandOdb.MapEncodingRule.newBuilder();
 			}
 			
-			for(String val : types.get(tag).getValuesSet()){
+			for(String val : valuesSet){
 				type = rule.getType(val);
 				subType = rule.getSubType(val);
 				builder.setTag(tag).setValue(val).setType(type).setSubtype(subType).setMinZoom(rule.getMinZoom(null));

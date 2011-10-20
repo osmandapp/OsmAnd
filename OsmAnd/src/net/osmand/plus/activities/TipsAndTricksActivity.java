@@ -136,6 +136,7 @@ public class TipsAndTricksActivity {
 		
 		nextButton.setOnClickListener(new View.OnClickListener() {
 			
+			@Override
 			public void onClick(View view) {
 				if(historyInd[0] == toShow.size() - 1){
 					int suggest = 0;
@@ -156,6 +157,7 @@ public class TipsAndTricksActivity {
 		
 		prevButton.setOnClickListener(new View.OnClickListener() {
 			
+			@Override
 			public void onClick(View view) {
 				if(historyInd[0] > 0){
 					historyInd[0] --;
@@ -169,6 +171,7 @@ public class TipsAndTricksActivity {
 		});
 		
 		((Button)dlg.findViewById(R.id.CloseButton)).setOnClickListener(new View.OnClickListener() {
+			@Override
 			public void onClick(View view) {
 				dlg.dismiss();
 			}

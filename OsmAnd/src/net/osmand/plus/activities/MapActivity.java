@@ -292,9 +292,19 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		showAndHideMapPosition();
 
 		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
-		LatLon latLon = settings.getAndClearMapLocationToShow();
-		if (latLon != null && !latLon.equals(cur)) {
-			mapView.getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), settings.getMapZoomToShow(), true);
+		LatLon latLonToShow = settings.getAndClearMapLocationToShow();
+		String mapLabelToShow = settings.getAndClearMapLabelToShow();
+		if(mapLabelToShow != null && latLonToShow != null){
+			if(mapLabelToShow.length() == 0){
+				mapLayers.getContextMenuLayer().setLocation(latLonToShow, mapLabelToShow);
+			} else {
+				mapLayers.getContextMenuLayer().setLocation(latLonToShow, mapLabelToShow);
+			}
+		}
+		if (latLonToShow != null && !latLonToShow.equals(cur)) {
+			mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(), latLonToShow.getLongitude(), 
+					settings.getMapZoomToShow(), true);
+			
 		}
 
 		View progress = findViewById(R.id.ProgressBar);
@@ -376,6 +386,13 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	
     @Override
 	protected Dialog onCreateDialog(int id) {
+    	Dialog dialog = null;
+    	for (DialogProvider dp : dialogProviders) {
+    		dialog = dp.onCreateDialog(id);
+    		if (dialog != null) {
+    			return dialog;
+    		}
+    	}
 		if(id == OsmandApplication.PROGRESS_DIALOG){
 			return startProgressDialog;
 		}
@@ -383,21 +400,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	}
     
     @Override
-    protected Dialog onCreateDialog(int id, Bundle args) {
-    	Dialog dialog = null;
+    protected void onPrepareDialog(int id, Dialog dialog) {
     	for (DialogProvider dp : dialogProviders) {
-    		dialog = dp.onCreateDialog(id,args);
-    		if (dialog != null) {
-    			return dialog;
-    		}
-    	}
-    	return dialog;
-    }
-    
-    @Override
-    protected void onPrepareDialog(int id, Dialog dialog, Bundle args) {
-    	for (DialogProvider dp : dialogProviders) {
-    		dp.onPrepareDialog(id, dialog, args);
+    		dp.onPrepareDialog(id, dialog);
     	}
     }
     
@@ -987,6 +992,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 	}
 	
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.map_menu, menu);
