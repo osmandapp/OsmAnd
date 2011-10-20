@@ -11,14 +11,10 @@ import android.content.DialogInterface.OnClickListener;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
-import android.graphics.Paint.Style;
 import android.util.DisplayMetrics;
-import android.util.FloatMath;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -78,7 +74,7 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 					int x = view.getRotatedMapXForPoint(o.getLatitude(), o.getLongitude());
 					int y = view.getRotatedMapYForPoint(o.getLatitude(), o.getLongitude());
 					canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2, 
-							y - favoriteIcon.getHeight() / 2, paint);
+							y - favoriteIcon.getHeight() , paint);
 				}
 			}
 		}
