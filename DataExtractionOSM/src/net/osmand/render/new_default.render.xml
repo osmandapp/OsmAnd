@@ -773,7 +773,10 @@
 		</group>
 
 		<!-- ZM 10 -->
-		<filter minzoom="9" shader="nr" color="#abdf96" tag="leisure" value="nature_reserve">
+		<CssParameter name="stroke">#6c3</CssParameter>
+	  <CssParameter name="stroke-width">1</CssParameter>
+		<filter minzoom="9" shader="nr2" color="#abdf96" tag="leisure" value="nature_reserve" 
+		   strokeWidth_2="1" color_2="#66cc33">
 			<filter nightMode="true" shader="" color="#000034" />
 		</filter>
 
