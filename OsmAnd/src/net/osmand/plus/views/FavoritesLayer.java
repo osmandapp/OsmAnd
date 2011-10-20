@@ -88,15 +88,20 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	
 	public FavouritePoint getFavoriteFromPoint(PointF point) {
 		FavouritePoint result = null;
-		float r = radius * dm.density;
+		float r = 100;
 		int ex = (int) point.x;
 		int ey = (int) point.y;
+		int w = favoriteIcon.getWidth() / 2;
+		int h = favoriteIcon.getHeight();
 		for (FavouritePoint n : favorites.getFavouritePoints()) {
 			int x = view.getRotatedMapXForPoint(n.getLatitude(), n.getLongitude());
 			int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
-			if (Math.abs(x - ex) <= r && Math.abs(y - ey) <= r) {
-				r = Math.max(Math.abs(x - ex), Math.abs(y - ey));
-				result = n;
+			if (Math.abs(x - ex) <= w && y - ey <= h && y - ey >= 0) {
+				float newr = Math.max(Math.abs(x - ex), Math.abs(y - ey));
+				if(newr < r){
+					r = newr;
+					result = n;
+				}
 			}
 		}
 		return result;
