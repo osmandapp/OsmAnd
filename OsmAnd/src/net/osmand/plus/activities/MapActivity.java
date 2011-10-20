@@ -489,7 +489,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
 				int fZoom = mapView.getZoom() < 14 ? 14 : mapView.getZoom();
 				thread.startMoving( lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), fZoom, false);
-				mapLayers.getExploreInfoLayer().whereAmI(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), fZoom);
 			}
 		}
 		if(locationLayer.getLastKnownLocation() == null){
@@ -949,7 +948,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		if(settings.SHOW_VIEW_ANGLE.get().booleanValue()){
 			if(mapLayers.getLocationLayer().getHeading() == null || Math.abs(mapLayers.getLocationLayer().getHeading() - val) > 10){
 				mapLayers.getLocationLayer().setHeading(val);
-				mapLayers.getExploreInfoLayer().setHeading(val);
 			}
 		}
 		

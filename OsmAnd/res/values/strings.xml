@@ -669,9 +669,4 @@
 <string name="zoomOut">Zoom out</string>
 <string name="zoomIn">Zoom in</string>
 <string name="zoomIs">Zoom is</string>
-<string name="look_forward">Look forward</string>
-<string name="look_right">Look right</string>
-<string name="look_left">Look left</string>
-<string name="look_back">Look back</string>
-<string name="look_menu_button">Observe menu</string>
 </resources>

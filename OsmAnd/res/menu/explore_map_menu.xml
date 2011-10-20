@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:orderInCategory="1" android:enabled="true" android:menuCategory="system" android:title="@string/look_forward" android:visible="true" android:id="@+id/look_forward"></item>
-    <item android:orderInCategory="2" android:enabled="true" android:menuCategory="system" android:title="@string/look_right" android:visible="true" android:id="@+id/look_right"></item>
-    <item android:orderInCategory="3" android:enabled="true" android:menuCategory="system" android:alphabeticShortcut="3" android:title="@string/look_left" android:visible="true" android:id="@+id/look_left"></item>
-    <item android:orderInCategory="4" android:enabled="true" android:menuCategory="system" android:title="@string/look_back" android:visible="true" android:id="@+id/look_back"></item>
-</menu>

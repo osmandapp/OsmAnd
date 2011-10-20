@@ -13,11 +13,7 @@
 	<string name="voice_not_use">Не использовать</string>
 	<string name="voice_not_specified">Нету</string>
 	<string name="installing_new_resources">Распаковываются новые данные...</string>
-	<string
-	name="internet_connection_required_for_online_route">Вы
-	собираетесь использовать интернет маршрутизацию, но у вас нет
-	активного интернет соединения. Вы можете попытаться
-	использовать (экспериментальный) автономный маршрутизатор OsmAnd ( \'Настройки\' -> \'Навигация\') на короткие расстояния.</string>
+	<string name="internet_connection_required_for_online_route">Вы собираетесь использовать интернет маршрутизацию, но у вас нет активного интернет соединения. Вы можете попытаться использовать (экспериментальный) автономный маршрутизатор OsmAnd ( \'Настройки\' -> \'Навигация\') на короткие расстояния.</string>
 	<string name="tts_language_not_supported_title">Язык не поддерживается</string>
 	<string name="tts_language_not_supported">Выбранный язык не поддерживается Android TTS (text-to-speech). Хотите найти в маркете другой TTS? Иначе язык TTS по умолчанию будет использован.</string>
 	<string name="tts_missing_language_data_title">Данные отсутсвуют</string>
@@ -607,9 +603,4 @@
 	<string name="zoomOut">Уменьшить масштаб</string>
 	<string name="zoomIn">Увеличить масштаб</string>
 	<string name="zoomIs">Масштаб </string>
-	<string name="look_forward">Смотреть вперед</string>
-	<string name="look_right">Смотреть вправо</string>
-	<string name="look_left">Смотреть влево</string>
-	<string name="look_back">Смотреть назад</string>
-	<string name="look_menu_button">Меню обзора</string> 
 </resources>

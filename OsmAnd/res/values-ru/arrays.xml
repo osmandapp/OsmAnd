@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-	<string-array name="observe_list_array">
-	    <item>Смотреть вперед</item>
-	    <item>Смотреть вправо</item>
-	    <item>Смотреть влево</item>
-	    <item>Смотреть назад</item>
-	</string-array> 
-</resources>

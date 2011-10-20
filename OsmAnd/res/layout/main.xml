@@ -11,7 +11,7 @@
 <ImageButton android:contentDescription="@string/back_to_location" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="top|right" android:layout_marginTop="64dp" android:id="@+id/BackToLocation" android:background="@drawable/back_location"></ImageButton>
 
 <LinearLayout android:layout_width="wrap_content" android:id="@+id/RouteLayout" android:orientation="horizontal" android:layout_height="wrap_content" 
-				android:layout_marginBottom="44dp" android:layout_gravity="bottom|center" >
+				android:layout_marginBottom="12dp" android:layout_gravity="bottom|center" >
 
 <Button android:layout_width="wrap_content" android:id="@+id/PreviousButton"  android:layout_height="wrap_content" android:background="@android:drawable/ic_media_previous" 
 			android:contentDescription="@string/previous_button"/>

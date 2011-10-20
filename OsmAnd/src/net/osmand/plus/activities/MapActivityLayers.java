@@ -26,7 +26,6 @@ import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.ContextMenuLayer;
-import net.osmand.plus.views.ExploreInfoLayer;
 import net.osmand.plus.views.FavoritesLayer;
 import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.MapControlsLayer;
@@ -72,7 +71,6 @@ public class MapActivityLayers {
 	private PointNavigationLayer navigationLayer;
 	private MapInfoLayer mapInfoLayer;
 	private ContextMenuLayer contextMenuLayer;
-	private ExploreInfoLayer exploreInfoLayer;
 	private RouteInfoLayer routeInfoLayer;
 	private MapControlsLayer mapControlsLayer;
 
@@ -133,11 +131,8 @@ public class MapActivityLayers {
 		mapInfoLayer = new MapInfoLayer(activity, routeLayer);
 		mapView.addLayer(mapInfoLayer, 8);
 		// 9. context menu layer 
-//		contextMenuLayer = new ContextMenuLayer(activity);
-//		mapView.addLayer(contextMenuLayer, 9);
-		// 9.2. explore info layer 
-		exploreInfoLayer = new ExploreInfoLayer(activity);
-		mapView.addLayer(exploreInfoLayer, 9);
+		contextMenuLayer = new ContextMenuLayer(activity);
+		mapView.addLayer(contextMenuLayer, 9);
 		// 10. route info layer
 		routeInfoLayer = new RouteInfoLayer(routingHelper, activity);
 		mapView.addLayer(routeInfoLayer, 10);
@@ -146,7 +141,6 @@ public class MapActivityLayers {
 		mapControlsLayer = new MapControlsLayer(activity);
 		mapView.addLayer(mapControlsLayer, 11);
 
-		LinearLayout rl = (LinearLayout) activity.findViewById(R.id.RouteLayout);
 	}
 	
 	
@@ -563,10 +557,6 @@ public class MapActivityLayers {
 	
 	public ContextMenuLayer getContextMenuLayer() {
 		return contextMenuLayer;
-	}
-	
-	public ExploreInfoLayer getExploreInfoLayer() {
-		return exploreInfoLayer;
 	}
 	
 	public FavoritesLayer getFavoritesLayer() {
