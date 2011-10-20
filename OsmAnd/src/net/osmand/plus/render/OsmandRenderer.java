@@ -703,7 +703,7 @@ public class OsmandRenderer {
 		}
 		render.setInitialTagValueZoom(tag, value, rc.zoom);
 		boolean rendered = render.search(RenderingRulesStorage.POLYGON_RULES);
-		if(!rendered || !updatePaint(render, paint, 0, true)){
+		if(!rendered || !updatePaint(render, paint, 0, true, rc)){
 			return;
 		}
 		rc.visible++;
@@ -733,7 +733,7 @@ public class OsmandRenderer {
 		// for test purpose
 //	      render.strokeWidth = 1.5f;
 //	      render.color = Color.BLACK;
-		if (updatePaint(render, paint, 1, false)) {
+		if (updatePaint(render, paint, 1, false, rc)) {
 			canvas.drawPath(path, paint);
 		}
 	}
@@ -750,7 +750,7 @@ public class OsmandRenderer {
 		// rc.main.color = Color.rgb(245, 245, 245);
 		render.setInitialTagValueZoom(pair.tag, pair.value, zoom);
 		boolean rendered = render.search(RenderingRulesStorage.POLYGON_RULES);
-		if(!rendered || !updatePaint(render, paint, 0, true)){
+		if(!rendered || !updatePaint(render, paint, 0, true, rc)){
 			return;
 		}
 		rc.visible++;
@@ -770,7 +770,7 @@ public class OsmandRenderer {
 
 		if (path != null && len > 0) {
 			canvas.drawPath(path, paint);
-			if (updatePaint(render, paint, 1, false)) {
+			if (updatePaint(render, paint, 1, false, rc)) {
 				canvas.drawPath(path, paint);
 			}
 			String name = obj.getName();
@@ -780,7 +780,7 @@ public class OsmandRenderer {
 		}
 	}
 	
-	private boolean updatePaint(RenderingRuleSearchRequest req, Paint p, int ind, boolean area){
+	private boolean updatePaint(RenderingRuleSearchRequest req, Paint p, int ind, boolean area, RenderingContext rc){
 		RenderingRuleProperty rColor;
 		RenderingRuleProperty rStrokeW;
 		RenderingRuleProperty rCap;
@@ -838,12 +838,16 @@ public class OsmandRenderer {
 			}
 			
 			// do not check shadow color here
-//			int shadowColor = req.getIntPropertyValue(req.ALL.R_SHADOW_COLOR);
-//			int shadowLayer = req.getIntPropertyValue(req.ALL.R_SHADOW_RADIUS);
-//			if(shadowColor == 0){
-//				shadowLayer = 0;
-//			}
-//			p.setShadowLayer(shadowLayer, 0, 0, shadowColor);
+			if(rc.shadowRenderingMode != 1) {
+				paint.clearShadowLayer();
+			} else {
+				int shadowColor = req.getIntPropertyValue(req.ALL.R_SHADOW_COLOR);
+				int shadowLayer = req.getIntPropertyValue(req.ALL.R_SHADOW_RADIUS);
+				if (shadowColor == 0) {
+					shadowLayer = 0;
+				}
+				p.setShadowLayer(shadowLayer, 0, 0, shadowColor);
+			}
 		} else {
 			p.setShader(null);
 			p.clearShadowLayer();
@@ -968,7 +972,7 @@ public class OsmandRenderer {
 		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
 		render.setIntFilter(render.ALL.R_LAYER, layer);
 		boolean rendered = render.search(RenderingRulesStorage.LINE_RULES);
-		if(!rendered || !updatePaint(render, paint, 0, false)){
+		if(!rendered || !updatePaint(render, paint, 0, false, rc)){
 			return;
 		}
 		boolean oneway = false;
@@ -1023,13 +1027,10 @@ public class OsmandRenderer {
 				int shadowRadius = render.getIntPropertyValue(render.ALL.R_SHADOW_RADIUS);
 				drawPolylineShadow(canvas, rc, path, shadowColor, shadowRadius);
 			} else {
-				if(rc.shadowRenderingMode != 1) {
-					paint.clearShadowLayer();
-				}
 				canvas.drawPath(path, paint);
-				if (updatePaint(render, paint, 1, false)) {
+				if (updatePaint(render, paint, 1, false, rc)) {
 					canvas.drawPath(path, paint);
-					if (updatePaint(render, paint, 2, false)) {
+					if (updatePaint(render, paint, 2, false, rc)) {
 						canvas.drawPath(path, paint);
 					}
 				}
