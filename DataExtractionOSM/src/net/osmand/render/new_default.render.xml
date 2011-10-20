@@ -322,6 +322,7 @@
 		<filter minzoom="16" maxzoom="16" textSize="13" textColor="#444444" textWrapWidth="16" textMinDistance="40" tag="building" value=""/>
 		<filter minzoom="17" maxzoom="17" textSize="13" textColor="#444444" textWrapWidth="16" tag="building" value=""/>
 		<filter minzoom="18" textSize="15" textColor="#444444" textWrapWidth="16" tag="building" value=""/>
+		<filter minzoom="18" textSize="15" textColor="#444444" textWrapWidth="16" tag="addr:housenumber" />
 
 		<filter minzoom="15" textSize="12" textColor="#000033" textDy="7" textWrapWidth="12" tag="man_made" value="lighthouse" />
 		<filter minzoom="17" textSize="12" textColor="#734a08" textDy="7" textWrapWidth="20" tag="man_made" value="windmill" />
