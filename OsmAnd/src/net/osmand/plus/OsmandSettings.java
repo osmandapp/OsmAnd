@@ -15,9 +15,9 @@ import net.osmand.osm.LatLon;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.activities.search.SearchHistoryHelper;
-import net.osmand.plus.render.BaseOsmandRender;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.render.RenderingRulesStorage;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -143,7 +143,7 @@ public class OsmandSettings {
 		}
 		// update vector renderer 
 		RendererRegistry registry = ctx.getRendererRegistry();
-		BaseOsmandRender newRenderer = registry.getRenderer(RENDERER.get());
+		RenderingRulesStorage newRenderer = registry.getRenderer(RENDERER.get());
 		if (newRenderer == null) {
 			newRenderer = registry.defaultRender();
 		}
@@ -562,18 +562,6 @@ public class OsmandSettings {
 	
 	public boolean usingEnglishNames(){
 		return USE_ENGLISH_NAMES.get();
-	}
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> SHOW_MORE_MAP_DETAIL = new BooleanPreference("show_more_map_detail", false, true);
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Boolean> USE_STEP_BY_STEP_RENDERING = new BooleanPreference("use_step_by_step_rendering",
-			true, false);
-	{
-		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.CAR, true);
-		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.BICYCLE, true);
-		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
@@ -1001,7 +989,7 @@ public class OsmandSettings {
 			if(val == null){
 				val = RendererRegistry.DEFAULT_RENDER;
 			}
-			BaseOsmandRender loaded = ctx.getRendererRegistry().getRenderer(val);
+			RenderingRulesStorage loaded = ctx.getRendererRegistry().getRenderer(val);
 			if (loaded != null) {
 				ctx.getRendererRegistry().setCurrentSelectedRender(loaded);
 				super.setValue(prefs, val);
@@ -1011,12 +999,20 @@ public class OsmandSettings {
 			return false;
 		};
 	};
-	{
-		RENDERER.setModeDefaultValue(ApplicationMode.CAR, RendererRegistry.CAR_RENDER);
-		RENDERER.setModeDefaultValue(ApplicationMode.PEDESTRIAN, RendererRegistry.PEDESTRIAN_RENDER);
-		RENDERER.setModeDefaultValue(ApplicationMode.BICYCLE, RendererRegistry.BICYCLE_RENDER);
-	}
 	
+	Map<String, CommonPreference<String>> customRendersProps = new LinkedHashMap<String, OsmandSettings.CommonPreference<String>>();
+	public CommonPreference<String> getCustomRenderProperty(String attrName){
+		if(!customRendersProps.containsKey(attrName)){
+			customRendersProps.put(attrName, new StringPreference("renderer_"+attrName, "", false));
+		}
+		return customRendersProps.get(attrName);
+	}
+	{
+		CommonPreference<String> pref = getCustomRenderProperty("appMode");
+		pref.setModeDefaultValue(ApplicationMode.CAR, "car");
+		pref.setModeDefaultValue(ApplicationMode.PEDESTRIAN, "pedestrian");
+		pref.setModeDefaultValue(ApplicationMode.BICYCLE, "bicycle");
+	}
 	
 	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference("voice_mute", false, true);
 	

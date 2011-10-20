@@ -36,8 +36,8 @@ import net.osmand.plus.AsyncLoadingThread.MapLoadRequest;
 import net.osmand.plus.AsyncLoadingThread.TileLoadDownloadRequest;
 import net.osmand.plus.AsyncLoadingThread.TransportLoadRequest;
 import net.osmand.plus.activities.OsmandApplication;
-import net.osmand.plus.render.BaseOsmandRender;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.render.RenderingRulesStorage;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -435,7 +435,7 @@ public class ResourceManager {
 		context.getRendererRegistry().setExternalRenderers(externalRenderers);
 		String r = context.getSettings().RENDERER.get();
 		if(r != null){
-			BaseOsmandRender obj = context.getRendererRegistry().getRenderer(r);
+			RenderingRulesStorage obj = context.getRendererRegistry().getRenderer(r);
 			if(obj != null){
 				context.getRendererRegistry().setCurrentSelectedRender(obj);
 			}

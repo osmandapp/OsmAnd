@@ -1,7 +1,7 @@
 package net.osmand.plus.render;
 
 import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.hash.TFloatObjectHashMap;
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,12 +11,16 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MultyPolygon;
+import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRulesStorage;
 import net.sf.junidecode.Junidecode;
 
 import org.apache.commons.logging.Log;
@@ -86,19 +90,22 @@ public class OsmandRenderer {
 		int shieldRes = 0;
 		int textOrder = 20;
 		
-		public void fillProperties(RenderingContext rc, float centerX, float centerY){
-			this.centerX = centerX + rc.textDx;
-			this.centerY = centerY + rc.textDy;
-			textColor = rc.textColor;
-			textSize = rc.textSize;
-			textShadow = (int) rc.textHaloRadius;
-			textWrap = rc.textWrapWidth;
-			bold = rc.textBold;
-			minDistance = rc.textMinDistance;
-			shieldRes = rc.textShield;
-			if(rc.textOrder >= 0){
-				textOrder = rc.textOrder;
+		public void fillProperties(RenderingRuleSearchRequest render, float centerX, float centerY){
+			this.centerX = centerX;
+			this.centerY = centerY + render.getIntPropertyValue(render.ALL.R_TEXT_DY, 0);
+			textColor = render.getIntPropertyValue(render.ALL.R_TEXT_COLOR);
+			if(textColor == 0){
+				textColor = Color.BLACK;
 			}
+			textSize = render.getIntPropertyValue(render.ALL.R_TEXT_SIZE);
+			textShadow = render.getIntPropertyValue(render.ALL.R_TEXT_HALO_RADIUS, 0);
+			textWrap = render.getIntPropertyValue(render.ALL.R_TEXT_WRAP_WIDTH, 0);
+			bold = render.getIntPropertyValue(render.ALL.R_TEXT_BOLD, 0) > 0;
+			minDistance = render.getIntPropertyValue(render.ALL.R_TEXT_MIN_DISTANCE,0);
+			if(render.isSpecified(render.ALL.R_TEXT_SHIELD)) {
+				shieldRes = RenderingIcons.getIcons().get(render.getStringPropertyValue(render.ALL.R_TEXT_SHIELD));
+			}
+			textOrder = render.getIntPropertyValue(render.ALL.R_TEXT_ORDER, 20);
 		}
 	}
 	
@@ -137,94 +144,8 @@ public class OsmandRenderer {
 		float cosRotateTileSize;
 		float sinRotateTileSize;
 
-		// These properties are used for rendering one object  
-		// polyline props
-		boolean showTextOnPath = false;
-		String showAnotherText = null;
-		float textSize = 0;
-		int textColor = 0;
-		int textMinDistance = 0;
-		int textWrapWidth = 0;
-		float textDx = 0;
-		float textDy = 0;
-		float textHaloRadius = 0;
-		boolean textBold;
-		int textShield = 0;
-		int textOrder = -1;
-		
 		String renderingDebugInfo;
 		
-		RenderingPaintProperties main = new RenderingPaintProperties();
-		RenderingPaintProperties second = new RenderingPaintProperties();
-		RenderingPaintProperties third = new RenderingPaintProperties();
-		RenderingPaintProperties[] adds = null;
-		
-
-		
-		public void clearText() {
-			showAnotherText = null;
-			showTextOnPath = false;
-			textSize = 0;
-			textColor = 0;
-			textOrder = -1;
-			textMinDistance = 0;
-			textWrapWidth = 0;
-			textDx = 0;
-			textDy = 0;
-			textHaloRadius = 0;
-			textBold = false;
-			textShield = 0;
-		}
-		 
-		
-	}
-	
-	/* package*/ static class RenderingPaintProperties {
-		int color;
-		float strokeWidth;
-		int shadowLayer;
-		int shadowColor;
-		boolean fillArea;
-		PathEffect pathEffect; 
-		Shader shader;
-		Cap cap;
-		
-		public void emptyLine(){
-			color = 0;
-			strokeWidth = 0;
-			cap = Cap.BUTT;
-			pathEffect = null;
-			fillArea = false;
-			shader = null;
-			shadowColor = 0;
-			shadowLayer = 0;
-		}
-		
-		public void updatePaint(Paint p){
-			p.setStyle(fillArea ? Style.FILL_AND_STROKE : Style.STROKE);
-			p.setColor(color);
-			p.setShader(shader);
-			if(shadowColor == 0){
-				shadowLayer = 0;
-			}
-			p.setShadowLayer(shadowLayer, 0, 0, shadowColor);
-			p.setStrokeWidth(strokeWidth);
-			p.setStrokeCap(cap);
-			if (!fillArea) {
-				p.setPathEffect(pathEffect);
-			}
-		}
-		
-		public void emptyArea(){
-			color = 0;
-			strokeWidth = 0;
-			cap = Cap.BUTT;
-			fillArea = false;
-			shader = null;
-			pathEffect = null;
-			shadowColor = 0;
-			shadowLayer = 0;
-		}
 	}
 	
 	public OsmandRenderer(Context context) {
@@ -273,7 +194,7 @@ public class OsmandRenderer {
 		return shaders.get(resId);
 	}
 	
-	private void put(TFloatObjectHashMap<TIntArrayList> map, Float k, int v, int init){
+	private void put(TIntObjectHashMap<TIntArrayList> map, int k, int v, int init){
 		if(!map.containsKey(k)){
 			map.put(k, new TIntArrayList());
 		}
@@ -282,33 +203,33 @@ public class OsmandRenderer {
 	
 	
 	public Bitmap generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, boolean useEnglishNames,
-			BaseOsmandRender renderer, List<IMapDownloaderCallback> notifyList) {
+			RenderingRuleSearchRequest render, List<IMapDownloaderCallback> notifyList, int defaultColor) {
 		long now = System.currentTimeMillis();
 		
 		// fill area
 		Canvas cv = new Canvas(bmp);
-		if(renderer != null){
-			int dc = renderer.getDefaultColor(rc.nightMode);
-			if(dc != 0){
-				paintFillEmpty.setColor(dc);
-			}
+		if(defaultColor != 0){
+			paintFillEmpty.setColor(defaultColor);
 		}
 		cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillEmpty);
 		
 		// put in order map
 		int sz = objects.size();
 		int init = sz / 4;
-		TFloatObjectHashMap<TIntArrayList> orderMap = new TFloatObjectHashMap<TIntArrayList>();
-		if (renderer != null) {
+		TIntObjectHashMap<TIntArrayList> orderMap = new TIntObjectHashMap<TIntArrayList>();
+		if (render != null) {
 			for (int i = 0; i < sz; i++) {
 				BinaryMapDataObject o = objects.get(i);
 				int sh = i << 8;
 
 				if (o instanceof MultyPolygon) {
-					int mask = MapRenderingTypes.MULTY_POLYGON_TYPE;
 					int layer = ((MultyPolygon) o).getLayer();
-					put(orderMap, renderer.getObjectOrder(((MultyPolygon) o).getTag(), ((MultyPolygon) o).getValue(), 
-							mask, layer), sh, init);
+					render.setInitialTagValueZoom(((MultyPolygon) o).getTag(), ((MultyPolygon) o).getValue(), rc.zoom);
+					render.setIntFilter(render.ALL.R_LAYER, layer);
+					render.setIntFilter(render.ALL.R_ORDER_TYPE, MapRenderingTypes.POLYGON_TYPE);
+					if(render.search(RenderingRulesStorage.ORDER_RULES)) {
+						put(orderMap, render.getIntPropertyValue(render.ALL.R_ORDER), sh, init);
+					}
 				} else {
 					for (int j = 0; j < o.getTypes().length; j++) {
 						// put(orderMap, BinaryMapDataObject.getOrder(o.getTypes()[j]), sh + j, init);
@@ -322,7 +243,12 @@ public class OsmandRenderer {
 						TagValuePair pair = o.getMapIndex().decodeType(MapRenderingTypes.getMainObjectType(wholeType),
 								MapRenderingTypes.getObjectSubType(wholeType));
 						if (pair != null) {
-							put(orderMap, renderer.getObjectOrder(pair.tag, pair.value, mask, layer), sh + j, init);
+							render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
+							render.setIntFilter(render.ALL.R_LAYER, layer);
+							render.setIntFilter(render.ALL.R_ORDER_TYPE, mask);
+							if(render.search(RenderingRulesStorage.ORDER_RULES)) {
+								put(orderMap, render.getIntPropertyValue(render.ALL.R_ORDER), sh + j, init);
+							}
 						}
 
 					}
@@ -341,7 +267,7 @@ public class OsmandRenderer {
 			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			
 			
-			float[] keys = orderMap.keys();
+			int[] keys = orderMap.keys();
 			Arrays.sort(keys);
 			int objCount = 0;
 			for (int k = 0; k < keys.length; k++) {
@@ -353,7 +279,7 @@ public class OsmandRenderer {
 					BinaryMapDataObject obj = objects.get(ind);
 
 					// show text only for main type
-					drawObj(obj, renderer, cv, rc, l, l == 0);
+					drawObj(obj, render, cv, rc, l, l == 0);
 					
 					objCount++;
 				}
@@ -647,10 +573,10 @@ public class OsmandRenderer {
 	}
 
 	
-	protected void drawObj(BinaryMapDataObject obj, BaseOsmandRender render, Canvas canvas, RenderingContext rc, int l, boolean renderText) {
+	protected void drawObj(BinaryMapDataObject obj, RenderingRuleSearchRequest render, Canvas canvas, RenderingContext rc, int l, boolean renderText) {
 		rc.allObjects++;
 		if (obj instanceof MultyPolygon) {
-			drawMultiPolygon(obj, render,canvas, rc);
+			drawMultiPolygon(obj, render, canvas, rc);
 		} else {
 			int mainType = obj.getTypes()[l];
 			int t = mainType & 3;
@@ -707,28 +633,20 @@ public class OsmandRenderer {
 		return rc.tempPoint;
 	}
 
-	
-	
-
-	
-	
 	public void clearCachedResources(){
 		cachedIcons.clear();
 		shaders.clear();
 	}
 	
-	private void drawMultiPolygon(BinaryMapDataObject obj, BaseOsmandRender render, Canvas canvas, RenderingContext rc) {
+	private void drawMultiPolygon(BinaryMapDataObject obj, RenderingRuleSearchRequest render, Canvas canvas, RenderingContext rc) {
 		String tag = ((MultyPolygon)obj).getTag();
 		String value = ((MultyPolygon)obj).getValue();
 		if(render == null || tag == null){
 			return;
 		}
-		rc.main.emptyArea();
-		rc.second.emptyLine();
-		rc.main.color = Color.rgb(245, 245, 245);
-		
-		boolean rendered = render.renderPolygon(tag, value, rc.zoom, rc, this, rc.nightMode);
-		if(!rendered){
+		render.setInitialTagValueZoom(tag, value, rc.zoom);
+		boolean rendered = render.search(RenderingRulesStorage.POLYGON_RULES);
+		if(!rendered || !updatePaint(render, paint, 0, true)){
 			return;
 		}
 		rc.visible++;
@@ -754,21 +672,16 @@ public class OsmandRenderer {
 				}
 			}
 		}
-		rc.main.updatePaint(paint);
 		canvas.drawPath(path, paint);
 		// for test purpose
-//	      rc.second.strokeWidth = 1.5f;
-//	      rc.second.color = Color.BLACK;
-	    
-		if (rc.second.strokeWidth != 0) {
-			rc.second.updatePaint(paint);
+//	      render.strokeWidth = 1.5f;
+//	      render.color = Color.BLACK;
+		if (updatePaint(render, paint, 1, false)) {
 			canvas.drawPath(path, paint);
 		}
 	}
 	
-	
-	private void drawPolygon(BinaryMapDataObject obj, BaseOsmandRender render, Canvas canvas, RenderingContext rc, TagValuePair pair) {
-		
+	private void drawPolygon(BinaryMapDataObject obj, RenderingRuleSearchRequest render, Canvas canvas, RenderingContext rc, TagValuePair pair) {
 		if(render == null || pair == null){
 			return;
 		}
@@ -776,12 +689,11 @@ public class OsmandRenderer {
 		float yText = 0;
 		int zoom = rc.zoom;
 		Path path = null;
-		rc.main.emptyArea();
-		rc.second.emptyLine();
-		// rc.main.color = Color.rgb(245, 245, 245);
 		
-		boolean rendered = render.renderPolygon(pair.tag, pair.value, zoom, rc, this, rc.nightMode);
-		if(!rendered){
+		// rc.main.color = Color.rgb(245, 245, 245);
+		render.setInitialTagValueZoom(pair.tag, pair.value, zoom);
+		boolean rendered = render.search(RenderingRulesStorage.POLYGON_RULES);
+		if(!rendered || !updatePaint(render, paint, 0, true)){
 			return;
 		}
 		rc.visible++;
@@ -800,11 +712,8 @@ public class OsmandRenderer {
 		}
 
 		if (path != null && len > 0) {
-
-			rc.main.updatePaint(paint);
 			canvas.drawPath(path, paint);
-			if (rc.second.strokeWidth != 0) {
-				rc.second.updatePaint(paint);
+			if (updatePaint(render, paint, 1, false)) {
 				canvas.drawPath(path, paint);
 			}
 			String name = obj.getName();
@@ -812,11 +721,81 @@ public class OsmandRenderer {
 				drawPointText(render, rc, pair, xText / len, yText / len, name);
 			}
 		}
-		return;
 	}
+	
+	private boolean updatePaint(RenderingRuleSearchRequest req, Paint p, int ind, boolean area){
+		RenderingRuleProperty rColor;
+		RenderingRuleProperty rStrokeW;
+		RenderingRuleProperty rCap;
+		RenderingRuleProperty rPathEff;
+		if(ind == 0){
+			rColor = req.ALL.R_COLOR;
+			rStrokeW = req.ALL.R_STROKE_WIDTH;
+			rCap = req.ALL.R_CAP;
+			rPathEff = req.ALL.R_PATH_EFFECT;
+		} else if(ind == 1){
+			rColor = req.ALL.R_COLOR_2;
+			rStrokeW = req.ALL.R_STROKE_WIDTH_2;
+			rCap = req.ALL.R_CAP_2;
+			rPathEff = req.ALL.R_PATH_EFFECT_2;
+		} else {
+			rColor = req.ALL.R_COLOR_3;
+			rStrokeW = req.ALL.R_STROKE_WIDTH_3;
+			rCap = req.ALL.R_CAP_3;
+			rPathEff = req.ALL.R_PATH_EFFECT_3;
+		}
+		if(area){
+			if(!req.isSpecified(rColor) && !req.isSpecified(req.ALL.R_SHADER)){
+				return false;
+			}
+			p.setStyle(Style.FILL_AND_STROKE);
+			p.setStrokeWidth(0);
+		} else {
+			if(!req.isSpecified(rStrokeW)){
+				return false;
+			}
+			p.setStyle(Style.STROKE);
+			p.setStrokeWidth(req.getFloatPropertyValue(rStrokeW));
+			String cap = req.getStringPropertyValue(rCap);
+			if(!Algoritms.isEmpty(cap)){
+				p.setStrokeCap(Cap.valueOf(cap.toUpperCase()));
+			} else {
+				p.setStrokeCap(Cap.BUTT);
+			}
+			String pathEffect = req.getStringPropertyValue(rPathEff);
+			if (!Algoritms.isEmpty(pathEffect)) {
+				p.setPathEffect(getDashEffect(pathEffect));
+			} else {
+				p.setPathEffect(null);
+			}
+		}
+		p.setColor(req.getIntPropertyValue(rColor));
+		
+		if(ind == 0){
+			Integer resId = RenderingIcons.getIcons().get(req.getStringPropertyValue(req.ALL.R_SHADER));
+			if(resId != null){
+				p.setColor(Color.BLACK);
+				p.setShader(getShader(resId));
+			} else {
+				p.setShader(null);
+			}
+			
+			int shadowColor = req.getIntPropertyValue(req.ALL.R_SHADOW_COLOR);
+			int shadowLayer = req.getIntPropertyValue(req.ALL.R_SHADOW_RADIUS);
+			if(shadowColor == 0){
+				shadowLayer = 0;
+			}
+			p.setShadowLayer(shadowLayer, 0, 0, shadowColor);
+		} else {
+			p.setShader(null);
+			p.setShadowLayer(0, 0, 0, 0);
+		}
+		return true;
+		
+	}
+	
 
-	private void drawPointText(BaseOsmandRender render, RenderingContext rc, TagValuePair pair, float xText, float yText, String name) {
-		rc.clearText();
+	private void drawPointText(RenderingRuleSearchRequest render, RenderingContext rc, TagValuePair pair, float xText, float yText, String name) {
 		String ref = null;
 		if (name.charAt(0) == MapRenderingTypes.REF_CHAR) {
 			ref = name.substring(1);
@@ -833,28 +812,39 @@ public class OsmandRenderer {
 		}
 
 		if (ref != null && ref.trim().length() > 0) {
-			rc.clearText();
-			ref = render.renderObjectText(ref, pair.tag, pair.value, rc, true, rc.nightMode);
-			TextDrawInfo text = new TextDrawInfo(ref);
-			text.fillProperties(rc, xText, yText);
-			rc.textToDraw.add(text);
+			render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
+			render.setIntFilter(render.ALL.R_TEXT_LENGTH, ref.length());
+			render.setBooleanFilter(render.ALL.R_REF, true);
+			if(render.search(RenderingRulesStorage.TEXT_RULES)){
+				if(render.getIntPropertyValue(render.ALL.R_TEXT_SIZE) > 0){
+					TextDrawInfo text = new TextDrawInfo(ref);
+					text.fillProperties(render, xText, yText);
+					rc.textToDraw.add(text);
+				}
+			}
 
 		}
-		name = render.renderObjectText(name, pair.tag, pair.value, rc, false, rc.nightMode);
-		if (rc.textSize > 0 && name != null) {
-			TextDrawInfo info = new TextDrawInfo(name);
-			info.fillProperties(rc, xText, yText);
-			rc.textToDraw.add(info);
+		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
+		render.setIntFilter(render.ALL.R_TEXT_LENGTH, name.length());
+		render.setBooleanFilter(render.ALL.R_REF, false);
+		if(render.search(RenderingRulesStorage.TEXT_RULES) ){
+			if(render.getIntPropertyValue(render.ALL.R_TEXT_SIZE) > 0){
+				TextDrawInfo info = new TextDrawInfo(name);
+				info.fillProperties(render, xText, yText);
+				rc.textToDraw.add(info);
+			}
 		}
 	}
 	
 	
-	private void drawPoint(BinaryMapDataObject obj, BaseOsmandRender render, Canvas canvas, RenderingContext rc, TagValuePair pair, boolean renderText) {
+	private void drawPoint(BinaryMapDataObject obj, RenderingRuleSearchRequest render, Canvas canvas, RenderingContext rc, TagValuePair pair, boolean renderText) {
 		if(render == null || pair == null){
 			return;
 		}
+		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
+		render.search(RenderingRulesStorage.POINT_RULES);
 		
-		Integer resId = render.getPointIcon(pair.tag, pair.value, rc.zoom, rc.nightMode);
+		Integer resId = RenderingIcons.getIcons().get(render.getStringPropertyValue(render.ALL.R_ICON));
 		String name = null;
 		if (renderText) {
 			name = obj.getName();
@@ -890,7 +880,7 @@ public class OsmandRenderer {
 	
 
 	
-	private void drawPolyline(BinaryMapDataObject obj, BaseOsmandRender render, Canvas canvas, RenderingContext rc, TagValuePair pair, int layer) {
+	private void drawPolyline(BinaryMapDataObject obj, RenderingRuleSearchRequest render, Canvas canvas, RenderingContext rc, TagValuePair pair, int layer) {
 		if(render == null || pair == null){
 			return;
 		}
@@ -898,16 +888,15 @@ public class OsmandRenderer {
 		if(length < 2){
 			return;
 		}
-		rc.main.emptyLine();
-		rc.second.emptyLine();
-		rc.third.emptyLine();
-		rc.adds = null;
-		boolean res = render.renderPolyline(pair.tag, pair.value, rc.zoom, rc, this, layer, rc.nightMode);
-		if(rc.main.strokeWidth == 0 || !res){
+		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
+		render.setIntFilter(render.ALL.R_LAYER, layer);
+		boolean rendered = render.search(RenderingRulesStorage.LINE_RULES);
+		if(!rendered || !updatePaint(render, paint, 0, false)){
 			return;
 		}
+		boolean oneway = false;
 		if(rc.zoom >= 16 && "highway".equals(pair.tag) && MapRenderingTypes.isOneWayWay(obj.getHighwayAttributes())){ //$NON-NLS-1$
-			rc.adds = getOneWayProperties();
+			oneway = true;
 		}
 		
 		
@@ -953,20 +942,17 @@ public class OsmandRenderer {
 			yPrev = p.y;
 		}
 		if (path != null) {
-			rc.main.updatePaint(paint);
 			canvas.drawPath(path, paint);
-			if (rc.second.strokeWidth != 0) {
-				rc.second.updatePaint(paint);
+			if (updatePaint(render, paint, 1, false)) {
 				canvas.drawPath(path, paint);
-				if (rc.third.strokeWidth != 0) {
-					rc.third.updatePaint(paint);
+				if (updatePaint(render, paint, 2, false)) {
 					canvas.drawPath(path, paint);
 				}
 			}
-			if (rc.adds != null) {
-				for (int i = 0; i < rc.adds.length; i++) {
-					rc.adds[i].updatePaint(paint);
-					canvas.drawPath(path, paint);
+			if(oneway){
+				Paint[] paints = getOneWayPaints();
+				for (int i = 0; i < paints.length; i++) {
+					canvas.drawPath(path, paints[i]);
 				}
 			}
 			if (obj.getName() != null && obj.getName().length() > 0) {
@@ -986,22 +972,28 @@ public class OsmandRenderer {
 					}
 				}
 				if(ref != null && ref.trim().length() > 0){
-					rc.clearText();
-					ref = render.renderObjectText(ref, pair.tag, pair.value, rc, true, rc.nightMode);
-					TextDrawInfo text = new TextDrawInfo(ref);
-					text.fillProperties(rc, middlePoint.x, middlePoint.y);
-					text.pathRotate = pathRotate;
-					rc.textToDraw.add(text);
+					render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
+					render.setIntFilter(render.ALL.R_TEXT_LENGTH, ref.length());
+					render.setBooleanFilter(render.ALL.R_REF, true);
+					if(render.search(RenderingRulesStorage.TEXT_RULES)){
+						if(render.getIntPropertyValue(render.ALL.R_TEXT_SIZE) > 0){
+							TextDrawInfo text = new TextDrawInfo(ref);
+							text.fillProperties(render, middlePoint.x, middlePoint.y);
+							text.pathRotate = pathRotate;
+							rc.textToDraw.add(text);
+						}
+					}
 					
 				}
 				
 				if(name != null && name.trim().length() > 0){
-					rc.clearText();
-					name = render.renderObjectText(name, pair.tag, pair.value, rc, false, rc.nightMode);
-					if (rc.textSize > 0) {
+					render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
+					render.setIntFilter(render.ALL.R_TEXT_LENGTH, name.length());
+					render.setBooleanFilter(render.ALL.R_REF, false);
+					if (render.search(RenderingRulesStorage.TEXT_RULES) && render.getIntPropertyValue(render.ALL.R_TEXT_SIZE) > 0) {
 						TextDrawInfo text = new TextDrawInfo(name);
-						if (!rc.showTextOnPath) {
-							text.fillProperties(rc, middlePoint.x, middlePoint.y);
+						if (render.getIntPropertyValue(render.ALL.R_TEXT_ON_PATH, 0) == 0) {
+							text.fillProperties(render, middlePoint.x, middlePoint.y);
 							rc.textToDraw.add(text);
 						} else {
 							paintText.setTextSize(text.textSize);
@@ -1019,10 +1011,11 @@ public class OsmandRenderer {
 										}
 									}
 								}
-								text.fillProperties(rc, xMid / 2, yMid / 2);
+								text.fillProperties(render, xMid / 2, yMid / 2);
 								text.pathRotate = pathRotate;
 								text.drawOnPath = path;
-								text.vOffset = rc.main.strokeWidth / 2 - 1;
+								float strokeWidth = render.getFloatPropertyValue(render.ALL.R_STROKE_WIDTH);
+								text.vOffset = strokeWidth / 2 - 1;
 								rc.textToDraw.add(text);
 							}
 						}
@@ -1032,38 +1025,37 @@ public class OsmandRenderer {
 			}
 		}
 	}
-	private static RenderingPaintProperties[] oneWay = null;
-	public static RenderingPaintProperties[] getOneWayProperties(){
+	private static Paint[] oneWay = null;
+	private static Paint oneWayPaint(){
+		Paint oneWay = new Paint();
+		oneWay.setStyle(Style.STROKE);
+		oneWay.setColor(0xff6c70d5);
+		oneWay.setAntiAlias(true);
+		return oneWay; 
+	}
+	public static Paint[] getOneWayPaints(){
 		if(oneWay == null){
 			PathEffect arrowDashEffect1 = new DashPathEffect(new float[] { 0, 12, 10, 152 }, 0);
 			PathEffect arrowDashEffect2 = new DashPathEffect(new float[] { 0, 12, 9, 153 }, 1);
 			PathEffect arrowDashEffect3 = new DashPathEffect(new float[] { 0, 18, 2, 154 }, 1);
 			PathEffect arrowDashEffect4 = new DashPathEffect(new float[] { 0, 18, 1, 155 }, 1);
-			oneWay = new RenderingPaintProperties[4];
-			oneWay[0] = new RenderingPaintProperties();
-			oneWay[0].emptyLine();
-			oneWay[0].color = 0xff6c70d5;
-			oneWay[0].strokeWidth = 1;
-			oneWay[0].pathEffect = arrowDashEffect1;
+			oneWay = new Paint[4];
+			oneWay[0] = oneWayPaint();
+			oneWay[0].setStrokeWidth(1);
+			oneWay[0].setPathEffect(arrowDashEffect1);
 			
-			oneWay[1] = new RenderingPaintProperties();
-			oneWay[1].emptyLine();
-			oneWay[1].color = 0xff6c70d5;
-			oneWay[1].strokeWidth = 2;
-			oneWay[1].pathEffect = arrowDashEffect2;
+			oneWay[1] = oneWayPaint();
+			oneWay[1].setStrokeWidth(2);
+			oneWay[1].setPathEffect(arrowDashEffect2);
+
+			oneWay[2] = oneWayPaint();
+			oneWay[2].setStrokeWidth(3);
+			oneWay[2].setPathEffect(arrowDashEffect3);
 			
-			oneWay[2] = new RenderingPaintProperties();
-			oneWay[2].emptyLine();
-			oneWay[2].color = 0xff6c70d5;
-			oneWay[2].strokeWidth = 3;
-			oneWay[2].pathEffect = arrowDashEffect3;
+			oneWay[3] = oneWayPaint();			
+			oneWay[3].setStrokeWidth(4);
+			oneWay[3].setPathEffect(arrowDashEffect4);
 			
-			oneWay[3] = new RenderingPaintProperties();
-			oneWay[3].emptyLine();
-			oneWay[3].color = 0xff6c70d5;
-			oneWay[3].strokeWidth = 4;
-			oneWay[3].pathEffect = arrowDashEffect4;
-				
 		}
 		return oneWay;
 	}
