@@ -53,6 +53,7 @@ public class OsmandRenderer {
 
 	private final int clFillScreen = Color.rgb(241, 238, 232);
 
+	
 	private TextPaint paintText;
 	private Paint paint;
 
@@ -212,8 +213,9 @@ public class OsmandRenderer {
 
 
 	public Bitmap generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, boolean useEnglishNames,
-			RenderingRuleSearchRequest render, List<IMapDownloaderCallback> notifyList, int defaultColor) {
+			RenderingRuleSearchRequest render, List<IMapDownloaderCallback> notifyList, int defaultColor, boolean nativeRendering) {
 		long now = System.currentTimeMillis();
+		
 
 		// fill area
 		Canvas cv = new Canvas(bmp);
@@ -223,77 +225,85 @@ public class OsmandRenderer {
 		cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillEmpty);
 
 		// put in order map
-		int sz = objects.size();
-		int init = sz / 4;
-		TIntObjectHashMap<TIntArrayList> orderMap = sortObjectsByProperOrder(rc, objects, render, sz, init);
+		
 		if (objects != null && !objects.isEmpty() && rc.width > 0 && rc.height > 0) {
-			int objCount = 0;
-			// init rendering context
-			rc.tileDivisor = (int) (1 << (31 - rc.zoom));
-			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
-			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
+			if (!nativeRendering) {
 
-			int[] keys = orderMap.keys();
-			Arrays.sort(keys);
-			
-			boolean shadowDrawn = false;
+				TIntObjectHashMap<TIntArrayList> orderMap = sortObjectsByProperOrder(rc, objects, render);
 
-			for (int k = 0; k < keys.length; k++) {
-				if (!shadowDrawn && keys[k] >= rc.shadowLevelMin && keys[k] <= rc.shadowLevelMax && 
-						rc.shadowRenderingMode > 1) {
-					for (int ki = k; ki < keys.length; ki++) {
-						if (keys[ki] > rc.shadowLevelMax || rc.interrupted) {
-							break;
+				int objCount = 0;
+				// init rendering context
+				rc.tileDivisor = (int) (1 << (31 - rc.zoom));
+				rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
+				rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
+
+				int[] keys = orderMap.keys();
+				Arrays.sort(keys);
+
+				boolean shadowDrawn = false;
+
+				for (int k = 0; k < keys.length; k++) {
+					if (!shadowDrawn && keys[k] >= rc.shadowLevelMin && keys[k] <= rc.shadowLevelMax && rc.shadowRenderingMode > 1) {
+						for (int ki = k; ki < keys.length; ki++) {
+							if (keys[ki] > rc.shadowLevelMax || rc.interrupted) {
+								break;
+							}
+							TIntArrayList list = orderMap.get(keys[ki]);
+							for (int j = 0; j < list.size(); j++) {
+								int i = list.get(j);
+								int ind = i >> 8;
+								int l = i & 0xff;
+								BinaryMapDataObject obj = objects.get(ind);
+
+								// show text only for main type
+								drawObj(obj, render, cv, rc, l, l == 0, true);
+								objCount++;
+							}
 						}
-						TIntArrayList list = orderMap.get(keys[ki]);
-						for (int j = 0; j < list.size(); j++) {
-							int i = list.get(j);
-							int ind = i >> 8;
-							int l = i & 0xff;
-							BinaryMapDataObject obj = objects.get(ind);
-
-							// show text only for main type
-							drawObj(obj, render, cv, rc, l, l == 0, true);
-							objCount++;
-						}
+						shadowDrawn = true;
 					}
-					shadowDrawn = true;
+					if (rc.interrupted) {
+						return null;
+					}
+
+					TIntArrayList list = orderMap.get(keys[k]);
+					for (int j = 0; j < list.size(); j++) {
+						int i = list.get(j);
+						int ind = i >> 8;
+						int l = i & 0xff;
+						BinaryMapDataObject obj = objects.get(ind);
+
+						// show text only for main type
+						drawObj(obj, render, cv, rc, l, l == 0, false);
+						objCount++;
+					}
+					if (objCount > 25) {
+						notifyListeners(notifyList);
+						objCount = 0;
+					}
+
 				}
-				if (rc.interrupted) {
-					return null;
-				}
 
-				TIntArrayList list = orderMap.get(keys[k]);
-				for (int j = 0; j < list.size(); j++) {
-					int i = list.get(j);
-					int ind = i >> 8;
-					int l = i & 0xff;
-					BinaryMapDataObject obj = objects.get(ind);
+				long beforeIconTextTime = System.currentTimeMillis() - now;
+				notifyListeners(notifyList);
+				drawIconsOverCanvas(rc, cv);
 
-					// show text only for main type
-					drawObj(obj, render, cv, rc, l, l == 0, false);
-					objCount++;
-				}
-				if (objCount > 25) {
-					notifyListeners(notifyList);
-					objCount = 0;
-				}
+				notifyListeners(notifyList);
+				drawTextOverCanvas(rc, cv, useEnglishNames);
 
-			}
+				long time = System.currentTimeMillis() - now;
+				rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
+						+ "(%s points, %s points inside, %s objects visile from %s)",//$NON-NLS-1$
+						time, time - beforeIconTextTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
+				log.info(rc.renderingDebugInfo);
 
-			long beforeIconTextTime = System.currentTimeMillis() - now;
-			notifyListeners(notifyList);
-			drawIconsOverCanvas(rc, cv);
-
-			notifyListeners(notifyList);
-			drawTextOverCanvas(rc, cv, useEnglishNames);
-
+			} else {
 			long time = System.currentTimeMillis() - now;
+			String res = NativeOsmandLibrary.generateRendering(rc, objects, bmp, useEnglishNames, render);
 			rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
-					+ "(%s points, %s points inside, %s objects visile from %s)",//$NON-NLS-1$
-					time, time - beforeIconTextTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
-			log.info(rc.renderingDebugInfo);
-
+					+ "(%s points, %s points inside, %s objects visile from %s)\n" + res,//$NON-NLS-1$
+					time, 0, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
+			}
 		}
 
 		return bmp;
@@ -334,7 +344,9 @@ public class OsmandRenderer {
 	}
 
 	private TIntObjectHashMap<TIntArrayList> sortObjectsByProperOrder(RenderingContext rc, List<BinaryMapDataObject> objects,
-			RenderingRuleSearchRequest render, int sz, int init) {
+			RenderingRuleSearchRequest render) {
+		int sz = objects.size();
+		int init = sz / 4;
 		TIntObjectHashMap<TIntArrayList> orderMap = new TIntObjectHashMap<TIntArrayList>();
 		if (render != null) {
 			render.clearState();

@@ -174,6 +174,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	    registerBooleanPreference(osmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES,screen);
 	    registerBooleanPreference(osmandSettings.MAP_VECTOR_DATA,screen);
 	    registerBooleanPreference(osmandSettings.TEST_ANIMATE_ROUTING,screen);
+	    registerBooleanPreference(osmandSettings.NATIVE_RENDERING,screen);
+	    
 	    
 		registerEditTextPreference(osmandSettings.USER_NAME, screen);
 		registerEditTextPreference(osmandSettings.USER_PASSWORD, screen);

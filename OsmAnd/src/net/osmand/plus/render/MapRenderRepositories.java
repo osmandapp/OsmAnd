@@ -446,7 +446,7 @@ public class MapRenderRepositories {
 			this.bmpLocation = tileRect;
 
 			renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, prefs.USE_ENGLISH_NAMES.get(), renderingReq,
-					notifyList, storage.getBgColor(nightMode));
+					notifyList, storage.getBgColor(nightMode), app.getSettings().NATIVE_RENDERING.get());
 			String renderingDebugInfo = currentRenderingContext.renderingDebugInfo;
 			if (checkWhetherInterrupted()) {
 				currentRenderingContext = null;
