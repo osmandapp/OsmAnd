@@ -94,25 +94,25 @@
 			<filter tag="administrative" value="" order="62" />
 			<filter tag="waterway"  value="" order="18" />
 
-			<filter tag="highway" value="motorway" order="57" />
-			<filter tag="highway" value="trunk" order="56" />
-			<filter tag="highway" value="primary" order="55" />
-			<filter tag="highway" value="secondary" order="54" />
-			<filter tag="highway" value="tertiary" order="53" />
-			<filter tag="highway" value="road" order="51" />
-			<filter tag="highway" value="unclassified" order="51" />
-			<filter tag="highway" value="residential" order="52" />
-			<filter tag="highway" value="service" order="52" />
-			<filter tag="highway" value="living_street" order="47" />
-			<filter tag="highway" value="track" order="50" />
-			<filter tag="highway" value="path" order="48" />
+			<filter tag="highway" value="motorway" order="57" shadowLevel="1"/>
+			<filter tag="highway" value="trunk" order="56" shadowLevel="1"/>
+			<filter tag="highway" value="primary" order="55" shadowLevel="1"/>
+			<filter tag="highway" value="secondary" order="54" shadowLevel="1"/>
+			<filter tag="highway" value="tertiary" order="53" shadowLevel="1"/>
+			<filter tag="highway" value="road" order="51" shadowLevel="1"/>
+			<filter tag="highway" value="unclassified" order="51" shadowLevel="1"/>
+			<filter tag="highway" value="residential" order="52" shadowLevel="1"/>
+			<filter tag="highway" value="service" order="52" shadowLevel="1"/>
+			<filter tag="highway" value="living_street" order="47" shadowLevel="1"/>
+			<filter tag="highway" value="track" order="50" shadowLevel="1"/>
+			<filter tag="highway" value="path" order="48" shadowLevel="1"/>
 
-			<filter tag="highway" value="construction" order="46" />
-			<filter tag="highway" value="proposed" order="45" />
-			<filter tag="highway" value="motorway_link" order="44" />
-			<filter tag="highway" value="trunk_link" order="43" />
-			<filter tag="highway" value="primary_link" order="42" />
-			<filter tag="highway" value="secondary_link" order="41" />
+			<filter tag="highway" value="construction" order="46" shadowLevel="1"/>
+			<filter tag="highway" value="proposed" order="45" shadowLevel="1"/>
+			<filter tag="highway" value="motorway_link" order="44" shadowLevel="1"/>
+			<filter tag="highway" value="trunk_link" order="43" shadowLevel="1"/>
+			<filter tag="highway" value="primary_link" order="42" shadowLevel="1"/>
+			<filter tag="highway" value="secondary_link" order="41" shadowLevel="1"/>
 
 			<filter appMode="pedestrian" tag="highway" value="pedestrian" order="60" />
 			<filter appMode="pedestrian" tag="highway" value="cycleway" order="45" />
@@ -953,7 +953,7 @@
 		<group>
 			<filter tag="highway" value="primary" maxzoom="13" />
 			<filter tag="highway" value="primary_link" maxzoom="13" />
-			<groupFilter color="#eb989a">
+			<groupFilter color="#eb989a" shadowColor="#464646" shadowRadius="1" cap="ROUND">
 				<filter minzoom="7" maxzoom="9" strokeWidth="4" />
 				<filter minzoom="10" maxzoom="10" strokeWidth="5" />
 				<filter minzoom="11" maxzoom="11" strokeWidth="6" />
@@ -965,7 +965,7 @@
 		<group>
 			<filter tag="highway" value="secondary" maxzoom="13" />
 			<filter tag="highway" value="secondary_link" maxzoom="13"/>
-			<groupFilter color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" shadowRadius="1" >
+			<groupFilter color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" shadowRadius="1" cap="ROUND" >
 				<filter minzoom="9" maxzoom="9" strokeWidth="3" />
 				<filter minzoom="10" maxzoom="10" strokeWidth="4" />
 				<filter minzoom="11" maxzoom="11" strokeWidth="5" />
@@ -975,24 +975,24 @@
 		</group>
 
 		<group>
-			<filter tag="highway" value="motorway" color="#a58dff" color_2="#a58dff" />
+			<filter tag="highway" value="motorway" color="#a58dff" color_2="#a58dff"  />
 			<filter tag="highway" value="motorway_link" color="#a58dff" color_2="#a58dff" />
 			<filter tag="highway" value="trunk" color="#ffaf80" color_2="#ffaf80" />
 			<filter tag="highway" value="trunk_link" color="#ffaf80" color_2="#ffaf80" />
 			<filter tag="highway" value="primary" color="#eb989a" color_2="#eb989a" />
 			<filter tag="highway" value="primary_link" color="#eb989a" color_2="#eb989a" />
-			<filter tag="highway" value="secondary" color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" shadowRadius="1" />
-			<filter tag="highway" value="secondary_link" color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" shadowRadius="1" />
-			<groupFilter>
+			<filter tag="highway" value="secondary" color="#fdd6a4" color_2="#fdd6a4"  />
+			<filter tag="highway" value="secondary_link" color="#fdd6a4" color_2="#fdd6a4"/>
+			<groupFilter cap="ROUND" shadowColor="#464646">
 				<!-- bridge -->
-				<filter layer="1" cap_2="SQUARE" color="#000000">
+				<filter layer="1" cap_2="SQUARE" color="#000000" cap="BUTT">
 					<filter minzoom="14" maxzoom="15" strokeWidth="14" strokeWidth_2="12" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="17" strokeWidth_2="15" />
 					<filter minzoom="17" maxzoom="17" strokeWidth="21" strokeWidth_2="19" />
 					<filter minzoom="18" strokeWidth="26" strokeWidth_2="24" />
 					<groupFilter nightMode="true" color="#ffffff" />
 				</filter>
-				<filter shadowRadius="1">
+				<filter shadowRadius="1" >
 					<filter minzoom="14" maxzoom="14" strokeWidth="10" />
 					<filter minzoom="15" maxzoom="15" strokeWidth="12" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="15" />
@@ -1006,13 +1006,13 @@
 		<group>
 			<filter tag="highway" value="tertiary" />
 			<filter tag="highway" value="tertiary_link" />
-			<groupFilter color="#fefeb3" color_2="#fefeb3" shadowColor="#bababa">
+			<groupFilter color="#fefeb3" color_2="#fefeb3" shadowRadius="1" shadowColor="#bababa"  >
 				<filter minzoom="10" maxzoom="10" strokeWidth="3" />
 				<filter minzoom="11" maxzoom="11" strokeWidth="4" />
 				<filter minzoom="12" maxzoom="12" strokeWidth="5" />
 				<filter minzoom="13" maxzoom="13" strokeWidth="6" />
 				<!-- bridge --> 
-				<filter layer="1" cap_2="SQUARE" color="#000000">
+				<filter layer="1" cap_2="SQUARE" color="#000000" cap="BUTT" shadowRadius="0">
 					<filter minzoom="13" maxzoom="14" strokeWidth="8" strokeWidth_2="6" />
 					<filter minzoom="15" maxzoom="15" strokeWidth="10" strokeWidth_2="8" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="12" strokeWidth_2="10" />
@@ -1020,7 +1020,7 @@
 					<filter minzoom="18" strokeWidth="20" strokeWidth_2="18" />
 					<groupFilter nightMode="true" color="#ffffff" />
 			 	</filter>
-				<filter shadowRadius="1">
+				<filter cap="ROUND">
 					<filter minzoom="14" maxzoom="14" strokeWidth="6" />
 					<filter minzoom="15" maxzoom="15" strokeWidth="8" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="10" />
@@ -1037,11 +1037,11 @@
 			<filter tag="highway" value="road" />
 			<filter tag="highway" value="unclassified" />
 			<filter tag="highway" value="residential" />
-			<groupFilter color="#ffffff" color_2="#ffffff" shadowColor="#464646">
+			<groupFilter shadowRadius="1" color="#ffffff" color_2="#ffffff" shadowColor="#464646">
 				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="3" /> 
 				<filter minzoom="13" maxzoom="13" strokeWidth="4" />
 				<!-- bridge --> 
-				<filter  layer="1" cap_2="SQUARE">
+				<filter  layer="1" cap_2="SQUARE" cap="BUTT" shadowRadius="0">
 					<filter minzoom="14" maxzoom="14" strokeWidth="8" strokeWidth_2="6" />
 					<filter minzoom="15" maxzoom="15" strokeWidth="10" strokeWidth_2="8" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="12" strokeWidth_2="10" />
@@ -1049,7 +1049,7 @@
 					<filter minzoom="18" strokeWidth="20" strokeWidth_2="18" />
 					<groupFilter nightMode="true" color="#ffffff" color_2="#9F9F9F" shadowColor="#666666" />
 			 	</filter>
-				<filter  shadowRadius="1">
+				<filter cap="ROUND">
 					<filter minzoom="14" maxzoom="14" strokeWidth="6" />
 					<filter minzoom="15" maxzoom="15" strokeWidth="8" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="10" />
@@ -1066,12 +1066,12 @@
 			<filter tag="highway" value="service" color="#ececec" color_2="#ececec" shadowColor="#b0b0b0" />
 			<filter tag="highway" value="living_street" color="#ececec" color_2="#ececec" shadowColor="#b0b0b0" />
 			<filter tag="highway" value="pedestrian" color="#ececec" color_2="#ececec" shadowColor="#b0b0b0" />
-			<groupFilter shadowRadius="1">
+			<groupFilter shadowRadius="1" cap="ROUND">
 				<filter hmRendered="true" minzoom="13" maxzoom="13" strokeWidth="2" />
 				<filter hmRendered="true" minzoom="14" maxzoom="14" strokeWidth="3" />
 				 
 				<!-- bridge --> 
-				<filter  layer="1" cap_2="SQUARE" color="#000000" color_2="#ffffff" shadowColor="#464646" >
+				<filter  layer="1" cap_2="SQUARE" cap="BUTT" color="#000000" color_2="#ffffff" shadowColor="#464646" >
 					<filter hmRendered="true" minzoom="13" maxzoom="14" strokeWidth="5" strokeWidth_2="3" />
 					<filter minzoom="15" maxzoom="15" strokeWidth="6" strokeWidth_2="4" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="7" strokeWidth_2="5" />
