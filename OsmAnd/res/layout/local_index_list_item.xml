@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"   android:layout_width="fill_parent"	android:layout_height="wrap_content" 
+android:orientation="vertical">
+
+  <LinearLayout android:layout_width="fill_parent"	android:layout_height="wrap_content" android:layout_marginLeft="15dp">
+	<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+		<CheckBox android:id="@+id/check_local_index" android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:gravity="center_vertical" android:focusable="false"/>
+	</LinearLayout>
+	<TextView android:id="@+id/local_index_name" android:gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_weight="1" android:textSize="20sp" android:layout_marginLeft="8dp"></TextView>
+
+	<TextView android:id="@+id/local_index_size" android:layout_marginLeft="3dp" android:gravity="center_vertical" android:layout_width="75dp"
+		android:layout_height="wrap_content" android:textSize="16sp" ></TextView>
+  </LinearLayout>
+  
+  	<TextView android:id="@+id/local_index_descr" android:layout_marginLeft="25dp" android:layout_marginTop="5dp"
+  			android:layout_marginRight="10dp" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:textSize="16sp" ></TextView>
+</LinearLayout>

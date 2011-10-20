@@ -10,7 +10,6 @@ import net.osmand.LogUtil;
 
 import org.apache.commons.logging.Log;
 
-import android.app.Activity;
 import android.content.Context;
 import android.media.MediaPlayer;
 
@@ -22,7 +21,7 @@ import android.media.MediaPlayer;
 public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	
 	private static final String CONFIG_FILE = "_config.p";
-	private static final int MEDIA_VOICE_VERSION = 0;
+	private static final int[] MEDIA_VOICE_VERSION = new int[] { 0 }; // MUST BE SORTED, list of supported versions
 
 	private static final Log log = LogUtil.getLog(MediaCommandPlayerImpl.class);
 	
@@ -41,19 +40,14 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	}
 	
 	@Override
-	public void onActivityInit(Activity ctx) {
-		//do nothing here
-	}
-	
-	@Override
-	public void onActvitiyStop(Context ctx) {
-		//do nothing here
-	}
-	
-	@Override
 	public void clear() {
 		super.clear();
 		mediaPlayer = null;
+	}
+	
+	@Override
+	public String[] getLibraries() {
+		return new String[] { "alice.tuprolog.lib.BasicLibrary"};
 	}
 	
 	@Override

@@ -10,6 +10,7 @@ import java.io.RandomAccessFile;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
@@ -32,6 +33,8 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.tools.bzip2.CBZip2InputStream;
 import org.xml.sax.SAXException;
 
+import com.anvisics.jleveldb.LevelDBAccess;
+
 import rtree.RTreeException;
 
 /**
@@ -45,8 +48,11 @@ import rtree.RTreeException;
 public class IndexCreator {
 	private static final Log log = LogFactory.getLog(IndexCreator.class);
 
-	// ONLY derby.jar needed for derby dialect
-	private final DBDialect dialect = DBDialect.SQLITE;
+	// ONLY derby.jar needed for derby dialect 
+	// (NOSQL is the fastest but is supported only on linux 32)
+	// Sqlite better to use only for 32-bit machines 
+	public static DBDialect dialect = DBDialect.SQLITE;
+	public static DBDialect mapDBDialect = DBDialect.SQLITE;
 
 	public static final int BATCH_SIZE = 5000;
 	public static final int BATCH_SIZE_OSM = 10000;
@@ -83,13 +89,15 @@ public class IndexCreator {
 	private boolean deleteOsmDB = false;
 	private boolean deleteDatabaseIndexes = true;
 
-	private Connection dbConn;
+	private Object dbConn;
 	private File dbFile;
 
 	private File mapFile;
 	private RandomAccessFile mapRAFile;
 	private Connection mapConnection;
-	private String cityAdminLevel = "8";
+
+	public static final int DEFAULT_CITY_ADMIN_LEVEL = 8;
+	private String cityAdminLevel = "" + DEFAULT_CITY_ADMIN_LEVEL;
 	
 
 	public IndexCreator(File workingDir) {
@@ -135,7 +143,7 @@ public class IndexCreator {
 		this.regionName = regionName;
 	}
 
-	private Connection getDatabaseConnection(String fileName) throws SQLException {
+	private Object getDatabaseConnection(String fileName, DBDialect dialect) throws SQLException {
 		return dialect.getDatabaseConnection(fileName, log);
 	}
 
@@ -202,9 +210,6 @@ public class IndexCreator {
 	}
 	
 	/* ***** END OF GETTERS/SETTERS ***** */
-	public void generateIndexes(File readFile, IProgress progress, IOsmStorageFilter addFilter) throws IOException, SAXException, SQLException{
-		generateIndexes(readFile, progress, addFilter, null, null);
-	}
 	
 	private void iterateMainEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		if (indexPOI) {
@@ -267,7 +272,7 @@ public class IndexCreator {
 				storage.parseOSM(stream, progress, streamFile, false);
 			}
 			dbCreator.finishLoading();
-			dbConn.commit();
+			dialect.commitDatabase(dbConn);
 
 			if (log.isInfoEnabled()) {
 				log.info("File parsed : " + (System.currentTimeMillis() - st)); //$NON-NLS-1$
@@ -291,7 +296,7 @@ public class IndexCreator {
 				dialect.removeDatabase(dbFile);
 			}
 		}
-		dbConn = getDatabaseConnection(dbFile.getAbsolutePath());
+		dbConn = getDatabaseConnection(dbFile.getAbsolutePath(), dialect);
 		int allRelations = 100000;
 		int allWays = 1000000;
 		int allNodes = 10000000;
@@ -302,8 +307,17 @@ public class IndexCreator {
 				allWays = dbCreator.getAllWays();
 				allRelations = dbCreator.getAllRelations();
 			}
+		} else {
+			if (DBDialect.NOSQL != dialect) {
+				Connection dbc = (Connection) dbConn;
+				final Statement stmt = dbc.createStatement();
+				allRelations = stmt.executeQuery("select count(*) from relations").getInt(1);
+				allNodes = stmt.executeQuery("select count(*) from node").getInt(1);
+				allWays = stmt.executeQuery("select count(*) from ways").getInt(1);
+				stmt.close();
+			}
 		}
-		accessor.initDatabase(dbConn, allNodes, allWays, allRelations);
+		accessor.initDatabase(dbConn, dialect, allNodes, allWays, allRelations);
 		return loadFromExistingFile;
 	}
 	
@@ -314,29 +328,33 @@ public class IndexCreator {
 			// to save space
 			mapFile.getParentFile().mkdirs();
 			File tempDBMapFile = new File(workingDir, getTempMapDBFileName());
-			dialect.removeDatabase(tempDBMapFile);
-			mapConnection = getDatabaseConnection(tempDBMapFile.getAbsolutePath());
+			mapDBDialect.removeDatabase(tempDBMapFile);
+			mapConnection = (Connection) getDatabaseConnection(tempDBMapFile.getAbsolutePath(), mapDBDialect);
 			mapConnection.setAutoCommit(false);
 		}
 
 		// 2.2 create rtree map
 		if (indexMap) {
-			indexMapCreator.createDatabaseStructure(mapConnection, dialect, getRTreeMapIndexNonPackFileName());
+			indexMapCreator.createDatabaseStructure(mapConnection, mapDBDialect, getRTreeMapIndexNonPackFileName());
 		}
 		if (indexAddress) {
-			indexAddressCreator.createDatabaseStructure(mapConnection, dialect);
+			indexAddressCreator.createDatabaseStructure(mapConnection, mapDBDialect);
 		}
 		if (indexPOI) {
 			indexPoiCreator.createDatabaseStructure(new File(workingDir, getPoiFileName()));
 		}
 		if (indexTransport) {
-			indexTransportCreator.createDatabaseStructure(mapConnection, dialect, getRTreeTransportStopsFileName());
+			indexTransportCreator.createDatabaseStructure(mapConnection, mapDBDialect, getRTreeTransportStopsFileName());
 		}
 	}
 
 	
 	public void generateIndexes(File readFile, IProgress progress, IOsmStorageFilter addFilter, MapZooms mapZooms,
-			MapRenderingTypes renderingTypes) throws IOException, SAXException, SQLException {
+			MapRenderingTypes renderingTypes) throws IOException, SAXException, SQLException, InterruptedException {
+		if(LevelDBAccess.load()){
+			dialect = DBDialect.NOSQL;
+		}
+		
 		if (renderingTypes == null) {
 			renderingTypes = MapRenderingTypes.getDefault();
 		}
@@ -379,7 +397,7 @@ public class IndexCreator {
 			if (recreateOnlyBinaryFile) {
 				mapFile = new File(workingDir, getMapFileName());
 				File tempDBMapFile = new File(workingDir, getTempMapDBFileName());
-				mapConnection = getDatabaseConnection(tempDBMapFile.getAbsolutePath());
+				mapConnection = (Connection) getDatabaseConnection(tempDBMapFile.getAbsolutePath(), mapDBDialect);
 				mapConnection.setAutoCommit(false);
 				try {
 					if (indexMap) {
@@ -559,18 +577,15 @@ public class IndexCreator {
 					mapConnection.close();
 					mapConnection = null;
 					File tempDBFile = new File(workingDir, getTempMapDBFileName());
-					if (dialect.databaseFileExists(tempDBFile) && deleteDatabaseIndexes) {
+					if (mapDBDialect.databaseFileExists(tempDBFile) && deleteDatabaseIndexes) {
 						// do not delete it for now
-						dialect.removeDatabase(tempDBFile);
+						mapDBDialect.removeDatabase(tempDBFile);
 					}
 				}
 
 				// do not delete first db connection
 				if (dbConn != null) {
-					if (DBDialect.H2 == dialect) {
-						dbConn.createStatement().execute("SHUTDOWN COMPACT"); //$NON-NLS-1$
-					}
-					dbConn.close();
+					dialect.commitDatabase(dbConn);
 				}
 				if (deleteOsmDB) {
 					if (DBDialect.DERBY == dialect) {
@@ -584,19 +599,21 @@ public class IndexCreator {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} catch (RuntimeException e) {
+				e.printStackTrace();
 			}
 		}
 	}
 
 
-	public static void main(String[] args) throws IOException, SAXException, SQLException {
+	public static void main(String[] args) throws IOException, SAXException, SQLException, InterruptedException {
 		
 		long time = System.currentTimeMillis();
 		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/data/osm-gen/")); //$NON-NLS-1$
 		creator.setIndexMap(true);
-//		creator.setIndexAddress(true);
-//		creator.setIndexPOI(true);
-//		creator.setIndexTransport(true);
+		creator.setIndexAddress(true);
+		creator.setIndexPOI(true);
+		creator.setIndexTransport(true);
 		// for NL
 //		creator.setCityAdminLevel("10");
 
@@ -605,10 +622,10 @@ public class IndexCreator {
 //		creator.deleteOsmDB = true;
 				
 		creator.setZoomWaySmothness(2);
-		MapRenderingTypes rt = new MapRenderingTypes("/home/victor/projects/OsmAnd/data/testdata/roads_rendering_types.xml");
-		MapZooms zooms = MapZooms.parseZooms("15-");
-		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
-		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/belarus-osm/belarus.osm.pbf"),
+		MapRenderingTypes rt = MapRenderingTypes.getDefault();// new MapRenderingTypes("/home/victor/projects/OsmAnd/data/testdata/roads_rendering_types.xml");
+		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
+//		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
+		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/mecklenburg-vorpommern.osm.pbf"),
 				new ConsoleProgressImplementation(1), null, zooms, rt);
 		
 //		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes3.tmp.odb"));

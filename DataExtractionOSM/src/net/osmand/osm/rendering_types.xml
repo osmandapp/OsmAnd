@@ -47,7 +47,7 @@
 		<subtype id="36" point="true" tag="highway" value="stop" minzoom="15" />
 		<subtype id="37" point="true" tag="highway" value="give_way" minzoom="15" />
 		<subtype id="38" point="true" tag="highway" value="traffic_signals" minzoom="15" />
-		<subtype id="39" point="true" tag="highway" value="motorway_junction" minzoom="15" />
+		<subtype id="39" point="true" tag="highway" value="motorway_junction" minzoom="13" />
 		<subtype id="40" point="true" tag="highway" value="bus_stop" minzoom="15" />
 		<subtype id="41" point="true" tag="highway" value="platform" minzoom="15" />
 		<subtype id="42" point="true" tag="highway" value="turning_circle" minzoom="15" />

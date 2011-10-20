@@ -773,12 +773,12 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 	private void createMapIndexStructure(Connection conn) throws SQLException{
 		Statement stat = conn.createStatement();
-        stat.executeUpdate("create table binary_map_objects (id bigint primary key, name varchar(255), " +
+        stat.executeUpdate("create table binary_map_objects (id bigint primary key, name varchar(1024), " +
         		"types binary, restrictions binary, nodes binary, highway int)");
         stat.executeUpdate("create index binary_map_objects_ind on binary_map_objects (id)");
         
         stat.executeUpdate("create table low_level_map_objects (id bigint primary key, start_node bigint, " +
-		"end_node bigint, name varchar(255), nodes binary, type bigint, level smallint)");
+		"end_node bigint, name varchar(1024), nodes binary, type bigint, level smallint)");
         stat.executeUpdate("create index low_level_map_objects_ind on low_level_map_objects (id)");
         stat.executeUpdate("create index low_level_map_objects_ind_st on low_level_map_objects (start_node, type)");
         stat.executeUpdate("create index low_level_map_objects_ind_end on low_level_map_objects (end_node, type)");

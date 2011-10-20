@@ -94,7 +94,6 @@ public class NavigationService extends Service implements LocationListener {
 		routingHelper = ((OsmandApplication)getApplication()).getRoutingHelper();
 		((OsmandApplication)getApplication()).setNavigationService(this);
 		
-		
 		// requesting 
 		if(isContinuous()){
 			// request location updates
@@ -151,7 +150,6 @@ public class NavigationService extends Service implements LocationListener {
 		// remove notification
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		mNotificationManager.cancel(NOTIFICATION_SERVICE_ID);
-		
 	}
 
 
@@ -165,8 +163,8 @@ public class NavigationService extends Service implements LocationListener {
 				locationManager.removeUpdates(this);
 				getLock(this).release();
 			}
-			savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(), 
-					location.getSpeed(), location.getTime(), settings);
+			savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
+					location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
 			if(routingHelper.isFollowingMode()){
 				routingHelper.setCurrentLocation(location);
 			}

@@ -29,8 +29,8 @@ public class OsmAndFormatter {
 		}
 		// 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000 ...
 		
-		int generator = 5;
-		byte pointer = 0;
+		int generator = 1;
+		byte pointer = 1;
 		double point = mainUnitInMeter;
 		while(distInMeters * point > generator){
 			if (pointer++ % 3 == 2) {
@@ -63,9 +63,9 @@ public class OsmAndFormatter {
 
 		if (meters >= 100 * mainUnitInMeters) {
 			return (int) (meters / mainUnitInMeters) + " " + ctx.getString(mainUnitStr); //$NON-NLS-1$
-		} else if (meters > 1.5f * mainUnitInMeters) {
+		} else if (meters > 9.99f * mainUnitInMeters) {
 			return MessageFormat.format("{0,number,#.#} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters); //$NON-NLS-1$ 
-		} else if (meters > 0.9f * mainUnitInMeters) {
+		} else if (meters > 0.999f * mainUnitInMeters) {
 			return MessageFormat.format("{0,number,#.##} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters); //$NON-NLS-1$
 		} else {
 			if (mc == MetricsConstants.KILOMETERS_AND_METERS) {

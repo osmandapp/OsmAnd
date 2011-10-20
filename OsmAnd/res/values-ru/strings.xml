@@ -1,5 +1,76 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="tip_recent_changes_0_6_7_t">Изменения в 0.6.7 : 
+\n\t- Менеджер офлайн данных (просмотр, удаление, создание архива данных прямо в Osmand)
+\n\t- Избранные точки и группы (категоризация точек, удаление и т.п.) 
+\n\t- GPX анализатор (просмотр записанных треков, общая длина, средняя скорость, подъем, спуск, средняя высота и др.)  
+\n\t- GPX навигация (полезные опции, продолжение навигации после ошибки, поддержка инструкций по движению из треков)
+\n\t- Сохранение расчитанного маршрута как GPX трека для использования офлайн 
+\n\t- Улучшенный GPX мониторинг (фильтрация неточных местоположений)
+\n\t- Возможность загрузить записанные GPX для OSM сообщества (http://download.osmand.net/gpx/)
+\n\t- Улучшенный векторный рендеринг
+\n\t- Улучшенное использование TTS 
+\n\t- Исправление ошибок
+	</string>	<string name="save_route_dialog_title">Сохранить маршрут как GPX путь</string>
+	<string name="route_successfully_saved_at">Маршрут успешно сохранен \'%1$s\'.</string>
+	<string name="filename_input">Имя файла : </string>
+	<string name="file_with_name_already_exist">Файл с данным именем уже существует.</string>
+	<string name="default_buttons_save">Сохранить</string>
+	<string name="menu_save_directions">Сохранить маршрут</string>
+	<string name="local_index_upload_gpx_description">Поделиться GPX файлами с OSM сообществом. Они будут использованы для улучшения карты и загружены в osm.org.</string>
+	<string name="local_index_items_uploaded">%1$d из %2$d объект(ов) успешно загружены.</string>
+	<string name="local_index_mi_upload_gpx">Отправить в OSM...</string>
+	
+	<string name="show_more_map_detail">Детализированная карта</string>
+	<string name="show_more_map_detail_descr">Показывать детали (дороги и др.), начиная с мелких масштабов.</string>
+
+	<string name="favourites_delete_multiple_succesful">Избранные точки удалены.</string>
+	<string name="favorite_delete_multiple">Вы собираетесь удалить %1$d избранных и %2$d групп. Вы уверены?</string>
+	<string name="favorite_home_category">Дома</string>
+	<string name="favorite_friends_category">Друзья</string>
+	<string name="favorite_places_category">Места</string>
+	<string name="favorite_default_category">Другое</string>
+
+	<string name="vector_map_not_needed">Не нужно</string>
+	<string name="basemap_missing">Базовая карта, покрывающая весь мир на мелком масштабе, отсутствует. Пожалуйста загрузите World_basemap_x.obf для полноценный работы приложения.</string>
+	<string name="vector_data_missing">Офлайн данные отсутствуют на SD карточке. Пожалуйста загрузите для того, чтобы использовать приложения без интернета.</string>
+	<string name="local_index_gpx_info_show">\n\nДлинное нажатие для просмотра на карте</string>
+    <string name="local_index_gpx_info_speed">\nСредняя скорость : %1$s \nМаксимальная скорость : %2$s</string>
+	<string name="local_index_gpx_info_elevation">\nСредняя высота : %1$.0f метров\nМинимальная высота : %2$.0f метров\nМаксимальная высота : %3$.0f метров\nПодъем вверх : %4$.0f метров\nПодъем вниз : %5$.0f метров</string>
+	<string name="local_index_gpx_info">Путей : %1$d\nВсего точек : %2$d\nОтмечено точек : %3$d\nВсего расстояние : %4$s
+										\nНачало : %5$tD %5$tR\nОкончание : %6$tD %6$tR\n</string>
+	<string name="local_index_installed">Установлено</string>
+	<string name="local_index_items_backuped">%1$d из %2$d объектов успешно архивированы.</string>
+	<string name="local_index_items_deleted">%1$d из %2$d объектов успешно удалены.</string>
+	<string name="local_index_items_restored">%1$d из %2$d объектов успешно восстановлены.</string>
+	<string name="local_index_no_items_to_do">Нет объектов, чтобы %1$s</string>	
+    <string name="local_index_action_do">Вы собириаетесь %1$s %2$s объектов. Вы уверены?</string>
+	<string name="local_index_descr_title">Менеджер офлайн данных:</string>
+	<string name="local_index_description">Офлайн данные доступные на SD карточке. Вы можете загрузить новые, архивировать и удалить данные.</string>
+	<string name="local_index_mi_restore">Восстановить</string>
+	<string name="local_index_mi_backup">Архив</string>
+	<string name="local_index_mi_delete">Удалить</string>
+	<string name="local_index_mi_reload">Обновить</string>
+	<string name="local_index_download">Загрузить</string>
+	<string name="local_index_tile_data">Тайловые данные : %1$s \nМинимальный уровень : %2$d\nМаксимальный уровень : %3$d\nЗагружаемый : %4$s \nУровни загружены : %5$s</string>
+	<string name="local_index_poi_data">POI</string>
+	<string name="local_index_address_data">Адрес</string>
+	<string name="local_index_transport_data">Транспорт</string>
+	<string name="local_index_map_data">Карта</string>
+	<string name="local_index_items"></string>
+	<string name="local_indexes_cat_backup">Архив</string>
+	<string name="local_indexes_cat_tts">TTS голосовые данные</string>
+	<string name="local_indexes_cat_voice">Голосовые данные</string>
+	<string name="local_indexes_cat_gpx">GPX данные</string>
+	<string name="local_indexes_cat_tile">Растровые карты</string>
+	<string name="local_indexes_cat_map">Векторные карты</string>
+	<string name="local_indexes_cat_poi">POI данные</string>
+	
+	<string name="ttsvoice">TTS Голос</string>
+	<string name="search_offline_clear_search">Новый поиск</string>
+	<string name="map_text_size_descr">Выберите размер текста для наименований на карте</string>
+	<string name="map_text_size">Размер текста</string>
+
 	<string name="tip_recent_changes">Последние изменения</string>
 	<string name="tip_recent_changes_0_6_6_t">Изменения в 0.6.6 : 
 \n\t- Text To Speech может быть использован для голосовой навигации

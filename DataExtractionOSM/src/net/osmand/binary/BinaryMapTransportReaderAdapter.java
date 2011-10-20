@@ -1,13 +1,13 @@
 package net.osmand.binary;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.TIntObjectMap;
+import gnu.trove.map.hash.TIntObjectHashMap;
 import static net.osmand.binary.BinaryMapIndexReader.TRANSPORT_STOP_ZOOM;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.TransportStop;
@@ -72,7 +72,7 @@ public class BinaryMapTransportReaderAdapter {
 		// offset from start for each SIZE_OFFSET_ARRAY elements
 		// (SIZE_OFFSET_ARRAY + 1) offset = offsets[0] + skipOneString()
 		TIntArrayList offsets = new TIntArrayList();
-		Map<Integer, String> cacheOfStrings = new LinkedHashMap<Integer, String>();
+		TIntObjectMap<String> cacheOfStrings = new TIntObjectHashMap<String>();
 
 		int windowOffset = 0;
 		List<String> window = new ArrayList<String>();
@@ -104,7 +104,7 @@ public class BinaryMapTransportReaderAdapter {
 				st.length = codedIS.readRawVarint32();
 				st.fileOffset = codedIS.getTotalBytesRead();
 				// Do not cache for now save memory
-				//	readStringTable(st, 0, 20, true);
+				// readStringTable(st, 0, 20, true);
 				ind.stringTable = st;
 				codedIS.seek(st.length + st.fileOffset);
 				break;
@@ -191,7 +191,11 @@ public class BinaryMapTransportReaderAdapter {
 			if (ind >= st.windowOffset && (ind - st.windowOffset) < st.window.size()) {
 				return st.window.get(ind - st.windowOffset);
 			}
-			lastRead = readStringTable(st, ind - IndexStringTable.WINDOW_SIZE / 4, IndexStringTable.WINDOW_SIZE, false);
+			int startOffset = ind - IndexStringTable.WINDOW_SIZE / 4;
+			if(startOffset < 0){
+				startOffset = 0;
+			}
+			lastRead = readStringTable(st, startOffset, IndexStringTable.WINDOW_SIZE, false);
 		}
 		return null;
 	}
@@ -412,7 +416,8 @@ public class BinaryMapTransportReaderAdapter {
 		}
 		if(nameEn != -1){
 			dataObject.setEnName(getStringFromStringTable(ind.stringTable, nameEn));
-		} else {
+		}
+		if(nameEn == -1 || dataObject.getEnName().length() == 0){
 			dataObject.setEnName(Junidecode.unidecode(dataObject.getName()));
 		}
 		
@@ -430,7 +435,8 @@ public class BinaryMapTransportReaderAdapter {
 				}
 				if (s.getEnName().length() > 0) {
 					s.setEnName(getStringFromStringTable(ind.stringTable, s.getEnName().charAt(0)));
-				} else {
+				}
+				if (s.getEnName().length() == 0) {
 					s.setEnName(Junidecode.unidecode(s.getName()));
 				}
 

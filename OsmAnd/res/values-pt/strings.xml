@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="amenity_type_administrative">Administrativo</string>
 	<string name="amenity_type_barrier">Barreira</string>
@@ -96,6 +96,7 @@
 	<string name="map_index">Mapa</string>
 	<string name="voice">Vozes</string>
 	<string name="no_vector_map_loaded">Nenhum mapa vetorial foi carregado</string>
+	<string name="gpx_option_reverse_route">Caminho reverso</string>
 	<string name="map_route_by_gpx">Navegar usando GPX</string>
 	<string name="gpx_files_not_found">Nenhum arquivo GPX encontrado no diretório /tracks</string>
 	<string name="layer_gpx_layer">Rotas GPX...</string>

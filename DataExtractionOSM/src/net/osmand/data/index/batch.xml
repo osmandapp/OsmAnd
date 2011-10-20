@@ -13,6 +13,10 @@
 		pagegen="" token=""
 		google_code_user="" google_code_password="" 
 		osmand_download_user="" osmand_download_password=""/>
+		
+	<process_attributes mapZooms="" renderingTypesFile="" zoomWaySmoothness="" 
+		osmDbDialect="sqlite" mapDbDialect="sqlite"/>
+	
 	<!-- There are 3 subprocess : 	
 		 1. Download fresh osm files from servers to 'directory_for_osm_files' (override existings).
 		 2. Generate index files from all files in 'directory_for_osm_files' and put all indexes into 'directory_for_index_files'
@@ -22,12 +26,11 @@
 		 or you can upload any file you have to googlecode (just put into 'directory_for_index_files')
 	 -->
 	 <!-- zoomWaySmoothness - 1-4, typical mapZooms - 8-10;11-12;13-14;15   -->
-	<process directory_for_osm_files="D:/android/batch_gen_osm" directory_for_index_files="D:/android/batch_gen_index"
+	<process directory_for_osm_files="/home/..." directory_for_index_files="/home/..."
 		directory_for_uploaded_files=""
 		downloadOsmFiles="true" generateIndexes="true" uploadIndexes="true" upload_osmand_googlecode="true"
 		deleteFilesAfterUploading="true" indexPOI="true" indexMap="true"
-		indexTransport="true" indexAddress="true" mapZooms="" renderingTypesFile="" zoomWaySmoothness=""
-		>
+		indexTransport="true" indexAddress="true">
 		<!-- Add wget="C:/Program Files/GNUWin32/bin/wget.exe" to process, to use wget for download.
 			 On linux systems if wget is in your path it can be wget="wget" or you can make own script with wget command:
 			 wget="/path/to/script/wget.sh"
@@ -128,23 +131,27 @@
 		<!-- 1.3 GERMANY [SOURCE: GEOFABRIK.DE] -->
 		<regions siteToDownload="http://download.geofabrik.de/osm/europe/germany/{0}.osm.pbf" region_prefix="Germany_" skip="true" 
 			region_suffix="_Europe">
-			<region name="baden-wuerttemberg" esize="" />
-			<region name="bayern" esize="" />
-			<region name="berlin" esize="" />
-			<region name="brandenburg" esize="" />
-			<region name="bremen" esize="" />
-			<region name="hamburg" esize="" />
-			<region name="hessen" esize="" />
-			<region name="mecklenburg-vorpommern" esize="" />
-			<region name="niedersachsen" esize="" />
-			<region name="nordrhein-westfalen" esize="" />
-			<region name="rheinland-pfalz" esize="" />
-			<region name="saarland" esize="" />
-			<region name="sachsen-anhalt" esize="" />
-			<region name="sachsen" esize="" />
-			<region name="schleswig-holstein" esize="" />
-			<region name="thueringen" esize="" />
+			<region name="baden-wuerttemberg" esize="" cityAdminLevel="7"/>
+			<region name="bayern" esize="" cityAdminLevel="7"/>
+			<region name="berlin" esize="" cityAdminLevel="7"/>
+			<region name="brandenburg" esize="" cityAdminLevel="7"/>
+			<region name="bremen" esize="" cityAdminLevel="7"/>
+			<region name="hamburg" esize="" cityAdminLevel="7"/>
+			<region name="hessen" esize="" cityAdminLevel="7"/>
+			<region name="mecklenburg-vorpommern" esize="" cityAdminLevel="7"/>
+			<region name="niedersachsen" esize="" cityAdminLevel="7"/>
+			<region name="nordrhein-westfalen" esize="" cityAdminLevel="7"/>
+			<region name="rheinland-pfalz" esize="" cityAdminLevel="7"/>
+			<region name="saarland" esize="" cityAdminLevel="7"/>
+			<region name="sachsen-anhalt" esize="" cityAdminLevel="7"/>
+			<region name="sachsen" esize="" cityAdminLevel="7"/>
+			<region name="schleswig-holstein" esize="" cityAdminLevel="7"/>
+			<region name="thueringen" esize="" cityAdminLevel="7"/>
 		</regions>
+
+ 	        <regions siteToDownload="http://planet.openstreetmap.nl/planet-{0}-latest.osm.pbf" region_prefix="" skip="true" region_suffix="_Europe">
+                       <region name="benelux" esize="6" />
+                </regions>
 
         <!-- 2. ASIA -->
 		<!-- 2.1 Russia [GIS-LAB.INFO] -->

@@ -24,7 +24,6 @@ import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.RouteProvider.RouteService;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.views.SeekBarPreference;
-import net.osmand.plus.voice.CommandPlayer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -60,8 +59,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private static final String MORE_VALUE = "MORE_VALUE";
 	
 	private Preference saveCurrentTrack;
-	private Preference reloadIndexes;
-	private Preference downloadIndexes;
 
 	private EditTextPreference applicationDir;
 	private ListPreference tileSourcePreference;
@@ -162,6 +159,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	    registerBooleanPreference(osmandSettings.USE_TRACKBALL_FOR_MOVEMENTS,screen); 
 	    registerBooleanPreference(osmandSettings.USE_HIGH_RES_MAPS,screen); 
 	    registerBooleanPreference(osmandSettings.USE_ENGLISH_NAMES,screen); 
+	    registerBooleanPreference(osmandSettings.SHOW_MORE_MAP_DETAIL,screen); 
 	    registerBooleanPreference(osmandSettings.AUTO_ZOOM_MAP,screen); 
 	    registerBooleanPreference(osmandSettings.SAVE_TRACK_TO_GPX,screen); 
 	    registerBooleanPreference(osmandSettings.DEBUG_RENDERING_INFO,screen); 
@@ -280,10 +278,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		underlayPreference.setOnPreferenceChangeListener(this);
 		
 
-		reloadIndexes =(Preference) screen.findPreference(OsmandSettings.RELOAD_INDEXES);
-		reloadIndexes.setOnPreferenceClickListener(this);
-		downloadIndexes =(Preference) screen.findPreference(OsmandSettings.DOWNLOAD_INDEXES);
-		downloadIndexes.setOnPreferenceClickListener(this);
+		Preference localIndexes =(Preference) screen.findPreference(OsmandSettings.LOCAL_INDEXES);
+		localIndexes.setOnPreferenceClickListener(this);
 		saveCurrentTrack =(Preference) screen.findPreference(OsmandSettings.SAVE_CURRENT_TRACK);
 		saveCurrentTrack.setOnPreferenceClickListener(this);
 		routeServiceEnabled =(CheckBoxPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_ENABLED);
@@ -358,11 +354,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     protected void onDestroy() {
     	super.onDestroy();
     	unregisterReceiver(broadcastReceiver);
-    	//we are initializing player in this activity, we must also stop it
-    	final CommandPlayer player = getMyApplication().getPlayer();
-    	if (player != null) {
-    		player.onActvitiyStop(this);
-    	}
     }
     
     public void updateAllSettings(){
@@ -644,11 +635,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if(preference == downloadIndexes){
-			startActivity(new Intent(this, DownloadIndexActivity.class));
-			return true;
-		} else if(preference == reloadIndexes){
-			reloadIndexes();
+		if(preference.getKey().equals(OsmandSettings.LOCAL_INDEXES)){
+			startActivity(new Intent(this, LocalIndexesActivity.class));
 			return true;
 		} else if(preference == saveCurrentTrack){
 			SavingTrackHelper helper = new SavingTrackHelper(this);

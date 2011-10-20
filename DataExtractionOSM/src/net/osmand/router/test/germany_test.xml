@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<router_tests>
+  <test regions="GERMANY_NIEDERSACHSEN" description="Straight on path" best_percent="100"
+	    start_lat="53.32488825137637" start_lon="10.339593887329102" target_lat="53.34719536968702" target_lon="10.335710048675537">
+	<segment id="56018104" start="4" end="0" name=" B 404"/>
+	<segment id="56017053" start="1" end="0" name=" B 404"/>
+	<segment id="4310175" start="1" end="0" name=" B 404"/>
+	<segment id="25706717" start="1" end="0" name=" B 404"/>
+	<segment id="56017055" start="1" end="0" name=" B 404"/>
+	<segment id="56018105" start="1" end="0" name=" B 404"/>
+	<segment id="31322780" start="6" end="2" name=" B 404"/>
+</test>
+	
+</router_tests>

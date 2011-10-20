@@ -25,6 +25,7 @@ public class RoutingContext {
 	private Boolean planRoadDirection = null;
 	private VehicleRouter router = new CarRouter();
 	private boolean useDynamicRoadPrioritising = true;
+	// not used right now
 	private boolean usingShortestWay = false;
 
 	

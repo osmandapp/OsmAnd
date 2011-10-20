@@ -86,8 +86,16 @@ public class OsmandSettings {
 //		}
 	}
 	
+	public static String getSharedPreferencesName(ApplicationMode mode){
+		if(mode == null){
+			return SHARED_PREFERENCES_NAME;
+		} else {
+			return SHARED_PREFERENCES_NAME + "." + mode.name().toLowerCase();
+		}
+	}
+	
 	private SharedPreferences getProfilePreferences(ApplicationMode mode){
-		return ctx.getSharedPreferences(SHARED_PREFERENCES_NAME + "." + mode.name().toLowerCase(), Context.MODE_WORLD_READABLE);
+		return ctx.getSharedPreferences(getSharedPreferencesName(mode), Context.MODE_WORLD_READABLE);
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
@@ -445,8 +453,7 @@ public class OsmandSettings {
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SAVE_CURRENT_TRACK = "save_current_track"; //$NON-NLS-1$
-	public static final String RELOAD_INDEXES = "reload_indexes"; //$NON-NLS-1$
-	public static final String DOWNLOAD_INDEXES = "download_indexes"; //$NON-NLS-1$
+	public static final String LOCAL_INDEXES = "local_indexes"; //$NON-NLS-1$
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX = new BooleanPreference("save_track_to_gpx", false, false);
@@ -542,10 +549,13 @@ public class OsmandSettings {
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> SHOW_MORE_MAP_DETAIL = new BooleanPreference("show_more_map_detail", false, true);
+	
+	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> USE_STEP_BY_STEP_RENDERING = new BooleanPreference("use_step_by_step_rendering",
-			true, false);
+			false, false);
 	{
-		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.CAR, true);
+		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.CAR, false);
 		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.BICYCLE, false);
 		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
 	}
@@ -595,16 +605,18 @@ public class OsmandSettings {
 	}
 	
 	private TileSourceTemplate checkAmongAvailableTileSources(File dir, List<TileSourceTemplate> list){
-		for (TileSourceTemplate l : list) {
-			if (dir.getName().equals(l.getName())) {
-				try {
-					dir.mkdirs();
-					TileSourceManager.createMetaInfoFile(dir, l, true);
-				} catch (IOException e) {
+		if (list != null) {
+			for (TileSourceTemplate l : list) {
+				if (dir.getName().equals(l.getName())) {
+					try {
+						dir.mkdirs();
+						TileSourceManager.createMetaInfoFile(dir, l, true);
+					} catch (IOException e) {
+					}
+					return l;
 				}
-				return l;
+				
 			}
-			
 		}
 		return null;
 	}
@@ -964,7 +976,8 @@ public class OsmandSettings {
 	public final OsmandPreference<String> CONTRIBUTION_INSTALL_APP_DATE = new StringPreference("CONTRIBUTION_INSTALL_APP_DATE", null, true);
 	
 	
-	public final OsmandPreference<Boolean> FOLLOW_TO_THE_ROUTE = new BooleanPreference("follow_to_route", false, true);
+	public final OsmandPreference<Boolean> FOLLOW_THE_ROUTE = new BooleanPreference("follow_to_route", false, true);
+	public final OsmandPreference<String> FOLLOW_THE_GPX_ROUTE = new StringPreference("follow_gpx", null, true);
 	
 	public final OsmandPreference<Boolean> SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME = 
 		new BooleanPreference("show_arrival_time", true, true);

@@ -67,7 +67,7 @@ public class BinaryMapIndexReader {
 		}
 		init();
 	}
-
+	
 	private void init() throws IOException {
 		boolean initCorrectly = false;
 		while(true){
@@ -271,7 +271,8 @@ public class BinaryMapIndexReader {
 				}
 				if (st.getEnName().length() != 0) {
 					st.setEnName(transportAdapter.getStringFromStringTable(index.stringTable, st.getEnName().charAt(0)));
-				} else {
+				} 
+				if(st.getEnName().length() == 0) {
 					st.setEnName(Junidecode.unidecode(st.getName()));
 				}
 			}

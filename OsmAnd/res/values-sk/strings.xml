@@ -1,5 +1,61 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="save_route_dialog_title">Uložiť cestu ako GPX stopu</string>
+	<string name="route_successfully_saved_at">Cesta je úspešne uložená v \'%1$s\'.</string>
+	<string name="filename_input">Názov súboru: </string>
+	<string name="file_with_name_already_exist">Súbor s takýmto názvom už existuje.</string>
+	<string name="default_buttons_save">Uložiť</string>
+	<string name="menu_save_directions">Uloženie pokynov</string>
+	<string name="local_index_upload_gpx_description">Nahranie GPX súborov do OSM komunity. Budú použité na vylepšenie máp.</string>
+	<string name="local_index_items_uploaded">%1$d z %2$d položky(iek) úspešne nahraných.</string>
+	<string name="local_index_mi_upload_gpx">Poskytnúť pre OSM...</string>
+	
+	<string name="show_more_map_detail">Zobraziť podrobnejšiu mapu</string>
+	<string name="show_more_map_detail_descr">Zobrazí viac detailov vektorovej mapy (cesty, atď.) už pri nižších priblíženiach</string>
+
+	<string name="favourites_delete_multiple_succesful">Obľúbené body úspešne zmazané.</string>
+	<string name="favorite_delete_multiple">Idete zmazať %1$d obľúbených bodov a %2$d skupín obľúbených. Ste si istý?</string>
+	<string name="favorite_home_category">Domov</string>
+	<string name="favorite_friends_category">Priatelia</string>
+	<string name="favorite_places_category">Miesta</string>
+	<string name="favorite_default_category">Iné</string>
+
+    <string name="vector_map_not_needed">Nepotrebné</string>
+	<string name="basemap_missing">Chýba základná mapa sveta. Prosím, zvážte jej stiahnutie pre správnu funkciu.</string>
+	<string name="vector_data_missing">Palubné údaje chýbajú na SD karte. Prosím, zvážte ich stiahnutie pre použitie máp bez internetu.</string>
+	<string name="local_index_gpx_info_show">\n\nDlhým kliknutím sa zobrazí na mape</string>
+	<string name="local_index_gpx_info_speed">\nPriemerná rýchlosť : %1$s \nMaximálna rýchlosť : %2$s</string>
+	<string name="local_index_gpx_info_elevation">\nPriemerná nadm. výška : %1$.0f metrov\nNajnižšia nadm. výška : %2$.0f metrov\nNajvyššia nadm. výška : %3$.0f metrov\nStúpanie hore : %4$.0f metrov\nStúpanie dole : %5$.0f metrov</string>
+	<string name="local_index_gpx_info">Pod-stopy : %1$d\nCelkovo bodov : %2$d\nWay-pointy : %3$d\nCelková vzdialenosť : %4$s
+									   \nČas spustenia : %5$tD %5$tR\nČas ukončenia : %6$tD %6$tR</string>
+	<string name="local_index_installed">Nainštalované</string>
+	<string name="local_index_items_backuped">%1$d položiek z %2$d úspešne zálohovaných.</string>
+	<string name="local_index_items_deleted">%1$d položiek z %2$d úspešne vymazaných.</string>
+	<string name="local_index_items_restored">%1$d položiek z %2$d úspešne obnovených.</string>
+	<string name="local_index_no_items_to_do">Žiadne položky pre akciu: %1$s</string>
+	<string name="local_index_action_do">Chcete %1$s %2$s položiek. Ste si istý?</string>
+	<string name="local_index_descr_title">Správca offline údajov:</string>
+	<string name="local_index_description">Stiahnite nové, zálohujte alebo vymažte existujúce údaje.\nAktuálne offline údaje v zariadení:</string>
+	<string name="local_index_mi_restore">Obnoviť</string>
+	<string name="local_index_mi_backup">Zálohovať</string>
+	<string name="local_index_mi_delete">Vymazať</string>
+	<string name="local_index_mi_reload">Znovu načítať</string>
+	<string name="local_index_download">Stiahnuť</string>
+	<string name="local_index_tile_data">Údaje dlaždíc : %1$s \nNajmenší zoom : %2$d\nNajväčší zoom : %3$d\nStiahnuteľné : %4$s \nStiahnuté zoomy : %5$s</string>
+	<string name="local_index_poi_data">POI údaje</string>
+	<string name="local_index_address_data">Adresné údaje</string>
+	<string name="local_index_transport_data">Dopravné údaje</string>
+	<string name="local_index_map_data">Mapové údaje</string>
+	<string name="local_index_items"></string>
+	<string name="local_indexes_cat_backup">Záloha</string>
+	<string name="local_indexes_cat_tts">Hlasové údaje (TTS)</string>
+	<string name="local_indexes_cat_voice">Hlasové údaje (mediálne)</string>
+	<string name="local_indexes_cat_gpx">GPX údaje</string>
+	<string name="local_indexes_cat_tile">Mapové údaje (dlaždice)</string>
+	<string name="local_indexes_cat_map">Mapové údaje (vektorové)</string>
+	<string name="local_indexes_cat_poi">POI údaje</string>
+
+	<string name="ttsvoice">TTS hlas</string>
 	<string name="search_offline_clear_search">Nové hľadanie</string>
 	<string name="map_text_size_descr">Výber veľkosti písma pre názvy na mape</string>
 	<string name="map_text_size">Veľkosť písma</string>

@@ -2,6 +2,7 @@ package net.osmand;
 
 public class FavouritePoint {
 	private String name;
+	private String category = "";
 	private double latitude;
 	private double longitude;
 	private boolean stored = false;
@@ -10,9 +11,10 @@ public class FavouritePoint {
 	public FavouritePoint(){
 	}
 
-	public FavouritePoint(double latitude, double longitude, String name) {
+	public FavouritePoint(double latitude, double longitude, String name, String category) {
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.category = category;
 		this.name = name;
 	}
 
@@ -37,6 +39,14 @@ public class FavouritePoint {
 
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
+	}
+	
+	public String getCategory() {
+		return category;
+	}
+	
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public String getName() {

@@ -27,13 +27,13 @@ public class DownloadOsmandIndexesHelper {
 
 				@Override
 				public int compare(String object1, String object2) {
-					if(object1.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)){
-						if(object2.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)){
+					if(object1.endsWith(IndexConstants.ANYVOICE_INDEX_EXT_ZIP)){
+						if(object2.endsWith(IndexConstants.ANYVOICE_INDEX_EXT_ZIP)){
 							return object1.compareTo(object2);
 						} else {
 							return -1;
 						}
-					} else if(object2.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)){
+					} else if(object2.endsWith(IndexConstants.ANYVOICE_INDEX_EXT_ZIP)){
 						return 1;
 					}
 					return object1.compareTo(object2);
@@ -99,34 +99,29 @@ public class DownloadOsmandIndexesHelper {
 				s = ctx.getString(R.string.poi);
 			} else if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)
 					|| fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
-				boolean f = true;
 				String lowerCase = description.toLowerCase();
 				if (lowerCase.contains("map")) { //$NON-NLS-1$
-					if (!f) {
+					if (s.length() > 0) {
 						s += ", "; //$NON-NLS-1$
-					} else {
-						f = false;
 					}
 					s += ctx.getString(R.string.map_index);
 				}
 				if (lowerCase.contains("transport")) { //$NON-NLS-1$
-					if (!f) {
+					if (s.length() > 0) {
 						s += ", "; //$NON-NLS-1$
-					} else {
-						f = false;
 					}
 					s += ctx.getString(R.string.transport);
 				}
 				if (lowerCase.contains("address")) { //$NON-NLS-1$
-					if (!f) {
+					if (s.length() > 0 ) {
 						s += ", "; //$NON-NLS-1$
-					} else {
-						f = false;
 					}
 					s += ctx.getString(R.string.address);
 				}
 			} else if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
 				s = ctx.getString(R.string.voice);
+			} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
+				s = ctx.getString(R.string.ttsvoice);
 			}
 			return s;
 		}
@@ -141,15 +136,19 @@ public class DownloadOsmandIndexesHelper {
 		}
 		
 		public boolean isAccepted(){
-			if (fileName.endsWith(IndexConstants.POI_INDEX_EXT) || fileName.endsWith(IndexConstants.POI_INDEX_EXT_ZIP)) {
-				return true;
-			} else if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)
-					|| fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
-				return true;
-			} else if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
+			if (fileName.endsWith(addVersionToExt(IndexConstants.POI_INDEX_EXT, IndexConstants.POI_TABLE_VERSION)) //
+				|| fileName.endsWith(addVersionToExt(IndexConstants.POI_INDEX_EXT_ZIP, IndexConstants.POI_TABLE_VERSION)) //
+				|| fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT,IndexConstants.BINARY_MAP_VERSION)) //
+				|| fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP,IndexConstants.BINARY_MAP_VERSION)) //
+				|| fileName.endsWith(addVersionToExt(IndexConstants.VOICE_INDEX_EXT_ZIP, IndexConstants.VOICE_VERSION))
+				|| fileName.endsWith(addVersionToExt(IndexConstants.TTSVOICE_INDEX_EXT_ZIP, IndexConstants.TTSVOICE_VERSION))) {
 				return true;
 			}
 			return false;
+		}
+
+		private String addVersionToExt(String ext, int version) {
+			return "_" + version + ext;
 		}
 		
 		public String getFileName() {

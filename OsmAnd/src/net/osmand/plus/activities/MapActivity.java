@@ -1,16 +1,16 @@
 package net.osmand.plus.activities;
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import net.osmand.access.AccessibleActivity;
 import net.osmand.access.AccessibleToast;
 import net.osmand.Algoritms;
-import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities.GPXFileResult;
+import net.osmand.GPXUtilities;
 import net.osmand.LogUtil;
 import net.osmand.Version;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
@@ -21,6 +21,7 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
+import net.osmand.plus.activities.RouteProvider.GPXRouteParams;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchPoiFilterActivity;
 import net.osmand.plus.activities.search.SearchTransportActivity;
@@ -30,16 +31,15 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointLocationLayer;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.app.AlertDialog.Builder;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -55,13 +55,12 @@ import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.media.AudioManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -69,15 +68,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.View.OnClickListener;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 public class MapActivity extends AccessibleActivity implements IMapLocationListener, SensorEventListener {
 
@@ -92,12 +89,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	
 	private static final int SHOW_POSITION_MSG_ID = 7;
 	private static final int SHOW_POSITION_DELAY = 2500;
+	private static final float ACCURACY_FOR_GPX_AND_ROUTING = 50;
 	
-	
-	private String currentLocationProvider = null;
-	private boolean providerSupportsBearing = false;
-	@SuppressWarnings("unused")
-	private boolean providerSupportsSpeed = false;
 	
 	
 	private long lastTimeAutoZooming = 0;
@@ -114,7 +107,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	private SavingTrackHelper savingTrackHelper;
 	private RoutingHelper routingHelper;
 	
-	private WakeLock wakeLock;
 	private boolean sensorRegistered = false;
 
 	// Notification status
@@ -190,68 +182,37 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 					mgr.tileDownloaded(request);
 				}
 				mapView.tileDownloaded(request);
-				
 			}
 		});
 		
 				
 		savingTrackHelper = new SavingTrackHelper(this);
-		routingHelper = getMyApplication().getRoutingHelper();
-		routingHelper.getVoiceRouter().onActivityInit(this);
-		
 		LatLon pointToNavigate = settings.getPointToNavigate();
+		
+		routingHelper = getMyApplication().getRoutingHelper();
 		// This situtation could be when navigation suddenly crashed and after restarting
 		// it tries to continue the last route
-		if(!Algoritms.objectEquals(routingHelper.getFinalLocation(), pointToNavigate)){
-			routingHelper.setFollowingMode(false);
-			routingHelper.setFinalAndCurrentLocation(pointToNavigate, null);
-
-		}
-		if(settings.FOLLOW_TO_THE_ROUTE.get()){
-			if(pointToNavigate == null){
-				settings.FOLLOW_TO_THE_ROUTE.set(false);
-			} else if(!routingHelper.isRouteCalculated()){
-				Builder builder = new AlertDialog.Builder(this);
-				builder.setMessage(R.string.continue_follow_previous_route);
-				builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener(){
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						routingHelper.setFollowingMode(true);
-						getMyApplication().showDialogInitializingCommandPlayer(MapActivity.this);
-					}
-				});
-				builder.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener(){
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						settings.APPLICATION_MODE.set(ApplicationMode.DEFAULT);
-						updateApplicationModeSettings();
-						settings.FOLLOW_TO_THE_ROUTE.set(false);
-						routingHelper.setFinalAndCurrentLocation(null, null);
-						mapView.refreshMap();
-					}
-				});
-				builder.show();
-			}
+		if(settings.FOLLOW_THE_ROUTE.get() && !routingHelper.isRouteCalculated()){
+			restoreRoutingMode(pointToNavigate);
 		}
 		
 		mapView.setMapLocationListener(this);
 		mapLayers.createLayers(mapView);
 		
 		if(!settings.isLastKnownMapLocation()){
+			// show first time when application ran
 			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 			Location location = null;
-			try {
-				location = service.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-			}
-			catch(IllegalArgumentException e) {
-				Log.d(LogUtil.TAG, "GPS location provider not available"); //$NON-NLS-1$
-			}
-
-			if(location == null){
+			for (String provider : service.getAllProviders()) {
 				try {
-					location = service.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-				} catch(IllegalArgumentException e) {
-					Log.d(LogUtil.TAG, "Network location provider not available"); //$NON-NLS-1$
+					Location loc = service.getLastKnownLocation(provider);
+					if (location == null) {
+						location = loc;
+					} else if (loc != null && location.getTime() < loc.getTime()) {
+						location = loc;
+					}
+				} catch (IllegalArgumentException e) {
+					Log.d(LogUtil.TAG, "Location provider not available"); //$NON-NLS-1$
 				}
 			}
 			if(location != null){
@@ -260,20 +221,152 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			}
 		}
 		
-		
 		backToLocation = (ImageButton)findViewById(R.id.BackToLocation);
 		backToLocation.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				backToLocationImpl();
 			}
-			
 		});
 
 		accessibleViews.add(backToLocation);
 	}
+    
+    @Override
+	protected void onResume() {
+		super.onResume();
+		if (settings.MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
+			setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
+			// can't return from this method we are not sure if activity will be recreated or not
+		}
+		mapLayers.getNavigationLayer().setPointToNavigate(settings.getPointToNavigate());
 
-	private OsmandApplication getMyApplication() {
+		currentScreenOrientation = getWindow().getWindowManager().getDefaultDisplay().getOrientation();
+
+		// for voice navigation
+		if (settings.AUDIO_STREAM_GUIDANCE.get() != null) {
+			setVolumeControlStream(settings.AUDIO_STREAM_GUIDANCE.get());
+		} else {
+			setVolumeControlStream(AudioManager.STREAM_MUSIC);
+		}
+
+		mapLayers.updateMapSource(mapView, null);
+		updateApplicationModeSettings();
+
+		mapLayers.getPoiMapLayer().setFilter(settings.getPoiFilterForMap((OsmandApplication) getApplication()));
+
+		backToLocation.setVisibility(View.INVISIBLE);
+		isMapLinkedToLocation = false;
+		if (routingHelper.isFollowingMode()) {
+			// by default turn off causing unexpected movements due to network establishing
+			// best to show previous location
+			isMapLinkedToLocation = true;
+		}
+
+		// if destination point was changed try to recalculate route 
+		if (routingHelper.isFollowingMode() && !Algoritms.objectEquals(settings.getPointToNavigate(), routingHelper.getFinalLocation())) {
+			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(), routingHelper.getCurrentLocation(), routingHelper.getCurrentGPXRoute());
+		}
+
+		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+		try {
+			service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, gpsListener);
+		} catch (IllegalArgumentException e) {
+			Log.d(LogUtil.TAG, "GPS location provider not available"); //$NON-NLS-1$
+		}
+		// try to always ask for network provide : it is faster way to find location
+		try {
+			service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, networkListener);
+		} catch (IllegalArgumentException e) {
+			Log.d(LogUtil.TAG, "Network location provider not available"); //$NON-NLS-1$
+		}
+
+		if (settings != null && settings.isLastKnownMapLocation()) {
+			LatLon l = settings.getLastKnownMapLocation();
+			mapView.setLatLon(l.getLatitude(), l.getLongitude());
+			mapView.setZoom(settings.getLastKnownMapZoom());
+		}
+
+		settings.MAP_ACTIVITY_ENABLED.set(true);
+		checkExternalStorage();
+		showAndHideMapPosition();
+
+		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
+		LatLon latLon = settings.getAndClearMapLocationToShow();
+		if (latLon != null && !latLon.equals(cur)) {
+			mapView.getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), settings.getMapZoomToShow(), true);
+		}
+
+		View progress = findViewById(R.id.ProgressBar);
+		if (progress != null) {
+			getMyApplication().getResourceManager().setBusyIndicator(new BusyIndicator(this, progress));
+		}
+
+		getMyApplication().getDaynightHelper().onMapResume();
+	}
+    
+    private void notRestoreRoutingMode(){
+    	settings.APPLICATION_MODE.set(ApplicationMode.DEFAULT);
+		updateApplicationModeSettings();
+		routingHelper.clearCurrentRoute(null);
+		mapView.refreshMap();	
+    }
+
+	private void restoreRoutingMode(final LatLon pointToNavigate) {
+		final String gpxPath = settings.FOLLOW_THE_GPX_ROUTE.get();
+		if (pointToNavigate == null && gpxPath == null) {
+			notRestoreRoutingMode();
+		} else {
+			Builder builder = new AlertDialog.Builder(MapActivity.this);
+			builder.setMessage(R.string.continue_follow_previous_route);
+			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					AsyncTask<String, Void, GPXFile> task = new AsyncTask<String, Void, GPXFile>() {
+						@Override
+						protected GPXFile doInBackground(String... params) {
+							if (gpxPath != null) {
+								// Reverse also should be stored ?
+								GPXFile f = GPXUtilities.loadGPXFile(MapActivity.this, new File(gpxPath), false);
+								if (f.warning != null) {
+									return null;
+								}
+								return f;
+							} else {
+								return null;
+							}
+						}
+
+						@Override
+						protected void onPostExecute(GPXFile result) {
+							final GPXRouteParams gpxRoute = result == null ? null : new GPXRouteParams(result, false);
+							LatLon endPoint = pointToNavigate != null ? pointToNavigate : gpxRoute.getLastPoint();
+							Location startPoint = gpxRoute == null ? null : gpxRoute.getStartPointForRoute();
+							if (endPoint == null) {
+								notRestoreRoutingMode();
+							} else {
+								routingHelper.setFollowingMode(true);
+								routingHelper.setFinalAndCurrentLocation(endPoint, startPoint, gpxRoute);
+								getMyApplication().showDialogInitializingCommandPlayer(MapActivity.this);
+							}
+						}
+					};
+					task.execute(gpxPath);
+
+				}
+			});
+			builder.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					notRestoreRoutingMode();
+				}
+			});
+			builder.show();
+		}
+
+	}
+
+	OsmandApplication getMyApplication() {
 		return ((OsmandApplication) getApplication());
 	}
     
@@ -453,7 +546,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
     		mNotificationManager.cancel(APP_NOTIFICATION_ID);
     	}
     	MapTileDownloader.getInstance().removeDownloaderCallback(mapView);
-    	routingHelper.getVoiceRouter().onActivityStop(this);
     }
     
     
@@ -518,8 +610,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				location.setSpeed(speed);
 			}
 		}
-    	if(!providerSupportsBearing && locationLayer.getLastKnownLocation() != null && location != null){
-    		if(locationLayer.getLastKnownLocation().distanceTo(location) > 10){
+    	if(locationLayer.getLastKnownLocation() != null && location != null && location.hasBearing()){
+    		if(locationLayer.getLastKnownLocation().distanceTo(location) > 10 && !isRunningOnEmulator()){
     			location.setBearing(locationLayer.getLastKnownLocation().bearingTo(location));
     		}
     	}
@@ -530,14 +622,20 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
     		Log.d(LogUtil.TAG, "Location changed " + location.getProvider()); //$NON-NLS-1$
     	}
     	if(location != null && settings.SAVE_TRACK_TO_GPX.get()){
-			savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), 
-					location.getAltitude(), location.getSpeed(), location.getTime(), settings);
+    		// write only with 50 meters accuracy
+			if (!location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
+				savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(), location.getSpeed(),
+						location.getAccuracy(), location.getTime(), settings);
+			}
 		}
     	registerUnregisterSensor(location);
     	updateSpeedBearing(location);
     	mapLayers.getLocationLayer().setLastKnownLocation(location);
     	if(routingHelper.isFollowingMode()){
-    		routingHelper.setCurrentLocation(location);
+    		if(location == null || 
+    				!location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
+    			routingHelper.setCurrentLocation(location);
+    		}
     	}
     	if (location != null) {
 			if (isMapLinkedToLocation()) {
@@ -634,8 +732,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		public void onLocationChanged(Location location) {
 			// double check about use only gps
 			// that strange situation but it could happen?
-			if(!Algoritms.objectEquals(currentLocationProvider, LocationManager.GPS_PROVIDER) &&  
-					!useOnlyGPS()){
+			if(!useOnlyGPS()){
 				setLocation(location);
 			}
 		}
@@ -669,7 +766,15 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 
 		@Override
 		public void onProviderDisabled(String provider) {
-			setLocation(null);
+			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+			if (!useOnlyGPS() && service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+				Location loc = service.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+				if(loc != null && (System.currentTimeMillis() - loc.getTime()) < USE_ONLY_GPS_INTERVAL){
+					setLocation(loc);
+				}
+			} else {
+				setLocation(null);
+			}
 		}
 
 		@Override
@@ -679,30 +784,19 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		@Override
 		public void onStatusChanged(String provider, int status, Bundle extras) {
 			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-			LocationProvider prov = service.getProvider(LocationManager.NETWORK_PROVIDER);
-			// do not change provider for temporarily unavailable (possible bug for htc hero 2.1 ?)
-			if (LocationProvider.OUT_OF_SERVICE == status /*|| LocationProvider.TEMPORARILY_UNAVAILABLE == status*/) {
-				if(LocationProvider.OUT_OF_SERVICE == status){
-					setLocation(null);
-				}
+			if (LocationProvider.OUT_OF_SERVICE == status) {
 				// do not use it in routing
-				if (!useOnlyGPS() &&  
-						service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-					if (!Algoritms.objectEquals(currentLocationProvider, LocationManager.NETWORK_PROVIDER)) {
-						currentLocationProvider = LocationManager.NETWORK_PROVIDER;
-						service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
-						providerSupportsBearing = prov == null ? false : prov.supportsBearing() && !isRunningOnEmulator();
-						providerSupportsSpeed = prov == null ? false : prov.supportsSpeed() && !isRunningOnEmulator();
-					}
+				if (service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+//					try {
+//						service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST,
+//								networkListener);
+//					} catch (IllegalArgumentException e) {
+//						Log.d(LogUtil.TAG, "Network location provider not available"); //$NON-NLS-1$
+//					}
 				}
 			} else if (LocationProvider.AVAILABLE == status) {
-				if (!Algoritms.objectEquals(currentLocationProvider, LocationManager.GPS_PROVIDER)) {
-					currentLocationProvider = LocationManager.GPS_PROVIDER;
-					service.removeUpdates(networkListener);
-					prov = service.getProvider(LocationManager.GPS_PROVIDER);
-					providerSupportsBearing = prov == null ? false : prov.supportsBearing() && !isRunningOnEmulator();
-					providerSupportsSpeed = prov == null ? false : prov.supportsSpeed() && !isRunningOnEmulator();
-				}
+				// Do not remove right now network listener
+				// service.removeUpdates(networkListener);
 			}
 
 		}
@@ -718,9 +812,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
 		sensorMgr.unregisterListener(this);
 		sensorRegistered = false;
-		currentLocationProvider = null;
-		routingHelper.setUiActivity(null);
-		routingHelper.getVoiceRouter().onActivityStop(this);
 		
 		getMyApplication().getDaynightHelper().onMapPause();
 		
@@ -732,10 +823,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 		
 		settings.setLastKnownMapZoom(mapView.getZoom());
-		if (wakeLock != null) {
-			wakeLock.release();
-			wakeLock = null;
-		}
 		settings.MAP_ACTIVITY_ENABLED.set(false);
 		getMyApplication().getResourceManager().interruptRendering();
 		getMyApplication().getResourceManager().setBusyIndicator(null);
@@ -772,98 +859,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 		mapView.refreshMap();
 	}
-	
-	@Override
-	protected void onResume() {
-		super.onResume();
-		if(settings.MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()){
-			setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
-			// can't return from this method we are not sure if activity will be recreated or not
-		}
-		mapLayers.getNavigationLayer().setPointToNavigate(settings.getPointToNavigate());
-		
-		currentScreenOrientation = getWindow().getWindowManager().getDefaultDisplay().getOrientation();
-		
-		// for voice navigation
-		if(settings.AUDIO_STREAM_GUIDANCE.get() != null){
-			setVolumeControlStream(settings.AUDIO_STREAM_GUIDANCE.get());
-		} else {
-			setVolumeControlStream(AudioManager.STREAM_MUSIC);
-		}
-		
-		mapLayers.updateMapSource(mapView, null);
-		updateApplicationModeSettings();
-		
-		mapLayers.getPoiMapLayer().setFilter(settings.getPoiFilterForMap((OsmandApplication) getApplication()));
-		
-		backToLocation.setVisibility(View.INVISIBLE);
-		isMapLinkedToLocation = false;
-		if(routingHelper.isFollowingMode()){
-			// by default turn off causing unexpected movements due to network establishing
-			// best to show previous location
-			isMapLinkedToLocation = true;
-		}
-		
-		routingHelper.setUiActivity(this);
-		routingHelper.getVoiceRouter().onActivityInit(this);
-		if(routingHelper.isFollowingMode() && !Algoritms.objectEquals(settings.getPointToNavigate(), routingHelper.getFinalLocation())){
-			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(), routingHelper.getCurrentLocation());
-		}
-		
-		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-		try {
-			service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, gpsListener);
-			currentLocationProvider = LocationManager.GPS_PROVIDER;
-		} catch (IllegalArgumentException e) {
-			Log.d(LogUtil.TAG, "GPS location provider not available"); //$NON-NLS-1$
-		}
-		if(!useOnlyGPS()){
-			// try to always  ask for network provide : it is faster way to find location
-			try {
-				service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, networkListener);
-				currentLocationProvider = LocationManager.NETWORK_PROVIDER;
-			} catch(IllegalArgumentException e) {
-				Log.d(LogUtil.TAG, "Network location provider not available"); //$NON-NLS-1$
-			}
-		}
-		
-		LocationProvider  prov = service.getProvider(currentLocationProvider); 
-		providerSupportsBearing = prov == null ? false : prov.supportsBearing() && !isRunningOnEmulator();
-		providerSupportsSpeed = prov == null ? false : prov.supportsSpeed() && !isRunningOnEmulator();
-		
-		if(settings != null && settings.isLastKnownMapLocation()){
-			LatLon l = settings.getLastKnownMapLocation();
-			mapView.setLatLon(l.getLatitude(), l.getLongitude());
-			mapView.setZoom(settings.getLastKnownMapZoom());
-		}
-		
-		
-		if (wakeLock == null) {
-			PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
-			wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "net.osmand.map"); //$NON-NLS-1$
-			wakeLock.acquire();
-		}
-		
-		settings.MAP_ACTIVITY_ENABLED.set(true);
-		checkExternalStorage();
-		showAndHideMapPosition();
-		
-		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
-		LatLon latLon = settings.getAndClearMapLocationToShow();
-		if (latLon != null && !latLon.equals(cur)) {
-			mapView.getAnimatedDraggingThread().startMoving(latLon.getLatitude(),
-					latLon.getLongitude(), settings.getMapZoomToShow(),  true);
-		}
-		
-		
-		View progress = findViewById(R.id.ProgressBar);
-		if(progress != null){
-			getMyApplication().getResourceManager().setBusyIndicator(new BusyIndicator(this, progress));
-		}
-		
-		getMyApplication().getDaynightHelper().onMapResume();
-	}
-	
 	
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
@@ -980,6 +975,11 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				muteMenu.setVisible(false);
 			}
 		}
+		MenuItem saveMenu = menu.findItem(R.id.map_save_directions);
+		if(saveMenu != null){
+			saveMenu.setVisible(routingHelper.isRouteCalculated());
+		}
+		
 		return val;
 	}
 	
@@ -1000,13 +1000,16 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		case R.id.map_get_directions:
 			Location loc = getLastKnownLocation();
 			if(loc != null){
-				getDirections(loc.getLatitude(), loc.getLongitude(), true);
+				mapActions.getDirections(loc.getLatitude(), loc.getLongitude(), true);
 			} else {
-				getDirections(mapView.getLatitude(), mapView.getLongitude(), true);
+				mapActions.getDirections(mapView.getLatitude(), mapView.getLongitude(), true);
 			}
 			return true;
 		case R.id.map_layers:
 			mapLayers.openLayerSelectionDialog(mapView);
+			return true;
+		case R.id.map_save_directions :
+			mapActions.saveDirections();
 			return true;
 		case R.id.map_specify_point:
 			// next 2 lines replaced for Issue 493, replaced by new 3 lines
@@ -1014,6 +1017,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			// dlg.showDialog();
 			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
 			newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			newIntent.putExtra(SearchActivity.TAB_INDEX_EXTRA, SearchActivity.LOCATION_TAB_INDEX);
 			startActivity(newIntent);
 			return true;
 		case R.id.map_mute:
@@ -1029,7 +1033,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			mapView.refreshMap();
 			return true;
 		case R.id.map_gpx_routing:
-			useGPXRouting();
+			mapActions.navigateUsingGPX();
 			return true;
 		case R.id.map_show_point_options:
 			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
@@ -1071,125 +1075,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 	}
 	
-    private ApplicationMode getAppMode(ToggleButton[] buttons){
-    	for(int i=0; i<buttons.length; i++){
-    		if(buttons[i] != null && buttons[i].isChecked() && i < ApplicationMode.values().length){
-    			return ApplicationMode.values()[i];
-    		}
-    	}
-    	return settings.getApplicationMode();
-    }
-    
-    
-    protected void getDirections(final double lat, final double lon, boolean followEnabled){
-    	if(mapLayers.getNavigationLayer().getPointToNavigate() == null){
-			AccessibleToast.makeText(this, R.string.mark_final_location_first, Toast.LENGTH_LONG).show();
-			return;
-		}
-    	Builder builder = new AlertDialog.Builder(this);
-    	
-    	View view = getLayoutInflater().inflate(R.layout.calculate_route, null);
-    	final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
-    	buttons[ApplicationMode.CAR.ordinal()] = (ToggleButton) view.findViewById(R.id.CarButton);
-    	buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
-    	buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
-    	ApplicationMode appMode = settings.getApplicationMode();
-    	for(int i=0; i< buttons.length; i++){
-    		if(buttons[i] != null){
-    			final int ind = i;
-    			ToggleButton b = buttons[i];
-    			b.setChecked(appMode == ApplicationMode.values()[i]);
-    			b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						if(isChecked){
-							for (int j = 0; j < buttons.length; j++) {
-								if (buttons[j] != null) {
-									if(buttons[j].isChecked() != (ind == j)){
-										buttons[j].setChecked(ind == j);
-									}
-								}
-							}
-						} else {
-							// revert state
-							boolean revert = true;
-							for (int j = 0; j < buttons.length; j++) {
-								if (buttons[j] != null) {
-									if(buttons[j].isChecked()){
-										revert = false;
-										break;
-									}
-								}
-							}
-							if (revert){ 
-								buttons[ind].setChecked(true);
-							}
-						}
-					}
-    			});
-    		}
-    	}
-    	
-    	DialogInterface.OnClickListener onlyShowCall = new DialogInterface.OnClickListener(){
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				ApplicationMode mode = getAppMode(buttons);
-				Location location = new Location("map"); //$NON-NLS-1$
-				location.setLatitude(lat);
-				location.setLongitude(lon);
-				routingHelper.setAppMode(mode);
-				settings.FOLLOW_TO_THE_ROUTE.set(false);
-				routingHelper.setFollowingMode(false);
-				routingHelper.setFinalAndCurrentLocation(getPointToNavigate(), location);
-			}
-    	};
-    	
-    	DialogInterface.OnClickListener followCall = new DialogInterface.OnClickListener(){
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				ApplicationMode mode = getAppMode(buttons);
-				// change global settings
-				boolean changed = settings.APPLICATION_MODE.set(mode);
-				if (changed) {
-					updateApplicationModeSettings();	
-					mapView.refreshMap();
-				}
-				
-				Location location = getLocationToStartFrom(lat, lon); 
-				routingHelper.setAppMode(mode);
-				settings.FOLLOW_TO_THE_ROUTE.set(true);
-				routingHelper.setFollowingMode(true);
-				routingHelper.setFinalAndCurrentLocation(getPointToNavigate(), location);
-				dialog.dismiss();
-				getMyApplication().showDialogInitializingCommandPlayer(MapActivity.this);
-			}
-    	};
-    	DialogInterface.OnClickListener showRoute = new DialogInterface.OnClickListener(){
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				Intent intent = new Intent(MapActivity.this, ShowRouteInfoActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-			}
-		};
-    	
-    	builder.setView(view);
-    	if (followEnabled) {
-    		builder.setTitle(R.string.follow_route);
-			builder.setPositiveButton(R.string.follow, followCall);
-			if (routingHelper.isRouterEnabled() && routingHelper.isRouteCalculated()) {
-				builder.setNeutralButton(R.string.route_about, showRoute);
-			}
-			builder.setNegativeButton(R.string.only_show, onlyShowCall);
-		} else {
-			builder.setTitle(R.string.show_route);
-			view.findViewById(R.id.TextView).setVisibility(View.GONE);
-    		builder.setPositiveButton(R.string.show_route, onlyShowCall);
-    		builder.setNegativeButton(R.string.default_buttons_cancel, null);
-    	}
-    	builder.show();
-    }
     
     protected void parseLaunchIntentLocation(){
     	Intent intent = getIntent();
@@ -1219,66 +1104,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		return getMyApplication().getFavorites();
 	}
 	
-	private void useGPXRouting() {
-		final LatLon endForRouting = getPointToNavigate();
-		mapLayers.selectGPXFileLayer(new CallbackWithObject<GPXFileResult>() {
-			
-			@Override
-			public boolean processResult(final GPXFileResult result) {
-				Builder builder = new AlertDialog.Builder(MapActivity.this);
-				final boolean[] props = new boolean[]{false, false, false};
-				builder.setMultiChoiceItems(new String[] { getString(R.string.gpx_option_reverse_route),
-						getString(R.string.gpx_option_destination_point), getString(R.string.gpx_option_from_start_point) }, props,
-						new OnMultiChoiceClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-								props[which] = isChecked;
-							}
-						});
-				builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						boolean reverse = props[0];
-						boolean passWholeWay = props[2];
-						ArrayList<List<Location>> locations = result.locations;
-						List<Location> l = new ArrayList<Location>();
-						for(List<Location> s : locations){
-							l.addAll(s);
-						}
-						if(reverse){
-							Collections.reverse(l);
-						}
-						
-						Location loc = getLastKnownLocation();
-						if(passWholeWay && loc != null){
-							l.add(0, loc);
-						}
-						Location startForRouting = getLastKnownLocation();
-						if(startForRouting == null && !l.isEmpty()){
-							startForRouting = l.get(0);
-						}
-						LatLon endPoint = endForRouting;
-						if((endPoint == null || !props[1]) && !l.isEmpty()){
-							LatLon point = new LatLon(l.get(l.size() - 1).getLatitude(), l.get(l.size() - 1).getLongitude());
-							settings.setPointToNavigate(point.getLatitude(), point.getLongitude(), null);
-							endPoint = point;
-							mapLayers.getNavigationLayer().setPointToNavigate(point);
-						}
-						mapView.refreshMap();
-						if(endPoint != null){
-							settings.FOLLOW_TO_THE_ROUTE.set(true);
-							routingHelper.setFollowingMode(true);
-							routingHelper.setFinalAndCurrentLocation(endPoint, startForRouting, l);
-							getMyApplication().showDialogInitializingCommandPlayer(MapActivity.this);
-						}
-					}
-				});
-				builder.setNegativeButton(R.string.default_buttons_cancel, null);
-				builder.show();
-				return true;
-			}
-		});
-	}
 		
 	public void contextMenuPoint(final double latitude, final double longitude){
 		contextMenuPoint(latitude, longitude, null, null);
@@ -1323,7 +1148,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				if(standardId == R.string.context_menu_item_navigate_point){
 					navigateToPoint(new LatLon(latitude, longitude));
 				} else if(standardId == R.string.context_menu_item_show_route){
-					getDirections(latitude, longitude, false);
+					mapActions. getDirections(latitude, longitude, false);
 				} else if(standardId == R.string.context_menu_item_search_poi){
 					Intent intent = new Intent(MapActivity.this, SearchPoiFilterActivity.class);
 					intent.putExtra(SearchPoiFilterActivity.SEARCH_LAT, latitude);
@@ -1358,6 +1183,14 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		builder.create().show();
     }
     
+    public MapActivityActions getMapActions() {
+		return mapActions;
+	}
+	
+	public MapActivityLayers getMapLayers() {
+		return mapLayers;
+	}
+    
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 	}
@@ -1368,14 +1201,5 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		activity.startActivity(newIntent);
 	}
 
-	private Location getLocationToStartFrom(final double lat, final double lon) {
-		Location location = getLastKnownLocation();
-		if(location == null){
-			location = new Location("map"); //$NON-NLS-1$
-			location.setLatitude(lat);
-			location.setLongitude(lon);
-		}
-		return location;
-	}
 
 }

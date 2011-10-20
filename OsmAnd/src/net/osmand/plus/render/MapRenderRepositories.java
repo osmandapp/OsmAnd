@@ -205,6 +205,15 @@ public class MapRenderRepositories {
 		return false;
 	}
 	
+	public boolean basemapExists(){
+		for (String f : files.keySet()) {
+			if (f.toLowerCase().contains(BASEMAP_NAME)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	private boolean loadVectorData(RectF dataBox, final int zoom, final BaseOsmandRender renderingType, final boolean nightMode){
 		double cBottomLatitude = dataBox.bottom;
 		double cTopLatitude = dataBox.top;
@@ -348,6 +357,7 @@ public class MapRenderRepositories {
 			OsmandApplication app = ((OsmandApplication)context.getApplicationContext());
 			Boolean renderDay = app.getDaynightHelper().getDayNightRenderer();
 			boolean nightMode = renderDay != null && !renderDay.booleanValue();
+			// boolean moreDetail = prefs.SHOW_MORE_MAP_DETAIL.get();
 			BaseOsmandRender renderingType = app.getRendererRegistry().getCurrentSelectedRenderer();
 			
 			// prevent editing
@@ -1052,4 +1062,7 @@ public class MapRenderRepositories {
 	}
 
 
+	public Map<String, BinaryMapIndexReader> getMetaInfoFiles() {
+		return files;
+	}
 }

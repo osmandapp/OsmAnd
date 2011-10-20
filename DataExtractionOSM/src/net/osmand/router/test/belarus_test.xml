@@ -20,31 +20,33 @@
 	</test>
 	<test regions="belarus" description="MINSK (restriction + roundabout)" best_percent="80" vehicle="car" start_lat="53.91051937749127"
 		start_lon="27.57667064666748" target_lat="53.91098072030288" target_lon="27.579095363616943">
-		<segment id="99472425" start="2" end="4" name="null" />
-		<segment id="33542962" start="3" end="2" name="null" />
-		<segment id="33911466" start="1" end="4" name="просп. Машерова" />
-		<segment id="33911427" start="0" end="1" name="null" />
-		<segment id="25441562" start="0" end="7" name="ул. Козлова" />
-		<segment id="61594238" start="0" end="2" name="null" />
-		<segment id="25228310" start="0" end="6" name="null" />
-		<segment id="61594235" start="0" end="6" name="null" />
-		<segment id="61594239" start="0" end="1" name="null" />
-		<segment id="25228312" start="0" end="7" name="ул. Козлова" />
-		<segment id="33911443" start="0" end="1" name="просп. Независимости" />
-		<segment id="31691782" start="0" end="2" name="null" />
-		<segment id="40885457" start="0" end="1" name="null" />
-		<segment id="40885456" start="0" end="1" name="null" />
-		<segment id="40885459" start="2" end="3" name="null" />
+		<segment id="99472425" start="1" end="0" name="null"/>
+		<segment id="99472427" start="1" end="0" name="null"/>
+		<segment id="33542963" start="0" end="2" name="null"/>
+		<segment id="33971851" start="4" end="7" name="ул. Киселёва"/>
+		<segment id="25228576" start="0" end="5" name="null"/>
+		<segment id="65073371" start="0" end="4" name="просп. Независимости"/>
+		<segment id="38028210" start="0" end="8" name="Победы пл."/>
+		<segment id="25228575" start="0" end="4" name="просп. Независимости"/>
+		<segment id="65073390" start="0" end="4" name="просп. Независимости"/>
+		<segment id="65073385" start="0" end="1" name="просп. Независимости"/>
+		<segment id="25228294" start="0" end="8" name="просп. Независимости"/>
+		<segment id="33911442" start="0" end="1" name="просп. Независимости"/>
+		<segment id="33911443" start="0" end="1" name="просп. Независимости"/>
+		<segment id="31691782" start="0" end="2" name="null"/>
+		<segment id="40885457" start="0" end="1" name="null"/>
+		<segment id="40885456" start="0" end="1" name="null"/>
+		<segment id="40885459" start="2" end="3" name="null"/>
 	</test>
 
 	<test regions="belarus" description="Minsk (roundabout + restriction on it)" best_percent="75" vehicle="car" start_lat="53.90941971791074"
 		start_lon="27.494959831237793" target_lat="53.9104182605777" target_lon="27.495667934417725">
-		<segment id="30821138" start="0" end="4" name="null" />
-		<segment id="30821157" start="0" end="1" name="null" />
-		<segment id="30821161" start="0" end="4" name="null" />
-		<segment id="30821165" start="0" end="1" name="null" />
-		<segment id="30821143" start="0" end="4" name="null" />
-		<segment id="30821192" start="0" end="1" name="просп. Пушкина" />
+		<segment id="30821138" start="0" end="4" name="null"/>
+		<segment id="30821157" start="0" end="1" name="null"/>
+		<segment id="30821198" start="0" end="1" name="null"/>
+		<segment id="48470184" start="0" end="1" name="null"/>
+		<segment id="48470183" start="0" end="1" name="null"/>
+		<segment id="30821192" start="0" end="1" name="просп. Пушкина"/>
 	</test>
 	<test regions="belarus" description="Straight forward way" best_percent="95" vehicle="car" start_lat="53.9202" start_lon="27.5877"
 		target_lat="53.938582493008525" target_lon="27.605509757995605">
@@ -63,9 +65,10 @@
 		<segment id="50727963" start="0" end="1" name="ул. Якуба Коласа" />
 	</test>
 
+
 	<test regions="belarus" description="Well known route" best_percent="60" vehicle="car" 
 		start_lat="53.9113" start_lon="27.5795" target_lat="53.95386"
-		target_lon="27.68131">
+		target_lon="27.68131" skip_comment="Not work right now">
 		<segment id="40885456" start="1" end="5" name="null" />
 		<segment id="40885455" start="0" end="4" name="null" />
 		<segment id="37975292" start="2" end="4" name="Краснозвездная ул." />

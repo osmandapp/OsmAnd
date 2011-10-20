@@ -7,16 +7,21 @@ import java.util.List;
 import net.osmand.access.AccessibleToast;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.Track;
+import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.RouteProvider.GPXRouteParams;
 import net.osmand.plus.activities.RouteProvider.RouteCalculationResult;
 import net.osmand.plus.activities.RouteProvider.RouteService;
 import net.osmand.plus.voice.CommandPlayer;
-import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
+import android.os.Handler;
 import android.util.FloatMath;
 import android.widget.Toast;
 
@@ -31,18 +36,16 @@ public class RoutingHelper {
 		public void routeWasCancelled();
 	}
 	
+	
 	private final double DISTANCE_TO_USE_OSMAND_ROUTER = 20000;
 	
 	private List<IRouteInformationListener> listeners = new ArrayList<IRouteInformationListener>();
 
 	private Context context;
 	
-	// activity to show messages & refresh map when route is calculated	
-	private Activity uiActivity;
-	
 	private boolean isFollowingMode = false;
 	
-	private List<Location> currentGPXRoute = null;
+	private GPXRouteParams currentGPXRoute = null;
 	// instead of this properties RouteCalculationResult could be used
 	private List<Location> routeNodes = new ArrayList<Location>();
 	private List<RouteDirectionInfo> directionInfo = null;
@@ -66,6 +69,8 @@ public class RoutingHelper {
 	private RouteProvider provider = new RouteProvider();
 	private VoiceRouter voiceRouter;
 
+	private Handler uiHandler;
+
 	
 	
 	
@@ -73,6 +78,7 @@ public class RoutingHelper {
 		this.settings = settings;
 		this.context = context;
 		voiceRouter = new VoiceRouter(this, player);
+		uiHandler = new Handler();
 	}
 	
 	public boolean isFollowingMode() {
@@ -88,7 +94,7 @@ public class RoutingHelper {
 		setFinalAndCurrentLocation(finalLocation, currentLocation, null);
 	}
 	
-	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, Location currentLocation, List<Location> gpxRoute){
+	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, Location currentLocation, GPXRouteParams gpxRoute){
 		clearCurrentRoute(finalLocation);
 		currentGPXRoute = gpxRoute;
 		// to update route
@@ -96,30 +102,30 @@ public class RoutingHelper {
 		
 	}
 	
-	public void clearCurrentRoute(LatLon newFinalLocation){
+	public void clearCurrentRoute(LatLon newFinalLocation) {
 		this.routeNodes.clear();
 		listDistance = null;
 		directionInfo = null;
 		evalWaitInterval = 3000;
-		if(uiActivity != null){
-			uiActivity.runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					for(IRouteInformationListener l : listeners){
-						l.routeWasCancelled();
-					}
+		uiHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				for (IRouteInformationListener l : listeners) {
+					l.routeWasCancelled();
 				}
-			});
-		}
+			}
+		});
 		this.finalLocation = newFinalLocation;
-		if(newFinalLocation == null){
-			settings.FOLLOW_TO_THE_ROUTE.set(false);
+		if (newFinalLocation == null) {
+			settings.FOLLOW_THE_ROUTE.set(false);
+			settings.FOLLOW_THE_GPX_ROUTE.set(null);
+			// clear last fixed location
+			this.lastFixedLocation = null;
 			this.isFollowingMode = false;
 		}
-		
 	}
 	
-	public List<Location> getCurrentGPXRoute() {
+	public GPXRouteParams getCurrentGPXRoute() {
 		return currentGPXRoute;
 	}
 	
@@ -162,10 +168,6 @@ public class RoutingHelper {
 			return true;
 		}
 		return false;
-	}
-	
-	public void setUiActivity(Activity uiActivity) {
-		this.uiActivity = uiActivity;
 	}
 	
 	public Location getCurrentLocation() {
@@ -340,7 +342,7 @@ public class RoutingHelper {
 	}
 	
 	private synchronized void setNewRoute(RouteCalculationResult res){
-		boolean updateRoute = !routeNodes.isEmpty();
+		final boolean updateRoute = !routeNodes.isEmpty();
 		routeNodes = res.getLocations();
 		directionInfo = res.getDirections();
 		listDistance = res.getListDistance();
@@ -349,9 +351,15 @@ public class RoutingHelper {
 		if(isFollowingMode){
 			voiceRouter.newRouteIsCalculated(updateRoute);
 		} 
-		for(IRouteInformationListener l : listeners){
-			l.newRouteIsCalculated(updateRoute);
-		}
+		uiHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				for (IRouteInformationListener l : listeners) {
+					l.newRouteIsCalculated(updateRoute);
+				}
+			}
+		});
+		
 	}
 	
 	public synchronized int getLeftDistance(){
@@ -432,7 +440,7 @@ public class RoutingHelper {
 		return 0;
 	}
 	
-	private void recalculateRouteInBackground(final Location start, final LatLon end, final List<Location> currentGPXRoute){
+	private void recalculateRouteInBackground(final Location start, final LatLon end, final GPXRouteParams gpxRoute){
 		if (start == null || end == null) {
 			return;
 		}
@@ -459,7 +467,7 @@ public class RoutingHelper {
 							if(service != RouteService.OSMAND && !settings.isInternetConnectionAvailable()){
 								showMessage(context.getString(R.string.internet_connection_required_for_online_route), Toast.LENGTH_LONG);
 							}
-							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, currentGPXRoute, fastRouteMode);
+							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, gpxRoute, fastRouteMode);
 							synchronized (RoutingHelper.this) {
 								if (res.isCalculated()) {
 									setNewRoute(res);
@@ -479,10 +487,6 @@ public class RoutingHelper {
 								int l = dist != null && dist.length > 0 ? dist[0] : 0;
 								showMessage(context.getString(R.string.new_route_calculated_dist)
 										+ " : " + OsmAndFormatter.getFormattedDistance(l, context)); //$NON-NLS-1$
-								if (uiActivity instanceof MapActivity) {
-									// be aware that is non ui thread
-									((MapActivity) uiActivity).getMapView().refreshMap();
-								}
 							} else {
 								if (res.getErrorMessage() != null) {
 									showMessage(context.getString(R.string.error_calculating_route) + " : " + res.getErrorMessage()); //$NON-NLS-1$
@@ -505,17 +509,13 @@ public class RoutingHelper {
 		return currentRunningJob != null;
 	}
 	
-	private void showMessage(final String msg, final int length){
-		if (uiActivity != null) {
-			uiActivity.runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					if(uiActivity != null){
-						AccessibleToast.makeText(uiActivity, msg, length).show();
-					}
-				}
-			});
-		}
+	private void showMessage(final String msg, final int length) {
+		uiHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				AccessibleToast.makeText(context, msg, length).show();
+			}
+		});
 	}
 	private void showMessage(final String msg){
 		showMessage(msg, Toast.LENGTH_SHORT);
@@ -563,7 +563,9 @@ public class RoutingHelper {
 		}
 	}
 	
-	
+	public GPXFile generateGPXFileWithRoute(){
+		return provider.createOsmandRouterGPX(currentRoute, routeNodes, currentDirectionInfo, directionInfo);
+	}
 
 	
 	public static class TurnType {
@@ -584,7 +586,7 @@ public class RoutingHelper {
 					return new TurnType(v);
 				}
 			}
-			if(s!= null && s.startsWith("EXIT")){ //$NON-NLS-1$
+			if (s != null && s.startsWith("EXIT")) { //$NON-NLS-1$
 				return getExitTurn(Integer.parseInt(s.substring(4)), 0);
 			}
 			return null;
@@ -638,6 +640,12 @@ public class RoutingHelper {
 		public TurnType turnType;
 		// location when you should action (turn or go ahead)
 		public int routePointOffset;
+		
+		// TODO add from parser
+		public String ref;
+		public String streetName;
+		// speed limit in m/s (should be array of speed limits?)
+		public float speedLimit; 
 		
 		// calculated vars
 		

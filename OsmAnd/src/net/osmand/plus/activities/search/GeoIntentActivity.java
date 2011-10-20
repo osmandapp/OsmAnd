@@ -74,7 +74,9 @@ public class GeoIntentActivity extends ListActivity {
 						e.printStackTrace();
 						showResult(R.string.error_doing_search, null);
 					} finally {
-						progressDlg.dismiss();
+						if (progressDlg != null) {
+							progressDlg.dismiss();
+						}
 					}
 				}
 			}, "SearchingAddress");
@@ -86,7 +88,6 @@ public class GeoIntentActivity extends ListActivity {
 				}
 			});
 			progressDlg.setCancelable(true);
-
 		}
 		// finish();
 	}

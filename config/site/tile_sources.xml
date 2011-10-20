@@ -4,7 +4,7 @@
    <tile_source name="OsmaRender" url_template="http://tah.openstreetmap.org/Tiles/tile/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="17" tile_size="256" img_density="16" avg_img_size="18000"/> 
    <tile_source name="Cloudmade" url_template="http://tile.cloudmade.com/7ded028e030c5929b28bf823486ce84f/1/256/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/> 
    <tile_source name="GoogleMaps" url_template="http://mt3.google.com/vt/v=w2.97&amp;x={1}&amp;y={2}&amp;z={0}" ext=".png" min_zoom="1" max_zoom="19" tile_size="256" img_density="16" avg_img_size="18000"/>
-   <tile_source name="GoogleMaps Satellite" url_template="http://khm1.google.com/kh/v=65&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="7" max_zoom="20" tile_size="256" img_density="32" avg_img_size="18000"/>
+   <tile_source name="GoogleMaps Satellite" url_template="http://khm1.google.com/kh/v=89&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="7" max_zoom="20" tile_size="256" img_density="32" avg_img_size="18000"/>
    <tile_source name="GoogleMaps Terrain" url_template="http://mt3.google.com/vt/v=w2p.111&amp;hl=en&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="5" max_zoom="15" tile_size="256" img_density="32" avg_img_size="18000"/>
 
    <tile_source rule="beanshell" name="Microsoft Maps" min_zoom="1" max_zoom="19" tile_size="256" img_density="16" avg_img_size="18000" ext="png"
@@ -16,7 +16,9 @@
    
    <tile_source name="ÖPNV Transit" url_template="http://tile.xn--pnvkarte-m4a.de/tilegen/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/> 
    <tile_source name="OpenCycleMap" url_template="http://c.tile.opencyclemap.org/cycle/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/>
-   <tile_source name="HikeBikeMap DE" url_template="http://toolserver.org/tiles/hikebike/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="17" tile_size="256" img_density="8" avg_img_size="18000"/>
+   <tile_source name="Hike Bike Map" url_template="http://toolserver.org/tiles/hikebike/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="17" tile_size="256" img_density="8" avg_img_size="18000"/>
+   <tile_source name="Hike Bike Map (Hills Underlay)" url_template="http://toolserver.org/~cmarqu/hill/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="17" tile_size="256" img_density="16" avg_img_size="18000"/>
+
 
    <tile_source name="OpenAerialMap" url_template="http://tile.openaerialmap.org/tiles/1.0.0/openaerialmap-900913/{0}/{1}/{2}.jpg" ext=".jpg" min_zoom="1" max_zoom="13" tile_size="256" img_density="16" avg_img_size="18000"/>
    <tile_source name="OpenPisteMap" url_template="http://openpistemap.org/tiles/contours/{0}/{1}/{2}.png" ext=".png" min_zoom="5" max_zoom="17" tile_size="256" img_density="32" avg_img_size="18000"/>
@@ -28,9 +30,19 @@
 
    <tile_source name="MTB Map CZ" url_template="http://tchor.fi.muni.cz:8080/mtbmap_tiles/{0}/{1}/{2}.png" ext=".png" min_zoom="7" max_zoom="16" tile_size="256" img_density="32" avg_img_size="18000"/>
 
-   <tile_source name="Yandex RU" url_template="http://vec01.maps.yandex.ru/tiles?l=map&amp;v=2.15.0&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000" ellipsoid="true"/>
-   <tile_source name="Yandex Satellite RU" url_template="http://sat01.maps.yandex.ru/tiles?l=sat&amp;v=1.19.0&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="1" max_zoom="18" tile_size="256" img_density="32" avg_img_size="18000" ellipsoid="true"/>
+   <tile_source name="Yandex RU" url_template="http://vec01.maps.yandex.net/tiles?l=map&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000" ellipsoid="true"/>
+   <tile_source name="Top Yandex RU" url_template="http://vec01.maps.yandex.net/tiles?l=skl&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000" ellipsoid="true"/>
+   <tile_source name="Yandex NK" url_template="http://wvec.maps.yandex.net/?l=wmap&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000" ellipsoid="true"/>
+   <tile_source name="Top Yandex NK" url_template="http://wvec.maps.yandex.net/?l=wskl&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000" ellipsoid="true"/>
+   <tile_source name="Yandex Satellite RU" url_template="http://sat01.maps.yandex.net/tiles?l=sat&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="1" max_zoom="16" tile_size="256" img_density="32" avg_img_size="18000" ellipsoid="true"/>
    <tile_source rule="yandex_traffic" name="Yandex Traffic RU"/>
+   
+   <tile_source rule="beanshell" name="Wikimapia" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000" ext="png"
+   url_template='String getTileUrl(int z, int x, int y) {  return "http://"+"i"+(x%4 + (y%4)*4)+".wikimapia.org/?x="+x+"&amp;y="+y+"&amp;zoom="+z;}'/>
+   
+   <tile_source rule="beanshell" name="Top Wikimapia" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000" ext="png"
+   url_template='String getTileUrl(int z, int x, int y) {  return "http://"+"i"+(x%4 + (y%4)*4)+".wikimapia.org/?x="+x+"&amp;y="+y+"&amp;zoom="+z+"&amp;type=hybrid";}'/>
+   
 
    <tile_source name="OpenFietskaart (NL)" url_template="http://overlay.openstreetmap.nl/openfietskaart-overlay/{0}/{1}/{2}.png" ext=".png" min_zoom="7" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/> 
    <tile_source name="OpenFietskaartBaseLayer (NL)" url_template="http://overlay.openstreetmap.nl/basemap/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/> 

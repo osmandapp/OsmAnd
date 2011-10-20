@@ -483,6 +483,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		int h = getCenterPointY();
 
 		// long prev = System.currentTimeMillis();
+
 		for (int i = 0; i < layers.size(); i++) {
 			try {
 				
@@ -750,12 +751,12 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-			if (Math.abs(e1.getX() - e2.getX()) + Math.abs(e1.getX() - e2.getX()) > 50 * dm.density) {
+//			if (Math.abs(e1.getX() - e2.getX()) + Math.abs(e1.getY() - e2.getY()) > 50 * dm.density) {
 				animatedDraggingThread.startDragging(velocityX, velocityY, 
 						e1.getX(), e1.getY(), e2.getX(), e2.getY(), true);
-			} else {
-				onScroll(e1, e2, e1.getX() - e2.getX(), e1.getY() - e2.getY());
-			}
+//			} else {
+//				onScroll(e1, e2, e1.getX() - e2.getX(), e1.getY() - e2.getY());
+//			}
 			return true;
 		}
 

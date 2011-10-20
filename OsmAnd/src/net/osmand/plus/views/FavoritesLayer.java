@@ -102,19 +102,6 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 					canvas.drawPath(pathDst, paintBlack);
 				}
 			}
-			if(favorites.getFavoritePointsFromGPXFile() != null){
-				for (FavouritePoint o : favorites.getFavoritePointsFromGPXFile()) {
-					if (o.getLatitude() >= latLonBounds.bottom && o.getLatitude() <= latLonBounds.top  && o.getLongitude() >= latLonBounds.left 
-							&& o.getLongitude() <= latLonBounds.right ) {
-						int x = view.getMapXForPoint(o.getLongitude());
-						int y = view.getMapYForPoint(o.getLatitude());
-						matrix.setTranslate(x, y);
-						path.transform(matrix, pathDst);
-						canvas.drawPath(pathDst, paint);
-						canvas.drawPath(pathDst, paintBlack);
-					}
-				}
-			}
 		}
 	}
 	
@@ -135,17 +122,6 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 			if (Math.abs(x - ex) <= r && Math.abs(y - ey) <= r) {
 				r = Math.max(Math.abs(x - ex), Math.abs(y - ey));
 				result = n;
-			}
-		}
-		if (favorites.getFavoritePointsFromGPXFile() != null) {
-			for (int i = 0; i < favorites.getFavoritePointsFromGPXFile().size(); i++) {
-				FavouritePoint n = favorites.getFavoritePointsFromGPXFile().get(i);
-				int x = view.getRotatedMapXForPoint(n.getLatitude(), n.getLongitude());
-				int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
-				if (Math.abs(x - ex) <= r && Math.abs(y - ey) <= r) {
-					r = Math.max(Math.abs(x - ex), Math.abs(y - ey));
-					result = n;
-				}
 			}
 		}
 		return result;

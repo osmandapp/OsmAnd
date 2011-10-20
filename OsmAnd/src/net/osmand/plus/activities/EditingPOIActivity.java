@@ -408,7 +408,6 @@ public class EditingPOIActivity {
 			HttpParams params = new BasicHttpParams();
 			HttpConnectionParams.setConnectionTimeout(params, 15000);
 			DefaultHttpClient httpclient = new DefaultHttpClient(params);
-
 			if (doAuthenticate) {
 				UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(OsmandSettings.getOsmandSettings(ctx).USER_NAME.get() + ":" //$NON-NLS-1$
 						+ OsmandSettings.getOsmandSettings(ctx).USER_PASSWORD.get());

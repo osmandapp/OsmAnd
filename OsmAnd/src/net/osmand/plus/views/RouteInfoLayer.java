@@ -17,7 +17,6 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.location.Location;
-import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -38,7 +37,6 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 	private Button next;
 	private Button prev;
 	private Button info;
-	private Handler uiHandler;
 	private boolean visible = true;
 	private RectF border;
 	private RectF textBorder;
@@ -141,7 +139,6 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 		wmgr.getDefaultDisplay().getMetrics(dm);
 		textSize = (int) (BASE_TEXT_SIZE * dm.density);
 		
-		uiHandler = new Handler();
 		border = new RectF();
 		paintBorder = new Paint();
 		paintBorder.setARGB(220, 160, 160, 160);
@@ -222,17 +219,12 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 
 	@Override
 	public void newRouteIsCalculated(boolean updateRoute) {
-		uiHandler.post(new Runnable(){
-			@Override
-			public void run() {
-				directionInfo = -1;
-				if(!routingHelper.isFollowingMode()){
-					visible = true;
-				}
-				updateVisibility();
-			}
-		});
-		
+		directionInfo = -1;
+		if (!routingHelper.isFollowingMode()) {
+			visible = true;
+		}
+		updateVisibility();
+		view.refreshMap();
 	}
 
 	public boolean isUserDefinedVisible() {
@@ -245,13 +237,8 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 	}
 	@Override
 	public void routeWasCancelled() {
-		uiHandler.post(new Runnable(){
-			@Override
-			public void run() {
-				directionInfo = -1;
-				updateVisibility();
-			}
-		});
+		directionInfo = -1;
+		updateVisibility();
 	}
 	
 	

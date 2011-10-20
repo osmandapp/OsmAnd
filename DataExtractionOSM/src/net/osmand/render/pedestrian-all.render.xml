@@ -1,0 +1,37 @@
+<renderer name="pedestrian" depends="all-purpose (more detail)" defaultColor="#f1eee8" defaultNightColor="#003333">
+
+	<order>
+	<filter orderType="line">
+			<filter tag="highway" value="pedestrian" order="60" />
+			<filter tag="highway" value="living_street" order="47" />
+
+			<filter tag="highway" value="track" order="50" />
+			<filter tag="highway" value="path" order="48" />
+			<filter tag="highway" value="cycleway" order="45" />
+			<filter tag="highway" value="byway" order="62" />
+			<filter tag="highway" value="footway" order="65" />
+			<filter tag="highway" value="steps" order="66" />
+			<filter tag="highway" value="bridleway" order="59" />
+        </filter>
+    </order>
+	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom], textLength, ref -->
+	<polygon>
+	</polygon>
+	<text>
+	</text>
+	<line>
+		<filter tag="highway" value="track" minzoom="14" color="#996600" strokeWidth="2" pathEffect="10_3" />
+		<filter tag="highway" value="path" minzoom="14" color="#000000" strokeWidth="2" pathEffect="10_3" />
+			<filter nightMode="true" tag="highway" value="path" minzoom="14" color="#787878" strokeWidth="2" pathEffect="10_3" />
+		<filter tag="highway" value="cycleway" minzoom="14" color="#0000ff" strokeWidth="2" pathEffect="10_3" />
+		<filter tag="highway" value="byway" minzoom="14" color="#ffcc00" strokeWidth="2" pathEffect="10_3" />
+		<filter tag="highway" value="footway" minzoom="14" color="#fa8073" strokeWidth="2" pathEffect="10_3" />
+		<filter tag="highway" value="steps" minzoom="14" color="#fa8073" strokeWidth="4" pathEffect="1_2" />
+		<filter tag="highway" value="bridleway" minzoom="14" color="#00ff00" strokeWidth="2" pathEffect="10_3" />
+	</line>
+	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
+	<point>
+					
+	</point>		
+		
+</renderer>

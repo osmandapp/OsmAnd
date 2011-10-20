@@ -4,24 +4,26 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.Algoritms;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.OsmAndFormatter;
-import net.osmand.GPXUtilities.GPXFileResult;
 import net.osmand.data.AmenityType;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.views.BaseMapLayer;
@@ -41,8 +43,8 @@ import net.osmand.plus.views.RouteLayer;
 import net.osmand.plus.views.TransportInfoLayer;
 import net.osmand.plus.views.TransportStopsLayer;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.widget.LinearLayout;
@@ -73,7 +75,6 @@ public class MapActivityLayers {
 	private ContextMenuLayer contextMenuLayer;
 	private RouteInfoLayer routeInfoLayer;
 	private MapControlsLayer mapControlsLayer;
-
 
 	public MapActivityLayers(MapActivity activity) {
 		this.activity = activity;
@@ -327,9 +328,9 @@ public class MapActivityLayers {
 	
 	public void showGPXFileLayer(final OsmandMapTileView mapView){
 		final OsmandSettings settings = getApplication().getSettings();
-		selectGPXFileLayer(new CallbackWithObject<GPXFileResult>() {
+		selectGPXFileLayer(new CallbackWithObject<GPXFile>() {
 			@Override
-			public boolean processResult(GPXFileResult result) {
+			public boolean processResult(GPXFile result) {
 				settings.SHOW_FAVORITES.set(true);
 				if (result != null) {
 					getApplication().setGpxFileToDisplay(result);
@@ -338,31 +339,31 @@ public class MapActivityLayers {
 				}
 				return true;
 			}
-		});
+		}, true);
 	}
 	
 	private void updateGPXLayer(){
-		GPXFileResult gpxFileToDisplay = getApplication().getGpxFileToDisplay();
+		GPXFile gpxFileToDisplay = getApplication().getGpxFileToDisplay();
 		if(gpxFileToDisplay == null){
 			gpxLayer.setTracks(null);
 		} else {
-			gpxLayer.setTracks(gpxFileToDisplay.locations);
+			gpxLayer.setTracks(gpxFileToDisplay.tracks);
 		}
 	}
 	
-	public void selectGPXFileLayer(final CallbackWithObject<GPXFileResult> callbackWithObject) {
+	public void selectGPXFileLayer(final CallbackWithObject<GPXFile> callbackWithObject, final boolean convertCloudmade) {
 		final List<String> list = new ArrayList<String>();
 		final OsmandSettings settings = getApplication().getSettings();
-		final File dir = settings.extendOsmandPath(ResourceManager.APP_DIR + SavingTrackHelper.TRACKS_PATH);
+		final File dir = settings.extendOsmandPath(ResourceManager.GPX_PATH);
 		if (dir != null && dir.canRead()) {
 			File[] files = dir.listFiles();
 			if (files != null) {
 				Arrays.sort(files, new Comparator<File>() {
 					@Override
 					public int compare(File object1, File object2) {
-						if (object1.lastModified() > object2.lastModified()) {
+						if (object1.getName().compareTo(object2.getName()) > 0) {
 							return -1;
-						} else if (object1.lastModified() == object2.lastModified()) {
+						} else if (object1.getName().equals(object2.getName())) {
 							return 0;
 						}
 						return 1;
@@ -393,22 +394,16 @@ public class MapActivityLayers {
 					new Thread(new Runnable() {
 						@Override
 						public void run() {
-							final GPXFileResult res = GPXUtilities.loadGPXFile(activity, f);
-							if (res.error != null) {
-								activity.runOnUiThread(new Runnable() {
-									@Override
-									public void run() {
-										AccessibleToast.makeText(activity, res.error, Toast.LENGTH_LONG).show();
-									}
-								});
-
-							}
+							final GPXFile res = GPXUtilities.loadGPXFile(activity, f, convertCloudmade);
 							dlg.dismiss();
 							activity.runOnUiThread(new Runnable() {
 								@Override
 								public void run() {
-									callbackWithObject.processResult(res);
-									
+									if(res.warning != null){
+										AccessibleToast.makeText(activity, res.warning, Toast.LENGTH_LONG).show();
+									} else {
+										callbackWithObject.processResult(res);
+									}
 								}
 							});
 						}
@@ -467,21 +462,52 @@ public class MapActivityLayers {
 	
 	private void selectMapLayer(final OsmandMapTileView mapView){
 		final OsmandSettings settings = getApplication().getSettings();
-		Map<String, String> entriesMap = settings.getTileSourceEntries();
+		
+		final LinkedHashMap<String, String> entriesMap = new LinkedHashMap<String, String>();
+		
+		final String layerOsmVector = "LAYER_OSM_VECTOR";
+		final String layerInstallMore = "LAYER_INSTALL_MORE";
+		
+		entriesMap.put(layerOsmVector, getString(R.string.vector_data));
+		entriesMap.putAll(settings.getTileSourceEntries());
+		entriesMap.put(layerInstallMore, getString(R.string.install_more));
+		
+		final List<Entry<String, String>> entriesMapList = new ArrayList<Entry<String, String>>(entriesMap.entrySet());
+		
 		Builder builder = new AlertDialog.Builder(activity);
-		final ArrayList<String> keys = new ArrayList<String>(entriesMap.keySet());
-		final String[] items = new String[entriesMap.size() + 2];
-		items[0] = getString(R.string.vector_data);
-		int i = 1;
-		for(String it : entriesMap.values()){
-			items[i++] = it;
+		
+		String selectedTileSourceKey = settings.MAP_TILE_SOURCES.get();		
+
+		int selectedItem = -1;
+		if (settings.MAP_VECTOR_DATA.get()) {
+			selectedItem = 0;
+		} else {
+		
+			Entry<String, String> selectedEntry = null;
+			for (Entry<String, String> entry : entriesMap.entrySet()) {
+				if (entry.getKey().equals(selectedTileSourceKey)) {
+					selectedEntry = entry;
+					break;
+				}
+			}
+			if (selectedEntry != null) {
+				selectedItem = 0;
+				entriesMapList.remove(selectedEntry);
+				entriesMapList.add(0, selectedEntry);
+			}
 		}
 		
-		items[i] = getString(R.string.install_more);
-		builder.setItems(items, new DialogInterface.OnClickListener(){
+		final String[] items = new String[entriesMapList.size()];
+		int i = 0;
+		for (Entry<String, String> entry : entriesMapList) {
+			items[i++] = entry.getValue();
+		}
+		
+		builder.setSingleChoiceItems(items, selectedItem, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if (which == 0) {
+				String layerKey = entriesMapList.get(which).getKey();
+				if (layerKey.equals(layerOsmVector)) {
 					MapRenderRepositories r = ((OsmandApplication) getApplication()).getResourceManager().getRenderer();
 					if (r.isEmpty()) {
 						AccessibleToast.makeText(activity, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
@@ -490,7 +516,7 @@ public class MapActivityLayers {
 						settings.MAP_VECTOR_DATA.set(true);
 					}
 					updateMapSource(mapView, null);
-				} else if (which == items.length - 1) {
+				} else if (layerKey.equals(layerInstallMore)) {
 					SettingsActivity.installMapLayers(activity, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
@@ -498,18 +524,18 @@ public class MapActivityLayers {
 						}
 					});
 				} else {
-					settings.MAP_TILE_SOURCES.set(keys.get(which - 1));
+					settings.MAP_TILE_SOURCES.set(layerKey);
 					settings.MAP_VECTOR_DATA.set(false);
 					updateMapSource(mapView, settings.MAP_TILE_SOURCES);
 				}
 
+				dialog.dismiss();
 			}
 			
 		});
 		builder.show();
 	}
-	
-	
+
 	private void selectMapOverlayLayer(final OsmandMapTileView mapView, 
 			final CommonPreference<String> mapPref, final CommonPreference<Integer> transparencyPref,
 			final BaseMapLayer... transparencyToChange){
@@ -524,7 +550,7 @@ public class MapActivityLayers {
 		}
 		
 		items[i] = getString(R.string.install_more);
-		builder.setItems(items, new DialogInterface.OnClickListener(){
+		builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if (which == items.length - 1){
@@ -540,6 +566,7 @@ public class MapActivityLayers {
 					updateMapSource(mapView, mapPref);
 				}
 				
+				dialog.dismiss();
 			}
 			
 		});

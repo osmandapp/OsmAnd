@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
 	<string name="amenity_type_administrative">Administrativo</string>
@@ -165,6 +165,7 @@
 	<string name="gps_provider">GPS</string>
 	<string name="gps_status_app_not_found">No se pudo encontrar el estado del Gps</string>
 	<string name="gpx_files_not_found">No se encontró los archivos GPX en el directorio /osmand/tracks</string>
+	<string name="gpx_option_reverse_route">Ruta inversa</string>
 	<string name="hello">Aplicación de navegación OsmAndAccess</string>
 	<string name="hide_poi_filter">Esconder filtro</string>
 	<string name="hint_search_online">Número de casa, calle, ciudad</string>

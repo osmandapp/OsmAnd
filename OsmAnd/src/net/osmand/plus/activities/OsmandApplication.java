@@ -14,7 +14,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.Algoritms;
 import net.osmand.FavouritePoint;
 import net.osmand.LogUtil;
-import net.osmand.GPXUtilities.GPXFileResult;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.NavigationService;
@@ -60,7 +60,7 @@ public class OsmandApplication extends Application {
 	private ProgressDialogImplementation startDialog;
 	private List<String> startingWarnings;
 	private Handler uiHandler;
-	private GPXFileResult gpxFileToDisplay;
+	private GPXFile gpxFileToDisplay;
 	
 	private boolean applicationInitializing = false;
 	private Locale prefferedLocale = null;
@@ -82,6 +82,15 @@ public class OsmandApplication extends Application {
     	}
 	}
     
+    @Override
+    public void onTerminate() {
+    	super.onTerminate();
+    	if (routingHelper != null) {
+    		routingHelper.getVoiceRouter().onApplicationTerminate(getApplicationContext());
+    	}
+    }
+    
+    
     public RendererRegistry getRendererRegistry() {
 		return rendererRegistry;
 	}
@@ -97,16 +106,19 @@ public class OsmandApplication extends Application {
 		return poiFilters;
 	}
 	
-	public void setGpxFileToDisplay(GPXFileResult gpxFileToDisplay) {
+	public void setGpxFileToDisplay(GPXFile gpxFileToDisplay) {
 		this.gpxFileToDisplay = gpxFileToDisplay;
 		if(gpxFileToDisplay == null){
 			getFavorites().setFavoritePointsFromGPXFile(null);
 		} else {
 			List<FavouritePoint> pts = new ArrayList<FavouritePoint>();
-			for (WptPt p : gpxFileToDisplay.wayPoints) {
+			for (WptPt p : gpxFileToDisplay.points) {
 				FavouritePoint pt = new FavouritePoint();
 				pt.setLatitude(p.lat);
 				pt.setLongitude(p.lon);
+				if(p.name == null){
+					p.name = "";
+				}
 				pt.setName(p.name);
 				pts.add(pt);
 			}
@@ -114,7 +126,7 @@ public class OsmandApplication extends Application {
 		}
 	}
 	
-	public GPXFileResult getGpxFileToDisplay() {
+	public GPXFile getGpxFileToDisplay() {
 		return gpxFileToDisplay;
 	}
     

@@ -10,7 +10,6 @@ import net.osmand.GPXUtilities;
 import net.osmand.LogUtil;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Track;
-import net.osmand.GPXUtilities.TrkPt;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandSettings;
@@ -25,10 +24,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.text.format.DateFormat;
 
 public class SavingTrackHelper extends SQLiteOpenHelper {
-	public final static String TRACKS_PATH = "tracks"; //$NON-NLS-1$
 	
 	public final static String DATABASE_NAME = "tracks"; //$NON-NLS-1$
-	public final static int DATABASE_VERSION = 2;
+	public final static int DATABASE_VERSION = 3;
 	
 	public final static String TRACK_NAME = "track"; //$NON-NLS-1$
 	public final static String TRACK_COL_DATE = "date"; //$NON-NLS-1$
@@ -36,6 +34,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public final static String TRACK_COL_LON = "lon"; //$NON-NLS-1$
 	public final static String TRACK_COL_ALTITUDE = "altitude"; //$NON-NLS-1$
 	public final static String TRACK_COL_SPEED = "speed"; //$NON-NLS-1$
+	public final static String TRACK_COL_HDOP = "hdop"; //$NON-NLS-1$
 	
 	public final static String POINT_NAME = "point"; //$NON-NLS-1$
 	public final static String POINT_COL_DATE = "date"; //$NON-NLS-1$
@@ -57,7 +56,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public SavingTrackHelper(Context ctx){
 		super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
 		this.ctx = ctx;
-		updateScript = "INSERT INTO " + TRACK_NAME + " VALUES (?, ?, ?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
+		updateScript = "INSERT INTO " + TRACK_NAME + 
+		" (" +TRACK_COL_LAT +", " +TRACK_COL_LON+", " +TRACK_COL_ALTITUDE+", " +TRACK_COL_SPEED
+			 +", " +TRACK_COL_HDOP+", " +TRACK_COL_DATE+ ")" +
+		" VALUES (?, ?, ?, ?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
 		updatePointsScript = "INSERT INTO " + POINT_NAME + " VALUES (?, ?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
@@ -70,12 +72,16 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private void createTableForTrack(SQLiteDatabase db){
 		db.execSQL("CREATE TABLE " + TRACK_NAME+ " ("+TRACK_COL_LAT +" double, " + TRACK_COL_LON+" double, " //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  
 				+ TRACK_COL_ALTITUDE+" double, " + TRACK_COL_SPEED+" double, "  //$NON-NLS-1$ //$NON-NLS-2$
-				+ TRACK_COL_DATE +" long )" ); //$NON-NLS-1$
+				+ TRACK_COL_HDOP +" double, " + TRACK_COL_DATE +" long )" ); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	private void createTableForPoints(SQLiteDatabase db){
-		db.execSQL("CREATE TABLE " + POINT_NAME+ " ("+POINT_COL_LAT +" double, " + POINT_COL_LON+" double, " //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  
-				+ POINT_COL_DATE+" long, " + POINT_COL_DESCRIPTION+" text)" ); //$NON-NLS-1$ //$NON-NLS-2$ 
+		try {
+			db.execSQL("CREATE TABLE " + POINT_NAME+ " ("+POINT_COL_LAT +" double, " + POINT_COL_LON+" double, " //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  
+					+ POINT_COL_DATE+" long, " + POINT_COL_DESCRIPTION+" text)" ); //$NON-NLS-1$ //$NON-NLS-2$
+		} catch (RuntimeException e) {
+			// ignore if already exists
+		}
 	}
 
 	@Override
@@ -83,47 +89,50 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		if(oldVersion < 2){
 			createTableForPoints(db);
 		}
+		if(oldVersion < 3){
+			db.execSQL("ALTER TABLE " + TRACK_NAME +  " ADD " + TRACK_COL_HDOP + " double");
+		}
 	}
 	
 	
 	
 		
-	public boolean hasDataToSave(){
-		SQLiteDatabase db = getReadableDatabase();
-		if(db != null){
+	public boolean hasDataToSave() {
+		SQLiteDatabase db = getWritableDatabase();
+		if (db != null) {
 			Cursor q = db.query(false, TRACK_NAME, new String[0], null, null, null, null, null, null);
-                        boolean has = q.moveToFirst();
-                        q.close();
-			if(has) {
-                            return true;
-                        }
-                        q = db.query(false, POINT_NAME, new String[0], null, null, null, null, null, null);
+			boolean has = q.moveToFirst();
+			q.close();
+			if (has) {
+				return true;
+			}
+			q = db.query(false, POINT_NAME, new String[0], null, null, null, null, null, null);
 			has = q.moveToFirst();
-                        q.close();
-			if(has) {
-                            return true;
-                        }
+			q.close();
+			if (has) {
+				return true;
+			}
 		}
-		
+
 		return false;
 	}
 	
 	/**
 	 * @return warnings
 	 */
-	public List<String> saveDataToGpx(){
+	public List<String> saveDataToGpx() {
 		SQLiteDatabase db = getReadableDatabase();
 		List<String> warnings = new ArrayList<String>();
 		File dir = OsmandSettings.getOsmandSettings(ctx).getExternalStorageDirectory();
-		if(db != null && dir.canWrite()){
-			dir = new File(dir, ResourceManager.APP_DIR + TRACKS_PATH);
+		if (db != null && dir.canWrite()) {
+			dir = new File(dir, ResourceManager.GPX_PATH);
 			dir.mkdirs();
 			if (dir.exists()) {
-				
+
 				Map<String, GPXFile> data = new LinkedHashMap<String, GPXFile>();
 				collectDBPoints(db, data);
 				collectDBTracks(db, data);
-				
+
 				// save file
 				for (String f : data.keySet()) {
 
@@ -141,7 +150,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				}
 			}
 		}
-		
+
 		db = getWritableDatabase();
 		if (db != null && warnings.isEmpty()) {
 			// remove all from db
@@ -180,19 +189,20 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	
 	private void collectDBTracks(SQLiteDatabase db, Map<String, GPXFile> dataTracks) {
 		Cursor query = db.rawQuery("SELECT " + TRACK_COL_LAT + "," + TRACK_COL_LON + "," + TRACK_COL_ALTITUDE + "," //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-				+ TRACK_COL_SPEED + "," + TRACK_COL_DATE + " FROM " + TRACK_NAME +" ORDER BY " + TRACK_COL_DATE +" ASC", null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				+ TRACK_COL_SPEED + "," + TRACK_COL_HDOP + "," + TRACK_COL_DATE + " FROM " + TRACK_NAME +" ORDER BY " + TRACK_COL_DATE +" ASC", null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		long previousTime = 0;
 		long previousInterval = 0;
 		TrkSegment segment = null;
 		Track track = null;
 		if (query.moveToFirst()) {
 			do {
-				TrkPt pt = new TrkPt();
+				WptPt pt = new WptPt();
 				pt.lat = query.getDouble(0);
 				pt.lon = query.getDouble(1);
 				pt.ele = query.getDouble(2);
 				pt.speed = query.getDouble(3);
-				long time = query.getLong(4);
+				pt.hdop = query.getDouble(4);
+				long time = query.getLong(5);
 				pt.time = time;
 				long currentInterval = Math.abs(time - previousTime);
 				
@@ -227,11 +237,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		query.close();
 	}
 	
-	public void insertData(double lat, double lon, double alt, double speed, long time, OsmandSettings settings){
+	public void insertData(double lat, double lon, double alt, double speed, double hdop, long time, OsmandSettings settings){
 		if (time - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()*1000) {
 			SQLiteDatabase db = getWritableDatabase();
 			if (db != null) {
-				db.execSQL(updateScript, new Object[] { lat, lon, alt, speed, time });
+				db.execSQL(updateScript, new Object[] { lat, lon, alt, speed, hdop, time });
 			}
 			lastTimeUpdated = time;
 		}

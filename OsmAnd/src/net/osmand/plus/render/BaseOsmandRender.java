@@ -148,7 +148,7 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 	}
 	
 	public boolean renderPolyline(String tag, String val, int zoom, RenderingContext rc, OsmandRenderer o, int layer, boolean nightMode){
-		boolean r = renderPolylineImpl(tag,val, zoom, rc, o, layer, nightMode);
+		boolean r = renderPolylineImpl(tag, val, zoom, rc, o, layer, nightMode);
 		if(!r){
 			r = renderPolylineImpl(tag, null, zoom, rc, o, layer, nightMode);
 		}
