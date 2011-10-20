@@ -43,6 +43,7 @@ public class RenderingRuleStorageProperties {
 	public static final String TEXT_COLOR = "textColor";
 	public static final String TEXT_HALO_RADIUS = "textHaloRadius";
 	public static final String TEXT_WRAP_WIDTH = "textWrapWidth";
+	public static final String SHADOW_LEVEL = "shadowLevel";
 
 	public RenderingRuleProperty R_TEXT_LENGTH;
 	public RenderingRuleProperty R_REF;
@@ -73,6 +74,7 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_TAG;
 	public RenderingRuleProperty R_VALUE;
 	public RenderingRuleProperty R_MINZOOM;
+	public RenderingRuleProperty R_SHADOW_LEVEL;
 	public RenderingRuleProperty R_MAXZOOM;
 	public RenderingRuleProperty R_NIGHT_MODE;
 	public RenderingRuleProperty R_TEXT_DY;
@@ -102,6 +104,7 @@ public class RenderingRuleStorageProperties {
 
 		// order - no sense to make it float
 		R_ORDER = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ORDER));
+		R_SHADOW_LEVEL = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(SHADOW_LEVEL));
 
 		// text properties
 		R_TEXT_WRAP_WIDTH = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(TEXT_WRAP_WIDTH));

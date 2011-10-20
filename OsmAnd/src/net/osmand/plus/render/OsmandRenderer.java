@@ -69,9 +69,6 @@ public class OsmandRenderer {
 
 	private DisplayMetrics dm;
 
-	private int[] shadowarray;
-	private int shadownum;
-
 	private static class TextDrawInfo {
 
 		public TextDrawInfo(String text){
@@ -146,6 +143,16 @@ public class OsmandRenderer {
 		PointF tempPoint = new PointF();
 		float cosRotateTileSize;
 		float sinRotateTileSize;
+		
+		// int shadowRenderingMode = 0; // no shadow (minumum CPU)
+		// int shadowRenderingMode = 1; // classic shadow (the implementaton in master)
+		// int shadowRenderingMode = 2; // blur shadow (most CPU, but still reasonable)
+		// int shadowRenderingMode = 3; solid border (CPU use like classic version or even smaller)
+		int shadowRenderingMode = 2;
+		
+		// not expect any shadow
+		int shadowLevelMin = 256;
+		int shadowLevelMax = 0;
 
 		String renderingDebugInfo;
 	}
@@ -218,6 +225,116 @@ public class OsmandRenderer {
 		// put in order map
 		int sz = objects.size();
 		int init = sz / 4;
+		TIntObjectHashMap<TIntArrayList> orderMap = sortObjectsByProperOrder(rc, objects, render, sz, init);
+		if (objects != null && !objects.isEmpty() && rc.width > 0 && rc.height > 0) {
+			int objCount = 0;
+			// init rendering context
+			rc.tileDivisor = (int) (1 << (31 - rc.zoom));
+			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
+			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
+
+			int[] keys = orderMap.keys();
+			Arrays.sort(keys);
+			
+			boolean shadowDrawn = false;
+
+			for (int k = 0; k < keys.length; k++) {
+				if (!shadowDrawn && keys[k] >= rc.shadowLevelMin && keys[k] <= rc.shadowLevelMax && 
+						rc.shadowRenderingMode > 1) {
+					for (int ki = k; ki < keys.length; ki++) {
+						if (keys[ki] > rc.shadowLevelMax || rc.interrupted) {
+							break;
+						}
+						TIntArrayList list = orderMap.get(keys[ki]);
+						for (int j = 0; j < list.size(); j++) {
+							int i = list.get(j);
+							int ind = i >> 8;
+							int l = i & 0xff;
+							BinaryMapDataObject obj = objects.get(ind);
+
+							// show text only for main type
+							drawObj(obj, render, cv, rc, l, l == 0, true);
+							objCount++;
+						}
+					}
+					shadowDrawn = true;
+				}
+				if (rc.interrupted) {
+					return null;
+				}
+
+				TIntArrayList list = orderMap.get(keys[k]);
+				for (int j = 0; j < list.size(); j++) {
+					int i = list.get(j);
+					int ind = i >> 8;
+					int l = i & 0xff;
+					BinaryMapDataObject obj = objects.get(ind);
+
+					// show text only for main type
+					drawObj(obj, render, cv, rc, l, l == 0, false);
+					objCount++;
+				}
+				if (objCount > 25) {
+					notifyListeners(notifyList);
+					objCount = 0;
+				}
+
+			}
+
+			long beforeIconTextTime = System.currentTimeMillis() - now;
+			notifyListeners(notifyList);
+			drawIconsOverCanvas(rc, cv);
+
+			notifyListeners(notifyList);
+			drawTextOverCanvas(rc, cv, useEnglishNames);
+
+			long time = System.currentTimeMillis() - now;
+			rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
+					+ "(%s points, %s points inside, %s objects visile from %s)",//$NON-NLS-1$
+					time, time - beforeIconTextTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
+			log.info(rc.renderingDebugInfo);
+
+		}
+
+		return bmp;
+	}
+
+	private void drawIconsOverCanvas(RenderingContext rc, Canvas cv) {
+		int skewConstant = (int) getDensityValue(rc, 16);
+		int iconsW = rc.width / skewConstant;
+		int iconsH = rc.height / skewConstant;
+		int[] alreadyDrawnIcons = new int[iconsW * iconsH / 32];
+		for (IconDrawInfo icon : rc.iconsToDraw) {
+			if (icon.resId != 0) {
+				if (cachedIcons.get(icon.resId) == null) {
+					cachedIcons.put(icon.resId, UnscaledBitmapLoader.loadFromResource(context.getResources(), icon.resId, null, dm));
+				}
+				Bitmap ico = cachedIcons.get(icon.resId);
+				if (ico != null) {
+					if (icon.y >= 0 && icon.y < rc.height && icon.x >= 0 && icon.x < rc.width) {
+						int z = (((int) icon.x / skewConstant) + ((int) icon.y / skewConstant) * iconsW);
+						int i = z / 32;
+						if (i >= alreadyDrawnIcons.length) {
+							continue;
+						}
+						int ind = alreadyDrawnIcons[i];
+						int b = z % 32;
+						// check bit b if it is set
+						if (((ind >> b) & 1) == 0) {
+							alreadyDrawnIcons[i] = ind | (1 << b);
+							cv.drawBitmap(ico, icon.x - ico.getWidth() / 2, icon.y - ico.getHeight() / 2, paintIcon);
+						}
+					}
+				}
+			}
+			if (rc.interrupted) {
+				return;
+			}
+		}
+	}
+
+	private TIntObjectHashMap<TIntArrayList> sortObjectsByProperOrder(RenderingContext rc, List<BinaryMapDataObject> objects,
+			RenderingRuleSearchRequest render, int sz, int init) {
 		TIntObjectHashMap<TIntArrayList> orderMap = new TIntObjectHashMap<TIntArrayList>();
 		if (render != null) {
 			render.clearState();
@@ -225,13 +342,17 @@ public class OsmandRenderer {
 			for (int i = 0; i < sz; i++) {
 				BinaryMapDataObject o = objects.get(i);
 				int sh = i << 8;
-
 				if (o instanceof MultyPolygon) {
 					int layer = ((MultyPolygon) o).getLayer();
 					render.setTagValueZoomLayer(((MultyPolygon) o).getTag(), ((MultyPolygon) o).getValue(), rc.zoom, layer);
 					render.setIntFilter(render.ALL.R_ORDER_TYPE, MapRenderingTypes.POLYGON_TYPE);
 					if(render.search(RenderingRulesStorage.ORDER_RULES)) {
-						put(orderMap, render.getIntPropertyValue(render.ALL.R_ORDER), sh, init);
+						int order = render.getIntPropertyValue(render.ALL.R_ORDER);
+						put(orderMap, order, sh, init);
+						if(render.isSpecified(render.ALL.R_SHADOW_LEVEL)){
+							rc.shadowLevelMin = Math.min(rc.shadowLevelMin, order);
+							rc.shadowLevelMax = Math.max(rc.shadowLevelMax, order);
+						}
 					}
 				} else {
 					for (int j = 0; j < o.getTypes().length; j++) {
@@ -248,8 +369,13 @@ public class OsmandRenderer {
 						if (pair != null) {
 							render.setTagValueZoomLayer(pair.tag, pair.value, rc.zoom, layer);
 							render.setIntFilter(render.ALL.R_ORDER_TYPE, mask);
-							if(render.search(RenderingRulesStorage.ORDER_RULES)) {
-								put(orderMap, render.getIntPropertyValue(render.ALL.R_ORDER), sh + j, init);
+							if (render.search(RenderingRulesStorage.ORDER_RULES)) {
+								int order = render.getIntPropertyValue(render.ALL.R_ORDER);
+								put(orderMap, order, sh + j, init);
+								if (render.isSpecified(render.ALL.R_SHADOW_LEVEL)) {
+									rc.shadowLevelMin = Math.min(rc.shadowLevelMin, order);
+									rc.shadowLevelMax = Math.max(rc.shadowLevelMax, order);
+								}
 							}
 						}
 
@@ -261,111 +387,7 @@ public class OsmandRenderer {
 				}
 			}
 		}
-
-		if (objects != null && !objects.isEmpty() && rc.width > 0 && rc.height > 0) {
-			// init rendering context
-			rc.tileDivisor = (int) (1 << (31 - rc.zoom));
-			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
-			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
-
-			//int shadow = 0; // no shadow (minumum CPU)
-			//int shadow = 1; // classic shadow (the implementaton in master)
-			//int shadow = 2; // blur shadow (most CPU, but still reasonable)
-			int shadow = 3; // solid border (CPU use like classic version or even smaller)
-			boolean repeat = false;
-
-			int[] keys = orderMap.keys();
-			Arrays.sort(keys);
-			int objCount = 0;
-
-			shadowarray = new int[keys.length];
-			shadownum = 0;
-
-			for (int k = 0; k < keys.length; k++) {
-
-				if(repeat == true && shadowarray[shadownum] != k && shadowarray[shadownum] != -1  && keys[k] < 58){
-					continue;
-				}
-				
-				if(repeat == true && shadowarray[shadownum] == k){
-					shadownum++;
-				}
-
-				TIntArrayList list = orderMap.get(keys[k]);
-
-				for (int j = 0; j < list.size(); j++) {
-					int i = list.get(j);
-					int ind = i >> 8;
-					int l = i & 0xff;
-					BinaryMapDataObject obj = objects.get(ind);
-
-				// show text only for main type
-					drawObj(obj, render, cv, rc, l, l == 0, shadow, k);
-					objCount++;
-				}
-				if(objCount > 25){
-					notifyListeners(notifyList);
-					objCount = 0;
-				}
-				if(rc.interrupted){
-					return null;
-				}
-
-				// order = 57 should be set as limit for shadows 
-				if(keys[k] > 57 && repeat == false && shadow > 1){
-					shadow = 0;
-					shadownum = 0;
-					k = shadowarray[0]-1;
-					repeat = true;
-				}
-			}
-			notifyListeners(notifyList);
-			long beforeIconTextTime = System.currentTimeMillis() - now;
-
-			int skewConstant = (int) getDensityValue(rc, 16);
-
-			int iconsW = rc.width / skewConstant ;
-			int iconsH = rc.height / skewConstant;
-			int[] alreadyDrawnIcons = new int[iconsW * iconsH / 32];
-			for(IconDrawInfo icon : rc.iconsToDraw){
-				if (icon.resId != 0) {
-					if (cachedIcons.get(icon.resId) == null) {
-						cachedIcons.put(icon.resId, UnscaledBitmapLoader.loadFromResource(context.getResources(), icon.resId, null, dm));
-					}
-					Bitmap ico = cachedIcons.get(icon.resId);
-					if (ico != null) {
-						if (icon.y >= 0 && icon.y < rc.height && icon.x >= 0 && icon.x < rc.width) {
-							int z = (((int) icon.x / skewConstant) + ((int) icon.y / skewConstant) * iconsW);
-							int i = z / 32;
-							if (i >= alreadyDrawnIcons.length) {
-								continue;
-							}
-							int ind = alreadyDrawnIcons[i];
-							int b = z % 32;
-							// check bit b if it is set
-							if (((ind >> b) & 1) == 0) {
-								alreadyDrawnIcons[i] = ind | (1 << b);
-								cv.drawBitmap(ico, icon.x - ico.getWidth() / 2, icon.y - ico.getHeight() / 2, paintIcon);
-							}
-						}
-					}
-				}
-				if(rc.interrupted){
-					return null;
-				}
-			}
-			notifyListeners(notifyList);
-			
-			drawTextOverCanvas(rc, cv, useEnglishNames);
-			long time = System.currentTimeMillis() - now;
-			rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n" +
-					"(%s points, %s points inside, %s objects visile from %s)",//$NON-NLS-1$
-					time, time - beforeIconTextTime,rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
-			log.info(rc.renderingDebugInfo);
-
-		}
-
-		return bmp;
+		return orderMap;
 	}
 	
 
@@ -603,23 +625,25 @@ public class OsmandRenderer {
 	}
 
 	
-	protected void drawObj(BinaryMapDataObject obj, RenderingRuleSearchRequest render, Canvas canvas, RenderingContext rc, int l, boolean renderText,
-			 int shadow, int index) {
+	protected void drawObj(BinaryMapDataObject obj, RenderingRuleSearchRequest render, Canvas canvas, RenderingContext rc, int l,
+			boolean renderText, boolean drawOnlyShadow) {
 		rc.allObjects++;
 		if (obj instanceof MultyPolygon) {
-			drawMultiPolygon(obj, render, canvas, rc);
+			if(!drawOnlyShadow){
+				drawMultiPolygon(obj, render, canvas, rc);
+			}
 		} else {
 			int mainType = obj.getTypes()[l];
 			int t = mainType & 3;
 			int type = MapRenderingTypes.getMainObjectType(mainType);
 			int subtype = MapRenderingTypes.getObjectSubType(mainType);
 			TagValuePair pair = obj.getMapIndex().decodeType(type, subtype);
-			if (t == MapRenderingTypes.POINT_TYPE) {
+			if (t == MapRenderingTypes.POINT_TYPE && !drawOnlyShadow) {
 				drawPoint(obj, render, canvas, rc, pair, renderText);
 			} else if (t == MapRenderingTypes.POLYLINE_TYPE) {
 				int layer = MapRenderingTypes.getNegativeWayLayer(mainType);
-				drawPolyline(obj, render, canvas, rc, pair, layer, shadow, index);
-			} else if (t == MapRenderingTypes.POLYGON_TYPE) {
+				drawPolyline(obj, render, canvas, rc, pair, layer, drawOnlyShadow);
+			} else if (t == MapRenderingTypes.POLYGON_TYPE && !drawOnlyShadow) {
 				drawPolygon(obj, render, canvas, rc, pair);
 			} else {
 				if (t == MapRenderingTypes.MULTY_POLYGON_TYPE && !(obj instanceof MultyPolygon)) {
@@ -811,15 +835,16 @@ public class OsmandRenderer {
 				p.setShader(null);
 			}
 			
-			int shadowColor = req.getIntPropertyValue(req.ALL.R_SHADOW_COLOR);
-			int shadowLayer = req.getIntPropertyValue(req.ALL.R_SHADOW_RADIUS);
-			if(shadowColor == 0){
-				shadowLayer = 0;
-			}
-			p.setShadowLayer(shadowLayer, 0, 0, shadowColor);
+			// do not check shadow color here
+//			int shadowColor = req.getIntPropertyValue(req.ALL.R_SHADOW_COLOR);
+//			int shadowLayer = req.getIntPropertyValue(req.ALL.R_SHADOW_RADIUS);
+//			if(shadowColor == 0){
+//				shadowLayer = 0;
+//			}
+//			p.setShadowLayer(shadowLayer, 0, 0, shadowColor);
 		} else {
 			p.setShader(null);
-			p.setShadowLayer(0, 0, 0, 0);
+			p.clearShadowLayer();
 		}
 		return true;
 		
@@ -908,59 +933,29 @@ public class OsmandRenderer {
 
 	}
 
-	private void drawPolylineWithShadow(Canvas canvas, Path path, int shadow, int shadowRadius, int index){
-		//if(paint.getStrokeCap() == Paint.Cap.ROUND)paint.setStrokeCap(Paint.Cap.SQUARE);
-		//if(paint.getStrokeCap() == Paint.Cap.ROUND)paint.setStrokeCap(Paint.Cap.BUTT);
-
-		if(paint.getPathEffect() != null){
-			paint.setStrokeCap(Paint.Cap.BUTT);			
-		}
-
-		// no shadow
-		if(shadow == 0){
-			paint.clearShadowLayer();
-			canvas.drawPath(path, paint);
-		}
-
-		//classic ugly shadows
-		if(shadow == 1){
-			canvas.drawPath(path, paint);
-		}
-
+	private void drawPolylineShadow(Canvas canvas, RenderingContext rc, Path path, int shadowColor, int shadowRadius) {
 		// blurred shadows
-		if(shadow == 2){
-			if(paint.getPathEffect() == null) paint.setColor(0xffffffff);
+		if (rc.shadowRenderingMode == 2 && shadowRadius > 0) {
+			// simply draw shadow? difference from option 3 ?
+			// paint.setColor(shadowRadius);
+			// paint.setColor(0xffffffff);
+			paint.setShadowLayer(shadowRadius, 0, 0, shadowColor);
 			canvas.drawPath(path, paint);
 		}
-		else if(shadow == 2) canvas.drawPath(path, paint);
 
 		// option shadow = 3 with solid border
-		if(shadow == 3 && shadowRadius > 0){
-			if(paint.getPathEffect() == null){
+		if (rc.shadowRenderingMode == 3 && shadowRadius > 0) {
 			paint.clearShadowLayer();
-			paint.setStrokeWidth(paint.getStrokeWidth() + 2);
-			paint.setColor(0xffbababa);
-			}
+			paint.setStrokeWidth(paint.getStrokeWidth() + shadowRadius * 2);
+			 paint.setColor(0xffbababa);
+//			paint.setColor(shadowColor);
 			canvas.drawPath(path, paint);
-		}
-		else if(shadow == 3) canvas.drawPath(path, paint);
-
-		//check for shadow and save index in array
-		if(shadowRadius > 0 && shadow > 1){
-			if(shadownum == 0){
-				shadowarray[shadownum] = index;
-				shadownum++;
-			}
-			if (shadowarray[shadownum-1] != index){
-				shadowarray[shadownum] = index;
-				shadownum++;
-			}
 		}
 	}
 
 	
 	private void drawPolyline(BinaryMapDataObject obj, RenderingRuleSearchRequest render, Canvas canvas, RenderingContext rc, TagValuePair pair, int layer,
-			int shadow, int index) {
+			boolean drawOnlyShadow) {
 		if(render == null || pair == null){
 			return;
 		}
@@ -978,7 +973,6 @@ public class OsmandRenderer {
 		if(rc.zoom >= 16 && "highway".equals(pair.tag) && MapRenderingTypes.isOneWayWay(obj.getHighwayAttributes())){ //$NON-NLS-1$
 			oneway = true;
 		}
-
 
 		rc.visible++;
 
@@ -1022,90 +1016,104 @@ public class OsmandRenderer {
 			yPrev = p.y;
 		}
 		if (path != null) {
-			canvas.drawPath(path, paint);
-// TODO
-			drawPolylineWithShadow(canvas, path, shadow, shadowRadius, index);
-			if (updatePaint(render, paint, 1, false)) {
+			if(drawOnlyShadow) {
+				int shadowColor = render.getIntPropertyValue(render.ALL.R_SHADOW_COLOR);
+				int shadowRadius = render.getIntPropertyValue(render.ALL.R_SHADOW_RADIUS);
+				drawPolylineShadow(canvas, rc, path, shadowColor, shadowRadius);
+			} else {
+				if(rc.shadowRenderingMode != 1) {
+					paint.clearShadowLayer();
+				}
 				canvas.drawPath(path, paint);
-				if (updatePaint(render, paint, 2, false)) {
+				if (updatePaint(render, paint, 1, false)) {
 					canvas.drawPath(path, paint);
+					if (updatePaint(render, paint, 2, false)) {
+						canvas.drawPath(path, paint);
+					}
 				}
 			}
-			if(oneway){
+			
+			if(oneway && !drawOnlyShadow){
 				Paint[] paints = getOneWayPaints();
 				for (int i = 0; i < paints.length; i++) {
 					canvas.drawPath(path, paints[i]);
 				}
 			}
-			if (obj.getName() != null && obj.getName().length() > 0) {
-				String name = obj.getName();
-				String ref = null;
-				if(name.charAt(0) == MapRenderingTypes.REF_CHAR){
-					ref = name.substring(1);
-					name = ""; //$NON-NLS-1$
-					for(int k = 0; k < ref.length(); k++){
-						if(ref.charAt(k) == MapRenderingTypes.REF_CHAR){
-							if(k < ref.length() - 1){
-								name = ref.substring(k + 1);
-							}
-							ref = ref.substring(0, k);
-							break;
-						}
-					}
-				}
-				if(ref != null && ref.trim().length() > 0){
-					render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
-					render.setIntFilter(render.ALL.R_TEXT_LENGTH, ref.length());
-					render.setBooleanFilter(render.ALL.R_REF, true);
-					if(render.search(RenderingRulesStorage.TEXT_RULES)){
-						if(render.getIntPropertyValue(render.ALL.R_TEXT_SIZE) > 0){
-							TextDrawInfo text = new TextDrawInfo(ref);
-							text.fillProperties(render, middlePoint.x, middlePoint.y);
-							text.pathRotate = pathRotate;
-							rc.textToDraw.add(text);
-						}
-					}
-				}
-
-				if(name != null && name.trim().length() > 0){
-					render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
-					render.setIntFilter(render.ALL.R_TEXT_LENGTH, name.length());
-					render.setBooleanFilter(render.ALL.R_REF, false);
-					if (render.search(RenderingRulesStorage.TEXT_RULES) && render.getIntPropertyValue(render.ALL.R_TEXT_SIZE) > 0) {
-						TextDrawInfo text = new TextDrawInfo(name);
-						if (render.getIntPropertyValue(render.ALL.R_TEXT_ON_PATH, 0) == 0) {
-							text.fillProperties(render, middlePoint.x, middlePoint.y);
-							rc.textToDraw.add(text);
-						} else {
-							paintText.setTextSize(text.textSize);
-							if (paintText.measureText(obj.getName()) < roadLength ) {
-								if (inverse) {
-									path.rewind();
-									boolean st = true;
-									for (int i = obj.getPointsLength() - 1; i >= 0; i--) {
-										PointF p = calcPoint(obj, i, rc);
-										if (st) {
-											st = false;
-											path.moveTo(p.x, p.y);
-										} else {
-											path.lineTo(p.x, p.y);
-										}
-									}
-								}
-								text.fillProperties(render, xMid / 2, yMid / 2);
-								text.pathRotate = pathRotate;
-								text.drawOnPath = path;
-								float strokeWidth = render.getFloatPropertyValue(render.ALL.R_STROKE_WIDTH);
-								text.vOffset = strokeWidth / 2 - 1;
-								rc.textToDraw.add(text);
-							}
-						}
-					}
-
-				}
+			if (!drawOnlyShadow && obj.getName() != null && obj.getName().length() > 0) {
+				calculatePolylineText(obj, render, rc, pair, path, pathRotate, roadLength, inverse, xMid, yMid, middlePoint);
 			}
 		}
 	}
+
+	private void calculatePolylineText(BinaryMapDataObject obj, RenderingRuleSearchRequest render, RenderingContext rc, TagValuePair pair,
+			Path path, float pathRotate, float roadLength, boolean inverse, float xMid, float yMid, PointF middlePoint) {
+		String name = obj.getName();
+		String ref = null;
+		if(name.charAt(0) == MapRenderingTypes.REF_CHAR){
+			ref = name.substring(1);
+			name = ""; //$NON-NLS-1$
+			for(int k = 0; k < ref.length(); k++){
+				if(ref.charAt(k) == MapRenderingTypes.REF_CHAR){
+					if(k < ref.length() - 1){
+						name = ref.substring(k + 1);
+					}
+					ref = ref.substring(0, k);
+					break;
+				}
+			}
+		}
+		if(ref != null && ref.trim().length() > 0){
+			render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
+			render.setIntFilter(render.ALL.R_TEXT_LENGTH, ref.length());
+			render.setBooleanFilter(render.ALL.R_REF, true);
+			if(render.search(RenderingRulesStorage.TEXT_RULES)){
+				if(render.getIntPropertyValue(render.ALL.R_TEXT_SIZE) > 0){
+					TextDrawInfo text = new TextDrawInfo(ref);
+					text.fillProperties(render, middlePoint.x, middlePoint.y);
+					text.pathRotate = pathRotate;
+					rc.textToDraw.add(text);
+				}
+			}
+		}
+
+		if(name != null && name.trim().length() > 0){
+			render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
+			render.setIntFilter(render.ALL.R_TEXT_LENGTH, name.length());
+			render.setBooleanFilter(render.ALL.R_REF, false);
+			if (render.search(RenderingRulesStorage.TEXT_RULES) && render.getIntPropertyValue(render.ALL.R_TEXT_SIZE) > 0) {
+				TextDrawInfo text = new TextDrawInfo(name);
+				if (render.getIntPropertyValue(render.ALL.R_TEXT_ON_PATH, 0) == 0) {
+					text.fillProperties(render, middlePoint.x, middlePoint.y);
+					rc.textToDraw.add(text);
+				} else {
+					paintText.setTextSize(text.textSize);
+					if (paintText.measureText(obj.getName()) < roadLength ) {
+						if (inverse) {
+							path.rewind();
+							boolean st = true;
+							for (int i = obj.getPointsLength() - 1; i >= 0; i--) {
+								PointF p = calcPoint(obj, i, rc);
+								if (st) {
+									st = false;
+									path.moveTo(p.x, p.y);
+								} else {
+									path.lineTo(p.x, p.y);
+								}
+							}
+						}
+						text.fillProperties(render, xMid / 2, yMid / 2);
+						text.pathRotate = pathRotate;
+						text.drawOnPath = path;
+						float strokeWidth = render.getFloatPropertyValue(render.ALL.R_STROKE_WIDTH);
+						text.vOffset = strokeWidth / 2 - 1;
+						rc.textToDraw.add(text);
+					}
+				}
+			}
+
+		}
+	}
+	
 	private static Paint[] oneWay = null;
 	private static Paint oneWayPaint(){
 		Paint oneWay = new Paint();

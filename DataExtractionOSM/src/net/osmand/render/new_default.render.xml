@@ -95,25 +95,25 @@
 			<filter tag="administrative" value="" order="62" />
 			<filter tag="waterway"  value="" order="18" />
 
-			<filter tag="highway" value="motorway" order="57" />
-			<filter tag="highway" value="trunk" order="56" />
-			<filter tag="highway" value="primary" order="55" />
-			<filter tag="highway" value="secondary" order="54" />
-			<filter tag="highway" value="tertiary" order="53" />
-			<filter tag="highway" value="road" order="51" />
-			<filter tag="highway" value="unclassified" order="51" />
-			<filter tag="highway" value="residential" order="52" />
-			<filter tag="highway" value="service" order="52" />
-			<filter tag="highway" value="living_street" order="47" />
-			<filter tag="highway" value="track" order="50" />
-			<filter tag="highway" value="path" order="48" />
+			<filter tag="highway" value="motorway" order="57" shadowLevel="1"/>
+			<filter tag="highway" value="trunk" order="56" shadowLevel="1"/>
+			<filter tag="highway" value="primary" order="55" shadowLevel="1"/>
+			<filter tag="highway" value="secondary" order="54" shadowLevel="1"/>
+			<filter tag="highway" value="tertiary" order="53" shadowLevel="1"/>
+			<filter tag="highway" value="road" order="51" shadowLevel="1"/>
+			<filter tag="highway" value="unclassified" order="51" shadowLevel="1"/>
+			<filter tag="highway" value="residential" order="52" shadowLevel="1"/>
+			<filter tag="highway" value="service" order="52" shadowLevel="1"/>
+			<filter tag="highway" value="living_street" order="47" shadowLevel="1"/>
+			<filter tag="highway" value="track" order="50" shadowLevel="1"/>
+			<filter tag="highway" value="path" order="48" shadowLevel="1"/>
 
-			<filter tag="highway" value="construction" order="46" />
-			<filter tag="highway" value="proposed" order="45" />
-			<filter tag="highway" value="motorway_link" order="44" />
-			<filter tag="highway" value="trunk_link" order="43" />
-			<filter tag="highway" value="primary_link" order="42" />
-			<filter tag="highway" value="secondary_link" order="41" />
+			<filter tag="highway" value="construction" order="46" shadowLevel="1"/>
+			<filter tag="highway" value="proposed" order="45" shadowLevel="1"/>
+			<filter tag="highway" value="motorway_link" order="44" shadowLevel="1"/>
+			<filter tag="highway" value="trunk_link" order="43" shadowLevel="1"/>
+			<filter tag="highway" value="primary_link" order="42" shadowLevel="1"/>
+			<filter tag="highway" value="secondary_link" order="41" shadowLevel="1"/>
 
 			<filter appMode="pedestrian" tag="highway" value="pedestrian" order="60" />
 			<filter appMode="pedestrian" tag="highway" value="cycleway" order="45" />
