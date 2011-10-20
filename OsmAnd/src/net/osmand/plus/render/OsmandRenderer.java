@@ -218,14 +218,15 @@ public class OsmandRenderer {
 		int init = sz / 4;
 		TIntObjectHashMap<TIntArrayList> orderMap = new TIntObjectHashMap<TIntArrayList>();
 		if (render != null) {
+			render.clearState();
+			
 			for (int i = 0; i < sz; i++) {
 				BinaryMapDataObject o = objects.get(i);
 				int sh = i << 8;
 
 				if (o instanceof MultyPolygon) {
 					int layer = ((MultyPolygon) o).getLayer();
-					render.setInitialTagValueZoom(((MultyPolygon) o).getTag(), ((MultyPolygon) o).getValue(), rc.zoom);
-					render.setIntFilter(render.ALL.R_LAYER, layer);
+					render.setTagValueZoomLayer(((MultyPolygon) o).getTag(), ((MultyPolygon) o).getValue(), rc.zoom, layer);
 					render.setIntFilter(render.ALL.R_ORDER_TYPE, MapRenderingTypes.POLYGON_TYPE);
 					if(render.search(RenderingRulesStorage.ORDER_RULES)) {
 						put(orderMap, render.getIntPropertyValue(render.ALL.R_ORDER), sh, init);
@@ -243,8 +244,7 @@ public class OsmandRenderer {
 						TagValuePair pair = o.getMapIndex().decodeType(MapRenderingTypes.getMainObjectType(wholeType),
 								MapRenderingTypes.getObjectSubType(wholeType));
 						if (pair != null) {
-							render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
-							render.setIntFilter(render.ALL.R_LAYER, layer);
+							render.setTagValueZoomLayer(pair.tag, pair.value, rc.zoom, layer);
 							render.setIntFilter(render.ALL.R_ORDER_TYPE, mask);
 							if(render.search(RenderingRulesStorage.ORDER_RULES)) {
 								put(orderMap, render.getIntPropertyValue(render.ALL.R_ORDER), sh + j, init);
@@ -822,8 +822,8 @@ public class OsmandRenderer {
 					rc.textToDraw.add(text);
 				}
 			}
-
 		}
+		
 		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
 		render.setIntFilter(render.ALL.R_TEXT_LENGTH, name.length());
 		render.setBooleanFilter(render.ALL.R_REF, false);

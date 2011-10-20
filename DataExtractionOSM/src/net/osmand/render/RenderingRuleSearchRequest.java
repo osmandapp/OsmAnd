@@ -71,6 +71,14 @@ public class RenderingRuleSearchRequest {
 		setStringFilter(ALL.R_VALUE, val);
 	}
 	
+	public void setTagValueZoomLayer(String tag, String val, int zoom, int layer){
+		setIntFilter(ALL.R_MINZOOM, zoom);
+		setIntFilter(ALL.R_MAXZOOM, zoom);
+		setIntFilter(ALL.R_LAYER, layer);
+		setStringFilter(ALL.R_TAG, tag);
+		setStringFilter(ALL.R_VALUE, val);
+	}
+	
 	public boolean isFound() {
 		return searchResult;
 	}
@@ -102,7 +110,7 @@ public class RenderingRuleSearchRequest {
 		if(dependsRequest != null){
 			// TODO search depends ?
 			// and copy results to local array
-			dependsRequest.search(state);
+			// dependsRequest.search(state);
 		}
 		return false;
 	}
