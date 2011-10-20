@@ -352,6 +352,7 @@ public class OsmandRenderer {
 						if(render.isSpecified(render.ALL.R_SHADOW_LEVEL)){
 							rc.shadowLevelMin = Math.min(rc.shadowLevelMin, order);
 							rc.shadowLevelMax = Math.max(rc.shadowLevelMax, order);
+							render.clearValue(render.ALL.R_SHADOW_LEVEL);
 						}
 					}
 				} else {
@@ -375,6 +376,7 @@ public class OsmandRenderer {
 								if (render.isSpecified(render.ALL.R_SHADOW_LEVEL)) {
 									rc.shadowLevelMin = Math.min(rc.shadowLevelMin, order);
 									rc.shadowLevelMax = Math.max(rc.shadowLevelMax, order);
+									render.clearValue(render.ALL.R_SHADOW_LEVEL);
 								}
 							}
 						}
