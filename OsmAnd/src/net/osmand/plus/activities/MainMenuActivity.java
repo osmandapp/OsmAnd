@@ -51,6 +51,10 @@ public class MainMenuActivity extends Activity {
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
 	
 	private ProgressDialog startProgressDialog;
+	
+	static {
+		System.loadLibrary("osmand");  
+	}
 
 	
 	public void checkPreviousRunsForExceptions(boolean firstTime) {

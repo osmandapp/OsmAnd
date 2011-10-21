@@ -10,14 +10,38 @@
 
 JNIEnv* env;
 jclass MultiPolygonClass;
+
+jclass PathClass;
+jmethodID Path_init;
+jmethodID Path_moveTo;
+jmethodID Path_lineTo;
+
+jclass CanvasClass;
+jmethodID Canvas_drawPath;
+
+jclass PaintClass;
+jclass PaintClass_setStrokeWidth;
+jclass PaintClass_setColor;
+
+
 jclass MapRenderingTypesClass;
 jmethodID MapRenderingTypes_getMainObjectType;
 jmethodID MapRenderingTypes_getObjectSubType;
+jmethodID MapRenderingTypes_getNegativeWayLayer;
+
+jclass BinaryMapDataObjectClass;
+jmethodID BinaryMapDataObject_getPointsLength;
+jmethodID BinaryMapDataObject_getPoint31YTile;
+jmethodID BinaryMapDataObject_getPoint31XTile;
+jmethodID BinaryMapDataObject_getTypes;
+jmethodID BinaryMapDataObject_getTagValue;
+
+jclass RenderingContextClass;
+jfieldID RenderingContextClass_interrupted;
+
 
 typedef struct RenderingContext {
-		// TODO check interrupted
 		jobject originalRC;
-		jfieldID interrupted;
 		
 		// public boolean interrupted = false;
 		// boolean highResMode = false;
@@ -55,15 +79,9 @@ typedef struct RenderingContext {
 } RenderingContext;
 
 
-jmethodID getMid(jobject obj, char* methodName, char* sig )
-{
-	jclass cls = (*env)->GetObjectClass(env, obj);
-	return (*env)->GetMethodID(env, cls, methodName, sig);
-}
 
-jfieldID getFid(jobject obj, char* fieldName, char* sig )
+jfieldID getFid(jclass cls, char* fieldName, char* sig )
 {
-	jclass cls = (*env)->GetObjectClass(env, obj);
 	return (*env)->GetFieldID(env, cls, fieldName, sig);
 }
 
@@ -72,10 +90,10 @@ jfieldID getFid(jobject obj, char* fieldName, char* sig )
  {
 		rc -> pointCount ++;
 		
-		float tx = (*env)->CallFloatMethod(env, mapObject, getMid(mapObject, "getPoint31XTile", "(I)[F" ), 
-						ind ) / (rc -> tileDivisor);
-		float ty = (*env)->CallFloatMethod(env, mapObject, getMid(mapObject, "getPoint31YTile", "(I)[F" ), 
-						ind ) / (rc -> tileDivisor);
+		float tx = (*env)->CallFloatMethod(env, mapObject, BinaryMapDataObject_getPoint31XTile,  ind )
+						/ (rc -> tileDivisor);
+		float ty = (*env)->CallFloatMethod(env, mapObject, BinaryMapDataObject_getPoint31YTile, ind )
+				/ (rc -> tileDivisor);
 		
 		float dTileX = tx - rc -> leftX;
 		float dTileY = ty - rc -> topY;
@@ -86,14 +104,51 @@ jfieldID getFid(jobject obj, char* fieldName, char* sig )
 				rc -> calcY >= 0 && rc -> calcY < rc ->height){
 			rc -> pointInsideCount++;
 		}
-} 
+}
+
+ void drawPolyline(jobject binaryMapDataObject,	jobject renderingRuleSearch, jobject cv, jobject paint,
+ 		RenderingContext* rc, jobject pair, int layer, int drawOnlyShadow)
+ {
+ 	rc -> visible++;
+ 	jint length = (*env)->CallIntMethod(env, binaryMapDataObject, BinaryMapDataObject_getPointsLength);
+ 	jobject path;
+ 	int i = 0;
+ 	for(; i< length ; i++)
+ 	{
+ 		calcPoint(binaryMapDataObject, i, rc);
+ 		if (!path) {
+ 			path = (*env)->NewObject( env, PathClass, Path_init);
+ 			(*env)->CallObjectMethod(env, path, Path_moveTo, rc->calcX, rc->calcY);
+ 		} else {
+ 			(*env)->CallObjectMethod(env, path, Path_lineTo, rc->calcX, rc->calcY);
+ 		}
+ 	}
+
+ 	if (path) {
+ 		if (drawOnlyShadow) {
+ 			//int shadowColor = render.getIntPropertyValue(render.ALL.R_SHADOW_COLOR);
+ 			//int shadowRadius = render.getIntPropertyValue(render.ALL.R_SHADOW_RADIUS);
+ 			//drawPolylineShadow(canvas, rc, path, shadowColor, shadowRadius);
+ 		} else {
+ 			(*env)->CallObjectMethod(env, paint, PaintClass_setColor, (jint) -3355444);
+ 			(*env)->CallObjectMethod(env, paint, PaintClass_setStrokeWidth, 3.5f);
+ 			(*env)->CallObjectMethod(env, cv, Canvas_drawPath, path, paint);
+ 			//if (updatePaint(render, paint, 1, false, rc)) {
+ 			//	canvas.drawPath(path, paint);
+ 			//	if (updatePaint(render, paint, 2, false, rc)) {
+ 			//		canvas.drawPath(path, paint);
+ 			//	}
+ 			//}
+ 		}
+
+ 		(*env)->DeleteLocalRef(env, path);
+ 	}
+
+ }
 
 void drawObject(RenderingContext* rc, jobject binaryMapDataObject, jobject cv,
-		jobject renderingRuleSearchRequest, int l) {
-		
+		jobject renderingRuleSearch, jobject paint, int l, int renderText, int drawOnlyShadow) {
 		rc -> allObjects++;
-		
-		
 		if ((*env)->IsInstanceOf(env, binaryMapDataObject, MultiPolygonClass)) {
 			//if(!drawOnlyShadow){
 			//	drawMultiPolygon(obj, render, canvas, rc);
@@ -101,8 +156,7 @@ void drawObject(RenderingContext* rc, jobject binaryMapDataObject, jobject cv,
 			 return; 
 		}
 		
-		jintArray types = (*env)->CallObjectMethod(env, binaryMapDataObject, 
-							         getMid(binaryMapDataObject, "getTypes", "()[I" ) );
+		jintArray types = (*env)->CallObjectMethod(env, binaryMapDataObject, BinaryMapDataObject_getTypes);
 		jint mainType;
 		(*env)->GetIntArrayRegion(env, types, l, 1, &mainType);	
 		int t = mainType & 3;
@@ -110,60 +164,51 @@ void drawObject(RenderingContext* rc, jobject binaryMapDataObject, jobject cv,
 		
 		jint type = (*env)->CallStaticIntMethod(env, MapRenderingTypesClass, MapRenderingTypes_getMainObjectType, mainType);
 		jint subtype = (*env)->CallStaticIntMethod(env, MapRenderingTypesClass, MapRenderingTypes_getObjectSubType, mainType);
-		// TODO
-		//TagValuePair pair = obj.getMapIndex().decodeType(type, subtype);
-		if( t == 1) { 
+
+
+		jobject pair = (*env)->CallObjectMethod(env, binaryMapDataObject, BinaryMapDataObject_getTagValue, mainType);
+		if( t == 1 && !drawOnlyShadow) {
 			// point
-		
+
+			// drawPoint(obj, render, canvas, rc, pair, renderText);
 		} else if(t == 2) {
 			// polyline
-		
-		} else if(t == 3) {
+			int layer = (*env)->CallStaticIntMethod(env, MapRenderingTypesClass,
+						MapRenderingTypes_getNegativeWayLayer, mainType);
+			drawPolyline(binaryMapDataObject, renderingRuleSearch, cv, paint, rc, pair, layer, drawOnlyShadow);
+		} else if(t == 3 && !drawOnlyShadow) {
 			// polygon
 
+			// drawPolygon(obj, render, canvas, rc, pair);
 		}
 		
-	/*	
-			TagValuePair pair = obj.getMapIndex().decodeType(type, subtype);
-			if (t == MapRenderingTypes.POINT_TYPE && !drawOnlyShadow) {
-				drawPoint(obj, render, canvas, rc, pair, renderText);
-			} else if (t == MapRenderingTypes.POLYLINE_TYPE) {
-				int layer = MapRenderingTypes.getNegativeWayLayer(mainType);
-				drawPolyline(obj, render, canvas, rc, pair, layer, drawOnlyShadow);
-			} else if (t == MapRenderingTypes.POLYGON_TYPE && !drawOnlyShadow) {
-				drawPolygon(obj, render, canvas, rc, pair);
-			} else {
-				if (t == MapRenderingTypes.MULTY_POLYGON_TYPE && !(obj instanceof MultyPolygon)) {
-					// log this situation
-					return;
-				}
-			}
-		} */
+		(*env)->DeleteLocalRef(env, pair);
 
 }
 
+
+
 void copyRenderingContext(jobject orc, RenderingContext* rc) 
 {
-	rc->leftX = (*env)->GetFloatField(env, orc, getFid( orc, "leftX", "F" ) ); 
-	rc->topY = (*env)->GetFloatField(env, orc, getFid( orc, "topY", "F" ) );
-	rc->width = (*env)->GetIntField(env, orc, getFid( orc, "width", "I" ) );
-	rc->height = (*env)->GetIntField(env, orc, getFid( orc, "height", "I" ) );
+	rc->leftX = (*env)->GetFloatField(env, orc, getFid( RenderingContextClass, "leftX", "F" ) );
+	rc->topY = (*env)->GetFloatField(env, orc, getFid( RenderingContextClass, "topY", "F" ) );
+	rc->width = (*env)->GetIntField(env, orc, getFid( RenderingContextClass, "width", "I" ) );
+	rc->height = (*env)->GetIntField(env, orc, getFid( RenderingContextClass, "height", "I" ) );
 	
 	
-	rc->zoom = (*env)->GetIntField(env, orc, getFid( orc, "zoom", "I" ) );
-	rc->rotate = (*env)->GetFloatField(env, orc, getFid( orc, "rotate", "F" ) ); 
-	rc->tileDivisor = (*env)->GetFloatField(env, orc, getFid( orc, "tileDivisor", "F" ) );
+	rc->zoom = (*env)->GetIntField(env, orc, getFid( RenderingContextClass, "zoom", "I" ) );
+	rc->rotate = (*env)->GetFloatField(env, orc, getFid( RenderingContextClass, "rotate", "F" ) );
+	rc->tileDivisor = (*env)->GetFloatField(env, orc, getFid( RenderingContextClass, "tileDivisor", "F" ) );
 	
-	rc->pointCount = (*env)->GetIntField(env, orc, getFid( orc, "pointCount", "I" ) );
-	rc->pointInsideCount = (*env)->GetIntField(env, orc, getFid( orc, "pointInsideCount", "I" ) );
-	rc->visible = (*env)->GetIntField(env, orc, getFid( orc, "visible", "I" ) );
-	rc->allObjects = (*env)->GetIntField(env, orc, getFid( orc, "allObjects", "I" ) );
+	rc->pointCount = (*env)->GetIntField(env, orc, getFid( RenderingContextClass, "pointCount", "I" ) );
+	rc->pointInsideCount = (*env)->GetIntField(env, orc, getFid( RenderingContextClass, "pointInsideCount", "I" ) );
+	rc->visible = (*env)->GetIntField(env, orc, getFid( RenderingContextClass, "visible", "I" ) );
+	rc->allObjects = (*env)->GetIntField(env, orc, getFid( RenderingContextClass, "allObjects", "I" ) );
 	
-	rc->shadowRenderingMode = (*env)->GetIntField(env, orc, getFid( orc, "shadowRenderingMode", "I" ) );
-	rc->shadowLevelMin = (*env)->GetIntField(env, orc, getFid( orc, "shadowLevelMin", "I" ) );
-	rc->shadowLevelMax = (*env)->GetIntField(env, orc, getFid( orc, "shadowLevelMax", "I" ) );
+	rc->shadowRenderingMode = (*env)->GetIntField(env, orc, getFid( RenderingContextClass, "shadowRenderingMode", "I" ) );
+	rc->shadowLevelMin = (*env)->GetIntField(env, orc, getFid( RenderingContextClass, "shadowLevelMin", "I" ) );
+	rc->shadowLevelMax = (*env)->GetIntField(env, orc, getFid( RenderingContextClass, "shadowLevelMax", "I" ) );
 	
-	rc->interrupted = getFid( orc, "interrupted", "B" );
 	rc->originalRC = orc; 
 
 }
@@ -171,56 +216,115 @@ void copyRenderingContext(jobject orc, RenderingContext* rc)
 
 void mergeRenderingContext(jobject orc, RenderingContext* rc) 
 {
-
-	(*env)->SetIntField(env, orc, getFid(orc, "pointCount", "I" ) , rc->pointCount);
-	(*env)->SetIntField(env, orc, getFid(orc, "pointInsideCount", "I" ) , rc->pointInsideCount);
-	(*env)->SetIntField(env, orc, getFid(orc, "visible", "I" ) , rc->visible);
-	(*env)->SetIntField(env, orc, getFid(orc, "allObjects", "I" ) , rc->allObjects);
+	(*env)->SetIntField(env, orc, getFid(RenderingContextClass, "pointCount", "I" ) , rc->pointCount);
+	(*env)->SetIntField(env, orc, getFid(RenderingContextClass, "pointInsideCount", "I" ) , rc->pointInsideCount);
+	(*env)->SetIntField(env, orc, getFid(RenderingContextClass, "visible", "I" ) , rc->visible);
+	(*env)->SetIntField(env, orc, getFid(RenderingContextClass, "allObjects", "I" ) , rc->allObjects);
 
 }
 
 
-void initLibrary() 
+void initLibrary(jobject rc)
 {
    MultiPolygonClass = (*env)->FindClass(env, "net/osmand/osm/MultyPolygon");
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "1");
+   PathClass = (*env)->FindClass(env, "android/graphics/Path");
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "2");
+   Path_init = (*env)->GetMethodID(env, PathClass, "<init>", "()V" );
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "3");
+   Path_moveTo = (*env)->GetMethodID(env, PathClass, "moveTo", "(F,F)" );
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "4");
+   Path_lineTo = (*env)->GetMethodID(env, PathClass, "lineTo", "(F,F)" );
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "5");
+
+   CanvasClass = (*env)->FindClass(env, "android/graphics/Canvas");
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "6");
+   Canvas_drawPath = (*env)->GetMethodID(env, CanvasClass, "drawPath",
+		   "(Landroid/graphics/Path;,Landroid/graphics/Paint;)V" );
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "7");
+
+   PaintClass = (*env)->FindClass(env, "android/graphics/Paint");
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "8");
+   PaintClass_setColor = (*env)->GetMethodID(env, PaintClass, "setColor", "(I)V" );
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "9");
+   PaintClass_setStrokeWidth = (*env)->GetMethodID(env, PaintClass, "setStrokeWidth", "(F)V" );
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "10");
+
+   RenderingContextClass = (*env)->GetObjectClass(env, rc);
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "11");
+   RenderingContextClass_interrupted = getFid( RenderingContextClass, "interrupted", "Z" );
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "12");
+
    MapRenderingTypesClass = (*env)->FindClass(env, "net/osmand/osm/MapRenderingTypes");
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "13");
    MapRenderingTypes_getMainObjectType = (*env)->GetStaticMethodID(env, MapRenderingTypesClass,"getMainObjectType","(I)I");
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "14");
    MapRenderingTypes_getObjectSubType = (*env)->GetStaticMethodID(env, MapRenderingTypesClass, "getObjectSubType","(I)I");
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "15");
+   MapRenderingTypes_getNegativeWayLayer = (*env)->GetMethodID(env, MapRenderingTypesClass,"getNegativeWayLayer","(I)I");
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "16");
+
+   BinaryMapDataObjectClass = (*env)->FindClass(env, "net/osmand/binary/BinaryMapDataObject");
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "17");
+   BinaryMapDataObject_getPointsLength = (*env)->GetMethodID(env, BinaryMapDataObjectClass,"getPointsLength","()I");
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "18");
+   BinaryMapDataObject_getPoint31YTile = (*env)->GetMethodID(env, BinaryMapDataObjectClass,"getPoint31YTile","(I)I");
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "19");
+   BinaryMapDataObject_getPoint31XTile = (*env)->GetMethodID(env, BinaryMapDataObjectClass,"getPoint31XTile","(I)I");
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "20");
+   BinaryMapDataObject_getTypes = (*env)->GetMethodID(env, BinaryMapDataObjectClass,"getTypes","()[I");
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "21");
+   BinaryMapDataObject_getTagValue = (*env)->GetMethodID(env, BinaryMapDataObjectClass,"getTagValue",
+		   "(I)Lnet/osmand/binary/BinaryMapIndexReader$TagValuePair;");
+   __android_log_print(ANDROID_LOG_WARN, "net.osmand", "22");
+
+
+}
+
+void unloadLibrary()
+{
+   (*env)->DeleteLocalRef( env, MultiPolygonClass );
+   (*env)->DeleteLocalRef( env, MapRenderingTypesClass );
+   (*env)->DeleteLocalRef( env, PathClass );
+   (*env)->DeleteLocalRef( env, CanvasClass );
+   (*env)->DeleteLocalRef( env, PaintClass );
+   (*env)->DeleteLocalRef( env, RenderingContextClass );
+   (*env)->DeleteLocalRef( env, BinaryMapDataObjectClass );
+
 }
 
 
 
 JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_generateRendering( JNIEnv* ienv, 
 		jobject obj, jobject renderingContext, jobjectArray binaryMapDataObjects, jobject cv,
-		jboolean useEnglishNames, jobject renderingRuleSearchRequest) {
+		jboolean useEnglishNames, jobject renderingRuleSearchRequest, jobject paint) {
+	__android_log_print(ANDROID_LOG_WARN, "net.osmand", "Initializing rendering");
 	int i = 0;
-	if(!env) {
+	//if(!env) {
 	   env = ienv;
-	   initLibrary();
-	} 
-	env = ienv;
+	   initLibrary(renderingContext);
+	//}
+	//env = ienv;
 	
-	const size_t size = (*env)->GetArrayLength(env,binaryMapDataObjects);
-	
+	const size_t size = (*env)->GetArrayLength(env, binaryMapDataObjects);
     char szResult[1024];
     RenderingContext rc;
     
-    
-    
-    // copyRenderingContext(renderingContext, &rc);
+    copyRenderingContext(renderingContext, &rc);
     // szResult = malloc(sizeof(szFormat) + 20);
     
-    
-	__android_log_print(ANDROID_LOG_INFO, "net.osmand", "Rendering cpp");    
+    __android_log_print(ANDROID_LOG_WARN, "net.osmand", "Rendering image");
     
     for(; i < size; i++) 
     {
    	    jobject binaryMapDataObject = (jobject) (*env)->GetObjectArrayElement(env, binaryMapDataObjects, i);
    	    
-   	    drawObject(&rc, binaryMapDataObject, cv, renderingRuleSearchRequest, 0);
+   	    // drawObject(&rc, binaryMapDataObject, cv, renderingRuleSearchRequest, paint, 0, 1, 0);
    	    
    	    (*env)->DeleteLocalRef(env, binaryMapDataObject);
     } 
+
+    __android_log_print(ANDROID_LOG_WARN, "net.osmand", "End Rendering image");
 
     sprintf(szResult, "Hello android %d", size);
   
@@ -230,7 +334,9 @@ JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
     // cleanup  
     // free(szResult);
       
-  	// mergeRenderingContext(renderingContext, &rc);
+  	mergeRenderingContext(renderingContext, &rc);
+
+  	unloadLibrary();
   	
   	
 	return result;
