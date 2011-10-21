@@ -227,15 +227,16 @@ public class OsmandRenderer {
 		// put in order map
 		
 		if (objects != null && !objects.isEmpty() && rc.width > 0 && rc.height > 0) {
+			// init rendering context
+			rc.tileDivisor = (int) (1 << (31 - rc.zoom));
+			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
+			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
+
 			if (!nativeRendering) {
 
 				TIntObjectHashMap<TIntArrayList> orderMap = sortObjectsByProperOrder(rc, objects, render);
 
 				int objCount = 0;
-				// init rendering context
-				rc.tileDivisor = (int) (1 << (31 - rc.zoom));
-				rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
-				rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 
 				int[] keys = orderMap.keys();
 				Arrays.sort(keys);
@@ -298,11 +299,12 @@ public class OsmandRenderer {
 				log.info(rc.renderingDebugInfo);
 
 			} else {
-			long time = System.currentTimeMillis() - now;
-			String res = NativeOsmandLibrary.generateRendering(rc, objects, bmp, useEnglishNames, render);
-			rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
-					+ "(%s points, %s points inside, %s objects visile from %s)\n" + res,//$NON-NLS-1$
-					time, 0, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
+				long time = System.currentTimeMillis() - now;
+				BinaryMapDataObject[] array = objects.toArray(new BinaryMapDataObject[objects.size()]);
+				String res = NativeOsmandLibrary.generateRendering(rc, array, cv, useEnglishNames, render);
+				rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
+						+ "(%s points, %s points inside, %s objects visile from %s)\n" + res,//$NON-NLS-1$
+						time, 0, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
 			}
 		}
 
