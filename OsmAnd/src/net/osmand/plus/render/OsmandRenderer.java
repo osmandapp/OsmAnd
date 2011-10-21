@@ -299,9 +299,9 @@ public class OsmandRenderer {
 				log.info(rc.renderingDebugInfo);
 
 			} else {
-				long time = System.currentTimeMillis() - now;
 				BinaryMapDataObject[] array = objects.toArray(new BinaryMapDataObject[objects.size()]);
 				String res = NativeOsmandLibrary.generateRendering(rc, array, cv, useEnglishNames, render, paint);
+				long time = System.currentTimeMillis() - now;
 				rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
 						+ "(%s points, %s points inside, %s objects visile from %s)\n" + res,//$NON-NLS-1$
 						time, 0, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
