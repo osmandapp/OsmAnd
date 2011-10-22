@@ -1,2 +1,2 @@
 set solib-search-path /home/victor/projects/OsmAnd/git/OsmAnd/obj/local/armeabi
-directory /home/victor/projects/android-ndk-r6b/platforms/android-8/arch-arm/usr/include /home/victor/projects/OsmAnd/git/OsmAnd/jni/osmand /home/victor/projects/android-ndk-r6b/sources/cxx-stl/system
+directory /home/victor/projects/android-ndk-r6b/platforms/android-8/arch-arm/usr/include /home/victor/projects/OsmAnd/git/OsmAnd/jni/jni /home/victor/projects/android-ndk-r6b/sources/cxx-stl/system/include

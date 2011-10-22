@@ -27,11 +27,16 @@
 							</builder>
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.2094589046" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 							<tool id="com.android.tool.compiler.g++.1543637239" name="Android G++" superClass="com.android.tool.compiler.g++">
+								<option id="gnu.cpp.compiler.option.include.paths.757537552" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="/home/victor/projects/OsmAnd/skia/trunk/include/core"/>
+									<listOptionValue builtIn="false" value="/home/victor/projects/android-ndk-r6b/platforms/android-3/arch-arm/usr/include"/>
+								</option>
 								<inputType id="com.android.tool.compiler.g++.input.478508689" superClass="com.android.tool.compiler.g++.input"/>
 							</tool>
 							<tool id="com.android.tool.compiler.c.1571517563" name="Android GCC" superClass="com.android.tool.compiler.c">
 								<option id="gnu.c.compiler.option.include.paths.741601891" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="/home/victor/projects/android-ndk-r6b/platforms/android-3/arch-arm/usr/include"/>
+									<listOptionValue builtIn="false" value="/home/victor/projects/OsmAnd/skia/trunk/include"/>
 								</option>
 								<inputType id="com.android.tool.compiler.c.input.1589735828" superClass="com.android.tool.compiler.c.input"/>
 							</tool>
