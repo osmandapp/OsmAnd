@@ -1,3 +1,0 @@
-set solib-search-path /home/victor/projects/OsmAnd/git/OsmAnd/obj/local/armeabi/
-directory /home/victor/projects/android-ndk-r6b/platforms/android-8/arch-arm/usr/include /home/victor/projects/OsmAnd/git/OsmAnd/jni/osmand
-file /home/victor/projects/OsmAnd/git/OsmAnd/obj/local/armeabi/app_process

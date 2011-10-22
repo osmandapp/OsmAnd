@@ -5,10 +5,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-///#define SK_BUILD_FOR_ANDROID_NDK
-//#include <SkBitmap.h>
-
-
+#define SK_BUILD_FOR_ANDROID_NDK
+#include <SkBitmap.h>
+#include <SkCanvas.h>
+#include <SkPaint.h>
+#include <SkPath.h>
 
 JNIEnv* env;
 jclass MultiPolygonClass;
@@ -20,6 +21,7 @@ jmethodID Path_lineTo;
 
 jclass CanvasClass;
 jmethodID Canvas_drawPath;
+jfieldID Canvas_nativeCanvas;
 
 jclass PaintClass;
 jmethodID PaintClass_setStrokeWidth;
@@ -229,7 +231,7 @@ jobject getDashEffect(jstring dashes){
 	return dashEffect;
 }
 
-int updatePaint(jobject renderingRuleSearch, jobject paint, int ind, int area,
+int updatePaint(jobject renderingRuleSearch, SkPaint* paint, int ind, int area,
 		RenderingContext* rc) {
 	const char* rColor;
 	const char* rStrokeW;
@@ -259,26 +261,28 @@ int updatePaint(jobject renderingRuleSearch, jobject paint, int ind, int area,
 		}
 
 		int color = getIntPropertyValue(renderingRuleSearch, rColor);
-		env->CallVoidMethod( paint, PaintClass_setStyle,PaintStyle_STROKE);
-		env->CallVoidMethod( paint, PaintClass_setColor, color);
-		env->CallVoidMethod( paint, PaintClass_setStrokeWidth, stroke);
+		paint->setStyle(SkPaint::kStroke_Style);
+		paint->setColor(color);
+		paint->setStrokeWidth(stroke);
 		jstring cap = getStringPropertyValue(renderingRuleSearch, rCap);
 		jstring pathEff = getStringPropertyValue(renderingRuleSearch, rPathEff);
 
 		if (cap != NULL && env->GetStringLength( cap) > 0) {
 			jobject capObj = env->CallStaticObjectMethod( CapClass, CapClass_valueOf, cap);
-			env->CallVoidMethod( paint, PaintClass_setStrokeCap, capObj);
+			// TODO
+			paint->setStrokeCap(SkPaint::kButt_Cap);
 			env->DeleteLocalRef( capObj);
 		} else {
-			env->CallVoidMethod( paint, PaintClass_setStrokeCap, CapClass_BUTT);
+			paint->setStrokeCap(SkPaint::kButt_Cap);
 		}
 
 		if (pathEff != NULL && env->GetStringLength(pathEff) > 0) {
+			// TODO
 			//jobject pathObj = getDashEffect(pathEff);
 			//env->CallVoidMethod( paint, PaintClass_setPathEffect, pathObj);
 			// env->DeleteLocalRef( pathObj );
 		} else {
-			env->CallObjectMethod(paint, PaintClass_setPathEffect, NULL);
+			paint-> setPathEffect(NULL);
 		}
 
 		env->DeleteLocalRef( cap);
@@ -290,7 +294,7 @@ int updatePaint(jobject renderingRuleSearch, jobject paint, int ind, int area,
 	return 0;
 }
 
- void drawPolyline(jobject binaryMapDataObject,	jobject renderingRuleSearch, jobject cv, jobject paint,
+ void drawPolyline(jobject binaryMapDataObject,	jobject renderingRuleSearch, SkCanvas* cv, SkPaint* paint,
  		RenderingContext* rc, jobject pair, int layer, int drawOnlyShadow)
  {
 
@@ -327,28 +331,28 @@ int updatePaint(jobject renderingRuleSearch, jobject paint, int ind, int area,
 
 	rc->visible++;
 //	__android_log_print(ANDROID_LOG_WARN, "net.osmand", "About to draw");
-
-	jobject path = NULL;
+	SkPath path ;
 	int i = 0;
+	float px = 0;
+	float py = 0;
 	for (; i < length; i++) {
 		calcPoint(binaryMapDataObject, i, rc);
-		if (path == NULL) {
-			path = env->NewObject( PathClass, Path_init);
-			env->CallVoidMethod( path, Path_moveTo, rc->calcX,
-					rc->calcY);
+		if (i == 0) {
+			path.moveTo(rc->calcX, rc->calcY);
 		} else {
-			env->CallVoidMethod( path, Path_lineTo, rc->calcX,
-					rc->calcY);
+//			cv->drawLine(px, py, rc->calcX, rc->calcY, *paint);
+			path.lineTo(rc->calcX, rc->calcY);
 		}
+		px = rc->calcX;
+		py = rc->calcY;
 	}
-
-	if (path) {
+	if (i > 0) {
 		if (drawOnlyShadow) {
 			//int shadowColor = render.getIntPropertyValue(render.ALL.R_SHADOW_COLOR);
 			//int shadowRadius = render.getIntPropertyValue(render.ALL.R_SHADOW_RADIUS);
 			//drawPolylineShadow(canvas, rc, path, shadowColor, shadowRadius);
 		} else {
-			env->CallVoidMethod( cv, Canvas_drawPath, path, paint);
+			cv->drawPath(path, *paint);
 			//if (updatePaint(render, paint, 1, false, rc)) {
 			//	canvas.drawPath(path, paint);
 			//	if (updatePaint(render, paint, 2, false, rc)) {
@@ -356,13 +360,12 @@ int updatePaint(jobject renderingRuleSearch, jobject paint, int ind, int area,
 			//	}
 			//}
 		}
-		env->DeleteLocalRef( path);
 	}
 
 }
 
-void drawObject(RenderingContext* rc, jobject binaryMapDataObject, jobject cv,
-		jobject renderingRuleSearch, jobject paint, int l, int renderText, int drawOnlyShadow) {
+void drawObject(RenderingContext* rc, jobject binaryMapDataObject, SkCanvas* cv,
+		jobject renderingRuleSearch, SkPaint* paint, int l, int renderText, int drawOnlyShadow) {
 		rc -> allObjects++;
 		if (env->IsInstanceOf( binaryMapDataObject, MultiPolygonClass)) {
 			//if(!drawOnlyShadow){
@@ -387,6 +390,7 @@ void drawObject(RenderingContext* rc, jobject binaryMapDataObject, jobject cv,
 			int layer = env->CallStaticIntMethod( MapRenderingTypesClass,
 						MapRenderingTypes_getNegativeWayLayer, mainType);
 //			__android_log_print(ANDROID_LOG_WARN, "net.osmand", "Draw polyline");
+
 			drawPolyline(binaryMapDataObject, renderingRuleSearch, cv, paint, rc, pair, layer, drawOnlyShadow);
 		} else if(t == 3 && !drawOnlyShadow) {
 			// polygon
@@ -460,6 +464,7 @@ void initLibrary(jobject rc)
    CanvasClass = globalRef(env->FindClass( "android/graphics/Canvas"));
    Canvas_drawPath = env->GetMethodID( CanvasClass, "drawPath",
 		   "(Landroid/graphics/Path;Landroid/graphics/Paint;)V" );
+   Canvas_nativeCanvas = env->GetFieldID( CanvasClass, "mNativeCanvas","I" );
 
    PaintClass = globalRef(env->FindClass( "android/graphics/Paint"));
    PaintClass_setColor = env->GetMethodID( PaintClass, "setColor", "(I)V" );
@@ -557,18 +562,28 @@ void unloadLibrary()
 
 
 extern "C" JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_generateRendering( JNIEnv* ienv,
-		jobject obj, jobject renderingContext, jobjectArray binaryMapDataObjects, jobject cv,
-		jboolean useEnglishNames, jobject renderingRuleSearchRequest, jobject paint) {
+		jobject obj, jobject renderingContext, jobjectArray binaryMapDataObjects, jobject bmpObj,
+		jboolean useEnglishNames, jobject renderingRuleSearchRequest, jint defaultColor) {
 	__android_log_print(ANDROID_LOG_WARN, "net.osmand", "Initializing rendering");
 	size_t i = 0;
 	if(!env) {
 	   env = ienv;
 	   initLibrary(renderingContext);
 	}
+
+//	SkBitmap* bmp = GraphicsJNI::getNativeBitmap(env, bmpObj);
+	jclass bmpClass = env->GetObjectClass(bmpObj);
+	SkBitmap* bmp = (SkBitmap*)env->CallIntMethod(bmpObj, env->GetMethodID(bmpClass, "ni", "()I"));
+//	SkBitmap* bmp = new SkBitmap;
+	SkPaint* paint = new SkPaint;
+	paint->setAntiAlias(true);
+	SkCanvas* canvas = new SkCanvas(*bmp);
+
+	sprintf(debugMessage, "Image %d %d  %d!", bmp->width(), bmp->height(), bmp->rowBytes());
+	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
 	__android_log_print(ANDROID_LOG_WARN, "net.osmand", "Classes and methods are loaded");
-	
+	canvas->drawColor(defaultColor);
 	const size_t size = env->GetArrayLength( binaryMapDataObjects);
-    char szResult[1024];
     RenderingContext rc;
     
     copyRenderingContext(renderingContext, &rc);
@@ -586,19 +601,22 @@ extern "C" JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 			env->DeleteLocalRef( types);
 			int j = 0;
 			for (; j < sizeTypes; j++) {
-				drawObject(&rc, binaryMapDataObject, cv, renderingRuleSearchRequest, paint, j, 1, 0);
+				drawObject(&rc, binaryMapDataObject, canvas, renderingRuleSearchRequest, paint, j, 1, 0);
 			}
 		}
    	    
    	    env->DeleteLocalRef( binaryMapDataObject);
-    } 
+    }
+
+    delete paint;
+    delete canvas;
 
     __android_log_print(ANDROID_LOG_WARN, "net.osmand", "End Rendering image");
 
-    sprintf(szResult, "Hello android %d", size);
+    sprintf(debugMessage, "Hello android %d", size);
   
     // get an object string  
-    jstring result = env->NewStringUTF( szResult);
+    jstring result = env->NewStringUTF( debugMessage);
   
     // cleanup  
     // free(szResult);

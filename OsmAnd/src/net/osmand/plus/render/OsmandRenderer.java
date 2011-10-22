@@ -3,6 +3,9 @@ package net.osmand.plus.render;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -218,11 +221,7 @@ public class OsmandRenderer {
 		
 
 		// fill area
-		Canvas cv = new Canvas(bmp);
-		if(defaultColor != 0){
-			paintFillEmpty.setColor(defaultColor);
-		}
-		cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillEmpty);
+		
 
 		// put in order map
 		
@@ -233,6 +232,11 @@ public class OsmandRenderer {
 			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 
 			if (!nativeRendering) {
+				Canvas cv = new Canvas(bmp);
+				if(defaultColor != 0){
+					paintFillEmpty.setColor(defaultColor);
+				}
+				cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillEmpty);
 
 				TIntObjectHashMap<TIntArrayList> orderMap = sortObjectsByProperOrder(rc, objects, render);
 
@@ -300,11 +304,15 @@ public class OsmandRenderer {
 
 			} else {
 				BinaryMapDataObject[] array = objects.toArray(new BinaryMapDataObject[objects.size()]);
-				String res = NativeOsmandLibrary.generateRendering(rc, array, cv, useEnglishNames, render, paint);
-				long time = System.currentTimeMillis() - now;
-				rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
-						+ "(%s points, %s points inside, %s objects visile from %s)\n" + res,//$NON-NLS-1$
-						time, 0, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
+				try {
+					String res = NativeOsmandLibrary.generateRendering(rc, array, bmp, useEnglishNames, render, defaultColor);
+					long time = System.currentTimeMillis() - now;
+					rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
+							+ "(%s points, %s points inside, %s objects visile from %s)\n" + res,//$NON-NLS-1$
+							time, 0, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 

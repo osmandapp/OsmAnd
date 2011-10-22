@@ -53,7 +53,8 @@ public class MainMenuActivity extends Activity {
 	private ProgressDialog startProgressDialog;
 	
 	static {
-		System.loadLibrary("osmand");  
+		System.loadLibrary("skia");
+		System.loadLibrary("osmand");
 	}
 
 	
