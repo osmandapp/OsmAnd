@@ -17,7 +17,15 @@
 #include "SkPath.h"
 
 JNIEnv* env;
+
 jclass MultiPolygonClass;
+jmethodID MultiPolygon_getTag;
+jmethodID MultiPolygon_getValue;
+jmethodID MultiPolygon_getPoint31XTile;
+jmethodID MultiPolygon_getPoint31YTile;
+jmethodID MultiPolygon_getBoundsCount;
+jmethodID MultiPolygon_getBoundPointsCount;
+
 
 jclass PathClass;
 jmethodID Path_init;
@@ -30,8 +38,6 @@ jfieldID Canvas_nativeCanvas;
 
 jclass RenderingIconsClass;
 jmethodID RenderingIcons_getIcon;
-
-
 
 jclass RenderingRuleStoragePropertiesClass;
 jclass RenderingRulePropertyClass;
@@ -113,24 +119,35 @@ jfieldID getFid(jclass cls,const char* fieldName, const char* sig )
 }
 
 
- void calcPoint(jobject mapObject, jint ind, RenderingContext* rc)
- {
-		rc -> pointCount ++;
-		
-		float tx = env->CallIntMethod( mapObject, BinaryMapDataObject_getPoint31XTile, ind)
-						/ (rc -> tileDivisor);
-		float ty = env->CallIntMethod( mapObject, BinaryMapDataObject_getPoint31YTile, ind)
-				/ (rc -> tileDivisor);
+ void calcPoint(jobject mapObject, jint ind, RenderingContext* rc) {
+	rc->pointCount++;
 
-		float dTileX = tx - rc -> leftX;
-		float dTileY = ty - rc -> topY;
-		rc -> calcX = rc -> cosRotateTileSize * dTileX - rc -> sinRotateTileSize * dTileY;
-		rc -> calcY = rc -> sinRotateTileSize * dTileX + rc -> cosRotateTileSize * dTileY;
-		
-		if(rc -> calcX >= 0 && rc -> calcX < rc -> width && 
-				rc -> calcY >= 0 && rc -> calcY < rc ->height){
-			rc -> pointInsideCount++;
-		}
+	float tx = env->CallIntMethod(mapObject, BinaryMapDataObject_getPoint31XTile, ind) / (rc->tileDivisor);
+	float ty = env->CallIntMethod(mapObject, BinaryMapDataObject_getPoint31YTile, ind) / (rc->tileDivisor);
+
+	float dTileX = tx - rc->leftX;
+	float dTileY = ty - rc->topY;
+	rc->calcX = rc->cosRotateTileSize * dTileX - rc->sinRotateTileSize * dTileY;
+	rc->calcY = rc->sinRotateTileSize * dTileX + rc->cosRotateTileSize * dTileY;
+
+	if (rc->calcX >= 0 && rc->calcX < rc->width && rc->calcY >= 0 && rc->calcY < rc->height) {
+		rc->pointInsideCount++;
+	}
+}
+
+ void calcMultipolygonPoint(jobject mapObject, jint ind, jint b, RenderingContext* rc) {
+	rc->pointCount++;
+	float tx = env->CallIntMethod(mapObject, MultiPolygon_getPoint31XTile, ind, b) / (rc->tileDivisor);
+	float ty = env->CallIntMethod(mapObject, MultiPolygon_getPoint31YTile, ind, b) / (rc->tileDivisor);
+
+	float dTileX = tx - rc->leftX;
+	float dTileY = ty - rc->topY;
+	rc->calcX = rc->cosRotateTileSize * dTileX - rc->sinRotateTileSize * dTileY;
+	rc->calcY = rc->sinRotateTileSize * dTileX + rc->cosRotateTileSize * dTileY;
+
+	if (rc->calcX >= 0 && rc->calcX < rc->width && rc->calcY >= 0 && rc->calcY < rc->height) {
+		rc->pointInsideCount++;
+	}
 }
 
 int getIntPropertyValue(jobject renderingRuleSearch, const char* prop)
@@ -368,6 +385,7 @@ int updatePaint(jobject renderingRuleSearch, SkPaint* paint, int ind, int area, 
 	rc->visible++;
 	SkPath path ;
 	int i = 0;
+	// TODO calculate text
 	for (; i < length; i++) {
 		calcPoint(binaryMapDataObject, i, rc);
 		if (i == 0) {
@@ -378,18 +396,84 @@ int updatePaint(jobject renderingRuleSearch, SkPaint* paint, int ind, int area, 
 	}
 	if (i > 0) {
 		if (drawOnlyShadow) {
+			// TODO
 			//int shadowColor = render.getIntPropertyValue(render.ALL.R_SHADOW_COLOR);
 			//int shadowRadius = render.getIntPropertyValue(render.ALL.R_SHADOW_RADIUS);
 			//drawPolylineShadow(canvas, rc, path, shadowColor, shadowRadius);
 		} else {
 			cv->drawPath(path, *paint);
-			//if (updatePaint(render, paint, 1, false, rc)) {
-			//	canvas.drawPath(path, paint);
-			//	if (updatePaint(render, paint, 2, false, rc)) {
-			//		canvas.drawPath(path, paint);
-			//	}
-			//}
+			if (updatePaint(renderingRuleSearch, paint, 1, 0, rc)) {
+				cv->drawPath(path, *paint);
+				if (updatePaint(renderingRuleSearch, paint, 2, 0, rc)) {
+					cv->drawPath(path, *paint);
+				}
+			}
+			// TODO
+//			if (oneway && !drawOnlyShadow) {
+//				Paint[] paints = getOneWayPaints();
+//				for (int i = 0; i < paints.length; i++) {
+//					canvas.drawPath(path, paints[i]);
+//				}
+//			}
+//			if (!drawOnlyShadow && obj.getName() != null && obj.getName().length() > 0) {
+//				calculatePolylineText(obj, render, rc, pair, path, pathRotate, roadLength, inverse, xMid, yMid,
+//						middlePoint);
+//			}
 		}
+	}
+}
+
+void drawMultiPolygon(jobject binaryMapDataObject,	jobject renderingRuleSearch, SkCanvas* cv, SkPaint* paint,
+ 		  		RenderingContext* rc) {
+	if (renderingRuleSearch == NULL) {
+		return;
+	}
+	jstring tag = (jstring) env->CallObjectMethod(binaryMapDataObject, MultiPolygon_getTag);
+	jstring value = (jstring) env->CallObjectMethod(binaryMapDataObject, MultiPolygon_getValue);
+
+	env->CallVoidMethod(renderingRuleSearch, RenderingRuleSearchRequest_setInitialTagValueZoom, tag, value, rc->zoom);
+
+	int rendered = env->CallBooleanMethod(renderingRuleSearch, RenderingRuleSearchRequest_search, 3);
+	env->DeleteLocalRef(tag);
+	env->DeleteLocalRef(value);
+
+	if (!rendered || !updatePaint(renderingRuleSearch, paint, 0, 1, rc)) {
+		return;
+	}
+
+	int boundsCount = env->CallIntMethod(binaryMapDataObject, MultiPolygon_getBoundsCount);
+	rc->visible++;
+	SkPath path;
+
+	for (int i = 0; i < boundsCount; i++) {
+		int cnt = env->CallIntMethod(binaryMapDataObject, MultiPolygon_getBoundPointsCount, i);
+		float xText = 0;
+		float yText = 0;
+		for (int j = 0; j < cnt; j++) {
+			calcMultipolygonPoint(binaryMapDataObject, j, i, rc);
+			xText += rc->calcX;
+			yText += rc->calcY;
+			if (j == 0) {
+				path.moveTo(rc->calcX, rc->calcY);
+			} else {
+				path.lineTo(rc->calcX, rc->calcY);
+			}
+		}
+		if (cnt > 0) {
+			// TODO name
+			// String name = ((MultyPolygon) obj).getName(i);
+			// if (name != null) {
+			// drawPointText(render, rc, new TagValuePair(tag, value), xText / cnt, yText / cnt, name);
+			// }
+		}
+	}
+
+	cv->drawPath(path, *paint);
+	// for test purpose
+	// render.strokeWidth = 1.5f;
+	// render.color = Color.BLACK;
+	if (updatePaint(renderingRuleSearch, paint, 1, 0, rc)) {
+		cv->drawPath(path, *paint);
 	}
 }
 
@@ -437,7 +521,6 @@ void drawPolygon(jobject binaryMapDataObject,	jobject renderingRuleSearch, SkCan
 	if (updatePaint(renderingRuleSearch, paint, 1, 0, rc)) {
 		cv->drawPath(path, *paint);
 	}
-
 	// TODO polygon text
 //			String name = obj.getName();
 //			if(name != null){
@@ -458,37 +541,39 @@ int getNegativeWayLayer(int type) {
 }
 
 void drawObject(RenderingContext* rc, jobject binaryMapDataObject, SkCanvas* cv,
-		jobject renderingRuleSearch, SkPaint* paint, int l, int renderText, int drawOnlyShadow) {
-		rc -> allObjects++;
-		if (env->IsInstanceOf( binaryMapDataObject, MultiPolygonClass)) {
-			//if(!drawOnlyShadow){
-			//	drawMultiPolygon(obj, render, canvas, rc);
-			//}
-			 return; 
+		jobject renderingRuleSearch,
+		SkPaint* paint, int l, int renderText, int drawOnlyShadow) {
+	rc->allObjects++;
+	if (env->IsInstanceOf(binaryMapDataObject, MultiPolygonClass)) {
+		if (!drawOnlyShadow) {
+			drawMultiPolygon(binaryMapDataObject, renderingRuleSearch, cv, paint, rc);
 		}
-		
-		jintArray types = (jintArray) env->CallObjectMethod( binaryMapDataObject, BinaryMapDataObject_getTypes);
-		jint mainType;
-		env->GetIntArrayRegion( types, l, 1, &mainType);
-		int t = mainType & 3;
-		env->DeleteLocalRef( types);
-		
-		jobject pair = env->CallObjectMethod( binaryMapDataObject, BinaryMapDataObject_getTagValue, l);
-		if( t == 1 && !drawOnlyShadow) {
-			// point
+		return;
+	}
 
-			// drawPoint(obj, render, canvas, rc, pair, renderText);
-		} else if(t == 2) {
-			// polyline
-			int layer = getNegativeWayLayer(mainType);
+	jintArray types = (jintArray) env->CallObjectMethod(binaryMapDataObject, BinaryMapDataObject_getTypes);
+	jint mainType;
+	env->GetIntArrayRegion(types, l, 1, &mainType);
+	int t = mainType & 3;
+	env->DeleteLocalRef(types);
+
+	jobject pair = env->CallObjectMethod(binaryMapDataObject, BinaryMapDataObject_getTagValue, l);
+	if (t == 1 && !drawOnlyShadow) {
+		// point
+		// TODO
+		// drawPoint(obj, render, canvas, rc, pair, renderText);
+	} else if (t == 2) {
+		// polyline
+		int layer = getNegativeWayLayer(mainType);
 //			__android_log_print(ANDROID_LOG_WARN, "net.osmand", "Draw polyline");
-			drawPolyline(binaryMapDataObject, renderingRuleSearch, cv, paint, rc, pair, layer, drawOnlyShadow);
-		} else if(t == 3 && !drawOnlyShadow) {
-			// polygon
-			drawPolygon(binaryMapDataObject, renderingRuleSearch, cv, paint, rc, pair);
-		}
-		env->DeleteLocalRef( pair);
+		drawPolyline(binaryMapDataObject, renderingRuleSearch, cv, paint, rc, pair, layer, drawOnlyShadow);
+	} else if (t == 3 && !drawOnlyShadow) {
+		// polygon
+		drawPolygon(binaryMapDataObject, renderingRuleSearch, cv, paint, rc, pair);
+	}
+	env->DeleteLocalRef(pair);
 }
+
 
 
 
@@ -545,6 +630,14 @@ jobject globalObj(jobject o)
 void initLibrary(jobject rc)
 {
    MultiPolygonClass = globalRef(env->FindClass( "net/osmand/osm/MultyPolygon"));
+   MultiPolygon_getTag = env->GetMethodID( MultiPolygonClass, "getTag", "()Ljava/lang/String;" );
+   MultiPolygon_getValue = env->GetMethodID( MultiPolygonClass, "getValue", "()Ljava/lang/String;" );
+   MultiPolygon_getPoint31XTile =env->GetMethodID( MultiPolygonClass, "getPoint31XTile", "(II)I" );
+   MultiPolygon_getPoint31YTile =env->GetMethodID( MultiPolygonClass, "getPoint31YTile", "(II)I" );
+   MultiPolygon_getBoundsCount =env->GetMethodID( MultiPolygonClass, "getBoundsCount", "()I" );
+   MultiPolygon_getBoundPointsCount =env->GetMethodID( MultiPolygonClass, "getBoundPointsCount", "(I)I" );
+
+
 
    PathClass = globalRef(env->FindClass( "android/graphics/Path"));
    Path_init = env->GetMethodID( PathClass, "<init>", "()V" );
