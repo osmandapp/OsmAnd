@@ -3,22 +3,18 @@ package net.osmand.plus.views;
 import gnu.trove.set.hash.TIntHashSet;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.data.Amenity;
 import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.EditingPOIActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.render.UnscaledBitmapLoader;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -53,7 +49,6 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 	private ResourceManager resourceManager;
 	private PoiFilter filter;
 	private DisplayMetrics dm;
-	private Map<Integer, Bitmap> cachedIcons = new LinkedHashMap<Integer, Bitmap>();
 	private final MapActivity activity;
 	
 	public POIMapLayer(MapActivity activity) {
@@ -160,20 +155,11 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 		return (int) (r * dm.density);
 	}
 	
-	public Bitmap getCachedImg(int resId) {
-		if (cachedIcons.containsKey(resId)) {
-			return cachedIcons.get(resId);
-		}
-		Bitmap bmp = UnscaledBitmapLoader.loadFromResource(view.getResources(), resId, null, dm);
-		cachedIcons.put(resId, bmp);
-		return bmp;
-	}
 	
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
 		
 		if (view.getZoom() >= startZoom) {
-			Map<String, Integer> icons = RenderingIcons.getIcons();
 			objects.clear();
 			resourceManager.searchAmenitiesAsync(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, view.getZoom(), filter, objects);
 			int r = getRadiusPoi(view.getZoom());
@@ -183,14 +169,13 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 				canvas.drawCircle(x, y, r, pointAltUI);
 				canvas.drawCircle(x, y, r, point);
 				String id = null;
-				if(icons.containsKey(o.getSubType())){
+				if(RenderingIcons.containsIcon(o.getSubType())){
 					id = o.getSubType();
-				} else if (icons.containsKey(o.getType().getDefaultTag() + "_" + o.getSubType())) {
+				} else if (RenderingIcons.containsIcon(o.getType().getDefaultTag() + "_" + o.getSubType())) {
 					id = o.getType().getDefaultTag() + "_" + o.getSubType();
 				}
 				if(id != null){
-					int resId = icons.get(id);
-					Bitmap bmp = getCachedImg(resId);
+					Bitmap bmp = RenderingIcons.getIcon(view.getContext(), id);
 					if(bmp != null){
 						canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintIcon);
 					}
@@ -294,7 +279,6 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 
 	@Override
 	public void destroyLayer() {
-		cachedIcons.clear();
 	}
 
 	@Override

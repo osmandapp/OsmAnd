@@ -3,9 +3,6 @@ package net.osmand.plus.render;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -30,7 +27,6 @@ import org.apache.commons.logging.Log;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -66,8 +62,7 @@ public class OsmandRenderer {
 	public static final int TILE_SIZE = 256; 
 
 	private Map<String, PathEffect> dashEffect = new LinkedHashMap<String, PathEffect>();
-	private Map<Integer, Shader> shaders = new LinkedHashMap<Integer, Shader>();
-	private Map<Integer, Bitmap> cachedIcons = new LinkedHashMap<Integer, Bitmap>();
+	private Map<String, Shader> shaders = new LinkedHashMap<String, Shader>();
 
 	private final Context context;
 
@@ -91,7 +86,7 @@ public class OsmandRenderer {
 		int textShadow = 0;
 		int textWrap = 0;
 		boolean bold = false;
-		int shieldRes = 0;
+		String shieldRes = null;
 		int textOrder = 20;
 		
 		public void fillProperties(RenderingRuleSearchRequest render, float centerX, float centerY){
@@ -107,7 +102,7 @@ public class OsmandRenderer {
 			bold = render.getIntPropertyValue(render.ALL.R_TEXT_BOLD, 0) > 0;
 			minDistance = render.getIntPropertyValue(render.ALL.R_TEXT_MIN_DISTANCE,0);
 			if(render.isSpecified(render.ALL.R_TEXT_SHIELD)) {
-				shieldRes = RenderingIcons.getIcons().get(render.getStringPropertyValue(render.ALL.R_TEXT_SHIELD));
+				shieldRes = render.getStringPropertyValue(render.ALL.R_TEXT_SHIELD);
 			}
 			textOrder = render.getIntPropertyValue(render.ALL.R_TEXT_ORDER, 20);
 		}
@@ -116,7 +111,7 @@ public class OsmandRenderer {
 	private static class IconDrawInfo {
 		float x = 0;
 		float y = 0;
-		int resId;
+		String resId;
 	}
 
 	/*package*/ static class RenderingContext {
@@ -198,11 +193,16 @@ public class OsmandRenderer {
 		return dashEffect.get(dashes);
 	}
 
-	public Shader getShader(int resId){
+	public Shader getShader(String resId){
+		
 		if(shaders.get(resId) == null){
-			Shader sh = new BitmapShader(
-					BitmapFactory.decodeResource(context.getResources(), resId), TileMode.REPEAT, TileMode.REPEAT);
-			shaders.put(resId, sh);
+			Bitmap bmp = RenderingIcons.getIcon(context, resId);
+			if(bmp != null){
+				Shader sh = new BitmapShader(bmp, TileMode.REPEAT, TileMode.REPEAT);
+				shaders.put(resId, sh);
+			} else {
+				shaders.put(resId, null);
+			}
 		}	
 		return shaders.get(resId);
 	}
@@ -325,11 +325,8 @@ public class OsmandRenderer {
 		int iconsH = rc.height / skewConstant;
 		int[] alreadyDrawnIcons = new int[iconsW * iconsH / 32];
 		for (IconDrawInfo icon : rc.iconsToDraw) {
-			if (icon.resId != 0) {
-				if (cachedIcons.get(icon.resId) == null) {
-					cachedIcons.put(icon.resId, UnscaledBitmapLoader.loadFromResource(context.getResources(), icon.resId, null, dm));
-				}
-				Bitmap ico = cachedIcons.get(icon.resId);
+			if (icon.resId != null) {
+				Bitmap ico = RenderingIcons.getIcon(context, icon.resId);
 				if (ico != null) {
 					if (icon.y >= 0 && icon.y < rc.height && icon.x >= 0 && icon.x < rc.width) {
 						int z = (((int) icon.x / skewConstant) + ((int) icon.y / skewConstant) * iconsW);
@@ -494,11 +491,8 @@ public class OsmandRenderer {
 					}
 					cv.drawTextOnPath(text.text, text.drawOnPath, 0, text.vOffset, paintText);
 				} else {
-					if (text.shieldRes != 0) {
-						if (cachedIcons.get(text.shieldRes) == null) {
-							cachedIcons.put(text.shieldRes, BitmapFactory.decodeResource(context.getResources(), text.shieldRes));
-						}
-						Bitmap ico = cachedIcons.get(text.shieldRes);
+					if (text.shieldRes != null) {
+						Bitmap ico = RenderingIcons.getIcon(context, text.shieldRes);
 						if (ico != null) {
 							cv.drawBitmap(ico, text.centerX - ico.getWidth() / 2 - 0.5f, text.centerY
 									- ico.getHeight() / 2 - getDensityValue(rc, 4.5f) 
@@ -713,7 +707,6 @@ public class OsmandRenderer {
 	}
 
 	public void clearCachedResources(){
-		cachedIcons.clear();
 		shaders.clear();
 	}
 	
@@ -851,7 +844,7 @@ public class OsmandRenderer {
 		p.setColor(req.getIntPropertyValue(rColor));
 		
 		if(ind == 0){
-			Integer resId = RenderingIcons.getIcons().get(req.getStringPropertyValue(req.ALL.R_SHADER));
+			String resId = req.getStringPropertyValue(req.ALL.R_SHADER);
 			if(resId != null){
 				p.setColor(Color.BLACK);
 				p.setShader(getShader(resId));
@@ -927,12 +920,12 @@ public class OsmandRenderer {
 		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
 		render.search(RenderingRulesStorage.POINT_RULES);
 		
-		Integer resId = RenderingIcons.getIcons().get(render.getStringPropertyValue(render.ALL.R_ICON));
+		String resId = render.getStringPropertyValue(render.ALL.R_ICON);
 		String name = null;
 		if (renderText) {
 			name = obj.getName();
 		}
-		if((resId == null || resId == 0) && name == null){
+		if(resId == null && name == null){
 			return;
 		}
 		int len = obj.getPointsLength();
@@ -948,7 +941,7 @@ public class OsmandRenderer {
 			ps.y /= len;
 		}
 
-		if(resId != null && resId != 0){
+		if(resId != null){
 			IconDrawInfo ico = new IconDrawInfo();
 			ico.x = ps.x;
 			ico.y = ps.y;

@@ -7,6 +7,11 @@
 
 #include "SkTypes.h"
 #include "SkBitmap.h"
+#include "SkShader.h"
+#include "SkBitmapProcShader.h"
+#include "SkPathEffect.h"
+#include "SkBlurDrawLooper.h"
+#include "SkDashPathEffect.h"
 #include "SkCanvas.h"
 #include "SkPaint.h"
 #include "SkPath.h"
@@ -23,23 +28,8 @@ jclass CanvasClass;
 jmethodID Canvas_drawPath;
 jfieldID Canvas_nativeCanvas;
 
-jclass PaintClass;
-jmethodID PaintClass_setStrokeWidth;
-jmethodID PaintClass_setStrokeCap;
-jmethodID PaintClass_setPathEffect;
-jmethodID PaintClass_setStyle;
-jmethodID PaintClass_setColor;
+jclass BitmapFactoryClass;
 
-jclass PaintStyleClass;
-jobject PaintStyle_STROKE;
-jobject PaintStyle_FILL_AND_STROKE;
-
-jclass DashPathEffect;
-jmethodID DashPathEffect_init;
-
-jclass CapClass;
-jobject CapClass_BUTT;
-jmethodID CapClass_valueOf;
 
 jclass MapRenderingTypesClass;
 jmethodID MapRenderingTypes_getMainObjectType;
@@ -140,8 +130,6 @@ jfieldID getFid(jclass cls,const char* fieldName, const char* sig )
 		rc -> calcX = rc -> cosRotateTileSize * dTileX - rc -> sinRotateTileSize * dTileY;
 		rc -> calcY = rc -> sinRotateTileSize * dTileX + rc -> cosRotateTileSize * dTileY;
 		
-//		sprintf(debugMessage, "Coordinates %f %f", rc->calcX, rc->calcY);
-//		__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
 		if(rc -> calcX >= 0 && rc -> calcX < rc -> width && 
 				rc -> calcY >= 0 && rc -> calcY < rc ->height){
 			rc -> pointInsideCount++;
@@ -196,20 +184,19 @@ float getFloatPropertyValue(jobject renderingRuleSearch, const char* prop)
 	return res;
 }
 
-jobject getDashEffect(jstring dashes){
-	int length = env->GetStringLength( dashes);
-	const char* chars = env->GetStringUTFChars( dashes, NULL);
+SkPathEffect* getDashEffect(const char* chars){
 	int i = 0;
 	char fval[10];
 	int flength = 0;
-	jfloat primFloats[20];
+	float primFloats[20];
 	int floatLen = 0;
-	for(;i<=length;i++)
+	for(;;i++)
 	{
-		if(i == length)
+		if(chars[i] == 0)
 		{
 			if(flength > 0)	{ fval[flength] = 0;
 			primFloats[floatLen++] = atof(fval); flength = 0;}
+			break;
 		}
 		else
 		{
@@ -223,16 +210,13 @@ jobject getDashEffect(jstring dashes){
 			}
 		}
 	}
-	env->ReleaseStringUTFChars( dashes, chars);
-	jfloatArray floatArray = env->NewFloatArray( floatLen);
-	env->SetFloatArrayRegion(floatArray, 0, floatLen, primFloats);
-	jobject dashEffect = env->NewObject( DashPathEffect, DashPathEffect_init, floatArray, 0);
-	env->DeleteLocalRef( floatArray);
-	return dashEffect;
+	return new SkDashPathEffect(primFloats, floatLen, 0);
 }
 
-int updatePaint(jobject renderingRuleSearch, SkPaint* paint, int ind, int area,
-		RenderingContext* rc) {
+
+// TODO cache shaders
+// TODO path effects
+int updatePaint(jobject renderingRuleSearch, SkPaint* paint, int ind, int area, RenderingContext* rc) {
 	const char* rColor;
 	const char* rStrokeW;
 	const char* rCap;
@@ -253,45 +237,79 @@ int updatePaint(jobject renderingRuleSearch, SkPaint* paint, int ind, int area,
 		rCap = "R_CAP_3";
 		rPathEff = "R_PATH_EFFECT_3";
 	}
-	if (!area) {
-		// TODO not complete
+	if (area) {
+		paint->setStyle(SkPaint::kStrokeAndFill_Style);
+		paint->setStrokeWidth(0);
+	} else {
 		float stroke = getFloatPropertyValue(renderingRuleSearch, rStrokeW);
 		if (!(stroke > 0)) {
 			return 0;
 		}
 
-		int color = getIntPropertyValue(renderingRuleSearch, rColor);
 		paint->setStyle(SkPaint::kStroke_Style);
-		paint->setColor(color);
 		paint->setStrokeWidth(stroke);
-		jstring cap = getStringPropertyValue(renderingRuleSearch, rCap);
-		jstring pathEff = getStringPropertyValue(renderingRuleSearch, rPathEff);
+		jstring capStr = getStringPropertyValue(renderingRuleSearch, rCap);
+		jstring pathEffStr = getStringPropertyValue(renderingRuleSearch, rPathEff);
 
-		if (cap != NULL && env->GetStringLength( cap) > 0) {
-			jobject capObj = env->CallStaticObjectMethod( CapClass, CapClass_valueOf, cap);
-			// TODO
-			paint->setStrokeCap(SkPaint::kButt_Cap);
-			env->DeleteLocalRef( capObj);
+		if (capStr != NULL && env->GetStringLength(capStr) > 0) {
+			const char* cap = env->GetStringUTFChars(capStr, NULL);
+			if (strcmp("BUTT", cap) == 0) {
+				paint->setStrokeCap(SkPaint::kButt_Cap);
+			} else if (strcmp("ROUND", cap) == 0) {
+				paint->setStrokeCap(SkPaint::kRound_Cap);
+			} else if (strcmp("SQUARE", cap) == 0) {
+				paint->setStrokeCap(SkPaint::kSquare_Cap);
+			}
+			env->ReleaseStringUTFChars(capStr, cap);
 		} else {
 			paint->setStrokeCap(SkPaint::kButt_Cap);
 		}
 
-		if (pathEff != NULL && env->GetStringLength(pathEff) > 0) {
-			// TODO
-			//jobject pathObj = getDashEffect(pathEff);
-			//env->CallVoidMethod( paint, PaintClass_setPathEffect, pathObj);
-			// env->DeleteLocalRef( pathObj );
+		if (pathEffStr != NULL && env->GetStringLength(pathEffStr) > 0) {
+			const char* pathEff = env->GetStringUTFChars(pathEffStr, NULL);
+			SkPathEffect* p = getDashEffect(pathEff);
+			paint->setPathEffect(p);
+			p->unref();
+			env->ReleaseStringUTFChars(pathEffStr, pathEff);
 		} else {
-			paint-> setPathEffect(NULL);
+			paint->setPathEffect(NULL);
 		}
 
-		env->DeleteLocalRef( cap);
-		env->DeleteLocalRef( pathEff);
-
-		return 1;
+		env->DeleteLocalRef(capStr);
+		env->DeleteLocalRef(pathEffStr);
 	}
 
-	return 0;
+	int color = getIntPropertyValue(renderingRuleSearch, rColor);
+	paint->setColor(color);
+
+	if (ind == 0) {
+//				Integer resId = RenderingIcons.getIcons().get(req.getStringPropertyValue(req.ALL.R_SHADER));
+//				if(resId != null){
+//					p.setColor(Color.BLACK);
+//					p.setShader(getShader(resId));
+//				} else {
+//					p.setShader(null);
+//				}
+
+	} else {
+		paint->setShader(NULL);
+	}
+
+	// do not check shadow color here
+	if (rc->shadowRenderingMode != 1 || ind != 0) {
+		paint->setLooper(NULL);
+	} else {
+		int shadowColor = getIntPropertyValue(renderingRuleSearch, "R_SHADOW_COLOR");
+		int shadowLayer = getIntPropertyValue(renderingRuleSearch, "R_SHADOW_RADIUS");
+		if (shadowColor == 0) {
+			shadowLayer = 0;
+		}
+		if (shadowLayer > 0) {
+			paint->setLooper(new SkBlurDrawLooper(shadowLayer, 0, 0, shadowColor))->unref();
+		}
+		paint->setLooper(NULL);
+	}
+	return 1;
 }
 
  void drawPolyline(jobject binaryMapDataObject,	jobject renderingRuleSearch, SkCanvas* cv, SkPaint* paint,
@@ -322,7 +340,6 @@ int updatePaint(jobject renderingRuleSearch, SkPaint* paint, int ind, int area,
 
 	int rendered = env->CallBooleanMethod( renderingRuleSearch,
 			RenderingRuleSearchRequest_search, 2);
-//	__android_log_print(ANDROID_LOG_WARN, "net.osmand", "Search done");
 	env->DeleteLocalRef( tag);
 	env->DeleteLocalRef( value);
 	if (!rendered || !updatePaint(renderingRuleSearch, paint, 0, 0, rc)) {
@@ -330,21 +347,15 @@ int updatePaint(jobject renderingRuleSearch, SkPaint* paint, int ind, int area,
 	}
 
 	rc->visible++;
-//	__android_log_print(ANDROID_LOG_WARN, "net.osmand", "About to draw");
 	SkPath path ;
 	int i = 0;
-	float px = 0;
-	float py = 0;
 	for (; i < length; i++) {
 		calcPoint(binaryMapDataObject, i, rc);
 		if (i == 0) {
 			path.moveTo(rc->calcX, rc->calcY);
 		} else {
-//			cv->drawLine(px, py, rc->calcX, rc->calcY, *paint);
 			path.lineTo(rc->calcX, rc->calcY);
 		}
-		px = rc->calcX;
-		py = rc->calcY;
 	}
 	if (i > 0) {
 		if (drawOnlyShadow) {
@@ -361,7 +372,59 @@ int updatePaint(jobject renderingRuleSearch, SkPaint* paint, int ind, int area,
 			//}
 		}
 	}
+}
 
+void drawPolygon(jobject binaryMapDataObject,	jobject renderingRuleSearch, SkCanvas* cv, SkPaint* paint,
+		  		RenderingContext* rc, jobject pair) {
+	if (renderingRuleSearch == NULL || pair == NULL) {
+		return;
+	}
+	jint length = env->CallIntMethod(binaryMapDataObject, BinaryMapDataObject_getPointsLength);
+	if (length <= 2) {
+		return;
+	}
+	jstring tag = (jstring) env->GetObjectField(pair, TagValuePair_tag);
+	jstring value = (jstring) env->GetObjectField(pair, TagValuePair_value);
+
+	env->CallVoidMethod(renderingRuleSearch, RenderingRuleSearchRequest_setInitialTagValueZoom, tag, value, rc->zoom);
+
+	int rendered = env->CallBooleanMethod(renderingRuleSearch, RenderingRuleSearchRequest_search, 3);
+	env->DeleteLocalRef(tag);
+	env->DeleteLocalRef(value);
+
+	float xText = 0;
+	float yText = 0;
+	if (!rendered || !updatePaint(renderingRuleSearch, paint, 0, 1, rc)) {
+		return;
+	}
+
+	rc->visible++;
+	SkPath path;
+	int i = 0;
+	float px = 0;
+	float py = 0;
+	for (; i < length; i++) {
+		calcPoint(binaryMapDataObject, i, rc);
+		if (i == 0) {
+			path.moveTo(rc->calcX, rc->calcY);
+		} else {
+			path.lineTo(rc->calcX, rc->calcY);
+		}
+		xText += px;
+		yText += py;
+	}
+
+	cv->drawPath(path, *paint);
+	if (updatePaint(renderingRuleSearch, paint, 1, 0, rc)) {
+		cv->drawPath(path, *paint);
+	}
+
+	// TODO polygon text
+//			String name = obj.getName();
+//			if(name != null){
+//				drawPointText(render, rc, pair, xText / len, yText / len, name);
+//			}
+//		}
 }
 
 void drawObject(RenderingContext* rc, jobject binaryMapDataObject, SkCanvas* cv,
@@ -390,16 +453,12 @@ void drawObject(RenderingContext* rc, jobject binaryMapDataObject, SkCanvas* cv,
 			int layer = env->CallStaticIntMethod( MapRenderingTypesClass,
 						MapRenderingTypes_getNegativeWayLayer, mainType);
 //			__android_log_print(ANDROID_LOG_WARN, "net.osmand", "Draw polyline");
-
 			drawPolyline(binaryMapDataObject, renderingRuleSearch, cv, paint, rc, pair, layer, drawOnlyShadow);
 		} else if(t == 3 && !drawOnlyShadow) {
 			// polygon
-
-			// drawPolygon(obj, render, canvas, rc, pair);
+			drawPolygon(binaryMapDataObject, renderingRuleSearch, cv, paint, rc, pair);
 		}
-		
 		env->DeleteLocalRef( pair);
-
 }
 
 
@@ -466,27 +525,6 @@ void initLibrary(jobject rc)
 		   "(Landroid/graphics/Path;Landroid/graphics/Paint;)V" );
    Canvas_nativeCanvas = env->GetFieldID( CanvasClass, "mNativeCanvas","I" );
 
-   PaintClass = globalRef(env->FindClass( "android/graphics/Paint"));
-   PaintClass_setColor = env->GetMethodID( PaintClass, "setColor", "(I)V" );
-   PaintClass_setStrokeWidth = env->GetMethodID( PaintClass, "setStrokeWidth", "(F)V" );
-   PaintClass_setStrokeCap = env->GetMethodID( PaintClass, "setStrokeCap", "(Landroid/graphics/Paint$Cap;)V" );
-   PaintClass_setPathEffect = env->GetMethodID( PaintClass, "setPathEffect",
-		   "(Landroid/graphics/PathEffect;)Landroid/graphics/PathEffect;" );
-   PaintClass_setStyle = env->GetMethodID( PaintClass, "setStyle", "(Landroid/graphics/Paint$Style;)V" );
-
-   DashPathEffect = globalRef(env->FindClass( "android/graphics/DashPathEffect"));
-   DashPathEffect_init =env->GetMethodID( DashPathEffect, "<init>", "([FF)V" );
-
-   CapClass = globalRef(env->FindClass( "android/graphics/Paint$Cap"));
-   CapClass_valueOf = env->GetStaticMethodID( CapClass, "valueOf", "(Ljava/lang/String;)Landroid/graphics/Paint$Cap;" );
-   CapClass_BUTT = globalRef(env->GetStaticObjectField( CapClass,
-   		   env-> GetStaticFieldID( CapClass, "BUTT","Landroid/graphics/Paint$Cap;")));
-
-   PaintStyleClass = globalRef(env->FindClass( "android/graphics/Paint$Style"));
-   PaintStyle_FILL_AND_STROKE = globalObj(env->GetStaticObjectField( PaintStyleClass,
-		   env-> GetStaticFieldID( PaintStyleClass, "FILL_AND_STROKE","Landroid/graphics/Paint$Style;")));
-   PaintStyle_STROKE = globalObj(env->GetStaticObjectField( PaintStyleClass,
-		   env-> GetStaticFieldID( PaintStyleClass, "STROKE","Landroid/graphics/Paint$Style;")));
 
    RenderingContextClass = globalRef(env->GetObjectClass( rc));
    RenderingContextClass_interrupted = getFid( RenderingContextClass, "interrupted", "Z" );
@@ -544,14 +582,7 @@ void unloadLibrary()
    env->DeleteGlobalRef( MapRenderingTypesClass );
    env->DeleteGlobalRef( PathClass );
    env->DeleteGlobalRef( CanvasClass );
-   env->DeleteGlobalRef( PaintClass );
    env->DeleteGlobalRef( RenderingContextClass );
-   env->DeleteGlobalRef( DashPathEffect );
-   env->DeleteGlobalRef( CapClass );
-   env->DeleteGlobalRef( CapClass_BUTT );
-   env->DeleteGlobalRef( PaintStyleClass );
-   env->DeleteGlobalRef( PaintStyle_FILL_AND_STROKE );
-   env->DeleteGlobalRef( PaintStyle_STROKE );
    env->DeleteGlobalRef( TagValuePairClass);
    env->DeleteGlobalRef( RenderingRuleSearchRequestClass);
    env->DeleteGlobalRef( RenderingRulePropertyClass);

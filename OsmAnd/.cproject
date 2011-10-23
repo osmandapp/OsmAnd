@@ -31,6 +31,7 @@
 									<listOptionValue builtIn="false" value="/home/victor/projects/android-ndk-r6b/platforms/android-3/arch-arm/usr/include"/>
 									<listOptionValue builtIn="false" value="/home/victor/projects/android/external/skia/include/core"/>
 									<listOptionValue builtIn="false" value="/home/victor/projects/android/frameworks/base/include"/>
+									<listOptionValue builtIn="false" value="/home/victor/projects/android/external/skia/include/effects"/>
 								</option>
 								<inputType id="com.android.tool.compiler.g++.input.478508689" superClass="com.android.tool.compiler.g++.input"/>
 							</tool>
