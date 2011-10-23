@@ -22,7 +22,10 @@ public class OpenstreetmapPoint implements Serializable {
 	}
 
 	public String getName() {
-		return entity.getTag(OSMTagKey.NAME.getValue());
+		String ret = entity.getTag(OSMTagKey.NAME.getValue());
+		if (ret == null)
+			return "";
+		return ret;
 	}
 
 	public String getType() {
@@ -50,7 +53,10 @@ public class OpenstreetmapPoint implements Serializable {
 	}
 
 	public String getOpeninghours() {
-		return entity.getTag(OSMTagKey.OPENING_HOURS.getValue());
+		String ret = entity.getTag(OSMTagKey.OPENING_HOURS.getValue());
+		if (ret == null)
+			return "";
+		return entity.getTag(ret);
 	}
 
 	public Node getEntity() {
@@ -87,5 +93,13 @@ public class OpenstreetmapPoint implements Serializable {
 
 	public void setStored(boolean stored) {
 		this.stored = stored;
+	}
+
+	public String toString() {
+		return new StringBuffer("Openstreetmap Point ").append(this.getAction()).append(" ").append(this.getName())
+			.append(" (").append(this.getId()).append("): [")
+			.append(this.getType()).append("/").append(this.getSubtype())
+			.append(" (").append(this.getLatitude()).append(", ").append(this.getLongitude())
+			.append(")]").toString();
 	}
 }

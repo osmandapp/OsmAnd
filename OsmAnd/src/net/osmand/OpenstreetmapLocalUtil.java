@@ -15,21 +15,21 @@ import net.osmand.osm.Node;
 import net.osmand.osm.OSMSettings.OSMTagKey;
 import net.osmand.plus.R;
 import net.osmand.plus.OpenstreetmapsDbHelper;
-import net.osmand.plus.activities.MapActivity;
 
 import org.apache.commons.logging.Log;
 
+import android.content.Context;
 import android.util.Xml;
 import android.widget.Toast;
 
 public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 	
-	private final MapActivity ctx;
+	private final Context ctx;
 	private final OpenstreetmapsDbHelper db;
 
 	public final static Log log = LogUtil.getLog(OpenstreetmapLocalUtil.class);
 
-	public OpenstreetmapLocalUtil(MapActivity uiContext){
+	public OpenstreetmapLocalUtil(Context uiContext){
 		this.ctx = uiContext;
 		this.db = new OpenstreetmapsDbHelper(ctx);
 	}
