@@ -28,7 +28,8 @@ jclass CanvasClass;
 jmethodID Canvas_drawPath;
 jfieldID Canvas_nativeCanvas;
 
-jclass BitmapFactoryClass;
+jclass RenderingIconsClass;
+jmethodID RenderingIcons_getIcon;
 
 
 jclass MapRenderingTypesClass;
@@ -65,13 +66,13 @@ jfieldID TagValuePair_tag;
 jfieldID TagValuePair_value;
 
 jclass RenderingContextClass;
-jfieldID RenderingContextClass_interrupted;
 
 char debugMessage[1024];
 
 
 typedef struct RenderingContext {
 		jobject originalRC;
+		jobject androidContext;
 		
 		// public boolean interrupted = false;
 		// boolean highResMode = false;
@@ -213,6 +214,24 @@ SkPathEffect* getDashEffect(const char* chars){
 	return new SkDashPathEffect(primFloats, floatLen, 0);
 }
 
+SkBitmap* getNativeBitmap(jobject bmpObj){
+	if(bmpObj == NULL){
+		return NULL;
+	}
+	jclass bmpClass = env->GetObjectClass(bmpObj);
+	SkBitmap* bmp = (SkBitmap*)env->CallIntMethod(bmpObj, env->GetMethodID(bmpClass, "ni", "()I"));
+	env->DeleteLocalRef(bmpClass);
+	return bmp;
+}
+
+SkBitmap* getCachedBitmap(RenderingContext* rc, jstring js)
+{
+	jobject bmp = env->CallStaticObjectMethod(RenderingIconsClass, RenderingIcons_getIcon, rc->androidContext, js);
+	SkBitmap* res = getNativeBitmap(bmp);
+	env->DeleteLocalRef(bmp);
+	return res;
+}
+
 
 // TODO cache shaders
 // TODO path effects
@@ -283,14 +302,15 @@ int updatePaint(jobject renderingRuleSearch, SkPaint* paint, int ind, int area, 
 	paint->setColor(color);
 
 	if (ind == 0) {
-//				Integer resId = RenderingIcons.getIcons().get(req.getStringPropertyValue(req.ALL.R_SHADER));
-//				if(resId != null){
-//					p.setColor(Color.BLACK);
-//					p.setShader(getShader(resId));
-//				} else {
-//					p.setShader(null);
-//				}
-
+		jstring shader = getStringPropertyValue(renderingRuleSearch, "R_SHADER");
+		if(shader != NULL){
+			SkBitmap*  bmp = getCachedBitmap(rc, shader);
+			paint->setShader(new SkBitmapProcShader(*bmp, SkShader::kRepeat_TileMode,SkShader::kRepeat_TileMode))->
+					unref();
+		} else {
+			paint->setShader(NULL);
+		}
+		env->DeleteLocalRef(shader);
 	} else {
 		paint->setShader(NULL);
 	}
@@ -315,7 +335,6 @@ int updatePaint(jobject renderingRuleSearch, SkPaint* paint, int ind, int area, 
  void drawPolyline(jobject binaryMapDataObject,	jobject renderingRuleSearch, SkCanvas* cv, SkPaint* paint,
  		RenderingContext* rc, jobject pair, int layer, int drawOnlyShadow)
  {
-
 	if (renderingRuleSearch == NULL || pair == NULL) {
 		return;
 	}
@@ -486,6 +505,7 @@ void copyRenderingContext(jobject orc, RenderingContext* rc)
 	rc->shadowRenderingMode = env->GetIntField( orc, getFid( RenderingContextClass, "shadowRenderingMode", "I" ) );
 	rc->shadowLevelMin = env->GetIntField( orc, getFid( RenderingContextClass, "shadowLevelMin", "I" ) );
 	rc->shadowLevelMax = env->GetIntField( orc, getFid( RenderingContextClass, "shadowLevelMax", "I" ) );
+	rc->androidContext = env->GetObjectField(orc, getFid( RenderingContextClass, "ctx", "Landroid/content/Context;"));
 	
 	rc->originalRC = orc; 
 
@@ -498,6 +518,7 @@ void mergeRenderingContext(jobject orc, RenderingContext* rc)
 	env->SetIntField( orc, getFid(RenderingContextClass, "pointInsideCount", "I" ) , rc->pointInsideCount);
 	env->SetIntField( orc, getFid(RenderingContextClass, "visible", "I" ) , rc->visible);
 	env->SetIntField( orc, getFid(RenderingContextClass, "allObjects", "I" ) , rc->allObjects);
+	env->DeleteLocalRef(rc->androidContext);
 
 }
 
@@ -527,12 +548,14 @@ void initLibrary(jobject rc)
 
 
    RenderingContextClass = globalRef(env->GetObjectClass( rc));
-   RenderingContextClass_interrupted = getFid( RenderingContextClass, "interrupted", "Z" );
 
    MapRenderingTypesClass = globalRef(env->FindClass( "net/osmand/osm/MapRenderingTypes"));
    MapRenderingTypes_getMainObjectType = env->GetStaticMethodID( MapRenderingTypesClass,"getMainObjectType","(I)I");
    MapRenderingTypes_getObjectSubType = env->GetStaticMethodID( MapRenderingTypesClass, "getObjectSubType","(I)I");
    MapRenderingTypes_getNegativeWayLayer = env->GetStaticMethodID( MapRenderingTypesClass,"getNegativeWayLayer","(I)I");
+
+   RenderingIconsClass = globalRef(env->FindClass( "net/osmand/plus/render/RenderingIcons"));
+   RenderingIcons_getIcon = env->GetStaticMethodID(RenderingIconsClass, "getIcon","(Landroid/content/Context;Ljava/lang/String;)Landroid/graphics/Bitmap;");
 
    BinaryMapDataObjectClass = globalRef(env->FindClass( "net/osmand/binary/BinaryMapDataObject"));
    BinaryMapDataObject_getPointsLength = env->GetMethodID( BinaryMapDataObjectClass,"getPointsLength","()I");
@@ -583,6 +606,7 @@ void unloadLibrary()
    env->DeleteGlobalRef( PathClass );
    env->DeleteGlobalRef( CanvasClass );
    env->DeleteGlobalRef( RenderingContextClass );
+   env->DeleteGlobalRef( RenderingIconsClass );
    env->DeleteGlobalRef( TagValuePairClass);
    env->DeleteGlobalRef( RenderingRuleSearchRequestClass);
    env->DeleteGlobalRef( RenderingRulePropertyClass);
@@ -602,12 +626,11 @@ extern "C" JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 	   initLibrary(renderingContext);
 	}
 
-//	SkBitmap* bmp = GraphicsJNI::getNativeBitmap(env, bmpObj);
-	jclass bmpClass = env->GetObjectClass(bmpObj);
-	SkBitmap* bmp = (SkBitmap*)env->CallIntMethod(bmpObj, env->GetMethodID(bmpClass, "ni", "()I"));
-//	SkBitmap* bmp = new SkBitmap;
+
 	SkPaint* paint = new SkPaint;
 	paint->setAntiAlias(true);
+
+	SkBitmap* bmp = getNativeBitmap(bmpObj);
 	SkCanvas* canvas = new SkCanvas(*bmp);
 
 	sprintf(debugMessage, "Image w:%d h:%d rb: %d!", bmp->width(), bmp->height(), bmp->rowBytes());
@@ -621,8 +644,6 @@ extern "C" JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLib
     RenderingContext rc;
     
     copyRenderingContext(renderingContext, &rc);
-    // szResult = malloc(sizeof(szFormat) + 20);
-    
     __android_log_print(ANDROID_LOG_WARN, "net.osmand", "Rendering image");
     
     for(; i < size; i++) 
@@ -652,13 +673,9 @@ extern "C" JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLib
     // get an object string  
     jstring result = env->NewStringUTF( debugMessage);
   
-    // cleanup  
-    // free(szResult);
-      
   	mergeRenderingContext(renderingContext, &rc);
 
 //  unloadLibrary();
-  	
   	
 	return result;
 }

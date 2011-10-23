@@ -421,7 +421,7 @@ public class MapRenderRepositories {
 			}
 			final long searchTime = System.currentTimeMillis() - now;
 
-			currentRenderingContext = new OsmandRenderer.RenderingContext();
+			currentRenderingContext = new OsmandRenderer.RenderingContext(context);
 			currentRenderingContext.leftX = (float) requestedBox.getLeftTileX();
 			currentRenderingContext.topY = (float) requestedBox.getTopTileY();
 			currentRenderingContext.zoom = requestedBox.getZoom();

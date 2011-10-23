@@ -115,13 +115,19 @@ public class OsmandRenderer {
 	}
 
 	/*package*/ static class RenderingContext {
+		// FIELDS OF THAT CLASS ARE USED IN C++
 		public boolean interrupted = false;
 		public boolean nightMode = false;
 		public boolean highResMode = false;
 		public float mapTextSize = 1;
+		public final Context ctx;
 
 		List<TextDrawInfo> textToDraw = new ArrayList<TextDrawInfo>();
 		List<IconDrawInfo> iconsToDraw = new ArrayList<IconDrawInfo>();
+		
+		public RenderingContext(Context ctx) {
+			this.ctx = ctx;
+		}
 
 		float leftX;
 		float topY;
@@ -218,13 +224,7 @@ public class OsmandRenderer {
 	public Bitmap generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, boolean useEnglishNames,
 			RenderingRuleSearchRequest render, List<IMapDownloaderCallback> notifyList, int defaultColor, boolean nativeRendering) {
 		long now = System.currentTimeMillis();
-		
 
-		// fill area
-		
-
-		// put in order map
-		
 		if (objects != null && !objects.isEmpty() && rc.width > 0 && rc.height > 0) {
 			// init rendering context
 			rc.tileDivisor = (int) (1 << (31 - rc.zoom));
@@ -232,12 +232,13 @@ public class OsmandRenderer {
 			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 
 			if (!nativeRendering) {
+				// fill area
 				Canvas cv = new Canvas(bmp);
 				if(defaultColor != 0){
 					paintFillEmpty.setColor(defaultColor);
 				}
 				cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillEmpty);
-
+				// put in order map
 				TIntObjectHashMap<TIntArrayList> orderMap = sortObjectsByProperOrder(rc, objects, render);
 
 				int objCount = 0;
