@@ -32,10 +32,6 @@ jclass RenderingIconsClass;
 jmethodID RenderingIcons_getIcon;
 
 
-jclass MapRenderingTypesClass;
-jmethodID MapRenderingTypes_getMainObjectType;
-jmethodID MapRenderingTypes_getObjectSubType;
-jmethodID MapRenderingTypes_getNegativeWayLayer;
 
 jclass RenderingRuleStoragePropertiesClass;
 jclass RenderingRulePropertyClass;
@@ -305,8 +301,12 @@ int updatePaint(jobject renderingRuleSearch, SkPaint* paint, int ind, int area, 
 		jstring shader = getStringPropertyValue(renderingRuleSearch, "R_SHADER");
 		if(shader != NULL){
 			SkBitmap*  bmp = getCachedBitmap(rc, shader);
-			paint->setShader(new SkBitmapProcShader(*bmp, SkShader::kRepeat_TileMode,SkShader::kRepeat_TileMode))->
+			if(bmp == NULL) {
+				paint->setShader(NULL);
+			} else {
+				paint->setShader(new SkBitmapProcShader(*bmp, SkShader::kRepeat_TileMode,SkShader::kRepeat_TileMode))->
 					unref();
+			}
 		} else {
 			paint->setShader(NULL);
 		}
@@ -446,6 +446,17 @@ void drawPolygon(jobject binaryMapDataObject,	jobject renderingRuleSearch, SkCan
 //		}
 }
 
+// 0 - normal, -1 - under, 1 - bridge,over
+int getNegativeWayLayer(int type) {
+	int i = (3 & (type >> 12));
+	if (i == 1) {
+		return -1;
+	} else if (i == 2) {
+		return 1;
+	}
+	return 0;
+}
+
 void drawObject(RenderingContext* rc, jobject binaryMapDataObject, SkCanvas* cv,
 		jobject renderingRuleSearch, SkPaint* paint, int l, int renderText, int drawOnlyShadow) {
 		rc -> allObjects++;
@@ -469,8 +480,7 @@ void drawObject(RenderingContext* rc, jobject binaryMapDataObject, SkCanvas* cv,
 			// drawPoint(obj, render, canvas, rc, pair, renderText);
 		} else if(t == 2) {
 			// polyline
-			int layer = env->CallStaticIntMethod( MapRenderingTypesClass,
-						MapRenderingTypes_getNegativeWayLayer, mainType);
+			int layer = getNegativeWayLayer(mainType);
 //			__android_log_print(ANDROID_LOG_WARN, "net.osmand", "Draw polyline");
 			drawPolyline(binaryMapDataObject, renderingRuleSearch, cv, paint, rc, pair, layer, drawOnlyShadow);
 		} else if(t == 3 && !drawOnlyShadow) {
@@ -549,11 +559,6 @@ void initLibrary(jobject rc)
 
    RenderingContextClass = globalRef(env->GetObjectClass( rc));
 
-   MapRenderingTypesClass = globalRef(env->FindClass( "net/osmand/osm/MapRenderingTypes"));
-   MapRenderingTypes_getMainObjectType = env->GetStaticMethodID( MapRenderingTypesClass,"getMainObjectType","(I)I");
-   MapRenderingTypes_getObjectSubType = env->GetStaticMethodID( MapRenderingTypesClass, "getObjectSubType","(I)I");
-   MapRenderingTypes_getNegativeWayLayer = env->GetStaticMethodID( MapRenderingTypesClass,"getNegativeWayLayer","(I)I");
-
    RenderingIconsClass = globalRef(env->FindClass( "net/osmand/plus/render/RenderingIcons"));
    RenderingIcons_getIcon = env->GetStaticMethodID(RenderingIconsClass, "getIcon","(Landroid/content/Context;Ljava/lang/String;)Landroid/graphics/Bitmap;");
 
@@ -602,7 +607,6 @@ void initLibrary(jobject rc)
 void unloadLibrary()
 {
    env->DeleteGlobalRef( MultiPolygonClass );
-   env->DeleteGlobalRef( MapRenderingTypesClass );
    env->DeleteGlobalRef( PathClass );
    env->DeleteGlobalRef( CanvasClass );
    env->DeleteGlobalRef( RenderingContextClass );
