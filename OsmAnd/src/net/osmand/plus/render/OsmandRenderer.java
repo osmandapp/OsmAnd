@@ -120,6 +120,7 @@ public class OsmandRenderer {
 		public boolean nightMode = false;
 		public boolean highResMode = false;
 		public float mapTextSize = 1;
+		public float density = 1;
 		public final Context ctx;
 
 		List<TextDrawInfo> textToDraw = new ArrayList<TextDrawInfo>();
@@ -230,6 +231,7 @@ public class OsmandRenderer {
 			rc.tileDivisor = (int) (1 << (31 - rc.zoom));
 			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
+			rc.density = dm.density;
 
 			if (!nativeRendering) {
 				// fill area
@@ -423,8 +425,8 @@ public class OsmandRenderer {
 	private final static boolean findAllTextIntersections = true;
 
 	private float getDensityValue(RenderingContext rc, float val) {
-		if (rc.highResMode && dm.density > 1) {
-			return val * dm.density * rc.mapTextSize;
+		if (rc.highResMode && rc.density > 1) {
+			return val * rc.density * rc.mapTextSize;
 		} else {
 			return val * rc.mapTextSize;
 		}
