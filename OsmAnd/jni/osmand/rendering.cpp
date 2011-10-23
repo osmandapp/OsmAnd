@@ -5,11 +5,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define SK_BUILD_FOR_ANDROID_NDK
-#include <SkBitmap.h>
-#include <SkCanvas.h>
-#include <SkPaint.h>
-#include <SkPath.h>
+#include "SkTypes.h"
+#include "SkBitmap.h"
+#include "SkCanvas.h"
+#include "SkPaint.h"
+#include "SkPath.h"
 
 JNIEnv* env;
 jclass MultiPolygonClass;
@@ -579,7 +579,10 @@ extern "C" JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 	paint->setAntiAlias(true);
 	SkCanvas* canvas = new SkCanvas(*bmp);
 
-	sprintf(debugMessage, "Image %d %d  %d!", bmp->width(), bmp->height(), bmp->rowBytes());
+	sprintf(debugMessage, "Image w:%d h:%d rb: %d!", bmp->width(), bmp->height(), bmp->rowBytes());
+	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
+	sprintf(debugMessage, "Image h:%d sz:%d bperpix:%d  shiftperpix:%d!",
+			bmp->height(), bmp->getSize(), bmp->bytesPerPixel(), bmp->shiftPerPixel());
 	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
 	__android_log_print(ANDROID_LOG_WARN, "net.osmand", "Classes and methods are loaded");
 	canvas->drawColor(defaultColor);
