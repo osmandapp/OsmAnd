@@ -22,70 +22,86 @@ jmethodID RenderingRuleSearchRequest_setBooleanFilter;
 jmethodID RenderingRuleSearchRequest_search;
 jmethodID RenderingRuleSearchRequest_searchI;
 
-
-int getIntPropertyValue(jobject renderingRuleSearch, const char* prop)
+class RenderingRuleSearchRequest
 {
-	jobject all = env->GetObjectField( renderingRuleSearch, RenderingRuleSearchRequest_ALL);
-	jfieldID fid = env->GetFieldID( RenderingRuleStoragePropertiesClass, prop,
-			"Lnet/osmand/render/RenderingRuleProperty;");
-	jobject propObj = env->GetObjectField( all, fid);
-	int res = env->CallIntMethod( renderingRuleSearch, RenderingRuleSearchRequest_getIntPropertyValue, propObj);
-	env->DeleteLocalRef( all);
-	env->DeleteLocalRef( propObj);
-	return res;
-}
+public :
+	int getIntPropertyValue(const char* prop)
+	{
+		jobject all = env->GetObjectField( renderingRuleSearch, RenderingRuleSearchRequest_ALL);
+		jfieldID fid = env->GetFieldID( RenderingRuleStoragePropertiesClass, prop,
+				"Lnet/osmand/render/RenderingRuleProperty;");
+		jobject propObj = env->GetObjectField( all, fid);
+		int res = env->CallIntMethod( renderingRuleSearch, RenderingRuleSearchRequest_getIntPropertyValue, propObj);
+		env->DeleteLocalRef( all);
+		env->DeleteLocalRef( propObj);
+		return res;
+	}
 
-jstring getStringPropertyValue(jobject renderingRuleSearch, const char* prop)
-{
-	jobject all = env->GetObjectField( renderingRuleSearch, RenderingRuleSearchRequest_ALL);
-	jfieldID fid = env->GetFieldID( RenderingRuleStoragePropertiesClass, prop,
-			"Lnet/osmand/render/RenderingRuleProperty;");
-	jobject propObj = env->GetObjectField( all, fid);
-	jstring res = (jstring) env->CallObjectMethod( renderingRuleSearch, RenderingRuleSearchRequest_getStringPropertyValue, propObj);
-	env->DeleteLocalRef( all);
-	env->DeleteLocalRef( propObj);
-	return res;
-}
+	jstring getStringPropertyValue(const char* prop)
+	{
+		jobject all = env->GetObjectField( renderingRuleSearch, RenderingRuleSearchRequest_ALL);
+		jfieldID fid = env->GetFieldID( RenderingRuleStoragePropertiesClass, prop,
+				"Lnet/osmand/render/RenderingRuleProperty;");
+		jobject propObj = env->GetObjectField( all, fid);
+		jstring res = (jstring) env->CallObjectMethod( renderingRuleSearch, RenderingRuleSearchRequest_getStringPropertyValue, propObj);
+		env->DeleteLocalRef( all);
+		env->DeleteLocalRef( propObj);
+		return res;
+	}
 
-void setIntPropertyFilter(jobject renderingRuleSearch, const char* prop, int filter)
-{
-	jobject all = env->GetObjectField( renderingRuleSearch, RenderingRuleSearchRequest_ALL);
-	jfieldID fid = env->GetFieldID( RenderingRuleStoragePropertiesClass, prop,
-			"Lnet/osmand/render/RenderingRuleProperty;");
-	jobject propObj = env->GetObjectField( all, fid);
-	env->CallVoidMethod( renderingRuleSearch, RenderingRuleSearchRequest_setIntFilter, propObj, filter);
-	env->DeleteLocalRef( all);
-	env->DeleteLocalRef( propObj);
-}
+	void setIntPropertyFilter(const char* prop, int filter)
+	{
+		jobject all = env->GetObjectField( renderingRuleSearch, RenderingRuleSearchRequest_ALL);
+		jfieldID fid = env->GetFieldID( RenderingRuleStoragePropertiesClass, prop,
+				"Lnet/osmand/render/RenderingRuleProperty;");
+		jobject propObj = env->GetObjectField( all, fid);
+		env->CallVoidMethod( renderingRuleSearch, RenderingRuleSearchRequest_setIntFilter, propObj, filter);
+		env->DeleteLocalRef( all);
+		env->DeleteLocalRef( propObj);
+	}
 
 
-float getFloatPropertyValue(jobject renderingRuleSearch, const char* prop)
-{
-	jobject all = env->GetObjectField( renderingRuleSearch, RenderingRuleSearchRequest_ALL);
-	jfieldID fid = env->GetFieldID( RenderingRuleStoragePropertiesClass, prop,
-			"Lnet/osmand/render/RenderingRuleProperty;");
-	jobject propObj = env->GetObjectField( all, fid);
-	float res = env->CallFloatMethod( renderingRuleSearch, RenderingRuleSearchRequest_getFloatPropertyValue, propObj);
-	env->DeleteLocalRef( all);
-	env->DeleteLocalRef( propObj);
-	return res;
-}
+	float getFloatPropertyValue(const char* prop)
+	{
+		jobject all = env->GetObjectField( renderingRuleSearch, RenderingRuleSearchRequest_ALL);
+		jfieldID fid = env->GetFieldID( RenderingRuleStoragePropertiesClass, prop,
+				"Lnet/osmand/render/RenderingRuleProperty;");
+		jobject propObj = env->GetObjectField( all, fid);
+		float res = env->CallFloatMethod( renderingRuleSearch, RenderingRuleSearchRequest_getFloatPropertyValue, propObj);
+		env->DeleteLocalRef( all);
+		env->DeleteLocalRef( propObj);
+		return res;
+	}
 
-int searchRule(jobject renderingRuleSearch, int type)
-{
-	return env->CallBooleanMethod(renderingRuleSearch, RenderingRuleSearchRequest_search, type);
-}
 
-void setInitialTagValueZoom(jobject renderingRuleSearch, jstring tag, jstring value, int zoom)
-{
-	env->CallVoidMethod(renderingRuleSearch, RenderingRuleSearchRequest_setInitialTagValueZoom, tag, value, zoom);
-}
+	int searchRule(int type)
+	{
+		return env->CallBooleanMethod(renderingRuleSearch, RenderingRuleSearchRequest_search, type);
+	}
+
+	void setInitialTagValueZoom(jstring tag, jstring value, int zoom)
+	{
+		env->CallVoidMethod(renderingRuleSearch, RenderingRuleSearchRequest_setInitialTagValueZoom, tag, value, zoom);
+	}
+
+	RenderingRuleSearchRequest(jobject rrs) :
+			renderingRuleSearch(rrs) {
+	}
+private :
+	jobject renderingRuleSearch;
+
+};
+
 
 jclass globalRef(jobject o)
 {
 	return  (jclass) env->NewGlobalRef( o);
 }
 
+RenderingRuleSearchRequest* initSearchRequest(jobject renderingRuleSearchRequest)
+{
+	return new RenderingRuleSearchRequest(renderingRuleSearchRequest);
+}
 
 void initRenderingRules(JNIEnv* ienv, jobject renderingRuleSearchRequest)
 {

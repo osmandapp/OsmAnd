@@ -184,7 +184,7 @@ SkBitmap* getCachedBitmap(RenderingContext* rc, jstring js)
 
 // TODO cache shaders
 // TODO path effects
-int updatePaint(jobject renderingRuleSearch, SkPaint* paint, int ind, int area, RenderingContext* rc) {
+int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int area, RenderingContext* rc) {
 	const char* rColor;
 	const char* rStrokeW;
 	const char* rCap;
@@ -209,15 +209,15 @@ int updatePaint(jobject renderingRuleSearch, SkPaint* paint, int ind, int area, 
 		paint->setStyle(SkPaint::kStrokeAndFill_Style);
 		paint->setStrokeWidth(0);
 	} else {
-		float stroke = getFloatPropertyValue(renderingRuleSearch, rStrokeW);
+		float stroke = req->getFloatPropertyValue(rStrokeW);
 		if (!(stroke > 0)) {
 			return 0;
 		}
 
 		paint->setStyle(SkPaint::kStroke_Style);
 		paint->setStrokeWidth(stroke);
-		jstring capStr = getStringPropertyValue(renderingRuleSearch, rCap);
-		jstring pathEffStr = getStringPropertyValue(renderingRuleSearch, rPathEff);
+		jstring capStr = req->getStringPropertyValue(rCap);
+		jstring pathEffStr = req->getStringPropertyValue(rPathEff);
 
 		if (capStr != NULL && env->GetStringLength(capStr) > 0) {
 			const char* cap = env->GetStringUTFChars(capStr, NULL);
@@ -247,11 +247,11 @@ int updatePaint(jobject renderingRuleSearch, SkPaint* paint, int ind, int area, 
 		env->DeleteLocalRef(pathEffStr);
 	}
 
-	int color = getIntPropertyValue(renderingRuleSearch, rColor);
+	int color = req->getIntPropertyValue(rColor);
 	paint->setColor(color);
 
 	if (ind == 0) {
-		jstring shader = getStringPropertyValue(renderingRuleSearch, "R_SHADER");
+		jstring shader = req->getStringPropertyValue("R_SHADER");
 		if(shader != NULL){
 			SkBitmap*  bmp = getCachedBitmap(rc, shader);
 			if(bmp == NULL) {
@@ -272,8 +272,8 @@ int updatePaint(jobject renderingRuleSearch, SkPaint* paint, int ind, int area, 
 	if (rc->shadowRenderingMode != 1 || ind != 0) {
 		paint->setLooper(NULL);
 	} else {
-		int shadowColor = getIntPropertyValue(renderingRuleSearch, "R_SHADOW_COLOR");
-		int shadowLayer = getIntPropertyValue(renderingRuleSearch, "R_SHADOW_RADIUS");
+		int shadowColor = req->getIntPropertyValue("R_SHADOW_COLOR");
+		int shadowLayer = req->getIntPropertyValue("R_SHADOW_RADIUS");
 		if (shadowColor == 0) {
 			shadowLayer = 0;
 		}
@@ -285,10 +285,10 @@ int updatePaint(jobject renderingRuleSearch, SkPaint* paint, int ind, int area, 
 	return 1;
 }
 
- void drawPolyline(jobject binaryMapDataObject,	jobject renderingRuleSearch, SkCanvas* cv, SkPaint* paint,
+ void drawPolyline(jobject binaryMapDataObject,	RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
  		RenderingContext* rc, jobject pair, int layer, int drawOnlyShadow)
  {
-	if (renderingRuleSearch == NULL || pair == NULL) {
+	if (req == NULL || pair == NULL) {
 		return;
 	}
 	jint length = env->CallIntMethod( binaryMapDataObject,
@@ -300,18 +300,18 @@ int updatePaint(jobject renderingRuleSearch, SkPaint* paint, int ind, int area, 
 	jstring value = (jstring ) env->GetObjectField( pair, TagValuePair_value);
 
 //	__android_log_print(ANDROID_LOG_WARN, "net.osmand", "About to search");
-	setInitialTagValueZoom(renderingRuleSearch, tag, value, rc->zoom);
-	setIntPropertyFilter(renderingRuleSearch, "R_LAYER", layer);
+	req->setInitialTagValueZoom(tag, value, rc->zoom);
+	req->setIntPropertyFilter("R_LAYER", layer);
 	// TODO oneway
 	// int oneway = 0;
 	//if(rc -> zoom >= 16 && "highway".equals(pair.tag) && MapRenderingTypes.isOneWayWay(obj.getHighwayAttributes())){
 	//strcmp("highway") oneway = 1;
 	//}
 
-	int rendered = searchRule(renderingRuleSearch,2);
+	int rendered = req->searchRule(2);
 	env->DeleteLocalRef( tag);
 	env->DeleteLocalRef( value);
-	if (!rendered || !updatePaint(renderingRuleSearch, paint, 0, 0, rc)) {
+	if (!rendered || !updatePaint(req,paint, 0, 0, rc)) {
 		return;
 	}
 
@@ -335,9 +335,9 @@ int updatePaint(jobject renderingRuleSearch, SkPaint* paint, int ind, int area, 
 			//drawPolylineShadow(canvas, rc, path, shadowColor, shadowRadius);
 		} else {
 			cv->drawPath(path, *paint);
-			if (updatePaint(renderingRuleSearch, paint, 1, 0, rc)) {
+			if (updatePaint(req, paint, 1, 0, rc)) {
 				cv->drawPath(path, *paint);
-				if (updatePaint(renderingRuleSearch, paint, 2, 0, rc)) {
+				if (updatePaint(req, paint, 2, 0, rc)) {
 					cv->drawPath(path, *paint);
 				}
 			}
@@ -356,20 +356,20 @@ int updatePaint(jobject renderingRuleSearch, SkPaint* paint, int ind, int area, 
 	}
 }
 
-void drawMultiPolygon(jobject binaryMapDataObject,	jobject renderingRuleSearch, SkCanvas* cv, SkPaint* paint,
+void drawMultiPolygon(jobject binaryMapDataObject,RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
  		  		RenderingContext* rc) {
-	if (renderingRuleSearch == NULL) {
+	if (req == NULL) {
 		return;
 	}
 	jstring tag = (jstring) env->CallObjectMethod(binaryMapDataObject, MultiPolygon_getTag);
 	jstring value = (jstring) env->CallObjectMethod(binaryMapDataObject, MultiPolygon_getValue);
 
-	setInitialTagValueZoom(renderingRuleSearch, tag, value, rc->zoom);
-	int rendered = searchRule(renderingRuleSearch, 3);
+	req->setInitialTagValueZoom(tag, value, rc->zoom);
+	int rendered = req->searchRule(3);
 	env->DeleteLocalRef(tag);
 	env->DeleteLocalRef(value);
 
-	if (!rendered || !updatePaint(renderingRuleSearch, paint, 0, 1, rc)) {
+	if (!rendered || !updatePaint(req, paint, 0, 1, rc)) {
 		return;
 	}
 
@@ -404,14 +404,14 @@ void drawMultiPolygon(jobject binaryMapDataObject,	jobject renderingRuleSearch, 
 	// for test purpose
 	// render.strokeWidth = 1.5f;
 	// render.color = Color.BLACK;
-	if (updatePaint(renderingRuleSearch, paint, 1, 0, rc)) {
+	if (updatePaint(req, paint, 1, 0, rc)) {
 		cv->drawPath(path, *paint);
 	}
 }
 
-void drawPolygon(jobject binaryMapDataObject,	jobject renderingRuleSearch, SkCanvas* cv, SkPaint* paint,
+void drawPolygon(jobject binaryMapDataObject, RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
 		  		RenderingContext* rc, jobject pair) {
-	if (renderingRuleSearch == NULL || pair == NULL) {
+	if (req == NULL || pair == NULL) {
 		return;
 	}
 	jint length = env->CallIntMethod(binaryMapDataObject, BinaryMapDataObject_getPointsLength);
@@ -421,14 +421,14 @@ void drawPolygon(jobject binaryMapDataObject,	jobject renderingRuleSearch, SkCan
 	jstring tag = (jstring) env->GetObjectField(pair, TagValuePair_tag);
 	jstring value = (jstring) env->GetObjectField(pair, TagValuePair_value);
 
-	setInitialTagValueZoom(renderingRuleSearch, tag, value, rc->zoom);
-	int rendered = searchRule(renderingRuleSearch, 3);
+	req->setInitialTagValueZoom(tag, value, rc->zoom);
+	int rendered = req->searchRule(3);
 	env->DeleteLocalRef(tag);
 	env->DeleteLocalRef(value);
 
 	float xText = 0;
 	float yText = 0;
-	if (!rendered || !updatePaint(renderingRuleSearch, paint, 0, 1, rc)) {
+	if (!rendered || !updatePaint(req, paint, 0, 1, rc)) {
 		return;
 	}
 
@@ -449,7 +449,7 @@ void drawPolygon(jobject binaryMapDataObject,	jobject renderingRuleSearch, SkCan
 	}
 
 	cv->drawPath(path, *paint);
-	if (updatePaint(renderingRuleSearch, paint, 1, 0, rc)) {
+	if (updatePaint(req, paint, 1, 0, rc)) {
 		cv->drawPath(path, *paint);
 	}
 	// TODO polygon text
@@ -460,19 +460,19 @@ void drawPolygon(jobject binaryMapDataObject,	jobject renderingRuleSearch, SkCan
 //		}
 }
 
-void drawPoint(jobject binaryMapDataObject,	jobject renderingRuleSearch, SkCanvas* cv, SkPaint* paint,
+void drawPoint(jobject binaryMapDataObject,	RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
  		RenderingContext* rc, jobject pair, int renderText)
  {
-	if (renderingRuleSearch == NULL || pair == NULL) {
+	if (req == NULL || pair == NULL) {
 		return;
 	}
 
 	jstring tag = (jstring) env->GetObjectField(pair, TagValuePair_tag);
 	jstring value = (jstring) env->GetObjectField(pair, TagValuePair_value);
 
-	setInitialTagValueZoom(renderingRuleSearch, tag, value, rc->zoom);
-	searchRule(renderingRuleSearch, 1);
-	jstring resId = getStringPropertyValue(renderingRuleSearch, "R_ICON");
+	req->setInitialTagValueZoom(tag, value, rc->zoom);
+	req->searchRule(1);
+	jstring resId = req->getStringPropertyValue("R_ICON");
 	SkBitmap* bmp = getCachedBitmap(rc, resId);
 	jstring name = NULL;
 	if (renderText) {
@@ -528,12 +528,12 @@ int getNegativeWayLayer(int type) {
 	return 0;
 }
 
-void drawObject(RenderingContext* rc, jobject binaryMapDataObject, SkCanvas* cv, jobject renderingRuleSearch,
+void drawObject(RenderingContext* rc, jobject binaryMapDataObject, SkCanvas* cv, RenderingRuleSearchRequest* req,
 		SkPaint* paint, int l, int renderText, int drawOnlyShadow) {
 	rc->allObjects++;
 	if (env->IsInstanceOf(binaryMapDataObject, MultiPolygonClass)) {
 		if (!drawOnlyShadow) {
-			drawMultiPolygon(binaryMapDataObject, renderingRuleSearch, cv, paint, rc);
+			drawMultiPolygon(binaryMapDataObject, req, cv, paint, rc);
 		}
 		return;
 	}
@@ -547,15 +547,15 @@ void drawObject(RenderingContext* rc, jobject binaryMapDataObject, SkCanvas* cv,
 	jobject pair = env->CallObjectMethod(binaryMapDataObject, BinaryMapDataObject_getTagValue, l);
 	if (t == 1 && !drawOnlyShadow) {
 		// point
-		drawPoint(binaryMapDataObject, renderingRuleSearch, cv, paint, rc, pair, renderText);
+		drawPoint(binaryMapDataObject, req, cv, paint, rc, pair, renderText);
 	} else if (t == 2) {
 		// polyline
 		int layer = getNegativeWayLayer(mainType);
 //			__android_log_print(ANDROID_LOG_WARN, "net.osmand", "Draw polyline");
-		drawPolyline(binaryMapDataObject, renderingRuleSearch, cv, paint, rc, pair, layer, drawOnlyShadow);
+		drawPolyline(binaryMapDataObject, req, cv, paint, rc, pair, layer, drawOnlyShadow);
 	} else if (t == 3 && !drawOnlyShadow) {
 		// polygon
-		drawPolygon(binaryMapDataObject, renderingRuleSearch, cv, paint, rc, pair);
+		drawPolygon(binaryMapDataObject, req, cv, paint, rc, pair);
 	}
 	env->DeleteLocalRef(pair);
 }
@@ -659,14 +659,15 @@ void drawIconsOverCanvas(RenderingContext* rc, SkCanvas* canvas)
 	int skewConstant = (int) getDensityValue(rc, 16);
 	int iconsW = rc -> width / skewConstant;
 	int iconsH = rc -> height / skewConstant;
-	int len = iconsW * iconsH / 32;
+	int len = (iconsW * iconsH) / 32;
 	int alreadyDrawnIcons[len];
-	size_t i = 0;
+	memset(alreadyDrawnIcons, 0, sizeof(int)*len);
+	size_t ji = 0;
 	SkPaint p;
 	p.setStyle(SkPaint::kStroke_Style);
-	for(;i< rc->iconsToDraw.size(); i++)
+	for(;ji< rc->iconsToDraw.size(); ji++)
 	{
-		IconDrawInfo icon = rc->iconsToDraw.at(i);
+		IconDrawInfo icon = rc->iconsToDraw.at(ji);
 		if (icon.y >= 0 && icon.y < rc -> height && icon.x >= 0 && icon.x < rc -> width &&
 				icon.bmp != NULL) {
 			int z = (((int) icon.x / skewConstant) + ((int) icon.y / skewConstant) * iconsW);
@@ -694,7 +695,7 @@ void drawIconsOverCanvas(RenderingContext* rc, SkCanvas* canvas)
 
 
 void doRendering(jobjectArray binaryMapDataObjects, SkCanvas* canvas, SkPaint* paint,
-		jobject renderingRuleSearchRequest, RenderingContext* rc) {
+		RenderingRuleSearchRequest* req, RenderingContext* rc) {
 	const size_t size = env->GetArrayLength(binaryMapDataObjects);
 	// put in order map
 	// TODO
@@ -709,7 +710,7 @@ void doRendering(jobjectArray binaryMapDataObjects, SkCanvas* canvas, SkPaint* p
 	for (; i < size; i++) {
 		jobject binaryMapDataObject = (jobject) env->GetObjectArrayElement(binaryMapDataObjects, i);
 		if (env->IsInstanceOf(binaryMapDataObject, MultiPolygonClass)) {
-			drawObject(rc, binaryMapDataObject, canvas, renderingRuleSearchRequest, paint, 0, 1, 0);
+			drawObject(rc, binaryMapDataObject, canvas, req, paint, 0, 1, 0);
 		} else {
 			jintArray types = (jintArray) env->CallObjectMethod(binaryMapDataObject, BinaryMapDataObject_getTypes);
 			if (types != NULL) {
@@ -717,7 +718,7 @@ void doRendering(jobjectArray binaryMapDataObjects, SkCanvas* canvas, SkPaint* p
 				env->DeleteLocalRef(types);
 				int j = 0;
 				for (; j < sizeTypes; j++) {
-					drawObject(rc, binaryMapDataObject, canvas, renderingRuleSearchRequest, paint, j, 1, 0);
+					drawObject(rc, binaryMapDataObject, canvas, req, paint, j, 1, 0);
 				}
 			}
 		}
@@ -747,9 +748,7 @@ JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 	   initLibrary(renderingContext);
 	   initRenderingRules(env, renderingRuleSearchRequest);
 	}
-
-
-
+	RenderingRuleSearchRequest* req =  initSearchRequest(renderingRuleSearchRequest);
 	SkPaint* paint = new SkPaint;
 	paint->setAntiAlias(true);
 
@@ -764,11 +763,12 @@ JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
     copyRenderingContext(renderingContext, &rc);
     __android_log_print(ANDROID_LOG_WARN, "net.osmand", "Rendering image");
     
-    doRendering(binaryMapDataObjects, canvas, paint, renderingRuleSearchRequest, &rc);
+    doRendering(binaryMapDataObjects, canvas, paint, req, &rc);
 
     __android_log_print(ANDROID_LOG_WARN, "net.osmand", "End Rendering image");
     delete paint;
     delete canvas;
+    delete req;
   	mergeRenderingContext(renderingContext, &rc);
 
     sprintf(debugMessage, "Native ok.");
