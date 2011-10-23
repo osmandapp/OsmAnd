@@ -96,6 +96,7 @@
 		<EditTextPreference android:title="@string/user_name" android:summary="@string/user_name_descr" android:key="user_name"></EditTextPreference>
 		<EditTextPreference android:title="@string/user_password" android:password="true" android:summary="@string/user_password_descr"
 			android:key="user_password"></EditTextPreference>
+		<Preference android:title="@string/local_openstreetmap_settings" android:key="local_openstreetmap_points" android:summary="@string/local_openstreetmap_settings_descr"></Preference>
 	</PreferenceScreen>
 	
 	<PreferenceScreen android:key="development" android:title="OsmAnd Development" android:summary="Development activities and experimental features">

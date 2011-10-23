@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="local_openstreetmap_descr_title">Asynchrone Openstreetmap POI Edition:</string>
+	<string name="local_openstreetmap_settings">Local Openstreetmap Points</string>
+	<string name="local_openstreetmap_settings_descr">Local Points Saved in DB</string>
 	<string name="pref_vector_rendering">Vector renderer specific options</string>
 	<string name="pref_overlay">Overlay / underlay</string>
 	<string name="pref_raster_map">Tile map settings</string>
