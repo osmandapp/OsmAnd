@@ -334,7 +334,7 @@ public class RenderingRulesStorage {
 	}
 	
 	public RenderingRule[] getRules(int state){
-		if(tagValueGlobalRules[state] == null) {
+		if(state > tagValueGlobalRules.length ||  tagValueGlobalRules[state] == null) {
 			return new RenderingRule[0];
 		}
 		return tagValueGlobalRules[state].values();

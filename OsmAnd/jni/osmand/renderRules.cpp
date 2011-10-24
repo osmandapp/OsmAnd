@@ -40,6 +40,7 @@ jfieldID RenderingRuleSearchRequest_fvalues;
 jfieldID RenderingRuleSearchRequest_savedValues;
 jfieldID RenderingRuleSearchRequest_savedFvalues;
 
+std::string EMPTY_STRING;
 
 class RenderingRuleProperty
 {
@@ -100,7 +101,7 @@ std::string getStringMethod(jobject o, jmethodID fid)
 	jstring st = (jstring) env->CallObjectMethod(o, fid);
 	if(st == NULL)
 	{
-		return std::string();
+		return EMPTY_STRING;
 	}
 	const char* utf = env->GetStringUTFChars(st, NULL);
 	std::string res(utf);
@@ -113,6 +114,7 @@ class RenderingRulesStorage
 {
 private:
 	const static int SHIFT_TAG_VAL = 16;
+	const static int SIZE_STATES = 7;
 	std::hash_map<std::string, int> dictionaryMap;
 	std::vector<std::string> dictionary;
 	std::hash_map<int, RenderingRule>* tagValueGlobalRules;
@@ -122,7 +124,7 @@ private:
 public:
 	RenderingRulesStorage(jobject storage) :
 			javaStorage(storage) {
-		tagValueGlobalRules = new std::hash_map<int, RenderingRule >[7];
+		tagValueGlobalRules = new std::hash_map<int, RenderingRule >[SIZE_STATES];
 		initDictionary();
 		initProperties();
 		initRules();
@@ -143,7 +145,11 @@ public:
 	}
 
 	RenderingRule* getRule(int state, int itag, int ivalue){
-			return &((tagValueGlobalRules[state])[(itag << SHIFT_TAG_VAL) | ivalue]);
+		std::hash_map<int, RenderingRule>::iterator it = (tagValueGlobalRules[state]).find((itag << SHIFT_TAG_VAL) | ivalue);
+		if(it == tagValueGlobalRules[state].end()){
+			return NULL;
+		}
+		return &(*it).second;
 	}
 
 	RenderingRuleProperty* getProperty(const char* st)
@@ -157,6 +163,9 @@ public:
 	}
 
 	std::string getDictionaryValue(int i){
+		if(i < 0){
+			return EMPTY_STRING;
+		}
 		return dictionary.at(i);
 	}
 
@@ -171,12 +180,16 @@ private:
 		uint i = 0;
 		for (; i < sz; i++) {
 			jstring st = (jstring) env->CallObjectMethod(listDictionary, List_get, i);
-			const char* utf = env->GetStringUTFChars(st, NULL);
-			env->ReleaseStringUTFChars(st, utf);
-			std::string d = std::string(utf);
-			env->DeleteLocalRef(st);
-			dictionary.push_back(d);
-			dictionaryMap[d] = i;
+//			if(st != NULL)
+//			{
+				const char* utf = env->GetStringUTFChars(st, NULL);
+				std::string d = std::string(utf);
+
+				env->ReleaseStringUTFChars(st, utf);
+				env->DeleteLocalRef(st);
+				dictionary.push_back(d);
+				dictionaryMap[d] = i;
+//			}
 		}
 		env->DeleteLocalRef(listDictionary);
 	}
@@ -202,9 +215,8 @@ private:
 	}
 
 	void initRules() {
-		for (int i = 1; i <= 7; i++)
-		{
-			jobjectArray rules = (jobjectArray) env->CallObjectMethod(javaStorage, RenderingRulesStorage_getRules);
+		for (int i = 1; i < SIZE_STATES; i++) {
+			jobjectArray rules = (jobjectArray) env->CallObjectMethod(javaStorage, RenderingRulesStorage_getRules, i);
 			jsize len = env->GetArrayLength(rules);
 			for (jsize j = 0; j < len; j++) {
 				jobject rRule = env->GetObjectArrayElement(rules, j);
@@ -224,10 +236,9 @@ private:
 					}
 					if (tag != -1 && value != -1) {
 						int key = (tag << SHIFT_TAG_VAL) + value;
-						(tagValueGlobalRules[i])[key] = *rule;
+						tagValueGlobalRules[i][key] = *rule;
 					}
 				}
-				env->DeleteLocalRef(rRule);
 			}
 			env->DeleteLocalRef(rules);
 		}
@@ -242,16 +253,31 @@ private:
 		jobject ifChildren =  env->GetObjectField(rRule, RenderingRule_ifChildren);
 		jobject ifElseChildren =  env->GetObjectField(rRule, RenderingRule_ifElseChildren);
 
-
 		jsize sz = env->GetArrayLength(props);
 
-		jfloat* fe = env->GetFloatArrayElements(floatProps, NULL);
-		rule->floatProperties.insert(fe, sz, 0);
-		env->ReleaseFloatArrayElements(floatProps, fe, JNI_ABORT);
+		if (floatProps != NULL) {
+			jfloat* fe = env->GetFloatArrayElements(floatProps, NULL);
+			for (int j = 0; j < sz; j++) {
+				rule->floatProperties.push_back(fe[j]);
+			}
+			env->ReleaseFloatArrayElements(floatProps, fe, JNI_ABORT);
+			env->DeleteLocalRef(floatProps);
+		} else {
+			rule->floatProperties.assign(sz, 0);
+		}
 
-		jint* ie = env->GetIntArrayElements(intProps, NULL);
-		rule->intProperties.insert(ie, sz, 0);
-		env->ReleaseIntArrayElements(intProps, ie, JNI_ABORT);
+		if (intProps != NULL) {
+			jint* ie = env->GetIntArrayElements(intProps, NULL);
+			for (int j = 0; j < sz; j++) {
+				rule->intProperties.push_back(ie[j]);
+			}
+			env->ReleaseIntArrayElements(intProps, ie, JNI_ABORT);
+			env->DeleteLocalRef(intProps);
+		} else {
+			rule->intProperties.assign(sz, -1);
+		}
+
+
 
 		for(jsize i = 0; i<sz;i++)
 		{
@@ -261,27 +287,28 @@ private:
 			rule->properties.push_back(p);
 			env->DeleteLocalRef(prop);
 		}
-
-		sz = env->CallIntMethod(ifChildren, List_size);
-		for(jsize i = 0; i<sz;i++)
-		{
-			jobject o = env->CallObjectMethod(ifChildren, List_get, i);
-			rule->ifChildren.push_back(*createRenderingRule(o));
-			env->DeleteLocalRef(o);
-		}
-
-		sz = env->CallIntMethod(ifElseChildren, List_size);
-		for (jsize i = 0; i < sz; i++) {
-			jobject o = env->CallObjectMethod(ifElseChildren, List_get, i);
-			rule->ifElseChildren.push_back(*createRenderingRule(o));
-			env->DeleteLocalRef(o);
-		}
-
 		env->DeleteLocalRef(props);
-		env->DeleteLocalRef(intProps);
-		env->DeleteLocalRef(floatProps);
-		env->DeleteLocalRef(ifChildren);
-		env->DeleteLocalRef(ifElseChildren);
+
+		if (ifChildren != NULL) {
+			sz = env->CallIntMethod(ifChildren, List_size);
+			for (jsize i = 0; i < sz; i++) {
+				jobject o = env->CallObjectMethod(ifChildren, List_get, i);
+				rule->ifChildren.push_back(*createRenderingRule(o));
+				env->DeleteLocalRef(o);
+			}
+			env->DeleteLocalRef(ifChildren);
+		}
+
+		if (ifElseChildren != NULL) {
+			sz = env->CallIntMethod(ifElseChildren, List_size);
+			for (jsize i = 0; i < sz; i++) {
+				jobject o = env->CallObjectMethod(ifElseChildren, List_get, i);
+				rule->ifElseChildren.push_back(*createRenderingRule(o));
+				env->DeleteLocalRef(o);
+			}
+			env->DeleteLocalRef(ifElseChildren);
+		}
+
 		return rule;
 	}
 
@@ -466,6 +493,7 @@ public:
 		this->storage = defaultStorage;
 		PROPS = new RenderingRulesStorageProperties(this->storage);
 		initObject(rrs);
+		clearState();
 	}
 
 public :
@@ -567,6 +595,10 @@ public :
 				bool match;
 				if (rp->isFloat()) {
 					match = rule->floatProperties[i] == fvalues[rp->id];
+				} else if(rp == PROPS->R_MINZOOM){
+					match = rule->intProperties[i] <= values[rp->id];
+				} else if(rp == PROPS->R_MAXZOOM){
+					match = rule->intProperties[i] >= values[rp->id];
 				} else {
 					match = rule->intProperties[i] == values[rp->id];
 				}
@@ -607,8 +639,8 @@ public :
 
 	void clearState()
 	{
-		memcpy(values, savedValues, storage->getPropertiesSize());
-		memcpy(fvalues, savedFvalues, storage->getPropertiesSize());
+		memcpy(values, savedValues, storage->getPropertiesSize()*sizeof(int));
+		memcpy(fvalues, savedFvalues, storage->getPropertiesSize()*sizeof(float));
 	}
 
 	void setInitialTagValueZoom(std::string tag, std::string value, int zoom)
@@ -647,7 +679,7 @@ void initRenderingRules(JNIEnv* ienv, jobject renderingRuleSearchRequest)
 	RenderingRuleClass = globalRef(env->FindClass("net/osmand/render/RenderingRule"));
 	RenderingRule_properties = env->GetFieldID(RenderingRuleClass, "properties", "[Lnet/osmand/render/RenderingRuleProperty;");
 	RenderingRule_intProperties = env->GetFieldID(RenderingRuleClass, "intProperties", "[I");
-	RenderingRule_floatProperties = env->GetFieldID(RenderingRuleClass, "floatProperties", "[I");
+	RenderingRule_floatProperties = env->GetFieldID(RenderingRuleClass, "floatProperties", "[F");
 	RenderingRule_ifElseChildren = env->GetFieldID(RenderingRuleClass, "ifElseChildren", "Ljava/util/List;");
 	RenderingRule_ifChildren = env->GetFieldID(RenderingRuleClass, "ifChildren", "Ljava/util/List;");
 
