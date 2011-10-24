@@ -40,19 +40,6 @@ jfieldID RenderingRuleSearchRequest_fvalues;
 jfieldID RenderingRuleSearchRequest_savedValues;
 jfieldID RenderingRuleSearchRequest_savedFvalues;
 
-jfieldID RenderingRuleSearchRequest_ALL;
-jmethodID RenderingRuleSearchRequest_setInitialTagValueZoom;
-jmethodID RenderingRuleSearchRequest_getIntPropertyValue;
-jmethodID RenderingRuleSearchRequest_getFloatPropertyValue;
-jmethodID RenderingRuleSearchRequest_getIntIntPropertyValue;
-jmethodID RenderingRuleSearchRequest_getStringPropertyValue;
-jmethodID RenderingRuleSearchRequest_setIntFilter;
-jmethodID RenderingRuleSearchRequest_setStringFilter;
-jmethodID RenderingRuleSearchRequest_setBooleanFilter;
-
-jmethodID RenderingRuleSearchRequest_search;
-jmethodID RenderingRuleSearchRequest_searchI;
-
 
 class RenderingRuleProperty
 {
@@ -66,6 +53,13 @@ public :
 		type(type), input(input), attrName(name), id(id)
 	{}
 
+	bool isFloat()
+	{
+		return type == FLOAT_TYPE;
+	}
+
+	const static int TRUE_VALUE = 1;
+	const static int FALSE_VALUE = 0;
 private :
    const static int INT_TYPE = 1;
    const static int FLOAT_TYPE = 2;
@@ -90,6 +84,20 @@ public:
 std::string getStringField(jobject o, jfieldID fid)
 {
 	jstring st = (jstring) env->GetObjectField(o, fid);
+	if(st == NULL)
+	{
+		return std::string();
+	}
+	const char* utf = env->GetStringUTFChars(st, NULL);
+	std::string res(utf);
+	env->ReleaseStringUTFChars(st, utf);
+	env->DeleteLocalRef(st);
+	return res;
+}
+
+std::string getStringMethod(jobject o, jmethodID fid)
+{
+	jstring st = (jstring) env->CallObjectMethod(o, fid);
 	if(st == NULL)
 	{
 		return std::string();
@@ -126,6 +134,18 @@ public:
 	}
 	jobject javaStorage;
 
+	int getPropertiesSize()	{
+		return properties.size();
+	}
+
+	RenderingRuleProperty* getProperty(int i)	{
+		return &properties.at(i);
+	}
+
+	RenderingRule* getRule(int state, int itag, int ivalue){
+			return &((tagValueGlobalRules[state])[(itag << SHIFT_TAG_VAL) | ivalue]);
+	}
+
 	RenderingRuleProperty* getProperty(const char* st)
 	{
 		std::hash_map<std::string,  RenderingRuleProperty*>::iterator i = propertyMap.find(st);
@@ -134,6 +154,14 @@ public:
 			return NULL;
 		}
 		return (*i).second;
+	}
+
+	std::string getDictionaryValue(int i){
+		return dictionary.at(i);
+	}
+
+	int getDictionaryValue(std::string s) {
+		return dictionaryMap[s];
 	}
 
 private:
@@ -356,18 +384,18 @@ private :
 	jobject renderingRuleSearch;
 	RenderingRulesStorage* storage;
 	RenderingRulesStorageProperties* PROPS;
-	std::vector<RenderingRuleProperty*> requestProps;
-	std::vector<int> values;
-	std::vector<float> fvalues;
-	std::vector<int> savedValues;
-	std::vector<float> savedFvalues;
-	bool searchResult = false;
+	int* values;
+	float* fvalues;
+	int* savedValues;
+	float* savedFvalues;
+	bool searchResult;
 
 	void initObject(jobject rrs)
 	{
 		jsize sz;
 		jobjectArray oa = (jobjectArray ) env->GetObjectField(rrs, RenderingRuleSearchRequest_props);
 		sz = env->GetArrayLength(oa);
+		std::vector<RenderingRuleProperty*> requestProps;
 		for(jsize i=0; i<sz; i++)
 		{
 			jobject prop = env->GetObjectArrayElement(oa, i);
@@ -377,39 +405,49 @@ private :
 			env->DeleteLocalRef(prop);
 		}
 		env->DeleteLocalRef(oa);
+		sz = storage->getPropertiesSize();
 		{
+			values = new int[sz];
 			jintArray ia = (jintArray) env->GetObjectField(rrs, RenderingRuleSearchRequest_values);
 			jint* ie = env->GetIntArrayElements(ia, NULL);
-			sz = env->GetArrayLength(ia);
-			values.insert(ie, sz, 0);
+			for(int i=0; i<sz; i++){
+				values[requestProps.at(i)->id] = ie[i];
+			}
 			env->ReleaseIntArrayElements(ia, ie, JNI_ABORT);
 			env->DeleteLocalRef(ia);
 		}
 
 		{
-			jfloatArray fa = (jfloatArray) env->GetObjectField(rrs, RenderingRuleSearchRequest_fvalues);
-			jfloat* fe = env->GetFloatArrayElements(fa, NULL);
-			sz = env->GetArrayLength(fa);
-			fvalues.insert(fe, sz, 0);
-			env->ReleaseFloatArrayElements(fa, fe, JNI_ABORT);
-			env->DeleteLocalRef(fa);
+			fvalues = new float[sz];
+			jfloatArray ia = (jfloatArray) env->GetObjectField(rrs, RenderingRuleSearchRequest_fvalues);
+			jfloat* ie = env->GetFloatArrayElements(ia, NULL);
+			for (int i = 0; i < sz; i++) {
+				fvalues[requestProps.at(i)->id] = ie[i];
+			}
+			env->ReleaseFloatArrayElements(ia, ie, JNI_ABORT);
+			env->DeleteLocalRef(ia);
 		}
+
 		{
-			jintArray ia = (jintArray) env->GetObjectField(rrs, RenderingRuleSearchRequest_savedValues);
+			savedValues = new int[sz];
+			jintArray ia = (jintArray) env->GetObjectField(rrs, RenderingRuleSearchRequest_values);
 			jint* ie = env->GetIntArrayElements(ia, NULL);
-			sz = env->GetArrayLength(ia);
-			savedValues.insert(ie, sz, 0);
+			for (int i = 0; i < sz; i++) {
+				savedValues[requestProps.at(i)->id] = ie[i];
+			}
 			env->ReleaseIntArrayElements(ia, ie, JNI_ABORT);
 			env->DeleteLocalRef(ia);
 		}
 
 		{
-			jfloatArray fa = (jfloatArray) env->GetObjectField(rrs, RenderingRuleSearchRequest_savedFvalues);
-			jfloat* fe = env->GetFloatArrayElements(fa, NULL);
-			sz = env->GetArrayLength(fa);
-			savedFvalues.insert(fe, sz, 0);
-			env->ReleaseFloatArrayElements(fa, fe, JNI_ABORT);
-			env->DeleteLocalRef(fa);
+			savedFvalues = new float[sz];
+			jfloatArray ia = (jfloatArray) env->GetObjectField(rrs, RenderingRuleSearchRequest_fvalues);
+			jfloat* ie = env->GetFloatArrayElements(ia, NULL);
+			for (int i = 0; i < sz; i++) {
+				savedFvalues[requestProps.at(i)->id] = ie[i];
+			}
+			env->ReleaseFloatArrayElements(ia, ie, JNI_ABORT);
+			env->DeleteLocalRef(ia);
 		}
 
 	}
@@ -431,68 +469,164 @@ public:
 	}
 
 public :
-	int getIntPropertyValue(const char* prop)
+
+
+	int getIntPropertyValue(RenderingRuleProperty* prop)
 	{
-		jobject all = env->GetObjectField( renderingRuleSearch, RenderingRuleSearchRequest_ALL);
-		jfieldID fid = env->GetFieldID( RenderingRuleStoragePropertiesClass, prop,
-				"Lnet/osmand/render/RenderingRuleProperty;");
-		jobject propObj = env->GetObjectField( all, fid);
-		int res = env->CallIntMethod( renderingRuleSearch, RenderingRuleSearchRequest_getIntPropertyValue, propObj);
-		env->DeleteLocalRef( all);
-		env->DeleteLocalRef( propObj);
-		return res;
+		if (prop == NULL) {
+			return 0;
+		}
+		return values[prop->id];
 	}
 
-	jstring getStringPropertyValue(const char* prop)
+	std::string getStringPropertyValue(RenderingRuleProperty* prop)
 	{
-		jobject all = env->GetObjectField( renderingRuleSearch, RenderingRuleSearchRequest_ALL);
-		jfieldID fid = env->GetFieldID( RenderingRuleStoragePropertiesClass, prop,
-				"Lnet/osmand/render/RenderingRuleProperty;");
-		jobject propObj = env->GetObjectField( all, fid);
-		jstring res = (jstring) env->CallObjectMethod( renderingRuleSearch, RenderingRuleSearchRequest_getStringPropertyValue, propObj);
-		env->DeleteLocalRef( all);
-		env->DeleteLocalRef( propObj);
-		return res;
-	}
-
-	void setIntPropertyFilter(const char* prop, int filter)
-	{
-		jobject all = env->GetObjectField( renderingRuleSearch, RenderingRuleSearchRequest_ALL);
-		jfieldID fid = env->GetFieldID( RenderingRuleStoragePropertiesClass, prop,
-				"Lnet/osmand/render/RenderingRuleProperty;");
-		jobject propObj = env->GetObjectField( all, fid);
-		env->CallVoidMethod( renderingRuleSearch, RenderingRuleSearchRequest_setIntFilter, propObj, filter);
-		env->DeleteLocalRef( all);
-		env->DeleteLocalRef( propObj);
+		if (prop == NULL) {
+			return "";
+		}
+		int s = values[prop->id];
+		return storage -> getDictionaryValue(s);
 	}
 
 
-	float getFloatPropertyValue(const char* prop)
-	{
-		jobject all = env->GetObjectField( renderingRuleSearch, RenderingRuleSearchRequest_ALL);
-		jfieldID fid = env->GetFieldID( RenderingRuleStoragePropertiesClass, prop,
-				"Lnet/osmand/render/RenderingRuleProperty;");
-		jobject propObj = env->GetObjectField( all, fid);
-		float res = env->CallFloatMethod( renderingRuleSearch, RenderingRuleSearchRequest_getFloatPropertyValue, propObj);
-		env->DeleteLocalRef( all);
-		env->DeleteLocalRef( propObj);
-		return res;
+	float getFloatPropertyValue(RenderingRuleProperty* prop) {
+		if (prop == NULL) {
+			return 0;
+		}
+		return fvalues[prop->id];
 	}
+
+	void setStringFilter(RenderingRuleProperty* p, std::string filter) {
+		if(p != NULL){
+			// assert p->input;
+			values[p->id] = storage->getDictionaryValue(filter);
+		}
+	}
+	void setIntFilter(RenderingRuleProperty* p, int filter) {
+		if (p != NULL) {
+			// assert p->input;
+			values[p->id] = filter;
+		}
+	}
+	void setBooleanFilter(RenderingRuleProperty* p, bool filter) {
+		if (p != NULL) {
+			// assert p->input;
+			values[p->id] = filter ? RenderingRuleProperty::TRUE_VALUE : RenderingRuleProperty::FALSE_VALUE;
+		}
+	}
+
 
 	RenderingRulesStorageProperties* props(){
 		return PROPS;
 	}
 
-	int searchRule(int type)
+	bool searchRule(int state)
 	{
-		return env->CallBooleanMethod(renderingRuleSearch, RenderingRuleSearchRequest_search, type);
+		return search(state, true);
 	}
 
-	void setInitialTagValueZoom(jstring tag, jstring value, int zoom)
-	{
-		env->CallVoidMethod(renderingRuleSearch, RenderingRuleSearchRequest_setInitialTagValueZoom, tag, value, zoom);
+	bool search(int state, bool loadOutput) {
+		searchResult = false;
+		int tagKey = values[PROPS->R_TAG->id];
+		int valueKey = values[PROPS->R_VALUE->id];
+		bool result = searchInternal(state, tagKey, valueKey, loadOutput);
+		if (result) {
+			searchResult = true;
+			return true;
+		}
+		result = searchInternal(state, tagKey, 0, loadOutput);
+		if (result) {
+			searchResult = true;
+			return true;
+		}
+		result = searchInternal(state, 0, 0, loadOutput);
+		if (result) {
+			searchResult = true;
+			return true;
+		}
+		return false;
 	}
 
+	bool searchInternal(int state, int tagKey, int valueKey, bool loadOutput) {
+		values[PROPS->R_TAG->id] = tagKey;
+		values[PROPS->R_VALUE->id] = valueKey;
+		RenderingRule* accept = storage->getRule(state, tagKey, valueKey);
+		if (accept == NULL) {
+			return false;
+		}
+		bool match = visitRule(accept, loadOutput);
+		return match;
+	}
+
+	bool visitRule(RenderingRule* rule, bool loadOutput) {
+		std::vector<RenderingRuleProperty*> properties = rule->properties;
+		int propLen = rule->properties.size();
+		for (int i = 0; i < propLen; i++) {
+			RenderingRuleProperty* rp = properties[i];
+			if (rp != NULL && rp->input) {
+				bool match;
+				if (rp->isFloat()) {
+					match = rule->floatProperties[i] == fvalues[rp->id];
+				} else {
+					match = rule->intProperties[i] == values[rp->id];
+				}
+				if (!match) {
+					return false;
+				}
+			}
+		}
+		if (!loadOutput) {
+			return true;
+		}
+		// accept it
+		for (int i = 0; i < propLen; i++) {
+			RenderingRuleProperty* rp = properties[i];
+			if (rp != NULL && !rp->input) {
+				searchResult = true;
+				if (rp->isFloat()) {
+					fvalues[rp->id] = rule->floatProperties[i];
+				} else {
+					values[rp->id] = rule->intProperties[i];
+				}
+			}
+		}
+		size_t j;
+		for (j = 0; j < rule->ifElseChildren.size(); j++) {
+			bool match = visitRule(&rule->ifElseChildren.at(j), loadOutput);
+			if (match) {
+				break;
+			}
+		}
+		for (j = 0; j < rule->ifChildren.size(); j++) {
+			visitRule(&rule->ifChildren.at(j), loadOutput);
+		}
+		return true;
+
+	}
+
+
+	void clearState()
+	{
+		memcpy(values, savedValues, storage->getPropertiesSize());
+		memcpy(fvalues, savedFvalues, storage->getPropertiesSize());
+	}
+
+	void setInitialTagValueZoom(std::string tag, std::string value, int zoom)
+	{
+		clearState();
+		setIntFilter(PROPS->R_MINZOOM, zoom);
+		setIntFilter(PROPS->R_MAXZOOM, zoom);
+		setStringFilter(PROPS->R_TAG, tag);
+		setStringFilter(PROPS->R_VALUE, value);
+	}
+
+	void setTagValueZoomLayer(std::string tag, std::string val, int zoom, int layer){
+		setIntFilter(PROPS->R_MINZOOM, zoom);
+		setIntFilter(PROPS->R_MAXZOOM, zoom);
+		setIntFilter(PROPS->R_LAYER, layer);
+		setStringFilter(PROPS->R_TAG, tag);
+		setStringFilter(PROPS->R_VALUE, val);
+	}
 
 };
 
@@ -537,8 +671,6 @@ void initRenderingRules(JNIEnv* ienv, jobject renderingRuleSearchRequest)
 	List_get = env->GetMethodID(ListClass, "get", "(I)Ljava/lang/Object;");
 
 	RenderingRuleSearchRequestClass = globalRef(env->FindClass("net/osmand/render/RenderingRuleSearchRequest"));
-	RenderingRuleSearchRequest_setInitialTagValueZoom = env->GetMethodID(RenderingRuleSearchRequestClass,
-			"setInitialTagValueZoom", "(Ljava/lang/String;Ljava/lang/String;I)V");
 	RenderingRuleSearchRequest_storage = env->GetFieldID(RenderingRuleSearchRequestClass,
 				"storage", "Lnet/osmand/render/RenderingRulesStorage;");
 	RenderingRuleSearchRequest_props = env->GetFieldID(RenderingRuleSearchRequestClass,
@@ -547,25 +679,6 @@ void initRenderingRules(JNIEnv* ienv, jobject renderingRuleSearchRequest)
 	RenderingRuleSearchRequest_fvalues = env->GetFieldID(RenderingRuleSearchRequestClass, "fvalues", "[F");
 	RenderingRuleSearchRequest_savedValues = env->GetFieldID(RenderingRuleSearchRequestClass, "savedValues", "[I");
 	RenderingRuleSearchRequest_savedFvalues = env->GetFieldID(RenderingRuleSearchRequestClass, "savedFvalues", "[F");
-
-	RenderingRuleSearchRequest_ALL = env->GetFieldID(RenderingRuleSearchRequestClass, "ALL",
-			"Lnet/osmand/render/RenderingRuleStorageProperties;");
-	RenderingRuleSearchRequest_getIntPropertyValue = env->GetMethodID(RenderingRuleSearchRequestClass,
-			"getIntPropertyValue", "(Lnet/osmand/render/RenderingRuleProperty;)I");
-	RenderingRuleSearchRequest_getIntIntPropertyValue = env->GetMethodID(RenderingRuleSearchRequestClass,
-			"getIntPropertyValue", "(Lnet/osmand/render/RenderingRuleProperty;I)I");
-	RenderingRuleSearchRequest_getFloatPropertyValue = env->GetMethodID(RenderingRuleSearchRequestClass,
-			"getFloatPropertyValue", "(Lnet/osmand/render/RenderingRuleProperty;)F");
-	RenderingRuleSearchRequest_getStringPropertyValue = env->GetMethodID(RenderingRuleSearchRequestClass,
-			"getStringPropertyValue", "(Lnet/osmand/render/RenderingRuleProperty;)Ljava/lang/String;");
-	RenderingRuleSearchRequest_setIntFilter = env->GetMethodID(RenderingRuleSearchRequestClass, "setIntFilter",
-			"(Lnet/osmand/render/RenderingRuleProperty;I)V");
-	RenderingRuleSearchRequest_setStringFilter = env->GetMethodID(RenderingRuleSearchRequestClass, "setStringFilter",
-			"(Lnet/osmand/render/RenderingRuleProperty;Ljava/lang/String;)V");
-	RenderingRuleSearchRequest_setBooleanFilter = env->GetMethodID(RenderingRuleSearchRequestClass, "setBooleanFilter",
-			"(Lnet/osmand/render/RenderingRuleProperty;Z)V");
-	RenderingRuleSearchRequest_search = env->GetMethodID(RenderingRuleSearchRequestClass, "search", "(I)Z");
-	RenderingRuleSearchRequest_searchI = env->GetMethodID(RenderingRuleSearchRequestClass, "search", "(IZ)Z");
 
 }
 

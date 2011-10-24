@@ -173,11 +173,13 @@ SkBitmap* getNativeBitmap(jobject bmpObj){
 	return bmp;
 }
 
-SkBitmap* getCachedBitmap(RenderingContext* rc, jstring js)
+SkBitmap* getCachedBitmap(RenderingContext* rc, std::string js)
 {
-	jobject bmp = env->CallStaticObjectMethod(RenderingIconsClass, RenderingIcons_getIcon, rc->androidContext, js);
+	jstring jstr = env->NewStringUTF(js.c_str());
+	jobject bmp = env->CallStaticObjectMethod(RenderingIconsClass, RenderingIcons_getIcon, rc->androidContext, jstr);
 	SkBitmap* res = getNativeBitmap(bmp);
 	env->DeleteLocalRef(bmp);
+	env->DeleteLocalRef(jstr);
 	return res;
 }
 
@@ -185,25 +187,25 @@ SkBitmap* getCachedBitmap(RenderingContext* rc, jstring js)
 // TODO cache shaders
 // TODO path effects
 int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int area, RenderingContext* rc) {
-	const char* rColor;
-	const char* rStrokeW;
-	const char* rCap;
-	const char* rPathEff;
+	RenderingRuleProperty* rColor;
+	RenderingRuleProperty* rStrokeW;
+	RenderingRuleProperty* rCap;
+	RenderingRuleProperty* rPathEff;
 	if (ind == 0) {
-		rColor = "R_COLOR";
-		rStrokeW = "R_STROKE_WIDTH";
-		rCap = "R_CAP";
-		rPathEff = "R_PATH_EFFECT";
+		rColor = req->props()->R_COLOR;
+		rStrokeW = req->props()->R_STROKE_WIDTH;
+		rCap = req->props()->R_CAP;
+		rPathEff = req->props()->R_PATH_EFFECT;
 	} else if (ind == 1) {
-		rColor = "R_COLOR_2";
-		rStrokeW = "R_STROKE_WIDTH_2";
-		rCap = "R_CAP_2";
-		rPathEff = "R_PATH_EFFECT_2";
+		rColor = req->props()->R_COLOR_2;
+		rStrokeW = req->props()->R_STROKE_WIDTH_2;
+		rCap = req->props()->R_CAP_2;
+		rPathEff = req->props()->R_PATH_EFFECT_2;
 	} else {
-		rColor = "R_COLOR_3";
-		rStrokeW = "R_STROKE_WIDTH_3";
-		rCap = "R_CAP_3";
-		rPathEff = "R_PATH_EFFECT_3";
+		rColor = req->props()->R_COLOR_3;
+		rStrokeW = req->props()->R_STROKE_WIDTH_3;
+		rCap = req->props()->R_CAP_3;
+		rPathEff = req->props()->R_PATH_EFFECT_3;
 	}
 	if (area) {
 		paint->setStyle(SkPaint::kStrokeAndFill_Style);
@@ -216,54 +218,44 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
 
 		paint->setStyle(SkPaint::kStroke_Style);
 		paint->setStrokeWidth(stroke);
-		jstring capStr = req->getStringPropertyValue(rCap);
-		jstring pathEffStr = req->getStringPropertyValue(rPathEff);
+		std::string cap = req->getStringPropertyValue(rCap);
+		std::string pathEff = req->getStringPropertyValue(rPathEff);
 
-		if (capStr != NULL && env->GetStringLength(capStr) > 0) {
-			const char* cap = env->GetStringUTFChars(capStr, NULL);
-			if (strcmp("BUTT", cap) == 0) {
-				paint->setStrokeCap(SkPaint::kButt_Cap);
-			} else if (strcmp("ROUND", cap) == 0) {
-				paint->setStrokeCap(SkPaint::kRound_Cap);
-			} else if (strcmp("SQUARE", cap) == 0) {
-				paint->setStrokeCap(SkPaint::kSquare_Cap);
-			}
-			env->ReleaseStringUTFChars(capStr, cap);
+		if (cap == "BUTT" || cap == "") {
+			paint->setStrokeCap(SkPaint::kButt_Cap);
+		} else if (cap == "ROUND") {
+			paint->setStrokeCap(SkPaint::kRound_Cap);
+		} else if (cap == "SQUARE") {
+			paint->setStrokeCap(SkPaint::kSquare_Cap);
 		} else {
 			paint->setStrokeCap(SkPaint::kButt_Cap);
 		}
 
-		if (pathEffStr != NULL && env->GetStringLength(pathEffStr) > 0) {
-			const char* pathEff = env->GetStringUTFChars(pathEffStr, NULL);
-			SkPathEffect* p = getDashEffect(pathEff);
+		if (pathEff.size() > 0) {
+			SkPathEffect* p = getDashEffect(pathEff.c_str());
 			paint->setPathEffect(p);
 			p->unref();
-			env->ReleaseStringUTFChars(pathEffStr, pathEff);
 		} else {
 			paint->setPathEffect(NULL);
 		}
 
-		env->DeleteLocalRef(capStr);
-		env->DeleteLocalRef(pathEffStr);
 	}
 
 	int color = req->getIntPropertyValue(rColor);
 	paint->setColor(color);
 
 	if (ind == 0) {
-		jstring shader = req->getStringPropertyValue("R_SHADER");
-		if(shader != NULL){
-			SkBitmap*  bmp = getCachedBitmap(rc, shader);
-			if(bmp == NULL) {
+		std::string shader = req->getStringPropertyValue(req->props()->R_SHADER);
+		if (shader.size() > 0) {
+			SkBitmap* bmp = getCachedBitmap(rc, shader);
+			if (bmp == NULL) {
 				paint->setShader(NULL);
 			} else {
-				paint->setShader(new SkBitmapProcShader(*bmp, SkShader::kRepeat_TileMode,SkShader::kRepeat_TileMode))->
-					unref();
+				paint->setShader(new SkBitmapProcShader(*bmp, SkShader::kRepeat_TileMode, SkShader::kRepeat_TileMode))->unref();
 			}
 		} else {
 			paint->setShader(NULL);
 		}
-		env->DeleteLocalRef(shader);
 	} else {
 		paint->setShader(NULL);
 	}
@@ -272,8 +264,8 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
 	if (rc->shadowRenderingMode != 1 || ind != 0) {
 		paint->setLooper(NULL);
 	} else {
-		int shadowColor = req->getIntPropertyValue("R_SHADOW_COLOR");
-		int shadowLayer = req->getIntPropertyValue("R_SHADOW_RADIUS");
+		int shadowColor = req->getIntPropertyValue(req->props()->R_SHADOW_COLOR);
+		int shadowLayer = req->getIntPropertyValue(req->props()->R_SHADOW_RADIUS);
 		if (shadowColor == 0) {
 			shadowLayer = 0;
 		}
@@ -296,21 +288,19 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
 	if (length < 2) {
 		return;
 	}
-	jstring tag = (jstring ) env->GetObjectField( pair, TagValuePair_tag);
-	jstring value = (jstring ) env->GetObjectField( pair, TagValuePair_value);
+	std::string tag = getStringField(pair, TagValuePair_tag);
+		std::string value = getStringField(pair, TagValuePair_value);
 
 //	__android_log_print(ANDROID_LOG_WARN, "net.osmand", "About to search");
 	req->setInitialTagValueZoom(tag, value, rc->zoom);
-	req->setIntPropertyFilter("R_LAYER", layer);
+	req->setIntFilter(req->props()->R_LAYER, layer);
 	// TODO oneway
 	// int oneway = 0;
 	//if(rc -> zoom >= 16 && "highway".equals(pair.tag) && MapRenderingTypes.isOneWayWay(obj.getHighwayAttributes())){
 	//strcmp("highway") oneway = 1;
 	//}
 
-	int rendered = req->searchRule(2);
-	env->DeleteLocalRef( tag);
-	env->DeleteLocalRef( value);
+	bool rendered = req->searchRule(2);
 	if (!rendered || !updatePaint(req,paint, 0, 0, rc)) {
 		return;
 	}
@@ -361,13 +351,11 @@ void drawMultiPolygon(jobject binaryMapDataObject,RenderingRuleSearchRequest* re
 	if (req == NULL) {
 		return;
 	}
-	jstring tag = (jstring) env->CallObjectMethod(binaryMapDataObject, MultiPolygon_getTag);
-	jstring value = (jstring) env->CallObjectMethod(binaryMapDataObject, MultiPolygon_getValue);
+	std::string tag = getStringMethod(binaryMapDataObject, MultiPolygon_getTag);
+	std::string value = getStringMethod(binaryMapDataObject, MultiPolygon_getValue);
 
 	req->setInitialTagValueZoom(tag, value, rc->zoom);
-	int rendered = req->searchRule(3);
-	env->DeleteLocalRef(tag);
-	env->DeleteLocalRef(value);
+	bool rendered = req->searchRule(3);
 
 	if (!rendered || !updatePaint(req, paint, 0, 1, rc)) {
 		return;
@@ -418,13 +406,11 @@ void drawPolygon(jobject binaryMapDataObject, RenderingRuleSearchRequest* req, S
 	if (length <= 2) {
 		return;
 	}
-	jstring tag = (jstring) env->GetObjectField(pair, TagValuePair_tag);
-	jstring value = (jstring) env->GetObjectField(pair, TagValuePair_value);
+	std::string tag = getStringField(pair, TagValuePair_tag);
+	std::string value = getStringField(pair, TagValuePair_value);
 
 	req->setInitialTagValueZoom(tag, value, rc->zoom);
-	int rendered = req->searchRule(3);
-	env->DeleteLocalRef(tag);
-	env->DeleteLocalRef(value);
+	bool rendered = req->searchRule(3);
 
 	float xText = 0;
 	float yText = 0;
@@ -467,23 +453,18 @@ void drawPoint(jobject binaryMapDataObject,	RenderingRuleSearchRequest* req, SkC
 		return;
 	}
 
-	jstring tag = (jstring) env->GetObjectField(pair, TagValuePair_tag);
-	jstring value = (jstring) env->GetObjectField(pair, TagValuePair_value);
+	std::string tag = getStringField(pair, TagValuePair_tag);
+	std::string value = getStringField(pair, TagValuePair_value);
 
 	req->setInitialTagValueZoom(tag, value, rc->zoom);
 	req->searchRule(1);
-	jstring resId = req->getStringPropertyValue("R_ICON");
+	std::string resId = req->getStringPropertyValue(req-> props()-> R_ICON);
 	SkBitmap* bmp = getCachedBitmap(rc, resId);
 	jstring name = NULL;
 	if (renderText) {
 		// TODO text
 //		name = obj.getName();
 	}
-	if (resId) {
-		env->DeleteLocalRef(resId);
-	}
-	env->DeleteLocalRef(tag);
-	env->DeleteLocalRef(value);
 	if (!bmp && !name) {
 		return;
 	}
