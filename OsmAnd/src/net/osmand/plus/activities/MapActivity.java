@@ -863,8 +863,12 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
-			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
-	    	return true;
+			if ((settings.getPointToNavigate() != null) && routingHelper.isRouteCalculated()) {
+				routingHelper.getVoiceRouter().announceCurrentDirection();
+			} else {
+				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
+			}
+			return true;
 		}
 		return false;
 	}

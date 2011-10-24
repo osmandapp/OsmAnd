@@ -152,10 +152,7 @@ public class VoiceRouter {
 		// the last turn say 
 		if(next == null || next.distance == 0) {
 			if(currentStatus == STATUS_UNKNOWN && currentDirection > 0){
-				CommandBuilder play = getNewCommandPlayerToPlay();
-				if(play != null){
-					play.goAhead(router.getLeftDistance()).andArriveAtDestination().play();
-				}
+				playGoAheadToDestination();
 				currentStatus = STATUS_TOLD;
 			}
 			return;
@@ -203,6 +200,62 @@ public class VoiceRouter {
 				playPrepareLongDistanceTurn(next, dist);
 			} 
 			nextStatusAfter(STATUS_3000_PREPARE);
+		}
+	}
+
+	public void announceCurrentDirection() {
+		Location currentLocation = router.getCurrentLocation();
+		RouteDirectionInfo next = router.getNextRouteDirectionInfo();
+		int dist = router.getDistanceToNextRouteDirection();
+		float speed = DEFAULT_SPEED;
+
+		if(currentLocation != null && currentLocation.hasSpeed()){
+			speed = Math.max(currentLocation.getSpeed(), speed);
+		}
+
+		switch (currentStatus) {
+		case STATUS_UNKNOWN:
+			if ((currentDirection > 0) && ((next == null) || (next.distance == 0))) {
+				playGoAheadToDestination();
+			} else {
+				playGoAhead(dist);
+			}
+			break;
+		case STATUS_TOLD:
+			if (currentDirection > 0) {
+				playGoAheadToDestination();
+			}
+			break;
+		case STATUS_TURN:
+			if(next.distance < TURN_IN_DISTANCE_END) {
+				playMakeTurnRightNow(next, router.getNextNextRouteDirectionInfo());
+			} else {
+				playMakeTurnRightNow(next, null);
+			}
+			break;
+		case STATUS_200_TURN:
+			if(isDistanceLess(speed, next.distance, TURN_DISTANCE) || next.distance < TURN_IN_DISTANCE_END) {
+				playMakeTurnInShortDistance(next, dist, router.getNextNextRouteDirectionInfo());
+			} else {
+				playMakeTurnInShortDistance(next, dist, null);
+			}
+			break;
+		case STATUS_800_PREPARE:
+			playPrepareLongDistanceTurn(next, dist);
+			break;
+		case STATUS_3000_PREPARE:
+			playPrepareLongDistanceTurn(next, dist);
+			break;
+		default:
+			break;
+		}
+	}
+
+
+	private void playGoAheadToDestination() {
+		CommandBuilder play = getNewCommandPlayerToPlay();
+		if(play != null){
+		play.goAhead(router.getLeftDistance()).andArriveAtDestination().play();
 		}
 	}
 
