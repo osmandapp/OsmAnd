@@ -5,8 +5,7 @@
 #include <vector>
 #include <hash_map>
 
-
-extern JNIEnv* env;
+#include "common.cpp"
 
 jclass ListClass;
 jmethodID List_size;
@@ -39,8 +38,6 @@ jfieldID RenderingRuleSearchRequest_values;
 jfieldID RenderingRuleSearchRequest_fvalues;
 jfieldID RenderingRuleSearchRequest_savedValues;
 jfieldID RenderingRuleSearchRequest_savedFvalues;
-
-std::string EMPTY_STRING;
 
 class RenderingRuleProperty
 {
@@ -82,33 +79,6 @@ public:
 
 };
 
-std::string getStringField(jobject o, jfieldID fid)
-{
-	jstring st = (jstring) env->GetObjectField(o, fid);
-	if(st == NULL)
-	{
-		return std::string();
-	}
-	const char* utf = env->GetStringUTFChars(st, NULL);
-	std::string res(utf);
-	env->ReleaseStringUTFChars(st, utf);
-	env->DeleteLocalRef(st);
-	return res;
-}
-
-std::string getStringMethod(jobject o, jmethodID fid)
-{
-	jstring st = (jstring) env->CallObjectMethod(o, fid);
-	if(st == NULL)
-	{
-		return EMPTY_STRING;
-	}
-	const char* utf = env->GetStringUTFChars(st, NULL);
-	std::string res(utf);
-	env->ReleaseStringUTFChars(st, utf);
-	env->DeleteLocalRef(st);
-	return res;
-}
 
 class RenderingRulesStorage
 {
@@ -686,9 +656,8 @@ RenderingRuleSearchRequest* initSearchRequest(jobject renderingRuleSearchRequest
 	return new RenderingRuleSearchRequest(renderingRuleSearchRequest);
 }
 
-void initRenderingRules(JNIEnv* ienv, jobject renderingRuleSearchRequest)
+void loadJNIRenderingRules()
 {
-	env = ienv;
 	RenderingRuleClass = globalRef(env->FindClass("net/osmand/render/RenderingRule"));
 	RenderingRule_properties = env->GetFieldID(RenderingRuleClass, "properties", "[Lnet/osmand/render/RenderingRuleProperty;");
 	RenderingRule_intProperties = env->GetFieldID(RenderingRuleClass, "intProperties", "[I");
@@ -727,7 +696,7 @@ void initRenderingRules(JNIEnv* ienv, jobject renderingRuleSearchRequest)
 
 }
 
-void unloadRenderingRules() {
+void unloadJniRenderRules() {
 	env->DeleteGlobalRef(RenderingRuleSearchRequestClass);
 	env->DeleteGlobalRef(RenderingRuleClass);
 	env->DeleteGlobalRef(RenderingRulePropertyClass);

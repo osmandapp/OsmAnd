@@ -1,12 +1,11 @@
 
 #include <jni.h>
 #include <android/log.h>
-#include <time.h>
 #include <stdio.h>
 #include <vector>
 #include <set>
 #include <hash_map>
-#include <stdlib.h>
+#include <time.h>
 #include "SkTypes.h"
 #include "SkBitmap.h"
 #include "SkShader.h"
@@ -18,35 +17,17 @@
 #include "SkPaint.h"
 #include "SkPath.h"
 
+#include "common.cpp"
 #include "renderRules.cpp"
+#include "mapObjects.cpp"
 
-JNIEnv* env;
-
-jclass MultiPolygonClass;
-jmethodID MultiPolygon_getTag;
-jmethodID MultiPolygon_getValue;
-jmethodID MultiPolygon_getLayer;
-jmethodID MultiPolygon_getPoint31XTile;
-jmethodID MultiPolygon_getPoint31YTile;
-jmethodID MultiPolygon_getBoundsCount;
-jmethodID MultiPolygon_getBoundPointsCount;
-
-
-jclass BinaryMapDataObjectClass;
-jmethodID BinaryMapDataObject_getPointsLength;
-jmethodID BinaryMapDataObject_getPoint31YTile;
-jmethodID BinaryMapDataObject_getPoint31XTile;
-jmethodID BinaryMapDataObject_getTypes;
-jmethodID BinaryMapDataObject_getTagValue;
-
-jclass TagValuePairClass;
-jfieldID TagValuePair_tag;
-jfieldID TagValuePair_value;
 
 jclass RenderingContextClass;
+jfieldID RenderingContext_interrupted;
 
 jclass RenderingIconsClass;
 jmethodID RenderingIcons_getIcon;
+
 
 struct IconDrawInfo {
 	SkBitmap* bmp;
@@ -60,8 +41,7 @@ typedef struct RenderingContext {
 		jobject originalRC;
 		jobject androidContext;
 		
-		// TODO
-		// public boolean interrupted = false;
+		// TODO text
 		// List<TextDrawInfo> textToDraw = new ArrayList<TextDrawInfo>();
 		bool highResMode;
 		float mapTextSize ;
@@ -97,8 +77,7 @@ typedef struct RenderingContext {
 		int shadowLevelMax;
 
 		bool interrupted() {
-			// TODO implement !
-			return false;
+			return env->GetBooleanField(originalRC, RenderingContext_interrupted);
 		}
 } RenderingContext;
 
@@ -110,11 +89,11 @@ jfieldID getFid(jclass cls,const char* fieldName, const char* sig )
 }
 
 
- void calcPoint(jobject mapObject, jint ind, RenderingContext* rc) {
+ void calcPoint(MapDataObject* mObj, jint ind, RenderingContext* rc) {
 	rc->pointCount++;
 
-	float tx = env->CallIntMethod(mapObject, BinaryMapDataObject_getPoint31XTile, ind) / (rc->tileDivisor);
-	float ty = env->CallIntMethod(mapObject, BinaryMapDataObject_getPoint31YTile, ind) / (rc->tileDivisor);
+	float tx = mObj->points.at(ind).first/ (rc->tileDivisor);
+	float ty = mObj->points.at(ind).second / (rc->tileDivisor);
 
 	float dTileX = tx - rc->leftX;
 	float dTileY = ty - rc->topY;
@@ -126,10 +105,10 @@ jfieldID getFid(jclass cls,const char* fieldName, const char* sig )
 	}
 }
 
- void calcMultipolygonPoint(jobject mapObject, jint ind, jint b, RenderingContext* rc) {
+ void calcMultipolygonPoint(int xt, int yt, jint ind, jint b, RenderingContext* rc) {
 	rc->pointCount++;
-	float tx = env->CallIntMethod(mapObject, MultiPolygon_getPoint31XTile, ind, b) / (rc->tileDivisor);
-	float ty = env->CallIntMethod(mapObject, MultiPolygon_getPoint31YTile, ind, b) / (rc->tileDivisor);
+	float tx = xt/ (rc->tileDivisor);
+	float ty = yt / (rc->tileDivisor);
 
 	float dTileX = tx - rc->leftX;
 	float dTileY = ty - rc->topY;
@@ -317,19 +296,15 @@ void drawPolylineShadow(SkCanvas* cv, SkPaint* paint, RenderingContext* rc, SkPa
 	}
 }
 
- void drawPolyline(jobject binaryMapDataObject,	RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
- 		RenderingContext* rc, jobject pair, int layer, int drawOnlyShadow)
+ void drawPolyline(MapDataObject* mObj,	RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
+ 		RenderingContext* rc, std::pair<std::string, std::string> pair, int layer, int drawOnlyShadow)
  {
-	if (req == NULL || pair == NULL) {
-		return;
-	}
-	jint length = env->CallIntMethod( binaryMapDataObject,
-			BinaryMapDataObject_getPointsLength);
+	jint length = mObj->points.size();
 	if (length < 2) {
 		return;
 	}
-	std::string tag = getStringField(pair, TagValuePair_tag);
-	std::string value = getStringField(pair, TagValuePair_value);
+	std::string tag = pair.first;
+	std::string value = pair.second;
 
 	req->setInitialTagValueZoom(tag, value, rc->zoom);
 	req->setIntFilter(req->props()->R_LAYER, layer);
@@ -349,7 +324,7 @@ void drawPolylineShadow(SkCanvas* cv, SkPaint* paint, RenderingContext* rc, SkPa
 	int i = 0;
 	// TODO calculate text
 	for (; i < length; i++) {
-		calcPoint(binaryMapDataObject, i, rc);
+		calcPoint(mObj, i, rc);
 		if (i == 0) {
 			path.moveTo(rc->calcX, rc->calcY);
 		} else {
@@ -369,7 +344,7 @@ void drawPolylineShadow(SkCanvas* cv, SkPaint* paint, RenderingContext* rc, SkPa
 					cv->drawPath(path, *paint);
 				}
 			}
-			// TODO
+			// TODO oneway text
 //			if (oneway && !drawOnlyShadow) {
 //				Paint[] paints = getOneWayPaints();
 //				for (int i = 0; i < paints.length; i++) {
@@ -384,31 +359,29 @@ void drawPolylineShadow(SkCanvas* cv, SkPaint* paint, RenderingContext* rc, SkPa
 	}
 }
 
-void drawMultiPolygon(jobject binaryMapDataObject,RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
+void drawMultiPolygon(MultiPolygonObject* mapObject,RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
  		  		RenderingContext* rc) {
 	if (req == NULL) {
 		return;
 	}
-	std::string tag = getStringMethod(binaryMapDataObject, MultiPolygon_getTag);
-	std::string value = getStringMethod(binaryMapDataObject, MultiPolygon_getValue);
-
-	req->setInitialTagValueZoom(tag, value, rc->zoom);
+	req->setInitialTagValueZoom(mapObject->tag, mapObject->value, rc->zoom);
 	bool rendered = req->searchRule(3);
 
 	if (!rendered || !updatePaint(req, paint, 0, 1, rc)) {
 		return;
 	}
 
-	int boundsCount = env->CallIntMethod(binaryMapDataObject, MultiPolygon_getBoundsCount);
+	int boundsCount = mapObject->points.size();
 	rc->visible++;
 	SkPath path;
 
 	for (int i = 0; i < boundsCount; i++) {
-		int cnt = env->CallIntMethod(binaryMapDataObject, MultiPolygon_getBoundPointsCount, i);
+		int cnt = mapObject->points.at(i).size();
 		float xText = 0;
 		float yText = 0;
 		for (int j = 0; j < cnt; j++) {
-			calcMultipolygonPoint(binaryMapDataObject, j, i, rc);
+			std::pair<int,int> pair = mapObject->points.at(i).at(j);
+			calcMultipolygonPoint(pair.first, pair.second, j, i, rc);
 			xText += rc->calcX;
 			yText += rc->calcY;
 			if (j == 0) {
@@ -418,7 +391,7 @@ void drawMultiPolygon(jobject binaryMapDataObject,RenderingRuleSearchRequest* re
 			}
 		}
 		if (cnt > 0) {
-			// TODO name
+			// TODO text
 			// String name = ((MultyPolygon) obj).getName(i);
 			// if (name != null) {
 			// drawPointText(render, rc, new TagValuePair(tag, value), xText / cnt, yText / cnt, name);
@@ -435,17 +408,14 @@ void drawMultiPolygon(jobject binaryMapDataObject,RenderingRuleSearchRequest* re
 	}
 }
 
-void drawPolygon(jobject binaryMapDataObject, RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
-		  		RenderingContext* rc, jobject pair) {
-	if (req == NULL || pair == NULL) {
-		return;
-	}
-	jint length = env->CallIntMethod(binaryMapDataObject, BinaryMapDataObject_getPointsLength);
+void drawPolygon(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
+		  		RenderingContext* rc, std::pair<std::string, std::string> pair) {
+	jint length = mObj->points.size();
 	if (length <= 2) {
 		return;
 	}
-	std::string tag = getStringField(pair, TagValuePair_tag);
-	std::string value = getStringField(pair, TagValuePair_value);
+	std::string tag = pair.first;
+	std::string value = pair.second;
 
 	req->setInitialTagValueZoom(tag, value, rc->zoom);
 	bool rendered = req->searchRule(3);
@@ -462,7 +432,7 @@ void drawPolygon(jobject binaryMapDataObject, RenderingRuleSearchRequest* req, S
 	float px = 0;
 	float py = 0;
 	for (; i < length; i++) {
-		calcPoint(binaryMapDataObject, i, rc);
+		calcPoint(mObj, i, rc);
 		if (i == 0) {
 			path.moveTo(rc->calcX, rc->calcY);
 		} else {
@@ -484,15 +454,11 @@ void drawPolygon(jobject binaryMapDataObject, RenderingRuleSearchRequest* req, S
 //		}
 }
 
-void drawPoint(jobject binaryMapDataObject,	RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
- 		RenderingContext* rc, jobject pair, int renderText)
+void drawPoint(MapDataObject* mObj,	RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
+ 		RenderingContext* rc, std::pair<std::string, std::string>  pair, int renderText)
  {
-	if (req == NULL || pair == NULL) {
-		return;
-	}
-
-	std::string tag = getStringField(pair, TagValuePair_tag);
-	std::string value = getStringField(pair, TagValuePair_value);
+	std::string tag = pair.first;
+	std::string value = pair.second;
 
 	req->setInitialTagValueZoom(tag, value, rc->zoom);
 	req->searchRule(1);
@@ -507,13 +473,14 @@ void drawPoint(jobject binaryMapDataObject,	RenderingRuleSearchRequest* req, SkC
 		return;
 	}
 
-	jint length = env->CallIntMethod(binaryMapDataObject, BinaryMapDataObject_getPointsLength);
+
+	jint length = mObj->points.size();
 	rc->visible++;
 	float px = 0;
 	float py = 0;
 	int i = 0;
 	for (; i < length; i++) {
-		calcPoint(binaryMapDataObject, i, rc);
+		calcPoint(mObj, i, rc);
 		px += rc->calcX;
 		py += rc->calcY;
 	}
@@ -547,36 +514,33 @@ int getNegativeWayLayer(int type) {
 	return 0;
 }
 
-void drawObject(RenderingContext* rc, jobject binaryMapDataObject, SkCanvas* cv, RenderingRuleSearchRequest* req,
+void drawObject(RenderingContext* rc, BaseMapDataObject* mapObject, SkCanvas* cv, RenderingRuleSearchRequest* req,
 		SkPaint* paint, int l, int renderText, int drawOnlyShadow) {
 	rc->allObjects++;
-	if (env->IsInstanceOf(binaryMapDataObject, MultiPolygonClass)) {
+	if (mapObject-> type == BaseMapDataObject::MULTI_POLYGON) {
 		if (!drawOnlyShadow) {
-			drawMultiPolygon(binaryMapDataObject, req, cv, paint, rc);
+			drawMultiPolygon((MultiPolygonObject*) mapObject, req, cv, paint, rc);
 		}
 		return;
 	}
+	MapDataObject* mObj = (MapDataObject*) mapObject;
 
-	jintArray types = (jintArray) env->CallObjectMethod(binaryMapDataObject, BinaryMapDataObject_getTypes);
-	jint mainType;
-	env->GetIntArrayRegion(types, l, 1, &mainType);
+	jint mainType = mObj->types.at(l);
 	int t = mainType & 3;
-	env->DeleteLocalRef(types);
 
-	jobject pair = env->CallObjectMethod(binaryMapDataObject, BinaryMapDataObject_getTagValue, l);
+	std::pair<std::string, std::string> pair = mObj->tagValues.at(l);
 	if (t == 1 && !drawOnlyShadow) {
 		// point
-		drawPoint(binaryMapDataObject, req, cv, paint, rc, pair, renderText);
+		drawPoint(mObj, req, cv, paint, rc, pair, renderText);
 	} else if (t == 2) {
 		// polyline
 		int layer = getNegativeWayLayer(mainType);
 //			__android_log_print(ANDROID_LOG_WARN, "net.osmand", "Draw polyline");
-		drawPolyline(binaryMapDataObject, req, cv, paint, rc, pair, layer, drawOnlyShadow);
+		drawPolyline(mObj, req, cv, paint, rc, pair, layer, drawOnlyShadow);
 	} else if (t == 3 && !drawOnlyShadow) {
 		// polygon
-		drawPolygon(binaryMapDataObject, req, cv, paint, rc, pair);
+		drawPolygon(mObj, req, cv, paint, rc, pair);
 	}
-	env->DeleteLocalRef(pair);
 }
 
 
@@ -626,43 +590,27 @@ void mergeRenderingContext(jobject orc, RenderingContext* rc)
 
 }
 
-void initLibrary(jobject rc)
+void loadLibrary(jobject rc)
 {
-   MultiPolygonClass = globalRef(env->FindClass( "net/osmand/osm/MultyPolygon"));
-   MultiPolygon_getTag = env->GetMethodID( MultiPolygonClass, "getTag", "()Ljava/lang/String;" );
-   MultiPolygon_getValue = env->GetMethodID( MultiPolygonClass, "getValue", "()Ljava/lang/String;" );
-   MultiPolygon_getLayer = env->GetMethodID( MultiPolygonClass, "getLayer", "()I" );
-   MultiPolygon_getPoint31XTile =env->GetMethodID( MultiPolygonClass, "getPoint31XTile", "(II)I" );
-   MultiPolygon_getPoint31YTile =env->GetMethodID( MultiPolygonClass, "getPoint31YTile", "(II)I" );
-   MultiPolygon_getBoundsCount =env->GetMethodID( MultiPolygonClass, "getBoundsCount", "()I" );
-   MultiPolygon_getBoundPointsCount =env->GetMethodID( MultiPolygonClass, "getBoundPointsCount", "(I)I" );
 
    RenderingContextClass = globalRef(env->GetObjectClass( rc));
+   RenderingContext_interrupted = getFid( RenderingContextClass, "interrupted", "Z" );
 
    RenderingIconsClass = globalRef(env->FindClass( "net/osmand/plus/render/RenderingIcons"));
    RenderingIcons_getIcon = env->GetStaticMethodID(RenderingIconsClass, "getIcon","(Landroid/content/Context;Ljava/lang/String;)Landroid/graphics/Bitmap;");
 
-   BinaryMapDataObjectClass = globalRef(env->FindClass( "net/osmand/binary/BinaryMapDataObject"));
-   BinaryMapDataObject_getPointsLength = env->GetMethodID( BinaryMapDataObjectClass,"getPointsLength","()I");
-   BinaryMapDataObject_getPoint31YTile = env->GetMethodID( BinaryMapDataObjectClass,"getPoint31YTile","(I)I");
-   BinaryMapDataObject_getPoint31XTile = env->GetMethodID( BinaryMapDataObjectClass,"getPoint31XTile","(I)I");
-   BinaryMapDataObject_getTypes = env->GetMethodID( BinaryMapDataObjectClass,"getTypes","()[I");
-   BinaryMapDataObject_getTagValue = env->GetMethodID( BinaryMapDataObjectClass,"getTagValue",
-		   "(I)Lnet/osmand/binary/BinaryMapIndexReader$TagValuePair;");
-
-   TagValuePairClass = globalRef(env->FindClass( "net/osmand/binary/BinaryMapIndexReader$TagValuePair"));
-   TagValuePair_tag = env->GetFieldID( TagValuePairClass, "tag", "Ljava/lang/String;");
-   TagValuePair_value= env->GetFieldID( TagValuePairClass, "value", "Ljava/lang/String;");
+   loadJNIRenderingRules();
+   loadJniMapObjects();
 
 }
 
 void unloadLibrary()
 {
-   env->DeleteGlobalRef( MultiPolygonClass );
    env->DeleteGlobalRef( RenderingContextClass );
    env->DeleteGlobalRef( RenderingIconsClass );
-   env->DeleteGlobalRef( BinaryMapDataObjectClass );
 
+   unloadJniRenderRules();
+   unloadJniMapObjects();
 }
 
 float getDensityValue(RenderingContext* rc, float val) {
@@ -710,22 +658,20 @@ void drawIconsOverCanvas(RenderingContext* rc, SkCanvas* canvas)
 	}
 }
 
-std::hash_map<int, std::vector<int> > sortObjectsByProperOrder(jobjectArray binaryMapDataObjects,
+std::hash_map<int, std::vector<int> > sortObjectsByProperOrder(std::vector <BaseMapDataObject* > mapDataObjects,
 			RenderingRuleSearchRequest* req, RenderingContext* rc) {
 	std::hash_map<int, std::vector<int> > orderMap;
 	if (req != NULL) {
 		req->clearState();
-		const size_t size = env->GetArrayLength(binaryMapDataObjects);
+		const size_t size = mapDataObjects.size();
 		size_t i = 0;
 		for (; i < size; i++) {
 			uint sh = i << 8;
-			jobject binaryMapDataObject = (jobject) env->GetObjectArrayElement(binaryMapDataObjects, i);
-			if (env->IsInstanceOf(binaryMapDataObject, MultiPolygonClass)) {
-				int layer = env->CallIntMethod(binaryMapDataObject, MultiPolygon_getLayer);
-				std::string tag = getStringMethod(binaryMapDataObject, MultiPolygon_getTag);
-				std::string value = getStringMethod(binaryMapDataObject, MultiPolygon_getValue);
+			BaseMapDataObject* obj = mapDataObjects.at(i);
+			if (obj->type == BaseMapDataObject::MULTI_POLYGON) {
+				MultiPolygonObject* mobj = (MultiPolygonObject*) obj;
 
-				req->setTagValueZoomLayer(tag, value, rc->zoom, layer);
+				req->setTagValueZoomLayer(mobj->tag, mobj->value, rc->zoom, mobj->layer);
 				req->setIntFilter(req->props()->R_ORDER_TYPE, RenderingRulesStorage::POLYGON_RULES);
 				if (req->searchRule(RenderingRulesStorage::ORDER_RULES)) {
 					int order = req->getIntPropertyValue(req->props()->R_ORDER);
@@ -737,42 +683,31 @@ std::hash_map<int, std::vector<int> > sortObjectsByProperOrder(jobjectArray bina
 					}
 				}
 			} else {
-				jintArray types = (jintArray) env->CallObjectMethod(binaryMapDataObject, BinaryMapDataObject_getTypes);
-				if (types != NULL) {
-					jint sizeTypes = env->GetArrayLength(types);
-					jint* els = env->GetIntArrayElements(types, NULL);
-					int j = 0;
-					for (; j < sizeTypes; j++) {
-						int wholeType = els[j];
-						int mask = wholeType & 3;
-						int layer = 0;
-						if (mask != 1) {
-							layer = getNegativeWayLayer(wholeType);
-						}
-						jobject pair = env->CallObjectMethod(binaryMapDataObject, BinaryMapDataObject_getTagValue, j);
-						if (pair != NULL) {
-							std::string tag = getStringField(pair, TagValuePair_tag);
-							std::string value = getStringField(pair, TagValuePair_value);
-							req->setTagValueZoomLayer(tag, value, rc->zoom, layer);
-							req->setIntFilter(req->props()->R_ORDER_TYPE, mask);
-							if (req->searchRule(RenderingRulesStorage::ORDER_RULES)) {
-								int order = req->getIntPropertyValue(req->props()->R_ORDER);
-								orderMap[order].push_back(sh + j);
-								if(req->getIntPropertyValue(req->props()->R_SHADOW_LEVEL) > 0) {
-									rc->shadowLevelMin = std::min(rc->shadowLevelMin, order);
-									rc->shadowLevelMax = std::max(rc->shadowLevelMax, order);
-									req->clearIntvalue(req->props()->R_SHADOW_LEVEL);
-								}
-							}
-							env->DeleteLocalRef(pair);
+				MapDataObject* mobj = (MapDataObject*) obj;
+				size_t sizeTypes = mobj->types.size();
+				size_t j = 0;
+				for (; j < sizeTypes; j++) {
+					int wholeType = mobj->types.at(j);
+					int mask = wholeType & 3;
+					int layer = 0;
+					if (mask != 1) {
+						layer = getNegativeWayLayer(wholeType);
+					}
+					std::pair<std::string, std::string> pair = mobj->tagValues.at(j);
+					req->setTagValueZoomLayer(pair.first, pair.second, rc->zoom, layer);
+					req->setIntFilter(req->props()->R_ORDER_TYPE, mask);
+					if (req->searchRule(RenderingRulesStorage::ORDER_RULES)) {
+						int order = req->getIntPropertyValue(req->props()->R_ORDER);
+						orderMap[order].push_back(sh + j);
+						if (req->getIntPropertyValue(req->props()->R_SHADOW_LEVEL) > 0) {
+							rc->shadowLevelMin = std::min(rc->shadowLevelMin, order);
+							rc->shadowLevelMax = std::max(rc->shadowLevelMax, order);
+							req->clearIntvalue(req->props()->R_SHADOW_LEVEL);
 						}
 					}
-					env->ReleaseIntArrayElements(types, els, JNI_ABORT);
-					env->DeleteLocalRef(types);
-
 				}
+
 			}
-			env->DeleteLocalRef(binaryMapDataObject);
 		}
 	}
 	return orderMap;
@@ -788,10 +723,10 @@ void objectDrawn(bool notify = false)
 	}
 }
 
-void doRendering(jobjectArray binaryMapDataObjects, SkCanvas* canvas, SkPaint* paint,
+void doRendering(std::vector <BaseMapDataObject* > mapDataObjects, SkCanvas* canvas, SkPaint* paint,
 		RenderingRuleSearchRequest* req, RenderingContext* rc) {
 	// put in order map
-	std::hash_map<int, std::vector<int> > orderMap = sortObjectsByProperOrder(binaryMapDataObjects, req, rc);
+	std::hash_map<int, std::vector<int> > orderMap = sortObjectsByProperOrder(mapDataObjects, req, rc);
 	std::set<int> keys;
 	std::hash_map<int, std::vector<int> >::iterator it = orderMap.begin();
 	while(it != orderMap.end())
@@ -813,12 +748,11 @@ void doRendering(jobjectArray binaryMapDataObjects, SkCanvas* canvas, SkPaint* p
 					int i = *ls;
 					int ind = i >> 8;
 					int l = i & 0xff;
-					jobject binaryMapDataObject = (jobject) env->GetObjectArrayElement(binaryMapDataObjects, ind);
+					BaseMapDataObject* mapObject = mapDataObjects.at(ind);
 
 					// show text only for main type
-					drawObject(rc, binaryMapDataObject, canvas, req, paint, l, l == 0, true);
+					drawObject(rc, mapObject, canvas, req, paint, l, l == 0, true);
 					objectDrawn();
-					env->DeleteLocalRef(binaryMapDataObject);
 				}
 			}
 			shadowDrawn = true;
@@ -830,12 +764,10 @@ void doRendering(jobjectArray binaryMapDataObjects, SkCanvas* canvas, SkPaint* p
 			int ind = i >> 8;
 			int l = i & 0xff;
 
-			jobject binaryMapDataObject = (jobject) env->GetObjectArrayElement(binaryMapDataObjects, ind);
-
+			BaseMapDataObject* mapObject = mapDataObjects.at(ind);
 			// show text only for main type
-			drawObject(rc, binaryMapDataObject, canvas, req, paint, l, l == 0, false);
+			drawObject(rc, mapObject, canvas, req, paint, l, l == 0, false);
 			objCount++;
-			env->DeleteLocalRef(binaryMapDataObject);
 			objectDrawn();
 
 		}
@@ -850,7 +782,7 @@ void doRendering(jobjectArray binaryMapDataObjects, SkCanvas* canvas, SkPaint* p
 
 
 	objectDrawn(true);
-	// TODO text draw
+	// TODO text
 //	drawTextOverCanvas(rc, cv, useEnglishNames);
 
 
@@ -864,37 +796,51 @@ JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 		jobject obj, jobject renderingContext, jobjectArray binaryMapDataObjects, jobject bmpObj,
 		jboolean useEnglishNames, jobject renderingRuleSearchRequest, jint defaultColor) {
 	__android_log_print(ANDROID_LOG_WARN, "net.osmand", "Initializing rendering");
+	struct timeval startInit;
+	struct timeval endInit;
+	gettimeofday(&startInit, NULL);
 	if(!env) {
 	   env = ienv;
-	   initLibrary(renderingContext);
-	   initRenderingRules(env, renderingRuleSearchRequest);
+	   loadLibrary(renderingContext);
 	}
 
+	SkBitmap* bmp = getNativeBitmap(bmpObj);
+	sprintf(debugMessage, "Image w:%d h:%d !", bmp->width(), bmp->height());
+	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
+
+	SkCanvas* canvas = new SkCanvas(*bmp);
+	canvas->drawColor(defaultColor);
 	SkPaint* paint = new SkPaint;
 	paint->setAntiAlias(true);
 
-	SkBitmap* bmp = getNativeBitmap(bmpObj);
-	SkCanvas* canvas = new SkCanvas(*bmp);
-	sprintf(debugMessage, "Image w:%d h:%d !", bmp->width(), bmp->height());
-	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
-	canvas->drawColor(defaultColor);
 
 	RenderingRuleSearchRequest* req =  initSearchRequest(renderingRuleSearchRequest);
 
     RenderingContext rc;
     copyRenderingContext(renderingContext, &rc);
-    __android_log_print(ANDROID_LOG_WARN, "net.osmand", "Rendering image");
-    
-    doRendering(binaryMapDataObjects, canvas, paint, req, &rc);
+    std::vector <BaseMapDataObject* > mapDataObjects = marshalObjects(binaryMapDataObjects);
 
+
+    __android_log_print(ANDROID_LOG_WARN, "net.osmand", "Rendering image");
+    gettimeofday(&endInit, NULL);
+    
+
+    // Main part do rendering
+    doRendering(mapDataObjects, canvas, paint, req, &rc);
+
+    mergeRenderingContext(renderingContext, &rc);
     __android_log_print(ANDROID_LOG_WARN, "net.osmand", "End Rendering image");
+
+    // delete  variables
     delete paint;
     delete canvas;
     delete req;
-  	mergeRenderingContext(renderingContext, &rc);
+    deleteObjects(mapDataObjects);
 
-    sprintf(debugMessage, "Native ok.");
+  	int lt = (endInit.tv_sec * 1000 + endInit.tv_usec/1000) - (startInit.tv_sec * 1000 + startInit.tv_usec / 1000);
+    sprintf(debugMessage, "Native ok (init %d) ", lt);
     jstring result = env->NewStringUTF( debugMessage);
+
 //  unloadLibrary();
 	return result;
 }
