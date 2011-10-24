@@ -28,11 +28,12 @@
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.2094589046" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 							<tool id="com.android.tool.compiler.g++.1543637239" name="Android G++" superClass="com.android.tool.compiler.g++">
 								<option id="gnu.cpp.compiler.option.include.paths.757537552" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="/home/victor/projects/android-ndk-r6b/sources/cxx-stl/stlport/stlport"/>
+									<listOptionValue builtIn="false" value="/home/victor/projects/android-ndk-r6b/sources/cxx-stl/gnu-libstdc++/include"/>
 									<listOptionValue builtIn="false" value="/home/victor/projects/android/external/skia/include/core"/>
 									<listOptionValue builtIn="false" value="/home/victor/projects/android/frameworks/base/include"/>
 									<listOptionValue builtIn="false" value="/home/victor/projects/android/external/skia/include/effects"/>
-									<listOptionValue builtIn="false" value="/home/victor/projects/android-ndk-r6b/sources/cxx-stl/gnu-libstdc++/include"/>
-									<listOptionValue builtIn="false" value="/home/victor/projects/android-ndk-r6b/sources/cxx-stl/stlport/stlport"/>
+									<listOptionValue builtIn="false" value="/home/victor/projects/android-ndk-r6b/sources/cxx-stl/gnu-libstdc++/libs/armeabi/include"/>
 								</option>
 								<inputType id="com.android.tool.compiler.g++.input.478508689" superClass="com.android.tool.compiler.g++.input"/>
 							</tool>
@@ -44,9 +45,10 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.1072970274" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.1246211237" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base">
-								<option id="gnu.cpp.link.option.paths.266312846" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
+								<option id="gnu.cpp.link.option.paths.266312846" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="/home/victor/projects/android-ndk-r6b/platforms/android-8/arch-arm/usr/lib"/>
 								</option>
+								<option id="gnu.cpp.link.option.libs.743028931" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.2067702743" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -99,4 +101,5 @@
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile"/>
 		</scannerConfigBuildInfo>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cproject>
