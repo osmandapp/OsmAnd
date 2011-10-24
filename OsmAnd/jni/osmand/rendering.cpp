@@ -4,6 +4,8 @@
 #include <time.h>
 #include <stdio.h>
 #include <vector>
+#include <set>
+#include <hash_map>
 #include <stdlib.h>
 #include "SkTypes.h"
 #include "SkBitmap.h"
@@ -23,6 +25,7 @@ JNIEnv* env;
 jclass MultiPolygonClass;
 jmethodID MultiPolygon_getTag;
 jmethodID MultiPolygon_getValue;
+jmethodID MultiPolygon_getLayer;
 jmethodID MultiPolygon_getPoint31XTile;
 jmethodID MultiPolygon_getPoint31YTile;
 jmethodID MultiPolygon_getBoundsCount;
@@ -92,6 +95,11 @@ typedef struct RenderingContext {
 		// not expect any shadow
 		int shadowLevelMin;
 		int shadowLevelMax;
+
+		bool interrupted() {
+			// TODO implement !
+			return false;
+		}
 } RenderingContext;
 
 
@@ -133,8 +141,12 @@ jfieldID getFid(jclass cls,const char* fieldName, const char* sig )
 	}
 }
 
-
-SkPathEffect* getDashEffect(const char* chars){
+std::hash_map<std::string, SkPathEffect*> pathEffects;
+SkPathEffect* getDashEffect(std::string input){
+	if(pathEffects.find(input) != pathEffects.end()) {
+		return pathEffects[input];
+	}
+	const char* chars = input.c_str();
 	int i = 0;
 	char fval[10];
 	int flength = 0;
@@ -160,7 +172,9 @@ SkPathEffect* getDashEffect(const char* chars){
 			}
 		}
 	}
-	return new SkDashPathEffect(primFloats, floatLen, 0);
+	SkPathEffect* r = new SkDashPathEffect(primFloats, floatLen, 0);
+	pathEffects[input] = r;
+	return r;
 }
 
 SkBitmap* getNativeBitmap(jobject bmpObj){
@@ -173,19 +187,25 @@ SkBitmap* getNativeBitmap(jobject bmpObj){
 	return bmp;
 }
 
+std::hash_map<std::string, SkBitmap*> cachedBitmaps;
 SkBitmap* getCachedBitmap(RenderingContext* rc, std::string js)
 {
+	if (cachedBitmaps.find(js) != cachedBitmaps.end()) {
+		return cachedBitmaps[js];
+	}
 	jstring jstr = env->NewStringUTF(js.c_str());
 	jobject bmp = env->CallStaticObjectMethod(RenderingIconsClass, RenderingIcons_getIcon, rc->androidContext, jstr);
 	SkBitmap* res = getNativeBitmap(bmp);
 	env->DeleteLocalRef(bmp);
 	env->DeleteLocalRef(jstr);
+	if(res != NULL){
+		res = new SkBitmap(*res);
+	}
+	cachedBitmaps[js] = res;
 	return res;
 }
 
 
-// TODO cache shaders
-// TODO path effects
 int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int area, RenderingContext* rc) {
 	RenderingRuleProperty* rColor;
 	RenderingRuleProperty* rStrokeW;
@@ -232,9 +252,8 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
 		}
 
 		if (pathEff.size() > 0) {
-			SkPathEffect* p = getDashEffect(pathEff.c_str());
+			SkPathEffect* p = getDashEffect(pathEff);
 			paint->setPathEffect(p);
-			p->unref();
 		} else {
 			paint->setPathEffect(NULL);
 		}
@@ -277,6 +296,27 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
 	return 1;
 }
 
+void drawPolylineShadow(SkCanvas* cv, SkPaint* paint, RenderingContext* rc, SkPath* path, int shadowColor,
+		int shadowRadius) {
+	// blurred shadows
+	if (rc->shadowRenderingMode == 2 && shadowRadius > 0) {
+		// simply draw shadow? difference from option 3 ?
+		// paint.setColor(shadowRadius);
+		// paint.setColor(0xffffffff);
+		paint->setLooper(new SkBlurDrawLooper(shadowRadius, 0, 0, shadowColor))->unref();
+		cv->drawPath(*path, *paint);
+	}
+
+	// option shadow = 3 with solid border
+	if (rc->shadowRenderingMode == 3 && shadowRadius > 0) {
+		paint->setLooper(NULL);
+		paint->setStrokeWidth(paint->getStrokeWidth() + shadowRadius * 2);
+		paint->setColor(0xffbababa);
+//			paint.setColor(shadowColor);
+		cv->drawPath(*path, *paint);
+	}
+}
+
  void drawPolyline(jobject binaryMapDataObject,	RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
  		RenderingContext* rc, jobject pair, int layer, int drawOnlyShadow)
  {
@@ -289,9 +329,8 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
 		return;
 	}
 	std::string tag = getStringField(pair, TagValuePair_tag);
-		std::string value = getStringField(pair, TagValuePair_value);
+	std::string value = getStringField(pair, TagValuePair_value);
 
-//	__android_log_print(ANDROID_LOG_WARN, "net.osmand", "About to search");
 	req->setInitialTagValueZoom(tag, value, rc->zoom);
 	req->setIntFilter(req->props()->R_LAYER, layer);
 	// TODO oneway
@@ -319,10 +358,9 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
 	}
 	if (i > 0) {
 		if (drawOnlyShadow) {
-			// TODO
-			//int shadowColor = render.getIntPropertyValue(render.ALL.R_SHADOW_COLOR);
-			//int shadowRadius = render.getIntPropertyValue(render.ALL.R_SHADOW_RADIUS);
-			//drawPolylineShadow(canvas, rc, path, shadowColor, shadowRadius);
+			int shadowColor = req->getIntPropertyValue(req->props()->R_SHADOW_COLOR);
+			int shadowRadius = req->getIntPropertyValue(req->props()->R_SHADOW_RADIUS);
+			drawPolylineShadow(cv, paint, rc, &path, shadowColor, shadowRadius);
 		} else {
 			cv->drawPath(path, *paint);
 			if (updatePaint(req, paint, 1, 0, rc)) {
@@ -593,6 +631,7 @@ void initLibrary(jobject rc)
    MultiPolygonClass = globalRef(env->FindClass( "net/osmand/osm/MultyPolygon"));
    MultiPolygon_getTag = env->GetMethodID( MultiPolygonClass, "getTag", "()Ljava/lang/String;" );
    MultiPolygon_getValue = env->GetMethodID( MultiPolygonClass, "getValue", "()Ljava/lang/String;" );
+   MultiPolygon_getLayer = env->GetMethodID( MultiPolygonClass, "getLayer", "()I" );
    MultiPolygon_getPoint31XTile =env->GetMethodID( MultiPolygonClass, "getPoint31XTile", "(II)I" );
    MultiPolygon_getPoint31YTile =env->GetMethodID( MultiPolygonClass, "getPoint31YTile", "(II)I" );
    MultiPolygon_getBoundsCount =env->GetMethodID( MultiPolygonClass, "getBoundsCount", "()I" );
@@ -665,52 +704,153 @@ void drawIconsOverCanvas(RenderingContext* rc, SkCanvas* canvas)
 				canvas->drawBitmap(*ico, icon.x - ico->width() / 2, icon.y - ico->height() / 2, &p);
 			}
 		}
-		// TODO check interrupted
-//		if (rc.interrupted) {
-//			return;
-//		}
+		if(rc->interrupted()){
+			return;
+		}
 	}
-
-
 }
 
+std::hash_map<int, std::vector<int> > sortObjectsByProperOrder(jobjectArray binaryMapDataObjects,
+			RenderingRuleSearchRequest* req, RenderingContext* rc) {
+	std::hash_map<int, std::vector<int> > orderMap;
+	if (req != NULL) {
+		req->clearState();
+		const size_t size = env->GetArrayLength(binaryMapDataObjects);
+		size_t i = 0;
+		for (; i < size; i++) {
+			uint sh = i << 8;
+			jobject binaryMapDataObject = (jobject) env->GetObjectArrayElement(binaryMapDataObjects, i);
+			if (env->IsInstanceOf(binaryMapDataObject, MultiPolygonClass)) {
+				int layer = env->CallIntMethod(binaryMapDataObject, MultiPolygon_getLayer);
+				std::string tag = getStringMethod(binaryMapDataObject, MultiPolygon_getTag);
+				std::string value = getStringMethod(binaryMapDataObject, MultiPolygon_getValue);
+
+				req->setTagValueZoomLayer(tag, value, rc->zoom, layer);
+				req->setIntFilter(req->props()->R_ORDER_TYPE, RenderingRulesStorage::POLYGON_RULES);
+				if (req->searchRule(RenderingRulesStorage::ORDER_RULES)) {
+					int order = req->getIntPropertyValue(req->props()->R_ORDER);
+					orderMap[order].push_back(sh);
+					if (req->getIntPropertyValue(req->props()->R_SHADOW_LEVEL) > 0) {
+						rc->shadowLevelMin = std::min(rc->shadowLevelMin, order);
+						rc->shadowLevelMax = std::max(rc->shadowLevelMax, order);
+						req->clearIntvalue(req->props()->R_SHADOW_LEVEL);
+					}
+				}
+			} else {
+				jintArray types = (jintArray) env->CallObjectMethod(binaryMapDataObject, BinaryMapDataObject_getTypes);
+				if (types != NULL) {
+					jint sizeTypes = env->GetArrayLength(types);
+					jint* els = env->GetIntArrayElements(types, NULL);
+					int j = 0;
+					for (; j < sizeTypes; j++) {
+						int wholeType = els[j];
+						int mask = wholeType & 3;
+						int layer = 0;
+						if (mask != 1) {
+							layer = getNegativeWayLayer(wholeType);
+						}
+						jobject pair = env->CallObjectMethod(binaryMapDataObject, BinaryMapDataObject_getTagValue, j);
+						if (pair != NULL) {
+							std::string tag = getStringField(pair, TagValuePair_tag);
+							std::string value = getStringField(pair, TagValuePair_value);
+							req->setTagValueZoomLayer(tag, value, rc->zoom, layer);
+							req->setIntFilter(req->props()->R_ORDER_TYPE, mask);
+							if (req->searchRule(RenderingRulesStorage::ORDER_RULES)) {
+								int order = req->getIntPropertyValue(req->props()->R_ORDER);
+								orderMap[order].push_back(sh + j);
+								if(req->getIntPropertyValue(req->props()->R_SHADOW_LEVEL) > 0) {
+									rc->shadowLevelMin = std::min(rc->shadowLevelMin, order);
+									rc->shadowLevelMax = std::max(rc->shadowLevelMax, order);
+									req->clearIntvalue(req->props()->R_SHADOW_LEVEL);
+								}
+							}
+							env->DeleteLocalRef(pair);
+						}
+					}
+					env->ReleaseIntArrayElements(types, els, JNI_ABORT);
+					env->DeleteLocalRef(types);
+
+				}
+			}
+			env->DeleteLocalRef(binaryMapDataObject);
+		}
+	}
+	return orderMap;
+}
+
+int objCount = 0;
+void objectDrawn(bool notify = false)
+{
+	if (objCount++ > 25) {
+		// TODO notification
+		//notifyListeners(notifyList);
+		objCount = 0;
+	}
+}
 
 void doRendering(jobjectArray binaryMapDataObjects, SkCanvas* canvas, SkPaint* paint,
 		RenderingRuleSearchRequest* req, RenderingContext* rc) {
-	const size_t size = env->GetArrayLength(binaryMapDataObjects);
 	// put in order map
-	// TODO
-//    TIntObjectHashMap < TIntArrayList > orderMap = sortObjectsByProperOrder(rc, objects, render);
-//	int objCount = 0;
-//
-//	int[] keys = orderMap.keys();
-//	Arrays.sort(keys);
-//
-//	boolean shadowDrawn = false;
-	size_t i = 0;
-	for (; i < size; i++) {
-		jobject binaryMapDataObject = (jobject) env->GetObjectArrayElement(binaryMapDataObjects, i);
-		if (env->IsInstanceOf(binaryMapDataObject, MultiPolygonClass)) {
-			drawObject(rc, binaryMapDataObject, canvas, req, paint, 0, 1, 0);
-		} else {
-			jintArray types = (jintArray) env->CallObjectMethod(binaryMapDataObject, BinaryMapDataObject_getTypes);
-			if (types != NULL) {
-				jint sizeTypes = env->GetArrayLength(types);
-				env->DeleteLocalRef(types);
-				int j = 0;
-				for (; j < sizeTypes; j++) {
-					drawObject(rc, binaryMapDataObject, canvas, req, paint, j, 1, 0);
+	std::hash_map<int, std::vector<int> > orderMap = sortObjectsByProperOrder(binaryMapDataObjects, req, rc);
+	std::set<int> keys;
+	std::hash_map<int, std::vector<int> >::iterator it = orderMap.begin();
+	while(it != orderMap.end())
+	{
+		keys.insert(it->first);
+		it++;
+	}
+	bool shadowDrawn = false;
+
+	for (std::set<int>::iterator ks = keys.begin(); ks != keys.end() ; ks++) {
+		if (!shadowDrawn && *ks >= rc->shadowLevelMin && *ks <= rc->shadowLevelMax &&
+				rc->shadowRenderingMode > 1) {
+			for (std::set<int>::iterator ki = ks; ki != keys.end() ; ki++) {
+				if (*ki > rc->shadowLevelMax || rc->interrupted()) {
+					break;
+				}
+				std::vector<int> list = orderMap[*ki];
+				for (std::vector<int>::iterator ls = list.begin(); ls != list.end(); ls++) {
+					int i = *ls;
+					int ind = i >> 8;
+					int l = i & 0xff;
+					jobject binaryMapDataObject = (jobject) env->GetObjectArrayElement(binaryMapDataObjects, ind);
+
+					// show text only for main type
+					drawObject(rc, binaryMapDataObject, canvas, req, paint, l, l == 0, true);
+					objectDrawn();
+					env->DeleteLocalRef(binaryMapDataObject);
 				}
 			}
+			shadowDrawn = true;
 		}
-		env->DeleteLocalRef(binaryMapDataObject);
+
+		std::vector<int> list = orderMap[*ks];
+		for (std::vector<int>::iterator ls = list.begin(); ls != list.end(); ls++) {
+			int i = *ls;
+			int ind = i >> 8;
+			int l = i & 0xff;
+
+			jobject binaryMapDataObject = (jobject) env->GetObjectArrayElement(binaryMapDataObjects, ind);
+
+			// show text only for main type
+			drawObject(rc, binaryMapDataObject, canvas, req, paint, l, l == 0, false);
+			objCount++;
+			env->DeleteLocalRef(binaryMapDataObject);
+			objectDrawn();
+
+		}
+		if (rc->interrupted()) {
+			return;
+		}
+
 	}
 
-//	long beforeIconTextTime = System.currentTimeMillis() - now;
-//	notifyListeners(notifyList);
+	objectDrawn(true);
 	drawIconsOverCanvas(rc, canvas);
 
-//	notifyListeners(notifyList);
+
+	objectDrawn(true);
+	// TODO text draw
 //	drawTextOverCanvas(rc, cv, useEnglishNames);
 
 
@@ -729,16 +869,17 @@ JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 	   initLibrary(renderingContext);
 	   initRenderingRules(env, renderingRuleSearchRequest);
 	}
-	RenderingRuleSearchRequest* req =  initSearchRequest(renderingRuleSearchRequest);
+
 	SkPaint* paint = new SkPaint;
 	paint->setAntiAlias(true);
 
 	SkBitmap* bmp = getNativeBitmap(bmpObj);
 	SkCanvas* canvas = new SkCanvas(*bmp);
-
 	sprintf(debugMessage, "Image w:%d h:%d !", bmp->width(), bmp->height());
 	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
 	canvas->drawColor(defaultColor);
+
+	RenderingRuleSearchRequest* req =  initSearchRequest(renderingRuleSearchRequest);
 
     RenderingContext rc;
     copyRenderingContext(renderingContext, &rc);

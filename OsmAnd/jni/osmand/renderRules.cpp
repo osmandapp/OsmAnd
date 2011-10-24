@@ -122,6 +122,11 @@ private:
 	std::hash_map<std::string,  RenderingRuleProperty*> propertyMap;
 
 public:
+    const static int POINT_RULES = 1;
+    const static int LINE_RULES = 2;
+    const static int POLYGON_RULES = 3;
+    const static int TEXT_RULES = 4;
+    const static int ORDER_RULES = 5;
 	RenderingRulesStorage(jobject storage) :
 			javaStorage(storage) {
 		tagValueGlobalRules = new std::hash_map<int, RenderingRule >[SIZE_STATES];
@@ -536,6 +541,14 @@ public :
 			values[p->id] = filter;
 		}
 	}
+
+	void clearIntvalue(RenderingRuleProperty* p) {
+		if (p != NULL) {
+			// assert !p->input;
+			values[p->id] = -1;
+		}
+	}
+
 	void setBooleanFilter(RenderingRuleProperty* p, bool filter) {
 		if (p != NULL) {
 			// assert p->input;
