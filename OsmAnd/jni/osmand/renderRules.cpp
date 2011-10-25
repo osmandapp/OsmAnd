@@ -1,3 +1,6 @@
+#ifndef _OSMAND_RENDER_RULES
+#define _OSMAND_RENDER_RULES
+
 #include <jni.h>
 #include <android/log.h>
 #include <iterator>
@@ -41,31 +44,32 @@ jfieldID RenderingRuleSearchRequest_savedFvalues;
 
 class RenderingRuleProperty
 {
-public :
+public:
 	int type;
 	bool input;
 	std::string attrName;
 	// order in
-	int id ;
+	int id;
 	RenderingRuleProperty(int type, bool input, std::string& name, int id) :
-		type(type), input(input), attrName(name), id(id)
-	{}
+			type(type), input(input), attrName(name), id(id) {
+	}
 
-	bool isFloat()
-	{
+	bool isFloat() {
 		return type == FLOAT_TYPE;
 	}
 
-	const static int TRUE_VALUE = 1;
-	const static int FALSE_VALUE = 0;
-private :
-   const static int INT_TYPE = 1;
-   const static int FLOAT_TYPE = 2;
-   const static int STRING_TYPE = 3;
-   const static int COLOR_TYPE = 4;
-   const static int BOOLEAN_TYPE = 5;
+
+private:
+	const static int INT_TYPE = 1;
+	const static int FLOAT_TYPE = 2;
+	const static int STRING_TYPE = 3;
+	const static int COLOR_TYPE = 4;
+	const static int BOOLEAN_TYPE = 5;
 
 };
+
+const static int TRUE_VALUE = 1;
+const static int FALSE_VALUE = 0;
 
 
 class RenderingRule
@@ -471,13 +475,18 @@ public:
 		clearState();
 	}
 
-public :
+public:
 
-
-	int getIntPropertyValue(RenderingRuleProperty* prop)
-	{
+	int getIntPropertyValue(RenderingRuleProperty* prop) {
 		if (prop == NULL) {
 			return 0;
+		}
+		return values[prop->id];
+	}
+
+	int getIntPropertyValue(RenderingRuleProperty* prop, int def) {
+		if (prop == NULL) {
+			return def;
 		}
 		return values[prop->id];
 	}
@@ -485,7 +494,7 @@ public :
 	std::string getStringPropertyValue(RenderingRuleProperty* prop)
 	{
 		if (prop == NULL) {
-			return "";
+			return EMPTY_STRING;
 		}
 		int s = values[prop->id];
 		return storage -> getDictionaryValue(s);
@@ -522,7 +531,7 @@ public :
 	void setBooleanFilter(RenderingRuleProperty* p, bool filter) {
 		if (p != NULL) {
 			// assert p->input;
-			values[p->id] = filter ? RenderingRuleProperty::TRUE_VALUE : RenderingRuleProperty::FALSE_VALUE;
+			values[p->id] = filter ? TRUE_VALUE : FALSE_VALUE;
 		}
 	}
 
@@ -646,11 +655,6 @@ public :
 };
 
 
-jclass globalRef(jobject o)
-{
-	return  (jclass) env->NewGlobalRef( o);
-}
-
 RenderingRuleSearchRequest* initSearchRequest(jobject renderingRuleSearchRequest)
 {
 	return new RenderingRuleSearchRequest(renderingRuleSearchRequest);
@@ -708,3 +712,4 @@ void unloadJniRenderRules() {
 
 
 
+#endif

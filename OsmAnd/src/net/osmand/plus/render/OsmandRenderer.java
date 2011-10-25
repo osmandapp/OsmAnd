@@ -144,6 +144,7 @@ public class OsmandRenderer {
 		int pointInsideCount = 0;
 		int visible = 0;
 		int allObjects = 0;
+		int textRenderingTime = 0;
 
 		// use to calculate points
 		PointF tempPoint = new PointF();
@@ -154,7 +155,7 @@ public class OsmandRenderer {
 		// int shadowRenderingMode = 1; // classic shadow (the implementaton in master)
 		// int shadowRenderingMode = 2; // blur shadow (most CPU, but still reasonable)
 		// int shadowRenderingMode = 3; solid border (CPU use like classic version or even smaller)
-		int shadowRenderingMode = 2;
+		int shadowRenderingMode = 3;
 		
 		// not expect any shadow
 		int shadowLevelMin = 256;
@@ -312,7 +313,7 @@ public class OsmandRenderer {
 					long time = System.currentTimeMillis() - now;
 					rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
 							+ "(%s points, %s points inside, %s objects visile from %s)\n" + res,//$NON-NLS-1$
-							time, 0, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
+							time, rc.textRenderingTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -1107,7 +1108,7 @@ public class OsmandRenderer {
 					text.fillProperties(render, middlePoint.x, middlePoint.y);
 					rc.textToDraw.add(text);
 				} else {
-					paintText.setTextSize(text.textSize);
+					paintText.setTextSize(render.getIntPropertyValue(render.ALL.R_TEXT_SIZE));
 					if (paintText.measureText(obj.getName()) < roadLength ) {
 						if (inverse) {
 							path.rewind();
@@ -1125,7 +1126,7 @@ public class OsmandRenderer {
 						text.fillProperties(render, xMid / 2, yMid / 2);
 						text.pathRotate = pathRotate;
 						text.drawOnPath = path;
-						float strokeWidth = render.getFloatPropertyValue(render.ALL.R_STROKE_WIDTH);
+						int strokeWidth = render.getIntPropertyValue(render.ALL.R_TEXT_SIZE);
 						text.vOffset = strokeWidth / 2 - 1;
 						rc.textToDraw.add(text);
 					}

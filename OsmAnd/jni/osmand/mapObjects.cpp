@@ -19,6 +19,7 @@ jclass BinaryMapDataObjectClass;
 jmethodID BinaryMapDataObject_getPointsLength;
 jmethodID BinaryMapDataObject_getPoint31YTile;
 jmethodID BinaryMapDataObject_getPoint31XTile;
+jmethodID BinaryMapDataObject_getHighwayAttributes;
 jmethodID BinaryMapDataObject_getTypes;
 jmethodID BinaryMapDataObject_getName;
 jmethodID BinaryMapDataObject_getTagValue;
@@ -58,6 +59,7 @@ public:
 	std::vector< int>  types;
 	std::vector< std::pair<int, int> >  points;
 	std::vector< std::pair<std::string, std::string> >  tagValues;
+	int highwayAttributes;
 };
 
 
@@ -120,6 +122,7 @@ std::vector <BaseMapDataObject* > marshalObjects(jobjectArray binaryMapDataObjec
 					o->points.push_back(std::pair<int, int>(tx, ty));
 				}
 				o->name = getStringMethod(binaryMapDataObject, BinaryMapDataObject_getName);
+				o->highwayAttributes = env->CallIntMethod(binaryMapDataObject, BinaryMapDataObject_getHighwayAttributes);
 				env->ReleaseIntArrayElements(types, els, JNI_ABORT);
 				env->DeleteLocalRef(types);
 				v.push_back((BaseMapDataObject* )o);
@@ -156,6 +159,7 @@ void loadJniMapObjects()
 	BinaryMapDataObject_getPointsLength = env->GetMethodID(BinaryMapDataObjectClass, "getPointsLength", "()I");
 	BinaryMapDataObject_getPoint31YTile = env->GetMethodID(BinaryMapDataObjectClass, "getPoint31YTile", "(I)I");
 	BinaryMapDataObject_getPoint31XTile = env->GetMethodID(BinaryMapDataObjectClass, "getPoint31XTile", "(I)I");
+	BinaryMapDataObject_getHighwayAttributes = env->GetMethodID(BinaryMapDataObjectClass, "getHighwayAttributes", "()I");
 	BinaryMapDataObject_getTypes = env->GetMethodID(BinaryMapDataObjectClass, "getTypes", "()[I");
 	BinaryMapDataObject_getName = env->GetMethodID(BinaryMapDataObjectClass, "getName", "()Ljava/lang/String;");
 	BinaryMapDataObject_getTagValue = env->GetMethodID(BinaryMapDataObjectClass, "getTagValue",

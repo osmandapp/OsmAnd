@@ -34,7 +34,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/jni \
     $(ANDROID_FOLDER)/frameworks/base/include
 
 
-LOCAL_SRC_FILES := osmand/rendering.cpp
+LOCAL_SRC_FILES := osmand/rendering.cpp 
 	
 	
 LOCAL_CFLAGS := -Wall -g

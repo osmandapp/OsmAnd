@@ -1,5 +1,5 @@
-
 #include <jni.h>
+#include <math.h>
 #include <android/log.h>
 #include <stdio.h>
 #include <vector>
@@ -19,74 +19,11 @@
 
 #include "common.cpp"
 #include "renderRules.cpp"
+#include "textdraw.cpp"
 #include "mapObjects.cpp"
 
 
-jclass RenderingContextClass;
-jfieldID RenderingContext_interrupted;
-
-jclass RenderingIconsClass;
-jmethodID RenderingIcons_getIcon;
-
-
-struct IconDrawInfo {
-	SkBitmap* bmp;
-	float x;
-	float y;
-};
-
 char debugMessage[1024];
-
-typedef struct RenderingContext {
-		jobject originalRC;
-		jobject androidContext;
-		
-		// TODO text
-		// List<TextDrawInfo> textToDraw = new ArrayList<TextDrawInfo>();
-		bool highResMode;
-		float mapTextSize ;
-		float density ;
-		std::vector<IconDrawInfo> iconsToDraw;
-
-		float leftX;
-		float topY;
-		int width;
-		int height;
-
-		int zoom;
-		float rotate;
-		float tileDivisor;
-
-		// debug purpose
-		int pointCount ;
-		int pointInsideCount;
-		int visible;
-		int allObjects;
-
-		// use to calculate points
-		float calcX;
-		float calcY;
-		
-		float cosRotateTileSize;
-		float sinRotateTileSize;
-		
-		int shadowRenderingMode;
-		
-		// not expect any shadow
-		int shadowLevelMin;
-		int shadowLevelMax;
-
-		bool interrupted() {
-			return env->GetBooleanField(originalRC, RenderingContext_interrupted);
-		}
-} RenderingContext;
-
-
-
-jfieldID getFid(jclass cls,const char* fieldName, const char* sig )
-{
-	return env->GetFieldID( cls, fieldName, sig);
-}
 
 
  void calcPoint(MapDataObject* mObj, jint ind, RenderingContext* rc) {
@@ -156,33 +93,7 @@ SkPathEffect* getDashEffect(std::string input){
 	return r;
 }
 
-SkBitmap* getNativeBitmap(jobject bmpObj){
-	if(bmpObj == NULL){
-		return NULL;
-	}
-	jclass bmpClass = env->GetObjectClass(bmpObj);
-	SkBitmap* bmp = (SkBitmap*)env->CallIntMethod(bmpObj, env->GetMethodID(bmpClass, "ni", "()I"));
-	env->DeleteLocalRef(bmpClass);
-	return bmp;
-}
 
-std::hash_map<std::string, SkBitmap*> cachedBitmaps;
-SkBitmap* getCachedBitmap(RenderingContext* rc, std::string js)
-{
-	if (cachedBitmaps.find(js) != cachedBitmaps.end()) {
-		return cachedBitmaps[js];
-	}
-	jstring jstr = env->NewStringUTF(js.c_str());
-	jobject bmp = env->CallStaticObjectMethod(RenderingIconsClass, RenderingIcons_getIcon, rc->androidContext, jstr);
-	SkBitmap* res = getNativeBitmap(bmp);
-	env->DeleteLocalRef(bmp);
-	env->DeleteLocalRef(jstr);
-	if(res != NULL){
-		res = new SkBitmap(*res);
-	}
-	cachedBitmaps[js] = res;
-	return res;
-}
 
 
 int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int area, RenderingContext* rc) {
@@ -275,13 +186,73 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
 	return 1;
 }
 
+void drawPointText(RenderingRuleSearchRequest* req, RenderingContext* rc, std::string tag, std::string value,
+		float xText, float yText, std::string name,
+		// line text properties
+		SkPath* path, float pathRotate, float roadLength, float xCenter, float yCenter,
+		SkPaint* paintText)
+{
+	if (name.at(0) == REF_CHAR) {
+		std::string ref = name.substr(1);
+		name = ""; //$NON-NLS-1$
+		for (uint k = 0; k < ref.length(); k++) {
+			if (ref.at(k) == REF_CHAR) {
+				if (k < ref.length() - 1) {
+					name = ref.substr(k + 1);
+				}
+				ref = ref.substr(0, k);
+				break;
+			}
+		}
+		if (ref.length() > 0) {
+			req->setInitialTagValueZoom(tag, value, rc->zoom);
+			req->setIntFilter(req->props()->R_TEXT_LENGTH, ref.length());
+			req->setBooleanFilter(req->props()->R_REF, true);
+			if (req->searchRule(RenderingRulesStorage::TEXT_RULES)) {
+				if (req->getIntPropertyValue(req->props()->R_TEXT_SIZE) > 0) {
+					TextDrawInfo* text = new TextDrawInfo(ref);
+					fillTextProperties(text, req, xText, yText);
+					rc->textToDraw.push_back(text);
+				}
+			}
+		}
+	}
+
+	req->setInitialTagValueZoom(tag, value, rc->zoom);
+	req->setIntFilter(req->props()->R_TEXT_LENGTH, name.length());
+	req->setBooleanFilter(req->props()->R_REF, false);
+	if (req->searchRule(RenderingRulesStorage::TEXT_RULES) &&
+			req->getIntPropertyValue(req->props()->R_TEXT_SIZE) > 0) {
+		if (path == NULL || req->getIntPropertyValue(req->props()->R_TEXT_ON_PATH, 0) == 0) {
+			TextDrawInfo* info = new TextDrawInfo(name);
+			fillTextProperties(info, req, xText, yText);
+			rc->textToDraw.push_back(info);
+		} else {
+			paintText->setTextSize(req->getIntPropertyValue(req->props()->R_TEXT_SIZE) > 0);
+			if (paintText->measureText(name.c_str(), name.size()) < roadLength) {
+				TextDrawInfo* text = new TextDrawInfo(name);
+				fillTextProperties(text, req, xCenter / 2, yCenter / 2);
+				text->pathRotate = pathRotate;
+				text->drawOnPath = new SkPath(*path);
+				int strokeWidth = req->getIntPropertyValue(req->props()->R_TEXT_SIZE);
+				text->vOffset = strokeWidth / 2 - 1;
+				rc->textToDraw.push_back(text);
+			}
+		}
+    }
+}
+
+void drawPointText(RenderingRuleSearchRequest* req, RenderingContext* rc, std::string tag, std::string value,
+		float xText, float yText, std::string name){
+	drawPointText(req, rc, tag, value, xText, yText, name, NULL, 0, 0, 0, 0, NULL);
+}
+
 void drawPolylineShadow(SkCanvas* cv, SkPaint* paint, RenderingContext* rc, SkPath* path, int shadowColor,
 		int shadowRadius) {
 	// blurred shadows
 	if (rc->shadowRenderingMode == 2 && shadowRadius > 0) {
 		// simply draw shadow? difference from option 3 ?
-		// paint.setColor(shadowRadius);
-		// paint.setColor(0xffffffff);
+		// paint->setColor(0xffffffff);
 		paint->setLooper(new SkBlurDrawLooper(shadowRadius, 0, 0, shadowColor))->unref();
 		cv->drawPath(*path, *paint);
 	}
@@ -291,14 +262,62 @@ void drawPolylineShadow(SkCanvas* cv, SkPaint* paint, RenderingContext* rc, SkPa
 		paint->setLooper(NULL);
 		paint->setStrokeWidth(paint->getStrokeWidth() + shadowRadius * 2);
 		paint->setColor(0xffbababa);
-//			paint.setColor(shadowColor);
+//		paint->setColor(shadowColor);
 		cv->drawPath(*path, *paint);
 	}
 }
 
- void drawPolyline(MapDataObject* mObj,	RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
- 		RenderingContext* rc, std::pair<std::string, std::string> pair, int layer, int drawOnlyShadow)
- {
+std::vector<SkPaint> oneWayPaints;
+SkPaint* oneWayPaint(){
+	SkPaint* oneWay = new SkPaint;
+	oneWay->setStyle(SkPaint::kStroke_Style);
+	oneWay->setColor(0xff6c70d5);
+	oneWay->setAntiAlias(true);
+	return oneWay;
+}
+void drawOneWayPaints(SkCanvas* cv, SkPath* p) {
+	if (oneWayPaints.size() == 0) {
+		SkPathEffect* arrowDashEffect1 = new SkDashPathEffect((float []){ 0, 12, 10, 152 }, 4, 0);
+		SkPathEffect* arrowDashEffect2 = new SkDashPathEffect((float[]){ 0, 12, 9, 153 }, 4, 1);
+		SkPathEffect* arrowDashEffect3 = new SkDashPathEffect((float[]){ 0, 18, 2, 154 }, 4, 1);
+		SkPathEffect* arrowDashEffect4 = new SkDashPathEffect((float[]){ 0, 18, 1, 155 }, 4, 1);
+
+		SkPaint* p = oneWayPaint();
+		p->setStrokeWidth(1);
+		p->setPathEffect(arrowDashEffect1)->unref();
+		oneWayPaints.push_back(*p);
+
+		p = oneWayPaint();
+		p->setStrokeWidth(2);
+		p->setPathEffect(arrowDashEffect2)->unref();
+		oneWayPaints.push_back(*p);
+
+		p = oneWayPaint();
+		p->setStrokeWidth(3);
+		p->setPathEffect(arrowDashEffect3)->unref();
+		oneWayPaints.push_back(*p);
+
+		p = oneWayPaint();
+		p->setStrokeWidth(4);
+		p->setPathEffect(arrowDashEffect4)->unref();
+		oneWayPaints.push_back(*p);
+	}
+
+	for (size_t i = 0; i < oneWayPaints.size(); i++) {
+		cv->drawPath(*p, oneWayPaints.at(i));
+	}
+}
+
+bool isOneWayWay(int highwayAttributes) {
+	return (highwayAttributes & 1) > 0;
+}
+
+bool isRoundabout(int highwayAttributes) {
+	return ((highwayAttributes >> 2) & 1) > 0;
+}
+
+void drawPolyline(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
+		RenderingContext* rc, std::pair<std::string, std::string> pair, int layer, int drawOnlyShadow) {
 	jint length = mObj->points.size();
 	if (length < 2) {
 		return;
@@ -308,28 +327,54 @@ void drawPolylineShadow(SkCanvas* cv, SkPaint* paint, RenderingContext* rc, SkPa
 
 	req->setInitialTagValueZoom(tag, value, rc->zoom);
 	req->setIntFilter(req->props()->R_LAYER, layer);
-	// TODO oneway
-	// int oneway = 0;
-	//if(rc -> zoom >= 16 && "highway".equals(pair.tag) && MapRenderingTypes.isOneWayWay(obj.getHighwayAttributes())){
-	//strcmp("highway") oneway = 1;
-	//}
+	bool oneway = false;
+	if (rc->zoom >= 16 && "highway" == pair.first && isOneWayWay(mObj->highwayAttributes)) {
+		oneway = true;
+	}
 
 	bool rendered = req->searchRule(2);
-	if (!rendered || !updatePaint(req,paint, 0, 0, rc)) {
+	if (!rendered || !updatePaint(req, paint, 0, 0, rc)) {
 		return;
 	}
 
 	rc->visible++;
-	SkPath path ;
+	SkPath path;
 	int i = 0;
-	// TODO calculate text
+	float pathRotate = 0;
+	float roadLength = 0;
+	bool inverse = false;
+	float xPrev = 0;
+	float yPrev = 0;
+	float xMid = 0;
+	float yMid = 0;
+	SkPoint middlePoint;
+	int middle = length / 2;
 	for (; i < length; i++) {
 		calcPoint(mObj, i, rc);
+		if(i == 0 || i == length -1){
+			xMid += rc->calcX;
+			yMid += rc->calcY;
+		}
 		if (i == 0) {
 			path.moveTo(rc->calcX, rc->calcY);
 		} else {
+			roadLength += std::sqrt((rc->calcX - xPrev) * (rc->calcX - xPrev) + (rc->calcY - yPrev) * (rc->calcY - yPrev));
+			if(i == middle){
+				middlePoint.set(rc->calcX, rc->calcY);
+				float rot = - std::atan2(rc->calcX - xPrev, rc->calcY - yPrev) * 180 / M_PI;
+				if (rot < 0) {
+					rot += 360;
+				}
+				if (rot < 180) {
+					rot += 180;
+					inverse = true;
+				}
+				pathRotate = (float) rot;
+			}
 			path.lineTo(rc->calcX, rc->calcY);
 		}
+		xPrev = rc->calcX;
+		yPrev = rc->calcY;
 	}
 	if (i > 0) {
 		if (drawOnlyShadow) {
@@ -344,17 +389,26 @@ void drawPolylineShadow(SkCanvas* cv, SkPaint* paint, RenderingContext* rc, SkPa
 					cv->drawPath(path, *paint);
 				}
 			}
-			// TODO oneway text
-//			if (oneway && !drawOnlyShadow) {
-//				Paint[] paints = getOneWayPaints();
-//				for (int i = 0; i < paints.length; i++) {
-//					canvas.drawPath(path, paints[i]);
-//				}
-//			}
-//			if (!drawOnlyShadow && obj.getName() != null && obj.getName().length() > 0) {
-//				calculatePolylineText(obj, render, rc, pair, path, pathRotate, roadLength, inverse, xMid, yMid,
-//						middlePoint);
-//			}
+			if (oneway && !drawOnlyShadow) {
+				drawOneWayPaints(cv, &path);
+			}
+			if (!drawOnlyShadow && mObj->name.length() > 0) {
+				if (inverse) {
+					path.rewind();
+					bool st = true;
+					for (i = length - 1; i >= 0; i--) {
+						calcPoint(mObj, i, rc);
+						if (st) {
+							st = false;
+							path.moveTo(rc->calcX, rc->calcY);
+						} else {
+							path.lineTo(rc->calcX, rc->calcY);
+						}
+					}
+				}
+				drawPointText(req, rc,pair.first, pair.second, middlePoint.fX, middlePoint.fY, mObj->name,
+						&path, pathRotate, roadLength, xMid, yMid, paint);
+			}
 		}
 	}
 }
@@ -391,11 +445,10 @@ void drawMultiPolygon(MultiPolygonObject* mapObject,RenderingRuleSearchRequest* 
 			}
 		}
 		if (cnt > 0) {
-			// TODO text
-			// String name = ((MultyPolygon) obj).getName(i);
-			// if (name != null) {
-			// drawPointText(render, rc, new TagValuePair(tag, value), xText / cnt, yText / cnt, name);
-			// }
+			std::string name = mapObject->names.at(i);
+			if (name.length() > 0) {
+				drawPointText(req, rc, mapObject->tag, mapObject->value, xText / cnt, yText / cnt, name);
+			}
 		}
 	}
 
@@ -407,6 +460,7 @@ void drawMultiPolygon(MultiPolygonObject* mapObject,RenderingRuleSearchRequest* 
 		cv->drawPath(path, *paint);
 	}
 }
+
 
 void drawPolygon(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
 		  		RenderingContext* rc, std::pair<std::string, std::string> pair) {
@@ -429,8 +483,6 @@ void drawPolygon(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas*
 	rc->visible++;
 	SkPath path;
 	int i = 0;
-	float px = 0;
-	float py = 0;
 	for (; i < length; i++) {
 		calcPoint(mObj, i, rc);
 		if (i == 0) {
@@ -438,20 +490,18 @@ void drawPolygon(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas*
 		} else {
 			path.lineTo(rc->calcX, rc->calcY);
 		}
-		xText += px;
-		yText += py;
+		xText += rc->calcX;
+		yText += rc->calcY;
 	}
 
 	cv->drawPath(path, *paint);
 	if (updatePaint(req, paint, 1, 0, rc)) {
 		cv->drawPath(path, *paint);
 	}
-	// TODO polygon text
-//			String name = obj.getName();
-//			if(name != null){
-//				drawPointText(render, rc, pair, xText / len, yText / len, name);
-//			}
-//		}
+	std::string name = mObj->name;
+	if (name.length() > 0) {
+		drawPointText(req, rc, tag, value, xText / length, yText / length, name);
+	}
 }
 
 void drawPoint(MapDataObject* mObj,	RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
@@ -464,12 +514,11 @@ void drawPoint(MapDataObject* mObj,	RenderingRuleSearchRequest* req, SkCanvas* c
 	req->searchRule(1);
 	std::string resId = req->getStringPropertyValue(req-> props()-> R_ICON);
 	SkBitmap* bmp = getCachedBitmap(rc, resId);
-	jstring name = NULL;
+	std::string name = EMPTY_STRING;
 	if (renderText) {
-		// TODO text
-//		name = obj.getName();
+		name = mObj->name;
 	}
-	if (!bmp && !name) {
+	if (!bmp && name.length() == 0) {
 		return;
 	}
 
@@ -496,9 +545,8 @@ void drawPoint(MapDataObject* mObj,	RenderingRuleSearchRequest* req, SkCanvas* c
 		ico.bmp = bmp;
 		rc->iconsToDraw.push_back(ico);
 	}
-	if (name != NULL) {
-		// TODO text
-//		drawPointText(render, rc, pair, px, py, name);
+	if (name.length() > 0) {
+		drawPointText(req, rc, tag, value, px, py, name);
 	}
 
 }
@@ -586,39 +634,21 @@ void mergeRenderingContext(jobject orc, RenderingContext* rc)
 	env->SetIntField( orc, getFid(RenderingContextClass, "pointInsideCount", "I" ) , rc->pointInsideCount);
 	env->SetIntField( orc, getFid(RenderingContextClass, "visible", "I" ) , rc->visible);
 	env->SetIntField( orc, getFid(RenderingContextClass, "allObjects", "I" ) , rc->allObjects);
+	env->SetIntField( orc, getFid(RenderingContextClass, "textRenderingTime", "I" ) , rc->textRendering);
 	env->DeleteLocalRef(rc->androidContext);
 
 }
 
-void loadLibrary(jobject rc)
-{
-
-   RenderingContextClass = globalRef(env->GetObjectClass( rc));
-   RenderingContext_interrupted = getFid( RenderingContextClass, "interrupted", "Z" );
-
-   RenderingIconsClass = globalRef(env->FindClass( "net/osmand/plus/render/RenderingIcons"));
-   RenderingIcons_getIcon = env->GetStaticMethodID(RenderingIconsClass, "getIcon","(Landroid/content/Context;Ljava/lang/String;)Landroid/graphics/Bitmap;");
-
-   loadJNIRenderingRules();
-   loadJniMapObjects();
-
+void loadLibrary(jobject rc) {
+	loadJniCommon(rc);
+	loadJNIRenderingRules();
+	loadJniMapObjects();
 }
 
-void unloadLibrary()
-{
-   env->DeleteGlobalRef( RenderingContextClass );
-   env->DeleteGlobalRef( RenderingIconsClass );
-
-   unloadJniRenderRules();
-   unloadJniMapObjects();
-}
-
-float getDensityValue(RenderingContext* rc, float val) {
-	if (rc -> highResMode && rc -> density > 1) {
-		return val * rc -> density * rc -> mapTextSize;
-	} else {
-		return val * rc -> mapTextSize;
-	}
+void unloadLibrary() {
+	unloadJniMapObjects();
+	unloadJniRenderRules();
+	unloadJniCommon();
 }
 
 
@@ -780,12 +810,14 @@ void doRendering(std::vector <BaseMapDataObject* > mapDataObjects, SkCanvas* can
 	objectDrawn(true);
 	drawIconsOverCanvas(rc, canvas);
 
-
+	struct timeval startInit;
+	struct timeval endInit;
+	gettimeofday(&startInit, NULL);
 	objectDrawn(true);
-	// TODO text
-//	drawTextOverCanvas(rc, cv, useEnglishNames);
+	drawTextOverCanvas(rc, canvas);
+	gettimeofday(&endInit, NULL);
 
-
+	rc->textRendering = (endInit.tv_sec * 1000 + endInit.tv_usec/1000) - (startInit.tv_sec * 1000 + startInit.tv_usec / 1000);
 }
 
 
