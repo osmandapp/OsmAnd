@@ -8,6 +8,10 @@ import android.graphics.Bitmap;
 
 public class NativeOsmandLibrary {
 	
+	static {
+		System.loadLibrary("osmand");
+	}
+	
 	public static native String generateRendering(RenderingContext rc, BinaryMapDataObject[] objects, Bitmap bmp, 
 			boolean useEnglishNames, RenderingRuleSearchRequest render, int defaultColor);
 	

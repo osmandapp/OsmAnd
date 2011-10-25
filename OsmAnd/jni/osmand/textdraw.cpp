@@ -16,6 +16,105 @@
 const char REF_CHAR = ((char)0x0019);
 const char DELIM_CHAR = ((char)0x0018);
 
+template <typename T> class quad_tree {
+private :
+	struct node {
+        typedef std::vector<T> cont_t;
+        cont_t data;
+		node* children[4];
+		SkRect bounds;
+
+		node(SkRect& b) : bounds(b) {
+            std::memset(children,0,4*sizeof(node*));
+		}
+
+		~node() {
+			for (int i = 0; i < 4; i++) {
+				if (children[i] != NULL) {
+					delete children[i];
+				}
+			}
+		}
+	};
+	typedef typename node::cont_t cont_t;
+	typedef typename cont_t::iterator node_data_iterator;
+	double ratio;
+	unsigned int max_depth;
+	node root;
+public:
+	quad_tree(SkRect& r, int depth=8, double ratio = 0.55) : ratio(ratio), max_depth(depth), root(r) {
+	}
+
+    void insert(T data, SkRect& box)
+    {
+        unsigned int depth=0;
+        do_insert_data(data, box, &root, depth);
+    }
+
+    void query_in_box(SkRect& box, std::vector<T>& result)
+    {
+        result.clear();
+        query_node(box, result, &root);
+    }
+
+private:
+
+    void query_node(SkRect& box, std::vector<T> & result, node* node) const {
+		if (node) {
+			if (box.intersect(node->bounds)) {
+				node_data_iterator i = node->data.begin();
+				node_data_iterator end = node->data.end();
+				while (i != end) {
+					result.push_back(*i);
+					++i;
+				}
+				for (int k = 0; k < 4; ++k) {
+					query_node(box, result, node->children[k]);
+				}
+			}
+		}
+	}
+
+
+    void do_insert_data(T data, SkRect& box, node * n, unsigned int& depth)
+    {
+        if (++depth >= max_depth) {
+			n->data.push_back(data);
+		} else {
+			SkRect& node_extent = n->bounds;
+			SkRect ext[4];
+			split_box(node_extent, ext);
+			for (int i = 0; i < 4; ++i) {
+				if (ext[i].contains(box)) {
+					if (!n->children[i]) {
+						n->children[i] = new node(ext[i]);
+					}
+					do_insert_data(data, box, n->children[i], depth);
+					return;
+				}
+			}
+			n->data.push_back(data);
+		}
+    }
+    void split_box(SkRect& node_extent,SkRect * ext)
+    {
+        //coord2d c=node_extent.center();
+
+    	float width=node_extent.width();
+    	float height=node_extent.height();
+
+        float lox=node_extent.fLeft;
+        float loy=node_extent.fTop;
+        float hix=node_extent.fRight;
+        float hiy=node_extent.fBottom;
+
+        ext[0]=SkRect::MakeLTRB(lox,loy,lox + width * ratio,loy + height * ratio);
+        ext[1]=SkRect::MakeLTRB(hix - width * ratio,loy,hix,loy + height * ratio);
+        ext[2]=SkRect::MakeLTRB(lox,hiy - height*ratio,lox + width * ratio,hiy);
+        ext[3]=SkRect::MakeLTRB(hix - width * ratio,hiy - height*ratio,hix,hiy);
+    }
+};
+
 
 
 void fillTextProperties(TextDrawInfo* info, RenderingRuleSearchRequest* render, float cx, float cy) {
@@ -31,7 +130,7 @@ void fillTextProperties(TextDrawInfo* info, RenderingRuleSearchRequest* render, 
 	info->bold = render->getIntPropertyValue(render->props()->R_TEXT_BOLD, 0) > 0;
 	info->minDistance = render->getIntPropertyValue(render->props()->R_TEXT_MIN_DISTANCE, 0);
 	info->shieldRes = render->getStringPropertyValue(render->props()->R_TEXT_SHIELD);
-	info->textOrder = render->getIntPropertyValue(render->props()->R_TEXT_ORDER, 20);
+	info->textOrder = render->getIntPropertyValue(render->props()->R_TEXT_ORDER, 100);
 }
 
 bool isLetterOrDigit(char c)
@@ -72,9 +171,22 @@ void drawWrappedText(SkCanvas* cv, TextDrawInfo* text, float textSize, SkPaint& 
 		while(pos < end) {
 			lastSpace = -1;
 			limit += text->textWrap;
-			while(pos < limit && pos < end) {
-				if(!isLetterOrDigit(text->text.at(pos))) {
-					lastSpace = pos;
+			// in UTF-8 all non ASCII characters has 2 or more characters
+			int symbolsRead = 0;
+			int utf8pos = pos;
+			while(symbolsRead < limit && pos < end) {
+				if(utf8pos == pos) {
+					if(text->text.at(pos) <= 128) {
+						symbolsRead++;
+						if(!isLetterOrDigit(text->text.at(pos))) {
+							lastSpace = pos;
+						}
+						utf8pos ++;
+					}
+				} else {
+					// here could be code to determine if UTF-8 is ended (currently only 2 chars)
+					symbolsRead++;
+					utf8pos = pos + 1;
 				}
 				pos++;
 			}
@@ -96,111 +208,51 @@ void drawWrappedText(SkCanvas* cv, TextDrawInfo* text, float textSize, SkPaint& 
 	}
 }
 
-const static bool findAllTextIntersections = true;
-bool findTextIntersection(RenderingContext* rc, std::vector<SkRect>& boundsNotPathIntersect,
-		std::vector<SkRect>&  boundsPathIntersect, /*Comparator<RectF> c, */TextDrawInfo* text,
-		SkPaint* paintText) {
-	bool horizontalWayDisplay = (text->pathRotate > 45 && text->pathRotate < 135)
-			|| (text->pathRotate > 225 && text->pathRotate < 315);
-	//text->minDistance = 0;
+std::vector<TextDrawInfo*> search;
+bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDrawInfo*>& boundIntersections, TextDrawInfo* text,
+		SkPaint* paintText, SkPaint* paintIcon) {
+	// TODO direction of path
+	//bool horizontalWayDisplay = (text->pathRotate > 45 && text->pathRotate < 135)
+	//		|| (text->pathRotate > 225 && text->pathRotate < 315);
+	paintText->measureText(text->text.c_str(), text->text.length(), &text->bounds);
+	text->bounds.inset(-getDensityValue(rc, 3), -getDensityValue(rc, 10));
+	text->bounds.offset(text->centerX, text->centerY);
+	text->bounds.offset(-text->bounds.width()/2, 0);
 
-	float textWidth = paintText->measureText(text->text.c_str(), text->text.length()) +
-			(!horizontalWayDisplay ? 0 : text->minDistance);
-	// Paint.ascent is negative, so negate it.
-	SkPaint::FontMetrics fm;
-	paintText->getFontMetrics(&fm);
-	int ascent = (int) std::ceil(-fm.fAscent);
-	int descent = (int) std::ceil(fm.fDescent);
-	float textHeight = ascent + descent + (horizontalWayDisplay ? 0 : text->minDistance) + getDensityValue(rc, 5);
-
-	SkRect bounds;
-	if (text->drawOnPath == NULL || horizontalWayDisplay) {
-		bounds.set(text->centerX - textWidth / 2, text->centerY - textHeight / 2, text->centerX + textWidth / 2,
-				text->centerY + textHeight / 2);
-	} else {
-		bounds.set(text->centerX - textHeight / 2, text->centerY - textWidth / 2, text->centerX + textHeight / 2,
-				text->centerY + textWidth / 2);
+	SkRect boundsSearch = text->bounds;
+	float v = -getDensityValue(rc, std::max(5.0f, text->minDistance));
+	boundsSearch.inset(v, v);
+	//TODO remove
+	// cv->drawRect(text->bounds, *paintIcon);
+	boundIntersections.query_in_box(boundsSearch, search);
+	for (uint i = 0; i < search.size(); i++) {
+		TextDrawInfo* t = search.at(i);
+		if (text->bounds.intersect(t->bounds)) {
+			return true;
+		} else if (boundsSearch.intersect(t->bounds) && t->text == text->text) {
+			return true;
+		}
 	}
-	std::vector< SkRect >* boundsIntersect =
-			text->drawOnPath == NULL || findAllTextIntersections ? &boundsNotPathIntersect : &boundsPathIntersect;
-	if (boundsIntersect->size()==0) {
-		boundsIntersect->push_back(bounds);
-	} else {
-		int diff = (int) (getDensityValue(rc, 3));
-		int diff2 = (int) (getDensityValue(rc, 15));
-		// implement binary search
-		// TODO binary search
-//		int index = Collections.binarySearch(boundsIntersect, bounds, c);
-//		if (index < 0) {
-//			index = -(index + 1);
-//		}
-		int index = 0;
-		// find sublist that is appropriate
-		uint e = index;
-		while (e < boundsIntersect->size()) {
-			if (boundsIntersect->at(e).fLeft < bounds.fRight) {
-				e++;
-			} else {
-				break;
-			}
-		}
-		int st = index - 1;
-		while (st >= 0) {
-			// that's not exact algorithm that replace comparison rect with each other
-			// because of that comparison that is not obvious
-			// (we store array sorted by left boundary, not by right) - that's euristic
-			if (boundsIntersect->at(st).fRight > bounds.fLeft) {
-				st--;
-			} else {
-				break;
-			}
-		}
-		if (st < 0) {
-			st = 0;
-		}
-		// test functionality
-		//cv.drawRect(bounds, paint);
-		//cv.drawText(text->text->substring(0, Math.min(5, text->text->length())), bounds.centerX(), bounds.centerY(), paint);
+	boundIntersections.insert(text, text->bounds);
 
-		for (uint j = st; j < e; j++) {
-			SkRect b = boundsIntersect->at(j);
-			float x = std::min(bounds.fRight, b.fRight) - std::max(b.fLeft, bounds.fLeft);
-			float y = std::min(bounds.fBottom, b.fBottom) - std::max(b.fTop, bounds.fTop);
-			if ((x > diff && y > diff2) || (x > diff2 && y > diff)) {
-				return true;
-			}
-		}
-		// TODO insert
-		// boundsIntersect->(index, bounds);
-	}
 	return false;
+}
+
+
+bool textOrder(TextDrawInfo* text1, TextDrawInfo* text2) {
+	return text1->textOrder < text2->textOrder;
 }
 
 SkTypeface* serif = SkTypeface::CreateFromName("Droid Serif", SkTypeface::kNormal);
 void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv) {
-		std::vector<SkRect> boundsNotPathIntersect;
-		std::vector<SkRect> boundsPathIntersect;
-		uint size = rc->textToDraw.size();
+	SkRect r = SkRect::MakeLTRB(0, 0, rc->width, rc->height);
+	r.inset(-100, -100);
+	quad_tree<TextDrawInfo*> boundsIntersect(r, 5, 0.7);
 
-		// TODO comparator !!!
-//	Comparator < SkRect > c = new Comparator<SkRect>()
-//	{
-//		int compare(SkRect object1, SkRect object2) {
-//			return Float.compare(object1.left, object2.left);
-//		}
-//
-//	};
-
-	// 1. Sort text using text order
-		// TODO sort !!!
-//	Collections.sort(rc.textToDraw, new Comparator<TextDrawInfo>() {
-//				@Override
-//			public int compare(TextDrawInfo object1, TextDrawInfo object2) {
-//					return object1.textOrder - object2.textOrder;
-//				}
-//			});
 	SkPaint paintIcon;
 	paintIcon.setStyle(SkPaint::kStroke_Style);
+	paintIcon.setStrokeWidth(1);
+	paintIcon.setColor(0xff000000);
 	SkPaint paintText;
 	paintText.setStyle(SkPaint::kFill_Style);
 	paintText.setStrokeWidth(1);
@@ -210,6 +262,9 @@ void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv) {
 	paintText.setAntiAlias(true);
 	SkPaint::FontMetrics fm;
 
+	// 1. Sort text using text order
+	std::sort(rc->textToDraw.begin(), rc->textToDraw.end(), textOrder);
+	uint size = rc->textToDraw.size();
 	for (uint i = 0; i < size; i++) {
 		TextDrawInfo* text = rc->textToDraw.at(i);
 		if (text->text.length() > 0) {
@@ -230,11 +285,8 @@ void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv) {
 			text->centerY += (-fm.fAscent);
 
 			// calculate if there is intersection
-			// bool intersects = findTextIntersection(rc, boundsNotPathIntersect, boundsPathIntersect, c, text);
-			// TODO
-			bool intersects = false;
+			bool intersects = findTextIntersection(cv, rc, boundsIntersect, text, &paintText, &paintIcon);
 			if (!intersects) {
-
 				if (text->drawOnPath != NULL) {
 					if (text->textShadow > 0) {
 						paintText.setColor(WHITE_COLOR);

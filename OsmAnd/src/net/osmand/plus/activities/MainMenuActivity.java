@@ -52,11 +52,6 @@ public class MainMenuActivity extends Activity {
 	
 	private ProgressDialog startProgressDialog;
 	
-	static {
-		System.loadLibrary("osmand");
-	}
-
-	
 	public void checkPreviousRunsForExceptions(boolean firstTime) {
 		long size = getPreferences(MODE_WORLD_READABLE).getLong(EXCEPTION_FILE_SIZE, 0);
 		final File file = OsmandSettings.getOsmandSettings(this).extendOsmandPath(OsmandApplication.EXCEPTION_PATH);

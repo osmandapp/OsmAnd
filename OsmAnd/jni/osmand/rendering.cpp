@@ -358,7 +358,8 @@ void drawPolyline(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas
 		if (i == 0) {
 			path.moveTo(rc->calcX, rc->calcY);
 		} else {
-			roadLength += std::sqrt((rc->calcX - xPrev) * (rc->calcX - xPrev) + (rc->calcY - yPrev) * (rc->calcY - yPrev));
+			roadLength += std::sqrt((rc->calcX - xPrev) * (rc->calcX - xPrev) +
+					(rc->calcY - yPrev) * (rc->calcY - yPrev));
 			if(i == middle){
 				middlePoint.set(rc->calcX, rc->calcY);
 				float rot = - std::atan2(rc->calcX - xPrev, rc->calcY - yPrev) * 180 / M_PI;

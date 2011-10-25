@@ -34,6 +34,7 @@ public :
 		drawOnPath = NULL;
 	}
 	SkPath* drawOnPath;
+	SkRect bounds;
 	float vOffset ;
 	float centerX;
 	float centerY;
