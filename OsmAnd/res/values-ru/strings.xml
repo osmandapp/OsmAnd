@@ -674,4 +674,29 @@
 	<string name="zoomOut">Уменьшить масштаб</string>
 	<string name="zoomIn">Увеличить масштаб</string>
 	<string name="zoomIs">Масштаб </string>
+
+	<string name="north">север</string>
+	<string name="north_north_east">северо-северо-восток</string>
+	<string name="north_east">северо-восток</string>
+	<string name="east_north_east">восток-северо-восток</string>
+	<string name="east">восток</string>
+	<string name="east_south_east">восток-юго-восток</string>
+	<string name="south_east">юго-восток</string>
+	<string name="south_south_east">юго-юго-восток</string>
+	<string name="south">юг</string>
+	<string name="south_south_west">юго-юго-запад</string>
+	<string name="south_west">юго-запад</string>
+	<string name="west_south_west">запад-юго-запад</string>
+	<string name="west">запад</string>
+	<string name="west_north_west">запад-северо-запад</string>
+	<string name="north_west">северо-запад</string>
+	<string name="north_north_west">северо-северо-запад</string>
+	<string name="oclock">ч.</string>
+	<string name="meters">м</string>
+	<string name="kilometers">км</string>
+	<string name="kilometers_per_hour">км/ч.</string>
+	<string name="towards">на</string>
+	<string name="accuracy">Точность</string>
+	<string name="altitude">Высота</string>
+	<string name="no_info">Нет информации</string>
 </resources>

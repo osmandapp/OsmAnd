@@ -6,6 +6,7 @@ import java.util.List;
 
 import net.osmand.access.AccessibleActivity;
 import net.osmand.access.AccessibleToast;
+import net.osmand.access.NavigationInfo;
 import net.osmand.Algoritms;
 import net.osmand.GPXUtilities;
 import net.osmand.LogUtil;
@@ -101,7 +102,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	private OsmandMapTileView mapView;
 	private MapActivityActions mapActions = new MapActivityActions(this);
 	private MapActivityLayers mapLayers = new MapActivityLayers(this);
-	
+	private NavigationInfo navigationInfo = new NavigationInfo(this);
+
 	private ImageButton backToLocation;
 	
 	private SavingTrackHelper savingTrackHelper;
@@ -631,6 +633,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
     	registerUnregisterSensor(location);
     	updateSpeedBearing(location);
     	mapLayers.getLocationLayer().setLastKnownLocation(location);
+    	navigationInfo.setLocation(location);
     	if(routingHelper.isFollowingMode()){
     		if(location == null || 
     				!location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
@@ -863,8 +866,13 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
-			if ((settings.getPointToNavigate() != null) && routingHelper.isRouteCalculated()) {
-				routingHelper.getVoiceRouter().announceCurrentDirection();
+			final LatLon point = settings.getPointToNavigate();
+			if (point != null) {
+				if (routingHelper.isRouteCalculated()) {
+					routingHelper.getVoiceRouter().announceCurrentDirection();
+				} else {
+					navigationInfo.show(point);
+				}
 			} else {
 				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 			}

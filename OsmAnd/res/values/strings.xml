@@ -736,4 +736,29 @@
 <string name="zoomOut">Zoom out</string>
 <string name="zoomIn">Zoom in</string>
 <string name="zoomIs">Zoom is</string>
+
+<string name="north">north</string>
+<string name="north_north_east">north-north-east</string>
+<string name="north_east">north-east</string>
+<string name="east_north_east">east-north-east</string>
+<string name="east">east</string>
+<string name="east_south_east">east-south-east</string>
+<string name="south_east">south-east</string>
+<string name="south_south_east">south-south-east</string>
+<string name="south">south</string>
+<string name="south_south_west">south-south-west</string>
+<string name="south_west">south-west</string>
+<string name="west_south_west">west-south-west</string>
+<string name="west">west</string>
+<string name="west_north_west">west-north-west</string>
+<string name="north_west">north-west</string>
+<string name="north_north_west">north-north-west</string>
+<string name="oclock">o\'clock</string>
+<string name="meters">m</string>
+<string name="kilometers">km</string>
+<string name="kilometers_per_hour">km/h</string>
+<string name="towards">towards</string>
+<string name="accuracy">Accuracy</string>
+<string name="altitude">Altitude</string>
+<string name="no_info">No info</string>
 </resources>
