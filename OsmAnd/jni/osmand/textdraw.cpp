@@ -208,26 +208,128 @@ void drawWrappedText(SkCanvas* cv, TextDrawInfo* text, float textSize, SkPaint& 
 	}
 }
 
+bool calculatePathToRotate(TextDrawInfo* p) {
+	// TODO rotate bounds for shields?
+	if (!p->drawOnPath || p->path == NULL) {
+		return true;
+	}
+	uint len = p->path->countPoints();
+	bool inverse = false;
+	float roadLength = 0;
+	SkPoint points[len];
+	p->path->getPoints(points, len);
+	// calculate vector of the road (px, py)
+	float px = 0;
+	float py = 0;
+	// TODO path outside (big zoom)
+	for (uint i = 0; i < len; i++) {
+		if (i > 0) {
+			roadLength += std::sqrt(
+					(points[i].fX - points[i - 1].fX) * (points[i].fX - points[i - 1].fX)
+							+ (points[i].fY - points[i - 1].fY) * (points[i].fY - points[i - 1].fY));
+			px += points[i].fX - points[i - 1].fX;
+			py += points[i].fY - points[i - 1].fY;
+		}
+
+	}
+	if (p->bounds.width() >= roadLength) {
+		return false;
+	}
+	float scale = 0.5f;
+	float plen = std::sqrt(px * px + py * py);
+	// vector ox,oy orthogonal to px,py to measure height
+	float ox = -py;
+	float oy = px;
+	if(plen > 0) {
+		float rot = std::atan2(py, px) * 180 / M_PI;
+		if (rot < 0) rot += 360;
+		if (rot > 90 && rot < 270) {
+			rot += 180;
+			inverse = true;
+		}
+		p->pathRotate = rot;
+		scale = (1 - p->bounds.width() / plen) / 2;
+		ox *= (p->bounds.height() / plen) / 2;
+		oy *= (p->bounds.height() / plen) / 2;
+	}
+
+
+	p->centerX = points[0].fX + scale * px + ox;
+	p->centerY = points[0].fY + scale * py + oy;
+	p->vOffset = p->textSize / 2 - 1;
+	// TODO ?
+	p->hOffset = 0;
+
+
+	if (inverse) {
+		SkPath* path = new SkPath;
+		for (int i = len - 1; i >= 0; i--) {
+			if (i == (int)(len - 1)) {
+				path->moveTo(points[i].fX, points[i].fY);
+			} else {
+				path->lineTo(points[i].fX, points[i].fY);
+			}
+		}
+		if (p->path != NULL) {
+			delete p->path;
+		}
+		p->path = path;
+	}
+	return true;
+}
+
+void drawTestBox(SkCanvas* cv, TextDrawInfo* text, SkPaint* paintIcon, SkPaint* paintText)
+{
+	cv->save();
+	cv->translate(text->bounds.centerX(),text->bounds.centerY());
+	cv->rotate(text->pathRotate);
+	SkRect r = SkRect::MakeLTRB(-text->bounds.width()/2, -text->bounds.height()/2,
+			text->bounds.width()/2, text->bounds.height()/2);
+	cv->drawRect(r, *paintIcon);
+	if (paintText != NULL) {
+		cv->drawText(text->text.data(), text->text.length(), r.centerX(), r.centerY(),
+				*paintText);
+	}
+	cv->restore();
+}
+
+bool intersect(TextDrawInfo* t, TextDrawInfo* s)
+{
+	// TODO rotation
+	return t->bounds.intersect(s->bounds);
+}
+
 std::vector<TextDrawInfo*> search;
 bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDrawInfo*>& boundIntersections, TextDrawInfo* text,
 		SkPaint* paintText, SkPaint* paintIcon) {
-	// TODO direction of path
-	//bool horizontalWayDisplay = (text->pathRotate > 45 && text->pathRotate < 135)
-	//		|| (text->pathRotate > 225 && text->pathRotate < 315);
 	paintText->measureText(text->text.c_str(), text->text.length(), &text->bounds);
+	// make wider
 	text->bounds.inset(-getDensityValue(rc, 3), -getDensityValue(rc, 10));
-	text->bounds.offset(text->centerX, text->centerY);
-	text->bounds.offset(-text->bounds.width()/2, 0);
+
+	bool display = calculatePathToRotate(text);
+	if (!display) {
+		return true;
+	}
+
+	if(!text->drawOnPath) {
+		text->bounds.offset(text->centerX, text->centerY);
+		// shift to match alignment
+		text->bounds.offset(-text->bounds.width()/2, 0);
+	} else {
+		text->bounds.offset(text->centerX - text->bounds.width()/2, text->centerY - text->bounds.height()/2);
+	}
+
 
 	SkRect boundsSearch = text->bounds;
 	float v = -getDensityValue(rc, std::max(5.0f, text->minDistance));
 	boundsSearch.inset(v, v);
+
 	//TODO remove
-	// cv->drawRect(text->bounds, *paintIcon);
+	drawTestBox(cv, text, paintIcon, paintText);
 	boundIntersections.query_in_box(boundsSearch, search);
 	for (uint i = 0; i < search.size(); i++) {
 		TextDrawInfo* t = search.at(i);
-		if (text->bounds.intersect(t->bounds)) {
+		if (intersect(text, t)) {
 			return true;
 		} else if (boundsSearch.intersect(t->bounds) && t->text == text->text) {
 			return true;
@@ -247,7 +349,7 @@ SkTypeface* serif = SkTypeface::CreateFromName("Droid Serif", SkTypeface::kNorma
 void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv) {
 	SkRect r = SkRect::MakeLTRB(0, 0, rc->width, rc->height);
 	r.inset(-100, -100);
-	quad_tree<TextDrawInfo*> boundsIntersect(r, 5, 0.7);
+	quad_tree<TextDrawInfo*> boundsIntersect(r, 4, 0.6);
 
 	SkPaint paintIcon;
 	paintIcon.setStyle(SkPaint::kStroke_Style);
@@ -287,20 +389,20 @@ void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv) {
 			// calculate if there is intersection
 			bool intersects = findTextIntersection(cv, rc, boundsIntersect, text, &paintText, &paintIcon);
 			if (!intersects) {
-				if (text->drawOnPath != NULL) {
+				if (text->drawOnPath && text->path != NULL) {
 					if (text->textShadow > 0) {
 						paintText.setColor(WHITE_COLOR);
 						paintText.setStyle(SkPaint::kStroke_Style);
 						paintText.setStrokeWidth(2 + text->textShadow);
-						cv->drawTextOnPathHV(text->text.c_str(), text->text.length(), *text->drawOnPath, 0,
+						cv->drawTextOnPathHV(text->text.c_str(), text->text.length(), *text->path, text->hOffset,
 								text->vOffset, paintText);
 						// reset
 						paintText.setStyle(SkPaint::kFill_Style);
 						paintText.setStrokeWidth(2);
 						paintText.setColor(text->textColor);
 					}
-					cv->drawTextOnPathHV(text->text.c_str(), text->text.length(), *text->drawOnPath, 0, text->vOffset,
-							paintText);
+					cv->drawTextOnPathHV(text->text.c_str(), text->text.length(), *text->path, text->hOffset,
+							text->vOffset, paintText);
 				} else {
 					if (text->shieldRes.length() > 0) {
 						SkBitmap* ico = getCachedBitmap(rc, text->shieldRes);

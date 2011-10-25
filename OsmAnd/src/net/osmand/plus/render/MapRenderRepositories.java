@@ -448,6 +448,9 @@ public class MapRenderRepositories {
 			renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, prefs.USE_ENGLISH_NAMES.get(), renderingReq,
 					notifyList, storage.getBgColor(nightMode), app.getSettings().NATIVE_RENDERING.get());
 			String renderingDebugInfo = currentRenderingContext.renderingDebugInfo;
+			if(currentRenderingContext != null) {
+				currentRenderingContext.ended = true;
+			}
 			if (checkWhetherInterrupted()) {
 				currentRenderingContext = null;
 				return;
@@ -488,7 +491,10 @@ public class MapRenderRepositories {
 					Toast.makeText(context, R.string.rendering_out_of_memory, Toast.LENGTH_SHORT).show();
 				}
 			});
-
+		} finally {
+			if(currentRenderingContext != null) {
+				currentRenderingContext.ended = true;
+			}
 		}
 
 	}

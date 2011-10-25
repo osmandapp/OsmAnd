@@ -42,6 +42,9 @@ import android.graphics.Paint.Align;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
 import android.graphics.Shader.TileMode;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
@@ -162,6 +165,8 @@ public class OsmandRenderer {
 		int shadowLevelMax = 0;
 
 		String renderingDebugInfo;
+		
+		boolean ended = false;
 	}
 
 	public OsmandRenderer(Context context) {
@@ -224,7 +229,7 @@ public class OsmandRenderer {
 
 
 	public Bitmap generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, boolean useEnglishNames,
-			RenderingRuleSearchRequest render, List<IMapDownloaderCallback> notifyList, int defaultColor, boolean nativeRendering) {
+			RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList, int defaultColor, boolean nativeRendering) {
 		long now = System.currentTimeMillis();
 
 		if (objects != null && !objects.isEmpty() && rc.width > 0 && rc.height > 0) {
@@ -309,7 +314,12 @@ public class OsmandRenderer {
 			} else {
 				BinaryMapDataObject[] array = objects.toArray(new BinaryMapDataObject[objects.size()]);
 				try {
+					if(Looper.getMainLooper() != null){
+						final Handler h = new Handler(Looper.getMainLooper());
+						notifyListenersWithDelay(rc, notifyList, h);
+					}
 					String res = NativeOsmandLibrary.generateRendering(rc, array, bmp, useEnglishNames, render, defaultColor);
+					rc.ended = true;
 					long time = System.currentTimeMillis() - now;
 					rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
 							+ "(%s points, %s points inside, %s objects visile from %s)\n" + res,//$NON-NLS-1$
@@ -321,6 +331,18 @@ public class OsmandRenderer {
 		}
 
 		return bmp;
+	}
+
+	private void notifyListenersWithDelay(final RenderingContext rc, final List<IMapDownloaderCallback> notifyList, final Handler h) {
+		h.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				if(!rc.ended) {
+					notifyListeners(notifyList);
+					notifyListenersWithDelay(rc, notifyList, h);
+				}
+			}
+		}, 700);
 	}
 
 	private void drawIconsOverCanvas(RenderingContext rc, Canvas cv) {

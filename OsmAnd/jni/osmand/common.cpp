@@ -31,14 +31,13 @@ public :
 
 	TextDrawInfo(std::string itext)  {
 		text = itext;
-		drawOnPath = NULL;
+		drawOnPath = false;
+		path = NULL;
+		pathRotate = 0;
 	}
-	SkPath* drawOnPath;
 	SkRect bounds;
-	float vOffset ;
 	float centerX;
 	float centerY;
-	float pathRotate;
 
 	float textSize ;
 	float minDistance ;
@@ -49,9 +48,15 @@ public :
 	std::string shieldRes;
 	int textOrder;
 
+	bool drawOnPath;
+	SkPath* path;
+	float pathRotate;
+	float vOffset ;
+	float hOffset ;
+
 	~TextDrawInfo() {
-		if (drawOnPath != NULL) {
-			delete drawOnPath;
+		if (path != NULL) {
+			delete path;
 		}
 	}
 };

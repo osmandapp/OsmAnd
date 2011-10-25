@@ -187,10 +187,7 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
 }
 
 void drawPointText(RenderingRuleSearchRequest* req, RenderingContext* rc, std::string tag, std::string value,
-		float xText, float yText, std::string name,
-		// line text properties
-		SkPath* path, float pathRotate, float roadLength, float xCenter, float yCenter,
-		SkPaint* paintText)
+		float xText, float yText, std::string name, SkPath* path)
 {
 	if (name.at(0) == REF_CHAR) {
 		std::string ref = name.substr(1);
@@ -223,29 +220,16 @@ void drawPointText(RenderingRuleSearchRequest* req, RenderingContext* rc, std::s
 	req->setBooleanFilter(req->props()->R_REF, false);
 	if (req->searchRule(RenderingRulesStorage::TEXT_RULES) &&
 			req->getIntPropertyValue(req->props()->R_TEXT_SIZE) > 0) {
-		if (path == NULL || req->getIntPropertyValue(req->props()->R_TEXT_ON_PATH, 0) == 0) {
-			TextDrawInfo* info = new TextDrawInfo(name);
-			fillTextProperties(info, req, xText, yText);
-			rc->textToDraw.push_back(info);
-		} else {
-			paintText->setTextSize(req->getIntPropertyValue(req->props()->R_TEXT_SIZE) > 0);
-			if (paintText->measureText(name.c_str(), name.size()) < roadLength) {
-				TextDrawInfo* text = new TextDrawInfo(name);
-				fillTextProperties(text, req, xCenter / 2, yCenter / 2);
-				text->pathRotate = pathRotate;
-				text->drawOnPath = new SkPath(*path);
-				int strokeWidth = req->getIntPropertyValue(req->props()->R_TEXT_SIZE);
-				text->vOffset = strokeWidth / 2 - 1;
-				rc->textToDraw.push_back(text);
-			}
+		TextDrawInfo* info = new TextDrawInfo(name);
+		info->drawOnPath = (path != NULL) && (req->getIntPropertyValue(req->props()->R_TEXT_ON_PATH, 0) > 0);
+		if (path != NULL) {
+			info->path = new SkPath(*path);
 		}
-    }
+		fillTextProperties(info, req, xText, yText);
+		rc->textToDraw.push_back(info);
+	}
 }
 
-void drawPointText(RenderingRuleSearchRequest* req, RenderingContext* rc, std::string tag, std::string value,
-		float xText, float yText, std::string name){
-	drawPointText(req, rc, tag, value, xText, yText, name, NULL, 0, 0, 0, 0, NULL);
-}
 
 void drawPolylineShadow(SkCanvas* cv, SkPaint* paint, RenderingContext* rc, SkPath* path, int shadowColor,
 		int shadowRadius) {
@@ -340,42 +324,18 @@ void drawPolyline(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas
 	rc->visible++;
 	SkPath path;
 	int i = 0;
-	float pathRotate = 0;
-	float roadLength = 0;
-	bool inverse = false;
-	float xPrev = 0;
-	float yPrev = 0;
-	float xMid = 0;
-	float yMid = 0;
 	SkPoint middlePoint;
 	int middle = length / 2;
 	for (; i < length; i++) {
 		calcPoint(mObj, i, rc);
-		if(i == 0 || i == length -1){
-			xMid += rc->calcX;
-			yMid += rc->calcY;
-		}
 		if (i == 0) {
 			path.moveTo(rc->calcX, rc->calcY);
 		} else {
-			roadLength += std::sqrt((rc->calcX - xPrev) * (rc->calcX - xPrev) +
-					(rc->calcY - yPrev) * (rc->calcY - yPrev));
 			if(i == middle){
 				middlePoint.set(rc->calcX, rc->calcY);
-				float rot = - std::atan2(rc->calcX - xPrev, rc->calcY - yPrev) * 180 / M_PI;
-				if (rot < 0) {
-					rot += 360;
-				}
-				if (rot < 180) {
-					rot += 180;
-					inverse = true;
-				}
-				pathRotate = (float) rot;
 			}
 			path.lineTo(rc->calcX, rc->calcY);
 		}
-		xPrev = rc->calcX;
-		yPrev = rc->calcY;
 	}
 	if (i > 0) {
 		if (drawOnlyShadow) {
@@ -394,21 +354,8 @@ void drawPolyline(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas
 				drawOneWayPaints(cv, &path);
 			}
 			if (!drawOnlyShadow && mObj->name.length() > 0) {
-				if (inverse) {
-					path.rewind();
-					bool st = true;
-					for (i = length - 1; i >= 0; i--) {
-						calcPoint(mObj, i, rc);
-						if (st) {
-							st = false;
-							path.moveTo(rc->calcX, rc->calcY);
-						} else {
-							path.lineTo(rc->calcX, rc->calcY);
-						}
-					}
-				}
 				drawPointText(req, rc,pair.first, pair.second, middlePoint.fX, middlePoint.fY, mObj->name,
-						&path, pathRotate, roadLength, xMid, yMid, paint);
+						&path);
 			}
 		}
 	}
@@ -448,7 +395,7 @@ void drawMultiPolygon(MultiPolygonObject* mapObject,RenderingRuleSearchRequest* 
 		if (cnt > 0) {
 			std::string name = mapObject->names.at(i);
 			if (name.length() > 0) {
-				drawPointText(req, rc, mapObject->tag, mapObject->value, xText / cnt, yText / cnt, name);
+				drawPointText(req, rc, mapObject->tag, mapObject->value, xText / cnt, yText / cnt, name, NULL);
 			}
 		}
 	}
@@ -501,7 +448,7 @@ void drawPolygon(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas*
 	}
 	std::string name = mObj->name;
 	if (name.length() > 0) {
-		drawPointText(req, rc, tag, value, xText / length, yText / length, name);
+		drawPointText(req, rc, tag, value, xText / length, yText / length, name, NULL);
 	}
 }
 
@@ -547,7 +494,7 @@ void drawPoint(MapDataObject* mObj,	RenderingRuleSearchRequest* req, SkCanvas* c
 		rc->iconsToDraw.push_back(ico);
 	}
 	if (name.length() > 0) {
-		drawPointText(req, rc, tag, value, px, py, name);
+		drawPointText(req, rc, tag, value, px, py, name, NULL);
 	}
 
 }
