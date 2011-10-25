@@ -208,32 +208,75 @@ void drawWrappedText(SkCanvas* cv, TextDrawInfo* text, float textSize, SkPaint& 
 	}
 }
 
-bool calculatePathToRotate(TextDrawInfo* p) {
+bool calculatePathToRotate(RenderingContext* rc, TextDrawInfo* p) {
 	// TODO rotate bounds for shields?
 	if (!p->drawOnPath || p->path == NULL) {
 		return true;
 	}
-	uint len = p->path->countPoints();
-	bool inverse = false;
-	float roadLength = 0;
+	int len = p->path->countPoints();
 	SkPoint points[len];
 	p->path->getPoints(points, len);
-	// calculate vector of the road (px, py)
-	float px = 0;
-	float py = 0;
-	// TODO path outside (big zoom)
-	for (uint i = 0; i < len; i++) {
+
+	bool inverse = false;
+	float roadLength = 0;
+	bool prevInside = false;
+	float visibleRoadLength = 0;
+	float textw = p->bounds.width();
+	int i;
+	int startVisible = 1;
+	for (i = 0; i < len; i++) {
+		bool inside = points[i].fX >= 0 && points[i].fX <= rc->width &&
+				points[i].fY >= 0 && points[i].fY <= rc->height;
 		if (i > 0) {
-			roadLength += std::sqrt(
+			float d = std::sqrt(
 					(points[i].fX - points[i - 1].fX) * (points[i].fX - points[i - 1].fX)
 							+ (points[i].fY - points[i - 1].fY) * (points[i].fY - points[i - 1].fY));
-			px += points[i].fX - points[i - 1].fX;
-			py += points[i].fY - points[i - 1].fY;
+			roadLength += d;
+			if(inside) {
+				visibleRoadLength += d;
+				if(!prevInside) {
+					startVisible = i - 1;
+				}
+			} else if(!prevInside) {
+				if(visibleRoadLength >= 1.5 * textw) {
+					break;
+				}
+				visibleRoadLength = 0;
+			}
 		}
-
+		prevInside = inside;
 	}
-	if (p->bounds.width() >= roadLength) {
+	if (textw >= roadLength) {
 		return false;
+	}
+	int startInd = 0;
+	int endInd = len;
+	if(textw < visibleRoadLength) {
+		startInd = startVisible - 1;
+		endInd = i;
+	}
+	// shrink path to display more text
+	if (startInd > 0 || endInd < len) {
+		// find subpath
+		SkPath* path = new SkPath;
+		for (int i = startInd; i < endInd; i++) {
+			if (i == startInd) {
+				path->moveTo(points[i].fX, points[i].fY);
+			} else {
+				path->lineTo(points[i].fX, points[i].fY);
+			}
+		}
+		if (p->path != NULL) {
+			delete p->path;
+		}
+		p->path = path;
+	}
+	// calculate vector of the road (px, py) to proper rotate it
+	float px = 0;
+	float py = 0;
+	for (i = startInd + 1; i < endInd; i++) {
+		px += points[i].fX - points[i - 1].fX;
+		py += points[i].fY - points[i - 1].fY;
 	}
 	float scale = 0.5f;
 	float plen = std::sqrt(px * px + py * py);
@@ -246,25 +289,23 @@ bool calculatePathToRotate(TextDrawInfo* p) {
 		if (rot > 90 && rot < 270) {
 			rot += 180;
 			inverse = true;
+			ox = -ox;
+			oy = -oy;
 		}
 		p->pathRotate = rot;
-		scale = (1 - p->bounds.width() / plen) / 2;
 		ox *= (p->bounds.height() / plen) / 2;
 		oy *= (p->bounds.height() / plen) / 2;
 	}
 
-
-	p->centerX = points[0].fX + scale * px + ox;
-	p->centerY = points[0].fY + scale * py + oy;
+	p->centerX = points[startInd].fX + scale * px + ox;
+	p->centerY = points[startInd].fY + scale * py + oy;
 	p->vOffset = p->textSize / 2 - 1;
-	// TODO ?
 	p->hOffset = 0;
-
 
 	if (inverse) {
 		SkPath* path = new SkPath;
-		for (int i = len - 1; i >= 0; i--) {
-			if (i == (int)(len - 1)) {
+		for (int i = endInd - 1; i >= startInd; i--) {
+			if (i == (int)(endInd - 1)) {
 				path->moveTo(points[i].fX, points[i].fY);
 			} else {
 				path->lineTo(points[i].fX, points[i].fY);
@@ -306,7 +347,7 @@ bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDraw
 	// make wider
 	text->bounds.inset(-getDensityValue(rc, 3), -getDensityValue(rc, 10));
 
-	bool display = calculatePathToRotate(text);
+	bool display = calculatePathToRotate(rc, text);
 	if (!display) {
 		return true;
 	}
@@ -324,8 +365,8 @@ bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDraw
 	float v = -getDensityValue(rc, std::max(5.0f, text->minDistance));
 	boundsSearch.inset(v, v);
 
-	//TODO remove
-	drawTestBox(cv, text, paintIcon, paintText);
+	// for text purposes
+//	drawTestBox(cv, text, paintIcon, paintText);
 	boundIntersections.query_in_box(boundsSearch, search);
 	for (uint i = 0; i < search.size(); i++) {
 		TextDrawInfo* t = search.at(i);
