@@ -1028,10 +1028,14 @@
 			<filter tag="highway" value="unclassified" />
 			<filter tag="highway" value="residential" />
 			<groupFilter shadowRadius="1" color="#ffffff" color_2="#ffffff" shadowColor="#464646">
-				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="3" /> 
-				<filter minzoom="13" maxzoom="13" strokeWidth="4" />
+				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="3">
+					<filter nightMode="true" color="#9F9F9F" color_2="#9F9F9F" shadowColor="#666666" /> 
+				</filter> 
+				<filter minzoom="13" maxzoom="13" strokeWidth="4">
+					<filter nightMode="true" color="#9F9F9F" color_2="#9F9F9F" shadowColor="#666666" />
+				</filter>
 				<!-- bridge --> 
-				<filter  layer="1" cap_2="SQUARE" cap="BUTT" shadowRadius="0">
+				<filter  layer="1" cap_2="SQUARE" color="#000000" cap="BUTT" shadowRadius="0">
 					<filter minzoom="14" maxzoom="14" strokeWidth="8" strokeWidth_2="6" />
 					<filter minzoom="15" maxzoom="15" strokeWidth="10" strokeWidth_2="8" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="12" strokeWidth_2="10" />
