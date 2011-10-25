@@ -523,6 +523,7 @@
     <string name="save_track_to_gpx_descrp">Сохранять путь в gpx формате в папку track</string>
     <string name="save_track_to_gpx">Мониторить</string>
     <string name="navigate_to">Идти к</string>
+    <string name="show_details">Подробности</string>
     <string name="update_tile">Обновить карту</string>
     <string name="reload_tile">Обновить часть карты</string>
     <string name="user_name_descr">Указать имя пользователя для работы с OSM</string>

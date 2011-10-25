@@ -575,6 +575,7 @@
     <string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
     <string name="save_track_to_gpx">Log track to GPX</string>
     <string name="navigate_to">Navigate to</string>
+    <string name="show_details">Show details</string>
     <string name="update_tile">Update map</string>
     <string name="reload_tile">Reload tile</string>
     <string name="user_name_descr">Your OSM user name</string>

@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.osm.LatLon;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.R;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -15,10 +15,10 @@ import android.location.Location;
 
 public class NavigationInfo {
 
-    private final MapActivity activity;
+    private final Activity activity;
     private Location currentLocation;
 
-    public NavigationInfo(final MapActivity activity) {
+    public NavigationInfo(final Activity activity) {
         this.activity = activity;
         currentLocation = null;
     }
@@ -50,12 +50,9 @@ public class NavigationInfo {
     }
 
     // Get distance and direction string for specified point
-    public String getDirection(final LatLon point) {
+    public String getDirection(Location point) {
         if ((currentLocation != null) && (point != null)) {
-            Location destination = new Location("map"); //$NON-NLS-1$
-            destination.setLatitude(point.getLatitude());
-            destination.setLongitude(point.getLongitude());
-            double distance = currentLocation.distanceTo(destination);
+            double distance = currentLocation.distanceTo(point);
             if (distance <1000.0)
                 distance = Math.rint(distance * 100.0) / 100.0;
             else
@@ -65,13 +62,23 @@ public class NavigationInfo {
             result += " " + activity.getString(R.string.towards) + " "; //$NON-NLS-1$ //$NON-NLS-2$
             if (currentLocation.hasBearing()) {
                 // clockwise direction
-                int clockwise = (int)Math.round((currentLocation.bearingTo(destination) - currentLocation.getBearing() + 360.0) / 30.0) % 12;
+                int clockwise = (int)Math.round((currentLocation.bearingTo(point) - currentLocation.getBearing() + 360.0) / 30.0) % 12;
                 result += String.valueOf((clockwise != 0) ? clockwise : 12) + " " + activity.getString(R.string.oclock); //$NON-NLS-1$
             } else {
                 // compass direction
-                result += getDirectionString(currentLocation.bearingTo(destination));
+                result += getDirectionString(currentLocation.bearingTo(point));
             }
             return result;
+        }
+        return null;
+    }
+
+    public String getDirection(final LatLon point) {
+        if (point != null) {
+            Location destination = new Location("map"); //$NON-NLS-1$
+            destination.setLatitude(point.getLatitude());
+            destination.setLongitude(point.getLongitude());
+            return getDirection(destination);
         }
         return null;
     }

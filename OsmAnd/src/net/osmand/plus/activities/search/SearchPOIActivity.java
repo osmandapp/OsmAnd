@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 import net.osmand.access.AccessibleToast;
+import net.osmand.access.NavigationInfo;
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
@@ -24,6 +25,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandApplication;
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -78,6 +80,8 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 	private static final int GPS_DIST_REQUEST = 5;
 	private static final int MIN_DISTANCE_TO_RESEARCH = 70;
 	private static final int MIN_DISTANCE_TO_UPDATE = 6;
+
+	private NavigationInfo navigationInfo = new NavigationInfo(this);
 
 
 	private Button searchPOILevel;
@@ -221,28 +225,31 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 				}
 				AlertDialog.Builder builder = new AlertDialog.Builder(SearchPOIActivity.this);
 				builder.setTitle(format);
-				builder.setItems(new String[]{getString(R.string.show_poi_on_map), getString(R.string.navigate_to)}, new DialogInterface.OnClickListener(){
+				builder.setItems(new String[]{getString(R.string.show_poi_on_map), getString(R.string.navigate_to),getString(R.string.show_details)}, new DialogInterface.OnClickListener(){
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						if(which == 0){
-							int z = settings.getLastKnownMapZoom();
-							String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.usingEnglishNames());
-							settings.setMapLocationToShow( 
-									amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 
-									Math.max(16, z), getString(R.string.poi)+" : " + poiSimpleFormat); //$NON-NLS-1$
-						} else if(which == 1){
-							LatLon l = amenity.getLocation();
-							String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.usingEnglishNames());
-							settings.setPointToNavigate(l.getLatitude(), l.getLongitude(), getString(R.string.poi)+" : " + poiSimpleFormat);
-						}
-						if(filter != null){
-							settings.setPoiFilterForMap(filter.getFilterId());
-							settings.SHOW_POI_OVER_MAP.set(true);
-						}
+						if(which == 2){
+							showPOIDetails(amenity, settings.USE_ENGLISH_NAMES.get());
+						} else {
+							if(which == 0){
+								int z = settings.getLastKnownMapZoom();
+								String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.usingEnglishNames());
+								settings.setMapLocationToShow( 
+										amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 
+										Math.max(16, z), getString(R.string.poi)+" : " + poiSimpleFormat); //$NON-NLS-1$
+							} else if(which == 1){
+								LatLon l = amenity.getLocation();
+								String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.usingEnglishNames());
+								settings.setPointToNavigate(l.getLatitude(), l.getLongitude(), getString(R.string.poi)+" : " + poiSimpleFormat);
+							}
+							if(filter != null){
+								settings.setPoiFilterForMap(filter.getFilterId());
+								settings.SHOW_POI_OVER_MAP.set(true);
+							}
 						
-						MapActivity.launchMapActivityMoveToTop(SearchPOIActivity.this);
-						
+							MapActivity.launchMapActivityMoveToTop(SearchPOIActivity.this);
+						}
 					}
 					
 				});
@@ -254,6 +261,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 	
 	public void setLocation(Location l){
 		registerUnregisterSensor(l);
+		navigationInfo.setLocation(l);
 		boolean handled = false;
 		if (l != null && filter != null) {
 			if (location == null) {
@@ -683,5 +691,31 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		}
 	}
 
+	public void showPOIDetails(Amenity amenity, boolean en) {
+		AlertDialog.Builder b = new AlertDialog.Builder(SearchPOIActivity.this);
+		b.setTitle(OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, en));
+		b.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		});
+		List<String> attributes = new ArrayList<String>();
+		String direction = navigationInfo.getDirection(amenity.getLocation());
+		if (direction != null)
+			attributes.add(direction);
+		if (amenity.getPhone() != null) 
+			attributes.add(getString(R.string.phone) + " " + amenity.getPhone());
+		if (amenity.getOpeningHours() != null)
+			attributes.add(getString(R.string.opening_hours) + " " + amenity.getOpeningHours());
+		attributes.add(getString(R.string.navigate_point_latitude) + " " + Double.toString(amenity.getLocation().getLatitude()));
+		attributes.add(getString(R.string.navigate_point_longitude) + " " + Double.toString(amenity.getLocation().getLongitude()));
+		b.setItems(attributes.toArray(new String[attributes.size()]),
+			new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+				}
+			});
+		b.show();
+	}
 
 }
