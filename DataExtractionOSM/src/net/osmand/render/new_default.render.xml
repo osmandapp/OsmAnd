@@ -55,7 +55,8 @@
 		type="boolean" possibleValues=""/>
 	<renderingProperty attr="appMode" name="Rendering mode" description="Default renderer: Adjust rendering for specific purpose"
 		type="string" possibleValues="default,car,bicycle,pedestrian"/>	
-		
+
+
 	<!-- input exact layer, orderType check tag, value -->
 	<!-- point = 1, line = 2, polygon = 3 -->
 	<order>
@@ -107,7 +108,10 @@
 				<filter tag="highway" value="track" order="50" />
 				<filter tag="highway" value="path" order="48" />
 				<filter tag="highway" value="living_street" order="47" />
-				<groupFilter minzoom="14" shadowLevel="1"/>
+				<groupFilter>
+					 <filter minzoom="14" shadowLevel="1"/>
+					 <filter hmRendered="true" shadowLevel="1"/>
+				</groupfilter>
 			</group>
 
 			<group>
@@ -117,7 +121,10 @@
 				<filter tag="highway" value="trunk_link" order="43" />
 				<filter tag="highway" value="primary_link" order="42"/>
 				<filter tag="highway" value="secondary_link" order="41"/>
-				<groupFilter minzoom="15" shadowLevel="1"/>
+				<groupFilter>
+					 <filter minzoom="15" shadowLevel="1"/>
+					 <filter hmRendered="true" shadowLevel="1"/>
+				</groupfilter>
 			</group>
 
 			<filter appMode="pedestrian" tag="highway" value="pedestrian" order="60" />
@@ -146,7 +153,6 @@
 		<filter tag="" value="" layer="-1" order="10" orderType="2"/>
 		<filter tag="" value="" layer="1" order="67" orderType="2"/>
 		<filter tag="" value="" order="11" orderType="2"/>
-		
 	</order>
 
 
@@ -470,6 +476,7 @@
 		</group>
 	</text>
 
+
 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
 	<point>
 		<filter minzoom="13" icon="highway_ford" tag="highway" value="ford" />
@@ -650,6 +657,7 @@
 		<filter minzoom="4" tag="place" icon="city" value="city" />
 		<filter minzoom="6" tag="place" icon="city" value="town" />
 	</point>
+
 
 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
 	<polygon>
