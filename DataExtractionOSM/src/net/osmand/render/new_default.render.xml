@@ -135,7 +135,7 @@
 			<filter tag="highway" value="steps" order="36" />
 			<filter tag="highway" value="bridleway" order="35" />
 			
-			<filter tag="countour" order="15" />
+			<filter tag="contour" value="" order="15" />
 		</group>
 		
 		<filter tag="" value="" order="128" orderType="1"/>
@@ -293,7 +293,7 @@
 		<filter minzoom="6" textSize="12" textColor="#6699cc" textWrapWidth="20" tag="natural" value="water" textOrder="10"/>
 		<filter minzoom="6" textSize="12" textColor="#6699cc" textWrapWidth="20" tag="natural" value="lake" textOrder="10"/>
 		<filter minzoom="13" textSize="12" textColor="#ff000000" textWrapWidth="10" tag="natural" value="wood" textOrder="10"/>
-		<filter minzoom="14" maxzoom="16" textSize="12" textOnPath="true" tag="contour"/>
+		<filter minzoom="14" maxzoom="16" textSize="12" textOnPath="true" tag="contour" value=""/>
 		
 		<filter minzoom="13" textSize="12" textColor="#6699cc" textOnPath="true" tag="waterway" value="stream" textOrder="15"/>
 		<filter minzoom="11" textSize="12" textColor="#6699cc" textOnPath="true" textMinDistance="80" tag="waterway" value="river" textOrder="10"/>
