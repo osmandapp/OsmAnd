@@ -109,9 +109,9 @@
 				<filter tag="highway" value="path" order="48" />
 				<filter tag="highway" value="living_street" order="47" />
 				<groupFilter>
-					 <filter minzoom="14" shadowLevel="1"/>
-					 <filter hmRendered="true" shadowLevel="1"/>
-				</groupfilter>
+					 <filter minzoom="14" shadowLevel="1" />
+					 <filter hmRendered="true" shadowLevel="1" />
+				</groupFilter>
 			</group>
 
 			<group>
@@ -122,9 +122,9 @@
 				<filter tag="highway" value="primary_link" order="42"/>
 				<filter tag="highway" value="secondary_link" order="41"/>
 				<groupFilter>
-					 <filter minzoom="15" shadowLevel="1"/>
-					 <filter hmRendered="true" shadowLevel="1"/>
-				</groupfilter>
+					 <filter minzoom="15" shadowLevel="1" />
+					 <filter hmRendered="true" shadowLevel="1" />
+				</groupFilter>
 			</group>
 
 			<filter appMode="pedestrian" tag="highway" value="pedestrian" order="60" />
