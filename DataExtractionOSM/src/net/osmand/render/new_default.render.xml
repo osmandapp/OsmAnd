@@ -92,6 +92,7 @@
 			<filter tag="power" value="" order="68" />
 			<filter tag="administrative" value="" order="62" />
 			<filter tag="waterway" value="" order="18" />
+			<filter tag="countour" order="15" />
 
 			<filter tag="highway" value="motorway" order="57" shadowLevel="1"/>
 			<filter tag="highway" value="trunk" order="56" shadowLevel="1"/>
@@ -441,6 +442,7 @@
 		<filter minzoom="3" textSize="14" textColor="#9d6c9d" textWrapWidth="20" tag="place" value="country" />
 		<filter minzoom="4" textSize="14" textColor="#9d6c9d" textWrapWidth="20" tag="place" value="state" />
 		<filter minzoom="4" textSize="14" textColor="#9d6c9d" textWrapWidth="20" tag="place" value="region" />
+		<filter minzoom="13" maxzoom="16" textSize="12" textOnPath="true" tag="contour"/>
 
 		<group textColor="#000000">
 			<filter minzoom="4" textSize="20" textDy="1" textBold="true" textWrapWidth="20" tag="place" value="city" textOrder="4"/>
@@ -1347,6 +1349,8 @@
 		<filter minzoom="17" color="#800080" strokeWidth="2" pathEffect="3_2" tag="admin_level" value="10" />
 		<filter minzoom="7" maxzoom="9" color="#a009dd09" strokeWidth="1.5" pathEffect="4_2" tag="boundary" value="national_park" />
 		<filter minzoom="10" color="#a009dd09" strokeWidth="3" pathEffect="6_2" tag="boundary" value="national_park" />
+		<!-- elevation lines -->
+		<filter minzoom="13" color="#ff4900" strokeWidth="1" tag="contour" value="elevation" />
 	</line>
 	
 </renderingStyle>
