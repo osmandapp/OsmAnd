@@ -99,20 +99,27 @@
 			<filter tag="highway" value="primary" order="55" shadowLevel="1"/>
 			<filter tag="highway" value="secondary" order="54" shadowLevel="1"/>
 			<filter tag="highway" value="tertiary" order="53" shadowLevel="1"/>
-			<filter tag="highway" value="road" order="51" shadowLevel="1"/>
-			<filter tag="highway" value="unclassified" order="51" shadowLevel="1"/>
-			<filter tag="highway" value="residential" order="52" shadowLevel="1"/>
-			<filter tag="highway" value="service" order="52" shadowLevel="1"/>
-			<filter tag="highway" value="living_street" order="47" shadowLevel="1"/>
-			<filter tag="highway" value="track" order="50" shadowLevel="1"/>
-			<filter tag="highway" value="path" order="48" shadowLevel="1"/>
+			
+			<group>
+				<filter tag="highway" value="residential" order="52" />
+				<filter tag="highway" value="service" order="52" />
+				<filter tag="highway" value="road" order="51" />
+				<filter tag="highway" value="unclassified" order="51" />
+				<filter tag="highway" value="track" order="50" />
+				<filter tag="highway" value="path" order="48" />
+				<filter tag="highway" value="living_street" order="47" />
+				<groupFilter minzoom="14" shadowLevel="1"/>
+			</group>
 
-			<filter tag="highway" value="construction" order="46" shadowLevel="1"/>
-			<filter tag="highway" value="proposed" order="45" shadowLevel="1"/>
-			<filter tag="highway" value="motorway_link" order="44" shadowLevel="1"/>
-			<filter tag="highway" value="trunk_link" order="43" shadowLevel="1"/>
-			<filter tag="highway" value="primary_link" order="42" shadowLevel="1"/>
-			<filter tag="highway" value="secondary_link" order="41" shadowLevel="1"/>
+			<group>
+				<filter tag="highway" value="construction" order="46" />
+				<filter tag="highway" value="proposed" order="45" />
+				<filter tag="highway" value="motorway_link" order="44"/>
+				<filter tag="highway" value="trunk_link" order="43" />
+				<filter tag="highway" value="primary_link" order="42"/>
+				<filter tag="highway" value="secondary_link" order="41"/>
+				<groupFilter minzoom="15" shadowLevel="1"/>
+			</group>
 
 			<filter appMode="pedestrian" tag="highway" value="pedestrian" order="60" />
 			<filter appMode="pedestrian" tag="highway" value="cycleway" order="45" />
@@ -143,11 +150,11 @@
 	</order>
 
 
-	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom], textLength, ref, textOrder (default=20) -->
+	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom], textLength, ref, textOrder (default=100) -->
 	<text>
 		<!-- Highway ref -->
-		<filter minzoom="10" tag="highway" value="motorway" ref="true" textMinDistance="70" textColor="#ffffff" textSize="12" textBold="true"
-				textOrder="6">
+		<filter minzoom="10" tag="highway" value="motorway" ref="true" textMinDistance="150" textColor="#ffffff" textSize="12" textBold="true"
+				textOrder="7">
 			<filter textLength="1" textShield="mot_shield1" />
 			<filter textLength="2" textShield="mot_shield2" />
 			<filter textLength="3" textShield="mot_shield3" />
@@ -156,8 +163,8 @@
 			<filter textLength="6" textShield="mot_shield6" />
 		</filter>
 
-		<filter minzoom="10" tag="highway" value="trunk" ref="true" textMinDistance="70" textColor="#ffffff" textSize="12" textBold="true"
-				textOrder="6">
+		<filter minzoom="10" tag="highway" value="trunk" ref="true" textMinDistance="150" textColor="#ffffff" textSize="12" textBold="true"
+				textOrder="7">
 			<filter textLength="1" textShield="tru_shield1" />
 			<filter textLength="2" textShield="tru_shield2" />
 			<filter textLength="3" textShield="tru_shield3" />
@@ -166,8 +173,8 @@
 			<filter textLength="6" textShield="tru_shield6" />
 		</filter>
 
-		<filter minzoom="11" tag="highway" value="primary" ref="true" textMinDistance="70" textColor="#ffffff" textSize="12" 
-				textBold="true" textOrder="7">
+		<filter minzoom="11" tag="highway" value="primary" ref="true" textMinDistance="150" textColor="#ffffff" textSize="12" 
+				textBold="true" textOrder="8">
 			<filter textLength="1" textShield="pri_shield1" />
 			<filter textLength="2" textShield="pri_shield2" />
 			<filter textLength="3" textShield="pri_shield3" />
@@ -176,8 +183,8 @@
 			<filter textLength="6" textShield="pri_shield6" />
 		</filter>
 
-		<filter minzoom="13" tag="highway" value="secondary" ref="true" textMinDistance="70" textColor="#ffffff" textSize="12" 
-				textBold="true" textOrder="8">
+		<filter minzoom="13" tag="highway" value="secondary" ref="true" textMinDistance="150" textColor="#ffffff" textSize="12" 
+				textBold="true" textOrder="9">
 			<filter textLength="1" textShield="sec_shield1" />
 			<filter textLength="2" textShield="sec_shield2" />
 			<filter textLength="3" textShield="sec_shield3" />
@@ -186,8 +193,8 @@
 			<filter textLength="6" textShield="sec_shield6" />
 		</filter>
 
-		<filter minzoom="14" tag="highway" value="tertiary" ref="true" textMinDistance="70" textColor="#ffffff" textSize="12" 
-				textBold="true" textOrder="9">
+		<filter minzoom="14" tag="highway" value="tertiary" ref="true" textMinDistance="150" textColor="#ffffff" textSize="12" 
+				textBold="true" textOrder="10">
 			<filter textLength="1" textShield="ter_shield1" />
 			<filter textLength="2" textShield="ter_shield2" />
 			<filter textLength="3" textShield="ter_shield3" />
@@ -290,12 +297,12 @@
 		<filter minzoom="13" textSize="12" textColor="#ff000000" textWrapWidth="10" tag="natural" value="wood" textOrder="10"/>
 
 		<filter minzoom="13" textSize="12" textColor="#6699cc" textOnPath="true" tag="waterway" value="stream" textOrder="15"/>
-		<filter minzoom="11" textSize="12" textColor="#6699cc" textOnPath="true" textMinDistance="70" tag="waterway" value="river" textOrder="10"/>
-		<filter minzoom="13" textSize="12" textColor="#6699cc" textOnPath="true" textMinDistance="70" tag="waterway" value="canal" textOrder="10"/>
+		<filter minzoom="11" textSize="12" textColor="#6699cc" textOnPath="true" textMinDistance="80" tag="waterway" value="river" textOrder="10"/>
+		<filter minzoom="13" textSize="12" textColor="#6699cc" textOnPath="true" textMinDistance="80" tag="waterway" value="canal" textOrder="10"/>
 		<filter minzoom="15" textSize="12" textColor="#6699cc" textOnPath="true" tag="waterway" value="ditch" textOrder="15"/>
 		<filter minzoom="15" textSize="12" textColor="#6699cc" textOnPath="true" tag="waterway" value="drain" textOrder="15"/>
-		<filter minzoom="15" textSize="12" textColor="#0066ff" textDy="7" textWrapWidth="70" tag="waterway" value="lock_gate" textOrder="15"/>
-		<filter minzoom="15" textSize="12" textColor="#0066ff" textDy="7" textWrapWidth="70" tag="waterway" value="lock" textOrder="15"/>
+		<filter minzoom="15" textSize="12" textColor="#0066ff" textDy="7" textWrapWidth="30" tag="waterway" value="lock_gate" textOrder="15"/>
+		<filter minzoom="15" textSize="12" textColor="#0066ff" textDy="7" textWrapWidth="30" tag="waterway" value="lock" textOrder="15"/>
 		<filter minzoom="15" textSize="12" tag="waterway" value="dam" textOrder="15"/>
 
 		<filter minzoom="16" textSize="12" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="historic" value="memorial" textColor="#654321">

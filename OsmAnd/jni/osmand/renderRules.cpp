@@ -485,7 +485,7 @@ public:
 	}
 
 	int getIntPropertyValue(RenderingRuleProperty* prop, int def) {
-		if (prop == NULL) {
+		if (prop == NULL || values[prop->id] == -1) {
 			return def;
 		}
 		return values[prop->id];

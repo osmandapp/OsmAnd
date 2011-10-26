@@ -90,7 +90,7 @@ public class OsmandRenderer {
 		int textWrap = 0;
 		boolean bold = false;
 		String shieldRes = null;
-		int textOrder = 20;
+		int textOrder = 100;
 		
 		public void fillProperties(RenderingRuleSearchRequest render, float centerX, float centerY){
 			this.centerX = centerX;
@@ -107,7 +107,7 @@ public class OsmandRenderer {
 			if(render.isSpecified(render.ALL.R_TEXT_SHIELD)) {
 				shieldRes = render.getStringPropertyValue(render.ALL.R_TEXT_SHIELD);
 			}
-			textOrder = render.getIntPropertyValue(render.ALL.R_TEXT_ORDER, 20);
+			textOrder = render.getIntPropertyValue(render.ALL.R_TEXT_ORDER, 100);
 		}
 	}
 

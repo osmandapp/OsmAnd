@@ -22,6 +22,7 @@
 #include "textdraw.cpp"
 #include "mapObjects.cpp"
 
+#define NAT_COUNT(rc, op) rc->nativeOperations.pause(); op; rc->nativeOperations.start()
 
 char debugMessage[1024];
 
@@ -238,7 +239,7 @@ void drawPolylineShadow(SkCanvas* cv, SkPaint* paint, RenderingContext* rc, SkPa
 		// simply draw shadow? difference from option 3 ?
 		// paint->setColor(0xffffffff);
 		paint->setLooper(new SkBlurDrawLooper(shadowRadius, 0, 0, shadowColor))->unref();
-		cv->drawPath(*path, *paint);
+		NAT_COUNT(rc, cv->drawPath(*path, *paint));
 	}
 
 	// option shadow = 3 with solid border
@@ -247,7 +248,7 @@ void drawPolylineShadow(SkCanvas* cv, SkPaint* paint, RenderingContext* rc, SkPa
 		paint->setStrokeWidth(paint->getStrokeWidth() + shadowRadius * 2);
 		paint->setColor(0xffbababa);
 //		paint->setColor(shadowColor);
-		cv->drawPath(*path, *paint);
+		NAT_COUNT(rc, cv->drawPath(*path, *paint));
 	}
 }
 
@@ -259,7 +260,7 @@ SkPaint* oneWayPaint(){
 	oneWay->setAntiAlias(true);
 	return oneWay;
 }
-void drawOneWayPaints(SkCanvas* cv, SkPath* p) {
+void drawOneWayPaints(RenderingContext* rc, SkCanvas* cv, SkPath* p) {
 	if (oneWayPaints.size() == 0) {
 		SkPathEffect* arrowDashEffect1 = new SkDashPathEffect((float []){ 0, 12, 10, 152 }, 4, 0);
 		SkPathEffect* arrowDashEffect2 = new SkDashPathEffect((float[]){ 0, 12, 9, 153 }, 4, 1);
@@ -288,7 +289,7 @@ void drawOneWayPaints(SkCanvas* cv, SkPath* p) {
 	}
 
 	for (size_t i = 0; i < oneWayPaints.size(); i++) {
-		cv->drawPath(*p, oneWayPaints.at(i));
+		NAT_COUNT(rc, cv->drawPath(*p, oneWayPaints.at(i)));
 	}
 }
 
@@ -343,15 +344,15 @@ void drawPolyline(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas
 			int shadowRadius = req->getIntPropertyValue(req->props()->R_SHADOW_RADIUS);
 			drawPolylineShadow(cv, paint, rc, &path, shadowColor, shadowRadius);
 		} else {
-			cv->drawPath(path, *paint);
+			NAT_COUNT(rc, cv->drawPath(path, *paint));
 			if (updatePaint(req, paint, 1, 0, rc)) {
-				cv->drawPath(path, *paint);
+				NAT_COUNT(rc, cv->drawPath(path, *paint));
 				if (updatePaint(req, paint, 2, 0, rc)) {
-					cv->drawPath(path, *paint);
+					NAT_COUNT(rc, cv->drawPath(path, *paint));
 				}
 			}
 			if (oneway && !drawOnlyShadow) {
-				drawOneWayPaints(cv, &path);
+				drawOneWayPaints(rc, cv, &path);
 			}
 			if (!drawOnlyShadow && mObj->name.length() > 0) {
 				drawPointText(req, rc,pair.first, pair.second, middlePoint.fX, middlePoint.fY, mObj->name,
@@ -400,12 +401,12 @@ void drawMultiPolygon(MultiPolygonObject* mapObject,RenderingRuleSearchRequest* 
 		}
 	}
 
-	cv->drawPath(path, *paint);
+	NAT_COUNT(rc, cv->drawPath(path, *paint));
 	// for test purpose
 	// render.strokeWidth = 1.5f;
 	// render.color = Color.BLACK;
 	if (updatePaint(req, paint, 1, 0, rc)) {
-		cv->drawPath(path, *paint);
+		NAT_COUNT(rc, cv->drawPath(path, *paint));
 	}
 }
 
@@ -442,9 +443,9 @@ void drawPolygon(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas*
 		yText += rc->calcY;
 	}
 
-	cv->drawPath(path, *paint);
+	NAT_COUNT(rc, cv->drawPath(path, *paint));
 	if (updatePaint(req, paint, 1, 0, rc)) {
-		cv->drawPath(path, *paint);
+		NAT_COUNT(rc, cv->drawPath(path, *paint));
 	}
 	std::string name = mObj->name;
 	if (name.length() > 0) {
@@ -582,7 +583,7 @@ void mergeRenderingContext(jobject orc, RenderingContext* rc)
 	env->SetIntField( orc, getFid(RenderingContextClass, "pointInsideCount", "I" ) , rc->pointInsideCount);
 	env->SetIntField( orc, getFid(RenderingContextClass, "visible", "I" ) , rc->visible);
 	env->SetIntField( orc, getFid(RenderingContextClass, "allObjects", "I" ) , rc->allObjects);
-	env->SetIntField( orc, getFid(RenderingContextClass, "textRenderingTime", "I" ) , rc->textRendering);
+	env->SetIntField( orc, getFid(RenderingContextClass, "textRenderingTime", "I" ) , rc->textRendering.getElapsedTime());
 	env->DeleteLocalRef(rc->androidContext);
 
 }
@@ -627,7 +628,7 @@ void drawIconsOverCanvas(RenderingContext* rc, SkCanvas* canvas)
 			if (((ind >> b) & 1) == 0) {
 				alreadyDrawnIcons[i] = ind | (1 << b);
 				SkBitmap* ico = icon.bmp;
-				canvas->drawBitmap(*ico, icon.x - ico->width() / 2, icon.y - ico->height() / 2, &p);
+				NAT_COUNT(rc, canvas->drawBitmap(*ico, icon.x - ico->width() / 2, icon.y - ico->height() / 2, &p));
 			}
 		}
 		if(rc->interrupted()){
@@ -758,14 +759,10 @@ void doRendering(std::vector <BaseMapDataObject* > mapDataObjects, SkCanvas* can
 	objectDrawn(true);
 	drawIconsOverCanvas(rc, canvas);
 
-	struct timeval startInit;
-	struct timeval endInit;
-	gettimeofday(&startInit, NULL);
+	rc->textRendering.start();
 	objectDrawn(true);
 	drawTextOverCanvas(rc, canvas);
-	gettimeofday(&endInit, NULL);
-
-	rc->textRendering = (endInit.tv_sec * 1000 + endInit.tv_usec/1000) - (startInit.tv_sec * 1000 + startInit.tv_usec / 1000);
+	rc->textRendering.pause();
 }
 
 
@@ -775,23 +772,22 @@ extern "C" {
 JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_generateRendering( JNIEnv* ienv,
 		jobject obj, jobject renderingContext, jobjectArray binaryMapDataObjects, jobject bmpObj,
 		jboolean useEnglishNames, jobject renderingRuleSearchRequest, jint defaultColor) {
-	__android_log_print(ANDROID_LOG_WARN, "net.osmand", "Initializing rendering");
-	struct timeval startInit;
-	struct timeval endInit;
-	gettimeofday(&startInit, NULL);
 	if(!env) {
 	   env = ienv;
 	   loadLibrary(renderingContext);
 	}
-
 	SkBitmap* bmp = getNativeBitmap(bmpObj);
 	sprintf(debugMessage, "Image w:%d h:%d !", bmp->width(), bmp->height());
 	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
-
 	SkCanvas* canvas = new SkCanvas(*bmp);
 	canvas->drawColor(defaultColor);
+
 	SkPaint* paint = new SkPaint;
 	paint->setAntiAlias(true);
+
+	__android_log_print(ANDROID_LOG_WARN, "net.osmand", "Initializing rendering");
+	timer initObjects;
+	initObjects.start();
 
 
 	RenderingRuleSearchRequest* req =  initSearchRequest(renderingRuleSearchRequest);
@@ -802,11 +798,13 @@ JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 
 
     __android_log_print(ANDROID_LOG_WARN, "net.osmand", "Rendering image");
-    gettimeofday(&endInit, NULL);
+    initObjects.pause();
     
 
     // Main part do rendering
+    rc.nativeOperations.start();
     doRendering(mapDataObjects, canvas, paint, req, &rc);
+    rc.nativeOperations.pause();
 
     mergeRenderingContext(renderingContext, &rc);
     __android_log_print(ANDROID_LOG_WARN, "net.osmand", "End Rendering image");
@@ -817,8 +815,8 @@ JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
     delete req;
     deleteObjects(mapDataObjects);
 
-  	int lt = (endInit.tv_sec * 1000 + endInit.tv_usec/1000) - (startInit.tv_sec * 1000 + startInit.tv_usec / 1000);
-    sprintf(debugMessage, "Native ok (init %d) ", lt);
+    sprintf(debugMessage, "Native ok (init %d, native op %d) ", initObjects.getElapsedTime(),
+    		rc.nativeOperations.getElapsedTime());
     jstring result = env->NewStringUTF( debugMessage);
 
 //  unloadLibrary();

@@ -155,7 +155,7 @@ void drawTextOnCanvas(SkCanvas* cv, std::string text, float centerX, float cente
 }
 
 
-void drawWrappedText(SkCanvas* cv, TextDrawInfo* text, float textSize, SkPaint& paintText) {
+void drawWrappedText(RenderingContext* rc, SkCanvas* cv, TextDrawInfo* text, float textSize, SkPaint& paintText) {
 	if(text->textWrap == 0) {
 		// set maximum for all text
 		text->textWrap = 40;
@@ -191,12 +191,16 @@ void drawWrappedText(SkCanvas* cv, TextDrawInfo* text, float textSize, SkPaint& 
 				pos++;
 			}
 			if(lastSpace == -1) {
+				rc->nativeOperations.pause();
 				drawTextOnCanvas(cv, text->text.substr(start, pos),
 						text->centerX, text->centerY + line * (textSize + 2), paintText, text->textShadow);
+				rc->nativeOperations.start();
 				start = pos;
 			} else {
+				rc->nativeOperations.pause();
 				drawTextOnCanvas(cv, text->text.substr(start, lastSpace),
 						text->centerX, text->centerY + line * (textSize + 2), paintText, text->textShadow);
+				rc->nativeOperations.start();
 				start = lastSpace + 1;
 				limit += (start - pos) - 1;
 			}
@@ -204,7 +208,9 @@ void drawWrappedText(SkCanvas* cv, TextDrawInfo* text, float textSize, SkPaint& 
 
 		}
 	} else {
+		rc->nativeOperations.pause();
 		drawTextOnCanvas(cv, text->text, text->centerX, text->centerY, paintText, text->textShadow);
+		rc->nativeOperations.start();
 	}
 }
 
@@ -435,25 +441,30 @@ void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv) {
 						paintText.setColor(WHITE_COLOR);
 						paintText.setStyle(SkPaint::kStroke_Style);
 						paintText.setStrokeWidth(2 + text->textShadow);
+						rc->nativeOperations.pause();
 						cv->drawTextOnPathHV(text->text.c_str(), text->text.length(), *text->path, text->hOffset,
 								text->vOffset, paintText);
+						rc->nativeOperations.start();
 						// reset
 						paintText.setStyle(SkPaint::kFill_Style);
 						paintText.setStrokeWidth(2);
 						paintText.setColor(text->textColor);
 					}
+					rc->nativeOperations.pause();
 					cv->drawTextOnPathHV(text->text.c_str(), text->text.length(), *text->path, text->hOffset,
 							text->vOffset, paintText);
+					rc->nativeOperations.start();
 				} else {
 					if (text->shieldRes.length() > 0) {
 						SkBitmap* ico = getCachedBitmap(rc, text->shieldRes);
 						if (ico != NULL) {
+							rc->nativeOperations.pause();
 							cv->drawBitmap(*ico, text->centerX - ico->width() / 2 - 0.5f,
 									text->centerY - ico->height() / 2 - getDensityValue(rc, 4.5f), &paintIcon);
+							rc->nativeOperations.start();
 						}
 					}
-
-					drawWrappedText(cv, text, textSize, paintText);
+					drawWrappedText(rc, cv, text, textSize, paintText);
 				}
 			}
 		}

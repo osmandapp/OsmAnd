@@ -72,6 +72,35 @@ jfieldID getFid(jclass cls,const char* fieldName, const char* sig )
 	return env->GetFieldID( cls, fieldName, sig);
 }
 
+class timer {
+	int elapsedTime;
+	timeval startInit;
+	timeval endInit;
+	bool run;
+public:
+	timer() {
+		elapsedTime = 0;
+	}
+	void start() {
+		if (!run) {
+			gettimeofday(&startInit, NULL);
+		}
+		run = true;
+	}
+	void pause() {
+		if (run) {
+			gettimeofday(&endInit, NULL);
+			elapsedTime += (endInit.tv_sec * 1000 + endInit.tv_usec / 1000)
+							- (startInit.tv_sec * 1000 + startInit.tv_usec / 1000);
+		}
+		run = false;
+	}
+	int getElapsedTime() {
+		pause();
+		return elapsedTime;
+	}
+};
+
 
 struct RenderingContext {
 	jobject originalRC;
@@ -82,7 +111,6 @@ struct RenderingContext {
 	bool highResMode;
 	float mapTextSize;
 	float density;
-
 
 	float leftX;
 	float topY;
@@ -98,7 +126,8 @@ struct RenderingContext {
 	int pointInsideCount;
 	int visible;
 	int allObjects;
-	int textRendering;
+	timer textRendering;
+	timer nativeOperations;
 
 	// use to calculate points
 	float calcX;
@@ -190,15 +219,19 @@ SkBitmap* getCachedBitmap(RenderingContext* rc, std::string js)
 	if (cachedBitmaps.find(js) != cachedBitmaps.end()) {
 		return cachedBitmaps[js];
 	}
+	rc->nativeOperations.pause();
 	jstring jstr = env->NewStringUTF(js.c_str());
 	jobject bmp = env->CallStaticObjectMethod(RenderingIconsClass, RenderingIcons_getIcon, rc->androidContext, jstr);
 	SkBitmap* res = getNativeBitmap(bmp);
+	rc->nativeOperations.start();
+
 	env->DeleteLocalRef(bmp);
 	env->DeleteLocalRef(jstr);
 	if(res != NULL){
 		res = new SkBitmap(*res);
 	}
 	cachedBitmaps[js] = res;
+
 	return res;
 }
 
