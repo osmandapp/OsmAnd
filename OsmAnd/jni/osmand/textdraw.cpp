@@ -191,16 +191,10 @@ void drawWrappedText(RenderingContext* rc, SkCanvas* cv, TextDrawInfo* text, flo
 				pos++;
 			}
 			if(lastSpace == -1) {
-				rc->nativeOperations.pause();
-				drawTextOnCanvas(cv, text->text.substr(start, pos),
-						text->centerX, text->centerY + line * (textSize + 2), paintText, text->textShadow);
-				rc->nativeOperations.start();
+				NAT_COUNT(rc, drawTextOnCanvas(cv, text->text.substr(start, pos), text->centerX, text->centerY + line * (textSize + 2), paintText, text->textShadow));
 				start = pos;
 			} else {
-				rc->nativeOperations.pause();
-				drawTextOnCanvas(cv, text->text.substr(start, lastSpace),
-						text->centerX, text->centerY + line * (textSize + 2), paintText, text->textShadow);
-				rc->nativeOperations.start();
+				NAT_COUNT(rc, drawTextOnCanvas(cv, text->text.substr(start, lastSpace), text->centerX, text->centerY + line * (textSize + 2), paintText, text->textShadow));
 				start = lastSpace + 1;
 				limit += (start - pos) - 1;
 			}
@@ -208,20 +202,31 @@ void drawWrappedText(RenderingContext* rc, SkCanvas* cv, TextDrawInfo* text, flo
 
 		}
 	} else {
-		rc->nativeOperations.pause();
-		drawTextOnCanvas(cv, text->text, text->centerX, text->centerY, paintText, text->textShadow);
-		rc->nativeOperations.start();
+		NAT_COUNT(rc, drawTextOnCanvas(cv, text->text, text->centerX, text->centerY, paintText, text->textShadow));
 	}
 }
 
 bool calculatePathToRotate(RenderingContext* rc, TextDrawInfo* p) {
-	// TODO rotate bounds for shields?
-	if (!p->drawOnPath || p->path == NULL) {
+	if(p->path == NULL) {
 		return true;
 	}
 	int len = p->path->countPoints();
 	SkPoint points[len];
 	p->path->getPoints(points, len);
+	if (!p->drawOnPath) {
+		// simply calculate rotation of path used for shields
+		p->vOffset -= p->textSize / 2 - 1;
+		float px = 0;
+		float py = 0;
+		for (int i = 1; i < len; i++) {
+			px += points[i].fX - points[i - 1].fX;
+			py += points[i].fY - points[i - 1].fY;
+		}
+		if (px != 0 || py != 0) {
+			p->pathRotate = std::atan2(py, px) * 180 / M_PI;
+		}
+		return true;
+	}
 
 	bool inverse = false;
 	float roadLength = 0;
@@ -229,7 +234,11 @@ bool calculatePathToRotate(RenderingContext* rc, TextDrawInfo* p) {
 	float visibleRoadLength = 0;
 	float textw = p->bounds.width();
 	int i;
-	int startVisible = 1;
+	int startVisible = 0;
+	std::vector<float> distances;
+	distances.resize(roadLength, 0);
+
+	float normalTextLen = 1.5 * textw;
 	for (i = 0; i < len; i++) {
 		bool inside = points[i].fX >= 0 && points[i].fX <= rc->width &&
 				points[i].fY >= 0 && points[i].fY <= rc->height;
@@ -237,18 +246,20 @@ bool calculatePathToRotate(RenderingContext* rc, TextDrawInfo* p) {
 			float d = std::sqrt(
 					(points[i].fX - points[i - 1].fX) * (points[i].fX - points[i - 1].fX)
 							+ (points[i].fY - points[i - 1].fY) * (points[i].fY - points[i - 1].fY));
+			distances.push_back(d);
 			roadLength += d;
 			if(inside) {
 				visibleRoadLength += d;
 				if(!prevInside) {
 					startVisible = i - 1;
 				}
-			} else if(!prevInside) {
-				if(visibleRoadLength >= 1.5 * textw) {
+			} else if(prevInside) {
+				if(visibleRoadLength >= normalTextLen) {
 					break;
 				}
 				visibleRoadLength = 0;
 			}
+
 		}
 		prevInside = inside;
 	}
@@ -257,9 +268,27 @@ bool calculatePathToRotate(RenderingContext* rc, TextDrawInfo* p) {
 	}
 	int startInd = 0;
 	int endInd = len;
-	if(textw < visibleRoadLength) {
-		startInd = startVisible - 1;
+
+	if(textw < visibleRoadLength && i - startVisible > 1) {
+		startInd = startVisible;
 		endInd = i;
+		// display long road name in center
+		if (visibleRoadLength > 3 * textw) {
+			bool ch ;
+			do {
+				ch = false;
+				if(endInd - startInd > 2 && visibleRoadLength - distances[startInd] > normalTextLen){
+					visibleRoadLength -= distances.at(startInd);
+					startInd++;
+					ch = true;
+				}
+				if(endInd - startInd > 2 && visibleRoadLength - distances[endInd - 2] > normalTextLen){
+					visibleRoadLength -= distances.at(endInd - 2);
+					endInd--;
+					ch = true;
+				}
+			} while(ch);
+		}
 	}
 	// shrink path to display more text
 	if (startInd > 0 || endInd < len) {
@@ -369,10 +398,12 @@ bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDraw
 
 	SkRect boundsSearch = text->bounds;
 	float v = -getDensityValue(rc, std::max(5.0f, text->minDistance));
+	// TODO min distance different !
 	boundsSearch.inset(v, v);
 
 	// for text purposes
 //	drawTestBox(cv, text, paintIcon, paintText);
+
 	boundIntersections.query_in_box(boundsSearch, search);
 	for (uint i = 0; i < search.size(); i++) {
 		TextDrawInfo* t = search.at(i);
@@ -436,6 +467,9 @@ void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv) {
 			// calculate if there is intersection
 			bool intersects = findTextIntersection(cv, rc, boundsIntersect, text, &paintText, &paintIcon);
 			if (!intersects) {
+				if(rc->interrupted()){
+						return;
+				}
 				if (text->drawOnPath && text->path != NULL) {
 					if (text->textShadow > 0) {
 						paintText.setColor(WHITE_COLOR);

@@ -22,7 +22,6 @@
 #include "textdraw.cpp"
 #include "mapObjects.cpp"
 
-#define NAT_COUNT(rc, op) rc->nativeOperations.pause(); op; rc->nativeOperations.start()
 
 char debugMessage[1024];
 
@@ -210,6 +209,9 @@ void drawPointText(RenderingRuleSearchRequest* req, RenderingContext* rc, std::s
 				if (req->getIntPropertyValue(req->props()->R_TEXT_SIZE) > 0) {
 					TextDrawInfo* text = new TextDrawInfo(ref);
 					fillTextProperties(text, req, xText, yText);
+					if (path != NULL) {
+						text->path = new SkPath(*path);
+					}
 					rc->textToDraw.push_back(text);
 				}
 			}
@@ -692,16 +694,6 @@ std::hash_map<int, std::vector<int> > sortObjectsByProperOrder(std::vector <Base
 	return orderMap;
 }
 
-int objCount = 0;
-void objectDrawn(bool notify = false)
-{
-	if (objCount++ > 25) {
-		// TODO notification
-		//notifyListeners(notifyList);
-		objCount = 0;
-	}
-}
-
 void doRendering(std::vector <BaseMapDataObject* > mapDataObjects, SkCanvas* canvas, SkPaint* paint,
 		RenderingRuleSearchRequest* req, RenderingContext* rc) {
 	// put in order map
@@ -731,7 +723,6 @@ void doRendering(std::vector <BaseMapDataObject* > mapDataObjects, SkCanvas* can
 
 					// show text only for main type
 					drawObject(rc, mapObject, canvas, req, paint, l, l == 0, true);
-					objectDrawn();
 				}
 			}
 			shadowDrawn = true;
@@ -746,8 +737,6 @@ void doRendering(std::vector <BaseMapDataObject* > mapDataObjects, SkCanvas* can
 			BaseMapDataObject* mapObject = mapDataObjects.at(ind);
 			// show text only for main type
 			drawObject(rc, mapObject, canvas, req, paint, l, l == 0, false);
-			objCount++;
-			objectDrawn();
 
 		}
 		if (rc->interrupted()) {
@@ -756,11 +745,9 @@ void doRendering(std::vector <BaseMapDataObject* > mapDataObjects, SkCanvas* can
 
 	}
 
-	objectDrawn(true);
 	drawIconsOverCanvas(rc, canvas);
 
 	rc->textRendering.start();
-	objectDrawn(true);
 	drawTextOverCanvas(rc, canvas);
 	rc->textRendering.pause();
 }
@@ -786,7 +773,7 @@ JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 	paint->setAntiAlias(true);
 
 	__android_log_print(ANDROID_LOG_WARN, "net.osmand", "Initializing rendering");
-	timer initObjects;
+	watcher initObjects;
 	initObjects.start();
 
 
@@ -815,8 +802,11 @@ JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
     delete req;
     deleteObjects(mapDataObjects);
 
-    sprintf(debugMessage, "Native ok (init %d, native op %d) ", initObjects.getElapsedTime(),
-    		rc.nativeOperations.getElapsedTime());
+#ifdef DEBUG_NAT_OPERATIONS
+    sprintf(debugMessage, "Native ok (init %d, native op %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
+#else
+    sprintf(debugMessage, "Native ok (init %d, rendering %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
+#endif
     jstring result = env->NewStringUTF( debugMessage);
 
 //  unloadLibrary();

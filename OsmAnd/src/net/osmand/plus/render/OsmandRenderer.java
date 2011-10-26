@@ -44,7 +44,6 @@ import android.graphics.Paint.Style;
 import android.graphics.Shader.TileMode;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
@@ -320,6 +319,7 @@ public class OsmandRenderer {
 					}
 					String res = NativeOsmandLibrary.generateRendering(rc, array, bmp, useEnglishNames, render, defaultColor);
 					rc.ended = true;
+					notifyListeners(notifyList);
 					long time = System.currentTimeMillis() - now;
 					rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
 							+ "(%s points, %s points inside, %s objects visile from %s)\n" + res,//$NON-NLS-1$

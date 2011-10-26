@@ -8,6 +8,14 @@
 #include <SkPath.h>
 #include <SkBitmap.h>
 
+//#define DEBUG_NAT_OPERATIONS
+
+#ifdef DEBUG_NAT_OPERATIONS
+	#define NAT_COUNT(rc, op) rc->nativeOperations.pause(); op; rc->nativeOperations.start()
+#else
+	#define NAT_COUNT(rc, op) op;
+#endif
+
 
 JNIEnv* env;
 const std::string EMPTY_STRING;
@@ -72,32 +80,56 @@ jfieldID getFid(jclass cls,const char* fieldName, const char* sig )
 	return env->GetFieldID( cls, fieldName, sig);
 }
 
-class timer {
+class watcher {
 	int elapsedTime;
-	timeval startInit;
-	timeval endInit;
+	bool enableFlag;
+//	timeval startInit;
+//	timeval endInit;
+	timespec startInit;
+	timespec endInit;
 	bool run;
+
+
 public:
-	timer() {
+	watcher() {
 		elapsedTime = 0;
+		enableFlag = true;
+	}
+	void enable(){
+		enableFlag = true;
+	}
+	void disable(){
+		pause();
+		enableFlag = false;
 	}
 	void start() {
+		if(!enableFlag){
+			return;
+		}
 		if (!run) {
-			gettimeofday(&startInit, NULL);
+			clock_gettime(CLOCK_MONOTONIC, &startInit);
+//			gettimeofday(&startInit, NULL);
 		}
 		run = true;
 	}
 	void pause() {
-		if (run) {
-			gettimeofday(&endInit, NULL);
-			elapsedTime += (endInit.tv_sec * 1000 + endInit.tv_usec / 1000)
-							- (startInit.tv_sec * 1000 + startInit.tv_usec / 1000);
+		if (!run) {
+			return;
 		}
+		clock_gettime(CLOCK_MONOTONIC, &endInit );
+		// gettimeofday(&endInit, NULL);
+		int sec = endInit.tv_sec - startInit.tv_sec;
+		if(sec > 0){
+			elapsedTime += 1e9 * sec;
+		}
+		elapsedTime += endInit.tv_nsec - startInit.tv_nsec ;
+//		elapsedTime += (endInit.tv_sec * 1000 + endInit.tv_usec / 1000)
+//					- (startInit.tv_sec * 1000 + startInit.tv_usec / 1000);
 		run = false;
 	}
 	int getElapsedTime() {
 		pause();
-		return elapsedTime;
+		return elapsedTime / 1e6;
 	}
 };
 
@@ -126,8 +158,8 @@ struct RenderingContext {
 	int pointInsideCount;
 	int visible;
 	int allObjects;
-	timer textRendering;
-	timer nativeOperations;
+	watcher textRendering;
+	watcher nativeOperations;
 
 	// use to calculate points
 	float calcX;
