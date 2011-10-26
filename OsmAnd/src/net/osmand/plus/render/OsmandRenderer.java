@@ -27,7 +27,6 @@ import org.apache.commons.logging.Log;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -43,6 +42,8 @@ import android.graphics.Paint.Align;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
 import android.graphics.Shader.TileMode;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
@@ -53,6 +54,7 @@ public class OsmandRenderer {
 
 	private final int clFillScreen = Color.rgb(241, 238, 232);
 
+	
 	private TextPaint paintText;
 	private Paint paint;
 
@@ -62,8 +64,7 @@ public class OsmandRenderer {
 	public static final int TILE_SIZE = 256; 
 
 	private Map<String, PathEffect> dashEffect = new LinkedHashMap<String, PathEffect>();
-	private Map<Integer, Shader> shaders = new LinkedHashMap<Integer, Shader>();
-	private Map<Integer, Bitmap> cachedIcons = new LinkedHashMap<Integer, Bitmap>();
+	private Map<String, Shader> shaders = new LinkedHashMap<String, Shader>();
 
 	private final Context context;
 
@@ -87,8 +88,8 @@ public class OsmandRenderer {
 		int textShadow = 0;
 		int textWrap = 0;
 		boolean bold = false;
-		int shieldRes = 0;
-		int textOrder = 20;
+		String shieldRes = null;
+		int textOrder = 100;
 		
 		public void fillProperties(RenderingRuleSearchRequest render, float centerX, float centerY){
 			this.centerX = centerX;
@@ -103,26 +104,33 @@ public class OsmandRenderer {
 			bold = render.getIntPropertyValue(render.ALL.R_TEXT_BOLD, 0) > 0;
 			minDistance = render.getIntPropertyValue(render.ALL.R_TEXT_MIN_DISTANCE,0);
 			if(render.isSpecified(render.ALL.R_TEXT_SHIELD)) {
-				shieldRes = RenderingIcons.getIcons().get(render.getStringPropertyValue(render.ALL.R_TEXT_SHIELD));
+				shieldRes = render.getStringPropertyValue(render.ALL.R_TEXT_SHIELD);
 			}
-			textOrder = render.getIntPropertyValue(render.ALL.R_TEXT_ORDER, 20);
+			textOrder = render.getIntPropertyValue(render.ALL.R_TEXT_ORDER, 100);
 		}
 	}
 
 	private static class IconDrawInfo {
 		float x = 0;
 		float y = 0;
-		int resId;
+		String resId;
 	}
 
 	/*package*/ static class RenderingContext {
+		// FIELDS OF THAT CLASS ARE USED IN C++
 		public boolean interrupted = false;
 		public boolean nightMode = false;
 		public boolean highResMode = false;
 		public float mapTextSize = 1;
+		public float density = 1;
+		public final Context ctx;
 
 		List<TextDrawInfo> textToDraw = new ArrayList<TextDrawInfo>();
 		List<IconDrawInfo> iconsToDraw = new ArrayList<IconDrawInfo>();
+		
+		public RenderingContext(Context ctx) {
+			this.ctx = ctx;
+		}
 
 		float leftX;
 		float topY;
@@ -138,6 +146,7 @@ public class OsmandRenderer {
 		int pointInsideCount = 0;
 		int visible = 0;
 		int allObjects = 0;
+		int textRenderingTime = 0;
 
 		// use to calculate points
 		PointF tempPoint = new PointF();
@@ -148,13 +157,15 @@ public class OsmandRenderer {
 		// int shadowRenderingMode = 1; // classic shadow (the implementaton in master)
 		// int shadowRenderingMode = 2; // blur shadow (most CPU, but still reasonable)
 		// int shadowRenderingMode = 3; solid border (CPU use like classic version or even smaller)
-		int shadowRenderingMode = 2;
+		int shadowRenderingMode = 3;
 		
 		// not expect any shadow
 		int shadowLevelMin = 256;
 		int shadowLevelMax = 0;
 
 		String renderingDebugInfo;
+		
+		boolean ended = false;
 	}
 
 	public OsmandRenderer(Context context) {
@@ -194,11 +205,16 @@ public class OsmandRenderer {
 		return dashEffect.get(dashes);
 	}
 
-	public Shader getShader(int resId){
+	public Shader getShader(String resId){
+		
 		if(shaders.get(resId) == null){
-			Shader sh = new BitmapShader(
-					BitmapFactory.decodeResource(context.getResources(), resId), TileMode.REPEAT, TileMode.REPEAT);
-			shaders.put(resId, sh);
+			Bitmap bmp = RenderingIcons.getIcon(context, resId);
+			if(bmp != null){
+				Shader sh = new BitmapShader(bmp, TileMode.REPEAT, TileMode.REPEAT);
+				shaders.put(resId, sh);
+			} else {
+				shaders.put(resId, null);
+			}
 		}	
 		return shaders.get(resId);
 	}
@@ -212,91 +228,121 @@ public class OsmandRenderer {
 
 
 	public Bitmap generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, boolean useEnglishNames,
-			RenderingRuleSearchRequest render, List<IMapDownloaderCallback> notifyList, int defaultColor) {
+			RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList, int defaultColor, boolean nativeRendering) {
 		long now = System.currentTimeMillis();
 
-		// fill area
-		Canvas cv = new Canvas(bmp);
-		if(defaultColor != 0){
-			paintFillEmpty.setColor(defaultColor);
-		}
-		cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillEmpty);
-
-		// put in order map
-		int sz = objects.size();
-		int init = sz / 4;
-		TIntObjectHashMap<TIntArrayList> orderMap = sortObjectsByProperOrder(rc, objects, render, sz, init);
 		if (objects != null && !objects.isEmpty() && rc.width > 0 && rc.height > 0) {
-			int objCount = 0;
 			// init rendering context
 			rc.tileDivisor = (int) (1 << (31 - rc.zoom));
 			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
+			rc.density = dm.density;
 
-			int[] keys = orderMap.keys();
-			Arrays.sort(keys);
-			
-			boolean shadowDrawn = false;
+			if (!nativeRendering) {
+				// fill area
+				Canvas cv = new Canvas(bmp);
+				if(defaultColor != 0){
+					paintFillEmpty.setColor(defaultColor);
+				}
+				cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillEmpty);
+				// put in order map
+				TIntObjectHashMap<TIntArrayList> orderMap = sortObjectsByProperOrder(rc, objects, render);
 
-			for (int k = 0; k < keys.length; k++) {
-				if (!shadowDrawn && keys[k] >= rc.shadowLevelMin && keys[k] <= rc.shadowLevelMax && 
-						rc.shadowRenderingMode > 1) {
-					for (int ki = k; ki < keys.length; ki++) {
-						if (keys[ki] > rc.shadowLevelMax || rc.interrupted) {
-							break;
+				int objCount = 0;
+
+				int[] keys = orderMap.keys();
+				Arrays.sort(keys);
+
+				boolean shadowDrawn = false;
+
+				for (int k = 0; k < keys.length; k++) {
+					if (!shadowDrawn && keys[k] >= rc.shadowLevelMin && keys[k] <= rc.shadowLevelMax && rc.shadowRenderingMode > 1) {
+						for (int ki = k; ki < keys.length; ki++) {
+							if (keys[ki] > rc.shadowLevelMax || rc.interrupted) {
+								break;
+							}
+							TIntArrayList list = orderMap.get(keys[ki]);
+							for (int j = 0; j < list.size(); j++) {
+								int i = list.get(j);
+								int ind = i >> 8;
+								int l = i & 0xff;
+								BinaryMapDataObject obj = objects.get(ind);
+
+								// show text only for main type
+								drawObj(obj, render, cv, rc, l, l == 0, true);
+								objCount++;
+							}
 						}
-						TIntArrayList list = orderMap.get(keys[ki]);
-						for (int j = 0; j < list.size(); j++) {
-							int i = list.get(j);
-							int ind = i >> 8;
-							int l = i & 0xff;
-							BinaryMapDataObject obj = objects.get(ind);
-
-							// show text only for main type
-							drawObj(obj, render, cv, rc, l, l == 0, true);
-							objCount++;
-						}
+						shadowDrawn = true;
 					}
-					shadowDrawn = true;
-				}
-				if (rc.interrupted) {
-					return null;
+					if (rc.interrupted) {
+						return null;
+					}
+
+					TIntArrayList list = orderMap.get(keys[k]);
+					for (int j = 0; j < list.size(); j++) {
+						int i = list.get(j);
+						int ind = i >> 8;
+						int l = i & 0xff;
+						BinaryMapDataObject obj = objects.get(ind);
+
+						// show text only for main type
+						drawObj(obj, render, cv, rc, l, l == 0, false);
+						objCount++;
+					}
+					if (objCount > 25) {
+						notifyListeners(notifyList);
+						objCount = 0;
+					}
+
 				}
 
-				TIntArrayList list = orderMap.get(keys[k]);
-				for (int j = 0; j < list.size(); j++) {
-					int i = list.get(j);
-					int ind = i >> 8;
-					int l = i & 0xff;
-					BinaryMapDataObject obj = objects.get(ind);
+				long beforeIconTextTime = System.currentTimeMillis() - now;
+				notifyListeners(notifyList);
+				drawIconsOverCanvas(rc, cv);
 
-					// show text only for main type
-					drawObj(obj, render, cv, rc, l, l == 0, false);
-					objCount++;
-				}
-				if (objCount > 25) {
+				notifyListeners(notifyList);
+				drawTextOverCanvas(rc, cv, useEnglishNames);
+
+				long time = System.currentTimeMillis() - now;
+				rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
+						+ "(%s points, %s points inside, %s objects visile from %s)",//$NON-NLS-1$
+						time, time - beforeIconTextTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
+				log.info(rc.renderingDebugInfo);
+
+			} else {
+				BinaryMapDataObject[] array = objects.toArray(new BinaryMapDataObject[objects.size()]);
+				try {
+					if(Looper.getMainLooper() != null){
+						final Handler h = new Handler(Looper.getMainLooper());
+						notifyListenersWithDelay(rc, notifyList, h);
+					}
+					String res = NativeOsmandLibrary.generateRendering(rc, array, bmp, useEnglishNames, render, defaultColor);
+					rc.ended = true;
 					notifyListeners(notifyList);
-					objCount = 0;
+					long time = System.currentTimeMillis() - now;
+					rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
+							+ "(%s points, %s points inside, %s objects visile from %s)\n" + res,//$NON-NLS-1$
+							time, rc.textRenderingTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-
 			}
-
-			long beforeIconTextTime = System.currentTimeMillis() - now;
-			notifyListeners(notifyList);
-			drawIconsOverCanvas(rc, cv);
-
-			notifyListeners(notifyList);
-			drawTextOverCanvas(rc, cv, useEnglishNames);
-
-			long time = System.currentTimeMillis() - now;
-			rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
-					+ "(%s points, %s points inside, %s objects visile from %s)",//$NON-NLS-1$
-					time, time - beforeIconTextTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
-			log.info(rc.renderingDebugInfo);
-
 		}
 
 		return bmp;
+	}
+
+	private void notifyListenersWithDelay(final RenderingContext rc, final List<IMapDownloaderCallback> notifyList, final Handler h) {
+		h.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				if(!rc.ended) {
+					notifyListeners(notifyList);
+					notifyListenersWithDelay(rc, notifyList, h);
+				}
+			}
+		}, 700);
 	}
 
 	private void drawIconsOverCanvas(RenderingContext rc, Canvas cv) {
@@ -305,11 +351,8 @@ public class OsmandRenderer {
 		int iconsH = rc.height / skewConstant;
 		int[] alreadyDrawnIcons = new int[iconsW * iconsH / 32];
 		for (IconDrawInfo icon : rc.iconsToDraw) {
-			if (icon.resId != 0) {
-				if (cachedIcons.get(icon.resId) == null) {
-					cachedIcons.put(icon.resId, UnscaledBitmapLoader.loadFromResource(context.getResources(), icon.resId, null, dm));
-				}
-				Bitmap ico = cachedIcons.get(icon.resId);
+			if (icon.resId != null) {
+				Bitmap ico = RenderingIcons.getIcon(context, icon.resId);
 				if (ico != null) {
 					if (icon.y >= 0 && icon.y < rc.height && icon.x >= 0 && icon.x < rc.width) {
 						int z = (((int) icon.x / skewConstant) + ((int) icon.y / skewConstant) * iconsW);
@@ -334,7 +377,9 @@ public class OsmandRenderer {
 	}
 
 	private TIntObjectHashMap<TIntArrayList> sortObjectsByProperOrder(RenderingContext rc, List<BinaryMapDataObject> objects,
-			RenderingRuleSearchRequest render, int sz, int init) {
+			RenderingRuleSearchRequest render) {
+		int sz = objects.size();
+		int init = sz / 4;
 		TIntObjectHashMap<TIntArrayList> orderMap = new TIntObjectHashMap<TIntArrayList>();
 		if (render != null) {
 			render.clearState();
@@ -403,8 +448,8 @@ public class OsmandRenderer {
 	private final static boolean findAllTextIntersections = true;
 
 	private float getDensityValue(RenderingContext rc, float val) {
-		if (rc.highResMode && dm.density > 1) {
-			return val * dm.density * rc.mapTextSize;
+		if (rc.highResMode && rc.density > 1) {
+			return val * rc.density * rc.mapTextSize;
 		} else {
 			return val * rc.mapTextSize;
 		}
@@ -472,11 +517,8 @@ public class OsmandRenderer {
 					}
 					cv.drawTextOnPath(text.text, text.drawOnPath, 0, text.vOffset, paintText);
 				} else {
-					if (text.shieldRes != 0) {
-						if (cachedIcons.get(text.shieldRes) == null) {
-							cachedIcons.put(text.shieldRes, BitmapFactory.decodeResource(context.getResources(), text.shieldRes));
-						}
-						Bitmap ico = cachedIcons.get(text.shieldRes);
+					if (text.shieldRes != null) {
+						Bitmap ico = RenderingIcons.getIcon(context, text.shieldRes);
 						if (ico != null) {
 							cv.drawBitmap(ico, text.centerX - ico.getWidth() / 2 - 0.5f, text.centerY
 									- ico.getHeight() / 2 - getDensityValue(rc, 4.5f) 
@@ -691,7 +733,6 @@ public class OsmandRenderer {
 	}
 
 	public void clearCachedResources(){
-		cachedIcons.clear();
 		shaders.clear();
 	}
 	
@@ -829,7 +870,7 @@ public class OsmandRenderer {
 		p.setColor(req.getIntPropertyValue(rColor));
 		
 		if(ind == 0){
-			Integer resId = RenderingIcons.getIcons().get(req.getStringPropertyValue(req.ALL.R_SHADER));
+			String resId = req.getStringPropertyValue(req.ALL.R_SHADER);
 			if(resId != null){
 				p.setColor(Color.BLACK);
 				p.setShader(getShader(resId));
@@ -905,12 +946,12 @@ public class OsmandRenderer {
 		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
 		render.search(RenderingRulesStorage.POINT_RULES);
 		
-		Integer resId = RenderingIcons.getIcons().get(render.getStringPropertyValue(render.ALL.R_ICON));
+		String resId = render.getStringPropertyValue(render.ALL.R_ICON);
 		String name = null;
 		if (renderText) {
 			name = obj.getName();
 		}
-		if((resId == null || resId == 0) && name == null){
+		if(resId == null && name == null){
 			return;
 		}
 		int len = obj.getPointsLength();
@@ -926,7 +967,7 @@ public class OsmandRenderer {
 			ps.y /= len;
 		}
 
-		if(resId != null && resId != 0){
+		if(resId != null){
 			IconDrawInfo ico = new IconDrawInfo();
 			ico.x = ps.x;
 			ico.y = ps.y;
@@ -1089,7 +1130,7 @@ public class OsmandRenderer {
 					text.fillProperties(render, middlePoint.x, middlePoint.y);
 					rc.textToDraw.add(text);
 				} else {
-					paintText.setTextSize(text.textSize);
+					paintText.setTextSize(render.getIntPropertyValue(render.ALL.R_TEXT_SIZE));
 					if (paintText.measureText(obj.getName()) < roadLength ) {
 						if (inverse) {
 							path.rewind();
@@ -1107,7 +1148,7 @@ public class OsmandRenderer {
 						text.fillProperties(render, xMid / 2, yMid / 2);
 						text.pathRotate = pathRotate;
 						text.drawOnPath = path;
-						float strokeWidth = render.getFloatPropertyValue(render.ALL.R_STROKE_WIDTH);
+						int strokeWidth = render.getIntPropertyValue(render.ALL.R_TEXT_SIZE);
 						text.vOffset = strokeWidth / 2 - 1;
 						rc.textToDraw.add(text);
 					}

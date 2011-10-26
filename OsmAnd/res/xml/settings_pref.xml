@@ -103,6 +103,7 @@
 			android:key="debug_rendering"></CheckBoxPreference>
 		<CheckBoxPreference android:key="animate_routing" android:title="Animate Routing" android:summary="Enable osmand animate routing"></CheckBoxPreference>
 		<Preference android:key="test_voice_commands" android:summary="Test currently selected voice routing" android:title="Test Voice Commands"></Preference>
+		<CheckBoxPreference android:key="native_rendering" android:title="Native Rendering" android:summary="Enable osmand native rendering"></CheckBoxPreference>
 	</PreferenceScreen>
 
 </PreferenceScreen>

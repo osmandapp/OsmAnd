@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +39,7 @@ public class RenderingRulesStorage {
 	private final static int LENGTH_RULES = 6;
 	
 	private final static int SHIFT_TAG_VAL = 16;
-	
+	// C++
 	List<String> dictionary = new ArrayList<String>();
 	Map<String, Integer> dictionaryMap = new LinkedHashMap<String, Integer>();
 	
@@ -135,8 +136,12 @@ public class RenderingRulesStorage {
 		RenderingRule toInsert = rr;
 		RenderingRule previous = tagValueGlobalRules[state].get(key);
 		if(previous != null){
-			if(previous.getProperties().length != 0){
-				toInsert = new RenderingRule(Collections.EMPTY_MAP, RenderingRulesStorage.this);
+			// all root rules should have at least tag/value
+			if(previous.getProperties().length > 2){
+				Map<String, String> m = new HashMap<String, String>();
+				m.put("tag", dictionary.get(tag));
+				m.put("value", dictionary.get(value));
+				toInsert = new RenderingRule(m, RenderingRulesStorage.this);
 				toInsert.addIfElseChildren(previous);
 			} else {
 				toInsert = previous; 
@@ -331,6 +336,13 @@ public class RenderingRulesStorage {
 			return tagValueGlobalRules[state].get((itag << SHIFT_TAG_VAL) | ivalue);
 		}
 		return null;
+	}
+	
+	public RenderingRule[] getRules(int state){
+		if(state >= tagValueGlobalRules.length ||  tagValueGlobalRules[state] == null) {
+			return new RenderingRule[0];
+		}
+		return tagValueGlobalRules[state].values(new RenderingRule[tagValueGlobalRules[state].size()]);
 	}
 	
 	

@@ -51,7 +51,6 @@ public class MainMenuActivity extends Activity {
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
 	
 	private ProgressDialog startProgressDialog;
-
 	
 	public void checkPreviousRunsForExceptions(boolean firstTime) {
 		long size = getPreferences(MODE_WORLD_READABLE).getLong(EXCEPTION_FILE_SIZE, 0);

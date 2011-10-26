@@ -230,8 +230,6 @@ public class MapRenderRepositories {
 		double cLeftLongitude = dataBox.left;
 		double cRightLongitude = dataBox.right;
 
-		log.info(String.format("BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", //$NON-NLS-1$
-				cBottomLatitude, cTopLatitude, cLeftLongitude, cRightLongitude, zoom));
 
 		long now = System.currentTimeMillis();
 
@@ -334,7 +332,12 @@ public class MapRenderRepositories {
 
 			List<MultyPolygon> pMulti = proccessMultiPolygons(multiPolygons, leftX, rightX, bottomY, topY, zoom);
 			tempList.addAll(pMulti);
-			log.info(String.format("Search done in %s ms. %s results were found.", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
+			if (count > 0) {
+				log.info(String.format("BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", //$NON-NLS-1$
+						cBottomLatitude, cTopLatitude, cLeftLongitude, cRightLongitude, zoom));
+				log.info(String.format("Search done in %s ms. %s results were found.", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
+			}
+		
 
 			cObjects = tempList;
 			cObjectsBox = dataBox;
@@ -421,7 +424,7 @@ public class MapRenderRepositories {
 			}
 			final long searchTime = System.currentTimeMillis() - now;
 
-			currentRenderingContext = new OsmandRenderer.RenderingContext();
+			currentRenderingContext = new OsmandRenderer.RenderingContext(context);
 			currentRenderingContext.leftX = (float) requestedBox.getLeftTileX();
 			currentRenderingContext.topY = (float) requestedBox.getTopTileY();
 			currentRenderingContext.zoom = requestedBox.getZoom();
@@ -446,9 +449,13 @@ public class MapRenderRepositories {
 			this.bmpLocation = tileRect;
 
 			renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, prefs.USE_ENGLISH_NAMES.get(), renderingReq,
-					notifyList, storage.getBgColor(nightMode));
+					notifyList, storage.getBgColor(nightMode), app.getSettings().NATIVE_RENDERING.get());
 			String renderingDebugInfo = currentRenderingContext.renderingDebugInfo;
+			currentRenderingContext.ended = true;
 			if (checkWhetherInterrupted()) {
+				// revert if it was interrupted
+				this.bmp = this.prevBmp;
+				this.bmpLocation = this.prevBmpLocation;
 				currentRenderingContext = null;
 				return;
 			}
@@ -463,6 +470,7 @@ public class MapRenderRepositories {
 					timeInfo += "\n" + renderingDebugInfo;
 				}
 				final String msg = timeInfo;
+				log.info(msg);
 				handler.post(new Runnable() {
 					@Override
 					public void run() {
@@ -488,7 +496,10 @@ public class MapRenderRepositories {
 					Toast.makeText(context, R.string.rendering_out_of_memory, Toast.LENGTH_SHORT).show();
 				}
 			});
-
+		} finally {
+			if(currentRenderingContext != null) {
+				currentRenderingContext.ended = true;
+			}
 		}
 
 	}

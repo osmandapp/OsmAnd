@@ -63,6 +63,7 @@ public class RenderingRuleSearchRequest {
 		System.arraycopy(savedFvalues, 0, fvalues, 0, fvalues.length);
 	}
 	
+	// USED in C
 	public void clearValue(RenderingRuleProperty p) {
 		if(p.isIntParse()){
 			values[p.getId()] = savedValues[p.getId()];
@@ -71,6 +72,8 @@ public class RenderingRuleSearchRequest {
 		}
 	}
 	
+
+	// USED in C
 	public void setInitialTagValueZoom(String tag, String val, int zoom){
 		clearState();
 		setIntFilter(ALL.R_MINZOOM, zoom);

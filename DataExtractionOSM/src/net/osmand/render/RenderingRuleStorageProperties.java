@@ -84,6 +84,7 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_TEXT_WRAP_WIDTH;
 
 	final Map<String, RenderingRuleProperty> properties = new LinkedHashMap<String, RenderingRuleProperty>();
+	// C++
 	final List<RenderingRuleProperty> rules = new ArrayList<RenderingRuleProperty>();
 	final List<RenderingRuleProperty> customRules = new ArrayList<RenderingRuleProperty>();
 	
