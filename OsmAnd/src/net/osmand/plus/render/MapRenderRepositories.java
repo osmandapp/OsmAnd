@@ -267,6 +267,8 @@ public class MapRenderRepositories {
 								return true;
 							}
 							if (mask == RenderingRulesStorage.POINT_RULES) {
+								renderingReq.setStringFilter(renderingReq.ALL.R_TAG, pair.tag);
+								renderingReq.setStringFilter(renderingReq.ALL.R_VALUE, pair.value);
 								if (renderingReq.search(RenderingRulesStorage.TEXT_RULES, false)) {
 									return true;
 								}
