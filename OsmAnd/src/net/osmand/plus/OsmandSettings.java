@@ -1024,7 +1024,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> TEST_ANIMATE_ROUTING = new BooleanPreference("animate_routing", false, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> NATIVE_RENDERING = new BooleanPreference("native_rendering", true, true);
+	public final OsmandPreference<Boolean> NATIVE_RENDERING = new BooleanPreference("native_rendering", false, true);
 	
 	
 	// this value string is synchronized with settings_pref.xml preference name

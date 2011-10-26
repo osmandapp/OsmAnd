@@ -230,8 +230,6 @@ public class MapRenderRepositories {
 		double cLeftLongitude = dataBox.left;
 		double cRightLongitude = dataBox.right;
 
-		log.info(String.format("BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", //$NON-NLS-1$
-				cBottomLatitude, cTopLatitude, cLeftLongitude, cRightLongitude, zoom));
 
 		long now = System.currentTimeMillis();
 
@@ -334,7 +332,12 @@ public class MapRenderRepositories {
 
 			List<MultyPolygon> pMulti = proccessMultiPolygons(multiPolygons, leftX, rightX, bottomY, topY, zoom);
 			tempList.addAll(pMulti);
-			log.info(String.format("Search done in %s ms. %s results were found.", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
+			if (count > 0) {
+				log.info(String.format("BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", //$NON-NLS-1$
+						cBottomLatitude, cTopLatitude, cLeftLongitude, cRightLongitude, zoom));
+				log.info(String.format("Search done in %s ms. %s results were found.", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
+			}
+		
 
 			cObjects = tempList;
 			cObjectsBox = dataBox;
@@ -450,6 +453,9 @@ public class MapRenderRepositories {
 			String renderingDebugInfo = currentRenderingContext.renderingDebugInfo;
 			currentRenderingContext.ended = true;
 			if (checkWhetherInterrupted()) {
+				// revert if it was interrupted
+				this.bmp = this.prevBmp;
+				this.bmpLocation = this.prevBmpLocation;
 				currentRenderingContext = null;
 				return;
 			}
@@ -464,6 +470,7 @@ public class MapRenderRepositories {
 					timeInfo += "\n" + renderingDebugInfo;
 				}
 				final String msg = timeInfo;
+				log.info(msg);
 				handler.post(new Runnable() {
 					@Override
 					public void run() {

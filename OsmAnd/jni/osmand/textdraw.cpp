@@ -223,7 +223,7 @@ bool calculatePathToRotate(RenderingContext* rc, TextDrawInfo* p) {
 			py += points[i].fY - points[i - 1].fY;
 		}
 		if (px != 0 || py != 0) {
-			p->pathRotate = std::atan2(py, px) * 180 / M_PI;
+			p->pathRotate = std::atan2(py, px);
 		}
 		return true;
 	}
@@ -319,10 +319,10 @@ bool calculatePathToRotate(RenderingContext* rc, TextDrawInfo* p) {
 	float ox = -py;
 	float oy = px;
 	if(plen > 0) {
-		float rot = std::atan2(py, px) * 180 / M_PI;
-		if (rot < 0) rot += 360;
-		if (rot > 90 && rot < 270) {
-			rot += 180;
+		float rot = std::atan2(py, px);
+		if (rot < 0) rot += M_PI * 2;
+		if (rot > M_PI_2 && rot < 3 * M_PI_2) {
+			rot += M_PI;
 			inverse = true;
 			ox = -ox;
 			oy = -oy;
@@ -354,27 +354,66 @@ bool calculatePathToRotate(RenderingContext* rc, TextDrawInfo* p) {
 	return true;
 }
 
-void drawTestBox(SkCanvas* cv, TextDrawInfo* text, SkPaint* paintIcon, SkPaint* paintText)
+void drawTestBox(SkCanvas* cv, SkRect* r, float rot, SkPaint* paintIcon, std::string text, SkPaint* paintText)
 {
 	cv->save();
-	cv->translate(text->bounds.centerX(),text->bounds.centerY());
-	cv->rotate(text->pathRotate);
-	SkRect r = SkRect::MakeLTRB(-text->bounds.width()/2, -text->bounds.height()/2,
-			text->bounds.width()/2, text->bounds.height()/2);
-	cv->drawRect(r, *paintIcon);
+	cv->translate(r->centerX(),r->centerY());
+	cv->rotate(rot * 180 / M_PI);
+	SkRect rs = SkRect::MakeLTRB(-r->width()/2, -r->height()/2,
+			r->width()/2, r->height()/2);
+	cv->drawRect(rs, *paintIcon);
 	if (paintText != NULL) {
-		cv->drawText(text->text.data(), text->text.length(), r.centerX(), r.centerY(),
+		cv->drawText(text.data(), text.length(), rs.centerX(), rs.centerY(),
 				*paintText);
 	}
 	cv->restore();
 }
 
-bool intersect(TextDrawInfo* t, TextDrawInfo* s)
-{
-	// TODO rotation
-	return t->bounds.intersect(s->bounds);
+float sqr(float a){
+	return a*a;
 }
 
+bool intersect(SkRect tRect, float tRot, TextDrawInfo* s)
+{
+	float sRot = s->pathRotate;
+	if (abs(tRot) < M_PI / 15 && abs(sRot) < M_PI / 15) {
+		return tRect.intersect(s->bounds);
+	}
+	float dist = sqrt(sqr(tRect.centerX() - s->bounds.centerX()) + sqr(tRect.centerY() - s->bounds.centerY()));
+	if(dist < 3) {
+		return true;
+	}
+	SkRect sRect = s->bounds;
+
+	// difference close to 90/270 degrees
+	if(abs(cos(tRot-sRot)) < 0.3 ){
+		// rotate one rectangle to 90 degrees
+		tRot += M_PI_2;
+		tRect = SkRect::MakeXYWH(tRect.centerX() -  tRect.height() / 2, tRect.centerY() -  tRect.width() / 2,
+				tRect.height(), tRect.width());
+	}
+
+	// determine difference close to 180/0 degrees
+	if(abs(sin(tRot-sRot)) < 0.3){
+		// rotate t box
+		// (calculate offset for t center suppose we rotate around s center)
+		float diff = atan2(tRect.centerY() - sRect.centerY(), tRect.centerX() - sRect.centerX());
+		diff -= sRot;
+		float left = sRect.centerX() + dist* cos(diff) - tRect.width()/2;
+		float top = sRect.centerY() - dist* sin(diff) - tRect.height()/2;
+		SkRect nRect = SkRect::MakeXYWH(left, top, tRect.width(), tRect.height());
+		return nRect.intersect(sRect);
+	}
+
+	// TODO other cases not covered
+	return tRect.intersect(sRect);
+}
+
+bool intersect(TextDrawInfo* t, TextDrawInfo* s) {
+	// TODO
+	return t->bounds.intersect(s->bounds);
+//	return intersect(t->bounds, t->pathRotate, s);
+}
 std::vector<TextDrawInfo*> search;
 bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDrawInfo*>& boundIntersections, TextDrawInfo* text,
 		SkPaint* paintText, SkPaint* paintIcon) {
@@ -395,24 +434,27 @@ bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDraw
 		text->bounds.offset(text->centerX - text->bounds.width()/2, text->centerY - text->bounds.height()/2);
 	}
 
-
-	SkRect boundsSearch = text->bounds;
-	float v = -getDensityValue(rc, std::max(5.0f, text->minDistance));
-	// TODO min distance different !
-	boundsSearch.inset(v, v);
-
 	// for text purposes
-//	drawTestBox(cv, text, paintIcon, paintText);
-
-	boundIntersections.query_in_box(boundsSearch, search);
+//	drawTestBox(cv, &text->bounds, text->pathRotate, paintIcon, text->text, NULL/*paintText*/);
+	boundIntersections.query_in_box(text->bounds, search);
 	for (uint i = 0; i < search.size(); i++) {
 		TextDrawInfo* t = search.at(i);
 		if (intersect(text, t)) {
 			return true;
-		} else if (boundsSearch.intersect(t->bounds) && t->text == text->text) {
-			return true;
 		}
 	}
+	if(text->minDistance > 0) {
+		SkRect boundsSearch = text->bounds;
+		boundsSearch.inset(-getDensityValue(rc, std::max(5.0f, text->minDistance)), -getDensityValue(rc, 12));
+//		drawTestBox(cv, &boundsSearch, text->pathRotate, paintIcon, text->text, NULL/*paintText*/);
+		for (uint i = 0; i < search.size(); i++) {
+			TextDrawInfo* t = search.at(i);
+			if (t->minDistance > 0 && intersect(boundsSearch, text->pathRotate,  t)) {
+				return true;
+			}
+		}
+	}
+
 	boundIntersections.insert(text, text->bounds);
 
 	return false;

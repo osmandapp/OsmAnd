@@ -8,7 +8,7 @@
 #include <SkPath.h>
 #include <SkBitmap.h>
 
-//#define DEBUG_NAT_OPERATIONS
+#define DEBUG_NAT_OPERATIONS
 
 #ifdef DEBUG_NAT_OPERATIONS
 	#define NAT_COUNT(rc, op) rc->nativeOperations.pause(); op; rc->nativeOperations.start()
@@ -81,7 +81,7 @@ jfieldID getFid(jclass cls,const char* fieldName, const char* sig )
 }
 
 class watcher {
-	int elapsedTime;
+	long elapsedTime;
 	bool enableFlag;
 //	timeval startInit;
 //	timeval endInit;
@@ -94,6 +94,7 @@ public:
 	watcher() {
 		elapsedTime = 0;
 		enableFlag = true;
+		run = false;
 	}
 	void enable(){
 		enableFlag = true;
