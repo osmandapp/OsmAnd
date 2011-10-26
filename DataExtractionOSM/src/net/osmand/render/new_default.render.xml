@@ -126,7 +126,7 @@
 			<filter appMode="pedestrian" tag="highway" value="footway" order="65" />
 			<filter appMode="pedestrian" tag="highway" value="steps" order="66" />
 			<filter appMode="pedestrian" tag="highway" value="bridleway" order="59" />
-
+			
 			<filter tag="highway" value="pedestrian" order="40" />
 			<filter appMode="bicycle" tag="highway" value="cycleway" order="59" />
 			<filter tag="highway" value="cycleway" order="39" />
@@ -134,6 +134,8 @@
 			<filter tag="highway" value="footway" order="37" />
 			<filter tag="highway" value="steps" order="36" />
 			<filter tag="highway" value="bridleway" order="35" />
+			
+			<filter tag="countour" order="15" />
 		</group>
 		
 		<filter tag="" value="" order="128" orderType="1"/>
@@ -144,6 +146,7 @@
 		<filter tag="" value="" layer="-1" order="10" orderType="2"/>
 		<filter tag="" value="" layer="1" order="67" orderType="2"/>
 		<filter tag="" value="" order="11" orderType="2"/>
+		
 	</order>
 
 
@@ -290,7 +293,8 @@
 		<filter minzoom="6" textSize="12" textColor="#6699cc" textWrapWidth="20" tag="natural" value="water" textOrder="10"/>
 		<filter minzoom="6" textSize="12" textColor="#6699cc" textWrapWidth="20" tag="natural" value="lake" textOrder="10"/>
 		<filter minzoom="13" textSize="12" textColor="#ff000000" textWrapWidth="10" tag="natural" value="wood" textOrder="10"/>
-
+		<filter minzoom="14" maxzoom="16" textSize="12" textOnPath="true" tag="contour"/>
+		
 		<filter minzoom="13" textSize="12" textColor="#6699cc" textOnPath="true" tag="waterway" value="stream" textOrder="15"/>
 		<filter minzoom="11" textSize="12" textColor="#6699cc" textOnPath="true" textMinDistance="80" tag="waterway" value="river" textOrder="10"/>
 		<filter minzoom="13" textSize="12" textColor="#6699cc" textOnPath="true" textMinDistance="80" tag="waterway" value="canal" textOrder="10"/>
@@ -641,6 +645,7 @@
 		<filter minzoom="16" icon="shop_copyshop" tag="shop" value="copyshop" />
 		<filter minzoom="16" icon="shop_greengrocer" tag="shop" value="greengrocer" />
 		<filter minzoom="16" icon="shop_mobile_phone" tag="shop" value="mobile_phone" />
+		<filter minzoom="16" icon="bird_hide" tag="leisure" value="bird_hide" />
 		
 		<filter minzoom="4" tag="place" icon="city" value="city" />
 		<filter minzoom="6" tag="place" icon="city" value="town" />
@@ -1142,6 +1147,8 @@
 		<filter minzoom="14" color="#000000" strokeWidth="2" tag="highway" value="services" />
 
 		<filter minzoom="14" color="#000000" strokeWidth="2" tag="highway" value="ford" />
+		
+		<filter minzoom="14" color="#ff4900" strokeWidth="1" tag="contour" value="elevation" />
 
 		<filter minzoom="15" maxzoom="15" color="#99cccc" strokeWidth="6" color_2="#ffffff" strokeWidth_2="5" pathEffect_2="8_6" tag="highway" value="construction" />
 		<filter minzoom="16" color="#99cccc" strokeWidth="8" color_2="#ffffff" strokeWidth_2="7" pathEffect_2="8_6" tag="highway" value="construction" />
