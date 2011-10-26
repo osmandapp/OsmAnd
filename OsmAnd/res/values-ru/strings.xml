@@ -692,6 +692,14 @@
 	<string name="west_north_west">запад-северо-запад</string>
 	<string name="north_west">северо-запад</string>
 	<string name="north_north_west">северо-северо-запад</string>
+	<string name="front">Вперед</string>
+	<string name="front_right">Направо вперед</string>
+	<string name="right">Направо</string>
+	<string name="back_right">Направо назад</string>
+	<string name="back">Назад</string>
+	<string name="back_left">Налево назад</string>
+	<string name="left">Налево</string>
+	<string name="front_left">Налево вперед</string>
 	<string name="oclock">ч.</string>
 	<string name="meters">м</string>
 	<string name="kilometers">км</string>
@@ -700,4 +708,8 @@
 	<string name="accuracy">Точность</string>
 	<string name="altitude">Высота</string>
 	<string name="no_info">Нет информации</string>
+	<string name="direction_style_sidewise">По сторонам (8 секторов)</string>
+	<string name="direction_style_clockwise">По циферблату (12 секторов)</string>
+	<string name="settings_direction_style">Стиль указания направлений</string>
+	<string name="settings_direction_style_descr">Выберите стиль указания относительных направлений во время движения</string>
 </resources>

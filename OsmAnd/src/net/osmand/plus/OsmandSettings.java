@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.access.AccessibleToast;
+import net.osmand.access.RelativeDirectionStyle;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -65,6 +66,7 @@ public class OsmandSettings {
 	private SharedPreferences defaultProfilePreferences;
 	private SharedPreferences profilePreferences;
 	private ApplicationMode currentMode;
+	private RelativeDirectionStyle relativeDirectionStyle;
 	
 	// cache variables
 	private long lastTimeInternetConnectionChecked = 0;
@@ -77,6 +79,7 @@ public class OsmandSettings {
 		globalPreferences = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		// start from default settings
 		currentMode = ApplicationMode.DEFAULT;
+		relativeDirectionStyle = RelativeDirectionStyle.SIDEWISE;
 		
 		defaultProfilePreferences = getProfilePreferences(ApplicationMode.DEFAULT);
 		profilePreferences = defaultProfilePreferences;
@@ -153,6 +156,23 @@ public class OsmandSettings {
 		}
 	}
 	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<RelativeDirectionStyle> DIRECTION_STYLE = new OsmandPreference<RelativeDirectionStyle>(){
+		public String getId() {
+			return "direction_style";
+		};
+		
+		@Override
+		public RelativeDirectionStyle get() {
+			return relativeDirectionStyle;
+		}
+
+		@Override
+		public boolean set(RelativeDirectionStyle style) {
+			relativeDirectionStyle = style;
+			return globalPreferences.edit().putString(getId(), style.name()).commit();
+		}
+	}; 
 
 	// Check internet connection available every 15 seconds
 	public boolean isInternetConnectionAvailable(){

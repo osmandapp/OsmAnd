@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import net.osmand.access.AccessibleToast;
+import net.osmand.access.RelativeDirectionStyle;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.NavigationService;
@@ -265,6 +266,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			entries[i] = ApplicationMode.toHumanString(ApplicationMode.values()[i], this);
 		}
 		registerListPreference(osmandSettings.APPLICATION_MODE, screen, entries, ApplicationMode.values());
+		
+		entries = new String[RelativeDirectionStyle.values().length];
+		for(int i=0; i<entries.length; i++){
+			entries[i] = RelativeDirectionStyle.toHumanString(RelativeDirectionStyle.values()[i], this);
+		}
+		registerListPreference(osmandSettings.DIRECTION_STYLE, screen, entries, RelativeDirectionStyle.values());
 		
 		Collection<String> rendererNames = getMyApplication().getRendererRegistry().getRendererNames();
 		entries = (String[]) rendererNames.toArray(new String[rendererNames.size()]);

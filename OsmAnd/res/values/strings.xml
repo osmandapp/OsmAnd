@@ -754,6 +754,14 @@
 <string name="west_north_west">west-north-west</string>
 <string name="north_west">north-west</string>
 <string name="north_north_west">north-north-west</string>
+<string name="front">Front</string>
+<string name="front_right">Front right</string>
+<string name="right">Right</string>
+<string name="back_right">Back right</string>
+<string name="back">Back</string>
+<string name="back_left">Back left</string>
+<string name="left">Left</string>
+<string name="front_left">Front left</string>
 <string name="oclock">o\'clock</string>
 <string name="meters">m</string>
 <string name="kilometers">km</string>
@@ -762,4 +770,8 @@
 <string name="accuracy">Accuracy</string>
 <string name="altitude">Altitude</string>
 <string name="no_info">No info</string>
+<string name="direction_style_sidewise">Sidewise (8 sectors)</string>
+<string name="direction_style_clockwise">Clockwise (12 sectors)</string>
+<string name="settings_direction_style">Direction style</string>
+<string name="settings_direction_style_descr">Choose style to express relative directions while moving</string>
 </resources>
