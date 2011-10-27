@@ -1,23 +1,38 @@
 LOCAL_PATH := $(call my-dir)
 
-include $(CLEAR_VARS)
-LOCAL_MODULE := skia2.2
-NDK_MODULE_PATH := $(LOCAL_PATH)
-LOCAL_SRC_FILES := libskia2.2.so
-
-include $(PREBUILT_SHARED_LIBRARY)
+#include $(CLEAR_VARS)
+#LOCAL_MODULE := skia2.2
+#NDK_MODULE_PATH := $(LOCAL_PATH)
+#LOCAL_SRC_FILES := libskia2.2.so
+#LOCAL_PRELINK_MODULE := false
+#
+#include $(PREBUILT_SHARED_LIBRARY)
 
 #include $(CLEAR_VARS)
-#LOCAL_MODULE := oskia
+#LOCAL_MODULE := skia_built
 #NDK_MODULE_PATH := $(LOCAL_PATH)
-#LOCAL_SRC_FILES := liboskia.a
+#LOCAL_SRC_FILES := skia_built.a
+#include $(PREBUILT_STATIC_LIBRARY)
+#
+#include $(CLEAR_VARS)
+#LOCAL_MODULE := png
+#NDK_MODULE_PATH := $(LOCAL_PATH)
+#LOCAL_SRC_FILES := libpng.a
+#include $(PREBUILT_STATIC_LIBRARY)
+#
+#include $(CLEAR_VARS)
+#LOCAL_MODULE := gif
+#NDK_MODULE_PATH := $(LOCAL_PATH)
+#LOCAL_SRC_FILES := libgif.a
+#include $(PREBUILT_STATIC_LIBRARY)
+#
+#include $(CLEAR_VARS)
+#LOCAL_MODULE := ft2
+#NDK_MODULE_PATH := $(LOCAL_PATH)
+#LOCAL_SRC_FILES := libft2.a
 #include $(PREBUILT_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
-
-#SKIA_FOLDER := $(LOCAL_PATH)/../../../skia/trunk
-#SKIA_SRC := $(LOCAL_PATH)/../../../skia/trunk/src
-#SKIA_FOLDER := $(LOCAL_PATH)/skia
 ANDROID_FOLDER := /home/victor/projects/android/
 SKIA_FOLDER := $(ANDROID_FOLDER)/external/skia
 SKIA_SRC := skia
@@ -38,16 +53,13 @@ LOCAL_SRC_FILES := osmand/rendering.cpp
 	
 	
 LOCAL_CFLAGS := -Wall -g
-LOCAL_LDLIBS := -ldl -llog -lcutils
+# in that case libskia_2.2.so should be in NDK folder to be properly built
+LOCAL_LDLIBS := -llog -lcutils -lskia_2.2
+##LOCAL_LDLIBS := -ldl -llog -lcutils
 
-#LOCAL_STATIC_LIBRARIES := oskia
+#LOCAL_STATIC_LIBRARIES := skia_built gif png ft2
+#LOCAL_SHARED_LIBRARIES := skia2.2
 
-LOCAL_SHARED_LIBRARIES := skia2.2
-#    libcutils \
-#    libutils \
-#    libandroid_runtime \
-#    libGLESv2
-
-# LOCAL_PRELINK_MODULE := false
+#LOCAL_PRELINK_MODULE := false
 
 include $(BUILD_SHARED_LIBRARY)
