@@ -21,9 +21,9 @@
 #include "SkPath.h"
 
 #include "common.h"
-#include "renderRules.cpp"
+#include "renderRules.h"
 #include "textdraw.cpp"
-#include "mapObjects.cpp"
+#include "mapObjects.h"
 
 extern JNIEnv* globalEnv();
 char debugMessage[1024];

@@ -1,15 +1,11 @@
 #ifndef _OSMAND_BINARY_READ
 #define _OSMAND_BINARY_READ
 
-#include <jni.h>
 #include <math.h>
 #include <android/log.h>
 #include <stdio.h>
-#include <vector>
-#include <string>
 #include <fstream>
 #include <map>
-
 #include "google/protobuf/io/zero_copy_stream_impl.h"
 #include "google/protobuf/wire_format_lite.h"
 #include "google/protobuf/wire_format_lite.cc"
@@ -19,7 +15,7 @@
 #include "proto/osmand_odb.pb.h"
 
 char errorMsg[1024];
-
+#define	INT_MAX		0x7fffffff	/* max value for an int */
 using namespace google::protobuf;
 using namespace google::protobuf::internal;
 
@@ -35,7 +31,7 @@ inline bool readInt(io::CodedInputStream* input, uint32* sz) {
 	return true;
 }
 
-inline bool skipFixed32(io::CodedInputStream* input){
+bool skipFixed32(io::CodedInputStream* input){
 	uint32 sz;
 	if(!readInt(input, &sz)) {
 		return false;
@@ -43,9 +39,17 @@ inline bool skipFixed32(io::CodedInputStream* input){
 	return input->Skip(sz);
 }
 
-#define SKIPFIELDS if (WireFormatLite::GetTagWireType(tag) ==WireFormatLite::WIRETYPE_END_GROUP) { return true; } \
-		if (WireFormatLite::GetTagWireType(tag) ==WireFormatLite::WIRETYPE_FIXED32_LENGTH_DELIMITED) { if(!skipFixed32(input)) return false; } \
-	    if(!WireFormat::SkipField(input, tag, NULL))  {return false; }
+bool skipUnknownFields(io::CodedInputStream* input, int tag) {
+	if (WireFormatLite::GetTagWireType(tag) == WireFormatLite::WIRETYPE_FIXED32_LENGTH_DELIMITED) {
+		if (!skipFixed32(input)) {
+			return false;
+		}
+	} else if (!WireFormat::SkipField(input, tag, NULL)) {
+		return false;
+	}
+	return true;
+}
+
 
 struct BinaryMapFile {
 	io::FileInputStream* input;
@@ -56,7 +60,8 @@ struct BinaryMapFile {
 		delete input;
 	}
 };
-
+//display google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
+// display google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)
 bool initMapStructure(io::CodedInputStream* input, BinaryMapFile* file) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
 	uint32 tag;
@@ -64,23 +69,29 @@ bool initMapStructure(io::CodedInputStream* input, BinaryMapFile* file) {
 	uint32 versionConfirm = -2;
 	while ((tag = input->ReadTag()) != 0) {
 		switch (WireFormatLite::GetTagFieldNumber(tag)) {
-			// required uint32 version = 1;
-			case OsmAndStructure::kVersionFieldNumber : {
-				DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &version)));
-				break;
-			}
+		// required uint32 version = 1;
+		case OsmAndStructure::kVersionFieldNumber: {
+			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &version)));
+			break;
+		}
 //			case OsmAndStructure::kMapIndexFieldNumber : {
 //				// TODO
 //				break;
 //			}
-			case OsmAndStructure::kVersionConfirmFieldNumber : {
-				DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &versionConfirm)));
-				break;
+		case OsmAndStructure::kVersionConfirmFieldNumber: {
+			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &versionConfirm)));
+			break;
+		}
+		default: {
+			if (WireFormatLite::GetTagWireType(tag) == WireFormatLite::WIRETYPE_END_GROUP) {
+				return true;
 			}
-			default: {
-				SKIPFIELDS;
-				break;
+			if (!skipUnknownFields(input, tag)) {
+				return false;
 			}
+
+			break;
+		}
 		}
 	}
 	if (version != versionConfirm) {
@@ -99,8 +110,9 @@ void loadJniBinaryRead() {
 
 extern "C"
 JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_initBinaryMapFile(JNIEnv* ienv,
-		jobject path) {
+		jobject obj, jobject path) {
 	// Verify that the version of the library that we linked against is
+	setGlobalEnv(ienv);
 	const char* utf = ienv->GetStringUTFChars((jstring)path, NULL);
 	std::string inputName(utf);
 	ienv->ReleaseStringUTFChars((jstring)path, utf);
@@ -126,6 +138,7 @@ JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_initB
 	BinaryMapFile* mapFile = new BinaryMapFile();
 	mapFile->input = new io::FileInputStream(fileno(file));
 	io::CodedInputStream cis (mapFile->input);
+	cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
 	if (!initMapStructure(&cis, mapFile)) {
 		sprintf(errorMsg, "File not initialised : %s", inputName.c_str());
 		__android_log_print(ANDROID_LOG_WARN, "net.osmand", errorMsg);

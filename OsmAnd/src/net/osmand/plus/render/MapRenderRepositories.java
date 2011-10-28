@@ -305,7 +305,7 @@ public class MapRenderRepositories {
 				if(prefs.NATIVE_RENDERING.get()){
 					if (!nativeFiles.contains(mapName)) {
 						nativeFiles.add(mapName);
-						if (NativeOsmandLibrary.initBinaryMapFile(mapName)) {
+						if (!NativeOsmandLibrary.initBinaryMapFile(mapName)) {
 							continue;
 						}
 						log.debug("Native resource " + mapName + " initialized"); //$NON-NLS-1$ //$NON-NLS-2$

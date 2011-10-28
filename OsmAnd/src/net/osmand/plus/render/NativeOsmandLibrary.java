@@ -14,7 +14,6 @@ public class NativeOsmandLibrary {
 	
 	public static void preloadLibrary() {}
 	
-//	public static native boolean loadLibrary();
 	
 	public static native String generateRendering(RenderingContext rc, BinaryMapDataObject[] objects, Bitmap bmp, 
 			boolean useEnglishNames, RenderingRuleSearchRequest render, int defaultColor);

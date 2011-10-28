@@ -11,7 +11,7 @@
 #include "SkPath.h"
 
 #include "common.h"
-#include "renderRules.cpp"
+#include "renderRules.h"
 
 const char REF_CHAR = ((char)0x0019);
 const char DELIM_CHAR = ((char)0x0018);
