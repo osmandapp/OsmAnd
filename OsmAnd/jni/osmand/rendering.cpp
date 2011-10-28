@@ -17,14 +17,12 @@
 #include "SkPaint.h"
 #include "SkPath.h"
 
-#include "common.cpp"
+#include "common.h"
 #include "renderRules.cpp"
 #include "textdraw.cpp"
 #include "mapObjects.cpp"
 
-
 char debugMessage[1024];
-
 
  void calcPoint(MapDataObject* mObj, jint ind, RenderingContext* rc) {
 	rc->pointCount++;
@@ -543,66 +541,6 @@ void drawObject(RenderingContext* rc, BaseMapDataObject* mapObject, SkCanvas* cv
 }
 
 
-
-
-void copyRenderingContext(jobject orc, RenderingContext* rc) 
-{
-	rc->leftX = env->GetFloatField( orc, getFid( RenderingContextClass, "leftX", "F" ) );
-	rc->topY = env->GetFloatField( orc, getFid( RenderingContextClass, "topY", "F" ) );
-	rc->width = env->GetIntField( orc, getFid( RenderingContextClass, "width", "I" ) );
-	rc->height = env->GetIntField( orc, getFid( RenderingContextClass, "height", "I" ) );
-	
-	
-	rc->zoom = env->GetIntField( orc, getFid( RenderingContextClass, "zoom", "I" ) );
-	rc->rotate = env->GetFloatField( orc, getFid( RenderingContextClass, "rotate", "F" ) );
-	rc->tileDivisor = env->GetFloatField( orc, getFid( RenderingContextClass, "tileDivisor", "F" ) );
-	
-	rc->pointCount = env->GetIntField( orc, getFid( RenderingContextClass, "pointCount", "I" ) );
-	rc->pointInsideCount = env->GetIntField( orc, getFid( RenderingContextClass, "pointInsideCount", "I" ) );
-	rc->visible = env->GetIntField( orc, getFid( RenderingContextClass, "visible", "I" ) );
-	rc->allObjects = env->GetIntField( orc, getFid( RenderingContextClass, "allObjects", "I" ) );
-	
-	rc->cosRotateTileSize = env->GetFloatField( orc, getFid( RenderingContextClass, "cosRotateTileSize", "F" ) );
-	rc->sinRotateTileSize = env->GetFloatField( orc, getFid( RenderingContextClass, "sinRotateTileSize", "F" ) );
-	rc->density = env->GetFloatField( orc, getFid( RenderingContextClass, "density", "F" ) );
-	rc->highResMode = env->GetBooleanField( orc, getFid( RenderingContextClass, "highResMode", "Z" ) );
-	rc->mapTextSize = env->GetFloatField( orc, getFid( RenderingContextClass, "mapTextSize", "F" ) );
-
-
-	rc->shadowRenderingMode = env->GetIntField( orc, getFid( RenderingContextClass, "shadowRenderingMode", "I" ) );
-	rc->shadowLevelMin = env->GetIntField( orc, getFid( RenderingContextClass, "shadowLevelMin", "I" ) );
-	rc->shadowLevelMax = env->GetIntField( orc, getFid( RenderingContextClass, "shadowLevelMax", "I" ) );
-	rc->androidContext = env->GetObjectField(orc, getFid( RenderingContextClass, "ctx", "Landroid/content/Context;"));
-	
-	rc->originalRC = orc; 
-
-}
-
-
-void mergeRenderingContext(jobject orc, RenderingContext* rc) 
-{
-	env->SetIntField( orc, getFid(RenderingContextClass, "pointCount", "I" ) , rc->pointCount);
-	env->SetIntField( orc, getFid(RenderingContextClass, "pointInsideCount", "I" ) , rc->pointInsideCount);
-	env->SetIntField( orc, getFid(RenderingContextClass, "visible", "I" ) , rc->visible);
-	env->SetIntField( orc, getFid(RenderingContextClass, "allObjects", "I" ) , rc->allObjects);
-	env->SetIntField( orc, getFid(RenderingContextClass, "textRenderingTime", "I" ) , rc->textRendering.getElapsedTime());
-	env->DeleteLocalRef(rc->androidContext);
-
-}
-
-void loadLibrary(jobject rc) {
-	loadJniCommon(rc);
-	loadJNIRenderingRules();
-	loadJniMapObjects();
-}
-
-void unloadLibrary() {
-	unloadJniMapObjects();
-	unloadJniRenderRules();
-	unloadJniCommon();
-}
-
-
 void drawIconsOverCanvas(RenderingContext* rc, SkCanvas* canvas)
 {
 	int skewConstant = (int) getDensityValue(rc, 16);
@@ -759,10 +697,6 @@ extern "C" {
 JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_generateRendering( JNIEnv* ienv,
 		jobject obj, jobject renderingContext, jobjectArray binaryMapDataObjects, jobject bmpObj,
 		jboolean useEnglishNames, jobject renderingRuleSearchRequest, jint defaultColor) {
-	if(!env) {
-	   env = ienv;
-	   loadLibrary(renderingContext);
-	}
 	SkBitmap* bmp = getNativeBitmap(bmpObj);
 	sprintf(debugMessage, "Image w:%d h:%d !", bmp->width(), bmp->height());
 	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);

@@ -28,13 +28,15 @@
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.2094589046" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 							<tool id="com.android.tool.compiler.g++.1543637239" name="Android G++" superClass="com.android.tool.compiler.g++">
 								<option id="gnu.cpp.compiler.option.include.paths.757537552" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="/home/victor/projects/android-ndk-r6b/sources/cxx-stl/stlport/stlport"/>
 									<listOptionValue builtIn="false" value="/home/victor/projects/android-ndk-r6b/sources/cxx-stl/gnu-libstdc++/include"/>
 									<listOptionValue builtIn="false" value="/home/victor/projects/android/external/skia/include/core"/>
 									<listOptionValue builtIn="false" value="/home/victor/projects/android/frameworks/base/include"/>
 									<listOptionValue builtIn="false" value="/home/victor/projects/android/external/skia/include/effects"/>
 									<listOptionValue builtIn="false" value="/home/victor/projects/android-ndk-r6b/sources/cxx-stl/gnu-libstdc++/libs/armeabi/include"/>
 									<listOptionValue builtIn="false" value="/home/victor/projects/android-ndk-r6b/platforms/android-8/arch-arm/usr/include/linux/"/>
+									<listOptionValue builtIn="false" value="/home/victor/projects/android-ndk-r6b/sources/cxx-stl/system/include"/>
+									<listOptionValue builtIn="false" value="/home/victor/projects/android-ndk-r6b/sources/cxx-stl/stlport/stlport"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/OsmAnd/jni/protobuf}&quot;"/>
 								</option>
 								<inputType id="com.android.tool.compiler.g++.input.478508689" superClass="com.android.tool.compiler.g++.input"/>
 							</tool>

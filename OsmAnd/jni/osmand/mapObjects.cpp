@@ -1,7 +1,7 @@
 #include <jni.h>
 #include <vector>
 
-#include "common.cpp"
+#include "common.h"
 
 
 jclass MultiPolygonClass;

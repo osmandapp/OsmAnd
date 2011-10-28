@@ -129,6 +129,11 @@ public class MapRenderRepositories {
 			}
 			throw oome;
 		}
+		if(prefs.NATIVE_RENDERING.get()){
+			if(NativeOsmandLibrary.initBinaryMapFile(file.getAbsolutePath())){
+				log.debug("Native resource " + file.getAbsolutePath() + " initialized"); //$NON-NLS-1$ //$NON-NLS-2$ 
+			}
+		}
 		if (log.isDebugEnabled()) {
 			log.debug("Initializing db " + file.getAbsolutePath() + " " + (System.currentTimeMillis() - start) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}

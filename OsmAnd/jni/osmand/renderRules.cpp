@@ -8,7 +8,7 @@
 #include <vector>
 #include <hash_map>
 
-#include "common.cpp"
+#include "common.h"
 
 jclass ListClass;
 jmethodID List_size;

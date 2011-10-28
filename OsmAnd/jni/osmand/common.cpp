@@ -1,26 +1,32 @@
 #ifndef _OSMAND_COMMON
 #define _OSMAND_COMMON
 
-#include <jni.h>
+#include <common.h>
 #include <string>
 #include <vector>
 #include <hash_map>
 #include <SkPath.h>
 #include <SkBitmap.h>
 
-#define DEBUG_NAT_OPERATIONS
-
-#ifdef DEBUG_NAT_OPERATIONS
-	#define NAT_COUNT(rc, op) rc->nativeOperations.pause(); op; rc->nativeOperations.start()
-#else
-	#define NAT_COUNT(rc, op) op;
-#endif
-
-
 JNIEnv* env;
-const std::string EMPTY_STRING;
-const int WHITE_COLOR = -1;
-const int BLACK_COLOR = 0xff000000;
+
+extern void loadJniCommon();
+extern void loadJniBinaryRead();
+extern void loadJNIRenderingRules();
+extern void loadJniMapObjects();
+
+extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
+    if(vm->GetEnv((void **)&env, JNI_VERSION_1_4)){
+    	return JNI_ERR; /* JNI version not supported */
+    }
+    loadJniCommon();
+    loadJNIRenderingRules();
+    loadJniMapObjects();
+    loadJniBinaryRead();
+	return JNI_VERSION_1_4;
+}
+
+
 
 jclass RenderingContextClass;
 jfieldID RenderingContext_interrupted;
@@ -33,158 +39,53 @@ jclass globalRef(jobject o)
 	return  (jclass) env->NewGlobalRef( o);
 }
 
-class TextDrawInfo {
-public :
-	std::string text;
-
-	TextDrawInfo(std::string itext)  {
-		text = itext;
-		drawOnPath = false;
-		path = NULL;
-		pathRotate = 0;
-	}
-	SkRect bounds;
-	float centerX;
-	float centerY;
-
-	float textSize ;
-	float minDistance ;
-	int textColor;
-	int textShadow ;
-	uint textWrap ;
-	bool bold ;
-	std::string shieldRes;
-	int textOrder;
-
-	bool drawOnPath;
-	SkPath* path;
-	float pathRotate;
-	float vOffset ;
-	float hOffset ;
-
-	~TextDrawInfo() {
-		if (path != NULL) {
-			delete path;
-		}
-	}
-};
-
-struct IconDrawInfo {
-	SkBitmap* bmp;
-	float x;
-	float y;
-};
 
 jfieldID getFid(jclass cls,const char* fieldName, const char* sig )
 {
 	return env->GetFieldID( cls, fieldName, sig);
 }
 
-class watcher {
-	long elapsedTime;
-	bool enableFlag;
-//	timeval startInit;
-//	timeval endInit;
-	timespec startInit;
-	timespec endInit;
-	bool run;
-
-
-public:
-	watcher() {
-		elapsedTime = 0;
-		enableFlag = true;
-		run = false;
+watcher::watcher() {
+	elapsedTime = 0;
+	enableFlag = true;
+	run = false;
+}
+void watcher::enable() {
+	enableFlag = true;
+}
+void watcher::disable() {
+	pause();
+	enableFlag = false;
+}
+void watcher::start() {
+	if (!enableFlag) {
+		return;
 	}
-	void enable(){
-		enableFlag = true;
-	}
-	void disable(){
-		pause();
-		enableFlag = false;
-	}
-	void start() {
-		if(!enableFlag){
-			return;
-		}
-		if (!run) {
-			clock_gettime(CLOCK_MONOTONIC, &startInit);
+	if (!run) {
+		clock_gettime(CLOCK_MONOTONIC, &startInit);
 //			gettimeofday(&startInit, NULL);
-		}
-		run = true;
 	}
-	void pause() {
-		if (!run) {
-			return;
-		}
-		clock_gettime(CLOCK_MONOTONIC, &endInit );
-		// gettimeofday(&endInit, NULL);
-		int sec = endInit.tv_sec - startInit.tv_sec;
-		if(sec > 0){
-			elapsedTime += 1e9 * sec;
-		}
-		elapsedTime += endInit.tv_nsec - startInit.tv_nsec ;
+	run = true;
+}
+void watcher::pause() {
+	if (!run) {
+		return;
+	}
+	clock_gettime(CLOCK_MONOTONIC, &endInit);
+	// gettimeofday(&endInit, NULL);
+	int sec = endInit.tv_sec - startInit.tv_sec;
+	if (sec > 0) {
+		elapsedTime += 1e9 * sec;
+	}
+	elapsedTime += endInit.tv_nsec - startInit.tv_nsec;
 //		elapsedTime += (endInit.tv_sec * 1000 + endInit.tv_usec / 1000)
 //					- (startInit.tv_sec * 1000 + startInit.tv_usec / 1000);
-		run = false;
-	}
-	int getElapsedTime() {
-		pause();
-		return elapsedTime / 1e6;
-	}
-};
-
-
-struct RenderingContext {
-	jobject originalRC;
-	jobject androidContext;
-
-	std::vector<TextDrawInfo*> textToDraw;
-	std::vector<IconDrawInfo> iconsToDraw;
-	bool highResMode;
-	float mapTextSize;
-	float density;
-
-	float leftX;
-	float topY;
-	int width;
-	int height;
-
-	int zoom;
-	float rotate;
-	float tileDivisor;
-
-	// debug purpose
-	int pointCount;
-	int pointInsideCount;
-	int visible;
-	int allObjects;
-	watcher textRendering;
-	watcher nativeOperations;
-
-	// use to calculate points
-	float calcX;
-	float calcY;
-
-	float cosRotateTileSize;
-	float sinRotateTileSize;
-
-	int shadowRenderingMode;
-
-	// not expect any shadow
-	int shadowLevelMin;
-	int shadowLevelMax;
-
-	bool interrupted() {
-		return env->GetBooleanField(originalRC, RenderingContext_interrupted);
-	}
-	~RenderingContext() {
-		for (uint i = 0; i < textToDraw.size(); i++) {
-			delete textToDraw.at(i);
-		}
-	}
-};
-
+	run = false;
+}
+int watcher::getElapsedTime() {
+	pause();
+	return elapsedTime / 1e6;
+}
 
 
 
@@ -202,9 +103,7 @@ std::string getStringField(jobject o, jfieldID fid)
 	return res;
 }
 
-std::string getStringMethod(jobject o, jmethodID fid)
-{
-	jstring st = (jstring) env->CallObjectMethod(o, fid);
+std::string getString(jstring st) {
 	if (st == NULL) {
 		return EMPTY_STRING;
 	}
@@ -215,17 +114,14 @@ std::string getStringMethod(jobject o, jmethodID fid)
 	return res;
 }
 
+std::string getStringMethod(jobject o, jmethodID fid)
+{
+	return getString((jstring) env->CallObjectMethod(o, fid));
+}
+
 std::string getStringMethod(jobject o, jmethodID fid, int i)
 {
-	jstring st = (jstring) env->CallObjectMethod(o, fid, i);
-	if (st == NULL) {
-		return EMPTY_STRING;
-	}
-	const char* utf = env->GetStringUTFChars(st, NULL);
-	std::string res(utf);
-	env->ReleaseStringUTFChars(st, utf);
-	env->DeleteLocalRef(st);
-	return res;
+	return getString((jstring) env->CallObjectMethod(o, fid, i));
 }
 
 float getDensityValue(RenderingContext* rc, float val) {
@@ -268,11 +164,12 @@ SkBitmap* getCachedBitmap(RenderingContext* rc, std::string js)
 	return res;
 }
 
-void loadJniCommon(jobject rc) {
 
-	RenderingContextClass = globalRef(env->GetObjectClass(rc));
+void loadJniCommon() {
+	RenderingContextClass = globalRef(env->FindClass("net/osmand/plus/render/OsmandRenderer$RenderingContext"));
 	RenderingContext_interrupted = getFid(RenderingContextClass, "interrupted", "Z");
 
+	RenderingIconsClass = globalRef(env->FindClass("net/osmand/render/RenderingRule"));
 	RenderingIconsClass = globalRef(env->FindClass("net/osmand/plus/render/RenderingIcons"));
 	RenderingIcons_getIcon = env->GetStaticMethodID(RenderingIconsClass, "getIcon",
 			"(Landroid/content/Context;Ljava/lang/String;)Landroid/graphics/Bitmap;");
@@ -282,6 +179,54 @@ void loadJniCommon(jobject rc) {
 void unloadJniCommon() {
 	env->DeleteGlobalRef(RenderingContextClass);
 	env->DeleteGlobalRef(RenderingIconsClass);
+}
+
+
+
+
+
+void copyRenderingContext(jobject orc, RenderingContext* rc)
+{
+	rc->leftX = env->GetFloatField( orc, getFid( RenderingContextClass, "leftX", "F" ) );
+	rc->topY = env->GetFloatField( orc, getFid( RenderingContextClass, "topY", "F" ) );
+	rc->width = env->GetIntField( orc, getFid( RenderingContextClass, "width", "I" ) );
+	rc->height = env->GetIntField( orc, getFid( RenderingContextClass, "height", "I" ) );
+
+
+	rc->zoom = env->GetIntField( orc, getFid( RenderingContextClass, "zoom", "I" ) );
+	rc->rotate = env->GetFloatField( orc, getFid( RenderingContextClass, "rotate", "F" ) );
+	rc->tileDivisor = env->GetFloatField( orc, getFid( RenderingContextClass, "tileDivisor", "F" ) );
+
+	rc->pointCount = env->GetIntField( orc, getFid( RenderingContextClass, "pointCount", "I" ) );
+	rc->pointInsideCount = env->GetIntField( orc, getFid( RenderingContextClass, "pointInsideCount", "I" ) );
+	rc->visible = env->GetIntField( orc, getFid( RenderingContextClass, "visible", "I" ) );
+	rc->allObjects = env->GetIntField( orc, getFid( RenderingContextClass, "allObjects", "I" ) );
+
+	rc->cosRotateTileSize = env->GetFloatField( orc, getFid( RenderingContextClass, "cosRotateTileSize", "F" ) );
+	rc->sinRotateTileSize = env->GetFloatField( orc, getFid( RenderingContextClass, "sinRotateTileSize", "F" ) );
+	rc->density = env->GetFloatField( orc, getFid( RenderingContextClass, "density", "F" ) );
+	rc->highResMode = env->GetBooleanField( orc, getFid( RenderingContextClass, "highResMode", "Z" ) );
+	rc->mapTextSize = env->GetFloatField( orc, getFid( RenderingContextClass, "mapTextSize", "F" ) );
+
+
+	rc->shadowRenderingMode = env->GetIntField( orc, getFid( RenderingContextClass, "shadowRenderingMode", "I" ) );
+	rc->shadowLevelMin = env->GetIntField( orc, getFid( RenderingContextClass, "shadowLevelMin", "I" ) );
+	rc->shadowLevelMax = env->GetIntField( orc, getFid( RenderingContextClass, "shadowLevelMax", "I" ) );
+	rc->androidContext = env->GetObjectField(orc, getFid( RenderingContextClass, "ctx", "Landroid/content/Context;"));
+
+	rc->originalRC = orc;
+
+}
+
+
+void mergeRenderingContext(jobject orc, RenderingContext* rc)
+{
+	env->SetIntField( orc, getFid(RenderingContextClass, "pointCount", "I" ) , rc->pointCount);
+	env->SetIntField( orc, getFid(RenderingContextClass, "pointInsideCount", "I" ) , rc->pointInsideCount);
+	env->SetIntField( orc, getFid(RenderingContextClass, "visible", "I" ) , rc->visible);
+	env->SetIntField( orc, getFid(RenderingContextClass, "allObjects", "I" ) , rc->allObjects);
+	env->SetIntField( orc, getFid(RenderingContextClass, "textRenderingTime", "I" ) , rc->textRendering.getElapsedTime());
+	env->DeleteLocalRef(rc->androidContext);
 }
 
 

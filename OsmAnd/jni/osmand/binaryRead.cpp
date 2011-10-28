@@ -1,0 +1,132 @@
+#include <jni.h>
+#include <math.h>
+#include <android/log.h>
+#include <stdio.h>
+#include <vector>
+#include <string>
+#include <fstream>
+#include <map>
+
+#include "google/protobuf/io/zero_copy_stream_impl.h"
+#include "google/protobuf/wire_format_lite.h"
+#include "google/protobuf/wire_format_lite.cc"
+#include "google/protobuf/wire_format.h"
+
+#include "common.h"
+#include "proto/osmand_odb.pb.h"
+
+char errorMsg[1024];
+
+using namespace google::protobuf;
+using namespace google::protobuf::internal;
+
+struct BinaryMapFile;
+std::map<std::string, BinaryMapFile*> openFiles;
+
+inline bool readInt(io::CodedInputStream* input, uint32* sz) {
+	uint8 buf[4];
+	if(!input->ReadRaw(buf, 4)){
+		return false;
+	}
+	*sz = ((buf[0] << 24) + (buf[1] << 16) + (buf[2] << 8) + (buf[3] << 0));
+	return true;
+}
+
+inline bool skipFixed32(io::CodedInputStream* input){
+	uint32 sz;
+	if(!readInt(input, &sz)) {
+		return false;
+	}
+	return input->Skip(sz);
+}
+
+#define SKIPFIELDS if (WireFormatLite::GetTagWireType(tag) ==WireFormatLite::WIRETYPE_END_GROUP) { return true; } \
+		if (WireFormatLite::GetTagWireType(tag) ==WireFormatLite::WIRETYPE_FIXED32_LENGTH_DELIMITED) { if(!skipFixed32(input)) return false; } \
+	    if(!WireFormat::SkipField(input, tag, NULL))  {return false; }
+
+struct BinaryMapFile {
+	io::FileInputStream* input;
+	std::string inputName;
+
+	~BinaryMapFile() {
+		input->Close();
+		delete input;
+	}
+};
+
+bool initMapStructure(io::CodedInputStream* input, BinaryMapFile* file) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+	uint32 tag;
+	uint32 version = -1;
+	uint32 versionConfirm = -2;
+	while ((tag = input->ReadTag()) != 0) {
+		switch (WireFormatLite::GetTagFieldNumber(tag)) {
+			// required uint32 version = 1;
+			case OsmAndStructure::kVersionFieldNumber : {
+				DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &version)));
+				break;
+			}
+//			case OsmAndStructure::kMapIndexFieldNumber : {
+//				// TODO
+//				break;
+//			}
+			case OsmAndStructure::kVersionConfirmFieldNumber : {
+				DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &versionConfirm)));
+				break;
+			}
+			default: {
+				SKIPFIELDS;
+				break;
+			}
+		}
+	}
+	if (version != versionConfirm) {
+		__android_log_print(ANDROID_LOG_WARN, "net.osmand",
+				"Corrupted file. It should be ended as it starts with version");
+		return false;
+	}
+#undef DO_
+	return true;
+}
+
+
+void loadJniBinaryRead() {
+   jstring js = env->NewStringUTF("Privet");
+   __android_log_print(ANDROID_LOG_ERROR, "net.osmand", getString(js).c_str());
+}
+
+
+extern "C"
+JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_initBinaryMapFile(JNIEnv* ienv,
+		jstring path) {
+	std::string inputName = getString(path);
+	// Verify that the version of the library that we linked against is
+	// compatible with the version of the headers we compiled against.
+	GOOGLE_PROTOBUF_VERIFY_VERSION;
+	std::map<std::string, BinaryMapFile*>::iterator iterator;
+	if ((iterator = openFiles.find(inputName)) != openFiles.end()) {
+		delete iterator->second;
+		openFiles.erase(iterator);
+	}
+
+	FILE* file = fopen(inputName.c_str(), "r");
+	if (file == NULL) {
+		sprintf(errorMsg, "File not initialised : %s", inputName.c_str());
+		__android_log_print(ANDROID_LOG_WARN, "net.osmand", errorMsg);
+		return false;
+	}
+
+	BinaryMapFile* mapFile = new BinaryMapFile();
+	mapFile->input = new io::FileInputStream(fileno(file));
+	io::CodedInputStream cis (mapFile->input);
+	if (!initMapStructure(&cis, mapFile)) {
+		sprintf(errorMsg, "File not initialised : %s", inputName.c_str());
+		__android_log_print(ANDROID_LOG_WARN, "net.osmand", errorMsg);
+		delete mapFile;
+		return false;
+	}
+	mapFile->inputName = inputName;
+
+	openFiles.insert(std::pair<std::string, BinaryMapFile*>(inputName, mapFile));
+	return true;
+}

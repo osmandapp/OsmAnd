@@ -10,7 +10,7 @@
 #include "SkPaint.h"
 #include "SkPath.h"
 
-#include "common.cpp"
+#include "common.h"
 #include "renderRules.cpp"
 
 const char REF_CHAR = ((char)0x0019);
