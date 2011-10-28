@@ -44,7 +44,7 @@ SKIA_SRC := skia
 
 LOCAL_MODULE := osmand
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/jni \
+LOCAL_C_INCLUDES := $(LOCAL_PATH) \
     $(PROTOBUF_FOLDER) \
 	$(SKIA_FOLDER)/include/core \
 	$(SKIA_FOLDER)/include/utils \

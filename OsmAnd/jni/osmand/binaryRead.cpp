@@ -1,3 +1,6 @@
+#ifndef _OSMAND_BINARY_READ
+#define _OSMAND_BINARY_READ
+
 #include <jni.h>
 #include <math.h>
 #include <android/log.h>
@@ -91,16 +94,20 @@ bool initMapStructure(io::CodedInputStream* input, BinaryMapFile* file) {
 
 
 void loadJniBinaryRead() {
-   jstring js = env->NewStringUTF("Privet");
-   __android_log_print(ANDROID_LOG_ERROR, "net.osmand", getString(js).c_str());
 }
 
 
 extern "C"
 JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_initBinaryMapFile(JNIEnv* ienv,
-		jstring path) {
-	std::string inputName = getString(path);
+		jobject path) {
 	// Verify that the version of the library that we linked against is
+	const char* utf = ienv->GetStringUTFChars((jstring)path, NULL);
+	std::string inputName(utf);
+	ienv->ReleaseStringUTFChars((jstring)path, utf);
+
+	__android_log_print(ANDROID_LOG_ERROR, "net.osmand", inputName.c_str());
+
+//	std::string inputName = getString((jstring) path);
 	// compatible with the version of the headers we compiled against.
 	GOOGLE_PROTOBUF_VERIFY_VERSION;
 	std::map<std::string, BinaryMapFile*>::iterator iterator;
@@ -111,7 +118,7 @@ JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_initB
 
 	FILE* file = fopen(inputName.c_str(), "r");
 	if (file == NULL) {
-		sprintf(errorMsg, "File not initialised : %s", inputName.c_str());
+		sprintf(errorMsg, "File could not be open to read from C : %s", inputName.c_str());
 		__android_log_print(ANDROID_LOG_WARN, "net.osmand", errorMsg);
 		return false;
 	}
@@ -130,3 +137,5 @@ JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_initB
 	openFiles.insert(std::pair<std::string, BinaryMapFile*>(inputName, mapFile));
 	return true;
 }
+
+#endif

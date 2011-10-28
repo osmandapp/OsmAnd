@@ -12,6 +12,7 @@ import java.io.RandomAccessFile;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -57,6 +58,7 @@ public class MapRenderRepositories {
 	private final Context context;
 	private Handler handler;
 	private Map<String, BinaryMapIndexReader> files = new LinkedHashMap<String, BinaryMapIndexReader>();
+	private Set<String> nativeFiles = new HashSet<String>();
 	private OsmandRenderer renderer;
 
 	private static String BASEMAP_NAME = "basemap";
@@ -100,6 +102,7 @@ public class MapRenderRepositories {
 		long start = System.currentTimeMillis();
 		if (files.containsKey(file.getAbsolutePath())) {
 			closeConnection(files.get(file.getAbsolutePath()), file.getAbsolutePath());
+			
 		}
 		RandomAccessFile raf = null;
 		BinaryMapIndexReader reader = null;
@@ -129,11 +132,6 @@ public class MapRenderRepositories {
 			}
 			throw oome;
 		}
-		if(prefs.NATIVE_RENDERING.get()){
-			if(NativeOsmandLibrary.initBinaryMapFile(file.getAbsolutePath())){
-				log.debug("Native resource " + file.getAbsolutePath() + " initialized"); //$NON-NLS-1$ //$NON-NLS-2$ 
-			}
-		}
 		if (log.isDebugEnabled()) {
 			log.debug("Initializing db " + file.getAbsolutePath() + " " + (System.currentTimeMillis() - start) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
@@ -150,6 +148,7 @@ public class MapRenderRepositories {
 
 	protected void closeConnection(BinaryMapIndexReader c, String file) {
 		files.remove(file);
+		nativeFiles.remove(file);
 		try {
 			c.close();
 		} catch (IOException e) {
@@ -302,6 +301,15 @@ public class MapRenderRepositories {
 			for (String mapName : files.keySet()) {
 				if (basemapSearch && !mapName.toLowerCase().contains(BASEMAP_NAME)) {
 					continue;
+				}
+				if(prefs.NATIVE_RENDERING.get()){
+					if (!nativeFiles.contains(mapName)) {
+						nativeFiles.add(mapName);
+						if (NativeOsmandLibrary.initBinaryMapFile(mapName)) {
+							continue;
+						}
+						log.debug("Native resource " + mapName + " initialized"); //$NON-NLS-1$ //$NON-NLS-2$
+					}
 				}
 				BinaryMapIndexReader c = files.get(mapName);
 				searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom, searchFilter);

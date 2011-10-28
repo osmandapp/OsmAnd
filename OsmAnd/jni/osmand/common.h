@@ -20,10 +20,13 @@ const std::string EMPTY_STRING;
 const int WHITE_COLOR = -1;
 const int BLACK_COLOR = 0xff000000;
 
-extern JNIEnv* env;
+JNIEnv* globalEnv();
+
+JNIEnv* setGlobalEnv(JNIEnv* e);
 
 // JNI Helpers
-extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved);
+//extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved);
+
 std::string getString(jstring st);
 std::string getStringMethod(jobject o, jmethodID fid, int i);
 std::string getStringMethod(jobject o, jmethodID fid);
@@ -142,7 +145,7 @@ struct RenderingContext {
 	int shadowLevelMax;
 
 	bool interrupted() {
-		return env->GetBooleanField(originalRC, RenderingContext_interrupted);
+		return globalEnv()->GetBooleanField(originalRC, RenderingContext_interrupted);
 	}
 	~RenderingContext() {
 		for (uint i = 0; i < textToDraw.size(); i++) {

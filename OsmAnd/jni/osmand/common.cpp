@@ -2,6 +2,7 @@
 #define _OSMAND_COMMON
 
 #include <common.h>
+#include <android/log.h>
 #include <string>
 #include <vector>
 #include <hash_map>
@@ -10,20 +11,35 @@
 
 JNIEnv* env;
 
+JNIEnv* globalEnv(){
+	return env;
+}
+
+JNIEnv* setGlobalEnv(JNIEnv* e) {
+	env = e;
+	return e;
+}
+
 extern void loadJniCommon();
 extern void loadJniBinaryRead();
 extern void loadJNIRenderingRules();
 extern void loadJniMapObjects();
 
-extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
-    if(vm->GetEnv((void **)&env, JNI_VERSION_1_4)){
-    	return JNI_ERR; /* JNI version not supported */
-    }
-    loadJniCommon();
+//extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
+//    if(vm->GetEnv((void **)&env, JNI_VERSION_1_2)){
+//    	return JNI_ERR; /* JNI version not supported */
+//    }
+//
+//	return JNI_VERSION_1_2;
+//}
+
+extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_loadLibrary(JNIEnv* ienv) {
+//	env = ienv;
+	loadJniCommon();
     loadJNIRenderingRules();
     loadJniMapObjects();
     loadJniBinaryRead();
-	return JNI_VERSION_1_4;
+    return true;
 }
 
 

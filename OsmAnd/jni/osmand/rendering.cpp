@@ -1,3 +1,6 @@
+#ifndef _OSMAND_RENDERING
+#define _OSMAND_RENDERING
+
 #include <jni.h>
 #include <math.h>
 #include <android/log.h>
@@ -22,6 +25,7 @@
 #include "textdraw.cpp"
 #include "mapObjects.cpp"
 
+extern JNIEnv* globalEnv();
 char debugMessage[1024];
 
  void calcPoint(MapDataObject* mObj, jint ind, RenderingContext* rc) {
@@ -697,6 +701,7 @@ extern "C" {
 JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_generateRendering( JNIEnv* ienv,
 		jobject obj, jobject renderingContext, jobjectArray binaryMapDataObjects, jobject bmpObj,
 		jboolean useEnglishNames, jobject renderingRuleSearchRequest, jint defaultColor) {
+	setGlobalEnv(ienv);
 	SkBitmap* bmp = getNativeBitmap(bmpObj);
 	sprintf(debugMessage, "Image w:%d h:%d !", bmp->width(), bmp->height());
 	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
@@ -741,7 +746,7 @@ JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 #else
     sprintf(debugMessage, "Native ok (init %d, rendering %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
 #endif
-    jstring result = env->NewStringUTF( debugMessage);
+    jstring result = globalEnv()->NewStringUTF( debugMessage);
 
 //  unloadLibrary();
 	return result;
@@ -750,3 +755,4 @@ JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 #ifdef __cplusplus
 }
 #endif
+#endif /**/

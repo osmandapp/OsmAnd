@@ -22,6 +22,7 @@ import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
+import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.voice.CommandPlayer;
@@ -301,6 +302,7 @@ public class OsmandApplication extends Application {
 					public void run() {
 						List<String> warnings = null;
 						try {
+							NativeOsmandLibrary.preloadLibrary();
 							warnings = manager.reloadIndexes(startDialog);
 							player = null;
 							SavingTrackHelper helper = new SavingTrackHelper(OsmandApplication.this);
@@ -309,6 +311,7 @@ public class OsmandApplication extends Application {
 								warnings.addAll(helper.saveDataToGpx());
 							}
 							helper.close();
+//							NativeOsmandLibrary.loadLibrary();
 
 						} finally {
 							synchronized (OsmandApplication.this) {
