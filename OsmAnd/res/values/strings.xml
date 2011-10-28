@@ -774,4 +774,6 @@
 <string name="direction_style_clockwise">Clockwise (12 sectors)</string>
 <string name="settings_direction_style">Direction style</string>
 <string name="settings_direction_style_descr">Choose style to express relative directions while moving</string>
+<string name="auto_announce_on">Start autoannouncing</string>
+<string name="auto_announce_off">Stop autoannouncing</string>
 </resources>

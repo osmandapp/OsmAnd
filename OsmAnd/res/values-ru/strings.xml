@@ -712,4 +712,6 @@
 	<string name="direction_style_clockwise">По циферблату (12 секторов)</string>
 	<string name="settings_direction_style">Стиль указания направлений</string>
 	<string name="settings_direction_style_descr">Выберите стиль указания относительных направлений во время движения</string>
+	<string name="auto_announce_on">Включить автооповещение</string>
+	<string name="auto_announce_off">Выключить автооповещение</string>
 </resources>
