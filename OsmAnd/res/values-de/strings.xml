@@ -297,7 +297,7 @@
 	<string name="amenity_type_other">Anderes</string>
 	<string name="amenity_type_shop">Geschäft</string>
 	<string name="amenity_type_sport">Sport</string>
-	<string name="amenity_type_sustenance">Lebensunterhalt</string>
+	<string name="amenity_type_sustenance">Gastronomie</string>
 	<string name="amenity_type_tourism">Touristik</string>
 	<string name="amenity_type_transportation">ÖPNV</string>
 	<string name="indexing_address">Indiziere Adressen...</string>
