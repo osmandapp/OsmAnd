@@ -367,6 +367,7 @@
 	<string name="none_region_found">Не найден ни один индекс на SD карточке. Можете загрузить их с интернета.</string>
 	<string name="poi_namefinder_query_empty">Введите запрос для поиска POI</string>
 	<string name="any_poi">Все</string>
+	<string name="back_to_location">Вернуться</string>
 	<string name="layer_transport_route">Маршрут на транспорте</string>
 	<string name="thanks_yandex_traffic">Спасибо Yandex за то, что они предоставили информацию о пробках. Установите Yandex как домашнюю страницу.</string>
 	<string name="layer_yandex_traffic">Yandex трафик</string>
