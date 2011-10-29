@@ -56,9 +56,9 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
     $(ANDROID_FOLDER)/frameworks/base/include
 
 LOCAL_CPP_EXTENSION := .cpp
-LOCAL_SRC_FILES := common.cpp \
+LOCAL_SRC_FILES := common.cpp mapObjects.cpp \
 	renderRules.cpp rendering.cpp \
-	proto/osmand_odb.pb.cpp binaryRead.cpp 
+	binaryRead.cpp 
 	
 LOCAL_CFLAGS := -Wall -g -DGOOGLE_PROTOBUF_NO_RTTI
 # in that case libskia_2.2.so should be in NDK folder to be properly built

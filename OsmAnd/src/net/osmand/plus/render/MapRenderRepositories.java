@@ -37,6 +37,7 @@ import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.activities.OsmandApplication;
+import net.osmand.plus.render.NativeOsmandLibrary.NativeSearchResult;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -67,6 +68,7 @@ public class MapRenderRepositories {
 	private RectF cObjectsBox = new RectF();
 	// cached objects in order to render rotation without reloading data from db
 	private List<BinaryMapDataObject> cObjects = new LinkedList<BinaryMapDataObject>();
+	private NativeSearchResult cNativeObjects = null;
 
 	// currently rendered box (not the same as already rendered)
 	// this box is checked for interrupted process or
@@ -227,13 +229,56 @@ public class MapRenderRepositories {
 		}
 		return false;
 	}
+	
+	
+	private boolean loadVectorDataNative(RectF dataBox, final int zoom, final RenderingRuleSearchRequest renderingReq) {
+		int leftX = MapUtils.get31TileNumberX(dataBox.left);
+		int rightX = MapUtils.get31TileNumberX(dataBox.right);
+		int bottomY = MapUtils.get31TileNumberY(dataBox.bottom);
+		int topY = MapUtils.get31TileNumberY(dataBox.top);
+		long now = System.currentTimeMillis();
+		// search lower level zooms only in basemap for now :) before it was intersection of maps on zooms 5-7
+		boolean basemapSearch = false;
+		if (zoom <= 7) {
+			for (String f : files.keySet()) {
+				if (f.toLowerCase().contains(BASEMAP_NAME)) {
+					basemapSearch = true;
+					break;
+				}
+			}
+		}
+		NativeSearchResult resultHandler = null;
+		for (String mapName : files.keySet()) {
+			if (basemapSearch && !mapName.toLowerCase().contains(BASEMAP_NAME)) {
+				continue;
+			}
+			if (!nativeFiles.contains(mapName)) {
+				nativeFiles.add(mapName);
+				if (!NativeOsmandLibrary.initBinaryMapFile(mapName)) {
+					continue;
+				}
+				log.debug("Native resource " + mapName + " initialized"); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+			resultHandler = NativeOsmandLibrary.searchObjectsForRendering(leftX, rightX, topY, bottomY, zoom, mapName,renderingReq,
+					PerformanceFlags.checkForDuplicateObjectIds, resultHandler);
+			if (checkWhetherInterrupted()) {
+				NativeOsmandLibrary.deleteSearchResult(resultHandler);
+				return false;
+			}
+		}
+		cNativeObjects = resultHandler;
+		cObjectsBox = dataBox;
+		log.info(String.format("BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", //$NON-NLS-1$
+				dataBox.bottom, dataBox.top, dataBox.left, dataBox.right, zoom));
+		log.info(String.format("Native search done in %s ms. ", System.currentTimeMillis() - now)); //$NON-NLS-1$
+		return true;
+	}
 
 	private boolean loadVectorData(RectF dataBox, final int zoom, final RenderingRuleSearchRequest renderingReq, final boolean nightMode) {
 		double cBottomLatitude = dataBox.bottom;
 		double cTopLatitude = dataBox.top;
 		double cLeftLongitude = dataBox.left;
 		double cRightLongitude = dataBox.right;
-
 
 		long now = System.currentTimeMillis();
 
@@ -302,15 +347,7 @@ public class MapRenderRepositories {
 				if (basemapSearch && !mapName.toLowerCase().contains(BASEMAP_NAME)) {
 					continue;
 				}
-				if(prefs.NATIVE_RENDERING.get()){
-					if (!nativeFiles.contains(mapName)) {
-						nativeFiles.add(mapName);
-						if (!NativeOsmandLibrary.initBinaryMapFile(mapName)) {
-							continue;
-						}
-						log.debug("Native resource " + mapName + " initialized"); //$NON-NLS-1$ //$NON-NLS-2$
-					}
-				}
+				
 				BinaryMapIndexReader c = files.get(mapName);
 				searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom, searchFilter);
 				List<BinaryMapDataObject> res = c.searchMapIndex(searchRequest);
@@ -420,7 +457,7 @@ public class MapRenderRepositories {
 			long now = System.currentTimeMillis();
 
 			if (cObjectsBox.left > dataBox.left || cObjectsBox.top > dataBox.top || cObjectsBox.right < dataBox.right
-					|| cObjectsBox.bottom < dataBox.bottom) {
+					|| cObjectsBox.bottom < dataBox.bottom || prefs.NATIVE_RENDERING.get() == (cNativeObjects == null)) {
 				// increase data box in order for rotate
 				if ((dataBox.right - dataBox.left) > (dataBox.top - dataBox.bottom)) {
 					double wi = (dataBox.right - dataBox.left) * .2;
@@ -432,7 +469,14 @@ public class MapRenderRepositories {
 					dataBox.bottom -= hi;
 				}
 				validateLatLonBox(dataBox);
-				boolean loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingReq, nightMode);
+				boolean loaded;
+				if(prefs.NATIVE_RENDERING.get()) {
+					cObjects = new LinkedList<BinaryMapDataObject>();
+					loaded = loadVectorDataNative(dataBox, requestedBox.getZoom(), renderingReq);
+				} else {
+					cNativeObjects = null;
+					loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingReq, nightMode);
+				}
 				if (!loaded || checkWhetherInterrupted()) {
 					return;
 				}
@@ -462,9 +506,14 @@ public class MapRenderRepositories {
 			this.prevBmpLocation = this.bmpLocation;
 			this.bmp = bmp;
 			this.bmpLocation = tileRect;
-
-			renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, prefs.USE_ENGLISH_NAMES.get(), renderingReq,
-					notifyList, storage.getBgColor(nightMode), app.getSettings().NATIVE_RENDERING.get());
+			
+			if(app.getSettings().NATIVE_RENDERING.get()) {
+				renderer.generateNewBitmapNative(currentRenderingContext, cNativeObjects, bmp, prefs.USE_ENGLISH_NAMES.get(), renderingReq,
+						notifyList, storage.getBgColor(nightMode));
+			} else {
+				renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, prefs.USE_ENGLISH_NAMES.get(), renderingReq,
+						notifyList, storage.getBgColor(nightMode));
+			}
 			String renderingDebugInfo = currentRenderingContext.renderingDebugInfo;
 			currentRenderingContext.ended = true;
 			if (checkWhetherInterrupted()) {
@@ -846,9 +895,9 @@ public class MapRenderRepositories {
 			int sy = (int) (i.get(0) & mask);
 			boolean st = y == topY || x == rightX || y == bottomY || x == leftX;
 			boolean end = sy == topY || sx == rightX || sy == bottomY || sx == leftX;
-			// something wrong here
+			// something goes wrong
 			// These exceptions are used to check logic about processing multipolygons
-			// However in map data this situation could happen with broken multipolygons (so it would data causes app error)
+			// However this situation could happen because of broken multipolygons (so it should data causes app error)
 			// that's why these exceptions could be replaced with return; statement.
 			if (!end || !st) {
 				float dx = (float) MapUtils.get31LongitudeX(x);

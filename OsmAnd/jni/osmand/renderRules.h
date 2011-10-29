@@ -64,6 +64,9 @@ private:
 	void initRules();
 
 public:
+	// No rules for multipolygon !!!
+	const static int MULTI_POLYGON_TYPE = 0;
+
     const static int POINT_RULES = 1;
     const static int LINE_RULES = 2;
     const static int POLYGON_RULES = 3;

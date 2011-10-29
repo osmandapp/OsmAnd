@@ -699,7 +699,7 @@ void doRendering(std::vector <BaseMapDataObject* > mapDataObjects, SkCanvas* can
 extern "C" {
 #endif
 JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_generateRendering( JNIEnv* ienv,
-		jobject obj, jobject renderingContext, jobjectArray binaryMapDataObjects, jobject bmpObj,
+		jobject obj, jobject renderingContext, jint searchResult, jobject bmpObj,
 		jboolean useEnglishNames, jobject renderingRuleSearchRequest, jint defaultColor) {
 	setGlobalEnv(ienv);
 	SkBitmap* bmp = getNativeBitmap(bmpObj);
@@ -710,17 +710,15 @@ JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 
 	SkPaint* paint = new SkPaint;
 	paint->setAntiAlias(true);
-
 	__android_log_print(ANDROID_LOG_WARN, "net.osmand", "Initializing rendering");
 	watcher initObjects;
 	initObjects.start();
 
-
 	RenderingRuleSearchRequest* req =  initSearchRequest(renderingRuleSearchRequest);
-
     RenderingContext rc;
     copyRenderingContext(renderingContext, &rc);
-    std::vector <BaseMapDataObject* > mapDataObjects = marshalObjects(binaryMapDataObjects);
+    SearchResult* result = ((SearchResult*) searchResult);
+//    std::vector <BaseMapDataObject* > mapDataObjects = marshalObjects(binaryMapDataObjects);
 
 
     __android_log_print(ANDROID_LOG_WARN, "net.osmand", "Rendering image");
@@ -729,7 +727,9 @@ JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 
     // Main part do rendering
     rc.nativeOperations.start();
-    doRendering(mapDataObjects, canvas, paint, req, &rc);
+    if(result != NULL) {
+    	doRendering(result->result, canvas, paint, req, &rc);
+    }
     rc.nativeOperations.pause();
 
     mergeRenderingContext(renderingContext, &rc);
@@ -739,17 +739,14 @@ JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
     delete paint;
     delete canvas;
     delete req;
-    deleteObjects(mapDataObjects);
+//    deleteObjects(mapDataObjects);
 
 #ifdef DEBUG_NAT_OPERATIONS
     sprintf(debugMessage, "Native ok (init %d, native op %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
 #else
     sprintf(debugMessage, "Native ok (init %d, rendering %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
 #endif
-    jstring result = globalEnv()->NewStringUTF( debugMessage);
-
-//  unloadLibrary();
-	return result;
+	return globalEnv()->NewStringUTF( debugMessage);
 }
 
 #ifdef __cplusplus

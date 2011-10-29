@@ -151,6 +151,19 @@ void CodedInputStream::PrintTotalBytesLimitError() {
                 "in google/protobuf/io/coded_stream.h.";
 }
 
+// Osmand change :  Seeks in the file
+bool CodedInputStream::Seek(int filePointer) {
+	if(filePointer >= getTotalBytesRead()) {
+	   return Skip(filePointer - getTotalBytesRead());
+	} else {
+		buffer_ = NULL;
+		buffer_end_ = NULL;
+		input_->BackUp(total_bytes_read_ - filePointer);
+		total_bytes_read_ -= filePointer;
+		return Refresh();
+	}
+}
+
 bool CodedInputStream::Skip(int count) {
   if (count < 0) return false;  // security: count is often user-supplied
 
@@ -390,6 +403,11 @@ uint32 CodedInputStream::ReadTagFallback() {
     }
     return ReadTagSlow();
   }
+}
+
+// Osmand change ::
+int CodedInputStream::getTotalBytesRead() {
+    return total_bytes_read_ - (buffer_end_ - buffer_);
 }
 
 bool CodedInputStream::ReadVarint64Slow(uint64* value) {

@@ -162,6 +162,9 @@ class LIBPROTOBUF_EXPORT CodedInputStream {
   // occurs.
   bool Skip(int count);
 
+  // Osmand change :  Seeks in the file
+  bool Seek(int filePointer);
+
   // Sets *data to point directly at the unread part of the CodedInputStream's
   // underlying buffer, and *size to the size of that buffer, but does not
   // advance the stream's current position.  This will always either produce
@@ -299,6 +302,9 @@ class LIBPROTOBUF_EXPORT CodedInputStream {
   // Returns the number of bytes left until the nearest limit on the
   // stack is hit, or -1 if no limits are in place.
   int BytesUntilLimit();
+
+  // osmand change : totally bytes read
+  int getTotalBytesRead();
 
   // Total Bytes Limit -----------------------------------------------
   // To prevent malicious users from sending excessively large messages

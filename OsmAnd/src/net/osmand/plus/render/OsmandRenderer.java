@@ -18,6 +18,7 @@ import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MultyPolygon;
+import net.osmand.plus.render.NativeOsmandLibrary.NativeSearchResult;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -227,8 +228,37 @@ public class OsmandRenderer {
 	}
 
 
+	public Bitmap generateNewBitmapNative(RenderingContext rc, NativeSearchResult searchResultHandler, Bitmap bmp, boolean useEnglishNames,
+			RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList, int defaultColor) {
+		long now = System.currentTimeMillis();
+		if (rc.width > 0 && rc.height > 0 && searchResultHandler != null) {
+			// init rendering context
+			rc.tileDivisor = (int) (1 << (31 - rc.zoom));
+			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
+			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
+			rc.density = dm.density;
+			try {
+				if(Looper.getMainLooper() != null){
+					final Handler h = new Handler(Looper.getMainLooper());
+					notifyListenersWithDelay(rc, notifyList, h);
+				}
+				String res = NativeOsmandLibrary.generateRendering(rc, searchResultHandler, bmp, useEnglishNames, render, defaultColor);
+				rc.ended = true;
+				notifyListeners(notifyList);
+				long time = System.currentTimeMillis() - now;
+				rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
+						+ "(%s points, %s points inside, %s objects visile from %s)\n" + res,//$NON-NLS-1$
+						time, rc.textRenderingTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return bmp;
+		
+	}
+	
 	public Bitmap generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, boolean useEnglishNames,
-			RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList, int defaultColor, boolean nativeRendering) {
+			RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList, int defaultColor) {
 		long now = System.currentTimeMillis();
 
 		if (objects != null && !objects.isEmpty() && rc.width > 0 && rc.height > 0) {
@@ -238,96 +268,77 @@ public class OsmandRenderer {
 			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			rc.density = dm.density;
 
-			if (!nativeRendering) {
-				// fill area
-				Canvas cv = new Canvas(bmp);
-				if(defaultColor != 0){
-					paintFillEmpty.setColor(defaultColor);
-				}
-				cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillEmpty);
-				// put in order map
-				TIntObjectHashMap<TIntArrayList> orderMap = sortObjectsByProperOrder(rc, objects, render);
-
-				int objCount = 0;
-
-				int[] keys = orderMap.keys();
-				Arrays.sort(keys);
-
-				boolean shadowDrawn = false;
-
-				for (int k = 0; k < keys.length; k++) {
-					if (!shadowDrawn && keys[k] >= rc.shadowLevelMin && keys[k] <= rc.shadowLevelMax && rc.shadowRenderingMode > 1) {
-						for (int ki = k; ki < keys.length; ki++) {
-							if (keys[ki] > rc.shadowLevelMax || rc.interrupted) {
-								break;
-							}
-							TIntArrayList list = orderMap.get(keys[ki]);
-							for (int j = 0; j < list.size(); j++) {
-								int i = list.get(j);
-								int ind = i >> 8;
-								int l = i & 0xff;
-								BinaryMapDataObject obj = objects.get(ind);
-
-								// show text only for main type
-								drawObj(obj, render, cv, rc, l, l == 0, true);
-								objCount++;
-							}
-						}
-						shadowDrawn = true;
-					}
-					if (rc.interrupted) {
-						return null;
-					}
-
-					TIntArrayList list = orderMap.get(keys[k]);
-					for (int j = 0; j < list.size(); j++) {
-						int i = list.get(j);
-						int ind = i >> 8;
-						int l = i & 0xff;
-						BinaryMapDataObject obj = objects.get(ind);
-
-						// show text only for main type
-						drawObj(obj, render, cv, rc, l, l == 0, false);
-						objCount++;
-					}
-					if (objCount > 25) {
-						notifyListeners(notifyList);
-						objCount = 0;
-					}
-
-				}
-
-				long beforeIconTextTime = System.currentTimeMillis() - now;
-				notifyListeners(notifyList);
-				drawIconsOverCanvas(rc, cv);
-
-				notifyListeners(notifyList);
-				drawTextOverCanvas(rc, cv, useEnglishNames);
-
-				long time = System.currentTimeMillis() - now;
-				rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
-						+ "(%s points, %s points inside, %s objects visile from %s)",//$NON-NLS-1$
-						time, time - beforeIconTextTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
-				log.info(rc.renderingDebugInfo);
-
-			} else {
-				BinaryMapDataObject[] array = objects.toArray(new BinaryMapDataObject[objects.size()]);
-				try {
-					if(Looper.getMainLooper() != null){
-						final Handler h = new Handler(Looper.getMainLooper());
-						notifyListenersWithDelay(rc, notifyList, h);
-					}
-					String res = NativeOsmandLibrary.generateRendering(rc, array, bmp, useEnglishNames, render, defaultColor);
-					rc.ended = true;
-					notifyListeners(notifyList);
-					long time = System.currentTimeMillis() - now;
-					rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
-							+ "(%s points, %s points inside, %s objects visile from %s)\n" + res,//$NON-NLS-1$
-							time, rc.textRenderingTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+			// fill area
+			Canvas cv = new Canvas(bmp);
+			if (defaultColor != 0) {
+				paintFillEmpty.setColor(defaultColor);
 			}
+			cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillEmpty);
+			// put in order map
+			TIntObjectHashMap<TIntArrayList> orderMap = sortObjectsByProperOrder(rc, objects, render);
+
+			int objCount = 0;
+
+			int[] keys = orderMap.keys();
+			Arrays.sort(keys);
+
+			boolean shadowDrawn = false;
+
+			for (int k = 0; k < keys.length; k++) {
+				if (!shadowDrawn && keys[k] >= rc.shadowLevelMin && keys[k] <= rc.shadowLevelMax && rc.shadowRenderingMode > 1) {
+					for (int ki = k; ki < keys.length; ki++) {
+						if (keys[ki] > rc.shadowLevelMax || rc.interrupted) {
+							break;
+						}
+						TIntArrayList list = orderMap.get(keys[ki]);
+						for (int j = 0; j < list.size(); j++) {
+							int i = list.get(j);
+							int ind = i >> 8;
+							int l = i & 0xff;
+							BinaryMapDataObject obj = objects.get(ind);
+
+							// show text only for main type
+							drawObj(obj, render, cv, rc, l, l == 0, true);
+							objCount++;
+						}
+					}
+					shadowDrawn = true;
+				}
+				if (rc.interrupted) {
+					return null;
+				}
+
+				TIntArrayList list = orderMap.get(keys[k]);
+				for (int j = 0; j < list.size(); j++) {
+					int i = list.get(j);
+					int ind = i >> 8;
+					int l = i & 0xff;
+					BinaryMapDataObject obj = objects.get(ind);
+
+					// show text only for main type
+					drawObj(obj, render, cv, rc, l, l == 0, false);
+					objCount++;
+				}
+				if (objCount > 25) {
+					notifyListeners(notifyList);
+					objCount = 0;
+				}
+
+			}
+
+			long beforeIconTextTime = System.currentTimeMillis() - now;
+			notifyListeners(notifyList);
+			drawIconsOverCanvas(rc, cv);
+
+			notifyListeners(notifyList);
+			drawTextOverCanvas(rc, cv, useEnglishNames);
+
+			long time = System.currentTimeMillis() - now;
+			rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
+					+ "(%s points, %s points inside, %s objects visile from %s)",//$NON-NLS-1$
+					time, time - beforeIconTextTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
+			log.info(rc.renderingDebugInfo);
+
 		}
 
 		return bmp;
