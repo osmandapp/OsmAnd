@@ -204,6 +204,8 @@ private :
 public:
 	RenderingRuleSearchRequest(jobject rrs);
 
+	~RenderingRuleSearchRequest();
+
 	int getIntPropertyValue(RenderingRuleProperty* prop);
 
 	int getIntPropertyValue(RenderingRuleProperty* prop, int def);

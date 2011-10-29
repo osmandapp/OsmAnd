@@ -128,8 +128,10 @@ struct RenderingContext {
 	int pointInsideCount;
 	int visible;
 	int allObjects;
+	int lastRenderedKey;
 	watcher textRendering;
 	watcher nativeOperations;
+
 
 	// use to calculate points
 	float calcX;

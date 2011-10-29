@@ -149,4 +149,14 @@ void unloadJniMapObjects()
 	globalEnv()->DeleteGlobalRef( TagValuePairClass );
 }
 
+int getNegativeWayLayer(int type) {
+	int i = (3 & (type >> 12));
+	if (i == 1) {
+		return -1;
+	} else if (i == 2) {
+		return 1;
+	}
+	return 0;
+}
+
 #endif /*_OSMAND_MAP_OBJECTS*/

@@ -148,6 +148,7 @@ public class OsmandRenderer {
 		int visible = 0;
 		int allObjects = 0;
 		int textRenderingTime = 0;
+		int lastRenderedKey = 0;
 
 		// use to calculate points
 		PointF tempPoint = new PointF();
@@ -228,7 +229,10 @@ public class OsmandRenderer {
 	}
 
 
-	public Bitmap generateNewBitmapNative(RenderingContext rc, NativeSearchResult searchResultHandler, Bitmap bmp, boolean useEnglishNames,
+	/**
+	 * @return if map could be replaced
+	 */
+	public void generateNewBitmapNative(RenderingContext rc, NativeSearchResult searchResultHandler, Bitmap bmp, boolean useEnglishNames,
 			RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList, int defaultColor) {
 		long now = System.currentTimeMillis();
 		if (rc.width > 0 && rc.height > 0 && searchResultHandler != null) {
@@ -253,11 +257,9 @@ public class OsmandRenderer {
 				e.printStackTrace();
 			}
 		}
-		return bmp;
-		
 	}
 	
-	public Bitmap generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, boolean useEnglishNames,
+	public void generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, boolean useEnglishNames,
 			RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList, int defaultColor) {
 		long now = System.currentTimeMillis();
 
@@ -305,7 +307,7 @@ public class OsmandRenderer {
 					shadowDrawn = true;
 				}
 				if (rc.interrupted) {
-					return null;
+					return;
 				}
 
 				TIntArrayList list = orderMap.get(keys[k]);
@@ -319,6 +321,7 @@ public class OsmandRenderer {
 					drawObj(obj, render, cv, rc, l, l == 0, false);
 					objCount++;
 				}
+				rc.lastRenderedKey = keys[k];
 				if (objCount > 25) {
 					notifyListeners(notifyList);
 					objCount = 0;
@@ -341,7 +344,7 @@ public class OsmandRenderer {
 
 		}
 
-		return bmp;
+		return;
 	}
 
 	private void notifyListenersWithDelay(final RenderingContext rc, final List<IMapDownloaderCallback> notifyList, final Handler h) {
@@ -441,7 +444,7 @@ public class OsmandRenderer {
 				}
 
 				if (rc.interrupted) {
-					return null;
+					return orderMap;
 				}
 			}
 		}
@@ -782,9 +785,13 @@ public class OsmandRenderer {
 			}
 		}
 		canvas.drawPath(path, paint);
-		// for test purpose
-//	      render.strokeWidth = 1.5f;
-//	      render.color = Color.BLACK;
+		// for test purpose 
+//		paint.setStyle(Style.STROKE);
+//		paint.setStrokeWidth(1.5f);
+//		paint.setColor(Color.BLACK);
+//		paint.setPathEffect(null);
+//		canvas.drawPath(path, paint);
+		
 		if (updatePaint(render, paint, 1, false, rc)) {
 			canvas.drawPath(path, paint);
 		}

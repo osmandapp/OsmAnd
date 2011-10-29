@@ -7,6 +7,9 @@
 
 #include "common.h"
 
+typedef std::pair<std::string, std::string> tag_value;
+typedef std::pair<int, int> int_pair;
+
 class BaseMapDataObject
 {
 
@@ -35,8 +38,9 @@ public:
 	std::string value;
 	std::vector< std::string > names;
 	int layer;
-	std::vector< std::vector< std::pair<int, int> > > points;
+	std::vector< std::vector< int_pair> > points;
 };
+
 
 class MapDataObject : public BaseMapDataObject
 {
@@ -44,8 +48,8 @@ public:
 	MapDataObject() : BaseMapDataObject(MAP_DATA_OBJECT)	{	}
 
 	std::vector< int>  types;
-	std::vector< std::pair<int, int> >  points;
-	std::vector< std::pair<std::string, std::string> >  tagValues;
+	std::vector< int_pair >  points;
+	std::vector< tag_value >  tagValues;
 	int highwayAttributes;
 };
 
@@ -57,5 +61,8 @@ void deleteObjects(std::vector <BaseMapDataObject* > & v);
 void loadJniMapObjects();
 
 void unloadJniMapObjects();
+
+// 0 - normal, -1 - under, 1 - bridge,over
+int getNegativeWayLayer(int type);
 
 #endif /*_OSMAND_MAP_OBJECTS_H*/

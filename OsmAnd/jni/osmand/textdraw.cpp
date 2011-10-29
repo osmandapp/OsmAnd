@@ -410,9 +410,7 @@ bool intersect(SkRect tRect, float tRot, TextDrawInfo* s)
 }
 
 bool intersect(TextDrawInfo* t, TextDrawInfo* s) {
-	// TODO
-	return t->bounds.intersect(s->bounds);
-//	return intersect(t->bounds, t->pathRotate, s);
+	return intersect(t->bounds, t->pathRotate, s);
 }
 std::vector<TextDrawInfo*> search;
 bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDrawInfo*>& boundIntersections, TextDrawInfo* text,
@@ -435,7 +433,7 @@ bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDraw
 	}
 
 	// for text purposes
-//	drawTestBox(cv, &text->bounds, text->pathRotate, paintIcon, text->text, NULL/*paintText*/);
+	drawTestBox(cv, &text->bounds, text->pathRotate, paintIcon, text->text, NULL/*paintText*/);
 	boundIntersections.query_in_box(text->bounds, search);
 	for (uint i = 0; i < search.size(); i++) {
 		TextDrawInfo* t = search.at(i);

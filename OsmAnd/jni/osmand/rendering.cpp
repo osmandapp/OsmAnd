@@ -407,8 +407,11 @@ void drawMultiPolygon(MultiPolygonObject* mapObject,RenderingRuleSearchRequest* 
 
 	NAT_COUNT(rc, cv->drawPath(path, *paint));
 	// for test purpose
-	// render.strokeWidth = 1.5f;
-	// render.color = Color.BLACK;
+//	paint->setStyle(SkPaint::kStroke_Style);
+//	paint->setStrokeWidth(2);
+//	paint->setPathEffect(NULL);
+//	paint->setColor(BLACK_COLOR);
+//	NAT_COUNT(rc, cv->drawPath(path, *paint));
 	if (updatePaint(req, paint, 1, 0, rc)) {
 		NAT_COUNT(rc, cv->drawPath(path, *paint));
 	}
@@ -502,17 +505,6 @@ void drawPoint(MapDataObject* mObj,	RenderingRuleSearchRequest* req, SkCanvas* c
 		drawPointText(req, rc, tag, value, px, py, name, NULL);
 	}
 
-}
-
-// 0 - normal, -1 - under, 1 - bridge,over
-int getNegativeWayLayer(int type) {
-	int i = (3 & (type >> 12));
-	if (i == 1) {
-		return -1;
-	} else if (i == 2) {
-		return 1;
-	}
-	return 0;
 }
 
 void drawObject(RenderingContext* rc, BaseMapDataObject* mapObject, SkCanvas* cv, RenderingRuleSearchRequest* req,
@@ -679,8 +671,8 @@ void doRendering(std::vector <BaseMapDataObject* > mapDataObjects, SkCanvas* can
 			BaseMapDataObject* mapObject = mapDataObjects.at(ind);
 			// show text only for main type
 			drawObject(rc, mapObject, canvas, req, paint, l, l == 0, false);
-
 		}
+		rc->lastRenderedKey = *ks;
 		if (rc->interrupted()) {
 			return;
 		}

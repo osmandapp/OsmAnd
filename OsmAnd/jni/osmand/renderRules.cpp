@@ -293,6 +293,14 @@ RenderingRuleSearchRequest::RenderingRuleSearchRequest(jobject rrs) :
 	clearState();
 }
 
+RenderingRuleSearchRequest::~RenderingRuleSearchRequest() {
+	delete PROPS;
+	delete[] fvalues;
+	delete[] values;
+	delete[] savedFvalues;
+	delete[] savedValues;
+}
+
 int RenderingRuleSearchRequest::getIntPropertyValue(RenderingRuleProperty* prop) {
 	if (prop == NULL) {
 		return 0;

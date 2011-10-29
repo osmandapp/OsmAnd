@@ -223,6 +223,7 @@ void copyRenderingContext(jobject orc, RenderingContext* rc)
 	rc->shadowLevelMin = globalEnv()->GetIntField( orc, getFid( RenderingContextClass, "shadowLevelMin", "I" ) );
 	rc->shadowLevelMax = globalEnv()->GetIntField( orc, getFid( RenderingContextClass, "shadowLevelMax", "I" ) );
 	rc->androidContext = globalEnv()->GetObjectField(orc, getFid( RenderingContextClass, "ctx", "Landroid/content/Context;"));
+	rc->lastRenderedKey = 0;
 
 	rc->originalRC = orc;
 
@@ -236,6 +237,8 @@ void mergeRenderingContext(jobject orc, RenderingContext* rc)
 	globalEnv()->SetIntField( orc, getFid(RenderingContextClass, "visible", "I" ) , rc->visible);
 	globalEnv()->SetIntField( orc, getFid(RenderingContextClass, "allObjects", "I" ) , rc->allObjects);
 	globalEnv()->SetIntField( orc, getFid(RenderingContextClass, "textRenderingTime", "I" ) , rc->textRendering.getElapsedTime());
+	globalEnv()->SetIntField( orc, getFid(RenderingContextClass, "lastRenderedKey", "I" ) , rc->lastRenderedKey);
+
 	globalEnv()->DeleteLocalRef(rc->androidContext);
 }
 

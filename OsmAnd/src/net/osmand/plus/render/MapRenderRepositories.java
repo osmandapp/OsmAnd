@@ -83,7 +83,7 @@ public class MapRenderRepositories {
 	private RotatedTileBox bmpLocation = null;
 	// already rendered bitmap
 	private Bitmap bmp;
-
+	// Field used in C++
 	private boolean interrupted = false;
 	private RenderingContext currentRenderingContext;
 	private SearchRequest<BinaryMapDataObject> searchRequest;
@@ -260,7 +260,7 @@ public class MapRenderRepositories {
 				log.debug("Native resource " + mapName + " initialized"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			resultHandler = NativeOsmandLibrary.searchObjectsForRendering(leftX, rightX, topY, bottomY, zoom, mapName,renderingReq,
-					PerformanceFlags.checkForDuplicateObjectIds, resultHandler);
+					PerformanceFlags.checkForDuplicateObjectIds, resultHandler, this);
 			if (checkWhetherInterrupted()) {
 				NativeOsmandLibrary.deleteSearchResult(resultHandler);
 				return false;
@@ -517,9 +517,12 @@ public class MapRenderRepositories {
 			String renderingDebugInfo = currentRenderingContext.renderingDebugInfo;
 			currentRenderingContext.ended = true;
 			if (checkWhetherInterrupted()) {
-				// revert if it was interrupted
-				this.bmp = this.prevBmp;
-				this.bmpLocation = this.prevBmpLocation;
+				// revert if it was interrupted 
+				// (be smart a bit do not revert if road already drawn) 
+				if(currentRenderingContext.lastRenderedKey < 35) {
+					this.bmp = this.prevBmp;
+					this.bmpLocation = this.prevBmpLocation;
+				}
 				currentRenderingContext = null;
 				return;
 			}
@@ -749,7 +752,7 @@ public class MapRenderRepositories {
 					continue;
 				}
 				boolean directionUp = prevY >= middleY;
-				if (firstX == -Integer.MIN_VALUE) {
+				if (firstX == Integer.MIN_VALUE) {
 					firstDirectionUp = directionUp;
 					firstX = rX;
 				} else {
@@ -765,8 +768,7 @@ public class MapRenderRepositories {
 				prevY = y;
 			}
 		}
-
-		if (firstX != -360) {
+		if (firstX != Integer.MIN_VALUE) {
 			boolean clockwise = (!firstDirectionUp) == (previousX < firstX);
 			if (clockwise) {
 				clockwiseSum += Math.abs(previousX - firstX);
@@ -804,38 +806,6 @@ public class MapRenderRepositories {
 			double rx = x + ((double) middleY - y) * ((double) x - prevX) / (((double) y - prevY));
 			return (int) rx;
 		}
-	}
-
-	// NOT WORKING GOOD !
-	private boolean isClockwiseWayOld(TLongList c) {
-		double angle = 0;
-		double prevAng = 0;
-		int px = 0;
-		int py = 0;
-		int mask = 0xffffffff;
-		for (int i = 0; i < c.size(); i++) {
-			int x = (int) (c.get(i) >> 32);
-			int y = (int) (c.get(i) & mask);
-			if (i >= 1) {
-				double ang = Math.atan2(py - y, x - px);
-				if (i > 1) {
-					double delta = (ang - prevAng);
-					if (delta < -Math.PI) {
-						delta += 2 * Math.PI;
-					} else if (delta > Math.PI) {
-						delta -= 2 * Math.PI;
-					}
-					angle += delta;
-					prevAng = ang;
-				} else {
-					prevAng = ang;
-				}
-			}
-			px = x;
-			py = y;
-
-		}
-		return angle < 0;
 	}
 
 	private void processMultipolygonLine(List<TLongList> completedRings, List<TLongList> incompletedRings,

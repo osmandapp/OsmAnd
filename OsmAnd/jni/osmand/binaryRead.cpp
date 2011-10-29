@@ -14,6 +14,7 @@
 #include "renderRules.h"
 #include "common.h"
 #include "mapObjects.h"
+#include "multipolygons.h"
 #include "proto/osmand_odb.pb.h"
 
 char errorMsg[1024];
@@ -61,7 +62,10 @@ struct SearchQuery {
 	int top;
 	int bottom;
 	int zoom;
-	SearchResult* res;
+	std::vector< MapDataObject*> result;
+
+	jobject o;
+	jfieldID interruptedField;
 
 	std::vector<std::pair<int, int> > cacheCoordinates;
 	std::vector<int> cacheTypes;
@@ -71,17 +75,15 @@ struct SearchQuery {
 	int numberOfAcceptedObjects;
 	int numberOfReadSubtrees;
 	int numberOfAcceptedSubtrees;
-	bool interrupted;
 
-	SearchQuery(int l, int r, int t, int b, RenderingRuleSearchRequest* req, SearchResult* res) :
-			req(req), left(l), right(r), top(t), bottom(b), res(res) {
+	SearchQuery(int l, int r, int t, int b, RenderingRuleSearchRequest* req, jobject o,	jfieldID interruptedField) :
+			req(req), left(l), right(r), top(t), bottom(b), o(o), interruptedField(interruptedField) {
 		numberOfAcceptedObjects = numberOfVisitedObjects = 0;
 		numberOfAcceptedSubtrees = numberOfReadSubtrees = 0;
-		interrupted = false;
 	}
 
 	bool isCancelled(){
-		return interrupted;
+		return globalEnv()->GetBooleanField(o, interruptedField);
 	}
 };
 
@@ -110,7 +112,7 @@ struct MapIndex {
 	uint32 length;
 	int filePointer;
 	std::string name;
-	std::hash_map<int, std::pair<std::string, std::string> > decodingRules;
+	std::hash_map<int, tag_value > decodingRules;
 	vector<MapRoot> levels;
 };
 
@@ -393,7 +395,7 @@ static const int SHIFT_COORDINATES = 5;
 static const int MASK_TO_READ = ~((1 << SHIFT_COORDINATES) - 1);
 static const int MASK_10 = (1 << 10) - 1;
 
-BaseMapDataObject* readMapDataObject(io::CodedInputStream* input, int left, int right, int top, int bottom, SearchQuery* req,
+MapDataObject* readMapDataObject(io::CodedInputStream* input, int left, int right, int top, int bottom, SearchQuery* req,
 			MapIndex* root) {
 	uint32 tag = input->ReadTag();
 	if (MapData::kCoordinatesFieldNumber != WireFormatLite::GetTagFieldNumber(tag)) {
@@ -468,7 +470,7 @@ BaseMapDataObject* readMapDataObject(io::CodedInputStream* input, int left, int 
 		if (mask != RenderingRulesStorage::POINT_RULES) {
 			type = type  & MASK_10;
 		}
-		std::pair<std::string, std::string> pair = root->decodingRules[type];
+		tag_value pair = root->decodingRules[type];
 		if (r != NULL && !accept) {
 			if(mask == RenderingRulesStorage::MULTI_POLYGON_TYPE){
 				mask = RenderingRulesStorage::POLYGON_RULES;
@@ -589,11 +591,11 @@ bool searchMapTreeBounds(io::CodedInputStream* input, int pleft, int pright, int
 			input->ReadVarint32(&length);
 			int oldLimit = input->PushLimit(length);
 			if (lastIndexResult == -1) {
-				lastIndexResult = req->res->result.size();
+				lastIndexResult = req->result.size();
 			}
-			BaseMapDataObject* mapObject = readMapDataObject(input, cleft, cright, ctop, cbottom, req, root);
+			MapDataObject* mapObject = readMapDataObject(input, cleft, cright, ctop, cbottom, req, root);
 			if (mapObject != NULL) {
-				req->res->result.push_back(mapObject);
+				req->result.push_back(mapObject);
 			}
 			input->Skip(input->BytesUntilLimit());
 			input->PopLimit(oldLimit);
@@ -618,10 +620,10 @@ bool searchMapTreeBounds(io::CodedInputStream* input, int pleft, int pright, int
 			uint64 baseId;
 			input->ReadVarint64(&baseId);
 			if (lastIndexResult != -1) {
-				for (uint32 i = lastIndexResult; i < req->res->result.size(); i++) {
-					BaseMapDataObject* rs = req->res->result.at(i);
+				for (uint32 i = lastIndexResult; i < req->result.size(); i++) {
+					BaseMapDataObject* rs = req->result.at(i);
 					rs->id += baseId;
-					// TODO restrictions are not supported
+					// restrictions are not supported
 //					if (rs.restrictions != null) {
 //						for (int j = 0; j < rs.restrictions.length; j++) {
 //							rs.restrictions[j] += baseId;
@@ -640,8 +642,8 @@ bool searchMapTreeBounds(io::CodedInputStream* input, int pleft, int pright, int
 			readStringTable(input, stringTable);
 			input->PopLimit(oldLimit);
 			if (lastIndexResult != -1) {
-				for (uint32 i = lastIndexResult; i < req->res->result.size(); i++) {
-					BaseMapDataObject* rs = req->res->result.at(i);
+				for (uint32 i = lastIndexResult; i < req->result.size(); i++) {
+					BaseMapDataObject* rs = req->result.at(i);
 					if (rs->stringId != BaseMapDataObject::UNDEFINED_STRING) {
 						rs->name = stringTable.at(rs->stringId);
 					}
@@ -685,7 +687,8 @@ void searchMapData(io::CodedInputStream* input, MapRoot* root, MapIndex* ind, Se
 
 extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_searchObjectsForRendering(JNIEnv* ienv,
 		jobject obj, jint sleft, jint sright, jint stop, jint sbottom, jint zoom, jstring mapName,
-		jobject renderingRuleSearchRequest, bool skipDuplicates, jint searchResult) {
+		jobject renderingRuleSearchRequest, bool skipDuplicates, jint searchResult, jobject objInterrupted) {
+	// TODO skipDuplicates not supported
 	setGlobalEnv(ienv);
 	SearchResult* result = (SearchResult*) searchResult;
 	if(result == NULL) {
@@ -698,7 +701,10 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 	}
 	BinaryMapFile* file =  i->second;
 	RenderingRuleSearchRequest* req = initSearchRequest(renderingRuleSearchRequest);
-	SearchQuery q(sleft,sright, stop, sbottom, req, result);
+	jclass clObjInterrupted = globalEnv()->GetObjectClass(objInterrupted);
+	jfieldID interruptedField =  getFid(clObjInterrupted, "interrupted", "Z");
+	globalEnv()->DeleteLocalRef(clObjInterrupted);
+	SearchQuery q(sleft,sright, stop, sbottom, req, objInterrupted, interruptedField);
 
 	fseek(file->f, 0, 0);
 	io::FileInputStream input(fileno(file->f));
@@ -724,11 +730,25 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 			}
 		}
 	}
-//	if(result->result.size() > 0) {
+	result->result.insert(result->result.end(), q.result.begin(), q.result.end());
+	std::map<tagValueType, std::vector<MapDataObject*> > multyPolygons;
+	std::vector<MapDataObject*>::iterator mdo = q.result.begin();
+	for(;mdo!= q.result.end(); mdo++) {
+		for(size_t j = 0; j<(*mdo)->types.size(); j++) {
+			int type = (*mdo)->types.at(j);
+			if((type & 0x3) == RenderingRulesStorage::MULTI_POLYGON_TYPE) {
+				tagValueType tagValue((*mdo)->tagValues.at(j), type);
+				multyPolygons[tagValue].push_back(*mdo);
+			}
+		}
+	}
+
+	proccessMultiPolygons(multyPolygons, q.left, q.right, q.bottom, q.top, q.zoom, result->result);
+	if(q.result.size() > 0) {
 		sprintf(errorMsg, "Search : tree - read( %d), accept( %d), objs - visit( %d), accept(%d), in result(%d) ", q.numberOfReadSubtrees,
 				q.numberOfAcceptedSubtrees, q.numberOfVisitedObjects, q.numberOfAcceptedObjects, result->result.size());
 		__android_log_print(ANDROID_LOG_INFO, "net.osmand", errorMsg);
-//	}
+	}
 	delete req;
 	return (jint)result;
 }

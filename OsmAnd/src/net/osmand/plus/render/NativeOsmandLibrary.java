@@ -26,13 +26,16 @@ public class NativeOsmandLibrary {
 	 * @param searchResultHandle
 	 *            - must be null if there is no need to append to previous results returns native handle to results
 	 */
-	public static NativeSearchResult searchObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom,
-			String mapName, RenderingRuleSearchRequest request, boolean skipDuplicates, NativeSearchResult searchResultHandler) {
+	public static NativeSearchResult searchObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom, String mapName,
+			RenderingRuleSearchRequest request, boolean skipDuplicates, NativeSearchResult searchResultHandler,
+			Object objectWithInterruptedField) {
 		if (searchResultHandler == null) {
-			return new NativeSearchResult(searchObjectsForRendering(sleft, sright, stop, sbottom, zoom, mapName, request, skipDuplicates, 0));
+			return new NativeSearchResult(searchObjectsForRendering(sleft, sright, stop, sbottom, zoom, mapName, request, skipDuplicates,
+					0, objectWithInterruptedField));
 		} else {
-			int res = searchObjectsForRendering(sleft, sright, stop, sbottom, zoom, mapName, request, skipDuplicates, searchResultHandler.nativeHandler);
-			if(res == searchResultHandler.nativeHandler){
+			int res = searchObjectsForRendering(sleft, sright, stop, sbottom, zoom, mapName, request, skipDuplicates,
+					searchResultHandler.nativeHandler, objectWithInterruptedField);
+			if (res == searchResultHandler.nativeHandler) {
 				return searchResultHandler;
 			}
 			return new NativeSearchResult(res);
@@ -70,6 +73,6 @@ public class NativeOsmandLibrary {
 	private static native String generateRendering(RenderingContext rc, int searchResultHandler, Bitmap bmp, boolean useEnglishNames,
 			RenderingRuleSearchRequest render, int defaultColor);
 
-	private static native int searchObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom,
-			String mapnaem,  RenderingRuleSearchRequest request, boolean skipDuplicates, int searchResultHandler);
+	private static native int searchObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom, String mapnaem,
+			RenderingRuleSearchRequest request, boolean skipDuplicates, int searchResultHandler, Object objectWithInterruptedField);
 }
