@@ -119,7 +119,7 @@ public class NavigationInfo {
             distance = Math.rint(distance * 100.0) / 100.0;
         else
             distance = Math.rint(distance / 10.0) * 10.0;
-        String result = new String(String.valueOf((distance < 1000.0) ? distance : (distance / 1000.0)));
+        String result = String.valueOf((distance < 1000.0) ? distance : (distance / 1000.0));
         result += " " + getString((distance < 1000.0) ? R.string.meters : R.string.kilometers); //$NON-NLS-1$
         return result;
     }
@@ -181,7 +181,7 @@ public class NavigationInfo {
     public String getSpeedString() {
         if ((currentLocation != null) && currentLocation.hasSpeed()) {
             double speed = Math.rint(currentLocation.getSpeed() * 360.0) / 100.0;
-            String result = new String(String.valueOf(speed) + " " + context.getString(R.string.kilometers_per_hour)); //$NON-NLS-1$
+            String result = String.valueOf(speed) + " " + getString(R.string.kilometers_per_hour); //$NON-NLS-1$
             if (currentLocation.hasBearing())
                 result += " " + absoluteDirectionString(currentLocation.getBearing()); //$NON-NLS-1$
             return result;
@@ -195,7 +195,7 @@ public class NavigationInfo {
         String result = null;
         if ((currentLocation != null) && currentLocation.hasAccuracy()) {
             double accuracy = Math.rint(currentLocation.getAccuracy() * 100.0) / 100.0;
-            result = new String(context.getString(R.string.accuracy) + " " + String.valueOf(accuracy) + " " + context.getString(R.string.meters)); //$NON-NLS-1$ //$NON-NLS-2$
+            result = getString(R.string.accuracy) + " " + String.valueOf(accuracy) + " " + getString(R.string.meters); //$NON-NLS-1$ //$NON-NLS-2$
         }
         if (result != null)
             result += " (" + provider + ")"; //$NON-NLS-1$ //$NON-NLS-2$
@@ -208,7 +208,7 @@ public class NavigationInfo {
     public String getAltitudeString() {
         if ((currentLocation != null) && currentLocation.hasAltitude()) {
             double altitude = Math.rint(currentLocation.getAltitude() * 100.0) / 100.0;
-            return new String(context.getString(R.string.altitude) + " " + String.valueOf(altitude) + " " + context.getString(R.string.meters)); //$NON-NLS-1$ //$NON-NLS-2$
+            return getString(R.string.altitude) + " " + String.valueOf(altitude) + " " + getString(R.string.meters); //$NON-NLS-1$ //$NON-NLS-2$
         }
         return null;
     }
@@ -258,7 +258,7 @@ public class NavigationInfo {
         if (item != null)
             attributes.add(item);
         if (attributes.isEmpty())
-            attributes.add(context.getString(R.string.no_info));
+            attributes.add(getString(R.string.no_info));
 
         AlertDialog.Builder info = new AlertDialog.Builder(context);
         if (point != null)
