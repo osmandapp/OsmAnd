@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import net.osmand.binary.BinaryMapIndexWriter;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.Entity;
@@ -130,7 +129,7 @@ public class IndexTransportCreator extends AbstractIndexPartCreator {
 	
 	public void visitEntityMainStep(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		if (e instanceof Relation && e.getTag(OSMTagKey.ROUTE) != null) {
-			ctx.loadEntityData(e, true);
+			ctx.loadEntityData(e);
 			TransportRoute route = indexTransportRoute((Relation) e);
 			if (route != null) {
 				insertTransportIntoIndex(route);

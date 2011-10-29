@@ -140,7 +140,8 @@ public class MinskTransReader {
 			MapUtils.sortListOfEntities(closestObjects, r.latitude, r.longitude);
 			int ind = 0; 
 			boolean ccorrelated = false;
-			while(ind < closestObjects.size() && !ccorrelated){
+			int cOsize = closestObjects.size();
+			while(ind < cOsize && !ccorrelated){
 				Node foundNode = closestObjects.get(ind);
 				if(!reverse.containsKey(foundNode)){
 					// all is good no one registered to that stop
@@ -279,7 +280,8 @@ public class MinskTransReader {
 			list.add(0, end);
 			list.add(start);
 		}
-		for(int i=0; i<list.size(); i++){
+		int lsize = list.size();
+		for(int i=0; i<lsize; i++){
 			String st = route.routeStops.get(i);
 			Node correlatedNode = correlated.get(st);
 			TransportStop trStop = trStops.get(st);
@@ -294,7 +296,7 @@ public class MinskTransReader {
 				
 			} else if(correlatedNode.getId() != e.getId()){
 				double dist = MapUtils.getDistance(correlatedNode, e.getLatLon());
-				if(i==list.size() - 1 && !direct && dist < 150){
+				if(i==lsize - 1 && !direct && dist < 150){
 					continue;
 				} 
 				String eStop = e.getId() + " " + e.getTag(OSMTagKey.NAME);
@@ -360,7 +362,8 @@ public class MinskTransReader {
 				Relation relation = checkedRoutes.get(s);
 
 				// correlating stops
-				for (int i = 0; i < r.routeStops.size(); i++) {
+				int rSsize = r.routeStops.size();
+				for (int i = 0; i < rSsize; i++) {
 					String stop = r.routeStops.get(i);
 					if (!stopsMap.containsKey(stop)) {
 						throw new IllegalArgumentException("Stops file is not corresponded to routes file");
@@ -379,7 +382,7 @@ public class MinskTransReader {
 						System.out.println("[ADD] Added new bus_stop : " + node.getId() + " " + st.name + " minsktrans_stop_id " + st.stopId);
 						correlated.put(stop, node);
 					}
-					if (i == 0 || i == r.routeStops.size() - 1) {
+					if (i == 0 || i == rSsize - 1) {
 						if (direct) {
 							relation.addMember(correlated.get(stop).getId(), EntityType.NODE, "stop");
 						}

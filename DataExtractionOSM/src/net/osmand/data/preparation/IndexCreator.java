@@ -14,7 +14,6 @@ import java.sql.Statement;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
-import net.osmand.binary.BinaryMapIndexWriter;
 import net.osmand.data.IndexConstants;
 import net.osmand.data.preparation.OsmDbAccessor.OsmDbVisitor;
 import net.osmand.impl.ConsoleProgressImplementation;
@@ -261,7 +260,7 @@ public class IndexCreator {
 		// 1. Loading osm file
 		OsmDbCreator dbCreator = new OsmDbCreator(this);
 		try {
-			progress.setGeneralProgress("[35 / 100]"); //$NON-NLS-1$
+			progress.setGeneralProgress("[15 / 100]"); //$NON-NLS-1$
 			progress.startTask(Messages.getString("IndexCreator.LOADING_FILE") + readFile.getAbsolutePath(), -1); //$NON-NLS-1$
 			// 1 init database to store temporary data
 			dbCreator.initDatabase(dialect, dbConn);
@@ -311,9 +310,10 @@ public class IndexCreator {
 			if (DBDialect.NOSQL != dialect) {
 				Connection dbc = (Connection) dbConn;
 				final Statement stmt = dbc.createStatement();
-				allRelations = stmt.executeQuery("select count(*) from relations").getInt(1);
-				allNodes = stmt.executeQuery("select count(*) from node").getInt(1);
-				allWays = stmt.executeQuery("select count(*) from ways").getInt(1);
+				accessor.computeRealCounts(stmt);
+				allRelations = accessor.getAllRelations();
+				allNodes = accessor.getAllNodes();
+				allWays = accessor.getAllWays();
 				stmt.close();
 			}
 		}
@@ -352,7 +352,7 @@ public class IndexCreator {
 	public void generateIndexes(File readFile, IProgress progress, IOsmStorageFilter addFilter, MapZooms mapZooms,
 			MapRenderingTypes renderingTypes) throws IOException, SAXException, SQLException, InterruptedException {
 		if(LevelDBAccess.load()){
-			dialect = DBDialect.NOSQL;
+//			dialect = DBDialect.NOSQL;
 		}
 		
 		if (renderingTypes == null) {
@@ -419,7 +419,7 @@ public class IndexCreator {
 				
 				// 3.1 write all cities
 				if (indexAddress) {
-					progress.setGeneralProgress("[40 / 100]"); //$NON-NLS-1$
+					progress.setGeneralProgress("[20 / 100]"); //$NON-NLS-1$
 					progress.startTask(Messages.getString("IndexCreator.INDEX_CITIES"), accessor.getAllNodes()); //$NON-NLS-1$
 					if (loadFromExistingFile) {
 						// load cities names
@@ -441,7 +441,7 @@ public class IndexCreator {
 						@Override
 						public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 							if (indexAddress) {
-								indexAddressCreator.indexAddressRelation((Relation) e, ctx);
+								//indexAddressCreator.indexAddressRelation((Relation) e, ctx); streets needs loaded boundaries !!!
 								indexAddressCreator.indexBoundariesRelation((Relation) e, ctx);
 							}
 							if (indexMap) {
@@ -459,9 +459,20 @@ public class IndexCreator {
 							}
 						});
 
+						//finish up the boundaries and cities
+						indexAddressCreator.bindCitiesWithBoundaries();
+						
+						progress.setGeneralProgress("[45 / 100]"); //$NON-NLS-1$
+						progress.startTask(Messages.getString("IndexCreator.PREINDEX_ADRESS_MAP"), accessor.getAllRelations()); //$NON-NLS-1$
+						accessor.iterateOverEntities(progress, EntityType.RELATION, new OsmDbVisitor() {
+							@Override
+							public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
+								indexAddressCreator.indexAddressRelation((Relation) e, ctx);
+							}
+						});
+						
 						indexAddressCreator.commitToPutAllCities();
 					}
-
 				}
 
 				// 3.3 MAIN iterate over all entities
@@ -521,7 +532,7 @@ public class IndexCreator {
 			}
 
 			// 5. Writing binary file
-			if (indexMap || indexAddress || indexTransport) {
+			if (indexMap || indexAddress || indexTransport || indexPOI) {
 				if (mapFile.exists()) {
 					mapFile.delete();
 				}
@@ -537,6 +548,12 @@ public class IndexCreator {
 					progress.setGeneralProgress("[95 of 100]");
 					progress.startTask("Writing address index to binary file...", -1);
 					indexAddressCreator.writeBinaryAddressIndex(writer, regionName, progress);
+				}
+				
+				if (indexPOI) {
+					progress.setGeneralProgress("[95 of 100]");
+					progress.startTask("Writing poi index to binary file...", -1);
+					indexPoiCreator.writeBinaryPoiIndex(writer, regionName, progress);
 				}
 
 				if (indexTransport) {
@@ -624,8 +641,10 @@ public class IndexCreator {
 		creator.setZoomWaySmothness(2);
 		MapRenderingTypes rt = MapRenderingTypes.getDefault();// new MapRenderingTypes("/home/victor/projects/OsmAnd/data/testdata/roads_rendering_types.xml");
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
-//		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
-		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/mecklenburg-vorpommern.osm.pbf"),
+		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
+//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/mecklenburg-vorpommern.osm.pbf"),
+//				new ConsoleProgressImplementation(1), null, zooms, rt);
+		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/download/RU-MOW.osm.bz2"),
 				new ConsoleProgressImplementation(1), null, zooms, rt);
 		
 //		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes3.tmp.odb"));

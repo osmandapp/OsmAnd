@@ -20,7 +20,6 @@ import java.util.Set;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
-import net.osmand.binary.BinaryMapIndexWriter;
 import net.osmand.data.Boundary;
 import net.osmand.data.MapAlgorithms;
 import net.osmand.osm.Entity;
@@ -84,7 +83,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 	private void indexMultiPolygon(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		if (e instanceof Relation && "multipolygon".equals(e.getTag(OSMTagKey.TYPE))) { //$NON-NLS-1$
-			ctx.loadEntityData(e, true);
+			ctx.loadEntityData(e);
 			Map<Entity, String> entities = ((Relation) e).getMemberEntities();
 
 			boolean outerFound = false;
@@ -173,7 +172,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 	private Node checkOuterWaysEncloseInnerWays(List<List<Way>> completedRings, Map<Entity, String> entities) {
 		List<List<Way>> innerWays = new ArrayList<List<Way>>();
-		Boundary outerBoundary = new Boundary();
+		Boundary outerBoundary = new Boundary(true);
 		Node toReturn = null;
 		for(List<Way> ring : completedRings){
 			boolean innerType = "inner".equals(entities.get(ring.get(0))); //$NON-NLS-1$
@@ -222,7 +221,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					type = MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON;
 				}
 				if (type != -1) {
-					ctx.loadEntityData(e, true);
+					ctx.loadEntityData(e);
 					Collection<EntityId> fromL = ((Relation) e).getMemberIds("from"); //$NON-NLS-1$
 					Collection<EntityId> toL = ((Relation) e).getMemberIds("to"); //$NON-NLS-1$
 					if (!fromL.isEmpty() && !toL.isEmpty()) {
@@ -576,7 +575,8 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				fs.close();
 			}
 			List<Node> wNodes = new ArrayList<Node>();
-			for (int i = 0; i < wayNodes.size(); i += 2) {
+			int wNsize = wayNodes.size(); 
+			for (int i = 0; i < wNsize; i += 2) {
 				wNodes.add(new Node(wayNodes.get(i), wayNodes.get(i + 1), i == 0 ? startNode : endNode));
 			}
 			boolean skip = false;
@@ -605,7 +605,8 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		int minY = Integer.MAX_VALUE;
 		int maxY = Integer.MIN_VALUE;
 		int c = 0;
-		for (int i = 0; i < nodes.size(); i++) {
+		int nsize = nodes.size(); 
+		for (int i = 0; i < nsize; i++) {
 			if (nodes.get(i) != null) {
 				c++;
 				int x = (int) (MapUtils.getTileNumberX(zoom, nodes.get(i).getLongitude()) * 256d);
@@ -641,7 +642,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	public void iterateMainEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		if (e instanceof Way || e instanceof Node) {
 			// manipulate what kind of way to load
-			ctx.loadEntityData(e, false);
+			ctx.loadEntityData(e);
 			boolean oneway = "-1".equals(e.getTag(OSMTagKey.ONEWAY)); //$NON-NLS-1$
 			for (int i = 0; i < mapZooms.size(); i++) {
 				boolean inverse = i == 0 ? oneway : false;

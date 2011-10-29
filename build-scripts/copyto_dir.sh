@@ -17,6 +17,7 @@ LATEST_DIR="$DIRECTORY"/latests
 cp -f $BUILD_DIR/* $FTP_FOLDER
 cp -f $LATEST_DIR/* $FTP_LATEST
 
+
 #ftp -n -v $FTP_SITE <<SCRIPT 2>&1
 #quote USER $FTP_USER
 #quote PASS $FTP_PWD

@@ -1,11 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+<string name="poi_query_by_name_matches_categories">Keresésnek megfelelő POI kategóriák:</string>
+<string name="data_to_search_poi_not_available">POI kereséshez nem található helyi adat.</string>
+<string name="poi_filter_by_name">Név szerinti keresés</string>
+<string name="old_poi_file_should_be_deleted">A(z) \'%1$s\' POI adat fájl elavult és törölhető.</string>
+<string name="update_poi_file_not_found">A POI változások tárolásához nem található és nem hozható létre helyi fájl.</string>
+<string name="update_poi_does_not_change_indexes">POI-k változtatásai helyileg tárolódnak, a letöltött térkép adatok nem változnak.</string>
+
+<string name="button_upgrade_osmandplus">Osmand+ frissítése</string>
+<string name="map_version_changed_info">A szerveren található térképek nem kompatibilisek az Osmand ezen verziójával. Letöltésükhöz és használatukhoz frissíteni kell az alkalmazást.</string>
+
+<string name="local_index_mi_rename">Átnevezés</string>
+<string name="show_gpx_route">Mutasd a térképen</string>
+<string name="poi_filter_nominatim">Online Nominatim</string>
+<string name="auto_follow_route_never">Soha</string>
+<string name="choose_auto_follow_route">Automatikus követés beállításai </string>
+<string name="choose_auto_follow_route_descr">Időintervallum beállítása az automatikus követéshez</string>
+<string name="search_select_point">Választás</string>
+<string name="search_position_current_location_search">Hely keresése...</string>
+<string name="search_position_current_location_found">Hely [Megtalálva]</string>
+<string name="search_position_address">Cím...</string>
+<string name="search_position_favorites">Kedvencek...</string>
+<string name="search_position_undefined">Meghatározatlan</string>
+<string name="search_position_fixed">Meghatározott</string>
+<string name="search_position_current_location">Jelenlegi hely...</string>
+<string name="search_position_map_view">Utolsó térkép nézet</string>
+
+<string name="select_search_position">Keresés helye:</string>
+<string name="context_menu_item_search">Keresés</string>
 <string name="tip_recent_changes_0_6_7_t">0.6.7 verzió változásai:
 \n\t- Offline - kapcsolat nélküli - adat kezelés (letöltés, törlés, adatok biztonsági mentése közvetlenül az Osmandban)
 \n\t- Kedvenc pontok és csoportok (csoportosítás, törlés, kedvencek kezelése)
-\n\t- GPX Explorer in application (see tracks, distance, average speed, elevation, etc.)
-\n\t- GPX navigáció (hasznos opciók, összeomlás után utvonal folytatása, körforgalmak kezelése)
-\n\t- Utvonal mentése GPX nyomvonalként kapcsolat nélküli munkához
+\n\t- Beépített GPX böngésző (útvonalak megjelenítése, távolság, átlagsebesség, magasság, stb.)
+\n\t- GPX navigáció (hasznos opciók, összeomlás után útvonal folytatása, körforgalmak kezelése)
+\n\t- Útvonal mentése GPX nyomvonalként kapcsolat nélküli munkához
 \n\t- GPX adatok kibővítése (pontatlan adatok kiszűrése és pontosság/emelkedés/sebesség mentése)
 \n\t- GPX nyomvonal feltöltése az OSM közösséghez (http://download.osmand.net/gpx/)
 \n\t- Vektoros megjelenítés javítása
@@ -36,9 +64,9 @@
 <string name="basemap_missing">Hiányzik az alap világtérkép (alacsony nagyításon az egész Földet lefedi). A teljes környezethez le lehet tölteni a World_basemap_x.obf -et.</string>
 <string name="vector_data_missing">Hiányzanak a helyi (\'offline - kapcsolat nélküli\') adatok az SD kártyáról. Az offline - kapcsolat nélküli használathoz le kell tölteni azokat.</string>
 <string name="local_index_gpx_info_show">\n\nHosszan megnyomva megjelenik a térképen</string>
-<string name="local_index_gpx_info_speed">\nÁtlagsebesség : %1$s \nLegnagyobb sebesség : %2$s</string>
-<string name="local_index_gpx_info_elevation">\nÁtlagos magasság : %1$.0f m\nLegkisebb magasság : %2$.0f m\nLegnagyobb magasság : %3$.0f m\nEreszkedés : %4$.0f m\nEmelkedés : %5$.0f m</string>
-<string name="local_index_gpx_info">Rész nyomvonal : %1$d\nÖsszes pontok : %2$d\nÚt pontok : %3$d\nTeljes távolság : %4$s\nIndulás : %5$tD %5$tR\nÉrkezés : %6$tD %6$tR</string>
+<string name="local_index_gpx_info_speed">\nÁtlagsebesség: %1$s \nLegnagyobb sebesség: %2$s</string>
+<string name="local_index_gpx_info_elevation">\nÁtlagos magasság: %1$.0f m\nLegkisebb magasság: %2$.0f m\nLegnagyobb magasság: %3$.0f m\nEreszkedés: %4$.0f m\nEmelkedés: %5$.0f m</string>
+<string name="local_index_gpx_info">Rész nyomvonal: %1$d\nÖsszes pont: %2$d\nÚtpontok: %3$d\nTeljes távolság: %4$s\nIndulás: %5$tD %5$tR\nÉrkezés: %6$tD %6$tR</string>
 <string name="local_index_installed">Telepítve</string>
 <string name="local_index_items_backuped">%2$d darabból %1$d sikeresen elmentve.</string>
 <string name="local_index_items_deleted">%2$d darabból %1$d sikeresen törölve.</string>
@@ -46,7 +74,7 @@
 <string name="local_index_no_items_to_do">Nincs elem a művelethez: %1$s</string>
 <string name="local_index_action_do">%2$s darab elemen végrehajtjuk: %1$s. Biztos?</string>
 <string name="local_index_descr_title">Offline - kapcsolat nélküli adat kezelés:</string>
-<string name="local_index_description">Új letöltés, biztonsági mentés vagy meglévő adat törlése.\nAz eszközön lévő adatok:</string>
+<string name="local_index_description">Új adat letöltés, biztonsági mentés vagy az adatok törlése. \nJelenlegi kapcsolat nélküli - offline - adatok az eszközön (Elérhető: %1$s):</string>
 <string name="local_index_mi_restore">Visszaállítás...</string>
 <string name="local_index_mi_backup">Biztonsági mentés...</string>
 <string name="local_index_mi_delete">Törlés...</string>
@@ -60,7 +88,7 @@
 <string name="local_index_items"></string>
 <string name="local_indexes_cat_backup">Mentés</string>
 <string name="local_indexes_cat_tts">Beszéd adat (TTS)</string>
-<string name="local_indexes_cat_voice">Beszéd adat (media)</string>
+<string name="local_indexes_cat_voice">Beszéd adat (média)</string>
 <string name="local_indexes_cat_gpx">GPX adat</string>
 <string name="local_indexes_cat_tile">Térkép adat (csempék)</string>
 <string name="local_indexes_cat_map">Térkép adat (vektor)</string>
@@ -73,7 +101,7 @@
 	<string name="map_text_size_descr">Szövegméret beállítása a térképen megjelenő nevekhez</string>
 	<string name="map_text_size">Szöveg méret</string>
 	<string name="trace_rendering">Hibakeresési információ megjelenítéshez</string>
-	<string name="trace_rendering_descr">Megjelenítési sebesség adatok hibakeresési, nyomonkövetési célból</string>
+	<string name="trace_rendering_descr">Megjelenítési sebesség adatok hibakeresési, nyomon követési célból</string>
 	<string name="tip_recent_changes">Legújabb változások</string>
 	<string name="tip_recent_changes_0_6_6_t">Legújabb változások a 0.6.6 verzióhoz: 
 \n\t- Text To Speech hang navigációhoz
@@ -98,8 +126,8 @@
 	<string name="tip_rotation_switching">Térkép elforgatás</string>
 	<string name="tip_rotation_switching_t">\tMegváltoztatható, hogy a térkép mikor és hogyan forogjon \'Beállítások\' -> \'Általános\' -> \'Térkép forgatása\'.
 	\n\tLehetőségek:
-	\n\t\'Ne forogjon\' - Térkép nem forog, felül mindíg észak van
-	\n\t\'Mozgás alapján\' - Térkép mindíg a mozgásnak megfelelően forog
+	\n\t\'Ne forogjon\' - Térkép nem forog, felül mindig észak van
+	\n\t\'Mozgás alapján\' - Térkép mindig a mozgásnak megfelelően forog
 	\n\t\'Iránytű alapján\' - A telefon iránytűjének megfelelően forog a térkép
 	\n\tTipp: Térkép nézetben az iránytűt megérintve egyszerűen lehet váltani a kiválasztott mód és az iránytű szerinti forgatás között.</string>
 
@@ -107,7 +135,7 @@
 	<string name="switch_to_vector_map_to_see">Hálózat nélkül használható vektoros térképre váltani a \'Beállítások\' -> \'Térkép megjelenítés\' -> \'Vektoros térképek\' menüponttal lehet.</string>
 	<string name="binary_map_download_success">Sikerült. Hálózat nélkül használható vektoros térképre váltani a \'Beállítások\' -> \'Térkép megjelenítés\' -> \'Vektoros térképek\' menüponttal lehet.</string>
 	<string name="choose_audio_stream">Hang navigáció kimenete</string>
-	<string name="choose_audio_stream_descr">Hang navigáció csatornájának kiválasztása (a rendszerkonfigurációtól függ)</string>
+	<string name="choose_audio_stream_descr">Hang navigáció csatornájának kiválasztása (a rendszer-konfigurációtól függ)</string>
 	<string name="voice_stream_voice_call">Telefonhívás hangcsatorna</string>
 	<string name="voice_stream_notification">Üzenetjel hangcsatorna</string>
 	<string name="voice_stream_music">Zene hangcsatorna</string>
@@ -212,13 +240,13 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 <string name="mile_per_hour">mph</string>
 <string name="mile">mi</string>
 <string name="send_location_way_choose_title">Hely megosztásának módja</string>
-<string name="send_location_sms_pattern">Itt vagyok / I\'m here : {0}\n{1}</string>
-<string name="send_location_email_pattern">A hely megjelenítéséhez kattints a {0} linkre a webböngészőben vagy az Androidra szánt linkre {1}\n\nTo see location follow the web browser link {0} or android intent link {1}</string>
+<string name="send_location_sms_pattern">Itt vagyok / I\'m here : %1$s\n%2$s</string>
+<string name="send_location_email_pattern">A hely megjelenítéséhez kattints a %1$s linkre a webböngészőben vagy az Androidra szánt linkre %2$s\n\nTo see location follow the web browser link %1$s or android intent link %2$s</string>
 <string name="send_location">Hely pozíció elküldése</string>
 <string name="context_menu_item_share_location">Hely megosztása</string>
 <string name="add_waypoint_dialog_added">Sikeres útpont felvétel: \'\'{0}\'\'</string>
 <string name="add_waypoint_dialog_title">Útpont hozzáadása a felvett GPX útvonalhoz</string>
-<string name="context_menu_item_add_waypoint">Gpx útpont hozzáadás</string>
+<string name="context_menu_item_add_waypoint">GPX útpont hozzáadás</string>
 	<string name="amenity_type_administrative">Adminisztráció</string>
 	<string name="amenity_type_barrier">Akadály</string>
 	<string name="amenity_type_education">Oktatás</string>
@@ -271,7 +299,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="gps_status_app_not_found">"GPS status" alkalmazás nincs telepítve. Megkeresi a Market-en?</string>
 	
 	<string name="voice_is_not_available_msg">A beszéd alapú navigáció nem érhető el. A Beállításoknál kiválasztható vagy letölthető.</string>
-	<string name="voice_is_not_available_title">Nincs megadva hang adat</string>
+	<string name="voice_is_not_available_title">Nincs kiválasztva hang adat</string>
 	<string name="daynight_mode_day">Nappal</string>
 	<string name="daynight_mode_night">Éjjel</string>
 	<string name="daynight_mode_auto">Napkelte/Napnyugta</string>
@@ -301,7 +329,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="maps_could_not_be_downloaded">Ezt a térképet nem lehet letölteni</string>
 	
 	<string name="continuous_rendering">Folyamatos megjelenítés</string>
-	<string name="continuous_rendering_descr">Folyamatos megjelenítés választása vagy csak a teljes képé</string>
+	<string name="continuous_rendering_descr">Folyamatos megjelenítés választása, vagy csak a teljes képé</string>
         <string name="rendering_exception">Hiba történt a kiválasztott terület megjelenítésekor</string>
         <string name="rendering_out_of_memory">Nincs elég memória a terület megjelenítéséhez</string>
         <string name="show_point_options">Pont beállítások</string>
@@ -335,7 +363,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 
 	<string name="vector_data">Vektoros OSM térkép</string>
 	<string name="transport_context_menu">Közlekedés keresése a célnál</string>
-	<string name="point_on_map">Pont a térképen\n Lat {0,number,#.####} Lon {1,number,#.####}</string>
+	<string name="point_on_map">Pont a térképen\n szélesség {0,number,#.####}, hosszúság {1,number,#.####}</string>
 	<string name="osb_bug_name">Hiba</string>
 	<string name="poi_context_menu_modify">POI módosítás</string>
 	<string name="poi_context_menu_delete">POI törlés</string>
@@ -372,8 +400,8 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="context_menu_item_show_route">Útvonal innen</string>
 	<string name="use_trackball_descr">Trackball használata a térkép mozgatásához</string>
 	<string name="use_trackball">Trackball használata</string>
-	<string name="background_service_wait_int_descr">Várakozási intervallum kiválasztása a helyzet meghatározáshoz</string>
-	<string name="background_service_wait_int">Várakozási intervallum</string>
+	<string name="background_service_wait_int_descr">Idő amíg a sikeres helymeghatározásra várhatunk, ez után a helymeghatározó szolgáltatás újraindul.</string>
+	<string name="background_service_wait_int">Helymeghatározási időtúllépés</string>
 	<string name="service_stop_background_service">Háttér navigációs szolgáltatás kikapcsolása</string>
 	<string name="where_am_i">Hol vagyok?</string>
 	<string name="process_navigation_service">OsmAnd navigációs szolgáltatás</string>
@@ -381,12 +409,12 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">másodperc</string>
 	<string name="int_min">min.</string>
-	<string name="background_service_int_descr">Helymeghatározási intervallum kiválasztása háttérszolgálatáshoz</string>
-	<string name="background_service_int">Pozicionálási intervallum</string>
-	<string name="background_service_provider_descr">Helymeghatározási szolgáltató kiválasztása a háttérszolgáltatáshoz</string>
-	<string name="background_service_provider">Helymeghatározási szolgáltató</string>
-	<string name="background_router_service_descr">Enable background service to track position in long time periods</string>
-	<string name="background_router_service">Útvonaltervező szolgáltatás</string>
+	<string name="background_service_int_descr">Helymeghatározási időköz megadása a háttérszolgáltatásnak</string>
+	<string name="background_service_int">Helymeghatározási időköz</string>
+	<string name="background_service_provider_descr">Helymeghatározási szolgáltatás kiválasztása a háttérszolgáltatáshoz</string>
+	<string name="background_service_provider">Helymeghatározási szolgáltatás</string>
+	<string name="background_router_service_descr">Hosszú idejű pozíciókövetéshez bekapcsolja a háttérszolgáltatást</string>
+	<string name="background_router_service">Háttérszolgáltatás pozíciókövetéshez</string>
 	<string name="off_router_service_no_gps_available">Helymeghatározó szolgáltatás szükséges a háttérben futó útvonaltervező szolgáltatáshoz.</string>
 	<string name="routing_settings_descr">Útvonaltervező paraméterek meghatározása</string>
 	<string name="routing_settings">Útvonaltervezés</string>
@@ -431,13 +459,13 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="transport_Stop">Megálló</string>
 	<string name="transport_stops">megállók</string>
 	
-	<string name="transport_search_after">Útvonal keresés utána</string>	
-	<string name="transport_search_before">Útvonal keresés előtte</string>
+	<string name="transport_search_after">Keresés előtte</string>	
+	<string name="transport_search_before">Folytatás keresése</string>
 	<string name="transport_finish_search">Keresés vége</string>
-	<string name="transport_stop_to_go_out">Choose stop to go out</string>
-	<string name="transport_to_go_after">to go after</string>
-	<string name="transport_to_go_before">to go before</string>
-	<string name="transport_stops_to_pass">stops to pass</string>
+	<string name="transport_stop_to_go_out">Hol szeretnél leszállni?</string>
+	<string name="transport_to_go_after">utána gyalog</string>
+	<string name="transport_to_go_before">előtte gyalog</string>
+	<string name="transport_stops_to_pass">megállók:</string>
 	<string name="transport_route_distance">Útvonal távolsága</string>
 	<string name="transport">Közlekedés</string>
 	<string name="default_buttons_ok">OK</string>
@@ -616,13 +644,13 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 <string name="app_mode_pedestrian">Gyalogos</string>
 <string name="position_on_map_center">Közép</string>
 <string name="position_on_map_bottom">Alul</string>
-<string name="navigate_point_top_text">Földrajzi szélesség &amp; hosszúság megadása a kiválasztott alakban (F - fok, P - perc, M - másodperc)</string>
+<string name="navigate_point_top_text">Földrajzi szélesség és hosszúság megadása a kiválasztott alakban (F - fok, P - perc, M - másodperc)</string>
 <string name="navigate_point_latitude">Szélesség</string>
 <string name="navigate_point_longitude">Hosszúság</string>
 <string name="navigate_point_format_D">FFF.FFFFF</string>
 <string name="navigate_point_format_DM">FFF PP.PPPPP</string>
 <string name="navigate_point_format_DMS">FFF PP MM.MMMMM</string>
-<string name="search_shown_on_map">Térképen mutat</string>
+<string name="search_shown_on_map">Mutasd a térképen</string>
 <string name="navigate_point_cancel">Mégse</string>
 <string name="search_address_top_text">Cím kiválasztása</string>
 <string name="search_address_region">Régió</string>
@@ -632,7 +660,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 <string name="search_address_building_option">Épület</string>
 <string name="search_address_street_option">Keresztező utca</string>
 
-<string name="search_tabs_location">Tartózkodási hely</string>
+<string name="search_tabs_location">Koordináta</string>
 
 <string name="context_menu_item_navigate_point">Ponthoz vezet</string>
 <string name="context_menu_item_add_favorite">Hozzáadás a kedvencekhez</string>
@@ -677,10 +705,10 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 <string name="osb_close_dialog_error">Hiba történt a hiba lezárásakor</string>
 
 <string name="poi_edit_title">POI szerkesztése</string>
-<string name="poi_create_title">POI létrehozás</string>
+<string name="poi_create_title">POI létrehozása</string>
 <string name="poi_error_poi_not_found">A csomópont nem található, vagy a szórakozás nem egy csomópont</string>
 <string name="poi_remove_confirm_template">{0} törlés (megjegyzés bevitele)?</string>
-<string name="poi_remove_title">POI törlés</string>
+<string name="poi_remove_title">POI törlésa</string>
 <string name="default_buttons_delete">Törlés</string>
 <string name="poi_remove_success">POI törlése sikeres</string>
 <string name="poi_action_add">hozzáad</string>
@@ -704,5 +732,5 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 <string name="edit_filter_delete_dialog_title">Kiválasztott szűrő törlése?</string>
 <string name="edit_filter_delete_message">{0} szűrő törölve</string>
 <string name="edit_filter_create_message">{0} szűrő létrehozva</string>
-<string name="default_buttons_selectall">Mindet kijelől</string>
+<string name="default_buttons_selectall">Mindet kijelöl</string>
 </resources>

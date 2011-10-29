@@ -93,6 +93,7 @@
 			</fileset>
 			<fileset dir="src/net/osmand/data/index">
 				<include name="batch.xml" />
+				<include name="regions.xml" />
 			</fileset>
 		</copy>
 		<zip destfile="build.zip">

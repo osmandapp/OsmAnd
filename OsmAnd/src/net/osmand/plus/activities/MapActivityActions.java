@@ -18,7 +18,6 @@ import net.osmand.data.Amenity;
 import net.osmand.map.ITileSource;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
-import net.osmand.plus.AmenityIndexRepository;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandSettings;
@@ -62,7 +61,6 @@ public class MapActivityActions {
 		this.mapActivity = mapActivity;
 	}
 
-	@SuppressWarnings("unchecked")
 	protected void addFavouritePoint(final double latitude, final double longitude){
     	final Resources resources = mapActivity.getResources();
     	final FavouritePoint point = new FavouritePoint(latitude, longitude, resources.getString(R.string.add_favorite_dialog_default_favourite_name),
@@ -76,7 +74,7 @@ public class MapActivityActions {
 		editText.setText(point.getName());
 		final AutoCompleteTextView cat =  (AutoCompleteTextView) v.findViewById(R.id.Category);
 		cat.setText(point.getCategory());
-		cat.setAdapter(new ArrayAdapter(mapActivity, R.layout.list_textview, helper.getFavoriteGroups().keySet().toArray()));
+		cat.setAdapter(new ArrayAdapter<String>(mapActivity, R.layout.list_textview, helper.getFavoriteGroups().keySet().toArray(new String[] {})));
 		
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setNeutralButton(R.string.update_existing, new DialogInterface.OnClickListener(){
@@ -210,11 +208,13 @@ public class MapActivityActions {
     		AccessibleToast.makeText(mapActivity, getString(R.string.update_poi_is_not_available_for_zoom), Toast.LENGTH_SHORT).show();
     		return;
     	}
-    	final List<AmenityIndexRepository> repos = ((OsmandApplication) mapActivity.getApplication()).
-    								getResourceManager().searchAmenityRepositories(latitude, longitude);
-    	if(repos.isEmpty()){
-    		AccessibleToast.makeText(mapActivity, getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_SHORT).show();
+    	final AmenityIndexRepositoryOdb repo = ((OsmandApplication) mapActivity.getApplication()).
+    								getResourceManager().getUpdatablePoiDb();
+    	if(repo == null){
+    		AccessibleToast.makeText(mapActivity, getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_LONG).show();
     		return;
+    	} else {
+    		Toast.makeText(mapActivity, getString(R.string.update_poi_does_not_change_indexes), Toast.LENGTH_LONG).show();
     	}
     	final OsmandMapTileView mapView = mapActivity.getMapView();
     	Rect pixRect = new Rect(-mapView.getWidth()/2, -mapView.getHeight()/2, 3*mapView.getWidth()/2, 3*mapView.getHeight()/2);
@@ -237,11 +237,7 @@ public class MapActivityActions {
 					if(!loadingPOIs){
 						showToast(getString(R.string.update_poi_error_loading));
 					} else {
-						for(AmenityIndexRepository r  : repos){
-							if(r instanceof AmenityIndexRepositoryOdb){
-								((AmenityIndexRepositoryOdb) r).updateAmenities(amenities, leftLon, topLat, rightLon, bottomLat);
-							}
-						}
+						repo.updateAmenities(amenities, leftLon, topLat, rightLon, bottomLat);
 						showToast(MessageFormat.format(getString(R.string.update_poi_success), amenities.size()));
 						mapView.refreshMap();
 					}
@@ -282,8 +278,8 @@ public class MapActivityActions {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				String sms = MessageFormat.format(getString(R.string.send_location_sms_pattern), shortOsmUrl, appLink);
-				String email = MessageFormat.format(getString(R.string.send_location_email_pattern), shortOsmUrl, appLink );
+				String sms = mapActivity.getString(R.string.send_location_sms_pattern, shortOsmUrl, appLink);
+				String email = mapActivity.getString(R.string.send_location_email_pattern, shortOsmUrl, appLink);
 				if(which == 0){
 					Intent intent = new Intent(Intent.ACTION_SEND);
 					intent.setType("vnd.android.cursor.dir/email"); //$NON-NLS-1$
@@ -307,6 +303,30 @@ public class MapActivityActions {
     	builder.show();
     }
     
+    
+    protected void aboutRoute() {
+    	DialogInterface.OnClickListener showRoute = new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent intent = new Intent(mapActivity, ShowRouteInfoActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				mapActivity.startActivity(intent);
+			}
+		};
+		DialogInterface.OnClickListener saveDirections = new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				saveDirections();
+			}
+		};
+		Builder builder = new AlertDialog.Builder(mapActivity);
+		builder.setTitle(R.string.show_route);
+		builder.setMessage(mapActivity.getRoutingHelper().getGeneralRouteInformation());
+		builder.setPositiveButton(R.string.default_buttons_save, saveDirections);
+		builder.setNeutralButton(R.string.route_about, showRoute);
+		builder.setNegativeButton(R.string.close, null);
+		builder.show();
+    }
     
     protected void getDirections(final double lat, final double lon, boolean followEnabled){
     	MapActivityLayers mapLayers = mapActivity.getMapLayers();
@@ -398,12 +418,13 @@ public class MapActivityActions {
 				getMyApplication().showDialogInitializingCommandPlayer(mapActivity);
 			}
     	};
-    	DialogInterface.OnClickListener showRoute = new DialogInterface.OnClickListener(){
+    	
+		
+		DialogInterface.OnClickListener useGpxNavigation = new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Intent intent = new Intent(mapActivity, ShowRouteInfoActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				mapActivity.startActivity(intent);
+				ApplicationMode mode = getAppMode(buttons, settings);
+				navigateUsingGPX(mode);
 			}
 		};
     	
@@ -411,9 +432,7 @@ public class MapActivityActions {
     	if (followEnabled) {
     		builder.setTitle(R.string.follow_route);
 			builder.setPositiveButton(R.string.follow, followCall);
-			if (routingHelper.isRouterEnabled() && routingHelper.isRouteCalculated()) {
-				builder.setNeutralButton(R.string.route_about, showRoute);
-			}
+			builder.setNeutralButton(R.string.gpx_navigation, useGpxNavigation);
 			builder.setNegativeButton(R.string.only_show, onlyShowCall);
 		} else {
 			builder.setTitle(R.string.show_route);
@@ -438,7 +457,7 @@ public class MapActivityActions {
 		return location;
 	}
     
-    public void navigateUsingGPX() {
+    public void navigateUsingGPX(final ApplicationMode appMode) {
 		final LatLon endForRouting = mapActivity.getPointToNavigate();
 		final MapActivityLayers mapLayers = mapActivity.getMapLayers();
 		final OsmandSettings settings = OsmandSettings.getOsmandSettings(mapActivity);
@@ -485,6 +504,11 @@ public class MapActivityActions {
 								settings.setPointToNavigate(point.getLatitude(), point.getLongitude(), null);
 								mapLayers.getNavigationLayer().setPointToNavigate(point);
 							}
+						}
+						// change global settings
+						boolean changed = settings.APPLICATION_MODE.set(appMode);
+						if (changed) {
+							mapActivity.updateApplicationModeSettings();	
 						}
 						mapActivity.getMapView().refreshMap();
 						if(endPoint != null){

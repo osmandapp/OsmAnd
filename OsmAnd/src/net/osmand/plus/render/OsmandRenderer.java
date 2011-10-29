@@ -542,7 +542,6 @@ public class OsmandRenderer {
 			paintText.setColor(Color.WHITE);
 			paintText.setStrokeWidth(2 + textShadow);
 			cv.drawText(text, centerX, centerY, paint);
-			cv.drawText(text, centerX, centerY, paint);
 			// reset
 			paintText.setStrokeWidth(2);
 			paintText.setStyle(Style.FILL);

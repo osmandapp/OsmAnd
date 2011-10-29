@@ -14,6 +14,7 @@ import java.util.Map;
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
+import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.IndexConstants;
@@ -29,6 +30,7 @@ import org.apache.commons.logging.Log;
 import org.xml.sax.SAXException;
 
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
 public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Amenity> implements AmenityIndexRepository {
@@ -41,7 +43,8 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 	
 	
 	private final String[] columns = new String[]{"id", "x", "y", "name", "name_en", "type", "subtype", "opening_hours", "phone", "site"};        //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$//$NON-NLS-5$//$NON-NLS-6$//$NON-NLS-7$//$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$
-	public List<Amenity> searchAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int limit, PoiFilter filter, List<Amenity> amenities){
+	public List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom, PoiFilter filter, 
+			List<Amenity> amenities, ResultMatcher<Amenity> matcher){
 		long now = System.currentTimeMillis();
 		String squery = "? < y AND y < ? AND ? < x AND x < ?"; //$NON-NLS-1$
 		
@@ -51,13 +54,15 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 				squery += " AND " + sql; //$NON-NLS-1$
 			}
 		}
-		if(limit != -1){
-			squery += " ORDER BY RANDOM() LIMIT " +limit; //$NON-NLS-1$
+		int limit = -1;
+		if(zoom != -1){
+			limit = 200;
+			squery += " ORDER BY RANDOM() LIMIT 200"; //$NON-NLS-1$
 		}
 		Cursor query = db.query(IndexConstants.POI_TABLE, columns, squery, 
-				new String[]{MapUtils.get31TileNumberY(topLatitude)+"",  //$NON-NLS-1$
-				MapUtils.get31TileNumberY(bottomLatitude)+"", MapUtils.get31TileNumberX(leftLongitude)+"",  //$NON-NLS-1$ //$NON-NLS-2$
-				MapUtils.get31TileNumberX(rightLongitude)+""}, null, null, null); //$NON-NLS-1$
+				new String[]{stop+"",  //$NON-NLS-1$
+				sbottom+"", sleft+"",  //$NON-NLS-1$ //$NON-NLS-2$
+				sright+""}, null, null, null); //$NON-NLS-1$
 		if(query.moveToFirst()){
 			do {
 				Amenity am = new Amenity();
@@ -74,7 +79,9 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 				am.setOpeningHours(query.getString(7));
 				am.setPhone(query.getString(8));
 				am.setSite(query.getString(9));
-				amenities.add(am);
+				if (matcher == null || matcher.publish(am)) {
+					amenities.add(am);
+				}
 				if(limit != -1 && amenities.size() >= limit){
 					break;
 				}
@@ -84,11 +91,66 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 		
 		if (log.isDebugEnabled()) {
 			log.debug(String.format("Search for %s done in %s ms found %s.",  //$NON-NLS-1$
-					topLatitude + " " + leftLongitude, System.currentTimeMillis() - now, amenities.size())); //$NON-NLS-1$
+					MapUtils.get31LatitudeY(stop) + " " + MapUtils.get31LongitudeX(sleft), System.currentTimeMillis() - now, amenities.size())); //$NON-NLS-1$
 		}
 		return amenities;
 	}
 	
+	
+	public synchronized void clearCache(){
+		super.clearCache();
+		cFilterId = null;
+	}
+	
+	@Override
+	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom,
+			PoiFilter filter, ResultMatcher<Amenity> matcher) {
+		cTopLatitude = topLatitude;
+		cBottomLatitude = bottomLatitude;
+		cLeftLongitude = leftLongitude;
+		cRightLongitude = rightLongitude;
+		cFilterId = filter == null ? null : filter.getFilterId();
+		cZoom = zoom;
+		// first of all put all entities in temp list in order to not freeze other read threads
+		ArrayList<Amenity> tempList = new ArrayList<Amenity>();
+		int sleft = MapUtils.get31TileNumberX(cLeftLongitude);
+		int sright = MapUtils.get31TileNumberX(cRightLongitude);
+		int sbottom = MapUtils.get31TileNumberY(cBottomLatitude);
+		int stop = MapUtils.get31TileNumberY(cTopLatitude);
+		searchAmenities(stop, sleft, sbottom, sright, cZoom, filter, tempList, matcher);
+		synchronized (this) {
+			cachedObjects.clear();
+			cachedObjects.addAll(tempList);
+		}
+	}
+
+	public synchronized boolean checkCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, String filterId, List<Amenity> toFill, boolean fillFound){
+		if (db == null) {
+			return true;
+		}
+		boolean inside = cTopLatitude >= topLatitude && cLeftLongitude <= leftLongitude && cRightLongitude >= rightLongitude
+				&& cBottomLatitude <= bottomLatitude && zoom == cZoom;
+		boolean noNeedToSearch = inside &&  Algoritms.objectEquals(filterId, cFilterId);
+		if((inside || fillFound) && toFill != null && Algoritms.objectEquals(filterId, cFilterId)){
+			for(Amenity a : cachedObjects){
+				LatLon location = a.getLocation();
+				if (location.getLatitude() <= topLatitude && location.getLongitude() >= leftLongitude && location.getLongitude() <= rightLongitude
+						&& location.getLatitude() >= bottomLatitude) {
+					toFill.add(a);
+				}
+			}
+		}
+		return noNeedToSearch;
+	}
+	public boolean checkCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, String filterId, List<Amenity> toFill){
+		return checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, filterId, toFill, false);
+	}
+
+	public boolean initialize(final IProgress progress, File file) {
+		return super.initialize(progress, file, IndexConstants.POI_TABLE_VERSION, IndexConstants.POI_TABLE, true);
+	}
+	
+	// Update functionality
 	public boolean addAmenity(Amenity a){
 		insertAmenities(Collections.singleton(a));
 		return true;
@@ -121,57 +183,6 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 	}
 	
 	
-	public synchronized void clearCache(){
-		super.clearCache();
-		cFilterId = null;
-	}
-	
-	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, int limit,  PoiFilter filter, List<Amenity> toFill){
-		cTopLatitude = topLatitude + (topLatitude -bottomLatitude);
-		cBottomLatitude = bottomLatitude - (topLatitude -bottomLatitude);
-		cLeftLongitude = leftLongitude - (rightLongitude - leftLongitude);
-		cRightLongitude = rightLongitude + (rightLongitude - leftLongitude);
-		cFilterId = filter == null? null :filter.getFilterId();
-		cZoom = zoom;
-		// first of all put all entities in temp list in order to not freeze other read threads
-		ArrayList<Amenity> tempList = new ArrayList<Amenity>();
-		searchAmenities(cTopLatitude, cLeftLongitude, cBottomLatitude, cRightLongitude, limit, filter, tempList);
-		synchronized (this) {
-			cachedObjects.clear();
-			cachedObjects.addAll(tempList);
-		}
-		
-		checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, cZoom, filter.getFilterId(), toFill);
-	}
-
-	public synchronized boolean checkCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, String filterId, List<Amenity> toFill, boolean fillFound){
-		if (db == null) {
-			return true;
-		}
-		boolean inside = cTopLatitude >= topLatitude && cLeftLongitude <= leftLongitude && cRightLongitude >= rightLongitude
-				&& cBottomLatitude <= bottomLatitude && zoom == cZoom;
-		boolean noNeedToSearch = inside &&  Algoritms.objectEquals(filterId, cFilterId);
-		if((inside || fillFound) && toFill != null && Algoritms.objectEquals(filterId, cFilterId)){
-			for(Amenity a : cachedObjects){
-				LatLon location = a.getLocation();
-				if (location.getLatitude() <= topLatitude && location.getLongitude() >= leftLongitude && location.getLongitude() <= rightLongitude
-						&& location.getLatitude() >= bottomLatitude) {
-					toFill.add(a);
-				}
-			}
-		}
-		return noNeedToSearch;
-	}
-	public boolean checkCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, String filterId, List<Amenity> toFill){
-		return checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, filterId, toFill, false);
-	}
-
-	public boolean initialize(final IProgress progress, File file) {
-		return super.initialize(progress, file, IndexConstants.POI_TABLE_VERSION, IndexConstants.POI_TABLE, true);
-	}
-	
-	
-	
 	public boolean updateAmenities(List<Amenity> amenities, double leftLon, double topLat, double rightLon, double bottomLat){
 		int l = MapUtils.get31TileNumberX(leftLon);
 		int r = MapUtils.get31TileNumberX(rightLon);
@@ -198,6 +209,10 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 			stat.bindLong(1, a.getId());
 			stat.bindDouble(2, MapUtils.get31TileNumberX(a.getLocation().getLongitude()));
 			stat.bindDouble(3, MapUtils.get31TileNumberY(a.getLocation().getLatitude()));
+			dataBottomLatitude = Math.min(a.getLocation().getLatitude() - 0.5, dataBottomLatitude); 
+			dataTopLatitude = Math.max(a.getLocation().getLatitude() + 0.5, dataTopLatitude);
+			dataLeftLongitude = Math.min(a.getLocation().getLongitude() - 0.5, dataLeftLongitude);
+			dataRightLongitude = Math.max(a.getLocation().getLongitude() + 0.5, dataRightLongitude);
 			bindString(stat, 4, a.getEnName());
 			bindString(stat, 5, a.getName());
 			bindString(stat, 6, AmenityType.valueToString(a.getType()));
@@ -208,9 +223,23 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 			stat.execute();
 		}
 		stat.close();
+		updateMaxMinBoundaries(IndexConstants.POI_TABLE);
+		
 	}
 
 	private final static String SITE_API = "http://api.openstreetmap.org/"; //$NON-NLS-1$
+	
+	public static void createAmenityIndexRepository(File file) {
+		SQLiteDatabase db = SQLiteDatabase.openDatabase(file.getAbsolutePath(), null, SQLiteDatabase.CREATE_IF_NECESSARY);
+		db.execSQL("create table " + IndexConstants.POI_TABLE + //$NON-NLS-1$
+				"(id bigint, x int, y int, name_en varchar(1024), name varchar(1024), "
+				+ "type varchar(1024), subtype varchar(1024), opening_hours varchar(1024), phone varchar(1024), site varchar(1024),"
+				+ "primary key(id, type, subtype))");
+		db.execSQL("create index poi_loc on poi (x, y, type, subtype)");
+		db.execSQL("create index poi_id on poi (id, type, subtype)");
+		db.setVersion(IndexConstants.POI_TABLE_VERSION);
+		db.close();
+	}
 	
 	public static boolean loadingPOIs(List<Amenity> amenities, double leftLon, double topLat, double righLon, double bottomLat) {
 		try {

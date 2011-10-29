@@ -13,32 +13,32 @@ turn('right', ['girate a destra ']).
 turn('right_sh', ['subito a destra ']).
 turn('right_sl', ['girate leggermente a destra ']).
 
-prepare_turn(Turn, Dist) == ['Dopo', D,' si preparano a ', M] :- 
+prepare_turn(Turn, Dist) == ['Prepararsi a ', M,' tra ', D] :- 
    distance(Dist) == D, turn(Turn, M).
 turn(Turn, Dist) == ['Dopo ', D, M] :- 
    distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
-prepare_make_ut(Dist) == [ 'Dopo ', D,' inversione a u'] :- 
+prepare_make_ut(Dist) == [ 'Prepararsi ad una inversione ad u tra ', D] :- 
    distance(Dist) == D.
 
-prepare_roundabout(Dist) == [ 'Dopo ', D,' si preparano a entrare una rotonda '] :- 
+prepare_roundabout(Dist) == [ 'Tra ', D,' entrerete in una rotonda '] :- 
    distance(Dist) == D.
 
-make_ut(Dist) == [' Dopo', D, ' inversione a u'] :- 
+make_ut(Dist) == ['Tra ', D, ' inversione ad u'] :- 
    distance(Dist) == D.
 make_ut == ['Inversione a u'].
 
-roundabout(Dist, _Angle, Exit) == ['Dopo ', D, ' entrare la rotonda e prendete la ', 
+roundabout(Dist, _Angle, Exit) == ['Tra ', D, ' entrate nella rotonda e prendete la ', 
    E ] :- distance(Dist) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['prendete la ', E ] :- nth(Exit, E).
 
 and_arrive_destination == ['e arrivate a destinazione'].
 then == ['Dopo '].
 reached_destination == ['arrivato a destinazione'].
-bear_right == ['spostatevi su la destra'].
-bear_left == ['spostatevi su la sinistra'].
-route_recalc(_Dist) == []. % ['recalculating route ']. nothing to said possibly beep?
+bear_right == ['tenersi sulla destra'].
+bear_left == ['tenersi sulla sinistra'].
+route_recalc(_Dist) == []. % ['ricalcolo percorso ']. nothing to said possibly beep?
 route_new_calc(_Dist) == ['Il viaggio è ', D] :- distance(Dist) == D. % nothing to said possibly beep?	
 
 go_ahead(Dist) == ['Sempre dritto per ',  D]:- distance(Dist) == D.
@@ -50,18 +50,18 @@ nth(2, 'seconda uscita').
 nth(3, 'terza uscita').
 nth(4, 'quarta uscita').
 nth(5, 'quinta uscita').
-nth(6, 'sexsta uscita').
-nth(7, 'uscita settimo').
+nth(6, 'sesta uscita').
+nth(7, 'settima uscita').
 nth(8, 'ottava uscita').
-nth(9, 'uscita nono').
-nth(10, 'uscita decimo').
-nth(11, 'uscita undicesimo').
+nth(9, 'nona uscita').
+nth(10, 'decima uscita').
+nth(11, 'undicesima uscita').
 nth(12, 'dodicesima uscita').
 nth(13, 'tredicesima uscita').
-nth(14, 'uscita quattordicesima').
+nth(14, 'quattordicesima uscita').
 nth(15, 'quindicesima uscita').
-nth(16, 'uscita sedicesimo').
-nth(17, 'uscita deciassettesimo').
+nth(16, 'sedicesima uscita').
+nth(17, 'deciassettesima uscita').
 
 %%% distance measure
 distance(Dist) == [ X, ' metri'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).

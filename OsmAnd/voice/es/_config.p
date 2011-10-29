@@ -7,11 +7,11 @@ preamble - [].
 
 
 %% TURNS 
-turn('left', ['giro_a.ogg',   'izquierda.ogg']).
-turn('left_sh', ['giro_fuerte.ogg', 'izquierda']).
+turn('left', ['giro_a.ogg', 'izquierda.ogg']).
+turn('left_sh', ['giro_fuerte.ogg', 'izquierda.ogg']).
 turn('left_sl', ['giro_leve.ogg', 'izquierda.ogg']).
 turn('right', ['giro_a.ogg', 'derecha.ogg']).
-turn('right_sh', ['giro_fuerte.ogg', 'derecha']).
+turn('right_sh', ['giro_fuerte.ogg', 'derecha.ogg']).
 turn('right_sl', ['giro_leve.ogg', 'derecha.ogg']).
 
 prepare_turn(Turn, Dist) == ['despues_de.ogg', delay_450, D,'prepararse_para.ogg', delay_450, M] :- 
@@ -40,8 +40,8 @@ then == ['entonces.ogg', delay_350].
 reached_destination == ['llegado.ogg'].
 bear_right == ['mantener_derecha.ogg'].
 bear_left == ['mantener_izquierda.ogg'].
-route_recalc(_Dist) == []. % nothing to said possibly beep?
-route_new_calc(_Dist) == []. % nothing to said possibly beep?	
+route_recalc(_Dist) == []. % ['recalcular.ogg'].  %nothing to said possibly beep?   
+route_new_calc(Dist) == ['eltrayecto.ogg', D] :- distance(Dist) == D. % nothing to said possibly beep?	
 
 go_ahead(Dist) == ['siga_por.ogg', delay_250,  D]:- distance(Dist) == D.
 go_ahead == ['siga.ogg'].

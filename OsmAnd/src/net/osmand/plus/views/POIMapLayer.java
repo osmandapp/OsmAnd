@@ -26,6 +26,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.net.Uri;
 import android.util.DisplayMetrics;
@@ -34,12 +35,13 @@ import android.widget.Toast;
 
 public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMenuProvider {
 	private static final int startZoom = 10;
-	public static final int LIMIT_POI = 200;
+	public static final int TEXT_WRAP = 30;
 	public static final org.apache.commons.logging.Log log = LogUtil.getLog(POIMapLayer.class);
 	
 	
 	private Paint pointAltUI;
 	private Paint paintIcon;
+	private Paint paintTextIcon;
 	private Paint point;
 	private OsmandMapTileView view;
 	private List<Amenity> objects = new ArrayList<Amenity>();
@@ -122,6 +124,10 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 		
 		paintIcon = new Paint();
 		
+		paintTextIcon = new Paint();
+		paintTextIcon.setTextSize(12 * dm.density);
+		paintTextIcon.setTextAlign(Align.CENTER);
+		
 		point = new Paint();
 		point.setColor(Color.GRAY);
 		point.setAntiAlias(true);
@@ -179,11 +185,70 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 					if(bmp != null){
 						canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintIcon);
 					}
+					String name = o.getName(view.getSettings().USE_ENGLISH_NAMES.get());
+					if(name != null && name.length() > 0){
+						// TODO cache list
+						// 1. Draw over in 2 phases over all circles
+						// 2. Draw without rotation and icons (!)
+						// 3. Omit highdensity icons
+//						drawWrappedText(canvas, name, paintTextIcon.getTextSize(), 
+//								x + bmp.getWidth() / 2, y + bmp.getHeight() / 2 + 
+//								paintTextIcon.getTextSize() / 2);
+						
+					}
 				}
 				
 			}
 
 		}
+	}
+	
+	private void drawWrappedText(Canvas cv, String text, float textSize, float x, float y) {
+		if(text.length() > TEXT_WRAP){
+			int start = 0;
+			int end = text.length();
+			int lastSpace = -1;
+			int line = 0;
+			int pos = 0;
+			int limit = 0;
+			while(pos < end){
+				lastSpace = -1;
+				limit += TEXT_WRAP;
+				while(pos < limit && pos < end){
+					if(!Character.isLetterOrDigit(text.charAt(pos))){
+						lastSpace = pos;
+					}
+					pos++;
+				}
+				if(lastSpace == -1){
+					drawShadowText(cv, text.substring(start, pos), x, y + line * (textSize + 2));
+					start = pos;
+				} else {
+					String subtext = text.substring(start, lastSpace);
+					drawShadowText(cv, subtext, x, y + line * (textSize + 2));
+					
+					start = lastSpace + 1;
+					limit += (start - pos) - 1;
+				}
+				line++;
+				
+			}
+		} else {
+			drawShadowText(cv, text, x, y);
+		}
+	}
+	
+	private void drawShadowText(Canvas cv, String text, float centerX, float centerY) {
+		int c = paintTextIcon.getColor();
+		paintTextIcon.setStyle(Style.STROKE);
+		paintTextIcon.setColor(Color.WHITE);
+		paintTextIcon.setStrokeWidth(2);
+		cv.drawText(text, centerX, centerY, paintTextIcon);
+		// reset
+		paintTextIcon.setStrokeWidth(2);
+		paintTextIcon.setStyle(Style.FILL);
+		paintTextIcon.setColor(c);
+		cv.drawText(text, centerX, centerY, paintTextIcon);
 	}
 
 	@Override

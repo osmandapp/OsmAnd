@@ -49,6 +49,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+
 import rtree.RTree;
 
 
@@ -106,6 +107,7 @@ public class IndexBatchCreator {
 	String cookieSID = "";
 	String pagegen = "";
 	String token = "";
+	private boolean local;
 	
 	
 	public static void main(String[] args) {
@@ -119,6 +121,7 @@ public class IndexBatchCreator {
 		InputStream stream;
 		if(name.equals("-local")){
 			stream = IndexBatchCreator.class.getResourceAsStream("batch.xml");
+			creator.setLocal(true);
 		} else {
 			try {
 				stream = new FileInputStream(name);
@@ -152,7 +155,11 @@ public class IndexBatchCreator {
 		}
 	}
 	
-	public void runBatch(Document doc){
+	private void setLocal(boolean local) {
+		this.local = local;
+	}
+
+	public void runBatch(Document doc) throws SAXException, IOException, ParserConfigurationException{
 		NodeList list = doc.getElementsByTagName("process");
 		if(list.getLength() != 1){
 			 throw new IllegalArgumentException("You should specify exactly 1 process element!");
@@ -185,6 +192,23 @@ public class IndexBatchCreator {
 			throw new IllegalArgumentException("Please specify directory with generated index files  as directory_for_index_files (attribute)"); //$NON-NLS-1$
 		}
 		indexDirFiles = new File(dir);
+		InputStream regionsStream = null;
+		if(downloadFiles){
+			dir = process.getAttribute("list_download_regions_file");
+			if(!Algoritms.isEmpty(dir)) {
+				File regionsFile = new File(dir);
+				if(!regionsFile.exists()){
+					if (local) {
+						regionsStream = IndexBatchCreator.class.getResourceAsStream("regions.xml");
+					}
+					if (regionsStream == null) {
+						throw new IllegalArgumentException("Please specify file with regions to download as list_download_regions_file (attribute)"); //$NON-NLS-1$
+					}
+				} else {
+					regionsStream = new FileInputStream(regionsFile);
+				}
+			} 
+		}
 		
 		dir = process.getAttribute("directory_for_uploaded_files");
 		if (dir != null) {
@@ -230,6 +254,18 @@ public class IndexBatchCreator {
 		}
 		
 		List<RegionCountries> countriesToDownload = new ArrayList<RegionCountries>();
+		parseCountriesToDownload(doc, countriesToDownload);
+		if(regionsStream != null){
+			Document innerDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(regionsStream);
+			parseCountriesToDownload(innerDoc, countriesToDownload);
+		}
+		
+		runBatch(countriesToDownload);
+		
+		
+	}
+
+	private void parseCountriesToDownload(Document doc, List<RegionCountries> countriesToDownload) {
 		NodeList regions = doc.getElementsByTagName("regions");
 		for(int i=0; i< regions.getLength(); i++){
 			Element el = (Element) regions.item(i);
@@ -261,10 +297,6 @@ public class IndexBatchCreator {
 				
 			}
 		}
-		
-		runBatch(countriesToDownload);
-		
-		
 	}
 
 	private void parseProcessAttributes(Element process) {
@@ -309,7 +341,7 @@ public class IndexBatchCreator {
 		if(downloadFiles){
 			downloadFilesAndGenerateIndex(countriesToDownload, alreadyGeneratedFiles, alreadyUploadedFiles);
 		}
-		if(generateIndexes){
+		if(generateIndexes && !downloadFiles){
 			generatedIndexes(alreadyGeneratedFiles, alreadyUploadedFiles);
 		}
 		if(uploadIndexes){
@@ -497,10 +529,11 @@ public class IndexBatchCreator {
 				if(zoomWaySmoothness != null){
 					indexCreator.setZoomWaySmothness(zoomWaySmoothness);
 				}
-				if (indexPOI) {
-					uploadIndex(new File(indexDirFiles, poiFileName), alreadyUploadedFiles);
-				}
-				if (indexMap || indexAddress || indexTransport) {
+				// Do not upload poi files any more
+//				if (indexPOI) {
+//					uploadIndex(new File(indexDirFiles, poiFileName), alreadyUploadedFiles);
+//				}
+				if (indexMap || indexAddress || indexTransport || indexPOI) {
 					uploadIndex(new File(indexDirFiles, mapFileName), alreadyUploadedFiles);
 				}
 			} catch (Exception e) {
@@ -556,6 +589,7 @@ public class IndexBatchCreator {
 			boolean addr = indexAddress;
 			boolean trans = indexTransport;
 			boolean map = indexMap;
+			boolean poi = indexPOI;
 			RandomAccessFile raf = null;
 			if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 				try {
@@ -564,6 +598,7 @@ public class IndexBatchCreator {
 					trans = reader.hasTransportData();
 					map = reader.containsMapData();
 					addr = reader.containsAddressData();
+					poi = reader.containsPoiData();
 					reader.close();
 				} catch (Exception e) {
 					log.info("Exception", e);
@@ -583,6 +618,10 @@ public class IndexBatchCreator {
 			}
 			if (trans) {
 				summary = "Transport" + (fir ? "" : ", ") + summary;
+				fir = false;
+			}
+			if (poi) {
+				summary = "POI" + (fir ? "" : ", ") + summary;
 				fir = false;
 			}
 			if (map) {
@@ -610,7 +649,9 @@ public class IndexBatchCreator {
 			try {
 				ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(zFile));
 				zout.setLevel(9);
-				zout.putNextEntry(new ZipEntry(fileName));
+				ZipEntry zEntry = new ZipEntry(fileName);
+				zEntry.setSize(f.length());
+				zout.putNextEntry(zEntry);
 				FileInputStream is = new FileInputStream(f);
 				byte[] BUFFER = new byte[8192];
 				int read = 0;

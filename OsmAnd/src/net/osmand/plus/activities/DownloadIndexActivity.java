@@ -6,10 +6,10 @@ import static net.osmand.data.IndexConstants.BINARY_MAP_VERSION;
 import static net.osmand.data.IndexConstants.POI_INDEX_EXT;
 import static net.osmand.data.IndexConstants.POI_INDEX_EXT_ZIP;
 import static net.osmand.data.IndexConstants.POI_TABLE_VERSION;
-import static net.osmand.data.IndexConstants.VOICE_INDEX_EXT_ZIP;
 import static net.osmand.data.IndexConstants.TTSVOICE_INDEX_EXT_ZIP;
-import static net.osmand.data.IndexConstants.VOICE_VERSION;
 import static net.osmand.data.IndexConstants.TTSVOICE_VERSION;
+import static net.osmand.data.IndexConstants.VOICE_INDEX_EXT_ZIP;
+import static net.osmand.data.IndexConstants.VOICE_VERSION;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -23,30 +23,32 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.Map.Entry;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.IProgress;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.DownloadOsmandIndexesHelper;
+import net.osmand.plus.DownloadOsmandIndexesHelper.IndexItem;
+import net.osmand.plus.IndexFileList;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
-import net.osmand.plus.DownloadOsmandIndexesHelper.IndexItem;
 import net.osmand.plus.activities.DownloadFileHelper.DownloadFileShowWarning;
-
-
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
-import android.app.AlertDialog.Builder;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -67,18 +69,24 @@ import android.widget.Toast;
 
 public class DownloadIndexActivity extends ListActivity {
 	
+	/** menus **/
 	private static final int RELOAD_ID = 0;
 	private static final int SELECT_ALL_ID = 1;
 	private static final int DESELECT_ALL_ID = 2;
 	private static final int FILTER_EXISTING_REGIONS = 3;
 	
+	/** dialogs **/
+	protected static final int DIALOG_MAP_VERSION_UPDATE = 0;
+	protected static final int DIALOG_PROGRESS_FILE = 1;
+	protected static final int DIALOG_PROGRESS_LIST = 2;
+	
+	/** other **/
 	private static final int MB = 1 << 20;
     public static final String FILTER_KEY = "filter";
 	
 	private static DownloadIndexListThread downloadListIndexThread = new DownloadIndexListThread();
 
 	private ProgressDialog progressFileDlg = null;
-	private ProgressDialog progressListDlg = null;
 	private Map<String, String> indexFileNames = null;
 	private TreeMap<String, DownloadEntry> entriesToDownload = new TreeMap<String, DownloadEntry>();
 	 
@@ -130,7 +138,7 @@ public class DownloadIndexActivity extends ListActivity {
 				filterText.setText(filter);
 			}
 		}
-		
+
 		if(downloadListIndexThread.getCachedIndexFiles() != null){
 			setListAdapter(new DownloadIndexAdapter(downloadListIndexThread.getCachedIndexFiles()));
 		} else {
@@ -139,17 +147,7 @@ public class DownloadIndexActivity extends ListActivity {
 	}
 
 	private void downloadIndexList() {
-		progressListDlg = ProgressDialog.show(this, getString(R.string.downloading), getString(R.string.downloading_list_indexes));
-		progressListDlg.setCancelable(true);
-		downloadListIndexThread.setUiActivity(this);
-		if(downloadListIndexThread.getState() == Thread.State.NEW){
-			downloadListIndexThread.start();
-		} else if(downloadListIndexThread.getState() == Thread.State.TERMINATED){
-			// possibly exception occurred we don't have cache of files
-			downloadListIndexThread = new DownloadIndexListThread();
-			downloadListIndexThread.setUiActivity(this);
-			downloadListIndexThread.start();
-		}
+		showDialog(DIALOG_PROGRESS_LIST);
 	}
 	
 	@Override
@@ -215,7 +213,7 @@ public class DownloadIndexActivity extends ListActivity {
 	
 	private static class DownloadIndexListThread extends Thread {
 		private DownloadIndexActivity uiActivity = null;
-		private Map<String, IndexItem> indexFiles = null; 
+		private IndexFileList indexFiles = null; 
 		
 		public DownloadIndexListThread(){
 			super("DownloadIndexes"); //$NON-NLS-1$
@@ -225,20 +223,22 @@ public class DownloadIndexActivity extends ListActivity {
 		}
 		
 		public Map<String, IndexItem> getCachedIndexFiles() {
-			return indexFiles;
+			return indexFiles != null ? indexFiles.getIndexFiles() : null;
 		}
 		
 		@Override
 		public void run() {
 			indexFiles = DownloadOsmandIndexesHelper.downloadIndexesListFromInternet();
-			if(uiActivity != null &&  uiActivity.progressListDlg != null){
-				uiActivity.progressListDlg.dismiss();
-				uiActivity.progressListDlg = null;
+			if(uiActivity != null) {
+				uiActivity.removeDialog(DIALOG_PROGRESS_LIST);
 				uiActivity.runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
 						if (indexFiles != null) {
-							uiActivity.setListAdapter(uiActivity.new DownloadIndexAdapter(indexFiles));
+							uiActivity.setListAdapter(uiActivity.new DownloadIndexAdapter(indexFiles.getIndexFiles()));
+							if (indexFiles.isIncreasedMapVersion()) {
+								uiActivity.showDialog(DownloadIndexActivity.DIALOG_MAP_VERSION_UPDATE);
+							}
 						} else {
 							AccessibleToast.makeText(uiActivity, R.string.list_index_files_was_not_loaded, Toast.LENGTH_LONG).show();
 						}
@@ -248,8 +248,74 @@ public class DownloadIndexActivity extends ListActivity {
 		}
 	}
 	
-	
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		switch (id) {
+			case DIALOG_MAP_VERSION_UPDATE:
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setMessage(R.string.map_version_changed_info);
+				builder.setPositiveButton(R.string.button_upgrade_osmandplus, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:net.osmand.plus"));
+						try {
+							startActivity(intent);
+						} catch (ActivityNotFoundException e) {
+						}
+					}
+				});
+				builder.setNegativeButton(R.string.default_buttons_cancel, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						removeDialog(DIALOG_MAP_VERSION_UPDATE); 
+					}
+				});
+				return builder.create();
+			case DIALOG_PROGRESS_LIST:
+				ProgressDialog dialog = new ProgressDialog(this);
+				dialog.setTitle(R.string.downloading);
+				dialog.setMessage(getString(R.string.downloading_list_indexes));
+				dialog.setCancelable(true);
+				return dialog;
+			case DIALOG_PROGRESS_FILE:
+				ProgressDialogImplementation progress = ProgressDialogImplementation.createProgressDialog(
+						DownloadIndexActivity.this,
+						getString(R.string.downloading),
+						getString(R.string.downloading_file),
+						ProgressDialog.STYLE_HORIZONTAL);
+				progressFileDlg = progress.getDialog();
+				progressFileDlg.setOnCancelListener(new DialogInterface.OnCancelListener() {
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						downloadFileHelper.setInterruptDownloading(true);
+					}
+				});
+				return progress.getDialog();
+		}
+		return null;
+	}
 
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog) {
+		switch (id) {
+			case DIALOG_PROGRESS_FILE:
+				DownloadIndexesAsyncTask task = new DownloadIndexesAsyncTask(new ProgressDialogImplementation(progressFileDlg,true));
+				task.execute(entriesToDownload.keySet().toArray(new String[0]));
+				break;
+			case DIALOG_PROGRESS_LIST:
+				downloadListIndexThread.setUiActivity(this);
+				if(downloadListIndexThread.getState() == Thread.State.NEW){
+					downloadListIndexThread.start();
+				} else if(downloadListIndexThread.getState() == Thread.State.TERMINATED){
+					// possibly exception occurred we don't have cache of files
+					downloadListIndexThread = new DownloadIndexListThread();
+					downloadListIndexThread.setUiActivity(this);
+					downloadListIndexThread.start();
+				}
+				break;
+		}
+	}
+	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
@@ -423,8 +489,7 @@ public class DownloadIndexActivity extends ListActivity {
 		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				DownloadIndexesAsyncTask task = new DownloadIndexesAsyncTask();
-				task.execute(entriesToDownload.keySet().toArray(new String[0]));
+				showDialog(DIALOG_PROGRESS_FILE);
 			}
 		});
 		builder.setNegativeButton(R.string.default_buttons_no, null);
@@ -443,7 +508,6 @@ public class DownloadIndexActivity extends ListActivity {
 	    	filterText.removeTextChangedListener(textWatcher);
 	    }
 		downloadListIndexThread.setUiActivity(null);
-		progressFileDlg = null;
 	}
 	
 
@@ -464,6 +528,10 @@ private class DownloadIndexesAsyncTask extends  AsyncTask<String, Object, String
 		
 		private IProgress progress;
 
+		public DownloadIndexesAsyncTask(ProgressDialogImplementation progressDialogImplementation) {
+			this.progress = progressDialogImplementation;
+		}
+
 		@Override
 		protected void onProgressUpdate(Object... values) {
 			for(Object o : values){
@@ -480,17 +548,7 @@ private class DownloadIndexesAsyncTask extends  AsyncTask<String, Object, String
 		
 		@Override
 		protected void onPreExecute() {
-			progressFileDlg = ProgressDialog.show(DownloadIndexActivity.this, getString(R.string.downloading),
-					getString(R.string.downloading_file), true, true);
 			downloadFileHelper.setInterruptDownloading(false);
-			progressFileDlg.show();
-			progress = new ProgressDialogImplementation(progressFileDlg, true);
-			progressFileDlg.setOnCancelListener(new DialogInterface.OnCancelListener() {
-				@Override
-				public void onCancel(DialogInterface dialog) {
-					downloadFileHelper.setInterruptDownloading(true);
-				}
-			});
 			View mainView = findViewById(R.id.MainLayout);
 			if(mainView != null){
 				mainView.setKeepScreenOn(true);
@@ -554,7 +612,7 @@ private class DownloadIndexesAsyncTask extends  AsyncTask<String, Object, String
 				progressFileDlg = null;
 			} finally {
 				if (progressFileDlg != null) {
-					progressFileDlg.dismiss();
+					removeDialog(DIALOG_PROGRESS_FILE);
 					progressFileDlg = null;
 				}
 			}

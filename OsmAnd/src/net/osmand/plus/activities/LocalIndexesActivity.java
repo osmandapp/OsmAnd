@@ -30,6 +30,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StatFs;
 import android.os.AsyncTask.Status;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -42,6 +43,7 @@ import android.view.View.OnClickListener;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,11 +60,17 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 
 	private boolean selectionMode = false;
 	private Set<LocalIndexInfo> selectedItems = new LinkedHashSet<LocalIndexInfo>();
+	private OsmandSettings settings;
 	
 	protected static int DELETE_OPERATION = 1;
 	protected static int BACKUP_OPERATION = 2;
 	protected static int RESTORE_OPERATION = 3;
+	
+	MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
+	MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
 
+	
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +78,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 
 		// requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.local_index);
+		settings = OsmandSettings.getOsmandSettings(this);
 		descriptionLoader = new LoadLocalIndexDescriptionTask();
 		listAdapter = new LocalIndexesAdapter();
 		Object indexes = getLastNonConfigurationInstance();
@@ -96,20 +105,101 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 				int child = ExpandableListView.getPackedPositionChild(packedPos);
 				if (child >= 0 && group >= 0) {
 					final LocalIndexInfo point = (LocalIndexInfo) listAdapter.getChild(group, child);
-					if (point != null && point.getGpxFile() != null) {
-						WptPt loc = point.getGpxFile().findPointToShow();
-						if (loc != null) {
-							OsmandSettings.getOsmandSettings(LocalIndexesActivity.this).setMapLocationToShow(loc.lat,
-									loc.lon);
-						}
-						((OsmandApplication) getApplication()).setGpxFileToDisplay(point.getGpxFile());
-						MapActivity.launchMapActivityMoveToTop(LocalIndexesActivity.this);
-					}
+					showContextMenu(point);
 				}
-			}	
+			}
 		});
 		
 		setListAdapter(listAdapter);
+		updateDescriptionTextWithSize();
+	}
+	
+	private void showContextMenu(final LocalIndexInfo info) {
+		Builder builder = new AlertDialog.Builder(this);
+		final List<Integer> menu = new ArrayList<Integer>();
+		if(info.getType() == LocalIndexType.GPX_DATA){
+			menu.add(R.string.show_gpx_route);
+			menu.add(R.string.local_index_mi_upload_gpx);
+			descriptionLoader = new LoadLocalIndexDescriptionTask();
+			descriptionLoader.execute(info);
+		}
+		if(info.getType() == LocalIndexType.MAP_DATA || info.getType() == LocalIndexType.POI_DATA){
+			if(!info.isBackupedData()){
+				menu.add(R.string.local_index_mi_backup);
+			}
+		}
+		if(info.isBackupedData()){
+			menu.add(R.string.local_index_mi_restore);
+		}
+		menu.add(R.string.local_index_mi_rename);
+		menu.add(R.string.local_index_mi_delete);
+		if (!menu.isEmpty()) {
+			String[] values = new String[menu.size()];
+			for (int i = 0; i < values.length; i++) {
+				values[i] = getString(menu.get(i));
+			}
+			builder.setItems(values, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					int resId = menu.get(which);
+					if (resId == R.string.show_gpx_route) {
+						if (info != null && info.getGpxFile() != null) {
+							WptPt loc = info.getGpxFile().findPointToShow();
+							if (loc != null) {
+								OsmandSettings.getOsmandSettings(LocalIndexesActivity.this).setMapLocationToShow(loc.lat, loc.lon);
+							}
+							((OsmandApplication) getApplication()).setGpxFileToDisplay(info.getGpxFile());
+							MapActivity.launchMapActivityMoveToTop(LocalIndexesActivity.this);
+						}
+					} else if (resId == R.string.local_index_mi_rename) {
+						renameFile(info);
+					} else if (resId == R.string.local_index_mi_restore) {
+						new LocalIndexOperationTask(RESTORE_OPERATION).execute(info);
+					} else if (resId == R.string.local_index_mi_delete) {
+						new LocalIndexOperationTask(DELETE_OPERATION).execute(info);
+					} else if (resId == R.string.local_index_mi_backup) {
+						new LocalIndexOperationTask(BACKUP_OPERATION).execute(info);
+					} else if (resId == R.string.local_index_mi_upload_gpx) {
+						new UploadGPXFilesTask().execute(info);
+					}
+				}
+
+			});
+
+		}
+		builder.show();
+	}
+	
+	private void renameFile(LocalIndexInfo info) {
+		final File f = new File(info.getPathToData());
+		Builder b = new AlertDialog.Builder(this);
+		if(f.exists()){
+			final EditText editText = new EditText(this);
+			editText.setText(f.getName());
+			b.setView(editText);
+			b.setPositiveButton(R.string.default_buttons_save, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					String newName = editText.getText().toString();
+					File dest = new File(f.getParentFile(), newName);
+					if (dest.exists()) {
+						Toast.makeText(LocalIndexesActivity.this, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
+					} else {
+						if(f.renameTo(dest)){
+							asyncLoader = new LoadLocalIndexTask();
+							asyncLoader.execute(LocalIndexesActivity.this);
+							reloadIndexes();
+						} else {
+							Toast.makeText(LocalIndexesActivity.this, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
+						}
+					}
+					
+				}
+			});
+			b.setNegativeButton(R.string.default_buttons_cancel, null);
+			b.show();
+		}
 	}
 
 	public class LoadLocalIndexTask extends AsyncTask<Activity, LocalIndexInfo, List<LocalIndexInfo>> {
@@ -160,50 +250,49 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 
 	}
 	
+	private File getFileToRestore(LocalIndexInfo i){
+		if(i.isBackupedData()){
+			File parent = new File(i.getPathToData()).getParentFile();
+			if(i.getType() == LocalIndexType.GPX_DATA){
+				parent = settings.extendOsmandPath(ResourceManager.GPX_PATH);
+			} else if(i.getType() == LocalIndexType.MAP_DATA){
+				parent = settings.extendOsmandPath(ResourceManager.MAPS_PATH);
+			} else if(i.getType() == LocalIndexType.POI_DATA){
+				parent = settings.extendOsmandPath(ResourceManager.POI_PATH);
+			} else if(i.getType() == LocalIndexType.TILES_DATA){
+				parent = settings.extendOsmandPath(ResourceManager.TILES_PATH);
+			} else if(i.getType() == LocalIndexType.VOICE_DATA){
+				parent = settings.extendOsmandPath(ResourceManager.VOICE_PATH);
+			} else if(i.getType() == LocalIndexType.TTS_VOICE_DATA){
+				parent = settings.extendOsmandPath(ResourceManager.VOICE_PATH);
+			}
+			return new File(parent, i.getFileName());
+		}
+		return new File(i.getPathToData());
+	}
+	
+	private File getFileToBackup(LocalIndexInfo i) {
+		if(!i.isBackupedData()){
+			return new File(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), i.getFileName());
+		}
+		return new File(i.getPathToData());
+	}
+	
+	private boolean move(File from, File to){
+		if(!to.getParentFile().exists()){
+			to.getParentFile().mkdirs();
+		}
+		return from.renameTo(to);
+	}
+	
 	public class LocalIndexOperationTask extends AsyncTask<LocalIndexInfo, LocalIndexInfo, String> {
 		
 		private final int operation;
-		private OsmandSettings settings;
 
 		public LocalIndexOperationTask(int operation){
 			this.operation = operation;
-			settings = ((OsmandApplication) getApplication()).getSettings();
 		}
 		
-		public File getFileToRestore(LocalIndexInfo i){
-			if(i.isBackupedData()){
-				File parent = new File(i.getPathToData()).getParentFile();
-				if(i.getType() == LocalIndexType.GPX_DATA){
-					parent = settings.extendOsmandPath(ResourceManager.GPX_PATH);
-				} else if(i.getType() == LocalIndexType.MAP_DATA){
-					parent = settings.extendOsmandPath(ResourceManager.MAPS_PATH);
-				} else if(i.getType() == LocalIndexType.POI_DATA){
-					parent = settings.extendOsmandPath(ResourceManager.POI_PATH);
-				} else if(i.getType() == LocalIndexType.TILES_DATA){
-					parent = settings.extendOsmandPath(ResourceManager.TILES_PATH);
-				} else if(i.getType() == LocalIndexType.VOICE_DATA){
-					parent = settings.extendOsmandPath(ResourceManager.VOICE_PATH);
-				} else if(i.getType() == LocalIndexType.TTS_VOICE_DATA){
-					parent = settings.extendOsmandPath(ResourceManager.VOICE_PATH);
-				}
-				return new File(parent, i.getFileName());
-			}
-			return new File(i.getPathToData());
-		}
-		
-		private File getFileToBackup(LocalIndexInfo i) {
-			if(!i.isBackupedData()){
-				return new File(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), i.getFileName());
-			}
-			return new File(i.getPathToData());
-		}
-		
-		private boolean move(File from, File to){
-			if(!to.getParentFile().exists()){
-				to.getParentFile().mkdirs();
-			}
-			return from.renameTo(to);
-		}
 		
 		@Override
 		protected String doInBackground(LocalIndexInfo... params) {
@@ -276,14 +365,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 	
 	
 	public class UploadGPXFilesTask extends AsyncTask<LocalIndexInfo, String, String> {
-		
-		private OsmandSettings settings;
 
-		public UploadGPXFilesTask(){
-			settings = ((OsmandApplication) getApplication()).getSettings();
-		}
-		
-		
 		@Override
 		protected String doInBackground(LocalIndexInfo... params) {
 			int count = 0;
@@ -515,6 +597,17 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		listAdapter.notifyDataSetChanged();
 	}
 	
+	private void updateDescriptionTextWithSize(){
+		File dir = OsmandSettings.getOsmandSettings(this).extendOsmandPath("");
+		String size = formatGb.format(new Object[]{0});
+		if(dir.canRead()){
+			StatFs fs = new StatFs(dir.getAbsolutePath());
+			size = formatGb.format(new Object[]{(float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30) }); 
+		}
+		((TextView) findViewById(R.id.DescriptionText)).setText(
+				getString(R.string.local_index_description, size));
+	}
+	
 	private void closeSelectionMode(){
 		selectionMode = false;
 		findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
@@ -524,7 +617,10 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		findViewById(R.id.CancelButton).setVisibility(View.GONE);
 		findViewById(R.id.ActionButton).setVisibility(View.GONE);
 		((TextView) findViewById(R.id.DescriptionTextTop)).setVisibility(View.GONE);
-		((TextView) findViewById(R.id.DescriptionText)).setText(R.string.local_index_description);
+		
+		
+		;
+		updateDescriptionTextWithSize();
 		listAdapter.cancelFilter();
 		collapseAllGroups();
 		listAdapter.notifyDataSetChanged();
@@ -596,10 +692,8 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		List<LocalIndexInfo> category = new ArrayList<LocalIndexInfo>();
 		List<LocalIndexInfo> filterCategory = null;
 		
-		private MessageFormat formatMb;
 
 		public LocalIndexesAdapter() {
-			formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
 		}
 		
 		public void clear() {

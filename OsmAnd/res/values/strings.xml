@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="tip_recent_changes_0_6_8_t">Changes in 0.6.8 :
+\n\t- Completely redesigned search (POI, Address)! Make address search much faster and responsiveness. Leave one search with many different search aspects.
+\n\t- Implement search POI by name big areas (countries)  
+\n\t- Fix flickering map screen for tablets(Issue 641)
+\n\t- Autofollow route option (Issue 356)
+\n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\'
+\n\t- POI data is inside .obf file (download index after 01/10/11) 
+\n\t- Voice prompt fixes (about GPS location and about first omitting command) 
+\n\t- Small improvements
+	</string>
+	<string name="file_can_not_be_renamed">File can not be renamed.</string>
+	<string name="file_with_name_already_exists">File with that name already exists.</string>
+	<string name="gpx_navigation">GPX route</string>
+	<string name="poi_query_by_name_matches_categories">Some poi categories matching to the query were found :</string>
+	<string name="data_to_search_poi_not_available">Local data to search POI is not present.</string>
+	<string name="poi_filter_by_name">Search by name</string>
+	<string name="old_poi_file_should_be_deleted">The poi data file \'%1$s\' is deprecated and can be deleted.</string>
+	<string name="update_poi_file_not_found">Local file to maintain poi changes not found and could not be created.</string>
+	<string name="update_poi_does_not_change_indexes">Changing poi inside application doesn\'t affect map files you downloaded but collects all changes in local file.</string>
+
+	<string name="button_upgrade_osmandplus">Upgrade Osmand+</string>
+	<string name="map_version_changed_info">On server are map files incompatible with your current version of application. To download and use them, please upgrade the application to newer version.</string>
+	
+	<string name="local_index_mi_rename">Rename</string>
+	<string name="show_gpx_route">Show on map</string>
+	<string name="poi_filter_nominatim">Online Nominatim</string>
+	<string name="auto_follow_route_never">Never</string>
+	<string name="choose_auto_follow_route">Choose auto follow settings </string>
+	<string name="choose_auto_follow_route_descr">Choose time interval to continue map following at the location</string>
+	<string name="search_select_point">Select</string>
+	<string name="local_index_description">Download new, or move to backup or delete existing data. \nCurrent offline data on device (%1$s is available):</string>
+	<string name="search_position_current_location_search">Search location...</string>
+	<string name="search_position_current_location_found">Location [Found]</string>
+	<string name="search_position_address">Address...</string>
+	<string name="search_position_favorites">Favorites...</string>
+	<string name="search_position_undefined">Undefined</string>
+	<string name="search_position_fixed">Fixed</string>
+	<string name="search_position_current_location">Current location...</string>
+	<string name="search_position_map_view">Last map view</string>
+	
+	<string name="select_search_position">Search around :</string>
+	<string name="context_menu_item_search">Search</string>
 	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7 :
 \n\t- Offline data manager (download, delete, backup offline data directly in Osmand)
 \n\t- Favorite points and groups (categorize, delete, manage favorites)
@@ -46,7 +88,7 @@
 	<string name="local_index_no_items_to_do">No items to %1$s</string>
 	<string name="local_index_action_do">You are about to %1$s %2$s item(s). Continue?</string>
 	<string name="local_index_descr_title">Offline Data Manager:</string>
-	<string name="local_index_description">Download new, or move to backup or delete existing data.\nCurrent offline data on device:</string>
+	
 	<string name="local_index_mi_restore">Restore...</string>
 	<string name="local_index_mi_backup">Backup...</string>
 	<string name="local_index_mi_delete">Delete...</string>
@@ -224,8 +266,8 @@
 	<string name="mile_per_hour">mph</string>
 	<string name="mile">mi</string>
 	<string name="send_location_way_choose_title">Share location using</string>
-	<string name="send_location_sms_pattern">I\'m here: {0}\n{1}</string>
-	<string name="send_location_email_pattern">To see location follow the web browser link {0} or android intent link {1}</string>
+	<string name="send_location_sms_pattern">I\'m here: %1$s\n%2$s</string>
+	<string name="send_location_email_pattern">To see location follow the web browser link %1$s or android intent link %2$s</string>
 	<string name="send_location">Send location</string>
 	<string name="context_menu_item_share_location">Share location</string>
 	<string name="add_waypoint_dialog_added">Waypoint \'\'{0}\'\' was successfully added</string>

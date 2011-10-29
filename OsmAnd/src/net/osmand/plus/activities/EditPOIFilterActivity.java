@@ -16,6 +16,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchPOIActivity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -40,7 +41,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * @author Frolov
  * 
  */
 public class EditPOIFilterActivity extends ListActivity {
@@ -48,8 +48,8 @@ public class EditPOIFilterActivity extends ListActivity {
 	private Button filterLevel;
 	private PoiFilter filter;
 	private PoiFiltersHelper helper;
-	public static final String SEARCH_LAT = "SEARCH_LAT"; //$NON-NLS-1$
-	public static final String SEARCH_LON = "SEARCH_LON"; //$NON-NLS-1$
+	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT; //$NON-NLS-1$
+	public static final String SEARCH_LON = SearchActivity.SEARCH_LON; //$NON-NLS-1$
 	
 
 	@Override

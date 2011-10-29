@@ -1,27 +1,22 @@
 package net.osmand.plus;
 
-import gnu.trove.list.array.TIntArrayList;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
-import net.osmand.binary.BinaryIndexPart;
-import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.MapIndex;
-import net.osmand.binary.BinaryMapIndexReader.MapRoot;
-import net.osmand.binary.BinaryMapIndexReader.SearchFilter;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
-import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
-import net.sf.junidecode.Junidecode;
 
 import org.apache.commons.logging.Log;
 
@@ -46,123 +41,59 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
 	@Override
 	public boolean checkContains(double latitude, double longitude) {
-		int x = MapUtils.get31TileNumberX(longitude);
-		int y = MapUtils.get31TileNumberY(latitude);
-		for(BinaryIndexPart i : index.getIndexes()){
-			if(i instanceof MapIndex){
-				List<MapRoot> rs = ((MapIndex) i).getRoots();
-				if(!rs.isEmpty()){
-					MapRoot rt = rs.get(0);
-					if(rt.getLeft() <= x && rt.getRight() >= x &&
-							rt.getTop() <= y && rt.getBottom() >= y){
-						return true;
-					}
-				}
-			}
-		}
-		return false;
+		return index.containsPoiData(latitude, longitude);
 	}
 
 	@Override
 	public boolean checkContains(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
-		int leftX = MapUtils.get31TileNumberX(leftLongitude);
-		int rightX = MapUtils.get31TileNumberX(rightLongitude);
-		int bottomY = MapUtils.get31TileNumberY(bottomLatitude);
-		int topY = MapUtils.get31TileNumberY(topLatitude);
-		for(BinaryIndexPart i : index.getIndexes()){
-			if(i instanceof MapIndex){
-				List<MapRoot> rs = ((MapIndex) i).getRoots();
-				if(!rs.isEmpty()){
-					MapRoot rt = rs.get(0);
-					if(rightX < rt.getLeft() || leftX > rt.getRight()){
-						continue;
-					}
-					if(topY >  rt.getBottom() || bottomY < rt.getTop()){
-						continue;
-					}
-					return true;
-				}
+		return index.containsPoiData(topLatitude, leftLongitude, bottomLatitude, rightLongitude);
+	}
+	
+	
+	public Map<AmenityType, List<String>> searchAmenityCategoriesByName(String query, Map<AmenityType, List<String>> map) {
+		return index.searchPoiCategoriesByName(query, map);
+	}
+	
+	
+	public List<Amenity> searchAmenitiesByName(int x, int y, String query, ResultMatcher<Amenity> resulMatcher) {
+		long now = System.currentTimeMillis();
+		List<Amenity> amenities = Collections.emptyList();
+		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(x, y, query, resulMatcher);
+		try {
+			amenities = index.searchPoiByName(req);
+			if (log.isDebugEnabled()) {
+				log.debug(String.format("Search for %s done in %s ms found %s.",  //$NON-NLS-1$
+						query, System.currentTimeMillis() - now, amenities.size())); //$NON-NLS-1$
 			}
+		} catch (IOException e) {
+			log.error("Error searching amenities", e); //$NON-NLS-1$
 		}
-		return false;
+		
+		return amenities;
 	}
 	
 	@Override
-	public List<Amenity> searchAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int limit,
-			final PoiFilter filter, final List<Amenity> amenities) {
+	public List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom, 
+			final PoiFilter filter, final List<Amenity> amenities, ResultMatcher<Amenity> matcher) {
 		long now = System.currentTimeMillis();
-		int sleft = MapUtils.get31TileNumberX(leftLongitude);
-		int sright = MapUtils.get31TileNumberX(rightLongitude);
-		int sbottom = MapUtils.get31TileNumberY(bottomLatitude);
-		int stop = MapUtils.get31TileNumberY(topLatitude);
-		
-		SearchRequest<BinaryMapDataObject> req = BinaryMapIndexReader.buildSearchRequest(sleft, sright, stop, sbottom, 16);
-		req.setSearchFilter(new SearchFilter(){
-
+		SearchPoiTypeFilter poiTypeFilter = new SearchPoiTypeFilter(){
 			@Override
-			public boolean accept(TIntArrayList types, MapIndex root) {
-				for (int j = 0; j < types.size(); j++) {
-					int wholeType = types.get(j);
-					TagValuePair pair = root.decodeType(wholeType);
-					if (pair != null) {
-						AmenityType type = MapRenderingTypes.getAmenityType(pair.tag, pair.value);
-						if (type != null) {
-							if(filter.acceptTypeSubtype(type, MapRenderingTypes.getAmenitySubtype(pair.tag, pair.value))){
-								return true;
-							}
-						}
-					}
-				}
-				return false;
+			public boolean accept(AmenityType type, String subcategory) {
+				return filter.acceptTypeSubtype(type, subcategory);
 			}
-			
-		});
+		};
+		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(sleft, sright, stop, sbottom, zoom,
+				poiTypeFilter, matcher);
 		try {
-			index.searchMapIndex(req);
-			for(BinaryMapDataObject o : req.getSearchResults()){
-				if(o.getPointsLength() == 0){
-					continue;
-				}
-				
-				int xTile = 0;
-				int yTile = 0;
-				for(int i=0; i<o.getPointsLength();i++){
-					xTile += o.getPoint31XTile(i);
-					yTile += o.getPoint31YTile(i);
-				}
-				double lat = MapUtils.get31LatitudeY(yTile/o.getPointsLength());
-				double lon = MapUtils.get31LongitudeX(xTile/o.getPointsLength());
-				
-				
-				for (int j = 0; j < o.getTypes().length; j++) {
-					TagValuePair pair = o.getMapIndex().decodeType(o.getTypes()[j]);
-					if(pair != null){
-						Amenity am = new Amenity();
-						am.setId(o.getId());
-						am.setLocation(lat, lon);
-						am.setName(o.getName());
-						am.setEnName(Junidecode.unidecode(am.getName()));
-						AmenityType type = MapRenderingTypes.getAmenityType(pair.tag, pair.value);
-						String subtype = MapRenderingTypes.getAmenitySubtype(pair.tag, pair.value);
-						am.setType(type);
-						am.setSubType(subtype);
-						am.setOpeningHours(null);
-						am.setPhone(null); 
-						am.setSite(null);
-						amenities.add(am);
-						break;
-					}
-				}
-				
-				
-			}
+			List<Amenity> result = index.searchPoi(req);
+			amenities.addAll(result);
 		} catch (IOException e) {
 			log.error("Error searching amenities", e); //$NON-NLS-1$
 			return amenities;
 		}
 		if (log.isDebugEnabled()) {
 			log.debug(String.format("Search for %s done in %s ms found %s.",  //$NON-NLS-1$
-					topLatitude + " " + leftLongitude, System.currentTimeMillis() - now, amenities.size())); //$NON-NLS-1$
+					MapUtils.get31LatitudeY(stop) + " " + MapUtils.get31LongitudeX(sleft), System.currentTimeMillis() - now, amenities.size())); //$NON-NLS-1$
 		}
 		return amenities;
 	}
@@ -210,22 +141,24 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
 	@Override
 	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom,
-			int limitPoi, PoiFilter filter, List<Amenity> toFill) {
-		cTopLatitude = topLatitude + (topLatitude - bottomLatitude);
-		cBottomLatitude = bottomLatitude - (topLatitude - bottomLatitude);
-		cLeftLongitude = leftLongitude - (rightLongitude - leftLongitude);
-		cRightLongitude = rightLongitude + (rightLongitude - leftLongitude);
+			PoiFilter filter, ResultMatcher<Amenity> matcher) {
+		cTopLatitude = topLatitude ;
+		cBottomLatitude = bottomLatitude ;
+		cLeftLongitude = leftLongitude ;
+		cRightLongitude = rightLongitude ;
 		cFilterId = filter == null ? null : filter.getFilterId();
 		cZoom = zoom;
 		// first of all put all entities in temp list in order to not freeze other read threads
 		ArrayList<Amenity> tempList = new ArrayList<Amenity>();
-		searchAmenities(cTopLatitude, cLeftLongitude, cBottomLatitude, cRightLongitude, limitPoi, filter, tempList);
+		int sleft = MapUtils.get31TileNumberX(cLeftLongitude);
+		int sright = MapUtils.get31TileNumberX(cRightLongitude);
+		int sbottom = MapUtils.get31TileNumberY(cBottomLatitude);
+		int stop = MapUtils.get31TileNumberY(cTopLatitude);
+		searchAmenities(stop, sleft, sbottom, sright, zoom, filter, tempList, matcher);
 		synchronized (this) {
 			cachedObjects.clear();
 			cachedObjects.addAll(tempList);
 		}
-
-		checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, cZoom, filter.getFilterId(), toFill, true);
 
 	}
 

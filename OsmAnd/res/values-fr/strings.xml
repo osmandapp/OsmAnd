@@ -208,8 +208,8 @@
 <string name="mile_per_hour">mph</string>
 <string name="mile">mi</string>
 <string name="send_location_way_choose_title">Partager un lieu utilisant</string>
-<string name="send_location_sms_pattern">Je suis ici : {0}\n{1}</string>
-<string name="send_location_email_pattern">Pour voir ce lieu, suivre le lien web {0} ou android {1}</string>
+<string name="send_location_sms_pattern">Je suis ici : %1$s\n%2$s</string>
+<string name="send_location_email_pattern">Pour voir ce lieu, suivre le lien web %1$s ou android %2$s</string>
 <string name="send_location">Envoyer le lieu</string>
 <string name="context_menu_item_share_location">Partager lieu</string>
 <string name="add_waypoint_dialog_added">Etape \'\'{0}\'\' ajoutée avec succés</string>

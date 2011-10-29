@@ -7,15 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.osm.LatLon;
+import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;
+import net.osmand.plus.ResourceManager;
+import net.osmand.plus.SearchByNameFilter;
 import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.OsmandApplication;
-import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -35,13 +37,9 @@ import android.widget.TextView;
  */
 public class SearchPoiFilterActivity extends ListActivity {
 
-	private Typeface typeFace;
-	public final static String SEARCH_LAT = "search_lat";  //$NON-NLS-1$
-	public final static String SEARCH_LON = "search_lon";  //$NON-NLS-1$
+	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
+	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
 	
-	private boolean searchNearBy = true;
-	private double latitude = 0;
-	private double longitude = 0;
 
 	
 	
@@ -49,18 +47,6 @@ public class SearchPoiFilterActivity extends ListActivity {
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		setContentView(R.layout.searchpoilist);
-		Bundle extras = getIntent().getExtras();
-		if(extras != null && extras.containsKey(SEARCH_LAT) && extras.containsKey(SEARCH_LON)){
-			searchNearBy = false;
-			latitude = extras.getDouble(SEARCH_LAT);
-			longitude = extras.getDouble(SEARCH_LON);
-		} else {
-			LatLon loc = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
-			latitude = loc.getLatitude();
-			longitude = loc.getLongitude();
-		}
-		
-		typeFace = Typeface.create((String)null, Typeface.ITALIC);
 		
 		// ListActivity has a ListView, which you can get with:
 		ListView lv = getListView();
@@ -84,49 +70,61 @@ public class SearchPoiFilterActivity extends ListActivity {
 		filters.add(poiFilters.getNameFinderPOIFilter());
 		setListAdapter(new AmenityAdapter(filters));
 	}
+	
+	
+	private void updateIntentToLaunch(Intent intentToLaunch){
+		LatLon loc = null;
+		boolean searchAround = false;
+		Intent intent = getIntent();
+		if(intent != null){
+			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
+			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
+			if(lat != 0 || lon != 0){
+				loc = new LatLon(lat, lon);
+			}
+		}
+		
+		if (loc == null && getParent() instanceof SearchActivity) {
+			loc = ((SearchActivity) getParent()).getSearchPoint();
+			searchAround = ((SearchActivity) getParent()).isSearchAroundCurrentLocation();
+		}
+		if (loc == null && !searchAround) {
+			loc = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+		}
+		if(loc != null && !searchAround) {
+			intentToLaunch.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
+			intentToLaunch.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
+		}
+	}
 
 	private void showEditActivity(PoiFilter poi) {
 		if(!poi.isStandardFilter()) {
 			Intent newIntent = new Intent(SearchPoiFilterActivity.this, EditPOIFilterActivity.class);
 			// folder selected
 			newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, poi.getFilterId());
-			if(!searchNearBy){
-				newIntent.putExtra(EditPOIFilterActivity.SEARCH_LAT, latitude);
-				newIntent.putExtra(EditPOIFilterActivity.SEARCH_LON, longitude);
-			}
+			updateIntentToLaunch(newIntent);
 			startActivityForResult(newIntent, 0);
 		}
 	}
+
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		final PoiFilter filter = ((AmenityAdapter) getListAdapter()).getItem(position);
-		if(filter.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)){
+		if (filter.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)) {
+			filter.clearFilter();
 			showEditActivity(filter);
 			return;
 		}
+		if(!(filter instanceof NameFinderPoiFilter)){
+			ResourceManager rm = ((OsmandApplication) getApplication()).getResourceManager();
+			if(!rm.containsAmenityRepositoryToSearch(filter instanceof SearchByNameFilter)){
+				Toast.makeText(this, R.string.data_to_search_poi_not_available, Toast.LENGTH_LONG);
+				return;
+			}
+		}
 		final Intent newIntent = new Intent(SearchPoiFilterActivity.this, SearchPOIActivity.class);
 		newIntent.putExtra(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
-		if (searchNearBy) {
-			AlertDialog.Builder b = new AlertDialog.Builder(this);
-			b.setItems(new String[] { getString(R.string.search_nearby), getString(R.string.search_near_map) },
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							if (which == 1) {
-								newIntent.putExtra(SearchPOIActivity.SEARCH_LAT, latitude);
-								newIntent.putExtra(SearchPOIActivity.SEARCH_LON, longitude);
-							}
-							startActivityForResult(newIntent, 0);
-						}
-					});
-			b.show();
-		} else {
-			newIntent.putExtra(SearchPOIActivity.SEARCH_LAT, latitude);
-			newIntent.putExtra(SearchPOIActivity.SEARCH_LON, longitude);
-			startActivityForResult(newIntent, 0);
-		}
-		
-			
-		
+		updateIntentToLaunch(newIntent);
+		startActivityForResult(newIntent, 0);
 	}
 
 
@@ -143,8 +141,11 @@ public class SearchPoiFilterActivity extends ListActivity {
 			ImageView icon = (ImageView) row.findViewById(R.id.folder_icon);
 			PoiFilter model = getItem(position);
 			label.setText(model.getName());
-			if(model.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)){
-				label.setTypeface(typeFace);
+			if(model.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID) || 
+					model.getFilterId().equals(PoiFilter.BY_NAME_FILTER_ID)){
+				label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+			} else {
+				label.setTypeface(Typeface.DEFAULT);
 			}
 			icon.setImageResource(model.isStandardFilter() ? R.drawable.folder : R.drawable.favorites);
 			return (row);

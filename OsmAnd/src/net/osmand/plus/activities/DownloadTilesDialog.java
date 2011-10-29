@@ -153,7 +153,9 @@ public class DownloadTilesDialog {
 		instance.addDownloaderCallback(new IMapDownloaderCallback(){
 			@Override
 			public void tileDownloaded(DownloadRequest request) {
-				progressDlg.setProgress(progressDlg.getProgress() + 1);
+				if (request != null) {
+					progressDlg.setProgress(progressDlg.getProgress() + 1);
+				}
 			}
 		});
 		

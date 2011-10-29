@@ -53,7 +53,7 @@ public class Node implements Cloneable //can be made abstract if leaf and non le
      These observations shold hold good for query building as well. But it is no harm to give large caches
      for query building.
   */
-  public final static int CACHE_SIZE = 250;
+  public final static int CACHE_SIZE = 100000;
   /**bytes*/
   final static int NODE_HDR_SIZE = 20;//16;
   /**2 kBytes - will include the file header and the stack*/

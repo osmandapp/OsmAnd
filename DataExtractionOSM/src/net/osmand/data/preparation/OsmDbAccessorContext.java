@@ -6,5 +6,5 @@ import net.osmand.osm.Entity;
 
 public interface OsmDbAccessorContext {
 	
-	public void loadEntityData(Entity e, boolean loadTags) throws SQLException;
+	public void loadEntityData(Entity e) throws SQLException;
 }

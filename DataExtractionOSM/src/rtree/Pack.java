@@ -82,7 +82,7 @@ public class Pack
     }
   }
   
-  public final int BUFFER_SIZE = 8192;
+  public final int BUFFER_SIZE = 8192*8;
   private int packTree(Element[] elmts, RTree rtree, String newFile)
   {
     try{
@@ -122,7 +122,9 @@ public class Pack
       fos.close();
       fis.close();
       rFile.close();
-      tmpPckFile.deleteOnExit();
+      if (!tmpPckFile.delete()) {
+    	  tmpPckFile.deleteOnExit();
+      }
       //System.out.println("Pack.packTree : packing took " + (System.currentTimeMillis() - t));
       return(0);
     }

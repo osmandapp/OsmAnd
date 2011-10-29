@@ -1,13 +1,16 @@
 package net.osmand.plus;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import net.osmand.OsmAndFormatter;
+import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.IndexConstants;
@@ -19,6 +22,7 @@ public class PoiFilter {
 	public final static String STD_PREFIX = "std_"; //$NON-NLS-1$
 	public final static String USER_PREFIX = "user_"; //$NON-NLS-1$
 	public final static String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id"; //$NON-NLS-1$
+	public final static String BY_NAME_FILTER_ID = USER_PREFIX + "by_name"; //$NON-NLS-1$
 	
 	private Map<AmenityType, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<AmenityType, LinkedHashSet<String>>();
 	private String filterByName = null;
@@ -27,11 +31,11 @@ public class PoiFilter {
 	protected String name;
 	private final boolean isStandardFilter;
 	
-	private final static int finalZoom = 6;
-	private final static int initialZoom = 13;
-	private final static int maxInitialCount = 200;
-	private int zoom = initialZoom;
-	private final OsmandApplication application;
+	protected final OsmandApplication application;
+	
+	protected int distanceInd = 1;
+	// in kilometers
+	protected double[] distanceToSearchValues = new double[] {1, 2, 3, 5, 10, 30, 100, 250 };
 	
 	
 	// constructor for standard filters
@@ -67,59 +71,71 @@ public class PoiFilter {
 		for(AmenityType t : AmenityType.values()){
 			acceptedTypes.put(t, null);
 		}
+		distanceToSearchValues = new double[] {0.5, 1, 2, 3, 5, 10, 15, 30, 100};
 	}
 	
 	
 	public boolean isSearchFurtherAvailable(){
-		return zoom > finalZoom;
+		return distanceInd < distanceToSearchValues.length - 1;
 	}
 	
-	public List<Amenity> searchFurther(double latitude, double longitude){
-		zoom --;
-		List<Amenity> amenityList = application.getResourceManager().searchAmenities(this, latitude, longitude, zoom, -1);
+	
+	public List<Amenity> searchFurther(double latitude, double longitude, ResultMatcher<Amenity> matcher){
+		if(distanceInd < distanceToSearchValues.length - 1){
+			distanceInd ++;
+		}
+		List<Amenity> amenityList = searchAmenities(this, latitude, longitude, matcher);
 		MapUtils.sortListOfMapObject(amenityList, latitude, longitude);
 		
 		return amenityList;
 	}
 	
 	public String getSearchArea(){
-		if(zoom <= 14){
-			int d = (int) (1 * (1 << (14 - zoom)));
-			return " < " + d + " " + application.getString(R.string.km);  //$NON-NLS-1$//$NON-NLS-2$
+		double val = distanceToSearchValues[distanceInd];
+		if(val >= 1){
+			return " < " + ((int) val)+ " " + application.getString(R.string.km);  //$NON-NLS-1$//$NON-NLS-2$
 		} else {
 			return " < 500 " + application.getString(R.string.m);  //$NON-NLS-1$
 		}
 	}
 	
 	public void clearPreviousZoom(){
-		zoom = getInitialZoom();
+		distanceInd = 0;
 	}
 	
-	private int getInitialZoom(){
-		int zoom = initialZoom;
-		if(areAllTypesAccepted()){
-			zoom += 1;
-		}
-		return zoom; 
-	}
-	
-	public List<Amenity> initializeNewSearch(double lat, double lon, int firstTimeLimit){
-		zoom = getInitialZoom();
-		List<Amenity> amenityList = application.getResourceManager().searchAmenities(this, lat, lon, zoom, maxInitialCount);
+	public List<Amenity> initializeNewSearch(double lat, double lon, int firstTimeLimit, ResultMatcher<Amenity> matcher){
+		clearPreviousZoom();
+		List<Amenity> amenityList = searchAmenities(this, lat, lon, matcher);
 		MapUtils.sortListOfMapObject(amenityList, lat, lon);
-		while (amenityList.size() > firstTimeLimit) {
-			amenityList.remove(amenityList.size() - 1);
+		if (firstTimeLimit > 0) {
+			while (amenityList.size() > firstTimeLimit) {
+				amenityList.remove(amenityList.size() - 1);
+			}
 		}
-		
 		return amenityList; 
 	}
 	
-	public List<Amenity> searchAgain(double lat, double lon){
-		int limit = -1;
-		if(zoom == getInitialZoom()){
-			limit = maxInitialCount;
-		}
-		List<Amenity> amenityList = application.getResourceManager().searchAmenities(this, lat, lon, zoom, limit);
+	private List<Amenity> searchAmenities(PoiFilter poiFilter, double lat, double lon, ResultMatcher<Amenity> matcher) {
+		double baseDistY = MapUtils.getDistance(lat, lon, lat - 1, lon);
+		double baseDistX = MapUtils.getDistance(lat, lon, lat, lon - 1);
+		double distance = distanceToSearchValues[distanceInd] * 1000;
+		
+		double topLatitude = lat + (distance/ baseDistY );
+		double bottomLatitude = lat - (distance/ baseDistY );
+		double leftLongitude = lon - (distance / baseDistX);
+		double rightLongitude = lon + (distance/ baseDistX);
+		
+		return searchAmenities(poiFilter, lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude, matcher);
+	}
+
+	protected List<Amenity> searchAmenities(PoiFilter poiFilter, double lat, double lon, double topLatitude,
+			double bottomLatitude, double leftLongitude, double rightLongitude, ResultMatcher<Amenity> matcher) {
+		return application.getResourceManager().searchAmenities(poiFilter, 
+				topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon, matcher);
+	}
+
+	public List<Amenity> searchAgain(double lat, double lon) {
+		List<Amenity> amenityList = searchAmenities(this, lat, lon, null);
 		MapUtils.sortListOfMapObject(amenityList, lat, lon);
 		return amenityList;
 	}
@@ -154,6 +170,10 @@ public class PoiFilter {
 		return set.contains(subtype);
 	}
 	
+	public void clearFilter(){
+		acceptedTypes = new LinkedHashMap<AmenityType, LinkedHashSet<String>>();
+	}
+	
 	public boolean areAllTypesAccepted(){
 		if(AmenityType.values().length == acceptedTypes.size()){
 			for(AmenityType a : acceptedTypes.keySet()){
@@ -172,6 +192,19 @@ public class PoiFilter {
 			acceptedTypes.put(type, new LinkedHashSet<String>());
 		} else {
 			acceptedTypes.remove(type);
+		}
+	}
+	
+	public void setMapToAccept(Map<AmenityType, List<String>> newMap) {
+		Iterator<Entry<AmenityType, List<String>>> iterator = newMap.entrySet().iterator();
+		acceptedTypes.clear();
+		while(iterator.hasNext()){
+			Entry<AmenityType, List<String>> e = iterator.next();
+			if(e.getValue() == null){
+				acceptedTypes.put(e.getKey(), null);
+			} else {
+				acceptedTypes.put(e.getKey(), new LinkedHashSet<String>(e.getValue()));
+			}
 		}
 	}
 	

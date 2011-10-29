@@ -240,28 +240,28 @@ public class MapRenderRepositories {
 			int rightX = MapUtils.get31TileNumberX(cRightLongitude);
 			int bottomY = MapUtils.get31TileNumberY(cBottomLatitude);
 			int topY = MapUtils.get31TileNumberY(cTopLatitude);
-			searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom);
-			if (zoom < 17) {
-				searchRequest.setSearchFilter(new BinaryMapIndexReader.SearchFilter() {
+			BinaryMapIndexReader.SearchFilter searchFilter = new BinaryMapIndexReader.SearchFilter() {
 
-					@Override
-					public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex root) {
-						for (int j = 0; j < types.size(); j++) {
-							int type = types.get(j);
-							int mask = type & 3;
-							TagValuePair pair = root.decodeType(type);
-							if (pair != null &&  renderingType.isObjectVisible(pair.tag, pair.value, zoom, mask, nightMode)) {
-								return true;
-							}
-							if(pair != null && mask == OsmandRenderingRulesParser.POINT_STATE && 
-									renderingType.isObjectVisible(pair.tag, pair.value, zoom, OsmandRenderingRulesParser.TEXT_STATE, nightMode)){
-								return true;
-							}
+				@Override
+				public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex root) {
+					for (int j = 0; j < types.size(); j++) {
+						int type = types.get(j);
+						int mask = type & 3;
+						TagValuePair pair = root.decodeType(type);
+						if (pair != null &&  renderingType.isObjectVisible(pair.tag, pair.value, zoom, mask, nightMode)) {
+							return true;
 						}
-						return false;
+						if(pair != null && mask == OsmandRenderingRulesParser.POINT_STATE && 
+								renderingType.isObjectVisible(pair.tag, pair.value, zoom, OsmandRenderingRulesParser.TEXT_STATE, nightMode)){
+							return true;
+						}
 					}
+					return false;
+				}
 
-				});
+			};
+			if (zoom > 17) {
+				searchFilter = null;
 			}
 			// search lower level zooms only in basemap for now :) before it was intersection of maps on zooms 5-7
 			boolean basemapSearch = false;
@@ -279,10 +279,8 @@ public class MapRenderRepositories {
 					continue;
 				}
 				BinaryMapIndexReader c  = files.get(mapName);
+				searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom, searchFilter);
 				List<BinaryMapDataObject> res = c.searchMapIndex(searchRequest);
-				if (checkWhetherInterrupted()) {
-					return false;
-				}
 				for (BinaryMapDataObject r : res) {
 					if (PerformanceFlags.checkForDuplicateObjectIds) {
 						if (ids.contains(r.getId())) {
@@ -307,14 +305,11 @@ public class MapRenderRepositories {
 							}
 						}
 					}
-					
-					
 					if (checkWhetherInterrupted()) {
 						return false;
 					}
 					tempList.add(r);
 				}
-				searchRequest.clearSearchResults();
 			}
 			
 			List<MultyPolygon> pMulti = proccessMultiPolygons(multiPolygons, leftX, rightX, bottomY, topY, zoom);

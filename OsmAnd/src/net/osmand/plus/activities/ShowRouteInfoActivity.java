@@ -13,7 +13,6 @@ import net.osmand.plus.activities.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.activities.RoutingHelper.TurnType;
 import net.osmand.plus.views.MapInfoLayer;
 import android.app.ListActivity;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -61,11 +60,7 @@ public class ShowRouteInfoActivity extends ListActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		int dist = helper.getLeftDistance();
-		int hours = helper.getLeftTime() / (60 * 60);
-		int minutes = (helper.getLeftTime() / 60) % 60;
-		header.setText(MessageFormat.format(getString(R.string.route_general_information), OsmAndFormatter.getFormattedDistance(dist, this),
-				hours, minutes));
+		header.setText(helper.getGeneralRouteInformation());
 		float f = Math.min(dm.widthPixels/(dm.density*160),dm.heightPixels/(dm.density*160));
 		if (f >= 3) {
 			// large screen

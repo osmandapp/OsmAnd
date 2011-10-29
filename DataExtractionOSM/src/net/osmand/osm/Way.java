@@ -88,11 +88,11 @@ public class Way extends Entity {
 			} else {
 				nodes.clear();
 			}
-			for (int i = 0; i < nodeIds.size(); i++) {
+			int nIsize = nodeIds.size();
+			for (int i = 0; i < nIsize; i++) {
 				nodes.add((Node) entities.get(new EntityId(EntityType.NODE,nodeIds.get(i))));
 			}
 		}
-		
 	}
 	
 	@Override

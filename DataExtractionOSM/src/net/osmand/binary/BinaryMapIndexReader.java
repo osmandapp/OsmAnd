@@ -8,17 +8,27 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import net.osmand.Algoritms;
+import net.osmand.CollatorStringMatcher;
 import net.osmand.LogUtil;
+import net.osmand.ResultMatcher;
 import net.osmand.StringMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
+import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
+import net.osmand.data.Amenity;
+import net.osmand.data.AmenityType;
+import net.osmand.data.Building;
 import net.osmand.data.City;
+import net.osmand.data.MapObject;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.data.TransportStop;
@@ -36,11 +46,13 @@ import com.google.protobuf.WireFormat;
 public class BinaryMapIndexReader {
 	
 	public final static int TRANSPORT_STOP_ZOOM = 24;
+	public static final int SHIFT_COORDINATES = 5;
 	private final static Log log = LogUtil.getLog(BinaryMapIndexReader.class);
 	
 	private final RandomAccessFile raf;
 	private int version;
 	private List<MapIndex> mapIndexes = new ArrayList<MapIndex>();
+	private List<PoiRegion> poiIndexes = new ArrayList<PoiRegion>();
 	private List<AddressRegion> addressIndexes = new ArrayList<AddressRegion>();
 	private List<TransportIndex> transportIndexes = new ArrayList<TransportIndex>();
 	private List<BinaryIndexPart> indexes = new ArrayList<BinaryIndexPart>();
@@ -48,6 +60,7 @@ public class BinaryMapIndexReader {
 	protected CodedInputStreamRAF codedIS;
 	
 	private final BinaryMapTransportReaderAdapter transportAdapter;
+	private final BinaryMapPoiReaderAdapter poiAdapter;
 	private final BinaryMapAddressReaderAdapter addressAdapter;
 	
 	public BinaryMapIndexReader(final RandomAccessFile raf) throws IOException {
@@ -56,14 +69,16 @@ public class BinaryMapIndexReader {
 	
 	public BinaryMapIndexReader(final RandomAccessFile raf, boolean readOnlyMapData) throws IOException {
 		this.raf = raf;
-		codedIS = CodedInputStreamRAF.newInstance(raf, 1024);
+		codedIS = CodedInputStreamRAF.newInstance(raf, 1024 * 5);
 		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
 		if(!readOnlyMapData){
 			transportAdapter = new BinaryMapTransportReaderAdapter(this);
 			addressAdapter = new BinaryMapAddressReaderAdapter(this);
+			poiAdapter = new BinaryMapPoiReaderAdapter(this);
 		} else {
 			transportAdapter = null;
 			addressAdapter = null;
+			poiAdapter = null;
 		}
 		init();
 	}
@@ -122,13 +137,43 @@ public class BinaryMapIndexReader {
 				}
 				codedIS.seek(ind.filePointer + ind.length);
 				break;
+			case OsmandOdb.OsmAndStructure.POIINDEX_FIELD_NUMBER:
+				PoiRegion poiInd = new PoiRegion();
+				poiInd.length = readInt();
+				poiInd.filePointer = codedIS.getTotalBytesRead();
+				if (poiAdapter != null) {
+					oldLimit = codedIS.pushLimit(poiInd.length);
+					poiAdapter.readPoiIndex(poiInd);
+					codedIS.popLimit(oldLimit);
+					poiIndexes.add(poiInd);
+					indexes.add(poiInd);
+				}
+				codedIS.seek(poiInd.filePointer + poiInd.length);
+				break;
 			case OsmandOdb.OsmAndStructure.VERSIONCONFIRM_FIELD_NUMBER :
 				int cversion = codedIS.readUInt32();
+				calculateCenterPointForRegions();
 				initCorrectly = cversion == version;
 				break;
 			default:
 				skipUnknownField(t);
 				break;
+			}
+		}
+	}
+	
+	private void calculateCenterPointForRegions(){
+		for(AddressRegion reg : addressIndexes){
+			for(MapIndex map : mapIndexes){
+				if(Algoritms.objectEquals(reg.name, map.name)){
+					if(map.getRoots().size() > 0){
+						MapRoot mapRoot = map.getRoots().get(map.getRoots().size() - 1);
+						double cy = (MapUtils.get31LatitudeY(mapRoot.getBottom()) + MapUtils.get31LatitudeY(mapRoot.getTop())) / 2;
+						double cx = (MapUtils.get31LongitudeX(mapRoot.getLeft()) + MapUtils.get31LongitudeX(mapRoot.getRight())) / 2;
+						reg.calculatedCenter = new LatLon(cy, cx);
+						break;
+					}
+				}
 			}
 		}
 	}
@@ -139,6 +184,31 @@ public class BinaryMapIndexReader {
 	
 	public boolean containsMapData(){
 		return mapIndexes.size() > 0;
+	}
+	
+	public boolean containsPoiData(){
+		return poiIndexes.size() > 0;
+	}
+	
+	public boolean containsPoiData(double latitude, double longitude) {
+		for (PoiRegion index : poiIndexes) {
+			if (index.rightLongitude >= longitude && index.leftLongitude <= longitude &&
+					index.topLatitude >= latitude && index.bottomLatitude <= latitude) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
+	public boolean containsPoiData(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
+		for (PoiRegion index : poiIndexes) {
+			if (index.rightLongitude >= leftLongitude && index.leftLongitude <= rightLongitude && 
+					index.topLatitude >= bottomLatitude && index.bottomLatitude <= topLatitude) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public boolean containsMapData(int tile31x, int tile31y, int zoom){
@@ -285,13 +355,20 @@ public class BinaryMapIndexReader {
 	/**
 	 * Address public methods
 	 */
-	
 	public List<String> getRegionNames(){
 		List<String> names = new ArrayList<String>();
 		for(AddressRegion r : addressIndexes){
 			names.add(r.name);
 		}
 		return names;
+	}
+	
+	public LatLon getRegionCenter(String name) {
+		AddressRegion rg = getRegionByName(name);
+		if (rg != null) {
+			return rg.calculatedCenter;
+		}
+		return null;
 	}
 	
 	private AddressRegion getRegionByName(String name){
@@ -303,14 +380,14 @@ public class BinaryMapIndexReader {
 		throw new IllegalArgumentException(name);
 	}
 	
-	public List<PostCode> getPostcodes(String region, StringMatcher nameMatcher) throws IOException {
+	public List<PostCode> getPostcodes(String region, SearchRequest<MapObject> resultMatcher, StringMatcher nameMatcher) throws IOException {
 		List<PostCode> postcodes = new ArrayList<PostCode>();
 		AddressRegion r = getRegionByName(region);
 		if(r.postcodesOffset != -1){
 			codedIS.seek(r.postcodesOffset);
 			int len = readInt();
 			int old = codedIS.pushLimit(len);
-			addressAdapter.readPostcodes(postcodes,nameMatcher);
+			addressAdapter.readPostcodes(postcodes, resultMatcher, nameMatcher);
 			codedIS.popLimit(old);
 		}
 		return postcodes;
@@ -331,42 +408,39 @@ public class BinaryMapIndexReader {
 		return null;
 	}
 	
-	public List<City> getCities(String region) throws IOException {
+	public List<City> getCities(String region, SearchRequest<MapObject> resultMatcher) throws IOException {
 		List<City> cities = new ArrayList<City>();
 		AddressRegion r = getRegionByName(region);
 		if(r.citiesOffset != -1){
 			codedIS.seek(r.citiesOffset);
 			int len = readInt();
 			int old = codedIS.pushLimit(len);
-			addressAdapter.readCities(cities, null, false);
+			addressAdapter.readCities(cities, resultMatcher, null, false);
 			codedIS.popLimit(old);
 		}
 		return cities;
 	}
 	
-	public List<City> getVillages(String region) throws IOException {
-		return getVillages(region, null, false);
-	}
-	public List<City> getVillages(String region, StringMatcher nameMatcher, boolean useEn) throws IOException {
+	public List<City> getVillages(String region, SearchRequest<MapObject> resultMatcher, StringMatcher nameMatcher, boolean useEn) throws IOException {
 		List<City> cities = new ArrayList<City>();
 		AddressRegion r = getRegionByName(region);
 		if(r.villagesOffset != -1){
 			codedIS.seek(r.villagesOffset);
 			int len = readInt();
 			int old = codedIS.pushLimit(len);
-			addressAdapter.readCities(cities, nameMatcher, useEn);
+			addressAdapter.readCities(cities, resultMatcher, nameMatcher, useEn);
 			codedIS.popLimit(old);
 		}
 		return cities;
 	}
 
 	
-	public void preloadStreets(City c) throws IOException {
+	public void preloadStreets(City c, SearchRequest<Street> resultMatcher) throws IOException {
 		checkAddressIndex(c.getFileOffset());
 		codedIS.seek(c.getFileOffset());
 		int size = codedIS.readRawVarint32();
 		int old = codedIS.pushLimit(size);
-		addressAdapter.readCity(c, c.getFileOffset(), true, null, false);
+		addressAdapter.readCity(c, c.getFileOffset(), true, resultMatcher, null, false);
 		codedIS.popLimit(old);
 	}
 	
@@ -382,13 +456,13 @@ public class BinaryMapIndexReader {
 	}
 	
 	
-	public void preloadStreets(PostCode p) throws IOException {
+	public void preloadStreets(PostCode p, SearchRequest<Street> resultMatcher) throws IOException {
 		checkAddressIndex(p.getFileOffset());
 		
 		codedIS.seek(p.getFileOffset());
 		int size = codedIS.readRawVarint32();
 		int old = codedIS.pushLimit(size);
-		addressAdapter.readPostcode(p, p.getFileOffset(), true, null);
+		addressAdapter.readPostcode(p, p.getFileOffset(), null, true, null);
 		codedIS.popLimit(old);
 	}
 	
@@ -405,12 +479,12 @@ public class BinaryMapIndexReader {
 		}
 	}
 	
-	public void preloadBuildings(Street s) throws IOException {
+	public void preloadBuildings(Street s, SearchRequest<Building> resultMatcher) throws IOException {
 		checkAddressIndex(s.getFileOffset());
 		codedIS.seek(s.getFileOffset());
 		int size = codedIS.readRawVarint32();
 		int old = codedIS.pushLimit(size);
-		addressAdapter.readStreet(s, true, 0, 0, null);
+		addressAdapter.readStreet(s, resultMatcher, true, 0, 0, null);
 		codedIS.popLimit(old);
 	}
 	
@@ -643,7 +717,7 @@ public class BinaryMapIndexReader {
 		int cbottom = 0;
 		req.numberOfReadSubtrees++;
 		while(true){
-			if(req.isInterrupted()){
+			if(req.isCancelled()){
 				return;
 			}
 			int t = codedIS.readTag();
@@ -739,7 +813,7 @@ public class BinaryMapIndexReader {
 		}
 	}
 	
-	private int MASK_TO_READ = ~((1 << BinaryMapIndexWriter.SHIFT_COORDINATES) - 1);
+	private int MASK_TO_READ = ~((1 << SHIFT_COORDINATES) - 1);
 	private BinaryMapDataObject readMapDataObject(int left, int right, int top, int bottom, SearchRequest<BinaryMapDataObject> req, 
 			MapIndex root) throws IOException {
 		int tag = WireFormat.getTagFieldNumber(codedIS.readTag());
@@ -758,8 +832,8 @@ public class BinaryMapIndexReader {
 		int maxY = 0;
 		req.numberOfVisitedObjects++;
 		while(codedIS.getBytesUntilLimit() > 0){
-			int x = (codedIS.readSInt32() << BinaryMapIndexWriter.SHIFT_COORDINATES) + px;
-			int y = (codedIS.readSInt32() << BinaryMapIndexWriter.SHIFT_COORDINATES) + py;
+			int x = (codedIS.readSInt32() << SHIFT_COORDINATES) + px;
+			int y = (codedIS.readSInt32() << SHIFT_COORDINATES) + py;
 			req.cacheCoordinates.add(x);
 			req.cacheCoordinates.add(y);
 			px = x;
@@ -848,7 +922,69 @@ public class BinaryMapIndexReader {
 		}
 		
 	}
-
+	
+	public List<Amenity> searchPoiByName(SearchRequest<Amenity> req) throws IOException {
+		if (req.nameQuery == null || req.nameQuery.length() == 0) {
+			throw new IllegalArgumentException();
+		}
+		for (PoiRegion poiIndex : poiIndexes) {
+			codedIS.seek(poiIndex.filePointer);
+			int old = codedIS.pushLimit(poiIndex.length);
+			poiAdapter.searchPoiByName(poiIndex, req);
+			codedIS.popLimit(old);
+		}
+		return req.getSearchResults();
+	}
+	
+	public Map<AmenityType, List<String>> searchPoiCategoriesByName(String query, Map<AmenityType, List<String>> map) {
+		if (query == null || query.length() == 0) {
+			throw new IllegalArgumentException();
+		}
+		Collator collator = Collator.getInstance();
+		collator.setStrength(Collator.PRIMARY);
+		for (PoiRegion poiIndex : poiIndexes) {
+			for(int i= 0; i< poiIndex.categories.size(); i++){
+				String cat = poiIndex.categories.get(i);
+				AmenityType catType = poiIndex.categoriesType.get(i);
+				if(CollatorStringMatcher.cmatches(collator, cat, query, StringMatcherMode.CHECK_STARTS_FROM_SPACE)){
+					map.put(catType, null);
+				} else {
+					List<String> subcats = poiIndex.subcategories.get(i);
+					for(int j=0; j< subcats.size(); j++){
+						if(CollatorStringMatcher.cmatches(collator, subcats.get(j), query, StringMatcherMode.CHECK_STARTS_FROM_SPACE)){
+							if(!map.containsKey(catType)){
+								map.put(catType, new ArrayList<String>());
+							}
+							List<String> list = map.get(catType);
+							if(list != null){
+								list.add(subcats.get(j));
+							}
+						}
+						
+					}
+				}
+			}
+		}
+		return map;
+	}
+	
+	public List<Amenity> searchPoi(SearchRequest<Amenity> req) throws IOException {
+		req.numberOfVisitedObjects = 0;
+		req.numberOfAcceptedObjects = 0;
+		req.numberOfAcceptedSubtrees = 0;
+		req.numberOfReadSubtrees = 0;
+		for (PoiRegion poiIndex : poiIndexes) {
+			codedIS.seek(poiIndex.filePointer);
+			int old = codedIS.pushLimit(poiIndex.length);
+			poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
+			codedIS.popLimit(old);
+		}
+		log.info("Read " + req.numberOfReadSubtrees + " subtrees. Go through " + req.numberOfAcceptedSubtrees + " subtrees.");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+		log.info("Search poi is done. Visit " + req.numberOfVisitedObjects + " objects. Read " + req.numberOfAcceptedObjects + " objects."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		
+		return req.getSearchResults();
+	}
+	
 	private List<String> readStringTable() throws IOException{
 		List<String> list = new ArrayList<String>();
 		while(true){
@@ -871,15 +1007,50 @@ public class BinaryMapIndexReader {
 	protected List<AddressRegion> getAddressIndexes() {
 		return addressIndexes;
 	}
+	
+	protected List<PoiRegion> getPoiIndexes() {
+		return poiIndexes;
+	}
 
 	
-	public static SearchRequest<BinaryMapDataObject> buildSearchRequest(int sleft, int sright, int stop, int sbottom, int zoom){
+	public static SearchRequest<BinaryMapDataObject> buildSearchRequest(int sleft, int sright, int stop, int sbottom, int zoom, SearchFilter searchFilter){
 		SearchRequest<BinaryMapDataObject> request = new SearchRequest<BinaryMapDataObject>();
 		request.left = sleft;
 		request.right = sright;
 		request.top = stop;
 		request.bottom = sbottom;
 		request.zoom = zoom;
+		request.searchFilter = searchFilter;
+		return request;
+	}
+	
+	public static <T> SearchRequest<T> buildAddressRequest(ResultMatcher<T> resultMatcher){
+		SearchRequest<T> request = new SearchRequest<T>();
+		request.resultMatcher = resultMatcher;
+		return request;
+	}
+	
+	
+	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int zoom, 
+			SearchPoiTypeFilter poiTypeFilter, ResultMatcher<Amenity> matcher){
+		SearchRequest<Amenity> request = new SearchRequest<Amenity>();
+		request.left = sleft;
+		request.right = sright;
+		request.top = stop;
+		request.bottom = sbottom;
+		request.zoom = zoom;
+		request.poiTypeFilter = poiTypeFilter;
+		request.resultMatcher = matcher;
+		
+		return request;
+	}
+	
+	public static SearchRequest<Amenity> buildSearchPoiRequest(int x, int y, String nameFilter, ResultMatcher<Amenity> resultMatcher){
+		SearchRequest<Amenity> request = new SearchRequest<Amenity>();
+		request.x = x;
+		request.y = y;
+		request.resultMatcher = resultMatcher;
+		request.nameQuery = nameFilter;
 		return request;
 	}
 	
@@ -913,18 +1084,38 @@ public class BinaryMapIndexReader {
 		
 	}
 	
+	public static interface SearchPoiTypeFilter {
+		
+		public boolean accept(AmenityType type, String subcategory);
+		
+	}
+	
 	public static class SearchRequest<T> {
+		private List<T> searchResults = new ArrayList<T>();
+		private ResultMatcher<T> resultMatcher;
+		
 		// 31 zoom tiles
+		// common variables
+		int x = 0;
+		int y = 0;
 		int left = 0;
 		int right = 0;
 		int top = 0;
 		int bottom = 0;
+		
 		int zoom = 15;
 		int limit = -1;
-		List<T> searchResults = new ArrayList<T>();
+		
+		
+		String nameQuery = null;
+
+		SearchFilter searchFilter = null;
+		
+		SearchPoiTypeFilter poiTypeFilter = null;
+
+		// cache information
 		TIntArrayList cacheCoordinates = new TIntArrayList();
 		TIntArrayList cacheTypes = new TIntArrayList();
-		SearchFilter searchFilter = null;
 		
 		// TRACE INFO
 		int numberOfVisitedObjects = 0;
@@ -936,11 +1127,13 @@ public class BinaryMapIndexReader {
 		protected SearchRequest(){
 		}
 		
-		public SearchFilter getSearchFilter() {
-			return searchFilter;
-		}
-		public void setSearchFilter(SearchFilter searchFilter) {
-			this.searchFilter = searchFilter;
+		
+		protected boolean publish(T obj){
+			if(resultMatcher == null || resultMatcher.publish(obj)){
+				searchResults.add(obj);
+				return true;
+			}
+			return false;
 		}
 		
 		public List<T> getSearchResults() {
@@ -951,13 +1144,25 @@ public class BinaryMapIndexReader {
 			this.interrupted = interrupted;
 		}
 		
-		public boolean isInterrupted() {
-			return interrupted;
+		public boolean isCancelled() {
+			if(this.interrupted){
+				return interrupted;
+			}
+			if(resultMatcher != null){
+				return resultMatcher.isCancelled();
+			}
+			return false;
 		}
 		
 		public void clearSearchResults(){
 			// recreate whole list to allow GC collect old data 
 			searchResults = new ArrayList<T>();
+			cacheCoordinates.clear();
+			cacheTypes.clear();
+			numberOfVisitedObjects = 0;
+			numberOfAcceptedObjects = 0;
+			numberOfReadSubtrees = 0;
+			numberOfAcceptedSubtrees = 0;
 		}
 	}
 	
@@ -1042,8 +1247,6 @@ public class BinaryMapIndexReader {
 			return true;
 		}
 		
-		
-		
 	}
 	
 	
@@ -1091,91 +1294,143 @@ public class BinaryMapIndexReader {
 	}
 
 	
+	private static boolean testMapSearch = false;
+	private static boolean testAddressSearch = false;
+	private static boolean testPoiSearch = true;
+	private static boolean testTransportSearch = false;
+	
 	public static void main(String[] args) throws IOException {
-		RandomAccessFile raf = new RandomAccessFile(new File("/home/victor/projects/OsmAnd/download/384/Spain_europe_1.obf"), "r");
+		RandomAccessFile raf = new RandomAccessFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.obf"), "r");
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
 		System.out.println("VERSION " + reader.getVersion()); //$NON-NLS-1$
 		long time = System.currentTimeMillis();
-		
-		System.out.println(reader.mapIndexes.get(0).encodingRules);
-		
-		// test search
-//		int sleft = MapUtils.get31TileNumberX(27.596);
-//		int sright = MapUtils.get31TileNumberX(27.599);
-//		int stop = MapUtils.get31TileNumberY(53.921);
-//		int sbottom = MapUtils.get31TileNumberY(53.919);
-//		System.out.println("SEARCH " + sleft + " " + sright + " " + stop + " " + sbottom);
-//
-//		for (BinaryMapDataObject obj : reader.searchMapIndex(buildSearchRequest(sleft, sright, stop, sbottom, 8))) {
-//			if (obj.getName() != null) {
-//				System.out.println(" " + obj.getName());
-//			}
-//		}
-		
-		// test address index search
-		String reg = reader.getRegionNames().get(0);
-		List<City> cs = reader.getCities(reg);
-		for(City c : cs){
-			int buildings = 0;
-//			reader.preloadStreets(c);
-//			for(Street s : c.getStreets()){
-//				reader.preloadBuildings(s);
-//				buildings += s.getBuildings().size();
-//			}
-			System.out.println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings + " " + c.getEnName());
+
+		if (testMapSearch) {
+			testMapSearch(reader);
 		}
-//		List<PostCode> postcodes = reader.getPostcodes(reg);
-//		for(PostCode c : postcodes){
-//			reader.preloadStreets(c);
-//			System.out.println(c.getName());
-//		}
-//		List<City> villages = reader.getVillages(reg, new StringMatcher() {
-//			
-//			@Override
-//			public boolean matches(String name) {
-//				return false;
-//			}
-//		}, true);
-//		System.out.println("Villages " + villages.size());
-		
-		// test transport
-//		for(TransportIndex i : reader.transportIndexes){
-//			System.out.println(i.left + " " + i.right + " " + i.top + " " + i.bottom);
-//			System.out.println(i.stringTable.cacheOfStrings);
-//			System.out.println(i.stringTable.offsets);
-//			System.out.println(i.stringTable.window);
-//		}
-//		{
-//			int sleft = MapUtils.get31TileNumberX(27.573);
-//			int sright = MapUtils.get31TileNumberX(27.581);
-//			int stop = MapUtils.get31TileNumberY(53.912);
-//			int sbottom = MapUtils.get31TileNumberY(53.908);
-//			for (TransportStop s : reader.searchTransportIndex(buildSearchTransportRequest(sleft, sright, stop, sbottom, 15, null))) {
-//				System.out.println(s.getName());
-//				for (int i : s.getReferencesToRoutes()) {
-//					TransportRoute route = reader.getTransportRoute(i);
-//					System.out.println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
-//							+ route.getAvgBothDistance());
-//				}
-//			}
-//		}
-//		{
-//			int sleft = MapUtils.get31TileNumberX(27.473);
-//			int sright = MapUtils.get31TileNumberX(27.681);
-//			int stop = MapUtils.get31TileNumberY(53.912);
-//			int sbottom = MapUtils.get31TileNumberY(53.708);
-//			for (TransportStop s : reader.searchTransportIndex(buildSearchTransportRequest(sleft, sright, stop, sbottom, 16, null))) {
-//				System.out.println(s.getName());
-//				for (int i : s.getReferencesToRoutes()) {
-//					TransportRoute route = reader.getTransportRoute(i);
-//					System.out.println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
-//							+ route.getAvgBothDistance());
-//				}
-//			}
-//		}
-		
+		if(testAddressSearch) {
+			testAddressSearch(reader);
+		}
+		if(testTransportSearch) {
+			testTransportSearch(reader);
+		}
+
+		Locale.setDefault(new Locale("RU"));
+		if (testPoiSearch) {
+			PoiRegion poiRegion = reader.getPoiIndexes().get(0);
+			System.out.println(poiRegion.leftLongitude + " " + poiRegion.rightLongitude + " " + poiRegion.bottomLatitude + " "
+					+ poiRegion.topLatitude);
+			for (int i = 0; i < poiRegion.categories.size(); i++) {
+				System.out.println(poiRegion.categories.get(i));
+				System.out.println(" " + poiRegion.subcategories.get(i));
+			}
+
+			int sleft = MapUtils.get31TileNumberX(37.5);
+			int sright = MapUtils.get31TileNumberX(37.9);
+			int stop = MapUtils.get31TileNumberY(55.814);
+			int sbottom = MapUtils.get31TileNumberY(55.81);
+			SearchRequest<Amenity> req = buildSearchPoiRequest(sleft, sright, stop, sbottom, -1, new SearchPoiTypeFilter() {
+				@Override
+				public boolean accept(AmenityType type, String subcategory) {
+					return type == AmenityType.TRANSPORTATION && "fuel".equals(subcategory);
+				}
+			}, null);
+			List<Amenity> results = reader.searchPoi(req);
+			for (Amenity a : results) {
+				System.out.println(a.getType() + " " + a.getSubType() + " " + a.getName() + " " + a.getLocation());
+			}
+
+			System.out.println("Searching by name...");
+			req = buildSearchPoiRequest(sleft, sright, "kolie", null);
+			reader.searchPoiByName(req);
+			for (Amenity a : req.getSearchResults()) {
+				System.out.println(a.getType() + " " + a.getSubType() + " " + a.getName() + " " + a.getLocation());
+			}
+		}
+
 		System.out.println("MEMORY " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())); //$NON-NLS-1$
 		System.out.println("Time " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
+	}
+
+	private static void testTransportSearch(BinaryMapIndexReader reader) throws IOException {
+		// test transport
+		for (TransportIndex i : reader.transportIndexes) {
+			System.out.println(i.left + " " + i.right + " " + i.top + " " + i.bottom);
+			System.out.println(i.stringTable.cacheOfStrings);
+			System.out.println(i.stringTable.offsets);
+			System.out.println(i.stringTable.window);
+		}
+		{
+			int sleft = MapUtils.get31TileNumberX(27.573);
+			int sright = MapUtils.get31TileNumberX(27.581);
+			int stop = MapUtils.get31TileNumberY(53.912);
+			int sbottom = MapUtils.get31TileNumberY(53.908);
+			for (TransportStop s : reader.searchTransportIndex(buildSearchTransportRequest(sleft, sright, stop, sbottom, 15, null))) {
+				System.out.println(s.getName());
+				for (int i : s.getReferencesToRoutes()) {
+					net.osmand.data.TransportRoute route = reader.getTransportRoute(i);
+					System.out.println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
+							+ route.getAvgBothDistance());
+				}
+			}
+		}
+		{
+			int sleft = MapUtils.get31TileNumberX(27.473);
+			int sright = MapUtils.get31TileNumberX(27.681);
+			int stop = MapUtils.get31TileNumberY(53.912);
+			int sbottom = MapUtils.get31TileNumberY(53.708);
+			for (TransportStop s : reader.searchTransportIndex(buildSearchTransportRequest(sleft, sright, stop, sbottom, 16, null))) {
+				System.out.println(s.getName());
+				for (int i : s.getReferencesToRoutes()) {
+					net.osmand.data.TransportRoute route = reader.getTransportRoute(i);
+					System.out.println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
+							+ route.getAvgBothDistance());
+				}
+			}
+		}
+	}
+
+	private static void testAddressSearch(BinaryMapIndexReader reader) throws IOException {
+		// test address index search
+		String reg = reader.getRegionNames().get(0);
+		List<City> cs = reader.getCities(reg, null);
+		for(City c : cs){
+			int buildings = 0;
+			reader.preloadStreets(c, null);
+			for(Street s : c.getStreets()){
+				reader.preloadBuildings(s, buildAddressRequest((ResultMatcher<Building>) null));
+				buildings += s.getBuildings().size();
+			}
+			System.out.println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings + " " + c.getEnName());
+		}
+		List<PostCode> postcodes = reader.getPostcodes(reg, buildAddressRequest((ResultMatcher<MapObject>) null), null);
+		for(PostCode c : postcodes){
+			reader.preloadStreets(c, buildAddressRequest((ResultMatcher<Street>) null));
+			System.out.println(c.getName());
+		}
+		List<City> villages = reader.getVillages(reg, buildAddressRequest((ResultMatcher<MapObject>) null), new StringMatcher() {
+			
+			@Override
+			public boolean matches(String name) {
+				return false;
+			}
+		}, true);
+		System.out.println("Villages " + villages.size());
+	}
+
+	private static void testMapSearch(BinaryMapIndexReader reader) throws IOException {
+		System.out.println(reader.mapIndexes.get(0).encodingRules);
+		int sleft = MapUtils.get31TileNumberX(27.596);
+		int sright = MapUtils.get31TileNumberX(27.599);
+		int stop = MapUtils.get31TileNumberY(53.921);
+		int sbottom = MapUtils.get31TileNumberY(53.919);
+		System.out.println("SEARCH " + sleft + " " + sright + " " + stop + " " + sbottom);
+
+		for (BinaryMapDataObject obj : reader.searchMapIndex(buildSearchRequest(sleft, sright, stop, sbottom, 8, null))) {
+			if (obj.getName() != null) {
+				System.out.println(" " + obj.getName());
+			}
+		}
 	}
 	
 }

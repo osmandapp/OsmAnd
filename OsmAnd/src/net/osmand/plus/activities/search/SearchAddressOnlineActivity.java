@@ -18,12 +18,14 @@ import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Xml;
 import android.view.LayoutInflater;
@@ -37,7 +39,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SearchAddressOnlineActivity extends ListActivity {
+public class SearchAddressOnlineActivity extends ListActivity implements SearchActivityChild {
 	
 	private LatLon location;
 	private ProgressDialog progressDlg;
@@ -87,6 +89,33 @@ public class SearchAddressOnlineActivity extends ListActivity {
 		
 		if (lastResult != null) {
 			setListAdapter(lastResult);
+		}
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Intent intent = getIntent();
+		if(intent != null){
+			double lat = intent.getDoubleExtra(SearchActivity.SEARCH_LAT, 0);
+			double lon = intent.getDoubleExtra(SearchActivity.SEARCH_LON, 0);
+			if(lat != 0 || lon != 0){
+				location = new LatLon(lat, lon);
+			}
+		}
+		if (location == null && getParent() instanceof SearchActivity) {
+			location = ((SearchActivity) getParent()).getSearchPoint();
+		}
+		if (location == null) {
+			location = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+		}
+	}
+	
+	@Override
+	public void locationUpdate(LatLon l) {
+		location = l;
+		if(lastResult != null){
+			lastResult.notifyDataSetInvalidated();
 		}
 	}
 

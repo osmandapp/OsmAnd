@@ -1,5 +1,45 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="data_to_search_poi_not_available">Miestne údaje na hľadanie POI nie sú dostupné.</string>
+	<string name="poi_filter_by_name">Hľadať podľa názvu</string>
+	<string name="old_poi_file_should_be_deleted">Súbor POI údajov \'%1$s\' je neschválený a môže byť vymazaný.</string>
+	<string name="update_poi_file_not_found">Miestný súbor na udržiavanie POI zmien sa nenašiel a nemôže byť vytvorený.</string>
+	<string name="update_poi_does_not_change_indexes">Zmeny POI v aplikácii neovplyvnia stiahnuté mapové súbory, ale budú zozbierané v miestnom súbore.</string>
+	<string name="button_upgrade_osmandplus">Aktualizovať Osmand+</string>
+	<string name="map_version_changed_info">Na serveri sú nekompatibilné mapové súbory s Vašou aktuálnou verziou aplikácie. Na ich stiahnutie a použitie, prosím, aktualizujte aplikáciu na novšiu verziu.</string>
+	
+	<string name="local_index_mi_rename">Premenovať</string>
+	<string name="show_gpx_route">Zobraziť na mape</string>
+	
+	<string name="poi_filter_nominatim">Online Nominatim</string>
+	<string name="auto_follow_route_never">Nikdy</string>
+	<string name="choose_auto_follow_route">Vybrať nastavenia automatického nasledovania</string>
+	<string name="choose_auto_follow_route_descr">Výber časového intervalu na nasledovanie pozície na mape</string>
+	<string name="search_select_point">Vybrať</string>
+	<string name="local_index_description">Stiahnite nové, zálohujte alebo zmažte existujúce údaje. \nAktuálne offline údaje v zariadení (%1$s dostupných):</string>
+	<string name="search_position_current_location_search">Hľadám umiestnenie...</string>
+	<string name="search_position_current_location_found">Umiestnenie [Nájdené]</string>
+	<string name="search_position_address">Adresa...</string>
+	<string name="search_position_favorites">Obľúbené...</string>
+	<string name="search_position_undefined">Neurčené</string>
+	<string name="search_position_fixed">Súradnice</string>
+	<string name="search_position_current_location">Aktuálne umiestnenie...</string>
+	<string name="search_position_map_view">Posledné mapové zobrazenie</string>
+	
+	<string name="select_search_position">Hľadať v okolí:</string>
+	<string name="context_menu_item_search">Hľadať</string>
+	<string name="tip_recent_changes_0_6_7_t">Novinky vo verzii 0.6.7 :
+\n\t- Manažér offline údajov (sťahovanie, mazanie a záloha offline dát priamo v Osmande)
+\n\t- Obľúbené body a skupiny (kategorizácia, mazanie a organizácia obľúbených bodov)
+\n\t- GPX prieskumník v aplikácii (zobrazenie stôp, vzdialenosti, priemernej rýchlosti, stúpania, atď.)
+\n\t- GPX navigácia (užitočné možnosti, pokračovanie v navigovaní po páde, podpora kruhových objazdov)
+\n\t- Funkcia na uloženie cesty do GPX stopy, pre neskoršie použitie offline
+\n\t- Vylepšenie GPX stopovania  (filtrovanie niektorých nepresných umiestnení a uloženie presnosti/stúpania/rýchlosti)
+\n\t- Nahrávanie GPX pre OSM komunitu (http://download.osmand.net/gpx/)
+\n\t- Vylepšenie vektorového vykresľovania
+\n\t- Vylepšenie TTS jadra (oznamovanie presnej vzdialenosti, povolenie míľ)
+\n\t- Oprava chýb
+	</string>
 	<string name="save_route_dialog_title">Uložiť cestu ako GPX stopu</string>
 	<string name="route_successfully_saved_at">Cesta je úspešne uložená v \'%1$s\'.</string>
 	<string name="filename_input">Názov súboru: </string>
@@ -35,7 +75,6 @@
 	<string name="local_index_no_items_to_do">Žiadne položky pre akciu: %1$s</string>
 	<string name="local_index_action_do">Chcete %1$s %2$s položiek. Ste si istý?</string>
 	<string name="local_index_descr_title">Správca offline údajov:</string>
-	<string name="local_index_description">Stiahnite nové, zálohujte alebo vymažte existujúce údaje.\nAktuálne offline údaje v zariadení:</string>
 	<string name="local_index_mi_restore">Obnoviť</string>
 	<string name="local_index_mi_backup">Zálohovať</string>
 	<string name="local_index_mi_delete">Vymazať</string>
@@ -199,8 +238,8 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 	<string name="mile_per_hour">mph</string>
 	<string name="mile">mi</string>
 	<string name="send_location_way_choose_title">Zdieľať umiestnenie cez</string>
-	<string name="send_location_sms_pattern">Ja som tu: {0}, {1}</string>
-	<string name="send_location_email_pattern">Na zobrazenie umiestnenia nasledujte webovský odkaz {0} alebo odkaz androidovského obsahu {1}</string>
+	<string name="send_location_sms_pattern">Ja som tu: %1$s, %2$s</string>
+	<string name="send_location_email_pattern">Na zobrazenie umiestnenia nasledujte webovský odkaz %1$s alebo odkaz androidovského obsahu %2$s</string>
 	<string name="send_location">Poslať umiestnenie</string>
 	<string name="context_menu_item_share_location">Zdieľať umiestnenie</string>
 	<string name="add_waypoint_dialog_added">Waypoint \'\'{0}\'\' bol úspešne pridaný</string>

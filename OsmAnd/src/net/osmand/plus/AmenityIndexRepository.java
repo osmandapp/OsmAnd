@@ -2,6 +2,7 @@ package net.osmand.plus;
 
 import java.util.List;
 
+import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 
 public interface AmenityIndexRepository {
@@ -15,8 +16,8 @@ public interface AmenityIndexRepository {
 	/**
 	 * Search amenities in the specified box doesn't cache results 
 	 */
-	public List<Amenity> searchAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int limit,
-			PoiFilter filter, List<Amenity> amenities);
+	public List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom, PoiFilter filter, List<Amenity> amenities,
+			ResultMatcher<Amenity> matcher);
 
 
 	public void clearCache();
@@ -25,5 +26,6 @@ public interface AmenityIndexRepository {
 			String filterId, List<Amenity> toFill, boolean fillFound);
 
 	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom,
-			int limitPoi, PoiFilter filter, List<Amenity> toFill);
+			PoiFilter filter, ResultMatcher<Amenity> matcher);
+	
 }

@@ -48,6 +48,12 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 	private ReadOptions randomAccessOptions;
 	
 	private DBAccessor accessor;
+
+	private PreparedStatement iterateNodes;
+
+	private PreparedStatement iterateWays;
+
+	private PreparedStatement iterateRelations;
 	
 	
 	public interface OsmDbVisitor {
@@ -77,6 +83,12 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 					"from relations r left join tags t on r.id = t.id and t.type = 2 and r.ord = 0 " + //$NON-NLS-1$
 					"where r.id = ? order by r.ord"); //$NON-NLS-1$
 			pselectTags = dbConn.prepareStatement("select skeys, value from tags where id = ? and type = ?"); //$NON-NLS-1$
+		
+			iterateNodes = dbConn.prepareStatement("select n.id, n.latitude, n.longitude, t.skeys, t.value from node n inner join tags t on n.id = t.id and t.type = 0 order by n.id"); //$NON-NLS-1$
+			iterateWays  = dbConn.prepareStatement("select w.id, w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " + //$NON-NLS-1$
+					"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 inner join node n on w.node = n.id " + //$NON-NLS-1$
+					"order by w.id, w.ord"); //$NON-NLS-1$
+			iterateRelations = dbConn.prepareStatement("select r.id, t.skeys, t.value  from relations r inner join tags t on t.id = r.id and t.type = 2 and r.ord = 0"); //$NON-NLS-1$
 		}
 	}
 	
@@ -92,13 +104,17 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		return allWays;
 	}
 	
-	public void loadEntityData(Entity e, boolean loadTags) throws SQLException {
+	public void loadEntityData(Entity e) throws SQLException {
+		if (e.isDataLoaded()) { //data was already loaded, nothing to do
+			return;
+		}
 		if (e instanceof Node || (e instanceof Way && !((Way) e).getNodes().isEmpty())) {
 			// do not load tags for nodes inside way
 			return;
 		}
 		if(dialect == DBDialect.NOSQL){
-			loadEntityDataNoSQL(e, loadTags);
+			loadEntityDataNoSQL(e);
+			e.entityDataLoaded();
 			return;
 		}
 		
@@ -172,6 +188,9 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 							way.putTag(rs.getString(3), rs.getString(4));
 						}
 					}
+					if (way.getNodes() == null) {
+						System.err.println("Strange, way with id:" + i.getId() + " has no nodes?");
+					}
 					rs.close();
 				}
 			} else if (i.getType() == EntityType.RELATION) {
@@ -201,34 +220,32 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		}
 
 		e.initializeLinks(map);
+		e.entityDataLoaded();
 	}
 	
 	
-	
-
 	public int iterateOverEntities(IProgress progress, EntityType type, OsmDbVisitor visitor) throws SQLException, InterruptedException {
 		if(dialect == DBDialect.NOSQL){
 			return iterateOverEntitiesNoSQL(progress, type, visitor);
 		}
 		Statement statement = dbConn.createStatement();
-		String select;
+		PreparedStatement select;
 		int count = 0;
 		
 		// stat.executeUpdate("create table tags (id "+longType+", type smallint, skeys varchar(1024), value varchar(1024))");
 		// stat.executeUpdate("create table ways (id "+longType+", node "+longType+", ord smallint)");
 //		stat.executeUpdate("create table relations (id "+longType+", member "+longType+", type smallint, role varchar(1024), ord smallint)");
 		computeRealCounts(statement);
+		statement.close();
 		if (type == EntityType.NODE) {
 			// filter out all nodes without tags
-			select = "select n.id, n.latitude, n.longitude, t.skeys, t.value from node n inner join tags t on n.id = t.id and t.type = 0 order by n.id"; //$NON-NLS-1$
+			select = iterateNodes;
 			count = allNodes;
 		} else if (type == EntityType.WAY) {
-			select = "select w.id, w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " + //$NON-NLS-1$
-					"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 inner join node n on w.node = n.id " + //$NON-NLS-1$
-					"order by w.id, w.ord"; //$NON-NLS-1$
+			select = iterateWays;
 			count = allWays;
 		} else {
-			select = "select r.id, t.skeys, t.value  from relations r inner join tags t on t.id = r.id and t.type = 2 and r.ord = 0"; //$NON-NLS-1$
+			select = iterateRelations;
 			count = allRelations;
 		}
 		progress.startWork(count);
@@ -236,37 +253,34 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		BlockingQueue<Entity> toProcess = new ArrayBlockingQueue<Entity>(100000);
 		
 		//produce
-		EntityProducer entityProducer = new EntityProducer(toProcess, type, statement, select);
+		EntityProducer entityProducer = new EntityProducer(toProcess, type, select);
 		entityProducer.start();
 		
-		count = 0;
-		while (true) {
-			Entity entityToProcess = toProcess.take();
-			if (entityToProcess == entityProducer.getEndingEntity()) {
-				//the last entity...
-				break;
-			}
+		int counter = 0;
+		Entity entityToProcess = null;
+		Entity endEntity = entityProducer.getEndingEntity();
+		while ((entityToProcess = toProcess.take())  != endEntity) {
 			if (progress != null) {
 				progress.progress(1);
 			}
-			count++;
+			counter++;
 			visitor.iterateEntity(entityToProcess, this);
 		}
 		return count;
 	}
 
 	
-	private void computeRealCounts(Statement statement) throws SQLException {
+	public void computeRealCounts(Statement statement) throws SQLException {
 		if (!realCounts) {
 			realCounts = true;
 			// filter out all nodes without tags
-			allNodes = statement.executeQuery("select count(*) from node n inner join tags t on n.id = t.id and t.type = 0").getInt(1); //$NON-NLS-1$
-			allWays = statement.executeQuery("select count(*) from ways w").getInt(1); //$NON-NLS-1$
-			allRelations = statement.executeQuery("select count(*) from relations r inner join tags t on t.id = r.id and t.type = 2 and r.ord = 0").getInt(1); //$NON-NLS-1$
+			allNodes = statement.executeQuery("select count(distinct n.id) from node n inner join tags t on n.id = t.id and t.type = 0").getInt(1); //$NON-NLS-1$
+			allWays = statement.executeQuery("select count(distinct w.id) from ways w").getInt(1); //$NON-NLS-1$
+			allRelations = statement.executeQuery("select count(distinct r.id) from relations r inner join tags t on t.id = r.id and t.type = 2 and r.ord = 0").getInt(1); //$NON-NLS-1$
 		}
 	}
 
-	private void loadEntityDataNoSQL(Entity e, boolean loadTags) {
+	private void loadEntityDataNoSQL(Entity e) {
 		Collection<EntityId> ids = e instanceof Relation ? ((Relation) e).getMemberIds() : ((Way) e).getEntityIds();
 		Map<EntityId, Entity> map = new LinkedHashMap<EntityId, Entity>();
 		for (EntityId i : ids) {
@@ -275,7 +289,7 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 			String value = accessor.get(randomAccessOptions, key);
 			if (value != null && value.length() > 0) {
 				try {
-					Entity es = loadEntityNoSqlFromValue(randomAccessOptions, key, value, loadTags, false);
+					Entity es = loadEntityNoSqlFromValue(randomAccessOptions, key, value, false);
 					map.put(i, es);
 				} catch (JSONException e1) {
 					log.warn(key + " - " + e1.getMessage() + " " + value + "("+value.length()+"]", e1);
@@ -292,7 +306,7 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 	}
 	
 	private Entity loadEntityNoSqlFromValue(ReadOptions opts,
-			String key, String value, boolean loadTags, boolean skipIfEmptyTags) throws JSONException{
+			String key, String value, boolean skipIfEmptyTags) throws JSONException{
 		if(value == null){
 			return null;
 		}
@@ -346,7 +360,7 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 			while(n == ArraySerializer.ELEMENT){
 				String pointId = "0"+ tokenizer.value();
 				String pointVal = this.accessor.get(opts, pointId);
-				Node node = (Node) loadEntityNoSqlFromValue(opts, pointId, pointVal, false, false);
+				Node node = (Node) loadEntityNoSqlFromValue(opts, pointId, pointVal, false);
 				if(node != null){
 					((Way) e).addNode(node);
 				}
@@ -398,11 +412,11 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 			try {
 				Entity e = null;
 				if (type == EntityType.NODE) {
-					e = loadEntityNoSqlFromValue(opts, key, value, true, true);
+					e = loadEntityNoSqlFromValue(opts, key, value, true);
 				} else if (type == EntityType.WAY) {
-					e = loadEntityNoSqlFromValue(opts, key, value, true, false);
+					e = loadEntityNoSqlFromValue(opts, key, value, false);
 				} else {
-					e = loadEntityNoSqlFromValue(opts, key, value, true, false);
+					e = loadEntityNoSqlFromValue(opts, key, value, false);
 				}
 				
 				if(e != null){
@@ -435,6 +449,15 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 			if (pselectTags != null) {
 				pselectTags.close();
 			}
+			if (iterateNodes != null) {
+				iterateNodes.close();
+			}
+			if (iterateRelations != null) {
+				iterateRelations.close();
+			}
+			if (iterateWays != null) {
+				iterateWays.close();
+			}
 		}
 		
 	}
@@ -442,17 +465,14 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 	public class EntityProducer extends Thread {
 
 		private final BlockingQueue<Entity> toProcess;
-		private final Statement statement;
-		private final String select;
+		private final PreparedStatement select;
 		private final EntityType type;
 		private final Entity endingEntity = new Node(0,0,0);
 		
-		public EntityProducer(BlockingQueue<Entity> toProcess, EntityType type,
-				Statement statement, String select) {
+		public EntityProducer(BlockingQueue<Entity> toProcess, EntityType type, PreparedStatement select2) {
 					this.toProcess = toProcess;
 					this.type = type;
-					this.statement = statement;
-					this.select = select;
+					this.select = select2;
 					setDaemon(true);
 					setName("EntityProducer");
 		}
@@ -465,7 +485,8 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		public void run() {
 			ResultSet rs;
 			try {
-				rs = statement.executeQuery(select);
+				select.execute();
+				rs = select.getResultSet();
 //				rs.setFetchSize(1000); !! not working for SQLite would case troubles probably
 				Entity prevEntity = null;
 

@@ -13,10 +13,12 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.Algoritms;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
+import net.osmand.ResultMatcher;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.OsmAndFormatter;
 import net.osmand.data.AmenityType;
 import net.osmand.map.ITileSource;
+import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.PoiFilter;
@@ -424,8 +426,10 @@ public class MapActivityLayers {
 		
 		final PoiFiltersHelper poiFilters = ((OsmandApplication)getApplication()).getPoiFilters();
 		for (PoiFilter f : poiFilters.getUserDefinedPoiFilters()) {
-			userDefined.add(f);
-			list.add(f.getName());
+			if(!f.getFilterId().equals(PoiFilter.BY_NAME_FILTER_ID)){
+				userDefined.add(f);
+				list.add(f.getName());
+			}
 		}
 		for(AmenityType t : AmenityType.values()){
 			list.add(OsmAndFormatter.toPublicString(t, activity));
@@ -517,10 +521,29 @@ public class MapActivityLayers {
 					}
 					updateMapSource(mapView, null);
 				} else if (layerKey.equals(layerInstallMore)) {
-					SettingsActivity.installMapLayers(activity, new DialogInterface.OnClickListener() {
+					SettingsActivity.installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {
+						TileSourceTemplate template = null;
+						int count = 0;
 						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							openLayerSelectionDialog(mapView);
+						public boolean publish(TileSourceTemplate object) {
+							if(object == null){
+								if(count == 1){
+									settings.MAP_TILE_SOURCES.set(template.getName());
+									settings.MAP_VECTOR_DATA.set(false);
+									updateMapSource(mapView, settings.MAP_TILE_SOURCES);
+								} else {
+									selectMapLayer(mapView);
+								}
+							} else {
+								count ++;
+								template = object;
+							}
+							return false;
+						}
+						
+						@Override
+						public boolean isCancelled() {
+							return false;
 						}
 					});
 				} else {
@@ -554,10 +577,29 @@ public class MapActivityLayers {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if (which == items.length - 1){
-					SettingsActivity.installMapLayers(activity, new DialogInterface.OnClickListener() {
+					SettingsActivity.installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {
+						TileSourceTemplate template = null;
+						int count = 0;
 						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							openLayerSelectionDialog(mapView);							
+						public boolean publish(TileSourceTemplate object) {
+							if(object == null){
+								if(count == 1){
+									mapPref.set(template.getName());
+									mapControlsLayer.showAndHideTransparencyBar(transparencyPref, transparencyToChange);
+									updateMapSource(mapView, mapPref);
+								} else {
+									selectMapOverlayLayer(mapView, mapPref, transparencyPref, transparencyToChange);
+								}
+							} else {
+								count ++;
+								template = object;
+							}
+							return false;
+						}
+						
+						@Override
+						public boolean isCancelled() {
+							return false;
 						}
 					});
 				} else {

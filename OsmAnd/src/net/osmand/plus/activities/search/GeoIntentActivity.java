@@ -233,7 +233,7 @@ public class GeoIntentActivity extends ListActivity {
 			for (RegionAddressRepository rar : countriesToSearch) {
 				List<MapObject> citiesFound = new ArrayList<MapObject>();
 				for (String maybeCity : elements) {
-					rar.fillWithSuggestedCities(maybeCity, citiesFound, null);
+					citiesFound.addAll(rar.fillWithSuggestedCities(maybeCity, null, null));
 				}
 				if (!citiesFound.isEmpty()) {
 					citiesForRegion.put(rar, citiesFound);
@@ -243,8 +243,7 @@ public class GeoIntentActivity extends ListActivity {
 			Map<MapObject, List<Street>> streetsForCity = new HashMap<MapObject, List<Street>>();
 			if (citiesForRegion.isEmpty()) {
 				for (RegionAddressRepository rar : countriesToSearch) {
-					ArrayList<MapObject> allcities = new ArrayList<MapObject>();
-					rar.fillWithSuggestedCities("", allcities, location);
+					List<MapObject> allcities = rar.fillWithSuggestedCities("", null, location);
 					findStreetsForCities(streetsForCity, rar, allcities);
 				}
 			} else {
@@ -274,8 +273,7 @@ public class GeoIntentActivity extends ListActivity {
 				Map<MapObject, List<Street>> streetsForCity,
 				RegionAddressRepository rar, List<MapObject> allcities) {
 			for (MapObject city : allcities) {
-				List<Street> streets = new ArrayList<Street>();
-				rar.fillWithSuggestedStreets(city, streets,
+				List<Street> streets = rar.fillWithSuggestedStreets(city, null,
 						elements.toArray(new String[] {}));
 				// we must do this, or we will fill up the whole memory (streets
 				// are preloaded...)

@@ -16,16 +16,17 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
-import net.osmand.binary.BinaryMapIndexWriter;
 import net.osmand.data.Boundary;
 import net.osmand.data.Building;
 import net.osmand.data.City;
@@ -68,46 +69,51 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	private DataTileManager<City> cityVillageManager = new DataTileManager<City>(13);
 	private DataTileManager<City> cityManager = new DataTileManager<City>(10);
 	private List<Relation> postalCodeRelations = new ArrayList<Relation>();
-	private Map<City, Boundary> cityBoundaries = new LinkedHashMap<City, Boundary>();
+	private Map<City, Boundary> cityBoundaries = new HashMap<City, Boundary>();
+	private Set<Boundary> allBoundaries = new HashSet<Boundary>();
 	private TLongHashSet visitedBoundaryWays = new TLongHashSet();
 	
 	private boolean normalizeStreets; 
 	private String[] normalizeDefaultSuffixes;
 	private String[] normalizeSuffixes;
 	
-	private String cityAdminLevel;
 	private boolean saveAddressWays;
 	
 	// TODO
 	Connection mapConnection;
 	DBStreetDAO streetDAO;
-	
+
+
+
 	public class DBStreetDAO
 	{
-		protected void writeStreetWayNodes(Long streetId, Way way)
-				throws SQLException {
-			for (Node n : way.getNodes()) {
-				if (n == null) {
-					continue;
+		protected void writeStreetWayNodes(Set<Long> streetIds, Way way) throws SQLException {
+			for (Long streetId : streetIds) {
+				for (Node n : way.getNodes()) {
+					if (n == null) {
+						continue;
+					}
+					addressStreetNodeStat.setLong(1, n.getId());
+					addressStreetNodeStat.setDouble(2, n.getLatitude());
+					addressStreetNodeStat.setDouble(3, n.getLongitude());
+					addressStreetNodeStat.setLong(5, way.getId());
+					addressStreetNodeStat.setLong(4, streetId);
+					addBatch(addressStreetNodeStat);
 				}
-				addressStreetNodeStat.setLong(1, n.getId());
-				addressStreetNodeStat.setDouble(2, n.getLatitude());
-				addressStreetNodeStat.setDouble(3, n.getLongitude());
-				addressStreetNodeStat.setLong(5, way.getId());
-				addressStreetNodeStat.setLong(4, streetId);
-				addBatch(addressStreetNodeStat);
 			}
 		}
 		
-		protected void writeBuilding(Long streetId, Building building) throws SQLException {
-			addressBuildingStat.setLong(1, building.getId());
-			addressBuildingStat.setDouble(2, building.getLocation().getLatitude());
-			addressBuildingStat.setDouble(3, building.getLocation().getLongitude());
-			addressBuildingStat.setString(4, building.getName());
-			addressBuildingStat.setString(5, building.getEnName());
-			addressBuildingStat.setLong(6, streetId);
-			addressBuildingStat.setString(7, building.getPostcode() == null ? null : building.getPostcode().toUpperCase());
-			addBatch(addressBuildingStat);
+		protected void writeBuilding(Set<Long> streetIds, Building building) throws SQLException {
+			for (Long streetId : streetIds) {
+				addressBuildingStat.setLong(1, building.getId());
+				addressBuildingStat.setDouble(2, building.getLocation().getLatitude());
+				addressBuildingStat.setDouble(3, building.getLocation().getLongitude());
+				addressBuildingStat.setString(4, building.getName());
+				addressBuildingStat.setString(5, building.getEnName());
+				addressBuildingStat.setLong(6, streetId);
+				addressBuildingStat.setString(7, building.getPostcode() == null ? null : building.getPostcode().toUpperCase());
+				addBatch(addressBuildingStat);
+			}
 		}
 
 		public Long findStreet(String name, City city, String cityPart) throws SQLException {
@@ -151,7 +157,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	
 	public class CachedDBStreetDAO extends DBStreetDAO
 	{
-		private Map<String, Long> addressStreetLocalMap = new LinkedHashMap<String, Long>();
+		private Map<String, Long> addressStreetLocalMap = new HashMap<String, Long>();
 		private TLongHashSet addressBuildingLocalSet = new TLongHashSet();
 		private TLongHashSet addressStreetNodeLocalSet = new TLongHashSet();
 
@@ -165,14 +171,14 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		}
 		
 		@Override
-		protected void writeStreetWayNodes(Long streetId, Way way)
+		protected void writeStreetWayNodes(Set<Long> streetId, Way way)
 				throws SQLException {
 			super.writeStreetWayNodes(streetId, way);
 			addressStreetNodeLocalSet.add(way.getId());
 		}
 		
 		@Override
-		protected void writeBuilding(Long streetId, Building building)
+		protected void writeBuilding(Set<Long> streetId, Building building)
 				throws SQLException {
 			super.writeBuilding(streetId, building);
 			addressBuildingLocalSet.add(building.getId());
@@ -229,7 +235,6 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		this.normalizeStreets = normalizeStreets;
 		this.normalizeDefaultSuffixes = normalizeDefaultSuffixes;
 		this.normalizeSuffixes = normalizeSuffixes;
-		this.cityAdminLevel = cityAdminLevel;
 		this.saveAddressWays = saveAddressWays;
 	}
 
@@ -248,120 +253,148 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	}
 	
 	public void indexBoundariesRelation(Entity e, OsmDbAccessorContext ctx) throws SQLException {
-		if (isBoundary(e) && hasNeededCityAdminLevel(e)) {
-			Boundary boundary = extractBoundary(e, ctx);
+		Boundary boundary = extractBoundary(e, ctx);
+		if (boundary != null && boundary.getAdminLevel() >= 4 && boundary.getCenterPoint() != null && !Algoritms.isEmpty(boundary.getName())) {
+			LatLon boundaryCenter = boundary.getCenterPoint();
+			List<City> citiesToSearch = new ArrayList<City>();
+			citiesToSearch.addAll(cityManager.getClosestObjects(boundaryCenter.getLatitude(), boundaryCenter.getLongitude(), 3));
+			citiesToSearch.addAll(cityVillageManager.getClosestObjects(boundaryCenter.getLatitude(), boundaryCenter.getLongitude(), 3));
 
-			if (boundary != null && boundary.getCenterPoint() != null) {
-				LatLon point = boundary.getCenterPoint();
-				boolean cityFound = false;
-				boolean containsCityInside = false;
-				for (City c : cityManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
+			List<City> cityFound = new ArrayList<City>();
+			String boundaryName = boundary.getName().toLowerCase();
+			for (City c : citiesToSearch) {
+				if (boundary.containsPoint(c.getLocation())) {
+					if (boundaryName.equalsIgnoreCase(c.getName())) {
+						cityFound.add(c);
+						break;
+					}
+				}
+			}
+			//We should not look for similarities, this can be 'very' wrong....
+			if (cityFound.isEmpty()) {
+				// try to find same name in the middle
+				for (City c : citiesToSearch) {
 					if (boundary.containsPoint(c.getLocation())) {
-						if (boundary.getName() == null || boundary.getName().equalsIgnoreCase(c.getName())) {
-							putCityBoundary(boundary, c);
-							cityFound = true;
-							containsCityInside = true;
+						String lower = c.getName().toLowerCase();
+						if (boundaryName.startsWith(lower + " ") || boundaryName.endsWith(lower + " ") || boundaryName.contains(" " + lower + " ")) {
+							cityFound.add(c);
+							break;
 						}
-					}
-				}
-				// TODO mark all suburbs inside city as is_in tag (!) or use another solution
-				if (!cityFound) {
-					for (City c : cityVillageManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
-						if (boundary.containsPoint(c.getLocation())) {
-							if (boundary.getName() == null || boundary.getName().equalsIgnoreCase(c.getName())) {
-								putCityBoundary(boundary, c);
-								cityFound = true;
-							}
-						}
-					}
-				}
-				if (!cityFound && boundary.getName() != null) {
-					// / create new city for named boundary very rare case that's why do not proper generate id
-					// however it could be a problem
-					City nCity = new City(containsCityInside ? CityType.CITY : CityType.SUBURB);
-					nCity.setLocation(point.getLatitude(), point.getLongitude());
-					nCity.setId(-boundary.getBoundaryId());
-					nCity.setName(boundary.getName());
-					putCityBoundary(boundary, nCity);
-					cityVillageManager.registerObject(point.getLatitude(), point.getLongitude(), nCity);
-
-					writeCity(nCity);
-					// commit to put all cities
-					if (pStatements.get(addressCityStat) > 0) {
-						addressCityStat.executeBatch();
-						pStatements.put(addressCityStat, 0);
 					}
 				}
 			}
-		} else if (isBoundary(e) && hasGreaterCityAdminLevel(cityAdminLevel,e)) {
-			//Any lower admin_level boundary is attached to the nearest city
-			Boundary boundary = extractBoundary(e, ctx);
-			if (boundary != null && boundary.getCenterPoint() != null) {
-				LatLon point = boundary.getCenterPoint();
-				for (City c : cityManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
-					Boundary cityB = cityBoundaries.get(c);
-					if (cityB == null) {
-						cityB = new Boundary(); //create empty boundary that is replaced with the real one for the city (if found)
-						putCityBoundary(cityB, c);
+//			if (cityFound.isEmpty()) {
+				// try to find closes city to the boundary center
+//				double minDist = Double.MAX_VALUE;
+//				City closestCity = null;
+//				for (City c : citiesToSearch) {
+//					if (boundary.containsPoint(c.getLocation())) {
+////						double dist = MapUtils.getDistance(boundaryCenter, c.getLocation());
+////						if (dist < minDist) {
+////							dist = minDist;
+////							closestCity = c;
+////						}
+//						cityFound.add(c);
+//					}
+//				}
+//				cityFound = closestCity;
+//			}
+			if (!cityFound.isEmpty()) {
+				//we can have more cities in one boundary!! (suburbs...)
+				putCityBoundary(boundary, cityFound);
+			}
+			allBoundaries.add(boundary);
+		}
+	}
+
+	public void bindCitiesWithBoundaries() {
+		Iterator<Boundary> iter = allBoundaries.iterator();
+		while (iter.hasNext()) {
+			Boundary b = iter.next();
+			if (!b.computeIsClosedWay()) {
+				System.out.println("Removing not closed boundary: " + b.getName() + " alevel:" + b.getAdminLevel());
+				iter.remove();
+			}
+		}
+		
+		//for cities without boundaries, try to find the right one
+		for (City c : cities.values()) {
+			Boundary cityB = cityBoundaries.get(c);
+			int smallestAdminLevel = 8; //TODO start at level 8 for now...
+			if (cityB == null) {
+				LatLon location = c.getLocation();
+				Boundary smallestoundary = null;
+				//try to found boundary
+				for (Boundary b : allBoundaries) {
+					if (b.containsPoint(location.getLatitude(), location.getLongitude())) {
+						//the bigger the admin level, the smaller the boundary :-)
+						if (b.getAdminLevel() > smallestAdminLevel) {
+							smallestAdminLevel = b.getAdminLevel();
+							smallestoundary = b;
+						}
 					}
-					cityB.addSubBoundary(boundary);
-					break;
+				}
+				if (smallestoundary != null) {
+					putCityBoundary(smallestoundary, Collections.singletonList(c));
 				}
 			}
 		}
 	}
 
-	private void putCityBoundary(Boundary boundary, City c) {
-		final Boundary oldBoundary = cityBoundaries.get(c);
-		if (oldBoundary != null) {
-			boundary.addSubBoundaries(oldBoundary.getSubboundaries());
+	private int extractBoundaryAdminLevel(Entity e) {
+		int adminLevel = -1;
+		try {
+			String tag = e.getTag(OSMTagKey.ADMIN_LEVEL);
+			if (tag == null) {
+				return adminLevel;
+			}
+			return Integer.parseInt(tag);
+		} catch (NumberFormatException ex) {
+			return adminLevel;
 		}
-		cityBoundaries.put(c, boundary);
 	}
 
+	private void putCityBoundary(Boundary boundary, List<City> cities) {
+		for (City cityFound : cities) {
+			final Boundary oldBoundary = cityBoundaries.get(cityFound);
+			if (oldBoundary != null) {
+				// try to found the biggest area (not small center district)
+				if (oldBoundary.getAdminLevel() > boundary.getAdminLevel() && !oldBoundary.getName().equalsIgnoreCase(cityFound.getName())) {
+					cityBoundaries.put(cityFound, boundary);
+					System.out.println("City: " + cityFound.getName() + " boundary: " + boundary.getName());
+				} else if(boundary.getName().equalsIgnoreCase(cityFound.getName()) && 
+						!oldBoundary.getName().equalsIgnoreCase(cityFound.getName())){
+					cityBoundaries.put(cityFound, boundary);
+					System.out.println("City: " + cityFound.getName() + " boundary: " + boundary.getName());
+				} else if(oldBoundary.getAdminLevel() == boundary.getAdminLevel() && 
+						oldBoundary != boundary && boundary.getName().equalsIgnoreCase(oldBoundary.getName())){
+					if(!oldBoundary.isClosedWay() && !boundary.isClosedWay()){
+						oldBoundary.getInnerWays().addAll(boundary.getInnerWays());
+						oldBoundary.getOuterWays().addAll(boundary.getOuterWays());
+					}
+				}
+			} else {
+				cityBoundaries.put(cityFound, boundary);
+				System.out.println("City: " + cityFound.getName() + " boundary: " + boundary.getName());
+			}
+		}
+	}
 
-	private boolean isBoundary(Entity e)
-	{
+	private boolean isBoundary(Entity e) {
 		return "administrative".equals(e.getTag(OSMTagKey.BOUNDARY)) && (e instanceof Relation || e instanceof Way);
 	}
 	
-	private boolean hasNeededCityAdminLevel(Entity e)
-	{
-		return cityAdminLevel.equals(e.getTag(OSMTagKey.ADMIN_LEVEL));
-	}
-
-	private boolean hasGreaterCityAdminLevel(String admin_level, Entity e)
-	{
-		try {
-			return Integer.parseInt(admin_level) < Integer.parseInt(e.getTag(OSMTagKey.ADMIN_LEVEL));
-		} catch (NumberFormatException ex) {
-			return false;
-		}
-	}
-
-	private boolean hasGreaterCityAdminLevel(int admin_level, Boundary b)
-	{
-		try {
-			return admin_level < Integer.parseInt(b.getAdminLevel());
-		} catch (NumberFormatException ex) {
-			return false;
-		}
-	}
-
-	private Boundary extractBoundary(Entity e, OsmDbAccessorContext ctx)
-			throws SQLException {
+	private Boundary extractBoundary(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		if (isBoundary(e)) {
 			Boundary boundary = null;
 			if (e instanceof Relation) {
-				Relation i = (Relation) e;
-				ctx.loadEntityData(i, true);
-				boundary = new Boundary();
-				boundary.setAdminLevel(e.getTag(OSMTagKey.ADMIN_LEVEL));
-				if (i.getTag(OSMTagKey.NAME) != null) {
-					boundary.setName(i.getTag(OSMTagKey.NAME));
-				}
-				boundary.setBoundaryId(i.getId());
-				Map<Entity, String> entities = i.getMemberEntities();
+				Relation aRelation = (Relation) e;
+				ctx.loadEntityData(aRelation);
+				boundary = new Boundary(true); //TODO here should be true or false ??? or, how it should be computed in this case?
+				boundary.setName(aRelation.getTag(OSMTagKey.NAME));
+				boundary.setBoundaryId(aRelation.getId());
+				boundary.setAdminLevel(extractBoundaryAdminLevel(aRelation));
+				Map<Entity, String> entities = aRelation.getMemberEntities();
 				for (Entity es : entities.keySet()) {
 					if (es instanceof Way) {
 						boolean inner = "inner".equals(entities.get(es)); //$NON-NLS-1$
@@ -375,23 +408,21 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 							}
 							boundary.getOuterWays().add((Way) es);
 						}
-					} else if (isBoundary(es)) {
-						//add any sub boundaries...
-						boundary.addSubBoundary(extractBoundary(es, ctx));
 					}
 				}
 			} else if (e instanceof Way) {
 				if (!visitedBoundaryWays.contains(e.getId())) {
-					boundary = new Boundary();
-					boundary.setAdminLevel(e.getTag(OSMTagKey.ADMIN_LEVEL));
-					if (e.getTag(OSMTagKey.NAME) != null) {
-						boundary.setName(e.getTag(OSMTagKey.NAME));
+					List<Long> nodeIds = ((Way) e).getNodeIds();
+					boolean closed = false;
+					if(nodeIds.size() > 0){
+						closed = Algoritms.objectEquals(nodeIds.get(0), nodeIds.get(nodeIds.size() - 1));
 					}
+					boundary = new Boundary(closed);
+					boundary.setName(e.getTag(OSMTagKey.NAME));
 					boundary.setBoundaryId(e.getId());
+					boundary.setAdminLevel(extractBoundaryAdminLevel(e));
 					boundary.getOuterWays().add((Way) e);
-
 				}
-
 			}
 			return boundary;
 		} else {
@@ -409,7 +440,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				// try to find appropriate city/street
 				City c = null;
 				// load with member ways with their nodes and tags !
-				ctx.loadEntityData(i, true);
+				ctx.loadEntityData(i);
 
 				Collection<Entity> members = i.getMembers("is_in"); //$NON-NLS-1$
 				Relation a3 = null;
@@ -419,7 +450,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 						a6 = i;
 					}
 					Entity in = members.iterator().next();
-					ctx.loadEntityData(in, true);
+					ctx.loadEntityData(in);
 					if (in instanceof Relation) {
 						// go one level up for house
 						if (house) {
@@ -427,7 +458,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 							members = ((Relation) in).getMembers("is_in"); //$NON-NLS-1$
 							if (!members.isEmpty()) {
 								in = members.iterator().next();
-								ctx.loadEntityData(in, true);
+								ctx.loadEntityData(in);
 								if (in instanceof Relation) {
 									a3 = (Relation) in;
 								}
@@ -460,7 +491,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 							}
 						}
 
-						Long streetId = getStreetInCity(c, name, location, (a6.getId() << 2) | 2);
+						Set<Long> streetId = registerStreetInCities(name, null, location, Collections.singletonList(c));
 						if (streetId == null) {
 							return;
 						}
@@ -590,47 +621,70 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		return newName.trim();
 	}
 
-	public Long getStreetInCity(City city, String name, LatLon location, long initId) throws SQLException {
-		if (name == null || city == null) {
-			return null;
+	public Set<Long> getStreetInCity(Set<String> isInNames, String name, String nameEn, LatLon location) throws SQLException {
+		if (name == null || location == null) {
+			return Collections.emptySet();
+		
 		}
-		Long foundId = null;
-
 		name = normalizeStreetName(name);
-		String cityPart = findCityPart(city,location);
-		foundId = streetDAO.findStreet(name,city,cityPart);
-
-		if (foundId == null) {
-			insertStreetData(addressStreetStat, initId, name, Junidecode.unidecode(name), 
-					location.getLatitude(), location.getLongitude(), city.getId(), cityPart);
-			streetDAO.insertStreet(addressStreetStat, name, city, cityPart, initId);
-			foundId = initId;
-		}
-		return foundId;
-	}
-
-	private String findCityPart(City city, LatLon location) {
-		final Boundary cityBoundary = cityBoundaries.get(city);
-		int greatestBoudnaryLevel = getParsedCityAdminLevel();
-		Boundary greatestBoundary = cityBoundary;
-		if (cityBoundary != null) {
-			for (Boundary subB : allSubBoundaries(cityBoundary)) {
-				if (subB.containsPoint(location) && hasGreaterCityAdminLevel(greatestBoudnaryLevel, subB)) {
-					greatestBoudnaryLevel = Integer.parseInt(subB.getAdminLevel());
-					greatestBoundary = subB;
-				}
+		Set<City> result = new HashSet<City>();
+		List<City> nearestObjects = new ArrayList<City>();
+		nearestObjects.addAll(cityManager.getClosestObjects(location.getLatitude(),location.getLongitude()));
+		nearestObjects.addAll(cityVillageManager.getClosestObjects(location.getLatitude(),location.getLongitude()));
+		for (City c : nearestObjects) {
+			Boundary boundary = cityBoundaries.get(c);
+			if (isInNames.contains(c.getName()) || (boundary != null && boundary.containsPoint(location))) {
+				result.add(c);
 			}
 		}
-		return greatestBoundary != cityBoundary ? findNearestCityOrSuburb(greatestBoundary, location) : city.getName();
+		if (result.isEmpty()) {
+			City city = getClosestCity(location, isInNames);
+			if (city != null) {
+				result.add(city);
+			}
+		}
+		return registerStreetInCities(name, nameEn, location, result);
 	}
 
 
-	private int getParsedCityAdminLevel() {
-		try {
-			return Integer.parseInt(cityAdminLevel);
-		} catch (NumberFormatException ex) {
-			return IndexCreator.DEFAULT_CITY_ADMIN_LEVEL;
+	private Set<Long> registerStreetInCities(String name, String nameEn, LatLon location, Collection<City> result) throws SQLException {
+		if (result.isEmpty()) {
+			return null;
 		}
+		if (Algoritms.isEmpty(nameEn)) {
+			nameEn = Junidecode.unidecode(name);
+		}
+
+		Set<Long> values = new TreeSet<Long>();
+		for (City city : result) {
+			String cityPart = city.getName();
+			boolean found = false;
+			for(City subpart : result){
+				if(subpart != city){
+					Boundary subBoundary = cityBoundaries.get(subpart);
+					Boundary b = cityBoundaries.get(city);
+					if(b != null && subBoundary != null &&  subBoundary.getAdminLevel() > b.getAdminLevel()){
+						cityPart = findNearestCityOrSuburb(subBoundary, location); //subpart.getName();
+						found = true;
+					}
+				}
+			}
+			if (!found) {
+				Boundary b = cityBoundaries.get(city);
+				if (b != null) {
+					cityPart = findNearestCityOrSuburb(b, location);
+				}
+			}
+			Long foundId = streetDAO.findStreet(name, city, cityPart);
+			if (foundId == null) {
+				long streetId = insertStreetData(addressStreetStat, name, nameEn, location.getLatitude(), location.getLongitude(), city.getId(),
+						cityPart);
+				streetDAO.insertStreet(addressStreetStat, name, city, cityPart, streetId);
+				foundId = streetId;
+			}
+			values.add(foundId);
+		}
+		return values;
 	}
 
 	private String findNearestCityOrSuburb(Boundary greatestBoundary,
@@ -652,15 +706,6 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		return result;
 	}
 
-	//TODO this is done on each city always, maybe we can just compute it once...
-	private Collection<Boundary> allSubBoundaries(Boundary cityBoundary) {
-		List<Boundary> result = new ArrayList<Boundary>();
-		for (Boundary subB : cityBoundary.getSubboundaries()) {
-			result.add(subB);
-			result.addAll(allSubBoundaries(subB));
-		}
-		return result;
-	}
 
 	public City getClosestCity(LatLon point, Set<String> isInNames) {
 		if (point == null) {
@@ -719,22 +764,6 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		return closest;
 	}
 	
-	private Set<String> getIsINames(Entity e) {
-		String values = e.getTag(OSMTagKey.IS_IN);
-		if (values == null) {
-			return Collections.emptySet();
-		}
-		if (values.indexOf(';') != -1) {
-			String[] splitted = values.split(";");
-			Set<String> set = new HashSet<String>();
-			for (int i = 0; i < splitted.length; i++) {
-				set.add(splitted[i].trim());
-			}
-			return set;
-		}
-		return Collections.singleton(values.trim());
-	}
-	
 	public void iterateMainEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		// index not only buildings but also nodes that belongs to addr:interpolation ways
 		if (e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER) != null && e.getTag(OSMTagKey.ADDR_STREET) != null) {
@@ -742,14 +771,13 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			// check that building is not registered already
 			boolean exist = streetDAO.findBuilding(e);
 			if (!exist) {
-				ctx.loadEntityData(e, false);
+				ctx.loadEntityData(e);
 				LatLon l = e.getLatLon();
-				City city = getClosestCity(l, getIsINames(e));
-				Long idStreet = getStreetInCity(city, e.getTag(OSMTagKey.ADDR_STREET), l, (e.getId() << 2));
-				if (idStreet != null) {
+				Set<Long> idsOfStreet = getStreetInCity(e.getIsInNames(), e.getTag(OSMTagKey.ADDR_STREET), null, l);
+				if (!idsOfStreet.isEmpty()) {
 					Building building = new Building(e);
 					building.setName(e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER));
-					streetDAO.writeBuilding(idStreet, building);
+					streetDAO.writeBuilding(idsOfStreet, building);
 				}
 			}
 		} else if (e instanceof Way /* && OSMSettings.wayForCar(e.getTag(OSMTagKey.HIGHWAY)) */
@@ -765,18 +793,17 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 
 			// check that street way is not registered already
 			if (!exist) {
-				ctx.loadEntityData(e, false);
+				ctx.loadEntityData(e);
 				LatLon l = e.getLatLon();
-				City city = getClosestCity(l, getIsINames(e));
-				Long idStreet = getStreetInCity(city, e.getTag(OSMTagKey.NAME), l, (e.getId() << 2) | 1);
-				if (idStreet != null && saveAddressWays) {
-					streetDAO.writeStreetWayNodes(idStreet, (Way) e);
+				Set<Long> idsOfStreet = getStreetInCity(e.getIsInNames(), e.getTag(OSMTagKey.NAME), e.getTag(OSMTagKey.NAME_EN), l);
+				if (!idsOfStreet.isEmpty() && saveAddressWays) {
+					streetDAO.writeStreetWayNodes(idsOfStreet, (Way) e);
 				}
 			}
 		}
 		if (e instanceof Relation) {
 			if (e.getTag(OSMTagKey.POSTAL_CODE) != null) {
-				ctx.loadEntityData(e, false);
+				ctx.loadEntityData(e);
 				postalCodeRelations.add((Relation) e);
 			}
 		}
@@ -793,15 +820,22 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	}
 	
 	
-	private void insertStreetData(PreparedStatement addressStreetStat, long id, String name, String nameEn, double latitude,
+	private long streetIdSequence = 0;
+	
+	private boolean debugFullNames = false; //true to see atached cityPart and boundaries to the street names
+	
+	private long insertStreetData(PreparedStatement addressStreetStat, //long id, 
+			String name, String nameEn, double latitude,
 			double longitude, Long cityId, String cityPart) throws SQLException {
-		addressStreetStat.setLong(1, id);
+		long streetId = streetIdSequence++;
+		addressStreetStat.setLong(1, streetId);
 		addressStreetStat.setString(4, name);
 		addressStreetStat.setString(5, nameEn);
 		addressStreetStat.setDouble(2, latitude);
 		addressStreetStat.setDouble(3, longitude);
 		addressStreetStat.setLong(6, cityId);
 		addressStreetStat.setString(7, cityPart);
+		return streetId;
 	}
 	
 
@@ -870,13 +904,14 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		}
 
 		int j = 0;
-		for (; j < cities.size(); j++) {
+		int csize = cities.size(); 
+		for (; j < csize; j++) {
 			City c = cities.get(j);
 			if (c.getType() != CityType.CITY && c.getType() != CityType.TOWN) {
 				break;
 			}
 		}
-		progress.startTask(Messages.getString("IndexCreator.SERIALIZING_ADRESS"), j + ((cities.size() - j) / 100 + 1)); //$NON-NLS-1$
+		progress.startTask(Messages.getString("IndexCreator.SERIALIZING_ADRESS"), j + ((csize - j) / 100 + 1)); //$NON-NLS-1$
 
 		Map<String, Set<Street>> postcodes = new TreeMap<String, Set<Street>>();
 		boolean writeCities = true;
@@ -891,7 +926,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 
 		// write cities and after villages
 		writer.startCityIndexes(false);
-		for (int i = 0; i < cities.size(); i++) {
+		for (int i = 0; i < csize; i++) {
 			City c = cities.get(i);
 			List<City> listSuburbs = null;
 			for (City suburb : suburbs) {
@@ -904,7 +939,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			}
 			if (writeCities) {
 				progress.progress(1);
-			} else if ((cities.size() - i) % 100 == 0) {
+			} else if ((csize - i) % 100 == 0) {
 				progress.progress(1);
 			}
 			if (writeCities && c.getType() != CityType.CITY && c.getType() != CityType.TOWN) {
@@ -1116,7 +1151,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 
 	private String identifyBestDistrict(final Street street, final String streetName, final String district,
 			final Map<String, List<StreetAndDistrict>> uniqueNames, Map<Street, List<Node>> streetNodes) {
-		String result = "";
+		String result = debugFullNames ?  district : ""; //TODO make it an option
 		List<StreetAndDistrict> sameStreets = uniqueNames.get(streetName);
 		if (sameStreets == null) {
 			sameStreets = new ArrayList<StreetAndDistrict>(1);
@@ -1161,12 +1196,15 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			city.setId(set.getLong(1));
 			cities.add(city);
 			
+			if (debugFullNames) { //TODO make it an option...
+				Boundary cityB = cityBoundaries.get(city);
+				if (cityB != null) {
+					city.setName(city.getName() + " " + cityB.getAdminLevel() + ":" + cityB.getName());
+				}
+			}
 		}
 		set.close();
 		stat.close();
 		return cities;
 	}
-
-
-
 }

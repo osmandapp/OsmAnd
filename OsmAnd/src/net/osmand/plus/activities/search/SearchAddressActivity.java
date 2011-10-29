@@ -3,11 +3,7 @@ package net.osmand.plus.activities.search;
 
 import java.text.MessageFormat;
 
-import net.osmand.data.Building;
-import net.osmand.data.City;
-import net.osmand.data.MapObject;
-import net.osmand.data.PostCode;
-import net.osmand.data.Street;
+import net.osmand.Algoritms;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -15,7 +11,6 @@ import net.osmand.plus.RegionAddressRepository;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandApplication;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +22,11 @@ import android.widget.TextView;
 
 public class SearchAddressActivity extends Activity {
 
+	public static final String SELECT_ADDRESS_POINT_INTENT_KEY = "SELECT_ADDRESS_POINT_INTENT_KEY";
+	public static final int SELECT_ADDRESS_POINT_RESULT_OK = 1;	
+	public static final String SELECT_ADDRESS_POINT_LAT = "SELECT_ADDRESS_POINT_LAT";
+	public static final String SELECT_ADDRESS_POINT_LON = "SELECT_ADDRESS_POINT_LON";
+	
 	private Button showOnMap;
 	private Button streetButton;
 	private Button cityButton;
@@ -34,17 +34,19 @@ public class SearchAddressActivity extends Activity {
 	private Button buildingButton;
 	private Button navigateTo;
 	
-	private RegionAddressRepository region = null;
-	private City city = null;
-	private PostCode postcode = null;
-	private Street street = null;
-	private Building building = null;
-	private Street street2 = null;
+	private String region = null;
+	private String city = null;
+	private String postcode = null;
+	private String street = null;
+	private String building = null;
+	private String street2 = null;
 	private boolean radioBuilding = true;
 	private Button searchOnline;
 	
-	private ProgressDialog progressDlg;
 	private OsmandSettings osmandSettings;
+	private LatLon searchPoint = null;
+
+	private boolean selectAddressMode;
 	
 
 	@Override
@@ -64,6 +66,27 @@ public class SearchAddressActivity extends Activity {
 		attachListeners();
 	}
 	
+	private Intent createIntent(Class<?> cl){
+		LatLon location = null;
+		Intent intent = getIntent();
+		if(intent != null){
+			double lat = intent.getDoubleExtra(SearchActivity.SEARCH_LAT, 0);
+			double lon = intent.getDoubleExtra(SearchActivity.SEARCH_LON, 0);
+			if(lat != 0 || lon != 0){
+				location = new LatLon(lat, lon);
+			}
+		}
+		if (location == null && getParent() instanceof SearchActivity) {
+			location = ((SearchActivity) getParent()).getSearchPoint();
+		}
+		Intent newIntent = new Intent(SearchAddressActivity.this, cl);
+		if (location != null) {
+			newIntent.putExtra(SearchActivity.SEARCH_LAT, location.getLatitude());
+			newIntent.putExtra(SearchActivity.SEARCH_LON, location.getLongitude());
+		}
+		return newIntent;
+	}
+	
 	private void attachListeners() {
 		if (getParent() instanceof SearchActivity) {
 			searchOnline.setOnClickListener(new View.OnClickListener() {
@@ -78,30 +101,28 @@ public class SearchAddressActivity extends Activity {
 		countryButton.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(SearchAddressActivity.this, SearchRegionByNameActivity.class));
+				startActivity(createIntent(SearchRegionByNameActivity.class));
 			}
 		});
 		cityButton.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(SearchAddressActivity.this, SearchCityByNameActivity.class));
+				startActivity(createIntent(SearchCityByNameActivity.class));
 			}
 		});
 		streetButton.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(SearchAddressActivity.this, SearchStreetByNameActivity.class));
+				startActivity(createIntent(SearchStreetByNameActivity.class));
 			}
 		});
 		buildingButton.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				if(radioBuilding){
-					osmandSettings.removeLastSearchedIntersectedStreet();
-					startActivity(new Intent(SearchAddressActivity.this, SearchBuildingByNameActivity.class));
+					startActivity(createIntent(SearchBuildingByNameActivity.class));
 				} else {
-					osmandSettings.setLastSearchedIntersectedStreet(""); //$NON-NLS-1$
-					startActivity(new Intent(SearchAddressActivity.this, SearchStreet2ByNameActivity.class));
+					startActivity(createIntent(SearchStreet2ByNameActivity.class));
 				}
 			}
 		});
@@ -121,6 +142,7 @@ public class SearchAddressActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				building = null;
+				searchPoint = null;
 				updateUI();
 			}
 		 });
@@ -130,6 +152,7 @@ public class SearchAddressActivity extends Activity {
 					street = null;
 					building = null;
 					street2 = null;
+					searchPoint = null;
 					updateUI();
 				}
 		 });
@@ -141,6 +164,7 @@ public class SearchAddressActivity extends Activity {
 					street = null;
 					street2 = null;
 					building = null;
+					searchPoint = null;
 					updateUI();
 				}
 		 });
@@ -153,6 +177,7 @@ public class SearchAddressActivity extends Activity {
 					street = null;
 					street2 = null;
 					building = null;
+					searchPoint = null;
 					updateUI();
 				}
 		 });
@@ -172,102 +197,112 @@ public class SearchAddressActivity extends Activity {
 			});
 	}
 	
-	public void showOnMap(boolean navigateTo){
-		LatLon l = null;
-		String historyName = null;
-		int zoom = 12;
-		boolean en = osmandSettings.USE_ENGLISH_NAMES.get();
-		if (street2 != null && street != null) {
-			l = region.findStreetIntersection(street, street2);
-			if(l != null) {
-				String cityName = postcode != null? postcode.getName() :  city.getName(en);
-				historyName = MessageFormat.format(getString(R.string.search_history_int_streets), 
-						street.getName(en), street2.getName(en), cityName); 
-				zoom = 16; 
-			}
-		} else if (building != null) {
-			l = building.getLocation();
-			String cityName = postcode != null? postcode.getName() :  city.getName(en);
-			historyName = MessageFormat.format(getString(R.string.search_history_building), building.getName(en), street.getName(en), cityName);
-			zoom = 16;
-		} else if (street != null) {
-			l = street.getLocation();
-			String cityName = postcode != null? postcode.getName() :  city.getName(en);
-			historyName = MessageFormat.format(getString(R.string.search_history_street), street.getName(en), cityName);
-			zoom = 14;
-		} else if (city != null) {
-			l = city.getLocation();
-			historyName = MessageFormat.format(getString(R.string.search_history_city), city.getName(en));
-			zoom = 12;
+	public void showOnMap(boolean navigateTo) {
+		if (searchPoint == null) {
+			return;
 		}
-		if (l != null) {
-			if(navigateTo){
-				osmandSettings.setPointToNavigate(l.getLatitude(), l.getLongitude(), historyName);
+		String historyName = null;
+		String objectName = "";
+		int zoom = 12;
+		if (!Algoritms.isEmpty(street2) && !Algoritms.isEmpty(street)) {
+			String cityName = !Algoritms.isEmpty(postcode) ? postcode : city;
+			objectName = street;
+			historyName = MessageFormat.format(getString(R.string.search_history_int_streets), street, street2,
+					cityName);
+			zoom = 16;
+		} else if (!Algoritms.isEmpty(building)) {
+			String cityName = !Algoritms.isEmpty(postcode) ? postcode : city;
+			objectName = street + " " + building;
+			historyName = MessageFormat.format(getString(R.string.search_history_building), building, street,
+					cityName);
+			zoom = 16;
+		} else if (!Algoritms.isEmpty(street)) {
+			String cityName = postcode != null ? postcode : city;
+			objectName = street;
+			historyName = MessageFormat.format(getString(R.string.search_history_street), street, cityName);
+			zoom = 15;
+		} else if (!Algoritms.isEmpty(city)) {
+			historyName = MessageFormat.format(getString(R.string.search_history_city), city);
+			objectName = city;
+			zoom = 13;
+		}
+		if(selectAddressMode){
+			Intent intent = getIntent();
+			intent.putExtra(SELECT_ADDRESS_POINT_INTENT_KEY, objectName);
+			intent.putExtra(SELECT_ADDRESS_POINT_LAT, searchPoint.getLatitude());
+			intent.putExtra(SELECT_ADDRESS_POINT_LON, searchPoint.getLongitude());
+			setResult(SELECT_ADDRESS_POINT_RESULT_OK, intent);
+			finish();
+		} else {
+			if (navigateTo) {
+				osmandSettings.setPointToNavigate(searchPoint.getLatitude(), searchPoint.getLongitude(), historyName);
 			} else {
-				osmandSettings.setMapLocationToShow(l.getLatitude(), l.getLongitude(), zoom, historyName);
+				osmandSettings.setMapLocationToShow(searchPoint.getLatitude(), searchPoint.getLongitude(), zoom, historyName);
 			}
-			
 			MapActivity.launchMapActivityMoveToTop(SearchAddressActivity.this);
 		}
 	}
 	
-	@Override
-	protected void onStop() {
-		if(progressDlg != null){
-			progressDlg.dismiss();
-			progressDlg = null;
-		}
-		super.onStop();
-	}
 	
 	protected void updateBuildingSection(){
 		if(radioBuilding){
 			((TextView)findViewById(R.id.BuildingText)).setText(R.string.search_address_building);
-			if(building == null){
+			if(Algoritms.isEmpty(building)){
 				((TextView)findViewById(R.id.BuildingButton)).setText(R.string.choose_building);
 			} else {
-				((TextView)findViewById(R.id.BuildingButton)).setText(building.getName(region.useEnglishNames()));
+				((TextView)findViewById(R.id.BuildingButton)).setText(building);
 			}
 		} else {
 			((TextView)findViewById(R.id.BuildingText)).setText(R.string.search_address_street);
-			if(street2 == null){
+			if(Algoritms.isEmpty(street2)){
 				((TextView)findViewById(R.id.BuildingButton)).setText(R.string.choose_intersected_street);
 			} else {
-				((TextView)findViewById(R.id.BuildingButton)).setText(street2.getName(region.useEnglishNames()));
+				((TextView)findViewById(R.id.BuildingButton)).setText(street2);
 			}
 		}
-		findViewById(R.id.ResetBuilding).setEnabled(building != null || street2 != null);
+		findViewById(R.id.ResetBuilding).setEnabled(!Algoritms.isEmpty(street2) || !Algoritms.isEmpty(building));
 	}
 
 	protected void updateUI(){
-		findViewById(R.id.ResetCountry).setEnabled(region != null);
-		if(region == null){
+		showOnMap.setEnabled(searchPoint != null);
+		navigateTo.setEnabled(searchPoint != null);
+		if(selectAddressMode) {
+			navigateTo.setText(R.string.search_select_point);
+			showOnMap.setVisibility(View.INVISIBLE);
+			findViewById(R.id.SearchOnline).setVisibility(View.INVISIBLE);
+		} else {
+			navigateTo.setText(R.string.navigate_to);
+			findViewById(R.id.SearchOnline).setVisibility(View.VISIBLE);
+			showOnMap.setVisibility(View.VISIBLE);
+		}
+		findViewById(R.id.ResetCountry).setEnabled(!Algoritms.isEmpty(region));
+		if(Algoritms.isEmpty(region)){
 			countryButton.setText(R.string.ChooseCountry);
 		} else {
-			countryButton.setText(region.getName());
+			countryButton.setText(region);
 		}
-		findViewById(R.id.ResetCity).setEnabled(postcode != null || city != null);
-		if(city == null && postcode == null){
+		findViewById(R.id.ResetCity).setEnabled(!Algoritms.isEmpty(city) || !Algoritms.isEmpty(postcode));
+		if(Algoritms.isEmpty(city) && Algoritms.isEmpty(postcode)){
 			cityButton.setText(R.string.choose_city);
 		} else {
-			if(postcode != null){
-				cityButton.setText(postcode.getName());
+			if(!Algoritms.isEmpty(postcode)){
+				cityButton.setText(postcode);
 			} else {
-				cityButton.setText(city.getName(region.useEnglishNames()));
+				cityButton.setText(city);
 			}
 		}
-		cityButton.setEnabled(region != null);
+		cityButton.setEnabled(!Algoritms.isEmpty(region));
 		
-		findViewById(R.id.ResetStreet).setEnabled(street != null);
-		if(street == null){
+		findViewById(R.id.ResetStreet).setEnabled(!Algoritms.isEmpty(street));
+		if(Algoritms.isEmpty(street)){
 			streetButton.setText(R.string.choose_street);
 		} else {
-			streetButton.setText(street.getName(region.useEnglishNames()));
+			streetButton.setText(street);
 		}
-		streetButton.setEnabled(city != null || postcode != null);
+		streetButton.setEnabled(!Algoritms.isEmpty(city) || !Algoritms.isEmpty(postcode));
 		
-		buildingButton.setEnabled(street != null);
-		((RadioGroup)findViewById(R.id.RadioGroup)).setVisibility(street == null ? View.GONE : View.VISIBLE);
+		buildingButton.setEnabled(!Algoritms.isEmpty(street));
+		((RadioGroup)findViewById(R.id.RadioGroup)).setVisibility(Algoritms.isEmpty(street) ? View.GONE : View.VISIBLE);
 		
 		if(radioBuilding){
 			((RadioButton)findViewById(R.id.RadioBuilding)).setChecked(true);
@@ -276,96 +311,58 @@ public class SearchAddressActivity extends Activity {
 		}
 		updateBuildingSection();
 		
-		showOnMap.setEnabled(city != null || street != null);
-		navigateTo.setEnabled(city != null || street != null);
 	}
 	
-	public void loadData(){
-		if (region != null) {
-			if(region.useEnglishNames() != osmandSettings.USE_ENGLISH_NAMES.get()){
-				region.setUseEnglishNames(osmandSettings.USE_ENGLISH_NAMES.get());
-			}
+	public void loadData() {
+		if (!Algoritms.isEmpty(region)) {
 			String postcodeStr = osmandSettings.getLastSearchedPostcode();
-			if(postcodeStr != null){
-				postcode = region.getPostcode(postcodeStr);
+			if (!Algoritms.isEmpty(postcodeStr)) {
+				postcode = postcodeStr;
 			} else {
-				city = region.getCityById(osmandSettings.getLastSearchedCity());
+				city = osmandSettings.getLastSearchedCityName();
 			}
-			
-			if (postcode != null || city != null) {
-				MapObject o = postcode == null ? city : postcode;
-				street = region.getStreetByName(o, osmandSettings.getLastSearchedStreet());
-				if (street != null) {
+
+			if (!Algoritms.isEmpty(postcode) || !Algoritms.isEmpty(city)) {
+				street = osmandSettings.getLastSearchedStreet();
+				if (!Algoritms.isEmpty(street)) {
 					String str = osmandSettings.getLastSearchedIntersectedStreet();
-					radioBuilding = str == null;
-					if(str != null){
-						street2 = region.getStreetByName(o, str);
+					radioBuilding = Algoritms.isEmpty(str);
+					if (!radioBuilding) {
+						street2 = str;
 					} else {
-						building = region.getBuildingByName(street, osmandSettings.getLastSearchedBuilding());
+						building = osmandSettings.getLastSearchedBuilding();
 					}
 				}
 			}
-		}		
+		}
 	}
 	
-	protected void startLoadDataInThread(String progressMsg){
-		progressDlg = ProgressDialog.show(this, getString(R.string.loading), progressMsg, true);
-		new Thread("Loader search data") { //$NON-NLS-1$
-			@Override
-			public void run() {
-				try {
-					loadData();
-				} finally {
-					if (progressDlg != null) {
-						progressDlg.dismiss();
-						progressDlg = null;
-						runOnUiThread(new Runnable() {
-							@Override
-							public void run() {
-								updateUI();
-							}
-						});
-					}
-				}
-			}
-		}.start();
-	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-		region = null;
-		String lastSearchedRegion = osmandSettings.getLastSearchedRegion();
-		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(lastSearchedRegion);
-		String progressMsg = null;
-		// try to determine whether progress dialog & new thread needed
 
-		if (region != null) {
-			Long cityId = osmandSettings.getLastSearchedCity();
-			String postcode = osmandSettings.getLastSearchedPostcode();
-			if (!region.areCitiesPreloaded()) {
-				progressMsg = getString(R.string.loading_cities);
-			} else if (postcode != null && !region.arePostcodesPreloaded()) {
-				progressMsg = getString(R.string.loading_postcodes);
-			} else if (cityId != -1 && region.getCityById(cityId) != null && region.getCityById(cityId).isEmptyWithStreets()) {
-				progressMsg = getString(R.string.loading_streets_buildings);
-			} else if (postcode != null && region.getPostcode(postcode) != null && region.getPostcode(postcode).isEmptyWithStreets()) {
-				progressMsg = getString(R.string.loading_streets_buildings);
-			} else if (osmandSettings.USE_ENGLISH_NAMES.get() != region.useEnglishNames()) {
-				progressMsg = getString(R.string.converting_names);
-			}
+		searchPoint = osmandSettings.getLastSearchedPoint();
+		
+		Intent intent = getIntent();
+		if (intent != null) {
+			selectAddressMode = intent.hasExtra(SELECT_ADDRESS_POINT_INTENT_KEY);
+		} else {
+			selectAddressMode = false;
 		}
+
+		region = null;
 		postcode = null;
 		city = null;
 		street = null;
 		building = null;
-		
-		if (progressMsg != null) {
-			startLoadDataInThread(progressMsg);
-		} else {
-			loadData();
-			updateUI();
+		region = osmandSettings.getLastSearchedRegion();
+		RegionAddressRepository reg = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(region);
+		if(reg != null && reg.useEnglishNames() != osmandSettings.USE_ENGLISH_NAMES.get()){
+			reg.setUseEnglishNames(osmandSettings.USE_ENGLISH_NAMES.get());
 		}
+		loadData();
+		updateUI();
 		
 	}
 

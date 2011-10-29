@@ -24,8 +24,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.RouteProvider.GPXRouteParams;
 import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.activities.search.SearchPoiFilterActivity;
-import net.osmand.plus.activities.search.SearchTransportActivity;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -92,7 +90,9 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	private static final int SHOW_POSITION_DELAY = 2500;
 	private static final float ACCURACY_FOR_GPX_AND_ROUTING = 50;
 	
-	
+	private static final int AUTO_FOLLOW_MSG_ID = 8; 
+	private static final int LOST_LOCATION_MSG_ID = 10;
+	private static final long LOST_LOCATION_CHECK_DELAY = 20000;
 	
 	private long lastTimeAutoZooming = 0;
 	
@@ -114,8 +114,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	// Notification status
 	private NotificationManager mNotificationManager;
 	private int APP_NOTIFICATION_ID;
-	// handler to show/hide trackball position 
-	private Handler mapPositionHandler = null;
+	// handler to show/hide trackball position and to link map with delay
+	private Handler uiHandler = new Handler();
 	// Current screen orientation
 	private int currentScreenOrientation;
 	// 
@@ -127,10 +127,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 
 	private boolean isMapLinkedToLocation = false;
 	private ProgressDialog startProgressDialog;
-	
-	private boolean isMapLinkedToLocation(){
-		return isMapLinkedToLocation;
-	}
 	
 	private Notification getNotification(){
 		Intent notificationIndent = new Intent(this, MapActivity.class);
@@ -258,12 +254,9 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		mapLayers.getPoiMapLayer().setFilter(settings.getPoiFilterForMap((OsmandApplication) getApplication()));
 
 		backToLocation.setVisibility(View.INVISIBLE);
-		isMapLinkedToLocation = false;
-		if (routingHelper.isFollowingMode()) {
-			// by default turn off causing unexpected movements due to network establishing
-			// best to show previous location
-			isMapLinkedToLocation = true;
-		}
+		// by default turn off causing unexpected movements due to network establishing
+		// best to show previous location
+		setMapLinkedToLocation(false);
 
 		// if destination point was changed try to recalculate route 
 		if (routingHelper.isFollowingMode() && !Algoritms.objectEquals(settings.getPointToNavigate(), routingHelper.getFinalLocation())) {
@@ -461,6 +454,9 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			@Override
 			public void onClick(View v) {
 				final Intent search = new Intent(MapActivity.this, SearchActivity.class);
+				LatLon loc = getMapLocation();
+				search.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
+				search.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
 				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				MapActivity.this.startActivity(search);
 				dlg.dismiss();
@@ -485,6 +481,9 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
         if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
 			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
 			newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			LatLon loc = getMapLocation();
+			newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
+			newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
 			startActivity(newIntent);
             return true;
 		} else if (!routingHelper.isFollowingMode()) {
@@ -577,7 +576,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		backToLocation.setVisibility(View.INVISIBLE);
 		PointLocationLayer locationLayer = mapLayers.getLocationLayer();
 		if(!isMapLinkedToLocation()){
-			isMapLinkedToLocation = true;
+			setMapLinkedToLocation(true);
 			if(locationLayer.getLastKnownLocation() != null){
 				Location lastKnownLocation = locationLayer.getLastKnownLocation();
 				AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
@@ -637,9 +636,25 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
     	if(routingHelper.isFollowingMode()){
     		if(location == null || 
     				!location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
+    			// Update routing position  
     			routingHelper.setCurrentLocation(location);
+    			// Check with delay that gps location is not lost
+    			if(location != null && routingHelper.getLeftDistance() > 0){
+    				Message msg = Message.obtain(uiHandler, new Runnable() {
+    					@Override
+    					public void run() {
+							if (routingHelper.getLeftDistance() > 0 && settings.MAP_ACTIVITY_ENABLED.get()) {
+								routingHelper.getVoiceRouter().gpsLocationLost();
+							}
+    					}
+    				});
+    				msg.what = LOST_LOCATION_MSG_ID;
+    				uiHandler.removeMessages(LOST_LOCATION_MSG_ID);
+    				uiHandler.sendMessageDelayed(msg, LOST_LOCATION_CHECK_DELAY);
+    			}
     		}
     	}
+    	
     	if (location != null) {
 			if (isMapLinkedToLocation()) {
 				if(settings.AUTO_ZOOM_MAP.get() && location.hasSpeed()){
@@ -895,10 +910,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	
 	public void showAndHideMapPosition() {
 		mapView.setShowMapPosition(true);
-		if (mapPositionHandler == null) {
-			mapPositionHandler = new Handler();
-		}
-		Message msg = Message.obtain(mapPositionHandler, new Runnable() {
+		Message msg = Message.obtain(uiHandler, new Runnable() {
 			@Override
 			public void run() {
 				if (mapView.isShowMapPosition()) {
@@ -909,8 +921,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 
 		});
 		msg.what = SHOW_POSITION_MSG_ID;
-		mapPositionHandler.removeMessages(SHOW_POSITION_MSG_ID);
-		mapPositionHandler.sendMessageDelayed(msg, SHOW_POSITION_DELAY);
+		uiHandler.removeMessages(SHOW_POSITION_MSG_ID);
+		uiHandler.sendMessageDelayed(msg, SHOW_POSITION_DELAY);
 	}
 	
 	
@@ -919,9 +931,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	public void locationChanged(double newLatitude, double newLongitude, Object source) {
 		// when user start dragging 
 		if(mapLayers.getLocationLayer().getLastKnownLocation() != null){
-			if(isMapLinkedToLocation()){
-				isMapLinkedToLocation = false;
-			}
+			setMapLinkedToLocation(false);
 			if (backToLocation.getVisibility() != View.VISIBLE) {
 				runOnUiThread(new Runnable() {
 					@Override
@@ -987,9 +997,11 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				muteMenu.setVisible(false);
 			}
 		}
-		MenuItem saveMenu = menu.findItem(R.id.map_save_directions);
-		if(saveMenu != null){
-			saveMenu.setVisible(routingHelper.isRouteCalculated());
+		MenuItem directions = menu.findItem(R.id.map_get_directions);
+		if(routingHelper.isRouteCalculated()){
+			directions.setTitle(R.string.show_route);
+		} else {
+			directions.setTitle(R.string.get_directions);
 		}
 		
 		return val;
@@ -1010,18 +1022,19 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			startGpsStatusIntent();
 			return true;
 		case R.id.map_get_directions:
-			Location loc = getLastKnownLocation();
-			if(loc != null){
-				mapActions.getDirections(loc.getLatitude(), loc.getLongitude(), true);
+			if(routingHelper.isRouteCalculated()){
+				mapActions.aboutRoute();
 			} else {
-				mapActions.getDirections(mapView.getLatitude(), mapView.getLongitude(), true);
+				Location loc = getLastKnownLocation();
+				if (loc != null) {
+					mapActions.getDirections(loc.getLatitude(), loc.getLongitude(), true);
+				} else {
+					mapActions.getDirections(mapView.getLatitude(), mapView.getLongitude(), true);
+				}
 			}
 			return true;
 		case R.id.map_layers:
 			mapLayers.openLayerSelectionDialog(mapView);
-			return true;
-		case R.id.map_save_directions :
-			mapActions.saveDirections();
 			return true;
 		case R.id.map_specify_point:
 			// next 2 lines replaced for Issue 493, replaced by new 3 lines
@@ -1030,6 +1043,9 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
 			newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			newIntent.putExtra(SearchActivity.TAB_INDEX_EXTRA, SearchActivity.LOCATION_TAB_INDEX);
+			LatLon mapLoc = getMapLocation();
+			newIntent.putExtra(SearchActivity.SEARCH_LAT, mapLoc.getLatitude());
+			newIntent.putExtra(SearchActivity.SEARCH_LON, mapLoc.getLongitude());
 			startActivity(newIntent);
 			return true;
 		case R.id.map_mute:
@@ -1038,14 +1054,15 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			return true;
 		case R.id.map_navigate_to_point:
 			if (mapLayers.getNavigationLayer().getPointToNavigate() != null) {
-				navigateToPoint(null);
+				if(routingHelper.isRouteCalculated()){
+					routingHelper.setFinalAndCurrentLocation(null, routingHelper.getCurrentLocation(), routingHelper.getCurrentGPXRoute());
+				} else {
+					navigateToPoint(null);
+				}
 			} else {
     			navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
     		}
 			mapView.refreshMap();
-			return true;
-		case R.id.map_gpx_routing:
-			mapActions.navigateUsingGPX();
 			return true;
 		case R.id.map_show_point_options:
 			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
@@ -1132,8 +1149,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
     	final int[] contextMenuStandardActions = new int[]{
     			R.string.context_menu_item_navigate_point,
     			R.string.context_menu_item_show_route,
-    			R.string.context_menu_item_search_poi,
-    			R.string.context_menu_item_search_transport,
+    			R.string.context_menu_item_search,
     			R.string.context_menu_item_add_favorite,
     			R.string.context_menu_item_share_location,
     			R.string.context_menu_item_create_poi,
@@ -1160,17 +1176,12 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				if(standardId == R.string.context_menu_item_navigate_point){
 					navigateToPoint(new LatLon(latitude, longitude));
 				} else if(standardId == R.string.context_menu_item_show_route){
-					mapActions. getDirections(latitude, longitude, false);
-				} else if(standardId == R.string.context_menu_item_search_poi){
-					Intent intent = new Intent(MapActivity.this, SearchPoiFilterActivity.class);
-					intent.putExtra(SearchPoiFilterActivity.SEARCH_LAT, latitude);
-					intent.putExtra(SearchPoiFilterActivity.SEARCH_LON, longitude);
+					mapActions.getDirections(latitude, longitude, false);
+				} else if(standardId == R.string.context_menu_item_search){
+					Intent intent = new Intent(MapActivity.this, SearchActivity.class);
+					intent.putExtra(SearchActivity.SEARCH_LAT, latitude);
+					intent.putExtra(SearchActivity.SEARCH_LON, longitude);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
-				} else if(standardId == R.string.context_menu_item_search_transport){
-					Intent intent = new Intent(MapActivity.this, SearchTransportActivity.class);
-					intent.putExtra(SearchTransportActivity.LAT_KEY, latitude);
-					intent.putExtra(SearchTransportActivity.LON_KEY, longitude);
 					startActivity(intent);
 				} else if(standardId == R.string.context_menu_item_add_favorite){
 					mapActions.addFavouritePoint(latitude, longitude);
@@ -1213,5 +1224,29 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		activity.startActivity(newIntent);
 	}
 
+	
+	private boolean isMapLinkedToLocation(){
+		return isMapLinkedToLocation;
+	}
+	
+	public void setMapLinkedToLocation(boolean isMapLinkedToLocation) {
+		if(!isMapLinkedToLocation){
+			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
+			if(autoFollow > 0){
+				uiHandler.removeMessages(AUTO_FOLLOW_MSG_ID);
+				Message msg = Message.obtain(uiHandler, new Runnable() {
+					@Override
+					public void run() {
+						if (settings.MAP_ACTIVITY_ENABLED.get()) {
+							backToLocationImpl();
+						}
+					}
+				});
+				msg.what = AUTO_FOLLOW_MSG_ID;
+				uiHandler.sendMessageDelayed(msg, autoFollow * 1000);
+			}
+		}
+		this.isMapLinkedToLocation = isMapLinkedToLocation;
+	}
 
 }

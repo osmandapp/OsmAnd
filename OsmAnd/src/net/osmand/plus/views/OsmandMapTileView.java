@@ -46,6 +46,7 @@ import android.widget.Toast;
 
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback {
 
+	protected final static int LOWEST_ZOOM_TO_ROTATE = 10;
 
 	protected final int emptyTileDivisor = 16;
 	
@@ -266,11 +267,16 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	
+	public boolean isMapRotateEnabled(){
+		return zoom > LOWEST_ZOOM_TO_ROTATE;
+	}
 
 	public void setRotate(float rotate) {
-		float diff = MapUtils.unifyRotationDiff(rotate, this.rotate);
-		if (Math.abs(diff) > 5) { // check smallest rotation
-			animatedDraggingThread.startRotate(rotate);
+		if (isMapRotateEnabled()) {
+			float diff = MapUtils.unifyRotationDiff(rotate, getRotate());
+			if (Math.abs(diff) > 5) { // check smallest rotation
+				animatedDraggingThread.startRotate(rotate);
+			}
 		}
 	}
 
@@ -283,7 +289,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	public float getRotate() {
-		return rotate;
+		return isMapRotateEnabled() ?  rotate : 0;
 	}
 
 
@@ -491,7 +497,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				canvas.save();
 				// rotate if needed
 				if (!layer.drawInScreenPixels()) {
-					canvas.rotate(rotate, w, h);
+					canvas.rotate(getRotate(), w, h);
 				}
 				layer.onDraw(canvas, latlonRect, tilesRect, nightMode);
 				canvas.restore();
@@ -540,19 +546,37 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	// ///////////////////////////////// DRAGGING PART ///////////////////////////////////////
 	public float calcDiffTileY(float dx, float dy) {
-		return (-rotateSin * dx + rotateCos * dy) / getTileSize();
+		if(isMapRotateEnabled()){
+			return (-rotateSin * dx + rotateCos * dy) / getTileSize();
+		} else {
+			return dy / getTileSize();
+		}
+		
 	}
 
 	public float calcDiffTileX(float dx, float dy) {
-		return (rotateCos * dx + rotateSin * dy) / getTileSize();
+		if(isMapRotateEnabled()){
+			return (rotateCos * dx + rotateSin * dy) / getTileSize();
+		} else {
+			return dx / getTileSize();
+		}
 	}
 
 	public float calcDiffPixelY(float dTileX, float dTileY) {
-		return (rotateSin * dTileX + rotateCos * dTileY) * getTileSize();
+		if(isMapRotateEnabled()){
+			return (rotateSin * dTileX + rotateCos * dTileY) * getTileSize();
+		} else {
+			return dTileY * getTileSize();
+		}
+		
 	}
 
 	public float calcDiffPixelX(float dTileX, float dTileY) {
-		return (rotateCos * dTileX - rotateSin * dTileY) * getTileSize();
+		if(isMapRotateEnabled()){
+			return (rotateCos * dTileX - rotateSin * dTileY) * getTileSize();
+		} else {
+			return dTileX * getTileSize();
+		}
 	}
 
 	/**
@@ -605,11 +629,13 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	protected void rotateToAnimate(float rotate) {
-		this.rotate = MapUtils.unifyRotationTo360(rotate);
-		float rotateRad = (float) Math.toRadians(rotate);
-		this.rotateCos = FloatMath.cos(rotateRad);
-		this.rotateSin = FloatMath.sin(rotateRad);
-		refreshMap();
+		if (isMapRotateEnabled()) {
+			this.rotate = MapUtils.unifyRotationTo360(rotate);
+			float rotateRad = (float) Math.toRadians(rotate);
+			this.rotateCos = FloatMath.cos(rotateRad);
+			this.rotateSin = FloatMath.sin(rotateRad);
+			refreshMap();
+		}
 	}
 	
 	protected void setLatLonAnimate(double latitude, double longitude, boolean notify) {

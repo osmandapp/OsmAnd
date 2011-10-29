@@ -15,6 +15,7 @@ function updateGoogleCodeIndexes($update=false) {
   $output->formatOutput = true;
   
    $outputIndexes = $output->createElement( "osmand_regions" );
+   $outputIndexes->setAttribute('mapversion','1');
    $output->appendChild( $outputIndexes );
    
 

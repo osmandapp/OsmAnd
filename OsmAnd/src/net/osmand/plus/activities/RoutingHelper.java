@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,9 +9,6 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.Track;
-import net.osmand.GPXUtilities.TrkSegment;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
@@ -22,6 +20,7 @@ import net.osmand.plus.voice.CommandPlayer;
 import android.content.Context;
 import android.location.Location;
 import android.os.Handler;
+import android.os.Message;
 import android.util.FloatMath;
 import android.widget.Toast;
 
@@ -198,6 +197,7 @@ public class RoutingHelper {
 		if(finalLocation == null || currentLocation == null){
 			return;
 		}
+		
 		boolean calculateRoute  = false;
 		synchronized (this) {
 			if(routeNodes.isEmpty() || routeNodes.size() <= currentRoute){
@@ -372,6 +372,14 @@ public class RoutingHelper {
 			return dist;
 		}
 		return 0;
+	}
+	
+	public String getGeneralRouteInformation(){
+		int dist = getLeftDistance();
+		int hours = getLeftTime() / (60 * 60);
+		int minutes = (getLeftTime() / 60) % 60;
+		return MessageFormat.format(context.getString(R.string.route_general_information), OsmAndFormatter.getFormattedDistance(dist, context),
+				hours, minutes);
 	}
 	
 	public Location getLocationFromRouteDirection(RouteDirectionInfo i){

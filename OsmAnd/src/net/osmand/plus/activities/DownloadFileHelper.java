@@ -15,12 +15,10 @@ import java.util.zip.ZipInputStream;
 import org.apache.commons.logging.Log;
 
 import android.app.Activity;
-import android.graphics.drawable.Drawable.Callback;
-import android.os.AsyncTask;
-import android.widget.Toast;
 
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
+import net.osmand.Version;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -130,11 +128,11 @@ public class DownloadFileHelper {
 			
 			try {
 				if(parts == 1){
-					URL url = new URL("http://download.osmand.net/download?file="+fileName);  //$NON-NLS-1$
+					URL url = new URL("http://download.osmand.net/download?file="+fileName + "&" + Version.getVersionAsURLParam());  //$NON-NLS-1$
 					downloadFile(fileName, out, url, null, indexOfAllFiles, progress);
 				} else {
 					for(int i=1; i<=parts; i++){
-						URL url = new URL("http://download.osmand.net/download?file="+fileName+"-"+i);  //$NON-NLS-1$
+						URL url = new URL("http://download.osmand.net/download?file="+fileName+"-"+i + "&" + Version.getVersionAsURLParam());  //$NON-NLS-1$
 						downloadFile(fileName, out, url, " ["+i+"/"+parts+"]", indexOfAllFiles, progress);
 					}
 				}
@@ -145,7 +143,6 @@ public class DownloadFileHelper {
 
 			File toIndex = fileToDownload;
 			if (fileToDownload.getName().endsWith(".zip")) { //$NON-NLS-1$
-				progress.startTask(ctx.getString(R.string.unzipping_file), -1);
 				if (!unzipToDir) {
 					toIndex = fileToUnZip;
 				} else {
@@ -155,6 +152,8 @@ public class DownloadFileHelper {
 				ZipEntry entry = null;
 				boolean first = true;
 				while ((entry = zipIn.getNextEntry()) != null) {
+					int size = (int)entry.getSize();
+					progress.startTask(ctx.getString(R.string.unzipping_file), size);
 					File fs;
 					if (!unzipToDir) {
 						if (first) {
@@ -182,6 +181,7 @@ public class DownloadFileHelper {
 					byte[] buffer = new byte[BUFFER_SIZE];
 					while ((read = zipIn.read(buffer)) != -1) {
 						out.write(buffer, 0, read);
+						progress.progress(read);
 					}
 					out.close();
 				}
