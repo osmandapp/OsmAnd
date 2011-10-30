@@ -270,7 +270,7 @@ public class MapRenderRepositories {
 		cObjectsBox = dataBox;
 		log.info(String.format("BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", //$NON-NLS-1$
 				dataBox.bottom, dataBox.top, dataBox.left, dataBox.right, zoom));
-		log.info(String.format("Native search done in %s ms. ", System.currentTimeMillis() - now)); //$NON-NLS-1$
+		log.info(String.format("Native search: %s ms ", System.currentTimeMillis() - now)); //$NON-NLS-1$
 		return true;
 	}
 
@@ -387,7 +387,7 @@ public class MapRenderRepositories {
 			if (count > 0) {
 				log.info(String.format("BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", //$NON-NLS-1$
 						cBottomLatitude, cTopLatitude, cLeftLongitude, cRightLongitude, zoom));
-				log.info(String.format("Search done in %s ms. %s results were found.", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
+				log.info(String.format("Searching: %s ms  (%s results found)", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
 			}
 		
 
@@ -532,7 +532,7 @@ public class MapRenderRepositories {
 			this.prevBmp = null;
 			this.prevBmpLocation = null;
 			if (prefs.DEBUG_RENDERING_INFO.get()) {
-				String timeInfo = "Search done in " + searchTime + " ms"; //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+				String timeInfo = "Searching: " + searchTime + " ms"; //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 				if (renderingDebugInfo != null) {
 					timeInfo += "\n" + renderingDebugInfo;
 				}
