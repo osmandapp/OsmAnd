@@ -21,10 +21,22 @@ import android.widget.Toast;
 public class NavigationInfo {
 
     private static final long MIN_NOTIFICATION_PERIOD = 10000;
+    private static final float FULL_CIRCLE = 360.0f;
 
     private class RelativeDirection {
 
         private static final int UNKNOWN = -1;
+
+        private final int[] direction = {
+            R.string.front,
+            R.string.front_right,
+            R.string.right,
+            R.string.back_right,
+            R.string.back,
+            R.string.back_left,
+            R.string.left,
+            R.string.front_left
+        };
 
         private RelativeDirectionStyle style;
         private int value;
@@ -61,22 +73,14 @@ public class NavigationInfo {
         }
 
         public String getString() {
+            if (value < 0) // unknown direction
+                return null;
             if (style == RelativeDirectionStyle.CLOCKWISE) {
                 String result = NavigationInfo.this.getString(R.string.towards);
                 result += " " + String.valueOf((value != 0) ? value : 12); //$NON-NLS-1$
                 result += " " + NavigationInfo.this.getString(R.string.oclock); //$NON-NLS-1$
                 return result;
             } else {
-                final int[] direction = new int[] {
-                    R.string.front,
-                    R.string.front_right,
-                    R.string.right,
-                    R.string.back_right,
-                    R.string.back,
-                    R.string.back_left,
-                    R.string.left,
-                    R.string.front_left
-                };
                 return NavigationInfo.this.getString(direction[value]);
             }
         }
@@ -84,19 +88,40 @@ public class NavigationInfo {
         // The argument must be not null as well as the currentLocation
         private int directionTo(final Location point) {
             final float bearing = currentLocation.bearingTo(point) - currentLocation.getBearing();
-            final float nSectors = (style == RelativeDirectionStyle.CLOCKWISE) ? 12.0f : 8.0f;
-            final float sectorSize = 360.0f / nSectors;
-            return (int)Math.round((bearing + 360.0) / sectorSize) % (int)Math.round(nSectors);
+            final int nSectors = (style == RelativeDirectionStyle.CLOCKWISE) ? 12 : direction.length;
+            int sector = (int)Math.round(Math.abs(bearing) * (float)nSectors / FULL_CIRCLE) % nSectors;
+            if ((bearing < 0) && (sector != 0))
+                sector = nSectors - sector;
+            return sector;
         }
 
     }
 
 
+    private final int[] cardinal = {
+        R.string.north,
+        R.string.north_north_east,
+        R.string.north_east,
+        R.string.east_north_east,
+        R.string.east,
+        R.string.east_south_east,
+        R.string.south_east,
+        R.string.south_south_east,
+        R.string.south,
+        R.string.south_south_west,
+        R.string.south_west,
+        R.string.west_south_west,
+        R.string.west,
+        R.string.west_north_west,
+        R.string.north_west,
+        R.string.north_north_west
+    };
+
     private final Context context;
     private Location currentLocation;
     private RelativeDirection lastDirection;
     private long lastNotificationTime;
-    private boolean autoAnnounce;
+    private volatile boolean autoAnnounce;
 
 
     public NavigationInfo(final Context context) {
@@ -126,30 +151,15 @@ public class NavigationInfo {
 
     // The argument must be not null as well as the currentLocation
     private String absoluteDirectionString(float bearing) {
-        final int[] direction = new int[] {
-            R.string.north,
-            R.string.north_north_east,
-            R.string.north_east,
-            R.string.east_north_east,
-            R.string.east,
-            R.string.east_south_east,
-            R.string.south_east,
-            R.string.south_south_east,
-            R.string.south,
-            R.string.south_south_west,
-            R.string.south_west,
-            R.string.west_south_west,
-            R.string.west,
-            R.string.west_north_west,
-            R.string.north_west,
-            R.string.north_north_west
-        };
-        return getString(direction[(int)Math.round((bearing + 360.0) / 22.5) % 16]);
+        int direction = (int)Math.round(Math.abs(bearing) * (float)cardinal.length / FULL_CIRCLE) % cardinal.length;
+        if ((bearing < 0) && (direction != 0))
+            direction = cardinal.length - direction;
+        return getString(cardinal[direction]);
     }
 
 
     // Get distance and direction string for specified point
-    public String getDirectionString(final Location point) {
+    public synchronized String getDirectionString(final Location point) {
         if ((currentLocation != null) && (point != null)) {
             String result = distanceString(point);
             result += " "; //$NON-NLS-1$
@@ -167,7 +177,7 @@ public class NavigationInfo {
         return null;
     }
 
-    public String getDirectionString(final LatLon point) {
+    public synchronized String getDirectionString(final LatLon point) {
         if (point != null) {
             Location destination = new Location("map"); //$NON-NLS-1$
             destination.setLatitude(point.getLatitude());
@@ -178,7 +188,7 @@ public class NavigationInfo {
     }
 
     // Get current travelling speed and direction
-    public String getSpeedString() {
+    public synchronized String getSpeedString() {
         if ((currentLocation != null) && currentLocation.hasSpeed()) {
             double speed = Math.rint(currentLocation.getSpeed() * 360.0) / 100.0;
             String result = String.valueOf(speed) + " " + getString(R.string.kilometers_per_hour); //$NON-NLS-1$
@@ -190,7 +200,7 @@ public class NavigationInfo {
     }
 
     // Get positioning accuracy and provider information if available
-    public String getAccuracyString() {
+    public synchronized String getAccuracyString() {
         String provider = currentLocation.getProvider();
         String result = null;
         if ((currentLocation != null) && currentLocation.hasAccuracy()) {
@@ -205,7 +215,7 @@ public class NavigationInfo {
     }
 
     // Get altitude information string
-    public String getAltitudeString() {
+    public synchronized String getAltitudeString() {
         if ((currentLocation != null) && currentLocation.hasAltitude()) {
             double altitude = Math.rint(currentLocation.getAltitude() * 100.0) / 100.0;
             return getString(R.string.altitude) + " " + String.valueOf(altitude) + " " + getString(R.string.meters); //$NON-NLS-1$ //$NON-NLS-2$
@@ -214,7 +224,7 @@ public class NavigationInfo {
     }
 
 
-    public void setLocation(Location location) {
+    public synchronized void setLocation(Location location) {
         currentLocation = location;
         if (autoAnnounce) {
             final LatLon point = OsmandSettings.getOsmandSettings(context).getPointToNavigate();
