@@ -1,6 +1,9 @@
 option java_package = "net.osmand.binary";
 //protoc --java_out=../.. osmand_odb.proto
 
+// C++ # cd OsmAnd
+// # protoc --proto_path=../DataExtractionOSM/src --cpp_out=jni/osmand/proto ../DataExtractionOSM/src/osmand_odb.proto
+
 //
 //  STORAGE LAYER: Storing primitives.
 //

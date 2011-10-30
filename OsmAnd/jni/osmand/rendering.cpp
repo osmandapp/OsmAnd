@@ -1,3 +1,6 @@
+#ifndef _OSMAND_RENDERING
+#define _OSMAND_RENDERING
+
 #include <jni.h>
 #include <math.h>
 #include <android/log.h>
@@ -17,14 +20,15 @@
 #include "SkPaint.h"
 #include "SkPath.h"
 
-#include "common.cpp"
-#include "renderRules.cpp"
+#include "common.h"
+#include "renderRules.h"
 #include "textdraw.cpp"
-#include "mapObjects.cpp"
+#include "mapObjects.h"
 
-
+extern JNIEnv* globalEnv();
 char debugMessage[1024];
-
+jclass JUnidecodeClass;
+jmethodID JUnidecode_unidecode;
 
  void calcPoint(MapDataObject* mObj, jint ind, RenderingContext* rc) {
 	rc->pointCount++;
@@ -189,6 +193,11 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
 void drawPointText(RenderingRuleSearchRequest* req, RenderingContext* rc, std::string tag, std::string value,
 		float xText, float yText, std::string name, SkPath* path)
 {
+	if(rc->useEnglishNames){
+		jstring n = globalEnv()->NewStringUTF(name.c_str());
+		name = getString((jstring) globalEnv()->CallStaticObjectMethod(JUnidecodeClass, JUnidecode_unidecode, n));
+		globalEnv()->DeleteLocalRef(n);
+	}
 	if (name.at(0) == REF_CHAR) {
 		std::string ref = name.substr(1);
 		name = ""; //$NON-NLS-1$
@@ -405,8 +414,11 @@ void drawMultiPolygon(MultiPolygonObject* mapObject,RenderingRuleSearchRequest* 
 
 	NAT_COUNT(rc, cv->drawPath(path, *paint));
 	// for test purpose
-	// render.strokeWidth = 1.5f;
-	// render.color = Color.BLACK;
+//	paint->setStyle(SkPaint::kStroke_Style);
+//	paint->setStrokeWidth(2);
+//	paint->setPathEffect(NULL);
+//	paint->setColor(BLACK_COLOR);
+//	NAT_COUNT(rc, cv->drawPath(path, *paint));
 	if (updatePaint(req, paint, 1, 0, rc)) {
 		NAT_COUNT(rc, cv->drawPath(path, *paint));
 	}
@@ -502,17 +514,6 @@ void drawPoint(MapDataObject* mObj,	RenderingRuleSearchRequest* req, SkCanvas* c
 
 }
 
-// 0 - normal, -1 - under, 1 - bridge,over
-int getNegativeWayLayer(int type) {
-	int i = (3 & (type >> 12));
-	if (i == 1) {
-		return -1;
-	} else if (i == 2) {
-		return 1;
-	}
-	return 0;
-}
-
 void drawObject(RenderingContext* rc, BaseMapDataObject* mapObject, SkCanvas* cv, RenderingRuleSearchRequest* req,
 		SkPaint* paint, int l, int renderText, int drawOnlyShadow) {
 	rc->allObjects++;
@@ -540,66 +541,6 @@ void drawObject(RenderingContext* rc, BaseMapDataObject* mapObject, SkCanvas* cv
 		// polygon
 		drawPolygon(mObj, req, cv, paint, rc, pair);
 	}
-}
-
-
-
-
-void copyRenderingContext(jobject orc, RenderingContext* rc) 
-{
-	rc->leftX = env->GetFloatField( orc, getFid( RenderingContextClass, "leftX", "F" ) );
-	rc->topY = env->GetFloatField( orc, getFid( RenderingContextClass, "topY", "F" ) );
-	rc->width = env->GetIntField( orc, getFid( RenderingContextClass, "width", "I" ) );
-	rc->height = env->GetIntField( orc, getFid( RenderingContextClass, "height", "I" ) );
-	
-	
-	rc->zoom = env->GetIntField( orc, getFid( RenderingContextClass, "zoom", "I" ) );
-	rc->rotate = env->GetFloatField( orc, getFid( RenderingContextClass, "rotate", "F" ) );
-	rc->tileDivisor = env->GetFloatField( orc, getFid( RenderingContextClass, "tileDivisor", "F" ) );
-	
-	rc->pointCount = env->GetIntField( orc, getFid( RenderingContextClass, "pointCount", "I" ) );
-	rc->pointInsideCount = env->GetIntField( orc, getFid( RenderingContextClass, "pointInsideCount", "I" ) );
-	rc->visible = env->GetIntField( orc, getFid( RenderingContextClass, "visible", "I" ) );
-	rc->allObjects = env->GetIntField( orc, getFid( RenderingContextClass, "allObjects", "I" ) );
-	
-	rc->cosRotateTileSize = env->GetFloatField( orc, getFid( RenderingContextClass, "cosRotateTileSize", "F" ) );
-	rc->sinRotateTileSize = env->GetFloatField( orc, getFid( RenderingContextClass, "sinRotateTileSize", "F" ) );
-	rc->density = env->GetFloatField( orc, getFid( RenderingContextClass, "density", "F" ) );
-	rc->highResMode = env->GetBooleanField( orc, getFid( RenderingContextClass, "highResMode", "Z" ) );
-	rc->mapTextSize = env->GetFloatField( orc, getFid( RenderingContextClass, "mapTextSize", "F" ) );
-
-
-	rc->shadowRenderingMode = env->GetIntField( orc, getFid( RenderingContextClass, "shadowRenderingMode", "I" ) );
-	rc->shadowLevelMin = env->GetIntField( orc, getFid( RenderingContextClass, "shadowLevelMin", "I" ) );
-	rc->shadowLevelMax = env->GetIntField( orc, getFid( RenderingContextClass, "shadowLevelMax", "I" ) );
-	rc->androidContext = env->GetObjectField(orc, getFid( RenderingContextClass, "ctx", "Landroid/content/Context;"));
-	
-	rc->originalRC = orc; 
-
-}
-
-
-void mergeRenderingContext(jobject orc, RenderingContext* rc) 
-{
-	env->SetIntField( orc, getFid(RenderingContextClass, "pointCount", "I" ) , rc->pointCount);
-	env->SetIntField( orc, getFid(RenderingContextClass, "pointInsideCount", "I" ) , rc->pointInsideCount);
-	env->SetIntField( orc, getFid(RenderingContextClass, "visible", "I" ) , rc->visible);
-	env->SetIntField( orc, getFid(RenderingContextClass, "allObjects", "I" ) , rc->allObjects);
-	env->SetIntField( orc, getFid(RenderingContextClass, "textRenderingTime", "I" ) , rc->textRendering.getElapsedTime());
-	env->DeleteLocalRef(rc->androidContext);
-
-}
-
-void loadLibrary(jobject rc) {
-	loadJniCommon(rc);
-	loadJNIRenderingRules();
-	loadJniMapObjects();
-}
-
-void unloadLibrary() {
-	unloadJniMapObjects();
-	unloadJniRenderRules();
-	unloadJniCommon();
 }
 
 
@@ -737,8 +678,8 @@ void doRendering(std::vector <BaseMapDataObject* > mapDataObjects, SkCanvas* can
 			BaseMapDataObject* mapObject = mapDataObjects.at(ind);
 			// show text only for main type
 			drawObject(rc, mapObject, canvas, req, paint, l, l == 0, false);
-
 		}
+		rc->lastRenderedKey = *ks;
 		if (rc->interrupted()) {
 			return;
 		}
@@ -752,17 +693,19 @@ void doRendering(std::vector <BaseMapDataObject* > mapDataObjects, SkCanvas* can
 	rc->textRendering.pause();
 }
 
+void loadJNIRendering(){
+	JUnidecodeClass = globalRef(globalEnv()->FindClass("net/sf/junidecode/Junidecode"));
+	JUnidecode_unidecode = globalEnv()->GetStaticMethodID(JUnidecodeClass, "unidecode", "(Ljava/lang/String;)Ljava/lang/String;");
+}
+
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_generateRendering( JNIEnv* ienv,
-		jobject obj, jobject renderingContext, jobjectArray binaryMapDataObjects, jobject bmpObj,
+		jobject obj, jobject renderingContext, jint searchResult, jobject bmpObj,
 		jboolean useEnglishNames, jobject renderingRuleSearchRequest, jint defaultColor) {
-	if(!env) {
-	   env = ienv;
-	   loadLibrary(renderingContext);
-	}
+	setGlobalEnv(ienv);
 	SkBitmap* bmp = getNativeBitmap(bmpObj);
 	sprintf(debugMessage, "Image w:%d h:%d !", bmp->width(), bmp->height());
 	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
@@ -771,17 +714,16 @@ JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 
 	SkPaint* paint = new SkPaint;
 	paint->setAntiAlias(true);
-
 	__android_log_print(ANDROID_LOG_WARN, "net.osmand", "Initializing rendering");
 	watcher initObjects;
 	initObjects.start();
 
-
 	RenderingRuleSearchRequest* req =  initSearchRequest(renderingRuleSearchRequest);
-
     RenderingContext rc;
     copyRenderingContext(renderingContext, &rc);
-    std::vector <BaseMapDataObject* > mapDataObjects = marshalObjects(binaryMapDataObjects);
+    rc.useEnglishNames = useEnglishNames;
+    SearchResult* result = ((SearchResult*) searchResult);
+//    std::vector <BaseMapDataObject* > mapDataObjects = marshalObjects(binaryMapDataObjects);
 
 
     __android_log_print(ANDROID_LOG_WARN, "net.osmand", "Rendering image");
@@ -790,7 +732,9 @@ JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 
     // Main part do rendering
     rc.nativeOperations.start();
-    doRendering(mapDataObjects, canvas, paint, req, &rc);
+    if(result != NULL) {
+    	doRendering(result->result, canvas, paint, req, &rc);
+    }
     rc.nativeOperations.pause();
 
     mergeRenderingContext(renderingContext, &rc);
@@ -800,19 +744,17 @@ JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
     delete paint;
     delete canvas;
     delete req;
-    deleteObjects(mapDataObjects);
+//    deleteObjects(mapDataObjects);
 
 #ifdef DEBUG_NAT_OPERATIONS
     sprintf(debugMessage, "Native ok (init %d, native op %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
 #else
     sprintf(debugMessage, "Native ok (init %d, rendering %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
 #endif
-    jstring result = env->NewStringUTF( debugMessage);
-
-//  unloadLibrary();
-	return result;
+	return globalEnv()->NewStringUTF( debugMessage);
 }
 
 #ifdef __cplusplus
 }
 #endif
+#endif /**/

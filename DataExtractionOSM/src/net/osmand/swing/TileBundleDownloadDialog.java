@@ -24,6 +24,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import net.osmand.Version;
 import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
@@ -184,7 +185,7 @@ public class TileBundleDownloadDialog extends JDialog {
 			numberTiles += (x2 - x1 + 1) * (y2 - y1 + 1);
 		}
 		final int number = numberTiles;
-		final MapTileDownloader instance = MapTileDownloader.getInstance();
+		final MapTileDownloader instance = MapTileDownloader.getInstance(Version.APP_MAP_CREATOR_VERSION);
 		progressDialog.setRunnable(new Runnable(){
 
 			@Override

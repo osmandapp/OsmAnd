@@ -10,8 +10,8 @@
 #include "SkPaint.h"
 #include "SkPath.h"
 
-#include "common.cpp"
-#include "renderRules.cpp"
+#include "common.h"
+#include "renderRules.h"
 
 const char REF_CHAR = ((char)0x0019);
 const char DELIM_CHAR = ((char)0x0018);
@@ -410,9 +410,7 @@ bool intersect(SkRect tRect, float tRot, TextDrawInfo* s)
 }
 
 bool intersect(TextDrawInfo* t, TextDrawInfo* s) {
-	// TODO
-	return t->bounds.intersect(s->bounds);
-//	return intersect(t->bounds, t->pathRotate, s);
+	return intersect(t->bounds, t->pathRotate, s);
 }
 std::vector<TextDrawInfo*> search;
 bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDrawInfo*>& boundIntersections, TextDrawInfo* text,
