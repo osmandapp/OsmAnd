@@ -269,7 +269,7 @@
 				<filter minzoom="16" maxzoom="16" textSize="14" />
 				<filter minzoom="17" maxzoom="17" textSize="16" />
 				<filter minzoom="18" textSize="18" />
-				<groupFilter textOnPath="true">
+				<groupFilter textOnPath="true" textDy="-7">
 					<filter nightMode="true" textColor="#ffffff"/>
 					<filter nightMode="false" textColor="#000000"/>
 				</groupFilter>
