@@ -250,8 +250,8 @@ public class OsmandRenderer {
 				rc.ended = true;
 				notifyListeners(notifyList);
 				long time = System.currentTimeMillis() - now;
-				rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
-						+ "(%s points, %s points inside, %s objects visile from %s)\n" + res,//$NON-NLS-1$
+				rc.renderingDebugInfo = String.format("Rendering: %s ms  (%s text)\n"
+						+ "(%s points, %s points inside, %s of %s objects visible)\n" + res,//$NON-NLS-1$
 						time, rc.textRenderingTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -337,8 +337,8 @@ public class OsmandRenderer {
 			drawTextOverCanvas(rc, cv, useEnglishNames);
 
 			long time = System.currentTimeMillis() - now;
-			rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
-					+ "(%s points, %s points inside, %s objects visile from %s)",//$NON-NLS-1$
+			rc.renderingDebugInfo = String.format("Rendering: %s ms  (%s text)\n"
+					+ "(%s points, %s points inside, %s of %s objects visible)",//$NON-NLS-1$
 					time, time - beforeIconTextTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
 			log.info(rc.renderingDebugInfo);
 
