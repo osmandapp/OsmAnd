@@ -21,6 +21,7 @@ JNIEnv* setGlobalEnv(JNIEnv* e) {
 
 extern void loadJniCommon();
 extern void loadJNIRenderingRules();
+extern void loadJNIRendering();
 extern void loadJniMapObjects();
 extern void loadJniBinaryRead();
 
@@ -29,6 +30,7 @@ extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
     	return JNI_ERR; /* JNI version not supported */
     }
     loadJniCommon();
+    loadJNIRendering();
     loadJNIRenderingRules();
     loadJniMapObjects();
     loadJniBinaryRead();

@@ -433,7 +433,7 @@ bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDraw
 	}
 
 	// for text purposes
-	drawTestBox(cv, &text->bounds, text->pathRotate, paintIcon, text->text, NULL/*paintText*/);
+//	drawTestBox(cv, &text->bounds, text->pathRotate, paintIcon, text->text, NULL/*paintText*/);
 	boundIntersections.query_in_box(text->bounds, search);
 	for (uint i = 0; i < search.size(); i++) {
 		TextDrawInfo* t = search.at(i);
@@ -464,7 +464,7 @@ bool textOrder(TextDrawInfo* text1, TextDrawInfo* text2) {
 }
 
 SkTypeface* serif = SkTypeface::CreateFromName("Droid Serif", SkTypeface::kNormal);
-void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv, bool useEnglishNames) {
+void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv) {
 	SkRect r = SkRect::MakeLTRB(0, 0, rc->width, rc->height);
 	r.inset(-100, -100);
 	quad_tree<TextDrawInfo*> boundsIntersect(r, 4, 0.6);

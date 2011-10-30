@@ -107,6 +107,7 @@ extern jfieldID RenderingContext_interrupted;
 struct RenderingContext {
 	jobject originalRC;
 	jobject androidContext;
+	bool useEnglishNames;
 
 	std::vector<TextDrawInfo*> textToDraw;
 	std::vector<IconDrawInfo> iconsToDraw;

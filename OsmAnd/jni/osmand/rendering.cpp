@@ -27,6 +27,8 @@
 
 extern JNIEnv* globalEnv();
 char debugMessage[1024];
+jclass JUnidecodeClass;
+jmethodID JUnidecode_unidecode;
 
  void calcPoint(MapDataObject* mObj, jint ind, RenderingContext* rc) {
 	rc->pointCount++;
@@ -191,6 +193,11 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
 void drawPointText(RenderingRuleSearchRequest* req, RenderingContext* rc, std::string tag, std::string value,
 		float xText, float yText, std::string name, SkPath* path)
 {
+	if(rc->useEnglishNames){
+		jstring n = globalEnv()->NewStringUTF(name.c_str());
+		name = getString((jstring) globalEnv()->CallStaticObjectMethod(JUnidecodeClass, JUnidecode_unidecode, n));
+		globalEnv()->DeleteLocalRef(n);
+	}
 	if (name.at(0) == REF_CHAR) {
 		std::string ref = name.substr(1);
 		name = ""; //$NON-NLS-1$
@@ -686,6 +693,11 @@ void doRendering(std::vector <BaseMapDataObject* > mapDataObjects, SkCanvas* can
 	rc->textRendering.pause();
 }
 
+void loadJNIRendering(){
+	JUnidecodeClass = globalRef(globalEnv()->FindClass("net/sf/junidecode/Junidecode"));
+	JUnidecode_unidecode = globalEnv()->GetStaticMethodID(JUnidecodeClass, "unidecode", "(Ljava/lang/String;)Ljava/lang/String;");
+}
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -709,6 +721,7 @@ JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 	RenderingRuleSearchRequest* req =  initSearchRequest(renderingRuleSearchRequest);
     RenderingContext rc;
     copyRenderingContext(renderingContext, &rc);
+    rc.useEnglishNames = useEnglishNames;
     SearchResult* result = ((SearchResult*) searchResult);
 //    std::vector <BaseMapDataObject* > mapDataObjects = marshalObjects(binaryMapDataObjects);
 
