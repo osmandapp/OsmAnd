@@ -15,8 +15,8 @@
 	<string name="auto_follow_route_navigation_descr">Enable auto follow position only in navigation mode.</string>
 	<string name="auto_follow_route_navigation">Auto follow navigation</string>
 	<string name="auto_follow_location_enabled">Auto follow setting is enabled.</string>
-	<string name="animate_route_off">Animate off</string>
-	<string name="animate_route">Animate on</string>
+	<string name="animate_route_off">Stop animation</string>
+	<string name="animate_route">Start animation</string>
 	
 	<string name="tip_recent_changes_0_6_8_t">Changes in 0.6.8 :
 \n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
@@ -132,7 +132,7 @@
 	<string name="map_text_size_descr">Select text size for names on the map</string>
 	<string name="map_text_size">Text size</string>
 	<string name="trace_rendering">Rendering debug info</string>
-	<string name="trace_rendering_descr">Show rendering performance data for debugging purposes</string>
+	<string name="trace_rendering_descr">Display rendering performance</string>
 	<string name="tip_recent_changes">Recent changes</string>
 	<string name="tip_recent_changes_0_6_6_t">Recent changes for 0.6.6 : 
 \n\t- Text To Speech engine for voice navigation
@@ -156,7 +156,7 @@
 	<string name="gpx_option_from_start_point">Pass along entire track</string>
 
 	<string name="tip_rotation_switching">Map Rotation</string>
-	<string name="tip_rotation_switching_t">\tYou can choose whether and how the map display is rotated in \'Settings\' -> \'General Settings\' -> \'Map rotation\'.
+	<string name="tip_rotation_switching_t">\tYou can choose whether and how the map display is rotated in \'Settings\' -> \'General settings\' -> \'Map rotation\'.
 	\n\tThe choices are:
 	\n\t\'Don\'t rotate\' - Map will not be rotated. North will be always up
 	\n\t\'To direction of movement\' - Map will continuously be aligned with your heading
@@ -367,7 +367,7 @@
 	<string name="reload">Refresh</string>
 
 	<string name="general_settings_descr">Configure internet use, display options, and more</string>
-    <string name="general_settings">General Settings</string>
+    <string name="general_settings">General settings</string>
 	<string name="rendering_settings_descr">Configure map source and appearance</string>
     <string name="rendering_settings">Maps</string>
     <string name="index_settings_descr">Download/manage offline maps and data</string>

@@ -98,12 +98,12 @@
 			android:key="user_password"></EditTextPreference>
 	</PreferenceScreen>
 	
-	<PreferenceScreen android:key="development" android:title="OsmAnd Development" android:summary="Development activities and experimental features">
+	<PreferenceScreen android:key="development" android:title="OsmAnd development" android:summary="Debugging and experimental features">
 		<CheckBoxPreference android:summary="@string/trace_rendering_descr" android:title="@string/trace_rendering"
 			android:key="debug_rendering"></CheckBoxPreference>
-		<CheckBoxPreference android:key="animate_routing" android:title="Animate Routing" android:summary="Enable osmand animate routing"></CheckBoxPreference>
-		<Preference android:key="test_voice_commands" android:summary="Test currently selected voice routing" android:title="Test Voice Commands"></Preference>
-		<CheckBoxPreference android:key="native_rendering" android:title="Native Rendering" android:summary="Enable osmand native rendering"></CheckBoxPreference>
+		<CheckBoxPreference android:key="animate_routing" android:title="Animate routing" android:summary="Simulate route progression manually"></CheckBoxPreference>
+		<Preference android:key="test_voice_commands" android:summary="Play commands of currently selected voice" android:title="Test voice commands"></Preference>
+		<CheckBoxPreference android:key="native_rendering" android:title="Native rendering" android:summary="New vector rendering, should be faster, depends on Android configuration"></CheckBoxPreference>
 	</PreferenceScreen>
 
 </PreferenceScreen>
