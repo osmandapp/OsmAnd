@@ -464,7 +464,7 @@ bool textOrder(TextDrawInfo* text1, TextDrawInfo* text2) {
 }
 
 SkTypeface* serif = SkTypeface::CreateFromName("Droid Serif", SkTypeface::kNormal);
-void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv) {
+void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv, bool useEnglishNames) {
 	SkRect r = SkRect::MakeLTRB(0, 0, rc->width, rc->height);
 	r.inset(-100, -100);
 	quad_tree<TextDrawInfo*> boundsIntersect(r, 4, 0.6);
