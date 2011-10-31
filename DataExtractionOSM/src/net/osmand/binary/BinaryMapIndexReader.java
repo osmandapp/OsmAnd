@@ -1105,6 +1105,7 @@ public class BinaryMapIndexReader {
 		if (stops != null) {
 			request.searchResults = stops;
 		}
+		request.stringTable = new TIntObjectHashMap<String>();
 		request.left = sleft >> (31 - TRANSPORT_STOP_ZOOM);
 		request.right = sright >> (31 - TRANSPORT_STOP_ZOOM);
 		request.top = stop >> (31 - TRANSPORT_STOP_ZOOM);
