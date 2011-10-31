@@ -1008,7 +1008,7 @@
 					<filter minzoom="16" maxzoom="16" strokeWidth="15" />
 					<filter minzoom="17" maxzoom="17" strokeWidth="19" shadowRadius="2" />
 					<filter minzoom="18" strokeWidth="24" shadowRadius="2" />
-					<groupFilter layer="-1" pathEffect="4_4"/>
+					<groupFilter layer="-1" pathEffect="4_4" shadowRadius="0" cap="BUTT"/>
 				</filter>
 			</groupFilter>
 		</group>
@@ -1037,7 +1037,7 @@
 					<!-- radius 0 to avoid showing many black lines, but removed again due to bad visibility on some backgrounds -->
 					<filter minzoom="17" maxzoom="17" strokeWidth="13" />
 					<filter minzoom="18" strokeWidth="18" />
-					<groupFilter layer="-1" pathEffect="4_4"/>
+					<groupFilter layer="-1" pathEffect="4_4" shadowRadius="0" cap="BUTT"/>
 				</filter>
 				
 			</groupFilter>

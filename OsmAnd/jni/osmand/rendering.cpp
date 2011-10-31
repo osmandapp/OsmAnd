@@ -155,7 +155,6 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
 		} else {
 			paint->setPathEffect(NULL);
 		}
-
 	}
 
 	int color = req->getIntPropertyValue(rColor);
