@@ -11,6 +11,7 @@
 #include <time.h>
 #include "SkTypes.h"
 #include "SkBitmap.h"
+#include "SkColorFilter.h"
 #include "SkShader.h"
 #include "SkBitmapProcShader.h"
 #include "SkPathEffect.h"
@@ -121,6 +122,7 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
 		rCap = req->props()->R_CAP_3;
 		rPathEff = req->props()->R_PATH_EFFECT_3;
 	}
+	paint->setColorFilter(NULL);
 	if (area) {
 		paint->setStyle(SkPaint::kStrokeAndFill_Style);
 		paint->setStrokeWidth(0);
@@ -174,9 +176,9 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
 	}
 
 	// do not check shadow color here
-	if (rc->shadowRenderingMode != 1 || ind != 0) {
+	paint->setLooper(NULL);
+	if (rc->shadowRenderingMode == 1 && ind == 0) {
 		paint->setLooper(NULL);
-	} else {
 		int shadowColor = req->getIntPropertyValue(req->props()->R_SHADOW_COLOR);
 		int shadowLayer = req->getIntPropertyValue(req->props()->R_SHADOW_RADIUS);
 		if (shadowColor == 0) {
@@ -185,7 +187,6 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
 		if (shadowLayer > 0) {
 			paint->setLooper(new SkBlurDrawLooper(shadowLayer, 0, 0, shadowColor))->unref();
 		}
-		paint->setLooper(NULL);
 	}
 	return 1;
 }
@@ -257,7 +258,8 @@ void drawPolylineShadow(SkCanvas* cv, SkPaint* paint, RenderingContext* rc, SkPa
 	if (rc->shadowRenderingMode == 3 && shadowRadius > 0) {
 		paint->setLooper(NULL);
 		paint->setStrokeWidth(paint->getStrokeWidth() + shadowRadius * 2);
-		paint->setColor(0xffbababa);
+//		paint->setColor(0xffbababa);
+		paint->setColorFilter(SkColorFilter::CreateModeFilter(shadowColor, SkXfermode::kSrcIn_Mode))->unref();
 //		paint->setColor(shadowColor);
 		NAT_COUNT(rc, cv->drawPath(*path, *paint));
 	}

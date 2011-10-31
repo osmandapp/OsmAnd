@@ -39,6 +39,7 @@ import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.render.NativeOsmandLibrary.NativeSearchResult;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import net.osmand.plus.render.OsmandRenderer.ShadowRenderingMode;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -484,6 +485,17 @@ public class MapRenderRepositories {
 			final long searchTime = System.currentTimeMillis() - now;
 
 			currentRenderingContext = new OsmandRenderer.RenderingContext(context);
+			RenderingRuleProperty rr = storage.PROPS.get("shadowRenderingMode");
+			if(rr != null){
+				CommonPreference<String> settings = app.getSettings().getCustomRenderProperty(rr.getAttrName());
+				if(settings.get().length() > 0 ) {
+					try {
+						ShadowRenderingMode m = ShadowRenderingMode.valueOf(settings.get().replace(' ', '_').toUpperCase());
+						currentRenderingContext.shadowRenderingMode = m.value;
+					} catch(IllegalArgumentException e){
+					}
+				}
+			}
 			currentRenderingContext.leftX = (float) requestedBox.getLeftTileX();
 			currentRenderingContext.topY = (float) requestedBox.getTopTileY();
 			currentRenderingContext.zoom = requestedBox.getZoom();

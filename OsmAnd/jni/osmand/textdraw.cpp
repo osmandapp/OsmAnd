@@ -369,7 +369,7 @@ void drawTestBox(SkCanvas* cv, SkRect* r, float rot, SkPaint* paintIcon, std::st
 	cv->restore();
 }
 
-float sqr(float a){
+inline float sqr(float a){
 	return a*a;
 }
 
@@ -444,10 +444,11 @@ bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDraw
 	if(text->minDistance > 0) {
 		SkRect boundsSearch = text->bounds;
 		boundsSearch.inset(-getDensityValue(rc, std::max(5.0f, text->minDistance)), -getDensityValue(rc, 12));
+		boundIntersections.query_in_box(boundsSearch, search);
 //		drawTestBox(cv, &boundsSearch, text->pathRotate, paintIcon, text->text, NULL/*paintText*/);
 		for (uint i = 0; i < search.size(); i++) {
 			TextDrawInfo* t = search.at(i);
-			if (t->minDistance > 0 && intersect(boundsSearch, text->pathRotate,  t)) {
+			if (t->minDistance > 0 && t->text == text->text && intersect(boundsSearch, text->pathRotate,  t)) {
 				return true;
 			}
 		}

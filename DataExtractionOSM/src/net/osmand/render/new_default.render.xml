@@ -54,7 +54,9 @@
 	<renderingProperty attr="hmRendered" name="Show more map detail" description="Default renderer: Increase amount of map detail shown"
 		type="boolean" possibleValues=""/>
 	<renderingProperty attr="appMode" name="Rendering mode" description="Default renderer: Adjust rendering for specific purpose"
-		type="string" possibleValues="default,car,bicycle,pedestrian"/>	
+		type="string" possibleValues="default,car,bicycle,pedestrian"/>
+	<renderingProperty attr="shadowRenderingMode" name="Shadow rendering" description="Default renderer: change way of displaying road edges."
+		type="string" possibleValues="no shadow,one step,blur shadow,solid shadow"/>		
 
 
 	<!-- input exact layer, orderType check tag, value -->
