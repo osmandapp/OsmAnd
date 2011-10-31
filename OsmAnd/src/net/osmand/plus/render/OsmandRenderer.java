@@ -393,7 +393,7 @@ public class OsmandRenderer {
 						int wholeType = o.getTypes()[j];
 						int mask = wholeType & 3;
 						int layer = 0;
-						if (mask != 1) {
+						if (mask != MapRenderingTypes.POINT_TYPE) {
 							layer = MapRenderingTypes.getNegativeWayLayer(wholeType);
 						}
 
@@ -592,6 +592,10 @@ public class OsmandRenderer {
 		RenderingRuleProperty rStrokeW;
 		RenderingRuleProperty rCap;
 		RenderingRuleProperty rPathEff;
+		
+		p.setShader(null);
+		p.setColorFilter(null);
+		p.clearShadowLayer();
 		if(ind == 0){
 			rColor = req.ALL.R_COLOR;
 			rStrokeW = req.ALL.R_STROKE_WIDTH;
@@ -633,21 +637,15 @@ public class OsmandRenderer {
 				p.setPathEffect(null);
 			}
 		}
-		p.setColorFilter(null);
-		p.setColor(req.getIntPropertyValue(rColor));
 		
+		p.setColor(req.getIntPropertyValue(rColor));
 		if(ind == 0){
 			String resId = req.getStringPropertyValue(req.ALL.R_SHADER);
 			if(resId != null){
 				p.setShader(getShader(resId));
-			} else {
-				p.setShader(null);
 			}
-			
 			// do not check shadow color here
-			if(rc.shadowRenderingMode != 1) {
-				paint.clearShadowLayer();
-			} else {
+			if(rc.shadowRenderingMode == 1) {
 				int shadowColor = req.getIntPropertyValue(req.ALL.R_SHADOW_COLOR);
 				int shadowLayer = req.getIntPropertyValue(req.ALL.R_SHADOW_RADIUS);
 				if (shadowColor == 0) {
@@ -655,10 +653,8 @@ public class OsmandRenderer {
 				}
 				p.setShadowLayer(shadowLayer, 0, 0, shadowColor);
 			}
-		} else {
-			p.setShader(null);
-			p.clearShadowLayer();
 		}
+		
 		return true;
 		
 	}

@@ -40,7 +40,7 @@ public class QuadTree<T> {
 
 	private void queryNode(RectF box, List<T> result, Node<T> node) {
 		if (node != null) {
-			if (box.intersect(node.bounds)) {
+			if (RectF.intersects(box, node.bounds)) {
 				if (node.data != null) {
 					result.addAll(node.data);
 				}

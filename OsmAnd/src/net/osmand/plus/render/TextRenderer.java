@@ -57,6 +57,8 @@ public class TextRenderer {
 		public void fillProperties(RenderingRuleSearchRequest render, float centerX, float centerY) {
 			this.centerX = centerX;
 			this.centerY = centerY + render.getIntPropertyValue(render.ALL.R_TEXT_DY, 0);
+			// used only for draw on path where centerY doesn't play role
+			this.vOffset = render.getIntPropertyValue(render.ALL.R_TEXT_DY, 0);
 			textColor = render.getIntPropertyValue(render.ALL.R_TEXT_COLOR);
 			if (textColor == 0) {
 				textColor = Color.BLACK;
@@ -95,9 +97,9 @@ public class TextRenderer {
 		return a * a;
 	}
 
-	boolean intersect(RectF tRect, float tRot, RectF sRect, float sRot) {
+	boolean intersects(RectF tRect, float tRot, RectF sRect, float sRot) {
 		if (Math.abs(tRot) < Math.PI / 15 && Math.abs(sRot) < Math.PI / 15) {
-			return tRect.intersect(sRect);
+			return RectF.intersects(tRect, sRect);
 		}
 		float dist = FloatMath.sqrt(sqr(tRect.centerX() - sRect.centerX()) + sqr(tRect.centerY() - sRect.centerY()));
 		if (dist < 3) {
@@ -122,11 +124,11 @@ public class TextRenderer {
 			float left = sRect.centerX() + dist * FloatMath.cos(diff) - tRect.width() / 2;
 			float top = sRect.centerY() - dist * FloatMath.sin(diff) - tRect.height() / 2;
 			RectF nRect = new RectF(left, top, left + tRect.width(), top + tRect.height());
-			return nRect.intersect(sRect);
+			return RectF.intersects(nRect, sRect);
 		}
 
 		// TODO other cases not covered
-		return tRect.intersect(sRect);
+		return RectF.intersects(tRect, sRect);
 	}
 
 	void drawTestBox(Canvas cv, RectF r, float rot, String text) {
@@ -151,19 +153,19 @@ public class TextRenderer {
 		boundIntersections.queryInBox(text.bounds, tempSearch);
 		for (int i = 0; i < tempSearch.size(); i++) {
 			TextDrawInfo t = tempSearch.get(i);
-			if (intersect(text.bounds, text.pathRotate, t.bounds, t.pathRotate)) {
+			if (intersects(text.bounds, text.pathRotate, t.bounds, t.pathRotate)) {
 				return true;
 			}
 		}
 		if (text.minDistance > 0) {
 			RectF boundsSearch = new RectF(text.bounds);
-			boundsSearch.inset(-rc.getDensityValue(Math.max(5.0f, text.minDistance)), -rc.getDensityValue(12));
+			boundsSearch.inset(-rc.getDensityValue(Math.max(5.0f, text.minDistance)), -rc.getDensityValue(15));
 			boundIntersections.queryInBox(boundsSearch, tempSearch);
 			// drawTestBox(cv, &boundsSearch, text.pathRotate, paintIcon, text.text, NULL/*paintText*/);
 			for (int i = 0; i < tempSearch.size(); i++) {
 				TextDrawInfo t = tempSearch.get(i);
 				if (t.minDistance > 0 && t.text.equals(text.text) &&
-						intersect(boundsSearch, text.pathRotate, t.bounds, t.pathRotate)) {
+						intersects(boundsSearch, text.pathRotate, t.bounds, t.pathRotate)) {
 					return true;
 				}
 			}
@@ -358,7 +360,6 @@ public class TextRenderer {
 		if (!drawOnPath) {
 			p.drawOnPath = null;
 			// simply calculate rotation of path used for shields
-			p.vOffset -= p.textSize / 2 - 1;
 			float px = 0;
 			float py = 0;
 			for (int i = 1; i < len; i++) {
@@ -472,7 +473,7 @@ public class TextRenderer {
 
 		p.centerX = points[startInd].x + scale * px + ox;
 		p.centerY = points[startInd].y + scale * py + oy;
-		p.vOffset = p.textSize / 2 - 1;
+		p.vOffset += p.textSize / 2 - 1;
 //		p.hOffset = 0;
 
 		if (inverse) {

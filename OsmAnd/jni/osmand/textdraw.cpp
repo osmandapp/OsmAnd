@@ -61,7 +61,7 @@ private:
 
     void query_node(SkRect& box, std::vector<T> & result, node* node) const {
 		if (node) {
-			if (box.intersect(node->bounds)) {
+			if (SkRect::Intersects(box, node->bounds)) {
 				node_data_iterator i = node->data.begin();
 				node_data_iterator end = node->data.end();
 				while (i != end) {
@@ -120,6 +120,8 @@ private:
 void fillTextProperties(TextDrawInfo* info, RenderingRuleSearchRequest* render, float cx, float cy) {
 	info->centerX = cx;
 	info->centerY = cy + render->getIntPropertyValue(render->props()->R_TEXT_DY, 0);
+	// used only for draw on path where centerY doesn't play role
+	info->vOffset = render->getIntPropertyValue(render->props()->R_TEXT_DY, 0);
 	info->textColor = render->getIntPropertyValue(render->props()->R_TEXT_COLOR);
 	if (info->textColor == 0) {
 		info->textColor = 0xff000000;
@@ -215,7 +217,6 @@ bool calculatePathToRotate(RenderingContext* rc, TextDrawInfo* p) {
 	p->path->getPoints(points, len);
 	if (!p->drawOnPath) {
 		// simply calculate rotation of path used for shields
-		p->vOffset -= p->textSize / 2 - 1;
 		float px = 0;
 		float py = 0;
 		for (int i = 1; i < len; i++) {
@@ -334,7 +335,7 @@ bool calculatePathToRotate(RenderingContext* rc, TextDrawInfo* p) {
 
 	p->centerX = points[startInd].fX + scale * px + ox;
 	p->centerY = points[startInd].fY + scale * py + oy;
-	p->vOffset = p->textSize / 2 - 1;
+	p->vOffset += p->textSize / 2 - 1;
 	p->hOffset = 0;
 
 	if (inverse) {
@@ -373,11 +374,11 @@ inline float sqr(float a){
 	return a*a;
 }
 
-bool intersect(SkRect tRect, float tRot, TextDrawInfo* s)
+bool intersects(SkRect tRect, float tRot, TextDrawInfo* s)
 {
 	float sRot = s->pathRotate;
 	if (abs(tRot) < M_PI / 15 && abs(sRot) < M_PI / 15) {
-		return tRect.intersect(s->bounds);
+		return SkRect::Intersects(tRect, s->bounds);
 	}
 	float dist = sqrt(sqr(tRect.centerX() - s->bounds.centerX()) + sqr(tRect.centerY() - s->bounds.centerY()));
 	if(dist < 3) {
@@ -402,15 +403,15 @@ bool intersect(SkRect tRect, float tRot, TextDrawInfo* s)
 		float left = sRect.centerX() + dist* cos(diff) - tRect.width()/2;
 		float top = sRect.centerY() - dist* sin(diff) - tRect.height()/2;
 		SkRect nRect = SkRect::MakeXYWH(left, top, tRect.width(), tRect.height());
-		return nRect.intersect(sRect);
+		return SkRect::Intersects(nRect, sRect);
 	}
 
 	// TODO other cases not covered
-	return tRect.intersect(sRect);
+	return SkRect::Intersects(tRect, sRect);
 }
 
-bool intersect(TextDrawInfo* t, TextDrawInfo* s) {
-	return intersect(t->bounds, t->pathRotate, s);
+bool intersects(TextDrawInfo* t, TextDrawInfo* s) {
+	return intersects(t->bounds, t->pathRotate, s);
 }
 std::vector<TextDrawInfo*> search;
 bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDrawInfo*>& boundIntersections, TextDrawInfo* text,
@@ -424,7 +425,7 @@ bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDraw
 		return true;
 	}
 
-	if(!text->drawOnPath) {
+	if(text->path == NULL) {
 		text->bounds.offset(text->centerX, text->centerY);
 		// shift to match alignment
 		text->bounds.offset(-text->bounds.width()/2, 0);
@@ -437,18 +438,18 @@ bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDraw
 	boundIntersections.query_in_box(text->bounds, search);
 	for (uint i = 0; i < search.size(); i++) {
 		TextDrawInfo* t = search.at(i);
-		if (intersect(text, t)) {
+		if (intersects(text, t)) {
 			return true;
 		}
 	}
 	if(text->minDistance > 0) {
 		SkRect boundsSearch = text->bounds;
-		boundsSearch.inset(-getDensityValue(rc, std::max(5.0f, text->minDistance)), -getDensityValue(rc, 12));
+		boundsSearch.inset(-getDensityValue(rc, std::max(5.0f, text->minDistance)), -getDensityValue(rc, 15));
 		boundIntersections.query_in_box(boundsSearch, search);
-//		drawTestBox(cv, &boundsSearch, text->pathRotate, paintIcon, text->text, NULL/*paintText*/);
+//		drawTestBox(cv, &boundsSearch, text->pathRotate, paintIcon, text->text, paintText);
 		for (uint i = 0; i < search.size(); i++) {
 			TextDrawInfo* t = search.at(i);
-			if (t->minDistance > 0 && t->text == text->text && intersect(boundsSearch, text->pathRotate,  t)) {
+			if (t->minDistance > 0 && t->text == text->text && intersects(boundsSearch, text->pathRotate,  t)) {
 				return true;
 			}
 		}

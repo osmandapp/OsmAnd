@@ -123,6 +123,8 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
 		rPathEff = req->props()->R_PATH_EFFECT_3;
 	}
 	paint->setColorFilter(NULL);
+	paint->setShader(NULL);
+	paint->setLooper(NULL);
 	if (area) {
 		paint->setStyle(SkPaint::kStrokeAndFill_Style);
 		paint->setStrokeWidth(0);
@@ -159,26 +161,19 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
 	int color = req->getIntPropertyValue(rColor);
 	paint->setColor(color);
 
+
 	if (ind == 0) {
 		std::string shader = req->getStringPropertyValue(req->props()->R_SHADER);
 		if (shader.size() > 0) {
 			SkBitmap* bmp = getCachedBitmap(rc, shader);
-			if (bmp == NULL) {
-				paint->setShader(NULL);
-			} else {
+			if (bmp != NULL) {
 				paint->setShader(new SkBitmapProcShader(*bmp, SkShader::kRepeat_TileMode, SkShader::kRepeat_TileMode))->unref();
 			}
-		} else {
-			paint->setShader(NULL);
 		}
-	} else {
-		paint->setShader(NULL);
 	}
 
 	// do not check shadow color here
-	paint->setLooper(NULL);
 	if (rc->shadowRenderingMode == 1 && ind == 0) {
-		paint->setLooper(NULL);
 		int shadowColor = req->getIntPropertyValue(req->props()->R_SHADOW_COLOR);
 		int shadowLayer = req->getIntPropertyValue(req->props()->R_SHADOW_RADIUS);
 		if (shadowColor == 0) {
