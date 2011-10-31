@@ -103,7 +103,7 @@
 			android:key="debug_rendering"></CheckBoxPreference>
 		<CheckBoxPreference android:key="animate_routing" android:title="Animate routing" android:summary="Simulate route progression manually"></CheckBoxPreference>
 		<Preference android:key="test_voice_commands" android:summary="Play commands of currently selected voice" android:title="Test voice commands"></Preference>
-		<CheckBoxPreference android:key="native_rendering" android:title="Native rendering" android:summary="New vector rendering, should be faster, depends on Android configuration"></CheckBoxPreference>
+		<CheckBoxPreference android:key="native_rendering" android:title="Native rendering" android:summary="Vector maps may display faster. May not work well on some devices."></CheckBoxPreference>
 	</PreferenceScreen>
 
 </PreferenceScreen>
