@@ -893,7 +893,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			}
 			return true;
 		}
-		return false;
+		return super.onKeyUp(keyCode, event);
 	}
 	
 	public void checkExternalStorage(){
