@@ -786,7 +786,7 @@
 		<!-- ZM 10 -->
 		<filter minzoom="9" shader="nr2" color="#abdf96" tag="leisure" value="nature_reserve" 
 			strokeWidth_2="1" color_2="#66cc33">
-			<filter nightMode="true" shader="" color="#000034" />
+			<filter nightMode="true" color="#000034" />
 		</filter>
 
 		<group>
