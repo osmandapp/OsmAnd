@@ -366,14 +366,14 @@
 	<string name="select_all">Select all</string>
 	<string name="reload">Refresh</string>
 
-	<string name="general_settings_descr">Configure internet use, display options, and more</string>
+	<string name="general_settings_descr">Configure display options and other overall settings</string>
     <string name="general_settings">General settings</string>
 	<string name="rendering_settings_descr">Configure map source and appearance</string>
     <string name="rendering_settings">Maps</string>
-    <string name="index_settings_descr">Download/manage offline maps and data</string>
+    <string name="index_settings_descr">Download and manage offline maps and other data like GPX tracks</string>
     <string name="index_settings">Offline data</string>
 	<string name="osmand_service">Background service</string>
-	<string name="osmand_service_descr">Run background service to use OsmAnd while screen is off</string>
+	<string name="osmand_service_descr">Use to run OsmAnd while screen is off</string>
 	<string name="fast_route_mode">Fastest route</string>
 	<string name="fast_route_mode_descr">Enable to calculate fastest route or disable for shortest route </string>
 	<string name="tiles_to_download_estimated_size">At zoom {0} download {1} tiles ({2} MB)</string>
