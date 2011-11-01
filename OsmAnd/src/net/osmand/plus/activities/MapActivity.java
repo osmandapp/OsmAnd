@@ -665,7 +665,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	    				if(Math.abs(mapView.getZoom() - z) > 1 || (lastTimeAutoZooming - now) > 6500){
 	    					lastTimeAutoZooming = now;
 	    					mapView.setZoom(z);
-						AccessibleToast.makeText(this, getString(R.string.zoomIs) + String.valueOf(z), Toast.LENGTH_SHORT);
 	    				}
 	    			}
 	    		}
