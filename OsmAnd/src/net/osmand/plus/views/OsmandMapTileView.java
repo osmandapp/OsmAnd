@@ -729,7 +729,15 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			float dz = (float) (Math.log(relativeToStart) / Math.log(2) * 1.5);
 			float calcZoom = initialMultiTouchZoom + dz;
 			setZoom(Math.round(calcZoom));
-			zoomPositionChanged(getZoom());
+			final Context ctx = getContext();
+			final int newZoom = getZoom();
+			zoomPositionChanged(newZoom);
+			handler.post(new Runnable(){
+					@Override
+					public void run() {
+						AccessibleToast.makeText(ctx, ctx.getString(R.string.zoomIs) + String.valueOf(newZoom), Toast.LENGTH_SHORT).show();
+					}
+			});
 		}
 
 		@Override
