@@ -15,6 +15,7 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.location.Location;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.widget.Toast;
 
@@ -117,6 +118,7 @@ public class NavigationInfo {
         R.string.north_north_west
     };
 
+    private Handler uiHandler = new Handler();
     private final Context context;
     private Location currentLocation;
     private RelativeDirection lastDirection;
@@ -236,10 +238,14 @@ public class NavigationInfo {
                         destination.setLatitude(point.getLatitude());
                         destination.setLongitude(point.getLongitude());
                         if (lastDirection.update(destination)) {
-                            String notification = distanceString(destination);
-                            notification += " " + lastDirection.getString(); //$NON-NLS-1$
+                            final String notification = distanceString(destination) + " " + lastDirection.getString(); //$NON-NLS-1$
                             lastNotificationTime = now;
-                            AccessibleToast.makeText(context, notification, Toast.LENGTH_LONG).show();
+                            uiHandler.post(new Runnable(){
+                                    @Override
+                                    public void run() {
+                                        AccessibleToast.makeText(context, notification, Toast.LENGTH_LONG).show();
+                                    }
+                                });
                         }
                     }
                 } else {
