@@ -28,7 +28,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
@@ -50,12 +49,8 @@ import android.view.WindowManager;
 public class OsmandRenderer {
 	private static final Log log = LogUtil.getLog(OsmandRenderer.class);
 
-	private final int clFillScreen = Color.rgb(241, 238, 232);
-
-	
 	private Paint paint;
 
-	private Paint paintFillEmpty;
 	private Paint paintIcon;
 
 	public static final int TILE_SIZE = 256; 
@@ -160,9 +155,6 @@ public class OsmandRenderer {
 		paint = new Paint();
 		paint.setAntiAlias(true);
 
-		paintFillEmpty = new Paint();
-		paintFillEmpty.setStyle(Style.FILL);
-		paintFillEmpty.setColor(clFillScreen);
 		dm = new DisplayMetrics();
 		WindowManager wmgr = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
@@ -246,9 +238,8 @@ public class OsmandRenderer {
 			// fill area
 			Canvas cv = new Canvas(bmp);
 			if (defaultColor != 0) {
-				paintFillEmpty.setColor(defaultColor);
+				cv.drawColor(defaultColor);
 			}
-			cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillEmpty);
 			// put in order map
 			TIntObjectHashMap<TIntArrayList> orderMap = sortObjectsByProperOrder(rc, objects, render);
 

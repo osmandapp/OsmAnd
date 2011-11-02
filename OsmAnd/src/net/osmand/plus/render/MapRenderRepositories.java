@@ -42,12 +42,14 @@ import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.render.OsmandRenderer.ShadowRenderingMode;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
 
 import org.apache.commons.logging.Log;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.RectF;
 import android.graphics.Bitmap.Config;
 import android.os.Handler;
@@ -485,16 +487,16 @@ public class MapRenderRepositories {
 			final long searchTime = System.currentTimeMillis() - now;
 
 			currentRenderingContext = new OsmandRenderer.RenderingContext(context);
-			RenderingRuleProperty rr = storage.PROPS.get("shadowRenderingMode");
-			if(rr != null){
-				CommonPreference<String> settings = app.getSettings().getCustomRenderProperty(rr.getAttrName());
-				if(settings.get().length() > 0 ) {
-					try {
-						ShadowRenderingMode m = ShadowRenderingMode.valueOf(settings.get().replace(' ', '_').toUpperCase());
-						currentRenderingContext.shadowRenderingMode = m.value;
-					} catch(IllegalArgumentException e){
-					}
-				}
+			int fillColor = 0xf1eee8;
+			renderingReq.clearState();
+			renderingReq.setIntFilter(renderingReq.ALL.R_MINZOOM, requestedBox.getZoom());
+			if(renderingReq.searchRenderingAttribute(RenderingRuleStorageProperties.A_DEFAULT_COLOR)) {
+				fillColor = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_COLOR_VALUE);
+			}
+			renderingReq.clearState();
+			renderingReq.setIntFilter(renderingReq.ALL.R_MINZOOM, requestedBox.getZoom());
+			if(renderingReq.searchRenderingAttribute(RenderingRuleStorageProperties.A_SHADOW_RENDERING)) {
+				currentRenderingContext.shadowRenderingMode = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_INT_VALUE);
 			}
 			currentRenderingContext.leftX = (float) requestedBox.getLeftTileX();
 			currentRenderingContext.topY = (float) requestedBox.getTopTileY();
@@ -511,7 +513,9 @@ public class MapRenderRepositories {
 
 			now = System.currentTimeMillis();
 
-			Bitmap bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.RGB_565);
+//			Bitmap bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.RGB_565);
+			Bitmap bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.ARGB_8888);
+			bmp.eraseColor(Color.TRANSPARENT);
 
 			// 1. generate image step by step
 			this.prevBmp = this.bmp;
@@ -519,12 +523,13 @@ public class MapRenderRepositories {
 			this.bmp = bmp;
 			this.bmpLocation = tileRect;
 			
+			
 			if(app.getSettings().NATIVE_RENDERING.get()) {
 				renderer.generateNewBitmapNative(currentRenderingContext, cNativeObjects, bmp, prefs.USE_ENGLISH_NAMES.get(), renderingReq,
-						notifyList, storage.getBgColor(nightMode));
+						notifyList, fillColor);
 			} else {
 				renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, prefs.USE_ENGLISH_NAMES.get(), renderingReq,
-						notifyList, storage.getBgColor(nightMode));
+						notifyList, fillColor);
 			}
 			String renderingDebugInfo = currentRenderingContext.renderingDebugInfo;
 			currentRenderingContext.ended = true;

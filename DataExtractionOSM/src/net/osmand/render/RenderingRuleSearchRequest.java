@@ -85,6 +85,17 @@ public class RenderingRuleSearchRequest {
 		return searchResult;
 	}
 	
+	public boolean searchRenderingAttribute(String attribute) {
+		searchResult = false;
+		RenderingRule rule = storage.getRenderingAttributeRule(attribute);
+		if(rule == null){
+			return false;
+		}
+		searchResult = visitRule(rule, true);
+		return searchResult;
+	}
+	
+	
 	public boolean search(int state) {
 		return search(state, true);
 	}

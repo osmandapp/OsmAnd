@@ -93,7 +93,7 @@ public class RendererRegistry {
 				if (dep == null) {
 					log.warn("Dependent renderer not found : "  + name); //$NON-NLS-1$
 				}
-				return null;
+				return dep;
 			}
 		});
 		renderers.put(name, main);
