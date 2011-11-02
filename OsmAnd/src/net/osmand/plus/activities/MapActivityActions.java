@@ -154,7 +154,7 @@ public class MapActivityActions {
     
     protected void reloadTile(final int zoom, final double latitude, final double longitude){
     	Builder builder = new AlertDialog.Builder(mapActivity);
-    	builder.setMessage(R.string.context_menu_item_update_map_confirm);
+    	builder.setView(mapActivity.accessibleMessage(R.string.context_menu_item_update_map_confirm));
     	builder.setNegativeButton(R.string.default_buttons_cancel, null);
     	final OsmandMapTileView mapView = mapActivity.getMapView();
     	builder.setPositiveButton(R.string.context_menu_item_update_map, new DialogInterface.OnClickListener(){
@@ -321,7 +321,7 @@ public class MapActivityActions {
 		};
 		Builder builder = new AlertDialog.Builder(mapActivity);
 		builder.setTitle(R.string.show_route);
-		builder.setMessage(mapActivity.getRoutingHelper().getGeneralRouteInformation());
+		builder.setView(mapActivity.accessibleMessage(mapActivity.getRoutingHelper().getGeneralRouteInformation()));
 		builder.setPositiveButton(R.string.default_buttons_save, saveDirections);
 		builder.setNeutralButton(R.string.route_about, showRoute);
 		builder.setNegativeButton(R.string.close, null);

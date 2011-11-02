@@ -313,7 +313,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			notRestoreRoutingMode();
 		} else {
 			Builder builder = new AlertDialog.Builder(MapActivity.this);
-			builder.setMessage(R.string.continue_follow_previous_route);
+			builder.setView(accessibleMessage(R.string.continue_follow_previous_route));
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -1081,7 +1081,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			startActivity(intent);
 		} else {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(getString(R.string.gps_status_app_not_found));
+			builder.setView(accessibleMessage(getString(R.string.gps_status_app_not_found)));
 			builder.setPositiveButton(
 					getString(R.string.default_buttons_yes),
 					new DialogInterface.OnClickListener() {

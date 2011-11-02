@@ -320,9 +320,9 @@ public class MainMenuActivity extends AccessibleActivity {
 		if (check && new Random().nextInt() % 5 == 1) {
 			Builder builder = new AlertDialog.Builder(this);
 			if(maps.isEmpty()){
-				builder.setMessage(R.string.vector_data_missing);
+				builder.setView(accessibleMessage(R.string.vector_data_missing));
 			} else if(!maps.basemapExists()){
-				builder.setMessage(R.string.basemap_missing);
+				builder.setView(accessibleMessage(R.string.basemap_missing));
 			} else {
 				return;
 			}

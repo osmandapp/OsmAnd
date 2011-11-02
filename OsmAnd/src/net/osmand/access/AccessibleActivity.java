@@ -69,13 +69,13 @@ public class AccessibleActivity extends Activity {
     // to wrap it into a View and set it by AlertDialog.Builder.setView().
     // Such message will be focusable and so it can be repeated by selecting.
 
-    protected View accessibleMessage(CharSequence msg) {
+    public View accessibleMessage(CharSequence msg) {
         View layout = getLayoutInflater().inflate(R.layout.alert, null);
         ((TextView)layout.findViewById(R.id.message)).setText(msg);
         return layout;
     }
 
-    protected View accessibleMessage(int msgid) {
+    public View accessibleMessage(int msgid) {
         View layout = getLayoutInflater().inflate(R.layout.alert, null);
         ((TextView)layout.findViewById(R.id.message)).setText(msgid);
         return layout;
