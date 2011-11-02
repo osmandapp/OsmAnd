@@ -735,7 +735,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			handler.post(new Runnable(){
 					@Override
 					public void run() {
-						AccessibleToast.makeText(ctx, ctx.getString(R.string.zoomIs) + String.valueOf(newZoom), Toast.LENGTH_SHORT).show();
+						AccessibleToast.makeText(ctx, ctx.getString(R.string.zoomIs) + " " + String.valueOf(newZoom), Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 					}
 			});
 		}

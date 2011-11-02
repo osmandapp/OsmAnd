@@ -376,7 +376,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
     public void changeZoom(int newZoom){
     	boolean changeLocation = settings.AUTO_ZOOM_MAP.get();
 		mapView.getAnimatedDraggingThread().startZooming(newZoom, changeLocation);
-		AccessibleToast.makeText(this, getString(R.string.zoomIs) + String.valueOf(newZoom), Toast.LENGTH_SHORT).show();
+		AccessibleToast.makeText(this, getString(R.string.zoomIs) + " " + String.valueOf(newZoom), Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 		showAndHideMapPosition();
     }
     

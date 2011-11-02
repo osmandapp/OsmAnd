@@ -717,7 +717,7 @@
 	<string name="backToMenu">Главное меню</string>
 	<string name="zoomOut">Уменьшить масштаб</string>
 	<string name="zoomIn">Увеличить масштаб</string>
-	<string name="zoomIs">Масштаб </string>
+	<string name="zoomIs">Масштаб</string>
 
 	<string name="north">север</string>
 	<string name="north_north_east">северо-северо-восток</string>
