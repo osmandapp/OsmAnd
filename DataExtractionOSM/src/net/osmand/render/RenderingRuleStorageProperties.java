@@ -83,12 +83,22 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_TEXT_HALO_RADIUS;
 	public RenderingRuleProperty R_TEXT_WRAP_WIDTH;
 
-	final Map<String, RenderingRuleProperty> properties = new LinkedHashMap<String, RenderingRuleProperty>();
+	final Map<String, RenderingRuleProperty> properties;
 	// C++
-	final List<RenderingRuleProperty> rules = new ArrayList<RenderingRuleProperty>();
-	final List<RenderingRuleProperty> customRules = new ArrayList<RenderingRuleProperty>();
+	final List<RenderingRuleProperty> rules ;
+	final List<RenderingRuleProperty> customRules ;
 	
 	public RenderingRuleStorageProperties() {
+		properties = new LinkedHashMap<String, RenderingRuleProperty>();
+		rules = new ArrayList<RenderingRuleProperty>();
+		customRules = new ArrayList<RenderingRuleProperty>();
+		createDefaultRenderingRuleProperties();
+	}
+	
+	public RenderingRuleStorageProperties(RenderingRuleStorageProperties toClone) {
+		properties = new LinkedHashMap<String, RenderingRuleProperty>(toClone.properties);
+		rules = new ArrayList<RenderingRuleProperty>(toClone.rules);
+		customRules = new ArrayList<RenderingRuleProperty>(toClone.customRules);
 		createDefaultRenderingRuleProperties();
 	}
 
@@ -158,15 +168,19 @@ public class RenderingRuleStorageProperties {
 	}
 	
 	private RenderingRuleProperty registerRuleInternal(RenderingRuleProperty p) {
-		properties.put(p.getAttrName(), p);
-		p.setId(rules.size());
-		rules.add(p);
-		return p;
+		if(get(p.getAttrName()) == null) {
+			properties.put(p.getAttrName(), p);
+			p.setId(rules.size());
+			rules.add(p);
+		}
+		return get(p.getAttrName());
 	}
 
 	public RenderingRuleProperty registerRule(RenderingRuleProperty p) {
-		registerRuleInternal(p);
-		customRules.add(p);
-		return p;
+		RenderingRuleProperty ps = registerRuleInternal(p);
+		if(!customRules.contains(ps)) {
+			customRules.add(p);
+		}
+		return ps;
 	}
 }

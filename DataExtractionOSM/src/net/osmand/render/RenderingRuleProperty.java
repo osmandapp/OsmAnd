@@ -247,11 +247,11 @@ public class RenderingRuleProperty {
                 // Set the alpha value
                 color |= 0x00000000ff000000;
             } else if (colorString.length() != 9) {
-                throw new IllegalArgumentException("Unknown color" + colorString); //$NON-NLS-1$
+                throw new IllegalArgumentException("Unknown color " + colorString); //$NON-NLS-1$
             }
             return (int)color;
         }
-        throw new IllegalArgumentException("Unknown color" + colorString); //$NON-NLS-1$
+        throw new IllegalArgumentException("Unknown color " + colorString); //$NON-NLS-1$
     }
     
     public static String colorToString(int color) {
