@@ -12,7 +12,7 @@
 		type="boolean" possibleValues=""/>
 	<renderingProperty attr="appMode" name="Rendering mode" description="Default renderer: Adjust rendering for specific purpose"
 		type="string" possibleValues="default,car,bicycle,pedestrian"/>
-	<renderingProperty attr="noPolygons" name="No polygons" description="Default renderer: Switch off fullfillment of area objects"
+	<renderingProperty attr="noPolygons" name="No polygons" description="Default renderer: Make areal map objects transparent"
 		type="boolean" possibleValues=""/>
 	<!-- <renderingProperty attr="shadowRenderingMode" name="Shadow rendering" description="Default renderer: change way of displaying road edges."
 		type="string" possibleValues="no shadow,one step,blur shadow,solid shadow"/>
@@ -21,7 +21,7 @@
 	<!-- 0 - no shadow, 1 - one step, 2 - blur shadow, 3 - solid shadow -->	
 	<renderingAttribute name="shadowRendering">
 		<filter minzoom="14" attrIntValue="3" />
-		<filter minzoom="10" maxzoom="14" attrIntValue="1" />
+		<filter minzoom="9" maxzoom="13" attrIntValue="1" />
 		<filter attrIntValue="0" />
 	</renderingAttribute>
 	
