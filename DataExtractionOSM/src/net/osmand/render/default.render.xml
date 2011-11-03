@@ -914,9 +914,9 @@
 			<filter tag="highway" value="trunk_link" color="#ffaf80" color_2="#ffaf80" />
 			<filter tag="highway" value="primary" color="#eb989a" color_2="#eb989a" />
 			<filter tag="highway" value="primary_link" color="#eb989a" color_2="#eb989a" />
-			<filter tag="highway" value="secondary" color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" shadowRadius="1" />
-			<filter tag="highway" value="secondary_link" color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" shadowRadius="1" />
-			<groupFilter cap="ROUND">
+			<filter tag="highway" value="secondary" color="#fdd6a4" color_2="#fdd6a4" />
+			<filter tag="highway" value="secondary_link" color="#fdd6a4" color_2="#fdd6a4" />
+			<groupFilter cap="ROUND" shadowColor="#464646" shadowRadius="1">
 				<!-- bridge -->
 				<filter layer="1" cap_2="SQUARE" color="#000000" cap="BUTT" shadowRadius="0">
 					<filter minzoom="14" maxzoom="15" strokeWidth="14" strokeWidth_2="12" />
