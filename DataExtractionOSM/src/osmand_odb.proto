@@ -1,5 +1,5 @@
 option java_package = "net.osmand.binary";
-//protoc --java_out=../.. osmand_odb.proto
+//protoc --java_out=DataExtractionOSM/src DataExtractionOSM/src/osmand_odb.proto
 
 // C++ # cd OsmAnd
 // # protoc --proto_path=../DataExtractionOSM/src --cpp_out=jni/osmand/proto ../DataExtractionOSM/src/osmand_odb.proto
@@ -8,8 +8,8 @@ option java_package = "net.osmand.binary";
 //  STORAGE LAYER: Storing primitives.
 //
 
-// IMPORTANT :  These messages are not intented to be parsed by google engine (because of the size)
- // The main difference that size of that messages is not var int and is always fixed int size
+// IMPORTANT :  These messages are not intented to be parsed by google engine (because of the random access to the file)
+// The main difference that size of that messages is not var int and is always fixed int size
 message OsmAndStructure {
    required uint32 version = 1;
 
@@ -60,72 +60,96 @@ message IndexedStringTable {
    repeated IndexedStringTable subtables = 5;
 }
 
+
+///////////////////////
+////  Map messages ////
+///////////////////////
 message OsmAndMapIndex {
-   // encoded as fixed32 length delimited 
-   repeated MapRootLevel levels = 1;
-   
-   optional string name = 3;
-   
-   repeated MapEncodingRule rules = 8;
+
+	required string name = 2;
+
+	repeated MapEncodingRule rules = 4;
+	message MapEncodingRule {
+		required string tag = 3;
+		optional string value = 5;
+		// it is optional because natural order in block of rules
+		// is the same as id
+		optional uint32 id = 7;
+		optional uint32 minZoom = 9;
+	}
+
+	// encoded as fixed32 length delimited
+	repeated MapRootLevel levels = 5;
+	message MapRootLevel {
+		required int32 maxZoom = 1;
+		required int32 minZoom = 2;
+		required int32 left = 3;
+		required int32 right = 4;
+		required int32 top = 5;
+		required int32 bottom = 6;
+
+		repeated MapDataBox boxes = 7;
+	}
+
+	message MapDataBox {
+		required sint32 left = 1; // delta encoded
+		required sint32 right = 2; // delta encoded
+		required sint32 top = 3; // delta encoded
+		required sint32 bottom = 4; // delta encoded
+
+		//shift to message MapDataBlock
+		optional uint32 shiftToMapData = 5;
+
+		repeated MapDataBox boxes = 7;
+	}
+
+	// encoded as fixed32 length delimited
+	repeated MapDataBlocks blocks = 7;
+	message MapDataBlocks {
+		// based coordinates can be specified
+		// for an array of blocks
+		repeated MapDataBlock block = 6;
+	}
 }
 
-message MapEncodingRule {
-	required string tag = 3;
-	optional string value = 5;
-	required uint32 type = 6;
-	required uint32 subtype = 7;
-	
-	optional uint32 minZoom = 9;
-}
-
-message MapRootLevel {
-   required int32 maxZoom = 1;
-   required int32 minZoom = 2;
-   required int32 left = 3; 
-   required int32 right = 4; 
-   required int32 top = 5; 
-   required int32 bottom = 6;
-   
-   // encoded as fixed32 length delimited
-   repeated MapTree root = 7;
-   
-}
-
-message MapTree {
-   required sint32 left = 1; // delta encoded
-   required sint32 right = 2; // delta encoded
-   required sint32 top = 3; // delta encoded
-   required sint32 bottom = 4; // delta encoded
-   
-   // deprecated fields used as base id (should be removed, when all maps be regenerated)
-   // leave for backward compatibility
-   optional StringTable oldstringTable = 5; 
-   optional uint64 oldbaseId = 6;  
-   
-   // encoded as fixed32 length delimited
-   repeated MapTree subtrees = 7;
-   
-   repeated MapData leafs = 8;
+message MapDataBlock {
+	// coordinates can take much space 4*4*count of data blocks=
+//   required sint32 left = 1; // delta encoded
+//   required sint32 right = 2; // delta encoded
+//   required sint32 top = 3; // delta encoded
+//   required sint32 bottom = 4; // delta encoded
    
    optional uint64 baseId = 10;
-   optional StringTable stringTable = 11;
+
+   // in future here can be optional raster tile
+   repeated MapData dataObjects = 12;
+
+   optional StringTable stringTable = 15;
 }
 
 
-/// Simple messages
 message MapData {
-  required bytes coordinates = 1; // array of delta x,y sint32 (CodedIinputStream) >> 5
-  								 // first x delta to Tree.left, y to delta Tree.top (next delta to previous)
-  required bytes types = 2; // array of fixed int16
-  
-  required sint64 id = 3; // delta encoded
-  optional uint32 stringId = 4;
-  
-  optional bytes restrictions = 5; // array of SInt64 delta encoded (to baseId !)
-  optional int32 highwayMeta = 6; 
+  // array of delta x,y sint32 (CodedIinputStream) >> 5
+  // first x delta to Tree.left, y to delta Tree.top (next delta to previous)
+  optional bytes pointCoordinates = 1;
+  optional bytes lineCoordinates = 2;
+  optional bytes polygonOuterCoordinates = 3;
+  repeated bytes polygonInnerCoordinates = 4;
+
+  // array of raw var int types
+  required bytes types = 7;
+  // repeated array<pair<tagId : raw_var_int, indexOfStringInParent : raw_var_int> >
+  optional bytes stringNames = 10; // in parent blocku
+
+  required sint64 id = 12; // delta encoded
 }
 
-/// Address messages
+
+
+////////////////////////////
+/////  Address messages ////
+////////////////////////////
+
 message OsmAndAddressIndex {
 	
 	required string name = 1;
@@ -133,31 +157,42 @@ message OsmAndAddressIndex {
 	
 	optional OsmAndTileBox boundaries = 3;
 	
-	// from OsmAndAddressIndex
-	optional fixed32 shiftToNameIndex = 4;
 	
 	// encoded as fixed32 length delimited
 	// 1) cities and towns - type 1,  2) postcodes - type 2, 3) villages - type 3
 	repeated CitiesIndex cities = 6;
-	
+	message CitiesIndex {
+	    // cities and towns - type 1,  postcodes - type 2, villages - type 3
+    	required uint32 type = 2;
+
+    	// not mixed
+	    // the list of the cities and the blocks are synchronized by the order (so even empty block will be written)
+	    repeated CityIndex cities = 5;
+
+    	// encoded as fixed32 length delimited
+    	repeated CityBlockIndex blocks = 7;
+	}
+
 	// encoded as fixed32 length delimited
 	optional OsmAndAddressNameIndexData nameIndex = 7;  
 }
 
 message OsmAndAddressNameIndexData {
 
-    required fixed32 shiftToStringTable = 2;
-   
-    repeated AddressNameIndexData data = 5;
+    repeated AddressNameIndexDataBlocks blocks = 3;
+    message AddressNameIndexDataBlocks {
+    	repeated AddressNameIndexData atom = 4;
+    	message AddressNameIndexData {
+    		repeated AddressNameIndexDataAtom atom = 4;
+		}
+	}
     
-    // shift to data starting from first AddressNameIndexData message
+    // shift to AddressNameIndexData starting from first OsmAndAddressNameIndexData message
     // encoded as fixed32 length delimited
     required IndexedStringTable table = 4;
 }
 
-message AddressNameIndexData {
-    repeated AddressNameIndexDataAtom atom = 4; 
-}
+
 
 message AddressNameIndexDataAtom {
      required string name = 1;
@@ -170,19 +205,6 @@ message AddressNameIndexDataAtom {
      repeated fixed32 shiftToIndex = 5;
      // optional used in case of type=street
      repeated fixed32 shiftToCityIndex = 6; 
-}
-
-
-message CitiesIndex {
-    // cities and towns - type 1,  postcodes - type 2, villages - type 3
-    required uint32 type = 2;
-    
-    // not mixed
-    // the list cities and blocks are synchronized by order (so even empty block will be written)
-    repeated CityIndex cities = 5;
-    
-    // encoded as fixed32 length delimited
-    repeated CityBlockIndex blocks = 7;
 }
 
 
@@ -199,7 +221,6 @@ message CityIndex {
 	
 	// shift from start CityIndex to cityBlockIndex
 	optional fixed32 shiftToCityBlockIndex = 10;
-	
 }
 
 message CityBlockIndex {
@@ -258,7 +279,9 @@ message BuildingIndex {
 	optional string postcode = 14;
 }
 
-// transport messages
+////////////////////////////
+//// Transport messages ////
+////////////////////////////
 
 message TransportRoutes {
    repeated TransportRoute routes = 6; 

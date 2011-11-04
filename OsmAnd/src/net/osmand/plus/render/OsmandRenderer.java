@@ -36,6 +36,7 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PathEffect;
 import android.graphics.PointF;
+import android.graphics.Xfermode;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Shader;
@@ -643,7 +644,6 @@ public class OsmandRenderer {
 				p.setPathEffect(null);
 			}
 		}
-		
 		p.setColor(req.getIntPropertyValue(rColor));
 		if(ind == 0){
 			String resId = req.getStringPropertyValue(req.ALL.R_SHADER);
