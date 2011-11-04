@@ -29,7 +29,7 @@
 	<string name="auto_follow_route_navigation">Auto follow nav only</string>
 	<string name="auto_follow_route_navigation_descr">Use map view auto follow only while navigating.</string>
 	<string name="auto_follow_location_enabled">Map view auto follow in use.</string>
-
+	
 	<string name="sendtoOSM_confirmation_msg">Send to OSM: %1$s?</string>
 	<string name="pref_vector_rendering">Vector renderer specific options</string>
 	<string name="pref_overlay">Overlay / underlay</string>
