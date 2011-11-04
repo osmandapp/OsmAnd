@@ -799,7 +799,6 @@
 			<filter minzoom="12" color="#efc8c8" tag="landuse" value="commercial" />
 			<filter minzoom="12" color="#9d9d6c" tag="landuse" value="construction" />
 			<filter minzoom="10" color="#CDCDCD" tag="landuse" value="residential" />
-			<filter minzoom="12" shader="quarry2" tag="landuse" value="quarry" />
 			<filter minzoom="15" color="#f0f0d8" color_2="#d4a89e" strokeWidth_2="1" tag="amenity" value="kindergarten" />
 			<filter minzoom="15" color="#f0f0d8" color_2="#d4a89e" strokeWidth_2="1" tag="amenity" value="school" />
 			<filter minzoom="15" color="#f0f0d8" color_2="#d4a89e" strokeWidth_2="1" tag="amenity" value="college" />
@@ -816,7 +815,6 @@
 			<filter minzoom="13" color="#f2caea" tag="tourism" value="attraction" />
 			<filter minzoom="12" maxzoom="15" color="#f2caea" color_2="#734a08" strokeWidth_2="1" pathEffect_2="9_3" tag="tourism" value="theme_park" />
 			<filter minzoom="16" color="#f2caea" color_2="#734a08" strokeWidth_2="2" pathEffect_2="9_3" tag="tourism" value="theme_park" />
-			<filter minzoom="12" shader="zoo" tag="tourism" value="zoo" />
 			<filter minzoom="13" color="#a0ccff99" tag="tourism" value="camp_site" />
 			<filter minzoom="13" color="#a0ccff99" tag="tourism" value="caravan_site" />
 			<filter minzoom="13" color="#a0ccff99" tag="tourism" value="picnic_site" />
@@ -842,21 +840,23 @@
 
 
 		<!-- special nature, with shaders, often night color unchanged -->
-		<filter minzoom="11" shader="beach" tag="natural" value="beach" />
-		<filter minzoom="12" shader="marsh" tag="natural" value="marsh" />
-		<filter minzoom="12" shader="mud" tag="natural" value="mud" />
-		<filter minzoom="12" shader="scrub" tag="natural" value="scrub" />
-		<filter minzoom="10" shader="marsh" tag="natural" value="wetland" />
-		<filter minzoom="12" shader="orchard" tag="landuse" value="orchard" />
+		<!-- Looks like shaders are not working without color statement, hence color="#100000" introduced for now where missing -->
+		<filter minzoom="11" shader="beach" color="#100000" tag="natural" value="beach" />
+		<filter minzoom="12" shader="marsh" color="#100000" tag="natural" value="marsh" />
+		<filter minzoom="12" shader="mud" color="#100000" tag="natural" value="mud" />
+		<filter minzoom="12" shader="scrub" color="#100000" tag="natural" value="scrub" />
+		<filter minzoom="10" shader="marsh" color="#100000" tag="natural" value="wetland" />
+		<filter minzoom="12" shader="orchard" color="#100000" tag="landuse" value="orchard" />
 		<filter minzoom="12" shader="vineyard" color="#abdf96" tag="landuse" value="vineyard" />	
 		<filter minzoom="12" shader="grave_yard" color="#aacbaf" tag="landuse" value="cemetery" />
+		<filter minzoom="12" shader="zoo" color="#100000" tag="tourism" value="zoo" />
 		<filter minzoom="12" shader="grave_yard" color="#aacbaf" tag="landuse" value="grave_yard" />
-		<filter nightMode="true" minzoom="9" shader="glacier" color_2="#497CAF" strokeWidth_2="2" tag="natural" value="glacier" />
-		<filter minzoom="9" shader="glacier" color_2="#99ccff" strokeWidth_2="2" tag="natural" value="glacier" />
-		<filter minzoom="10" shader="danger" tag="military" value="danger_area" />
+		<filter minzoom="12" shader="quarry2" color="#100000" tag="landuse" value="quarry" />
+		<filter nightMode="true" minzoom="9" shader="glacier" color="#100000" color_2="#497CAF" strokeWidth_2="2" tag="natural" value="glacier" />
+		<filter minzoom="9" shader="glacier" color="#100000" color_2="#99ccff" strokeWidth_2="2" tag="natural" value="glacier" />
+		<filter minzoom="10" shader="danger" color="#100000" tag="military" value="danger_area" />
 		<!-- ZM 10 -->
 		<filter minzoom="9" shader="nr2" tag="leisure" value="nature_reserve" strokeWidth_2="1" color_2="#66cc33" />
-		<!-- filter minzoom="9" shader="nr2" color="#abdf96" tag="leisure" value="nature_reserve" strokeWidth_2="1" color_2="#66cc33" / -->
 	</polygon>
 
 
