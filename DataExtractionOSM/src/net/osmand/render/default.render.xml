@@ -20,8 +20,10 @@
 		
 	<!-- 0 - no shadow, 1 - one step, 2 - blur shadow, 3 - solid shadow -->	
 	<renderingAttribute name="shadowRendering">
-		<filter minzoom="14" attrIntValue="3" />
-		<filter minzoom="9" maxzoom="13" attrIntValue="1" />
+			<!-- next line corrects for shadowColor appearing very dark with solid shadow in day view -->
+			<filter minzoom="14" nightMode="false" attrIntValue="3" shadowColor="#969696" />
+		<filter minzoom="14" attrIntValue="3" shadowColor="#464646" />
+		<filter minzoom="9" maxzoom="13" attrIntValue="1" shadowColor="#464646" />
 		<filter attrIntValue="0" />
 	</renderingAttribute>
 	
@@ -894,7 +896,7 @@
 		<group>
 			<filter tag="highway" value="secondary" maxzoom="13" />
 			<filter tag="highway" value="secondary_link" maxzoom="13"/>
-			<groupFilter color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" shadowRadius="1" cap="ROUND" >
+			<groupFilter color="#fdd6a4" color_2="#fdd6a4" shadowRadius="1" cap="ROUND" >
 				<filter minzoom="9" maxzoom="9" strokeWidth="3" />
 				<filter minzoom="10" maxzoom="10" strokeWidth="4" />
 				<filter minzoom="11" maxzoom="11" strokeWidth="5" />
@@ -916,9 +918,9 @@
 			<filter tag="highway" value="primary_link" color="#eb989a" color_2="#eb989a" />
 			<filter tag="highway" value="secondary" color="#fdd6a4" color_2="#fdd6a4" />
 			<filter tag="highway" value="secondary_link" color="#fdd6a4" color_2="#fdd6a4" />
-			<groupFilter cap="ROUND" shadowColor="#464646" shadowRadius="1">
+			<groupFilter shadowRadius="1" cap="ROUND" >
 				<!-- bridge -->
-				<filter layer="1" cap_2="SQUARE" color="#000000" cap="BUTT" shadowRadius="0">
+				<filter layer="1" cap_2="SQUARE" color="#000000" shadowRadius="0" cap="BUTT" >
 					<filter minzoom="14" maxzoom="15" strokeWidth="14" strokeWidth_2="12" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="17" strokeWidth_2="15" />
 					<filter minzoom="17" maxzoom="17" strokeWidth="21" strokeWidth_2="19" />
@@ -939,13 +941,13 @@
 		<group>
 			<filter tag="highway" value="tertiary" />
 			<filter tag="highway" value="tertiary_link" />
-			<groupFilter cap="ROUND" color="#fefeb3" color_2="#fefeb3" shadowRadius="1" shadowColor="#464646" >
+			<groupFilter color="#fefeb3" color_2="#fefeb3" shadowRadius="1" cap="ROUND" >
 				<filter minzoom="10" maxzoom="10" strokeWidth="3" />
 				<filter minzoom="11" maxzoom="11" strokeWidth="4" />
 				<filter minzoom="12" maxzoom="12" strokeWidth="5" />
 				<filter minzoom="13" maxzoom="13" strokeWidth="6" />
 				<!-- bridge --> 
-				<filter layer="1" cap_2="SQUARE" color="#000000" cap="BUTT" shadowRadius="0">
+				<filter layer="1" cap_2="SQUARE" color="#000000" shadowRadius="0" cap="BUTT" >
 					<filter minzoom="13" maxzoom="14" strokeWidth="8" strokeWidth_2="6" />
 					<filter minzoom="15" maxzoom="15" strokeWidth="10" strokeWidth_2="8" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="12" strokeWidth_2="10" />
@@ -968,7 +970,7 @@
 			<filter tag="highway" value="road" />
 			<filter tag="highway" value="unclassified" />
 			<filter tag="highway" value="residential" />
-			<groupFilter shadowRadius="1" cap="ROUND" color="#ffffff" color_2="#ffffff" shadowColor="#464646">
+			<groupFilter color="#ffffff" color_2="#ffffff" shadowRadius="1" cap="ROUND" >
 				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="3">
 					<filter nightMode="true" color="#9F9F9F" color_2="#9F9F9F" /> 
 				</filter> 
@@ -976,7 +978,7 @@
 					<filter nightMode="true" color="#9F9F9F" color_2="#9F9F9F" />
 				</filter>
 				<!-- bridge --> 
-				<filter layer="1" cap_2="SQUARE" color="#000000" cap="BUTT" shadowRadius="0">
+				<filter layer="1" cap_2="SQUARE" color="#000000" shadowRadius="0" cap="BUTT" >
 					<filter minzoom="14" maxzoom="14" strokeWidth="8" strokeWidth_2="6" />
 					<filter minzoom="15" maxzoom="15" strokeWidth="10" strokeWidth_2="8" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="12" strokeWidth_2="10" />
@@ -1002,11 +1004,11 @@
 			<filter tag="highway" value="service" />
 			<filter tag="highway" value="living_street" />
 			<filter tag="highway" value="pedestrian" />
-			<groupFilter shadowRadius="1" cap="ROUND" color="#ececec" color_2="#ececec" shadowColor="#464646" >
+			<groupFilter color="#ececec" color_2="#ececec" shadowRadius="1" cap="ROUND" >
 				<filter hmRendered="true" minzoom="13" maxzoom="13" strokeWidth="2" />
 				<filter hmRendered="true" minzoom="14" maxzoom="14" strokeWidth="3" />
 				<!-- bridge --> 
-				<filter  layer="1" cap_2="SQUARE" cap="BUTT" color="#000000" color_2="#ffffff" shadowColor="#464646" >
+				<filter  layer="1" cap_2="SQUARE" cap="BUTT" color="#000000" color_2="#ffffff" >
 					<filter hmRendered="true" minzoom="13" maxzoom="14" strokeWidth="5" strokeWidth_2="3" />
 					<filter minzoom="15" maxzoom="15" strokeWidth="6" strokeWidth_2="4" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="7" strokeWidth_2="5" />
@@ -1014,7 +1016,7 @@
 					<filter minzoom="18" strokeWidth="14" strokeWidth_2="12" />
 					<groupFilter nightMode="true" color="#000000"/>
 			 	</filter>
-				<filter shadowRadius="1">
+				<filter>
 					<filter minzoom="15" maxzoom="15" strokeWidth="4" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="5" />
 					<filter minzoom="17" maxzoom="17" strokeWidth="8" />
