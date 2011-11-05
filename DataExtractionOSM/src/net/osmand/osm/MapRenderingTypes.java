@@ -925,9 +925,8 @@ public class MapRenderingTypes {
 		amenityTagValToType.put("amenity"+TAG_DELIMETER+"college", AmenityType.EDUCATION);  //$NON-NLS-1$//$NON-NLS-2$
 		amenityTagValToType.put("amenity"+TAG_DELIMETER+"library", AmenityType.EDUCATION);  //$NON-NLS-1$//$NON-NLS-2$
 		amenityTagValToType.put("amenity"+TAG_DELIMETER+"university", AmenityType.EDUCATION);  //$NON-NLS-1$//$NON-NLS-2$
-		
-		
 		amenityTagValToType.put("amenity"+TAG_DELIMETER+"kindergarten", AmenityType.EDUCATION);  //$NON-NLS-1$//$NON-NLS-2$
+		
 		amenityTagValToType.put("amenity"+TAG_DELIMETER+"parking", AmenityType.TRANSPORTATION);  //$NON-NLS-1$//$NON-NLS-2$
 		amenityTagValToType.put("amenity"+TAG_DELIMETER+"bicycle_parking", AmenityType.TRANSPORTATION);  //$NON-NLS-1$//$NON-NLS-2$
 		amenityTagValToType.put("amenity"+TAG_DELIMETER+"ferry_terminal", AmenityType.TRANSPORTATION);  //$NON-NLS-1$//$NON-NLS-2$

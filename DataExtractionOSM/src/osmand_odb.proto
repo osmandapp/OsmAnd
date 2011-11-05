@@ -20,8 +20,9 @@ message OsmAndStructure {
     // encoded as fixed32 length delimited  
    repeated OsmAndTransportIndex transportIndex = 4;
    
-   // encoded as fixed32 length delimited  
-   repeated OsmAndPoiIndex poiIndex = 5;
+   // slight changes previous version was 5
+   // encoded as fixed32 length delimited
+   repeated OsmAndPoiIndex poiIndex = 8;
    
     // first version of map index was 2.
    // encoded as fixed32 length delimited
@@ -361,10 +362,13 @@ message OsmAndPoiIndex {
     
     repeated OsmAndCategoryTable categoriesTable = 3;
     
-    // leave space for other indexes
     // encoded as fixed32 length delimited
     optional OsmAndPoiNameIndex nameIndex = 4;
     
+    // shift to OsmAndPoiNameIndexData starting from OsmAndPoiIndex message
+    // encoded as fixed32 length delimited
+    optional IndexedStringTable table = 5;
+
 	// encoded as fixed32 length delimited
 	repeated OsmAndPoiBox boxes = 6; // children 
 
@@ -374,30 +378,19 @@ message OsmAndPoiIndex {
 }
 
 message OsmAndPoiNameIndex {
-   
-   required fixed32 shiftToStringTable = 2;
-   
-   repeated OsmAndPoiNameIndexData data = 5;
-   
-   // shift to data starting from first OsmAndPoiNameIndexData message
-   // encoded as fixed32 length delimited
-   required IndexedStringTable table = 8;
-}
-
-message OsmAndPoiNameIndexData {
-
-   // can contain multiple data offsets
-   repeated OsmAndPoiNameIndexDataAtom atoms = 4;
+   repeated OsmAndPoiNameIndexData data = 3;
+   message OsmAndPoiNameIndexData {
+   		// can contain multiple data offsets
+   		repeated OsmAndPoiNameIndexDataAtom atoms = 3;
+   }
 }
 
 message OsmAndPoiNameIndexDataAtom {
-
    // fields do not preserve order define, they are repeating 
    optional uint32 zoom = 2;
    optional uint32 x = 3;
    optional uint32 y = 4;
-   
-   // Must be the last
+   // Must be the last in order to proper calculate message size
    // shift to OsmAndPoiBoxData message from OsmAndPoiIndex.start
    // message is started when body is started
    optional fixed32 shiftTo = 14;

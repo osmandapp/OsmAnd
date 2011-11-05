@@ -66,8 +66,8 @@ public final class OsmandOdb {
       return transportIndex_.get(index);
     }
     
-    // repeated .OsmAndPoiIndex poiIndex = 5;
-    public static final int POIINDEX_FIELD_NUMBER = 5;
+    // repeated .OsmAndPoiIndex poiIndex = 8;
+    public static final int POIINDEX_FIELD_NUMBER = 8;
     private java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiIndex> poiIndex_ =
       java.util.Collections.emptyList();
     public java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiIndex> getPoiIndexList() {
@@ -126,14 +126,14 @@ public final class OsmandOdb {
       for (net.osmand.binary.OsmandOdb.OsmAndTransportIndex element : getTransportIndexList()) {
         output.writeMessage(4, element);
       }
-      for (net.osmand.binary.OsmandOdb.OsmAndPoiIndex element : getPoiIndexList()) {
-        output.writeMessage(5, element);
-      }
       for (net.osmand.binary.OsmandOdb.OsmAndMapIndex element : getMapIndexList()) {
         output.writeMessage(6, element);
       }
       for (net.osmand.binary.OsmandOdb.OsmAndAddressIndex element : getAddressIndexList()) {
         output.writeMessage(7, element);
+      }
+      for (net.osmand.binary.OsmandOdb.OsmAndPoiIndex element : getPoiIndexList()) {
+        output.writeMessage(8, element);
       }
       if (hasVersionConfirm()) {
         output.writeUInt32(32, getVersionConfirm());
@@ -155,10 +155,6 @@ public final class OsmandOdb {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, element);
       }
-      for (net.osmand.binary.OsmandOdb.OsmAndPoiIndex element : getPoiIndexList()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, element);
-      }
       for (net.osmand.binary.OsmandOdb.OsmAndMapIndex element : getMapIndexList()) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, element);
@@ -166,6 +162,10 @@ public final class OsmandOdb {
       for (net.osmand.binary.OsmandOdb.OsmAndAddressIndex element : getAddressIndexList()) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(7, element);
+      }
+      for (net.osmand.binary.OsmandOdb.OsmAndPoiIndex element : getPoiIndexList()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, element);
       }
       if (hasVersionConfirm()) {
         size += com.google.protobuf.CodedOutputStream
@@ -410,12 +410,6 @@ public final class OsmandOdb {
               addTransportIndex(subBuilder.buildPartial());
               break;
             }
-            case 42: {
-              net.osmand.binary.OsmandOdb.OsmAndPoiIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndPoiIndex.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addPoiIndex(subBuilder.buildPartial());
-              break;
-            }
             case 50: {
               net.osmand.binary.OsmandOdb.OsmAndMapIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndMapIndex.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
@@ -426,6 +420,12 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.OsmAndAddressIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndAddressIndex.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addAddressIndex(subBuilder.buildPartial());
+              break;
+            }
+            case 66: {
+              net.osmand.binary.OsmandOdb.OsmAndPoiIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndPoiIndex.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addPoiIndex(subBuilder.buildPartial());
               break;
             }
             case 256: {
@@ -557,7 +557,7 @@ public final class OsmandOdb {
         return this;
       }
       
-      // repeated .OsmAndPoiIndex poiIndex = 5;
+      // repeated .OsmAndPoiIndex poiIndex = 8;
       public java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiIndex> getPoiIndexList() {
         return java.util.Collections.unmodifiableList(result.poiIndex_);
       }
@@ -13862,6 +13862,13 @@ public final class OsmandOdb {
     public boolean hasNameIndex() { return hasNameIndex; }
     public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex getNameIndex() { return nameIndex_; }
     
+    // optional .IndexedStringTable table = 5;
+    public static final int TABLE_FIELD_NUMBER = 5;
+    private boolean hasTable;
+    private net.osmand.binary.OsmandOdb.IndexedStringTable table_;
+    public boolean hasTable() { return hasTable; }
+    public net.osmand.binary.OsmandOdb.IndexedStringTable getTable() { return table_; }
+    
     // repeated .OsmAndPoiBox boxes = 6;
     public static final int BOXES_FIELD_NUMBER = 6;
     private java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiBox> boxes_ =
@@ -13889,6 +13896,7 @@ public final class OsmandOdb {
     private void initFields() {
       boundaries_ = net.osmand.binary.OsmandOdb.OsmAndTileBox.getDefaultInstance();
       nameIndex_ = net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.getDefaultInstance();
+      table_ = net.osmand.binary.OsmandOdb.IndexedStringTable.getDefaultInstance();
     }
     public final boolean isInitialized() {
       if (!hasName) return false;
@@ -13896,9 +13904,6 @@ public final class OsmandOdb {
       if (!getBoundaries().isInitialized()) return false;
       for (net.osmand.binary.OsmandOdb.OsmAndCategoryTable element : getCategoriesTableList()) {
         if (!element.isInitialized()) return false;
-      }
-      if (hasNameIndex()) {
-        if (!getNameIndex().isInitialized()) return false;
       }
       for (net.osmand.binary.OsmandOdb.OsmAndPoiBox element : getBoxesList()) {
         if (!element.isInitialized()) return false;
@@ -13923,6 +13928,9 @@ public final class OsmandOdb {
       }
       if (hasNameIndex()) {
         output.writeMessage(4, getNameIndex());
+      }
+      if (hasTable()) {
+        output.writeMessage(5, getTable());
       }
       for (net.osmand.binary.OsmandOdb.OsmAndPoiBox element : getBoxesList()) {
         output.writeMessage(6, element);
@@ -13954,6 +13962,10 @@ public final class OsmandOdb {
       if (hasNameIndex()) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, getNameIndex());
+      }
+      if (hasTable()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, getTable());
       }
       for (net.osmand.binary.OsmandOdb.OsmAndPoiBox element : getBoxesList()) {
         size += com.google.protobuf.CodedOutputStream
@@ -14148,6 +14160,9 @@ public final class OsmandOdb {
         if (other.hasNameIndex()) {
           mergeNameIndex(other.getNameIndex());
         }
+        if (other.hasTable()) {
+          mergeTable(other.getTable());
+        }
         if (!other.boxes_.isEmpty()) {
           if (result.boxes_.isEmpty()) {
             result.boxes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiBox>();
@@ -14211,6 +14226,15 @@ public final class OsmandOdb {
               }
               input.readMessage(subBuilder, extensionRegistry);
               setNameIndex(subBuilder.buildPartial());
+              break;
+            }
+            case 42: {
+              net.osmand.binary.OsmandOdb.IndexedStringTable.Builder subBuilder = net.osmand.binary.OsmandOdb.IndexedStringTable.newBuilder();
+              if (hasTable()) {
+                subBuilder.mergeFrom(getTable());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setTable(subBuilder.buildPartial());
               break;
             }
             case 50: {
@@ -14376,6 +14400,43 @@ public final class OsmandOdb {
         return this;
       }
       
+      // optional .IndexedStringTable table = 5;
+      public boolean hasTable() {
+        return result.hasTable();
+      }
+      public net.osmand.binary.OsmandOdb.IndexedStringTable getTable() {
+        return result.getTable();
+      }
+      public Builder setTable(net.osmand.binary.OsmandOdb.IndexedStringTable value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.hasTable = true;
+        result.table_ = value;
+        return this;
+      }
+      public Builder setTable(net.osmand.binary.OsmandOdb.IndexedStringTable.Builder builderForValue) {
+        result.hasTable = true;
+        result.table_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergeTable(net.osmand.binary.OsmandOdb.IndexedStringTable value) {
+        if (result.hasTable() &&
+            result.table_ != net.osmand.binary.OsmandOdb.IndexedStringTable.getDefaultInstance()) {
+          result.table_ =
+            net.osmand.binary.OsmandOdb.IndexedStringTable.newBuilder(result.table_).mergeFrom(value).buildPartial();
+        } else {
+          result.table_ = value;
+        }
+        result.hasTable = true;
+        return this;
+      }
+      public Builder clearTable() {
+        result.hasTable = false;
+        result.table_ = net.osmand.binary.OsmandOdb.IndexedStringTable.getDefaultInstance();
+        return this;
+      }
+      
       // repeated .OsmAndPoiBox boxes = 6;
       public java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiBox> getBoxesList() {
         return java.util.Collections.unmodifiableList(result.boxes_);
@@ -14517,52 +14578,360 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiNameIndex_fieldAccessorTable;
     }
     
-    // required fixed32 shiftToStringTable = 2;
-    public static final int SHIFTTOSTRINGTABLE_FIELD_NUMBER = 2;
-    private boolean hasShiftToStringTable;
-    private int shiftToStringTable_ = 0;
-    public boolean hasShiftToStringTable() { return hasShiftToStringTable; }
-    public int getShiftToStringTable() { return shiftToStringTable_; }
+    public static final class OsmAndPoiNameIndexData extends
+        com.google.protobuf.GeneratedMessage {
+      // Use OsmAndPoiNameIndexData.newBuilder() to construct.
+      private OsmAndPoiNameIndexData() {
+        initFields();
+      }
+      private OsmAndPoiNameIndexData(boolean noInit) {}
+      
+      private static final OsmAndPoiNameIndexData defaultInstance;
+      public static OsmAndPoiNameIndexData getDefaultInstance() {
+        return defaultInstance;
+      }
+      
+      public OsmAndPoiNameIndexData getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+      
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiNameIndex_OsmAndPoiNameIndexData_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiNameIndex_OsmAndPoiNameIndexData_fieldAccessorTable;
+      }
+      
+      // repeated .OsmAndPoiNameIndexDataAtom atoms = 3;
+      public static final int ATOMS_FIELD_NUMBER = 3;
+      private java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom> atoms_ =
+        java.util.Collections.emptyList();
+      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom> getAtomsList() {
+        return atoms_;
+      }
+      public int getAtomsCount() { return atoms_.size(); }
+      public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom getAtoms(int index) {
+        return atoms_.get(index);
+      }
+      
+      private void initFields() {
+      }
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        for (net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom element : getAtomsList()) {
+          output.writeMessage(3, element);
+        }
+        getUnknownFields().writeTo(output);
+      }
+      
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+      
+        size = 0;
+        for (net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom element : getAtomsList()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(3, element);
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+      
+      public static net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        Builder builder = newBuilder();
+        if (builder.mergeDelimitedFrom(input)) {
+          return builder.buildParsed();
+        } else {
+          return null;
+        }
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        Builder builder = newBuilder();
+        if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+          return builder.buildParsed();
+        } else {
+          return null;
+        }
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+      
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder> {
+        private net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData result;
+        
+        // Construct using net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData.newBuilder()
+        private Builder() {}
+        
+        private static Builder create() {
+          Builder builder = new Builder();
+          builder.result = new net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData();
+          return builder;
+        }
+        
+        protected net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData internalGetResult() {
+          return result;
+        }
+        
+        public Builder clear() {
+          if (result == null) {
+            throw new IllegalStateException(
+              "Cannot call clear() after build().");
+          }
+          result = new net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData();
+          return this;
+        }
+        
+        public Builder clone() {
+          return create().mergeFrom(result);
+        }
+        
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData.getDescriptor();
+        }
+        
+        public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData getDefaultInstanceForType() {
+          return net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData.getDefaultInstance();
+        }
+        
+        public boolean isInitialized() {
+          return result.isInitialized();
+        }
+        public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData build() {
+          if (result != null && !isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return buildPartial();
+        }
+        
+        private net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData buildParsed()
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          if (!isInitialized()) {
+            throw newUninitializedMessageException(
+              result).asInvalidProtocolBufferException();
+          }
+          return buildPartial();
+        }
+        
+        public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData buildPartial() {
+          if (result == null) {
+            throw new IllegalStateException(
+              "build() has already been called on this Builder.");
+          }
+          if (result.atoms_ != java.util.Collections.EMPTY_LIST) {
+            result.atoms_ =
+              java.util.Collections.unmodifiableList(result.atoms_);
+          }
+          net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData returnMe = result;
+          result = null;
+          return returnMe;
+        }
+        
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData) {
+            return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+        
+        public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData other) {
+          if (other == net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData.getDefaultInstance()) return this;
+          if (!other.atoms_.isEmpty()) {
+            if (result.atoms_.isEmpty()) {
+              result.atoms_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom>();
+            }
+            result.atoms_.addAll(other.atoms_);
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+        
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder(
+              this.getUnknownFields());
+          while (true) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  this.setUnknownFields(unknownFields.build());
+                  return this;
+                }
+                break;
+              }
+              case 26: {
+                net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom.newBuilder();
+                input.readMessage(subBuilder, extensionRegistry);
+                addAtoms(subBuilder.buildPartial());
+                break;
+              }
+            }
+          }
+        }
+        
+        
+        // repeated .OsmAndPoiNameIndexDataAtom atoms = 3;
+        public java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom> getAtomsList() {
+          return java.util.Collections.unmodifiableList(result.atoms_);
+        }
+        public int getAtomsCount() {
+          return result.getAtomsCount();
+        }
+        public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom getAtoms(int index) {
+          return result.getAtoms(index);
+        }
+        public Builder setAtoms(int index, net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom value) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          result.atoms_.set(index, value);
+          return this;
+        }
+        public Builder setAtoms(int index, net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom.Builder builderForValue) {
+          result.atoms_.set(index, builderForValue.build());
+          return this;
+        }
+        public Builder addAtoms(net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom value) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          if (result.atoms_.isEmpty()) {
+            result.atoms_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom>();
+          }
+          result.atoms_.add(value);
+          return this;
+        }
+        public Builder addAtoms(net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom.Builder builderForValue) {
+          if (result.atoms_.isEmpty()) {
+            result.atoms_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom>();
+          }
+          result.atoms_.add(builderForValue.build());
+          return this;
+        }
+        public Builder addAllAtoms(
+            java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom> values) {
+          if (result.atoms_.isEmpty()) {
+            result.atoms_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom>();
+          }
+          super.addAll(values, result.atoms_);
+          return this;
+        }
+        public Builder clearAtoms() {
+          result.atoms_ = java.util.Collections.emptyList();
+          return this;
+        }
+        
+        // @@protoc_insertion_point(builder_scope:OsmAndPoiNameIndex.OsmAndPoiNameIndexData)
+      }
+      
+      static {
+        defaultInstance = new OsmAndPoiNameIndexData(true);
+        net.osmand.binary.OsmandOdb.internalForceInit();
+        defaultInstance.initFields();
+      }
+      
+      // @@protoc_insertion_point(class_scope:OsmAndPoiNameIndex.OsmAndPoiNameIndexData)
+    }
     
-    // repeated .OsmAndPoiNameIndexData data = 5;
-    public static final int DATA_FIELD_NUMBER = 5;
-    private java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData> data_ =
+    // repeated .OsmAndPoiNameIndex.OsmAndPoiNameIndexData data = 3;
+    public static final int DATA_FIELD_NUMBER = 3;
+    private java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData> data_ =
       java.util.Collections.emptyList();
-    public java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData> getDataList() {
+    public java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData> getDataList() {
       return data_;
     }
     public int getDataCount() { return data_.size(); }
-    public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData getData(int index) {
+    public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData getData(int index) {
       return data_.get(index);
     }
     
-    // required .IndexedStringTable table = 8;
-    public static final int TABLE_FIELD_NUMBER = 8;
-    private boolean hasTable;
-    private net.osmand.binary.OsmandOdb.IndexedStringTable table_;
-    public boolean hasTable() { return hasTable; }
-    public net.osmand.binary.OsmandOdb.IndexedStringTable getTable() { return table_; }
-    
     private void initFields() {
-      table_ = net.osmand.binary.OsmandOdb.IndexedStringTable.getDefaultInstance();
     }
     public final boolean isInitialized() {
-      if (!hasShiftToStringTable) return false;
-      if (!hasTable) return false;
       return true;
     }
     
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (hasShiftToStringTable()) {
-        output.writeFixed32(2, getShiftToStringTable());
-      }
-      for (net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData element : getDataList()) {
-        output.writeMessage(5, element);
-      }
-      if (hasTable()) {
-        output.writeMessage(8, getTable());
+      for (net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData element : getDataList()) {
+        output.writeMessage(3, element);
       }
       getUnknownFields().writeTo(output);
     }
@@ -14573,17 +14942,9 @@ public final class OsmandOdb {
       if (size != -1) return size;
     
       size = 0;
-      if (hasShiftToStringTable()) {
+      for (net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData element : getDataList()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFixed32Size(2, getShiftToStringTable());
-      }
-      for (net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData element : getDataList()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, element);
-      }
-      if (hasTable()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, getTable());
+          .computeMessageSize(3, element);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -14747,17 +15108,11 @@ public final class OsmandOdb {
       
       public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex other) {
         if (other == net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.getDefaultInstance()) return this;
-        if (other.hasShiftToStringTable()) {
-          setShiftToStringTable(other.getShiftToStringTable());
-        }
         if (!other.data_.isEmpty()) {
           if (result.data_.isEmpty()) {
-            result.data_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData>();
+            result.data_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData>();
           }
           result.data_.addAll(other.data_);
-        }
-        if (other.hasTable()) {
-          mergeTable(other.getTable());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -14784,23 +15139,10 @@ public final class OsmandOdb {
               }
               break;
             }
-            case 21: {
-              setShiftToStringTable(input.readFixed32());
-              break;
-            }
-            case 42: {
-              net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData.newBuilder();
+            case 26: {
+              net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addData(subBuilder.buildPartial());
-              break;
-            }
-            case 66: {
-              net.osmand.binary.OsmandOdb.IndexedStringTable.Builder subBuilder = net.osmand.binary.OsmandOdb.IndexedStringTable.newBuilder();
-              if (hasTable()) {
-                subBuilder.mergeFrom(getTable());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setTable(subBuilder.buildPartial());
               break;
             }
           }
@@ -14808,109 +15150,54 @@ public final class OsmandOdb {
       }
       
       
-      // required fixed32 shiftToStringTable = 2;
-      public boolean hasShiftToStringTable() {
-        return result.hasShiftToStringTable();
-      }
-      public int getShiftToStringTable() {
-        return result.getShiftToStringTable();
-      }
-      public Builder setShiftToStringTable(int value) {
-        result.hasShiftToStringTable = true;
-        result.shiftToStringTable_ = value;
-        return this;
-      }
-      public Builder clearShiftToStringTable() {
-        result.hasShiftToStringTable = false;
-        result.shiftToStringTable_ = 0;
-        return this;
-      }
-      
-      // repeated .OsmAndPoiNameIndexData data = 5;
-      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData> getDataList() {
+      // repeated .OsmAndPoiNameIndex.OsmAndPoiNameIndexData data = 3;
+      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData> getDataList() {
         return java.util.Collections.unmodifiableList(result.data_);
       }
       public int getDataCount() {
         return result.getDataCount();
       }
-      public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData getData(int index) {
+      public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData getData(int index) {
         return result.getData(index);
       }
-      public Builder setData(int index, net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData value) {
+      public Builder setData(int index, net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData value) {
         if (value == null) {
           throw new NullPointerException();
         }
         result.data_.set(index, value);
         return this;
       }
-      public Builder setData(int index, net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData.Builder builderForValue) {
+      public Builder setData(int index, net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData.Builder builderForValue) {
         result.data_.set(index, builderForValue.build());
         return this;
       }
-      public Builder addData(net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData value) {
+      public Builder addData(net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData value) {
         if (value == null) {
           throw new NullPointerException();
         }
         if (result.data_.isEmpty()) {
-          result.data_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData>();
+          result.data_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData>();
         }
         result.data_.add(value);
         return this;
       }
-      public Builder addData(net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData.Builder builderForValue) {
+      public Builder addData(net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData.Builder builderForValue) {
         if (result.data_.isEmpty()) {
-          result.data_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData>();
+          result.data_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData>();
         }
         result.data_.add(builderForValue.build());
         return this;
       }
       public Builder addAllData(
-          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData> values) {
+          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData> values) {
         if (result.data_.isEmpty()) {
-          result.data_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData>();
+          result.data_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData>();
         }
         super.addAll(values, result.data_);
         return this;
       }
       public Builder clearData() {
         result.data_ = java.util.Collections.emptyList();
-        return this;
-      }
-      
-      // required .IndexedStringTable table = 8;
-      public boolean hasTable() {
-        return result.hasTable();
-      }
-      public net.osmand.binary.OsmandOdb.IndexedStringTable getTable() {
-        return result.getTable();
-      }
-      public Builder setTable(net.osmand.binary.OsmandOdb.IndexedStringTable value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        result.hasTable = true;
-        result.table_ = value;
-        return this;
-      }
-      public Builder setTable(net.osmand.binary.OsmandOdb.IndexedStringTable.Builder builderForValue) {
-        result.hasTable = true;
-        result.table_ = builderForValue.build();
-        return this;
-      }
-      public Builder mergeTable(net.osmand.binary.OsmandOdb.IndexedStringTable value) {
-        if (result.hasTable() &&
-            result.table_ != net.osmand.binary.OsmandOdb.IndexedStringTable.getDefaultInstance()) {
-          result.table_ =
-            net.osmand.binary.OsmandOdb.IndexedStringTable.newBuilder(result.table_).mergeFrom(value).buildPartial();
-        } else {
-          result.table_ = value;
-        }
-        result.hasTable = true;
-        return this;
-      }
-      public Builder clearTable() {
-        result.hasTable = false;
-        result.table_ = net.osmand.binary.OsmandOdb.IndexedStringTable.getDefaultInstance();
         return this;
       }
       
@@ -14924,337 +15211,6 @@ public final class OsmandOdb {
     }
     
     // @@protoc_insertion_point(class_scope:OsmAndPoiNameIndex)
-  }
-  
-  public static final class OsmAndPoiNameIndexData extends
-      com.google.protobuf.GeneratedMessage {
-    // Use OsmAndPoiNameIndexData.newBuilder() to construct.
-    private OsmAndPoiNameIndexData() {
-      initFields();
-    }
-    private OsmAndPoiNameIndexData(boolean noInit) {}
-    
-    private static final OsmAndPoiNameIndexData defaultInstance;
-    public static OsmAndPoiNameIndexData getDefaultInstance() {
-      return defaultInstance;
-    }
-    
-    public OsmAndPoiNameIndexData getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiNameIndexData_descriptor;
-    }
-    
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiNameIndexData_fieldAccessorTable;
-    }
-    
-    // repeated .OsmAndPoiNameIndexDataAtom atoms = 4;
-    public static final int ATOMS_FIELD_NUMBER = 4;
-    private java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom> atoms_ =
-      java.util.Collections.emptyList();
-    public java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom> getAtomsList() {
-      return atoms_;
-    }
-    public int getAtomsCount() { return atoms_.size(); }
-    public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom getAtoms(int index) {
-      return atoms_.get(index);
-    }
-    
-    private void initFields() {
-    }
-    public final boolean isInitialized() {
-      return true;
-    }
-    
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      for (net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom element : getAtomsList()) {
-        output.writeMessage(4, element);
-      }
-      getUnknownFields().writeTo(output);
-    }
-    
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-    
-      size = 0;
-      for (net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom element : getAtomsList()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, element);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-    
-    public static net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    public static net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-    
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> {
-      private net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData result;
-      
-      // Construct using net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData.newBuilder()
-      private Builder() {}
-      
-      private static Builder create() {
-        Builder builder = new Builder();
-        builder.result = new net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData();
-        return builder;
-      }
-      
-      protected net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData internalGetResult() {
-        return result;
-      }
-      
-      public Builder clear() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "Cannot call clear() after build().");
-        }
-        result = new net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData();
-        return this;
-      }
-      
-      public Builder clone() {
-        return create().mergeFrom(result);
-      }
-      
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData.getDescriptor();
-      }
-      
-      public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData getDefaultInstanceForType() {
-        return net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData.getDefaultInstance();
-      }
-      
-      public boolean isInitialized() {
-        return result.isInitialized();
-      }
-      public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData build() {
-        if (result != null && !isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return buildPartial();
-      }
-      
-      private net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        if (!isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return buildPartial();
-      }
-      
-      public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData buildPartial() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "build() has already been called on this Builder.");
-        }
-        if (result.atoms_ != java.util.Collections.EMPTY_LIST) {
-          result.atoms_ =
-            java.util.Collections.unmodifiableList(result.atoms_);
-        }
-        net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData returnMe = result;
-        result = null;
-        return returnMe;
-      }
-      
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData) {
-          return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData other) {
-        if (other == net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData.getDefaultInstance()) return this;
-        if (!other.atoms_.isEmpty()) {
-          if (result.atoms_.isEmpty()) {
-            result.atoms_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom>();
-          }
-          result.atoms_.addAll(other.atoms_);
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-      
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                return this;
-              }
-              break;
-            }
-            case 34: {
-              net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addAtoms(subBuilder.buildPartial());
-              break;
-            }
-          }
-        }
-      }
-      
-      
-      // repeated .OsmAndPoiNameIndexDataAtom atoms = 4;
-      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom> getAtomsList() {
-        return java.util.Collections.unmodifiableList(result.atoms_);
-      }
-      public int getAtomsCount() {
-        return result.getAtomsCount();
-      }
-      public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom getAtoms(int index) {
-        return result.getAtoms(index);
-      }
-      public Builder setAtoms(int index, net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        result.atoms_.set(index, value);
-        return this;
-      }
-      public Builder setAtoms(int index, net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom.Builder builderForValue) {
-        result.atoms_.set(index, builderForValue.build());
-        return this;
-      }
-      public Builder addAtoms(net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        if (result.atoms_.isEmpty()) {
-          result.atoms_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom>();
-        }
-        result.atoms_.add(value);
-        return this;
-      }
-      public Builder addAtoms(net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom.Builder builderForValue) {
-        if (result.atoms_.isEmpty()) {
-          result.atoms_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom>();
-        }
-        result.atoms_.add(builderForValue.build());
-        return this;
-      }
-      public Builder addAllAtoms(
-          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom> values) {
-        if (result.atoms_.isEmpty()) {
-          result.atoms_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom>();
-        }
-        super.addAll(values, result.atoms_);
-        return this;
-      }
-      public Builder clearAtoms() {
-        result.atoms_ = java.util.Collections.emptyList();
-        return this;
-      }
-      
-      // @@protoc_insertion_point(builder_scope:OsmAndPoiNameIndexData)
-    }
-    
-    static {
-      defaultInstance = new OsmAndPoiNameIndexData(true);
-      net.osmand.binary.OsmandOdb.internalForceInit();
-      defaultInstance.initFields();
-    }
-    
-    // @@protoc_insertion_point(class_scope:OsmAndPoiNameIndexData)
   }
   
   public static final class OsmAndPoiNameIndexDataAtom extends
@@ -18206,10 +18162,10 @@ public final class OsmandOdb {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_OsmAndPoiNameIndex_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_OsmAndPoiNameIndexData_descriptor;
+    internal_static_OsmAndPoiNameIndex_OsmAndPoiNameIndexData_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_OsmAndPoiNameIndexData_fieldAccessorTable;
+      internal_static_OsmAndPoiNameIndex_OsmAndPoiNameIndexData_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_OsmAndPoiNameIndexDataAtom_descriptor;
   private static
@@ -18253,7 +18209,7 @@ public final class OsmandOdb {
       "\"\332\001\n\017OsmAndStructure\022\017\n\007version\030\001 \002(\r\022)\n" +
       "\014addressIndex\030\007 \003(\0132\023.OsmAndAddressIndex" +
       "\022-\n\016transportIndex\030\004 \003(\0132\025.OsmAndTranspo" +
-      "rtIndex\022!\n\010poiIndex\030\005 \003(\0132\017.OsmAndPoiInd" +
+      "rtIndex\022!\n\010poiIndex\030\010 \003(\0132\017.OsmAndPoiInd" +
       "ex\022!\n\010mapIndex\030\006 \003(\0132\017.OsmAndMapIndex\022\026\n" +
       "\016versionConfirm\030  \002(\r\"I\n\rOsmAndTileBox\022\014" +
       "\n\004left\030\001 \002(\r\022\r\n\005right\030\002 \002(\r\022\013\n\003top\030\003 \002(\r" +
@@ -18336,33 +18292,33 @@ public final class OsmandOdb {
       "ansportIndex\022\014\n\004name\030\001 \001(\t\022 \n\006routes\030\003 \001" +
       "(\0132\020.TransportRoutes\022\"\n\005stops\030\006 \001(\0132\023.Tr" +
       "ansportStopsTree\022!\n\013stringTable\030\t \002(\0132\014." +
-      "StringTable\"\333\001\n\016OsmAndPoiIndex\022\014\n\004name\030\001" +
+      "StringTable\"\377\001\n\016OsmAndPoiIndex\022\014\n\004name\030\001" +
       " \002(\t\022\"\n\nboundaries\030\002 \002(\0132\016.OsmAndTileBox" +
       "\022-\n\017categoriesTable\030\003 \003(\0132\024.OsmAndCatego",
       "ryTable\022&\n\tnameIndex\030\004 \001(\0132\023.OsmAndPoiNa" +
-      "meIndex\022\034\n\005boxes\030\006 \003(\0132\r.OsmAndPoiBox\022\"\n" +
-      "\007poiData\030\t \003(\0132\021.OsmAndPoiBoxData\"{\n\022Osm" +
-      "AndPoiNameIndex\022\032\n\022shiftToStringTable\030\002 " +
-      "\002(\007\022%\n\004data\030\005 \003(\0132\027.OsmAndPoiNameIndexDa" +
-      "ta\022\"\n\005table\030\010 \002(\0132\023.IndexedStringTable\"D" +
-      "\n\026OsmAndPoiNameIndexData\022*\n\005atoms\030\004 \003(\0132" +
-      "\033.OsmAndPoiNameIndexDataAtom\"Q\n\032OsmAndPo" +
-      "iNameIndexDataAtom\022\014\n\004zoom\030\002 \001(\r\022\t\n\001x\030\003 " +
-      "\001(\r\022\t\n\001y\030\004 \001(\r\022\017\n\007shiftTo\030\016 \001(\007\">\n\023OsmAn",
-      "dCategoryTable\022\020\n\010category\030\001 \002(\t\022\025\n\rsubc" +
-      "ategories\030\003 \003(\t\"\227\001\n\014OsmAndPoiBox\022\014\n\004zoom" +
-      "\030\001 \002(\r\022\014\n\004left\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022(\n\ncat" +
-      "egories\030\004 \001(\0132\024.OsmAndPoiCategories\022\037\n\010s" +
-      "ubBoxes\030\n \003(\0132\r.OsmAndPoiBox\022\023\n\013shiftToD" +
-      "ata\030\016 \001(\007\")\n\023OsmAndPoiCategories\022\022\n\ncate" +
-      "gories\030\003 \003(\r\"^\n\020OsmAndPoiBoxData\022\014\n\004zoom" +
-      "\030\001 \001(\r\022\t\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\022&\n\007poiData\030" +
-      "\005 \003(\0132\025.OsmAndPoiBoxDataAtom\"\255\001\n\024OsmAndP" +
-      "oiBoxDataAtom\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\022\n",
-      "\ncategories\030\004 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006nameE" +
-      "n\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\024\n\014openingHours\030\n \001(" +
-      "\t\022\014\n\004site\030\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004note\030\r" +
-      " \001(\tB\023\n\021net.osmand.binary"
+      "meIndex\022\"\n\005table\030\005 \001(\0132\023.IndexedStringTa" +
+      "ble\022\034\n\005boxes\030\006 \003(\0132\r.OsmAndPoiBox\022\"\n\007poi" +
+      "Data\030\t \003(\0132\021.OsmAndPoiBoxData\"\224\001\n\022OsmAnd" +
+      "PoiNameIndex\0228\n\004data\030\003 \003(\0132*.OsmAndPoiNa" +
+      "meIndex.OsmAndPoiNameIndexData\032D\n\026OsmAnd" +
+      "PoiNameIndexData\022*\n\005atoms\030\003 \003(\0132\033.OsmAnd" +
+      "PoiNameIndexDataAtom\"Q\n\032OsmAndPoiNameInd" +
+      "exDataAtom\022\014\n\004zoom\030\002 \001(\r\022\t\n\001x\030\003 \001(\r\022\t\n\001y" +
+      "\030\004 \001(\r\022\017\n\007shiftTo\030\016 \001(\007\">\n\023OsmAndCategor",
+      "yTable\022\020\n\010category\030\001 \002(\t\022\025\n\rsubcategorie" +
+      "s\030\003 \003(\t\"\227\001\n\014OsmAndPoiBox\022\014\n\004zoom\030\001 \002(\r\022\014" +
+      "\n\004left\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022(\n\ncategories\030" +
+      "\004 \001(\0132\024.OsmAndPoiCategories\022\037\n\010subBoxes\030" +
+      "\n \003(\0132\r.OsmAndPoiBox\022\023\n\013shiftToData\030\016 \001(" +
+      "\007\")\n\023OsmAndPoiCategories\022\022\n\ncategories\030\003" +
+      " \003(\r\"^\n\020OsmAndPoiBoxData\022\014\n\004zoom\030\001 \001(\r\022\t" +
+      "\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\022&\n\007poiData\030\005 \003(\0132\025." +
+      "OsmAndPoiBoxDataAtom\"\255\001\n\024OsmAndPoiBoxDat" +
+      "aAtom\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\022\n\ncategor",
+      "ies\030\004 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006nameEn\030\007 \001(\t\022" +
+      "\n\n\002id\030\010 \001(\004\022\024\n\014openingHours\030\n \001(\t\022\014\n\004sit" +
+      "e\030\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004note\030\r \001(\tB\023\n\021" +
+      "net.osmand.binary"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -18598,7 +18554,7 @@ public final class OsmandOdb {
           internal_static_OsmAndPoiIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndPoiIndex_descriptor,
-              new java.lang.String[] { "Name", "Boundaries", "CategoriesTable", "NameIndex", "Boxes", "PoiData", },
+              new java.lang.String[] { "Name", "Boundaries", "CategoriesTable", "NameIndex", "Table", "Boxes", "PoiData", },
               net.osmand.binary.OsmandOdb.OsmAndPoiIndex.class,
               net.osmand.binary.OsmandOdb.OsmAndPoiIndex.Builder.class);
           internal_static_OsmAndPoiNameIndex_descriptor =
@@ -18606,19 +18562,19 @@ public final class OsmandOdb {
           internal_static_OsmAndPoiNameIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndPoiNameIndex_descriptor,
-              new java.lang.String[] { "ShiftToStringTable", "Data", "Table", },
+              new java.lang.String[] { "Data", },
               net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.class,
               net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.Builder.class);
-          internal_static_OsmAndPoiNameIndexData_descriptor =
-            getDescriptor().getMessageTypes().get(23);
-          internal_static_OsmAndPoiNameIndexData_fieldAccessorTable = new
+          internal_static_OsmAndPoiNameIndex_OsmAndPoiNameIndexData_descriptor =
+            internal_static_OsmAndPoiNameIndex_descriptor.getNestedTypes().get(0);
+          internal_static_OsmAndPoiNameIndex_OsmAndPoiNameIndexData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_OsmAndPoiNameIndexData_descriptor,
+              internal_static_OsmAndPoiNameIndex_OsmAndPoiNameIndexData_descriptor,
               new java.lang.String[] { "Atoms", },
-              net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData.class,
-              net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData.Builder.class);
+              net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData.class,
+              net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData.Builder.class);
           internal_static_OsmAndPoiNameIndexDataAtom_descriptor =
-            getDescriptor().getMessageTypes().get(24);
+            getDescriptor().getMessageTypes().get(23);
           internal_static_OsmAndPoiNameIndexDataAtom_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndPoiNameIndexDataAtom_descriptor,
@@ -18626,7 +18582,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom.class,
               net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom.Builder.class);
           internal_static_OsmAndCategoryTable_descriptor =
-            getDescriptor().getMessageTypes().get(25);
+            getDescriptor().getMessageTypes().get(24);
           internal_static_OsmAndCategoryTable_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndCategoryTable_descriptor,
@@ -18634,7 +18590,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.OsmAndCategoryTable.class,
               net.osmand.binary.OsmandOdb.OsmAndCategoryTable.Builder.class);
           internal_static_OsmAndPoiBox_descriptor =
-            getDescriptor().getMessageTypes().get(26);
+            getDescriptor().getMessageTypes().get(25);
           internal_static_OsmAndPoiBox_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndPoiBox_descriptor,
@@ -18642,7 +18598,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.OsmAndPoiBox.class,
               net.osmand.binary.OsmandOdb.OsmAndPoiBox.Builder.class);
           internal_static_OsmAndPoiCategories_descriptor =
-            getDescriptor().getMessageTypes().get(27);
+            getDescriptor().getMessageTypes().get(26);
           internal_static_OsmAndPoiCategories_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndPoiCategories_descriptor,
@@ -18650,7 +18606,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.OsmAndPoiCategories.class,
               net.osmand.binary.OsmandOdb.OsmAndPoiCategories.Builder.class);
           internal_static_OsmAndPoiBoxData_descriptor =
-            getDescriptor().getMessageTypes().get(28);
+            getDescriptor().getMessageTypes().get(27);
           internal_static_OsmAndPoiBoxData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndPoiBoxData_descriptor,
@@ -18658,7 +18614,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.OsmAndPoiBoxData.class,
               net.osmand.binary.OsmandOdb.OsmAndPoiBoxData.Builder.class);
           internal_static_OsmAndPoiBoxDataAtom_descriptor =
-            getDescriptor().getMessageTypes().get(29);
+            getDescriptor().getMessageTypes().get(28);
           internal_static_OsmAndPoiBoxDataAtom_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndPoiBoxDataAtom_descriptor,

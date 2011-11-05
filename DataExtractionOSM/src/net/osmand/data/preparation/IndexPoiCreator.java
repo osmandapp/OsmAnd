@@ -1,8 +1,6 @@
 package net.osmand.data.preparation;
 
-import gnu.trove.list.TLongList;
 import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.list.array.TLongArrayList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -292,15 +290,14 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		int left31 = minX;
 		int bottom31 = maxY;
 		int top31 = minY;
-		long startFpPoiIndex = writer.startWritePOIIndex(regionName, left31, right31, bottom31, top31);
+		BinaryFileReference startFpPoiIndex = writer.startWritePOIIndex(regionName, left31, right31, bottom31, top31);
 
 		// 2. write categories table
 		Map<String, Map<String, Integer>> categories = rootZoomsTree.node.categories;
 		Map<String, Integer> catIndexes = writer.writePOICategoriesTable(categories);
 		
 		// 2.5 write names table
-		//Map<PoiTileBox, TLongList> fpToWriteSeeks = new LinkedHashMap<PoiTileBox, TLongList>();
-		Map<PoiTileBox, TLongList> fpToWriteSeeks = writer.writePoiNameIndex(namesIndex);
+		Map<PoiTileBox, List<BinaryFileReference>> fpToWriteSeeks = writer.writePoiNameIndex(namesIndex, startFpPoiIndex);
 
 		// 3. write boxes
 		log.info("Poi box processing finishied");
@@ -319,7 +316,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 
 		// 3.2 write tree using stack
 		for (Tree<PoiTileBox> subs : rootZoomsTree.getSubtrees()) {
-			writePoiBoxes(writer, subs, fpToWriteSeeks, categories, catIndexes);
+			writePoiBoxes(writer, subs, startFpPoiIndex, fpToWriteSeeks, categories, catIndexes);
 		}
 
 		// 4. write poi data
@@ -328,11 +325,11 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 				.prepareStatement("SELECT id, x, y, name_en, name, type, subtype, opening_hours, site, phone from poi "
 						+ "where x >= ? AND x < ? AND y >= ? AND y < ?");
 		TIntArrayList types = new TIntArrayList();
-		for (Map.Entry<PoiTileBox, TLongList> entry : fpToWriteSeeks.entrySet()) {
+		for (Map.Entry<PoiTileBox, List<BinaryFileReference>> entry : fpToWriteSeeks.entrySet()) {
 			int z = entry.getKey().zoom;
 			int x = entry.getKey().x;
 			int y = entry.getKey().y;
-			writer.startWritePoiData(z, x, y, startFpPoiIndex, entry.getValue());
+			writer.startWritePoiData(z, x, y, entry.getValue());
 
 			if(useInMemoryCreator){
 				List<PoiData> poiData = entry.getKey().poiData;
@@ -421,13 +418,20 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		
 	}
 
-	private void writePoiBoxes(BinaryMapIndexWriter writer, Tree<PoiTileBox> tree, Map<PoiTileBox, TLongList> fpToWriteSeeks,
+	private void writePoiBoxes(BinaryMapIndexWriter writer, Tree<PoiTileBox> tree, 
+			BinaryFileReference startFpPoiIndex, Map<PoiTileBox, List<BinaryFileReference>> fpToWriteSeeks,
 			Map<String, Map<String, Integer>> categories, Map<String, Integer> catIndexes) throws IOException, SQLException {
 		int x = tree.getNode().x;
 		int y = tree.getNode().y;
 		int zoom = tree.getNode().zoom;
 		boolean end = zoom == ZOOM_TO_SAVE_END;
-		long fp = writer.startWritePoiBox(zoom, x, y, end);
+		BinaryFileReference fileRef = writer.startWritePoiBox(zoom, x, y, startFpPoiIndex, end);
+		if(fileRef != null){
+			if(!fpToWriteSeeks.containsKey(tree.getNode())) {
+				fpToWriteSeeks.put(tree.getNode(), new ArrayList<BinaryFileReference>());
+			}
+			fpToWriteSeeks.get(tree.getNode()).add(fileRef);
+		}
 		if(zoom >= ZOOM_TO_WRITE_CATEGORIES_START && zoom <= ZOOM_TO_WRITE_CATEGORIES_END){
 			TIntArrayList types = new TIntArrayList();
 			for(Map.Entry<String, Map<String, Integer>> cats : tree.getNode().categories.entrySet()) {
@@ -441,13 +445,8 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		
 		if (!end) {
 			for (Tree<PoiTileBox> subTree : tree.getSubtrees()) {
-				writePoiBoxes(writer, subTree, fpToWriteSeeks, categories, catIndexes);
+				writePoiBoxes(writer, subTree, startFpPoiIndex, fpToWriteSeeks, categories, catIndexes);
 			}
-		} else {
-			if(!fpToWriteSeeks.containsKey(tree.getNode())) {
-				fpToWriteSeeks.put(tree.getNode(), new TLongArrayList());
-			}
-			fpToWriteSeeks.get(tree.getNode()).add(fp);
 		}
 		writer.endWritePoiBox();
 	}
