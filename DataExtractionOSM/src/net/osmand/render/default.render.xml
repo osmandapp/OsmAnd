@@ -511,11 +511,11 @@
 		<filter minzoom="16" icon="liftgate" tag="barrier" value="lift_gate" />
 		<filter minzoom="16" icon="bollard" tag="barrier" value="sally_port" />
 		<filter minzoom="13" icon="highway_ford" tag="highway" value="ford" />
-		<filter minzoom="14" icon="barrier_block" tag="barrier" value="block" />
-		<filter minzoom="14" icon="barrier_kissing_gate" tag="barrier" value="kissing_gate" />
+		<filter minzoom="15" icon="barrier_block" tag="barrier" value="block" />
+		<filter minzoom="15" icon="barrier_kissing_gate" tag="barrier" value="kissing_gate" />
 		<filter minzoom="14" icon="barrier_toll_booth" tag="barrier" value="toll_booth" />
 		<filter minzoom="15" icon="parking" tag="amenity" value="parking" />
-		<filter minzoom="15" icon="parking" tag="amenity" value="bicycle_parking" />
+		<filter minzoom="16" icon="parking" tag="amenity" value="bicycle_parking" />
 
 		<!-- buildings -->
 		<filter minzoom="16" icon="restaurant" tag="amenity" value="restaurant" />
@@ -552,10 +552,10 @@
 		<filter minzoom="16" icon="pharmacy" tag="amenity" value="pharmacy" />
 		<filter minzoom="15" icon="hospital" tag="amenity" value="hospital" />
 		<filter minzoom="16" icon="veterinary" tag="amenity" value="veterinary" />
-		<filter minzoom="15" icon="doctors" tag="amenity" value="doctors" />
-		<filter minzoom="15" icon="dentist" tag="amenity" value="dentist" />
-		<filter minzoom="15" icon="cinema" tag="amenity" value="cinema" />
-		<filter minzoom="15" icon="theatre" tag="amenity" value="theatre" />
+		<filter minzoom="16" icon="doctors" tag="amenity" value="doctors" />
+		<filter minzoom="16" icon="dentist" tag="amenity" value="dentist" />
+		<filter minzoom="16" icon="cinema" tag="amenity" value="cinema" />
+		<filter minzoom="16" icon="theatre" tag="amenity" value="theatre" />
 		<filter minzoom="16" icon="embassy" tag="amenity" value="embassy" />
 		<filter minzoom="16" icon="grave_yard" tag="amenity" value="grave_yard" />
 		<filter minzoom="16" icon="police" tag="amenity" value="police" />
@@ -568,15 +568,15 @@
 		<filter minzoom="16" icon="toilets" tag="amenity" value="toilets" />
 		<filter minzoom="16" icon="place_of_worship" tag="amenity" value="place_of_worship" />
 		<filter minzoom="16" icon="kindergarten" tag="amenity" value="kindergarten" />
-		<filter minzoom="15" icon="amenity_fountain" tag="amenity" value="fountain" />
-		<filter minzoom="15" icon="amenity_marketplace" tag="amenity" value="marketplace" />
+		<filter minzoom="16" icon="amenity_fountain" tag="amenity" value="fountain" />
+		<filter minzoom="16" icon="amenity_marketplace" tag="amenity" value="marketplace" />
 		<filter minzoom="16" icon="barrier_entrance" tag="barrier" value="entrance" />
 		<filter minzoom="16" icon="barrier_entrance" tag="building" value="entrance" />
 		<filter minzoom="16" icon="townhall" tag="amenity" value="townhall" />
 		<filter minzoom="16" icon="amenity_court" tag="amenity" value="courthouse" />
 
 		<!-- shops -->
-			<filter appMode="car" minzoom="15" icon="shop_bakery" tag="shop" value="bakery" />
+			<filter appMode="car" minzoom="16" icon="shop_bakery" tag="shop" value="bakery" />
 		<filter minzoom="17" icon="shop_bakery" tag="shop" value="bakery" />
 			<filter appMode="car" minzoom="16" icon="shop_butcher" tag="shop" value="butcher" />
 		<filter minzoom="17" icon="shop_butcher" tag="shop" value="butcher" />
@@ -601,10 +601,10 @@
 			<filter appMode="car" minzoom="15" icon="shop_supermarket" tag="shop" value="general" />			
 		<filter minzoom="16" icon="shop_supermarket" tag="shop" value="general" />
 		<filter minzoom="16" icon="shop_outdoor" tag="shop" value="outdoor" />
+		<filter minzoom="16" icon="shop_outdoor" tag="leisure" value="fishing" />
 		<filter minzoom="16" icon="florist" tag="shop" value="florist" />
 		<filter minzoom="16" icon="shop_hairdresser" tag="shop" value="hairdresser" />
-		<filter minzoom="16" icon="department_store" tag="shop" value="mall" />
-			<filter appMode="car" minzoom="15" icon="shop_supermarket" tag="shop" value="supermarket" />
+		<filter minzoom="15" icon="department_store" tag="shop" value="mall" />
 		<filter minzoom="15" icon="shop_supermarket" tag="shop" value="supermarket" />
 		<filter minzoom="16" icon="emergency_phone" tag="emergency" value="phone" />
 		<filter minzoom="17" icon="vending_machine" tag="amenity" value="vending_machine" />
@@ -644,10 +644,10 @@
 		<filter minzoom="14" icon="alpine_hut" tag="tourism" value="alpine_hut" />
 		<filter minzoom="16" icon="chalet" tag="tourism" value="chalet" />
 		<filter minzoom="16" icon="guest_house" tag="tourism" value="guest_house" />
-		<filter minzoom="15" icon="hostel" tag="tourism" value="hostel" />
-		<filter minzoom="15" icon="hotel" tag="tourism" value="hotel" />
-		<filter minzoom="15" icon="motel" tag="tourism" value="motel" />
-		<filter minzoom="15" icon="museum" tag="tourism" value="museum" />
+		<filter minzoom="16" icon="hostel" tag="tourism" value="hostel" />
+		<filter minzoom="16" icon="hotel" tag="tourism" value="hotel" />
+		<filter minzoom="16" icon="motel" tag="tourism" value="motel" />
+		<filter minzoom="16" icon="museum" tag="tourism" value="museum" />
 		<filter minzoom="15" icon="information" tag="tourism" value="information" />
 		<filter minzoom="16" icon="viewpoint" tag="tourism" value="viewpoint" />
 		<filter minzoom="16" icon="geocache_found" tag="geocache" value="found" />
@@ -661,27 +661,26 @@
 		<filter minzoom="16" icon="sport_canoe" tag="sport" value="canoe" />
 		<filter minzoom="16" icon="sport_tennis" tag="sport" value="tennis" />
 		<filter minzoom="16" icon="sport_shooting" tag="sport" value="shooting" />
-		<filter minzoom="16" icon="sport_golf" tag="sport" value="golf" />
-		<filter minzoom="16" icon="leisure_water_park" tag="sport" value="swimming" />
+		<filter minzoom="15" icon="sport_golf" tag="sport" value="golf" />
+		<filter minzoom="15" icon="leisure_water_park" tag="sport" value="swimming" />
 		<filter minzoom="15" icon="sport_ski" tag="sport" value="skiing" />
 		<filter minzoom="16" icon="sport_diving" tag="sport" value="diving" />
 		<filter minzoom="15" icon="theme_park" tag="tourism" value="theme_park" />
 		<filter minzoom="16" icon="amenity_bench" tag="amenity" value="bench" />
-		<filter minzoom="16" icon="shop_outdoor" tag="leisure" value="fishing" />
 		<filter minzoom="15" icon="leisure_sports_centre" tag="leisure" value="sports_centre" />
 		<filter minzoom="16" icon="bird_hide" tag="leisure" value="bird_hide" />
 
 		<!-- railway -->
 		<filter minzoom="12" maxzoom="12" icon="halt" tag="railway" value="station" />
-		<filter minzoom="13" maxzoom="14" icon="station_small" tag="railway" value="station" />
-		<filter minzoom="15" icon="station" tag="railway" value="station" />
+			<filter minzoom="13" maxzoom="14" icon="station_small" tag="railway" value="station" />
+			<filter minzoom="15" icon="station" tag="railway" value="station" />
 		<filter minzoom="13" maxzoom="14" icon="halt" tag="railway" value="halt" />
-		<filter minzoom="15" icon="station_small" tag="railway" value="halt" />
-		<filter minzoom="13" maxzoom="14" icon="halt" tag="railway" value="tram_stop" />
-		<filter minzoom="15" icon="station_small" tag="railway" value="tram_stop" />
-		<filter minzoom="14" maxzoom="15" icon="level_crossing" tag="railway" value="level_crossing" />
-		<filter minzoom="16" icon="level_crossing2" tag="railway" value="level_crossing" />
-		<filter minzoom="14" icon="subway_entrance" tag="railway" value="subway_entrance" />
+			<filter minzoom="15" icon="station_small" tag="railway" value="halt" />
+		<filter minzoom="14" maxzoom="14" icon="halt" tag="railway" value="tram_stop" />
+			<filter minzoom="15" icon="station_small" tag="railway" value="tram_stop" />
+		<filter minzoom="15" maxzoom="15" icon="level_crossing" tag="railway" value="level_crossing" />
+			<filter minzoom="16" icon="level_crossing2" tag="railway" value="level_crossing" />
+		<filter minzoom="15" icon="subway_entrance" tag="railway" value="subway_entrance" />
 
 		<!-- aero -->
 		<filter minzoom="15" icon="helipad" tag="aeroway" value="helipad" />
