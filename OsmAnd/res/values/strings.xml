@@ -4,8 +4,8 @@
 	<string name="pref_overlay">Overlay / underlay</string>
 	<string name="pref_raster_map">Tile map settings</string>
 	<string name="pref_vector_map">Vector map settings</string>
-	<string name="delete_confirmation_title">About to delete</string>
-	<string name="delete_confirmation_msg">Are you sure about deleting %1$s?</string>
+	<!-- string name="delete_confirmation_title">About to delete</string -->
+	<string name="delete_confirmation_msg">Delete %1$s?</string>
 	<string name="city_type_suburb">Suburb</string>
 	<string name="city_type_hamlet">Hamlet</string>
 	<string name="city_type_village">Village</string>
@@ -81,7 +81,7 @@
 	
 	<string name="local_index_upload_gpx_description">Upload GPX files to OSM community. They will be used to improve maps.</string>
 	<string name="local_index_items_uploaded">%1$d of %2$d item(s) successfully uploaded.</string>
-	<string name="local_index_mi_upload_gpx">Send to OSM...</string>
+	<string name="local_index_mi_upload_gpx">Send to OSM</string>
 	
 	<string name="show_more_map_detail">Show more map detail</string>
 	<string name="show_more_map_detail_descr">Show some vector map detail (roads etc.) at lower zooms already</string>
@@ -733,13 +733,13 @@
 <string name="add_favorite_dialog_default_favourite_name">Favorite</string>
 <string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>
 
-<string name="favourites_context_menu_title">Context menu</string>
+<!-- string name="favourites_context_menu_title">Context menu</string -->
 <string name="favourites_context_menu_navigate">Navigate to</string>
 <string name="favourites_context_menu_edit">Edit favorite</string>
 <string name="favourites_context_menu_delete">Delete favorite</string>
 <string name="favourites_edit_dialog_title">Rename favorite</string>
 
-<string name="favourites_remove_dialog_title">Are you sure to remove favorite point?</string>
+<string name="favourites_remove_dialog_title">Remove favorite point?</string>
 <string name="favourites_remove_dialog_success">Favorite point {0} was succesfully deleted.</string>
 
 <string name="osb_add_dialog_title">Enter bug text</string>

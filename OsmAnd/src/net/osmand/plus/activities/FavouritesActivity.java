@@ -93,7 +93,7 @@ public class FavouritesActivity extends ExpandableListActivity {
 				if (child == -1) {
 					return;
 				}
-				menu.setHeaderTitle(R.string.favourites_context_menu_title);
+				// menu.setHeaderTitle(R.string.favourites_context_menu_title);
 				
 				menu.add(0, SHOW_ON_MAP, 0, R.string.show_poi_on_map);
 				menu.add(0, NAVIGATE_TO, 1, R.string.favourites_context_menu_navigate);
