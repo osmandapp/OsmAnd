@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="pref_vector_rendering">Vector Renderer spezif. Optionen</string>
+	<string name="pref_overlay">Overlay / underlay</string>
+	<string name="pref_raster_map">Einstellungen Kachel-Karten</string>
+	<string name="pref_vector_map">Einstellungen Vektor-Karten</string>
+	<!-- string name="delete_confirmation_title">About to delete</string -->
+	<string name="delete_confirmation_msg">%1$s löschen?</string>
+	<string name="city_type_suburb">OSM-Suburb</string>
+	<string name="city_type_hamlet">OSM-Hamlet</string>
+	<string name="city_type_village">OSM-Village</string>
+	<string name="city_type_town">OSM-Town</string>
+	<string name="city_type_city">OSM-City</string>
 	<string name="layer_poi_label">POI Namen</string>
 	<string name="auto_follow_route_navigation_descr">Auto follow Position nur im Navigationsmodus.</string>
 	<string name="auto_follow_route_navigation">Auto follow Navigation</string>
@@ -68,7 +79,7 @@
 	<string name="menu_save_directions">Route speichern</string>
 	<string name="local_index_upload_gpx_description">GPX Dateien an OSM Community übermitteln. Die Dateien können dort zur Kartenverbesserung verwendet werden.</string>
 	<string name="local_index_items_uploaded">%1$d von %2$d Datei(en) erfolgreich hochgeladen.</string>
-	<string name="local_index_mi_upload_gpx">Senden an OSM...</string>
+	<string name="local_index_mi_upload_gpx">Senden an OSM</string>
 	
 	<string name="show_more_map_detail">Mehr Kartendetails</string>
 	<string name="show_more_map_detail_descr">Einige Vektor-Daten (Straßen etc.) bereits bei kleineren Vergrößerungen zeigen</string>
@@ -721,7 +732,7 @@
 <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
 <string name="add_favorite_dialog_favourite_added_template">Favorit Punkt \'\'{0}\'\' wurde erfolgreich hinzugefügt.</string>
 
-<string name="favourites_context_menu_title">Kontextmenü</string>
+<!-- string name="favourites_context_menu_title">Kontextmenü</string -->
 <string name="favourites_context_menu_navigate">Navigiere zu</string>
 <string name="favourites_context_menu_edit">Favorit bearbeiten</string>
 <string name="favourites_context_menu_delete">Favorit löschen</string>
