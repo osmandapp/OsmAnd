@@ -203,16 +203,18 @@ public class NavigationInfo {
 
     // Get positioning accuracy and provider information if available
     public synchronized String getAccuracyString() {
-        String provider = currentLocation.getProvider();
         String result = null;
-        if ((currentLocation != null) && currentLocation.hasAccuracy()) {
-            double accuracy = Math.rint(currentLocation.getAccuracy() * 100.0) / 100.0;
-            result = getString(R.string.accuracy) + " " + String.valueOf(accuracy) + " " + getString(R.string.meters); //$NON-NLS-1$ //$NON-NLS-2$
+        if (currentLocation != null) {
+            String provider = currentLocation.getProvider();
+            if (currentLocation.hasAccuracy()) {
+                double accuracy = Math.rint(currentLocation.getAccuracy() * 100.0) / 100.0;
+                result = getString(R.string.accuracy) + " " + String.valueOf(accuracy) + " " + getString(R.string.meters); //$NON-NLS-1$ //$NON-NLS-2$
+            }
+            if (result != null)
+                result += " (" + provider + ")"; //$NON-NLS-1$ //$NON-NLS-2$
+            else
+                result = provider;
         }
-        if (result != null)
-            result += " (" + provider + ")"; //$NON-NLS-1$ //$NON-NLS-2$
-        else
-            result = provider;
         return result;
     }
 
