@@ -180,7 +180,16 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 					} else if (resId == R.string.local_index_mi_backup) {
 						new LocalIndexOperationTask(BACKUP_OPERATION).execute(info);
 					} else if (resId == R.string.local_index_mi_upload_gpx) {
-						new UploadGPXFilesTask().execute(info);
+						Builder confirm = new AlertDialog.Builder(LocalIndexesActivity.this);
+						confirm.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								new UploadGPXFilesTask().execute(info);
+							}
+						});
+						confirm.setNegativeButton(R.string.default_buttons_no, null);
+						confirm.setMessage(getString(R.string.sendtoOSM_confirmation_msg, info.getFileName()));
+						confirm.show();
 					}
 				}
 
