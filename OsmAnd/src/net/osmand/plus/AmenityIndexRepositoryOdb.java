@@ -20,6 +20,7 @@ import net.osmand.data.AmenityType;
 import net.osmand.data.IndexConstants;
 import net.osmand.osm.Entity;
 import net.osmand.osm.LatLon;
+import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.io.IOsmStorageFilter;
@@ -269,10 +270,11 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 			OsmBaseStorage st = new OsmBaseStorage();
 			final Map<Amenity, Entity> amen = new LinkedHashMap<Amenity, Entity>();
 			final List<Amenity> tempList = new ArrayList<Amenity>();
+			final MapRenderingTypes def = MapRenderingTypes.getDefault();
 			st.getFilters().add(new IOsmStorageFilter(){
 				@Override
 				public boolean acceptEntityToLoad(OsmBaseStorage storage, Entity.EntityId id, Entity entity) {
-					Amenity.parseAmenities(entity, tempList);
+					Amenity.parseAmenities(def, entity, tempList);
 					if(!tempList.isEmpty()){
 						for(Amenity a : tempList){
 							amen.put(a, entity);

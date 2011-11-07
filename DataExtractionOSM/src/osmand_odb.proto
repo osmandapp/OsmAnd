@@ -77,6 +77,8 @@ message OsmAndMapIndex {
 		// is the same as id
 		optional uint32 id = 7;
 		optional uint32 minZoom = 9;
+		// additional - 1
+		optional uint32 type = 10;
 	}
 
 	// encoded as fixed32 length delimited
@@ -138,7 +140,10 @@ message MapData {
   repeated bytes polygonInnerCoordinates = 4;
 
   // array of raw var int types
+  optional bytes additionalTypes = 6;
+  // array of raw var int types
   required bytes types = 7;
+
   // repeated array<pair<tagId : raw_var_int, indexOfStringInParent : raw_var_int> >
   optional bytes stringNames = 10; // in parent blocku
 

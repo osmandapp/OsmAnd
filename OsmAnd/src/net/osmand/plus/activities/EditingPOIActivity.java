@@ -360,6 +360,7 @@ public class EditingPOIActivity implements DialogProvider {
 		return builder.create();
 	}
 	
+	
 	public void commitNode(final OpenstreetmapUtil.Action action, final Node n, final EntityInfo info, final String comment, final Runnable successAction) {
 		if (info == null && OpenstreetmapUtil.Action.CREATE != action) {
 			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();

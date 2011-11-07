@@ -77,7 +77,8 @@ public class Amenity extends MapObject {
 		this.subType = subType;
 	}
 	
-	public static List<Amenity> parseAmenities(Entity entity, List<Amenity> amenitiesList){
+	public static List<Amenity> parseAmenities(MapRenderingTypes renderingTypes,
+			Entity entity, List<Amenity> amenitiesList){
 		if(entity instanceof Relation){
 			// it could be collection of amenities
 			return amenitiesList;
@@ -87,18 +88,18 @@ public class Amenity extends MapObject {
 		if (!keySet.isEmpty()) {
 			int shift = 0;
 			for (String t : keySet) {
-				AmenityType type = MapRenderingTypes.getAmenityType(t, entity.getTag(t));
+				AmenityType type = renderingTypes.getAmenityType(t, entity.getTag(t));
 				if (type != null) {
-					String subtype = MapRenderingTypes.getAmenitySubtype(t, entity.getTag(t));
+					String subtype = renderingTypes.getAmenitySubtype(t, entity.getTag(t));
 					Amenity a = new Amenity(entity, type, subtype);
 					if(checkAmenitiesToAdd(a, amenitiesList)){
 						amenitiesList.add(shift, a);
 						shift++;
 					}
 				} else {
-					type = MapRenderingTypes.getAmenityType(t, null);
+					type = renderingTypes.getAmenityType(t, null);
 					if (type != null) {
-						String subtype = MapRenderingTypes.getAmenitySubtype(t, entity.getTag(t));
+						String subtype = renderingTypes.getAmenitySubtype(t, entity.getTag(t));
 						Amenity a = new Amenity(entity, type, subtype);
 						if(checkAmenitiesToAdd(a, amenitiesList)){
 							// 	add amenity to the end

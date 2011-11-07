@@ -30,6 +30,7 @@ import net.osmand.data.AmenityType;
 import net.osmand.data.IndexConstants;
 import net.osmand.impl.ConsoleProgressImplementation;
 import net.osmand.osm.Entity;
+import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.OSMSettings.OSMTagKey;
 import net.sf.junidecode.Junidecode;
@@ -54,7 +55,10 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 
 	private List<Amenity> tempAmenityList = new ArrayList<Amenity>();
 
-	public IndexPoiCreator() {
+	private final MapRenderingTypes renderingTypes;
+
+	public IndexPoiCreator(MapRenderingTypes renderingTypes) {
+		this.renderingTypes = renderingTypes;
 	}
 
 	public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {

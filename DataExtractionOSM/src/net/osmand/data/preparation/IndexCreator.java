@@ -364,7 +364,7 @@ public class IndexCreator {
 			}
 		}
 		this.indexTransportCreator = new IndexTransportCreator();
-		this.indexPoiCreator = new IndexPoiCreator();
+		this.indexPoiCreator = new IndexPoiCreator(renderingTypes);
 		this.indexAddressCreator = new IndexAddressCreator(logMapDataWarn);
 		this.indexMapCreator = new IndexVectorMapCreator(logMapDataWarn);
 		this.accessor = new OsmDbAccessor();

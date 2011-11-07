@@ -573,6 +573,7 @@ public class BinaryMapIndexReader {
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
+				// encoding rules are required!
 				if(index.encodingRules.isEmpty()){
 					// init encoding rules by default
 					Map<String, MapRulType> map = MapRenderingTypes.getDefault().getEncodingRuleTypes();

@@ -1,7 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
 <osmand_types>
 	<!-- 3 different types for polygon="true" that object will be rendered as polygon, polyline ="true" as line, point = "true" - as point -->
-
-
+	<!-- currently 3 name tags are indexed name/ref/ele-->
+	
+	<!-- additional  -->
+	<type polyline="true" tag="oneway" value="yes" minzoom="5" additional="true"/>
+	<type polyline="true" tag="oneway" value="no" minzoom="5" additional="true"/>
+	<type polyline="true" tag="oneway" value="-1" minzoom="5" additional="true"/>
+	
+	<type polyline="true" polygon="true" tag="layer" value="0" minzoom="5" additional="true"/>
+	<type polyline="true" polygon="true" tag="layer" value="1" minzoom="5" additional="true"/>
+	<type polyline="true" polygon="true" tag="layer" value="-1" minzoom="5" additional="true"/>
+	<type polyline="true" polygon="true" tag="layer" value="+1" target:value="1" minzoom="5" additional="true"/>
+	<type polyline="true" polygon="true" tag="layer" value="2" target:value="1" minzoom="5" additional="true"/>
+	<type polyline="true" polygon="true" tag="layer" value="+2" target:value="1" minzoom="5" additional="true"/>
+	<type polyline="true" polygon="true" tag="layer" value="-2" target:value="-1" minzoom="5" additional="true"/>
+	<type polyline="true" polygon="true" tag="layer" value="3" target:value="1" minzoom="5" additional="true"/>
+	<type polyline="true" polygon="true" tag="layer" value="+3" target:value="1" minzoom="5" additional="true"/>
+	<type polyline="true" polygon="true" tag="layer" value="-3" target:value="-1" minzoom="5" additional="true"/>
+	
+	<type polyline="true" polygon="true" tag="bridge" minzoom="5" additional="true"/>
+	<type polyline="true" polygon="true" tag="tunnel" minzoom="5" additional="true"/>
+	
 	<category name="highway">
 		<type polyline="true" tag="highway" value="motorway" minzoom="5" />
 		<type polyline="true" tag="highway" value="motorway_link" minzoom="10" />
@@ -42,13 +62,32 @@
 		<type point="true" tag="highway" value="give_way" minzoom="16" />
 		<type point="true" tag="highway" value="traffic_signals" minzoom="16" />
 		<type point="true" tag="highway" value="motorway_junction" minzoom="13" />
-		<type point="true" tag="highway" value="bus_stop" minzoom="15" />
-		<type point="true" tag="highway" value="platform" minzoom="15" />
-		<type point="true" tag="highway" value="turning_circle" minzoom="16" />
-		<type point="true" tag="highway" value="emergency_access_point" minzoom="16" />
-		<type point="true" tag="highway" value="speed_camera" minzoom="16" />
+		<type point="true" tag="highway" value="bus_stop" minzoom="15" poi:category="transportation"/>
+		<type point="true" tag="highway" value="platform" minzoom="15" poi:category="transportation"/>
+		<type point="true" tag="highway" value="turning_circle" minzoom="16" poi:category="transportation"/>
+		<type point="true" tag="highway" value="emergency_access_point" minzoom="16" poi:category="transportation"/>
+		<type point="true" tag="highway" value="speed_camera" minzoom="16" poi:category="transportation"/>
 		<type point="true" tag="highway" value="street_lamp" minzoom="16" />
+	</category>
 
+	<category name="tracktype">
+		<type polyline="true" tag="tracktype" value="grade1" minzoom="13" additional="true"/>
+		<type polyline="true" tag="tracktype" value="grade2" minzoom="13" additional="true"/>
+		<type polyline="true" tag="tracktype" value="grade3" minzoom="13" additional="true"/>
+		<type polyline="true" tag="tracktype" value="grade4" minzoom="13" additional="true"/>
+		<type polyline="true" tag="tracktype" value="grade5" minzoom="13" additional="true"/>
+	</category>
+	
+	<category name="cycleway">
+		<type polyline="true" tag="cycleway" value="lane" minzoom="13"/>
+		<type polyline="true" tag="cycleway" value="opposite_lane" minzoom="13"/>
+		<type polyline="true" tag="cycleway" minzoom="13"/>
+		<type polyline="true" tag="cycleway:left" target:tag="cycleway" minzoom="13"/>
+		<type polyline="true" tag="cycleway:right" target:tag="cycleway" minzoom="13"/>
+	</category>	
+	
+	
+	<category name="traffic_calming" poi:tag="traffic_calming" poi:category="barrier" poi:prefix="traffic_calming_">
 		<type point="true" tag="traffic_calming" value="yes" minzoom="16" />
 		<type point="true" tag="traffic_calming" value="bump" minzoom="16" />
 		<type point="true" tag="traffic_calming" value="chicane" minzoom="16" />
@@ -59,16 +98,16 @@
 		<type point="true" tag="traffic_calming" value="choker" minzoom="16" />
 	</category>
 
-	<category name="barrier">
+	<category name="barrier" poi:tag="barrier" poi:category="barrier">
 		<type polyline="true" tag="barrier" value="hedge" minzoom="15" />
 		<type polyline="true" tag="natural" value="hedge" minzoom="15" />
 		<type polyline="true" tag="barrier" value="fence" minzoom="15" />
-		<type polyline="true" tag="fenced" value="yes" minzoom="15" target:tag="barrier" target:value="fence" />
+		<type polyline="true" tag="fenced" value="yes" minzoom="15" target:tag="barrier" target:value="fence" poi:category="barrier"/>
 		<type polyline="true" tag="barrier" value="wall" minzoom="15" />
 		<type polyline="true" tag="barrier" value="ditch" minzoom="15" />
 		<type polyline="true" tag="barrier" value="retaining_wall" minzoom="15" />
 		<type polyline="true" tag="barrier" value="city_wall" minzoom="13" />
-		<type polyline="true" tag="historic" value="city_walls" minzoom="13" target:tag="barrier" target:value="city_wall" />
+		<type polyline="true" tag="historic" value="city_walls" minzoom="13" target:tag="barrier" target:value="city_wall"  poi:category="barrier"/>
 		<type point="true" polyline="true" tag="barrier" value="bollard" minzoom="15" />
 		<type point="true" tag="barrier" value="cycle_barrier" minzoom="15" />
 		<type point="true" tag="barrier" value="block" minzoom="15" />
@@ -76,7 +115,7 @@
 		<type point="true" tag="barrier" value="toll_booth" minzoom="15" />
 		<type point="true" tag="barrier" value="entrance" minzoom="15" />
 		<type point="true" tag="barrier" value="gate" minzoom="15" />
-		<type point="true" tag="highway" value="gate" minzoom="15" />
+		<type point="true" tag="highway" value="gate" minzoom="15"  poi:category="barrier"/>
 		<type point="true" tag="barrier" value="lift_gate" minzoom="15" />
 		<type point="true" tag="barrier" value="stile" minzoom="15" />
 		<type point="true" tag="barrier" value="horse_stile" minzoom="15" />
@@ -87,31 +126,31 @@
 	</category>
 
 
-	<category name="waterway">
-		<type polyline="true" tag="waterway" value="stream" minzoom="13" />
-		<type polygon="true" tag="waterway" value="riverbank" minzoom="8" />
-		<type polyline="true" tag="waterway" value="river" minzoom="5" />
-		<type polyline="true" tag="waterway" value="canal" minzoom="10" />
-		<type polyline="true" tag="waterway" value="ditch" minzoom="13" />
-		<type polyline="true" tag="waterway" value="drain" minzoom="13" />
-		<type point="true" tag="waterway" value="dock" minzoom="10" />
-		<type point="true" tag="waterway" value="lock_gate" minzoom="15" />
-		<type point="true" tag="waterway" value="lock" minzoom="15" />
-		<type point="true" tag="waterway" value="turning_point" minzoom="15" />
+	<category name="waterway"  poi:tag="waterway" poi:category="man_made">
+		<type polyline="true" tag="waterway" value="stream" minzoom="13" poi:category="natural"/>
+		<type polygon="true" tag="waterway" value="riverbank" minzoom="8" poi:category="natural"/>
+		<type polyline="true" tag="waterway" value="river" minzoom="5" poi:category="natural"/>
+		<type polyline="true" tag="waterway" value="canal" minzoom="10" poi:category="natural"/>
+		<type polyline="true" tag="waterway" value="ditch" minzoom="13" poi:category="natural"/>
+		<type polyline="true" tag="waterway" value="drain" minzoom="13" poi:category="natural"/>
+		<type point="true" tag="waterway" value="dock" minzoom="10" poi:prefix="water_"/>
+		<type point="true" tag="waterway" value="lock_gate" minzoom="15" poi:prefix="water_"/>
+		<type point="true" tag="waterway" value="lock" minzoom="15" poi:prefix="water_"/>
+		<type point="true" tag="waterway" value="turning_point" minzoom="15" poi:prefix="water_"/>
 		<type point="true" tag="waterway" value="boatyard" minzoom="15" />
-		<type point="true" polyline="true" tag="waterway" value="weir" minzoom="15" />
+		<type point="true" polyline="true" tag="waterway" value="weir" minzoom="15" poi:prefix="water_"/>
 		<type polyline="true" tag="waterway" value="dam" minzoom="13" />
-		<type point="true" tag="waterway" value="mill_pond" minzoom="13" />
+		<type point="true" tag="waterway" value="mill_pond" minzoom="13" poi:prefix="water_"/>
 
 	</category>
 
-	<category name="railway">
-		<type polyline="true" tag="railway" value="rail" minzoom="7" />
-		<type polyline="true" tag="railway" value="tram" minzoom="13" />
-		<type polyline="true" tag="railway" value="light_rail" minzoom="13" />
+	<category name="railway" poi:tag="railway" poi:category="transportation" poi:prefix="railway_">
+		<type polyline="true" tag="railway" value="rail" minzoom="7" poi:prefix=""/>
+		<type polyline="true" tag="railway" value="tram" minzoom="13" poi:prefix=""/>
+		<type polyline="true" tag="railway" value="light_rail" minzoom="13" poi:prefix=""/>
 		<type polyline="true" tag="railway" value="abandoned" minzoom="15" />
 		<type polyline="true" tag="railway" value="disused" minzoom="15" />
-		<type polyline="true" tag="railway" value="subway" minzoom="13" />
+		<type polyline="true" tag="railway" value="subway" minzoom="13" poi:prefix=""/>
 		<type polyline="true" tag="railway" value="preserved" minzoom="13" />
 		<type polyline="true" tag="railway" value="narrow_gauge" minzoom="15" />
 		<type polyline="true" tag="railway" value="construction" minzoom="15" />
@@ -120,29 +159,29 @@
 		<type polyline="true" tag="railway" value="platform" minzoom="15" />
 		<type point="true" polygon="true" tag="railway" value="station" minzoom="12" />
 		<type point="true" tag="railway" value="turntable" minzoom="15" />
-		<type point="true" tag="railway" value="halt" minzoom="15" />
-		<type point="true" tag="railway" value="tram_stop" minzoom="15" />
+		<type point="true" tag="railway" value="halt" minzoom="15" poi:prefix=""/>
+		<type point="true" tag="railway" value="tram_stop" minzoom="15" poi:prefix=""/>
 		<type point="true" tag="railway" value="crossing" minzoom="15" />
 		<type point="true" tag="railway" value="level_crossing" minzoom="15" />
-		<type point="true" tag="railway" value="subway_entrance" minzoom="15" />
+		<type point="true" tag="railway" value="subway_entrance" minzoom="15" poi:prefix=""/>
 		<type point="true" tag="railway" value="buffer_stop" minzoom="15" />
 	</category>
 
 
-	<category name="aeroway">
+	<category name="aeroway" poi:tag="aeroway" poi:category="transportation">
 		<type point="true" polygon="true" tag="aeroway" value="aerodrome" minzoom="12" />
 		<type point="true" polygon="true" tag="aeroway" value="terminal" minzoom="15" />
 		<type point="true" polygon="true" tag="aeroway" value="helipad" minzoom="12" />
-		<type polyline="true" tag="aeroway" value="runway" minzoom="11" />
-		<type polyline="true" tag="aeroway" value="taxiway" minzoom="12" />
-		<type polygon="true" tag="aeroway" value="apron" minzoom="12" />
+		<type polyline="true" tag="aeroway" value="runway" minzoom="11" poi:prefix="aeroway_"/>
+		<type polyline="true" tag="aeroway" value="taxiway" minzoom="12" poi:prefix="aeroway_"/>
+		<type polygon="true" tag="aeroway" value="apron" minzoom="12" poi:prefix="aeroway_"/>
 		<type point="true" polygon="true" tag="aeroway" value="airport" minzoom="11" />
 		<type point="true" tag="aeroway" value="gate" minzoom="15" nameNullTag="ref" />
 		<type point="true" tag="aeroway" value="windsock" minzoom="15" />
 	</category>
 
 
-	<category name="aerialway">
+	<category name="aerialway" poi:tag="aerialway" poi:category="transportation" poi:prefix="aerialway_">
 		<type polyline="true" tag="aerialway" value="cable_car" minzoom="13" />
 		<type polyline="true" tag="aerialway" value="gondola" minzoom="13" />
 		<type polyline="true" tag="aerialway" value="chair_lift" minzoom="13" />
@@ -150,8 +189,7 @@
 		<type polyline="true" tag="aerialway" value="drag_lift" minzoom="13" />
 		<type polyline="true" tag="aerialway" value="goods" minzoom="15" />
 		<type point="true" polygon="true" tag="aerialway" value="station" minzoom="15" />
-		<type point="true" tag="aerialway" value="pylon" minzoom="15" />
-		<type polyline="true" tag="aerialway" value="goods" minzoom="15" />
+		<type point="true" tag="aerialway" value="pylon" minzoom="15" poi:category=""/>
 
 	</category>
 
@@ -160,16 +198,16 @@
 		<type point="true" tag="power" value="pole" minzoom="15" />
 		<type polyline="true" tag="power" value="line" minzoom="13" />
 		<type polyline="true" tag="power" value="minor_line" minzoom="15" />
-		<type point="true" polygon="true" tag="power" value="station" minzoom="13" />
-		<type point="true" polygon="true" tag="power" value="sub_station" minzoom="13" />
-		<type point="true" tag="power" value="generator" minzoom="15" />
-		<type point="true" tag="power" value="cable_distribution_cabinet" minzoom="15" />
+		<type point="true" polygon="true" tag="power" value="station" minzoom="13" poi:category="man_made" poi:prefix="power_"/>
+		<type point="true" polygon="true" tag="power" value="sub_station" minzoom="13" poi:category="man_made" poi:prefix="power_"/>
+		<type point="true" tag="power" value="generator" minzoom="15" poi:category="man_made" poi:prefix="power_"/>
+		<type point="true" tag="power" value="cable_distribution_cabinet" minzoom="15" poi:category="man_made" poi:prefix="power_"/>
 	</category>
 
 
-	<category name="man_made">
-		<type polygon="true" tag="building" minzoom="16" />
-		<type point="true" tag="addr:housenumber" minzoom="16" />
+	<category name="man_made" poi:tag="man_made" poi:category="man_made">
+		<type polygon="true" tag="building" minzoom="16" poi:category="" nameNullTag="addr:housenumber"/>
+		<type point="true" tag="addr:housenumber" minzoom="16" nameNullTag="addr:housenumber"/>
 		<type point="true" polygon="true" tag="man_made" value="wastewater_plant" minzoom="16" />
 		<type polygon="true" point="true" tag="man_made" value="water_works" minzoom="16" />
 		<type point="true" polygon="true" tag="man_made" value="works" minzoom="15" />
@@ -197,7 +235,7 @@
 	</category>
 
 
-	<category name="leisure">
+	<category name="leisure" poi:tag="leisure" poi:category="leisure">
 		<type point="true" polygon="true" tag="leisure" value="dog_park" minzoom="15" />
 		<type point="true" polygon="true" tag="leisure" value="sports_centre" minzoom="13" />
 		<type point="true" polygon="true" tag="leisure" value="golf_course" minzoom="12" />
@@ -209,7 +247,7 @@
 		<type point="true" polygon="true" tag="leisure" value="slipway" minzoom="15" />
 		<type point="true" polygon="true" tag="leisure" value="fishing" minzoom="15" />
 		<type point="true" polygon="true" tag="leisure" value="nature_reserve" minzoom="10" />
-		<type point="true" polygon="true" tag="natural" value="park" minzoom="12" />
+		<type point="true" polygon="true" tag="natural" value="park" minzoom="12" poi:category="leisure"/>
 		<type point="true" polygon="true" tag="leisure" value="park" minzoom="12" />
 		<type point="true" polygon="true" tag="leisure" value="recreation_ground" minzoom="12" />
 		<type point="true" polygon="true" tag="leisure" value="playground" minzoom="15" />
@@ -222,7 +260,7 @@
 	</category>
 
 
-	<category name="office">
+	<category name="office" poi:tag="office" poi:category="office" >
 		<type point="true" tag="office" value="accountant" minzoom="15" />
 		<type point="true" tag="office" value="architect" minzoom="15" />
 		<type point="true" tag="office" value="company" minzoom="15" />
@@ -237,11 +275,11 @@
 		<type point="true" tag="office" value="research" minzoom="15" />
 		<type point="true" tag="office" value="telecommunication" minzoom="15" />
 		<type point="true" tag="office" value="travel_agent" minzoom="15" />
-		<type point="true" tag="amenity" value="architect_office" minzoom="15" target:tag="office" target:value="architect" />
+		<type point="true" tag="amenity" value="architect_office" minzoom="15" target:tag="office" target:value="architect" poi:category="office"/>
 	</category>
 
 
-	<category name="shop">
+	<category name="shop" poi:tag="shop" poi:category="shop" >
 		<type point="true" tag="shop" value="alcohol" minzoom="15" />
 		<type point="true" tag="shop" value="bakery" minzoom="15" />
 		<type point="true" tag="shop" value="beauty" minzoom="15" />
@@ -303,7 +341,7 @@
 	</category>
 
 
-	<category name="emergency">
+	<category name="emergency" poi:tag="emergency" poi:category="emergency">
 		<type polygon="true" tag="emergency" value="ambulance_station" minzoom="16" />
 		<type polygon="true" tag="emergency" value="ses_station" minzoom="16" />
 		<type point="true" tag="emergency" value="fire_extinguisher" minzoom="16" />
@@ -312,11 +350,11 @@
 		<type point="true" tag="emergency" value="fire_hydrant" minzoom="16" />
 		<type point="true" tag="emergency" value="phone" minzoom="16" />
 		<type point="true" tag="emergency" value="siren" minzoom="16" />
-		<type point="true" tag="amenity" value="fire_station" minzoom="16" />
+		<type point="true" tag="amenity" value="fire_station" minzoom="16" poi:category="emergency"/>
 	</category>
 
 
-	<category name="tourism">
+	<category name="tourism" poi:tag="tourism" poi:category="tourism" >
 		<type point="true" polygon="true" tag="tourism" value="attraction" minzoom="13" />
 		<type point="true" polygon="true" tag="tourism" value="artwork" minzoom="15" />
 		<type point="true" polygon="true" tag="tourism" value="camp_site" minzoom="13" />
@@ -336,7 +374,7 @@
 	</category>
 
 
-	<category name="historic">
+	<category name="historic" poi:tag="historic" poi:category="historic">
 		<type point="true" polygon="true" tag="historic" value="archaeological_site" minzoom="15" />
 		<type point="true" polygon="true" tag="historic" value="battlefield" minzoom="15" />
 		<type point="true" polygon="true" tag="historic" value="castle" minzoom="15" />
@@ -353,53 +391,52 @@
 
 	<category name="landuse">
 		<type polygon="true" tag="landuse" value="allotments" minzoom="10" />
-		<type point="true" polygon="true" tag="landuse" value="basin" minzoom="10" />
+		<type point="true" polygon="true" tag="landuse" value="basin" minzoom="10" poi:category="landuse"/>
 		<type point="true" polygon="true" tag="landuse" value="brownfield" minzoom="12" />
-		<type polygon="true" tag="landuse" value="cemetery" minzoom="11" />
-		<type polygon="true" tag="landuse" value="grave_yard" minzoom="15" />
+		<type polygon="true" tag="landuse" value="cemetery" minzoom="11" poi:category="landuse"/>
+		<type polygon="true" tag="landuse" value="grave_yard" minzoom="15" poi:category="landuse"/>
 		<type polygon="true" tag="landuse" value="commercial" minzoom="10" />
 		<type point="true" polygon="true" tag="landuse" value="construction" minzoom="12" />
 		<type polygon="true" tag="landuse" value="farm" minzoom="12" />
 		<type polygon="true" tag="landuse" value="farmland" minzoom="12" />
 		<type polygon="true" tag="landuse" value="farmyard" minzoom="12" />
-		<type polygon="true" tag="landuse" value="forest" minzoom="8" />
+		<type polygon="true" tag="landuse" value="forest" minzoom="8" poi:category="landuse"/>
 		<type polygon="true" tag="landuse" value="garages" minzoom="12" />
 		<type polygon="true" tag="landuse" value="grass" minzoom="12" />
 		<type polygon="true" tag="landuse" value="greenfield" minzoom="12" />
 		<type polygon="true" tag="landuse" value="greenhouse_horticulture" minzoom="12" />
 		<type polygon="true" tag="landuse" value="industrial" minzoom="10" />
 		<type polygon="true" tag="landuse" value="landfill" minzoom="12" />
-		<type point="true" polygon="true" tag="landuse" value="meadow" minzoom="12" />
-		<type polygon="true" tag="landuse" value="military" minzoom="10" />
-		<type polygon="true" tag="landuse" value="orchard" minzoom="12" />
+		<type point="true" polygon="true" tag="landuse" value="meadow" minzoom="12" poi:category="landuse"/>
+		<type polygon="true" tag="landuse" value="military" minzoom="10" poi:category="landuse"/>
+		<type polygon="true" tag="landuse" value="orchard" minzoom="12" poi:category="landuse"/>
 		<type polygon="true" tag="landuse" value="railway" minzoom="12" />
-		<type polygon="true" tag="landuse" value="recreation_ground" minzoom="12" />
-		<type polygon="true" tag="landuse" value="conservation" minzoom="10" />
-		<type polygon="true" tag="landuse" value="village_green" minzoom="12" />
-		<type point="true" polygon="true" tag="landuse" value="reservoir" minzoom="7" />
-		<type point="true" polygon="true" tag="landuse" value="water" minzoom="7" />
+		<type polygon="true" tag="landuse" value="recreation_ground" minzoom="12" poi:category="landuse"/>
+		<type polygon="true" tag="landuse" value="conservation" minzoom="10" poi:category="landuse"/>
+		<type polygon="true" tag="landuse" value="village_green" minzoom="12" poi:category="landuse"/>
+		<type point="true" polygon="true" tag="landuse" value="reservoir" minzoom="7" poi:category="landuse"/>
+		<type point="true" polygon="true" tag="landuse" value="water" minzoom="7" poi:category="landuse"/>
 		<type polygon="true" tag="landuse" value="residential" minzoom="10" />
 		<type polygon="true" tag="landuse" value="retail" minzoom="12" />
-		<type point="true" polygon="true" tag="landuse" value="salt_pond" minzoom="10" />
-		<type point="true" polygon="true" tag="landuse" value="quarry" minzoom="12" />
-		<type polygon="true" tag="landuse" value="vineyard" minzoom="12" />
+		<type point="true" polygon="true" tag="landuse" value="salt_pond" minzoom="10" poi:category="landuse"/>
+		<type point="true" polygon="true" tag="landuse" value="quarry" minzoom="12" poi:category="landuse"/>
+		<type polygon="true" tag="landuse" value="vineyard" minzoom="12" poi:category="landuse"/>
 		<type polygon="true" tag="landuse" value="field" minzoom="12" />
-		<type polygon="true" tag="natural" value="field" minzoom="12" />
+		<type polygon="true" tag="natural" value="field" minzoom="12" target:tag="landuse" target:value="field" poi:category="" />
 	</category>
 
 
-	<category name="military">
+	<category name="military" poi:category="military" poi:tag="military">
 		<type point="true" tag="military" value="airfield" minzoom="12" />
 		<type point="true" tag="military" value="bunker" minzoom="15" />
 		<type polygon="true" tag="military" value="barracks" minzoom="13" />
 		<type point="true" tag="military" value="danger_area" minzoom="10" />
 		<type point="true" polygon="true" tag="military" value="range" minzoom="10" />
 		<type point="true" polygon="true" tag="military" value="naval_base" minzoom="12" />
-		<type point="true" polygon="true" tag="military" minzoom="12" />
 	</category>
 
 
-	<category name="natural">
+	<category name="natural" poi:category="natural" poi:tag="natural">
 		<!-- coastline is polyline !!! -->
 		<type polyline="true" tag="natural" value="coastline" minzoom="1" />
 		<type point="true" polygon="true" tag="natural" value="bay" minzoom="5" />
@@ -409,7 +446,7 @@
 		<type point="true" polygon="true" tag="natural" value="fell" minzoom="13" />
 		<type point="true" polygon="true" tag="natural" value="glacier" minzoom="7" />
 		<type point="true" polygon="true" tag="natural" value="heath" minzoom="11" />
-		<type point="true" polygon="true" tag="natural" value="land" minzoom="10" />
+		<type point="true" polygon="true" tag="natural" value="land" minzoom="10" poi:category="" />
 		<type point="true" polygon="true" tag="natural" value="marsh" minzoom="11" />
 		<type point="true" polygon="true" tag="natural" value="mud" minzoom="11" />
 		<type point="true" tag="natural" value="peak" minzoom="11" nameNullTag="ele" />
@@ -418,20 +455,24 @@
 		<type point="true" polygon="true" tag="natural" value="scrub" minzoom="11" />
 		<type point="true" tag="natural" value="spring" minzoom="14" />
 		<type point="true" tag="natural" value="stone" minzoom="15" />
-		<type point="true" tag="natural" value="tree" minzoom="15" />
+		<type point="true" tag="natural" value="tree" minzoom="15" poi:category="" />
 		<type point="true" tag="natural" value="volcano" minzoom="11" />
 		<type point="true" polygon="true" tag="natural" value="water" minzoom="4" />
 		<type point="true" polygon="true" tag="natural" value="lake" minzoom="4" />
 		<type point="true" polygon="true" tag="natural" value="wetland" minzoom="10" />
 		<type point="true" polygon="true" tag="natural" value="wood" minzoom="8" />
-		<type point="true" polygon="true" tag="landuse" value="wood" minzoom="8" />
+		<type point="true" polygon="true" tag="landuse" value="wood" minzoom="8" 
+				target:tag="natural" target:value="wood" poi:category="natural" />
 		<type polyline="true" tag="contour" value="elevation" minzoom="8" />
-
-		<type point="true" polygon="true" tag="natural" minzoom="11" />
+	</category>
+	
+	<category name="geocache" poi:tag="geocache" poi:category="geocache">
+		<type point="true" tag="geocache" value="found" minzoom="15" />
+		<type point="true" tag="geocache" value="not found" minzoom="15" />
 	</category>
 
-
-	<category name="sustenance">
+	<!-- Amenities  -->
+	<category name="sustenance" poi:category="sustenance">
 		<type point="true" polygon="true" tag="amenity" value="restaurant" minzoom="15" />
 		<type point="true" polygon="true" tag="amenity" value="cafe" minzoom="15" />
 		<type point="true" polygon="true" tag="amenity" value="food_court" minzoom="15" />
@@ -443,7 +484,6 @@
 		<type point="true" tag="amenity" value="bbq" minzoom="15" />
 	</category>
 
-
 	<category name="education" poi:category="education">
 		<type point="true" polygon="true" tag="amenity" value="kindergarten" minzoom="15" />
 		<type point="true" polygon="true" tag="amenity" value="school" minzoom="15" />
@@ -451,7 +491,6 @@
 		<type point="true" polygon="true" tag="amenity" value="library" minzoom="15" />
 		<type point="true" polygon="true" tag="amenity" value="university" minzoom="15" />
 	</category>
-
 
 	<category name="transportation" poi:category="transportation">
 		<type point="true" polygon="true" tag="amenity" value="parking" minzoom="15" />
@@ -485,7 +524,6 @@
 		<type point="true" tag="amenity" value="first_aid" minzoom="15" />
 	</category>
 
-
 	<category name="entertainment" poi:category="entertainment">
 		<type point="true" tag="amenity" value="arts_centre" minzoom="15" />
 		<type point="true" polygon="true" tag="amenity" value="cinema" minzoom="15" />
@@ -497,7 +535,6 @@
 		<type point="true" polygon="true" tag="amenity" value="theatre" minzoom="15" />
 		<type point="true" tag="amenity" value="sauna" minzoom="15" />
 		<type point="true" tag="amenity" value="brothel" minzoom="15" />
-
 	</category>
 
 	
@@ -505,11 +542,10 @@
 		<poi tag="amenity" poi:category="geocache" />
 		<type point="true" tag="geocache" value="found" minzoom="15" />
 		<type point="true" tag="geocache" value="not found" minzoom="15" />
+
 	</category>
 
-
-	<category name="amenity_other">
-		<poi tag="amenity" poi:category="other" />
+	<category name="amenity_other" poi:tag="amenity" poi:category="other">
 		<type point="true" polygon="true" tag="amenity" value="marketplace" minzoom="15" />
 		<type point="true" polygon="true" tag="amenity" value="courthouse" minzoom="15" />
 		<type point="true" polygon="true" tag="amenity" value="crematorium" minzoom="15" />
@@ -537,9 +573,8 @@
 
 
 
-	<!-- administrative -->
-	<category name="administrative">
-		<poi tag="place" poi:category="administrative" />
+	<!-- administrative place-->
+	<category name="administrative" poi:tag="place" poi:category="administrative" >
 		<type point="true" tag="place" value="continent" minzoom="1" />
 		<type point="true" tag="place" value="country" minzoom="2" />
 		<type point="true" tag="place" value="state" minzoom="3" />
@@ -552,6 +587,10 @@
 		<type point="true" tag="place" value="suburb" minzoom="10" />
 		<type point="true" tag="place" value="locality" minzoom="10" />
 		<type point="true" tag="place" value="island" minzoom="10" />
+	</category>
+	
+	<!-- administrative boundaries -->
+	<category>
 		<!-- register(st, "boundary", "administrative", ADMINISTRATIVE, 15, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$ -->
 		<type polyline="true" tag="admin_level" value="1" minzoom="2" />
 		<type point="true" polyline="true" tag="admin_level" value="0" minzoom="2" />
@@ -574,8 +613,7 @@
 
 
 	<!-- sport -->
-	<category name="sport">
-		<poi tag="sport" poi:category="sport" />
+	<category name="sport" poi:tag="sport" poi:category="sport">
 		<type point="true" tag="sport" value="9pin" minzoom="15" />
 		<type point="true" tag="sport" value="10pin" minzoom="15" />
 		<type point="true" tag="sport" value="archery" minzoom="15" />
