@@ -8,9 +8,11 @@ import net.osmand.access.AccessibilityDelegate;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Rect;
 import android.os.SystemClock;
 import android.view.accessibility.AccessibilityEvent;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.View;
@@ -69,16 +71,24 @@ public class AccessibleActivity extends Activity {
     // to wrap it into a View and set it by AlertDialog.Builder.setView().
     // Such message will be focusable and so it can be repeated by selecting.
 
-    public View accessibleMessage(CharSequence msg) {
-        View layout = getLayoutInflater().inflate(R.layout.alert, null);
+    public static View caredMessage(Context ctx, CharSequence msg) {
+        View layout = ((LayoutInflater)(ctx.getSystemService(LAYOUT_INFLATER_SERVICE))).inflate(R.layout.alert, null);
         ((TextView)layout.findViewById(R.id.message)).setText(msg);
         return layout;
     }
 
-    public View accessibleMessage(int msgid) {
-        View layout = getLayoutInflater().inflate(R.layout.alert, null);
+    public static View caredMessage(Context ctx, int msgid) {
+        View layout = ((LayoutInflater)(ctx.getSystemService(LAYOUT_INFLATER_SERVICE))).inflate(R.layout.alert, null);
         ((TextView)layout.findViewById(R.id.message)).setText(msgid);
         return layout;
+    }
+
+    public View accessibleMessage(CharSequence msg) {
+        return caredMessage(this, msg);
+    }
+
+    public View accessibleMessage(int msgid) {
+        return caredMessage(this, msgid);
     }
 
     private View findTouch(MotionEvent event) {
