@@ -1,5 +1,7 @@
 package net.osmand.data.preparation;
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -50,17 +52,20 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	private static final int MAP_LEVELS_POWER = 3;  
 	private static final int MAP_LEVELS_MAX = 1 << MAP_LEVELS_POWER;
 	private MapRenderingTypes renderingTypes;
+	private MapZooms mapZooms;
 	
 	
 	// MEMORY map : save it in memory while that is allowed
 	private Map<Long, Set<Integer>>[] multiPolygonsWays;
 	private Map<Long, String> multiPolygonsNames = new LinkedHashMap<Long, String>();
+	
 	private Map<Long, List<Long>> highwayRestrictions = new LinkedHashMap<Long, List<Long>>();
 
 	// local purpose
-	List<Integer> typeUse = new ArrayList<Integer>(8);
+	TIntArrayList typeUse = new TIntArrayList(8);
 	List<Long> restrictionsUse = new ArrayList<Long>(8);
-	private MapZooms mapZooms;
+	
+	
 	
 	private PreparedStatement mapBinaryStat;
 	private PreparedStatement mapLowLevelBinaryStat;
@@ -72,8 +77,17 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	private final Log logMapDataWarn;
 
 
-	public IndexVectorMapCreator(Log logMapDataWarn) {
+	public IndexVectorMapCreator(Log logMapDataWarn, MapZooms mapZooms, MapRenderingTypes renderingTypes, int zoomWaySmothness) {
 		this.logMapDataWarn = logMapDataWarn;
+		this.mapZooms = mapZooms;
+		this.zoomWaySmothness = zoomWaySmothness;
+		this.renderingTypes = renderingTypes;
+		// init map
+		multiPolygonsWays = new Map[mapZooms.size()];
+		for (int i = 0; i < multiPolygonsWays.length; i++) {
+			multiPolygonsWays[i] = new LinkedHashMap<Long, Set<Integer>>();
+		}
+		lowLevelWays = -1;
 	}
 	
 	public void indexMapRelationsAndMultiPolygons(Entity e, OsmDbAccessorContext ctx) throws SQLException {
@@ -104,7 +118,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				return;
 			}
 
-			int mtType = findMultiPolygonType(e, 0);
+			int mtType = renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(0).getMaxZoom(), true, typeUse);
 			if (mtType != 0) {
 
 				String name = renderingTypes.getEntityName(e);
@@ -156,7 +170,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 						}
 						putMultipolygonType(multiPolygonsWays[0], way.getId(), mtType, inverse);
 						for (int i = 1; i < multiPolygonsWays.length; i++) {
-							int type = findMultiPolygonType(e, i);
+							int type = renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(0).getMaxZoom(), true, typeUse);
 							if (type != 0) {
 								putMultipolygonType(multiPolygonsWays[i], way.getId(), type, inverse);
 							}
@@ -200,45 +214,6 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	}
 
 
-	private void indexHighwayRestrictions(Entity e, OsmDbAccessorContext ctx) throws SQLException {
-		if (e instanceof Relation && "restriction".equals(e.getTag(OSMTagKey.TYPE))) { //$NON-NLS-1$
-			String val = e.getTag("restriction"); //$NON-NLS-1$
-			if (val != null) {
-				byte type = -1;
-				if ("no_right_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_NO_RIGHT_TURN;
-				} else if ("no_left_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_NO_LEFT_TURN;
-				} else if ("no_u_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_NO_U_TURN;
-				} else if ("no_straight_on".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON;
-				} else if ("only_right_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN;
-				} else if ("only_left_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_ONLY_LEFT_TURN;
-				} else if ("only_straight_on".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON;
-				}
-				if (type != -1) {
-					ctx.loadEntityData(e);
-					Collection<EntityId> fromL = ((Relation) e).getMemberIds("from"); //$NON-NLS-1$
-					Collection<EntityId> toL = ((Relation) e).getMemberIds("to"); //$NON-NLS-1$
-					if (!fromL.isEmpty() && !toL.isEmpty()) {
-						EntityId from = fromL.iterator().next();
-						EntityId to = toL.iterator().next();
-						if (from.getType() == EntityType.WAY) {
-							if (!highwayRestrictions.containsKey(from.getId())) {
-								highwayRestrictions.put(from.getId(), new ArrayList<Long>(4));
-							}
-							highwayRestrictions.get(from.getId()).add((to.getId() << 3) | (long) type);
-						}
-					}
-				}
-			}
-		}
-	}
-	
 	private void putMultipolygonType(Map<Long, Set<Integer>> multiPolygonsWays, long baseId, int mtType, boolean inverse) {
 		if (mtType == 0) {
 			return;
@@ -252,25 +227,6 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 			multiPolygonsWays.get(baseId).add(mtType);
 		}
 	}
-
-	private int findMultiPolygonType(Entity e, int level) {
-		int t = renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), true, typeUse);
-		int mtType = 0;
-		if (t != 0) {
-			if ((t & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
-				mtType = t;
-			} else {
-				for (Integer i : typeUse) {
-					if ((i & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
-						mtType = i;
-						break;
-					}
-				}
-			}
-		}
-		return mtType;
-	}
-	
 
 	private void combineMultiPolygons(Way w, List<List<Way>> completedRings, List<List<Way>> incompletedRings) {
 		long lId = w.getEntityIds().get(w.getEntityIds().size() - 1).getId().longValue();
@@ -625,19 +581,6 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 	}
 
-	@SuppressWarnings("unchecked")
-	public void initSettings(MapZooms mapZooms, MapRenderingTypes renderingTypes, int zoomWaySmothness) {
-		this.mapZooms = mapZooms;
-		this.zoomWaySmothness = zoomWaySmothness;
-		this.renderingTypes = renderingTypes;
-		// init map
-		multiPolygonsWays = new Map[mapZooms.size()];
-		for (int i = 0; i < multiPolygonsWays.length; i++) {
-			multiPolygonsWays[i] = new LinkedHashMap<Long, Set<Integer>>();
-		}
-		lowLevelWays = -1;
-		
-	}
 
 	public void iterateMainEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		if (e instanceof Way || e instanceof Node) {
@@ -951,5 +894,45 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	
 	public int getZoomWaySmothness() {
 		return zoomWaySmothness;
+	}
+	
+	// TODO restrictions should be moved to different creator (Routing Map creator)
+	private void indexHighwayRestrictions(Entity e, OsmDbAccessorContext ctx) throws SQLException {
+		if (e instanceof Relation && "restriction".equals(e.getTag(OSMTagKey.TYPE))) { //$NON-NLS-1$
+			String val = e.getTag("restriction"); //$NON-NLS-1$
+			if (val != null) {
+				byte type = -1;
+				if ("no_right_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_NO_RIGHT_TURN;
+				} else if ("no_left_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_NO_LEFT_TURN;
+				} else if ("no_u_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_NO_U_TURN;
+				} else if ("no_straight_on".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON;
+				} else if ("only_right_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN;
+				} else if ("only_left_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_ONLY_LEFT_TURN;
+				} else if ("only_straight_on".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON;
+				}
+				if (type != -1) {
+					ctx.loadEntityData(e);
+					Collection<EntityId> fromL = ((Relation) e).getMemberIds("from"); //$NON-NLS-1$
+					Collection<EntityId> toL = ((Relation) e).getMemberIds("to"); //$NON-NLS-1$
+					if (!fromL.isEmpty() && !toL.isEmpty()) {
+						EntityId from = fromL.iterator().next();
+						EntityId to = toL.iterator().next();
+						if (from.getType() == EntityType.WAY) {
+							if (!highwayRestrictions.containsKey(from.getId())) {
+								highwayRestrictions.put(from.getId(), new ArrayList<Long>(4));
+							}
+							highwayRestrictions.get(from.getId()).add((to.getId() << 3) | (long) type);
+						}
+					}
+				}
+			}
+		}
 	}
 }

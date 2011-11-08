@@ -63,7 +63,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 
 	public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		tempAmenityList.clear();
-		tempAmenityList = Amenity.parseAmenities(e, tempAmenityList);
+		tempAmenityList = Amenity.parseAmenities(renderingTypes, e, tempAmenityList);
 		if (!tempAmenityList.isEmpty() && poiPreparedStatement != null) {
 			// load data for way (location etc...)
 			ctx.loadEntityData(e);

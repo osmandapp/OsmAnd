@@ -52,14 +52,6 @@ public class MapRenderingTypes {
 	public final static int POLYLINE_TYPE = 2;
 	public final static int POINT_TYPE = 1;
 	
-	public final static byte RESTRICTION_NO_RIGHT_TURN = 1;
-	public final static byte RESTRICTION_NO_LEFT_TURN = 2;
-	public final static byte RESTRICTION_NO_U_TURN = 3;
-	public final static byte RESTRICTION_NO_STRAIGHT_ON = 4;
-	public final static byte RESTRICTION_ONLY_RIGHT_TURN = 5;
-	public final static byte RESTRICTION_ONLY_LEFT_TURN = 6;
-	public final static byte RESTRICTION_ONLY_STRAIGHT_ON = 7;
-	
 	private static char TAG_DELIMETER = '/'; //$NON-NLS-1$
 	
 	private String resourceName = null;
@@ -160,16 +152,16 @@ public class MapRenderingTypes {
 		return null;
 	}
 	
-
 	public String getEntityName(Entity e) {
 		String name = e.getTag(OSMTagKey.NAME);
 		if (name == null) {
-			name = getNullName(e);
+			name = e.getTag(OSMTagKey.NAME_EN);
+			if(name == null) {
+				name = getNullName(e);
+			}
 		}
 		return name;
 	}
-	
-	
 	
 	public Map<AmenityType, Map<String, String>> getAmenityTypeNameToTagVal() {
 		if (amenityTypeNameToTagVal == null) {
@@ -438,6 +430,7 @@ public class MapRenderingTypes {
 		
 	}
 	
+	// TODO Move to Routing Attributes and finalize 
 	// HIGHWAY special attributes :
 	// o/oneway			1 bit
 	// f/free toll 		1 bit
@@ -446,10 +439,18 @@ public class MapRenderingTypes {
 	// a/vehicle access 4 bit   (height, weight?) - one bit bicycle
 	// p/parking      	1 bit
 	// c/cycle oneway 	1 bit
-	// TODO 
 	// ci/inside city   1 bit
-	
 	// ENCODING :  ci|c|p|aaaa|sss|rr|f|o - 14 bit
+	
+	public final static byte RESTRICTION_NO_RIGHT_TURN = 1;
+	public final static byte RESTRICTION_NO_LEFT_TURN = 2;
+	public final static byte RESTRICTION_NO_U_TURN = 3;
+	public final static byte RESTRICTION_NO_STRAIGHT_ON = 4;
+	public final static byte RESTRICTION_ONLY_RIGHT_TURN = 5;
+	public final static byte RESTRICTION_ONLY_LEFT_TURN = 6;
+	public final static byte RESTRICTION_ONLY_STRAIGHT_ON = 7;
+	
+
 	public static boolean isOneWayWay(int highwayAttributes){
 		return (highwayAttributes & 1) > 0;
 	}
@@ -466,10 +467,7 @@ public class MapRenderingTypes {
 		case 1:
 			return 40;
 		case 2:
-			// for old format it should return 0;
-			// TODO it should be uncommented because now it is fixed
-			// return 60;
-			return 0;
+			return 60;
 		case 3:
 			return 80;
 		case 4:

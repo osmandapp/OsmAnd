@@ -34,7 +34,7 @@ public abstract class MapObject implements Comparable<MapObject>, Serializable {
 		if(this.name == null){
 			this.name = e.getTag(OSMTagKey.NAME);
 		}
-		if(this.enName == null){
+		if (this.enName == null) {
 			this.enName = e.getTag(OSMTagKey.NAME_EN);
 			if(name == null){
 				this.name = this.enName;

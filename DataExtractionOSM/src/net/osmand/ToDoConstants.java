@@ -7,23 +7,22 @@ package net.osmand;
  */
 public class ToDoConstants {
 	
+	// Index
+	// Map QTree (skip small areas!!!)
+	// new Address
+	// slightly changed POI (check it)
+	// Routing index 
 	
 //	    == Osmand application (TODO 127) ==
-	// TODO replace icon for default mode (???)
 	// TODO prepare C++ version of routing algorithm
-	// TODO make transport search faster (cancellable.. )
-
-	// TODO Test Voice activity
 
 	// Map Refactoring
 //      Remove notification from OsmAndMapTileView (?)
 	
-
 //		=== Refactoring issues ===
 //	    !|| 125 || Introduce service layer rather than singletons and put all related into new package (services). Review architecture. Split some big classes. ||
 	
 //		=== Common issues ===
-//      || 110 || Use android voice for pronounce command (could be used in future to pronounce street) (Issue 70) ||
 //      || 111 || Investigate showing street name while driving (Issue 286) ||  
 //      || 86 || Allow to add/edit custom tags to POI objects (Issue 44) ||
 //		|| 113 || Calculate speed cameras/bumps on the road (announce about them) (Issue 418) ||
@@ -41,6 +40,7 @@ public class ToDoConstants {
 
 	///////////////////////////   DONE //////////////////////////////
 	// DONE ANDROID :
+//  || 110 || Use android voice for pronounce command (could be used in future to pronounce street) (Issue 70) ||
 
 	// DONE SWING
 	
