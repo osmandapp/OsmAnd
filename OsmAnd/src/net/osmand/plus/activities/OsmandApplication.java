@@ -302,7 +302,11 @@ public class OsmandApplication extends Application {
 					public void run() {
 						List<String> warnings = null;
 						try {
-							NativeOsmandLibrary.preloadLibrary();
+							try {
+								NativeOsmandLibrary.preloadLibrary();
+							} catch (ExceptionInInitializerError e) {
+								LOG.info("Native library could not loaded!");
+							}
 							warnings = manager.reloadIndexes(startDialog);
 							player = null;
 							SavingTrackHelper helper = new SavingTrackHelper(OsmandApplication.this);
