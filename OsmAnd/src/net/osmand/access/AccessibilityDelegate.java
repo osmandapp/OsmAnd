@@ -1,10 +1,13 @@
 package net.osmand.access;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.SystemClock;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.MotionEvent;
+import android.view.Window;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -12,20 +15,20 @@ import android.widget.TextView;
 
 // This class serves as a delegate of accessibility service
 // providing a sort of touch exploration capability
-// for a View hierarchy
+// for a View hierarchy. It means that elements will be spoken
+// on touch. Thus, you can slide your finger across the screen
+// and hear available controls and items.
+// Lift finger up on a control to make click.
 //
-// To use this capability it should be instantiated and attached
-// to the root of target View hierarchy as follows:
-//
-// AccessibilityDelegate delegate = new AccessibilityDelegate(context);
-// delegate.attach(target);
+// Use static method takeCareOf() to get this functionality
+// for respective objects.
 //
 public class AccessibilityDelegate extends FrameLayout {
 
     private final Rect testFrame = new Rect();
     private View nowTouched;
 
-    public AccessibilityDelegate(Context context) {
+    private AccessibilityDelegate(Context context) {
         super(context);
     }
 
@@ -33,7 +36,7 @@ public class AccessibilityDelegate extends FrameLayout {
     // and provide on-touch accessibility feedback.
     // Target View must be an instance of FrameLayout
     // or have a parent which is an instance of ViewGroup.
-    public void attach(View target) {
+    private void attach(View target) {
         ViewGroup parent;
         if (target instanceof FrameLayout) {
             parent = (ViewGroup)target;
@@ -42,14 +45,41 @@ public class AccessibilityDelegate extends FrameLayout {
                 parent.removeViewAt(0);
                 addView(child);
             }
-            parent.addView(this);
+            parent.addView(this, new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
         } else if (target.getParent() instanceof ViewGroup) {
             parent = (ViewGroup)target.getParent();
             int position = parent.indexOfChild(target);
+            ViewGroup.LayoutParams params = target.getLayoutParams();
             parent.removeViewAt(position);
-            addView(target);
-            parent.addView(this, position);
+            addView(target, new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+            parent.addView(this, position, params);
         }
+    }
+
+    // Provide touch exploration capability for individual View
+    // or whole View hierarchy. The hierarchy root specified
+    // as an argument must either be an instance of FrameLayout
+    // or have a parent that is an instance of ViewGroup.
+    public static void takeCareOf(View hierarchy) {
+        final AccessibilityDelegate delegate = new AccessibilityDelegate(hierarchy.getContext());
+        delegate.attach(hierarchy);
+    }
+
+    // Provide touch exploration capability for given window.
+    public static void takeCareOf(Window window) {
+        takeCareOf(window.getDecorView());
+    }
+
+    // Provide touch exploration capability for an activity View content.
+    // Use after setContentView().
+    public static void takeCareOf(Activity activity) {
+        takeCareOf(activity.getWindow());
+    }
+
+    // Provide touch exploration capability for a dialog View content.
+    // Use after setContentView().
+    public static void takeCareOf(Dialog dialog) {
+        takeCareOf(dialog.getWindow());
     }
 
     // Recursive search through View tree.

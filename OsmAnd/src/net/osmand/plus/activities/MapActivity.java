@@ -227,7 +227,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			}
 		});
 
-		accessibleViews.add(backToLocation);
+		accessibleContent.add(backToLocation);
 	}
     
     @Override

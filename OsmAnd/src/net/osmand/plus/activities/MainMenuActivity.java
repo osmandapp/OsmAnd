@@ -5,6 +5,7 @@ import java.text.MessageFormat;
 import java.util.Random;
 
 import net.osmand.Version;
+import net.osmand.access.AccessibilityDelegate;
 import net.osmand.access.AccessibleActivity;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -161,7 +162,7 @@ public class MainMenuActivity extends AccessibleActivity {
 		});
 
 		// Provide on-touch accessible exploration.
-		takeCareOf(window);
+		AccessibilityDelegate.takeCareOf(window);
 	}
 	
 	

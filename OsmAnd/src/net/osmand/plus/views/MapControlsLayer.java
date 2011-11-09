@@ -249,7 +249,7 @@ public class MapControlsLayer implements OsmandMapLayer {
 			}
 		});
 		
-		activity.accessibleViews.add(backToMenuButton);
+		activity.accessibleContent.add(backToMenuButton);
 	}
 	
 	private void initRuler(OsmandMapTileView view, FrameLayout parent) {
@@ -297,8 +297,8 @@ public class MapControlsLayer implements OsmandMapLayer {
 		zoomOutButton.setContentDescription(ctx.getString(R.string.zoomOut));
 		parent.addView(zoomOutButton, params);
 		
-		activity.accessibleViews.add(zoomInButton);
-		activity.accessibleViews.add(zoomOutButton);
+		activity.accessibleContent.add(zoomInButton);
+		activity.accessibleContent.add(zoomOutButton);
 		
 		zoomInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
