@@ -1,6 +1,6 @@
 package net.osmand.access;
 
-import net.osmand.access.AccessibleActivity;
+import net.osmand.access.TextMessage;
 import net.osmand.plus.R;
 
 import android.content.Context;
@@ -17,14 +17,14 @@ public class AccessibleToast extends Toast {
 
     public static Toast makeText(Context context, int msg, int duration) {
         final Toast toast = new AccessibleToast(context);
-        toast.setView(AccessibleActivity.caredMessage(context, msg));
+        toast.setView(TextMessage.makeView(context, msg));
         toast.setDuration(duration);
         return toast;
     }
 
     public static Toast makeText(Context context, CharSequence msg, int duration) {
         final Toast toast = new AccessibleToast(context);
-        toast.setView(AccessibleActivity.caredMessage(context, msg));
+        toast.setView(TextMessage.makeView(context, msg));
         toast.setDuration(duration);
         return toast;
     }

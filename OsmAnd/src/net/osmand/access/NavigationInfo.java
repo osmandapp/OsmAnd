@@ -260,7 +260,7 @@ public class NavigationInfo {
 
     // Show all available info
     public void show(final LatLon point) {
-        List<String> attributes = new ArrayList<String>();
+        final List<String> attributes = new ArrayList<String>();
         String item;
 
         item = getDirectionString(point);

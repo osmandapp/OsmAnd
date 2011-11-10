@@ -1,10 +1,8 @@
 package net.osmand.access;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.osmand.plus.R;
 import net.osmand.access.AccessibleContent;
+import net.osmand.access.TextMessage;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,7 +17,7 @@ import android.widget.TextView;
 // and then add view elements you wish to be accessible
 // to the accessibleContent list.
 //
-public class AccessibleActivity extends Activity {
+public class AccessibleActivity extends Activity implements AccessibleContent.Callback {
 
     // List of accessible views. Use accessibleContent.add(element)
     // to add element to it.
@@ -33,40 +31,22 @@ public class AccessibleActivity extends Activity {
     // to wrap it into a View and set it by AlertDialog.Builder.setView().
     // Such message will be focusable and so it can be repeated by selecting.
 
-    public static View caredMessage(Context ctx, CharSequence msg) {
-        View layout = ((LayoutInflater)(ctx.getSystemService(LAYOUT_INFLATER_SERVICE))).inflate(R.layout.alert, null);
-        ((TextView)layout.findViewById(R.id.message)).setText(msg);
-        return layout;
-    }
-
-    public static View caredMessage(Context ctx, int msgid) {
-        View layout = ((LayoutInflater)(ctx.getSystemService(LAYOUT_INFLATER_SERVICE))).inflate(R.layout.alert, null);
-        ((TextView)layout.findViewById(R.id.message)).setText(msgid);
-        return layout;
-    }
-
     public View accessibleMessage(CharSequence msg) {
-        return caredMessage(this, msg);
+        return TextMessage.makeView(this, msg);
     }
 
     public View accessibleMessage(int msgid) {
-        return caredMessage(this, msgid);
+        return TextMessage.makeView(this, msgid);
     }
 
-    // Original touch event dispatcher
-    private boolean TouchEventCallback(MotionEvent event) {
+    @Override
+    public boolean dispatchNativeTouchEvent(MotionEvent event) {
         return super.dispatchTouchEvent(event);
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        return accessibleContent.dispatchTouchEvent(event,
-                                                    new AccessibleContent.Callback() {
-                                                        @Override
-                                                        public boolean dispatchTouchEvent(MotionEvent event) {
-                                                            return TouchEventCallback(event);
-                                                        }
-                                                    });
+        return accessibleContent.dispatchTouchEvent(event, this);
     }
 
 }

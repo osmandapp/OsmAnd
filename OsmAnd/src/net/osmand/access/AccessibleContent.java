@@ -15,13 +15,13 @@ import android.view.View;
 // Lift finger up on a control to make click.
 //
 // To make use of these capabilities instantiate an object of this class
-// and use it's dispatchTouchEvent() method for actual touch event dispatching.
+// and pass touch event to it via dispatchTouchEvent() method.
 // Then you can add view elements you wish to be accessible to this list.
 //
 public class AccessibleContent extends ArrayList<View> {
 
     public interface Callback {
-        public boolean dispatchTouchEvent(MotionEvent event);
+        public boolean dispatchNativeTouchEvent(MotionEvent event);
     }
 
     private final Rect testFrame = new Rect();
@@ -53,7 +53,7 @@ public class AccessibleContent extends ArrayList<View> {
                 int deviceId = event.getDeviceId();
                 int edgeFlags = event.getEdgeFlags();
                 event.setAction(MotionEvent.ACTION_CANCEL);
-                callback.dispatchTouchEvent(event);
+                callback.dispatchNativeTouchEvent(event);
                 newTouch.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
                 long now = SystemClock.uptimeMillis();
                 event.recycle();
@@ -71,7 +71,7 @@ public class AccessibleContent extends ArrayList<View> {
             nowTouched = null;
             break;
         }
-        return callback.dispatchTouchEvent(event);
+        return callback.dispatchNativeTouchEvent(event);
     }
 
 }
