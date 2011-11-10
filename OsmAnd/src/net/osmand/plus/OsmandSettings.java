@@ -79,7 +79,6 @@ public class OsmandSettings {
 		globalPreferences = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		// start from default settings
 		currentMode = ApplicationMode.DEFAULT;
-		relativeDirectionStyle = RelativeDirectionStyle.SIDEWISE;
 		
 		defaultProfilePreferences = getProfilePreferences(ApplicationMode.DEFAULT);
 		profilePreferences = defaultProfilePreferences;
@@ -87,6 +86,12 @@ public class OsmandSettings {
 			currentMode = readApplicationMode();
 			profilePreferences = getProfilePreferences(currentMode);
 //		}
+
+		try {
+			relativeDirectionStyle = RelativeDirectionStyle.valueOf(globalPreferences.getString(DIRECTION_STYLE.getId(), RelativeDirectionStyle.SIDEWISE.name()));
+		} catch (IllegalArgumentException e) {
+			relativeDirectionStyle = RelativeDirectionStyle.SIDEWISE;
+		}
 	}
 	
 	public static String getSharedPreferencesName(ApplicationMode mode){
