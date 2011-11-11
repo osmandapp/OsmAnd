@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<net.osmand.access.AccessibleLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	class="net.osmand.access.AccessibleLayout"
 	android:layout_width="fill_parent" 
 	android:layout_height="fill_parent" android:background="@drawable/background">
 	
@@ -84,4 +85,4 @@
 	</TableLayout>
  </LinearLayout>  
 
-</FrameLayout>
+</net.osmand.access.AccessibleLayout>

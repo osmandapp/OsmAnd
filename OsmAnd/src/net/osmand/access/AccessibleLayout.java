@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-// This class can be used instead of FrameLayout in order to provide
+// This class can be used in place of FrameLayout in order to provide
 // a sort of touch exploration capability for enclosing View hierarchy.
 // It means that elements will be spoken on touch.
 // Thus, you can slide your finger across the screen
@@ -41,8 +41,10 @@ public class AccessibleLayout extends FrameLayout {
 
     // Recursive search through View tree.
     private View findTouch(MotionEvent event) {
-        int x = (int)event.getX();
-        int y = (int)event.getY();
+        if (!getGlobalVisibleRect(testFrame))
+            return null;
+        final int x = (int)event.getX() + testFrame.left;
+        final int y = (int)event.getY() + testFrame.top;
         View root = this;
         View control = null;
         View text = null;
