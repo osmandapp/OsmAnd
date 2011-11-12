@@ -1,0 +1,793 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- Language: Vietnamese; Language code: vi
+Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
+<resources>
+	<string name="pref_vector_rendering">Thiết lập hiển thị Vector</string>
+	<string name="pref_overlay">Overlay / Underlay</string>
+	<string name="pref_raster_map">Thiết lập bản đồ Tile</string>
+	<string name="pref_vector_map">Thiết lập bản đồ Vector</string>
+	<string name="delete_confirmation_title">Xác nhận</string>
+	<string name="delete_confirmation_msg">Bạn có muốn xóa %1$s?</string>
+	<string name="city_type_suburb">Ngoại thành</string>
+	<string name="city_type_hamlet">Thôn/Xóm</string>
+	<string name="city_type_village">Làng</string>
+	<string name="city_type_town">Thị xã</string>
+	<string name="city_type_city">Thành phố</string>
+	<string name="layer_poi_label">nhãn POI</string>
+	<string name="auto_follow_route_navigation_descr">Bản đồ tự động di chuyển theo vị trí khi định vị.</string>
+	<string name="auto_follow_route_navigation">Tự động bám theo trên bản đồ</string>
+	<string name="auto_follow_location_enabled">Đã kích hoạt thiết lập tự động bám theo.</string>
+	<string name="animate_route_off">Dừng mô phỏng</string>
+	<string name="animate_route">Bắt đầu mô phỏng</string>
+	
+	<string name="tip_recent_changes_0_6_8_t">Changes in 0.6.8 :
+\n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
+\n\t- Implement POI search by name in big areas (countries)  
+\n\t- Fix flickering map screen for tablets (Issue 641)
+\n\t- Auto follow route option (Issue 356)
+\n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\'
+\n\t- POI data included in .obf file (all download indexes after 01/10/11) 
+\n\t- Voice prompt fixes (GPS position fix, omitting first command) 
+\n\t- Small improvements
+	</string>
+	<string name="file_can_not_be_renamed">Không thể đổi tên tập tin.</string>
+	<string name="file_with_name_already_exists">Tên tập tin đã có.</string>
+	<string name="gpx_navigation">Tuyến GPX</string>
+	<string name="poi_query_by_name_matches_categories">Tìm thấy một số danh mục POI theo yêu cầu tìm kiếm:</string>
+	<string name="data_to_search_poi_not_available">Dữ liệu tìm kiếm POI không có.</string>
+	<string name="poi_filter_by_name">Tìm theo tên</string>
+	<string name="old_poi_file_should_be_deleted">Tập dữ liệu POI \'%1$s\' thừa, có thể xóa tập tin này.</string>
+	<string name="update_poi_file_not_found">Local file to maintain POI changes not found and could not be created.</string>
+	<string name="update_poi_does_not_change_indexes">POI changes inside application do not affect downloaded map files, changes are saved to local file instead.</string>
+
+	<string name="button_upgrade_osmandplus">Nâng cấp Osmand+</string>
+	<string name="map_version_changed_info">Máy chủ lưu trữ tập tin bản đồ không tương thích với phiên bản hiện tại. Để tải về và dùng được các tập tin này, vui lòng nâng cấp ứng dụng lên phiên bản mới hơn.</string>
+	
+	<string name="local_index_mi_rename">Đổi tên</string>
+	<string name="show_gpx_route">Hiển thị trên bản đồ</string>
+	<string name="poi_filter_nominatim">Online Nominatim</string>
+	<string name="auto_follow_route_never">Không bao giờ</string>
+	<string name="choose_auto_follow_route">Auto follow return time</string>
+	<string name="choose_auto_follow_route_descr">Chọn thời gian chờ hiển thị bản đồ để quay lại vị trí vừa xong</string>
+	<string name="search_select_point">Chọn</string>
+	<string name="local_index_description">Tải mới hoặc di chuyển để sao lưu hoặc xóa dữ liệu hiện tại.\nDữ liệu offline hiện có trên máy (%1$s không gian trống):</string>
+	<string name="search_position_current_location_search">Đang tìm vị trí...</string>
+	<string name="search_position_current_location_found">Vị trí (Đã tìm thấy)</string>
+	<string name="search_position_address">Địa chỉ...</string>
+	<string name="search_position_favorites">Ưa thích...</string>
+	<string name="search_position_undefined">Chưa rõ</string>
+	<string name="search_position_fixed">Cố định</string>
+	<string name="search_position_current_location">Vị trí hiện tại...</string>
+	<string name="search_position_map_view">Lần hiển thị bản đồ trước</string>
+	
+	<string name="select_search_position">Tìm kiếm gần:</string>
+	<string name="context_menu_item_search">Tìm kiếm</string>
+	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7 :
+\n\t- Offline data manager (download, delete, backup offline data directly in Osmand)
+\n\t- Favorite points and groups (categorize, delete, manage favorites)
+\n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.)
+\n\t- GPX navigation (more options, continue navigation after crash, support roundabouts)
+\n\t- Function to save route as GPX track for offline use
+\n\t- Improve GPX monitoring  (filter some inaccurate location and save accuracy/elevation/speed)
+\n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/)
+\n\t- Improve vector rendering
+\n\t- Improvement of TTS engine (announce exact distance, enable miles)
+\n\t- Bug fixes
+	</string>
+	<string name="save_route_dialog_title">Lưu tuyến đường thành tập tin GPX</string>
+	<string name="route_successfully_saved_at">Đã lưu thành công \'%1$s\'.</string>
+	<string name="filename_input">Tên tập tin : </string>
+	<string name="file_with_name_already_exist">Tên tập tin đã có.</string>
+	<string name="default_buttons_save">Lưu</string>
+	<string name="menu_save_directions">Lưu hướng</string>
+	
+	<string name="local_index_upload_gpx_description">Tải tập tin GPX lên cộng đồng OSM. Nó sẽ hữu ích để cải thiện chất lượng bản đồ.</string>
+	<string name="local_index_items_uploaded">%1$d của %2$d đối tượng được tải lên thành công.</string>
+	<string name="local_index_mi_upload_gpx">Gửi đến OSM...</string>
+	
+	<string name="show_more_map_detail">Hiển thị chi tiết hơn</string>
+	<string name="show_more_map_detail_descr">Show some vector map detail (roads etc.) at lower zooms already</string>
+
+	<string name="favourites_delete_multiple_succesful">Đã xóa các điểm ưa thích.</string>
+	<string name="favorite_delete_multiple">Bạn sẽ xóa %1$d ưa thích và %2$d nhóm ưa thích. Bạn có chắc về điều này?</string>
+	<string name="favorite_home_category">Nhà</string>
+	<string name="favorite_friends_category">Bạn bè</string>
+	<string name="favorite_places_category">Địa điểm</string>
+	<string name="favorite_default_category">Khác</string>
+
+	<string name="vector_map_not_needed">Không cần</string>
+	<string name="basemap_missing">Bản đồ nền (bao phủ toàn bộ thế giới ở tỉ lệ xem nhỏ) bị thiếu. Hãy tải về tập tin World_basemap_x.obf để bổ sung đầy đủ.</string>
+	<string name="vector_data_missing">Dữ liệu (\'offline\') không có trên thẻ nhớ SD. Vui lòng tải về để cập nhật.</string>
+	<string name="local_index_gpx_info_show">\n\nGiữ một lúc để mở chi tiết hơn</string>
+	<string name="local_index_gpx_info_speed">\nTốc độ trung bình : %1$s \nTốc độ lớn nhất : %2$s</string>
+	<string name="local_index_gpx_info_elevation">\nĐộ cao trung bình : %1$.0f m\nĐộ cao thấp nhất : %2$.0f m\nĐộ cao cao nhất : %3$.0f m\nAscents : %4$.0f m\nDescents : %5$.0f m</string>
+	<string name="local_index_gpx_info">Subtracks : %1$d\nSố points : %2$d\nWay points : %3$d\nKhoảng cách : %4$s\nThời gian bắt đầu : %5$tD %5$tR\nThời gian kết thúc : %6$tD %6$tR</string>
+	<string name="local_index_installed">Đã cài đặt</string>
+	<string name="local_index_items_backuped">%1$d của %2$d đối tượng được sao lưu thành công.</string>
+	<string name="local_index_items_deleted">%1$d của %2$d đối tượng được xóa thành công.</string>
+	<string name="local_index_items_restored">%1$d của %2$d đối tượng được khôi phục thành công.</string>
+	<string name="local_index_no_items_to_do">Không có đối tượng cho %1$s</string>
+	<string name="local_index_action_do">Bạn sẽ %1$s %2$s đối tượng. Có tiếp tục?</string>
+	<string name="local_index_descr_title">Quản lý dữ liệu Offline:</string>
+	
+	<string name="local_index_mi_restore">Khôi phục...</string>
+	<string name="local_index_mi_backup">Sao lưu...</string>
+	<string name="local_index_mi_delete">Xóa...</string>
+	<string name="local_index_mi_reload">Làm tươi...</string>
+	<string name="local_index_download">Tải xuống</string>
+	<string name="local_index_tile_data">Dữ liệu Tile: %1$s \nZoom nhỏ nhất : %2$d\nZoom lớn nhất : %3$d\nCó thể tải về được : %4$s \nZooms được tải về : %5$s</string>
+	<string name="local_index_poi_data">dữ liệu POI</string>
+	<string name="local_index_address_data">dữ liệu Địa chỉ</string>
+	<string name="local_index_transport_data">Dữ liệu giao thông</string>
+	<string name="local_index_map_data">Dữ liệu bản đồ</string>
+	<string name="local_index_items"></string>
+	<string name="local_indexes_cat_backup">Sao lưu</string>
+	<string name="local_indexes_cat_tts">Dữ liệu giọng nói(TTS)</string>
+	<string name="local_indexes_cat_voice">Dữ liệu giọng nói (media)</string>
+	<string name="local_indexes_cat_gpx">Dữ liệu GPX</string>
+	<string name="local_indexes_cat_tile">Dữ liệu bản đồ (tiles)</string>
+	<string name="local_indexes_cat_map">Dữ liệu bản đồ (vector)</string>
+	<string name="local_indexes_cat_poi">Dữ liệu POI</string>
+
+	<string name="ttsvoice">Giọng đọc TTS</string>
+	<string name="search_offline_clear_search">Tìm kiếm mới</string>
+	<string name="map_text_size_descr">Chọn kích thước chữ trên bản đồ</string>
+	<string name="map_text_size">Kích thước chữ</string>
+	<string name="trace_rendering">Hiển thị thông tin debug</string>
+	<string name="trace_rendering_descr">Display rendering performance</string>
+	<string name="tip_recent_changes">Thay đổi gần đây</string>
+	<string name="tip_recent_changes_0_6_6_t">Recent changes for 0.6.6 : 
+\n\t- Text To Speech engine for voice navigation
+\n\t- Make map renderer more detailed
+\n\t- Basemap for whole world packaged with app
+\n\t- Tweak offline routing (still experimental)
+\n\t- GPX routing options
+\n\t- UI update and large bug fixing
+	</string>
+	<string name="voice_not_use">Không dùng</string>
+	<string name="voice_not_specified">Không có</string>
+	<string name="installing_new_resources">Đang giải nén dữ liệu mới...</string>
+	<string name="internet_connection_required_for_online_route">You are about to use an online routing service but there is no internet connection. You can try the (still experimental) OsmAnd offline routing service (select in \'Settings\' -> \'Navigation\'.</string>
+	<string name="tts_language_not_supported_title">Ngôn ngữ không được hỗ trợ</string>
+	<string name="tts_language_not_supported">The selected language is not supported by the installed Android TTS (text-to-speech) engine. Do you want to go to the Market to look for another TTS engine? Otherwise the preset TTS language will be used.</string>
+	<string name="tts_missing_language_data_title">Thiếu dữ liệu</string>
+	<string name="tts_missing_language_data">Ngôn ngữ được chọn không có dữ liệu. Bạn có muốn vào Market để cài đặt?</string>
+
+	<string name="gpx_option_reverse_route">Đảo hướng GPX</string>
+	<string name="gpx_option_destination_point">Sử dụng điểm đến hiện tại</string>
+	<string name="gpx_option_from_start_point">Dọc theo toàn bộ track</string>
+
+	<string name="tip_rotation_switching">Xoay bản đồ</string>
+	<string name="tip_rotation_switching_t">\tYou can choose whether and how the map display is rotated in \'Settings\' -> \'General settings\' -> \'Xoay bản đồ\'.
+	\n\tBao gồm các lựa chọn:
+	\n\t\'Không xoay' - Bản đồ sẽ không bị xoay và luôn thẳng đứng theo hướng Bắc.
+	\n\t\'Theo hướng di chuyển\'
+	\n\t\'Theo hướng la bàn\'
+	\n\tGợi ý: Bạn có thể chọm vào mũi kim la bàn trên bản đồ để chuyển nhanh giữa chế độ xoay theo la bàn và các chế độ xoay khác.</string>
+
+	<string name="switch_to_raster_map_to_see">Current position not covered in your offline vector maps, you can switch map source in menu \'Define view\' -> \'Map Source...\' or need to download additional vector map.</string>
+	<string name="switch_to_vector_map_to_see">You can switch to offline vector maps using menu (Define view -> Map Source... -> Offline vector maps) to see the map.</string>
+	<string name="binary_map_download_success">Thành công. Bạn có thể chuyển sang bản đồ vector offline bằng menu Xem -> Bản đồ...-> Bản đồ vector offline.</string> 
+	<string name="choose_audio_stream">Voice guidance output</string>
+	<string name="choose_audio_stream_descr">Choose channel to play voice guidance (system-dependent)</string>
+	<string name="voice_stream_voice_call">Voice call audio</string>
+	<string name="voice_stream_notification">Âm thanh thông báo</string>
+	<string name="voice_stream_music">Media/Nhạc</string>
+	<string name="warning_tile_layer_not_downloadable">Ứng dụng không thể tải về lớp bản đồ %1$s, hãy thử cài lại.</string>
+	<string name="overlay_transparency_descr">Thay đổi độ trong suốt cho lớp phủ</string>
+	<string name="overlay_transparency">Độ trong suốt lớp phủ</string>
+	<string name="map_transparency_descr">Thay đổi độ trong suốt cho bản đồ nền</string>
+	<string name="map_transparency">Độ trong suốt bản đồ nền</string>
+	<string name="modify_transparency">Thay đổi độ trong suốt</string>
+	<string name="layer_underlay">Bản đồ nền...</string>
+	<string name="map_underlay">Bản đồ nền</string>
+	<string name="map_underlay_descr">Chọn bản đồ nền</string>
+	<string name="layer_overlay">Chồng phủ bản đồ...</string>
+	<string name="default_none">Không</string>
+	<string name="map_overlay">Chồng phủ bản đồ</string>
+	<string name="map_overlay_descr">Chọn bản đồ cần chồng phủ</string>
+	<string name="map_vector_data">Bản đồ vector Offline</string>
+	<string name="map_vector_data_descr">Sử dụng bản đồ vector đã tải</string>
+	<string name="tile_source_already_installed">Bản đồ đã được cài, các thiết lập sẽ được cập nhật</string>
+	<string name="select_tile_source_to_install">Chọn bản đồ cần cài đặt hoặc cập nhật</string>
+	<string name="internet_not_available">Không vào được Internet</string>
+	<string name="install_more">Cài đặt thêm...</string>
+
+	<string name="tip_update_index">Cập nhật của dữ liệu Offline</string>
+	<string name="tip_update_index_t">\tOsmand cung cấp trình quản lý download có thể kiểm tra các bản cập nhật cho dữ liệu offline. 
+	\n\tĐể kiểm tra cập nhật, truy xuất vào \'Main Menu\' -> \'Settings\' -> \'Offline data\' -> \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -> \'Filter downloaded\' to indicate updates only for data already on your device.
+	\n\tThe availability of updates  is depicted by the following colors:
+	\n\t\'Green\' - indicates data files identical on device and server
+	\n\t\'Blue\' - indicates available updates on server</string>
+
+	<string name="level_to_switch_vector_raster_descr">Tỉ lệ nhỏ nhất để hiển thị bản đồ vector thay cho bản đồ ảnh</string>
+	<string name="level_to_switch_vector_raster">Tỉ lệ nhỏ nhất để xem bản đồ vector</string>
+
+	<string name="tip_day_night_mode">Chế độ ngày/đêm</string>
+	<string name="tip_day_night_mode_t">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker).
+	\n\tNight colors are safer for night driving.
+	\n\tYou can set a policy for day/night switching in \'Main Menu\' -> \'Settings\' -> \'Map appearance\' ->\'Day/night mode\'.
+	\n\tChoices are:
+	\n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default)
+	\n\t\'Ngày\' - always use day mode
+	\n\t\'Đêm\' - always use night mode 
+	\n\t\'Cảm biến ánh sáng\' - hiển thị bản đồ sẽ được kiểm soát bằng cảm biến ánh sáng trên thiết bị của bạn (chỉ họa động nếu được trang bị)</string>	
+	<string name="tip_location_sharing">Chia sẻ vị trí</string>
+	<string name="tip_location_sharing_t">\tBạn có thể chia sẻ vị trí các điểm bạn đã từng đi qua trong chuyến đi với gia đình và bạn bè.
+	\n\tĐể chia sẻ bất kì vị trí nào bạn muốn:
+	\n\tSử dụng \'Map context menu\' -> \'Chia sẻ vị trí\' menu.
+	\n\tSau đó chọn một cách để chia sẻ. Các lựa chọn: E-Mail, SMS(text), hoặc chỉ sao chép tọa độ vị trí vào clipboard.</string>
+
+	<string name="tip_favorites">Các điểm ưa thích</string>
+	<string name="tip_favorites_t">\tCác điểm thường xuyên được dùng có thể lưu vào mục Ưa thích.
+	\n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Menu\' -> \'Favorites\'.
+	\n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to Navigate to, Edit or Delete it.
+	\n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' ->\'Define view\'.</string>
+
+	<string name="tip_osm_improve">Cải thiện dữ liệu OSM</string>
+	<string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and routing- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks!
+\n\tFor this you need to first provide your OSM login information in \'Main Menu\' -> \'Settings\' -> \'OSM\'.
+\n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it.
+\n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem.
+\n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button.
+\n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
+	<string name="create_poi_link_to_osm_doc">Phân loại bản đồ trên <u>Online OSM</u> với ảnh</string>
+    <string name="error_doing_search">Có lỗi khi tìm kiếm</string>
+    <string name="search_offline_geo_error">Could not parse geo intent {0}</string>
+	<string name="search_osm_offline">Tìm kiếm địa chỉ bằng bản đồ Offline</string>
+
+	<string name="system_locale">Hệ thống</string>
+	<string name="preferred_locale_descr">Lựa chọn ngôn ngữ hiển thị</string>
+	<string name="preferred_locale">Ngôn ngữ</string>
+
+	<string name="tip_map_switch">Map Source</string>
+	<string name="tip_map_switch_t">\tThe fastest way to change the map source and layers displayed is pressing \'Menu\' -> \'Define view\' in map view.
+\n\tUnder \'Map source...\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources, or maps manually created using e.g. OsmAndMapCreator on a PC.
+\n\tOsmAnd also supports custom sources.</string>
+
+	<string name="tip_app_mode">Chế độ Ứng dụng</string>
+	<string name="tip_app_mode_t">\tOsmAnd supports different (customizable) application profiles for different use cases.
+\n\tYou can change profiles in \'Menu\' -> \'Settings\' -> \'Application mode\', or when creating a route.</string>
+
+	<string name="tip_navigation">Dẫn đường</string>
+	<string name="tip_navigation_t">\tĐể tìm đường đi, trước hết bạn phải chọn một điểm đến. Sau đó vào \'Menu\'->\'Hướng đi\' trên bản đồ để chọn kiểu dẫn đường.</string> 
+
+	<string name="tip_select_destination_point">Chọn điểm đến</string>
+	<string name="tip_select_destination_point_t">\tYou can select a destination point directly in the map (context menu, then \'Navigate to\'), or in all search activities.
+\n\tYou can also navigate to any favorite point via long pressing it in \'Favorites\'.</string>
+
+	<string name="tip_search">Tìm kiếm</string>
+	<string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite.
+\n\tPressing \'Search\' in the main menu opens the search activities. For all hits a context menu offers 2 options: \'Navigate to\' or \'Show on map\'.</string>
+
+	<string name="tip_map_context_menu">Map Context Menu</string>
+	<string name="tip_map_context_menu_t">\tThe map context menu is available by long pressing on the map or by pressing the trackball button.
+\n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or long press on it to hide the box again.)
+\n\tThe map context menu contains all actions referring to a point (location).</string>
+
+	<string name="tip_desctination_point">Điểm đến</string>
+	<string name="tip_desctination_point_t">\tYếu tố chính trong OsmAnd là điểm đến, được hiển thị bằng một cái đĩa màu đỏ trên bản đồ.\n\t OsmAnd hiển thị khoảng cách và hướng đi (mũi tên màu đỏ) đến điểm này trên bản đồ.\n\t Để đánh dấu bất kì điểm nào đó thành điểm đến, chọn \'Dẫn đường tới'\. Tùy chọn này có thể dùng trong tất cả các kiểu tìm kiếm và trong menu ngữ cảnh bản đồ (nhấn vào một đối tượng bất kì trên bản đồ và giữ một lúc)</string>
+
+	<string name="tip_initial">Thủ thuật</string>
+	<string name="tip_initial_t">\tOsmAnd là ứng dụng định vị trên Android với nhiều tính năng. 
+\n\tĐMột số thủ thuật và mẹo sử dụng được liên kết với màn hình menu chính.</string>
+	<string name="next_button">Tiếp</string>
+	<string name="previous_button">Quay lại</string>
+
+	<string name="unit_of_length_descr">Đổi đơn vị độ dài và tốc độ</string>
+	<string name="unit_of_length">Đơn vị độ dài</string>
+	<string name="si_mi_foots">Miles/feet</string>
+	<string name="si_mi_yard">Miles/yards</string>
+	<string name="si_km_m">Kilometers/meters</string>
+	<string name="yard">yd</string>
+	<string name="foot">ft</string>
+	<string name="mile_per_hour">mph</string>
+	<string name="mile">mi</string>
+	<string name="send_location_way_choose_title">Chia sẻ vị trí sử dụng</string>
+	<string name="send_location_sms_pattern">Tôi ở đây: %1$s\n%2$s</string>
+	<string name="send_location_email_pattern">To see location follow the web browser link %1$s or android intent link %2$s</string>
+	<string name="send_location">Gửi vị trí</string>
+	<string name="context_menu_item_share_location">Chia sẻ vị trí</string>
+	<string name="add_waypoint_dialog_added">Waypoint \'\'{0}\'\' được thêm vào thành công</string>
+	<string name="add_waypoint_dialog_title">Thêm waypoint vào track GPX</string>
+	<string name="context_menu_item_add_waypoint">Thêm GPX waypoint</string>
+	<string name="amenity_type_administrative">Hành chính</string>
+	<string name="amenity_type_barrier">Rào chắn</string>
+	<string name="amenity_type_education">Giáo dục</string>
+	<string name="amenity_type_emergency">Khẩn cấp</string>
+	<string name="amenity_type_entertainment">Giải trí</string>
+	<string name="amenity_type_finance">Tài chính</string>
+	<string name="amenity_type_geocache">Geocache</string>
+	<string name="amenity_type_healthcare">Y tế</string>
+	<string name="amenity_type_historic">Di tích lịch sử</string>
+	<string name="amenity_type_landuse">Sử dụng đất</string>
+	<string name="amenity_type_leisure">Vui chơi</string>
+	<string name="amenity_type_manmade">Man made</string>
+	<string name="amenity_type_military">Quân sự</string>
+	<string name="amenity_type_natural">Natural</string>
+	<string name="amenity_type_office">Office</string>
+	<string name="amenity_type_other">Mục khác</string>
+	<string name="amenity_type_shop">Cửa hàng</string>
+	<string name="amenity_type_sport">Thể thao</string>
+	<string name="amenity_type_sustenance">Sustenance</string>
+	<string name="amenity_type_tourism">Du lịch</string>
+	<string name="amenity_type_transportation">Giao thông</string>
+	<string name="indexing_address">Đang tạo chỉ mục địa chỉ...</string>
+	<string name="indexing_map">Đang tạo chỉ mục bản đồ...</string>
+	<string name="indexing_poi">Đang tạo chỉ mục POI...</string>
+	<string name="indexing_transport">Đang tạo chỉ mục giao thông...</string>
+	<string name="input_output_error">Có lỗi xảy ra với I/O</string>
+	<string name="km">km</string>
+	<string name="km_h">km/h</string>
+	<string name="m">m</string>
+	<string name="old_map_index_is_not_supported">Định dạng dữ liệu \'\'{0}\'\' không được hỗ trợ</string>
+	<string name="poi_filter_car_aid">Sửa Xe</string>
+	<string name="poi_filter_closest_poi">POI gần nhất</string>
+	<string name="poi_filter_custom_filter">Tùy chỉnh bộ lọc</string>
+	<string name="poi_filter_food_shop">Ăn uống</string>
+	<string name="poi_filter_for_tourists">Du lịch</string>
+	<string name="poi_filter_fuel">Trạm Xăng</string>
+	<string name="poi_filter_namefinder">Online NameFinder</string>
+	<string name="reading_cached_tiles">Đang đọc các tiles đã được lưu sẵn...</string>
+	<string name="version_index_is_big_for_memory">Chỉ mục \'\'{0}\'\' lớn hơn bộ nhớ</string>
+	<string name="version_index_is_not_supported">Phiên bản chỉ mục \'\'{0}\'\' không được hỗ trợ</string>
+
+	<string name="use_osmand_routing_service">Tìm đường OsmAnd</string>
+	<string name="use_osmand_routing_service_descr">Sử dụng tính năng tìm đường Offline với khoảng cách dài(đang thử nghiệm)</string>
+	<string name="osmand_routing_experimental">Tìm đường Offline trên OsmAnd là tính năng thử nghiệm và
+	nó không thể chạy được với khoảng cách trên 20km. Dịch vụ tìm được sẽ tự động chuyển sang dùng Cloudmade.</string>
+	<string name="specified_dir_doesnt_exist">Không tìm thấy thư mục.</string>
+	<string name="application_dir">Thư mục lưu trữ</string>
+	<string name="application_dir_change_warning">Việc thay đổi thư mục lưu trữ sẽ không di dời hay xóa dữ liệu. Thao tác này phải được tiến hành ngoài ứng dụng OsmAnd</string>
+
+	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by new the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
+	<string name="build_installed">Build {0} successfully installed ({1}).</string>
+	<string name="downloading_build">Downloading build...</string>
+	<string name="install_selected_build">Tiếp tục cài đặt OsmAnd - {0} từ {1} {2} MB ?</string>
+	<string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
+	<string name="loading_builds">Đang tải OsmAnd...</string>
+	<string name="select_build_to_install">Lựa chọn một bản OsmAnd để cài đặt</string>
+	<string name="contribution_activity">Special activity for contribution version</string>
+
+	<string name="gps_status_app_not_found">Ứng dụng Tín hiệu GPS chưa được cài đặt. Tìm trong Market?</string>
+
+	<string name="voice_is_not_available_msg">Voice guidance is not available. Please go to settings, choose preferred voice data package, and download it.</string>
+	<string name="voice_is_not_available_title">Không có giọng đọc nào được chọn</string>
+	<string name="daynight_mode_day">Ngày</string>
+	<string name="daynight_mode_night">Đêm</string>
+	<string name="daynight_mode_auto">Bình minh/Hoàng hôn</string>
+	<string name="daynight_mode_sensor">Cảm biến ánh sáng</string>
+	<string name="daynight_descr">Chọn quy luật chuyển chế độ ngày/đêm</string>
+	<string name="daynight">Chế độ Ngày/Đêm</string>
+
+	<string name="download_files_question">Tải xuống {0} tập tin ({1} MB)?</string>
+	<string name="items_were_selected">{0} đối tượng được chọn</string>
+	<string name="filter_existing_indexes">Bộ lọc đã được tải</string>
+	<string name="deselect_all">Bỏ chọn tất cả</string>
+	<string name="select_all">Lựa chọn tất cả</string>
+	<string name="reload">Làm tươi</string>
+
+	<string name="general_settings_descr">Các thiết lập chung cho ứng dụng</string>
+    <string name="general_settings">Thiết lập chung</string>
+	<string name="rendering_settings_descr">Các thiết lập và hiển thị cho bản đồ</string>
+    <string name="rendering_settings">Bản đồ</string>
+    <string name="index_settings_descr">Tải và Quản lý bản đồ Offline hoặc các dữ liệu khác(GPX)</string>
+    <string name="index_settings">Dữ liệu Offline</string>
+	<string name="osmand_service">Chạy ngầm</string>
+	<string name="osmand_service_descr">OsmAnd vẫn chạy khi tắt màn hình thiết bị</string>
+	<string name="fast_route_mode">Nhanh nhất</string>
+	<string name="fast_route_mode_descr">Bật/tắt tính năng tìm đường đi nhanh nhất</string>
+	<string name="tiles_to_download_estimated_size">Tại mức zoom {0} tải về {1} tiles ({2} MB)</string>
+	<string name="context_menu_item_download_map">Tải bản đồ</string>
+	<string name="select_max_zoom_preload_area">Lựa chọn Zoom lớn nhất để tải lại</string>
+	<string name="maps_could_not_be_downloaded">Bản đồ này không tải được</string>
+
+	<string name="continuous_rendering">Hiển thị liên tục</string>
+	<string name="continuous_rendering_descr">Hiển thị bản đồ liên tục thay cho hiển thị một lần một ảnh</string>
+	<string name="rendering_exception">Có lỗi khi hiển thị khu vực được chọn</string>
+	<string name="rendering_out_of_memory">Không đủ bộ nhớ để hiện khu vực được chọn</string>
+	<string name="show_point_options">Tùy chọn điểm</string>
+	<string name="renderer_load_sucess">Hiển thị thành công</string>
+	<string name="renderer_load_exception">Có lỗi: Không hiển thị được</string>
+	<string name="renderers">Hiển thị Vector</string>
+	<string name="renderers_descr">Chọn hiển thị bản đồ vector (offline)</string>
+
+	<string name="poi_context_menu_website">Hiện địa chỉ website</string>
+	<string name="poi_context_menu_call">Hiện số điện thoại</string>
+	<string name="website">web site</string>
+	<string name="phone">Điện thoại</string>
+	<string name="download_type_to_filter">kiểu bộ lọc</string>
+	<string name="use_high_res_maps">Hiện độ phân giải cao</string>
+	<string name="use_high_res_maps_descr">Cải thiện chất lượng hiển thị cho các thiết bị có độ phân giải cao</string>
+	<string name="unknown_location">Vị trí chưa được biết</string>
+	<string name="download_files">Tải xuống</string>
+	<string name="context_menu_item_search_transport">Search transport</string>
+	<string name="transport_searching_transport">Transport results (no target):</string>
+	<string name="transport_searching_route">Transport results ({0} to target):</string>
+	<string name="transport_search_none">không có</string>
+	<string name="transport_search_again">Tìm lại</string>
+
+	<string name="map_index">Bản đồ</string>
+	<string name="voice">Giọng nói</string>
+	<string name="no_vector_map_loaded">Chưa đọc được bản đồ vector</string>
+	
+	<string name="map_route_by_gpx">Tìm đường bằng tập tin GPX</string>
+	<string name="gpx_files_not_found">Tập tin GPX không tìm thấy trong thư mục /track</string>
+	<string name="layer_gpx_layer">Tracks GPX...</string>
+	<string name="error_reading_gpx">Gặp lỗi khi đọc tập tin GPX</string>
+
+	<string name="vector_data">Bản đồ vector Offline</string>
+	<string name="transport_context_menu">Search transport at stop</string>
+	<string name="point_on_map">Điểm trên bản đồ:\n VĐ {0,number,#.####}\n KĐ {1,số,#.####}</string>
+	<string name="osb_bug_name">Bug</string>
+	<string name="poi_context_menu_modify">Sửa POI</string>
+	<string name="poi_context_menu_delete">Xóa POI</string>
+	<string name="rotate_map_compass_opt">To compass</string>
+	<string name="rotate_map_bearing_opt">To direction of movement</string>
+    <string name="rotate_map_none_opt">Không xoay</string>
+	<string name="rotate_map_to_bearing_descr">Chọn chế độ xoay</string>
+    <string name="rotate_map_to_bearing">Xoay bản đồ</string>
+	<string name="show_route">Hiện tuyến đường</string>
+	<string name="fav_imported_sucessfully">Ưa thích được đọc vào thành công</string>
+	<string name="fav_file_to_load_not_found">Tập tin GPX chưa các điểm ưa thích không thấy tại {0}</string>
+	<string name="fav_saved_sucessfully">Các điểm ưa thích được lưu tới {0}</string>
+	<string name="no_fav_to_save">Không có điểm ưa thích được lưu</string>
+	<string name="import_fav">Import</string>
+	<string name="export_fav">Export</string>
+	<string name="error_occurred_loading_gpx">Có lỗi khi đọc tập tin GPX</string>
+	<string name="send_report">Gửi báo cáo</string>
+	<string name="none_region_found">Không có dữ liệu Offline cho khu vực này trong thẻ nhớ. Hãy tải về từ Internet.</string>
+	<string name="poi_namefinder_query_empty">Nhập thông tin cần tìm</string>
+	<string name="any_poi">Bất kỳ</string>
+
+	<string name="layer_transport_route">Transport route</string>
+	<string name="thanks_yandex_traffic">Thanks to Yandex for traffic information.</string>
+	<string name="layer_yandex_traffic">Yandex traffic</string>
+	<string name="layer_route">Route</string>
+	<string name="layer_favorites">Ưa thích</string>
+	<string name="layer_osm_bugs">OSM bugs</string>
+	<string name="layer_transport">Điểm dừng giao thông</string>
+	<string name="layer_poi">POI...</string>
+	<string name="layer_map">Nguồn bản đồ...</string>
+	<string name="menu_layers">Thiết lập Xem</string>
+	<string name="continue_follow_previous_route">Quá trình tìm được trước đó chưa hoàn thành. Bạn có muốn tiếp tục với nó?</string>
+	<string name="context_menu_item_search_poi">Tìm POI</string>
+	<string name="context_menu_item_show_route">Route from</string>
+	<string name="use_trackball_descr">Dùng trackball để di chuyển bản đồ</string>
+	<string name="use_trackball">Dùng trackball</string>
+	<string name="background_service_wait_int_descr">Set waiting time for position fix</string>
+	<string name="background_service_wait_int">Thời gian chờ</string>
+	<string name="service_stop_background_service">Tắt dịch vụ dẫn đường ẩn</string>
+	<string name="where_am_i">Vị trí của tôi?</string>
+	<string name="process_navigation_service">Dịch vụ dẫn đường OsmAnd</string>
+	<string name="network_provider">Network</string>
+	<string name="gps_provider">GPS</string>
+	<string name="int_seconds">giây</string>
+	<string name="int_min">phút</string>
+	<string name="background_service_int_descr">Thiết lập khoảng cách định vị khi sử dụng dịch vụ ngầm</string>
+	<string name="background_service_int">Khoảng cách Định vị</string>
+	<string name="background_service_provider_descr">Choose location provider for background service</string>
+	<string name="background_service_provider">Location provider</string>
+	<string name="background_router_service_descr">Bật chế độ chạy ngầm để lưu vị trí của bạn khi dùng trong thời gian dài</string>
+	<string name="background_router_service">Dùng dịch vụ chạy ngầm</string>
+	<string name="off_router_service_no_gps_available">Cần phải bật GPS khi sử dụng dịch vụ chạy ngầm.</string>
+	<string name="routing_settings_descr">Các thiết lập tìm đường</string>
+	<string name="routing_settings">Tìm đường</string>
+	<string name="hide_poi_filter">Ẩn bộ lọc</string>
+	<string name="show_poi_filter">Hiện bộ lọc</string>
+	<string name="search_poi_filter">Bộ lọc</string>
+	<string name="menu_mute_off">Âm thanh đã bật</string>
+	<string name="menu_mute_on">Âm thanh đã tắt</string>
+	<string name="voice_provider_descr">Chọn hướng dẫn tìm đường bằng giọng nói</string>
+	<string name="voice_provider">Hướng dẫn bằng giọng nói</string>
+	<string name="voice_data_initializing">Đang khởi tạo dữ liệu giọng nói...</string>
+	<string name="voice_data_not_supported">Phiên bản không được hỗ trợ</string>
+	<string name="voice_data_corrupted">Dữ liệu giọng nói bị lỗi</string>
+	<string name="voice_data_unavailable">Dữ liệu giọng nói được chọn không có</string>
+	<string name="stop_routing">Dừng tìm đường</string>
+	<string name="sd_unmounted">Không truy xuất được thẻ nhớ.\nBạn không thể dùng được bản đồ.</string>
+	<string name="sd_mounted_ro">Thẻ SD ở chế độ read-only.\nBạn chỉ có thể xem các bản đồ đã được tải trước đó, không thể tải thêm về máy được.</string>
+	<string name="unzipping_file">Đang giản nén tập tin...</string>
+	<string name="route_tr">Rẽ phải và đi</string>
+	<string name="route_tshr">Quẹo trái và đi</string>
+	<string name="route_tslr">Quẹo phải và đi </string>
+	<string name="route_tl">Rẽ trái và đi</string>
+	<string name="route_tshl">Rẽ trái và đi</string>
+	<string name="route_tsll">Quẹo trái và đi</string>
+	<string name="route_tu">Quay đầu và đi</string>
+	<string name="route_head">Head</string>
+	<string name="first_time_continue">Tiếp tục</string>
+	<string name="first_time_download">Tải bản đồ</string>
+	<string name="first_time_msg">Cảm ơn bạn đã chọn OsmAnd.\nĐể sử dụng các tính năng của ứng dụng, bạn cần có một số dữ liệu offline mà bạn có thể tải về từ Internet (Xem Thiết lập, Dữ liệu Offline) hoặc dữ liệu bạn tự làm. Sau đó, bạn có thể sử dụng ứng dụng để tìm kiếm theo địa chỉ, theo POI, theo thông tin giao thông</string>
+	<string name="search_poi_location">Đang tìm tín hiệu...</string>
+	<string name="search_near_map">Tìm theo vị trí trên bản đồ gần đây nhất</string>
+	<string name="search_nearby">Tìm xung quanh</string>
+	<string name="map_orientation_default">Giống cài đặt của máy</string>
+	<string name="map_orientation_portrait">Thẳng đứng</string>
+	<string name="map_orientation_landscape">Nằm ngang</string>
+	<string name="map_screen_orientation">Hướng màn hình bản đồ</string>
+	<string name="map_screen_orientation_descr">Chọn hướng màn hình</string>
+	<string name="opening_hours_not_supported">Opening hours format is not supported for editing</string>
+	<string name="add_new_rule">Tạo thêm quy tắc mới</string>
+	<string name="transport_Routes">Tuyến</string>
+	<string name="transport_Stop">Dừng</string>
+	<string name="transport_stops">Dừng</string>
+
+	<string name="transport_search_after">Subsequent route</string>	
+	<string name="transport_search_before">Prior route</string>
+	<string name="transport_finish_search">Kết thúc tìm kiếm</string>
+	<string name="transport_stop_to_go_out">Choose stop to get off</string>
+	<string name="transport_to_go_after">prior distance</string>
+	<string name="transport_to_go_before">subsequent distance</string>
+	<string name="transport_stops_to_pass">stops to pass</string>
+	<string name="transport_route_distance">Khoảng cách đường đi</string>
+	<string name="transport">Giao thông</string>
+	<string name="default_buttons_ok">OK</string>
+	<string name="show_transport_over_map_description">Hiện các điểm dừng giao thông công cộng trên bản đồ</string>
+	<string name="show_transport_over_map">Hiện các điểm dừng giao thông</string>
+	<string name="hello">Ứng dụng tìm đường OsmAnd</string>
+	<string name="update_poi_success">Dữ liệu POI được cập nhật thành công (Đã thêm {0} POI)</string>
+	<string name="update_poi_error_local">Có lỗi khi cập nhật danh sách POI</string>
+	<string name="update_poi_error_loading">Có lỗi khi tải dữ liệu từ máy chủ</string>
+	<string name="update_poi_no_offline_poi_index">Không có dữ liệu POI Offline cho khu vực này</string>
+	<string name="update_poi_is_not_available_for_zoom">Updating POIs is not available for small zoom levels</string>
+	<string name="context_menu_item_update_poi">Cập nhật POI</string>
+	<string name="context_menu_item_update_map_confirm">Cập nhật dữ liệu qua Internet?</string>
+	<string name="search_history_city">Thành phố: {0}</string>
+	<string name="search_history_street">Đường phố: {0}, {1}</string>
+	<string name="search_history_int_streets">Điểm giao cắt: {0} x {1} in {2}</string>
+	<string name="search_history_building">Tòa nhà: {0}, {1}, {2}</string>
+	<string name="search_history_navigate_to">Dẫn đường đến Vĩ độ = {0}, Kinh độ = {1}</string>
+	<string name="favorite">Ưa thích</string>
+	<string name="clear_all">Xóa hết</string>
+	<string name="history">Lịch sử</string>
+	<string name="uploading_data">Đang tải dữ liệu lên...</string>
+	<string name="uploading">Đang tải lên...</string>
+	<string name="search_nothing_found">Không tìm thấy</string>
+	<string name="searching">Tìm kiếm...</string>
+	<string name="searching_address">Tìm kiếm địa chỉ...</string>
+	<string name="search_osm_nominatim">Tìm địa chỉ bằng OSM Nominatim</string>
+	<string name="hint_search_online">Số nhà, phố, thành phố</string>
+	<string name="search_offline_address">Offline</string>
+	<string name="search_online_address">Internet</string>
+	<string name="max_level_download_tile">Online zoom lớn nhất</string>
+	<string name="max_level_download_tile_descr">Chọn tỉ lệ Zoom lớn nhất để tải về bản đồ tile online</string>
+	<string name="route_about">Thông tin về quãng đường</string>
+	<string name="route_general_information">Tổng khoảng cách {0}, thời gian đi {1} h {2} m.</string>
+	<string name="router_service_descr">Chọn dịch vụ tìm đường Online hoặc Offline</string>
+	<string name="router_service">Dịch vụ tìm đường</string>
+	<string name="sd_dir_not_accessible">Không truy xuất được thư mục trên thẻ nhớ</string>
+	<string name="download_question">Tải về {0} - {1} ?</string>
+	<string name="download_question_exist">Dữ liệu Offline cho {0} đã có ({1}). Bạn muốn cập nhật nó ({2}) ?</string>
+	<string name="address">Địa chỉ</string>
+	<string name="download_index_success">Tải về thành công</string>
+	<string name="error_io_error">Có lỗi xảy ra với I/O</string>
+	<string name="downloading_file">Đang tải tập tin...</string>
+	<string name="downloading">Đang tải..</string>
+	<string name="downloading_list_indexes">Đang tải danh sách các khu vực hiện có...</string>
+	<string name="list_index_files_was_not_loaded">Không thể truy cập danh sách các khu vực có bản đồ từ osmand.googlecode.com.</string>
+    <string name="select_index_file_to_download">Nếu không có bản đồ trong khu vực bạn cần, bạn có thể tự làm bằng cách tham khảo hướng dẫn tại osmand.net</string>
+	<string name="show_poi_on_map">Hiện trên bản đồ</string>
+	<string name="fav_points_edited">Điểm ưa thích đã được chỉnh sửa</string>
+	<string name="fav_points_not_exist">Không có điểm ưa thích nào</string>
+	<string name="update_existing">Thay đổi</string>
+	<string name="only_show">Chỉ hiện</string>
+	<string name="follow">Đi theo</string>
+	<string name="recalculate_route_to_your_location">Select mode of transportation (optional) and guidance mode</string>
+	<string name="follow_route">Hướng đi</string>
+	<string name="mark_final_location_first">Hãy chọn điểm cần đến</string>
+	<string name="get_directions">Hướng</string>
+    <string name="show_gps_status">Hiện tín hiệu GPS</string>
+	<string name="opening_hours">Opening hours</string>
+	<string name="opening_changeset">Opening changeset...</string>
+	<string name="closing_changeset">Closing changeset...</string>
+	<string name="commiting_node">Committing node...</string>
+	<string name="loading_poi_obj">Đang đọc POI...</string>
+	<string name="auth_failed">Định danh thất bại</string>
+	<string name="failed_op">thất bại</string>
+	<string name="converting_names">Chuyển đổi tên gốc/tiếng Anh...</string>
+	<string name="loading_streets_buildings">Đang tải phố/tòa nhà...</string>
+	<string name="loading_postcodes">Đang tải postcodes...</string>
+	<string name="loading_streets">Đang tải phố...</string>
+	<string name="loading_cities">Đang tải thành phố...</string>
+	<string name="loading">Đang tải...</string>
+	<string name="poi">POI</string>
+	<string name="error_occurred_saving_gpx">Có lỗi khi lưu GPX</string>
+	<string name="error_calculating_route">Có lỗi khi tìm đường đi</string>
+	<string name="error_calculating_route_occured">Error occurred while calculating route</string>
+	<string name="empty_route_calculated">Empty route is calculated</string>					
+	<string name="new_route_calculated_dist">New route is calculated, distance</string>
+	<string name="arrived_at_destination">Bạn đã đến điểm đích</string>
+	<string name="invalid_locations">Khu vực không xác định</string>
+	<string name="go_back_to_osmand">Quay lại bản đồ OsmAnd</string>
+	<string name="close">Đóng</string>
+	<string name="loading_data">Đang đọc dữ liệu...</string>
+	<string name="reading_indexes">Đang đọc dữ liệu...</string>
+	<string name="previous_run_crashed">Previous application run crashed. Log file is at {0}. Please report the issue and attach log file.</string>
+	<string name="saving_gpx_tracks">Đang lưu tracks GPX vào thẻ nhớ SD...</string>
+	<string name="finished_task">Đã xong</string>
+    <string name="reload_indexes_descr">Đọc lại bản đồ vector và dữ liệu từ thẻ nhớ SD</string>
+    <string name="reload_indexes">Đọc lại dữ liệu offline</string>
+    <string name="download_indexes_descr">Tải hoặc cập nhật dữ liệu offline từ Internet</string>
+    <string name="download_indexes">Tải về dữ liệu offline</string>
+    <string name="use_online_routing_descr">Tìm đường qua Internet</string>
+    <string name="use_online_routing">Tìm đường qua Internet</string>
+    <string name="user_password_descr">Mật khẩu tài khoản tại OpenStreetMap.org (OSM)</string>
+    <string name="user_password">Mật khẩu OSM</string>
+    <string name="osm_settings_descr">Thiết lập Openstreetmap.org (OSM)</string>
+    <string name="monitor_preferences_descr">Thiết lập tracking</string>
+    <string name="data_settings_descr">Lựa chọn ngôn ngữ, dữ liệu</string>
+    <string name="data_settings">Dữ liệu</string>
+    <string name="map_preferences_descr">Thiết lập bản đồ: nguồn bản đồ, xoay, vị trí đánh dấu, hướng màn hình</string>
+    <string name="osm_settings">OSM</string>
+    <string name="auto_zoom_map_descr">Tự động Zoom bản đồ theo tốc độ di chuyển</string>
+    <string name="auto_zoom_map">Tự động Zoom bản đồ</string>
+    <string name="additional_settings">Thiết lập thêm...</string>
+    <string name="settings_preset_descr">Select a use profile. (Each profile\'s settings can be customized below.)</string>
+    <string name="settings_preset">Chế độ Ứng dụng</string>
+    <string name="settings">Thiết lập</string>
+    <string name="save_current_track_descr">Lưu track hiện tại vào thẻ nhớ SD</string>
+    <string name="save_current_track">Lưu track hiện tại</string>
+    <string name="save_track_interval_descr">Chọn khoảng thời gian lưu vị trí cho track</string>
+    <string name="save_track_interval">Khoảng thời gian lưu Track</string>
+    <string name="monitor_preferences">Tracking</string>
+    <string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
+    <string name="save_track_to_gpx">Lưu track thành GPX</string>
+    <string name="navigate_to">Dẫn đường tới</string>
+    <string name="update_tile">Cập nhật bản đồ</string>
+    <string name="reload_tile">Tải lại tile</string>
+    <string name="user_name_descr">Tài khoản tại OpenStreetMap.org (OSM)</string>
+    <string name="user_name">Tài khoản OSM</string>
+    <string name="mark_point">Target</string>
+    <string name="show_osm_bugs_descr">Hiện OpenStreetBugs trên bản đồ</string>
+    <string name="show_osm_bugs">Hiện OpenStreetBugs</string>
+    <string name="favourites_activity">Danh sách điểm Ưa thích</string>
+    <string name="add_to_favourite">Thêm vào mục Ưa thích</string>
+    <string name="use_english_names_descr">Chọn giữa tên tiếng Anh và tên gốc</string>
+    <string name="use_english_names">Dùng tên tiếng Anh</string>
+    <string name="app_settings">Thiết lập</string>
+    <string name="search_address">Tìm kiếm địa chỉ</string>
+    <string name="choose_building">Chọn tòa nhà</string>
+    <string name="choose_street">Chọn tuyến phố</string>
+    <string name="choose_city">Chọn Thành phố</string>
+    <string name="ChooseCountry">Chọn Quốc gia</string>
+    <string name="position_on_map_descr">Chọn vị trí bạn muốn đánh dấu trên bản đồ</string>
+    <string name="position_on_map">Đánh dấu vị trị</string>
+    <string name="map_specify_point">Chọn điểm</string>
+    <string name="show_view_angle_descr">Hiển thị hướng xem theo la bàn</string>
+    <string name="show_view_angle">Hiển thị hướng xem</string>
+    <string name="stop_navigation">Xóa điểm</string>
+    <string name="navigate_to_point">Đánh dấu</string>
+    <string name="map_view_3d_descr">Bật chế độ 3D</string>
+    <string name="map_view_3d">Chế độ 3D</string>
+    
+    <string name="show_poi_over_map_description">Hiện POI trên bản đồ (sử dụng bộ lọc gần đây nhất)</string>
+    <string name="show_poi_over_map">Hiện POI</string>
+    <string name="map_tile_source_descr">Chọn nguồn cho bản đồ tiles online/offline: </string>
+    <string name="map_tile_source">Nguồn bản đồ Tile</string>
+    <string name="map_source">Nguồn bản đồ</string>
+    <string name="use_internet">Dùng Internet</string>
+    <string name="show_location">Hiện vị trí</string>
+    <string name="map_preferences">Bản đồ</string>
+    <string name="settings_activity">Thiết lập</string>
+    <string name="show_gps_coordinates_text">Hiện tọa độ GPS trên bản đồ</string>
+    <string name="use_internet_to_download_tile">Dùng Internet để tải các tile bị thiếu</string>
+    <string name="app_name">OsmAnd</string>
+    <string name="app_description">Ứng dụng dẫn đường cá nhân</string>
+
+<string name="exit_Button">Thoát</string>
+<string name="map_Button">Bản đồ</string>
+<string name="settings_Button">Thiết lập</string>
+<string name="favorites_Button">Ưa thích</string>
+<string name="search_button">Tìm kiếm</string>
+<color name="menu_background">#FF9030</color>
+<color name="color_light_gray">#d7d7d7</color>
+<color name="color_black">#000000</color>
+<color name="color_transparent">#00000000</color>
+<string name="search_activity">Tìm kiếm</string>
+<color name="color_white">#FFFFFF</color>
+<color name="color_red">#FF0000</color>
+<string name="searchpoi_activity">Chọn POI</string>
+<string name="search_POI_level_btn">Tìm thêm</string>
+<string name="incremental_search_city">Tìm tên thành phố tăng dần. Để tìm thị trấn/mã bưu điện, nhập 3 kí tự đầu tiên.</string>
+<string name="incremental_search_street">Tìm tên phố tăng dần</string>
+<string name="incremental_search_building">Tìm tòa nhà tăng dần</string>
+<string name="choose_available_region">Chọn khu vực từ danh sách</string>
+<string name="choose_intersected_street">Chọn phố giao cắt</string>
+<string name="Closest_Amenities">Điểm gần nhất</string>
+<string name="app_mode_default">Mặc định</string>
+<string name="app_mode_car">Ô tô</string>
+<string name="app_mode_bicycle">Xe đạp</string>
+<string name="app_mode_pedestrian">Đi bộ</string>
+<string name="position_on_map_center">Tâm</string>
+<string name="position_on_map_bottom">Dưới</string>
+<string name="navigate_point_top_text">Nhập Vĩ độ &amp; Kinh độ theo định dạng đã chọn (D - Độ, M - Phút, S - Giây)</string>
+<string name="navigate_point_latitude">Vĩ độ</string>
+<string name="navigate_point_longitude">Kinh độ</string>
+<string name="navigate_point_format_D">DDD.DDDDD</string>
+<string name="navigate_point_format_DM">DDD MM.MMMMM</string>
+<string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
+<string name="search_shown_on_map">Hiện trên bản đồ</string>
+<string name="navigate_point_cancel">Hủy</string>
+<string name="search_address_top_text">Chọn địa chỉ</string>
+<string name="search_address_region">Khu vực</string>
+<string name="search_address_city">Thành phố</string>
+<string name="search_address_street">Phố</string>
+<string name="search_address_building">Tòa nhà</string>
+<string name="search_address_building_option">Tòa nhà</string>
+<string name="search_address_street_option">Điểm giao cắt</string>
+
+<string name="search_tabs_location">Khu vực</string>
+
+<string name="context_menu_item_navigate_point">Tìm đến điểm</string>
+<string name="context_menu_item_add_favorite">Thêm vào mục Ưa thích</string>
+<string name="context_menu_item_update_map">Cập nhật bản đồ</string>
+<string name="context_menu_item_open_bug">Mở OSM bug</string>
+<string name="context_menu_item_create_poi">Tạo POI</string>
+
+<string name="default_buttons_yes">OK</string>
+<string name="default_buttons_cancel">Hủy</string>
+<string name="default_buttons_apply">Áp dụng</string>
+<string name="default_buttons_add">Thêm</string>
+<string name="default_buttons_no">Không</string>
+<string name="add_favorite_dialog_top_text">Nhập tên Ưa thích</string>
+<string name="add_favorite_dialog_default_favourite_name">Ưa thích</string>
+<string name="add_favorite_dialog_favourite_added_template">Điểm ưa thích \'\'{0}\'\' đã được thêm thành công.</string>
+
+<string name="favourites_context_menu_title">Context menu</string>
+<string name="favourites_context_menu_navigate">Dẫn đường tới</string>
+<string name="favourites_context_menu_edit">Sửa Ưa thích</string>
+<string name="favourites_context_menu_delete">Xóa Ưa thích </string>
+<string name="favourites_edit_dialog_title">Đổi tên Ưa thích</string>
+
+<string name="favourites_remove_dialog_title">Bạn có muốn xóa điểm ưa thích?</string>
+<string name="favourites_remove_dialog_success">Điểm Ưa thích {0} đã xóa thành công.</string>
+
+<string name="osb_add_dialog_title">Nhập thông tin bug</string>
+<string name="osb_add_dialog_success">Bug được tạo thành công</string>
+<string name="osb_add_dialog_error">Exception occured: bug was not created</string>
+
+<string name="osb_comment_menu_item">Thêm bình luận</string>
+<string name="osb_comment_dialog_message">Nội dung</string>
+<string name="osb_comment_dialog_author">Tên tác giả</string>
+<string name="osb_comment_dialog_title">Thêm bình luận cho lỗi</string>
+<string name="osb_comment_dialog_add_button">Thêm bình luận</string>
+<string name="osb_comment_dialog_success">Bình luận được thêm thành công</string>
+<string name="osb_comment_dialog_error">Ngoại lệ xảy ra: Bình luận không được thêm</string>
+
+<string name="osb_close_menu_item">Đóng bug</string>
+<string name="osb_close_dialog_title">Đang đóng bug</string>
+<string name="osb_close_dialog_close_button">Đóng bug</string>
+<string name="osb_close_dialog_success">Bug đã được đóng thành công</string>
+<string name="osb_close_dialog_error">Biệt lệ xảy ra: bug không được đóng</string>
+
+<string name="poi_edit_title">Sửa POI</string>
+<string name="poi_create_title">Tạo POI</string>
+<string name="poi_error_poi_not_found">Không tìm thấy Node hoặc amenity không phải là node đơn</string>
+<string name="poi_remove_confirm_template">Xóa {0} (bình luận)?</string>
+<string name="poi_remove_title">Xóa POI</string>
+<string name="default_buttons_delete">Xóa</string>
+<string name="poi_remove_success">Đã xóa POI thành công</string>
+<string name="poi_action_add">thêm</string>
+<string name="poi_action_change">thay đổi</string>
+<string name="poi_action_succeded_template">Hoàn thành tác vụ {0}.</string>
+<string name="poi_error_unexpected_template">Unexpected error occured while performing action {0}.</string>
+<string name="poi_error_io_error_template">I/O error occured while performing action {0}.</string>
+
+<string name="poi_error_info_not_loaded">Thông tin về node không đọc được</string>
+
+<string name="poi_dialog_name">Tên</string>
+<string name="poi_dialog_opening_hours">Thời gian mở</string>
+<string name="poi_dialog_comment">Bình luận</string>
+<string name="poi_dialog_comment_default">Thay đổi POI</string>
+<string name="poi_dialog_other_tags_message">Các thẻ khác được giữa lại</string>
+<string name="default_buttons_commit">Commit</string>
+<string name="default_buttons_reset">Làm lại</string>
+<string name="filter_current_poiButton">Filter</string>
+<string name="edit_filter_delete_menu_item">Xóa</string>
+<string name="edit_filter_save_as_menu_item">Lưu thành</string>
+<string name="edit_filter_delete_dialog_title">Xóa bộ lọc vừa chọn?</string>
+<string name="edit_filter_delete_message">Bộ lọc {0} đã bị xóa</string>
+<string name="edit_filter_create_message">Bộ lọc {0} đã được tạo</string>
+<string name="default_buttons_selectall">Chọn tất</string>
+</resources>
