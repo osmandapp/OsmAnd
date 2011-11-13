@@ -36,16 +36,4 @@ public class TextMessage {
         return layout;
     }
 
-    // A pretty long multiline message can be represented as
-    // a list of lines to provide a sort of exploration capability.
-
-    public static String[] makeStringArray(String text) {
-        final SimpleStringSplitter splitter = new SimpleStringSplitter('\n');
-        final List<String> lines = new ArrayList<String>();
-        splitter.setString(text);
-        while (splitter.hasNext())
-            lines.add(splitter.next());
-        return lines.toArray(new String[lines.size()]);
-    }
-
 }
