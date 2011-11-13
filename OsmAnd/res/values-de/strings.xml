@@ -12,9 +12,9 @@
 	<string name="city_type_town">OSM-Town</string>
 	<string name="city_type_city">OSM-City</string>
 	<string name="layer_poi_label">POI Namen</string>
-	<string name="auto_follow_route_navigation_descr">Auto follow Position nur im Navigationsmodus.</string>
-	<string name="auto_follow_route_navigation">Auto follow Navigation</string>
-	<string name="auto_follow_location_enabled">Auto follow setting aktiviert.</string>
+	<string name="auto_follow_route_navigation_descr">Kartenanzeige bei Navigation mit Position nachführen</string>
+	<string name="auto_follow_route_navigation">Kartenanzeige nachführen</string>
+	<string name="auto_follow_location_enabled">Kartennachführung aktviert.</string>
 	<string name="animate_route_off">Animation aus</string>
 	<string name="animate_route">Animation an</string>
 	
@@ -45,8 +45,8 @@
 	<string name="show_gpx_route">Auf Karte anzeigen</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="auto_follow_route_never">Nie</string>
-	<string name="choose_auto_follow_route">Auto follow Einstellungen</string>
-	<string name="choose_auto_follow_route_descr">Choose time interval to continue map following at the position</string>
+	<string name="choose_auto_follow_route">Rückkehr zur Nachführung</string>
+	<string name="choose_auto_follow_route_descr">Zeitintervall für Rückkehr zur Kartennachführung</string>
 	<string name="search_select_point">Select</string>
 	<string name="search_position_current_location_search">Suche Position...</string>
 	<string name="search_position_current_location_found">Position (gefunden)</string>
@@ -164,10 +164,10 @@
 	<string name="switch_to_vector_map_to_see">Sie können in der Kartenansicht auf Offline-Vektor-Karten wechseln mittels Menü -> Layers -> Kartenquelle -> Offline-Vektor-Karten.</string>
 	<string name="binary_map_download_success">Download erfolgreich. Sie können in der Kartenansicht auf Offline-Vektor-Karten wechseln mittels Menu -> Darstellung -> Kartenquelle -> Offline-Vektor-Karten</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
-	<string name="choose_audio_stream_descr">Navigations-Sprachausgabe wählen (abhängig von Systemkonfiguration)</string>
-	<string name="voice_stream_voice_call">Anruf-Stream</string>
-	<string name="voice_stream_notification">Benachrichtgungs-Stream</string>
-	<string name="voice_stream_music">Medien/Musik-Stream</string>
+	<string name="choose_audio_stream_descr">Ausgabemodus für Sprachansagen wählen (System-abhängig)</string>
+	<string name="voice_stream_voice_call">wie Anrufe</string>
+	<string name="voice_stream_notification">wie Benachrichtigungen</string>
+	<string name="voice_stream_music">wie Medien/Musik</string>
 
 	<string name="warning_tile_layer_not_downloadable">Karten-Schicht %1$s wurde nicht heruntergeladen, bitte nochmal laden.</string>
 	<string name="overlay_transparency_descr">Transparenz der Overlay-Karte ändern</string>
@@ -365,7 +365,7 @@
 	<string name="select_all">Alle markieren</string>
 	<string name="reload">Aktualisieren</string>
 	
-	<string name="general_settings_descr">Konfiguration der Internet-Verwendung, Anzeige und mehr</string>
+	<string name="general_settings_descr">Konfiguration der Anzeige und anderer allgemeiner Einstellungen</string>
     <string name="general_settings">Allgemein</string>
 	<string name="rendering_settings_descr">Konfiguration der Kartenquellen und -Darstellung</string>
     <string name="rendering_settings">Landkarten</string>
@@ -403,7 +403,7 @@
 	<string name="transport_searching_transport">Suche ÖPNV (kein Ziel)</string>
 	<string name="transport_searching_route">Suche ÖPNV (Ziel {0})</string>
 	<string name="transport_search_none">kein</string>
-	<string name="transport_search_again">ÖPNV nochmal suchen</string>
+	<string name="transport_search_again">ÖPNV-Suche zurücksetzen</string>
 
 	<string name="map_index">Karte</string>
 	<string name="voice">Ansagen</string>
@@ -465,7 +465,7 @@
 	<string name="background_service_int">Positionierungsintervall</string>
 	<string name="background_service_provider_descr">Art der Hintergrund-Positionsbestimmung</string>
 	<string name="background_service_provider">Positionsbestimmung</string>
-	<string name="background_router_service_descr">Aufzeichnung der Position in größeren Zeitabständen im Hintergrund aktivieren</string>
+	<string name="background_router_service_descr">Aktiviere Service zur Verwendung von OsmAnd während Anzeige aus ist</string>
 	<string name="background_router_service">Hintergrund-Service</string>
 	<string name="off_router_service_no_gps_available">Hintergrunddienst zur Routenberechnung erfordert aktiviertes GPS.</string>
 	<string name="routing_settings_descr">Navigationsoptionen</string>
@@ -641,7 +641,7 @@
     <string name="show_osm_bugs">OSM-Fehler</string>
     <string name="favourites_activity">Bevorzugte Punkte</string>
     <string name="add_to_favourite">Zu Favoriten hinzufügen</string>
-    <string name="use_english_names_descr">Verwende englische oder einheimische Bezeichnungen in Karten</string>
+    <string name="use_english_names_descr">Englische oder einheimische Bezeichnungen in Karten</string>
     <string name="use_english_names">Englische Bezeichnungen</string>
     <string name="app_settings">Anwendungseinstellungen</string>
     <string name="search_address">Adresse suchen </string>
