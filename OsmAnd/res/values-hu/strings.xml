@@ -4,7 +4,7 @@
 <string name="pref_overlay">Rátét / alátét</string>
 <string name="pref_raster_map">Raszter térkép beállítások</string>
 <string name="pref_vector_map">Vektoros térkép beállítások</string>
-<string name="delete_confirmation_title">Törlés</string>
+<!-- string name="delete_confirmation_title">Törlés</string -->
 <string name="delete_confirmation_msg">Biztosan törlöd: %1$s?</string>
 <string name="city_type_suburb">településrész</string>
 <string name="city_type_hamlet">falucska</string>
@@ -708,7 +708,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 <string name="add_favorite_dialog_default_favourite_name">Kedvenc</string>
 <string name="add_favorite_dialog_favourite_added_template">Kedvenc pont: \'\'{0}\'\' sikeresen hozzáadva.</string>
 
-<string name="favourites_context_menu_title">Eszközök menü</string>
+<!-- string name="favourites_context_menu_title">Eszközök menü</string -->
 <string name="favourites_context_menu_navigate">Navigáció ide</string>
 <string name="favourites_context_menu_edit">Kedvenc szerkesztése</string>
 <string name="favourites_context_menu_delete">Kedvenc törlése</string>

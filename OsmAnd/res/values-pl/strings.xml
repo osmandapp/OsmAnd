@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="delete_confirmation_title">Usuwanie</string>
+<!-- string name="delete_confirmation_title">Usuwanie</string -->
 <string name="delete_confirmation_msg">Czy na pewno usunąć %1$s?</string>
 <string name="city_type_suburb">Dzielnica</string>
 <string name="city_type_hamlet">Przysiółek</string>
@@ -715,7 +715,7 @@
 <string name="add_favorite_dialog_default_favourite_name">Ulubione</string>
 <string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>
 
-<string name="favourites_context_menu_title">Menu kontekstowe</string>
+<!-- string name="favourites_context_menu_title">Menu kontekstowe</string -->
 <string name="favourites_context_menu_navigate">Nawiguj do</string>
 <string name="favourites_context_menu_edit">Edytuj</string>
 <string name="favourites_context_menu_delete">Usuń</string>

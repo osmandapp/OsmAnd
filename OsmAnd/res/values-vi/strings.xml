@@ -6,7 +6,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="pref_overlay">Overlay / Underlay</string>
 	<string name="pref_raster_map">Thiết lập bản đồ Tile</string>
 	<string name="pref_vector_map">Thiết lập bản đồ Vector</string>
-	<string name="delete_confirmation_title">Xác nhận</string>
+	<!-- string name="delete_confirmation_title">Xác nhận</string -->
 	<string name="delete_confirmation_msg">Bạn có muốn xóa %1$s?</string>
 	<string name="city_type_suburb">Ngoại thành</string>
 	<string name="city_type_hamlet">Thôn/Xóm</string>
@@ -160,7 +160,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="tip_rotation_switching">Xoay bản đồ</string>
 	<string name="tip_rotation_switching_t">\tYou can choose whether and how the map display is rotated in \'Settings\' -> \'General settings\' -> \'Xoay bản đồ\'.
 	\n\tBao gồm các lựa chọn:
-	\n\t\'Không xoay' - Bản đồ sẽ không bị xoay và luôn thẳng đứng theo hướng Bắc.
+	\n\t\'Không xoay\' - Bản đồ sẽ không bị xoay và luôn thẳng đứng theo hướng Bắc.
 	\n\t\'Theo hướng di chuyển\'
 	\n\t\'Theo hướng la bàn\'
 	\n\tGợi ý: Bạn có thể chọm vào mũi kim la bàn trên bản đồ để chuyển nhanh giữa chế độ xoay theo la bàn và các chế độ xoay khác.</string>
@@ -266,7 +266,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 \n\tThe map context menu contains all actions referring to a point (location).</string>
 
 	<string name="tip_desctination_point">Điểm đến</string>
-	<string name="tip_desctination_point_t">\tYếu tố chính trong OsmAnd là điểm đến, được hiển thị bằng một cái đĩa màu đỏ trên bản đồ.\n\t OsmAnd hiển thị khoảng cách và hướng đi (mũi tên màu đỏ) đến điểm này trên bản đồ.\n\t Để đánh dấu bất kì điểm nào đó thành điểm đến, chọn \'Dẫn đường tới'\. Tùy chọn này có thể dùng trong tất cả các kiểu tìm kiếm và trong menu ngữ cảnh bản đồ (nhấn vào một đối tượng bất kì trên bản đồ và giữ một lúc)</string>
+	<string name="tip_desctination_point_t">\tYếu tố chính trong OsmAnd là điểm đến, được hiển thị bằng một cái đĩa màu đỏ trên bản đồ.\n\t OsmAnd hiển thị khoảng cách và hướng đi (mũi tên màu đỏ) đến điểm này trên bản đồ.\n\t Để đánh dấu bất kì điểm nào đó thành điểm đến, chọn \'Dẫn đường tới\'. Tùy chọn này có thể dùng trong tất cả các kiểu tìm kiếm và trong menu ngữ cảnh bản đồ (nhấn vào một đối tượng bất kì trên bản đồ và giữ một lúc)</string>
 
 	<string name="tip_initial">Thủ thuật</string>
 	<string name="tip_initial_t">\tOsmAnd là ứng dụng định vị trên Android với nhiều tính năng. 
@@ -734,7 +734,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <string name="add_favorite_dialog_default_favourite_name">Ưa thích</string>
 <string name="add_favorite_dialog_favourite_added_template">Điểm ưa thích \'\'{0}\'\' đã được thêm thành công.</string>
 
-<string name="favourites_context_menu_title">Context menu</string>
+<!-- string name="favourites_context_menu_title">Context menu</string -->
 <string name="favourites_context_menu_navigate">Dẫn đường tới</string>
 <string name="favourites_context_menu_edit">Sửa Ưa thích</string>
 <string name="favourites_context_menu_delete">Xóa Ưa thích </string>

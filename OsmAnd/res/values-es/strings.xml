@@ -146,7 +146,7 @@
 	<string name="favourites_context_menu_delete">Borrrar favorito</string>
 	<string name="favourites_context_menu_edit">Editar favorite</string>
 	<string name="favourites_context_menu_navigate">Navegar a</string>
-	<string name="favourites_context_menu_title">Menú contextual</string>
+	<!-- string name="favourites_context_menu_title">Menú contextual</string -->
 	<string name="favourites_edit_dialog_title">Renombrar favorito</string>
 	<string name="favourites_remove_dialog_success">Se borró el punto favorito {0}.</string>
 	<string name="favourites_remove_dialog_title">¿Está seguro/a?</string>

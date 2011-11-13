@@ -658,7 +658,7 @@
 	<string name="add_favorite_dialog_default_favourite_name">Избранная</string>
 	<string name="add_favorite_dialog_favourite_added_template">Точка \'\'{0}\'\' была успешно добавлена к Избранным.</string>
 
-	<string name="favourites_context_menu_title">Контекстное меню</string>
+	<!-- string name="favourites_context_menu_title">Контекстное меню</string -->
 	<string name="favourites_context_menu_navigate">Идти к</string>
 	<string name="favourites_context_menu_edit">Редактировать точку</string>
 	<string name="favourites_context_menu_delete">Удалить точку</string>

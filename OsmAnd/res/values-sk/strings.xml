@@ -5,7 +5,7 @@
 	<string name="pref_overlay">Prekrývacia/podkladová</string>
 	<string name="pref_raster_map">Rastrová mapa</string>
 	<string name="pref_vector_map">Vektorová mapa</string>
-	<string name="delete_confirmation_title">Mazanie</string>
+	<!-- string name="delete_confirmation_title">Mazanie</string -->
 	<string name="delete_confirmation_msg">Naozaj chcete zmazať %1$s?</string>
 	<string name="city_type_suburb">Mestská časť</string>
 	<string name="city_type_hamlet">Osada</string>
@@ -712,7 +712,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="add_favorite_dialog_default_favourite_name">Obľúbené</string>
 <string name="add_favorite_dialog_favourite_added_template">Obľúbený bod \'\'{0}\'\' bol úspešne pridaný.</string>
 
-<string name="favourites_context_menu_title">Kontextové menu</string>
+<!-- string name="favourites_context_menu_title">Kontextové menu</string -->
 <string name="favourites_context_menu_navigate">Navigovať sem</string>
 <string name="favourites_context_menu_edit">Upraviť obľúbený bod</string>
 <string name="favourites_context_menu_delete">Vymazať obľúbený bod</string>
