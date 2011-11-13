@@ -1,11 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="choose_auto_follow_route">Autostart nawigatora</string>
-<string name="choose_auto_follow_route_descr">Ustaw czas, po którym nastąpi automatyczne uruchomienie nawigatora</string>
+<string name="sendtoOSM_confirmation_msg">Wysłać do OSM: %1$s?</string>
+<string name="pref_vector_rendering">Opcje dotyczące rendera wektorowego</string>
+<string name="pref_overlay">Overlay / underlay</string>
+<string name="pref_raster_map">Ustawienia mapy kafelkowej</string>
+<string name="pref_vector_map">Ustawienia mapy wektorowej</string>
+
+<string name="choose_auto_follow_route">Podążanie widoku za pozycją</string>
+<string name="choose_auto_follow_route_descr">Opóźnienie, po którym mapa zacznie podążać za aktualną pozycją GPS</string>
 <string name="auto_follow_route_never">Nigdy</string>
-<string name="auto_follow_route_navigation">Autostart nawigatora</string>
-<string name="auto_follow_route_navigation_descr">Włącz autostart nawigatora tylko w trybie nawigacji.</string>
-<string name="auto_follow_location_enabled">Autostart nawigatora jest włączony.</string>
+<string name="auto_follow_route_navigation">Auto-podążanie za pozycją</string>
+<string name="auto_follow_route_navigation_descr">Włącz podążanie za pozycją tylko w trybie nawigacji.</string>
+<string name="auto_follow_location_enabled">Podążanie za pozycją jest włączone.</string>
 
 <!-- string name="delete_confirmation_title">Usuwanie</string -->
 <string name="delete_confirmation_msg">Czy na pewno usunąć %1$s?</string>
