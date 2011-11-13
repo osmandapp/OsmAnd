@@ -333,7 +333,7 @@ public class MapActivityActions {
     	final OsmandSettings settings = OsmandSettings.getOsmandSettings(mapActivity);
     	final RoutingHelper routingHelper = mapActivity.getRoutingHelper();
     	if(mapLayers.getNavigationLayer().getPointToNavigate() == null){
-			Toast.makeText(mapActivity, R.string.mark_final_location_first, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(mapActivity, R.string.mark_final_location_first, Toast.LENGTH_LONG).show();
 			return;
 		}
     	

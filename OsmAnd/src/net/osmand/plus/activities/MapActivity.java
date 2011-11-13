@@ -94,6 +94,9 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	private static final int LOST_LOCATION_MSG_ID = 10;
 	private static final long LOST_LOCATION_CHECK_DELAY = 20000;
 	
+	private static final int LONG_KEYPRESS_MSG_ID = 28;
+	private static final int LONG_KEYPRESS_DELAY = 500;
+
 	private long lastTimeAutoZooming = 0;
 	
 	private long lastTimeGPSLocationFixed = 0;
@@ -102,7 +105,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	private OsmandMapTileView mapView;
 	private MapActivityActions mapActions = new MapActivityActions(this);
 	private MapActivityLayers mapLayers = new MapActivityLayers(this);
-	private NavigationInfo navigationInfo = new NavigationInfo(this);
+	private final NavigationInfo navigationInfo = new NavigationInfo(this);
 
 	private ImageButton backToLocation;
 	
@@ -478,7 +481,19 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
  
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
+        if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
+            if (!uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
+                Message msg = Message.obtain(uiHandler, new Runnable() {
+                        @Override
+                            public void run() {
+                            emitNavigationHint();
+                        }
+                    });
+                msg.what = LONG_KEYPRESS_MSG_ID;
+                uiHandler.sendMessageDelayed(msg, LONG_KEYPRESS_DELAY);
+            }
+            return true;
+        } else if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
 			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
 			newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			LatLon loc = getMapLocation();
@@ -501,6 +516,48 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
         return super.onKeyDown(keyCode, event);
     }
+
+    private void emitNavigationHint() {
+        final LatLon point = settings.getPointToNavigate();
+        if (point != null) {
+            if (routingHelper.isRouteCalculated()) {
+                routingHelper.getVoiceRouter().announceCurrentDirection();
+            } else {
+                String hint = navigationInfo.getDirectionString(point);
+                if (hint == null)
+                    hint = getString(R.string.no_info);
+                AccessibleToast.makeText(this, hint, Toast.LENGTH_LONG).show();
+            }
+        } else {
+            AccessibleToast.makeText(this, R.string.mark_final_location_first, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void whereAmIDialog() {
+        final List<String> items = new ArrayList<String>();
+        items.add(getString(R.string.show_location));
+        items.add(getString(R.string.show_details));
+        AlertDialog.Builder menu = new AlertDialog.Builder(this);
+        menu.setItems(items.toArray(new String[items.size()]),
+                      new DialogInterface.OnClickListener() {
+                          @Override
+                          public void onClick(DialogInterface dialog, int item) {
+                              dialog.dismiss();
+                              switch (item) {
+                              case 0:
+                                  backToLocationImpl();
+                                  break;
+                              case 1:
+                                  navigationInfo.show(settings.getPointToNavigate());
+                                  break;
+                              default:
+                                  break;
+                              }
+                          }
+                      });
+        menu.show();
+    }
+
     @Override
     public boolean onTrackballEvent(MotionEvent event) {
     	if(event.getAction() == MotionEvent.ACTION_MOVE && settings.USE_TRACKBALL_FOR_MOVEMENTS.get()){
@@ -880,14 +937,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
-			final LatLon point = settings.getPointToNavigate();
-			if (point != null) {
-				if (routingHelper.isRouteCalculated()) {
-					routingHelper.getVoiceRouter().announceCurrentDirection();
-				} else {
-					navigationInfo.show(point);
-				}
-			} else {
+			if (uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
+				uiHandler.removeMessages(LONG_KEYPRESS_MSG_ID);
 				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 			}
 			return true;
@@ -1015,7 +1066,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			startActivity(intentSettings);
 			return true;
 		case R.id.map_where_am_i:
-			backToLocationImpl();
+			whereAmIDialog();
 			return true;
 		case R.id.map_show_gps_status:
 			startGpsStatusIntent();
