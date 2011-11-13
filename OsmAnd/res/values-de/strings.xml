@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="choose_auto_follow_route">Kartenanzeige nachführen</string>
-	<string name="choose_auto_follow_route_descr">Zeitintervall für Rückkehr zur Kartennachführung mit Position</string>
+	<string name="choose_auto_follow_route_descr">Wartezeit für Rückkehr zur Kartennachführung mit Position</string>
 	<string name="auto_follow_route_never">Nie</string>
 	<string name="auto_follow_route_navigation">Nachführung nur bei Nav</string>
 	<string name="auto_follow_route_navigation_descr">Kartennachführung mit Position erfolgt nur während Navigation (Routing)</string>
@@ -373,7 +373,7 @@
     <string name="index_settings_descr">Laden und Verwalten von Landkarten und Daten für Offline-Verwendung</string>
     <string name="index_settings">Offline-Daten</string>
 	<string name="osmand_service">Hintergrund-Service</string>
-	<string name="osmand_service_descr">Zur Verwendung von OsmAnd bei ausgeschalteter Anzeige</string>
+	<string name="osmand_service_descr">Für Verwendung von OsmAnd bei ausgeschalteter Anzeige</string>
 	<string name="fast_route_mode">Schnellste Route</string>
 	<string name="fast_route_mode_descr">Auswählen für schnellste Route oder deaktivieren für kürzeste Route</string>
 	<string name="tiles_to_download_estimated_size">Bei Zoomlevel {0} lade {1} Kacheln ({2} MB )</string>
@@ -466,7 +466,7 @@
 	<string name="background_service_int">Positionierungsintervall</string>
 	<string name="background_service_provider_descr">Art der Hintergrund-Positionsbestimmung</string>
 	<string name="background_service_provider">Positionsbestimmung</string>
-	<string name="background_router_service_descr">Aktiviere Service zur Verwendung von OsmAnd während Anzeige aus ist</string>
+	<string name="background_router_service_descr">Aktiviere Service für Verwendung von OsmAnd während Anzeige aus ist</string>
 	<string name="background_router_service">Hintergrund-Service</string>
 	<string name="off_router_service_no_gps_available">Hintergrunddienst zur Routenberechnung erfordert aktiviertes GPS.</string>
 	<string name="routing_settings_descr">Navigationsoptionen</string>
