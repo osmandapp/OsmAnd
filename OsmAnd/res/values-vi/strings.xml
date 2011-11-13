@@ -2,6 +2,13 @@
 <!-- Language: Vietnamese; Language code: vi
 Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <resources>
+	<string name="choose_auto_follow_route">Auto follow return time</string>
+	<string name="choose_auto_follow_route_descr">Chọn thời gian chờ hiển thị bản đồ để quay lại vị trí vừa xong</string>
+	<string name="auto_follow_route_never">Không bao giờ</string>
+	<string name="auto_follow_route_navigation">Tự động bám theo trên bản đồ</string>
+	<string name="auto_follow_route_navigation_descr">Bản đồ tự động di chuyển theo vị trí khi định vị.</string>
+	<string name="auto_follow_location_enabled">Đã kích hoạt thiết lập tự động bám theo.</string>
+
 	<string name="pref_vector_rendering">Thiết lập hiển thị Vector</string>
 	<string name="pref_overlay">Overlay / Underlay</string>
 	<string name="pref_raster_map">Thiết lập bản đồ Tile</string>
@@ -14,9 +21,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="city_type_town">Thị xã</string>
 	<string name="city_type_city">Thành phố</string>
 	<string name="layer_poi_label">nhãn POI</string>
-	<string name="auto_follow_route_navigation_descr">Bản đồ tự động di chuyển theo vị trí khi định vị.</string>
-	<string name="auto_follow_route_navigation">Tự động bám theo trên bản đồ</string>
-	<string name="auto_follow_location_enabled">Đã kích hoạt thiết lập tự động bám theo.</string>
 	<string name="animate_route_off">Dừng mô phỏng</string>
 	<string name="animate_route">Bắt đầu mô phỏng</string>
 	
@@ -46,9 +50,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="local_index_mi_rename">Đổi tên</string>
 	<string name="show_gpx_route">Hiển thị trên bản đồ</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
-	<string name="auto_follow_route_never">Không bao giờ</string>
-	<string name="choose_auto_follow_route">Auto follow return time</string>
-	<string name="choose_auto_follow_route_descr">Chọn thời gian chờ hiển thị bản đồ để quay lại vị trí vừa xong</string>
 	<string name="search_select_point">Chọn</string>
 	<string name="local_index_description">Tải mới hoặc di chuyển để sao lưu hoặc xóa dữ liệu hiện tại.\nDữ liệu offline hiện có trên máy (%1$s không gian trống):</string>
 	<string name="search_position_current_location_search">Đang tìm vị trí...</string>

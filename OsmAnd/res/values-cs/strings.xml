@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="choose_auto_follow_route">Nastavení automatického sledování</string>
+	<string name="choose_auto_follow_route_descr">Zadejte interval pro automatické vrácení mapy na vaši pozici</string>
+	<string name="auto_follow_route_never">Nikdy</string>
+	<string name="auto_follow_route_navigation">Automatické sledování pozice</string>
+	<string name="auto_follow_route_navigation_descr">Zapnout automatické sledování pozice pouze v režimu navigace.</string>
+	<string name="auto_follow_location_enabled">Automatické sledování pozice je zapnuto.</string>
 
 	<string name="pref_vector_rendering">Nastavení vektorového vykreslovače</string>
 	<string name="pref_overlay">Překryvná/podkresová vrstva</string>
@@ -13,9 +19,6 @@
 	<string name="city_type_town">Malé město</string>
 	<string name="city_type_city">Velké město</string>
 	<string name="layer_poi_label">POI popisky</string>
-	<string name="auto_follow_route_navigation_descr">Zapnout automatické sledování pozice pouze v režimu navigace.</string>
-	<string name="auto_follow_route_navigation">Automatické sledování pozice</string>
-	<string name="auto_follow_location_enabled">Automatické sledování pozice je zapnuto.</string>
 	<string name="animate_route_off">Animaci vypnuta</string>
 	<string name="animate_route">Animace zapnuta</string>
 	
@@ -45,9 +48,6 @@
 	<string name="local_index_mi_rename">Přejmenovat</string>
 	<string name="show_gpx_route">Zobrazit na mapě</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
-	<string name="auto_follow_route_never">Nikdy</string>
-	<string name="choose_auto_follow_route">Nastavení automatického sledování</string>
-	<string name="choose_auto_follow_route_descr">Zadejte interval pro automatické vrácení mapy na vaši pozici</string>
 
 <string name="search_select_point">Vybrat</string>
 <string name="local_index_description">Stahnout nová, zálohovat nebo smazat existující data. \nOffline data na zařízení (%1$s dostupné)</string>

@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="choose_auto_follow_route">Настройки автовозрата карты</string>
+	<string name="choose_auto_follow_route_descr">Выберите время, через которое карта вернется к текущей позиции</string>
+	<string name="auto_follow_route_never">Никогда</string>
+	<string name="auto_follow_route_navigation">Auto follow nav only</string>
+	<string name="auto_follow_route_navigation_descr">Use map view auto follow only while navigating.</string>
+	<string name="auto_follow_location_enabled">Map view auto follow in use.</string>
+
    <string name="tip_recent_changes_0_6_8_t">Изменения в 0.6.8 :
 \n\t- Полностью обновленный поиск (POI, Адрес)! Поиск по адресу более отзывчивый и быстрый. Единственная кнопка поиска с множественными вкладками.
 \n\t- Поиск POI по имени на больших территориях (страна)  в новых картах  
@@ -24,9 +31,6 @@
 	<string name="local_index_mi_rename">Переименовать</string>
 	<string name="show_gpx_route">Показать на карте</string>
 	<string name="poi_filter_nominatim">Nominatim (интернет)</string>
-    <string name="auto_follow_route_never">Никогда</string>
-	<string name="choose_auto_follow_route">Настройки автовозрата карты</string>
-	<string name="choose_auto_follow_route_descr">Выберите время, через которое карта вернется к текущей позиции</string>
 	<string name="search_select_point">Выбрать</string>
 	<string name="local_index_description">Офлайн данные доступные на SD карточке. Вы можете загрузить новые, архивировать и удалить данные. Доступно %1$s.</string>
 	<string name="search_position_current_location_search">Поиск позиции...</string>

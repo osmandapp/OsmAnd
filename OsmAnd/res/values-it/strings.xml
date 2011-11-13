@@ -1,9 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="layer_poi_label">POI labels</string>
-	<string name="auto_follow_route_navigation_descr">Abilita l\'auto-follow solo durante la navigazione.</string>
+	<string name="choose_auto_follow_route">Impostazioni auto-follow</string>
+	<string name="choose_auto_follow_route_descr">Scegli intervallo di tempo per seguire automaticamente la posizione attuale</string>
+	<string name="auto_follow_route_never">Mai</string>
 	<string name="auto_follow_route_navigation">Navigazione auto-follow</string>
+	<string name="auto_follow_route_navigation_descr">Abilita l\'auto-follow solo durante la navigazione.</string>
 	<string name="auto_follow_location_enabled">Auto follow e\' attivo.</string>
+
+	<string name="layer_poi_label">POI labels</string>
 	<string name="animate_route_off">Animazione off</string>
 	<string name="animate_route">Animazione on</string>
 
@@ -33,9 +37,6 @@
 	<string name="local_index_mi_rename">Rinomina</string>
 	<string name="show_gpx_route">Visualizza</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
-	<string name="auto_follow_route_never">Mai</string>
-	<string name="choose_auto_follow_route">Impostazioni auto-follow</string>
-	<string name="choose_auto_follow_route_descr">Scegli intervallo di tempo per seguire automaticamente la posizione attuale</string>
 	<string name="search_select_point">Seleziona</string>
 	<string name="local_index_description">Scarica nuovi dati, sposta, salva o cancella dati esistenti. \nDati attualmente nel dispositivo (%1$s disponibile):</string>
 	<string name="search_position_current_location_search">Cerca posizione...</string>
