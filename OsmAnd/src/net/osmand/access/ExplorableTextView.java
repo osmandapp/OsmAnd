@@ -45,8 +45,13 @@ public class ExplorableTextView extends TextView {
         cursorTrackingEnabled = false;
         boolean result = super.dispatchPopulateAccessibilityEvent(event);
         if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED) {
-            event.setAddedCount(selectionEnd - selectionStart);
-            event.setFromIndex(selectionStart);
+            final int length = Math.min(selectionEnd - selectionStart, AccessibilityEvent.MAX_TEXT_LENGTH);
+            event.getText().clear();
+            event.getText().add(getText().subSequence(selectionStart, selectionStart + length));
+            event.setAddedCount(length);
+            event.setRemovedCount(0);
+            event.setFromIndex(0);
+            event.setBeforeText(null);
             result = true;
         }
         cursorTrackingEnabled =true;
