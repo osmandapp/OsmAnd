@@ -805,9 +805,6 @@
 <string name="left">Left</string>
 <string name="front_left">Front left</string>
 <string name="oclock">o\'clock</string>
-<string name="meters">m</string>
-<string name="kilometers">km</string>
-<string name="kilometers_per_hour">km/h</string>
 <string name="towards">towards</string>
 <string name="accuracy">Accuracy</string>
 <string name="altitude">Altitude</string>

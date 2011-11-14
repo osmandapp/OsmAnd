@@ -744,9 +744,6 @@
 	<string name="left">Налево</string>
 	<string name="front_left">Налево вперед</string>
 	<string name="oclock">ч.</string>
-	<string name="meters">м</string>
-	<string name="kilometers">км</string>
-	<string name="kilometers_per_hour">км/ч.</string>
 	<string name="towards">на</string>
 	<string name="accuracy">Точность</string>
 	<string name="altitude">Высота</string>

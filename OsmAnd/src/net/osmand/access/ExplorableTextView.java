@@ -39,6 +39,7 @@ public class ExplorableTextView extends TextView {
 
     // Overrided callbacks to provide accessible exploration means.
 
+    @Override
     public boolean dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
         boolean result = super.dispatchPopulateAccessibilityEvent(event);
         if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED) {

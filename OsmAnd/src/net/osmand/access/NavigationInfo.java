@@ -4,6 +4,7 @@ import java.lang.Math;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.OsmAndFormatter;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.RelativeDirectionStyle;
 import net.osmand.osm.LatLon;
@@ -141,14 +142,7 @@ public class NavigationInfo {
 
     // The argument must be not null as well as the currentLocation
     private String distanceString(final Location point) {
-        double distance = currentLocation.distanceTo(point);
-        if (distance <1000.0)
-            distance = Math.rint(distance * 100.0) / 100.0;
-        else
-            distance = Math.rint(distance / 10.0) * 10.0;
-        String result = String.valueOf((distance < 1000.0) ? distance : (distance / 1000.0));
-        result += " " + getString((distance < 1000.0) ? R.string.meters : R.string.kilometers); //$NON-NLS-1$
-        return result;
+        return OsmAndFormatter.getFormattedDistance(currentLocation.distanceTo(point), context);
     }
 
     // The argument must be not null as well as the currentLocation
@@ -192,8 +186,7 @@ public class NavigationInfo {
     // Get current travelling speed and direction
     public synchronized String getSpeedString() {
         if ((currentLocation != null) && currentLocation.hasSpeed()) {
-            double speed = Math.rint(currentLocation.getSpeed() * 360.0) / 100.0;
-            String result = String.valueOf(speed) + " " + getString(R.string.kilometers_per_hour); //$NON-NLS-1$
+            String result = OsmAndFormatter.getFormattedSpeed(currentLocation.getSpeed(), context);
             if (currentLocation.hasBearing())
                 result += " " + absoluteDirectionString(currentLocation.getBearing()); //$NON-NLS-1$
             return result;
@@ -206,10 +199,8 @@ public class NavigationInfo {
         String result = null;
         if (currentLocation != null) {
             String provider = currentLocation.getProvider();
-            if (currentLocation.hasAccuracy()) {
-                double accuracy = Math.rint(currentLocation.getAccuracy() * 100.0) / 100.0;
-                result = getString(R.string.accuracy) + " " + String.valueOf(accuracy) + " " + getString(R.string.meters); //$NON-NLS-1$ //$NON-NLS-2$
-            }
+            if (currentLocation.hasAccuracy())
+                result = getString(R.string.accuracy) + " " + OsmAndFormatter.getFormattedDistance(currentLocation.getAccuracy(), context); //$NON-NLS-1$
             if (result != null)
                 result += " (" + provider + ")"; //$NON-NLS-1$ //$NON-NLS-2$
             else
@@ -220,10 +211,8 @@ public class NavigationInfo {
 
     // Get altitude information string
     public synchronized String getAltitudeString() {
-        if ((currentLocation != null) && currentLocation.hasAltitude()) {
-            double altitude = Math.rint(currentLocation.getAltitude() * 100.0) / 100.0;
-            return getString(R.string.altitude) + " " + String.valueOf(altitude) + " " + getString(R.string.meters); //$NON-NLS-1$ //$NON-NLS-2$
-        }
+        if ((currentLocation != null) && currentLocation.hasAltitude())
+            return getString(R.string.altitude) + " " + OsmAndFormatter.getFormattedDistance((float)currentLocation.getAltitude(), context); //$NON-NLS-1$
         return null;
     }
 

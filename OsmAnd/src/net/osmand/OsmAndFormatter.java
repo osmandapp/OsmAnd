@@ -86,9 +86,9 @@ public class OsmAndFormatter {
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		float kmh = metersperseconds * 3.6f;
 		if(mc == MetricsConstants.KILOMETERS_AND_METERS){
-			return ((int) kmh) + ctx.getString(R.string.km_h);
+			return ((int) kmh) + " " + ctx.getString(R.string.km_h); //$NON-NLS-1$
 		} else {
-			return ((int) (kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE)) + ctx.getString(R.string.mile_per_hour);
+			return ((int) (kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE)) + " " + ctx.getString(R.string.mile_per_hour); //$NON-NLS-1$
 		}
 	}
 	
