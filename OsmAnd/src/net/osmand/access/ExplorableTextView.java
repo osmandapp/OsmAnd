@@ -16,8 +16,7 @@ import android.widget.TextView;
 //
 public class ExplorableTextView extends TextView {
 
-    private int currentPosition;
-    private int previousPosition;
+    private int cursor;
     private int selectionStart;
     private int selectionEnd;
     private boolean cursorTrackingEnabled = true;
@@ -45,10 +44,14 @@ public class ExplorableTextView extends TextView {
         cursorTrackingEnabled = false;
         boolean result = super.dispatchPopulateAccessibilityEvent(event);
         if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED) {
-            final int length = Math.min(selectionEnd - selectionStart, AccessibilityEvent.MAX_TEXT_LENGTH);
-            event.getText().clear();
-            event.getText().add(getText().subSequence(selectionStart, selectionStart + length));
-            event.setAddedCount(length);
+            if (isFocused()) {
+                final int length = Math.min(selectionEnd - selectionStart, AccessibilityEvent.MAX_TEXT_LENGTH);
+                event.getText().clear();
+                event.getText().add(getText().subSequence(selectionStart, selectionStart + length));
+                event.setAddedCount(length);
+            } else {
+                event.setAddedCount(Math.min(getText().length(), AccessibilityEvent.MAX_TEXT_LENGTH));
+            }
             event.setRemovedCount(0);
             event.setFromIndex(0);
             event.setBeforeText(null);
@@ -64,23 +67,30 @@ public class ExplorableTextView extends TextView {
     }
 
     @Override
+    protected void onTextChanged(CharSequence text, int start, int before, int after) {
+        super.onTextChanged(text, start, before, after);
+        if (!isFocused())
+            sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED);
+    }
+
+    @Override
     protected void onSelectionChanged(int start, int end) {
-        if (cursorTrackingEnabled) {
-            previousPosition = currentPosition;
-            currentPosition = end;
-            if (currentPosition >= getText().length())
-                previousPosition = currentPosition;
-            if (currentPosition != previousPosition) {
-                if (Math.abs(currentPosition - previousPosition) > 1) {
+        super.onSelectionChanged(start, end);
+        if (cursorTrackingEnabled && isFocused()) {
+            if (end >= getText().length()) {
+                cursor = getText().length();
+            } else if (cursor != end) {
+                if (Math.abs(cursor - end) > 1) {
                     final Layout layout = getLayout();
-                    final int line = layout.getLineForOffset(currentPosition);
+                    final int line = layout.getLineForOffset(end);
                     selectionStart = layout.getLineStart(line);
                     selectionEnd = layout.getLineEnd(line);
                 } else {
-                    selectionStart = currentPosition;
-                    selectionEnd = currentPosition + 1;
+                    selectionStart = end;
+                    selectionEnd = end + 1;
                 }
                 sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED);
+                cursor = end;
             }
         }
     }
