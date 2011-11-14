@@ -20,6 +20,7 @@ public class ExplorableTextView extends TextView {
     private int previousPosition;
     private int selectionStart;
     private int selectionEnd;
+    private boolean cursorTrackingEnabled = true;
 
 
     // Conventional constructors.
@@ -41,13 +42,14 @@ public class ExplorableTextView extends TextView {
 
     @Override
     public boolean dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
+        cursorTrackingEnabled = false;
         boolean result = super.dispatchPopulateAccessibilityEvent(event);
         if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED) {
             event.setAddedCount(selectionEnd - selectionStart);
             event.setFromIndex(selectionStart);
-            previousPosition = currentPosition;
             result = true;
         }
+        cursorTrackingEnabled =true;
         return result;
     }
 
@@ -58,18 +60,23 @@ public class ExplorableTextView extends TextView {
 
     @Override
     protected void onSelectionChanged(int start, int end) {
-        currentPosition = end;
-        if (currentPosition != previousPosition) {
-            if (Math.abs(currentPosition - previousPosition) > 1) {
-                final Layout layout = getLayout();
-                final int line = layout.getLineForOffset(currentPosition);
-                selectionStart = layout.getLineStart(line);
-                selectionEnd = layout.getLineEnd(line);
-            } else {
-                selectionStart = currentPosition;
-                selectionEnd = currentPosition + 1;
+        if (cursorTrackingEnabled) {
+            previousPosition = currentPosition;
+            currentPosition = end;
+            if (currentPosition >= getText().length())
+                previousPosition = currentPosition;
+            if (currentPosition != previousPosition) {
+                if (Math.abs(currentPosition - previousPosition) > 1) {
+                    final Layout layout = getLayout();
+                    final int line = layout.getLineForOffset(currentPosition);
+                    selectionStart = layout.getLineStart(line);
+                    selectionEnd = layout.getLineEnd(line);
+                } else {
+                    selectionStart = currentPosition;
+                    selectionEnd = currentPosition + 1;
+                }
+                sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED);
             }
-            sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED);
         }
     }
 
