@@ -8,7 +8,6 @@ import android.text.method.ArrowKeyMovementMethod;
 import android.text.method.MovementMethod;
 import android.util.AttributeSet;
 import android.view.accessibility.AccessibilityEvent;
-import android.view.MotionEvent;
 import android.widget.TextView;
 
 // This class is intended to be used in place of the TextView
