@@ -17,23 +17,31 @@ import android.widget.TextView;
 // Since usual message in an AlertDialog that is set by
 // AlertDialog.Builder.setMessage() is spoken only once
 // at the best case and there is no way to explore or even repeat it,
-// use methods of this class to wrap it into a View
+// use public methods of this class to wrap it into a View
 // and set it by AlertDialog.Builder.setView().
 // Such message will be focusable and so it can be repeated
 // by selecting.
 //
 public class TextMessage {
 
-    public static View makeView(Context ctx, CharSequence msg) {
-        View layout = ((LayoutInflater)(ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE))).inflate(R.layout.alert, null);
+    protected static View makeView(Context ctx, CharSequence msg, int resid) {
+        View layout = ((LayoutInflater)(ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE))).inflate(resid, null);
         ((TextView)layout.findViewById(R.id.message)).setText(msg);
         return layout;
     }
 
-    public static View makeView(Context ctx, int msgid) {
-        View layout = ((LayoutInflater)(ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE))).inflate(R.layout.alert, null);
+    protected static View makeView(Context ctx, int msgid, int resid) {
+        View layout = ((LayoutInflater)(ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE))).inflate(resid, null);
         ((TextView)layout.findViewById(R.id.message)).setText(msgid);
         return layout;
+    }
+
+    public static View makeView(Context ctx, CharSequence msg) {
+        return makeView(ctx, msg, R.layout.alert);
+    }
+
+    public static View makeView(Context ctx, int msgid) {
+        return makeView(ctx, msgid, R.layout.alert);
     }
 
 }

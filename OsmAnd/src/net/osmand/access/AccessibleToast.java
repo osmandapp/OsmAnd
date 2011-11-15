@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 // Use this class instead of regular Toast to have
 // accessibility feedback on toast messages.
+//
 public class AccessibleToast extends Toast {
 
     public AccessibleToast(Context context) {
@@ -17,14 +18,14 @@ public class AccessibleToast extends Toast {
 
     public static Toast makeText(Context context, int msg, int duration) {
         final Toast toast = new AccessibleToast(context);
-        toast.setView(TextMessage.makeView(context, msg));
+        toast.setView(TextMessage.makeView(context, msg, R.layout.notification));
         toast.setDuration(duration);
         return toast;
     }
 
     public static Toast makeText(Context context, CharSequence msg, int duration) {
         final Toast toast = new AccessibleToast(context);
-        toast.setView(TextMessage.makeView(context, msg));
+        toast.setView(TextMessage.makeView(context, msg, R.layout.notification));
         toast.setDuration(duration);
         return toast;
     }
