@@ -18,7 +18,7 @@ public class ExplorableTextView extends TextView {
 
     private int cursor;
     private int selectionStart;
-    private int selectionEnd;
+    private int selectionLength;
     private boolean cursorTrackingEnabled = true;
 
 
@@ -37,7 +37,7 @@ public class ExplorableTextView extends TextView {
     }
 
 
-    // Overrided callbacks to provide accessible exploration means.
+    // Overridden callback methods to provide accessible exploration means.
 
     @Override
     public boolean dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
@@ -45,13 +45,10 @@ public class ExplorableTextView extends TextView {
         boolean result = super.dispatchPopulateAccessibilityEvent(event);
         if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED) {
             if (isFocused()) {
-                final int length = Math.min(selectionEnd - selectionStart, AccessibilityEvent.MAX_TEXT_LENGTH);
                 event.getText().clear();
-                event.getText().add(getText().subSequence(selectionStart, selectionStart + length));
-                event.setAddedCount(length);
-            } else {
-                event.setAddedCount(Math.min(getText().length(), AccessibilityEvent.MAX_TEXT_LENGTH));
+                event.getText().add(getText().subSequence(selectionStart, selectionStart + selectionLength));
             }
+            event.setAddedCount(selectionLength);
             event.setRemovedCount(0);
             event.setFromIndex(0);
             event.setBeforeText(null);
@@ -69,8 +66,10 @@ public class ExplorableTextView extends TextView {
     @Override
     protected void onTextChanged(CharSequence text, int start, int before, int after) {
         super.onTextChanged(text, start, before, after);
-        if (!isFocused())
+        if (!isFocused()) {
+            selectionLength = Math.min(text.length(), AccessibilityEvent.MAX_TEXT_LENGTH);
             sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED);
+        }
     }
 
     @Override
@@ -84,10 +83,10 @@ public class ExplorableTextView extends TextView {
                     final Layout layout = getLayout();
                     final int line = layout.getLineForOffset(end);
                     selectionStart = layout.getLineStart(line);
-                    selectionEnd = layout.getLineEnd(line);
+                    selectionLength = Math.min(layout.getLineEnd(line) - selectionStart, AccessibilityEvent.MAX_TEXT_LENGTH);
                 } else {
                     selectionStart = end;
-                    selectionEnd = end + 1;
+                    selectionLength = 1;
                 }
                 sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED);
                 cursor = end;
