@@ -73,10 +73,11 @@ public class SearchActivity extends TabActivity {
 	
 	private View getTabIndicator(int imageId){
 		View r = getLayoutInflater().inflate(R.layout.search_main_tab_header, getTabHost(), false);
-		((ImageView)r.findViewById(R.id.TabImage)).setImageResource(imageId);
+		ImageView tabImage = (ImageView)r.findViewById(R.id.TabImage);
+		tabImage.setImageResource(imageId);
+		tabImage.setBackgroundResource(R.drawable.tab_icon_background);
 		return r;
 	}
-	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,13 @@ public class SearchActivity extends TabActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		setContentView(R.layout.search_main);
 		
+		Button backButton = (Button) findViewById(R.id.search_back_button);
+		backButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				SearchActivity.this.finish();
+			}
+		});
 		
 		spinner = (Spinner) findViewById(R.id.SpinnerLocation);
 		spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, 
@@ -97,7 +105,7 @@ public class SearchActivity extends TabActivity {
 				);
 		
 		
-		TabHost host = getTabHost();
+		TabHost host = getTabHost(); 
 		host.addTab(host.newTabSpec("Search_POI").setIndicator(getTabIndicator(R.drawable.tab_search_poi_icon)).
 				setContent(new Intent(this, SearchPoiFilterActivity.class))); //$NON-NLS-1$
 

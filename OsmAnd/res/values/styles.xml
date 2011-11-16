@@ -44,4 +44,11 @@
 		<item name="@android:windowEnterAnimation">@anim/grow_from_bottom</item>
 		<item name="@android:windowExitAnimation">@anim/shrink_from_top</item>
 	</style>
+    <style name="OsmandActivity">
+        <item name="android:textColor">@color/activity_text</item>
+        <item name="android:background">@color/activity_background</item>
+    </style>
+    <style name="WhiteText">
+        <item name="android:textColor">@color/activity_text</item>
+    </style>
 </resources>

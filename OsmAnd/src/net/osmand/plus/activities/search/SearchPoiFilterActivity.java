@@ -149,7 +149,7 @@ public class SearchPoiFilterActivity extends ListActivity {
 			} else {
 				label.setTypeface(Typeface.DEFAULT);
 			}
-			icon.setImageResource(model.isStandardFilter() ? R.drawable.folder : R.drawable.favorites);
+			icon.setImageResource(model.isStandardFilter() ? R.drawable.folder : R.drawable.tab_icon_favourite_menu);
 			return (row);
 		}
 
