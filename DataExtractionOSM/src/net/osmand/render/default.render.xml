@@ -80,38 +80,16 @@
 	<!-- point = 1, line = 2, polygon = 3 -->
 	<order>
 		<!-- point has order 128 -->
-		<group orderType="3">
-			<filter tag="building" value="" order="64" />
-			<filter tag="building" value="" layer="-1" order="2" />
-
-			<filter tag="landuse" value="" order="1" />
-			<filter tag="landuse" value="reservoir" order="5" />
-			<filter tag="landuse" value="water" order="5" />
-			<filter tag="natural" value="water" order="5" />
-			<filter tag="natural" value="bay" order="5" />
-			<filter tag="waterway" value="" order="5" />
-
-			<filter tag="leisure" value="" order="2" />
-			<filter tag="leisure" value="pitch" order="4" />
-
-			<filter tag="power" value="" order="4" />
-
-			<filter tag="natural" value="coastline" order="1" />
-			<filter tag="natural" value="" order="1" />
-		</group>
+		<filter tag="" value="" order="128" orderType="1"/>
 
 		<group orderType="2">
-			<!-- Below sea level -->
-			<filter tag="admin_level" value="0" order="0" />
-			<filter tag="admin_level" value="1" order="0" />
-			<filter tag="railway" value="" layer="-1" order="58" />
-			<filter tag="railway" value="" order="58" />
-
 			<!-- over buildings -->
 			<filter tag="aerialway" value="" order="68" />
 			<filter tag="power" value="" order="68" />
+
 			<filter tag="administrative" value="" order="62" />
-			<filter tag="waterway" value="" order="18" />
+			<filter tag="railway" value="" layer="-1" order="58" />
+			<filter tag="railway" value="" order="58" />
 
 			<filter tag="highway" value="motorway" order="57" shadowLevel="1"/>
 			<filter tag="highway" value="trunk" order="56" shadowLevel="1"/>
@@ -147,31 +125,58 @@
 			</group>
 
 			<filter appMode="pedestrian" tag="highway" value="pedestrian" order="60" />
-			<filter appMode="pedestrian" tag="highway" value="cycleway" order="45" />
-			<filter appMode="pedestrian" tag="highway" value="byway" order="62" />
-			<filter appMode="pedestrian" tag="highway" value="footway" order="65" />
-			<filter appMode="pedestrian" tag="highway" value="steps" order="66" />
-			<filter appMode="pedestrian" tag="highway" value="bridleway" order="59" />
-			
 			<filter tag="highway" value="pedestrian" order="40" />
+
+			<filter appMode="pedestrian" tag="highway" value="cycleway" order="45" />
 			<filter appMode="bicycle" tag="highway" value="cycleway" order="59" />
 			<filter tag="highway" value="cycleway" order="39" />
+
+			<filter appMode="pedestrian" tag="highway" value="byway" order="62" />
 			<filter tag="highway" value="byway" order="38" />
+
+			<filter appMode="pedestrian" tag="highway" value="footway" order="65" />
 			<filter tag="highway" value="footway" order="37" />
+
+			<filter appMode="pedestrian" tag="highway" value="steps" order="66" />
 			<filter tag="highway" value="steps" order="36" />
+
+			<filter appMode="pedestrian" tag="highway" value="bridleway" order="59" />
 			<filter tag="highway" value="bridleway" order="35" />
 			
+			<filter tag="waterway" value="" order="18" />
+
 			<filter tag="contour" value="" order="15" />
+
+			<!-- Below sea level -->
+			<filter tag="admin_level" value="0" order="0" />
+			<filter tag="admin_level" value="1" order="0" />
 		</group>
-		
-		<filter tag="" value="" order="128" orderType="1"/>
-		<filter tag="" value="" layer="-1" order="1" orderType="3"/>
-		<filter tag="" value="" layer="1" order="64" orderType="3"/>
-		<filter tag="" value="" order="1" orderType="3"/>
-		
 		<filter tag="" value="" layer="-1" order="10" orderType="2"/>
 		<filter tag="" value="" layer="1" order="67" orderType="2"/>
 		<filter tag="" value="" order="11" orderType="2"/>
+
+		<group orderType="3">
+			<filter tag="building" value="" order="64" />
+			<filter tag="building" value="" layer="-1" order="2" />
+
+			<filter tag="landuse" value="reservoir" order="5" />
+			<filter tag="landuse" value="water" order="5" />
+			<filter tag="natural" value="water" order="5" />
+			<filter tag="natural" value="bay" order="5" />
+			<filter tag="waterway" value="" order="5" />
+			<filter tag="landuse" value="" order="1" />
+
+			<filter tag="leisure" value="pitch" order="4" />
+			<filter tag="leisure" value="" order="2" />
+
+			<filter tag="power" value="" order="4" />
+
+			<filter tag="natural" value="coastline" order="1" />
+			<filter tag="natural" value="" order="1" />
+		</group>
+		<filter tag="" value="" layer="-1" order="1" orderType="3"/>
+		<filter tag="" value="" layer="1" order="64" orderType="3"/>
+		<filter tag="" value="" order="1" orderType="3"/>
 	</order>
 
 
