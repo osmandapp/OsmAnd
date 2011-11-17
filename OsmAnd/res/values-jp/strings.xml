@@ -710,7 +710,7 @@ name="recalculate_route_to_your_location">現在地に従ってルートを再�
 <string name="add_favorite_dialog_favourite_added_template">お気に入り地点
  \'\'{0}\'\' が追加されました。</string>
 
-<string name="favourites_context_menu_title">コンテキストメニュー</string>
+<!-- string name="favourites_context_menu_title">コンテキストメニュー</string -->
 <string name="favourites_context_menu_navigate">ナビゲート先</string>
 <string name="favourites_context_menu_edit">お気に入りを編集</string>
 <string name="favourites_context_menu_delete">お気に入りを削除</string>

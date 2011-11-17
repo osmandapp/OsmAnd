@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="choose_auto_follow_route">Choisir les paramètres de suivi automatique</string>
+  <string name="choose_auto_follow_route_descr">Choisir le temps pendant lequel l\'application extrapole la position en mouvement</string>
+  <string name="auto_follow_route_never">Jamais</string>
+	<string name="auto_follow_route_navigation">Auto follow nav only</string>
+	<string name="auto_follow_route_navigation_descr">Use map view auto follow only while navigating.</string>
+	<string name="auto_follow_location_enabled">Map view auto follow in use.</string>
  <string name="animate_route_off">Arrêt animation</string>
  <string name="animate_route">Démarrage animation</string>
         <string name="tip_recent_changes_0_6_8_t">Changements en 0.6.8 :
@@ -27,9 +33,6 @@
   <string name="local_index_mi_rename">Renommer</string>
   <string name="show_gpx_route">Afficher sur la carte</string>
   <string name="poi_filter_nominatim">Nominatim en ligne</string>
-  <string name="auto_follow_route_never">Jamais</string>
-  <string name="choose_auto_follow_route">Choisir les paramètres de suivi automatique</string>
-  <string name="choose_auto_follow_route_descr">Choisir le temps pendant lequel l\'application extrapole la position en mouvement</string>
   <string name="search_select_point">Sélectionner</string>
   <string name="search_position_current_location_search">Recherche dans emplacement...</string>
   <string name="search_position_current_location_found">Emplacement[Trouvé]</string>
@@ -679,7 +682,7 @@ navigate_point_format_D, DM & DMS
 <string name="add_favorite_dialog_top_text">Nom du favoris</string>
 <string name="add_favorite_dialog_default_favourite_name">Favoris</string>
 <string name="add_favorite_dialog_favourite_added_template">Le point \'\'{0}\'\' à été ajouté aux favoris.</string>
-<string name="favourites_context_menu_title">Menu contextuel</string>
+<!-- string name="favourites_context_menu_title">Menu contextuel</string -->
 <string name="favourites_context_menu_navigate">Se déplacer vers</string>
 <string name="favourites_context_menu_edit">Modifier favori</string>
 <string name="favourites_context_menu_delete">Supprimer favori</string>

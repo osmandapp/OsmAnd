@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="delete_confirmation_title">Usuwanie</string>
+<string name="sendtoOSM_confirmation_msg">Wysłać do OSM: %1$s?</string>
+<string name="pref_vector_rendering">Opcje dotyczące rendera wektorowego</string>
+<string name="pref_overlay">Overlay / underlay</string>
+<string name="pref_raster_map">Ustawienia mapy kafelkowej</string>
+<string name="pref_vector_map">Ustawienia mapy wektorowej</string>
+
+<string name="choose_auto_follow_route">Podążanie widoku za pozycją</string>
+<string name="choose_auto_follow_route_descr">Opóźnienie, po którym mapa zacznie podążać za aktualną pozycją GPS</string>
+<string name="auto_follow_route_never">Nigdy</string>
+<string name="auto_follow_route_navigation">Auto-podążanie za pozycją</string>
+<string name="auto_follow_route_navigation_descr">Włącz podążanie za pozycją tylko w trybie nawigacji.</string>
+<string name="auto_follow_location_enabled">Podążanie za pozycją jest włączone.</string>
+
+<!-- string name="delete_confirmation_title">Usuwanie</string -->
 <string name="delete_confirmation_msg">Czy na pewno usunąć %1$s?</string>
 <string name="city_type_suburb">Dzielnica</string>
 <string name="city_type_hamlet">Przysiółek</string>
@@ -9,9 +22,6 @@
 <string name="city_type_city">Miasto</string>
 
 <string name="layer_poi_label">Etykiety POI</string>
-<string name="auto_follow_route_navigation_descr">Włącz autostart nawigatora tylko w trybie nawigacji.</string>
-<string name="auto_follow_route_navigation">Autostart nawigatora</string>
-<string name="auto_follow_location_enabled">Autostart nawigatora jest włączony.</string>
 <string name="animate_route_off">Wył. animacje</string>
 <string name="animate_route">Wł. animacje</string>
 <string name="tip_recent_changes_0_6_8_t">Zmiany w wersji 0.6.8:
@@ -37,9 +47,6 @@
 <string name="local_index_mi_rename">Zmień nazwę</string>
 <string name="show_gpx_route">Pokaż na mapie</string>
 <string name="poi_filter_nominatim">Online Nominatim</string>
-<string name="auto_follow_route_never">Nigdy</string>
-<string name="choose_auto_follow_route">Autostart nawigatora</string>
-<string name="choose_auto_follow_route_descr">Ustaw czas, po którym nastąpi automatyczne uruchomienie nawigatora</string>
 <string name="search_select_point">Wybierz</string>
 <string name="local_index_description">Pobierz nowe, zarchiwizuj lub usuń istniejące dane. \nIstniejące dane offline na urządzeniu (%1$s jest dostępne):</string>
 <string name="search_position_current_location_search">Ustal pozycję GPS...</string>
@@ -715,7 +722,7 @@
 <string name="add_favorite_dialog_default_favourite_name">Ulubione</string>
 <string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>
 
-<string name="favourites_context_menu_title">Menu kontekstowe</string>
+<!-- string name="favourites_context_menu_title">Menu kontekstowe</string -->
 <string name="favourites_context_menu_navigate">Nawiguj do</string>
 <string name="favourites_context_menu_edit">Edytuj</string>
 <string name="favourites_context_menu_delete">Usuń</string>

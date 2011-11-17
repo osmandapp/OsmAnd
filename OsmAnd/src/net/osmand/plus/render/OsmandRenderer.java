@@ -5,8 +5,6 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,32 +16,32 @@ import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MultyPolygon;
+import net.osmand.plus.render.NativeOsmandLibrary.NativeSearchResult;
+import net.osmand.plus.render.TextRenderer.TextDrawInfo;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.sf.junidecode.Junidecode;
 
 import org.apache.commons.logging.Log;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
-import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathEffect;
 import android.graphics.PointF;
-import android.graphics.RectF;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.Shader;
-import android.graphics.Typeface;
-import android.graphics.Paint.Align;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
 import android.graphics.Shader.TileMode;
-import android.text.TextPaint;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
 import android.view.WindowManager;
@@ -51,78 +49,58 @@ import android.view.WindowManager;
 public class OsmandRenderer {
 	private static final Log log = LogUtil.getLog(OsmandRenderer.class);
 
-	private final int clFillScreen = Color.rgb(241, 238, 232);
-
-	private TextPaint paintText;
 	private Paint paint;
 
-	private Paint paintFillEmpty;
 	private Paint paintIcon;
 
 	public static final int TILE_SIZE = 256; 
 
 	private Map<String, PathEffect> dashEffect = new LinkedHashMap<String, PathEffect>();
-	private Map<Integer, Shader> shaders = new LinkedHashMap<Integer, Shader>();
-	private Map<Integer, Bitmap> cachedIcons = new LinkedHashMap<Integer, Bitmap>();
+	private Map<String, Shader> shaders = new LinkedHashMap<String, Shader>();
 
 	private final Context context;
 
 	private DisplayMetrics dm;
 
-	private static class TextDrawInfo {
+	private TextRenderer textRenderer;
 
-		public TextDrawInfo(String text){
-			this.text = text;
-		}
-
-		String text = null;
-		Path drawOnPath = null;
-		float vOffset = 0;
-		float centerX = 0;
-		float pathRotate = 0;
-		float centerY = 0;
-		float textSize = 0;
-		float minDistance = 0;
-		int textColor = Color.BLACK;
-		int textShadow = 0;
-		int textWrap = 0;
-		boolean bold = false;
-		int shieldRes = 0;
-		int textOrder = 20;
-		
-		public void fillProperties(RenderingRuleSearchRequest render, float centerX, float centerY){
-			this.centerX = centerX;
-			this.centerY = centerY + render.getIntPropertyValue(render.ALL.R_TEXT_DY, 0);
-			textColor = render.getIntPropertyValue(render.ALL.R_TEXT_COLOR);
-			if(textColor == 0){
-				textColor = Color.BLACK;
-			}
-			textSize = render.getIntPropertyValue(render.ALL.R_TEXT_SIZE);
-			textShadow = render.getIntPropertyValue(render.ALL.R_TEXT_HALO_RADIUS, 0);
-			textWrap = render.getIntPropertyValue(render.ALL.R_TEXT_WRAP_WIDTH, 0);
-			bold = render.getIntPropertyValue(render.ALL.R_TEXT_BOLD, 0) > 0;
-			minDistance = render.getIntPropertyValue(render.ALL.R_TEXT_MIN_DISTANCE,0);
-			if(render.isSpecified(render.ALL.R_TEXT_SHIELD)) {
-				shieldRes = RenderingIcons.getIcons().get(render.getStringPropertyValue(render.ALL.R_TEXT_SHIELD));
-			}
-			textOrder = render.getIntPropertyValue(render.ALL.R_TEXT_ORDER, 20);
-		}
-	}
 
 	private static class IconDrawInfo {
 		float x = 0;
 		float y = 0;
-		int resId;
+		String resId;
+	}
+	
+	static enum ShadowRenderingMode {
+		// int shadowRenderingMode = 0; // no shadow (minumum CPU)
+		// int shadowRenderingMode = 1; // classic shadow (the implementaton in master)
+		// int shadowRenderingMode = 2; // blur shadow (most CPU, but still reasonable)
+		// int shadowRenderingMode = 3; solid border (CPU use like classic version or even smaller)
+		NO_SHADOW(0),
+		ONE_STEP(1),
+		BLUR_SHADOW(2),
+		SOLID_SHADOW(3);
+		public final int value;
+		ShadowRenderingMode(int v) {
+			this.value = v;
+		}
 	}
 
 	/*package*/ static class RenderingContext {
+		// FIELDS OF THAT CLASS ARE USED IN C++
 		public boolean interrupted = false;
 		public boolean nightMode = false;
 		public boolean highResMode = false;
 		public float mapTextSize = 1;
+		public float density = 1;
+		public final Context ctx;
 
 		List<TextDrawInfo> textToDraw = new ArrayList<TextDrawInfo>();
 		List<IconDrawInfo> iconsToDraw = new ArrayList<IconDrawInfo>();
+		
+		public RenderingContext(Context ctx) {
+			this.ctx = ctx;
+		}
 
 		float leftX;
 		float topY;
@@ -138,23 +116,32 @@ public class OsmandRenderer {
 		int pointInsideCount = 0;
 		int visible = 0;
 		int allObjects = 0;
+		int textRenderingTime = 0;
+		int lastRenderedKey = 0;
 
 		// use to calculate points
 		PointF tempPoint = new PointF();
 		float cosRotateTileSize;
 		float sinRotateTileSize;
 		
-		// int shadowRenderingMode = 0; // no shadow (minumum CPU)
-		// int shadowRenderingMode = 1; // classic shadow (the implementaton in master)
-		// int shadowRenderingMode = 2; // blur shadow (most CPU, but still reasonable)
-		// int shadowRenderingMode = 3; solid border (CPU use like classic version or even smaller)
-		int shadowRenderingMode = 2;
+		// be aware field is using in C++
+		int shadowRenderingMode = ShadowRenderingMode.BLUR_SHADOW.value;
 		
 		// not expect any shadow
 		int shadowLevelMin = 256;
 		int shadowLevelMax = 0;
 
 		String renderingDebugInfo;
+		
+		boolean ended = false;
+		
+		float getDensityValue(float val) {
+			if (highResMode && density > 1) {
+				return val * density * mapTextSize;
+			} else {
+				return val * mapTextSize;
+			}
+		}
 	}
 
 	public OsmandRenderer(Context context) {
@@ -163,20 +150,11 @@ public class OsmandRenderer {
 		paintIcon = new Paint();
 		paintIcon.setStyle(Style.STROKE);
 
-		paintText = new TextPaint();
-		paintText.setStyle(Style.FILL);
-		paintText.setStrokeWidth(1);
-		paintText.setColor(Color.BLACK);
-		paintText.setTextAlign(Align.CENTER);
-		paintText.setTypeface(Typeface.create("Droid Serif", Typeface.NORMAL)); //$NON-NLS-1$
-		paintText.setAntiAlias(true);
 
+		textRenderer = new TextRenderer(context);
 		paint = new Paint();
 		paint.setAntiAlias(true);
 
-		paintFillEmpty = new Paint();
-		paintFillEmpty.setStyle(Style.FILL);
-		paintFillEmpty.setColor(clFillScreen);
 		dm = new DisplayMetrics();
 		WindowManager wmgr = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
@@ -194,11 +172,16 @@ public class OsmandRenderer {
 		return dashEffect.get(dashes);
 	}
 
-	public Shader getShader(int resId){
+	public Shader getShader(String resId){
+		
 		if(shaders.get(resId) == null){
-			Shader sh = new BitmapShader(
-					BitmapFactory.decodeResource(context.getResources(), resId), TileMode.REPEAT, TileMode.REPEAT);
-			shaders.put(resId, sh);
+			Bitmap bmp = RenderingIcons.getIcon(context, resId);
+			if(bmp != null){
+				Shader sh = new BitmapShader(bmp, TileMode.REPEAT, TileMode.REPEAT);
+				shaders.put(resId, sh);
+			} else {
+				shaders.put(resId, null);
+			}
 		}	
 		return shaders.get(resId);
 	}
@@ -211,36 +194,64 @@ public class OsmandRenderer {
 	}
 
 
-	public Bitmap generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, boolean useEnglishNames,
-			RenderingRuleSearchRequest render, List<IMapDownloaderCallback> notifyList, int defaultColor) {
+	/**
+	 * @return if map could be replaced
+	 */
+	public void generateNewBitmapNative(RenderingContext rc, NativeSearchResult searchResultHandler, Bitmap bmp, boolean useEnglishNames,
+			RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList, int defaultColor) {
 		long now = System.currentTimeMillis();
-
-		// fill area
-		Canvas cv = new Canvas(bmp);
-		if(defaultColor != 0){
-			paintFillEmpty.setColor(defaultColor);
-		}
-		cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillEmpty);
-
-		// put in order map
-		int sz = objects.size();
-		int init = sz / 4;
-		TIntObjectHashMap<TIntArrayList> orderMap = sortObjectsByProperOrder(rc, objects, render, sz, init);
-		if (objects != null && !objects.isEmpty() && rc.width > 0 && rc.height > 0) {
-			int objCount = 0;
+		if (rc.width > 0 && rc.height > 0 && searchResultHandler != null) {
 			// init rendering context
 			rc.tileDivisor = (int) (1 << (31 - rc.zoom));
 			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
+			rc.density = dm.density;
+			try {
+				if(Looper.getMainLooper() != null){
+					final Handler h = new Handler(Looper.getMainLooper());
+					notifyListenersWithDelay(rc, notifyList, h);
+				}
+				String res = NativeOsmandLibrary.generateRendering(rc, searchResultHandler, bmp, useEnglishNames, render, defaultColor);
+				rc.ended = true;
+				notifyListeners(notifyList);
+				long time = System.currentTimeMillis() - now;
+				rc.renderingDebugInfo = String.format("Rendering: %s ms  (%s text)\n"
+						+ "(%s points, %s points inside, %s of %s objects visible)\n" + res,//$NON-NLS-1$
+						time, rc.textRenderingTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, boolean useEnglishNames,
+			RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList, int defaultColor) {
+		long now = System.currentTimeMillis();
+
+		if (objects != null && !objects.isEmpty() && rc.width > 0 && rc.height > 0) {
+			// init rendering context
+			rc.tileDivisor = (int) (1 << (31 - rc.zoom));
+			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
+			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
+			rc.density = dm.density;
+
+			// fill area
+			Canvas cv = new Canvas(bmp);
+			if (defaultColor != 0) {
+				cv.drawColor(defaultColor);
+			}
+			// put in order map
+			TIntObjectHashMap<TIntArrayList> orderMap = sortObjectsByProperOrder(rc, objects, render);
+
+			int objCount = 0;
 
 			int[] keys = orderMap.keys();
 			Arrays.sort(keys);
-			
+
 			boolean shadowDrawn = false;
 
 			for (int k = 0; k < keys.length; k++) {
-				if (!shadowDrawn && keys[k] >= rc.shadowLevelMin && keys[k] <= rc.shadowLevelMax && 
-						rc.shadowRenderingMode > 1) {
+				if (!shadowDrawn && keys[k] >= rc.shadowLevelMin && keys[k] <= rc.shadowLevelMax && rc.shadowRenderingMode > 1) {
 					for (int ki = k; ki < keys.length; ki++) {
 						if (keys[ki] > rc.shadowLevelMax || rc.interrupted) {
 							break;
@@ -260,7 +271,7 @@ public class OsmandRenderer {
 					shadowDrawn = true;
 				}
 				if (rc.interrupted) {
-					return null;
+					return;
 				}
 
 				TIntArrayList list = orderMap.get(keys[k]);
@@ -274,6 +285,7 @@ public class OsmandRenderer {
 					drawObj(obj, render, cv, rc, l, l == 0, false);
 					objCount++;
 				}
+				rc.lastRenderedKey = keys[k];
 				if (objCount > 25) {
 					notifyListeners(notifyList);
 					objCount = 0;
@@ -286,30 +298,39 @@ public class OsmandRenderer {
 			drawIconsOverCanvas(rc, cv);
 
 			notifyListeners(notifyList);
-			drawTextOverCanvas(rc, cv, useEnglishNames);
+			textRenderer.drawTextOverCanvas(rc, cv, useEnglishNames);
 
 			long time = System.currentTimeMillis() - now;
-			rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n"
-					+ "(%s points, %s points inside, %s objects visile from %s)",//$NON-NLS-1$
+			rc.renderingDebugInfo = String.format("Rendering: %s ms  (%s text)\n"
+					+ "(%s points, %s points inside, %s of %s objects visible)",//$NON-NLS-1$
 					time, time - beforeIconTextTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
 			log.info(rc.renderingDebugInfo);
 
 		}
 
-		return bmp;
+		return;
+	}
+
+	private void notifyListenersWithDelay(final RenderingContext rc, final List<IMapDownloaderCallback> notifyList, final Handler h) {
+		h.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				if(!rc.ended) {
+					notifyListeners(notifyList);
+					notifyListenersWithDelay(rc, notifyList, h);
+				}
+			}
+		}, 700);
 	}
 
 	private void drawIconsOverCanvas(RenderingContext rc, Canvas cv) {
-		int skewConstant = (int) getDensityValue(rc, 16);
+		int skewConstant = (int) rc.getDensityValue(16);
 		int iconsW = rc.width / skewConstant;
 		int iconsH = rc.height / skewConstant;
 		int[] alreadyDrawnIcons = new int[iconsW * iconsH / 32];
 		for (IconDrawInfo icon : rc.iconsToDraw) {
-			if (icon.resId != 0) {
-				if (cachedIcons.get(icon.resId) == null) {
-					cachedIcons.put(icon.resId, UnscaledBitmapLoader.loadFromResource(context.getResources(), icon.resId, null, dm));
-				}
-				Bitmap ico = cachedIcons.get(icon.resId);
+			if (icon.resId != null) {
+				Bitmap ico = RenderingIcons.getIcon(context, icon.resId);
 				if (ico != null) {
 					if (icon.y >= 0 && icon.y < rc.height && icon.x >= 0 && icon.x < rc.width) {
 						int z = (((int) icon.x / skewConstant) + ((int) icon.y / skewConstant) * iconsW);
@@ -334,7 +355,9 @@ public class OsmandRenderer {
 	}
 
 	private TIntObjectHashMap<TIntArrayList> sortObjectsByProperOrder(RenderingContext rc, List<BinaryMapDataObject> objects,
-			RenderingRuleSearchRequest render, int sz, int init) {
+			RenderingRuleSearchRequest render) {
+		int sz = objects.size();
+		int init = sz / 4;
 		TIntObjectHashMap<TIntArrayList> orderMap = new TIntObjectHashMap<TIntArrayList>();
 		if (render != null) {
 			render.clearState();
@@ -361,7 +384,7 @@ public class OsmandRenderer {
 						int wholeType = o.getTypes()[j];
 						int mask = wholeType & 3;
 						int layer = 0;
-						if (mask != 1) {
+						if (mask != MapRenderingTypes.POINT_TYPE) {
 							layer = MapRenderingTypes.getNegativeWayLayer(wholeType);
 						}
 
@@ -385,14 +408,12 @@ public class OsmandRenderer {
 				}
 
 				if (rc.interrupted) {
-					return null;
+					return orderMap;
 				}
 			}
 		}
 		return orderMap;
 	}
-	
-
 	private void notifyListeners(List<IMapDownloaderCallback> notifyList) {
 		if (notifyList != null) {
 			for (IMapDownloaderCallback c : notifyList) {
@@ -400,233 +421,7 @@ public class OsmandRenderer {
 			}
 		}
 	}
-	private final static boolean findAllTextIntersections = true;
 
-	private float getDensityValue(RenderingContext rc, float val) {
-		if (rc.highResMode && dm.density > 1) {
-			return val * dm.density * rc.mapTextSize;
-		} else {
-			return val * rc.mapTextSize;
-		}
-	}
-
-	public void drawTextOverCanvas(RenderingContext rc, Canvas cv, boolean useEnglishNames) {
-		List<RectF> boundsNotPathIntersect = new ArrayList<RectF>();
-		List<RectF> boundsPathIntersect = new ArrayList<RectF>();
-		int size = rc.textToDraw.size();
-		Comparator<RectF> c = new Comparator<RectF>(){
-			@Override
-			public int compare(RectF object1, RectF object2) {
-				return Float.compare(object1.left, object2.left);
-			}
-
-		};
-		
-		// 1. Sort text using text order 
-		Collections.sort(rc.textToDraw, new Comparator<TextDrawInfo>() {
-			@Override
-			public int compare(TextDrawInfo object1, TextDrawInfo object2) {
-				return object1.textOrder - object2.textOrder;
-			}
-		});
-		
-		nextText: for (int i = 0; i < size; i++) {
-			TextDrawInfo text  = rc.textToDraw.get(i);
-			if(text.text != null){
-				int d = text.text.indexOf(MapRenderingTypes.DELIM_CHAR);
-				// not used now functionality 
-				// possibly it will be used specifying english names after that character
-				if(d > 0){
-					text.text = text.text.substring(0, d);
-				}
-				if(useEnglishNames){
-					text.text = Junidecode.unidecode(text.text);
-				}
-
-
-				// sest text size before finding intersection (it is used there)
-				float textSize = getDensityValue(rc, text.textSize);
-				paintText.setTextSize(textSize);
-				paintText.setFakeBoldText(text.bold);
-				paintText.setColor(text.textColor);
-				// align center y
-				text.centerY += (-paintText.ascent());
-
-				// calculate if there is intersection
-				boolean intersects = findTextIntersection(rc, boundsNotPathIntersect, boundsPathIntersect, c, text);
-				if(intersects){
-					continue nextText;
-				}
-
-
-				if(text.drawOnPath != null){
-					if(text.textShadow > 0){
-						paintText.setColor(Color.WHITE);
-						paintText.setStyle(Style.STROKE);
-						paintText.setStrokeWidth(2 + text.textShadow);
-						cv.drawTextOnPath(text.text, text.drawOnPath, 0, text.vOffset, paintText);
-						// reset
-						paintText.setStyle(Style.FILL);
-						paintText.setStrokeWidth(2);
-						paintText.setColor(text.textColor);
-					}
-					cv.drawTextOnPath(text.text, text.drawOnPath, 0, text.vOffset, paintText);
-				} else {
-					if (text.shieldRes != 0) {
-						if (cachedIcons.get(text.shieldRes) == null) {
-							cachedIcons.put(text.shieldRes, BitmapFactory.decodeResource(context.getResources(), text.shieldRes));
-						}
-						Bitmap ico = cachedIcons.get(text.shieldRes);
-						if (ico != null) {
-							cv.drawBitmap(ico, text.centerX - ico.getWidth() / 2 - 0.5f, text.centerY
-									- ico.getHeight() / 2 - getDensityValue(rc, 4.5f) 
-									, paintIcon);
-						}
-					}
-
-					drawWrappedText(cv, text, textSize);
-				}
-			}
-		}
-	}
-
-	private void drawWrappedText(Canvas cv, TextDrawInfo text, float textSize) {
-		if(text.textWrap == 0){
-			// set maximum for all text
-			text.textWrap = 40;
-		}
-
-		if(text.text.length() > text.textWrap){
-			int start = 0;
-			int end = text.text.length();
-			int lastSpace = -1;
-			int line = 0;
-			int pos = 0;
-			int limit = 0;
-			while(pos < end){
-				lastSpace = -1;
-				limit += text.textWrap;
-				while(pos < limit && pos < end){
-					if(!Character.isLetterOrDigit(text.text.charAt(pos))){
-						lastSpace = pos;
-					}
-					pos++;
-				}
-				if(lastSpace == -1){
-					drawTextOnCanvas(cv, text.text.substring(start, pos), 
-							text.centerX, text.centerY + line * (textSize + 2), paintText, text.textShadow);
-					start = pos;
-				} else {
-					drawTextOnCanvas(cv, text.text.substring(start, lastSpace), 
-							text.centerX, text.centerY + line * (textSize + 2), paintText, text.textShadow); 
-					start = lastSpace + 1;
-					limit += (start - pos) - 1;
-				}
-				line++;
-
-			}
-		} else {
-			drawTextOnCanvas(cv, text.text, text.centerX, text.centerY, paintText, text.textShadow);
-		}
-	}
-
-	private void drawTextOnCanvas(Canvas cv, String text, float centerX, float centerY, Paint paint, float textShadow){
-		if(textShadow > 0){
-			int c = paintText.getColor();
-			paintText.setStyle(Style.STROKE);
-			paintText.setColor(Color.WHITE);
-			paintText.setStrokeWidth(2 + textShadow);
-			cv.drawText(text, centerX, centerY, paint);
-			// reset
-			paintText.setStrokeWidth(2);
-			paintText.setStyle(Style.FILL);
-			paintText.setColor(c);
-		}
-		cv.drawText(text, centerX, centerY, paint);
-	}
-
-
-	private boolean findTextIntersection(RenderingContext rc, List<RectF> boundsNotPathIntersect, List<RectF> boundsPathIntersect,
-			Comparator<RectF> c, TextDrawInfo text) {
-		boolean horizontalWayDisplay = (text.pathRotate > 45 && text.pathRotate < 135) || (text.pathRotate > 225 && text.pathRotate < 315);
-//		text.minDistance = 0;
-		float textWidth = paintText.measureText(text.text) + (!horizontalWayDisplay ? 0 : text.minDistance);
-		// Paint.ascent is negative, so negate it.
-		int ascent = (int) Math.ceil(-paintText.ascent());
-		int descent = (int) Math.ceil(paintText.descent());
-		float textHeight = ascent + descent + (horizontalWayDisplay ? 0 : text.minDistance) + getDensityValue(rc, 5);
-
-		RectF bounds = new RectF();
-		if(text.drawOnPath == null || horizontalWayDisplay){
-			bounds.set(text.centerX - textWidth / 2, text.centerY - textHeight / 2 ,
-					text.centerX + textWidth / 2 , text.centerY + textHeight / 2 );
-		} else {
-			bounds.set(text.centerX - textHeight / 2, text.centerY - textWidth / 2, 
-					text.centerX + textHeight / 2 , text.centerY + textWidth / 2);
-		}
-		List<RectF> boundsIntersect = text.drawOnPath == null || findAllTextIntersections? 
-				boundsNotPathIntersect : boundsPathIntersect;
-		if(boundsIntersect.isEmpty()){
-			boundsIntersect.add(bounds);
-		} else {
-			final int diff = (int) (getDensityValue(rc, 3));
-			final int diff2 = (int) (getDensityValue(rc, 15));
-			// implement binary search 
-			int index = Collections.binarySearch(boundsIntersect, bounds, c);
-			if (index < 0) {
-				index = -(index + 1);
-			}
-			// find sublist that is appropriate
-			int e = index;
-			while (e < boundsIntersect.size()) {
-				if (boundsIntersect.get(e).left < bounds.right ) {
-					e++;
-				} else {
-					break;
-				}
-			}
-			int st = index - 1;
-			while (st >= 0) {
-				// that's not exact algorithm that replace comparison rect with each other
-				// because of that comparison that is not obvious 
-				// (we store array sorted by left boundary, not by right) - that's euristic
-				if (boundsIntersect.get(st).right > bounds.left ) {
-					st--;
-				} else {
-					break;
-				}
-			}
-			if (st < 0) {
-				st = 0;
-			}
-			// test functionality
-			//					 cv.drawRect(bounds, paint);
-			//					 cv.drawText(text.text.substring(0, Math.min(5, text.text.length())), bounds.centerX(), bounds.centerY(), paint);
-
-			for (int j = st; j < e; j++) {
-				RectF b = boundsIntersect.get(j);
-				float x = Math.min(bounds.right, b.right) - Math.max(b.left, bounds.left);
-				float y = Math.min(bounds.bottom, b.bottom) - Math.max(b.top, bounds.top);
-				if ((x > diff && y > diff2) || (x > diff2 && y > diff)) {
-					return true;
-				}
-			}
-			// store in list sorted by left boundary
-			//					if(text.minDistance > 0){
-			//						if (verticalText) {
-			//							bounds.set(bounds.left + text.minDistance / 2, bounds.top, 
-			//									bounds.right - text.minDistance / 2, bounds.bottom);
-			//						} else {
-			//							bounds.set(bounds.left, bounds.top + text.minDistance / 2, bounds.right, 
-			//									bounds.bottom - text.minDistance / 2);
-			//						}
-			//					}
-			boundsIntersect.add(index, bounds);
-		}
-		return false;
-	}
-
-	
 	protected void drawObj(BinaryMapDataObject obj, RenderingRuleSearchRequest render, Canvas canvas, RenderingContext rc, int l,
 			boolean renderText, boolean drawOnlyShadow) {
 		rc.allObjects++;
@@ -691,7 +486,6 @@ public class OsmandRenderer {
 	}
 
 	public void clearCachedResources(){
-		cachedIcons.clear();
 		shaders.clear();
 	}
 	
@@ -725,14 +519,18 @@ public class OsmandRenderer {
 			if (cnt > 0) {
 				String name = ((MultyPolygon) obj).getName(i);
 				if (name != null) {
-					drawPointText(render, rc, new TagValuePair(tag, value), xText / cnt, yText / cnt, name);
+					textRenderer.renderText(name, render, rc, new TagValuePair(tag, value), xText / cnt, yText / cnt, null, null);
 				}
 			}
 		}
 		canvas.drawPath(path, paint);
-		// for test purpose
-//	      render.strokeWidth = 1.5f;
-//	      render.color = Color.BLACK;
+		// for test purpose 
+//		paint.setStyle(Style.STROKE);
+//		paint.setStrokeWidth(1.5f);
+//		paint.setColor(Color.BLACK);
+//		paint.setPathEffect(null);
+//		canvas.drawPath(path, paint);
+		
 		if (updatePaint(render, paint, 1, false, rc)) {
 			canvas.drawPath(path, paint);
 		}
@@ -775,7 +573,7 @@ public class OsmandRenderer {
 			}
 			String name = obj.getName();
 			if(name != null){
-				drawPointText(render, rc, pair, xText / len, yText / len, name);
+				textRenderer.renderText(name, render, rc, pair, xText / len, yText / len, null, null);
 			}
 		}
 	}
@@ -785,6 +583,10 @@ public class OsmandRenderer {
 		RenderingRuleProperty rStrokeW;
 		RenderingRuleProperty rCap;
 		RenderingRuleProperty rPathEff;
+		
+		p.setShader(null);
+		p.setColorFilter(null);
+		p.clearShadowLayer();
 		if(ind == 0){
 			rColor = req.ALL.R_COLOR;
 			rStrokeW = req.ALL.R_STROKE_WIDTH;
@@ -826,21 +628,15 @@ public class OsmandRenderer {
 				p.setPathEffect(null);
 			}
 		}
-		p.setColor(req.getIntPropertyValue(rColor));
 		
+		p.setColor(req.getIntPropertyValue(rColor));
 		if(ind == 0){
-			Integer resId = RenderingIcons.getIcons().get(req.getStringPropertyValue(req.ALL.R_SHADER));
+			String resId = req.getStringPropertyValue(req.ALL.R_SHADER);
 			if(resId != null){
-				p.setColor(Color.BLACK);
 				p.setShader(getShader(resId));
-			} else {
-				p.setShader(null);
 			}
-			
 			// do not check shadow color here
-			if(rc.shadowRenderingMode != 1) {
-				paint.clearShadowLayer();
-			} else {
+			if(rc.shadowRenderingMode == 1) {
 				int shadowColor = req.getIntPropertyValue(req.ALL.R_SHADOW_COLOR);
 				int shadowLayer = req.getIntPropertyValue(req.ALL.R_SHADOW_RADIUS);
 				if (shadowColor == 0) {
@@ -848,56 +644,13 @@ public class OsmandRenderer {
 				}
 				p.setShadowLayer(shadowLayer, 0, 0, shadowColor);
 			}
-		} else {
-			p.setShader(null);
-			p.clearShadowLayer();
 		}
+		
 		return true;
 		
 	}
 	
 
-	private void drawPointText(RenderingRuleSearchRequest render, RenderingContext rc, TagValuePair pair, float xText, float yText, String name) {
-		String ref = null;
-		if (name.charAt(0) == MapRenderingTypes.REF_CHAR) {
-			ref = name.substring(1);
-			name = ""; //$NON-NLS-1$
-			for (int k = 0; k < ref.length(); k++) {
-				if (ref.charAt(k) == MapRenderingTypes.REF_CHAR) {
-					if (k < ref.length() - 1) {
-						name = ref.substring(k + 1);
-					}
-					ref = ref.substring(0, k);
-					break;
-				}
-			}
-		}
-
-		if (ref != null && ref.trim().length() > 0) {
-			render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
-			render.setIntFilter(render.ALL.R_TEXT_LENGTH, ref.length());
-			render.setBooleanFilter(render.ALL.R_REF, true);
-			if(render.search(RenderingRulesStorage.TEXT_RULES)){
-				if(render.getIntPropertyValue(render.ALL.R_TEXT_SIZE) > 0){
-					TextDrawInfo text = new TextDrawInfo(ref);
-					text.fillProperties(render, xText, yText);
-					rc.textToDraw.add(text);
-				}
-			}
-		}
-		
-		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
-		render.setIntFilter(render.ALL.R_TEXT_LENGTH, name.length());
-		render.setBooleanFilter(render.ALL.R_REF, false);
-		if(render.search(RenderingRulesStorage.TEXT_RULES) ){
-			if(render.getIntPropertyValue(render.ALL.R_TEXT_SIZE) > 0){
-				TextDrawInfo info = new TextDrawInfo(name);
-				info.fillProperties(render, xText, yText);
-				rc.textToDraw.add(info);
-			}
-		}
-	}
-	
 	private void drawPoint(BinaryMapDataObject obj, RenderingRuleSearchRequest render, Canvas canvas, RenderingContext rc, TagValuePair pair, boolean renderText) {
 		if(render == null || pair == null){
 			return;
@@ -905,12 +658,12 @@ public class OsmandRenderer {
 		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
 		render.search(RenderingRulesStorage.POINT_RULES);
 		
-		Integer resId = RenderingIcons.getIcons().get(render.getStringPropertyValue(render.ALL.R_ICON));
+		String resId = render.getStringPropertyValue(render.ALL.R_ICON);
 		String name = null;
 		if (renderText) {
 			name = obj.getName();
 		}
-		if((resId == null || resId == 0) && name == null){
+		if(resId == null && name == null){
 			return;
 		}
 		int len = obj.getPointsLength();
@@ -926,15 +679,15 @@ public class OsmandRenderer {
 			ps.y /= len;
 		}
 
-		if(resId != null && resId != 0){
+		if(resId != null){
 			IconDrawInfo ico = new IconDrawInfo();
 			ico.x = ps.x;
 			ico.y = ps.y;
 			ico.resId = resId;
 			rc.iconsToDraw.add(ico);
 		}
-		if (name != null) {
-			drawPointText(render, rc, pair, ps.x, ps.y, name);
+		if (name != null && name.trim().length() > 0) {
+			textRenderer.renderText(name, render, rc, pair, ps.x, ps.y, null, null);
 		}
 
 	}
@@ -953,7 +706,9 @@ public class OsmandRenderer {
 		if (rc.shadowRenderingMode == 3 && shadowRadius > 0) {
 			paint.clearShadowLayer();
 			paint.setStrokeWidth(paint.getStrokeWidth() + shadowRadius * 2);
-			 paint.setColor(0xffbababa);
+			ColorFilter cf = new PorterDuffColorFilter(shadowColor, Mode.SRC_IN);
+			paint.setColorFilter(cf);
+//			 paint.setColor(0xffbababa);
 //			paint.setColor(shadowColor);
 			canvas.drawPath(path, paint);
 		}
@@ -983,43 +738,29 @@ public class OsmandRenderer {
 		rc.visible++;
 
 		Path path = null;
-		float pathRotate = 0;
-		float roadLength = 0;
-		boolean inverse = false;
-		float xPrev = 0;
-		float yPrev = 0;
 		float xMid = 0;
 		float yMid = 0;
-		PointF middlePoint = new PointF();
 		int middle = obj.getPointsLength() / 2;
+		PointF[] textPoints = null;
+		if (!drawOnlyShadow && obj.getName() != null && obj.getName().length() > 0) {
+			textPoints = new PointF[length];
+		}
 
 		for (int i = 0; i < length ; i++) {
 			PointF p = calcPoint(obj, i, rc);
-			if(i == 0 || i == length -1){
-				xMid += p.x;
-				yMid += p.y;
+			if(textPoints != null) {
+				textPoints[i] = new PointF(p.x, p.y);
 			}
 			if (path == null) {
 				path = new Path();
 				path.moveTo(p.x, p.y);
 			} else {
-				roadLength += Math.sqrt((p.x - xPrev) * (p.x - xPrev) + (p.y - yPrev) * (p.y - yPrev)); 
 				if(i == middle){
-					middlePoint.set(p.x, p.y);
-					double rot = - Math.atan2(p.x - xPrev, p.y - yPrev) * 180 / Math.PI;
-					if (rot < 0) {
-						rot += 360;
-					}
-					if (rot < 180) {
-						rot += 180;
-						inverse = true;
-					}
-					pathRotate = (float) rot;
+					xMid = p.x;
+					yMid = p.y;
 				}
 				path.lineTo(p.x, p.y);
 			}
-			xPrev = p.x;
-			yPrev = p.y;
 		}
 		if (path != null) {
 			if(drawOnlyShadow) {
@@ -1042,81 +783,13 @@ public class OsmandRenderer {
 					canvas.drawPath(path, paints[i]);
 				}
 			}
-			if (!drawOnlyShadow && obj.getName() != null && obj.getName().length() > 0) {
-				calculatePolylineText(obj, render, rc, pair, path, pathRotate, roadLength, inverse, xMid, yMid, middlePoint);
+			if (textPoints != null) {
+				textRenderer.renderText(obj.getName(), render, rc, pair, xMid, yMid, path, textPoints);
 			}
 		}
 	}
 
-	private void calculatePolylineText(BinaryMapDataObject obj, RenderingRuleSearchRequest render, RenderingContext rc, TagValuePair pair,
-			Path path, float pathRotate, float roadLength, boolean inverse, float xMid, float yMid, PointF middlePoint) {
-		String name = obj.getName();
-		String ref = null;
-		if(name.charAt(0) == MapRenderingTypes.REF_CHAR){
-			ref = name.substring(1);
-			name = ""; //$NON-NLS-1$
-			for(int k = 0; k < ref.length(); k++){
-				if(ref.charAt(k) == MapRenderingTypes.REF_CHAR){
-					if(k < ref.length() - 1){
-						name = ref.substring(k + 1);
-					}
-					ref = ref.substring(0, k);
-					break;
-				}
-			}
-		}
-		if(ref != null && ref.trim().length() > 0){
-			render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
-			render.setIntFilter(render.ALL.R_TEXT_LENGTH, ref.length());
-			render.setBooleanFilter(render.ALL.R_REF, true);
-			if(render.search(RenderingRulesStorage.TEXT_RULES)){
-				if(render.getIntPropertyValue(render.ALL.R_TEXT_SIZE) > 0){
-					TextDrawInfo text = new TextDrawInfo(ref);
-					text.fillProperties(render, middlePoint.x, middlePoint.y);
-					text.pathRotate = pathRotate;
-					rc.textToDraw.add(text);
-				}
-			}
-		}
-
-		if(name != null && name.trim().length() > 0){
-			render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
-			render.setIntFilter(render.ALL.R_TEXT_LENGTH, name.length());
-			render.setBooleanFilter(render.ALL.R_REF, false);
-			if (render.search(RenderingRulesStorage.TEXT_RULES) && render.getIntPropertyValue(render.ALL.R_TEXT_SIZE) > 0) {
-				TextDrawInfo text = new TextDrawInfo(name);
-				if (render.getIntPropertyValue(render.ALL.R_TEXT_ON_PATH, 0) == 0) {
-					text.fillProperties(render, middlePoint.x, middlePoint.y);
-					rc.textToDraw.add(text);
-				} else {
-					paintText.setTextSize(text.textSize);
-					if (paintText.measureText(obj.getName()) < roadLength ) {
-						if (inverse) {
-							path.rewind();
-							boolean st = true;
-							for (int i = obj.getPointsLength() - 1; i >= 0; i--) {
-								PointF p = calcPoint(obj, i, rc);
-								if (st) {
-									st = false;
-									path.moveTo(p.x, p.y);
-								} else {
-									path.lineTo(p.x, p.y);
-								}
-							}
-						}
-						text.fillProperties(render, xMid / 2, yMid / 2);
-						text.pathRotate = pathRotate;
-						text.drawOnPath = path;
-						float strokeWidth = render.getFloatPropertyValue(render.ALL.R_STROKE_WIDTH);
-						text.vOffset = strokeWidth / 2 - 1;
-						rc.textToDraw.add(text);
-					}
-				}
-			}
-
-		}
-	}
-	
+		
 	private static Paint[] oneWay = null;
 	private static Paint oneWayPaint(){
 		Paint oneWay = new Paint();
@@ -1152,6 +825,4 @@ public class OsmandRenderer {
 		}
 		return oneWay;
 	}
-
-
 }

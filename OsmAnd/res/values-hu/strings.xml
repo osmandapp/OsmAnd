@@ -1,6 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-<string name="delete_confirmation_title">Törlés</string>
+<string name="choose_auto_follow_route">Automatikus követés beállításai </string>
+<string name="choose_auto_follow_route_descr">Időintervallum beállítása az automatikus követéshez</string>
+<string name="auto_follow_route_never">Soha</string>
+<string name="auto_follow_route_navigation">Automatikus követés navigáláskor</string>
+<string name="auto_follow_route_navigation_descr">Csak navigáció közben követi automatikusan a pozíciódat.</string>
+<string name="auto_follow_location_enabled">Automatikus követés engedélyezve.</string>
+
+<string name="pref_vector_rendering">Beállítások vektoros megjelenítéshez</string>
+<string name="pref_overlay">Rátét / alátét</string>
+<string name="pref_raster_map">Raszter térkép beállítások</string>
+<string name="pref_vector_map">Vektoros térkép beállítások</string>
+<!-- string name="delete_confirmation_title">Törlés</string -->
 <string name="delete_confirmation_msg">Biztosan törlöd: %1$s?</string>
 <string name="city_type_suburb">településrész</string>
 <string name="city_type_hamlet">falucska</string>
@@ -8,9 +19,6 @@
 <string name="city_type_town">város</string>
 <string name="city_type_city">város</string>
 <string name="layer_poi_label">POI feliratok</string>
-<string name="auto_follow_route_navigation_descr">Csak navigáció közben követi automatikusan a pozíciódat.</string>
-<string name="auto_follow_route_navigation">Automatikus követés navigáláskor</string>
-<string name="auto_follow_location_enabled">Automatikus követés engedélyezve.</string>
 <string name="animate_route_off">Szimuláció ki</string>
 <string name="animate_route">Szimuláció be</string>
 	
@@ -40,9 +48,6 @@
 <string name="local_index_mi_rename">Átnevezés</string>
 <string name="show_gpx_route">Mutasd a térképen</string>
 <string name="poi_filter_nominatim">Online Nominatim</string>
-<string name="auto_follow_route_never">Soha</string>
-<string name="choose_auto_follow_route">Automatikus követés beállításai </string>
-<string name="choose_auto_follow_route_descr">Időintervallum beállítása az automatikus követéshez</string>
 <string name="search_select_point">Választás</string>
 <string name="search_position_current_location_search">Hely keresése...</string>
 <string name="search_position_current_location_found">Hely [Megtalálva]</string>
@@ -704,7 +709,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 <string name="add_favorite_dialog_default_favourite_name">Kedvenc</string>
 <string name="add_favorite_dialog_favourite_added_template">Kedvenc pont: \'\'{0}\'\' sikeresen hozzáadva.</string>
 
-<string name="favourites_context_menu_title">Eszközök menü</string>
+<!-- string name="favourites_context_menu_title">Eszközök menü</string -->
 <string name="favourites_context_menu_navigate">Navigáció ide</string>
 <string name="favourites_context_menu_edit">Kedvenc szerkesztése</string>
 <string name="favourites_context_menu_delete">Kedvenc törlése</string>

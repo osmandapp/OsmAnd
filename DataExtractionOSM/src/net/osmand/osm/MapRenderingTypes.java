@@ -365,6 +365,7 @@ public class MapRenderingTypes {
 	}
 	
 	// 0 - normal, -1 - under, 1 - bridge,over
+	// SYNCHRONIZED WITH C++
 	public static int getNegativeWayLayer(int type) {
 		int i = (3 & (type >> 12));
 		if (i == 1) {

@@ -7,6 +7,13 @@ import java.util.Map;
 
 public class RenderingRuleStorageProperties {
 
+	public static final String A_DEFAULT_COLOR = "defaultColor";
+	public static final String A_SHADOW_RENDERING = "shadowRendering";
+	public static final String ATTR_INT_VALUE = "attrIntValue";
+	public static final String ATTR_BOOL_VALUE = "attrBoolValue";
+	public static final String ATTR_COLOR_VALUE = "attrColorValue";
+	public static final String ATTR_STRING_VALUE = "attrStringValue";
+	
 	public static final String TEXT_LENGTH = "textLength";
 	public static final String REF = "ref";
 	public static final String TEXT_SHIELD = "textShield";
@@ -45,6 +52,11 @@ public class RenderingRuleStorageProperties {
 	public static final String TEXT_WRAP_WIDTH = "textWrapWidth";
 	public static final String SHADOW_LEVEL = "shadowLevel";
 
+	
+	public RenderingRuleProperty R_ATTR_INT_VALUE;
+	public RenderingRuleProperty R_ATTR_BOOL_VALUE;
+	public RenderingRuleProperty R_ATTR_COLOR_VALUE;
+	public RenderingRuleProperty R_ATTR_STRING_VALUE;
 	public RenderingRuleProperty R_TEXT_LENGTH;
 	public RenderingRuleProperty R_REF;
 	public RenderingRuleProperty R_TEXT_SHIELD;
@@ -83,11 +95,22 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_TEXT_HALO_RADIUS;
 	public RenderingRuleProperty R_TEXT_WRAP_WIDTH;
 
-	final Map<String, RenderingRuleProperty> properties = new LinkedHashMap<String, RenderingRuleProperty>();
-	final List<RenderingRuleProperty> rules = new ArrayList<RenderingRuleProperty>();
-	final List<RenderingRuleProperty> customRules = new ArrayList<RenderingRuleProperty>();
+	final Map<String, RenderingRuleProperty> properties;
+	// C++
+	final List<RenderingRuleProperty> rules ;
+	final List<RenderingRuleProperty> customRules ;
 	
 	public RenderingRuleStorageProperties() {
+		properties = new LinkedHashMap<String, RenderingRuleProperty>();
+		rules = new ArrayList<RenderingRuleProperty>();
+		customRules = new ArrayList<RenderingRuleProperty>();
+		createDefaultRenderingRuleProperties();
+	}
+	
+	public RenderingRuleStorageProperties(RenderingRuleStorageProperties toClone) {
+		properties = new LinkedHashMap<String, RenderingRuleProperty>(toClone.properties);
+		rules = new ArrayList<RenderingRuleProperty>(toClone.rules);
+		customRules = new ArrayList<RenderingRuleProperty>(toClone.customRules);
 		createDefaultRenderingRuleProperties();
 	}
 
@@ -102,6 +125,12 @@ public class RenderingRuleStorageProperties {
 		R_TEXT_LENGTH = registerRuleInternal(RenderingRuleProperty.createInputIntProperty(TEXT_LENGTH));
 		R_REF = registerRuleInternal(RenderingRuleProperty.createInputBooleanProperty(REF));
 
+		
+		R_ATTR_INT_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ATTR_INT_VALUE));
+		R_ATTR_BOOL_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(ATTR_BOOL_VALUE));
+		R_ATTR_COLOR_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputColorProperty(ATTR_COLOR_VALUE));
+		R_ATTR_STRING_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(ATTR_STRING_VALUE));
+		
 		// order - no sense to make it float
 		R_ORDER = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ORDER));
 		R_SHADOW_LEVEL = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(SHADOW_LEVEL));
@@ -157,15 +186,19 @@ public class RenderingRuleStorageProperties {
 	}
 	
 	private RenderingRuleProperty registerRuleInternal(RenderingRuleProperty p) {
-		properties.put(p.getAttrName(), p);
-		p.setId(rules.size());
-		rules.add(p);
-		return p;
+		if(get(p.getAttrName()) == null) {
+			properties.put(p.getAttrName(), p);
+			p.setId(rules.size());
+			rules.add(p);
+		}
+		return get(p.getAttrName());
 	}
 
 	public RenderingRuleProperty registerRule(RenderingRuleProperty p) {
-		registerRuleInternal(p);
-		customRules.add(p);
-		return p;
+		RenderingRuleProperty ps = registerRuleInternal(p);
+		if(!customRules.contains(ps)) {
+			customRules.add(p);
+		}
+		return ps;
 	}
 }

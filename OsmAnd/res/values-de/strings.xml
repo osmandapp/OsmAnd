@@ -1,9 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="choose_auto_follow_route">Kartenanzeige nachführen</string>
+	<string name="choose_auto_follow_route_descr">Wartezeit für Rückkehr zur Kartennachführung mit Position</string>
+	<string name="auto_follow_route_never">Nie</string>
+	<string name="auto_follow_route_navigation">Nachführung nur bei Nav</string>
+	<string name="auto_follow_route_navigation_descr">Kartennachführung mit Position erfolgt nur während Navigation (Routing)</string>
+	<string name="auto_follow_location_enabled">Kartennachführung aktviert.</string>
+
+	<string name="pref_vector_rendering">Vector Renderer spezif. Optionen</string>
+	<string name="pref_overlay">Overlay / underlay</string>
+	<string name="pref_raster_map">Einstellungen Kachel-Karten</string>
+	<string name="pref_vector_map">Einstellungen Vektor-Karten</string>
+	<!-- string name="delete_confirmation_title">About to delete</string -->
+	<string name="delete_confirmation_msg">%1$s löschen?</string>
+	<string name="city_type_suburb">OSM-Suburb</string>
+	<string name="city_type_hamlet">OSM-Hamlet</string>
+	<string name="city_type_village">OSM-Village</string>
+	<string name="city_type_town">OSM-Town</string>
+	<string name="city_type_city">OSM-City</string>
 	<string name="layer_poi_label">POI Namen</string>
-	<string name="auto_follow_route_navigation_descr">Auto follow Position nur im Navigationsmodus.</string>
-	<string name="auto_follow_route_navigation">Auto follow Navigation</string>
-	<string name="auto_follow_location_enabled">Auto follow setting aktiviert.</string>
 	<string name="animate_route_off">Animation aus</string>
 	<string name="animate_route">Animation an</string>
 	
@@ -33,9 +48,6 @@
 	<string name="local_index_mi_rename">Umbenennen</string>
 	<string name="show_gpx_route">Auf Karte anzeigen</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
-	<string name="auto_follow_route_never">Nie</string>
-	<string name="choose_auto_follow_route">Auto follow Einstellungen</string>
-	<string name="choose_auto_follow_route_descr">Choose time interval to continue map following at the position</string>
 	<string name="search_select_point">Select</string>
 	<string name="search_position_current_location_search">Suche Position...</string>
 	<string name="search_position_current_location_found">Position (gefunden)</string>
@@ -68,7 +80,7 @@
 	<string name="menu_save_directions">Route speichern</string>
 	<string name="local_index_upload_gpx_description">GPX Dateien an OSM Community übermitteln. Die Dateien können dort zur Kartenverbesserung verwendet werden.</string>
 	<string name="local_index_items_uploaded">%1$d von %2$d Datei(en) erfolgreich hochgeladen.</string>
-	<string name="local_index_mi_upload_gpx">Senden an OSM...</string>
+	<string name="local_index_mi_upload_gpx">Senden an OSM</string>
 	
 	<string name="show_more_map_detail">Mehr Kartendetails</string>
 	<string name="show_more_map_detail_descr">Einige Vektor-Daten (Straßen etc.) bereits bei kleineren Vergrößerungen zeigen</string>
@@ -153,10 +165,10 @@
 	<string name="switch_to_vector_map_to_see">Sie können in der Kartenansicht auf Offline-Vektor-Karten wechseln mittels Menü -> Layers -> Kartenquelle -> Offline-Vektor-Karten.</string>
 	<string name="binary_map_download_success">Download erfolgreich. Sie können in der Kartenansicht auf Offline-Vektor-Karten wechseln mittels Menu -> Darstellung -> Kartenquelle -> Offline-Vektor-Karten</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
-	<string name="choose_audio_stream_descr">Navigations-Sprachausgabe wählen (abhängig von Systemkonfiguration)</string>
-	<string name="voice_stream_voice_call">Anruf-Stream</string>
-	<string name="voice_stream_notification">Benachrichtgungs-Stream</string>
-	<string name="voice_stream_music">Medien/Musik-Stream</string>
+	<string name="choose_audio_stream_descr">Ausgabemodus für Sprachansagen wählen (System-abhängig)</string>
+	<string name="voice_stream_voice_call">wie Anrufe</string>
+	<string name="voice_stream_notification">wie Benachrichtigungen</string>
+	<string name="voice_stream_music">wie Medien/Musik</string>
 
 	<string name="warning_tile_layer_not_downloadable">Karten-Schicht %1$s wurde nicht heruntergeladen, bitte nochmal laden.</string>
 	<string name="overlay_transparency_descr">Transparenz der Overlay-Karte ändern</string>
@@ -297,7 +309,7 @@
 	<string name="amenity_type_other">Anderes</string>
 	<string name="amenity_type_shop">Geschäft</string>
 	<string name="amenity_type_sport">Sport</string>
-	<string name="amenity_type_sustenance">Lebensunterhalt</string>
+	<string name="amenity_type_sustenance">Gastronomie</string>
 	<string name="amenity_type_tourism">Touristik</string>
 	<string name="amenity_type_transportation">ÖPNV</string>
 	<string name="indexing_address">Indiziere Adressen...</string>
@@ -354,14 +366,14 @@
 	<string name="select_all">Alle markieren</string>
 	<string name="reload">Aktualisieren</string>
 	
-	<string name="general_settings_descr">Konfiguration der Internet-Verwendung, Anzeige und mehr</string>
+	<string name="general_settings_descr">Konfiguration der Anzeige und anderer allgemeiner Einstellungen</string>
     <string name="general_settings">Allgemein</string>
 	<string name="rendering_settings_descr">Konfiguration der Kartenquellen und -Darstellung</string>
     <string name="rendering_settings">Landkarten</string>
     <string name="index_settings_descr">Laden und Verwalten von Landkarten und Daten für Offline-Verwendung</string>
     <string name="index_settings">Offline-Daten</string>
 	<string name="osmand_service">Hintergrund-Service</string>
-	<string name="osmand_service_descr">Zur Verwendung von OsmAnd bei ausgeschalteter Anzeige</string>
+	<string name="osmand_service_descr">Für Verwendung von OsmAnd bei ausgeschalteter Anzeige</string>
 	<string name="fast_route_mode">Schnellste Route</string>
 	<string name="fast_route_mode_descr">Auswählen für schnellste Route oder deaktivieren für kürzeste Route</string>
 	<string name="tiles_to_download_estimated_size">Bei Zoomlevel {0} lade {1} Kacheln ({2} MB )</string>
@@ -392,7 +404,7 @@
 	<string name="transport_searching_transport">Suche ÖPNV (kein Ziel)</string>
 	<string name="transport_searching_route">Suche ÖPNV (Ziel {0})</string>
 	<string name="transport_search_none">kein</string>
-	<string name="transport_search_again">ÖPNV nochmal suchen</string>
+	<string name="transport_search_again">ÖPNV-Suche zurücksetzen</string>
 
 	<string name="map_index">Karte</string>
 	<string name="voice">Ansagen</string>
@@ -454,7 +466,7 @@
 	<string name="background_service_int">Positionierungsintervall</string>
 	<string name="background_service_provider_descr">Art der Hintergrund-Positionsbestimmung</string>
 	<string name="background_service_provider">Positionsbestimmung</string>
-	<string name="background_router_service_descr">Aufzeichnung der Position in größeren Zeitabständen im Hintergrund aktivieren</string>
+	<string name="background_router_service_descr">Aktiviere Service für Verwendung von OsmAnd während Anzeige aus ist</string>
 	<string name="background_router_service">Hintergrund-Service</string>
 	<string name="off_router_service_no_gps_available">Hintergrunddienst zur Routenberechnung erfordert aktiviertes GPS.</string>
 	<string name="routing_settings_descr">Navigationsoptionen</string>
@@ -607,7 +619,7 @@
     <string name="data_settings">Daten</string>
     <string name="map_preferences_descr">Karteneinstellungen festlegen: Kartenquelle, Ausrichtung, Markerposition, Bildschirmausrichtung</string>
     <string name="osm_settings">OSM</string>
-    <string name="auto_zoom_map_descr">Kartenvergrößerung (Zoomlevel) automatisch der Geschwindigkeit anpassen</string>
+    <string name="auto_zoom_map_descr">Kartenvergrößerung automatisch der Geschwindigkeit anpassen</string>
     <string name="auto_zoom_map">Automatischer Zoom</string>
     <string name="additional_settings">Weitere Einstellungen</string>
     <string name="settings_preset_descr">Anwendungsprofil wählen. (Viele Einstellungen unten werden für jedes Profil separat gespeichert.)</string>
@@ -630,7 +642,7 @@
     <string name="show_osm_bugs">OSM-Fehler</string>
     <string name="favourites_activity">Bevorzugte Punkte</string>
     <string name="add_to_favourite">Zu Favoriten hinzufügen</string>
-    <string name="use_english_names_descr">Verwende englische oder einheimische Bezeichnungen in Karten</string>
+    <string name="use_english_names_descr">Englische oder einheimische Bezeichnungen in Karten</string>
     <string name="use_english_names">Englische Bezeichnungen</string>
     <string name="app_settings">Anwendungseinstellungen</string>
     <string name="search_address">Adresse suchen </string>
@@ -721,7 +733,7 @@
 <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
 <string name="add_favorite_dialog_favourite_added_template">Favorit Punkt \'\'{0}\'\' wurde erfolgreich hinzugefügt.</string>
 
-<string name="favourites_context_menu_title">Kontextmenü</string>
+<!-- string name="favourites_context_menu_title">Kontextmenü</string -->
 <string name="favourites_context_menu_navigate">Navigiere zu</string>
 <string name="favourites_context_menu_edit">Favorit bearbeiten</string>
 <string name="favourites_context_menu_delete">Favorit löschen</string>

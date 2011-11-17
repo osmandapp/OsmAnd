@@ -23,7 +23,6 @@ import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.render.MapRenderRepositories;
-import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.views.SeekBarPreference;
 import net.osmand.render.RenderingRuleProperty;
@@ -175,6 +174,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	    registerBooleanPreference(osmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES,screen);
 	    registerBooleanPreference(osmandSettings.MAP_VECTOR_DATA,screen);
 	    registerBooleanPreference(osmandSettings.TEST_ANIMATE_ROUTING,screen);
+	    registerBooleanPreference(osmandSettings.NATIVE_RENDERING,screen);
+	    
 	    
 		registerEditTextPreference(osmandSettings.USER_NAME, screen);
 		registerEditTextPreference(osmandSettings.USER_PASSWORD, screen);
@@ -288,7 +289,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		entries = (String[]) rendererNames.toArray(new String[rendererNames.size()]);
 		registerListPreference(osmandSettings.RENDERER, screen, entries, entries);
 		
-		createCustomRenderingProperties();
+		createCustomRenderingProperties(false);
 		
 		tileSourcePreference = (ListPreference) screen.findPreference(osmandSettings.MAP_TILE_SOURCES.getId());
 		tileSourcePreference.setOnPreferenceChangeListener(this);
@@ -343,7 +344,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
     }
 
-	private void createCustomRenderingProperties() {
+	private void createCustomRenderingProperties(boolean update) {
 		RenderingRulesStorage renderer = getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		PreferenceCategory cat = (PreferenceCategory) findPreference("custom_vector_rendering");
 		cat.removeAll();
@@ -357,7 +358,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				lp.setSummary(p.getDescription());
 				cat.addPreference(lp);
 				
-				
 				LinkedHashMap<String, Object> vals = new LinkedHashMap<String, Object>();
 				screenPreferences.put(custom.getId(), lp);
 				listPreferences.put(custom.getId(), custom);
@@ -367,6 +367,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					vals.put(names[i], names[i]);
 				}
 				
+			}
+			if(update) {
+				updateAllSettings();
 			}
 		}
 		
@@ -554,7 +557,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				} else {
 					Toast.makeText(this, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 				}
-				createCustomRenderingProperties();
+				createCustomRenderingProperties(true);
 			}
 		} else if(preference == applicationDir){
 			warnAboutChangingStorage((String) newValue);

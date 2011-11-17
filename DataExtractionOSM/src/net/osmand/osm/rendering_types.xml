@@ -226,6 +226,7 @@
 		<subtype id="16" point="true" polygon="true" tag="leisure" value="ice_rink" minzoom="15" />
 		<subtype id="17" point="true" polygon="true" tag="leisure" value="miniature_golf" minzoom="15" />
 		<subtype id="18" point="true" polygon="true" tag="leisure" value="dance" minzoom="15" />
+		<subtype id="19" point="true" polygon="true" tag="leisure" value="bird_hide" minzoom="15" />
 	</type>
 
 

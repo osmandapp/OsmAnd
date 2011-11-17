@@ -32,6 +32,8 @@ public class MapTileDownloader {
 	private static MapTileDownloader downloader = null;
 	private static Log log = LogUtil.getLog(MapTileDownloader.class);
 	
+	public static String USER_AGENT = Version.APP_NAME_VERSION;
+	
 	
 	private ThreadPoolExecutor threadPoolExecutor;
 	private List<IMapDownloaderCallback> callbacks = new ArrayList<IMapDownloaderCallback>();
@@ -44,8 +46,13 @@ public class MapTileDownloader {
 	
 	
 	public static MapTileDownloader getInstance(){
+		return getInstance(Version.APP_NAME_VERSION);
+	}
+	
+	public static MapTileDownloader getInstance(String userAgent){
 		if(downloader == null){
 			downloader = new MapTileDownloader(TILE_DOWNLOAD_THREADS);
+			MapTileDownloader.USER_AGENT = userAgent;
 		}
 		return downloader;
 	}
@@ -179,7 +186,7 @@ public class MapTileDownloader {
 					request.fileToSave.getParentFile().mkdirs();
 					URL url = new URL(request.url);
 					URLConnection connection = url.openConnection();
-					connection.setRequestProperty("User-Agent", Version.APP_NAME_VERSION); //$NON-NLS-1$
+					connection.setRequestProperty("User-Agent", USER_AGENT); //$NON-NLS-1$
 					connection.setConnectTimeout(35000);
 					BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
 					FileOutputStream stream = null;

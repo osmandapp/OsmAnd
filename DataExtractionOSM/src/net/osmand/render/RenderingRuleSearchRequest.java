@@ -4,7 +4,6 @@ package net.osmand.render;
 public class RenderingRuleSearchRequest {
 
 	private final RenderingRulesStorage storage;
-	private final RenderingRuleSearchRequest dependsRequest;
 	RenderingRuleProperty[] props;
 	int[] values;
 	float[] fvalues;
@@ -20,11 +19,6 @@ public class RenderingRuleSearchRequest {
 	public RenderingRuleSearchRequest(RenderingRulesStorage storage) {
 		this.storage = storage;
 		this.ALL = storage.PROPS;
-		if(storage.getDependsStorage() != null){
-			dependsRequest = new RenderingRuleSearchRequest(storage.getDependsStorage());
-		} else {
-			dependsRequest = null;
-		}
 		props = storage.PROPS.getPoperties();
 		values = new int[props.length];
 		for (int i = 0; i < props.length; i++) {
@@ -91,6 +85,17 @@ public class RenderingRuleSearchRequest {
 		return searchResult;
 	}
 	
+	public boolean searchRenderingAttribute(String attribute) {
+		searchResult = false;
+		RenderingRule rule = storage.getRenderingAttributeRule(attribute);
+		if(rule == null){
+			return false;
+		}
+		searchResult = visitRule(rule, true);
+		return searchResult;
+	}
+	
+	
 	public boolean search(int state) {
 		return search(state, true);
 	}
@@ -114,12 +119,7 @@ public class RenderingRuleSearchRequest {
 			searchResult = true;
 			return true;
 		}
-
-		if(dependsRequest != null){
-			// TODO search depends ?
-			// and copy results to local array
-			// dependsRequest.search(state);
-		}
+		
 		return false;
 	}
 

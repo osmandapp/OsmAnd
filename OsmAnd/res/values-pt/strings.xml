@@ -410,7 +410,7 @@
 	<string name="add_favorite_dialog_top_text">Digite o nome do favorito</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorito</string>
 	<string name="add_favorite_dialog_favourite_added_template">O ponto \'\'{0}\'\' foi adicionado aos favoritos.</string>
-	<string name="favourites_context_menu_title">Menu contextual</string>
+	<!-- string name="favourites_context_menu_title">Menu contextual</string -->
 	<string name="favourites_context_menu_navigate">Mover-se para</string>
 	<string name="favourites_context_menu_edit">Modificar favorito</string>
 	<string name="favourites_context_menu_delete">Apagar favorito</string>

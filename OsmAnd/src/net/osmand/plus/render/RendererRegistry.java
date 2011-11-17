@@ -10,9 +10,9 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.render.RenderingRulesStorage.RenderingRulesStorageResolver;
 
 import org.apache.commons.logging.Log;
 import org.xml.sax.SAXException;
@@ -33,7 +33,7 @@ public class RendererRegistry {
 	private Map<String, RenderingRulesStorage> renderers = new LinkedHashMap<String, RenderingRulesStorage>();
 	
 	public RendererRegistry(){
-		internalRenderers.put(DEFAULT_RENDER, "new_default.render.xml");
+		internalRenderers.put(DEFAULT_RENDER, "default.render.xml");
 	}
 	
 	public RenderingRulesStorage defaultRender() {
@@ -59,7 +59,7 @@ public class RendererRegistry {
 	
 	private RenderingRulesStorage getRenderer(String name, Set<String> loadedRenderers) {
 		try {
-			return loadRenderer(name);
+			return loadRenderer(name, loadedRenderers);
 		} catch (IOException e) {
 			log.error("Error loading renderer", e); //$NON-NLS-1$
 		} catch (SAXException e) {
@@ -68,11 +68,7 @@ public class RendererRegistry {
 		return null;
 	}
 	
-	public RenderingRulesStorage loadRenderer(String name) throws IOException, SAXException {
-		return loadRenderer(name, new LinkedHashSet<String>());
-	}
-	
-	private RenderingRulesStorage loadRenderer(String name, Set<String> loadedRenderers) throws IOException, SAXException {
+	private RenderingRulesStorage loadRenderer(String name, final Set<String> loadedRenderers) throws IOException, SAXException {
 		InputStream is = null;
 		if(externalRenderers.containsKey(name)){
 			is = new FileInputStream(externalRenderers.get(name));
@@ -82,19 +78,24 @@ public class RendererRegistry {
 			throw new IllegalArgumentException("Not found " + name); //$NON-NLS-1$
 		}
 		RenderingRulesStorage main = new RenderingRulesStorage();
-		main.parseRulesFromXmlInputStream(is);
 		loadedRenderers.add(name);
-		if(!Algoritms.isEmpty(main.getDepends())){
-			if (loadedRenderers.contains(main.getDepends())) {
-				log.warn("Circular dependencies found " + name); //$NON-NLS-1$
-			} else {
-				RenderingRulesStorage dep = getRenderer(main.getDepends(), loadedRenderers);
+		main.parseRulesFromXmlInputStream(is, new RenderingRulesStorageResolver() {
+			
+			@Override
+			public RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws SAXException {
+				if(renderers.containsKey(name)){
+					return renderers.get(name);
+				}
+				if (loadedRenderers.contains(name)) {
+					log.warn("Circular dependencies found " + name); //$NON-NLS-1$
+				}
+				RenderingRulesStorage dep = getRenderer(name, loadedRenderers);
 				if (dep == null) {
 					log.warn("Dependent renderer not found : "  + name); //$NON-NLS-1$
 				}
-				main.setDependsStorage(dep);
+				return dep;
 			}
-		}
+		});
 		renderers.put(name, main);
 		return main;
 	}

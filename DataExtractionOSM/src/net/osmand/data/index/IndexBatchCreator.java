@@ -602,13 +602,15 @@ public class IndexBatchCreator {
 					poi = reader.containsPoiData();
 					reader.close();
 				} catch (Exception e) {
-					log.info("Exception", e);
+					log.info("File with not be uploaded! Exception", e);
 					if (raf != null) {
 						try {
 							raf.close();
 						} catch (IOException e1) {
 						}
 					}
+					//do not upload probably corrupted file
+					return;
 				}
 			}
 			summary = " index for ";

@@ -4,13 +4,15 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Stack;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -39,25 +41,31 @@ public class RenderingRulesStorage {
 	
 	private final static int SHIFT_TAG_VAL = 16;
 	
+	// C++
 	List<String> dictionary = new ArrayList<String>();
 	Map<String, Integer> dictionaryMap = new LinkedHashMap<String, Integer>();
 	
-	public final RenderingRuleStorageProperties PROPS = new RenderingRuleStorageProperties();
+	public RenderingRuleStorageProperties PROPS = new RenderingRuleStorageProperties();
 
 	@SuppressWarnings("unchecked")
 	protected TIntObjectHashMap<RenderingRule>[] tagValueGlobalRules = new TIntObjectHashMap[LENGTH_RULES];
 	
-	private int bgColor = 0;
-	private int bgNightColor = 0;
-	private String renderingName;
-	private String depends;
-	private RenderingRulesStorage dependsStorage;
+	protected Map<String, RenderingRule> renderingAttributes = new LinkedHashMap<String, RenderingRule>();
 	
+	private String renderingName;
+	
+	
+	public static interface RenderingRulesStorageResolver {
+		
+		RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws SAXException;
+	}
 	
 	public RenderingRulesStorage(){
 		// register empty string as 0
 		getDictionaryValue("");
 	}
+	
+	
 	
 	public int getDictionaryValue(String val) {
 		if(dictionaryMap.containsKey(val)){
@@ -79,35 +87,54 @@ public class RenderingRulesStorage {
 		return renderingName;
 	}
 	
-	public int getBgColor() {
-		return bgColor;
-	}
 	
-	public int getBgNightColor() {
-		return bgNightColor;
-	}
-	
-	public int getBgColor(boolean nightMode){
-		return nightMode ? bgNightColor : bgColor;
-	}
-	
-	public String getDepends() {
-		return depends;
-	}
-	
-	public RenderingRulesStorage getDependsStorage() {
-		return dependsStorage;
-	}
-	
-	public void setDependsStorage(RenderingRulesStorage dependsStorage) {
-		this.dependsStorage = dependsStorage;
-	}
-	
-	
-	public void parseRulesFromXmlInputStream(InputStream is) throws SAXException, IOException {
+	public void parseRulesFromXmlInputStream(InputStream is, RenderingRulesStorageResolver resolver) throws SAXException, IOException {
 		try {
 			final SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
-			saxParser.parse(is, new RenderingRulesHandler(saxParser));
+			RenderingRulesHandler handler = new RenderingRulesHandler(saxParser, resolver);
+			saxParser.parse(is, handler);
+			RenderingRulesStorage depends = handler.getDependsStorage();
+			if (depends != null) {
+				// merge results
+				// dictionary and props are already merged
+				Iterator<Entry<String, RenderingRule>> it = depends.renderingAttributes.entrySet().iterator();
+				while (it.hasNext()) {
+					Entry<String, RenderingRule> e = it.next();
+					if (renderingAttributes.containsKey(e.getKey())) {
+						RenderingRule root = renderingAttributes.get(e.getKey());
+						List<RenderingRule> list = e.getValue().getIfElseChildren();
+						for (RenderingRule every : list) {
+							root.addIfElseChildren(every);
+						}
+					} else {
+						renderingAttributes.put(e.getKey(), e.getValue());
+					}
+				}
+				
+				for(int i=0; i<LENGTH_RULES; i++) {
+					if(depends.tagValueGlobalRules[i] == null || depends.tagValueGlobalRules[i].isEmpty()){
+						continue;
+					}
+					if(tagValueGlobalRules[i] != null) {
+						int[] keys = depends.tagValueGlobalRules[i].keys();
+						for (int j = 0; j < keys.length; j++) {
+							RenderingRule rule = tagValueGlobalRules[i].get(keys[j]);
+							RenderingRule dependsRule = depends.tagValueGlobalRules[i].get(keys[j]);
+							if (dependsRule != null) {
+								if (rule != null) {
+									RenderingRule toInsert = createTagValueRootWrapperRule(keys[j], rule);
+									toInsert.addIfElseChildren(dependsRule);
+								} else {
+									tagValueGlobalRules[i].put(keys[j], dependsRule);
+								}
+							}
+						}
+					} else {
+						tagValueGlobalRules[i] = depends.tagValueGlobalRules[i];
+					}
+				}
+				
+			}
 		} catch (ParserConfigurationException e) {
 			throw new SAXException(e);
 		}
@@ -121,7 +148,6 @@ public class RenderingRulesStorage {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	private void registerGlobalRule(RenderingRule rr, int state, Map<String, String> attrsMap) throws SAXException {
 		int tag = rr.getIntPropertyValue(RenderingRuleStorageProperties.TAG);
 		if(tag == -1){
@@ -135,15 +161,25 @@ public class RenderingRulesStorage {
 		RenderingRule toInsert = rr;
 		RenderingRule previous = tagValueGlobalRules[state].get(key);
 		if(previous != null){
-			if(previous.getProperties().length != 0){
-				toInsert = new RenderingRule(Collections.EMPTY_MAP, RenderingRulesStorage.this);
-				toInsert.addIfElseChildren(previous);
-			} else {
-				toInsert = previous; 
-			}
+			// all root rules should have at least tag/value
+			toInsert = createTagValueRootWrapperRule(key, previous);
 			toInsert.addIfElseChildren(rr);
 		}
 		tagValueGlobalRules[state].put(key, toInsert);			
+	}
+	
+
+	private RenderingRule createTagValueRootWrapperRule(int tagValueKey, RenderingRule previous) {
+		if (previous.getProperties().length > 2) {
+			Map<String, String> m = new HashMap<String, String>();
+			m.put("tag", getTagString(tagValueKey));
+			m.put("value", getValueString(tagValueKey));
+			RenderingRule toInsert = new RenderingRule(m, RenderingRulesStorage.this);
+			toInsert.addIfElseChildren(previous);
+			return toInsert;
+		} else {
+			return previous;
+		}
 	}
 	
 	private class GroupRules {
@@ -178,10 +214,17 @@ public class RenderingRulesStorage {
 		Stack<Object> stack = new Stack<Object>();
 		
 		Map<String, String> attrsMap = new LinkedHashMap<String, String>();
+		private final RenderingRulesStorageResolver resolver;
+		private RenderingRulesStorage dependsStorage;
 		
 		
-		public RenderingRulesHandler(SAXParser parser){
+		public RenderingRulesHandler(SAXParser parser, RenderingRulesStorageResolver resolver){
 			this.parser = parser;
+			this.resolver = resolver;
+		}
+		
+		public RenderingRulesStorage getDependsStorage() {
+			return dependsStorage;
 		}
 		
 		@Override
@@ -244,6 +287,12 @@ public class RenderingRulesStorage {
 			} else if("polygon".equals(name)){ //$NON-NLS-1$
 				state = POLYGON_RULES;
 				stateChanged = true;
+			} else if("renderingAttribute".equals(name)){ //$NON-NLS-1$
+				String attr = attributes.getValue("name");
+				@SuppressWarnings("unchecked")
+				RenderingRule root = new RenderingRule(Collections.EMPTY_MAP, RenderingRulesStorage.this);
+				renderingAttributes.put(attr, root);
+				stack.push(root);
 			} else if("renderingProperty".equals(name)){ //$NON-NLS-1$
 				String attr = attributes.getValue("attr");
 				RenderingRuleProperty prop;
@@ -262,18 +311,19 @@ public class RenderingRulesStorage {
 				}
 				PROPS.registerRule(prop);
 			} else if("renderingStyle".equals(name)){ //$NON-NLS-1$
-				String dc = attributes.getValue("defaultColor");
-				int defaultColor = 0;
-				if(dc != null && dc.length() > 0){
-					bgColor = RenderingRuleProperty.parseColor(dc);
+				String depends = attributes.getValue("depends");
+				if(depends != null && depends.length()> 0){
+					this.dependsStorage = resolver.resolve(depends, resolver);
 				}
-				String dnc = attributes.getValue("defaultNightColor");
-				bgNightColor = defaultColor;
-				if(dnc != null && dnc.length() > 0){
-					bgNightColor = RenderingRuleProperty.parseColor(dnc);
+				if(dependsStorage != null){
+					// copy dictionary
+					dictionary = new ArrayList<String>(dependsStorage.dictionary);
+					dictionaryMap = new LinkedHashMap<String, Integer>(dependsStorage.dictionaryMap);
+					PROPS = new RenderingRuleStorageProperties(dependsStorage.PROPS);
+					
 				}
 				renderingName = attributes.getValue("name");
-				depends = attributes.getValue("depends");
+				
 			} else if("renderer".equals(name)){ //$NON-NLS-1$
 				throw new SAXException("Rendering style is deprecated and no longer supported.");
 			} else {
@@ -307,6 +357,8 @@ public class RenderingRulesStorage {
 				}
 			} else if("groupFilter".equals(name)){ //$NON-NLS-1$
 				stack.pop();
+			} else if("renderingAttribute".equals(name)){ //$NON-NLS-1$
+				stack.pop();
 			}
 		}
 		
@@ -331,6 +383,17 @@ public class RenderingRulesStorage {
 			return tagValueGlobalRules[state].get((itag << SHIFT_TAG_VAL) | ivalue);
 		}
 		return null;
+	}
+	
+	protected RenderingRule getRenderingAttributeRule(String attribute){
+		return renderingAttributes.get(attribute);
+	}
+	
+	public RenderingRule[] getRules(int state){
+		if(state >= tagValueGlobalRules.length ||  tagValueGlobalRules[state] == null) {
+			return new RenderingRule[0];
+		}
+		return tagValueGlobalRules[state].values(new RenderingRule[tagValueGlobalRules[state].size()]);
 	}
 	
 	
@@ -360,38 +423,47 @@ public class RenderingRulesStorage {
 		for(RenderingRule rc : rr.getIfElseChildren()){
 			printRenderingRule(indent, rc, out);
 		}
-		
 	}
 	
 	
 	public static void main(String[] args) throws SAXException, IOException {
 		RenderingRulesStorage storage = new RenderingRulesStorage();
-		storage.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream("new_default.render.xml"));
-//		storage.printDebug(LINE_RULES, System.out);
-		long tm = System.nanoTime();
-		int count = 100000;
-		for (int i = 0; i < count; i++) {
+		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
+			@Override
+			public RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws SAXException {
+				RenderingRulesStorage depends = new RenderingRulesStorage();
+				try {
+					depends.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream(name+".render.xml"),
+							ref);
+				} catch (IOException e) {
+					throw new SAXException(e);
+				}
+				return depends;
+			}
+		};
+		storage.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream("test_depends.render.xml"), 
+				resolver);
+//		storage.printDebug(ORDER_RULES, System.out);
+//		long tm = System.nanoTime();
+//		int count = 100000;
+//		for (int i = 0; i < count; i++) {
 			RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(storage);
 			searchRequest.setStringFilter(storage.PROPS.R_TAG, "highway");
 			searchRequest.setStringFilter(storage.PROPS.R_VALUE, "motorway");
-			// searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
-			searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 14);
-			searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 14);
-			// searchRequest.setStringFilter(storage.PROPS.R_ORDER_TYPE, "line");
-			// searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
+			 searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
+			searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 15);
+			searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 15);
+			 searchRequest.setIntFilter(storage.PROPS.R_ORDER_TYPE, 2);
+			//	searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
 			// searchRequest.setBooleanFilter(storage.PROPS.get("hmRendered"), true);
-
-			searchRequest.search(ORDER_RULES);
-			printResult(searchRequest, new PrintStream(new OutputStream() {
-				@Override
-				public void write(int b) throws IOException {
-					
-				}
-			}));
-		}
-		System.out.println((System.nanoTime()- tm)/ (1e6f * count) );
+			
+			boolean res = searchRequest.search(LINE_RULES);
+			System.out.println("Result " + res);
+			printResult(searchRequest,  System.out);
+//		}
+//		System.out.println((System.nanoTime()- tm)/ (1e6f * count) );
 	}
-
+	
 	private static void printResult(RenderingRuleSearchRequest searchRequest, PrintStream out) {
 		if(searchRequest.isFound()){
 			out.print(" Found : ");
