@@ -51,4 +51,7 @@
     <style name="WhiteText">
         <item name="android:textColor">@color/activity_text</item>
     </style>
+    <style name="NiceActivity" parent="android:Theme">
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 </resources>

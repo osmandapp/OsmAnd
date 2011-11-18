@@ -8,7 +8,8 @@
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:divider="@drawable/tab_text_separator">
+        android:divider="@drawable/tab_text_separator"
+        android:cacheColorHint="@color/activity_background">
     </ListView>
 
 </LinearLayout>

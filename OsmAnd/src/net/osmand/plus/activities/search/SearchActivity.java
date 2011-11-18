@@ -84,6 +84,7 @@ public class SearchActivity extends TabActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		setContentView(R.layout.search_main);
+		setTheme(R.style.NiceActivity);
 		
 		Button backButton = (Button) findViewById(R.id.search_back_button);
 		backButton.setOnClickListener(new View.OnClickListener() {
