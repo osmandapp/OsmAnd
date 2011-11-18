@@ -444,7 +444,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="route_head">Előre</string>
 	<string name="first_time_continue">Tovább</string>
 	<string name="first_time_download">Térkép adatok letöltése</string>
-	<string name="first_time_msg">Köszönjük, hogy az OsmAndAccess választotta. \nHogy a program minden lehetőségét kihasználhassa index állományokra lesz szüksége amiket az internetről letölthet (Beállítások -&gt; Offline adatok) vagy előállíthat magának. Ezt követően képes lesz: címre keresni, POI-ra keresni és tömegközékedési eszközre keresni.</string>
+	<string name="first_time_msg">Köszönjük, hogy az OsmAndAccessot választotta. \nHogy a program minden lehetőségét kihasználhassa index állományokra lesz szüksége amiket az internetről letölthet (Beállítások -&gt; Offline adatok) vagy előállíthat magának. Ezt követően képes lesz: címre keresni, POI-ra keresni és tömegközékedési eszközre keresni.</string>
 	<string name="search_poi_location">Kereső jelzés...</string>
 	<string name="search_near_map">Keresés az utolsó térképpozíció közelében</string>
 	<string name="search_nearby">Keresés a közelben</string>
