@@ -294,14 +294,10 @@
 				</groupFilter>
 			</groupFilter>
 		</group>
-		<group>
-			<filter appMode="car" tag="highway" value="motorway_junction" minzoom="13" textSize="14" textBold="true" textWrapWidth="20" textMinDistance="20" textOrder="12"/>
-			<filter tag="highway" value="motorway_junction" minzoom="14" textSize="14" textBold="true" textWrapWidth="20" textMinDistance="20" textOrder="12"/>
-			<groupFilter>
-				<filter nightMode="true" textColor="#ffffff"/>
-				<filter nightMode="false" textColor="#000000"/>
-			</groupFilter>
-		</group>
+		<filter tag="highway" value="motorway_junction" textColor="#00008b" textWrapWidth="16" textMinDistance="10" textHaloRadius="1" textOrder="6" >
+			<filter appMode="car" minzoom="13" textSize="16" />
+			<filter minzoom="14" textSize="14" />
+		</filter>
 
 		<!-- location names -->
 		<filter minzoom="3" textSize="14" textColor="#9d6c9d" textWrapWidth="20" tag="place" value="country" />
@@ -1086,7 +1082,7 @@
 				<filter minzoom="15" strokeWidth="4" />
 		</filter>
 
-		<filter tag="highway" value="bridleway" color="#00ff00" pathEffect="2_2" >
+		<filter tag="highway" value="bridleway" color="#339900" pathEffect="2_2" >
 			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="2" color_2="#00ff00" strokeWidth_2="2" pathEffect_2="2_2" />
 			<filter appMode="pedestrian" minzoom="14" strokeWidth="2" pathEffect="10_3" />
 			<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5" />
@@ -1179,15 +1175,15 @@
 		<filter tag="waterway" value="weir" minzoom="15" color="#aaaaaa" strokeWidth="2" />
 
 		<!-- railways -->
-		<filter tag="railway" value="rail" color="#aaaaaa" >
-			<filter layer="-1" minzoom="9" maxzoom="13" color="#aaaaaa" strokeWidth="2" pathEffect="5_2" />
-			<filter layer="-1" minzoom="14" color="#999999" strokeWidth="3" color_2="#ffffff" strokeWidth_2="3" pathEffect_2="4_4" />
-			<filter layer="1" minzoom="14" color="#000000" strokeWidth="5" color_2="#ffffff" strokeWidth_2="4" color_3="#999999" strokeWidth_3="1" pathEffect_3="12_8_1_0" tag="railway" value="rail" />
+		<filter tag="railway" value="rail" color="#999999" >
+			<filter layer="-1" minzoom="9" maxzoom="13" strokeWidth="2" pathEffect="5_2" />
+			<filter layer="-1" minzoom="14" strokeWidth="3" color_2="#ffffff" strokeWidth_2="3" pathEffect_2="4_4" />
+			<filter layer="1" minzoom="14" color="#000000" strokeWidth="5" color_2="#ffffff" strokeWidth_2="4" color_3="#999999" strokeWidth_3="1" pathEffect_3="12_8_1_0" />
 			<filter minzoom="7" maxzoom="7" strokeWidth="1" />
 			<filter minzoom="8" maxzoom="8" strokeWidth="1.5" />
 			<filter minzoom="9" maxzoom="12" strokeWidth="2" />
-			<filter minzoom="13" maxzoom="13" color="#999999" strokeWidth="3" color_2="#ffffff" strokeWidth_2="1" pathEffect_2="8_12" />
-			<filter minzoom="14" color="#999999" strokeWidth="3" color_2="#ffffff" strokeWidth_2="1" pathEffect_2="0_11_8_1" />
+			<filter minzoom="13" maxzoom="13" strokeWidth="3" color_2="#ffffff" strokeWidth_2="1" pathEffect_2="8_12" />
+			<filter minzoom="14" strokeWidth="3" color_2="#ffffff" strokeWidth_2="1" pathEffect_2="0_11_8_1" />
 		</filter>
 
 		<filter tag="railway" value="tram" color="#444444" >
