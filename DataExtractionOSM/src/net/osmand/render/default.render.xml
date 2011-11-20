@@ -295,8 +295,8 @@
 			</groupFilter>
 		</group>
 		<group>
-			<filter appMode="car" minzoom="13" textSize="14" textBold="true" textWrapWidth="12" textMinDistance="20" tag="highway" value="motorway_junction" textOrder="12"/>
-			<filter minzoom="14" textSize="14" textBold="true" textWrapWidth="12" textMinDistance="20" tag="highway" value="motorway_junction" textOrder="12"/>
+			<filter appMode="car" tag="highway" value="motorway_junction" minzoom="13" textSize="14" textBold="true" textWrapWidth="20" textMinDistance="20" textOrder="12"/>
+			<filter tag="highway" value="motorway_junction" minzoom="14" textSize="14" textBold="true" textWrapWidth="20" textMinDistance="20" textOrder="12"/>
 			<groupFilter>
 				<filter nightMode="true" textColor="#ffffff"/>
 				<filter nightMode="false" textColor="#000000"/>
