@@ -17,7 +17,7 @@
 	<!-- <renderingProperty attr="shadowRenderingMode" name="Shadow rendering" description="Default renderer: Change the way of displaying road edges."
 		type="string" possibleValues="no shadow,one step,blur shadow,solid shadow"/>
 		 -->		
-		
+
 	<!-- 0 - no shadow, 1 - one step, 2 - blur shadow, 3 - solid shadow -->	
 	<renderingAttribute name="shadowRendering">
 			<!-- next line corrects for shadowColor appearing very dark with solid shadow in day view -->
@@ -26,7 +26,7 @@
 		<filter minzoom="9" maxzoom="13" attrIntValue="1" shadowColor="#464646" />
 		<filter attrIntValue="0" />
 	</renderingAttribute>
-	
+
 	<renderingAttribute name="defaultColor">
 		<filter noPolygons="true" attrColorValue="#00ffffff" />
 		<filter nightMode="true" attrColorValue="#003333" />
@@ -96,7 +96,7 @@
 			<filter tag="highway" value="primary" order="55" shadowLevel="1"/>
 			<filter tag="highway" value="secondary" order="54" shadowLevel="1"/>
 			<filter tag="highway" value="tertiary" order="53" shadowLevel="1"/>
-			
+
 			<group>
 				<filter tag="highway" value="residential" order="52" />
 				<filter tag="highway" value="service" order="52" />
@@ -124,15 +124,17 @@
 				</groupFilter>
 			</group>
 
-			<filter appMode="pedestrian" tag="highway" value="pedestrian" order="60" />
-			<filter tag="highway" value="pedestrian" order="40" />
+			<!-- byway is deprecated tag, describes UK-only road. Proper tag should be highway=track or highway=path -->
+			<filter appMode="pedestrian" tag="highway" value="byway" order="59" />
+			<filter appMode="bicycle" tag="highway" value="byway" order="59" />
+			<filter tag="highway" value="byway" order="40" />
 
 			<filter appMode="pedestrian" tag="highway" value="cycleway" order="45" />
-			<filter appMode="bicycle" tag="highway" value="cycleway" order="59" />
+			<filter appMode="bicycle" tag="highway" value="cycleway" order="58" />
 			<filter tag="highway" value="cycleway" order="39" />
 
-			<filter appMode="pedestrian" tag="highway" value="byway" order="62" />
-			<filter tag="highway" value="byway" order="38" />
+			<filter appMode="pedestrian" tag="highway" value="pedestrian" order="60" />
+			<filter tag="highway" value="pedestrian" order="38" />
 
 			<filter appMode="pedestrian" tag="highway" value="footway" order="65" />
 			<filter tag="highway" value="footway" order="37" />
@@ -142,7 +144,7 @@
 
 			<filter appMode="pedestrian" tag="highway" value="bridleway" order="59" />
 			<filter tag="highway" value="bridleway" order="35" />
-			
+
 			<filter tag="waterway" value="" order="18" />
 
 			<filter tag="contour" value="" order="15" />
@@ -275,8 +277,8 @@
 		<group>
 			<filter tag="highway" value="track" textOrder="9"/>
 			<filter tag="highway" value="path" textOrder="9"/>
+			<filter tag="highway" value="byway" textOrder="9"/>
 			<filter tag="highway" value="cycleway" textOrder="14"/>
-			<filter tag="highway" value="byway" textOrder="15"/>
 			<filter tag="highway" value="footway" textOrder="15"/>
 			<filter tag="highway" value="steps" textOrder="15"/>
 			<filter tag="highway" value="bridleway" textOrder="15"/>
@@ -300,7 +302,7 @@
 				<filter nightMode="false" textColor="#000000"/>
 			</groupFilter>
 		</group>
-		
+
 		<!-- location names -->
 		<filter minzoom="3" textSize="14" textColor="#9d6c9d" textWrapWidth="20" tag="place" value="country" />
 		<filter minzoom="4" textSize="14" textColor="#9d6c9d" textWrapWidth="20" tag="place" value="state" />
@@ -335,7 +337,7 @@
 				<filter nightMode="false" textColor="#654321"/>
 			</groupFilter>
 		</group>
-		
+
 		<!-- Water -->
 		<filter minzoom="6" textSize="12" textColor="#6699cc" textWrapWidth="20" tag="natural" value="water" textOrder="10"/>
 		<filter minzoom="6" textSize="12" textColor="#6699cc" textWrapWidth="20" tag="natural" value="lake" textOrder="10"/>
@@ -807,11 +809,11 @@
 
 		<!-- built-up areas, night color 66004B -->
 		<group>
-			<filter minzoom="10" hmRendered="true" color="#dfd1d6" tag="landuse" value="industrial" />
+			<filter hmRendered="true" minzoom="10" color="#dfd1d6" tag="landuse" value="industrial" />
 			<filter minzoom="11" color="#dfd1d6" tag="landuse" value="industrial"/>
 			<filter minzoom="12" color="#dfd1d6" tag="landuse" value="railway" />
 			<filter minzoom="12" color="#9d9d6c" tag="landuse" value="landfill" />
-			<filter minzoom="10" hmRendered="true" color="#efc8c8" tag="landuse" value="commercial" />
+			<filter hmRendered="true" minzoom="10" color="#efc8c8" tag="landuse" value="commercial" />
 			<filter minzoom="12" color="#efc8c8" tag="landuse" value="commercial" />
 			<filter minzoom="12" color="#9d9d6c" tag="landuse" value="construction" />
 			<filter minzoom="10" color="#CDCDCD" tag="landuse" value="residential" />
@@ -878,13 +880,13 @@
 
 	<line>
 		<group>
-			<filter tag="highway" hmRendered="true" value="motorway" maxzoom="13" color="#809bff" />
+			<filter hmRendered="true" tag="highway" value="motorway" maxzoom="13" color="#809bff" />
 				<filter tag="highway" value="motorway" maxzoom="13" color="#a58dff" />
-			<filter tag="highway" hmRendered="true" value="motorway_link" maxzoom="13" color="#809bff" />
+			<filter hmRendered="true" tag="highway" value="motorway_link" maxzoom="13" color="#809bff" />
 				<filter tag="highway" value="motorway_link" maxzoom="13" color="#a58dff" />
-			<filter tag="highway" hmRendered="true" value="trunk" maxzoom="13" color="#df1346" />
+			<filter hmRendered="true" tag="highway" value="trunk" maxzoom="13" color="#df1346" />
 				<filter tag="highway" value="trunk" maxzoom="13" color="#ffaf80" />
-			<filter tag="highway" hmRendered="true" value="trunk_link" maxzoom="13" color="#df1346" />
+			<filter hmRendered="true" tag="highway" value="trunk_link" maxzoom="13" color="#df1346" />
 				<filter tag="highway" value="trunk_link" maxzoom="13" color="#ffaf80" />
 			<groupFilter cap="ROUND">
 				<filter minzoom="5" maxzoom="9" strokeWidth="5" />
@@ -920,13 +922,13 @@
 		</group>
 
 		<group>
-			<filter tag="highway" hmRendered="true" value="motorway" color="#809bff" color_2="#809bff" />
+			<filter hmRendered="true" tag="highway" value="motorway" color="#809bff" color_2="#809bff" />
 			<filter tag="highway" value="motorway" color="#a58dff" color_2="#a58dff" />
-			<filter tag="highway" hmRendered="true" value="motorway_link" color="#809bff" color_2="#809bff" />
+			<filter hmRendered="true" tag="highway" value="motorway_link" color="#809bff" color_2="#809bff" />
 			<filter tag="highway" value="motorway_link" color="#a58dff" color_2="#a58dff" />
-			<filter tag="highway" hmRendered="true" value="trunk" color="#df1346" color_2="#df1346" />
+			<filter hmRendered="true" tag="highway" value="trunk" color="#df1346" color_2="#df1346" />
 			<filter tag="highway" value="trunk" color="#ffaf80" color_2="#ffaf80" />
-			<filter tag="highway" hmRendered="true" value="trunk_link" color="#df1346" color_2="#df1346" />
+			<filter hmRendered="true" tag="highway" value="trunk_link" color="#df1346" color_2="#df1346" />
 			<filter tag="highway" value="trunk_link" color="#ffaf80" color_2="#ffaf80" />
 			<filter tag="highway" value="primary" color="#eb989a" color_2="#eb989a" />
 			<filter tag="highway" value="primary_link" color="#eb989a" color_2="#eb989a" />
@@ -1039,75 +1041,76 @@
 				</filter>
 			</groupFilter>
 		</group>
-		
-		<filter tag="highway" value="cycleway">
-			<filter appMode="bicycle" minzoom="14" color="#0000ff" strokeWidth="2" pathEffect="10_3" />
-			<filter appMode="pedestrian" minzoom="14" color="#0000ff" strokeWidth="2" pathEffect="10_3" />
-			<filter layer="1" minzoom="14" maxzoom="14" color="#0000ff" strokeWidth="1" pathEffect="2_2" />
-				<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="2" color_2="#0000ff" strokeWidth_2="2" pathEffect_2="2_2" />	
-			<filter hmRendered="true" minzoom="12" maxzoom="12" color="#0000ff" strokeWidth="0.5" pathEffect="2_2" />
-			<filter minzoom="13" color="#0000ff" strokeWidth="1" pathEffect="2_2" />
-		</filter>
-		
-		<filter tag="highway" value="byway">
-			<filter layer="1" minzoom="14" maxzoom="14" color="#ffcc00" strokeWidth="2" pathEffect="4_3" />
-				<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="4" color_2="#ffcc00" strokeWidth_2="2" pathEffect_2="4_3" />
-			<filter appMode="pedestrian" minzoom="14" color="#ffcc00" strokeWidth="2" pathEffect="10_3" />
-			<filter hmRendered="true" minzoom="11" color="#ffcc00" strokeWidth="1" pathEffect="4_3" />
-			<filter minzoom="12" color="#ffcc00" strokeWidth="1" pathEffect="4_3" />
+
+		<filter tag="highway" value="track" color="#996600" pathEffect="4_3" >
+			<filter appMode="pedestrian" minzoom="14" strokeWidth="2" pathEffect="10_3" />
+			<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5" />
+				<filter minzoom="13" strokeWidth="1" />
 		</filter>
 
-		<filter pathEffect="6_3" tag="highway" value="path" color="#000000">
+		<filter tag="highway" value="path" color="#000000" pathEffect="6_3">
 			<filter appMode="pedestrian" minzoom="14" color="#000000" strokeWidth="2" pathEffect="10_3" />
 			<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5" />
 				<filter minzoom="13" strokeWidth="1"/> 
 			<groupFilter nightMode="true" color="#787878"/>
 		</filter>
 
-		<filter appMode="pedestrian" tag="highway" value="track" minzoom="14" color="#996600" strokeWidth="2" pathEffect="10_3" />
-		<filter hmRendered="true" minzoom="12" maxzoom="12" color="#996600" strokeWidth="0.5" pathEffect="4_3" tag="highway" value="track" />
-			<filter minzoom="13" color="#996600" strokeWidth="1" pathEffect="4_3" tag="highway" value="track" />
+		<!-- byway is deprecated tag, describes UK-only road. Proper tag should be highway=track or highway=path -->
+		<filter tag="highway" value="byway" color="#996600" pathEffect="4_3" >
+			<filter appMode="bicycle" minzoom="14" strokeWidth="2" pathEffect="10_3" />
+			<filter appMode="pedestrian" minzoom="14" strokeWidth="2" pathEffect="10_3" />
+				<filter minzoom="12" strokeWidth="1" />
+		</filter>
 
-		<filter tag="highway" value="footway">
+		<filter tag="highway" value="cycleway" color="#0000ff" pathEffect="2_2" >
+			<filter layer="1" minzoom="14" maxzoom="14" strokeWidth="1" />
+				<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="2" color_2="#0000ff" strokeWidth_2="2" pathEffect_2="2_2" />	
+			<filter appMode="bicycle" minzoom="14" strokeWidth="2" pathEffect="10_3" />
+			<filter appMode="pedestrian" minzoom="14" strokeWidth="2" pathEffect="10_3" />
+			<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5" />
+				<filter minzoom="13" strokeWidth="1" />
+		</filter>
+
+		<filter tag="highway" value="footway" color="#fa8073" pathEffect="2_2" >
 			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="4" color_2="#fa8073" strokeWidth_2="2" pathEffect_2="2_2" />
-			<filter appMode="pedestrian" minzoom="14" color="#fa8073" strokeWidth="2" pathEffect="10_3" />
-			<filter hmRendered="true" minzoom="12" maxzoom="12" color="#fa8073" strokeWidth="0.5" pathEffect="2_2" />
-				<filter hmRendered="true" minzoom="13" maxzoom="14" color="#fa8073" strokeWidth="1" pathEffect="2_2" />
-				<filter minzoom="15" color="#fa8073" strokeWidth="1" pathEffect="2_2" />
+			<filter appMode="pedestrian" minzoom="14" strokeWidth="2" pathEffect="10_3" />
+			<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5" />
+				<filter hmRendered="true" minzoom="13" maxzoom="14" strokeWidth="1" />
+				<filter minzoom="15" strokeWidth="1" />
 		</filter>
-		
-		<filter tag="highway" value="steps">
-			<filter minzoom="15" layer="1" color="#88ffffff" strokeWidth="7" color_2="#fa8073" strokeWidth_2="5" pathEffect_2="1_2"/>
-			<filter appMode="pedestrian" minzoom="14" color="#fa8073" strokeWidth="4" pathEffect="1_2" />
-			<filter hmRendered="true" minzoom="14" color="#fa8073" strokeWidth="4" pathEffect="1_2"/>
-			<filter minzoom="15" color="#fa8073" strokeWidth="4" pathEffect="1_2"/>
+
+		<filter tag="highway" value="steps" color="#fa8073" pathEffect="1_2" >
+			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="7" color_2="#fa8073" strokeWidth_2="5" pathEffect_2="1_2"/>
+			<filter appMode="pedestrian" minzoom="14" strokeWidth="4" />
+			<filter hmRendered="true" minzoom="14" strokeWidth="4" />
+				<filter minzoom="15" strokeWidth="4" />
 		</filter>
-		
-		<filter tag="highway" value="bridleway">
+
+		<filter tag="highway" value="bridleway" color="#00ff00" pathEffect="2_2" >
 			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="2" color_2="#00ff00" strokeWidth_2="2" pathEffect_2="2_2" />
-			<filter appMode="pedestrian" minzoom="14" color="#00ff00" strokeWidth="2" pathEffect="10_3" />
-			<filter hmRendered="true" minzoom="12" maxzoom="12" color="#00ff00" strokeWidth="0.5" pathEffect="2_2" />
-				<filter minzoom="13" color="#00ff00" strokeWidth="1" pathEffect="2_2" />
+			<filter appMode="pedestrian" minzoom="14" strokeWidth="2" pathEffect="10_3" />
+			<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5" />
+				<filter minzoom="13" strokeWidth="1" />
 		</filter>
-		
-		<filter minzoom="14" color="#000000" strokeWidth="2" tag="highway" value="services" />
 
-		<filter minzoom="14" color="#000000" strokeWidth="2" tag="highway" value="ford" />
-		
-		<filter minzoom="14" color="#ff4900" strokeWidth="1" tag="contour" value="elevation" />
+		<filter tag="highway" value="services" minzoom="14" color="#000000" strokeWidth="2" />
 
-		<filter minzoom="15" maxzoom="15" color="#99cccc" strokeWidth="6" color_2="#ffffff" strokeWidth_2="5" pathEffect_2="8_6" tag="highway" value="construction" />
-			<filter minzoom="16" color="#99cccc" strokeWidth="8" color_2="#ffffff" strokeWidth_2="7" pathEffect_2="8_6" tag="highway" value="construction" />
+		<filter tag="highway" value="ford" minzoom="14" color="#000000" strokeWidth="2" />
 
-		<filter minzoom="15" maxzoom="15" color="#99cccc" strokeWidth="6" color_2="#ffffff" strokeWidth_2="5" pathEffect_2="8_6" tag="highway" value="proposed" />
-			<filter minzoom="16" color="#99cccc" strokeWidth="8" color_2="#ffffff" strokeWidth_2="7" pathEffect_2="8_6" tag="highway" value="proposed" />
+		<filter tag="highway" value="construction" minzoom="14" maxzoom="15" color="#99cccc" strokeWidth="6" color_2="#ffffff" strokeWidth_2="5" pathEffect_2="8_6" />
+			<filter tag="highway" value="construction" minzoom="16" color="#99cccc" strokeWidth="8" color_2="#ffffff" strokeWidth_2="7" pathEffect_2="8_6" />
+
+		<filter tag="highway" value="proposed" minzoom="14" maxzoom="15" color="#99cccc" strokeWidth="6" color_2="#ffffff" strokeWidth_2="5" pathEffect_2="8_6" />
+			<filter tag="highway" value="proposed" minzoom="16" color="#99cccc" strokeWidth="8" color_2="#ffffff" strokeWidth_2="7" pathEffect_2="8_6" />
+
+		<filter tag="contour" value="elevation" minzoom="14" color="#ff4900" strokeWidth="1" />
 
 		<!-- barriers -->
 		<filter minzoom="16" color="#000000" strokeWidth="1" tag="highway" value="gate" />
 		<filter minzoom="16" color="#aed1a0" strokeWidth="3" tag="barrier" value="hedge" />
 		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="fence" />
 		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="wall" />
-		<filter minzoom="16" color="#aed1a0" strokeWidth="3" tag="barrier" value="ditch" />
+		<filter minzoom="16" color="#b5d0d0" strokeWidth="3" tag="barrier" value="ditch" />
 		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="retaining_wall" />
 		<filter minzoom="14" maxzoom="14" color="#888888" strokeWidth="4" tag="barrier" value="city_wall" />
 			<filter minzoom="15" maxzoom="15" color="#888888" strokeWidth="6" tag="barrier" value="city_wall" />
@@ -1134,11 +1137,11 @@
 
 		<!-- waterways -->
 		<group>
-			<filter minzoom="12" strokeWidth="2" tag="waterway" value="stream" >
+			<filter tag="waterway" value="stream" minzoom="12" strokeWidth="2" >
 				<filter layer="-1" strokeWidth="3" strokeWidth_2="1" pathEffect_2="4_2"/>
 			</filter>
-			<filter minzoom="13" strokeWidth="2" tag="waterway" value="dam" />
-			
+			<filter tag="waterway" value="dam" minzoom="13" strokeWidth="2" />
+
 			<group>
 				<filter tag="waterway" value="river" />
 				<filter tag="waterway" value="canal" />
@@ -1173,10 +1176,10 @@
 			</groupFilter>
 		</group>
 
-		<filter minzoom="15" color="#aaaaaa" strokeWidth="2" tag="waterway" value="weir" />
+		<filter tag="waterway" value="weir" minzoom="15" color="#aaaaaa" strokeWidth="2" />
 
 		<!-- railways -->
-		<filter color="#aaaaaa" tag="railway" value="rail">
+		<filter tag="railway" value="rail" color="#aaaaaa" >
 			<filter layer="-1" minzoom="9" maxzoom="13" color="#aaaaaa" strokeWidth="2" pathEffect="5_2" />
 			<filter layer="-1" minzoom="14" color="#999999" strokeWidth="3" color_2="#ffffff" strokeWidth_2="3" pathEffect_2="4_4" />
 			<filter layer="1" minzoom="14" color="#000000" strokeWidth="5" color_2="#ffffff" strokeWidth_2="4" color_3="#999999" strokeWidth_3="1" pathEffect_3="12_8_1_0" tag="railway" value="rail" />
@@ -1187,18 +1190,18 @@
 			<filter minzoom="14" color="#999999" strokeWidth="3" color_2="#ffffff" strokeWidth_2="1" pathEffect_2="0_11_8_1" />
 		</filter>
 
-		<filter color="#444444" tag="railway" value="tram">
+		<filter tag="railway" value="tram" color="#444444" >
 			<filter layer="-1" minzoom="13" maxzoom="14" strokeWidth="1" pathEffect="5_3" />
 			<filter layer="-1" minzoom="15" strokeWidth="2" pathEffect="5_3" />
 			<filter minzoom="13" maxzoom="14" strokeWidth="1" />
 			<filter minzoom="15" strokeWidth="2" />
 		</filter>
 
-		<filter layer="-1" minzoom="13" color="#999999" strokeWidth="2" pathEffect="5_3" tag="railway" value="subway" />
-		<filter minzoom="13" color="#999999" strokeWidth="2" tag="railway" value="subway" />
-		
-		<filter layer="-1" minzoom="13" color="#666666" strokeWidth="2" pathEffect="5_3" tag="railway" value="light_rail" />
-		<filter minzoom="13" color="#666666" strokeWidth="2" tag="railway" value="light_rail" />
+		<filter layer="-1" tag="railway" value="subway" minzoom="13" color="#999999" strokeWidth="2" pathEffect="5_3" />
+			<filter tag="railway" value="subway" minzoom="13" color="#999999" strokeWidth="2" />
+
+		<filter layer="-1" tag="railway" value="light_rail" minzoom="13" color="#666666" strokeWidth="2" pathEffect="5_3" />
+			<filter tag="railway" value="light_rail" minzoom="13" color="#666666" strokeWidth="2" />
 
 		<group>
 			<filter tag="railway" value="abandoned" minzoom="13"/>
@@ -1209,20 +1212,20 @@
 			</groupFilter>
 		</group>
 
-		<filter minzoom="13" color="#999999" strokeWidth="3" color_2="#ffffff" strokeWidth_2="1" pathEffect_2="0_1_8_1" tag="railway" value="preserved" />
+		<filter tag="railway" value="preserved" minzoom="13" color="#999999" strokeWidth="3" color_2="#ffffff" strokeWidth_2="1" pathEffect_2="0_1_8_1" />
 
-		<filter layer="-1" minzoom="15" color="#666666" strokeWidth="5" pathEffect="5_3" color_2="#cccccc" strokeWidth_2="3" tag="railway" value="narrow_gauge" />
-		<filter minzoom="15" color="#666666" strokeWidth="2" tag="railway" value="narrow_gauge" />
+		<filter tag="railway" value="narrow_gauge" layer="-1" minzoom="15" color="#666666" strokeWidth="5" pathEffect="5_3" color_2="#cccccc" strokeWidth_2="3" />
+			<filter tag="railway" value="narrow_gauge" minzoom="15" color="#666666" strokeWidth="2" />
 
-		<filter layer="1" minzoom="13" color="#000000" strokeWidth="4.5" color_2="#888888" strokeWidth_2="2" pathEffect_2="4_2" tag="railway" value="construction" />
-		<filter minzoom="13" color="#888888" strokeWidth="2" pathEffect="4_2" tag="railway" value="construction" />
+		<filter layer="1" tag="railway" value="construction" minzoom="13" color="#000000" strokeWidth="4.5" color_2="#888888" strokeWidth_2="2" pathEffect_2="4_2" />
+			<filter tag="railway" value="construction" minzoom="13" color="#888888" strokeWidth="2" pathEffect="4_2" />
 
-		<filter minzoom="15" color="#777777" strokeWidth="3" pathEffect="2_3" tag="railway" value="monorail" />
+		<filter tag="railway" value="monorail" minzoom="15" color="#777777" strokeWidth="3" pathEffect="2_3" />
 
-		<filter layer="-1" minzoom="15" color="#666666" strokeWidth="5" pathEffect="5_3" color_2="#cccccc" strokeWidth_2="3" tag="railway" value="funicular" />
-		<filter minzoom="15" color="#666666" strokeWidth="2" tag="railway" value="funicular" />
+		<filter layer="-1" tag="railway" value="funicular" minzoom="15" color="#666666" strokeWidth="5" pathEffect="5_3" color_2="#cccccc" strokeWidth_2="3" />
+			<filter tag="railway" value="funicular" minzoom="15" color="#666666" strokeWidth="2" />
 
-		<filter minzoom="15" color="#888888" strokeWidth="3" tag="railway" value="platform" />
+		<filter tag="railway" value="platform" minzoom="15" color="#888888" strokeWidth="3" />
 
 		<!-- aeroways -->
 		<filter tag="aeroway" value="runway" color="#bbbbcc">
@@ -1245,16 +1248,16 @@
 			<filter minzoom="15" color="#bbbbcc" strokeWidth="6" />
 		</filter>
 
-		<filter minzoom="12" color="#bababa" strokeWidth="2" tag="aerialway" value="cable_car" />
-		<filter minzoom="12" color="#bababa" strokeWidth="2" tag="aerialway" value="gondola" />
-		<filter minzoom="12" color="#bababa" strokeWidth="2" tag="aerialway" value="chair_lift" />
-		<filter minzoom="12" color="#bababa" strokeWidth="2" tag="aerialway" value="mixed_lift" />
-		<filter minzoom="12" color="#bababa" strokeWidth="2" tag="aerialway" value="drag_lift" />
+		<filter tag="aerialway" value="cable_car" minzoom="12" color="#bababa" strokeWidth="2" />
+		<filter tag="aerialway" value="gondola" minzoom="12" color="#bababa" strokeWidth="2" />
+		<filter tag="aerialway" value="chair_lift" minzoom="12" color="#bababa" strokeWidth="2" />
+		<filter tag="aerialway" value="mixed_lift" minzoom="12" color="#bababa" strokeWidth="2" />
+		<filter tag="aerialway" value="drag_lift" minzoom="12" color="#bababa" strokeWidth="2" />
 
 		<!-- man made -->
-		<filter minzoom="14" maxzoom="14" color="#bababa" strokeWidth="1" tag="power" value="line" />
-			<filter minzoom="15" color="#bababa" strokeWidth="2" tag="power" value="line" />
-		<filter minzoom="14" color="#bababa" strokeWidth="1" tag="power" value="minor_line" />
+		<filter tag="power" value="line" minzoom="14" maxzoom="14" color="#bababa" strokeWidth="1" />
+			<filter tag="power" value="line" minzoom="15" color="#bababa" strokeWidth="2" />
+		<filter tag="power" value="minor_line" minzoom="14" color="#bababa" strokeWidth="1" />
 
 		<group>
 			<filter tag="man_made" value="groyne" />
@@ -1266,14 +1269,14 @@
 			</groupFilter>
 		</group>
 
-		<filter minzoom="12" maxzoom="13" color="#f2efe9" strokeWidth="1" tag="man_made" value="pier" />
-			<filter minzoom="14" maxzoom="15" color="#f2efe9" strokeWidth="3" tag="man_made" value="pier" />
-			<filter minzoom="16" color="#f2efe9" strokeWidth="6" tag="man_made" value="pier" />
+		<filter tag="man_made" value="pier" minzoom="12" maxzoom="13" color="#f2efe9" strokeWidth="1" />
+			<filter tag="man_made" value="pier" minzoom="14" maxzoom="15" color="#f2efe9" strokeWidth="3" />
+			<filter tag="man_made" value="pier" minzoom="16" color="#f2efe9" strokeWidth="6" />
 
-		<filter minzoom="13" color="#888888" strokeWidth="1" tag="leisure" value="track" />
+		<filter tag="leisure" value="track" minzoom="13" color="#888888" strokeWidth="1" />
 
-		<filter minzoom="13" maxzoom="15" color="#0000ff" strokeWidth="1" pathEffect="6_2" tag="leisure" value="marina" />
-			<filter minzoom="16" color="#0000ff" strokeWidth="2" pathEffect="6_2" tag="leisure" value="marina" />
+		<filter tag="leisure" value="marina" minzoom="13" maxzoom="15" color="#0000ff" strokeWidth="1" pathEffect="6_2" />
+			<filter tag="leisure" value="marina" minzoom="16" color="#0000ff" strokeWidth="2" pathEffect="6_2" />
 
 		<!-- admin levels (boundaries) -->
 		<group>
@@ -1289,22 +1292,22 @@
 			</groupFilter>
 		</group>
 
-		<filter color="#800080" pathEffect="4_3" tag="admin_level" value="4">
+		<filter tag="admin_level" value="4" color="#800080" pathEffect="4_3" >
 			<filter minzoom="4" maxzoom="6" strokeWidth="0.6" />
 			<filter minzoom="7" maxzoom="9" strokeWidth="2" />
 			<filter minzoom="11" strokeWidth="3" />
 		</filter>
 
-		<filter minzoom="11" color="#800080" strokeWidth="2" pathEffect="6_3_2_3_2_3" tag="admin_level" value="5" />
-		<filter minzoom="11" color="#800080" strokeWidth="2" pathEffect="6_3_2_3" tag="admin_level" value="6" />
-		<filter minzoom="12" color="#800080" strokeWidth="2" pathEffect="5_2" tag="admin_level" value="7" />
-		<filter minzoom="12" color="#800080" strokeWidth="2" pathEffect="5_2" tag="admin_level" value="8" />
-		<filter minzoom="13" maxzoom="16" color="#800080" strokeWidth="1" pathEffect="3_2" tag="admin_level" value="9" />
-			<filter minzoom="17" color="#800080" strokeWidth="2" pathEffect="3_2" tag="admin_level" value="9" />
-		<filter minzoom="13" maxzoom="16" color="#800080" strokeWidth="1" pathEffect="3_2" tag="admin_level" value="10" />
-			<filter minzoom="17" color="#800080" strokeWidth="2" pathEffect="3_2" tag="admin_level" value="10" />
-		<filter minzoom="7" maxzoom="9" color="#a009dd09" strokeWidth="1.5" pathEffect="4_2" tag="boundary" value="national_park" />
-			<filter minzoom="10" color="#a009dd09" strokeWidth="3" pathEffect="6_2" tag="boundary" value="national_park" />
+		<filter tag="admin_level" value="5" minzoom="11" color="#800080" strokeWidth="2" pathEffect="6_3_2_3_2_3" />
+		<filter tag="admin_level" value="6" minzoom="11" color="#800080" strokeWidth="2" pathEffect="6_3_2_3" />
+		<filter tag="admin_level" value="7" minzoom="12" color="#800080" strokeWidth="2" pathEffect="5_2" />
+		<filter tag="admin_level" value="8" minzoom="12" color="#800080" strokeWidth="2" pathEffect="5_2" />
+		<filter tag="admin_level" value="9" minzoom="13" maxzoom="16" color="#800080" strokeWidth="1" pathEffect="3_2" />
+			<filter tag="admin_level" value="9" minzoom="17" color="#800080" strokeWidth="2" pathEffect="3_2" />
+		<filter tag="admin_level" value="10" minzoom="13" maxzoom="16" color="#800080" strokeWidth="1" pathEffect="3_2" />
+			<filter tag="admin_level" value="10" minzoom="17" color="#800080" strokeWidth="2" pathEffect="3_2" />
+		<filter tag="boundary" value="national_park" minzoom="7" maxzoom="9" color="#a009dd09" strokeWidth="1.5" pathEffect="4_2" />
+			<filter tag="boundary" value="national_park" minzoom="10" color="#a009dd09" strokeWidth="3" pathEffect="6_2" />
 	</line>
-	
+
 </renderingStyle>
