@@ -39,7 +39,6 @@ import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.render.NativeOsmandLibrary.NativeSearchResult;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
-import net.osmand.plus.render.OsmandRenderer.ShadowRenderingMode;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
@@ -49,7 +48,6 @@ import org.apache.commons.logging.Log;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.RectF;
 import android.graphics.Bitmap.Config;
 import android.os.Handler;
@@ -512,10 +510,17 @@ public class MapRenderRepositories {
 			}
 
 			now = System.currentTimeMillis();
-
-//			Bitmap bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.RGB_565);
-			Bitmap bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.ARGB_8888);
-			bmp.eraseColor(Color.TRANSPARENT);
+			Bitmap bmp;
+			boolean transparent = false;
+			RenderingRuleProperty rr = storage.PROPS.get("noPolygons");
+			if (rr != null) {
+				transparent = renderingReq.getIntPropertyValue(rr) > 0;
+			}
+			if(transparent) {
+				bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.ARGB_8888);
+			} else {
+				bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.RGB_565);
+			}
 
 			// 1. generate image step by step
 			this.prevBmp = this.bmp;

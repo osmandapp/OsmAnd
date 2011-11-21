@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-	<string name="choose_auto_follow_route">Nastavenia autom. nasledovania</string>
-	<string name="choose_auto_follow_route_descr">Výber časového intervalu pre nasledovanie pozície na mape</string>
+	<string name="choose_auto_follow_route">Automatické nasledovanie</string>
+	<string name="choose_auto_follow_route_descr">Čas pokiaľ sa mapové zobrazenie zosynchronizuje s pozíciou</string>
 	<string name="auto_follow_route_never">Nikdy</string>
-	<string name="auto_follow_route_navigation">Autom. nasledovanie pri navigácii</string>
+	<string name="auto_follow_route_navigation">Autom. nasledovanie iba pri navigácii</string>
 	<string name="auto_follow_route_navigation_descr">Povoliť autom. nasledovanie pozície iba v režime navigácie.</string>
 	<string name="auto_follow_location_enabled">Automatické nasledovanie je povolené.</string>
 
@@ -162,9 +162,9 @@
 	\n\t\'Podľa smeru pohybu\' - Mapa sa bude otáčať podľa toho kam smerujete.
 	\n\t\'Podľa kompasu\' - Mapa sa bude otáčať podľa kompasu a Vášho otočenia.
 	\nPre rýchle prepnutie medzi otáčaním podľa kompasu a Vami zvoleným v nastaveniach, môžete ťuknúť na strelku kompasu počas zobrazenia mapy.</string>
-	<string name="switch_to_raster_map_to_see">Aktuálna pozícia nie je pokrytá Vašimi stiahnutými vektorovými mapami. Môžete prepnúť zdroj mapy cez menu (Zobrazenie -> Zdroj mapy... ). Je potrebné stiahnuť dodatočné vektorové mapy.</string>
-	<string name="switch_to_vector_map_to_see">Môžete prepnúť na stiahnuté vektorové mapy cez menu (Zobrazenie -> Zdroj mapy... -> Vektorové OSM mapy) na zobrazenie mapy.</string>
-	<string name="binary_map_download_success">Úspech. Môžete prepnúť na stiahnuté vektorové mapy v menu  Zobrazenie -> Zdroj mapy... -> Vektorové OSM mapy.</string>
+	<string name="switch_to_raster_map_to_see">Nie je dostupná žiadna offline vektorová mapa pre túto oblasť.\n\t\n\tMôžete ju stiahnuť v \'Nastavenia\' -> \'Údaje pre offline použitie\', alebo prepnúť na online mapy cez \'Nastavenia\' -> \'Mapy\'.</string>
+	<string name="switch_to_vector_map_to_see">Je dostupná offline vektorová mapa pre túto oblasť. \n\t\n\tNa jej použitie aktivujte \'Ponuka\' -> \'Zobrazenie\' -> \'Zdroj mapy...\' -> \'Vektorové OSM mapy\'.</string>
+	<string name="binary_map_download_success">Sťahovanie úspešné.\n\t\n\tPre jej použitie aktivujte \'Nastavenia\' -> \'Mapy\' -> \'Vektorové mapy\'.</string>
 	<string name="choose_audio_stream">Výstup hlasových pokynov</string>
 	<string name="choose_audio_stream_descr">Výber kanálu pre prehrávanie hlasových pokynov (závisí od systémovej konfigurácie)</string>
 	<string name="voice_stream_voice_call">Telefónny hovor</string>
