@@ -188,6 +188,7 @@ public class MapActivityActions implements DialogProvider {
     	Builder builder = new AlertDialog.Builder(mapActivity);
 		builder.setTitle(R.string.add_waypoint_dialog_title);
 		final EditText editText = new EditText(mapActivity);
+		editText.setId(R.id.TextView);
 		builder.setView(editText);
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
@@ -716,12 +717,16 @@ public class MapActivityActions implements DialogProvider {
 	public void onPrepareDialog(int id, Dialog dialog) {
 		Bundle args = dialogBundle;
 		switch (id) {
-			case DIALOG_ADD_FAVORITE:
-				prepareAddFavouriteDialog(dialog,args);
-				break;
-			case DIALOG_ABOUT_ROUTE:
-				prepareAboutRouteDialog(dialog, args);
-				break;
+		case DIALOG_ADD_FAVORITE:
+			prepareAddFavouriteDialog(dialog, args);
+			break;
+		case DIALOG_ADD_WAYPOINT:
+			EditText v = (EditText) dialog.getWindow().findViewById(R.id.TextView);
+			v.setText("");
+			break;
+		case DIALOG_ABOUT_ROUTE:
+			prepareAboutRouteDialog(dialog, args);
+			break;
 		}
 	}
 
