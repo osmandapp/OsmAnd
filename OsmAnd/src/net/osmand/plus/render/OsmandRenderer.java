@@ -197,7 +197,8 @@ public class OsmandRenderer {
 	/**
 	 * @return if map could be replaced
 	 */
-	public void generateNewBitmapNative(RenderingContext rc, NativeSearchResult searchResultHandler, Bitmap bmp, boolean useEnglishNames,
+	public void generateNewBitmapNative(RenderingContext rc, NativeOsmandLibrary library, 
+			NativeSearchResult searchResultHandler, Bitmap bmp, boolean useEnglishNames,
 			RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList, int defaultColor) {
 		long now = System.currentTimeMillis();
 		if (rc.width > 0 && rc.height > 0 && searchResultHandler != null) {
@@ -211,7 +212,7 @@ public class OsmandRenderer {
 					final Handler h = new Handler(Looper.getMainLooper());
 					notifyListenersWithDelay(rc, notifyList, h);
 				}
-				String res = NativeOsmandLibrary.getLibrary().generateRendering(rc, searchResultHandler, bmp, useEnglishNames, render, defaultColor);
+				String res = library.generateRendering(rc, searchResultHandler, bmp, useEnglishNames, render, defaultColor);
 				rc.ended = true;
 				notifyListeners(notifyList);
 				long time = System.currentTimeMillis() - now;

@@ -659,6 +659,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	
 	public void loadNativeLibrary(){
 		if (!NativeOsmandLibrary.isLoaded()) {
+			final RenderingRulesStorage storage = getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
 			new AsyncTask<Void, Void, Void>() {
 				@Override
 				protected void onPreExecute() {
@@ -668,14 +669,14 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
 				@Override
 				protected Void doInBackground(Void... params) {
-					NativeOsmandLibrary.getLibrary();
+					NativeOsmandLibrary.getLibrary(storage);
 					return null;
 				}
 
 				@Override
 				protected void onPostExecute(Void result) {
 					progressDlg.dismiss();
-					if (NativeOsmandLibrary.isNativeSupported()) {
+					if (!NativeOsmandLibrary.isNativeSupported(storage)) {
 						Toast.makeText(SettingsActivity.this, R.string.native_library_not_supported, Toast.LENGTH_LONG).show();
 					}
 				};

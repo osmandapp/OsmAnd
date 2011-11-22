@@ -3,6 +3,7 @@ package net.osmand.plus.render;
 
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRulesStorage;
 import android.graphics.Bitmap;
 
 public class NativeOsmandLibrary {
@@ -10,13 +11,18 @@ public class NativeOsmandLibrary {
 	private static NativeOsmandLibrary library;
 	private static boolean isNativeSupported = true;
 
-	public static NativeOsmandLibrary getLibrary() {
-		if(library == null && isNativeSupported) {
-			try {
-				System.loadLibrary("osmand");
-				library = new NativeOsmandLibrary();
-			} catch (Throwable e) {
-				isNativeSupported = false;
+	public static NativeOsmandLibrary getLibrary(RenderingRulesStorage storage) {
+		if (!isLoaded()) {
+			synchronized (NativeOsmandLibrary.class) {
+				if (!isLoaded()) {
+					try {
+						System.loadLibrary("osmand");
+						library = new NativeOsmandLibrary();
+					} catch (Throwable e) {
+						isNativeSupported = false;
+					}
+					NativeOsmandLibrary.initRenderingRulesStorage(storage);
+				}
 			}
 		}
 		return library;
@@ -26,8 +32,10 @@ public class NativeOsmandLibrary {
 		return !isNativeSupported || library != null;  
 	}
 	
-	public static boolean isNativeSupported() {
-		getLibrary();
+	public static boolean isNativeSupported(RenderingRulesStorage storage) {
+		if(storage != null) {
+			getLibrary(storage);
+		}
 		return isNativeSupported;
 	}
 
@@ -90,6 +98,8 @@ public class NativeOsmandLibrary {
 	private static native void deleteSearchResult(int searchResultHandle);
 
 	private static native boolean initBinaryMapFile(String filePath);
+	
+	private static native boolean initRenderingRulesStorage(RenderingRulesStorage storage);
 
 	private static native String generateRendering(RenderingContext rc, int searchResultHandler, Bitmap bmp, boolean useEnglishNames,
 			RenderingRuleSearchRequest render, int defaultColor);

@@ -232,8 +232,8 @@ public class MapRenderRepositories {
 	}
 	
 	
-	private boolean loadVectorDataNative(RectF dataBox, final int zoom, final RenderingRuleSearchRequest renderingReq) {
-		NativeOsmandLibrary library = NativeOsmandLibrary.getLibrary();
+	private boolean loadVectorDataNative(RectF dataBox, final int zoom, final RenderingRuleSearchRequest renderingReq, 
+			NativeOsmandLibrary library) {
 		int leftX = MapUtils.get31TileNumberX(dataBox.left);
 		int rightX = MapUtils.get31TileNumberX(dataBox.right);
 		int bottomY = MapUtils.get31TileNumberY(dataBox.bottom);
@@ -428,6 +428,7 @@ public class MapRenderRepositories {
 			OsmandApplication app = ((OsmandApplication) context.getApplicationContext());
 			Boolean renderDay = app.getDaynightHelper().getDayNightRenderer();
 			boolean nightMode = renderDay != null && !renderDay.booleanValue();
+			
 			// boolean moreDetail = prefs.SHOW_MORE_MAP_DETAIL.get();
 			RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
 			RenderingRuleSearchRequest renderingReq = new RenderingRuleSearchRequest(storage);
@@ -450,6 +451,7 @@ public class MapRenderRepositories {
 				}
 			}
 			renderingReq.saveState();
+			NativeOsmandLibrary nativeLib = prefs.NATIVE_RENDERING.get() ? NativeOsmandLibrary.getLibrary(storage) : null;
 
 			// prevent editing
 			requestedBox = new RotatedTileBox(tileRect);
@@ -459,7 +461,7 @@ public class MapRenderRepositories {
 			long now = System.currentTimeMillis();
 
 			if (cObjectsBox.left > dataBox.left || cObjectsBox.top > dataBox.top || cObjectsBox.right < dataBox.right
-					|| cObjectsBox.bottom < dataBox.bottom || prefs.NATIVE_RENDERING.get() == (cNativeObjects == null)) {
+					|| cObjectsBox.bottom < dataBox.bottom || (nativeLib != null) == (cNativeObjects == null)) {
 				// increase data box in order for rotate
 				if ((dataBox.right - dataBox.left) > (dataBox.top - dataBox.bottom)) {
 					double wi = (dataBox.right - dataBox.left) * .2;
@@ -472,9 +474,9 @@ public class MapRenderRepositories {
 				}
 				validateLatLonBox(dataBox);
 				boolean loaded;
-				if(prefs.NATIVE_RENDERING.get()) {
+				if(nativeLib != null) {
 					cObjects = new LinkedList<BinaryMapDataObject>();
-					loaded = loadVectorDataNative(dataBox, requestedBox.getZoom(), renderingReq);
+					loaded = loadVectorDataNative(dataBox, requestedBox.getZoom(), renderingReq, nativeLib);
 				} else {
 					cNativeObjects = null;
 					loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingReq, nightMode);
@@ -530,8 +532,8 @@ public class MapRenderRepositories {
 			this.bmpLocation = tileRect;
 			
 			
-			if(app.getSettings().NATIVE_RENDERING.get() && NativeOsmandLibrary.isNativeSupported()) {
-				renderer.generateNewBitmapNative(currentRenderingContext, cNativeObjects, bmp, prefs.USE_ENGLISH_NAMES.get(), renderingReq,
+			if(nativeLib != null) {
+				renderer.generateNewBitmapNative(currentRenderingContext, nativeLib, cNativeObjects, bmp, prefs.USE_ENGLISH_NAMES.get(), renderingReq,
 						notifyList, fillColor);
 			} else {
 				renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, prefs.USE_ENGLISH_NAMES.get(), renderingReq,

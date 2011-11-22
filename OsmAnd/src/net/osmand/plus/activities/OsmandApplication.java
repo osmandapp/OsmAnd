@@ -28,6 +28,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.voice.CommandPlayerFactory;
+import net.osmand.render.RenderingRulesStorage;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -304,7 +305,8 @@ public class OsmandApplication extends Application {
 						try {
 							if (osmandSettings.NATIVE_RENDERING.get()) {
 								startDialog.startTask(getString(R.string.init_native_library), -1);
-								boolean initialized = NativeOsmandLibrary.getLibrary() != null;
+								RenderingRulesStorage storage = rendererRegistry.getCurrentSelectedRenderer();
+								boolean initialized = NativeOsmandLibrary.getLibrary(storage) != null;
 								if (!initialized) {
 									LOG.info("Native library could not loaded!");
 								}
@@ -336,7 +338,6 @@ public class OsmandApplication extends Application {
 											if (toDismiss.getOwnerActivity() != null) {
 												toDismiss.getOwnerActivity().dismissDialog(PROGRESS_DIALOG);
 											}
-
 										}
 									});
 									showWarnings(warnings, toDismiss.getContext());

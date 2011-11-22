@@ -276,11 +276,24 @@ void RenderingRuleSearchRequest::initObject(jobject rrs) {
 
 }
 
+extern "C" JNIEXPORT void JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_initRenderingRulesStorage(JNIEnv* ienv,
+		jobject obj, jobject storage) {
+	setGlobalEnv(ienv);
+	if (defaultStorage == NULL || defaultStorage->javaStorage != storage) {
+		// multi thread will not work?
+		if (defaultStorage != NULL) {
+			delete defaultStorage;
+		}
+		defaultStorage = new RenderingRulesStorage(storage);
+	}
+}
+
+
 RenderingRuleSearchRequest::RenderingRuleSearchRequest(jobject rrs) :
 		renderingRuleSearch(rrs) {
 	jobject storage = globalEnv()->GetObjectField(rrs, RenderingRuleSearchRequest_storage);
 	if (defaultStorage == NULL || defaultStorage->javaStorage != storage) {
-		// multi threadn will not work?
+		// multi thread will not work?
 		if (defaultStorage != NULL) {
 			delete defaultStorage;
 		}
