@@ -211,7 +211,7 @@ public class OsmandRenderer {
 					final Handler h = new Handler(Looper.getMainLooper());
 					notifyListenersWithDelay(rc, notifyList, h);
 				}
-				String res = NativeOsmandLibrary.generateRendering(rc, searchResultHandler, bmp, useEnglishNames, render, defaultColor);
+				String res = NativeOsmandLibrary.getLibrary().generateRendering(rc, searchResultHandler, bmp, useEnglishNames, render, defaultColor);
 				rc.ended = true;
 				notifyListeners(notifyList);
 				long time = System.currentTimeMillis() - now;

@@ -7,14 +7,31 @@ import android.graphics.Bitmap;
 
 public class NativeOsmandLibrary {
 
-	static {
-		System.loadLibrary("osmand");
+	private static NativeOsmandLibrary library;
+	private static boolean isNativeSupported = true;
+
+	public static NativeOsmandLibrary getLibrary() {
+		if(library == null && isNativeSupported) {
+			try {
+				System.loadLibrary("osmand");
+				library = new NativeOsmandLibrary();
+			} catch (Throwable e) {
+				isNativeSupported = false;
+			}
+		}
+		return library;
+	}
+	
+	public static boolean isLoaded(){
+		return !isNativeSupported || library != null;  
+	}
+	
+	public static boolean isNativeSupported() {
+		getLibrary();
+		return isNativeSupported;
 	}
 
-	public static void preloadLibrary() {
-	}
-
-	public static String generateRendering(RenderingContext rc, NativeSearchResult searchResultHandler, Bitmap bmp,
+	public String generateRendering(RenderingContext rc, NativeSearchResult searchResultHandler, Bitmap bmp,
 			boolean useEnglishNames, RenderingRuleSearchRequest render, int defaultColor) {
 		if (searchResultHandler == null) {
 			return "Error searchresult = null";
@@ -26,7 +43,7 @@ public class NativeOsmandLibrary {
 	 * @param searchResultHandle
 	 *            - must be null if there is no need to append to previous results returns native handle to results
 	 */
-	public static NativeSearchResult searchObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom, String mapName,
+	public NativeSearchResult searchObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom, String mapName,
 			RenderingRuleSearchRequest request, boolean skipDuplicates, NativeSearchResult searchResultHandler,
 			Object objectWithInterruptedField) {
 		if (searchResultHandler == null) {
@@ -43,11 +60,15 @@ public class NativeOsmandLibrary {
 
 	}
 
-	public static void deleteSearchResult(NativeSearchResult searchResultHandler) {
+	public void deleteSearchResult(NativeSearchResult searchResultHandler) {
 		if (searchResultHandler.nativeHandler != 0) {
 			deleteSearchResult(searchResultHandler.nativeHandler);
 			searchResultHandler.nativeHandler = 0;
 		}
+	}
+	
+	public boolean initMapFile(String filePath) {
+		return initBinaryMapFile(filePath);
 	}
 
 	public static class NativeSearchResult {
@@ -68,7 +89,7 @@ public class NativeOsmandLibrary {
 
 	private static native void deleteSearchResult(int searchResultHandle);
 
-	public static native boolean initBinaryMapFile(String filePath);
+	private static native boolean initBinaryMapFile(String filePath);
 
 	private static native String generateRendering(RenderingContext rc, int searchResultHandler, Bitmap bmp, boolean useEnglishNames,
 			RenderingRuleSearchRequest render, int defaultColor);

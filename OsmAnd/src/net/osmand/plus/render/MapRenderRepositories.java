@@ -233,6 +233,7 @@ public class MapRenderRepositories {
 	
 	
 	private boolean loadVectorDataNative(RectF dataBox, final int zoom, final RenderingRuleSearchRequest renderingReq) {
+		NativeOsmandLibrary library = NativeOsmandLibrary.getLibrary();
 		int leftX = MapUtils.get31TileNumberX(dataBox.left);
 		int rightX = MapUtils.get31TileNumberX(dataBox.right);
 		int bottomY = MapUtils.get31TileNumberY(dataBox.bottom);
@@ -255,15 +256,15 @@ public class MapRenderRepositories {
 			}
 			if (!nativeFiles.contains(mapName)) {
 				nativeFiles.add(mapName);
-				if (!NativeOsmandLibrary.initBinaryMapFile(mapName)) {
+				if (!library.initMapFile(mapName)) {
 					continue;
 				}
 				log.debug("Native resource " + mapName + " initialized"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
-			resultHandler = NativeOsmandLibrary.searchObjectsForRendering(leftX, rightX, topY, bottomY, zoom, mapName,renderingReq,
+			resultHandler = library.searchObjectsForRendering(leftX, rightX, topY, bottomY, zoom, mapName, renderingReq,
 					PerformanceFlags.checkForDuplicateObjectIds, resultHandler, this);
 			if (checkWhetherInterrupted()) {
-				NativeOsmandLibrary.deleteSearchResult(resultHandler);
+				library.deleteSearchResult(resultHandler);
 				return false;
 			}
 		}
@@ -529,7 +530,7 @@ public class MapRenderRepositories {
 			this.bmpLocation = tileRect;
 			
 			
-			if(app.getSettings().NATIVE_RENDERING.get()) {
+			if(app.getSettings().NATIVE_RENDERING.get() && NativeOsmandLibrary.isNativeSupported()) {
 				renderer.generateNewBitmapNative(currentRenderingContext, cNativeObjects, bmp, prefs.USE_ENGLISH_NAMES.get(), renderingReq,
 						notifyList, fillColor);
 			} else {

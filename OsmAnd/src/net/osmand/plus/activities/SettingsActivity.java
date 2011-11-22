@@ -23,6 +23,7 @@ import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.views.SeekBarPreference;
 import net.osmand.render.RenderingRuleProperty;
@@ -41,6 +42,7 @@ import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.location.LocationManager;
 import android.media.AudioManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -515,6 +517,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					return false;
 				}
 			}
+			if (boolPref.getId().equals(osmandSettings.NATIVE_RENDERING.getId())) {
+				if(((Boolean)newValue).booleanValue()) {
+					loadNativeLibrary();
+				}
+			}
 		} else if (seekPref != null) {
 			seekPref.set((Integer) newValue);
 		} else if (editPref != null) {
@@ -648,6 +655,32 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			}
 		});
 		impl.run();
+	}
+	
+	public void loadNativeLibrary(){
+		if (!NativeOsmandLibrary.isLoaded()) {
+			new AsyncTask<Void, Void, Void>() {
+				@Override
+				protected void onPreExecute() {
+					progressDlg = ProgressDialog.show(SettingsActivity.this, getString(R.string.loading_data),
+							getString(R.string.init_native_library), true);
+				};
+
+				@Override
+				protected Void doInBackground(Void... params) {
+					NativeOsmandLibrary.getLibrary();
+					return null;
+				}
+
+				@Override
+				protected void onPostExecute(Void result) {
+					progressDlg.dismiss();
+					if (NativeOsmandLibrary.isNativeSupported()) {
+						Toast.makeText(SettingsActivity.this, R.string.native_library_not_supported, Toast.LENGTH_LONG).show();
+					}
+				};
+			}.execute();
+		}
 	}
 	
 	private OsmandApplication getMyApplication() {

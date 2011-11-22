@@ -302,10 +302,12 @@ public class OsmandApplication extends Application {
 					public void run() {
 						List<String> warnings = null;
 						try {
-							try {
-								NativeOsmandLibrary.preloadLibrary();
-							} catch (ExceptionInInitializerError e) {
-								LOG.info("Native library could not loaded!");
+							if (osmandSettings.NATIVE_RENDERING.get()) {
+								startDialog.startTask(getString(R.string.init_native_library), -1);
+								boolean initialized = NativeOsmandLibrary.getLibrary() != null;
+								if (!initialized) {
+									LOG.info("Native library could not loaded!");
+								}
 							}
 							warnings = manager.reloadIndexes(startDialog);
 							player = null;
@@ -315,26 +317,26 @@ public class OsmandApplication extends Application {
 								warnings.addAll(helper.saveDataToGpx());
 							}
 							helper.close();
-//							NativeOsmandLibrary.loadLibrary();
+							// NativeOsmandLibrary.loadLibrary();
 
 						} finally {
 							synchronized (OsmandApplication.this) {
 								final ProgressDialog toDismiss;
-								if(startDialog != null){
+								if (startDialog != null) {
 									toDismiss = startDialog.getDialog();
 								} else {
 									toDismiss = null;
 								}
 								startDialog = null;
-								
+
 								if (toDismiss != null) {
 									uiHandler.post(new Runnable() {
 										@Override
 										public void run() {
-											if(toDismiss.getOwnerActivity() != null){
+											if (toDismiss.getOwnerActivity() != null) {
 												toDismiss.getOwnerActivity().dismissDialog(PROGRESS_DIALOG);
 											}
-											
+
 										}
 									});
 									showWarnings(warnings, toDismiss.getContext());
