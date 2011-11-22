@@ -425,6 +425,10 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> USE_TRACKBALL_FOR_MOVEMENTS =
 		new BooleanPreference("use_trackball_for_movements", true, true);
 	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> SCROLL_MAP_BY_GESTURES =
+		new BooleanPreference("scroll_map_by_gestures", true, true);
+	
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_HIGH_RES_MAPS =

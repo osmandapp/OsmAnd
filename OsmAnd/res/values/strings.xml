@@ -815,4 +815,7 @@
 <string name="settings_direction_style_descr">Choose style to express relative directions while moving</string>
 <string name="auto_announce_on">Start autoannouncing</string>
 <string name="auto_announce_off">Stop autoannouncing</string>
+<string name="scroll_map_by_gestures_descr">Scroll map by gestures on the touchscreen</string>
+<string name="scroll_map_by_gestures">Natural map scrolling</string>
+<string name="i_am_here">I am here</string>
 </resources>
