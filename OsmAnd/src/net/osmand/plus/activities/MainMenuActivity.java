@@ -135,7 +135,7 @@ public class MainMenuActivity extends Activity {
 		SharedPreferences prefs = activity.getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
 		
 		// only one commit should be with contribution version flag
-		// prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
+//		 prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
 		if (prefs.contains(CONTRIBUTION_VERSION_FLAG)) {
 			SpannableString content = new SpannableString(textVersion);
 			content.setSpan(new ClickableSpan() {

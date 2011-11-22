@@ -18,10 +18,11 @@ public class NativeOsmandLibrary {
 					try {
 						System.loadLibrary("osmand");
 						library = new NativeOsmandLibrary();
+						NativeOsmandLibrary.initRenderingRulesStorage(storage);
 					} catch (Throwable e) {
 						isNativeSupported = false;
 					}
-					NativeOsmandLibrary.initRenderingRulesStorage(storage);
+					
 				}
 			}
 		}
