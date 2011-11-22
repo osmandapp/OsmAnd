@@ -17,7 +17,8 @@ public class BusyIndicator {
 	
 	public static final int STATUS_INVISIBLE = 0;
 	public static final int STATUS_GREEN = 1;
-	public static final int STATUS_BLUE = 2;
+	// public static final int STATUS_BLUE = 2;
+	public static final int STATUS_ORANGE = 2;
 	public static final int STATUS_BLACK = 3;
 	
 	public BusyIndicator(Context ctx, View bar){
@@ -48,8 +49,10 @@ public class BusyIndicator {
 			final Drawable drawable;
 			if(this.status == STATUS_BLACK){
 				drawable =  ctx.getResources().getDrawable(R.drawable.spinner_black_76);
-			} else if(this.status == STATUS_BLUE){
-				drawable =  ctx.getResources().getDrawable(R.drawable.spinner_blue_76);
+			// } else if(this.status == STATUS_BLUE){
+			// 	drawable =  ctx.getResources().getDrawable(R.drawable.spinner_blue_76);
+			} else if(this.status == STATUS_ORANGE){
+				drawable =  ctx.getResources().getDrawable(R.drawable.spinner_orange_76);
 			} else if(this.status == STATUS_GREEN){
 				drawable =  ctx.getResources().getDrawable(R.drawable.spinner_green_76);
 			} else {

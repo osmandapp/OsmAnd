@@ -62,7 +62,8 @@ public class AsyncLoadingThread extends Thread {
 		if (downloader.isSomethingBeingDownloaded()) {
 			progress = BusyIndicator.STATUS_GREEN;
 		} else if (resourceManger.getContext().getRoutingHelper().isRouteBeingCalculated()) {
-			progress = BusyIndicator.STATUS_BLUE;
+			// progress = BusyIndicator.STATUS_BLUE;
+			progress = BusyIndicator.STATUS_ORANGE;
 		} else if (!requests.isEmpty()) {
 			progress = BusyIndicator.STATUS_BLACK;
 		} else if(poiLoadRequest != null && poiLoadRequest.isRunning()) {
