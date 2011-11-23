@@ -1,8 +1,8 @@
 package net.osmand.access;
 
-import net.osmand.plus.R;
 import net.osmand.access.AccessibleContent;
 import net.osmand.access.TextMessage;
+import net.osmand.plus.R;
 
 import android.app.Activity;
 import android.content.Context;
