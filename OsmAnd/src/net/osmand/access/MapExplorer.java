@@ -25,7 +25,7 @@ import android.widget.Toast;
 public class MapExplorer implements OnGestureListener, IContextMenuProvider {
 
     private static final int HYSTERESIS = 5;
-    private static final float VICINITY = 7;
+    private static final float VICINITY_RADIUS = 15;
 
     private OsmandMapTileView mapView;
     private OnGestureListener fallback;
@@ -135,7 +135,7 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
 
     @Override
     public Object getPointObject(PointF point) {
-        if (PointF.length(point.x - mapView.getCenterPointX(), point.y - mapView.getCenterPointY()) < (VICINITY * dm.density))
+        if (PointF.length(point.x - mapView.getCenterPointX(), point.y - mapView.getCenterPointY()) < (VICINITY_RADIUS * dm.density))
             return this;
         return null;
     }
