@@ -834,7 +834,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		public DirectionDrawable(){
 			paintRouteDirection = new Paint();
 			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
-			paintRouteDirection.setColor(Color.rgb(255, 102, 0));
+			paintRouteDirection.setColor(Color.rgb(100, 0, 255));
 			paintRouteDirection.setAntiAlias(true);
 			
 			int h = 15;
@@ -855,11 +855,11 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		
 		public void setOpenedColor(int opened){
 			if(opened == 0){
-				paintRouteDirection.setColor(Color.rgb(0, 205, 0));
+				paintRouteDirection.setColor(Color.rgb(100, 0, 255));
 			} else if(opened == -1){
 				paintRouteDirection.setColor(Color.rgb(150, 150, 150));
 			} else {
-				paintRouteDirection.setColor(Color.rgb(238, 0, 0));
+				paintRouteDirection.setColor(Color.rgb(220, 100, 80));
 			}
 		}
 		

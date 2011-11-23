@@ -126,7 +126,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		paintMiniRoute = new Paint();
 		paintMiniRoute.setStyle(Style.STROKE);
 		paintMiniRoute.setStrokeWidth(35 * scaleCoefficient);
-		paintMiniRoute.setColor(Color.rgb(255, 102, 0));
+		paintMiniRoute.setColor(Color.BLUE);
 		paintMiniRoute.setStrokeJoin(Join.ROUND);
 		paintMiniRoute.setStrokeCap(Cap.ROUND);
 		paintMiniRoute.setAntiAlias(true);
