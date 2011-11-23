@@ -115,7 +115,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		
 		paintRouteDirection = new Paint();
 		paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
-		paintRouteDirection.setColor(Color.rgb(255, 102, 0));
+		paintRouteDirection.setColor(Color.rgb(100, 0, 255));
 		paintRouteDirection.setAntiAlias(true);
 		
 		fillBlack = new Paint();
