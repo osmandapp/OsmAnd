@@ -59,6 +59,7 @@ public class ContextMenuLayer implements OsmandMapLayer {
 	
 	@Override
 	public void destroyLayer() {
+		view.setContextMenuLayer(null);
 	}
 
 	@Override
@@ -89,7 +90,7 @@ public class ContextMenuLayer implements OsmandMapLayer {
 //		textView.setMaxLines(15);
 		textView.setGravity(Gravity.CENTER_HORIZONTAL);
 		textBorder = new RectF(-2, -1, textSize + 2, 0);
-		
+		view.setContextMenuLayer(this);
 	}
 
 	@Override
@@ -128,6 +129,14 @@ public class ContextMenuLayer implements OsmandMapLayer {
 			textView.setText(""); //$NON-NLS-1$
 		}
 		textView.layout(0, 0, textSize, (int) ((textView.getPaint().getTextSize()+4) * textView.getLineCount()));
+	}
+
+	public void setSelection(Object selection, IContextMenuProvider contextProvider) {
+		selectedObject = selection;
+		if (selection != null) {
+			selectedContextProvider = contextProvider;
+			latLon = contextProvider.getObjectLocation(selection);
+		}
 	}
 
 	@Override
@@ -184,12 +193,13 @@ public class ContextMenuLayer implements OsmandMapLayer {
 
 	@Override
 	public boolean onTouchEvent(PointF point) {
-		if (pressedInTextView(point)) {
+		boolean nativeMode = view.getSettings().SCROLL_MAP_BY_GESTURES.get();
+		if ((!nativeMode) || pressedInTextView(point)) {
 			if (selectedObject != null) {
 				ArrayList<String> l = new ArrayList<String>();
 				OnClickListener listener = selectedContextProvider.getActionListener(l, selectedObject);
 				activity.contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), l, listener);
-			} else {
+			} else if (nativeMode) {
 				activity.contextMenuPoint(latLon.getLatitude(), latLon.getLongitude());
 			}
 			return true;

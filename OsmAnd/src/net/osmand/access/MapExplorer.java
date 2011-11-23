@@ -1,12 +1,17 @@
 package net.osmand.access;
 
+import java.util.List;
+
 import net.osmand.access.AccessibleToast;
+import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
+import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.PointF;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -17,7 +22,7 @@ import android.widget.Toast;
 // Provide touch exploration mode for map view
 // when scrolling it by gestures is disabled.
 //
-public class MapExplorer implements OnGestureListener {
+public class MapExplorer implements OnGestureListener, IContextMenuProvider {
 
     private static final int HYSTERESIS = 5;
     private static final float VICINITY = 7;
@@ -54,23 +59,25 @@ public class MapExplorer implements OnGestureListener {
                 }
             }
         if (newSelection == null) {
-            point.x -= mapView.getCenterPointX();
-            point.y -= mapView.getCenterPointY();
-            if (point.length() < (VICINITY * dm.density))
-                newSelection = this;
+            newSelection = getPointObject(point);
+            contextProvider = this;
         }
         if (newSelection != null) {
             dribbleCount = HYSTERESIS;
             if (newSelection != selectedObject) {
-                final Context ctx = mapView.getContext();
-                final String description = (newSelection != this) ? contextProvider.getObjectDescription(newSelection) : ctx.getString(R.string.i_am_here);
-                AccessibleToast.makeText(mapView.getContext(), description, Toast.LENGTH_SHORT).show();
+                ContextMenuLayer contextMenuLayer = mapView.getContextMenuLayer();
+                AccessibleToast.makeText(mapView.getContext(), contextProvider.getObjectDescription(newSelection), Toast.LENGTH_SHORT).show();
+                if (contextMenuLayer != null)
+                    contextMenuLayer.setSelection(newSelection, contextProvider);
                 selectedObject = newSelection;
             }
         } else if (dribbleCount > 0) {
             dribbleCount--;
-        } else {
-            selectedObject = newSelection;
+        } else if (selectedObject != null) {
+            ContextMenuLayer contextMenuLayer = mapView.getContextMenuLayer();
+            if (contextMenuLayer != null)
+                contextMenuLayer.setSelection(null, null);
+            selectedObject = null;
         }
     }
 
@@ -81,6 +88,9 @@ public class MapExplorer implements OnGestureListener {
     public boolean onDown(MotionEvent e) {
         if (mapView.getSettings().SCROLL_MAP_BY_GESTURES.get())
             return fallback.onDown(e);
+        ContextMenuLayer contextMenuLayer = mapView.getContextMenuLayer();
+        if (contextMenuLayer != null)
+            contextMenuLayer.setSelection(null, null);
         selectedObject = null;
         describePointedObject(e);
         return false;
@@ -117,9 +127,32 @@ public class MapExplorer implements OnGestureListener {
 
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
-        if (mapView.getSettings().SCROLL_MAP_BY_GESTURES.get())
-            return fallback.onSingleTapUp(e);
-        return true;
+        return fallback.onSingleTapUp(e);
+    }
+
+
+    // IContextMenuProvider interface implementation.
+
+    @Override
+    public Object getPointObject(PointF point) {
+        if (PointF.length(point.x - mapView.getCenterPointX(), point.y - mapView.getCenterPointY()) < (VICINITY * dm.density))
+            return this;
+        return null;
+    }
+
+    @Override
+    public LatLon getObjectLocation(Object o) {
+        return mapView.getLatLonFromScreenPoint(mapView.getCenterPointX(), mapView.getCenterPointY());
+    }
+
+    @Override
+    public String getObjectDescription(Object o) {
+        return mapView.getContext().getString(R.string.i_am_here);
+    }
+
+    @Override
+    public DialogInterface.OnClickListener getActionListener(List<String> actionsList, Object o) {
+        return null;
     }
 
 }
