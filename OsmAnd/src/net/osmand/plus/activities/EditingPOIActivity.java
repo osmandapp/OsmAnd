@@ -19,6 +19,7 @@ import net.osmand.Base64;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.OpenstreetmapUtil;
+import net.osmand.OpenstreetmapRemoteUtil;
 import net.osmand.Version;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
@@ -85,7 +86,7 @@ public class EditingPOIActivity implements DialogProvider {
 
 	public EditingPOIActivity(MapActivity uiContext){
 		this.ctx = uiContext;
-		this.openstreetmapUtil = new OpenstreetmapUtil(uiContext);
+		this.openstreetmapUtil = new OpenstreetmapRemoteUtil(uiContext);
 	}
 	
 	public void showEditDialog(Amenity editA){
