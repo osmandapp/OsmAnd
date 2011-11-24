@@ -14,7 +14,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.data.Amenity;
 import net.osmand.osm.Entity;
@@ -52,7 +54,19 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	
 //	private final static String SITE_API = "http://api06.dev.openstreetmap.org/";
 	private final static String SITE_API = "http://api.openstreetmap.org/"; //$NON-NLS-1$
-	
+
+	public static final Map<Action, String> stringAction = new HashMap<Action, String>();
+	public static final Map<String, Action> actionString = new HashMap<String, Action>();
+	static {
+		stringAction.put(Action.CREATE, "create");
+		stringAction.put(Action.MODIFY, "modify");
+		stringAction.put(Action.DELETE, "delete");
+
+		actionString.put("create", Action.CREATE);
+		actionString.put("modify", Action.MODIFY);
+		actionString.put("delete", Action.DELETE);
+	};
+
 	private static final long NO_CHANGESET_ID = -1;
 	
 	private final MapActivity ctx;
@@ -304,16 +318,6 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			return false;
 		}
 
-		final String a;
-		if (Action.MODIFY == action) {
-			a = "modify";
-		} else if (Action.DELETE == action) {
-			a = "delete";
-		} else {
-			a = "create";
-		}
-
-
 		try {
 			StringWriter writer = new StringWriter(256);
 			XmlSerializer ser = Xml.newSerializer();
@@ -323,11 +327,11 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				ser.startTag(null, "osmChange"); //$NON-NLS-1$
 				ser.attribute(null, "version", "0.6");  //$NON-NLS-1$ //$NON-NLS-2$
 				ser.attribute(null, "generator", Version.APP_NAME); //$NON-NLS-1$
-				ser.startTag(null, a);
+				ser.startTag(null, stringAction.get(action));
 				ser.attribute(null, "version", "0.6"); //$NON-NLS-1$ //$NON-NLS-2$
 				ser.attribute(null, "generator", Version.APP_NAME); //$NON-NLS-1$
 				writeNode(n, info, ser, changeSetId, OsmandSettings.getOsmandSettings(ctx).USER_NAME.get());
-				ser.endTag(null, a);
+				ser.endTag(null, stringAction.get(action));
 				ser.endTag(null, "osmChange"); //$NON-NLS-1$
 				ser.endDocument();
 			} catch (IOException e) {
