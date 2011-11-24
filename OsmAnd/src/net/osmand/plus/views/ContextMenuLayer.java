@@ -143,7 +143,7 @@ public class ContextMenuLayer implements OsmandMapLayer {
 	public boolean onLongPressEvent(PointF point) {
 		if (!view.getSettings().SCROLL_MAP_BY_GESTURES.get()) {
 			if (selectedObject != null)
-				activity.emitNavigationHint(latLon);
+				view.showMessage(activity.getNavigationHint(latLon));
 			return true;
 		}
 		

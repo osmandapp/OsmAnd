@@ -2,7 +2,6 @@ package net.osmand.access;
 
 import java.util.List;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.views.ContextMenuLayer;
@@ -17,7 +16,6 @@ import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.view.GestureDetector.OnGestureListener;
-import android.widget.Toast;
 
 // Provide touch exploration mode for map view
 // when scrolling it by gestures is disabled.
@@ -63,17 +61,15 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
             contextProvider = this;
         }
         if (newSelection != null) {
-            dribbleCount = HYSTERESIS;
+            dribbleCount = 0;
             if (newSelection != selectedObject) {
                 ContextMenuLayer contextMenuLayer = mapView.getContextMenuLayer();
-                AccessibleToast.makeText(mapView.getContext(), contextProvider.getObjectDescription(newSelection), Toast.LENGTH_SHORT).show();
+                mapView.showMessage(contextProvider.getObjectDescription(newSelection));
                 if (contextMenuLayer != null)
                     contextMenuLayer.setSelection(newSelection, contextProvider);
                 selectedObject = newSelection;
             }
-        } else if (dribbleCount > 0) {
-            dribbleCount--;
-        } else if (selectedObject != null) {
+        } else if ((selectedObject != null) && (++dribbleCount > HYSTERESIS)) {
             ContextMenuLayer contextMenuLayer = mapView.getContextMenuLayer();
             if (contextMenuLayer != null)
                 contextMenuLayer.setSelection(null, null);
