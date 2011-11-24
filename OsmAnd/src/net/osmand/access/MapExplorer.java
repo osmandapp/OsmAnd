@@ -105,8 +105,7 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
 
     @Override
     public void onLongPress(MotionEvent e) {
-        if (mapView.getSettings().SCROLL_MAP_BY_GESTURES.get())
-            fallback.onLongPress(e);
+        fallback.onLongPress(e);
     }
 
     @Override

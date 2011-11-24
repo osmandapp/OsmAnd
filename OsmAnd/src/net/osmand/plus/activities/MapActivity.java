@@ -517,16 +517,20 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
         return super.onKeyDown(keyCode, event);
     }
 
+    public void emitNavigationHint(LatLon point) {
+        String hint = navigationInfo.getDirectionString(point);
+        if (hint == null)
+            hint = getString(R.string.no_info);
+        AccessibleToast.makeText(this, hint, Toast.LENGTH_LONG).show();
+    }
+
     private void emitNavigationHint() {
         final LatLon point = settings.getPointToNavigate();
         if (point != null) {
             if (routingHelper.isRouteCalculated()) {
                 routingHelper.getVoiceRouter().announceCurrentDirection();
             } else {
-                String hint = navigationInfo.getDirectionString(point);
-                if (hint == null)
-                    hint = getString(R.string.no_info);
-                AccessibleToast.makeText(this, hint, Toast.LENGTH_LONG).show();
+                emitNavigationHint(point);
             }
         } else {
             AccessibleToast.makeText(this, R.string.mark_final_location_first, Toast.LENGTH_LONG).show();
