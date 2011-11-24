@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import net.osmand.OpenstreetmapLocalUtil;
 import net.osmand.OpenstreetmapRemoteUtil;
 import net.osmand.OpenstreetmapUtil;
 import net.osmand.OsmAndFormatter;
@@ -69,7 +70,13 @@ public class EditingPOIActivity implements DialogProvider {
 
 	public EditingPOIActivity(MapActivity uiContext){
 		this.ctx = uiContext;
-		this.openstreetmapUtil = new OpenstreetmapRemoteUtil(uiContext);
+
+		OsmandSettings settings = OsmandSettings.getOsmandSettings(ctx);
+		if(!settings.isInternetConnectionAvailable(true)){
+			this.openstreetmapUtil = new OpenstreetmapLocalUtil(ctx);
+		} else {
+			this.openstreetmapUtil = new OpenstreetmapRemoteUtil(ctx);
+		}
 	}
 	
 	public void showEditDialog(Amenity editA){
