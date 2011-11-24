@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-
-	<string name="native_library_not_supported">Native library is not supported on that device.</string>
-	<string name="init_native_library">Initialize native library..</string>
+	<string name="native_library_not_supported">Native library is not supported on this device.</string>
+	<string name="init_native_library">Initializing native library...</string>
 	<string name="choose_auto_follow_route">Map view auto follow</string>
 	<string name="choose_auto_follow_route_descr">Time until map view returns to being synchronized with position</string>
 	<string name="auto_follow_route_never">Never</string>
