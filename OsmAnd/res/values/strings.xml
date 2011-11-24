@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="local_openstreetmap_descr_title">Asynchrone Openstreetmap POI Edition:</string>
+	<string name="local_openstreetmap_settings">Local Openstreetmap Points</string>
+	<string name="local_openstreetmap_settings_descr">Local Points Saved in DB</string>
+    
 	<string name="live_monitoring_descr">Enable sending HTTP requests to a specified web service</string>
 	<string name="live_monitoring">Enable Live Tracking</string>
 	<string name="live_monitoring_interval_descr">Specify Live Tracking interval</string>
