@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.LogUtil;
+import net.osmand.OsmAndFormatter;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapExplorer;
 import net.osmand.data.MapTileDownloader;
@@ -735,26 +736,47 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return animatedDraggingThread;
 	}
 
+	public void showMessage(final String msg) {
+		handler.post(new Runnable(){
+				@Override
+				public void run() {
+					AccessibleToast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
+				}
+		});
+	}
+
 	
 	private class MapTileViewMultiTouchZoomListener implements MultiTouchZoomListener {
 		private float initialMultiTouchZoom;
 		private PointF initialMultiTouchCenterPoint;
 		private LatLon initialMultiTouchLocation;
+		private float x1;
+		private float y1;
+		private float x2;
+		private float y2;
 		
 		@Override
 		public void onZoomEnded(float distance, float relativeToStart) {
 			float dz = (float) (Math.log(relativeToStart) / Math.log(2) * 1.5);
 			float calcZoom = initialMultiTouchZoom + dz;
 			setZoom(Math.round(calcZoom));
-			final Context ctx = getContext();
 			final int newZoom = getZoom();
 			zoomPositionChanged(newZoom);
-			handler.post(new Runnable(){
-					@Override
-					public void run() {
-						AccessibleToast.makeText(ctx, ctx.getString(R.string.zoomIs) + " " + String.valueOf(newZoom), Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
-					}
-			});
+			if (newZoom != initialMultiTouchZoom) {
+				showMessage(getContext().getString(R.string.zoomIs) + " " + String.valueOf(newZoom)); //$NON-NLS-1$
+			} else {
+				final LatLon p1 = getLatLonFromScreenPoint(x1, y1);
+				final LatLon p2 = getLatLonFromScreenPoint(x2, y2);
+				showMessage(OsmAndFormatter.getFormattedDistance((float)MapUtils.getDistance(p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude()), getContext()));
+			}
+		}
+
+		@Override
+		public void onGestureInit(float x1, float y1, float x2, float y2) {
+			this.x1 = x1;
+			this.y1 = y1;
+			this.x2 = x2;
+			this.y2 = y2;
 		}
 
 		@Override
