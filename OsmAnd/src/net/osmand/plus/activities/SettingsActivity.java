@@ -66,6 +66,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	
 	private Preference saveCurrentTrack;
 	private Preference testVoiceCommands;
+	private Preference localOpenstreetmapPoints;
 
 	private EditTextPreference applicationDir;
 	private ListPreference tileSourcePreference;
@@ -315,6 +316,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		routeServiceEnabled.setOnPreferenceChangeListener(this);
 		applicationDir = (EditTextPreference) screen.findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
 		applicationDir.setOnPreferenceChangeListener(this);
+		localOpenstreetmapPoints = (Preference) screen.findPreference(OsmandSettings.LOCAL_OPENSTREETMAP_POINTS);
+		localOpenstreetmapPoints.setOnPreferenceClickListener(this);
 		
 		
 		
@@ -748,6 +751,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			} else {
 				helper.close();
 			}
+			return true;
+		} else if(preference == localOpenstreetmapPoints){
+			startActivity(new Intent(this, LocalOpenstreetmapActivity.class));
 			return true;
 		}
 		return false;
