@@ -92,7 +92,7 @@ public class EditingPOIActivity implements DialogProvider {
 		if(!settings.isInternetConnectionAvailable(true)){
 			this.openstreetmapUtil = new OpenstreetmapLocalUtil(ctx);
 		} else {
-			this.openstreetmapUtil = new OpenstreetmapRemoteUtil(ctx);
+			this.openstreetmapUtil = new OpenstreetmapRemoteUtil(ctx, ctx.getMapView());
 		}
 	}
 	

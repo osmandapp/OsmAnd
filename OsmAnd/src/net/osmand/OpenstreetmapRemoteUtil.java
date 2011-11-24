@@ -47,7 +47,9 @@ import org.apache.http.params.HttpParams;
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlSerializer;
 
+import android.content.Context;
 import android.util.Xml;
+import android.view.View;
 import android.widget.Toast;
 
 public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
@@ -69,7 +71,8 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	private static final long NO_CHANGESET_ID = -1;
 	
-	private final MapActivity ctx;
+	private final Context ctx;
+	private final View view;
 	private EntityInfo entityInfo;
 	
 	// reuse changeset
@@ -78,8 +81,9 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	public final static Log log = LogUtil.getLog(OpenstreetmapRemoteUtil.class);
 
-	public OpenstreetmapRemoteUtil(MapActivity uiContext){
+	public OpenstreetmapRemoteUtil(Context uiContext, View view){
 		this.ctx = uiContext;
+		this.view = view;
 	}
 
 	public EntityInfo getEntityInfo() {
@@ -367,6 +371,29 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		}
 	}
 	
+	public EntityInfo loadNode(Node n) {
+		long nodeId = n.getId() >> 1;
+		try {
+			String res = sendRequest(SITE_API + "api/0.6/node/"+nodeId, "GET", null, ctx.getString(R.string.loading_poi_obj) + nodeId, false); //$NON-NLS-1$ //$NON-NLS-2$
+			if(res != null){
+				OsmBaseStorage st = new OsmBaseStorage();
+				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true); //$NON-NLS-1$
+				EntityId id = new Entity.EntityId(EntityType.NODE, nodeId);
+				Node entity = (Node) st.getRegisteredEntities().get(id);
+				entityInfo = st.getRegisteredEntityInfo().get(id);
+				return entityInfo;
+			}
+			
+		} catch (IOException e) {
+			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
+			Toast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
+		} catch (SAXException e) {
+			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
+			Toast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
+		}
+		return null;
+	}
+
 	public Node loadNode(Amenity n) {
 		if(n.getId() % 2 == 1){
 			// that's way id
@@ -399,7 +426,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	}
 	
 	private void showWarning(final String msg){
-		ctx.getMapView().post(new Runnable(){
+		view.post(new Runnable(){
 			@Override
 			public void run() {
 				Toast.makeText(ctx, msg, Toast.LENGTH_LONG).show();
