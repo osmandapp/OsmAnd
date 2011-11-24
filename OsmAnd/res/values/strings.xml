@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="local_openstreetmap_descr_title">Asynchrone Openstreetmap POI Edition:</string>
+	<string name="local_openstreetmap_items"></string>
+	<string name="local_openstreetmap_show_poi">Show POI on Map</string>
+	<string name="local_openstreetmap_upload">Upload modification to OSM</string>
+	<string name="local_openstreetmap_delete">Delete POI modification</string>
+	<string name="local_openstreetmap_descr_title">Asynchrone Openstreetmap POI Edition:</string>
 	<string name="local_openstreetmap_settings">Local Openstreetmap Points</string>
 	<string name="local_openstreetmap_settings_descr">Local Points Saved in DB</string>
     
