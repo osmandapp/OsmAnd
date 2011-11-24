@@ -70,6 +70,28 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 		return false;
 	}
 	
+	public boolean deleteOpenstreetmap(OpenstreetmapPoint p) {
+		checkOpenstreetmapPoints();
+		SQLiteDatabase db = getWritableDatabase();
+		if (db != null) {
+			db.execSQL("DELETE FROM " + OPENSTREETMAP_TABLE_NAME +
+					" WHERE " + OPENSTREETMAP_COL_ID + " = ? AND " +
+					   OPENSTREETMAP_COL_NAME + " = ? AND " +
+					   OPENSTREETMAP_COL_TYPE + " = ? AND " +
+					   OPENSTREETMAP_COL_SUBTYPE + " = ? AND " +
+					   OPENSTREETMAP_COL_LAT + " = ? AND " +
+					   OPENSTREETMAP_COL_LON + " = ? AND " +
+					   OPENSTREETMAP_COL_ACTION + " = ? AND " +
+					   OPENSTREETMAP_COL_COMMENT + " = ? AND " +
+					   OPENSTREETMAP_COL_OPENINGHOURS + " = ?",
+					   new Object[] { p.getId(), p.getName(), p.getType(), p.getSubtype(), p.getLatitude(), p.getLongitude(), OpenstreetmapRemoteUtil.stringAction.get(p.getAction()), p.getComment(), p.getOpeninghours() }); //$NON-NLS-1$ //$NON-NLS-2$
+			cachedOpenstreetmapPoints.remove(p);
+			p.setStored(false);
+			return true;
+		}
+		return false;
+	}
+	
 	private void checkOpenstreetmapPoints(){
 		SQLiteDatabase db = getWritableDatabase();
 		if (db != null) {
@@ -86,11 +108,14 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 
 					entity.putTag(query.getString(2), query.getString(3));
 					entity.putTag(OSMTagKey.NAME.getValue(), name);
-					entity.putTag(OSMTagKey.OPENING_HOURS.getValue(), query.getString(8));
+					String openingHours = query.getString(8);
+					if (openingHours != null && openingHours.length() > 0)
+						entity.putTag(OSMTagKey.OPENING_HOURS.getValue(), openingHours);
 					p.setEntity(entity);
 					p.setStored(true);
 					p.setAction(query.getString(6));
 					p.setComment(query.getString(7));
+					cachedOpenstreetmapPoints.add(p);
 				} while (query.moveToNext());
 			}
 			query.close();
