@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import net.osmand.OpenstreetmapRemoteUtil;
 import net.osmand.OpenstreetmapUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.data.Amenity;
@@ -21,8 +22,6 @@ import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-
-
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -70,7 +69,7 @@ public class EditingPOIActivity implements DialogProvider {
 
 	public EditingPOIActivity(MapActivity uiContext){
 		this.ctx = uiContext;
-		this.openstreetmapUtil = new OpenstreetmapUtil(uiContext);
+		this.openstreetmapUtil = new OpenstreetmapRemoteUtil(uiContext);
 	}
 	
 	public void showEditDialog(Amenity editA){
