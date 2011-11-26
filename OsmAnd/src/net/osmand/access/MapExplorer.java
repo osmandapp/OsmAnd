@@ -23,14 +23,12 @@ import android.view.GestureDetector.OnGestureListener;
 //
 public class MapExplorer implements OnGestureListener, IContextMenuProvider {
 
-    private static final int HYSTERESIS = 5;
     private static final float VICINITY_RADIUS = 15;
 
     private OsmandMapTileView mapView;
     private OnGestureListener fallback;
     private Object selectedObject = null;
     private IContextMenuProvider contextProvider;
-    private int dribbleCount;
     private final DisplayMetrics dm = new DisplayMetrics();
 
 
@@ -61,20 +59,13 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
             newSelection = getPointObject(point);
             contextProvider = this;
         }
-        if (newSelection != null) {
-            dribbleCount = 0;
-            if (newSelection != selectedObject) {
-                ContextMenuLayer contextMenuLayer = mapView.getContextMenuLayer();
-                mapView.showMessage(contextProvider.getObjectDescription(newSelection));
-                if (contextMenuLayer != null)
-                    contextMenuLayer.setSelection(newSelection, contextProvider);
-                selectedObject = newSelection;
-            }
-        } else if ((selectedObject != null) && (++dribbleCount > HYSTERESIS)) {
+        if (newSelection != selectedObject) {
             ContextMenuLayer contextMenuLayer = mapView.getContextMenuLayer();
+            if (newSelection != null)
+                mapView.showMessage(contextProvider.getObjectDescription(newSelection));
             if (contextMenuLayer != null)
-                contextMenuLayer.setSelection(null, null);
-            selectedObject = null;
+                contextMenuLayer.setSelection(newSelection, contextProvider);
+            selectedObject = newSelection;
         }
     }
 
