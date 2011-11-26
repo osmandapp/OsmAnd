@@ -1,5 +1,6 @@
 package net.osmand.access;
 
+import java.lang.Math;
 import java.util.List;
 
 import net.osmand.osm.LatLon;
@@ -130,7 +131,10 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
 
     @Override
     public Object getPointObject(PointF point) {
-        if (PointF.length(point.x - mapView.getCenterPointX(), point.y - mapView.getCenterPointY()) < (VICINITY_RADIUS * dm.density))
+        int radius = (int)(VICINITY_RADIUS * dm.density);
+        int dx = (int)Math.abs(point.x - mapView.getCenterPointX());
+        int dy = (int)Math.abs(point.y - mapView.getCenterPointY());
+        if ((dx < radius) && (dy < radius))
             return this;
         return null;
     }
