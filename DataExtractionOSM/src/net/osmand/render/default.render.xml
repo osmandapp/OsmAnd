@@ -21,7 +21,7 @@
 	<!-- 0 - no shadow, 1 - one step, 2 - blur shadow, 3 - solid shadow -->	
 	<renderingAttribute name="shadowRendering">
 			<!-- next line corrects for shadowColor appearing very dark with solid shadow in day view -->
-			<filter minzoom="14" nightMode="false" attrIntValue="3" shadowColor="#969696" />
+		<filter minzoom="14" nightMode="false" attrIntValue="3" shadowColor="#969696" />
 		<filter minzoom="14" attrIntValue="3" shadowColor="#464646" />
 		<filter minzoom="9" maxzoom="13" attrIntValue="1" shadowColor="#464646" />
 		<filter attrIntValue="0" />
@@ -133,8 +133,8 @@
 			<filter appMode="bicycle" tag="highway" value="cycleway" order="58" />
 			<filter tag="highway" value="cycleway" order="39" />
 
-			<filter appMode="pedestrian" tag="highway" value="pedestrian" order="60" />
-			<filter tag="highway" value="pedestrian" order="38" />
+			<filter appMode="pedestrian" tag="highway" value="pedestrian" order="60" shadowLevel="1"/>
+			<filter tag="highway" value="pedestrian" order="40" shadowLevel="1"/>
 
 			<filter appMode="pedestrian" tag="highway" value="footway" order="65" />
 			<filter tag="highway" value="footway" order="37" />
