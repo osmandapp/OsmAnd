@@ -158,8 +158,8 @@
 		<filter tag="" value="" order="11" orderType="2"/>
 
 		<group orderType="3">
-			<filter tag="building" value="" order="64" />
 			<filter tag="building" value="" layer="-1" order="2" />
+			<filter tag="building" value="" order="64" />
 
 			<filter tag="landuse" value="reservoir" order="5" />
 			<filter tag="landuse" value="water" order="5" />
