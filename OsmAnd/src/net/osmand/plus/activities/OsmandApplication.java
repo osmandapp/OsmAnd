@@ -291,67 +291,68 @@ public class OsmandApplication extends Application {
 	
 
 	public synchronized void startApplication() {
-		if(applicationInitializing){
+		if (applicationInitializing) {
 			return;
 		}
 		applicationInitializing = true;
 		startDialog = new ProgressDialogImplementation(this, null, false);
 
 		startDialog.setRunnable("Initializing app", new Runnable() { //$NON-NLS-1$
-
 					@Override
 					public void run() {
-						List<String> warnings = null;
-						try {
-							if (osmandSettings.NATIVE_RENDERING.get()) {
-								startDialog.startTask(getString(R.string.init_native_library), -1);
-								RenderingRulesStorage storage = rendererRegistry.getCurrentSelectedRenderer();
-								boolean initialized = NativeOsmandLibrary.getLibrary(storage) != null;
-								if (!initialized) {
-									LOG.info("Native library could not loaded!");
-								}
-							}
-							warnings = manager.reloadIndexes(startDialog);
-							player = null;
-							SavingTrackHelper helper = new SavingTrackHelper(OsmandApplication.this);
-							if (helper.hasDataToSave()) {
-								startDialog.startTask(getString(R.string.saving_gpx_tracks), -1);
-								warnings.addAll(helper.saveDataToGpx());
-							}
-							helper.close();
-							// NativeOsmandLibrary.loadLibrary();
-
-						} finally {
-							synchronized (OsmandApplication.this) {
-								final ProgressDialog toDismiss;
-								if (startDialog != null) {
-									toDismiss = startDialog.getDialog();
-								} else {
-									toDismiss = null;
-								}
-								startDialog = null;
-
-								if (toDismiss != null) {
-									uiHandler.post(new Runnable() {
-										@Override
-										public void run() {
-											if (toDismiss.getOwnerActivity() != null) {
-												toDismiss.getOwnerActivity().dismissDialog(PROGRESS_DIALOG);
-											}
-										}
-									});
-									showWarnings(warnings, toDismiss.getContext());
-								} else {
-									startingWarnings = warnings;
-								}
-							}
-						}
+						startApplicationBackground();
 					}
 				});
 		startDialog.run();
 
 		Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
 
+	}
+	
+	private void startApplicationBackground() {
+		List<String> warnings = null;
+		try {
+			if (osmandSettings.NATIVE_RENDERING.get()) {
+				startDialog.startTask(getString(R.string.init_native_library), -1);
+				RenderingRulesStorage storage = rendererRegistry.getCurrentSelectedRenderer();
+				boolean initialized = NativeOsmandLibrary.getLibrary(storage) != null;
+				if (!initialized) {
+					LOG.info("Native library could not loaded!");
+				}
+			}
+			warnings = manager.reloadIndexes(startDialog);
+			player = null;
+			SavingTrackHelper helper = new SavingTrackHelper(OsmandApplication.this);
+			if (helper.hasDataToSave()) {
+				startDialog.startTask(getString(R.string.saving_gpx_tracks), -1);
+				warnings.addAll(helper.saveDataToGpx());
+			}
+			helper.close();
+		} finally {
+			synchronized (OsmandApplication.this) {
+				final ProgressDialog toDismiss;
+				if (startDialog != null) {
+					toDismiss = startDialog.getDialog();
+				} else {
+					toDismiss = null;
+				}
+				startDialog = null;
+
+				if (toDismiss != null) {
+					uiHandler.post(new Runnable() {
+						@Override
+						public void run() {
+							if (toDismiss.getOwnerActivity() != null) {
+								toDismiss.getOwnerActivity().dismissDialog(PROGRESS_DIALOG);
+							}
+						}
+					});
+					showWarnings(warnings, toDismiss.getContext());
+				} else {
+					startingWarnings = warnings;
+				}
+			}
+		}
 	}
 	
 	protected void showWarnings(List<String> warnings, final Context uiContext) {

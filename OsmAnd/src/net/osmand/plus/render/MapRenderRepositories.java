@@ -172,6 +172,8 @@ public class MapRenderRepositories {
 
 	public void clearAllResources() {
 		clearCache();
+		bmp = null;
+		bmpLocation = null;
 		for (String f : new ArrayList<String>(files.keySet())) {
 			closeConnection(files.get(f), f);
 		}
@@ -607,8 +609,11 @@ public class MapRenderRepositories {
 	public synchronized void clearCache() {
 		cObjects = new ArrayList<BinaryMapDataObject>();
 		cObjectsBox = new RectF();
-		prevBmp = bmp = null;
-		requestedBox = prevBmpLocation = bmpLocation = null;
+		prevBmp = null;
+		requestedBox = prevBmpLocation = null;
+		// Do not clear main bitmap to not cause a screen refresh
+//		bmp = null;
+//		bmpLocation = null;
 	}
 
 	// / Manipulating with multipolygons

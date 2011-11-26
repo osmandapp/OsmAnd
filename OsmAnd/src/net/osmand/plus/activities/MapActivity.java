@@ -393,7 +393,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     			return dialog;
     		}
     	}
-		if(id == OsmandApplication.PROGRESS_DIALOG){
+		if (id == OsmandApplication.PROGRESS_DIALOG) {
 			return startProgressDialog;
 		}
 		return null;
@@ -533,6 +533,12 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}
         return super.onKeyDown(keyCode, event);
     }
+    
+    public void setMapLocation(double lat, double lon){
+		mapView.setLatLon(lat, lon);
+		locationChanged(lat, lon, this);
+	}
+    
     @Override
     public boolean onTrackballEvent(MotionEvent event) {
     	if(event.getAction() == MotionEvent.ACTION_MOVE && settings.USE_TRACKBALL_FOR_MOVEMENTS.get()){
@@ -963,11 +969,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				});
 			}
 		}
-	}
-	
-	public void setMapLocation(double lat, double lon){
-		mapView.setLatLon(lat, lon);
-		locationChanged(lat, lon, this);
 	}
 	
 	public OsmandMapTileView getMapView() {
