@@ -573,7 +573,7 @@ private class DownloadIndexesAsyncTask extends  AsyncTask<String, Object, String
 		protected String doInBackground(String... filesToDownload) {
 			try {
 				List<File> filesToReindex = new ArrayList<File>();
-				
+				boolean forceWifi = downloadFileHelper.isWifiConnected();
 				for (int i = 0; i < filesToDownload.length; i++) {
 					String filename = filesToDownload[i];
 					DownloadEntry entry = entriesToDownload.get(filename);
@@ -582,7 +582,7 @@ private class DownloadIndexesAsyncTask extends  AsyncTask<String, Object, String
 								+ filesToDownload.length + "]");
 						boolean result = downloadFileHelper.downloadFile(filename, 
 								entry.fileToSave, entry.fileToUnzip, entry.unzip, progress, entry.dateModified,
-								entry.parts, filesToReindex, indexOfAllFiles, this);
+								entry.parts, filesToReindex, indexOfAllFiles, this, forceWifi);
 						if (result) {
 							entriesToDownload.remove(filename);
 							publishProgress(entry);
