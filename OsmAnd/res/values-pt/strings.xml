@@ -17,8 +17,8 @@
 	<string name="amenity_type_office">Escritório</string>
 	<string name="amenity_type_other">Outro</string>
 	<string name="amenity_type_shop">Loja</string>
-	<string name="amenity_type_sport">Desporto</string>
-	<string name="amenity_type_sustenance">Restauração</string>
+	<string name="amenity_type_sport">Esporte</string>
+	<string name="amenity_type_sustenance">Alimentação</string>
 	<string name="amenity_type_tourism">Turismo</string>
 	<string name="amenity_type_transportation">Transporte</string>
 	<string name="indexing_address">Indexando endereço...</string>
@@ -33,6 +33,7 @@
 	<string name="poi_filter_car_aid">Socorro para carro</string>
 	<string name="poi_filter_closest_poi">POI mais perto</string>
 	<string name="poi_filter_custom_filter">Filtro Personalisado</string>
+	<string name="poi_filter_by_name">Procurar POI por nome</string>
 	<string name="poi_filter_food_shop">Supermercado</string>
 	<string name="poi_filter_for_tourists">Para touristas</string>
 	<string name="poi_filter_fuel">Combustível</string>
