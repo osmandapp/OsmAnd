@@ -256,6 +256,10 @@ public class MapRenderRepositories {
 			if (basemapSearch && !mapName.toLowerCase().contains(BASEMAP_NAME)) {
 				continue;
 			}
+			BinaryMapIndexReader reader = files.get(mapName);
+			if(!reader.containsMapData(leftX, topY, rightX, bottomY, zoom)) {
+				continue;
+			}
 			if (!nativeFiles.contains(mapName)) {
 				nativeFiles.add(mapName);
 				if (!library.initMapFile(mapName)) {

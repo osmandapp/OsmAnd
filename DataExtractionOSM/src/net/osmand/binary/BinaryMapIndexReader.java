@@ -227,6 +227,19 @@ public class BinaryMapIndexReader {
 		return false;
 	}
 	
+	public boolean containsMapData(int left31x, int top31y, int right31x, int bottom31y, int zoom){
+		for(MapIndex mapIndex :  mapIndexes){
+			for(MapRoot root : mapIndex.getRoots()){
+				if (root.minZoom <= zoom && root.maxZoom >= zoom) {
+					if (right31x >= root.left && left31x <= root.right && root.top <= bottom31y &&  root.bottom >= top31y) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
 	public boolean containsAddressData(){
 		return addressIndexes.size() > 0;
 	}
