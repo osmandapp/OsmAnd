@@ -98,13 +98,13 @@
 			<filter tag="highway" value="tertiary" order="53" shadowLevel="1"/>
 
 			<group>
-				<filter tag="highway" value="residential" order="52" />
-				<filter tag="highway" value="service" order="52" />
-				<filter tag="highway" value="road" order="51" />
-				<filter tag="highway" value="unclassified" order="51" />
-				<filter tag="highway" value="track" order="50" />
-				<filter tag="highway" value="path" order="48" />
-				<filter tag="highway" value="living_street" order="47" />
+				<filter tag="highway" value="road" order="52" />
+				<filter tag="highway" value="unclassified" order="52" />
+				<filter tag="highway" value="residential" order="51" />
+				<filter tag="highway" value="service" order="51" />
+				<filter tag="highway" value="living_street" order="50" />
+				<filter appMode="pedestrian" tag="highway" value="pedestrian" order="58" />
+				<filter tag="highway" value="pedestrian" order="50" />
 				<groupFilter>
 					 <filter minzoom="14" shadowLevel="1" />
 					 <filter hmRendered="true" shadowLevel="1" />
@@ -124,23 +124,26 @@
 				</groupFilter>
 			</group>
 
-			<!-- byway is deprecated tag, describes UK-only road. Proper tag should be highway=track or highway=path -->
-			<filter appMode="pedestrian" tag="highway" value="byway" order="59" />
-			<filter appMode="bicycle" tag="highway" value="byway" order="59" />
-			<filter tag="highway" value="byway" order="40" />
-
-			<filter appMode="pedestrian" tag="highway" value="cycleway" order="45" />
-			<filter appMode="bicycle" tag="highway" value="cycleway" order="58" />
+			<filter appMode="pedestrian" tag="highway" value="cycleway" order="51" />
+			<filter appMode="bicycle" tag="highway" value="cycleway" order="60" />
 			<filter tag="highway" value="cycleway" order="39" />
 
-			<filter appMode="pedestrian" tag="highway" value="pedestrian" order="60" shadowLevel="1"/>
-			<filter tag="highway" value="pedestrian" order="40" shadowLevel="1"/>
+			<!-- byway is deprecated tag, describes UK-only road. Proper tag should be highway=track or highway=path -->
+			<filter appMode="pedestrian" tag="highway" value="byway" order="60" />
+			<filter appMode="bicycle" tag="highway" value="byway" order="59" />
+			<filter tag="highway" value="byway" order="37" />
 
-			<filter appMode="pedestrian" tag="highway" value="footway" order="65" />
+			<filter appMode="pedestrian" tag="highway" value="track" order="60" />
+			<filter tag="highway" value="track" order="37" />
+
+			<filter appMode="pedestrian" tag="highway" value="path" order="60" />
+			<filter tag="highway" value="path" order="37" />
+
+			<filter appMode="pedestrian" tag="highway" value="footway" order="60" />
 			<filter tag="highway" value="footway" order="37" />
 
-			<filter appMode="pedestrian" tag="highway" value="steps" order="66" />
-			<filter tag="highway" value="steps" order="36" />
+			<filter appMode="pedestrian" tag="highway" value="steps" order="61" />
+			<filter tag="highway" value="steps" order="38" />
 
 			<filter appMode="pedestrian" tag="highway" value="bridleway" order="59" />
 			<filter tag="highway" value="bridleway" order="35" />
