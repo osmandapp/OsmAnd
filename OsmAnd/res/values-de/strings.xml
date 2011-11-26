@@ -15,11 +15,11 @@
 	<string name="pref_vector_map">Einstellungen Vektor-Karten</string>
 	<!-- string name="delete_confirmation_title">About to delete</string -->
 	<string name="delete_confirmation_msg">%1$s löschen?</string>
-	<string name="city_type_suburb">OSM-Suburb</string>
-	<string name="city_type_hamlet">OSM-Hamlet</string>
-	<string name="city_type_village">OSM-Village</string>
-	<string name="city_type_town">OSM-Town</string>
-	<string name="city_type_city">OSM-City</string>
+	<string name="city_type_suburb">Vorort</string>
+	<string name="city_type_hamlet">Dorf</string>
+	<string name="city_type_village">Gemeinde</string>
+	<string name="city_type_town">Stadt</string>
+	<string name="city_type_city">Großstadt</string>
 	<string name="layer_poi_label">POI Namen</string>
 	<string name="animate_route_off">Animation aus</string>
 	<string name="animate_route">Animation an</string>
