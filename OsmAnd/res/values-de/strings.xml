@@ -15,11 +15,11 @@
 	<string name="pref_vector_map">Einstellungen Vektor-Karten</string>
 	<!-- string name="delete_confirmation_title">About to delete</string -->
 	<string name="delete_confirmation_msg">%1$s löschen?</string>
-	<string name="city_type_suburb">OSM-Suburb</string>
-	<string name="city_type_hamlet">OSM-Hamlet</string>
-	<string name="city_type_village">OSM-Village</string>
-	<string name="city_type_town">OSM-Town</string>
-	<string name="city_type_city">OSM-City</string>
+	<string name="city_type_suburb">Vorstadt</string>
+	<string name="city_type_hamlet">Dorf</string>
+	<string name="city_type_village">Gemeinde</string>
+	<string name="city_type_town">Stadt</string>
+	<string name="city_type_city">Großstadt</string>
 	<string name="layer_poi_label">POI Namen</string>
 	<string name="animate_route_off">Animation aus</string>
 	<string name="animate_route">Animation an</string>
@@ -44,13 +44,13 @@
 	<string name="update_poi_file_not_found">Lokale Datei für POI Änderungen nicht gefunden und konnte nicht erstellt werden.</string>
 	<string name="update_poi_does_not_change_indexes">POI Änderungen in der Applikation beeinflussen die herunergeladenen Kartendateien nicht, sondern werden in einer lokalen Datei gespeichert.</string>
 
-	<string name="button_upgrade_osmandplus">Osmand+ aktualisieren</string>
+	<string name="button_upgrade_osmandplus">OsmAnd+ aktualisieren</string>
 	<string name="map_version_changed_info">Der Server enthält Karten die mit ihrer derzeitigen Anwendungsversion nicht kompatibel sind. Um sie zu laden und zu verwenden, aktualisieren Sie bitte auf die neueste Version.</string>
 	
 	<string name="local_index_mi_rename">Umbenennen</string>
 	<string name="show_gpx_route">Auf Karte anzeigen</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
-	<string name="search_select_point">Select</string>
+	<string name="search_select_point">Auswählen</string>
 	<string name="search_position_current_location_search">Suche Position...</string>
 	<string name="search_position_current_location_found">Position (gefunden)</string>
 	<string name="search_position_address">Addresse...</string>
@@ -63,7 +63,7 @@
 	<string name="select_search_position">Suche nahe :</string>
 	<string name="context_menu_item_search">Suche</string>
 	<string name="tip_recent_changes_0_6_7_t">Verbesserungen in 0.6.7 :
-\n\t- Offline-Daten Manager (Herunterladen, Löschen und Verschieben nach Backup von Offline-Daten direkt in Osmand)
+\n\t- Offline-Daten Manager (Herunterladen, Löschen und Verschieben nach Backup von Offline-Daten direkt in OsmAnd)
 \n\t- Favoriten und Favoritengruppen (Kategorisieren, Löschen, Managen von Favoriten)
 \n\t- GPX Explorer innerhalb der Applikation (Tracks und Track-Daten ansehen)
 \n\t- GPX Navigation (nützliche Optionen, Fortsetzung der Navigation nach Crash, unterstützt jetzt Kreisverkehre)
@@ -95,7 +95,7 @@
 	<string name="favorite_default_category">Andere</string>
 
 	<string name="vector_map_not_needed">Nicht verwendet</string>
-	<string name="basemap_missing">Offline Weltkarte für kleine Vergrößerungen noch nicht vorhanden. Bitte ggfls. World_basemap_x.obf herunterladen.</string>
+	<string name="basemap_missing">Die offline Weltkarte für kleine Vergrößerungen ist noch nicht vorhanden. Bitte ggfls. World_basemap_x.obf herunterladen.</string>
 	<string name="vector_data_missing">Keine Offline-Daten vorhanden (SD-Karte). Bitte ggfls. herunterladen, damit Karten offline verwendet werden können.</string>
 	<string name="local_index_gpx_info_show">\n\nLang klicken für mehr Optionen</string>
 	<string name="local_index_gpx_info_speed">\nDurchschn.geschw. : %1$s \nMax. Geschw. : %2$s</string>
@@ -114,7 +114,7 @@
 	<string name="local_index_mi_delete">Löschen...</string>
 	<string name="local_index_mi_reload">Aktualisieren</string>	
 	<string name="local_index_download">Herunterladen...</string>
-	<string name="local_index_tile_data">Kachel-Daten: %1$s \nMinimale Vergrößerung : %2$d\nMaximale Vergrößerung : %3$d\nHerunterladbar : %4$s \nHeruntegeladene Vergrößerungen : %5$s</string>
+	<string name="local_index_tile_data">Kacheldaten: %1$s \nMinimale Vergrößerung : %2$d\nMaximale Vergrößerung : %3$d\nHerunterladbar : %4$s \nHeruntegeladene Vergrößerungen : %5$s</string>
 	<string name="local_index_poi_data">POI-Daten</string>
 	<string name="local_index_address_data">Adress-Daten</string>
 	<string name="local_index_transport_data">ÖPNV-Daten</string>
@@ -124,8 +124,8 @@
 	<string name="local_indexes_cat_tts">Sprachansagen (TTS)</string>
 	<string name="local_indexes_cat_voice">Sprachansagen (Aufnahmen)</string>
 	<string name="local_indexes_cat_gpx">GPX-Daten</string>
-	<string name="local_indexes_cat_tile">Karten-Daten (Kacheln)</string>
-	<string name="local_indexes_cat_map">Karten-Daten (Vektor)</string>
+	<string name="local_indexes_cat_tile">Kartendaten (Kacheln)</string>
+	<string name="local_indexes_cat_map">Kartendaten (Vektor)</string>
 	<string name="local_indexes_cat_poi">POI-Daten</string>
 	<string name="ttsvoice">TTS Sprachansage</string>
 	<string name="search_offline_clear_search">Neue Suche</string>
@@ -145,13 +145,13 @@
 	<string name="trace_rendering">Rendering Debug Info</string>
 	<string name="trace_rendering_descr">Flag zur Prüfung der Rendering Performance (Geschwindigkeit des Offline-Bildaufbaus)</string>
 	<string name="installing_new_resources">Entpacke neue Daten...</string>
-	<string name="internet_connection_required_for_online_route">Es soll ein Online-Routing-Dienst verwendet werden, aber es besteht keine Internet-Verbindung. Es besteht die Möglichkeit, das (noch experimentelle) OsmAnd Offline-Routing zu verwenden, siehe \'Einstellungen\' -> \'Navigation\'.</string>
+	<string name="internet_connection_required_for_online_route">Es soll ein Online-Routingdienst verwendet werden, aber es besteht keine Internetverbindung. Es besteht die Möglichkeit, das (noch experimentelle) OsmAnd Offline-Routing zu verwenden, siehe \'Einstellungen\' -> \'Navigation\'.</string>
 	<string name="tts_language_not_supported_title">Sprache nicht unterstützt</string>
 	<string name="tts_language_not_supported">Die gewählte Sprache wird von der installierten Android TTS-Engine nicht unterstützt. Soll im Market nach einer anderen TTS-Engine gesucht werden? Andernfalls wird die voreingestellte Standard-Sprache verwendet.</string>
 	<string name="tts_missing_language_data_title">Fehlendes Sprachpaket</string>
 	<string name="tts_missing_language_data">Es ist kein Sprachpaket für die gewählte Sprache installiert. Soll aus dem Market eines installiert werden?</string>
 
-	<string name="gpx_option_reverse_route">Entgegen der GPX Richtung</string>
+	<string name="gpx_option_reverse_route">GPX-Route umkehren</string>
 	<string name="gpx_option_destination_point">Derzeitigen Zielpunkt verwenden</string>
 	<string name="gpx_option_from_start_point">Gesamten Track durchlaufen</string>
 
@@ -172,11 +172,11 @@
 	<string name="voice_stream_notification">wie Benachrichtigungen</string>
 	<string name="voice_stream_music">wie Medien/Musik</string>
 
-	<string name="warning_tile_layer_not_downloadable">Karten-Schicht %1$s wurde nicht heruntergeladen, bitte nochmal laden.</string>
+	<string name="warning_tile_layer_not_downloadable">Kartenebene %1$s wurde nicht heruntergeladen, bitte nochmal laden.</string>
 	<string name="overlay_transparency_descr">Transparenz der Overlay-Karte ändern</string>
 	<string name="overlay_transparency">Overlay Transparenz</string>
-	<string name="map_transparency_descr">Transparenz der Haupt-Karte ändern</string>
-	<string name="map_transparency">Karten-Transparenz</string>
+	<string name="map_transparency_descr">Transparenz der Hauptkarte ändern</string>
+	<string name="map_transparency">Kartentransparenz</string>
 	<string name="modify_transparency">Transparenz ändern</string>
 	<string name="layer_underlay">Underlay-Karte...</string>
 	<string name="map_underlay">Underlay-Karte</string>
@@ -211,7 +211,7 @@
 	\n\t\'Sonnenaufgang/-untergang\' - automatischer Modus (Voreinstellung)
 	\n\t\'Tag\' - permanente Tagesansicht
 	\n\t\'Nacht\' - permanente Nachtansicht 
-	\n\t\'Umgebungslicht-Sensor\' - automatischer Modus gemäß Umgebungslicht des Gerätes (nur wenn Sensor vorhanden)</string>	
+	\n\t\'Umgebungslicht-Sensor\' - automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden)</string>	
 	<string name="tip_location_sharing">Position mitteilen</string>
 	<string name="tip_location_sharing_t">\tWollen Sie eine interessante Position Freunden oder Familie mitteilen?
 	\n\tMit OsmAnd kann man jeden Aufenthaltsort leicht mit Anderen teilen.
@@ -224,15 +224,15 @@
 	\n\t Favoriten sind leicht zugänglich über \'Hauptmenü\' -> \'Favoriten\'. Ein Kontextmenü für jeden Favoriten bietet dort \'Navigieren zu\', \'Bearbeiten\' oder \'Löschen\'.
 	\n\tUm alle Favoriten in der Karte anzuzeigen, wählt man \'Favoriten\' unter \'Karten-Kontextmenü\' -> \'Darstellung\'.</string>
 
-	<string name="tip_osm_improve">OSM-Bearbeitung</string>
-	<string name="tip_osm_improve_t">\tOsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM), und kann (neben Kartenanzeige und Navigation) auch zur Verbesserung der OSM-Daten verwendet werden. Man kann mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden.
+	<string name="tip_osm_improve">OSM Bearbeitung</string>
+	<string name="tip_osm_improve_t">\tOsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM), und kann (neben Kartenanzeige und Navigation) auch zur Verbesserung der OSM-Daten verwendet werden. Man kann mit nur wenigen Klicks neue POIs und OSM Fehlerberichte einsenden.
 \n\tDazu muss man zunächst unter \'Hauptmenü\' -> \'Einstellungen\' -> \'OSM\' seine OSM Login-Daten hinterlegen.
 \n\tUm einen neuen POI zu erzeugen, verwendet man die Option \'POI erstellen\' im Karten-Kontextmenu. Danach werden die Informationen zum POI eingetragen und über die Menüführung zu OSM hochgeladen.
 \n\tGefundene Fehler auf den Karten kann man direkt berichten, und die Openstreetmap Community kann diese schneller beheben.
-\n\tOSM-Fehlerberichte erstellt man mit dem Menü \'OSM-Fehlerbericht einsenden\' im \'Karten-Kontextmenü\'.
-\n\tFür alle OSM-Aktivitäten wird eine Internet-Verbindung benötigt.</string>
+\n\tOSM Fehlerberichte erstellt man mit dem Menü \'OSM Fehlerbericht einsenden\' im \'Karten-Kontextmenü\'.
+\n\tFür alle OSM Aktivitäten wird eine Internetverbindung benötigt.</string>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> Klassifizierung mit Bildern</string>
-    <string name="error_doing_search">Fehler in der Offline-Suche aufgetreten</string>
+    <string name="error_doing_search">Fehler in der Offlinesuche aufgetreten</string>
     <string name="search_offline_geo_error">Konnte geointent nicht verarbeiten: {0}</string>
 	<string name="search_osm_offline">Adressuche mit Offline-Daten</string>
 
@@ -335,11 +335,11 @@
 	<string name="version_index_is_not_supported">Die Index-Version \'\'{0}\'\' wird nicht unterstützt</string>
 					
 	<string name="use_osmand_routing_service">OsmAnd Routing</string>
-	<string name="use_osmand_routing_service_descr">OsmAnd Offline-Routing für große Entfernungen verwenden (experimentell)</string>
-	<string name="osmand_routing_experimental">OsmAnd Offline-Routing ist in einem experimentellen Stadium und funktioniert schlecht für Entfernungen über 20 km.\n Routing-Dienst wird automatisch zu online Cloudmade gewechselt.</string>
+	<string name="use_osmand_routing_service_descr">OsmAnd Offlinerouting für große Entfernungen verwenden (experimentell)</string>
+	<string name="osmand_routing_experimental">OsmAnd Offlinerouting ist in einem experimentellen Stadium und funktioniert schlecht für Entfernungen über 20 km.\n Routingdienst wird automatisch zu online Cloudmade gewechselt.</string>
 	<string name="specified_dir_doesnt_exist">Angegebener Ordner kann nicht gefunden werden.</string>
-	<string name="application_dir">Speicher-Ordner</string>
-	<string name="application_dir_change_warning">Das Wechseln des Speicher-Ordners verschiebt oder löscht keine Daten. Dies muss separat außerhalb von OsmAnd durchgeführt werden. Dennoch fortfahren?</string>
+	<string name="application_dir">Verzeichnis</string>
+	<string name="application_dir_change_warning">Das Wechseln des Verzeichnis verschiebt oder löscht keine Daten. Dies muss separat außerhalb von OsmAnd durchgeführt werden. Dennoch fortfahren?</string>
 
 	<string name="osmand_net_previously_installed">Eine Vorversion von OsmAnd ist installiert. Alle Offline-Daten werden weiter unterstützt. Favoriten müssen aber in der Vorversion exportiert und anschließend in die neue Version importiert werden.</string>
 	<string name="build_installed">Build {0} erfolgreich installiert ({1}).</string>
@@ -352,7 +352,7 @@
 	
 	<string name="gps_status_app_not_found">Applikation GPS Status nicht installiert. Im Market suchen?</string>
 	
-	<string name="voice_is_not_available_msg">Keine Sprachansage verfügbar. Bitte unter Einstellungen ein Sprachpaket auswählen oder Herunterladen.</string>
+	<string name="voice_is_not_available_msg">Keine Sprachansage verfügbar. Bitte unter Einstellungen ein Sprachpaket auswählen oder herunterladen.</string>
 	<string name="voice_is_not_available_title">Keine Sprachansage ausgewählt</string>
 	<string name="daynight_mode_day">Tag</string>
 	<string name="daynight_mode_night">Nacht</string>
@@ -363,18 +363,18 @@
 
 	<string name="download_files_question">Lade {0} Datei(en) ({1} MB)?</string>
 	<string name="items_were_selected">{0} Positionen ausgewählt</string>
-	<string name="filter_existing_indexes">Filter Gespeicherte</string>
+	<string name="filter_existing_indexes">Filter gespeicherte</string>
 	<string name="deselect_all">Keine markieren</string>
 	<string name="select_all">Alle markieren</string>
 	<string name="reload">Aktualisieren</string>
 	
 	<string name="general_settings_descr">Konfiguration der Anzeige und anderer allgemeiner Einstellungen</string>
     <string name="general_settings">Allgemein</string>
-	<string name="rendering_settings_descr">Konfiguration der Kartenquellen und -Darstellung</string>
+	<string name="rendering_settings_descr">Konfiguration der Kartenquellen und -darstellung</string>
     <string name="rendering_settings">Landkarten</string>
-    <string name="index_settings_descr">Laden und Verwalten von Landkarten und Daten für Offline-Verwendung</string>
+    <string name="index_settings_descr">Laden und Verwalten von Landkarten und Daten für Offlineverwendung</string>
     <string name="index_settings">Offline-Daten</string>
-	<string name="osmand_service">Hintergrund-Service</string>
+	<string name="osmand_service">Hintergrundservice</string>
 	<string name="osmand_service_descr">Für Verwendung von OsmAnd bei ausgeschalteter Anzeige</string>
 	<string name="fast_route_mode">Schnellste Route</string>
 	<string name="fast_route_mode_descr">Auswählen für schnellste Route oder deaktivieren für kürzeste Route</string>
@@ -393,9 +393,9 @@
 	<string name="renderers">Vektor Renderer</string>
 	<string name="renderers_descr">Wähle Anzeigemodus für Offline-Vektor-Karten</string>
 
-	<string name="poi_context_menu_website">Zeige POI Internet-Seite</string>
+	<string name="poi_context_menu_website">Zeige POI Internetseite</string>
 	<string name="poi_context_menu_call">Zeige POI Telefon</string>
-	<string name="website">Internet-Seite</string>
+	<string name="website">Internetseite</string>
 	<string name="phone">Telefon</string>
 	<string name="download_type_to_filter">Filtern nach Typ</string>
 	<string name="use_high_res_maps">Hochauflösende Anzeige</string>
@@ -419,7 +419,7 @@
 	<string name="vector_data">Offline-Vektor-Karten</string>
 	<string name="transport_context_menu">Suche nach Verbindung an Haltestelle</string>
 	<string name="point_on_map">Punkt auf Karte:\n Lat {0,number,#.####}\n Lon {1,number,#.####}</string>
-	<string name="osb_bug_name">OSM-Fehler</string>
+	<string name="osb_bug_name">OSM Fehler</string>
 	<string name="poi_context_menu_modify">Bearbeite POI</string>
 	<string name="poi_context_menu_delete">Lösche POI</string>
 	<string name="rotate_map_compass_opt">Nach Kompass</string>
@@ -445,7 +445,7 @@
 	<string name="layer_yandex_traffic">Yandex Verkehr</string>
 	<string name="layer_route">Route</string>
 	<string name="layer_favorites">Favoriten</string>
-	<string name="layer_osm_bugs">OSM-Fehlerbericht</string>
+	<string name="layer_osm_bugs">OSM Fehlerbericht</string>
 	<string name="layer_transport">ÖPNV Haltestellen</string>
 	<string name="layer_poi">POI...</string>
 	<string name="layer_map">Kartenquelle...</string>
@@ -469,7 +469,7 @@
 	<string name="background_service_provider_descr">Art der Hintergrund-Positionsbestimmung</string>
 	<string name="background_service_provider">Positionsbestimmung</string>
 	<string name="background_router_service_descr">Aktiviere Service für Verwendung von OsmAnd während Anzeige aus ist</string>
-	<string name="background_router_service">Hintergrund-Service</string>
+	<string name="background_router_service">Hintergrundservice</string>
 	<string name="off_router_service_no_gps_available">Hintergrunddienst zur Routenberechnung erfordert aktiviertes GPS.</string>
 	<string name="routing_settings_descr">Navigationsoptionen</string>
 	<string name="routing_settings">Navigation</string>
@@ -537,7 +537,7 @@
 	<string name="search_history_city">Ort: {0}</string>
 	<string name="search_history_street">Straße: {0}, {1}</string>
 	<string name="search_history_int_streets">Querstraße : {0} x {1} in {2}</string>
-	<string name="search_history_building">Gebäude: {0}, {1}, {2}</string>
+	<string name="search_history_building">Hausnr.: {0}, {1}, {2}</string>
 	<string name="search_history_navigate_to">Navigiere zu {0}\'N {1}\'O</string>
 	<string name="favorite">Favoriten</string>
 	<string name="clear_all">Alles löschen</string>
@@ -556,7 +556,7 @@
 	<string name="route_about">Routeninformationen</string>
 	<string name="route_general_information">{0} Gesamtentfernung\n{1}:{2} Reisezeit</string>
 	<string name="router_service_descr">Online- oder Offline-Dienst zur Streckenberechnung wählen</string>
-	<string name="router_service">Routing-Dienst</string>
+	<string name="router_service">Routingdienst</string>
 	<string name="sd_dir_not_accessible"> Auf das Verzeichnis auf der SD-Karte kann nicht zugegriffen werden</string>
 	<string name="download_question">Herunterladen {0} - {1}?</string>
 	<string name="download_question_exist">Offline Daten für {0} existieren schon ({1}). Wollen Sie die überschreiben ({2})?</string>
@@ -587,7 +587,7 @@
 	<string name="auth_failed">Autorisierung fehlgeschlagen</string>
 	<string name="failed_op">fehlgeschlagen</string>
 	<string name="converting_names">Konvertiere einheimische/Englische Namen...</string>
-	<string name="loading_streets_buildings">Lade Straßen und Gebäude...</string>
+	<string name="loading_streets_buildings">Lade Straßen und Hausnr....</string>
 	<string name="loading_postcodes">Lade Postleitzahlen...</string>
 	<string name="loading_streets">Lade Straßen...</string>
 	<string name="loading_cities">Lade Orte...</string>
@@ -614,8 +614,8 @@
     <string name="use_online_routing_descr">Internet zur Streckenberechnung verwenden</string>
     <string name="use_online_routing">Online Streckenberechnung</string>
     <string name="user_password_descr">Persönliches Kennwort</string>
-    <string name="user_password">OSM-Kennwort</string>
-    <string name="osm_settings_descr">Einstellungen für OpenStreetMap.org (OSM) Beiträge</string>
+    <string name="user_password">OSM Kennwort</string>
+    <string name="osm_settings_descr">Einstellungen für OpenStreetMap.org (OSM)</string>
     <string name="monitor_preferences_descr">Positions-Logging konfigurieren</string>
     <string name="data_settings_descr">Dateneinstellungen festlegen: Sprache, Daten laden oder aktualisieren</string>
     <string name="data_settings">Daten</string>
@@ -625,7 +625,7 @@
     <string name="auto_zoom_map">Automatischer Zoom</string>
     <string name="additional_settings">Weitere Einstellungen</string>
     <string name="settings_preset_descr">Anwendungsprofil wählen. (Viele Einstellungen unten werden für jedes Profil separat gespeichert.)</string>
-    <string name="settings_preset">Applikationsmodus</string>
+    <string name="settings_preset">Anwendungsmodus</string>
     <string name="settings">Einstellungen</string>
     <string name="save_current_track_descr">Aktuellen Track jetzt auf SD-Karte abspeichern</string>
     <string name="save_current_track">Track jetzt speichern</string>
@@ -638,20 +638,20 @@
     <string name="update_tile">Karte (Kacheln) aktualisieren</string>
     <string name="reload_tile">Kartenteile (Kacheln) aktualisieren</string>
     <string name="user_name_descr">Persönlicher Benutzername</string>
-    <string name="user_name">OSM-Benutzername</string>
+    <string name="user_name">OSM Benutzername</string>
     <string name="mark_point">Ziel</string>
-    <string name="show_osm_bugs_descr">OSM-Fehlerberichte anzeigen</string>
-    <string name="show_osm_bugs">OSM-Fehler</string>
+    <string name="show_osm_bugs_descr">OSM Fehlerberichte anzeigen</string>
+    <string name="show_osm_bugs">OSM Fehler</string>
     <string name="favourites_activity">Bevorzugte Punkte</string>
     <string name="add_to_favourite">Zu Favoriten hinzufügen</string>
     <string name="use_english_names_descr">Englische oder einheimische Bezeichnungen in Karten</string>
     <string name="use_english_names">Englische Bezeichnungen</string>
     <string name="app_settings">Anwendungseinstellungen</string>
     <string name="search_address">Adresse suchen </string>
-    <string name="choose_building">Gebäude wählen</string>
+    <string name="choose_building">Hausnr. wählen</string>
     <string name="choose_street">Straße wählen</string>
     <string name="choose_city">Ort wählen </string>
-    <string name="ChooseCountry">Staat wählen</string>
+    <string name="ChooseCountry">Land wählen</string>
     <string name="position_on_map_descr">Position des Markers auf der Karte</string>
     <string name="position_on_map">Positionsmarker</string>
     <string name="map_specify_point">Punkt wählen</string>
@@ -692,7 +692,7 @@
 <string name="search_POI_level_btn">Finde mehr</string>
 <string name="incremental_search_city">Suche Stadt inkrementell. Um Städte/Postleitzahlen zu finden mindestens 3 Zeichen eingeben.</string>
 <string name="incremental_search_street">Suche Straße inkrementell</string>
-<string name="incremental_search_building">Suche Gebäude inkrementell</string>
+<string name="incremental_search_building">Suche Hausnr. inkrementell</string>
 <string name="choose_available_region">Wähle Region</string>
 <string name="choose_intersected_street">Wähle Querstraße</string>
 <string name="Closest_Amenities">Umliegende Einrichtungen</string>
@@ -714,8 +714,8 @@
 <string name="search_address_region">Region</string>
 <string name="search_address_city">Ort</string>
 <string name="search_address_street">Straße</string>
-<string name="search_address_building">Gebäude</string>
-<string name="search_address_building_option">Gebäude</string>
+<string name="search_address_building">Hausnr.</string>
+<string name="search_address_building_option">Hausnr.</string>
 <string name="search_address_street_option">Querstraße</string>
 
 <string name="search_tabs_location">Position</string>
@@ -723,7 +723,7 @@
 <string name="context_menu_item_navigate_point">Navigiere zu Punkt</string>
 <string name="context_menu_item_add_favorite">zu Favoriten hinzufügen</string>
 <string name="context_menu_item_update_map">Karte aktualisieren</string>
-<string name="context_menu_item_open_bug">OSM-Fehlerbericht einsenden</string>
+<string name="context_menu_item_open_bug">OSM Fehlerbericht einsenden</string>
 <string name="context_menu_item_create_poi">POI einsenden</string>
 
 <string name="default_buttons_yes">Ja</string>
@@ -745,22 +745,22 @@
 <string name="favourites_remove_dialog_success">Der Punkt {0} wurde erfolgreich gelöscht.</string>
 
 <string name="osb_add_dialog_title">Eingabetext des Fehlers</string>
-<string name="osb_add_dialog_success">OSM-Fehlerbericht erfolgreich erstellt</string>
+<string name="osb_add_dialog_success">OSM Fehlerbericht erfolgreich erstellt</string>
 <string name="osb_add_dialog_error">Ausnahme aufgetreten: Fehlerbericht wurde nicht erstellt</string>
 
 <string name="osb_comment_menu_item">Kommentar hinzufügen</string>
 <string name="osb_comment_dialog_message">Nachricht</string>
 <string name="osb_comment_dialog_author">Autor</string>
-<string name="osb_comment_dialog_title">Kommentar dem OSM-Fehlerbericht hinzufügen</string>
+<string name="osb_comment_dialog_title">Kommentar dem OSM Fehlerbericht hinzufügen</string>
 <string name="osb_comment_dialog_add_button">Kommentar hinzufügen</string>
 <string name="osb_comment_dialog_success">Kommentar wurde erfolgreich hinzugefügt</string>
 <string name="osb_comment_dialog_error">Fehler: Kommentar wurde nicht hinzugefügt</string>
 
-<string name="osb_close_menu_item">OSM-Fehlerbericht schließen</string>
-<string name="osb_close_dialog_title">OSM-Fehlerbericht schließen</string>
+<string name="osb_close_menu_item">OSM Fehlerbericht schließen</string>
+<string name="osb_close_dialog_title">OSM Fehlerbericht schließen</string>
 <string name="osb_close_dialog_close_button">Schließen</string>
-<string name="osb_close_dialog_success">OSM-Fehlerbericht wurde hinzugefügt</string>
-<string name="osb_close_dialog_error">Ausnahmefehler aufgetreten: OSM-Fehlerbericht wurde nicht erstellt</string>
+<string name="osb_close_dialog_success">OSM Fehlerbericht wurde hinzugefügt</string>
+<string name="osb_close_dialog_error">Ausnahmefehler aufgetreten: OSM Fehlerbericht wurde nicht erstellt</string>
 
 <string name="poi_edit_title">POI bearbeiten</string>
 <string name="poi_create_title">POI erstellen</string>
