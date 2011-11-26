@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="native_library_not_supported">Natívna knižnica nie je podporovaná na tomto zariadení.</string>
+	<string name="init_native_library">Inicializácia natívnej knižnice...</string>
 	<string name="choose_auto_follow_route">Automatické nasledovanie</string>
 	<string name="choose_auto_follow_route_descr">Čas pokiaľ sa mapové zobrazenie zosynchronizuje s pozíciou</string>
 	<string name="auto_follow_route_never">Nikdy</string>
