@@ -126,12 +126,12 @@ public class MapActivityLayers {
 		// 5.5 transport info layer 
 		transportInfoLayer = new TransportInfoLayer(TransportRouteHelper.getInstance());
 		mapView.addLayer(transportInfoLayer, 5.5f);
-		// 6. point navigation layer
-		navigationLayer = new PointNavigationLayer();
-		mapView.addLayer(navigationLayer, 6);
-		// 7. point location layer 
+		// 6. point location layer 
 		locationLayer = new PointLocationLayer();
-		mapView.addLayer(locationLayer, 7);
+		mapView.addLayer(locationLayer, 6);
+		// 7. point navigation layer
+		navigationLayer = new PointNavigationLayer();
+		mapView.addLayer(navigationLayer, 7);
 		// 8. map info layer
 		mapInfoLayer = new MapInfoLayer(activity, routeLayer);
 		mapView.addLayer(mapInfoLayer, 8);
