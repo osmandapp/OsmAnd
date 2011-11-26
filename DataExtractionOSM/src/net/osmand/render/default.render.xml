@@ -83,8 +83,8 @@
 		<filter tag="" value="" order="128" orderType="1"/>
 
 		<group orderType="2">
-			<filter tag="" value="" layer="1" order="67" />
-			<filter tag="" value="" layer="-1" order="10" />
+			<filter layer="1" tag="" value="" order="67" />
+			<filter layer="-1" tag="" value="" order="10" />
 
 			<!-- over buildings -->
 			<filter tag="aerialway" value="" order="68" />
@@ -162,8 +162,8 @@
 		</group>
 
 		<group orderType="3">
-			<filter tag="" value="" layer="1" order="64" />
-			<filter tag="" value="" layer="-1" order="1" />
+			<filter layer="1" tag="" value="" order="64" />
+			<filter layer="-1" tag="" value="" order="1" />
 
 			<filter tag="building" value="" order="64" />
 
