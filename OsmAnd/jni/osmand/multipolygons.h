@@ -336,8 +336,8 @@ void unifyIncompletedRings(std::vector<std::vector<int_pair> >& incompletedRings
 	for (j = 0; ir != incompletedRings.end(); ir++, irs++, j++) {
 		int x = ir->at(0).first;
 		int y = ir->at(0).second;
-		int sx = x;
-		int sy = y;
+		int sx = ir->at(ir->size() - 1).first;
+		int sy = ir->at(ir->size() - 1).second;
 		bool st = y == topY || x == rightX || y == bottomY || x == leftX;
 		bool end = sy == topY || sx == rightX || sy == bottomY || sx == leftX;
 		// something goes wrong
