@@ -778,7 +778,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			}
 		});
 		List<String> attributes = new ArrayList<String>();
-		String direction = navigationInfo.getDirectionString(amenity.getLocation());
+		String direction = navigationInfo.getDirectionString(amenity.getLocation(), heading);
 		if (direction != null)
 			attributes.add(direction);
 		if (amenity.getPhone() != null) 

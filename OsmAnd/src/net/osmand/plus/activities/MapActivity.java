@@ -518,7 +518,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
     }
 
     public String getNavigationHint(LatLon point) {
-        String hint = navigationInfo.getDirectionString(point);
+        String hint = navigationInfo.getDirectionString(point, mapLayers.getLocationLayer().getHeading());
         if (hint == null)
             hint = getString(R.string.no_info);
         return hint;
@@ -552,7 +552,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
                                   backToLocationImpl();
                                   break;
                               case 1:
-                                  navigationInfo.show(settings.getPointToNavigate());
+                                  navigationInfo.show(settings.getPointToNavigate(), mapLayers.getLocationLayer().getHeading());
                                   break;
                               default:
                                   break;

@@ -49,29 +49,42 @@ public class NavigationInfo {
         }
 
         // The argument must be not null as well as the currentLocation
+        // and currentLocation must have bearing.
         public RelativeDirection(final Location point) {
             style = OsmandSettings.getOsmandSettings(context).DIRECTION_STYLE.get();
-            value = directionTo(point);
+            value = directionTo(point, currentLocation.getBearing());
+        }
+
+        // The first argument must be not null as well as the currentLocation.
+        public RelativeDirection(final Location point, float heading) {
+            style = OsmandSettings.getOsmandSettings(context).DIRECTION_STYLE.get();
+            value = directionTo(point, heading);
         }
 
         public void clear() {
             value = UNKNOWN;
         }
 
-        // The argument must be not null as well as the currentLocation
-        public boolean update(final Location point) {
+        // The first argument must be not null as well as the currentLocation.
+        public boolean update(final Location point, float heading) {
             boolean result = false;
             final RelativeDirectionStyle newStyle = OsmandSettings.getOsmandSettings(context).DIRECTION_STYLE.get();
             if (style != newStyle) {
                 style = newStyle;
                 result = true;
             }
-            final int newValue = directionTo(point);
+            final int newValue = directionTo(point, heading);
             if (value != newValue) {
                 value = newValue;
                 result = true;
             }
             return result;
+        }
+
+        // The argument must be not null as well as the currentLocation
+        // and currentLocation must have bearing.
+        public boolean update(final Location point) {
+            return update(point, currentLocation.getBearing());
         }
 
         public String getString() {
@@ -87,9 +100,9 @@ public class NavigationInfo {
             }
         }
 
-        // The argument must be not null as well as the currentLocation
-        private int directionTo(final Location point) {
-            final float bearing = currentLocation.bearingTo(point) - currentLocation.getBearing();
+        // The first argument must be not null as well as the currentLocation.
+        private int directionTo(final Location point, float heading) {
+            final float bearing = currentLocation.bearingTo(point) - heading;
             final int nSectors = (style == RelativeDirectionStyle.CLOCKWISE) ? 12 : direction.length;
             int sector = (int)Math.round(Math.abs(bearing) * (float)nSectors / FULL_CIRCLE) % nSectors;
             if ((bearing < 0) && (sector != 0))
@@ -155,13 +168,17 @@ public class NavigationInfo {
 
 
     // Get distance and direction string for specified point
-    public synchronized String getDirectionString(final Location point) {
+    public synchronized String getDirectionString(final Location point, Float heading) {
         if ((currentLocation != null) && (point != null)) {
+            RelativeDirection direction = null;
             String result = distanceString(point);
             result += " "; //$NON-NLS-1$
-            if (currentLocation.hasBearing()) {
+            if (currentLocation.hasBearing())
+                direction = new RelativeDirection(point);
+            else if (heading != null)
+                direction = new RelativeDirection(point, heading);
+            if (direction != null) {
                 // relative direction
-                RelativeDirection direction = new RelativeDirection(point);
                 result += direction.getString();
             } else {
                 // absolute direction
@@ -173,12 +190,12 @@ public class NavigationInfo {
         return null;
     }
 
-    public synchronized String getDirectionString(final LatLon point) {
+    public synchronized String getDirectionString(final LatLon point, Float heading) {
         if (point != null) {
             Location destination = new Location("map"); //$NON-NLS-1$
             destination.setLatitude(point.getLatitude());
             destination.setLongitude(point.getLongitude());
-            return getDirectionString(destination);
+            return getDirectionString(destination, heading);
         }
         return null;
     }
@@ -248,11 +265,11 @@ public class NavigationInfo {
 
 
     // Show all available info
-    public void show(final LatLon point) {
+    public void show(final LatLon point, Float heading) {
         final List<String> attributes = new ArrayList<String>();
         String item;
 
-        item = getDirectionString(point);
+        item = getDirectionString(point, heading);
         if (item != null)
             attributes.add(item);
         item = getSpeedString();
