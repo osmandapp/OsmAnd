@@ -19,7 +19,7 @@ public class AnimateDraggingMapThread {
 	
 	protected static final Log log = LogUtil.getLog(AnimateDraggingMapThread.class);
 	
-	private final static float DRAGGING_ANIMATION_TIME = 1900f;
+	private final static float DRAGGING_ANIMATION_TIME = 1200f;
 	private final static float ZOOM_ANIMATION_TIME = 800f;
 	private final static float ZOOM_MOVE_ANIMATION_TIME = 650f;
 	private final static float MOVE_MOVE_ANIMATION_TIME = 2000f;
