@@ -22,7 +22,7 @@ public abstract class OsmandMapLayer {
 		return false;
 	}
 	
-	public void onTouchEvent(MotionEvent event) {}
+	public boolean onTouchEvent(MotionEvent event) { return false;}
 	
 	/**
 	 * This method returns whether canvas should be rotated as 

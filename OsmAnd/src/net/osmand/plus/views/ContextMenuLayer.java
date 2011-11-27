@@ -215,7 +215,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	
 	@Override
-	public void onTouchEvent(MotionEvent event) {
+	public boolean onTouchEvent(MotionEvent event) {
 		if (latLon != null) {
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
 				if(pressedInTextView(event.getX(), event.getY())){
@@ -230,6 +230,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				view.refreshMap();
 			}
 		}
+		return false;
 	}
 
 }

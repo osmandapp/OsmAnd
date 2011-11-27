@@ -673,7 +673,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			animatedDraggingThread.stopAnimating();
 		}
 		for(int i=layers.size() - 1; i >= 0; i--) {
-			layers.get(i).onTouchEvent(event);
+			if(layers.get(i).onTouchEvent(event)) {
+				return true;
+			}
 		}
 		if (!multiTouchSupport.onTouchEvent(event)) {
 			/* return */gestureDetector.onTouchEvent(event);

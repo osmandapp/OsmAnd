@@ -18,20 +18,27 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Paint.Cap;
+import android.graphics.Paint.Join;
+import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Paint.Cap;
-import android.graphics.Paint.Join;
-import android.graphics.Paint.Style;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
+import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.MeasureSpec;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.widget.FrameLayout.LayoutParams;
+import android.widget.ImageView;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
@@ -60,7 +67,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private long cachedLeftTime = 0;
 	private float[] calculations = new float[1];
 	private int cachedMeters = 0;
-	private int cachedZoom = 0;
 	private float cachedSpeed = 0;
 	
 	private int centerMiniRouteY;
@@ -72,22 +78,25 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private DisplayMetrics dm;
 	
 	private float scaleCoefficient;
-	private float roundCorner;
 	private Bitmap compass;
 	private Paint paintImg;
 	
 	private final static int[] pressedState = new int[]{android.R.attr.state_pressed};
 	private final static int[] simpleState = new int[]{};
 	
-	private int LEFT_MARGIN = 10;
 	
-	private MapInfoControl compassControl;
-	private TextInfoControl zoomControl;
+	
 	private TextInfoControl distanceControl;
 	private TextInfoControl speedControl;
 	private TextInfoControl leftTimeControl;
 	
+	private int STATUS_BAR_MARGIN_X = 10;
+	
+	private int LEFT_MARGIN_X = 10;
+	private int LEFT_MARGIN_Y = 10;
 	private List<MapInfoControl> leftControls = new ArrayList<MapInfoLayer.MapInfoControl>();
+	private ViewGroup statusBar;
+	private Drawable statusBarBackground;
 	
 	
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
@@ -110,7 +119,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 			scaleCoefficient *= 1.5f;
 		}
 		
-		roundCorner = 3 * scaleCoefficient;
 		
 		paintBlack.setStyle(Style.STROKE);
 		paintBlack.setColor(Color.BLACK);
@@ -178,11 +186,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		compass = BitmapFactory.decodeResource(view.getResources(), R.drawable.compass);
 		
-		LEFT_MARGIN = (int) (LEFT_MARGIN * scaleCoefficient);
-		compassControl = createCompassControl(R.drawable.box_top);
-		zoomControl = new TextInfoControl(R.drawable.box_top, paintText, paintSubText);
-		speedControl = new TextInfoControl(R.drawable.box_top, paintText, paintSubText);
-		leftTimeControl = new TextInfoControl(R.drawable.box_top, paintText, paintSubText) {
+		LEFT_MARGIN_X = (int) (LEFT_MARGIN_X * scaleCoefficient);
+		STATUS_BAR_MARGIN_X = (int) (STATUS_BAR_MARGIN_X * scaleCoefficient);
+		statusBar = createStatusBar();
+		statusBarBackground = view.getResources().getDrawable(R.drawable.box_top).mutate();
+		
+		LEFT_MARGIN_Y = statusBar.getMeasuredHeight() ;
+		Drawable time = view.getResources().getDrawable(R.drawable.info_time);
+		speedControl = new TextInfoControl(R.drawable.box_top, null, time.getMinimumWidth(), paintText, paintSubText);
+		leftTimeControl = new TextInfoControl(R.drawable.box_top, null, time.getMinimumWidth(), paintText, paintSubText) {
 			@Override
 			public boolean isClickable() {
 				return true;
@@ -194,7 +206,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 				view.refreshMap();
 			}
 		};
-		distanceControl = new TextInfoControl(R.drawable.box_top, paintText, paintSubText) {
+		distanceControl = new TextInfoControl(R.drawable.box_top, view.getResources().getDrawable(R.drawable.info_target), 0,
+				paintText, paintSubText) {
 			@Override
 			public boolean isClickable() {
 				return true;
@@ -210,12 +223,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 				}
 			}
 		};
-		leftControls.add(compassControl);
-		leftControls.add(zoomControl);
 		leftControls.add(distanceControl);
 		leftControls.add(speedControl);
 		leftControls.add(leftTimeControl);
-		relayoutLeftControls(compassControl);
 		
 		showArrivalTime = view.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME.get();
 	}
@@ -233,7 +243,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 		int w = 0;
 		for(MapInfoControl c : leftControls) {
-			w = Math.max(w, c.getWidth());
+			w = Math.max(w, c.getMeasuredWidth());
 		}
 		for(MapInfoControl c : leftControls) {
 			c.layout(w, c.getHeight());
@@ -287,10 +297,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		updateDistanceToGo();
 		updateSpeedInfo();
 		updateTimeLeftInfo();
-		if(view.getZoom() != cachedZoom){
-			zoomControl.setText(view.getZoom()+"", "zm");
-			relayoutLeftControls(zoomControl);
-		}
 		
 		
 		// draw route information
@@ -301,16 +307,26 @@ public class MapInfoLayer extends OsmandMapLayer {
 		for(int i=0; i<leftControls.size(); i++){
 			h += leftControls.get(i).getHeight();
 		}
-		canvas.translate(LEFT_MARGIN, 0);
+		h += LEFT_MARGIN_Y;
 		for (int i = leftControls.size() - 1; i >= 0; i--) {
 			h -= leftControls.get(i).getHeight();
 			canvas.save();
-			canvas.translate(0, h);
+			canvas.translate(LEFT_MARGIN_X, h);
 			if(leftControls.get(i).isVisible()) {
 				leftControls.get(i).onDraw(canvas);
 			}
 			canvas.restore();
 		}
+		if(statusBar.getRight() == 0) {
+			Rect statusBarPadding = new Rect();
+			statusBarBackground.getPadding(statusBarPadding);
+			statusBarBackground.setBounds(STATUS_BAR_MARGIN_X - statusBarPadding.left, -statusBarPadding.top, 
+					view.getWidth() - STATUS_BAR_MARGIN_X + statusBarPadding.right, 
+					statusBar.getMeasuredHeight() + statusBarPadding.bottom);
+			statusBar.layout(STATUS_BAR_MARGIN_X, 0, view.getWidth() - STATUS_BAR_MARGIN_X, statusBar.getMeasuredHeight());
+		}
+		statusBarBackground.draw(canvas);
+		statusBar.draw(canvas);
 	}
 
 	private void updateSpeedInfo() {
@@ -380,8 +396,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 					if (!routeLayer.getPath().isEmpty()) {
 						canvas.save();
 						canvas.clipRect(boundsForMiniRoute);
-						canvas.drawRoundRect(boundsForMiniRoute, roundCorner, roundCorner, paintAlphaGray);
-						canvas.drawRoundRect(boundsForMiniRoute, roundCorner, roundCorner, paintBlack);
+						// TODO draw rect boundsForMiniRoute
 						canvas.translate(centerMiniRouteX - view.getCenterPointX(), centerMiniRouteY - view.getCenterPointY());
 						canvas.scale(scaleMiniRoute, scaleMiniRoute, view.getCenterPointX(), view.getCenterPointY());
 						canvas.rotate(view.getRotate(), view.getCenterPointX(), view.getCenterPointY());
@@ -390,8 +405,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 						canvas.restore();
 					}
 				} else {
-					canvas.drawRoundRect(boundsForMiniRoute, roundCorner, roundCorner, paintAlphaGray);
-					canvas.drawRoundRect(boundsForMiniRoute, roundCorner, roundCorner, paintBlack);
+					// TODO draw rect boundsForMiniRoute
 					RouteDirectionInfo next = routeLayer.getHelper().getNextRouteDirectionInfo();
 					if (next != null) {
 						if (!Algoritms.objectEquals(cachedTurnType, next.turnType)) {
@@ -428,7 +442,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 	
 	@Override
-	public void onTouchEvent(MotionEvent event) {
+	public boolean onTouchEvent(MotionEvent event) {
 		int x = (int)event.getX();
 		int y = (int)event.getY();
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -439,11 +453,18 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		}
 		if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
+			MapInfoControl control = detectLeftControl(x, y);
 			for(MapInfoControl c : leftControls){
-				c.setPressed(false);
+				if(c.isPressed()) {
+					if(control == c) {
+						c.click();
+					}
+					c.setPressed(false);
+				}
 				view.refreshMap();
 			}
 		}
+		return false;
 	}
 
 
@@ -465,7 +486,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 	
 	private MapInfoControl detectLeftControl(int x, int y) {
-		x -= LEFT_MARGIN;
+		x -= LEFT_MARGIN_X;
+		y -= LEFT_MARGIN_Y;
 		if (y >= 0 && x >= 0) {
 			for (int i = 0; i < leftControls.size(); i++) {
 				if (leftControls.get(i).isVisible()) {
@@ -483,38 +505,32 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return null;
 	}
 	
-	private MapInfoControl createCompassControl(int boxTop) {
+	private ViewGroup createStatusBar() {
 		final int mw = (int) compass.getWidth() ;
 		final int mh = (int) compass.getHeight() ;
-		MapInfoControl control = new MapInfoControl(boxTop) {
-			
+		FrameLayout statusBar = new FrameLayout(view.getContext());
+		LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 
+				Gravity.LEFT | Gravity.TOP);
+		ImageView compassView = new ImageView(view.getContext()) {
 			@Override
-			public int getMeasuredWidth() {
-				return mw;
-			}
-			@Override
-			public int getMeasuredHeight() {
-				return mh;
-			}
-			
-			@Override
-			public boolean isClickable() {
-				return true;
-			}
-			
-			@Override
-			public void click() {
-				map.switchRotateMapMode();
-			}
-			
-			@Override
-			void onDraw(Canvas cv) {
-				super.onDraw(cv);
-				cv.rotate(view.getRotate(), mw / 2, mh / 2);
-				cv.drawBitmap(compass, 0, 0, paintImg);
+			protected void onDraw(Canvas canvas) {
+				canvas.save();
+				canvas.rotate(view.getRotate(), getLeft() + mw / 2, getTop() + mh / 2);
+				canvas.drawBitmap(compass, getLeft(), getTop(), paintImg);
+				canvas.restore();
 			}
 		};
-		return control;
+		compassView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				map.switchRotateMapMode();
+			}
+		});
+		statusBar.addView(compassView, params);
+		compassView.setImageBitmap(compass);
+		
+		statusBar.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
+		return statusBar;
 	}
 	
 	
@@ -537,6 +553,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 		
 		public void click() {
+		}
+		
+		public boolean isPressed() {
+			return pressed;
 		}
 		
 		public void setPressed(boolean pressed) {
@@ -592,10 +612,20 @@ public class MapInfoLayer extends OsmandMapLayer {
 		Paint textPaint;
 		String subtext;
 		Paint subtextPaint;
+		int cacheMeasuredWidth = -1;
+		int leftMargin = 0;
+		private Drawable imageDrawable;
 		
-		public TextInfoControl(int background, Paint textPaint,
+		public TextInfoControl(int background, Drawable drawable, int leftMargin, Paint textPaint,
 				Paint subtextPaint) {
 			super(background);
+			this.leftMargin = leftMargin;
+			this.imageDrawable = drawable;
+			if(imageDrawable != null) {
+				// Unknown reason to add 3*scaleCoefficient
+				imageDrawable.setBounds(0, (int) (3*scaleCoefficient), imageDrawable.getMinimumWidth(), imageDrawable.getMinimumHeight() + 
+						(int)(3*scaleCoefficient));
+			}
 			this.textPaint = textPaint;
 			this.subtextPaint = subtextPaint;
 		}
@@ -603,28 +633,41 @@ public class MapInfoLayer extends OsmandMapLayer {
 		public void setText(String text, String subtext) {
 			this.text = text;
 			this.subtext = subtext;
+			cacheMeasuredWidth = -1;
 		}
 		
 		@Override
 		public int getMeasuredWidth() {
-			int w = 0;
-			if(text != null) {
-				w += textPaint.measureText(text) + 2 * scaleCoefficient;
-				if(subtext != null) {
-					w += subtextPaint.measureText(subtext) + 2 * scaleCoefficient;
+			if (cacheMeasuredWidth == -1) {
+				int w = 0;
+				if (text != null) {
+					if(imageDrawable != null) {
+						w += imageDrawable.getBounds().width();
+					}
+					w += leftMargin;
+					w += textPaint.measureText(text);
+					if (subtext != null) {
+						w += subtextPaint.measureText(subtext) + 2 * scaleCoefficient;
+					}
 				}
+				cacheMeasuredWidth = w;
 			}
-			return w;
+			return cacheMeasuredWidth;
 		}
 		
 		@Override
 		void onDraw(Canvas cv) {
 			super.onDraw(cv);
-			if(isVisible()) {
-				cv.drawText(text, 2 * scaleCoefficient, getHeight() - scaleCoefficient,
-						textPaint);
-				if(subtext != null) {
-					cv.drawText(subtext, 4 * scaleCoefficient + textPaint.measureText(text), 
+			if (isVisible()) {
+				int margin = 0;
+				if(imageDrawable != null) {
+					imageDrawable.draw(cv);
+					margin = imageDrawable.getBounds().width();
+				}
+				margin += leftMargin;
+				cv.drawText(text, margin , getHeight() - scaleCoefficient, textPaint);
+				if (subtext != null) {
+					cv.drawText(subtext, margin + 2 * scaleCoefficient + textPaint.measureText(text), 
 							getHeight() - scaleCoefficient, subtextPaint);
 				}
 			}
@@ -637,11 +680,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		@Override
 		public int getMeasuredHeight() {
-			return (int) (5 * scaleCoefficient + Math.max(textPaint.getTextSize(), subtextPaint.getTextSize()));
+			int h = (int) (2 * scaleCoefficient + Math.max(textPaint.getTextSize(), subtextPaint.getTextSize()));
+			if(imageDrawable != null) {
+				h = Math.max(h, (int)(imageDrawable.getMinimumHeight()));
+			}
+			return h;
 		}
-		
-		
-		
 	}
 	
 
