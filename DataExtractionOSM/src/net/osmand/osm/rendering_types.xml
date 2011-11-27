@@ -80,7 +80,8 @@
 		<subtype id="16" point="true" tag="barrier" value="cycle_barrier" minzoom="15" />
 		<subtype id="17" point="true" tag="barrier" value="block" minzoom="15" />
 		<subtype id="18" point="true" tag="barrier" value="cattle_grid" minzoom="15" />
-		<subtype id="19" point="true" tag="barrier" value="toll_booth" minzoom="15" />
+		<subtype id="19" point="true" tag="barrier" value="toll_booth" minzoom="14" />
+		<subtype id="19" point="true" tag="barrier" value="border_control" minzoom="14" />
 		<subtype id="20" point="true" tag="barrier" value="entrance" minzoom="15" />
 		<subtype id="21" point="true" tag="barrier" value="gate" minzoom="15" />
 		<subtype id="21" point="true" tag="highway" value="gate" minzoom="15" />
