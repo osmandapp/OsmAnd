@@ -56,18 +56,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private Paint paintRouteDirection;
 	
 	private RectF boundsForMiniRoute;
-	private RectF boundsForLeftTime;
-	private RectF boundsForSpeed;
 	
-	
-	private String cachedLeftTimeString = null;
 	private long cachedLeftTime = 0;
 	private float[] calculations = new float[1];
-	
 	private int cachedMeters = 0;
 	private int cachedZoom = 0;
-	
-	private String cachedSpeedString = null;
 	private float cachedSpeed = 0;
 	
 	private int centerMiniRouteY;
@@ -88,12 +81,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 	
 	private int LEFT_MARGIN = 10;
 	
-
 	private MapInfoControl compassControl;
 	private TextInfoControl zoomControl;
 	private TextInfoControl distanceControl;
+	private TextInfoControl speedControl;
+	private TextInfoControl leftTimeControl;
 	
 	private List<MapInfoControl> leftControls = new ArrayList<MapInfoLayer.MapInfoControl>();
+	
 	
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
@@ -166,15 +161,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		fillRed.setColor(Color.RED);
 		fillRed.setAntiAlias(true);
 		
-		boundsForSpeed = new RectF(35, 32, 110, 64);
 		boundsForMiniRoute = new RectF(0, 64, 96, 196);
 		
-		boundsForLeftTime = new RectF(0, 0, 75, 32);
 
 		// Scale to have proper view
-		scaleRect(boundsForSpeed);
 		scaleRect(boundsForMiniRoute);
-		scaleRect(boundsForLeftTime);
 		
 		centerMiniRouteX = (int) (boundsForMiniRoute.width()/2);
 		centerMiniRouteY= (int) (boundsForMiniRoute.top + 3 * boundsForMiniRoute.height() /4);
@@ -190,6 +181,19 @@ public class MapInfoLayer extends OsmandMapLayer {
 		LEFT_MARGIN = (int) (LEFT_MARGIN * scaleCoefficient);
 		compassControl = createCompassControl(R.drawable.box_top);
 		zoomControl = new TextInfoControl(R.drawable.box_top, paintText, paintSubText);
+		speedControl = new TextInfoControl(R.drawable.box_top, paintText, paintSubText);
+		leftTimeControl = new TextInfoControl(R.drawable.box_top, paintText, paintSubText) {
+			@Override
+			public boolean isClickable() {
+				return true;
+			}
+			@Override
+			public void click() {
+				showArrivalTime = !showArrivalTime;
+				view.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME.set(showArrivalTime);
+				view.refreshMap();
+			}
+		};
 		distanceControl = new TextInfoControl(R.drawable.box_top, paintText, paintSubText) {
 			@Override
 			public boolean isClickable() {
@@ -209,6 +213,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		leftControls.add(compassControl);
 		leftControls.add(zoomControl);
 		leftControls.add(distanceControl);
+		leftControls.add(speedControl);
+		leftControls.add(leftTimeControl);
 		relayoutLeftControls(compassControl);
 		
 		showArrivalTime = view.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME.get();
@@ -232,7 +238,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		for(MapInfoControl c : leftControls) {
 			c.layout(w, c.getHeight());
 		}
-		
 	}
 	
 	public boolean distChanged(int oldDist, int dist){
@@ -266,13 +271,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 					} else {
 						distanceControl.setText(ds.substring(0, ls), ds.substring(ls + 1));
 					}
-					
-					relayoutLeftControls(distanceControl);
 				}
+				relayoutLeftControls(distanceControl);
 			}
-		} else {
+		} else if(cachedMeters != 0){
 			cachedMeters = 0;
 			distanceControl.setText(null, null);
+			relayoutLeftControls(distanceControl);
 		}
 	}
 	
@@ -280,29 +285,18 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void onDraw(Canvas canvas, RectF latlonBounds, RectF tilesRect, boolean nightMode) {
 		// prepare data (left distance, speed)
 		updateDistanceToGo();
+		updateSpeedInfo();
+		updateTimeLeftInfo();
 		if(view.getZoom() != cachedZoom){
 			zoomControl.setText(view.getZoom()+"", "zm");
 			relayoutLeftControls(zoomControl);
 		}
 		
-		// draw speed 	
-		if(map.getLastKnownLocation() != null && map.getLastKnownLocation().hasSpeed()){
-			if(Math.abs(map.getLastKnownLocation().getSpeed() - cachedSpeed) > .3f){
-				cachedSpeed = map.getLastKnownLocation().getSpeed();
-				cachedSpeedString = OsmAndFormatter.getFormattedSpeed(cachedSpeed, map); 
-				float right = paintBlack.measureText(cachedSpeedString) + 8 * scaleCoefficient + boundsForSpeed.left;
-				boundsForSpeed.right = right;
-			}
-			if(cachedSpeed > 0){
-				canvas.drawRoundRect(boundsForSpeed, roundCorner, roundCorner, paintAlphaGray);
-				canvas.drawRoundRect(boundsForSpeed, roundCorner, roundCorner, paintBlack);
-				canvas.drawText(cachedSpeedString, boundsForSpeed.left + 8 * scaleCoefficient, boundsForSpeed.bottom - 9f * scaleCoefficient, paintBlack);
-			}
-		}
 		
 		// draw route information
 		drawRouteInfo(canvas);
 		
+		// draw left controls
 		int h = 0;
 		for(int i=0; i<leftControls.size(); i++){
 			h += leftControls.get(i).getHeight();
@@ -316,6 +310,64 @@ public class MapInfoLayer extends OsmandMapLayer {
 				leftControls.get(i).onDraw(canvas);
 			}
 			canvas.restore();
+		}
+	}
+
+	private void updateSpeedInfo() {
+		// draw speed 	
+		if(map.getLastKnownLocation() != null){
+			if(map.getLastKnownLocation().hasSpeed()) {
+				if(Math.abs(map.getLastKnownLocation().getSpeed() - cachedSpeed) > .3f){
+					cachedSpeed = map.getLastKnownLocation().getSpeed();
+					String ds = OsmAndFormatter.getFormattedSpeed(cachedSpeed, map);
+					int ls = ds.lastIndexOf(' ');
+					if(ls == -1) {
+						speedControl.setText(ds, null);	
+					} else {
+						speedControl.setText(ds.substring(0, ls), ds.substring(ls + 1));
+					}
+					relayoutLeftControls(speedControl);
+				}	
+			} else if(cachedSpeed != 0) {
+				cachedSpeed = 0;
+				speedControl.setText(null, null);
+				relayoutLeftControls(speedControl);
+			}
+		}
+	}
+	
+	private void updateTimeLeftInfo() {
+		int time = 0;
+		if (routeLayer != null && routeLayer.getHelper().isRouterEnabled()) {
+			boolean followingMode = routeLayer.getHelper().isFollowingMode();
+			time = routeLayer.getHelper().getLeftTime();
+			if (time != 0) {
+				if (followingMode && showArrivalTime) {
+					long toFindTime = time * 1000 + System.currentTimeMillis();
+					if (Math.abs(toFindTime - cachedLeftTime) > 30000) {
+						cachedLeftTime = toFindTime;
+						if (DateFormat.is24HourFormat(map)) {
+							leftTimeControl.setText(DateFormat.format("kk:mm", toFindTime).toString(), null); //$NON-NLS-1$
+						} else {
+							leftTimeControl.setText(DateFormat.format("k:mm aa", toFindTime).toString(), null); //$NON-NLS-1$
+						}
+						relayoutLeftControls(leftTimeControl);
+					}
+				} else {
+					if (Math.abs(time - cachedLeftTime) > 30) {
+						cachedLeftTime = time;
+						int hours = time / (60 * 60);
+						int minutes = (time / 60) % 60;
+						leftTimeControl.setText(String.format("%d:%02d", hours, minutes), null); //$NON-NLS-1$
+					}
+					relayoutLeftControls(leftTimeControl);
+				}
+			}
+		}
+		if (time == 0 && cachedLeftTime != 0) {
+			cachedLeftTime = 0;
+			leftTimeControl.setText(null, null);
+			relayoutLeftControls(leftTimeControl);
 		}
 	}
 	
@@ -362,43 +414,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 					}
 				}
 			}
-			
-			boolean followingMode = routeLayer.getHelper().isFollowingMode();
-			int time = routeLayer.getHelper().getLeftTime();
-			if(time == 0){
-				cachedLeftTime = 0;
-				cachedLeftTimeString = null;
-			} else {
-				if(followingMode && showArrivalTime){
-					long toFindTime = time * 1000 + System.currentTimeMillis();
-					if(Math.abs(toFindTime - cachedLeftTime) > 30000){
-						cachedLeftTime = toFindTime;
-						if(DateFormat.is24HourFormat(map)){
-							cachedLeftTimeString = DateFormat.format("kk:mm",toFindTime).toString(); //$NON-NLS-1$
-						} else {
-							cachedLeftTimeString = DateFormat.format("k:mm aa",toFindTime).toString(); //$NON-NLS-1$
-						}
-						boundsForLeftTime.left = - paintBlack.measureText(cachedLeftTimeString) - 10 * scaleCoefficient + boundsForLeftTime.right;
-					}
-				} else {
-					if(Math.abs(time - cachedLeftTime) > 30){
-						cachedLeftTime = time;
-						int hours = time / (60 * 60);
-						int minutes = (time / 60) % 60;
-						cachedLeftTimeString = String.format("%d:%02d", hours, minutes); //$NON-NLS-1$
-						boundsForLeftTime.left = - paintBlack.measureText(cachedLeftTimeString) - 10 * scaleCoefficient + boundsForLeftTime.right;
-					}
-				}
-			}
-			if(cachedLeftTimeString != null) {
-				int w = (int) (boundsForLeftTime.right - boundsForLeftTime.left); 
-				boundsForLeftTime.right = view.getWidth();
-				boundsForLeftTime.left = view.getWidth() - w;
-				canvas.drawRoundRect(boundsForLeftTime, roundCorner, roundCorner, paintAlphaGray);
-				canvas.drawRoundRect(boundsForLeftTime, roundCorner, roundCorner, paintBlack);
-				canvas.drawText(cachedLeftTimeString, boundsForLeftTime.left + 5 * scaleCoefficient, boundsForLeftTime.bottom - 9 * scaleCoefficient, paintBlack);
-				
-			}
 		}
 	}
 	
@@ -437,12 +452,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		if (routeLayer != null && routeLayer.getHelper().isRouterEnabled()) {
 			if (boundsForMiniRoute.contains(point.x, point.y) && routeLayer.getHelper().isFollowingMode()) {
 				showMiniMap = !showMiniMap;
-				view.refreshMap();
-				return true;
-			}
-			if (boundsForLeftTime.contains(point.x, point.y) && routeLayer.getHelper().isFollowingMode()) {
-				showArrivalTime = !showArrivalTime;
-				view.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME.set(showArrivalTime);
 				view.refreshMap();
 				return true;
 			}
@@ -600,9 +609,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 		public int getMeasuredWidth() {
 			int w = 0;
 			if(text != null) {
-				w += textPaint.measureText(text) + 3 * scaleCoefficient;
+				w += textPaint.measureText(text) + 2 * scaleCoefficient;
 				if(subtext != null) {
-					w += textPaint.measureText(subtext) + 4 * scaleCoefficient;
+					w += subtextPaint.measureText(subtext) + 2 * scaleCoefficient;
 				}
 			}
 			return w;
@@ -612,10 +621,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		void onDraw(Canvas cv) {
 			super.onDraw(cv);
 			if(isVisible()) {
-				cv.drawText(text, 3 * scaleCoefficient, getHeight() - scaleCoefficient,
+				cv.drawText(text, 2 * scaleCoefficient, getHeight() - scaleCoefficient,
 						textPaint);
 				if(subtext != null) {
-					cv.drawText(subtext, 7 * scaleCoefficient + textPaint.measureText(text), 
+					cv.drawText(subtext, 4 * scaleCoefficient + textPaint.measureText(text), 
 							getHeight() - scaleCoefficient, subtextPaint);
 				}
 			}
