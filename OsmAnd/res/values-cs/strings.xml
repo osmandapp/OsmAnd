@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="native_library_not_supported">Android native library není podporovaná na tomto zařízení.</string>
+	<string name="init_native_library">Inicializuji Android native library...</string>
 	<string name="choose_auto_follow_route">Nastavení automatického sledování</string>
 	<string name="choose_auto_follow_route_descr">Zadejte interval pro automatické vrácení mapy na vaši pozici</string>
 	<string name="auto_follow_route_never">Nikdy</string>
@@ -61,7 +63,7 @@
 <string name="search_position_map_view">Posledního místa na mapě</string>
 
 <string name="select_search_position">Hledat v okolí :</string>
-<string name="context_menu_item_search">Search</string>
+<string name="context_menu_item_search">Hledat</string>
 
 
 	<string name="tip_recent_changes_0_6_7_t">Poslední změny ve verzi 0.6.7 :
