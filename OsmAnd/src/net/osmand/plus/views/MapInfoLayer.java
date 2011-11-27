@@ -16,14 +16,17 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
+import android.view.MotionEvent;
 import android.view.WindowManager;
 
 public class MapInfoLayer extends OsmandMapLayer {
@@ -46,7 +49,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private Paint paintAlphaGray;
 	private Paint paintRouteDirection;
 	
-	private RectF boundsForCompass;
+	private Rect boundsForCompass;
 	private RectF boundsForZoom;
 	private RectF boundsForDist;
 	private RectF boundsForMiniRoute;
@@ -76,6 +79,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private float roundCorner;
 	private Bitmap compass;
 	private Paint paintImg;
+	private Drawable boxTop;
+	
+	private final static int[] pressedState = new int[]{android.R.attr.state_pressed};
+	private final static int[] simpleState = new int[]{};
 	
 	
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
@@ -136,7 +143,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		fillRed.setColor(Color.RED);
 		fillRed.setAntiAlias(true);
 		
-		boundsForCompass = new RectF(0, 0, 35, 32);
+		boundsForCompass = new Rect(0, 0, 35, 32);
 		boundsForDist = new RectF(35, 0, 110, 32);
 		boundsForZoom = new RectF(0, 32, 35, 64);
 		boundsForSpeed = new RectF(35, 32, 110, 64);
@@ -163,10 +170,19 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		compass = BitmapFactory.decodeResource(view.getResources(), R.drawable.compass);
 		
+		boxTop = view.getResources().getDrawable(R.drawable.box_top);
+		
 		showArrivalTime = view.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME.get();
 	}
 	
 	private void scaleRect(RectF r){
+		r.bottom *= scaleCoefficient;
+		r.left *= scaleCoefficient;
+		r.right *= scaleCoefficient;
+		r.top *= scaleCoefficient;
+	}
+	
+	private void scaleRect(Rect r){
 		r.bottom *= scaleCoefficient;
 		r.left *= scaleCoefficient;
 		r.right *= scaleCoefficient;
@@ -250,8 +266,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 		drawRouteInfo(canvas);
 		
 		// draw compass the last (!) because it use rotating
-		canvas.drawRoundRect(boundsForCompass, roundCorner, roundCorner, paintAlphaGray);
-		canvas.drawRoundRect(boundsForCompass, roundCorner, roundCorner, paintBlack);
+//		canvas.drawRoundRect(boundsForCompass, roundCorner, roundCorner, paintAlphaGray);
+//		canvas.drawRoundRect(boundsForCompass, roundCorner, roundCorner, paintBlack);
+		boxTop.setBounds(boundsForCompass);
+		boxTop.draw(canvas);
+		
+		
 		canvas.rotate(view.getRotate(), 17 * scaleCoefficient, 15 * scaleCoefficient);
 		canvas.drawBitmap(compass, 0, 0, paintImg);
 	}
@@ -348,6 +368,22 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public boolean drawInScreenPixels() {
 		return true;
 	}
+	
+	@Override
+	public void onTouchEvent(MotionEvent event) {
+		if (event.getAction() == MotionEvent.ACTION_DOWN) {
+			if (boxTop.getBounds().contains((int)event.getX(), (int) event.getY())) {
+				boxTop.setState(pressedState);
+				view.refreshMap();
+			}
+		}
+		if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
+			if (boxTop.getState() == pressedState) {
+				boxTop.setState(simpleState);
+				view.refreshMap();
+			}
+		}
+	}
 
 
 	@Override
@@ -374,7 +410,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 						fZoom, true);
 			}
 		}
-		if(boundsForCompass.contains(point.x, point.y)){
+		if(boundsForCompass.contains((int)point.x, (int)point.y)){
 			map.switchRotateMapMode();
 			return true;
 		}
