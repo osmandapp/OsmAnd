@@ -476,7 +476,7 @@ public class MapActivityLayers {
 		builder.show();
 	}
 	
-	private void selectMapLayer(final OsmandMapTileView mapView){
+	public void selectMapLayer(final OsmandMapTileView mapView){
 		final OsmandSettings settings = getApplication().getSettings();
 		
 		final LinkedHashMap<String, String> entriesMap = new LinkedHashMap<String, String>();

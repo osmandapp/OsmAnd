@@ -4,11 +4,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" android:keepScreenOn="true">
 <net.osmand.plus.views.OsmandMapTileView android:id="@+id/MapView" android:layout_width="fill_parent" android:layout_height="fill_parent"/>
-<View android:id="@+id/ProgressBar"  
-			android:layout_width="40dp"  android:layout_height="40dp" android:layout_marginRight="25dp" android:layout_marginTop="5dp" android:layout_gravity="top|right"/>  			 
-			
-
-<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="top|right" android:layout_marginTop="64dp" android:id="@+id/BackToLocation" android:background="@drawable/back_location"></ImageButton>
 
 <LinearLayout android:layout_width="wrap_content" android:id="@+id/RouteLayout" android:orientation="horizontal" android:layout_height="wrap_content" 
 				android:layout_marginBottom="12dp" android:layout_gravity="bottom|center" >

@@ -72,7 +72,6 @@ import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class MapActivity extends Activity implements IMapLocationListener, SensorEventListener {
@@ -103,8 +102,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	final private MapActivityActions mapActions = new MapActivityActions(this);
 	private EditingPOIActivity poiActions;
 	final private MapActivityLayers mapLayers = new MapActivityLayers(this);
-	
-	private ImageButton backToLocation;
 	
 	private SavingTrackHelper savingTrackHelper;
 	private RoutingHelper routingHelper;
@@ -223,13 +220,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			}
 		}
 		
-		backToLocation = (ImageButton)findViewById(R.id.BackToLocation);
-		backToLocation.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				backToLocationImpl();
-			}
-		});
 		dialogProviders.add(mapActions);
 		dialogProviders.add(poiActions);
 		dialogProviders.add(mapLayers.getOsmBugsLayer());
@@ -258,7 +248,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 
 		mapLayers.getPoiMapLayer().setFilter(settings.getPoiFilterForMap((OsmandApplication) getApplication()));
 
-		backToLocation.setVisibility(View.INVISIBLE);
+		mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(false);
 		// by default turn off causing unexpected movements due to network establishing
 		// best to show previous location
 		setMapLinkedToLocation(false);
@@ -307,7 +297,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			
 		}
 
-		View progress = findViewById(R.id.ProgressBar);
+		View progress = mapLayers.getMapInfoLayer().getProgressBar();
 		if (progress != null) {
 			getMyApplication().getResourceManager().setBusyIndicator(new BusyIndicator(this, progress));
 		}
@@ -612,7 +602,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     }
     
     public void backToLocationImpl() {
-		backToLocation.setVisibility(View.INVISIBLE);
+    	mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(false);
 		PointLocationLayer locationLayer = mapLayers.getLocationLayer();
 		if(!isMapLinkedToLocation()){
 			setMapLinkedToLocation(true);
@@ -712,13 +702,13 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				}
 				mapView.setLatLon(location.getLatitude(), location.getLongitude());
 			} else {
-				if(backToLocation.getVisibility() != View.VISIBLE){
-					backToLocation.setVisibility(View.VISIBLE);
+				if(!mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()){
+					mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(true);
 				}
 			}
 		} else {
-			if(backToLocation.getVisibility() != View.INVISIBLE){
-				backToLocation.setVisibility(View.INVISIBLE);
+			if(mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()){
+				mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(false);
 			}
 		}
     	// When location is changed we need to refresh map in order to show movement! 
@@ -968,11 +958,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		// when user start dragging 
 		if(mapLayers.getLocationLayer().getLastKnownLocation() != null){
 			setMapLinkedToLocation(false);
-			if (backToLocation.getVisibility() != View.VISIBLE) {
+			if (!mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()) {
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						backToLocation.setVisibility(View.VISIBLE);
+						mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(true);
 					}
 				});
 			}

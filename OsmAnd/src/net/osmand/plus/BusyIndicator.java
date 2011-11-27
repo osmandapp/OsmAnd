@@ -35,9 +35,6 @@ public class BusyIndicator {
 		return status;
 	}
 
-
-    
-	
 	/**
 	 * @param status - 0 invisible
 	 * 1 
@@ -47,11 +44,11 @@ public class BusyIndicator {
 			this.status = status;
 			final Drawable drawable;
 			if(this.status == STATUS_BLACK){
-				drawable =  ctx.getResources().getDrawable(R.drawable.spinner_black_76);
+				drawable =  ctx.getResources().getDrawable(R.drawable.progress_grey);
 			} else if(this.status == STATUS_BLUE){
-				drawable =  ctx.getResources().getDrawable(R.drawable.spinner_blue_76);
+				drawable =  ctx.getResources().getDrawable(R.drawable.progress_blue);
 			} else if(this.status == STATUS_GREEN){
-				drawable =  ctx.getResources().getDrawable(R.drawable.spinner_green_76);
+				drawable =  ctx.getResources().getDrawable(R.drawable.progress_green);
 			} else {
 				drawable = null;
 			}
@@ -82,9 +79,7 @@ public class BusyIndicator {
 					if(drawable != null){
 						bar.setBackgroundDrawable(drawable);
 						bar.startAnimation(animation);
-						
 					}
-					
 				}
 			});
 		}
