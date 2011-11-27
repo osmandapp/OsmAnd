@@ -611,7 +611,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}
     }
     
-    protected void backToLocationImpl() {
+    public void backToLocationImpl() {
 		backToLocation.setVisibility(View.INVISIBLE);
 		PointLocationLayer locationLayer = mapLayers.getLocationLayer();
 		if(!isMapLinkedToLocation()){

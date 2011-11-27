@@ -132,16 +132,15 @@ public class MapActivityLayers {
 		// 7. point navigation layer
 		navigationLayer = new PointNavigationLayer();
 		mapView.addLayer(navigationLayer, 7);
-		// 8. map info layer
-		mapInfoLayer = new MapInfoLayer(activity, routeLayer);
-		mapView.addLayer(mapInfoLayer, 8);
-		// 9. context menu layer 
+		// 8. context menu layer 
 		contextMenuLayer = new ContextMenuLayer(activity);
-		mapView.addLayer(contextMenuLayer, 9);
+		mapView.addLayer(contextMenuLayer, 8);
+		// 9. map info layer
+		mapInfoLayer = new MapInfoLayer(activity, routeLayer);
+		mapView.addLayer(mapInfoLayer, 9);
 		// 10. route info layer
 		routeInfoLayer = new RouteInfoLayer(routingHelper, (LinearLayout) activity.findViewById(R.id.RouteLayout));
 		mapView.addLayer(routeInfoLayer, 10);
-		
 		// 11. route info layer
 		mapControlsLayer = new MapControlsLayer(activity);
 		mapView.addLayer(mapControlsLayer, 11);

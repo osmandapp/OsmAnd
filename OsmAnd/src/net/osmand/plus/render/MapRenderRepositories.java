@@ -545,6 +545,10 @@ public class MapRenderRepositories {
 				renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, prefs.USE_ENGLISH_NAMES.get(), renderingReq,
 						notifyList, fillColor);
 			}
+			// Force to use rendering request in order to prevent Garbage Collector when it is used in C++
+			if(renderingReq != null){
+				System.out.println("Debug :" + renderingReq != null);				
+			}
 			String renderingDebugInfo = currentRenderingContext.renderingDebugInfo;
 			currentRenderingContext.ended = true;
 			if (checkWhetherInterrupted()) {

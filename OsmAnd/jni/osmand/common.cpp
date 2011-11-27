@@ -122,7 +122,6 @@ std::string getString(jstring st) {
 	const char* utf = globalEnv()->GetStringUTFChars(st, NULL);
 	std::string res(utf);
 	globalEnv()->ReleaseStringUTFChars(st, utf);
-	globalEnv()->DeleteLocalRef(st);
 	return res;
 }
 
