@@ -18,7 +18,7 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-public class TransportStopsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMenuProvider {
+public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	private static final int startZoom = 12;
 	
 	private Paint pointAltUI;
@@ -68,7 +68,7 @@ public class TransportStopsLayer implements OsmandMapLayer, ContextMenuLayer.ICo
 	
 	
 	@Override
-	public boolean onTouchEvent(PointF point) {
+	public boolean onSingleTap(PointF point) {
 		TransportStop n = getFromPoint(point);
 		if(n != null){
 			Toast.makeText(view.getContext(), getStopDescription(n, true), Toast.LENGTH_LONG).show();

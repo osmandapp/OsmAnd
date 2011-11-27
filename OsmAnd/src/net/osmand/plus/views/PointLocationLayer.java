@@ -16,7 +16,7 @@ import android.location.Location;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-public class PointLocationLayer implements OsmandMapLayer {
+public class PointLocationLayer extends OsmandMapLayer {
 	protected final static int RADIUS = 7;
 	protected final static float HEADING_ANGLE = 60;
 	
@@ -169,16 +169,6 @@ public class PointLocationLayer implements OsmandMapLayer {
 	}
 	@Override
 	public boolean drawInScreenPixels() {
-		return false;
-	}
-
-	@Override
-	public boolean onLongPressEvent(PointF point) {
-		return false;
-	}
-
-	@Override
-	public boolean onTouchEvent(PointF point) {
 		return false;
 	}
 

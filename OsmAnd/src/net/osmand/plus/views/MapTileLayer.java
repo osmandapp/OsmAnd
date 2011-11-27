@@ -9,7 +9,6 @@ import net.osmand.plus.ResourceManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.FloatMath;
@@ -256,16 +255,5 @@ public class MapTileLayer extends BaseMapLayer {
 		return map;
 	}
 	
-
-
-	@Override
-	public boolean onLongPressEvent(PointF point) {
-		return false;
-	}
-
-	@Override
-	public boolean onTouchEvent(PointF point) {
-		return false;
-	}
 
 }

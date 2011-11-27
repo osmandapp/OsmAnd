@@ -17,7 +17,7 @@ import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 
-public class GPXLayer implements OsmandMapLayer {
+public class GPXLayer extends OsmandMapLayer {
 
 	
 	private OsmandMapTileView view;
@@ -143,7 +143,7 @@ public class GPXLayer implements OsmandMapLayer {
 	}
 
 	@Override
-	public boolean onTouchEvent(PointF point) {
+	public boolean onSingleTap(PointF point) {
 		return false;
 	}
 

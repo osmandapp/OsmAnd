@@ -161,7 +161,7 @@ public class MapVectorLayer extends BaseMapLayer {
 	}
 
 	@Override
-	public boolean onTouchEvent(PointF point) {
+	public boolean onSingleTap(PointF point) {
 		return false;
 	}
 }

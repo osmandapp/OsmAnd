@@ -42,7 +42,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMenuProvider, DialogProvider {
+public class OsmBugsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider, DialogProvider {
 
 	private static final Log log = LogUtil.getLog(OsmBugsLayer.class); 
 	private final static int startZoom = 8;
@@ -222,7 +222,7 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 	}
 
 	@Override
-	public boolean onTouchEvent(PointF point) {
+	public boolean onSingleTap(PointF point) {
 		OpenStreetBug bug = getBugFromPoint(point);
 		if(bug != null){
 			String format = activity.getString(R.string.osb_bug_name)+ " : " + bug.getName(); //$NON-NLS-1$

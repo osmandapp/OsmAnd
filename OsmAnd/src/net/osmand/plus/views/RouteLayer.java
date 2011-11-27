@@ -19,7 +19,7 @@ import android.graphics.Paint.Style;
 import android.location.Location;
 import android.util.Log;
 
-public class RouteLayer implements OsmandMapLayer {
+public class RouteLayer extends OsmandMapLayer {
 	
 	private OsmandMapTileView view;
 	
@@ -128,7 +128,7 @@ public class RouteLayer implements OsmandMapLayer {
 	}
 
 	@Override
-	public boolean onTouchEvent(PointF point) {
+	public boolean onSingleTap(PointF point) {
 		return false;
 	}
 

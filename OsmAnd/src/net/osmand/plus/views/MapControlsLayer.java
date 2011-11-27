@@ -28,7 +28,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
-public class MapControlsLayer implements OsmandMapLayer {
+public class MapControlsLayer extends OsmandMapLayer {
 
 	private static final int SHOW_SEEKBAR_MSG_ID = 2;
 	private static final int SHOW_SEEKBAR_DELAY = 7000;
@@ -215,13 +215,9 @@ public class MapControlsLayer implements OsmandMapLayer {
 		}
 	}
 
-	@Override
-	public boolean onLongPressEvent(PointF point) {
-		return false;
-	}
 
 	@Override
-	public boolean onTouchEvent(PointF point) {
+	public boolean onSingleTap(PointF point) {
 		if (modeShadow.getBounds().contains((int) point.x, (int) point.y)) {
 			onApplicationModePress();
 			return true;

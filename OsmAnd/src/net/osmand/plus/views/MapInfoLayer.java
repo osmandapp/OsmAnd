@@ -26,7 +26,7 @@ import android.util.DisplayMetrics;
 import android.util.FloatMath;
 import android.view.WindowManager;
 
-public class MapInfoLayer implements OsmandMapLayer {
+public class MapInfoLayer extends OsmandMapLayer {
 
 
 	private OsmandMapTileView view;
@@ -349,13 +349,9 @@ public class MapInfoLayer implements OsmandMapLayer {
 		return true;
 	}
 
-	@Override
-	public boolean onLongPressEvent(PointF point) {
-		return false;
-	}
 
 	@Override
-	public boolean onTouchEvent(PointF point) {
+	public boolean onSingleTap(PointF point) {
 		if (routeLayer != null && routeLayer.getHelper().isRouterEnabled()) {
 			if (boundsForMiniRoute.contains(point.x, point.y) && routeLayer.getHelper().isFollowingMode()) {
 				showMiniMap = !showMiniMap;

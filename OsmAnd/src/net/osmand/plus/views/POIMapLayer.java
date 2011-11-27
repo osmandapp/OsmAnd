@@ -32,7 +32,7 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMenuProvider {
+public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	private static final int startZoom = 10;
 	public static final int TEXT_WRAP = 15;
 	public static final int TEXT_LINES = 3;
@@ -55,10 +55,6 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 		this.activity = activity;
 	}
 
-	@Override
-	public boolean onLongPressEvent(PointF point) {
-		return false;
-	}
 	
 	public PoiFilter getFilter() {
 		return filter;
@@ -93,7 +89,7 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 	
 
 	@Override
-	public boolean onTouchEvent(PointF point) {
+	public boolean onSingleTap(PointF point) {
 		Amenity n = getAmenityFromPoint(point);
 		if(n != null){
 			String format = OsmAndFormatter.getPoiSimpleFormat(n, view.getContext(),

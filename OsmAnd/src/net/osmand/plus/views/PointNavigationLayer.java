@@ -15,7 +15,7 @@ import android.location.Location;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-public class PointNavigationLayer implements OsmandMapLayer {
+public class PointNavigationLayer extends OsmandMapLayer {
 	protected final static int DIST_TO_SHOW = 80;
 
 	private Paint point;
@@ -116,7 +116,7 @@ public class PointNavigationLayer implements OsmandMapLayer {
 	}
 
 	@Override
-	public boolean onTouchEvent(PointF point) {
+	public boolean onSingleTap(PointF point) {
 		return false;
 	}
 

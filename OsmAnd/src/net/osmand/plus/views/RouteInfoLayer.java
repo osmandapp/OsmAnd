@@ -26,7 +26,7 @@ import android.widget.TextView;
 import android.widget.FrameLayout.LayoutParams;
 
 
-public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener {
+public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationListener {
 
 	private static final int BASE_TEXT_SIZE = 150;
 	private int textSize = BASE_TEXT_SIZE;
@@ -208,7 +208,7 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 	}
 
 	@Override
-	public boolean onTouchEvent(PointF point) {
+	public boolean onSingleTap(PointF point) {
 		return false;
 	}
 

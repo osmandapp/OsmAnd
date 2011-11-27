@@ -3,19 +3,26 @@ package net.osmand.plus.views;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.view.MotionEvent;
 
-public interface OsmandMapLayer {
+public abstract class OsmandMapLayer {
 	
 	
-	public void initLayer(OsmandMapTileView view);
+	public abstract void initLayer(OsmandMapTileView view);
 	
-	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode);
+	public abstract void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode);
 	
-	public void destroyLayer();
+	public abstract void destroyLayer();
 	
-	public boolean onTouchEvent(PointF point);
+	public boolean onSingleTap(PointF point) {
+		return false;
+	}
 	
-	public boolean onLongPressEvent(PointF point);
+	public boolean onLongPressEvent(PointF point) {
+		return false;
+	}
+	
+	public void onTouchEvent(MotionEvent event) {}
 	
 	/**
 	 * This method returns whether canvas should be rotated as 
@@ -23,6 +30,7 @@ public interface OsmandMapLayer {
 	 * If the layer draws simply layer over screen (not over map)
 	 * it should return true.
 	 */
-	public boolean drawInScreenPixels();
+	public abstract boolean drawInScreenPixels();
+	
 
 }
