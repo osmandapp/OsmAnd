@@ -323,7 +323,7 @@ public class IndexCreator {
 	
 	private void createDatabaseIndexesStructure() throws SQLException, IOException {
 		// 2.1 create temporary sqlite database to put temporary results to it
-		if (indexMap || indexAddress || indexTransport) {
+		if (indexMap || indexAddress || indexTransport || indexPOI) {
 			mapFile = new File(workingDir, getMapFileName());
 			// to save space
 			mapFile.getParentFile().mkdirs();
