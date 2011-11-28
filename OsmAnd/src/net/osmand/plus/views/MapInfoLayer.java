@@ -522,8 +522,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		flp.leftMargin = STATUS_BAR_MARGIN_X;
 		flp.rightMargin = STATUS_BAR_MARGIN_X;
 		flp.gravity = Gravity.TOP;
-		statusBar.setLayoutParams(flp);
-		statusBar.setBackgroundColor(Color.argb(100, 200, 200, 200));
+		statusBar.setLayoutParams(flp);		
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		//params.leftMargin = (int) (5 * scaleCoefficient);
 		ImageView compassView = new ImageView(view.getContext()) {
