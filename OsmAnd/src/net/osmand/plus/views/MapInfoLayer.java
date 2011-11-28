@@ -578,6 +578,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		fl.addView(progressBar, fparams);
 		
 		params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		params.leftMargin = (int) (3 * scaleCoefficient);
 		backToLocation = new ImageView(view.getContext());
 		backToLocation.setImageDrawable(view.getResources().getDrawable(R.drawable.back_to_loc));
 		backToLocation.setOnClickListener(new View.OnClickListener() {
