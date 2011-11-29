@@ -5,6 +5,7 @@ import gnu.trove.set.hash.TIntHashSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.FavouritePoint;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.data.Amenity;
@@ -333,6 +334,14 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public String getObjectDescription(Object o) {
 		if(o instanceof Amenity){
 			return OsmAndFormatter.getPoiSimpleFormat((Amenity) o, view.getContext(), view.getSettings().USE_ENGLISH_NAMES.get());
+		}
+		return null;
+	}
+	
+	@Override
+	public String getObjectName(Object o) {
+		if(o instanceof Amenity){
+			return ((Amenity)o).getName(); //$NON-NLS-1$
 		}
 		return null;
 	}

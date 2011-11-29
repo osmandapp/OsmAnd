@@ -58,6 +58,7 @@ public class MapActivityActions implements DialogProvider {
 	
 	private static final String KEY_LONGITUDE = "longitude";
 	private static final String KEY_LATITUDE = "latitude";
+	private static final String KEY_NAME = "name";
 	private static final String KEY_FAVORITE = "favorite";
 	private static final String KEY_ZOOM = "zoom";
 
@@ -77,17 +78,19 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	protected void addFavouritePoint(final double latitude, final double longitude){
-		enhance(dialogBundle,latitude,longitude);
+		String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
+		enhance(dialogBundle,latitude,longitude, name);
 		mapActivity.showDialog(DIALOG_ADD_FAVORITE);
 	}
 	
-	private Bundle enhance(Bundle aBundle, double latitude,	double longitude) {
+	private Bundle enhance(Bundle aBundle, double latitude, double longitude, String name) {
 		aBundle.putDouble(KEY_LATITUDE, latitude);
 		aBundle.putDouble(KEY_LONGITUDE, longitude);
+		aBundle.putString(KEY_NAME, name);
 		return aBundle;
 	}
 	
-	private Bundle enhance(Bundle bundle, final int zoom) {
+	private Bundle enhance(Bundle bundle, double latitude, double longitude, final int zoom) {
 		bundle.putInt(KEY_ZOOM, zoom);
 		return bundle;
 	}
@@ -96,7 +99,11 @@ public class MapActivityActions implements DialogProvider {
 		final Resources resources = mapActivity.getResources();
 		final double latitude = args.getDouble(KEY_LATITUDE);
 		final double longitude = args.getDouble(KEY_LONGITUDE);
-		final FavouritePoint point = new FavouritePoint(latitude, longitude, resources.getString(R.string.add_favorite_dialog_default_favourite_name),
+		String name = resources.getString(R.string.add_favorite_dialog_default_favourite_name);
+		if(args.getString(KEY_NAME) != null) {
+			name = args.getString(KEY_NAME);
+		}
+		final FavouritePoint point = new FavouritePoint(latitude, longitude, name,
 				resources.getString(R.string.favorite_default_category));
 		args.putSerializable(KEY_FAVORITE, point);
 		final EditText editText =  (EditText) dialog.findViewById(R.id.Name);
@@ -180,7 +187,8 @@ public class MapActivityActions implements DialogProvider {
 	}
 	
     protected void addWaypoint(final double latitude, final double longitude){
-    	enhance(dialogBundle,latitude,longitude);
+    	String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
+    	enhance(dialogBundle,latitude,longitude, name);
     	mapActivity.showDialog(DIALOG_ADD_WAYPOINT);
     }
     
@@ -190,6 +198,7 @@ public class MapActivityActions implements DialogProvider {
 		final EditText editText = new EditText(mapActivity);
 		editText.setId(R.id.TextView);
 		builder.setView(editText);
+		editText.setPadding(5, 0, 5, 0);
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
 			@Override
@@ -207,7 +216,7 @@ public class MapActivityActions implements DialogProvider {
     }
     
     protected void reloadTile(final int zoom, final double latitude, final double longitude){
-    	enhance(enhance(dialogBundle,latitude,longitude),zoom);
+    	enhance(dialogBundle,latitude,longitude,zoom);
     	mapActivity.showDialog(DIALOG_RELOAD_TITLE);
     }
 
@@ -326,7 +335,7 @@ public class MapActivityActions implements DialogProvider {
     }
     
     protected void shareLocation(final double latitude, final double longitude, int zoom){
-    	enhance(enhance(dialogBundle,latitude,longitude),zoom);
+    	enhance(dialogBundle,latitude,longitude,zoom);
     	mapActivity.showDialog(DIALOG_SHARE_LOCATION);
     }
     
@@ -722,7 +731,12 @@ public class MapActivityActions implements DialogProvider {
 			break;
 		case DIALOG_ADD_WAYPOINT:
 			EditText v = (EditText) dialog.getWindow().findViewById(R.id.TextView);
-			v.setText("");
+			v.setPadding(5, 0, 5, 0);
+			if(args.getString(KEY_NAME) != null) {
+				v.setText(args.getString(KEY_NAME));
+			} else {
+				v.setText("");
+			}
 			break;
 		case DIALOG_ABOUT_ROUTE:
 			prepareAboutRouteDialog(dialog, args);

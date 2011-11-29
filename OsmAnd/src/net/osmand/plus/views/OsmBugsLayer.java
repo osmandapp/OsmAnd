@@ -466,6 +466,14 @@ public class OsmBugsLayer extends OsmandMapLayer implements ContextMenuLayer.ICo
 		}
 		return null;
 	}
+	
+	@Override
+	public String getObjectName(Object o) {
+		if(o instanceof OpenStreetBug){
+			return ((OpenStreetBug)o).getName(); 
+		}
+		return null;
+	}
 
 	@Override
 	public Object getPointObject(PointF point) {

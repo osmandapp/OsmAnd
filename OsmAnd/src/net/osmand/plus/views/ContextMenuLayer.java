@@ -35,6 +35,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		
 		public String getObjectDescription(Object o);
 		
+		public String getObjectName(Object o);
+		
 		public DialogInterface.OnClickListener getActionListener(List<String> actionsList, Object o);
 	}
 	
@@ -105,7 +107,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			canvas.translate(-tx, -ty);
 			
 			if (textView.getText().length() > 0) {
-				canvas.translate(x - textView.getWidth() / 2, ty - textView.getBottom());
+				int topMarginDiff = (int) (5 * scaleCoefficient);
+				canvas.translate(x - textView.getWidth() / 2, ty - textView.getBottom() - topMarginDiff);
 				int c = textView.getLineCount();
 				
 				textView.draw(canvas);
@@ -120,12 +123,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	
 	private void layoutText() {
 		Rect padding = new Rect();
-		if(textView.getLineCount() > 0) {
+		if (textView.getLineCount() > 0) {
 			textView.getBackground().getPadding(padding);
 		}
-		int w = BASE_TEXT_SIZE; 
-		int h = (int) ((textView.getPaint().getTextSize()	+4) * textView.getLineCount());
-		textView.layout(0, -padding.bottom - padding.top, w, h);
+		int w = BASE_TEXT_SIZE;
+		int h = (int) ((textView.getPaint().getTextSize() + 4) * textView.getLineCount());
+		
+		textView.layout(0, -padding.bottom, w, h + padding.top);
 	}
 	
 	public void setLocation(LatLon loc, String description){
@@ -195,6 +199,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 		}
 		return false;
+	}
+	
+	public String getSelectedObjectName(){
+		if(selectedObject != null && selectedContextProvider != null){
+			return selectedContextProvider.getObjectName(selectedObject);
+		}
+		return null;
 	}
 
 	@Override

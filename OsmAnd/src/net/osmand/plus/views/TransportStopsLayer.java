@@ -7,6 +7,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.TransportIndexRepository;
+import net.osmand.plus.views.OsmBugsLayer.OpenStreetBug;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
@@ -159,6 +160,14 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	public String getObjectDescription(Object o) {
 		if(o instanceof TransportStop){
 			return getStopDescription((TransportStop) o, false);
+		}
+		return null;
+	}
+	
+	@Override
+	public String getObjectName(Object o) {
+		if(o instanceof TransportStop){
+			return ((TransportStop)o).getName(); 
 		}
 		return null;
 	}

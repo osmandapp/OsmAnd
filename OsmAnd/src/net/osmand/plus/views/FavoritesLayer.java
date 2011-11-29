@@ -151,6 +151,14 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 		}
 		return null;
 	}
+	
+	@Override
+	public String getObjectName(Object o) {
+		if(o instanceof FavouritePoint){
+			return ((FavouritePoint)o).getName(); //$NON-NLS-1$
+		}
+		return null;
+	}
 
 	@Override
 	public Object getPointObject(PointF point) {

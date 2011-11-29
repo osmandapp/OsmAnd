@@ -10,13 +10,16 @@
 #include <SkBitmap.h>
 
 JNIEnv* globalE;
+JavaVM* globalVM;
 JNIEnv* globalEnv(){
 	return globalE;
 }
 
 JNIEnv* setGlobalEnv(JNIEnv* e) {
-	globalE = e;
-	return e;
+	globalVM->GetEnv((void**)&globalE, JNI_VERSION_1_4);
+	// try to avoid problem with different thread attach
+//	globalE = e;
+	return globalE;
 }
 
 extern void loadJniCommon();
@@ -29,6 +32,7 @@ extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
     if(vm->GetEnv((void **)&globalE, JNI_VERSION_1_4)){
     	return JNI_ERR; /* JNI version not supported */
     }
+    globalVM = vm;
     loadJniCommon();
     loadJNIRendering();
     loadJNIRenderingRules();
