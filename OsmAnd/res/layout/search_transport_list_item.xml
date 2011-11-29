@@ -9,8 +9,8 @@
 	
 	<TextView android:id="@+id/distance"
 		android:layout_width="wrap_content" android:layout_height="fill_parent" android:gravity="left|center_vertical"
-		android:textSize="21sp" android:maxWidth="70dp" android:minWidth="70dp"/>
+		android:textSize="21sp" android:maxWidth="70dp" android:minWidth="70dp" style="@style/WhiteText"/>
 	<TextView android:id="@+id/label" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:textSize="21sp" />
+		android:layout_height="wrap_content" android:textSize="21sp" style="@style/WhiteText"/>
 
 </LinearLayout>

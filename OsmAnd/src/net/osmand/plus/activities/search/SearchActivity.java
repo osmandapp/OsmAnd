@@ -28,6 +28,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TabHost;
+import android.widget.TabWidget;
 import android.widget.TabHost.TabSpec;
 
 
@@ -83,8 +84,8 @@ public class SearchActivity extends TabActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
-		setContentView(R.layout.search_main);
 		setTheme(R.style.NiceActivity);
+		setContentView(R.layout.search_main);
 		
 		Button backButton = (Button) findViewById(R.id.search_back_button);
 		backButton.setOnClickListener(new View.OnClickListener() {
@@ -106,10 +107,12 @@ public class SearchActivity extends TabActivity {
 				);
 		
 		
+		TabWidget tabs = (TabWidget) findViewById(android.R.id.tabs);
+		tabs.setBackgroundResource(R.drawable.tab_icon_background);
 		TabHost host = getTabHost(); 
 		host.addTab(host.newTabSpec("Search_POI").setIndicator(getTabIndicator(R.drawable.tab_search_poi_icon)).
 				setContent(new Intent(this, SearchPoiFilterActivity.class))); //$NON-NLS-1$
-
+		
 		addressSpec = host.newTabSpec("Search_Address").
 				setIndicator(getTabIndicator(R.drawable.tab_search_address_icon));
 		

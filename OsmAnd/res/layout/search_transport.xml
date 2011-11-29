@@ -1,22 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<!-- This file is at /res/layout/list.xml -->
+<!-- This file is at /res/layout/list.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent" android:id="@+id/RootLayout">
-	<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
-		<ProgressBar android:id="@+id/ProgressBar" android:layout_width="wrap_content" android:layout_height="wrap_content"></ProgressBar>
-		<Button android:id="@+id/SearchTransportLevelButton" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1"></Button>
-		<TextView android:layout_width="wrap_content" android:text="" android:id="@+id/SearchAreaText" android:layout_height="wrap_content"/>
-	</LinearLayout>
-	<RelativeLayout android:id="@+id/RelativeLayout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_gravity="center">
-	<ListView android:id="@android:id/list" android:layout_width="fill_parent" android:layout_alignParentBottom="true"
-		android:layout_height="wrap_content" android:layout_below="@+id/listView" 
-		></ListView>
-	<ListView android:id="@+id/listView" android:layout_width="fill_parent" 
-			android:layout_alignParentTop="true"	android:layout_height="wrap_content" ></ListView>
-	
-</RelativeLayout>
-	
-	
+    android:id="@+id/RootLayout"
+    style="@style/WhiteText"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ProgressBar
+            android:id="@+id/ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </ProgressBar>
+
+        <Button
+            android:id="@+id/SearchTransportLevelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+        </Button>
+
+        <TextView
+            android:id="@+id/SearchAreaText"
+            style="@style/WhiteText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center" >
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/listView"
+            android:cacheColorHint="@color/activity_background"
+            android:divider="@drawable/tab_text_separator" >
+        </ListView>
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true" 
+            android:cacheColorHint="@color/activity_background"
+            android:divider="@drawable/tab_text_separator" >
+        </ListView>
+    </RelativeLayout>
 
 </LinearLayout>

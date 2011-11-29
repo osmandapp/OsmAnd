@@ -1,22 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent" android:orientation="vertical">
-<TextView android:id="@+id/TextView" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center_horizontal"
-		  android:layout_marginTop = "5dp" android:text="@string/search_osm_nominatim"/>
-<LinearLayout  android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:layout_height="wrap_content"  
-				android:layout_marginRight = "5dp" android:layout_marginTop = "5dp">
-<EditText android:text="" android:id="@+id/SearchText" android:hint="@string/hint_search_online" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1"></EditText>
-<Button android:text="@string/search_button" android:minWidth="80dp"  android:id="@+id/SearchButton" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-</LinearLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
-<ListView android:id="@android:id/list" android:layout_width="fill_parent" android:layout_weight="1" android:layout_height="wrap_content"></ListView>
+    <TextView
+        android:id="@+id/TextView"
+        style="@style/WhiteText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center_horizontal"
+        android:text="@string/search_osm_nominatim" />
 
-<LinearLayout  android:id="@+id/LinearLayout" android:layout_width="wrap_content" android:layout_height="wrap_content"  
-				android:layout_marginTop = "5dp" android:gravity="left|bottom">
-	<Button android:text="@string/search_offline_address" android:id="@+id/SearchOffline" android:minWidth="120dp" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-	<Button android:text="@string/search_offline_clear_search" android:id="@+id/ClearSearch" android:minWidth="150dp" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/LinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp" >
+
+        <EditText
+            android:id="@+id/SearchText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/hint_search_online"
+            android:text="" >
+        </EditText>
+
+        <Button
+            android:id="@+id/SearchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="80dp"
+            android:text="@string/search_button" >
+        </Button>
+    </LinearLayout>
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:cacheColorHint="@color/activity_background"
+        android:divider="@drawable/tab_text_separator" >
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/LinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="left|bottom" >
+
+        <Button
+            android:id="@+id/SearchOffline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="120dp"
+            android:text="@string/search_offline_address" >
+        </Button>
+
+        <Button
+            android:id="@+id/ClearSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="150dp"
+            android:text="@string/search_offline_clear_search" >
+        </Button>
+    </LinearLayout>
 
 </LinearLayout>

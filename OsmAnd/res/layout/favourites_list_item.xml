@@ -13,8 +13,8 @@
 	
 	<TextView android:id="@+id/favouritedistance_label"
 		android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center"
-		android:textSize="23sp" android:maxWidth="150dp" android:minWidth="90dp"/>
+		android:textSize="23sp" android:maxWidth="150dp" android:minWidth="90dp" style="@style/WhiteText"/>
 	<TextView android:id="@+id/favourite_label" android:layout_width="wrap_content" android:layout_marginLeft="10dp"
-		android:layout_height="wrap_content" android:textSize="23sp" />
+		android:layout_height="wrap_content" android:textSize="23sp" style="@style/WhiteText"/>
 
 </LinearLayout>
