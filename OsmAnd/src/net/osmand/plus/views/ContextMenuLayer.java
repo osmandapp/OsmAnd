@@ -105,7 +105,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			canvas.translate(-tx, -ty);
 			
 			if (textView.getText().length() > 0) {
-				canvas.translate(x - textView.getWidth() / 2, ty - textView.getTop());
+				canvas.translate(x - textView.getWidth() / 2, ty - textView.getBottom());
 				int c = textView.getLineCount();
 				
 				textView.draw(canvas);
