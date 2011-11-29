@@ -12,11 +12,10 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Paint.Style;
+import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -47,15 +46,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private TextView textView;
 	private DisplayMetrics dm;
 	private OsmandMapTileView view;
-	private static final int BASE_TEXT_SIZE = 170;
-	private static final int MARGIN_Y_TO_BOX = 12;
-	private int textSize = BASE_TEXT_SIZE;
+	private int BASE_TEXT_SIZE = 170;
+	private int SHADOW_OF_LEG = 5;
 	
-	private Paint paintLightBorder;
-	private Paint paintBlack;
-	private Paint paintBorder;
 	private final MapActivity activity;
-	private Rect padding = new Rect();
+	private Drawable boxLeg;
+	private float scaleCoefficient = 1;
 	
 	public ContextMenuLayer(MapActivity activity){
 		this.activity = activity;
@@ -71,29 +67,28 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		dm = new DisplayMetrics();
 		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
-		textSize = (int) (BASE_TEXT_SIZE * dm.density);
+		scaleCoefficient  = dm.density;
+		if (Math.min(dm.widthPixels / (dm.density * 160), dm.heightPixels / (dm.density * 160)) > 2.5f) {
+			// large screen
+			scaleCoefficient *= 1.5f;
+		}
+		BASE_TEXT_SIZE = (int) (BASE_TEXT_SIZE * scaleCoefficient);
+		SHADOW_OF_LEG = (int) (SHADOW_OF_LEG * scaleCoefficient);
 		
-		paintLightBorder = new Paint();
-		paintLightBorder.setARGB(130, 220, 220, 220);
-		paintLightBorder.setStyle(Style.FILL);
-		paintBlack = new Paint();
-		paintBlack.setARGB(255, 0, 0, 0);
-		paintBlack.setStyle(Style.STROKE);
-		paintBlack.setAntiAlias(true);
-		paintBorder = new Paint();
-		paintBorder.setARGB(220, 160, 160, 160);
-		paintBorder.setStyle(Style.FILL);
+		boxLeg = view.getResources().getDrawable(R.drawable.box_leg);
+		boxLeg.setBounds(0, 0, boxLeg.getMinimumWidth(), boxLeg.getMinimumHeight());
 		
 		textView = new TextView(view.getContext());
-		LayoutParams lp = new LayoutParams(textSize, LayoutParams.WRAP_CONTENT);
+		LayoutParams lp = new LayoutParams(BASE_TEXT_SIZE, LayoutParams.WRAP_CONTENT);
 		textView.setLayoutParams(lp);
-		textView.setTextSize(16);
+		textView.setTextSize(15 * scaleCoefficient);
 		textView.setTextColor(Color.argb(255, 0, 0, 0));
 		textView.setMinLines(1);
 //		textView.setMaxLines(15);
 		textView.setGravity(Gravity.CENTER_HORIZONTAL);
 		
 		textView.setClickable(true);
+		
 		textView.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
 	}
 
@@ -102,11 +97,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if(latLon != null){
 			int x = view.getRotatedMapXForPoint(latLon.getLatitude(), latLon.getLongitude());
 			int y = view.getRotatedMapYForPoint(latLon.getLatitude(), latLon.getLongitude());
-			canvas.drawCircle(x, y, 5 * dm.density, paintBorder);
-			canvas.drawCircle(x, y, 5 * dm.density, paintBlack);
+			
+			int tx = x - boxLeg.getMinimumWidth() / 2;
+			int ty = y - boxLeg.getMinimumHeight() + SHADOW_OF_LEG;
+			canvas.translate(tx, ty);
+			boxLeg.draw(canvas);
+			canvas.translate(-tx, -ty);
 			
 			if (textView.getText().length() > 0) {
-				canvas.translate(x - textView.getWidth() / 2, y - textView.getHeight() - MARGIN_Y_TO_BOX);
+				canvas.translate(x - textView.getWidth() / 2, ty - textView.getTop());
 				int c = textView.getLineCount();
 				
 				textView.draw(canvas);
@@ -120,13 +119,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 	
 	private void layoutText() {
+		Rect padding = new Rect();
 		if(textView.getLineCount() > 0) {
 			textView.getBackground().getPadding(padding);
 		}
-		int w = textSize; 
-		int h = (int) ((textView.getPaint().getTextSize()	+4) * textView.getLineCount()) + 
-				padding.bottom + padding.top;
-		textView.layout(0, 0, w, h);
+		int w = BASE_TEXT_SIZE; 
+		int h = (int) ((textView.getPaint().getTextSize()	+4) * textView.getLineCount());
+		textView.layout(0, -padding.bottom - padding.top, w, h);
 	}
 	
 	public void setLocation(LatLon loc, String description){
@@ -190,7 +189,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			int x = (int) (px - view.getRotatedMapXForPoint(latLon.getLatitude(), latLon.getLongitude()));
 			int y = (int) (py - view.getRotatedMapYForPoint(latLon.getLatitude(), latLon.getLongitude()));
 			x += bs.width() / 2;
-			y += bs.height() + MARGIN_Y_TO_BOX;
+			y += bs.height() + boxLeg.getMinimumHeight() - SHADOW_OF_LEG;
 			if (bs.contains(x, y)) {
 				return true;
 			}

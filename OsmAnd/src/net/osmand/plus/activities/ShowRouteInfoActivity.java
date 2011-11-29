@@ -3,7 +3,6 @@
  */
 package net.osmand.plus.activities;
 
-import java.text.MessageFormat;
 import java.util.List;
 
 import net.osmand.OsmAndFormatter;
@@ -11,18 +10,8 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
-import net.osmand.plus.routing.RoutingHelper.TurnType;
-import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.TurnPathHelper;
 import android.app.ListActivity;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Rect;
-import android.graphics.Paint.Style;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -86,54 +75,6 @@ public class ShowRouteInfoActivity extends ListActivity {
 	}
 	
 
-	class RouteDrawable extends Drawable {
-		Paint paintRouteDirection;
-		Path p = new Path();
-		Path dp = new Path();
-		
-		public RouteDrawable(){
-			paintRouteDirection = new Paint();
-			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
-			paintRouteDirection.setColor(Color.rgb(100, 0, 255));
-			paintRouteDirection.setAntiAlias(true);
-		}
-		
-
-		@Override
-		protected void onBoundsChange(Rect bounds) {
-			Matrix m = new Matrix();
-			m.setScale(bounds.width()/96f, bounds.height()/96f);
-			p.transform(m, dp);
-		}
-		
-		public void setRouteType(TurnType t){
-			MapInfoLayer.calcTurnPath(p, t, null);
-			onBoundsChange(getBounds());
-		}
-
-		@Override
-		public void draw(Canvas canvas) {
-			canvas.drawPath(dp, paintRouteDirection);
-		}
-
-		@Override
-		public int getOpacity() {
-			return 0;
-		}
-
-		@Override
-		public void setAlpha(int alpha) {
-			paintRouteDirection.setAlpha(alpha);
-			
-		}
-
-		@Override
-		public void setColorFilter(ColorFilter cf) {
-			paintRouteDirection.setColorFilter(cf);
-		}
-		
-	}
-	
 	class RouteInfoAdapter extends ArrayAdapter<RouteDirectionInfo> {
 		RouteInfoAdapter(List<RouteDirectionInfo> list) {
 			super(ShowRouteInfoActivity.this, R.layout.route_info_list_item, list);
@@ -154,10 +95,10 @@ public class ShowRouteInfoActivity extends ListActivity {
 			TextView timeLabel = (TextView) row.findViewById(R.id.time);
 			ImageView icon = (ImageView) row.findViewById(R.id.direction);
 			
-			if(!(icon.getDrawable() instanceof RouteDrawable)){
-				icon.setImageDrawable(new RouteDrawable());
+			if(!(icon.getDrawable() instanceof TurnPathHelper.RouteDrawable)){
+				icon.setImageDrawable(new TurnPathHelper.RouteDrawable());
 			}
-			((RouteDrawable) icon.getDrawable()).setRouteType(model.turnType);
+			((TurnPathHelper.RouteDrawable) icon.getDrawable()).setRouteType(model.turnType);
 			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(model.distance, ShowRouteInfoActivity.this));
 			label.setText(model.descriptionRoute);
 			int seconds = model.expectedTime % 60;
