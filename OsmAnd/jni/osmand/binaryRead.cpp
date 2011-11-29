@@ -360,7 +360,8 @@ void loadJniBinaryRead() {
 
 extern "C" JNIEXPORT void JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_deleteSearchResult(JNIEnv* ienv,
 		jobject obj, jint searchResult) {
-	setGlobalEnv(ienv);
+	// DO NOT DO IT it can leads to messing thread that is not allowed
+	// setGlobalEnv(ienv);
 	SearchResult* result = (SearchResult*) searchResult;
 	if(result != NULL){
 		delete result;
