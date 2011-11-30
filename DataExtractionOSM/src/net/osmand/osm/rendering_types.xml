@@ -11,19 +11,19 @@
 	<!-- TODO Try to not change id of types and subtypes, some of the constants are hardcoded (for rendering order, rendering). -->
 	<type name="highway" id="1">
 		<subtype id="2" polyline="true" tag="highway" value="motorway" minzoom="5" />
-		<subtype id="2" polyline="true" tag="highway" value="motorway_link" minzoom="10" />
+		<subtype id="27" polyline="true" tag="highway" value="motorway_link" minzoom="10" />
 		<subtype id="1" polyline="true" tag="highway" value="trunk" minzoom="5" />
-		<subtype id="1" polyline="true" tag="highway" value="trunk_link" minzoom="10" />
+		<subtype id="28" polyline="true" tag="highway" value="trunk_link" minzoom="10" />
 		<subtype id="3" polyline="true" tag="highway" value="primary" minzoom="7" />
-		<subtype id="3" polyline="true" tag="highway" value="primary_link" minzoom="10" />
+		<subtype id="29" polyline="true" tag="highway" value="primary_link" minzoom="10" />
 		<subtype id="4" polyline="true" tag="highway" value="secondary" minzoom="9" />
-		<subtype id="4" polyline="true" tag="highway" value="secondary_link" minzoom="10" />
+		<subtype id="30" polyline="true" tag="highway" value="secondary_link" minzoom="10" />
 		<subtype id="5" polyline="true" tag="highway" value="tertiary" minzoom="10" />
-		<subtype id="5" polyline="true" tag="highway" value="tertiary_link" minzoom="11" />
+		<subtype id="31" polyline="true" tag="highway" value="tertiary_link" minzoom="11" />
 		<subtype id="6" polygon="true" polyline="true" tag="highway" value="residential" minzoom="12" />
-		<subtype id="7" polygon="true" polyline="true" tag="highway" value="service" minzoom="13" />
+		<subtype id="7" polygon="true" polyline="true" tag="highway" value="service" minzoom="12" />
 
-		<subtype id="8" polyline="true" tag="highway" value="unclassified" minzoom="12" />
+		<subtype id="32" polyline="true" tag="highway" value="unclassified" minzoom="12" />
 		<subtype id="8" polyline="true" tag="highway" value="road" minzoom="12" />
 		<subtype id="9" polyline="true" tag="highway" value="track" minzoom="12" />
 		<subtype id="10" polyline="true" tag="highway" value="path" minzoom="12" />
@@ -81,7 +81,6 @@
 		<subtype id="17" point="true" tag="barrier" value="block" minzoom="15" />
 		<subtype id="18" point="true" tag="barrier" value="cattle_grid" minzoom="15" />
 		<subtype id="19" point="true" tag="barrier" value="toll_booth" minzoom="14" />
-		<subtype id="19" point="true" tag="barrier" value="border_control" minzoom="14" />
 		<subtype id="20" point="true" tag="barrier" value="entrance" minzoom="15" />
 		<subtype id="21" point="true" tag="barrier" value="gate" minzoom="15" />
 		<subtype id="21" point="true" tag="highway" value="gate" minzoom="15" />
@@ -92,6 +91,7 @@
 		<subtype id="26" point="true" tag="barrier" value="sally_port" minzoom="15" />
 		<subtype id="27" point="true" tag="barrier" value="turnstile" minzoom="15" />
 		<subtype id="28" point="true" tag="barrier" value="kent_carriage_gap" minzoom="15" />
+		<subtype id="29" point="true" tag="barrier" value="border_control" minzoom="14" />
 	</type>
 
 
