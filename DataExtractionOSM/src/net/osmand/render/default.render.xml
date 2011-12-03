@@ -352,7 +352,7 @@
 
 		<!-- Natural -->
 		<filter minzoom="14" maxzoom="16" textSize="12" textOnPath="true" tag="contour" value=""/>
-		<filter minzoom="13" textSize="12" textColor="#ff000000" textWrapWidth="10" tag="natural" value="wood" textOrder="10"/>
+		<filter minzoom="13" textSize="12" textColor="#000000" textWrapWidth="10" tag="natural" value="wood" textOrder="10"/>
 		<filter minzoom="15" textSize="12" textColor="#09dd09" textWrapWidth="15" tag="natural" value="park" textOrder="10"/>
 		<filter minzoom="14" textSize="12" textHaloRadius="1" textColor="#6699cc" textWrapWidth="20" tag="natural" value="beach" textOrder="10"/>
 		<group>
@@ -1130,7 +1130,7 @@
 		<filter tag="highway" value="proposed" minzoom="14" maxzoom="15" color="#99cccc" strokeWidth="6" color_2="#ffffff" strokeWidth_2="5" pathEffect_2="8_6"/>
 			<filter tag="highway" value="proposed" minzoom="16" color="#99cccc" strokeWidth="8" color_2="#ffffff" strokeWidth_2="7" pathEffect_2="8_6"/>
 
-		<filter tag="contour" value="elevation" minzoom="14" color="#ff4900" strokeWidth="1"/>
+		<filter tag="contour" value="elevation" minzoom="14" color="#54ff4900" strokeWidth="1"/>
 
 		<!-- barriers -->
 		<filter minzoom="16" color="#000000" strokeWidth="1" tag="highway" value="gate"/>
@@ -1311,7 +1311,7 @@
 			<filter tag="admin_level" value="1"/>
 			<filter tag="admin_level" value="2"/>
 			<filter tag="admin_level" value="3"/>
-			<groupFilter color="#800080">
+			<groupFilter color="#54800080">
 				<filter minzoom="2" maxzoom="3" strokeWidth="0.5"/>
 				<filter minzoom="4" maxzoom="6" strokeWidth="1"/>
 				<filter minzoom="7" maxzoom="9" strokeWidth="2.5"/>
@@ -1319,20 +1319,20 @@
 			</groupFilter>
 		</group>
 
-		<filter tag="admin_level" value="4" color="#800080" pathEffect="4_3">
+		<filter tag="admin_level" value="4" color="#54800080" pathEffect="6_1">
 			<filter minzoom="4" maxzoom="6" strokeWidth="0.6"/>
 			<filter minzoom="7" maxzoom="9" strokeWidth="2"/>
 			<filter minzoom="11" strokeWidth="3"/>
 		</filter>
 
-		<filter tag="admin_level" value="5" minzoom="11" color="#800080" strokeWidth="2" pathEffect="6_3_2_3_2_3"/>
-		<filter tag="admin_level" value="6" minzoom="11" color="#800080" strokeWidth="2" pathEffect="6_3_2_3"/>
-		<filter tag="admin_level" value="7" minzoom="12" color="#800080" strokeWidth="2" pathEffect="5_2"/>
-		<filter tag="admin_level" value="8" minzoom="12" color="#800080" strokeWidth="2" pathEffect="5_2"/>
-		<filter tag="admin_level" value="9" minzoom="13" maxzoom="16" color="#800080" strokeWidth="1" pathEffect="3_2"/>
-			<filter tag="admin_level" value="9" minzoom="17" color="#800080" strokeWidth="2" pathEffect="3_2"/>
-		<filter tag="admin_level" value="10" minzoom="13" maxzoom="16" color="#800080" strokeWidth="1" pathEffect="3_2"/>
-			<filter tag="admin_level" value="10" minzoom="17" color="#800080" strokeWidth="2" pathEffect="3_2"/>
+		<filter tag="admin_level" value="5" minzoom="11" color="#54800080" strokeWidth="2" pathEffect="6_3_2_3_2_3"/>
+		<filter tag="admin_level" value="6" minzoom="11" color="#54800080" strokeWidth="2" pathEffect="6_3_2_3"/>
+		<filter tag="admin_level" value="7" minzoom="12" color="#54800080" strokeWidth="2" pathEffect="5_1"/>
+		<filter tag="admin_level" value="8" minzoom="12" color="#54800080" strokeWidth="2" pathEffect="5_1"/>
+		<filter tag="admin_level" value="9" minzoom="13" maxzoom="16" color="#54800080" strokeWidth="1" pathEffect="4_1"/>
+			<filter tag="admin_level" value="9" minzoom="17" color="#54800080" strokeWidth="2" pathEffect="4_1"/>
+		<filter tag="admin_level" value="10" minzoom="13" maxzoom="16" color="#54800080" strokeWidth="1" pathEffect="4_1"/>
+			<filter tag="admin_level" value="10" minzoom="17" color="#54800080" strokeWidth="2" pathEffect="4_1"/>
 		<filter tag="boundary" value="national_park" minzoom="7" maxzoom="9" color="#a009dd09" strokeWidth="1.5" pathEffect="4_2"/>
 			<filter tag="boundary" value="national_park" minzoom="10" color="#a009dd09" strokeWidth="3" pathEffect="6_2"/>
 	</line>
