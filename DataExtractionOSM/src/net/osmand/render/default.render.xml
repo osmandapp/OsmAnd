@@ -1325,12 +1325,12 @@
 			<filter minzoom="11" strokeWidth="3"/>
 		</filter>
 
-		<filter tag="admin_level" value="5" minzoom="11" color="#54800080" strokeWidth="2" pathEffect="6_3_2_3_2_3"/>
-		<filter tag="admin_level" value="6" minzoom="11" color="#54800080" strokeWidth="2" pathEffect="6_3_2_3"/>
-		<filter tag="admin_level" value="7" minzoom="12" color="#54800080" strokeWidth="2" pathEffect="5_1"/>
-		<filter tag="admin_level" value="8" minzoom="12" color="#54800080" strokeWidth="2" pathEffect="5_1"/>
-		<filter tag="admin_level" value="9" minzoom="13" color="#54800080" strokeWidth="2" pathEffect="4_1"/>
-		<filter tag="admin_level" value="10" minzoom="13" color="#54800080" strokeWidth="2" pathEffect="4_1"/>
+		<filter tag="admin_level" value="5" minzoom="11" color="#54800080" strokeWidth="3" pathEffect="6_3_2_3_2_3"/>
+		<filter tag="admin_level" value="6" minzoom="11" color="#54800080" strokeWidth="3" pathEffect="6_3_2_3"/>
+		<filter tag="admin_level" value="7" minzoom="12" color="#54800080" strokeWidth="3" pathEffect="5_1"/>
+		<filter tag="admin_level" value="8" minzoom="12" color="#54800080" strokeWidth="3" pathEffect="5_1"/>
+		<filter tag="admin_level" value="9" minzoom="13" color="#54800080" strokeWidth="3" pathEffect="4_1"/>
+		<filter tag="admin_level" value="10" minzoom="13" color="#54800080" strokeWidth="3" pathEffect="4_1"/>
 		<filter tag="boundary" value="national_park" minzoom="7" maxzoom="9" color="#a009dd09" strokeWidth="1.5" pathEffect="4_2"/>
 			<filter tag="boundary" value="national_park" minzoom="10" color="#a009dd09" strokeWidth="3" pathEffect="6_2"/>
 	</line>
