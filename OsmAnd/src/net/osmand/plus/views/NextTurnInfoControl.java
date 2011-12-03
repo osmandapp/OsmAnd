@@ -41,22 +41,17 @@ public class NextTurnInfoControl extends MapInfoControl {
 		paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
 		paintRouteDirection.setColor(Color.rgb(100, 0, 255));
 		paintRouteDirection.setAntiAlias(true);
+		
+		pathTransform = new Matrix();
+		pathTransform.postScale(scaleCoefficient, scaleCoefficient);
 	}
 
 	protected Matrix pathTransform = new Matrix();
 
 	@Override
-	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-		super.onLayout(changed, left, top, right, bottom);
-		pathTransform = new Matrix();
-		pathTransform.postScale(scaleCoefficient, scaleCoefficient);
-		pathTransform.postTranslate(left, top);
-	}
-
-	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		int h = (int) (5 * scaleCoefficient + Math.max(textPaint.getTextSize(), subtextPaint.getTextSize()));
-		setMeasuredDimension((int) width, (int) height + h);
+		setWDimensions((int) width, (int) height + h);
 	}
 
 	@Override
@@ -67,21 +62,22 @@ public class NextTurnInfoControl extends MapInfoControl {
 			canvas.drawPath(pathForTurn, paintBlack);
 			// TODO test
 			if (exitOut != null) {
-				canvas.drawText(exitOut, (getLeft() + getRight()) / 2 - 6 * scaleCoefficient, (getTop() + getBottom()) / 2 - 9
+				canvas.drawText(exitOut, (getWWidth()) / 2 - 6 * scaleCoefficient, getWHeight() / 2 - 9
 						* scaleCoefficient, paintBlack);
 			}
 			String text = OsmAndFormatter.getFormattedDistance(nextTurnDirection, getContext());
 			String subtext = null;
 			int ls = text.lastIndexOf(' ');
+			float st = 0;
 			if (ls != -1) {
 				subtext = text.substring(ls + 1);
 				text = text.substring(0, ls);
+				st = textPaint.measureText(subtext);
 			}
-			// TODO align center
-			int margin = (int) (10 * scaleCoefficient);
-			canvas.drawText(text, margin + getLeft(), getBottom() - 3 * scaleCoefficient, textPaint);
+			float mt = textPaint.measureText(text);
+			canvas.drawText(text, (getWWidth() - st - mt) / 2 - scaleCoefficient, getWHeight() - 3 * scaleCoefficient, textPaint);
 			if (subtext != null) {
-				canvas.drawText(subtext, getLeft() + margin + 2 * scaleCoefficient + textPaint.measureText(text), getBottom() - 3
+				canvas.drawText(subtext, (getWWidth() - st - mt) / 2 + 2 * scaleCoefficient + mt, getWHeight() - 3
 						* scaleCoefficient, subtextPaint);
 			}
 		}

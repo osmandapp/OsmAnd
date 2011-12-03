@@ -46,13 +46,8 @@ public class MapStackControl extends ViewGroup {
 			@Override
 			public void onClick(View v) {
 				isCollapsed = !isCollapsed;
-				if (!isCollapsed) {
-					for (MapInfoControl l : collapsedViews) {
-						l.updateInfo();
-					}
-				}
 				MapStackControl.this.requestLayout();
-
+				MapStackControl.this.invalidate();
 			}
 		});
 		MapStackControl.this.addView(expandView);
@@ -62,13 +57,13 @@ public class MapStackControl extends ViewGroup {
 		for (MapInfoControl v : stackViews) {
 			v.updateInfo();
 		}
-		if (!isCollapsed) {
-			for (MapInfoControl v : collapsedViews) {
-				v.updateInfo();
-			}
+		// update even if collapsed to know if view becomes visible
+		for (MapInfoControl v : collapsedViews) {
+			v.updateInfo();
 		}
 	}
-
+	
+	
 	@Override
 	protected int getChildDrawingOrder(int childCount, int i) {
 		// start from expand view
@@ -100,22 +95,40 @@ public class MapStackControl extends ViewGroup {
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		int w = 0;
 		int h = 0;
+		int prevBot = 0;
 		if (stackViews != null) {
-			for (View c : stackViews) {
-				c.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
-				w = Math.max(w, c.getMeasuredWidth());
-				h += c.getMeasuredHeight();
+			for (MapInfoControl c : stackViews) {
+				if (c.getVisibility() != View.GONE) {
+					c.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
+					w = Math.max(w, c.getMeasuredWidth());
+					if (h > 0) {
+						h -= c.getPaddingTop();
+						h -= prevBot; 
+					}
+					h += c.getMeasuredHeight();
+					prevBot = c.getPaddingBottom();
+				}
 			}
 			isCollapsible = false;
-			for (View c : collapsedViews) {
-				c.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
-				if (c.getMeasuredHeight() > 0) {
-					w = Math.max(w, c.getMeasuredWidth());
-					h += c.getMeasuredHeight();
+			for (MapInfoControl c : collapsedViews) {
+				if (c.getVisibility() != View.GONE) {
 					isCollapsible = true;
+					if (!isCollapsed) {
+						c.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
+						w = Math.max(w, c.getMeasuredWidth());
+						h -= c.getPaddingBottom();
+						if (h > 0) {
+							h -= c.getPaddingTop();
+							h -= prevBot; 
+						}
+						h += c.getMeasuredHeight();
+						prevBot = c.getPaddingBottom();
+					}
+					
 				}
 			}
 			if (isCollapsible) {
+				h -= prevBot;
 				h += expandView.getDrawable().getMinimumHeight();
 			}
 		}
@@ -127,17 +140,28 @@ public class MapStackControl extends ViewGroup {
 		int y = 0;
 		int cw = right - left;
 		for (View c : stackViews) {
-			c.layout(0, y, cw, y + c.getMeasuredHeight());
-			y += c.getMeasuredHeight();
+			if (c.getVisibility() != View.GONE) {
+				if (y > 0) {
+					y -= c.getPaddingTop();
+				}
+				c.layout(0, y, cw, y + c.getMeasuredHeight());
+				y += c.getMeasuredHeight();
+				y -= c.getPaddingBottom();
+			}
 		}
 
 		for (View c : collapsedViews) {
 			if (!isCollapsed) {
-				c.setVisibility(VISIBLE);
-				c.layout(0, y, cw, y + c.getMeasuredHeight());
-				y += c.getMeasuredHeight();
+				if (c.getVisibility() != View.GONE) {
+					if (y > 0) {
+						y -= c.getPaddingTop();
+					}
+					c.layout(0, y, cw, y + c.getMeasuredHeight());
+					y += c.getMeasuredHeight();
+					y -= c.getPaddingBottom();
+				}
 			} else {
-				c.setVisibility(GONE);
+				c.layout(0, 0, 0, 0);
 			}
 		}
 

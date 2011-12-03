@@ -49,7 +49,7 @@ public class MiniMapControl extends MapInfoControl {
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		setMeasuredDimension((int) width, (int) height);
+		setWDimensions((int) width, (int) height);
 	}
 
 	@Override

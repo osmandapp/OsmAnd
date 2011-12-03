@@ -99,6 +99,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void createTopBarElements() {
 		// 1. Create view groups and controls
 		statusBar = createStatusBar();
+		Rect topRectPadding = new Rect();
+		view.getResources().getDrawable(R.drawable.box_top).getPadding(topRectPadding);
 		
 		rightStack = new MapStackControl(view.getContext());
 		rightStack.addStackView(createDistanceControl());
@@ -114,15 +116,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 		statusBar.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 		Rect statusBarPadding = new Rect();
 		statusBar.getBackground().getPadding(statusBarPadding);
-		Rect topRectPadding = new Rect();
-		view.getResources().getDrawable(R.drawable.box_top).getPadding(topRectPadding);
+		
 
 		// 3. put into frame parent layout controls
 		FrameLayout parent = (FrameLayout) view.getParent();
 		// status bar hides own top part 
-		int topMargin = statusBar.getMeasuredHeight()  - statusBarPadding.top;
+		int topMargin = statusBar.getMeasuredHeight()  - statusBarPadding.top - statusBarPadding.bottom;
 		// we want that status bar lays over map stack controls
-		topMargin -= topRectPadding.bottom;
+		topMargin -= topRectPadding.top;
 
 		FrameLayout.LayoutParams flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.FILL_PARENT,
 				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.RIGHT);
@@ -209,6 +210,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				return false;
 			}
 		};
+		speedControl.setText(null, null);
 		return speedControl;
 	}
 	
@@ -265,6 +267,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 			
 		});
+		leftTimeControl.setText(null, null);
 		return leftTimeControl;
 	}
 	
@@ -273,7 +276,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				paintSubText) {
 			private float[] calculations = new float[1];
 			private int cachedMeters = 0;
-
+			
 			@Override
 			public boolean updateInfo() {
 				if (map.getPointToNavigate() != null) {
@@ -321,6 +324,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				}
 			}
 		});
+		distanceControl.setText(null, null);
 		return distanceControl;
 	}
 		
@@ -329,9 +333,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 			@Override
 			public boolean updateInfo() {
 				boolean visible = false;
-				// TODO
-				if (routeLayer != null && routeLayer.getHelper().isRouterEnabled() /* && routeLayer.getHelper().isFollowingMode() */) {
-					visible = true;
+				if (routeLayer != null && routeLayer.getHelper().isRouterEnabled()  && routeLayer.getHelper().isFollowingMode()) {
+					if (showMiniMap && !routeLayer.getPath().isEmpty()) {
+						visible = true;
+						miniMapPath = routeLayer.getPath();
+					}
 				}
 				updateVisibility(visible);
 				return super.updateInfo();
@@ -342,6 +348,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(View v) {
 				showMiniMap = false;
+				view.refreshMap();
 			}
 		});
 		return miniMapControl;
@@ -353,7 +360,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			@Override
 			public boolean updateInfo() {
 				boolean visible = false;
-				if (routeLayer != null && routeLayer.getHelper().isRouterEnabled() /* && routeLayer.getHelper().isFollowingMode() */) {
+				if (routeLayer != null && routeLayer.getHelper().isRouterEnabled() && routeLayer.getHelper().isFollowingMode()) {
 					int d = routeLayer.getHelper().getDistanceToNextRouteDirection();
 					if (d > 0 && !showMiniMap) {
 						visible = true;
@@ -387,6 +394,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(View v) {
 				showMiniMap = true;
+				view.refreshMap();
 			}
 		});
 		// initial state
