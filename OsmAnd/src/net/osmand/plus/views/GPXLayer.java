@@ -18,20 +18,14 @@ import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 
 public class GPXLayer extends OsmandMapLayer {
-
 	
 	private OsmandMapTileView view;
 	
 	private List<List<WptPt>> points = new ArrayList<List<WptPt>>();
 	private Paint paint;
-	
 
 	private Path path;
 	
-	public GPXLayer(){
-	}
-	
-
 	private void initUI() {
 		paint = new Paint();
 		paint.setColor(Color.argb(180, 160, 10, 215));
