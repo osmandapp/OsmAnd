@@ -184,7 +184,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	private TextInfoControl createSpeedControl(){
-		final TextInfoControl speedControl = new TextInfoControl(map, R.drawable.box_top, null, 0, paintText, paintSubText) {
+		final TextInfoControl speedControl = new TextInfoControl(map, R.drawable.box_top, 0, paintText, paintSubText) {
 			private float cachedSpeed = 0;
 
 			@Override
@@ -215,9 +215,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 	
 	private TextInfoControl createTimeControl(){
-		Drawable time = view.getResources().getDrawable(R.drawable.info_time);
+		final Drawable time = view.getResources().getDrawable(R.drawable.info_time);
+		final Drawable timeToGo = view.getResources().getDrawable(R.drawable.info_time_to_go);
 		showArrivalTime = view.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME.get();
-		TextInfoControl leftTimeControl = new TextInfoControl(map, R.drawable.box_top, time, 0, paintText, paintSubText) {
+		final TextInfoControl leftTimeControl = new TextInfoControl(map, R.drawable.box_top, 0, paintText, paintSubText) {
 			private long cachedLeftTime = 0;
 			
 			@Override
@@ -262,18 +263,19 @@ public class MapInfoLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(View v) {
 				showArrivalTime = !showArrivalTime;
+				leftTimeControl.setImageDrawable(showArrivalTime? time : timeToGo);
 				view.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME.set(showArrivalTime);
 				view.refreshMap();
 			}
 			
 		});
 		leftTimeControl.setText(null, null);
+		leftTimeControl.setImageDrawable(showArrivalTime? time : timeToGo);
 		return leftTimeControl;
 	}
 	
 	private TextInfoControl createDistanceControl() {
-		TextInfoControl distanceControl = new TextInfoControl(map, R.drawable.box_top, view.getResources().getDrawable(R.drawable.info_target), 0, paintText,
-				paintSubText) {
+		TextInfoControl distanceControl = new TextInfoControl(map, R.drawable.box_top, 0, paintText, paintSubText) {
 			private float[] calculations = new float[1];
 			private int cachedMeters = 0;
 			
@@ -325,6 +327,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		});
 		distanceControl.setText(null, null);
+		distanceControl.setImageDrawable(view.getResources().getDrawable(R.drawable.info_target));
 		return distanceControl;
 	}
 		
