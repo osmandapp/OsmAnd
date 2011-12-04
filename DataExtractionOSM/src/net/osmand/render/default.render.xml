@@ -14,9 +14,6 @@
 		type="string" possibleValues="default,car,bicycle,pedestrian"/>
 	<renderingProperty attr="noPolygons" name="No polygons" description="Default renderer: Make areal map objects transparent"
 		type="boolean" possibleValues=""/>
-	<!-- <renderingProperty attr="shadowRenderingMode" name="Shadow rendering" description="Default renderer: Change the way of displaying road edges."
-		type="string" possibleValues="no shadow,one step,blur shadow,solid shadow"/>
-		 -->		
 
 	<!-- 0 - no shadow, 1 - one step, 2 - blur shadow, 3 - solid shadow -->	
 	<renderingAttribute name="shadowRendering">
@@ -35,10 +32,10 @@
 
 	<!--
 		All-Purpose Renderer (by Hardy Mueller), v023:
-		- with ShowMoreMapDetails some roads already rendered at lower zooms than old default
-		- with ShowMoreMapDetails different motorway/trunk colors, aligned with conventional road atlas
-		Map rendering aligned to typical map use for all zoom levels/scales, hence always yields a complete and reliable map.
-		All features displayed at each zoom level (zX) are those for its typical use:
+		- with ShowMoreMapDetails some roads already rendered at lower zooms (travel/orienteering)
+		- with ShowMoreMapDetails motorways shown blue and trunk roads red, aligned with conventional road atlas
+		- with ShowMoreMapDetails map rendering is aligned to typical map use for all zoom levels (scales), to always give a complete and reliable map.
+		Typical zoom level use (zX) and alignment of features displayed:
 		 - z7  = "Rough Region Level Overview": Shows motorways, trunks, primary roads and city names
 		 - z11 = "Country Road Atlas": Secondary roads (already from z9) and tertiary (already from z10). Show large scale landuse like forest and residential areas (already from z10). Also all town names (already from z9) and now all other locality names. Shows mountain peaks for orientation.
 		 - z12 = "Detailed Country Road Atlas": Add all other public highways like road, unclassified, residential. Add foot and bike tracks. Also tag mountain peaks.
@@ -50,7 +47,7 @@
 	--> 
 
 	<!--
-		Main colors for night renderer (road brightness levels aligned with priority):
+		Main colors for night renderer (road brightness levels aligned with priority), by Hardy Mueller:
 		- default: 003333
 		- forest: 000034
 		- other open (non-forest) nature: 004333
@@ -806,11 +803,11 @@
 			<filter minzoom="12" color="#cfeca8" tag="landuse" value="recreation_ground"/>
 			<filter minzoom="10" color="#cfeca8" tag="landuse" value="conservation"/>
 			<filter minzoom="12" color="#cfeca8" tag="landuse" value="village_green"/>
-			<filter minzoom="12" tag="natural" value="park" color="#b0b6fdb6"/>
-			<filter minzoom="12" color="#b5e3b5" tag="leisure" value="golf_course"/>
+			<filter minzoom="12" color="#b0b6fdb6" color_2="#9DB487" strokeWidth_2="1" tag="natural" value="park"/>
+			<filter minzoom="12" color="#b0b6fdb6" color_2="#9DB487" strokeWidth_2="1" tag="leisure" value="park"/>
+			<filter minzoom="12" color="#b5e3b5" color_2="#9DB487" strokeWidth_2="1" tag="leisure" value="golf_course"/>
 			<filter minzoom="12" color="#74dcba" color_2="#888888" strokeWidth_2="1" tag="leisure" value="track"/>
 			<filter minzoom="12" color="#8ad3af" color_2="#888888" strokeWidth_2="1" tag="leisure" value="pitch"/>
-			<filter minzoom="12" tag="leisure" value="park" color="#b0b6fdb6"/>
 			<filter minzoom="12" tag="leisure" value="recreation_ground" color="#b0b6fdb6"/>
 			<filter minzoom="15" color="#ccfff1" tag="leisure" value="playground"/>
 			<filter minzoom="12" color="#cfeca8" tag="leisure" value="garden"/>
@@ -1091,31 +1088,31 @@
 		</filter>
 
 		<filter tag="highway" value="cycleway" color="#0000ff" pathEffect="2_2">
-			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="2" color_2="#0000ff" strokeWidth_2="2" pathEffect_2="2_2"/>	
 			<filter appMode="bicycle" minzoom="14" strokeWidth="2" pathEffect="10_3"/>
 			<filter appMode="pedestrian" minzoom="14" strokeWidth="2" pathEffect="10_3"/>
+			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="2" color_2="#0000ff" strokeWidth_2="2" pathEffect_2="2_2"/>	
 			<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
 				<filter minzoom="13" strokeWidth="1"/>
 		</filter>
 
 		<filter tag="highway" value="footway" color="#fa8073" pathEffect="2_2">
-			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="2" color_2="#fa8073" strokeWidth_2="2" pathEffect_2="2_2"/>
 			<filter appMode="pedestrian" minzoom="14" strokeWidth="2" pathEffect="10_3"/>
+			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="2" color_2="#fa8073" strokeWidth_2="2" pathEffect_2="2_2"/>
 			<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
 				<filter hmRendered="true" minzoom="13" maxzoom="14" strokeWidth="1"/>
 				<filter minzoom="15" strokeWidth="1"/>
 		</filter>
 
 		<filter tag="highway" value="steps" color="#fa8073" pathEffect="1_2">
-			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="7" color_2="#fa8073" strokeWidth_2="5" pathEffect_2="1_2"/>
 			<filter appMode="pedestrian" minzoom="14" strokeWidth="4"/>
+			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="7" color_2="#fa8073" strokeWidth_2="5" pathEffect_2="1_2"/>
 			<filter hmRendered="true" minzoom="14" strokeWidth="4"/>
 				<filter minzoom="15" strokeWidth="4"/>
 		</filter>
 
 		<filter tag="highway" value="bridleway" color="#339900" pathEffect="2_2">
-			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="2" color_2="#00ff00" strokeWidth_2="2" pathEffect_2="2_2"/>
 			<filter appMode="pedestrian" minzoom="14" strokeWidth="2" pathEffect="10_3"/>
+			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="2" color_2="#00ff00" strokeWidth_2="2" pathEffect_2="2_2"/>
 			<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
 				<filter minzoom="13" strokeWidth="1"/>
 		</filter>
