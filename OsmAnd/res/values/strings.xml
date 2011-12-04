@@ -11,7 +11,7 @@
 	
 	<string name="show_altitude_info_descr">Show current altitude information on map</string>
 	<string name="show_altitude_info">Show altitude</string>
-	<string name="use_transparent_map_theme_descr">Use transparent map controls (requires application restart)</string>
+	<string name="use_transparent_map_theme_descr">Use transparent map controls</string>
 	<string name="use_transparent_map_theme">Transparent theme</string>
 	
 	<string name="appearance_settings_descr">Configure application look and feel</string>

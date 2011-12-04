@@ -1,5 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="tip_recent_changes_0_6_9_t">Изменения в 0.6.9 :
+\n\t- Более детальная отрисовка векторных карт
+\n\t- Быстрая аппаратная отрисовка карт(экспериментальные настройки)
+\n\t- Существенные изменения внешнего вида
+\n\t- Информация о высоте
+\n\t- Исправления ошибок и мелкие улучшения
+	</string>
+	<string name="show_altitude_info_descr">Показывать текущую высоту на карте</string>
+	<string name="show_altitude_info">Показывать высоты</string>
+	<string name="use_transparent_map_theme_descr">Использовать прозрачные информационные элементы на карте</string>
+	<string name="use_transparent_map_theme">Прозрачная тема</string>
+	<string name="appearance_settings_descr">Настроить внешний вид приложения</string>
+	<string name="appearance_settings">Внешний вид</string>
+	<string name="native_library_not_supported">Нативная библиотека не поддерживается на этом устройстве.</string>
+	<string name="init_native_library">Инициализация нативной библиотеки...</string>
 	<string name="choose_auto_follow_route">Настройки автовозрата карты</string>
 	<string name="choose_auto_follow_route_descr">Выберите время, через которое карта вернется к текущей позиции</string>
 	<string name="auto_follow_route_never">Никогда</string>
