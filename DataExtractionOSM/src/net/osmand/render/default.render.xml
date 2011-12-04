@@ -147,7 +147,7 @@
 			</group>
 
 			 <filter layer="1" tag="highway" value="cycleway" order="67"/>
-			<filter appMode="pedestrian" tag="highway" value="cycleway" order="51"/>
+			<filter appMode="pedestrian" tag="highway" value="cycleway" order="59"/>
 			<filter appMode="bicycle" tag="highway" value="cycleway" order="60"/>
 			<filter tag="highway" value="cycleway" order="39"/>
 
