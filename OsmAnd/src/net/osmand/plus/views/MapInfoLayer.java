@@ -84,7 +84,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		paintSubText.setStyle(Style.FILL_AND_STROKE);
 		paintSubText.setColor(Color.BLACK);
 		paintSubText.setTextSize(15 * scaleCoefficient);
-		paintSubText.setFakeBoldText(true);
+		
 		paintSubText.setAntiAlias(true);
 		
 		paintImg = new Paint();
@@ -93,14 +93,39 @@ public class MapInfoLayer extends OsmandMapLayer {
 		paintImg.setAntiAlias(true);
 		
 		createTopBarElements();
+		
+		applyTheme();
 	}
 	
+	public void applyTheme() {
+		int boxTop = R.drawable.box_top;
+		int boxTopR = R.drawable.box_top_r;
+		int boxTopL = R.drawable.box_top_l;
+		int expand = R.drawable.box_expand;
+		if(view.getSettings().TRANSPARENT_MAP_THEME.get()){
+			boxTop = R.drawable.box_top_t;
+			boxTopR = R.drawable.box_top_rt;
+			boxTopL = R.drawable.box_top_lt;
+		}
+		int i = 0;
+		for(MapInfoControl m : rightStack.getAllViews()){
+			m.setBackgroundDrawable(view.getResources().getDrawable(i == 0 ? boxTopR : boxTop).mutate());
+			i++;
+		}
+		rightStack.setExpandImageDrawable(view.getResources().getDrawable(expand).mutate());
+		i = 0;
+		for(MapInfoControl m : leftStack.getAllViews()){
+			m.setBackgroundDrawable(view.getResources().getDrawable(i < 2 ? boxTopL : boxTop).mutate());
+			i++;
+		}
+		leftStack.setExpandImageDrawable(view.getResources().getDrawable(expand).mutate());
+		statusBar.setBackgroundDrawable(view.getResources().getDrawable(boxTop).mutate());
+	}
 	
 	public void createTopBarElements() {
 		// 1. Create view groups and controls
 		statusBar = createStatusBar();
-		Rect topRectPadding = new Rect();
-		view.getResources().getDrawable(R.drawable.box_top).getPadding(topRectPadding);
+		statusBar.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_top).mutate());
 		
 		rightStack = new MapStackControl(view.getContext());
 		rightStack.addStackView(createDistanceControl());
@@ -112,12 +137,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 		leftStack.addStackView(createMiniMapControl());
 		
 		// 2. Preparations
+		Rect topRectPadding = new Rect();
+		view.getResources().getDrawable(R.drawable.box_top).getPadding(topRectPadding);
+		
 		STATUS_BAR_MARGIN_X = (int) (STATUS_BAR_MARGIN_X * scaleCoefficient);
 		statusBar.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 		Rect statusBarPadding = new Rect();
 		statusBar.getBackground().getPadding(statusBarPadding);
-		
-
 		// 3. put into frame parent layout controls
 		FrameLayout parent = (FrameLayout) view.getParent();
 		// status bar hides own top part 
@@ -129,21 +155,25 @@ public class MapInfoLayer extends OsmandMapLayer {
 				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.RIGHT);
 		flp.rightMargin = STATUS_BAR_MARGIN_X;
 		flp.topMargin = topMargin;
-		parent.addView(rightStack, flp);
+		rightStack.setLayoutParams(flp);
+		
 		
 		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.FILL_PARENT,
 				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.LEFT);
 		flp.leftMargin = STATUS_BAR_MARGIN_X;
 		flp.topMargin = topMargin;
-		parent.addView(leftStack, flp);
+		leftStack.setLayoutParams(flp);
 
 		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.FILL_PARENT,
 				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.TOP);
 		flp.leftMargin = STATUS_BAR_MARGIN_X;
 		flp.rightMargin = STATUS_BAR_MARGIN_X;
 		flp.topMargin = -topRectPadding.top;
+		statusBar.setLayoutParams(flp);
 
-		parent.addView(statusBar, flp);
+		parent.addView(rightStack);
+		parent.addView(leftStack);
+		parent.addView(statusBar);
 	}
 
 	
@@ -184,7 +214,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	private TextInfoControl createSpeedControl(){
-		final TextInfoControl speedControl = new TextInfoControl(map, R.drawable.box_top, 0, paintText, paintSubText) {
+		final TextInfoControl speedControl = new TextInfoControl(map, 0, paintText, paintSubText) {
 			private float cachedSpeed = 0;
 
 			@Override
@@ -218,7 +248,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		final Drawable time = view.getResources().getDrawable(R.drawable.info_time);
 		final Drawable timeToGo = view.getResources().getDrawable(R.drawable.info_time_to_go);
 		showArrivalTime = view.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME.get();
-		final TextInfoControl leftTimeControl = new TextInfoControl(map, R.drawable.box_top, 0, paintText, paintSubText) {
+		final TextInfoControl leftTimeControl = new TextInfoControl(map, 0, paintText, paintSubText) {
 			private long cachedLeftTime = 0;
 			
 			@Override
@@ -275,7 +305,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 	
 	private TextInfoControl createDistanceControl() {
-		TextInfoControl distanceControl = new TextInfoControl(map, R.drawable.box_top, 0, paintText, paintSubText) {
+		TextInfoControl distanceControl = new TextInfoControl(map, 0, paintText, paintSubText) {
 			private float[] calculations = new float[1];
 			private int cachedMeters = 0;
 			
@@ -332,7 +362,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 		
 	private MiniMapControl createMiniMapControl() {
-		MiniMapControl miniMapControl = new MiniMapControl(map, view, R.drawable.box_top) {
+		MiniMapControl miniMapControl = new MiniMapControl(map, view) {
 			@Override
 			public boolean updateInfo() {
 				boolean visible = false;
@@ -358,7 +388,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 	
 	private NextTurnInfoControl createNextInfoControl() {
-		NextTurnInfoControl nextTurnInfo = new NextTurnInfoControl(map, R.drawable.box_top, paintText, paintSubText) {
+		NextTurnInfoControl nextTurnInfo = new NextTurnInfoControl(map, paintText, paintSubText) {
 			
 			@Override
 			public boolean updateInfo() {
@@ -407,7 +437,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	
 	private ViewGroup createStatusBar() {
 		LinearLayout statusBar = new LinearLayout(view.getContext());
-		statusBar.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_top).mutate());
 		statusBar.setOrientation(LinearLayout.HORIZONTAL);
 		
 		// Compass icon

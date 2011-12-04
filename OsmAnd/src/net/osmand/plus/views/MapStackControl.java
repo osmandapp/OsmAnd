@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -52,6 +53,10 @@ public class MapStackControl extends ViewGroup {
 		});
 		MapStackControl.this.addView(expandView);
 	}
+	
+	public void setExpandImageDrawable(Drawable d) {
+		expandView.setImageDrawable(d);
+	}
 
 	public void updateInfo() {
 		for (MapInfoControl v : stackViews) {
@@ -81,6 +86,21 @@ public class MapStackControl extends ViewGroup {
 	public void addCollapsedView(MapInfoControl v) {
 		collapsedViews.add(v);
 		MapStackControl.this.addView(v);
+	}
+	
+	public List<MapInfoControl> getStackViews() {
+		return stackViews;
+	}
+	
+	public List<MapInfoControl> getCollapsedViews() {
+		return collapsedViews;
+	}
+	
+	public List<MapInfoControl> getAllViews(){
+		List<MapInfoControl> l = new ArrayList<MapInfoControl>();
+		l.addAll(stackViews);
+		l.addAll(collapsedViews);
+		return l;
 	}
 
 	public boolean isCollapsed() {

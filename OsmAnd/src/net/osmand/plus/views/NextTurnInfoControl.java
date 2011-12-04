@@ -27,8 +27,8 @@ public class NextTurnInfoControl extends MapInfoControl {
 	private Paint paintBlack;
 	private Paint paintRouteDirection;
 
-	public NextTurnInfoControl(Context ctx, int background, Paint textPaint, Paint subtextPaint) {
-		super(ctx, background);
+	public NextTurnInfoControl(Context ctx, Paint textPaint, Paint subtextPaint) {
+		super(ctx);
 		this.textPaint = textPaint;
 		this.subtextPaint = subtextPaint;
 
@@ -75,9 +75,10 @@ public class NextTurnInfoControl extends MapInfoControl {
 				st = textPaint.measureText(subtext);
 			}
 			float mt = textPaint.measureText(text);
-			canvas.drawText(text, (getWWidth() - st - mt) / 2 - scaleCoefficient, getWHeight() - 3 * scaleCoefficient, textPaint);
+			drawShadowText(canvas, text, 
+					(getWWidth() - st - mt) / 2 - scaleCoefficient, getWHeight() - 3 * scaleCoefficient, textPaint);
 			if (subtext != null) {
-				canvas.drawText(subtext, (getWWidth() - st - mt) / 2 + 2 * scaleCoefficient + mt, getWHeight() - 3
+				drawShadowText(canvas, subtext, (getWWidth() - st - mt) / 2 + 2 * scaleCoefficient + mt, getWHeight() - 3
 						* scaleCoefficient, subtextPaint);
 			}
 		}

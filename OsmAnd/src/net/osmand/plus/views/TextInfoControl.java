@@ -15,8 +15,8 @@ public class TextInfoControl extends MapInfoControl {
 	private Drawable imageDrawable;
 	private float scaleCoefficient;
 
-	public TextInfoControl(Context ctx, int background, int leftMargin, Paint textPaint, Paint subtextPaint) {
-		super(ctx, background);
+	public TextInfoControl(Context ctx, int leftMargin, Paint textPaint, Paint subtextPaint) {
+		super(ctx);
 		scaleCoefficient = MapInfoLayer.scaleCoefficient;
 		this.leftMargin = leftMargin;
 		this.textPaint = textPaint;
@@ -81,13 +81,14 @@ public class TextInfoControl extends MapInfoControl {
 				margin = (int) (imageDrawable.getBounds().width() + 2 * scaleCoefficient);
 			}
 			margin += leftMargin;
-			cv.drawText(text, margin, getWHeight() - 3 * scaleCoefficient, textPaint);
+			drawShadowText(cv, text, margin, getWHeight() - 3 * scaleCoefficient, textPaint);
 			if (subtext != null) {
-				cv.drawText(subtext, margin + 2 * scaleCoefficient + textPaint.measureText(text), getWHeight() - 3
+				drawShadowText(cv, subtext, margin + 2 * scaleCoefficient + textPaint.measureText(text), getWHeight() - 3
 						* scaleCoefficient, subtextPaint);
 			}
 		}
 	}
+	
 
 	public boolean isVisible() {
 		return text != null && text.length() > 0;

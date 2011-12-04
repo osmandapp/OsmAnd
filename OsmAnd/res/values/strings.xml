@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="use_transparent_map_theme_descr">Use transparent map controls (requires application restart)</string>
+	<string name="use_transparent_map_theme">Transparent theme</string>
+	
+	<string name="appearance_settings_descr">Configure application look and feel</string>
+	<string name="appearance_settings">Appearance</string>
 	<string name="native_library_not_supported">Native library is not supported on this device.</string>
 	<string name="init_native_library">Initializing native library...</string>
 	<string name="choose_auto_follow_route">Map view auto follow</string>

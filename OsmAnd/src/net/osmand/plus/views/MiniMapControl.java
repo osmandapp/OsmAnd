@@ -22,8 +22,8 @@ public class MiniMapControl extends MapInfoControl {
 	private Paint fillBlack;
 	protected Path miniMapPath = null;
 
-	public MiniMapControl(Context ctx, OsmandMapTileView view, int background) {
-		super(ctx, background);
+	public MiniMapControl(Context ctx, OsmandMapTileView view) {
+		super(ctx);
 		this.view = view;
 
 		fillBlack = new Paint();

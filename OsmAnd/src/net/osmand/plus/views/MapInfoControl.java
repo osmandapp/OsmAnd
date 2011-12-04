@@ -2,7 +2,10 @@ package net.osmand.plus.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Paint.Style;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
@@ -11,11 +14,14 @@ public abstract class MapInfoControl extends View {
 	int height = 0;
 	Rect padding = new Rect();
 
-	public MapInfoControl(Context ctx, int background) {
+	public MapInfoControl(Context ctx) {
 		super(ctx);
-		Drawable drawable = ctx.getResources().getDrawable(background).mutate();
-		drawable.getPadding(padding);
-		setBackgroundDrawable(drawable);
+	}
+	
+	@Override
+	public void setBackgroundDrawable(Drawable d) {
+		d.getPadding(padding);
+		super.setBackgroundDrawable(d);
 	}
 
 	
@@ -39,6 +45,19 @@ public abstract class MapInfoControl extends View {
 	// To override
 	protected void onWLayout(int w, int h) {
 
+	}
+	
+	protected void drawShadowText(Canvas cv, String text, float centerX, float centerY, Paint textPaint) {
+		int c = textPaint.getColor();
+		textPaint.setStyle(Style.STROKE);
+		textPaint.setColor(Color.LTGRAY);
+		textPaint.setStrokeWidth(4);
+		cv.drawText(text, centerX, centerY, textPaint);
+		// reset
+		textPaint.setStrokeWidth(1);
+		textPaint.setStyle(Style.FILL);
+		textPaint.setColor(c);
+		cv.drawText(text, centerX, centerY, textPaint);
 	}
 	
 	@Override

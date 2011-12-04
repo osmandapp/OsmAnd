@@ -885,6 +885,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		routingHelper.setAppMode(settings.getApplicationMode());
 		mapView.setMapPosition(settings.POSITION_ON_MAP.get());
 		registerUnregisterSensor(getLastKnownLocation());
+		mapLayers.getMapInfoLayer().applyTheme();
 		mapLayers.updateLayers(mapView);
 	}
 	
