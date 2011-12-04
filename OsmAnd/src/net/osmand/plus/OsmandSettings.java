@@ -1050,14 +1050,18 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME = 
 		new BooleanPreference("show_arrival_time", true, true);
 	
+	
 	// UI boxes
 	public final CommonPreference<Boolean> TRANSPARENT_MAP_THEME = 
-			new BooleanPreference("transparent_map_theme", true, true);
+			new BooleanPreference("transparent_map_theme", true, false);
 	{
 		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.CAR, false);
 		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.BICYCLE, false);
 		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
 	}
+	
+	public final CommonPreference<Boolean> SHOW_ALTITUDE_INFO = 
+			new BooleanPreference("show_altitude_info", false, false);
 	
 	public enum DayNightMode {
 		AUTO(R.string.daynight_mode_auto), 

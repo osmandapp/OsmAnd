@@ -50,7 +50,7 @@ public abstract class MapInfoControl extends View {
 	protected void drawShadowText(Canvas cv, String text, float centerX, float centerY, Paint textPaint) {
 		int c = textPaint.getColor();
 		textPaint.setStyle(Style.STROKE);
-		textPaint.setColor(Color.LTGRAY);
+		textPaint.setColor(Color.WHITE);
 		textPaint.setStrokeWidth(4);
 		cv.drawText(text, centerX, centerY, textPaint);
 		// reset

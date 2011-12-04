@@ -81,6 +81,16 @@ public class OsmAndFormatter {
 			return ((int) meters) + " " + ctx.getString(R.string.m); //$NON-NLS-1$
 		}
 	}
+
+	public static String getFormattedAlt(double alt, Context ctx) {
+		OsmandSettings settings = OsmandSettings.getOsmandSettings(ctx);
+		MetricsConstants mc = settings.METRIC_SYSTEM.get();
+		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
+			return ((int) alt) + " " + ctx.getString(R.string.m);
+		} else {
+			return ((int) (alt * FOOTS_IN_ONE_METER)) + " " + ctx.getString(R.string.foot);
+		}
+	}
 	
 	public static String getFormattedSpeed(float metersperseconds, Context ctx) {
 		OsmandSettings settings = OsmandSettings.getOsmandSettings(ctx);

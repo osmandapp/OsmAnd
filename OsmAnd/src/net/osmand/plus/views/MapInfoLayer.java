@@ -43,6 +43,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	
 	private float cachedRotate = 0;
 	private boolean showArrivalTime = true;
+	private boolean showAltitude = false;
 	private boolean showMiniMap = false;
 	
 	// layout pseudo-constants
@@ -120,6 +121,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 		leftStack.setExpandImageDrawable(view.getResources().getDrawable(expand).mutate());
 		statusBar.setBackgroundDrawable(view.getResources().getDrawable(boxTop).mutate());
+		showAltitude = view.getSettings().SHOW_ALTITUDE_INFO.get();
 	}
 	
 	public void createTopBarElements() {
@@ -129,6 +131,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		rightStack = new MapStackControl(view.getContext());
 		rightStack.addStackView(createDistanceControl());
+		rightStack.addStackView(createAltitudeControl());
 		rightStack.addCollapsedView(createSpeedControl());
 		rightStack.addCollapsedView(createTimeControl());
 		
@@ -242,6 +245,38 @@ public class MapInfoLayer extends OsmandMapLayer {
 		};
 		speedControl.setText(null, null);
 		return speedControl;
+	}
+	
+	private TextInfoControl createAltitudeControl(){
+		final TextInfoControl altitudeControl = new TextInfoControl(map, 0, paintText, paintSubText) {
+			private int cachedAlt = 0;
+
+			@Override
+			public boolean updateInfo() {
+				// draw speed
+				if (showAltitude &&
+						map.getLastKnownLocation() != null && map.getLastKnownLocation().hasAltitude()) {
+					if (cachedAlt != (int) map.getLastKnownLocation().getAltitude()) {
+						cachedAlt = (int) map.getLastKnownLocation().getAltitude();
+						String ds = OsmAndFormatter.getFormattedAlt(cachedAlt, map);
+						int ls = ds.lastIndexOf(' ');
+						if (ls == -1) {
+							setText(ds, null);
+						} else {
+							setText(ds.substring(0, ls), ds.substring(ls + 1));
+						}
+						return true;
+					}
+				} else if (cachedAlt != 0) {
+					cachedAlt = 0;
+					setText(null, null);
+					return true;
+				}
+				return false;
+			}
+		};
+		altitudeControl.setText(null, null);
+		return altitudeControl;
 	}
 	
 	private TextInfoControl createTimeControl(){

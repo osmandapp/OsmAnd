@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="tip_recent_changes_0_6_9_t">Changes in 0.6.9 :
+\n\t- Improved offline map rendering
+\n\t- Native speedy offline rendering - look in experimental features (may not work on some devices)
+\n\t- Massive look and feel changes
+\n\t- Altitude info
+\n\t- New translations (Vienamese, Polish)
+\n\t- Other small features
+	</string>
+	
+	<string name="show_altitude_info_descr">Show current altitude information on map</string>
+	<string name="show_altitude_info">Show altitude</string>
 	<string name="use_transparent_map_theme_descr">Use transparent map controls (requires application restart)</string>
 	<string name="use_transparent_map_theme">Transparent theme</string>
 	
