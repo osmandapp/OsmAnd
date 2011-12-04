@@ -87,7 +87,12 @@
 			<filter tag="aerialway" value="" order="68"/>
 			<filter tag="power" value="" order="68"/>
 
+			<filter appMode="pedestrian" tag="admin_level" value="" order="34"/>
+			<filter appMode="bicycle" tag="admin_level" value="" order="34"/>
+			<filter appMode="car" tag="admin_level" value="" order="34"/>
+			<filter tag="admin_level" value="" order="62"/>
 			<filter tag="administrative" value="" order="62"/>
+
 			 <filter layer="1" tag="railway" value="" order="66"/>
 			<filter tag="railway" value="" order="58"/>
 
