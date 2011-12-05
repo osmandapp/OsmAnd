@@ -80,13 +80,11 @@
 		<filter tag="" value="" order="128" orderType="1"/>
 
 		<group orderType="2">
-			<!-- filter layer="1" tag="" value="" order="66"/>
-			<filter layer="-1" tag="" value="" order="10" / -->
-
 			<!-- over buildings -->
 			<filter tag="aerialway" value="" order="68"/>
 			<filter tag="power" value="" order="68"/>
 
+			<!-- under highways unless appMode=default -->
 			<filter appMode="pedestrian" tag="admin_level" value="" order="34"/>
 			<filter appMode="bicycle" tag="admin_level" value="" order="34"/>
 			<filter appMode="car" tag="admin_level" value="" order="34"/>
@@ -96,6 +94,7 @@
 			 <filter layer="1" tag="railway" value="" order="66"/>
 			<filter tag="railway" value="" order="58"/>
 
+			<!-- highways: 35-57, bridges 66+/-1 -->
 			 <filter layer="1" tag="highway" value="motorway" order="66" shadowLevel="1"/>
 			<filter tag="highway" value="motorway" order="57" shadowLevel="1"/>
 			 <filter layer="1" tag="highway" value="trunk" order="66" shadowLevel="1"/>
@@ -186,13 +185,11 @@
 			<filter tag="admin_level" value="0" order="0"/>
 			<filter tag="admin_level" value="1" order="0"/>
 
+			<filter layer="-1" tag="" value="" order="10"/>
 			<filter tag="" value="" order="11"/>
 		</group>
 
 		<group orderType="3">
-			<!-- filter layer="1" tag="" value="" order="64"/>
-			<filter layer="-1" tag="" value="" order="1" / -->
-
 			 <filter layer="-1" tag="building" value="" order="1"/>
 			<filter tag="building" value="" order="64"/>
 
@@ -211,6 +208,7 @@
 			<filter tag="natural" value="coastline" order="1"/>
 			<filter tag="natural" value="" order="1"/>
 
+			<filter layer="-1" tag="" value="" order="1"/>
 			<filter tag="" value="" order="1"/>
 		</group>
 	</order>
@@ -329,8 +327,9 @@
 			</groupFilter>
 		</group>
 		<filter tag="highway" value="motorway_junction" textColor="#00008b" textWrapWidth="16" textMinDistance="10" textHaloRadius="1" textOrder="6">
-			<filter appMode="car" minzoom="13" textSize="16"/>
-			<filter minzoom="14" textSize="14"/>
+			<filter appMode="car" minzoom="13" maxzoom="13" textSize="16" ref="true"/>
+			<filter appMode="car" minzoom="14" textSize="16" ref="false"/>
+			<filter minzoom="14" textSize="14" ref="false"/>
 		</filter>
 
 		<!-- location names -->
