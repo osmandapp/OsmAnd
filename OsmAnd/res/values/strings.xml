@@ -555,7 +555,7 @@
 	<string name="search_history_street">Street: {0}, {1}</string>
 	<string name="search_history_int_streets">Intersection: {0} x {1} in {2}</string>
 	<string name="search_history_building">Building: {0}, {1}, {2}</string>
-	<string name="search_history_navigate_to">Destination lat = {0}, lon = {1}</string>
+	<string name="search_history_navigate_to">Destination: lat = {0}, lon = {1}</string>
 	<string name="favorite">Favorite</string>
 	<string name="clear_all">Clear all</string>
 	<string name="history">History</string>
