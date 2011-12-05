@@ -171,7 +171,7 @@
 	<string name="tts_missing_language_data">No data for the selected language is installed. Do you want to go to the Market to install?</string>
 
 	<string name="gpx_option_reverse_route">Reverse GPX direction</string>
-	<string name="gpx_option_destination_point">Use current destination point</string>
+	<string name="gpx_option_destination_point">Use current destination</string>
 	<string name="gpx_option_from_start_point">Pass along entire track</string>
 
 	<string name="tip_rotation_switching">Map Rotation</string>
@@ -237,9 +237,9 @@
 
 	<string name="tip_favorites">Favorite Points</string>
 	<string name="tip_favorites_t">\tFrequently used points can be saved as Favorites.
-	\n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Menu\' -> \'Favorites\'.
-	\n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to Navigate to, Edit or Delete it.
-	\n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' ->\'Define view\'.</string>
+\n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Menu\' -> \'Favorites\'.
+\n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to set it as desination, Edit or Delete it.
+\n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' ->\'Define view\'.</string>
 
 	<string name="tip_osm_improve">Improving OSM Data</string>
 	<string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and routing- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks!
@@ -267,25 +267,25 @@
 \n\tYou can change profiles in \'Menu\' -> \'Settings\' -> \'Application mode\', or when creating a route.</string>
 
 	<string name="tip_navigation">Navigation</string>
-	<string name="tip_navigation_t">\tBefore starting navigation (routing) you need to select a destination point first. After that press \'Menu\' -> \'Directions\' on map and select navigation type.</string>
+	<string name="tip_navigation_t">\tBefore starting a navigation (routing) you need to select a destination. Afterwards press \'Menu\' -> \'Directions\' on map and select the navigation type.</string>
 
-	<string name="tip_select_destination_point">Select Destination Point</string>
-	<string name="tip_select_destination_point_t">\tYou can select a destination point directly in the map (context menu, then \'Navigate to\'), or in all search activities.
-\n\tYou can also navigate to any favorite point via long pressing it in \'Favorites\'.</string>
+	<string name="tip_select_destination_point">Select Destination</string>
+	<string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), or in all search activities. 
+\n\tYou can also select any favorite point as destination via long pressing it in \'Favorites\'.</string>
 
 	<string name="tip_search">Searching</string>
 	<string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite.
-\n\tPressing \'Search\' in the main menu opens the search activities. For all hits a context menu offers 2 options: \'Navigate to\' or \'Show on map\'.</string>
+\n\tPressing \'Search\' in the main menu opens the search activities. For all hits a context menu offers 2 options: \'Set as destination\' or \'Show on map\'.</string>
 
 	<string name="tip_map_context_menu">Map Context Menu</string>
 	<string name="tip_map_context_menu_t">\tThe map context menu is available by long pressing on the map or by pressing the trackball button.
 \n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or long press on it to hide the box again.)
 \n\tThe map context menu contains all actions referring to a point (location).</string>
 
-	<string name="tip_desctination_point">Destination Point</string>
-	<string name="tip_desctination_point_t">\tA key element in OsmAnd is the destination point, marked as a red disk on the map.
-\n\tOsmAnd displays the distance to it and the direction to it (red arrow) on the map.
-\n\tTo mark any point as destination select \'Navigate to\'. This option is available on all search hits and in the map context menu (long press on any map item).</string>
+	<string name="tip_desctination_point">Destination</string>
+	<string name="tip_desctination_point_t">\tA key element in OsmAnd is the destination, marked as an orange disk on the map.
+\n\tOsmAnd displays the distance to it and the direction to it (orange triangle) on the map.
+\n\tTo mark any point as destination select \'Set as destination\'. This option is available on all search hits and in the map context menu (long press on any map item).</string>
 
 	<string name="tip_initial">Tips and Tricks</string>
 	<string name="tip_initial_t">\tOsmAnd is a navigation application with many features. 
@@ -555,7 +555,7 @@
 	<string name="search_history_street">Street: {0}, {1}</string>
 	<string name="search_history_int_streets">Intersection: {0} x {1} in {2}</string>
 	<string name="search_history_building">Building: {0}, {1}, {2}</string>
-	<string name="search_history_navigate_to">Navigate to lat = {0}, lon = {1}</string>
+	<string name="search_history_navigate_to">Destination lat = {0}, lon = {1}</string>
 	<string name="favorite">Favorite</string>
 	<string name="clear_all">Clear all</string>
 	<string name="history">History</string>
@@ -615,7 +615,7 @@
 	<string name="error_calculating_route_occured">Error occurred while calculating route</string>
 	<string name="empty_route_calculated">Empty route is calculated</string>					
 	<string name="new_route_calculated_dist">New route is calculated, distance</string>
-	<string name="arrived_at_destination">You arrived at the destination</string>
+	<string name="arrived_at_destination">You have arrived at your destination</string>
 	<string name="invalid_locations">Locations are invalid</string>
 	<string name="go_back_to_osmand">Go back to OsmAnd map</string>
 	<string name="close">Close</string>
@@ -651,7 +651,7 @@
     <string name="monitor_preferences">Tracking</string>
     <string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
     <string name="save_track_to_gpx">Log track to GPX</string>
-    <string name="navigate_to">Navigate to</string>
+    <string name="navigate_to">Set as destination</string>
     <string name="update_tile">Update map</string>
     <string name="reload_tile">Reload tile</string>
     <string name="user_name_descr">Your OSM user name</string>
@@ -671,11 +671,11 @@
     <string name="ChooseCountry">Choose country</string>
     <string name="position_on_map_descr">Choose location of position marker on the map</string>
     <string name="position_on_map">Position marker</string>
-    <string name="map_specify_point">Specify point</string>
+    <string name="map_specify_point">Set as destination</string>
     <string name="show_view_angle_descr">Display viewing direction based on compass</string>
     <string name="show_view_angle">Display viewing direction</string>
-    <string name="stop_navigation">Clear point</string>
-    <string name="navigate_to_point">Mark point</string>
+    <string name="stop_navigation">Clear destin.</string>
+    <string name="navigate_to_point">Set as dest.</string>
     <string name="map_view_3d_descr">Enable 3D view of the map</string>
     <string name="map_view_3d">Map View 3D</string>
     
@@ -737,7 +737,7 @@
 
 <string name="search_tabs_location">Location</string>
 
-<string name="context_menu_item_navigate_point">Navigate to point</string>
+<string name="context_menu_item_navigate_point">Set as destination</string>
 <string name="context_menu_item_add_favorite">Add to favorites</string>
 <string name="context_menu_item_update_map">Update map</string>
 <string name="context_menu_item_open_bug">Open OSM bug</string>
@@ -753,7 +753,7 @@
 <string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>
 
 <!-- string name="favourites_context_menu_title">Context menu</string -->
-<string name="favourites_context_menu_navigate">Navigate to</string>
+<string name="favourites_context_menu_navigate">Set as destination</string>
 <string name="favourites_context_menu_edit">Edit favorite</string>
 <string name="favourites_context_menu_delete">Delete favorite</string>
 <string name="favourites_edit_dialog_title">Rename favorite</string>
