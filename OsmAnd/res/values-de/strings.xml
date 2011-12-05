@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="tip_recent_changes_0_6_9_t">Änderungen in 0.6.9 :
-\n\t- Verbesserte Offline Kartenanzeige
+\n\t- Verbesserte Offline-Kartenanzeige
 \n\t- Schnelles "Native Rendering" - siehe Development-Einstellungen (funktioniert evtl. nicht auf jedem Gerät)
 \n\t- Massive Änderungen am "Look and Feel"
 \n\t- Höhenanzeige
-\n\t- Neue Sprachversionen (Vietnamesisch, Polnisch)
+\n\t- Neue Sprachversionen (vietnamesisch, polnisch)
 \n\t- Weitere kleine Funktionalitäten
 	</string>
 	
@@ -18,16 +18,16 @@
 	<string name="native_library_not_supported">Native library wird auf diesem Gerät nicht unterstützt.</string>
 	<string name="init_native_library">Native Library wird initialisiert...</string>
 	<string name="choose_auto_follow_route">Kartenanzeige nachführen</string>
-	<string name="choose_auto_follow_route_descr">Wartezeit für Rückkehr zur Kartennachführung mit Position</string>
+	<string name="choose_auto_follow_route_descr">Wartezeit für Rückkehr zur Kartennachführung</string>
 	<string name="auto_follow_route_never">Nie</string>
-	<string name="auto_follow_route_navigation">Nachführung nur bei Nav</string>
-	<string name="auto_follow_route_navigation_descr">Kartennachführung mit Position erfolgt nur während Navigation (Routing)</string>
-	<string name="auto_follow_location_enabled">Kartennachführung aktviert.</string>
+	<string name="auto_follow_route_navigation">Nachführung nur bei Nav.</string>
+	<string name="auto_follow_route_navigation_descr">Kartennachführung erfolgt nur während Navigation (Routing)</string>
+	<string name="auto_follow_location_enabled">Kartennachführung aktiviert</string>
 
-	<string name="pref_vector_rendering">Vector Renderer spezif. Optionen</string>
-	<string name="pref_overlay">Overlay / underlay</string>
-	<string name="pref_raster_map">Einstellungen Kachel-Karten</string>
-	<string name="pref_vector_map">Einstellungen Vektor-Karten</string>
+	<string name="pref_vector_rendering">Vektor Renderer spezif. Optionen</string>
+	<string name="pref_overlay">Overlay / Underlay</string>
+	<string name="pref_raster_map">Einstellungen Kachelkarten</string>
+	<string name="pref_vector_map">Einstellungen Vektorkarten</string>
 	<!-- string name="delete_confirmation_title">About to delete</string -->
 	<string name="delete_confirmation_msg">%1$s löschen?</string>
 	<string name="city_type_suburb">Vorstadt</string>
