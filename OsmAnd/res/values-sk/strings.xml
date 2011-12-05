@@ -141,7 +141,7 @@
 	<string name="local_indexes_cat_backup">Záloha</string>
 	<string name="local_indexes_cat_tts">Hlasové údaje (TTS)</string>
 	<string name="local_indexes_cat_voice">Hlasové údaje (mediálne)</string>
-	&lt;string name="local_indexes_cat_gpx">GPX údaje</string>
+	<string name="local_indexes_cat_gpx">GPX údaje</string>
 	<string name="local_indexes_cat_tile">Mapové údaje (dlaždice)</string>
 	<string name="local_indexes_cat_map">Mapové údaje (vektorové)</string>
 	<string name="local_indexes_cat_poi">POI údaje</string>
@@ -479,7 +479,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="hide_poi_filter">Skryť filter</string>
 <string name="show_poi_filter">Zobraziť filter</string>
 <string name="search_poi_filter">Filter</string>
-<string name="menu_mute_off">Zvuk zapnutý&lt;/string>
+<string name="menu_mute_off">Zvuk zapnutý</string>
 <string name="menu_mute_on">Zvuk vypnutý</string>
 <string name="voice_provider_descr">Výber hlasových údajov pre rutovanie</string>
 <string name="voice_provider">Hlasové údaje</string>
