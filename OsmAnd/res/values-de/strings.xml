@@ -235,7 +235,7 @@
 
 	<string name="tip_favorites">Favoriten</string>
 	<string name="tip_favorites_t">\tOft verwendete Lokationen (Punkte) kann man als Favoriten speichern.
-	\n\tEinen Favoriten erstellt man im Karten-Kontextmenü mittels \'Zu Favoriten hinzufügen\', und Angabe eines Namens dafür.
+	\n\tEinen Favoriten erstellt man im Karten-Kontextmenü mittels \'Als Favorit speichern\', und Angabe eines Namens dafür.
 	\n\t Favoriten sind leicht zugänglich über \'Hauptmenü\' -> \'Favoriten\'. Ein Kontextmenü für jeden Favoriten bietet dort \'Als Ziel wählen\', \'Bearbeiten\' oder \'Löschen\'.
 	\n\tUm alle Favoriten in der Karte anzuzeigen, wählt man \'Favoriten\' unter \'Karten-Kontextmenü\' -> \'Darstellung\'.</string>
 
@@ -658,7 +658,7 @@
     <string name="show_osm_bugs_descr">OSM Fehlerberichte anzeigen</string>
     <string name="show_osm_bugs">OSM Fehler</string>
     <string name="favourites_activity">Bevorzugte Punkte</string>
-    <string name="add_to_favourite">Zu Favoriten hinzufügen</string>
+    <string name="add_to_favourite">Als Favorit speichern</string>
     <string name="use_english_names_descr">Englische oder einheimische Bezeichnungen in Karten</string>
     <string name="use_english_names">Englische Bezeichnungen</string>
     <string name="app_settings">Anwendungseinstellungen</string>
@@ -736,7 +736,7 @@
 <string name="search_tabs_location">Position</string>
 
 <string name="context_menu_item_navigate_point">Als Ziel wählen</string>
-<string name="context_menu_item_add_favorite">zu Favoriten hinzufügen</string>
+<string name="context_menu_item_add_favorite">Als Favorit speichern</string>
 <string name="context_menu_item_update_map">Karte aktualisieren</string>
 <string name="context_menu_item_open_bug">OSM Fehlerbericht einsenden</string>
 <string name="context_menu_item_create_poi">POI einsenden</string>
