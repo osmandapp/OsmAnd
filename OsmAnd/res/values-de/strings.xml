@@ -167,7 +167,7 @@
 	<string name="tts_missing_language_data">Es ist kein Sprachpaket für die gewählte Sprache installiert. Soll aus dem Market eines installiert werden?</string>
 
 	<string name="gpx_option_reverse_route">GPX-Route umkehren</string>
-	<string name="gpx_option_destination_point">Derzeitigen Zielpunkt verwenden</string>
+	<string name="gpx_option_destination_point">Derzeitiges Ziel verwenden</string>
 	<string name="gpx_option_from_start_point">Gesamten Track durchlaufen</string>
 
 	<string name="tip_rotation_switching">Kartenrotation</string>
@@ -236,7 +236,7 @@
 	<string name="tip_favorites">Favoriten</string>
 	<string name="tip_favorites_t">\tOft verwendete Lokationen (Punkte) kann man als Favoriten speichern.
 	\n\tEinen Favoriten erstellt man im Karten-Kontextmenü mittels \'Zu Favoriten hinzufügen\', und Angabe eines Namens dafür.
-	\n\t Favoriten sind leicht zugänglich über \'Hauptmenü\' -> \'Favoriten\'. Ein Kontextmenü für jeden Favoriten bietet dort \'Navigieren zu\', \'Bearbeiten\' oder \'Löschen\'.
+	\n\t Favoriten sind leicht zugänglich über \'Hauptmenü\' -> \'Favoriten\'. Ein Kontextmenü für jeden Favoriten bietet dort \'Als Ziel wählen\', \'Bearbeiten\' oder \'Löschen\'.
 	\n\tUm alle Favoriten in der Karte anzuzeigen, wählt man \'Favoriten\' unter \'Karten-Kontextmenü\' -> \'Darstellung\'.</string>
 
 	<string name="tip_osm_improve">OSM Bearbeitung</string>
@@ -265,15 +265,15 @@
 \n\tDas Profil wechselt unter \'Menü\' -> \'Einstellungen\' -> \'Applikationsmodus\', oder auch beim Berechnen einer Route.</string>
 
 	<string name="tip_navigation">Navigation</string>
-	<string name="tip_navigation_t">\tVor dem Starten der Navigationsfunktion (Routen) ist ein Zielpunkt zu wählen. Danach wählt man \'Menu\' -> \'Route\' in der Karte, und wählt den Navigationstyp.</string>
+	<string name="tip_navigation_t">\tVor dem Starten der Navigationsfunktion (Routen) ist ein Ziel zu wählen. Danach wählt man \'Menu\' -> \'Route\' in der Karte, und wählt den Navigationstyp.</string>
 
-	<string name="tip_select_destination_point">Zielpunkt wählen</string>
-	<string name="tip_select_destination_point_t">\tEin Zielpunkt kann direkt in der Karte (via Kontextmenü) gewählt werden (\'Navigiere zu\') oder in allen Such-Funktionen.
-\n\tEbenso kann man einen Favoriten mittels langem Drücken und Auswahl von \'Navigiere zu\' als Zielpunkt verwenden.</string>
+	<string name="tip_select_destination_point">Ziel wählen</string>
+	<string name="tip_select_destination_point_t">\tEin Ziel kann direkt in der Karte (via Kontextmenü) gewählt werden (\'Als Ziel wählen\') oder in allen Such-Funktionen.
+\n\tEbenso kann man einen Favoriten mittels langem Drücken \'Als Ziel wählen\'.</string>
 
 	<string name="tip_search">Suchen</string>
 	<string name="tip_search_t">\tMan kann Orte direkt in der Karte suchen, oder über Adresse, Koordinaten, als POI, oder als abgespeicherter Favorit.
-\n\t\'Suche\' im Hauptmenü öffnet die Suchaktivitäten. Ein Kontextmenü für einen Treffer bietet 2 Optionen: \'Navigiere zu\' oder \'Zeige auf der Karte\'.</string>
+\n\t\'Suche\' im Hauptmenü öffnet die Suchaktivitäten. Ein Kontextmenü für einen Treffer bietet 2 Optionen: \'Als Ziel wählen\' oder \'Zeige auf der Karte\'.</string>
 
 	<string name="tip_map_context_menu">Kontextmenü in der Karte</string>
 	<string name="tip_map_context_menu_t">\tDas Karten-Kontextmenü wird aufgerufen über ein langes Drücken auf einen Punkt in der Karte oder das Drücken des Trackball-Knopfes in der Kartenansicht.
@@ -281,9 +281,9 @@
 \n\tDas Karten-Kontextmenü enthält alle Aktionen im Zusammenhang mit einem Kartenpunkt.</string>
 
 	<string name="tip_desctination_point">Zielpunkt</string>
-	<string name="tip_desctination_point_t">\tEin Grundelement von OsmAnd ist der Zielpunkt, markiert als roter Punkt auf der Karte.
-\n\tZu einem gewählten Zielpunkt zeigt OsmAnd immer die Entfernung und die Richtung (roter Pfeil) in der Karte. 
-\n\tUm einen Punkt als Zielpunkt zu markieren, verwenden Sie \'Navigiere zu\'. Diese Schaltfläche gibt es für alle Such-Treffer und im Karten-Kontextmenü (langes Drücken in der Landkarte).</string>
+	<string name="tip_desctination_point_t">\tEin Grundelement von OsmAnd ist der Zielpunkt, markiert als orangefarbener Punkt auf der Karte.
+\n\tZu einem gewählten Ziel zeigt OsmAnd immer die Entfernung und die Richtung (oranges Dreieck) in der Karte. 
+\n\tUm einen Punkt als Ziel zu markieren, verwenden Sie \'Als Ziel wählen\'. Diese Schaltfläche gibt es für alle Such-Treffer und im Karten-Kontextmenü (langes Drücken in der Landkarte).</string>
 
 	<string name="tip_initial">Tipps und Tricks</string>
 	<string name="tip_initial_t">\tOsmAnd ist eine Navigationsanwendung mit vielen Fähigkeiten. 
@@ -553,7 +553,7 @@
 	<string name="search_history_street">Straße: {0}, {1}</string>
 	<string name="search_history_int_streets">Querstraße : {0} x {1} in {2}</string>
 	<string name="search_history_building">Hausnr.: {0}, {1}, {2}</string>
-	<string name="search_history_navigate_to">Navigiere zu {0}\'\'N {1}\'\'O</string>
+	<string name="search_history_navigate_to">Ziel {0}\'\'N {1}\'\'O</string>
 	<string name="favorite">Favoriten</string>
 	<string name="clear_all">Alles löschen</string>
 	<string name="history">Verlauf</string>
@@ -613,7 +613,7 @@
 	<string name="error_calculating_route_occured">Während der Routenberechnung ist ein Fehler aufgetreten</string>
 	<string name="empty_route_calculated">Es wurde keine Route berechnet</string>
 	<string name="new_route_calculated_dist">Neue Route wird berechnet</string>
-	<string name="arrived_at_destination">Sie haben den Zielpunkt erreicht</string>
+	<string name="arrived_at_destination">Sie haben Ihr Ziel erreicht</string>
 	<string name="invalid_locations">Position ist ungültig</string>
 	<string name="go_back_to_osmand">zurück zu OsmAnd</string>
 	<string name="close">Schließen</string>
@@ -649,7 +649,7 @@
     <string name="monitor_preferences">Positions-Logging</string>
     <string name="save_track_to_gpx_descrp">Zurückgelegte Strecken werden nach Tagen gruppiert als GPX auf der SD-Karte gespeichert</string>
     <string name="save_track_to_gpx">Logging aktivieren</string>
-    <string name="navigate_to">Navigiere zu</string>
+    <string name="navigate_to">Als Ziel wählen</string>
     <string name="update_tile">Karte (Kacheln) aktualisieren</string>
     <string name="reload_tile">Kartenteile (Kacheln) aktualisieren</string>
     <string name="user_name_descr">Persönlicher Benutzername</string>
@@ -669,11 +669,11 @@
     <string name="ChooseCountry">Land wählen</string>
     <string name="position_on_map_descr">Position des Markers auf der Karte</string>
     <string name="position_on_map">Positionsmarker</string>
-    <string name="map_specify_point">Punkt wählen</string>
+    <string name="map_specify_point">Als Ziel wählen</string>
     <string name="show_view_angle_descr">Blickrichtung gemäß Kompass anzeigen</string>
     <string name="show_view_angle">Blickrichtung einblenden</string>
-    <string name="stop_navigation">Lösche Punkt</string>
-    <string name="navigate_to_point">Markiere Punkt</string>
+    <string name="stop_navigation">Ziel Löschen</string>
+    <string name="navigate_to_point">Als Ziel wählen</string>
     <string name="map_view_3d_descr">3D-Kartenansicht verwenden</string>
     <string name="map_view_3d">3D-Kartenansicht</string>
 
@@ -735,7 +735,7 @@
 
 <string name="search_tabs_location">Position</string>
 
-<string name="context_menu_item_navigate_point">Navigiere zu Punkt</string>
+<string name="context_menu_item_navigate_point">Als Ziel wählen</string>
 <string name="context_menu_item_add_favorite">zu Favoriten hinzufügen</string>
 <string name="context_menu_item_update_map">Karte aktualisieren</string>
 <string name="context_menu_item_open_bug">OSM Fehlerbericht einsenden</string>
@@ -751,7 +751,7 @@
 <string name="add_favorite_dialog_favourite_added_template">Favorit Punkt \'\'{0}\'\' wurde erfolgreich hinzugefügt.</string>
 
 <!-- string name="favourites_context_menu_title">Kontextmenü</string -->
-<string name="favourites_context_menu_navigate">Navigiere zu</string>
+<string name="favourites_context_menu_navigate">Als Ziel wählen</string>
 <string name="favourites_context_menu_edit">Favorit bearbeiten</string>
 <string name="favourites_context_menu_delete">Favorit löschen</string>
 <string name="favourites_edit_dialog_title">Favorit umbenennen</string>
