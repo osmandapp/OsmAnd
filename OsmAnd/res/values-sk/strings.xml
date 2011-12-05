@@ -1,5 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="use_transparent_map_theme_descr">Použije priehľadné ovládače mapy (vyžaduje reštart aplikácie)</string>
+	<string name="use_transparent_map_theme">Priehľadná téma</string>
+	
+	<string name="appearance_settings_descr">Konfiguruje výzor a pocit z aplikácie</string>
+	<string name="appearance_settings">Vzhľad</string>
 	<string name="native_library_not_supported">Natívna knižnica nie je podporovaná na tomto zariadení.</string>
 	<string name="init_native_library">Inicializácia natívnej knižnice...</string>
 	<string name="choose_auto_follow_route">Automatické nasledovanie</string>
