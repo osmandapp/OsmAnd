@@ -1,5 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="tip_recent_changes_0_6_9_t">Änderungen in 0.6.9 :
+\n\t- Verbesserte Offline Kartenanzeige
+\n\t- Schnelles "Native Rendering" - siehe Development-Einstellungen (funktioniert evtl. nicht auf jedem Gerät)
+\n\t- Massive Änderungen am "Look and Feel"
+\n\t- Höhenanzeige
+\n\t- Neue Sprachversionen (Vietnamesisch, Polnisch)
+\n\t- Weitere kleine Funktionalitäten
+	</string>
+	
+	<string name="show_altitude_info_descr">Anzeige der gegenwärtigen Höhe in der Kartenansicht</string>
+	<string name="show_altitude_info">Höhe anzeigen</string>
+	<string name="use_transparent_map_theme_descr">Transparente Schaltflächen verwenden</string>
+	<string name="use_transparent_map_theme">Transparentes Layout</string>
+	<string name="appearance_settings_descr">Layout und Anzeigeelemente konfigurieren</string>
+	<string name="appearance_settings">Layout</string>
 	<string name="native_library_not_supported">Native library wird auf diesem Gerät nicht unterstützt.</string>
 	<string name="init_native_library">Native Library wird initialisiert...</string>
 	<string name="choose_auto_follow_route">Kartenanzeige nachführen</string>

@@ -2,7 +2,7 @@
 <resources>
 	<string name="tip_recent_changes_0_6_9_t">Changes in 0.6.9 :
 \n\t- Improved offline map rendering
-\n\t- Native speedy offline rendering - look in experimental features (may not work on some devices)
+\n\t- Fast Native offline rendering - look in experimental features (may not work on some devices)
 \n\t- Massive look and feel changes
 \n\t- Altitude info
 \n\t- New translations (Vienamese, Polish)
@@ -13,7 +13,6 @@
 	<string name="show_altitude_info">Show altitude</string>
 	<string name="use_transparent_map_theme_descr">Use transparent map controls</string>
 	<string name="use_transparent_map_theme">Transparent theme</string>
-	
 	<string name="appearance_settings_descr">Configure application look and feel</string>
 	<string name="appearance_settings">Appearance</string>
 	<string name="native_library_not_supported">Native library is not supported on this device.</string>
