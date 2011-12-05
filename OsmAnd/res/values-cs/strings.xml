@@ -1,5 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+
+	<string name="tip_recent_changes_0_6_9_t">Změny ve verzi 0.6.9 :
+\n\t- Vylepšené vykreslování offline map
+\n\t- Zrychlené vykreslování offline map pomocí Android native library - najdete v "experimental features" (na některých zařízeních nemusí fungovat)
+\n\t- Zásadní změny vzhledu zobrazení
+\n\t- Zobrazení nadmořské výšky
+\n\t- Nové překlady (Vienamština, Polština)
+\n\t- Další drobné změny
+	</string>
+
+	<string name="show_altitude_info_descr">Zobrazit aktuální nadmořskou výšku na mapě</string>
+	<string name="show_altitude_info">Zobrazit výšku</string>
+	<string name="use_transparent_map_theme_descr">Použít průhledné ovládání mapy</string>
+	<string name="use_transparent_map_theme">Transparentní téma</string>
+	
+	<string name="appearance_settings_descr">Konfigurace vzhledu aplikace</string>
+	<string name="appearance_settings">Vzhled</string>
+
 	<string name="native_library_not_supported">Android native library není podporovaná na tomto zařízení.</string>
 	<string name="init_native_library">Inicializuji Android native library...</string>
 	<string name="choose_auto_follow_route">Nastavení automatického sledování</string>
