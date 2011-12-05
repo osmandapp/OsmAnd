@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+<string name="tip_recent_changes_0_6_9_t">Zmiany w 0.6.9:
+\n\t- poprawiono renderowanie map offline
+\n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach)
+\n\t- poprawki w interfejsie
+\n\t- dodano wyświetlanie informacji o wysokości (altitude)
+\n\t- nowe tłumaczenia (polskie, wietnamskie)
+\n\t- inne, mniejsze poprawki
+</string>
+
+<string name="show_altitude_info_descr">Pokaż informację o wysokości na mapie</string>
+<string name="show_altitude_info">Pokaż wysokość</string>
+<string name="use_transparent_map_theme_descr">Użyj przezroczystych kontrolek mapy</string>
+<string name="use_transparent_map_theme">Przezroczysty styl</string>
+<string name="appearance_settings_descr">Konfiguruj wygląd aplikacji</string>
+<string name="appearance_settings">Wygląd</string>
+<string name="native_library_not_supported">Biblioteka renderowania natywnego nie jest obsługiwana na tym urządzeniu.</string>
+<string name="init_native_library">Inicjalizacja biblioteki renderowania natywnego...</string>
+
 <string name="sendtoOSM_confirmation_msg">Wysłać do OSM: %1$s?</string>
 <string name="pref_vector_rendering">Opcje dotyczące rendera wektorowego</string>
 <string name="pref_overlay">Overlay / underlay</string>
 <string name="pref_raster_map">Ustawienia mapy kafelkowej</string>
 <string name="pref_vector_map">Ustawienia mapy wektorowej</string>
 
-<string name="choose_auto_follow_route">Podążanie widoku za pozycją</string>
+<string name="choose_auto_follow_route">Auto-podążanie za pozycją</string>
 <string name="choose_auto_follow_route_descr">Opóźnienie, po którym mapa zacznie podążać za aktualną pozycją GPS</string>
 <string name="auto_follow_route_never">Nigdy</string>
 <string name="auto_follow_route_navigation">Auto-podążanie za pozycją</string>
