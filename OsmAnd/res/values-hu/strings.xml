@@ -1,5 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+<string name="tip_recent_changes_0_6_9_t">A 0.6.9-es verzió változásai:
+\n\t- Javított vektoros térképmegjelnítés
+\n\t- Gyors natív vektoros térképmegjelenítés - kísérleti állapotban van (egyes eszközökön nem működik)
+\n\t- Erőteljesen megváltoztatott kinézet
+\n\t- Magasság információ kijelzése
+\n\t- Új fordítások (Vienamese, Polish)
+\n\t- További kiseb fejlesztések
+</string>
+
+<string name="show_altitude_info_descr">Az aktuális magasság érték kijelzése a térképen</string>
+<string name="show_altitude_info">Magasság érték kijelzése</string>
+<string name="use_transparent_map_theme_descr">Átlátszó háttér a térkép kezelő gombokhoz</string>
+<string name="use_transparent_map_theme">Átlátszó téma</string>
+<string name="appearance_settings_descr">Az alkamazás kinézetének beállítása</string>
+<string name="appearance_settings">Megjelenés</string>
 	<string name="native_library_not_supported">A natív könyvtár nem támogatott ezen az eszközön.</string>
 	<string name="init_native_library">Natív renderelő inicializálása..</string>
 	<string name="choose_auto_follow_route">Automatikus követés ideje</string>
