@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+ 	<string name="tip_recent_changes_0_6_9_t">Zmeny vo verzii 0.6.9 :
+\n\t- Vylepšené offline vykresľovanie mapy
+\n\t- Rýchle natívne offline vykresľovanie - viď experimentálne funkcie (nemusí fungovať na všetkých zariadeniach)
+\n\t- Veľké zmeny vo vzhľade aplikácie
+\n\t- Informácie o nadmorskej výške
+\n\t- Nové preklady (Vietnamský, Polský)
+\n\t- Iné malé funkcie
+	</string>
+
+	<string name="show_altitude_info_descr">Zobrazí aktuálnu nadm. výšku na mape</string>
+	<string name="show_altitude_info">Zobraziť nadm. výšku</string> 
 	<string name="use_transparent_map_theme_descr">Použije priehľadné ovládače mapy</string>
 	<string name="use_transparent_map_theme">Priehľadná téma</string>
 	
@@ -130,7 +141,7 @@
 	<string name="local_indexes_cat_backup">Záloha</string>
 	<string name="local_indexes_cat_tts">Hlasové údaje (TTS)</string>
 	<string name="local_indexes_cat_voice">Hlasové údaje (mediálne)</string>
-	<string name="local_indexes_cat_gpx">GPX údaje</string>
+	&lt;string name="local_indexes_cat_gpx">GPX údaje</string>
 	<string name="local_indexes_cat_tile">Mapové údaje (dlaždice)</string>
 	<string name="local_indexes_cat_map">Mapové údaje (vektorové)</string>
 	<string name="local_indexes_cat_poi">POI údaje</string>
@@ -468,7 +479,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="hide_poi_filter">Skryť filter</string>
 <string name="show_poi_filter">Zobraziť filter</string>
 <string name="search_poi_filter">Filter</string>
-<string name="menu_mute_off">Zvuk zapnutý</string>
+<string name="menu_mute_off">Zvuk zapnutý&lt;/string>
 <string name="menu_mute_on">Zvuk vypnutý</string>
 <string name="voice_provider_descr">Výber hlasových údajov pre rutovanie</string>
 <string name="voice_provider">Hlasové údaje</string>
