@@ -139,10 +139,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if(appMode != cacheApplicationMode){
 			modeShadow.setBounds(backToMenuButton.getLeft() + (int) (2 * scaleCoefficient), backToMenuButton.getTop() - (int) (20 * scaleCoefficient),
 					backToMenuButton.getRight() - (int) (4 * scaleCoefficient), backToMenuButton.getBottom());
-			if(appMode == ApplicationMode.BICYCLE){
-				cacheAppModeIcon = view.getResources().getDrawable(R.drawable.bicycle_small);
-			} else if(appMode == ApplicationMode.CAR){
+			if(appMode == ApplicationMode.CAR){
 				cacheAppModeIcon = view.getResources().getDrawable(R.drawable.car_small);
+			} else if(appMode == ApplicationMode.BICYCLE){
+				cacheAppModeIcon = view.getResources().getDrawable(R.drawable.bicycle_small);
 			} else if(appMode == ApplicationMode.PEDESTRIAN){
 				cacheAppModeIcon = view.getResources().getDrawable(R.drawable.pedestrian_small);
 			} else {
@@ -161,10 +161,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 	private void onApplicationModePress() {
 		final QuickAction mQuickAction = new QuickAction(backToMenuButton);
-		int[] icons = new int[] { R.drawable.default_mode_small, R.drawable.bicycle_small, R.drawable.car_small, R.drawable.pedestrian_small };
-		int[] values = new int[] { R.string.app_mode_default, R.string.app_mode_bicycle, R.string.app_mode_car,
+		int[] icons = new int[] { R.drawable.default_mode_small, R.drawable.car_small, R.drawable.bicycle_small, R.drawable.pedestrian_small };
+		int[] values = new int[] { R.string.app_mode_default, R.string.app_mode_car, R.string.app_mode_bicycle,
 				R.string.app_mode_pedestrian };
-		final ApplicationMode[] modes = new ApplicationMode[] { ApplicationMode.DEFAULT, ApplicationMode.BICYCLE, ApplicationMode.CAR,
+		final ApplicationMode[] modes = new ApplicationMode[] { ApplicationMode.DEFAULT, ApplicationMode.CAR, ApplicationMode.BICYCLE,
 				ApplicationMode.PEDESTRIAN };
 		for (int i = 0; i < 4; i++) {
 			final ActionItem action = new ActionItem();
