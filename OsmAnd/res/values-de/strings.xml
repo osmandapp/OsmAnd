@@ -76,7 +76,7 @@
 	<string name="search_position_map_view">Letzte Kartenposition</string>
 	
 	<string name="select_search_position">Suche nahe :</string>
-	<string name="context_menu_item_search">Suche</string>
+	<string name="context_menu_item_search">In der Nähe suchen</string>
 	<string name="tip_recent_changes_0_6_7_t">Verbesserungen in 0.6.7 :
 \n\t- Offline-Daten Manager (Herunterladen, Löschen und Verschieben nach Backup von Offline-Daten direkt in OsmAnd)
 \n\t- Favoriten und Favoritengruppen (Kategorisieren, Löschen, Managen von Favoriten)

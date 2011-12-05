@@ -78,7 +78,7 @@
 	<string name="search_position_map_view">Last map view</string>
 	
 	<string name="select_search_position">Search near :</string>
-	<string name="context_menu_item_search">Search</string>
+	<string name="context_menu_item_search">Search near here</string>
 	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7 :
 \n\t- Offline data manager (download, delete, backup offline data directly in Osmand)
 \n\t- Favorite points and groups (categorize, delete, manage favorites)
