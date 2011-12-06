@@ -442,7 +442,7 @@
     <string name="rotate_map_none_opt">Keine Rotation</string>
 	<string name="rotate_map_to_bearing_descr">Art der Kartenausrichtung wählen</string>
     <string name="rotate_map_to_bearing">Kartenrotation</string>
-	<string name="show_route">Route anzeigen</string>
+	<string name="show_route">Routendetails</string>
 	<string name="fav_imported_sucessfully">Favoriten erfolgreich importiert</string>
 	<string name="fav_file_to_load_not_found">GPX Datei mit den Favoriten nicht gefunden unter {0}</string>
 	<string name="fav_saved_sucessfully">Favoriten erfolgreich gespeichert nach {0}</string>
@@ -589,7 +589,7 @@
 	<string name="update_existing">Ersetzen</string>
 	<string name="only_show">Nur anzeigen</string>
 	<string name="follow">Folgen</string>
-	<string name="recalculate_route_to_your_location">Transportmittel wählen (optional)</string>
+	<string name="recalculate_route_to_your_location">Transportmittel wählen (optional):</string>
 	<string name="follow_route">Route bestimmen</string>
 	<string name="mark_final_location_first">Bitte erst ein Ziel wählen</string>
 	<string name="get_directions">Route</string>

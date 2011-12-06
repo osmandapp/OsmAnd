@@ -445,7 +445,7 @@
     <string name="rotate_map_none_opt">Don\'t rotate</string>
 	<string name="rotate_map_to_bearing_descr">Select how to rotate map</string>
     <string name="rotate_map_to_bearing">Map rotation</string>
-	<string name="show_route">Show route</string>
+	<string name="show_route">Route details</string>
 	<string name="fav_imported_sucessfully">Favorites succesfully imported</string>
 	<string name="fav_file_to_load_not_found">GPX file containing favorites is not found at {0}</string>
 	<string name="fav_saved_sucessfully">Favorites succesfully saved to {0}</string>
@@ -591,7 +591,7 @@
 	<string name="update_existing">Replace</string>
 	<string name="only_show">Only show</string>
 	<string name="follow">Follow</string>
-	<string name="recalculate_route_to_your_location">Select mode of transportation (optional)</string>
+	<string name="recalculate_route_to_your_location">Select mode of transportation (optional):</string>
 	<string name="follow_route">Routing directions</string>
 	<string name="mark_final_location_first">Please select destination first</string>
 	<string name="get_directions">Directions</string>
