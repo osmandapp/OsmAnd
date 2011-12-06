@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
 <string name="tip_recent_changes_0_6_9_t">A 0.6.9-es verzió változásai:
-\n\t- Javított vektoros térképmegjelnítés
-\n\t- Gyors natív vektoros térképmegjelenítés - kísérleti állapotban van (egyes eszközökön nem működik)
+\n\t- Javított vektoros térkép megjelenítés
+\n\t- Gyors natív vektoros térkép-megjelenítés - kísérleti állapotban van (egyes eszközökön nem működik)
 \n\t- Erőteljesen megváltoztatott kinézet
 \n\t- Magasság információ kijelzése
-\n\t- Új fordítások (Vienamese, Polish)
-\n\t- További kiseb fejlesztések
+\n\t- Új fordítások (vietnami, lengyel)
+\n\t- További kisebb fejlesztések
 </string>
 
-<string name="show_altitude_info_descr">Az aktuális magasság érték kijelzése a térképen</string>
-<string name="show_altitude_info">Magasság érték kijelzése</string>
-<string name="use_transparent_map_theme_descr">Átlátszó háttér a térkép kezelő gombokhoz</string>
+<string name="show_altitude_info_descr">Az aktuális magassági érték kijelzése a térképen</string>
+<string name="show_altitude_info">Magassági érték kijelzése</string>
+<string name="use_transparent_map_theme_descr">Átlátszó háttér a térképkezelő gombokhoz</string>
 <string name="use_transparent_map_theme">Átlátszó téma</string>
-<string name="appearance_settings_descr">Az alkamazás kinézetének beállítása</string>
+<string name="appearance_settings_descr">Az alkalmazás kinézetének beállításai</string>
 <string name="appearance_settings">Megjelenés</string>
-	<string name="native_library_not_supported">A natív könyvtár nem támogatott ezen az eszközön.</string>
+	<string name="native_library_not_supported">A natív renderelő nem támogatott ezen az eszközön.</string>
 	<string name="init_native_library">Natív renderelő inicializálása..</string>
 	<string name="choose_auto_follow_route">Automatikus követés ideje</string>
 	<string name="choose_auto_follow_route_descr">Válaszd ki, mennyi idő múlva ugorjon vissza a térkép a pozíciódhoz</string>
@@ -38,7 +38,7 @@
 	<string name="city_type_city">város</string>
 	<string name="layer_poi_label">POI feliratok</string>
 	<string name="animate_route_off">Szimuláció leállítása</string>
-	<string name="animate_route">Szimuláció indítésa</string>
+	<string name="animate_route">Szimuláció indítása</string>
 	
 	<string name="tip_recent_changes_0_6_8_t">A 0.6.8 verzió változásai:
 \n\t- Teljesen újratervezett kereső (POI, cím)! Az új kereső sokkal gyorsabb és lehetőséget ad különféle kiindulópontok szerinti kereséshez.
@@ -149,7 +149,7 @@
 	
 	<string name="search_offline_clear_search">Új keresés</string>
 	<string name="map_text_size_descr">Szövegméret beállítása a térképen megjelenő nevekhez</string>
-	<string name="map_text_size">Szöveg méret</string>
+	<string name="map_text_size">Szövegméret</string>
 	<string name="trace_rendering">Hibakeresési információ megjelenítéshez</string>
 	<string name="trace_rendering_descr">Megjelenítési teljesítmény kijelzése</string>
 	<string name="tip_recent_changes">Legújabb változások</string>
@@ -192,7 +192,7 @@
 	<string name="warning_tile_layer_not_downloadable">%1$s térkép réteget nem tudja az alkalmazás letölteni, meg kell próbálni újratelepíteni.</string>
 	<string name="overlay_transparency_descr">Rátét áttetszőség megváltoztatása</string>
 	<string name="overlay_transparency">Rátét áttetszőség</string>
-	<string name="map_transparency_descr">Alap térkép áttetszőség megváltoztatása</string>
+	<string name="map_transparency_descr">Alaptérkép áttetszőség megváltoztatása</string>
 	<string name="map_transparency">Térkép áttetszőség</string>
 	<string name="modify_transparency">Áttetszőség megváltoztatása</string>
 	<string name="layer_underlay">Alátét térkép...</string>
@@ -248,14 +248,14 @@
 	<string name="search_osm_offline">Cím keresése kapcsolat nélkül működő térképpel</string>
 
 	<string name="system_locale">Rendszer nyelve</string>
-	<string name="preferred_locale_descr">Képernyőn megjelenő szöveg nyelvének megváltoztatása</string>
+	<string name="preferred_locale_descr">Képernyőn megjelenő feliratok nyelve</string>
 	<string name="preferred_locale">Előnyben részesített nyelv</string>
 	<string name="tip_map_switch">Térképforrás</string>
 	<string name="tip_map_switch_t">A térkép forrásának és rétegeknek a cseréjére a leggyorsabb megoldás a \'menü\'->\'Rétegek\' menüpont.
 \n\t\'Térkép forrás...\' alatt lehet választani az előre definiált térképek és az OsmAndMapCreator által PC-n készített térképek között.
 \n\tOsmAnd egyéni forrásokat is támogat.</string>
 	<string name="tip_app_mode">Működési mód</string>
-	<string name="tip_app_mode_t">Az OsmAnd több, személyreszabható megjelenítési módot támogat, különböző felhasználási esetekre.
+	<string name="tip_app_mode_t">Az OsmAnd több, személyre szabható megjelenítési módot támogat, különböző felhasználási esetekre.
 \n\tA mód kiválasztható a  \'Főmenü\'->\'Beállítások\'->\'Működési mód\' alatt.</string>
 	<string name="tip_navigation">Navigáció</string>
 	<string name="tip_navigation_t">A navigáció bekapcsolásához először ki kell választani egy célpontot. Ezután a \'menü\' -> \'Útirány\' menüt kell választani és megjelölni a közlekedési formát.</string>
@@ -337,7 +337,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="reading_cached_tiles">Elmentett térképcsempék olvasása...</string>
 	<string name="version_index_is_big_for_memory">A(z) \'\'{0}\'\' indexadat nem fér a memóriába</string>
 	<string name="version_index_is_not_supported">\'\'{0}\'\' index verziója nem támogatott</string>
-	<string name="osmand_net_previously_installed">Ön már telepített egy korbábbi OsmAnd verziót. Minden internettől független adat használható az új alkalmazással. A Kedvenc pontokat a régi alkalmazásból érdemes kimenteni és az újba betölteni</string>
+	<string name="osmand_net_previously_installed">Ön már telepített egy korábbi OsmAnd verziót. Minden internettől független adat használható az új alkalmazással. A Kedvenc pontokat a régi alkalmazásból érdemes kimenteni és az újba betölteni</string>
 	<string name="build_installed">OsmAnd verzió {0} sikeresen telepítve ({1}).</string>
 	<string name="downloading_build">OsmAnd verzió letöltése...</string>
 	<string name="install_selected_build">Telepíted az OsmAnd alkalmazást - {0} innen: {1} {2} MB.</string>
@@ -531,7 +531,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="context_menu_item_update_map_confirm">Biztos, hogy a helyi adatokat internetről frissíti?</string>
 	<string name="search_history_city">Település: {0}</string>
 	<string name="search_history_street">Utca: {0}, {1}</string>
-	<string name="search_history_int_streets">Köztes utcák: {0} x {1} in {2}</string>
+	<string name="search_history_int_streets">Kereszteződés: {0} és {1}, {2}</string>
 	<string name="search_history_building">Épület: {0}, {1}, {2}</string>
 	<string name="search_history_navigate_to">Navigáció ide: szélesség = {0}, hosszúság = {1}</string>
 	<string name="favorite">Kedvenc</string>
@@ -624,7 +624,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="settings">Beállítások</string>
 	<string name="save_current_track_descr">Jelenlegi útvonal SD kártyára mentése</string>
 	<string name="save_current_track">Jelenlegi útvonal mentése</string>
-	<string name="save_track_interval_descr">Válassz pozícionálási intervallumot az útvonal mentéshez</string>
+	<string name="save_track_interval_descr">Válassz pozicionálási intervallumot az útvonal mentéshez</string>
 	<string name="save_track_interval">Rögzítési sűrűség</string>
 	<string name="monitor_preferences">Útvonalrögzítés</string>
 	<string name="save_track_to_gpx_descrp">Az útvonalak napi csoportosításban kerülnek mentésre a track könyvtárba</string>
@@ -647,7 +647,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="choose_street">Utca kiválasztása</string>
 	<string name="choose_city">Település kiválasztása</string>
 	<string name="ChooseCountry">Ország kiválasztása</string>
-	<string name="position_on_map_descr">Pozíciójelző helyének kiválasztás a térképen</string>
+	<string name="position_on_map_descr">Pozíciójelző helyének kiválasztása a térképen</string>
 	<string name="position_on_map">Pozíció a térképen</string>
 	<string name="map_specify_point">Pont meghatározása</string>
 	<string name="show_view_angle_descr">Látómező megjelenítése iránytű alapján</string>
@@ -657,7 +657,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="map_view_3d_descr">A térkép 3D megjelenítésének engedélyezése</string>
 	<string name="map_view_3d">3D térkép</string>
     
-	<string name="show_poi_over_map_description">POI mutatása a térképen (utolsjára használt szűrő szerint)</string>
+	<string name="show_poi_over_map_description">POI mutatása a térképen (utoljára használt szűrő szerint)</string>
 	<string name="show_poi_over_map">POI mutatása</string>
 	<string name="map_tile_source_descr">Térképcsempék forrásának kiválasztása:</string>
 	<string name="map_tile_source">Térképcsempék forrása</string>
