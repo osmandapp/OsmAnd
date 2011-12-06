@@ -470,7 +470,7 @@
 	<string name="menu_layers">Define view</string>
 	<string name="continue_follow_previous_route">Previous route was unfinished. Continue following it?</string>
 	<string name="context_menu_item_search_poi">Search POI</string>
-	<string name="context_menu_item_show_route">Route from</string>
+	<string name="context_menu_item_show_route">Show route from here</string>
 	<string name="use_trackball_descr">Use trackball to move map</string>
 	<string name="use_trackball">Use trackball</string>
 	<string name="background_service_wait_int_descr">Set waiting time for position fix</string>
