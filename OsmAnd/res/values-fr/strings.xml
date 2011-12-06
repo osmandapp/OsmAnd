@@ -1,11 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="choose_auto_follow_route">Choisir les paramètres de suivi automatique</string>
-  <string name="choose_auto_follow_route_descr">Choisir le temps pendant lequel l\'application extrapole la position en mouvement</string>
+	<string name="tip_recent_changes_0_6_9_t">Changements en 0.6.9 :
+\n\t- Amelioration du rendu des cartes hors ligne
+\n\t- Rendu hors ligne acceléré - voir dans les options experimentales (ne marche pas sur tous les appareils)
+\n\t- Changements cosmétiques
+\n\t- Infos d\'altitude
+\n\t- Nouvelles traductions (Vietnamien, Polonais)
+\n\t- Améliorations diverses
+</string>
+
+	<string name="show_altitude_info_descr">Afficher l\'altitude en cours sur la carte</string>
+	<string name="show_altitude_info">Afficher l\'altitude</string>
+	<string name="use_transparent_map_theme_descr">Utiliser les contrôles de transparence de la carte</string>
+	<string name="use_transparent_map_theme">Thème de transparence</string>
+	<string name="appearance_settings_descr">Configurer le style de l\'application</string>
+	<string name="appearance_settings">Style</string>
+	<string name="native_library_not_supported">Rendu acceléré non supporté sur cet appareil.</string>
+	<string name="init_native_library">Initialisation du rendu acceléré...</string>
+
+ <string name="choose_auto_follow_route">Suivi automatique de la carte</string>
+ <string name="choose_auto_follow_route_descr">Temps avant que la carte se re-centre sur la position en cours</string>
   <string name="auto_follow_route_never">Jamais</string>
-	<string name="auto_follow_route_navigation">Auto follow nav only</string>
-	<string name="auto_follow_route_navigation_descr">Use map view auto follow only while navigating.</string>
-	<string name="auto_follow_location_enabled">Map view auto follow in use.</string>
+ <string name="auto_follow_route_navigation">Recentrage automatique navigation</string>
+	<string name="auto_follow_route_navigation_descr">Recentrage automatique uniquement pendant la navigation.</string>
+	<string name="auto_follow_location_enabled">Recentrage automatique activé.</string>
+  <string name="sendtoOSM_confirmation_msg">Envoyer à OSM: %1$s?</string>
+  <string name="pref_vector_rendering">Options pour le rendu de la carte vectorielle locale</string>
+  <string name="pref_overlay">Surcouche / sous-couche</string>
+  <string name="pref_raster_map">Options cartographie image</string>
+  <string name="pref_vector_map">Options cartographie vectorielle</string>
+	<!-- string name="delete_confirmation_title">About to delete</string -->
+  <string name="delete_confirmation_msg">Supprimer %1$s?</string>
+  <string name="city_type_suburb">Banlieue</string>
+  <string name="city_type_hamlet">Hameau</string>
+  <string name="city_type_village">Village</string>
+  <string name="city_type_town">Commune</string>
+  <string name="city_type_city">Ville</string>
+  <string name="layer_poi_label">Etiquettes POI</string>
+
  <string name="animate_route_off">Arrêt animation</string>
  <string name="animate_route">Démarrage animation</string>
         <string name="tip_recent_changes_0_6_8_t">Changements en 0.6.8 :
@@ -196,7 +228,7 @@
 \n\tVous pouvez aller dans \'Menu contextuel de la carte\'->\'Partager un lieu\'.
 \nLà sélectionner le moyen de partager. Les choix sont: E-Mail, SMS ou copier vers le presse-papier.</string>
 <string name="tip_favorites">Lieux favoris</string>
-<string name="tip_favorites_t">Si vous en avez assez de rechercher toujours les mêmes endroits, vous pouvez, facilement, les ajouter à vos Favoris en quelques clicks.
+<string name="tip_favorites_t">Les points utilisés fréquements peuvent être enregistrés en tant que favoris.
 \n\tPour créer un lieu Favori, aller dans le Menu contextuel de la carte, selectionner l\'option \'Ajouter aux favoris\' saisir un nom adapté. Après enregistrement, ce lieu est facilement accessible par le menu \'Menu principal\'->\'Favoris\'.
 \n\tUn long click sur un favoris dans le menu \'Favoris\' permet de le modifier, le supprimer ou de créer un itinéraire pour s\'y rendre.
 \n\tPour afficher tous les favoris sur la carte, activer le calque affichant tous les favoris directement sur la carte dans \'Menu contextuel de la carte\'->\'Couches\'.</string>
@@ -234,8 +266,8 @@
 \n\tAprès avoir touché la carte, une bulle apparaît avec les coordonnées du point, tapez court pour ouvrir le menu contextuel, ou long pour faire disparaître la bulle. Le menu contextuel est également disponible depuis le bouton \'Menu\'.
 \n\tLe menu contextuel de la carte regroupe les actions possible autour de ce point.</string>
 <string name="tip_destination_point">Point de destination</string>
-<string name="tip_destination_point_t">\tConcept clé de OsmAnd: le point de destination est marqué d\'un disque rouge sur la carte.
-\n\tOsmAnd affiche la distance à ce point et sa direction (flèche rouge) sur la carte.
+<string name="tip_destination_point_t">\tConcept clé de OsmAnd: le point de destination est marqué d\'un disque orange sur la carte.
+\n\tOsmAnd affiche la distance à ce point et sa direction (flèche orange) sur la carte.
 \n\Pour marquer un point en tant que destination il faut sélectionner \'Se déplacer vers le point\'. Ce bouton est disponible dans toutes les recherches, en menu contextuel de carte et en appuis long sur la carte.</string>
 <string name="tip_initial">Conseils et astuces</string>
 <string name="tip_initial_t">\tOsmAnd est une application de navigation avec beaucoup de fonctionnalités.
@@ -407,7 +439,7 @@
 <string name="menu_layers">Couches</string>
 <string name="continue_follow_previous_route">Trajet précédent inachevé. Voulez-vous continuer à le suivre?</string>
 <string name="context_menu_item_search_poi">Chercher un Point d\'Intérêt</string>
-<string name="context_menu_item_show_route">Se déplacer du point</string>
+<string name="context_menu_item_show_route">Afficher l\'itinéraire depuis ce point</string>
 <string name="use_trackball_descr">Utiliser le pointeur pour se déplacer sur la carte</string>
 <string name="use_trackball">Utiliser le pointeur</string>
 <string name="background_service_wait_int_descr">Configurer le délai d\'attente pour déterminer l\'emplacement</string>
@@ -587,7 +619,7 @@
 <string name="monitor_preferences">Enregistrement du parcours</string>
 <string name="save_track_to_gpx_descrp">Les trajets seront enregistrés et groupés par jour dans le répertoire de trajets</string>
 <string name="save_track_to_gpx">Enregistrer le trajet en GPX</string>
-<string name="navigate_to">Se déplacer vers</string>
+<string name="navigate_to">Point de destination</string>
 <string name="update_tile">Mettre à jour la carte</string>
 <string name="reload_tile">Recharger carreau</string>
 <string name="user_name_descr">Votre nom d\'utilisateur pour le service OpenStreetMap</string>
@@ -611,7 +643,7 @@
 <string name="show_view_angle_descr">Afficher un angle de vue basé sur le compas</string>
 <string name="show_view_angle">Afficher l\'angle de vue</string>
 <string name="stop_navigation">Effacer le point</string>
-<string name="navigate_to_point">Marquer position</string>
+<string name="navigate_to_point">Marquer point de destination</string>
 <string name="map_view_3d_descr">Activer vue 3D de la carte</string>
 <string name="map_view_3d">Vue 3D</string>
 <string name="show_poi_over_map_description">Afficher PI sur la carte (utiliser le dernier filtre)</string>
