@@ -407,7 +407,7 @@ public class MapActivityActions implements DialogProvider {
 		builder.setTitle(R.string.show_route);
 		builder.setMessage(mapActivity.getRoutingHelper().getGeneralRouteInformation());
 		builder.setPositiveButton(R.string.default_buttons_save, saveDirections);
-		builder.setNeutralButton(R.string.route_about, showRoute);
+		builder.setNeutralButton(R.string.show_gpx_route, showRoute);
 		builder.setNegativeButton(R.string.close, null);
 		return builder.create();
     }
