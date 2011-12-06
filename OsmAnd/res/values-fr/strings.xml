@@ -90,7 +90,7 @@
 	<string name="local_index_items_restored">%1$d sur %2$d eléments restaurés.</string>
 	<string name="local_index_no_items_to_do">Pas d\'eléments à %1$s</string>
 	<string name="local_index_action_do">Vous allez %1$s %2$s eléments. Continuer?</string>
-	<string name="local_index_descr_title">Gestionnaire de données hors ligne:</string>
+	<string name="local_index_descr_title">Gestionnaire de données hors ligne</string>
 	<string name="local_index_mi_restore">Restorer...</string>
 	<string name="local_index_mi_backup">Sauvegarder...</string>
 	<string name="local_index_mi_delete">Supprimer...</string>

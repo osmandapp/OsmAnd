@@ -126,7 +126,7 @@
 	<string name="local_index_items_restored">%1$d položiek z %2$d úspešne obnovených.</string>
 	<string name="local_index_no_items_to_do">Žiadne položky pre akciu: %1$s</string>
 	<string name="local_index_action_do">Chcete %1$s %2$s položiek. Ste si istý?</string>
-	<string name="local_index_descr_title">Správca offline údajov:</string>
+	<string name="local_index_descr_title">Správca offline údajov</string>
 	<string name="local_index_mi_restore">Obnoviť</string>
 	<string name="local_index_mi_backup">Zálohovať</string>
 	<string name="local_index_mi_delete">Vymazať</string>

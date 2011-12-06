@@ -109,7 +109,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="local_index_items_restored">%1$d của %2$d đối tượng được khôi phục thành công.</string>
 	<string name="local_index_no_items_to_do">Không có đối tượng cho %1$s</string>
 	<string name="local_index_action_do">Bạn sẽ %1$s %2$s đối tượng. Có tiếp tục?</string>
-	<string name="local_index_descr_title">Quản lý dữ liệu Offline:</string>
+	<string name="local_index_descr_title">Quản lý dữ liệu Offline</string>
 	
 	<string name="local_index_mi_restore">Khôi phục...</string>
 	<string name="local_index_mi_backup">Sao lưu...</string>

@@ -26,7 +26,7 @@
 		<activity android:name=".activities.search.SearchActivity" android:label="@string/search_activity" ></activity>
         <activity android:name=".activities.NavigatePointActivity"></activity>
         <activity android:name=".activities.DownloadIndexActivity" android:configChanges="keyboardHidden|orientation" android:label="@string/local_index_download"></activity>
-        <activity android:name=".activities.ShowRouteInfoActivity"></activity>
+        <activity android:name=".activities.ShowRouteInfoActivity" android:label="@string/route_about"></activity>
         <activity android:name=".activities.FavouritesListActivity"></activity>
         <activity android:name=".activities.FavouritesActivity" android:label="@string/favourites_activity"></activity>
         <activity android:name=".activities.ContributionVersionActivity" android:label="@string/contribution_activity"></activity>

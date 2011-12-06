@@ -123,7 +123,7 @@
 	<string name="local_index_items_restored">%2$d darabból %1$d sikeresen visszaállítva.</string>
 	<string name="local_index_no_items_to_do">Nincs elem a művelethez: %1$s</string>
 	<string name="local_index_action_do">%2$s darab elemen végre lesz hajtva a %1$s. Folytatod?</string>
-	<string name="local_index_descr_title">Offline - kapcsolat nélküli adat kezelés:</string>
+	<string name="local_index_descr_title">Offline - kapcsolat nélküli adat kezelés</string>
 	<string name="local_index_description">Új adat letöltése, biztonsági mentés vagy az adatok törlése.\nJelenlegi offline adatok az eszközön (szabad hely: %1$s):</string>
 	<string name="local_index_mi_restore">Visszaállítás...</string>
 	<string name="local_index_mi_backup">Biztonsági mentés...</string>
