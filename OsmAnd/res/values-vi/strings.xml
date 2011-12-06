@@ -266,8 +266,8 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 \n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or long press on it to hide the box again.)
 \n\tThe map context menu contains all actions referring to a point (location).</string>
 
-	<string name="tip_desctination_point">Điểm đến</string>
-	<string name="tip_desctination_point_t">\tYếu tố chính trong OsmAnd là điểm đến, được hiển thị bằng một cái đĩa màu đỏ trên bản đồ.\n\t OsmAnd hiển thị khoảng cách và hướng đi (mũi tên màu đỏ) đến điểm này trên bản đồ.\n\t Để đánh dấu bất kì điểm nào đó thành điểm đến, chọn \'Dẫn đường tới\'. Tùy chọn này có thể dùng trong tất cả các kiểu tìm kiếm và trong menu ngữ cảnh bản đồ (nhấn vào một đối tượng bất kì trên bản đồ và giữ một lúc)</string>
+	<string name="tip_destination_point">Điểm đến</string>
+	<string name="tip_destination_point_t">\tYếu tố chính trong OsmAnd là điểm đến, được hiển thị bằng một cái đĩa màu đỏ trên bản đồ.\n\t OsmAnd hiển thị khoảng cách và hướng đi (mũi tên màu đỏ) đến điểm này trên bản đồ.\n\t Để đánh dấu bất kì điểm nào đó thành điểm đến, chọn \'Dẫn đường tới\'. Tùy chọn này có thể dùng trong tất cả các kiểu tìm kiếm và trong menu ngữ cảnh bản đồ (nhấn vào một đối tượng bất kì trên bản đồ và giữ một lúc)</string>
 
 	<string name="tip_initial">Thủ thuật</string>
 	<string name="tip_initial_t">\tOsmAnd là ứng dụng định vị trên Android với nhiều tính năng. 

@@ -269,8 +269,8 @@
 	<string name="tip_map_context_menu_t">\tA térképmenü a térképen egy pont hosszú megnyomásával vagy a \'trackball\' gombbal érhető el.
 \n\tA kattintás után megjelenik egy doboz a koordinátákkal, vagy a POI nevével. A térképmenü megnyitásához kattints erre a dobozra (vagy kattints rá hosszan az eltüntetéséhez).
 \n\tA térképmenü tartalmaz minden olyan műveletet, amit azzal a ponttal tenni tudsz.</string>
-	<string name="tip_desctination_point">Cél</string>
-	<string name="tip_desctination_point_t">\tOsmAnd a cél helyét egy piros ponttal jelöli meg a térképen.
+	<string name="tip_destination_point">Cél</string>
+	<string name="tip_destination_point_t">\tOsmAnd a cél helyét egy piros ponttal jelöli meg a térképen.
 \n\tA távolság és az irány (piros háromszög) a céltól mindig látható a térképen. Bármelyik pont kijelölhető célnak a \'Ponthoz vezet\' vagy \'Vezess ide\' kiválasztásával.
 \n\tEz a lehetőség minden keresésnél elérhető vagy a \'Térkép menü\'-ből vagy a térkép objektum hosszú megnyomásával.
 A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanavigáláshoz.</string>

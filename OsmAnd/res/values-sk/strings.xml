@@ -269,8 +269,8 @@
 	<string name="tip_map_context_menu_t">\tKontextové menu mapy je dostupné dlhším držaním na mape alebo stlačením track ball tlačidla.
 \n\tPo kliknutí na zobrazený obdĺžnik so súradnicami sa zobrazí kontextové menu. Pre skrytie obdĺžnika ho dlhšie podržte. Kontextové menu je tiež dostupné pod tlačidlom \'Menu\' na mape.
 \n\tKontextové menu mapy pozostáva z akcií, ktoré používaju umiestnenie ako vstup.</string>
-	<string name="tip_desctination_point">Cieľový bod</string>
-	<string name="tip_desctination_point_t">\tKľúčový koncept OsmAndu je cieľový bod, ktorý je označený ako červený bod na mape.
+	<string name="tip_destination_point">Cieľový bod</string>
+	<string name="tip_destination_point_t">\tKľúčový koncept OsmAndu je cieľový bod, ktorý je označený ako červený bod na mape.
 \n\tMôžete vždy vidieť vzdialenosť k nemu a smer (červený trojuholník) na mape. Na označenie akéhokoľvek bodu ako cieľového, použite \'Navigovať  do\' na bod. 
 \n\tToto tlačidlo je dostupné vo všetkých vyhľadávacích aktivitách, v kontextovom menu mapy a medzi položkami pri dlhom stlačení na mape. 
 Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navigáciu.</string>

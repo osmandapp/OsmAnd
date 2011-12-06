@@ -282,8 +282,8 @@
 \n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or long press on it to hide the box again.)
 \n\tThe map context menu contains all actions referring to a point (location).</string>
 
-	<string name="tip_desctination_point">Destination</string>
-	<string name="tip_desctination_point_t">\tA key element in OsmAnd is the destination, marked as an orange disk on the map.
+	<string name="tip_destination_point">Destination</string>
+	<string name="tip_destination_point_t">\tA key element in OsmAnd is the destination, marked as an orange disk on the map.
 \n\tOsmAnd displays the distance to it and the direction to it (orange triangle) on the map.
 \n\tTo mark any point as destination select \'Set as destination\'. This option is available on all search hits and in the map context menu (long press on any map item).</string>
 

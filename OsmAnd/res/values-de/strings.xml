@@ -280,8 +280,8 @@
 \n\tEs erscheint eine Koordinatenanzeige: Kurzes Drücken darauf öffnet das Kontextmenü (langes Drücken lässt die Punktanzeige wieder verschwinden).
 \n\tDas Karten-Kontextmenü enthält alle Aktionen im Zusammenhang mit einem Kartenpunkt.</string>
 
-	<string name="tip_desctination_point">Zielpunkt</string>
-	<string name="tip_desctination_point_t">\tEin Grundelement von OsmAnd ist der Zielpunkt, markiert als orangefarbener Punkt auf der Karte.
+	<string name="tip_destination_point">Zielpunkt</string>
+	<string name="tip_destination_point_t">\tEin Grundelement von OsmAnd ist der Zielpunkt, markiert als orangefarbener Punkt auf der Karte.
 \n\tZu einem gewählten Ziel zeigt OsmAnd immer die Entfernung und die Richtung (oranges Dreieck) in der Karte. 
 \n\tUm einen Punkt als Ziel zu markieren, verwenden Sie \'Als Ziel wählen\'. Diese Schaltfläche gibt es für alle Such-Treffer und im Karten-Kontextmenü (langes Drücken in der Landkarte).</string>
 

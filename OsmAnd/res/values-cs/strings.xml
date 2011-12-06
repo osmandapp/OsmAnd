@@ -558,8 +558,8 @@
     se otevře kontextové menu, po dlouhém stisknutí obdélník naopak
     zmizí. Kontextové menu je dostupné také tlačítkem \'Menu\'.
   </string>
-  <string name="tip_desctination_point">Cílový bod</string>
-  <string name="tip_desctination_point_t">
+  <string name="tip_destination_point">Cílový bod</string>
+  <string name="tip_destination_point_t">
     \t
 
     Cílový bod je v mapě OsmAndu označen červenou tečkou.

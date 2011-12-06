@@ -251,8 +251,8 @@
 \n\tQuesto visualizza un box con le coordinate del punto. Per aprire il menu, cliccaci su. (O premi a lungo per nascondere il menu.)
 \n\tIl menu contestuale contiene tutte le azioni possibili per quel punto (luogo).</string>
 
-	<string name="tip_desctination_point">Punto di Destinazione</string>
-	<string name="tip_desctination_point_t">\tL\'elemento chiave in OsmAnd è il punto di destinazione, segnato nella mappa con cerchietto rosso.
+	<string name="tip_destination_point">Punto di Destinazione</string>
+	<string name="tip_destination_point_t">\tL\'elemento chiave in OsmAnd è il punto di destinazione, segnato nella mappa con cerchietto rosso.
 \n\tOsmAnd visualizza la distanza e la direzione da esso (freccia rossa) sulla mappa.
 \n\tPer marcare qualsiasi punto come destinazione seleziona \'Naviga verso\'. Questa opzione è disponibile in ogni ricerca e nel menù contestuale (premi a lungo su un oggetto sulla mappa).</string>
 

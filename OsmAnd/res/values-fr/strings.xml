@@ -233,8 +233,8 @@
 <string name="tip_map_context_menu_t">\tLe menu contextuel de la carte est disponible par un tap long sur la carte ou le bouton trackball.
 \n\tAprès avoir touché la carte, une bulle apparaît avec les coordonnées du point, tapez court pour ouvrir le menu contextuel, ou long pour faire disparaître la bulle. Le menu contextuel est également disponible depuis le bouton \'Menu\'.
 \n\tLe menu contextuel de la carte regroupe les actions possible autour de ce point.</string>
-<string name="tip_desctination_point">Point de destination</string>
-<string name="tip_desctination_point_t">\tConcept clé de OsmAnd: le point de destination est marqué d\'un disque rouge sur la carte.
+<string name="tip_destination_point">Point de destination</string>
+<string name="tip_destination_point_t">\tConcept clé de OsmAnd: le point de destination est marqué d\'un disque rouge sur la carte.
 \n\tOsmAnd affiche la distance à ce point et sa direction (flèche rouge) sur la carte.
 \n\Pour marquer un point en tant que destination il faut sélectionner \'Se déplacer vers le point\'. Ce bouton est disponible dans toutes les recherches, en menu contextuel de carte et en appuis long sur la carte.</string>
 <string name="tip_initial">Conseils et astuces</string>

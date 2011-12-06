@@ -181,8 +181,8 @@ OSMコミュニティはこの問題をいち早く修正することができ�
 \n\tマップコンテキストメニューには地点(位置)に関する
 全ての操作があります。</string>
 
-     <string name="tip_desctination_point">目的地点</string>
-     <string name="tip_desctination_point_t">\tOsmAndのキー要素は
+     <string name="tip_destination_point">目的地点</string>
+     <string name="tip_destination_point_t">\tOsmAndのキー要素は
 目的地点であり、マップ上に赤い円盤としてマークされています。
 \n\tOsmAndではマップ上に目的地までの距離及び方向(赤矢印)が表示されます。
 \n\tある地点を目的地としてマークするには\'ナビゲート先\'
