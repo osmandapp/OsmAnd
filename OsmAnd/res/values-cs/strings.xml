@@ -1,20 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
 
-	<string name="tip_select_destination_point">Výběr cílového bodu</string>
+	<string name="tip_select_destination_point">Výbrat cíl</string>
 	<string name="tip_select_destination_point_t">
-\tNEW VERSION, PLEASE ADAPT TRANSLATION: You can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
-\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
-
-	\n\t
-
-	Cílový bod můžete vybrat v kontextovém menu \'Navigovat do\', nebo
-	ve vyhledávání.
-
-	\n\t
-
-	Můžete navigovat i do oblíbených bodů dlouhým stisknutím položky v
-	\'Oblíbené\'.
+\tCílový bod můžete vybrat přímo v mapě (kontextové menu, pak vybrat  \'Ukázat směr\'), v každém módu vyhledávání nebo dlouhým stiskem položky ve vašem \'Seznamu oblíbených míst\'. 
+\n\tCíl je označen oranžovou tečkou na mapě. OsmAnd zobrazuje vzdálenost a směr do cíle (oranžová šipka).
 	</string>
 
 	<string name="tip_recent_changes_0_6_9_t">Změny ve verzi 0.6.9 :
@@ -22,7 +12,7 @@
 \n\t- Zrychlené vykreslování offline map pomocí Android native library - najdete v "experimental features" (na některých zařízeních nemusí fungovat)
 \n\t- Zásadní změny vzhledu zobrazení
 \n\t- Zobrazení nadmořské výšky
-\n\t- Nové překlady (Vienamština, Polština)
+\n\t- Nové překlady (Vietnamština, Polština)
 \n\t- Další drobné změny
 	</string>
 
