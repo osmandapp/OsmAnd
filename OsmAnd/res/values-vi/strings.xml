@@ -2,6 +2,14 @@
 <!-- Language: Vietnamese; Language code: vi
 Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <resources>
+	<string name="tip_select_destination_point">Chọn điểm đến</string>
+	<string name="tip_select_destination_point_t">
+\tNEW VERSION, PLEASE ADAPT TRANSLATION: You can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
+\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
+
+\n\tYou can select a destination point directly in the map (context menu, then \'Navigate to\'), or in all search activities.
+\n\tYou can also navigate to any favorite point via long pressing it in \'Favorites\'.</string>
+
 	<string name="choose_auto_follow_route">Auto follow return time</string>
 	<string name="choose_auto_follow_route_descr">Chọn thời gian chờ hiển thị bản đồ để quay lại vị trí vừa xong</string>
 	<string name="auto_follow_route_never">Không bao giờ</string>
@@ -253,10 +261,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="tip_navigation">Dẫn đường</string>
 	<string name="tip_navigation_t">\tĐể tìm đường đi, trước hết bạn phải chọn một điểm đến. Sau đó vào \'Menu\'->\'Hướng đi\' trên bản đồ để chọn kiểu dẫn đường.</string> 
 
-	<string name="tip_select_destination_point">Chọn điểm đến</string>
-	<string name="tip_select_destination_point_t">\tYou can select a destination point directly in the map (context menu, then \'Navigate to\'), or in all search activities.
-\n\tYou can also navigate to any favorite point via long pressing it in \'Favorites\'.</string>
-
 	<string name="tip_search">Tìm kiếm</string>
 	<string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite.
 \n\tPressing \'Search\' in the main menu opens the search activities. For all hits a context menu offers 2 options: \'Navigate to\' or \'Show on map\'.</string>
@@ -265,9 +269,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="tip_map_context_menu_t">\tThe map context menu is available by long pressing on the map or by pressing the trackball button.
 \n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or long press on it to hide the box again.)
 \n\tThe map context menu contains all actions referring to a point (location).</string>
-
-	<string name="tip_destination_point">Điểm đến</string>
-	<string name="tip_destination_point_t">\tYếu tố chính trong OsmAnd là điểm đến, được hiển thị bằng một cái đĩa màu đỏ trên bản đồ.\n\t OsmAnd hiển thị khoảng cách và hướng đi (mũi tên màu đỏ) đến điểm này trên bản đồ.\n\t Để đánh dấu bất kì điểm nào đó thành điểm đến, chọn \'Dẫn đường tới\'. Tùy chọn này có thể dùng trong tất cả các kiểu tìm kiếm và trong menu ngữ cảnh bản đồ (nhấn vào một đối tượng bất kì trên bản đồ và giữ một lúc)</string>
 
 	<string name="tip_initial">Thủ thuật</string>
 	<string name="tip_initial_t">\tOsmAnd là ứng dụng định vị trên Android với nhiều tính năng. 

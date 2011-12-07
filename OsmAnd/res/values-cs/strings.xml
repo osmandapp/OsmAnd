@@ -1,6 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
 
+	<string name="tip_select_destination_point">Výběr cílového bodu</string>
+	<string name="tip_select_destination_point_t">
+\tNEW VERSION, PLEASE ADAPT TRANSLATION: You can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
+\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
+
+	n\t
+
+	Cílový bod můžete vybrat v kontextovém menu \'Navigovat do\', nebo
+	ve vyhledávání.
+
+	\n\t
+
+	Můžete navigovat i do oblíbených bodů dlouhým stisknutím položky v
+	\'Oblíbené\'.
+	</string>
+
 	<string name="tip_recent_changes_0_6_9_t">Změny ve verzi 0.6.9 :
 \n\t- Vylepšené vykreslování offline map
 \n\t- Zrychlené vykreslování offline map pomocí Android native library - najdete v "experimental features" (na některých zařízeních nemusí fungovat)
@@ -520,18 +536,6 @@
     Pro zapnutí navigace musíte nejprve vybrat cílový bod. Poté
     vyberte \'Menu\'->\'Navigace\' na mapě a vyberte typ navigování.
   </string>
-  <string name="tip_select_destination_point">Výběr cílového bodu</string>
-  <string name="tip_select_destination_point_t">
-    \t
-
-    Cílový bod můžete vybrat v kontextovém menu \'Navigovat do\', nebo
-    ve vyhledávání.
-
-    \n\t
-
-    Můžete navigovat i do oblíbených bodů dlouhým stisknutím položky v
-    \'Oblíbené\'.
-  </string>
   <string name="tip_search">Vyhledávání</string>
   <string name="tip_search_t">
     \t
@@ -557,28 +561,6 @@
     Po stisknutí se objeví obdélník se souřadnicemi. Klepnutím na něj
     se otevře kontextové menu, po dlouhém stisknutí obdélník naopak
     zmizí. Kontextové menu je dostupné také tlačítkem \'Menu\'.
-  </string>
-  <string name="tip_destination_point">Cílový bod</string>
-  <string name="tip_destination_point_t">
-    \t
-
-    Cílový bod je v mapě OsmAndu označen červenou tečkou.
-
-    \n\t
-
-    Na mapě je vždy zobrazen směr k němu (červený trojúhelník) a jeho
-    vzdálenost. Pro označení libovolného bodu vyberte v menu položku
-    \'Navigovat do bodu\'.
-
-    \n\t
-
-    Toto tlačítko je dostupné u každého vyhledávání, v kontextovém
-    menu mapy a při dlouhém stisknutí kdekoli na mapě.
-
-    \n\t
-
-    Cílový bod se často využívá pro měření vzdáleností a hrubou
-    navigaci vzdušnou čarou.
   </string>
   <string name="tip_initial">Tipy a triky</string>
   <string name="tip_initial_t">

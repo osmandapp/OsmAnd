@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+<string name="tip_select_destination_point">Wybierz punkt docelowy</string>
+<string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
+\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).</string>
+
 <string name="tip_recent_changes_0_6_9_t">Zmiany w 0.6.9:
 \n\t- poprawiono renderowanie map offline
 \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach)
@@ -258,10 +262,6 @@
 <string name="tip_navigation">Nawigacja</string>
 <string name="tip_navigation_t">\tPrzed rozpoczęciem nawigacji musisz wybrać punkt docelowy. Potem naciśnij\'Menu\' -&gt; \'Nawigacja\' i wybierz rodzaj nawigacji.</string>
 
-<string name="tip_select_destination_point">Wybierz punkt docelowy</string>
-<string name="tip_select_destination_point_t">\tYou can select a destination point directly in the map (context menu, then \'Navigate to\'), or in all search activities.
-\n\tYou can also navigate to any favorite point via long pressing it in \'Favorites\'.</string>
-
 <string name="tip_search">Wyszukiwanie</string>
 <string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite.
 \n\tPressing \'Search\' in the main menu opens the search activities. For all hits a context menu offers 2 options: \'Navigate to\' or \'Show on map\'.</string>
@@ -270,11 +270,6 @@
 <string name="tip_map_context_menu_t">\tThe map context menu is available by long pressing on the map or by pressing the trackball button.
 \n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or long press on it to hide the box again.)
 \n\tThe map context menu contains all actions referring to a point (location).</string>
-
-<string name="tip_destination_point">Punkt docelowy</string>
-<string name="tip_destination_point_t">\tA key element in OsmAnd is the destination point, marked as a red disk on the map.
-\n\tOsmAnd displays the distance to it and the direction to it (red arrow) on the map.
-\n\tTo mark any point as destination select \'Navigate to\'. This option is available on all search hits and in the map context menu (long press on any map item).</string>
 
 <string name="tip_initial">Porady i sztuczki</string>
 <string name="tip_initial_t">\tOsmAnd Jest rozbudowanym programem do nawigacji satelitarnej. 

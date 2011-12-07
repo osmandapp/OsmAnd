@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+	<string name="tip_select_destination_point">Seleziona Punto Destinazione</string>
+	<string name="tip_select_destination_point_t">
+\tNEW VERSION, PLEASE ADAPT TRANSLATION: You can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
+\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
+
+\n\tPuoi selezionare un punto di destinazione direttamente sulla mappa (menu contestuale, poi \'Naviga verso\'), o in qualsiasi ricerca.
+\n\tPuoi anche navigare verso qualsiasi favorito premendolo a lungo sui \'Favoriti\'.</string>
+
 	<string name="choose_auto_follow_route">Impostazioni auto-follow</string>
 	<string name="choose_auto_follow_route_descr">Scegli intervallo di tempo per seguire automaticamente la posizione attuale</string>
 	<string name="auto_follow_route_never">Mai</string>
@@ -238,10 +247,6 @@
 	<string name="tip_navigation">Navigazione</string>
 	<string name="tip_navigation_t">\tPrima di iniziare la navigazione (routing) devi selezionare un punto di destinazione. Dopo averlo selezionato premi \'Menu\' -> \'Percorsi\' sulla mappa e seleziona il tipo di navigazione.</string>
 
-	<string name="tip_select_destination_point">Seleziona Punto Destinazione</string>
-	<string name="tip_select_destination_point_t">\tPuoi selezionare un punto di destinazione direttamente sulla mappa (menu contestuale, poi \'Naviga verso\'), o in qualsiasi ricerca.
-\n\tPuoi anche navigare verso qualsiasi favorito premendolo a lungo sui \'Favoriti\'.</string>
-
 	<string name="tip_search">Ricerca</string>
 	<string name="tip_search_t">\tPuoi cercare i posti direttamente sulla mappa, per indirizzo, luogo, PDI, o favorito predefinito.
 \n\tPRemendo \'Cerca\' nel menu principale aprirai la ricerca. Ogni elemento ha un menu contestuale con 2 opzioni: \'Naviga verso\' o \'Visualizza sulla mappa\'.</string>
@@ -250,11 +255,6 @@
 	<string name="tip_map_context_menu_t">\tIl menu contestuale viene visualizzato premendo a lungo sulla mappa o premendo il pulsante trackball.
 \n\tQuesto visualizza un box con le coordinate del punto. Per aprire il menu, cliccaci su. (O premi a lungo per nascondere il menu.)
 \n\tIl menu contestuale contiene tutte le azioni possibili per quel punto (luogo).</string>
-
-	<string name="tip_destination_point">Punto di Destinazione</string>
-	<string name="tip_destination_point_t">\tL\'elemento chiave in OsmAnd è il punto di destinazione, segnato nella mappa con cerchietto rosso.
-\n\tOsmAnd visualizza la distanza e la direzione da esso (freccia rossa) sulla mappa.
-\n\tPer marcare qualsiasi punto come destinazione seleziona \'Naviga verso\'. Questa opzione è disponibile in ogni ricerca e nel menù contestuale (premi a lungo su un oggetto sulla mappa).</string>
 
 	<string name="tip_initial">Consigli</string>
 	<string name="tip_initial_t">\tOsmAnd è una applicazione di navigazione con molte funzioni. 

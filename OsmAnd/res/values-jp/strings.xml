@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+     <string name="tip_select_destination_point">目的地点を選択</string>
+     <string name="tip_select_destination_point_t">
+\tNEW VERSION, PLEASE ADAPT TRANSLATION: You can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
+\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
+
+\n\t目的地点をマップ
+(コンテキストメニューから \'ナビゲート先\')で直接、あるいは全ての検索画面で
+選択することができます。
+\n\t\'お気に入り\'内で長押しすることで任意のお気に入り地点へナビゲート
+することができます</string>
+
      <string name="installing_new_resources">新しいデータを解凍中...</string>
      <string
 name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
@@ -158,13 +169,6 @@ OSMコミュニティはこの問題をいち早く修正することができ�
 目的地点をまず選ぶ必要があります。その後でマップ上の
 \'メニュー\' -> \'方向\' を押してナビゲーションタイプを選んでください。</string>
 
-     <string name="tip_select_destination_point">目的地点を選択</string>
-     <string name="tip_select_destination_point_t">\t目的地点をマップ
-(コンテキストメニューから \'ナビゲート先\')で直接、あるいは全ての検索画面で
-選択することができます。
-\n\t\'お気に入り\'内で長押しすることで任意のお気に入り地点へナビゲート
-することができます</string>
-
      <string name="tip_search">検索</string>
      <string name="tip_search_t">\t場所をマップ上で直接、住所で、位置で、POIとして、
 定義済のお気に入りとして検索することができます。
@@ -180,14 +184,6 @@ OSMコミュニティはこの問題をいち早く修正することができ�
 ダイアログを開いてください。
 \n\tマップコンテキストメニューには地点(位置)に関する
 全ての操作があります。</string>
-
-     <string name="tip_destination_point">目的地点</string>
-     <string name="tip_destination_point_t">\tOsmAndのキー要素は
-目的地点であり、マップ上に赤い円盤としてマークされています。
-\n\tOsmAndではマップ上に目的地までの距離及び方向(赤矢印)が表示されます。
-\n\tある地点を目的地としてマークするには\'ナビゲート先\'
-を選んでください。このオプションは全ての検索結果及びマップコンテキストメニュー
-(任意のマップアイテム上で長押し)上で利用できます。</string>
 
      <string name="tip_initial">ヒントとテクニック</string>
      <string name="tip_initial_t">\tOsmAndは多くの機能を持つナビゲーションアプリケーションです。

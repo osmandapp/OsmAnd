@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="tip_select_destination_point">Selectionner le  point de destination</string>
+	<string name="tip_select_destination_point_t">
+\tNEW VERSION, PLEASE ADAPT TRANSLATION: You can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
+\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
+
+\n\tVous pouvez sélectionner un point de destination dans le menu contextuel de la carte \'Se déplacer vers le point\' ou dans l\'écran de recherche.
+\n\tVous pouvez aussi naviguer vers un favoris avec un appui long sur celui-ci dans \'Favoris\'.</string>
+
 	<string name="tip_recent_changes_0_6_9_t">Changements en 0.6.9 :
 \n\t- Amelioration du rendu des cartes hors ligne
 \n\t- Rendu hors ligne acceléré - voir dans les options experimentales (ne marche pas sur tous les appareils)
@@ -255,9 +263,6 @@
 \n\tChangez de mode dans \'Menu\'->\'Paramètres\'->\'Mode d\'application\'.</string>
 <string name="tip_navigation">Navigation</string>
 <string name="tip_navigation_t">Pour activer la navigation il faut d\'abord sélectionner une destination. Puis aller dans \'Menu\'->\'Directions\' et sélectionner le mode de déplacement.</string>
-<string name="tip_select_destination_point">Selectionner le  point de destination</string>
-<string name="tip_select_destination_point_t">Vous pouvez sélectionner un point de destination dans le menu contextuel de la carte \'Se déplacer vers le point\' ou dans l\'écran de recherche.
-\n\tVous pouvez aussi naviguer vers un favoris avec un appui long sur celui-ci dans \'Favoris\'.</string>
 <string name="tip_search">Actions de recherche</string>
 <string name="tip_search_t">Vous pouvez rechercher un lieu directement depuis la carte ou par l\'adresse, l\'emplacement, le point d\'interêt ou un favori predefini.
 \n\tAppuyer sur \'Rechercher\' sur la carte ouvre le dialogue de recherche. Il y a 2 options : \'Naviger vers\' ou \'Afficher sur la carte\'.</string>
@@ -265,10 +270,6 @@
 <string name="tip_map_context_menu_t">\tLe menu contextuel de la carte est disponible par un tap long sur la carte ou le bouton trackball.
 \n\tAprès avoir touché la carte, une bulle apparaît avec les coordonnées du point, tapez court pour ouvrir le menu contextuel, ou long pour faire disparaître la bulle. Le menu contextuel est également disponible depuis le bouton \'Menu\'.
 \n\tLe menu contextuel de la carte regroupe les actions possible autour de ce point.</string>
-<string name="tip_destination_point">Point de destination</string>
-<string name="tip_destination_point_t">\tConcept clé de OsmAnd: le point de destination est marqué d\'un disque orange sur la carte.
-\n\tOsmAnd affiche la distance à ce point et sa direction (flèche orange) sur la carte.
-\n\Pour marquer un point en tant que destination il faut sélectionner \'Se déplacer vers le point\'. Ce bouton est disponible dans toutes les recherches, en menu contextuel de carte et en appuis long sur la carte.</string>
 <string name="tip_initial">Conseils et astuces</string>
 <string name="tip_initial_t">\tOsmAnd est une application de navigation avec beaucoup de fonctionnalités.
 \n\tPour mieux les utiliser, consultez les conseils et astuces disponibles en lien en haut du menu principal.</string>
