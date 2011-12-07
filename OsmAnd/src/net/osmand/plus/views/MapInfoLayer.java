@@ -441,10 +441,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 								invalidate();
 							}
 						} else if (!Algoritms.objectEquals(turnType, next.turnType)) {
-							// TODO
-//							if(turnType == null) {
-								turnType = next.turnType;
-//							}
+							turnType = next.turnType;
 							TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
 							if (turnType.getExitOut() > 0) {
 								exitOut = turnType.getExitOut() + ""; //$NON-NLS-1$
@@ -464,17 +461,21 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		};
 		nextTurnInfo.setOnClickListener(new View.OnClickListener() {
-			int i = 0;
+//			int i = 0;
 			@Override
 			public void onClick(View v) {
+				// for test rendering purposes
+//				final int l = TurnType.predefinedTypes.length;
+//				final int exits = 5;
 //				i++;
-//				if (i % (TurnType.predefinedTypes.length + 1) == TurnType.predefinedTypes.length ) {
-//					nextTurnInfo.turnType = TurnType.valueOf("EXIT4");
+//				if (i % (l + exits) >= l ) {
+//					nextTurnInfo.turnType = TurnType.valueOf("EXIT" + (i % (l + exits) - l + 1));
+//					float a = 180 - (i % (l + exits) - l + 1) * 50;
+//					nextTurnInfo.turnType.setTurnAngle(a < 0 ? a + 360 : a);
 //				} else {
-//					nextTurnInfo.turnType = TurnType.valueOf(TurnType.predefinedTypes[i % (TurnType.predefinedTypes.length + 1)]);
+//					nextTurnInfo.turnType = TurnType.valueOf(TurnType.predefinedTypes[i % (TurnType.predefinedTypes.length + exits)]);
 //				}
-//				nextTurnInfo.invalidate();
-				// TODO
+				nextTurnInfo.invalidate();
 				showMiniMap = true;
 				view.refreshMap();
 			}

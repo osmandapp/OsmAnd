@@ -15,8 +15,7 @@ import android.util.FloatMath;
 
 public class TurnPathHelper {
 
-	// draw path 96x96
-	// 64x64
+	// 72x72
 	public static void calcTurnPath(Path pathForTurn, TurnType turnType, Matrix transform) {
 		if(turnType == null){
 			return;
@@ -33,7 +32,7 @@ public class TurnPathHelper {
 		float hpartArrowL = (float) (harrowL - th) / 2;
 
 		if (TurnType.C.equals(turnType.getValue())) {
-			int h = (int) (ha - hpartArrowL - 18);
+			int h = (int) (ha - hpartArrowL - 16);
 			pathForTurn.rMoveTo(th / 2, 0);
 			pathForTurn.rLineTo(0, -h);
 			pathForTurn.rLineTo(hpartArrowL, 0);
@@ -131,27 +130,52 @@ public class TurnPathHelper {
 			if (sweepAngle < -360) {
 				sweepAngle += 360;
 			}
-			float r1 = ha / 3f;
-			float r2 = 18f;
+			
+			float r1 = ha / 3f - 1;
+			float r2 = r1 - 9;
 			float angleToRot = 0.3f;
+			int cx = wa / 2 ;
+			int cy = ha / 2 - 2;
+			pathForTurn.moveTo(cx, ha - 1);
+			pathForTurn.lineTo(cx, cy + r1);
+			RectF r = new RectF(cx - r1, cy - r1, cx + r1, cy + r1);
 			
-			pathForTurn.moveTo(48, 48 + r1 + 8);
-			pathForTurn.lineTo(48, 48 + r1);
-			RectF r = new RectF(48 - r1, 48 - r1, 48 + r1, 48 + r1);
-			pathForTurn.arcTo(r, 90, sweepAngle);
-			float angleRad = (float) ((180 + sweepAngle)*Math.PI/180f);
+			int out = turnType.getExitOut();
+			if (out < 1) {
+				out = 1;
+			}
+			float prev = 90;
+			float init = 90;
+			float step = sweepAngle / out;
+			for (int i = 1; i <= out; i++) {
+				float to = step * i;
+				if (i == out) {
+					pathForTurn.arcTo(r, prev, to - prev + init);
+				} else {
+					float tsRad = (float) ((to - step / 8 + 180) * Math.PI / 180f);
+					float tsRad2 = (float) ((to + step / 8 + 180) * Math.PI / 180f);
+					pathForTurn.arcTo(r, prev, to - step / 6 - prev + init );
+					pathForTurn.lineTo(cx + (r1 + 10) * FloatMath.sin(tsRad), cy - (r1 + 10) * FloatMath.cos(tsRad));
+					pathForTurn.lineTo(cx + (r1 + 10) * FloatMath.sin(tsRad2), cy - (r1 + 10) * FloatMath.cos(tsRad2));
+					// not necessary for next arcTo
+					//pathForTurn.lineTo(cx + (r1 + 0) * FloatMath.sin(tsRad2), cy - (r1 + 0) * FloatMath.cos(tsRad2));
+					prev = to + step / 6 + init;
+				}
+			}
+		
+			float angleRad = (float) ((180 + sweepAngle) * Math.PI / 180f);
 			
-			pathForTurn.lineTo(48 + (r1 + 4) * FloatMath.sin(angleRad), 48 - (r1 + 4) * FloatMath.cos(angleRad));
-			pathForTurn.lineTo(48 + (r1 + 6) * FloatMath.sin(angleRad + angleToRot/2), 48 - (r1 + 6) * FloatMath.cos(angleRad + angleToRot/2));
-			pathForTurn.lineTo(48 + (r1 + 12) * FloatMath.sin(angleRad - angleToRot/2), 48 - (r1 + 12) * FloatMath.cos(angleRad - angleToRot/2));
-			pathForTurn.lineTo(48 + (r1 + 6) * FloatMath.sin(angleRad - 3*angleToRot/2), 48 - (r1 + 6) * FloatMath.cos(angleRad - 3*angleToRot/2));
-			pathForTurn.lineTo(48 + (r1 + 4) * FloatMath.sin(angleRad - angleToRot), 48 - (r1 + 4) * FloatMath.cos(angleRad - angleToRot));
-			pathForTurn.lineTo(48 + r2 * FloatMath.sin(angleRad - angleToRot), 48 - r2 * FloatMath.cos(angleRad - angleToRot));
+			pathForTurn.lineTo(cx + (r1 + 4) * FloatMath.sin(angleRad), cy - (r1 + 4) * FloatMath.cos(angleRad));
+			pathForTurn.lineTo(cx + (r1 + 6) * FloatMath.sin(angleRad + angleToRot/2), cy - (r1 + 6) * FloatMath.cos(angleRad + angleToRot/2));
+			pathForTurn.lineTo(cx + (r1 + 14) * FloatMath.sin(angleRad - angleToRot/2), cy - (r1 + 12) * FloatMath.cos(angleRad - angleToRot/2));
+			pathForTurn.lineTo(cx + (r1 + 6) * FloatMath.sin(angleRad - 3*angleToRot/2), cy - (r1 + 6) * FloatMath.cos(angleRad - 3*angleToRot/2));
+			pathForTurn.lineTo(cx + (r1 + 4) * FloatMath.sin(angleRad - angleToRot), cy - (r1 + 4) * FloatMath.cos(angleRad - angleToRot));
+			pathForTurn.lineTo(cx + r2 * FloatMath.sin(angleRad - angleToRot), cy - r2 * FloatMath.cos(angleRad - angleToRot));
 			
-			r.set(48 - r2, 48 - r2, 48 + r2, 48 + r2);
+			r.set(cx - r2, cy - r2, cx + r2, cy + r2);
 			pathForTurn.arcTo(r, 360 + sweepAngle + 90, -sweepAngle);
-			pathForTurn.lineTo(40, 48 + r2);
-			pathForTurn.lineTo(40, 48 + r1 + 8);
+			pathForTurn.lineTo(cx - 8, cy + r2);
+			pathForTurn.lineTo(cx - 8, ha - 1);
 			pathForTurn.close();
 		}
 		pathForTurn.close();
@@ -176,7 +200,7 @@ public class TurnPathHelper {
 		@Override
 		protected void onBoundsChange(Rect bounds) {
 			Matrix m = new Matrix();
-			m.setScale(bounds.width()/96f, bounds.height()/96f);
+			m.setScale(bounds.width()/72f, bounds.height()/72f);
 			p.transform(m, dp);
 		}
 		

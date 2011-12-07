@@ -64,8 +64,8 @@ public class NextTurnInfoControl extends MapInfoControl {
 			canvas.drawPath(pathForTurn, paintRouteDirection);
 			canvas.drawPath(pathForTurn, paintBlack);
 			if (exitOut != null) {
-				drawShadowText(canvas, exitOut, (getWWidth()) / 2 - 6 * scaleCoefficient, 
-						getWHeight() / 2 - textPaint.getTextSize() / 2, textPaint);
+				drawShadowText(canvas, exitOut, (getWWidth()) / 2 - 7 * scaleCoefficient, 
+						getWHeight() / 2 - textPaint.getTextSize() / 2 + 3 * scaleCoefficient, textPaint);
 			}
 			String text = OsmAndFormatter.getFormattedDistance(nextTurnDirection, getContext());
 			String subtext = null;
