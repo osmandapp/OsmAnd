@@ -590,7 +590,8 @@ public class RoutingHelper {
 		public static final String TSLR = "TSLR"; // turn slight right //$NON-NLS-1$
 		public static final String TSHR = "TSHR"; // turn sharp right //$NON-NLS-1$
 		public static final String TU = "TU"; // U-turn //$NON-NLS-1$
-		public static String[] predefinedTypes = new String[] {C, TL, TSLL, TSHL, TR, TSLR, TSHR, TU}; 
+		public static final String TRU = "TRU"; // Right U-turn //$NON-NLS-1$
+		public static String[] predefinedTypes = new String[] {C, TL, TSLL, TSHL, TR, TSLR, TSHR, TU, TRU}; 
 		
 		
 		public static TurnType valueOf(String s){

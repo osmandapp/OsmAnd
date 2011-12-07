@@ -13,8 +13,8 @@ import android.graphics.Path;
 public class NextTurnInfoControl extends MapInfoControl {
 
 	private float scaleCoefficient = MapInfoLayer.scaleCoefficient;
-	private final float width = 96 * scaleCoefficient;
-	private final float height = 96 * scaleCoefficient;
+	private final float width = 72 * scaleCoefficient;
+	private final float height = 75 * scaleCoefficient;
 
 	protected Path pathForTurn = new Path();
 
@@ -36,10 +36,11 @@ public class NextTurnInfoControl extends MapInfoControl {
 		paintBlack.setStyle(Style.STROKE);
 		paintBlack.setColor(Color.BLACK);
 		paintBlack.setAntiAlias(true);
+		paintBlack.setStrokeWidth(2.5f);
 
 		paintRouteDirection = new Paint();
-		paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
-		paintRouteDirection.setColor(Color.rgb(100, 0, 255));
+		paintRouteDirection.setStyle(Style.FILL);
+		paintRouteDirection.setColor(Color.rgb(250, 222, 35));
 		paintRouteDirection.setAntiAlias(true);
 		
 		pathTransform = new Matrix();
@@ -58,12 +59,13 @@ public class NextTurnInfoControl extends MapInfoControl {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		if (pathForTurn != null) {
+			// small indent
+			canvas.translate(0, 3 * scaleCoefficient);
 			canvas.drawPath(pathForTurn, paintRouteDirection);
 			canvas.drawPath(pathForTurn, paintBlack);
-			// TODO test
 			if (exitOut != null) {
-				canvas.drawText(exitOut, (getWWidth()) / 2 - 6 * scaleCoefficient, getWHeight() / 2 - 9
-						* scaleCoefficient, paintBlack);
+				drawShadowText(canvas, exitOut, (getWWidth()) / 2 - 6 * scaleCoefficient, 
+						getWHeight() / 2 - textPaint.getTextSize() / 2, textPaint);
 			}
 			String text = OsmAndFormatter.getFormattedDistance(nextTurnDirection, getContext());
 			String subtext = null;
@@ -76,9 +78,9 @@ public class NextTurnInfoControl extends MapInfoControl {
 			}
 			float mt = textPaint.measureText(text);
 			drawShadowText(canvas, text, 
-					(getWWidth() - st - mt) / 2 - scaleCoefficient, getWHeight() - 3 * scaleCoefficient, textPaint);
+					(getWWidth() - st - mt) / 2 - scaleCoefficient, getWHeight() - 5 * scaleCoefficient, textPaint);
 			if (subtext != null) {
-				drawShadowText(canvas, subtext, (getWWidth() - st - mt) / 2 + 2 * scaleCoefficient + mt, getWHeight() - 3
+				drawShadowText(canvas, subtext, (getWWidth() - st - mt) / 2 + 2 * scaleCoefficient + mt, getWHeight() - 5
 						* scaleCoefficient, subtextPaint);
 			}
 		}

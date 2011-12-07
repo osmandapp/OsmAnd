@@ -7,6 +7,7 @@ import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
+import net.osmand.plus.routing.RoutingHelper.TurnType;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -80,6 +81,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		paintText.setColor(Color.BLACK);
 		paintText.setTextSize(23 * scaleCoefficient);
 		paintText.setAntiAlias(true);
+		paintText.setStrokeWidth(4);
 
 		paintSubText = new Paint();
 		paintSubText.setStyle(Style.FILL_AND_STROKE);
@@ -423,7 +425,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 	
 	private NextTurnInfoControl createNextInfoControl() {
-		NextTurnInfoControl nextTurnInfo = new NextTurnInfoControl(map, paintText, paintSubText) {
+		final NextTurnInfoControl nextTurnInfo = new NextTurnInfoControl(map, paintText, paintSubText) {
 			
 			@Override
 			public boolean updateInfo() {
@@ -439,7 +441,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 								invalidate();
 							}
 						} else if (!Algoritms.objectEquals(turnType, next.turnType)) {
-							turnType = next.turnType;
+							// TODO
+//							if(turnType == null) {
+								turnType = next.turnType;
+//							}
 							TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
 							if (turnType.getExitOut() > 0) {
 								exitOut = turnType.getExitOut() + ""; //$NON-NLS-1$
@@ -459,8 +464,17 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		};
 		nextTurnInfo.setOnClickListener(new View.OnClickListener() {
+			int i = 0;
 			@Override
 			public void onClick(View v) {
+//				i++;
+//				if (i % (TurnType.predefinedTypes.length + 1) == TurnType.predefinedTypes.length ) {
+//					nextTurnInfo.turnType = TurnType.valueOf("EXIT4");
+//				} else {
+//					nextTurnInfo.turnType = TurnType.valueOf(TurnType.predefinedTypes[i % (TurnType.predefinedTypes.length + 1)]);
+//				}
+//				nextTurnInfo.invalidate();
+				// TODO
 				showMiniMap = true;
 				view.refreshMap();
 			}

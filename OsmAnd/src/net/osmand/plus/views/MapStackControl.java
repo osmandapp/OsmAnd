@@ -18,7 +18,8 @@ public class MapStackControl extends ViewGroup {
 	List<MapInfoControl> stackViews = new ArrayList<MapInfoControl>();
 	List<MapInfoControl> collapsedViews = new ArrayList<MapInfoControl>();
 	ImageView expandView;
-	private boolean isCollapsed = true;
+	// by default opened
+	private boolean isCollapsed = false;
 	private boolean isCollapsible = true;
 
 	public MapStackControl(Context context) {
@@ -143,6 +144,12 @@ public class MapStackControl extends ViewGroup {
 						}
 						h += c.getMeasuredHeight();
 						prevBot = c.getPaddingBottom();
+					} else {
+						if (h == 0) {
+							// measure one of the figure if it is collapsed and no top elements
+							c.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
+							h += c.getPaddingTop();
+						}
 					}
 					
 				}
@@ -150,6 +157,7 @@ public class MapStackControl extends ViewGroup {
 			if (isCollapsible) {
 				h -= prevBot;
 				h += expandView.getDrawable().getMinimumHeight();
+				w = Math.max(w, expandView.getDrawable().getMinimumWidth());
 			}
 		}
 		setMeasuredDimension(w, h);
@@ -182,6 +190,9 @@ public class MapStackControl extends ViewGroup {
 				}
 			} else {
 				c.layout(0, 0, 0, 0);
+				if(y == 0){
+					y += c.getPaddingTop();
+				}
 			}
 		}
 
