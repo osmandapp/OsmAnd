@@ -3,12 +3,8 @@
 Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <resources>
 	<string name="tip_select_destination_point">Chọn điểm đến</string>
-	<string name="tip_select_destination_point_t">
-\tNEW VERSION, PLEASE ADAPT TRANSLATION: You can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
-\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
-
-\n\tYou can select a destination point directly in the map (context menu, then \'Navigate to\'), or in all search activities.
-\n\tYou can also navigate to any favorite point via long pressing it in \'Favorites\'.</string>
+	<string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
+\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).</string>
 
 	<string name="choose_auto_follow_route">Auto follow return time</string>
 	<string name="choose_auto_follow_route_descr">Chọn thời gian chờ hiển thị bản đồ để quay lại vị trí vừa xong</string>
