@@ -21,7 +21,6 @@ public class TipsAndTricksActivity {
 			{R.string.tip_location_sharing,R.string.tip_location_sharing_t},
 			{R.string.tip_favorites,R.string.tip_favorites_t},
 			{R.string.tip_osm_improve,R.string.tip_osm_improve_t},
-			{R.string.tip_destination_point,R.string.tip_destination_point_t},
 			{R.string.tip_map_context_menu,R.string.tip_map_context_menu_t},
 			{R.string.tip_search,R.string.tip_search_t},
 			{R.string.tip_select_destination_point,R.string.tip_select_destination_point_t},

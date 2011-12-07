@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="tip_select_destination_point">Ziel wählen</string>
+	<string name="tip_select_destination_point_t">\tEin Ziel kann direkt in der Karte gewählt werden (via Kontextmenü, \'Als Ziel wählen\'), in allen Such-Funktionen, oder in der Favoritenliste via langes Drücken. 
+\n\tDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd in der Karte die Entfernung und die Richtung (oranges Dreieck).</string>
+
 	<string name="tip_recent_changes_0_6_9_t">Änderungen in 0.6.9 :
 \n\t- Verbesserte Offline-Kartenanzeige
 \n\t- Schnelles "Native Rendering" - siehe Development-Einstellungen (funktioniert evtl. nicht auf jedem Gerät)
@@ -267,10 +271,6 @@
 	<string name="tip_navigation">Navigation</string>
 	<string name="tip_navigation_t">\tVor dem Starten der Navigationsfunktion (Routen) ist ein Ziel zu wählen. Danach wählt man \'Menu\' -> \'Route\' in der Karte, und wählt den Navigationstyp.</string>
 
-	<string name="tip_select_destination_point">Ziel wählen</string>
-	<string name="tip_select_destination_point_t">\tEin Ziel kann direkt in der Karte (via Kontextmenü) gewählt werden (\'Als Ziel wählen\') oder in allen Such-Funktionen.
-\n\tEbenso kann man einen Favoriten mittels langem Drücken \'Als Ziel wählen\'.</string>
-
 	<string name="tip_search">Suchen</string>
 	<string name="tip_search_t">\tMan kann Orte direkt in der Karte suchen, oder über Adresse, Koordinaten, als POI, oder als abgespeicherter Favorit.
 \n\t\'Suche\' im Hauptmenü öffnet die Suchaktivitäten. Ein Kontextmenü für einen Treffer bietet 2 Optionen: \'Als Ziel wählen\' oder \'Zeige auf der Karte\'.</string>
@@ -279,11 +279,6 @@
 	<string name="tip_map_context_menu_t">\tDas Karten-Kontextmenü wird aufgerufen über ein langes Drücken auf einen Punkt in der Karte oder das Drücken des Trackball-Knopfes in der Kartenansicht.
 \n\tEs erscheint eine Koordinatenanzeige: Kurzes Drücken darauf öffnet das Kontextmenü (langes Drücken lässt die Punktanzeige wieder verschwinden).
 \n\tDas Karten-Kontextmenü enthält alle Aktionen im Zusammenhang mit einem Kartenpunkt.</string>
-
-	<string name="tip_destination_point">Zielpunkt</string>
-	<string name="tip_destination_point_t">\tEin Grundelement von OsmAnd ist der Zielpunkt, markiert als orangefarbener Punkt auf der Karte.
-\n\tZu einem gewählten Ziel zeigt OsmAnd immer die Entfernung und die Richtung (oranges Dreieck) in der Karte. 
-\n\tUm einen Punkt als Ziel zu markieren, verwenden Sie \'Als Ziel wählen\'. Diese Schaltfläche gibt es für alle Such-Treffer und im Karten-Kontextmenü (langes Drücken in der Landkarte).</string>
 
 	<string name="tip_initial">Tipps und Tricks</string>
 	<string name="tip_initial_t">\tOsmAnd ist eine Navigationsanwendung mit vielen Fähigkeiten. 

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="tip_select_destination_point">Select Destination</string>
+	<string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
+\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).</string> 
+
 	<string name="tip_recent_changes_0_6_9_t">Changes in 0.6.9 :
 \n\t- Improved offline map rendering
 \n\t- Fast Native offline rendering - look in experimental features (may not work on some devices)
@@ -269,10 +273,6 @@
 	<string name="tip_navigation">Navigation</string>
 	<string name="tip_navigation_t">\tBefore starting a navigation (routing) you need to select a destination. Afterwards press \'Menu\' -> \'Directions\' on map and select the navigation type.</string>
 
-	<string name="tip_select_destination_point">Select Destination</string>
-	<string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), or in all search activities. 
-\n\tYou can also select any favorite point as destination via long pressing it in \'Favorites\'.</string>
-
 	<string name="tip_search">Searching</string>
 	<string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite.
 \n\tPressing \'Search\' in the main menu opens the search activities. For all hits a context menu offers 2 options: \'Set as destination\' or \'Show on map\'.</string>
@@ -281,11 +281,6 @@
 	<string name="tip_map_context_menu_t">\tThe map context menu is available by long pressing on the map or by pressing the trackball button.
 \n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or long press on it to hide the box again.)
 \n\tThe map context menu contains all actions referring to a point (location).</string>
-
-	<string name="tip_destination_point">Destination</string>
-	<string name="tip_destination_point_t">\tA key element in OsmAnd is the destination, marked as an orange disk on the map.
-\n\tOsmAnd displays the distance to it and the direction to it (orange triangle) on the map.
-\n\tTo mark any point as destination select \'Set as destination\'. This option is available on all search hits and in the map context menu (long press on any map item).</string>
 
 	<string name="tip_initial">Tips and Tricks</string>
 	<string name="tip_initial_t">\tOsmAnd is a navigation application with many features. 
