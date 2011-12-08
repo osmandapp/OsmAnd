@@ -192,7 +192,7 @@ public class TurnPathHelper {
 		public RouteDrawable(){
 			paintRouteDirection = new Paint();
 			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
-			paintRouteDirection.setColor(Color.rgb(100, 0, 255));
+			paintRouteDirection.setColor(Color.rgb(250, 222, 35));
 			paintRouteDirection.setAntiAlias(true);
 		}
 		
