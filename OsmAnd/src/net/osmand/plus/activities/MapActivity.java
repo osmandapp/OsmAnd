@@ -887,6 +887,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		registerUnregisterSensor(getLastKnownLocation());
 		mapLayers.getMapInfoLayer().applyTheme();
 		mapLayers.updateLayers(mapView);
+		getMyApplication().getDaynightHelper().setDayNightMode(settings.DAYNIGHT_MODE.get());
 	}
 	
 	
