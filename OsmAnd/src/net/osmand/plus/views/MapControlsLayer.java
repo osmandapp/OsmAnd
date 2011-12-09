@@ -188,15 +188,15 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 	
 	private void drawZoomLevel(Canvas canvas) {
-		String zoomText = view.getZoom() + "";
-		float length = zoomTextPaint.measureText(zoomText);
+		ShadowText zoomText = ShadowText.create(view.getZoom() + "");
+		float length = zoomTextPaint.measureText(zoomText.getText());
 		if (zoomShadow.getBounds().width() == 0) {
 			zoomShadow.setBounds(zoomInButton.getLeft() - 2, zoomInButton.getTop() - (int) (18 * scaleCoefficient), zoomInButton.getRight(),
 					zoomInButton.getBottom());
 		}
 		zoomShadow.draw(canvas);
 				
-		canvas.drawText(zoomText, zoomInButton.getLeft() + (zoomInButton.getWidth() - length - 2) / 2,
+		zoomText.draw(canvas, zoomInButton.getLeft() + (zoomInButton.getWidth() - length - 2) / 2,
 				zoomInButton.getTop() + 4 * scaleCoefficient, zoomTextPaint);
 	}
 	
@@ -372,7 +372,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 	/////////////////////// Ruler ///////////////////
 	// cache values for ruler
-	String cacheRulerText = null;
+	ShadowText cacheRulerText = null;
 	int cacheRulerZoom = 0;
 	double cacheRulerTileX = 0;
 	double cacheRulerTileY = 0;
@@ -397,8 +397,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 			double roundedDist = OsmAndFormatter.calculateRoundedDist(dist * screenRulerPercent, view.getContext());
 			
 			int cacheRulerDistPix = (int) (pixDensity * roundedDist);
-			cacheRulerText = OsmAndFormatter.getFormattedDistance((float) roundedDist, view.getContext());
-			cacheRulerTextLen = zoomTextPaint.measureText(cacheRulerText);
+			cacheRulerText = ShadowText.create(OsmAndFormatter.getFormattedDistance((float) roundedDist, view.getContext()));
+			cacheRulerTextLen = zoomTextPaint.measureText(cacheRulerText.getText());
 			
 			Rect bounds = rulerDrawable.getBounds();
 			bounds.right = (int) (view.getWidth() - 7 * scaleCoefficient);
@@ -410,7 +410,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if (cacheRulerText != null) {
 			rulerDrawable.draw(canvas);
 			Rect bounds = rulerDrawable.getBounds();
-			canvas.drawText(cacheRulerText, bounds.left + (bounds.width() - cacheRulerTextLen) / 2, bounds.bottom - 8 * scaleCoefficient,
+			cacheRulerText.draw(canvas, bounds.left + (bounds.width() - cacheRulerTextLen) / 2, bounds.bottom - 8 * scaleCoefficient,
 					rulerTextPaint);
 		}
 	}

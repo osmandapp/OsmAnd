@@ -7,7 +7,6 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.TransportIndexRepository;
-import net.osmand.plus.views.OsmBugsLayer.OpenStreetBug;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
