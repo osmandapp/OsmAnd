@@ -26,8 +26,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -37,6 +35,7 @@ import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.IndexConstants;
 import net.osmand.data.index.ExtractGooglecodeAuthorization.GooglecodeUploadTokens;
+import net.osmand.data.index.IndexZipper.OneFileException;
 import net.osmand.data.preparation.DBDialect;
 import net.osmand.data.preparation.IndexCreator;
 import net.osmand.data.preparation.MapZooms;
@@ -59,7 +58,6 @@ public class IndexBatchCreator {
 	
 	protected static final Log log = LogUtil.getLog(IndexBatchCreator.class);
 	private final static double MIN_SIZE_TO_UPLOAD = 0.015d;
-	private final static double MIN_SIZE_TO_NOT_ZIP = 2d;
 	private final static double MAX_SIZE_TO_NOT_SPLIT = 190d; 
 	private final static double MAX_UPLOAD_SIZE = 195d;
 	
@@ -640,41 +638,29 @@ public class IndexBatchCreator {
 			// do not upload small files
 			return;
 		}
+		
+		String regionName  = fileName.substring(0, fileName.lastIndexOf('_', fileName.indexOf('.')));
+		summary +=  regionName;
+		summary = summary.replace('_', ' ');
+		
 		File toUpload = f;
-		if(mbLengh > MIN_SIZE_TO_NOT_ZIP && (fileName.endsWith(".odb") || fileName.endsWith(".obf")) && zip){
+		if((fileName.endsWith(".odb") || fileName.endsWith(".obf")) && zip){
 			String n = fileName;
 			if(fileName.endsWith(".odb")){
 				n = fileName.substring(0, fileName.length() - 4);
 			}
 			String zipFileName = n+".zip";
-			File zFile = new File(f.getParentFile(), zipFileName);
 			log.info("Zipping file " + fileName);
 			try {
-				ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(zFile));
-				zout.setLevel(9);
-				ZipEntry zEntry = new ZipEntry(fileName);
-				zEntry.setSize(f.length());
-				zout.putNextEntry(zEntry);
-				FileInputStream is = new FileInputStream(f);
-				byte[] BUFFER = new byte[8192];
-				int read = 0;
-				while((read = is.read(BUFFER)) != -1){
-					zout.write(BUFFER, 0, read);
-				}
-				is.close();
-				zout.close();
-			} catch (IOException e) {
+				toUpload = IndexZipper.zip(f, zipFileName, summary);
+			} catch (OneFileException e) {
 				log.error("Exception while zipping file", e);
+				return ; //do not continue if error
 			}
 			if(f.delete()){
 				log.info("Source odb file was deleted");
 			}
-			toUpload = zFile;
 		}
-		
-		String regionName  = fileName.substring(0, fileName.lastIndexOf('_', fileName.indexOf('.')));
-		summary +=  regionName;
-		summary = summary.replace('_', ' ');
 		
 		List<File> splittedFiles = Collections.emptyList(); 
 		try {

@@ -82,7 +82,7 @@ public class IndexZipper {
 		}
 	}
 
-	private File zip(File f, String zipFileName, String description)
+	public static File zip(File f, String zipFileName, String description)
 			throws OneFileException {
 		File zFile = new File(f.getParentFile(), zipFileName);
 		try {
@@ -189,7 +189,7 @@ public class IndexZipper {
 		}
 	}
 
-	public void copyAndClose(InputStream in, OutputStream out)
+	public static void copyAndClose(InputStream in, OutputStream out)
 			throws IOException {
 		Algoritms.streamCopy(in, out);
 		Algoritms.closeStream(in);
