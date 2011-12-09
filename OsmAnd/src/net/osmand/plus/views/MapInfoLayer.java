@@ -7,7 +7,6 @@ import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
-import net.osmand.plus.routing.RoutingHelper.TurnType;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -278,6 +277,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		};
 		altitudeControl.setText(null, null);
+		altitudeControl.setImageDrawable(view.getResources().getDrawable(R.drawable.ic_altitude));
 		return altitudeControl;
 	}
 	

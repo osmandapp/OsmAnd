@@ -175,6 +175,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	    registerBooleanPreference(osmandSettings.TRANSPARENT_MAP_THEME,screen);
 	    registerBooleanPreference(osmandSettings.TEST_ANIMATE_ROUTING,screen);
 	    registerBooleanPreference(osmandSettings.NATIVE_RENDERING,screen);
+	    registerBooleanPreference(osmandSettings.SHOW_ALTITUDE_INFO,screen);
 	    
 		registerEditTextPreference(osmandSettings.USER_NAME, screen);
 		registerEditTextPreference(osmandSettings.USER_PASSWORD, screen);
