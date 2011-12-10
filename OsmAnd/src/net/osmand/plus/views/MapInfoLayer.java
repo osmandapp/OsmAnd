@@ -111,24 +111,24 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 		int i = 0;
 		for(MapInfoControl m : rightStack.getAllViews()){
-			m.setBackgroundDrawable(view.getResources().getDrawable(i == 0 ? boxTopR : boxTop).mutate());
+			m.setBackgroundDrawable(view.getResources().getDrawable(i == 0 ? boxTopR : boxTop));
 			i++;
 		}
-		rightStack.setExpandImageDrawable(view.getResources().getDrawable(expand).mutate());
+		rightStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
 		i = 0;
 		for(MapInfoControl m : leftStack.getAllViews()){
-			m.setBackgroundDrawable(view.getResources().getDrawable(i < 2 ? boxTopL : boxTop).mutate());
+			m.setBackgroundDrawable(view.getResources().getDrawable(i < 2 ? boxTopL : boxTop));
 			i++;
 		}
-		leftStack.setExpandImageDrawable(view.getResources().getDrawable(expand).mutate());
-		statusBar.setBackgroundDrawable(view.getResources().getDrawable(boxTop).mutate());
+		leftStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
+		statusBar.setBackgroundDrawable(view.getResources().getDrawable(boxTop));
 		showAltitude = view.getSettings().SHOW_ALTITUDE_INFO.get();
 	}
 	
 	public void createTopBarElements() {
 		// 1. Create view groups and controls
 		statusBar = createStatusBar();
-		statusBar.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_top).mutate());
+		statusBar.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_top));
 		
 		rightStack = new MapStackControl(view.getContext());
 		rightStack.addStackView(createDistanceControl());
@@ -218,7 +218,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	private TextInfoControl createSpeedControl(){
-		final TextInfoControl speedControl = new TextInfoControl(map, 0, paintText, paintSubText) {
+		final TextInfoControl speedControl = new TextInfoControl(map, 3, paintText, paintSubText) {
 			private float cachedSpeed = 0;
 
 			@Override

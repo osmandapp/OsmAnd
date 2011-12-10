@@ -28,7 +28,6 @@ public class MapStackControl extends ViewGroup {
 		final Bitmap arrowUp = BitmapFactory.decodeResource(context.getResources(), R.drawable.arrow_up);
 		final Paint paintImg = new Paint();
 		paintImg.setAntiAlias(true);
-		setChildrenDrawingOrderEnabled(true);
 		expandView = new ImageView(context) {
 			@Override
 			protected void onDraw(Canvas canvas) {
@@ -43,7 +42,7 @@ public class MapStackControl extends ViewGroup {
 				}
 			}
 		};
-		expandView.setImageDrawable(context.getResources().getDrawable(R.drawable.box_expand).mutate());
+		expandView.setImageDrawable(context.getResources().getDrawable(R.drawable.box_expand));
 		expandView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -70,23 +69,14 @@ public class MapStackControl extends ViewGroup {
 	}
 	
 	
-	@Override
-	protected int getChildDrawingOrder(int childCount, int i) {
-		// start from expand view
-		if (i == 0) {
-			return 0;
-		}
-		return childCount - i;
-	}
-
 	public void addStackView(MapInfoControl v) {
 		stackViews.add(v);
-		MapStackControl.this.addView(v);
+		MapStackControl.this.addView(v, 1);
 	}
 
 	public void addCollapsedView(MapInfoControl v) {
 		collapsedViews.add(v);
-		MapStackControl.this.addView(v);
+		MapStackControl.this.addView(v, 1);
 	}
 	
 	public List<MapInfoControl> getStackViews() {
