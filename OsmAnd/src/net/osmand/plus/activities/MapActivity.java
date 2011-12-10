@@ -832,12 +832,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			if (LocationProvider.OUT_OF_SERVICE == status) {
 				// do not use it in routing
 				if (service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-//					try {
-//						service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST,
-//								networkListener);
-//					} catch (IllegalArgumentException e) {
-//						Log.d(LogUtil.TAG, "Network location provider not available"); //$NON-NLS-1$
-//					}
 				}
 			} else if (LocationProvider.AVAILABLE == status) {
 				// Do not remove right now network listener

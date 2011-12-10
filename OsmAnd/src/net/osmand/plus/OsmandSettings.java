@@ -271,7 +271,7 @@ public class OsmandSettings {
 		}
 		
 		private BooleanPreference(String id, boolean defaultValue, boolean global, boolean cache) {
-			super(id, global, cache);
+			super(id, global, cache, defaultValue);
 		}
 		
 		@Override
@@ -1061,7 +1061,12 @@ public class OsmandSettings {
 	}
 	
 	public final CommonPreference<Boolean> SHOW_ALTITUDE_INFO = 
-			new BooleanPreference("show_altitude_info", false, false);
+			new BooleanPreference("show_altitude_info", false, false, true);
+	
+	public final CommonPreference<Boolean> SHOW_ZOOM_LEVEL = 
+			new BooleanPreference("show_zoom_level", false, false, true);
+	
+	
 	
 	public enum DayNightMode {
 		AUTO(R.string.daynight_mode_auto), 

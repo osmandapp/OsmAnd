@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="show_zoom_level_descr">Show zoom level constantly instead of ruler.</string>
+	<string name="show_zoom_level">Show zoom level</string>
 	<string name="tip_select_destination_point">Select Destination</string>
 	<string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
 \n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).</string> 

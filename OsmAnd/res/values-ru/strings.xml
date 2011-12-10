@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="show_zoom_level_descr">Показывать уровень приближения вместо масштаба.</string>
+	<string name="show_zoom_level">Показывать уровень приближения.</string>
 	<string name="tip_select_destination_point">Выбор точки назначения</string>
 	<string name="tip_select_destination_point_t">
-\tNEW VERSION, PLEASE ADAPT TRANSLATION: You can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
-\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
-
 \n\tВы можете выбрать точку назначения в контекстном меню карты \'Идти к\' или в поиске.
 \n\tВы также можете выбрать избранную точку долгим нажатием в \'Избранных\'.</string>
 

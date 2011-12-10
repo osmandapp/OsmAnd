@@ -90,6 +90,7 @@
 	<PreferenceScreen android:key="appearance_settings" android:title="@string/appearance_settings" android:summary="@string/appearance_settings_descr">
 		<CheckBoxPreference android:key="transparent_map_theme" android:title="@string/use_transparent_map_theme" android:summary="@string/use_transparent_map_theme_descr"/>
 		<CheckBoxPreference android:key="show_altitude_info" android:title="@string/show_altitude_info" android:summary="@string/show_altitude_info_descr"/>
+		<CheckBoxPreference android:key="show_zoom_level" android:title="@string/show_zoom_level" android:summary="@string/show_zoom_level_descr"/>
 	</PreferenceScreen>
 
 	<PreferenceScreen android:key = "osm_settings" android:title="@string/osm_settings" android:summary="@string/osm_settings_descr">
