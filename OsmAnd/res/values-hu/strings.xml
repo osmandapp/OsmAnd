@@ -1,28 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-	<string name="tip_select_destination_point">Célpont kiválasztása</string>
+	<string name="show_zoom_level_descr">A nagyítási szint folyamatos megjelenítése a lépték helyett.</string>
+	<string name="show_zoom_level">Nagyítási szint kijelzése</string>
+	<string name="tip_select_destination_point">Beállítás célpontnak</string>
 	<string name="tip_select_destination_point_t">
-\tNEW VERSION, PLEASE ADAPT TRANSLATION: You can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
-\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
+\tA célpontot kiválaszthatod közvetlenül a térképről (helyi menü, \'Beállítás célpontnak\'), kereséssel, vagy a \'Kedvencek\' közül hosszú kattintással.
+\n\tA célpontot a térképen narancssárga pötty jelzi. Az ettől való távolságot a jobb felső sarokban láthatod, irányát pedig egy narancssárga nyíl mutatja.</string>
 
-\n\tA célpontot a \'Térképmenü\' -> \'Ponthoz vezet\' menüpontjával vagy címkereséssel lehet meghatározni (\'Vezess ide\').
-\n\tKedvenc ponthoz a \'Főmenü\'->\'Kedvencek\' menüpont alatt a pontra hosszan rányomva lehet navigálni.</string>
-
-<string name="tip_recent_changes_0_6_9_t">A 0.6.9-es verzió változásai:
+	<string name="tip_recent_changes_0_6_9_t">A 0.6.9-es verzió változásai:
 \n\t- Javított vektoros térkép megjelenítés
 \n\t- Gyors natív vektoros térkép-megjelenítés - kísérleti állapotban van (egyes eszközökön nem működik)
 \n\t- Erőteljesen megváltoztatott kinézet
 \n\t- Magasság információ kijelzése
 \n\t- Új fordítások (vietnami, lengyel)
 \n\t- További kisebb fejlesztések
-</string>
+	</string>
 
-<string name="show_altitude_info_descr">Az aktuális magassági érték kijelzése a térképen</string>
-<string name="show_altitude_info">Magassági érték kijelzése</string>
-<string name="use_transparent_map_theme_descr">Átlátszó háttér a térképkezelő gombokhoz</string>
-<string name="use_transparent_map_theme">Átlátszó téma</string>
-<string name="appearance_settings_descr">Az alkalmazás kinézetének beállításai</string>
-<string name="appearance_settings">Megjelenés</string>
+	<string name="show_altitude_info_descr">Az aktuális magassági érték kijelzése a térképen</string>
+	<string name="show_altitude_info">Magassági érték kijelzése</string>
+	<string name="use_transparent_map_theme_descr">Átlátszó háttér a térképkezelő gombokhoz</string>
+	<string name="use_transparent_map_theme">Átlátszó téma</string>
+	<string name="appearance_settings_descr">Az alkalmazás kinézetének beállításai</string>
+	<string name="appearance_settings">Megjelenés</string>
 	<string name="native_library_not_supported">A natív renderelő nem támogatott ezen az eszközön.</string>
 	<string name="init_native_library">Natív renderelő inicializálása..</string>
 	<string name="choose_auto_follow_route">Automatikus követés ideje</string>
@@ -85,7 +84,7 @@
 	<string name="search_position_map_view">Utolsó térképnézet</string>
 
 	<string name="select_search_position">Keresés helye:</string>
-	<string name="context_menu_item_search">Keresés</string>
+	<string name="context_menu_item_search">Keresés itt</string>
 	<string name="tip_recent_changes_0_6_7_t">0.6.7 verzió változásai:
 \n\t- Offline - kapcsolat nélküli - adat kezelés (letöltés, törlés, adatok biztonsági mentése közvetlenül az Osmandban)
 \n\t- Kedvenc pontok és csoportok (csoportosítás, törlés, kedvencek kezelése)
@@ -178,7 +177,7 @@
 	<string name="tts_missing_language_data">Nincs telepített adat a kiválasztott nyelv használatához. A Marketből letölthető.</string>
 
 	<string name="gpx_option_reverse_route">GPX irány megfordítása</string>
-	<string name="gpx_option_destination_point">Használd a jelenlegi cél pontot</string>
+	<string name="gpx_option_destination_point">Használd a jelenlegi célpontot</string>
 	<string name="gpx_option_from_start_point">Végig az egész nyomvonalon</string>
 
 	<string name="tip_rotation_switching">Térkép elforgatás</string>
@@ -240,9 +239,9 @@
 \nEzután meg kell határoznod milyen módon szeretnéd mással megosztani a koordinátákat. Lehetséges választás: E-Mail, SMS vagy a koordináták másolása a vágólapra.</string>
 	<string name="tip_favorites">Kedvencek</string>
 	<string name="tip_favorites_t">Ha hosszadalmas a sűrűn használt helyek előkeresése, hozzá lehet adni a Kedvencekhez, utána pár kattintással előkereshető.
-\n\tKedvenc pont hozzáadásához a térkép menüjébe kell belépni és a \'Hozzáadás a kedvencekhez\'-et kell választani és egy megfelelő névvel kell ellátni. Mentés után egyszerűen a \'Főmenü\'->\'Kedvencek\' menüponton keresztül érhető el.
-\n\tA \'Kedvencek\' menüben a pontra hosszan rányomva navigálhatunk a ponthoz, szerkeszthetjük vagy törölhetjük.
-\n\tA térképen minden kedvenc pont megjelenítéséhez engedélyezni kell a \'Kedvencek\' réteget a \'Térkép menü\'->\'Rétegek\' pontjában.</string>
+\n\tKedvenc pont hozzáadásához a térképmenüben a \'Hozzáadás a kedvencekhez\'-et kell választani és a pontot egy megfelelő névvel ellátni. Mentés után egyszerűen a főmenü \'Kedvencek\' menüponton keresztül érhető el.
+\n\tA \'Kedvencek\' menüben a pontra hosszan rányomva beállíthatjuk célpontnak, szerkeszthetjük vagy törölhetjük.
+\n\tAz összes kedvenc pont térképen megjelenítéséhez engedélyezni kell a \'Kedvencek\' réteget a térképmenü \'Rétegek\' pontjában.</string>
 	<string name="tip_osm_improve">Openstreetmap fejlesztése</string>
 	<string name="tip_osm_improve_t">OsmAnd nem csak hogy az Openstreetmap.org-ról használ adatokat, amit nem csak útvonal tervezéshez lehet használni, hanem az adatok kiegészítéséhez, javításához, az Openstreetmap.org fejlesztéséhez is megfelelő. Egyszerűen feltölthető pár kattintással új POI vagy „OSM bug”!
 \nElőször is meg kell adni a bejelentkező információkat a \'Főmenü\'->\'Beállítások\'->\'OSM\' résznél.
@@ -266,10 +265,10 @@
 	<string name="tip_app_mode_t">Az OsmAnd több, személyre szabható megjelenítési módot támogat, különböző felhasználási esetekre.
 \n\tA mód kiválasztható a  \'Főmenü\'->\'Beállítások\'->\'Működési mód\' alatt.</string>
 	<string name="tip_navigation">Navigáció</string>
-	<string name="tip_navigation_t">A navigáció bekapcsolásához először ki kell választani egy célpontot. Ezután a \'menü\' -> \'Útirány\' menüt kell választani és megjelölni a közlekedési formát.</string>
+	<string name="tip_navigation_t">Navigáció indításához először ki kell választani egy célpontot. Ezután a térképmenü \'Útirány\' menütét kell választani és megjelölni a közlekedési módot.</string>
 	<string name="tip_search">Cím keresés</string>
-	<string name="tip_search_t">A térképen helyet keresni cím alapján vagy koordináta alapján, esetleg mint POI vagy Kedvenc pont lehet.
-\n\t\'Keresés\' menüvel tudsz keresni. A találatokra hosszan kattintva az alábbiak közül lehet választani: \'Vezess ide\' vagy \'Mutasd a térképen\'.</string>
+	<string name="tip_search_t">A térképen helyet keresni cím alapján, koordináta alapján, POI-k közül, vagy Kedvencek közül lehet.
+\n\t\'Keresés\' menüvel tudsz keresni. A találatokra hosszan kattintva az alábbiak közül lehet választani: \'Beállítás célpontnak\' vagy \'Mutasd a térképen\'.</string>
 	<string name="tip_map_context_menu">Térképmenü</string>
 	<string name="tip_map_context_menu_t">\tA térképmenü a térképen egy pont hosszú megnyomásával vagy a \'trackball\' gombbal érhető el.
 \n\tA kattintás után megjelenik egy doboz a koordinátákkal, vagy a POI nevével. A térképmenü megnyitásához kattints erre a dobozra (vagy kattints rá hosszan az eltüntetéséhez).
@@ -422,7 +421,7 @@
 	<string name="rotate_map_none_opt">Ne forogjon</string>
 	<string name="rotate_map_to_bearing_descr">Térkép forgatásának meghatározása</string>
 	<string name="rotate_map_to_bearing">Térkép forgatása</string>
-	<string name="show_route">Útvonal mutatása</string>
+	<string name="show_route">Útvonal részletei</string>
 	<string name="fav_imported_sucessfully">Kedvencek importálása sikeres</string>
 	<string name="fav_file_to_load_not_found">Nem található kedvenceket tartalmazó GPX fájl az alábbi helyen: {0}</string>
 	<string name="fav_saved_sucessfully">Kedvencek mentése sikeres: {0}</string>
@@ -447,7 +446,7 @@
 	<string name="menu_layers">Rétegek</string>
 	<string name="continue_follow_previous_route">Nem fejeződött be az előző útvonal. Folytassuk?</string>
 	<string name="context_menu_item_search_poi">POI keresése</string>
-	<string name="context_menu_item_show_route">Útvonal innen</string>
+	<string name="context_menu_item_show_route">Mutasd az utat innen</string>
 	<string name="use_trackball_descr">Trackball használata a térkép mozgatásához</string>
 	<string name="use_trackball">Trackball használata</string>
 	<string name="background_service_wait_int_descr">Idő amíg a sikeres helymeghatározásra várhatunk, ez után a helymeghatározó szolgáltatás újraindul.</string>
@@ -533,7 +532,7 @@
 	<string name="search_history_street">Utca: {0}, {1}</string>
 	<string name="search_history_int_streets">Kereszteződés: {0} és {1}, {2}</string>
 	<string name="search_history_building">Épület: {0}, {1}, {2}</string>
-	<string name="search_history_navigate_to">Navigáció ide: szélesség = {0}, hosszúság = {1}</string>
+	<string name="search_history_navigate_to">Célpont: szélesség = {0}, hosszúság = {1}</string>
 	<string name="favorite">Kedvenc</string>
 	<string name="clear_all">Mindent töröl</string>
 	<string name="history">Előzmény</string>
@@ -571,7 +570,7 @@
 	<string name="follow">Követ</string>
 	<string name="recalculate_route_to_your_location">Újratervezés a jelenlegi pozíció alapján</string>
 	<string name="follow_route">Útvonal követése</string>
-	<string name="mark_final_location_first">Először válassza ki a célt</string>
+	<string name="mark_final_location_first">Először válaszd ki a célpontot</string>
 	<string name="get_directions">Útirány</string>
 	<string name="show_gps_status">GPS állapot mutatása</string>
 	<string name="opening_hours">Nyitvatartás</string>
@@ -593,7 +592,7 @@
 	<string name="error_calculating_route_occured">Hiba történt az útvonaltervezés közben</string>
 	<string name="empty_route_calculated">Üres útvonal lett tervezve</string>									
 	<string name="new_route_calculated_dist">Új útvonal tervezve, távolság</string>
-	<string name="arrived_at_destination">Érkezés a célhoz</string>
+	<string name="arrived_at_destination">Megérkeztél a célponthoz</string>
 	<string name="invalid_locations">Érvénytelen hely</string>
 	<string name="go_back_to_osmand">Vissza az OsmAnd térképhez</string>
 	<string name="close">Bezár</string>
@@ -629,7 +628,7 @@
 	<string name="monitor_preferences">Útvonalrögzítés</string>
 	<string name="save_track_to_gpx_descrp">Az útvonalak napi csoportosításban kerülnek mentésre a track könyvtárba</string>
 	<string name="save_track_to_gpx">Útvonal mentése GPX-be</string>
-	<string name="navigate_to">Vezess ide</string>
+	<string name="navigate_to">Beállítás célpontnak</string>
 	<string name="update_tile">Térkép frissítés</string>
 	<string name="reload_tile">Térképcsempe újraolvasása</string>
 	<string name="user_name_descr">OSM felhasználói neved</string>
@@ -649,11 +648,11 @@
 	<string name="ChooseCountry">Ország kiválasztása</string>
 	<string name="position_on_map_descr">Pozíciójelző helyének kiválasztása a térképen</string>
 	<string name="position_on_map">Pozíció a térképen</string>
-	<string name="map_specify_point">Pont meghatározása</string>
+	<string name="map_specify_point">Beállítás célpontnak</string>
 	<string name="show_view_angle_descr">Látómező megjelenítése iránytű alapján</string>
 	<string name="show_view_angle">Látómező megjelenítése</string>
-	<string name="stop_navigation">Pont törlése</string>
-	<string name="navigate_to_point">Pont megjelölése</string>
+	<string name="stop_navigation">Cél törlése</string>
+	<string name="navigate_to_point">Célnak jelöl</string>
 	<string name="map_view_3d_descr">A térkép 3D megjelenítésének engedélyezése</string>
 	<string name="map_view_3d">3D térkép</string>
     
@@ -712,7 +711,7 @@
 
 	<string name="search_tabs_location">Koordináta</string>
 
-	<string name="context_menu_item_navigate_point">Ponthoz vezet</string>
+	<string name="context_menu_item_navigate_point">Beállítás célpontnak</string>
 	<string name="context_menu_item_add_favorite">Hozzáadás a kedvencekhez</string>
 	<string name="context_menu_item_update_map">Térkép frissítése</string>
 	<string name="context_menu_item_open_bug">OSM bug megnyitása</string>
@@ -728,7 +727,7 @@
 	<string name="add_favorite_dialog_favourite_added_template">Kedvenc pont: \'\'{0}\'\' sikeresen hozzáadva.</string>
 
 <!-- string name="favourites_context_menu_title">Eszközök menü</string -->
-	<string name="favourites_context_menu_navigate">Navigáció ide</string>
+	<string name="favourites_context_menu_navigate">Beállítás célpontnak</string>
 	<string name="favourites_context_menu_edit">Kedvenc szerkesztése</string>
 	<string name="favourites_context_menu_delete">Kedvenc törlése</string>
 	<string name="favourites_edit_dialog_title">Kedvenc átnevezése</string>
