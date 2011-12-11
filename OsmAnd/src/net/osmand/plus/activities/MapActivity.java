@@ -672,7 +672,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     					@Override
     					public void run() {
 							if (routingHelper.getLeftDistance() > 0 && settings.MAP_ACTIVITY_ENABLED.get()) {
-								routingHelper.getVoiceRouter().gpsLocationLost();
+								// TODO temporary disable
+//								routingHelper.getVoiceRouter().gpsLocationLost();
 							}
     					}
     				});
