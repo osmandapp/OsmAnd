@@ -2,19 +2,17 @@
 <resources>
 	<string name="tip_select_destination_point">Výber cieľového bodu</string>
 	<string name="tip_select_destination_point_t">
-\tNEW VERSION, PLEASE ADAPT TRANSLATION: You can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
-\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
-
-\n\tMôžete vybrať cieľový bod v kontextovom menu \'Navigovať do\' alebo v vyhľadaním.
-\n\tTaktiež môžete navigovať do obľúbeného bodu dlhým stlačením v \'Obľúbené\'.</string>
+	\tCieľ môžete určiť priamo na mape (kontextové menu, potom \'Nastaviť ako cieľ\'), vo všetkých hľadacích aktivitách, alebo cez dlhým kliknutím vo Vašom \'Zozname obľúbených bodov\'. 
+	\n\tCieľ je označený ako oranžový krúžok na mape a OsmAnd zobrazí vzdialenosť a smer k nemu (oranžový trojuholník).
+	</string>
 
  	<string name="tip_recent_changes_0_6_9_t">Zmeny vo verzii 0.6.9 :
-\n\t- Vylepšené offline vykresľovanie mapy
-\n\t- Rýchle natívne offline vykresľovanie - viď experimentálne funkcie (nemusí fungovať na všetkých zariadeniach)
-\n\t- Veľké zmeny vo vzhľade aplikácie
-\n\t- Informácie o nadmorskej výške
-\n\t- Nové preklady (Vietnamský, Polský)
-\n\t- Iné malé funkcie
+	\n\t- Vylepšené offline vykresľovanie mapy
+	\n\t- Rýchle natívne offline vykresľovanie - viď experimentálne funkcie (nemusí fungovať na všetkých zariadeniach)
+	\n\t- Veľké zmeny vo vzhľade aplikácie
+	\n\t- Informácie o nadmorskej výške
+	\n\t- Nové preklady (Vietnamský, Polský)
+	\n\t- Iné malé funkcie
 	</string>
 
 	<string name="show_altitude_info_descr">Zobrazí aktuálnu nadm. výšku na mape</string>
