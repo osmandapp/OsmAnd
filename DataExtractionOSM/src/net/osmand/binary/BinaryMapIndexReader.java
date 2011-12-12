@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -1363,7 +1362,7 @@ public class BinaryMapIndexReader {
 	private static boolean testTransportSearch = false;
 	
 	public static void main(String[] args) throws IOException {
-		RandomAccessFile raf = new RandomAccessFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.obf"), "r");
+		RandomAccessFile raf = new RandomAccessFile(new File("/home/victor/projects/OsmAnd/data/osmand_index/Parkcharge_me.obf"), "r");
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
 		System.out.println("VERSION " + reader.getVersion()); //$NON-NLS-1$
 		long time = System.currentTimeMillis();
@@ -1378,7 +1377,6 @@ public class BinaryMapIndexReader {
 			testTransportSearch(reader);
 		}
 
-		Locale.setDefault(new Locale("RU"));
 		if (testPoiSearch) {
 			PoiRegion poiRegion = reader.getPoiIndexes().get(0);
 			System.out.println(poiRegion.leftLongitude + " " + poiRegion.rightLongitude + " " + poiRegion.bottomLatitude + " "
@@ -1388,27 +1386,28 @@ public class BinaryMapIndexReader {
 				System.out.println(" " + poiRegion.subcategories.get(i));
 			}
 
-			int sleft = MapUtils.get31TileNumberX(37.5);
-			int sright = MapUtils.get31TileNumberX(37.9);
-			int stop = MapUtils.get31TileNumberY(55.814);
-			int sbottom = MapUtils.get31TileNumberY(55.81);
+			int sleft = MapUtils.get31TileNumberX(6);
+			int sright = MapUtils.get31TileNumberX(14);
+			int stop = MapUtils.get31TileNumberY(54);
+			int sbottom = MapUtils.get31TileNumberY(45);
 			SearchRequest<Amenity> req = buildSearchPoiRequest(sleft, sright, stop, sbottom, -1, new SearchPoiTypeFilter() {
 				@Override
 				public boolean accept(AmenityType type, String subcategory) {
-					return type == AmenityType.TRANSPORTATION && "fuel".equals(subcategory);
+//					return type == AmenityType.TRANSPORTATION && "fuel".equals(subcategory);
+					return true;
 				}
 			}, null);
 			List<Amenity> results = reader.searchPoi(req);
 			for (Amenity a : results) {
 				System.out.println(a.getType() + " " + a.getSubType() + " " + a.getName() + " " + a.getLocation());
 			}
-
-			System.out.println("Searching by name...");
-			req = buildSearchPoiRequest(sleft, sright, "kolie", null);
-			reader.searchPoiByName(req);
-			for (Amenity a : req.getSearchResults()) {
-				System.out.println(a.getType() + " " + a.getSubType() + " " + a.getName() + " " + a.getLocation());
-			}
+//
+//			System.out.println("Searching by name...");
+//			req = buildSearchPoiRequest(sleft, sright, "kolie", null);
+//			reader.searchPoiByName(req);
+//			for (Amenity a : req.getSearchResults()) {
+//				System.out.println(a.getType() + " " + a.getSubType() + " " + a.getName() + " " + a.getLocation());
+//			}
 		}
 
 		System.out.println("MEMORY " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())); //$NON-NLS-1$

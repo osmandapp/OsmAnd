@@ -807,11 +807,11 @@ public class BinaryMapIndexWriter {
 	public void writePOICategories(TIntArrayList categories) throws IOException {
 		checkPeekState(POI_BOX);
 		OsmandOdb.OsmAndPoiCategories.Builder builder = OsmandOdb.OsmAndPoiCategories.newBuilder();
-		int prev = 0;
+		int prev = -1;
 		categories.sort();
 		for (int i = 0; i < categories.size(); i++) {
 			// avoid duplicates
-			if (i > 0 && prev != categories.get(i)) {
+			if (i == 0 || prev != categories.get(i)) {
 				builder.addCategories(categories.get(i));
 				prev = categories.get(i);
 			}
