@@ -47,6 +47,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -59,6 +60,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.provider.Settings.Secure;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -80,8 +82,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private static final String GPS_STATUS_COMPONENT = "com.eclipsim.gpsstatus2"; //$NON-NLS-1$
 	
 	// stupid error but anyway hero 2.1 : always lost gps signal (temporarily unavailable) for timeout = 2000
-	private static final int GPS_TIMEOUT_REQUEST = 1000;
-	private static final int GPS_DIST_REQUEST = 5;
+	private static final int GPS_TIMEOUT_REQUEST = 0;
+	private static final int GPS_DIST_REQUEST = 0;
 	// use only gps (not network) for 12 seconds 
 	private static final int USE_ONLY_GPS_INTERVAL = 12000; 
 	
@@ -672,8 +674,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     					@Override
     					public void run() {
 							if (routingHelper.getLeftDistance() > 0 && settings.MAP_ACTIVITY_ENABLED.get()) {
-								// TODO temporary disable
-//								routingHelper.getVoiceRouter().gpsLocationLost();
+								routingHelper.getVoiceRouter().gpsLocationLost();
 							}
     					}
     				});
@@ -689,7 +690,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				if(settings.AUTO_ZOOM_MAP.get() && location.hasSpeed()){
 	    			int z = defineZoomFromSpeed(location.getSpeed(), mapView.getZoom());
 	    			if(mapView.getZoom() != z && !mapView.mapIsAnimating()){
-	    				long now = System.currentTimeMillis();
+	    				long now = SystemClock.elapsedRealtime();
 	    				// prevent ui hysterisis (check time interval for autozoom)
 	    				if(Math.abs(mapView.getZoom() - z) > 1 || (lastTimeAutoZooming - now) > 6500){
 	    					lastTimeAutoZooming = now;
@@ -801,6 +802,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			}
 		}
 	};
+	
+	
 	private LocationListener gpsListener = new LocationListener(){
 		@Override
 		public void onLocationChanged(Location location) {
@@ -829,10 +832,13 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 
 		@Override
 		public void onStatusChanged(String provider, int status, Bundle extras) {
-			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-			if (LocationProvider.OUT_OF_SERVICE == status) {
-				// do not use it in routing
-				if (service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+			if (LocationProvider.TEMPORARILY_UNAVAILABLE == status) {
+				if(routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0){
+					routingHelper.getVoiceRouter().gpsLocationLost();
+				}
+			} else if (LocationProvider.OUT_OF_SERVICE == status) {
+				if(routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0){
+					routingHelper.getVoiceRouter().gpsLocationLost();
 				}
 			} else if (LocationProvider.AVAILABLE == status) {
 				// Do not remove right now network listener

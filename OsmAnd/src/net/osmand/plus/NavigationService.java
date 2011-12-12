@@ -21,6 +21,7 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.os.PowerManager.WakeLock;
@@ -33,6 +34,8 @@ public class NavigationService extends Service implements LocationListener {
 	}
 	private final static int NOTIFICATION_SERVICE_ID = 1;
 	public final static String OSMAND_STOP_SERVICE_ACTION  = "OSMAND_STOP_SERVICE_ACTION"; //$NON-NLS-1$
+	private static final int LOST_LOCATION_MSG_ID = 10;
+	private static final long LOST_LOCATION_CHECK_DELAY = 20000;
 	
 	private NavigationServiceBinder binder = new NavigationServiceBinder();
 
@@ -99,7 +102,7 @@ public class NavigationService extends Service implements LocationListener {
 		if(isContinuous()){
 			// request location updates
 			LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-			locationManager.requestLocationUpdates(serviceOffProvider, 1000, 0, NavigationService.this);
+			locationManager.requestLocationUpdates(serviceOffProvider, 0, 0, NavigationService.this);
 		} else {
 			AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 			pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, OnNavigationServiceAlarmReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT);
@@ -171,7 +174,23 @@ public class NavigationService extends Service implements LocationListener {
 				if (lock.isHeld()) {
 					lock.release();
 				}
+			} else {
+				// if continuous notify about lost location
+				if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0) {
+					Message msg = Message.obtain(handler, new Runnable() {
+    					@Override
+    					public void run() {
+							if (routingHelper.getLeftDistance() > 0 && !settings.MAP_ACTIVITY_ENABLED.get()) {
+								routingHelper.getVoiceRouter().gpsLocationLost();
+							}
+    					}
+    				});
+    				msg.what = LOST_LOCATION_MSG_ID;
+    				handler.removeMessages(LOST_LOCATION_MSG_ID);
+    				handler.sendMessageDelayed(msg, LOST_LOCATION_CHECK_DELAY);
+				}
 			}
+			
 			savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
 					location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
 			if(routingHelper.isFollowingMode()){
@@ -200,4 +219,34 @@ public class NavigationService extends Service implements LocationListener {
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 	}
 
+	
+	public static class OnNavigationServiceAlarmReceiver extends BroadcastReceiver {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			final WakeLock lock = getLock(context);
+			final NavigationService service = ((OsmandApplication) context.getApplicationContext()).getNavigationService();
+			// do not do nothing
+			if (lock.isHeld() || service == null) {
+				return;
+			}
+			// 
+			lock.acquire();
+			// request location updates
+			final LocationManager locationManager = (LocationManager) service.getSystemService(Context.LOCATION_SERVICE);
+			locationManager.requestLocationUpdates(service.getServiceOffProvider(), 0, 0, service);
+			if (service.getServiceOffInterval() > service.getServiceError()) {
+				service.getHandler().postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						// if lock is not anymore held
+						if (lock.isHeld()) {
+							lock.release();
+							locationManager.removeUpdates(service);
+						}
+					}
+				}, service.getServiceError());
+			}
+		}
+
+	}
 }
