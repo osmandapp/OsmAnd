@@ -39,7 +39,6 @@
 	<string name="delete_confirmation_msg">Delete %1$s?</string>
 	<string name="delete_confirmation_title">About to delete</string>
 	<string name="city_type_suburb">Suburb</string>
-    <string name="city_type_suburb">Suburb</string>
 	<string name="city_type_hamlet">Hamlet</string>
 	<string name="city_type_village">Village</string>
 	<string name="city_type_town">Town</string>
