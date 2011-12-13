@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="show_zoom_level_descr">Zobrazovat permanentně stupeň zvětšení jako číslo namísto měřítka.</string>
+	<string name="show_zoom_level">Zobrazovat zvětšení</string>
 
 	<string name="tip_select_destination_point">Výbrat cíl</string>
 	<string name="tip_select_destination_point_t">
