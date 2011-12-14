@@ -36,7 +36,7 @@ public class SearchHistoryActivity extends ListActivity implements SearchActivit
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ListView lv = new ListView(this);
-		lv.setCacheColorHint(R.color.activity_background);
+		lv.setCacheColorHint(getResources().getColor(R.color.activity_background));
 		lv.setDivider(getResources().getDrawable(R.drawable.tab_text_separator));
 		lv.setId(android.R.id.list);
 

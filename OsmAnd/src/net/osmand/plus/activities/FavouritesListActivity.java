@@ -48,7 +48,7 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 		super.onCreate(icicle);
 		ListView lv = new ListView(this);
 		lv.setId(android.R.id.list);
-		lv.setCacheColorHint(R.color.activity_background);
+		lv.setCacheColorHint(getResources().getColor(R.color.activity_background));
 		lv.setDivider(getResources().getDrawable(R.drawable.tab_text_separator));
 		setContentView(lv);
 
