@@ -547,8 +547,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		// Back to location icon 
 		params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		params.leftMargin = (int) (10 * scaleCoefficient);
-		params.rightMargin = 0;
+		params.leftMargin = (int) (5 * scaleCoefficient);
+		params.rightMargin = (int) (5 * scaleCoefficient);
 		backToLocation = new ImageView(view.getContext());
 		backToLocation.setImageDrawable(view.getResources().getDrawable(R.drawable.back_to_loc));
 		backToLocation.setOnClickListener(new View.OnClickListener() {

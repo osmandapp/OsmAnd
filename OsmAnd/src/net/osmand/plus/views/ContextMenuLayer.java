@@ -54,6 +54,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private final MapActivity activity;
 	private Drawable boxLeg;
 	private float scaleCoefficient = 1;
+	private Rect textPadding;
 	
 	public ContextMenuLayer(MapActivity activity){
 		this.activity = activity;
@@ -83,7 +84,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		textView = new TextView(view.getContext());
 		LayoutParams lp = new LayoutParams(BASE_TEXT_SIZE, LayoutParams.WRAP_CONTENT);
 		textView.setLayoutParams(lp);
-		textView.setTextSize(15 * scaleCoefficient);
+		textView.setTextSize(15);
 		textView.setTextColor(Color.argb(255, 0, 0, 0));
 		textView.setMinLines(1);
 //		textView.setMaxLines(15);
@@ -92,6 +93,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		textView.setClickable(true);
 		
 		textView.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
+		textPadding = new Rect();
+		textView.getBackground().getPadding(textPadding);
 	}
 
 	@Override
@@ -107,8 +110,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			canvas.translate(-tx, -ty);
 			
 			if (textView.getText().length() > 0) {
-				int topMarginDiff = (int) (5 * scaleCoefficient);
-				canvas.translate(x - textView.getWidth() / 2, ty - textView.getBottom() - topMarginDiff);
+				canvas.translate(x - textView.getWidth() / 2, ty - textView.getBottom() + textPadding.bottom - textPadding.top);
 				int c = textView.getLineCount();
 				
 				textView.draw(canvas);
