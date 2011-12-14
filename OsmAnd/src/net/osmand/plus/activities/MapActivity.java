@@ -222,9 +222,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			}
 		}
 		
-		dialogProviders.add(mapActions);
-		dialogProviders.add(poiActions);
-		dialogProviders.add(mapLayers.getOsmBugsLayer());
+		addDialogProvider(mapActions);
+		addDialogProvider(poiActions);
+		addDialogProvider(mapLayers.getOsmBugsLayer());
 	}
     
     @Override
@@ -372,7 +372,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		return ((OsmandApplication) getApplication());
 	}
     
-	public void addDialogProvider(DialogProvider dp) {
+	private void addDialogProvider(DialogProvider dp) {
 		dialogProviders.add(dp);
 	}
 	

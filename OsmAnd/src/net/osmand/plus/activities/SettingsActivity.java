@@ -87,11 +87,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	
 	private Map<String, Map<String, ?>> listPrefValues = new LinkedHashMap<String, Map<String, ?>>();
 	
-	private void registerBooleanPreference(OsmandPreference<Boolean> b, PreferenceScreen screen){
+	private CheckBoxPreference registerBooleanPreference(OsmandPreference<Boolean> b, PreferenceScreen screen){
 		CheckBoxPreference p = (CheckBoxPreference) screen.findPreference(b.getId());
 		p.setOnPreferenceChangeListener(this);
 		screenPreferences.put(b.getId(), p);
 		booleanPreferences.put(b.getId(), b);
+		return p;
 	}
 	
 	private void registerSeekBarPreference(OsmandPreference<Integer> b, PreferenceScreen screen){
@@ -174,10 +175,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	    registerBooleanPreference(osmandSettings.MAP_VECTOR_DATA,screen);
 	    registerBooleanPreference(osmandSettings.TRANSPARENT_MAP_THEME,screen);
 	    registerBooleanPreference(osmandSettings.TEST_ANIMATE_ROUTING,screen);
-	    registerBooleanPreference(osmandSettings.NATIVE_RENDERING,screen);
 	    registerBooleanPreference(osmandSettings.SHOW_ALTITUDE_INFO,screen);
 	    registerBooleanPreference(osmandSettings.SHOW_ZOOM_LEVEL,screen);
-	    
+	    CheckBoxPreference nativeCheckbox = registerBooleanPreference(osmandSettings.NATIVE_RENDERING,screen);
+	    //disable the checkbox if the library cannot be used
+	    if (NativeOsmandLibrary.isLoaded() && !NativeOsmandLibrary.isSupported()) {
+	    	nativeCheckbox.setEnabled(false);
+	    }
 	    
 		registerEditTextPreference(osmandSettings.USER_NAME, screen);
 		registerEditTextPreference(osmandSettings.USER_PASSWORD, screen);

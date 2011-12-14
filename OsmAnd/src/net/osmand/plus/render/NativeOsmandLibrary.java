@@ -9,7 +9,7 @@ import android.graphics.Bitmap;
 public class NativeOsmandLibrary {
 
 	private static NativeOsmandLibrary library;
-	private static boolean isNativeSupported = true;
+	private static Boolean isNativeSupported = null;
 
 	public static NativeOsmandLibrary getLibrary(RenderingRulesStorage storage) {
 		if (!isLoaded()) {
@@ -19,6 +19,7 @@ public class NativeOsmandLibrary {
 						System.loadLibrary("osmand");
 						library = new NativeOsmandLibrary();
 						NativeOsmandLibrary.initRenderingRulesStorage(storage);
+						isNativeSupported = true;
 					} catch (Throwable e) {
 						isNativeSupported = false;
 					}
@@ -29,15 +30,20 @@ public class NativeOsmandLibrary {
 		return library;
 	}
 	
-	public static boolean isLoaded(){
-		return !isNativeSupported || library != null;  
+	public static boolean isSupported()
+	{
+		return isNativeSupported != null && isNativeSupported;
+	}
+	
+	public static boolean isLoaded() {
+		return isNativeSupported != null;  
 	}
 	
 	public static boolean isNativeSupported(RenderingRulesStorage storage) {
 		if(storage != null) {
 			getLibrary(storage);
 		}
-		return isNativeSupported;
+		return isSupported();
 	}
 
 	public String generateRendering(RenderingContext rc, NativeSearchResult searchResultHandler, Bitmap bmp,

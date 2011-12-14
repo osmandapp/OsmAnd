@@ -10,7 +10,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.render.MapRenderRepositories;
-import net.osmand.plus.render.NativeOsmandLibrary;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
