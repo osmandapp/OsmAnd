@@ -74,7 +74,7 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 					int x = view.getRotatedMapXForPoint(o.getLatitude(), o.getLongitude());
 					int y = view.getRotatedMapYForPoint(o.getLatitude(), o.getLongitude());
 					canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2, 
-							y - favoriteIcon.getHeight() , paint);
+							y - favoriteIcon.getHeight() / 2, paint);
 				}
 			}
 		}
