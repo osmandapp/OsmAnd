@@ -19,6 +19,8 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -109,8 +111,11 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 	public void initUI(double latitude, double longitude){
 		latitude = MapUtils.checkLatitude(latitude);
 		longitude = MapUtils.checkLongitude(longitude);
-		((TextView)findViewById(R.id.LatitudeEdit)).setText(convert(latitude, Location.FORMAT_DEGREES));
-		((TextView)findViewById(R.id.LongitudeEdit)).setText(convert(longitude, Location.FORMAT_DEGREES));
+		final TextView latEdit = ((TextView)findViewById(R.id.LatitudeEdit));
+		final TextView lonEdit = ((TextView)findViewById(R.id.LongitudeEdit));
+		currentFormat = Location.FORMAT_DEGREES;
+		latEdit.setText(convert(latitude, Location.FORMAT_DEGREES));
+		lonEdit.setText(convert(longitude, Location.FORMAT_DEGREES));
 		((RadioButton)findViewById(R.id.Format1)).setChecked(true);
 		((RadioGroup)findViewById(R.id.RadioGroup)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
 
@@ -124,12 +129,13 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 				} else if(checkedId == R.id.Format3){
 					newFormat = Location.FORMAT_SECONDS;
 				}
+				currentFormat = newFormat;
 				try { 
 					double lat = convert(((TextView) findViewById(R.id.LatitudeEdit)).getText().toString());
 					double lon = convert(((TextView) findViewById(R.id.LongitudeEdit)).getText().toString());
 					((TextView) findViewById(R.id.ValidateTextView)).setVisibility(View.INVISIBLE);
-					((TextView)findViewById(R.id.LatitudeEdit)).setText(convert(lat, newFormat));
-					((TextView)findViewById(R.id.LongitudeEdit)).setText(convert(lon, newFormat));
+					latEdit.setText(convert(lat, newFormat));
+					lonEdit.setText(convert(lon, newFormat));
 				} catch (RuntimeException e) {
 					((TextView) findViewById(R.id.ValidateTextView)).setVisibility(View.VISIBLE);
 					((TextView) findViewById(R.id.ValidateTextView)).setText(R.string.invalid_locations);
@@ -154,6 +160,21 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 				showOnMap(false);
 			}
 		});
+		TextWatcher textWatcher = new TextWatcher() {
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			}
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				
+			}
+		};
+		latEdit.addTextChangedListener(textWatcher);
+		lonEdit.addTextChangedListener(textWatcher);
 	}
 	
 	public void showOnMap(boolean navigate){
