@@ -1,9 +1,8 @@
 package net.osmand.binary;
 
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.TIntObjectMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
 import static net.osmand.binary.BinaryMapIndexReader.TRANSPORT_STOP_ZOOM;
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.io.IOException;
 import java.util.Arrays;

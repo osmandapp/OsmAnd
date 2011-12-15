@@ -1,12 +1,5 @@
 package net.osmand.data.index;
 
-import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT;
-import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
-import static net.osmand.data.IndexConstants.BINARY_MAP_VERSION;
-import static net.osmand.data.IndexConstants.VOICE_INDEX_EXT_ZIP;
-import static net.osmand.data.IndexConstants.VOICE_VERSION;
-
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -18,10 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import net.osmand.LogUtil;

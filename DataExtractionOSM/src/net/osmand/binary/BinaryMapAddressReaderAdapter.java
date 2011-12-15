@@ -3,15 +3,14 @@ package net.osmand.binary;
 import java.io.IOException;
 import java.util.List;
 
-import net.osmand.ResultMatcher;
 import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Building;
 import net.osmand.data.City;
+import net.osmand.data.City.CityType;
 import net.osmand.data.MapObject;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
-import net.osmand.data.City.CityType;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.sf.junidecode.Junidecode;
