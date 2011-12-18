@@ -181,7 +181,7 @@
 	<string name="invalid_locations">Los lugares no son válidos</string>
 	<string name="items_were_selected">Se seleccionó {0} artículos</string>
 	<string name="layer_favorites">Favoritos</string>
-	<string name="layer_gpx_layer">Trazas GPX...</string>
+	<string name="layer_gpx_layer">Traza GPX...</string>
 	<string name="layer_map">Fuente de mapas...</string>
 	<string name="layer_osm_bugs">Fallos en Osm</string>
 	<string name="layer_poi">POI...</string>

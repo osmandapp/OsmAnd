@@ -400,7 +400,7 @@
 
 	<string name="map_route_by_gpx">Percorso tramite GPX</string>
 	<string name="gpx_files_not_found">File GPX non trovato nella cartella /tracks</string>
-	<string name="layer_gpx_layer">percorsi GPX...</string>
+	<string name="layer_gpx_layer">percorso GPX...</string>
 	<string name="error_reading_gpx">Errore lettura dati GPX</string>
 
 	<string name="vector_data">Mappe vettoriali offline</string>

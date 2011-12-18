@@ -429,7 +429,7 @@
 	
 	<string name="map_route_by_gpx">Route using GPX</string>
 	<string name="gpx_files_not_found">GPX files not found in /tracks directory</string>
-	<string name="layer_gpx_layer">GPX tracks...</string>
+	<string name="layer_gpx_layer">GPX track...</string>
 	<string name="error_reading_gpx">Error reading GPX data</string>
 
 	<string name="vector_data">Offline vector maps</string>

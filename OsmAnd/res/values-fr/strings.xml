@@ -403,7 +403,7 @@
 <string name="no_vector_map_loaded">Aucune carte vectorielle n\'a été chargée</string>
 <string name="map_route_by_gpx">Itinéraires GPX enregistrés</string>
 <string name="gpx_files_not_found">Aucun fichier GPX n\'a été trouvé dans le dossier /osmand/tracks</string>
-<string name="layer_gpx_layer">Traces GPX...</string>
+<string name="layer_gpx_layer">Trace GPX...</string>
 <string name="error_reading_gpx">Erreur de lecteur des données GPX</string>
 <string name="vector_data">Cartes vectorielles OSM</string>
 <string name="transport_context_menu">Chercher transport à l\'arrivée</string>
