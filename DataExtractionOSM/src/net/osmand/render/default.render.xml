@@ -19,8 +19,8 @@
 
 	<!-- 0 - no shadow, 1 - one step, 2 - blur shadow, 3 - solid shadow -->	
 	<renderingAttribute name="shadowRendering">
-			<!-- next line corrects for shadowColor appearing very dark with solid shadow in day view -->
-		<filter minzoom="14" nightMode="false" attrIntValue="3" shadowColor="#8E8E8E"/>
+		 <!-- next line corrects for shadowColor appearing very dark with solid shadow in day view -->
+		 <filter minzoom="14" nightMode="false" attrIntValue="3" shadowColor="#8E8E8E"/>
 		<filter minzoom="14" attrIntValue="3" shadowColor="#3E3E3E"/>
 		<filter minzoom="9" maxzoom="13" attrIntValue="1" shadowColor="#3E3E3E"/>
 		<filter attrIntValue="0"/>
@@ -225,8 +225,7 @@
 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom], textLength, ref, textOrder (default=100) -->
 	<text>
 		<!-- Highway refs -->
-		<filter minzoom="10" tag="highway" value="motorway" ref="true" textMinDistance="150" textColor="#ffffff" textSize="12" textBold="true"
-				textOrder="7">
+		<filter minzoom="10" tag="highway" value="motorway" ref="true" textMinDistance="150" textColor="#ffffff" textSize="12" textBold="true" textOrder="7">
 			<filter textLength="1" textShield="mot_shield1"/>
 			<filter textLength="2" textShield="mot_shield2"/>
 			<filter textLength="3" textShield="mot_shield3"/>
@@ -234,8 +233,7 @@
 			<filter textLength="5" textShield="mot_shield5"/>
 			<filter textLength="6" textShield="mot_shield6"/>
 		</filter>
-		<filter minzoom="10" tag="highway" value="trunk" ref="true" textMinDistance="150" textColor="#ffffff" textSize="12" textBold="true"
-				textOrder="7">
+		<filter minzoom="10" tag="highway" value="trunk" ref="true" textMinDistance="150" textColor="#ffffff" textSize="12" textBold="true" textOrder="7">
 			<filter textLength="1" textShield="tru_shield1"/>
 			<filter textLength="2" textShield="tru_shield2"/>
 			<filter textLength="3" textShield="tru_shield3"/>
@@ -243,8 +241,7 @@
 			<filter textLength="5" textShield="tru_shield5"/>
 			<filter textLength="6" textShield="tru_shield6"/>
 		</filter>
-		<filter minzoom="11" tag="highway" value="primary" ref="true" textMinDistance="150" textColor="#ffffff" textSize="12" 
-				textBold="true" textOrder="8">
+		<filter minzoom="11" tag="highway" value="primary" ref="true" textMinDistance="150" textColor="#ffffff" textSize="12" textBold="true" textOrder="8">
 			<filter textLength="1" textShield="pri_shield1"/>
 			<filter textLength="2" textShield="pri_shield2"/>
 			<filter textLength="3" textShield="pri_shield3"/>
@@ -252,8 +249,7 @@
 			<filter textLength="5" textShield="pri_shield5"/>
 			<filter textLength="6" textShield="pri_shield6"/>
 		</filter>
-		<filter minzoom="13" tag="highway" value="secondary" ref="true" textMinDistance="150" textColor="#ffffff" textSize="12" 
-				textBold="true" textOrder="9">
+		<filter minzoom="13" tag="highway" value="secondary" ref="true" textMinDistance="150" textColor="#ffffff" textSize="12" textBold="true" textOrder="9">
 			<filter textLength="1" textShield="sec_shield1"/>
 			<filter textLength="2" textShield="sec_shield2"/>
 			<filter textLength="3" textShield="sec_shield3"/>
@@ -261,8 +257,7 @@
 			<filter textLength="5" textShield="sec_shield5"/>
 			<filter textLength="6" textShield="sec_shield6"/>
 		</filter>
-		<filter minzoom="14" tag="highway" value="tertiary" ref="true" textMinDistance="150" textColor="#ffffff" textSize="12" 
-				textBold="true" textOrder="10">
+		<filter minzoom="14" tag="highway" value="tertiary" ref="true" textMinDistance="150" textColor="#ffffff" textSize="12" textBold="true" textOrder="10">
 			<filter textLength="1" textShield="ter_shield1"/>
 			<filter textLength="2" textShield="ter_shield2"/>
 			<filter textLength="3" textShield="ter_shield3"/>
