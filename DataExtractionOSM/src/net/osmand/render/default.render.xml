@@ -10,6 +10,8 @@
 	<!-- Types : string, int, boolean; possibleValues comma separated possible values for int/string -->
 	<renderingProperty attr="hmRendered" name="Show more map detail" description="Default renderer: Increase amount of map detail shown"
 		type="boolean" possibleValues=""/>
+	<!-- renderingProperty attr="contourLines" name="Show contour lines" description="Default renderer: Display contour lines in map if available"
+		type="boolean" possibleValues=""/ -->
 	<renderingProperty attr="appMode" name="Rendering mode" description="Default renderer: Adjust rendering for specific purpose"
 		type="string" possibleValues="default,car,bicycle,pedestrian"/>
 	<renderingProperty attr="noPolygons" name="No polygons" description="Default renderer: Make areal map objects transparent"
@@ -733,7 +735,6 @@
 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
 	<polygon>
 		<!-- Polygon highways -->
-		<!-- ZM 14 -->
 		<group>
 			<filter tag="highway" value="road"/>
 			<filter tag="highway" value="unclassified"/>
@@ -786,7 +787,6 @@
 
 
 		<!-- Forest, night color 000034 -->
-		<!-- ZM10 -->
 		<group>
 			<filter minzoom="9" color="#aed1a0" tag="natural" value="wood"/>
 			<filter minzoom="9" color="#aed1a0" tag="landuse" value="wood"/>
@@ -908,7 +908,6 @@
 		<filter nightMode="true" minzoom="9" shader="glacier" color="#100000" color_2="#497CAF" strokeWidth_2="2" tag="natural" value="glacier"/>
 		<filter minzoom="9" shader="glacier" color="#100000" color_2="#99ccff" strokeWidth_2="2" tag="natural" value="glacier"/>
 		<filter minzoom="10" shader="danger" color="#100000" tag="military" value="danger_area"/>
-		<!-- ZM 10 -->
 		<filter minzoom="9" shader="nr2" color="#abdf96" color_2="#66cc33" strokeWidth_2="1" tag="leisure" value="nature_reserve"/>
 	</polygon>
 
