@@ -415,7 +415,7 @@
 
 <string name="map_route_by_gpx">Trasa z wykorzystaniem GPX</string>
 <string name="gpx_files_not_found">GPX files not found in /tracks directory</string>
-<string name="layer_gpx_layer">Ślady GPX...</string>
+<string name="layer_gpx_layer">Ślad GPX...</string>
 <string name="error_reading_gpx">Błąd odczytu danych GPX</string>
 
 <string name="vector_data">Mapy wektorowe offline</string>

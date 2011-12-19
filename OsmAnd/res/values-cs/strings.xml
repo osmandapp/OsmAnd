@@ -666,7 +666,7 @@
   <string name="no_vector_map_loaded">Vektorové mapy nebyly načteny</string>
   <string name="map_route_by_gpx">Cestovat podle GPX</string>
   <string name="gpx_files_not_found">Soubory GPX nebyly nalezeny v adresáři /osmand/tracks</string>
-  <string name="layer_gpx_layer">GPX trasy...</string>
+  <string name="layer_gpx_layer">GPX trasa...</string>
   <string name="error_reading_gpx">Chyba při načítání dat GPX</string>
 
   <string name="vector_data">Vektorové mapy OSM</string>

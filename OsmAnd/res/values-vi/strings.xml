@@ -411,7 +411,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	
 	<string name="map_route_by_gpx">Tìm đường bằng tập tin GPX</string>
 	<string name="gpx_files_not_found">Tập tin GPX không tìm thấy trong thư mục /track</string>
-	<string name="layer_gpx_layer">Tracks GPX...</string>
+	<string name="layer_gpx_layer">Track GPX...</string>
 	<string name="error_reading_gpx">Gặp lỗi khi đọc tập tin GPX</string>
 
 	<string name="vector_data">Bản đồ vector Offline</string>

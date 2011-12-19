@@ -360,7 +360,7 @@
 	<string name="no_vector_map_loaded">Векторные карты не загружены в приложение</string>
 	<string name="map_route_by_gpx">Навигация по GPX</string>
 	<string name="gpx_files_not_found">GPX файлы были не найдены в /osmand/tracks директории</string>
-	<string name="layer_gpx_layer">GPX треки...</string>
+	<string name="layer_gpx_layer">GPX трек...</string>
 	<string name="error_reading_gpx">Ошибка при чтении gpx файла</string>
 	<string name="vector_data">Векторные osm карты</string>
 	

@@ -407,7 +407,7 @@
 	<string name="no_vector_map_loaded">Nincs betöltött vektoros térkép</string>
 	<string name="map_route_by_gpx">Útvonal GPX alapján</string>
 	<string name="gpx_files_not_found">Nem található GPX fálj /osmand/tracks könyvtárban</string>
-	<string name="layer_gpx_layer">GPX nyomok...</string>
+	<string name="layer_gpx_layer">GPX nyom...</string>
 	<string name="error_reading_gpx">GPX adat olvasási hiba</string>
 
 	<string name="vector_data">Vektoros OSM térkép</string>

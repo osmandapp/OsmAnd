@@ -414,7 +414,7 @@
 
 <string name="map_route_by_gpx">Cestovať použítim GPX</string>
 <string name="gpx_files_not_found">GPX súbory neboli nájdene v adresári /osmand/tracks</string>
-<string name="layer_gpx_layer">GPX záznamy</string>
+<string name="layer_gpx_layer">GPX záznam...</string>
 <string name="error_reading_gpx">Chyba pri načítavaní GPX údajov</string>
 
 <string name="vector_data">Vektorové OSM mapy</string>
