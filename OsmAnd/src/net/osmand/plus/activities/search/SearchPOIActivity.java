@@ -855,11 +855,11 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		
 		public void setOpenedColor(int opened){
 			if(opened == 0){
-				paintRouteDirection.setColor(Color.rgb(100, 0, 255));
+				paintRouteDirection.setColor(Color.rgb(0, 205, 0));
 			} else if(opened == -1){
 				paintRouteDirection.setColor(Color.rgb(150, 150, 150));
 			} else {
-				paintRouteDirection.setColor(Color.rgb(220, 100, 80));
+				paintRouteDirection.setColor(Color.rgb(238, 0, 0));
 			}
 		}
 		
