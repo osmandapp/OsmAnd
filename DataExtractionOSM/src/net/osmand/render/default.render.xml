@@ -751,8 +751,10 @@
 			<filter tag="highway" value="service"/>
 			<filter tag="highway" value="pedestrian"/>
 			<filter tag="highway" value="footway"/>
-			<groupFilter minzoom="14" color="#ECECEC" color_2="#3E3E3E" strokeWidth_2="0.5"/>
-			<groupFilter hmRendered="true" minzoom="13" color="#ECECEC" color_2="#3E3E3E" strokeWidth_2="0.5"/>
+			<groupFilter>
+				<filter minzoom="14" color="#ECECEC" color_2="#3E3E3E" strokeWidth_2="0.5"/>
+				<filter hmRendered="true" minzoom="13" color="#ECECEC" color_2="#3E3E3E" strokeWidth_2="0.5"/>
+			</groupFilter>
 		</group>
 
 		<!-- Polygon railway -->
@@ -973,7 +975,7 @@
 			<filter tag="highway" value="secondary_link" color="#fdd6a4" color_2="#fdd6a4"/>
 			<groupFilter shadowRadius="1" cap="ROUND">
 				<!-- Bridges -->
-				<filter layer="1" cap_2="SQUARE" color="#000000" shadowRadius="0" cap="BUTT">
+				<filter layer="1" color="#000000" shadowRadius="0" cap="BUTT" cap_2="SQUARE">
 					<filter minzoom="14" maxzoom="15" strokeWidth="14" strokeWidth_2="12"/>
 					<filter minzoom="16" maxzoom="16" strokeWidth="17" strokeWidth_2="15"/>
 					<filter minzoom="17" maxzoom="17" strokeWidth="21" strokeWidth_2="19"/>
@@ -1000,7 +1002,7 @@
 				<filter minzoom="12" maxzoom="12" strokeWidth="5"/>
 				<filter minzoom="13" maxzoom="13" strokeWidth="6"/>
 				<!-- Bridges --> 
-				<filter layer="1" cap_2="SQUARE" color="#000000" shadowRadius="0" cap="BUTT">
+				<filter layer="1" color="#000000" shadowRadius="0" cap="BUTT" cap_2="SQUARE">
 					<filter minzoom="13" maxzoom="14" strokeWidth="8" strokeWidth_2="6"/>
 					<filter minzoom="15" maxzoom="15" strokeWidth="10" strokeWidth_2="8"/>
 					<filter minzoom="16" maxzoom="16" strokeWidth="12" strokeWidth_2="10"/>
@@ -1031,7 +1033,7 @@
 					<filter nightMode="true" color="#9F9F9F" color_2="#9F9F9F"/>
 				</filter>
 				<!-- Bridges --> 
-				<filter layer="1" cap_2="SQUARE" color="#000000" shadowRadius="0" cap="BUTT">
+				<filter layer="1" color="#000000" shadowRadius="0" cap="BUTT" cap_2="SQUARE">
 					<filter minzoom="14" maxzoom="14" strokeWidth="8" strokeWidth_2="6"/>
 					<filter minzoom="15" maxzoom="15" strokeWidth="10" strokeWidth_2="8"/>
 					<filter minzoom="16" maxzoom="16" strokeWidth="12" strokeWidth_2="10"/>
@@ -1045,9 +1047,11 @@
 					<filter minzoom="16" maxzoom="16" strokeWidth="10"/>
 					<filter minzoom="17" maxzoom="17" strokeWidth="13"/>
 					<filter minzoom="18" strokeWidth="18"/>
-					<groupFilter layer="-1" pathEffect="4_4" shadowRadius="0" cap="BUTT"/>
-					<groupfilter layer="-1" nightmode="true" color="#9F9F9F" color_2="#9F9F9F" pathEffect="4_4" shadowRadius="0" cap="BUTT"/>
-					<groupFilter nightMode="true" color="#9F9F9F" color_2="#9F9F9F"/>
+					<groupFilter>
+						<filter layer="-1" nightMode="true" color="#9F9F9F" color_2="#9F9F9F" pathEffect="4_4" shadowRadius="0" cap="BUTT"/>
+						<filter layer="-1" pathEffect="4_4" shadowRadius="0" cap="BUTT"/>
+						<filter nightMode="true" color="#9F9F9F" color_2="#9F9F9F"/>
+					</groupFilter>
 				</filter>
 			</groupFilter>
 		</group>
@@ -1060,7 +1064,7 @@
 				<filter hmRendered="true" minzoom="13" maxzoom="13" strokeWidth="2"/>
 				<filter hmRendered="true" minzoom="14" maxzoom="14" strokeWidth="3"/>
 				<!-- Bridges --> 
-				<filter layer="1" color="#000000" cap_2="SQUARE" cap="BUTT">
+				<filter layer="1" color="#000000" shadowRadius="0" cap="BUTT" cap_2="SQUARE">
 					<filter hmRendered="true" minzoom="13" maxzoom="14" strokeWidth="5" strokeWidth_2="3"/>
 					<filter minzoom="15" maxzoom="15" strokeWidth="6" strokeWidth_2="4"/>
 					<filter minzoom="16" maxzoom="16" strokeWidth="7" strokeWidth_2="5"/>
@@ -1128,8 +1132,10 @@
 			</filter>
 
 			<!-- Bridges -->
-			<groupFilter layer="1" nightMode="false" minzoom="14" color="#000000" strokeWidth="6.5" pathEffect="" color_2="#ffffff" strokeWidth_2="5"/>
-			<groupFilter layer="1" nightMode="true" minzoom="14" color="#ffffff" strokeWidth="6.5" pathEffect="" color_2="#000000" strokeWidth_2="5"/>
+			<groupFilter layer="1">
+				<filter nightMode="false" minzoom="14" color="#000000" strokeWidth="6.5" pathEffect="" color_2="#ffffff" strokeWidth_2="5"/>
+				<filter nightMode="true" minzoom="14" color="#ffffff" strokeWidth="6.5" pathEffect="" color_2="#000000" strokeWidth_2="5"/>
+			</groupFilter>
 		</group>
 
 		<filter tag="highway" value="services" minzoom="14" color="#000000" strokeWidth="2"/>
