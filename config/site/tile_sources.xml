@@ -24,9 +24,10 @@
    <tile_source name="OpenPisteMap" url_template="http://openpistemap.org/tiles/contours/{0}/{1}/{2}.png" ext=".png" min_zoom="5" max_zoom="17" tile_size="256" img_density="32" avg_img_size="18000"/>
    <tile_source name="Relief" url_template="http://www.maps-for-free.com/layer/relief/z{0}/row{2}/{0}_{1}-{2}.jpg" ext=".jpg" min_zoom="1" max_zoom="12" tile_size="256" img_density="32" avg_img_size="24000"/>
 
-
+<!--
    <tile_source name="Cykloatlas CZ" url_template="http://services.tmapserver.cz/tiles/gm/shc/{0}/{1}/{2}.png" ext=".png" min_zoom="7" max_zoom="16" tile_size="256" img_density="16" avg_img_size="26000"/>
    <tile_source name="Cykloatlas CZ HillShade" url_template="http://services.tmapserver.cz/tiles/gm/sum/{0}/{1}/{2}.png" ext=".png" min_zoom="7" max_zoom="15" tile_size="256" img_density="16" avg_img_size="26000"/>
+-->
 
    <tile_source name="MTB Map CZ" url_template="http://tchor.fi.muni.cz:8080/mtbmap_tiles/{0}/{1}/{2}.png" ext=".png" min_zoom="7" max_zoom="16" tile_size="256" img_density="32" avg_img_size="18000"/>
 
