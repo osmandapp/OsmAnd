@@ -428,24 +428,24 @@ public class RouteProvider {
 			}
 			
 			
-			if(delta > 50 && delta < 310){
+			if(delta > 45 && delta < 315){
 				
-				if(delta < 70){
+				if(delta < 60){
 					type = TurnType.valueOf(TurnType.TSLL);
 					description = getString(ctx, R.string.route_tsll);
-				} else if(delta < 110){
+				} else if(delta < 120){
 					type = TurnType.valueOf(TurnType.TL);
 					description = getString(ctx, R.string.route_tl);
-				} else if(delta < 135){
+				} else if(delta < 150){
 					type = TurnType.valueOf(TurnType.TSHL);
 					description = getString(ctx, R.string.route_tshl);
-				} else if(delta < 225){
+				} else if(delta < 210){
 					type = TurnType.valueOf(TurnType.TU);
 					description = getString(ctx, R.string.route_tu);
-				} else if(delta < 250){
+				} else if(delta < 240){
 					description = getString(ctx, R.string.route_tshr);
 					type = TurnType.valueOf(TurnType.TSHR);
-				} else if(delta < 290){
+				} else if(delta < 300){
 					description = getString(ctx, R.string.route_tr);
 					type = TurnType.valueOf(TurnType.TR);
 				} else {
