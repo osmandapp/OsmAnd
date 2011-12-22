@@ -10,8 +10,8 @@
 	<!-- Types : string, int, boolean; possibleValues comma separated possible values for int/string -->
 	<renderingProperty attr="hmRendered" name="Show more map detail" description="Default renderer: Increase amount of map detail shown"
 		type="boolean" possibleValues=""/>
-	<!-- renderingProperty attr="contourLines" name="Show contour lines" description="Default renderer: Display contour lines in map if available"
-		type="boolean" possibleValues=""/ -->
+	<renderingProperty attr="contourLines" name="Show contour lines" description="Default renderer: Display in map if available (zoom level 14 and up). Separate SRTM-file may be needed."
+		type="boolean" possibleValues=""/>
 	<renderingProperty attr="appMode" name="Rendering mode" description="Default renderer: Adjust rendering for specific purpose"
 		type="string" possibleValues="default,car,bicycle,pedestrian"/>
 	<renderingProperty attr="noPolygons" name="No polygons" description="Default renderer: Make areal map objects transparent"
@@ -337,7 +337,7 @@
 				</groupFilter>
 			</groupFilter>
 		</group>
-		<filter tag="highway" value="motorway_junction" textColor="#00008b" textWrapWidth="16" textMinDistance="10" textHaloRadius="1" textOrder="6">
+		<filter tag="highway" value="motorway_junction" textColor="#00008b" textHaloRadius="1" textWrapWidth="16" textMinDistance="10" textOrder="6">
 			<filter appMode="car" minzoom="13" maxzoom="13" textSize="16" ref="true"/>
 			<filter appMode="car" minzoom="14" textSize="16" ref="false"/>
 			<filter minzoom="14" textSize="14" ref="false"/>
@@ -348,8 +348,8 @@
 		<filter minzoom="4" textSize="14" textColor="#9d6c9d" textWrapWidth="20" tag="place" value="state"/>
 		<filter minzoom="4" textSize="14" textColor="#9d6c9d" textWrapWidth="20" tag="place" value="region"/>
 		<group textColor="#000000">
-			<filter minzoom="4" textSize="20" textDy="1" textBold="true" textWrapWidth="20" tag="place" value="city" textOrder="4"/>
-			<filter minzoom="6" textSize="16" textDy="1" textBold="true" textWrapWidth="20" tag="place" value="town" textOrder="5"/>
+			<filter minzoom="4" textSize="20" textBold="true" textDy="1" textWrapWidth="20" tag="place" value="city" textOrder="4"/>
+			<filter minzoom="6" textSize="16" textBold="true" textDy="1" textWrapWidth="20" tag="place" value="town" textOrder="5"/>
 			<filter minzoom="11" textSize="14" tag="place" value="village" textOrder="10"/>
 			<groupFilter nightMode="true" textColor="#ffffff"/>
 		</group>
@@ -358,15 +358,16 @@
 			<filter minzoom="11" textSize="14" tag="place" value="suburb" textOrder="12"/>
 			<filter minzoom="11" textSize="13" tag="place" value="locality" textOrder="15"/>
 			<filter minzoom="11" textSize="14" tag="place" value="island" textOrder="10"/>
-			<filter minzoom="10" textSize="14" textBold="true" textColor="#99cc99" textWrapWidth="14" tag="boundary" value="national_park" textOrder="10"/>
+			<filter minzoom="10" textSize="14" textColor="#99cc99" textBold="true" textWrapWidth="14" tag="boundary" value="national_park" textOrder="10"/>
 			<groupFilter nightMode="true" textColor="#D7D7D7"/>
 		</group>
 
 		<!-- Natural -->
-		<filter minzoom="14" maxzoom="16" textSize="12" textOnPath="true" tag="contour" value=""/>
+		<filter contourLines="true" nightMode="false" minzoom="14" maxzoom="16" textSize="12" textColor="#444444" textOnPath="true" tag="contour" value=""/>
+			<filter contourLines="true" nightMode="true" minzoom="14" maxzoom="16" textSize="12" textColor="#777777" textOnPath="true" tag="contour" value=""/>
 		<filter minzoom="13" textSize="12" textColor="#000000" textWrapWidth="10" tag="natural" value="wood" textOrder="10"/>
 		<filter minzoom="15" textSize="12" textColor="#09dd09" textWrapWidth="15" tag="natural" value="park" textOrder="10"/>
-		<filter minzoom="14" textSize="12" textHaloRadius="1" textColor="#6699cc" textWrapWidth="20" tag="natural" value="beach" textOrder="10"/>
+		<filter minzoom="14" textSize="12" textColor="#6699cc" textHaloRadius="1" textWrapWidth="20" tag="natural" value="beach" textOrder="10"/>
 		<group>
 			<filter minzoom="12" maxzoom="14" textSize="12" textHaloRadius="1" textDy="7" tag="natural" value="peak" textOrder="10"/>
 			<filter minzoom="15" maxzoom="16" textSize="13" textHaloRadius="1" textDy="7" tag="natural" value="peak" textOrder="15"/>
@@ -388,24 +389,24 @@
 		<filter minzoom="15" textSize="12" textColor="#6699cc" textOnPath="true" tag="waterway" value="drain" textOrder="15"/>
 		<filter minzoom="15" textSize="12" textColor="#6699cc" textDy="7" textWrapWidth="30" tag="waterway" value="lock_gate" textOrder="15"/>
 		<filter minzoom="15" textSize="12" textColor="#6699cc" textDy="7" textWrapWidth="30" tag="waterway" value="lock" textOrder="15"/>
-		<filter minzoom="15" textSize="12" tag="waterway" value="dam" textOrder="15"/>
+		<filter minzoom="15" textSize="12" textColor="#6699cc" tag="waterway" value="dam" textOrder="15"/>
 		<filter minzoom="16" textSize="12" textColor="#6699cc" textDy="7" textWrapWidth="20" tag="natural" value="spring" textOrder="15"/>
 
 		<filter minzoom="13" textSize="12" textColor="#6699cc" textWrapWidth="20" tag="landuse" value="water"/>
 		<filter minzoom="13" textSize="12" textColor="#6699cc" textWrapWidth="20" tag="landuse" value="reservoir"/>
 
 		<!-- Railroad -->
-		<filter minzoom="14" maxzoom="14" textSize="12" textBold="true" textColor="#6666ff" textDy="7" tag="railway" value="station"/>
-			<filter minzoom="15" textSize="13" textHaloRadius="1" textBold="true" textColor="#6666ff" textDy="7" tag="railway" value="station"/>
+		<filter minzoom="14" maxzoom="14" textSize="12" textColor="#6666ff" textBold="true" textDy="7" tag="railway" value="station"/>
+			<filter minzoom="15" textSize="13" textColor="#6666ff" textHaloRadius="1" textBold="true" textDy="7" tag="railway" value="station"/>
 		<filter minzoom="14" maxzoom="14" textSize="12" textColor="#6666ff" textDy="7" tag="railway" value="halt"/>
-			<filter minzoom="15" textSize="12" textHaloRadius="1" textColor="#6666ff" textDy="7" tag="railway" value="halt"/>
-			<filter minzoom="15" textSize="12" textHaloRadius="1" textColor="#6666ff" textDy="7" tag="railway" value="tram_stop"/>
+			<filter minzoom="15" textSize="12" textColor="#6666ff" textHaloRadius="1" textDy="7" tag="railway" value="halt"/>
+			<filter minzoom="15" textSize="12" textColor="#6666ff" textHaloRadius="1" textDy="7" tag="railway" value="tram_stop"/>
 
 		<!-- Aeroway -->
 		<filter minzoom="11" textSize="12" textColor="#6692da" textDy="7" tag="aeroway" value="aerodrome"/>
 		<filter minzoom="14" textSize="12" textColor="#333333" textOnPath="true" textMinDistance="50" tag="aeroway" value="runway" ref="true"/>
 		<filter minzoom="15" textSize="12" textColor="#333333" textOnPath="true" textMinDistance="50" tag="aeroway" value="taxiway" ref="true"/>
-		<filter minzoom="10" textSize="12" textBold="true" textColor="#6692da" textDy="7" tag="aeroway" value="airport"/>
+		<filter minzoom="10" textSize="12" textColor="#6692da" textBold="true" textDy="7" tag="aeroway" value="airport"/>
 		<filter minzoom="17" textSize="12" textColor="#aa66cc" textWrapWidth="10" tag="aeroway" value="gate" ref="true"/>
 		<filter minzoom="14" textSize="12" textColor="#6666ff" textDy="7" tag="aerialway" value="station"/>
 
@@ -413,15 +414,13 @@
 		<filter minzoom="16" maxzoom="17" textSize="13" textColor="#444444" textWrapWidth="16" textMinDistance="40" tag="building" value=""/>
 			<filter minzoom="18" textSize="15" textColor="#444444" textWrapWidth="16" tag="building" value=""/>
 		<filter minzoom="18" textSize="15" textColor="#444444" textWrapWidth="16" tag="addr:housenumber" value=""/>
-		<filter minzoom="15" textSize="12" textColor="#000033" textDy="7" textWrapWidth="12" tag="man_made" value="lighthouse"/>
+		<filter minzoom="15" textSize="12" textColor="#6699cc" textHaloRadius="1" textDy="7" textWrapWidth="12" tag="man_made" value="lighthouse"/>
 		<filter minzoom="16" textSize="12" textColor="#734a08" textDy="7" textWrapWidth="20" tag="man_made" value="windmill"/>
 		<filter minzoom="15" textSize="12" textColor="#734a08" textHaloRadius="1" textWrapWidth="30" tag="historic" value="castle"/>
-		<filter minzoom="16" textSize="12" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="historic" value="memorial" textColor="#654321">
-			<filter nightMode="true" textColor="#CC3300"/>
-		</filter>
+		<filter minzoom="16" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="historic" value="memorial"/>
 
 		<filter minzoom="14" textSize="12" textColor="#0000ff" textWrapWidth="30" tag="leisure" value="marina"/>
-		<filter minzoom="15" textSize="12" textHaloRadius="1" textWrapWidth="15" tag="leisure" value=""/>
+		<filter minzoom="15" textSize="12" textColor="#000033" textHaloRadius="1" textWrapWidth="15" tag="leisure" value=""/>
 		<filter minzoom="16" textSize="12" textColor="#734a08" textDy="7" textWrapWidth="30" tag="amenity" value="fire_station"/>
 		<group>
 			<filter tag="amenity" value="restaurant"/>
@@ -436,15 +435,15 @@
 		<filter minzoom="16" textSize="12" textColor="#000033" textWrapWidth="16" tag="amenity" value="kindergarten"/>
 		<filter minzoom="16" textSize="12" textColor="#000033" textDy="7" textWrapWidth="16" tag="amenity" value="school"/>
 		<filter minzoom="15" textSize="12" textColor="#000033" textDy="7" textWrapWidth="16" tag="amenity" value="college"/>
-		<filter minzoom="17" textSize="12" textBold="true" textColor="#734a08" textWrapWidth="16" textDy="7" tag="amenity" value="library"/>
-		<filter minzoom="15" textSize="12" textBold="true" textColor="#000033" textWrapWidth="16" tag="amenity" value="university"/>
+		<filter minzoom="17" textSize="12" textColor="#734a08" textBold="true" textWrapWidth="16" textDy="7" tag="amenity" value="library"/>
+		<filter minzoom="15" textSize="12" textColor="#000033" textBold="true" textWrapWidth="16" tag="amenity" value="university"/>
 
 		<filter minzoom="17" textSize="12" textColor="#0066ff" textDy="7" textWrapWidth="34" tag="amenity" value="parking"/>
 		<filter minzoom="17" textSize="12" textColor="#0066ff" textDy="7" tag="amenity" value="fuel"/>
 		<filter minzoom="16" textSize="12" textColor="#0066ff" textDy="7" tag="amenity" value="bus_station"/>
 
-		<filter minzoom="17" textSize="12" textHaloRadius="1" textDy="7" tag="amenity" value="bank"/>
-		<filter minzoom="17" textSize="12" textHaloRadius="1" textDy="7" tag="amenity" value="bureau_de_change"/>
+		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" tag="amenity" value="bank"/>
+		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" tag="amenity" value="bureau_de_change"/>
 		<filter minzoom="17" textSize="12" textColor="#da0092" textHaloRadius="1" textDy="7" textWrapWidth="12" tag="amenity" value="pharmacy"/>
 		<filter minzoom="16" textSize="12" textColor="#da0092" textHaloRadius="1" textDy="7" textWrapWidth="24" tag="amenity" value="hospital"/>
 		<filter minzoom="16" textSize="12" textColor="#da0092" textHaloRadius="1" textDy="7" textWrapWidth="24" tag="amenity" value="veterinary"/>
@@ -452,8 +451,8 @@
 		<filter minzoom="16" textSize="12" textColor="#da0092" textHaloRadius="1" textDy="7" textWrapWidth="24" tag="amenity" value="dentist"/>
 
 		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="amenity" value="marketplace"/> 
-		<filter minzoom="16" textSize="12" textHaloRadius="1" textDy="7" tag="amenity" value="townhall"/> 
-		<filter minzoom="16" textSize="12" textHaloRadius="1" textDy="7" tag="amenity" value="courthouse"/> 
+		<filter minzoom="16" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" tag="amenity" value="townhall"/> 
+		<filter minzoom="16" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" tag="amenity" value="courthouse"/> 
 
 		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" textWrapWidth="15" tag="amenity" value="arts_centre"/>
 		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" textWrapWidth="15" tag="amenity" value="cinema"/>
@@ -466,13 +465,13 @@
 		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" textWrapWidth="15" tag="amenity" value="sauna"/>
 		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" textWrapWidth="15" tag="amenity" value="brothel"/>
 
-		<filter minzoom="17" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="amenity" value="embassy"/>
+		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="amenity" value="embassy"/>
 		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" textWrapWidth="30" tag="amenity" value="police"/>
 		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="amenity" value="prison"/>
 		<filter minzoom="16" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="7" tag="amenity" value="shelter"/>
 		<filter minzoom="16" textSize="12" textColor="#000033" textHaloRadius="1" textDy="7" textWrapWidth="30" tag="amenity" value="place_of_worship"/>
 
-		<filter minzoom="13" textSize="12" textBold="true" textColor="#ffc0cb" textWrapWidth="10" tag="military" value="danger_area"/>
+		<filter minzoom="13" textSize="12" textColor="#ffc0cb" textBold="true" textWrapWidth="10" tag="military" value="danger_area"/>
 
 		<!-- Shops -->
 		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="7" textWrapWidth="14" tag="shop" value="bakery"/>
@@ -490,7 +489,7 @@
 		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="shop" value="alcohol"/>
 		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="shop" value="kiosk"/>
 		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="7" textWrapWidth="14" tag="shop" value="musical_instrument"/>
-		<filter minzoom="17" textSize="12" textColor="#da0092" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="shop" value="optician"/>
+		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="shop" value="optician"/>
 		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="7" textWrapWidth="14" tag="shop" value="video"/>
 		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="shop" value="laundry"/> 
 		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="shop" value="tobacco"/> 
@@ -499,7 +498,7 @@
 		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="shop" value="copyshop"/> 
 		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="shop" value="greengrocer"/> 
 		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="shop" value="mobile_phone"/> 
-		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" textWrapWidth="15" tag="amenity" value="ice_cream"/> 
+		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="7" textWrapWidth="15" tag="amenity" value="ice_cream"/> 
 
 		<!-- Outdoor -->
 		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="7" textWrapWidth="14" tag="shop" value="outdoor"/>
@@ -516,14 +515,14 @@
 		<filter minzoom="16" textSize="12" textColor="#000033" textHaloRadius="1" textDy="7" textWrapWidth="16" tag="sport" value="skiing"/>
 		<filter minzoom="16" textSize="12" textColor="#000033" textHaloRadius="1" textDy="7" textWrapWidth="16" tag="sport" value="swimming"/>
 		<filter minzoom="17" textSize="12" textColor="#000033" textHaloRadius="1" textDy="7" textWrapWidth="16" tag="sport" value="diving"/>
-		<filter minzoom="17" textSize="12" textHaloRadius="1" textDy="7" tag="leisure" value="fishing"/> 
-		<filter minzoom="16" textSize="12" textHaloRadius="1" textDy="7" tag="leisure" value="sports_centre"/> 
+		<filter minzoom="17" textSize="12" textColor="#000033" textHaloRadius="1" textDy="7" tag="leisure" value="fishing"/> 
+		<filter minzoom="16" textSize="12" textColor="#000033" textHaloRadius="1" textDy="7" tag="leisure" value="sports_centre"/> 
 
 		<filter minzoom="16" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="7" textWrapWidth="70" tag="tourism" value="camp_site"/>
 		<filter minzoom="16" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="7" textWrapWidth="70" tag="tourism" value="caravan_site"/>
 
 		<!-- Tourism -->
-		<filter minzoom="15" textSize="12" textColor="#734a08" textHaloRadius="1" textWrapWidth="30" tag="tourism" value="theme_park"/>
+		<filter minzoom="15" textSize="12" textColor="#000033" textHaloRadius="1" textWrapWidth="30" tag="tourism" value="theme_park"/>
 		<filter minzoom="16" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="7" tag="tourism" value="alpine_hut"/>
 		<filter minzoom="17" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="7" tag="tourism" value="guest_house"/>
 		<filter minzoom="17" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="7" tag="tourism" value="hostel"/>
@@ -1146,7 +1145,7 @@
 
 		<filter tag="highway" value="proposed" minzoom="14" color="#ff6600" strokeWidth="10" color_2="#9f9f9f" strokeWidth_2="8" pathEffect_2="12_4"/>
 
-		<filter tag="contour" value="elevation" minzoom="14" color="#54ff4900" strokeWidth="1"/>
+		<filter contourLines="true" tag="contour" value="elevation" minzoom="14" color="#54ff7c00" strokeWidth="1"/>
 
 		<!-- Barriers -->
 		<filter minzoom="16" color="#000000" strokeWidth="1" tag="highway" value="gate"/>
