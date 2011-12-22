@@ -21,6 +21,9 @@ public class MapStackControl extends ViewGroup {
 	// by default opened
 	private boolean isCollapsed = false;
 	private boolean isCollapsible = true;
+	
+	private Drawable topDrawable;
+	private Drawable stackDrawable;
 
 	public MapStackControl(Context context) {
 		super(context);
@@ -33,12 +36,12 @@ public class MapStackControl extends ViewGroup {
 			protected void onDraw(Canvas canvas) {
 				super.onDraw(canvas);
 				int cx = (getLeft() + getRight()) / 2 - getLeft();
-				int t = (int) (getBottom() - getTop() - 12 * MapInfoLayer.scaleCoefficient);
+				int t = (int) (10 * MapInfoLayer.scaleCoefficient); 
 
 				if (!isCollapsed) {
-					canvas.drawBitmap(arrowUp, cx - arrowUp.getWidth() / 2, t - arrowUp.getHeight(), paintImg);
+					canvas.drawBitmap(arrowUp, cx - arrowUp.getWidth() / 2, t , paintImg);
 				} else {
-					canvas.drawBitmap(arrowDown, cx - arrowDown.getWidth() / 2, t - arrowUp.getHeight(), paintImg);
+					canvas.drawBitmap(arrowDown, cx - arrowDown.getWidth() / 2, t , paintImg);
 				}
 			}
 		};
@@ -56,6 +59,14 @@ public class MapStackControl extends ViewGroup {
 	
 	public void setExpandImageDrawable(Drawable d) {
 		expandView.setImageDrawable(d);
+	}
+	
+	public void setTopDrawable(Drawable topDrawable) {
+		this.topDrawable = topDrawable;
+	}
+	
+	public void setStackDrawable(Drawable stackDrawable) {
+		this.stackDrawable = stackDrawable;
 	}
 
 	public void updateInfo() {
@@ -107,9 +118,12 @@ public class MapStackControl extends ViewGroup {
 		int w = 0;
 		int h = 0;
 		int prevBot = 0;
+		boolean first = true;
 		if (stackViews != null) {
 			for (MapInfoControl c : stackViews) {
 				if (c.getVisibility() != View.GONE) {
+					c.setBackgroundDrawable(first ? topDrawable.mutate() : stackDrawable.mutate());
+					first = false;
 					c.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 					w = Math.max(w, c.getMeasuredWidth());
 					if (h > 0) {
@@ -125,6 +139,8 @@ public class MapStackControl extends ViewGroup {
 				if (c.getVisibility() != View.GONE) {
 					isCollapsible = true;
 					if (!isCollapsed) {
+						c.setBackgroundDrawable(first ? topDrawable.mutate() : stackDrawable.mutate());
+						first = false;
 						c.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 						w = Math.max(w, c.getMeasuredWidth());
 						h -= c.getPaddingBottom();
@@ -145,7 +161,7 @@ public class MapStackControl extends ViewGroup {
 				}
 			}
 			if (isCollapsible) {
-				h -= prevBot;
+//				h -= prevBot;
 				h += expandView.getDrawable().getMinimumHeight();
 				w = Math.max(w, expandView.getDrawable().getMinimumWidth());
 			}

@@ -1062,6 +1062,9 @@ public class OsmandSettings {
 	
 	public final CommonPreference<Boolean> SHOW_ALTITUDE_INFO = 
 			new BooleanPreference("show_altitude_info", false, false, true);
+	{
+		SHOW_ALTITUDE_INFO.setModeDefaultValue(ApplicationMode.CAR, false);
+	}
 	
 	public final CommonPreference<Boolean> SHOW_ZOOM_LEVEL = 
 			new BooleanPreference("show_zoom_level", false, false, true);

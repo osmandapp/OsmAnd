@@ -100,27 +100,24 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 	
 	public void applyTheme() {
-		int boxTop = R.drawable.box_top;
+		int boxTop = R.drawable.box_top_stack;
 		int boxTopR = R.drawable.box_top_r;
 		int boxTopL = R.drawable.box_top_l;
 		int expand = R.drawable.box_expand;
 		if(view.getSettings().TRANSPARENT_MAP_THEME.get()){
-			boxTop = R.drawable.box_top_t;
+			boxTop = R.drawable.box_top_t_stack;
 			boxTopR = R.drawable.box_top_rt;
 			boxTopL = R.drawable.box_top_lt;
+			expand = R.drawable.box_expand_t;
 		}
-		int i = 0;
-		for(MapInfoControl m : rightStack.getAllViews()){
-			m.setBackgroundDrawable(view.getResources().getDrawable(i == 0 ? boxTopR : boxTop));
-			i++;
-		}
-		rightStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
-		i = 0;
-		for(MapInfoControl m : leftStack.getAllViews()){
-			m.setBackgroundDrawable(view.getResources().getDrawable(i < 2 ? boxTopL : boxTop));
-			i++;
-		}
+		rightStack.setTopDrawable(view.getResources().getDrawable(boxTopR));
+		rightStack.setStackDrawable(view.getResources().getDrawable(boxTop));
+		
+		leftStack.setTopDrawable(view.getResources().getDrawable(boxTopL));
+		leftStack.setStackDrawable(view.getResources().getDrawable(boxTop));
+		
 		leftStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
+		rightStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
 		statusBar.setBackgroundDrawable(view.getResources().getDrawable(boxTop));
 		showAltitude = view.getSettings().SHOW_ALTITUDE_INFO.get();
 	}
@@ -219,14 +216,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	private TextInfoControl createSpeedControl(){
 		final TextInfoControl speedControl = new TextInfoControl(map, 3, paintText, paintSubText) {
-			private float cachedSpeed = 0;
+			// TODO
+			private float cachedSpeed = 5;
 
 			@Override
 			public boolean updateInfo() {
 				// draw speed
-				if (map.getLastKnownLocation() != null && map.getLastKnownLocation().hasSpeed()) {
-					if (Math.abs(map.getLastKnownLocation().getSpeed() - cachedSpeed) > .3f) {
-						cachedSpeed = map.getLastKnownLocation().getSpeed();
+//				if (map.getLastKnownLocation() != null && map.getLastKnownLocation().hasSpeed()) {
+//					if (Math.abs(map.getLastKnownLocation().getSpeed() - cachedSpeed) > .3f) {
+//						cachedSpeed = map.getLastKnownLocation().getSpeed();
 						String ds = OsmAndFormatter.getFormattedSpeed(cachedSpeed, map);
 						int ls = ds.lastIndexOf(' ');
 						if (ls == -1) {
@@ -235,13 +233,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 							setText(ds.substring(0, ls), ds.substring(ls + 1));
 						}
 						return true;
-					}
-				} else if (cachedSpeed != 0) {
-					cachedSpeed = 0;
-					setText(null, null);
-					return true;
-				}
-				return false;
+//					}
+//				} else if (cachedSpeed != 0) {
+//					cachedSpeed = 0;
+//					setText(null, null);
+//					return true;
+//				}
+//				return false;
 			}
 		};
 		speedControl.setText(null, null);
@@ -290,12 +288,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 			
 			@Override
 			public boolean updateInfo() {
-				int time = 0;
-				if (routeLayer != null && routeLayer.getHelper().isRouterEnabled()) {
-					boolean followingMode = routeLayer.getHelper().isFollowingMode();
-					time = routeLayer.getHelper().getLeftTime();
+				int time = 1500;
+				// TODO
+//				if (routeLayer != null && routeLayer.getHelper().isRouterEnabled()) {
+//					boolean followingMode = routeLayer.getHelper().isFollowingMode();
+//					time = routeLayer.getHelper().getLeftTime();
 					if (time != 0) {
-						if (followingMode && showArrivalTime) {
+						if (/*followingMode && */showArrivalTime) {
 							long toFindTime = time * 1000 + System.currentTimeMillis();
 							if (Math.abs(toFindTime - cachedLeftTime) > 30000) {
 								cachedLeftTime = toFindTime;
@@ -316,7 +315,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 							}
 						}
 					}
-				}
+//				}
 				if (time == 0 && cachedLeftTime != 0) {
 					cachedLeftTime = 0;
 					setText(null, null);
@@ -345,6 +344,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextInfoControl distanceControl = new TextInfoControl(map, 0, paintText, paintSubText) {
 			private float[] calculations = new float[1];
 			private int cachedMeters = 0;
+			
 			
 			@Override
 			public boolean updateInfo() {
