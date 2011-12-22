@@ -312,7 +312,7 @@ public class TileSourceManager {
 	}
 
 	public static TileSourceTemplate getMapnikSource(){
-		return new TileSourceTemplate("Mapnik", "http://tile.openstreetmap.org/{0}/{1}/{2}.png", ".png", 18, 1, 256, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		return new TileSourceTemplate("Mapnik", "http://mapnik.osmand.net/{0}/{1}/{2}.png", ".png", 18, 1, 256, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	public static TileSourceTemplate getCycleMapSource(){
