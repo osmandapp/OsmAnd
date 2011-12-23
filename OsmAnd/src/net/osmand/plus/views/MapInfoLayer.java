@@ -131,8 +131,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		statusBar.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_top));
 		
 		rightStack = new MapStackControl(view.getContext());
-		rightStack.addStackView(createDistanceControl());
 		rightStack.addStackView(createAltitudeControl());
+		rightStack.addStackView(createDistanceControl());
 		rightStack.addCollapsedView(createSpeedControl());
 		rightStack.addCollapsedView(createTimeControl());
 		
