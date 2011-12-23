@@ -23,7 +23,8 @@ public class MapStackControl extends ViewGroup {
 	private boolean isCollapsible = true;
 	
 	private Drawable topDrawable;
-	private Drawable stackDrawable;
+	List<Drawable> cacheStackDrawables = new ArrayList<Drawable>();
+	private int stackDrawable;
 
 	public MapStackControl(Context context) {
 		super(context);
@@ -65,8 +66,9 @@ public class MapStackControl extends ViewGroup {
 		this.topDrawable = topDrawable;
 	}
 	
-	public void setStackDrawable(Drawable stackDrawable) {
+	public void setStackDrawable(int stackDrawable) {
 		this.stackDrawable = stackDrawable;
+		this.cacheStackDrawables.clear();
 	}
 
 	public void updateInfo() {
@@ -112,6 +114,14 @@ public class MapStackControl extends ViewGroup {
 	public boolean isCollapsible() {
 		return isCollapsible;
 	}
+	
+	
+	private Drawable getStackDrawable(int i){
+		while(i >= cacheStackDrawables.size()) {
+			cacheStackDrawables.add(getResources().getDrawable(stackDrawable).mutate());
+		}
+		return cacheStackDrawables.get(i);
+	}
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -119,10 +129,11 @@ public class MapStackControl extends ViewGroup {
 		int h = 0;
 		int prevBot = 0;
 		boolean first = true;
+		int cacheStack = 0;
 		if (stackViews != null) {
 			for (MapInfoControl c : stackViews) {
 				if (c.getVisibility() != View.GONE) {
-					c.setBackgroundDrawable(first ? topDrawable.mutate() : stackDrawable.mutate());
+					c.setBackgroundDrawable(first ? topDrawable : getStackDrawable(cacheStack++ ));
 					first = false;
 					c.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 					w = Math.max(w, c.getMeasuredWidth());
@@ -139,7 +150,7 @@ public class MapStackControl extends ViewGroup {
 				if (c.getVisibility() != View.GONE) {
 					isCollapsible = true;
 					if (!isCollapsed) {
-						c.setBackgroundDrawable(first ? topDrawable.mutate() : stackDrawable.mutate());
+						c.setBackgroundDrawable(first ? topDrawable : getStackDrawable(cacheStack++ ));
 						first = false;
 						c.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 						w = Math.max(w, c.getMeasuredWidth());

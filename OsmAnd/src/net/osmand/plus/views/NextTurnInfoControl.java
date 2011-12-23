@@ -77,10 +77,11 @@ public class NextTurnInfoControl extends MapInfoControl {
 				st = textPaint.measureText(subtext);
 			}
 			float mt = textPaint.measureText(text);
+			float startX = Math.max((getWWidth() - st - mt) / 2, 2 * scaleCoefficient);
 			drawShadowText(canvas, text, 
-					(getWWidth() - st - mt) / 2 - scaleCoefficient, getWHeight() - 5 * scaleCoefficient, textPaint);
+					startX, getWHeight() - 5 * scaleCoefficient, textPaint);
 			if (subtext != null) {
-				drawShadowText(canvas, subtext, (getWWidth() - st - mt) / 2 + 2 * scaleCoefficient + mt, getWHeight() - 5
+				drawShadowText(canvas, subtext, startX + 2 * scaleCoefficient + mt, getWHeight() - 5
 						* scaleCoefficient, subtextPaint);
 			}
 		}

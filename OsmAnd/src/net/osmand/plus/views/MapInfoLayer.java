@@ -111,10 +111,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 			expand = R.drawable.box_expand_t;
 		}
 		rightStack.setTopDrawable(view.getResources().getDrawable(boxTopR));
-		rightStack.setStackDrawable(view.getResources().getDrawable(boxTop));
+		rightStack.setStackDrawable(boxTop);
 		
 		leftStack.setTopDrawable(view.getResources().getDrawable(boxTopL));
-		leftStack.setStackDrawable(view.getResources().getDrawable(boxTop));
+		leftStack.setStackDrawable(boxTop);
 		
 		leftStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
 		rightStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
@@ -216,15 +216,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	private TextInfoControl createSpeedControl(){
 		final TextInfoControl speedControl = new TextInfoControl(map, 3, paintText, paintSubText) {
-			// TODO
-			private float cachedSpeed = 5;
+			private float cachedSpeed = 0;
 
 			@Override
 			public boolean updateInfo() {
 				// draw speed
-//				if (map.getLastKnownLocation() != null && map.getLastKnownLocation().hasSpeed()) {
-//					if (Math.abs(map.getLastKnownLocation().getSpeed() - cachedSpeed) > .3f) {
-//						cachedSpeed = map.getLastKnownLocation().getSpeed();
+				if (map.getLastKnownLocation() != null && map.getLastKnownLocation().hasSpeed()) {
+					if (Math.abs(map.getLastKnownLocation().getSpeed() - cachedSpeed) > .3f) {
+						cachedSpeed = map.getLastKnownLocation().getSpeed();
 						String ds = OsmAndFormatter.getFormattedSpeed(cachedSpeed, map);
 						int ls = ds.lastIndexOf(' ');
 						if (ls == -1) {
@@ -233,13 +232,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 							setText(ds.substring(0, ls), ds.substring(ls + 1));
 						}
 						return true;
-//					}
-//				} else if (cachedSpeed != 0) {
-//					cachedSpeed = 0;
-//					setText(null, null);
-//					return true;
-//				}
-//				return false;
+					}
+				} else if (cachedSpeed != 0) {
+					cachedSpeed = 0;
+					setText(null, null);
+					return true;
+				}
+				return false;
 			}
 		};
 		speedControl.setText(null, null);
@@ -288,20 +287,20 @@ public class MapInfoLayer extends OsmandMapLayer {
 			
 			@Override
 			public boolean updateInfo() {
-				int time = 1500;
-				// TODO
-//				if (routeLayer != null && routeLayer.getHelper().isRouterEnabled()) {
-//					boolean followingMode = routeLayer.getHelper().isFollowingMode();
-//					time = routeLayer.getHelper().getLeftTime();
+				int time = 0;
+				if (routeLayer != null && routeLayer.getHelper().isRouterEnabled()) {
+					boolean followingMode = routeLayer.getHelper().isFollowingMode();
+					time = routeLayer.getHelper().getLeftTime();
 					if (time != 0) {
-						if (/*followingMode && */showArrivalTime) {
+						if (followingMode && showArrivalTime) {
 							long toFindTime = time * 1000 + System.currentTimeMillis();
 							if (Math.abs(toFindTime - cachedLeftTime) > 30000) {
 								cachedLeftTime = toFindTime;
 								if (DateFormat.is24HourFormat(map)) {
 									setText(DateFormat.format("kk:mm", toFindTime).toString(), null); //$NON-NLS-1$
 								} else {
-									setText(DateFormat.format("k:mm aa", toFindTime).toString(), null); //$NON-NLS-1$
+									setText(DateFormat.format("k:mm", toFindTime).toString(), 
+											DateFormat.format("aa", toFindTime).toString()); //$NON-NLS-1$
 								}
 								return true;
 							}
@@ -315,7 +314,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 							}
 						}
 					}
-//				}
+				}
 				if (time == 0 && cachedLeftTime != 0) {
 					cachedLeftTime = 0;
 					setText(null, null);
