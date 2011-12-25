@@ -403,7 +403,7 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_HIGH_RES_MAPS =
-		new BooleanPreference("use_high_res_maps", false, false, true);
+		new BooleanPreference("use_high_res_maps", false, true, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Float> MAP_TEXT_SIZE =
