@@ -161,8 +161,13 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 			}
 		});
 		TextWatcher textWatcher = new TextWatcher() {
+			String pasteString = null;
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				pasteString = null; 
+				if(count > 3) {
+					pasteString = s.subSequence(start, start + count).toString();
+				}
 			}
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -171,6 +176,56 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 			@Override
 			public void afterTextChanged(Editable s) {
 				
+				if(pasteString != null){
+					int latSt = -1;
+					int latEnd = -1;
+					int lonSt = -1;
+					int lonEnd = -1;
+					int step = 0; // 0 - init, 1- lat, 2-between, 3-lon
+					for (int i = 0; i < pasteString.length(); i++) {
+						char ch = pasteString.charAt(i);
+						if (Character.isDigit(ch)) {
+							if (step == 0 || step == 2){
+								int t = i;
+								if (i > 0 && pasteString.charAt(i - 1) == '-') {
+									t--;
+								}
+								if (step == 0) {
+									latSt = t;
+								} else {
+									lonSt = t;
+								}
+								step++;
+							}
+						} else if (ch == '.') {
+							// do nothing here
+						} else {
+							if (step == 1) {
+								latEnd = i;
+								step++;
+							} else if (step == 3) {
+								lonEnd = i;
+								step++;
+								break;
+							}
+						}
+					}
+					
+					if(lonSt != -1){
+						if(lonEnd == -1){
+							lonEnd = pasteString.length();
+						}
+						try {
+							String latString = pasteString.substring(latSt, latEnd);
+							String lonString = pasteString.substring(lonSt, lonEnd);
+							Double.parseDouble(latString);
+							Double.parseDouble(lonString);
+							latEdit.setText(latString);
+							lonEdit.setText(lonString);
+						} catch (NumberFormatException e) {
+						}
+					}
+				}
 			}
 		};
 		latEdit.addTextChangedListener(textWatcher);
