@@ -4,14 +4,15 @@
 # [remote "google"]
 #	url = https://code.google.com/p/osmand/
 #   fetch = +refs/heads/*:refs/remotes/google/*
-git pull google
+git fetch origin -p
+git fetch google --all
 
 # Delete old branches
 for f in `git for-each-ref --format='%(refname)' | grep 'refs/remotes/google'`
 do 
  Branch=`echo $f | cut -d '/' -f 4`
  if [[ -z `git show-ref refs/remotes/origin/$Branch` ]]; then
-	 git push google :'$Branch'
+	git push google :$Branch
  fi	 
 done
 
