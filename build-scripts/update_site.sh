@@ -1,7 +1,7 @@
 #!/bin/sh
 DIRECTORY=$(cd `dirname $0` && pwd)
 
-GIT_SITE_DIR=$DIRECTORY/config/site
+GIT_SITE_DIR=$DIRECTORY/../config/site
 LOCAL_SITE_DIR=/var/www-download
 
 files='*.php resource/* tile_sources.xml favicon.ico'
