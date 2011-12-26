@@ -1,7 +1,7 @@
 #!/bin/sh
 DIRECTORY=$(cd `dirname $0` && pwd)
 
-GIT_SITE_DIR=$DIRECTORY/osmand-git/config/site
+GIT_SITE_DIR=$DIRECTORY/config/site
 LOCAL_SITE_DIR=/var/www-download
 
 files='*.php tile_sources.xml favicon.ico'
