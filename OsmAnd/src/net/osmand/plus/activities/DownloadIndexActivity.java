@@ -50,6 +50,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StatFs;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -105,7 +106,7 @@ public class DownloadIndexActivity extends ListActivity {
 
 			@Override
 			public void onClick(View v) {
-				downloadFilesConfirmation();
+				downloadFiles_1_CheckSpace();
 			}
 			
 		});
@@ -481,22 +482,39 @@ public class DownloadIndexActivity extends ListActivity {
 		return entry;
 	}
 	
-	protected void downloadFilesConfirmation() {
-		Builder builder = new AlertDialog.Builder(this);
+	protected void downloadFiles_1_CheckSpace() {
 		double sz = 0;
 		for(DownloadEntry es : entriesToDownload.values()){
 			sz += es.sizeMB;
 		}
-		builder.setMessage(MessageFormat.format(getString(R.string.download_files_question), entriesToDownload.size(), sz));
-		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				showDialog(DIALOG_PROGRESS_FILE);
+		// get availabile space 
+		File dir = OsmandSettings.getOsmandSettings(this).extendOsmandPath("");
+		double asz = -1;
+		if(dir.canRead()){
+			StatFs fs = new StatFs(dir.getAbsolutePath());
+			asz = (((long) fs.getAvailableBlocks()) * fs.getBlockSize()) / (1 << 20);
+		}
+		if(asz != -1 && asz < sz ){
+			Toast.makeText(this, getString(R.string.download_files_not_enough_space, sz, asz), Toast.LENGTH_LONG).show();
+		} else {
+			Builder builder = new AlertDialog.Builder(this);
+			if (asz - sz < 20) {
+				builder.setMessage(MessageFormat.format(getString(R.string.download_files_question_space), entriesToDownload.size(), sz,
+						asz));
+			} else {
+				builder.setMessage(MessageFormat.format(getString(R.string.download_files_question), entriesToDownload.size(), sz));
 			}
-		});
-		builder.setNegativeButton(R.string.default_buttons_no, null);
-		builder.show();
+			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					showDialog(DIALOG_PROGRESS_FILE);
+				}
+			});
+			builder.setNegativeButton(R.string.default_buttons_no, null);
+			builder.show();
+		}
 	}
+
 	
 	
 	@Override
