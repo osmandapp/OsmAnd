@@ -118,8 +118,8 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="local_index_mi_restore">Khôi phục...</string>
 	<string name="local_index_mi_backup">Sao lưu...</string>
 	<string name="local_index_mi_delete">Xóa...</string>
-	<string name="local_index_mi_reload">Làm tươi...</string>
-	<string name="local_index_download">Tải xuống</string>
+	<string name="local_index_mi_reload">Làm tươi</string>
+	<string name="local_index_download">Tải xuống...</string>
 	<string name="local_index_tile_data">Dữ liệu Tile: %1$s \nZoom nhỏ nhất : %2$d\nZoom lớn nhất : %3$d\nCó thể tải về được : %4$s \nZooms được tải về : %5$s</string>
 	<string name="local_index_poi_data">dữ liệu POI</string>
 	<string name="local_index_address_data">dữ liệu Địa chỉ</string>

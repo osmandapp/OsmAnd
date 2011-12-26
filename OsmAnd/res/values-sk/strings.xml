@@ -133,11 +133,11 @@
 	<string name="local_index_no_items_to_do">Žiadne položky pre akciu: %1$s</string>
 	<string name="local_index_action_do">Chcete %1$s %2$s položiek. Ste si istý?</string>
 	<string name="local_index_descr_title">Správca offline údajov</string>
-	<string name="local_index_mi_restore">Obnoviť</string>
-	<string name="local_index_mi_backup">Zálohovať</string>
-	<string name="local_index_mi_delete">Vymazať</string>
+	<string name="local_index_mi_restore">Obnoviť...</string>
+	<string name="local_index_mi_backup">Zálohovať...</string>
+	<string name="local_index_mi_delete">Vymazať...</string>
 	<string name="local_index_mi_reload">Znovu načítať</string>
-	<string name="local_index_download">Stiahnuť</string>
+	<string name="local_index_download">Stiahnuť...</string>
 	<string name="local_index_tile_data">Údaje dlaždíc : %1$s \nNajmenší zoom : %2$d\nNajväčší zoom : %3$d\nStiahnuteľné : %4$s \nStiahnuté zoomy : %5$s</string>
 	<string name="local_index_poi_data">POI údaje</string>
 	<string name="local_index_address_data">Adresné údaje</string>

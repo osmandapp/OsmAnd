@@ -115,11 +115,11 @@
     <string name="local_index_action_do">Вы собириаетесь %1$s %2$s объектов. Вы уверены?</string>
 	<string name="local_index_descr_title">Менеджер офлайн данных</string>
 	
-	<string name="local_index_mi_restore">Восстановить</string>
-	<string name="local_index_mi_backup">Архив</string>
-	<string name="local_index_mi_delete">Удалить</string>
+	<string name="local_index_mi_restore">Восстановить...</string>
+	<string name="local_index_mi_backup">Архив...</string>
+	<string name="local_index_mi_delete">Удалить...</string>
 	<string name="local_index_mi_reload">Обновить</string>
-	<string name="local_index_download">Загрузить</string>
+	<string name="local_index_download">Загрузить...</string>
 	<string name="local_index_tile_data">Тайловые данные : %1$s \nМинимальный уровень : %2$d\nМаксимальный уровень : %3$d\nЗагружаемый : %4$s \nУровни загружены : %5$s</string>
 	<string name="local_index_poi_data">POI</string>
 	<string name="local_index_address_data">Адрес</string>

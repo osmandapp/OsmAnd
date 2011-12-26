@@ -94,7 +94,7 @@
 	<string name="vector_map_not_needed">Non necessario</string>
 	<string name="basemap_missing">la mappa di Base del mondo (che ricopre il mondo per zoom piccoli) è mancante. Puoi scaricare World_basemap_x.obf per ottenerla.</string>
 	<string name="vector_data_missing">Mancano i dati (\'offline\') nella scheda SD. Ti consigliamo di scaricarli per poter usare le mappe offline.</string>
-	<string name="local_index_gpx_info_show">\n\nClick lungo per mostrare nella mappa</string>
+	<string name="local_index_gpx_info_show">\n\nClick lungo per mostrare opzioni</string>
 	<string name="local_index_gpx_info_speed">\nVelocità media : %1$s \nVelocità massima : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nAltitudine media : %1$.0f m\nAltitudine minima : %2$.0f m\nAltitudine massima : %3$.0f m\nSalite : %4$.0f m\nDiscese : %5$.0f m</string>
 	<string name="local_index_gpx_info">Subtracks : %1$d\nPunti totali : %2$d\nWay points : %3$d\nDistanza totale : %4$s\nOra partenza : %5$tD %5$tR\nOra arrivo : %6$tD %6$tR</string>
@@ -108,8 +108,8 @@
 	<string name="local_index_mi_restore">Ripristina...</string>
 	<string name="local_index_mi_backup">Backup...</string>
 	<string name="local_index_mi_delete">Elimina...</string>
-	<string name="local_index_mi_reload">Ricarica...</string>
-	<string name="local_index_download">Scarica</string>
+	<string name="local_index_mi_reload">Ricarica</string>
+	<string name="local_index_download">Scarica...</string>
 	<string name="local_index_tile_data">Tile data: %1$s \nZoom minimo : %2$d\nZoom massimo : %3$d\nScaricabile : %4$s \nZoom scaricati : %5$s</string>
 	<string name="local_index_poi_data">Dati PDI</string>
 	<string name="local_index_address_data">Dati indirizzi</string>

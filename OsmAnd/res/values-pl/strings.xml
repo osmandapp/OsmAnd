@@ -132,8 +132,8 @@
 <string name="local_index_mi_restore">Przywróć...</string>
 <string name="local_index_mi_backup">Zarchiwizuj...</string>
 <string name="local_index_mi_delete">Skasuj...</string>
-<string name="local_index_mi_reload">Odśwież...</string>
-<string name="local_index_download">Pobierz</string>
+<string name="local_index_mi_reload">Odśwież</string>
+<string name="local_index_download">Pobierz...</string>
 <string name="local_index_tile_data">Dane kafelkowe: %1$s \nMinimalny zoom: %2$d\nMaksymalny zoom: %3$d\nMożliwe do pobrania: %4$s \nPobrano poziomy: %5$s</string>
 <string name="local_index_poi_data">Dane POI</string>
 <string name="local_index_address_data">Dane adresowe</string>

@@ -135,8 +135,8 @@
 	<string name="local_index_mi_restore">Visszaállítás...</string>
 	<string name="local_index_mi_backup">Biztonsági mentés...</string>
 	<string name="local_index_mi_delete">Törlés...</string>
-	<string name="local_index_mi_reload">Frissítés...</string>
-	<string name="local_index_download">Letöltés</string>
+	<string name="local_index_mi_reload">Frissítés</string>
+	<string name="local_index_download">Letöltés...</string>
 	<string name="local_index_tile_data">Csempe adat: %1$s \nMinimális nagyítás : %2$d\nMaximális nagyítás : %3$d\nLetöltendő : %4$s \nNagyítások letöltve : %5$s</string>
 	<string name="local_index_poi_data">POI adat</string>
 	<string name="local_index_address_data">Cím adat</string>
