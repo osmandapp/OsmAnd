@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # First time add entries to .git/config (!) and add .netrc file
 # [remote "google"]
@@ -11,7 +11,7 @@ for f in `git for-each-ref --format='%(refname)' | grep 'refs/remotes/google'`
 do 
  Branch=`echo $f | cut -d '/' -f 4`
  if [[ -z `git show-ref refs/remotes/origin/$Branch` ]]; then
-	 git push google :$Branch
+	 git push google :'$Branch'
  fi	 
 done
 
