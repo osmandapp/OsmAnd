@@ -47,7 +47,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -393,6 +392,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     
     @Override
     protected void onPrepareDialog(int id, Dialog dialog) {
+    	super.onPrepareDialog(id, dialog);
     	for (DialogProvider dp : dialogProviders) {
     		dp.onPrepareDialog(id, dialog);
     	}
