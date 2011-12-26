@@ -95,7 +95,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		Algoritms.removeAllFiles(poiIndexFile);
 	}
 
-	private void checkEntity(Entity e) {
+	public void checkEntity(Entity e) {
 		String name = e.getTag(OSMTagKey.NAME);
 		if (name == null) {
 			String msg = "";
@@ -548,8 +548,10 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 				}
 			} else {
 				int sum = 0;
-				for (Tree<T> t : subtrees) {
-					sum += t.getSubTreesOnLevel(level - 1);
+				if (subtrees != null) {
+					for (Tree<T> t : subtrees) {
+						sum += t.getSubTreesOnLevel(level - 1);
+					}
 				}
 				return sum;
 			}
