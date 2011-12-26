@@ -11,7 +11,7 @@ for f in `git for-each-ref --format='%(refname)' | grep 'refs/remotes/google'`
 do 
  Branch=`echo $f | cut -d '/' -f 4`
  if [[ -z `git show-ref refs/remotes/origin/$Branch` ]]; then
-	 git push origin :$Branch
+	 git push google :$Branch
  fi	 
 done
 
