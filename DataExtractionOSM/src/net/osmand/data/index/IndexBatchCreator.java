@@ -41,6 +41,7 @@ import net.osmand.data.preparation.IndexCreator;
 import net.osmand.data.preparation.MapZooms;
 import net.osmand.impl.ConsoleProgressImplementation;
 import net.osmand.osm.MapRenderingTypes;
+import net.osmand.swing.OsmExtractionUI;
 
 import org.apache.commons.logging.Log;
 import org.w3c.dom.Document;
@@ -111,6 +112,7 @@ public class IndexBatchCreator {
 	public static void main(String[] args) {
 		
 		IndexBatchCreator creator = new IndexBatchCreator();
+		OsmExtractionUI.configLogFile();
 		if(args == null || args.length == 0){
 			System.out.println("Please specify -local parameter or path to batch.xml configuration file as 1 argument.");
 			throw new IllegalArgumentException("Please specify -local parameter or path to batch.xml configuration file as 1 argument.");

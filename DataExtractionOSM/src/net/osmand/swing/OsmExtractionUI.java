@@ -15,6 +15,9 @@ import java.lang.Thread.UncaughtExceptionHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.text.MessageFormat;
+import java.util.logging.FileHandler;
+import java.util.logging.LogManager;
+import java.util.logging.SimpleFormatter;
 
 import javax.swing.AbstractAction;
 import javax.swing.JCheckBox;
@@ -58,26 +61,28 @@ import rtree.RTree;
 public class OsmExtractionUI implements IMapLocationListener {
 
 	private static final Log log = LogFactory.getLog(OsmExtractionUI.class);
-	public static final String LOG_PATH  = getUserLogDirectoryPath() + "/Osmand/osmand.log"; //$NON-NLS-1$ //$NON-NLS-2$
+	public static final String LOG_PATH  = getUserLogDirectoryPath() + "/osmand.log"; //$NON-NLS-1$ //$NON-NLS-2$
 	public static OsmExtractionUI MAIN_APP;
 
 	public static String getUserLogDirectoryPath() {
-		String path = null;
-		if (System.getProperty("os.name").startsWith("Windows")) {
-			path = System.getenv("APPDATA").replaceAll("\\\\", "/");
-		} else if (System.getProperty("os.name").startsWith("Mac")) {
-			path = System.getProperty("user.home") + "/Library/Logs";
-		} else if (System.getenv("XDG_CACHE_HOME") != null) {
-			path = System.getenv("XDG_CACHE_HOME");
-		} else {
-			path = System.getProperty("user.home") + "/.cache";
-		}
-		return path;
+		return DataExtractionSettings.getSettings().getDefaultWorkingDir().getAbsolutePath();
+//		String path = null;
+//		if (System.getProperty("os.name").startsWith("Windows")) {
+//			path = System.getenv("APPDATA").replaceAll("\\\\", "/");
+//		} else if (System.getProperty("os.name").startsWith("Mac")) {
+//			path = System.getProperty("user.home") + "/Library/Logs";
+//		} else if (System.getenv("XDG_CACHE_HOME") != null) {
+//			path = System.getenv("XDG_CACHE_HOME");
+//		} else {
+//			path = System.getProperty("user.home") + "/.cache";
+//		}
+//		return path;
 	}
 	
 	public static void main(String[] args) {
 		// first of all config log
-		new File(LOG_PATH).getParentFile().mkdirs();
+		configLogFile();
+		
 		final UncaughtExceptionHandler defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
 		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler(){
 			@Override
@@ -92,6 +97,19 @@ public class OsmExtractionUI implements IMapLocationListener {
         MAIN_APP = new OsmExtractionUI();
         MAIN_APP.frame.setBounds(DataExtractionSettings.getSettings().getWindowBounds());
         MAIN_APP.frame.setVisible(true);
+	}
+
+	public static void configLogFile() {
+		new File(LOG_PATH).getParentFile().mkdirs();
+		try {
+			FileHandler fh = new FileHandler(LOG_PATH, 5000000, 1, true);
+			fh.setFormatter(new SimpleFormatter());
+			LogManager.getLogManager().getLogger("").addHandler(fh);
+		} catch (SecurityException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	
