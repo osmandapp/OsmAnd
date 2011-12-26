@@ -498,7 +498,7 @@ public class DownloadIndexActivity extends ListActivity {
 			Toast.makeText(this, getString(R.string.download_files_not_enough_space, sz, asz), Toast.LENGTH_LONG).show();
 		} else {
 			Builder builder = new AlertDialog.Builder(this);
-			if (asz - sz < 20) {
+			if (asz > 0 && sz/asz > 0.8) {
 				builder.setMessage(MessageFormat.format(getString(R.string.download_files_question_space), entriesToDownload.size(), sz,
 						asz));
 			} else {

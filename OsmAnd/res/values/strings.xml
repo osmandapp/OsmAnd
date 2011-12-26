@@ -2,7 +2,7 @@
 <resources>
 
 <string name="download_files_not_enough_space">There is not enough space to download %1$s MB (available %2$s).</string>
-	<string name="download_files_question_space">Free space now ({2} MB): ! Download {0} file(s) ({1} MB)?</string>
+	<string name="download_files_question_space">Free space now {2} MB! Download {0} file(s) ({1} MB)?</string>
 	<string name="show_zoom_level_descr">Show zoom level constantly instead of ruler.</string>
 	<string name="show_zoom_level">Show zoom level</string>
 	<string name="tip_select_destination_point">Select Destination</string>
