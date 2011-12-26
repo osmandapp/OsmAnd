@@ -106,7 +106,6 @@ public class IndexBatchCreator {
 	String cookieSID = "";
 	String pagegen = "";
 	String token = "";
-	private boolean local;
 	
 	
 	public static void main(String[] args) {
@@ -119,25 +118,35 @@ public class IndexBatchCreator {
 		}
 		String name = args[0];
 		InputStream stream;
+		InputStream regionsStream = null;
 		if(name.equals("-local")){
 			stream = IndexBatchCreator.class.getResourceAsStream("batch.xml");
-			creator.setLocal(true);
+			regionsStream = IndexBatchCreator.class.getResourceAsStream("regions.xml");
 		} else {
 			try {
 				stream = new FileInputStream(name);
 			} catch (FileNotFoundException e) {
-				System.out.println("XML configuration file not found : " + name);
-				return;
+				throw new IllegalArgumentException("XML configuration file not found : " + name, e);
+			}
+			if (args.length > 1) {
+				try {
+					File regionsFile = new File(args[1]);
+					regionsStream = new FileInputStream(regionsFile);
+				} catch (FileNotFoundException e) {
+					throw new IllegalArgumentException("Please specify xml-file with regions to download", e); //$NON-NLS-1$
+				}
 			}
 		}
-		
-		if(args.length >= 2 &&  args[1] != null && args[1].startsWith("-gp")){
-			creator.googlePassword = args[1].substring(3);
-		}
 				
+		
 		try {
 			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(stream);
-			creator.runBatch(doc);
+			Document regions = null;
+			if(regionsStream != null) {
+				name = args[1];
+				regions = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(regionsStream);
+			}
+			creator.runBatch(doc, regions);
 		} catch (SAXException e) {
 			System.out.println("XML configuration file could not be read from " + name);
 			e.printStackTrace();
@@ -155,11 +164,7 @@ public class IndexBatchCreator {
 		}
 	}
 	
-	private void setLocal(boolean local) {
-		this.local = local;
-	}
-
-	public void runBatch(Document doc) throws SAXException, IOException, ParserConfigurationException{
+	public void runBatch(Document doc, Document regions) throws SAXException, IOException, ParserConfigurationException{
 		NodeList list = doc.getElementsByTagName("process");
 		if(list.getLength() != 1){
 			 throw new IllegalArgumentException("You should specify exactly 1 process element!");
@@ -193,22 +198,10 @@ public class IndexBatchCreator {
 			throw new IllegalArgumentException("Please specify directory with generated index files  as directory_for_index_files (attribute)"); //$NON-NLS-1$
 		}
 		indexDirFiles = new File(dir);
-		InputStream regionsStream = null;
-		if(downloadFiles){
-			dir = process.getAttribute("list_download_regions_file");
-			if(!Algoritms.isEmpty(dir)) {
-				File regionsFile = new File(dir);
-				if(!regionsFile.exists()){
-					if (local) {
-						regionsStream = IndexBatchCreator.class.getResourceAsStream("regions.xml");
-					}
-					if (regionsStream == null) {
-						throw new IllegalArgumentException("Please specify file with regions to download as list_download_regions_file (attribute)"); //$NON-NLS-1$
-					}
-				} else {
-					regionsStream = new FileInputStream(regionsFile);
-				}
-			} 
+		if (downloadFiles) {
+			if (regions == null) {
+				throw new IllegalArgumentException("Please specify regions.xml file as 2nd parameter");
+			}
 		}
 		
 		dir = process.getAttribute("directory_for_uploaded_files");
@@ -256,9 +249,8 @@ public class IndexBatchCreator {
 		
 		List<RegionCountries> countriesToDownload = new ArrayList<RegionCountries>();
 		parseCountriesToDownload(doc, countriesToDownload);
-		if(regionsStream != null){
-			Document innerDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(regionsStream);
-			parseCountriesToDownload(innerDoc, countriesToDownload);
+		if (regions != null) {
+			parseCountriesToDownload(regions, countriesToDownload);
 		}
 		
 		runBatch(countriesToDownload);

@@ -14,7 +14,7 @@
 		google_code_user="" google_code_password="" 
 		osmand_download_user="" osmand_download_password=""/>
 		
-	<process_attributes mapZooms="" renderingTypesFile="" zoomWaySmoothness="" 
+	<process_attributes mapZooms="" renderingTypesFile="" zoomWaySmoothness="2" 
 		osmDbDialect="sqlite" mapDbDialect="sqlite"/>
 	
 	<!-- There are 3 subprocess : 	
@@ -26,10 +26,10 @@
 		 or you can upload any file you have to googlecode (just put into 'directory_for_index_files')
 	 -->
 	 <!-- zoomWaySmoothness - 1-4, typical mapZooms - 8-10;11-12;13-14;15   -->
-	<process directory_for_osm_files="/home/..." directory_for_index_files="/home/..."
-		directory_for_uploaded_files="" keepPoiOdb="false"
-		downloadOsmFiles="true" generateIndexes="true" uploadIndexes="true" 
-		upload_osmand_googlecode="true"	deleteFilesAfterUploading="true" indexPOI="true" indexMap="true"
+	<process directory_for_osm_files="~/indexes/osm" directory_for_index_files="~/indexes"
+		directory_for_uploaded_files="~/indexes/uploaded" keepPoiOdb="false"
+		downloadOsmFiles="true" generateIndexes="true" uploadIndexes="false" 
+		upload_osmand_googlecode="false" deleteFilesAfterUploading="false" indexPOI="true" indexMap="true"
 		indexTransport="true" indexAddress="true">
 		<!-- Add wget="C:/Program Files/GNUWin32/bin/wget.exe" to process, to use wget for download.
 			 On linux systems if wget is in your path it can be wget="wget" or you can make own script with wget command:

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <regions_list>
-		<!--  in order to delete remove all skip -->
+		
 		<!--  Overview of regions -->
 		<!-- 1. Europe : 1.1 Great Britain 1.2 France 1.3  Germany -->
 		<!-- 2. Asia : 2.1 Russia and regions 2.2 Asia from geofabric 2.3 Rest asia from cloudmade  -->
@@ -457,7 +457,7 @@
 			<region name="africa" esize=""/>
 		</regions>
 		<!-- 6. AFRICA [SOURCE: GEOFABRIK.DE] -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/africa/{0}.osm.pbf" region_prefix="" region_suffix="_Africa"  skip="true">
+		<regions siteToDownload="http://download.geofabrik.de/osm/africa/{0}.osm.pbf" region_prefix="" region_suffix="_Africa"  skip="false">
 			<region name="canary_islands" esize="" />
 			<region name="ethiopia" esize="" />
 			<region name="guinea" esize="" />

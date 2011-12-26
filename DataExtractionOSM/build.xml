@@ -90,10 +90,10 @@
 			<fileset dir=".">
 				<include name="batch_indexing.bat"/>
 				<include name="batch_indexing.sh"/>
+				<include name="../build-scripts/regions.xml" />
 			</fileset>
 			<fileset dir="src/net/osmand/data/index">
 				<include name="batch.xml" />
-				<include name="regions.xml" />
 			</fileset>
 		</copy>
 		<zip destfile="build.zip">
