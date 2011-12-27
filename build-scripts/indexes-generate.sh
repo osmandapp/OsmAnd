@@ -7,5 +7,4 @@ mv ~/indexes/uploaded/*.* backup
 rm -rf ~/indexes
 mkdir ~/indexes
 
-cd DataExtractionOSM
 java -Djava.util.logging.config.file=logging.properties -Xms64M -Xmx720M -cp "DataExtractionOSM/OsmAndMapCreator.jar:DataExtractionOSM/lib/*.jar" net.osmand.data.index.IndexBatchCreator build-scripts/indexes-batch-generate.xml build-scripts/indexes-regions.xml
