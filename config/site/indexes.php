@@ -2,7 +2,7 @@
 <head><title>OsmAnd Indexes</title></head>
 <?php 
    $update = $_GET['update'];
-   include 'update_googlecode_indexes.php';
+   include 'update_indexes.php';
    updateGoogleCodeIndexes($update);
    $dom = new DomDocument(); 
    $dom->load('indexes.xml'); 
