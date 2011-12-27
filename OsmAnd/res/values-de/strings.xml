@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
+	<string name="download_files_question_space">{2} MB freier Speicher vorhanden! {0} Datei(en) ({1} MB) herunterladen?</string>
+	<string name="show_zoom_level_descr">Immer Zoom Level statt Maßtabs anzeigen.</string>
+	<string name="show_zoom_level">Zoom Level zeigen</string>
 	<string name="tip_select_destination_point">Ziel wählen</string>
 	<string name="tip_select_destination_point_t">\tEin Ziel kann direkt in der Karte gewählt werden (via Kontextmenü, \'Als Ziel wählen\'), in allen Such-Funktionen, oder in der Favoritenliste via langes Drücken. 
 \n\tDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd in der Karte die Entfernung und die Richtung (oranges Dreieck).</string>
@@ -28,6 +32,7 @@
 	<string name="auto_follow_route_navigation_descr">Kartennachführung erfolgt nur während Navigation (Routing)</string>
 	<string name="auto_follow_location_enabled">Kartennachführung aktiviert</string>
 
+	<string name="sendtoOSM_confirmation_msg">An OSM schicken: %1$s?</string>
 	<string name="pref_vector_rendering">Vektor Renderer spezif. Optionen</string>
 	<string name="pref_overlay">Overlay / Underlay</string>
 	<string name="pref_raster_map">Einstellungen Kachelkarten</string>
