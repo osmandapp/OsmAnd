@@ -137,9 +137,9 @@
 	<string name="local_index_action_do">You are about to %1$s %2$s item(s). Continue?</string>
 	<string name="local_index_descr_title">Offline Data Manager</string>
 	
-	<string name="local_index_mi_restore">Restore...</string>
-	<string name="local_index_mi_backup">Backup...</string>
-	<string name="local_index_mi_delete">Delete...</string>
+	<string name="local_index_mi_restore">Restore</string>
+	<string name="local_index_mi_backup">Backup</string>
+	<string name="local_index_mi_delete">Delete</string>
 	<string name="local_index_mi_reload">Refresh</string>
 	<string name="local_index_download">Download...</string>
 	<string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable : %4$s \nZooms downloaded : %5$s</string>

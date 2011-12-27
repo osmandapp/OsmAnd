@@ -105,7 +105,7 @@
 	<string name="menu_save_directions">Enregistrer l\'itinéraire</string>
 	<string name="local_index_upload_gpx_description">Envoyer les fichiers GPX à la communauté OSM. Ils seront utilisés pour améliorer les cartes.</string>
 	<string name="local_index_items_uploaded">%1$d sur %2$d élement(s) envoyés avec succès.</string>
-	<string name="local_index_mi_upload_gpx">Envoyer à OSM...</string>     
+	<string name="local_index_mi_upload_gpx">Envoyer à OSM</string>     
 
 	<string name="show_more_map_detail">Afficher plus de détails</string>
 	<string name="show_more_map_detail_descr">Afficher plus de détails sur les cartes vectorielles (routes etc.) aux niveaux de zooms inférieurs</string>
@@ -131,9 +131,9 @@
 	<string name="local_index_no_items_to_do">Pas d\'eléments à %1$s</string>
 	<string name="local_index_action_do">Vous allez %1$s %2$s eléments. Continuer?</string>
 	<string name="local_index_descr_title">Gestionnaire de données hors ligne</string>
-	<string name="local_index_mi_restore">Restorer...</string>
-	<string name="local_index_mi_backup">Sauvegarder...</string>
-	<string name="local_index_mi_delete">Supprimer...</string>
+	<string name="local_index_mi_restore">Restorer</string>
+	<string name="local_index_mi_backup">Sauvegarder</string>
+	<string name="local_index_mi_delete">Supprimer</string>
 	<string name="local_index_mi_reload">Re-initialiser</string>
 	<string name="local_index_download">Télécharger...</string>
 	<string name="local_index_tile_data">Cartes tuiles: %1$s \nZoom minimum : %2$d\nZoom maximum : %3$d\nTéléchargeable : %4$s \nZooms téléchargés : %5$s</string>

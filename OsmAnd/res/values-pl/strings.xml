@@ -103,7 +103,7 @@
 <string name="menu_save_directions">Zapisz kierunki</string>
 <string name="local_index_upload_gpx_description">Wyślij ślady GPX do społeczności OSM. Pomoże to ulepszyć mapę.</string>
 <string name="local_index_items_uploaded">%1$d z %2$d został wysłany.</string>
-<string name="local_index_mi_upload_gpx">Wyślij do OSM...</string>
+<string name="local_index_mi_upload_gpx">Wyślij do OSM</string>
 
 <string name="show_more_map_detail">Pokaż więcej szczegółów na mapie</string>
 <string name="show_more_map_detail_descr">Pokazuje więcej szczegółów na mapie wektorowej na niższych poziomach powiększenia</string>
@@ -129,9 +129,9 @@
 <string name="local_index_action_do">Zamierzasz %1$s %2$s elementów. Kontynuować?</string>
 <string name="local_index_descr_title">Zarządzanie danymi offline</string>
 
-<string name="local_index_mi_restore">Przywróć...</string>
-<string name="local_index_mi_backup">Zarchiwizuj...</string>
-<string name="local_index_mi_delete">Skasuj...</string>
+<string name="local_index_mi_restore">Przywróć</string>
+<string name="local_index_mi_backup">Zarchiwizuj</string>
+<string name="local_index_mi_delete">Skasuj</string>
 <string name="local_index_mi_reload">Odśwież</string>
 <string name="local_index_download">Pobierz...</string>
 <string name="local_index_tile_data">Dane kafelkowe: %1$s \nMinimalny zoom: %2$d\nMaksymalny zoom: %3$d\nMożliwe do pobrania: %4$s \nPobrano poziomy: %5$s</string>

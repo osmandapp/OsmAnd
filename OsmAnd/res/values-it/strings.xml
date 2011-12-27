@@ -79,7 +79,7 @@
 	<string name="menu_save_directions">Salva direzioni</string>
 	<string name="local_index_upload_gpx_description">Upload dei file GPX alla comunità OSM. Loro li utilizzeranno per migliorare le mappe.</string>
 	<string name="local_index_items_uploaded">%1$d di %2$d oggetto(i) caricato(i) con successo.</string>
-	<string name="local_index_mi_upload_gpx">Invia ad OSM...</string>
+	<string name="local_index_mi_upload_gpx">Invia ad OSM</string>
 
 	<string name="show_more_map_detail">Mostra più dettagli mappa</string>
 	<string name="show_more_map_detail_descr">Mostra qualche dettaglio (strade ecc.) a zoom piu\' bassi</string>
@@ -105,9 +105,9 @@
 	<string name="local_index_no_items_to_do">Nessun oggetto da %1$s</string>
 	<string name="local_index_action_do">Stai per %1$s %2$s oggetti/i. Continuare?</string>
 	<string name="local_index_descr_title">Manager Dati Offline</string>
-	<string name="local_index_mi_restore">Ripristina...</string>
-	<string name="local_index_mi_backup">Backup...</string>
-	<string name="local_index_mi_delete">Elimina...</string>
+	<string name="local_index_mi_restore">Ripristina</string>
+	<string name="local_index_mi_backup">Backup</string>
+	<string name="local_index_mi_delete">Elimina</string>
 	<string name="local_index_mi_reload">Ricarica</string>
 	<string name="local_index_download">Scarica...</string>
 	<string name="local_index_tile_data">Tile data: %1$s \nZoom minimo : %2$d\nZoom massimo : %3$d\nScaricabile : %4$s \nZoom scaricati : %5$s</string>

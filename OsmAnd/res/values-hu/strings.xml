@@ -105,7 +105,7 @@
 	<string name="menu_save_directions">Irányok mentése</string>
 	<string name="local_index_upload_gpx_description">GPX fájl feltöltése OSM-be. A térkép kibővítésére használják majd.</string>
 	<string name="local_index_items_uploaded">%2$d darabból %1$d sikeresen feltöltve.</string>
-	<string name="local_index_mi_upload_gpx">OSM hozzájárulás...</string>
+	<string name="local_index_mi_upload_gpx">OSM hozzájárulás</string>
 
 	<string name="show_more_map_detail">Több térképrészlet mutatása</string>
 	<string name="show_more_map_detail_descr">Több részlet megmutatása, mint pl. utak, vektoros térképen már alacsonyabb nagyítási szinten.</string>
@@ -132,9 +132,9 @@
 	<string name="local_index_action_do">%2$s darab elemen végre lesz hajtva a %1$s. Folytatod?</string>
 	<string name="local_index_descr_title">Offline - kapcsolat nélküli adat kezelés</string>
 	<string name="local_index_description">Új adat letöltése, biztonsági mentés vagy az adatok törlése.\nJelenlegi offline adatok az eszközön (szabad hely: %1$s):</string>
-	<string name="local_index_mi_restore">Visszaállítás...</string>
-	<string name="local_index_mi_backup">Biztonsági mentés...</string>
-	<string name="local_index_mi_delete">Törlés...</string>
+	<string name="local_index_mi_restore">Visszaállítás</string>
+	<string name="local_index_mi_backup">Biztonsági mentés</string>
+	<string name="local_index_mi_delete">Törlés</string>
 	<string name="local_index_mi_reload">Frissítés</string>
 	<string name="local_index_download">Letöltés...</string>
 	<string name="local_index_tile_data">Csempe adat: %1$s \nMinimális nagyítás : %2$d\nMaximális nagyítás : %3$d\nLetöltendő : %4$s \nNagyítások letöltve : %5$s</string>

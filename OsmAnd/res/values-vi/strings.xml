@@ -88,7 +88,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	
 	<string name="local_index_upload_gpx_description">Tải tập tin GPX lên cộng đồng OSM. Nó sẽ hữu ích để cải thiện chất lượng bản đồ.</string>
 	<string name="local_index_items_uploaded">%1$d của %2$d đối tượng được tải lên thành công.</string>
-	<string name="local_index_mi_upload_gpx">Gửi đến OSM...</string>
+	<string name="local_index_mi_upload_gpx">Gửi đến OSM</string>
 	
 	<string name="show_more_map_detail">Hiển thị chi tiết hơn</string>
 	<string name="show_more_map_detail_descr">Show some vector map detail (roads etc.) at lower zooms already</string>
@@ -115,9 +115,9 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="local_index_action_do">Bạn sẽ %1$s %2$s đối tượng. Có tiếp tục?</string>
 	<string name="local_index_descr_title">Quản lý dữ liệu Offline</string>
 	
-	<string name="local_index_mi_restore">Khôi phục...</string>
-	<string name="local_index_mi_backup">Sao lưu...</string>
-	<string name="local_index_mi_delete">Xóa...</string>
+	<string name="local_index_mi_restore">Khôi phục</string>
+	<string name="local_index_mi_backup">Sao lưu</string>
+	<string name="local_index_mi_delete">Xóa</string>
 	<string name="local_index_mi_reload">Làm tươi</string>
 	<string name="local_index_download">Tải xuống...</string>
 	<string name="local_index_tile_data">Dữ liệu Tile: %1$s \nZoom nhỏ nhất : %2$d\nZoom lớn nhất : %3$d\nCó thể tải về được : %4$s \nZooms được tải về : %5$s</string>

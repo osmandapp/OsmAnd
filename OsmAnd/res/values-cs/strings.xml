@@ -112,7 +112,7 @@
 	<string name="menu_save_directions">Uložit pokyny</string>
 	<string name="local_index_upload_gpx_description">Nahrát GPX soubory do OSM komunity. Budou použity k vylepšení map.</string>
 	<string name="local_index_items_uploaded">%1$d z %2$d položek byla úspěšně nahrána.</string>
-	<string name="local_index_mi_upload_gpx">Přispět do OSM...</string>
+	<string name="local_index_mi_upload_gpx">Přispět do OSM</string>
 
 	<string name="show_more_map_detail">Více mapových detailů</string>
 	<string name="show_more_map_detail_descr">Zobrazit některé detaily vektorové mapy (silnice, atd.) již při menším zvětšení</string>
@@ -138,9 +138,9 @@
         <string name="local_index_items_restored">Obnoveno %1$d položek z %2$d.</string>
         <string name="local_index_no_items_to_do">Žádné položky pro akci %1$s</string>
         <string name="local_index_action_do">Chystáte se %1$s %2$s položek. Jste si jisti?</string>
-        <string name="local_index_mi_restore">Obnovit...</string>
-        <string name="local_index_mi_backup">Zálohovat...</string>
-        <string name="local_index_mi_delete">Smazat...</string>
+        <string name="local_index_mi_restore">Obnovit</string>
+        <string name="local_index_mi_backup">Zálohovat</string>
+        <string name="local_index_mi_delete">Smazat</string>
         <string name="local_index_mi_reload">Znovu nahrát</string>
         <string name="local_index_download">Stáhnout...</string>
         <string name="local_index_tile_data">Zdroj map. dlaždic: %1$s \nMinimální zvětšení : %2$d\nMaximální zvětšení : %3$d\nStahovatelné : %4$s \nStažené zvětšení : %5$s</string>

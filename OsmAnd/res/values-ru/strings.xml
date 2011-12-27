@@ -87,7 +87,7 @@
 	<string name="menu_save_directions">Сохранить маршрут</string>
 	<string name="local_index_upload_gpx_description">Поделиться GPX файлами с OSM сообществом. Они будут использованы для улучшения карты и загружены в osm.org.</string>
 	<string name="local_index_items_uploaded">%1$d из %2$d объект(ов) успешно загружены.</string>
-	<string name="local_index_mi_upload_gpx">Отправить в OSM...</string>
+	<string name="local_index_mi_upload_gpx">Отправить в OSM</string>
 	
 	<string name="show_more_map_detail">Детализированная карта</string>
 	<string name="show_more_map_detail_descr">Показывать детали (дороги и др.), начиная с мелких масштабов.</string>
@@ -115,9 +115,9 @@
     <string name="local_index_action_do">Вы собириаетесь %1$s %2$s объектов. Вы уверены?</string>
 	<string name="local_index_descr_title">Менеджер офлайн данных</string>
 	
-	<string name="local_index_mi_restore">Восстановить...</string>
-	<string name="local_index_mi_backup">Архив...</string>
-	<string name="local_index_mi_delete">Удалить...</string>
+	<string name="local_index_mi_restore">Восстановить</string>
+	<string name="local_index_mi_backup">Архив</string>
+	<string name="local_index_mi_delete">Удалить</string>
 	<string name="local_index_mi_reload">Обновить</string>
 	<string name="local_index_download">Загрузить...</string>
 	<string name="local_index_tile_data">Тайловые данные : %1$s \nМинимальный уровень : %2$d\nМаксимальный уровень : %3$d\nЗагружаемый : %4$s \nУровни загружены : %5$s</string>
