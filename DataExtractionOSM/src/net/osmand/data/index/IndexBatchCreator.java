@@ -122,6 +122,7 @@ public class IndexBatchCreator {
 		if(name.equals("-local")){
 			stream = IndexBatchCreator.class.getResourceAsStream("batch.xml");
 			regionsStream = IndexBatchCreator.class.getResourceAsStream("regions.xml");
+			System.out.println("Using local settings");
 		} else {
 			try {
 				stream = new FileInputStream(name);
@@ -190,7 +191,7 @@ public class IndexBatchCreator {
 	
 		String dir = process.getAttribute("directory_for_osm_files");
 		if(dir == null || !new File(dir).exists()) {
-			throw new IllegalArgumentException("Please specify directory with .osm or .osm.bz2 files as directory_for_osm_files (attribute)"); //$NON-NLS-1$
+			throw new IllegalArgumentException("Please specify directory with .osm or .osm.bz2 files as directory_for_osm_files (attribute)" + dir); //$NON-NLS-1$
 		}
 		osmDirFiles = new File(dir);
 		dir = process.getAttribute("directory_for_index_files");
