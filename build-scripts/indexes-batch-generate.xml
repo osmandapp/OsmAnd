@@ -26,8 +26,8 @@
 		 or you can upload any file you have to googlecode (just put into 'directory_for_index_files')
 	 -->
 	 <!-- zoomWaySmoothness - 1-4, typical mapZooms - 8-10;11-12;13-14;15   -->
-	<process directory_for_osm_files="~/indexes/osm" directory_for_index_files="~/indexes"
-		directory_for_uploaded_files="~/indexes/uploaded" keepPoiOdb="false"
+	<process directory_for_osm_files="/var/lib/jenkins/indexes/osm" directory_for_index_files="/var/lib/jenkins/indexes"
+		directory_for_uploaded_files="/var/lib/jenkins/indexes/uploaded" keepPoiOdb="false"
 		downloadOsmFiles="true" generateIndexes="true" uploadIndexes="false" 
 		upload_osmand_googlecode="false" deleteFilesAfterUploading="false" indexPOI="true" indexMap="true"
 		indexTransport="true" indexAddress="true">
