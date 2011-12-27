@@ -36,7 +36,6 @@
 <string name="auto_follow_route_navigation_descr">Włącz podążanie za pozycją tylko w trybie nawigacji.</string>
 <string name="auto_follow_location_enabled">Podążanie za pozycją jest włączone.</string>
 
-<!-- string name="delete_confirmation_title">Usuwanie</string -->
 <string name="delete_confirmation_msg">Czy na pewno usunąć %1$s?</string>
 <string name="city_type_suburb">Dzielnica</string>
 <string name="city_type_hamlet">Przysiółek</string>

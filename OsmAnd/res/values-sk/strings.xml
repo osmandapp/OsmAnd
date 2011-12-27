@@ -36,7 +36,6 @@
 	<string name="pref_overlay">Prekrývacia/podkladová</string>
 	<string name="pref_raster_map">Rastrová mapa</string>
 	<string name="pref_vector_map">Vektorová mapa</string>
-	<!-- string name="delete_confirmation_title">Mazanie</string -->
 	<string name="delete_confirmation_msg">Naozaj chcete zmazať %1$s?</string>
 	<string name="city_type_suburb">Mestská časť</string>
 	<string name="city_type_hamlet">Osada</string>

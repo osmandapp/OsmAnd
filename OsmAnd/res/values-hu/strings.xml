@@ -36,7 +36,6 @@
 	<string name="pref_overlay">Rátét / alátét</string>
 	<string name="pref_raster_map">Csempés (raszteres) térkép beállítások</string>
 	<string name="pref_vector_map">Vektoros térkép beállítások</string>
-<!-- string name="delete_confirmation_title">Törlés</string -->
 	<string name="delete_confirmation_msg">Biztosan törlöd: %1$s?</string>
 	<string name="city_type_suburb">településrész</string>
 	<string name="city_type_hamlet">falucska</string>

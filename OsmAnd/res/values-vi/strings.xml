@@ -17,7 +17,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="pref_overlay">Overlay / Underlay</string>
 	<string name="pref_raster_map">Thiết lập bản đồ Tile</string>
 	<string name="pref_vector_map">Thiết lập bản đồ Vector</string>
-	<!-- string name="delete_confirmation_title">Xác nhận</string -->
 	<string name="delete_confirmation_msg">Bạn có muốn xóa %1$s?</string>
 	<string name="city_type_suburb">Ngoại thành</string>
 	<string name="city_type_hamlet">Thôn/Xóm</string>

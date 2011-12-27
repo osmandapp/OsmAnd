@@ -174,7 +174,6 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 							}
 						});
 						confirm.setNegativeButton(R.string.default_buttons_no, null);
-						// confirm.setTitle(R.string.delete_confirmation_title);
 						confirm.setMessage(getString(R.string.delete_confirmation_msg, info.getFileName()));
 						confirm.show();
 					} else if (resId == R.string.local_index_mi_backup) {
