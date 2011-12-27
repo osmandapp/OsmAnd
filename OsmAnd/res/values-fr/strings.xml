@@ -57,7 +57,7 @@
 \n\t- Corrections des instructions vocales (sur l\'emplacement GPS et supprimer la première instruction) 
 \n\t- Petites améliorations diverses
   </string>
-  <string name="local_index_description">Télécharger nouveau, déplacer ou supprimer données actuelles. \nDonnées hors ligne actuellement présente sur l\'appareil (%1$s is available):</string>
+  <string name="local_index_description">Télécharger nouveau, déplacer ou supprimer données actuelles. \nDonnées hors ligne actuellement présente sur l\'appareil (%1$s free space):</string>
   <string name="file_can_not_be_renamed">Fichier ne peut être renommé.</string>
   <string name="file_with_name_already_exists">Un fichier avec ce nom existe déjà.</string>
   <string name="gpx_navigation">Itinéraire GPX</string>

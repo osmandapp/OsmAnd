@@ -77,7 +77,7 @@
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 
 <string name="search_select_point">Vybrat</string>
-<string name="local_index_description">Stahnout nová, zálohovat nebo smazat existující data. \nOffline data na zařízení (%1$s dostupné)</string>
+<string name="local_index_description">Stahnout nová, zálohovat nebo smazat existující data. \nOffline data na zařízení (%1$s dostupné):</string>
 <string name="search_position_current_location_search">Hledané polohy...</string>
 <string name="search_position_current_location_found">Poloha [nalezeno]</string>
 <string name="search_position_address">Adresy...</string>
