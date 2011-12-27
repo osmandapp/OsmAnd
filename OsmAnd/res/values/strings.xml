@@ -74,7 +74,7 @@
 	<string name="show_gpx_route">Show on map</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_select_point">Select</string>
-	<string name="local_index_description">Download new, activate, deactivate, or delete existing data. \nCurrent offline data on device (%1$s free space):</string>
+	<string name="local_index_description">Download, activate, deactivate, or delete offline data. \nCurrent data on device (%1$s free space):</string>
 	<string name="search_position_current_location_search">Searching position...</string>
 	<string name="search_position_current_location_found">Position (Found)</string>
 	<string name="search_position_address">Address...</string>

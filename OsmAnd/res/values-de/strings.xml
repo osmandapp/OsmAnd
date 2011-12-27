@@ -131,7 +131,7 @@
 	<string name="local_index_no_items_to_do">Aktion %1$s: Keine Dateien vorhanden</string>
 	<string name="local_index_action_do">%1$s: %2$s Datei(en). Fortfahren?</string>
 	<string name="local_index_descr_title">Offline-Daten Manager</string>
-	<string name="local_index_description">Herunterladen, Aktivieren / Deaktivieren und Löschen von Daten.\nLokal vorhandene Offline-Dateien (%1$s freier Speicher):</string>
+	<string name="local_index_description">Herunterladen, Aktivieren, Deaktivieren und Löschen von Offline-Daten.\nLokal vorhandene Dateien (%1$s freier Speicher):</string>
 	<string name="local_index_mi_restore">Aktivieren</string>
 	<string name="local_index_mi_backup">Deaktivieren</string>
 	<string name="local_index_mi_delete">Löschen</string>
