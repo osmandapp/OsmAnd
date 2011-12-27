@@ -75,7 +75,7 @@
 	<string name="show_gpx_route">Show on map</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_select_point">Select</string>
-	<string name="local_index_description">Download new, or move to backup or delete existing data. \nCurrent offline data on device (%1$s free space):</string>
+	<string name="local_index_description">Download new, activate, deactivate, or delete existing data. \nCurrent offline data on device (%1$s free space):</string>
 	<string name="search_position_current_location_search">Searching position...</string>
 	<string name="search_position_current_location_found">Position (Found)</string>
 	<string name="search_position_address">Address...</string>
@@ -88,7 +88,7 @@
 	<string name="select_search_position">Search near :</string>
 	<string name="context_menu_item_search">Search near here</string>
 	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7 :
-\n\t- Offline data manager (download, delete, backup offline data directly in Osmand)
+\n\t- Offline data manager (download, delete, activate / deactivate offline data directly in Osmand)
 \n\t- Favorite points and groups (categorize, delete, manage favorites)
 \n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.)
 \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts)
@@ -128,15 +128,15 @@
 	<string name="local_index_gpx_info_elevation">\nAverage altitude : %1$.0f m\nMinimum altitude : %2$.0f m\nMaximum altitude : %3$.0f m\nAscents : %4$.0f m\nDescents : %5$.0f m</string>
 	<string name="local_index_gpx_info">Subtracks : %1$d\nTotal points : %2$d\nWay points : %3$d\nTotal distance : %4$s\nStart time : %5$tD %5$tR\nEnd time : %6$tD %6$tR</string>
 	<string name="local_index_installed">Installed</string>
-	<string name="local_index_items_backuped">%1$d of %2$d item(s) successfully backed up.</string>
+	<string name="local_index_items_backuped">%1$d of %2$d item(s) successfully deactivated.</string>
 	<string name="local_index_items_deleted">%1$d of %2$d item(s) successfully deleted.</string>
-	<string name="local_index_items_restored">%1$d of %2$d item(s) successfully restored.</string>
+	<string name="local_index_items_restored">%1$d of %2$d item(s) successfully activated.</string>
 	<string name="local_index_no_items_to_do">No items to %1$s</string>
 	<string name="local_index_action_do">You are about to %1$s %2$s item(s). Continue?</string>
 	<string name="local_index_descr_title">Offline Data Manager</string>
 	
-	<string name="local_index_mi_restore">Restore</string>
-	<string name="local_index_mi_backup">Backup</string>
+	<string name="local_index_mi_restore">Activate</string>
+	<string name="local_index_mi_backup">Deactivate</string>
 	<string name="local_index_mi_delete">Delete</string>
 	<string name="local_index_mi_reload">Refresh</string>
 	<string name="local_index_download">Download...</string>
@@ -146,7 +146,7 @@
 	<string name="local_index_transport_data">Transport data</string>
 	<string name="local_index_map_data">Map data</string>
 	<string name="local_index_items"></string>
-	<string name="local_indexes_cat_backup">Backup</string>
+	<string name="local_indexes_cat_backup">Deactivated</string>
 	<string name="local_indexes_cat_tts">Voice data (TTS)</string>
 	<string name="local_indexes_cat_voice">Voice data (media)</string>
 	<string name="local_indexes_cat_gpx">GPX data</string>

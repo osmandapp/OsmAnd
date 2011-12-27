@@ -81,7 +81,7 @@
 	<string name="select_search_position">Suche nahe :</string>
 	<string name="context_menu_item_search">In der Nähe suchen</string>
 	<string name="tip_recent_changes_0_6_7_t">Verbesserungen in 0.6.7 :
-\n\t- Offline-Daten Manager (Herunterladen, Löschen und Verschieben nach Backup von Offline-Daten direkt in OsmAnd)
+\n\t- Offline-Daten Manager (Herunterladen, Löschen, und Aktivieren / Deaktivieren von Offline-Daten direkt in OsmAnd)
 \n\t- Favoriten und Favoritengruppen (Kategorisieren, Löschen, Managen von Favoriten)
 \n\t- GPX Explorer innerhalb der Applikation (Tracks und Track-Daten ansehen)
 \n\t- GPX Navigation (nützliche Optionen, Fortsetzung der Navigation nach Crash, unterstützt jetzt Kreisverkehre)
@@ -120,15 +120,15 @@
 	<string name="local_index_gpx_info_elevation">\nDurchschn.höhe : %1$.0f m\nMinimalhöhe : %2$.0f m\nMaximalhöhe : %3$.0f m\nAufstiege : %4$.0f m\nAbstiege : %5$.0f m</string>
 	<string name="local_index_gpx_info">Subtracks : %1$d\nPunkte insgesamt : %2$d\nWegpunkte : %3$d\nGesamtstrecke : %4$s\nStartzeit : %5$tD %5$tR\nEndzeit : %6$tD %6$tR</string>
 	<string name="local_index_installed">Installiert</string>
-	<string name="local_index_items_backuped">%1$d von %2$d Datei(en) erfolgreich nach Backup verschoben.</string>
+	<string name="local_index_items_backuped">%1$d von %2$d Datei(en) erfolgreich deaktiviert.</string>
 	<string name="local_index_items_deleted">%1$d von %2$d Datei(en) erfolgreich gelöscht.</string>
-	<string name="local_index_items_restored">%1$d von %2$d Datei(en) erfolgreich aus dem Backup wiederhergestellt.</string>
+	<string name="local_index_items_restored">%1$d von %2$d Datei(en) erfolgreich aktiviert.</string>
 	<string name="local_index_no_items_to_do">Aktion %1$s: Keine Dateien vorhanden</string>
 	<string name="local_index_action_do">%1$s: %2$s Datei(en). Fortfahren?</string>
 	<string name="local_index_descr_title">Offline-Daten Manager</string>
-	<string name="local_index_description">Herunterladen, Verschieben (in Backup-Ordner), Löschen und Wiederherstellen von Daten.\nLokal vorhandene Offline-Dateien:</string>
-	<string name="local_index_mi_restore">Wiederherstellen</string>
-	<string name="local_index_mi_backup">Backup</string>
+	<string name="local_index_description">Herunterladen, Aktivieren / Deaktivieren und Löschen von Daten.\nLokal vorhandene Offline-Dateien (%1$s freier Speicher):</string>
+	<string name="local_index_mi_restore">Aktivieren</string>
+	<string name="local_index_mi_backup">Deaktivieren</string>
 	<string name="local_index_mi_delete">Löschen</string>
 	<string name="local_index_mi_reload">Aktualisieren</string>	
 	<string name="local_index_download">Herunterladen...</string>
@@ -138,7 +138,7 @@
 	<string name="local_index_transport_data">ÖPNV-Daten</string>
 	<string name="local_index_map_data">Karten-Daten</string>
 	<string name="local_index_items"></string>
-	<string name="local_indexes_cat_backup">Backup</string>
+	<string name="local_indexes_cat_backup">Deaktiviert</string>
 	<string name="local_indexes_cat_tts">Sprachansagen (TTS)</string>
 	<string name="local_indexes_cat_voice">Sprachansagen (Aufnahmen)</string>
 	<string name="local_indexes_cat_gpx">GPX-Daten</string>
