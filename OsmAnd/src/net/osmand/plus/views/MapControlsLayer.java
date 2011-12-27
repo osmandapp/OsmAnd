@@ -103,7 +103,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, DrawSettings nightMode) {
 		BaseMapLayer mainLayer = view.getMainLayer();
 		boolean zoomInEnabled = mainLayer != null && view.getZoom() < mainLayer.getMaximumShownMapZoom();
 		boolean zoomOutEnabled = mainLayer != null && view.getZoom() > mainLayer.getMinimumShownMapZoom();
@@ -176,7 +176,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				public void onClick(View v) {
 					view.getSettings().APPLICATION_MODE.set(modes[j]);
 					activity.updateApplicationModeSettings();
-					view.refreshMap();
+					view.refreshMap(true);
 					mQuickAction.dismiss();
 				}
 			});

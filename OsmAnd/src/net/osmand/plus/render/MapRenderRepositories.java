@@ -39,6 +39,7 @@ import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.render.NativeOsmandLibrary.NativeSearchResult;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
@@ -48,8 +49,8 @@ import org.apache.commons.logging.Log;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.RectF;
 import android.graphics.Bitmap.Config;
+import android.graphics.RectF;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
@@ -179,11 +180,14 @@ public class MapRenderRepositories {
 		}
 	}
 
-	public boolean updateMapIsNeeded(RotatedTileBox box) {
+	public boolean updateMapIsNeeded(RotatedTileBox box, DrawSettings drawSettings) {
 		if (files.isEmpty() || box == null) {
 			return false;
 		}
 		if (requestedBox == null) {
+			return true;
+		}
+		if (drawSettings.isForce()) {
 			return true;
 		}
 		if (requestedBox.getZoom() != box.getZoom()) {

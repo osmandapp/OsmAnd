@@ -501,7 +501,7 @@ public class MapActivityActions implements DialogProvider {
 				boolean changed = settings.APPLICATION_MODE.set(mode);
 				if (changed) {
 					mapActivity.updateApplicationModeSettings();	
-					mapActivity.getMapView().refreshMap();
+					mapActivity.getMapView().refreshMap(true);
 				}
 				
 				Location location = getLocationToStartFrom(lat, lon); 
@@ -606,7 +606,7 @@ public class MapActivityActions implements DialogProvider {
 						if (changed) {
 							mapActivity.updateApplicationModeSettings();	
 						}
-						mapActivity.getMapView().refreshMap();
+						mapActivity.getMapView().refreshMap(changed);
 						if(endPoint != null){
 							settings.FOLLOW_THE_ROUTE.set(true);
 							settings.FOLLOW_THE_GPX_ROUTE.set(result.path);

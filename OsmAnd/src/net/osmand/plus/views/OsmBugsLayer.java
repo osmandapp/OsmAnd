@@ -18,7 +18,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DialogProvider;
 import net.osmand.plus.activities.MapActivity;
-
 import org.apache.commons.logging.Log;
 
 import android.app.AlertDialog;
@@ -130,7 +129,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements ContextMenuLayer.ICo
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		if (view.getZoom() >= startZoom) {
 			// request to load
 			requestToLoad(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, view.getZoom());

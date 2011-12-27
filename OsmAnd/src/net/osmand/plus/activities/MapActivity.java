@@ -304,13 +304,14 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}
 
 		getMyApplication().getDaynightHelper().onMapResume();
+		mapView.refreshMap(true);
 	}
     
     private void notRestoreRoutingMode(){
-    	settings.APPLICATION_MODE.set(ApplicationMode.DEFAULT);
+    	boolean changed = settings.APPLICATION_MODE.set(ApplicationMode.DEFAULT);
 		updateApplicationModeSettings();
 		routingHelper.clearCurrentRoute(null);
-		mapView.refreshMap();	
+		mapView.refreshMap(changed);	
     }
 
 	private void restoreRoutingMode(final LatLon pointToNavigate) {

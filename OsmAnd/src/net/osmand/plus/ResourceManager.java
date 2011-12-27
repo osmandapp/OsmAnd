@@ -26,8 +26,8 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.IndexConstants;
-import net.osmand.data.TransportStop;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
+import net.osmand.data.TransportStop;
 import net.osmand.map.ITileSource;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -37,6 +37,7 @@ import net.osmand.plus.AsyncLoadingThread.TileLoadDownloadRequest;
 import net.osmand.plus.AsyncLoadingThread.TransportLoadRequest;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.render.RenderingRulesStorage;
 
 import org.apache.commons.logging.Log;
@@ -728,8 +729,8 @@ public class ResourceManager {
 	}
 	
 	////////////////////////////////////////////// Working with map ////////////////////////////////////////////////
-	public boolean updateRenderedMapNeeded(RotatedTileBox rotatedTileBox){
-		return renderer.updateMapIsNeeded(rotatedTileBox);
+	public boolean updateRenderedMapNeeded(RotatedTileBox rotatedTileBox, DrawSettings drawSettings){
+		return renderer.updateMapIsNeeded(rotatedTileBox,drawSettings);
 	}
 	
 	public void updateRendererMap(RotatedTileBox rotatedTileBox){

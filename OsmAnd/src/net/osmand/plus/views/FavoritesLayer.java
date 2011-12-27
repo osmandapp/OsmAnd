@@ -65,7 +65,7 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		if (view.getZoom() >= startZoom) {
 			// request to load
 			for (FavouritePoint o : favorites.getFavouritePoints()) {

@@ -60,7 +60,7 @@ public class PointNavigationLayer extends OsmandMapLayer {
 
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		if(pointToNavigate == null){
 			return;
 		}

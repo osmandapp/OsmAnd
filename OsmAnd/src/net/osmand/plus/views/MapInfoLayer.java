@@ -186,7 +186,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latlonBounds, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latlonBounds, RectF tilesRect, DrawSettings nightMode) {
 		// update data on draw
 		rightStack.updateInfo();
 		leftStack.updateInfo();

@@ -8,8 +8,6 @@ import org.apache.commons.logging.Log;
 
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.os.Looper;
-
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.ResultMatcher;

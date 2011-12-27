@@ -153,7 +153,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		
 		if (view.getZoom() >= startZoom) {
 			objects.clear();

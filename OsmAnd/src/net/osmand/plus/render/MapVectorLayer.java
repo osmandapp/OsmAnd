@@ -85,7 +85,7 @@ public class MapVectorLayer extends BaseMapLayer {
 	
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings drawSettings) {
 		if(!visible){
 			return;
 		}
@@ -96,7 +96,9 @@ public class MapVectorLayer extends BaseMapLayer {
 			if (!view.isZooming()) {
 				pixRect.set(0, 0, view.getWidth(), view.getHeight());
 				updateRotatedTileBox();
-				if (resourceManager.updateRenderedMapNeeded(rotatedTileBox)) {
+				//TODO passing of nithMode and appMode could be probably something more general? These are
+				//renderer properties, so, we should check if renderer properties are changed somehow...
+				if (resourceManager.updateRenderedMapNeeded(rotatedTileBox,drawSettings)) {
 					// pixRect.set(-view.getWidth(), -view.getHeight() / 2, 2 * view.getWidth(), 3 * view.getHeight() / 2);
 					pixRect.set(-view.getWidth() / 3, -view.getHeight() / 4, 4 * view.getWidth() / 3, 5 * view.getHeight() / 4);
 					updateRotatedTileBox();

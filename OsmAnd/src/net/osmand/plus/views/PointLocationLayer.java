@@ -77,7 +77,7 @@ public class PointLocationLayer extends OsmandMapLayer {
 	}
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		// draw 
 		if(lastKnownLocation == null || view == null){
 			return;

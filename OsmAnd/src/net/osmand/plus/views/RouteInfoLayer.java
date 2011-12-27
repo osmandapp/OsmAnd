@@ -159,7 +159,7 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, DrawSettings nightMode) {
 		
 	}
 	

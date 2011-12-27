@@ -16,6 +16,7 @@ import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 
 import org.apache.commons.logging.Log;
 
@@ -419,7 +420,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return settings;
 	}
 
-	private void refreshMapInternal() {
+	private void refreshMapInternal(boolean force) {
 		handler.removeMessages(1);
 		
 		// long time = System.currentTimeMillis();
@@ -471,7 +472,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 //							drawEmptyTile(canvas, x1, y1, ftileSize, nightMode);
 //						}
 //					}
-					drawOverMap(canvas, latlonRect, tilesRect, nightMode);
+					drawOverMap(canvas, latlonRect, tilesRect, new DrawSettings(nightMode,force));
 					
 //					log.info("Draw with layers " + (System.currentTimeMillis() - time));
 				} finally {
@@ -481,7 +482,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 	}
 	
-	private void drawOverMap(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode) {
+	private void drawOverMap(Canvas canvas, RectF latlonRect, RectF tilesRect, DrawSettings drawSettings) {
 		int w = getCenterPointX();
 		int h = getCenterPointY();
 
@@ -496,7 +497,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				if (!layer.drawInScreenPixels()) {
 					canvas.rotate(getRotate(), w, h);
 				}
-				layer.onDraw(canvas, latlonRect, tilesRect, nightMode);
+				layer.onDraw(canvas, latlonRect, tilesRect, drawSettings);
 				canvas.restore();
 			} catch (IndexOutOfBoundsException e) {
 				// skip it
@@ -522,11 +523,17 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	// this method could be called in non UI thread
 	public void refreshMap() {
-		if (!handler.hasMessages(1)) {
+		refreshMap(false);
+	}
+	
+	// this method could be called in non UI thread
+	public void refreshMap(final boolean force) {
+		if (!handler.hasMessages(1) || force) {
+			handler.removeMessages(1);
 			Message msg = Message.obtain(handler, new Runnable() {
 				@Override
 				public void run() {
-					refreshMapInternal();
+					refreshMapInternal(force);
 				}
 			});
 			msg.what = 1;
