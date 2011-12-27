@@ -12,7 +12,7 @@
 		
         <!-- Countries to download from geofabrik or cloudmade server -->
 		<!-- 1. EUROPE [SOURCE: GEOFABRIK.DE] -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/europe/{0}.osm.pbf" region_prefix="" skip="true" region_suffix="_Europe">
+		<regions siteToDownload="http://download.geofabrik.de/osm/europe/{0}.osm.pbf" region_prefix="" skip="false" region_suffix="_Europe">
 			<region name="albania" esize="6" />
 			<region name="andorra" esize="1" />
 			<region name="austria" esize="110" />
@@ -59,7 +59,7 @@
 		</regions>
 
 		<!-- 1.1 GREAT BRITAIN [SOURCE: GEOFABRIK.DE] -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/europe/great_britain/{0}.osm.pbf" region_prefix="GB_" skip="true" region_suffix="_Europe">
+		<regions siteToDownload="http://download.geofabrik.de/osm/europe/great_britain/{0}.osm.pbf" region_prefix="GB_" skip="false" region_suffix="_Europe">
 			<region name="scotland" esize=""/>		
 			<region name="wales" esize="10"/>
 			<region name="england" esize="230"/>
@@ -67,7 +67,7 @@
 
 		<!-- 1.2 FRANCE [SOURCE: GEOFABRIK.DE] -->
 		<regions siteToDownload="http://download.geofabrik.de/osm/europe/france/{0}.osm.pbf" region_prefix="France_" 
-			skip="true" region_suffix="_Europe">
+			skip="false" region_suffix="_Europe">
 			<region name="alsace" esize="" />
 			<region name="aquitaine" esize="" />
 			<region name="auvergne" esize="" />
@@ -93,7 +93,7 @@
 		</regions>
 
 		<!-- 1.3 GERMANY [SOURCE: GEOFABRIK.DE] -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/europe/germany/{0}.osm.pbf" region_prefix="Germany_" skip="true" 
+		<regions siteToDownload="http://download.geofabrik.de/osm/europe/germany/{0}.osm.pbf" region_prefix="Germany_" skip="false" 
 			region_suffix="_Europe">
 			<region name="baden-wuerttemberg" esize="" cityAdminLevel="7"/>
 			<region name="bayern" esize="" cityAdminLevel="7"/>
@@ -113,13 +113,13 @@
 			<region name="thueringen" esize="" cityAdminLevel="7"/>
 		</regions>
 
- 	        <regions siteToDownload="http://planet.openstreetmap.nl/planet-{0}-latest.osm.pbf" region_prefix="" skip="true" region_suffix="_Europe">
+ 	        <regions siteToDownload="http://planet.openstreetmap.nl/planet-{0}-latest.osm.pbf" region_prefix="" skip="false" region_suffix="_Europe">
                        <region name="benelux" esize="6" />
                 </regions>
 
         <!-- 2. ASIA -->
 		<!-- 2.1 Russia [GIS-LAB.INFO] -->
-		<regions siteToDownload="http://gis-lab.info/data/osm/{0}/{0}.osm.bz2" region_prefix="Russia_"  skip="true" region_suffix="_Asia">
+		<regions siteToDownload="http://gis-lab.info/data/osm/{0}/{0}.osm.bz2" region_prefix="Russia_"  skip="false" region_suffix="_Asia">
 			<region name="adygeya" esize=""/>
 			<region name="altay" esize=""/>
 			<region name="altayskiy" esize=""/>
@@ -210,7 +210,7 @@
 	        </regions>
 		
 		<!-- 2.2 ASIA-AVAILABLE ON GEOFABRIK.DE [SOURCE: GEOFABRIK.DE] (REST OF ASIA IS BELOW FROM CLOUDMADE.COM) -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/asia/{0}.osm.pbf" region_prefix="" region_suffix="_Asia" skip="true">
+		<regions siteToDownload="http://download.geofabrik.de/osm/asia/{0}.osm.pbf" region_prefix="" region_suffix="_Asia" skip="false">
 			<region name="azerbaijan" esize="15"/>
 			<region name="china" esize="4"/>
 			<region name="gaza" esize="3"/>
@@ -230,12 +230,12 @@
 		</regions>
 	    
 		<!-- 2.3 CENTRAL ASIA [SOURCE: CLOUDMADE.COM] -->
-		<regions siteToDownload="http://downloads.cloudmade.com/asia/central_asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia" skip="true">
+		<regions siteToDownload="http://downloads.cloudmade.com/asia/central_asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia" skip="false">
 			<region name="tajikistan" esize="3"/>
 		</regions>
 		
 		<!-- 2.3 EASTERN ASIA [SOURCE: CLOUDMADE.COM] -->
-		<regions siteToDownload="http://downloads.cloudmade.com/asia/eastern_asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia" skip="true">
+		<regions siteToDownload="http://downloads.cloudmade.com/asia/eastern_asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia" skip="false">
 			<region name="hong_kong" esize="67"/>
 			<region name="macao" esize="1"/>
 			<region name="north_korea" esize="5"/>
@@ -243,7 +243,7 @@
 		</regions>	
 		
 		<!-- 2.3 SOUTH-EASTERN ASIA [SOURCE: CLOUDMADE.COM] -->
-		<regions siteToDownload="http://downloads.cloudmade.com/asia/south-eastern_asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia" skip="true">
+		<regions siteToDownload="http://downloads.cloudmade.com/asia/south-eastern_asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia" skip="false">
 			<region name="brunei" esize="1"/>
 			<region name="cambodia" esize="2"/>
 			<region name="christmas_island" esize="1"/>
@@ -258,7 +258,7 @@
 		</regions>	
 			
 		<!-- 2.3 SOUTHERN ASIA [SOURCE: CLOUDMADE.COM] -->
-		<regions siteToDownload="http://downloads.cloudmade.com/asia/southern_asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia" skip="true">
+		<regions siteToDownload="http://downloads.cloudmade.com/asia/southern_asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia" skip="false">
 			<region name="afghanistan" esize="6"/>
 			<region name="bangladesh" esize="3"/>
 			<region name="bhutan" esize="1"/>
@@ -270,7 +270,7 @@
 		</regions>		
 			
 		<!-- 2.3 WESTERN ASIA [SOURCE: CLOUDMADE.COM] -->
-		<regions siteToDownload="http://downloads.cloudmade.com/asia/western_asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia" skip="true">
+		<regions siteToDownload="http://downloads.cloudmade.com/asia/western_asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia" skip="false">
 			<region name="armenia" esize="1"/>
 			<region name="bahrain" esize="1"/>
 			<region name="caspian_sea" esize="1"/>
@@ -291,7 +291,7 @@
 		
 		<!-- 3. North America  -->		
 		<!-- 3.1 USA-AVAILABLE ON GEOFABRIK.DE [SOURCE: GEOFABRIK.DE] (REST OF USA IS BELOW FROM CLOUDMADE.COM) -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/north-america/us/{0}.osm.pbf" skip="true" region_prefix="US_" region_suffix="_NorthAmerica">
+		<regions siteToDownload="http://download.geofabrik.de/osm/north-america/us/{0}.osm.pbf" skip="false" region_prefix="US_" region_suffix="_NorthAmerica">
 			<region name="alabama" esize=""/>
 			<region name="alaska" esize=""/>
 			<region name="arizona" esize=""/>
@@ -347,12 +347,12 @@
 		</regions>
 		
 		<!-- 3.1 USA [SOURCE: CLOUDMADE.COM]-->
-		<regions siteToDownload="http://downloads.cloudmade.com/americas/northern_america/united_states/{0}/{0}.osm.bz2" skip="true" region_prefix="US_" region_suffix="_NorthAmerica">
+		<regions siteToDownload="http://downloads.cloudmade.com/americas/northern_america/united_states/{0}/{0}.osm.bz2" skip="false" region_prefix="US_" region_suffix="_NorthAmerica">
 			<region name="guantanamo_bay" esize=""/> <!-- ??? -->
 		</regions>
 		
 		<!-- 3.1 USA MINOR OUTLYING ISLANDS [SOURCE: CLOUDMADE.COM] -->
-		<regions siteToDownload="http://downloads.cloudmade.com/americas/northern_america/united_states_minor_outlying_islands/{0}/{0}.osm.bz2" skip="true" region_prefix="US-Islands_" region_suffix="_NorthAmerica">
+		<regions siteToDownload="http://downloads.cloudmade.com/americas/northern_america/united_states_minor_outlying_islands/{0}/{0}.osm.bz2" skip="false" region_prefix="US-Islands_" region_suffix="_NorthAmerica">
 			<region name="baker" esize=""/>
 			<region name="howland" esize=""/>
 			<region name="jarvis_island" esize=""/>
@@ -365,7 +365,7 @@
 		</regions>
 		
 		<!-- 3.2 CANADA [SOURCE: GEOFABRIK.DE] -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/north-america/canada/{0}.osm.pbf" region_prefix="Canada_" skip="true" region_suffix="_NorthAmerica">
+		<regions siteToDownload="http://download.geofabrik.de/osm/north-america/canada/{0}.osm.pbf" region_prefix="Canada_" skip="false" region_suffix="_NorthAmerica">
 			<region name="alberta" esize="36"/>
 			<region name="british-columbia" esize=""/>
 			<region name="manitoba" esize=""/>
@@ -383,7 +383,7 @@
 	
 	
 		<!--  3.3 NORTH AMERICA EXCEPT USA AND CANADA [SOURCE: CLOUDMADE.COM] -->	
-		<regions siteToDownload="http://downloads.cloudmade.com/americas/northern_america/{0}/{0}.osm.bz2" region_prefix=""  skip="true" region_suffix="_NorthAmerica">	
+		<regions siteToDownload="http://downloads.cloudmade.com/americas/northern_america/{0}/{0}.osm.bz2" region_prefix=""  skip="false" region_suffix="_NorthAmerica">	
 			<region name="bermuda" esize=""/>
 			<region name="greenland" esize=""/>
 		</regions>	
@@ -392,7 +392,7 @@
 		<regions siteToDownload="http://download.geofabrik.de/osm/{0}.osm.pbf" region_prefix=""  skip="true" region_suffix="">
 			<region name="central-america" esize=""/>
 		</regions>	
-		<regions siteToDownload="http://download.geofabrik.de/osm/central-america/{0}.osm.pbf" region_prefix=""  skip="true" region_suffix="_CentralAmerica">
+		<regions siteToDownload="http://download.geofabrik.de/osm/central-america/{0}.osm.pbf" region_prefix=""  skip="false" region_suffix="_CentralAmerica">
 			<region name="belize" esize="" />
 			<region name="guatemala" esize="" />
 			<region name="haiti-and-domrep" esize="" />
@@ -400,7 +400,7 @@
 			
 		</regions>
 		<!--  4. CENTRAL AMERICA [SOURCE: CLOUDMADE.DE] -->
-		<regions siteToDownload="http://downloads.cloudmade.com/americas/central_america/{0}/{0}.osm.bz2" region_prefix=""  skip="true" region_suffix="_CentralAmerica">
+		<regions siteToDownload="http://downloads.cloudmade.com/americas/central_america/{0}/{0}.osm.bz2" region_prefix=""  skip="false" region_suffix="_CentralAmerica">
 			<region name="costa_rica" esize="" />
 			<region name="el_salvador" esize="" />
 			<region name="honduras" esize="" />
@@ -409,7 +409,7 @@
 		</regions>
 		
 		<!--  4. CENTRAL AMERICA/CARIBBEANS [SOURCE: CLOUDMADE.DE] -->
-		<regions siteToDownload="http://downloads.cloudmade.com/americas/caribbean/{0}/{0}.osm.bz2" region_prefix=""  skip="true" region_suffix="_CentralAmerica">
+		<regions siteToDownload="http://downloads.cloudmade.com/americas/caribbean/{0}/{0}.osm.bz2" region_prefix=""  skip="false" region_suffix="_CentralAmerica">
 			<region name="trinidad_and_tobago" esize="" />
 			<region name="puerto_rico" esize="" />
 			<region name="netherlands_antilles" esize="" />
@@ -430,7 +430,7 @@
 			<region name="south-america" esize="22"/>
 		</regions>
 		
-		<regions siteToDownload="http://download.geofabrik.de/osm/south-america/{0}.osm.pbf" region_prefix="" skip="true"
+		<regions siteToDownload="http://download.geofabrik.de/osm/south-america/{0}.osm.pbf" region_prefix="" skip="false"
 			region_suffix="_SouthAmerica">
 			<region name="argentina" esize="" />
 			<region name="bolivia" esize="" />
@@ -441,7 +441,7 @@
 		
 		<!--  5. SOUTH AMERICA [SOURCE: CLOUDMADE.COM] --> 
 		<regions siteToDownload="http://downloads.cloudmade.com/americas/south_america/{0}/{0}.osm.bz2" region_prefix=""  
-					skip="true" region_suffix="_SouthAmerica">	
+					skip="false" region_suffix="_SouthAmerica">	
 			<region name="ecuador" esize="" />
 			<region name="guyana" esize="" />
 			<region name="paraguay" esize="" />
@@ -476,7 +476,7 @@
 		</regions>
 				
 		<!-- 7. NEW ZEALAND-AUSTRALIA [SOURCE: GEOFABRIK.DE] -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/australia-oceania/{0}.osm.pbf" region_prefix="" region_suffix="_Australia"  skip="true">
+		<regions siteToDownload="http://download.geofabrik.de/osm/australia-oceania/{0}.osm.pbf" region_prefix="" region_suffix="_Australia"  skip="false">
 			<region name="new-zealand" esize=""/>
 			<region name="new-caledonia" esize=""/>
 		</regions>
