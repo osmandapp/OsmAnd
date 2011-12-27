@@ -735,7 +735,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <string name="favourites_context_menu_edit">Sửa Ưa thích</string>
 <string name="favourites_context_menu_delete">Xóa Ưa thích </string>
 
-<string name="favourites_remove_dialog_msg">Bạn có muốn xóa điểm ưa thích?</string>
+<string name="favourites_remove_dialog_msg">Bạn có muốn xóa điểm ưa thích {0}?</string>
 <string name="favourites_remove_dialog_success">Điểm Ưa thích {0} đã xóa thành công.</string>
 
 <string name="osb_add_dialog_title">Nhập thông tin bug</string>

@@ -748,7 +748,7 @@
 <string name="favourites_context_menu_edit">Favorit bearbeiten</string>
 <string name="favourites_context_menu_delete">Favorit löschen</string>
 
-<string name="favourites_remove_dialog_msg">Wollen Sie den Punkt wirklich löschen?</string>
+<string name="favourites_remove_dialog_msg">Wollen Sie den Punkt {0} wirklich löschen?</string>
 <string name="favourites_remove_dialog_success">Der Punkt {0} wurde erfolgreich gelöscht.</string>
 
 <string name="osb_add_dialog_title">Eingabetext des Fehlers</string>

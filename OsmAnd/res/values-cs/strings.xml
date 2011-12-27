@@ -995,7 +995,7 @@
   <string name="favourites_context_menu_delete">Smazat oblíbené</string>
 
   <string name="favourites_remove_dialog_msg">
-    Opravdu chcete odstranit oblíbené místo?
+    Opravdu chcete odstranit oblíbené místo {0}?
   </string>
   <string name="favourites_remove_dialog_success">Oblíbené místo {0} bylo vymazáno.</string>
 

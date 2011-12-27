@@ -414,7 +414,7 @@
 	<string name="favourites_context_menu_navigate">Mover-se para</string>
 	<string name="favourites_context_menu_edit">Modificar favorito</string>
 	<string name="favourites_context_menu_delete">Apagar favorito</string>
-	<string name="favourites_remove_dialog_msg">Você quer mesmo apagar este favorito?</string>
+	<string name="favourites_remove_dialog_msg">Você quer mesmo apagar este favorito {0}?</string>
 	<string name="favourites_remove_dialog_success">Favorito {0} apagado com sucesso.</string>
 	
 	<string name="osb_add_dialog_title">Descrição do bug</string>

@@ -717,7 +717,7 @@ navigate_point_format_D, DM & DMS
 <string name="favourites_context_menu_navigate">Se déplacer vers</string>
 <string name="favourites_context_menu_edit">Modifier favori</string>
 <string name="favourites_context_menu_delete">Supprimer favori</string>
-<string name="favourites_remove_dialog_msg">Voulez-vous vraiment supprimer ce favori ?</string>
+<string name="favourites_remove_dialog_msg">Voulez-vous vraiment supprimer ce favori {0}?</string>
 <string name="favourites_remove_dialog_success">Suppression du favori {0} réussi.</string>
 <string name="osb_add_dialog_title">Description du bogue</string>
 <string name="osb_add_dialog_success">Le bogue a bien été créé</string>

@@ -143,11 +143,11 @@
 	<string name="favorite">Favorito</string>
 	<string name="favorites_Button">Favoritos</string>
 	<string name="favourites_activity">Lista de puntos favoritos</string>
-	<string name="favourites_context_menu_delete">Borrrar favorito</string>
+	<string name="favourites_context_menu_delete">Borrar favorito</string>
 	<string name="favourites_context_menu_edit">Editar favorite</string>
 	<string name="favourites_context_menu_navigate">Navegar a</string>
 	<string name="favourites_remove_dialog_success">Se borró el punto favorito {0}.</string>
-	<string name="favourites_remove_dialog_msg">¿Está seguro/a?</string>
+	<string name="favourites_remove_dialog_msg">¿Está seguro/a borrar {0}?</string>
 	<string name="filter_current_poiButton">Filtro</string>
 	<string name="filter_existing_indexes">Se descargó el filtro</string>
 	<string name="finished_task">Terminado</string>

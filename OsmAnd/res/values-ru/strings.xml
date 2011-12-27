@@ -680,7 +680,7 @@
 	<string name="favourites_context_menu_edit">Редактировать точку</string>
 	<string name="favourites_context_menu_delete">Удалить точку</string>
 
-	<string name="favourites_remove_dialog_msg">Вы действительно хотите удалить точку из Избранных?</string>
+	<string name="favourites_remove_dialog_msg">Вы действительно хотите удалить точку {0} из Избранных?</string>
 	<string name="favourites_remove_dialog_success">Точка {0} была успешно удалена из Избранных.</string>
 
 	<string name="osb_add_dialog_title">Подробно опишите ошибку</string>

@@ -725,7 +725,7 @@
 <string name="favourites_context_menu_edit">Modifica favorito</string>
 <string name="favourites_context_menu_delete">Elimina favorito</string>
 
-<string name="favourites_remove_dialog_msg">Si è sicuri di voler eliminare il punto favorito?</string>
+<string name="favourites_remove_dialog_msg">Si è sicuri di voler eliminare il punto favorito {0}?</string>
 <string name="favourites_remove_dialog_success">Il punto favorito {0} è stato eliminato.</string>
 
 <string name="osb_add_dialog_title">Inserire la descrizione del bug</string>

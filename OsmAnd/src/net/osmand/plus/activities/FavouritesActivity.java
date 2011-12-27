@@ -282,7 +282,7 @@ public class FavouritesActivity extends ExpandableListActivity {
 		if (aItem.getItemId() == DELETE_ITEM) {
 			final Resources resources = this.getResources();
 			Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(getString(R.string.favourites_remove_dialog_msg, point.getName()));
+			builder.setMessage(MessageFormat.format(getString(R.string.favourites_remove_dialog_msg, point.getName())));
 			builder.setNegativeButton(R.string.default_buttons_no, null);
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override

@@ -710,7 +710,7 @@ name="recalculate_route_to_your_location">現在地に従ってルートを再�
 <string name="favourites_context_menu_edit">お気に入りを編集</string>
 <string name="favourites_context_menu_delete">お気に入りを削除</string>
 
-<string name="favourites_remove_dialog_msg">本当にお気に入り地点を削除しますか?</string>
+<string name="favourites_remove_dialog_msg">本当にお気に入り地点を削除しますか? {0}</string>
 <string name="favourites_remove_dialog_success">お気に入り地点 {0}
 は削除されました。</string>
 

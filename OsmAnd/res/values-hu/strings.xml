@@ -729,7 +729,7 @@
 	<string name="favourites_context_menu_edit">Kedvenc szerkesztése</string>
 	<string name="favourites_context_menu_delete">Kedvenc törlése</string>
 
-	<string name="favourites_remove_dialog_msg">Törlöd ezt a kedvenc pontot?</string>
+	<string name="favourites_remove_dialog_msg">Törlöd ezt a kedvenc pontot? {0}</string>
 	<string name="favourites_remove_dialog_success">{0} kedvenc pont sikeresen törölve.</string>
 
 	<string name="osb_add_dialog_title">Hiba leírása</string>

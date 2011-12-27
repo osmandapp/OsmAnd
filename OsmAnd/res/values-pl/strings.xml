@@ -739,7 +739,7 @@
 <string name="favourites_context_menu_edit">Edytuj</string>
 <string name="favourites_context_menu_delete">Usuń</string>
 
-<string name="favourites_remove_dialog_msg">Czy na pewno chcesz usunąć ulubiony punkt?</string>
+<string name="favourites_remove_dialog_msg">Czy na pewno chcesz usunąć ulubiony punkt {0}?</string>
 <string name="favourites_remove_dialog_success">Ulubiony punkt {0} został usunięty.</string>
 
 <string name="osb_add_dialog_title">Wprowadź opis błędu</string>
