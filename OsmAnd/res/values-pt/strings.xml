@@ -411,12 +411,10 @@
 	<string name="add_favorite_dialog_top_text">Digite o nome do favorito</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorito</string>
 	<string name="add_favorite_dialog_favourite_added_template">O ponto \'\'{0}\'\' foi adicionado aos favoritos.</string>
-	<!-- string name="favourites_context_menu_title">Menu contextual</string -->
 	<string name="favourites_context_menu_navigate">Mover-se para</string>
 	<string name="favourites_context_menu_edit">Modificar favorito</string>
 	<string name="favourites_context_menu_delete">Apagar favorito</string>
-	<string name="favourites_edit_dialog_title">Modificar nome do favorito</string>
-	<string name="favourites_remove_dialog_title">Você quer mesmo apagar este favorito?</string>
+	<string name="favourites_remove_dialog_msg">Você quer mesmo apagar este favorito?</string>
 	<string name="favourites_remove_dialog_success">Favorito {0} apagado com sucesso.</string>
 	
 	<string name="osb_add_dialog_title">Descrição do bug</string>

@@ -735,13 +735,11 @@
 <string name="add_favorite_dialog_default_favourite_name">Ulubione</string>
 <string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>
 
-<!-- string name="favourites_context_menu_title">Menu kontekstowe</string -->
 <string name="favourites_context_menu_navigate">Nawiguj do</string>
 <string name="favourites_context_menu_edit">Edytuj</string>
 <string name="favourites_context_menu_delete">Usuń</string>
-<string name="favourites_edit_dialog_title">Zmień nazwę</string>
 
-<string name="favourites_remove_dialog_title">Czy na pewno chcesz usunąć ulubiony punkt?</string>
+<string name="favourites_remove_dialog_msg">Czy na pewno chcesz usunąć ulubiony punkt?</string>
 <string name="favourites_remove_dialog_success">Ulubiony punkt {0} został usunięty.</string>
 
 <string name="osb_add_dialog_title">Wprowadź opis błędu</string>

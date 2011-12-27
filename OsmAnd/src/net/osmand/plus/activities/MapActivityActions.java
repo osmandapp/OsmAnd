@@ -114,7 +114,7 @@ public class MapActivityActions implements DialogProvider {
 	
 	protected Dialog createAddFavouriteDialog(final Bundle args) {
     	Builder builder = new AlertDialog.Builder(mapActivity);
-		builder.setTitle(R.string.favourites_edit_dialog_title);
+		builder.setTitle(R.string.favourites_context_menu_edit);
 		final View v = mapActivity.getLayoutInflater().inflate(R.layout.favourite_edit_dialog, null, false);
 		final FavouritesDbHelper helper = getMyApplication().getFavorites();
 		builder.setView(v);

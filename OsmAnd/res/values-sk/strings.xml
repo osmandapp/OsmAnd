@@ -728,13 +728,11 @@
 <string name="add_favorite_dialog_default_favourite_name">Obľúbené</string>
 <string name="add_favorite_dialog_favourite_added_template">Obľúbený bod \'\'{0}\'\' bol úspešne pridaný.</string>
 
-<!-- string name="favourites_context_menu_title">Kontextové menu</string -->
 <string name="favourites_context_menu_navigate">Navigovať sem</string>
 <string name="favourites_context_menu_edit">Upraviť obľúbený bod</string>
 <string name="favourites_context_menu_delete">Vymazať obľúbený bod</string>
-<string name="favourites_edit_dialog_title">Premenovať obľúbený bod</string>
 
-<string name="favourites_remove_dialog_title">Ste si istý?</string>
+<string name="favourites_remove_dialog_msg">Ste si istý?</string>
 <string name="favourites_remove_dialog_success">Obľúbený bod {0} bol úspešne zmazaný.</string>
 
 <string name="osb_add_dialog_title">Zadajte popis k chybe</string>

@@ -751,13 +751,11 @@
 <string name="add_favorite_dialog_default_favourite_name">Favorite</string>
 <string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>
 
-<!-- string name="favourites_context_menu_title">Context menu</string -->
 <string name="favourites_context_menu_navigate">Set as destination</string>
 <string name="favourites_context_menu_edit">Edit favorite</string>
 <string name="favourites_context_menu_delete">Delete favorite</string>
-<string name="favourites_edit_dialog_title">Rename favorite</string>
 
-<string name="favourites_remove_dialog_title">Remove favorite point?</string>
+<string name="favourites_remove_dialog_msg">Remove favorite point?</string>
 <string name="favourites_remove_dialog_success">Favorite point {0} was succesfully deleted.</string>
 
 <string name="osb_add_dialog_title">Enter bug text</string>

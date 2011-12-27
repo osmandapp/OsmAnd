@@ -731,13 +731,11 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <string name="add_favorite_dialog_default_favourite_name">Ưa thích</string>
 <string name="add_favorite_dialog_favourite_added_template">Điểm ưa thích \'\'{0}\'\' đã được thêm thành công.</string>
 
-<!-- string name="favourites_context_menu_title">Context menu</string -->
 <string name="favourites_context_menu_navigate">Dẫn đường tới</string>
 <string name="favourites_context_menu_edit">Sửa Ưa thích</string>
 <string name="favourites_context_menu_delete">Xóa Ưa thích </string>
-<string name="favourites_edit_dialog_title">Đổi tên Ưa thích</string>
 
-<string name="favourites_remove_dialog_title">Bạn có muốn xóa điểm ưa thích?</string>
+<string name="favourites_remove_dialog_msg">Bạn có muốn xóa điểm ưa thích?</string>
 <string name="favourites_remove_dialog_success">Điểm Ưa thích {0} đã xóa thành công.</string>
 
 <string name="osb_add_dialog_title">Nhập thông tin bug</string>

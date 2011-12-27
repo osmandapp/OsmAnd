@@ -93,7 +93,6 @@ public class FavouritesActivity extends ExpandableListActivity {
 				if (child == -1) {
 					return;
 				}
-				// menu.setHeaderTitle(R.string.favourites_context_menu_title);
 				
 				menu.add(0, SHOW_ON_MAP, 0, R.string.show_poi_on_map);
 				menu.add(0, NAVIGATE_TO, 1, R.string.favourites_context_menu_navigate);
@@ -257,7 +256,7 @@ public class FavouritesActivity extends ExpandableListActivity {
 			MapActivity.launchMapActivityMoveToTop(this);
 		} else if (aItem.getItemId() == EDIT_ITEM) {
 			Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle(R.string.favourites_edit_dialog_title);
+			builder.setTitle(R.string.favourites_context_menu_edit);
 			final View v = getLayoutInflater().inflate(R.layout.favourite_edit_dialog, getExpandableListView(), false);
 			final AutoCompleteTextView cat =  (AutoCompleteTextView) v.findViewById(R.id.Category);
 			final EditText editText =  (EditText) v.findViewById(R.id.Name);
@@ -283,7 +282,7 @@ public class FavouritesActivity extends ExpandableListActivity {
 		if (aItem.getItemId() == DELETE_ITEM) {
 			final Resources resources = this.getResources();
 			Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(R.string.favourites_remove_dialog_title);
+			builder.setMessage(R.string.favourites_remove_dialog_msg);
 			builder.setNegativeButton(R.string.default_buttons_no, null);
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override

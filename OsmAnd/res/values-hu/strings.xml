@@ -725,13 +725,11 @@
 	<string name="add_favorite_dialog_default_favourite_name">Kedvenc</string>
 	<string name="add_favorite_dialog_favourite_added_template">Kedvenc pont: \'\'{0}\'\' sikeresen hozzáadva.</string>
 
-<!-- string name="favourites_context_menu_title">Eszközök menü</string -->
 	<string name="favourites_context_menu_navigate">Beállítás célpontnak</string>
 	<string name="favourites_context_menu_edit">Kedvenc szerkesztése</string>
 	<string name="favourites_context_menu_delete">Kedvenc törlése</string>
-	<string name="favourites_edit_dialog_title">Kedvenc átnevezése</string>
 
-	<string name="favourites_remove_dialog_title">Törlöd ezt a kedvenc pontot?</string>
+	<string name="favourites_remove_dialog_msg">Törlöd ezt a kedvenc pontot?</string>
 	<string name="favourites_remove_dialog_success">{0} kedvenc pont sikeresen törölve.</string>
 
 	<string name="osb_add_dialog_title">Hiba leírása</string>

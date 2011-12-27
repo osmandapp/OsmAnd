@@ -744,13 +744,11 @@
 <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
 <string name="add_favorite_dialog_favourite_added_template">Favorit Punkt \'\'{0}\'\' wurde erfolgreich hinzugefügt.</string>
 
-<!-- string name="favourites_context_menu_title">Kontextmenü</string -->
 <string name="favourites_context_menu_navigate">Als Ziel wählen</string>
 <string name="favourites_context_menu_edit">Favorit bearbeiten</string>
 <string name="favourites_context_menu_delete">Favorit löschen</string>
-<string name="favourites_edit_dialog_title">Favorit umbenennen</string>
 
-<string name="favourites_remove_dialog_title">Wollen Sie den Punkt wirklich löschen?</string>
+<string name="favourites_remove_dialog_msg">Wollen Sie den Punkt wirklich löschen?</string>
 <string name="favourites_remove_dialog_success">Der Punkt {0} wurde erfolgreich gelöscht.</string>
 
 <string name="osb_add_dialog_title">Eingabetext des Fehlers</string>
