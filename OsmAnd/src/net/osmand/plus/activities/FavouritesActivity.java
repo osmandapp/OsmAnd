@@ -238,7 +238,6 @@ public class FavouritesActivity extends ExpandableListActivity {
 		return true;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean onContextItemSelected(MenuItem aItem) {
 		ContextMenuInfo menuInfo = aItem.getMenuInfo();
@@ -264,7 +263,7 @@ public class FavouritesActivity extends ExpandableListActivity {
 			editText.setText(point.getName());
 			cat.setText(point.getCategory());
 			cat.setThreshold(1);
-			cat.setAdapter(new ArrayAdapter(this, R.layout.list_textview, helper.getFavoriteGroups().keySet().toArray()));
+			cat.setAdapter(new ArrayAdapter<String>(this, R.layout.list_textview, helper.getFavoriteGroups().keySet().toArray(new String[] {})));
 			builder.setNegativeButton(R.string.default_buttons_cancel, null);
 			builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
 				@Override
@@ -282,7 +281,6 @@ public class FavouritesActivity extends ExpandableListActivity {
 		if (aItem.getItemId() == DELETE_ITEM) {
 			final Resources resources = this.getResources();
 			Builder builder = new AlertDialog.Builder(this);
-			// builder.setMessage(MessageFormat.format(resources.getString(R.string.favourites_remove_dialog_msg, point.getName())));
 			builder.setMessage(getString(R.string.favourites_remove_dialog_msg, point.getName()));
 			builder.setNegativeButton(R.string.default_buttons_no, null);
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
