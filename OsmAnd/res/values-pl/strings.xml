@@ -419,7 +419,7 @@
 
 <string name="vector_data">Mapy wektorowe offline</string>
 <string name="transport_context_menu">Search transport at stop</string>
-<string name="point_on_map">Punkt na mapie:\n Szer. %1$.4f\n Dł. %2$.4f</string>
+<string name="point_on_map">Punkt na mapie:\n Szer. %1$.5f\n Dł. %2$.5f</string>
 <string name="osb_bug_name">Błąd</string>
 <string name="poi_context_menu_modify">Modyfikuj POI</string>
 <string name="poi_context_menu_delete">Usuń POI</string>
@@ -538,7 +538,7 @@
 <string name="search_history_street">Ulica: {0}, {1}</string>
 <string name="search_history_int_streets">Przecięcie: {0} x {1} in {2}</string>
 <string name="search_history_building">Budynek: {0}, {1}, {2}</string>
-<string name="search_history_navigate_to">Naviguj do szer. = {0}, dł. = {1}</string>
+<string name="search_history_navigate_to">Naviguj do\n szer. {0,number,#.#####}\n dł. {1,number,#.#####}</string>
 <string name="favorite">Ulubione</string>
 <string name="clear_all">Wyczyść wszystko</string>
 <string name="history">Historia</string>

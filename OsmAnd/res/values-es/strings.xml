@@ -281,7 +281,7 @@
 	<string name="poi_remove_confirm_template">Borrar {0} (añadir comentario) ?</string>
 	<string name="poi_remove_success">se eliminó el POI</string>
 	<string name="poi_remove_title">Borrar POI</string>
-	<string name="point_on_map">Punto en el mapa\n Lat %1$.4f Lon %2$.4f</string>
+	<string name="point_on_map">Punto en el mapa\n Lat %1$.5f Lon %2$.5f</string>
 	<string name="position_on_map">Posición en el mapa</string>
 	<string name="position_on_map_bottom">Fondo</string>
 	<string name="position_on_map_center">Centro</string>
@@ -345,7 +345,7 @@
 	<string name="search_history_building">Edificio : {0}, {1}, {2}</string>
 	<string name="search_history_city">Ciudad : {0}</string>
 	<string name="search_history_int_streets">Calles de intersección : {0} x {1} en {2}</string>
-	<string name="search_history_navigate_to">Navegar a lat = {0}, lon = {1}</string>
+	<string name="search_history_navigate_to">Navegar a\n lat {0,number,#.#####}\n lon {1,number,#.#####}</string>
 	<string name="search_history_street">Calle : {0}, {1}</string>
 	<string name="search_near_map">Buscar cerca a la última localización</string>
 	<string name="search_nearby">Sitios cercanos</string>

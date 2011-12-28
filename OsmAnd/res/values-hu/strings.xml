@@ -411,7 +411,7 @@
 
 	<string name="vector_data">Vektoros OSM térkép</string>
 	<string name="transport_context_menu">Közlekedés keresése a célnál</string>
-	<string name="point_on_map">Pont a térképen\n szélesség %1$.4f, hosszúság %2$.4f</string>
+	<string name="point_on_map">Pont a térképen\n szélesség %1$.5f, hosszúság %2$.5f</string>
 	<string name="osb_bug_name">Hiba</string>
 	<string name="poi_context_menu_modify">POI módosítás</string>
 	<string name="poi_context_menu_delete">POI törlés</string>
@@ -531,7 +531,7 @@
 	<string name="search_history_street">Utca: {0}, {1}</string>
 	<string name="search_history_int_streets">Kereszteződés: {0} és {1}, {2}</string>
 	<string name="search_history_building">Épület: {0}, {1}, {2}</string>
-	<string name="search_history_navigate_to">Célpont: szélesség = {0}, hosszúság = {1}</string>
+	<string name="search_history_navigate_to">Célpont:\n szélesség {0,number,#.#####}\n hosszúság {1,number,#.#####}</string>
 	<string name="favorite">Kedvenc</string>
 	<string name="clear_all">Mindent töröl</string>
 	<string name="history">Előzmény</string>

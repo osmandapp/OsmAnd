@@ -418,7 +418,7 @@
 
 <string name="vector_data">Vektorové OSM mapy</string>
 <string name="transport_context_menu">Hľadať prepravu po zastavení</string>
-<string name="point_on_map">Bod na mape:\n Zem. šírka %1$.4f\n Zem. dĺžka %2$.4f</string>
+<string name="point_on_map">Bod na mape:\n Zem. šírka %1$.5f\n Zem. dĺžka %2$.5f</string>
 <string name="osb_bug_name">Chyba</string>
 <string name="poi_context_menu_modify">Upraviť bod záujmu (POI)</string>
 <string name="poi_context_menu_delete">Vymazať bod záujmu (POI)</string>
@@ -537,7 +537,7 @@
 <string name="search_history_street">Ulica: {0}, {1}</string>
 <string name="search_history_int_streets">Pretínajúce ulice: {0} x {1} v {2}</string>
 <string name="search_history_building">Adresa: {0}, {1}, {2}</string>
-<string name="search_history_navigate_to">Navigovať do: šírka = {0}, dĺžka = {1}</string>
+<string name="search_history_navigate_to">Navigovať do:\n šírka {0,number,#.#####}\n dĺžka {1,number,#.#####}</string>
 <string name="favorite">Obľúbené</string>
 <string name="clear_all">Zmazať všetko</string>
 <string name="history">História</string>

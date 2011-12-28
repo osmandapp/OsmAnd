@@ -362,7 +362,7 @@ name="maps_could_not_be_downloaded">このマップはダウンロードでき�
      <string name="vector_data">オフラインベクターマップ</string>
      <string name="transport_context_menu">交通機関を乗り場で探す</string>
      <string name="point_on_map">マップ上の地点:\n 緯度
-%1$.4f\n 経度 %2$.4f</string>
+%1$.5f\n 経度 %2$.5f</string>
      <string name="osb_bug_name">バグ</string>
      <string name="poi_context_menu_modify">POIを変更</string>
      <string name="poi_context_menu_delete">POIを削除</string>
@@ -495,7 +495,7 @@ POIの更新は利用できません</string>
      <string name="search_history_int_streets">交差点: {0} x
 {1} in {2}</string>
      <string name="search_history_building">建物: {0}, {1}, {2}</string>
-     <string name="search_history_navigate_to">緯度 = {0}, 経度 = {1}にナビゲート</string>
+     <string name="search_history_navigate_to">緯度 {0,number,#.#####}\n 経度 {1,number,#.#####}にナビゲート</string>
      <string name="favorite">お気に入り</string>
      <string name="clear_all">全てクリア</string>
      <string name="history">履歴</string>
