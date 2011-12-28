@@ -482,7 +482,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				LatLon loc = getMapLocation();
 				search.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
 				search.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
-				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				// causes wrong position caching:  search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				search.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				MapActivity.this.startActivity(search);
 				dlg.dismiss();
 			}
@@ -505,11 +506,12 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
 			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
-			newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			LatLon loc = getMapLocation();
 			newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
 			newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
 			startActivity(newIntent);
+			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             return true;
 		} else if (!routingHelper.isFollowingMode()) {
 			if (keyCode == KeyEvent.KEYCODE_VOLUME_UP && event.getRepeatCount() == 0) {
@@ -1082,10 +1084,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			// NavigatePointActivity dlg = new NavigatePointActivity(this);
 			// dlg.showDialog();
 			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
-			newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			LatLon mapLoc = getMapLocation();
 			newIntent.putExtra(SearchActivity.SEARCH_LAT, mapLoc.getLatitude());
 			newIntent.putExtra(SearchActivity.SEARCH_LON, mapLoc.getLongitude());
+			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(newIntent);
 			return true;
 		case R.id.map_mute:
