@@ -491,7 +491,7 @@
     <u>Online OSM</u> - mapová klasifikace
   </string>
   <string name="error_doing_search">Při offline hledání došlo k chybě</string>
-  <string name="search_offline_geo_error">Nemohu rozpoznat geo intent:{0}</string>
+  <string name="search_offline_geo_error">Nemohu rozpoznat geo intent:\'%s\'</string>
   <string name="search_osm_offline">Hledat adresu pomocí offline map</string>
 
   <string name="system_locale">Systém</string>
@@ -995,7 +995,7 @@
   <string name="favourites_context_menu_delete">Smazat oblíbené</string>
 
   <string name="favourites_remove_dialog_msg">
-    Opravdu chcete odstranit oblíbené místo {0}?
+    Opravdu chcete odstranit oblíbené místo \'%s\'?
   </string>
   <string name="favourites_remove_dialog_success">Oblíbené místo {0} bylo vymazáno.</string>
 

@@ -143,7 +143,7 @@ OSMコミュニティはこの問題をいち早く修正することができ�
      <string name="create_poi_link_to_osm_doc"><u>オンラインOSM</u>
 マップ分類、画像つき</string>
  <string name="error_doing_search">オフライン検索でエラーが発生しました</string>
- <string name="search_offline_geo_error">次のgeoインテントをパースできません:{0}</string>
+ <string name="search_offline_geo_error">次のgeoインテントをパースできません:\'%s\'</string>
      <string name="search_osm_offline">オフラインマップで住所検索</string>
 
      <string name="system_locale">システム</string>
@@ -710,7 +710,7 @@ name="recalculate_route_to_your_location">現在地に従ってルートを再�
 <string name="favourites_context_menu_edit">お気に入りを編集</string>
 <string name="favourites_context_menu_delete">お気に入りを削除</string>
 
-<string name="favourites_remove_dialog_msg">本当にお気に入り地点を削除しますか? {0}</string>
+<string name="favourites_remove_dialog_msg">本当にお気に入り地点を削除しますか? \'%s\'</string>
 <string name="favourites_remove_dialog_success">お気に入り地点 {0}
 は削除されました。</string>
 

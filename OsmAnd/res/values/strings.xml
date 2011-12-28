@@ -257,7 +257,7 @@
 \n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
     <string name="error_doing_search">Error occurred in offline search</string>
-    <string name="search_offline_geo_error">Could not parse geo intent {0}</string>
+    <string name="search_offline_geo_error">Could not parse geo intent \'%s\'</string>
 	<string name="search_osm_offline">Search address using offline maps</string>
 
 	<string name="system_locale">System</string>
@@ -754,7 +754,7 @@
 <string name="favourites_context_menu_edit">Edit favorite</string>
 <string name="favourites_context_menu_delete">Delete favorite</string>
 
-<string name="favourites_remove_dialog_msg">Remove favorite point {0}?</string>
+<string name="favourites_remove_dialog_msg">Remove favorite point \'%s\'?</string>
 <string name="favourites_remove_dialog_success">Favorite point {0} was succesfully deleted.</string>
 
 <string name="osb_add_dialog_title">Enter bug text</string>

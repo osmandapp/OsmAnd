@@ -228,7 +228,7 @@
 \n\tAssicurati di essere connesso ad internet per contribuire in questi due modi suddetti.</string>
 	<string name="create_poi_link_to_osm_doc">Classificazione mappa <u>OSM Online</u> con immagini</string>
     <string name="error_doing_search">Errore nella ricerca offline</string>
-    <string name="search_offline_geo_error">Impossibile capire le geo-intenzioni {0}</string>
+    <string name="search_offline_geo_error">Impossibile capire le geo-intenzioni \'%s\'</string>
 	<string name="search_osm_offline">Ricerca indirizzo usando le mappe offline</string>
 
 	<string name="system_locale">Sistema</string>
@@ -725,7 +725,7 @@
 <string name="favourites_context_menu_edit">Modifica favorito</string>
 <string name="favourites_context_menu_delete">Elimina favorito</string>
 
-<string name="favourites_remove_dialog_msg">Si è sicuri di voler eliminare il punto favorito {0}?</string>
+<string name="favourites_remove_dialog_msg">Si è sicuri di voler eliminare il punto favorito \'%s\'?</string>
 <string name="favourites_remove_dialog_success">Il punto favorito {0} è stato eliminato.</string>
 
 <string name="osb_add_dialog_title">Inserire la descrizione del bug</string>

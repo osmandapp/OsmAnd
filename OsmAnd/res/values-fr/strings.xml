@@ -248,7 +248,7 @@
 \n\tN\'oubliez pas qu\'il faut une connexion internet pour ces fonctions!</string>
 <string name="create_poi_link_to_osm_doc"><u>OSM en ligne</u>  classification des cartes en images</string>
 	<string name="error_doing_search">Une erreur est survenue lors de la recherche hors-ligne</string>
-	<string name="search_offline_geo_error">Could not parse geo intent:{0}</string>
+	<string name="search_offline_geo_error">Could not parse geo intent:\'%s\'</string>
 <string name="search_osm_offline">Recherche d\'adresse dans les cartes hors-ligne</string>
 <string name="system_locale">Système</string>
 <string name="preferred_locale_descr">Changer la langue d\'affichage</string>
@@ -717,7 +717,7 @@ navigate_point_format_D, DM & DMS
 <string name="favourites_context_menu_navigate">Se déplacer vers</string>
 <string name="favourites_context_menu_edit">Modifier favori</string>
 <string name="favourites_context_menu_delete">Supprimer favori</string>
-<string name="favourites_remove_dialog_msg">Voulez-vous vraiment supprimer ce favori {0}?</string>
+<string name="favourites_remove_dialog_msg">Voulez-vous vraiment supprimer ce favori \'%s\'?</string>
 <string name="favourites_remove_dialog_success">Suppression du favori {0} réussi.</string>
 <string name="osb_add_dialog_title">Description du bogue</string>
 <string name="osb_add_dialog_success">Le bogue a bien été créé</string>

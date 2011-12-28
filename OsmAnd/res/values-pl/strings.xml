@@ -242,7 +242,7 @@
 \n\tAby wyświetlić wszystkie ulubione punkty bezpośrednio na mapie, włącz warstwę \'Ulubione\' w \'Zdefiniuj widok\'.</string>
 
 <string name="error_doing_search">Wystąpił błąd podczas wyszukiwania offline</string>
-<string name="search_offline_geo_error">Nie można zinterpretować {0}</string>
+<string name="search_offline_geo_error">Nie można zinterpretować \'%s\'</string>
 <string name="search_osm_offline">Wyszukaj adres korzystając z map offline</string>
 
 <string name="system_locale">System</string>
@@ -739,7 +739,7 @@
 <string name="favourites_context_menu_edit">Edytuj</string>
 <string name="favourites_context_menu_delete">Usuń</string>
 
-<string name="favourites_remove_dialog_msg">Czy na pewno chcesz usunąć ulubiony punkt {0}?</string>
+<string name="favourites_remove_dialog_msg">Czy na pewno chcesz usunąć ulubiony punkt \'%s\'?</string>
 <string name="favourites_remove_dialog_success">Ulubiony punkt {0} został usunięty.</string>
 
 <string name="osb_add_dialog_title">Wprowadź opis błędu</string>

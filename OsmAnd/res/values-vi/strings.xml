@@ -237,7 +237,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 \n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
 	<string name="create_poi_link_to_osm_doc">Phân loại bản đồ trên <u>Online OSM</u> với ảnh</string>
     <string name="error_doing_search">Có lỗi khi tìm kiếm</string>
-    <string name="search_offline_geo_error">Could not parse geo intent {0}</string>
+    <string name="search_offline_geo_error">Could not parse geo intent \'%s\'</string>
 	<string name="search_osm_offline">Tìm kiếm địa chỉ bằng bản đồ Offline</string>
 
 	<string name="system_locale">Hệ thống</string>
@@ -735,7 +735,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <string name="favourites_context_menu_edit">Sửa Ưa thích</string>
 <string name="favourites_context_menu_delete">Xóa Ưa thích </string>
 
-<string name="favourites_remove_dialog_msg">Bạn có muốn xóa điểm ưa thích {0}?</string>
+<string name="favourites_remove_dialog_msg">Bạn có muốn xóa điểm ưa thích \'%s\'?</string>
 <string name="favourites_remove_dialog_success">Điểm Ưa thích {0} đã xóa thành công.</string>
 
 <string name="osb_add_dialog_title">Nhập thông tin bug</string>

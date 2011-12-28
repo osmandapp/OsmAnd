@@ -250,7 +250,7 @@
 \n\tNem szabad elfelejteni, hogy mindehhez internetkapcsolatra van szükség!</string>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
 	<string name="error_doing_search">Hiba történt a kapcsolat nélküli keresésben</string>
-	<string name="search_offline_geo_error">Could not parse geo intent:{0}</string>
+	<string name="search_offline_geo_error">Could not parse geo intent:\'%s\'</string>
 	<string name="search_osm_offline">Cím keresése kapcsolat nélkül működő térképpel</string>
 
 	<string name="system_locale">Rendszer nyelve</string>
@@ -729,7 +729,7 @@
 	<string name="favourites_context_menu_edit">Kedvenc szerkesztése</string>
 	<string name="favourites_context_menu_delete">Kedvenc törlése</string>
 
-	<string name="favourites_remove_dialog_msg">Törlöd ezt a kedvenc pontot? {0}</string>
+	<string name="favourites_remove_dialog_msg">Törlöd ezt a kedvenc pontot? \'%s\'</string>
 	<string name="favourites_remove_dialog_success">{0} kedvenc pont sikeresen törölve.</string>
 
 	<string name="osb_add_dialog_title">Hiba leírása</string>

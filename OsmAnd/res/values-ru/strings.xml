@@ -200,7 +200,7 @@
 \n\tНе забывайте, что для этих функций вам понадобится интернет!</string>
 	<string name="create_poi_link_to_osm_doc"><u>Интернет OSM</u> классификация</string>
 	<string name="error_doing_search">Ошибка offline поиска</string>
-    <string name="search_offline_geo_error">Невозможно разобрать запрос : {0}</string>
+    <string name="search_offline_geo_error">Невозможно разобрать запрос : \'%s\'</string>
 	<string name="search_osm_offline">Поиск адреса используя offline карты</string>
 	<string name="system_locale">Системная</string>
 	<string name="preferred_locale_descr">Изменить язык программы</string>
@@ -680,7 +680,7 @@
 	<string name="favourites_context_menu_edit">Редактировать точку</string>
 	<string name="favourites_context_menu_delete">Удалить точку</string>
 
-	<string name="favourites_remove_dialog_msg">Вы действительно хотите удалить точку {0} из Избранных?</string>
+	<string name="favourites_remove_dialog_msg">Вы действительно хотите удалить точку \'%s\' из Избранных?</string>
 	<string name="favourites_remove_dialog_success">Точка {0} была успешно удалена из Избранных.</string>
 
 	<string name="osb_add_dialog_title">Подробно опишите ошибку</string>

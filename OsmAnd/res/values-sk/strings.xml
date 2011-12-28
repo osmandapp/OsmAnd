@@ -249,7 +249,7 @@
 	
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> mapová klasifikácia s obrázkami</string>
     <string name="error_doing_search">Prihodila sa chyba pri offline hľadaní</string>
-    <string name="search_offline_geo_error">Nedá sa parsovať geo obsah: {0}</string>
+    <string name="search_offline_geo_error">Nedá sa parsovať geo obsah: \'%s\'</string>
 	<string name="search_osm_offline">Nájsť adresu použitím stiahnutých máp</string>
 	
 	<string name="system_locale">Systémový</string>
@@ -732,7 +732,7 @@
 <string name="favourites_context_menu_edit">Upraviť obľúbený bod</string>
 <string name="favourites_context_menu_delete">Vymazať obľúbený bod</string>
 
-<string name="favourites_remove_dialog_msg">Ste si istý? {0}</string>
+<string name="favourites_remove_dialog_msg">Ste si istý? \'%s\'</string>
 <string name="favourites_remove_dialog_success">Obľúbený bod {0} bol úspešne zmazaný.</string>
 
 <string name="osb_add_dialog_title">Zadajte popis k chybe</string>
