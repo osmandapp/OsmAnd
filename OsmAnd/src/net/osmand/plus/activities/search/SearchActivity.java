@@ -1,9 +1,9 @@
 package net.osmand.plus.activities.search;
 
 import java.io.Serializable;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Formatter;
 import java.util.Locale;
 
 import net.osmand.Algoritms;
@@ -28,8 +28,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TabHost;
-import android.widget.TabWidget;
 import android.widget.TabHost.TabSpec;
+import android.widget.TabWidget;
 
 
 public class SearchActivity extends TabActivity {
@@ -266,8 +266,7 @@ public class SearchActivity extends TabActivity {
 	}
 	
 	private String formatLatLon(LatLon searchPoint){
-		MessageFormat format = new MessageFormat(" ({0,number,#.##};{1,number,#.##})", Locale.US);
-		return format.format(new Object[]{searchPoint.getLatitude(), searchPoint.getLongitude()});
+		return new Formatter(Locale.US).format(" %.2f;%.2f", searchPoint.getLatitude(), searchPoint.getLongitude()).toString();
 	}
 	
 	public void updateSearchPoint(LatLon searchPoint, String message, boolean showLoc){

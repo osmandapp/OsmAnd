@@ -405,7 +405,7 @@
 
 	<string name="vector_data">Mappe vettoriali offline</string>
 	<string name="transport_context_menu">Cercare un trasporto pubblico all\'arrivo</string>
-	<string name="point_on_map">Punto sulla mappa\n Lat {0,number,#.####} Lon {1,number,#.####}</string>
+	<string name="point_on_map">Punto sulla mappa\n Lat %1$.4f Lon %2$.4f</string>
 	<string name="osb_bug_name">Bug</string>
 	<string name="poi_context_menu_modify">Modificare PDI</string>
 	<string name="poi_context_menu_delete">Eliminare PDI</string>
@@ -540,7 +540,7 @@
 	<string name="max_level_download_tile">Max zoom online</string>
 	<string name="max_level_download_tile_descr">Scegliere il massimo livello di zoom usando internet</string>
 	<string name="route_about">Info sul percorso</string>
-	<string name="route_general_information">Distanza totale = {0}, tempo di viaggio = {1} h {2} m.</string>
+	<string name="route_general_information">Distanza totale = %s, tempo di viaggio = %d h %d m.</string>
 	<string name="router_service_descr">Scegliere il servizio di generazione percorso</string>
 	<string name="router_service">Generazione percorso</string>
 	<string name="sd_dir_not_accessible">Directory su SD card inaccessibile</string>

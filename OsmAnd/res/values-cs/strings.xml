@@ -670,7 +670,7 @@
 
   <string name="vector_data">Vektorové mapy OSM</string>
   <string name="transport_context_menu">Hledat dopravu ze zastávky</string>
-  <string name="point_on_map">Bod na mapě\n Šíř. {0,number,#.####} Dél. {1,number,#.####}</string>
+  <string name="point_on_map">Bod na mapě\n Šíř. %1$.4f Dél. %2$.4f</string>
   <string name="osb_bug_name">Chyba</string>
   <string name="poi_context_menu_modify">Upravit POI</string>
   <string name="poi_context_menu_delete">Smazat POI</string>
@@ -814,7 +814,7 @@
   <string name="max_level_download_tile">Maximální zvětšení</string>
   <string name="max_level_download_tile_descr">Jaké nejvyšší zvětšení mapy stahovat</string>
   <string name="route_about">O cestě</string>
-  <string name="route_general_information">Celková vzdálenost {0}, doba cesty {1} h {2} m.</string>
+  <string name="route_general_information">Celková vzdálenost %s, doba cesty %d h %d m.</string>
   <string name="router_service_descr">Vyberte navigační službu</string>
   <string name="router_service">Navigace</string>
   <string name="sd_dir_not_accessible">Adresář pro uložení na SD kartě není dostupný</string>

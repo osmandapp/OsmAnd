@@ -434,7 +434,7 @@
 
 	<string name="vector_data">Offline vector maps</string>
 	<string name="transport_context_menu">Search transport at stop</string>
-	<string name="point_on_map">Point on map:\n Lat {0,number,#.####}\n Lon {1,number,#.####}</string>
+	<string name="point_on_map">Point on map:\n Lat %1$.4f\n Lon %2$.4f</string>
 	<string name="osb_bug_name">Bug</string>
 	<string name="poi_context_menu_modify">Modify POI</string>
 	<string name="poi_context_menu_delete">Delete POI</string>
@@ -569,7 +569,7 @@
 	<string name="max_level_download_tile">Max. online zoom</string>
 	<string name="max_level_download_tile_descr">Choose maximum zoom level to download for online map tiles</string>
 	<string name="route_about">About route</string>
-	<string name="route_general_information">Total distance {0}, travelling time {1} h {2} m.</string>
+	<string name="route_general_information">Total distance %s, travelling time %d h %d m.</string>
 	<string name="router_service_descr">Choose online or offline routing services</string>
 	<string name="router_service">Routing service</string>
 	<string name="sd_dir_not_accessible">Save directory on SD card not accessible</string>

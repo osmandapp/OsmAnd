@@ -418,7 +418,7 @@
 
 <string name="vector_data">Vektorové OSM mapy</string>
 <string name="transport_context_menu">Hľadať prepravu po zastavení</string>
-<string name="point_on_map">Bod na mape:\n Zem. šírka {0,number,#.####}\n Zem. dĺžka {1,number,#.####}</string>
+<string name="point_on_map">Bod na mape:\n Zem. šírka %1$.4f\n Zem. dĺžka %2$.4f</string>
 <string name="osb_bug_name">Chyba</string>
 <string name="poi_context_menu_modify">Upraviť bod záujmu (POI)</string>
 <string name="poi_context_menu_delete">Vymazať bod záujmu (POI)</string>
@@ -553,7 +553,7 @@
 <string name="max_level_download_tile">Max. úroveň priblíženia</string>
 <string name="max_level_download_tile_descr">Výber maximálnej úrovne priblíženia na stiahnutie</string>
 <string name="route_about">O ceste</string>
-<string name="route_general_information">Celková vzdialenosť {0}, čas cestovania {1} h {2} m.</string>
+<string name="route_general_information">Celková vzdialenosť %s, čas cestovania %d h %d m.</string>
 <string name="router_service_descr">Výber rutovacej služby</string>
 <string name="router_service">Rutovanie</string>
 <string name="sd_dir_not_accessible">Adresár pre uloženie na SD karte nie je prístupný</string>

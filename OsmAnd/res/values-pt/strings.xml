@@ -104,7 +104,7 @@
 	<string name="error_reading_gpx">Erro na leitura de dados GPX</string>
 	<string name="vector_data">Mapas vetoriais offline</string>
 	<string name="transport_context_menu">Procurar transporte na parada</string>
-	<string name="point_on_map">Ponto no mapa\n Lat {0,number,#.####} Long {1,number,#.####}</string>
+	<string name="point_on_map">Ponto no mapa\n Lat %1$.4f Long %2$.4f</string>
 	<string name="osb_bug_name">Bug</string>
 	<string name="poi_context_menu_modify">Modificar POI</string>
 	<string name="poi_context_menu_delete">Apagar POI</string>
@@ -239,7 +239,7 @@
 	<string name="max_level_download_tile">Nível de zoom máx.</string>
 	<string name="max_level_download_tile_descr">Escolher um nível máximo de zoom para download</string>
 	<string name="route_about">Sobre a viagem</string>
-	<string name="route_general_information">Distância total = {0} tempo de viagem, = {1}h {2}m.</string>
+	<string name="route_general_information">Distância total = %s tempo de viagem, = %dh %dm.</string>
 	<string name="router_service_descr">Escolha o sistema de navegação</string>
 	<string name="router_service">Serviço de navegação</string>
 	<string name="sd_dir_not_accessible">Diretório do cartão SD inacessível</string>

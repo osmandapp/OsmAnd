@@ -406,7 +406,7 @@
 <string name="error_reading_gpx">Erreur de lecteur des données GPX</string>
 <string name="vector_data">Cartes vectorielles OSM</string>
 <string name="transport_context_menu">Chercher transport à l\'arrivée</string>
-<string name="point_on_map">Point sur la carte\n Lat {0,number,#.####} Long {1,number,#.####}</string>
+<string name="point_on_map">Point sur la carte\n Lat %1$.4f Long %2$.4f</string>
 <string name="osb_bug_name">Bogue</string>
 <string name="poi_context_menu_modify">Modifier PI</string>
 <string name="poi_context_menu_delete">Supprimer PI</string>
@@ -539,7 +539,7 @@
 <string name="max_level_download_tile">Niveau de zoom max.</string>
 <string name="max_level_download_tile_descr">Choisir un niveau de zoom maximum pour le téléchargement</string>
 <string name="route_about">À propos du trajet</string>
-<string name="route_general_information">Distance totale = {0}, temps de déplacement = {1} h {2} m.</string>
+<string name="route_general_information">Distance totale = %s, temps de déplacement = %d h %d m.</string>
 <string name="router_service_descr">Choisir la source de l\'itinéraire à suivre</string>
 <string name="router_service">Itinéraire</string>
 <string name="sd_dir_not_accessible">Répertoire sur la carte SD inaccessible en écriture</string>

@@ -362,7 +362,7 @@ name="maps_could_not_be_downloaded">このマップはダウンロードでき�
      <string name="vector_data">オフラインベクターマップ</string>
      <string name="transport_context_menu">交通機関を乗り場で探す</string>
      <string name="point_on_map">マップ上の地点:\n 緯度
-{0,number,#.####}\n 経度 {1,number,#.####}</string>
+%1$.4f\n 経度 %2$.4f</string>
      <string name="osb_bug_name">バグ</string>
      <string name="poi_context_menu_modify">POIを変更</string>
      <string name="poi_context_menu_delete">POIを削除</string>
@@ -512,8 +512,8 @@ POIの更新は利用できません</string>
      <string name="max_level_download_tile_descr">オンラインマップタイル用にダウンロードする
 最大ズームレベルを選ぶ</string>
      <string name="route_about">ルートについて</string>
-     <string name="route_general_information">総距離 {0},
-移動時間 {1} 時間 {2} 分。</string>
+     <string name="route_general_information">総距離 %s,
+移動時間 %d 時間 %d 分。</string>
      <string name="router_service_descr">オンラインまたはオフラインルーティングサービスを選択</string>
      <string name="router_service">経路案内サービス</string>
      <string name="sd_dir_not_accessible">SDカードの保存ディレクトリにアクセスできません</string>

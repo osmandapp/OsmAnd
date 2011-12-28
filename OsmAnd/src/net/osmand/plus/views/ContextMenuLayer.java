@@ -1,6 +1,5 @@
 package net.osmand.plus.views;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +19,8 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.WindowManager;
-import android.widget.TextView;
 import android.widget.FrameLayout.LayoutParams;
+import android.widget.TextView;
 
 public class ContextMenuLayer extends OsmandMapLayer {
 	
@@ -138,7 +137,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		latLon = loc;
 		if(latLon != null){
 			if(description == null || description.length() == 0){
-				description = MessageFormat.format(view.getContext().getString(R.string.point_on_map), 
+				description = view.getContext().getString(R.string.point_on_map, 
 						latLon.getLatitude(), latLon.getLongitude());
 			}
 			textView.setText(description);

@@ -281,7 +281,7 @@
 	<string name="poi_remove_confirm_template">Borrar {0} (añadir comentario) ?</string>
 	<string name="poi_remove_success">se eliminó el POI</string>
 	<string name="poi_remove_title">Borrar POI</string>
-	<string name="point_on_map">Punto en el mapa\n Lat {0,number,#.####} Lon {1,number,#.####}</string>
+	<string name="point_on_map">Punto en el mapa\n Lat %1$.4f Lon %2$.4f</string>
 	<string name="position_on_map">Posición en el mapa</string>
 	<string name="position_on_map_bottom">Fondo</string>
 	<string name="position_on_map_center">Centro</string>
@@ -308,7 +308,7 @@
 	<string name="rotate_map_to_bearing">Rotar mapa</string>
 	<string name="rotate_map_to_bearing_descr">Seleccionar cómo rotar el mapa</string>
 	<string name="route_about">Acerca de ruta</string>
-	<string name="route_general_information">Distancia total = {0}, tiempo de viaje = {1} h {2} m.</string>
+	<string name="route_general_information">Distancia total = %s, tiempo de viaje = %d h %d m.</string>
 	<string name="route_head">Cabecera</string>
 	<string name="route_tl">Gire a la izquierda y siga</string>
 	<string name="route_tr">Gire a la derecha y siga</string>

@@ -1,13 +1,12 @@
 package net.osmand.plus.routing;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
-import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
@@ -383,7 +382,7 @@ public class RoutingHelper {
 		int dist = getLeftDistance();
 		int hours = getLeftTime() / (60 * 60);
 		int minutes = (getLeftTime() / 60) % 60;
-		return MessageFormat.format(context.getString(R.string.route_general_information), OsmAndFormatter.getFormattedDistance(dist, context),
+		return context.getString(R.string.route_general_information, OsmAndFormatter.getFormattedDistance(dist, context),
 				hours, minutes);
 	}
 	
