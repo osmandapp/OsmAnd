@@ -554,7 +554,7 @@
 <string name="max_level_download_tile">Maks. zoom online</string>
 <string name="max_level_download_tile_descr">Choose maximum zoom level to download for online map tiles</string>
 <string name="route_about">O trasie</string>
-<string name="route_general_information">Dystans całkowity %s, czas podróży %d h %d m.</string>
+<string name="route_general_information">Dystans całkowity %1$s, czas podróży %2$d h %3$d m.</string>
 <string name="router_service_descr">Wybierz usługę routującą (offline lub online)</string>
 <string name="router_service">Usługa routująca</string>
 <string name="sd_dir_not_accessible">Katalog zapisu na karcie SD jest niedostępny.</string>

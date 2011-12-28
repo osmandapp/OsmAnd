@@ -539,7 +539,7 @@
 <string name="max_level_download_tile">Niveau de zoom max.</string>
 <string name="max_level_download_tile_descr">Choisir un niveau de zoom maximum pour le téléchargement</string>
 <string name="route_about">À propos du trajet</string>
-<string name="route_general_information">Distance totale = %s, temps de déplacement = %d h %d m.</string>
+<string name="route_general_information">Distance totale = %1$s, temps de déplacement = %2$d h %3$d m.</string>
 <string name="router_service_descr">Choisir la source de l\'itinéraire à suivre</string>
 <string name="router_service">Itinéraire</string>
 <string name="sd_dir_not_accessible">Répertoire sur la carte SD inaccessible en écriture</string>

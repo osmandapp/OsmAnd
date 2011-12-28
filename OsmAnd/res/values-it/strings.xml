@@ -540,7 +540,7 @@
 	<string name="max_level_download_tile">Max zoom online</string>
 	<string name="max_level_download_tile_descr">Scegliere il massimo livello di zoom usando internet</string>
 	<string name="route_about">Info sul percorso</string>
-	<string name="route_general_information">Distanza totale = %s, tempo di viaggio = %d h %d m.</string>
+	<string name="route_general_information">Distanza totale = %1$s, tempo di viaggio = %2$d h %3$d m.</string>
 	<string name="router_service_descr">Scegliere il servizio di generazione percorso</string>
 	<string name="router_service">Generazione percorso</string>
 	<string name="sd_dir_not_accessible">Directory su SD card inaccessibile</string>

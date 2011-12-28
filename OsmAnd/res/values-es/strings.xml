@@ -308,7 +308,7 @@
 	<string name="rotate_map_to_bearing">Rotar mapa</string>
 	<string name="rotate_map_to_bearing_descr">Seleccionar cómo rotar el mapa</string>
 	<string name="route_about">Acerca de ruta</string>
-	<string name="route_general_information">Distancia total = %s, tiempo de viaje = %d h %d m.</string>
+	<string name="route_general_information">Distancia total = %1$s, tiempo de viaje = %2$d h %3$d m.</string>
 	<string name="route_head">Cabecera</string>
 	<string name="route_tl">Gire a la izquierda y siga</string>
 	<string name="route_tr">Gire a la derecha y siga</string>

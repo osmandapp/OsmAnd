@@ -499,7 +499,7 @@
 	<string name="max_level_download_tile">Уровень детализации</string>
 	<string name="max_level_download_tile_descr">Выберите максимальный уровень для загрузки из интернета</string>
 	<string name="route_about">О маршруте</string>
-	<string name="route_general_information">Общая протяженность = %s, время в пути = %d ч. %d мин.</string>
+	<string name="route_general_information">Общая протяженность = %1$s, время в пути = %2$d ч. %3$d мин.</string>
 	<string name="router_service_descr">Выберите сервис для прокладки маршрута</string>
 	<string name="router_service">Прокладка маршрута</string>
 	<string name="sd_dir_not_accessible">Директория на SD карточке не доступна для сохранения</string>

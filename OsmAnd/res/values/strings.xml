@@ -569,7 +569,7 @@
 	<string name="max_level_download_tile">Max. online zoom</string>
 	<string name="max_level_download_tile_descr">Choose maximum zoom level to download for online map tiles</string>
 	<string name="route_about">About route</string>
-	<string name="route_general_information">Total distance %s, travelling time %d h %d m.</string>
+	<string name="route_general_information">Total distance %1$s, travelling time %2$d h %3$d m.</string>
 	<string name="router_service_descr">Choose online or offline routing services</string>
 	<string name="router_service">Routing service</string>
 	<string name="sd_dir_not_accessible">Save directory on SD card not accessible</string>

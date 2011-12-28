@@ -553,7 +553,7 @@
 <string name="max_level_download_tile">Max. úroveň priblíženia</string>
 <string name="max_level_download_tile_descr">Výber maximálnej úrovne priblíženia na stiahnutie</string>
 <string name="route_about">O ceste</string>
-<string name="route_general_information">Celková vzdialenosť %s, čas cestovania %d h %d m.</string>
+<string name="route_general_information">Celková vzdialenosť %1$s, čas cestovania %2$d h %3$d m.</string>
 <string name="router_service_descr">Výber rutovacej služby</string>
 <string name="router_service">Rutovanie</string>
 <string name="sd_dir_not_accessible">Adresár pre uloženie na SD karte nie je prístupný</string>
