@@ -371,7 +371,7 @@ public class IndexBatchCreator {
 				String url = MessageFormat.format(site, name);
 				
 				String regionName = prefix + name;
-				String fileName = prefix + name + suffix;
+				String fileName = Algoritms.capitalizeFirstLetterAndLowercase(prefix + name + suffix);
 				File bmif = new File(indexDirFiles, fileName + "_" + IndexConstants.BINARY_MAP_VERSION + IndexConstants.BINARY_MAP_INDEX_EXT);
 				if(skipGeneratedIndexes && bmif.exists()){
 					continue;
