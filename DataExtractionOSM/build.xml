@@ -26,11 +26,15 @@
 	   <mkdir dir="${bin.absolute.dir}"/>
 	</target>
 
+	<target name="-version" if="build.version">
+	   <replace file="src/net/osmand/Version.java" token="String APP_DESCRIPTION" value="String APP_DESCRIPTION=&quot;${build.version}&quot;;//"/>
+	</target>
+
 	<target name="clean">
 	   <delete dir="${bin.absolute.dir}"/>
 	</target>
 
-	<target name="compile" depends="-dirs">
+	<target name="compile" depends="-dirs,-version">
 	 <copy todir="${bin.absolute.dir}">
 	   <fileset dir="${src.absolute.dir}">
 		<exclude name="**/*.java" />
