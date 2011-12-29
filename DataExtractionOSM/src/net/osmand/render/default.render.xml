@@ -1,4 +1,4 @@
-﻿<renderingStyle name="default" depends="" defaultColor="#f1eee8" version="1">
+﻿<renderingStyle name="default" depends="" defaultColor="#f1eae4" version="1">
 
 	<!-- Simple rule definition : 
 		- "filter" is analogue of If(...) Else. So if one "filter" passes other neighbors will not be checked.
@@ -29,7 +29,7 @@
 	<renderingAttribute name="defaultColor">
 		<filter noPolygons="true" attrColorValue="#00ffffff"/>
 		<filter nightMode="true" attrColorValue="#003333"/>
-		<filter attrColorValue="#f1eee8"/>
+		<filter attrColorValue="#f1eae4"/>
 	</renderingAttribute>
 
 	<!--
