@@ -49,6 +49,13 @@ public class BinaryInspector {
 //		inspector(new String[]{"E:\\Information\\OSM maps\\osmand\\Netherlands-addr-trans.map.obf"});
 	}
 	
+	private static void println(String s) {
+		System.out.println(s);
+	}
+	
+	private static void print(String s) {
+		System.out.println(s);
+	}
 
 	public static void inspector(String[] args) throws IOException {
 		if(args == null || args.length == 0){
@@ -79,7 +86,7 @@ public class BinaryInspector {
 					}
 					List<Float> extracted = combineParts(new File(args[1]), parts);
 					if(extracted != null){
-						System.out.println("\n"+extracted.size()+" parts were successfully extracted to " + args[1]);
+						println("\n"+extracted.size()+" parts were successfully extracted to " + args[1]);
 					}
 				} 
 			} else if (f.equals("-v")) {
@@ -227,7 +234,7 @@ public class BinaryInspector {
 						
 					}
 					
-					System.out.println(MessageFormat.format("{2} part {0} is extracted {1} bytes", part.getName(), part.getLength() + newL, map));
+					println(MessageFormat.format("{2} part {0} is extracted {1} bytes", part.getName(), part.getLength() + newL, map));
 				} else {
 					if (part instanceof AddressRegion) {
 						ous.writeTag(OsmandOdb.OsmAndStructure.ADDRESSINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
@@ -248,7 +255,7 @@ public class BinaryInspector {
 					}
 					writeInt(ous, part.getLength());
 					copyBinaryPart(ous, BUFFER_TO_READ, raf, part.getFilePointer(), part.getLength());
-					System.out.println(MessageFormat.format("{2} part {0} is extracted {1} bytes", part.getName(), part.getLength(), map));
+					println(MessageFormat.format("{2} part {0} is extracted {1} bytes", part.getName(), part.getLength(), map));
 				}
 				
 			}
@@ -293,7 +300,7 @@ public class BinaryInspector {
 	public static void printFileInformation(String fileName,boolean verbose) throws IOException {
 		File file = new File(fileName);
 		if(!file.exists()){
-			System.out.println("Binary OsmAnd index " + fileName + " was not found.");
+			println("Binary OsmAnd index " + fileName + " was not found.");
 			return;
 		}
 		printFileInformation(file,verbose);
@@ -304,7 +311,7 @@ public class BinaryInspector {
 		try {
 			BinaryMapIndexReader index = new BinaryMapIndexReader(r);
 			int i = 1;
-			System.out.println("Binary index " + file.getName() + " version = " + index.getVersion());
+			println("Binary index " + file.getName() + " version = " + index.getVersion());
 			for(BinaryIndexPart p : index.getIndexes()){
 				String partname = "";
 				if(p instanceof MapIndex ){
@@ -317,46 +324,46 @@ public class BinaryInspector {
 					partname = "Address";
 				}
 				String name = p.getName() == null ? "" : p.getName(); 
-				System.out.println(MessageFormat.format("{0}. {1} data {3} - {2} bytes", i, partname, p.getLength(), name));
+				println(MessageFormat.format("{0}. {1} data {3} - {2} bytes", i, partname, p.getLength(), name));
 				if(p instanceof TransportIndex){
 					TransportIndex ti = ((TransportIndex) p);
 					int sh = (31 - BinaryMapIndexReader.TRANSPORT_STOP_ZOOM);
-					System.out.println("\t Bounds " + formatBounds(ti.getLeft() << sh, ti.getRight() << sh, 
+					println("\t Bounds " + formatBounds(ti.getLeft() << sh, ti.getRight() << sh, 
 							ti.getTop() << sh, ti.getBottom() << sh));
 				} else if(p instanceof MapIndex){
 					MapIndex m = ((MapIndex) p);
 					int j = 1;
 					for(MapRoot mi : m.getRoots()){
-						System.out.println(MessageFormat.format("\t{4}.{5} Map level minZoom = {0}, maxZoom = {1}, size = {2} bytes \n\t\tBounds {3}",
+						println(MessageFormat.format("\t{4}.{5} Map level minZoom = {0}, maxZoom = {1}, size = {2} bytes \n\t\tBounds {3}",
 								mi.getMinZoom(), mi.getMaxZoom(), mi.getLength(), 
 								formatBounds(mi.getLeft(), mi.getRight(), mi.getTop(), mi.getBottom()), 
 								i, j++));
 					}
 				} else if (p instanceof AddressRegion && verbose) {
 					for(String region : index.getRegionNames()){
-						System.out.println("\tRegion:" + region);
+						println("\tRegion:" + region);
 						for (City c : index.getCities(region, null)) {
 							index.preloadStreets(c, null);
-							System.out.println("\t\tCity:" + c.getName());
+							println("\t\tCity:" + c.getName());
 							for (Street t : c.getStreets()) {
-								System.out.print("\t\t\t" + t.getName());
+								print("\t\t\t" + t.getName());
 								index.preloadBuildings(t, null);
 								List<Building> buildings = t.getBuildings();
 								if (buildings != null && !buildings.isEmpty()) {
-									System.out.print(" (");
+									print(" (");
 									for (Building b : buildings) {
-										System.out.print(b.getName() + ",");
+										print(b.getName() + ",");
 									}
-									System.out.print(")");
+									print(")");
 								}
-								System.out.println();
+								println("");
 							}
 						}
 						for (City c : index.getVillages(region, null,null,false)) {
 							index.preloadStreets(c, null);
-							System.out.println("\t\tVillage:" + c.getName());
+							println("\t\tVillage:" + c.getName());
 							for (Street t : c.getStreets()) {
-								System.out.println("\t\t\t" + t.getName());	
+								println("\t\t\t" + t.getName());	
 							}
 						}
 					}
@@ -374,19 +381,19 @@ public class BinaryInspector {
 
 	public static void printUsage(String warning) {
 		if(warning != null){
-			System.out.println(warning);
+			println(warning);
 		}
-		System.out.println("Inspector is console utility for working with binary indexes of OsmAnd.");
-		System.out.println("It allows print info about file, extract parts and merge indexes.");
-		System.out.println("\nUsage for print info : inspector [-v] [file]");
-		System.out.println("  Prints information about [file] binary index of OsmAnd.");
-		System.out.println("  -v more verbouse output (like all cities and their streets)");
-		System.out.println("\nUsage for combining indexes : inspector -c file_to_create (file_from_extract ((+|-)parts_to_extract)? )*");
-		System.out.println("\tCreate new file of extracted parts from input file. [parts_to_extract] could be parts to include or exclude.");
-		System.out.println("  Example : inspector -c output_file input_file +1,2,3\n\tExtracts 1, 2, 3 parts (could be find in print info)");
-		System.out.println("  Example : inspector -c output_file input_file -2,3\n\tExtracts all  parts excluding 2, 3");
-		System.out.println("  Example : inspector -c output_file input_file1 input_file2 input_file3\n\tSimply combine 3 files");
-		System.out.println("  Example : inspector -c output_file input_file1 input_file2 -4\n\tCombine all parts of 1st file and all parts excluding 4th part of 2nd file");
+		println("Inspector is console utility for working with binary indexes of OsmAnd.");
+		println("It allows print info about file, extract parts and merge indexes.");
+		println("\nUsage for print info : inspector [-v] [file]");
+		println("  Prints information about [file] binary index of OsmAnd.");
+		println("  -v more verbouse output (like all cities and their streets)");
+		println("\nUsage for combining indexes : inspector -c file_to_create (file_from_extract ((+|-)parts_to_extract)? )*");
+		println("\tCreate new file of extracted parts from input file. [parts_to_extract] could be parts to include or exclude.");
+		println("  Example : inspector -c output_file input_file +1,2,3\n\tExtracts 1, 2, 3 parts (could be find in print info)");
+		println("  Example : inspector -c output_file input_file -2,3\n\tExtracts all  parts excluding 2, 3");
+		println("  Example : inspector -c output_file input_file1 input_file2 input_file3\n\tSimply combine 3 files");
+		println("  Example : inspector -c output_file input_file1 input_file2 -4\n\tCombine all parts of 1st file and all parts excluding 4th part of 2nd file");
 		
 	}
 

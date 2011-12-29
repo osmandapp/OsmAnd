@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<regions_list>
+		
+
+		<!-- 7. AUSTRALIA-OCEANIA [SOURCE: GEOFABRIK.DE] -->
+		<regions siteToDownload="http://download.geofabrik.de/osm/{0}.osm.pbf" region_prefix="" region_suffix=""  skip="false">
+			<region name="australia-oceania" esize=""/>
+		</regions>
+				
+		<!-- 7. NEW ZEALAND-AUSTRALIA [SOURCE: GEOFABRIK.DE] -->
+		<regions siteToDownload="http://download.geofabrik.de/osm/australia-oceania/{0}.osm.pbf" region_prefix="" region_suffix="_Australia"  skip="false">
+			<region name="new-zealand" esize=""/>
+			<region name="new-caledonia" esize=""/>
+		</regions>			
+</regions_list> 

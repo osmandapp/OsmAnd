@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<regions_list>
+		
+        <!-- 2. ASIA -->
+		
+		<!-- 2.2 ASIA-AVAILABLE ON GEOFABRIK.DE [SOURCE: GEOFABRIK.DE] (REST OF ASIA IS BELOW FROM CLOUDMADE.COM) -->
+		<regions siteToDownload="http://download.geofabrik.de/osm/asia/{0}.osm.pbf" region_prefix="" region_suffix="_Asia" skip="false">
+			<region name="azerbaijan" esize="15"/>
+			<region name="china" esize="4"/>
+			<region name="gaza" esize="3"/>
+			<region name="india" esize="1"/>
+			<region name="indonesia" esize="3"/>
+			<region name="iraq" esize="1"/>
+			<region name="israel_and_palestine" esize="1"/>
+			<region name="japan" esize="1"/>
+			<region name="kazakhstan" esize="1"/>
+			<region name="kyrgyzstan" esize="1"/>
+			<region name="mongolia" esize="1"/>
+			<region name="pakistan" esize="1"/>
+			<region name="philippines" esize="1"/>
+			<region name="taiwan" esize="1"/>
+			<region name="turkmenistan" esize="1"/>
+			<region name="uzbekistan" esize="1"/>
+		</regions>
+	    
+		<!-- 2.3 CENTRAL ASIA [SOURCE: CLOUDMADE.COM] -->
+		<regions siteToDownload="http://downloads.cloudmade.com/asia/central_asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia" skip="false">
+			<region name="tajikistan" esize="3"/>
+		</regions>
+		
+		<!-- 2.3 EASTERN ASIA [SOURCE: CLOUDMADE.COM] -->
+		<regions siteToDownload="http://downloads.cloudmade.com/asia/eastern_asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia" skip="false">
+			<region name="hong_kong" esize="67"/>
+			<region name="macao" esize="1"/>
+			<region name="north_korea" esize="5"/>
+			<region name="south_korea" esize="25"/>
+		</regions>	
+		
+		<!-- 2.3 SOUTH-EASTERN ASIA [SOURCE: CLOUDMADE.COM] -->
+		<regions siteToDownload="http://downloads.cloudmade.com/asia/south-eastern_asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia" skip="false">
+			<region name="brunei" esize="1"/>
+			<region name="cambodia" esize="2"/>
+			<region name="christmas_island" esize="1"/>
+			<region name="east_timor" esize="1"/>
+			<region name="laos" esize="3"/>
+			<region name="malaysia" esize="7"/>
+			<region name="myanmar" esize="7"/>
+			<region name="singapore" esize="2"/>
+			<region name="spratly_islands" esize="1"/>
+			<region name="thailand" esize="12"/>
+			<region name="vietnam" esize=""/>
+		</regions>	
+			
+		<!-- 2.3 SOUTHERN ASIA [SOURCE: CLOUDMADE.COM] -->
+		<regions siteToDownload="http://downloads.cloudmade.com/asia/southern_asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia" skip="false">
+			<region name="afghanistan" esize="6"/>
+			<region name="bangladesh" esize="3"/>
+			<region name="bhutan" esize="1"/>
+			<region name="british_indian_ocean_territory" esize="1"/>  
+			<region name="iran" esize="11"/>
+			<region name="maldives" esize="1"/>
+			<region name="nepal" esize="2"/>
+			<region name="sri_lanka" esize="2"/>			
+		</regions>		
+			
+		<!-- 2.3 WESTERN ASIA [SOURCE: CLOUDMADE.COM] -->
+		<regions siteToDownload="http://downloads.cloudmade.com/asia/western_asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia" skip="false">
+			<region name="armenia" esize="1"/>
+			<region name="bahrain" esize="1"/>
+			<region name="caspian_sea" esize="1"/>
+			<region name="cyprus" esize="1"/>
+			<region name="georgia" esize="1"/>
+			<region name="jordan" esize="1"/>
+			<region name="kuwait" esize="1"/>
+			<region name="lebanon" esize="1"/>
+			<region name="oman" esize="1"/>
+			<region name="qatar" esize="1"/>
+			<region name="saudi_arabia" esize="1"/>
+			<region name="syria" esize="1"/>
+			<region name="turkey" esize="1"/>
+			<region name="united_arab_emirates" esize="1"/>
+			<region name="yemen" esize="1"/>
+		</regions>			
+
+		
+</regions_list> 

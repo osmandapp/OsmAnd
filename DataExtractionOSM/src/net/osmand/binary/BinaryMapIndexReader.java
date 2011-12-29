@@ -1361,10 +1361,14 @@ public class BinaryMapIndexReader {
 	private static boolean testPoiSearch = true;
 	private static boolean testTransportSearch = false;
 	
+	private static void println(String s){
+		System.out.println(s);
+	}
+	
 	public static void main(String[] args) throws IOException {
 		RandomAccessFile raf = new RandomAccessFile(new File("/home/victor/projects/OsmAnd/data/osmand_index/Parkcharge_me.obf"), "r");
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
-		System.out.println("VERSION " + reader.getVersion()); //$NON-NLS-1$
+		println("VERSION " + reader.getVersion()); //$NON-NLS-1$
 		long time = System.currentTimeMillis();
 
 		if (testMapSearch) {
@@ -1379,11 +1383,11 @@ public class BinaryMapIndexReader {
 
 		if (testPoiSearch) {
 			PoiRegion poiRegion = reader.getPoiIndexes().get(0);
-			System.out.println(poiRegion.leftLongitude + " " + poiRegion.rightLongitude + " " + poiRegion.bottomLatitude + " "
+			println(poiRegion.leftLongitude + " " + poiRegion.rightLongitude + " " + poiRegion.bottomLatitude + " "
 					+ poiRegion.topLatitude);
 			for (int i = 0; i < poiRegion.categories.size(); i++) {
-				System.out.println(poiRegion.categories.get(i));
-				System.out.println(" " + poiRegion.subcategories.get(i));
+				println(poiRegion.categories.get(i));
+				println(" " + poiRegion.subcategories.get(i));
 			}
 
 			int sleft = MapUtils.get31TileNumberX(6);
@@ -1399,26 +1403,26 @@ public class BinaryMapIndexReader {
 			}, null);
 			List<Amenity> results = reader.searchPoi(req);
 			for (Amenity a : results) {
-				System.out.println(a.getType() + " " + a.getSubType() + " " + a.getName() + " " + a.getLocation());
+				println(a.getType() + " " + a.getSubType() + " " + a.getName() + " " + a.getLocation());
 			}
 //
-//			System.out.println("Searching by name...");
+//			println("Searching by name...");
 //			req = buildSearchPoiRequest(sleft, sright, "kolie", null);
 //			reader.searchPoiByName(req);
 //			for (Amenity a : req.getSearchResults()) {
-//				System.out.println(a.getType() + " " + a.getSubType() + " " + a.getName() + " " + a.getLocation());
+//				println(a.getType() + " " + a.getSubType() + " " + a.getName() + " " + a.getLocation());
 //			}
 		}
 
-		System.out.println("MEMORY " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())); //$NON-NLS-1$
-		System.out.println("Time " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
+		println("MEMORY " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())); //$NON-NLS-1$
+		println("Time " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
 	}
 
 	private static void testTransportSearch(BinaryMapIndexReader reader) throws IOException {
 		// test transport
 		for (TransportIndex i : reader.transportIndexes) {
-			System.out.println(i.left + " " + i.right + " " + i.top + " " + i.bottom);
-			System.out.println(i.stringTable.offsets);
+			println(i.left + " " + i.right + " " + i.top + " " + i.bottom);
+			println(i.stringTable.offsets + "");
 		}
 		{
 			int sleft = MapUtils.get31TileNumberX(27.573);
@@ -1426,10 +1430,10 @@ public class BinaryMapIndexReader {
 			int stop = MapUtils.get31TileNumberY(53.912);
 			int sbottom = MapUtils.get31TileNumberY(53.908);
 			for (TransportStop s : reader.searchTransportIndex(buildSearchTransportRequest(sleft, sright, stop, sbottom, 15, null))) {
-				System.out.println(s.getName());
+				println(s.getName());
 				TIntObjectHashMap<TransportRoute> routes = reader.getTransportRoutes(s.getReferencesToRoutes());
 				for (net.osmand.data.TransportRoute  route : routes.values()) {
-					System.out.println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
+					println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
 							+ route.getAvgBothDistance());
 				}
 			}
@@ -1440,10 +1444,10 @@ public class BinaryMapIndexReader {
 			int stop = MapUtils.get31TileNumberY(53.912);
 			int sbottom = MapUtils.get31TileNumberY(53.708);
 			for (TransportStop s : reader.searchTransportIndex(buildSearchTransportRequest(sleft, sright, stop, sbottom, 16, null))) {
-				System.out.println(s.getName());
+				println(s.getName());
 				TIntObjectHashMap<TransportRoute> routes = reader.getTransportRoutes(s.getReferencesToRoutes());
 				for (net.osmand.data.TransportRoute  route : routes.values()) {
-					System.out.println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
+					println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
 							+ route.getAvgBothDistance());
 				}
 			}
@@ -1461,12 +1465,12 @@ public class BinaryMapIndexReader {
 				reader.preloadBuildings(s, buildAddressRequest((ResultMatcher<Building>) null));
 				buildings += s.getBuildings().size();
 			}
-			System.out.println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings + " " + c.getEnName());
+			println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings + " " + c.getEnName());
 		}
 		List<PostCode> postcodes = reader.getPostcodes(reg, buildAddressRequest((ResultMatcher<MapObject>) null), null);
 		for(PostCode c : postcodes){
 			reader.preloadStreets(c, buildAddressRequest((ResultMatcher<Street>) null));
-			System.out.println(c.getName());
+			println(c.getName());
 		}
 		List<City> villages = reader.getVillages(reg, buildAddressRequest((ResultMatcher<MapObject>) null), new StringMatcher() {
 			
@@ -1475,20 +1479,20 @@ public class BinaryMapIndexReader {
 				return false;
 			}
 		}, true);
-		System.out.println("Villages " + villages.size());
+		println("Villages " + villages.size());
 	}
 
 	private static void testMapSearch(BinaryMapIndexReader reader) throws IOException {
-		System.out.println(reader.mapIndexes.get(0).encodingRules);
+		println(reader.mapIndexes.get(0).encodingRules + "");
 		int sleft = MapUtils.get31TileNumberX(27.596);
 		int sright = MapUtils.get31TileNumberX(27.599);
 		int stop = MapUtils.get31TileNumberY(53.921);
 		int sbottom = MapUtils.get31TileNumberY(53.919);
-		System.out.println("SEARCH " + sleft + " " + sright + " " + stop + " " + sbottom);
+		println("SEARCH " + sleft + " " + sright + " " + stop + " " + sbottom);
 
 		for (BinaryMapDataObject obj : reader.searchMapIndex(buildSearchRequest(sleft, sright, stop, sbottom, 8, null))) {
 			if (obj.getName() != null) {
-				System.out.println(" " + obj.getName());
+				println(" " + obj.getName());
 			}
 		}
 	}
