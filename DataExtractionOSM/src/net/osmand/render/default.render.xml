@@ -987,7 +987,7 @@
 					<filter minzoom="16" maxzoom="16" strokeWidth="15"/>
 					<filter minzoom="17" maxzoom="17" strokeWidth="19"/>
 					<filter minzoom="18" strokeWidth="24"/>
-					<groupFilter layer="-1" pathEffect="4_4" shadowRadius="0" cap="BUTT"/>
+					<groupFilter layer="-1" pathEffect="4_4" cap="BUTT"/>
 				</filter>
 			</groupFilter>
 		</group>
@@ -1015,7 +1015,7 @@
 					<filter minzoom="16" maxzoom="16" strokeWidth="10"/>
 					<filter minzoom="17" maxzoom="17" strokeWidth="13"/>
 					<filter minzoom="18" strokeWidth="18"/>
-					<groupFilter layer="-1" pathEffect="4_4" shadowRadius="0" cap="BUTT"/>
+					<groupFilter layer="-1" pathEffect="4_4" cap="BUTT"/>
 				</filter>
 			</groupFilter>
 		</group>
@@ -1047,8 +1047,8 @@
 					<filter minzoom="17" maxzoom="17" strokeWidth="13"/>
 					<filter minzoom="18" strokeWidth="18"/>
 					<groupFilter>
-						<filter layer="-1" nightMode="true" color="#9F9F9F" color_2="#9F9F9F" pathEffect="4_4" shadowRadius="0" cap="BUTT"/>
-						<filter layer="-1" pathEffect="4_4" shadowRadius="0" cap="BUTT"/>
+						<filter layer="-1" nightMode="true" color="#9F9F9F" color_2="#9F9F9F" pathEffect="4_4" cap="BUTT"/>
+						<filter layer="-1" pathEffect="4_4" cap="BUTT"/>
 						<filter nightMode="true" color="#9F9F9F" color_2="#9F9F9F"/>
 					</groupFilter>
 				</filter>
@@ -1076,7 +1076,7 @@
 					<filter minzoom="16" maxzoom="16" strokeWidth="5"/>
 					<filter minzoom="17" maxzoom="17" strokeWidth="8"/>
 					<filter minzoom="18" strokeWidth="12"/>
-					<groupFilter layer="-1" pathEffect="4_4" shadowRadius="0" cap="BUTT"/>
+					<groupFilter layer="-1" pathEffect="4_4" cap="BUTT"/>
 				</filter>
 			</groupFilter>
 		</group>
