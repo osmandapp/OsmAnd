@@ -81,6 +81,7 @@ public class IndexBatchCreator {
 	boolean downloadFiles = false;
 	boolean generateIndexes = false;
 	boolean uploadIndexes = false;
+	boolean skipGeneratedIndexes = false;
 	MapZooms mapZooms = null;
 	Integer zoomWaySmoothness = null; 
 	MapRenderingTypes types = MapRenderingTypes.getDefault();
@@ -88,6 +89,7 @@ public class IndexBatchCreator {
 	
 	File osmDirFiles;
 	File indexDirFiles;
+	File workDir;
 	File backupUploadedFiles;
 	
 	boolean indexPOI = false;
@@ -176,6 +178,7 @@ public class IndexBatchCreator {
 		uploadIndexes = Boolean.parseBoolean(process.getAttribute("uploadIndexes"));
 		deleteFilesAfterUploading = Boolean.parseBoolean(process.getAttribute("deleteFilesAfterUploading"));
 		IndexCreator.REMOVE_POI_DB = !Boolean.parseBoolean(process.getAttribute("keepPoiOdb"));
+		skipGeneratedIndexes = Boolean.parseBoolean(process.getAttribute("skipGeneratedIndexes"));
 		wget = process.getAttribute("wget");
 		
 		indexPOI = Boolean.parseBoolean(process.getAttribute("indexPOI"));
@@ -199,6 +202,12 @@ public class IndexBatchCreator {
 			throw new IllegalArgumentException("Please specify directory with generated index files  as directory_for_index_files (attribute)"); //$NON-NLS-1$
 		}
 		indexDirFiles = new File(dir);
+		workDir = indexDirFiles;
+		dir = process.getAttribute("directory_for_generation");
+		if(dir != null && new File(dir).exists()) {
+			workDir = new File(dir);
+		}
+		
 		if (downloadFiles) {
 			if (regions == null) {
 				throw new IllegalArgumentException("Please specify regions.xml file as 2nd parameter");
@@ -360,17 +369,23 @@ public class IndexBatchCreator {
 				name = name.toLowerCase();
 				RegionSpecificData regionSpecificData = regionCountries.regionNames.get(name);
 				String url = MessageFormat.format(site, name);
-				String country = prefix+name;
-				File toSave = downloadFile(url, country, suffix, alreadyGeneratedFiles, alreadyUploadedFiles);
+				
+				String regionName = prefix + name;
+				String fileName = prefix + name + suffix;
+				File bmif = new File(indexDirFiles, fileName + "_" + IndexConstants.BINARY_MAP_VERSION + IndexConstants.BINARY_MAP_INDEX_EXT);
+				if(skipGeneratedIndexes && bmif.exists()){
+					continue;
+				}
+				File toSave = downloadFile(url,  fileName, alreadyGeneratedFiles, alreadyUploadedFiles);
 				if (toSave != null && generateIndexes) {
-					generateIndex(toSave, country, regionSpecificData, alreadyGeneratedFiles, alreadyUploadedFiles);
+					generateIndex(toSave, regionName, regionSpecificData, alreadyGeneratedFiles, alreadyUploadedFiles);
 				}
 			}
 		}
 		System.out.println("DOWNLOADING FILES FINISHED");
 	}
 	
-	protected File downloadFile(String url, String country, String suffix, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
+	protected File downloadFile(String url, String regionName, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
 		String ext = ".osm";
 		if(url.endsWith(".osm.bz2")){
 			ext = ".osm.bz2";
@@ -378,16 +393,16 @@ public class IndexBatchCreator {
 			ext = ".osm.pbf";
 		}
 		File toIndex = null;
-		File saveTo = new File(osmDirFiles, country + suffix + ext);
+		File saveTo = new File(osmDirFiles, regionName + ext);
 		if (wget == null || wget.trim().length() == 0) {
-			toIndex = internalDownload(url, country, saveTo);
+			toIndex = internalDownload(url, saveTo);
 		} else {
-			toIndex = wgetDownload(url, country, saveTo);
+			toIndex = wgetDownload(url, saveTo);
 		}
 		return toIndex;
 	}
 
-	private File wgetDownload(String url, String country, File toSave) 
+	private File wgetDownload(String url,  File toSave) 
 	{
 		BufferedReader wgetOutput = null;
 		OutputStream wgetInput = null;
@@ -427,7 +442,7 @@ public class IndexBatchCreator {
 	private final static int DOWNLOAD_DEBUG = 1 << 20;
 	private final static int MB = 1 << 20;
 	private final static int BUFFER_SIZE = 1 << 15;
-	private File internalDownload(String url, String country, File toSave) {
+	private File internalDownload(String url, File toSave) {
 		int count = 0;
 		int downloaded = 0;
 		int mbDownloaded = 0;
@@ -437,7 +452,7 @@ public class IndexBatchCreator {
 		try {
 			ostream = new FileOutputStream(toSave);
 			stream = new URL(url).openStream();
-			log.info("Downloading country " + country + " from " + url);  //$NON-NLS-1$//$NON-NLS-2$
+			log.info("Downloading country " + toSave.getName() + " from " + url);  //$NON-NLS-1$//$NON-NLS-2$
 			while ((count = stream.read(buffer)) != -1) {
 				ostream.write(buffer, 0, count);
 				downloaded += count;
@@ -490,6 +505,9 @@ public class IndexBatchCreator {
 			RTree.clearCache();
 			
 			String regionName = f.getName();
+			System.out.println("-----------------------------------------------");
+			System.out.println("----------- Generate " + f.getName());
+			System.out.println("\n\n\n\n");
 			int i = f.getName().indexOf('.');
 			if (i > -1) {
 				regionName = Algoritms.capitalizeFirstLetterAndLowercase(f.getName().substring(0, i));
@@ -500,7 +518,7 @@ public class IndexBatchCreator {
 				rName = Algoritms.capitalizeFirstLetterAndLowercase(rName);
 			}
 			
-			IndexCreator indexCreator = new IndexCreator(indexDirFiles);
+			IndexCreator indexCreator = new IndexCreator(workDir);
 			indexCreator.setIndexAddress(indexAddress);
 			indexCreator.setIndexPOI(indexPOI);
 			indexCreator.setIndexTransport(indexTransport);
@@ -512,6 +530,9 @@ public class IndexBatchCreator {
 			if (regionSpecificData != null && regionSpecificData.cityAdminLevel != null) {
 				indexCreator.setCityAdminLevel(regionSpecificData.cityAdminLevel);
 			}
+			if(zoomWaySmoothness != null){
+				indexCreator.setZoomWaySmothness(zoomWaySmoothness);
+			}
 
 			String poiFileName = regionName + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT;
 			indexCreator.setPoiFileName(poiFileName);
@@ -520,15 +541,13 @@ public class IndexBatchCreator {
 			try {
 				alreadyGeneratedFiles.add(f.getName());
 				indexCreator.generateIndexes(f, new ConsoleProgressImplementation(3),  null, mapZooms, types);
-				if(zoomWaySmoothness != null){
-					indexCreator.setZoomWaySmothness(zoomWaySmoothness);
-				}
+				
+				File generated = new File(workDir, mapFileName);
+				File ready = new File(indexDirFiles, mapFileName);
+				generated.renameTo(ready);
 				// Do not upload poi files any more
-//				if (indexPOI) {
-//					uploadIndex(new File(indexDirFiles, poiFileName), alreadyUploadedFiles);
-//				}
 				if (indexMap || indexAddress || indexTransport || indexPOI) {
-					uploadIndex(new File(indexDirFiles, mapFileName), alreadyUploadedFiles);
+					uploadIndex(ready, alreadyUploadedFiles);
 				}
 			} catch (Exception e) {
 				log.error("Exception generating indexes for " + f.getName(), e); //$NON-NLS-1$ 
