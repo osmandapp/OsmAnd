@@ -20,9 +20,9 @@
 	<!-- 0 - no shadow, 1 - one step, 2 - blur shadow, 3 - solid shadow -->	
 	<renderingAttribute name="shadowRendering">
 		 <!-- next line corrects for shadowColor appearing very dark with solid shadow in day view -->
-		 <filter minzoom="14" nightMode="false" attrIntValue="3" shadowColor="#8E8E8E"/>
-		<filter minzoom="14" attrIntValue="3" shadowColor="#3E3E3E"/>
-		<filter minzoom="9" maxzoom="13" attrIntValue="1" shadowColor="#3E3E3E"/>
+		 <filter minzoom="14" nightMode="false" attrIntValue="3" shadowColor="#969696"/>
+		<filter minzoom="14" attrIntValue="3" shadowColor="#464646"/>
+		<filter minzoom="9" maxzoom="13" attrIntValue="1" shadowColor="#464646"/>
 		<filter attrIntValue="0"/>
 	</renderingAttribute>
 
@@ -741,7 +741,7 @@
 			<filter tag="highway" value="road"/>
 			<filter tag="highway" value="unclassified"/>
 			<filter tag="highway" value="residential"/>
-			<groupFilter color="#ffffff" color_2="#3E3E3E" minzoom="12" strokeWidth_2="1">
+			<groupFilter color="#ffffff" color_2="#464646" minzoom="12" strokeWidth_2="1">
 				<filter nightMode="true" color="#9f9f9f"/>
 			</groupFilter>
 		</group>
@@ -751,8 +751,8 @@
 			<filter tag="highway" value="pedestrian"/>
 			<filter tag="highway" value="footway"/>
 			<groupFilter>
-				<filter minzoom="14" color="#ECECEC" color_2="#3E3E3E" strokeWidth_2="0.5"/>
-				<filter hmRendered="true" minzoom="13" color="#ECECEC" color_2="#3E3E3E" strokeWidth_2="0.5"/>
+				<filter minzoom="14" color="#ECECEC" color_2="#464646" strokeWidth_2="0.5"/>
+				<filter hmRendered="true" minzoom="13" color="#ECECEC" color_2="#464646" strokeWidth_2="0.5"/>
 			</groupFilter>
 		</group>
 
