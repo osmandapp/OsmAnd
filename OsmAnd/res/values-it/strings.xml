@@ -524,7 +524,6 @@
 	<string name="search_history_street">Strada: {0}, {1}</string>
 	<string name="search_history_int_streets">Incrocio: {0} x {1} in {2}</string>
 	<string name="search_history_building">Naviga verso lat = {0}, lon = {1}</string>
-	<string name="search_history_navigate_to">Luogo:\n lat {0,number,#.#####}\n lon {1,number,#.#####}</string>
 	<string name="favorite">Favorito</string>
 	<string name="clear_all">Eliminare tutto</string>
 	<string name="history">Recenti</string>

@@ -345,7 +345,6 @@
 	<string name="search_history_building">Edificio : {0}, {1}, {2}</string>
 	<string name="search_history_city">Ciudad : {0}</string>
 	<string name="search_history_int_streets">Calles de intersección : {0} x {1} en {2}</string>
-	<string name="search_history_navigate_to">Localización:\n lat {0,number,#.#####}\n lon {1,number,#.#####}</string>
 	<string name="search_history_street">Calle : {0}, {1}</string>
 	<string name="search_near_map">Buscar cerca a la última localización</string>
 	<string name="search_nearby">Sitios cercanos</string>

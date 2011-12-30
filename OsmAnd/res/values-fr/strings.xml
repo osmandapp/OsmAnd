@@ -523,7 +523,6 @@
 <string name="search_history_street">Rue : {0}, {1}</string>
 <string name="search_history_int_streets">Intersections : {0} x {1} dans {2}</string>
 <string name="search_history_building">Édifice : {0}, {1}, {2}</string>
-<string name="search_history_navigate_to">Emplacement:\n lat {0,number,#.#####}\n long {1,number,#.#####}</string>
 <string name="favorite">Favoris</string>
 <string name="clear_all">Supprimer tout</string>
 <string name="history">Historique</string>

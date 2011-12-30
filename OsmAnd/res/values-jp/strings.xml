@@ -495,7 +495,6 @@ POIの更新は利用できません</string>
      <string name="search_history_int_streets">交差点: {0} x
 {1} in {2}</string>
      <string name="search_history_building">建物: {0}, {1}, {2}</string>
-     <string name="search_history_navigate_to">緯度 {0,number,#.#####}\n 経度 {1,number,#.#####}にナビゲート</string>
      <string name="favorite">お気に入り</string>
      <string name="clear_all">全てクリア</string>
      <string name="history">履歴</string>

@@ -401,7 +401,7 @@
 	<string name="continuous_rendering_descr">Wähle zwischen kontinuierlichem Kartenaufbau oder Bilddarstellung auf einmal</string>
 	<string name="rendering_exception">Fehler aufgetreten beim Rendern des gewählten Gebietes</string>
 	<string name="rendering_out_of_memory">Zu wenig Speicher zum Anzeigen des gewählten Gebietes</string>
-	<string name="show_point_options">Optionen für Punkt</string>
+	<string name="show_point_options">Optionen für Lokation</string>
 	<string name="renderer_load_sucess">Renderer erfolgreich geladen</string>
 	<string name="renderer_load_exception">Fehler aufgetreten: Renderer wurde nicht geladen</string>
 	<string name="renderers">Vektor Renderer</string>
@@ -432,7 +432,7 @@
 
 	<string name="vector_data">Offline-Vektor-Karten</string>
 	<string name="transport_context_menu">Suche nach Verbindung an Haltestelle</string>
-	<string name="point_on_map">Punkt auf Karte:\n Lat %1$.5f\n Lon %2$.5f</string>
+	<string name="point_on_map">Lokation:\n Lat %1$.5f\n Lon %2$.5f</string>
 	<string name="osb_bug_name">OSM Fehler</string>
 	<string name="poi_context_menu_modify">Bearbeite POI</string>
 	<string name="poi_context_menu_delete">Lösche POI</string>
@@ -552,7 +552,6 @@
 	<string name="search_history_street">Straße: {0}, {1}</string>
 	<string name="search_history_int_streets">Querstraße : {0} x {1} in {2}</string>
 	<string name="search_history_building">Hausnr.: {0}, {1}, {2}</string>
-	<string name="search_history_navigate_to">Ziel:\n {0,number,#.#####} N\n {1,number,#.#####} O</string>
 	<string name="favorite">Favoriten</string>
 	<string name="clear_all">Alles löschen</string>
 	<string name="history">Verlauf</string>
