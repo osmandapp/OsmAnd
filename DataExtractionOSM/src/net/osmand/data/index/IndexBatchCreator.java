@@ -50,6 +50,7 @@ import net.osmand.swing.OsmExtractionUI;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.logging.impl.Jdk14Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -542,13 +543,12 @@ public class IndexBatchCreator {
 				try {
 					fh = new FileHandler(new File(workDir, mapFileName+".gen.log").getAbsolutePath(), 5000000, 1, true);
 					fh.setFormatter(new SimpleFormatter());
-					Logger logger = LogManager.getLogManager().getLogger("batch.file.generation.log");
-					Handler[] hs = logger.getHandlers();
-					for(int ik=0; ik<hs.length; ik++) {
-						logger.removeHandler(hs[ik]);
-					}
-					logger.addHandler(fh);
-					warningsAboutMapData = LogFactory.getLog("net.osmand.batch.generation.log");
+					fh.setLevel(Level.ALL);
+					Jdk14Logger jdk14Logger = new Jdk14Logger("tempLogger");
+		                        jdk14Logger.getLogger().setLevel(Level.ALL);
+		                        jdk14Logger.getLogger().setUseParentHandlers(false);
+		                        jdk14Logger.getLogger().addHandler(fh);
+		                        warningsAboutMapData = jdk14Logger;												
 				} catch (SecurityException e1) {
 					e1.printStackTrace();
 				} catch (IOException e1) {
