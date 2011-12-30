@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="download_files_not_enough_space">Nie je dostatok voľného miesta pre stiahnutie %1$s MB (voľné: %2$s).</string>
+	<string name="download_files_question_space">Aktuálne je voľných {2} MB! Stiahnuť {0} súbor(y/ov) ({1} MB)?</string>
+	<string name="show_zoom_level_descr">Natrvalo zobrazí úroveň pribl. namiesto pravítka.</string>
+	<string name="show_zoom_level">Zobraziť úroveň priblíženia</string>
 	<string name="tip_select_destination_point">Výber cieľového bodu</string>
 	<string name="tip_select_destination_point_t">
 	\tCieľ môžete určiť priamo na mape (kontextové menu, potom \'Nastaviť ako cieľ\'), vo všetkých hľadacích aktivitách, alebo cez dlhým kliknutím vo Vašom \'Zozname obľúbených bodov\'. 
