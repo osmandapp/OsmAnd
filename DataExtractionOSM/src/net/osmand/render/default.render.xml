@@ -141,6 +141,8 @@
 				<filter tag="highway" value="primary_link" order="42"/>
 				 <filter layer="1" tag="highway" value="secondary_link" order="65"/>
 				<filter tag="highway" value="secondary_link" order="41"/>
+				 <filter layer="1" tag="highway" value="tertiary_link" order="65"/>
+				<filter tag="highway" value="tertiary_link" order="40"/>
 				<groupFilter>
 					 <filter minzoom="14" shadowLevel="1"/>
 					 <filter hmRendered="true" shadowLevel="1"/>
@@ -1141,9 +1143,9 @@
 
 		<filter tag="highway" value="ford" minzoom="14" color="#000000" strokeWidth="2"/>
 
-		<filter tag="highway" value="construction" minzoom="12" color="#ff6600" strokeWidth="10" color_2="#ffffff" strokeWidth_2="6" pathEffect_2="6_6"/>
+		<filter tag="highway" value="construction" minzoom="12" color="#ff6600" strokeWidth="8" color_2="#ffffff" strokeWidth_2="6" pathEffect_2="6_6"/>
 
-		<filter tag="highway" value="proposed" minzoom="12" color="#ff6600" strokeWidth="10" color_2="#9f9f9f" strokeWidth_2="8" pathEffect_2="12_4"/>
+		<filter tag="highway" value="proposed" minzoom="12" color="#ff6600" strokeWidth="8" color_2="#9f9f9f" strokeWidth_2="6" pathEffect_2="9_3"/>
 
 		<filter contourLines="true" tag="contour" value="elevation" minzoom="14" color="#54ff7c00" strokeWidth="1"/>
 
