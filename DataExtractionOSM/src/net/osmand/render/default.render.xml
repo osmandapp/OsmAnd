@@ -1141,9 +1141,9 @@
 
 		<filter tag="highway" value="ford" minzoom="14" color="#000000" strokeWidth="2"/>
 
-		<filter tag="highway" value="construction" minzoom="14" color="#ff6600" strokeWidth="10" color_2="#ffffff" strokeWidth_2="6" pathEffect_2="6_6"/>
+		<filter tag="highway" value="construction" minzoom="12" color="#ff6600" strokeWidth="10" color_2="#ffffff" strokeWidth_2="6" pathEffect_2="6_6"/>
 
-		<filter tag="highway" value="proposed" minzoom="14" color="#ff6600" strokeWidth="10" color_2="#9f9f9f" strokeWidth_2="8" pathEffect_2="12_4"/>
+		<filter tag="highway" value="proposed" minzoom="12" color="#ff6600" strokeWidth="10" color_2="#9f9f9f" strokeWidth_2="8" pathEffect_2="12_4"/>
 
 		<filter contourLines="true" tag="contour" value="elevation" minzoom="14" color="#54ff7c00" strokeWidth="1"/>
 
