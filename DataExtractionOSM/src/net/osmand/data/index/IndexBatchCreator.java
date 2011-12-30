@@ -30,6 +30,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
+import java.util.logging.Level;
 import java.util.logging.SimpleFormatter;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -569,6 +570,7 @@ public class IndexBatchCreator {
 				}
 				if(fh != null) {
 					LogManager.getLogManager().getLogger("").removeHandler(fh);
+					fh.close();
 				}
 			} catch (Exception e) {
 				log.error("Exception generating indexes for " + f.getName(), e); //$NON-NLS-1$ 
