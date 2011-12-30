@@ -358,7 +358,7 @@ public class MapActivityActions implements DialogProvider {
 					String email = mapActivity.getString(R.string.send_location_email_pattern, shortOsmUrl, appLink);
 					Intent intent = new Intent(Intent.ACTION_SEND);
 					intent.setType("vnd.android.cursor.dir/email"); //$NON-NLS-1$
-					intent.putExtra(Intent.EXTRA_SUBJECT, "Mine location"); //$NON-NLS-1$
+					intent.putExtra(Intent.EXTRA_SUBJECT, "Location"); //$NON-NLS-1$
 					intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(email));
 					intent.setType("text/html");
 					mapActivity.startActivity(Intent.createChooser(intent, getString(R.string.send_location)));
