@@ -54,7 +54,7 @@ public class BinaryInspector {
 	}
 	
 	private static void print(String s) {
-		System.out.println(s);
+		System.out.print(s);
 	}
 
 	public static void inspector(String[] args) throws IOException {

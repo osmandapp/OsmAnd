@@ -26,6 +26,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -44,6 +49,7 @@ import net.osmand.osm.MapRenderingTypes;
 import net.osmand.swing.OsmExtractionUI;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -124,7 +130,7 @@ public class IndexBatchCreator {
 		if(name.equals("-local")){
 			stream = IndexBatchCreator.class.getResourceAsStream("batch.xml");
 			regionsStream = IndexBatchCreator.class.getResourceAsStream("regions.xml");
-			System.out.println("Using local settings");
+			log.info("Using local settings");
 		} else {
 			try {
 				stream = new FileInputStream(name);
@@ -150,15 +156,7 @@ public class IndexBatchCreator {
 				regions = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(regionsStream);
 			}
 			creator.runBatch(doc, regions);
-		} catch (SAXException e) {
-			System.out.println("XML configuration file could not be read from " + name);
-			e.printStackTrace();
-			log.error("XML configuration file could not be read from " + name, e);
-		} catch (IOException e) {
-			System.out.println("XML configuration file could not be read from " + name);
-			e.printStackTrace();
-			log.error("XML configuration file could not be read from " + name, e);
-		} catch (ParserConfigurationException e) {
+		} catch (Exception e) {
 			System.out.println("XML configuration file could not be read from " + name);
 			e.printStackTrace();
 			log.error("XML configuration file could not be read from " + name, e);
@@ -382,7 +380,6 @@ public class IndexBatchCreator {
 				}
 			}
 		}
-		System.out.println("DOWNLOADING FILES FINISHED");
 	}
 	
 	protected File downloadFile(String url, String regionName, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
@@ -491,7 +488,7 @@ public class IndexBatchCreator {
 				generateIndex(f, null, null, alreadyGeneratedFiles, alreadyUploadedFiles);
 			}
 		}
-		System.out.println("GENERATING INDEXES FINISHED ");
+		log.info("GENERATING INDEXES FINISHED ");
 	}
 	
 	
@@ -505,9 +502,8 @@ public class IndexBatchCreator {
 			RTree.clearCache();
 			
 			String regionName = f.getName();
-			System.out.println("-----------------------------------------------");
-			System.out.println("----------- Generate " + f.getName());
-			System.out.println("\n\n\n\n");
+			log.warn("-------------------------------------------");
+			log.warn("----------- Generate " + f.getName() + "\n\n\n");
 			int i = f.getName().indexOf('.');
 			if (i > -1) {
 				regionName = Algoritms.capitalizeFirstLetterAndLowercase(f.getName().substring(0, i));
@@ -540,7 +536,29 @@ public class IndexBatchCreator {
 			indexCreator.setMapFileName(mapFileName);
 			try {
 				alreadyGeneratedFiles.add(f.getName());
-				indexCreator.generateIndexes(f, new ConsoleProgressImplementation(3),  null, mapZooms, types);
+				Log warningsAboutMapData = null;
+				FileHandler fh = null;
+				// configure log path
+				try {
+					fh = new FileHandler(new File(workDir, mapFileName+".gen.log").getAbsolutePath(), 5000000, 1, true);
+					fh.setFormatter(new SimpleFormatter());
+					Logger logger = LogManager.getLogManager().getLogger("batch.file.generation.log");
+					Handler[] hs = logger.getHandlers();
+					for(int ik=0; ik<hs.length; ik++) {
+						logger.removeHandler(hs[ik]);
+					}
+					logger.addHandler(fh);
+					warningsAboutMapData = LogFactory.getLog("net.osmand.batch.generation.log");
+				} catch (SecurityException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				if(fh != null) {
+					LogManager.getLogManager().getLogger("").addHandler(fh);
+				}
+				
+				indexCreator.generateIndexes(f, new ConsoleProgressImplementation(3),  null, mapZooms, types, warningsAboutMapData);
 				
 				File generated = new File(workDir, mapFileName);
 				File ready = new File(indexDirFiles, mapFileName);
@@ -548,6 +566,9 @@ public class IndexBatchCreator {
 				// Do not upload poi files any more
 				if (indexMap || indexAddress || indexTransport || indexPOI) {
 					uploadIndex(ready, alreadyUploadedFiles);
+				}
+				if(fh != null) {
+					LogManager.getLogManager().getLogger("").removeHandler(fh);
 				}
 			} catch (Exception e) {
 				log.error("Exception generating indexes for " + f.getName(), e); //$NON-NLS-1$ 
@@ -576,11 +597,11 @@ public class IndexBatchCreator {
 			if(!alreadyUploadedFiles.contains(f.getName()) && !f.isDirectory()){
 				uploadIndex(f, alreadyUploadedFiles);
 				if(!alreadyUploadedFiles.contains(f.getName())){
-					System.out.println("! NOT UPLOADED "  + f.getName());
+					log.warn("! NOT UPLOADED "  + f.getName());
 				}
 			}
 		}
-		System.out.println("UPLOADING INDEXES FINISHED ");
+		log.info("UPLOADING INDEXES FINISHED ");
 		
 	}
 	

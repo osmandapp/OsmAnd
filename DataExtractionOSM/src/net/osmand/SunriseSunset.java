@@ -647,9 +647,7 @@ public class SunriseSunset
 		// Catch errors
 		catch( ParseException e )
 		{
-			System.out.println( "\nCannot parse date" );
-			System.out.println( e );
-			System.exit( 1 );
+			e.printStackTrace();
 		} // end of catch
 
 	}

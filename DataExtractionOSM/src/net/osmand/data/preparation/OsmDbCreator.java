@@ -182,7 +182,7 @@ public class OsmDbCreator implements IOsmStorageFilter {
 				database.write(options, batch);
 				batch = new DBWriteBatch();
 				long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-				System.out.println("" + Runtime.getRuntime().totalMemory() / (1024 * 1024) + " MB Total " + (usedMemory / (1024 * 1024))
+				log.info("" + Runtime.getRuntime().totalMemory() / (1024 * 1024) + " MB Total " + (usedMemory / (1024 * 1024))
 						+ " MB used memory");
 				currentCountNode = 0;
 			}

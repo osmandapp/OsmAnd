@@ -152,14 +152,14 @@ public class DownloaderIndexFromGoogleCode {
 		}
 		
 		String urlText = "http://code.google.com/p/osmand/downloads/delete.do?name="+fileName; //$NON-NLS-1$
-		System.out.println(urlText);
+		log.info("Url to delete :" + urlText);
 		StringBuilder requestBody = new StringBuilder();
 		requestBody.
 				append("token=").append(token). //$NON-NLS-1$
 				append("&pagegen=").append(pagegen). //$NON-NLS-1$
 				append("&filename=").append(fileName). //$NON-NLS-1$
 				append("&delete=Delete+download"); //$NON-NLS-1$
-		System.out.println(requestBody);
+		log.info("Request body : " + requestBody);
 		
 		// getting url
 		URL url = new URL(urlText);

@@ -22,6 +22,9 @@ import javax.swing.Action;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
@@ -40,6 +43,7 @@ public class MapClusterLayer implements MapPanelLayer {
 
 	private /*final */ static boolean ANIMATE_CLUSTERING = true;
 	private /*final */ static int SIZE_OF_ROUTES_TO_ANIMATE = 50;
+	private Log log = LogFactory.getLog(MapClusterLayer.class);
 	
 	
 	private MapPanel map;
@@ -135,7 +139,7 @@ public class MapClusterLayer implements MapPanelLayer {
 		if (st != null) {
 			BinaryMapDataObject road = st.getRoad();
 			TagValuePair pair = road.getTagValue(0);
-			System.out.println("ROAD TO START " + pair.tag + " " + pair.value + " " + road.getName() + " " 
+			log.info("ROAD TO START " + pair.tag + " " + pair.value + " " + road.getName() + " " 
 					+ (road.getId() >> 3));
 		}
 		

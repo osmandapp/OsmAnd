@@ -44,6 +44,7 @@ import rtree.RTreeException;
  */
 public class IndexCreator {
 	private static final Log log = LogFactory.getLog(IndexCreator.class);
+	private Log logMapDataWarn = log;
 
 	// ONLY derby.jar needed for derby dialect 
 	// (NOSQL is the fastest but is supported only on linux 32)
@@ -75,8 +76,6 @@ public class IndexCreator {
 	private Long lastModifiedDate = null;
 	
 	
-
-	
 	private IndexTransportCreator indexTransportCreator;
 	private IndexPoiCreator indexPoiCreator;
 	private IndexAddressCreator indexAddressCreator;
@@ -96,7 +95,7 @@ public class IndexCreator {
 
 	public static final int DEFAULT_CITY_ADMIN_LEVEL = 8;
 	private String cityAdminLevel = "" + DEFAULT_CITY_ADMIN_LEVEL;
-	
+
 
 	public IndexCreator(File workingDir) {
 		this.workingDir = workingDir;
@@ -350,11 +349,12 @@ public class IndexCreator {
 
 	
 	public void generateIndexes(File readFile, IProgress progress, IOsmStorageFilter addFilter, MapZooms mapZooms,
-			MapRenderingTypes renderingTypes) throws IOException, SAXException, SQLException, InterruptedException {
+			MapRenderingTypes renderingTypes, Log logMapDataWarn) throws IOException, SAXException, SQLException, InterruptedException {
 //		if(LevelDBAccess.load()){
 //			dialect = DBDialect.NOSQL;
 //		}
 		
+		this.logMapDataWarn = logMapDataWarn;
 		if (renderingTypes == null) {
 			renderingTypes = MapRenderingTypes.getDefault();
 		}
@@ -371,7 +371,7 @@ public class IndexCreator {
 		}
 		this.indexTransportCreator = new IndexTransportCreator();
 		this.indexPoiCreator = new IndexPoiCreator();
-		this.indexAddressCreator = new IndexAddressCreator();
+		this.indexAddressCreator = new IndexAddressCreator(logMapDataWarn);
 		this.indexMapCreator = new IndexVectorMapCreator();
 		this.accessor = new OsmDbAccessor();
 		
@@ -650,9 +650,9 @@ public class IndexCreator {
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
 		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/mecklenburg-vorpommern.osm.pbf"),
-//				new ConsoleProgressImplementation(1), null, zooms, rt);
+//				new ConsoleProgressImplementation(1), null, zooms, rt, null);
 		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/download/RU-MOW.osm.bz2"),
-				new ConsoleProgressImplementation(1), null, zooms, rt);
+				new ConsoleProgressImplementation(1), null, zooms, rt, null);
 		
 //		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes3.tmp.odb"));
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/stadion-dynamo.osm"),
@@ -678,14 +678,14 @@ public class IndexCreator {
 		
 		
 
-		System.out.println("WHOLE GENERATION TIME :  " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
-		 System.out.println("COORDINATES_SIZE " + BinaryMapIndexWriter.COORDINATES_SIZE + " count " + BinaryMapIndexWriter.COORDINATES_COUNT); //$NON-NLS-1$ //$NON-NLS-2$
-		System.out.println("TYPES_SIZE " + BinaryMapIndexWriter.TYPES_SIZE); //$NON-NLS-1$
-		System.out.println("ID_SIZE " + BinaryMapIndexWriter.ID_SIZE); //$NON-NLS-1$
-		 System.out.println("- COORD_TYPES_ID SIZE " + (BinaryMapIndexWriter.COORDINATES_SIZE + BinaryMapIndexWriter.TYPES_SIZE + BinaryMapIndexWriter.ID_SIZE)); //$NON-NLS-1$
-		System.out.println("- MAP_DATA_SIZE " + BinaryMapIndexWriter.MAP_DATA_SIZE); //$NON-NLS-1$
-		System.out.println("- STRING_TABLE_SIZE " + BinaryMapIndexWriter.STRING_TABLE_SIZE); //$NON-NLS-1$
-		System.out.println("-- MAP_DATA_AND_STRINGS SIZE " + (BinaryMapIndexWriter.MAP_DATA_SIZE + BinaryMapIndexWriter.STRING_TABLE_SIZE)); //$NON-NLS-1$
+		log.info("WHOLE GENERATION TIME :  " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
+		log.info("COORDINATES_SIZE " + BinaryMapIndexWriter.COORDINATES_SIZE + " count " + BinaryMapIndexWriter.COORDINATES_COUNT); //$NON-NLS-1$ //$NON-NLS-2$
+		log.info("TYPES_SIZE " + BinaryMapIndexWriter.TYPES_SIZE); //$NON-NLS-1$
+		log.info("ID_SIZE " + BinaryMapIndexWriter.ID_SIZE); //$NON-NLS-1$
+		log.info("- COORD_TYPES_ID SIZE " + (BinaryMapIndexWriter.COORDINATES_SIZE + BinaryMapIndexWriter.TYPES_SIZE + BinaryMapIndexWriter.ID_SIZE)); //$NON-NLS-1$
+		log.info("- MAP_DATA_SIZE " + BinaryMapIndexWriter.MAP_DATA_SIZE); //$NON-NLS-1$
+		log.info("- STRING_TABLE_SIZE " + BinaryMapIndexWriter.STRING_TABLE_SIZE); //$NON-NLS-1$
+		log.info("-- MAP_DATA_AND_STRINGS SIZE " + (BinaryMapIndexWriter.MAP_DATA_SIZE + BinaryMapIndexWriter.STRING_TABLE_SIZE)); //$NON-NLS-1$
 
 	}
 }
