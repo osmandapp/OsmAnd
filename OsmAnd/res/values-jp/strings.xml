@@ -202,7 +202,7 @@ OSMコミュニティはこの問題をいち早く修正することができ�
      <string name="mile_per_hour">mph</string>
      <string name="mile">mi</string>
      <string name="send_location_way_choose_title">次の方法で位置をシェア</string>
-     <string name="send_location_sms_pattern">いまここ : %1$s\n%2$s</string>
+     <string name="send_location_sms_pattern">位置 : %1$s\n%2$s</string>
      <string name="send_location_email_pattern">位置を見るには
 次のWebブラウザ用リンク %1$s、もしくはandroidインテントリンク%2$sを参照</string>
      <string name="send_location">位置を送信</string>

@@ -577,7 +577,7 @@
   <string name="mile_per_hour">mph</string>
   <string name="mile">mi</string>
   <string name="send_location_way_choose_title">Sdílet polohu pomocí</string>
-  <string name="send_location_sms_pattern">Jsem tady : %1$s\n%2$s</string>
+  <string name="send_location_sms_pattern">Poloha : %1$s\n%2$s</string>
   <string name="send_location_email_pattern">
     Pro zobrazení polohy následujte link %1$s v prohlížeči nebo android
     intent link %2$s

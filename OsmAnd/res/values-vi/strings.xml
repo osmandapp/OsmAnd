@@ -281,7 +281,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="mile_per_hour">mph</string>
 	<string name="mile">mi</string>
 	<string name="send_location_way_choose_title">Chia sẻ vị trí sử dụng</string>
-	<string name="send_location_sms_pattern">Tôi ở đây: %1$s\n%2$s</string>
+	<string name="send_location_sms_pattern">Khu vực: %1$s\n%2$s</string>
 	<string name="send_location_email_pattern">To see location follow the web browser link %1$s or android intent link %2$s</string>
 	<string name="send_location">Gửi vị trí</string>
 	<string name="context_menu_item_share_location">Chia sẻ vị trí</string>

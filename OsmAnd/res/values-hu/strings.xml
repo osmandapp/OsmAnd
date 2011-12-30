@@ -288,7 +288,7 @@
 	<string name="mile_per_hour">mph</string>
 	<string name="mile">mi</string>
 	<string name="send_location_way_choose_title">Hely megosztásának módja</string>
-	<string name="send_location_sms_pattern">Itt vagyok / I\'m here : %1$s\n%2$s</string>
+	<string name="send_location_sms_pattern">Hely : %1$s\n%2$s</string>
 	<string name="send_location_email_pattern">A hely megjelenítéséhez kattints a %1$s linkre a webböngészőben vagy az Androidra szánt linkre %2$s\n\nTo see location follow the web browser link %1$s or android intent link %2$s</string>
 	<string name="send_location">Hely pozíció elküldése</string>
 	<string name="context_menu_item_share_location">Hely megosztása</string>

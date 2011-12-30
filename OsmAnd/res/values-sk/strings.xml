@@ -287,7 +287,7 @@
 	<string name="mile_per_hour">mph</string>
 	<string name="mile">mi</string>
 	<string name="send_location_way_choose_title">Zdieľať umiestnenie cez</string>
-	<string name="send_location_sms_pattern">Ja som tu: %1$s, %2$s</string>
+	<string name="send_location_sms_pattern">Pozícia: %1$s, %2$s</string>
 	<string name="send_location_email_pattern">Na zobrazenie umiestnenia nasledujte webovský odkaz %1$s alebo odkaz androidovského obsahu %2$s</string>
 	<string name="send_location">Poslať umiestnenie</string>
 	<string name="context_menu_item_share_location">Zdieľať umiestnenie</string>

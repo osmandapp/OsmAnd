@@ -272,7 +272,7 @@
 	<string name="mile_per_hour">mph</string>
 	<string name="mile">mi</string>
 	<string name="send_location_way_choose_title">Condividi la posizione</string>
-	<string name="send_location_sms_pattern">Sono quì: %1$s\n%2$s</string>
+	<string name="send_location_sms_pattern">Luogo: %1$s\n%2$s</string>
 	<string name="send_location_email_pattern">Per vedere la posizione segui il link web %1$s o il link %2$s</string>
 	<string name="send_location">Invia posizione</string>
 	<string name="context_menu_item_share_location">Condividi posizione</string>

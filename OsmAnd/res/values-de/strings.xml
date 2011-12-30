@@ -300,7 +300,7 @@
 	<string name="mile_per_hour">mph</string>
 	<string name="mile">mi</string>
 	<string name="send_location_way_choose_title">Lokation mitteilen mittels</string>
-	<string name="send_location_sms_pattern">Ich bin hier: %1$s, %2$s</string>
+	<string name="send_location_sms_pattern">Lokation: %1$s, %2$s</string>
 	<string name="send_location_email_pattern">Um die Lokation zu sehen, folge dem Web-Link %1$s oder Android Intent Link %2$s</string>
 	<string name="send_location">Lokation senden</string>
 	<string name="context_menu_item_share_location">Lokation mitteilen</string>

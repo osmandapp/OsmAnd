@@ -236,7 +236,7 @@
 	<string name="mile_per_hour">мл/ч</string>
 	<string name="mile">мл</string>
 	<string name="send_location_way_choose_title">Поделиться используя</string>
-	<string name="send_location_sms_pattern">Tut : %1$s\n%2$s</string>
+	<string name="send_location_sms_pattern">Координаты : %1$s\n%2$s</string>
 	<string name="send_location_email_pattern">Чтобы увидить местоположение следуйте ссылке %1$s или android ссылке %2$s</string>
 	<string name="send_location">Отправить местоположение</string>
 	<string name="context_menu_item_share_location">Поделиться местоположением</string>

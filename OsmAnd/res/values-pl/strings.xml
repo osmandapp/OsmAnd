@@ -286,7 +286,7 @@
 <string name="mile_per_hour">mph</string>
 <string name="mile">mi</string>
 <string name="send_location_way_choose_title">Udostępnij pozycję GPS używając:</string>
-<string name="send_location_sms_pattern">Jestem tutaj: %1$s\n%2$s</string>
+<string name="send_location_sms_pattern">Pozycja: %1$s\n%2$s</string>
 <string name="send_location_email_pattern">To see location follow the web browser link %1$s or android intent link %2$s</string>
 <string name="send_location">Wyślij pozycję GPS</string>
 <string name="context_menu_item_share_location">Share location</string>
