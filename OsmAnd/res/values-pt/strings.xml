@@ -104,7 +104,7 @@
 	<string name="error_reading_gpx">Erro na leitura de dados GPX</string>
 	<string name="vector_data">Mapas vetoriais offline</string>
 	<string name="transport_context_menu">Procurar transporte na parada</string>
-	<string name="point_on_map">Ponto no mapa\n Lat %1$.5f Long %2$.5f</string>
+	<string name="point_on_map">Localização:\n Lat %1$.5f Long %2$.5f</string>
 	<string name="osb_bug_name">Bug</string>
 	<string name="poi_context_menu_modify">Modificar POI</string>
 	<string name="poi_context_menu_delete">Apagar POI</string>
@@ -223,7 +223,7 @@
 	<string name="search_history_street">Rua : {0}, {1}</string>
 	<string name="search_history_int_streets">Interseção : {0} x {1} dans {2}</string>
 	<string name="search_history_building">Edifício : {0}, {1}, {2}</string>
-	<string name="search_history_navigate_to">Se mover para\n lat {0,number,#.#####}\n long {1,number,#.#####}</string>
+	<string name="search_history_navigate_to">Localização:\n lat {0,number,#.#####}\n long {1,number,#.#####}</string>
 	<string name="favorite">Favoritos</string>
 	<string name="clear_all">Apagar tudo</string>
 	<string name="history">Histórico</string>

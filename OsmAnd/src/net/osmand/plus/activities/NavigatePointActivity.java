@@ -238,7 +238,7 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 			double lon = convert(((TextView) findViewById(R.id.LongitudeEdit)).getText().toString());
 			
 			if(navigate){
-				OsmandSettings.getOsmandSettings(this).setPointToNavigate(lat, lon, MessageFormat.format(getString(R.string.search_history_navigate_to), lat, lon));
+				OsmandSettings.getOsmandSettings(this).setPointToNavigate(lat, lon, getString(R.string.point_on_map, lat, lon));
 			} else {
 				// in case when it is dialog
 				if(activity != null) {
@@ -247,7 +247,7 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 				} else {
 					OsmandSettings settings = OsmandSettings.getOsmandSettings(this);
 					settings.setMapLocationToShow(lat, lon, Math.max(12, settings.getLastKnownMapZoom()), 
-							MessageFormat.format(getString(R.string.search_history_navigate_to), lat, lon));
+							getString(R.string.point_on_map, lat, lon));
 				}
 			}
 			close();

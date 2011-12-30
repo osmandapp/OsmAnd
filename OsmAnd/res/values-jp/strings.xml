@@ -361,7 +361,7 @@ name="maps_could_not_be_downloaded">このマップはダウンロードでき�
 
      <string name="vector_data">オフラインベクターマップ</string>
      <string name="transport_context_menu">交通機関を乗り場で探す</string>
-     <string name="point_on_map">マップ上の地点:\n 緯度
+     <string name="point_on_map">位置:\n 緯度
 %1$.5f\n 経度 %2$.5f</string>
      <string name="osb_bug_name">バグ</string>
      <string name="poi_context_menu_modify">POIを変更</string>

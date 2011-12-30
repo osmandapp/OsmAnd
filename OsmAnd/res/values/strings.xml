@@ -92,7 +92,7 @@
 \n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.)
 \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts)
 \n\t- Function to save route as GPX track for offline use
-\n\t- Improve GPX monitoring  (filter some inaccurate location and save accuracy/elevation/speed)
+\n\t- Improve GPX monitoring  (filter some inaccurate position and save accuracy/elevation/speed)
 \n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/)
 \n\t- Improve vector rendering
 \n\t- Improvement of TTS engine (announce exact distance, enable miles)
@@ -434,7 +434,7 @@
 
 	<string name="vector_data">Offline vector maps</string>
 	<string name="transport_context_menu">Search transport at stop</string>
-	<string name="point_on_map">Point on map:\n Lat %1$.5f\n Lon %2$.5f</string>
+	<string name="point_on_map">Location:\n Lat %1$.5f\n Lon %2$.5f</string>
 	<string name="osb_bug_name">Bug</string>
 	<string name="poi_context_menu_modify">Modify POI</string>
 	<string name="poi_context_menu_delete">Delete POI</string>
@@ -553,7 +553,7 @@
 	<string name="search_history_street">Street: {0}, {1}</string>
 	<string name="search_history_int_streets">Intersection: {0} x {1} in {2}</string>
 	<string name="search_history_building">Building: {0}, {1}, {2}</string>
-	<string name="search_history_navigate_to">Destination:\n Lat {0,number,#.#####}\n Lon {1,number,#.#####}</string>
+	<string name="search_history_navigate_to">Location:\n Lat {0,number,#.#####}\n Lon {1,number,#.#####}</string>
 	<string name="favorite">Favorite</string>
 	<string name="clear_all">Clear all</string>
 	<string name="history">History</string>
@@ -614,7 +614,7 @@
 	<string name="empty_route_calculated">Empty route is calculated</string>					
 	<string name="new_route_calculated_dist">New route is calculated, distance</string>
 	<string name="arrived_at_destination">You have arrived at your destination</string>
-	<string name="invalid_locations">Locations are invalid</string>
+	<string name="invalid_locations">Coordinates are invalid!</string>
 	<string name="go_back_to_osmand">Go back to OsmAnd map</string>
 	<string name="close">Close</string>
 	<string name="loading_data">Loading data...</string>

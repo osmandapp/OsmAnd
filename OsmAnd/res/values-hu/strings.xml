@@ -411,7 +411,7 @@
 
 	<string name="vector_data">Vektoros OSM térkép</string>
 	<string name="transport_context_menu">Közlekedés keresése a célnál</string>
-	<string name="point_on_map">Pont a térképen\n szélesség %1$.5f, hosszúság %2$.5f</string>
+	<string name="point_on_map">Hely:\n szélesség %1$.5f, hosszúság %2$.5f</string>
 	<string name="osb_bug_name">Hiba</string>
 	<string name="poi_context_menu_modify">POI módosítás</string>
 	<string name="poi_context_menu_delete">POI törlés</string>
@@ -531,7 +531,7 @@
 	<string name="search_history_street">Utca: {0}, {1}</string>
 	<string name="search_history_int_streets">Kereszteződés: {0} és {1}, {2}</string>
 	<string name="search_history_building">Épület: {0}, {1}, {2}</string>
-	<string name="search_history_navigate_to">Célpont:\n szélesség {0,number,#.#####}\n hosszúság {1,number,#.#####}</string>
+	<string name="search_history_navigate_to">Hely:\n szélesség {0,number,#.#####}\n hosszúság {1,number,#.#####}</string>
 	<string name="favorite">Kedvenc</string>
 	<string name="clear_all">Mindent töröl</string>
 	<string name="history">Előzmény</string>
@@ -592,7 +592,7 @@
 	<string name="empty_route_calculated">Üres útvonal lett tervezve</string>									
 	<string name="new_route_calculated_dist">Új útvonal tervezve, távolság</string>
 	<string name="arrived_at_destination">Megérkeztél a célponthoz</string>
-	<string name="invalid_locations">Érvénytelen hely</string>
+	<string name="invalid_locations">Érvénytelen koordináta</string>
 	<string name="go_back_to_osmand">Vissza az OsmAnd térképhez</string>
 	<string name="close">Bezár</string>
 	<string name="loading_data">Adatok betöltése</string>

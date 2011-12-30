@@ -186,8 +186,8 @@
 	\n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt
 	\n\tTipp: Um schnell zwischen der Kompassnachführung und der in den Einstellungen gewählten Option zu wechseln, einfach auf die Kompassnadel in der Kartenansicht drücken.</string>
 
-	<string name="switch_to_raster_map_to_see">Keine Offline-Vektor-Karte für diese Position vorhanden.\n\t\n\tBitte Vektor-Karte laden via \'Einstellungen\' -> \'Offline-Daten\', oder Online-Karte verwenden via \'Einstellungen\' -> \'Landkarten\'.</string>
-	<string name="switch_to_vector_map_to_see">Offline-Vektor-Karte für diese Position vorhanden.\n\t\n\tFür Verwendung aktivieren: \'Menu\' -> \'Darstellung\' -> \'Kartenquelle...\' -> \'Offline-Vektor-Karten\'.</string>
+	<string name="switch_to_raster_map_to_see">Keine Offline-Vektor-Karte für diese Lokation vorhanden.\n\t\n\tBitte Vektor-Karte laden via \'Einstellungen\' -> \'Offline-Daten\', oder Online-Karte verwenden via \'Einstellungen\' -> \'Landkarten\'.</string>
+	<string name="switch_to_vector_map_to_see">Offline-Vektor-Karte für diese Lokation vorhanden.\n\t\n\tFür Verwendung aktivieren: \'Menu\' -> \'Darstellung\' -> \'Kartenquelle...\' -> \'Offline-Vektor-Karten\'.</string>
 	<string name="binary_map_download_success">Download erfolgreich.\n\t\n\tFür Verwendung aktivieren: \'Einstellungen\' -> \'Landkarten\' -> \'Offline-Vektor-Karten\'.</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
 	<string name="choose_audio_stream_descr">Ausgabemodus für Sprachansagen wählen (System-abhängig)</string>
@@ -235,10 +235,10 @@
 	\n\t\'Tag\' - permanente Tagesansicht
 	\n\t\'Nacht\' - permanente Nachtansicht 
 	\n\t\'Umgebungslicht-Sensor\' - automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden)</string>	
-	<string name="tip_location_sharing">Position mitteilen</string>
-	<string name="tip_location_sharing_t">\tWollen Sie eine interessante Position Freunden oder Familie mitteilen?
+	<string name="tip_location_sharing">Lokation mitteilen</string>
+	<string name="tip_location_sharing_t">\tWollen Sie eine interessante Lokation Freunden oder Familie mitteilen?
 	\n\tMit OsmAnd kann man jeden Aufenthaltsort leicht mit Anderen teilen.
-	\n\tDies geschieht im \'Karten-Kontextmenü\' via \'Position mitteilen\'.
+	\n\tDies geschieht im \'Karten-Kontextmenü\' via \'Lokation mitteilen\'.
 	\n\tDann wählt man einen Übertragungsweg, zur Wahl stehen: E-Mail, SMS, oder man kann einfach die Lokationskoordinaten in die Ablage (Clipboard) kopieren.</string>
 
 	<string name="tip_favorites">Favoriten</string>
@@ -299,11 +299,11 @@
 	<string name="foot">ft</string>
 	<string name="mile_per_hour">mph</string>
 	<string name="mile">mi</string>
-	<string name="send_location_way_choose_title">Position mitteilen mittels</string>
+	<string name="send_location_way_choose_title">Lokation mitteilen mittels</string>
 	<string name="send_location_sms_pattern">Ich bin hier: %1$s, %2$s</string>
-	<string name="send_location_email_pattern">Um die Position zu sehen, folge dem Web-Link %1$s oder Android Intent Link %2$s</string>
-	<string name="send_location">Position senden</string>
-	<string name="context_menu_item_share_location">Position mitteilen</string>
+	<string name="send_location_email_pattern">Um die Lokation zu sehen, folge dem Web-Link %1$s oder Android Intent Link %2$s</string>
+	<string name="send_location">Lokation senden</string>
+	<string name="context_menu_item_share_location">Lokation mitteilen</string>
 	<string name="add_waypoint_dialog_added">Wegpunkt \'\'{0}\'\' erfolgreich hinzugefügt</string>
 	<string name="add_waypoint_dialog_title">GPX Wegpunkt an gespeicherten GPX Track anfügen</string>
 	<string name="context_menu_item_add_waypoint">GPX Wegpunkt anfügen</string>
@@ -515,7 +515,7 @@
 	<string name="first_time_download">Offline-Daten herunterladen</string>
 	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. \nUm alle Funktionen verwenden zu können, sind Offline-Daten erforderlich, die Sie in den Einstellungen unter Offline-Daten herunterladen oder selbst erstellen können. Danach können Sie Adressen, POI und ÖPNV finden.</string>
 	<string name="search_poi_location">Suche Signal...</string>
-	<string name="search_near_map">Suche um Kartenposition</string>
+	<string name="search_near_map">Suche um Lokation</string>
 	<string name="search_nearby">Suche um Aufenthaltsort</string>
 	<string name="map_orientation_default">je nach Geräteorientierung</string>
 	<string name="map_orientation_portrait">Hochformat</string>
@@ -613,7 +613,7 @@
 	<string name="empty_route_calculated">Es wurde keine Route berechnet</string>
 	<string name="new_route_calculated_dist">Neue Route wird berechnet</string>
 	<string name="arrived_at_destination">Sie haben Ihr Ziel erreicht</string>
-	<string name="invalid_locations">Position ist ungültig</string>
+	<string name="invalid_locations">Koordinaten sind ungültig!</string>
 	<string name="go_back_to_osmand">zurück zu OsmAnd</string>
 	<string name="close">Schließen</string>
 	<string name="loading_data">Daten werden geladen...</string>
@@ -732,7 +732,7 @@
 <string name="search_address_building_option">Hausnr.</string>
 <string name="search_address_street_option">Querstraße</string>
 
-<string name="search_tabs_location">Position</string>
+<string name="search_tabs_location">Lokation</string>
 
 <string name="context_menu_item_navigate_point">Als Ziel wählen</string>
 <string name="context_menu_item_add_favorite">Als Favorit speichern</string>

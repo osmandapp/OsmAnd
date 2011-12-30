@@ -406,7 +406,7 @@
 <string name="error_reading_gpx">Erreur de lecteur des données GPX</string>
 <string name="vector_data">Cartes vectorielles OSM</string>
 <string name="transport_context_menu">Chercher transport à l\'arrivée</string>
-<string name="point_on_map">Point sur la carte\n Lat %1$.5f Long %2$.5f</string>
+<string name="point_on_map">Emplacement:\n Lat %1$.5f Long %2$.5f</string>
 <string name="osb_bug_name">Bogue</string>
 <string name="poi_context_menu_modify">Modifier PI</string>
 <string name="poi_context_menu_delete">Supprimer PI</string>
@@ -523,7 +523,7 @@
 <string name="search_history_street">Rue : {0}, {1}</string>
 <string name="search_history_int_streets">Intersections : {0} x {1} dans {2}</string>
 <string name="search_history_building">Édifice : {0}, {1}, {2}</string>
-<string name="search_history_navigate_to">Se diriger vers\n lat {0,number,#.#####}\n long {1,number,#.#####}</string>
+<string name="search_history_navigate_to">Emplacement:\n lat {0,number,#.#####}\n long {1,number,#.#####}</string>
 <string name="favorite">Favoris</string>
 <string name="clear_all">Supprimer tout</string>
 <string name="history">Historique</string>
