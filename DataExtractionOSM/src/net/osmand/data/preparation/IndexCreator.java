@@ -44,7 +44,6 @@ import rtree.RTreeException;
  */
 public class IndexCreator {
 	private static final Log log = LogFactory.getLog(IndexCreator.class);
-	private Log logMapDataWarn = log;
 
 	// ONLY derby.jar needed for derby dialect 
 	// (NOSQL is the fastest but is supported only on linux 32)
@@ -354,7 +353,6 @@ public class IndexCreator {
 //			dialect = DBDialect.NOSQL;
 //		}
 		
-		this.logMapDataWarn = logMapDataWarn;
 		if (renderingTypes == null) {
 			renderingTypes = MapRenderingTypes.getDefault();
 		}
@@ -372,7 +370,7 @@ public class IndexCreator {
 		this.indexTransportCreator = new IndexTransportCreator();
 		this.indexPoiCreator = new IndexPoiCreator();
 		this.indexAddressCreator = new IndexAddressCreator(logMapDataWarn);
-		this.indexMapCreator = new IndexVectorMapCreator();
+		this.indexMapCreator = new IndexVectorMapCreator(logMapDataWarn);
 		this.accessor = new OsmDbAccessor();
 		
 

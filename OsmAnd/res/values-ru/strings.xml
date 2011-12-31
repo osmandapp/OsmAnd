@@ -110,12 +110,12 @@
 	<string name="local_index_installed">Установлено</string>
 	<string name="local_index_items_backuped">%1$d из %2$d объектов успешно архивированы.</string>
 	<string name="local_index_items_deleted">%1$d из %2$d объектов успешно удалены.</string>
-	<string name="local_index_items_restored">%1$d из %2$d объектов успешно восстановлены.</string>
+	<string name="local_index_items_restored">%1$d из %2$d объектов успешно активированы.</string>
 	<string name="local_index_no_items_to_do">Нет объектов, чтобы %1$s</string>	
     <string name="local_index_action_do">Вы собириаетесь %1$s %2$s объектов. Вы уверены?</string>
 	<string name="local_index_descr_title">Менеджер офлайн данных</string>
 	
-	<string name="local_index_mi_restore">Восстановить</string>
+	<string name="local_index_mi_restore">Активировать</string>
 	<string name="local_index_mi_backup">Архив</string>
 	<string name="local_index_mi_delete">Удалить</string>
 	<string name="local_index_mi_reload">Обновить</string>
