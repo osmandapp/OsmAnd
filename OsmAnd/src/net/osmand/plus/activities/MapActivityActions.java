@@ -91,6 +91,8 @@ public class MapActivityActions implements DialogProvider {
 	}
 	
 	private Bundle enhance(Bundle bundle, double latitude, double longitude, final int zoom) {
+		bundle.putDouble(KEY_LATITUDE, latitude);
+		bundle.putDouble(KEY_LONGITUDE, longitude);
 		bundle.putInt(KEY_ZOOM, zoom);
 		return bundle;
 	}
