@@ -758,6 +758,7 @@
 			</groupFilter>
 		</group>
 
+
 		<!-- Polygon railway -->
 		<filter minzoom="11" tag="railway" value="station" color="#d4aaaa">
 			<filter nightMode="true" color="#560000"/>
@@ -792,6 +793,23 @@
 		</filter>
 
 
+		<!-- Water, night color 330099 -->
+		<group>
+			<filter minzoom="1" tag="natural" value="coastline"/>
+			<filter minzoom="4" tag="natural" value="water"/>
+			<filter minzoom="4" tag="natural" value="lake"/>
+			<filter minzoom="4" tag="natural" value="bay"/>
+			<filter minzoom="7" tag="landuse" value="reservoir"/>
+			<filter minzoom="7" tag="landuse" value="water"/>	
+			<filter minzoom="10" tag="landuse" value="basin"/>
+
+			<groupFilter color="#b5d0d0">
+				<filter nightMode="true" color="#330099"/>
+			</groupFilter>
+		</group>
+
+
+	<group>
 		<!-- Forest, night color 000034 -->
 		<group>
 			<filter minzoom="9" color="#aed1a0" tag="natural" value="wood"/>
@@ -829,22 +847,6 @@
 			<filter minzoom="12" color="#cfeca8" tag="leisure" value="common"/>
 
 			<groupFilter nightMode="true" color="#004333"/>
-		</group>
-
-
-		<!-- Water, night color 330099 -->
-		<group>
-			<filter minzoom="1" tag="natural" value="coastline"/>
-			<filter minzoom="4" tag="natural" value="water"/>
-			<filter minzoom="4" tag="natural" value="lake"/>
-			<filter minzoom="4" tag="natural" value="bay"/>
-			<filter minzoom="7" tag="landuse" value="reservoir"/>
-			<filter minzoom="7" tag="landuse" value="water"/>	
-			<filter minzoom="10" tag="landuse" value="basin"/>
-
-			<groupFilter color="#b5d0d0">
-				<filter nightMode="true" color="#330099"/>
-			</groupFilter>
 		</group>
 
 
@@ -886,11 +888,11 @@
 		<group>
 			<filter minzoom="16" color="#bca9a9" tag="building" value=""/>
 			<filter minzoom="16" color="#dddddd" tag="building" value="garages"/>
-			<filter minzoom="13" tag="power" value="station" color="#bbbbbb"/>
-			<filter minzoom="13" tag="power" value="sub_station" color="#bbbbbb"/>
-			<filter minzoom="13" tag="leisure" value="stadium" color="#33cc99"/>
-			<filter minzoom="13" tag="leisure" value="sports_centre" color="#33cc99"/>
-			<filter minzoom="14" tag="landuse" value="garages" color="#dfd1d6"/>
+			<filter minzoom="13" color="#bbbbbb" tag="power" value="station"/>
+			<filter minzoom="13" color="#bbbbbb" tag="power" value="sub_station"/>
+			<filter minzoom="13" color="#33cc99" tag="leisure" value="stadium"/>
+			<filter minzoom="13" color="#33cc99" tag="leisure" value="sports_centre"/>
+			<filter minzoom="14" color="#dfd1d6" tag="landuse" value="garages"/>
 			<filter minzoom="12" color="#ff8f8f" tag="military" value="barracks"/>
 			<filter minzoom="10" color="#a0ffa8a8" tag="landuse" value="military"/>
 
@@ -915,6 +917,8 @@
 		<filter minzoom="9" shader="glacier" color="#100000" color_2="#99ccff" strokeWidth_2="2" tag="natural" value="glacier"/>
 		<filter minzoom="10" shader="danger" color="#100000" tag="military" value="danger_area"/>
 		<filter minzoom="9" shader="nr2" color="#abdf96" color_2="#66cc33" strokeWidth_2="1" tag="leisure" value="nature_reserve"/>
+	<groupFilter noPolygons="true" color="#00ffffff" color_2="#00ffffff" shader=""/>
+	</group>
 	</polygon>
 
 
