@@ -57,8 +57,9 @@ public class IndexZipper {
 	}
 
 	private File directory;
+	private File targetDirectory;
 
-	public IndexZipper(String path) throws IndexZipperException {
+	public IndexZipper(String path, String targetPath) throws IndexZipperException {
 		directory = new File(path);
 		if (!directory.isDirectory()) {
 			throw new IndexZipperException("Not a directory:" + path);
@@ -106,7 +107,8 @@ public class IndexZipper {
 		String fileName = unzipped.getName();
 		String n = fileName;
 		if (fileName.endsWith(".odb")) {
-			n = fileName.substring(0, fileName.length() - 4);
+			throw new UnsupportedOperationException("Odb is not supported any more");
+//			n = fileName.substring(0, fileName.length() - 4);
 		}
 		return n + ".zip";
 	}
@@ -198,21 +200,26 @@ public class IndexZipper {
 
 	public static void main(String[] args) {
 		try {
-			IndexZipper indexZipper = new IndexZipper(extractDirectory(args));
+			String srcPath = extractDirectory(args, 0);
+			String targetPath = srcPath;
+			if(args.length > 1) {
+				targetPath = extractDirectory(args, 1);
+			}
+			IndexZipper indexZipper = new IndexZipper(srcPath, targetPath);
 			indexZipper.run();
 		} catch (IndexZipperException e) {
 			log.error(e.getMessage());
 		}
 	}
 
-	private static String extractDirectory(String[] args)
+	private static String extractDirectory(String[] args, int ind)
 			throws IndexZipperException {
-		if (args.length > 0) {
+		if (args.length > ind) {
 			if ("-h".equals(args[0])) {
 				throw new IndexZipperException(
 						"Usage: IndexZipper [directory] (if not specified, the current one will be taken)");
 			} else {
-				return args[0];
+				return args[ind];
 			}
 		}
 		return ".";

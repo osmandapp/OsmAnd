@@ -38,6 +38,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
+import net.osmand.Version;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.IndexConstants;
 import net.osmand.data.index.ExtractGooglecodeAuthorization.GooglecodeUploadTokens;
@@ -542,7 +543,12 @@ public class IndexBatchCreator {
 				FileHandler fh = null;
 				// configure log path
 				try {
-					fh = new FileHandler(new File(workDir, mapFileName+".gen.log").getAbsolutePath(), 5000000, 1, true);
+					File fs = new File(workDir, mapFileName+".gen.log");
+					FileOutputStream fout = new FileOutputStream(fs);
+					fout.write((new Date() + "\n").getBytes());
+					fout.write((Version.APP_MAP_CREATOR_FULL_NAME+"\n").getBytes());
+					fout.close();
+					fh = new FileHandler(fs.getAbsolutePath(), 5000000, 1, false);
 					fh.setFormatter(new SimpleFormatter());
 					fh.setLevel(Level.ALL);
 					Jdk14Logger jdk14Logger = new Jdk14Logger("tempLogger");
