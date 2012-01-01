@@ -14,7 +14,7 @@
 		type="boolean" possibleValues=""/>
 	<renderingProperty attr="appMode" name="Rendering mode" description="Default renderer: Adjust rendering for specific purpose"
 		type="string" possibleValues="default,car,bicycle,pedestrian"/>
-	<renderingProperty attr="noPolygons" name="No polygons" description="Default renderer: Make areal map objects transparent"
+	<renderingProperty attr="noPolygons" name="No polygons" description="Default renderer: Make all areal land features on map transparent"
 		type="boolean" possibleValues=""/>
 
 	<!-- 0 - no shadow, 1 - one step, 2 - blur shadow, 3 - solid shadow -->	
