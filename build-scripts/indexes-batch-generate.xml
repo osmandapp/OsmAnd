@@ -1,19 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <batch_process>
-	<!-- These attributes are required  to upload/delete downloads
-	     * cookieHSID - cookie HSID is required for delete index (could be taken from source (!) of page when you are about delete index) 
-	     * cookieSID - cookie SID is required for delete index (could be taken from source (!) of page when you are about delete index)
-	     * pagegen - pagegen attribute is required for delete index (could be taken from source (!) of page when you are about delete index)
-	     * token - token attribute is required for delete index (could be taken from source (!) of page when you are about delete index)
-	     * google_code_user - is required to upload index 
-	     * google_code_password - is required to upload index (is not gmail password!) - could be found in profile 
-	-->
-	<authorization_info cookieHSID=""
-		cookieSID=""
-		pagegen="" token=""
-		google_code_user="" google_code_password="" 
-		osmand_download_user="" osmand_download_password=""/>
-		
 	<process_attributes mapZooms="" renderingTypesFile="" zoomWaySmoothness="2" 
 		osmDbDialect="sqlite" mapDbDialect="sqlite"/>
 	
@@ -26,11 +12,8 @@
 		 or you can upload any file you have to googlecode (just put into 'directory_for_index_files')
 	 -->
 	 <!-- zoomWaySmoothness - 1-4, typical mapZooms - 8-10;11-12;13-14;15   -->
-	<process directory_for_osm_files=".work/osm" directory_for_index_files="/var/lib/jenkins/indexes"
-		directory_for_uploaded_files="/var/lib/jenkins/indexes/uploaded" keepPoiOdb="false" directory_for_generation=".work"
-		downloadOsmFiles="true" generateIndexes="true" uploadIndexes="false" skipGeneratedIndexes="true"
-		upload_osmand_googlecode="false" deleteFilesAfterUploading="false" indexPOI="true" indexMap="true"
-		indexTransport="true" indexAddress="true">
+	<process directory_for_osm_files=".work/osm" directory_for_index_files="/var/lib/jenkins/indexes" directory_for_generation=".work"
+		skipGeneratedIndexes="true"	indexPOI="true" indexMap="true"	indexTransport="true" indexAddress="true">
 		<!-- Add wget="C:/Program Files/GNUWin32/bin/wget.exe" to process, to use wget for download.
 			 On linux systems if wget is in your path it can be wget="wget" or you can make own script with wget command:
 			 wget="/path/to/script/wget.sh"

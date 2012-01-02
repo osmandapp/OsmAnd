@@ -50,7 +50,7 @@ public class IndexCreator {
 	// Sqlite better to use only for 32-bit machines 
 	public static DBDialect dialect = DBDialect.SQLITE;
 	public static DBDialect mapDBDialect = DBDialect.SQLITE;
-	public static boolean REMOVE_POI_DB = false; 
+	public static boolean REMOVE_POI_DB = true; 
 
 	public static final int BATCH_SIZE = 5000;
 	public static final int BATCH_SIZE_OSM = 10000;
