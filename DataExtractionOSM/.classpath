@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="lib/junidecode-0.1.jar"/>
 	<classpathentry kind="lib" path="lib/jleveldb-v01.jar"/>
 	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.7.6.3-20110609.081603-3.jar"/>
+	<classpathentry kind="lib" path="lib/jsch-20120101.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

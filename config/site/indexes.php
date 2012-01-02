@@ -24,19 +24,38 @@
     }		
 ?>
 </table>
-<h1><?php echo "Table of indexes hosted on googlecode"; ?></h1>
+<h1><?php echo "Table of indexes hosted on osmand.net"; ?></h1>
+<table border="1">
+<?php
+   $res = $xpath->query('//region');
+   if($res && $res->length > 0) {
+		foreach($res as $node) {
+		  if (file_exists('indexes/'.$node->getAttribute('name')) {
+		      echo "<tr><td>".$node->getAttribute('name')."</td><td>".$node->getAttribute('date').
+         		   "</td><td>".$node->getAttribute('size')."</td><td>".
+				$node->getAttribute('description')."</td></tr>";
+				
+	      }
+        }
+    }			
+?>
+</table>
+<h1><?php echo "Table of  indexes on googlecode"; ?></h1>
 <table border="1">
 <?php
    $res = $xpath->query('//region');
    if($res && $res->length > 0) { 	 
 	   
 		foreach($res as $node) {
+     		if (!file_exists('indexes/'.$node->getAttribute('name')) {
 		  echo "<tr><td>".$node->getAttribute('name')."</td><td>".$node->getAttribute('date').
 		   "</td><td>".$node->getAttribute('size')."</td><td>".
 				$node->getAttribute('description')."</td></tr>";
+		    }
       }
     }			
 ?>
 </table>
+
 </body>
 </html>

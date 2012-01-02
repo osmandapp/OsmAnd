@@ -7,9 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,6 +21,12 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.logging.Log;
+
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelExec;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
@@ -49,11 +52,11 @@ public class IndexUploader {
 	/**
 	 * Something bad have happend
 	 */
-	public static class IndexZipperException extends Exception {
+	public static class IndexUploadException extends Exception {
 
 		private static final long serialVersionUID = 2343219168909577070L;
 
-		public IndexZipperException(String message) {
+		public IndexUploadException(String message) {
 			super(message);
 		}
 
@@ -75,15 +78,21 @@ public class IndexUploader {
 	private File directory;
 	private File targetDirectory;
 
-	public IndexUploader(String path, String targetPath) throws IndexZipperException {
+	public IndexUploader(String path, String targetPath) throws IndexUploadException {
 		directory = new File(path);
 		if (!directory.isDirectory()) {
-			throw new IndexZipperException("Not a directory:" + path);
+			throw new IndexUploadException("Not a directory:" + path);
+		}
+		targetDirectory = new File(targetPath);
+		if (!targetDirectory.isDirectory()) {
+			throw new IndexUploadException("Not a directory:" + targetPath);
 		}
 	}
 
-	private void run() {
-		for (File f : directory.listFiles()) {
+	public void run() {
+		// take files before whole upload process
+		File[] listFiles = directory.listFiles();
+		for (File f : listFiles) {
 			try {
 				if (!f.isFile()) {
 					continue;
@@ -237,7 +246,7 @@ public class IndexUploader {
 
 	}
 
-	public void uploadIndex(File indexFile, File dirToBackup, Set<String> alreadyUploadedFiles, String user, String password) {
+	public void uploadIndex(File indexFile, File dirToBackup, Set<String> alreadyUploadedFiles, UploadCredentials uc) {
 		double mbLengh = (double) indexFile.length() / MB;
 		String fileName = indexFile.getName();
 		if (mbLengh < MIN_SIZE_TO_UPLOAD) {
@@ -259,7 +268,7 @@ public class IndexUploader {
 				}
 			}
 
-			boolean uploaded = uploadFileToServer(toUpload, summary, user, password, false, null, null, null, null);
+			boolean uploaded = uploadFileToServer(toUpload, summary, uc);
 			// remove source file if file was splitted
 			if (uploaded && dirToBackup != null) {
 				File toBackup = new File(dirToBackup, toUpload.getName());
@@ -284,45 +293,66 @@ public class IndexUploader {
 			if (args.length > 1) {
 				targetPath = extractDirectory(args, 1);
 			}
-			IndexUploader indexZipper = new IndexUploader(srcPath, targetPath);
-			indexZipper.run();
-		} catch (IndexZipperException e) {
+			IndexUploader indexUploader = new IndexUploader(srcPath, targetPath);
+			indexUploader.run();
+		} catch (IndexUploadException e) {
 			log.error(e.getMessage());
 		}
 	}
 
-	private static String extractDirectory(String[] args, int ind) throws IndexZipperException {
+	private static String extractDirectory(String[] args, int ind) throws IndexUploadException {
 		if (args.length > ind) {
 			if ("-h".equals(args[0])) {
-				throw new IndexZipperException("Usage: IndexZipper [directory] (if not specified, the current one will be taken)");
+				throw new IndexUploadException("Usage: IndexZipper [directory] (if not specified, the current one will be taken)");
 			} else {
 				return args[ind];
 			}
 		}
 		return ".";
 	}
+	
+	
+	public static class UploadCredentials {
+		
+		String password;
+		String user;
+		String url;
+		String path;
+	}
+	
+	public static class UploadSSHCredentials extends UploadCredentials {
+		String privateKey;
+		String knownHosts;
+	}
+	
+	public static class UploadToGoogleCodeCredentials extends UploadCredentials {
+		String token;
+		String pagegen;
+		String cookieHSID;
+		String cookieSID;
+	}
+	
 
 	@Deprecated
-	public void uploadToGoogleCode(File f, String summary, String user, String password, String token, String pagegen, String cookieHSID,
-			String cookieSID) throws IOException {
+	public void uploadToGoogleCode(File f, String summary, UploadToGoogleCodeCredentials gc) throws IOException {
 		if (f.length() / MB > MAX_UPLOAD_SIZE) {
 			System.err.println("ERROR : file " + f.getName() + " exceeded 200 mb!!! Could not be uploaded.");
 			throw new IOException("ERROR : file " + f.getName() + " exceeded 200 mb!!! Could not be uploaded.");
 			// restriction for google code
 		}
 		try {
-			DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName(), token, pagegen, cookieHSID, cookieSID);
+			DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName(), gc.token, gc.pagegen, gc.cookieHSID, gc.cookieSID);
 			if (f.getName().endsWith("obf.zip") && f.length() / MB < 5) {
 				// try to delete without .zip part
-				DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName().substring(0, f.getName().length() - 4), token,
-						pagegen, cookieHSID, cookieSID);
+				DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName().substring(0, f.getName().length() - 4), gc.token,
+						gc.pagegen, gc.cookieHSID, gc.cookieSID);
 			} else if (f.getName().endsWith("poi.zip") && f.length() / MB < 5) {
 				// try to delete without .zip part
 				DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName().substring(0, f.getName().length() - 3) + "odb",
-						token, pagegen, cookieHSID, cookieSID);
+						gc.token, gc.pagegen, gc.cookieHSID, gc.cookieSID);
 			} else if (f.getName().endsWith(".zip-1")) {
-				DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName().substring(0, f.getName().length() - 2), token,
-						pagegen, cookieHSID, cookieSID);
+				DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName().substring(0, f.getName().length() - 2), gc.token,
+						gc.pagegen, gc.cookieHSID, gc.cookieSID);
 			}
 			try {
 				Thread.sleep(4000);
@@ -337,26 +367,23 @@ public class IndexUploader {
 		uploader.setFileName(f.getAbsolutePath());
 		uploader.setTargetFileName(f.getName());
 		uploader.setProjectName("osmand");
-		uploader.setUserName(user);
-		uploader.setPassword(password);
+		uploader.setUserName(gc.user);
+		uploader.setPassword(gc.password);
 		uploader.setLabels("Type-Archive, Testdata");
 		uploader.setSummary(summary);
 		uploader.setDescription(summary);
 		uploader.upload();
 	}
 
-	@Deprecated
-	public boolean uploadFileToServer(File original, String summary, String user, String password, boolean uploadToOsmandGooglecode,
-			String token, String pagegen, String cookieHSID, String cookieSID) throws IOException {
+	public boolean uploadFileToServer(File original, String summary, UploadCredentials credentials) throws IOException {
 		double originalLength = (double) original.length() / MB;
 		MessageFormat dateFormat = new MessageFormat("{0,date,dd.MM.yyyy}", Locale.US);
 		MessageFormat numberFormat = new MessageFormat("{0,number,##.#}", Locale.US);
 		String size = numberFormat.format(new Object[] { originalLength });
 		String date = dateFormat.format(new Object[] { new Date(original.lastModified()) });
 		try {
-			if (uploadToOsmandGooglecode) {
-				uploadToDownloadOsmandNet(original, summary, size, date, user, password);
-			} else {
+			if (credentials instanceof UploadToGoogleCodeCredentials) {
+				
 				String descriptionFile = "{" + date + " : " + size + " MB}";
 				summary += " " + descriptionFile;
 
@@ -364,7 +391,7 @@ public class IndexUploader {
 				try {
 					splittedFiles = splitFiles(original);
 					for (File fs : splittedFiles) {
-						uploadToGoogleCode(fs, summary, user, password, token, pagegen, cookieHSID, cookieSID);
+						uploadToGoogleCode(fs, summary, (UploadToGoogleCodeCredentials) credentials);
 					}
 
 				} finally {
@@ -375,40 +402,145 @@ public class IndexUploader {
 						}
 					}
 				}
+			} else if(credentials instanceof UploadCredentials){
+				uploadToSSH(original, summary, size, date, (UploadSSHCredentials) credentials);
+			} else {
+				uploadToFTP(original, summary, size, date, credentials);
 			}
 		} catch (IOException e) {
+			log.error("Input/output exception uploading " + original.getName(), e);
+			return false;
+		} catch (JSchException e) {
 			log.error("Input/output exception uploading " + original.getName(), e);
 			return false;
 		}
 		return true;
 	}
 
-	@Deprecated
-	public void uploadToDownloadOsmandNet(File f, String description, String size, String date, String user, String password)
+	public void uploadToFTP(File f, String description, String size, String date, UploadCredentials credentials)
 			throws IOException {
 		log.info("Uploading file " + f.getName() + " " + size + " MB " + date + " of " + description);
 		// Upload to ftp
 		FTPFileUpload upload = new FTPFileUpload();
-		upload.upload("download.osmand.net", user, password, "indexes/" + f.getName(), f, 1 << 15);
-
-		String url = "http://download.osmand.net/xml_update.php?";
-		url += "index=" + URLEncoder.encode(f.getName());
-		url += "&description=" + URLEncoder.encode(description);
-		url += "&date=" + URLEncoder.encode(date);
-		url += "&size=" + URLEncoder.encode(size);
-		url += "&action=update";
-		log.info("Updating index " + url); //$NON-NLS-1$//$NON-NLS-2$
-		HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-		connection.setRequestMethod("POST");
-		connection.connect();
-		if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-			log.error("Error updating indexes " + connection.getResponseMessage());
+		String serverName = credentials.url;
+		if(serverName.startsWith("ftp://")){
+			serverName = serverName.substring("ftp://".length());
 		}
-		InputStream is = connection.getInputStream();
-		while (is.read() != -1)
-			;
-		connection.disconnect();
-		log.info("Finish updating index");
+		upload.upload(serverName, credentials.password, credentials.password, credentials.path + "" + f.getName(), f, 1 << 15);
+		log.info("Finish uploading file index");
+	}
+	
+	public void uploadToSSH(File f, String description, String size, String date, UploadSSHCredentials cred) throws IOException,
+			JSchException {
+		log.info("Uploading file " + f.getName() + " " + size + " MB " + date + " of " + description);
+		// Upload to ftp
+		JSch jSch = new JSch();
+		if (cred.knownHosts != null) {
+			jSch.setKnownHosts(cred.knownHosts);
+		}
+		if (cred.privateKey != null) {
+			jSch.addIdentity(cred.privateKey);
+		}
+		String serverName = cred.url;
+		if (serverName.startsWith("ssh://")) {
+			serverName = serverName.substring("ssh://".length());
+		}
+		Session session = jSch.getSession(cred.user, cred.url);
+		if (cred.password != null) {
+			session.setPassword(cred.password);
+		}
+		String rfile = cred.path + f.getName();
+		String lfile = f.getAbsolutePath();
+		session.connect();
+
+		// exec 'scp -t rfile' remotely
+		String command = "scp -p -t " + rfile;
+		Channel channel = session.openChannel("exec");
+		((ChannelExec) channel).setCommand(command);
+
+		// get I/O streams for remote scp
+		OutputStream out = channel.getOutputStream();
+		InputStream in = channel.getInputStream();
+
+		channel.connect();
+
+		if (checkAck(in) != 0) {
+			channel.disconnect();
+			session.disconnect();
+			return;
+		}
+
+		// send "C0644 filesize filename", where filename should not include '/'
+		long filesize = (new File(lfile)).length();
+		command = "C0644 " + filesize + " ";
+		if (lfile.lastIndexOf('/') > 0) {
+			command += lfile.substring(lfile.lastIndexOf('/') + 1);
+		} else {
+			command += lfile;
+		}
+		command += "\n";
+		out.write(command.getBytes());
+		out.flush();
+		if (checkAck(in) != 0) {
+			channel.disconnect();
+			session.disconnect();
+			return;
+		}
+
+		// send a content of lfile
+		FileInputStream fis = new FileInputStream(lfile);
+		byte[] buf = new byte[1024];
+		try {
+			int len;
+			while ((len = fis.read(buf, 0, buf.length)) > 0) {
+				out.write(buf, 0, len); // out.flush();
+			}
+		} finally {
+			fis.close();
+		}
+		fis = null;
+		// send '\0'
+		buf[0] = 0;
+		out.write(buf, 0, 1);
+		out.flush();
+		if (checkAck(in) != 0) {
+			channel.disconnect();
+			session.disconnect();
+			return;
+		}
+		out.close();
+
+		channel.disconnect();
+		session.disconnect();
+		log.info("Finish uploading file index");
+	}
+
+	static int checkAck(InputStream in) throws IOException {
+		int b = in.read();
+		// b may be 0 for success,
+		// 1 for error,
+		// 2 for fatal error,
+		// -1
+		if (b == 0)
+			return b;
+		if (b == -1)
+			return b;
+
+		if (b == 1 || b == 2) {
+			StringBuffer sb = new StringBuffer();
+			int c;
+			do {
+				c = in.read();
+				sb.append((char) c);
+			} while (c != '\n');
+			if (b == 1) { // error
+				System.out.print(sb.toString());
+			}
+			if (b == 2) { // fatal error
+				System.out.print(sb.toString());
+			}
+		}
+		return b;
 	}
 
 }

@@ -53,6 +53,8 @@ public class IndexBatchCreator {
 	
 	protected static final Log log = LogUtil.getLog(IndexBatchCreator.class);
 	
+	public static final String GEN_LOG_EXT = ".gen.log";
+	
 	
 	public static class RegionCountries {
 		String namePrefix = ""; // for states of the country
@@ -438,15 +440,16 @@ public class IndexBatchCreator {
 			try {
 				alreadyGeneratedFiles.add(f.getName());
 				Log warningsAboutMapData = null;
+				File logFileName = new File(workDir, mapFileName + GEN_LOG_EXT);
 				FileHandler fh = null;
 				// configure log path
 				try {
-					File fs = new File(workDir, mapFileName + ".gen.log");
-					FileOutputStream fout = new FileOutputStream(fs);
+
+					FileOutputStream fout = new FileOutputStream(logFileName);
 					fout.write((new Date() + "\n").getBytes());
 					fout.write((Version.APP_MAP_CREATOR_FULL_NAME + "\n").getBytes());
 					fout.close();
-					fh = new FileHandler(fs.getAbsolutePath(), 5000000, 1, false);
+					fh = new FileHandler(logFileName.getAbsolutePath(), 5000000, 1, false);
 					fh.setFormatter(new SimpleFormatter());
 					fh.setLevel(Level.ALL);
 					Jdk14Logger jdk14Logger = new Jdk14Logger("tempLogger");
@@ -459,16 +462,17 @@ public class IndexBatchCreator {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				if(fh != null) {
+				if (fh != null) {
 					LogManager.getLogManager().getLogger("").addHandler(fh);
 				}
-				
-				indexCreator.generateIndexes(f, new ConsoleProgressImplementation(3),  null, mapZooms, types, warningsAboutMapData);
-				
+
+				indexCreator.generateIndexes(f, new ConsoleProgressImplementation(3), null, mapZooms, types, warningsAboutMapData);
+
 				File generated = new File(workDir, mapFileName);
-				File ready = new File(indexDirFiles, mapFileName);
-				generated.renameTo(ready);
-				if(fh != null) {
+				generated.renameTo(new File(indexDirFiles, generated.getName()));
+
+				logFileName.renameTo(new File(indexDirFiles, logFileName.getName()));
+				if (fh != null) {
 					LogManager.getLogManager().getLogger("").removeHandler(fh);
 					fh.close();
 				}
