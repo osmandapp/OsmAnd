@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-	<string name="show_zoom_level_descr">A nagyítási szint folyamatos megjelenítése a lépték helyett.</string>
+	<string name="download_files_not_enough_space">Nincs elég hely %1$s MB letöltéséhez (szabad %2$s).</string>
+	<string name="download_files_question_space">Szabad hely jelenleg {2} MB! Letöltesz {0} fájlt ({1} MB)?</string>
+	<string name="show_zoom_level_descr">A nagyítási szint állandó megjelenítése a lépték helyett.</string>
 	<string name="show_zoom_level">Nagyítási szint kijelzése</string>
 	<string name="tip_select_destination_point">Beállítás célpontnak</string>
 	<string name="tip_select_destination_point_t">
@@ -85,7 +87,7 @@
 	<string name="select_search_position">Keresés helye:</string>
 	<string name="context_menu_item_search">Keresés itt</string>
 	<string name="tip_recent_changes_0_6_7_t">0.6.7 verzió változásai:
-\n\t- Offline - kapcsolat nélküli - adat kezelés (letöltés, törlés, adatok biztonsági mentése közvetlenül az Osmandban)
+\n\t- Offline - kapcsolat nélküli - adat kezelés (letöltés, törlés, aktiválás/deaktiválás közvetlenül az OsmAndban)
 \n\t- Kedvenc pontok és csoportok (csoportosítás, törlés, kedvencek kezelése)
 \n\t- Beépített GPX böngésző (útvonalak megjelenítése, távolság, átlagsebesség, magasság, stb.)
 \n\t- GPX navigáció (hasznos opciók, összeomlás után útvonal folytatása, körforgalmak kezelése)
@@ -124,15 +126,15 @@
 	<string name="local_index_gpx_info_elevation">\nÁtlagos magasság: %1$.0f m\nLegkisebb magasság: %2$.0f m\nLegnagyobb magasság: %3$.0f m\nEreszkedés: %4$.0f m\nEmelkedés: %5$.0f m</string>
 	<string name="local_index_gpx_info">Rész nyomvonal: %1$d\nÖsszes pont: %2$d\nÚtpontok: %3$d\nTeljes távolság: %4$s\nIndulás: %5$tD %5$tR\nÉrkezés: %6$tD %6$tR</string>
 	<string name="local_index_installed">Telepítve</string>
-	<string name="local_index_items_backuped">%2$d darabból %1$d sikeresen elmentve.</string>
+	<string name="local_index_items_backuped">%2$d darabból %1$d sikeresen deaktiválva.</string>
 	<string name="local_index_items_deleted">%2$d darabból %1$d sikeresen törölve.</string>
-	<string name="local_index_items_restored">%2$d darabból %1$d sikeresen visszaállítva.</string>
+	<string name="local_index_items_restored">%2$d darabból %1$d sikeresen aktiválva.</string>
 	<string name="local_index_no_items_to_do">Nincs elem a művelethez: %1$s</string>
 	<string name="local_index_action_do">%2$s darab elemen végre lesz hajtva a %1$s. Folytatod?</string>
 	<string name="local_index_descr_title">Offline - kapcsolat nélküli adat kezelés</string>
-	<string name="local_index_description">Új adat letöltése, biztonsági mentés vagy az adatok törlése.\nJelenlegi offline adatok az eszközön (szabad hely: %1$s):</string>
-	<string name="local_index_mi_restore">Visszaállítás</string>
-	<string name="local_index_mi_backup">Biztonsági mentés</string>
+	<string name="local_index_description">Új offline adat letöltése, aktiválása/deaktiválása, törlése.\nJelenlegi adatok az eszközön (szabad hely: %1$s):</string>
+	<string name="local_index_mi_restore">Aktiválás</string>
+	<string name="local_index_mi_backup">Deaktiválás</string>
 	<string name="local_index_mi_delete">Törlés</string>
 	<string name="local_index_mi_reload">Frissítés</string>
 	<string name="local_index_download">Letöltés...</string>
@@ -142,7 +144,7 @@
 	<string name="local_index_transport_data">Közlekedési eszköz adat</string>
 	<string name="local_index_map_data">Térképadat</string>
 	<string name="local_index_items"></string>
-	<string name="local_indexes_cat_backup">Mentés</string>
+	<string name="local_indexes_cat_backup">Deaktivált</string>
 	<string name="local_indexes_cat_tts">Beszédadat (TTS)</string>
 	<string name="local_indexes_cat_voice">Beszédadat (média)</string>
 	<string name="local_indexes_cat_gpx">GPX-adat</string>
@@ -406,7 +408,7 @@
 	<string name="no_vector_map_loaded">Nincs betöltött vektoros térkép</string>
 	<string name="map_route_by_gpx">Útvonal GPX alapján</string>
 	<string name="gpx_files_not_found">Nem található GPX fálj /osmand/tracks könyvtárban</string>
-	<string name="layer_gpx_layer">GPX nyom...</string>
+	<string name="layer_gpx_layer">GPX nyomvonal...</string>
 	<string name="error_reading_gpx">GPX adat olvasási hiba</string>
 
 	<string name="vector_data">Vektoros OSM térkép</string>
@@ -728,7 +730,7 @@
 	<string name="favourites_context_menu_edit">Kedvenc szerkesztése</string>
 	<string name="favourites_context_menu_delete">Kedvenc törlése</string>
 
-	<string name="favourites_remove_dialog_msg">Törlöd ezt a kedvenc pontot? \'%s\'</string>
+	<string name="favourites_remove_dialog_msg">Törlöd a(z) \'%s\' kedvenc pontot?</string>
 	<string name="favourites_remove_dialog_success">{0} kedvenc pont sikeresen törölve.</string>
 
 	<string name="osb_add_dialog_title">Hiba leírása</string>
