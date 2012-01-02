@@ -1,6 +1,6 @@
 <?php 
    include 'update_indexes.php';
-   updateGoogleCodeIndexes($update);
+   updateGoogleCodeIndexes();
    header('Content-type: application/xml');
    header('Content-Disposition: attachment; filename="indexes.xml"');
 

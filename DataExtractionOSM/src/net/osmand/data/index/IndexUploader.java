@@ -14,7 +14,6 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
@@ -77,6 +76,7 @@ public class IndexUploader {
 
 	private File directory;
 	private File targetDirectory;
+	private UploadCredentials uploadCredentials;
 
 	public IndexUploader(String path, String targetPath) throws IndexUploadException {
 		directory = new File(path);
@@ -99,48 +99,53 @@ public class IndexUploader {
 				}
 				File unzipped = unzip(f);
 				String description = getDescription(unzipped);
-				zip(unzipped, getZipfileName(unzipped), description);
+				File zFile = new File(f.getParentFile(), unzipped.getName() + ".zip");
+				File logFile = new File(f.getParentFile(), unzipped.getName() + IndexBatchCreator.GEN_LOG_EXT);
+				List<File> files = new ArrayList<File>();
+				files.add(zFile);
+				if(logFile.exists()) {
+					files.add(logFile);
+				}
+				zip(files, zFile, description);
 				unzipped.delete(); // delete the unzipped file
+				if(logFile.exists()){
+					logFile.delete();
+				}
+				if(uploadCredentials != null) {
+					uploadIndex(zFile, description, uploadCredentials);
+				}
 			} catch (OneFileException e) {
-				log.error(f.getName() + ": " + e.getMessage());
+				log.error(f.getName() + ": " + e.getMessage(), e);
 			}
 		}
 	}
 
-	public static File zip(File f, String zipFileName, String description) throws OneFileException {
-		File zFile = new File(f.getParentFile(), zipFileName);
+	public static File zip(List<File> fs, File zFile, String description) throws OneFileException {
 		try {
-			log.info("Zipping to file: " + zipFileName + " file:" + f.getName() + " with desc:" + description);
 			ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(zFile));
 			zout.setLevel(9);
-			ZipEntry zEntry = new ZipEntry(f.getName());
-			zEntry.setSize(f.length());
-			zEntry.setComment(description);
-			zout.putNextEntry(zEntry);
-			FileInputStream is = new FileInputStream(f);
-			copyAndClose(is, zout);
+			for (File f : fs) {
+				log.info("Zipping to file: " + zFile.getName() + " file:" + f.getName() + " with desc:" + description);
+
+				ZipEntry zEntry = new ZipEntry(f.getName());
+				zEntry.setSize(f.length());
+				zEntry.setComment(description);
+				zout.putNextEntry(zEntry);
+				FileInputStream is = new FileInputStream(f);
+				Algoritms.streamCopy(is, zout);
+				Algoritms.closeStream(is);
+			}
+			Algoritms.closeStream(zout);
 		} catch (IOException e) {
 			throw new OneFileException("cannot zip file:" + e.getMessage());
 		}
 		return zFile;
 	}
 
-	private String getZipfileName(File unzipped) {
-		String fileName = unzipped.getName();
-		String n = fileName;
-		if (fileName.endsWith(".odb")) {
-			throw new UnsupportedOperationException("Odb is not supported any more");
-			// n = fileName.substring(0, fileName.length() - 4);
-		}
-		return n + ".zip";
-	}
-
 	private String getDescription(File f) throws OneFileException {
 		String fileName = f.getName();
 		String summary = null;
-		if (fileName.endsWith(IndexConstants.POI_INDEX_EXT) || fileName.endsWith(IndexConstants.POI_INDEX_EXT_ZIP)) {
-			summary = "POI index for ";
-		} else if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
+		if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
 			RandomAccessFile raf = null;
 			try {
 				raf = new RandomAccessFile(f, "r");
@@ -174,7 +179,7 @@ public class IndexUploader {
 				throw new OneFileException("Reader could not read the index: " + e.getMessage());
 			}
 		} else {
-			throw new OneFileException("Not a processable file.");
+			throw new OneFileException("Not supported file format " + fileName);
 		}
 
 		String regionName = fileName.substring(0, fileName.lastIndexOf('_', fileName.indexOf('.')));
@@ -189,18 +194,26 @@ public class IndexUploader {
 			if (!Algoritms.isZipFile(f)) {
 				return f;
 			}
-
+			
+			
 			log.info("Unzipping file: " + f.getName());
 			ZipFile zipFile;
 			zipFile = new ZipFile(f);
 			Enumeration<? extends ZipEntry> entries = zipFile.entries();
+			File mainFile = null;
 			while (entries.hasMoreElements()) {
 				ZipEntry entry = entries.nextElement();
 				File tempFile = new File(f.getParentFile(), entry.getName());
-				copyAndClose(zipFile.getInputStream(entry), new FileOutputStream(tempFile));
-				return tempFile;
+				InputStream zin = zipFile.getInputStream(entry);
+				FileOutputStream out = new FileOutputStream(tempFile);
+				Algoritms.streamCopy(zin, out);
+				Algoritms.closeStream(zin);
+				Algoritms.closeStream(out);
+				if (!tempFile.getName().endsWith(IndexBatchCreator.GEN_LOG_EXT)) {
+					mainFile = tempFile;
+				}
 			}
-			return null;
+			return mainFile;
 		} catch (ZipException e) {
 			throw new OneFileException("cannot unzip:" + e.getMessage());
 		} catch (IOException e) {
@@ -208,11 +221,6 @@ public class IndexUploader {
 		}
 	}
 
-	public static void copyAndClose(InputStream in, OutputStream out) throws IOException {
-		Algoritms.streamCopy(in, out);
-		Algoritms.closeStream(in);
-		Algoritms.closeStream(out);
-	}
 
 	private List<File> splitFiles(File f) throws IOException {
 		double mbLengh = (double) f.length() / MB;
@@ -246,9 +254,9 @@ public class IndexUploader {
 
 	}
 
-	public void uploadIndex(File indexFile, File dirToBackup, Set<String> alreadyUploadedFiles, UploadCredentials uc) {
-		double mbLengh = (double) indexFile.length() / MB;
-		String fileName = indexFile.getName();
+	private void uploadIndex(File zipFile, String summary, UploadCredentials uc) {
+		double mbLengh = (double) zipFile.length() / MB;
+		String fileName = zipFile.getName();
 		if (mbLengh < MIN_SIZE_TO_UPLOAD) {
 			log.info("Skip uploading index due to size " + fileName);
 			// do not upload small files
@@ -256,31 +264,16 @@ public class IndexUploader {
 		}
 		try {
 			log.info("Upload index " + fileName);
-			String summary = getDescription(indexFile);
-			File toUpload = indexFile;
-			if (fileName.endsWith(".obf")) {
-				String zipFileName = fileName + ".zip";
-				log.info("Zipping file " + fileName);
-
-				toUpload = IndexUploader.zip(indexFile, zipFileName, summary);
-				if (indexFile.delete()) {
-					log.info("Source obf file was deleted.");
-				}
-			}
-
+			File toUpload = zipFile;
 			boolean uploaded = uploadFileToServer(toUpload, summary, uc);
 			// remove source file if file was splitted
-			if (uploaded && dirToBackup != null) {
-				File toBackup = new File(dirToBackup, toUpload.getName());
+			if (uploaded && targetDirectory != null) {
+				File toBackup = new File(targetDirectory, toUpload.getName());
 				if (toBackup.exists()) {
 					toBackup.delete();
 				}
 				toUpload.renameTo(toBackup);
 			}
-			alreadyUploadedFiles.add(toUpload.getName());
-		} catch (OneFileException e) {
-			log.error("Exception ", e);
-			return; // do not continue if error
 		} catch (IOException e) {
 			log.error("Input/output exception uploading " + fileName, e);
 		}
