@@ -124,6 +124,8 @@ public class IndexUploader {
 				uploadCredentials.user = args[i].substring("--user=".length());
 			} else if (args[i].startsWith("--path=")) {
 				uploadCredentials.path = args[i].substring("--path=".length());
+			} else if (args[i].startsWith("--privKey=")) {
+				((UploadSSHCredentials) uploadCredentials).privateKey = args[i].substring("--privKey=".length());
 			} else if (args[i].startsWith("--knownHosts=")) {
 				((UploadSSHCredentials) uploadCredentials).knownHosts = args[i].substring("--knownHosts=".length());
 			}
