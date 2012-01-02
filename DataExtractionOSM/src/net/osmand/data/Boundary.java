@@ -37,13 +37,15 @@ public class Boundary {
 		if (getOuterWays().size() > 0) {
 			// now we try to merge the ways until we have only one
 			int oldSize = 0;
-			while (getOuterWays().size() != oldSize) {
+			while (getOuterWays().size() != oldSize && !getOuterWays().isEmpty()) {
 				oldSize = getOuterWays().size();
 				mergeOuterWays();
 			}
-			// there is one way and last element is equal to the first...
-			List<Node> nodes = getOuterWays().get(0).getNodes();
-			closedWay = getOuterWays().size() == 1 && nodes.get(0).getId() == nodes.get(nodes.size() - 1).getId();
+			if (!getOuterWays().isEmpty()) {
+				// there is one way and last element is equal to the first...
+				List<Node> nodes = getOuterWays().get(0).getNodes();
+				closedWay = getOuterWays().size() == 1 && nodes.get(0).getId() == nodes.get(nodes.size() - 1).getId();
+			}
 		} else {
 			closedWay = false;
 		}

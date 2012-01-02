@@ -465,17 +465,19 @@ public class IndexBatchCreator {
 				if (fh != null) {
 					LogManager.getLogManager().getLogger("").addHandler(fh);
 				}
-
-				indexCreator.generateIndexes(f, new ConsoleProgressImplementation(3), null, mapZooms, types, warningsAboutMapData);
-
+				try {
+					indexCreator.generateIndexes(f, new ConsoleProgressImplementation(3), null, mapZooms, types, warningsAboutMapData);
+				} finally {
+					if (fh != null) {
+						LogManager.getLogManager().getLogger("").removeHandler(fh);
+						fh.close();
+					}
+				}
 				File generated = new File(workDir, mapFileName);
 				generated.renameTo(new File(indexDirFiles, generated.getName()));
 
 				logFileName.renameTo(new File(indexDirFiles, logFileName.getName()));
-				if (fh != null) {
-					LogManager.getLogManager().getLogger("").removeHandler(fh);
-					fh.close();
-				}
+				
 			} catch (Exception e) {
 				log.error("Exception generating indexes for " + f.getName(), e); //$NON-NLS-1$ 
 			}
