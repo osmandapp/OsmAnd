@@ -41,7 +41,7 @@ import net.osmand.data.IndexConstants;
 public class IndexUploader {
 
 	protected static final Log log = LogUtil.getLog(IndexUploader.class);
-	private final static double MIN_SIZE_TO_UPLOAD = 0.015d;
+	private final static double MIN_SIZE_TO_UPLOAD = 0.001d;
 	private final static double MAX_SIZE_TO_NOT_SPLIT = 190d;
 	private final static double MAX_UPLOAD_SIZE = 195d;
 
@@ -88,24 +88,69 @@ public class IndexUploader {
 			throw new IndexUploadException("Not a directory:" + targetPath);
 		}
 	}
+	
+	public static void main(String[] args) {
+		try {
+			String srcPath = extractDirectory(args, 0);
+			String targetPath = srcPath;
+			if (args.length > 1) {
+				targetPath = extractDirectory(args, 1);
+			}
+			IndexUploader indexUploader = new IndexUploader(srcPath, targetPath);
+			if(args.length > 2) {
+				indexUploader.parseUploadCredentials(args, 2);
+			}
+			indexUploader.run();
+		} catch (IndexUploadException e) {
+			log.error(e.getMessage());
+		}
+	}
+	
+	
+	public void parseUploadCredentials(String[] args, int start) {
+		if ("-ssh".equals(args[start])) {
+			uploadCredentials = new UploadSSHCredentials();
+		} else if ("-ftp".equals(args[start])) {
+			uploadCredentials = new UploadCredentials();
+		} else {
+			return;
+		}
+		for (int i = start + 1; i < args.length; i++) {
+			if (args[i].startsWith("--url=")) {
+				uploadCredentials.url = args[i].substring("--url=".length());
+			} else if (args[i].startsWith("--password=")) {
+				uploadCredentials.password = args[i].substring("--password=".length());
+			} else if (args[i].startsWith("--user=")) {
+				uploadCredentials.user = args[i].substring("--user=".length());
+			} else if (args[i].startsWith("--path=")) {
+				uploadCredentials.path = args[i].substring("--path=".length());
+			} else if (args[i].startsWith("--knownHosts=")) {
+				((UploadSSHCredentials) uploadCredentials).knownHosts = args[i].substring("--knownHosts=".length());
+			}
+		}
+	}
+
+	public void setUploadCredentials(UploadCredentials uploadCredentials) {
+		this.uploadCredentials = uploadCredentials;
+	}
 
 	public void run() {
 		// take files before whole upload process
 		File[] listFiles = directory.listFiles();
 		for (File f : listFiles) {
 			try {
-				if (!f.isFile()) {
+				if (!f.isFile() || f.getName().endsWith(IndexBatchCreator.GEN_LOG_EXT)) {
 					continue;
 				}
 				File unzipped = unzip(f);
 				String description = getDescription(unzipped);
-				File zFile = new File(f.getParentFile(), unzipped.getName() + ".zip");
 				File logFile = new File(f.getParentFile(), unzipped.getName() + IndexBatchCreator.GEN_LOG_EXT);
 				List<File> files = new ArrayList<File>();
-				files.add(zFile);
+				files.add(unzipped);
 				if(logFile.exists()) {
 					files.add(logFile);
 				}
+				File zFile = new File(f.getParentFile(), unzipped.getName() + ".zip");
 				zip(files, zFile, description);
 				unzipped.delete(); // delete the unzipped file
 				if(logFile.exists()){
@@ -194,8 +239,6 @@ public class IndexUploader {
 			if (!Algoritms.isZipFile(f)) {
 				return f;
 			}
-			
-			
 			log.info("Unzipping file: " + f.getName());
 			ZipFile zipFile;
 			zipFile = new ZipFile(f);
@@ -279,20 +322,6 @@ public class IndexUploader {
 		}
 	}
 
-	public static void main(String[] args) {
-		try {
-			String srcPath = extractDirectory(args, 0);
-			String targetPath = srcPath;
-			if (args.length > 1) {
-				targetPath = extractDirectory(args, 1);
-			}
-			IndexUploader indexUploader = new IndexUploader(srcPath, targetPath);
-			indexUploader.run();
-		} catch (IndexUploadException e) {
-			log.error(e.getMessage());
-		}
-	}
-
 	private static String extractDirectory(String[] args, int ind) throws IndexUploadException {
 		if (args.length > ind) {
 			if ("-h".equals(args[0])) {
@@ -306,7 +335,6 @@ public class IndexUploader {
 	
 	
 	public static class UploadCredentials {
-		
 		String password;
 		String user;
 		String url;
@@ -395,7 +423,7 @@ public class IndexUploader {
 						}
 					}
 				}
-			} else if(credentials instanceof UploadCredentials){
+			} else if(credentials instanceof UploadSSHCredentials){
 				uploadToSSH(original, summary, size, date, (UploadSSHCredentials) credentials);
 			} else {
 				uploadToFTP(original, summary, size, date, credentials);
@@ -428,8 +456,10 @@ public class IndexUploader {
 		log.info("Uploading file " + f.getName() + " " + size + " MB " + date + " of " + description);
 		// Upload to ftp
 		JSch jSch = new JSch();
+		boolean knownHosts = false;
 		if (cred.knownHosts != null) {
 			jSch.setKnownHosts(cred.knownHosts);
+			knownHosts = true;
 		}
 		if (cred.privateKey != null) {
 			jSch.addIdentity(cred.privateKey);
@@ -438,11 +468,16 @@ public class IndexUploader {
 		if (serverName.startsWith("ssh://")) {
 			serverName = serverName.substring("ssh://".length());
 		}
-		Session session = jSch.getSession(cred.user, cred.url);
+		Session session = jSch.getSession(cred.user, serverName);
 		if (cred.password != null) {
 			session.setPassword(cred.password);
 		}
-		String rfile = cred.path + f.getName();
+		if(!knownHosts) {
+			java.util.Properties config = new java.util.Properties(); 
+			config.put("StrictHostKeyChecking", "no");
+			session.setConfig(config);
+		}
+		String rfile = cred.path + "/"+ f.getName();
 		String lfile = f.getAbsolutePath();
 		session.connect();
 
