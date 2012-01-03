@@ -115,15 +115,6 @@ public class IndexBatchCreator {
 			}
 		}
 		
-		boolean skipExisting = false;
-		for (int i = 0; i < args.length; i++) {
-			if ("--skip-existing".equals(args[i])) {
-				skipExisting = true;
-				break;
-			}
-		}
-				
-		
 		try {
 			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(stream);
 			Document regions = null;
@@ -131,7 +122,7 @@ public class IndexBatchCreator {
 				name = args[1];
 				regions = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(regionsStream);
 			}
-			creator.runBatch(doc, regions, skipExisting);
+			creator.runBatch(doc, regions);
 		} catch (Exception e) {
 			System.out.println("XML configuration file could not be read from " + name);
 			e.printStackTrace();
@@ -141,7 +132,7 @@ public class IndexBatchCreator {
 		}
 	}
 	
-	public void runBatch(Document doc, Document regions, boolean skipExisting) throws SAXException, IOException, ParserConfigurationException{
+	public void runBatch(Document doc, Document regions) throws SAXException, IOException, ParserConfigurationException{
 		NodeList list = doc.getElementsByTagName("process");
 		if(list.getLength() != 1){
 			 throw new IllegalArgumentException("You should specify exactly 1 process element!");
@@ -149,7 +140,7 @@ public class IndexBatchCreator {
 		Element process = (Element) list.item(0);
 		IndexCreator.REMOVE_POI_DB = true;
 		String file = process.getAttribute("skipExistingIndexesAt");
-		if(file != null && new File(file).exists() && skipExisting){
+		if (file != null && new File(file).exists()) {
 			skipExistingIndexes = new File(file);
 		}
 		wget = process.getAttribute("wget");
