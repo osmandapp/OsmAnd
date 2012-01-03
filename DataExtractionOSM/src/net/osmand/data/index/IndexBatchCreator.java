@@ -69,7 +69,7 @@ public class IndexBatchCreator {
 	
 	
 	// process atributtes
-	boolean skipGeneratedIndexes = false;
+	File skipExistingIndexes;
 	MapZooms mapZooms = null;
 	Integer zoomWaySmoothness = null; 
 	MapRenderingTypes types = MapRenderingTypes.getDefault();
@@ -114,6 +114,14 @@ public class IndexBatchCreator {
 				}
 			}
 		}
+		
+		boolean skipExisting = false;
+		for (int i = 0; i < args.length; i++) {
+			if ("--skip-existing".equals(args[i])) {
+				skipExisting = true;
+				break;
+			}
+		}
 				
 		
 		try {
@@ -123,7 +131,7 @@ public class IndexBatchCreator {
 				name = args[1];
 				regions = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(regionsStream);
 			}
-			creator.runBatch(doc, regions);
+			creator.runBatch(doc, regions, skipExisting);
 		} catch (Exception e) {
 			System.out.println("XML configuration file could not be read from " + name);
 			e.printStackTrace();
@@ -133,14 +141,17 @@ public class IndexBatchCreator {
 		}
 	}
 	
-	public void runBatch(Document doc, Document regions) throws SAXException, IOException, ParserConfigurationException{
+	public void runBatch(Document doc, Document regions, boolean skipExisting) throws SAXException, IOException, ParserConfigurationException{
 		NodeList list = doc.getElementsByTagName("process");
 		if(list.getLength() != 1){
 			 throw new IllegalArgumentException("You should specify exactly 1 process element!");
 		}
 		Element process = (Element) list.item(0);
 		IndexCreator.REMOVE_POI_DB = true;
-		skipGeneratedIndexes = Boolean.parseBoolean(process.getAttribute("skipGeneratedIndexes"));
+		String file = process.getAttribute("skipExistingIndexesAt");
+		if(file != null && new File(file).exists() && skipExisting){
+			skipExistingIndexes = new File(file);
+		}
 		wget = process.getAttribute("wget");
 		
 		indexPOI = Boolean.parseBoolean(process.getAttribute("indexPOI"));
@@ -277,9 +288,13 @@ public class IndexBatchCreator {
 				
 				String regionName = prefix + name;
 				String fileName = Algoritms.capitalizeFirstLetterAndLowercase(prefix + name + suffix);
-				File bmif = new File(indexDirFiles, fileName + "_" + IndexConstants.BINARY_MAP_VERSION + IndexConstants.BINARY_MAP_INDEX_EXT);
-				if(skipGeneratedIndexes && bmif.exists()){
-					continue;
+				if (skipExistingIndexes != null) {
+					File bmif = new File(skipExistingIndexes, fileName + "_" + IndexConstants.BINARY_MAP_VERSION
+							+ IndexConstants.BINARY_MAP_INDEX_EXT);
+					File bmifz = new File(skipExistingIndexes, bmif.getName() + ".zip");
+					if (bmif.exists() || bmifz.exists()) {
+						continue;
+					}
 				}
 				File toSave = downloadFile(url,  fileName, alreadyGeneratedFiles);
 				if (toSave != null) {
