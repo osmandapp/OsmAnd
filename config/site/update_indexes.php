@@ -1,4 +1,3 @@
-
 <?php
 function updateGoogleCodeIndexes($update=false) { 
   $localFileName='indexes.xml';
