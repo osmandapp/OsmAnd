@@ -123,9 +123,8 @@ public class DownloadOsmandIndexesHelper {
 		}
 		
 		public boolean isAccepted(){
-			if (fileName.endsWith(addVersionToExt(IndexConstants.POI_INDEX_EXT, IndexConstants.POI_TABLE_VERSION)) //
-				|| fileName.endsWith(addVersionToExt(IndexConstants.POI_INDEX_EXT_ZIP, IndexConstants.POI_TABLE_VERSION)) //
-				|| fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT,IndexConstants.BINARY_MAP_VERSION)) //
+			// POI index download is not supported any longer
+			if (fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT,IndexConstants.BINARY_MAP_VERSION)) //
 				|| fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP,IndexConstants.BINARY_MAP_VERSION)) //
 				|| fileName.endsWith(addVersionToExt(IndexConstants.VOICE_INDEX_EXT_ZIP, IndexConstants.VOICE_VERSION))
 				|| fileName.endsWith(addVersionToExt(IndexConstants.TTSVOICE_INDEX_EXT_ZIP, IndexConstants.TTSVOICE_VERSION))) {
