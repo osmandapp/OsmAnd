@@ -352,6 +352,9 @@ public class IndexCreator {
 //		if(LevelDBAccess.load()){
 //			dialect = DBDialect.NOSQL;
 //		}
+		if(logMapDataWarn == null) {
+			log = logMapDataWarn;
+		}
 		
 		if (renderingTypes == null) {
 			renderingTypes = MapRenderingTypes.getDefault();
@@ -648,13 +651,13 @@ public class IndexCreator {
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
 		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/mecklenburg-vorpommern.osm.pbf"),
-//				new ConsoleProgressImplementation(1), null, zooms, rt, null);
+//				new ConsoleProgressImplementation(1), null, zooms, rt, log);
 		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/download/RU-MOW.osm.bz2"),
-				new ConsoleProgressImplementation(1), null, zooms, rt, null);
+				new ConsoleProgressImplementation(1), null, zooms, rt, log);
 		
 //		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes3.tmp.odb"));
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/stadion-dynamo.osm"),
-//				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), null);
+//				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), log);
 		
 		
 		
@@ -672,7 +675,7 @@ public class IndexCreator {
 //		creator.generateIndexes(new File(
 //				"/home/victor/projects/OsmAnd/download/basemap/basemap_1.osm"
 //				), 
-//				new ConsoleProgressImplementation(1), null, mapZooms, null);
+//				new ConsoleProgressImplementation(1), null, mapZooms, log);
 		
 		
 
