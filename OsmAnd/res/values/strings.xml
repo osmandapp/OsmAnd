@@ -1,5 +1,53 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="index_settings">OFFLINE DATA</string>
+	<string name="index_settings_descr">Download and manage offline maps and other data like GPX tracks</string>
+	<string name="settings_preset">APPLICATION MODE</string>
+	<string name="settings_preset_descr">Select a use profile. (Each profile\'s settings can be customized below. Only General settings, Background service and map sources are global settings.)</string>
+	<string name="rendering_settings">Map configuration</string>
+	<string name="rendering_settings_descr">Configure maps and map sources</string>
+	<string name="appearance_settings">Map appearance</string>
+	<string name="appearance_settings_descr">Configure map display</string>
+	<string name="general_settings">GENERAL SETTINGS</string>
+	<string name="general_settings_descr">Configure display and other global settings</string>
+	<string name="global_app_settings">Global app settings</string>
+	<string name="user_name">Your OSM user name</string>
+	<string name="user_name_descr">Needed for openstreetmap.org submissions</string>
+	<string name="user_password">Your OSM password</string>
+	<string name="user_password_descr">Needed for openstreetmap.org submissions</string>
+	<string name="osmand_service">BACKGROUND SERVICE</string>
+	<string name="osmand_service_descr">Use to run OsmAnd while screen is off</string>
+
+	<string name="tip_rotation_switching">Map Rotation</string>
+	<string name="tip_rotation_switching_t">\tYou can choose whether and how the map display is rotated in \'Settings\' -> \'Map appearance\' -> \'Map rotation\'.
+	\n\tThe choices are:
+	\n\t\'Don\'t rotate\' - Map will not be rotated. North will be always up
+	\n\t\'To direction of movement\' - Map will continuously be aligned with your heading
+	\n\t\'To compass\' - Map will continuously be aligned with device compass reading
+	\n\tHint: To quickly change between rotation by compass and the one you selected in settings, you can simply tap on the compass needle in map view.</string>
+
+	<string name="switch_to_raster_map_to_see">No offline vector map present for this location.\n\t\n\tYou can download one in \'Settings\' -> \'Offline data\', or switch to online maps via \'Settings\' -> \'Map configuration\'.</string>
+	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Settings\' -> \'Map configuration\' -> \'Offline vector maps\'.</string>
+
+	<string name="tip_day_night_mode">Day/Night Mode</string>
+	<string name="tip_day_night_mode_t">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker).
+	\n\tNight colors are safer for night driving.
+	\n\tYou can set a policy for day/night switching in \'Settings\' -> \'Map appearance\' ->\'Day/night mode\'.
+	\n\tChoices are:
+	\n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default)
+	\n\t\'Day\' - always use day mode
+	\n\t\'Night\' - always use night mode 
+	\n\t\'Light sensor\' - map appearance is controlled by light sensor of your device (only if equipped)</string>	
+
+	<string name="tip_osm_improve">Improving OSM Data</string>
+	<string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and routing- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks!
+	\n\tFor this you need to first provide your OSM login information in \'Settings\' -> \'General settings\' -> \'OSM\'.
+	\n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it.
+	\n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem.
+	\n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button.
+	\n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
+<!-- end of string changes for new menu structure -->
+
 	<string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>
 	<string name="download_files_question_space">Free space now {2} MB! Download {0} file(s) ({1} MB)?</string>
 	<string name="show_zoom_level_descr">Permanently show zoom level instead of ruler.</string>
@@ -21,8 +69,7 @@
 	<string name="show_altitude_info">Show altitude</string>
 	<string name="use_transparent_map_theme_descr">Use transparent map controls</string>
 	<string name="use_transparent_map_theme">Transparent theme</string>
-	<string name="appearance_settings_descr">Configure application look and feel</string>
-	<string name="appearance_settings">Appearance</string>
+
 	<string name="native_library_not_supported">Native library is not supported on this device.</string>
 	<string name="init_native_library">Initializing native library...</string>
 	<string name="choose_auto_follow_route">Map view auto follow</string>
@@ -181,17 +228,7 @@
 	<string name="gpx_option_destination_point">Use current destination</string>
 	<string name="gpx_option_from_start_point">Pass along entire track</string>
 
-	<string name="tip_rotation_switching">Map Rotation</string>
-	<string name="tip_rotation_switching_t">\tYou can choose whether and how the map display is rotated in \'Settings\' -> \'General settings\' -> \'Map rotation\'.
-	\n\tThe choices are:
-	\n\t\'Don\'t rotate\' - Map will not be rotated. North will be always up
-	\n\t\'To direction of movement\' - Map will continuously be aligned with your heading
-	\n\t\'To compass\' - Map will continuously be aligned with device compass reading
-	\n\tHint: To quickly change between rotation by compass and the one you selected in settings, you can simply tap on the compass needle in map view.</string>
-
-	<string name="switch_to_raster_map_to_see">No offline vector map present for this location.\n\t\n\tYou can download one in \'Settings\' -> \'Offline data\', or switch to online maps via \'Settings\' -> \'Maps\'.</string>
 	<string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' -> \'Define view\' -> \'Map Source...\' -> \'Offline vector maps\'.</string>
-	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Settings\' -> \'Maps\' -> \'Offline vector maps\'.</string>
 	<string name="choose_audio_stream">Voice guidance output</string>
 	<string name="choose_audio_stream_descr">Choose channel to play voice guidance (system-dependent)</string>
 	<string name="voice_stream_voice_call">Voice call audio</string>
@@ -219,7 +256,7 @@
 
 	<string name="tip_update_index">Update of Offline Data</string>
 	<string name="tip_update_index_t">\tHaving up-to-date map data is essential. Osmand provides a download manager which can check for available offline data updates.
-	\n\tTo check for updates go to \'Main Menu\' -> \'Settings\' -> \'Offline data\' -> \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -> \'Filter downloaded\' to indicate updates only for data already on your device.
+	\n\tTo check for updates go to \'Settings\' -> \'Offline data\' -> \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -> \'Filter downloaded\' to indicate updates only for data already on your device.
 	\n\tThe availability of updates  is depicted by the following colors:
 	\n\t\'Green\' - indicates data files identical on device and server
 	\n\t\'Blue\' - indicates available updates on server</string>
@@ -227,15 +264,6 @@
 	<string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector rendering instead of map tiles</string>
 	<string name="level_to_switch_vector_raster">Min. vector zoom level</string>
 
-	<string name="tip_day_night_mode">Day/Night Mode</string>
-	<string name="tip_day_night_mode_t">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker).
-	\n\tNight colors are safer for night driving.
-	\n\tYou can set a policy for day/night switching in \'Main Menu\' -> \'Settings\' -> \'Map appearance\' ->\'Day/night mode\'.
-	\n\tChoices are:
-	\n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default)
-	\n\t\'Day\' - always use day mode
-	\n\t\'Night\' - always use night mode 
-	\n\t\'Light sensor\' - map appearance is controlled by light sensor of your device (only if equipped)</string>	
 	<string name="tip_location_sharing">Location Sharing</string>
 	<string name="tip_location_sharing_t">\tYou can share the location of interesting places on your trip  with family or friends.
 	\n\tTo share any location you want:
@@ -248,13 +276,6 @@
 \n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to set it as desination, Edit or Delete it.
 \n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' ->\'Define view\'.</string>
 
-	<string name="tip_osm_improve">Improving OSM Data</string>
-	<string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and routing- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks!
-\n\tFor this you need to first provide your OSM login information in \'Main Menu\' -> \'Settings\' -> \'OSM\'.
-\n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it.
-\n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem.
-\n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button.
-\n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
     <string name="error_doing_search">Error occurred in offline search</string>
     <string name="search_offline_geo_error">Could not parse geo intent \'%s\'</string>
@@ -383,14 +404,6 @@
 	<string name="select_all">Select all</string>
 	<string name="reload">Refresh</string>
 
-	<string name="general_settings_descr">Configure display options and other overall settings</string>
-    <string name="general_settings">General settings</string>
-	<string name="rendering_settings_descr">Configure map source and appearance</string>
-    <string name="rendering_settings">Maps</string>
-    <string name="index_settings_descr">Download and manage offline maps and other data like GPX tracks</string>
-    <string name="index_settings">Offline data</string>
-	<string name="osmand_service">Background service</string>
-	<string name="osmand_service_descr">Use to run OsmAnd while screen is off</string>
 	<string name="fast_route_mode">Fastest route</string>
 	<string name="fast_route_mode_descr">Enable to calculate fastest route or disable for shortest route </string>
 	<string name="tiles_to_download_estimated_size">At zoom {0} download {1} tiles ({2} MB)</string>
@@ -627,8 +640,6 @@
     <string name="download_indexes">Download offline data</string>
     <string name="use_online_routing_descr">Use Internet to calculate route</string>
     <string name="use_online_routing">Use online routing</string>
-    <string name="user_password_descr">Your OSM password</string>
-    <string name="user_password">OSM password</string>
     <string name="osm_settings_descr">Specify Openstreetmap.org (OSM) settings needed for OSM submissions</string>
     <string name="monitor_preferences_descr">Specify tracking settings</string>
     <string name="data_settings_descr">Specify language, download/reload data</string>
@@ -638,8 +649,6 @@
     <string name="auto_zoom_map_descr">Auto zoom map according to your speed</string>
     <string name="auto_zoom_map">Auto zoom map</string>
     <string name="additional_settings">Additional settings</string>
-    <string name="settings_preset_descr">Select a use profile. (Each profile\'s settings can be customized below.)</string>
-    <string name="settings_preset">Application mode</string>
     <string name="settings">Settings</string>
     <string name="save_current_track_descr">Save current track to SD now</string>
     <string name="save_current_track">Save current track</string>
@@ -651,8 +660,6 @@
     <string name="navigate_to">Set as destination</string>
     <string name="update_tile">Update map</string>
     <string name="reload_tile">Reload tile</string>
-    <string name="user_name_descr">Your OSM user name</string>
-    <string name="user_name">OSM user name</string>
     <string name="mark_point">Target</string>
     <string name="show_osm_bugs_descr">Show OpenStreetBugs on map</string>
     <string name="show_osm_bugs">Show OpenStreetBugs</string>
