@@ -353,7 +353,7 @@ public class IndexCreator {
 //			dialect = DBDialect.NOSQL;
 //		}
 		if(logMapDataWarn == null) {
-			log = logMapDataWarn;
+			logMapDataWarn = log ;
 		}
 		
 		if (renderingTypes == null) {
