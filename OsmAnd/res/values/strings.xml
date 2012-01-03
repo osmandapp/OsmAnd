@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+<!-- this block re-worked for new menu structure -->
 	<string name="index_settings">OFFLINE DATA</string>
 	<string name="index_settings_descr">Download and manage offline maps and other data like GPX tracks</string>
 	<string name="settings_preset">APPLICATION MODE</string>
@@ -9,7 +10,7 @@
 	<string name="appearance_settings">- Map appearance</string>
 	<string name="appearance_settings_descr">Configure map display</string>
 	<string name="monitor_preferences">- Tracking</string>
-	<string name="save_track_interval">Track interval</string>
+	<string name="monitor_preferences_descr">Specify tracking settings</string>
 	<string name="routing_settings">- Navigation</string>
 	<string name="routing_settings_descr">Specify routing options</string>
 	<string name="general_settings">GENERAL SETTINGS</string>
@@ -643,7 +644,6 @@
     <string name="use_online_routing_descr">Use Internet to calculate route</string>
     <string name="use_online_routing">Use online routing</string>
     <string name="osm_settings_descr">Specify Openstreetmap.org (OSM) settings needed for OSM submissions</string>
-    <string name="monitor_preferences_descr">Specify tracking settings</string>
     <string name="data_settings_descr">Specify language, download/reload data</string>
     <string name="data_settings">Data</string>
     <string name="map_preferences_descr">Specify map settings: map source, rotation, marker position, screen orientation</string>
@@ -654,6 +654,7 @@
     <string name="settings">Settings</string>
     <string name="save_current_track_descr">Save current track to SD now</string>
     <string name="save_current_track">Save current track</string>
+    <string name="save_track_interval">Track interval</string>
     <string name="save_track_interval_descr">Choose positioning interval for tracks</string>
     <string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
     <string name="save_track_to_gpx">Log track to GPX</string>

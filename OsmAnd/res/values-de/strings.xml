@@ -1,5 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+<!-- this block re-worked for new menu structure -->
+	<string name="index_settings">OFFLINE-DATEN</string>
+	<string name="index_settings_descr">Laden und Verwalten von Landkarten und Daten für Offlineverwendung</string>
+	<string name="settings_preset">ANWENDUNGSMODUS</string>
+	<string name="settings_preset_descr">Anwendungsprofil wählen. (Karten-, Logging- und Navigationseinstellungen werden für jedes Profil separat gespeichert.)</string>
+	<string name="rendering_settings">- Landkarten</string>
+	<string name="rendering_settings_descr">Konfiguration der Kartenquellen und -darstellung</string>
+	<string name="appearance_settings">- Kartendarstellung</string>
+	<string name="appearance_settings_descr">Layout und Anzeigeelemente konfigurieren</string>
+	<string name="monitor_preferences">- Positions-Logging</string>
+	<string name="monitor_preferences_descr">Positions-Logging konfigurieren</string>
+	<string name="routing_settings">- Navigation</string>
+	<string name="routing_settings_descr">Navigationsoptionen</string>
+	<string name="general_settings">ALLGEMEIN</string>
+	<string name="general_settings_descr">Konfiguration der Anzeige und anderer allgemeiner Einstellungen</string>
+	<string name="global_app_settings">Globale Einstellungen</string>
+	<string name="user_name">OSM Benutzername</string>
+	<string name="user_name_descr">Nötig für openstreetmap.org Beiträge</string>
+	<string name="user_password">OSM Kennwort</string>
+	<string name="user_password_descr">Nötig für openstreetmap.org Beiträge</string>
+	<string name="osmand_service">HINTERGRUNDSERVICE</string>
+	<string name="osmand_service_descr">Für Verwendung von OsmAnd bei ausgeschalteter Anzeige</string>
+
+	<string name="tip_rotation_switching">Kartenrotation</string>
+	<string name="tip_rotation_switching_t">\tMan kann unter \'Einstellungen\' -> \'Kartendarstellung\' -> \'Kartenrotation\' wählen, in welche Richtung die Anzeige der Landkarte ausgerichtet werden soll.
+	\n\tZur Wahl stehen:
+	\n\t\'Keine Rotation\' - Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben
+	\n\t\'Nach Bewegungsrichtung\' - Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt
+	\n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt
+	\n\tTipp: Um schnell zwischen der Kompassnachführung und der in den Einstellungen gewählten Option zu wechseln, einfach auf die Kompassnadel in der Kartenansicht drücken.</string>
+
+	<string name="switch_to_raster_map_to_see">Keine Offline-Vektor-Karte für diese Lokation vorhanden.\n\t\n\tBitte Vektor-Karte laden via \'Einstellungen\' -> \'Offline-Daten\', oder Online-Karte verwenden via \'Einstellungen\' -> \'Landkarten\'.</string>
+	<string name="binary_map_download_success">Download erfolgreich.\n\t\n\tFür Verwendung aktivieren: \'Einstellungen\' -> \'Landkarten\' -> \'Offline-Vektor-Karten\'.</string>
+
+	<string name="tip_day_night_mode">Tag/Nacht Modus</string>
+	<string name="tip_day_night_mode_t">\tDie Anzeige von Offline-Vektor-Karten kann für einige Anzeigemodi zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden.
+	\n\tInsbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
+	\n\tDer Umschaltmechanismus kann in \'Einstellungen\' -> \'Landkarten\' -> \'Tag/Nacht Modus\' gewählt werden.
+	\n\tZur Auswahl stehen:
+	\n\t\'Sonnenaufgang/-untergang\' - automatischer Modus (Voreinstellung)
+	\n\t\'Tag\' - permanente Tagesansicht
+	\n\t\'Nacht\' - permanente Nachtansicht 
+	\n\t\'Umgebungslicht-Sensor\' - automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden)</string>	
+
+	<string name="tip_osm_improve">OSM Bearbeitung</string>
+	<string name="tip_osm_improve_t">\tOsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM), und kann (neben Kartenanzeige und Navigation) auch zur Verbesserung der OSM-Daten verwendet werden. Man kann mit nur wenigen Klicks neue POIs und OSM Fehlerberichte einsenden.
+	\n\tDazu muss man zunächst unter \'Einstellungen\' -> \'Allgemein\' -> \'OSM\' seine OSM Login-Daten hinterlegen.
+	\n\tUm einen neuen POI zu erzeugen, verwendet man die Option \'POI erstellen\' im Karten-Kontextmenu. Danach werden die Informationen zum POI eingetragen und über die Menüführung zu OSM hochgeladen.
+	\n\tGefundene Fehler auf den Karten kann man direkt berichten, und die Openstreetmap Community kann diese schneller beheben.
+	\n\tOSM Fehlerberichte erstellt man mit dem Menü \'OSM Fehlerbericht einsenden\' im \'Karten-Kontextmenü\'.
+	\n\tFür alle OSM Aktivitäten wird eine Internetverbindung benötigt.</string>
+<!-- end of string changes for new menu structure -->
+
 	<string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
 	<string name="download_files_question_space">{2} MB freier Speicher vorhanden! {0} Datei(en) ({1} MB) herunterladen?</string>
 	<string name="show_zoom_level_descr">Immer Zoom Level statt Maßtabs anzeigen.</string>
@@ -21,8 +74,6 @@
 	<string name="show_altitude_info">Höhe anzeigen</string>
 	<string name="use_transparent_map_theme_descr">Transparente Schaltflächen verwenden</string>
 	<string name="use_transparent_map_theme">Transparentes Layout</string>
-	<string name="appearance_settings_descr">Layout und Anzeigeelemente konfigurieren</string>
-	<string name="appearance_settings">Layout</string>
 	<string name="native_library_not_supported">Native library wird auf diesem Gerät nicht unterstützt.</string>
 	<string name="init_native_library">Native Library wird initialisiert...</string>
 	<string name="choose_auto_follow_route">Kartenanzeige nachführen</string>
@@ -178,17 +229,7 @@
 	<string name="gpx_option_destination_point">Derzeitiges Ziel verwenden</string>
 	<string name="gpx_option_from_start_point">Gesamten Track durchlaufen</string>
 
-	<string name="tip_rotation_switching">Kartenrotation</string>
-	<string name="tip_rotation_switching_t">\tMan kann unter \'Einstellungen\' -> \'Allgemein\' -> \'Kartenrotation\' wählen, in welche Richtung die Anzeige der Landkarte ausgerichtet werden soll.
-	\n\tZur Wahl stehen:
-	\n\t\'Keine Rotation\' - Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben
-	\n\t\'Nach Bewegungsrichtung\' - Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt
-	\n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt
-	\n\tTipp: Um schnell zwischen der Kompassnachführung und der in den Einstellungen gewählten Option zu wechseln, einfach auf die Kompassnadel in der Kartenansicht drücken.</string>
-
-	<string name="switch_to_raster_map_to_see">Keine Offline-Vektor-Karte für diese Lokation vorhanden.\n\t\n\tBitte Vektor-Karte laden via \'Einstellungen\' -> \'Offline-Daten\', oder Online-Karte verwenden via \'Einstellungen\' -> \'Landkarten\'.</string>
 	<string name="switch_to_vector_map_to_see">Offline-Vektor-Karte für diese Lokation vorhanden.\n\t\n\tFür Verwendung aktivieren: \'Menu\' -> \'Darstellung\' -> \'Kartenquelle...\' -> \'Offline-Vektor-Karten\'.</string>
-	<string name="binary_map_download_success">Download erfolgreich.\n\t\n\tFür Verwendung aktivieren: \'Einstellungen\' -> \'Landkarten\' -> \'Offline-Vektor-Karten\'.</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
 	<string name="choose_audio_stream_descr">Ausgabemodus für Sprachansagen wählen (System-abhängig)</string>
 	<string name="voice_stream_voice_call">wie Anrufe</string>
@@ -226,15 +267,6 @@
 	<string name="level_to_switch_vector_raster_descr">Minimaler Zoomlevel bis zu dem Offline-Vektor-Karten (statt Kacheln) verwendet werden sollen</string>
 	<string name="level_to_switch_vector_raster">Min. Vektor Zoomlevel</string>
 
-	<string name="tip_day_night_mode">Tag/Nacht Modus</string>
-	<string name="tip_day_night_mode_t">\tDie Anzeige von Offline-Vektor-Karten kann für einige Anzeigemodi zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden.
-	\n\tInsbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
-	\n\tDer Umschaltmechanismus kann in \'Hauptmenü\' -> \'Einstellungen\' -> \'Landkarten\' -> \'Tag/Nacht Modus\' gewählt werden.
-	\n\tZur Auswahl stehen:
-	\n\t\'Sonnenaufgang/-untergang\' - automatischer Modus (Voreinstellung)
-	\n\t\'Tag\' - permanente Tagesansicht
-	\n\t\'Nacht\' - permanente Nachtansicht 
-	\n\t\'Umgebungslicht-Sensor\' - automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden)</string>	
 	<string name="tip_location_sharing">Lokation mitteilen</string>
 	<string name="tip_location_sharing_t">\tWollen Sie eine interessante Lokation Freunden oder Familie mitteilen?
 	\n\tMit OsmAnd kann man jeden Aufenthaltsort leicht mit Anderen teilen.
@@ -247,13 +279,6 @@
 	\n\t Favoriten sind leicht zugänglich über \'Hauptmenü\' -> \'Favoriten\'. Ein Kontextmenü für jeden Favoriten bietet dort \'Als Ziel wählen\', \'Bearbeiten\' oder \'Löschen\'.
 	\n\tUm alle Favoriten in der Karte anzuzeigen, wählt man \'Favoriten\' unter \'Karten-Kontextmenü\' -> \'Darstellung\'.</string>
 
-	<string name="tip_osm_improve">OSM Bearbeitung</string>
-	<string name="tip_osm_improve_t">\tOsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM), und kann (neben Kartenanzeige und Navigation) auch zur Verbesserung der OSM-Daten verwendet werden. Man kann mit nur wenigen Klicks neue POIs und OSM Fehlerberichte einsenden.
-\n\tDazu muss man zunächst unter \'Hauptmenü\' -> \'Einstellungen\' -> \'OSM\' seine OSM Login-Daten hinterlegen.
-\n\tUm einen neuen POI zu erzeugen, verwendet man die Option \'POI erstellen\' im Karten-Kontextmenu. Danach werden die Informationen zum POI eingetragen und über die Menüführung zu OSM hochgeladen.
-\n\tGefundene Fehler auf den Karten kann man direkt berichten, und die Openstreetmap Community kann diese schneller beheben.
-\n\tOSM Fehlerberichte erstellt man mit dem Menü \'OSM Fehlerbericht einsenden\' im \'Karten-Kontextmenü\'.
-\n\tFür alle OSM Aktivitäten wird eine Internetverbindung benötigt.</string>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> Klassifizierung mit Bildern</string>
     <string name="error_doing_search">Fehler in der Offlinesuche aufgetreten</string>
     <string name="search_offline_geo_error">Konnte geointent nicht verarbeiten: \'%s\'</string>
@@ -382,14 +407,6 @@
 	<string name="select_all">Alle markieren</string>
 	<string name="reload">Aktualisieren</string>
 	
-	<string name="general_settings_descr">Konfiguration der Anzeige und anderer allgemeiner Einstellungen</string>
-    <string name="general_settings">Allgemein</string>
-	<string name="rendering_settings_descr">Konfiguration der Kartenquellen und -darstellung</string>
-    <string name="rendering_settings">Landkarten</string>
-    <string name="index_settings_descr">Laden und Verwalten von Landkarten und Daten für Offlineverwendung</string>
-    <string name="index_settings">Offline-Daten</string>
-	<string name="osmand_service">Hintergrundservice</string>
-	<string name="osmand_service_descr">Für Verwendung von OsmAnd bei ausgeschalteter Anzeige</string>
 	<string name="fast_route_mode">Schnellste Route</string>
 	<string name="fast_route_mode_descr">Auswählen für schnellste Route oder deaktivieren für kürzeste Route</string>
 	<string name="tiles_to_download_estimated_size">Bei Zoomlevel {0} lade {1} Kacheln ({2} MB )</string>
@@ -485,8 +502,6 @@
 	<string name="background_router_service_descr">Aktiviere Service für Verwendung von OsmAnd während Anzeige aus ist</string>
 	<string name="background_router_service">Hintergrundservice</string>
 	<string name="off_router_service_no_gps_available">Hintergrunddienst zur Routenberechnung erfordert aktiviertes GPS.</string>
-	<string name="routing_settings_descr">Navigationsoptionen</string>
-	<string name="routing_settings">Navigation</string>
 	<string name="hide_poi_filter">Filter verstecken</string>
 	<string name="show_poi_filter">Filter zeigen</string>
 	<string name="search_poi_filter">Filter</string>
@@ -626,10 +641,7 @@
     <string name="download_indexes">Offline-Daten herunterladen</string>
     <string name="use_online_routing_descr">Internet zur Streckenberechnung verwenden</string>
     <string name="use_online_routing">Online Streckenberechnung</string>
-    <string name="user_password_descr">Persönliches Kennwort</string>
-    <string name="user_password">OSM Kennwort</string>
     <string name="osm_settings_descr">Einstellungen für OpenStreetMap.org (OSM)</string>
-    <string name="monitor_preferences_descr">Positions-Logging konfigurieren</string>
     <string name="data_settings_descr">Dateneinstellungen festlegen: Sprache, Daten laden oder aktualisieren</string>
     <string name="data_settings">Daten</string>
     <string name="map_preferences_descr">Karteneinstellungen festlegen: Kartenquelle, Ausrichtung, Markerposition, Bildschirmausrichtung</string>
@@ -637,21 +649,16 @@
     <string name="auto_zoom_map_descr">Kartenvergrößerung automatisch der Geschwindigkeit anpassen</string>
     <string name="auto_zoom_map">Automatischer Zoom</string>
     <string name="additional_settings">Weitere Einstellungen</string>
-    <string name="settings_preset_descr">Anwendungsprofil wählen. (Viele Einstellungen unten werden für jedes Profil separat gespeichert.)</string>
-    <string name="settings_preset">Anwendungsmodus</string>
     <string name="settings">Einstellungen</string>
     <string name="save_current_track_descr">Aktuellen Track jetzt auf SD-Karte abspeichern</string>
     <string name="save_current_track">Track jetzt speichern</string>
     <string name="save_track_interval_descr">Intervall zwischen zwei Positionsbestimmungen</string>
     <string name="save_track_interval">Logging-Intervall</string>
-    <string name="monitor_preferences">Positions-Logging</string>
     <string name="save_track_to_gpx_descrp">Zurückgelegte Strecken werden nach Tagen gruppiert als GPX auf der SD-Karte gespeichert</string>
     <string name="save_track_to_gpx">Logging aktivieren</string>
     <string name="navigate_to">Als Ziel wählen</string>
     <string name="update_tile">Karte (Kacheln) aktualisieren</string>
     <string name="reload_tile">Kartenteile (Kacheln) aktualisieren</string>
-    <string name="user_name_descr">Persönlicher Benutzername</string>
-    <string name="user_name">OSM Benutzername</string>
     <string name="mark_point">Ziel</string>
     <string name="show_osm_bugs_descr">OSM Fehlerberichte anzeigen</string>
     <string name="show_osm_bugs">OSM Fehler</string>
