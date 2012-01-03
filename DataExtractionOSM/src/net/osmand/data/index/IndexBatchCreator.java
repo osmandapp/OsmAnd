@@ -200,6 +200,7 @@ public class IndexBatchCreator {
 					countries.nameSuffix = "";
 				}
 				NodeList ncountries = el.getElementsByTagName("region");
+				log.info("Region to download " +countries.siteToDownload);
 				for(int j=0; j< ncountries.getLength(); j++){
 					Element ncountry = (Element) ncountries.item(j);
 					String name = ncountry.getAttribute("name");
@@ -207,6 +208,7 @@ public class IndexBatchCreator {
 					data.cityAdminLevel = ncountry.getAttribute("cityAdminLevel");
 					if(name != null && !Boolean.parseBoolean(ncountry.getAttribute("skip"))){
 						countries.regionNames.put(name, data);
+						log.info("  Country : " +name);
 					}
 				}
 				countriesToDownload.add(countries);
@@ -287,7 +289,7 @@ public class IndexBatchCreator {
 						continue;
 					}
 				}
-				File toSave = downloadFile(url,  fileName, alreadyGeneratedFiles);
+				File toSave = downloadFile(url,  fileName);
 				if (toSave != null) {
 					generateIndex(toSave, regionName, regionSpecificData, alreadyGeneratedFiles);
 				}
@@ -295,7 +297,7 @@ public class IndexBatchCreator {
 		}
 	}
 	
-	protected File downloadFile(String url, String regionName, Set<String> alreadyGeneratedFiles) {
+	protected File downloadFile(String url, String regionName) {
 		String ext = ".osm";
 		if(url.endsWith(".osm.bz2")){
 			ext = ".osm.bz2";
