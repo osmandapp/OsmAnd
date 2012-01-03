@@ -208,7 +208,6 @@ public class IndexBatchCreator {
 					data.cityAdminLevel = ncountry.getAttribute("cityAdminLevel");
 					if(name != null && !Boolean.parseBoolean(ncountry.getAttribute("skip"))){
 						countries.regionNames.put(name, data);
-						log.info("  Country : " +name);
 					}
 				}
 				countriesToDownload.add(countries);
@@ -255,7 +254,7 @@ public class IndexBatchCreator {
 	
 	public void runBatch(List<RegionCountries> countriesToDownload ){
 		Set<String> alreadyGeneratedFiles = new LinkedHashSet<String>();
-		if(countriesToDownload.isEmpty()){
+		if(!countriesToDownload.isEmpty()){
 			downloadFilesAndGenerateIndex(countriesToDownload, alreadyGeneratedFiles);
 		}
 		generatedIndexes(alreadyGeneratedFiles);
