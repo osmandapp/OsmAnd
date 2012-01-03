@@ -93,7 +93,7 @@
 			<EditTextPreference android:title="@string/user_password" android:password="true" android:summary="@string/user_password_descr"
 				android:key="user_password"></EditTextPreference>
 		</PreferenceCategory>
-		<PreferenceCategory android:title="OsmAnd development - Debugging and experimental features">
+		<PreferenceCategory android:title="OsmAnd debugging and development">
 			<CheckBoxPreference android:summary="@string/trace_rendering_descr" android:title="@string/trace_rendering"
 				android:key="debug_rendering"></CheckBoxPreference>
 			<CheckBoxPreference android:key="animate_routing" android:title="Animate routing" android:summary="Simulate route progression manually"></CheckBoxPreference>
