@@ -4,10 +4,14 @@
 	<string name="index_settings_descr">Download and manage offline maps and other data like GPX tracks</string>
 	<string name="settings_preset">APPLICATION MODE</string>
 	<string name="settings_preset_descr">Select a use profile. (Each profile\'s settings can be customized below. Only General settings, Background service and map sources are GLOBAL settings.)</string>
-	<string name="rendering_settings">Map configuration</string>
+	<string name="rendering_settings">- Map configuration</string>
 	<string name="rendering_settings_descr">Configure maps and map sources</string>
-	<string name="appearance_settings">Map appearance</string>
+	<string name="appearance_settings">- Map appearance</string>
 	<string name="appearance_settings_descr">Configure map display</string>
+	<string name="monitor_preferences">- Tracking</string>
+	<string name="save_track_interval">Track interval</string>
+	<string name="routing_settings">- Navigation</string>
+	<string name="routing_settings_descr">Specify routing options</string>
 	<string name="general_settings">GENERAL SETTINGS</string>
 	<string name="general_settings_descr">Configure display and other global settings</string>
 	<string name="global_app_settings">Global app settings</string>
@@ -500,8 +504,6 @@
 	<string name="background_router_service_descr">Enable background service to track position over long time periods</string>
 	<string name="background_router_service">Use background service</string>
 	<string name="off_router_service_no_gps_available">The background routing service requires a location source to be turned on.</string>
-	<string name="routing_settings_descr">Specify routing options</string>
-	<string name="routing_settings">Navigation</string>
 	<string name="hide_poi_filter">Hide filter</string>
 	<string name="show_poi_filter">Show filter</string>
 	<string name="search_poi_filter">Filter</string>
@@ -653,8 +655,6 @@
     <string name="save_current_track_descr">Save current track to SD now</string>
     <string name="save_current_track">Save current track</string>
     <string name="save_track_interval_descr">Choose positioning interval for tracks</string>
-    <string name="save_track_interval">Track interval</string>
-    <string name="monitor_preferences">Tracking</string>
     <string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
     <string name="save_track_to_gpx">Log track to GPX</string>
     <string name="navigate_to">Set as destination</string>
