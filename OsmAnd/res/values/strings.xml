@@ -3,7 +3,7 @@
 	<string name="index_settings">OFFLINE DATA</string>
 	<string name="index_settings_descr">Download and manage offline maps and other data like GPX tracks</string>
 	<string name="settings_preset">APPLICATION MODE</string>
-	<string name="settings_preset_descr">Select a use profile. (Each profiles's Map, Tracking, and Navigation settings can be customized below.)</string>
+	<string name="settings_preset_descr">Select a use profile. (Each profiles\'s Map, Tracking, and Navigation settings can be customized below.)</string>
 	<string name="rendering_settings">- Map configuration</string>
 	<string name="rendering_settings_descr">Configure maps and map sources</string>
 	<string name="appearance_settings">- Map appearance</string>
