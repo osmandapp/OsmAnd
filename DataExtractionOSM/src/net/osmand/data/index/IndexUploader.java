@@ -144,6 +144,7 @@ public class IndexUploader {
 				if (!f.isFile() || f.getName().endsWith(IndexBatchCreator.GEN_LOG_EXT)) {
 					continue;
 				}
+				log.info("Process file " + f.getName());
 				File unzipped = unzip(f);
 				String description = getDescription(unzipped);
 				File logFile = new File(f.getParentFile(), unzipped.getName() + IndexBatchCreator.GEN_LOG_EXT);
