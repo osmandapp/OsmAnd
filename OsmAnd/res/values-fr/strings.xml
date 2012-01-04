@@ -55,8 +55,8 @@
     <string name="download_files_question_space">Espace actuellement disponible: {2} MB! Télécharger {0} fichier(s) ({1} MB)?</string>
     <string name="show_zoom_level_descr">Afficher le niveau de zoom en permanence à la place de l\'échelle.</string>
     <string name="show_zoom_level">Afficher niveau de zoom</string>
-    <string name="tip_select_destination_point">Selectionner le  point de destination</string>
-﻿    <string name="tip_select_destination_point_t">
+    <string name="tip_select_destination_point">Selectionner le point de destination</string>
+    <string name="tip_select_destination_point_t">
       \tVous pouvez sélectionner une destination directement dans la carte (menu contextuel, puis \'Se déplacer vers ce point\'), dans toutes les recherches, ou via un appui long sur un de vos favoris dans la \'Liste des points favoris\'.
       \n\tLa destination est marquée d\'un disque orange surla carte et OsmAnd affichera la distance (en ligne droite) vers ce point ainsi que sa direction (triangle orange).</string>
   ﻿  <string name="tip_recent_changes_0_6_9_t">Changements en 0.6.9 :

@@ -32,7 +32,7 @@
 	\n\t\'Non ruotare\' - La mappa non verra\' ruotata. Il nord sara\' sempre in alto
 	\n\t\'Nella direzione del movimento\' - La mappa si allineera\' continaumente con la tua direzione
 	\n\t\'Alla bussola\' - La mappa sara\' continuamente allineata con la bussola del device
-	\n\tSuggerimento: Per cambiare velocemente tra la rotazione secondo la bussola e quella selezionata nelle impostazioni, puoi semplicemente premere l'ago della bussola della vista della mappa.</string>
+	\n\tSuggerimento: Per cambiare velocemente tra la rotazione secondo la bussola e quella selezionata nelle impostazioni, puoi semplicemente premere l\'ago della bussola della vista della mappa.</string>
 
 	<string name="switch_to_raster_map_to_see">Nessuna mappa vettoriale è presente per questa posizione. \n\t\n\tNe puoi scaricare una in \'Impostazioni\' -> \'Dati offline\', o passare alle mappe online tramite \'Impostazioni\' -> \'Configurazione delle mappe\'.</string>
 	<string name="binary_map_download_success">Download riuscito.\n\t\n\tPer usarle attivare o use activate \'Impostazioni\' -> \'Configurazione delle mappe\' -> \'Mappe vettoriali offline\'.</string>
@@ -206,17 +206,8 @@
 	<string name="gpx_option_destination_point">Usa il punto di destinazione attuale</string>
 	<string name="gpx_option_from_start_point">Passa lungo tutto il percorso</string>
 
-	<string name="tip_rotation_switching">Rotazione Mappa</string>
-	<string name="tip_rotation_switching_t">\tPuoi scegliere se e come ruotare il display su \'Impostazioni\' -> \'Impostazioni generali\' -> \'Rotazioni mappa\'.
-	\n\tLe scelte sono:
-	\n\t\'Non ruotare\' - Nord sempre in alto
-	\n\t\'Verso la direzione del movimento\' - la mappa sarà allineata secondo la tua direzione
-	\n\t\'Verso la bussola\' - la mappa sarà allineata tramite la lettura bussola del dispositivo
-	\n\tSuggerimento: Per cambiare velocemente impostazione bussola puoi premere sull\'ago della bussola nella mappa.</string>
 
-	<string name="switch_to_raster_map_to_see">La posizione corrente non è presente nelle mappe vettoriali offline, puoi cambiare la fonte nel menu \'Definisci vista\' -> \'Fonte mappa...\' o hai bisogno di scaricare altre mappe.</string>
 	<string name="switch_to_vector_map_to_see">Puoi selezionare le mappe vettoriali offline (Definisci vista -> Fonte Mappa... -> Mappe vettoriali offline) per visualizzare la mappa.</string>
-	<string name="binary_map_download_success">Completato. Puoi selezionare le mappe offline nel menu  Definisci vista -> Fonte Mappa... -> Mappe vettoriali offline.</string>
 	<string name="choose_audio_stream">Output guida vocale</string>
 	<string name="choose_audio_stream_descr">Scegli il canale per la guida vocale (dipendente dal sistema)</string>
 	<string name="voice_stream_voice_call">Stream chiamate vocali</string>
@@ -252,15 +243,6 @@
 	<string name="level_to_switch_vector_raster_descr">Minimo livello di zoom per usare il rendering vettoriale al posto dei tile mappa</string>
 	<string name="level_to_switch_vector_raster">Min. livello zoom</string>
 
-	<string name="tip_day_night_mode">Modo Giorno/Notte</string>
-	<string name="tip_day_night_mode_t">\tL\'aspetto della mappa per alcune mappe vettoriali può essere cambiato tra giorno (chiaro) e notte (scuro).
-	\n\tI colori notturni sono indicati per la guida notturna.
-	\n\tPuoi imporre il cambio tra Giorno/Notte nel \'Menu Principale\' -> \'Impostazioni\' -> \'Visualizzazione Mappa\' ->\'Modo Giorno/notte\'.
-	\n\tLe scelte sono:
-	\n\t\'Alba/Tramonto\' - automatico, controllato dalla posizione del sole (default)
-	\n\t\'Giorno\' - sempre giorno
-	\n\t\'Notte\' - sempre notte 
-	\n\t\'Sensore Luce\' - controllato dal sensore nel dispositivo (se esistente)</string>	
 	<string name="tip_location_sharing">Condivisione Posizione</string>
 	<string name="tip_location_sharing_t">\tPuoi condividere posizione di posti interessanti con familiari e amici.
 	\n\tPer farlo devi:
@@ -273,13 +255,6 @@
 	\n\tPremendo a lungo su un Favorito nel menu \'Favoriti\' aprirà le opzioni Naviga verso, modifica, elimina.
 	\n\tPer visualizzare i favoriti direttamente sulla mappa attiva il layer \'Favoriti\' su \'Menu contestuale mappa\' ->\'Definisci vista\'.</string>
 
-	<string name="tip_osm_improve">Migliorare i dati OSM</string>
-	<string name="tip_osm_improve_t">\tOsmAnd utilizza mappe basate sui dati Openstreetmap.org (OSM) e -oltre alla visualizzazione mappa e il routing- può essere utilizzato per migliorare la qualità dei dati OSM. Puoi facilmente creare e inserire nuovi PDI o bug OSM con pochi click!
-\n\tPer questo devi prima fornire i tuoi dati di login OSM nel \'Menu Principale\' -> \'Impostazioni\' -> \'OSM\'.
-\n\tPer aggiungere un PDI usa \'Crea PDI\' nel menu contestuale della mappa. Prosegui inserendo le informazioni sul nuovo PDI su \'Crea PDI\' e infine invia le modifiche.
-\n\tGli errori nella mappa possono essere riportati tramite bug OSM, la comunità OSM procederà a correggerli velocemente.
-\n\tPer inserire un bug OSM usa \'Apri bug OSM\' nel menu contestuale. Inserisci una descrizione dettagliata del problema e invia il tutto tramite il bottone \'Aggiungi\'.
-\n\tAssicurati di essere connesso ad internet per contribuire in questi due modi suddetti.</string>
 	<string name="create_poi_link_to_osm_doc">Classificazione mappa <u>OSM Online</u> con immagini</string>
     <string name="error_doing_search">Errore nella ricerca offline</string>
     <string name="search_offline_geo_error">Impossibile capire le geo-intenzioni \'%s\'</string>
@@ -408,14 +383,6 @@
 	<string name="select_all">Seleziona tutto</string>
 	<string name="reload">Ricarica</string>
 
-	<string name="general_settings_descr">Configura utilizzo internet, opzioni display e altro</string>
-    <string name="general_settings">Impostazioni generali</string>
-	<string name="rendering_settings_descr">Configura fonte e aspetto mappa</string>
-    <string name="rendering_settings">- Mappe</string>
-    <string name="index_settings_descr">Download/gestione mappe e dati offline</string>
-    <string name="index_settings">Dati offline</string>
-	<string name="osmand_service">Servizio in background</string>
-	<string name="osmand_service_descr">Attiva il servizio in background per usare OsmAnd a schermo spento</string>
 	<string name="fast_route_mode">Percorso più Veloce</string>
 	<string name="fast_route_mode_descr">Abilita per calc. il percorso più veloce; disabilita per il percorso più corto</string>
 	<string name="tiles_to_download_estimated_size">Per lo zoom {0} download {1} tiles ({2} MB)</string>
@@ -512,8 +479,6 @@
 	<string name="background_router_service_descr">Abilitare il servizio in background per il tracciamento della posizione sul lungo periodo</string>
 	<string name="background_router_service">Servizio di ricerca percorso</string>
 	<string name="off_router_service_no_gps_available">Il servizio in background OsmAnd di generazione percorso necessita del sistema di posizionamento attivato.</string>
-	<string name="routing_settings_descr">Generazione percorso</string>
-	<string name="routing_settings">- Navigazione</string>
 	<string name="hide_poi_filter">Nascondi il filtro</string>
 	<string name="show_poi_filter">Mostra il filtro</string>
 	<string name="search_poi_filter">Filtro</string>
@@ -652,10 +617,7 @@
     <string name="download_indexes">Download dati offline</string>
     <string name="use_online_routing_descr">Utilizzare internet per calcolare il percorso</string>
     <string name="use_online_routing">Utilizzare il generatore di percorsi online</string>
-    <string name="user_password_descr">Inserire password OSM</string>
-    <string name="user_password">Password utente</string>
     <string name="osm_settings_descr">Specificare impostazioni openstreetmap.org: osm login</string>
-    <string name="monitor_preferences_descr">Specificare impostazioni per tracce GPX: salvare la traccia</string>
     <string name="data_settings_descr">Specificare impostazioni dati: lingua, aggiorna dati</string>
     <string name="data_settings">Dati</string>
     <string name="map_preferences_descr">Specificare impostazioni mappa: fonte, rotazione, posizione marker, orientazione schermo</string>
@@ -663,21 +625,16 @@
     <string name="auto_zoom_map_descr">Zoom automatico relativo alla velocità</string>
     <string name="auto_zoom_map">Zoom automatico mappa</string>
     <string name="additional_settings">Impostazioni aggiuntive</string>
-    <string name="settings_preset_descr">Selezionare impostazioni predefinite</string>
-    <string name="settings_preset">Modo applicazione</string>
     <string name="settings">Impostazioni</string>
     <string name="save_current_track_descr">Salvare la traccia corrente sulla scheda SD</string>
     <string name="save_current_track">Salvare la traccia corrente</string>
     <string name="save_track_interval_descr">Scegliere l\'intervallo di tempo per salvare le tracce</string>
     <string name="save_track_interval">Intervallo di salvataggio</string>
-    <string name="monitor_preferences">- Monitoraggio</string>
     <string name="save_track_to_gpx_descrp">Le tracce saranno salvate nella directory tracce divise per giorno</string>
     <string name="save_track_to_gpx">Salva traccia in GPX</string>
     <string name="navigate_to">Naviga verso</string>
     <string name="update_tile">Aggiorna mappa</string>
     <string name="reload_tile">Ricarica tasselli</string>
-    <string name="user_name_descr">Inserire il nome utente di OSM</string>
-    <string name="user_name">Nome utente OSM</string>
     <string name="mark_point">Obiettivo</string>
     <string name="show_osm_bugs_descr">Visualizza OpenStreetBugs sulla mappa</string>
     <string name="show_osm_bugs">Visualizza OpenStreetBugs</string>
