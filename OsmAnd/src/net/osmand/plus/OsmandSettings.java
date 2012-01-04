@@ -558,7 +558,7 @@ public class OsmandSettings {
 			AudioManager.STREAM_MUSIC, true);
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> USE_ENGLISH_NAMES = new BooleanPreference("use_english_names", false, true);
+	public final OsmandPreference<Boolean> USE_ENGLISH_NAMES = new BooleanPreference("use_english_names", false, false);
 	
 	public boolean usingEnglishNames(){
 		return USE_ENGLISH_NAMES.get();
@@ -566,27 +566,27 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> MAP_VECTOR_DATA = new BooleanPreference("map_vector_data",
-			false, true);
+			false, false);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_OVERLAY = new StringPreference("map_overlay",
-			null, true);
+			null, false);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_UNDERLAY = new StringPreference("map_underlay",
-			null, true);
+			null, false);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Integer> MAP_OVERLAY_TRANSPARENCY = new IntPreference("overlay_transparency",
-			200, true);
+			200, false);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Integer> MAP_TRANSPARENCY = new IntPreference("map_transparency",
-			255, true);
+			255, false);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference("map_tile_sources",
-			TileSourceManager.getMapnikSource().getName(), true);
+			TileSourceManager.getMapnikSource().getName(), false);
 	
 	public List<TileSourceTemplate> getInternetAvailableSourceTemplates(){
 		if(internetAvailableSourceTemplates == null && isInternetConnectionAvailable()){
