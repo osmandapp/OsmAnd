@@ -71,6 +71,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 
 	
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -106,13 +107,9 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		
 		setListAdapter(listAdapter);
 		updateDescriptionTextWithSize();
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	protected void onResume() {
-		super.onResume();
 		if (asyncLoader == null || asyncLoader.getResult() == null) {
+			// getLastNonConfigurationInstance method should be in onCreate() method 
+			// (onResume() doesn't work)
 			Object indexes = getLastNonConfigurationInstance();
 			asyncLoader = new LoadLocalIndexTask();
 			if (indexes instanceof List<?>) {
@@ -122,6 +119,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 			}
 		}
 	}
+	
 	
 	private void showContextMenu(final LocalIndexInfo info) {
 		Builder builder = new AlertDialog.Builder(this);
@@ -193,7 +191,6 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 				}
 
 			});
-
 		}
 		builder.show();
 	}
