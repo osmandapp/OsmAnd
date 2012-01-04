@@ -126,6 +126,7 @@ public class OsmandRenderer {
 		
 		// be aware field is using in C++
 		int shadowRenderingMode = ShadowRenderingMode.BLUR_SHADOW.value;
+		int shadowRenderingColor = 0xff969696;
 		
 		// not expect any shadow
 		int shadowLevelMin = 256;
@@ -639,6 +640,9 @@ public class OsmandRenderer {
 			// do not check shadow color here
 			if(rc.shadowRenderingMode == 1) {
 				int shadowColor = req.getIntPropertyValue(req.ALL.R_SHADOW_COLOR);
+				if(shadowColor == 0) {
+					shadowColor = rc.shadowRenderingColor;
+				}
 				int shadowLayer = req.getIntPropertyValue(req.ALL.R_SHADOW_RADIUS);
 				if (shadowColor == 0) {
 					shadowLayer = 0;
@@ -767,6 +771,9 @@ public class OsmandRenderer {
 			if(drawOnlyShadow) {
 				int shadowColor = render.getIntPropertyValue(render.ALL.R_SHADOW_COLOR);
 				int shadowRadius = render.getIntPropertyValue(render.ALL.R_SHADOW_RADIUS);
+				if(shadowColor == 0) {
+					shadowColor = rc.shadowRenderingColor;
+				}
 				drawPolylineShadow(canvas, rc, path, shadowColor, shadowRadius);
 			} else {
 				canvas.drawPath(path, paint);
