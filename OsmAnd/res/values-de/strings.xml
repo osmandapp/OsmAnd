@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 <!-- this block re-worked for new menu structure -->
-	<string name="profile_settings">EINSTELLUNGEN PRO ANWENDUNGSMODUS</string>
+	<string name="profile_settings">PROFILSPEZIF. EINSTELLUNGEN</string>
 	<string name="settings_preset">Anwendungsmodus</string>
 	<string name="settings_preset_descr">Anwendungsprofil wählen. (Einstellungen für Karten, Logging und Navigation werden für jedes Profil separat gespeichert.)</string>
 	<string name="rendering_settings">- Landkarten</string>
