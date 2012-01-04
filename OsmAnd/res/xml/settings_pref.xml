@@ -97,11 +97,11 @@
 				android:key="user_password"></EditTextPreference>
 		</PreferenceCategory>
 		<PreferenceCategory android:title="OsmAnd debugging and development">
+			<CheckBoxPreference android:key="native_rendering" android:title="Native rendering" android:summary="Vector maps may display faster. May not work well on some devices."></CheckBoxPreference>
 			<CheckBoxPreference android:summary="@string/trace_rendering_descr" android:title="@string/trace_rendering"
 				android:key="debug_rendering"></CheckBoxPreference>
 			<CheckBoxPreference android:key="animate_routing" android:title="Animate routing" android:summary="Simulate route progression manually"></CheckBoxPreference>
 			<Preference android:key="test_voice_commands" android:summary="Play commands of currently selected voice" android:title="Test voice commands"></Preference>
-			<CheckBoxPreference android:key="native_rendering" android:title="Native rendering" android:summary="Vector maps may display faster. May not work well on some devices."></CheckBoxPreference>
 		</PreferenceCategory>
 	</PreferenceScreen>
 
