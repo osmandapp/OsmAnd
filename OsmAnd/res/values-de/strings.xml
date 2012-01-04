@@ -3,8 +3,8 @@
 <!-- this block re-worked for new menu structure -->
 	<string name="profile_settings">EINSTELLUNGEN PRO ANWENDUNGSMODUS</string>
 	<string name="settings_preset">Anwendungsmodus</string>
-	<string name="settings_preset_descr">Anwendungsprofil wählen. (Karten-, Logging- und Navigationseinstellungen werden für jedes Profil separat gespeichert.)</string>
-	<string name="rendering_settings">- Landkarten</string>
+	<string name="settings_preset_descr">Anwendungsprofil wählen. (Einstellungen für Karten, Logging und Navigation werden für jedes Profil separat gespeichert.)</string>
+	<string name="rendering_settings">- Landkartenquellen und -konfiguration</string>
 	<string name="rendering_settings_descr">Konfiguration der Kartenquellen und -darstellung</string>
 	<string name="appearance_settings">- Kartendarstellung</string>
 	<string name="appearance_settings_descr">Layout und Anzeigeelemente konfigurieren</string>
