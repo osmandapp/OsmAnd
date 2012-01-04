@@ -7,7 +7,7 @@
 	<string name="rendering_settings">- Landkarten</string>
 	<string name="rendering_settings_descr">Kartenquellen und -konfiguration</string>
 	<string name="appearance_settings">- Kartendarstellung</string>
-	<string name="appearance_settings_descr">Kartenlayout und Anzeigeelemente konfigurieren</string>
+	<string name="appearance_settings_descr">Kartenlayout und Anzeigeelemente</string>
 	<string name="monitor_preferences">- Positions-Logging</string>
 	<string name="monitor_preferences_descr">Positions-Logging konfigurieren</string>
 	<string name="routing_settings">- Navigation</string>
