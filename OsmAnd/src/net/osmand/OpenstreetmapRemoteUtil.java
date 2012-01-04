@@ -26,6 +26,7 @@ import net.osmand.osm.EntityInfo;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.io.OsmBaseStorage;
+import net.osmand.plus.OpenstreetmapsDbHelper;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -312,7 +313,22 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 		return false;
 	}
-	
+
+	public void commitNodeImpl(final OpenstreetmapsDbHelper db, List<OpenstreetmapPoint> list){
+		List<OpenstreetmapPoint> local = new ArrayList<OpenstreetmapPoint>();
+		local.addAll(list);
+
+		for (OpenstreetmapPoint info : local) {
+			EntityInfo entityInfo = null;
+			if (OpenstreetmapUtil.Action.CREATE != info.getAction()) {
+				entityInfo = this.loadNode(info.getEntity());
+			}
+			if (this.commitNodeImpl(info.getAction(), info.getEntity(), entityInfo, info.getComment())) {
+				db.deleteOpenstreetmap(info);
+			}
+		}
+	}
+
 	public boolean commitNodeImpl(Action action, Node n, EntityInfo info, String comment){
 		if (isNewChangesetRequired()){
 			changeSetId = openChangeSet(comment);

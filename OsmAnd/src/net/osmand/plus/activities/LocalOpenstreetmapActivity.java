@@ -39,6 +39,8 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 
 	private OpenstreetmapsDbHelper db;
 
+	private OpenstreetmapRemoteUtil remote;
+
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,26 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 			listAdapter.addOpenstreetmapPoint(p);
 		}
 		listAdapter.notifyDataSetChanged();
+
+		remote = new OpenstreetmapRemoteUtil(this, this.getWindow().getDecorView());
+
+
+		findViewById(R.id.UploadAllButton).setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				remote.commitNodeImpl(db, db.getOpenstreetmapPoints());
+
+				// Reload all the POIs
+				listAdapter.clear();
+				List<OpenstreetmapPoint> l = db.getOpenstreetmapPoints();
+				android.util.Log.d(LogUtil.TAG, "List of POI " + l.size() + " length");
+				for (OpenstreetmapPoint p : l) {
+					listAdapter.addOpenstreetmapPoint(p);
+				}
+				listAdapter.notifyDataSetChanged();
+			}
+		});
 	}
 
 	private void showContextMenu(final OpenstreetmapPoint info) {
@@ -96,8 +118,6 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 					} else if (resId == R.string.local_openstreetmap_delete) {
 						listAdapter.delete(info);
 					} else if (resId == R.string.local_openstreetmap_upload) {
-						OpenstreetmapRemoteUtil remote = new OpenstreetmapRemoteUtil(LocalOpenstreetmapActivity.this,
-																					 LocalOpenstreetmapActivity.this.getWindow().getDecorView());
 						EntityInfo entityInfo = null;
 						if (OpenstreetmapUtil.Action.CREATE != info.getAction()) {
 							entityInfo = remote.loadNode(info.getEntity());
