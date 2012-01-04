@@ -62,8 +62,6 @@ public class FavouritesActivity extends ExpandableListActivity {
 	public static final int IMPORT_ID = 1;
 	public static final int DELETE_ID = 2;
 	
-	public static final String FILE_TO_SAVE = "favourites.gpx"; //$NON-NLS-1$
-	
 
 	private FavouritesAdapter favouritesAdapter;
 	private FavouritesDbHelper helper;
@@ -326,29 +324,18 @@ public class FavouritesActivity extends ExpandableListActivity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		final File appDir = OsmandSettings.getOsmandSettings(this).extendOsmandPath(ResourceManager.APP_DIR);
+		final File tosave = new File(appDir, FavouritesDbHelper.FILE_TO_SAVE);
 		if(item.getItemId() == EXPORT_ID){
-			final File appDir = OsmandSettings.getOsmandSettings(this).extendOsmandPath(ResourceManager.APP_DIR);
 			if(favouritesAdapter.isEmpty()){
 				Toast.makeText(this, R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
 			} else if(!appDir.exists()){
 				Toast.makeText(this, R.string.sd_dir_not_accessible, Toast.LENGTH_LONG).show();
 			} else {
-				final File f = new File(appDir, FILE_TO_SAVE);
-				new AsyncTask<Void, Void, String>(){
+				final AsyncTask<Void, Void, String> exportTask = new AsyncTask<Void, Void, String>(){
 					@Override
 					protected String doInBackground(Void... params) {
-						GPXFile gpx = new GPXFile();
-						
-						for (FavouritePoint p : helper.getFavouritePoints()) {
-							if (p.isStored()) {
-								WptPt pt = new WptPt();
-								pt.lat = p.getLatitude();
-								pt.lon = p.getLongitude();
-								pt.name = p.getName() + "_" + p.getCategory();
-								gpx.points.add(pt);
-							}
-						}
-						return GPXUtilities.writeGpxFile(f, gpx, FavouritesActivity.this);
+						return helper.exportFavorites();
 					}
 					
 					@Override
@@ -360,20 +347,33 @@ public class FavouritesActivity extends ExpandableListActivity {
 					protected void onPostExecute(String warning) {
 						hideProgressBar();
 						if(warning == null){
-							Toast.makeText(FavouritesActivity.this, MessageFormat.format(getString(R.string.fav_saved_sucessfully), f.getAbsolutePath()), 
-									Toast.LENGTH_LONG).show();
+							Toast.makeText(
+									FavouritesActivity.this,
+									MessageFormat.format(getString(R.string.fav_saved_sucessfully), tosave.getAbsolutePath()), Toast.LENGTH_LONG).show();
 						} else {
 							Toast.makeText(FavouritesActivity.this, warning, Toast.LENGTH_LONG).show();
 						}
 					};
-					
-				}.execute();
+				};
+				
+				if(tosave.exists()) {
+					Builder bld = new AlertDialog.Builder(this);
+					bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							exportTask.execute();
+						}
+					});
+					bld.setNegativeButton(R.string.default_buttons_no, null);
+					bld.setMessage(R.string.fav_export_confirmation);
+					bld.show();
+				} else {
+					exportTask.execute();
+				}
 			}
 		} else if(item.getItemId() == IMPORT_ID){
-			File appDir = OsmandSettings.getOsmandSettings(this).extendOsmandPath(ResourceManager.APP_DIR);
-			final File f = new File(appDir, FILE_TO_SAVE);
-			if(!f.exists()){
-				Toast.makeText(this, MessageFormat.format(getString(R.string.fav_file_to_load_not_found), f.getAbsolutePath()), Toast.LENGTH_LONG).show();
+			if(!tosave.exists()){
+				Toast.makeText(this, MessageFormat.format(getString(R.string.fav_file_to_load_not_found), tosave.getAbsolutePath()), Toast.LENGTH_LONG).show();
 			} else {
 				new AsyncTask<Void, FavouritePoint, String>(){
 					@Override
@@ -384,7 +384,7 @@ public class FavouritesActivity extends ExpandableListActivity {
 								existedPoints.add(fp.getName() + "_" + fp.getCategory());
 							}
 						}
-						GPXFile res = GPXUtilities.loadGPXFile(FavouritesActivity.this, f, false);
+						GPXFile res = GPXUtilities.loadGPXFile(FavouritesActivity.this, tosave, false);
 						if(res.warning != null){
 							return res.warning;
 						}
