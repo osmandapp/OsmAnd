@@ -345,12 +345,7 @@
 			<region name="wyoming" esize=""/>
 			
 		</regions>
-		
-		<!-- 3.1 USA [SOURCE: CLOUDMADE.COM]-->
-		<regions siteToDownload="http://downloads.cloudmade.com/americas/northern_america/united_states/{0}/{0}.osm.bz2" skip="false" region_prefix="US_" region_suffix="_NorthAmerica">
-			<region name="guantanamo_bay" esize=""/> <!-- ??? -->
-		</regions>
-		
+				
 		<!-- 3.1 USA MINOR OUTLYING ISLANDS [SOURCE: CLOUDMADE.COM] -->
 		<regions siteToDownload="http://downloads.cloudmade.com/americas/northern_america/united_states_minor_outlying_islands/{0}/{0}.osm.bz2" skip="true" region_prefix="US-Islands_" region_suffix="_NorthAmerica">
 			<region name="baker" esize=""/>
