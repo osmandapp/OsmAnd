@@ -200,8 +200,6 @@ public class NavigationService extends Service implements LocationListener {
 		
 	}
 
-
-
 	@Override
 	public void onProviderDisabled(String provider) {
 		Toast.makeText(this, getString(R.string.off_router_service_no_gps_available), Toast.LENGTH_LONG).show();
@@ -220,33 +218,4 @@ public class NavigationService extends Service implements LocationListener {
 	}
 
 	
-	public static class OnNavigationServiceAlarmReceiver extends BroadcastReceiver {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			final WakeLock lock = getLock(context);
-			final NavigationService service = ((OsmandApplication) context.getApplicationContext()).getNavigationService();
-			// do not do nothing
-			if (lock.isHeld() || service == null) {
-				return;
-			}
-			// 
-			lock.acquire();
-			// request location updates
-			final LocationManager locationManager = (LocationManager) service.getSystemService(Context.LOCATION_SERVICE);
-			locationManager.requestLocationUpdates(service.getServiceOffProvider(), 0, 0, service);
-			if (service.getServiceOffInterval() > service.getServiceError()) {
-				service.getHandler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						// if lock is not anymore held
-						if (lock.isHeld()) {
-							lock.release();
-							locationManager.removeUpdates(service);
-						}
-					}
-				}, service.getServiceError());
-			}
-		}
-
-	}
 }

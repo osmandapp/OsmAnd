@@ -693,7 +693,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				if(settings.AUTO_ZOOM_MAP.get() && location.hasSpeed()){
 	    			int z = defineZoomFromSpeed(location.getSpeed(), mapView.getZoom());
 	    			if(mapView.getZoom() != z && !mapView.mapIsAnimating()){
-	    				long now = SystemClock.elapsedRealtime();
+	    				long now = System.currentTimeMillis();
 	    				// prevent ui hysterisis (check time interval for autozoom)
 	    				if(Math.abs(mapView.getZoom() - z) > 1 || (lastTimeAutoZooming - now) > 6500){
 	    					lastTimeAutoZooming = now;
