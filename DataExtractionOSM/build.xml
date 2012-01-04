@@ -92,9 +92,7 @@
 				<include name="rendering_types.xml"/>
 			</fileset>
 			<fileset dir=".">
-				<include name="batch_indexing.bat"/>
-				<include name="batch_indexing.sh"/>
-				<include name="../build-scripts/regions.xml" />
+				<include name="../build-scripts/regions/indexes.xml" />
 			</fileset>
 			<fileset dir="src/net/osmand/data/index">
 				<include name="batch.xml" />
@@ -107,30 +105,4 @@
 		<delete file="OsmAndMapCreator.jar" />
 	</target>
 
-	<!-- NOT USED now could be deleted -->
-	<typedef resource="org/tigris/subversion/svnant/svnantlib.xml" classpathref="ant.lib.path" />
-
-	<target name="update">
-		<svn svnkit="true">
-			<update dir="." revision="HEAD" />
-			<info target="." />
-		</svn>
-		<echo>Updated to revision: ${svn.info.rev}</echo>
-	</target>
-
-	<target name="nightbuild" depends="clean,update,compile,build">
-		<move file="build.zip" tofile="${file.to.upload}"/>
-		<ftp action="del" server="download.osmand.net" userid="${ftp.user}" password="${ftp.password}">
-			<fileset>
-				<include name="night-builds/${file.to.upload}" />
-			</fileset>
-		</ftp>
-
-
-		<ftp server="download.osmand.net" remotedir="night-builds" userid="${ftp.user}" password="${ftp.password}" depends="yes">
-			<fileset dir=".">
-				<include name="${file.to.upload}" />
-			</fileset>
-		</ftp>
-	</target>
 </project>

@@ -346,7 +346,7 @@
 			
 		</regions>
 				
-		<!-- 3.1 USA MINOR OUTLYING ISLANDS [SOURCE: CLOUDMADE.COM] -->
+		<!-- 3.1 USA MINOR OUTLYING ISLANDS [SOURCE: CLOUDMADE.COM] 
 		<regions siteToDownload="http://downloads.cloudmade.com/americas/northern_america/united_states_minor_outlying_islands/{0}/{0}.osm.bz2" skip="true" region_prefix="US-Islands_" region_suffix="_NorthAmerica">
 			<region name="baker" esize=""/>
 			<region name="howland" esize=""/>
@@ -357,7 +357,7 @@
 			<region name="navassa" esize=""/>
 			<region name="palmyra" esize=""/>
 			<region name="wake" esize=""/>
-		</regions>
+		</regions> -->
 		
 		<!-- 3.2 CANADA [SOURCE: GEOFABRIK.DE] -->
 		<regions siteToDownload="http://download.geofabrik.de/osm/north-america/canada/{0}.osm.pbf" region_prefix="Canada_" skip="false" region_suffix="_NorthAmerica">
