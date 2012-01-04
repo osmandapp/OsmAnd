@@ -2,13 +2,13 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-	<Preference android:title="@string/index_settings" android:key="local_indexes" android:summary="@string/index_settings_descr"></Preference>
+	<Preference android:title="@string/index_settings" android:key="local_indexes" android:summary="@string/index_settings_descr" android:textStyle="bold"></Preference>
 
 
-	<ListPreference android:summary="@string/settings_preset_descr" android:title="@string/settings_preset" android:key="application_mode"></ListPreference>
+	<ListPreference android:summary="@string/settings_preset_descr" android:title="@string/settings_preset" android:key="application_mode" android:textStyle="bold"></ListPreference>
 
 
-	<PreferenceScreen android:key="map_settings" android:title="@string/rendering_settings" android:summary="@string/rendering_settings_descr">
+	<PreferenceScreen android:key="map_settings" android:title="@string/rendering_settings" android:summary="@string/rendering_settings_descr" android:padding="5px">
 		<PreferenceCategory android:title="@string/pref_raster_map">
 			<ListPreference android:title="@string/map_tile_source" android:summary="@string/map_tile_source_descr" android:key="map_tile_sources"></ListPreference>
 			<CheckBoxPreference android:key="use_internet_to_download_tiles" android:title="@string/use_internet" android:summary="@string/use_internet_to_download_tile"></CheckBoxPreference>
@@ -36,7 +36,7 @@
 	</PreferenceScreen>
 
 
-	<PreferenceScreen android:key="appearance_settings" android:title="@string/appearance_settings" android:summary="@string/appearance_settings_descr">
+	<PreferenceScreen android:key="appearance_settings" android:title="@string/appearance_settings" android:summary="@string/appearance_settings_descr" android:padding="5px">
 		<ListPreference android:key="daynight_mode" android:title="@string/daynight" android:summary="@string/daynight_descr"></ListPreference>
 		<ListPreference android:key="rotate_map" android:title="@string/rotate_map_to_bearing" android:summary="@string/rotate_map_to_bearing_descr"></ListPreference>
 		<CheckBoxPreference android:title="@string/auto_zoom_map" android:summary="@string/auto_zoom_map_descr" android:key="auto_zoom_map"></CheckBoxPreference>
@@ -50,7 +50,7 @@
 	</PreferenceScreen>
 
 
-	<PreferenceScreen android:key = "monitor_settings" android:title="@string/monitor_preferences" android:summary="@string/monitor_preferences_descr">
+	<PreferenceScreen android:key = "monitor_settings" android:title="@string/monitor_preferences" android:summary="@string/monitor_preferences_descr" android:padding="5px">
 		<CheckBoxPreference android:summary="@string/save_track_to_gpx_descrp" android:title="@string/save_track_to_gpx"
 			android:key="save_track_to_gpx"></CheckBoxPreference>
 		<ListPreference android:summary="@string/save_track_interval_descr" android:title="@string/save_track_interval"
@@ -59,7 +59,7 @@
 	</PreferenceScreen>
 
 
-	<PreferenceScreen android:key="routing_settings" android:title="@string/routing_settings" android:summary="@string/routing_settings_descr">
+	<PreferenceScreen android:key="routing_settings" android:title="@string/routing_settings" android:summary="@string/routing_settings_descr" android:padding="5px">
 		<ListPreference android:title="@string/router_service" android:key="router_service" android:summary="@string/router_service_descr"></ListPreference>
 		<CheckBoxPreference android:summary="@string/fast_route_mode_descr" android:title="@string/fast_route_mode"
 			android:key="fast_route_mode"></CheckBoxPreference>
@@ -73,7 +73,7 @@
 	</PreferenceScreen>
 
 
-	<PreferenceScreen android:key="general_settings" android:title="@string/general_settings" android:summary="@string/general_settings_descr">
+	<PreferenceScreen android:key="general_settings" android:title="@string/general_settings" android:summary="@string/general_settings_descr" android:textStyle="bold">
 		<PreferenceCategory android:title="@string/global_app_settings">
 			<ListPreference android:key="map_screen_orientation" android:title="@string/map_screen_orientation" android:summary="@string/map_screen_orientation_descr"></ListPreference>
 			<CheckBoxPreference android:key="use_high_res_maps" android:title="@string/use_high_res_maps" android:summary="@string/use_high_res_maps_descr"></CheckBoxPreference>
@@ -103,7 +103,7 @@
 	</PreferenceScreen>
 
 
-	<PreferenceScreen android:title="@string/osmand_service" android:summary="@string/osmand_service_descr">
+	<PreferenceScreen android:title="@string/osmand_service" android:summary="@string/osmand_service_descr" android:textStyle="bold">
 		<CheckBoxPreference android:summary="@string/background_router_service_descr" android:title="@string/background_router_service"
 			android:key="service_off_enabled"></CheckBoxPreference>
 		<ListPreference android:key="service_off_provider" android:title="@string/background_service_provider" android:summary="@string/background_service_provider_descr"></ListPreference>
