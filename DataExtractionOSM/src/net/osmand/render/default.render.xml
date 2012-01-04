@@ -416,13 +416,22 @@
 		<filter minzoom="16" maxzoom="17" textSize="13" textColor="#444444" textWrapWidth="16" textMinDistance="40" tag="building" value=""/>
 			<filter minzoom="18" textSize="15" textColor="#444444" textWrapWidth="16" tag="building" value=""/>
 		<filter minzoom="18" textSize="15" textColor="#444444" textWrapWidth="16" tag="addr:housenumber" value=""/>
+
 		<filter minzoom="15" textSize="12" textColor="#6699cc" textHaloRadius="1" textDy="7" textWrapWidth="12" tag="man_made" value="lighthouse"/>
 		<filter minzoom="16" textSize="12" textColor="#734a08" textDy="7" textWrapWidth="20" tag="man_made" value="windmill"/>
-		<filter minzoom="15" textSize="12" textColor="#734a08" textHaloRadius="1" textWrapWidth="30" tag="historic" value="castle"/>
-		<filter minzoom="16" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="historic" value="memorial"/>
+
+		<filter minzoom="16" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="historic" value="castle"/>
+		<filter minzoom="16" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="historic" value="monument"/>
+		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="historic" value="memorial"/>
+		<filter minzoom="15" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="historic" value="battlefield"/>
+		<filter minzoom="15" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="historic" value="fort"/>
+		<filter minzoom="16" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="historic" value="ruins"/>
+		<filter minzoom="16" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="historic" value="archaeological_site"/>
+		<filter minzoom="16" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="7" textWrapWidth="20" tag="historic" value="wreck"/>
 
 		<filter minzoom="14" textSize="12" textColor="#0000ff" textWrapWidth="30" tag="leisure" value="marina"/>
 		<filter minzoom="15" textSize="12" textColor="#000033" textHaloRadius="1" textWrapWidth="15" tag="leisure" value=""/>
+
 		<filter minzoom="16" textSize="12" textColor="#734a08" textDy="7" textWrapWidth="30" tag="amenity" value="fire_station"/>
 		<group>
 			<filter tag="amenity" value="restaurant"/>
@@ -576,17 +585,17 @@
 		<filter minzoom="16" icon="school" tag="amenity" value="college"/>
 		<filter minzoom="16" icon="library" tag="amenity" value="library"/>
 
+		<filter minzoom="15" icon="historic_castle" tag="historic" value="castle"/>
 		<filter minzoom="16" icon="historic_monument" tag="historic" value="monument"/>
 		<filter minzoom="16" icon="historic_memorial" tag="historic" value="memorial"/>
-		<filter minzoom="15" icon="historic_castle" tag="historic" value="castle"/>
-		<filter minzoom="16" icon="h_historic_archaeological_site" tag="historic" value="archaeological_site"/>
 		<filter minzoom="16" icon="historic_battlefield" tag="historic" value="battlefield"/>
 		<filter minzoom="16" icon="viewpoint" tag="historic" value="fort"/>
 		<filter minzoom="16" icon="historic_ruins" tag="historic" value="ruins"/>
-		<filter minzoom="16" icon="viewpoint" tag="historic" value="boundary_stone"/>
+		<filter minzoom="16" icon="h_historic_archaeological_site" tag="historic" value="archaeological_site"/>
+		<filter minzoom="16" icon="historic_wreck" tag="historic" value="wreck"/>
 		<filter minzoom="16" icon="historic_wayside_cross" tag="historic" value="wayside_cross"/>
 		<filter minzoom="16" icon="historic_wayside_shrine" tag="historic" value="wayside_shrine"/>
-		<filter minzoom="16" icon="historic_wreck" tag="historic" value="wreck"/>
+		<filter minzoom="16" icon="viewpoint" tag="historic" value="boundary_stone"/>
 
 		<filter minzoom="15" icon="power_tower" tag="power" value="tower"/>
 		<filter minzoom="15" icon="power_wind" tag="power" value="generator"/>
