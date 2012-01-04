@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="local_openstreetmap_uploadall">Upload All POI</string>
 	<string name="local_openstreetmap_items"></string>
 	<string name="local_openstreetmap_show_poi">Show POI on Map</string>
 	<string name="local_openstreetmap_upload">Upload modification to OSM</string>
