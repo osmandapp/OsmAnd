@@ -24,7 +24,7 @@
 	<string name="use_transparent_map_theme">Transparentní téma</string>
 	
 	<string name="appearance_settings_descr">Konfigurace vzhledu aplikace</string>
-	<string name="appearance_settings">Vzhled</string>
+	<string name="appearance_settings">- Vzhled</string>
 
 	<string name="native_library_not_supported">Android native library není podporovaná na tomto zařízení.</string>
 	<string name="init_native_library">Inicializuji Android native library...</string>
@@ -622,7 +622,7 @@
   <string name="general_settings_descr">Nastavení použití internetu, natočení mapy, orientace displeje a dalších</string>
   <string name="general_settings">Obecné</string>
   <string name="rendering_settings_descr">Nastavení zdroje mapy a vzhledu</string>
-  <string name="rendering_settings">Vzhled mapy</string>
+  <string name="rendering_settings">- Vzhled mapy</string>
   <string name="index_settings_descr">Stáhnout nebo aktualizovat data pro použití offline</string>
   <string name="index_settings">Offline data</string>
   <string name="osmand_service">Služba na pozadí</string>
@@ -724,7 +724,7 @@
   <string name="background_router_service">Sledování polohy</string>
   <string name="off_router_service_no_gps_available">Služba pro navigaci na pozadí vyžaduje zapnutý zdroj polohy.</string>
   <string name="routing_settings_descr">Možnosti navigace</string>
-  <string name="routing_settings">Navigace</string>
+  <string name="routing_settings">- Navigace</string>
   <string name="hide_poi_filter">Skrýt filtr</string>
   <string name="show_poi_filter">Zobrazit filtr</string>
   <string name="search_poi_filter">Filtr</string>
@@ -890,7 +890,7 @@
   <string name="save_current_track">Uložit aktuální trasu</string>
   <string name="save_track_interval_descr">Vyberte časový interval pro ukládání trasy</string>
   <string name="save_track_interval">Interval ukládání trasy</string>
-  <string name="monitor_preferences">Sledování</string>
+  <string name="monitor_preferences">- Sledování</string>
   <string name="save_track_to_gpx_descrp">Trasy budou ukládány do adresáře s trasami, seskupené podle dní</string>
   <string name="save_track_to_gpx">Uložit trasu do GPX</string>
   <string name="navigate_to">Ukázat směr</string>

@@ -367,7 +367,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="general_settings_descr">Các thiết lập chung cho ứng dụng</string>
     <string name="general_settings">Thiết lập chung</string>
 	<string name="rendering_settings_descr">Các thiết lập và hiển thị cho bản đồ</string>
-    <string name="rendering_settings">Bản đồ</string>
+    <string name="rendering_settings">- Bản đồ</string>
     <string name="index_settings_descr">Tải và Quản lý bản đồ Offline hoặc các dữ liệu khác(GPX)</string>
     <string name="index_settings">Dữ liệu Offline</string>
 	<string name="osmand_service">Chạy ngầm</string>
@@ -469,7 +469,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="background_router_service">Dùng dịch vụ chạy ngầm</string>
 	<string name="off_router_service_no_gps_available">Cần phải bật GPS khi sử dụng dịch vụ chạy ngầm.</string>
 	<string name="routing_settings_descr">Các thiết lập tìm đường</string>
-	<string name="routing_settings">Tìm đường</string>
+	<string name="routing_settings">- Tìm đường</string>
 	<string name="hide_poi_filter">Ẩn bộ lọc</string>
 	<string name="show_poi_filter">Hiện bộ lọc</string>
 	<string name="search_poi_filter">Bộ lọc</string>
@@ -626,7 +626,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
     <string name="save_current_track">Lưu track hiện tại</string>
     <string name="save_track_interval_descr">Chọn khoảng thời gian lưu vị trí cho track</string>
     <string name="save_track_interval">Khoảng thời gian lưu Track</string>
-    <string name="monitor_preferences">Tracking</string>
+    <string name="monitor_preferences">- Tracking</string>
     <string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
     <string name="save_track_to_gpx">Lưu track thành GPX</string>
     <string name="navigate_to">Dẫn đường tới</string>

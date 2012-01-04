@@ -60,7 +60,7 @@
 	<string name="general_settings_descr">Configurar o uso da Internet, opções de visualização, e mais</string>
 	<string name="general_settings">Configurações Gerais</string>
 	<string name="rendering_settings_descr">Configurar a origem do mapa e sua aparência</string>
-	<string name="rendering_settings">Mapas</string>
+	<string name="rendering_settings">- Mapas</string>
 	<string name="index_settings_descr">Obter ou atualizar dados para uso offline</string>
 	<string name="index_settings">Dados offline</string>
 	<string name="osmand_service">Serviço de segundo plano</string>
@@ -157,7 +157,7 @@
 	<string name="background_router_service">Usar serviço em segundo plano</string>
 	<string name="off_router_service_no_gps_available">O serviço em segundo plano exige a ativação de alguma fonte de localização</string>
 	<string name="routing_settings_descr">Especifique opções da rota</string>
-	<string name="routing_settings">Navegação</string>
+	<string name="routing_settings">- Navegação</string>
 	<string name="hide_poi_filter">Ocultar filtro</string>
 	<string name="show_poi_filter">Mostrar filtro</string>
 	<string name="search_poi_filter">Filtro</string>
@@ -317,7 +317,7 @@
 	<string name="save_current_track">slavar a trilha atual</string>
 	<string name="save_track_interval_descr">Escolher o intervalo entre posições nas trilhas</string>
 	<string name="save_track_interval">Intervalo de gravação</string>
-	<string name="monitor_preferences">Registro de trilhas</string>
+	<string name="monitor_preferences">- Registro de trilhas</string>
 	<string name="save_track_to_gpx_descrp">As trilhas serão gravadas no diretório tracks agrupadas por dia</string>
 	<string name="save_track_to_gpx">salvar trilhas em GPX</string>
 	<string name="navigate_to">Mover-se para o ponto</string>

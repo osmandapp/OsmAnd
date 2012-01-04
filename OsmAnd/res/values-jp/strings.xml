@@ -309,7 +309,7 @@ MB)をダウンロードしますか?</string>
      <string name="general_settings_descr">インターネット利用、表示オプション、その他の構成</string>
  <string name="general_settings">全般設定</string>
      <string name="rendering_settings_descr">マップソースと外観の構成</string>
- <string name="rendering_settings">マップ</string>
+ <string name="rendering_settings">- マップ</string>
  <string name="index_settings_descr">オフライン用のデータを取得/更新</string>
  <string name="index_settings">オフラインデータ</string>
      <string name="osmand_service">背景サービス</string>
@@ -419,7 +419,7 @@ name="maps_could_not_be_downloaded">このマップはダウンロードでき�
      <string name="off_router_service_no_gps_available">背景ルーティングサービスを動かすには
 位置ソースを動作させる必要があります。</string>
      <string name="routing_settings_descr">ルーティングオプションを指定</string>
-     <string name="routing_settings">ナビゲーション</string>
+     <string name="routing_settings">- ナビゲーション</string>
      <string name="hide_poi_filter">フィルタを非表示</string>
      <string name="show_poi_filter">フィルタを表示</string>
      <string name="search_poi_filter">フィルタ</string>
@@ -595,7 +595,7 @@ name="recalculate_route_to_your_location">現在地に従ってルートを再�
  <string name="save_current_track">現在のトラックを保存</string>
  <string name="save_track_interval_descr">トラックの位置取得間隔を選択</string>
  <string name="save_track_interval">トラック間隔</string>
- <string name="monitor_preferences">トラッキング</string>
+ <string name="monitor_preferences">- トラッキング</string>
  <string name="save_track_to_gpx_descrp">トラックは日ごとにグループ化されたトラック用ディレクトリに
  保存されます</string>
  <string name="save_track_to_gpx">トラックをGPXにログ</string>

@@ -25,7 +25,7 @@
 	<string name="use_transparent_map_theme">Priehľadná téma</string>
 	
 	<string name="appearance_settings_descr">Konfiguruje výzor a pocit z aplikácie</string>
-	<string name="appearance_settings">Vzhľad</string>
+	<string name="appearance_settings">- Vzhľad</string>
 	<string name="native_library_not_supported">Natívna knižnica nie je podporovaná na tomto zariadení.</string>
 	<string name="init_native_library">Inicializácia natívnej knižnice...</string>
 	<string name="choose_auto_follow_route">Automatické nasledovanie</string>
@@ -375,7 +375,7 @@
 <string name="general_settings_descr">Konfigurácia použitia internetu, otáčania mapy, orientácie obrazovky a iného</string>
 <string name="general_settings">Všeobecné nastavenia</string>
 <string name="rendering_settings_descr">Konfigurácia zdroja mapy a vzhľadu</string>
-<string name="rendering_settings">Mapy</string>
+<string name="rendering_settings">- Mapy</string>
 <string name="index_settings_descr">Získanie/aktualizácia údajov pre offline použitie</string>
 <string name="index_settings">Údaje pre offline použitie</string>
 <string name="osmand_service">Služba na pozadí</string>
@@ -476,7 +476,7 @@
 <string name="background_router_service">Použiť službu na pozadí</string>
 <string name="off_router_service_no_gps_available">Služba na pozadí pre rutovanie potrebuje zapnutý zdroj umiestnenia.</string>
 <string name="routing_settings_descr">Určenie možností rutovania</string>
-<string name="routing_settings">Navigovanie</string>
+<string name="routing_settings">- Navigovanie</string>
 <string name="hide_poi_filter">Skryť filter</string>
 <string name="show_poi_filter">Zobraziť filter</string>
 <string name="search_poi_filter">Filter</string>
@@ -633,7 +633,7 @@
 <string name="save_current_track">Uložiť aktuálnu stopu</string>
 <string name="save_track_interval_descr">Výber časového intervalu na ukladanie stopy</string>
 <string name="save_track_interval">Interval ukladania stopy</string>
-<string name="monitor_preferences">Stopovanie</string>
+<string name="monitor_preferences">- Stopovanie</string>
 <string name="save_track_to_gpx_descrp">Stopy budú ukladané do adresára stôp, zoskupené podľa dní</string>
 <string name="save_track_to_gpx">Zaznamenať stopu do GPX</string>
 <string name="navigate_to">Navigovať sem</string>

@@ -22,7 +22,7 @@
 	<string name="use_transparent_map_theme_descr">Utiliser les contrôles de transparence de la carte</string>
 	<string name="use_transparent_map_theme">Thème de transparence</string>
 	<string name="appearance_settings_descr">Configurer le style de l\'application</string>
-	<string name="appearance_settings">Style</string>
+	<string name="appearance_settings">- Style</string>
 	<string name="native_library_not_supported">Rendu acceléré non supporté sur cet appareil.</string>
 	<string name="init_native_library">Initialisation du rendu acceléré...</string>
 
@@ -363,7 +363,7 @@
 <string name="general_settings_descr">Configurer l\'utilisation d\'internet, la rotation de la carte, l\'orientation de l\'écran...</string>
 <string name="general_settings">Général</string>
 <string name="rendering_settings_descr">Configurer la source de la carte et son apparence</string>
-<string name="rendering_settings">Apparence de la carte</string>
+<string name="rendering_settings">- Apparence de la carte</string>
 <string name="index_settings_descr">Obtenir ou mettre à jour les données pour l\'utilisation hors-ligne</string>
 <string name="index_settings">Données hors-ligne</string>
 <string name="osmand_service">Service d\'arrière-plan</string>
@@ -459,7 +459,7 @@
 <string name="background_router_service">Service de positionnement</string>
 <string name="off_router_service_no_gps_available">Le service d\'arrière plan requiert l\'activation de la géolocalisation.</string>
 <string name="routing_settings_descr">Définir les options de la navigation</string>
-<string name="routing_settings">Navigation</string>
+<string name="routing_settings">- Navigation</string>
 <string name="hide_poi_filter">Masquer le filtre</string>
 <string name="show_poi_filter">Afficher filtre</string>
 <string name="search_poi_filter">Filtre</string>
@@ -615,7 +615,7 @@
 <string name="save_current_track">Enregistrer le trajet</string>
 <string name="save_track_interval_descr">Choisir l\'intervalle d\'enregistrement du trajet</string>
 <string name="save_track_interval">Intervalle d\'enregistrement</string>
-<string name="monitor_preferences">Enregistrement du parcours</string>
+<string name="monitor_preferences">- Enregistrement du parcours</string>
 <string name="save_track_to_gpx_descrp">Les trajets seront enregistrés et groupés par jour dans le répertoire de trajets</string>
 <string name="save_track_to_gpx">Enregistrer le trajet en GPX</string>
 <string name="navigate_to">Point de destination</string>

@@ -19,7 +19,7 @@
 <string name="use_transparent_map_theme_descr">Użyj przezroczystych kontrolek mapy</string>
 <string name="use_transparent_map_theme">Przezroczysty styl</string>
 <string name="appearance_settings_descr">Konfiguruj wygląd aplikacji</string>
-<string name="appearance_settings">Wygląd</string>
+<string name="appearance_settings">- Wygląd</string>
 <string name="native_library_not_supported">Biblioteka renderowania natywnego nie jest obsługiwana na tym urządzeniu.</string>
 <string name="init_native_library">Inicjalizacja biblioteki renderowania natywnego...</string>
 
@@ -371,7 +371,7 @@
 <string name="general_settings_descr">Skonfiguruj użycie Internetu, opcje wyświetlania i inne</string>
 <string name="general_settings">Ustawienia główne</string>
 <string name="rendering_settings_descr">Skonfiguruj źródło mapy i wygląd</string>
-<string name="rendering_settings">Mapy</string>
+<string name="rendering_settings">- Mapy</string>
 <string name="index_settings_descr">Pobierz/zarządzaj mapami i danymi offline</string>
 <string name="index_settings">Dane offline</string>
 <string name="osmand_service">Usługa w tle</string>
@@ -473,7 +473,7 @@
 <string name="background_router_service">Użyj usługi w tle</string>
 <string name="off_router_service_no_gps_available">The background routing service requires a location source to be turned on.</string>
 <string name="routing_settings_descr">Skonfiguruj opcje routingu</string>
-<string name="routing_settings">Nawigacja</string>
+<string name="routing_settings">- Nawigacja</string>
 <string name="hide_poi_filter">Ukryj filtr</string>
 <string name="show_poi_filter">Pokaż filtr</string>
 <string name="search_poi_filter">Filtr</string>
@@ -630,7 +630,7 @@
 <string name="save_current_track">Zapisz bieżący ślad</string>
 <string name="save_track_interval_descr">Choose positioning interval for tracks</string>
 <string name="save_track_interval">Track interval</string>
-<string name="monitor_preferences">Zapisywanie śladów</string>
+<string name="monitor_preferences">- Zapisywanie śladów</string>
 <string name="save_track_to_gpx_descrp">Ślady zostaną zapisane do katalogu grupami wg dni</string>
 <string name="save_track_to_gpx">Zapisuj ślad do GPX</string>
 <string name="navigate_to">Nawiguj do</string>

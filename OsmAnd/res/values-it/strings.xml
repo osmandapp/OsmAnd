@@ -357,7 +357,7 @@
 	<string name="general_settings_descr">Configura utilizzo internet, opzioni display e altro</string>
     <string name="general_settings">Impostazioni generali</string>
 	<string name="rendering_settings_descr">Configura fonte e aspetto mappa</string>
-    <string name="rendering_settings">Mappe</string>
+    <string name="rendering_settings">- Mappe</string>
     <string name="index_settings_descr">Download/gestione mappe e dati offline</string>
     <string name="index_settings">Dati offline</string>
 	<string name="osmand_service">Servizio in background</string>
@@ -459,7 +459,7 @@
 	<string name="background_router_service">Servizio di ricerca percorso</string>
 	<string name="off_router_service_no_gps_available">Il servizio in background OsmAnd di generazione percorso necessita del sistema di posizionamento attivato.</string>
 	<string name="routing_settings_descr">Generazione percorso</string>
-	<string name="routing_settings">Navigazione</string>
+	<string name="routing_settings">- Navigazione</string>
 	<string name="hide_poi_filter">Nascondi il filtro</string>
 	<string name="show_poi_filter">Mostra il filtro</string>
 	<string name="search_poi_filter">Filtro</string>
@@ -616,7 +616,7 @@
     <string name="save_current_track">Salvare la traccia corrente</string>
     <string name="save_track_interval_descr">Scegliere l\'intervallo di tempo per salvare le tracce</string>
     <string name="save_track_interval">Intervallo di salvataggio</string>
-    <string name="monitor_preferences">Monitoraggio</string>
+    <string name="monitor_preferences">- Monitoraggio</string>
     <string name="save_track_to_gpx_descrp">Le tracce saranno salvate nella directory tracce divise per giorno</string>
     <string name="save_track_to_gpx">Salva traccia in GPX</string>
     <string name="navigate_to">Naviga verso</string>

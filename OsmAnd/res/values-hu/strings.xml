@@ -23,7 +23,7 @@
 	<string name="use_transparent_map_theme_descr">Átlátszó háttér a térképkezelő gombokhoz</string>
 	<string name="use_transparent_map_theme">Átlátszó téma</string>
 	<string name="appearance_settings_descr">Az alkalmazás kinézetének beállításai</string>
-	<string name="appearance_settings">Megjelenés</string>
+	<string name="appearance_settings">- Megjelenés</string>
 	<string name="native_library_not_supported">A natív renderelő nem támogatott ezen az eszközön.</string>
 	<string name="init_native_library">Natív renderelő inicializálása..</string>
 	<string name="choose_auto_follow_route">Automatikus követés ideje</string>
@@ -366,7 +366,7 @@
 	<string name="general_settings_descr">Megjelenítési és egyéb beállítások</string>
 	<string name="general_settings">Általános beállítások</string>
 	<string name="rendering_settings_descr">Térképforrás és megjelenítési beállítások</string>
-	<string name="rendering_settings">Térképek</string>
+	<string name="rendering_settings">- Térképek</string>
 	<string name="index_settings_descr">Offline térképek letöltése és kezelése; GPX útvonalak és egyéb fájlok</string>
 	<string name="index_settings">Offline adatok</string>
 	<string name="osmand_service">Háttérszolgáltatás</string>
@@ -467,7 +467,7 @@
 	<string name="background_router_service">Háttérszolgáltatás pozíciókövetéshez</string>
 	<string name="off_router_service_no_gps_available">Helymeghatározó szolgáltatás szükséges a háttérben futó útvonaltervező szolgáltatáshoz.</string>
 	<string name="routing_settings_descr">Útvonaltervező paraméterek meghatározása</string>
-	<string name="routing_settings">Útvonaltervezés</string>
+	<string name="routing_settings">- Útvonaltervezés</string>
 	<string name="hide_poi_filter">Szűrő elrejtéshez</string>
 	<string name="show_poi_filter">Szűrő megmutatáshoz</string>
 	<string name="search_poi_filter">Szűrő</string>
@@ -625,7 +625,7 @@
 	<string name="save_current_track">Jelenlegi útvonal mentése</string>
 	<string name="save_track_interval_descr">Válassz pozicionálási intervallumot az útvonal mentéshez</string>
 	<string name="save_track_interval">Rögzítési sűrűség</string>
-	<string name="monitor_preferences">Útvonalrögzítés</string>
+	<string name="monitor_preferences">- Útvonalrögzítés</string>
 	<string name="save_track_to_gpx_descrp">Az útvonalak napi csoportosításban kerülnek mentésre a track könyvtárba</string>
 	<string name="save_track_to_gpx">Útvonal mentése GPX-be</string>
 	<string name="navigate_to">Beállítás célpontnak</string>

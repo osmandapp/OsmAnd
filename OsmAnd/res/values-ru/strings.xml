@@ -19,7 +19,7 @@
 	<string name="use_transparent_map_theme_descr">Использовать прозрачные информационные элементы на карте</string>
 	<string name="use_transparent_map_theme">Прозрачная тема</string>
 	<string name="appearance_settings_descr">Настроить внешний вид приложения</string>
-	<string name="appearance_settings">Внешний вид</string>
+	<string name="appearance_settings">- Внешний вид</string>
 	<string name="native_library_not_supported">Нативная библиотека не поддерживается на этом устройстве.</string>
 	<string name="init_native_library">Инициализация нативной библиотеки...</string>
 	<string name="choose_auto_follow_route">Настройки автовозрата карты</string>
@@ -320,7 +320,7 @@
 	<string name="general_settings_descr">Настроить использование интернета, выбрать ориентацию экрана, вращение карты и другое</string>
     <string name="general_settings">Общие</string>
 	<string name="rendering_settings_descr">Выбрать источник карты и внешний вид</string>
-    <string name="rendering_settings">Карта</string>
+    <string name="rendering_settings">- Карта</string>
     <string name="index_settings_descr">Загрузить и обновить данные для офлайн использования</string>
     <string name="index_settings">Данные</string>
 	<string name="osmand_service">Фоновый режим</string>
@@ -416,7 +416,7 @@
 	<string name="background_router_service">Сервис навигации</string>
 	<string name="off_router_service_no_gps_available">Сервис маршрутизации OsmAnd включен, отключив позиционирование, он перестает вести по маршруту.</string>
 	<string name="routing_settings_descr">Изменить настройки навигации</string>
-	<string name="routing_settings">Навигация</string>
+	<string name="routing_settings">- Навигация</string>
 	<string name="hide_poi_filter">Скрыть фильтр</string>
 	<string name="show_poi_filter">Показать фильтр</string>
 	<string name="search_poi_filter">Фильтр</string>
@@ -577,7 +577,7 @@
     <string name="save_current_track">Сохранить путь</string>
     <string name="save_track_interval_descr">Указать интервал между сохранениями пути</string>
     <string name="save_track_interval">Интервал сохранения</string>
-    <string name="monitor_preferences">Мониторинг</string>
+    <string name="monitor_preferences">- Мониторинг</string>
     <string name="save_track_to_gpx_descrp">Сохранять путь в gpx формате в папку track</string>
     <string name="save_track_to_gpx">Мониторить</string>
     <string name="navigate_to">Идти к</string>

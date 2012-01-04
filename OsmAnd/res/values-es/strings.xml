@@ -219,7 +219,7 @@
 	<string name="menu_layers">Representación</string>
 	<string name="menu_mute_off">Con sonido</string>
 	<string name="menu_mute_on">Mudo</string>
-	<string name="monitor_preferences">Monitoreo</string>
+	<string name="monitor_preferences">- Monitoreo</string>
 	<string name="monitor_preferences_descr">Especificar configuración de monitoreo</string>
 	<string name="navigate_point_cancel">Cancelar</string>
 	<string name="navigate_point_latitude">Latitud</string>
@@ -300,7 +300,7 @@
 	<string name="renderers_descr">Elegir estilo de visualización vectorial</string>
 	<string name="rendering_exception">Ocurrió un error al visualizar el área seleccionada</string>
 	<string name="rendering_out_of_memory">No hay suficiente memoria para mostrar el área seleccionada</string>
-	<string name="rendering_settings">Mapas</string>
+	<string name="rendering_settings">- Mapas</string>
 	<string name="rendering_settings_descr">Configurar fuente del mapa y apariencia</string>
 	<string name="rotate_map_bearing_opt">A la dirección del movimiento</string>
 	<string name="rotate_map_compass_opt">A la brújula</string>
@@ -319,7 +319,7 @@
 	<string name="route_tu">Haga giro en U y siga</string>
 	<string name="router_service">Rutas</string>
 	<string name="router_service_descr">Elija servicio de ruteo</string>
-	<string name="routing_settings">Ruteo</string>
+	<string name="routing_settings">- Ruteo</string>
 	<string name="routing_settings_descr">Especificar opciones de ruteo</string>
 	<string name="save_current_track">Guardar traza actual</string>
 	<string name="save_current_track_descr">Guardar traza actual a la SD</string>
