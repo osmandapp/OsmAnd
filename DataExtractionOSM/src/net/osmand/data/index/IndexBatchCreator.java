@@ -310,6 +310,9 @@ public class IndexBatchCreator {
 		} else {
 			toIndex = wgetDownload(url, saveTo);
 		}
+		if(toIndex == null) {
+			saveTo.delete();
+		}
 		return toIndex;
 	}
 
