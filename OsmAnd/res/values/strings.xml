@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
 <!-- this block re-worked for new menu structure -->
-	<string name="profile_settings">PROFILE SPECIFIC SETTINGS</string>
+	<string name="profile_settings">Profile Specific Settings</string>
 	<string name="settings_preset">User Profile</string>
 	<string name="settings_preset_descr">Select a use profile. (Each profiles\'s Map, Tracking, and Navigation settings can be customized below.)</string>
 	<string name="rendering_settings">- Map configuration</string>
@@ -12,7 +12,7 @@
 	<string name="monitor_preferences_descr">Specify tracking settings</string>
 	<string name="routing_settings">- Navigation</string>
 	<string name="routing_settings_descr">Specify routing options</string>
-	<string name="global_settings">GLOBAL SETTINGS</string>
+	<string name="global_settings">Global Settings</string>
 	<string name="index_settings">Offline Data</string>
 	<string name="index_settings_descr">Download and manage offline maps and other data like GPX tracks</string>
 	<string name="general_settings">General Settings</string>
