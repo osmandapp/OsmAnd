@@ -4,7 +4,7 @@
 	<string name="profile_settings">PROFILE SPECIFIC SETTINGS</string>
 	<string name="settings_preset">Application Mode</string>
 	<string name="settings_preset_descr">Select a use profile. (Each profiles\'s Map, Tracking, and Navigation settings can be customized below.)</string>
-	<string name="rendering_settings">- Map sources and configuration</string>
+	<string name="rendering_settings">- Map configuration</string>
 	<string name="rendering_settings_descr">Configure maps and map sources</string>
 	<string name="appearance_settings">- Map appearance</string>
 	<string name="appearance_settings_descr">Configure map display</string>
