@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
 <!-- this block re-worked for new menu structure -->
-	<string name="index_settings">OFFLINE DATA</string>
-	<string name="index_settings_descr">Download and manage offline maps and other data like GPX tracks</string>
-	<string name="settings_preset">APPLICATION MODE</string>
+	<string name="profile_settings">PROFILE SPECIFIC SETTINGS</string>
+	<string name="settings_preset">Application Mode</string>
 	<string name="settings_preset_descr">Select a use profile. (Each profiles\'s Map, Tracking, and Navigation settings can be customized below.)</string>
 	<string name="rendering_settings">- Map configuration</string>
 	<string name="rendering_settings_descr">Configure maps and map sources</string>
@@ -13,14 +12,17 @@
 	<string name="monitor_preferences_descr">Specify tracking settings</string>
 	<string name="routing_settings">- Navigation</string>
 	<string name="routing_settings_descr">Specify routing options</string>
-	<string name="general_settings">GENERAL SETTINGS</string>
+	<string name="global_settings">GLOBAL SETTINGS</string>
+	<string name="index_settings">Offline Data</string>
+	<string name="index_settings_descr">Download and manage offline maps and other data like GPX tracks</string>
+	<string name="general_settings">General Settings</string>
 	<string name="general_settings_descr">Configure display and other global settings</string>
 	<string name="global_app_settings">Global app settings</string>
 	<string name="user_name">Your OSM user name</string>
 	<string name="user_name_descr">Needed for openstreetmap.org submissions</string>
 	<string name="user_password">Your OSM password</string>
 	<string name="user_password_descr">Needed for openstreetmap.org submissions</string>
-	<string name="osmand_service">BACKGROUND SERVICE</string>
+	<string name="osmand_service">Background Service</string>
 	<string name="osmand_service_descr">Use to run OsmAnd while screen is off</string>
 
 	<string name="tip_rotation_switching">Map Rotation</string>

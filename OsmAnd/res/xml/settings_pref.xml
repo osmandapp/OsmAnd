@@ -2,9 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-	<Preference android:title="@string/index_settings" android:key="local_indexes" android:summary="@string/index_settings_descr"></Preference>
-
-
+<PreferenceCategory android:title="@string/profile_settings">
 	<ListPreference android:summary="@string/settings_preset_descr" android:title="@string/settings_preset" android:key="application_mode"></ListPreference>
 
 
@@ -71,6 +69,11 @@
 		<CheckBoxPreference android:summary="@string/use_osmand_routing_service_descr" android:title="@string/use_osmand_routing_service"
 			android:key="use_osmand_routing_service"></CheckBoxPreference>	
 	</PreferenceScreen>
+</PreferenceCategory>
+
+
+<PreferenceCategory android:title="@string/global_settings">
+	<Preference android:title="@string/index_settings" android:key="local_indexes" android:summary="@string/index_settings_descr"></Preference>
 
 
 	<PreferenceScreen android:key="general_settings" android:title="@string/general_settings" android:summary="@string/general_settings_descr">
@@ -111,6 +114,7 @@
 		<ListPreference android:key="service_off_wait_interval" android:title="@string/background_service_wait_int"
 			android:summary="@string/background_service_wait_int_descr"></ListPreference>
 	</PreferenceScreen>
+</PreferenceCategory>
 
 
 </PreferenceScreen>
