@@ -12,7 +12,7 @@
 		type="boolean" possibleValues=""/>
 	<renderingProperty attr="contourLines" name="Show contour lines" description="Default renderer: Display in map if available (zoom level 14 and up). Separate SRTM-file may be needed."
 		type="boolean" possibleValues=""/>
-	<renderingProperty attr="appMode" name="Rendering mode" description="Default renderer: Map optimization for respective Application Mode"
+	<renderingProperty attr="appMode" name="Rendering mode" description="Default renderer: Map optimization for respective User Profile"
 		type="string" possibleValues="default,car,bicycle,pedestrian"/>
 	<renderingProperty attr="noPolygons" name="No polygons" description="Default renderer: Make all areal land features on map transparent"
 		type="boolean" possibleValues=""/>

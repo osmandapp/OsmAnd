@@ -2,7 +2,7 @@
 <resources>
 <!-- this block re-worked for new menu structure -->
 	<string name="profile_settings">PROFILE SPECIFIC SETTINGS</string>
-	<string name="settings_preset">Application Mode</string>
+	<string name="settings_preset">User Profile</string>
 	<string name="settings_preset_descr">Select a use profile. (Each profiles\'s Map, Tracking, and Navigation settings can be customized below.)</string>
 	<string name="rendering_settings">- Map configuration</string>
 	<string name="rendering_settings_descr">Configure maps and map sources</string>
@@ -297,9 +297,9 @@
 \n\tUnder \'Map source...\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources, or maps manually created using e.g. OsmAndMapCreator on a PC.
 \n\tOsmAnd also supports custom sources.</string>
 
-	<string name="tip_app_mode">Application Mode</string>
+	<string name="tip_app_mode">User Profile</string>
 	<string name="tip_app_mode_t">\tOsmAnd supports different (customizable) application profiles for different use cases.
-\n\tYou can change profiles in \'Menu\' -> \'Settings\' -> \'Application mode\', or when creating a route.</string>
+\n\tYou can change profiles in \'Menu\' -> \'Settings\' -> \'User Profile\', or when creating a route.</string>
 
 	<string name="tip_navigation">Navigation</string>
 	<string name="tip_navigation_t">\tBefore starting a navigation (routing) you need to select a destination. Afterwards press \'Menu\' -> \'Directions\' on map and select the navigation type.</string>

@@ -251,7 +251,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 
 	<string name="tip_app_mode">Chế độ Ứng dụng</string>
 	<string name="tip_app_mode_t">\tOsmAnd supports different (customizable) application profiles for different use cases.
-\n\tYou can change profiles in \'Menu\' -> \'Settings\' -> \'Application mode\', or when creating a route.</string>
+\n\tYou can change profiles in \'Menu\' -> \'Settings\' -> \'User Profile\', or when creating a route.</string>
 
 	<string name="tip_navigation">Dẫn đường</string>
 	<string name="tip_navigation_t">\tĐể tìm đường đi, trước hết bạn phải chọn một điểm đến. Sau đó vào \'Menu\'->\'Hướng đi\' trên bản đồ để chọn kiểu dẫn đường.</string> 

@@ -2,8 +2,8 @@
 <resources>
 <!-- this block re-worked for new menu structure -->
 	<string name="profile_settings">PROFILSPEZIF. EINSTELLUNGEN</string>
-	<string name="settings_preset">Anwendungsmodus</string>
-	<string name="settings_preset_descr">Anwendungsprofil wählen. (Einstellungen für Karten, Logging und Navigation werden für jedes Profil separat gespeichert.)</string>
+	<string name="settings_preset">Anwendungsprofil</string>
+	<string name="settings_preset_descr">Verwendungszweck. (Einstellungen für Karten, Logging und Navigation werden für jedes Profil separat gespeichert.)</string>
 	<string name="rendering_settings">- Landkarten</string>
 	<string name="rendering_settings_descr">Konfiguration der Kartenquellen und -darstellung</string>
 	<string name="appearance_settings">- Kartendarstellung</string>
@@ -295,9 +295,9 @@
 \n\tUnter \'Kartenquelle...\' kann man wählen zwischen vordefinierten Quellen für Online-oder Offline-Kacheln, Offline-Vektor-Karten, oder selbst auf dem PC (z.B. via OsmAndMapCreator) erstellten Karten.
 \n\tOsmAnd unterstützt auch selbst definierte Quellen.</string>
 
-	<string name="tip_app_mode">Applikationsmodus</string>
+	<string name="tip_app_mode">Anwendungsprofile</string>
 	<string name="tip_app_mode_t">\tOsmAnd unterstützt verschiedene (individuell anpassbare) Profile für unterschiedliche Einsatzzwecke.
-\n\tDas Profil wechselt unter \'Menü\' -> \'Einstellungen\' -> \'Applikationsmodus\', oder auch beim Berechnen einer Route.</string>
+\n\tDas Profil wechselt unter \'Menü\' -> \'Einstellungen\' -> \'Anwendungsprofil\', oder auch beim Berechnen einer Route.</string>
 
 	<string name="tip_navigation">Navigation</string>
 	<string name="tip_navigation_t">\tVor dem Starten der Navigationsfunktion (Routen) ist ein Ziel zu wählen. Danach wählt man \'Menu\' -> \'Route\' in der Karte, und wählt den Navigationstyp.</string>
