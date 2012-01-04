@@ -6,7 +6,7 @@
    <string name="settings_preset_descr">Sélectionner un profil d\'utilisation. (Pour chaque profil, il est possible de configurer une source de carte, le suivi et la navigation, voir plus bas.)</string>
    <string name="rendering_settings">- Sources de carte</string>
    <string name="rendering_settings_descr">Configurer la source et le propriétés des cartes</string>
-   <string name="appearance_settings">- Style d'affichage</string>
+   <string name="appearance_settings">- Style d\'affichage</string>
    <string name="appearance_settings_descr">Configurer le style de l\'affichage de la carte</string>
    <string name="monitor_preferences">- Traces</string>
    <string name="monitor_preferences_descr">Configurer les paramèttres d\'enregistrement du parcours</string>
@@ -23,7 +23,7 @@
    <string name="user_password">Votre mot de passe OSM</string>
    <string name="user_password_descr">Nécessaire pour les contributions openstreetmap.org</string>
    <string name="osmand_service">Service d\'arrière plan</string>
-   <string name="osmand_service_descr">Permet d'utiliser  OsmAnd pendant que l\'écran est désactivé</string>
+   <string name="osmand_service_descr">Permet d\'utiliser  OsmAnd pendant que l\'écran est désactivé</string>
    <string name="tip_rotation_switching">Rotation de la carte</string>
    <string name="tip_rotation_switching_t">\tVous pouvez choisir quand et comment la carte est tournée dans \'Paramètres\' -> \'Général\' -> \'Rotation de la carte\'.
 ﻿   \nLes choix sont:
@@ -41,7 +41,7 @@
     \n\t\'Lever/coucher du soleil\' - mode automatique, controlé par la position du soleil (defaut)
     \n\t\'Jour\' - toujours utiliser le mode jour
     \n\t\'Nuit\' - toujours utiliser le mode nuit
-    \n\t\'Capteur de luminosité\' - le style de la carte est controlé par le capteur de luminosité de l'appareil (seulmenent si celui-ci existe)</string>  
+    \n\t\'Capteur de luminosité\' - le style de la carte est controlé par le capteur de luminosité de l\'appareil (seulmenent si celui-ci existe)</string>  
    <string name="tip_osm_improve">Améliorer les données OSM</string>
    <string name="tip_osm_improve_t">\tOsmAnd utilise des cartes issues des données Openstreetmap.org (OSM) - en plus de la visualisation des cartes et du calcul d\'itinéraires- peut également être utilisé pour améliorer la qualité des données OSM. Vous pouvez facilement créer et télécharger des nouveaux PI ou rapports de bugs cartographiques en quelques clicks!
     \n\tPour cela il faudra d\'abord fournir vos paramètres de connexion OSM dans \'Paramètres\' -> \'Général\' -> \'OSM\'.
