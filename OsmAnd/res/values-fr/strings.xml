@@ -9,10 +9,10 @@
    <string name="appearance_settings">- Style d'affichage</string>
    <string name="appearance_settings_descr">Configurer le style de l\'affichage de la carte</string>
    <string name="monitor_preferences">- Traces</string>
-   <string name="monitor_preferences_descr">Configurer les paramèttres d\'enregistrement du parcours</string>
+   <string name="monitor_preferences_descr">Configurer les paramètres d\'enregistrement du parcours</string>
    <string name="routing_settings">- Navigation</string>
    <string name="routing_settings_descr">Configurer les options de la navigation</string>
-   <string name="global_settings">Paramètres glogaux</string>
+   <string name="global_settings">Paramètres globaux</string>
    <string name="index_settings">Données hors ligne</string>
    <string name="index_settings_descr">Obtenir ou mettre à jour les données pour l\'utilisation hors-ligne</string>
    <string name="general_settings">Général</string>
@@ -34,21 +34,21 @@
    <string name="switch_to_raster_map_to_see">Vous n\'avez pas actuellement de carte vectorielle pour cet emplacement.\n\t\n\tVous pouvez en télécharger dans \'Paramètres\' -> \'Données hors ligne\', ou basculer sur les cartes en ligne via \'Paramètres\' -> \'Sources de carte\'.</string>
    <string name="binary_map_download_success">Téléchargement réussi.\n\t\n\tPour utiliser, activer dans \'Paramètres\' -> \'Sources de carte\' -> \'Cartes vectorielles\'.</string>
    <string name="tip_day_night_mode">Mode Jour/Nuit</string>
-   <string name="tip_day_night_mode_t">\tLe style de certains cartes vectorielles peut être changé entre jour (plus clair) et nuit (plus sombre).
-    \n\tLEs couleurs de nuit sont moins dangereuses pour la conduite nocturne.
+   <string name="tip_day_night_mode_t">\tLe style de certaines cartes vectorielles peut être changé entre jour (plus clair) et nuit (plus sombre).
+    \n\tLes couleurs de nuit sont moins dangereuses pour la conduite nocturne.
     \n\tVous pouvez paramétrer une politique pour la bascule jour/nuit dans \'Paramètres\' -> \'Style de la carte\' ->\'Mode Jour/Nuit\'.
     \n\tLes choix sont:
     \n\t\'Lever/coucher du soleil\' - mode automatique, controlé par la position du soleil (defaut)
     \n\t\'Jour\' - toujours utiliser le mode jour
     \n\t\'Nuit\' - toujours utiliser le mode nuit
-    \n\t\'Capteur de luminosité\' - le style de la carte est controlé par le capteur de luminosité de l'appareil (seulmenent si celui-ci existe)</string>  
+    \n\t\'Capteur de luminosité\' - le style de la carte est contrôlé par le capteur de luminosité de l'appareil (seulmenent si celui-ci existe)</string>  
    <string name="tip_osm_improve">Améliorer les données OSM</string>
    <string name="tip_osm_improve_t">\tOsmAnd utilise des cartes issues des données Openstreetmap.org (OSM) - en plus de la visualisation des cartes et du calcul d\'itinéraires- peut également être utilisé pour améliorer la qualité des données OSM. Vous pouvez facilement créer et télécharger des nouveaux PI ou rapports de bugs cartographiques en quelques clicks!
     \n\tPour cela il faudra d\'abord fournir vos paramètres de connexion OSM dans \'Paramètres\' -> \'Général\' -> \'OSM\'.
     \n\tPour ajouter un nouveau PI, utiliser l\'option \'Créer PI\' dans le menu contextuel de la carte. Saisir les informations dans la boite de dialogue \'Créer PI\' avant d\'enregistrer.
     \n\tLes erreurs de cartographie peuvent être signalées immédiatement  via les bugs OSM, permettant à la communauté OSM de corriger plus rapidement le problème.
     \n\tPour créer un bug OSM bug utiliser l\'option \'Ouvrir bug OSM\'  dans le menu contextuel de la carte. Saisir une description detaillée du problème et le poster avec le bouton  \'Ajouter\'.
-    \n\tNotez que la connexion internet ets nécessaire pour les contributions de PI et de bugs OSM.</string>
+    \n\tNotez que la connexion internet est nécessaire pour les contributions de PI et de bugs OSM.</string>
 <!-- end of string changes for new menu structure -->
 
     <string name="download_files_not_enough_space">Il n\'y a pas assez de place pour télécharger %1$s MB (disponible: %2$s).</string>
@@ -58,7 +58,7 @@
     <string name="tip_select_destination_point">Selectionner le  point de destination</string>
 ﻿    <string name="tip_select_destination_point_t">
       \tVous pouvez sélectionner une destination directement dans la carte (menu contextuel, puis \'Se déplacer vers ce point\'), dans toutes les recherches, ou via un appui long sur un de vos favoris dans la \'Liste des points favoris\'.
-      \n\tLa destination est marquée d\'un disque orange surla carte et OsmAnd affichera la distance (en ligne droite) vers ce point ainsi que sa direction (triangle orange).</string>
+      \n\tLa destination est marquée d\'un disque orange sur la carte et OsmAnd affichera la distance (en ligne droite) vers ce point ainsi que sa direction (triangle orange).</string>
   ﻿  <string name="tip_recent_changes_0_6_9_t">Changements en 0.6.9 :
 \n\t- Amelioration du rendu des cartes hors ligne
 \n\t- Rendu hors ligne acceléré - voir dans les options experimentales (ne marche pas sur tous les appareils)
