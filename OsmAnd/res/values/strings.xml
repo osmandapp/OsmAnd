@@ -657,7 +657,7 @@
     <string name="settings">Settings</string>
     <string name="save_current_track_descr">Save current track to SD now</string>
     <string name="save_current_track">Save current track</string>
-    <string name="save_track_interval">Track interval</string>
+    <string name="save_track_interval">Logging interval</string>
     <string name="save_track_interval_descr">Choose positioning interval for tracks</string>
     <string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
     <string name="save_track_to_gpx">Log track to GPX</string>
