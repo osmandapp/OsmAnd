@@ -42,9 +42,9 @@
 	<string name="sendtoOSM_confirmation_msg">Odoslať do OSM: %1$s?</string>
 	<string name="pref_vector_rendering">Vektorové vykresľovanie</string>
 	<string name="pref_overlay">Prekrývacia/podkladová</string>
-	<string name="pref_raster_map">Rastrová mapa</string>
-	<string name="pref_vector_map">Vektorová mapa</string>
-	<string name="delete_confirmation_msg">Naozaj chcete zmazať %1$s?</string>
+	<string name="pref_raster_map">Nastavenia rastrovej mapy</string>
+	<string name="pref_vector_map">Nastavenia vektorovej mapy</string>
+	<string name="delete_confirmation_msg">Vymazať %1$s?</string>
 	<string name="city_type_suburb">Mestská časť</string>
 	<string name="city_type_hamlet">Osada</string>
 	<string name="city_type_village">Obec</string>
@@ -116,7 +116,7 @@
 	<string name="local_index_mi_upload_gpx">Poskytnúť pre OSM</string>
 	
 	<string name="show_more_map_detail">Zobraziť podrobnejšiu mapu</string>
-	<string name="show_more_map_detail_descr">Zobrazí viac detailov vektorovej mapy (cesty, atď.) už pri nižších priblíženiach</string>
+	<string name="show_more_map_detail_descr">Zobrazí viac detailov offline vektorovej mapy (cesty, atď.) už pri nižších priblíženiach</string>
 
 	<string name="favourites_delete_multiple_succesful">Obľúbené body úspešne zmazané.</string>
 	<string name="favorite_delete_multiple">Idete zmazať %1$d obľúbených bodov a %2$d skupín obľúbených. Ste si istý?</string>
@@ -214,7 +214,7 @@
 	<string name="default_none">Žiadna</string>
 	<string name="map_overlay">Prekrývacia mapa</string>
 	<string name="map_overlay_descr">Výber mapy na prekrytie</string>
-	<string name="map_vector_data">Vektorové mapy</string>
+	<string name="map_vector_data">Offline vektorové mapy</string>
 	<string name="map_vector_data_descr">Použitie stiahnutých vektorových máp</string>
 	<string name="tile_source_already_installed">Mapa je už nainštalovaná, nastavenia budú zaktualizované</string>
 	<string name="select_tile_source_to_install">Vyberte mapy na inštaláciu alebo aktualizáciu</string>
@@ -463,8 +463,8 @@
 <string name="context_menu_item_show_route">Cestovať odtiaľto</string>
 <string name="use_trackball_descr">Použitie trackballu na pohyb po mape</string>
 <string name="use_trackball">Použiť trackball</string>
-<string name="background_service_wait_int_descr">Nastavenia času čakania na ustálenú pozíciu</string>
-<string name="background_service_wait_int">Čakací čas</string>
+<string name="background_service_wait_int_descr">Nastaví max. čakaciu dobu pre každú ustálenú pozíciu na pozadí</string>
+<string name="background_service_wait_int">Max. doba čakania na fix</string>
 <string name="service_stop_background_service">Vypnúť navigačnú službu na pozadí</string>
 <string name="where_am_i">Kde som?</string>
 <string name="process_navigation_service">Navigačná služba OsmAnd</string>
@@ -472,8 +472,8 @@
 <string name="gps_provider">GPS</string>
 <string name="int_seconds">sekúnd</string>
 <string name="int_min">min.</string>
-<string name="background_service_int_descr">nastavenie intervalu pre rozpoznanie pozície službou na pozadí</string>
-	<string name="background_service_int">Umiestňovací interval</string>
+<string name="background_service_int_descr">Nastaví interval rozpoznávania pozície službou na pozadí</string>
+<string name="background_service_int">Umiestňovací interval</string>
 <string name="background_service_provider_descr">Výber poskytovateľa umiestnenia pre službu na pozadí</string>
 <string name="background_service_provider">Poskytovateľ umiestnenia</string>
 <string name="background_router_service_descr">Zapnutie služby na pozadí na sledovanie pozície v dlhých časových periódach</string>
@@ -635,8 +635,8 @@
 <string name="settings">Nastavenia</string>
 <string name="save_current_track_descr">Uloženie aktuálnej stopy na SD kartu</string>
 <string name="save_current_track">Uložiť aktuálnu stopu</string>
-<string name="save_track_interval_descr">Výber časového intervalu na ukladanie stopy</string>
-<string name="save_track_interval">Interval ukladania stopy</string>
+<string name="save_track_interval_descr">Výber umietňovacieho intervalu pre stopy</string>
+<string name="save_track_interval">Logovací interval</string>
 <string name="monitor_preferences">- Stopovanie</string>
 <string name="save_track_to_gpx_descrp">Stopy budú ukladané do adresára stôp, zoskupené podľa dní</string>
 <string name="save_track_to_gpx">Zaznamenať stopu do GPX</string>
