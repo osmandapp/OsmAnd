@@ -6,6 +6,8 @@ package net.osmand.plus.activities;
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -190,26 +192,25 @@ public class FavouritesActivity extends ExpandableListActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		favouritesAdapter.synchronizeGroups();
 		final LatLon mapLocation = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+		favouritesAdapter.synchronizeGroups();
 		
 		if(mapLocation != null){
-			// TODO sort
-//			favouritesAdapter.sort(new Comparator<FavouritePoint>(){
-//
-//				@Override
-//				public int compare(FavouritePoint object1, FavouritePoint object2) {
-//					double d1 = MapUtils.getDistance(mapLocation, object1.getLatitude(), object1.getLongitude());
-//					double d2 = MapUtils.getDistance(mapLocation, object2.getLatitude(), object2.getLongitude());
-//					if(d1 == d2){
-//						return 0;
-//					} else if(d1 > d2){
-//						return 1;
-//					}
-//					return -1;
-//				}
-//				
-//			});
+			favouritesAdapter.sort(new Comparator<FavouritePoint>(){
+
+				@Override
+				public int compare(FavouritePoint object1, FavouritePoint object2) {
+					double d1 = MapUtils.getDistance(mapLocation, object1.getLatitude(), object1.getLongitude());
+					double d2 = MapUtils.getDistance(mapLocation, object2.getLatitude(), object2.getLongitude());
+					if(d1 == d2){
+						return 0;
+					} else if(d1 > d2){
+						return 1;
+					}
+					return -1;
+				}
+				
+			});
 		}
 		
 	}
@@ -460,6 +461,12 @@ public class FavouritesActivity extends ExpandableListActivity {
 			synchronizeGroups();
 		}
 		
+		public void sort(Comparator<FavouritePoint> comparator) {
+			for(List<FavouritePoint> ps : favoriteGroups.values()) {
+				Collections.sort(ps, comparator);
+			}
+		}
+
 		public void addFavoritePoint(FavouritePoint p) {
 			if(!favoriteGroups.containsKey(p.getCategory())){
 				favoriteGroups.put(p.getCategory(), new ArrayList<FavouritePoint>());
