@@ -492,7 +492,7 @@
 	<string name="context_menu_item_show_route">Show route from here</string>
 	<string name="use_trackball_descr">Use trackball to move map</string>
 	<string name="use_trackball">Use trackball</string>
-	<string name="background_service_wait_int_descr">Set waiting time for position fix</string>
+	<string name="background_service_wait_int_descr">Set maximum waiting time for each background position fix</string>
 	<string name="background_service_wait_int">Waiting time</string>
 	<string name="service_stop_background_service">Switch off background navigation service</string>
 	<string name="where_am_i">Where am I?</string>

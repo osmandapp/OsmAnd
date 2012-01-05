@@ -452,7 +452,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="context_menu_item_show_route">Route from</string>
 	<string name="use_trackball_descr">Dùng trackball để di chuyển bản đồ</string>
 	<string name="use_trackball">Dùng trackball</string>
-	<string name="background_service_wait_int_descr">Set waiting time for position fix</string>
+	<string name="background_service_wait_int_descr">Set maximum waiting time for each background position fix</string>
 	<string name="background_service_wait_int">Thời gian chờ</string>
 	<string name="service_stop_background_service">Tắt dịch vụ dẫn đường ẩn</string>
 	<string name="where_am_i">Vị trí của tôi?</string>
