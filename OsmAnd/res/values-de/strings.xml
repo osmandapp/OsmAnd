@@ -488,8 +488,8 @@
 	<string name="context_menu_item_show_route">Zeige Route von hier</string>
 	<string name="use_trackball_descr">Trackball für Kartenbewegung benutzen</string>
 	<string name="use_trackball">Trackball verwenden</string>
-	<string name="background_service_wait_int_descr">Maximale Wartezeit für jede Hintergrund-Positionsbestimmung</string>
-	<string name="background_service_wait_int">Wartezeit</string>
+	<string name="background_service_wait_int_descr">Maximale Suchzeit für jede Hintergrund-Positionsbestimmung</string>
+	<string name="background_service_wait_int">Maximale Suchzeit</string>
 	<string name="service_stop_background_service">Hintergrund-Navigationsdienst ausschalten</string>
 	<string name="where_am_i">Wo bin ich?</string>
 	<string name="process_navigation_service">OsmAnd Navigationsdienst</string>
