@@ -164,6 +164,8 @@ public class IndexUploader {
 				}
 			} catch (OneFileException e) {
 				log.error(f.getName() + ": " + e.getMessage(), e);
+			} catch (RuntimeException e) {
+				log.error(f.getName() + ": " + e.getMessage(), e);
 			}
 		}
 	}
