@@ -53,6 +53,7 @@ public class BinaryMapIndexReader {
 	
 	private final RandomAccessFile raf;
 	private int version;
+	// keep them immutable inside
 	private List<MapIndex> mapIndexes = new ArrayList<MapIndex>();
 	private List<PoiRegion> poiIndexes = new ArrayList<PoiRegion>();
 	private List<AddressRegion> addressIndexes = new ArrayList<AddressRegion>();
@@ -67,6 +68,21 @@ public class BinaryMapIndexReader {
 	
 	public BinaryMapIndexReader(final RandomAccessFile raf) throws IOException {
 		this(raf, false);
+	}
+	
+	public BinaryMapIndexReader(final RandomAccessFile raf, BinaryMapIndexReader referenceToSameFile) throws IOException {
+		this.raf = raf;
+		codedIS = CodedInputStreamRAF.newInstance(raf, 1024 * 5);
+		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
+		version = referenceToSameFile.version;
+		transportAdapter = new BinaryMapTransportReaderAdapter(this);
+		addressAdapter = new BinaryMapAddressReaderAdapter(this);
+		poiAdapter = new BinaryMapPoiReaderAdapter(this);
+		mapIndexes = new ArrayList<BinaryMapIndexReader.MapIndex>(referenceToSameFile.mapIndexes);
+		poiIndexes = new ArrayList<PoiRegion>(referenceToSameFile.poiIndexes);
+		addressIndexes = new ArrayList<AddressRegion>(referenceToSameFile.addressIndexes);
+		transportIndexes = new ArrayList<TransportIndex>(referenceToSameFile.transportIndexes);
+		indexes = new ArrayList<BinaryIndexPart>(referenceToSameFile.indexes);
 	}
 	
 	public BinaryMapIndexReader(final RandomAccessFile raf, boolean readOnlyMapData) throws IOException {
