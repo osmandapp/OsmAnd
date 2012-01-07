@@ -29,7 +29,6 @@ import net.osmand.osm.io.OsmBaseStorage;
 import net.osmand.plus.OpenstreetmapsDbHelper;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 
 import org.apache.commons.logging.Log;
 import org.apache.http.HttpResponse;
@@ -44,7 +43,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
-
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlSerializer;
 
@@ -87,6 +85,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		this.view = view;
 	}
 
+	@Override
 	public EntityInfo getEntityInfo() {
 		return entityInfo;
 	}
@@ -329,6 +328,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		}
 	}
 
+	@Override
 	public boolean commitNodeImpl(Action action, Node n, EntityInfo info, String comment){
 		if (isNewChangesetRequired()){
 			changeSetId = openChangeSet(comment);
@@ -395,7 +395,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				OsmBaseStorage st = new OsmBaseStorage();
 				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true); //$NON-NLS-1$
 				EntityId id = new Entity.EntityId(EntityType.NODE, nodeId);
-				Node entity = (Node) st.getRegisteredEntities().get(id);
+//				Node entity = (Node) st.getRegisteredEntities().get(id);
 				entityInfo = st.getRegisteredEntityInfo().get(id);
 				return entityInfo;
 			}
@@ -410,6 +410,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		return null;
 	}
 
+	@Override
 	public Node loadNode(Amenity n) {
 		if(n.getId() % 2 == 1){
 			// that's way id

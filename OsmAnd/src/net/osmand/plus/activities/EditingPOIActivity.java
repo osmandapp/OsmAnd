@@ -54,6 +54,7 @@ public class EditingPOIActivity implements DialogProvider {
 	private EditText openingHours;
 	private EditText commentText;
 
+//	private final static Log log = LogUtil.getLog(EditingPOIActivity.class);
 
 	/* dialog stuff */
 	private static final int DIALOG_CREATE_POI = 200;

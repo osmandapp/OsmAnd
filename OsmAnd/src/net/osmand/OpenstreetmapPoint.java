@@ -95,6 +95,7 @@ public class OpenstreetmapPoint implements Serializable {
 		this.stored = stored;
 	}
 
+	@Override
 	public String toString() {
 		return new StringBuffer("Openstreetmap Point ").append(this.getAction()).append(" ").append(this.getName())
 			.append(" (").append(this.getId()).append("): [")

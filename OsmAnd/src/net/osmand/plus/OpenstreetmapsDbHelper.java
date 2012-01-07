@@ -1,15 +1,12 @@
 package net.osmand.plus;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import net.osmand.OpenstreetmapPoint;
 import net.osmand.OpenstreetmapRemoteUtil;
 import net.osmand.osm.Node;
 import net.osmand.osm.OSMSettings.OSMTagKey;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -35,11 +32,11 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 			OPENSTREETMAP_COL_ACTION + " TEXT, " + OPENSTREETMAP_COL_COMMENT + " TEXT, " + OPENSTREETMAP_COL_OPENINGHOURS + " TEXT);"; //$NON-NLS-1$ //$NON-NLS-2$ 
 	
 	private List<OpenstreetmapPoint> cachedOpenstreetmapPoints = new ArrayList<OpenstreetmapPoint>();
-	private final Context context;
+//	private final Context context;
 
 	public OpenstreetmapsDbHelper(Context context) {
 		super(context, OPENSTREETMAP_DB_NAME, null, DATABASE_VERSION);
-		this.context = context;
+//		this.context = context;
 	}
 	
 	@Override

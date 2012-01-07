@@ -2,25 +2,18 @@ package net.osmand;
 
 import java.util.Map;
 
-import net.osmand.OpenstreetmapPoint;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
-import net.osmand.osm.Entity;
-import net.osmand.osm.Entity.EntityId;
-import net.osmand.osm.Entity.EntityType;
 import net.osmand.osm.EntityInfo;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.OSMSettings.OSMTagKey;
-import net.osmand.plus.R;
 import net.osmand.plus.OpenstreetmapsDbHelper;
 
 import org.apache.commons.logging.Log;
 
 import android.content.Context;
-import android.util.Xml;
-import android.widget.Toast;
 
 public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 	
@@ -34,10 +27,12 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		this.db = new OpenstreetmapsDbHelper(ctx);
 	}
 
+	@Override
 	public EntityInfo getEntityInfo() {
 		return new EntityInfo();
 	}
 	
+	@Override
 	public boolean commitNodeImpl(Action action, Node n, EntityInfo info, String comment){
 		OpenstreetmapPoint p = new OpenstreetmapPoint();
 		p.setEntity(n);
@@ -46,6 +41,7 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		return db.addOpenstreetmap(p);
 	}
 	
+	@Override
 	public Node loadNode(Amenity n) {
 		if(n.getId() % 2 == 1){
 			// that's way id
@@ -53,7 +49,7 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		}
 		long nodeId = n.getId() >> 1;
 
-		EntityId id = new Entity.EntityId(EntityType.NODE, nodeId);
+//		EntityId id = new Entity.EntityId(EntityType.NODE, nodeId);
 		Node entity = new Node(n.getLocation().getLatitude(),
 							   n.getLocation().getLongitude(),
 							   nodeId);
