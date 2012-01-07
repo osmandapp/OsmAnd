@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu
-  xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:id="@+id/Exit" android:title="Exit" android:orderInCategory="2"></item>
-<item android:menuCategory="container" android:title="Clear All" android:alphabeticShortcut="A" android:id="@+id/Clear" android:orderInCategory="1"></item>
-
-<item android:id="@+id/Export" android:title="Export To File"></item>
-</menu>
