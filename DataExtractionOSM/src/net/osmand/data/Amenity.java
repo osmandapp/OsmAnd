@@ -17,6 +17,7 @@ public class Amenity extends MapObject {
 	private AmenityType type;
 	private String openingHours;
 	private String phone;
+	private String description;
 	private String site;
 
 	public Amenity(Entity entity, AmenityType type, String subtype){
@@ -47,6 +48,7 @@ public class Amenity extends MapObject {
 				}
 			}
 		}
+		this.description = entity.getTag(OSMTagKey.DESCRIPTION);
 	}
 
 	@Override
@@ -149,6 +151,14 @@ public class Amenity extends MapObject {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	

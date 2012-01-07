@@ -969,6 +969,9 @@ public class MapRenderingTypes {
 		amenityTagValToType.put("amenity", AmenityType.OTHER);  //$NON-NLS-1$
 		amenityTagValToType.put("place", AmenityType.ADMINISTRATIVE);  //$NON-NLS-1$
 		amenityTagValToType.put("sport", AmenityType.SPORT);  //$NON-NLS-1$
+		
+		amenityTagValToType.put("osmwiki", AmenityType.OSMWIKI);  //$NON-NLS-1$
+		amenityTagValToType.put("user_defined", AmenityType.USER_DEFINED);  //$NON-NLS-1$
 	}
 	
 	

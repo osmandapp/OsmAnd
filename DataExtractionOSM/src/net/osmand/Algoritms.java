@@ -121,6 +121,9 @@ public class Algoritms {
 	}
 	
 	public static boolean removeAllFiles(File f) {
+		if (f == null) {
+			return false;
+		}
 		if (f.isDirectory()) {
 			for (File c : f.listFiles()) {
 				removeAllFiles(c);

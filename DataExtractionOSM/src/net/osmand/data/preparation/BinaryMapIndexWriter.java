@@ -893,7 +893,7 @@ public class BinaryMapIndexWriter {
 	}
 
 	public void writePoiDataAtom(long id, int x24shift, int y24shift, String nameEn, String name, TIntArrayList types, String openingHours,
-			String site, String phone) throws IOException {
+			String site, String phone, String description) throws IOException {
 		checkPeekState(POI_DATA);
 		
 		OsmAndPoiBoxDataAtom.Builder builder = OsmandOdb.OsmAndPoiBoxDataAtom.newBuilder();
@@ -919,6 +919,9 @@ public class BinaryMapIndexWriter {
 		}
 		if(!Algoritms.isEmpty(phone)){
 			builder.setPhone(phone);
+		}
+		if(!Algoritms.isEmpty(description)){
+			builder.setNote(description);
 		}
 		
 		codedOutStream.writeMessage(OsmandOdb.OsmAndPoiBoxData.POIDATA_FIELD_NUMBER, builder.build());
