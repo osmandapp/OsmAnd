@@ -2,7 +2,6 @@ package net.osmand.plus.activities;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.StringTokenizer;
 

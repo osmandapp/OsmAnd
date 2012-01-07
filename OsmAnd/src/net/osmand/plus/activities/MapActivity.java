@@ -59,7 +59,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
 import android.provider.Settings.Secure;
 import android.util.Log;
 import android.view.KeyEvent;

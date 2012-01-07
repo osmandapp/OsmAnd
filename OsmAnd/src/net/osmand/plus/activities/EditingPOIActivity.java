@@ -1,13 +1,5 @@
 package net.osmand.plus.activities;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.MalformedURLException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -15,34 +7,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import net.osmand.Base64;
-import net.osmand.LogUtil;
-import net.osmand.OsmAndFormatter;
 import net.osmand.OpenstreetmapLocalUtil;
-import net.osmand.OpenstreetmapUtil;
 import net.osmand.OpenstreetmapRemoteUtil;
-import net.osmand.Version;
+import net.osmand.OpenstreetmapUtil;
+import net.osmand.OsmAndFormatter;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
-import net.osmand.osm.Entity;
 import net.osmand.osm.EntityInfo;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.Node;
-import net.osmand.osm.OpeningHoursParser;
-import net.osmand.osm.Entity.EntityType;
 import net.osmand.osm.OSMSettings.OSMTagKey;
+import net.osmand.osm.OpeningHoursParser;
 import net.osmand.osm.OpeningHoursParser.BasicDayOpeningHourRule;
 import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-
-import org.apache.commons.logging.Log;
-
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -70,7 +54,7 @@ public class EditingPOIActivity implements DialogProvider {
 	private EditText openingHours;
 	private EditText commentText;
 
-	private final static Log log = LogUtil.getLog(EditingPOIActivity.class);
+//	private final static Log log = LogUtil.getLog(EditingPOIActivity.class);
 
 	/* dialog stuff */
 	private static final int DIALOG_CREATE_POI = 200;
