@@ -81,7 +81,7 @@ function update_count_of_downloads($file) {
  //}
  set_time_limit(0);
  $xml = simplexml_load_file("indexes.xml");
- $res = $xml->xpath('//download[@name="'.$file.'"]');
+ $res = $xml->xpath('//region[@name="'.$file.'"]');
  if (count($res) > 0) {
  	$node = $res[0];
  	if($node["local"]) {
