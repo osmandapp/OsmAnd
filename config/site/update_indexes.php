@@ -122,6 +122,10 @@ function updateGoogleCodeIndexes($update=false) {
 						continue;
 					}
 					$out = $mapNodes[$indexName];
+					if($out -> getAttribute("parts")) {
+						$out = $output->createElement( "region" );
+						$outputIndexes->appendChild($out);
+					}
 				} else {
 					$out = $output->createElement( "region" );
 					$outputIndexes->appendChild($out);

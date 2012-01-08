@@ -27,7 +27,7 @@
 <h1><?php echo "Table of indexes hosted on osmand.net"; ?></h1>
 <table border="1">
 <?php
-   $res = $xpath->query('//region');
+   $res = $xpath->query('//region[@local]');
    if($res && $res->length > 0) {
 		foreach($res as $node) {
 		  if (file_exists('indexes/'.$node->getAttribute('name'))) {
@@ -44,16 +44,16 @@
 <table border="1">
 <?php
    $res = $xpath->query('//region');
-   if($res && $res->length > 0) { 	 
-	   
-		foreach($res as $node) {
-     		if (!file_exists('indexes/'.$node->getAttribute('name'))) {
-		  echo "<tr><td>".$node->getAttribute('name')."</td><td>".$node->getAttribute('date').
+   if($res && $res->length > 0) {
+
+   	foreach($res as $node) {
+   		if (!file_exists('indexes/'.$node->getAttribute('name') && !$node->getAttribute('local'))) {
+   			echo "<tr><td>".$node->getAttribute('name')."</td><td>".$node->getAttribute('date').
 		   "</td><td>".$node->getAttribute('size')."</td><td>".
-				$node->getAttribute('description')."</td></tr>";
-		    }
-      }
-    }			
+   			$node->getAttribute('description')."</td></tr>";
+   		}
+   	}
+   }
 ?>
 </table>
 
