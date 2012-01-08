@@ -299,7 +299,9 @@ public class WikiIndexer {
 						}
 					} else if (name.equals("text")) {
 						if(parseText) {
-							log.debug("Article accepted " + cid + " " + title.toString());
+							if(id % 50 == 0) {
+								log.debug("Article accepted " + cid + " " + title.toString());
+							}
 							analyzeTextForGeoInfoNew();
 						}
 						ctext = null;
@@ -478,32 +480,38 @@ public class WikiIndexer {
 		
 		private void analyzeTextForGeoInfoNew() throws XMLStreamException {
 			StringBuilder description = new StringBuilder();
-			int beg = 0;
-			int h = findOpenBrackets(beg);
-			
-			// 1. Find main header section {{ ... lat, lon }}
-			while (h != -1 && text.substring(beg, h).trim().length() == 0 ) {
-				beg = findClosedBrackets(h);
-				if(beg == -1){
-					return;
-				}
-				beg += 2;
-				h = findOpenBrackets(beg);
+			try {
 				
-			}
+				int beg = 0;
+				int h = findOpenBrackets(beg);
+				
+				// 1. Find main header section {{ ... lat, lon }}
+				while (h != -1 && text.substring(beg, h).trim().length() == 0 ) {
+					beg = findClosedBrackets(h);
+					if(beg == -1){
+						return;
+					}
+					beg += 2;
+					h = findOpenBrackets(beg);
+					
+				}
 
-			// 3. Parse main subcategory name
+				// 3. Parse main subcategory name
 //			for (int j = h + 2; j < e; j++) {
 //				if (Character.isWhitespace(text.charAt(j)) || text.charAt(j) == '|') {
 //					subcategory = text.substring(h + 2, j).trim();
 //					break;
 //				}
 //			}
-			// Special case
+				// Special case
 
-			// 4. Parse main subcategory name
-			processDescription(description, beg);
+				// 4. Parse main subcategory name
+				processDescription(description, beg);
 
+			} catch (RuntimeException e) {
+				description.setLength(0);
+				log.error(e.getMessage(), e);
+			}
 			if (description.length() > 0) {
 				writeNode(clat, clon, subcategory, description);
 			}
@@ -513,7 +521,7 @@ public class WikiIndexer {
 			if (text.charAt(i) != start.charAt(0)) {
 				return -1;
 			}
-			for (int j = 1; j < start.length(); j++) {
+			for (int j = 1; j < start.length() && i + j < text.length(); j++) {
 				if (text.charAt(i + j) != start.charAt(j)) {
 					return -1;
 				}
