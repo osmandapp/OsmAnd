@@ -75,13 +75,21 @@ function update_count_of_downloads($file) {
    die(1);
  }
  $file = $_GET['file'];
- //Victor says not needed if we have awstats statistics per file
+ // not used now
  //if(!isset($_SERVER['HTTP_RANGE']) ) {
  // update_count_of_downloads($file) ;
  //}
  set_time_limit(0);
- if(isset($_GET['direct']) or !url_exists('http://osmand.googlecode.com/files/'.$file)) {
-    downloadFile('indexes/'.$file);
+ $xml = simplexml_load_file("indexes.xml");
+ $res = $xml->xpath('//download[@name="'.$file.'"]');
+ if (count($res) > 0) {
+ 	$node = $res[0];
+ 	if($node["local"]) {
+ 		downloadFile('indexes/'.$file);
+ 	}  else {
+ 		header('HTTP/1.1 302 Found');
+ 		header('Location: http://osmand.googlecode.com/files/'.$file);
+ 	}
  } else {
     header('HTTP/1.1 302 Found');
     header('Location: http://osmand.googlecode.com/files/'.$file);
