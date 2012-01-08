@@ -287,9 +287,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	@Override
 	public OnClickListener getActionListener(List<String> actionsList, Object o) {
 		final Amenity a = (Amenity) o;
-		actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_modify));
-		actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_delete));
-		int ind = 2;
+		int ind = 0;
 		final int phoneIndex = a.getPhone() != null ? ind++ : -1;
 		final int siteIndex = a.getSite() != null ? ind++ : -1;
 		final int descriptionIndex = a.getDescription() != null ? ind++ : -1;
@@ -302,14 +300,19 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		if(a.getDescription() != null){
 			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_showdescription));
 		}
+		final int modifyInd = ind++;
+		actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_modify));
+		final int deleteInd = ind++;
+		actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_delete));
+		
 		final EditingPOIActivity edit = activity.getPoiActions();
 		return new DialogInterface.OnClickListener(){
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if (which == 0) {
+				if (which == modifyInd) {
 					edit.showEditDialog(a);
-				} else if(which == 1) {
+				} else if(which == deleteInd) {
 					edit.showDeleteDialog(a);
 				} else if (which == phoneIndex) {
 					try {

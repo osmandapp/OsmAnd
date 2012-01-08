@@ -2,7 +2,6 @@ package net.osmand.plus.activities;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
@@ -197,7 +196,7 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 								}
 								step++;
 							}
-						} else if (ch == '.') {
+						} else if (ch == '.' || ch == ':' ) {
 							// do nothing here
 						} else {
 							if (step == 1) {
