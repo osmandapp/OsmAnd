@@ -274,6 +274,8 @@ public class WikiIndexer {
 					int commEnd = result.indexOf("-->");
 					if(commEnd == -1){
 						commEnd = result.length();
+					} else {
+						commEnd += "-->".length();
 					}
 					return (result.substring(0, commSt) + result.substring(commEnd)).trim();
 				}
