@@ -47,7 +47,7 @@
    if($res && $res->length > 0) {
 
    	foreach($res as $node) {
-   		if (!file_exists('indexes/'.$node->getAttribute('name')) && !$node->getAttribute('local')) {
+   		if (!file_exists('indexes/'.$node->getAttribute('name')) || !$node->getAttribute('local')) {
    			echo "<tr><td>".$node->getAttribute('name')."</td><td>".$node->getAttribute('date').
 		   "</td><td>".$node->getAttribute('size')."</td><td>".
    			$node->getAttribute('description')."</td></tr>";

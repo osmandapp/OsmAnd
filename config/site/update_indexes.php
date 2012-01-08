@@ -123,6 +123,7 @@ function updateGoogleCodeIndexes($update=false) {
 					}
 					$out = $mapNodes[$indexName];
 					if($out -> getAttribute("parts")) {
+						$outputIndexes->removeChild($out);
 						$out = $output->createElement( "region" );
 						$outputIndexes->appendChild($out);
 					}
