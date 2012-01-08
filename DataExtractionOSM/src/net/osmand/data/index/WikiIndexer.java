@@ -268,7 +268,16 @@ public class WikiIndexer {
 				}
 			}
 			if(sr != -1) {
-				return text.substring(sr, se).trim();
+				String result = text.substring(sr, se);
+				int commSt = result.indexOf("<!--");
+				if(commSt != -1) {
+					int commEnd = result.indexOf("-->");
+					if(commEnd == -1){
+						commEnd = result.length();
+					}
+					return (result.substring(0, commSt) + result.substring(commEnd)).trim();
+				}
+				return result.trim();
 			}
 			return null;
 		}
@@ -320,7 +329,7 @@ public class WikiIndexer {
 		
 		private void analyzeTextForGeoInfo() throws XMLStreamException {
 			// fast precheck
-			if(title.toString().endsWith("/doc")) {
+			if(title.toString().endsWith("/doc") || title.toString().startsWith("Шаблон:")) {
 				// Looks as template article no information in it
 				return;
 			}
