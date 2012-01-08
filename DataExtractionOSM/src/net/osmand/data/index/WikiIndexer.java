@@ -351,6 +351,9 @@ public class WikiIndexer {
 				try {
 					String lat_dir = readProperty("lat_dir", h, e);
 					String lon_dir = readProperty("lon_dir", h, e);
+					if(lat_dir.length() == 0 || lon_dir.length() == 0){
+						return;
+					}
 					float lat_deg = Float.parseFloat(readProperty("lat_deg", h, e));
 					float lon_deg = Float.parseFloat(readProperty("lon_deg", h, e));
 					float lat_min = zeroParseFloat(readProperty("lat_min", h, e));
