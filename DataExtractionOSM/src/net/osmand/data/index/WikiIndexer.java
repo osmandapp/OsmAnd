@@ -198,6 +198,7 @@ public class WikiIndexer {
 		long id = 1;
 		private final SAXParser saxParser;
 		private boolean page = false;
+		private boolean revision = false;
 		private StringBuilder ctext = null;
 
 		private StringBuilder title = new StringBuilder();
@@ -253,7 +254,9 @@ public class WikiIndexer {
 						text.setLength(0);
 						ctext = text;
 					}
-				} else if (name.equals("id")) {
+				} else if (name.equals("revision")) {
+					revision  = true;
+				} else if (name.equals("id") && !revision) {
 					pageId.setLength(0);
 					ctext = pageId;
 				}
@@ -280,7 +283,9 @@ public class WikiIndexer {
 						progress.remaining(progIS.available());
 					} else if (name.equals("title")) {
 						ctext = null;
-					} else if (name.equals("id")) {
+					} else if (name.equals("revision")) {
+						revision = false;
+					} else if (name.equals("id") && !revision) {
 						ctext = null;
 						cid = Long.parseLong(pageId.toString());
 						dbStat.setLong(1, cid);
