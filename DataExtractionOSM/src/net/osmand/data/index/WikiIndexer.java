@@ -258,13 +258,13 @@ public class WikiIndexer {
 			}
 			int sr = -1;
 			int se = e;
-			for(int i = res + prop.length() + 1; i<e; i++){
-				if(sr == -1 ) {
-					if(text.charAt(i) != '=' && !Character.isWhitespace(text.charAt(i))) {
+			for (int i = res  + 1; i < e; i++) {
+				if (sr == -1) {
+					if (text.charAt(i) != '=' && !Character.isWhitespace(text.charAt(i))) {
 						sr = i;
 					}
 				} else {
-					if(text.charAt(i) == '|') {
+					if (text.charAt(i) == '|') {
 						se = i;
 						break;
 					}

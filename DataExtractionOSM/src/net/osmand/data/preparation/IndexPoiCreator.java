@@ -217,6 +217,8 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		int minY = Integer.MAX_VALUE;
 		int maxY = 0;
 		int count = 0;
+		ConsoleProgressImplementation console = new ConsoleProgressImplementation();
+		console.startWork(1000000);
 		while (rs.next()) {
 			int x = rs.getInt(1);
 			int y = rs.getInt(2);
@@ -226,7 +228,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 			maxY = Math.max(y, maxY);
 			if(count++ > 10000){
 				count = 0;
-				log.info("proccess 10000 entities");
+				console.progress(10000);
 			}
 
 			String name = rs.getString(3);
