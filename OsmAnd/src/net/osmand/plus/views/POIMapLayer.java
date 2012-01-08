@@ -15,6 +15,8 @@ import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.EditingPOIActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.RenderingIcons;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -290,11 +292,15 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		int ind = 2;
 		final int phoneIndex = a.getPhone() != null ? ind++ : -1;
 		final int siteIndex = a.getSite() != null ? ind++ : -1;
+		final int descriptionIndex = a.getDescription() != null ? ind++ : -1;
 		if(a.getPhone() != null){
 			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_call));
 		}
 		if(a.getSite() != null){
 			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_website));
+		}
+		if(a.getDescription() != null){
+			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_showdescription));
 		}
 		final EditingPOIActivity edit = activity.getPoiActions();
 		return new DialogInterface.OnClickListener(){
@@ -323,12 +329,21 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 						log.error("Failed to invoke call", e); //$NON-NLS-1$
 						Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
 					}
+				} else if (which == descriptionIndex) {
+					showDescriptionDialog(a);
 				} else {
 				}
 			}
 		};
 	}
 
+	private void showDescriptionDialog(Amenity a) {
+		Builder bs = new AlertDialog.Builder(view.getContext());
+		bs.setTitle(OsmAndFormatter.getPoiSimpleFormat(a, view.getContext(), view.getSettings().USE_ENGLISH_NAMES.get()));
+		bs.setMessage(a.getDescription());
+		bs.show();
+	}
+	
 	@Override
 	public String getObjectDescription(Object o) {
 		if(o instanceof Amenity){

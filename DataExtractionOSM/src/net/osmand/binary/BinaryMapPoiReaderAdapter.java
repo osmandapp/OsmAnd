@@ -618,6 +618,9 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiBoxDataAtom.PHONE_FIELD_NUMBER:
 				am.setPhone(codedIS.readString());
 				break;
+			case OsmandOdb.OsmAndPoiBoxDataAtom.NOTE_FIELD_NUMBER:
+				am.setDescription(codedIS.readString());
+				break;
 			default:
 				skipUnknownField(t);
 				break;
