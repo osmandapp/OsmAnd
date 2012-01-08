@@ -232,7 +232,11 @@ public class IndexUploader {
 			throw new OneFileException("Not supported file format " + fileName);
 		}
 
-		String regionName = fileName.substring(0, fileName.lastIndexOf('_', fileName.indexOf('.')));
+		int last = fileName.lastIndexOf('_', fileName.indexOf('.'));
+		if (last == -1) {
+			last = fileName.indexOf('.');
+		}
+		String regionName = fileName.substring(0, last);
 		summary += regionName;
 		summary = summary.replace('_', ' ');
 
