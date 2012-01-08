@@ -372,7 +372,7 @@ public class WikiIndexer {
 					float lat_sec = zeroParseFloat(readProperty("lat_sec", h, e));
 					float lon_sec = zeroParseFloat(readProperty("lon_sec", h, e));
 					lat = (("S".equals(lat_dir))? -1 : 1) * (lat_deg + (lat_min + lat_sec/60)/60);
-					lon = (("E".equals(lon_dir))? -1 : 1) * (lon_deg + (lon_min + lon_sec/60)/60);
+					lon = (("W".equals(lon_dir))? -1 : 1) * (lon_deg + (lon_min + lon_sec/60)/60);
 				} catch (RuntimeException es) {
 					log.error("Article " + title, es);
 					return;
