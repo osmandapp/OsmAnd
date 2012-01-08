@@ -125,9 +125,9 @@
 	<string name="favorite_places_category">Miesta</string>
 	<string name="favorite_default_category">Iné</string>
 
-    <string name="vector_map_not_needed">Nepotrebné</string>
-	<string name="basemap_missing">Chýba základná mapa sveta. Prosím, zvážte jej stiahnutie pre správnu funkciu.</string>
-	<string name="vector_data_missing">Palubné údaje chýbajú na SD karte. Prosím, zvážte ich stiahnutie pre použitie máp bez internetu.</string>
+    <string name="vector_map_not_needed">Netreba</string>
+	<string name="basemap_missing">Chýba základná mapa sveta(World Basemap). Prosím, zvážte jej stiahnutie pre správnu funkčnosť.</string>
+	<string name="vector_data_missing">Na SD karte chýbajú palubné údaje. Prosím, zvážte ich stiahnutie pre použitie máp bez internetu.</string>
 	<string name="local_index_gpx_info_show">\n\nDlhým kliknutím sa zobrazí na mape</string>
 	<string name="local_index_gpx_info_speed">\nPriemerná rýchlosť : %1$s \nMaximálna rýchlosť : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nPriemerná nadm. výška : %1$.0f metrov\nNajnižšia nadm. výška : %2$.0f metrov\nNajvyššia nadm. výška : %3$.0f metrov\nStúpanie hore : %4$.0f metrov\nStúpanie dole : %5$.0f metrov</string>
@@ -316,7 +316,7 @@
 	<string name="amenity_type_manmade">Človekom vytvorené</string>
 	<string name="amenity_type_military">Armáda</string>
 	<string name="amenity_type_natural">Príroda</string>
-	<string name="amenity_type_office">Kancelária</string>
+	<string name="amenity_type_office">Kancelárie</string>
 	<string name="amenity_type_other">Iné</string>
 	<string name="amenity_type_shop">Nakupovanie</string>
 	<string name="amenity_type_sport">Šport</string>
@@ -699,7 +699,7 @@
 <string name="choose_available_region">Vybrať oblasť zo zoznamu</string>
 <string name="choose_intersected_street">Vybrať pretínajúcu ulicu</string>
 <string name="Closest_Amenities">Najbližšie body záujmu</string>
-<string name="app_mode_default">Štandardný(tiež nastaví štand. hodnoty)</string>
+<string name="app_mode_default">Štandardný(znovunastaví štand. hodnoty)</string>
 <string name="app_mode_car">Automobil</string>
 <string name="app_mode_bicycle">Bicykel</string>
 <string name="app_mode_pedestrian">Chodec</string>
