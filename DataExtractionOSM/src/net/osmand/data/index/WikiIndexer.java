@@ -331,7 +331,8 @@ public class WikiIndexer {
 		
 		private void analyzeTextForGeoInfo() throws XMLStreamException {
 			// fast precheck
-			if(title.toString().endsWith("/doc") || title.toString().startsWith("Шаблон:")) {
+			if(title.toString().endsWith("/doc") || title.toString().startsWith("Шаблон:") ||
+					title.toString().startsWith("Template:")) {
 				// Looks as template article no information in it
 				return;
 			}
