@@ -263,7 +263,7 @@ public class WikiIndexer {
 					se = i;
 					break;
 				}
-				if (text.charAt(i) != '=') {
+				if (text.charAt(i) == '=') {
 					sr = i + 1;
 				}
 			}
@@ -351,11 +351,13 @@ public class WikiIndexer {
 				try {
 					String lat_dir = readProperty("lat_dir", h, e);
 					String lon_dir = readProperty("lon_dir", h, e);
-					if(lat_dir.length() == 0 || lon_dir.length() == 0){
+					String lat_dg = readProperty("lat_deg", h, e);
+					String lon_dg = readProperty("lon_deg", h, e);
+					if(lat_dg.length() == 0 || lon_dg.length() == 0){
 						return;
 					}
-					float lat_deg = Float.parseFloat(readProperty("lat_deg", h, e));
-					float lon_deg = Float.parseFloat(readProperty("lon_deg", h, e));
+					float lat_deg = Float.parseFloat(lat_dg);
+					float lon_deg = Float.parseFloat(lon_dg);
 					float lat_min = zeroParseFloat(readProperty("lat_min", h, e));
 					float lon_min = zeroParseFloat(readProperty("lon_min", h, e));
 					float lat_sec = zeroParseFloat(readProperty("lat_sec", h, e));
