@@ -170,7 +170,7 @@ public class WikiIndexer {
 			ConsoleProgressImplementation progress = new ConsoleProgressImplementation();
 			out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(osmOut), "UTF-8"));
 			SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
-			WikiOsmHandler wikiOsmHandler = new WikiOsmHandler(saxParser, out, progress, progressStream, statement);
+			WikiOsmHandler wikiOsmHandler = new WikiOsmHandler(saxParser, out, progress, progressStream, statement, wikiLocale);
 			saxParser.parse(fi, wikiOsmHandler);
 
 			statement.close();
@@ -205,6 +205,7 @@ public class WikiIndexer {
 		private StringBuilder pageId = new StringBuilder();
 		private float clat = 0;
 		private float clon = 0;
+		private long cid;
 		private String subcategory = null;
 		private boolean parseText = false;
 
@@ -212,14 +213,17 @@ public class WikiIndexer {
 		private final InputStream progIS;
 		private XMLStreamWriter streamWriter;
 		private final PreparedStatement dbStat;
+		private final String locale;
+		
 
 		WikiOsmHandler(SAXParser saxParser, BufferedWriter outOsm, ConsoleProgressImplementation progress, InputStream progIS, 
-				PreparedStatement dbStat)
+				PreparedStatement dbStat, String wikiLocale)
 				throws IOException, XMLStreamException {
 			this.saxParser = saxParser;
 			this.progress = progress;
 			this.progIS = progIS;
 			this.dbStat = dbStat;
+			this.locale = wikiLocale;
 			XMLOutputFactory xof = XMLOutputFactory.newInstance();
 			streamWriter = xof.createXMLStreamWriter(outOsm);
 			streamWriter.writeStartDocument();
@@ -278,8 +282,8 @@ public class WikiIndexer {
 						ctext = null;
 					} else if (name.equals("id")) {
 						ctext = null;
-						long pid = Long.parseLong(pageId.toString());
-						dbStat.setLong(1, pid);
+						cid = Long.parseLong(pageId.toString());
+						dbStat.setLong(1, cid);
 						ResultSet rs = dbStat.executeQuery();
 						parseText = false;
 						if(rs.next()) {
@@ -290,6 +294,7 @@ public class WikiIndexer {
 						}
 					} else if (name.equals("text")) {
 						if(parseText) {
+							log.debug("Article accepted " + cid + " " + title.toString());
 							analyzeTextForGeoInfoNew();
 						}
 						ctext = null;
@@ -467,7 +472,6 @@ public class WikiIndexer {
 		}
 		
 		private void analyzeTextForGeoInfoNew() throws XMLStreamException {
-			// fast precheck
 			StringBuilder description = new StringBuilder();
 			int beg = 0;
 			int h = findOpenBrackets(beg);
@@ -578,7 +582,8 @@ public class WikiIndexer {
 		private void writeNode(double lat, double lon, String subcategory, StringBuilder description) throws XMLStreamException {
 			streamWriter.writeCharacters("\n");
 			streamWriter.writeStartElement("node");
-			streamWriter.writeAttribute("id", "-" + id++);
+			id++;
+			streamWriter.writeAttribute("id", "-" + cid);
 			streamWriter.writeAttribute("lat", lat + "");
 			streamWriter.writeAttribute("lon", lon + "");
 
@@ -587,6 +592,13 @@ public class WikiIndexer {
 			streamWriter.writeAttribute("k", "name");
 			streamWriter.writeAttribute("v", title.toString());
 			streamWriter.writeEndElement();
+			
+			streamWriter.writeCharacters("\n  ");
+			streamWriter.writeStartElement("tag");
+			streamWriter.writeAttribute("k", "wikipedia");
+			streamWriter.writeAttribute("v", locale + ":"+title.toString());
+			streamWriter.writeEndElement();
+			
 
 			streamWriter.writeCharacters("\n  ");
 			streamWriter.writeStartElement("tag");
