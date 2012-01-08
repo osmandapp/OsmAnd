@@ -247,8 +247,8 @@ public class WikiIndexer {
 							break;
 						}
 					}
-					if(!neq){
-						res = i;
+					if (!neq) {
+						res = i + prop.length();
 						break;
 					}
 				}
@@ -258,7 +258,7 @@ public class WikiIndexer {
 			}
 			int sr = -1;
 			int se = e;
-			for (int i = res  + 1; i < e; i++) {
+			for (int i = res ; i < e; i++) {
 				if (sr == -1) {
 					if (text.charAt(i) != '=' && !Character.isWhitespace(text.charAt(i))) {
 						sr = i;
@@ -384,9 +384,6 @@ public class WikiIndexer {
 				if(description.length() > 0) {
 					writeNode(lat, lon, subcategory, description);
 				}
-	            System.out.println("Point " + title + " " + subcategory  + " Lon:" + lat + " Lon:" + lon + " " );
-	            System.out.println("Description : " + description.toString().trim());
-	            System.out.println("---------------------");
 			}
 		}
 		
