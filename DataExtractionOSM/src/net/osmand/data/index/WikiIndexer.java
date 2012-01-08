@@ -147,7 +147,12 @@ public class WikiIndexer {
 		BufferedWriter out = null;
 		try {
 			int in = f.getName().indexOf('.');
-			String wikiLocale = f.getName().substring(in + 1, f.getName().indexOf('.', in));
+			int in2 = f.getName().indexOf('.', in + 1);
+			if (in2 == -1) {
+				log.error("File was not processed " + f.getName() + " please use name <Index-name>.<2Letters-Locale>.xml.bz2");
+				return null;
+			}
+			String wikiLocale = f.getName().substring(in + 1, in2);
 			log.info("Locale for file " + wikiLocale);
 			
 			PreparedStatement statement = dbConnection.prepareStatement("SELECT gc_lat, gc_lon, gc_type FROM coord_"+wikiLocale+"wiki WHERE gc_from=?");
