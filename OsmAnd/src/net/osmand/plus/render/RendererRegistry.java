@@ -23,7 +23,7 @@ public class RendererRegistry {
 	private final static Log log = LogUtil.getLog(RendererRegistry.class);
 	
 	public final static String DEFAULT_RENDER = "default";  //$NON-NLS-1$
-	public final static String WINTER+SKI_RENDER = "winter+ski";  //$NON-NLS-1$
+	public final static String WINTERSKI_RENDER = "winter+ski";  //$NON-NLS-1$
 	
 	private RenderingRulesStorage defaultRender = null;
 	private RenderingRulesStorage currentSelectedRender = null;
@@ -35,7 +35,7 @@ public class RendererRegistry {
 	
 	public RendererRegistry(){
 		internalRenderers.put(DEFAULT_RENDER, "default.render.xml");
-		internalRenderers.put(WINTER+SKI_RENDER, "winter+ski.render.xml");
+		internalRenderers.put(WINTERSKI_RENDER, "winter+ski.render.xml");
 	}
 	
 	public RenderingRulesStorage defaultRender() {
