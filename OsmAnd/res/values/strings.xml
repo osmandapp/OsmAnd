@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="amenity_type_wikiosm">Wikipedia</string>
+	<string name="amenity_type_user_defined">User defined</string>
 	<string name="fav_export_confirmation">File with previously exported favorites already exist. Do you want to replace it? </string>
 <!-- this block re-worked for new menu structure -->
 	<string name="profile_settings">Profile Specific Settings</string>
