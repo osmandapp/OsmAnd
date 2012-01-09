@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="poi_context_menu_showdescription">Zobraziť popis</string>
+	<string name="amenity_type_wikiosm">Wikipedia</string>
+	<string name="amenity_type_user_defined">Užívateľský</string>
 	<string name="fav_export_confirmation">Súbor s predošle exporotvanými obľúbenými bodmi už existuje. Chcete ho nahradiť? </string>
 	<string name="profile_settings">Profilovo špecifické nastavenia</string>
 	<string name="global_settings">Globálne nastavenia</string>
