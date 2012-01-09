@@ -82,7 +82,7 @@
 	<string name="use_transparent_map_theme">Transparent theme</string>
 
 	<string name="native_library_not_supported">Native library is not supported on this device.</string>
-	<string name="init_native_library">Initializing native library...</string>
+	<string name="init_native_library">Initializing native library&#8230;</string>
 	<string name="choose_auto_follow_route">Map view auto follow</string>
 	<string name="choose_auto_follow_route_descr">Time until map view returns to being synchronized with position</string>
 	<string name="auto_follow_route_never">Never</string>
@@ -133,13 +133,13 @@
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_select_point">Select</string>
 	<string name="local_index_description">Download, activate, deactivate, or delete offline data. \nCurrent data on device (%1$s free space):</string>
-	<string name="search_position_current_location_search">Searching position...</string>
+	<string name="search_position_current_location_search">Searching position&#8230;</string>
 	<string name="search_position_current_location_found">Position (Found)</string>
-	<string name="search_position_address">Address...</string>
-	<string name="search_position_favorites">Favorites...</string>
+	<string name="search_position_address">Address&#8230;</string>
+	<string name="search_position_favorites">Favorites&#8230;</string>
 	<string name="search_position_undefined">Undefined</string>
 	<string name="search_position_fixed">Fixed</string>
-	<string name="search_position_current_location">Current position...</string>
+	<string name="search_position_current_location">Current position&#8230;</string>
 	<string name="search_position_map_view">Last map view</string>
 	
 	<string name="select_search_position">Search near :</string>
@@ -196,7 +196,7 @@
 	<string name="local_index_mi_backup">Deactivate</string>
 	<string name="local_index_mi_delete">Delete</string>
 	<string name="local_index_mi_reload">Refresh</string>
-	<string name="local_index_download">Download...</string>
+	<string name="local_index_download">Download&#8230;</string>
 	<string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable : %4$s \nZooms downloaded : %5$s</string>
 	<string name="local_index_poi_data">POI data</string>
 	<string name="local_index_address_data">Address data</string>
@@ -228,7 +228,7 @@
 	</string>
 	<string name="voice_not_use">Do not use</string>
 	<string name="voice_not_specified">None</string>
-	<string name="installing_new_resources">Unpacking new data...</string>
+	<string name="installing_new_resources">Unpacking new data&#8230;</string>
 	<string name="internet_connection_required_for_online_route">You are about to use an online routing service but there is no internet connection. You can try the (still experimental) OsmAnd offline routing service (select in \'Settings\' -> \'Navigation\'.</string>
 	<string name="tts_language_not_supported_title">Language not supported</string>
 	<string name="tts_language_not_supported">The selected language is not supported by the installed Android TTS (text-to-speech) engine. Do you want to go to the Market to look for another TTS engine? Otherwise the preset TTS language will be used.</string>
@@ -239,7 +239,7 @@
 	<string name="gpx_option_destination_point">Use current destination</string>
 	<string name="gpx_option_from_start_point">Pass along entire track</string>
 
-	<string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' -> \'Define view\' -> \'Map Source...\' -> \'Offline vector maps\'.</string>
+	<string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' -> \'Define view\' -> \'Map Source&#8230;\' -> \'Offline vector maps\'.</string>
 	<string name="choose_audio_stream">Voice guidance output</string>
 	<string name="choose_audio_stream_descr">Choose channel to play voice guidance (system-dependent)</string>
 	<string name="voice_stream_voice_call">Voice call audio</string>
@@ -251,10 +251,10 @@
 	<string name="map_transparency_descr">Modify base map transparency</string>
 	<string name="map_transparency">Base map transparency</string>
 	<string name="modify_transparency">Modify transparency</string>
-	<string name="layer_underlay">Underlay map...</string>
+	<string name="layer_underlay">Underlay map&#8230;</string>
 	<string name="map_underlay">Underlay map</string>
 	<string name="map_underlay_descr">Choose underlay map</string>
-	<string name="layer_overlay">Overlay map...</string>
+	<string name="layer_overlay">Overlay map&#8230;</string>
 	<string name="default_none">None</string>
 	<string name="map_overlay">Overlay map</string>
 	<string name="map_overlay_descr">Choose overlay map</string>
@@ -263,7 +263,7 @@
 	<string name="tile_source_already_installed">Map is already installed, settings will be updated</string>
 	<string name="select_tile_source_to_install">Select (tile) maps to install or update</string>
 	<string name="internet_not_available">Internet connection required for operation is not available</string>
-	<string name="install_more">Install more...</string>
+	<string name="install_more">Install more&#8230;</string>
 
 	<string name="tip_update_index">Update of Offline Data</string>
 	<string name="tip_update_index_t">\tHaving up-to-date map data is essential. Osmand provides a download manager which can check for available offline data updates.
@@ -298,7 +298,7 @@
 
 	<string name="tip_map_switch">Map Source</string>
 	<string name="tip_map_switch_t">\tThe fastest way to change the map source and layers displayed is pressing \'Menu\' -> \'Define view\' in map view.
-\n\tUnder \'Map source...\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources, or maps manually created using e.g. OsmAndMapCreator on a PC.
+\n\tUnder \'Map source&#8230;\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources, or maps manually created using e.g. OsmAndMapCreator on a PC.
 \n\tOsmAnd also supports custom sources.</string>
 
 	<string name="tip_app_mode">User Profile</string>
@@ -361,10 +361,10 @@
 	<string name="amenity_type_sustenance">Sustenance</string>
 	<string name="amenity_type_tourism">Tourism</string>
 	<string name="amenity_type_transportation">Transportation</string>
-	<string name="indexing_address">Indexing address...</string>
-	<string name="indexing_map">Indexing map...</string>
-	<string name="indexing_poi">Indexing POI...</string>
-	<string name="indexing_transport">Indexing transport...</string>
+	<string name="indexing_address">Indexing address&#8230;</string>
+	<string name="indexing_map">Indexing map&#8230;</string>
+	<string name="indexing_poi">Indexing POI&#8230;</string>
+	<string name="indexing_transport">Indexing transport&#8230;</string>
 	<string name="input_output_error">I/O error occurred</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
@@ -377,7 +377,7 @@
 	<string name="poi_filter_for_tourists">For tourists</string>
 	<string name="poi_filter_fuel">Fuel</string>
 	<string name="poi_filter_namefinder">Online NameFinder</string>
-	<string name="reading_cached_tiles">Reading cached tiles...</string>
+	<string name="reading_cached_tiles">Reading cached tiles&#8230;</string>
 	<string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
 	<string name="version_index_is_not_supported">The version of index \'\'{0}\'\' is not supported</string>
 
@@ -390,10 +390,10 @@
 
 	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by new the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
-	<string name="downloading_build">Downloading build...</string>
+	<string name="downloading_build">Downloading build&#8230;</string>
 	<string name="install_selected_build">Continue to install OsmAnd - {0} from {1} {2} MB ?</string>
 	<string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
-	<string name="loading_builds">Loading OsmAnd builds...</string>
+	<string name="loading_builds">Loading OsmAnd builds&#8230;</string>
 	<string name="select_build_to_install">Select one of the OsmAnd builds to install</string>
 	<string name="contribution_activity">Special activity for contribution version</string>
 
@@ -453,7 +453,7 @@
 	
 	<string name="map_route_by_gpx">Route using GPX</string>
 	<string name="gpx_files_not_found">GPX files not found in /tracks directory</string>
-	<string name="layer_gpx_layer">GPX track...</string>
+	<string name="layer_gpx_layer">GPX track&#8230;</string>
 	<string name="error_reading_gpx">Error reading GPX data</string>
 
 	<string name="vector_data">Offline vector maps</string>
@@ -487,8 +487,8 @@
 	<string name="layer_favorites">Favorites</string>
 	<string name="layer_osm_bugs">OSM bugs</string>
 	<string name="layer_transport">Transport stops</string>
-	<string name="layer_poi">POI...</string>
-	<string name="layer_map">Map source...</string>
+	<string name="layer_poi">POI&#8230;</string>
+	<string name="layer_map">Map source&#8230;</string>
 	<string name="menu_layers">Define view</string>
 	<string name="continue_follow_previous_route">Previous route was unfinished. Continue following it?</string>
 	<string name="context_menu_item_search_poi">Search POI</string>
@@ -518,14 +518,14 @@
 	<string name="menu_mute_on">Sound is off</string>
 	<string name="voice_provider_descr">Select voice guidance for routing</string>
 	<string name="voice_provider">Voice guidance</string>
-	<string name="voice_data_initializing">Initializing voice data...</string>
+	<string name="voice_data_initializing">Initializing voice data&#8230;</string>
 	<string name="voice_data_not_supported">Unsupported version of voice data</string>
 	<string name="voice_data_corrupted">Specified voice data is corrupted</string>
 	<string name="voice_data_unavailable">Selected voice data is not available</string>
 	<string name="stop_routing">Stop routing</string>
 	<string name="sd_unmounted">SD card is not accessible.\nYou won\'t be able to see maps or find things.</string>
 	<string name="sd_mounted_ro">SD card is read-only.\nYou can only see the preloaded map and can\'t download from the Internet.</string>
-	<string name="unzipping_file">Unzipping file...</string>
+	<string name="unzipping_file">Unzipping file&#8230;</string>
 	<string name="route_tr">Turn right and go</string>
 	<string name="route_tshr">Turn sharply right and go</string>
 	<string name="route_tslr">Turn slightly right and go</string>
@@ -537,7 +537,7 @@
 	<string name="first_time_continue">Continue</string>
 	<string name="first_time_download">Download regions</string>
 	<string name="first_time_msg">Thank you for choosing OsmAnd. \nTo use all features of the application you need some regional offline data, which you can download (Settings, Offline Data) or prepare yourself. Afterwards, you will be able to search by address, search for POIs, and search for public transport.</string>
-	<string name="search_poi_location">Searching signal...</string>
+	<string name="search_poi_location">Searching signal&#8230;</string>
 	<string name="search_near_map">Search near last map location</string>
 	<string name="search_nearby">Search nearby</string>
 	<string name="map_orientation_default">Same as device</string>
@@ -578,11 +578,11 @@
 	<string name="favorite">Favorite</string>
 	<string name="clear_all">Clear all</string>
 	<string name="history">History</string>
-	<string name="uploading_data">Uploading data...</string>
-	<string name="uploading">Uploading...</string>
+	<string name="uploading_data">Uploading data&#8230;</string>
+	<string name="uploading">Uploading&#8230;</string>
 	<string name="search_nothing_found">Nothing found</string>
-	<string name="searching">Searching...</string>
-	<string name="searching_address">Searching address...</string>
+	<string name="searching">Searching&#8230;</string>
+	<string name="searching_address">Searching address&#8230;</string>
 	<string name="search_osm_nominatim">Search address using OSM Nominatim</string>
 	<string name="hint_search_online">House number, street, city</string>
 	<string name="search_offline_address">Offline</string>
@@ -599,9 +599,9 @@
 	<string name="address">Address</string>
 	<string name="download_index_success">Download successful</string>
 	<string name="error_io_error">I/O error occured</string>
-	<string name="downloading_file">Downloading file...</string>
-	<string name="downloading">Downloading...</string>
-	<string name="downloading_list_indexes">Downloading list of available regions...</string>
+	<string name="downloading_file">Downloading file&#8230;</string>
+	<string name="downloading">Downloading&#8230;</string>
+	<string name="downloading_list_indexes">Downloading list of available regions&#8230;</string>
 	<string name="list_index_files_was_not_loaded">The list of regions was not retrieved from osmand.googlecode.com.</string>
     <string name="select_index_file_to_download">If you can\'t find your region, you can make it yourself. See osmand.net</string>
 	<string name="show_poi_on_map">Show on map</string>
@@ -616,18 +616,18 @@
 	<string name="get_directions">Directions</string>
     <string name="show_gps_status">Show GPS Status</string>
 	<string name="opening_hours">Opening hours</string>
-	<string name="opening_changeset">Opening changeset...</string>
-	<string name="closing_changeset">Closing changeset...</string>
-	<string name="commiting_node">Committing node...</string>
-	<string name="loading_poi_obj">Loading POI...</string>
+	<string name="opening_changeset">Opening changeset&#8230;</string>
+	<string name="closing_changeset">Closing changeset&#8230;</string>
+	<string name="commiting_node">Committing node&#8230;</string>
+	<string name="loading_poi_obj">Loading POI&#8230;</string>
 	<string name="auth_failed">Authorization failed</string>
 	<string name="failed_op">failed</string>
-	<string name="converting_names">Converting native/English names...</string>
-	<string name="loading_streets_buildings">Loading streets/buildings...</string>
-	<string name="loading_postcodes">Loading postcodes...</string>
-	<string name="loading_streets">Loading streets...</string>
-	<string name="loading_cities">Loading cities...</string>
-	<string name="loading">Loading...</string>
+	<string name="converting_names">Converting native/English names&#8230;</string>
+	<string name="loading_streets_buildings">Loading streets/buildings&#8230;</string>
+	<string name="loading_postcodes">Loading postcodes&#8230;</string>
+	<string name="loading_streets">Loading streets&#8230;</string>
+	<string name="loading_cities">Loading cities&#8230;</string>
+	<string name="loading">Loading&#8230;</string>
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">Error while saving GPX</string>
 	<string name="error_calculating_route">Error calculating route</string>
@@ -638,10 +638,10 @@
 	<string name="invalid_locations">Coordinates are invalid!</string>
 	<string name="go_back_to_osmand">Go back to OsmAnd map</string>
 	<string name="close">Close</string>
-	<string name="loading_data">Loading data...</string>
-	<string name="reading_indexes">Reading local data...</string>
+	<string name="loading_data">Loading data&#8230;</string>
+	<string name="reading_indexes">Reading local data&#8230;</string>
 	<string name="previous_run_crashed">Previous application run crashed. Log file is at {0}. Please report the issue and attach log file.</string>
-	<string name="saving_gpx_tracks">Saving GPX tracks to SD...</string>
+	<string name="saving_gpx_tracks">Saving GPX tracks to SD&#8230;</string>
 	<string name="finished_task">Finished</string>
     <string name="reload_indexes_descr">Re-read offline vector maps and data from SD card</string>
     <string name="reload_indexes">Re-read offline data</string>
