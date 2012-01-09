@@ -312,10 +312,13 @@ public class WikiIndexer {
 							subcategory = subcategory.toLowerCase();
 						}
 					} else if (name.equals("text")) {
+						log.info("End text");
 						if(!parseText && RECOGNIZE_ENGLISH) {
+							log.info("Match english " + text);
 							tryToMatchEnglish();
 						}
 						if (parseText) {
+							log.info("parse text " + "Article accepted " + cid + " " + title.toString());
 							if(id % 500 == 0) {
 								log.debug("Article accepted " + cid + " " + title.toString());
 							}
