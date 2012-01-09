@@ -401,9 +401,10 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 				if(which == 0){
 					int z = settings.getLastKnownMapZoom();
 					String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.usingEnglishNames());
+					String name = getString(R.string.poi)+" : " + poiSimpleFormat;
 					settings.setMapLocationToShow( 
 							amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 
-							Math.max(16, z), getString(R.string.poi)+" : " + poiSimpleFormat); //$NON-NLS-1$
+							Math.max(16, z), name, name, amenity);
 				} else if(which == 1){
 					LatLon l = amenity.getLocation();
 					String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.usingEnglishNames());
@@ -512,8 +513,9 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		int z = settings.getLastKnownMapZoom();
 		Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
 		String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, this, settings.usingEnglishNames());
+		String name = getString(R.string.poi)+" : " + poiSimpleFormat;
 		settings.setMapLocationToShow( amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 
-				Math.max(16, z), getString(R.string.poi)+" : " + poiSimpleFormat); //$NON-NLS-1$
+				Math.max(16, z), name, name, amenity); //$NON-NLS-1$
 		MapActivity.launchMapActivityMoveToTop(SearchPOIActivity.this);
 	}
 	

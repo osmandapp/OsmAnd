@@ -177,7 +177,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			if (selectedObjects.size() > 1) {
 				description.append("1. ");
 			}
-			description.append(selectedContextProvider.getObjectDescription(0));
+			description.append(selectedContextProvider.getObjectDescription(selectedObjects.get(0)));
 			for (int i = 1; i < selectedObjects.size(); i++) {
 				description.append("\n" + (i + 1) + ". ").append(selectedContextProvider.getObjectDescription(selectedObjects.get(i)));
 			}
@@ -274,6 +274,23 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 		}
 		return false;
+	}
+
+	public void setSelectedObject(Object toShow) {
+		selectedObjects.clear();
+		if(toShow == null){
+			selectedContextProvider = null;
+		} else {
+			for(OsmandMapLayer l : view.getLayers()){
+				if(l instanceof ContextMenuLayer.IContextMenuProvider){
+					String des = ((ContextMenuLayer.IContextMenuProvider) l).getObjectDescription(toShow);
+					if(des != null) {
+						selectedContextProvider = (IContextMenuProvider) l;
+						selectedObjects.add(toShow);
+					}
+				}
+			}
+		}
 	}
 
 }

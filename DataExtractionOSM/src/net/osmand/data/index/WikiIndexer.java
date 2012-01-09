@@ -155,7 +155,13 @@ public class WikiIndexer {
 			String wikiLocale = f.getName().substring(in + 1, in2);
 			log.info("Locale for file " + wikiLocale);
 			
-			PreparedStatement statement = dbConnection.prepareStatement("SELECT gc_lat, gc_lon, gc_type FROM coord_"+wikiLocale+"wiki WHERE gc_from=?");
+			PreparedStatement locSearch = dbConnection.prepareStatement("SELECT gc_lat, gc_lon, gc_type FROM coord_"+wikiLocale+"wiki WHERE gc_from=?");
+			PreparedStatement enSearch = null;
+			try {
+				enSearch = dbConnection.prepareStatement("SELECT gc_lat, gc_lon, gc_type FROM coord_enwiki WHERE gc_name=?");
+			} catch (SQLException e) {
+				log.warn("EN coord not initialized " , e);
+			}
 			
 			File osmOut = new File(workPath, f.getName().substring(0, in) + ".osm");
 			fi = new BufferedInputStream(new FileInputStream(f));
@@ -170,10 +176,11 @@ public class WikiIndexer {
 			ConsoleProgressImplementation progress = new ConsoleProgressImplementation();
 			out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(osmOut), "UTF-8"));
 			SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
-			WikiOsmHandler wikiOsmHandler = new WikiOsmHandler(saxParser, out, progress, progressStream, statement, wikiLocale);
+			WikiOsmHandler wikiOsmHandler = new WikiOsmHandler(saxParser, out, progress, progressStream, locSearch, enSearch, wikiLocale);
 			saxParser.parse(fi, wikiOsmHandler);
 
-			statement.close();
+			locSearch.close();
+			enSearch.close();
 			if (wikiOsmHandler.getCount() < 1) {
 				return null;
 			}
@@ -195,6 +202,7 @@ public class WikiIndexer {
 	}
 
 	public class WikiOsmHandler extends DefaultHandler {
+		private final static boolean RECOGNIZE_ENGLISH = true;
 		long id = 1;
 		private final SAXParser saxParser;
 		private boolean page = false;
@@ -213,17 +221,19 @@ public class WikiIndexer {
 		private final ConsoleProgressImplementation progress;
 		private final InputStream progIS;
 		private XMLStreamWriter streamWriter;
-		private final PreparedStatement dbStat;
+		private final PreparedStatement locSearch;
+		private final PreparedStatement enSearch;
 		private final String locale;
 		
 
 		WikiOsmHandler(SAXParser saxParser, BufferedWriter outOsm, ConsoleProgressImplementation progress, InputStream progIS, 
-				PreparedStatement dbStat, String wikiLocale)
+				PreparedStatement dbStat, PreparedStatement enSearch, String wikiLocale)
 				throws IOException, XMLStreamException {
 			this.saxParser = saxParser;
 			this.progress = progress;
 			this.progIS = progIS;
-			this.dbStat = dbStat;
+			this.locSearch = dbStat;
+			this.enSearch = enSearch;
 			this.locale = wikiLocale;
 			XMLOutputFactory xof = XMLOutputFactory.newInstance();
 			streamWriter = xof.createXMLStreamWriter(outOsm);
@@ -250,7 +260,7 @@ public class WikiIndexer {
 					title.setLength(0);
 					ctext = title;
 				} else if (name.equals("text")) {
-					if(parseText) {
+					if(parseText || RECOGNIZE_ENGLISH) {
 						text.setLength(0);
 						ctext = text;
 					}
@@ -288,17 +298,24 @@ public class WikiIndexer {
 					} else if (name.equals("id") && !revision) {
 						ctext = null;
 						cid = Long.parseLong(pageId.toString());
-						dbStat.setLong(1, cid);
-						ResultSet rs = dbStat.executeQuery();
+						locSearch.setLong(1, cid);
+						ResultSet rs = locSearch.executeQuery();
 						parseText = false;
 						if(rs.next()) {
 							parseText = true;
 							clat = rs.getFloat(1);
 							clon = rs.getFloat(2);
-							subcategory = (rs.getString(3) + "").toLowerCase();
+							subcategory = rs.getString(3);
+							if(subcategory == null){
+								subcategory = "";
+							}
+							subcategory = subcategory.toLowerCase();
 						}
 					} else if (name.equals("text")) {
-						if(parseText) {
+						if(!parseText && RECOGNIZE_ENGLISH) {
+							tryToMatchEnglish();
+						}
+						if (parseText) {
 							if(id % 500 == 0) {
 								log.debug("Article accepted " + cid + " " + title.toString());
 							}
@@ -313,6 +330,27 @@ public class WikiIndexer {
 				throw new SAXException(e);
 			} catch (SQLException e) {
 				throw new SAXException(e);
+			}
+		}
+		
+		public void tryToMatchEnglish() throws SQLException {
+			int i = text.lastIndexOf("[[en:");
+			if(i != -1){
+				int ei = text.indexOf("]]",i);
+				if(ei != -1) {
+					String englishName = text.substring("[[en:".length() + i, ei).trim();
+					enSearch.setString(1, englishName);
+					ResultSet rs = enSearch.getResultSet();
+					while (rs.next()) {
+						clat = rs.getFloat(1);
+						clon = rs.getFloat(2);
+						subcategory = rs.getString(3);
+						if (subcategory == null) {
+							subcategory = "";
+						}
+						subcategory = subcategory.toLowerCase();
+					}
+				}
 			}
 		}
 
@@ -363,7 +401,7 @@ public class WikiIndexer {
 			}
 			return null;
 		}
-
+		
 		private float zeroParseFloat(String s) {
 			return s == null || s.length() == 0 ? 0 : Float.parseFloat(s);
 		}
@@ -497,12 +535,13 @@ public class WikiIndexer {
 				}
 
 				// 3. Parse main subcategory name
-//			for (int j = h + 2; j < e; j++) {
-//				if (Character.isWhitespace(text.charAt(j)) || text.charAt(j) == '|') {
-//					subcategory = text.substring(h + 2, j).trim();
-//					break;
-//				}
-//			}
+				//		String subcategory ;
+				//		for (int j = h + 2; j < e; j++) {
+				//			if (Character.isWhitespace(text.charAt(j)) || text.charAt(j) == '|') {
+				//				subcategory = text.substring(h + 2, j).trim();
+				//				break;
+				//			}
+				//		}
 				// Special case
 
 				// 4. Parse main subcategory name
@@ -641,4 +680,5 @@ public class WikiIndexer {
 		}
 
 	}
+
 }

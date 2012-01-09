@@ -285,12 +285,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
 		LatLon latLonToShow = settings.getAndClearMapLocationToShow();
 		String mapLabelToShow = settings.getAndClearMapLabelToShow();
+		Object toShow = settings.getAndClearObjectToShow();
 		if(mapLabelToShow != null && latLonToShow != null){
-			if(mapLabelToShow.length() == 0){
-				mapLayers.getContextMenuLayer().setLocation(latLonToShow, mapLabelToShow);
-			} else {
-				mapLayers.getContextMenuLayer().setLocation(latLonToShow, mapLabelToShow);
-			}
+			mapLayers.getContextMenuLayer().setSelectedObject(toShow);
+			mapLayers.getContextMenuLayer().setLocation(latLonToShow, mapLabelToShow);
 		}
 		if (latLonToShow != null && !latLonToShow.equals(cur)) {
 			mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(), latLonToShow.getLongitude(), 

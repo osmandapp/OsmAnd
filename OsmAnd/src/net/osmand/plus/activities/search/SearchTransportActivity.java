@@ -372,7 +372,7 @@ public class SearchTransportActivity extends ListActivity implements SearchActiv
 					toInsert --;
 				}
 				intermediateListAdapater.remove(null);
-				intermediateListAdapater.insert(null, routeInd);
+				intermediateListAdapater.insert(null, toInsert);
 				zoom = initialZoom;
 				searchTransport();	
 			}

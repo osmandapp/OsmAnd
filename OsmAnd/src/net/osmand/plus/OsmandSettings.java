@@ -772,12 +772,19 @@ public class OsmandSettings {
 		return label;
 	}
 	
+	private Object objectToShow;
+	public Object getAndClearObjectToShow(){
+		Object objectToShow = this.objectToShow;
+		this.objectToShow = null;
+		return objectToShow;
+	}
+	
 	public int getMapZoomToShow() {
 		return globalPreferences.getInt(MAP_ZOOM_TO_SHOW, 5);
 	}
 	
 	public void setMapLocationToShow(double latitude, double longitude, int zoom, String historyDescription,
-			String labelToShow) {
+			String labelToShow, Object toShow) {
 		Editor edit = globalPreferences.edit();
 		edit.putFloat(MAP_LAT_TO_SHOW, (float) latitude);
 		edit.putFloat(MAP_LON_TO_SHOW, (float) longitude);
@@ -788,17 +795,18 @@ public class OsmandSettings {
 		}
 		edit.putInt(MAP_ZOOM_TO_SHOW, zoom);
 		edit.commit();
+		objectToShow = toShow;
 		if(historyDescription != null){
 			SearchHistoryHelper.getInstance().addNewItemToHistory(latitude, longitude, historyDescription, ctx);
 		}
 	}
 	
 	public void setMapLocationToShow(double latitude, double longitude, int zoom) {
-		setMapLocationToShow(latitude, longitude, zoom,  null, null);
+		setMapLocationToShow(latitude, longitude, zoom,  null, null, null);
 	}
 
 	public void setMapLocationToShow(double latitude, double longitude, int zoom, String historyDescription){
-		setMapLocationToShow(latitude, longitude, zoom, historyDescription, historyDescription);
+		setMapLocationToShow(latitude, longitude, zoom, historyDescription, historyDescription, null);
 	}
 
 	// Do not use that method if you want to show point on map. Use setMapLocationToShow

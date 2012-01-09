@@ -107,7 +107,7 @@ public class SearchHistoryActivity extends ListActivity implements SearchActivit
 						if (which == 0) {
 							OsmandSettings settings = OsmandSettings.getOsmandSettings(SearchHistoryActivity.this);
 							settings.setMapLocationToShow(entry.getLat(), entry.getLon(), settings.getLastKnownMapZoom(), null, entry
-									.getName());
+									.getName(), null);
 						} else if (which == 1) {
 							OsmandSettings.getOsmandSettings(SearchHistoryActivity.this).setPointToNavigate(entry.getLat(), entry.getLon(),
 									null);
@@ -129,7 +129,7 @@ public class SearchHistoryActivity extends ListActivity implements SearchActivit
 	private void selectModel(HistoryEntry model) {
 		helper.selectEntry(model, this);
 		OsmandSettings settings = OsmandSettings.getOsmandSettings(SearchHistoryActivity.this);
-		settings.setMapLocationToShow(model.getLat(), model.getLon(), settings.getLastKnownMapZoom(), null, model.getName());
+		settings.setMapLocationToShow(model.getLat(), model.getLon(), settings.getLastKnownMapZoom(), null, model.getName(), null);
 		MapActivity.launchMapActivityMoveToTop(this);
 	}
 
