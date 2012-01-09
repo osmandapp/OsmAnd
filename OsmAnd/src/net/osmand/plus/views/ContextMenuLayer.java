@@ -6,6 +6,8 @@ import java.util.List;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -28,7 +30,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	public interface IContextMenuProvider {
 	
-		public Object getPointObject(PointF point);
+		public void collectObjectsFromPoint(PointF point, List<Object> o);
 		
 		public LatLon getObjectLocation(Object o);
 		
@@ -42,7 +44,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private LatLon latLon;
 	private IContextMenuProvider selectedContextProvider;
-	private Object selectedObject;
+	private List<Object> selectedObjects = new ArrayList<Object>();
 	
 	private TextView textView;
 	private DisplayMetrics dm;
@@ -157,11 +159,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 		
 		selectedContextProvider = null;
-		selectedObject = null;
+		selectedObjects.clear();
 		for(OsmandMapLayer l : view.getLayers()){
 			if(l instanceof ContextMenuLayer.IContextMenuProvider){
-				selectedObject = ((ContextMenuLayer.IContextMenuProvider) l).getPointObject(point);
-				if(selectedObject != null){
+				((ContextMenuLayer.IContextMenuProvider) l).collectObjectsFromPoint(point, selectedObjects);
+				if(!selectedObjects.isEmpty()){
 					selectedContextProvider = (IContextMenuProvider) l;
 					break;
 				}
@@ -169,16 +171,18 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 		
 		LatLon latLon = view.getLatLonFromScreenPoint(point.x, point.y);
-		String description = ""; 
+		StringBuilder description = new StringBuilder(); 
 		
-		if(selectedObject != null){
-			description = selectedContextProvider.getObjectDescription(selectedObject);
-			LatLon l = selectedContextProvider.getObjectLocation(selectedObject);
+		if(!selectedObjects.isEmpty()){
+			for(Object o : selectedObjects) {
+				description.append(selectedContextProvider.getObjectDescription(o));
+			}
+			LatLon l = selectedContextProvider.getObjectLocation(selectedObjects.get(0));
 			if(l != null){
 				latLon = l;
 			}
 		}
-		setLocation(latLon, description);
+		setLocation(latLon, description.toString());
 		view.refreshMap();
 		return true;
 	}
@@ -203,8 +207,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 	
 	public String getSelectedObjectName(){
-		if(selectedObject != null && selectedContextProvider != null){
-			return selectedContextProvider.getObjectName(selectedObject);
+		if(!selectedObjects.isEmpty() && selectedContextProvider != null){
+			return selectedContextProvider.getObjectName(selectedObjects);
 		}
 		return null;
 	}
@@ -212,16 +216,40 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	@Override
 	public boolean onSingleTap(PointF point) {
 		if (pressedInTextView(point.x, point.y)) {
-			if (selectedObject != null) {
-				ArrayList<String> l = new ArrayList<String>();
-				OnClickListener listener = selectedContextProvider.getActionListener(l, selectedObject);
-				activity.contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), l, listener);
+			if (!selectedObjects.isEmpty()) {
+				showContextMenuForSelectedObjects();
 			} else {
 				activity.contextMenuPoint(latLon.getLatitude(), latLon.getLongitude());
 			}
 			return true;
 		}
 		return false;
+	}
+
+	private void showContextMenuForSelectedObjects() {
+		if(selectedObjects.size() > 1){
+			Builder builder = new AlertDialog.Builder(view.getContext());
+			String[] d = new String[selectedObjects.size()];
+			int i =0;
+			for(Object o  : selectedObjects) {
+				d[i++] = selectedContextProvider.getObjectDescription(o);
+			}
+			builder.setItems(d, new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// single selection at 0
+					selectedObjects.set(0, selectedObjects.get(which));
+					ArrayList<String> l = new ArrayList<String>();
+					OnClickListener listener = selectedContextProvider.getActionListener(l, selectedObjects.get(0));
+					activity.contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), l, listener);
+				}
+			});
+			builder.show();
+		} else {
+			ArrayList<String> l = new ArrayList<String>();
+			OnClickListener listener = selectedContextProvider.getActionListener(l, selectedObjects.get(0));
+			activity.contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), l, listener);
+		}
 	}
 
 	

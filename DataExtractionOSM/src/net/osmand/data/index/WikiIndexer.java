@@ -299,7 +299,7 @@ public class WikiIndexer {
 						}
 					} else if (name.equals("text")) {
 						if(parseText) {
-							if(id % 50 == 0) {
+							if(id % 100 == 0) {
 								log.debug("Article accepted " + cid + " " + title.toString());
 							}
 							analyzeTextForGeoInfoNew();

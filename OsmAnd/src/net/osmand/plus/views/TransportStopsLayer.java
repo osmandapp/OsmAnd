@@ -40,27 +40,26 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		pointAltUI.setAntiAlias(true);
 	}
 	
-	public TransportStop getFromPoint(PointF point){
-		TransportStop result = null;
+	public void getFromPoint(PointF point, List<? super TransportStop> res) {
 		if (objects != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
 			int radius = getRadiusPoi(view.getZoom()) * 3 / 2;
+			int small = getRadiusPoi(view.getZoom());
 			try {
 				for (int i = 0; i < objects.size(); i++) {
 					TransportStop n = objects.get(i);
 					int x = view.getRotatedMapXForPoint(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 					int y = view.getRotatedMapYForPoint(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
-						radius = Math.max(Math.abs(x - ex), Math.abs(y - ey));
-						result = n;
+						radius = small;
+						res.add(n);
 					}
 				}
 			} catch (IndexOutOfBoundsException e) {
 				// that's really rare case, but is much efficient than introduce synchronized block
 			}
 		}
-		return result;
 	}
 	
 
@@ -69,9 +68,17 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	
 	@Override
 	public boolean onSingleTap(PointF point) {
-		TransportStop n = getFromPoint(point);
-		if(n != null){
-			Toast.makeText(view.getContext(), getStopDescription(n, true), Toast.LENGTH_LONG).show();
+		ArrayList<TransportStop> stops = new ArrayList<TransportStop >(); 
+		getFromPoint(point, stops);
+		if(stops.isEmpty()){
+			StringBuilder res = new StringBuilder();
+			for (TransportStop n : stops) {
+				if(stops.size() > 1) {
+					res.append("\n");
+				}
+				res.append(getStopDescription(n, true));
+			}
+			Toast.makeText(view.getContext(), res.toString(), Toast.LENGTH_LONG).show();
 			return true;
 		}
 		return false;
@@ -172,8 +179,8 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	}
 
 	@Override
-	public Object getPointObject(PointF point) {
-		return getFromPoint(point);
+	public void collectObjectsFromPoint(PointF point, List<Object> res) {
+		getFromPoint(point, res);
 	}
 
 	@Override

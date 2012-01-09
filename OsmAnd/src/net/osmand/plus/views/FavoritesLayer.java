@@ -1,5 +1,6 @@
 package net.osmand.plus.views;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.FavouritePoint;
@@ -21,7 +22,6 @@ import android.widget.Toast;
 public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 
 	private static final int startZoom = 6;
-	private static final int radius = 15;
 	
 	private OsmandMapTileView view;
 	private Paint paint;
@@ -86,9 +86,8 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 		return false;
 	}
 	
-	public FavouritePoint getFavoriteFromPoint(PointF point) {
-		FavouritePoint result = null;
-		float r = 100;
+	public void getFavoriteFromPoint(PointF point, List<? super FavouritePoint> res) {
+		float r = 80;
 		int ex = (int) point.x;
 		int ey = (int) point.y;
 		int w = favoriteIcon.getWidth() / 2;
@@ -98,21 +97,26 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 			int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
 			if (Math.abs(x - ex) <= w && y - ey <= h && y - ey >= 0) {
 				float newr = Math.max(Math.abs(x - ex), Math.abs(y - ey));
-				if(newr < r){
-					r = newr;
-					result = n;
+				if (newr < r) {
+					res.add(n);
 				}
 			}
 		}
-		return result;
 	}
 
 	@Override
 	public boolean onSingleTap(PointF point) {
-		FavouritePoint fav = getFavoriteFromPoint(point);
-		if(fav != null){
-			String format = view.getContext().getString(R.string.favorite) + " : " + fav.getName();  //$NON-NLS-1$
-			Toast.makeText(view.getContext(), format, Toast.LENGTH_LONG).show();
+		List<FavouritePoint> favs = new ArrayList<FavouritePoint>();
+		getFavoriteFromPoint(point, favs);
+		if(!favs.isEmpty()){
+			StringBuilder res = new StringBuilder();
+			for(FavouritePoint fav : favs) {
+				if(favs.size() > 1) {
+					res.append("\n");
+				}
+				res.append(view.getContext().getString(R.string.favorite) + " : " + fav.getName());  //$NON-NLS-1$
+			}
+			Toast.makeText(view.getContext(), res.toString(), Toast.LENGTH_LONG).show();
 			return true;
 		}
 		return false;
@@ -142,8 +146,8 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	}
 
 	@Override
-	public Object getPointObject(PointF point) {
-		return getFavoriteFromPoint(point);
+	public void collectObjectsFromPoint(PointF point, List<Object> res) {
+		getFavoriteFromPoint(point, res);
 	}
 
 	@Override

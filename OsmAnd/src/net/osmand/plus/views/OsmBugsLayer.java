@@ -197,35 +197,41 @@ public class OsmBugsLayer extends OsmandMapLayer implements ContextMenuLayer.ICo
 		return false;
 	}
 	
-	public OpenStreetBug getBugFromPoint(PointF point){
-		OpenStreetBug result = null;
+	public void getBugFromPoint(PointF point, List<? super OpenStreetBug> res){
 		if (objects != null && view != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
 			int radius = getRadiusBug(view.getZoom()) * 3 / 2;
+			int small = getRadiusBug(view.getZoom()) * 3 / 4;
 			try {
 				for (int i = 0; i < objects.size(); i++) {
 					OpenStreetBug n = objects.get(i);
 					int x = view.getRotatedMapXForPoint(n.getLatitude(), n.getLongitude());
 					int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
 					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
-						radius = Math.max(Math.abs(x - ex), Math.abs(y - ey));
-						result = n;
+						radius = small;
+						res.add(n);
 					}
 				}
 			} catch (IndexOutOfBoundsException e) {
 				// that's really rare case, but is much efficient than introduce synchronized block
 			}
 		}
-		return result;
 	}
 
 	@Override
 	public boolean onSingleTap(PointF point) {
-		OpenStreetBug bug = getBugFromPoint(point);
-		if(bug != null){
-			String format = activity.getString(R.string.osb_bug_name)+ " : " + bug.getName(); //$NON-NLS-1$
-			Toast.makeText(activity, format, Toast.LENGTH_LONG).show();
+		ArrayList<OpenStreetBug> list = new ArrayList<OpenStreetBug>();
+		getBugFromPoint(point, list);
+		if(!list.isEmpty()){
+			StringBuilder res = new StringBuilder();
+			for(OpenStreetBug o : list) {
+				if(list.size() > 1) {
+					res.append("\n");
+				}
+				res.append(activity.getString(R.string.osb_bug_name)+ " : " + o.getName()); //$NON-NLS-1$
+			}
+			Toast.makeText(activity, res.toString(), Toast.LENGTH_LONG).show();
 			return true;
 		}
 		return false;
@@ -475,8 +481,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements ContextMenuLayer.ICo
 	}
 
 	@Override
-	public Object getPointObject(PointF point) {
-		return getBugFromPoint(point);
+	public void collectObjectsFromPoint(PointF point, List<Object> res) {
+		getBugFromPoint(point, res);
 	}
 
 	@Override
