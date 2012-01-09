@@ -110,9 +110,10 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 		getFavoriteFromPoint(point, favs);
 		if(!favs.isEmpty()){
 			StringBuilder res = new StringBuilder();
+			int i = 0;
 			for(FavouritePoint fav : favs) {
-				if(favs.size() > 1) {
-					res.append("\n");
+				if (i++ > 0) {
+					res.append("\n\n");
 				}
 				res.append(view.getContext().getString(R.string.favorite) + " : " + fav.getName());  //$NON-NLS-1$
 			}

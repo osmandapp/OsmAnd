@@ -299,7 +299,7 @@ public class WikiIndexer {
 						}
 					} else if (name.equals("text")) {
 						if(parseText) {
-							if(id % 100 == 0) {
+							if(id % 500 == 0) {
 								log.debug("Article accepted " + cid + " " + title.toString());
 							}
 							analyzeTextForGeoInfoNew();
@@ -563,7 +563,7 @@ public class WikiIndexer {
 
 		private void processDescription(StringBuilder description, int start) {
 			for (int j = start; j < text.length();) {
-				if (text.charAt(j) == '=' && text.charAt(j + 1) == '=') {
+				if (text.charAt(j) == '=' && text.charAt(j + 1) == '=' && j - start > 2048) {
 					break;
 				} else if (text.charAt(j) == '\n' && j - start > 2048) {
 					break;

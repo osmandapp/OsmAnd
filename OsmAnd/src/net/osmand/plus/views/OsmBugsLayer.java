@@ -225,9 +225,10 @@ public class OsmBugsLayer extends OsmandMapLayer implements ContextMenuLayer.ICo
 		getBugFromPoint(point, list);
 		if(!list.isEmpty()){
 			StringBuilder res = new StringBuilder();
+			int i = 0;
 			for(OpenStreetBug o : list) {
-				if(list.size() > 1) {
-					res.append("\n");
+				if (i++ > 0) {
+					res.append("\n\n");
 				}
 				res.append(activity.getString(R.string.osb_bug_name)+ " : " + o.getName()); //$NON-NLS-1$
 			}

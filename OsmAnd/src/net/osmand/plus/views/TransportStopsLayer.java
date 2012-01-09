@@ -72,9 +72,10 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		getFromPoint(point, stops);
 		if(stops.isEmpty()){
 			StringBuilder res = new StringBuilder();
+			int i = 0;
 			for (TransportStop n : stops) {
-				if(stops.size() > 1) {
-					res.append("\n");
+				if (i++ > 0) {
+					res.append("\n\n");
 				}
 				res.append(getStopDescription(n, true));
 			}

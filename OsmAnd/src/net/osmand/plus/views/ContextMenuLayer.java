@@ -173,12 +173,16 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		LatLon latLon = view.getLatLonFromScreenPoint(point.x, point.y);
 		StringBuilder description = new StringBuilder(); 
 		
-		if(!selectedObjects.isEmpty()){
-			for(Object o : selectedObjects) {
-				description.append(selectedContextProvider.getObjectDescription(o));
+		if (!selectedObjects.isEmpty()) {
+			if (selectedObjects.size() > 1) {
+				description.append("1. ");
+			}
+			description.append(selectedContextProvider.getObjectDescription(0));
+			for (int i = 1; i < selectedObjects.size(); i++) {
+				description.append("\n" + (i + 1) + ". ").append(selectedContextProvider.getObjectDescription(selectedObjects.get(i)));
 			}
 			LatLon l = selectedContextProvider.getObjectLocation(selectedObjects.get(0));
-			if(l != null){
+			if (l != null) {
 				latLon = l;
 			}
 		}

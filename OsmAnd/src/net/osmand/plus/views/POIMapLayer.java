@@ -8,6 +8,7 @@ import java.util.List;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.data.Amenity;
+import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
@@ -99,7 +100,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			for (int i = 0; i < MAXIMUM_SHOW_AMENITIES && i < am.size(); i++) {
 				Amenity n = am.get(i);
 				if (i > 0) {
-					res.append("\n ");
+					res.append("\n\n");
 				}
 				String format = OsmAndFormatter.getPoiSimpleFormat(n, view.getContext(), view.getSettings().USE_ENGLISH_NAMES.get());
 				res.append(" " + format);
@@ -109,7 +110,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				if (n.getPhone() != null) {
 					res.append("\n").append(view.getContext().getString(R.string.phone)).append(" : ").append(n.getPhone()); //$NON-NLS-1$ //$NON-NLS-2$
 				}
-				if (n.getSite() != null) {
+				if (n.getSite() != null && n.getType() != AmenityType.OSMWIKI) {
 					res.append("\n").append(view.getContext().getString(R.string.website)).append(" : ").append(n.getSite()); //$NON-NLS-1$ //$NON-NLS-2$
 				}
 			}
