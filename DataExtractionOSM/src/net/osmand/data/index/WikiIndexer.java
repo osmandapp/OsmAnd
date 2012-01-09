@@ -340,7 +340,7 @@ public class WikiIndexer {
 				if(ei != -1) {
 					String englishName = text.substring("[[en:".length() + i, ei).trim();
 					enSearch.setString(1, englishName);
-					ResultSet rs = enSearch.getResultSet();
+					ResultSet rs = enSearch.executeQuery();
 					while (rs.next()) {
 						clat = rs.getFloat(1);
 						clon = rs.getFloat(2);
