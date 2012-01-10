@@ -2,7 +2,7 @@
 <resources>
     <string name="poi_context_menu_showdescription">Mostra descrizione</string>
     <string name="amenity_type_wikiosm">Wikipedia</string>
-	<string name="amenity_type_user_defined">Definito dall'utente</string>
+	<string name="amenity_type_user_defined">Definito dall\'utente</string>
 	<string name="fav_export_confirmation">Esistono file con preferiti già esportati. Vuoi sostituirli? </string>
 <!-- this block re-worked for new menu structure -->
 	<string name="profile_settings">Impostazioni particolari per il profilo</string>
