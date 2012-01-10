@@ -121,6 +121,7 @@
                 <src path="${source.absolute.dir}" />
 		
 		<!-- osmchange -->
+		<compilerarg value="-Xlint"/>
 		<src path="${use.absolute.dir}" />
 		<exclude name="**/LogUtil.java" />
 		<exclude name="**/OsmStorageWriter.java" />
