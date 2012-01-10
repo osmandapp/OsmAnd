@@ -316,9 +316,9 @@ public class WikiIndexer {
 							tryToMatchEnglish();
 						}
 						if (parseText) {
-//							if(id % 500 == 0) {
+							if(id % 500 == 0) {
 								log.debug("Article accepted " + cid + " " + title.toString());
-//							}
+							}
 							analyzeTextForGeoInfoNew();
 						}
 						ctext = null;
@@ -339,14 +339,13 @@ public class WikiIndexer {
 				int ei = text.indexOf("]]",i);
 				if(ei != -1) {
 					String englishName = text.substring("[[en:".length() + i, ei).trim();
-					log.info("Lookup english name !" + englishName+"!");
 					enSearch.setString(1, englishName);
 					ResultSet rs = enSearch.executeQuery();
 					if (rs.next()) {
 						clat = rs.getFloat(1);
 						clon = rs.getFloat(2);
 						subcategory = rs.getString(3);
-						log.info("Lookup english name !" + englishName+"!" + clat + " " + clon);
+						parseText = true;
 						if (subcategory == null) {
 							subcategory = "";
 						}
