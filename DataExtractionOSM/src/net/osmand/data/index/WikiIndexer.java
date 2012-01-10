@@ -43,7 +43,8 @@ public class WikiIndexer {
 	private final String userName = "jenkins";
 	private final String password = "jenkins";
 	private final String url = "jdbc:mysql://localhost/wiki";
-
+	private final File srcDone;
+	
 	public static class WikiIndexerException extends Exception {
 		private static final long serialVersionUID = 1L;
 
@@ -57,10 +58,11 @@ public class WikiIndexer {
 
 	}
 
-	public WikiIndexer(File srcPath, File targetPath, File workPath) {
+	public WikiIndexer(File srcPath, File targetPath, File workPath, File srcDone) {
 		this.srcPath = srcPath;
 		this.targetPath = targetPath;
 		this.workPath = workPath;
+		this.srcDone = srcDone;
 	}
 
 	public static void main(String[] args) {
@@ -68,8 +70,15 @@ public class WikiIndexer {
 			File srcPath = extractDirectory(args, 0);
 			File targetPath = extractDirectory(args, 1);
 			File workPath = extractDirectory(args, 2);
+			File srcDone = srcPath;
+			for (int i = 3; i < args.length; i++) {
+				if(args[i].startsWith("--source-done=")){
+					srcDone = new File(srcPath, args[i].substring("--source-done=".length()));
+//				} else if(args[i].startsWith("--description=")){
+				}
+			}
 
-			WikiIndexer wikiIndexer = new WikiIndexer(srcPath, targetPath, workPath);
+			WikiIndexer wikiIndexer = new WikiIndexer(srcPath, targetPath, workPath, srcDone);
 			wikiIndexer.run();
 
 		} catch (WikiIndexerException e) {
@@ -115,6 +124,7 @@ public class WikiIndexer {
 					log.info("About to process " + f.getName());
 					File outFile = process(f, conn);
 					if (outFile != null) {
+						f.renameTo(new File(srcDone, f.getName()));
 
 						IndexCreator ic = new IndexCreator(workPath);
 						ic.setIndexPOI(true);
