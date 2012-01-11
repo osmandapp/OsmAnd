@@ -1,10 +1,13 @@
 package net.osmand.plus.activities;
 
-import android.app.ExpandableListActivity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
+import android.app.ExpandableListActivity;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -13,9 +16,11 @@ import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.TextView;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -29,9 +34,17 @@ import net.osmand.osm.EntityInfo;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
 import net.osmand.plus.OpenstreetmapsDbHelper;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 
 public class LocalOpenstreetmapActivity extends ExpandableListActivity {
+
+	/** dialogs **/
+	protected static final int DIALOG_PROGRESS_UPLOAD = 0;
+
+	/** bundles **/
+	protected static final String ALL_OPENSTREETMAP_POINTS = "all_openstreetmap_points";
+	protected static final String OPENSTREETMAP_POINT = "openstreetmap_point";
 
 	private LocalOpenstreetmapAdapter listAdapter;
 
@@ -40,6 +53,8 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 	private OpenstreetmapsDbHelper db;
 
 	private OpenstreetmapRemoteUtil remote;
+
+	private ProgressDialog progressPointDlg = null;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -75,25 +90,131 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 
 		remote = new OpenstreetmapRemoteUtil(this, this.getWindow().getDecorView());
 
-
 		findViewById(R.id.UploadAllButton).setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				remote.commitNodeImpl(db, db.getOpenstreetmapPoints());
-
-				// Reload all the POIs
-				listAdapter.clear();
-				List<OpenstreetmapPoint> l = db.getOpenstreetmapPoints();
-				android.util.Log.d(LogUtil.TAG, "List of POI " + l.size() + " length");
-				for (OpenstreetmapPoint p : l) {
-					listAdapter.addOpenstreetmapPoint(p);
-				}
-				listAdapter.notifyDataSetChanged();
+				Bundle bundle = new Bundle();
+				bundle.putBoolean(ALL_OPENSTREETMAP_POINTS, true);
+				showDialog(DIALOG_PROGRESS_UPLOAD, bundle);
 			}
 		});
 	}
 
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		switch (id) {
+			case DIALOG_PROGRESS_UPLOAD:
+				progressPointDlg = ProgressDialogImplementation.createProgressDialog(
+						LocalOpenstreetmapActivity.this,
+						getString(R.string.uploading),
+						getString(R.string.local_openstreetmap_uploading_poi),
+						ProgressDialog.STYLE_HORIZONTAL).getDialog();
+
+				return progressPointDlg;
+		}
+		return null;
+	}
+
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog, Bundle args) {
+		switch (id) {
+			case DIALOG_PROGRESS_UPLOAD:
+				UploadOpenstreetmapPointAsyncTask uploadTask;
+
+				if (args.getBoolean(ALL_OPENSTREETMAP_POINTS)) {
+					List<OpenstreetmapPoint> l = listAdapter.values();
+					uploadTask = new UploadOpenstreetmapPointAsyncTask(progressPointDlg,
+																	   remote, db, l.size());
+					uploadTask.execute(l.toArray(new OpenstreetmapPoint[0]));
+				} else {
+					OpenstreetmapPoint info = (OpenstreetmapPoint) args.getSerializable(OPENSTREETMAP_POINT);
+					uploadTask = new UploadOpenstreetmapPointAsyncTask(progressPointDlg,
+																	   remote, db, 1);
+					uploadTask.execute(info);
+				}
+				break;
+		}
+	}
+
+	public class UploadOpenstreetmapPointAsyncTask extends AsyncTask<OpenstreetmapPoint, OpenstreetmapPoint, Integer> {
+
+		private ProgressDialog progress;
+
+		private OpenstreetmapRemoteUtil remote;
+
+		private OpenstreetmapsDbHelper db;
+
+		private int listSize = 0;
+
+		private boolean interruptUploading = false;
+
+		private int uploaded = 0;
+
+		public UploadOpenstreetmapPointAsyncTask(ProgressDialog progress,
+												 OpenstreetmapRemoteUtil remote,
+												 OpenstreetmapsDbHelper db,
+												 int listSize) {
+			this.progress = progress;
+			this.remote = remote;
+			this.db = db;
+			this.listSize = listSize;
+		}
+
+		@Override
+		protected Integer doInBackground(OpenstreetmapPoint... points) {
+			for (OpenstreetmapPoint p : points) {
+				if (interruptUploading) break;
+
+				EntityInfo entityInfo = null;
+				if (OpenstreetmapUtil.Action.CREATE != p.getAction()) {
+					entityInfo = remote.loadNode(p.getEntity());
+				}
+				if (remote.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo, p.getComment())) {
+					db.deleteOpenstreetmap(p);
+					uploaded++;
+					publishProgress(p);
+				}
+			}
+
+			return new Integer(uploaded);
+		}
+
+		@Override
+		protected void onPreExecute() {
+			interruptUploading = false;
+			uploaded = 0;
+
+			progress.setOnCancelListener(new DialogInterface.OnCancelListener() {
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						UploadOpenstreetmapPointAsyncTask.this.setInterruptUploading(true);
+					}
+				});
+			progress.setMax(listSize);
+		}
+
+		@Override
+		protected void onPostExecute(Integer result) {
+			listAdapter.notifyDataSetChanged();
+			if(result != null){
+				Toast.makeText(LocalOpenstreetmapActivity.this, MessageFormat.format(getString(R.string.local_openstreetmap_poi_were_uploaded), result.intValue()), Toast.LENGTH_LONG).show();
+			}
+			removeDialog(DIALOG_PROGRESS_UPLOAD);
+		}
+
+		public void setInterruptUploading(boolean b) {
+			interruptUploading = b;
+		}
+
+		@Override
+		protected void onProgressUpdate(OpenstreetmapPoint... points) {
+			listAdapter.delete(points[0]);
+			progress.setProgress(uploaded);
+		}
+
+	}
+	
 	private void showContextMenu(final OpenstreetmapPoint info) {
 		Builder builder = new AlertDialog.Builder(this);
 		final List<Integer> menu = new ArrayList<Integer>();
@@ -118,13 +239,10 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 					} else if (resId == R.string.local_openstreetmap_delete) {
 						listAdapter.delete(info);
 					} else if (resId == R.string.local_openstreetmap_upload) {
-						EntityInfo entityInfo = null;
-						if (OpenstreetmapUtil.Action.CREATE != info.getAction()) {
-							entityInfo = remote.loadNode(info.getEntity());
-						}
-						if (remote.commitNodeImpl(info.getAction(), info.getEntity(), entityInfo, info.getComment())) {
-							listAdapter.delete(info);
-						}
+						Bundle bundle = new Bundle();
+						bundle.putBoolean(ALL_OPENSTREETMAP_POINTS, false);
+						bundle.putSerializable(OPENSTREETMAP_POINT, info);
+						showDialog(DIALOG_PROGRESS_UPLOAD, bundle);
 					}
 				}
 			}
@@ -148,6 +266,14 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 			category.clear();
 			filterCategory = null;
 			notifyDataSetChanged();
+		}
+
+		public List<OpenstreetmapPoint> values() {
+			List<OpenstreetmapPoint> values = new ArrayList<OpenstreetmapPoint>();
+			for (List<OpenstreetmapPoint> v : data.values()) {
+				values.addAll(v);
+			}
+			return values;
 		}
 
 		public void delete(OpenstreetmapPoint i) {
@@ -211,7 +337,7 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 
 		@Override
 		public long getChildId(int groupPosition, int childPosition) {
-			// it would be unusable to have 10000 local indexes
+			// it would be unusable to have 10000 local categories
 			return groupPosition * 10000 + childPosition;
 		}
 
