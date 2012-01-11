@@ -3,3 +3,4 @@ gen/
 local.properties
 raw/
 obj/
+cpd.xml

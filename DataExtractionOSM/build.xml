@@ -105,4 +105,13 @@
 		<delete file="OsmAndMapCreator.jar" />
 	</target>
 
+	<taskdef name="cpd" classname="net.sourceforge.pmd.cpd.CPDTask" classpathref="ant.lib.path"/>
+	 
+	<target name="cpd" description="Search for cut-and-pasted code">
+	  <property name="cpd.report.xml" location="cpd.xml"/>
+	  <cpd minimumTokenCount="100" format="xml" outputFile="${cpd.report.xml}"
+	      ignoreLiterals="true" ignoreIdentifiers="true">
+	    <fileset dir="${src.absolute.dir}" includes="**/*.java"/>
+	  </cpd>
+	</target>
 </project>
