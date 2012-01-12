@@ -1,5 +1,4 @@
 bin/
 gen/
 local.properties
-proguard.cfg
 raw/
