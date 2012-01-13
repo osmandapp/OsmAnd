@@ -10,4 +10,5 @@ for f in $files ; do
 done
 
 cp $GIT_SITE_DIR/resource/* $LOCAL_SITE_DIR/resource/ -u;
+cp $GIT_SITE_DIR/GoogleAnalytics/* $LOCAL_SITE_DIR/GoogleAnalytics/ -u;
 
