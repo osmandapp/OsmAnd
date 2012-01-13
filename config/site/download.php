@@ -76,9 +76,27 @@ function update_count_of_downloads($file) {
  }
  $file = $_GET['file'];
  // not used now
- //if(!isset($_SERVER['HTTP_RANGE']) ) {
- // update_count_of_downloads($file) ;
- //}
+ if(!isset($_SERVER['HTTP_RANGE']) ) {
+    // old version
+    // update_count_of_downloads($file) ;
+    use UnitedPrototype\GoogleAnalytics;
+     
+    $tracker = new GoogleAnalytics\Tracker('UA-12345678-9', 'download.osmand.net');
+    $visitor = new GoogleAnalytics\Visitor();
+    $visitor->setIpAddress($_SERVER['REMOTE_ADDRESS']);
+    $visitor->setUserAgent($_SERVER['HTTP_USER_AGENT']);
+    $visitor->setScreenResolution('1024x768');
+    // Assemble Session information
+    // (could also get unserialized from PHP session)
+    $session = new GoogleAnalytics\Session();
+
+    // Assemble Page information
+    $page = new GoogleAnalytics\Page('/download.php?'.$file);
+    $page->setTitle('Download file '.$file);
+
+    // Track page view
+    $tracker->trackPageview($page, $session, $visitor);
+ }
  set_time_limit(0);
  $xml = simplexml_load_file("indexes.xml");
  $res = $xml->xpath('//region[@name="'.$file.'"]');
