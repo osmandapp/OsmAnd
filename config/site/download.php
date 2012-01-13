@@ -1,4 +1,6 @@
 <?php
+use GoogleAnalytics as UnitedPrototype\GoogleAnalytics;
+
 function downloadFile($filename) {
 	if (!file_exists($filename)) {
 		header('HTTP/1.0 404 Not Found');
@@ -79,8 +81,7 @@ function update_count_of_downloads($file) {
  if(!isset($_SERVER['HTTP_RANGE']) ) {
     // old version
     // update_count_of_downloads($file) ;
-    use UnitedPrototype\GoogleAnalytics;
-     
+      
     $tracker = new GoogleAnalytics\Tracker('UA-28342846-1', 'download.osmand.net');
     $visitor = new GoogleAnalytics\Visitor();
     $visitor->setIpAddress($_SERVER['REMOTE_ADDRESS']);

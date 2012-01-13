@@ -12,5 +12,5 @@ done
 mkdir -p $LOCAL_SITE_DIR/resource;
 cp $GIT_SITE_DIR/resource/* $LOCAL_SITE_DIR/resource/ -u;
 mkdir -p $LOCAL_SITE_DIR/GoogleAnalytics;
-cp $GIT_SITE_DIR/GoogleAnalytics/* $LOCAL_SITE_DIR/GoogleAnalytics/ -u;
+cp $GIT_SITE_DIR/GoogleAnalytics/* $LOCAL_SITE_DIR/GoogleAnalytics/ -ru;
 
