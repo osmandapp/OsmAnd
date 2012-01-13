@@ -750,6 +750,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 
 		public DownloadIndexAdapter(Map<String, IndexItem> indexFiles) {
 			this.indexFiles = new LinkedHashMap<String, IndexItem>(indexFiles);
+			list.clear();
 			list.addAll(categorizeIndexItems(indexFiles.values()));
 			getFilter().filter(filterText.getText());
 		}
@@ -763,6 +764,9 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 			for(IndexItem i : indexFiles) {
 				this.indexFiles.put(i.getFileName(), i);
 			}
+			list.clear();
+			list.addAll(categorizeIndexItems(indexFiles));
+			notifyDataSetChanged();
 		}
 		
 		
