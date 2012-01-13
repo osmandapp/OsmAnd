@@ -18,12 +18,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -41,7 +41,7 @@ import net.osmand.plus.activities.DownloadFileHelper.DownloadFileShowWarning;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
-import android.app.ListActivity;
+import android.app.ExpandableListActivity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
@@ -58,16 +58,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class DownloadIndexActivity extends ListActivity {
+public class DownloadIndexActivity extends ExpandableListActivity {
 	
 	/** menus **/
 	private static final int RELOAD_ID = 0;
@@ -126,7 +127,7 @@ public class DownloadIndexActivity extends ListActivity {
 	        @Override
 			public void onTextChanged(CharSequence s, int start, int before,
 	                int count) {
-	        	DownloadIndexAdapter adapter = ((DownloadIndexAdapter)getListAdapter());
+	        	DownloadIndexAdapter adapter = ((DownloadIndexAdapter)getExpandableListAdapter());
 				if(adapter != null){
 					adapter.getFilter().filter(s);
 				}
@@ -159,7 +160,7 @@ public class DownloadIndexActivity extends ListActivity {
 		super.onPrepareOptionsMenu(menu);
 		menu.clear();
 		menu.add(0, RELOAD_ID, 0, R.string.reload);
-		if (getListAdapter() != null) {
+		if (getExpandableListAdapter() != null) {
 			// item.setIcon(R.drawable.ic_menu_refresh);
 			menu.add(0, SELECT_ALL_ID, 0, R.string.select_all);
 			menu.add(0, DESELECT_ALL_ID, 0, R.string.deselect_all);
@@ -175,11 +176,11 @@ public class DownloadIndexActivity extends ListActivity {
 			downloadListIndexThread = new DownloadIndexListThread();
 			downloadIndexList();
 		} else {
-			final DownloadIndexAdapter listAdapter = (DownloadIndexAdapter)getListAdapter();
+			final DownloadIndexAdapter listAdapter = (DownloadIndexAdapter)getExpandableListAdapter();
 			if(item.getItemId() == SELECT_ALL_ID){
 				int selected = 0;
-				for (int i = 0; i < listAdapter.getCount(); i++) {
-					IndexItem es = listAdapter.getItem(i);
+				for (int i = 0; i < listAdapter.getChildrenCount(0); i++) {
+					IndexItem es = listAdapter.getChild(0, i);
 					if(!entriesToDownload.containsKey(es.getFileName())){
 						selected++;
 						entriesToDownload.put(es.getFileName(), createDownloadEntry(es));
@@ -190,19 +191,16 @@ public class DownloadIndexActivity extends ListActivity {
 				if(selected > 0){
 					findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
 				}
-			} else if(item.getItemId() == FILTER_EXISTING_REGIONS){
+			} else if (item.getItemId() == FILTER_EXISTING_REGIONS) {
 				final Collection<String> listAlreadyDownloaded = listAlreadyDownloadedWithAlternatives();
 				final List<IndexItem> filtered = new ArrayList<IndexItem>();
-				for(String file : listAlreadyDownloaded) {
+				for (String file : listAlreadyDownloaded) {
 					IndexItem fileItem = listAdapter.getIndexFiles().get(file);
 					if (fileItem != null) {
 						filtered.add(fileItem);
 					}
 				}
-				listAdapter.clear();
-				for (IndexItem fileItem : filtered) {
-					listAdapter.add(fileItem);
-				}
+				listAdapter.setIndexFiles(filtered);
 			} else if(item.getItemId() == DESELECT_ALL_ID){
 				entriesToDownload.clear();
 				listAdapter.notifyDataSetInvalidated();
@@ -319,10 +317,18 @@ public class DownloadIndexActivity extends ListActivity {
 		}
 	}
 	
+	public ExpandableListView getListView() {
+		return super.getExpandableListView();
+	}
+	
+	public ExpandableListAdapter getListAdapter() {
+		return super.getExpandableListAdapter();
+	}
+	
+	
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
-		final IndexItem e = ((DownloadIndexAdapter)getListAdapter()).getItem(position);
+	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+		final IndexItem e = (IndexItem) ((DownloadIndexAdapter)getListAdapter()).getChild(groupPosition, childPosition);
 		String key = e.getFileName();
 		final CheckBox ch = (CheckBox) v.findViewById(R.id.check_download_item);
 		
@@ -335,7 +341,7 @@ public class DownloadIndexActivity extends ListActivity {
 				findViewById(R.id.DownloadButton).setVisibility(View.GONE);
 				getListView().scrollTo(x, y);
 			}
-			return;
+			return true;
 		}
 		
 		final DownloadEntry entry = createDownloadEntry(e);
@@ -377,16 +383,17 @@ public class DownloadIndexActivity extends ListActivity {
 				getListView().scrollTo(x, y);
 				ch.setChecked(!ch.isChecked());
 			}
-
 		}
-		
+		return true;
 	}
-
+	
+	
 	private Collection<String> listAlreadyDownloadedWithAlternatives() {
 		Set<String> files = new TreeSet<String>();
 		File externalStorageDirectory = OsmandSettings.getOsmandSettings(getApplicationContext()).getExternalStorageDirectory();
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.POI_PATH),POI_INDEX_EXT,POI_INDEX_EXT_ZIP,POI_TABLE_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.APP_DIR),BINARY_MAP_INDEX_EXT,BINARY_MAP_INDEX_EXT_ZIP,BINARY_MAP_VERSION));
+		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.BACKUP_PATH),BINARY_MAP_INDEX_EXT,BINARY_MAP_INDEX_EXT_ZIP,BINARY_MAP_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.VOICE_PATH),"",VOICE_INDEX_EXT_ZIP, VOICE_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.VOICE_PATH),"",TTSVOICE_INDEX_EXT_ZIP, TTSVOICE_VERSION));
 		return files;
@@ -544,7 +551,7 @@ public class DownloadIndexActivity extends ListActivity {
 		return name.substring(0, l) + s;
 	}
 	
-private class DownloadIndexesAsyncTask extends  AsyncTask<String, Object, String> implements DownloadFileShowWarning {
+	private class DownloadIndexesAsyncTask extends  AsyncTask<String, Object, String> implements DownloadFileShowWarning {
 		
 		private IProgress progress;
 
@@ -556,7 +563,7 @@ private class DownloadIndexesAsyncTask extends  AsyncTask<String, Object, String
 		protected void onProgressUpdate(Object... values) {
 			for(Object o : values){
 				if(o instanceof DownloadEntry){
-					((DownloadIndexAdapter) getListAdapter()).notifyDataSetChanged();
+					((DownloadIndexAdapter) getExpandableListAdapter()).notifyDataSetChanged();
 					findViewById(R.id.DownloadButton).setVisibility(
 							entriesToDownload.isEmpty() ? View.GONE : View.VISIBLE);
 				} else if(o instanceof String) {
@@ -655,18 +662,95 @@ private class DownloadIndexesAsyncTask extends  AsyncTask<String, Object, String
 		public String baseName;
 		public int parts;
 	}
+	
+	private static class IndexItemCategory implements Comparable<IndexItemCategory> {
+		public final String name; 
+		public final List<IndexItem> items = new ArrayList<IndexItem>();
+		private final int order;
+		
+		public IndexItemCategory(String name, int order) {
+			this.name = name;
+			this.order = order;
+		}
+		
+		@Override
+		public int compareTo(IndexItemCategory another) {
+			return order < another.order ? -1 : 1;
+		}
+	}
+	
+	
+	public List<IndexItemCategory> categorizeIndexItems(Collection<IndexItem> indexItems) {
+		final Map<String, IndexItemCategory> cats = new TreeMap<String, DownloadIndexActivity.IndexItemCategory>();
+		for(IndexItem i : indexItems){
+			int nameId = R.string.index_name_other;
+			int order = 100;
+			String lc = i.getFileName().toLowerCase();
+			if(lc.endsWith(".voice.zip")) {
+				nameId = R.string.index_name_voice;
+				order = 1; 
+			} else if(lc.contains(".ttsvoice.zip")) {
+				nameId = R.string.index_name_tts_voice;
+				order = 3;
+			} else if(lc.contains("_wiki_")) {
+				nameId = R.string.index_name_wiki;
+				order = 5;
+			} else if(lc.startsWith("germany_")) {
+				nameId = R.string.index_name_germany;
+				order = 40;
+			} else if(lc.startsWith("france_")) {
+				nameId = R.string.index_name_france;
+				order = 45;
+			} else if(lc.startsWith("russia_")) {
+				nameId = R.string.index_name_russia;
+				order = 50;
+			} else if(lc.startsWith("us")) {
+				nameId = R.string.index_name_us;
+				order = 60;
+			} else if(lc.contains("_europe_")) {
+				nameId = R.string.index_name_europe;
+				order = 10;
+			} else if(lc.contains("_asia_")) {
+				nameId = R.string.index_name_asia;
+				order = 80;
+			} else if(lc.contains("_northamerica_")) {
+				nameId = R.string.index_name_north_america;
+				order = 65;
+			} else if(lc.contains("_centralamerica_") || lc.contains("central-america")) {
+				nameId = R.string.index_name_central_america;
+				order = 70;
+			} else if(lc.contains("_southamerica_") || lc.contains("south-america")) {
+				nameId = R.string.index_name_south_america;
+				order = 75;
+			} else if(lc.contains("australia")) {
+				nameId = R.string.index_name_australia;
+				order = 80;
+			} else if(lc.contains("africa")) {
+				nameId = R.string.index_name_africa;
+				order = 85;
+			}
+			
+			String name = getString(nameId);
+			if (!cats.containsKey(name)) {
+				cats.put(name, new IndexItemCategory(name, order));
+			}
+			cats.get(name).items.add(i);	
+		}	
+		ArrayList<IndexItemCategory> r = new ArrayList<DownloadIndexActivity.IndexItemCategory>(cats.values());
+		Collections.sort(r);
+		return r;
+	}
+	
 
-	protected class DownloadIndexAdapter extends ArrayAdapter<IndexItem> implements Filterable {
+	protected class DownloadIndexAdapter extends BaseExpandableListAdapter implements Filterable {
 		
 		private DownloadIndexFilter myFilter;
 		private final Map<String, IndexItem> indexFiles;
+		private final List<IndexItemCategory> list = new ArrayList<IndexItemCategory>();
 
 		public DownloadIndexAdapter(Map<String, IndexItem> indexFiles) {
-			super(DownloadIndexActivity.this, net.osmand.plus.R.layout.download_index_list_item);
 			this.indexFiles = new LinkedHashMap<String, IndexItem>(indexFiles);
-			for (Entry<String, IndexItem> entry : indexFiles.entrySet()) {
-				add(entry.getValue());
-			}
+			list.addAll(categorizeIndexItems(indexFiles.values()));
 			getFilter().filter(filterText.getText());
 		}
 
@@ -674,49 +758,13 @@ private class DownloadIndexesAsyncTask extends  AsyncTask<String, Object, String
 			return indexFiles;
 		}
 		
-		@Override
-		public View getView(final int position, View convertView, ViewGroup parent) {
-			View v = convertView;
-			if (v == null) {
-				LayoutInflater inflater = getLayoutInflater();
-				v = inflater.inflate(net.osmand.plus.R.layout.download_index_list_item, parent, false);
+		public void setIndexFiles(List<IndexItem> indexFiles) {
+			this.indexFiles.clear();
+			for(IndexItem i : indexFiles) {
+				this.indexFiles.put(i.getFileName(), i);
 			}
-			final View row = v; 
-			TextView item = (TextView) row.findViewById(R.id.download_item);
-			TextView description = (TextView) row.findViewById(R.id.download_descr);
-			IndexItem e = getItem(position);
-			item.setText(e.getVisibleDescription(DownloadIndexActivity.this) + "\n" + e.getVisibleName()); //$NON-NLS-1$
-			description.setText(e.getDate() + "\n" + e.getSize() + " MB");
-			
-			CheckBox ch = (CheckBox) row.findViewById(R.id.check_download_item);
-			ch.setChecked(entriesToDownload.containsKey(e.getFileName()));
-			ch.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					final CheckBox ch = (CheckBox) v.findViewById(R.id.check_download_item);
-					ch.setChecked(!ch.isChecked());
-					DownloadIndexActivity.this.onListItemClick(getListView(), row, position, getItemId(position));
-				}
-			});
-			
-			if(indexFileNames != null){
-				String sfName = convertServerFileNameToLocal(e.getFileName());
-				if(!indexFileNames.containsKey(sfName)){
-					item.setTextColor(Color.WHITE);
-				} else {
-					if(e.getDate() != null){
-						if(e.getDate().equals(indexFileNames.get(sfName))){
-							item.setTextColor(Color.GREEN);
-						} else {
-							item.setTextColor(Color.BLUE);
-						}
-					} else {
-						item.setTextColor(Color.GREEN);
-					}
-				}
-			}
-			return row;
 		}
+		
 		
 		@Override
 		public Filter getFilter() {
@@ -763,11 +811,108 @@ private class DownloadIndexesAsyncTask extends  AsyncTask<String, Object, String
 			@SuppressWarnings("unchecked")
 			@Override
 			protected void publishResults(CharSequence constraint, FilterResults results) {
-				clear();
-				for (IndexItem item : (Collection<IndexItem>) results.values) {
-					add(item);
+				list.clear();
+				list.addAll(categorizeIndexItems((Collection<IndexItem>) results.values));
+				notifyDataSetChanged();
+			}
+		}
+
+		@Override
+		public int getGroupCount() {
+			return list.size();
+		}
+
+		@Override
+		public int getChildrenCount(int groupPosition) {
+			return list.get(groupPosition).items.size();
+		}
+
+		@Override
+		public IndexItemCategory getGroup(int groupPosition) {
+			return list.get(groupPosition);
+		}
+
+		@Override
+		public IndexItem getChild(int groupPosition, int childPosition) {
+			return list.get(groupPosition).items.get(childPosition);
+		}
+
+		@Override
+		public long getGroupId(int groupPosition) {
+			return groupPosition;
+		}
+
+		@Override
+		public long getChildId(int groupPosition, int childPosition) {
+			return groupPosition + (childPosition + 1)* 10000;
+		}
+
+		@Override
+		public boolean hasStableIds() {
+			return false;
+		}
+
+		@Override
+		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+			View v = convertView;
+			IndexItemCategory group = getGroup(groupPosition);
+			if (v == null) {
+				LayoutInflater inflater = getLayoutInflater();
+				v = inflater.inflate(net.osmand.plus.R.layout.download_index_list_item_category, parent, false);
+			}
+			final View row = v; 
+			TextView item = (TextView) row.findViewById(R.id.download_index_category_name);
+			item.setText(group.name);
+			return row;
+		}
+
+		@Override
+		public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+			View v = convertView;
+			if (v == null) {
+				LayoutInflater inflater = getLayoutInflater();
+				v = inflater.inflate(net.osmand.plus.R.layout.download_index_list_item, parent, false);
+			}
+			final View row = v; 
+			TextView item = (TextView) row.findViewById(R.id.download_item);
+			TextView description = (TextView) row.findViewById(R.id.download_descr);
+			IndexItem e = (IndexItem) getChild(groupPosition, childPosition);
+			item.setText(e.getVisibleDescription(DownloadIndexActivity.this) + "\n" + e.getVisibleName()); //$NON-NLS-1$
+			description.setText(e.getDate() + "\n" + e.getSize() + " MB");
+			
+			CheckBox ch = (CheckBox) row.findViewById(R.id.check_download_item);
+			ch.setChecked(entriesToDownload.containsKey(e.getFileName()));
+			ch.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					final CheckBox ch = (CheckBox) v.findViewById(R.id.check_download_item);
+					ch.setChecked(!ch.isChecked());
+					DownloadIndexActivity.this.onChildClick(getListView(), row, groupPosition, childPosition, getChildId(groupPosition, childPosition));
+				}
+			});
+			
+			if(indexFileNames != null){
+				String sfName = convertServerFileNameToLocal(e.getFileName());
+				if(!indexFileNames.containsKey(sfName)){
+					item.setTextColor(Color.WHITE);
+				} else {
+					if(e.getDate() != null){
+						if(e.getDate().equals(indexFileNames.get(sfName))){
+							item.setTextColor(Color.GREEN);
+						} else {
+							item.setTextColor(Color.BLUE);
+						}
+					} else {
+						item.setTextColor(Color.GREEN);
+					}
 				}
 			}
+			return row;
+		}
+
+		@Override
+		public boolean isChildSelectable(int groupPosition, int childPosition) {
+			return true;
 		}
 	}
 	

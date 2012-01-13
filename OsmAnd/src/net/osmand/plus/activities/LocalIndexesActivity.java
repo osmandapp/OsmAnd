@@ -114,9 +114,16 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 			asyncLoader = new LoadLocalIndexTask();
 			if (indexes instanceof List<?>) {
 				asyncLoader.setResult((List<LocalIndexInfo>) indexes);
-			} else {
-				asyncLoader.execute(this);
 			}
+		}
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (asyncLoader == null || asyncLoader.getResult() == null) {
+			asyncLoader = new LoadLocalIndexTask();
+			asyncLoader.execute(this);
 		}
 	}
 	

@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="poi_context_menu_showdescription">Show description</string>
+    
+    <string name="index_name_other">Other</string>
+    <string name="index_name_australia">Australia</string>
+    <string name="index_name_central_america">Central america</string>
+    <string name="index_name_south_america">South america</string>
+    <string name="index_name_north_america">North america</string>
+    <string name="index_name_us">United States</string>
+    <string name="index_name_asia">Asia</string>
+    <string name="index_name_africa">Africa</string>
+    <string name="index_name_europe">Europe</string>
+    <string name="index_name_france">France</string>
+    <string name="index_name_germany">Germany</string>
+    <string name="index_name_russia">Russia</string>
+    <string name="index_name_wiki">Wikipedia</string>
+    <string name="index_name_voice">Voice packs</string>
+    <string name="index_name_tts_voice">TTS voice packs</string>
+    
     <string name="amenity_type_wikiosm">Wikipedia</string>
 	<string name="amenity_type_user_defined">User defined</string>
 	<string name="fav_export_confirmation">File with previously exported favorites already exist. Do you want to replace it? </string>
