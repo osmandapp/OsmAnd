@@ -81,7 +81,7 @@ function update_count_of_downloads($file) {
     // update_count_of_downloads($file) ;
     use UnitedPrototype\GoogleAnalytics;
      
-    $tracker = new GoogleAnalytics\Tracker('UA-12345678-9', 'download.osmand.net');
+    $tracker = new GoogleAnalytics\Tracker('UA-28342846-1', 'download.osmand.net');
     $visitor = new GoogleAnalytics\Visitor();
     $visitor->setIpAddress($_SERVER['REMOTE_ADDRESS']);
     $visitor->setUserAgent($_SERVER['HTTP_USER_AGENT']);
