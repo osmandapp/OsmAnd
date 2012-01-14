@@ -28,12 +28,10 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import org.apache.commons.logging.Log;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 import net.osmand.IProgress;
-import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.DownloadOsmandIndexesHelper;
