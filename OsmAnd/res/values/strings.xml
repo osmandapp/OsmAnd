@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
 	<string name="index_name_us">North America - United States</string>
-	<string name="index_name_north_america">North America - other maps</string>
+	<string name="index_name_north_america">North America</string>
 	<string name="index_name_central_america">Central America</string>
 	<string name="index_name_south_america">South America</string>
 	<string name="index_name_france">Europe - France</string>
 	<string name="index_name_germany">Europe - Germany</string>
-	<string name="index_name_europe">Europe - other maps</string>
+	<string name="index_name_europe">Europe</string>
 	<string name="index_name_russia">Europe/Asia - Russia</string>
 	<string name="index_name_africa">Africa</string>
 	<string name="index_name_asia">Asia</string>
 	<string name="index_name_australia">Australia</string>
-	<string name="index_name_other">Other (Worldwide and topic maps)</string>
+	<string name="index_name_other">Worldwide and topic maps</string>
 	<string name="index_name_wiki">Worldwide Wikipedia</string>
 	<string name="index_name_voice">Voice packs (recorded)</string>
 	<string name="index_name_tts_voice">Voice packs (TTS)</string>

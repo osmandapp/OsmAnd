@@ -723,50 +723,50 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 		final Map<String, IndexItemCategory> cats = new TreeMap<String, DownloadIndexActivity.IndexItemCategory>();
 		for(IndexItem i : indexItems){
 			int nameId = R.string.index_name_other;
-			int order = 80;
+			int order = 12;
 			String lc = i.getFileName().toLowerCase();
 			if(lc.endsWith(".voice.zip")) {
 				nameId = R.string.index_name_voice;
-				order = 95; 
+				order = 1; 
 			} else if(lc.contains(".ttsvoice.zip")) {
 				nameId = R.string.index_name_tts_voice;
-				order = 96;
+				order = 2;
 			} else if(lc.startsWith("us")) {
 				nameId = R.string.index_name_us;
-				order = 10;
+				order = 31;
 			} else if(lc.contains("_northamerica_")) {
 				nameId = R.string.index_name_north_america;
-				order = 18;
+				order = 30;
 			} else if(lc.contains("_centralamerica_") || lc.contains("central-america")) {
 				nameId = R.string.index_name_central_america;
-				order = 28;
+				order = 50;
 			} else if(lc.contains("_southamerica_") || lc.contains("south-america")) {
 				nameId = R.string.index_name_south_america;
-				order = 38;
+				order = 55;
 			} else if(lc.startsWith("france_")) {
 				nameId = R.string.index_name_france;
-				order = 40;
+				order = 17;
 			} else if(lc.startsWith("germany_")) {
 				nameId = R.string.index_name_germany;
-				order = 41;
+				order = 16;
 			} else if(lc.contains("_europe_")) {
 				nameId = R.string.index_name_europe;
-				order = 48;
+				order = 15;
 			} else if(lc.startsWith("russia_")) {
 				nameId = R.string.index_name_russia;
-				order = 49;
+				order = 18;
 			} else if(lc.contains("africa")) {
 				nameId = R.string.index_name_africa;
-				order = 58;
+				order = 80;
 			} else if(lc.contains("_asia_")) {
 				nameId = R.string.index_name_asia;
-				order = 68;
+				order = 41;
 			} else if(lc.contains("australia")) {
 				nameId = R.string.index_name_australia;
-				order = 78;
+				order = 70;
 			} else if(lc.contains("_wiki_")) {
 				nameId = R.string.index_name_wiki;
-				order = 90;
+				order = 10;
 			}
 			
 			String name = getString(nameId);
