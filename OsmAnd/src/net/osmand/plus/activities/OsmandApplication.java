@@ -76,6 +76,7 @@ public class OsmandApplication extends Application {
     	long timeToStart = System.currentTimeMillis();
     	osmandSettings = OsmandSettings.getOsmandSettings(this);
     	Version.APP_NAME = getString(R.string.app_name);
+    	Version.APP_VERSION = getString(R.string.app_version);
     	routingHelper = new RoutingHelper(osmandSettings, OsmandApplication.this, player);
     	manager = new ResourceManager(this);
     	daynightHelper = new DayNightHelper(this);
