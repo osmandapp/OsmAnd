@@ -1,5 +1,6 @@
 <?php
-use GoogleAnalytics as UnitedPrototype\GoogleAnalytics;
+include 'autoload.php';
+use UnitedPrototype\GoogleAnalytics;
 
 function downloadFile($filename) {
 	if (!file_exists($filename)) {
@@ -84,7 +85,7 @@ function update_count_of_downloads($file) {
       
     $tracker = new GoogleAnalytics\Tracker('UA-28342846-1', 'download.osmand.net');
     $visitor = new GoogleAnalytics\Visitor();
-    $visitor->setIpAddress($_SERVER['REMOTE_ADDRESS']);
+    $visitor->setIpAddress($_SERVER['REMOTE_ADDR']);
     $visitor->setUserAgent($_SERVER['HTTP_USER_AGENT']);
     $visitor->setScreenResolution('1024x768');
     // Assemble Session information
