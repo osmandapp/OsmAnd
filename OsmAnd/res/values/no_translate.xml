@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="app_name">OsmAnd~</string>
+    <string name="app_name">OsmAnd</string>
     <string name="app_version">0.7.0</string>
     <!-- Not translatable -->
     <string name="ga_api_key">UA-28342846-2</string>
