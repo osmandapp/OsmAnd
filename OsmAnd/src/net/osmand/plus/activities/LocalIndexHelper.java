@@ -390,12 +390,12 @@ public class LocalIndexHelper {
 
 
 	public enum LocalIndexType {
-		VOICE_DATA(R.string.local_indexes_cat_voice),
-		TTS_VOICE_DATA(R.string.local_indexes_cat_tts),
 		TILES_DATA(R.string.local_indexes_cat_tile),
-		GPX_DATA(R.string.local_indexes_cat_gpx),
 		MAP_DATA(R.string.local_indexes_cat_map),
 		POI_DATA(R.string.local_indexes_cat_poi);
+		VOICE_DATA(R.string.local_indexes_cat_voice),
+		TTS_VOICE_DATA(R.string.local_indexes_cat_tts),
+		GPX_DATA(R.string.local_indexes_cat_gpx),
 		
 		private final int resId;
 
