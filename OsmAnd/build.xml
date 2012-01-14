@@ -236,7 +236,7 @@
 	 	<fail message="ndk.dir is missing. Make sure to generate local.properties  or to inject it through an env var" unless="ndk.dir"/>
 	 		
 		<echo>Package helper running: nativeon</echo>
-	 	    <exec command="${ndk.dir}/ndk-build V=1"/>
+	 	    <exec command="${ndk.dir}/ndk-build V=1" failonerror="true"/>
             <apkbuilder
                     outfolder="${out.absolute.dir}"
                     resourcefile="${resource.package.file.name}"
