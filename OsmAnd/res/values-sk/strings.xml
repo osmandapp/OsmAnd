@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
 
-	<string name="index_name_other">Ostatné</string>
-	<string name="index_name_australia">Austrália</string>
+	<string name="index_name_us">Severná Amerika - Spojené štáty</string>
+	<string name="index_name_north_america">Severná Amerika</string>
 	<string name="index_name_central_america">Stredná Amerika</string>
 	<string name="index_name_south_america">Južná Amerika</string>
-	<string name="index_name_north_america">Severná Amerika</string>
-	<string name="index_name_us">Spojené štáty</string>
-	<string name="index_name_asia">Ázia</string>
-	<string name="index_name_africa">Afrika</string>
+	<string name="index_name_france">Európa - Francúzsko</string>
+	<string name="index_name_germany">Európa - Nemecko</string>
 	<string name="index_name_europe">Európa</string>
-	<string name="index_name_france">Francúzsko</string>
-	<string name="index_name_germany">Nemecko</string>
-	<string name="index_name_russia">Rusko</string>
-	<string name="index_name_wiki">Wikipedia</string>
-	<string name="index_name_voice">Hlasové balíky</string>
-	<string name="index_name_tts_voice">Hlasové TTS balíky</string>
+	<string name="index_name_russia">Európa/Ázia - Rusko</string>
+	<string name="index_name_africa">Afrika</string>
+	<string name="index_name_asia">Ázia</string>
+	<string name="index_name_australia">Austrália</string>
+	<string name="index_name_other">Ostatné</string>
+	<string name="index_name_wiki">Wikipedia globálne</string>
+	<string name="index_name_voice">Hlasové balíky (mediálne)</string>
+	<string name="index_name_tts_voice">Hlasové balíky (TTS)</string>
 
-	<string name="amenity_type_wikiosm">Wikipedia</string>
+	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
 	<string name="amenity_type_user_defined">Užívateľský</string>
 	<string name="fav_export_confirmation">Súbor s predošle exporotvanými obľúbenými bodmi už existuje. Chcete ho nahradiť? </string>
 	<string name="profile_settings">Profilovo špecifické nastavenia</string>
