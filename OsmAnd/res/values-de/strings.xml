@@ -1,5 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="index_name_us">Nordamerika - Vereinigte Staaten</string>
+	<string name="index_name_north_america">Nordamerika - andere Karten</string>
+	<string name="index_name_central_america">Zentralamerika/string>
+	<string name="index_name_south_america">Südamerika</string>
+	<string name="index_name_france">Europa - Frankreich</string>
+	<string name="index_name_germany">Europa - Deutschland</string>
+	<string name="index_name_europe">Europa - andere Karten</string>
+	<string name="index_name_russia">Europa/Asien - Russland</string>
+	<string name="index_name_africa">Afrika</string>
+	<string name="index_name_asia">Asien</string>
+	<string name="index_name_australia">Australien</string>
+	<string name="index_name_other">Andere (weltweite oder thematische Karten)</string>
+	<string name="index_name_wiki">Weltweite Wikipedia</string>
+	<string name="index_name_voice">Sprachpakete (Aufnahmen)</string>
+	<string name="index_name_tts_voice">Sprachpakete (TTS)</string>
+
 	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
 	<string name="amenity_type_user_defined">Benutzerdefiniert</string>
 	<string name="fav_export_confirmation">Eine Datei mit exportierten Favoriten existiert beretis. Überschreiben?</string>
@@ -519,7 +535,7 @@
 	<string name="voice_data_not_supported">Sprachpaket-Version wird nicht unterstützt.</string>
 	<string name="voice_data_corrupted">Sprachpaket ist defekt</string>
 	<string name="voice_data_unavailable">Das aktuelle Sprachpaket ist nicht verfügbar</string>
-	<string name="stop_routing">Navigation stoppen</string>
+	<string name="stop_routing">Navig.stoppen</string>
 	<string name="sd_unmounted">Die SD-Karte ist nicht verfügbar. \nKarte lässt sich nicht darstellen.</string>
 	<string name="sd_mounted_ro">Die SD-Karte befindet sich im Nur-Lesen Modus. \nSie können nur vorgeladene Karten sehen. Der Internetdownload ist deaktiviert.</string>
 	<string name="unzipping_file">Datei wird entpackt...</string>
