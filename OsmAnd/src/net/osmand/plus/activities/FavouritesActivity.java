@@ -203,10 +203,11 @@ public class FavouritesActivity extends ExpandableListActivity {
 //					double d1 = MapUtils.getDistance(mapLocation, object1.getLatitude(), object1.getLongitude());
 //					double d2 = MapUtils.getDistance(mapLocation, object2.getLatitude(), object2.getLongitude());
 //					if(d1 == d2){
-					if(object1.getName() == object2.getName()){
+					int result = object1.getName().compareTo(object2.getName());
+					if(result == 0){
 						return 0;
 //					} else if(d1 > d2){
-					} else if(object1.getName() > object2.getName()){
+					} else if(result < 0){
 						return 1;
 					}
 					return -1;
