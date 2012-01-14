@@ -234,8 +234,9 @@
 	</then>
 	 <else>
 	 	<fail message="ndk.dir is missing. Make sure to generate local.properties  or to inject it through an env var" unless="ndk.dir"/>
-	 		
+	 	<!-- Requires 1) gcc, 2) make, 3) download android sources (skia) - specify branch 4) Define environment variable ANDROID_SRC -->	
 		<echo>Package helper running: nativeon</echo>
+	 	
 	 	    <exec command="${ndk.dir}/ndk-build V=1" failonerror="true"/>
             <apkbuilder
                     outfolder="${out.absolute.dir}"
