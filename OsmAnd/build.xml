@@ -38,6 +38,9 @@
          This file is an integral part of the build system for your
          application and should be checked into Version Control Systems. -->
     <loadproperties srcFile="project.properties" />
+	
+	<!-- specify java.compilerArgs if they were not specified -->
+	<property name="java.compilerargs" value=""/>
 
     <!-- quick check on sdk.dir -->
     <fail
@@ -69,14 +72,17 @@
 				<exclude name="**/*.java" />
 			</fileset>
 		</copy>
-		<if> <isset property="net.osmand"/>
+		<if> 
+		  <condition>
+		  		<isset property="net.osmand" />
+		  </condition>
 		  <then>
 		  	<replaceregexp file="AndroidManifest.xml" match='package="net.osmand.plus"' replace='package="net.osmand"' byline="true" />
 		  	<replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;Osmand&lt;' byline="true" />
 		  </then>
 		  <else>
 		  	<replaceregexp file="AndroidManifest.xml" match='package="net.osmand"' replace='package="net.osmand.plus"' byline="true" />
-		  	<replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;Osmand&lt;+' byline="true" />
+		  	<replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;Osmand+&lt;' byline="true" />
 		  </else>
 		</if> 
 	</target>
@@ -227,7 +233,10 @@
             </apkbuilder>
 	</then>
 	 <else>
+	 	<fail message="ndk.dir is missing. Make sure to generate local.properties  or to inject it through an env var" unless="ndk.dir"/>
+	 		
 		<echo>Package helper running: nativeon</echo>
+	 	    <exec command="${ndk.dir}/ndk-build V=1"/>
             <apkbuilder
                     outfolder="${out.absolute.dir}"
                     resourcefile="${resource.package.file.name}"
