@@ -46,13 +46,15 @@ public class MapTileDownloader {
 	
 	
 	public static MapTileDownloader getInstance(){
-		return getInstance(Version.APP_NAME_VERSION);
+		return getInstance(null);
 	}
 	
 	public static MapTileDownloader getInstance(String userAgent){
 		if(downloader == null){
 			downloader = new MapTileDownloader(TILE_DOWNLOAD_THREADS);
-			MapTileDownloader.USER_AGENT = userAgent;
+			if(userAgent != null) {
+				MapTileDownloader.USER_AGENT = userAgent;
+			}
 		}
 		return downloader;
 	}

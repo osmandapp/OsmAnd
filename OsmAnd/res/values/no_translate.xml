@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <string name="app_name">OsmAnd+</string>
+    <!-- Not translatable -->
+    <string name="ga_api_key">UA-28342846-2</string>
+    <string name="ga_dispatchPeriod">10</string>
+    <string name="ga_debug">true</string>
+    
+</resources>

@@ -28,9 +28,13 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import org.apache.commons.logging.Log;
+
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 import net.osmand.IProgress;
+import net.osmand.LogUtil;
+import net.osmand.Version;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.DownloadOsmandIndexesHelper;
 import net.osmand.plus.DownloadOsmandIndexesHelper.IndexItem;
@@ -48,9 +52,12 @@ import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StatFs;
 import android.text.Editable;
@@ -97,9 +104,25 @@ public class DownloadIndexActivity extends ExpandableListActivity {
     private TextWatcher textWatcher ;
 	private EditText filterText;
 	private DownloadFileHelper downloadFileHelper = null;
+	
 	private GoogleAnalyticsTracker tracker;
 
 
+	private void setCustomVarsToTracker(){
+		tracker.setCustomVar(1, "App", Version.APP_NAME_VERSION);
+		tracker.setCustomVar(2, "Device", Build.DEVICE);
+		tracker.setCustomVar(3, "Brand", Build.BRAND);
+		tracker.setCustomVar(4, "Model", Build.MODEL);
+		tracker.setCustomVar(5, "Package", getPackageName());
+		try {
+			PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
+			if (info != null) {
+				tracker.setCustomVar(6, "Version name", info.versionName);
+				tracker.setCustomVar(7, "Version code", info.versionCode+"");
+			}
+		} catch (NameNotFoundException e) {
+		}
+	}
 	
 	
 	@Override
@@ -110,14 +133,15 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 	    tracker = GoogleAnalyticsTracker.getInstance();
 	    // Start the tracker in manual dispatch mode...
 	    tracker.startNewSession(getString(R.string.ga_api_key), 60, this);
-
+	    setCustomVarsToTracker();
+	    tracker.trackPageView("/download.activity");
 		
 		downloadFileHelper = new DownloadFileHelper(this);
 		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
-				downloadFiles_1_CheckSpace();
+				downloadFilesPreCheckSpace();
 			}
 			
 		});
@@ -159,6 +183,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 			downloadIndexList();
 		}
 	}
+	
 
 	private void downloadIndexList() {
 		showDialog(DIALOG_PROGRESS_LIST);
@@ -313,7 +338,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 				DownloadIndexesAsyncTask task = new DownloadIndexesAsyncTask(new ProgressDialogImplementation(progressFileDlg,true));
 				String[] indexes = entriesToDownload.keySet().toArray(new String[0]);
 				for(String index : indexes) {
-					tracker.trackEvent("Downloads", index, "file", 50);
+					tracker.trackEvent("Downloads", Version.APP_NAME, index, 1);
 				}
 				task.execute(indexes);
 				break;
@@ -503,7 +528,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 		return entry;
 	}
 	
-	protected void downloadFiles_1_CheckSpace() {
+	protected void downloadFilesPreCheckSpace() {
 		double sz = 0;
 		for(DownloadEntry es : entriesToDownload.values()){
 			sz += es.sizeMB;
@@ -541,6 +566,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		tracker.stopSession();
 		if(isFinishing()){
 			downloadFileHelper.setInterruptDownloading(true);
 		}
@@ -606,6 +632,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 			if(mainView != null){
 				mainView.setKeepScreenOn(false);
 			}
+			tracker.dispatch();
 		}
 		
 		@Override

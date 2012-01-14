@@ -552,7 +552,7 @@ public class MapRenderRepositories {
 			}
 			// Force to use rendering request in order to prevent Garbage Collector when it is used in C++
 			if(renderingReq != null){
-				System.out.println("Debug :" + renderingReq != null);				
+				log.info("Debug :" + renderingReq != null);				
 			}
 			String renderingDebugInfo = currentRenderingContext.renderingDebugInfo;
 			currentRenderingContext.ended = true;

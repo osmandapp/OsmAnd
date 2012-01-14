@@ -4,5 +4,10 @@
     <color name="activity_background">#6A6A6A</color>
     <color name="list_separator">#494949</color>
     <color name="activity_text">#FFFFFF</color>
-
+	<color name="menu_background">#FF9030</color>
+	<color name="color_light_gray">#d7d7d7</color>
+	<color name="color_black">#000000</color>
+	<color name="color_transparent">#00000000</color>
+	<color name="color_white">#FFFFFF</color>
+	<color name="color_red">#FF0000</color>
 </resources>

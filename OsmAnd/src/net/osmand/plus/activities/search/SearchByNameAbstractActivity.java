@@ -4,7 +4,10 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+
 import net.osmand.CollatorStringMatcher;
+import net.osmand.LogUtil;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandSettings;
@@ -47,6 +50,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 	protected Collator collator;
 	protected NamesFilter namesFilter;
 	private String currentFilter = "";
+	private static final Log log = LogUtil.getLog(SearchByNameAbstractActivity.class); 
 	
 
 	@Override
@@ -170,6 +174,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public NamesAdapter getListAdapter() {
 		return (NamesAdapter) super.getListAdapter();
@@ -246,7 +251,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 		@Override
 		protected void publishResults(CharSequence constraint, FilterResults results) {
 			if(results != null && initializeTaskIsFinished()){
-				System.out.println("Search " + constraint + " finished in " + (System.currentTimeMillis() - startTime));
+				log.debug("Search " + constraint + " finished in " + (System.currentTimeMillis() - startTime));
 				progress.setVisibility(View.INVISIBLE);
 			}
 		}
