@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    
-    <string name="index_name_other">Other</string>
-    <string name="index_name_australia">Australia</string>
-    <string name="index_name_central_america">Central America</string>
-    <string name="index_name_south_america">South America</string>
-    <string name="index_name_north_america">North America</string>
-    <string name="index_name_us">United States</string>
-    <string name="index_name_asia">Asia</string>
-    <string name="index_name_africa">Africa</string>
-    <string name="index_name_europe">Europe</string>
-    <string name="index_name_france">France</string>
-    <string name="index_name_germany">Germany</string>
-    <string name="index_name_russia">Russia</string>
-    <string name="index_name_wiki">Wikipedia</string>
-    <string name="index_name_voice">Voice packs</string>
-    <string name="index_name_tts_voice">TTS voice packs</string>
-    
-    <string name="amenity_type_wikiosm">Wikipedia</string>
+	<string name="index_name_voice">_Voice packs (recorded)</string>
+	<string name="index_name_tts_voice">_Voice packs (TTS)</string>
+	<string name="index_name_africa">Africa - other countries</string>
+	<string name="index_name_asia">Asia - other countries</string>
+	<string name="index_name_australia">Australia</string>
+	<string name="index_name_central_america">Central America - other countries</string>
+	<string name="index_name_north_america">North America - other countries</string>
+	<string name="index_name_us">North America - United States</string>
+	<string name="index_name_france">Europe - France</string>
+	<string name="index_name_germany">Europe - Germany</string>
+	<string name="index_name_europe">Europe - other countries</string>
+	<string name="index_name_russia">Europe/Asia - Russia</string>
+	<string name="index_name_south_america">South America - other countries</string>
+	<string name="index_name_other">Worldwide + other maps</string>
+	<string name="index_name_wiki">Worldwide Wikipedia</string>
+
+	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
 	<string name="amenity_type_user_defined">User defined</string>
-	<string name="fav_export_confirmation">File with previously exported favorites already exist. Do you want to replace it? </string>
-<!-- this block re-worked for new menu structure -->
+	<string name="fav_export_confirmation">File with previously exported favorites already exists. Do you want to replace it?</string>
+<!-- this block re-worked for new Preferences structure -->
 	<string name="profile_settings">Profile Specific Settings</string>
 	<string name="settings_preset">User Profile</string>
 	<string name="settings_preset_descr">Select a use profile. (Each profiles\'s Map, Tracking, and Navigation settings can be customized below.)</string>
@@ -73,7 +72,7 @@
 	\n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem.
 	\n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button.
 	\n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
-<!-- end of string changes for new menu structure -->
+<!-- end of string changes for new Preferences structure -->
 
 	<string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>
 	<string name="download_files_question_space">Free space now {2} MB! Download {0} file(s) ({1} MB)?</string>
