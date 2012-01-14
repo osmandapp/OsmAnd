@@ -207,7 +207,7 @@ public class FavouritesActivity extends ExpandableListActivity {
 					if(result == 0){
 						return 0;
 //					} else if(d1 > d2){
-					} else if(result < 0){
+					} else if(result > 0){
 						return 1;
 					}
 					return -1;
