@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-
-	<string name="index_name_us">Severná Amerika - Spojené štáty</string>
+	<string name="index_name_us">Severná Amerika - Spojené Štáty</string>
 	<string name="index_name_north_america">Severná Amerika</string>
 	<string name="index_name_central_america">Stredná Amerika</string>
 	<string name="index_name_south_america">Južná Amerika</string>
@@ -12,9 +11,9 @@
 	<string name="index_name_africa">Afrika</string>
 	<string name="index_name_asia">Ázia</string>
 	<string name="index_name_australia">Austrália</string>
-	<string name="index_name_other">Ostatné</string>
-	<string name="index_name_wiki">Wikipedia globálne</string>
-	<string name="index_name_voice">Hlasové balíky (mediálne)</string>
+	<string name="index_name_other">Celosvetové a ostatné mapy</string>
+	<string name="index_name_wiki">Celosvetová Wikipedia</string>
+	<string name="index_name_voice">Hlasové balíky (zvukové)</string>
 	<string name="index_name_tts_voice">Hlasové balíky (TTS)</string>
 
 	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
