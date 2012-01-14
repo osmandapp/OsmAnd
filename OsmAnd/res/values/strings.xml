@@ -2,18 +2,18 @@
 <resources>
 	<string name="index_name_voice">_Voice packs (recorded)</string>
 	<string name="index_name_tts_voice">_Voice packs (TTS)</string>
-	<string name="index_name_africa">Africa - other countries</string>
-	<string name="index_name_asia">Asia - other countries</string>
+	<string name="index_name_africa">Africa - other maps</string>
+	<string name="index_name_asia">Asia - other maps</string>
 	<string name="index_name_australia">Australia</string>
-	<string name="index_name_central_america">Central America - other countries</string>
-	<string name="index_name_north_america">North America - other countries</string>
+	<string name="index_name_central_america">Central America - other maps</string>
+	<string name="index_name_north_america">North America - other maps</string>
 	<string name="index_name_us">North America - United States</string>
 	<string name="index_name_france">Europe - France</string>
 	<string name="index_name_germany">Europe - Germany</string>
-	<string name="index_name_europe">Europe - other countries</string>
+	<string name="index_name_europe">Europe - other maps</string>
 	<string name="index_name_russia">Europe/Asia - Russia</string>
-	<string name="index_name_south_america">South America - other countries</string>
-	<string name="index_name_other">Worldwide + other maps</string>
+	<string name="index_name_south_america">South America - other maps</string>
+	<string name="index_name_other">Worldwide and topic maps</string>
 	<string name="index_name_wiki">Worldwide Wikipedia</string>
 
 	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
