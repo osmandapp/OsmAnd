@@ -4,6 +4,8 @@ import java.io.File;
 import java.text.MessageFormat;
 import java.util.Random;
 
+import com.google.android.apps.analytics.easytracking.TrackedActivity;
+
 import net.osmand.Version;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -37,7 +39,7 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 
-public class MainMenuActivity extends Activity {
+public class MainMenuActivity extends TrackedActivity {
 
 	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
 	private static final String VECTOR_INDEXES_CHECK = "VECTOR_INDEXES_CHECK"; //$NON-NLS-1$

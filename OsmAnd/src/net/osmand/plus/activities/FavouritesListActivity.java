@@ -6,6 +6,8 @@ package net.osmand.plus.activities;
 import java.util.Comparator;
 import java.util.List;
 
+import com.google.android.apps.analytics.easytracking.TrackedListActivity;
+
 import net.osmand.FavouritePoint;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
@@ -33,7 +35,7 @@ import android.widget.TextView;
 /**
  * 
  */
-public class FavouritesListActivity extends ListActivity implements SearchActivityChild {
+public class FavouritesListActivity extends TrackedListActivity implements SearchActivityChild {
 
 	public static final String SELECT_FAVORITE_POINT_INTENT_KEY = "SELECT_FAVORITE_POINT_INTENT_KEY"; 
 	public static final int SELECT_FAVORITE_POINT_RESULT_OK = 1;

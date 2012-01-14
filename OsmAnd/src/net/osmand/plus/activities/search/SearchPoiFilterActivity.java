@@ -6,6 +6,8 @@ package net.osmand.plus.activities.search;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.android.apps.analytics.easytracking.TrackedListActivity;
+
 import net.osmand.osm.LatLon;
 import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmandSettings;
@@ -16,7 +18,6 @@ import net.osmand.plus.ResourceManager;
 import net.osmand.plus.SearchByNameFilter;
 import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.OsmandApplication;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -35,7 +36,7 @@ import android.widget.Toast;
  * @author Maxim Frolov
  * 
  */
-public class SearchPoiFilterActivity extends ListActivity {
+public class SearchPoiFilterActivity extends TrackedListActivity {
 
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;

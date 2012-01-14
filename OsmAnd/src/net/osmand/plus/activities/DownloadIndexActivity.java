@@ -28,6 +28,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
 import net.osmand.IProgress;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.DownloadOsmandIndexesHelper;
@@ -95,6 +97,9 @@ public class DownloadIndexActivity extends ExpandableListActivity {
     private TextWatcher textWatcher ;
 	private EditText filterText;
 	private DownloadFileHelper downloadFileHelper = null;
+	private GoogleAnalyticsTracker tracker;
+
+
 	
 	
 	@Override
@@ -102,6 +107,11 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 		super.onCreate(savedInstanceState);
 		// recreation upon rotation is prevented in manifest file
 		setContentView(R.layout.download_index);
+	    tracker = GoogleAnalyticsTracker.getInstance();
+	    // Start the tracker in manual dispatch mode...
+	    tracker.startNewSession(getString(R.string.ga_api_key), 60, this);
+
+		
 		downloadFileHelper = new DownloadFileHelper(this);
 		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener(){
 
@@ -301,7 +311,11 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 		switch (id) {
 			case DIALOG_PROGRESS_FILE:
 				DownloadIndexesAsyncTask task = new DownloadIndexesAsyncTask(new ProgressDialogImplementation(progressFileDlg,true));
-				task.execute(entriesToDownload.keySet().toArray(new String[0]));
+				String[] indexes = entriesToDownload.keySet().toArray(new String[0]);
+				for(String index : indexes) {
+					tracker.trackEvent("Downloads", index, "file", 50);
+				}
+				task.execute(indexes);
 				break;
 			case DIALOG_PROGRESS_LIST:
 				downloadListIndexThread.setUiActivity(this);

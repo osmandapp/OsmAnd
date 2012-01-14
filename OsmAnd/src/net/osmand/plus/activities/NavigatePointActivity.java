@@ -5,6 +5,9 @@ import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
+import com.google.android.apps.analytics.easytracking.TrackedActivity;
+import com.google.android.apps.analytics.easytracking.TrackedListActivity;
+
 import net.osmand.LogUtil;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -27,7 +30,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-public class NavigatePointActivity extends Activity implements SearchActivityChild {
+public class NavigatePointActivity extends TrackedActivity implements SearchActivityChild {
 	Dialog dlg;
 	MapActivity activity; 
 	int currentFormat = Location.FORMAT_DEGREES;
