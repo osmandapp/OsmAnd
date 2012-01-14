@@ -200,13 +200,11 @@ public class FavouritesActivity extends ExpandableListActivity {
 
 				@Override
 				public int compare(FavouritePoint object1, FavouritePoint object2) {
-//					double d1 = MapUtils.getDistance(mapLocation, object1.getLatitude(), object1.getLongitude());
-//					double d2 = MapUtils.getDistance(mapLocation, object2.getLatitude(), object2.getLongitude());
-//					if(d1 == d2){
-					if(object1.getString == object2.getString){
+					double d1 = MapUtils.getDistance(mapLocation, object1.getLatitude(), object1.getLongitude());
+					double d2 = MapUtils.getDistance(mapLocation, object2.getLatitude(), object2.getLongitude());
+					if(d1 == d2){
 						return 0;
-//					} else if(d1 > d2){
-					} else if(object1.getString > object2.getString){
+					} else if(d1 > d2){
 						return 1;
 					}
 					return -1;
