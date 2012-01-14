@@ -684,50 +684,50 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 		final Map<String, IndexItemCategory> cats = new TreeMap<String, DownloadIndexActivity.IndexItemCategory>();
 		for(IndexItem i : indexItems){
 			int nameId = R.string.index_name_other;
-			int order = 100;
+			int order = 80;
 			String lc = i.getFileName().toLowerCase();
 			if(lc.endsWith(".voice.zip")) {
 				nameId = R.string.index_name_voice;
-				order = 1; 
+				order = 95; 
 			} else if(lc.contains(".ttsvoice.zip")) {
 				nameId = R.string.index_name_tts_voice;
-				order = 3;
-			} else if(lc.contains("_wiki_")) {
-				nameId = R.string.index_name_wiki;
-				order = 5;
-			} else if(lc.startsWith("germany_")) {
-				nameId = R.string.index_name_germany;
-				order = 40;
-			} else if(lc.startsWith("france_")) {
-				nameId = R.string.index_name_france;
-				order = 45;
-			} else if(lc.startsWith("russia_")) {
-				nameId = R.string.index_name_russia;
-				order = 50;
+				order = 96;
 			} else if(lc.startsWith("us")) {
 				nameId = R.string.index_name_us;
-				order = 60;
-			} else if(lc.contains("_europe_")) {
-				nameId = R.string.index_name_europe;
 				order = 10;
-			} else if(lc.contains("_asia_")) {
-				nameId = R.string.index_name_asia;
-				order = 80;
 			} else if(lc.contains("_northamerica_")) {
 				nameId = R.string.index_name_north_america;
-				order = 65;
+				order = 19;
 			} else if(lc.contains("_centralamerica_") || lc.contains("central-america")) {
 				nameId = R.string.index_name_central_america;
-				order = 70;
+				order = 20;
 			} else if(lc.contains("_southamerica_") || lc.contains("south-america")) {
 				nameId = R.string.index_name_south_america;
-				order = 75;
-			} else if(lc.contains("australia")) {
-				nameId = R.string.index_name_australia;
-				order = 80;
+				order = 30;
+			} else if(lc.startsWith("france_")) {
+				nameId = R.string.index_name_france;
+				order = 40;
+			} else if(lc.startsWith("germany_")) {
+				nameId = R.string.index_name_germany;
+				order = 41;
+			} else if(lc.contains("_europe_")) {
+				nameId = R.string.index_name_europe;
+				order = 48;
+			} else if(lc.startsWith("russia_")) {
+				nameId = R.string.index_name_russia;
+				order = 49;
 			} else if(lc.contains("africa")) {
 				nameId = R.string.index_name_africa;
-				order = 85;
+				order = 50;
+			} else if(lc.contains("_asia_")) {
+				nameId = R.string.index_name_asia;
+				order = 60;
+			} else if(lc.contains("australia")) {
+				nameId = R.string.index_name_australia;
+				order = 70;
+			} else if(lc.contains("_wiki_")) {
+				nameId = R.string.index_name_wiki;
+				order = 90;
 			}
 			
 			String name = getString(nameId);
