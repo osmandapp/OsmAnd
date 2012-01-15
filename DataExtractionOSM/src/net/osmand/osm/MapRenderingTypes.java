@@ -531,7 +531,7 @@ public class MapRenderingTypes {
 			}
 		} else if(e.getTag(OSMTagKey.BRIDGE) != null){
 			return 2;
-		} else if(e.getTag(OSMTagKey.TUNNEL) != null){
+		} else if(e.getTag(OSMTagKey.TUNNEL) != null && !e.getTag(OSMTagKey.TUNNEL).equalsIgnoreCase("no")){
 			return 1;
 		}
 		return 0;
