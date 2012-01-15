@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="poi_context_menu_showdescription">Zeige POI-Beschreibung</string>
+
 	<string name="index_name_us">Nordamerika - Vereinigte Staaten</string>
 	<string name="index_name_north_america">Nordamerika - andere Karten</string>
 	<string name="index_name_central_america">Zentralamerika</string>
@@ -445,8 +447,8 @@
 	<string name="renderers">Vektor Renderer</string>
 	<string name="renderers_descr">Wähle Anzeigemodus für Offline-Vektor-Karten</string>
 
-	<string name="poi_context_menu_website">Zeige POI Internetseite</string>
-	<string name="poi_context_menu_call">Zeige POI Telefon</string>
+	<string name="poi_context_menu_website">Zeige POI-Internetseite</string>
+	<string name="poi_context_menu_call">Zeige POI-Telefon</string>
 	<string name="website">Internetseite</string>
 	<string name="phone">Telefon</string>
 	<string name="download_type_to_filter">Filtern nach Typ</string>
