@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    
+	<string name="tip_recent_changes_0_7_0_t">Changes in 0.7.0 :
+\n\t- Offline wikipedia maps with articles
+\n\t- Updated maps
+\n\t- Other small features
+	</string>    
     <string name="free_version_message">Free OsmAnd version is limited to %1$s downloads %2$s and doesn\'t support offline wikipedia articles.</string>
     <string name="free_version_title">Free version</string>
 	<string name="poi_context_menu_showdescription">Show POI description</string>

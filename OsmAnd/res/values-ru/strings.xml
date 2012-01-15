@@ -1,5 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    	<string name="tip_recent_changes_0_7_0_t">Изменения в 0.7.0 :
+\n\t- Offline Wikipedia карты со статьями
+\n\t- Обновление карт
+\n\t- Другие изменения
+	</string>    
         <string name="free_version_message">Бесплатная версия OsmAnd ограничена %1$s загрузками %2$s и не поддерживает геостатьи из wikipedia.</string>
     <string name="free_version_title">Бесплатная версия</string>
 	<string name="poi_context_menu_showdescription">Показать POI описание</string>
