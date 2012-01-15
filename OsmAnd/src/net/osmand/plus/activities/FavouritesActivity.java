@@ -195,7 +195,7 @@ public class FavouritesActivity extends ExpandableListActivity {
 		final LatLon mapLocation = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
 		favouritesAdapter.synchronizeGroups();
 		
-		if(mapLocation != null){
+//		if(mapLocation != null){
 			favouritesAdapter.sort(new Comparator<FavouritePoint>(){
 
 				@Override
@@ -214,7 +214,7 @@ public class FavouritesActivity extends ExpandableListActivity {
 				}
 				
 			});
-		}
+//		}
 		
 	}
 
