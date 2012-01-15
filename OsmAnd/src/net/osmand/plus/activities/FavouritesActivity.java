@@ -157,6 +157,13 @@ public class FavouritesActivity extends ExpandableListActivity {
 			protected void onPostExecute(String result) {
 				hideProgressBar();
 				favouritesAdapter.synchronizeGroups();
+				favouritesAdapter.sort(new Comparator<FavouritePoint>(){
+
+					@Override
+					public int compare(FavouritePoint object1, FavouritePoint object2) {
+						return object1.getName().compareTo(object2.getName());
+					}
+				});
 			};
 			
 			@Override
@@ -261,6 +268,13 @@ public class FavouritesActivity extends ExpandableListActivity {
 					boolean editied = helper.editFavouriteName(point, editText.getText().toString(), cat.getText().toString());
 					if (editied) {
 						favouritesAdapter.synchronizeGroups();
+						favouritesAdapter.sort(new Comparator<FavouritePoint>(){
+
+							@Override
+							public int compare(FavouritePoint object1, FavouritePoint object2) {
+								return object1.getName().compareTo(object2.getName());
+							}
+						});
 					}
 
 				}
@@ -282,6 +296,13 @@ public class FavouritesActivity extends ExpandableListActivity {
 								MessageFormat.format(resources.getString(R.string.favourites_remove_dialog_success), point.getName()),
 								Toast.LENGTH_SHORT).show();
 						favouritesAdapter.synchronizeGroups();
+						favouritesAdapter.sort(new Comparator<FavouritePoint>(){
+
+							@Override
+							public int compare(FavouritePoint object1, FavouritePoint object2) {
+								return object1.getName().compareTo(object2.getName());
+							}
+						});
 					}
 
 				}
@@ -422,6 +443,13 @@ public class FavouritesActivity extends ExpandableListActivity {
 							Toast.makeText(FavouritesActivity.this, warning, Toast.LENGTH_LONG).show();
 						}
 						favouritesAdapter.synchronizeGroups();
+						favouritesAdapter.sort(new Comparator<FavouritePoint>(){
+
+							@Override
+							public int compare(FavouritePoint object1, FavouritePoint object2) {
+								return object1.getName().compareTo(object2.getName());
+							}
+						});
 					};
 					
 				}.execute();
