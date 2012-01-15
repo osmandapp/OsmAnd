@@ -135,7 +135,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 	    // Start the tracker in manual dispatch mode...
 	    tracker.startNewSession(getString(R.string.ga_api_key), 60, this);
 	    setCustomVarsToTracker();
-	    tracker.trackPageView("/download.activity");
+	    tracker.trackPageView("/download.activity?" +Version.getVersionAsURLParam());
 		
 		downloadFileHelper = new DownloadFileHelper(this);
 		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener(){
@@ -344,8 +344,14 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 			case DIALOG_PROGRESS_FILE:
 				DownloadIndexesAsyncTask task = new DownloadIndexesAsyncTask(new ProgressDialogImplementation(progressFileDlg,true));
 				String[] indexes = entriesToDownload.keySet().toArray(new String[0]);
+				String v = Version.APP_NAME_VERSION;
+				if(Version.APP_DESCRIPTION.equals("beta")){
+					v +="beta";
+				} else {
+					v +="test";
+				}
 				for(String index : indexes) {
-					tracker.trackEvent("Downloads", Version.APP_NAME, index, 1);
+					tracker.trackEvent(v, Version.APP_NAME, index, 1);
 				}
 				task.execute(indexes);
 				break;
