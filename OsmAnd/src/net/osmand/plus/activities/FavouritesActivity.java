@@ -200,7 +200,7 @@ public class FavouritesActivity extends ExpandableListActivity {
 
 			@Override
 			public int compare(FavouritePoint object1, FavouritePoint object2) {
-				return object1.getName(object1).compareTo(object2.getName(object2));
+				return object1.getName().compareTo(object2.getName());
 			}
 		});
 		
