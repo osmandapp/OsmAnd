@@ -186,7 +186,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 		}
 		if(getPackageName().equals(FREE_VERSION_NAME) && OsmandSettings.getOsmandSettings(this).checkFreeDownloadsNumberZero()){
 			Builder msg = new AlertDialog.Builder(this);
-			msg.setTitle(R.string.free_version_message);
+			msg.setTitle(R.string.free_version_title);
 			msg.setMessage(getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS+"", ""));
 			msg.show();
 		}
@@ -555,8 +555,8 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 			}
 			if (total > MAXIMUM_AVAILABLE_FREE_DOWNLOADS || wiki) {
 				Builder msg = new AlertDialog.Builder(this);
-				msg.setTitle(R.string.free_version_message);
-				msg.setMessage(getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "", "( > " + total + ") "));
+				msg.setTitle(R.string.free_version_title);
+				msg.setMessage(getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "", "( =" + total + ") "));
 				msg.show();
 			} else {
 				downloadFilesPreCheckSpace();
