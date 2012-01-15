@@ -1,5 +1,89 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="tip_recent_changes_0_7_0_t">A 0.7.0 verzió változásai :
+\n\t- Internet nélkül is használható wikipédia szócikkek
+\n\t- Frissített térképek
+\n\t- Egy kisebb hasznos funkciók
+	</string>
+	<string name="free_version_message">Az ingyenes verzióval %1$s letöltés engedélyezett %2$s és nem támogatja a wikipédia cikkeket.</string>
+	<string name="free_version_title">Ingyenes verzió</string>
+	<string name="poi_context_menu_showdescription">POI leírások megjelenítése</string>
+
+	<string name="index_name_us">Észak-Amerika - Egyesült Államok</string>
+	<string name="index_name_north_america">Észak-Amerika</string>
+	<string name="index_name_central_america">Közép-Amerika</string>
+	<string name="index_name_south_america">Dél-Amerika</string>
+	<string name="index_name_france">Európa - Franciaország</string>
+	<string name="index_name_germany">Európa - Németország</string>
+	<string name="index_name_europe">Európa</string>
+	<string name="index_name_russia">Európa/Ázsia - Oroszország</string>
+	<string name="index_name_africa">Afrika</string>
+	<string name="index_name_asia">Ázsia</string>
+	<string name="index_name_australia">Ausztrália</string>
+	<string name="index_name_other">Világtértkép és főbb térképek</string>
+	<string name="index_name_wiki">Wikipedia</string>
+	<string name="index_name_voice">Hang csomagok (felvett)</string>
+	<string name="index_name_tts_voice">Hang csomagok (gépi hang)</string>
+
+	<string name="amenity_type_wikiosm">Wikipédia (kapcsolat nélküli munkához)</string>
+	<string name="amenity_type_user_defined">Felhasználó által beállított</string>
+	<string name="fav_export_confirmation">A kedvencekből létezik már mentés. Lecseréljem?</string>
+<!-- this block re-worked for new Preferences structure -->
+	<string name="profile_settings">Felhasználási módnak megfelelő beállítások</string>
+	<string name="settings_preset">Felhaszálói beállítások</string>
+	<string name="settings_preset_descr">Felhasználási mód kiválasztása. (Minden felhasználási módhoz a térkép, útvonalrögzítés, navigáció személyre szabható.)</string>
+	<string name="rendering_settings">- Térkép beállítások</string>
+	<string name="rendering_settings_descr">Térkép beállításoks és térkép források</string>
+	<string name="appearance_settings">- Térkép megjelenítés</string>
+	<string name="appearance_settings_descr">Térkép megjelenésének beállításai</string>
+	<string name="monitor_preferences">- Útvonalrögzítés</string>
+	<string name="monitor_preferences_descr">Útvonalrögzítés beállításai</string>
+	<string name="routing_settings">- Navigáció</string>
+	<string name="routing_settings_descr">Navigáció beállításai</string>
+	<string name="global_settings">Globális beállítások</string>
+	<string name="index_settings">Kapcsolat nélküli adatok</string>
+	<string name="index_settings_descr">Térképek és más, pl. GPX nyomvonalak, letöltése és kezelése</string>
+	<string name="general_settings">Általános beállítások</string>
+	<string name="general_settings_descr">Kijelző és más általános beállítások</string>
+	<string name="global_app_settings">Globális beállítások az alkalmzáshoz</string>
+	<string name="user_name">OSM felhasználói név</string>
+	<string name="user_name_descr">openstreetmap.org felé történő adatküldéshez szükséges</string>
+	<string name="user_password">OSM jelszó</string>
+	<string name="user_password_descr">openstreetmap.org felé történő adatküldéshez szükséges</string>
+	<string name="osmand_service">Háttérszolgáltatás</string>
+	<string name="osmand_service_descr">OsmAnd kikapcsolt képernyővel való használatához</string>
+
+	<string name="tip_rotation_switching">Térkép elforgatása</string>
+	<string name="tip_rotation_switching_t">\tBeállítható, hogy mikor egy hogyan forogjon el a térkép a \'Beállítások\' -> \'Térkép megjelenítés\' -> \'Térkép forgatása\'.
+\n\tLehetőségek:
+\n\t\'Ne forogjon\' - A térkép nem forog. Észak van mindig fönt
+\n\t\'Mozgás alapján\' - A térkép folyamatosan a mozgás irányának megfelelően fordul el
+\n\t\'Iránytű alapján\' - A térkép folyamatosan a beépített iránytűnek megfelelően fordul el
+\n\tTanács: A forgás alapjának a kiválasztottról iránytűre és vissza váltásához egyszerűen csak meg kell érinteni a kijelzőn az iránytűt.</string>
+
+	<string name="switch_to_raster_map_to_see">Nincs Internet nélkül használható térkép erre a területre.\n\t\n\tLe lehet tölteni a \'Beállítások\' -> \'Kapcsolat nélküli adatok\' alatt, vagy át lehet váltani online téjképekre \'Beállítások\' -> \'Térkép beállítások\' alatt.</string>
+	<string name="binary_map_download_success">Sikeres letöltés.\n\t\n\tFelhasználása: \'Beállítások\' -> \'Térkép beállítások\' -> \'Vektor térképek\'.</string>
+
+	<string name="tip_day_night_mode">Éjjel/nappali mód</string>
+	<string name="tip_day_night_mode_t">\tA térkép megjelenése néhány esetben megváltoztatható nappali (világosabb) és éjszakai (sötétebb) módnak megfelelően.
+\n\tAz éjszakai színek biztonságosabbak éjszakai vezetésnél.
+\n\tAz átállítás időzítését be lehet állítani a \'Beállítások\' -> \'Térkép beállítások\' ->\'Éjjel/nappali mód\' alatt.
+\n\tLehetőségek:
+\n\t\'Napkelte/Napnyugta\' - automatikus mód, a napkelte és napnyugta alapján (alapértelmezett)
+\n\t\'Nappal\' - folyamatosan nappali mód
+\n\t\'Éjjel\' - folyamatosan éjjeli mód
+\n\t\'Fényérzékelő szenzor\' - a térkép megjelenítése a beépített fényérzékelő alapján áll át egyik módról a másikra (csak, ha az eszközben van fényérzékelő)</string>
+
+	<string name="tip_osm_improve">OSM adatok javítása</string>
+	<string name="tip_osm_improve_t">\tOsmAnd Openstreetmap alapú adatokat használ, a megjelenítés és navigáció mellett, használható az adatok javításához. Egyszerűen lehet pár kattintással új POI-t feltölteni vagy OSM hibát bejelenteni!
+\n\tEhhez először meg kell adni az OSM bejelentkezési információkat a \'Beállítások\' -> \'Általános beállítások\' -> \'OSM\' alatt.
+\n\tÚj POI hozzáadásához a \'POI készítés\' -t kell választani a menüben. Be kell írni az új POI információit a \'POI készítés\' adatlapon majd el kell küldeni.
+\n\tA térkép hibáit egyből be lehet jelenteni az OSM bug-on keresztül, és az OSM közösség gyorsabban tudja javítani.
+\n\tHiba bejelentése az \'OSM bug megnyitása\' -n keresztül lehet a térkép helyi menüjében. Utána részletesen le kell írni a hibát és el kell küldeni a \'Hozzáad\' gombbal.
+\n\tInternet elérés szükséges a POI hozzáadáshoz és a hiba bejelentéshez.</string>
+<!-- end of string changes for new Preferences structure -->
+
+
 	<string name="download_files_not_enough_space">Nincs elég hely %1$s MB letöltéséhez (szabad %2$s).</string>
 	<string name="download_files_question_space">Szabad hely jelenleg {2} MB! Letöltesz {0} fájlt ({1} MB)?</string>
 	<string name="show_zoom_level_descr">A nagyítási szint állandó megjelenítése a lépték helyett.</string>
