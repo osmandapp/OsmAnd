@@ -1,5 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+        <string name="free_version_message">Бесплатная версия OsmAnd ограничена %1$s загрузками %2$s и не поддерживает геостатьи из wikipedia.</string>
+    <string name="free_version_title">Бесплатная версия</string>
+	<string name="poi_context_menu_showdescription">Показать POI описание</string>
+
+	<string name="index_name_us">Северная Америка - США</string>
+	<string name="index_name_north_america">Северная Америка</string>
+	<string name="index_name_central_america">Центральная Америка</string>
+	<string name="index_name_south_america">Южная Америка</string>
+	<string name="index_name_france">Европа - Франция</string>
+	<string name="index_name_germany">Европа - Германия</string>
+	<string name="index_name_europe">Европа</string>
+	<string name="index_name_russia">Евразия - Россия</string>
+	<string name="index_name_africa">Африка</string>
+	<string name="index_name_asia">Азия</string>
+	<string name="index_name_australia">Австралия</string>
+	<string name="index_name_other">Мировые карты</string>
+	<string name="index_name_wiki">Wikipedia по языкам</string>
+	<string name="index_name_voice">Голосовые данные (запись)</string>
+	<string name="index_name_tts_voice">Голосовые данные (TTS)</string>
+
+	<string name="amenity_type_wikiosm">Wikipedia (офлайн)</string>
+	<string name="amenity_type_user_defined">Предопределенные</string>
+	<string name="fav_export_confirmation">Файл с избранными уже существует. Вы хотите его заменит?</string>
+<!-- this block re-worked for new Preferences structure -->
+	<string name="profile_settings">Профильные настройки</string>
+	<string name="settings_preset">Выберите профиль</string>
+	<string name="settings_preset_descr">Выберите профиль работы приложения. (В каждом профиле настройки хранятся отдельно.)</string>
+	<string name="global_settings">Общие настройки</string>
+	<string name="global_app_settings">Общие настройки приложения</string>
+
+	<string name="download_files_not_enough_space">Недостаточно места на диске для загрузки  %1$s MB (свободно: %2$s).</string>
+	<string name="download_files_question_space">Свободное место {2} MB! Загрузить {0} файл(ов) ({1} MB)?</string>
 	<string name="show_zoom_level_descr">Показывать уровень приближения вместо масштаба.</string>
 	<string name="show_zoom_level">Показывать уровень приближения.</string>
 	<string name="tip_select_destination_point">Выбор точки назначения</string>
@@ -18,7 +50,7 @@
 	<string name="show_altitude_info">Показывать высоты</string>
 	<string name="use_transparent_map_theme_descr">Использовать прозрачные информационные элементы на карте</string>
 	<string name="use_transparent_map_theme">Прозрачная тема</string>
-	<string name="appearance_settings_descr">Настроить внешний вид приложения</string>
+	<string name="appearance_settings_descr">Настроить внешний вид карты</string>
 	<string name="appearance_settings">- Внешний вид</string>
 	<string name="native_library_not_supported">Нативная библиотека не поддерживается на этом устройстве.</string>
 	<string name="init_native_library">Инициализация нативной библиотеки...</string>
@@ -319,8 +351,8 @@
 	<string name="reload">Перезагрузить</string>
 	<string name="general_settings_descr">Настроить использование интернета, выбрать ориентацию экрана, вращение карты и другое</string>
     <string name="general_settings">Общие</string>
-	<string name="rendering_settings_descr">Выбрать источник карты и внешний вид</string>
-    <string name="rendering_settings">- Карта</string>
+	<string name="rendering_settings_descr">Выбрать источник карты и конфигурацию</string>
+    <string name="rendering_settings">- Настройка карты</string>
     <string name="index_settings_descr">Загрузить и обновить данные для офлайн использования</string>
     <string name="index_settings">Данные</string>
 	<string name="osmand_service">Фоновый режим</string>
@@ -570,8 +602,6 @@
     <string name="auto_zoom_map_descr">Автоматически изменять масштаб карты при изменении скорости</string>
     <string name="auto_zoom_map">Масштаб</string>
     <string name="additional_settings">Дополнительные настройки</string>
-    <string name="settings_preset_descr">Выбор режима работы приложения</string>
-    <string name="settings_preset">Режим работы</string>
     <string name="settings">Настройки</string>
     <string name="save_current_track_descr">Сохранить текущий путь на SD</string>
     <string name="save_current_track">Сохранить путь</string>
