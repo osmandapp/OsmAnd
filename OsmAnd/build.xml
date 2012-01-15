@@ -63,6 +63,26 @@
 	<property name="use.absolute.dir" location="${use.dir}" />
 	<property name="raw.absolute.dir" location="raw" />
 	<property name="base.dir" location="." />
+	
+	<target name="-package-resources">
+		<echo>Packaging resources and assets...</echo>
+		<exec executable="${aapt}">
+			<!-- failonerror="true"> -->
+			<arg value="package" />
+			<arg value="-f" />
+			<arg value="-M" />
+			<arg value="${base.dir}/AndroidManifest.xml" />
+			<arg value="-S" />
+			<arg value="${resource.absolute.dir}" />
+			<arg value="-A" />
+			<arg value="${asset.absolute.dir}" />
+			<arg value="-I" />
+			<arg value="${android.jar}" />
+			<arg value="-F" />
+			<arg value="${out.absolute.dir}/${resource.package.file.name}" />
+			<arg value="${raw.absolute.dir}" />
+		</exec>
+	</target>
 
 	<target name="-pre-build">
 		<delete dir="${raw.absolute.dir}" verbose="${verbose}" />
