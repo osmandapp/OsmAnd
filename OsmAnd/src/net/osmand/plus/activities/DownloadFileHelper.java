@@ -35,6 +35,7 @@ public class DownloadFileHelper {
 	private final Activity ctx;
 	private boolean interruptDownloading = false;
 	
+	
 	public DownloadFileHelper(Activity ctx){
 		this.ctx = ctx;
 	}
@@ -65,6 +66,7 @@ public class DownloadFileHelper {
 						}
 					}
 					HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+					conn.setRequestProperty("User-Agent", Version.APP_NAME); //$NON-NLS-1$
 					conn.setReadTimeout(30000);
 					if (fileread > 0) {
 						String range = "bytes="+fileread + "-" + (length -1); //$NON-NLS-1$ //$NON-NLS-2$

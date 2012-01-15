@@ -46,7 +46,7 @@ public class MapTileDownloader {
 	
 	
 	public static MapTileDownloader getInstance(){
-		return getInstance(null);
+		return getInstance(Version.APP_NAME_VERSION);
 	}
 	
 	public static MapTileDownloader getInstance(String userAgent){

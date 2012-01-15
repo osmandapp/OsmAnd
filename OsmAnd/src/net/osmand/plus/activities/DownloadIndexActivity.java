@@ -97,6 +97,9 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 	private ProgressDialog progressFileDlg = null;
 	private Map<String, String> indexFileNames = null;
 	private TreeMap<String, DownloadEntry> entriesToDownload = new TreeMap<String, DownloadEntry>();
+
+	private String FREE_VERSION_NAME = "net.osmand";
+	private int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 5;
 	 
 	
     private TextWatcher textWatcher ;
@@ -139,7 +142,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 
 			@Override
 			public void onClick(View v) {
-				downloadFilesPreCheckSpace();
+				downloadFilesCheckFreeVersion();
 			}
 			
 		});
@@ -179,6 +182,12 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 			setListAdapter(new DownloadIndexAdapter(downloadListIndexThread.getCachedIndexFiles()));
 		} else {
 			downloadIndexList();
+		}
+		if(getPackageName().equals(FREE_VERSION_NAME) && OsmandSettings.getOsmandSettings(this).checkFreeDownloadsNumberZero()){
+			Builder msg = new AlertDialog.Builder(this);
+			msg.setTitle(R.string.free_version_message);
+			msg.setMessage(getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS+"", ""));
+			msg.show();
 		}
 	}
 	
@@ -524,6 +533,30 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 			entry.fileToUnzip = new File(parent, entry.baseName + toCheckPostfix);
 		}
 		return entry;
+	}
+	
+	
+	protected void downloadFilesCheckFreeVersion() {
+		if (getPackageName().equals(FREE_VERSION_NAME)) {
+			int total = OsmandSettings.getOsmandSettings(this).NUMBER_OF_FREE_DOWNLOADS.get() + entriesToDownload.size();
+			boolean wiki = false;
+			for (DownloadEntry es : entriesToDownload.values()) {
+				if (es.baseName.contains("_wiki")) {
+					wiki = true;
+					break;
+				}
+			}
+			if (total > MAXIMUM_AVAILABLE_FREE_DOWNLOADS || wiki) {
+				Builder msg = new AlertDialog.Builder(this);
+				msg.setTitle(R.string.free_version_message);
+				msg.setMessage(getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "", "( > " + total + ") "));
+				msg.show();
+			} else {
+				downloadFilesPreCheckSpace();
+			}
+		} else {
+			downloadFilesPreCheckSpace();
+		}
 	}
 	
 	protected void downloadFilesPreCheckSpace() {

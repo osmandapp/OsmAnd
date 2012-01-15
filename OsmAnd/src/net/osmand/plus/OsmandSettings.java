@@ -1077,7 +1077,17 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> SHOW_ZOOM_LEVEL = 
 			new BooleanPreference("show_zoom_level", false, false, true);
 	
+
+	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS = 
+			new IntPreference("free_downloads", 0, true);
 	
+	public boolean checkFreeDownloadsNumberZero(){
+		if(!globalPreferences.contains(NUMBER_OF_FREE_DOWNLOADS.getId())){
+			NUMBER_OF_FREE_DOWNLOADS.set(0);
+			return true;
+		}
+		return false;
+	}
 	
 	public enum DayNightMode {
 		AUTO(R.string.daynight_mode_auto), 
