@@ -38,6 +38,7 @@ import net.osmand.plus.DownloadOsmandIndexesHelper;
 import net.osmand.plus.DownloadOsmandIndexesHelper.IndexItem;
 import net.osmand.plus.IndexFileList;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -631,9 +632,11 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 	private class DownloadIndexesAsyncTask extends  AsyncTask<String, Object, String> implements DownloadFileShowWarning {
 		
 		private IProgress progress;
+		private OsmandPreference<Integer> downloads;
 
 		public DownloadIndexesAsyncTask(ProgressDialogImplementation progressDialogImplementation) {
 			this.progress = progressDialogImplementation;
+			downloads = OsmandSettings.getOsmandSettings(DownloadIndexActivity.this).NUMBER_OF_FREE_DOWNLOADS;
 		}
 
 		@Override
@@ -688,6 +691,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 								entry.parts, filesToReindex, indexOfAllFiles, this, forceWifi);
 						if (result) {
 							entriesToDownload.remove(filename);
+							downloads.set(downloads.get() + 1);
 							publishProgress(entry);
 						}
 					}
