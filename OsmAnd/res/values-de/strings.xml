@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="tip_recent_changes_0_7_0_t">Änderungen in 0.7.0 :
+	\n\t- Offline Wikipedia Daten mit Artikeln
+	\n\t- Aktualisierte Karten
+	\n\t- Weitere kleine Verbesserungen
+	</string>    
+	<string name="free_version_message">Diese kostenlose Version von OsmAnd ist limitiert auf %1$s Downloads %2$s und unterstützt keine offline Wikipedia-Artikel.</string>
+	<string name="free_version_title">Kostenlose Version</string>
 	<string name="poi_context_menu_showdescription">Zeige POI-Beschreibung</string>
 
 	<string name="index_name_us">Nordamerika - Vereinigte Staaten</string>
