@@ -195,26 +195,14 @@ public class FavouritesActivity extends ExpandableListActivity {
 		final LatLon mapLocation = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
 		favouritesAdapter.synchronizeGroups();
 		
-//		if(mapLocation != null){
-			favouritesAdapter.sort(new Comparator<FavouritePoint>(){
+//		Sort Favs by distance on Search tab, but sort alphabetically here
+		favouritesAdapter.sort(new Comparator<FavouritePoint>(){
 
-				@Override
-				public int compare(FavouritePoint object1, FavouritePoint object2) {
-//					double d1 = MapUtils.getDistance(mapLocation, object1.getLatitude(), object1.getLongitude());
-//					double d2 = MapUtils.getDistance(mapLocation, object2.getLatitude(), object2.getLongitude());
-//					if(d1 == d2){
-					int result = object1.getName().compareTo(object2.getName());
-					if(result == 0){
-						return 0;
-//					} else if(d1 > d2){
-					} else if(result > 0){
-						return 1;
-					}
-					return -1;
-				}
-				
-			});
-//		}
+			@Override
+			public int compare(FavouritePoint object1, FavouritePoint object2) {
+				return object1.getName(object1).compareTo(object2.getName(object2));
+			}
+		});
 		
 	}
 
