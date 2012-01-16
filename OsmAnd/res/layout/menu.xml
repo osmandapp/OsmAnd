@@ -9,10 +9,10 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
   				<ImageView android:src="@drawable/icon_small" android:layout_marginLeft="4dp" android:layout_marginTop="4dp"
   				android:layout_height="wrap_content" android:layout_width="wrap_content"/>
   				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/AppName"
-  				android:layout_marginLeft="2dp" android:layout_weight="1" android:layout_marginTop="3dp" 
+  				android:layout_marginLeft="2dp" android:layout_marginTop="3dp" 
 				android:text="@string/app_name" android:textColor="#000000" android:typeface="serif" android:textSize="20sp"/>
 				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
-				android:layout_marginTop="3dp" android:layout_weight="1" android:text="0.5.1 beta(b6)" android:textColor="#000000" android:typeface="serif"
+				android:layout_marginTop="3dp" android:text="0.5.1 beta(b6)" android:textColor="#000000" android:typeface="serif"
 				android:id="@+id/TextVersion" android:textSize="13sp"/> 
 				<ImageView android:id="@+id/HelpButton" android:clickable="true" android:layout_marginTop="4dp" android:layout_marginLeft="4dp" 
   				android:layout_height="wrap_content" android:layout_width="wrap_content" android:src="@drawable/help_icon"
