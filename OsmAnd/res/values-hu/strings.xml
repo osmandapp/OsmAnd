@@ -106,8 +106,6 @@
 	<string name="show_altitude_info">Magassági érték kijelzése</string>
 	<string name="use_transparent_map_theme_descr">Átlátszó háttér a térképkezelő gombokhoz</string>
 	<string name="use_transparent_map_theme">Átlátszó téma</string>
-	<string name="appearance_settings_descr">Az alkalmazás kinézetének beállításai</string>
-	<string name="appearance_settings">- Megjelenés</string>
 	<string name="native_library_not_supported">A natív renderelő nem támogatott ezen az eszközön.</string>
 	<string name="init_native_library">Natív renderelő inicializálása..</string>
 	<string name="choose_auto_follow_route">Automatikus követés ideje</string>
@@ -265,17 +263,7 @@
 	<string name="gpx_option_destination_point">Használd a jelenlegi célpontot</string>
 	<string name="gpx_option_from_start_point">Végig az egész nyomvonalon</string>
 
-	<string name="tip_rotation_switching">Térkép elforgatás</string>
-	<string name="tip_rotation_switching_t">\tMegváltoztatható, hogy a térkép mikor és hogyan forogjon \'Beállítások\' -> \'Általános beállítások\' -> \'Térkép forgatása\'.
-	\n\tLehetőségek:
-	\n\t\'Ne forogjon\' - Térkép nem forog, felül mindig észak van
-	\n\t\'Mozgás alapján\' - Térkép mindig a mozgásnak megfelelően forog
-	\n\t\'Iránytű alapján\' - Térkép az eszköz iránytűjének megfelelően forog
-	\n\tTipp: Térképnézetben az iránytűt megérintve egyszerűen lehet váltani a kiválasztott mód és az iránytű szerinti forgatás között.</string>
-
-	<string name="switch_to_raster_map_to_see">Ehhez a helyhez nincs hálózat nélkül használható vektoros térkép.\n\t\n\tLetölthetsz egyet a \'Beállítások\' -> \'Offline adatok\' menüben, vagy válts online térképre itt: \'Beállítások\' -> \'Térképek\'.</string>
 	<string name="switch_to_vector_map_to_see">Offline vektoros térkép érhető el ezen a helyen.\n\t\n\tAktiválni a \'menü\' -> \'Rétegek\' -> \'Térképforrás\' menüben tudod.</string>
-	<string name="binary_map_download_success">Letöltés sikeres.\n\t\n\tAktiválni itt tudod: \'Beállítások\' -> \'Térképek\' -> \'Vektoros térképek\'.</string>
 	<string name="choose_audio_stream">Hang navigáció kimenete</string>
 	<string name="choose_audio_stream_descr">Hang navigáció csatornájának kiválasztása (rendszer-konfigurációtól függ)</string>
 	<string name="voice_stream_voice_call">Telefonhívás hangcsatorna</string>
@@ -308,15 +296,6 @@
 \n\t\'Kék\' - azt jelenti, hogy újabb verzió tölthető le a szerverről</string>
 	<string name="level_to_switch_vector_raster_descr">Minimális nagyítási szint vektoros megjelenítéshez térképcsempék helyett</string>
 	<string name="level_to_switch_vector_raster">Min. vektoros nagyítás</string>
-	<string name="tip_day_night_mode">Éjjeli/Nappali mód</string>
-	<string name="tip_day_night_mode_t">A térkép megjelenítése nappali (erős fényviszonyok) vagy éjjeli (gyenge fényviszonyok) használatnak megfelelően megváltoztatható.
-\nÉjjel biztonságosabbak a sötét térkép színek mert nem vakít annyira mint a nappali megjelenítés világos színei.
-\n\tA váltás módja beállítható a \'Főmenü\'->\'Beállítások\'->\'Térképek\'->\'Éjjel/nappali mód\'.
-\nVálasztható:
-\n\t\'Napkelte/Napnyugta\' - automatikus, a Nap pozíciója által vezérelt(alapértelmezett)
-\n\t\'Nappal\' - mindig nappali módot használ
-\n\t\'Éjjel\' - mindig éjjeli módot használ
-\n\t\'Fényérzékelő\' - a térkép megjelenését az eszköz fényérzékelő szenzora, ha létezik, vezérli.</string>
 	<string name="tip_location_sharing">Hely megosztás</string>
 	<string name="tip_location_sharing_t">Érdekes helyet találtál az utazásod során és meg akarod osztani a pozíciót a barátoddal, családoddal?
 \nOsmAnd lehetőséget biztosít, hogy megoszthass másokkal minden helyet amit csak akarsz.
@@ -327,13 +306,6 @@
 \n\tKedvenc pont hozzáadásához a térképmenüben a \'Hozzáadás a kedvencekhez\'-et kell választani és a pontot egy megfelelő névvel ellátni. Mentés után egyszerűen a főmenü \'Kedvencek\' menüponton keresztül érhető el.
 \n\tA \'Kedvencek\' menüben a pontra hosszan rányomva beállíthatjuk célpontnak, szerkeszthetjük vagy törölhetjük.
 \n\tAz összes kedvenc pont térképen megjelenítéséhez engedélyezni kell a \'Kedvencek\' réteget a térképmenü \'Rétegek\' pontjában.</string>
-	<string name="tip_osm_improve">Openstreetmap fejlesztése</string>
-	<string name="tip_osm_improve_t">OsmAnd nem csak hogy az Openstreetmap.org-ról használ adatokat, amit nem csak útvonal tervezéshez lehet használni, hanem az adatok kiegészítéséhez, javításához, az Openstreetmap.org fejlesztéséhez is megfelelő. Egyszerűen feltölthető pár kattintással új POI vagy „OSM bug”!
-\nElőször is meg kell adni a bejelentkező információkat a \'Főmenü\'->\'Beállítások\'->\'OSM\' résznél.
-\n\tÚj POI létrehozásához térkép nézetben a menüből ki kell választani a \'POI készítés\' pontot. Ezután meg lehet adni az információkat az új POI-ról majd \'Alkalmaz\'-zal el lehet menteni.
-\n\tHa hibás a térkép, jelezhető a hiba és az Openstreetmap közösség gyorsan javítani tudja.
-\n\tHiba bejelntésére a \'Térképmenü\' -> \'OSM bug megnyitása\' menüpont használható. A megjelenő űrlapon részletesen le kell írni a hibát és a \'Hozzáad\' gombbal kell küldeni.
-\n\tNem szabad elfelejteni, hogy mindehhez internetkapcsolatra van szükség!</string>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
 	<string name="error_doing_search">Hiba történt a kapcsolat nélküli keresésben</string>
 	<string name="search_offline_geo_error">Could not parse geo intent:\'%s\'</string>
@@ -447,14 +419,6 @@
 	<string name="deselect_all">Kijelölés megszüntetése</string>
 	<string name="select_all">Mindet kijelöl</string>
 	<string name="reload">Újratölt</string>
-	<string name="general_settings_descr">Megjelenítési és egyéb beállítások</string>
-	<string name="general_settings">Általános beállítások</string>
-	<string name="rendering_settings_descr">Térképforrás és megjelenítési beállítások</string>
-	<string name="rendering_settings">- Térképek</string>
-	<string name="index_settings_descr">Offline térképek letöltése és kezelése; GPX útvonalak és egyéb fájlok</string>
-	<string name="index_settings">Offline adatok</string>
-	<string name="osmand_service">Háttérszolgáltatás</string>
-	<string name="osmand_service_descr">OsmAnd működése kikapcsolt képernyőnél</string>
 	<string name="fast_route_mode">Leggyorsabb útvonal</string>
 	<string name="fast_route_mode_descr">Leggyorsabb útvonal kiszámításának engedése vagy a legrövidebb út tiltása </string>
 	<string name="tiles_to_download_estimated_size">{0} nagyításnál {1} képkocka letöltése ({2} Mb )</string>
@@ -550,8 +514,6 @@
 	<string name="background_router_service_descr">Hosszú idejű pozíciókövetéshez bekapcsolja a háttérszolgáltatást</string>
 	<string name="background_router_service">Háttérszolgáltatás pozíciókövetéshez</string>
 	<string name="off_router_service_no_gps_available">Helymeghatározó szolgáltatás szükséges a háttérben futó útvonaltervező szolgáltatáshoz.</string>
-	<string name="routing_settings_descr">Útvonaltervező paraméterek meghatározása</string>
-	<string name="routing_settings">- Útvonaltervezés</string>
 	<string name="hide_poi_filter">Szűrő elrejtéshez</string>
 	<string name="show_poi_filter">Szűrő megmutatáshoz</string>
 	<string name="search_poi_filter">Szűrő</string>
@@ -691,10 +653,7 @@
 	<string name="download_indexes">Térképadatok letöltése</string>
 	<string name="use_online_routing_descr">Internet használata útvonaltervezéshez</string>
 	<string name="use_online_routing">Online útvonaltervezés</string>
-	<string name="user_password_descr">OSM jelszó</string>
-	<string name="user_password">Felhasználói jelszó</string>
 	<string name="osm_settings_descr">Feltöltéshez szükséges Openstreetmap.org beállítások</string>
-	<string name="monitor_preferences_descr">Rögzített útvonal mentése</string>
 	<string name="data_settings_descr">Nyelv kiválasztása, letölti/újraolvassa az adatokat</string>
 	<string name="map_preferences_descr">Térkép beállítás: térkép forrása, forgatás, középpont, kijelző helyzete</string>
 	<string name="data_settings">Adat</string>
@@ -702,21 +661,16 @@
 	<string name="auto_zoom_map_descr">Térkép automatikus nagyítása a sebesség függvényében</string>
 	<string name="auto_zoom_map">Automatikus nagyítás</string>
 	<string name="additional_settings">További beállítások</string>
-	<string name="settings_preset_descr">Válassz felhasználási profilt. Az egyes profilbeállítások alább személyreszabhatóak.</string>
-	<string name="settings_preset">Működési mód</string>
 	<string name="settings">Beállítások</string>
 	<string name="save_current_track_descr">Jelenlegi útvonal SD kártyára mentése</string>
 	<string name="save_current_track">Jelenlegi útvonal mentése</string>
 	<string name="save_track_interval_descr">Milyen sűrűn rögzítsen pontokat a mentett útvonalba</string>
 	<string name="save_track_interval">Rögzítési sűrűség</string>
-	<string name="monitor_preferences">- Útvonalrögzítés</string>
 	<string name="save_track_to_gpx_descrp">Az útvonalak napi csoportosításban kerülnek mentésre a track könyvtárba</string>
 	<string name="save_track_to_gpx">Útvonal mentése GPX-be</string>
 	<string name="navigate_to">Beállítás célpontnak</string>
 	<string name="update_tile">Térkép frissítés</string>
 	<string name="reload_tile">Térképcsempe újraolvasása</string>
-	<string name="user_name_descr">OSM felhasználói neved</string>
-	<string name="user_name">Felhasználói név</string>
 	<string name="mark_point">Célpont</string>
 	<string name="show_osm_bugs_descr">OpenStreetBugs mutatása a térképen</string>
 	<string name="show_osm_bugs">OpenStreetBugs megmutatása</string>
