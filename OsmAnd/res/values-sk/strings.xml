@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="tip_recent_changes_0_7_0_t">Zmeny vo verzii 0.7.0 :
+	\n\t- Údaje článkov offline wikipedie
+	\n\t- Aktualizované mapy
+	\n\t- Iné menšie funkce
+	</string>
+	<string name="free_version_message">Táto bezplatná verzia OsmAndu je obmedzená na %1$s stiahnutí %2$s a nepodporuje články offline wikipedie.</string>
+	<string name="free_version_title">Bezplatná verzia</string>
+	<string name="poi_context_menu_showdescription">Zobraziť POI popis</string>
+
 	<string name="index_name_us">Severná Amerika - Spojené Štáty</string>
 	<string name="index_name_north_america">Severná Amerika</string>
 	<string name="index_name_central_america">Stredná Amerika</string>
