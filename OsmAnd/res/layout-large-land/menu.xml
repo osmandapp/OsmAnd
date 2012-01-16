@@ -12,7 +12,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 				android:layout_marginLeft="4dp" android:layout_marginTop="8dp" 
 				android:text="@string/app_name" android:textColor="#000000" android:typeface="serif" android:textSize="30sp"/>
 				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1"
-				android:layout_marginTop="8dp" android:text="0.5.1 beta(b6)" android:textColor="#000000"
+				android:layout_marginLeft="16dp" android:layout_marginTop="8dp" android:text="0.5.1 beta(b6)" android:textColor="#000000"
 				android:typeface="serif" android:id="@+id/TextVersion" android:textSize="18sp"/> 
 				<ImageView android:src="@drawable/help_icon" android:id="@+id/HelpButton" android:layout_marginTop="5dp"
 				android:focusable="true" android:clickable="true"
