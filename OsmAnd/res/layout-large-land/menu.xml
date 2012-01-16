@@ -22,8 +22,8 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 				android:layout_height="wrap_content" android:layout_width="wrap_content"/>
 			</LinearLayout>
 		</LinearLayout>
-		<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp">
-	 		<TableRow android:layout_height = "wrap_content">
+		<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+	 		<TableRow android:layout_height = "wrap_content" android:layout_marginTop="15dp">
 	 			<LinearLayout android:id="@+id/MapButton" android:background="@drawable/bg_left" 
 	 			android:focusable="true" android:clickable="true"
 	 			android:layout_weight="1" android:layout_height="165dp">

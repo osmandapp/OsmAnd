@@ -23,7 +23,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 			</LinearLayout>
 		</LinearLayout>
 		<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
-	 		<TableRow android:layout_height = "wrap_content" android:layout_marginTop="20dp">
+	 		<TableRow android:layout_height = "wrap_content" android:layout_marginTop="15dp">
 	 			<LinearLayout android:id="@+id/MapButton" android:background="@drawable/bg_leftr" android:orientation="vertical" android:clickable="true"
 	 			android:layout_weight="3" android:layout_height="175dp" android:focusable="true">
 	 				<ImageView
@@ -48,7 +48,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 					</LinearLayout>	
 				</LinearLayout>
 			</TableRow>
-			<TableRow android:layout_height = "wrap_content" android:layout_marginTop="10dp">
+			<TableRow android:layout_height = "wrap_content" android:layout_marginTop="15dp">
 				<LinearLayout android:id="@+id/FavoritesButton" android:background="@drawable/bg_leftr" android:orientation="vertical" android:clickable="true"
 	 			android:layout_weight="3" android:layout_height="175dp" android:focusable="true">
 	 				<ImageView
