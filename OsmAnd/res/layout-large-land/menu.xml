@@ -1,102 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" 
-	android:layout_height="fill_parent" android:background="@drawable/background">
-	
-			  
-  <LinearLayout android:layout_width="fill_parent"  android:layout_height="fill_parent" android:orientation="vertical">
-  	<LinearLayout android:layout_height="wrap_content"  android:layout_width="fill_parent" android:gravity="center_horizontal" >
-  	<LinearLayout android:layout_height="wrap_content"  android:layout_width="fill_parent"  android:background="@drawable/status_bar" 
-  		android:orientation="horizontal"  android:id="@+id/Headliner" android:layout_marginLeft="10dp"	android:layout_marginRight="10dp">
-  		<ImageView  android:src="@drawable/icon_small"  android:layout_marginLeft="4dp" android:layout_marginTop="6dp"  
-  					android:layout_height="wrap_content" android:layout_width="wrap_content"/>
-  		<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/AppName" 
-  				  android:layout_marginLeft="4dp" android:layout_weight="1" android:layout_marginTop="8dp" 
-				  android:text="@string/app_name" android:textColor="#000000"	android:typeface="serif" android:textSize="30sp"/>
-		<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
-				  android:layout_marginTop="8dp"
-				  android:text="0.5.1 beta(b6)" android:textColor="#000000"	android:typeface="serif" android:id="@+id/TextVersion"
-				  android:textSize="18sp"/> 
-        <ImageView android:src="@drawable/help_icon"  android:id="@+id/HelpButton" android:layout_marginTop="5dp"
-        			android:focusable="true" android:clickable="true"
-  					android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="6dp"/>				  
-		<ImageView android:src="@drawable/headliner_close"  android:layout_marginRight="4dp" android:id="@+id/CloseButton"
-					android:layout_marginTop="5dp" android:focusable="true" android:clickable="true"
-  					android:layout_height="wrap_content" android:layout_width="wrap_content"/>		  
-	</LinearLayout>
-	</LinearLayout>
-	
-	<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp">
-	 	<TableRow android:layout_height = "wrap_content"  >
-	 		<LinearLayout android:id="@+id/MapButton" android:background="@drawable/bg_left" 
-	 					android:focusable="true" android:clickable="true"
-	 					android:layout_weight="1" android:layout_height="165dp">
-	 			<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
+android:layout_width="fill_parent" android:layout_height="fill_parent" android:background="@drawable/background">
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical">
+		<LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center_horizontal">
+			<LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:background="@drawable/status_bar" 
+			android:orientation="horizontal" android:id="@+id/Headliner" android:layout_marginLeft="10dp" android:layout_marginRight="10dp">
+				<ImageView android:src="@drawable/icon_small" android:layout_marginLeft="4dp" android:layout_marginTop="6dp"
+				android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/AppName" 
+				android:layout_marginLeft="4dp" android:layout_weight="1" android:layout_marginTop="8dp" 
+				android:text="@string/app_name" android:textColor="#000000" android:typeface="serif" android:textSize="30sp"/>
+				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
+				android:layout_marginTop="8dp" android:text="0.5.1 beta(b6)" android:textColor="#000000"
+				android:typeface="serif" android:id="@+id/TextVersion" android:textSize="18sp"/> 
+				<ImageView android:src="@drawable/help_icon" android:id="@+id/HelpButton" android:layout_marginTop="5dp"
+				android:focusable="true" android:clickable="true"
+				android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="6dp"/>
+				<ImageView android:src="@drawable/headliner_close" android:layout_marginRight="4dp" android:id="@+id/CloseButton"
+				android:layout_marginTop="5dp" android:focusable="true" android:clickable="true"
+				android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+			</LinearLayout>
+		</LinearLayout>
+		<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp">
+	 		<TableRow android:layout_height = "wrap_content">
+	 			<LinearLayout android:id="@+id/MapButton" android:background="@drawable/bg_left" 
+	 			android:focusable="true" android:clickable="true"
+	 			android:layout_weight="1" android:layout_height="165dp">
+	 				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
 					android:layout_gravity="center_vertical" 
-					android:layout_marginLeft="15dp"
-				    android:text="@string/map_Button" android:textColor="#000000" android:typeface="serif"
-				    android:layout_weight="1"
-				  	android:textSize="24sp"/>	
-	 			<ImageView
+					android:layout_marginLeft="15dp" android:text="@string/map_Button" android:textColor="#000000"
+					android:typeface="serif" android:layout_weight="1" android:textSize="24sp"/>
+	 				<ImageView
 					android:src="@drawable/button_icon_map"
 					android:layout_gravity="center|right"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>
-	 		</LinearLayout>
-			<LinearLayout android:layout_weight="2" android:layout_height="fill_parent" />
-			<LinearLayout android:id="@+id/SearchButton"  android:background="@drawable/bg_right" 
-						android:focusable="true" android:clickable="true"
-						android:layout_weight="1" android:layout_height="165dp">
-				<ImageView
+	 			</LinearLayout>
+				<LinearLayout android:layout_weight="2" android:layout_height="fill_parent"/>
+				<LinearLayout android:id="@+id/SearchButton" android:background="@drawable/bg_right" 
+				android:focusable="true" android:clickable="true"
+				android:layout_weight="1" android:layout_height="165dp">
+					<ImageView
 					android:src="@drawable/button_icon_search"
 					android:layout_gravity="center|left"
 					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"/>
-					
-				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
+					android:layout_height="wrap_content"/>	
+					<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
 					android:layout_gravity="center_vertical" 
 					android:layout_weight="1"
 					android:layout_marginLeft="5dp" android:layout_marginRight="15dp"
-				    android:text="@string/search_button"  android:textColor="#000000" android:typeface="serif"
-				  	android:textSize="24sp"/>
-			</LinearLayout>
-		</TableRow>
-		<TableRow android:layout_height = "wrap_content" android:layout_marginTop = "15dp"  >
-		<LinearLayout android:id="@+id/FavoritesButton"  android:background="@drawable/bg_left"
-					android:focusable="true" android:clickable="true" 
-					android:layout_weight="1" android:layout_height="165dp">
-				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
+					android:text="@string/search_button" android:textColor="#000000" android:typeface="serif"
+					android:textSize="24sp"/>
+				</LinearLayout>
+			</TableRow>
+			<TableRow android:layout_height = "wrap_content" android:layout_marginTop = "15dp">
+				<LinearLayout android:id="@+id/FavoritesButton" android:background="@drawable/bg_left"
+				android:focusable="true" android:clickable="true" 
+				android:layout_weight="1" android:layout_height="165dp">
+					<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
 					android:layout_marginLeft="15dp" android:layout_gravity="center_vertical|left"
-				    android:text="@string/favorites_Button"  android:textColor="#000000" android:typeface="serif"
-				    android:layout_weight="1"
-				  	android:textSize="24sp"/>
-	 			<ImageView
+					android:text="@string/favorites_Button" android:textColor="#000000" android:typeface="serif"
+					android:layout_weight="1" android:textSize="24sp"/>
+	 				<ImageView
 					android:src="@drawable/button_icon_favorites"
 					android:layout_gravity="center|right"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>
-	 		</LinearLayout>
-			<LinearLayout android:layout_weight="2" android:layout_height="fill_parent" />
-			<LinearLayout android:id="@+id/SettingsButton"  android:background="@drawable/bg_right"
-					android:focusable="true" android:clickable="true" 
-					android:layout_weight="1" android:layout_height="165dp">
-				<ImageView
+	 			</LinearLayout>
+				<LinearLayout android:layout_weight="2" android:layout_height="fill_parent"/>
+				<LinearLayout android:id="@+id/SettingsButton" android:background="@drawable/bg_right"
+				android:focusable="true" android:clickable="true" 
+				android:layout_weight="1" android:layout_height="165dp">
+					<ImageView
 					android:src="@drawable/button_icon_settings"
 					android:layout_gravity="center|left"
 					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"/>
-					
+					android:layout_height="wrap_content"/>		
 					<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
 					android:layout_gravity="center_vertical|right"
 					android:layout_weight="1"
 					android:layout_marginLeft="5dp" android:layout_marginRight="15dp"
-				    android:text="@string/settings_Button"  android:textColor="#000000" android:typeface="serif"
-				  	android:textSize="24sp"/>
-			 </LinearLayout> 		
-			</TableRow>
-	 			
-	</TableLayout>
- </LinearLayout>  
-
+					android:text="@string/settings_Button" android:textColor="#000000" android:typeface="serif"
+					android:textSize="24sp"/>
+				 </LinearLayout> 		
+			</TableRow>	
+		</TableLayout>
+	</LinearLayout>
 </FrameLayout>
