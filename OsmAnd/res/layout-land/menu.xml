@@ -23,7 +23,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 			</LinearLayout>
 		</LinearLayout>
 		<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
-	 		<TableRow android:layout_height = "wrap_content" android:layout_marginTop = "4dp">
+	 		<TableRow android:layout_height = "wrap_content" android:layout_marginTop = "10dp">
 	 			<LinearLayout android:id="@+id/MapButton" android:background="@drawable/bg_left" android:clickable="true"
 	 			android:layout_weight="1" android:layout_height="112dp" android:focusable="true">
 	 				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
@@ -39,7 +39,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 	 			</LinearLayout>
 				<LinearLayout android:layout_weight="2" android:layout_height="fill_parent"/>
 				<LinearLayout android:id="@+id/SearchButton" android:background="@drawable/bg_right" android:clickable="true"
-					android:layout_weight="1" android:layout_height="112dp" android:focusable="true">
+				android:layout_weight="1" android:layout_height="112dp" android:focusable="true">
 					<ImageView
 					android:src="@drawable/button_icon_search"
 					android:layout_gravity="center|left"
@@ -54,7 +54,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 					android:textSize="16sp"/>
 				</LinearLayout>
 			</TableRow>
-			<TableRow android:layout_height = "wrap_content" android:layout_marginTop = "4dp">
+			<TableRow android:layout_height = "wrap_content" android:layout_marginTop = "10dp">
 				<LinearLayout android:id="@+id/FavoritesButton" android:background="@drawable/bg_left" 
 				android:layout_weight="1" android:layout_height="112dp" android:focusable="true" android:clickable="true">
 					<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
