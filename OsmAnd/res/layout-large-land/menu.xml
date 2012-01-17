@@ -28,7 +28,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 	 			android:focusable="true" android:clickable="true"
 	 			android:layout_weight="1" android:layout_height="165dp">
 	 				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
-					android:layout_gravity="center_vertical" 
+					android:layout_gravity="center_vertical|left" 
 					android:layout_marginLeft="15dp" android:text="@string/map_Button" android:textColor="#000000"
 					android:typeface="serif" android:layout_weight="1" android:textSize="24sp"/>
 	 				<ImageView
@@ -47,9 +47,9 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>	
 					<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
-					android:layout_gravity="center_vertical" 
+					android:layout_gravity="center_vertical|right" 
 					android:layout_weight="1"
-					android:layout_marginLeft="5dp" android:layout_marginRight="15dp"
+					android:layout_marginRight="15dp"
 					android:text="@string/search_button" android:textColor="#000000" android:typeface="serif"
 					android:textSize="24sp"/>
 				</LinearLayout>
@@ -80,7 +80,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 					<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
 					android:layout_gravity="center_vertical|right"
 					android:layout_weight="1"
-					android:layout_marginLeft="5dp" android:layout_marginRight="15dp"
+					android:layout_marginRight="15dp"
 					android:text="@string/settings_Button" android:textColor="#000000" android:typeface="serif"
 					android:textSize="24sp"/>
 				 </LinearLayout> 		
