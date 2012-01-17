@@ -644,7 +644,7 @@
     <string name="map_view_3d">3D вид</string>
     <string name="show_poi_over_map_description">Показывать слой POI</string>
     <string name="show_poi_over_map">POI</string>
-    <string name="map_tile_source_descr">Загружать недостающие части карты из : </string>
+    <string name="map_tile_source_descr">Загружать недостающие части карты из</string>
     <string name="map_tile_source">Растровые карты</string>
     <string name="map_source">Источник карты</string>
     <string name="use_internet">Интернет</string>

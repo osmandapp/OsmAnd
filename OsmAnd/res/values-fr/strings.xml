@@ -653,7 +653,7 @@
 <string name="map_view_3d">Vue 3D</string>
 <string name="show_poi_over_map_description">Afficher PI sur la carte (utiliser le dernier filtre)</string>
 <string name="show_poi_over_map">Afficher PI</string>
-<string name="map_tile_source_descr">Choisir la source de la carte apparente :</string>
+<string name="map_tile_source_descr">Choisir la source de la carte apparente</string>
 <string name="map_tile_source">Source des carreaux</string>
 <string name="map_source">Source cartographique</string>
 <string name="use_internet">Utiliser internet</string>

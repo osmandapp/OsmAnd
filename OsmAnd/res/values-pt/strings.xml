@@ -351,7 +351,7 @@
 	<string name="map_view_3d">Visualização em 3D</string>
 	<string name="show_poi_over_map_description">Mostrar POI no mapa (use o último filtro)</string>
 	<string name="show_poi_over_map">Mostrar POI</string>
-	<string name="map_tile_source_descr">Escolha a fonte de imagens de mapa online ou offline:</string>
+	<string name="map_tile_source_descr">Escolha a fonte de imagens de mapa online ou offline</string>
 	<string name="map_tile_source">Fonte de imagens</string>
 	<string name="map_source">Origem do mapa</string>
 	<string name="use_internet">Utilizar Internet</string>

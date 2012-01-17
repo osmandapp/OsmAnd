@@ -663,7 +663,7 @@
 
 <string name="show_poi_over_map_description">Pokaż POI na mapie (używa ostatnio wybranego filtru)</string>
 <string name="show_poi_over_map">Pokaż POI</string>
-<string name="map_tile_source_descr">Wybierz źródło mapy kafelkowej (online lub offline): </string>
+<string name="map_tile_source_descr">Wybierz źródło mapy kafelkowej (online lub offline)</string>
 <string name="map_tile_source">Źródło mapy kafelkowej</string>
 <string name="map_source">Źródło mapy</string>
 <string name="use_internet">Korzystaj z Internetu</string>

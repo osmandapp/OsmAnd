@@ -714,7 +714,7 @@
 
     <string name="show_poi_over_map_description">Zuletzt gewählte POIs auf der Karte anzeigen</string>
     <string name="show_poi_over_map">POIs anzeigen</string>
-    <string name="map_tile_source_descr">Online oder offline Quelle für Karte (Kacheln):</string>
+    <string name="map_tile_source_descr">Online oder offline Quelle für Karte (Kacheln)</string>
     <string name="map_tile_source">Kartenquelle (Kacheln)</string>
     <string name="map_source">Kartenquelle</string>
     <string name="use_internet">Internet verwenden</string>

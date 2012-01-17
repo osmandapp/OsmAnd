@@ -692,7 +692,7 @@
     
     <string name="show_poi_over_map_description">Visualizzare POI sulla mappa (usa l\'ultimo filtro scelto)</string>
     <string name="show_poi_over_map">Visualizza PDI</string>
-    <string name="map_tile_source_descr">Scegliere la sorgente per i tasselli: </string>
+    <string name="map_tile_source_descr">Scegliere la sorgente per i tasselli</string>
     <string name="map_tile_source">Sorgente dei tasselli della mappa</string>
     <string name="map_source">Sorgente mappa</string>
     <string name="use_internet">Usare internet</string>

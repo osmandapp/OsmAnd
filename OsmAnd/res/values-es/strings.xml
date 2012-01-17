@@ -208,7 +208,7 @@
 	<string name="map_source">Fuente de mapa</string>
 	<string name="map_specify_point">Especificar punto</string>
 	<string name="map_tile_source">Fuente de Tiles</string>
-	<string name="map_tile_source_descr">Elija la fuente de tiles: </string>
+	<string name="map_tile_source_descr">Elija la fuente de tiles</string>
 	<string name="map_view_3d">Vista de mapa 3D</string>
 	<string name="map_view_3d_descr">Habilitar la vista 3D del mapa</string>
 	<string name="maps_could_not_be_downloaded">Este mapa no se pudo descargar</string>

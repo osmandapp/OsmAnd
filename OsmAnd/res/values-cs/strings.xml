@@ -923,7 +923,7 @@
 
   <string name="show_poi_over_map_description">Zobrazit POI na mapě (použít poslední vybraný filtr)</string>
   <string name="show_poi_over_map">Zobrazit POI</string>
-  <string name="map_tile_source_descr">Zvolte zdroj mapových dlaždic:</string>
+  <string name="map_tile_source_descr">Zvolte zdroj mapových dlaždic</string>
   <string name="map_tile_source">Zdroj mapových dlaždic</string>
   <string name="map_source">Zdroj map</string>
   <string name="use_internet">Používat internet</string>

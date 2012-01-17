@@ -659,7 +659,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
     
     <string name="show_poi_over_map_description">Hiện POI trên bản đồ (sử dụng bộ lọc gần đây nhất)</string>
     <string name="show_poi_over_map">Hiện POI</string>
-    <string name="map_tile_source_descr">Chọn nguồn cho bản đồ tiles online/offline: </string>
+    <string name="map_tile_source_descr">Chọn nguồn cho bản đồ tiles online/offline</string>
     <string name="map_tile_source">Nguồn bản đồ Tile</string>
     <string name="map_source">Nguồn bản đồ</string>
     <string name="use_internet">Dùng Internet</string>

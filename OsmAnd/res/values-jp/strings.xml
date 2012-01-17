@@ -630,7 +630,7 @@ name="recalculate_route_to_your_location">現在地に従ってルートを再�
  <string name="show_poi_over_map_description">マップ上にPOIを表示
 (前回選択したフィルタを使用)</string>
  <string name="show_poi_over_map">POIを表示</string>
- <string name="map_tile_source_descr">オンラインまたはオフラインマップタイルのソースを選ぶ: </string>
+ <string name="map_tile_source_descr">オンラインまたはオフラインマップタイルのソースを選ぶ</string>
  <string name="map_tile_source">タイルマップソース</string>
  <string name="map_source">マップソース</string>
  <string name="use_internet">インターネットを使用</string>

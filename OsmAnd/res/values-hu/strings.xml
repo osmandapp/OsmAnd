@@ -696,7 +696,7 @@
     
 	<string name="show_poi_over_map_description">POI mutatása a térképen (utoljára használt szűrő szerint)</string>
 	<string name="show_poi_over_map">POI mutatása</string>
-	<string name="map_tile_source_descr">Térképcsempék forrásának kiválasztása:</string>
+	<string name="map_tile_source_descr">Térképcsempék forrásának kiválasztása</string>
 	<string name="map_tile_source">Térképcsempék forrása</string>
 	<string name="map_source">Térkép forrása</string>
 	<string name="use_internet">Internet használata</string>

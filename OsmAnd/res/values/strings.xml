@@ -716,7 +716,7 @@
     
     <string name="show_poi_over_map_description">Show POI over map (use last chosen filter)</string>
     <string name="show_poi_over_map">Show POI</string>
-    <string name="map_tile_source_descr">Choose the source of online or offline map tiles: </string>
+    <string name="map_tile_source_descr">Choose the source of online or offline map tiles</string>
     <string name="map_tile_source">Tile map source</string>
     <string name="map_source">Map source</string>
     <string name="use_internet">Use Internet</string>

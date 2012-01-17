@@ -697,7 +697,7 @@
 
 <string name="show_poi_over_map_description">Zobrazenie POI na mape (použije sa posledný vybraný filter)</string>
 <string name="show_poi_over_map">Zobraziť POI</string>
-<string name="map_tile_source_descr">Vybraný zdroj dlaždíc: </string>
+<string name="map_tile_source_descr">Vybraný zdroj dlaždíc</string>
 <string name="map_tile_source">Zdroj dlaždíc mapy</string>
 <string name="map_source">Zdroj mapy</string>
 <string name="use_internet">Použiť internet</string>
