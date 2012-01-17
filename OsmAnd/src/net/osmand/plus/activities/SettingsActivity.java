@@ -297,6 +297,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		
 		createCustomRenderingProperties(false);
 		
+		applicationModePreference = (ListPreference) screen.findPreference(osmandSettings.APPLICATION_MODE.getId());
+		applicationModePreference.setOnPreferenceChangeListener(this);
+
 		tileSourcePreference = (ListPreference) screen.findPreference(osmandSettings.MAP_TILE_SOURCES.getId());
 		tileSourcePreference.setOnPreferenceChangeListener(this);
 		overlayPreference = (ListPreference) screen.findPreference(osmandSettings.MAP_OVERLAY.getId());
@@ -552,7 +555,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 						getMyApplication().showDialogInitializingCommandPlayer(this, false);
 					}
 				} else if (listPref.getId().equals(osmandSettings.APPLICATION_MODE.getId())) {
-					// ApplicationMode.setTitle(ApplicationMode.getTitle().toString() + " [" + osmandSettings.APPLICATION_MODE.get() + "]");
+					applicationModePreference.setTitle(applicationModePreference.getTitle().toString() + " [" + osmandSettings.APPLICATION_MODE.get() + "]");
 					updateAllSettings();
 				} else if (listPref.getId().equals(osmandSettings.PREFERRED_LOCALE.getId())) {
 					// restart application to update locale
