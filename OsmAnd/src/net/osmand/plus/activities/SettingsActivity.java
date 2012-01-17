@@ -552,7 +552,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 						getMyApplication().showDialogInitializingCommandPlayer(this, false);
 					}
 				} else if (listPref.getId().equals(osmandSettings.APPLICATION_MODE.getId())) {
-					ApplicationMode.setTitle(ApplicationMode.getTitle().toString() + " [" + osmandSettings.APPLICATION_MODE.get() + "]");
+					// ApplicationMode.setTitle(ApplicationMode.getTitle().toString() + " [" + osmandSettings.APPLICATION_MODE.get() + "]");
 					updateAllSettings();
 				} else if (listPref.getId().equals(osmandSettings.PREFERRED_LOCALE.getId())) {
 					// restart application to update locale
