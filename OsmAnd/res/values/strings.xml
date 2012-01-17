@@ -9,13 +9,13 @@
 	<string name="free_version_title">Free version</string>
 	<string name="poi_context_menu_showdescription">Show POI description</string>
 
-	<string name="index_name_us">North America - United States</string>
 	<string name="index_name_north_america">North America</string>
+	<string name="index_name_us">North America - United States</string>
 	<string name="index_name_central_america">Central America</string>
 	<string name="index_name_south_america">South America</string>
+	<string name="index_name_europe">Europe</string>
 	<string name="index_name_france">Europe - France</string>
 	<string name="index_name_germany">Europe - Germany</string>
-	<string name="index_name_europe">Europe</string>
 	<string name="index_name_russia">Europe/Asia - Russia</string>
 	<string name="index_name_africa">Africa</string>
 	<string name="index_name_asia">Asia</string>

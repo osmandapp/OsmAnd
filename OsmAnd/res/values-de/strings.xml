@@ -9,18 +9,18 @@
 	<string name="free_version_title">Kostenlose Version</string>
 	<string name="poi_context_menu_showdescription">Zeige POI-Beschreibung</string>
 
+	<string name="index_name_north_america">Nordamerika</string>
 	<string name="index_name_us">Nordamerika - Vereinigte Staaten</string>
-	<string name="index_name_north_america">Nordamerika - andere Karten</string>
 	<string name="index_name_central_america">Zentralamerika</string>
 	<string name="index_name_south_america">Südamerika</string>
+	<string name="index_name_europe">Europa</string>
 	<string name="index_name_france">Europa - Frankreich</string>
 	<string name="index_name_germany">Europa - Deutschland</string>
-	<string name="index_name_europe">Europa - andere Karten</string>
 	<string name="index_name_russia">Europa/Asien - Russland</string>
 	<string name="index_name_africa">Afrika</string>
 	<string name="index_name_asia">Asien</string>
 	<string name="index_name_australia">Australien</string>
-	<string name="index_name_other">Andere (weltweite oder thematische Karten)</string>
+	<string name="index_name_other">Weltweite und thematische Karten</string>
 	<string name="index_name_wiki">Weltweite Wikipedia</string>
 	<string name="index_name_voice">Sprachpakete (Aufnahmen)</string>
 	<string name="index_name_tts_voice">Sprachpakete (TTS)</string>
