@@ -68,6 +68,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private Preference testVoiceCommands;
 
 	private EditTextPreference applicationDir;
+	private ListPreference applicationModePreference;
 	private ListPreference tileSourcePreference;
 	private ListPreference overlayPreference;
 	private ListPreference underlayPreference;
