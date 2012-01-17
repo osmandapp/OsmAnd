@@ -464,12 +464,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		fillTileSourcesToPreference(overlayPreference, osmandSettings.MAP_OVERLAY.get(), true);
 		fillTileSourcesToPreference(underlayPreference, osmandSettings.MAP_UNDERLAY.get(), true);
 
-		String mapName = " " + osmandSettings.MAP_TILE_SOURCES.get(); //$NON-NLS-1$
-		String summary = tileSourcePreference.getSummary().toString();
-		if (summary.lastIndexOf(':') != -1) {
-			summary = summary.substring(0, summary.lastIndexOf(':') + 1);
-		}
-		tileSourcePreference.setSummary(summary + mapName);
+//		String mapName = " " + osmandSettings.MAP_TILE_SOURCES.get(); //$NON-NLS-1$
+//		String summary = tileSourcePreference.getSummary().toString();
+//		if (summary.lastIndexOf(':') != -1) {
+//			summary = summary.substring(0, summary.lastIndexOf(':') + 1);
+//		}
+//		tileSourcePreference.setSummary(summary + mapName);
+		tileSourcePreference.setSummary(tileSourcePreference.getSummary().toString() + "[" + osmandSettings.MAP_TILE_SOURCES.get() + "]");
 	}
 
 	private void fillTileSourcesToPreference(ListPreference tileSourcePreference, String value, boolean addNone) {
