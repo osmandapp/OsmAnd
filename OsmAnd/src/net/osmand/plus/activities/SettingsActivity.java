@@ -474,7 +474,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 //			summary = summary.substring(0, summary.lastIndexOf(':') + 1);
 //		}
 //		tileSourcePreference.setSummary(summary + mapName);
-		tileSourcePreference.setSummary(tileSourcePreference.getSummary().toString() + " [" + osmandSettings.MAP_TILE_SOURCES.get() + "]");
+		tileSourcePreference.setSummary(R.string.map_tile_source_descr + " [" + osmandSettings.MAP_TILE_SOURCES.get() + "]");
 	}
 
 	private void fillTileSourcesToPreference(ListPreference tileSourcePreference, String value, boolean addNone) {
@@ -556,7 +556,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 						getMyApplication().showDialogInitializingCommandPlayer(this, false);
 					}
 				} else if (listPref.getId().equals(osmandSettings.APPLICATION_MODE.getId())) {
-					applicationModePreference.setTitle(applicationModePreference.getTitle().toString() + " [" + osmandSettings.APPLICATION_MODE.get() + "]");
+					applicationModePreference.setTitle(R.string.settings_preset + " [" + osmandSettings.APPLICATION_MODE.get() + "]");
 					updateAllSettings();
 				} else if (listPref.getId().equals(osmandSettings.PREFERRED_LOCALE.getId())) {
 					// restart application to update locale
