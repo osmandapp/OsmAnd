@@ -12,8 +12,8 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 				android:layout_marginLeft="4dp" android:layout_marginTop="8dp" 
 				android:text="@string/app_name" android:textColor="#000000" android:typeface="serif" android:textSize="30sp"/>
 				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1"
-				android:layout_marginLeft="24dp" android:layout_marginTop="8dp" android:layout_marginBottom="8dp" android:text="0.5.1 beta(b6)" android:textColor="#000000"
-				android:typeface="serif" android:id="@+id/TextVersion" android:textSize="18sp"/> 
+				android:layout_marginLeft="24dp" android:layout_marginTop="8dp" android:layout_marginBottom="8dp" android:text="0.5.1 beta(b6)" android:gravity="right"
+				android:textColor="#000000" android:typeface="serif" android:id="@+id/TextVersion" android:textSize="18sp"/> 
 				<ImageView android:src="@drawable/help_icon" android:id="@+id/HelpButton" android:layout_marginTop="9dp"
 				android:focusable="true" android:clickable="true"
 				android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="6dp"/>
@@ -47,7 +47,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>	
 					<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
-					android:layout_gravity="center_vertical|right" 
+					android:layout_gravity="center_vertical|right" android:gravity="right"
 					android:layout_weight="1"
 					android:layout_marginRight="15dp"
 					android:text="@string/search_button" android:textColor="#000000" android:typeface="serif"
@@ -78,7 +78,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>		
 					<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
-					android:layout_gravity="center_vertical|right"
+					android:layout_gravity="center_vertical|right" android:gravity="right"
 					android:layout_weight="1"
 					android:layout_marginRight="15dp"
 					android:text="@string/settings_Button" android:textColor="#000000" android:typeface="serif"
