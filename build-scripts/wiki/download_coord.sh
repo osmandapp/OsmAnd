@@ -56,3 +56,25 @@ download_coord lb;
 download_coord os;
 download_coord gl;
 
+download_coord fy;
+download_coord af;
+download_coord hy;
+download_coord ml;
+download_coord als;
+download_coord sw;
+download_coord ta;
+download_coord pam;
+download_coord ku;
+download_coord nds;
+download_coord la;
+download_coord vec;
+download_coord ga;
+download_coord nv;
+download_coord war;
+download_coord hi;
+download_coord hu;
+download_coord te;
+download_coord ht;
+download_coord ceb;
+
+

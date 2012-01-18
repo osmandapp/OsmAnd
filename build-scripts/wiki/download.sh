@@ -52,4 +52,20 @@ download lb Luxembourgish;
 download os Ossetian;
 download gl Galician ;
 
+download fy Frysk;
+download af Africaans;
+download hy Armenian;
+download ml Malayalam;
+download als Alsatian;
+download sw Swahili;
+download ta Tamil;
+download ku Kurdish;
+download la Latin;
+download ga Irish;
+download nv Navajo;
+download hi Hindi;
+download hu Hungarian;
+download te Telugu;
+download ht Haitian;
+
 
