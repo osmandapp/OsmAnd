@@ -471,7 +471,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		updateApplicationDirTextAndSummary();
 
 		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  [" + ApplicationMode.toHumanString(osmandSettings.APPLICATION_MODE.get(), this) + "]");
-		dayNightModePreference.setSummary(getString(R.string.daynight_descr) + "  [" + osmandSettings.DayNightMode.toHumanStrings(DAYNIGHT_MODE.get()) + "]");
+		dayNightModePreference.setSummary(getString(R.string.daynight_descr) + "  [" + osmandSettings.DAYNIGHT_MODE.get() + "]");
 		routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + osmandSettings.ROUTER_SERVICE.get() + "]");
     }
 
@@ -578,7 +578,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					finish();
 					startActivity(intent);
 				} else if (listPref.getId().equals(osmandSettings.DAYNIGHT_MODE.getId())) {
-					dayNightModePreference.setSummary(getString(R.string.daynight_descr) + "  [" + osmandSettings.DayNightMode.toHumanStrings(DAYNIGHT_MODE.get()) + "]");
+					dayNightModePreference.setSummary(getString(R.string.daynight_descr) + "  [" + osmandSettings.DAYNIGHT_MODE.get() + "]");
 				} else if (listPref.getId().equals(osmandSettings.ROUTER_SERVICE.getId())) {
 					routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + osmandSettings.ROUTER_SERVICE.get() + "]");
 				}
