@@ -3,9 +3,6 @@ package net.osmand.plus.activities;
 import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
 import static net.osmand.data.IndexConstants.BINARY_MAP_VERSION;
-import static net.osmand.data.IndexConstants.POI_INDEX_EXT;
-import static net.osmand.data.IndexConstants.POI_INDEX_EXT_ZIP;
-import static net.osmand.data.IndexConstants.POI_TABLE_VERSION;
 import static net.osmand.data.IndexConstants.TTSVOICE_INDEX_EXT_ZIP;
 import static net.osmand.data.IndexConstants.TTSVOICE_VERSION;
 import static net.osmand.data.IndexConstants.VOICE_INDEX_EXT_ZIP;
@@ -444,7 +441,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 	private Collection<String> listAlreadyDownloadedWithAlternatives() {
 		Set<String> files = new TreeSet<String>();
 		File externalStorageDirectory = OsmandSettings.getOsmandSettings(getApplicationContext()).getExternalStorageDirectory();
-		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.POI_PATH),POI_INDEX_EXT,POI_INDEX_EXT_ZIP,POI_TABLE_VERSION));
+		// files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.POI_PATH),POI_INDEX_EXT,POI_INDEX_EXT_ZIP,POI_TABLE_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.APP_DIR),BINARY_MAP_INDEX_EXT,BINARY_MAP_INDEX_EXT_ZIP,BINARY_MAP_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.BACKUP_PATH),BINARY_MAP_INDEX_EXT,BINARY_MAP_INDEX_EXT_ZIP,BINARY_MAP_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.VOICE_PATH),"",VOICE_INDEX_EXT_ZIP, VOICE_VERSION));
@@ -483,15 +480,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 		boolean unzipDir = false;
 		
 		File externalStorageDirectory = OsmandSettings.getOsmandSettings(getApplicationContext()).getExternalStorageDirectory();
-		if(fileName.endsWith(IndexConstants.POI_INDEX_EXT)){
-			parent = new File(externalStorageDirectory, ResourceManager.POI_PATH);
-			toSavePostfix = POI_INDEX_EXT;
-			toCheckPostfix = POI_INDEX_EXT;
-		} else if(fileName.endsWith(IndexConstants.POI_INDEX_EXT_ZIP)){
-			parent = new File(externalStorageDirectory, ResourceManager.POI_PATH);
-			toSavePostfix = POI_INDEX_EXT_ZIP;
-			toCheckPostfix = POI_INDEX_EXT;
-		} else if(fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)){
+		if(fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)){
 			parent = new File(externalStorageDirectory, ResourceManager.APP_DIR);
 			toSavePostfix = BINARY_MAP_INDEX_EXT;
 			toCheckPostfix = BINARY_MAP_INDEX_EXT;
@@ -620,9 +609,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 	private String convertServerFileNameToLocal(String name){
 		int l = name.lastIndexOf('_');
 		String s;
-		if(name.endsWith(IndexConstants.POI_INDEX_EXT) || name.endsWith(IndexConstants.POI_INDEX_EXT_ZIP)){
-			s = IndexConstants.POI_INDEX_EXT;
-		} else if(name.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || name.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)){
+		if(name.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || name.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)){
 			s = IndexConstants.BINARY_MAP_INDEX_EXT;
 		} else {
 			s = ""; //$NON-NLS-1$

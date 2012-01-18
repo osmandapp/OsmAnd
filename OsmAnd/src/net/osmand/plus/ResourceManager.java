@@ -551,35 +551,13 @@ public class ResourceManager {
 		}
 		return false;
 	}
-	
+
+	// POI not supported any more
 	public void indexingPoi(final IProgress progress, List<String> warnings, File f) {
 		if (f.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
-			AmenityIndexRepositoryOdb repository = new AmenityIndexRepositoryOdb();
 			progress.startTask(context.getString(R.string.indexing_poi) + " " +  f.getName(), -1); //$NON-NLS-1$
 			try {
-				boolean initialized = repository.initialize(progress, f);
-				if (initialized) {
-					boolean covered = false;
-					for(AmenityIndexRepository r :  amenityRepositories){
-						if(r instanceof AmenityIndexRepositoryBinary){
-							double latC = (repository.dataBottomLatitude + repository.dataTopLatitude )/ 2;
-							double lonC = (repository.dataLeftLongitude + repository.dataRightLongitude) / 2;
-							if(r.checkContains(latC, lonC)){
-								covered = true;
-								break;
-							}
-						}
-					}
-					if(covered){
-						repository.close();
-						warnings.add(context.getString(R.string.old_poi_file_should_be_deleted, f.getName())); //$NON-NLS-1$
-					} else {
-						amenityRepositories.add(repository);
-						indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$
-					}
-				} else {
-					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
-				}
+				warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 			} catch (SQLiteException e) {
 				log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
 				warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$

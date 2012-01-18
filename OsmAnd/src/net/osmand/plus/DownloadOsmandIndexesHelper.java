@@ -76,9 +76,7 @@ public class DownloadOsmandIndexesHelper {
 		
 		public String getVisibleDescription(Context ctx){
 			String s = ""; //$NON-NLS-1$
-			if (fileName.endsWith(IndexConstants.POI_INDEX_EXT) || fileName.endsWith(IndexConstants.POI_INDEX_EXT_ZIP)) {
-				s = ctx.getString(R.string.poi);
-			} else if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)
+			if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)
 					|| fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
 				String lowerCase = description.toLowerCase();
 				if (lowerCase.contains("map")) { //$NON-NLS-1$
