@@ -392,8 +392,6 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 			findViewById(R.id.ProgressBar).setVisibility(View.GONE);
 			Toast.makeText(LocalIndexesActivity.this, result, Toast.LENGTH_LONG).show();
 			listAdapter.clear();
-			asyncLoader = new LoadLocalIndexTask();
-			asyncLoader.execute(LocalIndexesActivity.this);
 			reloadIndexes();
 			
 		}
@@ -686,6 +684,8 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 	
 
 	public void reloadIndexes() {
+		listAdapter.clear();
+		asyncLoader = new LoadLocalIndexTask();
 		AsyncTask<Void, String, List<String>> task = new AsyncTask<Void, String, List<String>>(){
 
 			@Override
@@ -704,6 +704,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 					}
 					Toast.makeText(LocalIndexesActivity.this, b.toString(), Toast.LENGTH_LONG).show();
 				}
+				asyncLoader.execute(LocalIndexesActivity.this);
 			}
 			
 			@Override
