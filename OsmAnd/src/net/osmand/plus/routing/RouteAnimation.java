@@ -23,22 +23,20 @@ public class RouteAnimation {
 				public void run() {
 					final List<Location> directions = new ArrayList<Location>(
 							routingHelper.getCurrentRoute());
-					Location current = null;
+					Location current = directions.isEmpty() ? null : new Location(directions.remove(0));
 					Location prev = null;
-					float meters = 20.0f;
+					float meters = metersToGoInFiveSteps(directions, current);
 					while (!directions.isEmpty() && routeAnimation != null) {
-						if (current == null) {
-							current = new Location(directions.remove(0));
+						if (current.distanceTo(directions.get(0)) > meters) {
+							current = LatLonUtils.middleLocation(current,
+									directions.get(0), meters);
 						} else {
-							if (current.distanceTo(directions.get(0)) > meters) {
-								current = LatLonUtils.middleLocation(current,
-										directions.get(0), meters);
-							} else {
-								current = new Location(directions.remove(0));
-							}
+							current = new Location(directions.remove(0));
+							meters = metersToGoInFiveSteps(directions, current);
 						}
 						current.setSpeed(meters);
 						current.setTime(System.currentTimeMillis());
+						current.setAccuracy(5);
 						if (prev != null) {
 							current.setBearing(prev.bearingTo(current));
 						}
@@ -57,6 +55,11 @@ public class RouteAnimation {
 						prev = current;
 					}
 					RouteAnimation.this.stop();
+				}
+
+				private float metersToGoInFiveSteps(
+						final List<Location> directions, Location current) {
+					return directions.isEmpty() ? 20.0f : Math.max(20.0f, current.distanceTo(directions.get(0)) / 2 );
 				};
 			};
 			routeAnimation.start();
