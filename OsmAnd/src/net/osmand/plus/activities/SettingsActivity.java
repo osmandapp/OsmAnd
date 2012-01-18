@@ -577,6 +577,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					Intent intent = getIntent();
 					finish();
 					startActivity(intent);
+				} else if (listPref.getId().equals(osmandSettings.DAYNIGHT_MODE.getId())) {
+					dayNightModePreference.setSummary(getString(R.string.daynight_descr) + "  [" + osmandSettings.DAYNIGHT_MODE.get() + "]");
+				} else if (listPref.getId().equals(osmandSettings.ROUTER_SERVICE.getId())) {
+					routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + osmandSettings.ROUTER_SERVICE.get() + "]");
 				}
 			}
 			if (listPref.getId().equals(osmandSettings.RENDERER.getId())) {
