@@ -503,7 +503,11 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
  
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
+    	if (keyCode == KeyEvent.KEYCODE_BACK) {
+			//some application/hardware needs that back button reacts on key up, so
+			//that they could do some key combinations with it...
+			return true;
+		} else if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
 			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
 			// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			LatLon loc = getMapLocation();
@@ -913,10 +917,15 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 	
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
+    	if (keyCode == KeyEvent.KEYCODE_BACK) {
+			//some application/hardware needs that back button reacts on key up, so
+			//that they could do some key combinations with it...
+    		onBackPressed();
+			return true;
+    	}  else if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
 			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 	    	return true;
-		}
+		} else 
 		// Parrot device has only dpad left and right
 		if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
 			changeZoom(mapView.getZoom() - 1);
@@ -925,7 +934,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 			changeZoom(mapView.getZoom() + 1);
 	    	return true;
 		}
-		return false;
+		return super.onKeyUp(keyCode,event);
 	}
 	
 	public void checkExternalStorage(){
