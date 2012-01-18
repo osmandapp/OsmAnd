@@ -116,7 +116,7 @@
 	<string name="sendtoOSM_confirmation_msg">An OSM schicken: %1$s?</string>
 	<string name="pref_vector_rendering">Vektor Renderer spezif. Optionen</string>
 	<string name="pref_overlay">Overlay / Underlay</string>
-	<string name="pref_raster_map">Einstellungen Kachelkarten</string>
+	<string name="pref_raster_map">Einstellungen Kartenquelle</string>
 	<string name="pref_vector_map">Einstellungen Vektorkarten</string>
 	<string name="delete_confirmation_msg">%1$s löschen?</string>
 	<string name="city_type_suburb">Vorstadt</string>

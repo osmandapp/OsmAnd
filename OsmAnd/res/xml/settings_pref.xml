@@ -8,18 +8,14 @@
 
 	<PreferenceScreen android:key="map_settings" android:title="@string/rendering_settings" android:summary="@string/rendering_settings_descr">
 		<PreferenceCategory android:title="@string/pref_raster_map">
+			<CheckBoxPreference android:summary="@string/map_vector_data_descr" android:title="@string/map_vector_data"
+				android:key="map_vector_data"></CheckBoxPreference>
 			<ListPreference android:title="@string/map_tile_source" android:summary="@string/map_tile_source_descr" android:key="map_tile_sources"></ListPreference>
 			<CheckBoxPreference android:key="use_internet_to_download_tiles" android:title="@string/use_internet" android:summary="@string/use_internet_to_download_tile"></CheckBoxPreference>
 			<ListPreference android:title="@string/max_level_download_tile" android:summary="@string/max_level_download_tile_descr"
 				android:key="max_level_download_tile"></ListPreference>
-		</PreferenceCategory>
-		<PreferenceCategory android:title="@string/pref_vector_map">
-			<CheckBoxPreference android:summary="@string/map_vector_data_descr" android:title="@string/map_vector_data"
-				android:key="map_vector_data"></CheckBoxPreference>
-			<ListPreference android:key="renderer" android:title="@string/renderers" android:summary="@string/renderers_descr"></ListPreference>
 			<ListPreference android:title="@string/level_to_switch_vector_raster" android:summary="@string/level_to_switch_vector_raster_descr"
 				android:key="level_to_switch_vector_raster"></ListPreference>
-			<ListPreference android:key="map_text_size" android:title="@string/map_text_size" android:summary="@string/map_text_size_descr"/>
 		</PreferenceCategory>
 		<PreferenceCategory android:title="@string/pref_overlay">
 			<ListPreference android:title="@string/map_overlay" android:summary="@string/map_overlay_descr" android:key="map_overlay"></ListPreference>
@@ -28,6 +24,10 @@
 			<ListPreference android:title="@string/map_underlay" android:summary="@string/map_underlay_descr" android:key="map_underlay"></ListPreference>
 			<net.osmand.plus.views.SeekBarPreference android:key="map_transparency" android:defaultValue="0" android:max="255" 
 				android:dialogMessage="@string/modify_transparency" android:title="@string/map_transparency" android:summary="@string/map_transparency_descr"/>
+		</PreferenceCategory>
+		<PreferenceCategory android:title="@string/pref_vector_map">
+			<ListPreference android:key="renderer" android:title="@string/renderers" android:summary="@string/renderers_descr"></ListPreference>
+			<ListPreference android:key="map_text_size" android:title="@string/map_text_size" android:summary="@string/map_text_size_descr"/>
 		</PreferenceCategory>
 		<PreferenceCategory android:title="@string/pref_vector_rendering" android:key="custom_vector_rendering">
 		</PreferenceCategory>
