@@ -471,7 +471,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		updateApplicationDirTextAndSummary();
 
 		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  [" + ApplicationMode.toHumanString(osmandSettings.APPLICATION_MODE.get(), this) + "]");
-		dayNightModePreference.setSummary(getString(R.string.daynight_descr) + "  [" + DayNightMode.toHumanString(osmandSettings.DAYNIGHT_MODE.get()) + "]");
+		dayNightModePreference.setSummary(getString(R.string.daynight_descr) + "  [" + DayNightMode.osmandSettings.DAYNIGHT_MODE.get().toHumanString(this) + "]");
 		routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + osmandSettings.ROUTER_SERVICE.get() + "]");
     }
 
