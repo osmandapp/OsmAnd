@@ -83,7 +83,7 @@
   <string name="sendtoOSM_confirmation_msg">Envoyer à OSM: %1$s?</string>
   <string name="pref_vector_rendering">Options pour le rendu de la carte vectorielle locale</string>
   <string name="pref_overlay">Surcouche / sous-couche</string>
-  <string name="pref_raster_map">Options cartographie image</string>
+  <string name="pref_raster_map">Options source de cartes</string>
   <string name="pref_vector_map">Options cartographie vectorielle</string>
   <string name="delete_confirmation_msg">Supprimer %1$s?</string>
   <string name="city_type_suburb">Banlieue</string>

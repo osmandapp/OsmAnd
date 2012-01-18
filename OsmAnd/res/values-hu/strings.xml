@@ -118,7 +118,7 @@
 	<string name="sendtoOSM_confirmation_msg">Feltöltöd OSM-re: %1$s?</string>
 	<string name="pref_vector_rendering">Beállítások vektoros megjelenítéshez</string>
 	<string name="pref_overlay">Rátét / alátét</string>
-	<string name="pref_raster_map">Csempés (raszteres) térkép beállítások</string>
+	<string name="pref_raster_map">Térképforrás beállítások</string>
 	<string name="pref_vector_map">Vektoros térkép beállítások</string>
 	<string name="delete_confirmation_msg">Biztosan törlöd: %1$s?</string>
 	<string name="city_type_suburb">településrész</string>
