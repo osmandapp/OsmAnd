@@ -72,7 +72,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private ListPreference tileSourcePreference;
 	private ListPreference overlayPreference;
 	private ListPreference underlayPreference;
-	
+
+	private ListPreference dayNightModePreference;
+	private ListPreference routerServicePreference;
+
 	private CheckBoxPreference routeServiceEnabled;
 	private BroadcastReceiver broadcastReceiver;
 	
@@ -308,7 +311,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		overlayPreference.setOnPreferenceChangeListener(this);
 		underlayPreference = (ListPreference) screen.findPreference(osmandSettings.MAP_UNDERLAY.getId());
 		underlayPreference.setOnPreferenceChangeListener(this);
-		
+
+		dayNightModePreference = (ListPreference) screen.findPreference(osmandSettings.DAYNIGHT_MODE.getId());
+		dayNightModePreference.setOnPreferenceChangeListener(this);
+		routerServicePreference = (ListPreference) screen.findPreference(osmandSettings.ROUTER_SERVICE.getId());
+		routerServicePreference.setOnPreferenceChangeListener(this);
 
 		Preference localIndexes =(Preference) screen.findPreference(OsmandSettings.LOCAL_INDEXES);
 		localIndexes.setOnPreferenceClickListener(this);
@@ -464,6 +471,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		updateApplicationDirTextAndSummary();
 
 		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  [" + ApplicationMode.toHumanString(osmandSettings.APPLICATION_MODE.get(), this) + "]");
+		// dayNightModePreference.setSummary(getString(R.string.daynight_descr) + "  [" + DayNightMode.toHumanString(osmandSettings.DAYNIGHT_MODE.get()) + "]");
+		routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + osmandSettings.ROUTER_SERVICE.get() + "]");
     }
 
 	private void updateTileSourceSummary() {
