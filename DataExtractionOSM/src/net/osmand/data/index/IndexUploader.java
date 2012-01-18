@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.text.MessageFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -154,7 +156,7 @@ public class IndexUploader {
 					files.add(logFile);
 				}
 				File zFile = new File(f.getParentFile(), unzipped.getName() + ".zip");
-				zip(files, zFile, description);
+				zip(files, zFile, description, unzipped.lastModified());
 				unzipped.delete(); // delete the unzipped file
 				if(logFile.exists()){
 					logFile.delete();
@@ -170,7 +172,7 @@ public class IndexUploader {
 		}
 	}
 
-	public static File zip(List<File> fs, File zFile, String description) throws OneFileException {
+	public static File zip(List<File> fs, File zFile, String description, long lastModifiedTime) throws OneFileException {
 		try {
 			ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(zFile));
 			zout.setLevel(9);
@@ -186,6 +188,7 @@ public class IndexUploader {
 				Algoritms.closeStream(is);
 			}
 			Algoritms.closeStream(zout);
+			zFile.setLastModified(lastModifiedTime);
 		} catch (IOException e) {
 			throw new OneFileException("cannot zip file:" + e.getMessage());
 		}
@@ -253,17 +256,20 @@ public class IndexUploader {
 			zipFile = new ZipFile(f);
 			Enumeration<? extends ZipEntry> entries = zipFile.entries();
 			File mainFile = null;
+			long slastModified = f.lastModified();
 			while (entries.hasMoreElements()) {
 				ZipEntry entry = entries.nextElement();
+				long lastModified = slastModified;
 				File tempFile = new File(f.getParentFile(), entry.getName());
 				InputStream zin = zipFile.getInputStream(entry);
 				FileOutputStream out = new FileOutputStream(tempFile);
 				Algoritms.streamCopy(zin, out);
 				Algoritms.closeStream(zin);
 				Algoritms.closeStream(out);
-				if (!tempFile.getName().endsWith(IndexBatchCreator.GEN_LOG_EXT)) {
+				if (!tempFile.getName().endsWith(IndexConstants.GEN_LOG_EXT)) {
 					mainFile = tempFile;
 				}
+				tempFile.setLastModified(lastModified);
 			}
 			return mainFile;
 		} catch (ZipException e) {
@@ -405,12 +411,12 @@ public class IndexUploader {
 		uploader.upload();
 	}
 
-	public boolean uploadFileToServer(File original, String summary, UploadCredentials credentials) throws IOException {
-		double originalLength = (double) original.length() / MB;
+	public boolean uploadFileToServer(File toUpload, String summary, UploadCredentials credentials) throws IOException {
+		double originalLength = (double) toUpload.length() / MB;
 		MessageFormat dateFormat = new MessageFormat("{0,date,dd.MM.yyyy}", Locale.US);
 		MessageFormat numberFormat = new MessageFormat("{0,number,##.#}", Locale.US);
 		String size = numberFormat.format(new Object[] { originalLength });
-		String date = dateFormat.format(new Object[] { new Date(original.lastModified()) });
+		String date = dateFormat.format(new Object[] { new Date(toUpload.lastModified()) });
 		try {
 			if (credentials instanceof UploadToGoogleCodeCredentials) {
 				
@@ -419,7 +425,7 @@ public class IndexUploader {
 
 				List<File> splittedFiles = Collections.emptyList();
 				try {
-					splittedFiles = splitFiles(original);
+					splittedFiles = splitFiles(toUpload);
 					for (File fs : splittedFiles) {
 						uploadToGoogleCode(fs, summary, (UploadToGoogleCodeCredentials) credentials);
 					}
@@ -427,21 +433,21 @@ public class IndexUploader {
 				} finally {
 					// remove all splitted files
 					for (File fs : splittedFiles) {
-						if (!fs.equals(original)) {
+						if (!fs.equals(toUpload)) {
 							fs.delete();
 						}
 					}
 				}
 			} else if(credentials instanceof UploadSSHCredentials){
-				uploadToSSH(original, summary, size, date, (UploadSSHCredentials) credentials);
+				uploadToSSH(toUpload, summary, size, date, (UploadSSHCredentials) credentials);
 			} else {
-				uploadToFTP(original, summary, size, date, credentials);
+				uploadToFTP(toUpload, summary, size, date, credentials);
 			}
 		} catch (IOException e) {
-			log.error("Input/output exception uploading " + original.getName(), e);
+			log.error("Input/output exception uploading " + toUpload.getName(), e);
 			return false;
 		} catch (JSchException e) {
-			log.error("Input/output exception uploading " + original.getName(), e);
+			log.error("Input/output exception uploading " + toUpload.getName(), e);
 			return false;
 		}
 		return true;

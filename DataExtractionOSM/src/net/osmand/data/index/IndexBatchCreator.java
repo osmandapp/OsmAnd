@@ -443,8 +443,6 @@ public class IndexBatchCreator {
 				indexCreator.setZoomWaySmothness(zoomWaySmoothness);
 			}
 
-			String poiFileName = regionName + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT;
-			indexCreator.setPoiFileName(poiFileName);
 			String mapFileName = regionName + "_" + IndexConstants.BINARY_MAP_VERSION + IndexConstants.BINARY_MAP_INDEX_EXT;
 			indexCreator.setMapFileName(mapFileName);
 			try {

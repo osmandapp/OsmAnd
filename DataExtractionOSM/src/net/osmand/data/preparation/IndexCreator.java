@@ -70,7 +70,6 @@ public class IndexCreator {
 	private int zoomWaySmothness = 2;
 
 	private String regionName;
-	private String poiFileName = null;
 	private String mapFileName = null;
 	private Long lastModifiedDate = null;
 	
@@ -143,9 +142,6 @@ public class IndexCreator {
 		return dialect.getDatabaseConnection(fileName, log);
 	}
 
-	public void setPoiFileName(String poiFileName) {
-		this.poiFileName = poiFileName;
-	}
 
 	public void setNodesDBFile(File file) {
 		dbFile = file;
@@ -175,10 +171,7 @@ public class IndexCreator {
 	}
 
 	public String getPoiFileName() {
-		if (poiFileName == null) {
-			return IndexConstants.POI_INDEX_DIR + getRegionName() + IndexConstants.POI_INDEX_EXT;
-		}
-		return poiFileName;
+		return getRegionName() + IndexConstants.POI_INDEX_EXT;
 	}
 	
 	public String getCityAdminLevel() {
