@@ -890,6 +890,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		registerUnregisterSensor(getLastKnownLocation());
 		mapLayers.getMapInfoLayer().applyTheme();
 		mapLayers.updateLayers(mapView);
+		mapLayers.updateMapSource(mapView, settings.MAP_TILE_SOURCES);
 		getMyApplication().getDaynightHelper().setDayNightMode(settings.DAYNIGHT_MODE.get());
 	}
 	
