@@ -182,7 +182,6 @@ public class DownloadFileHelper {
 								}
 							}
 							fs = new File(fileToUnZip.getParent(), name);
-							toIndex = fs;
 						}
 					} else {
 						fs = new File(fileToUnZip, entry.getName());
