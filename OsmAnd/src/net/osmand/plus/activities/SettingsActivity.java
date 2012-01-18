@@ -477,6 +477,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 //		}
 //		tileSourcePreference.setSummary(summary + mapName);
 		tileSourcePreference.setSummary(getString(R.string.map_tile_source_descr) + "  [" + osmandSettings.MAP_TILE_SOURCES.get() + "]");
+		overlayPreference.setSummary(getString(R.string.map_overlay_descr) + "  [" + osmandSettings.MAP_OVERLAY.get() + "]");
+		underlayPreference.setSummary(getString(R.string.map_underlay_descr) + "  [" + osmandSettings.MAP_UNDERLAY.get() + "]");
 	}
 
 	private void fillTileSourcesToPreference(ListPreference tileSourcePreference, String value, boolean addNone) {
