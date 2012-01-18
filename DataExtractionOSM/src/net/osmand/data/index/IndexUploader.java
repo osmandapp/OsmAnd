@@ -8,8 +8,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.text.MessageFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -260,6 +258,9 @@ public class IndexUploader {
 			while (entries.hasMoreElements()) {
 				ZipEntry entry = entries.nextElement();
 				long lastModified = slastModified;
+				if(entry.getTime() < lastModified) {
+					lastModified = entry.getTime();
+				}
 				File tempFile = new File(f.getParentFile(), entry.getName());
 				InputStream zin = zipFile.getInputStream(entry);
 				FileOutputStream out = new FileOutputStream(tempFile);
