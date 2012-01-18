@@ -19,7 +19,7 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name="net.osmand.plus.activities.MapActivity" android:label="@string/app_name" android:screenOrientation="portrait"
+		<activity android:name="net.osmand.plus.activities.MapActivity" android:label="@string/app_name" android:screenOrientation="unspecified"
 			android:launchMode="singleTop">
 			<intent-filter>
     			<data android:scheme="http" android:host="download.osmand.net" path="go"/>
