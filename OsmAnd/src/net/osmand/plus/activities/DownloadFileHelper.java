@@ -160,7 +160,7 @@ public class DownloadFileHelper {
 				while ((entry = zipIn.getNextEntry()) != null) {
 					int size = (int)entry.getSize();
 					progress.startTask(ctx.getString(R.string.unzipping_file), size);
-					if(entry.isDirectory() || entry.getName().endsWith(IndexConstants.GEN_LOG_INDEX_EXT)){
+					if(entry.isDirectory() || entry.getName().endsWith(IndexConstants.GEN_LOG_EXT)){
 						continue;
 					}
 					File fs;
