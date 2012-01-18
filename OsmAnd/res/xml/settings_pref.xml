@@ -10,8 +10,8 @@
 		<PreferenceCategory android:title="@string/pref_raster_map">
 			<ListPreference android:title="@string/map_tile_source" android:summary="@string/map_tile_source_descr" android:key="map_tile_sources"></ListPreference>
 			<CheckBoxPreference android:key="use_internet_to_download_tiles" android:title="@string/use_internet" android:summary="@string/use_internet_to_download_tile"></CheckBoxPreference>
-			<!-- ListPreference android:title="@string/max_level_download_tile" android:summary="@string/max_level_download_tile_descr"
-				android:key="max_level_download_tile"></ListPreference -->
+			<ListPreference android:title="@string/max_level_download_tile" android:summary="@string/max_level_download_tile_descr"
+				android:key="max_level_download_tile"></ListPreference>
 		</PreferenceCategory>
 		<PreferenceCategory android:title="@string/pref_vector_map">
 			<CheckBoxPreference android:summary="@string/map_vector_data_descr" android:title="@string/map_vector_data"
