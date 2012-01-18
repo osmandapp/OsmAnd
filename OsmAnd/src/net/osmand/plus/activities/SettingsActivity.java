@@ -238,7 +238,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			entries[i - startZoom] = i + ""; //$NON-NLS-1$
 			intValues[i - startZoom] = i ;
 		}
-		registerListPreference(osmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE, screen, entries, intValues);
+		// try without, Issue 823:
+		// registerListPreference(osmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE, screen, entries, intValues);
 		
 		
 		intValues = new Integer[] { 0, 5, 10, 15, 20, 25, 30, 45, 60, 90};

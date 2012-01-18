@@ -12,8 +12,10 @@
 				android:key="map_vector_data"></CheckBoxPreference>
 			<ListPreference android:title="@string/map_tile_source" android:summary="@string/map_tile_source_descr" android:key="map_tile_sources"></ListPreference>
 			<CheckBoxPreference android:key="use_internet_to_download_tiles" android:title="@string/use_internet" android:summary="@string/use_internet_to_download_tile"></CheckBoxPreference>
+			<!-- try without, Issue 823:
 			<ListPreference android:title="@string/max_level_download_tile" android:summary="@string/max_level_download_tile_descr"
 				android:key="max_level_download_tile"></ListPreference>
+			-->
 			<ListPreference android:title="@string/level_to_switch_vector_raster" android:summary="@string/level_to_switch_vector_raster_descr"
 				android:key="level_to_switch_vector_raster"></ListPreference>
 		</PreferenceCategory>
