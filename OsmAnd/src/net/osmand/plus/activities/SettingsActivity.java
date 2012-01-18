@@ -476,9 +476,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 //			summary = summary.substring(0, summary.lastIndexOf(':') + 1);
 //		}
 //		tileSourcePreference.setSummary(summary + mapName);
-		tileSourcePreference.setSummary(getString(R.string.map_tile_source_descr) + " [" + osmandSettings.MAP_TILE_SOURCES.get() + "]");
-		overlayPreference.setSummary(getString(R.string.map_overlay_descr) + " [" + osmandSettings.MAP_OVERLAY.get() + "]");
-		underlayPreference.setSummary(getString(R.string.map_underlay_descr) + " [" + osmandSettings.MAP_UNDERLAY.get() + "]");
+		tileSourcePreference.setSummary(getString(R.string.map_tile_source_descr) + "  [" + osmandSettings.MAP_TILE_SOURCES.get() + "]");
 	}
 
 	private void fillTileSourcesToPreference(ListPreference tileSourcePreference, String value, boolean addNone) {
@@ -616,8 +614,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				}
 				if(preference == underlayPreference){
 					osmandSettings.MAP_UNDERLAY.set(((String) newValue));
+					underlayPreference.setSummary(getString(R.string.map_underlay_descr) + "  [" + osmandSettings.MAP_UNDERLAY.get() + "]");
 				} else if(preference == overlayPreference){
 					osmandSettings.MAP_OVERLAY.set(((String) newValue));
+					overlayPreference.setSummary(getString(R.string.map_overlay_descr) + "  [" + osmandSettings.MAP_OVERLAY.get() + "]");
 				}
 			}
 		}
