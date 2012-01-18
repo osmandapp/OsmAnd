@@ -462,7 +462,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		
 		updateApplicationDirTextAndSummary();
 
-		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  [" + ApplicationMode.toHumanString(osmandSettings.APPLICATION_MODE.get()) + "]");
+		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  [" + ApplicationMode.toHumanString(osmandSettings.APPLICATION_MODE.get(), this) + "]");
     }
 
 	private void updateTileSourceSummary() {
