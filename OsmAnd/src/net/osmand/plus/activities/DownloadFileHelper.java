@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -24,7 +23,6 @@ import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.R;
-import net.osmand.plus.ResourceManager;
 
 public class DownloadFileHelper {
 	
@@ -152,11 +150,8 @@ public class DownloadFileHelper {
 				out = null;
 			}
 
-			File toIndex = fileToDownload;
 			if (fileToDownload.getName().endsWith(".zip")) { //$NON-NLS-1$
-				if (!unzipToDir) {
-					toIndex = fileToUnZip;
-				} else {
+				if (unzipToDir) {
 					fileToUnZip.mkdirs();
 				}
 				ZipInputStream zipIn = new ZipInputStream(new FileInputStream(fileToDownload));
@@ -171,7 +166,7 @@ public class DownloadFileHelper {
 					File fs;
 					if (!unzipToDir) {
 						if (first) {
-							fs = toIndex;
+							fs = fileToUnZip;
 							first = false;
 						} else {
 							String name = entry.getName();
@@ -185,7 +180,6 @@ public class DownloadFileHelper {
 								}
 							}
 							fs = new File(fileToUnZip.getParent(), name);
-							toIndex = fs;
 						}
 					} else {
 						fs = new File(fileToUnZip, entry.getName());
@@ -202,23 +196,13 @@ public class DownloadFileHelper {
 					if(dateModified != null){
 						fs.setLastModified(dateModified);
 					}
+					toReIndex.add(fs);
 				}
 				zipIn.close();
 				fileToDownload.delete(); // zip is no needed more
 			}
 
-			ArrayList<String> warnings = new ArrayList<String>();
-			ResourceManager manager = ((OsmandApplication) ctx.getApplicationContext()).getResourceManager();
-			if(dateModified != null){
-				toIndex.setLastModified(dateModified);
-				manager.updateIndexLastDateModified(toIndex);
-			}
-			toReIndex.add(toIndex);
-			if (warnings.isEmpty()) {
-				showWarningCallback.showWarning(ctx.getString(R.string.download_index_success));
-			} else {
-				showWarningCallback.showWarning(warnings.get(0));
-			}
+			showWarningCallback.showWarning(ctx.getString(R.string.download_index_success));
 			return true;
 		} catch (IOException e) {
 			log.error("Exception ocurred", e); //$NON-NLS-1$
