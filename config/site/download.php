@@ -98,6 +98,9 @@ function update_count_of_downloads($file) {
 
     // Track page view
     $tracker->trackPageview($page, $session, $visitor);
+    
+    $event = new GoogleAnalytics\Event('Download '.$_SERVER['HTTP_USER_AGENT'], 'App', $file,1);
+    $tracker->trackEvent($event, $session, $visitor);
  }
  set_time_limit(0);
  $xml = simplexml_load_file("indexes.xml");

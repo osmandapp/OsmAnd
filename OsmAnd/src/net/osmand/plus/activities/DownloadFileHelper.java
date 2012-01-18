@@ -165,6 +165,9 @@ public class DownloadFileHelper {
 				while ((entry = zipIn.getNextEntry()) != null) {
 					int size = (int)entry.getSize();
 					progress.startTask(ctx.getString(R.string.unzipping_file), size);
+					if(entry.isDirectory() || entry.getName().endsWith(IndexConstants.GEN_LOG_INDEX_EXT)){
+						continue;
+					}
 					File fs;
 					if (!unzipToDir) {
 						if (first) {
@@ -195,6 +198,10 @@ public class DownloadFileHelper {
 						progress.progress(read);
 					}
 					out.close();
+					
+					if(dateModified != null){
+						fs.setLastModified(dateModified);
+					}
 				}
 				zipIn.close();
 				fileToDownload.delete(); // zip is no needed more
@@ -204,18 +211,10 @@ public class DownloadFileHelper {
 			ResourceManager manager = ((OsmandApplication) ctx.getApplicationContext()).getResourceManager();
 			if(dateModified != null){
 				toIndex.setLastModified(dateModified);
-			}
-			if (toIndex.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
-				// update poi index immediately
-				manager.indexingPoi(progress, warnings, toIndex);
-			}
-			if(dateModified != null){
-				toIndex.setLastModified(dateModified);
 				manager.updateIndexLastDateModified(toIndex);
 			}
 			toReIndex.add(toIndex);
 			if (warnings.isEmpty()) {
-				
 				showWarningCallback.showWarning(ctx.getString(R.string.download_index_success));
 			} else {
 				showWarningCallback.showWarning(warnings.get(0));

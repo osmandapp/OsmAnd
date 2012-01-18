@@ -17,6 +17,8 @@ public class IndexConstants {
 	public static final String POI_INDEX_EXT = ".poi.odb"; //$NON-NLS-1$
 	public static final String BINARY_MAP_INDEX_EXT = ".obf"; //$NON-NLS-1$
 	
+	public static final String GEN_LOG_INDEX_EXT = ".gen.log"; //$NON-NLS-1$
+	
 	public static final String POI_INDEX_EXT_ZIP = ".poi.zip"; //$NON-NLS-1$
 	public static final String VOICE_INDEX_EXT_ZIP = ".voice.zip"; //$NON-NLS-1$
 	public static final String TTSVOICE_INDEX_EXT_ZIP = ".ttsvoice.zip"; //$NON-NLS-1$
