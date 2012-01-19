@@ -770,10 +770,10 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 				order = 30;
 			} else if(lc.contains("_centralamerica_") || lc.contains("central-america")) {
 				nameId = R.string.index_name_central_america;
-				order = 50;
+				order = 40;
 			} else if(lc.contains("_southamerica_") || lc.contains("south-america")) {
 				nameId = R.string.index_name_south_america;
-				order = 55;
+				order = 45;
 			} else if(lc.startsWith("france_")) {
 				nameId = R.string.index_name_france;
 				order = 17;
@@ -791,7 +791,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 				order = 80;
 			} else if(lc.contains("_asia_")) {
 				nameId = R.string.index_name_asia;
-				order = 41;
+				order = 50;
 			} else if(lc.contains("australia")) {
 				nameId = R.string.index_name_australia;
 				order = 70;
