@@ -1,5 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="tip_select_destination_point">Выбор точки назначения</string>
+	<string name="tip_select_destination_point_t">
+\tNEW VERSION, PLEASE ADAPT TRANSLATION: You can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
+\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
+
+\n\tВы можете выбрать точку назначения в контекстном меню карты \'Идти к\' или в поиске.
+\n\tВы также можете выбрать избранную точку долгим нажатием в \'Избранных\'.</string>
+
+	<string name="tip_recent_changes_0_6_9_t">Изменения в 0.6.9 :
+\n\t- Более детальная отрисовка векторных карт
+\n\t- Быстрая аппаратная отрисовка карт(экспериментальные настройки)
+\n\t- Существенные изменения внешнего вида
+\n\t- Информация о высоте
+\n\t- Исправления ошибок и мелкие улучшения
+	</string>
+	<string name="show_altitude_info_descr">Показывать текущую высоту на карте</string>
+	<string name="show_altitude_info">Показывать высоты</string>
+	<string name="use_transparent_map_theme_descr">Использовать прозрачные информационные элементы на карте</string>
+	<string name="use_transparent_map_theme">Прозрачная тема</string>
+	<string name="appearance_settings_descr">Настроить внешний вид приложения</string>
+	<string name="appearance_settings">Внешний вид</string>
+	<string name="native_library_not_supported">Нативная библиотека не поддерживается на этом устройстве.</string>
+	<string name="init_native_library">Инициализация нативной библиотеки...</string>
+	<string name="choose_auto_follow_route">Настройки автовозрата карты</string>
+	<string name="choose_auto_follow_route_descr">Выберите время, через которое карта вернется к текущей позиции</string>
+	<string name="auto_follow_route_never">Никогда</string>
+	<string name="auto_follow_route_navigation">Auto follow nav only</string>
+	<string name="auto_follow_route_navigation_descr">Use map view auto follow only while navigating.</string>
+	<string name="auto_follow_location_enabled">Map view auto follow in use.</string>
+
    <string name="tip_recent_changes_0_6_8_t">Изменения в 0.6.8 :
 \n\t- Полностью обновленный поиск (POI, Адрес)! Поиск по адресу более отзывчивый и быстрый. Единственная кнопка поиска с множественными вкладками.
 \n\t- Поиск POI по имени на больших территориях (страна)  в новых картах  
@@ -24,9 +54,6 @@
 	<string name="local_index_mi_rename">Переименовать</string>
 	<string name="show_gpx_route">Показать на карте</string>
 	<string name="poi_filter_nominatim">Nominatim (интернет)</string>
-    <string name="auto_follow_route_never">Никогда</string>
-	<string name="choose_auto_follow_route">Настройки автовозрата карты</string>
-	<string name="choose_auto_follow_route_descr">Выберите время, через которое карта вернется к текущей позиции</string>
 	<string name="search_select_point">Выбрать</string>
 	<string name="local_index_description">Офлайн данные доступные на SD карточке. Вы можете загрузить новые, архивировать и удалить данные. Доступно %1$s.</string>
 	<string name="search_position_current_location_search">Поиск позиции...</string>
@@ -87,7 +114,7 @@
 	<string name="local_index_items_restored">%1$d из %2$d объектов успешно восстановлены.</string>
 	<string name="local_index_no_items_to_do">Нет объектов, чтобы %1$s</string>	
     <string name="local_index_action_do">Вы собириаетесь %1$s %2$s объектов. Вы уверены?</string>
-	<string name="local_index_descr_title">Менеджер офлайн данных:</string>
+	<string name="local_index_descr_title">Менеджер офлайн данных</string>
 	
 	<string name="local_index_mi_restore">Восстановить</string>
 	<string name="local_index_mi_backup">Архив</string>
@@ -188,9 +215,6 @@
 \n\tВы можете изменить режим в \'Меню\'->\'Настройки\'->\'Режим работы\', при этом меняется большинство настроек карты.</string>
 	<string name="tip_navigation">Навигация</string>
 	<string name="tip_navigation_t">Чтобы использовать навигацию, необходимо выбрать точку назначения. После этого нажмите \'Меню\'->\'Навигация\' на карте и выберите тип.</string>
-	<string name="tip_select_destination_point">Выбор точки назначения</string>
-	<string name="tip_select_destination_point_t">Вы можете выбрать точку назначения в контекстном меню карты \'Идти к\' или в поиске.
-\n\tВы также можете выбрать избранную точку долгим нажатием в \'Избранных\'.</string>
 	<string name="tip_search">Поиск</string>
 	<string name="tip_search_t">Вы можете искать объект на карте, просто разглядывая карту, используя адресный, координатный, POI поиск или выбрать предопределенную избранную точку.
 \n\tНажатие поиск на карте открывает поиск. После поиска имеются 2 варианта : \'Идти к\' или \'Показать на карте\'.</string>
@@ -198,11 +222,6 @@
 	<string name="tip_map_context_menu_t">\tКонтестное меню карты доступно по долгому нажатию на карту или при нажатии кнопки трекбола.
 \n\tПосле этого появится окно с координатами, при нажатии на него откроется меню, при долгом нажатии - окно пропадет. Также контекстное меню доступно по кнопке Меню на карте.
 \n\tДействия в этом меню зависят от текущей выбранной точки (центр карты).</string>
-	<string name="tip_desctination_point">Точка назначения</string>
-	<string name="tip_desctination_point_t">\tТочкой назначения называется красная точка, отмеченная на карте.
-\n\tВы всегда можете видеть расстояние до нее от видимой точки и направление (красный треугольник). Чтобы выбрать точку назначения используйте \'Идти к\' функцию. 
-\n\tЭто кнопка доступна во всех поисках, в контекстном меню карты и при долгом нажатии на избранных, POI. 
-Эту точку можно использовать, чтобы измерять расстояние и для простой навигации.</string>
 	<string name="tip_initial">Советы по использованию</string>
 	<string name="tip_initial_t">\tOsmAndAccess - навигационное приложение с большим количеством функций. 
 \n\tЧтобы использовать его как можно лучше, следуйте советам по ссылке вверху меню.</string>
@@ -661,7 +680,7 @@
 	<string name="add_favorite_dialog_default_favourite_name">Избранная</string>
 	<string name="add_favorite_dialog_favourite_added_template">Точка \'\'{0}\'\' была успешно добавлена к Избранным.</string>
 
-	<string name="favourites_context_menu_title">Контекстное меню</string>
+	<!-- string name="favourites_context_menu_title">Контекстное меню</string -->
 	<string name="favourites_context_menu_navigate">Идти к</string>
 	<string name="favourites_context_menu_edit">Редактировать точку</string>
 	<string name="favourites_context_menu_delete">Удалить точку</string>

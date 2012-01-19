@@ -9,15 +9,15 @@ if [ ! -d "$GIT_DIR" ]; then
     git clone ${GIT_URL} "${GIT_DIR}"
 fi
 cd "$GIT_DIR"
-git checkout .
+git checkout -q .
 git reset HEAD --hard
-git checkout master
+git checkout -q master
 
 # First time add entries to .git/config (!) and add .netrc file
 # [remote "google"]
 #	url = https://code.google.com/p/osmand/
 #       fetch = +refs/heads/*:refs/remotes/google/*
-git push --all --force google
+git push -q --all --force google
 
 echo "Synchronization is ok"
 

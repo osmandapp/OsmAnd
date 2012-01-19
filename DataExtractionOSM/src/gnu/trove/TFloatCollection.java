@@ -295,7 +295,8 @@ public interface TFloatCollection extends Serializable {
      * @param o object to be compared for equality with this collection
      * @return <tt>true</tt> if the specified object is equal to this collection
      */
-    boolean equals( Object o );
+    @Override
+	boolean equals( Object o );
 
 
     /**
@@ -310,7 +311,8 @@ public interface TFloatCollection extends Serializable {
      * @see Object#equals(Object)
      * @see Collection#equals(Object)
      */
-    int hashCode();
+    @Override
+	int hashCode();
 
 
 } // TFloatCollection

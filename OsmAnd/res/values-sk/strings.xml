@@ -1,8 +1,71 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="tip_select_destination_point">Výber cieľového bodu</string>
+	<string name="tip_select_destination_point_t">
+\tNEW VERSION, PLEASE ADAPT TRANSLATION: You can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
+\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
+
+\n\tMôžete vybrať cieľový bod v kontextovom menu \'Navigovať do\' alebo v vyhľadaním.
+\n\tTaktiež môžete navigovať do obľúbeného bodu dlhým stlačením v \'Obľúbené\'.</string>
+
+ 	<string name="tip_recent_changes_0_6_9_t">Zmeny vo verzii 0.6.9 :
+\n\t- Vylepšené offline vykresľovanie mapy
+\n\t- Rýchle natívne offline vykresľovanie - viď experimentálne funkcie (nemusí fungovať na všetkých zariadeniach)
+\n\t- Veľké zmeny vo vzhľade aplikácie
+\n\t- Informácie o nadmorskej výške
+\n\t- Nové preklady (Vietnamský, Polský)
+\n\t- Iné malé funkcie
+	</string>
+
+	<string name="show_altitude_info_descr">Zobrazí aktuálnu nadm. výšku na mape</string>
+	<string name="show_altitude_info">Zobraziť nadm. výšku</string> 
+	<string name="use_transparent_map_theme_descr">Použije priehľadné ovládače mapy</string>
+	<string name="use_transparent_map_theme">Priehľadná téma</string>
+	
+	<string name="appearance_settings_descr">Konfiguruje výzor a pocit z aplikácie</string>
+	<string name="appearance_settings">Vzhľad</string>
+	<string name="native_library_not_supported">Natívna knižnica nie je podporovaná na tomto zariadení.</string>
+	<string name="init_native_library">Inicializácia natívnej knižnice...</string>
+	<string name="choose_auto_follow_route">Automatické nasledovanie</string>
+	<string name="choose_auto_follow_route_descr">Čas pokiaľ sa mapové zobrazenie zosynchronizuje s pozíciou</string>
+	<string name="auto_follow_route_never">Nikdy</string>
+	<string name="auto_follow_route_navigation">Autom. nasledovanie iba pri navigácii</string>
+	<string name="auto_follow_route_navigation_descr">Povoliť autom. nasledovanie pozície iba v režime navigácie.</string>
+	<string name="auto_follow_location_enabled">Automatické nasledovanie je povolené.</string>
+
+	<string name="sendtoOSM_confirmation_msg">Odoslať do OSM: %1$s?</string>
+	<string name="pref_vector_rendering">Vektorové vykresľovanie</string>
+	<string name="pref_overlay">Prekrývacia/podkladová</string>
+	<string name="pref_raster_map">Rastrová mapa</string>
+	<string name="pref_vector_map">Vektorová mapa</string>
+	<!-- string name="delete_confirmation_title">Mazanie</string -->
+	<string name="delete_confirmation_msg">Naozaj chcete zmazať %1$s?</string>
+	<string name="city_type_suburb">Mestská časť</string>
+	<string name="city_type_hamlet">Osada</string>
+	<string name="city_type_village">Obec</string>
+	<string name="city_type_town">Mesto</string>
+	<string name="city_type_city">Veľkomesto</string>
+	<string name="layer_poi_label">POI popisy</string>
+	<string name="animate_route_off">Vypnúť animáciu</string>
+	<string name="animate_route">Zapnúť animáciu</string>
+	
+	<string name="tip_recent_changes_0_6_8_t">Zmeny v 0.6.8 :
+\n\t- Kompletne prerobené vyhľadávanie (POI, adresy)! Hľadanie adries je oveľa rýchlejšie a prístupnejšie. Zanecháva jedno hľadanie s mnohými rozdielnymi hľadacími aspektami.
+\n\t- Implementácia vyhľadávania POI podľa názvu vo veľkých oblastiach (krajinách)  
+\n\t- Oprava blikania mapovej obrazovky na tabletoch(Issue 641)
+\n\t- Možnosť automatického nasledovania trasy (Issue 356)
+\n\t- GPX navigácia premiestnená do ponuky \'Pokyny\' a \'Uložiť pokyny\' premiestnené do ponuky \'O ceste\'
+\n\t- POI údaje sú v .obf súbore (stiahnuté indexy po 01.10.11) 
+\n\t- Opravy hlasových pokynov (o GPS umiestnení a o prvom použití) 
+\n\t- Menšie vylepšenia
+	</string>
+	<string name="file_can_not_be_renamed">Súbor nemôže byť premenovaný.</string>
+	<string name="file_with_name_already_exists">Súbor s týmto názvom už existuje.</string>
+	<string name="gpx_navigation">GPX trasa</string>
+	<string name="poi_query_by_name_matches_categories">Boli nájdené nejaké kategórie POI vyhovujúce požiadavke:</string>
 	<string name="data_to_search_poi_not_available">Miestne údaje na hľadanie POI nie sú dostupné.</string>
 	<string name="poi_filter_by_name">Hľadať podľa názvu</string>
-	<string name="old_poi_file_should_be_deleted">Súbor POI údajov \'%1$s\' je neschválený a môže byť vymazaný.</string>
+	<string name="old_poi_file_should_be_deleted">Súbor POI údajov \'%1$s\' je zbytočný a môže byť vymazaný.</string>
 	<string name="update_poi_file_not_found">Miestný súbor na udržiavanie POI zmien sa nenašiel a nemôže byť vytvorený.</string>
 	<string name="update_poi_does_not_change_indexes">Zmeny POI v aplikácii neovplyvnia stiahnuté mapové súbory, ale budú zozbierané v miestnom súbore.</string>
 	<string name="button_upgrade_osmandplus">Aktualizovať Osmand+</string>
@@ -12,9 +75,6 @@
 	<string name="show_gpx_route">Zobraziť na mape</string>
 	
 	<string name="poi_filter_nominatim">Online Nominatim</string>
-	<string name="auto_follow_route_never">Nikdy</string>
-	<string name="choose_auto_follow_route">Vybrať nastavenia automatického nasledovania</string>
-	<string name="choose_auto_follow_route_descr">Výber časového intervalu na nasledovanie pozície na mape</string>
 	<string name="search_select_point">Vybrať</string>
 	<string name="local_index_description">Stiahnite nové, zálohujte alebo zmažte existujúce údaje. \nAktuálne offline údaje v zariadení (%1$s dostupných):</string>
 	<string name="search_position_current_location_search">Hľadám umiestnenie...</string>
@@ -45,7 +105,7 @@
 	<string name="filename_input">Názov súboru: </string>
 	<string name="file_with_name_already_exist">Súbor s takýmto názvom už existuje.</string>
 	<string name="default_buttons_save">Uložiť</string>
-	<string name="menu_save_directions">Uloženie pokynov</string>
+	<string name="menu_save_directions">Uložiť pokyny</string>
 	<string name="local_index_upload_gpx_description">Nahranie GPX súborov do OSM komunity. Budú použité na vylepšenie máp.</string>
 	<string name="local_index_items_uploaded">%1$d z %2$d položky(iek) úspešne nahraných.</string>
 	<string name="local_index_mi_upload_gpx">Poskytnúť pre OSM...</string>
@@ -74,7 +134,7 @@
 	<string name="local_index_items_restored">%1$d položiek z %2$d úspešne obnovených.</string>
 	<string name="local_index_no_items_to_do">Žiadne položky pre akciu: %1$s</string>
 	<string name="local_index_action_do">Chcete %1$s %2$s položiek. Ste si istý?</string>
-	<string name="local_index_descr_title">Správca offline údajov:</string>
+	<string name="local_index_descr_title">Správca offline údajov</string>
 	<string name="local_index_mi_restore">Obnoviť</string>
 	<string name="local_index_mi_backup">Zálohovať</string>
 	<string name="local_index_mi_delete">Vymazať</string>
@@ -128,11 +188,11 @@
 	\n\t\'Podľa smeru pohybu\' - Mapa sa bude otáčať podľa toho kam smerujete.
 	\n\t\'Podľa kompasu\' - Mapa sa bude otáčať podľa kompasu a Vášho otočenia.
 	\nPre rýchle prepnutie medzi otáčaním podľa kompasu a Vami zvoleným v nastaveniach, môžete ťuknúť na strelku kompasu počas zobrazenia mapy.</string>
-	<string name="switch_to_raster_map_to_see">Aktuálna pozícia nie je pokrytá Vašimi stiahnutými vektorovými mapami. Môžete prepnúť zdroj mapy cez menu (Zobrazenie -> Zdroj mapy... ). Je potrebné stiahnuť dodatočné vektorové mapy.</string>
-	<string name="switch_to_vector_map_to_see">Môžete prepnúť na stiahnuté vektorové mapy cez menu (Zobrazenie -> Zdroj mapy... -> Vektorové OSM mapy) na zobrazenie mapy.</string>
-	<string name="binary_map_download_success">Úspech. Môžete prepnúť na stiahnuté vektorové mapy v menu  Zobrazenie -> Zdroj mapy... -> Vektorové OSM mapy.</string>
-	<string name="choose_audio_stream">Výstup hlasových povelov</string>
-	<string name="choose_audio_stream_descr">Výber kanálu pre prehrávanie hlasových povelov (závisí od systémovej konfigurácie)</string>
+	<string name="switch_to_raster_map_to_see">Nie je dostupná žiadna offline vektorová mapa pre túto oblasť.\n\t\n\tMôžete ju stiahnuť v \'Nastavenia\' -> \'Údaje pre offline použitie\', alebo prepnúť na online mapy cez \'Nastavenia\' -> \'Mapy\'.</string>
+	<string name="switch_to_vector_map_to_see">Je dostupná offline vektorová mapa pre túto oblasť. \n\t\n\tNa jej použitie aktivujte \'Ponuka\' -> \'Zobrazenie\' -> \'Zdroj mapy...\' -> \'Vektorové OSM mapy\'.</string>
+	<string name="binary_map_download_success">Sťahovanie úspešné.\n\t\n\tPre jej použitie aktivujte \'Nastavenia\' -> \'Mapy\' -> \'Vektorové mapy\'.</string>
+	<string name="choose_audio_stream">Výstup hlasových pokynov</string>
+	<string name="choose_audio_stream_descr">Výber kanálu pre prehrávanie hlasových pokynov (závisí od systémovej konfigurácie)</string>
 	<string name="voice_stream_voice_call">Telefónny hovor</string>
 	<string name="voice_stream_notification">Oznámenia</string>
 	<string name="voice_stream_music">Hudba/médiá</string>
@@ -207,9 +267,6 @@
 \n\tMôžete zmeniť režim v \'Menu\' -> \'Nastavenia\' -> \'Režim aplikácie\'.</string>
 	<string name="tip_navigation">Navigácia</string>
 	<string name="tip_navigation_t">Na zapnutie navigácie musíte najskôr vybrať cieľový bod. Potom stlačte \'Menu\'->\'Pokyny\' na mape a vyberte typ navigovania.</string>
-	<string name="tip_select_destination_point">Výber cieľového bodu</string>
-	<string name="tip_select_destination_point_t">Môžete vybrať cieľový bod v kontextovom menu \'Navigovať do\' alebo v vyhľadaním.
-\n\tTaktiež môžete navigovať do obľúbeného bodu dlhým stlačením v \'Obľúbené\'.</string>
 	<string name="tip_search">Vyhľadávanie</string>
 	<string name="tip_search_t">Môžete vyhľadať miesto priamo na mape alebo adresou, umiestnením, ako bod záujmu(POI) alebo vo forme obľúbeného bodu.
 \n\tStlačením \'Hľadať\' na mape sa otvorí vyhľadávanie. Tam máte 2 možnosti : \'Navigovať do\' alebo \'Zobraziť na mape\'.</string>
@@ -217,11 +274,6 @@
 	<string name="tip_map_context_menu_t">\tKontextové menu mapy je dostupné dlhším držaním na mape alebo stlačením track ball tlačidla.
 \n\tPo kliknutí na zobrazený obdĺžnik so súradnicami sa zobrazí kontextové menu. Pre skrytie obdĺžnika ho dlhšie podržte. Kontextové menu je tiež dostupné pod tlačidlom \'Menu\' na mape.
 \n\tKontextové menu mapy pozostáva z akcií, ktoré používaju umiestnenie ako vstup.</string>
-	<string name="tip_desctination_point">Cieľový bod</string>
-	<string name="tip_desctination_point_t">\tKľúčový koncept OsmAndu je cieľový bod, ktorý je označený ako červený bod na mape.
-\n\tMôžete vždy vidieť vzdialenosť k nemu a smer (červený trojuholník) na mape. Na označenie akéhokoľvek bodu ako cieľového, použite \'Navigovať  do\' na bod. 
-\n\tToto tlačidlo je dostupné vo všetkých vyhľadávacích aktivitách, v kontextovom menu mapy a medzi položkami pri dlhom stlačení na mape. 
-Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navigáciu.</string>
 	<string name="tip_initial">Tipy a triky</string>
 	<string name="tip_initial_t">\tOsmAndAccess je navigačná aplikácia, ktorá ma rozmanité funkcie. 
 \n\tNa jej lepšie využitie môžete využiť tipy a triky dostupné ako odkaz v hlavnej ponuke.</string>
@@ -679,7 +731,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="add_favorite_dialog_default_favourite_name">Obľúbené</string>
 <string name="add_favorite_dialog_favourite_added_template">Obľúbený bod \'\'{0}\'\' bol úspešne pridaný.</string>
 
-<string name="favourites_context_menu_title">Kontextové menu</string>
+<!-- string name="favourites_context_menu_title">Kontextové menu</string -->
 <string name="favourites_context_menu_navigate">Navigovať sem</string>
 <string name="favourites_context_menu_edit">Upraviť obľúbený bod</string>
 <string name="favourites_context_menu_delete">Vymazať obľúbený bod</string>

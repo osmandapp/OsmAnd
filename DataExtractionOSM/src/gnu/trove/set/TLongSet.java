@@ -53,7 +53,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      *
      * @return the value that represents null
      */
-    long getNoEntryValue();
+    @Override
+	long getNoEntryValue();
 
 
     /**
@@ -63,7 +64,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      *
      * @return the number of elements in this set (its cardinality)
      */
-    int size();
+    @Override
+	int size();
 
     
     /**
@@ -71,7 +73,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      *
      * @return <tt>true</tt> if this set contains no elements
      */
-    boolean isEmpty();
+    @Override
+	boolean isEmpty();
 
 
     /**
@@ -80,7 +83,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      * @param entry an <code>long</code> value
      * @return true if the set contains the specified element.
      */
-    boolean contains( long entry );
+    @Override
+	boolean contains( long entry );
 
 
     /**
@@ -89,7 +93,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      *
      * @return an <code>TLongIterator</code> value
      */
-    TLongIterator iterator();
+    @Override
+	TLongIterator iterator();
 
 
     /**
@@ -108,7 +113,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      *
      * @return an array containing all the elements in this set
      */
-    long[] toArray();
+    @Override
+	long[] toArray();
 
 
     /**
@@ -134,7 +140,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      * @return an <tt>long[]</tt> containing all the elements in this set
      * @throws NullPointerException if the specified array is null
      */
-    long[] toArray( long[] dest );
+    @Override
+	long[] toArray( long[] dest );
 
 
     /**
@@ -143,7 +150,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      * @param entry a <code>long</code> value
      * @return true if the set was modified by the add operation
      */
-    boolean add( long entry );
+    @Override
+	boolean add( long entry );
 
 
     /**
@@ -152,7 +160,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      * @param entry an <code>long</code> value
      * @return true if the set was modified by the remove operation.
      */
-    boolean remove( long entry );
+    @Override
+	boolean remove( long entry );
 
 
     /**
@@ -162,7 +171,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      * @param collection a <code>Collection</code> value
      * @return true if all elements were present in the set.
      */
-    boolean containsAll( Collection<?> collection );
+    @Override
+	boolean containsAll( Collection<?> collection );
 
 
     /**
@@ -172,7 +182,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      * @param collection a <code>TLongCollection</code> value
      * @return true if all elements were present in the set.
      */
-    boolean containsAll( TLongCollection collection );
+    @Override
+	boolean containsAll( TLongCollection collection );
 
 
     /**
@@ -182,7 +193,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      * @param array as <code>array</code> of long primitives.
      * @return true if all elements were present in the set.
      */
-    boolean containsAll( long[] array );
+    @Override
+	boolean containsAll( long[] array );
 
 
     /**
@@ -191,7 +203,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      * @param collection a <code>Collection</code> value
      * @return true if the set was modified by the add all operation.
      */
-    boolean addAll( Collection<? extends Long> collection );
+    @Override
+	boolean addAll( Collection<? extends Long> collection );
 
 
     /**
@@ -200,7 +213,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      * @param collection a <code>TLongCollection</code> value
      * @return true if the set was modified by the add all operation.
      */
-    boolean addAll( TLongCollection collection );
+    @Override
+	boolean addAll( TLongCollection collection );
 
 
     /**
@@ -209,7 +223,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      * @param array a <code>array</code> of long primitives.
      * @return true if the set was modified by the add all operation.
      */
-    boolean addAll( long[] array );
+    @Override
+	boolean addAll( long[] array );
 
 
     /**
@@ -219,7 +234,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      * @param collection a <code>Collection</code> value
      * @return true if the set was modified by the retain all operation
      */
-    boolean retainAll( Collection<?> collection );
+    @Override
+	boolean retainAll( Collection<?> collection );
 
 
     /**
@@ -229,7 +245,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      * @param collection a <code>TLongCollection</code> value
      * @return true if the set was modified by the retain all operation
      */
-    boolean retainAll( TLongCollection collection );
+    @Override
+	boolean retainAll( TLongCollection collection );
 
 
     /**
@@ -239,7 +256,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      * @param array an <code>array</code> of long primitives.
      * @return true if the set was modified by the retain all operation
      */
-    boolean retainAll( long[] array );
+    @Override
+	boolean retainAll( long[] array );
 
 
     /**
@@ -248,7 +266,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      * @param collection a <code>Collection</code> value
      * @return true if the set was modified by the remove all operation.
      */
-    boolean removeAll( Collection<?> collection );
+    @Override
+	boolean removeAll( Collection<?> collection );
 
 
     /**
@@ -257,7 +276,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      * @param collection a <code>TLongCollection</code> value
      * @return true if the set was modified by the remove all operation.
      */
-    boolean removeAll( TLongCollection collection );
+    @Override
+	boolean removeAll( TLongCollection collection );
 
 
     /**
@@ -266,13 +286,15 @@ public interface TLongSet extends TLongCollection, Serializable {
      * @param array an <code>array</code> of long primitives.
      * @return true if the set was modified by the remove all operation.
      */
-    public boolean removeAll( long[] array );
+    @Override
+	public boolean removeAll( long[] array );
 
 
     /**
      * Empties the set.
      */
-    void clear();
+    @Override
+	void clear();
 
 
     /**
@@ -282,7 +304,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      * @return false if the loop over the set terminated because
      * the procedure returned false for some value.
      */
-    boolean forEach( TLongProcedure procedure );
+    @Override
+	boolean forEach( TLongProcedure procedure );
 
 
     // Comparison and hashing
@@ -299,7 +322,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      * @param o object to be compared for equality with this set
      * @return <tt>true</tt> if the specified object is equal to this set
      */
-    boolean equals( Object o );
+    @Override
+	boolean equals( Object o );
 
 
     /**
@@ -314,7 +338,8 @@ public interface TLongSet extends TLongCollection, Serializable {
      * @see Object#equals(Object)
      * @see Set#equals(Object)
      */
-    int hashCode();
+    @Override
+	int hashCode();
 
 
 } // THashSet

@@ -119,7 +119,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public long getNoEntryValue() {
+    @Override
+	public long getNoEntryValue() {
         return no_entry_value;
     }
 
@@ -142,13 +143,15 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public int size() {
+    @Override
+	public int size() {
         return _pos;
     }
 
 
     /** {@inheritDoc} */
-    public boolean isEmpty() {
+    @Override
+	public boolean isEmpty() {
         return _pos == 0;
     }
 
@@ -168,7 +171,8 @@ public class TLongArrayList implements TLongList, Externalizable {
     // modifying
 
     /** {@inheritDoc} */
-    public boolean add( long val ) {
+    @Override
+	public boolean add( long val ) {
         ensureCapacity( _pos + 1 );
         _data[ _pos++ ] = val;
         return true;
@@ -176,13 +180,15 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void add( long[] vals ) {
+    @Override
+	public void add( long[] vals ) {
         add( vals, 0, vals.length );
     }
 
 
     /** {@inheritDoc} */
-    public void add( long[] vals, int offset, int length ) {
+    @Override
+	public void add( long[] vals, int offset, int length ) {
         ensureCapacity( _pos + length );
         System.arraycopy( vals, offset, _data, _pos, length );
         _pos += length;
@@ -190,7 +196,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void insert( int offset, long value ) {
+    @Override
+	public void insert( int offset, long value ) {
         if ( offset == _pos ) {
             add( value );
             return;
@@ -205,13 +212,15 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void insert( int offset, long[] values ) {
+    @Override
+	public void insert( int offset, long[] values ) {
         insert( offset, values, 0, values.length );
     }
 
 
     /** {@inheritDoc} */
-    public void insert( int offset, long[] values, int valOffset, int len ) {
+    @Override
+	public void insert( int offset, long[] values, int valOffset, int len ) {
         if ( offset == _pos ) {
             add( values, valOffset, len );
             return;
@@ -227,7 +236,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public long get( int offset ) {
+    @Override
+	public long get( int offset ) {
         if ( offset >= _pos ) {
             throw new ArrayIndexOutOfBoundsException( offset );
         }
@@ -244,7 +254,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public long set( int offset, long val ) {
+    @Override
+	public long set( int offset, long val ) {
         if ( offset >= _pos ) {
             throw new ArrayIndexOutOfBoundsException( offset );
         }
@@ -256,7 +267,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public long replace( int offset, long val ) {
+    @Override
+	public long replace( int offset, long val ) {
         if ( offset >= _pos ) {
             throw new ArrayIndexOutOfBoundsException( offset );
         }
@@ -267,13 +279,15 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void set( int offset, long[] values ) {
+    @Override
+	public void set( int offset, long[] values ) {
         set( offset, values, 0, values.length );
     }
 
 
     /** {@inheritDoc} */
-    public void set( int offset, long[] values, int valOffset, int length ) {
+    @Override
+	public void set( int offset, long[] values, int valOffset, int length ) {
         if ( offset < 0 || offset + length > _pos ) {
             throw new ArrayIndexOutOfBoundsException( offset );
         }
@@ -290,7 +304,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void clear() {
+    @Override
+	public void clear() {
         clear( DEFAULT_CAPACITY );
     }
 
@@ -330,7 +345,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean remove( long value ) {
+    @Override
+	public boolean remove( long value ) {
         for ( int index = 0; index < _pos; index++ ) {
             if ( value == _data[index]  ) {
                 remove( index, 1 );
@@ -342,7 +358,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public long removeAt( int offset ) {
+    @Override
+	public long removeAt( int offset ) {
         long old = get( offset );
         remove( offset, 1 );
         return old;
@@ -350,7 +367,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void remove( int offset, int length ) {
+    @Override
+	public void remove( int offset, int length ) {
         if ( offset < 0 || offset >= _pos ) {
             throw new ArrayIndexOutOfBoundsException(offset);
         }
@@ -376,13 +394,15 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public TLongIterator iterator() {
+    @Override
+	public TLongIterator iterator() {
         return new TLongArrayIterator( 0 );
     }
 
 
     /** {@inheritDoc} */
-    public boolean containsAll( Collection<?> collection ) {
+    @Override
+	public boolean containsAll( Collection<?> collection ) {
         for ( Object element : collection ) {
             if ( element instanceof Long ) {
                 long c = ( ( Long ) element ).longValue();
@@ -399,7 +419,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean containsAll( TLongCollection collection ) {
+    @Override
+	public boolean containsAll( TLongCollection collection ) {
         if ( this == collection ) {
             return true;
         }
@@ -415,7 +436,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean containsAll( long[] array ) {
+    @Override
+	public boolean containsAll( long[] array ) {
         for ( int i = array.length; i-- > 0; ) {
             if ( ! contains( array[i] ) ) {
                 return false;
@@ -426,7 +448,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean addAll( Collection<? extends Long> collection ) {
+    @Override
+	public boolean addAll( Collection<? extends Long> collection ) {
         boolean changed = false;
         for ( Long element : collection ) {
             long e = element.longValue();
@@ -439,7 +462,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean addAll( TLongCollection collection ) {
+    @Override
+	public boolean addAll( TLongCollection collection ) {
         boolean changed = false;
         TLongIterator iter = collection.iterator();
         while ( iter.hasNext() ) {
@@ -453,7 +477,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean addAll( long[] array ) {
+    @Override
+	public boolean addAll( long[] array ) {
         boolean changed = false;
         for ( long element : array ) {
             if ( add( element ) ) {
@@ -465,7 +490,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"SuspiciousMethodCalls"})
+    @Override
+	@SuppressWarnings({"SuspiciousMethodCalls"})
     public boolean retainAll( Collection<?> collection ) {
         boolean modified = false;
 	    TLongIterator iter = iterator();
@@ -480,7 +506,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean retainAll( TLongCollection collection ) {
+    @Override
+	public boolean retainAll( TLongCollection collection ) {
         if ( this == collection ) {
             return false;
         }
@@ -497,7 +524,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean retainAll( long[] array ) {
+    @Override
+	public boolean retainAll( long[] array ) {
         boolean changed = false;
         Arrays.sort( array );
         long[] data = _data;
@@ -513,7 +541,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean removeAll( Collection<?> collection ) {
+    @Override
+	public boolean removeAll( Collection<?> collection ) {
         boolean changed = false;
         for ( Object element : collection ) {
             if ( element instanceof Long ) {
@@ -528,7 +557,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean removeAll( TLongCollection collection ) {
+    @Override
+	public boolean removeAll( TLongCollection collection ) {
         if ( collection == this ) {
             clear();
             return true;
@@ -546,7 +576,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean removeAll( long[] array ) {
+    @Override
+	public boolean removeAll( long[] array ) {
         boolean changed = false;
         for ( int i = array.length; i-- > 0; ) {
             if ( remove(array[i]) ) {
@@ -558,7 +589,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void transformValues( TLongFunction function ) {
+    @Override
+	public void transformValues( TLongFunction function ) {
         for ( int i = _pos; i-- > 0; ) {
             _data[ i ] = function.execute( _data[ i ] );
         }
@@ -566,13 +598,15 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void reverse() {
+    @Override
+	public void reverse() {
         reverse( 0, _pos );
     }
 
 
     /** {@inheritDoc} */
-    public void reverse( int from, int to ) {
+    @Override
+	public void reverse( int from, int to ) {
         if ( from == to ) {
             return;             // nothing to do
         }
@@ -586,7 +620,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void shuffle( Random rand ) {
+    @Override
+	public void shuffle( Random rand ) {
         for ( int i = _pos; i-- > 1; ) {
             swap( i, rand.nextInt( i ) );
         }
@@ -609,7 +644,8 @@ public class TLongArrayList implements TLongList, Externalizable {
     // copying
 
     /** {@inheritDoc} */
-    public TLongList subList( int begin, int end ) {
+    @Override
+	public TLongList subList( int begin, int end ) {
     	if ( end < begin ) {
 			throw new IllegalArgumentException( "end index " + end +
 				" greater than begin index " + begin );
@@ -629,13 +665,15 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public long[] toArray() {
+    @Override
+	public long[] toArray() {
         return toArray( 0, _pos );
     }
 
 
     /** {@inheritDoc} */
-    public long[] toArray( int offset, int len ) {
+    @Override
+	public long[] toArray( int offset, int len ) {
         long[] rv = new long[ len ];
         toArray( rv, offset, len );
         return rv;
@@ -643,7 +681,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public long[] toArray( long[] dest ) {
+    @Override
+	public long[] toArray( long[] dest ) {
         int len = dest.length;
         if ( dest.length > _pos ) {
             len = _pos;
@@ -655,7 +694,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public long[] toArray( long[] dest, int offset, int len ) {
+    @Override
+	public long[] toArray( long[] dest, int offset, int len ) {
         if ( len == 0 ) {
             return dest;             // nothing to copy
         }
@@ -668,7 +708,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public long[] toArray( long[] dest, int source_pos, int dest_pos, int len ) {
+    @Override
+	public long[] toArray( long[] dest, int source_pos, int dest_pos, int len ) {
         if ( len == 0 ) {
             return dest;             // nothing to copy
         }
@@ -718,7 +759,8 @@ public class TLongArrayList implements TLongList, Externalizable {
     // procedures
 
     /** {@inheritDoc} */
-    public boolean forEach( TLongProcedure procedure ) {
+    @Override
+	public boolean forEach( TLongProcedure procedure ) {
         for ( int i = 0; i < _pos; i++ ) {
             if ( !procedure.execute( _data[ i ] ) ) {
                 return false;
@@ -729,7 +771,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean forEachDescending( TLongProcedure procedure ) {
+    @Override
+	public boolean forEachDescending( TLongProcedure procedure ) {
         for ( int i = _pos; i-- > 0; ) {
             if ( !procedure.execute( _data[ i ] ) ) {
                 return false;
@@ -742,13 +785,15 @@ public class TLongArrayList implements TLongList, Externalizable {
     // sorting
 
     /** {@inheritDoc} */
-    public void sort() {
+    @Override
+	public void sort() {
         Arrays.sort( _data, 0, _pos );
     }
 
 
     /** {@inheritDoc} */
-    public void sort( int fromIndex, int toIndex ) {
+    @Override
+	public void sort( int fromIndex, int toIndex ) {
         Arrays.sort( _data, fromIndex, toIndex );
     }
 
@@ -756,13 +801,15 @@ public class TLongArrayList implements TLongList, Externalizable {
     // filling
 
     /** {@inheritDoc} */
-    public void fill( long val ) {
+    @Override
+	public void fill( long val ) {
         Arrays.fill( _data, 0, _pos, val );
     }
 
 
     /** {@inheritDoc} */
-    public void fill( int fromIndex, int toIndex, long val ) {
+    @Override
+	public void fill( int fromIndex, int toIndex, long val ) {
         if ( toIndex > _pos ) {
           ensureCapacity( toIndex );
           _pos = toIndex;
@@ -774,13 +821,15 @@ public class TLongArrayList implements TLongList, Externalizable {
     // searching
 
     /** {@inheritDoc} */
-    public int binarySearch( long value ) {
+    @Override
+	public int binarySearch( long value ) {
         return binarySearch( value, 0, _pos );
     }
 
 
     /** {@inheritDoc} */
-    public int binarySearch(long value, int fromIndex, int toIndex) {
+    @Override
+	public int binarySearch(long value, int fromIndex, int toIndex) {
         if ( fromIndex < 0 ) {
             throw new ArrayIndexOutOfBoundsException( fromIndex );
         }
@@ -810,13 +859,15 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public int indexOf( long value ) {
+    @Override
+	public int indexOf( long value ) {
         return indexOf( 0, value );
     }
 
 
     /** {@inheritDoc} */
-    public int indexOf( int offset, long value ) {
+    @Override
+	public int indexOf( int offset, long value ) {
         for ( int i = offset; i < _pos; i++ ) {
             if ( _data[ i ] == value ) {
                 return i;
@@ -827,13 +878,15 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public int lastIndexOf( long value ) {
+    @Override
+	public int lastIndexOf( long value ) {
         return lastIndexOf( _pos, value );
     }
 
 
     /** {@inheritDoc} */
-    public int lastIndexOf( int offset, long value ) {
+    @Override
+	public int lastIndexOf( int offset, long value ) {
         for ( int i = offset; i-- > 0; ) {
             if ( _data[ i ] == value ) {
                 return i;
@@ -844,13 +897,15 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean contains( long value ) {
+    @Override
+	public boolean contains( long value ) {
         return lastIndexOf( value ) >= 0;
     }
 
 
     /** {@inheritDoc} */
-    public TLongList grep( TLongProcedure condition ) {
+    @Override
+	public TLongList grep( TLongProcedure condition ) {
         TLongArrayList list = new TLongArrayList();
         for ( int i = 0; i < _pos; i++ ) {
             if ( condition.execute( _data[ i ] ) ) {
@@ -862,7 +917,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public TLongList inverseGrep( TLongProcedure condition ) {
+    @Override
+	public TLongList inverseGrep( TLongProcedure condition ) {
         TLongArrayList list = new TLongArrayList();
         for ( int i = 0; i < _pos; i++ ) {
             if ( !condition.execute( _data[ i ] ) ) {
@@ -874,7 +930,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public long max() {
+    @Override
+	public long max() {
         if ( size() == 0 ) {
             throw new IllegalStateException("cannot find maximum of an empty list");
         }
@@ -889,7 +946,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public long min() {
+    @Override
+	public long min() {
         if ( size() == 0 ) {
             throw new IllegalStateException( "cannot find minimum of an empty list" );
         }
@@ -941,13 +999,15 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
         /** {@inheritDoc} */
-        public boolean hasNext() {
+        @Override
+		public boolean hasNext() {
             return cursor < size();
 	    }
 
 
         /** {@inheritDoc} */
-        public long next() {
+        @Override
+		public long next() {
             try {
                 long next = get( cursor );
                 lastRet = cursor++;
@@ -959,7 +1019,8 @@ public class TLongArrayList implements TLongList, Externalizable {
 
 
         /** {@inheritDoc} */
-        public void remove() {
+        @Override
+		public void remove() {
             if ( lastRet == -1 )
 		        throw new IllegalStateException();
 
@@ -975,7 +1036,8 @@ public class TLongArrayList implements TLongList, Externalizable {
     }
 
 
-    public void writeExternal( ObjectOutput out ) throws IOException {
+    @Override
+	public void writeExternal( ObjectOutput out ) throws IOException {
     	// VERSION
     	out.writeByte( 0 );
 
@@ -994,7 +1056,8 @@ public class TLongArrayList implements TLongList, Externalizable {
     }
 
 
-    public void readExternal( ObjectInput in )
+    @Override
+	public void readExternal( ObjectInput in )
     	throws IOException, ClassNotFoundException {
 
     	// VERSION

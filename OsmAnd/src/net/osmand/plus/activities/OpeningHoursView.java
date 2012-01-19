@@ -85,6 +85,7 @@ public class OpeningHoursView {
 		public TimeAdapter(List<BasicDayOpeningHourRule> l ){
 			super(ctx, R.layout.open_hours_list_item, l);
 		}
+		@Override
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			View row = convertView;
 			final BasicDayOpeningHourRule item = getItem(position);

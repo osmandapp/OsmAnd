@@ -15,6 +15,9 @@ import java.util.zip.ZipInputStream;
 import org.apache.commons.logging.Log;
 
 import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
@@ -42,7 +45,7 @@ public class DownloadFileHelper {
 	}
 	
 	protected void downloadFile(String fileName, FileOutputStream out, URL url, String part, String indexOfAllFiles, 
-			IProgress progress) throws IOException, InterruptedException {
+			IProgress progress, boolean forceWifi) throws IOException, InterruptedException {
 		InputStream is = null;
 		
 		byte[] buffer = new byte[BUFFER_SIZE];
@@ -69,8 +72,9 @@ public class DownloadFileHelper {
 					}
 					conn.setConnectTimeout(30000);
 					log.info(conn.getResponseMessage() + " " + conn.getResponseCode()); //$NON-NLS-1$
-					if (conn.getResponseCode() != HttpURLConnection.HTTP_PARTIAL  && 
-							conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+					boolean wifiConnectionBroken = forceWifi && !isWifiConnected();
+					if ((conn.getResponseCode() != HttpURLConnection.HTTP_PARTIAL  && 
+							conn.getResponseCode() != HttpURLConnection.HTTP_OK ) || wifiConnectionBroken) {
 						conn.disconnect();
 						triesDownload--;
 						continue;
@@ -118,22 +122,27 @@ public class DownloadFileHelper {
 		
 	}
 	
+	public boolean isWifiConnected(){
+		ConnectivityManager mgr =  (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo ni = mgr.getActiveNetworkInfo();
+		return ni != null && ni.getType() == ConnectivityManager.TYPE_WIFI;
+	}
+	
 	protected boolean downloadFile(final String fileName, final File fileToDownload, final File fileToUnZip, final boolean unzipToDir,
 			IProgress progress, Long dateModified, int parts, List<File> toReIndex, String indexOfAllFiles, 
-			DownloadFileShowWarning showWarningCallback) throws InterruptedException {
+			DownloadFileShowWarning showWarningCallback, boolean forceWifi ) throws InterruptedException {
 		FileOutputStream out = null;
 		try {
 
 			out = new FileOutputStream(fileToDownload);
-			
 			try {
 				if(parts == 1){
 					URL url = new URL("http://download.osmand.net/download?file="+fileName + "&" + Version.getVersionAsURLParam());  //$NON-NLS-1$
-					downloadFile(fileName, out, url, null, indexOfAllFiles, progress);
+					downloadFile(fileName, out, url, null, indexOfAllFiles, progress, forceWifi);
 				} else {
 					for(int i=1; i<=parts; i++){
 						URL url = new URL("http://download.osmand.net/download?file="+fileName+"-"+i + "&" + Version.getVersionAsURLParam());  //$NON-NLS-1$
-						downloadFile(fileName, out, url, " ["+i+"/"+parts+"]", indexOfAllFiles, progress);
+						downloadFile(fileName, out, url, " ["+i+"/"+parts+"]", indexOfAllFiles, progress, forceWifi);
 					}
 				}
 			} finally {

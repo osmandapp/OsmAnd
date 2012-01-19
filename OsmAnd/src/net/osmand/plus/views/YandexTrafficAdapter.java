@@ -31,6 +31,7 @@ public class YandexTrafficAdapter  extends MapTileAdapter {
 	private boolean updateThreadRan = false;
 	
 	
+	@Override
 	public void onInit() {
 		AccessibleToast.makeText(view.getContext(), R.string.thanks_yandex_traffic, Toast.LENGTH_LONG).show();
 	}

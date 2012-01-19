@@ -258,6 +258,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 			super(SearchByNameAbstractActivity.this, R.layout.searchbyname_list, list);
 		}
 
+		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row;
 			if (convertView != null) {

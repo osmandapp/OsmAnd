@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="OsmAnd" default="help">
-
+	
 	<!-- The local.properties file is created and updated by the 'android'
      tool.
      It contains the path to the SDK. It should *NOT* be checked into
@@ -42,7 +42,7 @@
 	</path>
 
 	<taskdef name="setup" classname="com.android.ant.SetupTask" classpathref="android.antlibs" />
-
+	
 	<!-- extension targets. Uncomment the ones where you want to do custom work
      in between standard targets -->
 	<!--
@@ -92,26 +92,6 @@
 			<arg value="${raw.absolute.dir}" />
 		</exec>
 	</target>
-
-	<macrodef name="package-helper">
-		<attribute name="sign.package" />
-		<attribute name="output.filepath" />
-		<element name="extra-jars" optional="yes" />
-		<sequential>
-			<apkbuilder outfolder="${out.absolute.dir}" resourcefile="${resource.package.file.name}" apkfilepath="@{output.filepath}" signed="@{sign.package}" debug="${manifest.debuggable}" abifilter="${filter.abi}" verbose="${verbose}" hascode="${manifest.hasCode}">
-				<dex path="${intermediate.dex.file}" />
-				<sourcefolder path="${source.absolute.dir}" />
-				<sourcefolder path="${use.absolute.dir}" />
-				<sourcefolder refid="android.libraries.src" />
-				<jarfolder path="${external.libs.absolute.dir}" />
-				<jarfolder refid="android.libraries.libs" />
-				<nativefolder path="${native.libs.absolute.dir}" />
-				<nativefolder refid="android.libraries.libs" />
-				<extra-jars />
-			</apkbuilder>
-		</sequential>
-	</macrodef>
-
 
 	<!-- Compiles this project's .java files into .class files. -->
 	<target name="compile" depends="-pre-build, -resource-src, -aidl, -pre-compile" description="Compiles project's .java files into .class files">
@@ -177,7 +157,64 @@
              - customize to your needs.
     -->
 	<setup />
+	
+    <macrodef name="package-helper">
+        <attribute name="output.filepath" />
+        <element name="extra-jars" optional="yes" />
+        <sequential>
+	<if>
+	 <condition>
+	 	<isset property="nativeoff"/>
+	 </condition>
+	 <then>
+		<echo>Package helper running: nativeoff</echo>
+	    	<apkbuilder
+                    outfolder="${out.absolute.dir}"
+                    resourcefile="${resource.package.file.name}"
+                    apkfilepath="@{output.filepath}"
+                    debugpackaging="${build.packaging.debug}"
+                    debugsigning="${build.signing.debug}"
+                    abifilter="${filter.abi}"
+                    verbose="${verbose}"
+							hascode="${manifest.hasCode}">
+			<dex path="${intermediate.dex.file}"/>
+			<sourcefolder path="${source.absolute.dir}"/>
+			<sourcefolder refid="project.libraries.src"/>
+			<jarfolder path="${jar.libs.absolute.dir}" />
+			<jarfolder refid="project.libraries.libs" />
+			<extra-jars/>
+            	</apkbuilder>
+	</then>
+	 <else>
+		<echo>Package helper running: nativeon</echo>
+		<apkbuilder
+                    outfolder="${out.absolute.dir}"
+                    resourcefile="${resource.package.file.name}"
+                    apkfilepath="@{output.filepath}"
+                    debugpackaging="${build.packaging.debug}"
+                    debugsigning="${build.signing.debug}"
+                    abifilter="${filter.abi}"
+                    verbose="${verbose}"
+							hascode="${manifest.hasCode}">
+			<dex path="${intermediate.dex.file}"/>
+			<sourcefolder path="${source.absolute.dir}"/>
+			<sourcefolder refid="project.libraries.src"/>
+			<jarfolder path="${jar.libs.absolute.dir}" />
+			<jarfolder refid="project.libraries.libs" />
+			<nativefolder path="${native.libs.absolute.dir}" />
+			<nativefolder refid="project.libraries.libs" />
+			<extra-jars/>
+            	</apkbuilder>
+	 </else>
+	</if>			
+        </sequential>
+    </macrodef>
 
+
+	<target name="debug-nondk">
+	 <property name="nativeoff" value="true"/>
+         <antcall target="debug"/>
+	</target>
 	
 	<!-- NOT used now for night builds could be deleted -->
 	<typedef resource="org/tigris/subversion/svnant/svnantlib.xml" classpathref="lib.path" />

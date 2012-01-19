@@ -143,6 +143,7 @@ public class ProgressDialogImplementation implements IProgress {
 		}
 	}
 	
+	@Override
 	public boolean isIndeterminate(){
 		return work == -1;
 	}

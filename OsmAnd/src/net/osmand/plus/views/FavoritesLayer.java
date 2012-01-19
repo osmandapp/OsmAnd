@@ -21,7 +21,7 @@ import android.util.FloatMath;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContextMenuProvider {
+public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 
 	private static final int startZoom = 6;
 	private static final int radius = 15;
@@ -128,7 +128,7 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 	}
 
 	@Override
-	public boolean onTouchEvent(PointF point) {
+	public boolean onSingleTap(PointF point) {
 		FavouritePoint fav = getFavoriteFromPoint(point);
 		if(fav != null){
 			String format = view.getContext().getString(R.string.favorite) + " : " + fav.getName();  //$NON-NLS-1$
@@ -149,6 +149,14 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 	public String getObjectDescription(Object o) {
 		if(o instanceof FavouritePoint){
 			return view.getContext().getString(R.string.favorite) + " : " + ((FavouritePoint)o).getName(); //$NON-NLS-1$
+		}
+		return null;
+	}
+	
+	@Override
+	public String getObjectName(Object o) {
+		if(o instanceof FavouritePoint){
+			return ((FavouritePoint)o).getName(); //$NON-NLS-1$
 		}
 		return null;
 	}

@@ -2,3 +2,4 @@ bin/
 gen/
 local.properties
 raw/
+obj/

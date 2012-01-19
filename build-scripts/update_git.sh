@@ -13,5 +13,5 @@ fi
 # update git
 cd "${GIT_DIR}"
 git reset --hard
-git checkout master
+git checkout -q master
 git fetch ${GIT_ORIGIN_NAME}

@@ -57,7 +57,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
     static final long serialVersionUID = 1L;
 
     private final TLongObjectProcedure<V> PUT_ALL_PROC = new TLongObjectProcedure<V>() {
-        public boolean execute( long key, V value) {
+        @Override
+		public boolean execute( long key, V value) {
             put( key, value );
             return true;
         }
@@ -134,7 +135,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     protected int setUp( int initialCapacity ) {
         int capacity;
 
@@ -145,7 +147,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     protected void rehash( int newCapacity ) {
         int oldCapacity = _set.length;
         
@@ -172,19 +175,22 @@ public class TLongObjectHashMap<V> extends TLongHash implements
     // Query Operations
 
     /** {@inheritDoc} */
-    public long getNoEntryKey() {
+    @Override
+	public long getNoEntryKey() {
         return no_entry_key;
     }
 
 
     /** {@inheritDoc} */
-    public boolean containsKey( long key ) {
+    @Override
+	public boolean containsKey( long key ) {
         return contains( key );
     }
 
 
     /** {@inheritDoc} */
-    public boolean containsValue( Object val ) {
+    @Override
+	public boolean containsValue( Object val ) {
         byte[] states = _states;
         V[] vals = _values;
 
@@ -209,7 +215,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
 
 
     /** {@inheritDoc} */
-    public V get( long key ) {
+    @Override
+	public V get( long key ) {
         int index = index( key );
         return index < 0 ? null : _values[index];
     }
@@ -218,14 +225,16 @@ public class TLongObjectHashMap<V> extends TLongHash implements
     // Modification Operations
 
     /** {@inheritDoc} */
-    public V put( long key, V value ) {
+    @Override
+	public V put( long key, V value ) {
         int index = insertionIndex( key );
         return doPut( key, value, index );
     }
 
 
     /** {@inheritDoc} */
-    public V putIfAbsent( long key, V value ) {
+    @Override
+	public V putIfAbsent( long key, V value ) {
         int index = insertionIndex( key );
         if ( index < 0 )
             return _values[-index - 1];
@@ -256,7 +265,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
 
 
     /** {@inheritDoc} */
-    public V remove( long key ) {
+    @Override
+	public V remove( long key ) {
         V prev = null;
         int index = index( key );
         if ( index >= 0 ) {
@@ -268,7 +278,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
 
 
     /** {@inheritDoc} */
-    protected void removeAt( int index ) {
+    @Override
+	protected void removeAt( int index ) {
         _values[index] = null;
         super.removeAt( index );  // clear key, state; adjust size
     }
@@ -277,7 +288,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
     // Bulk Operations
 
     /** {@inheritDoc} */
-    public void putAll( Map<? extends Long, ? extends V> map ) {
+    @Override
+	public void putAll( Map<? extends Long, ? extends V> map ) {
         Set<? extends Map.Entry<? extends Long,? extends V>> set = map.entrySet();
         for ( Map.Entry<? extends Long,? extends V> entry : set ) {
             put( entry.getKey(), entry.getValue() );
@@ -286,13 +298,15 @@ public class TLongObjectHashMap<V> extends TLongHash implements
 
 
     /** {@inheritDoc} */
-    public void putAll( TLongObjectMap<V> map ){
+    @Override
+	public void putAll( TLongObjectMap<V> map ){
         map.forEachEntry( PUT_ALL_PROC );
     }
 
 
     /** {@inheritDoc} */
-    public void clear() {
+    @Override
+	public void clear() {
         super.clear();
         Arrays.fill( _set, 0, _set.length, no_entry_key );
         Arrays.fill( _states, 0, _states.length, FREE );
@@ -303,13 +317,15 @@ public class TLongObjectHashMap<V> extends TLongHash implements
     // Views
 
     /** {@inheritDoc} */
-    public TLongSet keySet() {
+    @Override
+	public TLongSet keySet() {
         return new KeyView();
     }
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     public long[] keys() {
         long[] keys = new long[size()];
         long[] k = _set;
@@ -325,7 +341,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
    public long[] keys( long[] dest ) {
         if ( dest.length < _size ) {
 			dest = new long[_size];
@@ -344,13 +361,15 @@ public class TLongObjectHashMap<V> extends TLongHash implements
 
 
     /** {@inheritDoc} */
-    public Collection<V> valueCollection() {
+    @Override
+	public Collection<V> valueCollection() {
         return new ValueView();
     }
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     public V[] values() {
         V[] vals = ( V[] ) new Object[size()];
         V[] v = _values;
@@ -366,7 +385,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     public <T> T[] values( T[] dest ) {
         if ( dest.length < _size ) {
 			dest = ( T[] ) java.lang.reflect.Array.newInstance(
@@ -386,19 +406,22 @@ public class TLongObjectHashMap<V> extends TLongHash implements
 
 
     /** {@inheritDoc} */
-    public TLongObjectIterator<V> iterator() {
+    @Override
+	public TLongObjectIterator<V> iterator() {
         return new TLongObjectHashIterator<V>( this );
     }
 
 
     /** {@inheritDoc} */
-    public boolean forEachKey( TLongProcedure procedure ) {
+    @Override
+	public boolean forEachKey( TLongProcedure procedure ) {
         return forEach( procedure );
     }
 
 
     /** {@inheritDoc} */
-    public boolean forEachValue( TObjectProcedure<V> procedure ) {
+    @Override
+	public boolean forEachValue( TObjectProcedure<V> procedure ) {
         byte[] states = _states;
         V[] values = _values;
         for ( int i = values.length; i-- > 0; ) {
@@ -411,7 +434,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     public boolean forEachEntry( TLongObjectProcedure<V> procedure ) {
         byte[] states = _states;
         long[] keys = _set;
@@ -426,7 +450,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     public boolean retainEntries( TLongObjectProcedure<V> procedure ) {
         boolean modified = false;
         byte[] states = _states;
@@ -452,7 +477,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
 
 
     /** {@inheritDoc} */
-    public void transformValues( TObjectFunction<V,V> function ) {
+    @Override
+	public void transformValues( TObjectFunction<V,V> function ) {
         byte[] states = _states;
         V[] values = _values;
         for ( int i = values.length; i-- > 0; ) {
@@ -466,7 +492,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
     // Comparison and hashing
 
     /** {@inheritDoc} */
-    public boolean equals( Object other ) {
+    @Override
+	public boolean equals( Object other ) {
         if ( ! ( other instanceof TLongObjectMap ) ) {
             return false;
         }
@@ -498,7 +525,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
 
 
     /** {@inheritDoc} */
-    public int hashCode() {
+    @Override
+	public int hashCode() {
         int hashcode = 0;
         V[] values = _values;
         byte[] states = _states;
@@ -515,52 +543,62 @@ public class TLongObjectHashMap<V> extends TLongHash implements
     class KeyView implements TLongSet {
 
         /** {@inheritDoc} */
-        public long getNoEntryValue() {
+        @Override
+		public long getNoEntryValue() {
             return no_entry_key;
         }
 
         /** {@inheritDoc} */
-        public int size() {
+        @Override
+		public int size() {
             return _size;
         }
 
         /** {@inheritDoc} */
-        public boolean isEmpty() {
+        @Override
+		public boolean isEmpty() {
             return _size == 0;
         }
 
         /** {@inheritDoc} */
-        public boolean contains( long entry ) {
+        @Override
+		public boolean contains( long entry ) {
             return TLongObjectHashMap.this.containsKey( entry );
         }
 
         /** {@inheritDoc} */
-        public TLongIterator iterator() {
+        @Override
+		public TLongIterator iterator() {
             return new TLongHashIterator( TLongObjectHashMap.this );
         }
 
         /** {@inheritDoc} */
-        public long[] toArray() {
+        @Override
+		public long[] toArray() {
             return keys();
         }
 
         /** {@inheritDoc} */
-        public long[] toArray( long[] dest ) {
+        @Override
+		public long[] toArray( long[] dest ) {
             return keys( dest );
         }
 
         /** {@inheritDoc} */
-        public boolean add( long entry ) {
+        @Override
+		public boolean add( long entry ) {
             throw new UnsupportedOperationException();
         }
 
         /** {@inheritDoc} */
-        public boolean remove( long entry ) {
+        @Override
+		public boolean remove( long entry ) {
             return null != TLongObjectHashMap.this.remove( entry );
         }
 
         /** {@inheritDoc} */
-        public boolean containsAll( Collection<?> collection ) {
+        @Override
+		public boolean containsAll( Collection<?> collection ) {
            for ( Object element : collection ) {
                 if ( ! TLongObjectHashMap.this.containsKey( ( ( Long ) element ).longValue() ) ) {
                     return false;
@@ -570,7 +608,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
         }
 
         /** {@inheritDoc} */
-        public boolean containsAll( TLongCollection collection ) {
+        @Override
+		public boolean containsAll( TLongCollection collection ) {
             if ( collection == this ) {
                 return true;
             }
@@ -584,7 +623,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
         }
 
         /** {@inheritDoc} */
-        public boolean containsAll( long[] array ) {
+        @Override
+		public boolean containsAll( long[] array ) {
             for ( long element : array  ) {
                 if ( ! TLongObjectHashMap.this.containsKey( element ) ) {
                     return false;
@@ -594,22 +634,26 @@ public class TLongObjectHashMap<V> extends TLongHash implements
         }
 
         /** {@inheritDoc} */
-        public boolean addAll( Collection<? extends Long> collection ) {
+        @Override
+		public boolean addAll( Collection<? extends Long> collection ) {
             throw new UnsupportedOperationException();
         }
 
         /** {@inheritDoc} */
-        public boolean addAll( TLongCollection collection ) {
+        @Override
+		public boolean addAll( TLongCollection collection ) {
             throw new UnsupportedOperationException();
         }
 
         /** {@inheritDoc} */
-        public boolean addAll( long[] array ) {
+        @Override
+		public boolean addAll( long[] array ) {
             throw new UnsupportedOperationException();
         }
 
         /** {@inheritDoc} */
-        public boolean retainAll( Collection<?> collection ) {
+        @Override
+		public boolean retainAll( Collection<?> collection ) {
             boolean modified = false;
             TLongIterator iter = iterator();
             while ( iter.hasNext() ) {
@@ -623,7 +667,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
         }
 
         /** {@inheritDoc} */
-        public boolean retainAll( TLongCollection collection ) {
+        @Override
+		public boolean retainAll( TLongCollection collection ) {
             if ( this == collection ) {
                 return false;
             }
@@ -639,7 +684,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
         }
 
         /** {@inheritDoc} */
-        public boolean retainAll( long[] array ) {
+        @Override
+		public boolean retainAll( long[] array ) {
             boolean changed = false;
             Arrays.sort( array );
             long[] set = _set;
@@ -655,7 +701,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
         }
 
         /** {@inheritDoc} */
-        public boolean removeAll( Collection<?> collection ) {
+        @Override
+		public boolean removeAll( Collection<?> collection ) {
             boolean changed = false;
             for ( Object element : collection ) {
                 if ( element instanceof Long ) {
@@ -669,7 +716,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
         }
 
         /** {@inheritDoc} */
-        public boolean removeAll( TLongCollection collection ) {
+        @Override
+		public boolean removeAll( TLongCollection collection ) {
             if ( collection == this ) {
                 clear();
                 return true;
@@ -686,7 +734,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
         }
 
         /** {@inheritDoc} */
-        public boolean removeAll( long[] array ) {
+        @Override
+		public boolean removeAll( long[] array ) {
             boolean changed = false;
             for ( int i = array.length; i-- > 0; ) {
                 if ( remove(array[i]) ) {
@@ -697,17 +746,20 @@ public class TLongObjectHashMap<V> extends TLongHash implements
         }
 
         /** {@inheritDoc} */
-        public void clear() {
+        @Override
+		public void clear() {
             TLongObjectHashMap.this.clear();
         }
 
         /** {@inheritDoc} */
-        public boolean forEach( TLongProcedure procedure ) {
+        @Override
+		public boolean forEach( TLongProcedure procedure ) {
             return TLongObjectHashMap.this.forEachKey( procedure );
         }
 
         /** {@inheritDoc) */
-        public boolean equals( Object other ) {
+        @Override
+		public boolean equals( Object other ) {
             if (! ( other instanceof TLongSet ) ) {
                 return false;
             }
@@ -726,7 +778,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
         }
 
         /** {@inheritDoc} */
-        public int hashCode() {
+        @Override
+		public int hashCode() {
             int hashcode = 0;
             for ( int i = _states.length; i-- > 0; ) {
                 if ( _states[i] == FULL ) {
@@ -737,7 +790,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
         }
 
         /** {@inheritDoc} */
-        public String toString() {
+        @Override
+		public String toString() {
             final StringBuilder buf = new StringBuilder("{");
             boolean first = true;
             for ( int i = _states.length; i-- > 0; ) {
@@ -763,7 +817,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
             }
 
             /** {@inheritDoc} */
-            public long next() {
+            @Override
+			public long next() {
                 moveToNextIndex();
                 return _hash._set[_index];
             }
@@ -774,20 +829,24 @@ public class TLongObjectHashMap<V> extends TLongHash implements
     /** a view onto the values of the map. */
     protected class ValueView extends MapBackedView<V> {
 
-        @SuppressWarnings({"unchecked"})
+        @Override
+		@SuppressWarnings({"unchecked"})
         public Iterator<V> iterator() {
             return new TLongObjectValueHashIterator( TLongObjectHashMap.this ) {
-                protected V objectAtIndex( int index ) {
+                @Override
+				protected V objectAtIndex( int index ) {
                     return _values[index];
                 }
             };
         }
 
-        public boolean containsElement( V value ) {
+        @Override
+		public boolean containsElement( V value ) {
             return containsValue( value );
         }
 
-        public boolean removeElement( V value ) {
+        @Override
+		public boolean removeElement( V value ) {
             V[] values = _values;
             byte[] states = _states;
 
@@ -823,7 +882,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
             }
 
             /** {@inheritDoc} */
-            @SuppressWarnings("unchecked")
+            @Override
+			@SuppressWarnings("unchecked")
             public V next() {
                 moveToNextIndex();
 	            return ( V ) _map._values[_index];
@@ -835,35 +895,42 @@ public class TLongObjectHashMap<V> extends TLongHash implements
     private abstract class MapBackedView<E> extends AbstractSet<E>
             implements Set<E>, Iterable<E> {
 
-        public abstract Iterator<E> iterator();
+        @Override
+		public abstract Iterator<E> iterator();
 
         public abstract boolean removeElement( E key );
 
         public abstract boolean containsElement( E key );
 
-        @SuppressWarnings({"unchecked"})
+        @Override
+		@SuppressWarnings({"unchecked"})
         public boolean contains( Object key ) {
             return containsElement( (E) key );
         }
 
-        @SuppressWarnings({"unchecked"})
+        @Override
+		@SuppressWarnings({"unchecked"})
         public boolean remove( Object o ) {
             return removeElement( (E) o );
         }
 
-        public void clear() {
+        @Override
+		public void clear() {
             TLongObjectHashMap.this.clear();
         }
 
-        public boolean add( E obj ) {
+        @Override
+		public boolean add( E obj ) {
             throw new UnsupportedOperationException();
         }
 
-        public int size() {
+        @Override
+		public int size() {
             return TLongObjectHashMap.this.size();
         }
 
-        public Object[] toArray() {
+        @Override
+		public Object[] toArray() {
             Object[] result = new Object[size()];
             Iterator<E> e = iterator();
             for ( int i = 0; e.hasNext(); i++ ) {
@@ -872,7 +939,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
             return result;
         }
 
-        @SuppressWarnings({"unchecked"})
+        @Override
+		@SuppressWarnings({"unchecked"})
         public <T> T[] toArray( T[] a ) {
             int size = size();
             if ( a.length < size ) {
@@ -892,15 +960,18 @@ public class TLongObjectHashMap<V> extends TLongHash implements
             return a;
         }
 
-        public boolean isEmpty() {
+        @Override
+		public boolean isEmpty() {
             return TLongObjectHashMap.this.isEmpty();
         }
 
-        public boolean addAll( Collection<? extends E> collection ) {
+        @Override
+		public boolean addAll( Collection<? extends E> collection ) {
             throw new UnsupportedOperationException();
         }
 
-        @SuppressWarnings({"SuspiciousMethodCalls"})
+        @Override
+		@SuppressWarnings({"SuspiciousMethodCalls"})
         public boolean retainAll( Collection<?> collection ) {
             boolean changed = false;
             Iterator<E> i = iterator();
@@ -932,22 +1003,26 @@ public class TLongObjectHashMap<V> extends TLongHash implements
         }
 
         /** {@inheritDoc} */
-        public void advance() {
+        @Override
+		public void advance() {
             moveToNextIndex();
         }
 
         /** {@inheritDoc} */
-        public long key() {
+        @Override
+		public long key() {
             return _map._set[_index];
         }
 
         /** {@inheritDoc} */
-        public V value() {
+        @Override
+		public V value() {
             return _map._values[_index];
         }
 
         /** {@inheritDoc} */
-        public V setValue( V val ) {
+        @Override
+		public V setValue( V val ) {
             V old = value();
             _map._values[_index] = val;
             return old;
@@ -955,7 +1030,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
     }
 
 
-    public void writeExternal( ObjectOutput out ) throws IOException {
+    @Override
+	public void writeExternal( ObjectOutput out ) throws IOException {
     	// VERSION
     	out.writeByte( 0 );
 
@@ -978,7 +1054,8 @@ public class TLongObjectHashMap<V> extends TLongHash implements
     }
 
 
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     public void readExternal( ObjectInput in )
     	throws IOException, ClassNotFoundException {
 
@@ -1004,11 +1081,13 @@ public class TLongObjectHashMap<V> extends TLongHash implements
     }
 
 
-    public String toString() {
+    @Override
+	public String toString() {
         final StringBuilder buf = new StringBuilder("{");
         forEachEntry(new TLongObjectProcedure<V>() {
             private boolean first = true;
-            public boolean execute(long key, Object value) {
+            @Override
+			public boolean execute(long key, Object value) {
                 if ( first ) first = false;
                 else buf.append( "," );
 

@@ -67,6 +67,7 @@ public class BicycleRouter extends VehicleRouter {
 		bicyclePriorityValues.put("steps", 0.6d);
 	}
 
+	@Override
 	public boolean acceptLine(TagValuePair pair) {
 		if (pair.tag.equals("highway")) {
 			return bicycleNotDefinedValues.containsKey(pair.value);
@@ -74,6 +75,7 @@ public class BicycleRouter extends VehicleRouter {
 		return false;
 	}
 
+	@Override
 	public boolean acceptPoint(TagValuePair pair) {
 		if (pair.tag.equals("highway") && pair.value.equals("traffic_signals")) {
 			return true;
@@ -93,6 +95,7 @@ public class BicycleRouter extends VehicleRouter {
 	/**
 	 * return delay in seconds
 	 */
+	@Override
 	public double defineObstacle(BinaryMapDataObject road, int point) {
 		if ((road.getTypes()[0] & 3) == MapRenderingTypes.POINT_TYPE) {
 			// possibly not only first type needed ?
@@ -121,6 +124,7 @@ public class BicycleRouter extends VehicleRouter {
 	/**
 	 * return speed in m/s
 	 */
+	@Override
 	public double defineSpeed(BinaryMapDataObject road) {
 		TagValuePair pair = road.getTagValue(0);
 		double speed = 4d;
@@ -140,6 +144,7 @@ public class BicycleRouter extends VehicleRouter {
 	 * 
 	 * @return minimal speed at road
 	 */
+	@Override
 	public double getMinDefaultSpeed() {
 		return 2;
 	}
@@ -149,10 +154,12 @@ public class BicycleRouter extends VehicleRouter {
 	 * 
 	 * @return maximum speed to calculate shortest distance
 	 */
+	@Override
 	public double getMaxDefaultSpeed() {
 		return 6;
 	}
 
+	@Override
 	public double calculateTurnTime(RouteSegment segment, RouteSegment next, int segmentEnd) {
 		boolean end = (segmentEnd == segment.road.getPointsLength() - 1 || segmentEnd == 0);
 		boolean start = next.segmentStart == 0;

@@ -7,6 +7,7 @@ import java.util.Stack;
 import org.apache.commons.logging.Log;
 
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Looper;
 
 import net.osmand.Algoritms;
@@ -45,34 +46,15 @@ public class AsyncLoadingThread extends Thread {
 	}
 	
 	private void startPoiLoadingThread() {
-		if (asyncLoadingPoi == null) {
-			Thread th = new Thread(new Runnable() {
-				@Override
-				public void run() {
-					Looper.prepare();
-					asyncLoadingPoi = new Handler();
-					Looper.loop();
-				}
-			}, "Loading poi");
-			th.start();
-		}
-		while(asyncLoadingPoi != null){
-			// wait
-		}
+		HandlerThread h = new HandlerThread("Loading poi");
+		h.start();
+		asyncLoadingPoi = new Handler(h.getLooper());
 	}
 	
 	private void startTransportLoadingThread() {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				Looper.prepare();
-				asyncLoadingTransport = new Handler();
-				Looper.loop();
-			}
-		}, "Loading transport").start();
-		while(asyncLoadingTransport != null){
-			// wait
-		}
+		HandlerThread h = new HandlerThread("Loading transport");
+		h.start();
+		asyncLoadingTransport = new Handler(h.getLooper());
 	}
 
 	private int calculateProgressStatus(){

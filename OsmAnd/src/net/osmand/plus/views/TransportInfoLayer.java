@@ -18,7 +18,7 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-public class TransportInfoLayer implements OsmandMapLayer {
+public class TransportInfoLayer extends OsmandMapLayer {
 	
 	private final TransportRouteHelper routeHelper;
 	private OsmandMapTileView view;
@@ -31,6 +31,7 @@ public class TransportInfoLayer implements OsmandMapLayer {
 		this.routeHelper = routeHelper;
 	}
 	
+	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 		dm = new DisplayMetrics();
@@ -109,13 +110,9 @@ public class TransportInfoLayer implements OsmandMapLayer {
 		return false;
 	}
 
-	@Override
-	public boolean onLongPressEvent(PointF point) {
-		return false;
-	}
 
 	@Override
-	public boolean onTouchEvent(PointF point) {
+	public boolean onSingleTap(PointF point) {
 		int ex = (int) point.x;
 		int ey = (int) point.y;
 		if (visible && !routeHelper.getRoute().isEmpty()) {

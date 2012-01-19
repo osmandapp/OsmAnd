@@ -3,6 +3,7 @@ package net.osmand;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.Closeable;
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -30,6 +31,25 @@ public class Algoritms {
 		return s == null || s.length() == 0;
 	}
 	
+	/**
+	 * Determine whether a file is a ZIP File.
+	 */
+	public static boolean isZipFile(File file) throws IOException {
+		if (file.isDirectory()) {
+			return false;
+		}
+		if (!file.canRead()) {
+			throw new IOException("Cannot read file " + file.getAbsolutePath());
+		}
+		if (file.length() < 4) {
+			return false;
+		}
+		DataInputStream in = new DataInputStream(new BufferedInputStream(
+				new FileInputStream(file)));
+		int test = in.readInt();
+		in.close();
+		return test == 0x504b0304;
+	}
 	
 	public static String capitalizeFirstLetterAndLowercase(String s) {
 		if (s != null && s.length() > 1) {
@@ -102,9 +122,8 @@ public class Algoritms {
 	
 	public static boolean removeAllFiles(File f) {
 		if (f.isDirectory()) {
-			boolean deleted = true;
 			for (File c : f.listFiles()) {
-				deleted &= removeAllFiles(c);
+				removeAllFiles(c);
 			}
 			return f.delete();
 		} else {

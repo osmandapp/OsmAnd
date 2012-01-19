@@ -145,7 +145,8 @@ public class SweepLine
 */
 class CompRectX implements Comparator
 {
-  public int compare(Object o1, Object o2)
+  @Override
+public int compare(Object o1, Object o2)
   {
     if(o1 instanceof Rect && o2 instanceof Rect){
       Rect r1 = (Rect)o1;
@@ -161,7 +162,8 @@ class CompRectX implements Comparator
       throw new ClassCastException("Rect.compareTo : wrong object(s) passed");
       
   }
-  public boolean equals(Object o)
+  @Override
+public boolean equals(Object o)
   {
     return true;
   }

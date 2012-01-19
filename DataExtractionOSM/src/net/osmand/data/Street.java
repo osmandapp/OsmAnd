@@ -117,6 +117,7 @@ public class Street extends MapObject {
 		});
 	}
 
+	@Override
 	public void doDataPreparation() {
 		sortBuildings();
 		calculateCenter();

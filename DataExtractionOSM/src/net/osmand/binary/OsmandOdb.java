@@ -21,7 +21,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public OsmAndStructure getDefaultInstanceForType() {
+    @Override
+	public OsmAndStructure getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -30,7 +31,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndStructure_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndStructure_fieldAccessorTable;
     }
@@ -99,7 +101,8 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasVersion) return false;
       if (!hasVersionConfirm) return false;
       for (net.osmand.binary.OsmandOdb.OsmAndMapIndex element : getMapIndexList()) {
@@ -117,7 +120,8 @@ public final class OsmandOdb {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasVersion()) {
@@ -142,7 +146,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -244,11 +249,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndStructure prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -263,11 +270,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.OsmAndStructure internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.OsmAndStructure internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -276,23 +285,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.OsmAndStructure.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndStructure getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndStructure getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.OsmAndStructure.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.OsmAndStructure build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndStructure build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -308,7 +322,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndStructure buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndStructure buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -334,7 +349,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.OsmAndStructure) {
           return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndStructure)other);
         } else {
@@ -379,7 +395,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -702,7 +719,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public StringTable getDefaultInstanceForType() {
+    @Override
+	public StringTable getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -711,7 +729,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_StringTable_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_StringTable_fieldAccessorTable;
     }
@@ -730,11 +749,13 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       for (java.lang.String element : getSList()) {
@@ -744,7 +765,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -831,11 +853,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.StringTable prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -850,11 +874,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.StringTable internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.StringTable internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -863,23 +889,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.StringTable.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.StringTable getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.StringTable getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.StringTable build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.StringTable build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -895,7 +926,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.StringTable buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.StringTable buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -909,7 +941,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.StringTable) {
           return mergeFrom((net.osmand.binary.OsmandOdb.StringTable)other);
         } else {
@@ -930,7 +963,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -1025,7 +1059,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public IndexedStringTable getDefaultInstanceForType() {
+    @Override
+	public IndexedStringTable getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -1034,7 +1069,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_IndexedStringTable_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_IndexedStringTable_fieldAccessorTable;
     }
@@ -1084,11 +1120,13 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasPrefix()) {
@@ -1107,7 +1145,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -1211,11 +1250,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.IndexedStringTable prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -1230,11 +1271,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.IndexedStringTable internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.IndexedStringTable internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -1243,23 +1286,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.IndexedStringTable.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.IndexedStringTable getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.IndexedStringTable getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.IndexedStringTable.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.IndexedStringTable build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.IndexedStringTable build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -1275,7 +1323,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.IndexedStringTable buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.IndexedStringTable buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -1297,7 +1346,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.IndexedStringTable) {
           return mergeFrom((net.osmand.binary.OsmandOdb.IndexedStringTable)other);
         } else {
@@ -1333,7 +1383,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -1557,7 +1608,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public OsmAndMapIndex getDefaultInstanceForType() {
+    @Override
+	public OsmAndMapIndex getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -1566,7 +1618,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndMapIndex_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndMapIndex_fieldAccessorTable;
     }
@@ -1604,7 +1657,8 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       for (net.osmand.binary.OsmandOdb.MapRootLevel element : getLevelsList()) {
         if (!element.isInitialized()) return false;
       }
@@ -1614,7 +1668,8 @@ public final class OsmandOdb {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       for (net.osmand.binary.OsmandOdb.MapRootLevel element : getLevelsList()) {
@@ -1630,7 +1685,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -1720,11 +1776,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndMapIndex prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -1739,11 +1797,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.OsmAndMapIndex internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.OsmAndMapIndex internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -1752,23 +1812,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.OsmAndMapIndex.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndMapIndex getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndMapIndex getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.OsmAndMapIndex.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.OsmAndMapIndex build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndMapIndex build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -1784,7 +1849,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndMapIndex buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndMapIndex buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -1802,7 +1868,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.OsmAndMapIndex) {
           return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndMapIndex)other);
         } else {
@@ -1832,7 +1899,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -2022,7 +2090,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public MapEncodingRule getDefaultInstanceForType() {
+    @Override
+	public MapEncodingRule getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -2031,7 +2100,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_MapEncodingRule_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_MapEncodingRule_fieldAccessorTable;
     }
@@ -2073,14 +2143,16 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasTag) return false;
       if (!hasType) return false;
       if (!hasSubtype) return false;
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasTag()) {
@@ -2102,7 +2174,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -2200,11 +2273,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.MapEncodingRule prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -2219,11 +2294,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.MapEncodingRule internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.MapEncodingRule internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -2232,23 +2309,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.MapEncodingRule.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.MapEncodingRule getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.MapEncodingRule getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.MapEncodingRule.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.MapEncodingRule build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.MapEncodingRule build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -2264,7 +2346,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.MapEncodingRule buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.MapEncodingRule buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -2274,7 +2357,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.MapEncodingRule) {
           return mergeFrom((net.osmand.binary.OsmandOdb.MapEncodingRule)other);
         } else {
@@ -2304,7 +2388,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -2471,7 +2556,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public MapRootLevel getDefaultInstanceForType() {
+    @Override
+	public MapRootLevel getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -2480,7 +2566,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_MapRootLevel_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_MapRootLevel_fieldAccessorTable;
     }
@@ -2541,7 +2628,8 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasMaxZoom) return false;
       if (!hasMinZoom) return false;
       if (!hasLeft) return false;
@@ -2554,7 +2642,8 @@ public final class OsmandOdb {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasMaxZoom()) {
@@ -2582,7 +2671,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -2688,11 +2778,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.MapRootLevel prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -2707,11 +2799,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.MapRootLevel internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.MapRootLevel internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -2720,23 +2814,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.MapRootLevel.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.MapRootLevel getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.MapRootLevel getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.MapRootLevel.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.MapRootLevel build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.MapRootLevel build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -2752,7 +2851,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.MapRootLevel buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.MapRootLevel buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -2766,7 +2866,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.MapRootLevel) {
           return mergeFrom((net.osmand.binary.OsmandOdb.MapRootLevel)other);
         } else {
@@ -2805,7 +2906,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -3045,7 +3147,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public MapTree getDefaultInstanceForType() {
+    @Override
+	public MapTree getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -3054,7 +3157,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_MapTree_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_MapTree_fieldAccessorTable;
     }
@@ -3143,7 +3247,8 @@ public final class OsmandOdb {
       oldstringTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
       stringTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasLeft) return false;
       if (!hasRight) return false;
       if (!hasTop) return false;
@@ -3157,7 +3262,8 @@ public final class OsmandOdb {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasLeft()) {
@@ -3194,7 +3300,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -3312,11 +3419,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.MapTree prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -3331,11 +3440,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.MapTree internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.MapTree internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -3344,23 +3455,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.MapTree.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.MapTree getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.MapTree getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.MapTree.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.MapTree build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.MapTree build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -3376,7 +3492,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.MapTree buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.MapTree buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -3394,7 +3511,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.MapTree) {
           return mergeFrom((net.osmand.binary.OsmandOdb.MapTree)other);
         } else {
@@ -3445,7 +3563,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -3834,7 +3953,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public MapData getDefaultInstanceForType() {
+    @Override
+	public MapData getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -3843,7 +3963,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_MapData_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_MapData_fieldAccessorTable;
     }
@@ -3892,14 +4013,16 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasCoordinates) return false;
       if (!hasTypes) return false;
       if (!hasId) return false;
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasCoordinates()) {
@@ -3924,7 +4047,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -4026,11 +4150,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.MapData prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -4045,11 +4171,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.MapData internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.MapData internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -4058,23 +4186,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.MapData.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.MapData getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.MapData getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.MapData.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.MapData build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.MapData build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -4090,7 +4223,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.MapData buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.MapData buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -4100,7 +4234,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.MapData) {
           return mergeFrom((net.osmand.binary.OsmandOdb.MapData)other);
         } else {
@@ -4133,7 +4268,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -4325,7 +4461,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public OsmAndAddressIndex getDefaultInstanceForType() {
+    @Override
+	public OsmAndAddressIndex getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -4334,7 +4471,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndAddressIndex_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndAddressIndex_fieldAccessorTable;
     }
@@ -4379,7 +4517,8 @@ public final class OsmandOdb {
       postcodes_ = net.osmand.binary.OsmandOdb.PostcodesIndex.getDefaultInstance();
       villages_ = net.osmand.binary.OsmandOdb.CitiesIndex.getDefaultInstance();
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasName) return false;
       if (hasCities()) {
         if (!getCities().isInitialized()) return false;
@@ -4393,7 +4532,8 @@ public final class OsmandOdb {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasName()) {
@@ -4415,7 +4555,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -4513,11 +4654,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndAddressIndex prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -4532,11 +4675,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.OsmAndAddressIndex internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.OsmAndAddressIndex internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -4545,23 +4690,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.OsmAndAddressIndex.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndAddressIndex getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndAddressIndex getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.OsmAndAddressIndex.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.OsmAndAddressIndex build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndAddressIndex build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -4577,7 +4727,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndAddressIndex buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndAddressIndex buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -4587,7 +4738,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.OsmAndAddressIndex) {
           return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndAddressIndex)other);
         } else {
@@ -4617,7 +4769,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -4856,7 +5009,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public CitiesIndex getDefaultInstanceForType() {
+    @Override
+	public CitiesIndex getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -4865,7 +5019,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_CitiesIndex_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_CitiesIndex_fieldAccessorTable;
     }
@@ -4884,14 +5039,16 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       for (net.osmand.binary.OsmandOdb.CityIndex element : getCitiesList()) {
         if (!element.isInitialized()) return false;
       }
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       for (net.osmand.binary.OsmandOdb.CityIndex element : getCitiesList()) {
@@ -4901,7 +5058,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -4983,11 +5141,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.CitiesIndex prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -5002,11 +5162,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.CitiesIndex internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.CitiesIndex internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -5015,23 +5177,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.CitiesIndex.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.CitiesIndex getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.CitiesIndex getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.CitiesIndex.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.CitiesIndex build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.CitiesIndex build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -5047,7 +5214,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.CitiesIndex buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.CitiesIndex buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -5061,7 +5229,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.CitiesIndex) {
           return mergeFrom((net.osmand.binary.OsmandOdb.CitiesIndex)other);
         } else {
@@ -5082,7 +5251,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -5190,7 +5360,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public PostcodesIndex getDefaultInstanceForType() {
+    @Override
+	public PostcodesIndex getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -5199,7 +5370,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_PostcodesIndex_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_PostcodesIndex_fieldAccessorTable;
     }
@@ -5218,14 +5390,16 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       for (net.osmand.binary.OsmandOdb.PostcodeIndex element : getPostcodesList()) {
         if (!element.isInitialized()) return false;
       }
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       for (net.osmand.binary.OsmandOdb.PostcodeIndex element : getPostcodesList()) {
@@ -5235,7 +5409,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -5317,11 +5492,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.PostcodesIndex prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -5336,11 +5513,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.PostcodesIndex internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.PostcodesIndex internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -5349,23 +5528,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.PostcodesIndex.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.PostcodesIndex getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.PostcodesIndex getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.PostcodesIndex.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.PostcodesIndex build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.PostcodesIndex build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -5381,7 +5565,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.PostcodesIndex buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.PostcodesIndex buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -5395,7 +5580,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.PostcodesIndex) {
           return mergeFrom((net.osmand.binary.OsmandOdb.PostcodesIndex)other);
         } else {
@@ -5416,7 +5602,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -5524,7 +5711,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public CityIndex getDefaultInstanceForType() {
+    @Override
+	public CityIndex getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -5533,7 +5721,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_CityIndex_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_CityIndex_fieldAccessorTable;
     }
@@ -5602,7 +5791,8 @@ public final class OsmandOdb {
     private void initFields() {
       intersections_ = net.osmand.binary.OsmandOdb.InteresectedStreets.getDefaultInstance();
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasCityType) return false;
       if (!hasName) return false;
       if (!hasX) return false;
@@ -5616,7 +5806,8 @@ public final class OsmandOdb {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasCityType()) {
@@ -5647,7 +5838,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -5757,11 +5949,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.CityIndex prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -5776,11 +5970,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.CityIndex internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.CityIndex internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -5789,23 +5985,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.CityIndex.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.CityIndex getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.CityIndex getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.CityIndex.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.CityIndex build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.CityIndex build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -5821,7 +6022,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.CityIndex buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.CityIndex buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -5835,7 +6037,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.CityIndex) {
           return mergeFrom((net.osmand.binary.OsmandOdb.CityIndex)other);
         } else {
@@ -5877,7 +6080,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -6169,7 +6373,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public InteresectedStreets getDefaultInstanceForType() {
+    @Override
+	public InteresectedStreets getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -6178,7 +6383,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_InteresectedStreets_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_InteresectedStreets_fieldAccessorTable;
     }
@@ -6197,14 +6403,16 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       for (net.osmand.binary.OsmandOdb.StreetIntersection element : getIntersectionsList()) {
         if (!element.isInitialized()) return false;
       }
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       for (net.osmand.binary.OsmandOdb.StreetIntersection element : getIntersectionsList()) {
@@ -6214,7 +6422,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -6296,11 +6505,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.InteresectedStreets prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -6315,11 +6526,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.InteresectedStreets internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.InteresectedStreets internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -6328,23 +6541,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.InteresectedStreets.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.InteresectedStreets getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.InteresectedStreets getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.InteresectedStreets.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.InteresectedStreets build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.InteresectedStreets build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -6360,7 +6578,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.InteresectedStreets buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.InteresectedStreets buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -6374,7 +6593,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.InteresectedStreets) {
           return mergeFrom((net.osmand.binary.OsmandOdb.InteresectedStreets)other);
         } else {
@@ -6395,7 +6615,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -6503,7 +6724,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public StreetIntersection getDefaultInstanceForType() {
+    @Override
+	public StreetIntersection getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -6512,7 +6734,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_StreetIntersection_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_StreetIntersection_fieldAccessorTable;
     }
@@ -6547,7 +6770,8 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasIntersectedStreet1) return false;
       if (!hasIntersectedStreet2) return false;
       if (!hasIntersectedX) return false;
@@ -6555,7 +6779,8 @@ public final class OsmandOdb {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasIntersectedStreet1()) {
@@ -6574,7 +6799,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -6668,11 +6894,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.StreetIntersection prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -6687,11 +6915,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.StreetIntersection internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.StreetIntersection internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -6700,23 +6930,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.StreetIntersection.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.StreetIntersection getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.StreetIntersection getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.StreetIntersection.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.StreetIntersection build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.StreetIntersection build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -6732,7 +6967,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.StreetIntersection buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.StreetIntersection buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -6742,7 +6978,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.StreetIntersection) {
           return mergeFrom((net.osmand.binary.OsmandOdb.StreetIntersection)other);
         } else {
@@ -6769,7 +7006,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -6908,7 +7146,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public PostcodeIndex getDefaultInstanceForType() {
+    @Override
+	public PostcodeIndex getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -6917,7 +7156,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_PostcodeIndex_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_PostcodeIndex_fieldAccessorTable;
     }
@@ -6957,7 +7197,8 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasPostcode) return false;
       if (!hasX) return false;
       if (!hasY) return false;
@@ -6967,7 +7208,8 @@ public final class OsmandOdb {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasPostcode()) {
@@ -6986,7 +7228,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -7080,11 +7323,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.PostcodeIndex prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -7099,11 +7344,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.PostcodeIndex internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.PostcodeIndex internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -7112,23 +7359,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.PostcodeIndex.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.PostcodeIndex getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.PostcodeIndex getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.PostcodeIndex.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.PostcodeIndex build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.PostcodeIndex build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -7144,7 +7396,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.PostcodeIndex buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.PostcodeIndex buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -7158,7 +7411,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.PostcodeIndex) {
           return mergeFrom((net.osmand.binary.OsmandOdb.PostcodeIndex)other);
         } else {
@@ -7188,7 +7442,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -7365,7 +7620,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public StreetIndex getDefaultInstanceForType() {
+    @Override
+	public StreetIndex getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -7374,7 +7630,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_StreetIndex_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_StreetIndex_fieldAccessorTable;
     }
@@ -7428,7 +7685,8 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasName) return false;
       if (!hasX) return false;
       if (!hasY) return false;
@@ -7438,7 +7696,8 @@ public final class OsmandOdb {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasName()) {
@@ -7463,7 +7722,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -7565,11 +7825,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.StreetIndex prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -7584,11 +7846,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.StreetIndex internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.StreetIndex internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -7597,23 +7861,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.StreetIndex.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.StreetIndex getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.StreetIndex getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.StreetIndex.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.StreetIndex build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.StreetIndex build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -7629,7 +7898,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.StreetIndex buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.StreetIndex buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -7643,7 +7913,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.StreetIndex) {
           return mergeFrom((net.osmand.binary.OsmandOdb.StreetIndex)other);
         } else {
@@ -7679,7 +7950,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -7903,7 +8175,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public BuildingIndex getDefaultInstanceForType() {
+    @Override
+	public BuildingIndex getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -7912,7 +8185,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_BuildingIndex_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_BuildingIndex_fieldAccessorTable;
     }
@@ -7961,14 +8235,16 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasName) return false;
       if (!hasX) return false;
       if (!hasY) return false;
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasName()) {
@@ -7993,7 +8269,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -8095,11 +8372,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.BuildingIndex prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -8114,11 +8393,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.BuildingIndex internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.BuildingIndex internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -8127,23 +8408,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.BuildingIndex.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.BuildingIndex getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.BuildingIndex getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.BuildingIndex.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.BuildingIndex build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.BuildingIndex build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -8159,7 +8445,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.BuildingIndex buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.BuildingIndex buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -8169,7 +8456,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.BuildingIndex) {
           return mergeFrom((net.osmand.binary.OsmandOdb.BuildingIndex)other);
         } else {
@@ -8202,7 +8490,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -8394,7 +8683,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public TransportRoutes getDefaultInstanceForType() {
+    @Override
+	public TransportRoutes getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -8403,7 +8693,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_TransportRoutes_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_TransportRoutes_fieldAccessorTable;
     }
@@ -8422,14 +8713,16 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       for (net.osmand.binary.OsmandOdb.TransportRoute element : getRoutesList()) {
         if (!element.isInitialized()) return false;
       }
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       for (net.osmand.binary.OsmandOdb.TransportRoute element : getRoutesList()) {
@@ -8439,7 +8732,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -8521,11 +8815,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.TransportRoutes prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -8540,11 +8836,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.TransportRoutes internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.TransportRoutes internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -8553,23 +8851,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.TransportRoutes.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.TransportRoutes getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.TransportRoutes getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.TransportRoutes.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.TransportRoutes build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.TransportRoutes build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -8585,7 +8888,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.TransportRoutes buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.TransportRoutes buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -8599,7 +8903,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.TransportRoutes) {
           return mergeFrom((net.osmand.binary.OsmandOdb.TransportRoutes)other);
         } else {
@@ -8620,7 +8925,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -8728,7 +9034,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public TransportRoute getDefaultInstanceForType() {
+    @Override
+	public TransportRoute getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -8737,7 +9044,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_TransportRoute_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_TransportRoute_fieldAccessorTable;
     }
@@ -8817,7 +9125,8 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasId) return false;
       for (net.osmand.binary.OsmandOdb.TransportRouteStop element : getDirectStopsList()) {
         if (!element.isInitialized()) return false;
@@ -8828,7 +9137,8 @@ public final class OsmandOdb {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasId()) {
@@ -8862,7 +9172,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -8976,11 +9287,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.TransportRoute prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -8995,11 +9308,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.TransportRoute internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.TransportRoute internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -9008,23 +9323,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.TransportRoute.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.TransportRoute getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.TransportRoute getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.TransportRoute.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.TransportRoute build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.TransportRoute build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -9040,7 +9360,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.TransportRoute buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.TransportRoute buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -9058,7 +9379,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.TransportRoute) {
           return mergeFrom((net.osmand.binary.OsmandOdb.TransportRoute)other);
         } else {
@@ -9106,7 +9428,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -9428,7 +9751,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public TransportRouteStop getDefaultInstanceForType() {
+    @Override
+	public TransportRouteStop getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -9437,7 +9761,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_TransportRouteStop_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_TransportRouteStop_fieldAccessorTable;
     }
@@ -9479,7 +9804,8 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasId) return false;
       if (!hasDx) return false;
       if (!hasDy) return false;
@@ -9487,7 +9813,8 @@ public final class OsmandOdb {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasId()) {
@@ -9509,7 +9836,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -9607,11 +9935,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.TransportRouteStop prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -9626,11 +9956,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.TransportRouteStop internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.TransportRouteStop internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -9639,23 +9971,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.TransportRouteStop.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.TransportRouteStop getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.TransportRouteStop getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.TransportRouteStop.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.TransportRouteStop build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.TransportRouteStop build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -9671,7 +10008,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.TransportRouteStop buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.TransportRouteStop buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -9681,7 +10019,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.TransportRouteStop) {
           return mergeFrom((net.osmand.binary.OsmandOdb.TransportRouteStop)other);
         } else {
@@ -9711,7 +10050,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -9872,7 +10212,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public TransportStop getDefaultInstanceForType() {
+    @Override
+	public TransportStop getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -9881,7 +10222,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_TransportStop_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_TransportStop_fieldAccessorTable;
     }
@@ -9935,7 +10277,8 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasDx) return false;
       if (!hasDy) return false;
       if (!hasId) return false;
@@ -9943,7 +10286,8 @@ public final class OsmandOdb {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasDx()) {
@@ -9968,7 +10312,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -10075,11 +10420,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.TransportStop prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -10094,11 +10441,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.TransportStop internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.TransportStop internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -10107,23 +10456,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.TransportStop.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.TransportStop getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.TransportStop getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.TransportStop.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.TransportStop build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.TransportStop build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -10139,7 +10493,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.TransportStop buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.TransportStop buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -10153,7 +10508,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.TransportStop) {
           return mergeFrom((net.osmand.binary.OsmandOdb.TransportStop)other);
         } else {
@@ -10189,7 +10545,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -10397,7 +10754,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public TransportStopsTree getDefaultInstanceForType() {
+    @Override
+	public TransportStopsTree getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -10406,7 +10764,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_TransportStopsTree_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_TransportStopsTree_fieldAccessorTable;
     }
@@ -10472,7 +10831,8 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasLeft) return false;
       if (!hasRight) return false;
       if (!hasTop) return false;
@@ -10486,7 +10846,8 @@ public final class OsmandOdb {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasLeft()) {
@@ -10514,7 +10875,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -10620,11 +10982,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.TransportStopsTree prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -10639,11 +11003,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.TransportStopsTree internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.TransportStopsTree internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -10652,23 +11018,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.TransportStopsTree.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.TransportStopsTree getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.TransportStopsTree getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.TransportStopsTree.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.TransportStopsTree build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.TransportStopsTree build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -10684,7 +11055,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.TransportStopsTree buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.TransportStopsTree buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -10702,7 +11074,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.TransportStopsTree) {
           return mergeFrom((net.osmand.binary.OsmandOdb.TransportStopsTree)other);
         } else {
@@ -10744,7 +11117,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -11019,7 +11393,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public OsmAndTransportIndex getDefaultInstanceForType() {
+    @Override
+	public OsmAndTransportIndex getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -11028,7 +11403,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndTransportIndex_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndTransportIndex_fieldAccessorTable;
     }
@@ -11066,7 +11442,8 @@ public final class OsmandOdb {
       stops_ = net.osmand.binary.OsmandOdb.TransportStopsTree.getDefaultInstance();
       stringTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasStringTable) return false;
       if (hasRoutes()) {
         if (!getRoutes().isInitialized()) return false;
@@ -11077,7 +11454,8 @@ public final class OsmandOdb {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasName()) {
@@ -11096,7 +11474,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -11190,11 +11569,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndTransportIndex prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -11209,11 +11590,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.OsmAndTransportIndex internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.OsmAndTransportIndex internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -11222,23 +11605,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.OsmAndTransportIndex.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndTransportIndex getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndTransportIndex getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.OsmAndTransportIndex.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.OsmAndTransportIndex build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndTransportIndex build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -11254,7 +11642,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndTransportIndex buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndTransportIndex buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -11264,7 +11653,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.OsmAndTransportIndex) {
           return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndTransportIndex)other);
         } else {
@@ -11291,7 +11681,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -11505,7 +11896,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public OsmAndTileBox getDefaultInstanceForType() {
+    @Override
+	public OsmAndTileBox getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -11514,7 +11906,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndTileBox_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndTileBox_fieldAccessorTable;
     }
@@ -11549,7 +11942,8 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasLeft) return false;
       if (!hasRight) return false;
       if (!hasTop) return false;
@@ -11557,7 +11951,8 @@ public final class OsmandOdb {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasLeft()) {
@@ -11576,7 +11971,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -11670,11 +12066,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndTileBox prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -11689,11 +12087,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.OsmAndTileBox internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.OsmAndTileBox internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -11702,23 +12102,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.OsmAndTileBox.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndTileBox getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndTileBox getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.OsmAndTileBox.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.OsmAndTileBox build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndTileBox build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -11734,7 +12139,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndTileBox buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndTileBox buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -11744,7 +12150,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.OsmAndTileBox) {
           return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndTileBox)other);
         } else {
@@ -11771,7 +12178,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -11910,7 +12318,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public OsmAndPoiIndex getDefaultInstanceForType() {
+    @Override
+	public OsmAndPoiIndex getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -11919,7 +12328,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiIndex_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiIndex_fieldAccessorTable;
     }
@@ -11985,7 +12395,8 @@ public final class OsmandOdb {
       boundaries_ = net.osmand.binary.OsmandOdb.OsmAndTileBox.getDefaultInstance();
       nameIndex_ = net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.getDefaultInstance();
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasName) return false;
       if (!hasBoundaries) return false;
       if (!getBoundaries().isInitialized()) return false;
@@ -12004,7 +12415,8 @@ public final class OsmandOdb {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasName()) {
@@ -12029,7 +12441,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -12131,11 +12544,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndPoiIndex prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -12150,11 +12565,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.OsmAndPoiIndex internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.OsmAndPoiIndex internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -12163,23 +12580,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.OsmAndPoiIndex.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndPoiIndex getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiIndex getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.OsmAndPoiIndex.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.OsmAndPoiIndex build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiIndex build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -12195,7 +12617,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndPoiIndex buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiIndex buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -12217,7 +12640,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.OsmAndPoiIndex) {
           return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndPoiIndex)other);
         } else {
@@ -12259,7 +12683,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -12598,7 +13023,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public OsmAndPoiNameIndex getDefaultInstanceForType() {
+    @Override
+	public OsmAndPoiNameIndex getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -12607,7 +13033,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiNameIndex_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiNameIndex_fieldAccessorTable;
     }
@@ -12634,12 +13061,14 @@ public final class OsmandOdb {
     private void initFields() {
       table_ = net.osmand.binary.OsmandOdb.IndexedStringTable.getDefaultInstance();
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasTable) return false;
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasTable()) {
@@ -12652,7 +13081,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -12738,11 +13168,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -12757,11 +13189,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -12770,23 +13204,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -12802,7 +13241,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -12816,7 +13256,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex) {
           return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex)other);
         } else {
@@ -12840,7 +13281,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -12994,7 +13436,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public OsmAndPoiNameIndexData getDefaultInstanceForType() {
+    @Override
+	public OsmAndPoiNameIndexData getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -13003,7 +13446,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiNameIndexData_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiNameIndexData_fieldAccessorTable;
     }
@@ -13022,11 +13466,13 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       for (net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom element : getAtomsList()) {
@@ -13036,7 +13482,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -13118,11 +13565,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -13137,11 +13586,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -13150,23 +13601,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -13182,7 +13638,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -13196,7 +13653,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData) {
           return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData)other);
         } else {
@@ -13217,7 +13675,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -13325,7 +13784,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public OsmAndPoiNameIndexDataAtom getDefaultInstanceForType() {
+    @Override
+	public OsmAndPoiNameIndexDataAtom getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -13334,7 +13794,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiNameIndexDataAtom_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiNameIndexDataAtom_fieldAccessorTable;
     }
@@ -13369,11 +13830,13 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasZoom()) {
@@ -13392,7 +13855,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -13486,11 +13950,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -13505,11 +13971,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -13518,23 +13986,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -13550,7 +14023,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -13560,7 +14034,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom) {
           return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom)other);
         } else {
@@ -13587,7 +14062,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -13726,7 +14202,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public OsmAndCategoryTable getDefaultInstanceForType() {
+    @Override
+	public OsmAndCategoryTable getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -13735,7 +14212,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndCategoryTable_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndCategoryTable_fieldAccessorTable;
     }
@@ -13761,12 +14239,14 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasCategory) return false;
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasCategory()) {
@@ -13779,7 +14259,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -13870,11 +14351,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndCategoryTable prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -13889,11 +14372,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.OsmAndCategoryTable internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.OsmAndCategoryTable internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -13902,23 +14387,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.OsmAndCategoryTable.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndCategoryTable getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndCategoryTable getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.OsmAndCategoryTable.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.OsmAndCategoryTable build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndCategoryTable build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -13934,7 +14424,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndCategoryTable buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndCategoryTable buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -13948,7 +14439,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.OsmAndCategoryTable) {
           return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndCategoryTable)other);
         } else {
@@ -13972,7 +14464,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -14092,7 +14585,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public OsmAndPoiBox getDefaultInstanceForType() {
+    @Override
+	public OsmAndPoiBox getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -14101,7 +14595,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiBox_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiBox_fieldAccessorTable;
     }
@@ -14156,7 +14651,8 @@ public final class OsmandOdb {
     private void initFields() {
       categories_ = net.osmand.binary.OsmandOdb.OsmAndPoiCategories.getDefaultInstance();
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasZoom) return false;
       if (!hasLeft) return false;
       if (!hasTop) return false;
@@ -14166,7 +14662,8 @@ public final class OsmandOdb {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasZoom()) {
@@ -14191,7 +14688,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -14293,11 +14791,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndPoiBox prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -14312,11 +14812,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.OsmAndPoiBox internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.OsmAndPoiBox internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -14325,23 +14827,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.OsmAndPoiBox.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndPoiBox getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiBox getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.OsmAndPoiBox.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.OsmAndPoiBox build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiBox build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -14357,7 +14864,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndPoiBox buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiBox buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -14371,7 +14879,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.OsmAndPoiBox) {
           return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndPoiBox)other);
         } else {
@@ -14407,7 +14916,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -14649,7 +15159,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public OsmAndPoiCategories getDefaultInstanceForType() {
+    @Override
+	public OsmAndPoiCategories getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -14658,7 +15169,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiCategories_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiCategories_fieldAccessorTable;
     }
@@ -14677,11 +15189,13 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       for (int element : getCategoriesList()) {
@@ -14691,7 +15205,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -14778,11 +15293,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndPoiCategories prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -14797,11 +15314,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.OsmAndPoiCategories internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.OsmAndPoiCategories internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -14810,23 +15329,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.OsmAndPoiCategories.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndPoiCategories getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiCategories getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.OsmAndPoiCategories.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.OsmAndPoiCategories build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiCategories build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -14842,7 +15366,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndPoiCategories buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiCategories buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -14856,7 +15381,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.OsmAndPoiCategories) {
           return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndPoiCategories)other);
         } else {
@@ -14877,7 +15403,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -14975,7 +15502,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public OsmAndPoiBoxData getDefaultInstanceForType() {
+    @Override
+	public OsmAndPoiBoxData getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -14984,7 +15512,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiBoxData_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiBoxData_fieldAccessorTable;
     }
@@ -15024,14 +15553,16 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       for (net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom element : getPoiDataList()) {
         if (!element.isInitialized()) return false;
       }
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasZoom()) {
@@ -15050,7 +15581,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -15144,11 +15676,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndPoiBoxData prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -15163,11 +15697,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.OsmAndPoiBoxData internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.OsmAndPoiBoxData internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -15176,23 +15712,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.OsmAndPoiBoxData.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndPoiBoxData getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiBoxData getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.OsmAndPoiBoxData.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.OsmAndPoiBoxData build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiBoxData build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -15208,7 +15749,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndPoiBoxData buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiBoxData buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -15222,7 +15764,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.OsmAndPoiBoxData) {
           return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndPoiBoxData)other);
         } else {
@@ -15252,7 +15795,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -15426,7 +15970,8 @@ public final class OsmandOdb {
       return defaultInstance;
     }
     
-    public OsmAndPoiBoxDataAtom getDefaultInstanceForType() {
+    @Override
+	public OsmAndPoiBoxDataAtom getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -15435,7 +15980,8 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiBoxDataAtom_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndPoiBoxDataAtom_fieldAccessorTable;
     }
@@ -15517,13 +16063,15 @@ public final class OsmandOdb {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasDx) return false;
       if (!hasDy) return false;
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasDx()) {
@@ -15560,7 +16108,8 @@ public final class OsmandOdb {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -15683,11 +16232,13 @@ public final class OsmandOdb {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -15702,11 +16253,13 @@ public final class OsmandOdb {
         return builder;
       }
       
-      protected net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom internalGetResult() {
+      @Override
+	protected net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -15715,23 +16268,28 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom.getDescriptor();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom getDefaultInstanceForType() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom getDefaultInstanceForType() {
         return net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom build() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -15747,7 +16305,8 @@ public final class OsmandOdb {
         return buildPartial();
       }
       
-      public net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom buildPartial() {
+      @Override
+	public net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -15761,7 +16320,8 @@ public final class OsmandOdb {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom) {
           return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom)other);
         } else {
@@ -15809,7 +16369,8 @@ public final class OsmandOdb {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -16383,7 +16944,8 @@ public final class OsmandOdb {
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+        @Override
+		public com.google.protobuf.ExtensionRegistry assignDescriptors(
             com.google.protobuf.Descriptors.FileDescriptor root) {
           descriptor = root;
           internal_static_OsmAndStructure_descriptor =

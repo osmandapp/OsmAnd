@@ -11,6 +11,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.render.NativeOsmandLibrary;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -52,7 +53,6 @@ public class MainMenuActivity extends AccessibleActivity {
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
 	
 	private ProgressDialog startProgressDialog;
-
 	
 	public void checkPreviousRunsForExceptions(boolean firstTime) {
 		long size = getPreferences(MODE_WORLD_READABLE).getLong(EXCEPTION_FILE_SIZE, 0);
@@ -136,7 +136,7 @@ public class MainMenuActivity extends AccessibleActivity {
 		SharedPreferences prefs = activity.getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
 		
 		// only one commit should be with contribution version flag
-		// prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
+//		 prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
 		if (prefs.contains(CONTRIBUTION_VERSION_FLAG)) {
 			SpannableString content = new SpannableString(textVersion);
 			content.setSpan(new ClickableSpan() {

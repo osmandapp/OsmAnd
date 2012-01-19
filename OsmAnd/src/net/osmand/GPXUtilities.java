@@ -116,9 +116,11 @@ public class GPXUtilities {
 				return points.get(0);
 			}
 			return null;
-			
 		}
-		
+
+		public boolean isEmpty() {
+			return tracks.isEmpty() && points.isEmpty() && routes.isEmpty();
+		}
 		
 	}
 	

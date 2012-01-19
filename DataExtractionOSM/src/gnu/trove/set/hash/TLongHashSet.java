@@ -151,13 +151,15 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public TLongIterator iterator() {
+    @Override
+	public TLongIterator iterator() {
         return new TLongHashIterator( this );
     }
 
 
     /** {@inheritDoc} */
-    public long[] toArray() {
+    @Override
+	public long[] toArray() {
         long[] result = new long[ size() ];
         long[] set = _set;
         byte[] states = _states;
@@ -172,7 +174,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public long[] toArray( long[] dest ) {
+    @Override
+	public long[] toArray( long[] dest ) {
         long[] set = _set;
         byte[] states = _states;
 
@@ -190,7 +193,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public boolean add( long val ) {
+    @Override
+	public boolean add( long val ) {
         int index = insertionIndex(val);
 
         if ( index < 0 ) {
@@ -207,7 +211,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public boolean remove( long val ) {
+    @Override
+	public boolean remove( long val ) {
         int index = index(val);
         if ( index >= 0 ) {
             removeAt( index );
@@ -218,7 +223,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public boolean containsAll( Collection<?> collection ) {
+    @Override
+	public boolean containsAll( Collection<?> collection ) {
         for ( Object element : collection ) {
             if ( element instanceof Long ) {
                 long c = ( ( Long ) element ).longValue();
@@ -235,7 +241,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public boolean containsAll( TLongCollection collection ) {
+    @Override
+	public boolean containsAll( TLongCollection collection ) {
         TLongIterator iter = collection.iterator();
         while ( iter.hasNext() ) {
             long element = iter.next();
@@ -248,7 +255,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public boolean containsAll( long[] array ) {
+    @Override
+	public boolean containsAll( long[] array ) {
         for ( int i = array.length; i-- > 0; ) {
             if ( ! contains( array[i] ) ) {
                 return false;
@@ -259,7 +267,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public boolean addAll( Collection<? extends Long> collection ) {
+    @Override
+	public boolean addAll( Collection<? extends Long> collection ) {
         boolean changed = false;
         for ( Long element : collection ) {
             long e = element.longValue();
@@ -272,7 +281,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public boolean addAll( TLongCollection collection ) {
+    @Override
+	public boolean addAll( TLongCollection collection ) {
         boolean changed = false;
         TLongIterator iter = collection.iterator();
         while ( iter.hasNext() ) {
@@ -286,7 +296,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public boolean addAll( long[] array ) {
+    @Override
+	public boolean addAll( long[] array ) {
         boolean changed = false;
         for ( int i = array.length; i-- > 0; ) {
             if ( add( array[i] ) ) {
@@ -298,7 +309,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"SuspiciousMethodCalls"})
+    @Override
+	@SuppressWarnings({"SuspiciousMethodCalls"})
     public boolean retainAll( Collection<?> collection ) {
         boolean modified = false;
 	    TLongIterator iter = iterator();
@@ -313,7 +325,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public boolean retainAll( TLongCollection collection ) {
+    @Override
+	public boolean retainAll( TLongCollection collection ) {
         if ( this == collection ) {
             return false;
         }
@@ -330,7 +343,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public boolean retainAll( long[] array ) {
+    @Override
+	public boolean retainAll( long[] array ) {
         boolean changed = false;
         Arrays.sort( array );
         long[] set = _set;
@@ -347,7 +361,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public boolean removeAll( Collection<?> collection ) {
+    @Override
+	public boolean removeAll( Collection<?> collection ) {
         boolean changed = false;
         for ( Object element : collection ) {
             if ( element instanceof Long ) {
@@ -362,7 +377,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public boolean removeAll( TLongCollection collection ) {
+    @Override
+	public boolean removeAll( TLongCollection collection ) {
         boolean changed = false;
         TLongIterator iter = collection.iterator();
         while ( iter.hasNext() ) {
@@ -376,7 +392,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public boolean removeAll( long[] array ) {
+    @Override
+	public boolean removeAll( long[] array ) {
         boolean changed = false;
         for ( int i = array.length; i-- > 0; ) {
             if ( remove(array[i]) ) {
@@ -388,7 +405,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public void clear() {
+    @Override
+	public void clear() {
         super.clear();
         long[] set = _set;
         byte[] states = _states;
@@ -401,7 +419,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    protected void rehash( int newCapacity ) {
+    @Override
+	protected void rehash( int newCapacity ) {
         int oldCapacity = _set.length;
         
         long oldSet[] = _set;
@@ -422,7 +441,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public boolean equals( Object other ) {
+    @Override
+	public boolean equals( Object other ) {
         if ( ! ( other instanceof TLongSet ) ) {
             return false;
         }
@@ -442,7 +462,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public int hashCode() {
+    @Override
+	public int hashCode() {
         int hashcode = 0;
         for ( int i = _states.length; i-- > 0; ) {
             if ( _states[i] == FULL ) {
@@ -454,7 +475,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public String toString() {
+    @Override
+	public String toString() {
         StringBuilder buffy = new StringBuilder( _size * 2 + 2 );
         buffy.append("{");
         for ( int i = _states.length, j = 1; i-- > 0; ) {
@@ -482,7 +504,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
         }
 
         /** {@inheritDoc} */
-        public long next() {
+        @Override
+		public long next() {
             moveToNextIndex();
             return _hash._set[_index];
         }
@@ -490,7 +513,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public void writeExternal( ObjectOutput out ) throws IOException {
+    @Override
+	public void writeExternal( ObjectOutput out ) throws IOException {
 
     	// VERSION
     	out.writeByte( 1 );
@@ -517,7 +541,8 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
 
     /** {@inheritDoc} */
-    public void readExternal( ObjectInput in )
+    @Override
+	public void readExternal( ObjectInput in )
     	throws IOException, ClassNotFoundException {
 
     	// VERSION

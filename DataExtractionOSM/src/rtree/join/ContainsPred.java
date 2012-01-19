@@ -23,7 +23,8 @@ public class ContainsPred extends Predicate
   public ContainsPred(){}
 
 
-  public void relate(Element event, int from, Element[] others, List pairs, int evtSide)
+  @Override
+public void relate(Element event, int from, Element[] others, List pairs, int evtSide)
   {
     //System.out.println("SweepLine.internalLoop : before pairs size : " + pairs.size());
     if(evtSide == Join.LEFT){
@@ -51,7 +52,8 @@ public class ContainsPred extends Predicate
   /**
      @param side The side of <code>elmt1</code>.
   */
-  public boolean relateMismatch(Element elmt1, Element elmt2, int side)
+  @Override
+public boolean relateMismatch(Element elmt1, Element elmt2, int side)
   {
     //System.out.println("ContainsPred.relateMismatch :");
     

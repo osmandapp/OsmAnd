@@ -422,7 +422,8 @@ public class Rect implements java.io.Serializable
     return true;
   }
 
-  public String toString()
+  @Override
+public String toString()
   {
     String ret;
     ret = "\nThe Rectangle:-";

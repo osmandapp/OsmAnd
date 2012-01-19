@@ -1,5 +1,7 @@
 package net.osmand.plus;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -87,8 +89,7 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 	/**
 	 * 
 	 * @param stop
-	 * @param format
-	 *            0} - ref, {1} - type, {2} - name, {3} - name_en
+	 * @param format {0} - ref, {1} - type, {2} - name, {3} - name_en
 	 * @return null if something goes wrong
 	 */
 	@Override
@@ -98,17 +99,15 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 		
 		MessageFormat f = new MessageFormat(format);
 		List<String> res = new ArrayList<String>();
-		for(int r : stop.getReferencesToRoutes()) {
-			try {
-				TransportRoute route = file.getTransportRoute(r);
-				if(route == null){
-					return null;
+		try {
+			List<TransportRoute> routes = file.getTransportRouteDescriptions(stop);
+			if(routes != null){
+				for(TransportRoute route : routes){
+					res.add(f.format(new String[] { route.getRef() + "", route.getType() + "", route.getName() + "", route.getEnName() + "" })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 				}
-				res.add(f.format(new String[] { route.getRef()+"", route.getType()+"", route.getName()+"", route.getEnName()+""})); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-			} catch (IOException e) {
-				log.error("Disk error ", e); //$NON-NLS-1$
 			}
-			
+		} catch (IOException e) {
+			log.error("Disk error ", e); //$NON-NLS-1$
 		}
 
 		if (log.isDebugEnabled()) {
@@ -135,6 +134,7 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 		}
 
 	}
+	
 
 	@Override
 	public List<RouteInfoLocation> searchTransportRouteStops(double latitude, double longitude, LatLon locationToGo, int zoom) {
@@ -147,59 +147,59 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 		double leftLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX - 0.5);
 		double rightLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX + 0.5);
 		SearchRequest<TransportStop> req = BinaryMapIndexReader.buildSearchTransportRequest(MapUtils.get31TileNumberX(leftLongitude),
-				MapUtils.get31TileNumberX(rightLongitude), MapUtils.get31TileNumberY(topLatitude),
-				MapUtils.get31TileNumberY(bottomLatitude), -1, null);
-		
+				MapUtils.get31TileNumberX(rightLongitude), MapUtils.get31TileNumberY(topLatitude), MapUtils
+						.get31TileNumberY(bottomLatitude), -1, null);
 		List<RouteInfoLocation> listRoutes = new ArrayList<RouteInfoLocation>();
 		try {
 			List<TransportStop> stops = file.searchTransportIndex(req);
 
-			Map<Long, RouteInfoLocation> registeredRoutes = new LinkedHashMap<Long, RouteInfoLocation>();
+			TIntObjectHashMap<TransportStop> stopsToProcess = new TIntObjectHashMap<TransportStop>();
 			for (TransportStop s : stops) {
 				for (int ref : s.getReferencesToRoutes()) {
-					TransportRoute route = file.getTransportRoute(ref);
-					for (int i = 0; i < 2; i++) {
-						boolean direction = i == 0;
-						List<TransportStop> stps = direction ? route.getForwardStops() : route.getBackwardStops();
-						// load only part
-						while (!stps.isEmpty() && (stps.get(0).getId().longValue() != s.getId().longValue())) {
-							stps.remove(0);
-						}
-						if (!stps.isEmpty()) {
-							long idToPut = route.getId() << 1 + (direction ? 1 : 0);
-							if (registeredRoutes.containsKey(idToPut)) {
-								TransportStop st = registeredRoutes.get(idToPut).getStart();
-								if (MapUtils.getDistance(loc, st.getLocation()) < MapUtils.getDistance(loc, s.getLocation())) {
-									continue;
+					TransportStop exist = stopsToProcess.get(ref);
+					if (exist == null || MapUtils.getDistance(loc, s.getLocation()) < MapUtils.getDistance(loc, exist.getLocation())) {
+						stopsToProcess.put(ref, s);
+					}
+				}
+			}
+			TIntObjectHashMap<TransportRoute> transportRoutes = file.getTransportRoutes(stopsToProcess.keys());
+			for (int ref : stopsToProcess.keys()) {
+				TransportRoute route = transportRoutes.get(ref);
+				TransportStop s = stopsToProcess.get(ref);
+				for (int i = 0; i < 2; i++) {
+					boolean direction = i == 0;
+					List<TransportStop> stps = direction ? route.getForwardStops() : route.getBackwardStops();
+					// load only part
+					
+					while (!stps.isEmpty() && (stps.get(0).getId().longValue() != s.getId().longValue())) {
+						stps.remove(0);
+					}
+					if (!stps.isEmpty()) {
+						RouteInfoLocation r = new RouteInfoLocation();
+						r.setRoute(route);
+						r.setStart(stps.get(0));
+						r.setDirection(direction);
+						if (locationToGo != null) {
+							int distToLoc = Integer.MAX_VALUE;
+							for (TransportStop st : stps) {
+								double ndist = MapUtils.getDistance(locationToGo, st.getLocation());
+								if (ndist < distToLoc) {
+									distToLoc = (int) ndist;
+									r.setStop(st);
+									r.setDistToLocation(distToLoc);
 								}
 							}
-							RouteInfoLocation r = new RouteInfoLocation();
-							r.setRoute(route);
-							r.setStart(stps.get(0));
-							r.setDirection(direction);
-							if (locationToGo != null) {
-								int distToLoc = Integer.MAX_VALUE;
-								for (TransportStop st : stps) {
-									double ndist = MapUtils.getDistance(locationToGo, st.getLocation());
-									if (ndist < distToLoc) {
-										distToLoc = (int) ndist;
-										r.setStop(st);
-										r.setDistToLocation(distToLoc);
-									}
-								}
-								
-							}
-							registeredRoutes.put(idToPut, r);
+
 						}
+						listRoutes.add(r);
 					}
 				}
 			}
 			if (log.isDebugEnabled()) {
 				log.debug(String.format("Search for routes done in %s ms found %s.", //$NON-NLS-1$
-						System.currentTimeMillis() - now, registeredRoutes.size()));
+						System.currentTimeMillis() - now, listRoutes.size()));
 			}
 
-			listRoutes = new ArrayList<RouteInfoLocation>(registeredRoutes.values());
 			if (locationToGo != null) {
 				Collections.sort(listRoutes, new Comparator<RouteInfoLocation>() {
 					@Override
@@ -214,8 +214,8 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 				Collections.sort(listRoutes, new Comparator<RouteInfoLocation>() {
 					@Override
 					public int compare(RouteInfoLocation object1, RouteInfoLocation object2) {
-						return Double.compare(MapUtils.getDistance(loc, object1.getStart().getLocation()), MapUtils.getDistance(loc, object2
-								.getStart().getLocation()));
+						return Double.compare(MapUtils.getDistance(loc, object1.getStart().getLocation()), MapUtils.getDistance(loc,
+								object2.getStart().getLocation()));
 					}
 
 				});

@@ -17,15 +17,19 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.DayNightMode;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
-import net.osmand.plus.activities.RouteProvider.RouteService;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.views.SeekBarPreference;
+import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRulesStorage;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -40,11 +44,13 @@ import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.location.LocationManager;
 import android.media.AudioManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
@@ -61,6 +67,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private static final String MORE_VALUE = "MORE_VALUE";
 	
 	private Preference saveCurrentTrack;
+	private Preference testVoiceCommands;
 
 	private EditTextPreference applicationDir;
 	private ListPreference tileSourcePreference;
@@ -81,8 +88,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private Map<String, OsmandPreference<Integer>> seekBarPreferences = new LinkedHashMap<String, OsmandPreference<Integer>>();
 	
 	private Map<String, Map<String, ?>> listPrefValues = new LinkedHashMap<String, Map<String, ?>>();
-	
-	
 	
 	private void registerBooleanPreference(OsmandPreference<Boolean> b, PreferenceScreen screen){
 		CheckBoxPreference p = (CheckBoxPreference) screen.findPreference(b.getId());
@@ -162,15 +167,17 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	    registerBooleanPreference(osmandSettings.SCROLL_MAP_BY_GESTURES,screen); 
 	    registerBooleanPreference(osmandSettings.USE_HIGH_RES_MAPS,screen); 
 	    registerBooleanPreference(osmandSettings.USE_ENGLISH_NAMES,screen); 
-	    registerBooleanPreference(osmandSettings.SHOW_MORE_MAP_DETAIL,screen); 
 	    registerBooleanPreference(osmandSettings.AUTO_ZOOM_MAP,screen); 
+	    registerBooleanPreference(osmandSettings.AUTO_FOLLOW_ROUTE_NAV,screen);
 	    registerBooleanPreference(osmandSettings.SAVE_TRACK_TO_GPX,screen); 
 	    registerBooleanPreference(osmandSettings.DEBUG_RENDERING_INFO,screen); 
-	    registerBooleanPreference(osmandSettings.USE_STEP_BY_STEP_RENDERING,screen); 
 	    registerBooleanPreference(osmandSettings.FAST_ROUTE_MODE,screen);
 	    registerBooleanPreference(osmandSettings.USE_OSMAND_ROUTING_SERVICE_ALWAYS,screen); 
 	    registerBooleanPreference(osmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES,screen);
 	    registerBooleanPreference(osmandSettings.MAP_VECTOR_DATA,screen);
+	    registerBooleanPreference(osmandSettings.TRANSPARENT_MAP_THEME,screen);
+	    registerBooleanPreference(osmandSettings.TEST_ANIMATE_ROUTING,screen);
+	    registerBooleanPreference(osmandSettings.NATIVE_RENDERING,screen);
 	    
 		registerEditTextPreference(osmandSettings.USER_NAME, screen);
 		registerEditTextPreference(osmandSettings.USER_PASSWORD, screen);
@@ -210,7 +217,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerListPreference(osmandSettings.METRIC_SYSTEM, screen, entries, MetricsConstants.values());
 		
 		//getResources().getAssets().getLocales();
-		entrieValues = new String[] { "", "en", "cs", "de", "es", "fr", "hu", "it", "pt", "ru", "sk" };
+		entrieValues = new String[] { "", "en", "cs", "de", "es", "jp", "fr", "hu", "it", "pl", "pt", "ru", "sk", "vi" };
 		entries = new String[entrieValues.length];
 		entries[0] = getString(R.string.system_locale);
 		for (int i = 1; i < entries.length; i++) {
@@ -290,6 +297,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		entries = (String[]) rendererNames.toArray(new String[rendererNames.size()]);
 		registerListPreference(osmandSettings.RENDERER, screen, entries, entries);
 		
+		createCustomRenderingProperties(false);
+		
 		tileSourcePreference = (ListPreference) screen.findPreference(osmandSettings.MAP_TILE_SOURCES.getId());
 		tileSourcePreference.setOnPreferenceChangeListener(this);
 		overlayPreference = (ListPreference) screen.findPreference(osmandSettings.MAP_OVERLAY.getId());
@@ -302,10 +311,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		localIndexes.setOnPreferenceClickListener(this);
 		saveCurrentTrack =(Preference) screen.findPreference(OsmandSettings.SAVE_CURRENT_TRACK);
 		saveCurrentTrack.setOnPreferenceClickListener(this);
+		testVoiceCommands =(Preference) screen.findPreference("test_voice_commands");
+		testVoiceCommands.setOnPreferenceClickListener(this);
 		routeServiceEnabled =(CheckBoxPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_ENABLED);
 		routeServiceEnabled.setOnPreferenceChangeListener(this);
 		applicationDir = (EditTextPreference) screen.findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
 		applicationDir.setOnPreferenceChangeListener(this);
+		
 		
 		
 		broadcastReceiver = new BroadcastReceiver(){
@@ -337,6 +349,37 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			}
 		}
     }
+
+	private void createCustomRenderingProperties(boolean update) {
+		RenderingRulesStorage renderer = getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
+		PreferenceCategory cat = (PreferenceCategory) findPreference("custom_vector_rendering");
+		cat.removeAll();
+		if(renderer != null){
+			for(RenderingRuleProperty p : renderer.PROPS.getCustomRules()){
+				CommonPreference<String> custom = getMyApplication().getSettings().getCustomRenderProperty(p.getAttrName());
+				ListPreference lp = new ListPreference(this);
+				lp.setOnPreferenceChangeListener(this);
+				lp.setKey(custom.getId());
+				lp.setTitle(p.getName());
+				lp.setSummary(p.getDescription());
+				cat.addPreference(lp);
+				
+				LinkedHashMap<String, Object> vals = new LinkedHashMap<String, Object>();
+				screenPreferences.put(custom.getId(), lp);
+				listPreferences.put(custom.getId(), custom);
+				listPrefValues.put(custom.getId(), vals);
+				String[] names = p.getPossibleValues();
+				for(int i=0; i<names.length; i++){
+					vals.put(names[i], names[i]);
+				}
+				
+			}
+			if(update) {
+				updateAllSettings();
+			}
+		}
+		
+	}
 
 	private void reloadVoiceListPreference(PreferenceScreen screen) {
 		String[] entries;
@@ -481,6 +524,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					return false;
 				}
 			}
+			if (boolPref.getId().equals(osmandSettings.NATIVE_RENDERING.getId())) {
+				if(((Boolean)newValue).booleanValue()) {
+					loadNativeLibrary();
+				}
+			}
 		} else if (seekPref != null) {
 			seekPref.set((Integer) newValue);
 		} else if (editPref != null) {
@@ -520,6 +568,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				} else {
 					AccessibleToast.makeText(this, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 				}
+				createCustomRenderingProperties(true);
 			}
 		} else if(preference == applicationDir){
 			warnAboutChangingStorage((String) newValue);
@@ -615,6 +664,33 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		impl.run();
 	}
 	
+	public void loadNativeLibrary(){
+		if (!NativeOsmandLibrary.isLoaded()) {
+			final RenderingRulesStorage storage = getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
+			new AsyncTask<Void, Void, Void>() {
+				@Override
+				protected void onPreExecute() {
+					progressDlg = ProgressDialog.show(SettingsActivity.this, getString(R.string.loading_data),
+							getString(R.string.init_native_library), true);
+				};
+
+				@Override
+				protected Void doInBackground(Void... params) {
+					NativeOsmandLibrary.getLibrary(storage);
+					return null;
+				}
+
+				@Override
+				protected void onPostExecute(Void result) {
+					progressDlg.dismiss();
+					if (!NativeOsmandLibrary.isNativeSupported(storage)) {
+						Toast.makeText(SettingsActivity.this, R.string.native_library_not_supported, Toast.LENGTH_LONG).show();
+					}
+				};
+			}.execute();
+		}
+	}
+	
 	private OsmandApplication getMyApplication() {
 		return (OsmandApplication)getApplication();
 	}
@@ -664,33 +740,40 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		if(preference.getKey().equals(OsmandSettings.LOCAL_INDEXES)){
 			startActivity(new Intent(this, LocalIndexesActivity.class));
 			return true;
+		} else if(preference == testVoiceCommands){
+			startActivity(new Intent(this, TestVoiceActivity.class));
+			return true;
 		} else if(preference == saveCurrentTrack){
 			SavingTrackHelper helper = new SavingTrackHelper(this);
 			if (helper.hasDataToSave()) {
-				progressDlg = ProgressDialog.show(this, getString(R.string.saving_gpx_tracks), getString(R.string.saving_gpx_tracks), true);
-				final ProgressDialogImplementation impl = new ProgressDialogImplementation(progressDlg);
-				impl.setRunnable("SavingGPX", new Runnable() { //$NON-NLS-1$
-					@Override
-					public void run() {
-							try {
-								SavingTrackHelper helper = new SavingTrackHelper(SettingsActivity.this);
-								helper.saveDataToGpx();
-								helper.close();
-							} finally {
-								if (progressDlg != null) {
-									progressDlg.dismiss();
-									progressDlg = null;
-								}
-							}
-						}
-					});
-				impl.run();
+				saveCurrentTracks();
 			} else {
 				helper.close();
 			}
 			return true;
 		}
 		return false;
+	}
+
+	private void saveCurrentTracks() {
+		progressDlg = ProgressDialog.show(this, getString(R.string.saving_gpx_tracks), getString(R.string.saving_gpx_tracks), true);
+		final ProgressDialogImplementation impl = new ProgressDialogImplementation(progressDlg);
+		impl.setRunnable("SavingGPX", new Runnable() { //$NON-NLS-1$
+					@Override
+					public void run() {
+						try {
+							SavingTrackHelper helper = new SavingTrackHelper(SettingsActivity.this);
+							helper.saveDataToGpx();
+							helper.close();
+						} finally {
+							if (progressDlg != null) {
+								progressDlg.dismiss();
+								progressDlg = null;
+							}
+						}
+					}
+				});
+		impl.run();
 	}
 	
 	public static void installMapLayers(final Activity activity, final ResultMatcher<TileSourceTemplate> result){

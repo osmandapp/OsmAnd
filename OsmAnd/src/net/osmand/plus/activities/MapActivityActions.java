@@ -12,8 +12,8 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.CallbackWithObject;
 import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
-import net.osmand.LogUtil;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.LogUtil;
 import net.osmand.data.Amenity;
 import net.osmand.map.ITileSource;
 import net.osmand.osm.LatLon;
@@ -23,23 +23,25 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
-import net.osmand.plus.activities.RouteProvider.GPXRouteParams;
+import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.location.Location;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.text.ClipboardManager;
 import android.text.Html;
 import android.util.FloatMath;
@@ -53,7 +55,22 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-public class MapActivityActions {
+public class MapActivityActions implements DialogProvider {
+	
+	private static final String KEY_LONGITUDE = "longitude";
+	private static final String KEY_LATITUDE = "latitude";
+	private static final String KEY_NAME = "name";
+	private static final String KEY_FAVORITE = "favorite";
+	private static final String KEY_ZOOM = "zoom";
+
+	private static final int DIALOG_ADD_FAVORITE = 100;
+	private static final int DIALOG_REPLACE_FAVORITE = 101;
+	private static final int DIALOG_ADD_WAYPOINT = 102;
+	private static final int DIALOG_RELOAD_TITLE = 103;
+	private static final int DIALOG_SHARE_LOCATION = 104;
+	private static final int DIALOG_ABOUT_ROUTE = 105;
+	private static final int DIALOG_SAVE_DIRECTIONS = 106;
+	private Bundle dialogBundle = new Bundle();
 	
 	private final MapActivity mapActivity;
 
@@ -62,18 +79,48 @@ public class MapActivityActions {
 	}
 
 	protected void addFavouritePoint(final double latitude, final double longitude){
-    	final Resources resources = mapActivity.getResources();
-    	final FavouritePoint point = new FavouritePoint(latitude, longitude, resources.getString(R.string.add_favorite_dialog_default_favourite_name),
-    			resources.getString(R.string.favorite_default_category));
+		String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
+		enhance(dialogBundle,latitude,longitude, name);
+		mapActivity.showDialog(DIALOG_ADD_FAVORITE);
+	}
+	
+	private Bundle enhance(Bundle aBundle, double latitude, double longitude, String name) {
+		aBundle.putDouble(KEY_LATITUDE, latitude);
+		aBundle.putDouble(KEY_LONGITUDE, longitude);
+		aBundle.putString(KEY_NAME, name);
+		return aBundle;
+	}
+	
+	private Bundle enhance(Bundle bundle, double latitude, double longitude, final int zoom) {
+		bundle.putInt(KEY_ZOOM, zoom);
+		return bundle;
+	}
+
+	protected void prepareAddFavouriteDialog(Dialog dialog, Bundle args) {
+		final Resources resources = mapActivity.getResources();
+		final double latitude = args.getDouble(KEY_LATITUDE);
+		final double longitude = args.getDouble(KEY_LONGITUDE);
+		String name = resources.getString(R.string.add_favorite_dialog_default_favourite_name);
+		if(args.getString(KEY_NAME) != null) {
+			name = args.getString(KEY_NAME);
+		}
+		final FavouritePoint point = new FavouritePoint(latitude, longitude, name,
+				resources.getString(R.string.favorite_default_category));
+		args.putSerializable(KEY_FAVORITE, point);
+		final EditText editText =  (EditText) dialog.findViewById(R.id.Name);
+		editText.setText(point.getName());
+		final AutoCompleteTextView cat =  (AutoCompleteTextView) dialog.findViewById(R.id.Category);
+		cat.setText(point.getCategory());
+	}
+	
+	protected Dialog createAddFavouriteDialog(final Bundle args) {
     	Builder builder = new AlertDialog.Builder(mapActivity);
 		builder.setTitle(R.string.favourites_edit_dialog_title);
 		final View v = mapActivity.getLayoutInflater().inflate(R.layout.favourite_edit_dialog, null, false);
-		final FavouritesDbHelper helper = ((OsmandApplication)mapActivity.getApplication()).getFavorites();
+		final FavouritesDbHelper helper = getMyApplication().getFavorites();
 		builder.setView(v);
 		final EditText editText =  (EditText) v.findViewById(R.id.Name);
-		editText.setText(point.getName());
 		final AutoCompleteTextView cat =  (AutoCompleteTextView) v.findViewById(R.id.Category);
-		cat.setText(point.getCategory());
 		cat.setAdapter(new ArrayAdapter<String>(mapActivity, R.layout.list_textview, helper.getFavoriteGroups().keySet().toArray(new String[] {})));
 		
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
@@ -81,44 +128,14 @@ public class MapActivityActions {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Builder b = new AlertDialog.Builder(mapActivity);
-				
-				final Collection<FavouritePoint> points = helper.getFavouritePoints();
-				final String[] names = new String[points.size()];
-				final FavouritePoint[] favs = new FavouritePoint[points.size()];
-				Iterator<FavouritePoint> it = points.iterator();
-				int i=0;
-				while(it.hasNext()){
-					FavouritePoint fp = it.next();
-					// filter gpx points
-					if(fp.isStored()){
-						favs[i] = fp;
-						names[i] = fp.getName();
-						i++;
-					}
-				}
-				b.setItems(names, new DialogInterface.OnClickListener(){
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						FavouritePoint fv = favs[which];
-						if(helper.editFavourite(fv, latitude, longitude)){
-							AccessibleToast.makeText(mapActivity, getString(R.string.fav_points_edited), Toast.LENGTH_SHORT).show();
-						}
-						mapActivity.getMapView().refreshMap();
-					}
-				});
-				if(names.length == 0){
-					AccessibleToast.makeText(mapActivity, getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
-					helper.close();
-				}  else {
-					b.show();
-				}
+				mapActivity.showDialog(DIALOG_REPLACE_FAVORITE);
 			}
 			
 		});
 		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
 				final FavouritesDbHelper helper = ((OsmandApplication)mapActivity.getApplication()).getFavorites();
 				point.setName(editText.getText().toString());
 				point.setCategory(cat.getText().toString());
@@ -130,29 +147,82 @@ public class MapActivityActions {
 				mapActivity.getMapView().refreshMap();
 			}
 		});
-		builder.create().show();
+		return builder.create();
     }
 
-    protected void addWaypoint(final double latitude, final double longitude, final SavingTrackHelper savingTrackHelper){
-    	
+	protected Dialog createReplaceFavouriteDialog(final Bundle args) {
+		final FavouritesDbHelper helper = getMyApplication().getFavorites();
+		final Collection<FavouritePoint> points = helper.getFavouritePoints();
+		final String[] names = new String[points.size()];
+		if(names.length == 0){
+			AccessibleToast.makeText(mapActivity, getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
+			helper.close();
+			return null;
+		}
+			
+		Builder b = new AlertDialog.Builder(mapActivity);
+		final FavouritePoint[] favs = new FavouritePoint[points.size()];
+		Iterator<FavouritePoint> it = points.iterator();
+		int i=0;
+		while(it.hasNext()){
+			FavouritePoint fp = it.next();
+			// filter gpx points
+			if(fp.isStored()){
+				favs[i] = fp;
+				names[i] = fp.getName();
+				i++;
+			}
+		}
+		b.setItems(names, new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				FavouritePoint fv = favs[which];
+				FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
+				if(helper.editFavourite(fv, point.getLatitude(), point.getLongitude())){
+					AccessibleToast.makeText(mapActivity, getString(R.string.fav_points_edited), Toast.LENGTH_SHORT).show();
+				}
+				mapActivity.getMapView().refreshMap();
+			}
+		});
+		return b.create();
+	}
+	
+    protected void addWaypoint(final double latitude, final double longitude){
+    	String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
+    	enhance(dialogBundle,latitude,longitude, name);
+    	mapActivity.showDialog(DIALOG_ADD_WAYPOINT);
+    }
+    
+    private Dialog createAddWaypointDialog(final Bundle args) {
     	Builder builder = new AlertDialog.Builder(mapActivity);
 		builder.setTitle(R.string.add_waypoint_dialog_title);
 		final EditText editText = new EditText(mapActivity);
+		editText.setId(R.id.TextView);
 		builder.setView(editText);
+		editText.setPadding(5, 0, 5, 0);
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				double latitude = args.getDouble(KEY_LATITUDE);
+				double longitude = args.getDouble(KEY_LONGITUDE);
 				String name = editText.getText().toString();
-				savingTrackHelper.insertPointData(latitude, longitude, System.currentTimeMillis(), name);
+				mapActivity.getSavingTrackHelper().insertPointData(latitude, longitude, System.currentTimeMillis(), name);
 				AccessibleToast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_waypoint_dialog_added), name), Toast.LENGTH_SHORT)
 							.show();
+				dialog.dismiss();
 			}
 		});
-		builder.create().show();
+		return builder.create();
     }
     
     protected void reloadTile(final int zoom, final double latitude, final double longitude){
+    	enhance(dialogBundle,latitude,longitude,zoom);
+    	mapActivity.showDialog(DIALOG_RELOAD_TITLE);
+    }
+
+    
+    private Dialog createReloadTitleDialog(final Bundle args) {
     	Builder builder = new AlertDialog.Builder(mapActivity);
     	builder.setView(mapActivity.accessibleMessage(R.string.context_menu_item_update_map_confirm));
     	builder.setNegativeButton(R.string.default_buttons_cancel, null);
@@ -160,6 +230,7 @@ public class MapActivityActions {
     	builder.setPositiveButton(R.string.context_menu_item_update_map, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				int zoom = args.getInt(KEY_ZOOM);
 				BaseMapLayer mainLayer = mapView.getMainLayer();
 				if(!(mainLayer instanceof MapTileLayer) || !((MapTileLayer) mainLayer).isVisible()){
 					AccessibleToast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
@@ -192,11 +263,10 @@ public class MapActivityActions {
     	builder.setNeutralButton(R.string.context_menu_item_update_poi, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				updatePoiDb(zoom, latitude, longitude);
-				
+				updatePoiDb(args.getInt(KEY_ZOOM), args.getDouble(KEY_LATITUDE), args.getDouble(KEY_LONGITUDE));
 			}
     	});
-		builder.create().show();
+		return builder.create();
     }
     
     protected String getString(int res){
@@ -214,7 +284,7 @@ public class MapActivityActions {
     		AccessibleToast.makeText(mapActivity, getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_LONG).show();
     		return;
     	} else {
-    		Toast.makeText(mapActivity, getString(R.string.update_poi_does_not_change_indexes), Toast.LENGTH_LONG).show();
+    		AccessibleToast.makeText(mapActivity, getString(R.string.update_poi_does_not_change_indexes), Toast.LENGTH_LONG).show();
     	}
     	final OsmandMapTileView mapView = mapActivity.getMapView();
     	Rect pixRect = new Rect(-mapView.getWidth()/2, -mapView.getHeight()/2, 3*mapView.getWidth()/2, 3*mapView.getHeight()/2);
@@ -266,45 +336,60 @@ public class MapActivityActions {
     }
     
     protected void shareLocation(final double latitude, final double longitude, int zoom){
-    	final String shortOsmUrl = MapUtils.buildShortOsmUrl(latitude, longitude, zoom);
-		// final String simpleGeo = "geo:"+((float) latitude)+","+((float)longitude) +"?z="+zoom;
-		final String appLink = "http://download.osmand.net/go?lat="+((float) latitude)+"&lon="+((float)longitude) +"&z="+zoom;
-		
+    	enhance(dialogBundle,latitude,longitude,zoom);
+    	mapActivity.showDialog(DIALOG_SHARE_LOCATION);
+    }
+    
+    private Dialog createShareLocationDialog(final Bundle args) {
 		AlertDialog.Builder builder = new Builder(mapActivity);
 		builder.setTitle(R.string.send_location_way_choose_title);
 		builder.setItems(new String[]{
 				"Email", "SMS", "Clipboard"
 		}, new DialogInterface.OnClickListener() {
-			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				String sms = mapActivity.getString(R.string.send_location_sms_pattern, shortOsmUrl, appLink);
-				String email = mapActivity.getString(R.string.send_location_email_pattern, shortOsmUrl, appLink);
+				final double latitude = args.getDouble(KEY_LATITUDE);
+				final double longitude = args.getDouble(KEY_LONGITUDE);
+				final int zoom = args.getInt(KEY_ZOOM);
+
+				final String shortOsmUrl = MapUtils.buildShortOsmUrl(latitude, longitude, zoom);
+				// final String simpleGeo = "geo:"+((float) latitude)+","+((float)longitude) +"?z="+zoom;
+				final String appLink = "http://download.osmand.net/go?lat="+((float) latitude)+"&lon="+((float)longitude) +"&z="+zoom;
 				if(which == 0){
+					String email = mapActivity.getString(R.string.send_location_email_pattern, shortOsmUrl, appLink);
 					Intent intent = new Intent(Intent.ACTION_SEND);
 					intent.setType("vnd.android.cursor.dir/email"); //$NON-NLS-1$
 					intent.putExtra(Intent.EXTRA_SUBJECT, "Mine location"); //$NON-NLS-1$
 					intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(email));
 					intent.setType("text/html");
 					mapActivity.startActivity(Intent.createChooser(intent, getString(R.string.send_location)));
-				} else if(which == 1){
-					Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-					sendIntent.putExtra("sms_body", sms); 
-					sendIntent.setType("vnd.android-dir/mms-sms");
-					mapActivity.startActivity(sendIntent);   
-				} else if (which == 2){
-					ClipboardManager clipboard = (ClipboardManager) mapActivity.getSystemService(Activity.CLIPBOARD_SERVICE);
-					clipboard.setText(sms);
+				} else {
+					String sms = mapActivity.getString(R.string.send_location_sms_pattern, shortOsmUrl, appLink);
+					if(which == 1){
+						Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+						sendIntent.putExtra("sms_body", sms); 
+						sendIntent.setType("vnd.android-dir/mms-sms");
+						mapActivity.startActivity(sendIntent);   
+					} else if (which == 2){
+						ClipboardManager clipboard = (ClipboardManager) mapActivity.getSystemService(Activity.CLIPBOARD_SERVICE);
+						clipboard.setText(sms);
+					}
 				}
 				
 			}
 		});
-    	
-    	builder.show();
+    	return builder.create();
     }
     
-    
     protected void aboutRoute() {
+    	mapActivity.showDialog(DIALOG_ABOUT_ROUTE);
+    }
+    
+    private void prepareAboutRouteDialog(Dialog dlg, Bundle args) {
+    	((AlertDialog)dlg).setMessage(mapActivity.getRoutingHelper().getGeneralRouteInformation());
+    }
+    
+    private Dialog createAboutRouteDialog(Bundle args) {
     	DialogInterface.OnClickListener showRoute = new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -325,19 +410,25 @@ public class MapActivityActions {
 		builder.setPositiveButton(R.string.default_buttons_save, saveDirections);
 		builder.setNeutralButton(R.string.route_about, showRoute);
 		builder.setNegativeButton(R.string.close, null);
-		builder.show();
+		return builder.create();
+    }
+    
+    private boolean checkPointToNavigate(){
+    	MapActivityLayers mapLayers = mapActivity.getMapLayers();
+    	if(mapLayers.getNavigationLayer().getPointToNavigate() == null){
+			AccessibleToast.makeText(mapActivity, R.string.mark_final_location_first, Toast.LENGTH_LONG).show();
+			return false;
+		}
+    	return true;
     }
     
     protected void getDirections(final double lat, final double lon, boolean followEnabled){
-    	MapActivityLayers mapLayers = mapActivity.getMapLayers();
+    	
     	final OsmandSettings settings = OsmandSettings.getOsmandSettings(mapActivity);
     	final RoutingHelper routingHelper = mapActivity.getRoutingHelper();
-    	if(mapLayers.getNavigationLayer().getPointToNavigate() == null){
-			AccessibleToast.makeText(mapActivity, R.string.mark_final_location_first, Toast.LENGTH_LONG).show();
-			return;
-		}
     	
     	Builder builder = new AlertDialog.Builder(mapActivity);
+    	
     	
     	View view = mapActivity.getLayoutInflater().inflate(R.layout.calculate_route, null);
     	final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
@@ -345,7 +436,7 @@ public class MapActivityActions {
     	buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
     	buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
     	ApplicationMode appMode = settings.getApplicationMode();
-    	for(int i=0; i< buttons.length; i++){
+		for (int i = 0; i < buttons.length; i++) {
     		if(buttons[i] != null){
     			final int ind = i;
     			ToggleButton b = buttons[i];
@@ -386,6 +477,9 @@ public class MapActivityActions {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				ApplicationMode mode = getAppMode(buttons, settings);
+				if(!checkPointToNavigate()){
+					return;
+				}
 				Location location = new Location("map"); //$NON-NLS-1$
 				location.setLatitude(lat);
 				location.setLongitude(lon);
@@ -400,6 +494,9 @@ public class MapActivityActions {
     	DialogInterface.OnClickListener followCall = new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				if(!checkPointToNavigate()){
+					return;
+				}
 				ApplicationMode mode = getAppMode(buttons, settings);
 				// change global settings
 				boolean changed = settings.APPLICATION_MODE.set(mode);
@@ -437,7 +534,7 @@ public class MapActivityActions {
 		} else {
 			builder.setTitle(R.string.show_route);
 			view.findViewById(R.id.TextView).setVisibility(View.GONE);
-    		builder.setPositiveButton(R.string.show_route, onlyShowCall);
+    		builder.setPositiveButton(R.string.show_gpx_route, onlyShowCall);
     		builder.setNegativeButton(R.string.default_buttons_cancel, null);
     	}
     	builder.show();
@@ -537,6 +634,10 @@ public class MapActivityActions {
     }
 
 	public void saveDirections() {
+		mapActivity.showDialog(DIALOG_SAVE_DIRECTIONS);
+	}
+	
+	private Dialog createSaveDirections() {
 		OsmandSettings settings = getMyApplication().getSettings();
 		final File fileDir = settings.extendOsmandPath(ResourceManager.GPX_PATH);
 		final Dialog dlg = new Dialog(mapActivity);
@@ -574,7 +675,7 @@ public class MapActivityActions {
 		});
 		
 		
-		dlg.show();
+		return dlg;
 	}
 	
 	
@@ -594,10 +695,54 @@ public class MapActivityActions {
 		@Override
 		protected void onPostExecute(String result) {
 			if(result != null){
-				Toast.makeText(mapActivity, result, Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(mapActivity, result, Toast.LENGTH_LONG).show();
 			}
 		}
 		
+	}
+
+	@Override
+	public Dialog onCreateDialog(int id) {
+		Bundle args = dialogBundle;
+		switch (id) {
+			case DIALOG_ADD_FAVORITE:
+				return createAddFavouriteDialog(args);
+			case DIALOG_REPLACE_FAVORITE:
+				return createReplaceFavouriteDialog(args);
+			case DIALOG_ADD_WAYPOINT:
+				return createAddWaypointDialog(args);
+			case DIALOG_RELOAD_TITLE:
+				return createReloadTitleDialog(args);
+			case DIALOG_SHARE_LOCATION:
+				return createShareLocationDialog(args);
+			case DIALOG_ABOUT_ROUTE:
+				return createAboutRouteDialog(args);
+			case DIALOG_SAVE_DIRECTIONS:
+				return createSaveDirections();
+		}
+		return null;
+	}
+
+	@Override
+	public void onPrepareDialog(int id, Dialog dialog) {
+		Bundle args = dialogBundle;
+		switch (id) {
+		case DIALOG_ADD_FAVORITE:
+			prepareAddFavouriteDialog(dialog, args);
+			break;
+		case DIALOG_ADD_WAYPOINT:
+			EditText v = (EditText) dialog.getWindow().findViewById(R.id.TextView);
+			v.setPadding(5, 0, 5, 0);
+			if(args.getString(KEY_NAME) != null) {
+				v.setText(args.getString(KEY_NAME));
+			} else {
+				v.setText("");
+			}
+			break;
+		case DIALOG_ABOUT_ROUTE:
+			prepareAboutRouteDialog(dialog, args);
+			break;
+		}
 	}
 
 }

@@ -23,16 +23,17 @@
 					android:contentDescription="@string/help"
   					android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="6dp"/>				  
 		<ImageButton android:src="@drawable/headliner_close"  android:layout_marginRight="4dp" android:id="@+id/CloseButton"
-						android:contentDescription="@string/close" android:layout_marginTop="5dp"
+					android:layout_marginTop="5dp" android:contentDescription="@string/close"
   					android:layout_height="wrap_content" android:layout_width="wrap_content"/>		  
 	</LinearLayout>
 	</LinearLayout>
 	
 	<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp">
 	 	<TableRow android:layout_height = "wrap_content"  >
-	 		<LinearLayout android:id="@+id/MapButton" android:background="@drawable/bg_left" android:clickable="true"
-	 					android:focusable="true" android:layout_weight="1" android:layout_height="165dp">
-	 			<Button android:clickable="false" android:duplicateParentState="true" android:layout_height="wrap_content" android:layout_width="wrap_content" 
+	 		<LinearLayout android:id="@+id/MapButton" android:background="@drawable/bg_left" 
+	 					android:focusable="true" android:clickable="true"
+	 					android:layout_weight="1" android:layout_height="165dp">
+	 			<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
 					android:layout_gravity="center_vertical" 
 					android:layout_marginLeft="15dp"
 				    android:text="@string/map_Button" android:textColor="#000000" android:typeface="serif"
@@ -45,8 +46,9 @@
 					android:layout_height="wrap_content"/>
 	 		</LinearLayout>
 			<LinearLayout android:layout_weight="2" android:layout_height="fill_parent" />
-			<LinearLayout android:id="@+id/SearchButton"  android:background="@drawable/bg_right" android:clickable="true"
-						android:focusable="true" android:layout_weight="1" android:layout_height="165dp">
+			<LinearLayout android:id="@+id/SearchButton"  android:background="@drawable/bg_right" 
+						android:focusable="true" android:clickable="true"
+						android:layout_weight="1" android:layout_height="165dp">
 				<ImageView
 					android:src="@drawable/button_icon_search"
 					android:layout_gravity="center|left"
@@ -62,9 +64,10 @@
 			</LinearLayout>
 		</TableRow>
 		<TableRow android:layout_height = "wrap_content" android:layout_marginTop = "15dp"  >
-		<LinearLayout android:id="@+id/FavoritesButton"  android:background="@drawable/bg_left" 
-					android:focusable="true" android:layout_weight="1" android:layout_height="165dp">
-				<Button android:clickable="false" android:duplicateParentState="true" android:layout_height="wrap_content" android:layout_width="wrap_content" 
+		<LinearLayout android:id="@+id/FavoritesButton"  android:background="@drawable/bg_left"
+					android:focusable="true" android:clickable="true" 
+					android:layout_weight="1" android:layout_height="165dp">
+				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
 					android:layout_marginLeft="15dp" android:layout_gravity="center_vertical|left"
 				    android:text="@string/favorites_Button"  android:textColor="#000000" android:typeface="serif"
 				    android:layout_weight="1"
@@ -76,8 +79,9 @@
 					android:layout_height="wrap_content"/>
 	 		</LinearLayout>
 			<LinearLayout android:layout_weight="2" android:layout_height="fill_parent" />
-			<LinearLayout android:id="@+id/SettingsButton"  android:background="@drawable/bg_right" 
-					android:focusable="true" android:layout_weight="1" android:layout_height="165dp">
+			<LinearLayout android:id="@+id/SettingsButton"  android:background="@drawable/bg_right"
+					android:focusable="true" android:clickable="true" 
+					android:layout_weight="1" android:layout_height="165dp">
 				<ImageView
 					android:src="@drawable/button_icon_settings"
 					android:layout_gravity="center|left"

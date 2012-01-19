@@ -20,18 +20,20 @@
 				  android:text="0.5.1 beta(b6)" android:textColor="#000000"	android:typeface="serif" android:id="@+id/TextVersion"
 				  android:textSize="13sp"/> 
 		</LinearLayout>
-	    <ImageButton android:id="@+id/HelpButton" android:contentDescription="@string/help" android:layout_marginTop="4dp" android:layout_marginLeft="4dp" 
-  					android:layout_height="wrap_content" android:layout_width="wrap_content" android:src="@drawable/help_icon"/>				  
-		<ImageButton android:id="@+id/CloseButton" android:layout_marginRight="2dp"
-					android:contentDescription="@string/close" android:layout_marginTop="4dp"
-  					android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="0dp" android:src="@drawable/headliner_close"/>		  
+	    <ImageButton android:id="@+id/HelpButton" android:layout_marginTop="4dp" android:layout_marginLeft="4dp" 
+  					android:layout_height="wrap_content" android:layout_width="wrap_content" android:src="@drawable/help_icon"
+  					android:contentDescription="@string/help"/>				  
+		<ImageButton android:layout_marginRight="2dp" android:id="@+id/CloseButton"
+					android:layout_marginTop="4dp"
+  					android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="0dp" android:src="@drawable/headliner_close"
+  					android:contentDescription="@string/close"/>		  
 	</LinearLayout>
 	</LinearLayout>
 	
 	<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
 	 	<TableRow android:layout_height = "wrap_content"  android:layout_marginTop="20dp" >
 	 		<LinearLayout android:id="@+id/MapButton" android:background="@drawable/bg_leftr" android:orientation="vertical" android:clickable="true"
-	 					android:focusable="true" android:layout_weight="3"  android:layout_height="175dp">
+	 					android:layout_weight="3"  android:layout_height="175dp" android:focusable="true">
 	 			<ImageView
 					android:src="@drawable/button_icon_map" android:scaleType="center" android:layout_gravity="center"
 					 android:layout_weight="1" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
@@ -43,7 +45,7 @@
 	 		</LinearLayout>
 			<LinearLayout android:layout_weight="2" android:layout_height="fill_parent" />
 			<LinearLayout android:id="@+id/SearchButton"  android:background="@drawable/bg_rightr" android:orientation="vertical" android:clickable="true"
-						android:focusable="true" android:layout_weight="3"  android:layout_height="175dp">
+						android:layout_weight="3"  android:layout_height="175dp" android:focusable="true">
 					<ImageView
 					android:src="@drawable/button_icon_search" android:scaleType="center" android:layout_gravity="center"
 					android:layout_weight="1" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
@@ -57,7 +59,7 @@
 		</TableRow>
 		<TableRow android:layout_height = "wrap_content" android:layout_marginTop="10dp">
 			<LinearLayout android:id="@+id/FavoritesButton" android:background="@drawable/bg_leftr" android:orientation="vertical" android:clickable="true"
-	 					android:focusable="true" android:layout_weight="3" android:layout_height="175dp">
+	 					android:layout_weight="3" android:layout_height="175dp" android:focusable="true">
 	 			<ImageView
 					android:src="@drawable/button_icon_favorites" android:scaleType="center" android:layout_gravity="center"
 					 android:layout_weight="1" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
@@ -69,7 +71,7 @@
 	 		</LinearLayout>
 			<LinearLayout android:layout_weight="2" android:layout_height="fill_parent" />
 			<LinearLayout android:id="@+id/SettingsButton"  android:background="@drawable/bg_rightr" android:orientation="vertical" android:clickable="true"
-						android:focusable="true" android:layout_weight="3" android:layout_height="175dp">
+						android:layout_weight="3" android:layout_height="175dp" android:focusable="true">
 				<ImageView
 					android:src="@drawable/button_icon_settings" android:scaleType="center" android:layout_gravity="center"
 					android:layout_weight="1" android:layout_width="wrap_content" android:layout_height="wrap_content"/>

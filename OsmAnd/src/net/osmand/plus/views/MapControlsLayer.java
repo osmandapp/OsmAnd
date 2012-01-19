@@ -28,7 +28,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
-public class MapControlsLayer implements OsmandMapLayer {
+public class MapControlsLayer extends OsmandMapLayer {
 
 	private static final int SHOW_SEEKBAR_MSG_ID = 2;
 	private static final int SHOW_SEEKBAR_DELAY = 7000;
@@ -139,12 +139,14 @@ public class MapControlsLayer implements OsmandMapLayer {
 		if(appMode != cacheApplicationMode){
 			modeShadow.setBounds(backToMenuButton.getLeft() + (int) (2 * scaleCoefficient), backToMenuButton.getTop() - (int) (20 * scaleCoefficient),
 					backToMenuButton.getRight() - (int) (4 * scaleCoefficient), backToMenuButton.getBottom());
-			if(appMode == ApplicationMode.BICYCLE){
-				cacheAppModeIcon = view.getResources().getDrawable(R.drawable.bicycle_small);
-			} else if(appMode == ApplicationMode.CAR){
+			if(appMode == ApplicationMode.CAR){
 				cacheAppModeIcon = view.getResources().getDrawable(R.drawable.car_small);
-			} else {
+			} else if(appMode == ApplicationMode.BICYCLE){
+				cacheAppModeIcon = view.getResources().getDrawable(R.drawable.bicycle_small);
+			} else if(appMode == ApplicationMode.PEDESTRIAN){
 				cacheAppModeIcon = view.getResources().getDrawable(R.drawable.pedestrian_small);
+			} else {
+				cacheAppModeIcon = view.getResources().getDrawable(R.drawable.default_mode_small);
 			}
 			int l = modeShadow.getBounds().left + (modeShadow.getBounds().width() - cacheAppModeIcon.getMinimumWidth()) / 2;
 			int t = (int) (modeShadow.getBounds().top + 5 * scaleCoefficient);
@@ -159,10 +161,10 @@ public class MapControlsLayer implements OsmandMapLayer {
 	
 	private void onApplicationModePress() {
 		final QuickAction mQuickAction = new QuickAction(backToMenuButton);
-		int[] icons = new int[] { R.drawable.pedestrian_small, R.drawable.bicycle_small, R.drawable.car_small, R.drawable.pedestrian_small };
-		int[] values = new int[] { R.string.app_mode_default, R.string.app_mode_bicycle, R.string.app_mode_car,
+		int[] icons = new int[] { R.drawable.default_mode_small, R.drawable.car_small, R.drawable.bicycle_small, R.drawable.pedestrian_small };
+		int[] values = new int[] { R.string.app_mode_default, R.string.app_mode_car, R.string.app_mode_bicycle,
 				R.string.app_mode_pedestrian };
-		final ApplicationMode[] modes = new ApplicationMode[] { ApplicationMode.DEFAULT, ApplicationMode.BICYCLE, ApplicationMode.CAR,
+		final ApplicationMode[] modes = new ApplicationMode[] { ApplicationMode.DEFAULT, ApplicationMode.CAR, ApplicationMode.BICYCLE,
 				ApplicationMode.PEDESTRIAN };
 		for (int i = 0; i < 4; i++) {
 			final ActionItem action = new ActionItem();
@@ -213,13 +215,9 @@ public class MapControlsLayer implements OsmandMapLayer {
 		}
 	}
 
-	@Override
-	public boolean onLongPressEvent(PointF point) {
-		return false;
-	}
 
 	@Override
-	public boolean onTouchEvent(PointF point) {
+	public boolean onSingleTap(PointF point) {
 		if (modeShadow.getBounds().contains((int) point.x, (int) point.y)) {
 			onApplicationModePress();
 			return true;

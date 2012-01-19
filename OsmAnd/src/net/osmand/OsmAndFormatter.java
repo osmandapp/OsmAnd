@@ -4,6 +4,7 @@ import java.text.MessageFormat;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
+import net.osmand.data.City.CityType;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
@@ -80,18 +81,44 @@ public class OsmAndFormatter {
 			return ((int) meters) + " " + ctx.getString(R.string.m); //$NON-NLS-1$
 		}
 	}
+
+	public static String getFormattedAlt(double alt, Context ctx) {
+		OsmandSettings settings = OsmandSettings.getOsmandSettings(ctx);
+		MetricsConstants mc = settings.METRIC_SYSTEM.get();
+		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
+			return ((int) alt) + " " + ctx.getString(R.string.m);
+		} else {
+			return ((int) (alt * FOOTS_IN_ONE_METER)) + " " + ctx.getString(R.string.foot);
+		}
+	}
 	
 	public static String getFormattedSpeed(float metersperseconds, Context ctx) {
 		OsmandSettings settings = OsmandSettings.getOsmandSettings(ctx);
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		float kmh = metersperseconds * 3.6f;
 		if(mc == MetricsConstants.KILOMETERS_AND_METERS){
-			return ((int) kmh) + " " + ctx.getString(R.string.km_h); //$NON-NLS-1$
+			return ((int) kmh) + " " + ctx.getString(R.string.km_h);
 		} else {
-			return ((int) (kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE)) + " " + ctx.getString(R.string.mile_per_hour); //$NON-NLS-1$
+			return ((int) (kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE)) + " "+ ctx.getString(R.string.mile_per_hour);
 		}
 	}
 	
+	
+	public static String toPublicString(CityType t, Context ctx) {
+		switch (t) {
+		case CITY:
+			return ctx.getString(R.string.city_type_city);
+		case HAMLET:
+			return ctx.getString(R.string.city_type_hamlet);
+		case TOWN:
+			return ctx.getString(R.string.city_type_town);
+		case VILLAGE:
+			return ctx.getString(R.string.city_type_village);
+		case SUBURB:
+			return ctx.getString(R.string.city_type_suburb);
+		}
+		return "";
+	}
 	public static String toPublicString(AmenityType t, Context ctx) {
 		switch (t) {
 		case SUSTENANCE:

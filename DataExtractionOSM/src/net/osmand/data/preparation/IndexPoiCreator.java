@@ -90,6 +90,10 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 			}
 		}
 	}
+	
+	public void removePoiFile(){
+		Algoritms.removeAllFiles(poiIndexFile);
+	}
 
 	private void checkEntity(Entity e) {
 		String name = e.getTag(OSMTagKey.NAME);

@@ -141,6 +141,11 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
     }
 
     @Override
+    public String getObjectName(Object o) {
+        return mapView.getContext().getString(R.string.i_am_here);
+    }
+
+    @Override
     public DialogInterface.OnClickListener getActionListener(List<String> actionsList, Object o) {
         return null;
     }

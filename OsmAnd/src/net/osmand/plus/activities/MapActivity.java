@@ -9,9 +9,9 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.access.NavigationInfo;
 import net.osmand.Algoritms;
 import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.LogUtil;
 import net.osmand.Version;
-import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
@@ -22,20 +22,22 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
-import net.osmand.plus.activities.RouteProvider.GPXRouteParams;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.routing.RouteAnimation;
+import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointLocationLayer;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
-import android.app.AlertDialog.Builder;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.DialogInterface;
@@ -60,6 +62,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings.Secure;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -67,12 +70,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class MapActivity extends AccessibleActivity implements IMapLocationListener, SensorEventListener {
@@ -103,11 +105,10 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	
     /** Called when the activity is first created. */
 	private OsmandMapTileView mapView;
-	private MapActivityActions mapActions = new MapActivityActions(this);
-	private MapActivityLayers mapLayers = new MapActivityLayers(this);
-	private final NavigationInfo navigationInfo = new NavigationInfo(this);
-
-	private ImageButton backToLocation;
+	final private MapActivityActions mapActions = new MapActivityActions(this);
+	private EditingPOIActivity poiActions;
+	final private MapActivityLayers mapLayers = new MapActivityLayers(this);
+	final private NavigationInfo navigationInfo = new NavigationInfo(this);
 	
 	private SavingTrackHelper savingTrackHelper;
 	private RoutingHelper routingHelper;
@@ -128,8 +129,11 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	// Store previous map rotation settings for rotate button
 	private Integer previousMapRotate = null;
 
+	private RouteAnimation routeAnimation = new RouteAnimation();
+
 	private boolean isMapLinkedToLocation = false;
 	private ProgressDialog startProgressDialog;
+	private List<DialogProvider> dialogProviders = new ArrayList<DialogProvider>(2);
 	
 	private Notification getNotification(){
 		Intent notificationIndent = new Intent(this, MapActivity.class);
@@ -175,6 +179,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			}
 
 		});
+		poiActions = new EditingPOIActivity(this);
 		MapTileDownloader.getInstance().addDownloaderCallback(new IMapDownloaderCallback(){
 			@Override
 			public void tileDownloaded(DownloadRequest request) {
@@ -222,15 +227,9 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			}
 		}
 		
-		backToLocation = (ImageButton)findViewById(R.id.BackToLocation);
-		backToLocation.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				backToLocationImpl();
-			}
-		});
-
-		accessibleContent.add(backToLocation);
+		dialogProviders.add(mapActions);
+		dialogProviders.add(poiActions);
+		dialogProviders.add(mapLayers.getOsmBugsLayer());
 	}
     
     @Override
@@ -256,7 +255,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 
 		mapLayers.getPoiMapLayer().setFilter(settings.getPoiFilterForMap((OsmandApplication) getApplication()));
 
-		backToLocation.setVisibility(View.INVISIBLE);
+		mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(false);
 		// by default turn off causing unexpected movements due to network establishing
 		// best to show previous location
 		setMapLinkedToLocation(false);
@@ -290,12 +289,22 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		showAndHideMapPosition();
 
 		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
-		LatLon latLon = settings.getAndClearMapLocationToShow();
-		if (latLon != null && !latLon.equals(cur)) {
-			mapView.getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), settings.getMapZoomToShow(), true);
+		LatLon latLonToShow = settings.getAndClearMapLocationToShow();
+		String mapLabelToShow = settings.getAndClearMapLabelToShow();
+		if(mapLabelToShow != null && latLonToShow != null){
+			if(mapLabelToShow.length() == 0){
+				mapLayers.getContextMenuLayer().setLocation(latLonToShow, mapLabelToShow);
+			} else {
+				mapLayers.getContextMenuLayer().setLocation(latLonToShow, mapLabelToShow);
+			}
+		}
+		if (latLonToShow != null && !latLonToShow.equals(cur)) {
+			mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(), latLonToShow.getLongitude(), 
+					settings.getMapZoomToShow(), true);
+			
 		}
 
-		View progress = findViewById(R.id.ProgressBar);
+		View progress = mapLayers.getMapInfoLayer().getProgressBar();
 		if (progress != null) {
 			getMyApplication().getResourceManager().setBusyIndicator(new BusyIndicator(this, progress));
 		}
@@ -368,13 +377,31 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		return ((OsmandApplication) getApplication());
 	}
     
+	public void addDialogProvider(DialogProvider dp) {
+		dialogProviders.add(dp);
+	}
+	
     @Override
 	protected Dialog onCreateDialog(int id) {
-		if(id == OsmandApplication.PROGRESS_DIALOG){
+    	Dialog dialog = null;
+    	for (DialogProvider dp : dialogProviders) {
+    		dialog = dp.onCreateDialog(id);
+    		if (dialog != null) {
+    			return dialog;
+    		}
+    	}
+		if (id == OsmandApplication.PROGRESS_DIALOG) {
 			return startProgressDialog;
 		}
-		return super.onCreateDialog(id);
+		return null;
 	}
+    
+    @Override
+    protected void onPrepareDialog(int id, Dialog dialog) {
+    	for (DialogProvider dp : dialogProviders) {
+    		dp.onPrepareDialog(id, dialog);
+    	}
+    }
     
     public void changeZoom(int newZoom){
     	boolean changeLocation = settings.AUTO_ZOOM_MAP.get();
@@ -561,7 +588,12 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
                       });
         menu.show();
     }
-
+    
+    public void setMapLocation(double lat, double lon){
+		mapView.setLatLon(lat, lon);
+		locationChanged(lat, lon, this);
+	}
+    
     @Override
     public boolean onTrackballEvent(MotionEvent event) {
     	if(event.getAction() == MotionEvent.ACTION_MOVE && settings.USE_TRACKBALL_FOR_MOVEMENTS.get()){
@@ -604,6 +636,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
     protected void onDestroy() {
     	super.onDestroy();
     	savingTrackHelper.close();
+    	routeAnimation.close();
     	if(mNotificationManager != null){
     		mNotificationManager.cancel(APP_NOTIFICATION_ID);
     	}
@@ -633,8 +666,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
     }
     
-    protected void backToLocationImpl() {
-		backToLocation.setVisibility(View.INVISIBLE);
+    public void backToLocationImpl() {
+    	mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(false);
 		PointLocationLayer locationLayer = mapLayers.getLocationLayer();
 		if(!isMapLinkedToLocation()){
 			setMapLinkedToLocation(true);
@@ -735,13 +768,13 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				}
 				mapView.setLatLon(location.getLatitude(), location.getLongitude());
 			} else {
-				if(backToLocation.getVisibility() != View.VISIBLE){
-					backToLocation.setVisibility(View.VISIBLE);
+				if(!mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()){
+					mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(true);
 				}
 			}
 		} else {
-			if(backToLocation.getVisibility() != View.INVISIBLE){
-				backToLocation.setVisibility(View.INVISIBLE);
+			if(mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()){
+				mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(false);
 			}
 		}
     	// When location is changed we need to refresh map in order to show movement! 
@@ -918,6 +951,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		routingHelper.setAppMode(settings.getApplicationMode());
 		mapView.setMapPosition(settings.POSITION_ON_MAP.get());
 		registerUnregisterSensor(getLastKnownLocation());
+		mapLayers.getMapInfoLayer().applyTheme();
 		mapLayers.updateLayers(mapView);
 	}
 	
@@ -947,7 +981,15 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			}
 			return true;
 		}
-		return super.onKeyUp(keyCode, event);
+		// Parrot device has only dpad left and right
+		if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+			changeZoom(mapView.getZoom() - 1);
+	    	return true;
+		} else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+			changeZoom(mapView.getZoom() + 1);
+	    	return true;
+		}
+		return false;
 	}
 	
 	public void checkExternalStorage(){
@@ -986,20 +1028,15 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		// when user start dragging 
 		if(mapLayers.getLocationLayer().getLastKnownLocation() != null){
 			setMapLinkedToLocation(false);
-			if (backToLocation.getVisibility() != View.VISIBLE) {
+			if (!mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()) {
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						backToLocation.setVisibility(View.VISIBLE);
+						mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(true);
 					}
 				});
 			}
 		}
-	}
-	
-	public void setMapLocation(double lat, double lon){
-		mapView.setLatLon(lat, lon);
-		locationChanged(lat, lon, this);
 	}
 	
 	public OsmandMapTileView getMapView() {
@@ -1024,6 +1061,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		
 	}
 	
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.map_menu, menu);
@@ -1058,6 +1096,21 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			directions.setTitle(R.string.get_directions);
 		}
 		
+		MenuItem animateMenu = menu.findItem(R.id.map_animate_route);
+		
+		if (animateMenu != null) {
+			if(settings.TEST_ANIMATE_ROUTING.get()){
+				animateMenu.setTitle(routeAnimation.isRouteAnimating() ? R.string.animate_route_off
+					: R.string.animate_route);
+				animateMenu.setVisible("1".equals(Secure.getString(
+					getContentResolver(), Secure.ALLOW_MOCK_LOCATION))
+					&& settings.getPointToNavigate() != null
+					&& routingHelper.isRouteCalculated());
+				animateMenu.setVisible(true);
+			} else {
+				animateMenu.setVisible(false);
+			}
+		}
 		return val;
 	}
 	
@@ -1096,7 +1149,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			// dlg.showDialog();
 			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
 			newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-			newIntent.putExtra(SearchActivity.TAB_INDEX_EXTRA, SearchActivity.LOCATION_TAB_INDEX);
 			LatLon mapLoc = getMapLocation();
 			newIntent.putExtra(SearchActivity.SEARCH_LAT, mapLoc.getLatitude());
 			newIntent.putExtra(SearchActivity.SEARCH_LON, mapLoc.getLongitude());
@@ -1121,6 +1173,10 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		case R.id.map_show_point_options:
 			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 			return true;
+		case R.id.map_animate_route:
+			//animate moving on route
+			routeAnimation.startStopRouteAnimation(routingHelper, this);
+			return true;			
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -1158,7 +1214,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 	}
 	
-    
+        
     protected void parseLaunchIntentLocation(){
     	Intent intent = getIntent();
     	if(intent != null && intent.getData() != null){
@@ -1242,12 +1298,11 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				} else if(standardId == R.string.context_menu_item_share_location){
 					mapActions.shareLocation(latitude, longitude, mapView.getZoom());
 				} else if(standardId == R.string.context_menu_item_create_poi){
-					EditingPOIActivity activity = new EditingPOIActivity(MapActivity.this, (OsmandApplication) getApplication(), mapView);
-					activity.showCreateDialog(latitude, longitude);
+					getPoiActions().showCreateDialog(latitude, longitude);
 				} else if(standardId == R.string.context_menu_item_add_waypoint){
-					mapActions.addWaypoint(latitude, longitude, savingTrackHelper);
+					mapActions.addWaypoint(latitude, longitude);
 				} else if(standardId == R.string.context_menu_item_open_bug){
-					mapLayers.getOsmBugsLayer().openBug(MapActivity.this, getLayoutInflater(), mapView, latitude, longitude);
+					mapLayers.getOsmBugsLayer().openBug(latitude, longitude);
 				} else if(standardId == R.string.context_menu_item_update_map){
 					mapActions.reloadTile(mapView.getZoom(), latitude, longitude);
 				} else if(standardId == R.string.context_menu_item_download_map){
@@ -1263,11 +1318,19 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
     public MapActivityActions getMapActions() {
 		return mapActions;
 	}
+    
+    public EditingPOIActivity getPoiActions() {
+		return poiActions;
+	}
 	
 	public MapActivityLayers getMapLayers() {
 		return mapLayers;
 	}
     
+	public SavingTrackHelper getSavingTrackHelper() {
+		return savingTrackHelper;
+	}
+	
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 	}
@@ -1286,12 +1349,13 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	public void setMapLinkedToLocation(boolean isMapLinkedToLocation) {
 		if(!isMapLinkedToLocation){
 			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
-			if(autoFollow > 0){
+			if(autoFollow > 0 && (!settings.AUTO_FOLLOW_ROUTE_NAV.get() || routingHelper.isFollowingMode())){
 				uiHandler.removeMessages(AUTO_FOLLOW_MSG_ID);
 				Message msg = Message.obtain(uiHandler, new Runnable() {
 					@Override
 					public void run() {
 						if (settings.MAP_ACTIVITY_ENABLED.get()) {
+							Toast.makeText(MapActivity.this, R.string.auto_follow_location_enabled, Toast.LENGTH_SHORT).show();
 							backToLocationImpl();
 						}
 					}

@@ -169,6 +169,7 @@ public class IndexBatchCreator {
 		generateIndexes = Boolean.parseBoolean(process.getAttribute("generateIndexes"));
 		uploadIndexes = Boolean.parseBoolean(process.getAttribute("uploadIndexes"));
 		deleteFilesAfterUploading = Boolean.parseBoolean(process.getAttribute("deleteFilesAfterUploading"));
+		IndexCreator.REMOVE_POI_DB = !Boolean.parseBoolean(process.getAttribute("keepPoiOdb"));
 		wget = process.getAttribute("wget");
 		
 		indexPOI = Boolean.parseBoolean(process.getAttribute("indexPOI"));
@@ -601,13 +602,15 @@ public class IndexBatchCreator {
 					poi = reader.containsPoiData();
 					reader.close();
 				} catch (Exception e) {
-					log.info("Exception", e);
+					log.info("File with not be uploaded! Exception", e);
 					if (raf != null) {
 						try {
 							raf.close();
 						} catch (IOException e1) {
 						}
 					}
+					//do not upload probably corrupted file
+					return;
 				}
 			}
 			summary = " index for ";

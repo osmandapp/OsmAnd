@@ -115,13 +115,16 @@ public class DownloadIndexActivity extends ListActivity {
 
 	    filterText = (EditText) findViewById(R.id.search_box);
 	    textWatcher = new TextWatcher() {
-	        public void afterTextChanged(Editable s) {
+	        @Override
+			public void afterTextChanged(Editable s) {
 	        }
-	        public void beforeTextChanged(CharSequence s, int start, int count,
+	        @Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
 	                int after) {
 	        }
 
-	        public void onTextChanged(CharSequence s, int start, int before,
+	        @Override
+			public void onTextChanged(CharSequence s, int start, int before,
 	                int count) {
 	        	DownloadIndexAdapter adapter = ((DownloadIndexAdapter)getListAdapter());
 				if(adapter != null){
@@ -571,7 +574,7 @@ private class DownloadIndexesAsyncTask extends  AsyncTask<String, Object, String
 		protected String doInBackground(String... filesToDownload) {
 			try {
 				List<File> filesToReindex = new ArrayList<File>();
-				
+				boolean forceWifi = downloadFileHelper.isWifiConnected();
 				for (int i = 0; i < filesToDownload.length; i++) {
 					String filename = filesToDownload[i];
 					DownloadEntry entry = entriesToDownload.get(filename);
@@ -580,7 +583,7 @@ private class DownloadIndexesAsyncTask extends  AsyncTask<String, Object, String
 								+ filesToDownload.length + "]");
 						boolean result = downloadFileHelper.downloadFile(filename, 
 								entry.fileToSave, entry.fileToUnzip, entry.unzip, progress, entry.dateModified,
-								entry.parts, filesToReindex, indexOfAllFiles, this);
+								entry.parts, filesToReindex, indexOfAllFiles, this, forceWifi);
 						if (result) {
 							entriesToDownload.remove(filename);
 							publishProgress(entry);
@@ -714,15 +717,25 @@ private class DownloadIndexesAsyncTask extends  AsyncTask<String, Object, String
 					results.values = indexFiles.values();
 					results.count = indexFiles.size();
 				} else {
-					CharSequence lowerCase = constraint.toString()
-							.toLowerCase();
+					String[] vars = constraint.toString().split("\\s");
+					for(int i=0; i< vars.length; i++){
+						vars[i] = vars[i].trim().toLowerCase();
+					}
 					List<IndexItem> filter = new ArrayList<IndexItem>();
 					for (IndexItem item : indexFiles.values()) {
-						if (item.getVisibleName().toLowerCase().contains(lowerCase)) {
-							filter.add(item);
-						} else if (item.getDescription().toLowerCase().contains(lowerCase)) {
+						boolean add = true;
+						for (String var : vars) {
+							if (var.length() > 0) {
+								if (!item.getVisibleName().toLowerCase().contains(var)
+										&& !item.getDescription().toLowerCase().contains(var)) {
+									add = false;
+								}
+							}
+						}
+						if(add){
 							filter.add(item);
 						}
+							
 					}
 					results.values = filter;
 					results.count = filter.size();

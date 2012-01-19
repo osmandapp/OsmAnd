@@ -22,12 +22,14 @@ public class MeetPred extends Predicate
 {
   public MeetPred(){}
 
-  public void relate(Element event, int from, Element[] others, List pairs, int evtSide)
+  @Override
+public void relate(Element event, int from, Element[] others, List pairs, int evtSide)
   {
     (new IntersectPred()).relate(event, from, others, pairs, evtSide);
   }
   
-  public boolean relateMismatch(Element nlElmt, Element lfElmt, int side)
+  @Override
+public boolean relateMismatch(Element nlElmt, Element lfElmt, int side)
   {
     try{
       //if(nlElmt instanceof NonLeafElement)

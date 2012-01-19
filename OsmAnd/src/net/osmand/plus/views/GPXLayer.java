@@ -17,21 +17,15 @@ import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 
-public class GPXLayer implements OsmandMapLayer {
-
+public class GPXLayer extends OsmandMapLayer {
 	
 	private OsmandMapTileView view;
 	
 	private List<List<WptPt>> points = new ArrayList<List<WptPt>>();
 	private Paint paint;
-	
 
 	private Path path;
 	
-	public GPXLayer(){
-	}
-	
-
 	private void initUI() {
 		paint = new Paint();
 		paint.setColor(Color.argb(180, 160, 10, 215));
@@ -45,6 +39,7 @@ public class GPXLayer implements OsmandMapLayer {
 		path = new Path();
 	}
 	
+	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 		initUI();
@@ -142,7 +137,7 @@ public class GPXLayer implements OsmandMapLayer {
 	}
 
 	@Override
-	public boolean onTouchEvent(PointF point) {
+	public boolean onSingleTap(PointF point) {
 		return false;
 	}
 

@@ -41,6 +41,7 @@ import javax.swing.UIManager;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
+import net.osmand.Version;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
@@ -250,7 +251,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	private int xStartingImage = 0;
 	private int yStartingImage = 0;
 	
-	private MapTileDownloader downloader = MapTileDownloader.getInstance();
+	private MapTileDownloader downloader = MapTileDownloader.getInstance(Version.APP_MAP_CREATOR_VERSION);
 	Map<String, Image> cache = new HashMap<String, Image>();
 
 	private JPopupMenu popupMenu;
@@ -280,6 +281,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		downloader.addDownloaderCallback(this);
 		setFocusable(true);
 		addComponentListener(new ComponentAdapter(){
+			@Override
 			public void componentResized(ComponentEvent e) {
 				prepareImage();
 			}

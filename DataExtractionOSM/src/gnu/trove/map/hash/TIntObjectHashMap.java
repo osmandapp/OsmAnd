@@ -58,7 +58,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
     static final long serialVersionUID = 1L;
 
     private final TIntObjectProcedure<V> PUT_ALL_PROC = new TIntObjectProcedure<V>() {
-        public boolean execute( int key, V value) {
+        @Override
+		public boolean execute( int key, V value) {
             put( key, value );
             return true;
         }
@@ -135,7 +136,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     protected int setUp( int initialCapacity ) {
         int capacity;
 
@@ -146,7 +148,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     protected void rehash( int newCapacity ) {
         int oldCapacity = _set.length;
         
@@ -173,19 +176,22 @@ public class TIntObjectHashMap<V> extends TIntHash implements
     // Query Operations
 
     /** {@inheritDoc} */
-    public int getNoEntryKey() {
+    @Override
+	public int getNoEntryKey() {
         return no_entry_key;
     }
 
 
     /** {@inheritDoc} */
-    public boolean containsKey( int key ) {
+    @Override
+	public boolean containsKey( int key ) {
         return contains( key );
     }
 
 
     /** {@inheritDoc} */
-    public boolean containsValue( Object val ) {
+    @Override
+	public boolean containsValue( Object val ) {
         byte[] states = _states;
         V[] vals = _values;
 
@@ -210,7 +216,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
 
 
     /** {@inheritDoc} */
-    public V get( int key ) {
+    @Override
+	public V get( int key ) {
         int index = index( key );
         return index < 0 ? null : _values[index];
     }
@@ -219,14 +226,16 @@ public class TIntObjectHashMap<V> extends TIntHash implements
     // Modification Operations
 
     /** {@inheritDoc} */
-    public V put( int key, V value ) {
+    @Override
+	public V put( int key, V value ) {
         int index = insertionIndex( key );
         return doPut( key, value, index );
     }
 
 
     /** {@inheritDoc} */
-    public V putIfAbsent( int key, V value ) {
+    @Override
+	public V putIfAbsent( int key, V value ) {
         int index = insertionIndex( key );
         if ( index < 0 )
             return _values[-index - 1];
@@ -257,7 +266,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
 
 
     /** {@inheritDoc} */
-    public V remove( int key ) {
+    @Override
+	public V remove( int key ) {
         V prev = null;
         int index = index( key );
         if ( index >= 0 ) {
@@ -269,7 +279,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
 
 
     /** {@inheritDoc} */
-    protected void removeAt( int index ) {
+    @Override
+	protected void removeAt( int index ) {
         _values[index] = null;
         super.removeAt( index );  // clear key, state; adjust size
     }
@@ -278,7 +289,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
     // Bulk Operations
 
     /** {@inheritDoc} */
-    public void putAll( Map<? extends Integer, ? extends V> map ) {
+    @Override
+	public void putAll( Map<? extends Integer, ? extends V> map ) {
         Set<? extends Map.Entry<? extends Integer,? extends V>> set = map.entrySet();
         for ( Map.Entry<? extends Integer,? extends V> entry : set ) {
             put( entry.getKey(), entry.getValue() );
@@ -287,13 +299,15 @@ public class TIntObjectHashMap<V> extends TIntHash implements
 
 
     /** {@inheritDoc} */
-    public void putAll( TIntObjectMap<V> map ){
+    @Override
+	public void putAll( TIntObjectMap<V> map ){
         map.forEachEntry( PUT_ALL_PROC );
     }
 
 
     /** {@inheritDoc} */
-    public void clear() {
+    @Override
+	public void clear() {
         super.clear();
         Arrays.fill( _set, 0, _set.length, no_entry_key );
         Arrays.fill( _states, 0, _states.length, FREE );
@@ -304,13 +318,15 @@ public class TIntObjectHashMap<V> extends TIntHash implements
     // Views
 
     /** {@inheritDoc} */
-    public TIntSet keySet() {
+    @Override
+	public TIntSet keySet() {
         return new KeyView();
     }
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     public int[] keys() {
         int[] keys = new int[size()];
         int[] k = _set;
@@ -326,7 +342,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
    public int[] keys( int[] dest ) {
         if ( dest.length < _size ) {
 			dest = new int[_size];
@@ -345,13 +362,15 @@ public class TIntObjectHashMap<V> extends TIntHash implements
 
 
     /** {@inheritDoc} */
-    public Collection<V> valueCollection() {
+    @Override
+	public Collection<V> valueCollection() {
         return new ValueView();
     }
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     public V[] values() {
         V[] vals = ( V[] ) new Object[size()];
         V[] v = _values;
@@ -367,7 +386,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     public <T> T[] values( T[] dest ) {
         if ( dest.length < _size ) {
 			dest = ( T[] ) java.lang.reflect.Array.newInstance(
@@ -387,19 +407,22 @@ public class TIntObjectHashMap<V> extends TIntHash implements
 
 
     /** {@inheritDoc} */
-    public TIntObjectIterator<V> iterator() {
+    @Override
+	public TIntObjectIterator<V> iterator() {
         return new TIntObjectHashIterator<V>( this );
     }
 
 
     /** {@inheritDoc} */
-    public boolean forEachKey( TIntProcedure procedure ) {
+    @Override
+	public boolean forEachKey( TIntProcedure procedure ) {
         return forEach( procedure );
     }
 
 
     /** {@inheritDoc} */
-    public boolean forEachValue( TObjectProcedure<V> procedure ) {
+    @Override
+	public boolean forEachValue( TObjectProcedure<V> procedure ) {
         byte[] states = _states;
         V[] values = _values;
         for ( int i = values.length; i-- > 0; ) {
@@ -412,7 +435,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     public boolean forEachEntry( TIntObjectProcedure<V> procedure ) {
         byte[] states = _states;
         int[] keys = _set;
@@ -427,7 +451,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     public boolean retainEntries( TIntObjectProcedure<V> procedure ) {
         boolean modified = false;
         byte[] states = _states;
@@ -453,7 +478,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
 
 
     /** {@inheritDoc} */
-    public void transformValues( TObjectFunction<V,V> function ) {
+    @Override
+	public void transformValues( TObjectFunction<V,V> function ) {
         byte[] states = _states;
         V[] values = _values;
         for ( int i = values.length; i-- > 0; ) {
@@ -467,7 +493,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
     // Comparison and hashing
 
     /** {@inheritDoc} */
-    public boolean equals( Object other ) {
+    @Override
+	public boolean equals( Object other ) {
         if ( ! ( other instanceof TIntObjectMap ) ) {
             return false;
         }
@@ -499,7 +526,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
 
 
     /** {@inheritDoc} */
-    public int hashCode() {
+    @Override
+	public int hashCode() {
         int hashcode = 0;
         V[] values = _values;
         byte[] states = _states;
@@ -516,52 +544,62 @@ public class TIntObjectHashMap<V> extends TIntHash implements
     class KeyView implements TIntSet {
 
         /** {@inheritDoc} */
-        public int getNoEntryValue() {
+        @Override
+		public int getNoEntryValue() {
             return no_entry_key;
         }
 
         /** {@inheritDoc} */
-        public int size() {
+        @Override
+		public int size() {
             return _size;
         }
 
         /** {@inheritDoc} */
-        public boolean isEmpty() {
+        @Override
+		public boolean isEmpty() {
             return _size == 0;
         }
 
         /** {@inheritDoc} */
-        public boolean contains( int entry ) {
+        @Override
+		public boolean contains( int entry ) {
             return TIntObjectHashMap.this.containsKey( entry );
         }
 
         /** {@inheritDoc} */
-        public TIntIterator iterator() {
+        @Override
+		public TIntIterator iterator() {
             return new TIntHashIterator( TIntObjectHashMap.this );
         }
 
         /** {@inheritDoc} */
-        public int[] toArray() {
+        @Override
+		public int[] toArray() {
             return keys();
         }
 
         /** {@inheritDoc} */
-        public int[] toArray( int[] dest ) {
+        @Override
+		public int[] toArray( int[] dest ) {
             return keys( dest );
         }
 
         /** {@inheritDoc} */
-        public boolean add( int entry ) {
+        @Override
+		public boolean add( int entry ) {
             throw new UnsupportedOperationException();
         }
 
         /** {@inheritDoc} */
-        public boolean remove( int entry ) {
+        @Override
+		public boolean remove( int entry ) {
             return null != TIntObjectHashMap.this.remove( entry );
         }
 
         /** {@inheritDoc} */
-        public boolean containsAll( Collection<?> collection ) {
+        @Override
+		public boolean containsAll( Collection<?> collection ) {
            for ( Object element : collection ) {
                 if ( ! TIntObjectHashMap.this.containsKey( ( ( Integer ) element ).intValue() ) ) {
                     return false;
@@ -571,7 +609,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
         }
 
         /** {@inheritDoc} */
-        public boolean containsAll( TIntCollection collection ) {
+        @Override
+		public boolean containsAll( TIntCollection collection ) {
             if ( collection == this ) {
                 return true;
             }
@@ -585,7 +624,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
         }
 
         /** {@inheritDoc} */
-        public boolean containsAll( int[] array ) {
+        @Override
+		public boolean containsAll( int[] array ) {
             for ( int element : array  ) {
                 if ( ! TIntObjectHashMap.this.containsKey( element ) ) {
                     return false;
@@ -595,22 +635,26 @@ public class TIntObjectHashMap<V> extends TIntHash implements
         }
 
         /** {@inheritDoc} */
-        public boolean addAll( Collection<? extends Integer> collection ) {
+        @Override
+		public boolean addAll( Collection<? extends Integer> collection ) {
             throw new UnsupportedOperationException();
         }
 
         /** {@inheritDoc} */
-        public boolean addAll( TIntCollection collection ) {
+        @Override
+		public boolean addAll( TIntCollection collection ) {
             throw new UnsupportedOperationException();
         }
 
         /** {@inheritDoc} */
-        public boolean addAll( int[] array ) {
+        @Override
+		public boolean addAll( int[] array ) {
             throw new UnsupportedOperationException();
         }
 
         /** {@inheritDoc} */
-        public boolean retainAll( Collection<?> collection ) {
+        @Override
+		public boolean retainAll( Collection<?> collection ) {
             boolean modified = false;
             TIntIterator iter = iterator();
             while ( iter.hasNext() ) {
@@ -624,7 +668,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
         }
 
         /** {@inheritDoc} */
-        public boolean retainAll( TIntCollection collection ) {
+        @Override
+		public boolean retainAll( TIntCollection collection ) {
             if ( this == collection ) {
                 return false;
             }
@@ -640,7 +685,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
         }
 
         /** {@inheritDoc} */
-        public boolean retainAll( int[] array ) {
+        @Override
+		public boolean retainAll( int[] array ) {
             boolean changed = false;
             Arrays.sort( array );
             int[] set = _set;
@@ -656,7 +702,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
         }
 
         /** {@inheritDoc} */
-        public boolean removeAll( Collection<?> collection ) {
+        @Override
+		public boolean removeAll( Collection<?> collection ) {
             boolean changed = false;
             for ( Object element : collection ) {
                 if ( element instanceof Integer ) {
@@ -670,7 +717,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
         }
 
         /** {@inheritDoc} */
-        public boolean removeAll( TIntCollection collection ) {
+        @Override
+		public boolean removeAll( TIntCollection collection ) {
             if ( collection == this ) {
                 clear();
                 return true;
@@ -687,7 +735,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
         }
 
         /** {@inheritDoc} */
-        public boolean removeAll( int[] array ) {
+        @Override
+		public boolean removeAll( int[] array ) {
             boolean changed = false;
             for ( int i = array.length; i-- > 0; ) {
                 if ( remove(array[i]) ) {
@@ -698,17 +747,20 @@ public class TIntObjectHashMap<V> extends TIntHash implements
         }
 
         /** {@inheritDoc} */
-        public void clear() {
+        @Override
+		public void clear() {
             TIntObjectHashMap.this.clear();
         }
 
         /** {@inheritDoc} */
-        public boolean forEach( TIntProcedure procedure ) {
+        @Override
+		public boolean forEach( TIntProcedure procedure ) {
             return TIntObjectHashMap.this.forEachKey( procedure );
         }
 
         /** {@inheritDoc) */
-        public boolean equals( Object other ) {
+        @Override
+		public boolean equals( Object other ) {
             if (! ( other instanceof TIntSet ) ) {
                 return false;
             }
@@ -727,7 +779,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
         }
 
         /** {@inheritDoc} */
-        public int hashCode() {
+        @Override
+		public int hashCode() {
             int hashcode = 0;
             for ( int i = _states.length; i-- > 0; ) {
                 if ( _states[i] == FULL ) {
@@ -738,7 +791,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
         }
 
         /** {@inheritDoc} */
-        public String toString() {
+        @Override
+		public String toString() {
             final StringBuilder buf = new StringBuilder("{");
             boolean first = true;
             for ( int i = _states.length; i-- > 0; ) {
@@ -764,7 +818,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
             }
 
             /** {@inheritDoc} */
-            public int next() {
+            @Override
+			public int next() {
                 moveToNextIndex();
                 return _hash._set[_index];
             }
@@ -775,20 +830,24 @@ public class TIntObjectHashMap<V> extends TIntHash implements
     /** a view onto the values of the map. */
     protected class ValueView extends MapBackedView<V> {
 
-        @SuppressWarnings({"unchecked"})
+        @Override
+		@SuppressWarnings({"unchecked"})
         public Iterator<V> iterator() {
             return new TIntObjectValueHashIterator( TIntObjectHashMap.this ) {
-                protected V objectAtIndex( int index ) {
+                @Override
+				protected V objectAtIndex( int index ) {
                     return _values[index];
                 }
             };
         }
 
-        public boolean containsElement( V value ) {
+        @Override
+		public boolean containsElement( V value ) {
             return containsValue( value );
         }
 
-        public boolean removeElement( V value ) {
+        @Override
+		public boolean removeElement( V value ) {
             V[] values = _values;
             byte[] states = _states;
 
@@ -824,7 +883,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
             }
 
             /** {@inheritDoc} */
-            @SuppressWarnings("unchecked")
+            @Override
+			@SuppressWarnings("unchecked")
             public V next() {
                 moveToNextIndex();
 	            return ( V ) _map._values[_index];
@@ -836,35 +896,42 @@ public class TIntObjectHashMap<V> extends TIntHash implements
     private abstract class MapBackedView<E> extends AbstractSet<E>
             implements Set<E>, Iterable<E> {
 
-        public abstract Iterator<E> iterator();
+        @Override
+		public abstract Iterator<E> iterator();
 
         public abstract boolean removeElement( E key );
 
         public abstract boolean containsElement( E key );
 
-        @SuppressWarnings({"unchecked"})
+        @Override
+		@SuppressWarnings({"unchecked"})
         public boolean contains( Object key ) {
             return containsElement( (E) key );
         }
 
-        @SuppressWarnings({"unchecked"})
+        @Override
+		@SuppressWarnings({"unchecked"})
         public boolean remove( Object o ) {
             return removeElement( (E) o );
         }
 
-        public void clear() {
+        @Override
+		public void clear() {
             TIntObjectHashMap.this.clear();
         }
 
-        public boolean add( E obj ) {
+        @Override
+		public boolean add( E obj ) {
             throw new UnsupportedOperationException();
         }
 
-        public int size() {
+        @Override
+		public int size() {
             return TIntObjectHashMap.this.size();
         }
 
-        public Object[] toArray() {
+        @Override
+		public Object[] toArray() {
             Object[] result = new Object[size()];
             Iterator<E> e = iterator();
             for ( int i = 0; e.hasNext(); i++ ) {
@@ -873,7 +940,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
             return result;
         }
 
-        @SuppressWarnings({"unchecked"})
+        @Override
+		@SuppressWarnings({"unchecked"})
         public <T> T[] toArray( T[] a ) {
             int size = size();
             if ( a.length < size ) {
@@ -893,15 +961,18 @@ public class TIntObjectHashMap<V> extends TIntHash implements
             return a;
         }
 
-        public boolean isEmpty() {
+        @Override
+		public boolean isEmpty() {
             return TIntObjectHashMap.this.isEmpty();
         }
 
-        public boolean addAll( Collection<? extends E> collection ) {
+        @Override
+		public boolean addAll( Collection<? extends E> collection ) {
             throw new UnsupportedOperationException();
         }
 
-        @SuppressWarnings({"SuspiciousMethodCalls"})
+        @Override
+		@SuppressWarnings({"SuspiciousMethodCalls"})
         public boolean retainAll( Collection<?> collection ) {
             boolean changed = false;
             Iterator<E> i = iterator();
@@ -933,22 +1004,26 @@ public class TIntObjectHashMap<V> extends TIntHash implements
         }
 
         /** {@inheritDoc} */
-        public void advance() {
+        @Override
+		public void advance() {
             moveToNextIndex();
         }
 
         /** {@inheritDoc} */
-        public int key() {
+        @Override
+		public int key() {
             return _map._set[_index];
         }
 
         /** {@inheritDoc} */
-        public V value() {
+        @Override
+		public V value() {
             return _map._values[_index];
         }
 
         /** {@inheritDoc} */
-        public V setValue( V val ) {
+        @Override
+		public V setValue( V val ) {
             V old = value();
             _map._values[_index] = val;
             return old;
@@ -956,7 +1031,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
     }
 
 
-    public void writeExternal( ObjectOutput out ) throws IOException {
+    @Override
+	public void writeExternal( ObjectOutput out ) throws IOException {
     	// VERSION
     	out.writeByte( 0 );
 
@@ -979,7 +1055,8 @@ public class TIntObjectHashMap<V> extends TIntHash implements
     }
 
 
-    @SuppressWarnings({"unchecked"})
+    @Override
+	@SuppressWarnings({"unchecked"})
     public void readExternal( ObjectInput in )
     	throws IOException, ClassNotFoundException {
 
@@ -1005,11 +1082,13 @@ public class TIntObjectHashMap<V> extends TIntHash implements
     }
 
 
-    public String toString() {
+    @Override
+	public String toString() {
         final StringBuilder buf = new StringBuilder("{");
         forEachEntry(new TIntObjectProcedure<V>() {
             private boolean first = true;
-            public boolean execute(int key, Object value) {
+            @Override
+			public boolean execute(int key, Object value) {
                 if ( first ) first = false;
                 else buf.append( "," );
 

@@ -119,7 +119,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public int getNoEntryValue() {
+    @Override
+	public int getNoEntryValue() {
         return no_entry_value;
     }
 
@@ -142,13 +143,15 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public int size() {
+    @Override
+	public int size() {
         return _pos;
     }
 
 
     /** {@inheritDoc} */
-    public boolean isEmpty() {
+    @Override
+	public boolean isEmpty() {
         return _pos == 0;
     }
 
@@ -168,7 +171,8 @@ public class TIntArrayList implements TIntList, Externalizable {
     // modifying
 
     /** {@inheritDoc} */
-    public boolean add( int val ) {
+    @Override
+	public boolean add( int val ) {
         ensureCapacity( _pos + 1 );
         _data[ _pos++ ] = val;
         return true;
@@ -176,13 +180,15 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void add( int[] vals ) {
+    @Override
+	public void add( int[] vals ) {
         add( vals, 0, vals.length );
     }
 
 
     /** {@inheritDoc} */
-    public void add( int[] vals, int offset, int length ) {
+    @Override
+	public void add( int[] vals, int offset, int length ) {
         ensureCapacity( _pos + length );
         System.arraycopy( vals, offset, _data, _pos, length );
         _pos += length;
@@ -190,7 +196,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void insert( int offset, int value ) {
+    @Override
+	public void insert( int offset, int value ) {
         if ( offset == _pos ) {
             add( value );
             return;
@@ -205,13 +212,15 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void insert( int offset, int[] values ) {
+    @Override
+	public void insert( int offset, int[] values ) {
         insert( offset, values, 0, values.length );
     }
 
 
     /** {@inheritDoc} */
-    public void insert( int offset, int[] values, int valOffset, int len ) {
+    @Override
+	public void insert( int offset, int[] values, int valOffset, int len ) {
         if ( offset == _pos ) {
             add( values, valOffset, len );
             return;
@@ -227,7 +236,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public int get( int offset ) {
+    @Override
+	public int get( int offset ) {
         if ( offset >= _pos ) {
             throw new ArrayIndexOutOfBoundsException( offset );
         }
@@ -244,7 +254,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public int set( int offset, int val ) {
+    @Override
+	public int set( int offset, int val ) {
         if ( offset >= _pos ) {
             throw new ArrayIndexOutOfBoundsException( offset );
         }
@@ -256,7 +267,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public int replace( int offset, int val ) {
+    @Override
+	public int replace( int offset, int val ) {
         if ( offset >= _pos ) {
             throw new ArrayIndexOutOfBoundsException( offset );
         }
@@ -267,13 +279,15 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void set( int offset, int[] values ) {
+    @Override
+	public void set( int offset, int[] values ) {
         set( offset, values, 0, values.length );
     }
 
 
     /** {@inheritDoc} */
-    public void set( int offset, int[] values, int valOffset, int length ) {
+    @Override
+	public void set( int offset, int[] values, int valOffset, int length ) {
         if ( offset < 0 || offset + length > _pos ) {
             throw new ArrayIndexOutOfBoundsException( offset );
         }
@@ -290,7 +304,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void clear() {
+    @Override
+	public void clear() {
         clear( DEFAULT_CAPACITY );
     }
 
@@ -330,7 +345,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean remove( int value ) {
+    @Override
+	public boolean remove( int value ) {
         for ( int index = 0; index < _pos; index++ ) {
             if ( value == _data[index]  ) {
                 remove( index, 1 );
@@ -342,7 +358,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public int removeAt( int offset ) {
+    @Override
+	public int removeAt( int offset ) {
         int old = get( offset );
         remove( offset, 1 );
         return old;
@@ -350,7 +367,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void remove( int offset, int length ) {
+    @Override
+	public void remove( int offset, int length ) {
         if ( offset < 0 || offset >= _pos ) {
             throw new ArrayIndexOutOfBoundsException(offset);
         }
@@ -376,13 +394,15 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public TIntIterator iterator() {
+    @Override
+	public TIntIterator iterator() {
         return new TIntArrayIterator( 0 );
     }
 
 
     /** {@inheritDoc} */
-    public boolean containsAll( Collection<?> collection ) {
+    @Override
+	public boolean containsAll( Collection<?> collection ) {
         for ( Object element : collection ) {
             if ( element instanceof Integer ) {
                 int c = ( ( Integer ) element ).intValue();
@@ -399,7 +419,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean containsAll( TIntCollection collection ) {
+    @Override
+	public boolean containsAll( TIntCollection collection ) {
         if ( this == collection ) {
             return true;
         }
@@ -415,7 +436,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean containsAll( int[] array ) {
+    @Override
+	public boolean containsAll( int[] array ) {
         for ( int i = array.length; i-- > 0; ) {
             if ( ! contains( array[i] ) ) {
                 return false;
@@ -426,7 +448,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean addAll( Collection<? extends Integer> collection ) {
+    @Override
+	public boolean addAll( Collection<? extends Integer> collection ) {
         boolean changed = false;
         for ( Integer element : collection ) {
             int e = element.intValue();
@@ -439,7 +462,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean addAll( TIntCollection collection ) {
+    @Override
+	public boolean addAll( TIntCollection collection ) {
         boolean changed = false;
         TIntIterator iter = collection.iterator();
         while ( iter.hasNext() ) {
@@ -453,7 +477,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean addAll( int[] array ) {
+    @Override
+	public boolean addAll( int[] array ) {
         boolean changed = false;
         for ( int element : array ) {
             if ( add( element ) ) {
@@ -465,7 +490,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"SuspiciousMethodCalls"})
+    @Override
+	@SuppressWarnings({"SuspiciousMethodCalls"})
     public boolean retainAll( Collection<?> collection ) {
         boolean modified = false;
 	    TIntIterator iter = iterator();
@@ -480,7 +506,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean retainAll( TIntCollection collection ) {
+    @Override
+	public boolean retainAll( TIntCollection collection ) {
         if ( this == collection ) {
             return false;
         }
@@ -497,7 +524,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean retainAll( int[] array ) {
+    @Override
+	public boolean retainAll( int[] array ) {
         boolean changed = false;
         Arrays.sort( array );
         int[] data = _data;
@@ -513,7 +541,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean removeAll( Collection<?> collection ) {
+    @Override
+	public boolean removeAll( Collection<?> collection ) {
         boolean changed = false;
         for ( Object element : collection ) {
             if ( element instanceof Integer ) {
@@ -528,7 +557,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean removeAll( TIntCollection collection ) {
+    @Override
+	public boolean removeAll( TIntCollection collection ) {
         if ( collection == this ) {
             clear();
             return true;
@@ -546,7 +576,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean removeAll( int[] array ) {
+    @Override
+	public boolean removeAll( int[] array ) {
         boolean changed = false;
         for ( int i = array.length; i-- > 0; ) {
             if ( remove(array[i]) ) {
@@ -558,7 +589,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void transformValues( TIntFunction function ) {
+    @Override
+	public void transformValues( TIntFunction function ) {
         for ( int i = _pos; i-- > 0; ) {
             _data[ i ] = function.execute( _data[ i ] );
         }
@@ -566,13 +598,15 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void reverse() {
+    @Override
+	public void reverse() {
         reverse( 0, _pos );
     }
 
 
     /** {@inheritDoc} */
-    public void reverse( int from, int to ) {
+    @Override
+	public void reverse( int from, int to ) {
         if ( from == to ) {
             return;             // nothing to do
         }
@@ -586,7 +620,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public void shuffle( Random rand ) {
+    @Override
+	public void shuffle( Random rand ) {
         for ( int i = _pos; i-- > 1; ) {
             swap( i, rand.nextInt( i ) );
         }
@@ -609,7 +644,8 @@ public class TIntArrayList implements TIntList, Externalizable {
     // copying
 
     /** {@inheritDoc} */
-    public TIntList subList( int begin, int end ) {
+    @Override
+	public TIntList subList( int begin, int end ) {
     	if ( end < begin ) {
 			throw new IllegalArgumentException( "end index " + end +
 				" greater than begin index " + begin );
@@ -629,13 +665,15 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public int[] toArray() {
+    @Override
+	public int[] toArray() {
         return toArray( 0, _pos );
     }
 
 
     /** {@inheritDoc} */
-    public int[] toArray( int offset, int len ) {
+    @Override
+	public int[] toArray( int offset, int len ) {
         int[] rv = new int[ len ];
         toArray( rv, offset, len );
         return rv;
@@ -643,7 +681,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public int[] toArray( int[] dest ) {
+    @Override
+	public int[] toArray( int[] dest ) {
         int len = dest.length;
         if ( dest.length > _pos ) {
             len = _pos;
@@ -655,7 +694,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public int[] toArray( int[] dest, int offset, int len ) {
+    @Override
+	public int[] toArray( int[] dest, int offset, int len ) {
         if ( len == 0 ) {
             return dest;             // nothing to copy
         }
@@ -668,7 +708,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public int[] toArray( int[] dest, int source_pos, int dest_pos, int len ) {
+    @Override
+	public int[] toArray( int[] dest, int source_pos, int dest_pos, int len ) {
         if ( len == 0 ) {
             return dest;             // nothing to copy
         }
@@ -718,7 +759,8 @@ public class TIntArrayList implements TIntList, Externalizable {
     // procedures
 
     /** {@inheritDoc} */
-    public boolean forEach( TIntProcedure procedure ) {
+    @Override
+	public boolean forEach( TIntProcedure procedure ) {
         for ( int i = 0; i < _pos; i++ ) {
             if ( !procedure.execute( _data[ i ] ) ) {
                 return false;
@@ -729,7 +771,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean forEachDescending( TIntProcedure procedure ) {
+    @Override
+	public boolean forEachDescending( TIntProcedure procedure ) {
         for ( int i = _pos; i-- > 0; ) {
             if ( !procedure.execute( _data[ i ] ) ) {
                 return false;
@@ -742,13 +785,15 @@ public class TIntArrayList implements TIntList, Externalizable {
     // sorting
 
     /** {@inheritDoc} */
-    public void sort() {
+    @Override
+	public void sort() {
         Arrays.sort( _data, 0, _pos );
     }
 
 
     /** {@inheritDoc} */
-    public void sort( int fromIndex, int toIndex ) {
+    @Override
+	public void sort( int fromIndex, int toIndex ) {
         Arrays.sort( _data, fromIndex, toIndex );
     }
 
@@ -756,13 +801,15 @@ public class TIntArrayList implements TIntList, Externalizable {
     // filling
 
     /** {@inheritDoc} */
-    public void fill( int val ) {
+    @Override
+	public void fill( int val ) {
         Arrays.fill( _data, 0, _pos, val );
     }
 
 
     /** {@inheritDoc} */
-    public void fill( int fromIndex, int toIndex, int val ) {
+    @Override
+	public void fill( int fromIndex, int toIndex, int val ) {
         if ( toIndex > _pos ) {
           ensureCapacity( toIndex );
           _pos = toIndex;
@@ -774,13 +821,15 @@ public class TIntArrayList implements TIntList, Externalizable {
     // searching
 
     /** {@inheritDoc} */
-    public int binarySearch( int value ) {
+    @Override
+	public int binarySearch( int value ) {
         return binarySearch( value, 0, _pos );
     }
 
 
     /** {@inheritDoc} */
-    public int binarySearch(int value, int fromIndex, int toIndex) {
+    @Override
+	public int binarySearch(int value, int fromIndex, int toIndex) {
         if ( fromIndex < 0 ) {
             throw new ArrayIndexOutOfBoundsException( fromIndex );
         }
@@ -810,13 +859,15 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public int indexOf( int value ) {
+    @Override
+	public int indexOf( int value ) {
         return indexOf( 0, value );
     }
 
 
     /** {@inheritDoc} */
-    public int indexOf( int offset, int value ) {
+    @Override
+	public int indexOf( int offset, int value ) {
         for ( int i = offset; i < _pos; i++ ) {
             if ( _data[ i ] == value ) {
                 return i;
@@ -827,13 +878,15 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public int lastIndexOf( int value ) {
+    @Override
+	public int lastIndexOf( int value ) {
         return lastIndexOf( _pos, value );
     }
 
 
     /** {@inheritDoc} */
-    public int lastIndexOf( int offset, int value ) {
+    @Override
+	public int lastIndexOf( int offset, int value ) {
         for ( int i = offset; i-- > 0; ) {
             if ( _data[ i ] == value ) {
                 return i;
@@ -844,13 +897,15 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public boolean contains( int value ) {
+    @Override
+	public boolean contains( int value ) {
         return lastIndexOf( value ) >= 0;
     }
 
 
     /** {@inheritDoc} */
-    public TIntList grep( TIntProcedure condition ) {
+    @Override
+	public TIntList grep( TIntProcedure condition ) {
         TIntArrayList list = new TIntArrayList();
         for ( int i = 0; i < _pos; i++ ) {
             if ( condition.execute( _data[ i ] ) ) {
@@ -862,7 +917,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public TIntList inverseGrep( TIntProcedure condition ) {
+    @Override
+	public TIntList inverseGrep( TIntProcedure condition ) {
         TIntArrayList list = new TIntArrayList();
         for ( int i = 0; i < _pos; i++ ) {
             if ( !condition.execute( _data[ i ] ) ) {
@@ -874,7 +930,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public int max() {
+    @Override
+	public int max() {
         if ( size() == 0 ) {
             throw new IllegalStateException("cannot find maximum of an empty list");
         }
@@ -889,7 +946,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
     /** {@inheritDoc} */
-    public int min() {
+    @Override
+	public int min() {
         if ( size() == 0 ) {
             throw new IllegalStateException( "cannot find minimum of an empty list" );
         }
@@ -941,13 +999,15 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
         /** {@inheritDoc} */
-        public boolean hasNext() {
+        @Override
+		public boolean hasNext() {
             return cursor < size();
 	    }
 
 
         /** {@inheritDoc} */
-        public int next() {
+        @Override
+		public int next() {
             try {
                 int next = get( cursor );
                 lastRet = cursor++;
@@ -959,7 +1019,8 @@ public class TIntArrayList implements TIntList, Externalizable {
 
 
         /** {@inheritDoc} */
-        public void remove() {
+        @Override
+		public void remove() {
             if ( lastRet == -1 )
 		        throw new IllegalStateException();
 
@@ -975,7 +1036,8 @@ public class TIntArrayList implements TIntList, Externalizable {
     }
 
 
-    public void writeExternal( ObjectOutput out ) throws IOException {
+    @Override
+	public void writeExternal( ObjectOutput out ) throws IOException {
     	// VERSION
     	out.writeByte( 0 );
 
@@ -994,7 +1056,8 @@ public class TIntArrayList implements TIntList, Externalizable {
     }
 
 
-    public void readExternal( ObjectInput in )
+    @Override
+	public void readExternal( ObjectInput in )
     	throws IOException, ClassNotFoundException {
 
     	// VERSION

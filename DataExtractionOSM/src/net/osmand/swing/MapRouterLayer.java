@@ -75,6 +75,7 @@ public class MapRouterLayer implements MapPanelLayer {
 		Action start = new AbstractAction("Mark start point") {
 			private static final long serialVersionUID = 507156107455281238L;
 
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Point popupMenuPoint = map.getPopupMenuPoint();
 				double fy = (popupMenuPoint.y - map.getCenterPointY()) / map.getTileSize();
@@ -89,6 +90,7 @@ public class MapRouterLayer implements MapPanelLayer {
 		Action end= new AbstractAction("Mark end point") {
 			private static final long serialVersionUID = 4446789424902471319L;
 
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				Point popupMenuPoint = map.getPopupMenuPoint();
 				double fy = (popupMenuPoint.y - map.getCenterPointY()) / map.getTileSize();
@@ -103,6 +105,7 @@ public class MapRouterLayer implements MapPanelLayer {
 		Action route = new AbstractAction("Calculate YOURS route") {
 			private static final long serialVersionUID = 507156107455281238L;
 
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				new Thread(){
 					@Override
@@ -123,6 +126,7 @@ public class MapRouterLayer implements MapPanelLayer {
 		Action altroute = new AbstractAction("Calculate CloudMade route") {
 			private static final long serialVersionUID = 507156107455281238L;
 
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				new Thread() {
 					@Override
@@ -143,6 +147,7 @@ public class MapRouterLayer implements MapPanelLayer {
 		Action selfRoute = new AbstractAction("Calculate OsmAnd route") {
 			private static final long serialVersionUID = 507156107455281238L;
 
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				new Thread() {
 					@Override

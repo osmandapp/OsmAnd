@@ -23,10 +23,13 @@ import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
+import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.voice.CommandPlayerFactory;
+import net.osmand.render.RenderingRulesStorage;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -66,7 +69,8 @@ public class OsmandApplication extends Application {
 	private Locale prefferedLocale = null;
 
 	
-    public void	onCreate(){
+    @Override
+	public void	onCreate(){
     	super.onCreate();
     	long timeToStart = System.currentTimeMillis();
     	osmandSettings = OsmandSettings.getOsmandSettings(this);
@@ -212,7 +216,11 @@ public class OsmandApplication extends Application {
 	public void showDialogInitializingCommandPlayer(final Activity uiContext){
 		showDialogInitializingCommandPlayer(uiContext, true);
 	}
+	
 	public void showDialogInitializingCommandPlayer(final Activity uiContext, boolean warningNoneProvider){
+		showDialogInitializingCommandPlayer(uiContext, warningNoneProvider, null);
+	}
+	public void showDialogInitializingCommandPlayer(final Activity uiContext, boolean warningNoneProvider, Runnable run){
 		String voiceProvider = osmandSettings.VOICE_PROVIDER.get();
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			if (warningNoneProvider && voiceProvider == null) {
@@ -236,13 +244,13 @@ public class OsmandApplication extends Application {
 		} else {
 			if(player == null 
 					|| !Algoritms.objectEquals(voiceProvider, player.getCurrentVoice())){
-				initVoiceDataInDifferentThread(uiContext, voiceProvider);
+				initVoiceDataInDifferentThread(uiContext, voiceProvider, run);
 			}
 		}
 		
 	}
 
-	private void initVoiceDataInDifferentThread(final Activity uiContext, final String voiceProvider) {
+	private void initVoiceDataInDifferentThread(final Activity uiContext, final String voiceProvider, final Runnable run) {
 		final ProgressDialog dlg = ProgressDialog.show(uiContext,
 				getString(R.string.loading_data),
 				getString(R.string.voice_data_initializing));
@@ -256,6 +264,9 @@ public class OsmandApplication extends Application {
 					player = CommandPlayerFactory.createCommandPlayer(voiceProvider, OsmandApplication.this, uiContext);
 					routingHelper.getVoiceRouter().setPlayer(player);
 					dlg.dismiss();
+					if(run != null && uiContext != null){
+						uiContext.runOnUiThread(run);
+					}
 				} catch (CommandPlayerException e) {
 					dlg.dismiss();
 					showWarning(uiContext, e.getError());
@@ -281,59 +292,68 @@ public class OsmandApplication extends Application {
 	
 
 	public synchronized void startApplication() {
-		if(applicationInitializing){
+		if (applicationInitializing) {
 			return;
 		}
 		applicationInitializing = true;
 		startDialog = new ProgressDialogImplementation(this, null, false);
 
 		startDialog.setRunnable("Initializing app", new Runnable() { //$NON-NLS-1$
-
 					@Override
 					public void run() {
-						List<String> warnings = null;
-						try {
-							warnings = manager.reloadIndexes(startDialog);
-							player = null;
-							SavingTrackHelper helper = new SavingTrackHelper(OsmandApplication.this);
-							if (helper.hasDataToSave()) {
-								startDialog.startTask(getString(R.string.saving_gpx_tracks), -1);
-								warnings.addAll(helper.saveDataToGpx());
-							}
-							helper.close();
-
-						} finally {
-							synchronized (OsmandApplication.this) {
-								final ProgressDialog toDismiss;
-								if(startDialog != null){
-									toDismiss = startDialog.getDialog();
-								} else {
-									toDismiss = null;
-								}
-								startDialog = null;
-								
-								if (toDismiss != null) {
-									uiHandler.post(new Runnable() {
-										@Override
-										public void run() {
-											if(toDismiss.getOwnerActivity() != null){
-												toDismiss.getOwnerActivity().dismissDialog(PROGRESS_DIALOG);
-											}
-											
-										}
-									});
-									showWarnings(warnings, toDismiss.getContext());
-								} else {
-									startingWarnings = warnings;
-								}
-							}
-						}
+						startApplicationBackground();
 					}
 				});
 		startDialog.run();
 
 		Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
 
+	}
+	
+	private void startApplicationBackground() {
+		List<String> warnings = null;
+		try {
+			if (osmandSettings.NATIVE_RENDERING.get()) {
+				startDialog.startTask(getString(R.string.init_native_library), -1);
+				RenderingRulesStorage storage = rendererRegistry.getCurrentSelectedRenderer();
+				boolean initialized = NativeOsmandLibrary.getLibrary(storage) != null;
+				if (!initialized) {
+					LOG.info("Native library could not loaded!");
+				}
+			}
+			warnings = manager.reloadIndexes(startDialog);
+			player = null;
+			SavingTrackHelper helper = new SavingTrackHelper(OsmandApplication.this);
+			if (helper.hasDataToSave()) {
+				startDialog.startTask(getString(R.string.saving_gpx_tracks), -1);
+				warnings.addAll(helper.saveDataToGpx());
+			}
+			helper.close();
+		} finally {
+			synchronized (OsmandApplication.this) {
+				final ProgressDialog toDismiss;
+				if (startDialog != null) {
+					toDismiss = startDialog.getDialog();
+				} else {
+					toDismiss = null;
+				}
+				startDialog = null;
+
+				if (toDismiss != null) {
+					uiHandler.post(new Runnable() {
+						@Override
+						public void run() {
+							if (toDismiss.getOwnerActivity() != null) {
+								toDismiss.getOwnerActivity().dismissDialog(PROGRESS_DIALOG);
+							}
+						}
+					});
+					showWarnings(warnings, toDismiss.getContext());
+				} else {
+					startingWarnings = warnings;
+				}
+			}
+		}
 	}
 	
 	protected void showWarnings(List<String> warnings, final Context uiContext) {

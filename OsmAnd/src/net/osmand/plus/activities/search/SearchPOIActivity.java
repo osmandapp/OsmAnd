@@ -120,7 +120,6 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.searchpoi);
 		
 		uiHandler = new Handler();
@@ -514,6 +513,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		}
 	}
 
+	@Override
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		if(filter != null){
 			settings.setPoiFilterForMap(filter.getFilterId());
@@ -661,6 +661,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			
 		}
 
+		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {

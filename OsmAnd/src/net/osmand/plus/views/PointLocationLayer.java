@@ -9,19 +9,19 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.location.Location;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-public class PointLocationLayer implements OsmandMapLayer {
+public class PointLocationLayer extends OsmandMapLayer {
 	protected final static int RADIUS = 7;
 	protected final static float HEADING_ANGLE = 60;
 	
 	private Paint locationPaint;
 	private Paint area;
+	private Paint aroundArea;
 	private Paint headingPaint;
 	
 	protected Location lastKnownLocation = null;
@@ -42,7 +42,13 @@ public class PointLocationLayer implements OsmandMapLayer {
 		
 		area = new Paint();
 		area.setColor(Color.BLUE);
-		area.setAlpha(40);		
+		area.setAlpha(40);
+		
+		aroundArea = new Paint();
+		aroundArea.setColor(Color.rgb(112, 124, 220));
+		aroundArea.setStyle(Style.STROKE);
+		aroundArea.setStrokeWidth(1);
+		aroundArea.setAntiAlias(true);
 		
 		headingPaint = new Paint();
 		headingPaint.setColor(Color.BLUE);
@@ -54,6 +60,7 @@ public class PointLocationLayer implements OsmandMapLayer {
 		
 	}
 	
+	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 		initUI();
@@ -65,41 +72,46 @@ public class PointLocationLayer implements OsmandMapLayer {
 
 	
 	private RectF getHeadingRect(int locationX, int locationY){
-		int rad = Math.min(3*view.getWidth()/8, 3*view.getHeight()/8);
+		int rad = Math.min(3 * view.getWidth() / 8, 3 * view.getHeight() / 8);
 		return new RectF(locationX - rad, locationY - rad, locationX + rad, locationY + rad);
 	}
 	
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+		// draw 
+		if(lastKnownLocation == null || view == null){
+			return;
+		}
+		int locationX = view.getMapXForPoint(lastKnownLocation.getLongitude());
+		int locationY = view.getMapYForPoint(lastKnownLocation.getLatitude());
+		
+		int radius = MapUtils.getLengthXFromMeters(view.getZoom(), view.getLatitude(), view.getLongitude(),
+				lastKnownLocation.getAccuracy(), view.getTileSize(), view.getWidth());
+		if (radius > RADIUS * dm.density) {
+			int allowedRad = Math.min(view.getWidth() / 2, view.getHeight() / 2);
+			canvas.drawCircle(locationX, locationY, Math.min(radius, allowedRad), area);
+			canvas.drawCircle(locationX, locationY, Math.min(radius, allowedRad), aroundArea);
+		}
+		// draw bearing/direction/location
 		if (isLocationVisible(lastKnownLocation)) {
 			checkAppMode(view.getSettings().getApplicationMode());
-			
-			int locationX = view.getMapXForPoint(lastKnownLocation.getLongitude());
-			int locationY = view.getMapYForPoint(lastKnownLocation.getLatitude());
-			
-			int radius = MapUtils.getLengthXFromMeters(view.getZoom(), view.getLatitude(), view.getLongitude(), 
-					lastKnownLocation.getAccuracy(), view.getTileSize(), view.getWidth());
 			boolean isBearing = lastKnownLocation.hasBearing();
-			if(!isBearing){
-				canvas.drawBitmap(locationIcon, locationX - locationIcon.getWidth() / 2, 
-						locationY - locationIcon.getHeight() / 2, locationPaint);
+			if (!isBearing) {
+				canvas.drawBitmap(locationIcon, locationX - locationIcon.getWidth() / 2, locationY - locationIcon.getHeight() / 2,
+						locationPaint);
 			}
-			if (radius > RADIUS * dm.density) {
-				canvas.drawCircle(locationX, locationY, radius, area);
+
+			if (heading != null) {
+				canvas.drawArc(getHeadingRect(locationX, locationY), heading - HEADING_ANGLE / 2 - 90, HEADING_ANGLE, true, headingPaint);
 			}
-				
-			if(heading != null){
-				canvas.drawArc(getHeadingRect(locationX, locationY), 
-						heading - HEADING_ANGLE/ 2 - 90, HEADING_ANGLE, true, headingPaint);
-			}
-			
-			if(isBearing){
+
+			if (isBearing) {
 				float bearing = lastKnownLocation.getBearing();
 				canvas.rotate(bearing - 90, locationX, locationY);
-				canvas.drawBitmap(bearingIcon, locationX - bearingIcon.getWidth() / 2, 
-						locationY - bearingIcon.getHeight() / 2, locationPaint);
+				canvas.drawBitmap(bearingIcon, locationX - bearingIcon.getWidth() / 2, locationY - bearingIcon.getHeight() / 2,
+						locationPaint);
 			}
-			
+
 		}
 	}
 
@@ -156,16 +168,6 @@ public class PointLocationLayer implements OsmandMapLayer {
 	}
 	@Override
 	public boolean drawInScreenPixels() {
-		return false;
-	}
-
-	@Override
-	public boolean onLongPressEvent(PointF point) {
-		return false;
-	}
-
-	@Override
-	public boolean onTouchEvent(PointF point) {
 		return false;
 	}
 

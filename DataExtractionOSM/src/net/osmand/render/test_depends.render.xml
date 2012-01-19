@@ -1,0 +1,12 @@
+<renderingStyle name="test_depends" depends="default" defaultColor="#232323" version="1">
+
+<!-- Test -->
+  <order>
+ 	<filter tag="highway" value="motorway" order="50" shadowLevel="1" orderType="2"/>
+	<filter tag="highway" value="pedestrian" order="60" />
+	<filter tag="highway" value="byway" order="62" />
+	<filter tag="highway" value="footway" order="65" />
+	<filter tag="highway" value="steps" order="66" />
+	<filter tag="highway" value="bridleway" order="59" />
+</order> 
+</renderingStyle>

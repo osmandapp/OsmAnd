@@ -1,5 +1,7 @@
 package net.osmand.plus.activities;
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +30,7 @@ import net.osmand.plus.ResourceManager;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.MapVectorLayer;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.FavoritesLayer;
@@ -116,7 +119,7 @@ public class MapActivityLayers {
 		// 2. osm bugs layer
 		osmBugsLayer = new OsmBugsLayer(activity);
 		// 3. poi layer
-		poiMapLayer = new POIMapLayer();
+		poiMapLayer = new POIMapLayer(activity);
 		// 4. favorites layer
 		favoritesLayer = new FavoritesLayer();
 		// 5. transport layer
@@ -124,22 +127,21 @@ public class MapActivityLayers {
 		// 5.5 transport info layer 
 		transportInfoLayer = new TransportInfoLayer(TransportRouteHelper.getInstance());
 		mapView.addLayer(transportInfoLayer, 5.5f);
-		// 6. point navigation layer
-		navigationLayer = new PointNavigationLayer();
-		mapView.addLayer(navigationLayer, 6);
-		// 7. point location layer 
+		// 6. point location layer 
 		locationLayer = new PointLocationLayer();
-		mapView.addLayer(locationLayer, 7);
-		// 8. map info layer
-		mapInfoLayer = new MapInfoLayer(activity, routeLayer);
-		mapView.addLayer(mapInfoLayer, 8);
-		// 9. context menu layer 
+		mapView.addLayer(locationLayer, 6);
+		// 7. point navigation layer
+		navigationLayer = new PointNavigationLayer();
+		mapView.addLayer(navigationLayer, 7);
+		// 8. context menu layer 
 		contextMenuLayer = new ContextMenuLayer(activity);
-		mapView.addLayer(contextMenuLayer, 9);
+		mapView.addLayer(contextMenuLayer, 8);
+		// 9. map info layer
+		mapInfoLayer = new MapInfoLayer(activity, routeLayer);
+		mapView.addLayer(mapInfoLayer, 9);
 		// 10. route info layer
-		routeInfoLayer = new RouteInfoLayer(routingHelper, activity);
+		routeInfoLayer = new RouteInfoLayer(routingHelper, activity, contextMenuLayer);
 		mapView.addLayer(routeInfoLayer, 10);
-		
 		// 11. route info layer
 		mapControlsLayer = new MapControlsLayer(activity);
 		mapView.addLayer(mapControlsLayer, 11);
@@ -234,59 +236,70 @@ public class MapActivityLayers {
 	}
 	
 	public void openLayerSelectionDialog(final OsmandMapTileView mapView){
-		List<String> layersList = new ArrayList<String>();
+		
+		final TIntArrayList layers = new TIntArrayList();
+		TIntArrayList selectedList = new TIntArrayList();
 		final OsmandSettings settings = getApplication().getSettings();
-		layersList.add(getString(R.string.layer_map));
-		layersList.add(getString(R.string.layer_poi));
-		layersList.add(getString(R.string.layer_favorites));
-		layersList.add(getString(R.string.layer_overlay));
-		layersList.add(getString(R.string.layer_underlay));
-		layersList.add(getString(R.string.layer_gpx_layer));
-		layersList.add(getString(R.string.layer_transport));
-		layersList.add(getString(R.string.layer_osm_bugs));
+		layers.add(R.string.layer_map);
+		selectedList.add(1);
+		layers.add(R.string.layer_poi);
+		selectedList.add(settings.SHOW_POI_OVER_MAP.get() ? 1 : 0);
+		if(settings.SHOW_POI_OVER_MAP.get()){
+			layers.add(R.string.layer_poi_label);
+			selectedList.add(settings.SHOW_POI_LABEL.get() ? 1 : 0);
+		}
+		layers.add(R.string.layer_favorites);
+		selectedList.add(settings.SHOW_FAVORITES.get() ? 1 : 0);
+		layers.add(R.string.layer_overlay);
+		selectedList.add(overlayLayer.getMap() != null ? 1 : 0);
+		layers.add(R.string.layer_underlay);
+		selectedList.add(underlayLayer.getMap() != null ? 1 : 0);
 		
-		
-		final int routeInfoInd = routeInfoLayer.couldBeVisible() ? layersList.size() : -1;
+		layers.add(R.string.layer_gpx_layer);
+		selectedList.add(gpxLayer.isVisible() ? 1 : 0);
 		if(routeInfoLayer.couldBeVisible()){
-			layersList.add(getString(R.string.layer_route));
-		}
-		final int transportRouteInfoInd = !TransportRouteHelper.getInstance().routeIsCalculated() ? - 1 : layersList.size(); 
-		if(transportRouteInfoInd > -1){
-			layersList.add(getString(R.string.layer_transport_route));
+			layers.add(R.string.layer_route);
+			selectedList.add(routeInfoLayer.isUserDefinedVisible() ? 1 : 0);
 		}
 		
-		final boolean[] selected = new boolean[layersList.size()];
-		Arrays.fill(selected, true);
-		selected[1] = settings.SHOW_POI_OVER_MAP.get();
-		selected[2] = settings.SHOW_FAVORITES.get();
-		selected[3] = overlayLayer.getMap() != null;
-		selected[4] = underlayLayer.getMap() != null;
-		selected[5] = gpxLayer.isVisible();
-		selected[6] = settings.SHOW_TRANSPORT_OVER_MAP.get();
-		selected[7] = settings.SHOW_OSM_BUGS.get();
-		if(routeInfoInd != -1){
-			selected[routeInfoInd] = routeInfoLayer.isUserDefinedVisible(); 
+		layers.add(R.string.layer_transport);
+		selectedList.add(settings.SHOW_TRANSPORT_OVER_MAP.get() ? 1 : 0);
+		if(TransportRouteHelper.getInstance().routeIsCalculated()){
+			layers.add(R.string.layer_transport_route);
+			selectedList.add(routeInfoLayer.isUserDefinedVisible() ? 1 : 0);
 		}
-		if(transportRouteInfoInd != -1){
-			selected[transportRouteInfoInd] = transportInfoLayer.isVisible(); 
+		
+		layers.add(R.string.layer_osm_bugs);
+		selectedList.add(settings.SHOW_OSM_BUGS.get() ? 1 : 0);
+		
+		final boolean[] selected = new boolean[selectedList.size()];
+		for (int i = 0; i < selected.length; i++) {
+			selected[i] = selectedList.get(i) > 0;
 		}
 		
 		Builder builder = new AlertDialog.Builder(activity);
-		builder.setMultiChoiceItems(layersList.toArray(new String[layersList.size()]), selected, new DialogInterface.OnMultiChoiceClickListener() {
+		String[] layersName = new String[layers.size()];
+		for (int i = 0; i < layers.size(); i++) {
+			layersName[i] = getString(layers.get(i));
+
+		}
+		builder.setMultiChoiceItems(layersName, selected, new DialogInterface.OnMultiChoiceClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int item, boolean isChecked) {
-				if (item == 0) {
+				if (layers.get(item) == R.string.layer_map) {
 					dialog.dismiss();
 					selectMapLayer(mapView);
-				} else if(item == 1){
+				} else if(layers.get(item) == R.string.layer_poi){
 					if(isChecked){
 						selectPOIFilterLayer(mapView);
 					}
 					settings.SHOW_POI_OVER_MAP.set(isChecked);
-				} else if(item == 2){
+				} else if(layers.get(item) == R.string.layer_favorites){
 					settings.SHOW_FAVORITES.set(isChecked);
-				} else if(item == 3){
+				} else if(layers.get(item) == R.string.layer_poi_label){
+					settings.SHOW_POI_LABEL.set(isChecked);
+				} else if(layers.get(item) == R.string.layer_overlay){
 					if(overlayLayer.getMap() != null){
 						settings.MAP_OVERLAY.set(null);
 						updateMapSource(mapView, null);
@@ -295,7 +308,7 @@ public class MapActivityLayers {
 						selectMapOverlayLayer(mapView, settings.MAP_OVERLAY, settings.MAP_OVERLAY_TRANSPARENCY, 
 								overlayLayer);
 					}
-				} else if(item == 4){
+				} else if(layers.get(item) == R.string.layer_underlay){
 					if(underlayLayer.getMap() != null){
 						settings.MAP_UNDERLAY.set(null);
 						updateMapSource(mapView, null);
@@ -304,7 +317,7 @@ public class MapActivityLayers {
 						selectMapOverlayLayer(mapView, settings.MAP_UNDERLAY,settings.MAP_TRANSPARENCY, 
 								mapTileLayer, mapVectorLayer);
 					}
-				} else if(item == 5){
+				} else if(layers.get(item) == R.string.layer_gpx_layer){
 					if(gpxLayer.isVisible()){
 						getApplication().setGpxFileToDisplay(null);
 						gpxLayer.clearCurrentGPX();
@@ -312,13 +325,13 @@ public class MapActivityLayers {
 						dialog.dismiss();
 						showGPXFileLayer(mapView);
 					}
-				} else if(item == 6){
+				} else if(layers.get(item) == R.string.layer_transport){
 					settings.SHOW_TRANSPORT_OVER_MAP.set(isChecked);
-				} else if(item == 7){
+				} else if(layers.get(item) == R.string.layer_osm_bugs){
 					settings.SHOW_OSM_BUGS.set(isChecked);
-				} else if(item == routeInfoInd){
+				} else if(layers.get(item) == R.string.layer_route){
 					routeInfoLayer.setVisible(isChecked);
-				} else if(item == transportRouteInfoInd){
+				} else if(layers.get(item) == R.string.layer_transport_route){
 					transportInfoLayer.setVisible(isChecked);
 				}
 				updateLayers(mapView);
@@ -464,7 +477,7 @@ public class MapActivityLayers {
 		builder.show();
 	}
 	
-	private void selectMapLayer(final OsmandMapTileView mapView){
+	public void selectMapLayer(final OsmandMapTileView mapView){
 		final OsmandSettings settings = getApplication().getSettings();
 		
 		final LinkedHashMap<String, String> entriesMap = new LinkedHashMap<String, String>();

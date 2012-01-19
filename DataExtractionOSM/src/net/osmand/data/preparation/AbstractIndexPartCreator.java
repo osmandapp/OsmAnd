@@ -2,6 +2,7 @@ package net.osmand.data.preparation;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
@@ -22,6 +23,13 @@ public class AbstractIndexPartCreator {
 	
 	protected Map<PreparedStatement, Integer> pStatements = new LinkedHashMap<PreparedStatement, Integer>();
 	
+	public PreparedStatement createPrepareStatement(Connection mapConnection,
+			String string) throws SQLException {
+		PreparedStatement prepareStatement = mapConnection.prepareStatement(string);
+		pStatements.put(prepareStatement, 0);
+		return prepareStatement;
+	}
+
 	protected void closePreparedStatements(PreparedStatement... preparedStatements) throws SQLException {
 		for (PreparedStatement p : preparedStatements) {
 			if (p != null) {
@@ -39,6 +47,18 @@ public class AbstractIndexPartCreator {
 			}
 			p.close();
 		}
+	}
+	
+	protected boolean executePendingPreparedStatements() throws SQLException {
+		boolean exec = false;
+		for (PreparedStatement p : pStatements.keySet()) {
+			if (pStatements.get(p) > 0) {
+				p.executeBatch();
+				pStatements.put(p, 0);
+				exec = true;
+			}
+		}
+		return exec;
 	}
 	
 	protected void addBatch(PreparedStatement p) throws SQLException {

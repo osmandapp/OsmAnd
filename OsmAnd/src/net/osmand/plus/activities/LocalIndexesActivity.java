@@ -71,7 +71,6 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 
 	
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,18 +80,13 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		settings = OsmandSettings.getOsmandSettings(this);
 		descriptionLoader = new LoadLocalIndexDescriptionTask();
 		listAdapter = new LocalIndexesAdapter();
-		Object indexes = getLastNonConfigurationInstance();
-		asyncLoader = new LoadLocalIndexTask();
-		if(indexes instanceof List<?>){
-			asyncLoader.setResult((List<LocalIndexInfo>) indexes);
-		} else {
-			asyncLoader.execute(this);
-		}
+		
 		
 		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
+				asyncLoader.setResult(null);
 				startActivity(new Intent(LocalIndexesActivity.this, DownloadIndexActivity.class));
 			}
 		});
@@ -112,6 +106,21 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		
 		setListAdapter(listAdapter);
 		updateDescriptionTextWithSize();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (asyncLoader == null || asyncLoader.getResult() == null) {
+			Object indexes = getLastNonConfigurationInstance();
+			asyncLoader = new LoadLocalIndexTask();
+			if (indexes instanceof List<?>) {
+				asyncLoader.setResult((List<LocalIndexInfo>) indexes);
+			} else {
+				asyncLoader.execute(this);
+			}
+		}
 	}
 	
 	private void showContextMenu(final LocalIndexInfo info) {
@@ -146,7 +155,8 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 						if (info != null && info.getGpxFile() != null) {
 							WptPt loc = info.getGpxFile().findPointToShow();
 							if (loc != null) {
-								OsmandSettings.getOsmandSettings(LocalIndexesActivity.this).setMapLocationToShow(loc.lat, loc.lon);
+								OsmandSettings settings = OsmandSettings.getOsmandSettings(LocalIndexesActivity.this);
+								settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
 							}
 							((OsmandApplication) getApplication()).setGpxFileToDisplay(info.getGpxFile());
 							MapActivity.launchMapActivityMoveToTop(LocalIndexesActivity.this);
@@ -156,11 +166,30 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 					} else if (resId == R.string.local_index_mi_restore) {
 						new LocalIndexOperationTask(RESTORE_OPERATION).execute(info);
 					} else if (resId == R.string.local_index_mi_delete) {
-						new LocalIndexOperationTask(DELETE_OPERATION).execute(info);
+						Builder confirm = new AlertDialog.Builder(LocalIndexesActivity.this);
+						confirm.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								new LocalIndexOperationTask(DELETE_OPERATION).execute(info);	
+							}
+						});
+						confirm.setNegativeButton(R.string.default_buttons_no, null);
+						// confirm.setTitle(R.string.delete_confirmation_title);
+						confirm.setMessage(getString(R.string.delete_confirmation_msg, info.getFileName()));
+						confirm.show();
 					} else if (resId == R.string.local_index_mi_backup) {
 						new LocalIndexOperationTask(BACKUP_OPERATION).execute(info);
 					} else if (resId == R.string.local_index_mi_upload_gpx) {
-						new UploadGPXFilesTask().execute(info);
+						Builder confirm = new AlertDialog.Builder(LocalIndexesActivity.this);
+						confirm.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								new UploadGPXFilesTask().execute(info);
+							}
+						});
+						confirm.setNegativeButton(R.string.default_buttons_no, null);
+						confirm.setMessage(getString(R.string.sendtoOSM_confirmation_msg, info.getFileName()));
+						confirm.show();
 					}
 				}
 
@@ -231,11 +260,15 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		
 		public void setResult(List<LocalIndexInfo> result) {
 			this.result = result;
-			for (LocalIndexInfo v : result) {
-				listAdapter.addLocalIndexInfo(v);
+			if(result == null){
+				listAdapter.clear();
+			} else {
+				for (LocalIndexInfo v : result) {
+					listAdapter.addLocalIndexInfo(v);
+				}
+				listAdapter.notifyDataSetChanged();
+				onPostExecute(result);
 			}
-			listAdapter.notifyDataSetChanged();
-			onPostExecute(result);
 		}
 
 		@Override

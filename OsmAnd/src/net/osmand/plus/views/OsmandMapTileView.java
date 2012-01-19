@@ -555,6 +555,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 	}
 
+	@Override
 	public void tileDownloaded(DownloadRequest request) {
 		// force to refresh map because image can be loaded from different threads
 		// and threads can block each other especially for sqlite images when they
@@ -692,6 +693,11 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
 			animatedDraggingThread.stopAnimating();
 		}
+		for(int i=layers.size() - 1; i >= 0; i--) {
+			if(layers.get(i).onTouchEvent(event)) {
+				return true;
+			}
+		}
 		if (!multiTouchSupport.onTouchEvent(event)) {
 			/* return */gestureDetector.onTouchEvent(event);
 		}
@@ -814,19 +820,13 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private class MapTileViewOnGestureListener implements OnGestureListener {
 		@Override
 		public boolean onDown(MotionEvent e) {
-			// enable double tap animation
-			// animatedDraggingThread.stopAnimating();
 			return false;
 		}
 
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-//			if (Math.abs(e1.getX() - e2.getX()) + Math.abs(e1.getY() - e2.getY()) > 50 * dm.density) {
-				animatedDraggingThread.startDragging(velocityX, velocityY, 
+			animatedDraggingThread.startDragging(velocityX, velocityY, 
 						e1.getX(), e1.getY(), e2.getX(), e2.getY(), true);
-//			} else {
-//				onScroll(e1, e2, e1.getX() - e2.getX(), e1.getY() - e2.getY());
-//			}
 			return true;
 		}
 
@@ -866,7 +866,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				log.debug("On click event " + point.x + " " + point.y); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			for (int i = layers.size() - 1; i >= 0; i--) {
-				if (layers.get(i).onTouchEvent(point)) {
+				if (layers.get(i).onSingleTap(point)) {
 					return true;
 				}
 			}

@@ -395,7 +395,8 @@ abstract public class THash implements Externalizable {
     }
 
 
-    public void writeExternal( ObjectOutput out ) throws IOException {
+    @Override
+	public void writeExternal( ObjectOutput out ) throws IOException {
         // VERSION
         out.writeByte( 0 );
 
@@ -407,7 +408,8 @@ abstract public class THash implements Externalizable {
     }
 
 
-    public void readExternal( ObjectInput in )
+    @Override
+	public void readExternal( ObjectInput in )
             throws IOException, ClassNotFoundException {
 
         // VERSION

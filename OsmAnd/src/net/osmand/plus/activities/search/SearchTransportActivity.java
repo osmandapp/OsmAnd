@@ -267,6 +267,7 @@ public class SearchTransportActivity extends ListActivity implements SearchActiv
 	}
 	
 
+	@Override
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		final RouteInfoLocation item = ((TransportStopAdapter)getListAdapter()).getItem(position);
 		Builder builder = new AlertDialog.Builder(this);
@@ -454,6 +455,7 @@ public class SearchTransportActivity extends ListActivity implements SearchActiv
 			return model;
 		}
 
+		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {
@@ -500,6 +502,7 @@ public class SearchTransportActivity extends ListActivity implements SearchActiv
 			super(SearchTransportActivity.this, R.layout.search_transport_route_item, list);
 		}
 
+		@Override
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			View row = convertView;
 			final RouteInfoLocation info = getItem(position);

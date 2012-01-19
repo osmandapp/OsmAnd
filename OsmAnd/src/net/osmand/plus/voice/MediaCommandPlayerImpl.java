@@ -28,7 +28,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	// playing media
 	private MediaPlayer mediaPlayer;
 	// indicates that player is ready to play first file
-	private boolean playNext = true;
+	private volatile boolean playNext = true;
 	private List<String> filesToPlay = Collections.synchronizedList(new ArrayList<String>());
 
 	
@@ -78,6 +78,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer {
 						mediaPlayer.setDataSource(file.getAbsolutePath());
 						mediaPlayer.prepare();
 						mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+							@Override
 							public void onCompletion(MediaPlayer mp) {
 								mp.release();
 								mediaPlayer = new MediaPlayer();

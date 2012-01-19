@@ -116,16 +116,20 @@ public final class WireFormat {
     FIXED32 (JavaType.INT        , WIRETYPE_FIXED32         ),
     BOOL    (JavaType.BOOLEAN    , WIRETYPE_VARINT          ),
     STRING  (JavaType.STRING     , WIRETYPE_LENGTH_DELIMITED) {
-      public boolean isPackable() { return false; }
+      @Override
+	public boolean isPackable() { return false; }
     },
     GROUP   (JavaType.MESSAGE    , WIRETYPE_START_GROUP     ) {
-      public boolean isPackable() { return false; }
+      @Override
+	public boolean isPackable() { return false; }
     },
     MESSAGE (JavaType.MESSAGE    , WIRETYPE_LENGTH_DELIMITED) {
-      public boolean isPackable() { return false; }
+      @Override
+	public boolean isPackable() { return false; }
     },
     BYTES   (JavaType.BYTE_STRING, WIRETYPE_LENGTH_DELIMITED) {
-      public boolean isPackable() { return false; }
+      @Override
+	public boolean isPackable() { return false; }
     },
     UINT32  (JavaType.INT        , WIRETYPE_VARINT          ),
     ENUM    (JavaType.ENUM       , WIRETYPE_VARINT          ),

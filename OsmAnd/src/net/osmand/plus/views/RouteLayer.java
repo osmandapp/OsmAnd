@@ -5,7 +5,7 @@ import java.util.List;
 
 import net.osmand.LogUtil;
 import net.osmand.osm.MapUtils;
-import net.osmand.plus.activities.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelper;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -19,7 +19,7 @@ import android.graphics.Paint.Style;
 import android.location.Location;
 import android.util.Log;
 
-public class RouteLayer implements OsmandMapLayer {
+public class RouteLayer extends OsmandMapLayer {
 	
 	private OsmandMapTileView view;
 	
@@ -50,6 +50,7 @@ public class RouteLayer implements OsmandMapLayer {
 		path = new Path();
 	}
 	
+	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 		initUI();
@@ -127,7 +128,7 @@ public class RouteLayer implements OsmandMapLayer {
 	}
 
 	@Override
-	public boolean onTouchEvent(PointF point) {
+	public boolean onSingleTap(PointF point) {
 		return false;
 	}
 

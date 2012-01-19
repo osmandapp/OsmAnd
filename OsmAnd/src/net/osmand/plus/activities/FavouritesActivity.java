@@ -94,7 +94,7 @@ public class FavouritesActivity extends ExpandableListActivity {
 				if (child == -1) {
 					return;
 				}
-				menu.setHeaderTitle(R.string.favourites_context_menu_title);
+				// menu.setHeaderTitle(R.string.favourites_context_menu_title);
 				
 				menu.add(0, SHOW_ON_MAP, 0, R.string.show_poi_on_map);
 				menu.add(0, NAVIGATE_TO, 1, R.string.favourites_context_menu_navigate);
@@ -151,14 +151,17 @@ public class FavouritesActivity extends ExpandableListActivity {
 	private void deleteFavorites() {
 		new AsyncTask<Void, Object, String>(){
 
+			@Override
 			protected void onPreExecute() {
 				showProgressBar();
 			};
+			@Override
 			protected void onPostExecute(String result) {
 				hideProgressBar();
 				favouritesAdapter.synchronizeGroups();
 			};
 			
+			@Override
 			protected void onProgressUpdate(Object... values) {
 				for(Object o : values){
 					if(o instanceof FavouritePoint){
@@ -193,6 +196,7 @@ public class FavouritesActivity extends ExpandableListActivity {
 		super.onResume();
 		favouritesAdapter.synchronizeGroups();
 		final LatLon mapLocation = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+		
 		if(mapLocation != null){
 			// TODO sort
 //			favouritesAdapter.sort(new Comparator<FavouritePoint>(){
@@ -227,8 +231,10 @@ public class FavouritesActivity extends ExpandableListActivity {
 			}
 		} else {
 			FavouritePoint point = (FavouritePoint) favouritesAdapter.getChild(groupPosition, childPosition);
-			OsmandSettings.getOsmandSettings(this).SHOW_FAVORITES.set( true);
-			OsmandSettings.getOsmandSettings(this).setMapLocationToShow(point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName()); //$NON-NLS-1$
+			OsmandSettings settings = OsmandSettings.getOsmandSettings(this);
+			settings.SHOW_FAVORITES.set(true);
+			settings.setMapLocationToShow(point.getLatitude(), point.getLongitude(), 
+					Math.max(12, settings.getLastKnownMapZoom()), null, getString(R.string.favorite)+" : " + point.getName());
 			MapActivity.launchMapActivityMoveToTop(FavouritesActivity.this);
 		}
 		return true;
@@ -242,8 +248,10 @@ public class FavouritesActivity extends ExpandableListActivity {
 		int group = ExpandableListView.getPackedPositionGroup(((ExpandableListContextMenuInfo)menuInfo).packedPosition);
 		final FavouritePoint point = (FavouritePoint) favouritesAdapter.getChild(group, child);
 		if (aItem.getItemId() == SHOW_ON_MAP) {
-			OsmandSettings.getOsmandSettings(this).SHOW_FAVORITES.set( true);
-			OsmandSettings.getOsmandSettings(this).setMapLocationToShow(point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName());
+			OsmandSettings settings = OsmandSettings.getOsmandSettings(this);
+			settings.SHOW_FAVORITES.set(true);
+			settings.setMapLocationToShow(point.getLatitude(), point.getLongitude(), 
+					Math.max(12, settings.getLastKnownMapZoom()), null, getString(R.string.favorite)+" : " + point.getName());
 			MapActivity.launchMapActivityMoveToTop(this);
 		} else if (aItem.getItemId() == NAVIGATE_TO) {
 			OsmandSettings.getOsmandSettings(this).setPointToNavigate(point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName());
@@ -346,10 +354,12 @@ public class FavouritesActivity extends ExpandableListActivity {
 						return GPXUtilities.writeGpxFile(f, gpx, FavouritesActivity.this);
 					}
 					
+					@Override
 					protected void onPreExecute() {
 						showProgressBar();
 					};
 					
+					@Override
 					protected void onPostExecute(String warning) {
 						hideProgressBar();
 						if(warning == null){
@@ -402,16 +412,19 @@ public class FavouritesActivity extends ExpandableListActivity {
 						return null;
 					}
 					
+					@Override
 					protected void onProgressUpdate(FavouritePoint... values) {
 						for(FavouritePoint p : values){
 							favouritesAdapter.addFavoritePoint(p);
 						}
 					};
 					
+					@Override
 					protected void onPreExecute() {
 						showProgressBar();
 					};
 					
+					@Override
 					protected void onPostExecute(String warning) {
 						hideProgressBar();
 						if(warning == null){

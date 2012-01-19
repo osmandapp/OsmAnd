@@ -10,7 +10,6 @@ import net.osmand.plus.ResourceManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.FloatMath;
@@ -220,6 +219,7 @@ public class MapTileLayer extends BaseMapLayer {
 	}
 	
 	
+	@Override
 	public int getMaximumShownMapZoom(){
 		if(map == null){
 			return 20;
@@ -228,6 +228,7 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 	}
 	
+	@Override
 	public int getMinimumShownMapZoom(){
 		if(map == null){
 			return 1;
@@ -255,16 +256,5 @@ public class MapTileLayer extends BaseMapLayer {
 		return map;
 	}
 	
-
-
-	@Override
-	public boolean onLongPressEvent(PointF point) {
-		return false;
-	}
-
-	@Override
-	public boolean onTouchEvent(PointF point) {
-		return false;
-	}
 
 }

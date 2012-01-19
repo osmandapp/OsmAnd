@@ -49,11 +49,13 @@ public class LeafElement extends Element
   //  {
   //    return(new Long(recordPtr));
   //  }
-  public long getPtr()
+  @Override
+public long getPtr()
   {
     return recordPtr;
   }
-  public int getElementType()
+  @Override
+public int getElementType()
   {
     return  Node.LEAF_NODE;
   }
@@ -64,15 +66,18 @@ public class LeafElement extends Element
   //      throw new IllegalValueException("rtree.LeafElement.setPtr: pointer shoild be Long");
   //    recordPtr = ((Long)ptr).longValue();
   //  }
-  public void setPtr(long ptr)
+  @Override
+public void setPtr(long ptr)
   {
     recordPtr = ptr;
   }
-  public String toString()
+  @Override
+public String toString()
   {
     return (super.toString()+"\n\trecPointer: "+recordPtr);
   }
-  public Object clone()
+  @Override
+public Object clone()
   {
     try{
       return new LeafElement(new Rect(Rectangle.getMinX(), Rectangle.getMinY(),

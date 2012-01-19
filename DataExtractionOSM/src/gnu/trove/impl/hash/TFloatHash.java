@@ -141,7 +141,8 @@ abstract public class TFloatHash extends TPrimitiveHash {
      * @param initialCapacity an <code>int</code> value
      * @return the actual capacity chosen
      */
-    protected int setUp( int initialCapacity ) {
+    @Override
+	protected int setUp( int initialCapacity ) {
         int capacity;
 
         capacity = super.setUp( initialCapacity );
@@ -185,7 +186,8 @@ abstract public class TFloatHash extends TPrimitiveHash {
      *
      * @param index an <code>int</code> value
      */
-    protected void removeAt( int index ) {
+    @Override
+	protected void removeAt( int index ) {
         _set[index] = no_entry_value;
         super.removeAt( index );
     }

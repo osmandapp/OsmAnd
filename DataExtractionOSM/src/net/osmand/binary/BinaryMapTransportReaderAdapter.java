@@ -6,7 +6,7 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 import static net.osmand.binary.BinaryMapIndexReader.TRANSPORT_STOP_ZOOM;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -64,18 +64,13 @@ public class BinaryMapTransportReaderAdapter {
 	}
 
 	protected static class IndexStringTable {
-		private static final int SIZE_OFFSET_ARRAY = 100;
-		private static final int WINDOW_SIZE = 25;
 		int fileOffset = 0;
 		int length = 0;
 
 		// offset from start for each SIZE_OFFSET_ARRAY elements
 		// (SIZE_OFFSET_ARRAY + 1) offset = offsets[0] + skipOneString()
 		TIntArrayList offsets = new TIntArrayList();
-		TIntObjectMap<String> cacheOfStrings = new TIntObjectHashMap<String>();
 
-		int windowOffset = 0;
-		List<String> window = new ArrayList<String>();
 	}
 	
 	
@@ -139,117 +134,6 @@ public class BinaryMapTransportReaderAdapter {
 				break;
 			}
 		}
-	}
-
-
-	// if cache false put into window
-	private int readStringTable(IndexStringTable st, int startOffset, int length, boolean cache) throws IOException {
-		
-		int toSkip = seekUsingOffsets(st, startOffset);
-		if(!cache){
-			st.window.clear();
-			st.windowOffset = startOffset;
-		}
-		int old = codedIS.pushLimit(st.fileOffset + st.length - codedIS.getTotalBytesRead());
-		while (length > 0) {
-			int t = codedIS.readTag();
-			int tag = WireFormat.getTagFieldNumber(t);
-			switch (tag) {
-			case 0:
-				length = 0;
-				break;
-			case OsmandOdb.StringTable.S_FIELD_NUMBER:
-				if (toSkip > 0) {
-					toSkip--;
-					skipUnknownField(t);
-				} else {
-					String string = codedIS.readString();
-					if(cache){
-						st.cacheOfStrings.put(startOffset, string);
-					} else {
-						st.window.add(string);
-					}
-					startOffset++;
-					length--;
-				}
-				break;
-			default:
-				skipUnknownField(t);
-				break;
-			}
-		}
-		codedIS.popLimit(old);
-		return startOffset;
-	}
-	
-	protected String getStringFromStringTable(IndexStringTable st, int ind) throws IOException {
-		int lastRead = Integer.MAX_VALUE;
-		while (lastRead >= ind) {
-			if (st.cacheOfStrings.containsKey(ind)) {
-				return st.cacheOfStrings.get(ind);
-			}
-			if (ind >= st.windowOffset && (ind - st.windowOffset) < st.window.size()) {
-				return st.window.get(ind - st.windowOffset);
-			}
-			int startOffset = ind - IndexStringTable.WINDOW_SIZE / 4;
-			if(startOffset < 0){
-				startOffset = 0;
-			}
-			lastRead = readStringTable(st, startOffset, IndexStringTable.WINDOW_SIZE, false);
-		}
-		return null;
-	}
-	
-	private int seekUsingOffsets(IndexStringTable st, int index) throws IOException {
-		initStringOffsets(st, index);
-		int shift = 0;
-		int a = index / IndexStringTable.SIZE_OFFSET_ARRAY;
-		if (a > st.offsets.size()) {
-			a = st.offsets.size();
-		}
-		if (a > 0) {
-			shift = st.offsets.get(a - 1);
-		}
-		codedIS.seek(st.fileOffset + shift);
-		return index - a * IndexStringTable.SIZE_OFFSET_ARRAY;
-	}
-	
-	private void initStringOffsets(IndexStringTable st, int index) throws IOException {
-		if (index > IndexStringTable.SIZE_OFFSET_ARRAY * (st.offsets.size() + 1)) {
-			int shift = 0;
-			if (!st.offsets.isEmpty()) {
-				shift = st.offsets.get(st.offsets.size() - 1);
-			}
-			codedIS.seek(st.fileOffset + shift);
-			int old = codedIS.pushLimit(st.length - shift);
-			while (index > IndexStringTable.SIZE_OFFSET_ARRAY * (st.offsets.size() + 1)) {
-				int ind = 0;
-				while (ind < IndexStringTable.SIZE_OFFSET_ARRAY && ind != -1) {
-					int t = codedIS.readTag();
-					int tag = WireFormat.getTagFieldNumber(t);
-					switch (tag) {
-					case 0:
-						ind = -1;
-						break;
-					case OsmandOdb.StringTable.S_FIELD_NUMBER:
-						skipUnknownField(t);
-						ind++;
-						break;
-					default:
-						skipUnknownField(t);
-						break;
-					}
-				}
-				if(ind == IndexStringTable.SIZE_OFFSET_ARRAY){
-					st.offsets.add(codedIS.getTotalBytesRead() - st.fileOffset);
-				} else {
-					// invalid index
-					break;
-				}
-			}
-			codedIS.popLimit(old);
-		}
-
 	}
 	
 	protected void searchTransportTreeBounds(int pleft, int pright, int ptop, int pbottom,
@@ -340,16 +224,19 @@ public class BinaryMapTransportReaderAdapter {
 		}
 	}
 	
-	public net.osmand.data.TransportRoute getTransportRoute(int filePointer, TransportIndex ind) throws IOException {
+	private String regStr(TIntObjectHashMap<String> stringTable) throws IOException{
+		int i = codedIS.readUInt32();
+		stringTable.putIfAbsent(i, "");
+		return ((char) i)+"";
+	}
+	
+	public net.osmand.data.TransportRoute getTransportRoute(int filePointer, TIntObjectHashMap<String> stringTable,
+			boolean onlyDescription) throws IOException {
 		codedIS.seek(filePointer);
 		int routeLength = codedIS.readRawVarint32();
 		int old = codedIS.pushLimit(routeLength);
 		net.osmand.data.TransportRoute dataObject = new net.osmand.data.TransportRoute();
 		boolean end = false;
-		int name = -1;
-		int nameEn = -1;
-		int operator = -1;
-		int type = -1;
 		long rid = 0;
 		int rx = 0;
 		int ry = 0;
@@ -373,21 +260,26 @@ public class BinaryMapTransportReaderAdapter {
 				dataObject.setRef(codedIS.readString());
 				break;
 			case OsmandOdb.TransportRoute.TYPE_FIELD_NUMBER :
-				type = codedIS.readUInt32();
+				dataObject.setType(regStr(stringTable)); //$NON-NLS-1$
 				break;
 			case OsmandOdb.TransportRoute.NAME_EN_FIELD_NUMBER :
-				nameEn = codedIS.readUInt32();
+				dataObject.setEnName(regStr(stringTable)); //$NON-NLS-1$
 				break;
 			case OsmandOdb.TransportRoute.NAME_FIELD_NUMBER :
-				name = codedIS.readUInt32();
+				dataObject.setName(regStr(stringTable)); //$NON-NLS-1$
 				break;
 			case OsmandOdb.TransportRoute.OPERATOR_FIELD_NUMBER:
-				operator = codedIS.readUInt32();
+				dataObject.setOperator(regStr(stringTable)); //$NON-NLS-1$
 				break;
 			case OsmandOdb.TransportRoute.REVERSESTOPS_FIELD_NUMBER:
+				if(onlyDescription){
+					end = true;
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+					break;
+				}
 				int length = codedIS.readRawVarint32();
 				int olds = codedIS.pushLimit(length);
-				TransportStop stop = readTransportRouteStop(dx, dy, did);
+				TransportStop stop = readTransportRouteStop(dx, dy, did, stringTable);
 				dataObject.getBackwardStops().add(stop);
 				did = stop.getId();
 				dx = (int) MapUtils.getTileNumberX(TRANSPORT_STOP_ZOOM, stop.getLocation().getLongitude());
@@ -395,9 +287,14 @@ public class BinaryMapTransportReaderAdapter {
 				codedIS.popLimit(olds);
 				break;
 			case OsmandOdb.TransportRoute.DIRECTSTOPS_FIELD_NUMBER:
+				if(onlyDescription){
+					end = true;
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+					break;
+				}
 				length = codedIS.readRawVarint32();
 				olds = codedIS.pushLimit(length);
-				stop = readTransportRouteStop(rx, ry, rid);
+				stop = readTransportRouteStop(rx, ry, rid, stringTable);
 				dataObject.getForwardStops().add(stop);
 				rid = stop.getId();
 				rx = (int) MapUtils.getTileNumberX(TRANSPORT_STOP_ZOOM, stop.getLocation().getLongitude());
@@ -410,45 +307,83 @@ public class BinaryMapTransportReaderAdapter {
 			}
 		}
 		codedIS.popLimit(old);
-		if(name != -1){
-			dataObject.setName(getStringFromStringTable(ind.stringTable, name));
-		}
-		if(nameEn != -1){
-			dataObject.setEnName(getStringFromStringTable(ind.stringTable, nameEn));
-		}
-		if(nameEn == -1 || dataObject.getEnName().length() == 0){
-			dataObject.setEnName(Junidecode.unidecode(dataObject.getName()));
-		}
-		
-		if(operator != -1){
-			dataObject.setOperator(getStringFromStringTable(ind.stringTable, operator));
-		}
-		if(type != -1){
-			dataObject.setType(getStringFromStringTable(ind.stringTable, type));
-		}
-		for (int i = 0; i < 2; i++) {
-			List<TransportStop> stops = i == 0 ? dataObject.getForwardStops() : dataObject.getBackwardStops();
-			for (TransportStop s : stops) {
-				if (s.getName().length() > 0) {
-					s.setName(getStringFromStringTable(ind.stringTable, s.getName().charAt(0)));
-				}
-				if (s.getEnName().length() > 0) {
-					s.setEnName(getStringFromStringTable(ind.stringTable, s.getEnName().charAt(0)));
-				}
-				if (s.getEnName().length() == 0) {
-					s.setEnName(Junidecode.unidecode(s.getName()));
-				}
-
-			}
-		}
 		
 		
 		return dataObject;
 	}
+	
+	protected void initializeStringTable(TransportIndex ind, TIntObjectHashMap<String> stringTable) throws IOException {
+		int[] values = stringTable.keys();
+		Arrays.sort(values);
+		codedIS.seek(ind.stringTable.fileOffset);
+		int oldLimit = codedIS.pushLimit(ind.stringTable.length);
+		int current = 0;
+		int i = 0;
+		while (i < values.length) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				break;
+			case OsmandOdb.StringTable.S_FIELD_NUMBER:
+				if (current == values[i]) {
+					String value = codedIS.readString();
+					stringTable.put(values[i], value);
+					i++;
+				} else {
+					skipUnknownField(t);
+				}
+				current ++;
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+		codedIS.popLimit(oldLimit);
+	}
+
+	protected void initializeNames(boolean onlyDescription, net.osmand.data.TransportRoute dataObject,
+			TIntObjectHashMap<String> stringTable) throws IOException {
+		if(dataObject.getName().length() > 0){
+			dataObject.setName(stringTable.get(dataObject.getName().charAt(0)));
+		}
+		if(dataObject.getEnName().length() > 0){
+			dataObject.setEnName(stringTable.get(dataObject.getEnName().charAt(0)));
+		}
+		if(dataObject.getName().length() > 0 && dataObject.getEnName().length() == 0){
+			dataObject.setEnName(Junidecode.unidecode(dataObject.getName()));
+		}
+		
+		if(dataObject.getOperator().length() > 0){
+			dataObject.setOperator(stringTable.get(dataObject.getOperator().charAt(0)));
+		}
+		if(dataObject.getType().length() > 0){
+			dataObject.setType(stringTable.get(dataObject.getType().charAt(0)));
+		}
+		for (int i = 0; i < 2 && !onlyDescription; i++) {
+			List<TransportStop> stops = i == 0 ? dataObject.getForwardStops() : dataObject.getBackwardStops();
+			for (TransportStop s : stops) {
+				initializeNames(stringTable, s);
+			}
+		}
+	}
+
+	protected void initializeNames(TIntObjectHashMap<String> stringTable, TransportStop s) {
+		if (s.getName().length() > 0) {
+			s.setName(stringTable.get(s.getName().charAt(0)));
+		}
+		if (s.getEnName().length() > 0) {
+			s.setEnName(stringTable.get(s.getEnName().charAt(0)));
+		}
+		if (s.getEnName().length() == 0) {
+			s.setEnName(Junidecode.unidecode(s.getName()));
+		}
+	}
 
 	
 	
-	private TransportStop readTransportRouteStop(int dx, int dy, long did) throws IOException {
+	private TransportStop readTransportRouteStop(int dx, int dy, long did, TIntObjectHashMap<String> stringTable) throws IOException {
 		TransportStop dataObject = new TransportStop();
 		boolean end = false;
 		while(!end){
@@ -456,16 +391,13 @@ public class BinaryMapTransportReaderAdapter {
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				if(dataObject.getEnName().length() == 0){
-					dataObject.setEnName(Junidecode.unidecode(dataObject.getName()));
-				}
 				end = true;
 				break;
 			case OsmandOdb.TransportRouteStop.NAME_EN_FIELD_NUMBER :
-				dataObject.setEnName(""+((char) codedIS.readUInt32())); //$NON-NLS-1$
+				dataObject.setEnName(regStr(stringTable)); //$NON-NLS-1$
 				break;
 			case OsmandOdb.TransportRouteStop.NAME_FIELD_NUMBER :
-				dataObject.setName(""+((char) codedIS.readUInt32())); //$NON-NLS-1$
+				dataObject.setName(regStr(stringTable)); //$NON-NLS-1$
 				break;
 			case OsmandOdb.TransportRouteStop.ID_FIELD_NUMBER :
 				did += codedIS.readSInt64();
@@ -523,11 +455,19 @@ public class BinaryMapTransportReaderAdapter {
 				req.cacheTypes.add(shift - codedIS.readUInt32());
 				break;
 			case OsmandOdb.TransportStop.NAME_EN_FIELD_NUMBER :
-				dataObject.setEnName(""+((char) codedIS.readUInt32())); //$NON-NLS-1$
+				if (req.stringTable != null) {
+					dataObject.setEnName(regStr(req.stringTable)); //$NON-NLS-1$
+				} else {
+					skipUnknownField(t);
+				}
 				break;
 			case OsmandOdb.TransportStop.NAME_FIELD_NUMBER :
-				int i = codedIS.readUInt32();
-				dataObject.setName(""+((char) i)); //$NON-NLS-1$
+				if (req.stringTable != null) {
+					dataObject.setName(regStr(req.stringTable)); //$NON-NLS-1$
+				} else {
+					skipUnknownField(t);
+				}
+				
 				break;
 			case OsmandOdb.TransportStop.ID_FIELD_NUMBER :
 				dataObject.setId(codedIS.readSInt64());

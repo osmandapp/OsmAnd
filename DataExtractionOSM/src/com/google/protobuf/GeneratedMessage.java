@@ -64,7 +64,8 @@ public abstract class GeneratedMessage extends AbstractMessage {
    */
   protected abstract FieldAccessorTable internalGetFieldAccessorTable();
 
-  public Descriptor getDescriptorForType() {
+  @Override
+public Descriptor getDescriptorForType() {
     return internalGetFieldAccessorTable().descriptor;
   }
 
@@ -119,29 +120,35 @@ private Map<FieldDescriptor, Object> getAllFieldsMutable() {
     return true;
   }
 
-  public Map<FieldDescriptor, Object> getAllFields() {
+  @Override
+public Map<FieldDescriptor, Object> getAllFields() {
     return Collections.unmodifiableMap(getAllFieldsMutable());
   }
 
-  public boolean hasField(final FieldDescriptor field) {
+  @Override
+public boolean hasField(final FieldDescriptor field) {
     return internalGetFieldAccessorTable().getField(field).has(this);
   }
 
-  public Object getField(final FieldDescriptor field) {
+  @Override
+public Object getField(final FieldDescriptor field) {
     return internalGetFieldAccessorTable().getField(field).get(this);
   }
 
-  public int getRepeatedFieldCount(final FieldDescriptor field) {
+  @Override
+public int getRepeatedFieldCount(final FieldDescriptor field) {
     return internalGetFieldAccessorTable().getField(field)
       .getRepeatedCount(this);
   }
 
-  public Object getRepeatedField(final FieldDescriptor field, final int index) {
+  @Override
+public Object getRepeatedField(final FieldDescriptor field, final int index) {
     return internalGetFieldAccessorTable().getField(field)
       .getRepeated(this, index);
   }
 
-  public final UnknownFieldSet getUnknownFields() {
+  @Override
+public final UnknownFieldSet getUnknownFields() {
     return unknownFields;
   }
 
@@ -174,24 +181,29 @@ private Map<FieldDescriptor, Object> getAllFieldsMutable() {
       return internalGetResult().internalGetFieldAccessorTable();
     }
 
-    public Descriptor getDescriptorForType() {
+    @Override
+	public Descriptor getDescriptorForType() {
       return internalGetFieldAccessorTable().descriptor;
     }
 
-    public Map<FieldDescriptor, Object> getAllFields() {
+    @Override
+	public Map<FieldDescriptor, Object> getAllFields() {
       return internalGetResult().getAllFields();
     }
 
-    public Message.Builder newBuilderForField(
+    @Override
+	public Message.Builder newBuilderForField(
         final FieldDescriptor field) {
       return internalGetFieldAccessorTable().getField(field).newBuilder();
     }
 
-    public boolean hasField(final FieldDescriptor field) {
+    @Override
+	public boolean hasField(final FieldDescriptor field) {
       return internalGetResult().hasField(field);
     }
 
-    public Object getField(final FieldDescriptor field) {
+    @Override
+	public Object getField(final FieldDescriptor field) {
       if (field.isRepeated()) {
         // The underlying list object is still modifiable at this point.
         // Make sure not to expose the modifiable list to the caller.
@@ -202,44 +214,52 @@ private Map<FieldDescriptor, Object> getAllFieldsMutable() {
       }
     }
 
-    public BuilderType setField(final FieldDescriptor field,
+    @Override
+	public BuilderType setField(final FieldDescriptor field,
                                 final Object value) {
       internalGetFieldAccessorTable().getField(field).set(this, value);
       return (BuilderType) this;
     }
 
-    public BuilderType clearField(final FieldDescriptor field) {
+    @Override
+	public BuilderType clearField(final FieldDescriptor field) {
       internalGetFieldAccessorTable().getField(field).clear(this);
       return (BuilderType) this;
     }
 
-    public int getRepeatedFieldCount(final FieldDescriptor field) {
+    @Override
+	public int getRepeatedFieldCount(final FieldDescriptor field) {
       return internalGetResult().getRepeatedFieldCount(field);
     }
 
-    public Object getRepeatedField(final FieldDescriptor field,
+    @Override
+	public Object getRepeatedField(final FieldDescriptor field,
                                    final int index) {
       return internalGetResult().getRepeatedField(field, index);
     }
 
-    public BuilderType setRepeatedField(final FieldDescriptor field,
+    @Override
+	public BuilderType setRepeatedField(final FieldDescriptor field,
                                         final int index, final Object value) {
       internalGetFieldAccessorTable().getField(field)
         .setRepeated(this, index, value);
       return (BuilderType) this;
     }
 
-    public BuilderType addRepeatedField(final FieldDescriptor field,
+    @Override
+	public BuilderType addRepeatedField(final FieldDescriptor field,
                                         final Object value) {
       internalGetFieldAccessorTable().getField(field).addRepeated(this, value);
       return (BuilderType) this;
     }
 
-    public final UnknownFieldSet getUnknownFields() {
+    @Override
+	public final UnknownFieldSet getUnknownFields() {
       return internalGetResult().unknownFields;
     }
 
-    public final BuilderType setUnknownFields(
+    @Override
+	public final BuilderType setUnknownFields(
         final UnknownFieldSet unknownFields) {
       internalGetResult().unknownFields = unknownFields;
       return (BuilderType) this;
@@ -256,7 +276,8 @@ private Map<FieldDescriptor, Object> getAllFieldsMutable() {
       return (BuilderType) this;
     }
 
-    public boolean isInitialized() {
+    @Override
+	public boolean isInitialized() {
       return internalGetResult().isInitialized();
     }
 
@@ -1063,37 +1084,46 @@ private Map<FieldDescriptor, Object> getAllFieldsMutable() {
       protected final Method hasMethod;
       protected final Method clearMethod;
 
-      public Object get(final GeneratedMessage message) {
+      @Override
+	public Object get(final GeneratedMessage message) {
         return invokeOrDie(getMethod, message);
       }
-      public void set(final Builder builder, final Object value) {
+      @Override
+	public void set(final Builder builder, final Object value) {
         invokeOrDie(setMethod, builder, value);
       }
-      public Object getRepeated(final GeneratedMessage message,
+      @Override
+	public Object getRepeated(final GeneratedMessage message,
                                 final int index) {
         throw new UnsupportedOperationException(
           "getRepeatedField() called on a singular field.");
       }
-      public void setRepeated(final Builder builder,
+      @Override
+	public void setRepeated(final Builder builder,
                               final int index, final Object value) {
         throw new UnsupportedOperationException(
           "setRepeatedField() called on a singular field.");
       }
-      public void addRepeated(final Builder builder, final Object value) {
+      @Override
+	public void addRepeated(final Builder builder, final Object value) {
         throw new UnsupportedOperationException(
           "addRepeatedField() called on a singular field.");
       }
-      public boolean has(final GeneratedMessage message) {
+      @Override
+	public boolean has(final GeneratedMessage message) {
         return (Boolean) invokeOrDie(hasMethod, message);
       }
-      public int getRepeatedCount(final GeneratedMessage message) {
+      @Override
+	public int getRepeatedCount(final GeneratedMessage message) {
         throw new UnsupportedOperationException(
           "getRepeatedFieldSize() called on a singular field.");
       }
-      public void clear(final Builder builder) {
+      @Override
+	public void clear(final Builder builder) {
         invokeOrDie(clearMethod, builder);
       }
-      public Message.Builder newBuilder() {
+      @Override
+	public Message.Builder newBuilder() {
         throw new UnsupportedOperationException(
           "newBuilderForField() called on a non-Message type.");
       }
@@ -1129,10 +1159,12 @@ private Map<FieldDescriptor, Object> getAllFieldsMutable() {
       protected final Method getCountMethod;
       protected final Method clearMethod;
 
-      public Object get(final GeneratedMessage message) {
+      @Override
+	public Object get(final GeneratedMessage message) {
         return invokeOrDie(getMethod, message);
       }
-      public void set(final Builder builder, final Object value) {
+      @Override
+	public void set(final Builder builder, final Object value) {
         // Add all the elements individually.  This serves two purposes:
         // 1) Verifies that each element has the correct type.
         // 2) Insures that the caller cannot modify the list later on and
@@ -1142,28 +1174,35 @@ private Map<FieldDescriptor, Object> getAllFieldsMutable() {
           addRepeated(builder, element);
         }
       }
-      public Object getRepeated(final GeneratedMessage message,
+      @Override
+	public Object getRepeated(final GeneratedMessage message,
                                 final int index) {
         return invokeOrDie(getRepeatedMethod, message, index);
       }
-      public void setRepeated(final Builder builder,
+      @Override
+	public void setRepeated(final Builder builder,
                               final int index, final Object value) {
         invokeOrDie(setRepeatedMethod, builder, index, value);
       }
-      public void addRepeated(final Builder builder, final Object value) {
+      @Override
+	public void addRepeated(final Builder builder, final Object value) {
         invokeOrDie(addRepeatedMethod, builder, value);
       }
-      public boolean has(final GeneratedMessage message) {
+      @Override
+	public boolean has(final GeneratedMessage message) {
         throw new UnsupportedOperationException(
           "hasField() called on a singular field.");
       }
-      public int getRepeatedCount(final GeneratedMessage message) {
+      @Override
+	public int getRepeatedCount(final GeneratedMessage message) {
         return (Integer) invokeOrDie(getCountMethod, message);
       }
-      public void clear(final Builder builder) {
+      @Override
+	public void clear(final Builder builder) {
         invokeOrDie(clearMethod, builder);
       }
-      public Message.Builder newBuilder() {
+      @Override
+	public Message.Builder newBuilder() {
         throw new UnsupportedOperationException(
           "newBuilderForField() called on a non-Message type.");
       }

@@ -8,6 +8,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.TransportIndexRepository;
+import net.osmand.plus.views.OsmBugsLayer.OpenStreetBug;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
@@ -19,7 +20,7 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-public class TransportStopsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMenuProvider {
+public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	private static final int startZoom = 12;
 	
 	private Paint pointAltUI;
@@ -69,7 +70,7 @@ public class TransportStopsLayer implements OsmandMapLayer, ContextMenuLayer.ICo
 	
 	
 	@Override
-	public boolean onTouchEvent(PointF point) {
+	public boolean onSingleTap(PointF point) {
 		TransportStop n = getFromPoint(point);
 		if(n != null){
 			AccessibleToast.makeText(view.getContext(), getStopDescription(n, true), Toast.LENGTH_LONG).show();
@@ -160,6 +161,14 @@ public class TransportStopsLayer implements OsmandMapLayer, ContextMenuLayer.ICo
 	public String getObjectDescription(Object o) {
 		if(o instanceof TransportStop){
 			return getStopDescription((TransportStop) o, false);
+		}
+		return null;
+	}
+	
+	@Override
+	public String getObjectName(Object o) {
+		if(o instanceof TransportStop){
+			return ((TransportStop)o).getName(); 
 		}
 		return null;
 	}

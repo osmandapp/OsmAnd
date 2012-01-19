@@ -1,6 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
 
+	<string name="tip_select_destination_point">Výbrat cíl</string>
+	<string name="tip_select_destination_point_t">
+\tCílový bod můžete vybrat přímo v mapě (kontextové menu, pak vybrat  \'Ukázat směr\'), v každém módu vyhledávání nebo dlouhým stiskem položky ve vašem \'Seznamu oblíbených míst\'. 
+\n\tCíl je označen oranžovou tečkou na mapě. OsmAnd zobrazuje vzdálenost a směr do cíle (oranžová šipka).
+	</string>
+
+	<string name="tip_recent_changes_0_6_9_t">Změny ve verzi 0.6.9 :
+\n\t- Vylepšené vykreslování offline map
+\n\t- Zrychlené vykreslování offline map pomocí Android native library - najdete v "experimental features" (na některých zařízeních nemusí fungovat)
+\n\t- Zásadní změny vzhledu zobrazení
+\n\t- Zobrazení nadmořské výšky
+\n\t- Nové překlady (Vietnamština, Polština)
+\n\t- Další drobné změny
+	</string>
+
+	<string name="show_altitude_info_descr">Zobrazit aktuální nadmořskou výšku na mapě</string>
+	<string name="show_altitude_info">Zobrazit výšku</string>
+	<string name="use_transparent_map_theme_descr">Použít průhledné ovládání mapy</string>
+	<string name="use_transparent_map_theme">Transparentní téma</string>
+	
+	<string name="appearance_settings_descr">Konfigurace vzhledu aplikace</string>
+	<string name="appearance_settings">Vzhled</string>
+
+	<string name="native_library_not_supported">Android native library není podporovaná na tomto zařízení.</string>
+	<string name="init_native_library">Inicializuji Android native library...</string>
+	<string name="choose_auto_follow_route">Nastavení automatického sledování</string>
+	<string name="choose_auto_follow_route_descr">Zadejte interval pro automatické vrácení mapy na vaši pozici</string>
+	<string name="auto_follow_route_never">Nikdy</string>
+	<string name="auto_follow_route_navigation">Automatické sledování pozice</string>
+	<string name="auto_follow_route_navigation_descr">Zapnout automatické sledování pozice pouze v režimu navigace.</string>
+	<string name="auto_follow_location_enabled">Automatické sledování pozice je zapnuto.</string>
+
+	<string name="pref_vector_rendering">Nastavení vektorového vykreslovače</string>
+	<string name="pref_overlay">Překryvná/podkresová vrstva</string>
+	<string name="pref_raster_map">Nastavení rastrové mapy</string>
+	<string name="pref_vector_map">Nastavení vektorové mapy</string>
+	<!-- string name="delete_confirmation_title">Chystáte se smazat</string -->
+	<string name="delete_confirmation_msg">Opravdu chcete smazat %1$s?</string>
+	<string name="city_type_suburb">Předměstí</string>
+	<string name="city_type_hamlet">Osada</string>
+	<string name="city_type_village">Vesnice</string>
+	<string name="city_type_town">Malé město</string>
+	<string name="city_type_city">Velké město</string>
+	<string name="layer_poi_label">POI popisky</string>
+	<string name="animate_route_off">Animaci vypnuta</string>
+	<string name="animate_route">Animace zapnuta</string>
+	
+	<string name="tip_recent_changes_0_6_8_t">Změny ve verzi 0.6.8 :
+\n\t- kompletní redesign vyhledávání (POI, adresy)! Hledání adres je nyní mnohem rychlejší. Jednotné vyhledávací rozhraní s mnoha různými parametry.
+\n\t- Vyhledávání POI ve velkých oblastech podle jména (ve státech).
+\n\t- Opravené blikání mapy na tabletech (Chyba č.641)
+\n\t- Automatické sledování pohybu (Chyba č.356)
+\n\t- GPX navigace přesunuta do \'Navigace\' a  \'Uložit pokyny\' přesunuto do \'O cestě\'
+\n\t- POI data jsou nyní součástí .obf souboru (všechny stažené indexy po 01/10/11) 
+\n\t- Opravy v hlasových pokynech (oprava GPS pozice, zapomenutí prvního pokynu) 
+\n\t- Drobná vylepšení
+	</string>
+	<string name="file_can_not_be_renamed">Nelze přejmenovat soubor.</string>
+	<string name="file_with_name_already_exists">Soubor tohoto jména již existuje.</string>
+	<string name="gpx_navigation">GPX trasa</string>
+	<string name="poi_query_by_name_matches_categories">Několik POI kategorií odpovídají vašemu dotazu :</string>
+	<string name="data_to_search_poi_not_available">Lokální data pro vyhledávání POI není dostupný.</string>
+	<string name="poi_filter_by_name">Hledat podle jména</string>
+	<string name="old_poi_file_should_be_deleted">Soubor s POI daty \'%1$s\' již není potřeba a může být smazán.</string>
+	<string name="update_poi_file_not_found">Lokální soubor pro úpravu POI bodů nebyl nalezen a ani nemohl být vytvořen.</string>
+	<string name="update_poi_does_not_change_indexes">Změny POI bodů v aplikaci neovlivní stažená mapová data, změny se namísto toho ukládají do lokálního souboru.</string>
+
+	<string name="button_upgrade_osmandplus">Upgradovat Osmand+</string>
+	<string name="map_version_changed_info">Na serveru jsou mapy nekompatibilní s vaší verzí aplikace. Prosím aktualizujte aplikaci na novější verzi, abyste data mohli používat.</string>
+	
+	<string name="local_index_mi_rename">Přejmenovat</string>
+	<string name="show_gpx_route">Zobrazit na mapě</string>
+	<string name="poi_filter_nominatim">Online Nominatim</string>
+
 <string name="search_select_point">Vybrat</string>
 <string name="local_index_description">Stahnout nová, zálohovat nebo smazat existující data. \nOffline data na zařízení (%1$s dostupné)</string>
 <string name="search_position_current_location_search">Hledané polohy...</string>
@@ -13,7 +87,7 @@
 <string name="search_position_map_view">Posledního místa na mapě</string>
 
 <string name="select_search_position">Hledat v okolí :</string>
-<string name="context_menu_item_search">Search</string>
+<string name="context_menu_item_search">Hledat</string>
 
 
 	<string name="tip_recent_changes_0_6_7_t">Poslední změny ve verzi 0.6.7 :
@@ -452,18 +526,6 @@
     Pro zapnutí navigace musíte nejprve vybrat cílový bod. Poté
     vyberte \'Menu\'->\'Navigace\' na mapě a vyberte typ navigování.
   </string>
-  <string name="tip_select_destination_point">Výběr cílového bodu</string>
-  <string name="tip_select_destination_point_t">
-    \t
-
-    Cílový bod můžete vybrat v kontextovém menu \'Navigovat do\', nebo
-    ve vyhledávání.
-
-    \n\t
-
-    Můžete navigovat i do oblíbených bodů dlouhým stisknutím položky v
-    \'Oblíbené\'.
-  </string>
   <string name="tip_search">Vyhledávání</string>
   <string name="tip_search_t">
     \t
@@ -489,28 +551,6 @@
     Po stisknutí se objeví obdélník se souřadnicemi. Klepnutím na něj
     se otevře kontextové menu, po dlouhém stisknutí obdélník naopak
     zmizí. Kontextové menu je dostupné také tlačítkem \'Menu\'.
-  </string>
-  <string name="tip_desctination_point">Cílový bod</string>
-  <string name="tip_desctination_point_t">
-    \t
-
-    Cílový bod je v mapě OsmAndu označen červenou tečkou.
-
-    \n\t
-
-    Na mapě je vždy zobrazen směr k němu (červený trojúhelník) a jeho
-    vzdálenost. Pro označení libovolného bodu vyberte v menu položku
-    \'Navigovat do bodu\'.
-
-    \n\t
-
-    Toto tlačítko je dostupné u každého vyhledávání, v kontextovém
-    menu mapy a při dlouhém stisknutí kdekoli na mapě.
-
-    \n\t
-
-    Cílový bod se často využívá pro měření vzdáleností a hrubou
-    navigaci vzdušnou čarou.
   </string>
   <string name="tip_initial">Tipy a triky</string>
   <string name="tip_initial_t">
@@ -949,7 +989,7 @@
   <string name="add_favorite_dialog_default_favourite_name">Oblíbené</string>
   <string name="add_favorite_dialog_favourite_added_template">Oblíbené místo \'\'{0}\'\' bylo přidáno.</string>
 
-  <string name="favourites_context_menu_title">Kontextové menu</string>
+  <!-- string name="favourites_context_menu_title">Kontextové menu</string -->
   <string name="favourites_context_menu_navigate">Navigovat do</string>
   <string name="favourites_context_menu_edit">Upravit oblíbené</string>
   <string name="favourites_context_menu_delete">Smazat oblíbené</string>

@@ -133,6 +133,7 @@ public class City extends MapObject {
 		return "City [" +type+"] " + getName(); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
+	@Override
 	public void doDataPreparation(){
 		for(Street s : new ArrayList<Street>(getStreets())){
 			s.doDataPreparation();

@@ -49,7 +49,8 @@ public class ProgressDialog extends JDialog implements IProgress {
         initDialog();
     }
     
-    public boolean isInterrupted(){
+    @Override
+	public boolean isInterrupted(){
     	return !isVisible();
     }
     
@@ -164,6 +165,7 @@ public class ProgressDialog extends JDialog implements IProgress {
 		deltaWork = progressBar.getMaximum() - remainingWork - this.progressBar.getValue();
 	}
 	
+	@Override
 	public boolean isIndeterminate(){
 		return progressBar.isIndeterminate();
 	}

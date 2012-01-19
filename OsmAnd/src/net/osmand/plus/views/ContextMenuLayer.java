@@ -12,18 +12,21 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Paint.Style;
+import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.FrameLayout.LayoutParams;
 
-public class ContextMenuLayer implements OsmandMapLayer {
+public class ContextMenuLayer extends OsmandMapLayer {
 	
+	
+
 	public interface IContextMenuProvider {
 	
 		public Object getPointObject(PointF point);
@@ -31,6 +34,8 @@ public class ContextMenuLayer implements OsmandMapLayer {
 		public LatLon getObjectLocation(Object o);
 		
 		public String getObjectDescription(Object o);
+		
+		public String getObjectName(Object o);
 		
 		public DialogInterface.OnClickListener getActionListener(List<String> actionsList, Object o);
 	}
@@ -43,15 +48,12 @@ public class ContextMenuLayer implements OsmandMapLayer {
 	private TextView textView;
 	private DisplayMetrics dm;
 	private OsmandMapTileView view;
-	private static final int BASE_TEXT_SIZE = 170;
-	private int textSize = BASE_TEXT_SIZE;
+	private int BASE_TEXT_SIZE = 170;
+	private int SHADOW_OF_LEG = 5;
 	
-	private Paint paintLightBorder;
-	private Paint paintBlack;
-	private RectF textBorder;
-	private Paint paintBorder;
 	private final MapActivity activity;
-
+	private Drawable boxLeg;
+	private float scaleCoefficient = 1;
 	
 	public ContextMenuLayer(MapActivity activity){
 		this.activity = activity;
@@ -68,68 +70,85 @@ public class ContextMenuLayer implements OsmandMapLayer {
 		dm = new DisplayMetrics();
 		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
-		textSize = (int) (BASE_TEXT_SIZE * dm.density);
+		scaleCoefficient  = dm.density;
+		if (Math.min(dm.widthPixels / (dm.density * 160), dm.heightPixels / (dm.density * 160)) > 2.5f) {
+			// large screen
+			scaleCoefficient *= 1.5f;
+		}
+		BASE_TEXT_SIZE = (int) (BASE_TEXT_SIZE * scaleCoefficient);
+		SHADOW_OF_LEG = (int) (SHADOW_OF_LEG * scaleCoefficient);
 		
-		paintLightBorder = new Paint();
-		paintLightBorder.setARGB(130, 220, 220, 220);
-		paintLightBorder.setStyle(Style.FILL);
-		paintBlack = new Paint();
-		paintBlack.setARGB(255, 0, 0, 0);
-		paintBlack.setStyle(Style.STROKE);
-		paintBlack.setAntiAlias(true);
-		paintBorder = new Paint();
-		paintBorder.setARGB(220, 160, 160, 160);
-		paintBorder.setStyle(Style.FILL);
+		boxLeg = view.getResources().getDrawable(R.drawable.box_leg);
+		boxLeg.setBounds(0, 0, boxLeg.getMinimumWidth(), boxLeg.getMinimumHeight());
 		
 		textView = new TextView(view.getContext());
-		LayoutParams lp = new LayoutParams(textSize, LayoutParams.WRAP_CONTENT);
+		LayoutParams lp = new LayoutParams(BASE_TEXT_SIZE, LayoutParams.WRAP_CONTENT);
 		textView.setLayoutParams(lp);
-		textView.setTextSize(16);
+		textView.setTextSize(15 * scaleCoefficient);
 		textView.setTextColor(Color.argb(255, 0, 0, 0));
 		textView.setMinLines(1);
 //		textView.setMaxLines(15);
 		textView.setGravity(Gravity.CENTER_HORIZONTAL);
-		textBorder = new RectF(-2, -1, textSize + 2, 0);
+		
+		textView.setClickable(true);
+		
+		textView.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
+
 		view.setContextMenuLayer(this);
 	}
 
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
 		if(latLon != null){
-			int x = view.getMapXForPoint(latLon.getLongitude());
-			int y = view.getMapYForPoint(latLon.getLatitude());
-			canvas.drawCircle(x, y, 5 * dm.density, paintBorder);
-			canvas.drawCircle(x, y, 5 * dm.density, paintBlack);
+			int x = view.getRotatedMapXForPoint(latLon.getLatitude(), latLon.getLongitude());
+			int y = view.getRotatedMapYForPoint(latLon.getLatitude(), latLon.getLongitude());
 			
+			int tx = x - boxLeg.getMinimumWidth() / 2;
+			int ty = y - boxLeg.getMinimumHeight() + SHADOW_OF_LEG;
+			canvas.translate(tx, ty);
+			boxLeg.draw(canvas);
+			canvas.translate(-tx, -ty);
 			
 			if (textView.getText().length() > 0) {
-				x = view.getRotatedMapXForPoint(latLon.getLatitude(), latLon.getLongitude());
-				y = view.getRotatedMapYForPoint(latLon.getLatitude(), latLon.getLongitude());
-				canvas.rotate(-view.getRotate(), view.getCenterPointX(), view.getCenterPointY());
-				canvas.translate(x - textView.getWidth() / 2, y - textView.getHeight() - 12);
+				int topMarginDiff = (int) (5 * scaleCoefficient);
+				canvas.translate(x - textView.getWidth() / 2, ty - textView.getBottom() - topMarginDiff);
 				int c = textView.getLineCount();
-				textBorder.bottom = textView.getHeight() + 2;
-				canvas.drawRect(textBorder, paintLightBorder);
-				canvas.drawRect(textBorder, paintBlack);
+				
 				textView.draw(canvas);
 				if (c == 0) {
 					// special case relayout after on draw method
-					textView.layout(0, 0, textSize, (int) ((textView.getPaint().getTextSize() + 4) * textView.getLineCount()));
+					layoutText();
 					view.refreshMap();
 				}
 			}
 		}
 	}
 	
+	private void layoutText() {
+		Rect padding = new Rect();
+		if (textView.getLineCount() > 0) {
+			textView.getBackground().getPadding(padding);
+		}
+		int w = BASE_TEXT_SIZE;
+		int h = (int) ((textView.getPaint().getTextSize() + 4) * textView.getLineCount());
+		
+		textView.layout(0, -padding.bottom, w, h + padding.top);
+	}
+	
 	public void setLocation(LatLon loc, String description){
 		latLon = loc;
 		if(latLon != null){
+			if(description == null || description.length() == 0){
+				description = MessageFormat.format(view.getContext().getString(R.string.point_on_map), 
+						latLon.getLatitude(), latLon.getLongitude());
+			}
 			textView.setText(description);
 		} else {
 			textView.setText(""); //$NON-NLS-1$
 		}
-		textView.layout(0, 0, textSize, (int) ((textView.getPaint().getTextSize()+4) * textView.getLineCount()));
+		layoutText();
 	}
+	
 
 	public void setSelection(Object selection, IContextMenuProvider contextProvider) {
 		selectedObject = selection;
@@ -147,7 +166,7 @@ public class ContextMenuLayer implements OsmandMapLayer {
 			return true;
 		}
 		
-		if(pressedInTextView(point)){
+		if(pressedInTextView(point.x, point.y)){
 			setLocation(null, ""); //$NON-NLS-1$
 			view.refreshMap();
 			return true;
@@ -166,8 +185,7 @@ public class ContextMenuLayer implements OsmandMapLayer {
 		}
 		
 		LatLon latLon = view.getLatLonFromScreenPoint(point.x, point.y);
-		String description = MessageFormat.format(view.getContext().getString(R.string.point_on_map), 
-				latLon.getLatitude(), latLon.getLongitude()); 
+		String description = ""; 
 		
 		if(selectedObject != null){
 			description = selectedContextProvider.getObjectDescription(selectedObject);
@@ -183,24 +201,34 @@ public class ContextMenuLayer implements OsmandMapLayer {
 	
 	@Override
 	public boolean drawInScreenPixels() {
-		return false;
+		return true;
 	}
 	
-	public boolean pressedInTextView(PointF point){
-		if(latLon != null){
-			int x = view.getRotatedMapXForPoint(latLon.getLatitude(), latLon.getLongitude());
-			int y = view.getRotatedMapYForPoint(latLon.getLatitude(), latLon.getLongitude());
-			if (textBorder.contains(point.x - x + textView.getWidth() / 2, point.y - y + textView.getHeight() + 8)) {
+	public boolean pressedInTextView(float px, float py) {
+		if (latLon != null) {
+			Rect bs = textView.getBackground().getBounds();
+			int x = (int) (px - view.getRotatedMapXForPoint(latLon.getLatitude(), latLon.getLongitude()));
+			int y = (int) (py - view.getRotatedMapYForPoint(latLon.getLatitude(), latLon.getLongitude()));
+			x += bs.width() / 2;
+			y += bs.height() + boxLeg.getMinimumHeight() - SHADOW_OF_LEG;
+			if (bs.contains(x, y)) {
 				return true;
 			}
 		}
 		return false;
 	}
+	
+	public String getSelectedObjectName(){
+		if(selectedObject != null && selectedContextProvider != null){
+			return selectedContextProvider.getObjectName(selectedObject);
+		}
+		return null;
+	}
 
 	@Override
-	public boolean onTouchEvent(PointF point) {
+	public boolean onSingleTap(PointF point) {
 		boolean nativeMode = view.getSettings().SCROLL_MAP_BY_GESTURES.get();
-		if ((!nativeMode) || pressedInTextView(point)) {
+		if ((!nativeMode) || pressedInTextView(point.x, point.y)) {
 			if (selectedObject != null) {
 				ArrayList<String> l = new ArrayList<String>();
 				OnClickListener listener = selectedContextProvider.getActionListener(l, selectedObject);
@@ -209,6 +237,26 @@ public class ContextMenuLayer implements OsmandMapLayer {
 				activity.contextMenuPoint(latLon.getLatitude(), latLon.getLongitude());
 			}
 			return true;
+		}
+		return false;
+	}
+
+	
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		if (latLon != null) {
+			if (event.getAction() == MotionEvent.ACTION_DOWN) {
+				if(pressedInTextView(event.getX(), event.getY())){
+					textView.setPressed(true);
+					view.refreshMap();
+				}
+			}
+		}
+		if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
+			if(textView.isPressed()) {
+				textView.setPressed(false);
+				view.refreshMap();
+			}
 		}
 		return false;
 	}

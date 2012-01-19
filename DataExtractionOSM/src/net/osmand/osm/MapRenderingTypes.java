@@ -36,7 +36,6 @@ public class MapRenderingTypes {
 
 	private static final Log log = LogUtil.getLog(MapRenderingTypes.class);
 	
-	// TODO Internet access bits for point, polygon
 	/** standard schema :	 
 	 	polygon : ll aaaaa ttttt 11 : 14 bits
 	 	multi   : ll aaaaa ttttt 00 : 14 bits  
@@ -47,6 +46,7 @@ public class MapRenderingTypes {
 				   t - object type, s - subtype
 	 */
 
+	// keep sync ! not change values
 	public final static int MULTY_POLYGON_TYPE = 0;
 	public final static int POLYGON_TYPE = 3;
 	public final static int POLYLINE_TYPE = 2;
@@ -365,6 +365,7 @@ public class MapRenderingTypes {
 	}
 	
 	// 0 - normal, -1 - under, 1 - bridge,over
+	// SYNCHRONIZED WITH C++
 	public static int getNegativeWayLayer(int type) {
 		int i = (3 & (type >> 12));
 		if (i == 1) {

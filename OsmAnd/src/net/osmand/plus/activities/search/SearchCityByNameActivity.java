@@ -2,6 +2,7 @@ package net.osmand.plus.activities.search;
 
 import java.util.List;
 
+import net.osmand.Algoritms;
 import net.osmand.OsmAndFormatter;
 import net.osmand.ResultMatcher;
 import net.osmand.data.City;
@@ -89,7 +90,11 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<MapOb
 	public String getText(MapObject obj) {
 		LatLon l = obj.getLocation();
 		if (getFilter().length() > 2 && locationToSearch != null && l != null) {
-			return obj.getName(region.useEnglishNames()) + " - " + //$NON-NLS-1$
+			String name =obj.getName(region.useEnglishNames()); 
+			if(obj instanceof City){
+				name += " [" + OsmAndFormatter.toPublicString(((City) obj).getType(), this) + "]";
+			}
+			return  name+ " - " + //$NON-NLS-1$
 					OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(l, locationToSearch), this); 
 		} else {
 			return obj.getName(region.useEnglishNames());

@@ -87,7 +87,8 @@ public abstract class THashIterator<V> implements TIterator, Iterator<V> {
      * @throws NoSuchElementException if this is called on an
      *                                exhausted iterator.
      */
-    public V next() {
+    @Override
+	public V next() {
         moveToNextIndex();
         return objectAtIndex( _index );
     }
@@ -99,7 +100,8 @@ public abstract class THashIterator<V> implements TIterator, Iterator<V> {
      *
      * @return a <code>boolean</code> value
      */
-    public boolean hasNext() {
+    @Override
+	public boolean hasNext() {
         return nextIndex() >= 0;
     }
 
@@ -110,7 +112,8 @@ public abstract class THashIterator<V> implements TIterator, Iterator<V> {
      * will leave the underlying data structure in a confused
      * state.
      */
-    public void remove() {
+    @Override
+	public void remove() {
         if ( _expectedSize != _hash.size() ) {
             throw new ConcurrentModificationException();
         }
