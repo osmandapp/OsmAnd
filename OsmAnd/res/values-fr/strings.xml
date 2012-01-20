@@ -171,7 +171,7 @@
 <string name="local_index_gpx_info_speed">\nVitesse moyenne : %1$s \nVitesse maximum : %2$s</string>
 <string name="local_index_gpx_info_elevation">\nAltitude moyenne : %1$.0f m\nAltitude minimum : %2$.0f m\nAltitude maximum : %3$.0f m\nMontées : %4$.0f m\nDescentes : %5$.0f m</string>
 <string name="local_index_gpx_info">Sections : %1$d\nPoints au total : %2$d\nPoints étapes : %3$d\nDistance totale : %4$s\nHeure de départ : %5$tD %5$tR\nHeure d\'arrivée : %6$tD %6$tR</string>
-<string name="local_index_installed">Installé</string>
+<string name="local_index_installed">Édition</string>
 <string name="local_index_items_backuped">%1$d sur %2$d eléments sauvegardés.</string>
 <string name="local_index_items_deleted">%1$d sur %2$d eléments supprimés.</string>
 <string name="local_index_items_restored">%1$d sur %2$d eléments restaurés.</string>
