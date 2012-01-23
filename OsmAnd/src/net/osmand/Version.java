@@ -37,7 +37,7 @@ public class Version {
 	
 	public static boolean isProductionVersion(Context ctx){
 		Version v = getVersion(ctx);
-		return !v.appVersion.startsWith("#");
+		return !v.appVersion.contains("#");
 	}
 
 	public static String getVersionAsURLParam(Context ctx) {
