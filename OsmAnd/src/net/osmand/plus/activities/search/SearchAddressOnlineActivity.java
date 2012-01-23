@@ -138,7 +138,7 @@ public class SearchAddressOnlineActivity extends ListActivity implements SearchA
 					URL url = new URL(b.toString());
 					URLConnection conn = url.openConnection();
 					conn.setDoInput(true);
-					conn.setRequestProperty("User-Agent", Version.APP_NAME_VERSION); //$NON-NLS-1$
+					conn.setRequestProperty("User-Agent", Version.getFullVersion(SearchAddressOnlineActivity.this)); //$NON-NLS-1$
 					conn.connect();
 					InputStream is = conn.getInputStream();
 					XmlPullParser parser = Xml.newPullParser();

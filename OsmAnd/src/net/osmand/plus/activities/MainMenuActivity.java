@@ -77,7 +77,7 @@ public class MainMenuActivity extends TrackedActivity {
 						text.append("\nProduct : ").append(Build.PRODUCT); //$NON-NLS-1$
 						text.append("\nBuild : ").append(Build.DISPLAY); //$NON-NLS-1$
 						text.append("\nVersion : ").append(Build.VERSION.RELEASE); //$NON-NLS-1$
-						text.append("\nApp Version : ").append(Version.APP_NAME_VERSION); //$NON-NLS-1$
+						text.append("\nApp Version : ").append(Version.getAppName(MainMenuActivity.this)); //$NON-NLS-1$
 						try {
 							PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
 							if (info != null) {
@@ -130,7 +130,7 @@ public class MainMenuActivity extends TrackedActivity {
 		rightview = (View) window.findViewById(R.id.SearchButton);
 		rightview.startAnimation(getAnimation(1, 0));
 		
-		String textVersion = Version.APP_VERSION + " " + Version.APP_DESCRIPTION;
+		String textVersion = Version.getFullVersion(activity);
 		final TextView textVersionView = (TextView) window.findViewById(R.id.TextVersion);
 		textVersionView.setText(textVersion);
 		SharedPreferences prefs = activity.getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
@@ -245,7 +245,7 @@ public class MainMenuActivity extends TrackedActivity {
 		if(!pref.contains(FIRST_TIME_APP_RUN)){
 			firstTime = true;
 			pref.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
-			pref.edit().putString(VERSION_INSTALLED, Version.APP_VERSION).commit();
+			pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(activity)).commit();
 			
 			applicationInstalledFirstTime();
 		} else {
@@ -254,8 +254,8 @@ public class MainMenuActivity extends TrackedActivity {
 				pref.edit().putInt(TIPS_SHOW, ++i).commit();
 			}
 			boolean appVersionChanged = false;
-			if(!Version.APP_VERSION.equals(pref.getString(VERSION_INSTALLED, ""))){
-				pref.edit().putString(VERSION_INSTALLED, Version.APP_VERSION).commit();
+			if(!Version.getFullVersion(activity).equals(pref.getString(VERSION_INSTALLED, ""))){
+				pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(activity)).commit();
 				appVersionChanged = true;
 			}
 						

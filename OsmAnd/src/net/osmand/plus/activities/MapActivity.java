@@ -11,7 +11,6 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.LogUtil;
 import net.osmand.Version;
-import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.IMapLocationListener;
@@ -135,7 +134,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		Notification notification = new Notification(R.drawable.icon, "", //$NON-NLS-1$
 				System.currentTimeMillis());
-		notification.setLatestEventInfo(this, Version.APP_NAME,
+		notification.setLatestEventInfo(this, Version.getAppName(this),
 				getString(R.string.go_back_to_osmand), PendingIntent.getActivity(
 						this, 0, notificationIndent,
 						PendingIntent.FLAG_UPDATE_CURRENT));
@@ -175,7 +174,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 
 		});
 		poiActions = new EditingPOIActivity(this);
-		MapTileDownloader.getInstance().addDownloaderCallback(new IMapDownloaderCallback(){
+		getMyApplication().getResourceManager().getMapTileDownloader().addDownloaderCallback(new IMapDownloaderCallback(){
 			@Override
 			public void tileDownloaded(DownloadRequest request) {
 				if(request != null && !request.error && request.fileToSave != null){
@@ -583,7 +582,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
     	if(mNotificationManager != null){
     		mNotificationManager.cancel(APP_NOTIFICATION_ID);
     	}
-    	MapTileDownloader.getInstance().removeDownloaderCallback(mapView);
+    	getMyApplication().getResourceManager().getMapTileDownloader().removeDownloaderCallback(mapView);
     }
     
     

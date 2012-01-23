@@ -31,7 +31,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
-import net.osmand.Version;
+import net.osmand.MapCreatorVersion;
 import net.osmand.data.IndexConstants;
 import net.osmand.data.preparation.DBDialect;
 import net.osmand.data.preparation.IndexCreator;
@@ -455,7 +455,7 @@ public class IndexBatchCreator {
 
 					FileOutputStream fout = new FileOutputStream(logFileName);
 					fout.write((new Date() + "\n").getBytes());
-					fout.write((Version.APP_MAP_CREATOR_FULL_NAME + "\n").getBytes());
+					fout.write((MapCreatorVersion.APP_MAP_CREATOR_FULL_NAME + "\n").getBytes());
 					fout.close();
 					fh = new FileHandler(logFileName.getAbsolutePath(), 5000000, 1, true);
 					fh.setFormatter(new SimpleFormatter());

@@ -39,7 +39,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.xml.stream.XMLStreamException;
 
-import net.osmand.Version;
+import net.osmand.MapCreatorVersion;
 import net.osmand.data.preparation.IndexCreator;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.ITileSource;
@@ -252,7 +252,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 		aboutApplication.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(frame, Version.APP_MAP_CREATOR_FULL_NAME);
+				JOptionPane.showMessageDialog(frame, MapCreatorVersion.APP_MAP_CREATOR_FULL_NAME);
 			}
 		});
 

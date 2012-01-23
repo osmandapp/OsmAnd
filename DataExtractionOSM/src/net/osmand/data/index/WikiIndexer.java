@@ -29,7 +29,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
-import net.osmand.Version;
+import net.osmand.MapCreatorVersion;
 import net.osmand.data.preparation.IndexCreator;
 import net.osmand.impl.ConsoleProgressImplementation;
 
@@ -251,7 +251,7 @@ public class WikiIndexer {
 			streamWriter.writeCharacters("\n");
 			streamWriter.writeStartElement("osm");
 			streamWriter.writeAttribute("version", "0.6");
-			streamWriter.writeAttribute("generator", Version.APP_MAP_CREATOR_VERSION);
+			streamWriter.writeAttribute("generator", MapCreatorVersion.APP_MAP_CREATOR_VERSION);
 
 			progress.startTask("Parse wiki xml", progIS.available());
 		}

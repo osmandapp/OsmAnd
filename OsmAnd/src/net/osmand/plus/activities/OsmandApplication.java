@@ -14,7 +14,6 @@ import net.osmand.Algoritms;
 import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
 import net.osmand.LogUtil;
-import net.osmand.Version;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.FavouritesDbHelper;
@@ -75,7 +74,6 @@ public class OsmandApplication extends Application {
     	super.onCreate();
     	long timeToStart = System.currentTimeMillis();
     	osmandSettings = OsmandSettings.getOsmandSettings(this);
-    	Version.setAppVersionAndName(getString(R.string.app_name), getString(R.string.app_version));
     	routingHelper = new RoutingHelper(osmandSettings, OsmandApplication.this, player);
     	manager = new ResourceManager(this);
     	daynightHelper = new DayNightHelper(this);

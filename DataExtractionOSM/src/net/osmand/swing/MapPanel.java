@@ -41,7 +41,7 @@ import javax.swing.UIManager;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
-import net.osmand.Version;
+import net.osmand.MapCreatorVersion;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
@@ -99,7 +99,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		final JMenu downloadedMenu = new JMenu("Additional"); //$NON-NLS-1$
 		final File tilesDirectory = DataExtractionSettings.getSettings().getTilesDirectory();
 		Map<String, TileSourceTemplate> udf = getCommonTemplates(tilesDirectory);
-		final List<TileSourceTemplate> downloaded = TileSourceManager.downloadTileSourceTemplates();
+		final List<TileSourceTemplate> downloaded = TileSourceManager.downloadTileSourceTemplates(MapCreatorVersion.APP_VERSION);
 		final Map<TileSourceTemplate, JCheckBoxMenuItem> items = new IdentityHashMap<TileSourceTemplate, JCheckBoxMenuItem>();
 		
 		tiles.add(downloadedMenu);
@@ -251,7 +251,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	private int xStartingImage = 0;
 	private int yStartingImage = 0;
 	
-	private MapTileDownloader downloader = MapTileDownloader.getInstance(Version.APP_MAP_CREATOR_VERSION);
+	private MapTileDownloader downloader = MapTileDownloader.getInstance(MapCreatorVersion.APP_MAP_CREATOR_VERSION);
 	Map<String, Image> cache = new HashMap<String, Image>();
 
 	private JPopupMenu popupMenu;

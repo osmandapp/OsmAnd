@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.LogUtil;
-import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.IMapLocationListener;
@@ -427,7 +426,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 		boolean useInternet = getSettings().USE_INTERNET_TO_DOWNLOAD_TILES.get();
 		if (useInternet) {
-			MapTileDownloader.getInstance().refuseAllPreviousRequests();
+			if(application != null) {
+				application.getResourceManager().getMapTileDownloader().refuseAllPreviousRequests();
+			}
 		}
 		
 

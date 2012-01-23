@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.Version;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -590,7 +591,7 @@ public class OsmandSettings {
 	
 	public List<TileSourceTemplate> getInternetAvailableSourceTemplates(){
 		if(internetAvailableSourceTemplates == null && isInternetConnectionAvailable()){
-			internetAvailableSourceTemplates = TileSourceManager.downloadTileSourceTemplates();
+			internetAvailableSourceTemplates = TileSourceManager.downloadTileSourceTemplates(Version.getVersionAsURLParam(ctx));
 		}
 		return internetAvailableSourceTemplates;
 	}

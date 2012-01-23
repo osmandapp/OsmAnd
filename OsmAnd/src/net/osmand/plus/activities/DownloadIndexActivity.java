@@ -90,7 +90,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 	private static final int MB = 1 << 20;
     public static final String FILTER_KEY = "filter";
 	
-	private static DownloadIndexListThread downloadListIndexThread = new DownloadIndexListThread();
+	private static DownloadIndexListThread downloadListIndexThread;
 
 	private ProgressDialog progressFileDlg = null;
 	private Map<String, String> indexFileNames = null;
@@ -108,7 +108,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 
 
 	private void setCustomVarsToTracker(){
-		tracker.setCustomVar(1, "App", Version.APP_NAME_VERSION);
+		tracker.setCustomVar(1, "App", Version.getFullVersion(this));
 		tracker.setCustomVar(2, "Device", Build.DEVICE);
 		tracker.setCustomVar(3, "Brand", Build.BRAND);
 		tracker.setCustomVar(4, "Model", Build.MODEL);
@@ -127,13 +127,16 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if(downloadListIndexThread == null) {
+			downloadListIndexThread = new DownloadIndexListThread(Version.getVersionAsURLParam(this));
+		}
 		// recreation upon rotation is prevented in manifest file
 		setContentView(R.layout.download_index);
 	    tracker = GoogleAnalyticsTracker.getInstance();
 	    // Start the tracker in manual dispatch mode...
 	    tracker.startNewSession(getString(R.string.ga_api_key), 60, this);
 	    setCustomVarsToTracker();
-	    tracker.trackPageView("/download.activity?" +Version.getVersionAsURLParam());
+	    tracker.trackPageView("/download.activity?" +Version.getVersionAsURLParam(this));
 		
 		downloadFileHelper = new DownloadFileHelper(this);
 		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener(){
@@ -213,7 +216,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if(item.getItemId() == RELOAD_ID){
 			//re-create the thread
-			downloadListIndexThread = new DownloadIndexListThread();
+			downloadListIndexThread = new DownloadIndexListThread(Version.getVersionAsURLParam(this));
 			downloadIndexList();
 		} else {
 			final DownloadIndexAdapter listAdapter = (DownloadIndexAdapter)getExpandableListAdapter();
@@ -254,10 +257,12 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 	
 	private static class DownloadIndexListThread extends Thread {
 		private DownloadIndexActivity uiActivity = null;
-		private IndexFileList indexFiles = null; 
+		private IndexFileList indexFiles = null;
+		private final String versionUrlParam; 
 		
-		public DownloadIndexListThread(){
+		public DownloadIndexListThread(String versionUrlParam){
 			super("DownloadIndexes"); //$NON-NLS-1$
+			this.versionUrlParam = versionUrlParam;
 		}
 		public void setUiActivity(DownloadIndexActivity uiActivity) {
 			this.uiActivity = uiActivity;
@@ -269,7 +274,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 		
 		@Override
 		public void run() {
-			indexFiles = DownloadOsmandIndexesHelper.downloadIndexesListFromInternet();
+			indexFiles = DownloadOsmandIndexesHelper.downloadIndexesListFromInternet(versionUrlParam);
 			if(uiActivity != null) {
 				uiActivity.removeDialog(DIALOG_PROGRESS_LIST);
 				uiActivity.runOnUiThread(new Runnable() {
@@ -342,14 +347,14 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 			case DIALOG_PROGRESS_FILE:
 				DownloadIndexesAsyncTask task = new DownloadIndexesAsyncTask(new ProgressDialogImplementation(progressFileDlg,true));
 				String[] indexes = entriesToDownload.keySet().toArray(new String[0]);
-				String v = Version.APP_NAME_VERSION;
-				if(Version.APP_DESCRIPTION.equals("beta")){
-					v +="beta";
+				String v = Version.getAppName(this);
+				if(Version.isProductionVersion(this)){
+					v = Version.getFullVersion(this);
 				} else {
-					v +="test";
+					v +=" test";
 				}
 				for(String index : indexes) {
-					tracker.trackEvent(v, Version.APP_NAME, index, 1);
+					tracker.trackEvent(v, Version.getAppName(this), index, 1);
 				}
 				task.execute(indexes);
 				break;
@@ -359,7 +364,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 					downloadListIndexThread.start();
 				} else if(downloadListIndexThread.getState() == Thread.State.TERMINATED){
 					// possibly exception occurred we don't have cache of files
-					downloadListIndexThread = new DownloadIndexListThread();
+					downloadListIndexThread = new DownloadIndexListThread(Version.getVersionAsURLParam(this));
 					downloadListIndexThread.setUiActivity(this);
 					downloadListIndexThread.start();
 				}

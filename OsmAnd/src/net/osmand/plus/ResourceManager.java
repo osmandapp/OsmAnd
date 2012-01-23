@@ -26,6 +26,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.IndexConstants;
+import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.TransportStop;
 import net.osmand.map.ITileSource;
@@ -107,6 +108,8 @@ public class ResourceManager {
 	
 	protected final MapRenderRepositories renderer;
 	
+	protected final MapTileDownloader tileDownloader;
+	
 	public final AsyncLoadingThread asyncLoadingThread = new AsyncLoadingThread(this);
 	
 	protected boolean internetIsNotAccessible = false;
@@ -118,6 +121,8 @@ public class ResourceManager {
 		this.renderer = new MapRenderRepositories(context);
 		asyncLoadingThread.start();
 		
+		tileDownloader = MapTileDownloader.getInstance(Version.getFullVersion(context));
+		
 		resetStoreDirectory();
 		WindowManager mgr = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
 		DisplayMetrics dm = new DisplayMetrics();
@@ -127,6 +132,10 @@ public class ResourceManager {
 		float tiles = (dm.widthPixels / 256 + 2) * (dm.heightPixels / 256 + 2) * 3;
 		log.info("Tiles to load in memory : " + tiles);
 		maxImgCacheSize = (int) (tiles) ; 
+	}
+	
+	public MapTileDownloader getMapTileDownloader() {
+		return tileDownloader;
 	}
 
 	
@@ -370,7 +379,7 @@ public class ResourceManager {
 	}
 	
 	private List<String> checkAssets(IProgress progress) {
-		if (!Version.APP_VERSION.equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get())) {
+		if (!Version.getFullVersion(context).equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get())) {
 			File file = context.getSettings().extendOsmandPath(APP_DIR);
 			file.mkdirs();
 			if(file.canWrite()){
@@ -378,7 +387,7 @@ public class ResourceManager {
 					progress.startTask(context.getString(R.string.installing_new_resources), -1); 
 					AssetManager assetManager = context.getAssets();
 					copyingAssets(assetManager, "", file, progress);
-					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(Version.APP_VERSION);
+					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(Version.getFullVersion(context));
 				} catch (IOException e) {
 					log.error(e.getMessage(), e);
 				} catch (XmlPullParserException e) {
@@ -661,7 +670,7 @@ public class ResourceManager {
 				}
 			}
 			if(!repos.isEmpty()){
-				AmenityLoadRequest req = new AmenityLoadRequest(repos, zoom, filter);
+				AmenityLoadRequest req = asyncLoadingThread.new AmenityLoadRequest(repos, zoom, filter);
 				req.setBoundaries(topLatitude, leftLongitude, bottomLatitude, rightLongitude);
 				asyncLoadingThread.requestToLoadAmenities(req);
 			}
@@ -700,7 +709,7 @@ public class ResourceManager {
 			}
 		}
 		if(!repos.isEmpty()){
-			TransportLoadRequest req = new TransportLoadRequest(repos, zoom);
+			TransportLoadRequest req = asyncLoadingThread.new TransportLoadRequest(repos, zoom);
 			req.setBoundaries(topLatitude, leftLongitude, bottomLatitude, rightLongitude);
 			asyncLoadingThread.requestToLoadTransport(req);
 		}

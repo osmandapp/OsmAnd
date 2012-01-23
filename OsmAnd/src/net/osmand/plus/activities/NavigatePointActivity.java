@@ -6,7 +6,6 @@ import java.util.Locale;
 import java.util.StringTokenizer;
 
 import com.google.android.apps.analytics.easytracking.TrackedActivity;
-import com.google.android.apps.analytics.easytracking.TrackedListActivity;
 
 import net.osmand.LogUtil;
 import net.osmand.osm.LatLon;
@@ -16,7 +15,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.views.OsmandMapTileView;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.location.Location;

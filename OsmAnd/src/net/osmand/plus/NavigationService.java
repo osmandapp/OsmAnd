@@ -122,7 +122,7 @@ public class NavigationService extends Service implements LocationListener {
 		Notification notification = new Notification(R.drawable.icon, "", //$NON-NLS-1$
 				System.currentTimeMillis());
 		notification.flags = Notification.FLAG_NO_CLEAR;
-		notification.setLatestEventInfo(this, Version.APP_NAME,
+		notification.setLatestEventInfo(this, Version.getAppName(this),
 				getString(R.string.service_stop_background_service), PendingIntent.getBroadcast(this, 0, notificationIntent, 
 						PendingIntent.FLAG_UPDATE_CURRENT));
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);

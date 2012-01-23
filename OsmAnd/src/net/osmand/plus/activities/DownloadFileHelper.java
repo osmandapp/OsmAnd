@@ -64,7 +64,7 @@ public class DownloadFileHelper {
 						}
 					}
 					HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-					conn.setRequestProperty("User-Agent", Version.APP_NAME); //$NON-NLS-1$
+					conn.setRequestProperty("User-Agent", Version.getFullVersion(ctx)); //$NON-NLS-1$
 					conn.setReadTimeout(30000);
 					if (fileread > 0) {
 						String range = "bytes="+fileread + "-" + (length -1); //$NON-NLS-1$ //$NON-NLS-2$
@@ -137,11 +137,11 @@ public class DownloadFileHelper {
 			out = new FileOutputStream(fileToDownload);
 			try {
 				if(parts == 1){
-					URL url = new URL("http://download.osmand.net/download?file="+fileName + "&" + Version.getVersionAsURLParam());  //$NON-NLS-1$
+					URL url = new URL("http://download.osmand.net/download?file="+fileName + "&" + Version.getVersionAsURLParam(ctx));  //$NON-NLS-1$
 					downloadFile(fileName, out, url, null, indexOfAllFiles, progress, forceWifi);
 				} else {
 					for(int i=1; i<=parts; i++){
-						URL url = new URL("http://download.osmand.net/download?file="+fileName+"-"+i + "&" + Version.getVersionAsURLParam());  //$NON-NLS-1$
+						URL url = new URL("http://download.osmand.net/download?file="+fileName+"-"+i + "&" + Version.getVersionAsURLParam(ctx));  //$NON-NLS-1$
 						downloadFile(fileName, out, url, " ["+i+"/"+parts+"]", indexOfAllFiles, progress, forceWifi);
 					}
 				}

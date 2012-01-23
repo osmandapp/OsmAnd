@@ -567,7 +567,7 @@ public class EditingPOIActivity implements DialogProvider {
 
 			ser.startTag(null, "tag"); //$NON-NLS-1$
 			ser.attribute(null, "k", "created_by"); //$NON-NLS-1$ //$NON-NLS-2$
-			ser.attribute(null, "v", Version.APP_NAME_VERSION); //$NON-NLS-1$
+			ser.attribute(null, "v", Version.getFullVersion(ctx)); //$NON-NLS-1$
 			ser.endTag(null, "tag"); //$NON-NLS-1$
 			ser.endTag(null, "changeset"); //$NON-NLS-1$
 			ser.endTag(null, "osm"); //$NON-NLS-1$
@@ -699,10 +699,10 @@ public class EditingPOIActivity implements DialogProvider {
 				ser.startDocument("UTF-8", true); //$NON-NLS-1$
 				ser.startTag(null, "osmChange"); //$NON-NLS-1$
 				ser.attribute(null, "version", "0.6");  //$NON-NLS-1$ //$NON-NLS-2$
-				ser.attribute(null, "generator", Version.APP_NAME); //$NON-NLS-1$
+				ser.attribute(null, "generator", Version.getFullVersion(ctx)); //$NON-NLS-1$
 				ser.startTag(null, action);
 				ser.attribute(null, "version", "0.6"); //$NON-NLS-1$ //$NON-NLS-2$
-				ser.attribute(null, "generator", Version.APP_NAME); //$NON-NLS-1$
+				ser.attribute(null, "generator", Version.getFullVersion(ctx)); //$NON-NLS-1$
 				writeNode(n, info, ser, changeSetId, OsmandSettings.getOsmandSettings(ctx).USER_NAME.get());
 				ser.endTag(null, action);
 				ser.endTag(null, "osmChange"); //$NON-NLS-1$
