@@ -27,7 +27,7 @@
 	</target>
 
 	<target name="-version" if="build.version">
-	   <replace file="src/net/osmand/Version.java" token="String APP_DESCRIPTION" value="String APP_DESCRIPTION=&quot;${build.version}&quot;;//"/>
+	   <replace file="src/net/osmand/MapCreatorVersion.java" token="String APP_DESCRIPTION" value="String APP_DESCRIPTION=&quot;${build.version}&quot;;//"/>
 	</target>
 
 	<target name="clean">

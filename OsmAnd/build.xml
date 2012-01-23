@@ -104,7 +104,15 @@
 		  	<replaceregexp file="AndroidManifest.xml" match='package="net.osmand"' replace='package="net.osmand.plus"' byline="true" />
 		  	<replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;Osmand+&lt;' byline="true" />
 		  </else>
-		</if> 
+		</if>
+		<if> 
+		  <condition>
+		  		<isset property="build.version" />
+		  </condition>
+		  <then>
+		  	 <replaceregexp file="res/values/no_translate.xml" match='"app_version"&gt;(.*)&lt;' replace='"app_version"&gt;${build.version} alpha&lt;' byline="true" />
+		  </then>
+		 </if>
 	</target>
 
 
