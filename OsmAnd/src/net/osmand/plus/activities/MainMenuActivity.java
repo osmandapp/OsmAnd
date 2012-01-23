@@ -130,7 +130,7 @@ public class MainMenuActivity extends TrackedActivity {
 		rightview = (View) window.findViewById(R.id.SearchButton);
 		rightview.startAnimation(getAnimation(1, 0));
 		
-		String textVersion = Version.getFullVersion(activity);
+		String textVersion = Version.getAppVersion(activity);
 		final TextView textVersionView = (TextView) window.findViewById(R.id.TextVersion);
 		textVersionView.setText(textVersion);
 		SharedPreferences prefs = activity.getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);

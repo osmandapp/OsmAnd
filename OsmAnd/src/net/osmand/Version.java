@@ -30,6 +30,11 @@ public class Version {
 		return v.appName + " " + v.appVersion;
 	}
 	
+	public static String getAppVersion(Context ctx){
+		Version v = getVersion(ctx);
+		return v.appVersion;
+	}
+	
 	public static String getAppName(Context ctx){
 		Version v = getVersion(ctx);
 		return v.appName;
