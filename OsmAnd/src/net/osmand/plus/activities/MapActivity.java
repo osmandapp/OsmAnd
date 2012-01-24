@@ -921,7 +921,8 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
     	if (keyCode == KeyEvent.KEYCODE_BACK) {
 			//some application/hardware needs that back button reacts on key up, so
 			//that they could do some key combinations with it...
-    		onBackPressed();
+    		// Android 1.6 doesn't have onBack method!
+    		finish();
 			return true;
     	}  else if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
 			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());

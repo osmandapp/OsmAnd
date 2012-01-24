@@ -102,22 +102,28 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				if (i > 0) {
 					res.append("\n\n");
 				}
-				String format = OsmAndFormatter.getPoiSimpleFormat(n, view.getContext(), view.getSettings().USE_ENGLISH_NAMES.get());
-				res.append(" " + format);
-				if (n.getOpeningHours() != null) {
-					res.append("\n").append(view.getContext().getString(R.string.opening_hours)).append(" : ").append(n.getOpeningHours()); //$NON-NLS-1$ //$NON-NLS-2$
-				}
-				if (n.getPhone() != null) {
-					res.append("\n").append(view.getContext().getString(R.string.phone)).append(" : ").append(n.getPhone()); //$NON-NLS-1$ //$NON-NLS-2$
-				}
-				if (n.getSite() != null && n.getType() != AmenityType.OSMWIKI) {
-					res.append("\n").append(view.getContext().getString(R.string.website)).append(" : ").append(n.getSite()); //$NON-NLS-1$ //$NON-NLS-2$
-				}
+				buildPoiInformation(res, n);
 			}
 			Toast.makeText(view.getContext(), res.toString(), Toast.LENGTH_SHORT).show();
 			return true;
 		}
 		return false;
+	}
+
+
+	private StringBuilder buildPoiInformation(StringBuilder res, Amenity n) {
+		String format = OsmAndFormatter.getPoiSimpleFormat(n, view.getContext(), view.getSettings().USE_ENGLISH_NAMES.get());
+		res.append(" " + format);
+		if (n.getOpeningHours() != null) {
+			res.append("\n").append(view.getContext().getString(R.string.opening_hours)).append(" : ").append(n.getOpeningHours()); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		if (n.getPhone() != null) {
+			res.append("\n").append(view.getContext().getString(R.string.phone)).append(" : ").append(n.getPhone()); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		if (n.getSite() != null && n.getType() != AmenityType.OSMWIKI) {
+			res.append("\n").append(view.getContext().getString(R.string.website)).append(" : ").append(n.getSite()); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		return res;
 	}
 	
 	
@@ -359,7 +365,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	@Override
 	public String getObjectDescription(Object o) {
 		if(o instanceof Amenity){
-			return OsmAndFormatter.getPoiSimpleFormat((Amenity) o, view.getContext(), view.getSettings().USE_ENGLISH_NAMES.get());
+			return buildPoiInformation(new StringBuilder(), (Amenity) o).toString();
 		}
 		return null;
 	}
