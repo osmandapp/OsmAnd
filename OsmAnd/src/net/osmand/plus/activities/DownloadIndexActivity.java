@@ -336,6 +336,13 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 						downloadFileHelper.setInterruptDownloading(true);
 					}
 				});
+				progressFileDlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						downloadFileHelper.setInterruptDownloading(true);
+						
+					}
+				});
 				return progress.getDialog();
 		}
 		return null;

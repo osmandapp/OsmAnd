@@ -53,17 +53,17 @@ public class AsyncLoadingThread extends Thread {
 		asyncLoadingTransport = new Handler(h.getLooper());
 	}
 
-	private int calculateProgressStatus(){
+	private int calculateProgressStatus() {
 		int progress = 0;
-		if (resourceManger.getMapTileDownloader().isSomethingBeingDownloaded()) {
+		if (resourceManger.getMapTileDownloader() != null && resourceManger.getMapTileDownloader().isSomethingBeingDownloaded()) {
 			progress = BusyIndicator.STATUS_GREEN;
 		} else if (resourceManger.getContext().getRoutingHelper().isRouteBeingCalculated()) {
 			progress = BusyIndicator.STATUS_BLUE;
 		} else if (!requests.isEmpty()) {
 			progress = BusyIndicator.STATUS_BLACK;
-		} else if(poiLoadRequest != null && poiLoadRequest.isRunning()) {
+		} else if (poiLoadRequest != null && poiLoadRequest.isRunning()) {
 			progress = BusyIndicator.STATUS_BLACK;
-		} else if(transportLoadRequest != null && transportLoadRequest.isRunning()) {
+		} else if (transportLoadRequest != null && transportLoadRequest.isRunning()) {
 			progress = BusyIndicator.STATUS_BLACK;
 		}
 		return progress;
