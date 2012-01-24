@@ -181,7 +181,9 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 					ResourceManager mgr = getMyApplication().getResourceManager();
 					mgr.tileDownloaded(request);
 				}
-				mapView.tileDownloaded(request);
+				if(request == null || !request.error){
+					mapView.tileDownloaded(request);
+				}
 			}
 		});
 		

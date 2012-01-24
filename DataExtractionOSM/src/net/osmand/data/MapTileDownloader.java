@@ -26,7 +26,9 @@ public class MapTileDownloader {
 	// Download manager tile settings
 	public static int TILE_DOWNLOAD_THREADS = 4;
 	public static int TILE_DOWNLOAD_SECONDS_TO_WORK = 25;
-	public static final int TILE_DOWNLOAD_MAX_ERRORS = -1;
+	public static final long TIMEOUT_AFTER_EXCEEDING_LIMIT_ERRORS = 20000;
+	public static final int TILE_DOWNLOAD_MAX_ERRORS_PER_TIMEOUT = 25;
+	
 	
 	private static MapTileDownloader downloader = null;
 	private static Log log = LogUtil.getLog(MapTileDownloader.class);
@@ -40,6 +42,7 @@ public class MapTileDownloader {
 	private Set<File> currentlyDownloaded;
 	
 	private int currentErrors = 0;
+	private long timeForErrorCounter = 0;
 	
 	
 	public static MapTileDownloader getInstance(String userAgent){
@@ -143,8 +146,11 @@ public class MapTileDownloader {
 	}
 	
 	public void requestToDownload(DownloadRequest request){
-		if(TILE_DOWNLOAD_MAX_ERRORS > 0 && 
-				currentErrors > TILE_DOWNLOAD_MAX_ERRORS){
+		long now = System.currentTimeMillis();
+		if((int)(now - timeForErrorCounter) > TIMEOUT_AFTER_EXCEEDING_LIMIT_ERRORS ) {
+			timeForErrorCounter = now;
+			currentErrors = 0;
+		} else if(currentErrors > TILE_DOWNLOAD_MAX_ERRORS_PER_TIMEOUT){
 			return;
 		}
 		if(request.url == null){
@@ -207,8 +213,10 @@ public class MapTileDownloader {
 				} finally {
 					currentlyDownloaded.remove(request.fileToSave);
 				}
-				for(IMapDownloaderCallback c : new ArrayList<IMapDownloaderCallback>(callbacks)){
-					c.tileDownloaded(request);
+				if (!request.error) {
+					for (IMapDownloaderCallback c : new ArrayList<IMapDownloaderCallback>(callbacks)) {
+						c.tileDownloaded(request);
+					}
 				}
 			}
 				
