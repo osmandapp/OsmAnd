@@ -718,7 +718,6 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 				}
 			} catch (InterruptedException e) {
 				// do not dismiss dialog
-				progressFileDlg = null;
 			} finally {
 				if (progressFileDlg != null) {
 					removeDialog(DIALOG_PROGRESS_FILE);
