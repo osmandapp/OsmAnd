@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -118,7 +119,11 @@ public class MapStackControl extends ViewGroup {
 	
 	private Drawable getStackDrawable(int i){
 		while(i >= cacheStackDrawables.size()) {
-			cacheStackDrawables.add(getResources().getDrawable(stackDrawable).mutate());
+			Drawable d = getResources().getDrawable(stackDrawable);
+			if(Build.VERSION_CODES.FROYO <=  Build.VERSION.SDK_INT) {
+				d = d.mutate();
+			}
+			cacheStackDrawables.add(d);
 		}
 		return cacheStackDrawables.get(i);
 	}
