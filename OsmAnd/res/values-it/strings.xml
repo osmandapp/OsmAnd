@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="tip_recent_changes_0_7_0_t">Changes in 0.7.0 :
+	\n\t- Offline wikipedia data with articles
+	\n\t- Updated maps
+	\n\t- Other small features
+	</string>    
+	<string name="free_version_message">Questa versione gratuita di OsmAnd è limitata a %1$ download %2$ e non supporta gli articoli offline di Wikipedia.</string>
+	<string name="free_version_title">Versione gratuita</string>
     <string name="poi_context_menu_showdescription">Mostra descrizione</string>
     <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
 	<string name="amenity_type_user_defined">Definito dall\'utente</string>
