@@ -122,6 +122,7 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 			favoriteGroups.put(GPX_GROUP, new ArrayList<FavouritePoint>());
 		}
 		favoriteGroups.get(GPX_GROUP).add(fp);
+		recalculateCachedFavPoints();
 	}
 	
 	public List<FavouritePoint> getFavouritePoints() {

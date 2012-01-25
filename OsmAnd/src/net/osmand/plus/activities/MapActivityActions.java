@@ -51,6 +51,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -197,10 +198,12 @@ public class MapActivityActions implements DialogProvider {
     private Dialog createAddWaypointDialog(final Bundle args) {
     	Builder builder = new AlertDialog.Builder(mapActivity);
 		builder.setTitle(R.string.add_waypoint_dialog_title);
+		FrameLayout parent = new FrameLayout(mapActivity);
 		final EditText editText = new EditText(mapActivity);
 		editText.setId(R.id.TextView);
-		builder.setView(editText);
-		editText.setPadding(15, 0, 15, 0);
+		parent.setPadding(15, 0, 15, 0);
+		parent.addView(editText);
+		builder.setView(parent);
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
 			@Override
