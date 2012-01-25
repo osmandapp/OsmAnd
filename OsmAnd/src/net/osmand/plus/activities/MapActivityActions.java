@@ -200,7 +200,7 @@ public class MapActivityActions implements DialogProvider {
 		final EditText editText = new EditText(mapActivity);
 		editText.setId(R.id.TextView);
 		builder.setView(editText);
-		editText.setPadding(5, 0, 5, 0);
+		editText.setPadding(15, 0, 15, 0);
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
 			@Override
