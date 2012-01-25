@@ -9,6 +9,7 @@ import com.google.android.apps.analytics.easytracking.TrackedActivity;
 import net.osmand.Algoritms;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
@@ -665,8 +666,15 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 			if (!location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
 				savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(), location.getSpeed(),
 						location.getAccuracy(), location.getTime(), settings);
+				if(settings.SHOW_CURRENT_GPX_TRACK.get()) {
+					WptPt pt = new GPXUtilities.WptPt(location.getLatitude(), location.getLongitude(), location.getTime(), location.getAltitude(), location.getSpeed(),
+							location.getAccuracy()); 
+					mapLayers.getGpxLayer().addTrackPoint(pt);
+				}
 			}
 		}
+
+    	
     	registerUnregisterSensor(location);
     	updateSpeedBearing(location);
     	mapLayers.getLocationLayer().setLastKnownLocation(location);

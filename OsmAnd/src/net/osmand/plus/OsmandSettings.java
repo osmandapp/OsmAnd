@@ -174,6 +174,7 @@ public class OsmandSettings {
 		return internetConnectionAvailable;
 	}
 	
+	
 	/////////////// PREFERENCES classes ////////////////
 	
 	public abstract class CommonPreference<T> implements OsmandPreference<T> {
@@ -1045,6 +1046,9 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Integer> SERVICE_OFF_INTERVAL = new IntPreference("service_off_interval", 
 			5 * 60 * 1000, true);
+	
+	public final CommonPreference<Boolean> SHOW_CURRENT_GPX_TRACK = 
+			new BooleanPreference("show_current_gpx_track", false, true, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Integer> SERVICE_OFF_WAIT_INTERVAL = new IntPreference("service_off_wait_interval", 

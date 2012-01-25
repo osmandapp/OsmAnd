@@ -163,7 +163,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 								OsmandSettings settings = OsmandSettings.getOsmandSettings(LocalIndexesActivity.this);
 								settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
 							}
-							((OsmandApplication) getApplication()).setGpxFileToDisplay(info.getGpxFile());
+							((OsmandApplication) getApplication()).setGpxFileToDisplay(info.getGpxFile(), false);
 							MapActivity.launchMapActivityMoveToTop(LocalIndexesActivity.this);
 						}
 					} else if (resId == R.string.local_index_mi_rename) {

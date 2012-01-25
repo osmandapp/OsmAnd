@@ -255,7 +255,7 @@ public class MapActivityLayers {
 		selectedList.add(underlayLayer.getMap() != null ? 1 : 0);
 		
 		layers.add(R.string.layer_gpx_layer);
-		selectedList.add(gpxLayer.isVisible() ? 1 : 0);
+		selectedList.add(getApplication().getGpxFileToDisplay() != null ? 1 : 0);
 		if(routeInfoLayer.couldBeVisible()){
 			layers.add(R.string.layer_route);
 			selectedList.add(routeInfoLayer.isUserDefinedVisible() ? 1 : 0);
@@ -317,8 +317,8 @@ public class MapActivityLayers {
 								mapTileLayer, mapVectorLayer);
 					}
 				} else if(layers.get(item) == R.string.layer_gpx_layer){
-					if(gpxLayer.isVisible()){
-						getApplication().setGpxFileToDisplay(null);
+					if(getApplication().getGpxFileToDisplay() != null){
+						getApplication().setGpxFileToDisplay(null, false);
 						gpxLayer.clearCurrentGPX();
 					} else {
 						dialog.dismiss();
@@ -345,15 +345,27 @@ public class MapActivityLayers {
 		selectGPXFileLayer(new CallbackWithObject<GPXFile>() {
 			@Override
 			public boolean processResult(GPXFile result) {
-				settings.SHOW_FAVORITES.set(true);
-				if (result != null) {
-					getApplication().setGpxFileToDisplay(result);
-					updateGPXLayer();
-					mapView.refreshMap();
+				GPXFile toShow = result;
+				if (toShow == null) {
+					if(!settings.SAVE_TRACK_TO_GPX.get()){
+						Toast.makeText(activity, R.string.gpx_monitoring_disabled_warn, Toast.LENGTH_SHORT).show();
+						return true;
+					}
+					Map<String, GPXFile> data = activity.getSavingTrackHelper().collectRecordedData();
+					if(data.isEmpty()){
+						toShow = new GPXFile();						
+					} else {
+						toShow = data.values().iterator().next();
+					}
 				}
+				
+				settings.SHOW_FAVORITES.set(true);
+				getApplication().setGpxFileToDisplay(toShow, result == null);
+				updateGPXLayer();
+				mapView.refreshMap();
 				return true;
 			}
-		}, true);
+		}, true, true);
 	}
 	
 	private void updateGPXLayer(){
@@ -365,7 +377,8 @@ public class MapActivityLayers {
 		}
 	}
 	
-	public void selectGPXFileLayer(final CallbackWithObject<GPXFile> callbackWithObject, final boolean convertCloudmade) {
+	public void selectGPXFileLayer(final CallbackWithObject<GPXFile> callbackWithObject, final boolean convertCloudmade,
+			final boolean showCurrentGpx) {
 		final List<String> list = new ArrayList<String>();
 		final OsmandSettings settings = getApplication().getSettings();
 		final File dir = settings.extendOsmandPath(ResourceManager.GPX_PATH);
@@ -395,35 +408,42 @@ public class MapActivityLayers {
 		
 		if(list.isEmpty()){
 			Toast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
-		} else {
+		}
+		if(!list.isEmpty() || showCurrentGpx){
 			Builder builder = new AlertDialog.Builder(activity);
+			if(showCurrentGpx){
+				list.add(0, getString(R.string.show_current_gpx_title));
+			}
 			builder.setItems(list.toArray(new String[list.size()]), new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();
-					final ProgressDialog dlg = ProgressDialog.show(activity, getString(R.string.loading),
-							getString(R.string.loading_data));
-					final File f = new File(dir, list.get(which));
-					new Thread(new Runnable() {
-						@Override
-						public void run() {
-							final GPXFile res = GPXUtilities.loadGPXFile(activity, f, convertCloudmade);
-							dlg.dismiss();
-							activity.runOnUiThread(new Runnable() {
-								@Override
-								public void run() {
-									if(res.warning != null){
-										Toast.makeText(activity, res.warning, Toast.LENGTH_LONG).show();
-									} else {
-										callbackWithObject.processResult(res);
+					if(showCurrentGpx && which == 0){
+						callbackWithObject.processResult(null);
+					} else {
+						final ProgressDialog dlg = ProgressDialog.show(activity, getString(R.string.loading),
+								getString(R.string.loading_data));
+						final File f = new File(dir, list.get(which));
+						new Thread(new Runnable() {
+							@Override
+							public void run() {
+								final GPXFile res = GPXUtilities.loadGPXFile(activity, f, convertCloudmade);
+								dlg.dismiss();
+								activity.runOnUiThread(new Runnable() {
+									@Override
+									public void run() {
+										if (res.warning != null) {
+											Toast.makeText(activity, res.warning, Toast.LENGTH_LONG).show();
+										} else {
+											callbackWithObject.processResult(res);
+										}
 									}
-								}
-							});
-						}
+								});
+							}
 
-						
-					}, "Loading gpx").start(); //$NON-NLS-1$
+						}, "Loading gpx").start(); //$NON-NLS-1$
+					}
 				}
 
 			});
@@ -634,6 +654,10 @@ public class MapActivityLayers {
 
 	public PointNavigationLayer getNavigationLayer() {
 		return navigationLayer;
+	}
+	
+	public GPXLayer getGpxLayer() {
+		return gpxLayer;
 	}
 	
 	public ContextMenuLayer getContextMenuLayer() {

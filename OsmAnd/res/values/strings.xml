@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="gpx_monitoring_disabled_warn">Please enable GPX monitoring in the settings</string>
+    <string name="show_current_gpx_title">Show current track</string>
 	<string name="tip_recent_changes_0_7_0_t">Changes in 0.7.0 :
 	\n\t- Offline wikipedia data with articles
 	\n\t- Updated maps

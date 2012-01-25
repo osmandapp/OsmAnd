@@ -6,6 +6,7 @@ import java.util.List;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.plus.OsmandSettings;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -24,6 +25,9 @@ public class GPXLayer extends OsmandMapLayer {
 	private Paint paint;
 
 	private Path path;
+
+	private OsmandSettings settings;
+	
 	
 	private void initUI() {
 		paint = new Paint();
@@ -41,6 +45,7 @@ public class GPXLayer extends OsmandMapLayer {
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
+		settings = OsmandSettings.getOsmandSettings(view.getContext());
 		initUI();
 	}
 
@@ -96,8 +101,8 @@ public class GPXLayer extends OsmandMapLayer {
 	}
 	
 
-	public boolean isVisible(){
-		return !points.isEmpty();
+	public boolean isShowingCurrentTrack(){
+		return settings.SHOW_CURRENT_GPX_TRACK.get();
 	}
 	
 	
@@ -117,6 +122,21 @@ public class GPXLayer extends OsmandMapLayer {
 			}
 			points = tpoints;
 			
+		}
+	}
+	
+	public void addTrackPoint(WptPt pt){
+		if(points.size() == 0){
+			points.add(new ArrayList<WptPt>());
+		}
+		List<WptPt> last = points.get(points.size() - 1);
+		if(last.size() == 0 || last.get(last.size() - 1).time - pt.time < 6 * 60 * 1000) {
+			// 6 minutes same segment
+			last.add(pt);
+		} else {
+			ArrayList<WptPt> l = new ArrayList<WptPt>();
+			l.add(pt);
+			points.add(l);
 		}
 	}
 	

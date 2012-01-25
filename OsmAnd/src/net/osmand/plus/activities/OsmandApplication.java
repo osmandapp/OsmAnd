@@ -110,8 +110,9 @@ public class OsmandApplication extends Application {
 		return poiFilters;
 	}
 	
-	public void setGpxFileToDisplay(GPXFile gpxFileToDisplay) {
+	public void setGpxFileToDisplay(GPXFile gpxFileToDisplay, boolean showCurrentGpxFile) {
 		this.gpxFileToDisplay = gpxFileToDisplay;
+		osmandSettings.SHOW_CURRENT_GPX_TRACK.set(showCurrentGpxFile);
 		if(gpxFileToDisplay == null){
 			getFavorites().setFavoritePointsFromGPXFile(null);
 		} else {

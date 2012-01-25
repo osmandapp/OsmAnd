@@ -209,6 +209,9 @@ public class MapActivityActions implements DialogProvider {
 				double longitude = args.getDouble(KEY_LONGITUDE);
 				String name = editText.getText().toString();
 				mapActivity.getSavingTrackHelper().insertPointData(latitude, longitude, System.currentTimeMillis(), name);
+				if(OsmandSettings.getOsmandSettings(mapActivity).SHOW_CURRENT_GPX_TRACK.get()) {
+					getMyApplication().favorites.addFavoritePointToGPXFile(new FavouritePoint(latitude, longitude, name, ""));
+				}
 				Toast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_waypoint_dialog_added), name), Toast.LENGTH_SHORT)
 							.show();
 				dialog.dismiss();
@@ -622,7 +625,7 @@ public class MapActivityActions implements DialogProvider {
 				builder.show();
 				return true;
 			}
-		}, false);
+		}, false, false);
 	}
     
     private ApplicationMode getAppMode(ToggleButton[] buttons, OsmandSettings settings){

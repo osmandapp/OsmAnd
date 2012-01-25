@@ -123,17 +123,14 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	 * @return warnings
 	 */
 	public List<String> saveDataToGpx() {
-		SQLiteDatabase db = getReadableDatabase();
 		List<String> warnings = new ArrayList<String>();
 		File dir = OsmandSettings.getOsmandSettings(ctx).getExternalStorageDirectory();
-		if (db != null && dir.canWrite()) {
+		if (dir.canWrite()) {
 			dir = new File(dir, ResourceManager.GPX_PATH);
 			dir.mkdirs();
 			if (dir.exists()) {
 
-				Map<String, GPXFile> data = new LinkedHashMap<String, GPXFile>();
-				collectDBPoints(db, data);
-				collectDBTracks(db, data);
+				Map<String, GPXFile> data = collectRecordedData();
 
 				// save file
 				for (final String f : data.keySet()) {
@@ -156,13 +153,23 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			}
 		}
 
-		db = getWritableDatabase();
+		SQLiteDatabase db = getWritableDatabase();
 		if (db != null && warnings.isEmpty()) {
 			// remove all from db
 			db.execSQL("DELETE FROM " + TRACK_NAME + " WHERE " + TRACK_COL_DATE + " <= ?", new Object[] { System.currentTimeMillis() }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			db.execSQL("DELETE FROM " + POINT_NAME + " WHERE " + POINT_COL_DATE + " <= ?", new Object[] { System.currentTimeMillis() }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		return warnings;
+	}
+
+	public Map<String, GPXFile> collectRecordedData() {
+		Map<String, GPXFile> data = new LinkedHashMap<String, GPXFile>();
+		SQLiteDatabase db = getReadableDatabase();
+		if(db != null) {
+			collectDBPoints(db, data);
+			collectDBTracks(db, data);
+		}
+		return data;
 	}
 
 	private void collectDBPoints(SQLiteDatabase db, Map<String, GPXFile> dataTracks) {
@@ -243,7 +250,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 	
 	public void insertData(double lat, double lon, double alt, double speed, double hdop, long time, OsmandSettings settings){
-		if (time - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()*1000) {
+		if (time - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get() * 1000) {
 			execWithClose(updateScript, new Object[] { lat, lon, alt, speed, hdop, time });
 			lastTimeUpdated = time;
 		}

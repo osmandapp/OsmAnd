@@ -68,6 +68,18 @@ public class GPXUtilities {
 		public double ele = Double.NaN;
 		public double speed = 0;
 		public double hdop = Double.NaN;
+		
+		public WptPt(){}
+
+		public WptPt(double lat, double lon, long time, double ele, double speed, double hdop) {
+			this.lat = lat;
+			this.lon = lon;
+			this.time = time;
+			this.ele = ele;
+			this.speed = speed;
+			this.hdop = hdop;
+		}
+		
 	}
 	
 	

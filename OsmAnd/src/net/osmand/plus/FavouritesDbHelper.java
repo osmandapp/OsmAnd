@@ -115,6 +115,15 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 		recalculateCachedFavPoints();
 	}
 	
+	public void addFavoritePointToGPXFile(FavouritePoint fp) {
+		fp.setCategory(GPX_GROUP);
+		fp.setStored(false);
+		if (!favoriteGroups.containsKey(GPX_GROUP)) {
+			favoriteGroups.put(GPX_GROUP, new ArrayList<FavouritePoint>());
+		}
+		favoriteGroups.get(GPX_GROUP).add(fp);
+	}
+	
 	public List<FavouritePoint> getFavouritePoints() {
 		checkFavoritePoints();
 		return cachedFavoritePoints;
