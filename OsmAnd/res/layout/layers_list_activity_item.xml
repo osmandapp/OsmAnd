@@ -3,7 +3,6 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="horizontal"
 	android:paddingTop="0dip"
-	android:background="@color/color_white"
 	android:paddingBottom="0dip"
 	android:paddingLeft="5dip"
 	android:paddingRight="5dip" 
@@ -20,8 +19,7 @@
 		android:layout_width="fill_parent" 
 		android:layout_height="wrap_content"
 		android:layout_weight="1" 
-		android:textSize="15sp"	
-		android:textColor="@color/color_black"/>
+		android:textSize="15sp"/>
 	<CheckBox 
 		android:id="@+id/check_item"
 		android:layout_width="wrap_content" 

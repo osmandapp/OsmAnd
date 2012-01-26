@@ -354,16 +354,9 @@ public class MapActivityLayers {
 				mapView.refreshMap();
 			}
 		};
-//		final boolean[] selected = new boolean[selectedList.size()];
-//		for (int i = 0; i < selected.length; i++) {
-//			selected[i] = selectedList.get(i) != 0;
-//		}
-//		
-//		Builder builder = new AlertDialog.Builder(activity);
-//		final Dialog dlg = new Dialog(activity, android.R.style.Theme_Light);
 		Builder b = new AlertDialog.Builder(activity);
-		ListView list = new ListView(activity);
-//		dlg.setContentView(list);
+		ListView list = new ListView(activity, null, R.style.NiceActivity);
+//		list.setBackgroundColor(R.color.color_white);
 		b.setView(list);
 		final List<String> layerNames = new ArrayList<String>();
 		for (int i = 0; i < layers.size(); i++) {
@@ -397,37 +390,34 @@ public class MapActivityLayers {
 						}
 					});
 				}
-				row.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if(selectedList.get(position) >= 0) {
-							ch.setChecked(!ch.isChecked());
-						} else {
-							listener.onClick(dlg, position, selectedList.get(position) > 0);
-						}
-					}
-				});
+//				row.setOnClickListener(new View.OnClickListener() {
+//					@Override
+//					public void onClick(View v) {
+//						if(selectedList.get(position) >= 0) {
+//							ch.setChecked(!ch.isChecked());
+//						} else {
+//							listener.onClick(dlg, position, selectedList.get(position) > 0);
+//						}
+//					}
+//				});
 				return row;
 			}
 		};
 		list.setAdapter(adapter);
-//		list.setOnItemClickListener(new OnItemClickListener() {
-//			@Override
-//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//				listener.onClick(dlg, position, selectedList.get(position) > 0);
-//			}
-//		});
+		list.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				if(selectedList.get(position) >= 0) {
+					CheckBox ch = ((CheckBox) view.findViewById(R.id.check_item));
+					ch.setChecked(!ch.isChecked());
+				} else {
+					listener.onClick(dlg, position, selectedList.get(position) > 0);
+				}
+			}
+		});
 		dlg.setCanceledOnTouchOutside(true);
 		dlg.show();
 		
-		
-//		String[] layersName = new String[layers.size()];
-//		for (int i = 0; i < layers.size(); i++) {
-//			layersName[i] = getString(layers.get(i));
-//
-//		}
-//		builder.setMultiChoiceItems(layersName, selected, );
-//		builder.show();
 	}
 	
 	public void showGPXFileLayer(final OsmandMapTileView mapView){
