@@ -48,10 +48,25 @@ import net.osmand.plus.views.TransportInfoLayer;
 import net.osmand.plus.views.TransportStopsLayer;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.FrameLayout.LayoutParams;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -237,52 +252,54 @@ public class MapActivityLayers {
 	public void openLayerSelectionDialog(final OsmandMapTileView mapView){
 		
 		final TIntArrayList layers = new TIntArrayList();
-		TIntArrayList selectedList = new TIntArrayList();
+		final TIntArrayList selectedList = new TIntArrayList();
+		final TIntArrayList iconList = new TIntArrayList();
 		final OsmandSettings settings = getApplication().getSettings();
 		layers.add(R.string.layer_map);
-		selectedList.add(1);
+		iconList.add(R.drawable.list_activities_map_src);
+		selectedList.add(-1);
 		layers.add(R.string.layer_poi);
+		iconList.add(R.drawable.list_activities_poi);
 		selectedList.add(settings.SHOW_POI_OVER_MAP.get() ? 1 : 0);
 		if(settings.SHOW_POI_OVER_MAP.get()){
 			layers.add(R.string.layer_poi_label);
 			selectedList.add(settings.SHOW_POI_LABEL.get() ? 1 : 0);
+			iconList.add(0);
 		}
 		layers.add(R.string.layer_favorites);
+		iconList.add(R.drawable.list_activities_favorites);
 		selectedList.add(settings.SHOW_FAVORITES.get() ? 1 : 0);
 		layers.add(R.string.layer_overlay);
 		selectedList.add(overlayLayer.getMap() != null ? 1 : 0);
+		iconList.add(R.drawable.list_activities_overlay_map);
 		layers.add(R.string.layer_underlay);
 		selectedList.add(underlayLayer.getMap() != null ? 1 : 0);
+		iconList.add(R.drawable.list_activities_underlay_map);
 		
 		layers.add(R.string.layer_gpx_layer);
 		selectedList.add(getApplication().getGpxFileToDisplay() != null ? 1 : 0);
+		iconList.add(R.drawable.list_activities_gpx_tracks);
 		if(routeInfoLayer.couldBeVisible()){
 			layers.add(R.string.layer_route);
 			selectedList.add(routeInfoLayer.isUserDefinedVisible() ? 1 : 0);
+			iconList.add(0);
 		}
 		
 		layers.add(R.string.layer_transport);
 		selectedList.add(settings.SHOW_TRANSPORT_OVER_MAP.get() ? 1 : 0);
+		iconList.add(R.drawable.list_activities_transport_stops);
 		if(TransportRouteHelper.getInstance().routeIsCalculated()){
 			layers.add(R.string.layer_transport_route);
 			selectedList.add(routeInfoLayer.isUserDefinedVisible() ? 1 : 0);
+			iconList.add(0);
 		}
 		
 		layers.add(R.string.layer_osm_bugs);
 		selectedList.add(settings.SHOW_OSM_BUGS.get() ? 1 : 0);
+		iconList.add(R.drawable.list_activities_osm_bugs);
 		
-		final boolean[] selected = new boolean[selectedList.size()];
-		for (int i = 0; i < selected.length; i++) {
-			selected[i] = selectedList.get(i) > 0;
-		}
-		
-		Builder builder = new AlertDialog.Builder(activity);
-		String[] layersName = new String[layers.size()];
-		for (int i = 0; i < layers.size(); i++) {
-			layersName[i] = getString(layers.get(i));
 
-		}
-		builder.setMultiChoiceItems(layersName, selected, new DialogInterface.OnMultiChoiceClickListener() {
+		final OnMultiChoiceClickListener listener = new DialogInterface.OnMultiChoiceClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int item, boolean isChecked) {
@@ -336,8 +353,81 @@ public class MapActivityLayers {
 				updateLayers(mapView);
 				mapView.refreshMap();
 			}
-		});
-		builder.show();
+		};
+//		final boolean[] selected = new boolean[selectedList.size()];
+//		for (int i = 0; i < selected.length; i++) {
+//			selected[i] = selectedList.get(i) != 0;
+//		}
+//		
+//		Builder builder = new AlertDialog.Builder(activity);
+//		final Dialog dlg = new Dialog(activity, android.R.style.Theme_Light);
+		Builder b = new AlertDialog.Builder(activity);
+		ListView list = new ListView(activity);
+//		dlg.setContentView(list);
+		b.setView(list);
+		final List<String> layerNames = new ArrayList<String>();
+		for (int i = 0; i < layers.size(); i++) {
+			layerNames.add(getString(layers.get(i)));
+
+		}
+		final AlertDialog dlg = b.create();
+		final int minWidth = activity.getResources().getDrawable(R.drawable.list_activities_favorites).getMinimumWidth();
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.layers_list_activity_item, 
+				layerNames) {
+			@Override
+			public View getView(final int position, View convertView, ViewGroup parent) {
+				View row = activity.getLayoutInflater().inflate(R.layout.layers_list_activity_item, null);
+				((TextView) row.findViewById(R.id.title)).setText(layerNames.get(position));
+				if(iconList.get(position) != 0) {
+					Drawable d = activity.getResources().getDrawable(iconList.get(position));
+					((ImageView) row.findViewById(R.id.icon)).setImageDrawable(d);
+				} else {
+					LinearLayout.LayoutParams layoutParams = (android.widget.LinearLayout.LayoutParams) ((ImageView) row.findViewById(R.id.icon)).getLayoutParams();
+					layoutParams.leftMargin = minWidth;
+				}
+				final CheckBox ch = ((CheckBox) row.findViewById(R.id.check_item));
+				if(selectedList.get(position) == -1){
+					ch.setVisibility(View.INVISIBLE);
+				} else {
+					ch.setChecked(selectedList.get(position) > 0);
+					ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+						@Override
+						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+							listener.onClick(dlg, position, isChecked);
+						}
+					});
+				}
+				row.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if(selectedList.get(position) >= 0) {
+							ch.setChecked(!ch.isChecked());
+						} else {
+							listener.onClick(dlg, position, selectedList.get(position) > 0);
+						}
+					}
+				});
+				return row;
+			}
+		};
+		list.setAdapter(adapter);
+//		list.setOnItemClickListener(new OnItemClickListener() {
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//				listener.onClick(dlg, position, selectedList.get(position) > 0);
+//			}
+//		});
+		dlg.setCanceledOnTouchOutside(true);
+		dlg.show();
+		
+		
+//		String[] layersName = new String[layers.size()];
+//		for (int i = 0; i < layers.size(); i++) {
+//			layersName[i] = getString(layers.get(i));
+//
+//		}
+//		builder.setMultiChoiceItems(layersName, selected, );
+//		builder.show();
 	}
 	
 	public void showGPXFileLayer(final OsmandMapTileView mapView){

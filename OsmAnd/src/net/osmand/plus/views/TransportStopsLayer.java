@@ -70,7 +70,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	public boolean onSingleTap(PointF point) {
 		ArrayList<TransportStop> stops = new ArrayList<TransportStop >(); 
 		getFromPoint(point, stops);
-		if(stops.isEmpty()){
+		if(!stops.isEmpty()){
 			StringBuilder res = new StringBuilder();
 			int i = 0;
 			for (TransportStop n : stops) {

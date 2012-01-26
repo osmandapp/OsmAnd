@@ -2,31 +2,29 @@
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="horizontal"
-	android:paddingTop="1dip"
-	android:paddingBottom="1dip"
+	android:paddingTop="0dip"
+	android:background="@color/color_white"
+	android:paddingBottom="0dip"
 	android:paddingLeft="5dip"
 	android:paddingRight="5dip" 
-	android:clickable="true"
 	android:layout_width="wrap_content" 
-	android:layout_height="wrap_content"
-	android:background="@drawable/quickaction_slider_btn">
+	android:layout_height="wrap_content">
 
 	<ImageView
 		android:id="@+id/icon" 
-		android:layout_width="fill_parent" 
+		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content"/>
 
 	<TextView 
 		android:id="@+id/title"
 		android:layout_width="fill_parent" 
-		android:layout_height="fill_parent"
+		android:layout_height="wrap_content"
 		android:layout_weight="1" 
-		android:textSize="15sp"	/>
-	
+		android:textSize="15sp"	
+		android:textColor="@color/color_black"/>
 	<CheckBox 
 		android:id="@+id/check_item"
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content"
-		/>
-		
+		 android:focusable="false" />
 </LinearLayout>

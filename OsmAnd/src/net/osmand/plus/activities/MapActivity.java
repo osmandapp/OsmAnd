@@ -508,7 +508,8 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
     	if (keyCode == KeyEvent.KEYCODE_BACK) {
 			//some application/hardware needs that back button reacts on key up, so
 			//that they could do some key combinations with it...
-			return true;
+    		// Victor : doing in that way doesn't close dialog properly!
+//			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
 			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
 			// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -929,9 +930,9 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
     	if (keyCode == KeyEvent.KEYCODE_BACK) {
 			//some application/hardware needs that back button reacts on key up, so
 			//that they could do some key combinations with it...
-    		// Android 1.6 doesn't have onBack method!
-    		finish();
-			return true;
+    		// Android 1.6 doesn't have onBackPressed() method it should be finish instead!
+//    		onBackPressed();
+//			return true;
     	}  else if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
 			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 	    	return true;
