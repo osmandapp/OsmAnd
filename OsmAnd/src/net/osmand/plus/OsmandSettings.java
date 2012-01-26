@@ -479,6 +479,17 @@ public class OsmandSettings {
 		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.BICYCLE, 10);
 		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 20);
 	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<Boolean> LIVE_MONITORING = new BooleanPreference("live_monitoring", false, false);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<Integer> LIVE_MONITORING_INTERVAL = new IntPreference("live_monitoring_interval", 5, false);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<String> LIVE_MONITORING_URL = new StringPreference("live_monitoring_url", 
+			"http://example.com?lat={0}&lon={1}&timestamp={2}&hdop={3}&altitude={5}&speed={6}", false);
+
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_OSMAND_ROUTING_SERVICE_ALWAYS = 

@@ -56,6 +56,12 @@
 		<ListPreference android:summary="@string/save_track_interval_descr" android:title="@string/save_track_interval"
 			android:key="save_track_interval"></ListPreference>
 		<Preference android:summary="@string/save_current_track_descr" android:title="@string/save_current_track" android:key="save_current_track"></Preference>
+		<CheckBoxPreference android:summary="@string/live_monitoring_descr" android:title="@string/live_monitoring"
+			android:key="live_monitoring"></CheckBoxPreference>
+		<ListPreference android:summary="@string/live_monitoring_interval_descr" android:title="@string/live_monitoring_interval"
+			android:key="live_monitoring_interval"></ListPreference>
+		<EditTextPreference android:summary="@string/live_monitoring_url_descr" android:title="@string/live_monitoring_url"
+			android:key="live_monitoring_url"/>
 	</PreferenceScreen>
 
 

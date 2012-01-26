@@ -106,6 +106,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 	final private MapActivityLayers mapLayers = new MapActivityLayers(this);
 	
 	private SavingTrackHelper savingTrackHelper;
+	private LiveMonitoringHelper liveMonitoringHelper;
 	private RoutingHelper routingHelper;
 	
 	private boolean sensorRegistered = false;
@@ -190,6 +191,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		
 				
 		savingTrackHelper = new SavingTrackHelper(this);
+		liveMonitoringHelper = new LiveMonitoringHelper(this);
 		LatLon pointToNavigate = settings.getPointToNavigate();
 		
 		routingHelper = getMyApplication().getRoutingHelper();
@@ -662,15 +664,21 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
     	if(Log.isLoggable(LogUtil.TAG, Log.DEBUG)){
     		Log.d(LogUtil.TAG, "Location changed " + location.getProvider()); //$NON-NLS-1$
     	}
-    	if(location != null && settings.SAVE_TRACK_TO_GPX.get()){
+    	if(location != null ){
     		// write only with 50 meters accuracy
 			if (!location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
-				savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(), location.getSpeed(),
-						location.getAccuracy(), location.getTime(), settings);
-				if(settings.SHOW_CURRENT_GPX_TRACK.get()) {
-					WptPt pt = new GPXUtilities.WptPt(location.getLatitude(), location.getLongitude(), location.getTime(), location.getAltitude(), location.getSpeed(),
-							location.getAccuracy()); 
-					mapLayers.getGpxLayer().addTrackPoint(pt);
+				if (settings.SAVE_TRACK_TO_GPX.get()) {
+					savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
+							location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
+					if (settings.SHOW_CURRENT_GPX_TRACK.get()) {
+						WptPt pt = new GPXUtilities.WptPt(location.getLatitude(), location.getLongitude(), location.getTime(),
+								location.getAltitude(), location.getSpeed(), location.getAccuracy());
+						mapLayers.getGpxLayer().addTrackPoint(pt);
+					}
+				}
+				if(settings.LIVE_MONITORING.get()){
+					liveMonitoringHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
+							location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
 				}
 			}
 		}

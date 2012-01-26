@@ -2,6 +2,7 @@ package net.osmand.plus;
 
 
 import net.osmand.Version;
+import net.osmand.plus.activities.LiveMonitoringHelper;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.routing.RoutingHelper;
@@ -53,6 +54,7 @@ public class NavigationService extends Service implements LocationListener {
 	private static WakeLock lockStatic;
 	private PendingIntent pendingIntent;
 	private BroadcastReceiver broadcastReceiver;
+	private LiveMonitoringHelper liveMonitoringHelper;
 	
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -94,6 +96,7 @@ public class NavigationService extends Service implements LocationListener {
 		serviceOffProvider = settings.SERVICE_OFF_PROVIDER.get();
 		serviceError = settings.SERVICE_OFF_WAIT_INTERVAL.get();
 		savingTrackHelper = new SavingTrackHelper(this);
+		liveMonitoringHelper = new LiveMonitoringHelper(this);
 		
 		routingHelper = ((OsmandApplication)getApplication()).getRoutingHelper();
 		((OsmandApplication)getApplication()).setNavigationService(this);
@@ -192,6 +195,8 @@ public class NavigationService extends Service implements LocationListener {
 			}
 			
 			savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
+					location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
+			liveMonitoringHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
 					location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
 			if(routingHelper.isFollowingMode()){
 				routingHelper.setCurrentLocation(location);

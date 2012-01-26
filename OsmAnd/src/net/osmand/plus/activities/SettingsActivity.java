@@ -173,6 +173,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	    registerBooleanPreference(osmandSettings.AUTO_ZOOM_MAP,screen); 
 	    registerBooleanPreference(osmandSettings.AUTO_FOLLOW_ROUTE_NAV,screen);
 	    registerBooleanPreference(osmandSettings.SAVE_TRACK_TO_GPX,screen); 
+	    registerBooleanPreference(osmandSettings.LIVE_MONITORING,screen);
 	    registerBooleanPreference(osmandSettings.DEBUG_RENDERING_INFO,screen); 
 	    registerBooleanPreference(osmandSettings.FAST_ROUTE_MODE,screen);
 	    registerBooleanPreference(osmandSettings.USE_OSMAND_ROUTING_SERVICE_ALWAYS,screen); 
@@ -190,6 +191,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	    
 		registerEditTextPreference(osmandSettings.USER_NAME, screen);
 		registerEditTextPreference(osmandSettings.USER_PASSWORD, screen);
+		registerEditTextPreference(osmandSettings.LIVE_MONITORING_URL, screen);
 		
 		
 		registerSeekBarPreference(osmandSettings.MAP_OVERLAY_TRANSPARENCY, screen);
@@ -285,6 +287,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerListPreference(osmandSettings.SERVICE_OFF_PROVIDER, screen, entries, entrieValues);
 		
 		registerTimeListPreference(osmandSettings.SAVE_TRACK_INTERVAL, screen, new int[]{1, 2, 3, 5, 10, 15, 20, 30}, new int[]{1, 2, 3, 5}, 1);
+		registerTimeListPreference(osmandSettings.LIVE_MONITORING_INTERVAL, screen, new int[]{1, 2, 3, 5, 10, 15, 20, 30}, new int[]{1, 2, 3, 5}, 1);
 		registerTimeListPreference(osmandSettings.SERVICE_OFF_INTERVAL, screen, 
 				new int[]{0, 30, 45, 60}, new int[]{2, 3, 5, 10, 15, 30, 45, 60, 90}, 1000);
 		registerTimeListPreference(osmandSettings.SERVICE_OFF_WAIT_INTERVAL, screen, 
