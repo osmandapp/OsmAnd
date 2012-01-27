@@ -248,7 +248,7 @@
 \n\t- Text-To-Speech (TTS) Sprachansagensupport
 \n\t- Anzeige von mehr Details in den Landkarten
 \n\t- World_Basemap für die ganze Welt in der Applikation enthalten
-\n\t- Verbesserungen im Offline-Routing (immer noch experimentell)
+\n\t- Verbesserungen im Offlinerouting (immer noch experimentell)
 \n\t- GPX-Routing-Optionen
 \n\t- Update der Bedienoberfläche und viele Bug-Fixes
 	</string>
@@ -257,7 +257,7 @@
 	<string name="trace_rendering">Rendering Debug Info</string>
 	<string name="trace_rendering_descr">Flag zur Prüfung der Rendering-Performance (Geschwindigkeit des Offline-Bildaufbaus)</string>
 	<string name="installing_new_resources">Entpacke neue Daten ...</string>
-	<string name="internet_connection_required_for_online_route">Es soll ein Online-Routingdienst verwendet werden, aber es besteht keine Internetverbindung. Es besteht die Möglichkeit, das (noch experimentelle) OsmAnd Offline-Routing zu verwenden, siehe \'Einstellungen\' -> \'Navigation\'.</string>
+	<string name="internet_connection_required_for_online_route">Es soll ein Online-Routingdienst verwendet werden, aber es besteht keine Internetverbindung. Alternative ist das (noch experimentelle) OsmAnd Offlinerouting, siehe \'Einstellungen\' -> \'Navigation\'.</string>
 	<string name="tts_language_not_supported_title">Sprache nicht unterstützt</string>
 	<string name="tts_language_not_supported">Die gewählte Sprache wird von der installierten Android TTS-Engine nicht unterstützt. Soll im Market nach einer anderen TTS-Engine gesucht werden? Andernfalls wird die voreingestellte Standard-Sprache verwendet.</string>
 	<string name="tts_missing_language_data_title">Fehlendes Sprachpaket</string>
