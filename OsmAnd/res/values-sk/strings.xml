@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-	<string name="gpx_monitoring_disabled_warn">Prosím, zapnite GPX stopovanie v nastaveniach</string>
+	<string name="live_monitoring_descr">Zapnutie posielania HTTP požiadaviek na určenú webovú službu</string>
+	<string name="live_monitoring">Zapnúť stopovanie naživo</string>
+	<string name="live_monitoring_interval_descr">Určenie intervalu stopovania naživo</string>
+	<string name="live_monitoring_interval">Interval stopovania naživo</string>
+	<string name="live_monitoring_url_descr">Určenie webovej adresy stopovania naživo so syntaxom parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={5}, speed={6}</string>
+	<string name="live_monitoring_url">Webová adresa stopovania naživo</string>
+	<string name="gpx_monitoring_disabled_warn">Prosím, zapnite \'Zaznemať stopu do GPX\' v stopovacích nastaveniach</string>
 	<string name="show_current_gpx_title">Zobraziť aktuálnu stopu</string>
 	<string name="tip_recent_changes_0_7_0_t">Zmeny vo verzii 0.7.0 :
 	\n\t- Údaje článkov offline wikipedie
@@ -206,7 +212,7 @@
 	<string name="voice_not_use">Nepoužívať</string>
 	<string name="voice_not_specified">Žiadny</string>
 	<string name="installing_new_resources">Rozbaľujú sa nové údaje...</string>	
-	<string name="internet_connection_required_for_online_route">Používate online rutovaciu službu ale nemáte pripojenie na internet. Môžete použiť (stále experimentálnu) OsmAnd offline rutovaciu službu (vyberte v \'Nastavenia\' -> \'Navigovanie\'.</string>
+	<string name="internet_connection_required_for_online_route">Pokúšate sa použiť online rutovaciu službu ale nemáte internetové pripojenie. Môžete skúsiť (stále experimentálnu) OsmAnd offline rutovaciu službu (zvoľte ju v \'Nastavenia\' -> \'Navigovanie\'.</string>
 	<string name="tts_language_not_supported_title">Nepodporovaný jazyk</string>
 	<string name="tts_language_not_supported">Zvolený jazyk nie je podporovaný nainštalovaným TTS (text-to-speech) v Androide. Chcete ísť na Market pozrieť iný TTS? Inak bude použitý prednastavený TTS jazyk.</string>
 	<string name="tts_missing_language_data_title">Chýbajúce údaje</string>
@@ -373,7 +379,7 @@
 	<string name="version_index_is_not_supported">Verzia indexu \'\'{0}\'\' nie je podporovaná</string>
 	
 <string name="use_osmand_routing_service">OsmAnd offline rutovanie</string>
-<string name="use_osmand_routing_service_descr">Použitie offline rutovania na dlhé vzdialenosti (experimentálne)</string>
+<string name="use_osmand_routing_service_descr">Použitie offline rutovania na dlhé vzdialenosti (experimentálne) namiesto CloudMade</string>
 <string name="osmand_routing_experimental">OsmAnd offline rutovanie je experimentálna funkcia a nefunguje na vzdialenosť väčšiu ako 20 km.\n Rutovacia služba je automaticky prpenutá na online Cloudmade.</string>
 <string name="specified_dir_doesnt_exist">Nedá sa nájsť určený adresár.</string>
 <string name="application_dir">Úložiskový adresár</string>
