@@ -42,7 +42,7 @@ bear_left == ['keep left '].
 route_recalc(_Dist) == []. % ['recalculating route '].  %nothing to said possibly beep?	
 route_new_calc(Dist) == ['The trip is ', D] :- distance(Dist) == D. % nothing to said possibly beep?
 
-go_ahead(Dist) == ['Drive for ', D]:- distance(Dist) == D.
+go_ahead(Dist) == ['Follow the course of the road for ', D]:- distance(Dist) == D.
 go_ahead == ['Continue straight ahead '].
 
 %% 

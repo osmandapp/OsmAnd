@@ -1,4 +1,4 @@
-:- op('==', xfy, 500).
+﻿:- op('==', xfy, 500).
 version(101).
 language(de).
 
@@ -34,7 +34,7 @@ make_ut == ['Bitte wenden '].
 roundabout(Dist, _Angle, Exit) == ['Nach ', D, ' in den Kreisverkehr einfahren, dann nehmen Sie die ', E, 'Ausfahrt'] :- distance(Dist, dativ) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['nehmen Sie die ', E, 'Ausfahrt'] :- nth(Exit, E).
 
-and_arrive_destination == ['und kommen an Ihrem Ziel an ']. % Miss and?
+and_arrive_destination == ['dann haben Sie Ihr Ziel erreicht '].
 then == ['dann '].
 reached_destination == ['Ziel erreicht '].
 bear_right == ['rechts halten '].
@@ -42,7 +42,7 @@ bear_left == ['links halten '].
 route_recalc(_Dist) == []. % ['Route wird neu berechnet '].  %nothing to said possibly beep?	
 route_new_calc(Dist) == ['Die berechnete Strecke ist ', D, ' lang'] :- distance(Dist, nominativ) == D. % nothing to said possibly beep?
 
-go_ahead(Dist) == ['Fahren Sie für ', D]:- distance(Dist, nominativ) == D.
+go_ahead(Dist) == ['Dem Strasenverlauf', D,'folgen']:- distance(Dist, nominativ) == D.
 go_ahead == ['Weiter geradeaus '].
 
 %% 
