@@ -412,7 +412,7 @@
 	<string name="version_index_is_not_supported">Die Index-Version \'\'{0}\'\' wird nicht unterstützt</string>
 					
 	<string name="use_osmand_routing_service">OsmAnd Routing</string>
-	<string name="use_osmand_routing_service_descr">OsmAnd Offlinerouting für große Entfernungen verwenden (experimentell)</string>
+	<string name="use_osmand_routing_service_descr">OsmAnd Offlinerouting für große Entfernungen verwenden (experimentell) anstatt automatisch CloudMade zu nehmen</string>
 	<string name="osmand_routing_experimental">OsmAnd Offlinerouting ist noch experimentell und funktioniert nicht gut für Entfernungen über 20 km.\n Routingdienst wird automatisch zu online Cloudmade gewechselt.</string>
 	<string name="specified_dir_doesnt_exist">Angegebener Ordner kann nicht gefunden werden.</string>
 	<string name="application_dir">Verzeichnis</string>
