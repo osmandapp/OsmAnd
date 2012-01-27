@@ -41,7 +41,7 @@
     \n\t\'Lever/coucher du soleil\' - mode automatique, controlé par la position du soleil (défaut)
     \n\t\'Jour\' - toujours utiliser le mode jour
     \n\t\'Nuit\' - toujours utiliser le mode nuit
-    \n\t\'Capteur de luminosité\' - le style de la carte est controlé par le capteur de luminosité de l\'appareil (seulement si celui-ci existe)</string>  
+    \n\t\'Capteur de luminosité\' - le style de la carte est contrôlé par le capteur de luminosité de l\'appareil (seulement si celui-ci existe)</string>  
    <string name="tip_osm_improve">Améliorer les données OSM</string>
    <string name="tip_osm_improve_t">\tOsmAnd utilise des cartes issues des données Openstreetmap.org (OSM) - en plus de la visualisation des cartes et du calcul d\'itinéraires- peut également être utilisé pour améliorer la qualité des données OSM. Vous pouvez facilement créer et télécharger des nouveaux PI ou rapports de bugs cartographiques en quelques clicks!
     \n\tPour cela il faudra d\'abord fournir vos paramètres de connexion OSM dans \'Paramètres\' -> \'Général\' -> \'OSM\'.
@@ -55,13 +55,13 @@
     <string name="download_files_question_space">Espace actuellement disponible: {2} MB! Télécharger {0} fichier(s) ({1} MB)?</string>
     <string name="show_zoom_level_descr">Afficher le niveau de zoom en permanence à la place de l\'échelle.</string>
     <string name="show_zoom_level">Afficher niveau de zoom</string>
-    <string name="tip_select_destination_point">Selectionner le point de destination</string>
+    <string name="tip_select_destination_point">Sélectionner le point de destination</string>
     <string name="tip_select_destination_point_t">
       \tVous pouvez sélectionner une destination directement dans la carte (menu contextuel, puis \'Se déplacer vers ce point\'), dans toutes les recherches, ou via un appui long sur un de vos favoris dans la \'Liste des points favoris\'.
       \n\tLa destination est marquée d\'un disque orange sur la carte et OsmAnd affichera la distance (en ligne droite) vers ce point ainsi que sa direction (triangle orange).</string>
     <string name="tip_recent_changes_0_6_9_t">Changements en 0.6.9 :
 \n\t- Amelioration du rendu des cartes hors ligne
-\n\t- Rendu hors ligne acceléré - voir dans les options experimentales (ne marche pas sur tous les appareils)
+\n\t- Rendu hors ligne acceléré - voir dans les options expérimentales (ne marche pas sur tous les appareils)
 \n\t- Changements cosmétiques
 \n\t- Infos d\'altitude
 \n\t- Nouvelles traductions (Vietnamien, Polonais)
@@ -105,7 +105,7 @@
 \n\t- Corrections des instructions vocales (sur l\'emplacement GPS et supprimer la première instruction)
 \n\t- Petites améliorations diverses
   </string>
-  <string name="local_index_description">Télécharger nouveau, déplacer ou supprimer données actuelles. \nDonnées hors ligne actuellement présente sur l\'appareil (%1$s free space):</string>
+  <string name="local_index_description">Télécharger nouveau, déplacer ou supprimer données actuelles. \nDonnées hors ligne actuellement présente sur l\'appareil (%1$s espace libre):</string>
   <string name="file_can_not_be_renamed">Fichier ne peut être renommé.</string>
   <string name="file_with_name_already_exists">Un fichier avec ce nom existe déjà.</string>
   <string name="gpx_navigation">Itinéraire GPX</string>
@@ -113,7 +113,7 @@
   <string name="data_to_search_poi_not_available">Pas de données de PI en local pour effectuer une recherche.</string>
   <string name="poi_filter_by_name">Recherche par nom</string>
   <string name="old_poi_file_should_be_deleted">Le fichier de PI \'%1$s\' est obsolète et peut être supprimé.</string>
-  <string name="update_poi_file_not_found">Fichier local de gestion des modifications de poi introuvable, et ne peut être créé.</string>
+  <string name="update_poi_file_not_found">Fichier local de gestion des modifications de PI introuvable, et ne peut être créé.</string>
   <string name="update_poi_does_not_change_indexes">La modification d\'un PI dans l\'application ne modifie pas les fichiers téléchargés mais récolte les modifications dans un fichier en local.</string>
   <string name="button_upgrade_osmandplus">Mettre à jour Osmand+</string>
   <string name="map_version_changed_info">Les fichiers de cartes sur le serveur sont incompatibles avec votre version de l\'application. Pour les télécharger et les utiliser, installez une version plus récente de votre application</string>
@@ -175,10 +175,10 @@
 <string name="local_index_items_backuped">%1$d sur %2$d eléments sauvegardés.</string>
 <string name="local_index_items_deleted">%1$d sur %2$d eléments supprimés.</string>
 <string name="local_index_items_restored">%1$d sur %2$d eléments restaurés.</string>
-<string name="local_index_no_items_to_do">Pas d\'eléments à %1$s</string>
+<string name="local_index_no_items_to_do">Pas d\'elément à %1$s</string>
 <string name="local_index_action_do">Vous allez %1$s %2$s eléments. Continuer?</string>
 <string name="local_index_descr_title">Gestionnaire de données hors ligne</string>
-<string name="local_index_mi_restore">Restorer</string>
+<string name="local_index_mi_restore">Restaurer</string>
 <string name="local_index_mi_backup">Sauvegarder</string>
 <string name="local_index_mi_delete">Supprimer</string>
 <string name="local_index_mi_reload">Re-initialiser</string>
@@ -247,7 +247,7 @@
 <string name="map_vector_data">Cartes vectorielles</string>
 <string name="map_vector_data_descr">Utiliser les cartes vectorielles téléchargées</string>
 <string name="tile_source_already_installed">Carte déjà installée, paramètres seront mis à jour</string>
-<string name="select_tile_source_to_install">Selectioner les cartes à installer ou mettre à jour</string>
+<string name="select_tile_source_to_install">Sélectioner les cartes à installer ou à mettre à jour</string>
 <string name="internet_not_available">Connexion Internet nécessaire pour cette opération non disponible</string>
 <string name="install_more">Installer plus...</string>
 <string name="tip_update_index">Mise à jour des cartes locales</string>
@@ -270,7 +270,7 @@
 \n\tPour afficher tous les favoris sur la carte, activer le calque affichant tous les favoris directement sur la carte dans \'Menu contextuel de la carte\'->\'Couches\'.</string>
 <string name="create_poi_link_to_osm_doc"><u>OSM en ligne</u>  classification des cartes en images</string>
 <string name="error_doing_search">Une erreur est survenue lors de la recherche hors-ligne</string>
-<string name="search_offline_geo_error">Ne peut interpreter le geo intent:\'%s\'</string>
+<string name="search_offline_geo_error">Ne peut interpréter le geo intent:\'%s\'</string>
 <string name="search_osm_offline">Recherche d\'adresse dans les cartes hors-ligne</string>
 <string name="system_locale">Système</string>
 <string name="preferred_locale_descr">Changer la langue d\'affichage</string>
@@ -285,8 +285,8 @@
 <string name="tip_navigation">Navigation</string>
 <string name="tip_navigation_t">Pour activer la navigation il faut d\'abord sélectionner une destination. Puis aller dans \'Menu\'->\'Directions\' et sélectionner le mode de déplacement.</string>
 <string name="tip_search">Actions de recherche</string>
-<string name="tip_search_t">Vous pouvez rechercher un lieu directement depuis la carte ou par l\'adresse, l\'emplacement, le point d\'interêt ou un favori predefini.
-\n\tAppuyer sur \'Rechercher\' sur la carte ouvre le dialogue de recherche. Il y a 2 options : \'Naviger vers\' ou \'Afficher sur la carte\'.</string>
+<string name="tip_search_t">Vous pouvez rechercher un lieu directement depuis la carte ou par l\'adresse, l\'emplacement, le point d\'interêt ou un favori prédéfini.
+\n\tAppuyer sur \'Rechercher\' sur la carte ouvre le dialogue de recherche. Il y a 2 options : \'Naviguer vers\' ou \'Afficher sur la carte\'.</string>
 <string name="tip_map_context_menu">Menu contextuel de la carte</string>
 <string name="tip_map_context_menu_t">\tLe menu contextuel de la carte est disponible par un tap long sur la carte ou le bouton trackball.
 \n\tAprès avoir touché la carte, une bulle apparaît avec les coordonnées du point, tapez court pour ouvrir le menu contextuel, ou long pour faire disparaître la bulle. Le menu contextuel est également disponible depuis le bouton \'Menu\'.
@@ -300,7 +300,7 @@
 <string name="unit_of_length">Unité de distance</string>
 <string name="si_mi_foots">Miles/pieds</string>
 <string name="si_mi_yard">Miles/yards</string>
-<string name="si_km_m">Kilometres/metres</string>
+<string name="si_km_m">Kilomètres/mètres</string>
 <string name="yard">yd</string>
 <string name="foot">ft</string>
 <string name="mile_per_hour">mph</string>
@@ -310,7 +310,7 @@
 <string name="send_location_email_pattern">Pour voir ce lieu, suivre le lien web %1$s ou android %2$s</string>
 <string name="send_location">Envoyer le lieu</string>
 <string name="context_menu_item_share_location">Partager lieu</string>
-<string name="add_waypoint_dialog_added">Etape \'\'{0}\'\' ajoutée avec succés</string>
+<string name="add_waypoint_dialog_added">Etape \'\'{0}\'\' ajoutée avec succès</string>
 <string name="add_waypoint_dialog_title">Ajouter une étape à une trace GPX enregistrée</string>
 <string name="context_menu_item_add_waypoint">Ajouter une étape GPX</string>
 <string name="amenity_type_administrative">Administratif</string>
@@ -404,10 +404,10 @@
 <string name="phone">Téléphone</string>
 <string name="download_type_to_filter">Filtre</string>
 <string name="use_high_res_maps">Carte haute résolution</string>
-<string name="use_high_res_maps_descr">Utilisez des cartes de hautes résolution pour les appareils les mieux équipés</string>
+<string name="use_high_res_maps_descr">Utilisez des cartes de haute résolution pour les appareils les mieux équipés</string>
 <string name="unknown_location">Position inconnue actuellement</string>
 <string name="download_files">Télécharger</string>
-<string name="context_menu_item_search_transport">Chercher transports</string>
+<string name="context_menu_item_search_transport">Chercher transport</string>
 <string name="transport_searching_transport">Recherche transport (sans cible)</string>
 <string name="transport_searching_route">Recherche de transport ({0} pour cible)</string>
 <string name="transport_search_none">aucun</string>
@@ -452,14 +452,14 @@
 <string name="layer_poi">Point d\'Intérêt...</string>
 <string name="layer_map">Source de la carte...</string>
 <string name="menu_layers">Couches</string>
-<string name="continue_follow_previous_route">Trajet précédent inachevé. Voulez-vous continuer à le suivre?</string>
+<string name="continue_follow_previous_route">Trajet précédent inachevé. Voulez-vous continuer à le suivre ?</string>
 <string name="context_menu_item_search_poi">Chercher un Point d\'Intérêt</string>
 <string name="context_menu_item_show_route">Afficher l\'itinéraire depuis ce point</string>
 <string name="use_trackball_descr">Utiliser le pointeur pour se déplacer sur la carte</string>
 <string name="use_trackball">Utiliser le pointeur</string>
 <string name="background_service_wait_int_descr">Configurer le délai d\'attente pour déterminer l\'emplacement</string>
 <string name="background_service_wait_int">Délai d\'attente</string>
-<string name="service_stop_background_service">Arrêter le service de navigation à arrière plan</string>
+<string name="service_stop_background_service">Arrêter le service de navigation en arrière plan</string>
 <string name="where_am_i">Où suis-je ?</string>
 <string name="process_navigation_service">Service de navigation OsmAnd</string>
 <string name="network_provider">Réseau</string>
@@ -531,7 +531,7 @@
 <string name="update_poi_no_offline_poi_index">Il n\'y a pas de données hors ligne pour cette région</string>
 <string name="update_poi_is_not_available_for_zoom">Mise à jour de PI n\'est pas disponible pour un petit niveau de zoom</string>
 <string name="context_menu_item_update_poi">Points d\'Intérêts</string>
-<string name="context_menu_item_update_map_confirm">Sélectionnez les données que vous voulez mettre à jour d\'internet</string>
+<string name="context_menu_item_update_map_confirm">Sélectionnez les données que vous voulez mettre à jour depuis internet</string>
 <string name="search_history_city">Ville : {0}</string>
 <string name="search_history_street">Rue : {0}, {1}</string>
 <string name="search_history_int_streets">Intersections : {0} x {1} dans {2}</string>
@@ -539,8 +539,8 @@
 <string name="favorite">Favoris</string>
 <string name="clear_all">Supprimer tout</string>
 <string name="history">Historique</string>
-<string name="uploading_data">Téléversement des données...</string>
-<string name="uploading">Téléversement</string>
+<string name="uploading_data">Envoi des données...</string>
+<string name="uploading">Envoi</string>
 <string name="search_nothing_found">Rien n\'a été trouvé</string>
 <string name="searching">Recherche en cours</string>
 <string name="searching_address">Recherche de l\'adresse...</string>
@@ -581,7 +581,7 @@
 <string name="closing_changeset">Fermeture des modifications</string>
 <string name="commiting_node">Envoi des nœuds...</string>
 <string name="loading_poi_obj">Chargement des Points d\'Intérêts...</string>
-<string name="auth_failed">Autorisation refusé</string>
+<string name="auth_failed">Autorisation refusée</string>
 <string name="failed_op">Échec</string>
 <string name="converting_names">Convertir les noms en anglais...</string>
 <string name="loading_streets_buildings">Chargement des rues/édifices...</string>
@@ -661,7 +661,7 @@
 <string name="map_preferences">Carte</string>
 <string name="settings_activity">Paramètres</string>
 <string name="show_gps_coordinates_text">Afficher les coordonnées GPS sur la carte</string>
-<string name="use_internet_to_download_tile">Utiliser internet pour télécharger les carreaux manquantes</string>
+<string name="use_internet_to_download_tile">Utiliser internet pour télécharger les carreaux manquants</string>
 <string name="app_name">OsmAnd</string>
 <string name="app_description">Application de navigation</string>
 <string name="exit_Button">Quitter</string>
