@@ -592,9 +592,9 @@ name="recalculate_route_to_your_location">現在地に従ってルートを再�
  <string name="settings_preset">アプリケーションモード</string>
  <string name="settings">設定</string>
  <string name="save_current_track_descr">今すぐ現在のトラックをSDに保存</string>
- <string name="save_current_track">- 現在のトラックを保存</string>
+ <string name="save_current_track">現在のトラックを保存</string>
  <string name="save_track_interval_descr">トラックの位置取得間隔を選択</string>
- <string name="save_track_interval">- トラック間隔</string>
+ <string name="save_track_interval">トラック間隔</string>
  <string name="monitor_preferences">- トラッキング</string>
  <string name="save_track_to_gpx_descrp">トラックは日ごとにグループ化されたトラック用ディレクトリに
  保存されます</string>

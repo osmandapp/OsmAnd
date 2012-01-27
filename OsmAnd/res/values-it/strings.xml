@@ -666,9 +666,9 @@
     <string name="additional_settings">Impostazioni aggiuntive</string>
     <string name="settings">Impostazioni</string>
     <string name="save_current_track_descr">Salvare la traccia corrente sulla scheda SD</string>
-    <string name="save_current_track">- Salvare la traccia corrente</string>
+    <string name="save_current_track">Salvare la traccia corrente</string>
     <string name="save_track_interval_descr">Scegliere l\'intervallo di tempo per salvare le tracce</string>
-    <string name="save_track_interval">- Intervallo di salvataggio</string>
+    <string name="save_track_interval">Intervallo di salvataggio</string>
     <string name="save_track_to_gpx_descrp">Le tracce saranno salvate nella directory tracks divise per giorno</string>
     <string name="save_track_to_gpx">Salva traccia in GPX</string>
     <string name="navigate_to">Naviga verso</string>

@@ -321,9 +321,9 @@
 	<string name="router_service_descr">Elija servicio de ruteo</string>
 	<string name="routing_settings">- Ruteo</string>
 	<string name="routing_settings_descr">Especificar opciones de ruteo</string>
-	<string name="save_current_track">- Guardar traza actual</string>
+	<string name="save_current_track">Guardar traza actual</string>
 	<string name="save_current_track_descr">Guardar traza actual a la SD</string>
-	<string name="save_track_interval">- Intervalo de guardado de traza</string>
+	<string name="save_track_interval">Intervalo de guardado de traza</string>
 	<string name="save_track_interval_descr">Elija el intervalo para almacenar la traza</string>
 	<string name="save_track_to_gpx">Guardar la traza GPX</string>
 	<string name="save_track_to_gpx_descrp">Las trazas se almacenarán en el directorio de trazas agrupado por días</string>

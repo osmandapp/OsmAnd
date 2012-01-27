@@ -609,9 +609,9 @@
     <string name="additional_settings">Дополнительные настройки</string>
     <string name="settings">Настройки</string>
     <string name="save_current_track_descr">Сохранить текущий путь на SD</string>
-    <string name="save_current_track">- Сохранить путь</string>
+    <string name="save_current_track">Сохранить путь</string>
     <string name="save_track_interval_descr">Указать интервал между сохранениями пути</string>
-    <string name="save_track_interval">- Интервал сохранения</string>
+    <string name="save_track_interval">Интервал сохранения</string>
     <string name="monitor_preferences">- Мониторинг</string>
     <string name="save_track_to_gpx_descrp">Сохранять путь в gpx формате в папку track</string>
     <string name="save_track_to_gpx">Мониторить</string>

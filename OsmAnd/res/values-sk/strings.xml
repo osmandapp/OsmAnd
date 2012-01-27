@@ -663,9 +663,9 @@
 <string name="settings_preset">Užívateľský režim</string>
 <string name="settings">Nastavenia</string>
 <string name="save_current_track_descr">Uloženie aktuálnej stopy na SD kartu</string>
-<string name="save_current_track">- Uložiť aktuálnu stopu</string>
+<string name="save_current_track">Uložiť aktuálnu stopu</string>
 <string name="save_track_interval_descr">Výber umietňovacieho intervalu pre stopy</string>
-<string name="save_track_interval">- Logovací interval</string>
+<string name="save_track_interval">Logovací interval</string>
 <string name="monitor_preferences">- Stopovanie</string>
 <string name="save_track_to_gpx_descrp">Stopy budú ukladané do adresára stôp, zoskupené podľa dní</string>
 <string name="save_track_to_gpx">Zaznamenať stopu do GPX</string>

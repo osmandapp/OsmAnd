@@ -627,9 +627,9 @@
 <string name="settings_preset">Tryb programu</string>
 <string name="settings">Ustawienia</string>
 <string name="save_current_track_descr">Zapisz bieżący ślad do karty SD</string>
-<string name="save_current_track">- Zapisz bieżący ślad</string>
+<string name="save_current_track">Zapisz bieżący ślad</string>
 <string name="save_track_interval_descr">Choose positioning interval for tracks</string>
-<string name="save_track_interval">- Logging interval</string>
+<string name="save_track_interval">Logging interval</string>
 <string name="monitor_preferences">- Zapisywanie śladów</string>
 <string name="save_track_to_gpx_descrp">Ślady zostaną zapisane do katalogu grupami wg dni</string>
 <string name="save_track_to_gpx">Zapisuj ślad do GPX</string>

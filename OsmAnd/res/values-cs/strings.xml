@@ -898,9 +898,9 @@
   <string name="additional_settings">Další volby</string>
   <string name="settings">Nastavení</string>
   <string name="save_current_track_descr">Uloží aktuální trasu na SD kartu</string>
-  <string name="save_current_track">- Uložit aktuální trasu</string>
+  <string name="save_current_track">Uložit aktuální trasu</string>
   <string name="save_track_interval_descr">Vyberte časový interval pro ukládání trasy</string>
-  <string name="save_track_interval">- Interval ukládání trasy</string>
+  <string name="save_track_interval">Interval ukládání trasy</string>
   <string name="save_track_to_gpx_descrp">Trasy budou ukládány do adresáře s trasami, seskupené podle dní</string>
   <string name="save_track_to_gpx">Uložit trasu do GPX</string>
   <string name="navigate_to">Ukázat směr</string>

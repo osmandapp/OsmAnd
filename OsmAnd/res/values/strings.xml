@@ -3,9 +3,9 @@
 	<string name="live_monitoring_descr">Enable sending HTTP requests to a specified web service</string>
 	<string name="live_monitoring">Enable Live Tracking</string>
 	<string name="live_monitoring_interval_descr">Specify Live Tracking inverval</string>
-	<string name="live_monitoring_interval">- Live Tracking interval</string>
+	<string name="live_monitoring_interval">Live Tracking interval</string>
 	<string name="live_monitoring_url_descr">Specify the Live Tracking web address with pattern : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={5}, speed={6}</string>
-	<string name="live_monitoring_url">- Live Tracking web address</string>
+	<string name="live_monitoring_url">Live Tracking web address</string>
 	<string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX\' Tracking settings</string>
 	<string name="show_current_gpx_title">Show current track</string>
 	<string name="tip_recent_changes_0_7_0_t">Changes in 0.7.0 :
@@ -691,8 +691,8 @@
     <string name="additional_settings">Additional settings</string>
     <string name="settings">Settings</string>
     <string name="save_current_track_descr">Save current track to SD now</string>
-    <string name="save_current_track">- Save current track</string>
-    <string name="save_track_interval">- Logging interval</string>
+    <string name="save_current_track">Save current track</string>
+    <string name="save_track_interval">Logging interval</string>
     <string name="save_track_interval_descr">Choose positioning interval for tracks</string>
     <string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
     <string name="save_track_to_gpx">Log track to GPX</string>

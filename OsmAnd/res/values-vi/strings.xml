@@ -623,9 +623,9 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
     <string name="settings_preset">Chế độ Ứng dụng</string>
     <string name="settings">Thiết lập</string>
     <string name="save_current_track_descr">Lưu track hiện tại vào thẻ nhớ SD</string>
-    <string name="save_current_track">- Lưu track hiện tại</string>
+    <string name="save_current_track">Lưu track hiện tại</string>
     <string name="save_track_interval_descr">Chọn khoảng thời gian lưu vị trí cho track</string>
-    <string name="save_track_interval">- Khoảng thời gian lưu Track</string>
+    <string name="save_track_interval">Khoảng thời gian lưu Track</string>
     <string name="monitor_preferences">- Tracking</string>
     <string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
     <string name="save_track_to_gpx">Lưu track thành GPX</string>

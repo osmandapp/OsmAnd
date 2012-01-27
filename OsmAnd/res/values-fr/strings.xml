@@ -621,9 +621,9 @@
 <string name="additional_settings">Paramètres supplémentaires</string>
 <string name="settings">Paramètres</string>
 <string name="save_current_track_descr">Enregistrer le trajet actuel sur carte SD</string>
-<string name="save_current_track">- Enregistrer le trajet</string>
+<string name="save_current_track">Enregistrer le trajet</string>
 <string name="save_track_interval_descr">Choisir l\'intervalle d\'enregistrement du trajet</string>
-<string name="save_track_interval">- Intervalle d\'enregistrement</string>
+<string name="save_track_interval">Intervalle d\'enregistrement</string>
 <string name="save_track_to_gpx_descrp">Les trajets seront enregistrés et groupés par jour dans le répertoire de trajets</string>
 <string name="save_track_to_gpx">Enregistrer le trajet en GPX</string>
 <string name="navigate_to">Point de destination</string>
