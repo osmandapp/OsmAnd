@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="live_monitoring_descr">Senden von HTTP-Daten an einen Web-Service</string>
+	<string name="live_monitoring">Aktiviere Live-Tracking</string>
+	<string name="live_monitoring_interval_descr">Angabe des Live-Tracking Invervalls</string>
+	<string name="live_monitoring_interval">Live-Tracking Intervall</string>
+	<string name="live_monitoring_url_descr">Spezifikation der Live-Tracking Web-Addresse mit Datenübergabe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={5}, speed={6}</string>
+	<string name="live_monitoring_url">Live-Tracking Web-Addresse</string>
 	<string name="gpx_monitoring_disabled_warn">Bitte Positions-Logging in den Einstellungen aktivieren</string>
 	<string name="show_current_gpx_title">Aktuellen Track anzeigen</string>
 	<string name="tip_recent_changes_0_7_0_t">Änderungen in 0.7.0 :

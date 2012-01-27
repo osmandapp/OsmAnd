@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="live_monitoring_descr">Enable sending HTTP requests to the specified web service</string>
-    <string name="live_monitoring">Enable Live Tracking</string>
-    <string name="live_monitoring_interval_descr">Specify Live Tracking inverval</string>
-    <string name="live_monitoring_interval">Live Tracking intervals</string>
-    <string name="live_monitoring_url_descr">Specify Live Tracking web address using following patterns : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={5}, speed={6}</string>
-    <string name="live_monitoring_url">Live Tracking web address</string>
+	<string name="live_monitoring_descr">Enable sending HTTP requests to a specified web service</string>
+	<string name="live_monitoring">Enable Live Tracking</string>
+	<string name="live_monitoring_interval_descr">Specify Live Tracking inverval</string>
+	<string name="live_monitoring_interval">Live Tracking interval</string>
+	<string name="live_monitoring_url_descr">Specify the Live Tracking web address with pattern : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={5}, speed={6}</string>
+	<string name="live_monitoring_url">Live Tracking web address</string>
 	<string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX\' Tracking settings</string>
 	<string name="show_current_gpx_title">Show current track</string>
 	<string name="tip_recent_changes_0_7_0_t">Changes in 0.7.0 :
