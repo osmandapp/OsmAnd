@@ -663,9 +663,9 @@
 	<string name="additional_settings">További beállítások</string>
 	<string name="settings">Beállítások</string>
 	<string name="save_current_track_descr">Jelenlegi útvonal SD kártyára mentése</string>
-	<string name="save_current_track">Jelenlegi útvonal mentése</string>
+	<string name="save_current_track">- Jelenlegi útvonal mentése</string>
 	<string name="save_track_interval_descr">Milyen sűrűn rögzítsen pontokat a mentett útvonalba</string>
-	<string name="save_track_interval">Rögzítési sűrűség</string>
+	<string name="save_track_interval">- Rögzítési sűrűség</string>
 	<string name="save_track_to_gpx_descrp">Az útvonalak napi csoportosításban kerülnek mentésre a track könyvtárba</string>
 	<string name="save_track_to_gpx">Útvonal mentése GPX-be</string>
 	<string name="navigate_to">Beállítás célpontnak</string>

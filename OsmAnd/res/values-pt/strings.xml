@@ -314,9 +314,9 @@
 	<string name="settings_preset">Modo da aplicação</string>
 	<string name="settings">Configurações</string>
 	<string name="save_current_track_descr">Salvar a trilha atual no cartão SD agora</string>
-	<string name="save_current_track">slavar a trilha atual</string>
+	<string name="save_current_track">- Salvar a trilha atual</string>
 	<string name="save_track_interval_descr">Escolher o intervalo entre posições nas trilhas</string>
-	<string name="save_track_interval">Intervalo de gravação</string>
+	<string name="save_track_interval">- Intervalo de gravação</string>
 	<string name="monitor_preferences">- Registro de trilhas</string>
 	<string name="save_track_to_gpx_descrp">As trilhas serão gravadas no diretório tracks agrupadas por dia</string>
 	<string name="save_track_to_gpx">salvar trilhas em GPX</string>
