@@ -1,5 +1,9 @@
 package net.osmand.plus.activities;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.MessageFormat;
@@ -34,13 +38,21 @@ public class LiveMonitoringHelper  {
 	}
 
 	public void sendData(float lat, float lon, float alt, float speed, float hdop, long time) {
-		String url = MessageFormat.format(settings.LIVE_MONITORING_URL.get(), lat, lon, time, hdop, alt, speed);
+		String url = MessageFormat.format(settings.LIVE_MONITORING_URL.get(), lat, lon, time+"", hdop, alt, speed);
 		try {
 			URL curl = new URL(url);
+			log.info("Monitor " + url);
 			URLConnection conn = curl.openConnection();
-			conn.setDoInput(false);
 			conn.setDoOutput(false);
 			conn.connect();
+			InputStream is = conn.getInputStream();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+			String r;
+			StringBuilder bs = new StringBuilder();
+			while((r=reader.readLine()) != null){
+				bs.append(r).append('\n');
+			}
+			is.close();
 		} catch (Exception e) {
 			log.error("Failed connect to " + url, e);
 		}
