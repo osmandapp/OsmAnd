@@ -662,8 +662,8 @@
 	<string name="error_occurred_saving_gpx">Fehler während des Speicherns aufgetreten</string>
 	<string name="error_calculating_route">Fehler während der Routenberechnung</string>
 	<string name="error_calculating_route_occured">Während der Routenberechnung ist ein Fehler aufgetreten</string>
-	<string name="empty_route_calculated">Es wurde keine Route berechnet</string>
-	<string name="new_route_calculated_dist">Neue Route wird berechnet</string>
+	<string name="empty_route_calculated">Fehler: Die berechnete Route ist leer</string>
+	<string name="new_route_calculated_dist">Route neu berechnet, Entfernung</string>
 	<string name="arrived_at_destination">Sie haben Ihr Ziel erreicht</string>
 	<string name="invalid_locations">Koordinaten sind ungültig!</string>
 	<string name="go_back_to_osmand">zurück zu OsmAnd</string>
