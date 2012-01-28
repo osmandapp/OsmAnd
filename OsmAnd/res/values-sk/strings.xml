@@ -4,7 +4,7 @@
 	<string name="live_monitoring">Zapnúť stopovanie naživo</string>
 	<string name="live_monitoring_interval_descr">Určenie intervalu stopovania naživo</string>
 	<string name="live_monitoring_interval">Interval stopovania naživo</string>
-	<string name="live_monitoring_url_descr">Určenie webovej adresy stopovania naživo so syntaxom parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={5}, speed={6}</string>
+	<string name="live_monitoring_url_descr">Určenie webovej adresy stopovania naživo so syntaxom parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
 	<string name="live_monitoring_url">Webová adresa stopovania naživo</string>
 	<string name="gpx_monitoring_disabled_warn">Prosím, zapnite \'Zaznemať stopu do GPX\' v stopovacích nastaveniach</string>
 	<string name="show_current_gpx_title">Zobraziť aktuálnu stopu</string>

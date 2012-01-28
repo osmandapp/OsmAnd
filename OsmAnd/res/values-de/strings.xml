@@ -4,7 +4,7 @@
 	<string name="live_monitoring">Live-Tracking aktivieren</string>
 	<string name="live_monitoring_interval_descr">Angabe des Live-Tracking Invervalls</string>
 	<string name="live_monitoring_interval">Live-Tracking Intervall</string>
-	<string name="live_monitoring_url_descr">Spezifikation der Live-Tracking Web-Addresse mit Datenübergabe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={5}, speed={6}</string>
+	<string name="live_monitoring_url_descr">Spezifikation der Live-Tracking Web-Addresse mit Datenübergabe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
 	<string name="live_monitoring_url">Live-Tracking Web-Addresse</string>
 	<string name="gpx_monitoring_disabled_warn">Bitte Positions-Logging in den Einstellungen aktivieren</string>
 	<string name="show_current_gpx_title">Aktuellen Track anzeigen</string>
