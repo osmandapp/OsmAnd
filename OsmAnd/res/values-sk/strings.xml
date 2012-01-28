@@ -637,8 +637,8 @@
 <string name="error_occurred_saving_gpx">Chyba počas ukladania GPX</string>
 <string name="error_calculating_route">Chyba počas počítania cesty</string>
 <string name="error_calculating_route_occured">Vyskytla sa chyba počas počítania cesty</string>
-<string name="empty_route_calculated">Je vypočítaná prázdna cesta</string> 
-<string name="new_route_calculated_dist">Je vypočítaná nová cesta, vzdialenosť</string>
+<string name="empty_route_calculated">Chyba: Vypočítaná cesta je prázdna</string> 
+<string name="new_route_calculated_dist">Vypočítaná nová cesta, vzdialenosť</string>
 <string name="arrived_at_destination">Dorazili ste k cieľovému bodu</string>
 <string name="invalid_locations">Umiestnenia sú neplatné</string>
 <string name="go_back_to_osmand">Ísť späť na OsmAnd mapu</string>
