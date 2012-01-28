@@ -501,11 +501,11 @@ public class RoutingHelper {
 										+ " : " + OsmAndFormatter.getFormattedDistance(l, context)); //$NON-NLS-1$
 							} else {
 								if (res.getErrorMessage() != null) {
-									showMessage(context.getString(R.string.error_calculating_route) + " : " + res.getErrorMessage()); //$NON-NLS-1$
+									showMessage(context.getString(R.string.error_calculating_route) + " : " + res.getErrorMessage(), Toast.LENGTH_LONG); //$NON-NLS-1$
 								} else if (res.getLocations() == null) {
-									showMessage(context.getString(R.string.error_calculating_route_occured));
+									showMessage(context.getString(R.string.error_calculating_route_occured), Toast.LENGTH_LONG);
 								} else {
-									showMessage(context.getString(R.string.empty_route_calculated));
+									showMessage(context.getString(R.string.empty_route_calculated), Toast.LENGTH_LONG);
 								}
 							}
 							lastTimeEvaluatedRoute = System.currentTimeMillis();
