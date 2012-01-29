@@ -377,7 +377,7 @@ public class VoiceRouter {
 	/**
 	 * Command to wait until voice player is initialized 
 	 */
-	private static class VoiceCommandPending {
+	private class VoiceCommandPending {
 		public static final int ROUTE_CALCULATED = 1;
 		public static final int ROUTE_RECALCULATED = 2;
 //		protected final long timestamp;
