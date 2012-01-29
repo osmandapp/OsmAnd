@@ -498,13 +498,13 @@ public class RoutingHelper {
 								int[] dist = res.getListDistance();
 								int l = dist != null && dist.length > 0 ? dist[0] : 0;
 								showMessage(context.getString(R.string.new_route_calculated_dist)
-										+ " : " + OsmAndFormatter.getFormattedDistance(l, context)); //$NON-NLS-1$
+										+ ": " + OsmAndFormatter.getFormattedDistance(l, context)); //$NON-NLS-1$
 							} else if (service != RouteService.OSMAND && !settings.isInternetConnectionAvailable()) {
 									showMessage(context.getString(R.string.error_calculating_route)
-										+ " : " + context.getString(R.string.internet_connection_required_for_online_route), Toast.LENGTH_LONG); //$NON-NLS-1$
+										+ ":\n" + context.getString(R.string.internet_connection_required_for_online_route), Toast.LENGTH_LONG); //$NON-NLS-1$
 							} else {
 								if (res.getErrorMessage() != null) {
-									showMessage(context.getString(R.string.error_calculating_route) + " : " + res.getErrorMessage(), Toast.LENGTH_LONG); //$NON-NLS-1$
+									showMessage(context.getString(R.string.error_calculating_route) + ":\n" + res.getErrorMessage(), Toast.LENGTH_LONG); //$NON-NLS-1$
 								} else if (res.getLocations() == null) {
 									showMessage(context.getString(R.string.error_calculating_route_occured), Toast.LENGTH_LONG);
 								} else {

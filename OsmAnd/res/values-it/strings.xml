@@ -390,7 +390,7 @@
 
 	<string name="use_osmand_routing_service">Routing OsmAnd</string>
 	<string name="use_osmand_routing_service_descr">Usa il routing OsmAnd offline per lunghe distanze (sperimentale)</string>
-	<string name="osmand_routing_experimental">Il routing offline di OsmAnd è sperimentale e non funziona per distanze superiori ai 20 km.\n Il servizio routing viene cambiato in automatico tramite Cloudmade online.</string>
+	<string name="osmand_routing_experimental">Il routing offline di OsmAnd è sperimentale e non funziona per distanze superiori ai 20 km.\n Il servizio routing viene cambiato temporaneo tramite Cloudmade online.</string>
 	<string name="specified_dir_doesnt_exist">Impossibile trovare la directory specificata.</string>
 	<string name="application_dir">Cartella deposito</string>
 	<string name="application_dir_change_warning">Il cambiamento della cartella non sposterà nè eliminerà i dati. Dovrà essere fatto manualmente al di fuori di OsmAnd. Continuare?</string>
