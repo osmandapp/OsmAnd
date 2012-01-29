@@ -1,6 +1,7 @@
 package net.osmand.plus.routing;
 
 import net.osmand.plus.activities.ApplicationMode;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper.TurnType;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
@@ -110,6 +111,7 @@ public class VoiceRouter {
 		}
 	}
 	
+	private OsmandSettings settings;
 	
 	private boolean isDistanceLess(float currentSpeed, double dist, double etalon){
 		if(dist < etalon || (dist / currentSpeed < etalon / DEFAULT_SPEED)){
