@@ -1,9 +1,10 @@
-:- op('==', xfy, 500).
+﻿:- op('==', xfy, 500).
 version(101).
 language(ru).
 
 % before each announcement (beep)
 preamble - [].
+
 
 %% TURNS 
 turn('left', ['поверните налево ']).
@@ -13,35 +14,33 @@ turn('right', ['поверните направо ']).
 turn('right_sh', ['резко поверните направо ']).
 turn('right_sl', ['плавно поверните направо ']).
 
-prepare_turn(Turn, Dist) == ['Приготовьтесь через ', D, ' ', M] :- 
-			distance(Dist) == D, turn(Turn, M).
-turn(Turn, Dist) == ['Через ', D, M] :- 
-			distance(Dist) == D, turn(Turn, M).
+prepare_turn(Turn, Dist) == ['Приготовьтесь через ', D, ' ', M] :- distance(Dist) == D, turn(Turn, M).
+turn(Turn, Dist) == ['Через ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
-prepare_make_ut(Dist) == ['Через ', D, ' выполните разворот'] :- 
-		distance(Dist) == D.
-
-prepare_roundabout(Dist) == ['Приготовьте через ', D, ' круг'] :- 
-		distance(Dist) == D.
-
-make_ut(Dist) ==  ['Через ', D, ' выполните разворот'] :-
-			distance(Dist) == D.
+prepare_make_ut(Dist) == ['Через ', D, ' выполните разворот'] :- distance(Dist) == D.
+make_ut(Dist) ==  ['Через ', D, ' выполните разворот'] :- distance(Dist) == D.
 make_ut == ['Выполните разворот '].
 
+prepare_roundabout(Dist) == ['Приготовьте через ', D, ' круг'] :- distance(Dist) == D.
 roundabout(Dist, _Angle, Exit) == ['Через ', D, ' круг, выполните ', E, 'съезд'] :- distance(Dist) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['Выполните ', E, ' съезд'] :- nth(Exit, E).
 
-and_arrive_destination == ['и вы прибудете в пункт назначения ']. % Miss and?
+go_ahead == ['Продолжайте движение прямо '].
+go_ahead(Dist) == ['Продолжайте движение ', D]:- distance(Dist) == D.
+
+and_arrive_destination == ['и вы прибудете в пункт назначения '].
+
 then == ['затем '].
 reached_destination == ['вы прибыли в пункт назначения '].
 bear_right == ['держитесь правее '].
 bear_left == ['держитесь левее '].
-route_recalc(_Dist) == []. % ['recalculating route '].  %nothing to said possibly beep?	
-route_new_calc(Dist) == ['Маршрут составляет ', D] :- distance(Dist) == D. % nothing to said possibly beep?
 
-go_ahead(Dist) == ['Продолжайте движение ', D]:- distance(Dist) == D.
-go_ahead == ['Продолжайте движение прямо '].
+route_new_calc(Dist) == ['Маршрут составляет ', D] :- distance(Dist) == D.
+%route_recalc(Dist) == ['Route recalculated, the trip is ', D] :- distance(Dist) == D.
+
+%location_lost == ['g p s location lost '].
+
 
 %% 
 nth(1, 'первый ').
@@ -62,12 +61,12 @@ nth(15, 'пятнадцатый ').
 nth(16, 'шестнадцатый ').
 nth(17, 'семнадцатый ').
 
+
 %%% distance measure
 distance(Dist) == [ X, ' метров'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
 distance(Dist) == [ X, ' метров'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
 distance(Dist) == ['около одного километра '] :- Dist < 1500.
-distance(Dist) == ['около ', X, Km] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X),
-											plural_km(D, Km).
+distance(Dist) == ['около ', X, Km] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X), plural_km(D, Km).
 
 plural_km(D, ' километр ') :- 1 is D mod 10.
 plural_km(D, ' километра ') :- Mod is D mod 10, Mod < 5,  Mod > 1.
@@ -75,13 +74,13 @@ plural_km(_D, ' километров ').
 
 distance(Dist) == [ X, ' километров '] :- D is round(Dist/1000), num_atom(D, X).
 
+
 %% resolve command main method
 %% if you are familar with Prolog you can input specific to the whole mechanism,
 %% by adding exception cases.
 flatten(X, Y) :- flatten(X, [], Y), !.
 flatten([], Acc, Acc).
-flatten([X|Y], Acc, Res):- 
-		flatten(Y, Acc, R), flatten(X, R, Res).
+flatten([X|Y], Acc, Res):- flatten(Y, Acc, R), flatten(X, R, Res).
 flatten(X, Acc, [X|Acc]).
 
 resolve(X, Y) :- resolve_impl(X,Z), flatten(Z, Y).
