@@ -502,7 +502,6 @@ public class RoutingHelper {
 							} else {
 								if(service != RouteService.OSMAND && !settings.isInternetConnectionAvailable()){
 									showMessage(context.getString(R.string.error_calculating_route) + " : " + context.getString(R.string.internet_connection_required_for_online_route), Toast.LENGTH_LONG); //$NON-NLS-1$
-								}
 							} else {
 								if (res.getErrorMessage() != null) {
 									showMessage(context.getString(R.string.error_calculating_route) + " : " + res.getErrorMessage(), Toast.LENGTH_LONG); //$NON-NLS-1$
