@@ -479,9 +479,6 @@ public class RoutingHelper {
 					currentRunningJob = new Thread(new Runnable() {
 						@Override
 						public void run() {
-							if(service != RouteService.OSMAND && !settings.isInternetConnectionAvailable()){
-								showMessage(context.getString(R.string.internet_connection_required_for_online_route), Toast.LENGTH_LONG);
-							}
 							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, gpxRoute, fastRouteMode);
 							synchronized (RoutingHelper.this) {
 								if (res.isCalculated()) {
@@ -502,6 +499,10 @@ public class RoutingHelper {
 								int l = dist != null && dist.length > 0 ? dist[0] : 0;
 								showMessage(context.getString(R.string.new_route_calculated_dist)
 										+ " : " + OsmAndFormatter.getFormattedDistance(l, context)); //$NON-NLS-1$
+							} else {
+								if(service != RouteService.OSMAND && !settings.isInternetConnectionAvailable()){
+									showMessage(context.getString(R.string.error_calculating_route) + " : " + context.getString(R.string.internet_connection_required_for_online_route), Toast.LENGTH_LONG); //$NON-NLS-1$
+								}
 							} else {
 								if (res.getErrorMessage() != null) {
 									showMessage(context.getString(R.string.error_calculating_route) + " : " + res.getErrorMessage(), Toast.LENGTH_LONG); //$NON-NLS-1$
