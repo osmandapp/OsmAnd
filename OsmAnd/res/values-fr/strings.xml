@@ -215,7 +215,7 @@
 <string name="voice_not_use">Non utilisé</string>
 <string name="voice_not_specified">Aucun</string>
 <string name="installing_new_resources">Dépaquetage de nouvelles données...</string>
-<string name="internet_connection_required_for_online_route">Vous vous apprêtez à utiliser le calcul d\'itinéraire en ligne mais vous n\'avez pas de connexion internet. Vous pouvez utiliser la navigation expérimentale embarquée (voir dans les paramètres).</string>
+<string name="internet_connection_required_for_online_route">Vous vous apprêtez à utiliser le calcul d\'itinéraire en ligne mais vous n\'avez pas de connexion internet.</string>
 <string name="tts_language_not_supported_title">Langue non disponible</string>
 <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible dans le moteur de synthèse vocale installé. Voulez-vous allez sur le Market et chercher d\'autres moteurs de synthèse vocale? Sinon la langue par défaut sera utilisée.</string>
 <string name="tts_missing_language_data_title">Données manquantes</string>

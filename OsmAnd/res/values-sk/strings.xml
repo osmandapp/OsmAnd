@@ -212,7 +212,7 @@
 	<string name="voice_not_use">Nepoužívať</string>
 	<string name="voice_not_specified">Žiadny</string>
 	<string name="installing_new_resources">Rozbaľujú sa nové údaje...</string>	
-	<string name="internet_connection_required_for_online_route">Pokúšate sa použiť online rutovaciu službu ale nemáte internetové pripojenie. Môžete skúsiť (stále experimentálnu) OsmAnd offline rutovaciu službu (zvoľte ju v \'Nastavenia\' -> \'Navigovanie\'.</string>
+	<string name="internet_connection_required_for_online_route">Pokúšate sa použiť online rutovaciu službu ale nemáte internetové pripojenie.</string>
 	<string name="tts_language_not_supported_title">Nepodporovaný jazyk</string>
 	<string name="tts_language_not_supported">Zvolený jazyk nie je podporovaný nainštalovaným TTS (text-to-speech) v Androide. Chcete ísť na Market pozrieť iný TTS? Inak bude použitý prednastavený TTS jazyk.</string>
 	<string name="tts_missing_language_data_title">Chýbajúce údaje</string>

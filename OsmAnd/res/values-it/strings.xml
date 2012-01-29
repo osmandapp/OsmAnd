@@ -236,7 +236,7 @@
 	<string name="voice_not_use">Non usare</string>
 	<string name="voice_not_specified">Nessuna</string>
 	<string name="installing_new_resources">Installando nuovi file...</string>
-	<string name="internet_connection_required_for_online_route">Stai per usare un servizio di routing online ma non sei su internet. Puoi provare (in fase sperimentale) il servizio offline di routing OsmAnd (seleziona in \'Impostazioni\' -> \'Navigazione\'.</string>
+	<string name="internet_connection_required_for_online_route">Stai per usare un servizio di routing online ma non sei su internet.</string>
 	<string name="tts_language_not_supported_title">Lingua non supportata</string>
 	<string name="tts_language_not_supported">La lingua selezionata non è supportata nel motore TTS (text-to-speech) Android installato. Vuoi vedere nel Market un altro motore TTS? Altrimenti verrà utilizzata la lingua TTS di default.</string>
 	<string name="tts_missing_language_data_title">Dati mancanti</string>

@@ -443,8 +443,7 @@
 
   <string name="internet_connection_required_for_online_route">
     Snažíte se použít online navigaci, ale nemáte internetové
-    připojení. Můžete vyzkoušet experimentální offline navigaci
-    (zapnete ji v menu Nastavení).
+    připojení.
   </string>
 
   <string name="tts_language_not_supported_title">Jazyk není podporován</string>

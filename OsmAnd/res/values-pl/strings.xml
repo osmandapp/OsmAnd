@@ -165,7 +165,7 @@
 <string name="voice_not_use">Nie używaj</string>
 <string name="voice_not_specified">Brak</string>
 <string name="installing_new_resources">Rozpakowywanie nowych danych...</string>
-<string name="internet_connection_required_for_online_route">Próbujesz użyć usługi online do wyznaczenia trasy, ale nie masz połączenia z Internetem. Możesz spróbować użyć ekperymentalnej obsługi routingu wbudowanej w program (wybierz w \'Ustawienia\' -&gt; \'Nawigacja\'.</string>
+<string name="internet_connection_required_for_online_route">Próbujesz użyć usługi online do wyznaczenia trasy, ale nie masz połączenia z Internetem.</string>
 <string name="tts_language_not_supported_title">Język niewspierany</string>
 <string name="tts_language_not_supported">Wybrany język jest niewspierany przez zainstalowany mechanizm TTS (text-to-speech). Czy chcesz odwiedzić Android Market, by poszukać innego silnika TTS? W innym przypadku zostanie użyty bieżący język.</string>
 <string name="tts_missing_language_data_title">Brakujące dane</string>

@@ -253,7 +253,7 @@
 	</string>
 	<string name="voice_not_specified">Nincs</string>
 	<string name="installing_new_resources">Új adatok kicsomagolása&#8230;</string>
-	<string name="internet_connection_required_for_online_route">Az internetes navigáció használata az internetkapcsolat hiánya miatt nem lehetséges. Használhatod a (még kísérleti) OsmAnd kapcsolat nélküli navigációt (\'Beállítások\' -> \'Útvonaltervezés\'.</string>
+	<string name="internet_connection_required_for_online_route">Az internetes navigáció használata az internetkapcsolat hiánya miatt nem lehetséges.</string>
 	<string name="tts_language_not_supported_title">Nem támogatott nyelv</string>
 	<string name="tts_language_not_supported">A kiválasztott nyelvet az Android TTS rendszere nem támogatja. A Marketből letölthető másik TTS rendszer. Különben a jelenlegi TTS-t használja a program.</string>
 	<string name="tts_missing_language_data_title">Hiányzó adat</string>

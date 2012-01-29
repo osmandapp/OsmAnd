@@ -14,7 +14,7 @@
      <string name="installing_new_resources">新しいデータを解凍中...</string>
      <string
 name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
-インターネット接続されていません。実験版のオフライン経路案内を利用できます(利用開始の設定が必要)。</string>
+インターネット接続されていません。</string>
      <string name="tts_language_not_supported_title">未サポート言語</string>
      <string name="tts_language_not_supported">選択された言語は
 インストール済のTTSエンジンがサポートしていません。マーケットで

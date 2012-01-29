@@ -151,7 +151,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="voice_not_use">Không dùng</string>
 	<string name="voice_not_specified">Không có</string>
 	<string name="installing_new_resources">Đang giải nén dữ liệu mới...</string>
-	<string name="internet_connection_required_for_online_route">You are about to use an online routing service but there is no internet connection. You can try the (still experimental) OsmAnd offline routing service (select in \'Settings\' -> \'Navigation\'.</string>
+	<string name="internet_connection_required_for_online_route">An online routing service is selected but no internet connection is available.</string>
 	<string name="tts_language_not_supported_title">Ngôn ngữ không được hỗ trợ</string>
 	<string name="tts_language_not_supported">The selected language is not supported by the installed Android TTS (text-to-speech) engine. Do you want to go to the Market to look for another TTS engine? Otherwise the preset TTS language will be used.</string>
 	<string name="tts_missing_language_data_title">Thiếu dữ liệu</string>

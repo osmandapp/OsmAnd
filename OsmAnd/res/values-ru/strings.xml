@@ -189,7 +189,7 @@
 	<string name="voice_not_use">Не использовать</string>
 	<string name="voice_not_specified">Нету</string>
 	<string name="installing_new_resources">Распаковываются новые данные...</string>
-	<string name="internet_connection_required_for_online_route">Вы собираетесь использовать интернет роутинг, но у вас нет активного интернет соединения. Вы можете попытаться использовать (экспериментальный) OsmAnd offline роутинг ( \'Настройки\' -> \'Навигация\') на короткие расстояния.</string>
+	<string name="internet_connection_required_for_online_route">Вы собираетесь использовать интернет роутинг, но у вас нет активного интернет соединения.</string>
 	<string name="tts_language_not_supported_title">Язык не поддерживается</string>
 	<string name="tts_language_not_supported">Выбранный язык не поддерживается Android TTS (text-to-speech). Хотите найти в маркте другой TTS? Иначе язык TTS по умолчанию будет использован.</string>
 	<string name="tts_missing_language_data_title">Данные отсутсвуют</string>
