@@ -269,13 +269,6 @@ public class MapActivityLayers {
 		layers.add(R.string.layer_favorites);
 		iconList.add(R.drawable.list_activities_favorites);
 		selectedList.add(settings.SHOW_FAVORITES.get() ? 1 : 0);
-		layers.add(R.string.layer_overlay);
-		selectedList.add(overlayLayer.getMap() != null ? 1 : 0);
-		iconList.add(R.drawable.list_activities_overlay_map);
-		layers.add(R.string.layer_underlay);
-		selectedList.add(underlayLayer.getMap() != null ? 1 : 0);
-		iconList.add(R.drawable.list_activities_underlay_map);
-		
 		layers.add(R.string.layer_gpx_layer);
 		selectedList.add(getApplication().getGpxFileToDisplay() != null ? 1 : 0);
 		iconList.add(R.drawable.list_activities_gpx_tracks);
@@ -284,7 +277,6 @@ public class MapActivityLayers {
 			selectedList.add(routeInfoLayer.isUserDefinedVisible() ? 1 : 0);
 			iconList.add(0);
 		}
-		
 		layers.add(R.string.layer_transport);
 		selectedList.add(settings.SHOW_TRANSPORT_OVER_MAP.get() ? 1 : 0);
 		iconList.add(R.drawable.list_activities_transport_stops);
@@ -293,14 +285,18 @@ public class MapActivityLayers {
 			selectedList.add(routeInfoLayer.isUserDefinedVisible() ? 1 : 0);
 			iconList.add(0);
 		}
-		
 		layers.add(R.string.layer_osm_bugs);
 		selectedList.add(settings.SHOW_OSM_BUGS.get() ? 1 : 0);
 		iconList.add(R.drawable.list_activities_osm_bugs);
 		
-
+		layers.add(R.string.layer_overlay);
+		selectedList.add(overlayLayer.getMap() != null ? 1 : 0);
+		iconList.add(R.drawable.list_activities_overlay_map);
+		layers.add(R.string.layer_underlay);
+		selectedList.add(underlayLayer.getMap() != null ? 1 : 0);
+		iconList.add(R.drawable.list_activities_underlay_map);
+		
 		final OnMultiChoiceClickListener listener = new DialogInterface.OnMultiChoiceClickListener() {
-
 			@Override
 			public void onClick(DialogInterface dialog, int item, boolean isChecked) {
 				if (layers.get(item) == R.string.layer_map) {
@@ -311,10 +307,26 @@ public class MapActivityLayers {
 						selectPOIFilterLayer(mapView);
 					}
 					settings.SHOW_POI_OVER_MAP.set(isChecked);
-				} else if(layers.get(item) == R.string.layer_favorites){
-					settings.SHOW_FAVORITES.set(isChecked);
 				} else if(layers.get(item) == R.string.layer_poi_label){
 					settings.SHOW_POI_LABEL.set(isChecked);
+				} else if(layers.get(item) == R.string.layer_favorites){
+					settings.SHOW_FAVORITES.set(isChecked);
+				} else if(layers.get(item) == R.string.layer_gpx_layer){
+					if(getApplication().getGpxFileToDisplay() != null){
+						getApplication().setGpxFileToDisplay(null, false);
+						gpxLayer.clearCurrentGPX();
+					} else {
+						dialog.dismiss();
+						showGPXFileLayer(mapView);
+					}
+				} else if(layers.get(item) == R.string.layer_route){
+					routeInfoLayer.setVisible(isChecked);
+				} else if(layers.get(item) == R.string.layer_transport_route){
+					transportInfoLayer.setVisible(isChecked);
+				} else if(layers.get(item) == R.string.layer_transport){
+					settings.SHOW_TRANSPORT_OVER_MAP.set(isChecked);
+				} else if(layers.get(item) == R.string.layer_osm_bugs){
+					settings.SHOW_OSM_BUGS.set(isChecked);
 				} else if(layers.get(item) == R.string.layer_overlay){
 					if(overlayLayer.getMap() != null){
 						settings.MAP_OVERLAY.set(null);
@@ -333,22 +345,6 @@ public class MapActivityLayers {
 						selectMapOverlayLayer(mapView, settings.MAP_UNDERLAY,settings.MAP_TRANSPARENCY, 
 								mapTileLayer, mapVectorLayer);
 					}
-				} else if(layers.get(item) == R.string.layer_gpx_layer){
-					if(getApplication().getGpxFileToDisplay() != null){
-						getApplication().setGpxFileToDisplay(null, false);
-						gpxLayer.clearCurrentGPX();
-					} else {
-						dialog.dismiss();
-						showGPXFileLayer(mapView);
-					}
-				} else if(layers.get(item) == R.string.layer_transport){
-					settings.SHOW_TRANSPORT_OVER_MAP.set(isChecked);
-				} else if(layers.get(item) == R.string.layer_osm_bugs){
-					settings.SHOW_OSM_BUGS.set(isChecked);
-				} else if(layers.get(item) == R.string.layer_route){
-					routeInfoLayer.setVisible(isChecked);
-				} else if(layers.get(item) == R.string.layer_transport_route){
-					transportInfoLayer.setVisible(isChecked);
 				}
 				updateLayers(mapView);
 				mapView.refreshMap();
