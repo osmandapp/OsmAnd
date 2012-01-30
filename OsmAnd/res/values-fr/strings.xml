@@ -60,7 +60,7 @@
       \tVous pouvez sélectionner une destination directement dans la carte (menu contextuel, puis \'Se déplacer vers ce point\'), dans toutes les recherches, ou via un appui long sur un de vos favoris dans la \'Liste des points favoris\'.
       \n\tLa destination est marquée d\'un disque orange sur la carte et OsmAnd affichera la distance (en ligne droite) vers ce point ainsi que sa direction (triangle orange).</string>
     <string name="tip_recent_changes_0_6_9_t">Changements en 0.6.9 :
-\n\t- Amelioration du rendu des cartes hors ligne
+\n\t- Amélioration du rendu des cartes hors ligne
 \n\t- Rendu hors ligne acceléré - voir dans les options expérimentales (ne marche pas sur tous les appareils)
 \n\t- Changements cosmétiques
 \n\t- Infos d\'altitude
@@ -172,11 +172,11 @@
 <string name="local_index_gpx_info_elevation">\nAltitude moyenne : %1$.0f m\nAltitude minimum : %2$.0f m\nAltitude maximum : %3$.0f m\nMontées : %4$.0f m\nDescentes : %5$.0f m</string>
 <string name="local_index_gpx_info">Sections : %1$d\nPoints au total : %2$d\nPoints étapes : %3$d\nDistance totale : %4$s\nHeure de départ : %5$tD %5$tR\nHeure d\'arrivée : %6$tD %6$tR</string>
 <string name="local_index_installed">Édition</string>
-<string name="local_index_items_backuped">%1$d sur %2$d eléments sauvegardés.</string>
-<string name="local_index_items_deleted">%1$d sur %2$d eléments supprimés.</string>
-<string name="local_index_items_restored">%1$d sur %2$d eléments restaurés.</string>
-<string name="local_index_no_items_to_do">Pas d\'elément à %1$s</string>
-<string name="local_index_action_do">Vous allez %1$s %2$s eléments. Continuer?</string>
+<string name="local_index_items_backuped">%1$d sur %2$d éléments sauvegardés.</string>
+<string name="local_index_items_deleted">%1$d sur %2$d éléments supprimés.</string>
+<string name="local_index_items_restored">%1$d sur %2$d éléments restaurés.</string>
+<string name="local_index_no_items_to_do">Pas d\'éléments à %1$s</string>
+<string name="local_index_action_do">Vous allez %1$s %2$s éléments. Continuer?</string>
 <string name="local_index_descr_title">Gestionnaire de données hors ligne</string>
 <string name="local_index_mi_restore">Restaurer</string>
 <string name="local_index_mi_backup">Sauvegarder</string>
@@ -247,7 +247,7 @@
 <string name="map_vector_data">Cartes vectorielles</string>
 <string name="map_vector_data_descr">Utiliser les cartes vectorielles téléchargées</string>
 <string name="tile_source_already_installed">Carte déjà installée, paramètres seront mis à jour</string>
-<string name="select_tile_source_to_install">Sélectioner les cartes à installer ou à mettre à jour</string>
+<string name="select_tile_source_to_install">Sélectioner les cartes à installer ou mettre à jour</string>
 <string name="internet_not_available">Connexion Internet nécessaire pour cette opération non disponible</string>
 <string name="install_more">Installer plus...</string>
 <string name="tip_update_index">Mise à jour des cartes locales</string>
