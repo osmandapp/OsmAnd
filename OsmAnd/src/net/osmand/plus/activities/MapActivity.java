@@ -1038,7 +1038,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		MenuItem navigateToPointMenu = menu.findItem(R.id.map_navigate_to_point);
 		if (navigateToPointMenu != null) {
 			if (settings.getPointToNavigate() != null) {
-				navigateToPointMenu.setTitle(routingHelper.isRouteCalculated() ? R.string.stop_routing : R.string.stop_navigation);
+				navigateToPointMenu.setTitle((routingHelper.isRouteCalculated() || routingHelper.isFollowingMode()) ? R.string.stop_routing : R.string.stop_navigation);
 				navigateToPointMenu.setVisible(true);
 			} else {
 				navigateToPointMenu.setVisible(false);
