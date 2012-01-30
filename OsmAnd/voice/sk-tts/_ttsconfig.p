@@ -21,52 +21,52 @@ pturn('right', ['doprava']).
 pturn('right_sh', ['ostro doprava']).
 pturn('right_sl', ['mierne doprava']).
 
-prepare_turn(Turn, Dist) == ['o', D, 'budete odbáčať', M] :- distance(Dist) == D, pturn(Turn, M).
-turn(Turn, Dist) == ['o', D, M] :- distance(Dist) == D, turn(Turn, M).
+prepare_turn(Turn, Dist) == ['o ', D, 'budete odbáčať ', M] :- distance(Dist) == D, pturn(Turn, M).
+turn(Turn, Dist) == ['o ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
-prepare_make_ut(Dist) == ['o', D, 'sa otočte naspäť'] :- distance(Dist) == D.
+prepare_make_ut(Dist) == ['o ', D, 'sa otočte naspäť'] :- distance(Dist) == D.
 make_ut(Dist) == ['o', D, 'sa otočte naspäť'] :- distance(Dist) == D.
 make_ut == ['otočte sa naspäť'].
 
-prepare_roundabout(Dist) == ['o', D, 'vojdete na kruhový objazd'] :- distance(Dist) == D.
-roundabout(Dist, _Angle, Exit) == ['o', D, 'vojdite na kruhový objazd', 'a zvoľte', E, 'výjazd'] :- distance(Dist) == D, nth(Exit, E).
-roundabout(_Angle, Exit) == ['pôjdete cez', E, 'výjazd'] :- nth(Exit, E).
+prepare_roundabout(Dist) == ['o ', D, 'vojdete na kruhový objazd'] :- distance(Dist) == D.
+roundabout(Dist, _Angle, Exit) == ['o ', D, ' vojdite na kruhový objazd ', 'a opustite ho cez ', E, 'výjazd'] :- distance(Dist) == D, nth(Exit, E).
+roundabout(_Angle, Exit) == ['pôjdete cez ', E, 'výjazd'] :- nth(Exit, E).
 
 go_ahead == ['pokračujte rovno'].
-go_ahead(Dist) == ['pokračujte', D]:- distance(Dist) == D.
+go_ahead(Dist) == ['pokračujte ', D]:- distance(Dist) == D.
 
 and_arrive_destination == ['a dorazíte do cieľa'].
 
-then == ['potom'].
+then == ['potom '].
 reached_destination == ['dorazili ste do cieľa'].
 bear_right == ['držte sa vpravo'].
 bear_left == ['držte sa vľavo'].
 
 route_new_calc(Dist) == ['Cesta je dlhá ', D] :- distance(Dist) == D.	
-route_recalc(Dist) == ['Prepočítava sa cesta , cesta je dlhá ', D] :- distance(Dist) == D.
+route_recalc(Dist) == ['Cesta prepočítaná, cesta je dlhá ', D] :- distance(Dist) == D.
 
-location_lost == ['g p s location lost '].
+location_lost == ['strata g p s pozície '].
 
 
 %% 
-nth(1, 'prvý').
-nth(2, 'druhý').
-nth(3, 'tretí').
-nth(4, 'štvrtý').
-nth(5, 'piaty').
-nth(6, 'šiesty').
-nth(7, 'siedmy').
-nth(8, 'ôsmy').
-nth(9, 'deviaty').
-nth(10, 'desiaty').
-nth(11, 'jedenásty').
-nth(12, 'dvanásty').
-nth(13, 'trinásty').
-nth(14, 'štrnásty').
-nth(15, 'pätnásty').
-nth(16, 'šestnásty').
-nth(17, 'sedemnásty').
+nth(1, 'prvý ').
+nth(2, 'druhý ').
+nth(3, 'tretí ').
+nth(4, 'štvrtý ').
+nth(5, 'piaty ').
+nth(6, 'šiesty ').
+nth(7, 'siedmy ').
+nth(8, 'ôsmy ').
+nth(9, 'deviaty ').
+nth(10, 'desiaty ').
+nth(11, 'jedenásty ').
+nth(12, 'dvanásty ').
+nth(13, 'trinásty ').
+nth(14, 'štrnásty ').
+nth(15, 'pätnásty ').
+nth(16, 'šestnásty ').
+nth(17, 'sedemnásty ').
 
 
 %%% distance measure
