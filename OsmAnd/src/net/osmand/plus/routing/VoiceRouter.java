@@ -347,7 +347,7 @@ public class VoiceRouter {
 		if (play != null) {
 			if (updateRoute) {
 				//suppress "route recaluated" message for GPX routing, as message would be constantly triggered for any deviation from pre-saved track
-				if (settings.FOLLOW_THE_GPX_ROUTE.get() != null) {
+				if (settings.FOLLOW_THE_GPX_ROUTE != null) {
 					play.routeRecalculated(router.getLeftDistance()).play();
 				}
 			} else {
@@ -397,7 +397,7 @@ public class VoiceRouter {
 					newCommand.newRouteCalculated(left).play();
 				} else if (type == ROUTE_RECALCULATED) {
 					//suppress "route recaluated" message for GPX routing, as message would be constantly triggered for any deviation from pre-saved track
-					if (settings.FOLLOW_THE_GPX_ROUTE.get() != null) {
+					if (settings.FOLLOW_THE_GPX_ROUTE != null) {
 						newCommand.routeRecalculated(left).play();
 					}
 				}
