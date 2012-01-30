@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="live_monitoring_descr">Zapnout přímé nahrávání pozice na HTTP server</string>
+	<string name="live_monitoring">Přímý přenos pozice</string>
+	<string name="live_monitoring_interval_descr">Zadejte interval nahrávání pozice na server</string>
+	<string name="live_monitoring_interval">Interval přímého přenosu</string>
+	<string name="live_monitoring_url_descr">Zadejte webovou adresu serveru pro přímý přenos pozice. Parametry: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+	<string name="live_monitoring_url">Server pro přímý přenos</string>
+	<string name="gpx_monitoring_disabled_warn">Prosím, zapněte funkci \'Uložit trasu do GPX\'</string>
+	<string name="show_current_gpx_title">Zobrazit aktuální trasu</string>
+
 	<string name="tip_recent_changes_0_7_0_t">Změny ve verzi 0.7.0 :
 	\n\t- Offline informace o místech z Wikipedie
 	\n\t- Aktualizované mapy
