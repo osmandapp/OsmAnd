@@ -53,7 +53,7 @@ bear_left == ['držte se vlevo'].
 route_new_calc(Dist) == ['cesta je dlouhá', D] :- distance(Dist,accusative) == D.
 route_recalc(Dist) == ['přepočítávám', D] :- distance(Dist,accusative) == D.
 
-location_lost == ['g p s location lost '].
+location_lost == ['Ztráta družicového signálu'].
 
 
 %% 
