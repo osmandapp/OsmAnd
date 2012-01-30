@@ -1,5 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="live_monitoring_descr">Lehetővé teszi HTTP üzenetek küldését a megadott webes szolgáltatásnak</string>
+	<string name="live_monitoring">Élő Útvonalrögzítés</string>
+	<string name="live_monitoring_interval_descr">Élő Útvonalrögzítés intervalluma</string>
+	<string name="live_monitoring_interval">Élő rögzítési sűrűség</string>
+	<string name="live_monitoring_url_descr">Add meg az Élő Útvonalrögzítéshez használni kívánt webcímet az alábbi paraméterekkel: szélesség={0}, hosszúság={1}, időbélyeg={2}, hdop pontosság={3}, magasság={4}, sebesség={5}</string>
+	<string name="live_monitoring_url">Élő rögzítés webcíme</string>
+	<string name="gpx_monitoring_disabled_warn">Kérlek engedélyezd az \'Útvonal rögzítése GPX-be\' beállítást</string>
+	<string name="show_current_gpx_title">Aktív útvonalrögzítés</string>
 	<string name="tip_recent_changes_0_7_0_t">A 0.7.0 verzió változásai:
 \n\t- Internet nélkül is használható Wikipédia szócikkek
 \n\t- Frissített térképek
@@ -83,14 +91,12 @@
 \n\tPOI hozzáadáshoz és a hibabejelentéshez internet elérés szükséges.</string>
 <!-- end of string changes for new Preferences structure -->
 
-
 	<string name="download_files_not_enough_space">Nincs elég hely %1$s MB letöltéséhez (szabad %2$s).</string>
 	<string name="download_files_question_space">Szabad hely jelenleg {2} MB! Letöltesz {0} fájlt ({1} MB)?</string>
 	<string name="show_zoom_level_descr">A nagyítási szint állandó megjelenítése a lépték helyett.</string>
 	<string name="show_zoom_level">Nagyítási szint kijelzése</string>
 	<string name="tip_select_destination_point">Beállítás célpontnak</string>
-	<string name="tip_select_destination_point_t">
-\tA célpontot kiválaszthatod közvetlenül a térképről (helyi menü, \'Beállítás célpontnak\'), kereséssel, vagy a \'Kedvencek\' közül hosszú kattintással.
+	<string name="tip_select_destination_point_t">\tA célpontot kiválaszthatod közvetlenül a térképről (helyi menü, \'Beállítás célpontnak\'), kereséssel, vagy a \'Kedvencek\' közül hosszú kattintással.
 \n\tA célpontot a térképen narancssárga pötty jelzi. Az ettől való távolságot a jobb felső sarokban láthatod, irányát pedig egy narancssárga nyíl mutatja.</string>
 
 	<string name="tip_recent_changes_0_6_9_t">A 0.6.9-es verzió változásai:
@@ -106,6 +112,7 @@
 	<string name="show_altitude_info">Magassági érték kijelzése</string>
 	<string name="use_transparent_map_theme_descr">Átlátszó háttér a térképkezelő gombokhoz</string>
 	<string name="use_transparent_map_theme">Átlátszó téma</string>
+
 	<string name="native_library_not_supported">A natív renderelő nem támogatott ezen az eszközön.</string>
 	<string name="init_native_library">Natív renderelő inicializálása..</string>
 	<string name="choose_auto_follow_route">Automatikus követés ideje</string>
@@ -157,6 +164,7 @@
 	<string name="show_gpx_route">Mutasd a térképen</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_select_point">Választás</string>
+	<string name="local_index_description">Új offline adat letöltése, aktiválása/deaktiválása, törlése.\nJelenlegi adatok az eszközön (szabad hely: %1$s):</string>
 	<string name="search_position_current_location_search">Pozíció keresése&#8230;</string>
 	<string name="search_position_current_location_found">Pozíció [Megtalálva]</string>
 	<string name="search_position_address">Cím&#8230;</string>
@@ -186,6 +194,7 @@
 	<string name="file_with_name_already_exist">Már létezik fájl ilyen névvel.</string>
 	<string name="default_buttons_save">Mentés</string>
 	<string name="menu_save_directions">Irányok mentése</string>
+
 	<string name="local_index_upload_gpx_description">GPX fájl feltöltése OSM-be. A térkép kibővítésére használják majd.</string>
 	<string name="local_index_items_uploaded">%2$d darabból %1$d sikeresen feltöltve.</string>
 	<string name="local_index_mi_upload_gpx">OSM hozzájárulás</string>
@@ -214,7 +223,7 @@
 	<string name="local_index_no_items_to_do">Nincs elem a művelethez: %1$s</string>
 	<string name="local_index_action_do">%2$s darab elemen végre lesz hajtva a %1$s. Folytatod?</string>
 	<string name="local_index_descr_title">Offline - kapcsolat nélküli adat kezelés</string>
-	<string name="local_index_description">Új offline adat letöltése, aktiválása/deaktiválása, törlése.\nJelenlegi adatok az eszközön (szabad hely: %1$s):</string>
+
 	<string name="local_index_mi_restore">Aktiválás</string>
 	<string name="local_index_mi_backup">Deaktiválás</string>
 	<string name="local_index_mi_delete">Törlés</string>
@@ -234,9 +243,7 @@
 	<string name="local_indexes_cat_map">Térképadat (vektor)</string>
 	<string name="local_indexes_cat_poi">POI-adat</string>
 
-
 	<string name="ttsvoice">TTS felolvasó hang</string>
-	
 	<string name="search_offline_clear_search">Új keresés</string>
 	<string name="map_text_size_descr">Szövegméret beállítása a térképen megjelenő nevekhez</string>
 	<string name="map_text_size">Szövegméret</string>
@@ -251,6 +258,7 @@
 \n\t- GPX navigációs beállítások
 \n\t- Kezelő felület és egyéb hibajavítások
 	</string>
+	<string name="voice_not_use">Letiltva</string>
 	<string name="voice_not_specified">Nincs</string>
 	<string name="installing_new_resources">Új adatok kicsomagolása&#8230;</string>
 	<string name="internet_connection_required_for_online_route">Az internetes navigáció használata az internetkapcsolat hiánya miatt nem lehetséges.</string>
@@ -288,24 +296,29 @@
 	<string name="select_tile_source_to_install">Térkép kiválasztása telepítéshez, frissítéshez</string>
 	<string name="internet_not_available">A művelet elvégzéséhez internetelérés szükséges</string>
 	<string name="install_more">További telepítése&#8230;</string>
+
 	<string name="tip_update_index">Térképadatok frissítése</string>
 	<string name="tip_update_index_t">Fontos az aktuális térképek megléte. Az Osmand program tartalmaz egy letöltéskezelőt amivel egyszerűen ellenőrizhető, hogy létezik-e frissebb a meglévő térképadatokból.
 \n\tA frissítések ellenőrzéséhez a \'Főmenü\'->\'Beállítások\'->\'Offline adatok\'->\'Térképadatok letöltése\' menüpontot kell választani. A térképadatok internetről való frissítése után a \'Letöltöttek szűrése\' menüt kell választani.
 \nÍgy most már csak a letöltött térképadatok jelennek meg a következő színekkel jelölve:
 \n\t\'Zöld\' - azt jelenti, hogy az index állomány megegyezik a szerveren lévővel
 \n\t\'Kék\' - azt jelenti, hogy újabb verzió tölthető le a szerverről</string>
+
 	<string name="level_to_switch_vector_raster_descr">Minimális nagyítási szint vektoros megjelenítéshez térképcsempék helyett</string>
 	<string name="level_to_switch_vector_raster">Min. vektoros nagyítás</string>
+
 	<string name="tip_location_sharing">Hely megosztás</string>
 	<string name="tip_location_sharing_t">Érdekes helyet találtál az utazásod során és meg akarod osztani a pozíciót a barátoddal, családoddal?
 \nOsmAnd lehetőséget biztosít, hogy megoszthass másokkal minden helyet amit csak akarsz.
 \n\tVálaszd a \'Térkép menű\'->\'Hely megosztása\' pontot.
 \nEzután meg kell határoznod milyen módon szeretnéd mással megosztani a koordinátákat. Lehetséges választás: E-Mail, SMS vagy a koordináták másolása a vágólapra.</string>
+
 	<string name="tip_favorites">Kedvencek</string>
 	<string name="tip_favorites_t">Ha hosszadalmas a sűrűn használt helyek előkeresése, hozzá lehet adni a Kedvencekhez, utána pár kattintással előkereshető.
 \n\tKedvenc pont hozzáadásához a térképmenüben a \'Hozzáadás a kedvencekhez\'-et kell választani és a pontot egy megfelelő névvel ellátni. Mentés után egyszerűen a főmenü \'Kedvencek\' menüponton keresztül érhető el.
 \n\tA \'Kedvencek\' menüben a pontra hosszan rányomva beállíthatjuk célpontnak, szerkeszthetjük vagy törölhetjük.
 \n\tAz összes kedvenc pont térképen megjelenítéséhez engedélyezni kell a \'Kedvencek\' réteget a térképmenü \'Rétegek\' pontjában.</string>
+
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
 	<string name="error_doing_search">Hiba történt a kapcsolat nélküli keresésben</string>
 	<string name="search_offline_geo_error">Nem sikerült értelmezni a geo intent által küldött parancsot:\'%s\'</string>
@@ -314,22 +327,28 @@
 	<string name="system_locale">Rendszer nyelve</string>
 	<string name="preferred_locale_descr">Megjelenített feliratok nyelve</string>
 	<string name="preferred_locale">Preferált nyelv</string>
+
 	<string name="tip_map_switch">Térképforrás</string>
 	<string name="tip_map_switch_t">A térkép forrásának és rétegeknek a cseréjére a leggyorsabb megoldás a \'menü\'->\'Rétegek\' menüpont.
 \n\t\'Térképforrás&#8230;\' alatt lehet választani az előre definiált térképek és az OsmAndMapCreator által PC-n készített térképek között.
 \n\tOsmAnd egyéni forrásokat is támogat.</string>
+
 	<string name="tip_app_mode">Működési mód</string>
 	<string name="tip_app_mode_t">Az OsmAnd több, személyre szabható megjelenítési módot támogat, különböző felhasználási esetekre.
 \n\tA mód kiválasztható a  \'Főmenü\'->\'Beállítások\'->\'Működési mód\' alatt.</string>
+
 	<string name="tip_navigation">Navigáció</string>
 	<string name="tip_navigation_t">Navigáció indításához először ki kell választani egy célpontot. Ezután a térképmenü \'Útirány\' menütét kell választani és megjelölni a közlekedési módot.</string>
+
 	<string name="tip_search">Cím keresés</string>
 	<string name="tip_search_t">A térképen helyet keresni cím alapján, koordináta alapján, POI-k közül, vagy Kedvencek közül lehet.
 \n\t\'Keresés\' menüvel tudsz keresni. A találatokra hosszan kattintva az alábbiak közül lehet választani: \'Beállítás célpontnak\' vagy \'Mutasd a térképen\'.</string>
+
 	<string name="tip_map_context_menu">Térképmenü</string>
 	<string name="tip_map_context_menu_t">\tA térképmenü a térképen egy pont hosszú megnyomásával vagy a \'trackball\' gombbal érhető el.
 \n\tA kattintás után megjelenik egy doboz a koordinátákkal, vagy a POI nevével. A térképmenü megnyitásához kattints erre a dobozra (vagy kattints rá hosszan az eltüntetéséhez).
 \n\tA térképmenü tartalmaz minden olyan műveletet, amit azzal a ponttal tenni tudsz.</string>
+
 	<string name="tip_initial">Tippek és trükkök</string>
 	<string name="tip_initial_t">\tAz OsmAnd navigációs alkalmazás sok lehetőséggel rendelkezik.
 \n\tA gyorsabb megértés érdekében ajánlott a tippek és trükkök elolvasása ami egy linken keresztül elérhető a főmenüből.</string>
@@ -394,6 +413,14 @@
 	<string name="version_index_is_big_for_memory">A(z) \'\'{0}\'\' indexadat nem fér a memóriába</string>
 	<string name="version_index_is_not_supported">\'\'{0}\'\' index verziója nem támogatott</string>
 	<string name="osmand_net_previously_installed">Ön már telepített egy korábbi OsmAnd verziót. Minden internettől független adat használható az új alkalmazással. A Kedvenc pontokat a régi alkalmazásból érdemes kimenteni és az újba betölteni</string>
+
+	<string name="use_osmand_routing_service">OsmAnd útvonaltervező</string>
+	<string name="use_osmand_routing_service_descr">OsmAnd offline útvonaltervező használata nagy távolságokra is (kísérleti funkció) CloudMade-re váltás helyett.</string>
+	<string name="osmand_routing_experimental">Az OsmAnd offline útvonaltervezője kísérleti funkció és nem működik 20 kilométernél nagyobb távolságban.\n Átmenetileg átállítva online Cluodmade-re.</string>
+	<string name="specified_dir_doesnt_exist">Nem található a megadott könyvtár.</string>
+	<string name="application_dir">Tárolási könyvtár</string>
+	<string name="application_dir_change_warning">A tárolási könyvtár megváltoztatása nem helyezi át vagy törli az adatokat, ezt kézzel kell megtenni, nem az OsmAnd-ban. Biztosan folytatod?</string>
+
 	<string name="build_installed">OsmAnd verzió {0} sikeresen telepítve ({1}).</string>
 	<string name="downloading_build">OsmAnd verzió letöltése&#8230;</string>
 	<string name="install_selected_build">Telepíted az OsmAnd alkalmazást - {0} innen: {1} {2} MB.</string>
@@ -419,6 +446,7 @@
 	<string name="deselect_all">Kijelölés megszüntetése</string>
 	<string name="select_all">Mindet kijelöl</string>
 	<string name="reload">Újratölt</string>
+
 	<string name="fast_route_mode">Leggyorsabb útvonal</string>
 	<string name="fast_route_mode_descr">Leggyorsabb útvonal kiszámításának engedése vagy a legrövidebb út tiltása </string>
 	<string name="tiles_to_download_estimated_size">{0} nagyításnál {1} képkocka letöltése ({2} Mb )</string>
@@ -454,6 +482,7 @@
 	<string name="map_index">Térkép</string>
 	<string name="voice">Hang</string>
 	<string name="no_vector_map_loaded">Nincs betöltött vektoros térkép</string>
+
 	<string name="map_route_by_gpx">Útvonal GPX alapján</string>
 	<string name="gpx_files_not_found">Nem található GPX fálj /osmand/tracks könyvtárban</string>
 	<string name="layer_gpx_layer">GPX nyomvonal&#8230;</string>
@@ -519,7 +548,6 @@
 	<string name="search_poi_filter">Szűrő</string>
 	<string name="menu_mute_off">Hang be</string>
 	<string name="menu_mute_on">Némítva</string>
-	<string name="voice_not_use">nem használunk beszédet</string>
 	<string name="voice_provider_descr">Hangutasítás kiválasztása navigációhoz</string>
 	<string name="voice_provider">Hangutasítás</string>
 	<string name="voice_data_initializing">Beszédadat előkészítése&#8230;</string>
@@ -705,7 +733,6 @@
 	<string name="settings_activity">Beállítások</string>
 	<string name="show_gps_coordinates_text">GPS koordináták mutatása a térképen</string>
 	<string name="use_internet_to_download_tile">Internet használata a hiányzó térképszeletek letöltésére</string>
-	<string name="app_name">OsmAnd</string>
 	<string name="app_description">Navigációs alkalmazás</string>
 
 	<string name="exit_Button">Kilép</string>
@@ -713,10 +740,8 @@
 	<string name="settings_Button">Beállítások</string>
 	<string name="favorites_Button">Kedvencek</string>
 	<string name="search_button">Keresés</string>
-<color name="menu_background">#FF9030</color>
 	<string name="search_activity">Keresés</string>
-<color name="color_white">#FFFFFF</color>
-<color name="color_red">#FF0000</color>
+
 	<string name="searchpoi_activity">POI kiválasztás</string>
 	<string name="search_POI_level_btn">További találat</string>
 	<string name="incremental_search_city">Település keresése. A település vagy irányítószám kereséshez írjon be 3 vagy több karaktert.</string>
