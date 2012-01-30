@@ -380,7 +380,7 @@
 	
 <string name="use_osmand_routing_service">OsmAnd offline rutovanie</string>
 <string name="use_osmand_routing_service_descr">Použitie offline rutovania na dlhé vzdialenosti (experimentálne) namiesto CloudMade</string>
-<string name="osmand_routing_experimental">OsmAnd offline rutovanie je experimentálna funkcia a nefunguje na vzdialenosť väčšiu ako 20 km.\n Rutovacia služba je dočasne prepnutá na online Cloudmade.</string>
+<string name="osmand_routing_experimental">OsmAnd offline rutovanie je experimentálna funkcia a nefunguje na vzdialenosť väčšiu ako 20 km.\n Rutovacia služba je dočasne prepnutá na online CloudMade.</string>
 <string name="specified_dir_doesnt_exist">Nedá sa nájsť určený adresár.</string>
 <string name="application_dir">Úložiskový adresár</string>
 <string name="application_dir_change_warning">Zmena úložiskového adresára nepresunie alebo nezmaže dát. Musíte to urobiť sami! Robíte to na vlastné riziko! Napriek tomu pokračovať?</string>

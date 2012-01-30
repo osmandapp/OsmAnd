@@ -260,7 +260,7 @@ OSMコミュニティはこの問題をいち早く修正することができ�
 OsmAndを使用(実験版)</string>
      <string name="osmand_routing_experimental">OsmAndオフライン経路案内は実験的な機能であり
 20km以上の距離では動作しません。
-\n 経路案内サービスはオンラインのCloudmadeに自動的に切り替わります。</string>
+\n 経路案内サービスはオンラインのCloudMadeに自動的に切り替わります。</string>
      <string name="specified_dir_doesnt_exist">指定されたディレクトリが見つかりません。</string>
      <string name="application_dir">記憶領域のディレクトリ</string>
      <string name="application_dir_change_warning">領域のディレクトリ変更は

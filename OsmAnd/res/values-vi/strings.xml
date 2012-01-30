@@ -332,7 +332,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="use_osmand_routing_service">Tìm đường OsmAnd</string>
 	<string name="use_osmand_routing_service_descr">Sử dụng tính năng tìm đường Offline với khoảng cách dài(đang thử nghiệm)</string>
 	<string name="osmand_routing_experimental">Tìm đường Offline trên OsmAnd là tính năng thử nghiệm và
-	nó không thể chạy được với khoảng cách trên 20km. Dịch vụ tìm được sẽ tự động chuyển sang dùng Cloudmade.</string>
+	nó không thể chạy được với khoảng cách trên 20km. Dịch vụ tìm được sẽ tự động chuyển sang dùng CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Không tìm thấy thư mục.</string>
 	<string name="application_dir">Thư mục lưu trữ</string>
 	<string name="application_dir_change_warning">Việc thay đổi thư mục lưu trữ sẽ không di dời hay xóa dữ liệu. Thao tác này phải được tiến hành ngoài ứng dụng OsmAnd</string>
