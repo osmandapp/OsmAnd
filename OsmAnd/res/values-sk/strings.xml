@@ -212,7 +212,7 @@
 	<string name="voice_not_use">Nepoužívať</string>
 	<string name="voice_not_specified">Žiadny</string>
 	<string name="installing_new_resources">Rozbaľujú sa nové údaje...</string>	
-	<string name="internet_connection_required_for_online_route">Pokúšate sa použiť online rutovaciu službu ale nemáte internetové pripojenie.</string>
+	<string name="internet_connection_required_for_online_route">Je vybratá online rutovacia služba, ale nie je dostupné internetové pripojenie.</string>
 	<string name="tts_language_not_supported_title">Nepodporovaný jazyk</string>
 	<string name="tts_language_not_supported">Zvolený jazyk nie je podporovaný nainštalovaným TTS (text-to-speech) v Androide. Chcete ísť na Market pozrieť iný TTS? Inak bude použitý prednastavený TTS jazyk.</string>
 	<string name="tts_missing_language_data_title">Chýbajúce údaje</string>
@@ -380,7 +380,7 @@
 	
 <string name="use_osmand_routing_service">OsmAnd offline rutovanie</string>
 <string name="use_osmand_routing_service_descr">Použitie offline rutovania na dlhé vzdialenosti (experimentálne) namiesto CloudMade</string>
-<string name="osmand_routing_experimental">OsmAnd offline rutovanie je experimentálna funkcia a nefunguje na vzdialenosť väčšiu ako 20 km.\n Rutovacia služba je automaticky prpenutá na online Cloudmade.</string>
+<string name="osmand_routing_experimental">OsmAnd offline rutovanie je experimentálna funkcia a nefunguje na vzdialenosť väčšiu ako 20 km.\n Rutovacia služba je dočasne prepnutá na online Cloudmade.</string>
 <string name="specified_dir_doesnt_exist">Nedá sa nájsť určený adresár.</string>
 <string name="application_dir">Úložiskový adresár</string>
 <string name="application_dir_change_warning">Zmena úložiskového adresára nepresunie alebo nezmaže dát. Musíte to urobiť sami! Robíte to na vlastné riziko! Napriek tomu pokračovať?</string>
