@@ -1125,7 +1125,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 			return true;
 		case R.id.map_navigate_to_point:
 			if (mapLayers.getNavigationLayer().getPointToNavigate() != null) {
-				if(routingHelper.isRouteCalculated()){
+				if(routingHelper.isRouteCalculated() || routingHelper.isFollowingMode()){
 					routingHelper.setFinalAndCurrentLocation(null, routingHelper.getCurrentLocation(), routingHelper.getCurrentGPXRoute());
 				} else {
 					navigateToPoint(null);
