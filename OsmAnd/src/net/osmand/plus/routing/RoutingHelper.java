@@ -465,6 +465,7 @@ public class RoutingHelper {
 				// display 'temporarily switched to CloudMade' message only once per error wait period and not for GPX routes
 				if (evalWaitInterval == 3000 && settings.FOLLOW_THE_GPX_ROUTE.get() == null) {
 					showMessage(context.getString(R.string.osmand_routing_experimental), Toast.LENGTH_LONG);
+					evalWaitInterval = 3001;
 				}
 				serviceToUse = RouteService.CLOUDMADE;
 			}
