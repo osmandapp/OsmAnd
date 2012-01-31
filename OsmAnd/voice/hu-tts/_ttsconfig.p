@@ -18,28 +18,28 @@ prepare_turn(Turn, Dist) == [D, ' múlva ', M] :- distance(Dist) == D, turn(Turn
 turn(Turn, Dist) == [D, 'múlva ', M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
-prepare_make_ut(Dist) == [D, ' múlva készüj fel a visszafordulásra'] :- distance(Dist) == D.
+prepare_make_ut(Dist) == [D, ' múlva készülj fel a visszafordulásra'] :- distance(Dist) == D.
 make_ut(Dist) == [D, ' múlva fordulj vissza '] :- distance(Dist) == D.
 make_ut == ['Fordulj vissza '].
 
-prepare_roundabout(Dist) == [D, ' múlva hajts be a köforgalomba'] :- distance(Dist) == D.
-roundabout(Dist, _Angle, Exit) == [D, ' múlva a körfrorgalomban ', E, 'kijáraton hajts ki'] :- distance(Dist) == D, nth(Exit, E).
+prepare_roundabout(Dist) == [D, ' múlva hajts be a körforgalomba'] :- distance(Dist) == D.
+roundabout(Dist, _Angle, Exit) == [D, ' múlva a körforgalomban ', E, 'kijáraton hajts ki'] :- distance(Dist) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['hajts ki ', E, 'kijáraton'] :- nth(Exit, E).
 
 go_ahead == ['Haladj tovább egyenesen '].
-go_ahead(Dist) == ['Menj tovább ', D, 't '] :- distance(Dist) == D.
+go_ahead(Dist) == ['Menj tovább ', D, ''] :- distance(Dist) == D.   % Not correct, 't' would be necessary after D
 
-and_arrive_destination == ['és megérkezel az uticélhoz '].
+and_arrive_destination == ['és megérkezel az úti célhoz '].
 
 then == ['majd '].
-reached_destination == ['megérkeztél az uticélhoz '].
+reached_destination == ['megérkeztél az úti célhoz '].
 bear_right == ['tarts jobbra '].
 bear_left == ['tarts balra '].
 
 route_new_calc(Dist) == ['Az útvonal ', D] :- distance(Dist) == D.
 route_recalc(Dist) == ['útvonal újratervezése, az útvonal ', D] :- distance(Dist) == D.
 
-location_lost == ['g p s location lost '].
+location_lost == ['nem található dzsípíesz pozíció '].
 
 
 %% 
