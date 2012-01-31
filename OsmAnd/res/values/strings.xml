@@ -415,7 +415,7 @@
 
 	<string name="use_osmand_routing_service">OsmAnd routing</string>
 	<string name="use_osmand_routing_service_descr">Use OsmAnd offline routing for long distances (experimental) instead of fallback to CloudMade</string>
-	<string name="osmand_routing_experimental">OsmAnd offline routing is an experimental feature and it doesn\'t work for distances of more than about 20 km.\n Routing service is temporarily switched to online CloudMade.</string>
+	<string name="osmand_routing_experimental">OsmAnd offline routing is an experimental feature and it doesn\'t work for distances of more than about 20 km.\n\nRouting service is temporarily switched to online CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
 	<string name="application_dir">Storage directory</string>
 	<string name="application_dir_change_warning">Changing the storage directory will not move or delete the data. This must be performed separately and outside OsmAnd. Continue anyway?</string>

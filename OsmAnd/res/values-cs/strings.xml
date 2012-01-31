@@ -626,7 +626,7 @@
   navigaci pro dlouhé vzdálenosti (experimentální)</string>
   <string name="osmand_routing_experimental">Offline navigace je
   experimentální a funguje jen pro vzdálenosti do 20
-  km.\nPak se navigace automaticky přepne na online CloudMade.</string>
+  km.\n\nPak se navigace automaticky přepne na online CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Nemohu najít zadaný adresář.</string>
   <string name="application_dir">Adresář pro data</string>
   <string name="application_dir_change_warning">Změna adresáře pro

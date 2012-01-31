@@ -413,7 +413,7 @@
 					
 	<string name="use_osmand_routing_service">OsmAnd Routing</string>
 	<string name="use_osmand_routing_service_descr">OsmAnd Offlinerouting für große Entfernungen verwenden (experimentell) anstatt automatisch CloudMade zu nehmen</string>
-	<string name="osmand_routing_experimental">OsmAnd Offlinerouting ist noch experimentell und funktioniert nicht gut für Entfernungen über 20 km.\n Als Routingdienst wird temporär online CloudMade verwendet.</string>
+	<string name="osmand_routing_experimental">OsmAnd Offlinerouting ist noch experimentell und funktioniert nicht gut für Entfernungen über 20 km.\n\nAls Routingdienst wird temporär online CloudMade verwendet.</string>
 	<string name="specified_dir_doesnt_exist">Angegebener Ordner kann nicht gefunden werden.</string>
 	<string name="application_dir">Verzeichnis</string>
 	<string name="application_dir_change_warning">Das Wechseln des Verzeichnis verschiebt oder löscht keine Daten. Dies muss separat außerhalb von OsmAnd durchgeführt werden. Dennoch fortfahren?</string>

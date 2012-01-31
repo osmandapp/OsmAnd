@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
 	<string name="live_monitoring_descr">Lehetővé teszi HTTP üzenetek küldését a megadott webes szolgáltatásnak</string>
 	<string name="live_monitoring">Élő Útvonalrögzítés</string>
@@ -416,7 +416,7 @@
 
 	<string name="use_osmand_routing_service">OsmAnd útvonaltervező</string>
 	<string name="use_osmand_routing_service_descr">OsmAnd offline útvonaltervező használata nagy távolságokra is (kísérleti funkció) CloudMade-re váltás helyett.</string>
-	<string name="osmand_routing_experimental">Az OsmAnd offline útvonaltervezője kísérleti funkció és nem működik 20 kilométernél nagyobb távolságban.\n Átmenetileg átállítva online Cluodmade-re.</string>
+	<string name="osmand_routing_experimental">Az OsmAnd offline útvonaltervezője kísérleti funkció és nem működik 20 kilométernél nagyobb távolságban.\n\nÁtmenetileg átállítva online Cluodmade-re.</string>
 	<string name="specified_dir_doesnt_exist">Nem található a megadott könyvtár.</string>
 	<string name="application_dir">Tárolási könyvtár</string>
 	<string name="application_dir_change_warning">A tárolási könyvtár megváltoztatása nem helyezi át vagy törli az adatokat, ezt kézzel kell megtenni, nem az OsmAnd-ban. Biztosan folytatod?</string>

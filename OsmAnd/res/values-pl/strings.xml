@@ -336,7 +336,7 @@
 
 <string name="use_osmand_routing_service">OsmAnd routing</string>
 <string name="use_osmand_routing_service_descr">Użyj routingu offline dla długich tras (funkcjonalność eksperymentalna)</string>
-<string name="osmand_routing_experimental">Routing offline OsmAnd-a jest funkcją eksperymentalną i nie działa dobrze dla odległości większych niż 20km.\n Usługa routująca jest automatycznie przełączana do CloudMade (online).</string>
+<string name="osmand_routing_experimental">Routing offline OsmAnd-a jest funkcją eksperymentalną i nie działa dobrze dla odległości większych niż 20km.\n\nUsługa routująca jest automatycznie przełączana do CloudMade (online).</string>
 <string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
 <string name="application_dir">Storage directory</string>
 <string name="application_dir_change_warning">Changing the storage directory will not move or delete the data. This must be performed separately and outside OsmAnd. Continue anyway?</string>

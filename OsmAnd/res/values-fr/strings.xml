@@ -355,7 +355,7 @@
 <string name="version_index_is_not_supported">La version \'\'{0}\'\' de l\'index n\'est pas supporté</string>
 <string name="use_osmand_routing_service">Navigation hors-ligne OsmAnd</string>
 <string name="use_osmand_routing_service_descr">Utiliser la navigation hors-ligne pour les longues distances (expérimental)</string>
-<string name="osmand_routing_experimental">La navigation hors-ligne OsmAnd est une fonction expérimentale ne fonctionnant pas pour une distance de plus de 20 km.\n Le service utilise alors automatiquement le service en-ligne CloudMade.</string>
+<string name="osmand_routing_experimental">La navigation hors-ligne OsmAnd est une fonction expérimentale ne fonctionnant pas pour une distance de plus de 20 km.\n\nLe service utilise alors automatiquement le service en-ligne CloudMade.</string>
 <string name="specified_dir_doesnt_exist">Le répertoire spécifié est introuvable.</string>
 <string name="application_dir">Répertoire de stockage</string>
 <string name="application_dir_change_warning">Le changement du répertoire de stockage ne déplacera pas vos données. Vous devrez alors le faire vous même ! Faites-le à vos risques et périls ! Continuer quand même ?</string>
