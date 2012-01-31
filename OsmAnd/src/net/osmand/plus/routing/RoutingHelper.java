@@ -484,7 +484,7 @@ public class RoutingHelper {
 								if (res.isCalculated()) {
 									setNewRoute(res);
 									// reset error wait interval
-									evalWaitInterval = 3000;
+									evalWaitInterval = 3001;
 								} else {
 									evalWaitInterval = evalWaitInterval * 4 / 3;
 									if (evalWaitInterval > 120000) {
