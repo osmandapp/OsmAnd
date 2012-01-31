@@ -1,7 +1,6 @@
 package net.osmand.plus.routing;
 
 import net.osmand.plus.activities.ApplicationMode;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper.TurnType;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
@@ -27,6 +26,8 @@ public class VoiceRouter {
 	private int currentDirection = 0;
  
 	private int currentStatus = STATUS_UNKNOWN;
+
+	private long lastTimeRouteRecalcAnnounced = 0;
 	
 	// default speed to have comfortable announcements (if actual speed is higher than it would be problem)
 	// Speed in m/s 
@@ -110,9 +111,7 @@ public class VoiceRouter {
 			DEFAULT_SPEED = 12;
 		}
 	}
-	
-	private OsmandSettings settings;
-	
+		
 	private boolean isDistanceLess(float currentSpeed, double dist, double etalon){
 		if(dist < etalon || (dist / currentSpeed < etalon / DEFAULT_SPEED)){
 			return true;
@@ -346,11 +345,11 @@ public class VoiceRouter {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if (play != null) {
 			if (updateRoute) {
-				//temporarily remove playing route recalculated message for further testing
-				//suppress "route recaluated" message for GPX routing, as message would be constantly triggered for any deviation from pre-saved track
-				//if (settings.FOLLOW_THE_GPX_ROUTE != null) {
-				//	play.routeRecalculated(router.getLeftDistance()).play();
-				//}
+				//suppress "route recaluated" message for 60sec
+				if (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000) {
+					play.routeRecalculated(router.getLeftDistance()).play();
+					lastTimeRouteRecalcAnnounced = System.currentTimeMillis();
+				}
 			} else {
 				play.newRouteCalculated(router.getLeftDistance()).play();
 			}
@@ -397,11 +396,11 @@ public class VoiceRouter {
 				if (type == ROUTE_CALCULATED) {
 					newCommand.newRouteCalculated(left).play();
 				} else if (type == ROUTE_RECALCULATED) {
-					//temporarily remove playing route recalculated message for further testing
-					//suppress "route recaluated" message for GPX routing, as message would be constantly triggered for any deviation from pre-saved track
-					//if (settings.FOLLOW_THE_GPX_ROUTE != null) {
-					//	newCommand.routeRecalculated(left).play();
-					//}
+					//suppress "route recaluated" message for 60sec
+					if (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000) {
+						newCommand.routeRecalculated(left).play();
+						lastTimeRouteRecalcAnnounced = System.currentTimeMillis();
+					}
 				}
 			}
 		}
