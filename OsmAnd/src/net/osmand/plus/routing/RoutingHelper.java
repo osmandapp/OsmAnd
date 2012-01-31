@@ -463,7 +463,7 @@ public class RoutingHelper {
 			double distance = MapUtils.getDistance(end, start.getLatitude(), start.getLongitude());
 			if (distance > DISTANCE_TO_USE_OSMAND_ROUTER) {
 				// display 'temporarily switched to CloudMade' message only once per error wait period and not for GPX routes
-				if (evalWaitInterval == 3000 && settings.FOLLOW_THE_GPX_ROUTE == null) {
+				if ((evalWaitInterval == 3000) && (settings.FOLLOW_THE_GPX_ROUTE == null)) {
 					showMessage(context.getString(R.string.osmand_routing_experimental), Toast.LENGTH_LONG);
 				}
 				serviceToUse = RouteService.CLOUDMADE;
