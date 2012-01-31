@@ -346,10 +346,11 @@ public class VoiceRouter {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if (play != null) {
 			if (updateRoute) {
+				//temporarily remove playing route recalculated message for further testing
 				//suppress "route recaluated" message for GPX routing, as message would be constantly triggered for any deviation from pre-saved track
-				if (settings.FOLLOW_THE_GPX_ROUTE != null) {
-					play.routeRecalculated(router.getLeftDistance()).play();
-				}
+				//if (settings.FOLLOW_THE_GPX_ROUTE != null) {
+				//	play.routeRecalculated(router.getLeftDistance()).play();
+				//}
 			} else {
 				play.newRouteCalculated(router.getLeftDistance()).play();
 			}
@@ -396,10 +397,11 @@ public class VoiceRouter {
 				if (type == ROUTE_CALCULATED) {
 					newCommand.newRouteCalculated(left).play();
 				} else if (type == ROUTE_RECALCULATED) {
+					//temporarily remove playing route recalculated message for further testing
 					//suppress "route recaluated" message for GPX routing, as message would be constantly triggered for any deviation from pre-saved track
-					if (settings.FOLLOW_THE_GPX_ROUTE != null) {
-						newCommand.routeRecalculated(left).play();
-					}
+					//if (settings.FOLLOW_THE_GPX_ROUTE != null) {
+					//	newCommand.routeRecalculated(left).play();
+					//}
 				}
 			}
 		}
