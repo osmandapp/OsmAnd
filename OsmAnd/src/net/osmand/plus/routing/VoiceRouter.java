@@ -347,9 +347,11 @@ public class VoiceRouter {
 		if (play != null) {
 			if (updateRoute) {
 				//suppress "route recaluated" message for 60sec
-				if (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000 && OsmandSettings.getOsmandSettings(this).FOLLOW_THE_GPX_ROUTE.get() == null) {
+				if (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000) {
+					//if (OsmandSettings.getOsmandSettings(this).FOLLOW_THE_GPX_ROUTE.get() == null) {
 					play.routeRecalculated(router.getLeftDistance()).play();
 					lastTimeRouteRecalcAnnounced = System.currentTimeMillis();
+					//}
 				}
 			} else {
 				play.newRouteCalculated(router.getLeftDistance()).play();
@@ -398,9 +400,11 @@ public class VoiceRouter {
 					newCommand.newRouteCalculated(left).play();
 				} else if (type == ROUTE_RECALCULATED) {
 					//suppress "route recaluated" message for 60sec
-					if (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000 && OsmandSettings.getOsmandSettings(this).FOLLOW_THE_GPX_ROUTE.get() == null) {
+					if (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000) {
+						//if (OsmandSettings.getOsmandSettings(this).FOLLOW_THE_GPX_ROUTE.get() == null) {
 						newCommand.routeRecalculated(left).play();
 						lastTimeRouteRecalcAnnounced = System.currentTimeMillis();
+						//}
 					}
 				}
 			}
