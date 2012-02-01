@@ -1,6 +1,7 @@
 package net.osmand.plus.routing;
 
 import net.osmand.plus.activities.ApplicationMode;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper.TurnType;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
@@ -346,7 +347,7 @@ public class VoiceRouter {
 		if (play != null) {
 			if (updateRoute) {
 				//suppress "route recaluated" message for 60sec
-				if (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000) {
+				if (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000 && OsmandSettings.getOsmandSettings(this).FOLLOW_THE_GPX_ROUTE.get() == null) {
 					play.routeRecalculated(router.getLeftDistance()).play();
 					lastTimeRouteRecalcAnnounced = System.currentTimeMillis();
 				}
@@ -397,7 +398,7 @@ public class VoiceRouter {
 					newCommand.newRouteCalculated(left).play();
 				} else if (type == ROUTE_RECALCULATED) {
 					//suppress "route recaluated" message for 60sec
-					if (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000) {
+					if (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000 && OsmandSettings.getOsmandSettings(this).FOLLOW_THE_GPX_ROUTE.get() == null) {
 						newCommand.routeRecalculated(left).play();
 						lastTimeRouteRecalcAnnounced = System.currentTimeMillis();
 					}
