@@ -1,7 +1,7 @@
 package net.osmand.plus.routing;
 
 import net.osmand.plus.activities.ApplicationMode;
-import net.osmand.plus.OsmandSettings;
+//import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper.TurnType;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
