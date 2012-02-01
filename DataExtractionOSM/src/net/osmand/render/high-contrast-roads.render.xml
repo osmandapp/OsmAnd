@@ -5,7 +5,7 @@
 	--> 
 
 	<!--
-		Try high contrast roads, suggested by Dirk Sommer: primary = #C00828, seconfary = #FF8000, tertiary = #F0D808
+		Try high contrast roads, suggested by Dirk Sommer: primary = #C00828, seconfary = #FF8000, tertiary = #F0C810
 	--> 
 
 
@@ -96,7 +96,7 @@
 		<group>
 			<filter tag="highway" value="tertiary"/>
 			<filter tag="highway" value="tertiary_link"/>
-			<groupFilter color="#F0D808" color_2="#F0D808" shadowRadius="1" cap="ROUND">
+			<groupFilter color="#F0C810" color_2="#F0C810" shadowRadius="1" cap="ROUND">
 				<filter minzoom="10" maxzoom="10" strokeWidth="3"/>
 				<filter minzoom="11" maxzoom="11" strokeWidth="4"/>
 				<filter minzoom="12" maxzoom="12" strokeWidth="5"/>
