@@ -1038,7 +1038,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		MenuItem navigateToPointMenu = menu.findItem(R.id.map_navigate_to_point);
 		if (navigateToPointMenu != null) {
 			if (settings.getPointToNavigate() != null) {
-				navigateToPointMenu.setTitle((routingHelper.isRouteCalculated() || routingHelper.isFollowingMode()) ? R.string.stop_routing : R.string.stop_navigation);
+				navigateToPointMenu.setTitle((routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()) ? R.string.stop_routing : R.string.stop_navigation);
 				navigateToPointMenu.setVisible(true);
 			} else {
 				navigateToPointMenu.setVisible(false);
@@ -1125,7 +1125,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 			return true;
 		case R.id.map_navigate_to_point:
 			if (mapLayers.getNavigationLayer().getPointToNavigate() != null) {
-				if(routingHelper.isRouteCalculated() || routingHelper.isFollowingMode()){
+				if(routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()){
 					routingHelper.setFinalAndCurrentLocation(null, routingHelper.getCurrentLocation(), routingHelper.getCurrentGPXRoute());
 				} else {
 					navigateToPoint(null);
