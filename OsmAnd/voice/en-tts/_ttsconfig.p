@@ -37,7 +37,7 @@ bear_right == ['keep right '].
 bear_left == ['keep left '].
 
 route_new_calc(Dist) == ['The trip is ', D] :- distance(Dist) == D.
-route_recalc(Dist) == ['Route recalculated, the trip is ', D] :- distance(Dist) == D.
+route_recalc(Dist) == ['Route recalculated, distance ', D] :- distance(Dist) == D.
 
 location_lost == ['g p s location lost '].
 
