@@ -676,10 +676,10 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 						mapLayers.getGpxLayer().addTrackPoint(pt);
 					}
 				}
-				if(settings.LIVE_MONITORING.get()){
-					liveMonitoringHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
-							location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
-				}
+			}
+			if(settings.LIVE_MONITORING.get()){
+				liveMonitoringHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
+						location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
 			}
 		}
 

@@ -38,7 +38,7 @@ public class LiveMonitoringHelper  {
 	}
 
 	public void sendData(float lat, float lon, float alt, float speed, float hdop, long time) {
-		String url = MessageFormat.format(settings.LIVE_MONITORING_URL.get(), lat, lon, time+"", hdop, alt, speed);
+		String url = MessageFormat.format(settings.LIVE_MONITORING_URL.get(), lat+"", lon+"", time+"", hdop+"", alt+"", speed+"");
 		try {
 			URL curl = new URL(url);
 			log.info("Monitor " + url);
