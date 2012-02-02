@@ -1,9 +1,9 @@
 package net.osmand.plus.routing;
 
 import net.osmand.plus.activities.ApplicationMode;
-//import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper.TurnType;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
@@ -348,10 +348,10 @@ public class VoiceRouter {
 			if (updateRoute) {
 				//suppress "route recaluated" message for 60sec
 				if (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000) {
-					//if (OsmandSettings.getOsmandSettings(this).FOLLOW_THE_GPX_ROUTE.get() == null) {
-					play.routeRecalculated(router.getLeftDistance()).play();
-					lastTimeRouteRecalcAnnounced = System.currentTimeMillis();
-					//}
+					if (router.getCurrentGPXRoute() == null) {
+						play.routeRecalculated(router.getLeftDistance()).play();
+						lastTimeRouteRecalcAnnounced = System.currentTimeMillis();
+					}
 				}
 			} else {
 				play.newRouteCalculated(router.getLeftDistance()).play();
@@ -401,10 +401,10 @@ public class VoiceRouter {
 				} else if (type == ROUTE_RECALCULATED) {
 					//suppress "route recaluated" message for 60sec
 					if (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000) {
-						//if (OsmandSettings.getOsmandSettings(this).FOLLOW_THE_GPX_ROUTE.get() == null) {
-						newCommand.routeRecalculated(left).play();
-						lastTimeRouteRecalcAnnounced = System.currentTimeMillis();
-						//}
+						if (router.getCurrentGPXRoute() == null) {
+							newCommand.routeRecalculated(left).play();
+							lastTimeRouteRecalcAnnounced = System.currentTimeMillis();
+						}
 					}
 				}
 			}
