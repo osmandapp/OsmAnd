@@ -97,11 +97,11 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			if (t.acceptTransportStop(n)) {
 				List<String> l;
 				if (!useName) {
-					l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0}"); //$NON-NLS-1$
+					l = t.getRouteDescriptionsForStop(n, "{1} {0}"); //$NON-NLS-1$
 				} else if (view.getSettings().USE_ENGLISH_NAMES.get()) {
-					l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0} - {3}"); //$NON-NLS-1$
+					l = t.getRouteDescriptionsForStop(n, "{1} {0} - {3}"); //$NON-NLS-1$
 				} else {
-					l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0} - {2}"); //$NON-NLS-1$
+					l = t.getRouteDescriptionsForStop(n, "{1} {0} - {2}"); //$NON-NLS-1$
 				}
 				if (l != null) {
 					for (String s : l) {
