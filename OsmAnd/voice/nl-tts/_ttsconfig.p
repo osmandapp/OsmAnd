@@ -14,20 +14,20 @@ turn('right', ['rechts afslaan ']).
 turn('right_sh', ['scherpe bocht naar rechts ']).
 turn('right_sl', ['rechts afbuigen ']).
 
-prepare_turn(Turn, Dist) == ['Na ', D, M] :- distance(Dist, dativ) == D, turn(Turn, M).
-turn(Turn, Dist) == ['Na ', D, M] :- distance(Dist, dativ) == D, turn(Turn, M).
+prepare_turn(Turn, Dist) == ['Na ', D, M] :- distance(Dist) == D, turn(Turn, M).
+turn(Turn, Dist) == ['Na ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
-prepare_make_ut(Dist) == ['Houdt rekening met een afslag ', D] :- distance(Dist, dativ) == D.
-make_ut(Dist) == ['Na ', D, ' afslaan '] :- distance(Dist, dativ) == D.
+prepare_make_ut(Dist) == ['Houdt rekening met een afslag ', D] :- distance(Dist) == D.
+make_ut(Dist) == ['Na ', D, ' afslaan '] :- distance(Dist) == D.
 make_ut == ['Graag afslaan '].
 
-prepare_roundabout(Dist) == ['Afslaan bij een rotonde ', D] :- distance(Dist, dativ) == D.
-roundabout(Dist, _Angle, Exit) == ['Na ', D, ' de rotonde oprijden en dan neemt u de ', E, 'afslag'] :- distance(Dist, dativ) == D, nth(Exit, E).
+prepare_roundabout(Dist) == ['Afslaan bij een rotonde ', D] :- distance(Dist) == D.
+roundabout(Dist, _Angle, Exit) == ['Na ', D, ' de rotonde oprijden en dan neemt u de ', E, 'afslag'] :- distance(Dist) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['Neemt u de ', E, 'afslag'] :- nth(Exit, E).
 
 go_ahead == ['Verder doorrijden '].
-go_ahead(Dist) == ['De weg', D,'volgen']:- distance(Dist, nominativ) == D.
+go_ahead(Dist) == ['De weg', D,'volgen']:- distance(Dist) == D.
 
 and_arrive_destination == ['dan heeft u uw bestemming bereikt '].
 
@@ -36,8 +36,8 @@ reached_destination == ['Bestemming bereikt '].
 bear_right == ['rechts aanhouden '].
 bear_left == ['links aanhouden '].
 
-route_new_calc(Dist) == ['De berekende afstand is ', D, ' lang'] :- distance(Dist, nominativ) == D.
-route_recalc(Dist) == ['Afstand opnieuw berekend, Verwijdering ', D] :- distance(Dist, nominativ) == D.
+route_new_calc(Dist) == ['De berekende afstand is ', D, ' lang'] :- distance(Dist) == D.
+route_recalc(Dist) == ['Afstand opnieuw berekend, Verwijdering ', D] :- distance(Dist) == D.
 
 location_lost == ['G P S  Signaal verloren '].
 
@@ -63,16 +63,11 @@ nth(17, 'zeventiende ').
 
 
 %%% distance measure
-distance(Dist, nominativ) == [ X, ' meter'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist, dativ) == [ X, ' meter'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist, nominativ) == [ X, ' meter'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
-distance(Dist, dativ) == [ X, ' meter'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
-distance(Dist, nominativ) == ['ongeveer een kilometer '] :- Dist < 1500.
-distance(Dist, dativ) == ['ongeveer een Kilometer '] :- Dist < 1500.
-distance(Dist, nominativ) == ['ongeveer ', X, ' Kilometer '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance(Dist, dativ) == ['ongeveer ', X, 'Kilometer '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance(Dist, nominativ) == [ X, ' Kilometer '] :- D is round(Dist/1000), num_atom(D, X).
-distance(Dist, dativ) == [ X, 'Kilometer '] :- D is round(Dist/1000), num_atom(D, X).
+distance(Dist) == [ X, ' meter'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
+distance(Dist) == [ X, ' meter'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist) == ['ongeveer een kilometer '] :- Dist < 1500.
+distance(Dist) == ['ongeveer ', X, ' Kilometer '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
+distance(Dist) == [ X, ' Kilometer '] :- D is round(Dist/1000), num_atom(D, X).
 
 
 %% resolve command main method
