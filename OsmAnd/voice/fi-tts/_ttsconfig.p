@@ -46,7 +46,7 @@ bear_left == ['pidä vasen '].
 route_new_calc(Dist) == ['Matkan pituus on ', D] :- distance(Dist, metria) == D.
 route_recalc(Dist) == ['Reitin uudelleenlaskenta ', D] :- distance(Dist, metria) == D.	
 
-location_lost == ['g p s location lost '].
+location_lost == ['g p s signal lost '].
 
 
 %% 

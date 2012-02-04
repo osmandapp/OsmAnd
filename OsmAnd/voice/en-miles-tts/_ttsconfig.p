@@ -8,10 +8,10 @@ preamble - [].
 
 %% TURNS 
 turn('left', ['turn left ']).
-turn('left_sh', ['turn sharp left ']).
+turn('left_sh', ['turn sharply left ']).
 turn('left_sl', ['turn slightly left ']).
 turn('right', ['turn right ']).
-turn('right_sh', ['turn sharp right ']).
+turn('right_sh', ['turn sharply right ']).
 turn('right_sl', ['turn slightly right ']).
 
 prepare_turn(Turn, Dist) == ['Prepare to ', M, ' after ', D] :- distance(Dist) == D, turn(Turn, M).
@@ -26,7 +26,7 @@ prepare_roundabout(Dist) == ['Prepare to enter a roundabout after ', D] :- dista
 roundabout(Dist, _Angle, Exit) == ['After ', D, ' enter the roundabout, and take the ', E, 'exit'] :- distance(Dist) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['take the ', E, 'exit'] :- nth(Exit, E).
 
-go_ahead == ['Continue straight ahead '].
+go_ahead == ['Go straight ahead '].
 go_ahead(Dist) == ['Follow the course of the road for ', D]:- distance(Dist) == D.
 
 and_arrive_destination == ['and arrive at your destination '].
@@ -39,7 +39,7 @@ bear_left == ['keep left '].
 route_new_calc(Dist) == ['The trip is ', D] :- distance(Dist) == D.
 route_recalc(Dist) == ['Route recalculated, distance ', D] :- distance(Dist) == D.
 
-location_lost == ['g p s location lost '].
+location_lost == ['g p s signal lost '].
 
 
 %% 
