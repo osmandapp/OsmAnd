@@ -2,6 +2,8 @@ package net.osmand.plus.activities;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import net.osmand.LogUtil;
 import net.osmand.Version;
@@ -23,6 +25,7 @@ import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.view.LayoutInflater;
@@ -44,7 +47,61 @@ public class DownloadTilesDialog {
 		this.app = app;
 		this.mapView = mapView;
 	}
-	
+
+	public class TileCoords {
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + getOuterType().hashCode();
+			result = prime * result + x;
+			result = prime * result + y;
+			result = prime * result + z;
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			TileCoords other = (TileCoords) obj;
+			if (!getOuterType().equals(other.getOuterType()))
+				return false;
+			if (x != other.x)
+				return false;
+			if (y != other.y)
+				return false;
+			if (z != other.z)
+				return false;
+			return true;
+		}
+
+		public TileCoords(int x, int y, int z) {
+			this.x = x;
+			this.y = y;
+			this.z = z;
+		}
+
+		public TileCoords(TileCoords c) {
+			this.x = c.x;
+			this.y = c.y;
+			this.z = c.z;
+		}
+
+		public void unzoom() {
+			x /= 2;
+			y /= 2;
+			z--;
+		}
+		int x, y, z;
+		private DownloadTilesDialog getOuterType() {
+			return DownloadTilesDialog.this;
+		}
+	}
 	
 	public void openDialog(){
 		BaseMapLayer mainLayer = mapView.getMainLayer();
@@ -166,6 +223,7 @@ public class DownloadTilesDialog {
 				int limitRequests = 50;
 				try {
 					ResourceManager rm = app.getResourceManager();
+					Set<TileCoords> excludedTiles = new HashSet<TileCoords>();
 					for (int z = zoom; z <= zoom + progress && !cancel; z++) {
 						int x1 = (int) MapUtils.getTileNumberX(z, latlonRect.left);
 						int x2 = (int) MapUtils.getTileNumberX(z, latlonRect.right);
@@ -173,6 +231,12 @@ public class DownloadTilesDialog {
 						int y2 = (int) MapUtils.getTileNumberY(z, latlonRect.bottom);
 						for (int x = x1; x <= x2 && !cancel; x++) {
 							for (int y = y1; y <= y2 && !cancel; y++) {
+
+								// skip tiles containing nothing of interest
+								TileCoords c = new TileCoords(x, y, z);
+								if (checkIfExcluded(excludedTiles, c))
+									continue;
+
 								String tileId = rm.calculateTileId(map, x, y, z);
 								if (rm.tileExistOnFileSystem(tileId, map, x, y, z)) {
 									progressDlg.setProgress(progressDlg.getProgress() + 1);
@@ -189,6 +253,31 @@ public class DownloadTilesDialog {
 												Thread.sleep(500);
 											} catch (InterruptedException e) {
 												throw new IllegalArgumentException(e);
+											}
+										}
+									}
+								}
+							}
+						}
+						while (instance.isSomethingBeingDownloaded()) {
+							try {
+								Thread.sleep(500);
+							} catch (InterruptedException e) {
+								throw new IllegalArgumentException(e);
+							}
+						}
+						// scan tiles, remember tiles containing only identical pixels
+						for (int x = x1; x <= x2 && !cancel; x++) {
+							for (int y = y1; y <= y2 && !cancel; y++) {
+								String tileId = rm.calculateTileId(map, x, y, z);
+								Bitmap tile = rm.getUnditheredImageTile(tileId);
+								if (tile != null) {
+									int flags = scanTile(tile);
+									for (int qx = 0; qx < 2; qx++) {
+										for (int qy = 0; qy < 2; qy++) {
+											if ((flags & (1 << (qx * 2 + qy))) != 0) {
+												TileCoords c = new TileCoords(x * 2 + qx, y * 2 + qy, z + 1);
+												excludedTiles.add(c);
 											}
 										}
 									}
@@ -228,6 +317,43 @@ public class DownloadTilesDialog {
 		progressDlg.show();
 	}
 
+	private boolean checkIfExcluded(Set<TileCoords> excludedTiles, TileCoords c) {
+		TileCoords c2 = new TileCoords(c);
+		while (c2.z > 0) {
+			if (excludedTiles.contains(c2))
+				return true;
+			c2.unzoom();
+		}
+		return false;
+	}
+
+	private int scanTile(Bitmap tile) {
+		int flags = 0x0f;
+
+		// skip checking for uneven dimensions
+		if (tile.getWidth() % 2 != 0 || tile.getHeight() % 2 != 0)
+			return flags;
+
+		int subW = tile.getWidth() / 2;
+		int subH = tile.getHeight() / 2;
+		int pixels[] = new int[subW * subH];
+		for (int qx = 0; qx < 2; qx++) {
+			for (int qy = 0; qy < 2; qy++) {
+				boolean diff = false;
+				tile.getPixels(pixels, 0, subW, qx * subW, qy * subH, subW, subH);
+				for (int y = 0; !diff && y < subH; y++) {
+					for (int x = 0; !diff && x < subW; x++) {
+						if (pixels[y * subW + x] != pixels[0])
+							diff = true;
+					}
+				}
+				if (diff)
+					flags &= ~(1 << (qx * 2 + qy));
+			}
+		}
+
+		return flags;
+	}
 
 	private void updateLabel(final int zoom, final RectF latlonRect, final TextView downloadText, final String template, int progress) {
 		int numberTiles = 0;

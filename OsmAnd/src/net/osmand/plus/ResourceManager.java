@@ -315,8 +315,26 @@ public class ResourceManager {
 		return cacheOfImages.get(tileId);
 	}
 	
-	
-	
+	public Bitmap getUnditheredImageTile(String tileId){
+		if(tileId == null || dirWithTiles == null){
+			return null;
+		}
+		Bitmap bmp = null;
+		if (dirWithTiles.canRead()) {
+			File en = new File(dirWithTiles, tileId);
+			if (en.exists()) {
+				try {
+					BitmapFactory.Options o = new BitmapFactory.Options();
+					o.inDither = false;
+					bmp = BitmapFactory.decodeFile(en.getAbsolutePath(), o);
+				} catch (OutOfMemoryError e) {
+					log.error("Out of memory error", e); //$NON-NLS-1$
+				}
+			}
+		}
+		return bmp;
+	}
+
 	protected Bitmap getRequestedImageTile(TileLoadDownloadRequest req){
 		if(req.tileId == null || req.dirWithTiles == null){
 			return null;
