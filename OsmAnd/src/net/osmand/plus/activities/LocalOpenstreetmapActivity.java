@@ -17,6 +17,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
+import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +60,15 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 		setContentView(R.layout.local_openstreetmap);
 		listAdapter = new LocalOpenstreetmapAdapter();
 
+		getExpandableListView().setOnChildClickListener(new OnChildClickListener() {
+			
+			@Override
+			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+				final OpenstreetmapPoint point = (OpenstreetmapPoint) listAdapter.getChild(groupPosition, childPosition);
+				showContextMenu(point);
+				return true;
+			}
+		});
 		getExpandableListView().setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
 			@Override
 			public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
