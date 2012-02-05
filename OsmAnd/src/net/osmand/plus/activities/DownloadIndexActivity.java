@@ -149,6 +149,8 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 		});
 		
 		indexFileNames = ((OsmandApplication)getApplication()).getResourceManager().getIndexFileNames();
+		((OsmandApplication)getApplication()).getResourceManager().getBackupIndexes(indexFileNames);
+		
 
 	    filterText = (EditText) findViewById(R.id.search_box);
 	    textWatcher = new TextWatcher() {
