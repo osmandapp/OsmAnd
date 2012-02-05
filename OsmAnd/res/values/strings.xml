@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="update_poi_does_not_change_indexes">POI changes inside application do not affect downloaded map files, changes are saved to local file instead.</string>
+	<string name="local_openstreetmap_uploading_poi">Uploading POI</string>
+	<string name="local_openstreetmap_poi_were_uploaded">{0} POI were uploaded</string>
+	<string name="local_openstreetmap_uploadall">Upload All POI</string>
+	<string name="local_openstreetmap_items"></string>
+	<string name="local_openstreetmap_show_poi">Show POI on Map</string>
+	<string name="local_openstreetmap_upload">Upload modification to OSM</string>
+	<string name="local_openstreetmap_delete">Delete POI modification</string>
+	<string name="local_openstreetmap_descr_title">Asynchrone Openstreetmap POI Edition:</string>
+	<string name="local_openstreetmap_settings">Local Openstreetmap Points</string>
+	<string name="local_openstreetmap_settings_descr">Local Points Saved in DB</string>
+    
 	<string name="live_monitoring_descr">Enable sending HTTP requests to a specified web service</string>
 	<string name="live_monitoring">Enable Live Tracking</string>
 	<string name="live_monitoring_interval_descr">Specify Live Tracking interval</string>
@@ -155,7 +167,6 @@
 	<string name="poi_filter_by_name">Search by name</string>
 	<string name="old_poi_file_should_be_deleted">The POI data file \'%1$s\' is redundant and can be deleted.</string>
 	<string name="update_poi_file_not_found">Local file to maintain POI changes not found and could not be created.</string>
-	<string name="update_poi_does_not_change_indexes">POI changes inside application do not affect downloaded map files, changes are saved to local file instead.</string>
 
 	<string name="button_upgrade_osmandplus">Upgrade Osmand+</string>
 	<string name="map_version_changed_info">Server contains map files not compatible with your current version of the application. To download and use them, please upgrade the application to newer version.</string>

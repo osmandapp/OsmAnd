@@ -107,6 +107,7 @@
 			<EditTextPreference android:title="@string/user_name" android:summary="@string/user_name_descr" android:key="user_name"></EditTextPreference>
 			<EditTextPreference android:title="@string/user_password" android:password="true" android:summary="@string/user_password_descr"
 				android:key="user_password"></EditTextPreference>
+			<Preference android:title="@string/local_openstreetmap_settings" android:key="local_openstreetmap_points" android:summary="@string/local_openstreetmap_settings_descr"></Preference>
 		</PreferenceCategory>
 		<PreferenceCategory android:title="OsmAnd debugging and development">
 			<CheckBoxPreference android:key="native_rendering" android:title="Native rendering" android:summary="Vector maps may display faster. May not work well on some devices."></CheckBoxPreference>

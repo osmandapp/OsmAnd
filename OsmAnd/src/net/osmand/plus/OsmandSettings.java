@@ -439,6 +439,8 @@ public class OsmandSettings {
 	public final OsmandPreference<String> USER_PASSWORD = 
 		new StringPreference("user_password", "", true);
 
+	public static final String LOCAL_OPENSTREETMAP_POINTS = "local_openstreetmap_points";
+
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<DayNightMode> DAYNIGHT_MODE = 

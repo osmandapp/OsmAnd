@@ -57,6 +57,8 @@
 		</activity>
 		<activity android:name="net.osmand.plus.activities.TestVoiceActivity"></activity>
 		<activity android:name="net.osmand.plus.activities.LocalIndexesActivity" android:label="@string/local_index_descr_title"></activity>
+		<activity android:name="net.osmand.plus.activities.LocalOpenstreetmapActivity" android:label="@string/local_openstreetmap_descr_title"></activity>
+		
 		<service android:process="net.osmand.plus" android:label="@string/process_navigation_service" android:name="net.osmand.plus.NavigationService">
 			<intent-filter><action android:name="net.osmand.plus.NavigationService"></action></intent-filter>
 		</service>
