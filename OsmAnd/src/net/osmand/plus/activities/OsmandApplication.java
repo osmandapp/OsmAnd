@@ -334,6 +334,7 @@ public class OsmandApplication extends Application {
 				boolean initialized = NativeOsmandLibrary.getLibrary(storage) != null;
 				if (!initialized) {
 					LOG.info("Native library could not loaded!");
+					osmandSettings.NATIVE_RENDERING.set(false);
 				}
 			}
 			warnings = manager.reloadIndexes(startDialog);
