@@ -42,13 +42,7 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 	/** dialogs **/
 	protected static final int DIALOG_PROGRESS_UPLOAD = 0;
 
-	/** bundles **/
-	protected static final String ALL_OPENSTREETMAP_POINTS = "all_openstreetmap_points";
-	protected static final String OPENSTREETMAP_POINT = "openstreetmap_point";
-
 	private LocalOpenstreetmapAdapter listAdapter;
-
-	private OsmandSettings settings;
 
 	private OpenstreetmapsDbHelper db;
 
@@ -56,13 +50,13 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 
 	private ProgressDialog progressPointDlg = null;
 
-	@SuppressWarnings("unchecked")
+	protected OpenstreetmapPoint[] toUpload;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.local_openstreetmap);
-		settings = OsmandSettings.getOsmandSettings(this);
 		listAdapter = new LocalOpenstreetmapAdapter();
 
 		getExpandableListView().setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
@@ -92,11 +86,11 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 
 		findViewById(R.id.UploadAllButton).setOnClickListener(new View.OnClickListener() {
 
+
 			@Override
 			public void onClick(View v) {
-				Bundle bundle = new Bundle();
-				bundle.putBoolean(ALL_OPENSTREETMAP_POINTS, true);
-				showDialog(DIALOG_PROGRESS_UPLOAD, bundle);
+				toUpload = listAdapter.values().toArray(new OpenstreetmapPoint[0]);
+				showDialog(DIALOG_PROGRESS_UPLOAD);
 			}
 		});
 	}
@@ -110,7 +104,6 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 						getString(R.string.uploading),
 						getString(R.string.local_openstreetmap_uploading_poi),
 						ProgressDialog.STYLE_HORIZONTAL).getDialog();
-
 				return progressPointDlg;
 		}
 		return null;
@@ -119,21 +112,11 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 	@Override
 	protected void onPrepareDialog(int id, Dialog dialog, Bundle args) {
 		switch (id) {
-			case DIALOG_PROGRESS_UPLOAD:
-				UploadOpenstreetmapPointAsyncTask uploadTask;
-
-				if (args.getBoolean(ALL_OPENSTREETMAP_POINTS)) {
-					List<OpenstreetmapPoint> l = listAdapter.values();
-					uploadTask = new UploadOpenstreetmapPointAsyncTask(progressPointDlg,
-																	   remote, db, l.size());
-					uploadTask.execute(l.toArray(new OpenstreetmapPoint[0]));
-				} else {
-					OpenstreetmapPoint info = (OpenstreetmapPoint) args.getSerializable(OPENSTREETMAP_POINT);
-					uploadTask = new UploadOpenstreetmapPointAsyncTask(progressPointDlg,
-																	   remote, db, 1);
-					uploadTask.execute(info);
-				}
-				break;
+		case DIALOG_PROGRESS_UPLOAD:
+			UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(progressPointDlg, remote, db,
+					toUpload.length);
+			uploadTask.execute(toUpload);
+			break;
 		}
 	}
 
@@ -239,10 +222,8 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 					} else if (resId == R.string.local_openstreetmap_delete) {
 						listAdapter.delete(info);
 					} else if (resId == R.string.local_openstreetmap_upload) {
-						Bundle bundle = new Bundle();
-						bundle.putBoolean(ALL_OPENSTREETMAP_POINTS, false);
-						bundle.putSerializable(OPENSTREETMAP_POINT, info);
-						showDialog(DIALOG_PROGRESS_UPLOAD, bundle);
+						toUpload = new OpenstreetmapPoint[]{info};
+						showDialog(DIALOG_PROGRESS_UPLOAD);
 					}
 				}
 			}
@@ -379,7 +360,6 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 			if(getString(R.string.local_openstreetmap_items).length() > 0){
 				t.append(" ").append(getString(R.string.local_openstreetmap_items));
 			}
-			List<OpenstreetmapPoint> list = data.get(group);
 			t.append("]");
 			nameView.setText(t.toString());
 
