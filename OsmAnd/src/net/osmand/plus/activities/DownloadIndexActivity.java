@@ -643,7 +643,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 		protected void onProgressUpdate(Object... values) {
 			for(Object o : values){
 				if(o instanceof DownloadEntry){
-					((DownloadIndexAdapter) getExpandableListAdapter()).notifyDataSetChanged();
+					((DownloadIndexAdapter) getExpandableListAdapter()).notifyDataSetInvalidated();
 					findViewById(R.id.DownloadButton).setVisibility(
 							entriesToDownload.isEmpty() ? View.GONE : View.VISIBLE);
 				} else if(o instanceof String) {
@@ -672,6 +672,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 			if(mainView != null){
 				mainView.setKeepScreenOn(false);
 			}
+			((DownloadIndexAdapter) getExpandableListAdapter()).notifyDataSetInvalidated();
 			tracker.dispatch();
 		}
 		
