@@ -594,7 +594,6 @@
 <string name="search_online_address">Internet</string>
 <string name="max_level_download_tile">Max. úroveň priblíženia</string>
 <string name="max_level_download_tile_descr">Výber maximálnej úrovne priblíženia na stiahnutie</string>
-<string name="route_about">O ceste</string>
 <string name="route_general_information">Celková vzdialenosť %1$s, čas cestovania %2$d h %3$d m.</string>
 <string name="router_service_descr">Výber rutovacej služby</string>
 <string name="router_service">Rutovanie</string>
@@ -616,7 +615,6 @@
 <string name="only_show">Iba zobraziť</string>
 <string name="follow">Nasledovať</string>
 <string name="recalculate_route_to_your_location">Prepočítať cestu podľa vášho umiestnenia</string>
-<string name="follow_route">Nasledovať cestu</string>
 <string name="mark_final_location_first">Prosím, najskôr zvoľte cieľ</string>
 <string name="get_directions">Pokyny</string>
 <string name="show_gps_status">Zobraziť stav GPS</string>

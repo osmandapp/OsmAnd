@@ -621,7 +621,6 @@
 	<string name="search_online_address">Internet</string>
 	<string name="max_level_download_tile">Max. online nagyítás</string>
 	<string name="max_level_download_tile_descr">Maximum nagyítási szint kiválasztása térképcsempék letöltéshez</string>
-	<string name="route_about">Útvonalterv</string>
 	<string name="route_general_information">Teljes távolság %1$s, utazási idő %2$d ó. %3$d p.</string>
 	<string name="router_service_descr">Online vagy offline útvonaltervező szolgáltatás kiválasztása</string>
 	<string name="router_service">Útvonaltervező</string>
@@ -643,7 +642,6 @@
 	<string name="only_show">Csak mutat</string>
 	<string name="follow">Követ</string>
 	<string name="recalculate_route_to_your_location">Újratervezés a jelenlegi pozíció alapján</string>
-	<string name="follow_route">Útvonal követése</string>
 	<string name="mark_final_location_first">Először válaszd ki a célpontot</string>
 	<string name="get_directions">Útirány</string>
 	<string name="show_gps_status">GPS állapot mutatása</string>

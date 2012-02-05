@@ -621,7 +621,6 @@
 	<string name="search_online_address">Internet</string>
 	<string name="max_level_download_tile">Max. online zoom</string>
 	<string name="max_level_download_tile_descr">Choose maximum zoom level to download for online map tiles</string>
-	<string name="route_about">About route</string>
 	<string name="route_general_information">Total distance %1$s, travelling time %2$d h %3$d m.</string>
 	<string name="router_service_descr">Choose online or offline routing services</string>
 	<string name="router_service">Routing service</string>
@@ -643,7 +642,6 @@
 	<string name="only_show">Only show</string>
 	<string name="follow">Follow</string>
 	<string name="recalculate_route_to_your_location">Select mode of transportation (optional):</string>
-	<string name="follow_route">Routing directions</string>
 	<string name="mark_final_location_first">Please select destination first</string>
 	<string name="get_directions">Directions</string>
     <string name="show_gps_status">Show GPS Status</string>

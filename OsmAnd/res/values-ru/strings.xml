@@ -534,7 +534,6 @@
 	<string name="search_online_address">Интернет</string>
 	<string name="max_level_download_tile">Уровень детализации</string>
 	<string name="max_level_download_tile_descr">Выберите максимальный уровень для загрузки из интернета</string>
-	<string name="route_about">О маршруте</string>
 	<string name="route_general_information">Общая протяженность = %1$s, время в пути = %2$d ч. %3$d мин.</string>
 	<string name="router_service_descr">Выберите сервис для прокладки маршрута</string>
 	<string name="router_service">Прокладка маршрута</string>
@@ -557,7 +556,6 @@
 	<string name="only_show">Только показать</string>
 	<string name="follow">Следовать</string>
 	<string name="recalculate_route_to_your_location">Пересчитывать маршрут в зависимости от местоположения</string>
-	<string name="follow_route">Следовать по маршруту</string>
 	<string name="mark_final_location_first">Отметьте сначала точку назначения</string>
 	<string name="get_directions">Маршрут</string>
 	<string name="gps_status_app_not_found">Приложение Gps status не найдено. Искать на маркете</string>

@@ -415,7 +415,7 @@ public class MapActivityActions implements DialogProvider {
 		builder.setTitle(R.string.show_route);
 		builder.setMessage(mapActivity.getRoutingHelper().getGeneralRouteInformation());
 		builder.setPositiveButton(R.string.default_buttons_save, saveDirections);
-		builder.setNeutralButton(R.string.route_about, showRoute);
+		builder.setNeutralButton(R.string.show_route, showRoute);
 		builder.setNegativeButton(R.string.close, null);
 		return builder.create();
     }
@@ -533,7 +533,7 @@ public class MapActivityActions implements DialogProvider {
 		};
     	
     	builder.setView(view);
-	builder.setTitle(R.string.follow_route);
+	builder.setTitle(R.string.get_directions);
     	if (followEnabled) {
 			builder.setPositiveButton(R.string.follow, followCall);
 			builder.setNeutralButton(R.string.gpx_navigation, useGpxNavigation);

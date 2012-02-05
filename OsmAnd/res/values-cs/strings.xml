@@ -836,7 +836,6 @@
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Maximální zvětšení</string>
   <string name="max_level_download_tile_descr">Jaké nejvyšší zvětšení mapy stahovat</string>
-  <string name="route_about">O cestě</string>
   <string name="route_general_information">Celková vzdálenost %1$s, doba cesty %2$d h %3$d m.</string>
   <string name="router_service_descr">Vyberte navigační službu</string>
   <string name="router_service">Navigace</string>
@@ -858,7 +857,6 @@
   <string name="only_show">Jen ukázat</string>
   <string name="follow">Následovat</string>
   <string name="recalculate_route_to_your_location">Přepočítat cestu podle Vaší polohy</string>
-  <string name="follow_route">Následovat cestu</string>
   <string name="mark_final_location_first">Prosím zadejte nejprve cíl</string>
   <string name="get_directions">Navigace</string>
   <string name="show_gps_status">Ukázat stav GPS</string>

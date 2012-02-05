@@ -548,7 +548,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="search_online_address">Internet</string>
 	<string name="max_level_download_tile">Online zoom lớn nhất</string>
 	<string name="max_level_download_tile_descr">Chọn tỉ lệ Zoom lớn nhất để tải về bản đồ tile online</string>
-	<string name="route_about">Thông tin về quãng đường</string>
 	<string name="route_general_information">Tổng khoảng cách %1$s, thời gian đi %2$d h %3$d m.</string>
 	<string name="router_service_descr">Chọn dịch vụ tìm đường Online hoặc Offline</string>
 	<string name="router_service">Dịch vụ tìm đường</string>
@@ -570,7 +569,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="only_show">Chỉ hiện</string>
 	<string name="follow">Đi theo</string>
 	<string name="recalculate_route_to_your_location">Select mode of transportation (optional) and guidance mode</string>
-	<string name="follow_route">Hướng đi</string>
 	<string name="mark_final_location_first">Hãy chọn điểm cần đến</string>
 	<string name="get_directions">Hướng</string>
     <string name="show_gps_status">Hiện tín hiệu GPS</string>

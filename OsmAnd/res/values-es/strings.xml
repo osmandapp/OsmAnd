@@ -155,7 +155,6 @@
 	<string name="first_time_download">Descargar índices</string>
 	<string name="first_time_msg">Gracias por descargar OsmAnd. \nPara poderusar todas las características de la aplicación requiere los archivos índices, que puede descargar(Opciones/Datos) o prepararlos usted mismo.Después de eso puede usar: búsqueda por dirección, POI, transporte.</string>
 	<string name="follow">Seguir</string>
-	<string name="follow_route">Seguir la ruta</string>
 	<string name="general_settings">General</string>
 	<string name="general_settings_descr">Configurar uso de internet, rotación de mapa, orientación de pantalla y otros</string>
 	<string name="get_directions">Indicaciones</string>
@@ -307,7 +306,6 @@
 	<string name="rotate_map_none_opt">No rotar</string>
 	<string name="rotate_map_to_bearing">Rotar mapa</string>
 	<string name="rotate_map_to_bearing_descr">Seleccionar cómo rotar el mapa</string>
-	<string name="route_about">Acerca de ruta</string>
 	<string name="route_general_information">Distancia total = %1$s, tiempo de viaje = %2$d h %3$d m.</string>
 	<string name="route_head">Cabecera</string>
 	<string name="route_tl">Gire a la izquierda y siga</string>

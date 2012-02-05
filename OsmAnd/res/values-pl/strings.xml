@@ -552,7 +552,6 @@
 <string name="search_online_address">Internet</string>
 <string name="max_level_download_tile">Maks. zoom online</string>
 <string name="max_level_download_tile_descr">Choose maximum zoom level to download for online map tiles</string>
-<string name="route_about">O trasie</string>
 <string name="route_general_information">Dystans całkowity %1$s, czas podróży %2$d h %3$d m.</string>
 <string name="router_service_descr">Wybierz usługę routującą (offline lub online)</string>
 <string name="router_service">Usługa routująca</string>
@@ -574,7 +573,6 @@
 <string name="only_show">Tylko pokaż</string>
 <string name="follow">Prowadź</string>
 <string name="recalculate_route_to_your_location">Wybierz rodzaj pojazdu (opcjonalnie) and guidance mode</string>
-<string name="follow_route">Prowadź</string>
 <string name="mark_final_location_first">Najpierw wybierz cel podróży</string>
 <string name="get_directions">Nawigacja</string>
 <string name="show_gps_status">Pokaż status GPS</string>

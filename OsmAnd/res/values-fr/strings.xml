@@ -550,7 +550,6 @@
 <string name="search_online_address">Internet</string>
 <string name="max_level_download_tile">Niveau de zoom max.</string>
 <string name="max_level_download_tile_descr">Choisir un niveau de zoom maximum pour le téléchargement</string>
-<string name="route_about">À propos du trajet</string>
 <string name="route_general_information">Distance totale = %1$s, temps de déplacement = %2$d h %3$d m.</string>
 <string name="router_service_descr">Choisir la source de l\'itinéraire à suivre</string>
 <string name="router_service">Itinéraire</string>
@@ -572,7 +571,6 @@
 <string name="only_show">Afficher seulement</string>
 <string name="follow">Suivre</string>
 <string name="recalculate_route_to_your_location">Recalculer le trajet à partir de votre emplacement</string>
-<string name="follow_route">Suivre le trajet</string>
 <string name="mark_final_location_first">Veuillez tout d\'abord sélectionner un point de destination</string>
 <string name="get_directions">Navigation</string>
 <string name="show_gps_status">Afficher le statut GPS</string>

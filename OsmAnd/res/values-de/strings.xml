@@ -619,7 +619,6 @@
 	<string name="search_online_address">Internet</string>
 	<string name="max_level_download_tile">Max. Online-Zoom</string>
 	<string name="max_level_download_tile_descr">Maximale Vergrößerung bis zu der Online-Karten-Daten (Kacheln) aus dem Internet geladen werden</string>
-	<string name="route_about">Routeninformationen</string>
 	<string name="route_general_information">%1$s Gesamtentfernung\n%2$d:%3$d Reisezeit</string>
 	<string name="router_service_descr">Online- oder Offline-Dienst zur Streckenberechnung wählen</string>
 	<string name="router_service">Routingdienst</string>
@@ -641,7 +640,6 @@
 	<string name="only_show">Nur anzeigen</string>
 	<string name="follow">Folgen</string>
 	<string name="recalculate_route_to_your_location">Transportmittel wählen (optional):</string>
-	<string name="follow_route">Route bestimmen</string>
 	<string name="mark_final_location_first">Bitte erst ein Ziel wählen</string>
 	<string name="get_directions">Route</string>
     <string name="show_gps_status">GPS-Status anzeigen</string>
