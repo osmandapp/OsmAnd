@@ -18,11 +18,11 @@ prepare_turn(Turn, Dist) == ['Na ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn, Dist) == ['Na ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
-prepare_make_ut(Dist) == ['Houdt rekening met een afslag ', D] :- distance(Dist) == D.
+prepare_make_ut(Dist) == ['Houdt rekening met een afslag over ', D] :- distance(Dist) == D.
 make_ut(Dist) == ['Na ', D, ' afslaan '] :- distance(Dist) == D.
 make_ut == ['Graag afslaan '].
 
-prepare_roundabout(Dist) == ['Afslaan bij een rotonde ', D] :- distance(Dist) == D.
+prepare_roundabout(Dist) == ['Afslaan bij een rotonde over ', D] :- distance(Dist) == D.
 roundabout(Dist, _Angle, Exit) == ['Na ', D, ' de rotonde oprijden en dan neemt u de ', E, 'afslag'] :- distance(Dist) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['Neemt u de ', E, 'afslag'] :- nth(Exit, E).
 
@@ -37,7 +37,7 @@ bear_right == ['rechts aanhouden '].
 bear_left == ['links aanhouden '].
 
 route_new_calc(Dist) == ['De berekende afstand is ', D, ' lang'] :- distance(Dist) == D.
-route_recalc(Dist) == ['Afstand opnieuw berekend, Verwijdering ', D] :- distance(Dist) == D.
+route_recalc(Dist) == ['Afstand is opnieuw berekend, de nieuwe afstand is', D] :- distance(Dist) == D.
 
 location_lost == ['G P S  Signaal verloren '].
 
