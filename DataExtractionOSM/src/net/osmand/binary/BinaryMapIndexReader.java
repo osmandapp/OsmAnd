@@ -789,6 +789,7 @@ public class BinaryMapIndexReader {
 		int ctop = 0;
 		int cbottom = 0;
 		req.numberOfReadSubtrees++;
+		List<BinaryMapDataObject> tempResults = null;
 		while(true){
 			if(req.isCancelled()){
 				return;
@@ -806,6 +807,11 @@ public class BinaryMapIndexReader {
 			}
 			switch (tag) {
 			case 0:
+				if (tempResults != null) {
+					for (int i = 0; i < tempResults.size(); i++) {
+						req.publish(tempResults.get(i));
+					}
+				}
 				return;
 			case OsmandOdb.MapTree.BOTTOM_FIELD_NUMBER :
 				cbottom = codedIS.readSInt32() + pbottom;
@@ -831,8 +837,10 @@ public class BinaryMapIndexReader {
 				}
 				BinaryMapDataObject mapObject = readMapDataObject(cleft, cright, ctop, cbottom, req, root);
 				if(mapObject != null){
-					req.searchResults.add(mapObject);
-					
+					if(tempResults == null){
+						tempResults = new ArrayList<BinaryMapDataObject>();
+					}
+					tempResults.add(mapObject);
 				}
 				codedIS.popLimit(oldLimit);
 				break;
@@ -851,9 +859,9 @@ public class BinaryMapIndexReader {
 			case OsmandOdb.MapTree.BASEID_FIELD_NUMBER :
 			case OsmandOdb.MapTree.OLDBASEID_FIELD_NUMBER :
 				long baseId = codedIS.readUInt64();
-				if (lastIndexResult != -1) {
-					for (int i = lastIndexResult; i < req.searchResults.size(); i++) {
-						BinaryMapDataObject rs = req.searchResults.get(i);
+				if (tempResults != null) {
+					for (int i = 0; i < tempResults.size(); i++) {
+						BinaryMapDataObject rs = tempResults.get(i);
 						rs.id += baseId;
 						if (rs.restrictions != null) {
 							for (int j = 0; j < rs.restrictions.length; j++) {
@@ -870,9 +878,9 @@ public class BinaryMapIndexReader {
 				List<String> stringTable = readStringTable();
 				codedIS.popLimit(oldLimit);
 
-				if (lastIndexResult != -1) {
-					for (int i = lastIndexResult; i < req.searchResults.size(); i++) {
-						BinaryMapDataObject rs = req.searchResults.get(i);
+				if (tempResults != null) {
+					for (int i = 0; i < tempResults.size(); i++) {
+						BinaryMapDataObject rs = tempResults.get(i);
 						if (rs.stringId != -1) {
 							rs.name = stringTable.get(rs.stringId);
 						}
@@ -1085,6 +1093,18 @@ public class BinaryMapIndexReader {
 		return poiIndexes;
 	}
 
+	public static SearchRequest<BinaryMapDataObject> buildSearchRequest(int sleft, int sright, int stop, int sbottom, int zoom,
+			SearchFilter searchFilter, ResultMatcher<BinaryMapDataObject> matcher) {
+		SearchRequest<BinaryMapDataObject> request = new SearchRequest<BinaryMapDataObject>();
+		request.left = sleft;
+		request.right = sright;
+		request.top = stop;
+		request.bottom = sbottom;
+		request.zoom = zoom;
+		request.resultMatcher = matcher;
+		request.searchFilter = searchFilter;
+		return request;
+	}
 	
 	public static SearchRequest<BinaryMapDataObject> buildSearchRequest(int sleft, int sright, int stop, int sbottom, int zoom, SearchFilter searchFilter){
 		SearchRequest<BinaryMapDataObject> request = new SearchRequest<BinaryMapDataObject>();
