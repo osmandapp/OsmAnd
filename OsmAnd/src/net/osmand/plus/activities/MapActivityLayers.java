@@ -16,6 +16,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.ResultMatcher;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.OsmAndFormatter;
 import net.osmand.data.AmenityType;
 import net.osmand.map.ITileSource;
@@ -48,7 +49,6 @@ import net.osmand.plus.views.TransportInfoLayer;
 import net.osmand.plus.views.TransportStopsLayer;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
@@ -62,7 +62,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -437,6 +436,11 @@ public class MapActivityLayers {
 				
 				settings.SHOW_FAVORITES.set(true);
 				getApplication().setGpxFileToDisplay(toShow, result == null);
+				WptPt loc = toShow.findPointToShow();
+				if(loc != null){
+					mapView.getAnimatedDraggingThread().startMoving(loc.lat, loc.lon, 
+							mapView.getZoom(), true);
+				}
 				updateGPXLayer();
 				mapView.refreshMap();
 				return true;
