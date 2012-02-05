@@ -13,9 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import net.osmand.data.Amenity;
@@ -26,7 +24,6 @@ import net.osmand.osm.EntityInfo;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.io.OsmBaseStorage;
-import net.osmand.plus.OpenstreetmapsDbHelper;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 
@@ -252,7 +249,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 			ser.startTag(null, "tag"); //$NON-NLS-1$
 			ser.attribute(null, "k", "created_by"); //$NON-NLS-1$ //$NON-NLS-2$
-			ser.attribute(null, "v", Version.APP_NAME_VERSION); //$NON-NLS-1$
+			ser.attribute(null, "v", Version.getFullVersion(ctx)); //$NON-NLS-1$
 			ser.endTag(null, "tag"); //$NON-NLS-1$
 			ser.endTag(null, "changeset"); //$NON-NLS-1$
 			ser.endTag(null, "osm"); //$NON-NLS-1$
@@ -313,6 +310,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		return false;
 	}
 
+	@Override
 	public boolean commitNodeImpl(Action action, Node n, EntityInfo info, String comment){
 		if (isNewChangesetRequired()){
 			changeSetId = openChangeSet(comment);
@@ -330,10 +328,10 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				ser.startDocument("UTF-8", true); //$NON-NLS-1$
 				ser.startTag(null, "osmChange"); //$NON-NLS-1$
 				ser.attribute(null, "version", "0.6");  //$NON-NLS-1$ //$NON-NLS-2$
-				ser.attribute(null, "generator", Version.APP_NAME); //$NON-NLS-1$
+				ser.attribute(null, "generator", Version.getAppName(ctx)); //$NON-NLS-1$
 				ser.startTag(null, stringAction.get(action));
 				ser.attribute(null, "version", "0.6"); //$NON-NLS-1$ //$NON-NLS-2$
-				ser.attribute(null, "generator", Version.APP_NAME); //$NON-NLS-1$
+				ser.attribute(null, "generator", Version.getAppName(ctx)); //$NON-NLS-1$
 				writeNode(n, info, ser, changeSetId, OsmandSettings.getOsmandSettings(ctx).USER_NAME.get());
 				ser.endTag(null, stringAction.get(action));
 				ser.endTag(null, "osmChange"); //$NON-NLS-1$
