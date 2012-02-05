@@ -533,18 +533,17 @@ public class MapActivityActions implements DialogProvider {
 		};
     	
     	builder.setView(view);
+	builder.setTitle(R.string.follow_route);
     	if (followEnabled) {
-    		builder.setTitle(R.string.follow_route);
 			builder.setPositiveButton(R.string.follow, followCall);
 			builder.setNeutralButton(R.string.gpx_navigation, useGpxNavigation);
 			builder.setNegativeButton(R.string.only_show, onlyShowCall);
 		} else {
-			builder.setTitle(R.string.show_route);
-			view.findViewById(R.id.TextView).setVisibility(View.GONE);
-    		builder.setPositiveButton(R.string.show_gpx_route, onlyShowCall);
-    		builder.setNegativeButton(R.string.default_buttons_cancel, null);
-    	}
-    	builder.show();
+			// view.findViewById(R.id.TextView).setVisibility(View.GONE);
+			builder.setPositiveButton(R.string.show_gpx_route, onlyShowCall);
+			builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		}
+	builder.show();
     }
     
     protected OsmandApplication getMyApplication() {
