@@ -204,33 +204,168 @@ public class SQLiteTileSource implements ITileSource {
 		if(db == null){
 			return null;
 		}
-        Bitmap stitchedImage = Bitmap.createBitmap(256*3, 256*3, Config.ARGB_8888);
+        Bitmap stitchedImage = Bitmap.createBitmap(268, 268, Config.ARGB_8888);
         Canvas canvas = new Canvas(stitchedImage);
         
-		for (int i = -1 ; i < 2 ; i++ ) {
-			for (int j = -1 ; j < 2 ; j++ ) {
-				Cursor cursor = db.rawQuery(
-						"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
-						new String[] {x+i+"", y+j+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-				byte[] blob = null;
-				if(cursor.moveToFirst()) {
-					blob = cursor.getBlob(0);
-				}
-				cursor.close();
-				if(blob != null){
-					Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
-					blob = null;
-					System.gc();
-					Rect src = new Rect(0, 0, 256, 256); 
-					Rect dst = new Rect((i+1)*256,(j+1)*256 , (i+2)*256, (j+2)*256);  
-					canvas.drawBitmap(Tile, src, dst, null);
-					Tile.recycle();
-				} else {
-					return null;
-				}
-			}
+		Cursor cursor = db.rawQuery(
+				"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
+				new String[] {x-1+"", y-1+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		byte[] blob = null;
+		if(cursor.moveToFirst()) {
+			blob = cursor.getBlob(0);
 		}
-		return Bitmap.createBitmap(stitchedImage,250,250,268,268); // return a 256x256 tile + 6px margin
+		cursor.close();
+		if(blob != null){
+			Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
+			blob = null;
+			System.gc();
+			Rect src = new Rect(250, 250, 6, 6); 
+			Rect dst = new Rect(0,0,0,0);  
+			canvas.drawBitmap(Tile, src, dst, null);
+			Tile.recycle();
+		}
+		
+		cursor = db.rawQuery(
+				"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
+				new String[] {x-1+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		blob = null;
+		if(cursor.moveToFirst()) {
+			blob = cursor.getBlob(0);
+		}
+		cursor.close();
+		if(blob != null){
+			Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
+			blob = null;
+			System.gc();
+			Rect src = new Rect(0, 250, 256, 6); 
+			Rect dst = new Rect(6,0,256,6);  
+			canvas.drawBitmap(Tile, src, dst, null);
+			Tile.recycle();
+		}
+		
+		cursor = db.rawQuery(
+				"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
+				new String[] {x-1+"", y+1+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		blob = null;
+		if(cursor.moveToFirst()) {
+			blob = cursor.getBlob(0);
+		}
+		cursor.close();
+		if(blob != null){
+			Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
+			blob = null;
+			System.gc();
+			Rect src = new Rect(0, 250, 6, 6); 
+			Rect dst = new Rect(262,0,6,6);  
+			canvas.drawBitmap(Tile, src, dst, null);
+			Tile.recycle();
+		}
+		
+		cursor = db.rawQuery(
+				"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
+				new String[] {x+"", y-1+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		blob = null;
+		if(cursor.moveToFirst()) {
+			blob = cursor.getBlob(0);
+		}
+		cursor.close();
+		if(blob != null){
+			Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
+			blob = null;
+			System.gc();
+			Rect src = new Rect(250, 0, 6, 256); 
+			Rect dst = new Rect(0,6,6,256);  
+			canvas.drawBitmap(Tile, src, dst, null);
+			Tile.recycle();
+		}
+		
+		cursor = db.rawQuery(
+				"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
+				new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		blob = null;
+		if(cursor.moveToFirst()) {
+			blob = cursor.getBlob(0);
+		}
+		cursor.close();
+		if(blob != null){
+			Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
+			blob = null;
+			System.gc();
+			Rect src = new Rect(0, 0, 256, 256); 
+			Rect dst = new Rect(6,6,256,256);  
+			canvas.drawBitmap(Tile, src, dst, null);
+			Tile.recycle();
+		}
+		cursor = db.rawQuery(
+				"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
+				new String[] {x+"", y+1+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		blob = null;
+		if(cursor.moveToFirst()) {
+			blob = cursor.getBlob(0);
+		}
+		cursor.close();
+		if(blob != null){
+			Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
+			blob = null;
+			System.gc();
+			Rect src = new Rect(0, 0, 6, 256); 
+			Rect dst = new Rect(262,6,6,256);  
+			canvas.drawBitmap(Tile, src, dst, null);
+			Tile.recycle();
+		}
+		cursor = db.rawQuery(
+				"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
+				new String[] {x+1+"", y-1+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		blob = null;
+		if(cursor.moveToFirst()) {
+			blob = cursor.getBlob(0);
+		}
+		cursor.close();
+		if(blob != null){
+			Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
+			blob = null;
+			System.gc();
+			Rect src = new Rect(250, 0, 6, 6); 
+			Rect dst = new Rect(0,262,6,6);  
+			canvas.drawBitmap(Tile, src, dst, null);
+			Tile.recycle();
+		}
+		cursor = db.rawQuery(
+				"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
+				new String[] {x+1+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		blob = null;
+		if(cursor.moveToFirst()) {
+			blob = cursor.getBlob(0);
+		}
+		cursor.close();
+		if(blob != null){
+			Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
+			blob = null;
+			System.gc();
+			Rect src = new Rect(0, 0, 256, 6); 
+			Rect dst = new Rect(6,262,256,6);  
+			canvas.drawBitmap(Tile, src, dst, null);
+			Tile.recycle();
+		}
+		cursor = db.rawQuery(
+				"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
+				new String[] {x+1+"", y+1+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		blob = null;
+		if(cursor.moveToFirst()) {
+			blob = cursor.getBlob(0);
+		}
+		cursor.close();
+		if(blob != null){
+			Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
+			blob = null;
+			System.gc();
+			Rect src = new Rect(0, 0, 6, 6); 
+			Rect dst = new Rect(262,262,6,6);  
+			canvas.drawBitmap(Tile, src, dst, null);
+			Tile.recycle();
+		}
+		
+		return stitchedImage; // return a 256x256 tile + 6px margin
 		
 	}
 	public Bitmap getImage(int x, int y, int zoom) {
@@ -273,7 +408,6 @@ public class SQLiteTileSource implements ITileSource {
 				int scaleto = (int)(256+12*Math.pow(2,n));
 				Bitmap scaled = Bitmap.createScaledBitmap(xn,scaleto,scaleto,true);
 				xn.recycle();
-				System.gc();
 				return Bitmap.createBitmap(scaled,(int)(6*Math.pow(2,n)),(int)(6*Math.pow(2,n)),256,256);
 			}
 			return null;
