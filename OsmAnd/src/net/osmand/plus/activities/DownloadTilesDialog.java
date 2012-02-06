@@ -332,7 +332,7 @@ public class DownloadTilesDialog {
 
 		// skip checking for uneven dimensions
 		if (tile.getWidth() % 2 != 0 || tile.getHeight() % 2 != 0)
-			return flags;
+			return 0x00;
 
 		int subW = tile.getWidth() / 2;
 		int subH = tile.getHeight() / 2;
