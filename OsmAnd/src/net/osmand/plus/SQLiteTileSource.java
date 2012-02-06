@@ -19,7 +19,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDiskIOException;
 import android.database.sqlite.SQLiteStatement;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Rect;
 
 public class SQLiteTileSource implements ITileSource {
 
@@ -33,7 +36,8 @@ public class SQLiteTileSource implements ITileSource {
 	private SQLiteDatabase db;
 	private final File file;
 	private int minZoom = 1;
-	private int maxZoom = 17;
+	private int maxZoom = 17; 
+	private int baseZoom = 17; //Default base zoom
 	
 	public SQLiteTileSource(File f, List<TileSourceTemplate> toFindUrl){
 		this.file = f;
@@ -139,7 +143,8 @@ public class SQLiteTileSource implements ITileSource {
 				long z;
 				z = db.compileStatement("SELECT minzoom FROM info").simpleQueryForLong(); //$NON-NLS-1$
 				if (z < 17 && z >= 0)
-					maxZoom = 17 - (int)z;
+					baseZoom = 17 - (int)z; // sqlite base zoom, =11 for SRTM hillshade
+					maxZoom = 17; // Cheat to have tiles request even if zoom level not in sqlite	
 				z = db.compileStatement("SELECT maxzoom FROM info").simpleQueryForLong(); //$NON-NLS-1$
 				if (z < 17 && z >= 0)
 					minZoom = 17 - (int)z;
@@ -154,14 +159,15 @@ public class SQLiteTileSource implements ITileSource {
 		if(db == null){
 			return false;
 		}
-		Cursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE z = ? LIMIT 1", new String[] {(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-		try {
-			boolean e = cursor.moveToFirst();
-			cursor.close();
-			return e;
-		} catch (SQLiteDiskIOException e) {
-			return false;
-		}
+		return true; // Cheat to test resampling /o modifying ressourceManager
+//		Cursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE z = ? LIMIT 1", new String[] {(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+//		try {
+//			boolean e = cursor.moveToFirst();
+//			cursor.close();
+//			return e;
+//		} catch (SQLiteDiskIOException e) {
+//			return false;
+//		}
 	}
 	
 	public boolean exists(int x, int y, int zoom) {
@@ -169,18 +175,19 @@ public class SQLiteTileSource implements ITileSource {
 		if(db == null){
 			return false;
 		}
-		long time = System.currentTimeMillis();
-		Cursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-		try {
-			boolean e = cursor.moveToFirst();
-			cursor.close();
-			if (log.isDebugEnabled()) {
-				log.debug("Checking tile existance x = " + x + " y = " + y + " z = " + zoom + " for " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-			}
-			return e;
-		} catch (SQLiteDiskIOException e) {
-			return false;
-		}
+		return true; // Cheat to test resampling /o modifying ressourceManager
+//		long time = System.currentTimeMillis();
+//		Cursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+//		try {
+//			boolean e = cursor.moveToFirst();
+//			cursor.close();
+//			if (log.isDebugEnabled()) {
+//				log.debug("Checking tile existance x = " + x + " y = " + y + " z = " + zoom + " for " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+//			}
+//			return e;
+//		} catch (SQLiteDiskIOException e) {
+//			return false;
+//		}
 	}
 	
 	public boolean isLocked() {
@@ -191,23 +198,87 @@ public class SQLiteTileSource implements ITileSource {
 		return db.isDbLockedByOtherThreads();
 	}
 
+	private Bitmap getMetaTile(int x, int y, int zoom) {
+		// return a 3x3 metatile (768x768 px) around a given tile
+		SQLiteDatabase db = getDatabase();
+		if(db == null){
+			return null;
+		}
+        Bitmap stitchedImage = Bitmap.createBitmap(256*3, 256*3, Config.ARGB_8888);
+        Canvas canvas = new Canvas(stitchedImage);
+        
+		for (int i = -1 ; i < 2 ; i++ ) {
+			for (int j = -1 ; j < 2 ; j++ ) {
+				Cursor cursor = db.rawQuery(
+						"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
+						new String[] {x+i+"", y+j+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+				byte[] blob = null;
+				if(cursor.moveToFirst()) {
+					blob = cursor.getBlob(0);
+				}
+				cursor.close();
+				if(blob != null){
+					Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
+					blob = null;
+					System.gc();
+					Rect src = new Rect(0, 0, 256, 256); 
+					Rect dst = new Rect((i+1)*256,(j+1)*256 , (i+2)*256, (j+2)*256);  
+					canvas.drawBitmap(Tile, src, dst, null);
+					Tile.recycle();
+				} else {
+					return null;
+				}
+			}
+		}
+		return Bitmap.createBitmap(stitchedImage,250,250,268,268); // return a 256x256 tile + 6px margin
+		
+	}
 	public Bitmap getImage(int x, int y, int zoom) {
 		SQLiteDatabase db = getDatabase();
 		if(db == null){
 			return null;
 		}
-		Cursor cursor = db.rawQuery("SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-		byte[] blob = null;
-		if(cursor.moveToFirst()) {
-			blob = cursor.getBlob(0);
-		}
-		cursor.close();
-		if(blob != null){
-			return BitmapFactory.decodeByteArray(blob, 0, blob.length);
-		}
-		return null;
+		if ( zoom <= baseZoom) {
+			Cursor cursor = db.rawQuery("SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+			byte[] blob = null;
+			if(cursor.moveToFirst()) {
+				blob = cursor.getBlob(0);
+			}
+			cursor.close();
+			if(blob != null){			
+				return BitmapFactory.decodeByteArray(blob, 0, blob.length);
+			}
+			return null;
+		} else {
+			int n = zoom - baseZoom;
+			int base_xtile = (int)(x / Math.pow(2,n));
+			int base_ytile = (int)(y / Math.pow(2,n));
+			
+			Bitmap metaTile = getMetaTile(base_xtile, base_ytile, baseZoom);
+			
+			if(metaTile != null){
+				// in tile space:
+				int scaledSize= (int)(256/Math.pow(2,n));
+		        int offset_x=  (int)((x - base_xtile*Math.pow(2,n)));
+		        int offset_y=  (int)((y - base_ytile*Math.pow(2,n)));
+		        int delta_px = (int)(scaledSize*offset_x);
+		        int delta_py = (int)(scaledSize*offset_y);
+		        
+				Bitmap xn = Bitmap.createBitmap(metaTile,
+						delta_px, //(+6)
+						delta_py, //(+6)
+						scaledSize+12,
+						scaledSize+12);
+				metaTile.recycle();
+				int scaleto = (int)(256+12*Math.pow(2,n));
+				Bitmap scaled = Bitmap.createScaledBitmap(xn,scaleto,scaleto,true);
+				xn.recycle();
+				System.gc();
+				return Bitmap.createBitmap(scaled,(int)(6*Math.pow(2,n)),(int)(6*Math.pow(2,n)),256,256);
+			}
+			return null;
+			}
 	}
-	
 	public ITileSource getBase() {
 		return base;
 	}
