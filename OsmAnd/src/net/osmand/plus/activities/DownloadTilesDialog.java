@@ -269,6 +269,11 @@ public class DownloadTilesDialog {
 						// scan tiles, remember tiles containing only identical pixels
 						for (int x = x1; x <= x2 && !cancel; x++) {
 							for (int y = y1; y <= y2 && !cancel; y++) {
+								// skip tiles containing nothing of interest
+								TileCoords c = new TileCoords(x, y, z);
+								if (checkIfExcluded(excludedTiles, c))
+									continue;
+
 								String tileId = rm.calculateTileId(map, x, y, z);
 								Bitmap tile = rm.getUnditheredImageTile(tileId);
 								if (tile != null) {
@@ -276,7 +281,7 @@ public class DownloadTilesDialog {
 									for (int qx = 0; qx < 2; qx++) {
 										for (int qy = 0; qy < 2; qy++) {
 											if ((flags & (1 << (qx * 2 + qy))) != 0) {
-												TileCoords c = new TileCoords(x * 2 + qx, y * 2 + qy, z + 1);
+												c = new TileCoords(x * 2 + qx, y * 2 + qy, z + 1);
 												excludedTiles.add(c);
 											}
 										}
