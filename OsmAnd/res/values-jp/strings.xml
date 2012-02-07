@@ -524,7 +524,7 @@ POIの更新は利用できません</string>
      <string name="downloading_file">ファイルをダウンロード中...</string>
      <string name="downloading">ダウンロード中...</string>
      <string name="downloading_list_indexes">利用可能な地域のリストをダウンロード中</string>
-     <string name="list_index_files_was_not_loaded">地域のリストはosmand.googlecode.com 
+     <string name="list_index_files_was_not_loaded">地域のリストはosmand.net 
 から参照されていません。</string>
  <string name="select_index_file_to_download">自分の地域が見つからない場合、
 自分で作ることができます。osmand.net を参照</string>

@@ -562,7 +562,7 @@
 <string name="downloading_file">Téléchargement du fichier...</string>
 <string name="downloading">Téléchargement...</string>
 <string name="downloading_list_indexes">Téléchargement de la liste des régions disponibles</string>
-<string name="list_index_files_was_not_loaded">Les fichiers d\'index ne sont pas de osmand.googlecode.com.</string>
+<string name="list_index_files_was_not_loaded">Les fichiers d\'index ne sont pas de osmand.net.</string>
 <string name="select_index_file_to_download">Si vous ne pouvez trouver votre région, vous pouvez la créer vous-même. (Voir sur osmand.net)</string>
 <string name="show_poi_on_map">Voir sur la carte</string>
 <string name="fav_points_edited">Le favoris a été modifié</string>

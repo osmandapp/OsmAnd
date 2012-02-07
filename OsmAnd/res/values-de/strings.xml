@@ -631,7 +631,7 @@
 	<string name="downloading_file">Herunterladen der Datei ...</string>
 	<string name="downloading">Herunterladen ...</string>
 	<string name="downloading_list_indexes">Herunterladen einer Liste der verfügbaren Regionen ...</string>
-	<string name="list_index_files_was_not_loaded">Die Liste der Regionen wurde von osmand.googlecode.com nicht geladen.</string>
+	<string name="list_index_files_was_not_loaded">Die Liste der Regionen wurde von osmand.net nicht geladen.</string>
     <string name="select_index_file_to_download">Nicht vorhandene Regionen können selbst erstellt werden, siehe osmand.net.</string>
 	<string name="show_poi_on_map">Auf Karte zeigen</string>
 	<string name="fav_points_edited">Favorit wurde bearbeitet</string>

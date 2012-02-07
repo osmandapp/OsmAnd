@@ -546,9 +546,9 @@
 	<string name="downloading_file">Загрузка файла</string>
 	<string name="downloading">Загрузка...</string>
 	<string name="downloading_list_indexes">Загружается список доступных индексов</string>
-	<string name="list_index_files_was_not_loaded">Не найдены доступные индекс файлы на osmand.googlecode.com</string>
+	<string name="list_index_files_was_not_loaded">Не найдены доступные индекс файлы на osmand.net</string>
     <string name="select_index_file_to_download">Если вы не можете найти регион, вы можете создать его самостоятельно.
-Читайте на osmand.googlecode.com .</string>
+Читайте на osmand.net.</string>
 	<string name="show_poi_on_map">Показать на карте</string>
 	<string name="fav_points_edited">Отредактирована избранная точка</string>
 	<string name="fav_points_not_exist">Не существует избранных точек</string>

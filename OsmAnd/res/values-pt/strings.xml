@@ -249,7 +249,7 @@
 	<string name="downloading_file">Baixando arquivo...</string>
 	<string name="downloading">Baixando...</string>
 	<string name="downloading_list_indexes">Baixando lista de regiões disponíveis...</string>
-	<string name="list_index_files_was_not_loaded">Os arquivos de índice não puderam ser recuperados de osmand.googlecode.com.</string>
+	<string name="list_index_files_was_not_loaded">Os arquivos de índice não puderam ser recuperados de osmand.net.</string>
 	<string name="select_index_file_to_download">Se você não encontra a sua região, você pode criá-la. Veja osmand.net</string>
 	<string name="show_poi_on_map">Mostrar no mapa</string>
 	<string name="fav_points_edited">O favorito foi modificado</string>

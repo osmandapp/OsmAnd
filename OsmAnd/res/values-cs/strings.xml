@@ -848,7 +848,7 @@
   <string name="downloading_file">Stahuji soubor...</string>
   <string name="downloading">Stahuji...</string>
   <string name="downloading_list_indexes">Stahuji seznam dostupných indexů</string>
-  <string name="list_index_files_was_not_loaded">Seznam indexů z osmand.googlecode.com nebyl stažen.</string>
+  <string name="list_index_files_was_not_loaded">Seznam indexů z osmand.net nebyl stažen.</string>
   <string name="select_index_file_to_download">Pokud nemůžete najít svou oblast, můžete si data vytvořit sami, viz osmand.net</string>
   <string name="show_poi_on_map">Ukázat na mapě</string>
   <string name="fav_points_edited">Oblíbené místo bylo upraveno</string>

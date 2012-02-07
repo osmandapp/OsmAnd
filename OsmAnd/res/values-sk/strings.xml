@@ -616,7 +616,7 @@
 <string name="downloading_file">Sťahuje sa súbor...</string>
 <string name="downloading">Sťahovanie...</string>
 <string name="downloading_list_indexes">Sťahuje sa zoznam dostupných oblastí</string>
-<string name="list_index_files_was_not_loaded">Zoznam oblastí nebol prijatý z osmand.googlecode.com.</string>
+<string name="list_index_files_was_not_loaded">Zoznam oblastí nebol prijatý z osmand.net.</string>
 <string name="select_index_file_to_download">Ak nemôžete nájsť Vašu oblasť, môžete si ju sami vytvoriť. Viď osmand.net</string>
 <string name="show_poi_on_map">Zobraziť na mape</string>
 <string name="fav_points_edited">Obľúbený bod bol upravený</string>

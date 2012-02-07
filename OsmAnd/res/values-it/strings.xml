@@ -608,7 +608,7 @@
 	<string name="downloading_file">Ricezione file...</string>
 	<string name="downloading">In ricezione...</string>
 	<string name="downloading_list_indexes">Ricezione lista regioni disponibili...</string>
-	<string name="list_index_files_was_not_loaded">I file di indice non sono stati trovati su osmand.googlecode.com.</string>
+	<string name="list_index_files_was_not_loaded">I file di indice non sono stati trovati su osmand.net.</string>
     <string name="select_index_file_to_download">Se non trovate la vostra zona potete generarla da voi. Consultare osmand.net</string>
 	<string name="show_poi_on_map">Visualizza sulla mappa</string>
 	<string name="fav_points_edited">Favorito modificato</string>

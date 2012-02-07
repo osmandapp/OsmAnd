@@ -186,7 +186,7 @@
 	<string name="layer_transport">Paradas de transporte</string>
 	<string name="layer_transport_route">Ruta de transporte</string>
 	<string name="layer_yandex_traffic">Tráfico Yandex</string>
-	<string name="list_index_files_was_not_loaded">Los archivos índices no son descargados de osmand.googlecode.com.</string>
+	<string name="list_index_files_was_not_loaded">Los archivos índices no son descargados de osmand.net.</string>
 	<string name="loading">Cargando...</string>
 	<string name="loading_cities">Cargando ciudades...</string>
 	<string name="loading_data">Cargando datos...</string>

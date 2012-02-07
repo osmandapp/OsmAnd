@@ -560,7 +560,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="downloading_file">Đang tải tập tin...</string>
 	<string name="downloading">Đang tải..</string>
 	<string name="downloading_list_indexes">Đang tải danh sách các khu vực hiện có...</string>
-	<string name="list_index_files_was_not_loaded">Không thể truy cập danh sách các khu vực có bản đồ từ osmand.googlecode.com.</string>
+	<string name="list_index_files_was_not_loaded">Không thể truy cập danh sách các khu vực có bản đồ từ osmand.net.</string>
     <string name="select_index_file_to_download">Nếu không có bản đồ trong khu vực bạn cần, bạn có thể tự làm bằng cách tham khảo hướng dẫn tại osmand.net</string>
 	<string name="show_poi_on_map">Hiện trên bản đồ</string>
 	<string name="fav_points_edited">Điểm ưa thích đã được chỉnh sửa</string>

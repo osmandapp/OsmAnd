@@ -633,7 +633,7 @@
 	<string name="downloading_file">Fájl letöltése&#8230;</string>
 	<string name="downloading">Letöltés&#8230;</string>
 	<string name="downloading_list_indexes">Elérhető térképadatok listájának letöltése</string>
-	<string name="list_index_files_was_not_loaded">Nincs letöltve a térképadatok listája az osmand.googlecode.com-ról.</string>
+	<string name="list_index_files_was_not_loaded">Nincs letöltve a térképadatok listája az osmand.net-ról.</string>
 	<string name="select_index_file_to_download">Ha nem találja a régióját, elkészítheti magának. Lásd: osmand.net</string>
 	<string name="show_poi_on_map">Mutasd a térképen</string>
 	<string name="fav_points_edited">Kedvenc pontok szerkesztése kész</string>
