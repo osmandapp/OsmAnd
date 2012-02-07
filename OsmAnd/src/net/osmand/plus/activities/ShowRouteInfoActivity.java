@@ -22,6 +22,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 /**
  * 
@@ -40,13 +42,12 @@ public class ShowRouteInfoActivity extends ListActivity {
 		lv.setId(android.R.id.list);
 		header = new TextView(this);
 		helper = ((OsmandApplication)getApplication()).getRoutingHelper();
-		
 		lv.addHeaderView(header);
 		setContentView(lv);
 		dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -73,7 +74,24 @@ public class ShowRouteInfoActivity extends ListActivity {
 			MapActivity.launchMapActivityMoveToTop(this);
 		}
 	}
-	
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuItem item = menu.add(0, 0, 0, getString(R.string.edit_filter_save_as_menu_item)+"...");
+		item.setIcon(android.R.drawable.ic_menu_save);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if(item.getItemId() == 0){
+			//mapActivityActions.saveDirections();
+		} else {
+			return false;
+		}
+		return true;
+	}
 
 	class RouteInfoAdapter extends ArrayAdapter<RouteDirectionInfo> {
 		RouteInfoAdapter(List<RouteDirectionInfo> list) {
@@ -112,6 +130,5 @@ public class ShowRouteInfoActivity extends ListActivity {
 			return row;
 		}
 	}
-
 }
 
