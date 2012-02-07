@@ -18,15 +18,15 @@ prepare_turn(Turn, Dist) == ['Na ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn, Dist) == ['Na ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
-prepare_make_ut(Dist) == ['Houdt rekening met een afslag over ', D] :- distance(Dist) == D.
-make_ut(Dist) == ['Na ', D, ' afslaan '] :- distance(Dist) == D.
-make_ut == ['Graag afslaan '].
+prepare_make_ut(Dist) == ['Houdt rekening  met een ommekeer na ', D ] :- distance(Dist) == D. 
+make_ut(Dist) == ['Na ', D, ' omkeren'] :- distance(Dist) == D.
+make_ut == ['Graag nu omkeren '].
 
-prepare_roundabout(Dist) == ['Afslaan bij een rotonde over ', D] :- distance(Dist) == D.
+prepare_roundabout(Dist) == ['Houdt rekening met een rotonde na ', D] :- distance(Dist) == D.
 roundabout(Dist, _Angle, Exit) == ['Na ', D, ' de rotonde oprijden en dan neemt u de ', E, 'afslag'] :- distance(Dist) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['Neemt u de ', E, 'afslag'] :- nth(Exit, E).
 
-go_ahead == ['Verder doorrijden '].
+go_ahead == ['Verder dóorrijden '].
 go_ahead(Dist) == ['De weg', D,'volgen']:- distance(Dist) == D.
 
 and_arrive_destination == ['dan heeft u uw bestemming bereikt '].
