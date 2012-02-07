@@ -266,7 +266,10 @@ public class EditingPOIActivity implements DialogProvider {
 					}
 				}
 				n.putTag(tag, val);
-				n.putTag(OSMTagKey.NAME.getValue(), nameText.getText().toString());
+				String name = nameText.getText().toString();
+				if(name.length() > 0) {
+					n.putTag(OSMTagKey.NAME.getValue(), name);
+				}
 				if (openingHours.getText().toString().length() == 0) {
 					n.removeTag(OSMTagKey.OPENING_HOURS.getValue());
 				} else {
