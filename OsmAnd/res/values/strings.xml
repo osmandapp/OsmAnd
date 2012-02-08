@@ -219,6 +219,9 @@
 	<string name="favorite_friends_category">Friends</string>
 	<string name="favorite_places_category">Places</string>
 	<string name="favorite_default_category">Others</string>
+	
+	<string name="favourites_edit_dialog_name">Name</string>
+	<string name="favourites_edit_dialog_category">Category</string>
 
 	<string name="vector_map_not_needed">Not needed</string>
 	<string name="basemap_missing">Base world map (covering whole world at small zooms) is missing. Please consider downloading World_basemap_x.obf for a complete environment.</string>
