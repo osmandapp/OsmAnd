@@ -19,6 +19,7 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 public class LiveMonitoringHelper  {
 	
@@ -38,13 +39,47 @@ public class LiveMonitoringHelper  {
 	
 	public void insertData(double lat, double lon, double alt, double speed, double hdop, long time, OsmandSettings settings){
 		if (time - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get() * 1000) {
-			sendData((float)lat, (float)lon,(float) alt,(float) speed,(float) hdop, time );
+			LiveMonitoringData data = new LiveMonitoringData((float)lat, (float)lon,(float) alt,(float) speed,(float) hdop, time );
+			new LiveSender().execute(data);
 			lastTimeUpdated = time;
 		}
 	}
+	
+	private static class LiveMonitoringData {
 
-	public void sendData(float lat, float lon, float alt, float speed, float hdop, long time) {
-		String url = MessageFormat.format(settings.LIVE_MONITORING_URL.get(), lat+"", lon+"", time+"", hdop+"", alt+"", speed+"");
+		private final float lat;
+		private final float lon;
+		private final float alt;
+		private final float speed;
+		private final float hdop;
+		private final long time;
+
+		public LiveMonitoringData(float lat, float lon, float alt, float speed, float hdop, long time) {
+			this.lat = lat;
+			this.lon = lon;
+			this.alt = alt;
+			this.speed = speed;
+			this.hdop = hdop;
+			this.time = time;
+		}
+		
+	}
+	
+	private class LiveSender extends AsyncTask<LiveMonitoringData, Void, Void> {
+
+		@Override
+		protected Void doInBackground(LiveMonitoringData... params) {
+			for(LiveMonitoringData d : params){
+				sendData(d);
+			}
+			return null;
+		}
+		
+	}
+
+	public void sendData(LiveMonitoringData data) {
+		String url = MessageFormat.format(settings.LIVE_MONITORING_URL.get(), data.lat+"", data.lon+"", 
+				data.time+"", data.hdop+"", data.alt+"", data.speed+"");
 		try {
 
 			HttpParams params = new BasicHttpParams();
