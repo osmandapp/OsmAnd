@@ -38,6 +38,9 @@ public class SQLiteTileSource implements ITileSource {
 	private int minZoom = 1;
 	private int maxZoom = 17; 
 	private int baseZoom = 17; //Default base zoom
+
+	final int margin = 6;
+	final int tileSize = 256;
 	
 	public SQLiteTileSource(File f, List<TileSourceTemplate> toFindUrl){
 		this.file = f;
@@ -86,7 +89,7 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public int getTileSize() {
-		return base != null ? base.getTileSize() : 256;
+		return base != null ? base.getTileSize() : tileSize;
 	}
 
 	@Override
@@ -198,7 +201,7 @@ public class SQLiteTileSource implements ITileSource {
 		return db.isDbLockedByOtherThreads();
 	}
 
-	private Bitmap getMetaTile(int x, int y, int zoom) {
+	private Bitmap getMetaTile(int x, int y, int zoom, int flags) {
 		// return a 268x268 tile ((6+256+6)x(6+256+6) px) around a given tile
 		// based on its neighbor. This is needed to have a nice bilinear resampling
 		// on tile edges. A 258x258 would do well, but maybe somebody wants to
@@ -210,161 +213,39 @@ public class SQLiteTileSource implements ITileSource {
 		if(db == null){
 			return null;
 		}
-        Bitmap stitchedImage = Bitmap.createBitmap(268, 268, Config.ARGB_8888);
+        Bitmap stitchedImage = Bitmap.createBitmap(tileSize + 2 * margin, tileSize + 2 * margin, Config.ARGB_8888);
         Canvas canvas = new Canvas(stitchedImage);
-        //1
-		Cursor cursor = db.rawQuery(
-				"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
-				new String[] {(x-1)+"", (y-1)+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-		byte[] blob = null;
-		if(cursor.moveToFirst()) {
-			blob = cursor.getBlob(0);
-		}
-		cursor.close();
-		if(blob != null){
-			Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
-			blob = null;
-			Rect src = new Rect(250, 250, 256, 256); 
-			Rect dst = new Rect(0,0,6,6);  
-			canvas.drawBitmap(Tile, src, dst, null);
-			//Tile.recycle();
-		}
-		//2
-		cursor = db.rawQuery(
-				"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
-				new String[] {(x)+"", (y-1)+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-		blob = null;
-		if(cursor.moveToFirst()) {
-			blob = cursor.getBlob(0);
-		}
-		cursor.close();
-		if(blob != null){
-			Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
-			blob = null;
-			Rect src = new Rect(0, 250, 256, 256); 
-			Rect dst = new Rect(6,0,262,6);  
-			canvas.drawBitmap(Tile, src, dst, null);
-			//Tile.recycle();
-		}
-		//3
-		cursor = db.rawQuery(
-				"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
-				new String[] {(x+1)+"", (y-1)+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-		blob = null;
-		if(cursor.moveToFirst()) {
-			blob = cursor.getBlob(0);
-		}
-		cursor.close();
-		if(blob != null){
-			Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
-			blob = null;
-			Rect src = new Rect(0, 250, 6, 256); 
-			Rect dst = new Rect(262,0,268,6);  
-			canvas.drawBitmap(Tile, src, dst, null);
-			//Tile.recycle();
-		}
-		//4
-		cursor = db.rawQuery(
-				"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
-				new String[] {(x-1)+"", (y)+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-		blob = null;
-		if(cursor.moveToFirst()) {
-			blob = cursor.getBlob(0);
-		}
-		cursor.close();
-		if(blob != null){
-			Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
-			blob = null;
-			Rect src = new Rect(250, 0, 256, 256); 
-			Rect dst = new Rect(0,6,6,262);  
-			canvas.drawBitmap(Tile, src, dst, null);
-			//Tile.recycle();
-		}
-		//5
-		cursor = db.rawQuery(
-				"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
-				new String[] {(x)+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-		blob = null;
-		if(cursor.moveToFirst()) {
-			blob = cursor.getBlob(0);
-		}
-		cursor.close();
-		if(blob != null){
-			Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
-			blob = null;
-			Rect src = new Rect(0, 0, 256, 256); 
-			Rect dst = new Rect(6,6,262,262);  
-			canvas.drawBitmap(Tile, src, dst, null);
-			//Tile.recycle();
-		}
-		//6
-		cursor = db.rawQuery(
-				"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
-				new String[] {(x+1)+"", (y)+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-		blob = null;
-		if(cursor.moveToFirst()) {
-			blob = cursor.getBlob(0);
-		}
-		cursor.close();
-		if(blob != null){
-			Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
-			blob = null;
-			Rect src = new Rect(0, 0, 6, 256); 
-			Rect dst = new Rect(262,6,268,262);  
-			canvas.drawBitmap(Tile, src, dst, null);
-			//Tile.recycle();
-		}
-		//7
-		cursor = db.rawQuery(
-				"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
-				new String[] {(x-1)+"", (y+1)+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-		blob = null;
-		if(cursor.moveToFirst()) {
-			blob = cursor.getBlob(0);
-		}
-		cursor.close();
-		if(blob != null){
-			Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
-			blob = null;
-			Rect src = new Rect(250, 0, 256, 6); 
-			Rect dst = new Rect(0,262,6,268);  
-			canvas.drawBitmap(Tile, src, dst, null);
-			//Tile.recycle();
-		}
-		//8
-		cursor = db.rawQuery(
-				"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
-				new String[] {(x)+"", (y+1)+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-		blob = null;
-		if(cursor.moveToFirst()) {
-			blob = cursor.getBlob(0);
-		}
-		cursor.close();
-		if(blob != null){
-			Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
-			blob = null;
-			Rect src = new Rect(0, 0, 256, 6); 
-			Rect dst = new Rect(6,262,262,268);  
-			canvas.drawBitmap(Tile, src, dst, null);
-			//Tile.recycle();
-		}
-		//9
-		cursor = db.rawQuery(
-				"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
-				new String[] {(x+1)+"", (y+1)+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-		blob = null;
-		if(cursor.moveToFirst()) {
-			blob = cursor.getBlob(0);
-		}
-		cursor.close();
-		if(blob != null){
-			Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
-			blob = null;
-			Rect src = new Rect(0, 0, 6, 6); 
-			Rect dst = new Rect(262,262,268,268);  
-			canvas.drawBitmap(Tile, src, dst, null);
-			Tile.recycle();
-		}
+        
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
+            	if ((flags & (0x400 >> (4 * (dy + 1) + (dx + 1)))) == 0)
+            		continue;
+            	
+            	int xOff, yOff, w, h;
+            	int dstx, dsty;
+        		Cursor cursor = db.rawQuery(
+        				"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?",
+        				new String[] {(x + dx) + "", (y + dy) + "", (17 - zoom) + ""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+        		byte[] blob = null;
+        		if(cursor.moveToFirst()) {
+        			blob = cursor.getBlob(0);
+        		}
+        		cursor.close();
+        		if (dx < 0) xOff = tileSize - margin; else xOff = 0;
+        		if (dx == 0) w = tileSize; else w = margin;
+        		if (dy < 0) yOff = tileSize - margin; else yOff = 0;
+        		if (dy == 0) h = tileSize; else h = margin;
+        		dstx = dx * tileSize + xOff + margin;
+        		dsty = dy * tileSize + yOff + margin;
+        		if(blob != null){
+        			Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
+        			blob = null;
+        			Rect src = new Rect(xOff, yOff, xOff + w, yOff + h);
+        			Rect dst = new Rect(dstx, dsty, dstx + w, dsty + h);
+        			canvas.drawBitmap(Tile, src, dst, null);
+        		}
+            }
+        }
 		System.gc();
 		return stitchedImage; // return a 256x256 tile + 6px margin
 		
@@ -374,6 +255,7 @@ public class SQLiteTileSource implements ITileSource {
 		if(db == null){
 			return null;
 		}
+		if (zoom > maxZoom) return null;
 		if ( zoom <= baseZoom) {
 			// return the normal tile if exists
 			Cursor cursor = db.rawQuery("SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
@@ -389,30 +271,40 @@ public class SQLiteTileSource implements ITileSource {
 		} else {
 			// return a resampled tile from its last parent
 			int n = zoom - baseZoom;
-			int base_xtile = (int)(x / Math.pow(2,n));
-			int base_ytile = (int)(y / Math.pow(2,n));
-			
-			Bitmap metaTile = getMetaTile(base_xtile, base_ytile, baseZoom);
+			int base_xtile = x >> n;
+			int base_ytile = y >> n;
+
+			int scaledSize= tileSize >> n;
+	        int offset_x=  x - (base_xtile << n);
+	        int offset_y=  y - (base_ytile << n);
+	        int flags = 0x020;
+	        
+	        if (offset_x == 0)
+	        	flags |= 0x444;
+	        else if (offset_x == (1 << n) - 1)
+	        	flags |= 0x111;
+	        if (offset_y == 0)
+	        	flags |= 0x700;
+	        else if (offset_y == (1 << n) - 1)
+	        	flags |= 0x007;
+
+			Bitmap metaTile = getMetaTile(base_xtile, base_ytile, baseZoom, flags);
 			
 			if(metaTile != null){
-				//return Bitmap.createScaledBitmap(metaTile,256,256,false);
 				// in tile space:
-				int scaledSize= (int)(256/Math.pow(2,n));
-		        int offset_x=  (int)((x - base_xtile*Math.pow(2,n)));
-		        int offset_y=  (int)((y - base_ytile*Math.pow(2,n)));
-		        int delta_px = (int)(scaledSize*offset_x);
-		        int delta_py = (int)(scaledSize*offset_y);
+		        int delta_px = scaledSize * offset_x;
+		        int delta_py = scaledSize * offset_y;
 		        
 				Bitmap xn = Bitmap.createBitmap(metaTile,
 						delta_px, //(+6)
 						delta_py, //(+6)
-						scaledSize+12,
-						scaledSize+12);
+						scaledSize + 2 * margin,
+						scaledSize + 2 * margin);
 				metaTile.recycle();
-				int scaleto = (int)(256+12*Math.pow(2,n));
+				int scaleto = 256 + ((2 * margin) << n);
 				Bitmap scaled = Bitmap.createScaledBitmap(xn,scaleto,scaleto,true);
 				xn.recycle();
-				return Bitmap.createBitmap(scaled,(int)(6*Math.pow(2,n)),(int)(6*Math.pow(2,n)),256,256);
+				return Bitmap.createBitmap(scaled, (margin << n), (margin << n), 256, 256);
 			}
 			return null;
 			}
