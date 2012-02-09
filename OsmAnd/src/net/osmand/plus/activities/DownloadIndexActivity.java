@@ -97,7 +97,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 	private TreeMap<String, DownloadEntry> entriesToDownload = new TreeMap<String, DownloadEntry>();
 
 	private String FREE_VERSION_NAME = "net.osmand";
-	private int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 5;
+	private int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 8;
 	 
 	
     private TextWatcher textWatcher ;
