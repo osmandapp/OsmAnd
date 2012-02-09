@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="context_menu_item_start_measurement_mode">Measure distances</string>
+	<string name="context_menu_item_delete_point">Remove this point</string>
+	<string name="context_menu_item_clear_all_points">Remove all points</string>
+	<string name="context_menu_item_insert_point">Insert point before this</string>
+	<string name="context_menu_item_cancel">Cancel</string>
+	<string name="context_menu_item_display_point_info">Display point lat/lon.</string>
+	<string name="context_menu_item_display_distance_only">Display distance only.</string>
+	<string name="context_menu_item_end_measurement">End measuring</string>
+	<string name="context_menu_item_increase_point_size">Increase point size</string>
+	<string name="context_menu_item_decrease_point_size">Decrease point size</string>
+	<string name="context_menu_item_increase_point_selection_area">Increase selection area</string>
+	<string name="context_menu_item_decrease_point_selection_area">Decrease selection area</string>
+	<string name="tip_Distance_Measurement">Measuring point to point distances</string>
+	<string name="tip_Distance_Measurement_t">\tPoint to point measurements are now available from the map menu. 
+	\n\tWhen turned on, the cumulative distance between locations selected on a map in the normal way is displayed.
+	\n\tMeasurement mode can also be turned on/off from the pop-up menu for map location text boxes (short click on text box).
+	\n\tOther editing options are also available - short click measurement point or info text box.</string>
 	<string name="live_monitoring_descr">Enable sending HTTP requests to a specified web service</string>
+	<string name="help_Distance_Measurement">Start/Stop measurement mode from the main menu or from the context menu opened by tapping a point info text box.
+	    \n\nUse a long touch to create/insert a new point
+		\n\nTap on any point to open editing menu
+		\n- Points can be inserted, deleted or dragged.
+		\n- Info text boxes can be displayed for each point.
+		\n\nLong touch any text box to hide it.</string>
+	<string name="help_Distance_Measurement_t">Distance Measurement</string>	
 	<string name="live_monitoring">Enable Live Tracking</string>
 	<string name="live_monitoring_interval_descr">Specify Live Tracking interval</string>
 	<string name="live_monitoring_interval">Live Tracking interval</string>
@@ -99,10 +123,6 @@
 	<string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
 \n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).</string> 
 
-	<string name="tip_recent_changes_0_7_x_t">Changes in 0.7.x :
-\n\t- Added measurement of distance between one or more points on a map.
-	</string>
-	
 	<string name="tip_recent_changes_0_6_9_t">Changes in 0.6.9 :
 \n\t- Improved offline map rendering
 \n\t- Fast Native offline rendering - look in experimental features (may not work on some devices)
@@ -847,24 +867,5 @@
 <string name="edit_filter_delete_message">Filter {0} has been deleted</string>
 <string name="edit_filter_create_message">Filter {0} has been created</string>
 <string name="default_buttons_selectall">Select All</string>
-
-<!-- block of strings added by CGM -->
-<string name="context_menu_item_start_measurement_mode">Measure distances</string>
-<string name="context_menu_item_delete_point">Remove this point</string>
-<string name="context_menu_item_clear_all_points">Remove all points</string>
-<string name="context_menu_item_insert_point">Insert point before this</string>
-<string name="context_menu_item_cancel">Cancel</string>
-<string name="context_menu_item_display_point_info">Display point lat/lon.</string>
-<string name="context_menu_item_display_distance_only">Display distance only.</string>
-<string name="context_menu_item_end_measurement">End measuring</string>
-<string name="context_menu_item_increase_point_size">Increase point size</string>
-<string name="context_menu_item_decrease_point_size">Decrease point size</string>
-<string name="context_menu_item_increase_point_selection_area">Increase selection area</string>
-<string name="context_menu_item_decrease_point_selection_area">Decrease selection area</string>
-<string name="tip_Distance_Measurement">Measuring point to point distances</string>
-<string name="tip_Distance_Measurement_t">\tPoint to point measurements are now available from the map menu. 
-\n\tWhen turned on, the cumulative distance between locations selected on a map in the normal way is displayed.
-\n\tMeasurement mode can also be turned on/off from the pop-up menu for map location text boxes (short click on text box).
-\n\tOther editing options are also available - short click measurement point or info text box.</string>
-    
+  
 </resources>

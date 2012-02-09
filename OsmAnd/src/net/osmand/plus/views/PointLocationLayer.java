@@ -24,9 +24,9 @@ public class PointLocationLayer extends OsmandMapLayer {
 	private Paint area;
 	private Paint aroundArea;
 	private Paint headingPaint;
-	private Paint measurementPaint;	//CGM: add for measurement point plotting
-	private Paint tempPaint;	//CGM: added for dynamic changes to measurement points
-	private Paint trailingPointsPaint;	//CGM: added for measurement points following selected point
+	private Paint measurementPaint;	//For measurement point plotting
+	private Paint tempPaint;	//For dynamic changes to measurement points
+	private Paint trailingPointsPaint;	//For measurement points following selected point
 	
 	protected Location lastKnownLocation = null;
 	private DisplayMetrics dm;
@@ -37,7 +37,7 @@ public class PointLocationLayer extends OsmandMapLayer {
 	private ApplicationMode appMode;
 	private Bitmap bearingIcon;
 	private Bitmap locationIcon;
-	private Bitmap targetIcon;		//CGM: add bitmap to use in measurement mode
+	private Bitmap targetIcon;		//Bitmap to use in measurement mode
 
 	private void initUI() {
 		locationPaint = new Paint();
@@ -49,7 +49,7 @@ public class PointLocationLayer extends OsmandMapLayer {
 		area.setColor(Color.BLUE);
 		area.setAlpha(40);
 		
-		measurementPaint = new Paint();	//CGM: define paint object for drawing measurement points
+		measurementPaint = new Paint();	//For drawing measurement points
 		measurementPaint.setColor(Color.RED);
 		measurementPaint.setAlpha(80);
 		measurementPaint.setStrokeWidth(2);
@@ -59,7 +59,7 @@ public class PointLocationLayer extends OsmandMapLayer {
 		trailingPointsPaint.setColor(Color.BLUE);
 		trailingPointsPaint.setAlpha(80);
 		trailingPointsPaint.setAntiAlias(true);
-		trailingPointsPaint.setStrokeWidth(1);	//CGM end block
+		trailingPointsPaint.setStrokeWidth(1);
 		
 		aroundArea = new Paint();
 		aroundArea.setColor(Color.rgb(112, 124, 220));
@@ -96,21 +96,21 @@ public class PointLocationLayer extends OsmandMapLayer {
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		// draw 
-//		if(lastKnownLocation == null || view == null){	//CGM: Continue if in measurement mode
+//		if(lastKnownLocation == null || view == null){	//Continue if in measurement mode
 		if((!view.getMeasureDistanceMode() && lastKnownLocation == null) || view == null){
 			return;
 		}
-		int size = 0;	//CGM: add to support measurement mode
-		int locationX = 0;	//CGM: moved declaration here
+		int size = 0;	
+		int locationX = 0;
 		int locationY = 0;
-		if(view.getMeasureDistanceMode()){	//CGM: handle extra track points when measuring
+		if(view.getMeasureDistanceMode()){	//Handle extra track points when measuring
 		int index = view.getColourChangeIndex();
 			size = view.measurementPoints.size();
 			if(size > 0){
 				for (int i=0;i< size; i++){
 					locationX=view.getMapXForPoint(view.measurementPoints.get(i).getLongitude());
 					locationY=view.getMapYForPoint(view.measurementPoints.get(i).getLatitude());
-					if(i==0){	//CGM: change drawing colour if there is a point insertion or movement
+					if(i==0){	//Change drawing colour if there is a point insertion or movement
 						canvas.drawBitmap(targetIcon, locationX - targetIcon.getWidth()/5, locationY - targetIcon.getHeight(), locationPaint);
 					}else{
 						if(i > index && index >= 0){
@@ -128,7 +128,7 @@ public class PointLocationLayer extends OsmandMapLayer {
 			return;
 		}
 		locationX = view.getMapXForPoint(lastKnownLocation.getLongitude());
-		locationY = view.getMapYForPoint(lastKnownLocation.getLatitude());	//CGM end block
+		locationY = view.getMapYForPoint(lastKnownLocation.getLatitude());
 		
 		int radius = MapUtils.getLengthXFromMeters(view.getZoom(), view.getLatitude(), view.getLongitude(),
 				lastKnownLocation.getAccuracy(), view.getTileSize(), view.getWidth());
@@ -198,7 +198,7 @@ public class PointLocationLayer extends OsmandMapLayer {
 	public void checkAppMode(ApplicationMode appMode) {
 		if (appMode != this.appMode) {
 			this.appMode = appMode;
-			targetIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.info_target);	//CGM: add bitmap to use in measurement mode
+			targetIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.info_target);	//bitmap to use in measurement mode
 			if (appMode == ApplicationMode.CAR) {
 				bearingIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.car_bearing);
 				locationIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.car_location);

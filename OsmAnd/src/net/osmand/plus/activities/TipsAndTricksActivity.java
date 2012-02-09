@@ -5,6 +5,7 @@ import gnu.trove.list.array.TIntArrayList;
 import java.util.Arrays;
 
 import net.osmand.plus.R;
+import net.osmand.plus.R.string;
 import android.app.Dialog;
 import android.content.Context;
 import android.text.method.ScrollingMovementMethod;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 
 public class TipsAndTricksActivity {
 	private int[][] tipNamesAndDescriptions = new int[][] {
-			{R.string.tip_recent_changes,R.string.tip_recent_changes_0_7_x_t},
 			{R.string.tip_recent_changes,R.string.tip_recent_changes_0_7_0_t},
 			{R.string.tip_rotation_switching,R.string.tip_rotation_switching_t},
 			{R.string.tip_update_index,R.string.tip_update_index_t},
@@ -179,21 +179,14 @@ public class TipsAndTricksActivity {
 		return dlg;
 	}
 
-	public Dialog getDialogToMeasurementHelp(){	//CGM: Provide a help dialog box for Measurement Mode
+	public Dialog getHelpDialog(int title, int info){	//Provide a general help dialog box
 		
 		final Dialog dlg = new Dialog(ctx);
-		dlg.setContentView(R.layout.measurement_help);
+		dlg.setContentView(R.layout.help_dialog);
 		final TextView tipDescription = (TextView) dlg.findViewById(R.id.TipDescription);
 		tipDescription.setMovementMethod(ScrollingMovementMethod.getInstance());
-		int nextInd = 0;
-		dlg.setTitle("How to Measure Distances");
-		tipDescription.setText(
-				"Start/Stop measurement mode from the main menu or from the context menu opened by tapping a point info text box.\n\n" +
-				"Use a long touch to create/insert a new point\n\n" +
-				"Tap on any point to open editing menu\n" +
-				"- Points can be inserted, deleted or dragged.\n" +
-				"- Info text boxes can be displayed for each point.\n\n" +
-				"Long touch any text box to hide it.");	
+		dlg.setTitle(title);
+		tipDescription.setText(info);	
 		
 		((Button)dlg.findViewById(R.id.CloseButton)).setOnClickListener(new View.OnClickListener() {
 			@Override
