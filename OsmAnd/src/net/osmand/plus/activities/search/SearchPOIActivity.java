@@ -196,6 +196,9 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		showOnMap.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if(searchFilter.getVisibility() == View.VISIBLE) {
+					filter.setNameFilter(searchFilter.getText().toString());
+				}
 				settings.setPoiFilterForMap(filter.getFilterId());
 				settings.SHOW_POI_OVER_MAP.set(true);
 				if(location != null){
@@ -247,6 +250,9 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			}
 			// run query again
 			clearSearchQuery();
+		}
+		if(filter != null) {
+			filter.clearFilter();
 		}
 		
 		if(isNameFinderFilter()){

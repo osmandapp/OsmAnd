@@ -567,7 +567,11 @@ public class MapActivityLayers {
 					activity.startActivity(newIntent);
 				} else {
 					getApplication().getSettings().setPoiFilterForMap(filterId);
-					poiMapLayer.setFilter(poiFilters.getFilterById(filterId));
+					PoiFilter f = poiFilters.getFilterById(filterId);
+					if(f != null){
+						f.clearFilter();
+					}
+					poiMapLayer.setFilter(f);
 					mapView.refreshMap();
 				}
 			}
