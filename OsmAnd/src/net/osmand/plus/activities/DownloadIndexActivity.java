@@ -148,9 +148,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 			
 		});
 		
-		indexFileNames = ((OsmandApplication)getApplication()).getResourceManager().getIndexFileNames();
-		((OsmandApplication)getApplication()).getResourceManager().getBackupIndexes(indexFileNames);
-		
+		updateLoadedFiles();
 
 	    filterText = (EditText) findViewById(R.id.search_box);
 	    textWatcher = new TextWatcher() {
@@ -192,6 +190,12 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 			msg.setMessage(getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS+"", ""));
 			msg.show();
 		}
+	}
+
+
+	private void updateLoadedFiles() {
+		indexFileNames = ((OsmandApplication)getApplication()).getResourceManager().getIndexFileNames();
+		((OsmandApplication)getApplication()).getResourceManager().getBackupIndexes(indexFileNames);
 	}
 	
 
@@ -645,6 +649,7 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 		protected void onProgressUpdate(Object... values) {
 			for(Object o : values){
 				if(o instanceof DownloadEntry){
+					updateLoadedFiles();
 					((DownloadIndexAdapter) getExpandableListAdapter()).notifyDataSetInvalidated();
 					findViewById(R.id.DownloadButton).setVisibility(
 							entriesToDownload.isEmpty() ? View.GONE : View.VISIBLE);
@@ -674,8 +679,10 @@ public class DownloadIndexActivity extends ExpandableListActivity {
 			if(mainView != null){
 				mainView.setKeepScreenOn(false);
 			}
+			updateLoadedFiles();
 			((DownloadIndexAdapter) getExpandableListAdapter()).notifyDataSetInvalidated();
 			tracker.dispatch();
+			
 		}
 		
 		@Override
