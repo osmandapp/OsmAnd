@@ -6,7 +6,9 @@ import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.TipsAndTricksActivity;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -52,6 +54,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private ImageView backToLocation;
 	private ImageView compassView;
 	private View progressBar;
+	private ImageView helpIconView;	//CGM added for Measurement mode help icon display
 	
 	// groups
 	private MapStackControl rightStack;
@@ -190,6 +193,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// update data on draw
 		rightStack.updateInfo();
 		leftStack.updateInfo();
+		if(view.getMeasureDistanceMode()) {		//CGM: add to support Measurement Mode help icon display
+			helpIconView.setVisibility(View.VISIBLE);
+		}else{
+			helpIconView.setVisibility(View.GONE);	
+		}	//CGM: end block
 		if(view.getRotate() != cachedRotate) {
 			cachedRotate = view.getRotate();
 			compassView.invalidate();
@@ -516,6 +524,30 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextView space = new TextView(view.getContext());
 		statusBar.addView(space, params);
 
+		// help icon - CGM: add help icon for measurement mode only
+		final Drawable helpIconDrawable = view.getResources().getDrawable(R.drawable.help_icon);
+		helpIconDrawable.setVisible(true, true);
+		params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+		helpIconView = new ImageView(view.getContext())
+		{
+			@Override
+			public void onDraw(Canvas canvas){
+				helpIconDrawable.draw(canvas);
+			}
+		};
+		helpIconView.setVisibility(View.GONE);		
+		helpIconView.setImageDrawable(helpIconDrawable);
+		
+		helpIconView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				TipsAndTricksActivity tactivity = new TipsAndTricksActivity(map);
+				Dialog dlg = tactivity.getDialogToMeasurementHelp();
+				dlg.show();
+			}
+		});
+		statusBar.addView(helpIconView, params);	//CGM: end of block
+		
 		// Map and progress icon
 		Drawable globusDrawable = view.getResources().getDrawable(R.drawable.globus);
 		

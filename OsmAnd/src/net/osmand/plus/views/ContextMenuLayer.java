@@ -2,6 +2,9 @@ package net.osmand.plus.views;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.text.MessageFormat;
+import net.osmand.OsmAndFormatter;
+import android.location.Location;
 
 import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
@@ -56,6 +59,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private Drawable boxLeg;
 	private float scaleCoefficient = 1;
 	private Rect textPadding;
+
+	private LatLon tempPoint;	//CGM: added for measurement mode support
+	private LatLon tempPoint2;	//CGM: added for measurement mode support
+	private boolean newPointFlag = true;	//CGM used to block new distance point creation for menu or text box clicks
 	
 	public ContextMenuLayer(MapActivity activity){
 		this.activity = activity;
@@ -136,12 +143,49 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 	
 	public void setLocation(LatLon loc, String description){
+		int index = view.getSelectedMeasurementPointIndex();	//CGM: added to support measurement point distance display
 		latLon = loc;
 		if(latLon != null){
 			if(description == null || description.length() == 0){
-				description = view.getContext().getString(R.string.point_on_map, 
-						latLon.getLatitude(), latLon.getLongitude());
-			}
+				// CGM: added test for distance measurement mode
+//				description = view.getContext().getString(R.string.point_on_map, 
+//						latLon.getLatitude(), latLon.getLongitude());
+				if(!view.getMeasureDistanceMode()){
+					description = view.getContext().getString(R.string.point_on_map, 
+							latLon.getLatitude(), latLon.getLongitude());
+				}else{	//display cumulative measurement data
+					if(newPointFlag){	//do not add point for menu activity
+						if(view.getMeasurementPointInsertionIndex() < 0) {
+							view.measurementPoints.add(latLon);
+							index = view.measurementPoints.size() - 1;
+						}else{
+							view.measurementPoints.add(view.getMeasurementPointInsertionIndex(), latLon);
+							index = view.getMeasurementPointInsertionIndex();
+							view.setMeasurementPointInsertionIndex(-1);		//clear insertion flag
+						}
+						view.setColourChangeIndex(index);	//CGM 12/1/12: added to assist point display colour coding
+						view.setSelectedMeasurementPointIndex(index);
+						newPointFlag = false;
+					}
+					if(index == 0){
+						if(view.getLongInfoFlag()){
+							description = view.getContext().getString(R.string.point_on_map,
+									view.measurementPoints.get(0).getLatitude(), view.measurementPoints.get(0).getLongitude());	
+						}else{
+							description = "Start Point";								
+						}
+					}else{
+						view.setCumMeasuredDistance(calculatePathDistance(index));
+						if(view.getLongInfoFlag()){
+							description = "Location:\n Lat: " + String.format("%3.6f", view.measurementPoints.get(index).getLatitude()) + "\nLon: " + 
+									String.format("%3.6f", view.measurementPoints.get(index).getLongitude()) + '\n' + "Distance: " +
+									OsmAndFormatter.getFormattedDistance(view.getCumMeasuredDistance(), view.getContext());
+						}else{
+							description = OsmAndFormatter.getFormattedDistance(view.getCumMeasuredDistance(), view.getContext());
+						}
+					}
+				}
+			}	//CGM: end of block
 			textView.setText(description);
 		} else {
 			textView.setText(""); //$NON-NLS-1$
@@ -152,6 +196,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public boolean onLongPressEvent(PointF point) {
+		newPointFlag = true;	//CGM: enable new measurement point creation
 		if(pressedInTextView(point.x, point.y)){
 			setLocation(null, ""); //$NON-NLS-1$
 			view.refreshMap();
@@ -219,6 +264,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public boolean onSingleTap(PointF point) {
+		//CGM: Add mods for measurement mode - trigger a measurement point dialog
+		if(view.getMeasureDistanceMode() && view.getSelectedMeasurementPointIndex() >= 0){
+			latLon = view.getScreenPointLatLon();
+			activity.contextMenuPoint(latLon.getLatitude(), latLon.getLongitude());
+			return true;	//if a point has been verified as selected, ignore this test
+		}	//CGM: end of block
 		if (pressedInTextView(point.x, point.y)) {
 			if (!selectedObjects.isEmpty()) {
 				showContextMenuForSelectedObjects();
@@ -259,6 +310,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
+		if(event == null){	//CGM: used to pass request to delete text box display
+			latLon = view.measurementPoints.get(view.getSelectedMeasurementPointIndex());
+			setLocation(view.measurementPoints.get(view.getSelectedMeasurementPointIndex()), "");
+			return false;
+		}	//CGM: end of block
 		if (latLon != null) {
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
 				if(pressedInTextView(event.getX(), event.getY())){
@@ -292,5 +348,55 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 		}
 	}
+	
+	//CGM: Methods added to support measurement mode
+		public void displayIntermediatePointInfo(int index){	//CGM: modified version of setLocation for displaying info for intermediate measurement points
+			String description ="";
+			latLon = view.measurementPoints.get(index);
+			if (index == 0){
+				if(view.getLongInfoFlag()){
+					description = "Start Point: \nLat: " + String.format("%3.6f",
+							view.measurementPoints.get(index).getLatitude()) + String.format("\nLon: %3.6f", view.measurementPoints.get(index).getLongitude());					
+				}else{
+					description = "Start Point";								
+				}
+			}else{
+				view.setCumMeasuredDistance(calculatePathDistance(index));
+				if(view.getLongInfoFlag()){
+					description = "Location:\n Lat: " + String.format("%3.6f", view.measurementPoints.get(index).getLatitude()) + "\nLon: " + 
+						String.format("%3.6f", view.measurementPoints.get(index).getLongitude()) + '\n' + "Distance: " +
+						OsmAndFormatter.getFormattedDistance(view.getCumMeasuredDistance(), view.getContext());
+				}else{
+					description = OsmAndFormatter.getFormattedDistance(view.getCumMeasuredDistance(), view.getContext());
+				}
+			}
+			textView.setText(description);
+			layoutText();
+		}
+		
+		public float calculatePathDistance(int index){	//CGM: Added method to support distance measurement mode
+			// index is the array index of the last point to include in the calculation
+			float[] calculatedDistance = new float[1];
+			float distance = 0;
+			for (int i = 1; i <= index; i++){
+				tempPoint = new LatLon(0, 0);	//CGM instantiate a temporary object to save to measurement point list.
+				tempPoint2 = new LatLon(0,0);	//CGM instantiate a temporary object to save to measurement point list.
+				tempPoint = view.measurementPoints.get(i - 1);
+				tempPoint2 = view.measurementPoints.get(i);
+				Location.distanceBetween(tempPoint.getLatitude(), tempPoint.getLongitude(), tempPoint2.getLatitude(),
+						tempPoint2.getLongitude(), calculatedDistance);
+				distance += calculatedDistance[0];
+			}
+			return distance;
+		}
+		
+		public void setNewPointFlag(boolean status){	//CGM: added to control new measurement point creation during menu activity
+			newPointFlag = status;
+		}
+		
+		public boolean getNewPointFlag(){
+			return newPointFlag;
+		}
+	//CGM: end of block	
 
 }

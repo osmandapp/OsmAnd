@@ -1075,6 +1075,14 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 				animateMenu.setVisible(false);
 			}
 		}
+		
+		MenuItem measureDistance = menu.findItem(R.id.map_calculate_distance);	//CGM: Add to ensure menu is synchronised to changes made external to menu.
+		if(mapView.getMeasureDistanceMode()){
+			measureDistance.setChecked(true);
+		}else{
+			measureDistance.setChecked(false);			
+		}	//CGM: end block
+
 		return val;
 	}
 	
@@ -1142,6 +1150,23 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 			//animate moving on route
 			routeAnimation.startStopRouteAnimation(routingHelper, this);
 			return true;			
+		case R.id.map_calculate_distance:	//CGM: added to support calculation of distance along selected path of points
+			if(routingHelper.isRouteCalculated()){
+				mapActions.aboutRoute();
+			} else {	//toggle the distance measurement mode
+				if(mapView.getMeasureDistanceMode()){
+					mapView.setMeasureDistanceMode(false);
+					item.setChecked(false);
+				}else{
+					mapView.setMeasureDistanceMode(true);
+					item.setChecked(true);
+					mapView.setCumMeasuredDistance(0);	//Clear the cumulative distance measurement
+					mapView.measurementPoints.clear();	//clear the list of measurement points
+				}
+				mapLayers.getContextMenuLayer().setLocation(null, "");	//delete any visible point info text box
+				mapView.refreshMap();
+			}
+			return true;	//CGM: end block
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -1225,6 +1250,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
     			R.string.context_menu_item_navigate_point,
     			R.string.context_menu_item_show_route,
     			R.string.context_menu_item_search,
+    			R.string.context_menu_item_start_measurement_mode,	/*CGM added option to start measurement mode*/
     			R.string.context_menu_item_add_favorite,
     			R.string.context_menu_item_share_location,
     			R.string.context_menu_item_create_poi,
@@ -1234,9 +1260,45 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
     			R.string.context_menu_item_update_map,
     			R.string.context_menu_item_download_map
     	};
+    	//CGM: 2 dialog boxes added for measurement mode: Measurement point clicked menu options
+    	final int[] measurementPointSelectedMenuActions = new int[]{
+    			R.string.context_menu_item_delete_point,
+    			R.string.context_menu_item_insert_point,
+    			R.string.context_menu_item_display_point_info,
+    			R.string.context_menu_item_display_distance_only,
+    			R.string.context_menu_item_clear_all_points,
+    			R.string.context_menu_item_cancel,
+    			R.string.context_menu_item_end_measurement,
+    			R.string.context_menu_item_increase_point_size,
+    			R.string.context_menu_item_decrease_point_size,
+    			R.string.context_menu_item_increase_point_selection_area,
+    			R.string.context_menu_item_decrease_point_selection_area,
+    	};	
+    	//CGM: Measurement point text box clicked menu options
+    	final int[] measurementPointTextBoxSelectedMenuActions = new int[]{
+    			R.string.context_menu_item_clear_all_points,
+    			R.string.context_menu_item_end_measurement,
+    			R.string.context_menu_item_cancel,
+    			R.string.context_menu_item_increase_point_size,
+    			R.string.context_menu_item_decrease_point_size,
+    			R.string.context_menu_item_increase_point_selection_area,
+    			R.string.context_menu_item_decrease_point_selection_area,
+    	};	//CGM end block    	
     	int actionsToUse = (mapView.getMainLayer() instanceof MapTileLayer) ? contextMenuStandardActions.length : contextMenuStandardActions.length - 2;
-    	for(int j = 0; j<actionsToUse; j++){
-    		actions.add(getResources().getString(contextMenuStandardActions[j]));
+    	if(mapView.getMeasureDistanceMode() && mapView.getSelectedMeasurementPointIndex() >= 0){	//CGM: select different menu items for measurement mode
+    		actionsToUse =  measurementPointSelectedMenuActions.length;	//measurement point selected items;
+        	for(int j = 0; j < actionsToUse; j++){
+        		actions.add(getResources().getString(measurementPointSelectedMenuActions[j]));
+        	}
+        }else if(mapView.getMeasureDistanceMode() && mapView.getSelectedMeasurementPointIndex() < 0){
+        		actionsToUse =  measurementPointTextBoxSelectedMenuActions.length;	//measurement point text box selected items
+            	for(int j = 0; j < actionsToUse; j++){
+            		actions.add(getResources().getString(measurementPointTextBoxSelectedMenuActions[j]));
+            	}
+        }else{
+        	for(int j = 0; j<actionsToUse; j++){
+        		actions.add(getResources().getString(contextMenuStandardActions[j]));
+        	}	//CGM: end of block
     	}
     	
     	builder.setItems(actions.toArray(new String[actions.size()]), new DialogInterface.OnClickListener(){
@@ -1247,7 +1309,75 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 					additionalActions.onClick(dialog, which);
 					return;
 				}
-				int standardId = contextMenuStandardActions[which - sizeAdditional];
+// CGM start of block to respond to measurement point menu callbacks
+//				int standardId = contextMenuStandardActions[which - sizeAdditional];
+				int standardId = 0;	//CGM: change usage
+				int index = 0;
+				if(mapView.getMeasureDistanceMode()){
+					mapLayers.getContextMenuLayer().setNewPointFlag(false);	//block new measurement point creation
+					if(mapView.getSelectedMeasurementPointIndex() >= 0){
+						standardId = measurementPointSelectedMenuActions[which];	//items common to both measurement point dialogs
+					}else{
+						standardId = measurementPointTextBoxSelectedMenuActions[which];	//items common to both measurement point dialogs					
+					}
+					index = mapView.getSelectedMeasurementPointIndex();
+					if(standardId == R.string.context_menu_item_delete_point){	//CGM 27/12/11: added to test if current point is to be removed
+						if(index >= 0){
+							mapView.measurementPoints.remove(index);	//delete the point if one has been selected
+							mapView.setSelectedMeasurementPointIndex(-1);
+							mapLayers.getContextMenuLayer().setLocation(null, "");	//delete the point info text box
+						}
+					}else if(standardId == R.string.context_menu_item_clear_all_points){	//CGM 27/12/11: added to test if all measurement points should be removed
+						mapView.setSelectedMeasurementPointIndex(-1);
+						mapView.measurementPoints.clear();	//remove all points from the list
+						mapLayers.getContextMenuLayer().setLocation(null, "");	//delete the point info text box
+					}else if(standardId == R.string.context_menu_item_insert_point){	//CGM 27/12/11: added to test if extra measurement point is to be inserted
+						if(index >= 0){
+							mapView.setColourChangeIndex(index);	//point colour should change after this point
+							mapView.setMeasurementPointInsertionIndex(index);	//indicates an insertion should be performed before this point
+							mapLayers.getContextMenuLayer().displayIntermediatePointInfo(index);	//use the latLon for the point, not the menu click
+						}
+					}else if(standardId == R.string.context_menu_item_cancel){	//CGM 27/12/11: added to close dialog with no action
+					}else if(standardId == R.string.context_menu_item_display_point_info){
+						mapView.setLongInfoFlag(true);
+						if(index >=0){
+							mapLayers.getContextMenuLayer().displayIntermediatePointInfo(index);	//use the latLon for the point, not the menu click
+							mapView.setColourChangeIndex(index);	//point colour should change after this point
+						}else{
+							mapLayers.getContextMenuLayer().setLocation(null, "");	//delete the point info text box
+						}
+					}else if(standardId == R.string.context_menu_item_display_distance_only){
+						mapView.setLongInfoFlag(false);
+						if(index >=0){
+							mapLayers.getContextMenuLayer().displayIntermediatePointInfo(index);	//use the latLon for the point, not the menu click
+							mapView.setColourChangeIndex(index);	//point colour should change after this point
+						}else{
+							mapLayers.getContextMenuLayer().setLocation(null, "");	//delete the point info text box
+						}
+					}else if(standardId == R.string.context_menu_item_end_measurement){	//CGM 27/12/11: End measurement mode
+						mapView.setMeasureDistanceMode(false);	//turn off measurement mode						
+						mapView.measurementPoints.clear();	//remove all points from the list
+						mapLayers.getContextMenuLayer().setLocation(null, "");	//delete the point info text box
+					}else if(standardId == R.string.context_menu_item_increase_point_size){	//change measurement point display size
+						if(mapView.checkMeasurementPointSize(mapView.getMeasurementPointRadius() + 2)) {
+							mapView.setMeasurementPointRadius(mapView.getMeasurementPointRadius() + 2);
+						}
+					}else if(standardId == R.string.context_menu_item_decrease_point_size){	//change measurement point display size
+						if(mapView.checkMeasurementPointSize(mapView.getMeasurementPointRadius() - 2)) {
+							mapView.setMeasurementPointRadius(mapView.getMeasurementPointRadius() - 2);
+						}
+					}else if(standardId == R.string.context_menu_item_increase_point_selection_area){	//change measurement point display size
+						if(mapView.checkMeasurementPointSelectionSize(mapView.getMeasurementPointSelectionRadius() + 1)) {
+							mapView.setMeasurementPointSelectionRadius(mapView.getMeasurementPointSelectionRadius() + 1);
+						}
+					}else if(standardId == R.string.context_menu_item_decrease_point_selection_area){	//change measurement point display size
+						if(mapView.checkMeasurementPointSelectionSize(mapView.getMeasurementPointSelectionRadius() - 1)) {
+							mapView.setMeasurementPointSelectionRadius(mapView.getMeasurementPointSelectionRadius() - 1);
+						}
+					}
+				}else{
+					standardId = contextMenuStandardActions[which - sizeAdditional];	//CGM: end of block
+
 				if(standardId == R.string.context_menu_item_navigate_point){
 					navigateToPoint(new LatLon(latitude, longitude));
 				} else if(standardId == R.string.context_menu_item_show_route){
@@ -1274,8 +1404,18 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 					DownloadTilesDialog dlg = new DownloadTilesDialog(MapActivity.this, 
 							(OsmandApplication) getApplication(), mapView);
 					dlg.openDialog();
+				}else if(standardId == R.string.context_menu_item_start_measurement_mode){	//CGM: Toggle measurement mode
+					if(mapView.getMeasureDistanceMode()){
+						mapView.setMeasureDistanceMode(false);	//turn off measurement mode						
+					}else{
+						mapView.setMeasureDistanceMode(true);	//turn on measurement mode
+					}
+				}else{
 				}
+				mapLayers.getContextMenuLayer().setLocation(null, "");	//CGM: delete the point info text box
 			}
+			mapView.refreshMap();
+		}
     	});
 		builder.create().show();
     }
