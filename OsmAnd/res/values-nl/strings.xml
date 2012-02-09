@@ -496,7 +496,7 @@
 	<string name="transport_search_again">Opnieuw vervoer zoeken</string>
 
 	<string name="map_index">Kaart</string>
-	<string name="stem">Stem</string>
+	<string name="voice">Stem</string>
 	<string name="no_vector_map_loaded">Geen vectorkaarten geladen</string>
 	
 	<string name="map_route_by_gpx">Toon route van een GPX</string>
@@ -524,7 +524,7 @@
 	<string name="export_fav">Exporteer</string>
 	<string name="error_occurred_loading_gpx">Fout tijdens laden van GPX</string>
 	<string name="send_report">Zend rapport</string>
-	<string name="none_region_found">Geen offline-gegevens voor regio gevonden op de SD kaart. Download regio's van het Internet.</string>
+	<string name="none_region_found">Geen offline-gegevens voor regio gevonden op de SD kaart. Download regio\'s van het Internet.</string>
 	<string name="poi_namefinder_query_empty">Type een zoekwoord om een interessepunt te vinden</string>
 	<string name="any_poi">Alle</string>
 
@@ -583,7 +583,7 @@
 	<string name="route_tu">Keer om en ga dan door</string>
 	<string name="route_head">Koers</string>
 	<string name="first_time_continue">Ga door</string>
-	<string name="first_time_download">Download regio's</string>
+	<string name="first_time_download">Download regio\'s</string>
 	<string name="first_time_msg">Bedankt voor het kiezen voor OsmAnd. \nOm alle features van het programma te gebruiken, heeft u enige regionale offline gegevens nodig, die u kunt downloaden (Instellingen, Offline Gegevens) of zelf prepareren. Daarna kunt u zoeken naar adressen, interessepunten en openbaar vervoer.</string>
 	<string name="search_poi_location">Zoek interessepunt locatie&#8230;</string>
 	<string name="search_near_map">Zoek dichtbij de laatste kaart locatie</string>
@@ -637,7 +637,6 @@
 	<string name="search_online_address">Internet</string>
 	<string name="max_level_download_tile">Max. online zoom</string>
 	<string name="max_level_download_tile_descr">Selecteer maximum zoomniveau voor het downloaden van online kaartsegmenten</string>
-	<string name="route_about">Info over de route</string>
 	<string name="route_general_information">Totale afstand %1$s, reistijd %2$d u %3$d m.</string>
 	<string name="router_service_descr">Selecteer online of offline routing services</string>
 	<string name="router_service">Routing service</string>
@@ -649,8 +648,8 @@
 	<string name="error_io_error">Lees/schrijffout opgetreden</string>
 	<string name="downloading_file">Downloading bestand&#8230;</string>
 	<string name="downloading">Downloading&#8230;</string>
-	<string name="downloading_list_indexes">Lijst van beschikbare regio's wordt gedownload&#8230;</string>
-	<string name="list_index_files_was_not_loaded">De lijst van regio's werd niet geladen van osmand.googlecode.com.</string>
+	<string name="downloading_list_indexes">Lijst van beschikbare regio\'s wordt gedownload&#8230;</string>
+	<string name="list_index_files_was_not_loaded">De lijst van regio\'s werd niet geladen van osmand.googlecode.com.</string>
     <string name="select_index_file_to_download">Als u uw regio niet kan vinden, dan kunt u deze zelf maken. Zie osmand.net</string>
 	<string name="show_poi_on_map">Toon op kaart</string>
 	<string name="fav_points_edited">Favoriet point is bewerkt</string>
@@ -659,7 +658,6 @@
 	<string name="only_show">Alleen tonen</string>
 	<string name="follow">Volg</string>
 	<string name="recalculate_route_to_your_location">Selecteer transportmethode (optioneel):</string>
-	<string name="follow_route">Route-aanwijzingen</string>
 	<string name="mark_final_location_first">Selecteer eerst een bestemming</string>
 	<string name="get_directions">Aanwijzingen</string>
     <string name="show_gps_status">Toon GPS Status</string>
