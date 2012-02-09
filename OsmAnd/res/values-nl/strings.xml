@@ -50,9 +50,9 @@
 	<string name="profile_settings">Profielspecifieke instellingen</string>
 	<string name="settings_preset">Gebruikerprofiel</string>
 	<string name="settings_preset_descr">Selecteer een profiel. (Elke profielinstelling, kaart, tracking en navigatie kan hieronder ingesteld worden.)</string>
-	<string name="rendering_settings">- kaartconfiguratie</string>
+	<string name="rendering_settings">- Kaartconfiguratie</string>
 	<string name="rendering_settings_descr">Configureer kaarten en kaartbronnen</string>
-	<string name="appearance_settings">- kaartpresentatie</string>
+	<string name="appearance_settings">- Kaartpresentatie</string>
 	<string name="appearance_settings_descr">Configureer kaartpresentatie</string>
 	<string name="monitor_preferences">- Tracking</string>
 	<string name="monitor_preferences_descr">Specifieke tracking-instellingen</string>
@@ -68,7 +68,7 @@
 	<string name="user_name_descr">Nodig voor openstreetmap.org aanmelding</string>
 	<string name="user_password">Uw OSM wachtwoord</string>
 	<string name="user_password_descr">Nodig voor openstreetmap.org aanmelding</string>
-	<string name="osmand_service">achtergrondservice</string>
+	<string name="osmand_service">Achtergrondservice</string>
 	<string name="osmand_service_descr">Dit is om OsmAnd te gebruiken als het scherm uit is</string>
 
 	<string name="tip_rotation_switching">kaartrotatie</string>
