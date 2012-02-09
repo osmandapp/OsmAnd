@@ -297,9 +297,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 							if (Math.abs(toFindTime - cachedLeftTime) > 30000) {
 								cachedLeftTime = toFindTime;
 								if (DateFormat.is24HourFormat(map)) {
-									setText(DateFormat.format("kk:mm", toFindTime).toString(), null); //$NON-NLS-1$
+									setText(DateFormat.format("k:mm", toFindTime).toString(), null); //$NON-NLS-1$
 								} else {
-									setText(DateFormat.format("k:mm", toFindTime).toString(), 
+									setText(DateFormat.format("h:mm", toFindTime).toString(), 
 											DateFormat.format("aa", toFindTime).toString()); //$NON-NLS-1$
 								}
 								return true;
