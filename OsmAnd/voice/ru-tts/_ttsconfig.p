@@ -37,9 +37,9 @@ bear_right == ['держитесь правее '].
 bear_left == ['держитесь левее '].
 
 route_new_calc(Dist) == ['Маршрут составляет ', D] :- distance(Dist) == D.
-%route_recalc(Dist) == ['Route recalculated, the trip is ', D] :- distance(Dist) == D.
+route_recalc(Dist) == ['маршрут пересчитывается, расстояние ', D] :- distance(Dist) == D.
 
-%location_lost == ['g p s signal lost '].
+location_lost == ['g p s потеря сигнала '].
 
 
 %% 
