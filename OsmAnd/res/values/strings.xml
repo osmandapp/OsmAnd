@@ -127,12 +127,12 @@
 
 	<string name="native_library_not_supported">Native library is not supported on this device.</string>
 	<string name="init_native_library">Initializing native library&#8230;</string>
-	<string name="choose_auto_follow_route">Map view auto follow</string>
+	<string name="choose_auto_follow_route">Map view auto return</string>
 	<string name="choose_auto_follow_route_descr">Time until map view returns to being synchronized with position</string>
 	<string name="auto_follow_route_never">Never</string>
-	<string name="auto_follow_route_navigation">Auto follow nav only</string>
-	<string name="auto_follow_route_navigation_descr">Use map view auto follow only while navigating.</string>
-	<string name="auto_follow_location_enabled">Map view auto follow in use.</string>
+	<string name="auto_follow_route_navigation">Auto return nav only</string>
+	<string name="auto_follow_route_navigation_descr">Use map view auto return only while navigating.</string>
+	<string name="auto_follow_location_enabled">Map view auto return in use.</string>
 	
 	<string name="sendtoOSM_confirmation_msg">Send to OSM: %1$s?</string>
 	<string name="pref_vector_rendering">Vector renderer specific options</string>
@@ -153,7 +153,7 @@
 \n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
 \n\t- Implement POI search by name in big areas (countries)  
 \n\t- Fix flickering map screen for tablets (Issue 641)
-\n\t- Auto follow route option (Issue 356)
+\n\t- Map view auto return option (Issue 356)
 \n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\'
 \n\t- POI data included in .obf file (all download indexes after 01/10/11) 
 \n\t- Voice prompt fixes (GPS position fix, omitting first command) 

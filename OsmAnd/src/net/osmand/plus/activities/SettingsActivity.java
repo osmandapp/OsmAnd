@@ -168,27 +168,28 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		osmandSettings = OsmandSettings.getOsmandSettings(this);
 		
 		registerBooleanPreference(osmandSettings.SHOW_VIEW_ANGLE,screen); 
-	    registerBooleanPreference(osmandSettings.USE_TRACKBALL_FOR_MOVEMENTS,screen); 
-	    registerBooleanPreference(osmandSettings.USE_HIGH_RES_MAPS,screen); 
-	    registerBooleanPreference(osmandSettings.USE_ENGLISH_NAMES,screen); 
-	    registerBooleanPreference(osmandSettings.AUTO_ZOOM_MAP,screen); 
-	    registerBooleanPreference(osmandSettings.AUTO_FOLLOW_ROUTE_NAV,screen);
-	    registerBooleanPreference(osmandSettings.SAVE_TRACK_TO_GPX,screen); 
-	    registerBooleanPreference(osmandSettings.LIVE_MONITORING,screen);
-	    registerBooleanPreference(osmandSettings.DEBUG_RENDERING_INFO,screen); 
-	    registerBooleanPreference(osmandSettings.FAST_ROUTE_MODE,screen);
-	    registerBooleanPreference(osmandSettings.USE_OSMAND_ROUTING_SERVICE_ALWAYS,screen); 
-	    registerBooleanPreference(osmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES,screen);
-	    registerBooleanPreference(osmandSettings.MAP_VECTOR_DATA,screen);
-	    registerBooleanPreference(osmandSettings.TRANSPARENT_MAP_THEME,screen);
-	    registerBooleanPreference(osmandSettings.TEST_ANIMATE_ROUTING,screen);
-	    registerBooleanPreference(osmandSettings.SHOW_ALTITUDE_INFO,screen);
-	    registerBooleanPreference(osmandSettings.SHOW_ZOOM_LEVEL,screen);
-	    CheckBoxPreference nativeCheckbox = registerBooleanPreference(osmandSettings.NATIVE_RENDERING,screen);
-	    //disable the checkbox if the library cannot be used
-	    if (NativeOsmandLibrary.isLoaded() && !NativeOsmandLibrary.isSupported()) {
-	    	nativeCheckbox.setEnabled(false);
-	    }
+		registerBooleanPreference(osmandSettings.USE_TRACKBALL_FOR_MOVEMENTS,screen); 
+		registerBooleanPreference(osmandSettings.USE_HIGH_RES_MAPS,screen); 
+		registerBooleanPreference(osmandSettings.USE_ENGLISH_NAMES,screen); 
+		registerBooleanPreference(osmandSettings.AUTO_ZOOM_MAP,screen); 
+		// try without AUTO_FOLLOW_ROUTE_NAV (see forum discussion 'Simplify our navigation preference menu')
+		//registerBooleanPreference(osmandSettings.AUTO_FOLLOW_ROUTE_NAV,screen);
+		registerBooleanPreference(osmandSettings.SAVE_TRACK_TO_GPX,screen); 
+		registerBooleanPreference(osmandSettings.LIVE_MONITORING,screen);
+		registerBooleanPreference(osmandSettings.DEBUG_RENDERING_INFO,screen); 
+		registerBooleanPreference(osmandSettings.FAST_ROUTE_MODE,screen);
+		registerBooleanPreference(osmandSettings.USE_OSMAND_ROUTING_SERVICE_ALWAYS,screen); 
+		registerBooleanPreference(osmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES,screen);
+		registerBooleanPreference(osmandSettings.MAP_VECTOR_DATA,screen);
+		registerBooleanPreference(osmandSettings.TRANSPARENT_MAP_THEME,screen);
+		registerBooleanPreference(osmandSettings.TEST_ANIMATE_ROUTING,screen);
+		registerBooleanPreference(osmandSettings.SHOW_ALTITUDE_INFO,screen);
+		registerBooleanPreference(osmandSettings.SHOW_ZOOM_LEVEL,screen);
+		CheckBoxPreference nativeCheckbox = registerBooleanPreference(osmandSettings.NATIVE_RENDERING,screen);
+		//disable the checkbox if the library cannot be used
+		if (NativeOsmandLibrary.isLoaded() && !NativeOsmandLibrary.isSupported()) {
+			nativeCheckbox.setEnabled(false);
+		}
 	    
 		registerEditTextPreference(osmandSettings.USER_NAME, screen);
 		registerEditTextPreference(osmandSettings.USER_PASSWORD, screen);

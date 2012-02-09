@@ -119,7 +119,7 @@
 	<string name="auto_follow_route_never">Nie</string>
 	<string name="auto_follow_route_navigation">Nachführung nur bei Nav.</string>
 	<string name="auto_follow_route_navigation_descr">Kartennachführung erfolgt nur während Navigation (Routing)</string>
-	<string name="auto_follow_location_enabled">Kartennachführung aktiviert</string>
+	<string name="auto_follow_location_enabled">Kartennachführung aktiv</string>
 
 	<string name="sendtoOSM_confirmation_msg">An OSM schicken: %1$s?</string>
 	<string name="pref_vector_rendering">Vektor Renderer spezif. Optionen</string>

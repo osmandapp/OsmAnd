@@ -1314,7 +1314,9 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 	public void setMapLinkedToLocation(boolean isMapLinkedToLocation) {
 		if(!isMapLinkedToLocation){
 			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
-			if(autoFollow > 0 && (!settings.AUTO_FOLLOW_ROUTE_NAV.get() || routingHelper.isFollowingMode())){
+			// try without AUTO_FOLLOW_ROUTE_NAV (see forum discussion 'Simplify our navigation preference menu')
+			//if(autoFollow > 0 && (!settings.AUTO_FOLLOW_ROUTE_NAV.get() || routingHelper.isFollowingMode())){
+			if(autoFollow > 0 && routingHelper.isFollowingMode()){
 				uiHandler.removeMessages(AUTO_FOLLOW_MSG_ID);
 				Message msg = Message.obtain(uiHandler, new Runnable() {
 					@Override

@@ -76,8 +76,10 @@
 		<ListPreference android:title="@string/voice_provider" android:key="voice_provider" android:summary="@string/voice_provider_descr"></ListPreference>
 		<ListPreference android:key="auto_follow_route" android:title="@string/choose_auto_follow_route"
 			android:summary="@string/choose_auto_follow_route_descr"></ListPreference>
+		<!-- try without AUTO_FOLLOW_ROUTE_NAV (see forum discussion 'Simplify our navigation preference menu')
 		<CheckBoxPreference android:summary="@string/auto_follow_route_navigation_descr" android:title="@string/auto_follow_route_navigation"
 			android:key="auto_follow_route_navigation"></CheckBoxPreference>
+		-->
 		<CheckBoxPreference android:summary="@string/use_osmand_routing_service_descr" android:title="@string/use_osmand_routing_service"
 			android:key="use_osmand_routing_service"></CheckBoxPreference>	
 	</PreferenceScreen>
