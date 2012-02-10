@@ -44,11 +44,11 @@
 	<string name="index_name_tts_voice">Stembestanden (stemgenerator)</string>
 
 	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
-	<string name="amenity_type_user_defined">Door gebruiker gedefinieerd</string>
+	<string name="amenity_type_user_defined">Gebruikergedefinieerd</string>
 	<string name="fav_export_confirmation">Favorietenbestand bestaat al, wilt u dit vervangen?</string>
 <!-- this block re-worked for new Preferences structure -->
 	<string name="profile_settings">Profielspecifieke instellingen</string>
-	<string name="settings_preset">Gebruikerprofiel</string>
+	<string name="settings_preset">Gebruiksprofiel</string>
 	<string name="settings_preset_descr">Selecteer een profiel. (Elke profielinstelling, kaart, tracking en navigatie kan hieronder ingesteld worden.)</string>
 	<string name="rendering_settings">- Kaartconfiguratie</string>
 	<string name="rendering_settings_descr">Configureer kaarten en kaartbronnen</string>
@@ -126,7 +126,7 @@
 
 	<string name="native_library_not_supported">Interne bibliotheek wordt niet ondersteund op dit apparaat.</string>
 	<string name="init_native_library">Voorbereiden interne bibliotheek&#8230;</string>
-	<string name="choose_auto_follow_route">Kaartpositie automatisch volgen</string>
+	<string name="choose_auto_follow_route">Kaartpositie volgen</string>
 	<string name="choose_auto_follow_route_descr">Tijd totdat kaartweergave wordt gesynchroniseerd met de positie</string>
 	<string name="auto_follow_route_never">Nooit</string>
 	<string name="auto_follow_route_navigation">Alleen automatisch volgen tijdens navigatie</string>
@@ -390,9 +390,9 @@
 	<string name="context_menu_item_add_waypoint">Voeg GPX routepunt toe</string>
 	<string name="amenity_type_administrative">Diensten</string>
 	<string name="amenity_type_barrier">Blokkade</string>
-	<string name="amenity_type_education">Opleiding</string>
+	<string name="amenity_type_education">Scholen e.d.</string>
 	<string name="amenity_type_emergency">Noodgevallen</string>
-	<string name="amenity_type_entertainment">Vermaak</string>
+	<string name="amenity_type_entertainment">Entertainment</string>
 	<string name="amenity_type_finance">Financieel</string>
 	<string name="amenity_type_geocache">Geocache</string>
 	<string name="amenity_type_healthcare">Gezondheidszorg</string>
@@ -406,7 +406,7 @@
 	<string name="amenity_type_other">Andere</string>
 	<string name="amenity_type_shop">Winkel</string>
 	<string name="amenity_type_sport">Sport</string>
-	<string name="amenity_type_sustenance">Voedsel</string>
+	<string name="amenity_type_sustenance">Horeca</string>
 	<string name="amenity_type_tourism">Toerisme</string>
 	<string name="amenity_type_transportation">Vervoer</string>
 	<string name="indexing_address">adres wordt geïndexeerd&#8230;</string>
@@ -419,9 +419,9 @@
 	<string name="m">m</string>
 	<string name="old_map_index_is_not_supported">Verouderd kaartformaat \'\'{0}\'\' wordt niet ondersteund</string>
 	<string name="poi_filter_car_aid">Auto hulp</string>
-	<string name="poi_filter_closest_poi">Dichtstbijzijnd interessepunt</string>
+	<string name="poi_filter_closest_poi">Interessepunten</string>
 	<string name="poi_filter_custom_filter">Zelfgedefinieerd filter</string>
-	<string name="poi_filter_food_shop">Levensmiddelenwinkel</string>
+	<string name="poi_filter_food_shop">Levensmiddelen</string>
 	<string name="poi_filter_for_tourists">Voor toeristen</string>
 	<string name="poi_filter_fuel">Brandstof</string>
 	<string name="poi_filter_namefinder">Online Namenzoeker</string>
@@ -591,7 +591,7 @@
 	<string name="map_orientation_default">Zelfde als apparaat-instelling</string>
 	<string name="map_orientation_portrait">Staand</string>
 	<string name="map_orientation_landscape">Liggend</string>
-	<string name="map_screen_orientation">Kaart scherm-orientation</string>
+	<string name="map_screen_orientation">Kaartscherm-oriëntatie</string>
 	<string name="map_screen_orientation_descr">Selecteer scherm-orientation</string>
 	<string name="opening_hours_not_supported">Openingtijden-formaat kan niet gewijzigd worden</string>
 	<string name="add_new_rule">Voeg nieuwe regel toe</string>
