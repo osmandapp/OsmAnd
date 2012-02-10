@@ -214,53 +214,44 @@ public class SQLiteTileSource implements ITileSource {
 		if(db == null){
 			return null;
 		}
-		try{
-			Bitmap stitchedImage = Bitmap.createBitmap(tileSize + 2 * margin, tileSize + 2 * margin, Config.ARGB_8888);
+		
+		Bitmap stitchedImage = Bitmap.createBitmap(tileSize + 2 * margin, tileSize + 2 * margin, Config.ARGB_8888);
+		Canvas canvas = new Canvas(stitchedImage);
 
-			Canvas canvas = new Canvas(stitchedImage);
-
-			for (int dx = -1; dx <= 1; dx++) {
-				for (int dy = -1; dy <= 1; dy++) {
-					if ((flags & (0x400 >> (4 * (dy + 1) + (dx + 1)))) == 0)
-						continue;
+		for (int dx = -1; dx <= 1; dx++) {
+			for (int dy = -1; dy <= 1; dy++) {
+				if ((flags & (0x400 >> (4 * (dy + 1) + (dx + 1)))) == 0)
+					continue;
 
 
-					int xOff, yOff, w, h;
-					int dstx, dsty;
-					Cursor cursor = db.rawQuery(
-							"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?",
-									new String[] {(x + dx) + "", (y + dy) + "", (17 - zoom) + ""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-					byte[] blob = null;
-					if(cursor.moveToFirst()) {
-						blob = cursor.getBlob(0);
-					}
-					cursor.close();
-					if (dx < 0) xOff = tileSize - margin; else xOff = 0;
-					if (dx == 0) w = tileSize; else w = margin;
-					if (dy < 0) yOff = tileSize - margin; else yOff = 0;
-					if (dy == 0) h = tileSize; else h = margin;
-					dstx = dx * tileSize + xOff + margin;
-					dsty = dy * tileSize + yOff + margin;
-					if(blob != null){
+				int xOff, yOff, w, h;
+				int dstx, dsty;
+				Cursor cursor = db.rawQuery(
+						"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?",
+						new String[] {(x + dx) + "", (y + dy) + "", (17 - zoom) + ""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+				byte[] blob = null;
+				if(cursor.moveToFirst()) {
+					blob = cursor.getBlob(0);
+				}
+				cursor.close();
+				if (dx < 0) xOff = tileSize - margin; else xOff = 0;
+				if (dx == 0) w = tileSize; else w = margin;
+				if (dy < 0) yOff = tileSize - margin; else yOff = 0;
+				if (dy == 0) h = tileSize; else h = margin;
+				dstx = dx * tileSize + xOff + margin;
+				dsty = dy * tileSize + yOff + margin;
+				if(blob != null){
 
-						Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
-						blob = null;
-						Rect src = new Rect(xOff, yOff, xOff + w, yOff + h);
-						Rect dst = new Rect(dstx, dsty, dstx + w, dsty + h);
-						canvas.drawBitmap(Tile, src, dst, null);
-						Tile.recycle();
-
-					}
+					Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
+					blob = null;
+					Rect src = new Rect(xOff, yOff, xOff + w, yOff + h);
+					Rect dst = new Rect(dstx, dsty, dstx + w, dsty + h);
+					canvas.drawBitmap(Tile, src, dst, null);
+					Tile.recycle();
 				}
 			}
-			return stitchedImage; // return a tileSize+2*margin size image
-		}    		        
-		catch(OutOfMemoryError ome)
-		{
-			double free= Runtime.getRuntime().freeMemory();
-			if (log.isDebugEnabled()) log.debug("Out of memory, skipping. Free mem = " + free );
-			return null;
 		}
+		return stitchedImage; // return a tileSize+2*margin size image
 		
 	}
 	
@@ -278,14 +269,7 @@ public class SQLiteTileSource implements ITileSource {
 			}
 			cursor.close();
 			if(blob != null){
-				try{
-					return BitmapFactory.decodeByteArray(blob, 0, blob.length);
-				}
-				catch(OutOfMemoryError ome)
-				{
-					double free= Runtime.getRuntime().freeMemory();
-					if (log.isDebugEnabled()) log.debug("Out of memory, skipping. Free mem = " + free );
-				}
+				return BitmapFactory.decodeByteArray(blob, 0, blob.length);
 			}
 			return null;
 		} else {
@@ -317,24 +301,17 @@ public class SQLiteTileSource implements ITileSource {
 				// in tile space:
 				int delta_px = scaledSize * offset_x;
 				int delta_py = scaledSize * offset_y;
-
-				try {
-					Bitmap xn = Bitmap.createBitmap(metaTile,
-							delta_px,
-							delta_py,
-							scaledSize + 2 * margin,
-							scaledSize + 2 * margin);
-					metaTile.recycle();
-					int scaleto = tileSize + ((2 * margin) << n);
-					Bitmap scaled = Bitmap.createScaledBitmap(xn,scaleto,scaleto,true);
-					xn.recycle();
-					return Bitmap.createBitmap(scaled, (margin << n), (margin << n), tileSize, tileSize);
-				} 
-				catch(OutOfMemoryError ome)
-				{
-					double free= Runtime.getRuntime().freeMemory();
-					if (log.isDebugEnabled()) log.debug("Out of memory, skipping. Free mem = " + free );
-				}
+				
+				Bitmap xn = Bitmap.createBitmap(metaTile,
+						delta_px,
+						delta_py,
+						scaledSize + 2 * margin,
+						scaledSize + 2 * margin);
+				metaTile.recycle();
+				int scaleto = tileSize + ((2 * margin) << n);
+				Bitmap scaled = Bitmap.createScaledBitmap(xn,scaleto,scaleto,true);
+				xn.recycle();
+				return Bitmap.createBitmap(scaled, (margin << n), (margin << n), tileSize, tileSize);
 			}
 			return null;
 		}
