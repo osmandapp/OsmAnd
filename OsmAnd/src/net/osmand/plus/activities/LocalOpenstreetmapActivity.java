@@ -123,7 +123,7 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 	protected void onPrepareDialog(int id, Dialog dialog, Bundle args) {
 		switch (id) {
 		case DIALOG_PROGRESS_UPLOAD:
-			UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(progressPointDlg, remote, db,
+			UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(progressPointDlg, remote,
 					toUpload.length);
 			uploadTask.execute(toUpload);
 			break;
@@ -136,26 +136,22 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 
 		private OpenstreetmapRemoteUtil remote;
 
-		private OpenstreetmapsDbHelper db;
-
 		private int listSize = 0;
 
 		private boolean interruptUploading = false;
 
-		private int uploaded = 0;
-
 		public UploadOpenstreetmapPointAsyncTask(ProgressDialog progress,
 												 OpenstreetmapRemoteUtil remote,
-												 OpenstreetmapsDbHelper db,
 												 int listSize) {
 			this.progress = progress;
 			this.remote = remote;
-			this.db = db;
 			this.listSize = listSize;
 		}
 
 		@Override
 		protected Integer doInBackground(OpenstreetmapPoint... points) {
+			int uploaded = 0;
+
 			for (OpenstreetmapPoint p : points) {
 				if (interruptUploading) break;
 
@@ -164,9 +160,8 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 					entityInfo = remote.loadNode(p.getEntity());
 				}
 				if (remote.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo, p.getComment())) {
-					db.deleteOpenstreetmap(p);
-					uploaded++;
 					publishProgress(p);
+					uploaded++;
 				}
 			}
 
@@ -176,7 +171,6 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 		@Override
 		protected void onPreExecute() {
 			interruptUploading = false;
-			uploaded = 0;
 
 			progress.setOnCancelListener(new DialogInterface.OnCancelListener() {
 					@Override
@@ -184,7 +178,9 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 						UploadOpenstreetmapPointAsyncTask.this.setInterruptUploading(true);
 					}
 				});
+			progress.setIndeterminate(false);
 			progress.setMax(listSize);
+			progress.setProgress(0);
 		}
 
 		@Override
@@ -203,7 +199,7 @@ public class LocalOpenstreetmapActivity extends ExpandableListActivity {
 		@Override
 		protected void onProgressUpdate(OpenstreetmapPoint... points) {
 			listAdapter.delete(points[0]);
-			progress.setProgress(uploaded);
+			progress.incrementProgressBy(1);
 		}
 
 	}
