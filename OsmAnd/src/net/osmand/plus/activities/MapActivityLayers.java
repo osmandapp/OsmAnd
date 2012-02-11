@@ -350,7 +350,7 @@ public class MapActivityLayers {
 			}
 		};
 		Builder b = new AlertDialog.Builder(activity);
-		ListView list = new ListView(activity, null, R.style.NiceActivity);
+		ListView list = new ListView(activity);
 //		list.setBackgroundColor(R.color.color_white);
 		b.setView(list);
 		final List<String> layerNames = new ArrayList<String>();
