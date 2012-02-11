@@ -569,7 +569,7 @@ public class MapActivityLayers {
 					getApplication().getSettings().setPoiFilterForMap(filterId);
 					PoiFilter f = poiFilters.getFilterById(filterId);
 					if(f != null){
-						f.clearFilter();
+						f.clearNameFilter();
 					}
 					poiMapLayer.setFilter(f);
 					mapView.refreshMap();

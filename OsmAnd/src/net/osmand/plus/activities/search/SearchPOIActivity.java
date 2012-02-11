@@ -252,7 +252,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			clearSearchQuery();
 		}
 		if(filter != null) {
-			filter.clearFilter();
+			filter.clearNameFilter();
 		}
 		
 		if(isNameFinderFilter()){

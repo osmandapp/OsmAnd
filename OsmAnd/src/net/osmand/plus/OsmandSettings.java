@@ -443,14 +443,18 @@ public class OsmandSettings {
 
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<DayNightMode> DAYNIGHT_MODE = 
-		new EnumIntPreference<DayNightMode>("daynight_mode", DayNightMode.AUTO, false, DayNightMode.values()) {
+	public final CommonPreference<DayNightMode> DAYNIGHT_MODE = 
+		new EnumIntPreference<DayNightMode>("daynight_mode", DayNightMode.DAY, false, DayNightMode.values()) {
 		@Override
 		protected boolean setValue(SharedPreferences prefs, DayNightMode val) {
 			ctx.getDaynightHelper().setDayNightMode(val);
 			return super.setValue(prefs, val);
 		}
 	};
+	{
+		DAYNIGHT_MODE.setModeDefaultValue(ApplicationMode.CAR, DayNightMode.AUTO);
+		DAYNIGHT_MODE.setModeDefaultValue(ApplicationMode.BICYCLE, DayNightMode.AUTO);
+	}
 		
 	
 	// this value string is synchronized with settings_pref.xml preference name

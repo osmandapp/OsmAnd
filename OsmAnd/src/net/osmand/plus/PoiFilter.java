@@ -73,7 +73,7 @@ public class PoiFilter {
 		if(nameFilter != null) {
 			this.nameFilter = nameFilter.toLowerCase();
 		} else {
-			clearFilter();
+			clearNameFilter();
 		}
 	}
 	
@@ -145,29 +145,32 @@ public class PoiFilter {
 		
 		return searchAmenities(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude, matcher);
 	}
+	
+	public ResultMatcher<Amenity> getResultMatcher(final ResultMatcher<Amenity> matcher){
+		if(nameFilter != null) {
+			final boolean en = OsmandSettings.getOsmandSettings(application).USE_ENGLISH_NAMES.get();
+			return new ResultMatcher<Amenity>() {
+				@Override
+				public boolean publish(Amenity object) {
+					if(!OsmAndFormatter.getPoiStringWithoutType(object, en).toLowerCase().contains(nameFilter) || 
+							(matcher != null && !matcher.publish(object))) {
+						return false;
+					}
+					return true;
+				}
+				
+				@Override
+				public boolean isCancelled() {
+					return false || (matcher != null && matcher.isCancelled());
+				}
+			};
+		}
+		return matcher;
+	}
 
 	protected List<Amenity> searchAmenities(double lat, double lon, double topLatitude,
 			double bottomLatitude, double leftLongitude, double rightLongitude, final ResultMatcher<Amenity> matcher) {
-		if(nameFilter != null) {
-			final boolean en = OsmandSettings.getOsmandSettings(application).USE_ENGLISH_NAMES.get();
-			application.getResourceManager().searchAmenities(this, 
-					topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon, new ResultMatcher<Amenity>() {
-						
-						@Override
-						public boolean publish(Amenity object) {
-							if(!OsmAndFormatter.getPoiStringWithoutType(object, en).toLowerCase().contains(nameFilter) || 
-									(matcher != null && !matcher.publish(object))) {
-								return false;
-							}
-							return true;
-						}
-						
-						@Override
-						public boolean isCancelled() {
-							return false || (matcher != null && matcher.isCancelled());
-						}
-					});
-		}
+		
 		return application.getResourceManager().searchAmenities(this, 
 				topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon, matcher);
 	}
