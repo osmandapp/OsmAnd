@@ -25,9 +25,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 import net.osmand.IProgress;
 import net.osmand.Version;
 import net.osmand.data.IndexConstants;
@@ -43,7 +40,6 @@ import net.osmand.plus.activities.DownloadFileHelper.DownloadFileShowWarning;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
-import android.app.ExpandableListActivity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
@@ -73,7 +69,9 @@ import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class DownloadIndexActivity extends ExpandableListActivity {
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
+public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
 	/** menus **/
 	private static final int RELOAD_ID = 0;

@@ -1,22 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    >
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical">
-  
-	<LinearLayout android:id="@+id/LoadingPanel" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="3dp" android:visibility="gone">
+    <RelativeLayout
+        android:id="@+id/RelativeLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-		<LinearLayout android:id="@+id/FillLayoutStart"  android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1"/>
-			<Button android:id="@+id/ActionButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/default_buttons_delete"
-				android:layout_marginLeft = "3dp" android:layout_marginTop ="3dp" android:layout_marginRight = "3dp" android:visibility="gone"/>
-			<Button android:id="@+id/CancelButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/default_buttons_cancel"
-				android:layout_marginLeft = "3dp" android:layout_marginTop ="3dp" android:layout_marginRight = "3dp" android:visibility="gone"/>
-		<LinearLayout android:id="@+id/FillLayoutEnd"  android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1"/>
+        <Button
+            android:id="@+id/favourites_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="top"
+            android:background="@drawable/tab_back_button"
+            android:text="" />
 
-		<ProgressBar android:id="@+id/ProgressBar" android:layout_marginLeft="5dp" android:indeterminate="true" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:layout_marginRight="5dp" android:visibility="gone"/>
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="27dp"
+            android:src="@drawable/tab_favorites_screen_icon" />
 
-	</LinearLayout>
+        <TextView
+            android:id="@+id/TextView1"
+            style="@style/WhiteTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="29dp"
+            android:layout_toRightOf="@+id/favourites_back_button"
+            android:text="@string/favourites_title" />
 
-	<ExpandableListView android:id="@android:id/list" android:layout_width="fill_parent" android:layout_weight="1" android:layout_height="wrap_content" 
-		android:layout_marginLeft="3dp" android:layout_marginTop="3dp" android:layout_marginRight="3dp" ></ExpandableListView>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/LoadingPanel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:visibility="gone" >
+
+        <LinearLayout
+            android:id="@+id/FillLayoutStart"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/ActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="3dp"
+            android:text="@string/default_buttons_delete"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/CancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="3dp"
+            android:text="@string/default_buttons_cancel"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/FillLayoutEnd"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ProgressBar
+            android:id="@+id/ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:indeterminate="true"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <ExpandableListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_weight="1"
+        style="@style/OsmandListView">
+    </ExpandableListView>
 
 </LinearLayout>

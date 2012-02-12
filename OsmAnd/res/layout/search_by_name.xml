@@ -14,6 +14,6 @@
 </LinearLayout>
 
 <ListView android:id="@android:id/list" android:layout_width="fill_parent" android:layout_height="fill_parent" 
-		android:layout_marginLeft="3dp" android:layout_marginTop="3dp" android:layout_marginRight="3dp"></ListView>
+		android:layout_marginLeft="3dp" android:layout_marginTop="3dp" android:layout_marginRight="3dp" style="@style/OsmandListView"></ListView>
 
 </LinearLayout>

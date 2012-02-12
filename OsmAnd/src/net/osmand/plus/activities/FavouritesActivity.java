@@ -16,9 +16,9 @@ import java.util.Set;
 
 import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
-import net.osmand.OsmAndFormatter;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.FavouritesDbHelper;
@@ -26,34 +26,35 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import android.app.AlertDialog;
-import android.app.ExpandableListActivity;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 
 /**
  * 
  */
-public class FavouritesActivity extends ExpandableListActivity {
+public class FavouritesActivity extends OsmandExpandableListActivity {
 
 	public static final int SHOW_ON_MAP = 0;
 	public static final int NAVIGATE_TO = 1;
@@ -76,8 +77,17 @@ public class FavouritesActivity extends ExpandableListActivity {
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.favourites_list);
 
+		Button backButton = (Button) findViewById(R.id.favourites_back_button);
+		backButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FavouritesActivity.this.finish();
+			}
+		});
+		
 		helper = ((OsmandApplication)getApplication()).getFavorites();
 		favouritesAdapter = new FavouritesAdapter();
 		favouritesAdapter.setFavoriteGroups(helper.getFavoriteGroups());

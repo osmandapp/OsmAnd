@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:id="@+id/spinnerText" 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:layout_centerHorizontal="true"
+    android:singleLine="true"
+    style="@style/OsmandSpinner"
+    xmlns:android="http://schemas.android.com/apk/res/android"/>

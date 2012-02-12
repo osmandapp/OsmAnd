@@ -11,24 +11,23 @@ import net.osmand.plus.R;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.views.TurnPathHelper;
-import android.app.ListActivity;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.view.Menu;
-import android.view.MenuItem;
 
 /**
  * 
  */
-public class ShowRouteInfoActivity extends ListActivity {
+public class ShowRouteInfoActivity extends OsmandListActivity {
 
 
 	private RoutingHelper helper;

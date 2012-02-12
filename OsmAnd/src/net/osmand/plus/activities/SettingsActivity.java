@@ -161,6 +161,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     @Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getListView().setCacheColorHint(getResources().getColor(R.color.activity_background));
 		addPreferencesFromResource(R.xml.settings_pref);
 		String[] entries;
 		String[] entrieValues;

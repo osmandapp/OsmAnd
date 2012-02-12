@@ -34,7 +34,7 @@
         <activity android:name="net.osmand.plus.activities.DownloadIndexActivity" android:configChanges="keyboardHidden|orientation" android:label="@string/local_index_download"></activity>
         <activity android:name="net.osmand.plus.activities.ShowRouteInfoActivity" android:label="@string/show_route"></activity>
         <activity android:name="net.osmand.plus.activities.FavouritesListActivity"></activity>
-        <activity android:name="net.osmand.plus.activities.FavouritesActivity" android:label="@string/favourites_activity"></activity>
+        <activity android:name="net.osmand.plus.activities.FavouritesActivity"></activity>
         <activity android:name="net.osmand.plus.activities.ContributionVersionActivity" android:label="@string/contribution_activity"></activity>
         
         

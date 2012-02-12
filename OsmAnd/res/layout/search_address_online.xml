@@ -6,7 +6,6 @@
 
     <TextView
         android:id="@+id/TextView"
-        style="@style/WhiteText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -43,8 +42,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:cacheColorHint="@color/activity_background"
-        android:divider="@drawable/tab_text_separator" >
+        style="@style/OsmandListView">
     </ListView>
 
     <LinearLayout

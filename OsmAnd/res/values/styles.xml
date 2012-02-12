@@ -44,14 +44,30 @@
 		<item name="@android:windowEnterAnimation">@anim/grow_from_bottom</item>
 		<item name="@android:windowExitAnimation">@anim/shrink_from_top</item>
 	</style>
-    <style name="OsmandActivity">
-        <item name="android:textColor">@color/activity_text</item>
-        <item name="android:background">@color/activity_background</item>
+	
+	<!-- The gray theme related styles -->
+    <style name="WhiteTitleText" parent="android:style/TextAppearance.Large">
     </style>
-    <style name="WhiteText">
-        <item name="android:textColor">@color/activity_text</item>
+    <style name="ListText">
+        <item name="android:textSize">25sp</item>
+    </style>
+    <style name="ListText.Small">
+        <item name="android:textSize">21sp</item>
+    </style>
+    <style name="OsmandDialog" parent="android:style/Theme.Light">
+        <item name="android:background">@color/color_white</item>
+        <item name="android:textColor">@color/color_black</item>
     </style>
     <style name="OsmandTheme" parent="android:style/Theme">
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@color/activity_background</item>
+        <item name="android:textColor">@color/activity_text</item>
     </style>
+    <style name="OsmandListView">
+        <item name="android:cacheColorHint">@color/activity_background</item>
+        <item name="android:divider">@drawable/tab_text_separator</item>
+    </style>
+    <style name="OsmandSpinner">
+        <item name="android:textColor">@color/color_black</item>
+    </style>    
 </resources>

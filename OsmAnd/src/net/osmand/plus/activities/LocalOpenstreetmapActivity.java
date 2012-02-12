@@ -1,19 +1,34 @@
 package net.osmand.plus.activities;
 
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import net.osmand.LogUtil;
+import net.osmand.OpenstreetmapPoint;
+import net.osmand.OpenstreetmapRemoteUtil;
+import net.osmand.OpenstreetmapUtil;
+import net.osmand.osm.EntityInfo;
+import net.osmand.plus.AmenityIndexRepositoryOdb;
+import net.osmand.plus.OpenstreetmapsDbHelper;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.ProgressDialogImplementation;
+import net.osmand.plus.R;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
-import android.app.ExpandableListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
@@ -21,24 +36,7 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import net.osmand.OpenstreetmapPoint;
-import net.osmand.OpenstreetmapUtil;
-import net.osmand.OpenstreetmapRemoteUtil;
-import net.osmand.LogUtil;
-import net.osmand.osm.EntityInfo;
-import net.osmand.plus.AmenityIndexRepositoryOdb;
-import net.osmand.plus.OpenstreetmapsDbHelper;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.ProgressDialogImplementation;
-import net.osmand.plus.R;
-
-public class LocalOpenstreetmapActivity extends ExpandableListActivity {
+public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 
 	/** dialogs **/
 	protected static final int DIALOG_PROGRESS_UPLOAD = 0;
