@@ -28,7 +28,7 @@ public class RoutingHelper {
 	
 	public static interface IRouteInformationListener {
 		
-		public void newRouteIsCalculated(boolean updateRoute);
+		public void newRouteIsCalculated(boolean updateRoute, boolean makeUturnWhenpossible);
 		
 		public void routeWasCancelled();
 	}
@@ -385,13 +385,13 @@ public class RoutingHelper {
 		currentDirectionInfo = 0;
 		currentRoute = 0;
 		if(isFollowingMode){
-			voiceRouter.newRouteIsCalculated(updateRoute);
+			voiceRouter.newRouteIsCalculated(updateRoute, makeUturnWhenPossible);
 		} 
 		uiHandler.post(new Runnable() {
 			@Override
 			public void run() {
 				for (IRouteInformationListener l : listeners) {
-					l.newRouteIsCalculated(updateRoute);
+					l.newRouteIsCalculated(updateRoute, makeUturnWhenPossible);
 				}
 			}
 		});
