@@ -92,6 +92,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 	private ProgressDialog progressFileDlg = null;
 	private Map<String, String> indexFileNames = null;
+	private Map<String, String> indexActivatedFileNames = null;
 	private TreeMap<String, DownloadEntry> entriesToDownload = new TreeMap<String, DownloadEntry>();
 
 	private String FREE_VERSION_NAME = "net.osmand";
@@ -192,6 +193,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 
 	private void updateLoadedFiles() {
+		indexActivatedFileNames = ((OsmandApplication)getApplication()).getResourceManager().getIndexFileNames();
 		indexFileNames = ((OsmandApplication)getApplication()).getResourceManager().getIndexFileNames();
 		((OsmandApplication)getApplication()).getResourceManager().getBackupIndexes(indexFileNames);
 	}
@@ -990,10 +992,14 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 					item.setTextColor(Color.WHITE);
 				} else {
 					if(e.getDate() != null){
-						if(e.getDate().equals(indexFileNames.get(sfName))){
+						if(e.getDate().equals(indexActivatedFileNames.get(sfName))){
 							item.setTextColor(Color.GREEN);
-						} else {
+						} else if (e.getDate().equals(indexFileNames.get(sfName))) {
+							item.setTextColor(Color.rgb(0,100,0));
+						} else if (indexActivatedFileNames.containsKey(sfName)) {
 							item.setTextColor(Color.BLUE);
+						} else {
+							item.setTextColor(Color.rgb(0,0,139));
 						}
 					} else {
 						item.setTextColor(Color.GREEN);
