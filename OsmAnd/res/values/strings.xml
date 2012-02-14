@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="tip_recent_changes_0_7_1_t">Changes in 0.7.1 :
+\n\t- Offline editing POI
+\n\t- Live Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles)
+\n\t- Show current recording track on map
+\n\t- Other changes
+	</string>
+    
     <string name="update_poi_does_not_change_indexes">POI changes inside application do not affect downloaded map files, changes are saved to local file instead.</string>
 	<string name="local_openstreetmap_uploading_poi">Uploading POI</string>
 	<string name="local_openstreetmap_poi_were_uploaded">{0} POI were uploaded</string>

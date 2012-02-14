@@ -1,6 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    	<string name="tip_recent_changes_0_7_0_t">Изменения в 0.7.0 :
+    <string name="tip_recent_changes_0_7_1_t">Изменения в 0.7.1 :
+\n\t- Offline POI редактирование
+\n\t- Live Tracking функциональность (использование и настройка web service в HowTo en)
+\n\t- Показывать текущий записываемый трек на карте
+\n\t- Другие изменения
+	</string>
+    <string name="update_poi_does_not_change_indexes">Измение POI в приложении не меняет POI данные загруженные из интернета, все изменения однако собираются в локальный файл.</string>
+	<string name="local_openstreetmap_uploading_poi">Загрузка POI</string>
+	<string name="local_openstreetmap_poi_were_uploaded">{0} POI были загружены</string>
+	<string name="local_openstreetmap_uploadall">Загрузить все POI</string>
+	<string name="local_openstreetmap_items"></string>
+	<string name="local_openstreetmap_show_poi">Показать POI на карте</string>
+	<string name="local_openstreetmap_upload">Загрузить изменения в OSM</string>
+	<string name="local_openstreetmap_delete">Удалить созданные POI</string>
+	<string name="local_openstreetmap_descr_title">Offline POI дополнение:</string>
+	<string name="local_openstreetmap_settings">Локальные Openstreetmap точки</string>
+	<string name="local_openstreetmap_settings_descr">POI сохраненные в локальную БД</string>
+    
+	<string name="live_monitoring_descr">Включить пересылку HTTP запросов на специальный web сервис</string>
+	<string name="live_monitoring">Включить Live слежение</string>
+	<string name="live_monitoring_interval_descr">Укажите интервал Live слежения</string>
+	<string name="live_monitoring_interval">Интервал Live слежения</string>
+	<string name="live_monitoring_url_descr">Укажите адрес Live слежения со следующими параметрами : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+	<string name="live_monitoring_url">Web адрес Live слежения</string>
+	<string name="gpx_monitoring_disabled_warn">Пожалуйста включите \'Записывать путь в GPX\' в Настройках</string>
+	<string name="show_current_gpx_title">Показывать текущий путь</string>
+    
+    <string name="tip_recent_changes_0_7_0_t">Изменения в 0.7.0 :
 \n\t- Offline Wikipedia карты со статьями
 \n\t- Обновление карт
 \n\t- Другие изменения
@@ -82,7 +109,7 @@
 	<string name="poi_filter_by_name">Поиск по имени</string>
 	<string name="old_poi_file_should_be_deleted">POI данные \'%1$s\' устарели и могут быть удалены.</string>
 	<string name="update_poi_file_not_found">Локальный файл, который содержит обновляемые данные POI (при создании, удалении) не найден и не может быть создан.</string>
-	<string name="update_poi_does_not_change_indexes">Измение POI в приложении не меняет POI данные загруженные из интернета, все изменения однако собираются в локальный файл.</string>
+	
 
 	<string name="button_upgrade_osmandplus">Обновить Osmand+</string>
 	<string name="map_version_changed_info">На сервере данных были найдены файлы новее данной версии программы, чтобы использовать их, пожалуйста, обновите приложение.</string>
