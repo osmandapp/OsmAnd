@@ -46,7 +46,7 @@ bear_left == ['držte sa vľavo'].
 route_new_calc(Dist) == ['Cesta je dlhá ', D] :- distance(Dist) == D.	
 route_recalc(Dist) == ['Cesta prepočítaná, cesta je dlhá ', D] :- distance(Dist) == D.
 
-location_lost == ['strata g p s pozície '].
+location_lost == ['strata satelitného signálu '].
 
 
 %% 
@@ -73,6 +73,7 @@ nth(17, 'sedemnásty ').
 distance(Dist) == [ X, ' metrov'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
 distance(Dist) == [ X, ' metrov'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
 distance(Dist) == ['približne jeden kilometer '] :- Dist < 1500.
+distance(Dist) == ['približne ', X, ' kilometre'] :- Dist < 4500, D is round(Dist/1000), num_atom(D, X).
 distance(Dist) == ['približne ', X, ' kilometrov '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
 distance(Dist) == [ X, ' kilometrov '] :- D is round(Dist/1000), num_atom(D, X).
 
