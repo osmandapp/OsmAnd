@@ -29,6 +29,7 @@ public class VoiceRouter {
 	private int currentStatus = STATUS_UNKNOWN;
 
 	private long lastTimeRouteRecalcAnnounced = 0;
+	private long lastTimeMakeUTwpAnnounced = 0;
 	
 	// default speed to have comfortable announcements (if actual speed is higher than it would be problem)
 	// Speed in m/s 
@@ -146,7 +147,7 @@ public class VoiceRouter {
 	 * Updates status of voice guidance 
 	 * @param currentLocation 
 	 */
-	protected void updateStatus(Location currentLocation){
+	protected void updateStatus(Location currentLocation, boolean makeUturnWhenPossible){
 		// directly after turn (go - ahead dist)
 		// < 800m prepare
 		// < 200m turn in
@@ -155,6 +156,20 @@ public class VoiceRouter {
 		if(currentLocation != null && currentLocation.hasSpeed()){
 			speed = Math.max(currentLocation.getSpeed(), speed);
 		}
+
+		// for Issue 863
+		if (makeUturnWhenPossible == true) {
+			//suppress "make UT when possible" message for 60sec
+			if (System.currentTimeMillis() - lastTimeMakeUTwpAnnounced > 60000) {
+				CommandBuilder play = getNewCommandPlayerToPlay();
+				if(play != null){
+					play.makeUT().play();
+					lastTimeMakeUTwpAnnounced = System.currentTimeMillis();
+				}
+			}
+			return;
+		}
+
 		RouteDirectionInfo next = router.getNextRouteDirectionInfo();
 		int dist = router.getDistanceToNextRouteDirection();
 		
@@ -251,7 +266,7 @@ public class VoiceRouter {
 			if (tParam != null) {
 				play.turn(tParam, dist);
 			} else if (next.turnType.isRoundAbout()) {
-				play.roundAbout(dist,  next.turnType.getTurnAngle(), next.turnType.getExitOut());
+				play.roundAbout(dist, next.turnType.getTurnAngle(), next.turnType.getExitOut());
 			} else if (next.turnType.getValue().equals(TurnType.TU) || next.turnType.getValue().equals(TurnType.TRU)) {
 				play.makeUT(dist);
 			} else {

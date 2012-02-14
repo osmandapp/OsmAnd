@@ -7,6 +7,7 @@ import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
+import net.osmand.plus.routing.RoutingHelper.TurnType;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -57,6 +58,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private MapStackControl rightStack;
 	private MapStackControl leftStack;
 	private ViewGroup statusBar;
+
 	
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
@@ -431,27 +433,38 @@ public class MapInfoLayer extends OsmandMapLayer {
 				boolean visible = false;
 				if (routeLayer != null && routeLayer.getHelper().isRouterEnabled() && routeLayer.getHelper().isFollowingMode()) {
 					int d = routeLayer.getHelper().getDistanceToNextRouteDirection();
-					if (d > 0 && !showMiniMap) {
-						visible = true;
-						RouteDirectionInfo next = routeLayer.getHelper().getNextRouteDirectionInfo();
-						if (next == null) {
-							if (turnType != null) {
-								turnType = null;
-								invalidate();
-							}
-						} else if (!Algoritms.objectEquals(turnType, next.turnType)) {
-							turnType = next.turnType;
+
+					// Issue 863
+					if (routeLayer.getHelper().makeUturnWhenPossible() == true) {
+						if (!showMiniMap) {
+							visible = true;
+							turnType = TurnType.valueOf(TurnType.TU);
 							TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
-							if (turnType.getExitOut() > 0) {
-								exitOut = turnType.getExitOut() + ""; //$NON-NLS-1$
-							} else {
-								exitOut = null;
-							}
 							invalidate();
 						}
-						if (distChanged(d, nextTurnDirection)) {
-							invalidate();
-							nextTurnDirection = d;
+					} else {
+						if (d > 0 && !showMiniMap) {
+							visible = true;
+							RouteDirectionInfo next = routeLayer.getHelper().getNextRouteDirectionInfo();
+							if (next == null) {
+								if (turnType != null) {
+									turnType = null;
+									invalidate();
+								}
+							} else if (!Algoritms.objectEquals(turnType, next.turnType)) {
+								turnType = next.turnType;
+								TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
+								if (turnType.getExitOut() > 0) {
+									exitOut = turnType.getExitOut() + ""; //$NON-NLS-1$
+								} else {
+									exitOut = null;
+								}
+								invalidate();
+							}
+							if (distChanged(d, nextTurnDirection)) {
+								invalidate();
+								nextTurnDirection = d;
+							}
 						}
 					}
 				}

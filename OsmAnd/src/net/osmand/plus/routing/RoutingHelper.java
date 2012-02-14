@@ -68,20 +68,30 @@ public class RoutingHelper {
 
 	private Handler uiHandler;
 
+	public static boolean makeUturnWhenPossible = false;
+	public static boolean turnImminent = false;
+
+	public static boolean makeUturnWhenPossible() {
+		return makeUturnWhenPossible;
+	}
+
+	public static boolean turnImminent() {
+		return turnImminent;
+	}
 	
-	
-	
+
+
 	public RoutingHelper(OsmandSettings settings, Context context, CommandPlayer player){
 		this.settings = settings;
 		this.context = context;
 		voiceRouter = new VoiceRouter(this, player);
 		uiHandler = new Handler();
 	}
-	
+
 	public boolean isFollowingMode() {
 		return isFollowingMode;
 	}
-	
+
 	public void setFollowingMode(boolean isFollowingMode) {
 		this.isFollowingMode = isFollowingMode;
 	}
@@ -103,6 +113,8 @@ public class RoutingHelper {
 		this.routeNodes.clear();
 		listDistance = null;
 		directionInfo = null;
+		makeUturnWhenPossible = false;
+		turnImminent = false;
 		evalWaitInterval = 3000;
 		uiHandler.post(new Runnable() {
 			@Override
@@ -199,9 +211,12 @@ public class RoutingHelper {
 	
 	public void setCurrentLocation(Location currentLocation) {
 		if(finalLocation == null || currentLocation == null){
+			makeUturnWhenPossible = false;
+			turnImminent = false;
 			return;
 		}
 		
+		makeUturnWhenPossible = false;
 		boolean calculateRoute  = false;
 		synchronized (this) {
 			if(routeNodes.isEmpty() || routeNodes.size() <= currentRoute){
@@ -335,9 +350,26 @@ public class RoutingHelper {
 //				if (Math.abs(bearing - bearingRoute) > 60f && 360 - Math.abs(bearing - bearingRoute) > 60f) {
 //				      something wrong however it could be starting movement
 //				}
+
+				// 6. Check necessity for unscheduled U-turn, Issue 863
+				if(routeNodes.size() > 0){
+					if (currentLocation.hasBearing() || lastFixedLocation != null) {
+						float bearing = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation.bearingTo(currentLocation);
+						float bearingRoute;
+						bearingRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
+						if (Math.abs(bearing - bearingRoute) > 135f && 360 - Math.abs(bearing - bearingRoute) > 135f) {
+							float d = currentLocation.distanceTo(routeNodes.get(currentRoute));
+							if (d > 50) {
+								makeUturnWhenPossible = true;
+								turnImminent = true;
+								//log.info("Bearing is opposite to bearingRoute"); //$NON-NLS-1$
+							}
+						}
+					}
+				}
 			}
 		}
-		voiceRouter.updateStatus(currentLocation);
+		voiceRouter.updateStatus(currentLocation, makeUturnWhenPossible);
 
 		lastFixedLocation = currentLocation;
 		if(calculateRoute){
@@ -428,8 +460,16 @@ public class RoutingHelper {
 			if(lastFixedLocation != null){
 				dist += lastFixedLocation.distanceTo(routeNodes.get(currentRoute));
 			}
+
+			if (dist < 100 || makeUturnWhenPossible == true) {
+				turnImminent = true;
+			} else {
+				turnImminent = false;
+			}
+
 			return dist;
 		}
+		turnImminent = false;
 		return 0;
 	}
 	
@@ -587,11 +627,11 @@ public class RoutingHelper {
 	public static class TurnType {
 		public static final String C = "C"; // continue (go straight) //$NON-NLS-1$
 		public static final String TL = "TL"; // turn left //$NON-NLS-1$
-		public static final String TSLL = "TSLL"; // turn slight left //$NON-NLS-1$
-		public static final String TSHL = "TSHL"; // turn sharp left //$NON-NLS-1$
+		public static final String TSLL = "TSLL"; // turn slightly left //$NON-NLS-1$
+		public static final String TSHL = "TSHL"; // turn sharply left //$NON-NLS-1$
 		public static final String TR = "TR"; // turn right //$NON-NLS-1$
-		public static final String TSLR = "TSLR"; // turn slight right //$NON-NLS-1$
-		public static final String TSHR = "TSHR"; // turn sharp right //$NON-NLS-1$
+		public static final String TSLR = "TSLR"; // turn slightly right //$NON-NLS-1$
+		public static final String TSHR = "TSHR"; // turn sharply right //$NON-NLS-1$
 		public static final String TU = "TU"; // U-turn //$NON-NLS-1$
 		public static final String TRU = "TRU"; // Right U-turn //$NON-NLS-1$
 		public static String[] predefinedTypes = new String[] {C, TL, TSLL, TSHL, TR, TSLR, TSHR, TU, TRU}; 
