@@ -21,17 +21,17 @@ pturn('right', ['doprava']).
 pturn('right_sh', ['ostro doprava']).
 pturn('right_sl', ['mierne doprava']).
 
-prepare_turn(Turn, Dist) == ['o ', D, 'budete odbáčať ', M] :- distance(Dist) == D, pturn(Turn, M).
+prepare_turn(Turn, Dist) == ['o ', D, 'buďte pripravený odbočiť ', M] :- distance(Dist) == D, pturn(Turn, M).
 turn(Turn, Dist) == ['o ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
-prepare_make_ut(Dist) == ['o ', D, 'sa otočte naspäť'] :- distance(Dist) == D.
+prepare_make_ut(Dist) == ['o ', D, 'buďte pripravený otočiť sa naspäť'] :- distance(Dist) == D.
 make_ut(Dist) == ['o', D, 'sa otočte naspäť'] :- distance(Dist) == D.
 make_ut == ['otočte sa naspäť'].
 
-prepare_roundabout(Dist) == ['o ', D, 'vojdete na kruhový objazd'] :- distance(Dist) == D.
+prepare_roundabout(Dist) == ['o ', D, 'buďte pripravený vojsť na kruhový objazd'] :- distance(Dist) == D.
 roundabout(Dist, _Angle, Exit) == ['o ', D, ' vojdite na kruhový objazd ', 'a opustite ho cez ', E, 'výjazd'] :- distance(Dist) == D, nth(Exit, E).
-roundabout(_Angle, Exit) == ['pôjdete cez ', E, 'výjazd'] :- nth(Exit, E).
+roundabout(_Angle, Exit) == ['choďte cez ', E, 'výjazd'] :- nth(Exit, E).
 
 go_ahead == ['pokračujte rovno'].
 go_ahead(Dist) == ['pokračujte ', D]:- distance(Dist) == D.
@@ -44,7 +44,7 @@ bear_right == ['držte sa vpravo'].
 bear_left == ['držte sa vľavo'].
 
 route_new_calc(Dist) == ['Cesta je dlhá ', D] :- distance(Dist) == D.	
-route_recalc(Dist) == ['Cesta prepočítaná, cesta je dlhá ', D] :- distance(Dist) == D.
+route_recalc(Dist) == ['Cesta prepočítaná, vzdialenosť ', D] :- distance(Dist) == D.
 
 location_lost == ['strata satelitného signálu '].
 
