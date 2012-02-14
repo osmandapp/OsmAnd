@@ -38,7 +38,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="29dp"
             android:layout_toRightOf="@+id/favourites_back_button"
-            android:text="@string/favourites_title" />
+            android:text="@string/favourites_activity" />
 
     </RelativeLayout>
 

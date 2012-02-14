@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="favourites_title">Favorites</string>
-    
     <string name="update_poi_does_not_change_indexes">POI changes inside application do not affect downloaded map files, changes are saved to local file instead.</string>
 	<string name="local_openstreetmap_uploading_poi">Uploading POI</string>
 	<string name="local_openstreetmap_poi_were_uploaded">{0} POI were uploaded</string>
@@ -716,7 +714,7 @@
     <string name="mark_point">Target</string>
     <string name="show_osm_bugs_descr">Show OpenStreetBugs on map</string>
     <string name="show_osm_bugs">Show OpenStreetBugs</string>
-    <string name="favourites_activity2">List of favorite points</string>
+    <string name="favourites_activity">Favorites</string>
     <string name="add_to_favourite">Add to Favorites</string>
     <string name="use_english_names_descr">Select between native and English names</string>
     <string name="use_english_names">Use english names</string>
