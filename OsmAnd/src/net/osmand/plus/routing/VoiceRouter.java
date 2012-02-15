@@ -167,6 +167,7 @@ public class VoiceRouter {
 					lastTimeMakeUTwpAnnounced = System.currentTimeMillis();
 				}
 			}
+			currentStatus = STATUS_UNKNOWN;
 			return;
 		}
 
