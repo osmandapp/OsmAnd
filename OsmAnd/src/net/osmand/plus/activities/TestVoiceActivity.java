@@ -78,7 +78,7 @@ public class TestVoiceActivity extends Activity {
 		addButton(ll, "Prepare to turn slighlty left after 850m then bear right", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_SL, 850).then().bearRight());
 		addButton(ll, "Turn sharply right then bear left", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH).then().bearLeft());
 		addButton(ll, "Prepare to make a U-turn after 400m", builder(p).prepareMakeUT(400));
-		addButton(ll, "Make a U-turn after 640m", builder(p).makeUT(640));
+		addButton(ll, "After 640m make a U-turn", builder(p).makeUT(640));
 		addButton(ll, "Make a U-turn", builder(p).makeUT());
 		addButton(ll, "When possible, make a U-turn", builder(p).makeUTwp());
 		addButton(ll, "Prepare to enter a roundabout after 750m", builder(p).prepareRoundAbout(750));
