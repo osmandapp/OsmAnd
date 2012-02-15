@@ -20,7 +20,7 @@ turn(Turn) == M :- turn(Turn, M).
 prepare_make_ut(Dist) == ['Prepare_to-a.ogg', 'after-m.ogg', delay_300, D, delay_300,'turn_back-e.ogg'] :- distance(Dist) == D.
 make_ut(Dist) == ['after-m.ogg', delay_300, D, delay_300, 'turn_back-e.ogg'] :- distance(Dist) == D.
 make_ut == ['turn_back-e.ogg'].
-make_ut_wp == ['turn_back-e.ogg'].
+make_ut_wp == ['turn_back_when_possible-e.ogg'].
 
 prepare_roundabout(Dist) == ['prepare_to-enter.ogg', 'after-m.ogg', delay_300, D] :- distance(Dist) == D.
 roundabout(Dist, _Angle, Exit) == ['after-m.ogg', delay_300, D, delay_300, 'enter_the_roundabout-e.ogg', delay_250, 'and_take.ogg', delay_250, E, 'exit-e.ogg'] :- distance(Dist) == D, nth(Exit, E).
