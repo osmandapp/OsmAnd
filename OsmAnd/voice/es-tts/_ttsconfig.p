@@ -21,7 +21,7 @@ turn(Turn) == M :- turn(Turn, M).
 prepare_make_ut(Dist) == [ 'Despues de ', D,' prepararse para giro en u'] :- distance(Dist) == D.
 make_ut(Dist) == [' Despues de', D, ' giro en u'] :- distance(Dist) == D.
 make_ut == ['Giro en u'].
-make_ut_wp == ['Giro en u'].
+make_ut_wp == ['Cuando posible, giro en u'].
 
 prepare_roundabout(Dist) == [ 'Despues de ', D,' prepararse para entrar '] :- distance(Dist) == D.
 roundabout(Dist, _Angle, Exit) == ['Despues de ', D, ' entrar a glorieta y tomar la ', E ] :- distance(Dist) == D, nth(Exit, E).
