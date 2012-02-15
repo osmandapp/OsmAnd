@@ -18,9 +18,10 @@ prepare_turn(Turn, Dist) == ['Prepare to ', M, ' after ', D] :- distance(Dist) =
 turn(Turn, Dist) == ['After ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
-prepare_make_ut(Dist) == ['Prepare to turn back after ', D] :- distance(Dist) == D.
-make_ut(Dist) == ['After ', D, ' turn back '] :- distance(Dist) == D.
-make_ut == ['Please make a U turn '].
+prepare_make_ut(Dist) == ['Prepare to make a U turn after ', D] :- distance(Dist) == D.
+make_ut(Dist) == ['After ', D, ' make a U turn '] :- distance(Dist) == D.
+make_ut == ['Make a U turn '].
+make_ut_wp == ['When possible, please make a U turn '].
 
 prepare_roundabout(Dist) == ['Prepare to enter a roundabout after ', D] :- distance(Dist) == D.
 roundabout(Dist, _Angle, Exit) == ['After ', D, ' enter the roundabout, and take the ', E, 'exit'] :- distance(Dist) == D, nth(Exit, E).

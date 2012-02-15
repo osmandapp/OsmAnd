@@ -21,6 +21,7 @@ turn(Turn) == M :- turn(Turn, M).
 prepare_make_ut(Dist) == [D, ' múlva készülj fel a visszafordulásra'] :- distance(Dist, no-t) == D.
 make_ut(Dist) == [D, ' múlva fordulj vissza '] :- distance(Dist, no-t) == D.
 make_ut == ['Fordulj vissza '].
+make_ut_wp == ['Fordulj vissza '].
 
 prepare_roundabout(Dist) == [D, ' múlva hajts be a körforgalomba'] :- distance(Dist, no-t) == D.
 roundabout(Dist, _Angle, Exit) == [D, ' múlva a körforgalomban ', E, 'kijáraton hajts ki'] :- distance(Dist, no-t) == D, nth(Exit, E).

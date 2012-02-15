@@ -20,6 +20,7 @@ turn(Turn) == M :- turn(Turn, M).
 prepare_make_ut(Dist) == ['dans.ogg', delay_300, D, 'preparez_vous_a.ogg',  delay_300,'faire_demi_tour.ogg'] :- distance(Dist) == D.
 make_ut(Dist) == ['dans.ogg', delay_300, D, 'preparez_vous_a.ogg',  delay_300,'faites_demi_tour.ogg'] :- distance(Dist) == D.
 make_ut == ['faites_demi_tour.ogg'].
+make_ut_wp == ['faites_demi_tour.ogg'].
 
 prepare_roundabout(Dist) == ['dans.ogg', delay_300, D,'preparez_vous_a.ogg','entrez_dans_rondpoint.ogg'] :- distance(Dist) == D.
 roundabout(Dist, _Angle, Exit) == ['dans.ogg', delay_300, D, delay_300, 'entrez_dans_rondpoint.ogg', delay_250, 'et.ogg','prenez_la.ogg',

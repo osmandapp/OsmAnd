@@ -21,6 +21,7 @@ turn(Turn) == M :- turn(Turn, M).
 prepare_make_ut(Dist) == ['Через ', D, ' выполните разворот'] :- distance(Dist) == D.
 make_ut(Dist) ==  ['Через ', D, ' выполните разворот'] :- distance(Dist) == D.
 make_ut == ['Выполните разворот '].
+make_ut_wp == ['Выполните разворот '].
 
 prepare_roundabout(Dist) == ['Приготовьте через ', D, ' круг'] :- distance(Dist) == D.
 roundabout(Dist, _Angle, Exit) == ['Через ', D, ' круг, выполните ', E, 'съезд'] :- distance(Dist) == D, nth(Exit, E).

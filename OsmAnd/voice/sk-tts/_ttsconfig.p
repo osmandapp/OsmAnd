@@ -28,6 +28,7 @@ turn(Turn) == M :- turn(Turn, M).
 prepare_make_ut(Dist) == ['o ', D, 'buďte pripravený otočiť sa naspäť'] :- distance(Dist) == D.
 make_ut(Dist) == ['o', D, 'sa otočte naspäť'] :- distance(Dist) == D.
 make_ut == ['otočte sa naspäť'].
+make_ut_wp == ['otočte sa naspäť'].
 
 prepare_roundabout(Dist) == ['o ', D, 'buďte pripravený vojsť na kruhový objazd'] :- distance(Dist) == D.
 roundabout(Dist, _Angle, Exit) == ['o ', D, ' vojdite na kruhový objazd ', 'a opustite ho cez ', E, 'výjazd'] :- distance(Dist) == D, nth(Exit, E).

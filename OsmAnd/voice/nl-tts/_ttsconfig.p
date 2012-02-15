@@ -21,6 +21,7 @@ turn(Turn) == M :- turn(Turn, M).
 prepare_make_ut(Dist) == ['Houdt rekening  met een ommekeer na ', D ] :- distance(Dist) == D. 
 make_ut(Dist) == ['Na ', D, ' omkeren'] :- distance(Dist) == D.
 make_ut == ['Graag nu omkeren '].
+make_ut_wp == ['Graag nu omkeren '].
 
 prepare_roundabout(Dist) == ['Houdt rekening met een rotonde na ', D] :- distance(Dist) == D.
 roundabout(Dist, _Angle, Exit) == ['Na ', D, ' de rotonde oprijden en dan neemt u de ', E, 'afslag'] :- distance(Dist) == D, nth(Exit, E).
