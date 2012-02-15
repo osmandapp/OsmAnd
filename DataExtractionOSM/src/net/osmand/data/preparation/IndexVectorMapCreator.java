@@ -1,6 +1,7 @@
 package net.osmand.data.preparation;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TLongObjectHashMap;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -598,10 +599,12 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		closePreparedStatements(mapBinaryStat, mapLowLevelBinaryStat);
 		mapConnection.commit();
 		try {
-			PreparedStatement selectData = mapConnection.prepareStatement("SELECT nodes, types, name, highway, restrictions FROM binary_map_objects WHERE id = ?"); //$NON-NLS-1$
-
 			writer.startWriteMapIndex(regionName);
-
+			// write map encoding rules
+			writer.writeMapEncodingRules(renderingTypes.getEncodingRuleTypes());
+			
+			// write map levels and map index
+			TLongObjectHashMap<BinaryFileReference> bounds = new TLongObjectHashMap<BinaryFileReference>();
 			for (int i = 0; i < mapZooms.size(); i++) {
 				RTree rtree = mapTree[i];
 				long rootIndex = rtree.getFileHdr().getRootIndex();
@@ -612,10 +615,10 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					writer.startWriteMapLevelIndex(mapZooms.getLevel(i).getMinZoom(), mapZooms.getLevel(i).getMaxZoom(), rootBounds
 							.getMinX(), rootBounds.getMaxX(), rootBounds.getMinY(), rootBounds.getMaxY());
 					if (last) {
-						writer.startMapTreeElement(rootBounds.getMinX(), rootBounds.getMaxX(), rootBounds.getMinY(), rootBounds.getMaxY());
-
+						BinaryFileReference ref = writer.startMapTreeElement(rootBounds.getMinX(), rootBounds.getMaxX(), rootBounds.getMinY(), rootBounds.getMaxY(), true);
+						bounds.put(rootIndex, ref);
 					}
-					writeBinaryMapTree(root, rtree, writer, selectData);
+					writeBinaryMapTree(root, rtree, writer, bounds);
 					if (last) {
 						writer.endWriteMapTreeElement();
 					}
@@ -623,8 +626,21 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					writer.endWriteMapLevelIndex();
 				}
 			}
+			// write map data blocks
+			PreparedStatement selectData = mapConnection.prepareStatement("SELECT nodes, types, name FROM binary_map_objects WHERE id = ?"); //$NON-NLS-1$
+			for (int i = 0; i < mapZooms.size(); i++) {
+				RTree rtree = mapTree[i];
+				long rootIndex = rtree.getFileHdr().getRootIndex();
+				rtree.Node root = rtree.getReadNode(rootIndex);
+				Rect rootBounds = calcBounds(root);
+				if (rootBounds != null) {
+					writeBinaryMapBlock(root, rtree, writer, selectData, bounds);
+				}
+			}
+			
+			
 			selectData.close();
-			writer.writeMapEncodingRules(renderingTypes.getEncodingRuleTypes());
+
 			writer.endWriteMapIndex();
 			writer.flush();
 		} catch (RTreeException e) {
@@ -643,30 +659,52 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		return (id >> (MAP_LEVELS_POWER)) + (id & 1);
 	}
 
-	public void writeBinaryMapTree(rtree.Node parent, RTree r, BinaryMapIndexWriter writer, PreparedStatement selectData) throws IOException, RTreeException, SQLException {
+	public void writeBinaryMapBlock(rtree.Node parent, RTree r, BinaryMapIndexWriter writer, PreparedStatement selectData, TLongObjectHashMap<BinaryFileReference> bounds) throws IOException, RTreeException, SQLException {
 		Element[] e = parent.getAllElements();
 
 		for (int i = 0; i < parent.getTotalElements(); i++) {
 			Rect re = e[i].getRect();
 			if (e[i].getElementType() == rtree.Node.LEAF_NODE) {
+				BinaryFileReference ref = bounds.get(parent.getNodeIndex());
+				// TODO create block
 				long id = ((LeafElement) e[i]).getPtr();
 				selectData.setLong(1, id);
 				ResultSet rs = selectData.executeQuery();
 				if (rs.next()) {
-					 // mapConnection.prepareStatement("SELECT nodes, types, name, highway, restrictions FROM binary_map_objects WHERE id = ?");
+					 // mapConnection.prepareStatement("SELECT nodes, types, name FROM binary_map_objects WHERE id = ?");
 					 writer.writeMapData(convertGeneratedIdToObfWrite(id), rs.getBytes(1), 
-							 rs.getBytes(2), rs.getString(3),  
-							 rs.getInt(4),  rs.getBytes(5));
+							 rs.getBytes(2), rs.getString(3));
 				} else {
 					logMapDataWarn.error("Something goes wrong with id = " + id); //$NON-NLS-1$
 				}
 			} else {
 				long ptr = ((NonLeafElement) e[i]).getPtr();
 				rtree.Node ns = r.getReadNode(ptr);
-
-				writer.startMapTreeElement(re.getMinX(), re.getMaxX(), re.getMinY(), re.getMaxY());
-
-				writeBinaryMapTree(ns, r, writer, selectData);
+				writeBinaryMapBlock(ns, r, writer, selectData, bounds);
+				writer.endWriteMapTreeElement();
+			}
+		}
+	}
+	
+	public void writeBinaryMapTree(rtree.Node parent, RTree r, BinaryMapIndexWriter writer, TLongObjectHashMap<BinaryFileReference> bounds)
+			throws IOException, RTreeException {
+		Element[] e = parent.getAllElements();
+		boolean containsLeaf = false;
+		for (int i = 0; i < parent.getTotalElements(); i++) {
+			if (e[i].getElementType() == rtree.Node.LEAF_NODE) {
+				containsLeaf = true;
+			}
+		}
+		for (int i = 0; i < parent.getTotalElements(); i++) {
+			Rect re = e[i].getRect();
+			if (e[i].getElementType() != rtree.Node.LEAF_NODE) {
+				long ptr = ((NonLeafElement) e[i]).getPtr();
+				rtree.Node ns = r.getReadNode(ptr);
+				BinaryFileReference ref = writer.startMapTreeElement(re.getMinX(), re.getMaxX(), re.getMinY(), re.getMaxY(), containsLeaf);
+				if (ref != null) {
+					bounds.put(ns.getNodeIndex(), ref);
+				}
+				writeBinaryMapTree(ns, r, writer, bounds);
 				writer.endWriteMapTreeElement();
 			}
 		}

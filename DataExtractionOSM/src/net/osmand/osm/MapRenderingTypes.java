@@ -387,6 +387,7 @@ public class MapRenderingTypes {
 		
 		int id;
 		int freq;
+		int targetId;
 		
 		String poiPrefix;
 		AmenityType poiCategory;
@@ -420,12 +421,36 @@ public class MapRenderingTypes {
 			return tag;
 		}
 		
+		public int getTargetId() {
+			return targetId;
+		}
+		
+		public void setTargetId(int targetId) {
+			this.targetId = targetId;
+		}
+		
+		public MapRulType getTargetTagValue() {
+			return targetTagValue;
+		}
+		
 		public String getValue() {
 			return value;
 		}
 		
 		public int getMinzoom() {
 			return minzoom;
+		}
+		
+		public boolean isAdditional() {
+			return additional;
+		}
+		
+		public int getFreq() {
+			return freq;
+		}
+		
+		public int updateFreq(){
+			return ++freq;
 		}
 		
 	}

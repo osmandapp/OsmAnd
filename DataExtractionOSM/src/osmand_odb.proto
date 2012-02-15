@@ -72,19 +72,21 @@ message OsmAndMapIndex {
 
 	required string name = 2;
 
+	// encoded as fixed32 length delimited
+
 	repeated MapEncodingRule rules = 4;
 	message MapEncodingRule {
 		required string tag = 3;
 		optional string value = 5;
 		// it is optional because natural order in block of rules
-		// is the same as id
+		// is the same as id (id is 1-based and order)
 		optional uint32 id = 7;
+		// min zoom combination exists
 		optional uint32 minZoom = 9;
-		// additional - 1
+		// "additional" flag is encoded as %2 == 1
 		optional uint32 type = 10;
 	}
 
-	// encoded as fixed32 length delimited
 	repeated MapRootLevel levels = 5;
 	message MapRootLevel {
 		required int32 maxZoom = 1;
@@ -103,8 +105,8 @@ message OsmAndMapIndex {
 		required sint32 top = 3; // delta encoded
 		required sint32 bottom = 4; // delta encoded
 
-		//shift to message MapDataBlock
-		optional uint32 shiftToMapData = 5;
+		//shift from mapdatabox start to message MapDataBlock
+		optional fixed32 shiftToMapData = 5;
 
 		repeated MapDataBox boxes = 7;
 	}

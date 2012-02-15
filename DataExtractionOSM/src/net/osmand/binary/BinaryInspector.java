@@ -249,7 +249,7 @@ public class BinaryInspector {
 		byte[] BUFFER_TO_READ = new byte[BUFFER_SIZE];
 		
 		ous.writeInt32(OsmandOdb.OsmAndStructure.VERSION_FIELD_NUMBER, version);
-		ous.writeInt32(OsmandOdb.OsmAndStructure.DATECREATED_FIELD_NUMBER, System.currentTimeMillis());
+		ous.writeInt64(OsmandOdb.OsmAndStructure.DATECREATED_FIELD_NUMBER, System.currentTimeMillis());
 		
 		
 		for (int k = 0; k < indexes.length; k++) {

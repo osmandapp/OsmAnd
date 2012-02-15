@@ -9,6 +9,8 @@ import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -23,6 +25,9 @@ import net.osmand.Algoritms;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.OsmandOdb;
 import net.osmand.binary.OsmandOdb.CityIndex;
+import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapDataBox;
+import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapEncodingRule;
+import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapRootLevel;
 import net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom;
@@ -178,12 +183,12 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeTag(OsmandOdb.OsmAndMapIndex.LEVELS_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		preserveInt32Size();
 		
-		codedOutStream.writeInt32(OsmandOdb.MapRootLevel.MAXZOOM_FIELD_NUMBER, maxZoom);
-		codedOutStream.writeInt32(OsmandOdb.MapRootLevel.MINZOOM_FIELD_NUMBER, minZoom);
-		codedOutStream.writeInt32(OsmandOdb.MapRootLevel.LEFT_FIELD_NUMBER, leftX);
-		codedOutStream.writeInt32(OsmandOdb.MapRootLevel.RIGHT_FIELD_NUMBER, rightX);
-		codedOutStream.writeInt32(OsmandOdb.MapRootLevel.TOP_FIELD_NUMBER, topY);
-		codedOutStream.writeInt32(OsmandOdb.MapRootLevel.BOTTOM_FIELD_NUMBER, bottomY);
+		codedOutStream.writeInt32(OsmandOdb.OsmAndMapIndex.MapRootLevel.MAXZOOM_FIELD_NUMBER, maxZoom);
+		codedOutStream.writeInt32(OsmandOdb.OsmAndMapIndex.MapRootLevel.MINZOOM_FIELD_NUMBER, minZoom);
+		codedOutStream.writeInt32(OsmandOdb.OsmAndMapIndex.MapRootLevel.LEFT_FIELD_NUMBER, leftX);
+		codedOutStream.writeInt32(OsmandOdb.OsmAndMapIndex.MapRootLevel.RIGHT_FIELD_NUMBER, rightX);
+		codedOutStream.writeInt32(OsmandOdb.OsmAndMapIndex.MapRootLevel.TOP_FIELD_NUMBER, topY);
+		codedOutStream.writeInt32(OsmandOdb.OsmAndMapIndex.MapRootLevel.BOTTOM_FIELD_NUMBER, bottomY);
 		
 		stackBounds.push(new Bounds(leftX, rightX, topY, bottomY));
 	}
@@ -194,60 +199,73 @@ public class BinaryMapIndexWriter {
 		writeInt32Size();
 	}
 	
-	public void writeMapEncodingRules(Map<String, MapRulType> types) throws IOException{
+	
+	public void writeMapEncodingRules(Map<String, MapRulType> types) throws IOException {
 		checkPeekState(MAP_INDEX_INIT);
 		long fp = getFilePointer();
-		MapEncodingRule.Builder builder = OsmandOdb.MapEncodingRule.newBuilder(); 
-		for(String tag : types.keySet()){
-			MapRulType rule = types.get(tag);
-			int type = rule.getType(null);
-			int subType = rule.getSubType(null);
-			Collection<String> valuesSet = types.get(tag).getValuesSet();
-			if(type != 0 && subType != 0){
-				builder.setTag(tag).setValue("").setType(type).setSubtype(subType).setMinZoom(rule.getMinZoom(null));
-				if (valuesSet.isEmpty()) {
-					codedOutStream.writeMessage(OsmandOdb.OsmAndMapIndex.RULES_FIELD_NUMBER, builder.build());
-				}
-				builder = OsmandOdb.MapEncodingRule.newBuilder();
+
+		ArrayList<MapRulType> out = new ArrayList<MapRulType>();
+		int highestTargetId = types.size();
+		// 1. prepare map rule type to write
+		for (MapRulType t : types.values()) {
+			if (!t.isMapIndexed() || t.getTargetTagValue() != null || t.getFreq() == 0) {
+				t.setTargetId(highestTargetId++);
+			} else {
+				out.add(t);
 			}
-			
-			for(String val : valuesSet){
-				type = rule.getType(val);
-				subType = rule.getSubType(val);
-				builder.setTag(tag).setValue(val).setType(type).setSubtype(subType).setMinZoom(rule.getMinZoom(null));
-				codedOutStream.writeMessage(OsmandOdb.OsmAndMapIndex.RULES_FIELD_NUMBER, builder.build());
-				builder = OsmandOdb.MapEncodingRule.newBuilder();
+		}
+
+		// 2. sort by frequency and assign ids
+		Collections.sort(out, new Comparator<MapRulType>() {
+			@Override
+			public int compare(MapRulType o1, MapRulType o2) {
+				return o1.getFreq() - o2.getFreq();
 			}
-			
+		});
+
+		for (int i = 0; i < out.size(); i++) {
+			MapEncodingRule.Builder builder = OsmandOdb.OsmAndMapIndex.MapEncodingRule.newBuilder();
+			MapRulType rule = out.get(i);
+			rule.setTargetId(i);
+
+			builder.setTag(rule.getTag());
+			if (rule.getValue() != null) {
+				builder.setValue(rule.getValue());
+			}
+			builder.setMinZoom(rule.getMinzoom());
+			if (rule.isAdditional()) {
+				builder.setType(1);
+			}
+			codedOutStream.writeMessage(OsmandOdb.OsmAndMapIndex.RULES_FIELD_NUMBER, builder.build());
 		}
 		long newfp = getFilePointer();
 		System.out.println("RENDERING SCHEMA takes " + (newfp - fp));
 	}
 	
 	
-	public void startMapTreeElement(int leftX, int rightX, int topY, int bottomY) throws IOException{
-		startMapTreeElement(-1L, leftX, rightX, topY, bottomY);
-	}
-	
-	public void startMapTreeElement(long baseId, int leftX, int rightX, int topY, int bottomY) throws IOException{
+	public BinaryFileReference startMapTreeElement(int leftX, int rightX, int topY, int bottomY, boolean containsLeaf) throws IOException{
 		checkPeekState(MAP_ROOT_LEVEL_INIT, MAP_TREE);
 		if(state.peek() == MAP_ROOT_LEVEL_INIT){
-			codedOutStream.writeTag(OsmandOdb.MapRootLevel.ROOT_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+			codedOutStream.writeTag(MapRootLevel.BOXES_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		} else {
-			codedOutStream.writeTag(OsmandOdb.MapTree.SUBTREES_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+			codedOutStream.writeTag(MapDataBox.BOXES_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		}
 		state.push(MAP_TREE);
 		preserveInt32Size();
+		long fp = getFilePointer();
 		
 		
 		Bounds bounds = stackBounds.peek();
-		codedOutStream.writeSInt32(OsmandOdb.MapTree.LEFT_FIELD_NUMBER, leftX - bounds.leftX);
-		codedOutStream.writeSInt32(OsmandOdb.MapTree.RIGHT_FIELD_NUMBER, rightX - bounds.rightX);
-		codedOutStream.writeSInt32(OsmandOdb.MapTree.TOP_FIELD_NUMBER, topY - bounds.topY);
-		codedOutStream.writeSInt32(OsmandOdb.MapTree.BOTTOM_FIELD_NUMBER, bottomY - bounds.bottomY);
+		codedOutStream.writeSInt32(MapDataBox.LEFT_FIELD_NUMBER, leftX - bounds.leftX);
+		codedOutStream.writeSInt32(MapDataBox.RIGHT_FIELD_NUMBER, rightX - bounds.rightX);
+		codedOutStream.writeSInt32(MapDataBox.TOP_FIELD_NUMBER, topY - bounds.topY);
+		codedOutStream.writeSInt32(MapDataBox.BOTTOM_FIELD_NUMBER, bottomY - bounds.bottomY);
 		stackBounds.push(new Bounds(leftX, rightX, topY, bottomY));
-		stackBaseIds.push(baseId);
-		stackStringTable.push(null);
+		BinaryFileReference ref = null;
+		if(containsLeaf){
+			ref = BinaryFileReference.createShiftReference(getFilePointer(), fp);
+		}
+		return ref;
 	}
 	
 
@@ -255,32 +273,33 @@ public class BinaryMapIndexWriter {
 		popState(MAP_TREE);
 		
 		stackBounds.pop();
-		Long l = stackBaseIds.pop();
-		if(l != -1){
-			codedOutStream.writeTag(OsmandOdb.MapTree.BASEID_FIELD_NUMBER, WireFormat.FieldType.UINT64.getWireType());
-			codedOutStream.writeUInt64NoTag(l);
-		}
-		Map<String, Integer> map = stackStringTable.peek();
-		if(map != null){
-			
-			int i = 0;
-			int size = 0;
-			for(String s : map.keySet()){
-				Integer integer = map.get(s);
-				if(integer != i){
-					throw new IllegalStateException();
-				}
-				i++;
-				size += CodedOutputStream.computeStringSize(OsmandOdb.StringTable.S_FIELD_NUMBER, s);
-			}
-			codedOutStream.writeTag(OsmandOdb.MapTree.STRINGTABLE_FIELD_NUMBER, WireFormat.FieldType.MESSAGE.getWireType());
-			STRING_TABLE_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapTree.STRINGTABLE_FIELD_NUMBER) + 
-						CodedOutputStream.computeRawVarint32Size(size) + size;
-			codedOutStream.writeRawVarint32(size);
-			for(String s : map.keySet()){
-				codedOutStream.writeString(OsmandOdb.StringTable.S_FIELD_NUMBER, s);
-			}
-		}
+		
+		// TODO move to box
+//		Long l = stackBaseIds.pop();
+//		if(l != -1){
+//			codedOutStream.writeTag(OsmandOdb.MapTree.BASEID_FIELD_NUMBER, WireFormat.FieldType.UINT64.getWireType());
+//			codedOutStream.writeUInt64NoTag(l);
+//		}
+//		if(map != null){
+//			
+//			int i = 0;
+//			int size = 0;
+//			for(String s : map.keySet()){
+//				Integer integer = map.get(s);
+//				if(integer != i){
+//					throw new IllegalStateException();
+//				}
+//				i++;
+//				size += CodedOutputStream.computeStringSize(OsmandOdb.StringTable.S_FIELD_NUMBER, s);
+//			}
+//			codedOutStream.writeTag(OsmandOdb.MapTree.STRINGTABLE_FIELD_NUMBER, WireFormat.FieldType.MESSAGE.getWireType());
+//			STRING_TABLE_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapTree.STRINGTABLE_FIELD_NUMBER) + 
+//						CodedOutputStream.computeRawVarint32Size(size) + size;
+//			codedOutStream.writeRawVarint32(size);
+//			for(String s : map.keySet()){
+//				codedOutStream.writeString(OsmandOdb.StringTable.S_FIELD_NUMBER, s);
+//			}
+//		}
 		writeInt32Size();
 	}
 	
@@ -961,7 +980,7 @@ public class BinaryMapIndexWriter {
 		
 		if (end) {
 			codedOutStream.writeTag(OsmandOdb.OsmAndPoiBox.SHIFTTODATA_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
-			BinaryFileReference shift = BinaryFileReference.createShiftReference(codedOutStream.getWrittenBytes(), startPoiIndex.getStartPointer());
+			BinaryFileReference shift = BinaryFileReference.createShiftReference(getFilePointer(), startPoiIndex.getStartPointer());
 			codedOutStream.writeFixed32NoTag(0);
 			return shift;
 		}
