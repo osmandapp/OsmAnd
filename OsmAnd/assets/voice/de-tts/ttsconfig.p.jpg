@@ -21,6 +21,8 @@ turn(Turn) == M :- turn(Turn, M).
 prepare_make_ut(Dist) == ['Vorbereiten zum Wenden nach ', D] :- distance(Dist, dativ) == D.
 make_ut(Dist) == ['Nach ', D, ' wenden '] :- distance(Dist, dativ) == D.
 make_ut == ['Bitte wenden '].
+make_ut_wp == ['Wenn möglich, bitte wenden '].
+
 
 prepare_roundabout(Dist) == ['Einbiegen in Kreisverkehr nach ', D] :- distance(Dist, dativ) == D.
 roundabout(Dist, _Angle, Exit) == ['Nach ', D, ' in den Kreisverkehr einfahren, dann nehmen Sie die ', E, 'Ausfahrt'] :- distance(Dist, dativ) == D, nth(Exit, E).
