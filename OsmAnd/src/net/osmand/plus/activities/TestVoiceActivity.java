@@ -80,6 +80,7 @@ public class TestVoiceActivity extends Activity {
 		addButton(ll, "Prepare to make a U-turn after 400m", builder(p).prepareMakeUT(400));
 		addButton(ll, "Make a U-turn after 640m", builder(p).makeUT(640));
 		addButton(ll, "Make a U-turn", builder(p).makeUT());
+		addButton(ll, "When possible, make a U-turn", builder(p).makeUTwp());
 		addButton(ll, "Prepare to enter a roundabout after 750m", builder(p).prepareRoundAbout(750));
 		addButton(ll, "After 450m enter the roundabout and take the 1st exit", builder(p).roundAbout(450, 0, 1));
 		addButton(ll, "Roundabout: Take the 3rd exit", builder(p).roundAbout(0, 3));

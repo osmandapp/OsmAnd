@@ -163,7 +163,7 @@ public class VoiceRouter {
 			if (System.currentTimeMillis() - lastTimeMakeUTwpAnnounced > 60000) {
 				CommandBuilder play = getNewCommandPlayerToPlay();
 				if(play != null){
-					play.makeUT().play();
+					play.makeUTwp().play();
 					lastTimeMakeUTwpAnnounced = System.currentTimeMillis();
 				}
 			}
