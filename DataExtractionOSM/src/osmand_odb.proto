@@ -13,6 +13,9 @@ option java_package = "net.osmand.binary";
 message OsmAndStructure {
    required uint32 version = 1;
 
+   // System.currentTimeMillis()
+   required int64 dateCreated = 18;
+
    // first version of map index was 3.
    // encoded as fixed32 length delimited  
    repeated OsmAndAddressIndex addressIndex = 7;

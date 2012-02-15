@@ -55,6 +55,7 @@ public class BinaryMapIndexReader {
 	
 	private final RandomAccessFile raf;
 	private int version;
+	private long dateCreated;
 	// keep them immutable inside
 	private List<MapIndex> mapIndexes = new ArrayList<MapIndex>();
 	private List<PoiRegion> poiIndexes = new ArrayList<PoiRegion>();
@@ -67,6 +68,7 @@ public class BinaryMapIndexReader {
 	private final BinaryMapTransportReaderAdapter transportAdapter;
 	private final BinaryMapPoiReaderAdapter poiAdapter;
 	private final BinaryMapAddressReaderAdapter addressAdapter;
+	
 	
 	public BinaryMapIndexReader(final RandomAccessFile raf) throws IOException {
 		this(raf, false);
@@ -103,6 +105,10 @@ public class BinaryMapIndexReader {
 		init();
 	}
 	
+	public long getDateCreated() {
+		return dateCreated;
+	}
+	
 	private void init() throws IOException {
 		boolean initCorrectly = false;
 		while(true){
@@ -116,6 +122,9 @@ public class BinaryMapIndexReader {
 				return;
 			case OsmandOdb.OsmAndStructure.VERSION_FIELD_NUMBER :
 				version = codedIS.readUInt32();
+				break;
+			case OsmandOdb.OsmAndStructure.DATECREATED_FIELD_NUMBER :
+				dateCreated = codedIS.readInt64();
 				break;
 			case OsmandOdb.OsmAndStructure.MAPINDEX_FIELD_NUMBER:
 				MapIndex mapIndex = new MapIndex();
