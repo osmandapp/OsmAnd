@@ -652,13 +652,13 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 				}
 				location.setSpeed(speed);
 			}
-		}
+	}
     	if(locationLayer.getLastKnownLocation() != null && location != null && location.hasBearing()){
     		if(locationLayer.getLastKnownLocation().distanceTo(location) > 10 && !isRunningOnEmulator()){
     			location.setBearing(locationLayer.getLastKnownLocation().bearingTo(location));
     		}
     	}
-	}
+    }
     
     public void setLocation(Location location){
     	if(Log.isLoggable(LogUtil.TAG, Log.DEBUG)){
@@ -666,30 +666,29 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
     	}
     	if(location != null ){
     		// write only with 50 meters accuracy
-			if (!location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
-				if (settings.SAVE_TRACK_TO_GPX.get()) {
-					savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
-							location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
-					if (settings.SHOW_CURRENT_GPX_TRACK.get()) {
-						WptPt pt = new GPXUtilities.WptPt(location.getLatitude(), location.getLongitude(), location.getTime(),
-								location.getAltitude(), location.getSpeed(), location.getAccuracy());
-						mapLayers.getGpxLayer().addTrackPoint(pt);
-					}
+		if (!location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
+			if (settings.SAVE_TRACK_TO_GPX.get()) {
+				savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
+					location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
+				if (settings.SHOW_CURRENT_GPX_TRACK.get()) {
+					WptPt pt = new GPXUtilities.WptPt(location.getLatitude(), location.getLongitude(), location.getTime(),
+						location.getAltitude(), location.getSpeed(), location.getAccuracy());
+					mapLayers.getGpxLayer().addTrackPoint(pt);
 				}
 			}
-			if(settings.LIVE_MONITORING.get()){
-				liveMonitoringHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
-						location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
-			}
 		}
+		if(settings.LIVE_MONITORING.get()){
+			liveMonitoringHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
+				location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
+		}
+	}
 
     	
     	registerUnregisterSensor(location);
     	updateSpeedBearing(location);
     	mapLayers.getLocationLayer().setLastKnownLocation(location);
     	if(routingHelper.isFollowingMode()){
-    		if(location == null || 
-    				!location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
+    		if(location == null || !location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
     			// Update routing position  
     			routingHelper.setCurrentLocation(location);
     			// Check with delay that gps location is not lost
@@ -710,8 +709,8 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
     	}
     	
     	if (location != null) {
-			if (isMapLinkedToLocation()) {
-				if(settings.AUTO_ZOOM_MAP.get() && location.hasSpeed()){
+		if (isMapLinkedToLocation()) {
+			if(settings.AUTO_ZOOM_MAP.get() && location.hasSpeed()){
 	    			int z = defineZoomFromSpeed(location.getSpeed(), mapView.getZoom());
 	    			if(mapView.getZoom() != z && !mapView.mapIsAnimating()){
 	    				long now = System.currentTimeMillis();
@@ -722,21 +721,21 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 	    				}
 	    			}
 	    		}
-		    	int currentMapRotation = settings.ROTATE_MAP.get();
-				if (location.hasBearing() && currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
-					mapView.setRotate(-location.getBearing());
-				}
-				mapView.setLatLon(location.getLatitude(), location.getLongitude());
-			} else {
-				if(!mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()){
-					mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(true);
-				}
+	    		int currentMapRotation = settings.ROTATE_MAP.get();
+			if (location.hasBearing() && currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
+				mapView.setRotate(-location.getBearing());
 			}
+			mapView.setLatLon(location.getLatitude(), location.getLongitude());
 		} else {
-			if(mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()){
-				mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(false);
+			if(!mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()){
+				mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(true);
 			}
 		}
+	} else {
+		if(mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()){
+			mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(false);
+		}
+	}
     	// When location is changed we need to refresh map in order to show movement! 
     	mapView.refreshMap();
     }
