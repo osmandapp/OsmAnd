@@ -27,8 +27,8 @@
 	
 	<color name="index_unknown">#FFFFFF</color> <!-- standard WHITE -->
 	<color name="act_index_uptodate">#00FF00</color> <!-- standard GREEN -->
-	<color name="deact_index_uptodate">#007C00</color> <!-- DARK_GREEN+3 shades, related to above! -->
-	<color name="act_index_updateable">#8080FF</color> <!-- standard LIGHT_BLUE -->
+	<color name="deact_index_uptodate">#003C00</color> <!-- DARK_GREEN -5 shades, related to above! -->
+	<color name="act_index_updateable">#A8A8FF</color> <!-- standard LIGHT_BLUE +5 -->
 	<color name="deact_index_updateable">#00008B</color> <!-- DARK_BLUE, related to above! -->
 
 	<color name="localindex_notsupported">#FF0000</color> <!-- standard RED -->
