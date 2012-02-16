@@ -63,6 +63,14 @@
         <item name="android:windowBackground">@color/activity_background</item>
         <item name="android:textColor">@color/activity_text</item>
         <item name="android:spinnerItemStyle">@style/OsmandSpinnerItem</item>
+	<item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewLight</item>
+	<item name="android:dropDownItemStyle">@style/Widget.DropDownItemLight</item>
+    </style>
+    <style name="AutoCompleteTextViewLight" parent="@android:style/Widget.AutoCompleteTextView">
+	<item name="android:textColor">@android:color/primary_text_light</item>
+    </style>
+    <style name="Widget.DropDownItemLight" parent="@android:style/Widget.DropDownItem">
+	<item name="android:textColor">@android:color/primary_text_light</item>
     </style>
     <style name="OsmandSpinnerItem" parent="android:Widget.TextView.SpinnerItem">
         <item name="android:textAppearance">@style/OsmandTextAppearanceSpinnerItem</item>
