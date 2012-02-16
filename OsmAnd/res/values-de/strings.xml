@@ -177,7 +177,6 @@
 	<string name="poi_filter_by_name">Nach Namen suchen</string>
 	<string name="old_poi_file_should_be_deleted">Die POI-Datei \'%1$s\' wird nicht mehr benötigt und kann gelöscht werden.</string>
 	<string name="update_poi_file_not_found">Lokale Datei für POI-Änderungen nicht gefunden und konnte nicht erstellt werden.</string>
-	<string name="update_poi_does_not_change_indexes">POI-Änderungen in der Applikation beeinflussen die herunergeladenen Kartendateien nicht, sondern werden in einer lokalen Datei gespeichert.</string>
 
 	<string name="button_upgrade_osmandplus">OsmAnd+ aktualisieren</string>
 	<string name="map_version_changed_info">Der Server enthält Karten die mit ihrer derzeitigen Anwendungsversion nicht kompatibel sind. Um sie zu laden und zu verwenden, aktualisieren Sie bitte auf die neueste Version.</string>
