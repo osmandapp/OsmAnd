@@ -844,7 +844,9 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		public DirectionDrawable(){
 			paintRouteDirection = new Paint();
 			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
-			paintRouteDirection.setColor(getResources().getColor(R.color.poi_direction));
+			// colors.xml-Issue
+			//paintRouteDirection.setColor(getResources().getColor(R.color.poi_direction));
+			paintRouteDirection.setColor(Color.rgb(100, 0, 255)));
 			paintRouteDirection.setAntiAlias(true);
 			
 			int h = 15;
@@ -865,11 +867,17 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		
 		public void setOpenedColor(int opened){
 			if(opened == 0){
-				paintRouteDirection.setColor(getResources().getColor(R.color.poi_open));
+				// colors.xml-Issue
+				//paintRouteDirection.setColor(getResources().getColor(R.color.poi_open));
+				paintRouteDirection.setColor(Color.rgb(50, 205, 50));
 			} else if(opened == -1){
-				paintRouteDirection.setColor(getResources().getColor(R.color.poi_unknown_arrow));
+				// colors.xml-Issue
+				//paintRouteDirection.setColor(getResources().getColor(R.color.poi_unknown_arrow));
+				paintRouteDirection.setColor(Color.rgb(200, 200, 200)));
 			} else {
-				paintRouteDirection.setColor(getResources().getColor(R.color.poi_closed));
+				// colors.xml-Issue
+				//paintRouteDirection.setColor(getResources().getColor(R.color.poi_closed));
+				paintRouteDirection.setColor(Color.rgb(238, 50, 50)));
 			}
 		}
 		

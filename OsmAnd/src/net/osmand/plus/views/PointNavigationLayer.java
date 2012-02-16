@@ -35,7 +35,7 @@ public class PointNavigationLayer extends OsmandMapLayer {
 	private void initUI() {
 		
 		point = new Paint();
-		point.setColor(getResources().getColor(R.color.nav_point));
+		point.setColor(view.getResources().getColor(R.color.nav_point));
 		point.setAntiAlias(true);
 		point.setStyle(Style.FILL);
 
