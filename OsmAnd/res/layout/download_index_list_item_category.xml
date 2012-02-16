@@ -3,6 +3,6 @@
 	android:layout_height="wrap_content">
 
 	<TextView android:id="@+id/download_index_category_name" android:gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:textSize="21sp" android:layout_marginTop="5dp" android:layout_marginLeft="40dp"></TextView>
+		android:textSize="21sp" android:layout_marginTop="5dp" android:layout_marginLeft="40dp" android:autoLink="web"></TextView>
 
 </LinearLayout>

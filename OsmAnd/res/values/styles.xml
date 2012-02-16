@@ -63,6 +63,15 @@
         <item name="android:windowBackground">@color/activity_background</item>
         <item name="android:textColor">@color/activity_text</item>
     </style>
+    <style name="CustomWindowTitleBackground">
+        <item name="android:background">@color/activity_background</item>
+    </style>
+    <style name="CustomTitleTheme" parent="OsmandTheme">
+        <item name="android:windowTitleSize">46dp</item>
+        <item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>
+        <item name="android:preferenceScreenStyle">@style/OsmandTheme</item>
+        <!-- item name="android:preferenceCategoryStyle">@style/OsmandTheme</item-->
+    </style>
     <style name="OsmandListView">
         <item name="android:cacheColorHint">@color/activity_background</item>
         <item name="android:divider">@drawable/tab_text_separator</item>

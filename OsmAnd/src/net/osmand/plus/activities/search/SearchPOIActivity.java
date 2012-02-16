@@ -29,6 +29,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.SearchByNameFilter;
+import net.osmand.plus.activities.CustomTitleBar;
 import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandApplication;
@@ -114,7 +115,9 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
+		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.searchpoi_activity, R.drawable.tab_search_poi_icon);
 		setContentView(R.layout.searchpoi);
+		titleBar.afterSetContentView();
 		
 		uiHandler = new Handler();
 		searchPOILevel = (Button) findViewById(R.id.SearchPOILevelButton);
@@ -862,11 +865,11 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		
 		public void setOpenedColor(int opened){
 			if(opened == 0){
-				paintRouteDirection.setColor(Color.rgb(0, 205, 0));
+				paintRouteDirection.setColor(Color.rgb(50, 205, 50));
 			} else if(opened == -1){
-				paintRouteDirection.setColor(Color.rgb(150, 150, 150));
+				paintRouteDirection.setColor(Color.rgb(200, 200, 200));
 			} else {
-				paintRouteDirection.setColor(Color.rgb(238, 0, 0));
+				paintRouteDirection.setColor(Color.rgb(238, 50, 50));
 			}
 		}
 		

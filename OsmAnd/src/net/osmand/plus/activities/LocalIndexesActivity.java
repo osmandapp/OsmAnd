@@ -75,8 +75,9 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// requestWindowFeature(Window.FEATURE_NO_TITLE);
+		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.local_index_descr_title, R.drawable.tab_settings_screen_icon);
 		setContentView(R.layout.local_index);
+		titleBar.afterSetContentView();
 		settings = OsmandSettings.getOsmandSettings(this);
 		descriptionLoader = new LoadLocalIndexDescriptionTask();
 		listAdapter = new LocalIndexesAdapter();

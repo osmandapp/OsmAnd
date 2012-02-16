@@ -5,43 +5,6 @@
     android:orientation="vertical"
     >
 
-    <RelativeLayout
-        android:id="@+id/RelativeLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/favourites_back_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="top"
-            android:background="@drawable/tab_back_button"
-            android:text="" />
-
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="27dp"
-            android:src="@drawable/tab_favorites_screen_icon" />
-
-        <TextView
-            android:id="@+id/TextView1"
-            style="@style/WhiteTitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="29dp"
-            android:layout_toRightOf="@+id/favourites_back_button"
-            android:text="@string/favourites_activity" />
-
-    </RelativeLayout>
-
     <LinearLayout
         android:id="@+id/LoadingPanel"
         android:layout_width="fill_parent"

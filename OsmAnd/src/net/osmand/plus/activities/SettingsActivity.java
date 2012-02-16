@@ -157,12 +157,16 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		return setFiles;
 	}
-	
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	CustomTitleBar titleBar = new CustomTitleBar(this, R.string.settings_activity, R.drawable.tab_settings_screen_icon);
 		super.onCreate(savedInstanceState);
 		getListView().setCacheColorHint(getResources().getColor(R.color.activity_background));
+		getListView().setDivider(getResources().getDrawable(R.drawable.tab_text_separator));
 		addPreferencesFromResource(R.xml.settings_pref);
+		titleBar.afterSetContentView();
+		
 		String[] entries;
 		String[] entrieValues;
 		PreferenceScreen screen = getPreferenceScreen();

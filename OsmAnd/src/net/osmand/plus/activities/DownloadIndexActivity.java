@@ -122,7 +122,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		}
 	}
 	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -130,7 +129,9 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			downloadListIndexThread = new DownloadIndexListThread(Version.getVersionAsURLParam(this));
 		}
 		// recreation upon rotation is prevented in manifest file
+		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.local_index_download, R.drawable.tab_settings_screen_icon);
 		setContentView(R.layout.download_index);
+		titleBar.afterSetContentView();
 	    tracker = GoogleAnalyticsTracker.getInstance();
 	    // Start the tracker in manual dispatch mode...
 	    tracker.startNewSession(getString(R.string.ga_api_key), 60, this);
@@ -907,7 +908,12 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			@Override
 			protected void publishResults(CharSequence constraint, FilterResults results) {
 				list.clear();
-				list.addAll(categorizeIndexItems((Collection<IndexItem>) results.values));
+				Collection<IndexItem> items = (Collection<IndexItem>) results.values;
+				if (items != null && !items.isEmpty()) {
+					list.addAll(categorizeIndexItems(items));
+				} else {
+					list.add(new IndexItemCategory(getResources().getString(R.string.select_index_file_to_download),1));
+				}
 				notifyDataSetChanged();
 			}
 		}
@@ -958,6 +964,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			final View row = v; 
 			TextView item = (TextView) row.findViewById(R.id.download_index_category_name);
 			item.setText(group.name);
+			item.setLinkTextColor(Color.YELLOW);
 			return row;
 		}
 
@@ -997,7 +1004,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 						} else if (e.getDate().equals(indexFileNames.get(sfName))) {
 							item.setTextColor(Color.rgb(0,100,0));
 						} else if (indexActivatedFileNames.containsKey(sfName)) {
-							item.setTextColor(Color.BLUE);
+							item.setTextColor(getResources().getColor(R.color.color_orange));
 						} else {
 							item.setTextColor(Color.rgb(0,0,139));
 						}

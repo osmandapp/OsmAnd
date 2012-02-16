@@ -10,4 +10,5 @@
 	<color name="color_transparent">#00000000</color>
 	<color name="color_white">#FFFFFF</color>
 	<color name="color_red">#FF0000</color>
+	<color name="color_orange">#FD9822</color>
 </resources>

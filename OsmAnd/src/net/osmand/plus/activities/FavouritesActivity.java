@@ -38,11 +38,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
@@ -77,16 +75,9 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.favourites_activity, R.drawable.tab_favorites_screen_icon);
 		setContentView(R.layout.favourites_list);
-
-		Button backButton = (Button) findViewById(R.id.favourites_back_button);
-		backButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FavouritesActivity.this.finish();
-			}
-		});
+		titleBar.afterSetContentView();
 		
 		helper = ((OsmandApplication)getApplication()).getFavorites();
 		favouritesAdapter = new FavouritesAdapter();
@@ -147,7 +138,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			}
 		});
 	}
-	
+
 	private void cancelSelectingMode() {
 		selectionMode = false;
 		findViewById(R.id.ActionButton).setVisibility(View.GONE);

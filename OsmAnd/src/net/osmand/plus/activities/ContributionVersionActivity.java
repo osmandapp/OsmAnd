@@ -31,7 +31,6 @@ import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Filterable;
 import android.widget.ListView;
@@ -50,7 +49,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 	
 	private ProgressDialog progressDlg;
 	private Date currentInstalledDate;
-	
+
 	private List<OsmAndBuild> downloadedBuilds = new ArrayList<OsmAndBuild>();
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 	private File pathToDownload = new File(Environment.getExternalStorageDirectory(), ResourceManager.APP_DIR + "osmandToInstall.apk");
@@ -60,8 +59,9 @@ public class ContributionVersionActivity extends OsmandListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.download_files, R.drawable.tab_favorites_screen_icon);
 		setContentView(R.layout.download_builds);
+		titleBar.afterSetContentView();
 		
 		String installDate = OsmandSettings.getOsmandSettings(this).CONTRIBUTION_INSTALL_APP_DATE.get();
 		if(installDate != null){
@@ -255,9 +255,9 @@ public class ContributionVersionActivity extends OsmandListActivity {
 
 			if(currentInstalledDate != null){
 				if(currentInstalledDate.before(build.date)){
-					tagView.setTextColor(Color.GREEN);
+					tagView.setTextColor(getResources().getColor(R.color.color_orange));
 				} else {
-					tagView.setTextColor(Color.BLUE);
+					tagView.setTextColor(Color.WHITE);
 				}
 			} else {
 				tagView.setTextColor(Color.WHITE);
