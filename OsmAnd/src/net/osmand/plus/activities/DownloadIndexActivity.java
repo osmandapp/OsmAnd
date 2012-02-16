@@ -1002,11 +1002,11 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 						if(e.getDate().equals(indexActivatedFileNames.get(sfName))){
 							item.setTextColor(Color.GREEN);
 						} else if (e.getDate().equals(indexFileNames.get(sfName))) {
-							item.setTextColor(Color.rgb(0,100,0));
+							item.setTextColor(Color.rgb(0,100,0));     //This is standard DARK_GREEN
 						} else if (indexActivatedFileNames.containsKey(sfName)) {
-							item.setTextColor(getResources().getColor(R.color.color_orange));
+							item.setTextColor(Color.rgb(128,128,255)); //This is standard LIGHT_BLUE
 						} else {
-							item.setTextColor(Color.rgb(0,0,139));
+							item.setTextColor(Color.rgb(0,0,139));     //This is standard DARK_BLUE
 						}
 					} else {
 						item.setTextColor(Color.GREEN);
