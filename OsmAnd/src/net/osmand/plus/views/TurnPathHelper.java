@@ -2,8 +2,8 @@ package net.osmand.plus.views;
 
 import net.osmand.plus.routing.RoutingHelper.TurnType;
 import net.osmand.plus.R;
+import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
@@ -190,15 +190,12 @@ public class TurnPathHelper {
 		Path p = new Path();
 		Path dp = new Path();
 		
-		public RouteDrawable(){
+		public RouteDrawable(Resources resources){
 			paintRouteDirection = new Paint();
 			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
-			// colors.xml-Issue
-			//paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow));
-			paintRouteDirection.setColor(Color.rgb(250, 222, 35));
+			paintRouteDirection.setColor(resources.getColor(R.color.nav_arrow));
 			paintRouteDirection.setAntiAlias(true);
 		}
-		
 
 		@Override
 		protected void onBoundsChange(Rect bounds) {
