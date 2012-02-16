@@ -2,7 +2,6 @@ package net.osmand.plus.views;
 
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.R;
-import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.ApplicationMode;
 import android.content.Context;
 import android.graphics.Bitmap;

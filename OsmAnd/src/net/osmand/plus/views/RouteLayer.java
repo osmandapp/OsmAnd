@@ -7,7 +7,6 @@ import net.osmand.LogUtil;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.R;
-import net.osmand.plus.ResourceManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;

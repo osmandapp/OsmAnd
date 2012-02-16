@@ -8,7 +8,6 @@ import net.osmand.osm.LatLon;
 import net.osmand.plus.TransportIndexRepository.RouteInfoLocation;
 import net.osmand.plus.activities.TransportRouteHelper;
 import net.osmand.plus.R;
-import net.osmand.plus.ResourceManager;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
