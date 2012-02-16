@@ -1,5 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="tip_recent_changes_0_7_1_t">Changes in 0.7.1 :
+\n\t- Offline POI-Bearbeitung 
+\n\t- Live-Tracking Option: Koordinaten periodisch an einen Web-Service schicken (Setup-Anleitung für eigenen Web-Service in den HowTo-Artikeln)
+\n\t- Anzeige des gegenwärtig aufgezeichneten Tracks möglich
+\n\t- Richtungsüberprüfung: \'Bitte wenden\' wird jetzt angezeigt und angsagt bei entgegengesetzter Bewegungsrichtung oder bei verpasster Abzweigung
+\n\t- Neue Ansage \'Strecke neu berechnet\'
+\n\t- Optische Anzeige eines innerhalb 100m bevorstehenden Abbiegevorgangs durch Farbwehsel des Richtungspfeils
+\n\t- Die Aktualität auch der deaktivierten Karten wird jetzt im Donwload-Liste in dunkelgrün und dunkelblau angezeigt
+\n\t- Weitere Verbesserungen
+	</string>
+
+	<string name="update_poi_does_not_change_indexes">Das Bearbeiten von POIs innerhalb der Applikation beeinflusst nicht die Offline-Karten, sondern wird in einer eigenen Datei gespeichert.</string>
+	<string name="local_openstreetmap_uploading_poi">POI hochladen...</string>
+	<string name="local_openstreetmap_poi_were_uploaded">{0} POI wurden hochgeladen</string>
+	<string name="local_openstreetmap_uploadall">Alle POI hochladen</string>
+	<string name="local_openstreetmap_items"></string>
+	<string name="local_openstreetmap_show_poi">POI auf Karte zeigen</string>
+	<string name="local_openstreetmap_upload">POI Änderung auf OSM hochladen</string>
+	<string name="local_openstreetmap_delete">POI Änderung löschen</string>
+	<string name="local_openstreetmap_descr_title">Asynchrone Openstreetmap POI Edition:</string>
+	<string name="local_openstreetmap_settings">Lokale Openstreetmap Punkte</string>
+	<string name="local_openstreetmap_settings_descr">Lokale Punkte in DB gespeichert</string>
+
 	<string name="live_monitoring_descr">Senden von HTTP-Daten an einen Web-Service</string>
 	<string name="live_monitoring">Live-Tracking aktivieren</string>
 	<string name="live_monitoring_interval_descr">Angabe des Live-Tracking Invervalls</string>
