@@ -339,7 +339,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 			if (child.getAction() == OpenstreetmapUtil.Action.CREATE) {
 				viewName.setTextColor(getResources().getColor(R.color.osm_create));
 			} else if (child.getAction() == OpenstreetmapUtil.Action.MODIFY) {
-				viewName.setTextColor(getResources().getColor(R.color.osm_modify)A);
+				viewName.setTextColor(getResources().getColor(R.color.osm_modify));
 			} else if (child.getAction() == OpenstreetmapUtil.Action.DELETE) {
 				viewName.setTextColor(getResources().getColor(R.color.osm_delete));
 			}
