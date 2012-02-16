@@ -58,7 +58,7 @@
         <item name="android:background">@color/color_white</item>
         <item name="android:textColor">@color/color_black</item>
     </style>
-    <style name="OsmandTheme" parent="android:style/Theme">
+    <style name="OsmandTheme" parent="android:style/Theme.Light">
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@color/activity_background</item>
         <item name="android:textColor">@color/activity_text</item>
