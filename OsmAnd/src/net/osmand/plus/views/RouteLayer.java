@@ -42,7 +42,9 @@ public class RouteLayer extends OsmandMapLayer {
 		boundsRect = new Rect(0, 0, view.getWidth(), view.getHeight());
 		tileRect = new RectF();
 		paint = new Paint();
-		paint.setColor(getResources().getColor(R.color.nav_track));
+		// colors.xml-Issue
+		//paint.setColor(getResources().getColor(R.color.nav_track));
+		paint.setColor(Color.BLUE);
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(14);
 		paint.setAlpha(150);

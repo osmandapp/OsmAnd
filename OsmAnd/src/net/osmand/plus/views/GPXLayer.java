@@ -33,7 +33,9 @@ public class GPXLayer extends OsmandMapLayer {
 	
 	private void initUI() {
 		paint = new Paint();
-		paint.setColor(getResources().getColor(R.color.gpx_track));
+		// colors.xml-Issue
+		//paint.setColor(getResources().getColor(R.color.gpx_track));
+		paint.setColor(Color.argb(180, 160, 10, 215));
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(14);
 		paint.setAntiAlias(true);
