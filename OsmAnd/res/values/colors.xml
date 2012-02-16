@@ -28,7 +28,7 @@
 	<color name="index_unknown">#FFFFFF</color> <!-- standard WHITE -->
 	<color name="act_index_uptodate">#00FF00</color> <!-- standard GREEN -->
 	<color name="deact_index_uptodate">#003C00</color> <!-- DARK_GREEN -5 shades, related to above! -->
-	<color name="act_index_updateable">#A8A8FF</color> <!-- standard LIGHT_BLUE +5 -->
+	<color name="act_index_updateable">#0080FF</color> <!-- modified BLUE because of grey background -->
 	<color name="deact_index_updateable">#00008B</color> <!-- DARK_BLUE, related to above! -->
 
 	<color name="localindex_notsupported">#FF0000</color> <!-- standard RED -->
