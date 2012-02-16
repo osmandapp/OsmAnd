@@ -58,10 +58,17 @@
         <item name="android:background">@color/color_white</item>
         <item name="android:textColor">@color/color_black</item>
     </style>
-    <style name="OsmandTheme" parent="android:style/Theme.Light">
+    <style name="OsmandTheme" parent="android:style/Theme">
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@color/activity_background</item>
         <item name="android:textColor">@color/activity_text</item>
+        <item name="android:spinnerItemStyle">@style/OsmandSpinnerItem</item>
+    </style>
+    <style name="OsmandSpinnerItem" parent="android:Widget.TextView.SpinnerItem">
+        <item name="android:textAppearance">@style/OsmandTextAppearanceSpinnerItem</item>
+    </style>
+    <style name="OsmandTextAppearanceSpinnerItem" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+        <item name="android:textColor">#000000</item>
     </style>
     <style name="CustomWindowTitleBackground">
         <item name="android:background">@color/activity_background</item>
