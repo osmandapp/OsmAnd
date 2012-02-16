@@ -996,20 +996,20 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			if(indexFileNames != null){
 				String sfName = convertServerFileNameToLocal(e.getFileName());
 				if(!indexFileNames.containsKey(sfName)){
-					item.setTextColor(Color.WHITE);
+					item.setTextColor(getResources().getColor(R.color.index_unknown));
 				} else {
 					if(e.getDate() != null){
 						if(e.getDate().equals(indexActivatedFileNames.get(sfName))){
-							item.setTextColor(Color.GREEN);
+							item.setTextColor(getResources().getColor(R.color.act_index_uptodate)); //GREEN
 						} else if (e.getDate().equals(indexFileNames.get(sfName))) {
-							item.setTextColor(Color.rgb(0,100,0));     //This is standard DARK_GREEN
+							item.setTextColor(getResources().getColor(R.color.deact_index_uptodate)); //DARK_GREEN
 						} else if (indexActivatedFileNames.containsKey(sfName)) {
-							item.setTextColor(Color.rgb(128,128,255)); //This is standard LIGHT_BLUE
+							item.setTextColor(getResources().getColor(R.color.act_index_updateable)); //LIGHT_BLUE
 						} else {
-							item.setTextColor(Color.rgb(0,0,139));     //This is standard DARK_BLUE
+							item.setTextColor(getResources().getColor(R.color.deact_index_updateable)); //DARK_BLUE
 						}
 					} else {
-						item.setTextColor(Color.GREEN);
+						item.setTextColor(getResources().getColor(R.color.act_index_uptodate));
 					}
 				}
 			}

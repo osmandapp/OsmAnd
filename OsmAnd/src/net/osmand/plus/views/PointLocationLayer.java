@@ -41,17 +41,17 @@ public class PointLocationLayer extends OsmandMapLayer {
 		locationPaint.setDither(true);
 		
 		area = new Paint();
-		area.setColor(Color.BLUE);
+		area.setColor(getResources().getColor(R.color.pos_area));
 		area.setAlpha(40);
 		
 		aroundArea = new Paint();
-		aroundArea.setColor(Color.rgb(112, 124, 220));
+		aroundArea.setColor(getResources().getColor(R.color.pos_around));
 		aroundArea.setStyle(Style.STROKE);
 		aroundArea.setStrokeWidth(1);
 		aroundArea.setAntiAlias(true);
 		
 		headingPaint = new Paint();
-		headingPaint.setColor(Color.BLUE);
+		headingPaint.setColor(getResources().getColor(R.color.pos_heading));
 		headingPaint.setAlpha(50);
 		headingPaint.setAntiAlias(true);
 		headingPaint.setStyle(Style.FILL);

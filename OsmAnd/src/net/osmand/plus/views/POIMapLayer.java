@@ -135,7 +135,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		wmgr.getDefaultDisplay().getMetrics(dm);
 
 		pointAltUI = new Paint();
-		pointAltUI.setColor(Color.rgb(255, 128, 0));
+		pointAltUI.setColor(getResources().getColor(R.color.poi_background));
 		pointAltUI.setAlpha(160);
 		pointAltUI.setStyle(Style.FILL);
 		

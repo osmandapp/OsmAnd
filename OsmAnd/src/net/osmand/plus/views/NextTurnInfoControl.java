@@ -45,7 +45,7 @@ public class NextTurnInfoControl extends MapInfoControl {
 
 		paintRouteDirection = new Paint();
 		paintRouteDirection.setStyle(Style.FILL);
-		paintRouteDirection.setColor(Color.rgb(250, 222, 35));
+		paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow));
 		paintRouteDirection.setAntiAlias(true);
 		
 		pathTransform = new Matrix();
@@ -66,9 +66,9 @@ public class NextTurnInfoControl extends MapInfoControl {
 		if (pathForTurn != null) {
 			turnImminent = RoutingHelper.turnImminent();
 			if (turnImminent == false) {
-				paintRouteDirection.setColor(Color.rgb(250, 222, 35));
+				paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow));
 			} else {
-				paintRouteDirection.setColor(Color.rgb(255, 35, 0));
+				paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_imminent));
 			}
 			// small indent
 			canvas.translate(0, 3 * scaleCoefficient);
