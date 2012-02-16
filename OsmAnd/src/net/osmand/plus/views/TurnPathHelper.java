@@ -1,6 +1,8 @@
 package net.osmand.plus.views;
 
 import net.osmand.plus.routing.RoutingHelper.TurnType;
+import net.osmand.plus.R;
+import net.osmand.plus.ResourceManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
