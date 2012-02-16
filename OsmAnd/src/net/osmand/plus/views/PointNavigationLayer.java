@@ -2,6 +2,7 @@ package net.osmand.plus.views;
 
 import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
+import net.osmand.plus.ResourceManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

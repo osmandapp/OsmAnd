@@ -7,6 +7,8 @@ import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.ResourceManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;

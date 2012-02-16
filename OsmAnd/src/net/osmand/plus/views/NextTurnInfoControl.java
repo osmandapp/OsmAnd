@@ -3,6 +3,8 @@ package net.osmand.plus.views;
 import net.osmand.OsmAndFormatter;
 import net.osmand.plus.routing.RoutingHelper.TurnType;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.R;
+import net.osmand.plus.ResourceManager;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,6 +12,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
+
 
 
 public class NextTurnInfoControl extends MapInfoControl {
