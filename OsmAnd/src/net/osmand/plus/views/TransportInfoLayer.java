@@ -10,7 +10,6 @@ import net.osmand.plus.activities.TransportRouteHelper;
 import net.osmand.plus.R;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
