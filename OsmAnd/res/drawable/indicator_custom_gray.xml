@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- checked -->
+    <item android:drawable="@drawable/list_activities_dot_marker1_pressed" android:state_expanded="true"/>
+    <!-- unchecked -->
+    <item android:drawable="@drawable/list_activities_dot_marker1_unpressed" android:state_expanded="false"/>
+    <!-- default -->
+    <item android:drawable="@drawable/list_activities_dot_marker1_unpressed"/>
+
+</selector>

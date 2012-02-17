@@ -62,6 +62,7 @@
         android:layout_marginRight="3dp"
         android:layout_marginTop="3dp"
         android:layout_weight="1"
+        android:groupIndicator="@drawable/indicator_custom_gray"
         style="@style/OsmandListView">
     </ExpandableListView>
 

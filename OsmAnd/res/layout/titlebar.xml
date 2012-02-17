@@ -3,7 +3,8 @@
         android:id="@+id/RelativeLayout1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:background="@drawable/tab_title_headline_background" >
 
         <Button
             android:id="@+id/back_button"
