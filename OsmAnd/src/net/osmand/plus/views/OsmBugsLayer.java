@@ -27,7 +27,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
@@ -99,11 +98,11 @@ public class OsmBugsLayer extends OsmandMapLayer implements ContextMenuLayer.ICo
 			
 		}
 		pointOpenedUI = new Paint();
-		pointOpenedUI.setColor(Color.RED);
+		pointOpenedUI.setColor(activity.getResources().getColor(R.color.osmbug_opened));
 		pointOpenedUI.setAlpha(200);
 		pointOpenedUI.setAntiAlias(true);
 		pointClosedUI = new Paint();
-		pointClosedUI.setColor(Color.GREEN);
+		pointClosedUI.setColor(activity.getResources().getColor(R.color.osmbug_closed));
 		pointClosedUI.setAlpha(200);
 		pointClosedUI.setAntiAlias(true);
 	}

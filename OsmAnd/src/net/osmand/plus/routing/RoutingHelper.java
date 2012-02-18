@@ -218,6 +218,7 @@ public class RoutingHelper {
 		
 		makeUturnWhenPossible = false;
 		boolean calculateRoute  = false;
+		boolean suppressTurnPrompt  = false;
 		synchronized (this) {
 			if(routeNodes.isEmpty() || routeNodes.size() <= currentRoute){
 				calculateRoute = true;
@@ -339,7 +340,7 @@ public class RoutingHelper {
 					}
 				}
 				
-				// 5. Also bearing could be checked (is it same direction)
+				// X. Also bearing could be checked (is it same direction)
 //				float bearing;
 //				if(currentLocation.hasBearing()){
 //					bearing = currentLocation.getBearing();
@@ -351,7 +352,25 @@ public class RoutingHelper {
 //				      something wrong however it could be starting movement
 //				}
 
-				// 6. Check necessity for unscheduled U-turn, Issue 863
+				// 6. Suppress turn prompt if prescribed direction of motion is between 45 and 135 degrees off
+				if(routeNodes.size() > 0){
+					if (currentLocation.hasBearing() || lastFixedLocation != null) {
+						float bearing = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation.bearingTo(currentLocation);
+						float bearingRoute;
+						bearingRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
+						if (Math.abs(bearing - bearingRoute) > 45f && 360 - Math.abs(bearing - bearingRoute) > 45f) {
+							if (Math.abs(bearing - bearingRoute) <= 135f && 360 - Math.abs(bearing - bearingRoute) <= 135f) {
+								//float d = currentLocation.distanceTo(routeNodes.get(currentRoute));
+								//if (d > 50) {
+									suppressTurnPrompt = true;
+									//log.info("Bearing is off from bearingRoute between >45 and <=135 degrees"); //$NON-NLS-1$
+								//}
+							}
+						}
+					}
+				}
+
+				// 7. Check necessity for unscheduled U-turn, Issue 863
 				if(routeNodes.size() > 0){
 					if (currentLocation.hasBearing() || lastFixedLocation != null) {
 						float bearing = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation.bearingTo(currentLocation);
@@ -369,8 +388,9 @@ public class RoutingHelper {
 				}
 			}
 		}
-		voiceRouter.updateStatus(currentLocation, makeUturnWhenPossible);
-
+		if (suppressTurnPrompt == false) {
+			voiceRouter.updateStatus(currentLocation, makeUturnWhenPossible);
+		}
 		lastFixedLocation = currentLocation;
 		if(calculateRoute){
 			recalculateRouteInBackground(lastFixedLocation, finalLocation, currentGPXRoute);

@@ -113,7 +113,7 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 			ImageView icon = (ImageView) row.findViewById(R.id.direction);
 			
 			if(!(icon.getDrawable() instanceof TurnPathHelper.RouteDrawable)){
-				icon.setImageDrawable(new TurnPathHelper.RouteDrawable());
+				icon.setImageDrawable(new TurnPathHelper.RouteDrawable(getResources()));
 			}
 			((TurnPathHelper.RouteDrawable) icon.getDrawable()).setRouteType(model.turnType);
 			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(model.distance, ShowRouteInfoActivity.this));

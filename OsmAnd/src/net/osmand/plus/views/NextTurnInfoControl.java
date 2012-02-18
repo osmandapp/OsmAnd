@@ -3,6 +3,7 @@ package net.osmand.plus.views;
 import net.osmand.OsmAndFormatter;
 import net.osmand.plus.routing.RoutingHelper.TurnType;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.R;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,6 +11,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
+
 
 
 public class NextTurnInfoControl extends MapInfoControl {
@@ -45,7 +47,7 @@ public class NextTurnInfoControl extends MapInfoControl {
 
 		paintRouteDirection = new Paint();
 		paintRouteDirection.setStyle(Style.FILL);
-		paintRouteDirection.setColor(Color.rgb(250, 222, 35));
+		paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow));
 		paintRouteDirection.setAntiAlias(true);
 		
 		pathTransform = new Matrix();
@@ -66,9 +68,9 @@ public class NextTurnInfoControl extends MapInfoControl {
 		if (pathForTurn != null) {
 			turnImminent = RoutingHelper.turnImminent();
 			if (turnImminent == false) {
-				paintRouteDirection.setColor(Color.rgb(250, 222, 35));
+				paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow));
 			} else {
-				paintRouteDirection.setColor(Color.rgb(255, 35, 0));
+				paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_imminent));
 			}
 			// small indent
 			canvas.translate(0, 3 * scaleCoefficient);

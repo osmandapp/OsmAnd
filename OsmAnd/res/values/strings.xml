@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="tip_recent_changes_0_7_1_t">Changes in 0.7.1 :
-\n\t- Offline editing POI
+	<string name="tip_recent_changes_0_7_1_t">Changes in 0.7.1 :
+\n\t- Offline POI editing 
 \n\t- Live Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles)
-\n\t- Show current recording track on map
+\n\t- Show currently recorded track on map
+\n\t- Direction detection: \'Make U-turn\' is indicated and announced when heading in opposite direction or after missing a turn
+\n\t- New voice prompt \'Route recalculated\'
+\n\t- Optical indication of an imminent turn within 100m by diretion arrow changing color
+\n\t- Actuality also of deactivated index files now shown on Download screen in dark green and dark blue
 \n\t- Other changes
 	</string>
-    
-    <string name="update_poi_does_not_change_indexes">POI changes inside application do not affect downloaded map files, changes are saved to local file instead.</string>
-	<string name="local_openstreetmap_uploading_poi">Uploading POI</string>
+
+	<string name="update_poi_does_not_change_indexes">POI changes inside application do not affect downloaded map files, changes are saved to local file instead.</string>
+	<string name="local_openstreetmap_uploading_poi">Uploading POI...</string>
 	<string name="local_openstreetmap_poi_were_uploaded">{0} POI were uploaded</string>
 	<string name="local_openstreetmap_uploadall">Upload All POI</string>
 	<string name="local_openstreetmap_items"></string>
@@ -18,7 +22,7 @@
 	<string name="local_openstreetmap_descr_title">Asynchrone Openstreetmap POI Edition:</string>
 	<string name="local_openstreetmap_settings">Local Openstreetmap Points</string>
 	<string name="local_openstreetmap_settings_descr">Local Points Saved in DB</string>
-    
+
 	<string name="live_monitoring_descr">Enable sending HTTP requests to a specified web service</string>
 	<string name="live_monitoring">Enable Live Tracking</string>
 	<string name="live_monitoring_interval_descr">Specify Live Tracking interval</string>

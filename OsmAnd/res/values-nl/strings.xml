@@ -607,7 +607,7 @@
 	<string name="transport_to_go_before">Voorafgaande afstand</string>
 	<string name="transport_stops_to_pass">Aantal haltes te gaan</string>
 	<string name="transport_route_distance">Route afstand</string>
-	<string name="vervoer">Vervoer</string>
+	<string name="transport">Vervoer</string>
 	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">Toon openbaar vervoer haltes op kaart</string>
 	<string name="show_transport_over_map">Toon openbaar vervoer haltes</string>

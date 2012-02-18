@@ -10,7 +10,6 @@ import net.osmand.plus.TransportIndexRepository;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
@@ -35,7 +34,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		wmgr.getDefaultDisplay().getMetrics(dm);
 
 		pointAltUI = new Paint();
-		pointAltUI.setColor(Color.rgb(0, 0, 255));
+		pointAltUI.setColor(view.getResources().getColor(R.color.transport_stop));
 		pointAltUI.setAlpha(150);
 		pointAltUI.setAntiAlias(true);
 	}

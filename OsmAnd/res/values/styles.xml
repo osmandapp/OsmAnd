@@ -58,10 +58,27 @@
         <item name="android:background">@color/color_white</item>
         <item name="android:textColor">@color/color_black</item>
     </style>
-    <style name="OsmandTheme" parent="android:style/Theme">
+    <style name="OsmandTheme" parent="@android:style/Theme">
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@color/activity_background</item>
         <item name="android:textColor">@color/activity_text</item>
+        <item name="android:spinnerItemStyle">@style/OsmandSpinnerItem</item>
+        <item name="android:autoCompleteTextViewStyle">@style/Widget.AutoCompleteTextViewLight</item>
+    </style>
+    <style name="OsmandAutoCompleteTextView">
+		<item name="android:textColor">@color/color_black</item>
+    </style>
+    <style name="Widget.AutoCompleteTextViewLight" parent="@android:style/Widget.AutoCompleteTextView">
+		<item name="android:textColor">@color/color_black</item>
+    </style>
+    <style name="Widget.DropDownItem" parent="@android:style/Widget.DropDownItem">
+		<item name="android:textColor">@color/color_black</item>
+    </style>
+    <style name="OsmandSpinnerItem" parent="android:Widget.TextView.SpinnerItem">
+        <item name="android:textAppearance">@style/OsmandTextAppearanceSpinnerItem</item>
+    </style>
+    <style name="OsmandTextAppearanceSpinnerItem" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+        <item name="android:textColor">@color/color_black</item>
     </style>
     <style name="CustomWindowTitleBackground">
         <item name="android:background">@color/activity_background</item>
@@ -70,7 +87,6 @@
         <item name="android:windowTitleSize">46dp</item>
         <item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>
         <item name="android:preferenceScreenStyle">@style/OsmandTheme</item>
-        <!-- item name="android:preferenceCategoryStyle">@style/OsmandTheme</item-->
     </style>
     <style name="OsmandListView">
         <item name="android:cacheColorHint">@color/activity_background</item>

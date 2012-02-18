@@ -38,7 +38,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
@@ -833,7 +832,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		}
 	};
 	
-	static class DirectionDrawable extends Drawable {
+	class DirectionDrawable extends Drawable {
 		Paint paintRouteDirection;
 		Path path = new Path();
 		private float angle;
@@ -844,7 +843,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		public DirectionDrawable(){
 			paintRouteDirection = new Paint();
 			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
-			paintRouteDirection.setColor(Color.rgb(100, 0, 255));
+			paintRouteDirection.setColor(getResources().getColor(R.color.poi_direction));
 			paintRouteDirection.setAntiAlias(true);
 			
 			int h = 15;
@@ -865,11 +864,11 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		
 		public void setOpenedColor(int opened){
 			if(opened == 0){
-				paintRouteDirection.setColor(Color.rgb(50, 205, 50));
+				paintRouteDirection.setColor(getResources().getColor(R.color.poi_open));
 			} else if(opened == -1){
-				paintRouteDirection.setColor(Color.rgb(200, 200, 200));
+				paintRouteDirection.setColor(getResources().getColor(R.color.poi_unknown_arrow));
 			} else {
-				paintRouteDirection.setColor(Color.rgb(238, 50, 50));
+				paintRouteDirection.setColor(getResources().getColor(R.color.poi_closed));
 			}
 		}
 		

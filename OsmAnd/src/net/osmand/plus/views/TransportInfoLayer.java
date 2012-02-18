@@ -7,9 +7,9 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.TransportIndexRepository.RouteInfoLocation;
 import net.osmand.plus.activities.TransportRouteHelper;
+import net.osmand.plus.R;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
@@ -38,11 +38,11 @@ public class TransportInfoLayer extends OsmandMapLayer {
 		wmgr.getDefaultDisplay().getMetrics(dm);
 
 		paintInt = new Paint();
-		paintInt.setColor(Color.rgb(50, 200, 50));
+		paintInt.setColor(view.getResources().getColor(R.color.transport_int));
 		paintInt.setAlpha(150);
 		paintInt.setAntiAlias(true);
 		paintEnd = new Paint();
-		paintEnd.setColor(Color.rgb(255, 0, 0));
+		paintEnd.setColor(view.getResources().getColor(R.color.transport_end));
 		paintEnd.setAlpha(150);
 		paintEnd.setAntiAlias(true);
 	}

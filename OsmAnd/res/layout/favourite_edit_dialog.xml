@@ -11,7 +11,7 @@
   <TableRow>
   	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" 
   			android:text="@string/favourites_edit_dialog_category"/>
-  	<AutoCompleteTextView  android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="3dp"
+  	<AutoCompleteTextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="3dp"
   		android:id="@+id/Category" android:completionThreshold="1"/>
   </TableRow>
 </TableLayout>

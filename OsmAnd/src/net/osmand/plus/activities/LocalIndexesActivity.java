@@ -25,7 +25,6 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
@@ -850,13 +849,13 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			TextView viewName = ((TextView) v.findViewById(R.id.local_index_name));
 			viewName.setText(child.getName());
 			if (child.isNotSupported()) {
-				viewName.setTextColor(Color.RED);
+				viewName.setTextColor(getResources().getColor(R.color.localindex_notsupported));
 			} else if (child.isCorrupted()) {
-				viewName.setTextColor(Color.MAGENTA);
+				viewName.setTextColor(getResources().getColor(R.color.localindex_iscorrupted));
 			} else if (child.isLoaded()) {
-				viewName.setTextColor(Color.GREEN);
+				viewName.setTextColor(getResources().getColor(R.color.localindex_isloaded));
 			} else {
-				viewName.setTextColor(Color.LTGRAY);
+				viewName.setTextColor(getResources().getColor(R.color.localindex_unknown));
 			}
 			if (child.getSize() >= 0) {
 				String size;

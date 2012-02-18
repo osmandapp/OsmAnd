@@ -21,7 +21,6 @@ import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -121,7 +120,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 	protected void onPrepareDialog(int id, Dialog dialog, Bundle args) {
 		switch (id) {
 		case DIALOG_PROGRESS_UPLOAD:
-			UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(progressPointDlg, remote, db,
+			UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(progressPointDlg, remote,
 					toUpload.length);
 			uploadTask.execute(toUpload);
 			break;
@@ -134,26 +133,22 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 
 		private OpenstreetmapRemoteUtil remote;
 
-		private OpenstreetmapsDbHelper db;
-
 		private int listSize = 0;
 
 		private boolean interruptUploading = false;
 
-		private int uploaded = 0;
-
 		public UploadOpenstreetmapPointAsyncTask(ProgressDialog progress,
 												 OpenstreetmapRemoteUtil remote,
-												 OpenstreetmapsDbHelper db,
 												 int listSize) {
 			this.progress = progress;
 			this.remote = remote;
-			this.db = db;
 			this.listSize = listSize;
 		}
 
 		@Override
 		protected Integer doInBackground(OpenstreetmapPoint... points) {
+			int uploaded = 0;
+
 			for (OpenstreetmapPoint p : points) {
 				if (interruptUploading) break;
 
@@ -162,9 +157,8 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 					entityInfo = remote.loadNode(p.getEntity());
 				}
 				if (remote.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo, p.getComment())) {
-					db.deleteOpenstreetmap(p);
-					uploaded++;
 					publishProgress(p);
+					uploaded++;
 				}
 			}
 
@@ -174,7 +168,6 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		@Override
 		protected void onPreExecute() {
 			interruptUploading = false;
-			uploaded = 0;
 
 			progress.setOnCancelListener(new DialogInterface.OnCancelListener() {
 					@Override
@@ -182,7 +175,9 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 						UploadOpenstreetmapPointAsyncTask.this.setInterruptUploading(true);
 					}
 				});
+			progress.setIndeterminate(false);
 			progress.setMax(listSize);
+			progress.setProgress(0);
 		}
 
 		@Override
@@ -201,7 +196,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		@Override
 		protected void onProgressUpdate(OpenstreetmapPoint... points) {
 			listAdapter.delete(points[0]);
-			progress.setProgress(uploaded);
+			progress.incrementProgressBy(1);
 		}
 
 	}
@@ -341,11 +336,11 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 			TextView viewName = ((TextView) v.findViewById(R.id.local_openstreetmap_name));
 			viewName.setText("(" + child.getSubtype() + ") " + child.getName());
 			if (child.getAction() == OpenstreetmapUtil.Action.CREATE) {
-				viewName.setTextColor(Color.GREEN);
+				viewName.setTextColor(getResources().getColor(R.color.osm_create));
 			} else if (child.getAction() == OpenstreetmapUtil.Action.MODIFY) {
-				viewName.setTextColor(Color.MAGENTA);
+				viewName.setTextColor(getResources().getColor(R.color.osm_modify));
 			} else if (child.getAction() == OpenstreetmapUtil.Action.DELETE) {
-				viewName.setTextColor(Color.RED);
+				viewName.setTextColor(getResources().getColor(R.color.osm_delete));
 			}
 
 			return v;
