@@ -23,6 +23,8 @@ import java.util.Set;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
+import net.osmand.binary.OsmandOdb.MapDataBlock;
+import net.osmand.binary.OsmandOdb.MapDataBlock.Builder;
 import net.osmand.data.Boundary;
 import net.osmand.data.MapAlgorithms;
 import net.osmand.osm.Entity;
@@ -661,23 +663,40 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 	public void writeBinaryMapBlock(rtree.Node parent, RTree r, BinaryMapIndexWriter writer, PreparedStatement selectData, TLongObjectHashMap<BinaryFileReference> bounds) throws IOException, RTreeException, SQLException {
 		Element[] e = parent.getAllElements();
-
+		
+		Map<String, Integer> stringTable = null;
+		MapDataBlock.Builder dataBlock = null;
+		BinaryFileReference ref = bounds.get(parent.getNodeIndex());
+		long baseId = 0;
 		for (int i = 0; i < parent.getTotalElements(); i++) {
 			Rect re = e[i].getRect();
 			if (e[i].getElementType() == rtree.Node.LEAF_NODE) {
-				BinaryFileReference ref = bounds.get(parent.getNodeIndex());
-				// TODO create block
+				
+				
 				long id = ((LeafElement) e[i]).getPtr();
 				selectData.setLong(1, id);
 				ResultSet rs = selectData.executeQuery();
 				if (rs.next()) {
+					long cid = convertGeneratedIdToObfWrite(id);
+					if(dataBlock == null){
+						baseId = cid;
+						dataBlock = writer.createWriteMapDataBlock(baseId);
+					}
+					renderingTypes.getEncodingRuleTypes()
 					 // mapConnection.prepareStatement("SELECT nodes, types, name FROM binary_map_objects WHERE id = ?");
-					 writer.writeMapData(convertGeneratedIdToObfWrite(id), rs.getBytes(1), 
+					 writer.writeMapData(cid - id, rs.getBytes(1), 
 							 rs.getBytes(2), rs.getString(3));
 				} else {
 					logMapDataWarn.error("Something goes wrong with id = " + id); //$NON-NLS-1$
 				}
-			} else {
+			}
+		}
+		if(dataBlock != null){
+			writer.writeMapDataBlock(dataBlock, stringTable, ref);
+		}
+		for (int i = 0; i < parent.getTotalElements(); i++) {
+			Rect re = e[i].getRect();
+			if (e[i].getElementType() != rtree.Node.LEAF_NODE) {
 				long ptr = ((NonLeafElement) e[i]).getPtr();
 				rtree.Node ns = r.getReadNode(ptr);
 				writeBinaryMapBlock(ns, r, writer, selectData, bounds);

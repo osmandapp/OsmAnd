@@ -25,15 +25,19 @@ import net.osmand.Algoritms;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.OsmandOdb;
 import net.osmand.binary.OsmandOdb.CityIndex;
+import net.osmand.binary.OsmandOdb.MapDataBlock;
 import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapDataBox;
 import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapEncodingRule;
 import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapRootLevel;
+import net.osmand.binary.OsmandOdb.IndexedStringTable;
+import net.osmand.binary.OsmandOdb.OsmAndMapIndex;
 import net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom;
 import net.osmand.binary.OsmandOdb.OsmAndTransportIndex;
 import net.osmand.binary.OsmandOdb.StreetIndex;
 import net.osmand.binary.OsmandOdb.StreetIntersection;
+import net.osmand.binary.OsmandOdb.StringTable;
 import net.osmand.binary.OsmandOdb.TransportRoute;
 import net.osmand.binary.OsmandOdb.TransportRouteStop;
 import net.osmand.binary.OsmandOdb.OsmAndCategoryTable.Builder;
@@ -78,10 +82,6 @@ public class BinaryMapIndexWriter {
 		
 	}
 	private Stack<Bounds> stackBounds = new Stack<Bounds>();
-	// needed for map tree
-	private Stack<Long> stackBaseIds = new Stack<Long>();
-	private Stack<Map<String, Integer>> stackStringTable = new Stack<Map<String, Integer>>();
-	
 	
 	// internal constants to track state of index writing
 	private Stack<Integer> state = new Stack<Integer>();
@@ -271,35 +271,7 @@ public class BinaryMapIndexWriter {
 
 	public void endWriteMapTreeElement() throws IOException{
 		popState(MAP_TREE);
-		
 		stackBounds.pop();
-		
-		// TODO move to box
-//		Long l = stackBaseIds.pop();
-//		if(l != -1){
-//			codedOutStream.writeTag(OsmandOdb.MapTree.BASEID_FIELD_NUMBER, WireFormat.FieldType.UINT64.getWireType());
-//			codedOutStream.writeUInt64NoTag(l);
-//		}
-//		if(map != null){
-//			
-//			int i = 0;
-//			int size = 0;
-//			for(String s : map.keySet()){
-//				Integer integer = map.get(s);
-//				if(integer != i){
-//					throw new IllegalStateException();
-//				}
-//				i++;
-//				size += CodedOutputStream.computeStringSize(OsmandOdb.StringTable.S_FIELD_NUMBER, s);
-//			}
-//			codedOutStream.writeTag(OsmandOdb.MapTree.STRINGTABLE_FIELD_NUMBER, WireFormat.FieldType.MESSAGE.getWireType());
-//			STRING_TABLE_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapTree.STRINGTABLE_FIELD_NUMBER) + 
-//						CodedOutputStream.computeRawVarint32Size(size) + size;
-//			codedOutStream.writeRawVarint32(size);
-//			for(String s : map.keySet()){
-//				codedOutStream.writeString(OsmandOdb.StringTable.S_FIELD_NUMBER, s);
-//			}
-//		}
 		writeInt32Size();
 	}
 	
@@ -319,15 +291,36 @@ public class BinaryMapIndexWriter {
 	
 
 	
-	public void writeMapData(long id, byte[] nodes, byte[] types, String name, int highwayAttributes, byte[] restrictions) throws IOException{
-		assert state.peek() == MAP_TREE;
+	public MapDataBlock.Builder createWriteMapDataBlock(long baseid) throws IOException{
+		MapDataBlock.Builder builder = MapDataBlock.newBuilder();
+		builder.setBaseId(baseid);
+		return builder;
+	}
+	
+	public void writeMapDataBlock(MapDataBlock.Builder builder, Map<String, Integer> stringTable, BinaryFileReference ref) throws IOException{
+		checkPeekState(MAP_INDEX_INIT);
+		StringTable.Builder bs = OsmandOdb.StringTable.newBuilder();
+		for(String s : stringTable.keySet()){
+			bs.addS(s);
+		}
+		StringTable st = bs.build();
+		builder.setStringTable(st);
+		int size = st.getSerializedSize();
+		STRING_TABLE_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapDataBlock.STRINGTABLE_FIELD_NUMBER) + 
+				CodedOutputStream.computeRawVarint32Size(size) + size;
+
+		ref.writeReference(raf, getFilePointer());
+		codedOutStream.writeMessage(OsmAndMapIndex.BLOCKS_FIELD_NUMBER, builder.build());
+	}
+	
+	
+
 		
+	
+	public void writeMapData(long diffId, byte[] nodes, byte[] types, Map<String,String> name, Map<String, Integer> stringTable,
+			MapDataBlock.Builder dataBlock) throws IOException{
 		
 		Bounds bounds = stackBounds.peek();
-		if(stackBaseIds.peek() == -1){
-			stackBaseIds.pop();
-			stackBaseIds.push(id);
-		}
 		// calculate size
 		int sizeCoordinates = 0;
 		int allSize = 0;
@@ -357,49 +350,32 @@ public class BinaryMapIndexWriter {
 				CodedOutputStream.computeRawVarint32Size(types.length) + types.length; 
 		
 		
-		allSize += CodedOutputStream.computeSInt64Size(OsmandOdb.MapData.ID_FIELD_NUMBER, id - stackBaseIds.peek());
+		allSize += CodedOutputStream.computeSInt64Size(OsmandOdb.MapData.ID_FIELD_NUMBER, diffId);
 		// DEBUG 
-		ID_SIZE += CodedOutputStream.computeSInt64Size(OsmandOdb.MapData.ID_FIELD_NUMBER, id - stackBaseIds.peek());
+		ID_SIZE += CodedOutputStream.computeSInt64Size(OsmandOdb.MapData.ID_FIELD_NUMBER, diffId);
 		
 		
 		int nameId = 0;
 		if(name != null){
-			if(stackStringTable.peek() == null) {
-				stackStringTable.pop();
-				stackStringTable.push(new LinkedHashMap<String, Integer>());
-			}
-			Map<String, Integer> map = stackStringTable.peek();
-			if(map.containsKey(name)) {
-				nameId = map.get(name);
+			if(stringTable.containsKey(name)) {
+				nameId = stringTable.get(name);
 			} else {
-				nameId = map.size();
-				map.put(name, nameId);
+				nameId = stringTable.size();
+				stringTable.put(name, nameId);
 			}
-			allSize += CodedOutputStream.computeUInt32Size(OsmandOdb.MapData.STRINGID_FIELD_NUMBER, nameId);
+			allSize += CodedOutputStream.computeUInt32Size(OsmandOdb.MapData.S, nameId);
 		}
 		
-		int restrictionsSize = 0;
-		if(restrictions != null && restrictions.length > 0){
-			allSize += CodedOutputStream.computeTagSize(OsmandOdb.MapData.RESTRICTIONS_FIELD_NUMBER);
-			for (int i = 0; i < restrictions.length / 8; i++) {
-				long l = Algoritms.parseLongFromBytes(restrictions, i * 8) - stackBaseIds.peek();
-				restrictionsSize += CodedOutputStream.computeSInt64SizeNoTag(l);
-			}
-			allSize += CodedOutputStream.computeRawVarint32Size(restrictionsSize);
-			allSize += restrictionsSize;
-		}
-		if(highwayAttributes != 0){
-			allSize += CodedOutputStream.computeInt32Size(OsmandOdb.MapData.HIGHWAYMETA_FIELD_NUMBER, highwayAttributes);
-		}
 		
 		// DEBUG
 		MAP_DATA_SIZE += allSize;
 		
 		// writing data
-		codedOutStream.writeTag(OsmandOdb.MapTree.LEAFS_FIELD_NUMBER, WireFormat.FieldType.MESSAGE.getWireType());
+		codedOutStream.writeTag(MapDataBlock.DATAOBJECTS_FIELD_NUMBER, WireFormat.FieldType.MESSAGE.getWireType());
 		codedOutStream.writeRawVarint32(allSize);
 		
 		
+		/// TODO !!!!
 		codedOutStream.writeTag(OsmandOdb.MapData.COORDINATES_FIELD_NUMBER, WireFormat.FieldType.BYTES.getWireType());
 		codedOutStream.writeRawVarint32(sizeCoordinates);
 		
@@ -419,24 +395,17 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeRawVarint32(types.length);
 		codedOutStream.writeRawBytes(types);
 		
-		codedOutStream.writeSInt64(OsmandOdb.MapData.ID_FIELD_NUMBER, id - stackBaseIds.peek());
-		
-		
+		// TODO !!!
 		if(name != null){
 			codedOutStream.writeUInt32(OsmandOdb.MapData.STRINGID_FIELD_NUMBER, nameId);
 		} 
 		
-		if(restrictions != null && restrictions.length > 0){
-			codedOutStream.writeTag(OsmandOdb.MapData.RESTRICTIONS_FIELD_NUMBER, WireFormat.FieldType.BYTES.getWireType());
-			codedOutStream.writeRawVarint32(restrictionsSize);
-			for (int i = 0; i < restrictions.length / 8; i++) {
-				long l = Algoritms.parseLongFromBytes(restrictions, i * 8) - stackBaseIds.peek();
-				codedOutStream.writeSInt64NoTag(l);
-			}
-		}
-		if(highwayAttributes != 0){
-			codedOutStream.writeInt32(OsmandOdb.MapData.HIGHWAYMETA_FIELD_NUMBER, highwayAttributes);
-		}
+		codedOutStream.writeSInt64(OsmandOdb.MapData.ID_FIELD_NUMBER, diffId);
+		
+		
+		
+		
+		
 	}
 	
 	public void startWriteAddressIndex(String name) throws IOException {

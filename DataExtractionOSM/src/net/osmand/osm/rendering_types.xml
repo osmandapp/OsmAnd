@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <osmand_types>
 	<!-- 3 different types for polygon="true" that object will be rendered as polygon, polyline ="true" as line, point = "true" - as point -->
-	<!-- currently 3 name tags are indexed name/ref/ele-->
+	<!-- currently  name tags are indexed with name and additional in nameTags separated by comma-->
 	
 	<!-- additional  -->
 	<type polyline="true" tag="oneway" value="yes" minzoom="5" additional="true"/>
@@ -23,38 +23,38 @@
 	<type polyline="true" polygon="true" tag="tunnel" minzoom="5" additional="true"/>
 	
 	<category name="highway">
-		<type polyline="true" tag="highway" value="motorway" minzoom="5" />
-		<type polyline="true" tag="highway" value="motorway_link" minzoom="10" />
-		<type polyline="true" tag="highway" value="trunk" minzoom="5" />
-		<type polyline="true" tag="highway" value="trunk_link" minzoom="10" />
-		<type polyline="true" tag="highway" value="primary" minzoom="7" />
-		<type polyline="true" tag="highway" value="primary_link" minzoom="10" />
-		<type polyline="true" tag="highway" value="secondary" minzoom="9" />
-		<type polyline="true" tag="highway" value="secondary_link" minzoom="10" />
-		<type polyline="true" tag="highway" value="tertiary" minzoom="10" />
-		<type polyline="true" tag="highway" value="tertiary_link" minzoom="11" />
-		<type polygon="true" polyline="true" tag="highway" value="residential" minzoom="12" />
-		<type polygon="true" polyline="true" tag="highway" value="service" minzoom="13" />
+		<type polyline="true" tag="highway" value="motorway" minzoom="5" nameTags="ref"/>
+		<type polyline="true" tag="highway" value="motorway_link" minzoom="10" nameTags="ref"/>
+		<type polyline="true" tag="highway" value="trunk" minzoom="5" nameTags="ref"/>
+		<type polyline="true" tag="highway" value="trunk_link" minzoom="10" nameTags="ref"/>
+		<type polyline="true" tag="highway" value="primary" minzoom="7" nameTags="ref"/>
+		<type polyline="true" tag="highway" value="primary_link" minzoom="10" nameTags="ref"/>
+		<type polyline="true" tag="highway" value="secondary" minzoom="9" nameTags="ref"/>
+		<type polyline="true" tag="highway" value="secondary_link" minzoom="10" nameTags="ref"/>
+		<type polyline="true" tag="highway" value="tertiary" minzoom="10" nameTags="ref"/>
+		<type polyline="true" tag="highway" value="tertiary_link" minzoom="11" nameTags="ref"/>
+		<type polygon="true" polyline="true" tag="highway" value="residential" minzoom="12" nameTags="ref"/>
+		<type polygon="true" polyline="true" tag="highway" value="service" minzoom="13" nameTags="ref"/>
 
-		<type polyline="true" tag="highway" value="unclassified" minzoom="12" />
-		<type polyline="true" tag="highway" value="road" minzoom="12" />
-		<type polyline="true" tag="highway" value="track" minzoom="12" />
-		<type polyline="true" tag="highway" value="path" minzoom="12" />
-		<type polyline="true" tag="highway" value="living_street" minzoom="12" />
+		<type polyline="true" tag="highway" value="unclassified" minzoom="12" nameTags="ref"/>
+		<type polyline="true" tag="highway" value="road" minzoom="12"  nameTags="ref"/>
+		<type polyline="true" tag="highway" value="track" minzoom="12" nameTags="ref"/>
+		<type polyline="true" tag="highway" value="path" minzoom="12" nameTags="ref"/>
+		<type polyline="true" tag="highway" value="living_street" minzoom="12" nameTags="ref"/>
 
 
-		<type polygon="true" polyline="true" tag="highway" value="pedestrian" minzoom="12" />
-		<type polyline="true" tag="highway" value="cycleway" minzoom="12" />
-		<type polyline="true" tag="highway" value="byway" minzoom="12" />
-		<type polyline="true" tag="highway" value="footway" minzoom="12" />
-		<type polyline="true" tag="highway" value="steps" minzoom="14" />
-		<type polyline="true" tag="highway" value="bridleway" minzoom="12" />
-		<type polygon="true" point="true" tag="highway" value="services" minzoom="12" />
+		<type polygon="true" polyline="true" tag="highway" value="pedestrian" minzoom="12" nameTags="ref"/>
+		<type polyline="true" tag="highway" value="cycleway" minzoom="12" nameTags="ref"/>
+		<type polyline="true" tag="highway" value="byway" minzoom="12" nameTags="ref"/>
+		<type polyline="true" tag="highway" value="footway" minzoom="12" nameTags="ref"/>
+		<type polyline="true" tag="highway" value="steps" minzoom="14" nameTags="ref"/>
+		<type polyline="true" tag="highway" value="bridleway" minzoom="12" nameTags="ref"/>
+		<type polygon="true" point="true" tag="highway" value="services" minzoom="12" nameTags="ref"/>
 		<!-- <type id="" polyline="true" tag="highway" value="bus_guideway" minzoom="15" /> -->
 
 		<type polyline="true" point="true" tag="highway" value="ford" minzoom="14" />
-		<type polyline="true" tag="highway" value="construction" minzoom="14" />
-		<type polyline="true" tag="highway" value="proposed" minzoom="14" />
+		<type polyline="true" tag="highway" value="construction" minzoom="14" nameTags="ref"/>
+		<type polyline="true" tag="highway" value="proposed" minzoom="14" nameTags="ref"/>
 
 		<!-- POINT typeS -->
 		<type point="true" tag="highway" value="mini_roundabout" minzoom="16" />
@@ -176,7 +176,7 @@
 		<type polyline="true" tag="aeroway" value="taxiway" minzoom="12" poi:prefix="aeroway_"/>
 		<type polygon="true" tag="aeroway" value="apron" minzoom="12" poi:prefix="aeroway_"/>
 		<type point="true" polygon="true" tag="aeroway" value="airport" minzoom="11" />
-		<type point="true" tag="aeroway" value="gate" minzoom="15" nameNullTag="ref" />
+		<type point="true" tag="aeroway" value="gate" minzoom="15" nameTags="ref" />
 		<type point="true" tag="aeroway" value="windsock" minzoom="15" />
 	</category>
 
@@ -206,8 +206,8 @@
 
 
 	<category name="man_made" poi:tag="man_made" poi:category="man_made">
-		<type polygon="true" tag="building" minzoom="16" poi:category="" nameNullTag="addr:housenumber"/>
-		<type point="true" tag="addr:housenumber" minzoom="16" nameNullTag="addr:housenumber"/>
+		<type polygon="true" tag="building" minzoom="16" poi:category="" nameTags="addr:housenumber"/>
+		<type point="true" tag="addr:housenumber" minzoom="16" nameTags="addr:housenumber"/>
 		<type point="true" polygon="true" tag="man_made" value="wastewater_plant" minzoom="16" />
 		<type polygon="true" point="true" tag="man_made" value="water_works" minzoom="16" />
 		<type point="true" polygon="true" tag="man_made" value="works" minzoom="15" />
@@ -449,7 +449,7 @@
 		<type point="true" polygon="true" tag="natural" value="land" minzoom="10" poi:category="" />
 		<type point="true" polygon="true" tag="natural" value="marsh" minzoom="11" />
 		<type point="true" polygon="true" tag="natural" value="mud" minzoom="11" />
-		<type point="true" tag="natural" value="peak" minzoom="11" nameNullTag="ele" />
+		<type point="true" tag="natural" value="peak" minzoom="11" nameTags="ele" />
 		<type point="true" polygon="true" tag="natural" value="sand" minzoom="11" />
 		<type point="true" polygon="true" tag="natural" value="scree" minzoom="11" />
 		<type point="true" polygon="true" tag="natural" value="scrub" minzoom="11" />

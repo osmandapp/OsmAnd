@@ -72,8 +72,6 @@ message OsmAndMapIndex {
 
 	required string name = 2;
 
-	// encoded as fixed32 length delimited
-
 	repeated MapEncodingRule rules = 4;
 	message MapEncodingRule {
 		required string tag = 3;
@@ -87,6 +85,7 @@ message OsmAndMapIndex {
 		optional uint32 type = 10;
 	}
 
+	// encoded as fixed32 length delimited
 	repeated MapRootLevel levels = 5;
 	message MapRootLevel {
 		required int32 maxZoom = 1;
@@ -111,7 +110,6 @@ message OsmAndMapIndex {
 		repeated MapDataBox boxes = 7;
 	}
 
-	// encoded as fixed32 length delimited
 	repeated MapDataBlocks blocks = 7;
 	message MapDataBlocks {
 		// based coordinates can be specified

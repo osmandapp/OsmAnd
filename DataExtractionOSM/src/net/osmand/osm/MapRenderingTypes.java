@@ -61,6 +61,8 @@ public class MapRenderingTypes {
 	
 	private Map<AmenityType, Map<String, String>> amenityTypeNameToTagVal = null;
 	private Map<String, AmenityType> amenityNameToType = null;
+
+	private MapRulType nameRuleType;
 	
 	public MapRenderingTypes(String fileName){
 		this.resourceName = fileName;
@@ -79,6 +81,11 @@ public class MapRenderingTypes {
 	public Map<String, MapRulType> getEncodingRuleTypes(){
 		if (types == null) {
 			types = new LinkedHashMap<String, MapRulType>();
+			nameRuleType = new MapRulType(types.size());
+			nameRuleType.tag = "name";
+			nameRuleType.additional = true;
+			types.put(constructRuleKey("name", null), nameRuleType);
+			
 			init();
 		}
 		return types;
@@ -138,29 +145,29 @@ public class MapRenderingTypes {
 	}
 	
 	
-	public String getNullName(Entity e) {
-		Map<String, MapRulType> rules = getEncodingRuleTypes();
-		for (int i = 0; i < 2; i++) {
-			for (String tag : e.getTagKeySet()) {
-				String val = i == 0 ? e.getTag(tag) : null;
-				MapRulType rt = rules.get(constructRuleKey(tag, val));
-				if(rt != null && rt.nameNullTag != null && e.getTag(rt.nameNullTag) != null) {
-					return e.getTag(rt.nameNullTag);
-				}
-			}
-		}
-		return null;
-	}
 	
-	public String getEntityName(Entity e) {
+	public void getEntityNames(Entity e, Map<MapRulType, String> names) {
 		String name = e.getTag(OSMTagKey.NAME);
 		if (name == null) {
 			name = e.getTag(OSMTagKey.NAME_EN);
-			if(name == null) {
-				name = getNullName(e);
+		}
+		if (name != null) {
+			names.put(nameRuleType, name);
+		}
+		Map<String, MapRulType> rules = getEncodingRuleTypes();
+		for (int i = 0; i < 2; i++) {
+			for (Entry<String, String> tag : e.getTags().entrySet()) {
+				MapRulType rt = rules.get(constructRuleKey(tag.getKey(), i == 0 ? tag.getValue() : null));
+				if (rt != null && rt.names != null) {
+					for (MapRulType rtname : rt.names) {
+						String tg = e.getTag(rtname.tag);
+						if (tg != null) {
+							names.put(rtname, name);
+						}
+					}
+				}
 			}
 		}
-		return name;
 	}
 	
 	public Map<AmenityType, Map<String, String>> getAmenityTypeNameToTagVal() {
@@ -259,7 +266,21 @@ public class MapRenderingTypes {
 						rtype.polyline= Boolean.parseBoolean(attributes.getValue("polyline")); //$NON-NLS-1$
 						rtype.point = Boolean.parseBoolean(attributes.getValue("point")); //$NON-NLS-1$
 						rtype.additional = Boolean.parseBoolean(attributes.getValue("additional")); //$NON-NLS-1$
-						rtype.nameNullTag = attributes.getValue("nameNullTag");
+						String v = attributes.getValue("nameTags");
+						if(v != null) {
+							String[] names = v.split(",");
+							rtype.names = new MapRulType[names.length];
+							for(int i=0; i<names.length; i++){
+								MapRulType mt = types.get(constructRuleKey(names[i], null));
+								if(mt == null){
+									mt = new MapRulType(types.size());
+									mt.tag = names[i];
+									mt.additional = true;
+									types.put(constructRuleKey(names[i], null), mt);
+								}
+								rtype.names[i] = mt;
+							}
+						}
 						String targetTag = attributes.getValue("target:tag");
 						String targetValue = attributes.getValue("target:value");
 						if (targetTag != null || targetValue != null) {
@@ -378,14 +399,14 @@ public class MapRenderingTypes {
 	}
 	
 	public static class MapRulType {
-		String nameNullTag;
+		MapRulType[] names;
 		String tag;
 		String value;
 		int minzoom;
 		boolean additional;
 		MapRulType targetTagValue;
 		
-		int id;
+		final int id;
 		int freq;
 		int targetId;
 		
@@ -399,10 +420,6 @@ public class MapRenderingTypes {
 		
 		public MapRulType(int id){
 			this.id = id;
-		}
-		
-		public String getNameNullTag() {
-			return nameNullTag;
 		}
 		
 		public boolean isMapIndexed(){
