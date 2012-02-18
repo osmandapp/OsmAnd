@@ -15,11 +15,15 @@ public class CustomTitleBar {
 	private int titleImageRes;
 
 	public CustomTitleBar(final Activity activity, int titleStringRes, int titleImageRes) {
+		this(activity,titleStringRes,titleImageRes,R.style.CustomTitleTheme);
+	}
+	
+	public CustomTitleBar(final Activity activity, int titleStringRes, int titleImageRes, int style) {
 		this.activity = activity;
 		this.titleStringRes = titleStringRes;
 		this.titleImageRes = titleImageRes;
 		
-		this.activity.setTheme(R.style.CustomTitleTheme);
+		this.activity.setTheme(style);
 		this.activity.requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 	}
 	

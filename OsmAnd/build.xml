@@ -97,11 +97,13 @@
 		  		<isset property="net.osmand" />
 		  </condition>
 		  <then>
+		  	<replaceregexp file="AndroidManifest.xml" match='"@drawable/icon"' replace='"@drawable/icon_free"' byline="true" />
 		  	<replaceregexp file="AndroidManifest.xml" match='package="net.osmand.plus"' replace='package="net.osmand"' byline="true" />
 		  	<replaceregexp file="AndroidManifest.xml" match='android:process="net.osmand.plus"' replace='android:process="net.osmand"' byline="true" />
 		  	<replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;Osmand&lt;' byline="true" />
 		  </then>
 		  <else>
+		  	<replaceregexp file="AndroidManifest.xml" match='"@drawable/icon_free"' replace='"@drawable/icon"' byline="true" />
 		  	<replaceregexp file="AndroidManifest.xml" match='package="net.osmand"' replace='package="net.osmand.plus"' byline="true" />
 		  	<replaceregexp file="AndroidManifest.xml" match='android:process="net.osmand"' replace='android:process="net.osmand.plus"' byline="true" />
 		  </else>
