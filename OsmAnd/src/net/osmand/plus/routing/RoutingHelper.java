@@ -386,7 +386,7 @@ public class RoutingHelper {
 						}
 					}
 				}
-				if (suppressTurnPrompt == false && calculateRoute == false) {
+				if ((suppressTurnPrompt == false && calculateRoute == false) || makeUturnWhenPossible == true) {
 					voiceRouter.updateStatus(currentLocation, makeUturnWhenPossible);
 				}
 			}
