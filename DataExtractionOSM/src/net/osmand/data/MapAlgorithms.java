@@ -11,7 +11,7 @@ import net.osmand.osm.Way;
 
 public class MapAlgorithms {
 	
-	public static void simplifyDouglasPeucker(List<Node> n, int zoom, int epsilon, Way w){
+	public static void simplifyDouglasPeucker(List<Node> n, int zoom, int epsilon, List<Node> result){
 		if(zoom > 31){
 			zoom = 31;
 		}
@@ -54,13 +54,13 @@ public class MapAlgorithms {
 			return;
 		}
 		simplifyDouglasPeucker(n, zoom, epsilon, l, first, last);
-		w.addNode(n.get(first));
+		result.add(n.get(first));
 		int lsize = l.size();
 		for (int i = 0; i < lsize; i++) {
-			w.addNode(n.get(l.get(i)));
+			result.add(n.get(l.get(i)));
 		}
 		if (cycle) {
-			w.addNode(n.get(first));
+			result.add(n.get(first));
 		}
 	}
 

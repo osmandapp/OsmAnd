@@ -58,10 +58,8 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	private MapRenderingTypes renderingTypes;
 	private MapZooms mapZooms;
 
-	// MEMORY map : save it in memory while that is allowed
-	private Map<Long, Set<Integer>>[] multiPolygonsWays;
-	private Map<Long, String> multiPolygonsNames = new LinkedHashMap<Long, String>();
 
+	Map<Long, TIntArrayList> multiPolygonsWays;
 	private Map<Long, List<Long>> highwayRestrictions = new LinkedHashMap<Long, List<Long>>();
 
 	// local purpose to speed up processing cache allocation
@@ -80,16 +78,13 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	private int zoomWaySmothness = 0;
 	private final Log logMapDataWarn;
 
+	@SuppressWarnings("unchecked")
 	public IndexVectorMapCreator(Log logMapDataWarn, MapZooms mapZooms, MapRenderingTypes renderingTypes, int zoomWaySmothness) {
 		this.logMapDataWarn = logMapDataWarn;
 		this.mapZooms = mapZooms;
 		this.zoomWaySmothness = zoomWaySmothness;
 		this.renderingTypes = renderingTypes;
-		// init map
-		multiPolygonsWays = new Map[mapZooms.size()];
-		for (int i = 0; i < multiPolygonsWays.length; i++) {
-			multiPolygonsWays[i] = new LinkedHashMap<Long, Set<Integer>>();
-		}
+		this.multiPolygonsWays = new LinkedHashMap<Long, TIntArrayList>();
 		lowLevelWays = -1;
 	}
 
@@ -121,10 +116,10 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				return;
 			}
 
-			int mtType = renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(0).getMaxZoom(), true, typeUse);
-			if (mtType != 0) {
-
-				String name = renderingTypes.getEntityName(e);
+			
+			renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(0).getMaxZoom(), typeUse, addtypeUse,
+					namesUse, tempNameUse);
+			if (typeUse.size() > 0) {
 				List<List<Way>> completedRings = new ArrayList<List<Way>>();
 				List<List<Way>> incompletedRings = new ArrayList<List<Way>>();
 				for (Entity es : entities.keySet()) {
@@ -149,41 +144,73 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 						if (innerType != inner) {
 							logMapDataWarn
 									.warn("Probably map bug: Multipoligon contains outer and inner ways.\n" + //$NON-NLS-1$
-											"Way:"
-											+ way.getId()
+											"Way:" + way.getId()
 											+ " is strange part of completed ring. InnerType:" + innerType + " way inner: " + inner + " way inner string:" + entities.get(way)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 							return;
 						}
 					}
 				}
 
+				// That check is not strictly needed on preproccessing step because client can handle it  
 				Node nodeOut = checkOuterWaysEncloseInnerWays(completedRings, entities);
 				if (nodeOut != null) {
 					logMapDataWarn.warn("Map bug: Multipoligon contains 'inner' way point outside of 'outer' border.\n" + //$NON-NLS-1$
 							"Multipolygon id : " + e.getId() + ", inner node out id : " + nodeOut.getId()); //$NON-NLS-1$
 				}
+				
+				List<Node> outerWay = new ArrayList<Node>();
+				List<List<Node>> innerWays = new ArrayList<List<Node>>();
 
+				TIntArrayList typeToSave = new TIntArrayList(typeUse);
+				long baseId = e.getId();
 				for (List<Way> l : completedRings) {
 					boolean innerType = "inner".equals(entities.get(l.get(0))); //$NON-NLS-1$
-					boolean clockwise = MapAlgorithms.isClockwiseWay(l);
-
-					// clockwise - outer (like coastline), anticlockwise - inner
-					boolean inverse = clockwise != !innerType;
+					if(!innerType && !outerWay.isEmpty()) {
+						logMapDataWarn.warn("Map bug: Multipoligon contains many 'outer' borders.\n" + //$NON-NLS-1$
+								"Multipolygon id : " + e.getId() + ", outer way id : " + l.get(0).getId()); //$NON-NLS-1$
+						return;
+					}
+					List<Node> toCollect;
+					if(innerType) {
+						toCollect = new ArrayList<Node>();
+						innerWays.add(toCollect);
+					} else {
+						toCollect = outerWay;
+					}
+					
 					for (Way way : l) {
-						boolean inner = "inner".equals(entities.get(way)); //$NON-NLS-1$
-						if (!inner && name != null) {
-							multiPolygonsNames.put(way.getId(), name);
+						toCollect.addAll(way.getNodes());
+						if(!innerType){
+							baseId = way.getId();
 						}
-						putMultipolygonType(multiPolygonsWays[0], way.getId(), mtType, inverse);
-						for (int i = 1; i < multiPolygonsWays.length; i++) {
-							int type = renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(0).getMaxZoom(), true, typeUse);
-							if (type != 0) {
-								putMultipolygonType(multiPolygonsWays[i], way.getId(), type, inverse);
-							}
-						}
+						multiPolygonsWays.put(way.getId(), typeToSave);
 					}
 				}
-
+				nextZoom : for (int level = 0; level < mapZooms.size(); level++) {
+					renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), typeUse, addtypeUse, namesUse,
+							tempNameUse);
+					if (typeUse.isEmpty()) {
+						continue;
+					}
+					long id = convertBaseIdToGeneratedId(baseId, level);
+					// simplify route
+					int zoomToSimplify = mapZooms.getLevel(level).getMaxZoom() - 1;
+					if (zoomToSimplify < 15) {
+						outerWay = simplifyCycleWay(outerWay, zoomToSimplify);
+						if(outerWay == null){
+							continue nextZoom;
+						}
+						List<List<Node>> newinnerWays = new ArrayList<List<Node>>();
+						for(List<Node> ls : innerWays){
+							ls = simplifyCycleWay(ls, zoomToSimplify);
+							if(ls != null){
+								newinnerWays.add(ls);
+							}
+						}
+						innerWays = newinnerWays;
+					}
+					insertBinaryMapRenderObjectIndex(mapTree[level], outerWay, innerWays, namesUse, id, true, typeUse, addtypeUse, true);
+				}
 			}
 		}
 	}
@@ -217,19 +244,6 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		return toReturn;
 	}
 
-	private void putMultipolygonType(Map<Long, Set<Integer>> multiPolygonsWays, long baseId, int mtType, boolean inverse) {
-		if (mtType == 0) {
-			return;
-		}
-		if (!multiPolygonsWays.containsKey(baseId)) {
-			multiPolygonsWays.put(baseId, new LinkedHashSet<Integer>());
-		}
-		if (inverse) {
-			multiPolygonsWays.get(baseId).add(mtType | (1 << 15));
-		} else {
-			multiPolygonsWays.get(baseId).add(mtType);
-		}
-	}
 
 	private void combineMultiPolygons(Way w, List<List<Way>> completedRings, List<List<Way>> incompletedRings) {
 		long lId = w.getEntityIds().get(w.getEntityIds().size() - 1).getId().longValue();
@@ -275,84 +289,17 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	}
 
 
-	private long encodeTypesToOneLong(int mainType) {
-		long i = 0;
-		int ind = 0;
-		int sh = 0;
-		if (typeUse.size() > 3) {
-			logMapDataWarn.error("Types for low index way more than 4"); //$NON-NLS-1$
-		}
-		i |= (mainType << sh);
-		if (typeUse.size() > ind) {
-			sh += 16;
-			i |= ((long) typeUse.get(ind++) << sh);
-			if (typeUse.size() > ind) {
-				sh += 16;
-				i |= ((long) typeUse.get(ind++) << sh);
-				if (typeUse.size() > ind) {
-					sh += 16;
-					i |= ((long) typeUse.get(ind++) << sh);
-				}
-			}
-		}
-		return i;
-	}
-
-	protected int decodeTypesFromOneLong(long i) {
-		typeUse.clear();
-		int mask = (1 << 16) - 1;
-		int k = (int) (i & mask);
-		int r = 0;
-		if (k > 0) {
-			r = k;
-			i >>= 16;
-			k = (int) (i & mask);
-			if (k > 0) {
-				typeUse.add(k);
-				i >>= 16;
-				k = (int) (i & mask);
-				if (k > 0) {
-					typeUse.add(k);
-					i >>= 16;
-					k = (int) (i & mask);
-					if (k > 0) {
-						typeUse.add(k);
-						i >>= 16;
-					}
-				}
-			}
-		}
-		return r;
-	}
-
-	protected Way simplifyWay(Way originalE, long id, boolean hasMulti, int zoom, String name, int type, int level) throws SQLException {
-		List<Node> nodes = originalE.getNodes();
-		Way way = new Way(id);
-		for (String t : originalE.getTagKeySet()) {
-			way.putTag(t, originalE.getTag(t));
-		}
-		boolean cycle = originalE.getNodeIds().get(0).longValue() == originalE.getNodeIds().get(nodes.size() - 1).longValue();
-		long longType = encodeTypesToOneLong(type);
-
-		if (cycle) {
-			if (checkForSmallAreas(nodes, zoom + Math.min(zoomWaySmothness / 2, 3), 1, 4)) {
-				return null;
-			}
-		}
-
-		MapAlgorithms.simplifyDouglasPeucker(nodes, zoom + 8 + zoomWaySmothness, 3, way);
-		if (way.getNodes().size() < 2) {
+	protected List<Node> simplifyCycleWay(List<Node> ns, int zoom) throws SQLException {
+		if (checkForSmallAreas(ns, zoom + Math.min(zoomWaySmothness / 2, 3), 2, 4)) {
 			return null;
 		}
-		if (cycle) {
-			// nothing to do
-			return way;
-		} else {
-			lowLevelWays++;
-			insertLowLevelMapBinaryObject(level, longType, id, way.getNodes(), name);
+		List<Node> res = new ArrayList<Node>();
+		// simplification
+		MapAlgorithms.simplifyDouglasPeucker(ns, zoom + 8 + zoomWaySmothness, 3, res);
+		if (res.size() < 2) {
 			return null;
 		}
-
+		return res;
 	}
 
 	public int getLowLevelWays() {
@@ -379,6 +326,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		mapLowLevelBinaryStat = null;
 		mapConnection.commit();
 
+		TODO;
 		PreparedStatement startStat = mapConnection.prepareStatement("SELECT id, start_node, end_node, nodes FROM low_level_map_objects"
 				+ " WHERE start_node = ? AND type=? AND level = ? AND name=?");
 		PreparedStatement endStat = mapConnection.prepareStatement("SELECT id, start_node, end_node, nodes FROM low_level_map_objects"
@@ -512,35 +460,42 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 			// manipulate what kind of way to load
 			ctx.loadEntityData(e);
 			for (int level = 0; level < mapZooms.size(); level++) {
-				boolean area = renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), false, 
-						typeUse, addtypeUse, namesUse, tempNameUse);
-				if(typeUse.isEmpty()) {
+				boolean area = renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(),  typeUse, addtypeUse,
+						namesUse, tempNameUse);
+				if (typeUse.isEmpty()) {
 					continue;
 				}
-				Map<Long, Set<Integer>> multiPolygonsWays = this.multiPolygonsWays[level];
 				boolean hasMulti = e instanceof Way && multiPolygonsWays.containsKey(e.getId());
 				if (hasMulti) {
-					Set<Integer> set = multiPolygonsWays.get(e.getId());
+					TIntArrayList set = multiPolygonsWays.get(e.getId());
 					typeUse.removeAll(set);
 				}
-				if(typeUse.isEmpty()) {
+				if (typeUse.isEmpty()) {
 					continue;
 				}
 				long id = convertBaseIdToGeneratedId(e.getId(), level);
-				boolean skip = false;
-
-				if (e instanceof Way) {
+				List<Node> res = null;
+				if(e instanceof Node){
+					res = Collections.singletonList((Node)e);
+				} else {
 					id |= 1;
+					
 					// simplify route
 					int zoomToSimplify = mapZooms.getLevel(level).getMaxZoom() - 1;
 					if (zoomToSimplify < 15) {
-						e = simplifyWay((Way) e, id, hasMulti, zoomToSimplify, eName, type, level);
-						skip = e == null;
+						boolean cycle = ((Way) e).getNodeIds().get(0).longValue() == ((Way) e).getNodeIds().get(((Way) e).getNodeIds().size() - 1).longValue();
+						if(cycle) {
+							res = simplifyCycleWay(((Way) e).getNodes(), zoomToSimplify);
+						} else {
+							String ename = namesUse.get(renderingTypes.getNameRuleType());
+							insertLowLevelMapBinaryObject(level, zoomToSimplify, typeUse, id, ((Way) e).getNodes(), ename);
+						}
+					} else {
+						res = ((Way) e).getNodes();
 					}
-
 				}
-				if (!skip) {
-					insertBinaryMapRenderObjectIndex(rtree, e, eName, id, type, typeUse, highwayAttributes, restrictionsUse, inverse, point, true);
+				if(res != null){
+					insertBinaryMapRenderObjectIndex(mapTree[level], res, null, namesUse, id, area, typeUse, addtypeUse, true);
 				}
 			}
 		}
@@ -614,6 +569,15 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	}
 
 	private static final char SPECIAL_CHAR = ((char) 0x60000);
+	private String encodeNames(Map<MapRulType, String> tempNames) {
+		StringBuilder b = new StringBuilder();
+		for(Map.Entry<MapRulType, String> e : tempNames.entrySet()) {
+			if(e.getValue() != null) {
+				b.append(SPECIAL_CHAR).append(e.getKey().getInternalId()).append(e.getValue());
+			}
+		}
+		return b.toString();
+	}
 
 	private void decodeNames(String name, Map<MapRulType, String> tempNames) {
 		int i = name.indexOf(SPECIAL_CHAR);
@@ -746,7 +710,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		stat.executeUpdate("create index binary_map_objects_ind on binary_map_objects (id)");
 
 		stat.executeUpdate("create table low_level_map_objects (id bigint primary key, start_node bigint, "
-				+ "end_node bigint, name varchar(1024), nodes binary, type bigint, level smallint)");
+				+ "end_node bigint, name varchar(1024), nodes binary, type binary, level smallint)");
 		stat.executeUpdate("create index low_level_map_objects_ind on low_level_map_objects (id)");
 		stat.executeUpdate("create index low_level_map_objects_ind_st on low_level_map_objects (start_node, type)");
 		stat.executeUpdate("create index low_level_map_objects_ind_end on low_level_map_objects (end_node, type)");
@@ -763,11 +727,15 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				.prepareStatement("insert into low_level_map_objects(id, start_node, end_node, name, nodes, type, level) values(?, ?, ?, ?, ?, ?, ?)");
 	}
 
-	private void insertLowLevelMapBinaryObject(int level, long types, long id, List<Node> nodes, String name) throws SQLException {
+	private void insertLowLevelMapBinaryObject(int level, int zoom, TIntArrayList types, long id, List<Node> in, String name) throws SQLException {
+		lowLevelWays ++;
+		List<Node> nodes = new ArrayList<Node>();
+		MapAlgorithms.simplifyDouglasPeucker(in, zoom + 8 + zoomWaySmothness, 3, nodes);
 		boolean first = true;
 		long firstId = -1;
 		long lastId = -1;
 		ByteArrayOutputStream bnodes = new ByteArrayOutputStream();
+		ByteArrayOutputStream btypes = new ByteArrayOutputStream();
 		try {
 			for (Node n : nodes) {
 				if (n != null) {
@@ -786,56 +754,42 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		if (firstId == -1) {
 			return;
 		}
-		// conn.prepareStatement("insert into binary_map_objects(id, name, types, restrictions, nodes, highway) values(?, ?, ?, ?, ?, ?)");
+		for(int j = 0; j< types.size(); j++){
+			try {
+				Algoritms.writeInt(btypes, types.get(j));
+			} catch (IOException e) {
+			}
+		}
 		mapLowLevelBinaryStat.setLong(1, id);
 		mapLowLevelBinaryStat.setLong(2, firstId);
 		mapLowLevelBinaryStat.setLong(3, lastId);
 		mapLowLevelBinaryStat.setString(4, name);
 		mapLowLevelBinaryStat.setBytes(5, bnodes.toByteArray());
-		mapLowLevelBinaryStat.setLong(6, types);
+		mapLowLevelBinaryStat.setBytes(6, btypes.toByteArray());
 		mapLowLevelBinaryStat.setShort(7, (short) level);
 
 		addBatch(mapLowLevelBinaryStat);
 	}
 
-	private void insertBinaryMapRenderObjectIndex(RTree mapTree, Entity e, String name,
-			long id, int type, List<Integer> typeUse, int highwayAttributes, List<Long> restrictions, 	
-			boolean inversePath, boolean writeAsPoint, boolean commit) throws SQLException {
-		if(e instanceof Relation){
-			throw new IllegalArgumentException();
-		}
+	private void insertBinaryMapRenderObjectIndex(RTree mapTree, Collection<Node> nodes, List<List<Node>> innerWays, Map<MapRulType, String> names, long id,
+			boolean area, TIntArrayList types, TIntArrayList addTypes, boolean commit) throws SQLException {
 		boolean init = false;
 		int minX = Integer.MAX_VALUE;
 		int maxX = 0;
 		int minY = Integer.MAX_VALUE;
 		int maxY = 0;
-		Collection<Node> nodes; 
-		if (e instanceof Way) {
-			if (writeAsPoint) {
-				LatLon center = MapUtils.getCenter(((Way) e));
-				nodes = Collections.singleton(new Node(center.getLatitude(), center.getLongitude(), -1));
-			} else {
-				nodes = ((Way) e).getNodes();
-			}
-		} else {
-			nodes = Collections.singleton((Node) e);
-		}
-		if(inversePath){
-			nodes = new ArrayList<Node>(nodes);
-			Collections.reverse((List<?>) nodes);
-		}
-		
-		ByteArrayOutputStream bnodes = new ByteArrayOutputStream();
+
+		ByteArrayOutputStream bcoordinates = new ByteArrayOutputStream();
+		ByteArrayOutputStream binnercoord = new ByteArrayOutputStream();
 		ByteArrayOutputStream btypes = new ByteArrayOutputStream();
-		ByteArrayOutputStream brestrictions = new ByteArrayOutputStream();
-		
+		ByteArrayOutputStream badditionalTypes = new ByteArrayOutputStream();
+
 		try {
-			Algoritms.writeSmallInt(btypes, type);
-			for (Integer i : typeUse) {
-				Algoritms.writeSmallInt(btypes, i);
+			for (int j = 0; j < types.size(); j++) {
+				Algoritms.writeSmallInt(btypes, types.get(j));
 			}
-			for (Long i : restrictions) {
-				Algoritms.writeLongInt(brestrictions, i);
+			for (int j = 0; j < addTypes.size(); j++) {
+				Algoritms.writeSmallInt(badditionalTypes, addTypes.get(j));
 			}
 
 			for (Node n : nodes) {
@@ -847,23 +801,45 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					minY = Math.min(minY, y);
 					maxY = Math.max(maxY, y);
 					init = true;
-					Algoritms.writeInt(bnodes, x);
-					Algoritms.writeInt(bnodes, y);
+					Algoritms.writeInt(bcoordinates, x);
+					Algoritms.writeInt(bcoordinates, y);
+				}
+			}
+			
+			
+			if (innerWays != null) {
+				for (List<Node> ws : innerWays) {
+					boolean exist = false;
+					if (ws != null) {
+						for (Node n : ws) {
+							if (n != null) {
+								exist = true;
+								int y = MapUtils.get31TileNumberY(n.getLatitude());
+								int x = MapUtils.get31TileNumberX(n.getLongitude());
+								Algoritms.writeInt(binnercoord, x);
+								Algoritms.writeInt(binnercoord, y);
+							}
+						}
+					}
+					if (exist) {
+						Algoritms.writeInt(binnercoord, 0);
+						Algoritms.writeInt(binnercoord, 0);
+					}
 				}
 			}
 		} catch (IOException es) {
 			throw new IllegalStateException(es);
 		}
 		if (init) {
-			TODO;
 			// conn.prepareStatement("insert into binary_map_objects(id, area, coordinates, innerPolygons, types, additionalTypes, name) values(?, ?, ?, ?, ?, ?, ?)");
 			mapBinaryStat.setLong(1, id);
-			mapBinaryStat.setString(2, name);
-			mapBinaryStat.setBytes(3, btypes.toByteArray());
-			mapBinaryStat.setBytes(4, brestrictions.toByteArray());
-			mapBinaryStat.setBytes(5, bnodes.toByteArray());
-			mapBinaryStat.setInt(6, highwayAttributes);
-			
+			mapBinaryStat.setBoolean(2, area);
+			mapBinaryStat.setBytes(3, bcoordinates.toByteArray());
+			mapBinaryStat.setBytes(4, binnercoord.toByteArray());
+			mapBinaryStat.setBytes(5, btypes.toByteArray());
+			mapBinaryStat.setBytes(6, badditionalTypes.toByteArray());
+			mapBinaryStat.setString(7, encodeNames(names));
+
 			addBatch(mapBinaryStat, commit);
 			try {
 				mapTree.insert(new LeafElement(new Rect(minX, minY, maxX, maxY), id));

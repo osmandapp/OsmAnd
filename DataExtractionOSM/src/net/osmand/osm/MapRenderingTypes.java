@@ -107,9 +107,13 @@ public class MapRenderingTypes {
 		typeList.add(rt);
 	}
 	
+	public MapRulType getNameRuleType() {
+		return nameRuleType;
+	}
+	
 	
 	// if type equals 0 no need to save that point
-	public boolean encodeEntityWithType(Entity e, int zoom, boolean multipolygon, TIntArrayList outTypes, 
+	public boolean encodeEntityWithType(Entity e, int zoom, TIntArrayList outTypes, 
 			TIntArrayList outaddTypes, Map<MapRulType, String> namesToEncode, List<MapRulType> tempList) {
 		Map<String, MapRulType> types = getEncodingRuleTypes();
 		outTypes.clear();
@@ -118,7 +122,7 @@ public class MapRenderingTypes {
 		tempList.clear();
 		tempList.add(nameRuleType);
 
-		boolean area = multipolygon || "yes".equals(e.getTag("area"));
+		boolean area = "yes".equals(e.getTag("area"));
 
 		Collection<String> tagKeySet = e.getTagKeySet();
 		for (String tag : tagKeySet) {
@@ -435,6 +439,10 @@ public class MapRenderingTypes {
 		
 		public int getTargetId() {
 			return targetId;
+		}
+		
+		public int getInternalId() {
+			return id;
 		}
 		
 		public void setTargetId(int targetId) {

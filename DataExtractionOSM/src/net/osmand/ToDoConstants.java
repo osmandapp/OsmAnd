@@ -7,12 +7,15 @@ package net.osmand;
  */
 public class ToDoConstants {
 	
+	
 	// Index
-	// Add map date created field!
-	// Map QTree (skip small areas!!!)
+	// Map QuadTree (skip small areas!!!)
 	// new Address
 	// slightly changed POI (check it)
-	// Routing index 
+	// Routing index
+	
+	// TODO
+	// Ref and other names are not provided as additional types (on level < 15)!
 	
 	
 //	    == Osmand application (TODO 127) ==

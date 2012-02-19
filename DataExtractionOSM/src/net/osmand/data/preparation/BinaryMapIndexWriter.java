@@ -381,9 +381,11 @@ public class BinaryMapIndexWriter {
 			for(int i=0; i< innerPolygonTypes.length / 8; i++){
 				int x = Algoritms.parseIntFromBytes(coordinates, i * 8);
 				int y = Algoritms.parseIntFromBytes(coordinates, i * 8 + 4);
-				if(x == 0 && y == 0){
-					data.addPolygonInnerCoordinates(ByteString.copyFrom(mapDataBuf.toArray()));
-					mapDataBuf.clear();
+				if (x == 0 && y == 0) {
+					if (mapDataBuf.size() > 0) {
+						data.addPolygonInnerCoordinates(ByteString.copyFrom(mapDataBuf.toArray()));
+						mapDataBuf.clear();
+					}
 					pcalcx = pleft;
 					pcalcy = ptop;
 				} else {
