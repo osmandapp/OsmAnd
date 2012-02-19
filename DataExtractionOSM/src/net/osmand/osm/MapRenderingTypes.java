@@ -5,6 +5,7 @@ import gnu.trove.list.array.TIntArrayList;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -58,6 +59,7 @@ public class MapRenderingTypes {
 
 	// stored information to convert from osm tags to int type
 	private Map<String, MapRulType> types = null;
+	private List<MapRulType> typeList = new ArrayList<MapRenderingTypes.MapRulType>();
 	
 	private Map<AmenityType, Map<String, String>> amenityTypeNameToTagVal = null;
 	private Map<String, AmenityType> amenityNameToType = null;
@@ -81,67 +83,75 @@ public class MapRenderingTypes {
 	public Map<String, MapRulType> getEncodingRuleTypes(){
 		if (types == null) {
 			types = new LinkedHashMap<String, MapRulType>();
-			nameRuleType = new MapRulType(types.size());
+			typeList.clear();
+			nameRuleType = new MapRulType();
 			nameRuleType.tag = "name";
 			nameRuleType.additional = true;
-			types.put(constructRuleKey("name", null), nameRuleType);
-			
+			registerRuleType("name", null, nameRuleType);
 			init();
 		}
 		return types;
 	}
 	
+	public MapRulType getTypeByInternalId(int id) {
+		return typeList.get(id);
+	}
+	
+	private void registerRuleType(String tag, String val, MapRulType rt){
+		rt.id = types.size();
+		String keyVal = constructRuleKey(tag, val);
+		if(types.containsKey(keyVal)){
+			throw new RuntimeException("Duplicate " + keyVal);
+		}
+		types.put(keyVal, rt);
+		typeList.add(rt);
+	}
+	
 	
 	// if type equals 0 no need to save that point
-	public int encodeEntityWithType(Entity e, int zoom, boolean multipolygon, TIntArrayList types) {
-		Map<String, MapRulType> rules = getEncodingRuleTypes();
-		types.clear();
-		if ("coastline".equals(e.getTag(OSMTagKey.NATURAL))) { //$NON-NLS-1$
-			multipolygon = false;
-		}
+	public boolean encodeEntityWithType(Entity e, int zoom, boolean multipolygon, TIntArrayList outTypes, 
+			TIntArrayList outaddTypes, Map<MapRulType, String> namesToEncode, List<MapRulType> tempList) {
+		Map<String, MapRulType> types = getEncodingRuleTypes();
+		outTypes.clear();
+		outaddTypes.clear();
+		namesToEncode.clear();
+		tempList.clear();
+		tempList.add(nameRuleType);
 
-		boolean point = e instanceof Node;
-		boolean polygon = multipolygon || "yes".equals(e.getTag("area"));
-		if (!point && !polygon) {
-			// determining area or path
-			boolean highway = e.getTag("highway") != null; //$NON-NLS-1$
-			if (!highway) {
-				List<Long> ids = ((Way) e).getNodeIds();
-				if (ids.size() > 1) {
-					polygon = ((long) ids.get(0) == (long) ids.get(ids.size() - 1));
-				}
-			}
-		}
+		boolean area = multipolygon || "yes".equals(e.getTag("area"));
 
 		Collection<String> tagKeySet = e.getTagKeySet();
-		int type = -1;
 		for (String tag : tagKeySet) {
 			String val = e.getTag(tag);
-			MapRulType rType = rules.get(constructRuleKey(tag, val));
+			MapRulType rType = types.get(constructRuleKey(tag, val));
 			if (rType == null) {
-				rType = rules.get(constructRuleKey(tag, null));
+				rType = types.get(constructRuleKey(tag, null));
 			}
 			if (rType != null) {
 				if (rType.minzoom > zoom) {
 					continue;
 				}
-				boolean accept;
-				if (point) {
-					accept = rType.point;
-				} else if (polygon) {
-					accept = rType.point || rType.polygon;
+				rType.freq++;
+				if (rType.names != null) {
+					for (int i = 0; i < rType.names.length; i++) {
+						tempList.add(rType.names[i]);
+					}
+				}
+				
+				if (rType.additional) {
+					outaddTypes.add(rType.id);
 				} else {
-					accept = rType.polyline;
+					outTypes.add(rType.id);
 				}
-				if (accept) {
-					rType.freq++;
-					types.add(rType.id);
-					type = point ? POINT_TYPE : (polygon ? POLYGON_TYPE : POLYLINE_TYPE);
-				}
-
 			}
 		}
-		return type;
+		for(MapRulType mt : tempList){
+			String val = e.getTag(mt.tag);
+			if(val != null && val.length() > 0){
+				namesToEncode.put(mt, val);
+			}
+		}
+		return area;
 	}
 	
 	
@@ -237,15 +247,15 @@ public class MapRenderingTypes {
 						poiParentPrefix = attributes.getValue("poi:prefix");
 						String tag = attributes.getValue("poi:tag");
 						if (tag != null) {
-							MapRulType rtype = new MapRulType(types.size());
+							MapRulType rtype = new MapRulType();
 							rtype.poiCategory = AmenityType.valueOf(poiParentCategory.toUpperCase());
 							rtype.poiSpecified = true;
 							rtype.poiPrefix = poiParentPrefix;
 							rtype.tag = tag;
-							types.put(constructRuleKey(tag, null), rtype);
+							registerRuleType(tag, null, rtype);
 						}
 					} else if (name.equals("type")) { //$NON-NLS-1$
-						MapRulType rtype = new MapRulType(types.size());
+						MapRulType rtype = new MapRulType();
 						String val = attributes.getValue("minzoom"); //$NON-NLS-1$
 						rtype.minzoom = 15;
 						if (val != null) {
@@ -256,15 +266,7 @@ public class MapRenderingTypes {
 						if (rtype.value != null && rtype.value.length() == 0) { //$NON-NLS-1$
 							rtype.value = null;
 						}
-						String keyVal = constructRuleKey(rtype.tag, rtype.value);
-						if(types.containsKey(keyVal)){
-							throw new RuntimeException("Duplicate " + keyVal);
-						}
-						types.put(keyVal, rtype);
-						
-						rtype.polygon = Boolean.parseBoolean(attributes.getValue("polygon")); //$NON-NLS-1$
-						rtype.polyline= Boolean.parseBoolean(attributes.getValue("polyline")); //$NON-NLS-1$
-						rtype.point = Boolean.parseBoolean(attributes.getValue("point")); //$NON-NLS-1$
+						registerRuleType(rtype.tag, rtype.value, rtype);
 						rtype.additional = Boolean.parseBoolean(attributes.getValue("additional")); //$NON-NLS-1$
 						String v = attributes.getValue("nameTags");
 						if(v != null) {
@@ -273,10 +275,10 @@ public class MapRenderingTypes {
 							for(int i=0; i<names.length; i++){
 								MapRulType mt = types.get(constructRuleKey(names[i], null));
 								if(mt == null){
-									mt = new MapRulType(types.size());
+									mt = new MapRulType();
 									mt.tag = names[i];
 									mt.additional = true;
-									types.put(constructRuleKey(names[i], null), mt);
+									registerRuleType(names[i], null, mt);
 								}
 								rtype.names[i] = mt;
 							}
@@ -406,7 +408,8 @@ public class MapRenderingTypes {
 		boolean additional;
 		MapRulType targetTagValue;
 		
-		final int id;
+		// inner id
+		private int id;
 		int freq;
 		int targetId;
 		
@@ -414,16 +417,8 @@ public class MapRenderingTypes {
 		AmenityType poiCategory;
 		boolean poiSpecified;
 		
-		boolean polyline;
-		boolean point;
-		boolean polygon;
 		
-		public MapRulType(int id){
-			this.id = id;
-		}
-		
-		public boolean isMapIndexed(){
-			return polygon || polyline || polygon;
+		public MapRulType(){
 		}
 		
 		public String poiPrefix(){

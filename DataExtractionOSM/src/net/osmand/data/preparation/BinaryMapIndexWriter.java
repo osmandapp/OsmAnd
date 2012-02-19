@@ -215,7 +215,7 @@ public class BinaryMapIndexWriter {
 		int highestTargetId = types.size();
 		// 1. prepare map rule type to write
 		for (MapRulType t : types.values()) {
-			if (!t.isMapIndexed() || t.getTargetTagValue() != null || t.getFreq() == 0) {
+			if (t.getTargetTagValue() != null || t.getFreq() == 0) {
 				t.setTargetId(highestTargetId++);
 			} else {
 				out.add(t);
@@ -348,7 +348,6 @@ public class BinaryMapIndexWriter {
 			byte[] additionalTypes, Map<MapRulType, String> names, Map<String, Integer> stringTable,
 			MapDataBlock.Builder dataBlock) throws IOException{
 		
-		Bounds bounds = stackBounds.peek();
 		
 		MapData.Builder data = MapData.newBuilder();
 		// calculate size
@@ -359,7 +358,7 @@ public class BinaryMapIndexWriter {
 			int x = Algoritms.parseIntFromBytes(coordinates, i * 8);
 			int y = Algoritms.parseIntFromBytes(coordinates, i * 8 + 4);
 			int tx = (x - pcalcx) >> SHIFT_COORDINATES;
-			int ty = (x - pcalcy) >> SHIFT_COORDINATES;
+			int ty = (y - pcalcy) >> SHIFT_COORDINATES;
 		    
 			writeRawVarint32(mapDataBuf, tx);
 			writeRawVarint32(mapDataBuf, ty);
@@ -389,7 +388,7 @@ public class BinaryMapIndexWriter {
 					pcalcy = ptop;
 				} else {
 					int tx = (x - pcalcx) >> SHIFT_COORDINATES;
-					int ty = (x - pcalcy) >> SHIFT_COORDINATES;
+					int ty = (y - pcalcy) >> SHIFT_COORDINATES;
 
 					writeRawVarint32(mapDataBuf, tx);
 					writeRawVarint32(mapDataBuf, ty);
