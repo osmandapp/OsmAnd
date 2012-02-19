@@ -386,10 +386,10 @@ public class RoutingHelper {
 						}
 					}
 				}
+				if (suppressTurnPrompt == false && calculateRoute == false) {
+					voiceRouter.updateStatus(currentLocation, makeUturnWhenPossible);
+				}
 			}
-		}
-		if (suppressTurnPrompt == false) {
-			voiceRouter.updateStatus(currentLocation, makeUturnWhenPossible);
 		}
 		lastFixedLocation = currentLocation;
 		if(calculateRoute){
