@@ -137,7 +137,7 @@ public class MapRenderingTypes {
 						tempList.add(rType.names[i]);
 					}
 				}
-				
+
 				if (rType.additional) {
 					outaddTypes.add(rType.id);
 				} else {

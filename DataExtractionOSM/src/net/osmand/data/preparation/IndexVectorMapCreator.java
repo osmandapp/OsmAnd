@@ -64,8 +64,11 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 	private Map<Long, List<Long>> highwayRestrictions = new LinkedHashMap<Long, List<Long>>();
 
-	// local purpose
+	// local purpose to speed up processing cache allocation
 	TIntArrayList typeUse = new TIntArrayList(8);
+	List<MapRulType> tempNameUse = new ArrayList<MapRenderingTypes.MapRulType>();
+	Map<MapRulType, String> namesUse = new LinkedHashMap<MapRenderingTypes.MapRulType, String>();
+	TIntArrayList addtypeUse = new TIntArrayList(8);
 	List<Long> restrictionsUse = new ArrayList<Long>(8);
 
 	private PreparedStatement mapBinaryStat;
@@ -508,62 +511,23 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		if (e instanceof Way || e instanceof Node) {
 			// manipulate what kind of way to load
 			ctx.loadEntityData(e);
-			for (int i = 0; i < mapZooms.size(); i++) {
-				boolean inverse = i == 0 ? oneway : false;
-				int type = renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), false, typeUse);
+			for (int level = 0; level < mapZooms.size(); level++) {
+				boolean area = renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), false, 
+						typeUse, addtypeUse, namesUse, tempNameUse);
+				if(typeUse.isEmpty()) {
+					continue;
+				}
 				Map<Long, Set<Integer>> multiPolygonsWays = this.multiPolygonsWays[level];
 				boolean hasMulti = e instanceof Way && multiPolygonsWays.containsKey(e.getId());
 				if (hasMulti) {
 					Set<Integer> set = multiPolygonsWays.get(e.getId());
-					boolean first = true;
-					for (Integer i : set) {
-						if (first && type == 0) {
-							type = i;
-							first = false;
-						} else {
-							// do not compare direction
-							int k = i & 0x7fff;
-							int ks = k | MapRenderingTypes.POLYGON_TYPE;
-							// turn of polygon type 3 ^ (suppose polygon = multipolygon)
-							if (ks == type) {
-								type = i;
-							} else {
-								int ind = typeUse.indexOf(ks);
-								if (ind == -1) {
-									typeUse.add(i);
-								} else {
-									typeUse.set(ind, i);
-								}
-							}
-						}
-					}
+					typeUse.removeAll(set);
 				}
-
-				if (type == 0) {
-					return;
+				if(typeUse.isEmpty()) {
+					continue;
 				}
-
-				restrictionsUse.clear();
-				// try to find restrictions only for max zoom level
-				if (level == 0 && highwayRestrictions.containsKey(baseId)) {
-					restrictionsUse.addAll(highwayRestrictions.get(baseId));
-				}
-
-				boolean point = (type & 3) == MapRenderingTypes.POINT_TYPE;
-				RTree rtree = null;
-				long id = convertBaseIdToGeneratedId(baseId, level);
-				rtree = mapTree[level];
-
+				long id = convertBaseIdToGeneratedId(e.getId(), level);
 				boolean skip = false;
-
-				String eName = renderingTypes.getEntityName(e);
-				if (eName == null) {
-					eName = multiPolygonsNames.get(baseId);
-				}
-				int highwayAttributes = 0;
-				if (e.getTag(OSMTagKey.HIGHWAY) != null) {
-					highwayAttributes = MapRenderingTypes.getHighwayAttributes(e);
-				}
 
 				if (e instanceof Way) {
 					id |= 1;
