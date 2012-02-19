@@ -1,12 +1,15 @@
 package net.osmand.data.preparation;
 
+import gnu.trove.TByteCollection;
 import gnu.trove.list.TLongList;
+import gnu.trove.list.array.TByteArrayList;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -15,6 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Stack;
 
@@ -25,6 +29,7 @@ import net.osmand.Algoritms;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.OsmandOdb;
 import net.osmand.binary.OsmandOdb.CityIndex;
+import net.osmand.binary.OsmandOdb.MapData;
 import net.osmand.binary.OsmandOdb.MapDataBlock;
 import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapDataBox;
 import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapEncodingRule;
@@ -54,6 +59,7 @@ import net.osmand.osm.Node;
 import net.osmand.osm.MapRenderingTypes.MapRulType;
 import net.sf.junidecode.Junidecode;
 
+import com.google.protobuf.ByteString;
 import com.google.protobuf.CodedOutputStream;
 import com.google.protobuf.MessageLite;
 import com.google.protobuf.WireFormat;
@@ -82,6 +88,7 @@ public class BinaryMapIndexWriter {
 		
 	}
 	private Stack<Bounds> stackBounds = new Stack<Bounds>();
+	private Stack<Long> stackBaseIds = new Stack<Long>();
 	
 	// internal constants to track state of index writing
 	private Stack<Integer> state = new Stack<Integer>();
@@ -284,10 +291,6 @@ public class BinaryMapIndexWriter {
 	public static int STRING_TABLE_SIZE = 0;
 	
 	
-	protected static int codeCoordinateDifference(int x, int px){
-		// shift absolute coordinates first and get truncated
-		return (x >> SHIFT_COORDINATES) - (px >> SHIFT_COORDINATES);
-	}
 	
 
 	
@@ -310,101 +313,118 @@ public class BinaryMapIndexWriter {
 				CodedOutputStream.computeRawVarint32Size(size) + size;
 
 		ref.writeReference(raf, getFilePointer());
-		codedOutStream.writeMessage(OsmAndMapIndex.BLOCKS_FIELD_NUMBER, builder.build());
+		MapDataBlock block = builder.build();
+		MAP_DATA_SIZE += block.getSerializedSize();
+		codedOutStream.writeMessage(OsmAndMapIndex.BLOCKS_FIELD_NUMBER, block);
 	}
 	
 	
+	/**
+	 * Encode and write a varint. {@code value} is treated as unsigned, so it won't be sign-extended if negative.
+	 */
+	public void writeRawVarint32(TByteArrayList bf, int value) throws IOException {
+		while (true) {
+			if ((value & ~0x7F) == 0) {
+				writeRawByte(bf, value);
+				return;
+			} else {
+				writeRawByte(bf, (value & 0x7F) | 0x80);
+				value >>>= 7;
+			}
+		}
+	}
+	
+	  
+	/** Write a single byte. */
+	public void writeRawByte(TByteArrayList bf, final int value) throws IOException {
+		bf.add((byte)value);
+	}
 
 		
+	private TByteArrayList mapDataBuf = new TByteArrayList();
 	
-	public void writeMapData(long diffId, byte[] nodes, byte[] types, Map<String,String> name, Map<String, Integer> stringTable,
+	public void writeMapData(long diffId, int pleft, int ptop, boolean area, byte[] coordinates,
+			byte[] innerPolygonTypes, byte[] types, 
+			byte[] additionalTypes, Map<MapRulType, String> names, Map<String, Integer> stringTable,
 			MapDataBlock.Builder dataBlock) throws IOException{
 		
 		Bounds bounds = stackBounds.peek();
+		
+		MapData.Builder data = MapData.newBuilder();
 		// calculate size
-		int sizeCoordinates = 0;
-		int allSize = 0;
-		int px = bounds.leftX;
-		int py = bounds.topY;
-		for(int i=0; i< nodes.length / 8; i++){
-			int x = Algoritms.parseIntFromBytes(nodes, i * 8);
-			int y = Algoritms.parseIntFromBytes(nodes, i * 8 + 4);
-			sizeCoordinates += CodedOutputStream.computeSInt32SizeNoTag(codeCoordinateDifference(x, px));
-			sizeCoordinates += CodedOutputStream.computeSInt32SizeNoTag(codeCoordinateDifference(y, py));
-			px = x;
-			py = y;
-			COORDINATES_COUNT += 2;
+		mapDataBuf.clear();
+		int pcalcx = pleft;
+		int pcalcy = ptop;
+		for(int i=0; i< coordinates.length / 8; i++){
+			int x = Algoritms.parseIntFromBytes(coordinates, i * 8);
+			int y = Algoritms.parseIntFromBytes(coordinates, i * 8 + 4);
+			int tx = (x - pcalcx) >> SHIFT_COORDINATES;
+			int ty = (x - pcalcy) >> SHIFT_COORDINATES;
+		    
+			writeRawVarint32(mapDataBuf, tx);
+			writeRawVarint32(mapDataBuf, ty);
+			
+			pcalcx = pcalcx + (tx << SHIFT_COORDINATES);
+		    pcalcy = pcalcy + (ty << SHIFT_COORDINATES);
 		}
-		allSize += CodedOutputStream.computeRawVarint32Size(sizeCoordinates) + 
-				CodedOutputStream.computeTagSize(OsmandOdb.MapData.COORDINATES_FIELD_NUMBER) + sizeCoordinates;
-		// DEBUG
-		COORDINATES_SIZE += allSize;
+		COORDINATES_SIZE += CodedOutputStream.computeRawVarint32Size(mapDataBuf.size()) + 
+				CodedOutputStream.computeTagSize(MapData.COORDINATES_FIELD_NUMBER) + mapDataBuf.size();
+		if(area) {
+			data.setAreaCoordinates(ByteString.copyFrom(mapDataBuf.toArray()));
+		} else {
+			data.setCoordinates(ByteString.copyFrom(mapDataBuf.toArray()));
+		}
 		
+		if(innerPolygonTypes.length > 0){
+			mapDataBuf.clear();
+			pcalcx = pleft;
+			pcalcy = ptop;
+			for(int i=0; i< innerPolygonTypes.length / 8; i++){
+				int x = Algoritms.parseIntFromBytes(coordinates, i * 8);
+				int y = Algoritms.parseIntFromBytes(coordinates, i * 8 + 4);
+				if(x == 0 && y == 0){
+					data.addPolygonInnerCoordinates(ByteString.copyFrom(mapDataBuf.toArray()));
+					mapDataBuf.clear();
+					pcalcx = pleft;
+					pcalcy = ptop;
+				} else {
+					int tx = (x - pcalcx) >> SHIFT_COORDINATES;
+					int ty = (x - pcalcy) >> SHIFT_COORDINATES;
 
-		
-		allSize += CodedOutputStream.computeTagSize(OsmandOdb.MapData.TYPES_FIELD_NUMBER);
-		allSize += CodedOutputStream.computeRawVarint32Size(types.length);
-		allSize += types.length;
-		// DEBUG
-		TYPES_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapData.TYPES_FIELD_NUMBER) + 
-				CodedOutputStream.computeRawVarint32Size(types.length) + types.length; 
-		
-		
-		allSize += CodedOutputStream.computeSInt64Size(OsmandOdb.MapData.ID_FIELD_NUMBER, diffId);
-		// DEBUG 
-		ID_SIZE += CodedOutputStream.computeSInt64Size(OsmandOdb.MapData.ID_FIELD_NUMBER, diffId);
-		
-		
-		int nameId = 0;
-		if(name != null){
-			if(stringTable.containsKey(name)) {
-				nameId = stringTable.get(name);
-			} else {
-				nameId = stringTable.size();
-				stringTable.put(name, nameId);
+					writeRawVarint32(mapDataBuf, tx);
+					writeRawVarint32(mapDataBuf, ty);
+
+					pcalcx = pcalcx + (tx << SHIFT_COORDINATES);
+					pcalcy = pcalcy + (ty << SHIFT_COORDINATES);
+				}
 			}
-			allSize += CodedOutputStream.computeUInt32Size(OsmandOdb.MapData.S, nameId);
+		}
+
+		data.setTypes(ByteString.copyFrom(types));
+		TYPES_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapData.TYPES_FIELD_NUMBER) + 
+				CodedOutputStream.computeRawVarint32Size(types.length) + types.length;
+		if(additionalTypes.length > 0 ){
+		data.setAdditionalTypes(ByteString.copyFrom(additionalTypes));
+		TYPES_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapData.ADDITIONALTYPES_FIELD_NUMBER) + 
+				CodedOutputStream.computeRawVarint32Size(additionalTypes.length) + additionalTypes.length;
 		}
 		
-		
-		// DEBUG
-		MAP_DATA_SIZE += allSize;
-		
-		// writing data
-		codedOutStream.writeTag(MapDataBlock.DATAOBJECTS_FIELD_NUMBER, WireFormat.FieldType.MESSAGE.getWireType());
-		codedOutStream.writeRawVarint32(allSize);
-		
-		
-		/// TODO !!!!
-		codedOutStream.writeTag(OsmandOdb.MapData.COORDINATES_FIELD_NUMBER, WireFormat.FieldType.BYTES.getWireType());
-		codedOutStream.writeRawVarint32(sizeCoordinates);
-		
-		px = bounds.leftX;
-		py = bounds.topY;
-		for (int i = 0; i < nodes.length / 8; i++) {
-			int x = Algoritms.parseIntFromBytes(nodes, i * 8);
-			int y = Algoritms.parseIntFromBytes(nodes, i * 8 + 4);
-			codedOutStream.writeSInt32NoTag(codeCoordinateDifference(x, px));
-			codedOutStream.writeSInt32NoTag(codeCoordinateDifference(y, py));
-			px = x;
-			py = y;
+		mapDataBuf.clear();
+		for(Entry<MapRulType, String> s : names.entrySet()) {
+			writeRawVarint32(mapDataBuf, s.getKey().getTargetId());
+			Integer ls = stringTable.get(s.getValue());
+			if(ls == null){
+				ls = stringTable.size();
+				stringTable.put(s.getValue(), ls);
+			}
+			writeRawVarint32(mapDataBuf, ls);
 		}
+		STRING_TABLE_SIZE += mapDataBuf.size();
+		data.setStringNames(ByteString.copyFrom(mapDataBuf.toArray()));
 		
 		
-		codedOutStream.writeTag(OsmandOdb.MapData.TYPES_FIELD_NUMBER, WireFormat.FieldType.BYTES.getWireType());
-		codedOutStream.writeRawVarint32(types.length);
-		codedOutStream.writeRawBytes(types);
-		
-		// TODO !!!
-		if(name != null){
-			codedOutStream.writeUInt32(OsmandOdb.MapData.STRINGID_FIELD_NUMBER, nameId);
-		} 
-		
-		codedOutStream.writeSInt64(OsmandOdb.MapData.ID_FIELD_NUMBER, diffId);
-		
-		
-		
-		
+		data.setId(diffId);
+		ID_SIZE += CodedOutputStream.computeSInt64Size(OsmandOdb.MapData.ID_FIELD_NUMBER, diffId);
 		
 	}
 	

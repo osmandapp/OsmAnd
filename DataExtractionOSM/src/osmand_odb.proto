@@ -107,6 +107,8 @@ message OsmAndMapIndex {
 		//shift from mapdatabox start to message MapDataBlock
 		optional fixed32 shiftToMapData = 5;
 
+		optional bool ocean = 6;
+
 		repeated MapDataBox boxes = 7;
 	}
 
@@ -137,9 +139,9 @@ message MapDataBlock {
 message MapData {
   // array of delta x,y sint32 (CodedIinputStream) >> 5
   // first x delta to Tree.left, y to delta Tree.top (next delta to previous)
-  optional bytes pointCoordinates = 1;
-  optional bytes lineCoordinates = 2;
-  optional bytes polygonOuterCoordinates = 3;
+  // point, line or outer polygon coordinates
+  optional bytes coordinates = 1;
+  optional bytes areaCoordinates = 2;
   repeated bytes polygonInnerCoordinates = 4;
 
   // array of raw var int types
