@@ -340,24 +340,13 @@ public class RoutingHelper {
 					}
 				}
 				
-				// X. Also bearing could be checked (is it same direction)
-//				float bearing;
-//				if(currentLocation.hasBearing()){
-//					bearing = currentLocation.getBearing();
-//				} else if(lastFixedLocation != null){
-//					bearing = lastFixedLocation.bearingTo(currentLocation);
-//				}
-//				bearingRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
-//				if (Math.abs(bearing - bearingRoute) > 60f && 360 - Math.abs(bearing - bearingRoute) > 60f) {
-//				      something wrong however it could be starting movement
-//				}
-
-				// 6. Suppress turn prompt if prescribed direction of motion is between 45 and 135 degrees off
+				// 6. + 7. Direction detection, by Hardy, Feb 2012
 				if(routeNodes.size() > 0){
 					if (currentLocation.hasBearing() || lastFixedLocation != null) {
 						float bearing = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation.bearingTo(currentLocation);
 						float bearingRoute;
 						bearingRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
+						// 6. Suppress turn prompt if prescribed direction of motion is between 45 and 135 degrees off
 						if (Math.abs(bearing - bearingRoute) > 45f && 360 - Math.abs(bearing - bearingRoute) > 45f) {
 							// disregard upper bound to suppress turn prompt also for recalculated still-opposite route
 							//if (Math.abs(bearing - bearingRoute) <= 135f && 360 - Math.abs(bearing - bearingRoute) <= 135f) {
@@ -365,15 +354,7 @@ public class RoutingHelper {
 								//log.info("Bearing is off from bearingRoute between >45 and <=135 degrees"); //$NON-NLS-1$
 							//}
 						}
-					}
-				}
-
-				// 7. Check necessity for unscheduled U-turn, Issue 863
-				if(routeNodes.size() > 0){
-					if (currentLocation.hasBearing() || lastFixedLocation != null) {
-						float bearing = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation.bearingTo(currentLocation);
-						float bearingRoute;
-						bearingRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
+						// 7. Check necessity for unscheduled U-turn, Issue 863
 						if (Math.abs(bearing - bearingRoute) > 135f && 360 - Math.abs(bearing - bearingRoute) > 135f) {
 							float d = currentLocation.distanceTo(routeNodes.get(currentRoute));
 							if (d > 50) {
@@ -384,6 +365,7 @@ public class RoutingHelper {
 						}
 					}
 				}
+
 				if ((suppressTurnPrompt == false && calculateRoute == false) || makeUturnWhenPossible == true) {
 					voiceRouter.updateStatus(currentLocation, makeUturnWhenPossible);
 				}
