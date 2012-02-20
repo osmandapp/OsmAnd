@@ -359,13 +359,11 @@ public class RoutingHelper {
 						float bearingRoute;
 						bearingRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
 						if (Math.abs(bearing - bearingRoute) > 45f && 360 - Math.abs(bearing - bearingRoute) > 45f) {
-							if (Math.abs(bearing - bearingRoute) <= 135f && 360 - Math.abs(bearing - bearingRoute) <= 135f) {
-								//float d = currentLocation.distanceTo(routeNodes.get(currentRoute));
-								//if (d > 50) {
-									suppressTurnPrompt = true;
-									//log.info("Bearing is off from bearingRoute between >45 and <=135 degrees"); //$NON-NLS-1$
-								//}
-							}
+							// disregard upper bound to suppress turn prompt also for recalculated still-opposite route
+							//if (Math.abs(bearing - bearingRoute) <= 135f && 360 - Math.abs(bearing - bearingRoute) <= 135f) {
+								suppressTurnPrompt = true;
+								//log.info("Bearing is off from bearingRoute between >45 and <=135 degrees"); //$NON-NLS-1$
+							//}
 						}
 					}
 				}
