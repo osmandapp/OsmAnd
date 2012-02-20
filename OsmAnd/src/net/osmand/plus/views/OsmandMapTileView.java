@@ -41,6 +41,7 @@ import android.view.WindowManager;
 import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.SurfaceHolder.Callback;
+import android.widget.Toast;
 
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback {
 
@@ -93,9 +94,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private BaseMapLayer mainLayer;
 	
 	private Map<OsmandMapLayer, Float> zOrders = new HashMap<OsmandMapLayer, Float>();
-	
 	private MapActivity activity;
-	
+
 	// UI Part
 	// handler to refresh map (in ui thread - ui thread is not necessary, but msg queue is required).
 	protected Handler handler = new Handler();
@@ -692,6 +692,25 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		if (!multiTouchSupport.onTouchEvent(event)) {
 			/* return */gestureDetector.onTouchEvent(event);
 		}
+		if (event.getAction() == MotionEvent.ACTION_UP) {	//CGM: add support for dragging measurement point
+			if(scrollingFlag && measureDistanceMode){
+				if(selectedMeasurementPointIndex >= 0){	//move selected point to new location
+					int i = 0;
+					for (i = 0; i < layers.size(); i++){
+						OsmandMapLayer l = layers.get(i);
+						if(l instanceof ContextMenuLayer) break;
+					}
+					if(i > 0 && i < layers.size()){
+						measurementPoints.set(selectedMeasurementPointIndex,getLatLonFromScreenPoint(event.getX(), event.getY()));
+						colourChangeIndex = selectedMeasurementPointIndex;
+						layers.get(i).onTouchEvent(null);	//adjust text info
+						screenPointLatLon = measurementPoints.get(selectedMeasurementPointIndex);
+						refreshMap();
+					}
+				}
+				scrollingFlag = false;
+			}
+		}	//CGM end block
 		return true;
 	}
 
@@ -822,6 +841,15 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		@Override
 		public boolean onSingleTapUp(MotionEvent e) {
 			PointF point = new PointF(e.getX(), e.getY());
+			//CGM: Black added to test if a measurement point has been clicked
+			if (measureDistanceMode) {
+				selectedMeasurementPointIndex = isMeasurementPointSelected(point);	//save index of point selected	
+				if(selectedMeasurementPointIndex >= 0){
+					screenPointLatLon = measurementPoints.get(selectedMeasurementPointIndex);
+				}else{
+					screenPointLatLon = getLatLonFromScreenPoint(point.x, point.y);
+				}	//this event will be responded to by ContextMenuLayer
+			}	//CGM: end of block
 			if (log.isDebugEnabled()) {
 				log.debug("On click event " + point.x + " " + point.y); //$NON-NLS-1$ //$NON-NLS-2$
 			}
