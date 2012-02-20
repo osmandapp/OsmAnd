@@ -40,6 +40,7 @@ import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -99,13 +100,14 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 	private long lastTimeAutoZooming = 0;
 	
 	private long lastTimeGPSLocationFixed = 0;
+	Context context = this;
 	
     /** Called when the activity is first created. */
 	private OsmandMapTileView mapView;
 	final private MapActivityActions mapActions = new MapActivityActions(this);
 	private EditingPOIActivity poiActions;
 	final private MapActivityLayers mapLayers = new MapActivityLayers(this);
-	final private MeasurementActivity measurementActivity = new MeasurementActivity(this);	//for measurement mode
+	private MeasurementActivity measurementActivity;	//for measurement mode
 	
 	private SavingTrackHelper savingTrackHelper;
 	private LiveMonitoringHelper liveMonitoringHelper;
@@ -169,6 +171,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		parseLaunchIntentLocation();
 		
 		mapView = (OsmandMapTileView) findViewById(R.id.MapView);
+		measurementActivity = new MeasurementActivity(this);	//for measurement mode
 		mapView.setTrackBallDelegate(new OsmandMapTileView.OnTrackBallListener(){
 			@Override
 			public boolean onTrackBallEvent(MotionEvent e) {
@@ -197,7 +200,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		LatLon pointToNavigate = settings.getPointToNavigate();
 		
 		routingHelper = getMyApplication().getRoutingHelper();
-		// This situtation could be when navigation suddenly crashed and after restarting
+		// This situation could be when navigation suddenly crashed and after restarting
 		// it tries to continue the last route
 		if(settings.FOLLOW_THE_ROUTE.get() && !routingHelper.isRouteCalculated()){
 			restoreRoutingMode(pointToNavigate);
@@ -643,7 +646,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 				} else {
 					speed = ((float) d * 1000) / time ;
 				}
-				// Be aware only for emulator ! code is incorrect in case of airplane
+				// Be aware only for emulator ! code is incorrect in case of aeroplane
 				if (speed > 100) {
 					speed = 100;
 				}
@@ -1068,7 +1071,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		}
 		
 		MenuItem measureDistance = menu.findItem(R.id.map_calculate_distance);	//synchronise to changes made to measurement mode external to this menu actions.
-		if(mapView.getMeasureDistanceMode()){
+		if(measurementActivity.getMeasureDistanceMode()){
 			measureDistance.setChecked(true);
 		}else{
 			measureDistance.setChecked(false);			
@@ -1145,19 +1148,29 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 			if(routingHelper.isRouteCalculated()){
 				mapActions.aboutRoute();
 			} else {	//toggle the distance measurement mode
-				if(mapView.getMeasureDistanceMode()){
-					mapView.setMeasureDistanceMode(false);
+				if(measurementActivity.getMeasureDistanceMode()){
+					measurementActivity.setMeasureDistanceMode(false);
 					item.setChecked(false);
 				}else{
-					mapView.setMeasureDistanceMode(true);
+					measurementActivity.setMeasureDistanceMode(true);
 					item.setChecked(true);
-					mapView.setCumMeasuredDistance(0);	//Clear the cumulative distance measurement
-					mapView.measurementPoints.clear();	//clear the list of measurement points
+					measurementActivity.setCumMeasuredDistance(0);	//Clear the cumulative distance measurement
+					measurementActivity.measurementPoints.clear();	//clear the list of measurement points
 				}
-				mapLayers.getContextMenuLayer().setLocation(null, "");	//delete any visible point info text box
+				mapLayers.getContextMenuLayer().setLocation(null, "");	//delete any visible point info on contextlayer text box
 				mapView.refreshMap();
 			}
 			return true;
+		case R.id.map_GPX_plan:	//Load a previously saved plan track from a GPX file
+			if(routingHelper.isRouteCalculated()){
+				mapActions.aboutRoute();
+			} else {
+				mapLayers.showGPXFileLayer(mapView);
+				mapLayers.getContextMenuLayer().setLocation(null, "");	//delete any visible point info on contextlayer text box
+				mapView.refreshMap();
+			}
+			return true;
+			
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -1244,6 +1257,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
     			R.string.context_menu_item_share_location,
     			R.string.context_menu_item_create_poi,
     			R.string.context_menu_item_add_waypoint,
+    			R.string.context_menu_item_load_GPX_plan,
     			R.string.context_menu_item_open_bug,
     			//MapTileLayer menu actions
     			R.string.context_menu_item_update_map,
@@ -1251,8 +1265,8 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
     	};
 	
     	int actionsToUse = (mapView.getMainLayer() instanceof MapTileLayer) ? contextMenuStandardActions.length : contextMenuStandardActions.length - 2;
-       	if(mapView.getMeasureDistanceMode()){
-       		if(mapView.getSelectedMeasurementPointIndex() >= 0){
+       	if(measurementActivity.getMeasureDistanceMode()){	//there are different menus available for measurement mode
+       		if(measurementActivity.getSelectedMeasurementPointIndex() >= 0){
        			measurementActivity.createMeasurementMenu(1);
        		}else{
        			measurementActivity.createMeasurementMenu(2);		
@@ -1300,11 +1314,14 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 								(OsmandApplication) getApplication(), mapView);
 						dlg.openDialog();
 					}else if(standardId == R.string.context_menu_item_start_measurement_mode){	//Toggle measurement mode
-						if(mapView.getMeasureDistanceMode()){
-							mapView.setMeasureDistanceMode(false);	//turn off measurement mode						
+						if(measurementActivity.getMeasureDistanceMode()){
+							measurementActivity.setMeasureDistanceMode(false);	//turn off measurement mode						
 						}else{
-							mapView.setMeasureDistanceMode(true);	//turn on measurement mode
+							measurementActivity.setMeasureDistanceMode(true);	//turn on measurement mode
 						}
+					}else if(standardId == R.string.context_menu_item_load_GPX_plan){	//load a GPX file for planning/editing
+						mapLayers.getContextMenuLayer().setLocation(null, "");	//delete any visible point info on contextlayer text box
+						mapLayers.showGPXFileLayer(mapView);
 					}else{
 					}
 					mapLayers.getContextMenuLayer().setLocation(null, "");	//Delete the point info text box
@@ -1366,4 +1383,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		this.isMapLinkedToLocation = isMapLinkedToLocation;
 	}
 
+	public MeasurementActivity getMeasurementActivity(){
+		return measurementActivity;
+	}
 }

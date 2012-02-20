@@ -13,6 +13,7 @@ import net.osmand.map.IMapLocationListener;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -40,7 +41,6 @@ import android.view.WindowManager;
 import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.SurfaceHolder.Callback;
-import android.widget.Toast;
 
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback {
 
@@ -93,24 +93,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private BaseMapLayer mainLayer;
 	
 	private Map<OsmandMapLayer, Float> zOrders = new HashMap<OsmandMapLayer, Float>();
-
-	//Variables defined to support measurement mode
-	public boolean measureDistanceMode = false;	//Status of distance measurement mode
-	public int measurementPointInsertionIndex = -1;	//distance measurement point array insertion index
-	public int selectedMeasurementPointIndex = -1;	//For distance measurement point display
-	public int colourChangeIndex = -1;	//to support distance measurement point display colours
-	private boolean longInfoFlag = false;	//to provide control of info provided for measurement points
-	private float cumMeasuredDistance=0;	//Distance along path for distance measurement mode
-	public List<LatLon> measurementPoints = new ArrayList<LatLon>();	//Path points for distance measurement
-	private boolean scrollingFlag = false;		//For measurement point dragging
-	private LatLon screenPointLatLon;		//To provide access to current point lat/lon
-	private final int maxMeasurementPointRadius = 9;
-	private final int minMeasurementPointRadius = 1;
-	private final int maxMeasurementPointSelectionRadius = 9;
-	private final int minMeasurementPointSelectionRadius = 3;
-	private int measurementPointRadius = 5;
-	private int measurementPointSelectionRadius = 5;
-
+	
+	private MapActivity activity;
 	
 	// UI Part
 	// handler to refresh map (in ui thread - ui thread is not necessary, but msg queue is required).
@@ -134,6 +118,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	public OsmandMapTileView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		application = (OsmandApplication) context.getApplicationContext();
+		activity = (MapActivity)context;
 		initView();
 		
 	}
@@ -141,9 +126,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	public OsmandMapTileView(Context context) {
 		super(context);
 		application = (OsmandApplication) context.getApplicationContext();
+		activity = (MapActivity)context;
 		initView();
 	}
-
+	
 	// ///////////////////////////// INITIALIZING UI PART ///////////////////////////////////
 	public void initView() {
 		paintGrayFill = new Paint();
@@ -706,25 +692,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		if (!multiTouchSupport.onTouchEvent(event)) {
 			/* return */gestureDetector.onTouchEvent(event);
 		}
-		if (event.getAction() == MotionEvent.ACTION_UP) {	//Support for dragging measurement point
-			if(scrollingFlag && measureDistanceMode){
-				if(selectedMeasurementPointIndex >= 0){	//move selected point to new location
-					int i = 0;
-					for (i = 0; i < layers.size(); i++){
-						OsmandMapLayer l = layers.get(i);
-						if(l instanceof ContextMenuLayer) break;
-					}
-					if(i > 0 && i < layers.size()){
-						measurementPoints.set(selectedMeasurementPointIndex,getLatLonFromScreenPoint(event.getX(), event.getY()));
-						colourChangeIndex = selectedMeasurementPointIndex;
-						layers.get(i).onTouchEvent(null);	//adjust text info
-						screenPointLatLon = measurementPoints.get(selectedMeasurementPointIndex);
-						refreshMap();
-					}
-				}
-				scrollingFlag = false;
-			}
-		}
 		return true;
 	}
 
@@ -842,17 +809,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		@Override
 		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
 			//Support point dragging in measurement mode without affecting map dragging
-			if (measureDistanceMode){	//Check if a measurement point has been selected
-				if(!scrollingFlag) {	//flag to delay activity until scrolling has finished
-					PointF point = new PointF(e1.getX(), e1.getY());
-					if(isMeasurementPointSelected(point) >= 0){
-						selectedMeasurementPointIndex = isMeasurementPointSelected(point);	//save index of point selected	
-						scrollingFlag = true;
-					}else{
-						dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);				
-					}
-				}
-			}else{
+			if(!activity.getMeasurementActivity().dragMeasurementPoint(e1)){
 				dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
 			}
 			return true;
@@ -865,15 +822,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		@Override
 		public boolean onSingleTapUp(MotionEvent e) {
 			PointF point = new PointF(e.getX(), e.getY());
-			//Test if a measurement point has been clicked
-			if (measureDistanceMode) {
-				selectedMeasurementPointIndex = isMeasurementPointSelected(point);	//save index of point selected	
-				if(selectedMeasurementPointIndex >= 0){
-					screenPointLatLon = measurementPoints.get(selectedMeasurementPointIndex);
-				}else{
-					screenPointLatLon = getLatLonFromScreenPoint(point.x, point.y);
-				}	//this event will be responded to by ContextMenuLayer
-			}
 			if (log.isDebugEnabled()) {
 				log.debug("On click event " + point.x + " " + point.y); //$NON-NLS-1$ //$NON-NLS-2$
 			}
@@ -907,110 +855,4 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			return false;
 		}
 	}
-	
-	//Methods for measurement mode
-		public void setCumMeasuredDistance(float dist){	//distance measured
-			cumMeasuredDistance=dist;
-		}
-
-		public float getCumMeasuredDistance(){	//access distance measured
-			return cumMeasuredDistance;
-		}
-
-		public LatLon getScreenPointLatLon(){	//accessor for local point lat lon storage
-			return screenPointLatLon;
-		}
-		
-		public void setMeasurementPointRadius(int radius){	//change measurement point display size
-			measurementPointRadius = radius;
-		}
-		
-		public int getMeasurementPointRadius(){	//access measurement point display size
-			return measurementPointRadius;
-		}
-		
-		public void setMeasurementPointSelectionRadius(int radius){	//change measurement point display size
-			measurementPointSelectionRadius = radius;
-		}
-		
-		public int getMeasurementPointSelectionRadius(){	//access measurement point selection area size
-			return measurementPointSelectionRadius;
-		}
-		
-		public boolean checkMeasurementPointSize(int radius){	//check if proposed change to measurement point display size is within defined range
-			if(radius <= maxMeasurementPointRadius && radius >= minMeasurementPointRadius){
-				return true;
-			}else{
-				return false;
-			}
-		}
-		
-		public boolean checkMeasurementPointSelectionSize(int radius){	//Check if proposed change to measurement point selection area is within defined range
-			if(radius <= maxMeasurementPointSelectionRadius && radius >= minMeasurementPointSelectionRadius){
-				return true;
-			}else{
-				return false;
-			}
-		}
-
-		public int isMeasurementPointSelected(PointF point){	//test if point on map is a point in measurement set
-			int locationX = 0;
-			int locationY = 0;
-			int index = -1;	//indicates no match found
-			int size = measurementPoints.size();
-			if(size > 0){
-				for (int i = 0;i < size; i++){
-					locationX = getMapXForPoint(measurementPoints.get(i).getLongitude());
-					locationY = getMapYForPoint(measurementPoints.get(i).getLatitude());
-					if(Math.abs(locationX - point.x) < measurementPointSelectionRadius &&
-							Math.abs(locationY - point.y) < measurementPointSelectionRadius){
-						index = i;	//a point has been found in the detection area
-						break;
-					}
-				}
-			}
-			return index;
-		}
-		
-		public int getSelectedMeasurementPointIndex(){	//Save measurement point selected
-			return selectedMeasurementPointIndex;
-		}
-		
-		public void setSelectedMeasurementPointIndex(int index){	//Access selected measurement point index
-			selectedMeasurementPointIndex = index;
-		}
-		
-		public void setLongInfoFlag(boolean status){	//Support distance measuring info length selection
-			longInfoFlag = status;
-		}
-
-		public boolean getLongInfoFlag(){	//Support distance measuring info length selection
-			return longInfoFlag;
-		}
-
-		public int getColourChangeIndex(){	//Indicate measurement point where display colour should change
-			return colourChangeIndex;
-		}
-		
-		public void setColourChangeIndex(int index){	//indicate measurement point where display colour should change
-			colourChangeIndex = index;
-		}
-		
-		public boolean getMeasureDistanceMode() {	//to check for distance measuring mode
-			return measureDistanceMode;
-		}
-
-		public void setMeasureDistanceMode(boolean state) {	//Set distance measuring mode
-			measureDistanceMode=state;
-			measurementPointInsertionIndex = -1;	//clear insertion point index
-		}
-
-		public int getMeasurementPointInsertionIndex() {	//Access distance measurement point insertion
-			return measurementPointInsertionIndex;
-		}
-
-		public void setMeasurementPointInsertionIndex(int index) {	//Set distance measurement point insertion
-			measurementPointInsertionIndex = index;
-		}
-
 }

@@ -5,7 +5,6 @@ import gnu.trove.list.array.TIntArrayList;
 import java.util.Arrays;
 
 import net.osmand.plus.R;
-import net.osmand.plus.R.string;
 import android.app.Dialog;
 import android.content.Context;
 import android.text.method.ScrollingMovementMethod;

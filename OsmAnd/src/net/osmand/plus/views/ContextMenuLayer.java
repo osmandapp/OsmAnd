@@ -2,9 +2,6 @@ package net.osmand.plus.views;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.text.MessageFormat;
-import net.osmand.OsmAndFormatter;
-import android.location.Location;
 
 import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
@@ -61,12 +58,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private float scaleCoefficient = 1;
 	private Rect textPadding;
 
-	private LatLon tempPoint;	//For measurement mode support
-	private LatLon tempPoint2;	//For measurement mode support
-	private boolean newPointFlag = true;	//Used to block new distance point creation for menu or text box clicks
+	private final MeasurementActivity measurementActivity;
 	
 	public ContextMenuLayer(MapActivity activity){
 		this.activity = activity;
+		measurementActivity = activity.getMeasurementActivity();
 	}
 	
 	@Override
@@ -108,7 +104,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
-		if(latLon != null){
+		if(latLon != null && !measurementActivity.getMeasureDistanceMode()){
 			int x = view.getRotatedMapXForPoint(latLon.getLatitude(), latLon.getLongitude());
 			int y = view.getRotatedMapYForPoint(latLon.getLatitude(), latLon.getLongitude());
 			
@@ -144,46 +140,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 	
 	public void setLocation(LatLon loc, String description){
-		int index = view.getSelectedMeasurementPointIndex();	//For measurement point distance display
 		latLon = loc;
 		if(latLon != null){
 			if(description == null || description.length() == 0){
-				
-				if(!view.getMeasureDistanceMode()){	//Test for distance measurement mode
-					description = view.getContext().getString(R.string.point_on_map, 
-							latLon.getLatitude(), latLon.getLongitude());
-				}else{	//display cumulative measurement data
-					if(newPointFlag){	//do not add point for menu activity
-						if(view.getMeasurementPointInsertionIndex() < 0) {
-							view.measurementPoints.add(latLon);
-							index = view.measurementPoints.size() - 1;
-						}else{
-							view.measurementPoints.add(view.getMeasurementPointInsertionIndex(), latLon);
-							index = view.getMeasurementPointInsertionIndex();
-							view.setMeasurementPointInsertionIndex(-1);		//clear insertion flag
-						}
-						view.setColourChangeIndex(index);	//To assist point display colour coding
-						view.setSelectedMeasurementPointIndex(index);
-						newPointFlag = false;
-					}
-					if(index == 0){
-						if(view.getLongInfoFlag()){
-							description = view.getContext().getString(R.string.point_on_map,
-									view.measurementPoints.get(0).getLatitude(), view.measurementPoints.get(0).getLongitude());	
-						}else{
-							description = "Start Point";								
-						}
-					}else{
-						view.setCumMeasuredDistance(calculatePathDistance(index));
-						if(view.getLongInfoFlag()){
-							description = "Location:\n Lat: " + String.format("%3.6f", view.measurementPoints.get(index).getLatitude()) + "\nLon: " + 
-									String.format("%3.6f", view.measurementPoints.get(index).getLongitude()) + '\n' + "Distance: " +
-									OsmAndFormatter.getFormattedDistance(view.getCumMeasuredDistance(), view.getContext());
-						}else{
-							description = OsmAndFormatter.getFormattedDistance(view.getCumMeasuredDistance(), view.getContext());
-						}
-					}
-				}
+				description = view.getContext().getString(R.string.point_on_map, 
+						latLon.getLatitude(), latLon.getLongitude());
 			}
 			textView.setText(description);
 		} else {
@@ -195,21 +156,22 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public boolean onLongPressEvent(PointF point) {
-		newPointFlag = true;	//Enable new measurement point creation
-		if(pressedInTextView(point.x, point.y)){
-			setLocation(null, ""); //$NON-NLS-1$
-			view.refreshMap();
-			return true;
-		}
-		
-		selectedContextProvider = null;
-		selectedObjects.clear();
-		for(OsmandMapLayer l : view.getLayers()){
-			if(l instanceof ContextMenuLayer.IContextMenuProvider){
-				((ContextMenuLayer.IContextMenuProvider) l).collectObjectsFromPoint(point, selectedObjects);
-				if(!selectedObjects.isEmpty()){
-					selectedContextProvider = (IContextMenuProvider) l;
-					break;
+		if(!measurementActivity.getMeasureDistanceMode()){
+			if(pressedInTextView(point.x, point.y)){
+				setLocation(null, ""); //$NON-NLS-1$
+				view.refreshMap();
+				return true;
+			}
+			
+			selectedContextProvider = null;
+			selectedObjects.clear();
+			for(OsmandMapLayer l : view.getLayers()){
+				if(l instanceof ContextMenuLayer.IContextMenuProvider){
+					((ContextMenuLayer.IContextMenuProvider) l).collectObjectsFromPoint(point, selectedObjects);
+					if(!selectedObjects.isEmpty()){
+						selectedContextProvider = (IContextMenuProvider) l;
+						break;
+					}
 				}
 			}
 		}
@@ -263,13 +225,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public boolean onSingleTap(PointF point) {
-		//Test for measurement mode - trigger a measurement point dialog
-		MeasurementActivity measurementActivity = new MeasurementActivity(activity);
-		if(view.getMeasureDistanceMode() && view.getSelectedMeasurementPointIndex() >= 0){
-			latLon = view.getScreenPointLatLon();
-			measurementActivity.createMeasurementMenu(2);
-			return true;	//if a point has been verified as selected, ignore this test
-		}
+		if(measurementActivity.getMeasureDistanceMode())return false;
 		if (pressedInTextView(point.x, point.y)) {
 			if (!selectedObjects.isEmpty()) {
 				showContextMenuForSelectedObjects();
@@ -310,11 +266,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		if(event == null){	// used to pass request to delete text box display
-			latLon = view.measurementPoints.get(view.getSelectedMeasurementPointIndex());
-			setLocation(view.measurementPoints.get(view.getSelectedMeasurementPointIndex()), "");
-			return false;
-		}
+		if(!measurementActivity.getMeasureDistanceMode())return false;
+
 		if (latLon != null) {
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
 				if(pressedInTextView(event.getX(), event.getY())){
@@ -349,53 +302,4 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 	}
 	
-	//Methods to support measurement mode
-		public void displayIntermediatePointInfo(int index){	//Display info for intermediate measurement points
-			String description ="";
-			latLon = view.measurementPoints.get(index);
-			if (index == 0){
-				if(view.getLongInfoFlag()){
-					description = "Start Point: \nLat: " + String.format("%3.6f",
-							view.measurementPoints.get(index).getLatitude()) + String.format("\nLon: %3.6f", view.measurementPoints.get(index).getLongitude());					
-				}else{
-					description = "Start Point";								
-				}
-			}else{
-				view.setCumMeasuredDistance(calculatePathDistance(index));
-				if(view.getLongInfoFlag()){
-					description = "Location:\n Lat: " + String.format("%3.6f", view.measurementPoints.get(index).getLatitude()) + "\nLon: " + 
-						String.format("%3.6f", view.measurementPoints.get(index).getLongitude()) + '\n' + "Distance: " +
-						OsmAndFormatter.getFormattedDistance(view.getCumMeasuredDistance(), view.getContext());
-				}else{
-					description = OsmAndFormatter.getFormattedDistance(view.getCumMeasuredDistance(), view.getContext());
-				}
-			}
-			textView.setText(description);
-			layoutText();
-		}
-		
-		public float calculatePathDistance(int index){	//Calculate distance between points
-			// index is the array index of the last point to include in the calculation
-			float[] calculatedDistance = new float[1];
-			float distance = 0;
-			for (int i = 1; i <= index; i++){
-				tempPoint = new LatLon(0, 0);	//temporary object to save to measurement point list.
-				tempPoint2 = new LatLon(0,0);	//temporary object to save to measurement point list.
-				tempPoint = view.measurementPoints.get(i - 1);
-				tempPoint2 = view.measurementPoints.get(i);
-				Location.distanceBetween(tempPoint.getLatitude(), tempPoint.getLongitude(), tempPoint2.getLatitude(),
-						tempPoint2.getLongitude(), calculatedDistance);
-				distance += calculatedDistance[0];
-			}
-			return distance;
-		}
-		
-		public void setNewPointFlag(boolean status){	//Controls new measurement point creation during menu activity
-			newPointFlag = status;
-		}
-		
-		public boolean getNewPointFlag(){
-			return newPointFlag;
-		}
-
 }

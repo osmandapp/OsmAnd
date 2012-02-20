@@ -5,8 +5,8 @@ import net.osmand.Algoritms;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
-import net.osmand.plus.R.string;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MeasurementActivity;
 import net.osmand.plus.activities.TipsAndTricksActivity;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
 import android.app.Dialog;
@@ -39,6 +39,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private final MapActivity map;
 	private final RouteLayer routeLayer;
 	private OsmandMapTileView view;
+	private final MeasurementActivity measurementActivity;
 	
 	private Paint paintText;
 	private Paint paintSubText;
@@ -65,6 +66,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
 		this.routeLayer = layer;
+		measurementActivity = map.getMeasurementActivity();
 	}
 
 	@Override
@@ -194,7 +196,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// update data on draw
 		rightStack.updateInfo();
 		leftStack.updateInfo();
-		if(view.getMeasureDistanceMode()) {		//Measurement Mode help icon display
+		if(measurementActivity.getMeasureDistanceMode()) {		//Measurement Mode help icon display
 			helpIconView.setVisibility(View.VISIBLE);
 		}else{
 			helpIconView.setVisibility(View.GONE);	
