@@ -3,23 +3,23 @@
 	<!-- currently  name tags are indexed with name and additional in nameTags separated by comma-->
 	
 	<!-- additional  -->
-	<type tag="oneway" value="yes" minzoom="5" additional="true"/>
-	<type tag="oneway" value="no" minzoom="5" additional="true"/>
-	<type tag="oneway" value="-1" minzoom="5" additional="true"/>
+	<type tag="oneway" value="yes" minzoom="15" additional="true"/>
+	<type tag="oneway" value="no" minzoom="15" additional="true"/>
+	<type tag="oneway" value="-1" minzoom="15" additional="true"/>
 	
-	<type tag="layer" value="0" minzoom="5" additional="true"/>
-	<type tag="layer" value="1" minzoom="5" additional="true"/>
-	<type tag="layer" value="-1" minzoom="5" additional="true"/>
-	<type tag="layer" value="+1" target:value="1" minzoom="5" additional="true"/>
-	<type tag="layer" value="2" target:value="1" minzoom="5" additional="true"/>
-	<type tag="layer" value="+2" target:value="1" minzoom="5" additional="true"/>
-	<type tag="layer" value="-2" target:value="-1" minzoom="5" additional="true"/>
-	<type tag="layer" value="3" target:value="1" minzoom="5" additional="true"/>
-	<type tag="layer" value="+3" target:value="1" minzoom="5" additional="true"/>
-	<type tag="layer" value="-3" target:value="-1" minzoom="5" additional="true"/>
+	<type tag="layer" value="0" minzoom="10" additional="true"/>
+	<type tag="layer" value="1" minzoom="10" additional="true"/>
+	<type tag="layer" value="-1" minzoom="10" additional="true"/>
+	<type tag="layer" value="+1" target:value="1" minzoom="10" additional="true"/>
+	<type tag="layer" value="2" target:value="1" minzoom="10" additional="true"/>
+	<type tag="layer" value="+2" target:value="1" minzoom="10" additional="true"/>
+	<type tag="layer" value="-2" target:value="-1" minzoom="10" additional="true"/>
+	<type tag="layer" value="3" target:value="1" minzoom="10" additional="true"/>
+	<type tag="layer" value="+3" target:value="1" minzoom="10" additional="true"/>
+	<type tag="layer" value="-3" target:value="-1" minzoom="10" additional="true"/>
 	
-	<type tag="bridge" minzoom="5" additional="true"/>
-	<type tag="tunnel" minzoom="5" additional="true"/>
+	<type tag="bridge" minzoom="10" additional="true"/>
+	<type tag="tunnel" minzoom="10" additional="true"/>
 	
 	<category name="highway">
 		<type tag="highway" value="motorway" minzoom="5" nameTags="ref"/>

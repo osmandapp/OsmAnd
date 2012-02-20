@@ -13,6 +13,8 @@ public class ToDoConstants {
 	// new Address
 	// slightly changed POI (check it)
 	// Routing index
+	// Identify coastline areas and pure ocean areas
+	
 	
 	// TODO
 	// Ref and other names are not provided as additional types (on level < 15)!
