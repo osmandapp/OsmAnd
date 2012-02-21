@@ -69,13 +69,13 @@ public class RoutingHelper {
 	private Handler uiHandler;
 
 	public static boolean makeUturnWhenPossible = false;
-	public static boolean turnImminent = false;
+	public static int turnImminent = 0;
 
 	public static boolean makeUturnWhenPossible() {
 		return makeUturnWhenPossible;
 	}
 
-	public static boolean turnImminent() {
+	public static int turnImminent() {
 		return turnImminent;
 	}
 	
@@ -114,7 +114,7 @@ public class RoutingHelper {
 		listDistance = null;
 		directionInfo = null;
 		makeUturnWhenPossible = false;
-		turnImminent = false;
+		turnImminent = 0;
 		evalWaitInterval = 3000;
 		uiHandler.post(new Runnable() {
 			@Override
@@ -212,7 +212,7 @@ public class RoutingHelper {
 	public void setCurrentLocation(Location currentLocation) {
 		if(finalLocation == null || currentLocation == null){
 			makeUturnWhenPossible = false;
-			turnImminent = false;
+			turnImminent = 0;
 			return;
 		}
 		
@@ -359,7 +359,7 @@ public class RoutingHelper {
 							float d = currentLocation.distanceTo(routeNodes.get(currentRoute));
 							if (d > 50) {
 								makeUturnWhenPossible = true;
-								turnImminent = true;
+								turnImminent = 1;
 								//log.info("Bearing is opposite to bearingRoute"); //$NON-NLS-1$
 							}
 						}
@@ -462,14 +462,16 @@ public class RoutingHelper {
 			}
 
 			if (dist < 100 || makeUturnWhenPossible == true) {
-				turnImminent = true;
+				turnImminent = 1;
+			} else  if (dist < 2000) {
+				turnImminent = 0;
 			} else {
-				turnImminent = false;
+				turnImminent = -1;
 			}
 
 			return dist;
 		}
-		turnImminent = false;
+		turnImminent = 0;
 		return 0;
 	}
 	

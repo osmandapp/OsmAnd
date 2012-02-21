@@ -20,9 +20,10 @@
 	<color name="pos_area">#0000FF</color>
 	<color name="pos_around">#707CDC</color>  <!-- family blue similar to above -->
 
-	<color name="nav_track">#0000FF</color> 
-	<color name="nav_arrow">#FADE23</color> <!-- shouldn't this be same as 'nav_track'? -->
-	<color name="nav_arrow_imminent">#FF2300</color> <!-- needs to be brighter, hardly visible in night mode -->
+	<color name="nav_track">#0000FF</color>  <!-- needs to be brighter, hardly visible in night mode -->
+	<color name="nav_arrow">#FADE23</color>  <!-- shouldn't this be same as 'nav_track'? -->
+	<color name="nav_arrow_imminent">#FF2300</color>
+	<color name="nav_arrow_distant">#545454</color>
 	<color name="nav_point">#FA5050</color> 
 	
 	<color name="index_unknown">#FFFFFF</color> <!-- standard WHITE -->
