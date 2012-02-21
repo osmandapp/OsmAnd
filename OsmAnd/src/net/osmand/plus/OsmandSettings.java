@@ -494,7 +494,7 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> LIVE_MONITORING_URL = new StringPreference("live_monitoring_url", 
-			"http://t.esya.ru?a={0}&b={1}&t={2}&e={3}&h={4}&s={5}", false);
+			"http://example.com?a={0}&b={1}&t={2}&e={3}&h={4}&s={5}", false);
 
 
 	// this value string is synchronized with settings_pref.xml preference name
