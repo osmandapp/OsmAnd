@@ -463,7 +463,7 @@ public class RoutingHelper {
 
 			if (dist < 100 || makeUturnWhenPossible == true) {
 				turnImminent = 1;
-			} else  if (dist < 2000) {
+			} else if (dist < 2000) {
 				turnImminent = 0;
 			} else {
 				turnImminent = -1;
