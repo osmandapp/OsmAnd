@@ -101,8 +101,16 @@ public class BidForFixHelper {
 		this.cancelButton = cancelButton;
 	}
 
-	private void loadList() {
-		if (initialized == null || initialized.before(new Date(System.currentTimeMillis()-DAY))) {
+	public boolean isReloadNeeded() {
+		return initialized == null || initialized.before(new Date(System.currentTimeMillis()-DAY));
+	}
+	
+	public List<BFFIssue> getList() {
+		return bffIssues;
+	}
+	
+	public void loadList() {
+		if (isReloadNeeded()) {
 			BufferedReader in = null;
 			String url = "http://www.bidforfix.com/p/" + project + "/issues/";
 			try {

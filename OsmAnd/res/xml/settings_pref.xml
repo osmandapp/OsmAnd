@@ -136,6 +136,9 @@
 		<CheckBoxPreference android:key="scroll_map_by_gestures" android:title="@string/scroll_map_by_gestures" android:summary="@string/scroll_map_by_gestures_descr"></CheckBoxPreference>
 		<CheckBoxPreference android:key="use_short_object_names" android:title="@string/use_short_object_names" android:summary="@string/use_short_object_names_descr"></CheckBoxPreference>
 	</PreferenceScreen>
+	
+	<Preference android:title="@string/support_new_features" android:key="bidforfix">
+	</Preference>	
 </PreferenceCategory>
 
 
