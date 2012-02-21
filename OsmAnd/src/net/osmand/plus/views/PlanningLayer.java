@@ -112,7 +112,6 @@ public class PlanningLayer extends OsmandMapLayer{
 		textView.setTextSize(15);
 		textView.setTextColor(Color.argb(255, 0, 0, 0));
 		textView.setMinLines(1);
-//		textView.setMaxLines(15);
 		textView.setGravity(Gravity.CENTER_HORIZONTAL);
 		
 		textView.setClickable(true);
@@ -334,7 +333,6 @@ public class PlanningLayer extends OsmandMapLayer{
 				if(measurementActivity.getSelectedMeasurementPointIndex() >= 0){	//move selected point to new location
 					measurementActivity.measurementPoints.set(measurementActivity.getSelectedMeasurementPointIndex(),view.getLatLonFromScreenPoint(event.getX(), event.getY()));
 					measurementActivity.setColourChangeIndex(measurementActivity.getSelectedMeasurementPointIndex());
-//					hideMeasurementPointTextBox();	//hide text info
 					displayIntermediatePointInfo(measurementActivity.getColourChangeIndex());
 					measurementActivity.saveScreenPoint();
 					
@@ -360,15 +358,7 @@ public class PlanningLayer extends OsmandMapLayer{
 		}
 		return false;
 	}
-
-//	public void hideMeasurementPointTextBox(){
-//		textView.setText(""); //$NON-NLS-1$
-//		layoutText();
-//		latLon = measurementActivity.measurementPoints.get(measurementActivity.getSelectedMeasurementPointIndex());
-//		newPointFlag = false;	//prevent accidental creation of a second point
-//		setLocation(measurementActivity.measurementPoints.get(measurementActivity.getSelectedMeasurementPointIndex()), "");		
-//	}
-		
+	
 	//Methods to support measurement mode
 	public void displayIntermediatePointInfo(int index){	//Display info for intermediate measurement points
 		String description ="";
