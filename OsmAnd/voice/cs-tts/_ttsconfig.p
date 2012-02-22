@@ -34,7 +34,7 @@ turn(Turn) == M :- turn(Turn, M).
 prepare_make_ut(Dist) == ['po', D, 'se budete otáčet zpět'] :- distance(Dist,locative) == D.
 make_ut(Dist) == ['po', D, 'se otočte zpět'] :- distance(Dist,locative) == D.
 make_ut == ['otočte se zpět'].
-make_ut_wp == ['otočte se zpět'].
+make_ut_wp == ['vraťte se, jakmile to bude možné'].
 
 
 prepare_roundabout(Dist) == ['po', D, 'přijedete na kruhový objezd'] :- distance(Dist,locative) == D.
