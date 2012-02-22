@@ -439,6 +439,10 @@ public class OsmandSettings {
 	public final OsmandPreference<String> USER_PASSWORD = 
 		new StringPreference("user_password", "", true);
 
+	// this value boolean is synchronized with settings_pref.xml preference offline POI edition
+	public final OsmandPreference<Boolean> OFFLINE_POI_EDITION = 
+		new BooleanPreference("offline_poi_edition", false, true);
+
 	public static final String LOCAL_OPENSTREETMAP_POINTS = "local_openstreetmap_points";
 
 	
