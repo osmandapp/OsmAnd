@@ -2,6 +2,17 @@
 <resources>
 	<string name="offline_poi_edition">Offline úprava POI bodov</string>
 	<string name="offline_poi_edition_descr">Ak chcete používať iba offline úpravu POI</string>
+	<string name="tip_recent_changes_0_7_1_t">Zmeny vo verzii 0.7.1 :
+\n\t- Offline úpravy POI
+\n\t- Možnosť stopovania naživo - pravidelné odosielanie súradníc do webovej služby (prečítajte si ako nastaviť Vašu webovú službu v článkoch Ako na to)
+\n\t- Zobrazenie aktuálne zaznamenávanej stopy na mape
+\n\t- Detekcia smeru jazdy: \'Otočte sa\' je indikované a oznámené pri smerovaní do opačného smeru alebo minutí odbočenia
+\n\t- Nový hlasový povel \'Cesta prepočítaná\'
+\n\t- Optická inidkácia najbližšieho odbočenia v 100 metroch zmenou farby smerovej šípky
+\n\t- Aktuálne sú tiež deaktivované súbory indexov vyznačené v Sťahovaniach ako tmavo zelené a tmavo modré
+\n\t- Iné zmeny
+	</string>
+
 	<string name="update_poi_does_not_change_indexes">Zmeny POI v aplikácii neovplyvnia stiahnuté mapové súbory, zmeny sú uložené namiesto toho v lokálnom súbore.</string>
 	<string name="local_openstreetmap_uploading_poi">Nahrávajú sa POI</string>
 	<string name="local_openstreetmap_poi_were_uploaded">{0} POI bolo nahratých</string>
