@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="offline_poi_edition">Offline úprava POI bodov</string>
+	<string name="offline_poi_edition_descr">Ak chcete používať iba offline úpravu POI</string>
 	<string name="update_poi_does_not_change_indexes">Zmeny POI v aplikácii neovplyvnia stiahnuté mapové súbory, zmeny sú uložené namiesto toho v lokálnom súbore.</string>
 	<string name="local_openstreetmap_uploading_poi">Nahrávajú sa POI</string>
 	<string name="local_openstreetmap_poi_were_uploaded">{0} POI bolo nahratých</string>
