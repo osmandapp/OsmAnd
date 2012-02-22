@@ -17,14 +17,14 @@
 	<string name="update_poi_does_not_change_indexes">POI changes inside application do not affect downloaded map files, changes are saved to local file instead.</string>
 	<string name="local_openstreetmap_uploading_poi">Uploading POI...</string>
 	<string name="local_openstreetmap_poi_were_uploaded">{0} POI were uploaded</string>
-	<string name="local_openstreetmap_uploadall">Upload All POI</string>
+	<string name="local_openstreetmap_uploadall">Upload all POI</string>
 	<string name="local_openstreetmap_items"></string>
-	<string name="local_openstreetmap_show_poi">Show POI on Map</string>
+	<string name="local_openstreetmap_show_poi">Show POI on map</string>
 	<string name="local_openstreetmap_upload">Upload modification to OSM</string>
 	<string name="local_openstreetmap_delete">Delete POI modification</string>
-	<string name="local_openstreetmap_descr_title">Asynchrone Openstreetmap POI Edition:</string>
-	<string name="local_openstreetmap_settings">Local Openstreetmap Points</string>
-	<string name="local_openstreetmap_settings_descr">Local Points Saved in DB</string>
+	<string name="local_openstreetmap_descr_title">Asynchronous OSM POI Editing:</string>
+	<string name="local_openstreetmap_settings">Locally saved OSM points</string>
+	<string name="local_openstreetmap_settings_descr">Show and manage OSM points noted in local database</string>
 
 	<string name="live_monitoring_descr">Enable sending HTTP requests to a specified web service</string>
 	<string name="live_monitoring">Enable Live Tracking</string>
