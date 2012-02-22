@@ -32,7 +32,7 @@ public class NextTurnInfoControl extends MapInfoControl {
 	private Paint paintRouteDirection;
 
 	private boolean makeUturnWhenPossible;
-	private boolean turnImminent;
+	private int turnImminent;
 
 	public NextTurnInfoControl(Context ctx, Paint textPaint, Paint subtextPaint) {
 		super(ctx);
@@ -67,10 +67,12 @@ public class NextTurnInfoControl extends MapInfoControl {
 		super.onDraw(canvas);
 		if (pathForTurn != null) {
 			turnImminent = RoutingHelper.turnImminent();
-			if (turnImminent == false) {
+			if (turnImminent == 1) {
+				paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_imminent));
+			} else if (turnImminent == 0) {
 				paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow));
 			} else {
-				paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_imminent));
+				paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
 			}
 			// small indent
 			canvas.translate(0, 3 * scaleCoefficient);
