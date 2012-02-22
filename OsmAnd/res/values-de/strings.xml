@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="offline_poi_edition">Offline POI Bearbeitung</string>
+	<string name="offline_poi_edition_descr">Immer Offline-POI-Bearbeitung verwenden</string>
+
 	<string name="tip_recent_changes_0_7_1_t">Changes in 0.7.1 :
 \n\t- Offline POI-Bearbeitung 
 \n\t- Live-Tracking Option: Koordinaten periodisch an einen Web-Service schicken (Setup-Anleitung für eigenen Web-Service in den HowTo-Artikeln)
@@ -50,7 +53,7 @@
 	<string name="index_name_russia">Europa/Asien - Russland</string>
 	<string name="index_name_africa">Afrika</string>
 	<string name="index_name_asia">Asien</string>
-	<string name="index_name_australia">Australien</string>
+	<string name="index_name_oceania">Ozeanien</string>
 	<string name="index_name_other">Weltweite und thematische Karten</string>
 	<string name="index_name_wiki">Weltweite Wikipedia</string>
 	<string name="index_name_voice">Sprachpakete (Aufnahmen)</string>
