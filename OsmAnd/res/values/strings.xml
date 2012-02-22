@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-	<string name="offline_poi_edition">Offline POI edition</string>
-	<string name="offline_poi_edition_descr">If you want to use only offline POI edition</string>
+	<string name="offline_poi_edition">Offline POI editing</string>
+	<string name="offline_poi_edition_descr">Always use offline POI editing</string>
 
 	<string name="tip_recent_changes_0_7_1_t">Changes in 0.7.1 :
 \n\t- Offline POI editing 
