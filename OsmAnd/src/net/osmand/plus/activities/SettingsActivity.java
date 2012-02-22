@@ -196,6 +196,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	    
 		registerEditTextPreference(osmandSettings.USER_NAME, screen);
 		registerEditTextPreference(osmandSettings.USER_PASSWORD, screen);
+		registerBooleanPreference(osmandSettings.OFFLINE_POI_EDITION, screen);
 		registerEditTextPreference(osmandSettings.LIVE_MONITORING_URL, screen);
 		
 		
