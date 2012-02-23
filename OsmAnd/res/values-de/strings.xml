@@ -22,9 +22,9 @@
 	<string name="local_openstreetmap_show_poi">POI auf Karte zeigen</string>
 	<string name="local_openstreetmap_upload">POI Änderung auf OSM hochladen</string>
 	<string name="local_openstreetmap_delete">POI Änderung löschen</string>
-	<string name="local_openstreetmap_descr_title">Asynchrone Openstreetmap POI Edition:</string>
-	<string name="local_openstreetmap_settings">Lokale Openstreetmap Punkte</string>
-	<string name="local_openstreetmap_settings_descr">Lokale Punkte in DB gespeichert</string>
+	<string name="local_openstreetmap_descr_title">Asynchrone OSM POI Bearbeitung:</string>
+	<string name="local_openstreetmap_settings">Lokal notierte OSM Punkte</string>
+	<string name="local_openstreetmap_settings_descr">Lokal vorgemerkte OSM Punkte anzeigen und verwalten</string>
 
 	<string name="live_monitoring_descr">Senden von HTTP-Daten an einen Web-Service</string>
 	<string name="live_monitoring">Live-Tracking aktivieren</string>
