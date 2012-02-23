@@ -236,7 +236,6 @@
 	<string name="poi_filter_by_name">Hledat podle jména</string>
 	<string name="old_poi_file_should_be_deleted">Soubor s POI daty \'%1$s\' již není potřeba a může být smazán.</string>
 	<string name="update_poi_file_not_found">Lokální soubor pro úpravu POI bodů nebyl nalezen a ani nemohl být vytvořen.</string>
-	<string name="update_poi_does_not_change_indexes">Změny POI bodů v aplikaci neovlivní stažená mapová data, změny se namísto toho ukládají do lokálního souboru.</string>
 
 	<string name="button_upgrade_osmandplus">Upgradovat Osmand+</string>
 	<string name="map_version_changed_info">Na serveru jsou mapy nekompatibilní s vaší verzí aplikace. Prosím aktualizujte aplikaci na novější verzi, abyste data mohli používat.</string>
