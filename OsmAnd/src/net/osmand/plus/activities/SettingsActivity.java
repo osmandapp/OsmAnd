@@ -486,16 +486,18 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		dayNightModePreference.setSummary(getString(R.string.daynight_descr) + "  [" + osmandSettings.DAYNIGHT_MODE.get().toHumanString(this) + "]");
 		routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + osmandSettings.ROUTER_SERVICE.get() + "]");
 
+/*
 		PreferenceScreen screen = getPreferenceScreen();
 		if (screen.getTitle().startsWith(getString(R.string.rendering_settings))) {
 			 screen.setTitle(getString(R.string.rendering_settings) + "  [" + ApplicationMode.toHumanString(osmandSettings.APPLICATION_MODE.get(), this) + "]");
 		} else if (screen.getTitle().startsWith(getString(R.string.appearance_settings))) {
 			 screen.setTitle(getString(R.string.appearance_settings) + "  [" + ApplicationMode.toHumanString(osmandSettings.APPLICATION_MODE.get(), this) + "]");
-		} else if (screen.getTitle().startsWith(getString(R.string.monitor_settings))) {
-			 screen.setTitle(getString(R.string.monitor_settings) + "  [" + ApplicationMode.toHumanString(osmandSettings.APPLICATION_MODE.get(), this) + "]");
+		} else if (screen.getTitle().startsWith(getString(R.string.monitor_preferences))) {
+			 screen.setTitle(getString(R.string.monitor_preferences) + "  [" + ApplicationMode.toHumanString(osmandSettings.APPLICATION_MODE.get(), this) + "]");
 		} else if (screen.getTitle().startsWith(getString(R.string.routing_settings))) {
 			 screen.setTitle(getString(R.string.routing_settings) + "  [" + ApplicationMode.toHumanString(osmandSettings.APPLICATION_MODE.get(), this) + "]");
 		}
+*/
     }
 
 	private void updateTileSourceSummary() {
