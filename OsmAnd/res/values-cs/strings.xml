@@ -1,5 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="offline_poi_edition">Offline editace POI</string>
+	<string name="offline_poi_edition_descr">Vždy používat offline editaci POI</string>
+
+	<string name="tip_recent_changes_0_7_1_t">Změny ve verzi 0.7.1 :
+	\n\t- offline editace POI
+	n\t- přímý přenos pozice - pravidelně posílá souřadnice na webový server (návod jak nastavit vlastní webovou služby je v HowTo článcích)
+	n\t- Zobrazení momentálně zaznamenávané trasy
+	n\t- Detekce směru pohybu: indikace a hlášení \'Otočte se zpět\' v případě pohybu směrem od cíle nebo po minutí odbočky
+	n\t- Obnovené hlasové hlášení \'Přepočítávám cestu\'
+	n\t- Optická indikace blížící se odbočky během 100m pomocí změny barvy šipky
+	n\t- Zobrazení aktuálnosti offline dat u deaktivovaných souborů (sekce Download) pomocí tmavě zelené a tmavě modré
+	n\t- Další změny
+	</string>
+
+	<string name="update_poi_does_not_change_indexes">Lokální změny POI v aplikaci nemají vliv na zobrazení stažených map, změny se ukládají do lokálního souboru.</string>
+	<string name="local_openstreetmap_uploading_poi">Odesílám POI...</string>
+	<string name="local_openstreetmap_poi_were_uploaded">{0} POI bylo odesláno</string>
+	<string name="local_openstreetmap_uploadall">Odeslat všechny POI</string>
+	<string name="local_openstreetmap_items"></string>
+	<string name="local_openstreetmap_show_poi">Zobrazit POI na mapě</string>
+	<string name="local_openstreetmap_upload">Odeslat změny do OSM</string>
+	<string name="local_openstreetmap_delete">Smazat změny POI</string>
+	<string name="local_openstreetmap_descr_title">Offline editace POI v Openstreetmap:</string>
+	<string name="local_openstreetmap_settings">Lokální body Openstreetmap</string>
+	<string name="local_openstreetmap_settings_descr">Lokální body uložené v databázi</string>
+
+
 	<string name="live_monitoring_descr">Zapnout přímé nahrávání pozice na HTTP server</string>
 	<string name="live_monitoring">Přímý přenos pozice</string>
 	<string name="live_monitoring_interval_descr">Zadejte interval nahrávání pozice na server</string>
