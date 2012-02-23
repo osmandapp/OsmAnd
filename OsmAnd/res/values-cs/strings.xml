@@ -15,7 +15,7 @@
 	\n\nSledujte také stránky české podpory osmand.cz
 	</string>
 
-	<string name="update_poi_does_not_change_indexes">Lokální změny POI v aplikaci nemají vliv na zobrazení stažených map, změny se ukládají do lokálního souboru.</string>
+	<string name="update_poi_does_not_change_indexes">Změny POI bodů v aplikaci nemají vliv na zobrazení stažených map, změny se ukládají do lokálního souboru.</string>
 	<string name="local_openstreetmap_uploading_poi">Odesílám POI...</string>
 	<string name="local_openstreetmap_poi_were_uploaded">{0} POI bylo odesláno</string>
 	<string name="local_openstreetmap_uploadall">Odeslat všechny POI</string>
