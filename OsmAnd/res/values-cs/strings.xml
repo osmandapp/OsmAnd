@@ -5,16 +5,17 @@
 
 	<string name="tip_recent_changes_0_7_1_t">Změny ve verzi 0.7.1 :
 	\n\t- offline editace POI
-	n\t- přímý přenos pozice - pravidelně posílá souřadnice na webový server (návod jak nastavit vlastní webovou služby je v HowTo článcích)
-	n\t- Zobrazení momentálně zaznamenávané trasy
-	n\t- Detekce směru pohybu: indikace a hlášení \'Otočte se zpět\' v případě pohybu směrem od cíle nebo po minutí odbočky
-	n\t- Obnovené hlasové hlášení \'Přepočítávám cestu\'
-	n\t- Optická indikace blížící se odbočky během 100m pomocí změny barvy šipky
-	n\t- Zobrazení aktuálnosti offline dat u deaktivovaných souborů (sekce Download) pomocí tmavě zelené a tmavě modré
-	n\t- Další změny
+	\n\t- přímý přenos pozice - pravidelně posílá souřadnice na webový server (návod jak nastavit vlastní webovou služby je v HowTo článcích)
+	\n\t- Zobrazení momentálně zaznamenávané trasy
+	\n\t- Detekce směru pohybu: indikace a hlášení \'Otočte se zpět\' v případě pohybu směrem od cíle nebo po minutí odbočky
+	\n\t- Obnovené hlasové hlášení \'Přepočítávám cestu\'
+	\n\t- Optická indikace blížící se odbočky během 100m pomocí změny barvy šipky
+	\n\t- Zobrazení aktuálnosti offline dat u deaktivovaných souborů (sekce Download) pomocí tmavě zelené a tmavě modré
+	\n\t- Další změny
+	\n\nSledujte také stránky české podpory osmand.cz
 	</string>
 
-	<string name="update_poi_does_not_change_indexes">Lokální změny POI v aplikaci nemají vliv na zobrazení stažených map, změny se ukládají do lokálního souboru.</string>
+	<string name="update_poi_does_not_change_indexes">Změny POI bodů v aplikaci nemají vliv na zobrazení stažených map, změny se ukládají do lokálního souboru.</string>
 	<string name="local_openstreetmap_uploading_poi">Odesílám POI...</string>
 	<string name="local_openstreetmap_poi_were_uploaded">{0} POI bylo odesláno</string>
 	<string name="local_openstreetmap_uploadall">Odeslat všechny POI</string>
@@ -236,7 +237,6 @@
 	<string name="poi_filter_by_name">Hledat podle jména</string>
 	<string name="old_poi_file_should_be_deleted">Soubor s POI daty \'%1$s\' již není potřeba a může být smazán.</string>
 	<string name="update_poi_file_not_found">Lokální soubor pro úpravu POI bodů nebyl nalezen a ani nemohl být vytvořen.</string>
-	<string name="update_poi_does_not_change_indexes">Změny POI bodů v aplikaci neovlivní stažená mapová data, změny se namísto toho ukládají do lokálního souboru.</string>
 
 	<string name="button_upgrade_osmandplus">Upgradovat Osmand+</string>
 	<string name="map_version_changed_info">Na serveru jsou mapy nekompatibilní s vaší verzí aplikace. Prosím aktualizujte aplikaci na novější verzi, abyste data mohli používat.</string>

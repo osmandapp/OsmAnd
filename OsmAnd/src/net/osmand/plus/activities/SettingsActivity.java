@@ -485,6 +485,20 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  [" + ApplicationMode.toHumanString(osmandSettings.APPLICATION_MODE.get(), this) + "]");
 		dayNightModePreference.setSummary(getString(R.string.daynight_descr) + "  [" + osmandSettings.DAYNIGHT_MODE.get().toHumanString(this) + "]");
 		routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + osmandSettings.ROUTER_SERVICE.get() + "]");
+
+/*
+		// TODO: Add Profile name to screen title (only, not to Preference title) of Profile specific settings
+		PreferenceScreen screen = getPreferenceScreen();
+		if (screen.getKey().toString().equals("map_settings")) {
+			 screen.setTitle(getString(R.string.rendering_settings) + "  [" + ApplicationMode.toHumanString(osmandSettings.APPLICATION_MODE.get(), this) + "]");
+		} else if (screen.getKey().toString().equals("appearance_settings")) {
+			 screen.setTitle(getString(R.string.appearance_settings) + "  [" + ApplicationMode.toHumanString(osmandSettings.APPLICATION_MODE.get(), this) + "]");
+		} else if (screen.getKey().toString().equals("monitor_settings")) {
+			 screen.setTitle(getString(R.string.monitor_preferences) + "  [" + ApplicationMode.toHumanString(osmandSettings.APPLICATION_MODE.get(), this) + "]");
+		} else if (screen.getKey().toString().equals("routing_settings")) {
+			 screen.setTitle(getString(R.string.routing_settings) + "  [" + ApplicationMode.toHumanString(osmandSettings.APPLICATION_MODE.get(), this) + "]");
+		}
+*/
     }
 
 	private void updateTileSourceSummary() {

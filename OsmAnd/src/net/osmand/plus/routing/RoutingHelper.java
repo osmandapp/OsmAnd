@@ -469,6 +469,13 @@ public class RoutingHelper {
 				turnImminent = -1;
 			}
 
+			//Show turnImminent for at least 5 sec (changed to 6 for device delay) if moving, cut off at 300m to avoid speed artifacts
+			if(lastFixedLocation != null && lastFixedLocation.hasSpeed()){
+				if ((dist < (lastFixedLocation.getSpeed() * 6f)) && (dist < 300)) {
+					turnImminent = 1;
+				}
+			}
+
 			return dist;
 		}
 		turnImminent = 0;
