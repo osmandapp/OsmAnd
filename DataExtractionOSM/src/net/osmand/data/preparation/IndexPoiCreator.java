@@ -3,9 +3,7 @@ package net.osmand.data.preparation;
 import gnu.trove.list.array.TIntArrayList;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -399,8 +397,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 	private void parsePrefix(String name, PoiTileBox data, Map<String, Set<PoiTileBox>> poiData) {
 		int prev = -1;
 		for (int i = 0; i <= name.length(); i++) {
-			if (i == name.length() || (!Character.isLetter(name.charAt(i)) && 
-					!Character.isDigit(name.charAt(i)))) {
+			if (i == name.length() || (!Character.isLetter(name.charAt(i)) && !Character.isDigit(name.charAt(i)) && name.charAt(i) != '\'')) {
 				if (prev != -1) {
 					String substr = name.substring(prev, i);
 					if (substr.length() > CHARACTERS_TO_BUILD) {
@@ -568,24 +565,5 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 
 	}
 
-	public static void main(String[] args) throws SQLException, FileNotFoundException, IOException {
-		long time = System.currentTimeMillis();
-		IndexPoiCreator poiCreator = new IndexPoiCreator();
-//		String fileSqlte = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.odb";
-//		String outFile = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.obf";
-		String fileSqlte = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Netherlands_europe.poi.odb";
-		String outFile = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Netherlands.poi.obf";
-		
-		poiCreator.poiConnection = (Connection) DBDialect.SQLITE.getDatabaseConnection(
-				fileSqlte, log);
-		BinaryMapIndexWriter writer = new BinaryMapIndexWriter(new RandomAccessFile(
-				outFile, "rw"));
-		
-		
-		poiCreator.poiConnection.setAutoCommit(false);
-		poiCreator.writeBinaryPoiIndex(writer, "Ru-mow", new ConsoleProgressImplementation());
-		writer.close();
-		System.out.println("TIME " + (System.currentTimeMillis() - time));
-	}
 
 }

@@ -58,9 +58,9 @@ message IndexedStringTable {
    // so that's example of data : key1,val1,subtables1,key2,val2,key3,val3,subtables3,subtables3
    repeated string key = 3;
    // the shift to the data or one uint data itself
-   repeated uint32 val = 4;
+   repeated fixed32 val = 4;
    // subtables are supposed to make search faster instead of searching through all strings 
-   // it's enought to read prefix in the header
+   // it's enough to read prefix in the header
    repeated IndexedStringTable subtables = 5;
 }
 
@@ -189,18 +189,14 @@ message OsmAndAddressIndex {
 }
 
 message OsmAndAddressNameIndexData {
-
-    repeated AddressNameIndexDataBlocks blocks = 3;
-    message AddressNameIndexDataBlocks {
-    	repeated AddressNameIndexData atom = 4;
-    	message AddressNameIndexData {
-    		repeated AddressNameIndexDataAtom atom = 4;
-		}
-	}
-    
     // shift to AddressNameIndexData starting from first OsmAndAddressNameIndexData message
     // encoded as fixed32 length delimited
     required IndexedStringTable table = 4;
+
+    repeated AddressNameIndexData atom = 7;
+   	message AddressNameIndexData {
+   		repeated AddressNameIndexDataAtom atom = 4;
+	}
 }
 
 
@@ -375,10 +371,6 @@ message OsmAndPoiIndex {
     // encoded as fixed32 length delimited
     optional OsmAndPoiNameIndex nameIndex = 4;
     
-    // shift to OsmAndPoiNameIndexData starting from OsmAndPoiIndex message
-    // encoded as fixed32 length delimited
-    optional IndexedStringTable table = 5;
-
 	// encoded as fixed32 length delimited
 	repeated OsmAndPoiBox boxes = 6; // children 
 
@@ -388,7 +380,11 @@ message OsmAndPoiIndex {
 }
 
 message OsmAndPoiNameIndex {
-   repeated OsmAndPoiNameIndexData data = 3;
+   // shift to OsmAndPoiNameIndexData starting from OsmAndPoiIndex message
+   // encoded as fixed32 length delimited
+   required IndexedStringTable table = 3;
+
+   repeated OsmAndPoiNameIndexData data = 5;
    message OsmAndPoiNameIndexData {
    		// can contain multiple data offsets
    		repeated OsmAndPoiNameIndexDataAtom atoms = 3;
@@ -400,8 +396,7 @@ message OsmAndPoiNameIndexDataAtom {
    optional uint32 zoom = 2;
    optional uint32 x = 3;
    optional uint32 y = 4;
-   // Must be the last in order to proper calculate message size
-   // shift to OsmAndPoiBoxData message from OsmAndPoiIndex.start
+   // shift to OsmAndPoiBoxData message from OsmAndPoiNameIndexDataAtom.start
    // message is started when body is started
    optional fixed32 shiftTo = 14;
 }

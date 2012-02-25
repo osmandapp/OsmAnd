@@ -75,6 +75,8 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	
 	private boolean saveAddressWays;
 	
+	private boolean debugFullNames = false; //true to see atached cityPart and boundaries to the street names
+	
 	// TODO
 	Connection mapConnection;
 	DBStreetDAO streetDAO;
@@ -706,8 +708,6 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	}
 	
 	
-	private boolean debugFullNames = false; //true to see atached cityPart and boundaries to the street names
-	
 	public void writeCitiesIntoDb() throws SQLException {
 		for (City c : cities.values()) {
 			writeCity(c);
@@ -890,16 +890,15 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
         stat.close();
 	}
 	
-	private List<Street> readStreetsBuildings(PreparedStatement streetBuildingsStat, City city,
-			PreparedStatement waynodesStat, Map<Street, List<Node>> streetNodes, List<City> citySuburbs) throws SQLException {
+	private List<Street> readStreetsBuildings(PreparedStatement streetBuildingsStat, City city, PreparedStatement waynodesStat,
+			Map<Street, List<Node>> streetNodes, List<City> citySuburbs) throws SQLException {
 		TLongObjectHashMap<Street> visitedStreets = new TLongObjectHashMap<Street>();
-		Map<String,List<StreetAndDistrict>> uniqueNames = new HashMap<String,List<StreetAndDistrict>>();
-		Map<String,Street> streets = new HashMap<String,Street>();
-		
-		//read streets for city
-		readStreatsByBuildingsForCity(streetBuildingsStat, city, streets,
-				waynodesStat, streetNodes, visitedStreets, uniqueNames);
-		//read streets for suburbs of the city
+		Map<String, List<StreetAndDistrict>> uniqueNames = new HashMap<String, List<StreetAndDistrict>>();
+		Map<String, Street> streets = new HashMap<String, Street>();
+
+		// read streets for city
+		readStreatsByBuildingsForCity(streetBuildingsStat, city, streets, waynodesStat, streetNodes, visitedStreets, uniqueNames);
+		// read streets for suburbs of the city
 		if (citySuburbs != null) {
 			for (City suburb : citySuburbs) {
 				readStreatsByBuildingsForCity(streetBuildingsStat, suburb, streets, waynodesStat, streetNodes, visitedStreets, uniqueNames);
@@ -908,12 +907,9 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		return new ArrayList<Street>(streets.values());
 	}
 
-
-	private void readStreatsByBuildingsForCity(
-			PreparedStatement streetBuildingsStat, City city,
-			Map<String,Street> streets, PreparedStatement waynodesStat,
-			Map<Street, List<Node>> streetNodes,
-			TLongObjectHashMap<Street> visitedStreets, Map<String,List<StreetAndDistrict>> uniqueNames) throws SQLException {
+	private void readStreatsByBuildingsForCity(PreparedStatement streetBuildingsStat, City city, Map<String, Street> streets,
+			PreparedStatement waynodesStat, Map<Street, List<Node>> streetNodes, TLongObjectHashMap<Street> visitedStreets,
+			Map<String, List<StreetAndDistrict>> uniqueNames) throws SQLException {
 		streetBuildingsStat.setLong(1, city.getId());
 		ResultSet set = streetBuildingsStat.executeQuery();
 		while (set.next()) {
@@ -923,26 +919,26 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				String streetName = set.getString(2);
 				street.setLocation(set.getDouble(4), set.getDouble(5));
 				street.setId(streetId);
-				//load the street nodes
+				// load the street nodes
 				loadStreetNodes(street, waynodesStat, streetNodes);
-				
-				//If there are more streets with same name in different districts. 
-				//Add district name to all other names. If sorting is right, the first street was the one in the city
+
+				// If there are more streets with same name in different districts.
+				// Add district name to all other names. If sorting is right, the first street was the one in the city
 				String defaultDistrict = set.getString(12);
 				String district = identifyBestDistrict(street, streetName, " (" + defaultDistrict + ")", uniqueNames, streetNodes);
 				street.setName(streetName + district);
 				street.setEnName(set.getString(3) + district);
-				//if for this street there is already same street, add just nodes to the street.
+				// if for this street there is already same street, add just nodes to the street.
 				if (!streets.containsKey(street.getName())) {
-					streets.put(street.getName(),street);
+					streets.put(street.getName(), street);
 				} else {
-					//add the current streetNodes to the existing street
+					// add the current streetNodes to the existing street
 					List<Node> firstStreetNodes = streetNodes.get(streets.get(street.getName()));
 					if (firstStreetNodes != null && streetNodes.get(street) != null) {
 						firstStreetNodes.addAll(streetNodes.get(street));
 					}
 				}
-				visitedStreets.put(streetId, street); //mark the street as visited
+				visitedStreets.put(streetId, street); // mark the street as visited
 			}
 			if (set.getObject(6) != null) {
 				Street s = visitedStreets.get(streetId);
