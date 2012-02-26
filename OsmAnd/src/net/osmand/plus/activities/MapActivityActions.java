@@ -651,7 +651,7 @@ public class MapActivityActions implements DialogProvider {
 		dlg.setContentView(R.layout.save_directions_dialog);
 		final EditText edit = (EditText) dlg.findViewById(R.id.FileNameEdit);
 		
-		edit.setText(MessageFormat.format("{0,date,dd-MM-yyyy}", new Date()));
+		edit.setText(MessageFormat.format("{0,date,yyyy-MM-dd}", new Date()));
 		((Button) dlg.findViewById(R.id.Save)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
