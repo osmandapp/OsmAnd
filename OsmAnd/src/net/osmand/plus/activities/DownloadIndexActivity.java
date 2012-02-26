@@ -814,7 +814,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			} else if(lc.contains("_asia_")) {
 				nameId = R.string.index_name_asia;
 				order = 50;
-			} else if(lc.contains("_oceania_")) {
+			} else if(lc.contains("_oceania_") || lc.contains("_australia") ) {
 				nameId = R.string.index_name_oceania;
 				order = 70;
 			} else if(lc.contains("_wiki_")) {
