@@ -13,7 +13,6 @@ import net.osmand.map.IMapLocationListener;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -94,8 +93,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	private Map<OsmandMapLayer, Float> zOrders = new HashMap<OsmandMapLayer, Float>();
 	
-	private MapActivity activity;
-	
 	// UI Part
 	// handler to refresh map (in ui thread - ui thread is not necessary, but msg queue is required).
 	protected Handler handler = new Handler();
@@ -118,7 +115,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	public OsmandMapTileView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		application = (OsmandApplication) context.getApplicationContext();
-		activity = (MapActivity)context;
 		initView();
 		
 	}
@@ -126,7 +122,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	public OsmandMapTileView(Context context) {
 		super(context);
 		application = (OsmandApplication) context.getApplicationContext();
-		activity = (MapActivity)context;
 		initView();
 	}
 	
@@ -782,6 +777,12 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+			//Provide layers opportunity to move without dragging map
+			for (int i = layers.size() - 1; i >= 0; i--) {
+				if (layers.get(i).onFling(e1, e2, velocityX, velocityY)) {
+					return true;
+				}
+			}
 			animatedDraggingThread.startDragging(velocityX, velocityY, 
 						e1.getX(), e1.getY(), e2.getX(), e2.getY(), true);
 			return true;
@@ -808,10 +809,14 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 		@Override
 		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-			//Support point dragging in measurement mode without affecting map dragging
-			if(!activity.getMeasurementActivity().dragMeasurementPoint(e1)){
-				dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
+			//Provide layers opportunity to scroll without dragging map
+			for (int i = layers.size() - 1; i >= 0; i--) {
+				if (layers.get(i).onScroll(e1, e2, distanceX, distanceY)) {
+					return true;
+				}
 			}
+			
+			dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
 			return true;
 		}
 

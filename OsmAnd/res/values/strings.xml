@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="warning_saved_OK">Saved as </string>
+    <string name="start_point">Start Point </string>    
     <string name="warning_save_failed">Failed to save </string>
     <string name="plan_file_name_prefix">plan_</string>
     <string name="context_menu_item_load_GPX_plan">Load GPX plan file</string>
@@ -880,5 +881,5 @@
 <string name="edit_filter_delete_message">Filter {0} has been deleted</string>
 <string name="edit_filter_create_message">Filter {0} has been created</string>
 <string name="default_buttons_selectall">Select All</string>
-
+  
 </resources>

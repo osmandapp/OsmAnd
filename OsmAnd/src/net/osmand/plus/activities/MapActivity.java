@@ -133,7 +133,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 
 	private boolean isMapLinkedToLocation = false;
 	private ProgressDialog startProgressDialog;
-	private List<DialogProvider> dialogProviders = new ArrayList<DialogProvider>(2);
+	private List<DialogProvider> dialogProviders = new ArrayList<DialogProvider>(4);
 	
 	private Notification getNotification(){
 		Intent notificationIndent = new Intent(this, MapActivity.class);
@@ -234,6 +234,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		addDialogProvider(mapActions);
 		addDialogProvider(poiActions);
 		addDialogProvider(mapLayers.getOsmBugsLayer());
+		addDialogProvider(measurementActivity);
 	}
     
     @Override
@@ -1071,11 +1072,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		}
 		
 		MenuItem measureDistance = menu.findItem(R.id.map_calculate_distance);	//synchronise to changes made to measurement mode external to this menu actions.
-		if(measurementActivity.getMeasureDistanceMode()){
-			measureDistance.setChecked(true);
-		}else{
-			measureDistance.setChecked(false);			
-		}
+		measureDistance.setChecked(measurementActivity.getMeasureDistanceMode());
 
 		return val;
 	}
@@ -1158,7 +1155,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 					measurementActivity.measurementPoints.clear();	//clear the list of measurement points
 				}
 				mapLayers.getContextMenuLayer().setLocation(null, "");	//delete any visible point info on contextlayer text box
-				mapView.refreshMap();
+				mapView.refreshMap(true);
 			}
 			return true;
 		case R.id.map_GPX_plan:	//Load a previously saved plan track from a GPX file
@@ -1266,12 +1263,8 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 	
     	int actionsToUse = (mapView.getMainLayer() instanceof MapTileLayer) ? contextMenuStandardActions.length : contextMenuStandardActions.length - 2;
        	if(measurementActivity.getMeasureDistanceMode()){	//there are different menus available for measurement mode
-       		if(measurementActivity.getSelectedMeasurementPointIndex() >= 0){
-       			measurementActivity.createMeasurementMenu(1);
-       		}else{
-       			measurementActivity.createMeasurementMenu(2);		
-       		}
-        }else{
+       		measurementActivity.createMeasurementMenu();		
+       }else{
         	for(int j = 0; j<actionsToUse; j++){
         		actions.add(getResources().getString(contextMenuStandardActions[j]));
         	}

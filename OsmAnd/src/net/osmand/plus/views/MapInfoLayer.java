@@ -7,9 +7,7 @@ import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MeasurementActivity;
-import net.osmand.plus.activities.TipsAndTricksActivity;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -544,9 +542,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 		helpIconView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				TipsAndTricksActivity tactivity = new TipsAndTricksActivity(map);
-				Dialog dlg = tactivity.getHelpDialog(R.string.help_Distance_Measurement_t, R.string.help_Distance_Measurement);
-				dlg.show();
+//				TipsAndTricksActivity tactivity = new TipsAndTricksActivity(map);
+//				tactivity.getHelpDialog();
+				map.getMeasurementActivity().getHelpDialog();
 			}
 		});
 		statusBar.addView(helpIconView, params);

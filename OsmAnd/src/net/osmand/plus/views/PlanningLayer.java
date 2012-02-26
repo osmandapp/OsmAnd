@@ -63,7 +63,9 @@ public class PlanningLayer extends OsmandMapLayer{
 	private LatLon latLon;
 	private LatLon tempPoint;	//For measurement mode support
 	private LatLon tempPoint2;	//For measurement mode support
+	
 	private boolean newPointFlag = true;	//Used to block new distance point creation for menu or text box clicks
+	private boolean scrollingFlag = false;		//For measurement point dragging
 	
 	public PlanningLayer(MapActivity activity){
 		measurementActivity = activity.getMeasurementActivity();
@@ -213,7 +215,6 @@ public class PlanningLayer extends OsmandMapLayer{
 						if(measurementActivity.getMeasurementPointInsertionIndex() < 0) {
 							measurementActivity.measurementPoints.add(latLon);
 							index = measurementActivity.measurementPoints.size() - 1;
-							measurementActivity.setSelectedMeasurementPointIndex(index);
 						}else{
 							measurementActivity.measurementPoints.add(measurementActivity.getMeasurementPointInsertionIndex(), latLon);
 							index = measurementActivity.getMeasurementPointInsertionIndex();
@@ -228,7 +229,7 @@ public class PlanningLayer extends OsmandMapLayer{
 							description = view.getContext().getString(R.string.point_on_map,
 									measurementActivity.measurementPoints.get(0).getLatitude(), measurementActivity.measurementPoints.get(0).getLongitude());	
 						}else{
-							description = "Start Point";								
+							description = view.getContext().getString(R.string.start_point);								
 						}
 					}else{
 						measurementActivity.setCumMeasuredDistance(calculatePathDistance(index));
@@ -251,65 +252,82 @@ public class PlanningLayer extends OsmandMapLayer{
 
 	@Override
 	public boolean onLongPressEvent(PointF point) {
-		if(measurementActivity.getMeasureDistanceMode()){
-			newPointFlag = true;	//Enable new measurement point creation
-			if(pressedInTextView(point.x, point.y)){
-				setLocation(null, ""); //$NON-NLS-1$
-				view.refreshMap();
-				return true;
-			}
-					
-			LatLon latLon = view.getLatLonFromScreenPoint(point.x, point.y);
-			StringBuilder description = new StringBuilder(); 
-			
-			if (!selectedObjects.isEmpty()) {
-				if (selectedObjects.size() > 1) {
-					description.append("1. ");
-				}
-				description.append(selectedContextProvider.getObjectDescription(selectedObjects.get(0)));
-				for (int i = 1; i < selectedObjects.size(); i++) {
-					description.append("\n" + (i + 1) + ". ").append(selectedContextProvider.getObjectDescription(selectedObjects.get(i)));
-				}
-				LatLon l = selectedContextProvider.getObjectLocation(selectedObjects.get(0));
-				if (l != null) {
-					latLon = l;
-				}
-			}		
-			setLocation(latLon, description.toString());
+		if(!measurementActivity.getMeasureDistanceMode()) return false;
+		
+		newPointFlag = true;	//Enable new measurement point creation
+		if(pressedInTextView(point.x, point.y)){
+			setLocation(null, ""); //$NON-NLS-1$
 			view.refreshMap();
 			return true;
-		}else{
-			return false;			
 		}
+				
+		LatLon latLon = view.getLatLonFromScreenPoint(point.x, point.y);
+		StringBuilder description = new StringBuilder(); 
+		
+		if (!selectedObjects.isEmpty()) {
+			if (selectedObjects.size() > 1) {
+				description.append("1. ");
+			}
+			description.append(selectedContextProvider.getObjectDescription(selectedObjects.get(0)));
+			for (int i = 1; i < selectedObjects.size(); i++) {
+				description.append("\n" + (i + 1) + ". ").append(selectedContextProvider.getObjectDescription(selectedObjects.get(i)));
+			}
+			LatLon l = selectedContextProvider.getObjectLocation(selectedObjects.get(0));
+			if (l != null) {
+				latLon = l;
+			}
+		}		
+		setLocation(latLon, description.toString());
+		view.refreshMap();
+		return true;
 	}
 
 	@Override
 	public boolean onSingleTap(PointF point) {
 		if (!measurementActivity.getMeasureDistanceMode()) return false;
 		if(pressedInTextView(point.x, point.y)){	//Test if a measurement point text box has been clicked
-				measurementActivity.setScreenPointLatLon (measurementActivity.measurementPoints.get(measurementActivity.getSelectedMeasurementPointIndex()));
+				if(measurementActivity.getSelectedMeasurementPointIndex() >= 0){	//only set if there has been a change
+					measurementActivity.setScreenPointLatLon (measurementActivity.measurementPoints.get(measurementActivity.getSelectedMeasurementPointIndex()));
+				}
+				measurementActivity.createMeasurementMenu();
 		}else{
 
 		//Test if a measurement point has been clicked
-			measurementActivity.setSelectedMeasurementPointIndex(measurementActivity.isMeasurementPointSelected(point));	//save index of point selected	
-			if(measurementActivity.getSelectedMeasurementPointIndex() >= 0){
+			int pointIndex = measurementActivity.isMeasurementPointSelected(point);
+			if(pointIndex >= 0){
+				measurementActivity.setSelectedMeasurementPointIndex(pointIndex);	//only save index of point if one has been selected 
 				measurementActivity.saveScreenPoint();
+				measurementActivity.createMeasurementMenu();
 			}else{
-				measurementActivity.setScreenPointLatLon (view.getLatLonFromScreenPoint(point.x, point.y));
+				measurementActivity.setScreenPointLatLon (view.getLatLonFromScreenPoint(point.x, point.y));	//point or text not selected
+				return false;
 			}
 		}
 		
-		//Test for trigger of a measurement point dialog
-			if( measurementActivity.getSelectedMeasurementPointIndex() >= 0){
-				latLon = measurementActivity.getScreenPointLatLon();
-				measurementActivity.createMeasurementMenu(2);
-				return true;	//if a point has been verified as selected, ignore this test
-			}else{
-				measurementActivity.createMeasurementMenu(1);
-				return true;
-			}				
+		return true;
 	}
 	
+	@Override
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+		if (!measurementActivity.getMeasureDistanceMode()) return false;		//Check if in measurement mode
+		if(scrollingFlag) return true;	//delay activity until scrolling has finished
+		PointF point = new PointF(e1.getX(), e1.getY());
+		int pointIndex = measurementActivity.isMeasurementPointSelected(point);
+		if(pointIndex >= 0){
+			measurementActivity.setSelectedMeasurementPointIndex( pointIndex);	//save index of point selected	
+			scrollingFlag = true;	//must remain true until next touch event
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+		if (!measurementActivity.getMeasureDistanceMode()) return false;	//Check if in measurement mode
+		if(scrollingFlag) return true;	//block fling while dragging a point. Note scroll event occurs before fling event
+		return false;
+	}
+
 	public boolean pressedInTextView(float px, float py) {
 		if (latLon != null) {
 			Rect bs = textView.getBackground().getBounds();
@@ -328,8 +346,12 @@ public class PlanningLayer extends OsmandMapLayer{
 	public boolean onTouchEvent(MotionEvent event) {
 		if(!measurementActivity.getMeasureDistanceMode())return false;	
 
+		if (event.getAction() == MotionEvent.ACTION_DOWN) {	//must clear at start of new event, not end of last event to ensure fling is blocked
+			scrollingFlag = false;
+		}
+		
 		if (event.getAction() == MotionEvent.ACTION_UP) {	//Support for dragging measurement point
-			if(measurementActivity.getScrollingFlag() && measurementActivity.getMeasureDistanceMode()){
+			if(scrollingFlag){
 				if(measurementActivity.getSelectedMeasurementPointIndex() >= 0){	//move selected point to new location
 					measurementActivity.measurementPoints.set(measurementActivity.getSelectedMeasurementPointIndex(),view.getLatLonFromScreenPoint(event.getX(), event.getY()));
 					measurementActivity.setColourChangeIndex(measurementActivity.getSelectedMeasurementPointIndex());
@@ -338,7 +360,6 @@ public class PlanningLayer extends OsmandMapLayer{
 					
 					view.refreshMap();
 				}
-				measurementActivity.setScrollingFlag( false);
 			}
 		}
 					
@@ -365,10 +386,10 @@ public class PlanningLayer extends OsmandMapLayer{
 		latLon = measurementActivity.measurementPoints.get(index);
 		if (index == 0){
 			if(measurementActivity.getLongInfoFlag()){
-				description = "Start Point: \nLat: " + String.format("%3.6f",
+				description = view.getContext().getString(R.string.start_point) + ": \nLat: " + String.format("%3.6f",
 						measurementActivity.measurementPoints.get(index).getLatitude()) + String.format("\nLon: %3.6f", measurementActivity.measurementPoints.get(index).getLongitude());					
 			}else{
-				description = "Start Point";								
+				description = view.getContext().getString(R.string.start_point);								
 			}
 		}else{
 			measurementActivity.setCumMeasuredDistance(calculatePathDistance(index));
