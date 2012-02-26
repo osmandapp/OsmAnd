@@ -53,7 +53,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements ContextMenuLayer.ICo
 	private Paint pointClosedUI;
 	private Paint pointOpenedUI;
 	private Pattern patternToParse = Pattern.compile("putAJAXMarker\\((\\d*), (-?(?:\\d|\\.)+), (-?(?:\\d|\\.)+), '([^']*)', (\\d)\\);"); //$NON-NLS-1$
-//	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm aaa", Locale.US); //$NON-NLS-1$
+//	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm aaa", Locale.US); //$NON-NLS-1$
 	
 	private double cTopLatitude;
 	private double cBottomLatitude;

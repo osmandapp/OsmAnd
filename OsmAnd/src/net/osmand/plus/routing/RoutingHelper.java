@@ -357,7 +357,7 @@ public class RoutingHelper {
 						// 7. Check necessity for unscheduled U-turn, Issue 863
 						if (Math.abs(bearing - bearingRoute) > 135f && 360 - Math.abs(bearing - bearingRoute) > 135f) {
 							float d = currentLocation.distanceTo(routeNodes.get(currentRoute));
-							if (d > 50) {
+							if (d > 60) {
 								makeUturnWhenPossible = true;
 								turnImminent = 1;
 								//log.info("Bearing is opposite to bearingRoute"); //$NON-NLS-1$
