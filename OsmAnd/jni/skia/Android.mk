@@ -35,6 +35,7 @@ LOCAL_SRC_FILES := \
 	trunk/src/core/SkColorTable.cpp \
 	trunk/src/core/SkComposeShader.cpp \
 	trunk/src/core/SkConcaveToTriangles.cpp \
+	trunk/src/core/SkConfig8888.cpp \
 	trunk/src/core/SkCordic.cpp \
 	trunk/src/core/SkCubicClipper.cpp \
 	trunk/src/core/SkData.cpp \
