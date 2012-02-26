@@ -240,7 +240,7 @@
 	<string name="local_index_gpx_info_show">\n\nLang klicken für Optionen</string>
 	<string name="local_index_gpx_info_speed">\nDurchschn.geschw.: %1$s \nMax. Geschw.: %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nDurchschn.höhe: %1$.0f m\nMinimalhöhe: %2$.0f m\nMaximalhöhe: %3$.0f m\nAufstiege: %4$.0f m\nAbstiege: %5$.0f m</string>
-	<string name="local_index_gpx_info">Subtracks: %1$d\nPunkte insgesamt: %2$d\nWegpunkte: %3$d\nGesamtstrecke: %4$s\nStartzeit: %5$tD %5$tR\nEndzeit: %6$tD %6$tR</string>
+	<string name="local_index_gpx_info">Subtracks: %1$d\nPunkte insgesamt: %2$d\nWegpunkte: %3$d\nGesamtstrecke: %4$s\nStartzeit: %5$tF  %5$tR\nEndzeit: %6$tF  %6$tR</string>
 	<string name="local_index_installed">Edition</string>
 	<string name="local_index_items_backuped">%1$d von %2$d Datei(en) erfolgreich deaktiviert.</string>
 	<string name="local_index_items_deleted">%1$d von %2$d Datei(en) erfolgreich gelöscht.</string>

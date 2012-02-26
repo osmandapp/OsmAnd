@@ -170,7 +170,7 @@
     <string name="local_index_gpx_info_speed">\nСредняя скорость : %1$s \nМаксимальная скорость : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nСредняя высота : %1$.0f метров\nМинимальная высота : %2$.0f метров\nМаксимальная высота : %3$.0f метров\nПодъем вверх : %4$.0f метров\nПодъем вниз : %5$.0f метров</string>
 	<string name="local_index_gpx_info">Путей : %1$d\nВсего точек : %2$d\nОтмечено точек : %3$d\nВсего расстояние : %4$s
-										\nНачало : %5$tD %5$tR\nОкончание : %6$tD %6$tR\n</string>
+										\nНачало : %5$tF  %5$tR\nОкончание : %6$tF  %6$tR\n</string>
 	<string name="local_index_installed">Издание</string>
 	<string name="local_index_items_backuped">%1$d из %2$d объектов успешно архивированы.</string>
 	<string name="local_index_items_deleted">%1$d из %2$d объектов успешно удалены.</string>

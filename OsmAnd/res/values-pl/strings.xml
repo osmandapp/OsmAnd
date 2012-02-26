@@ -119,7 +119,7 @@
 <string name="local_index_gpx_info_show">\n\nPrzytrzymaj dłużej, by pokazać na mapie</string>
 <string name="local_index_gpx_info_speed">\nŚrednia prędkość: %1$s \nMaksymalna prędkość: %2$s</string>
 <string name="local_index_gpx_info_elevation">\nŚrednia wysokość: %1$.0f m\nMinimalna wysokość: %2$.0f m\nMaksymalna wysokość: %3$.0f m\nWzniosy: %4$.0f m\nSpadki: %5$.0f m</string>
-<string name="local_index_gpx_info">Subtracks : %1$d\nWszystkie punkty: %2$d\nWay points : %3$d\nCałkowity dystans: %4$s\nCzas startu: %5$tD %5$tR\nCzas zakończenia: %6$tD %6$tR</string>
+<string name="local_index_gpx_info">Subtracks : %1$d\nWszystkie punkty: %2$d\nWay points : %3$d\nCałkowity dystans: %4$s\nCzas startu: %5$tF  %5$tR\nCzas zakończenia: %6$tF  %6$tR</string>
 <string name="local_index_installed">Wydanie</string>
 <string name="local_index_items_backuped">%1$d z %2$d zarchiwizowano.</string>
 <string name="local_index_items_deleted">%1$d z %2$d skasowano.</string>
