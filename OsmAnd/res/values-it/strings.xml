@@ -190,7 +190,7 @@
 	<string name="local_index_gpx_info_show">\n\nClick lungo per mostrare opzioni</string>
 	<string name="local_index_gpx_info_speed">\nVelocità media : %1$s \nVelocità massima : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nAltitudine media : %1$.0f m\nAltitudine minima : %2$.0f m\nAltitudine massima : %3$.0f m\nSalite : %4$.0f m\nDiscese : %5$.0f m</string>
-	<string name="local_index_gpx_info">Subtracks : %1$d\nPunti totali : %2$d\nWay points : %3$d\nDistanza totale : %4$s\nOra partenza : %5$tF  %5$tR\nOra arrivo : %6$tF  %6$tR</string>
+	<string name="local_index_gpx_info">Subtracks : %1$d\nPunti totali : %2$d\nWay points : %3$d\nDistanza totale : %4$s\nOra partenza : %5$tF,  %5$tR\nOra arrivo : %6$tF,  %6$tR</string>
 	<string name="local_index_installed">Edizione</string>
 	<string name="local_index_items_backuped">%1$d su %2$d oggetto/i backuppato/i.</string>
 	<string name="local_index_items_deleted">%1$d su %2$d oggetto/i eliminato/i.</string>
