@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="use_fluorescent_overlays">Use fluorescent overlays</string>
+	<string name="use_fluorescent_overlays_descr">Use fluorescent colors to display tracks and routes</string>
 	<string name="offline_poi_edition">Offline POI editing</string>
 	<string name="offline_poi_edition_descr">Always use offline POI editing</string>
 

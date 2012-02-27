@@ -8,6 +8,7 @@ import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 
 public class MiniMapControl extends MapInfoControl {
@@ -35,7 +36,11 @@ public class MiniMapControl extends MapInfoControl {
 		paintMiniRoute = new Paint();
 		paintMiniRoute.setStyle(Style.STROKE);
 		paintMiniRoute.setStrokeWidth(35 * scaleCoefficient);
-		paintMiniRoute.setColor(getResources().getColor(R.color.nav_track));
+		if (view.getSettings().FLUORESCENT_OVERLAYS.get()) {
+			paintMiniRoute.setColor(getResources().getColor(R.color.nav_track_fluorescent));
+		} else {
+			paintMiniRoute.setColor(getResources().getColor(R.color.nav_track));
+		}
 		paintMiniRoute.setStrokeJoin(Join.ROUND);
 		paintMiniRoute.setStrokeCap(Cap.ROUND);
 		paintMiniRoute.setAntiAlias(true);
@@ -56,6 +61,14 @@ public class MiniMapControl extends MapInfoControl {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
+
+		//to change color immediately when needed
+		if (view.getSettings().FLUORESCENT_OVERLAYS.get()) {
+			paintMiniRoute.setColor(getResources().getColor(R.color.nav_track_fluorescent));
+		} else {
+			paintMiniRoute.setColor(getResources().getColor(R.color.nav_track));
+		}
+
 		if (miniMapPath != null && !miniMapPath.isEmpty()) {
 			canvas.save();
 			canvas.translate(centerMiniRouteX - view.getCenterPointX(), centerMiniRouteY - view.getCenterPointY());

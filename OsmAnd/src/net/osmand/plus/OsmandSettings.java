@@ -1095,6 +1095,9 @@ public class OsmandSettings {
 		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
 	}
 	
+	public final CommonPreference<Boolean> FLUORESCENT_OVERLAYS = 
+			new BooleanPreference("fluorescent_overlays", false, false, true);
+
 	public final CommonPreference<Boolean> SHOW_ALTITUDE_INFO = 
 			new BooleanPreference("show_altitude_info", false, false, true);
 	{
