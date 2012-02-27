@@ -1,5 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+        <string name="offline_poi_edition">Modification hors ligne de POI</string>
+        <string name="offline_poi_edition_descr">Toujours utiliser la modification hors ligne de POI</string>
+
+        <string name="tip_recent_changes_0_7_1_t">Modifications en 0.7.1 :
+\n\t- Modification hors ligne des POI
+\n\t- Option de suivi en ligne - envoyer ses coordonnées à un service web de façon périodique (lire la configuration dans les articles HowTo)
+\n\t- Afficher l\'itinéraire en cours d\'enregistrement sur la carte
+\n\t- Détection de la direction: \'Faîtes demi-tour\' est affiché et annoncé lors d\'un déplacement dans la direction opposée, ou après avoir raté un virage
+\n\t- Nouveau message vocal \'Itinéraire recalculé\'
+\n\t- Indication visuelle d\'un tournant imminent dans les 100m en changeant la couleur de la flèche de direction
+\n\t- Etat des fichiers de cartes désactivés affichés dans l\'écran de téléchargement en vert foncé et bleu foncé
+\n\t- Modifications diverses
+        </string>
+
+        <string name="update_poi_does_not_change_indexes">Les modifications de POI dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier.</string>
+        <string name="local_openstreetmap_uploading_poi">Téléchargement des POI...</string>
+        <string name="local_openstreetmap_poi_were_uploaded">{0} POI ont été téléchargés</string>
+        <string name="local_openstreetmap_uploadall">Télécharger tous les POI</string>
+        <string name="local_openstreetmap_items"></string>
+        <string name="local_openstreetmap_show_poi">Afficher le POI sur la carte</string>
+        <string name="local_openstreetmap_upload">Télécharger les modifications vers OSM</string>
+        <string name="local_openstreetmap_delete">Supprimer la modification de POI</string>
+        <string name="local_openstreetmap_descr_title">Modification asynchrone de points OSM:</string>
+        <string name="local_openstreetmap_settings">Points OSM enregistrés en local</string>
+        <string name="local_openstreetmap_settings_descr">Afficher et gérer les points OSM enregistrés dans la base locale</string>
+
+        <string name="live_monitoring_descr">Activer l\'envoi de requêtes HTTP à un service web donné</string>
+        <string name="live_monitoring">Activer le suivi en ligne</string>
+        <string name="live_monitoring_interval_descr">Préciser l\'intervalle pour le suivi en ligne</string>
+        <string name="live_monitoring_interval">Intervalle pour le suivi en ligne</string>
+        <string name="live_monitoring_url_descr">Précisez l\'adresse web pour le suivi en ligne avec la syntaxe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+        <string name="live_monitoring_url">Adresse web pour le suivi en ligne</string>
+        <string name="gpx_monitoring_disabled_warn">Veuillez activer \'Enregistrer l\'itinéraire en GPX\' en paramètre de suivi</string>
+        <string name="show_current_gpx_title">Afficher l\'itinéraire en cours</string>
+        <string name="tip_recent_changes_0_7_0_t">Changements en 0.7.0 :
+        \n\t- Données wikipedia hors ligne avec articles
+        \n\t- Cartes mises à jour
+        \n\t- Petites amélioration diverses
+        </string>    
+        <string name="free_version_message">Cette version gratuite de OsmAnd est limitée à %1$s téléchargements (%2$s réalisés) et ne supporte pas les articles Wikipedia hors ligne.</string>
+        <string name="free_version_title">Version gratuite</string>
+        <string name="poi_context_menu_showdescription">Afficher description POI</string>
+
+        <string name="index_name_north_america">Amerique du Nord</string>
+        <string name="index_name_us">Amerique du Nord - Etats unis</string>
+        <string name="index_name_central_america">Amerique centrale</string>
+        <string name="index_name_south_america">Amerique du Sud</string>
+        <string name="index_name_europe">Europe</string>
+        <string name="index_name_france">Europe - France</string>
+        <string name="index_name_germany">Europe - Allemagne</string>
+        <string name="index_name_russia">Europe/Asie - Russie</string>
+        <string name="index_name_africa">Afrique</string>
+        <string name="index_name_asia">Asie</string>
+        <string name="index_name_oceania">Oceanie</string>
+        <string name="index_name_other">Cartes mondiales et thematiques</string>
+        <string name="index_name_wiki">Wikipedia Monde</string>
+        <string name="index_name_voice">Packs voix (enregistrés)</string>
+        <string name="index_name_tts_voice">Packs voix (TTS)</string>
+
+        <string name="amenity_type_wikiosm">Wikipedia (hors ligne)</string>
+        <string name="amenity_type_user_defined">Défini par l\'utilisateur</string>
+        <string name="fav_export_confirmation">Un fichier de favoris précedemment exporté existe déjà. Voulez vous le remplacer?</string>
+
 <!-- this block re-worked for new menu structure -->
    <string name="profile_settings">Paramètres de profil</string>
    <string name="settings_preset">Profil d\'utilisation</string>
@@ -105,7 +168,7 @@
 \n\t- Corrections des instructions vocales (sur l\'emplacement GPS et supprimer la première instruction)
 \n\t- Petites améliorations diverses
   </string>
-  <string name="local_index_description">Télécharger nouveau, déplacer ou supprimer données actuelles. \nDonnées hors ligne actuellement présente sur l\'appareil (%1$s espace libre):</string>
+  <string name="local_index_description">Télécharger, déplacer ou supprimer données actuelles. \nDonnées hors ligne actuellement présente sur l\'appareil (%1$s espace libre):</string>
   <string name="file_can_not_be_renamed">Fichier ne peut être renommé.</string>
   <string name="file_with_name_already_exists">Un fichier avec ce nom existe déjà.</string>
   <string name="gpx_navigation">Itinéraire GPX</string>
