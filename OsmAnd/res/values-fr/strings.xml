@@ -177,7 +177,6 @@
   <string name="poi_filter_by_name">Recherche par nom</string>
   <string name="old_poi_file_should_be_deleted">Le fichier de PI \'%1$s\' est obsolète et peut être supprimé.</string>
   <string name="update_poi_file_not_found">Fichier local de gestion des modifications de PI introuvable, et ne peut être créé.</string>
-  <string name="update_poi_does_not_change_indexes">La modification d\'un PI dans l\'application ne modifie pas les fichiers téléchargés mais récolte les modifications dans un fichier en local.</string>
   <string name="button_upgrade_osmandplus">Mettre à jour Osmand+</string>
   <string name="map_version_changed_info">Les fichiers de cartes sur le serveur sont incompatibles avec votre version de l\'application. Pour les télécharger et les utiliser, installez une version plus récente de votre application</string>
   <string name="local_index_mi_rename">Renommer</string>
