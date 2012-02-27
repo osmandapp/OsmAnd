@@ -16,6 +16,7 @@ public class NativeOsmandLibrary {
 			synchronized (NativeOsmandLibrary.class) {
 				if (!isLoaded()) {
 					try {
+						System.loadLibrary("libstlport_shared");
 						System.loadLibrary("osmand");
 						library = new NativeOsmandLibrary();
 						NativeOsmandLibrary.initRenderingRulesStorage(storage);
