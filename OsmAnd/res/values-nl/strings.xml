@@ -229,7 +229,7 @@
 	<string name="local_index_gpx_info_show">\n\nLange klik voor opties</string>
 	<string name="local_index_gpx_info_speed">\nGemiddelde snelheid : %1$s \nMaximum snelheid : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nGemiddelde hoogte : %1$.0f m\nMinimum hoogte : %2$. m\nMaximum hoogte : %3$. m\nStijgingen : %4$. m\nDalingen : %5$. m</string>
-	<string name="local_index_gpx_info">Subtracks : %1$d\nTotaal aantal punten : %2$d\nRoutepunten : %3$d\nTotale afstand : %4$s\nStarttijd : %5$tF  %5$tR\nEindtijd : %6$tF  %6$tR</string>
+	<string name="local_index_gpx_info">Subtracks : %1$d\nTotaal aantal punten : %2$d\nRoutepunten : %3$d\nTotale afstand : %4$s\nStarttijd : %5$tF,  %5$tR\nEindtijd : %6$tF,  %6$tR</string>
 	<string name="local_index_installed">Editie</string>
 	<string name="local_index_items_backuped">%1$d van %2$d gegevens succesvol gedeactiveerd.</string>
 	<string name="local_index_items_deleted">%1$d van %2$d gegevens succesvol verwijderd.</string>

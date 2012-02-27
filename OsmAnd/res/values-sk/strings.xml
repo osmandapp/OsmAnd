@@ -190,7 +190,7 @@
 	<string name="local_index_gpx_info_speed">\nPriemerná rýchlosť : %1$s \nMaximálna rýchlosť : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nPriemerná nadm. výška : %1$.0f metrov\nNajnižšia nadm. výška : %2$.0f metrov\nNajvyššia nadm. výška : %3$.0f metrov\nStúpanie hore : %4$.0f metrov\nStúpanie dole : %5$.0f metrov</string>
 	<string name="local_index_gpx_info">Pod-stopy : %1$d\nCelkovo bodov : %2$d\nWay-pointy : %3$d\nCelková vzdialenosť : %4$s
-									   \nČas spustenia : %5$tF  %5$tR\nČas ukončenia : %6$tF  %6$tR</string>
+									   \nČas spustenia : %5$tF,  %5$tR\nČas ukončenia : %6$tF,  %6$tR</string>
 	<string name="local_index_installed">Vydanie</string>
 	<string name="local_index_items_backuped">%1$d položiek z %2$d úspešne zálohovaných.</string>
 	<string name="local_index_items_deleted">%1$d položiek z %2$d úspešne vymazaných.</string>

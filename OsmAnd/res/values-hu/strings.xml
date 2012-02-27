@@ -1,5 +1,31 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="offline_poi_edition">Offline POI szerkesztés</string>
+	<string name="offline_poi_edition_descr">POI szerkesztése mindig offline módban</string>
+
+	<string name="tip_recent_changes_0_7_1_t">A 0.7.1 verzió változásai:
+\n\t- Offline POI szerkesztés 
+\n\t- Élő Útvonalrögzítési lehetőség: periodikusan koordinátákat küld egy webes szolgáltatásnak (a beállításról a weboldalunk HowTo cikkében olvashatsz)
+\n\t- Rögzítés alatt álló nyomvonal megjeleníthető a térképen
+\n\t- Irányfelismerés: \'Fordulj vissza\' utasítás megjelenítése és bemondása, ha rossz irányba mész, vagy elvétettél egy lekanyarodást
+\n\t- Új figyelmeztető hang: \'Útvonal újratervezve\'
+\n\t- A lekanyarodáshoz közeledve az irányjelző nyíl színe megváltozik
+\n\t- A letöltéskezelőben a deaktivált indexfájlok sötétebb színnel jelennek meg
+\n\t- Egyéb javítások
+	</string>
+
+	<string name="update_poi_does_not_change_indexes">Az alkalmazáson belüli POI módosítások nincsenek hatással a letöltött térképre, a változások helyi fájlban tárolódnak.</string>
+	<string name="local_openstreetmap_uploading_poi">POI feltöltése...</string>
+	<string name="local_openstreetmap_poi_were_uploaded">{0} POI feltöltve</string>
+	<string name="local_openstreetmap_uploadall">Összes POI feltöltése</string>
+	<string name="local_openstreetmap_items"></string>
+	<string name="local_openstreetmap_show_poi">POI megjelenítése a térképen</string>
+	<string name="local_openstreetmap_upload">Módosítások feltöltése OSM-re</string>
+	<string name="local_openstreetmap_delete">POI módosítás törlése</string>
+	<string name="local_openstreetmap_descr_title">Aszinkron OSM POI szerkesztés:</string>
+	<string name="local_openstreetmap_settings">Helyileg tárolt OSM pontok</string>
+	<string name="local_openstreetmap_settings_descr">Helyi adatbázisban tárolt OSM pontok megjelenítése, kezelése</string>
+
 	<string name="live_monitoring_descr">Lehetővé teszi HTTP üzenetek küldését a megadott webes szolgáltatásnak</string>
 	<string name="live_monitoring">Élő Útvonalrögzítés</string>
 	<string name="live_monitoring_interval_descr">Élő Útvonalrögzítés intervalluma</string>
@@ -118,7 +144,7 @@
 	<string name="choose_auto_follow_route">Automatikus követés ideje</string>
 	<string name="choose_auto_follow_route_descr">Válaszd ki, mennyi idő múlva ugorjon vissza a térkép a pozíciódhoz</string>
 	<string name="auto_follow_route_never">Soha</string>
-	<string name="auto_follow_route_navigation">Automatikus követés navigáció közben</string>
+	<string name="auto_follow_route_navigation">Követés csak navigáció közben</string>
 	<string name="auto_follow_route_navigation_descr">Csak navigáció közben követi automatikusan a pozíciódat a térkép</string>
 	<string name="auto_follow_location_enabled">Automatikus követés engedélyezve</string>
 
@@ -208,6 +234,9 @@
 	<string name="favorite_friends_category">Barátok</string>
 	<string name="favorite_places_category">Helyek</string>
 	<string name="favorite_default_category">Egyéb</string>
+	
+	<string name="favourites_edit_dialog_name">Név</string>
+   <string name="favourites_edit_dialog_category">Kategória</string>
 
 	<string name="vector_map_not_needed">Nem szükséges</string>
 	<string name="basemap_missing">Hiányzik az alap világtérkép (alacsony nagyításon az egész Földet lefedi). A teljes környezethez le lehet tölteni a World_basemap.obf -et.</string>
@@ -215,7 +244,7 @@
 	<string name="local_index_gpx_info_show">\n\nHosszan megnyomva további lehetőségek</string>
 	<string name="local_index_gpx_info_speed">\nÁtlagsebesség: %1$s \nLegnagyobb sebesség: %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nÁtlagos magasság: %1$.0f m\nLegkisebb magasság: %2$.0f m\nLegnagyobb magasság: %3$.0f m\nEreszkedés: %4$.0f m\nEmelkedés: %5$.0f m</string>
-	<string name="local_index_gpx_info">Rész nyomvonal: %1$d\nÖsszes pont: %2$d\nÚtpontok: %3$d\nTeljes távolság: %4$s\nIndulás: %5$tF  %5$tR\nÉrkezés: %6$tF  %6$tR</string>
+	<string name="local_index_gpx_info">Rész nyomvonal: %1$d\nÖsszes pont: %2$d\nÚtpontok: %3$d\nTeljes távolság: %4$s\nIndulás: %5$tF,  %5$tR\nÉrkezés: %6$tF,  %6$tR</string>
 	<string name="local_index_installed">Kiadás</string>
 	<string name="local_index_items_backuped">%2$d darabból %1$d sikeresen deaktiválva.</string>
 	<string name="local_index_items_deleted">%2$d darabból %1$d sikeresen törölve.</string>
@@ -261,9 +290,9 @@
 	<string name="voice_not_use">Letiltva</string>
 	<string name="voice_not_specified">Nincs</string>
 	<string name="installing_new_resources">Új adatok kicsomagolása&#8230;</string>
-	<string name="internet_connection_required_for_online_route">Az internetes navigáció használata az internetkapcsolat hiánya miatt nem lehetséges.</string>
+	<string name="internet_connection_required_for_online_route">Online navigáció használata internetkapcsolat nélkül nem lehetséges.</string>
 	<string name="tts_language_not_supported_title">Nem támogatott nyelv</string>
-	<string name="tts_language_not_supported">A kiválasztott nyelvet az Android TTS rendszere nem támogatja. A Marketből letölthető másik TTS rendszer. Különben a jelenlegi TTS-t használja a program.</string>
+	<string name="tts_language_not_supported">A kiválasztott nyelvet az Android TTS rendszere nem támogatja. A Marketből letölthetsz másik TTS rendszert, egyébként a jelenlegi TTS-t használja a program.</string>
 	<string name="tts_missing_language_data_title">Hiányzó adat</string>
 	<string name="tts_missing_language_data">Nincs telepített adat a kiválasztott nyelv használatához. A Marketből letölthető.</string>
 
@@ -633,7 +662,7 @@
 	<string name="downloading_file">Fájl letöltése&#8230;</string>
 	<string name="downloading">Letöltés&#8230;</string>
 	<string name="downloading_list_indexes">Elérhető térképadatok listájának letöltése</string>
-	<string name="list_index_files_was_not_loaded">Nincs letöltve a térképadatok listája az osmand.net-ról.</string>
+	<string name="list_index_files_was_not_loaded">Nincs letöltve a térképadatok listája az osmand.net-ről.</string>
 	<string name="select_index_file_to_download">Ha nem találja a régióját, elkészítheti magának. Lásd: osmand.net</string>
 	<string name="show_poi_on_map">Mutasd a térképen</string>
 	<string name="fav_points_edited">Kedvenc pontok szerkesztése kész</string>
@@ -700,7 +729,7 @@
 	<string name="mark_point">Célpont</string>
 	<string name="show_osm_bugs_descr">OpenStreetBugs mutatása a térképen</string>
 	<string name="show_osm_bugs">OpenStreetBugs megmutatása</string>
-	<string name="favourites_activity">Kedvenc pontok listája</string>
+	<string name="favourites_activity">Kedvencek</string>
 	<string name="add_to_favourite">Hozzáadás a kedvencekhez</string>
 	<string name="use_english_names_descr">Választás az eredeti és angol név között</string>
 	<string name="use_english_names">Angol nevek használata</string>
