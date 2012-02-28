@@ -7,7 +7,7 @@
 
 	<string name="tip_recent_changes_0_7_1_t">Cambiamenti nella versione 0.7.1 :
 \n\t- Editing offline dei PDI
-\n\t- Opzione per il Live Tracking - invia le coordinate periodicamente ad un servizio web (guarda come impostare il tuo servizio personale negli articoli dell'HowTo)
+\n\t- Opzione per il Live Tracking - invia le coordinate periodicamente ad un servizio web (guarda come impostare il tuo servizio personale negli articoli dell\'HowTo)
 \n\t- Mostra sulla mappa la traccia registrata
 \n\t- Individuazione della direzione: \'Esegui una svolta ad U\' è indicato e annunciato quando ci si dirige in direzione opposta o dopo aver sbagliato una svolta
 \n\t- Nuovo avviso vocale \'Ricalcolo percorso\'
@@ -32,7 +32,7 @@
 	<string name="live_monitoring">Abilita il Live Tracking</string>
 	<string name="live_monitoring_interval_descr">Specifica l\'intervallo del Live Tracking</string>
 	<string name="live_monitoring_interval">Intervallo del Live Tracking</string>
-	<string name="live_monitoring_url_descr">Specifica l'indirizzo internet per il Live Tracking con la sintassi dei parametri : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+	<string name="live_monitoring_url_descr">Specifica l\'indirizzo internet per il Live Tracking con la sintassi dei parametri : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
 	<string name="live_monitoring_url">Indirizzo internet per il Live Tracking</string>
 	<string name="gpx_monitoring_disabled_warn">Abilita \'Log della traccia in GPX\' nelle impostazioni di Tracking</string>
 	<string name="show_current_gpx_title">Mostra la traccia corrente</string>
