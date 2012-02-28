@@ -48,7 +48,7 @@ public class RouteLayer extends OsmandMapLayer {
 		}
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(14);
-		paint.setAlpha(150);
+		//paint.setAlpha(150);
 		paint.setAntiAlias(true);
 		paint.setStrokeCap(Cap.ROUND);
 		paint.setStrokeJoin(Join.ROUND);

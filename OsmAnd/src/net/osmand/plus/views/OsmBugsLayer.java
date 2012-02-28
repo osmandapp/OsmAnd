@@ -99,11 +99,11 @@ public class OsmBugsLayer extends OsmandMapLayer implements ContextMenuLayer.ICo
 		}
 		pointOpenedUI = new Paint();
 		pointOpenedUI.setColor(activity.getResources().getColor(R.color.osmbug_opened));
-		pointOpenedUI.setAlpha(200);
+		//pointOpenedUI.setAlpha(200);
 		pointOpenedUI.setAntiAlias(true);
 		pointClosedUI = new Paint();
 		pointClosedUI.setColor(activity.getResources().getColor(R.color.osmbug_closed));
-		pointClosedUI.setAlpha(200);
+		//pointClosedUI.setAlpha(200);
 		pointClosedUI.setAntiAlias(true);
 	}
 

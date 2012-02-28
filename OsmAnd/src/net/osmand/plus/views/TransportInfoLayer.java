@@ -39,11 +39,11 @@ public class TransportInfoLayer extends OsmandMapLayer {
 
 		paintInt = new Paint();
 		paintInt.setColor(view.getResources().getColor(R.color.transport_int));
-		paintInt.setAlpha(150);
+		//paintInt.setAlpha(150);
 		paintInt.setAntiAlias(true);
 		paintEnd = new Paint();
 		paintEnd.setColor(view.getResources().getColor(R.color.transport_end));
-		paintEnd.setAlpha(150);
+		//paintEnd.setAlpha(150);
 		paintEnd.setAntiAlias(true);
 	}
 	
