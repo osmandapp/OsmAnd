@@ -17,11 +17,11 @@
 
 	<color name="gpx_track">#B4A00AD7</color>
 	<color name="gpx_track_fluorescent">#B400FFFF</color>
-	<color name="pos_heading">#0000FF</color>
-	<color name="pos_area">#0000FF</color>
+	<color name="pos_heading">#320000FF</color>
+	<color name="pos_area">#280000FF</color>
 	<color name="pos_around">#707CDC</color>  <!-- family blue similar to above -->
 
-	<color name="nav_track">#0000FF</color>  <!-- needs to be brighter, hardly visible in night mode -->
+	<color name="nav_track">#960000FF</color>  <!-- needs to be brighter, hardly visible in night mode -->
 	<color name="nav_track_fluorescent">#CCFF6600</color>
 	<color name="nav_arrow">#FADE23</color>
 	<color name="nav_arrow_imminent">#FF2300</color>
@@ -39,21 +39,21 @@
 	<color name="localindex_isloaded">#00FF00</color> <!-- standard GREEN -->
 	<color name="localindex_unknown">#C0C0C0</color> <!-- standard LTGRAY -->
 
-	<color name="poi_background">#FF8000</color>
+	<color name="poi_background">#A0FF8000</color>
 	<color name="poi_open">#32CD32</color> <!-- GREEN/RED is intuitive for open/closed -->
 	<color name="poi_closed">#EE3232</color>
 	<color name="poi_direction">#6400FF</color>
 	<color name="poi_unknown_arrow">#C8C8C8</color>
 
-	<color name="transport_stop">#0000FF</color>
-	<color name="transport_int">#32C832</color>
-	<color name="transport_end">#FF0000</color>
+	<color name="transport_stop">#960000FF</color>
+	<color name="transport_int">#9632C832</color>
+	<color name="transport_end">#96FF0000</color>
 
 	<color name="osm_create">#00FF00</color> <!-- standard GREEN -->
 	<color name="osm_modify">#FF00FF</color> <!-- standard MAGENTA -->
 	<color name="osm_delete">#FF0000</color> <!-- standard RED -->
 
-	<color name="osmbug_opened">#FF0000</color> <!-- standard RED -->
-	<color name="osmbug_closed">#00FF00</color> <!-- standard GREEN -->
+	<color name="osmbug_opened">#C8FF0000</color> <!-- standard RED -->
+	<color name="osmbug_closed">#C800FF00</color> <!-- standard GREEN -->
 	
 </resources>

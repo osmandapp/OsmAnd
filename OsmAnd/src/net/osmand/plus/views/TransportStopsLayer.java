@@ -35,7 +35,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 
 		pointAltUI = new Paint();
 		pointAltUI.setColor(view.getResources().getColor(R.color.transport_stop));
-		pointAltUI.setAlpha(150);
 		pointAltUI.setAntiAlias(true);
 	}
 	
