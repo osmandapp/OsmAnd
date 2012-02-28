@@ -1,13 +1,17 @@
 package net.osmand.plus.render;
 
 
+import org.apache.commons.logging.Log;
+
+import net.osmand.LogUtil;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import android.graphics.Bitmap;
 
 public class NativeOsmandLibrary {
-
+	private static final Log log = LogUtil.getLog(NativeOsmandLibrary.class);
+	
 	private static NativeOsmandLibrary library;
 	private static Boolean isNativeSupported = null;
 
@@ -16,12 +20,18 @@ public class NativeOsmandLibrary {
 			synchronized (NativeOsmandLibrary.class) {
 				if (!isLoaded()) {
 					try {
-						System.loadLibrary("libstlport_shared");
+						log.debug("Loading native stlport_shared..."); //$NON-NLS-1$
+						System.loadLibrary("stlport_shared");
+						log.debug("Loading native osmand..."); //$NON-NLS-1$
 						System.loadLibrary("osmand");
+						log.debug("Creating NativeOsmandLibrary instance..."); //$NON-NLS-1$
 						library = new NativeOsmandLibrary();
+						log.debug("Initializing rendering rules storage..."); //$NON-NLS-1$
 						NativeOsmandLibrary.initRenderingRulesStorage(storage);
 						isNativeSupported = true;
+						log.debug("Native library loaded successfully"); //$NON-NLS-1$
 					} catch (Throwable e) {
+						log.error("Failed to load native library", e); //$NON-NLS-1$
 						isNativeSupported = false;
 					}
 					

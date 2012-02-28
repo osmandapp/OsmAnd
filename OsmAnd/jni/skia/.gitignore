@@ -1,0 +1,5 @@
+*
+!.gitignore
+!.gclient
+!Android.mk
+!FakeHost.mk
