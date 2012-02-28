@@ -40,7 +40,7 @@ bear_left == ['serrez à gauche '].
 route_new_calc(Dist) == ['L itinéraire fait  ', D] :- distance(Dist) == D.
 route_recalc(Dist) == ['recalcul de l itinéraire, l itinéraire fait ', D] :- distance(Dist) == D.
 
-location_lost == ['g p s signal lost '].
+location_lost == ['signal g p s perdu '].
 
 
 %% 
