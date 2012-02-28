@@ -31,17 +31,20 @@ public class GPXLayer extends OsmandMapLayer {
 	
 	private void initUI() {
 		paint = new Paint();
-		paint.setColor(view.getResources().getColor(R.color.gpx_track));
+		if (view.getSettings().FLUORESCENT_OVERLAYS.get()) {
+			paint.setColor(view.getResources().getColor(R.color.gpx_track_fluorescent));
+		} else {
+			paint.setColor(view.getResources().getColor(R.color.gpx_track));
+		}
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(14);
 		paint.setAntiAlias(true);
 		paint.setStrokeCap(Cap.ROUND);
 		paint.setStrokeJoin(Join.ROUND);
-		
-		
+
 		path = new Path();
 	}
-	
+
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
@@ -53,6 +56,7 @@ public class GPXLayer extends OsmandMapLayer {
 	
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
+		initUI(); //to change color immediately when needed
 		List<List<WptPt>> points = this.points;
 		if(points.isEmpty()){
 			return;

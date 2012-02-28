@@ -181,7 +181,6 @@
 	<string name="poi_filter_by_name">Név szerinti keresés</string>
 	<string name="old_poi_file_should_be_deleted">A(z) \'%1$s\' POI adat fájl fölösleges és törölhető.</string>
 	<string name="update_poi_file_not_found">A POI változások tárolásához nem található és nem hozható létre helyi fájl.</string>
-	<string name="update_poi_does_not_change_indexes">POI-k változtatásai helyileg tárolódnak, a letöltött térképadatok nem változnak.</string>
 
 	<string name="button_upgrade_osmandplus">Osmand+ frissítése</string>
 	<string name="map_version_changed_info">A szerveren található térképek nem kompatibilisek az OsmAnd ezen verziójával. Letöltésükhöz és használatukhoz frissíteni kell az alkalmazást.</string>

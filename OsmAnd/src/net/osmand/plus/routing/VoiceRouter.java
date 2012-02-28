@@ -12,11 +12,10 @@ import android.location.Location;
 
 
 public class VoiceRouter {
-	// 0 - unknown, 1 - notify to prepare, 2 - notify to turn in , 3 - notify to turn
 	private final int STATUS_UNKNOWN = 0;
-	private final int STATUS_3000_PREPARE = 1;
-	private final int STATUS_800_PREPARE = 2;
-	private final int STATUS_200_TURN = 3;
+	private final int STATUS_LONG_PREPARE = 1;
+	private final int STATUS_PREPARE = 2;
+	private final int STATUS_TURN_IN = 3;
 	private final int STATUS_TURN = 4;
 	private final int STATUS_TOLD = 5;
 	
@@ -35,8 +34,8 @@ public class VoiceRouter {
 	// Speed in m/s 
 	protected float DEFAULT_SPEED = 12;
 		
-	protected int PREPARE_LONG_DISTANCE_ST = 2500;
-	protected int PREPARE_LONG_DISTANCE_END = 3200;
+	protected int PREPARE_LONG_DISTANCE = 3000;
+	protected int PREPARE_LONG_DISTANCE_END = 2000;
 	
 	protected int PREPARE_DISTANCE = 0;
 	protected int PREPARE_DISTANCE_END = 0;
@@ -123,15 +122,7 @@ public class VoiceRouter {
 	
 	
 	private void nextStatusAfter(int previousStatus){
-//		if(previousStatus == STATUS_TURN){
-//			this.currentStatus = STATUS_TOLD;
-//		} else if(previousStatus == STATUS_200_TURN){
-//			this.currentStatus = STATUS_TURN;
-//		} else if(previousStatus == STATUS_800_PREPARE){
-//			this.currentStatus = STATUS_200_TURN;
-//		} else if(previousStatus == STATUS_3000_PREPARE){
-//			this.currentStatus = STATUS_800_PREPARE;
-//		} else
+		//STATUS_UNKNOWN=0 -> STATUS_LONG_PREPARE=1 -> STATUS_PREPARE=2 -> STATUS_TURN_IN=3 -> STATUS_TURN=4 -> STATUS_TOLD=5
 		if(previousStatus != STATUS_TOLD){
 			this.currentStatus = previousStatus + 1;
 		} else {
@@ -148,10 +139,11 @@ public class VoiceRouter {
 	 * @param currentLocation 
 	 */
 	protected void updateStatus(Location currentLocation, boolean makeUturnWhenPossible){
-		// directly after turn (go - ahead dist)
-		// < 800m prepare
-		// < 200m turn in
-		// < 50m turn
+		//   Directly after turn:             goAhead (dist), unless:
+		// < PREPARE_LONG_DISTANCE (~3000m):  playPrepareTurn
+		// < PREPARE_DISTANCE       (~730m):  playPrepareTurn
+		// < TURN_IN_DISTANCE       (~330m):  playMakeTurnIn
+		// < TURN_DISTANCE           (~60m):  playMakeTurn
 		float speed = DEFAULT_SPEED;
 		if(currentLocation != null && currentLocation.hasSpeed()){
 			speed = Math.max(currentLocation.getSpeed(), speed);
@@ -201,40 +193,36 @@ public class VoiceRouter {
 		
 		RouteDirectionInfo nextNext = router.getNextNextRouteDirectionInfo();
 		if(statusNotPassed(STATUS_TURN) && isDistanceLess(speed, dist, TURN_DISTANCE)){
-			if(/*isDistanceLess(speed, next.distance, TURN_DISTANCE) || */next.distance < TURN_IN_DISTANCE_END) {
-				playMakeTurnRightNow(next, nextNext);
+			if(next.distance < TURN_IN_DISTANCE_END) {
+				playMakeTurn(next, nextNext);
 			} else {
-				playMakeTurnRightNow(next, null);
+				playMakeTurn(next, null);
 			}
 			nextStatusAfter(STATUS_TURN);
-		} else if(statusNotPassed(STATUS_200_TURN) && isDistanceLess(speed, dist, TURN_IN_DISTANCE)){
+		} else if (statusNotPassed(STATUS_TURN_IN) && isDistanceLess(speed, dist, TURN_IN_DISTANCE)){
 			if (dist >= TURN_IN_DISTANCE_END) {
 				if(isDistanceLess(speed, next.distance, TURN_DISTANCE) || next.distance < TURN_IN_DISTANCE_END) {
-					playMakeTurnInShortDistance(next, dist, nextNext);
+					playMakeTurnIn(next, dist, nextNext);
 				} else {
-					playMakeTurnInShortDistance(next, dist, null);
+					playMakeTurnIn(next, dist, null);
 				}
 			}
-			nextStatusAfter(STATUS_200_TURN);
-		} else if (statusNotPassed(STATUS_800_PREPARE) && isDistanceLess(speed, dist, PREPARE_DISTANCE)) {
+			nextStatusAfter(STATUS_TURN_IN);
+		} else if (statusNotPassed(STATUS_PREPARE) && isDistanceLess(speed, dist, PREPARE_DISTANCE)) {
 			if (dist >= PREPARE_DISTANCE_END) {
-				playPrepareLongDistanceTurn(next, dist);
+				playPrepareTurn(next, dist);
 			}
-			nextStatusAfter(STATUS_800_PREPARE);
-		} else if(statusNotPassed(STATUS_UNKNOWN)){
-			if (dist >= PREPARE_DISTANCE * 1.3f) {
+			nextStatusAfter(STATUS_PREPARE);
+		} else if (statusNotPassed(STATUS_LONG_PREPARE) && isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE)){
+			if (dist >= PREPARE_LONG_DISTANCE_END) {
+				playPrepareTurn(next, dist);
+			} 
+			nextStatusAfter(STATUS_LONG_PREPARE);
+		} else if (statusNotPassed(STATUS_UNKNOWN)){
+			if (dist >= PREPARE_LONG_DISTANCE && !isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE)) {
 				playGoAhead(dist);
 			}
-			if (dist >= PREPARE_LONG_DISTANCE_END * 1.5f) {
-				nextStatusAfter(STATUS_UNKNOWN);
-			} else {
-				nextStatusAfter(STATUS_3000_PREPARE);
-			}
-		} else if(statusNotPassed(STATUS_3000_PREPARE) && isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE_END)){
-			if (dist >= PREPARE_LONG_DISTANCE_ST) {
-				playPrepareLongDistanceTurn(next, dist);
-			} 
-			nextStatusAfter(STATUS_3000_PREPARE);
+			nextStatusAfter(STATUS_UNKNOWN);
 		}
 	}
 
@@ -245,7 +233,7 @@ public class VoiceRouter {
 		}
 	}
 
-	private void playPrepareLongDistanceTurn(RouteDirectionInfo next, int dist) {
+	private void playPrepareTurn(RouteDirectionInfo next, int dist) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
 			String tParam = getTurnType(next.turnType);
@@ -259,7 +247,7 @@ public class VoiceRouter {
 		}
 	}
 
-	private void playMakeTurnInShortDistance(RouteDirectionInfo next, int dist, RouteDirectionInfo pronounceNextNext) {
+	private void playMakeTurnIn(RouteDirectionInfo next, int dist, RouteDirectionInfo pronounceNextNext) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if (play != null) {
 			String tParam = getTurnType(next.turnType);
@@ -296,7 +284,7 @@ public class VoiceRouter {
 	
 	
 
-	private void playMakeTurnRightNow(RouteDirectionInfo next, RouteDirectionInfo nextNext) {
+	private void playMakeTurn(RouteDirectionInfo next, RouteDirectionInfo nextNext) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
 			String tParam = getTurnType(next.turnType);
