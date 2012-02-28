@@ -1,9 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="tip_recent_changes_0_7_0_t">Changes in 0.7.0 :
-	\n\t- Offline wikipedia data with articles
-	\n\t- Updated maps
-	\n\t- Other small features
+<string name="use_fluorescent_overlays">Usa overlay fluorescenti</string>
+	<string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per mostrare tracce e percorsi</string>
+	<string name="offline_poi_edition">Editing offline dei PDI</string>
+	<string name="offline_poi_edition_descr">Usa sempre l\'editing offline dei PDI</string>
+
+	<string name="tip_recent_changes_0_7_1_t">Cambiamenti nella versione 0.7.1 :
+\n\t- Editing offline dei PDI
+\n\t- Opzione per il Live Tracking - invia le coordinate periodicamente ad un servizio web (guarda come impostare il tuo servizio personale negli articoli dell'HowTo)
+\n\t- Mostra sulla mappa la traccia registrata
+\n\t- Individuazione della direzione: \'Esegui una svolta ad U\' è indicato e annunciato quando ci si dirige in direzione opposta o dopo aver sbagliato una svolta
+\n\t- Nuovo avviso vocale \'Ricalcolo percorso\'
+\n\t- Indicazione visiva di una svolta imminente entro 100 metri tramite il cambio del colore della freccia della direzione
+\n\t- Viene mostrato in verde e blu scuro nella schermata di Download l\'età dei file di indice disattivati
+\n\t- Altri cambiamenti
+	</string>
+
+	<string name="update_poi_does_not_change_indexes">I cambiamenti dei PDI all\'interno dell\'applicazione non si riflettono nelle mappe scaricate, i cambiamenti sono salvati in un file locale.</string>
+	<string name="local_openstreetmap_uploading_poi">Caricando i PDI...</string>
+	<string name="local_openstreetmap_poi_were_uploaded">{0} PDI sono stati caricati</string>
+	<string name="local_openstreetmap_uploadall">Carica tutti i PDI</string>
+	<string name="local_openstreetmap_items"></string>
+	<string name="local_openstreetmap_show_poi">Modifica il PDI sulla mappa</string>
+	<string name="local_openstreetmap_upload">Carica in OSM la modifica</string>
+	<string name="local_openstreetmap_delete">Cancella la modifica al PDI</string>
+	<string name="local_openstreetmap_descr_title">Modifica asincrona dei PDI OSM:</string>
+	<string name="local_openstreetmap_settings">Nodi OSM salvati in locale</string>
+	<string name="local_openstreetmap_settings_descr">Mostra e gestisci i nodi OSM inseriti nel database locale</string>
+
+	<string name="live_monitoring_descr">Abilita l\'invio di richieste HTTP ad un specifico servizio web</string>
+	<string name="live_monitoring">Abilita il Live Tracking</string>
+	<string name="live_monitoring_interval_descr">Specifica l\'intervallo del Live Tracking</string>
+	<string name="live_monitoring_interval">Intervallo del Live Tracking</string>
+	<string name="live_monitoring_url_descr">Specifica l'indirizzo internet per il Live Tracking con la sintassi dei parametri : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+	<string name="live_monitoring_url">Indirizzo internet per il Live Tracking</string>
+	<string name="gpx_monitoring_disabled_warn">Abilita \'Log della traccia in GPX\' nelle impostazioni di Tracking</string>
+	<string name="show_current_gpx_title">Mostra la traccia corrente</string>
+	<string name="tip_recent_changes_0_7_0_t">Cambiamenti nella versione 0.7.0 :
+	\n\t- Articoli di Wikipedia accessibili offline
+	\n\t- Aggiornate le mappe
+	\n\t- Altre feature minori
 	</string>    
 	<string name="free_version_message">Questa versione gratuita di OsmAnd è limitata a %1$ download %2$ e non supporta gli articoli offline di Wikipedia.</string>
 	<string name="free_version_title">Versione gratuita</string>
