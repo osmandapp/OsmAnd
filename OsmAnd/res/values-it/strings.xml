@@ -166,7 +166,6 @@
 	<string name="poi_filter_by_name">Ricerca per nome</string>
 	<string name="old_poi_file_should_be_deleted">Il file dati PDI \'%1$s\' non è più in uso e può essere cancellato.</string>
 	<string name="update_poi_file_not_found">File per registrare i cambiamenti ai PDI non è stato trovato nè creato.</string>
-	<string name="update_poi_does_not_change_indexes">Cambiare PDI nell\'applicazione non modifica i file scaricati, ma le modifiche sono salvate in un file apposito.</string>
 
 	<string name="button_upgrade_osmandplus">Aggiorna Osmand+</string>
 	<string name="map_version_changed_info">Sul server ci sono file di mappa incompatibili con l\'attuale versione utilizzata. Per scaricarli ed utilizzarli aggiorna l\'applicazione.</string>
