@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.nio.ByteBuffer;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
@@ -199,7 +200,8 @@ public class OsmandRenderer {
 	 * @return if map could be replaced
 	 */
 	public void generateNewBitmapNative(RenderingContext rc, NativeOsmandLibrary library, 
-			NativeSearchResult searchResultHandler, Bitmap bmp, boolean useEnglishNames,
+			NativeSearchResult searchResultHandler, 
+			Bitmap bmp, boolean useEnglishNames,
 			RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList, int defaultColor) {
 		long now = System.currentTimeMillis();
 		if (rc.width > 0 && rc.height > 0 && searchResultHandler != null) {
@@ -213,13 +215,20 @@ public class OsmandRenderer {
 					final Handler h = new Handler(Looper.getMainLooper());
 					notifyListenersWithDelay(rc, notifyList, h);
 				}
-				String res = library.generateRendering(rc, searchResultHandler, bmp, useEnglishNames, render, defaultColor);
+				final NativeOsmandLibrary.RenderingGenerationResult res = library.generateRendering(rc, searchResultHandler,
+					bmp.getWidth(), bmp.getHeight(), bmp.hasAlpha(),
+					useEnglishNames, render, defaultColor);
 				rc.ended = true;
 				notifyListeners(notifyList);
 				long time = System.currentTimeMillis() - now;
 				rc.renderingDebugInfo = String.format("Rendering: %s ms  (%s text)\n"
-						+ "(%s points, %s points inside, %s of %s objects visible)\n" + res,//$NON-NLS-1$
+						+ "(%s points, %s points inside, %s of %s objects visible)\n" + res.debugMessage,//$NON-NLS-1$
 						time, rc.textRenderingTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
+				
+				if(res.bitmapArray != null) {
+					final ByteBuffer bitmapByteBuffer = ByteBuffer.wrap(res.bitmapArray);
+					bmp.copyPixelsFromBuffer(bitmapByteBuffer);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

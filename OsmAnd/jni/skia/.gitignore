@@ -1,3 +1,6 @@
-android
-trunk
-.gclient_entries
+*
+!.gitignore
+!.gclient
+!Android.mk
+!FakeHost.mk
+!FontHostConfiguration_android.cpp

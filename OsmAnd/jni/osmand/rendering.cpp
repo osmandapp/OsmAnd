@@ -698,14 +698,25 @@ void loadJNIRendering(){
 #ifdef __cplusplus
 extern "C" {
 #endif
-JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_generateRendering( JNIEnv* ienv,
-		jobject obj, jobject renderingContext, jint searchResult, jobject bmpObj,
+JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_generateRendering( JNIEnv* ienv, jobject obj,
+		jobject renderingContext, jint searchResult, jint requestedBitmapWidth, jint requestedBitmapHeight, jboolean isTransparent, 
 		jboolean useEnglishNames, jobject renderingRuleSearchRequest, jint defaultColor) {
 	setGlobalEnv(ienv);
-	SkBitmap* bmp = getNativeBitmap(bmpObj);
-	sprintf(debugMessage, "Image w:%d h:%d !", bmp->width(), bmp->height());
+	
+	sprintf(debugMessage, "Creating SkBitmap in native w:%d h:%d!", requestedBitmapWidth, requestedBitmapHeight);
 	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
-	SkCanvas* canvas = new SkCanvas(*bmp);
+	
+	SkBitmap* bitmap = new SkBitmap();
+	if(isTransparent == JNI_TRUE)
+		bitmap->setConfig(SkBitmap::kARGB_8888_Config, requestedBitmapWidth, requestedBitmapHeight);
+	else
+		bitmap->setConfig(SkBitmap::kRGB_565_Config, requestedBitmapWidth, requestedBitmapHeight);
+	bitmap->allocPixels();
+	
+	sprintf(debugMessage, "Allocated %d bytes!", bitmap->getSize());
+	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
+	
+	SkCanvas* canvas = new SkCanvas(*bitmap);
 	canvas->drawColor(defaultColor);
 
 	SkPaint* paint = new SkPaint;
@@ -714,13 +725,12 @@ JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 	watcher initObjects;
 	initObjects.start();
 
-	RenderingRuleSearchRequest* req =  initSearchRequest(renderingRuleSearchRequest);
+	RenderingRuleSearchRequest* req = initSearchRequest(renderingRuleSearchRequest);
     RenderingContext rc;
     copyRenderingContext(renderingContext, &rc);
     rc.useEnglishNames = useEnglishNames;
     SearchResult* result = ((SearchResult*) searchResult);
 //    std::vector <BaseMapDataObject* > mapDataObjects = marshalObjects(binaryMapDataObjects);
-
 
     __android_log_print(ANDROID_LOG_WARN, "net.osmand", "Rendering image");
     initObjects.pause();
@@ -735,19 +745,43 @@ JNIEXPORT jstring JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 
     mergeRenderingContext(renderingContext, &rc);
     __android_log_print(ANDROID_LOG_WARN, "net.osmand", "End Rendering image");
+	
+	// Create byte array
+	jbyteArray bitmapByteArray = ienv->NewByteArray(bitmap->getSize());
+	ienv->SetByteArrayRegion(bitmapByteArray, 0, bitmap->getSize(), (jbyte*)bitmap->getPixels());
 
     // delete  variables
     delete paint;
     delete canvas;
     delete req;
+	delete bitmap;
 //    deleteObjects(mapDataObjects);
+
+	jclass resultClass = ienv->FindClass("net/osmand/plus/render/NativeOsmandLibrary$RenderingGenerationResult");
+	if(!resultClass)
+		resultClass = ienv->FindClass("net/osmand/render/NativeOsmandLibrary$RenderingGenerationResult");
+	sprintf(debugMessage, "Result class = %p", resultClass);
+	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
+	
+	/* Get the method ID for the String(char[]) constructor */
+	jmethodID resultClassCtorId = ienv->GetMethodID(resultClass, "<init>", "([BLjava/lang/String;)V");
+	
+	sprintf(debugMessage, "Result class ctor = %p", resultClassCtorId);
+	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
 
 #ifdef DEBUG_NAT_OPERATIONS
     sprintf(debugMessage, "Native ok (init %d, native op %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
 #else
     sprintf(debugMessage, "Native ok (init %d, rendering %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
 #endif
-	return globalEnv()->NewStringUTF( debugMessage);
+	
+	/* Construct a result object */
+	jobject resultObject = ienv->NewObject(resultClass, resultClassCtorId, bitmapByteArray, globalEnv()->NewStringUTF(debugMessage));
+
+	/* Free local references */
+	ienv->DeleteLocalRef(bitmapByteArray);
+	ienv->DeleteLocalRef(resultClass);
+	return resultObject;
 }
 
 #ifdef __cplusplus

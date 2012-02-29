@@ -1077,69 +1077,78 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.map_show_settings:
+		final int itemId = item.getItemId();
+		if (itemId == R.id.map_show_settings) {
 			final Intent intentSettings = new Intent(MapActivity.this,
 					SettingsActivity.class);
 			startActivity(intentSettings);
 			return true;
-		case R.id.map_where_am_i:
+		} else if (itemId == R.id.map_where_am_i) {
 			backToLocationImpl();
 			return true;
-		case R.id.map_show_gps_status:
+		} else if (itemId == R.id.map_show_gps_status) {
 			startGpsStatusIntent();
 			return true;
-		case R.id.map_get_directions:
-			if(routingHelper.isRouteCalculated()){
+		} else if (itemId == R.id.map_get_directions) {
+			if (routingHelper.isRouteCalculated()) {
 				mapActions.aboutRoute();
 			} else {
 				Location loc = getLastKnownLocation();
 				if (loc != null) {
-					mapActions.getDirections(loc.getLatitude(), loc.getLongitude(), true);
+					mapActions.getDirections(loc.getLatitude(),
+							loc.getLongitude(), true);
 				} else {
-					mapActions.getDirections(mapView.getLatitude(), mapView.getLongitude(), true);
+					mapActions.getDirections(mapView.getLatitude(),
+							mapView.getLongitude(), true);
 				}
 			}
 			return true;
-		case R.id.map_layers:
+		} else if (itemId == R.id.map_layers) {
 			mapLayers.openLayerSelectionDialog(mapView);
 			return true;
-		case R.id.map_specify_point:
+		} else if (itemId == R.id.map_specify_point) {
 			// next 2 lines replaced for Issue 493, replaced by new 3 lines
 			// NavigatePointActivity dlg = new NavigatePointActivity(this);
 			// dlg.showDialog();
-			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
-			// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			Intent newIntent = new Intent(MapActivity.this,
+					SearchActivity.class);
+			// causes wrong position caching:
+			// newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			LatLon mapLoc = getMapLocation();
 			newIntent.putExtra(SearchActivity.SEARCH_LAT, mapLoc.getLatitude());
-			newIntent.putExtra(SearchActivity.SEARCH_LON, mapLoc.getLongitude());
+			newIntent
+					.putExtra(SearchActivity.SEARCH_LON, mapLoc.getLongitude());
 			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(newIntent);
 			return true;
-		case R.id.map_mute:
+		} else if (itemId == R.id.map_mute) {
 			routingHelper.getVoiceRouter().setMute(
 					!routingHelper.getVoiceRouter().isMute());
 			return true;
-		case R.id.map_navigate_to_point:
+		} else if (itemId == R.id.map_navigate_to_point) {
 			if (mapLayers.getNavigationLayer().getPointToNavigate() != null) {
-				if(routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()){
-					routingHelper.setFinalAndCurrentLocation(null, routingHelper.getCurrentLocation(), routingHelper.getCurrentGPXRoute());
+				if (routingHelper.isRouteCalculated()
+						|| routingHelper.isFollowingMode()
+						|| routingHelper.isRouteBeingCalculated()) {
+					routingHelper.setFinalAndCurrentLocation(null,
+							routingHelper.getCurrentLocation(),
+							routingHelper.getCurrentGPXRoute());
 				} else {
 					navigateToPoint(null);
 				}
 			} else {
-			navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
-		}
+				navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
+			}
 			mapView.refreshMap();
 			return true;
-		case R.id.map_show_point_options:
+		} else if (itemId == R.id.map_show_point_options) {
 			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 			return true;
-		case R.id.map_animate_route:
-			//animate moving on route
+		} else if (itemId == R.id.map_animate_route) {
+			// animate moving on route
 			routeAnimation.startStopRouteAnimation(routingHelper, this);
-			return true;			
-		default:
+			return true;
+		} else {
 			return super.onOptionsItemSelected(item);
 		}
 	}
