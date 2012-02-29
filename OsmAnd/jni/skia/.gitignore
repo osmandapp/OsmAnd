@@ -3,3 +3,4 @@
 !.gclient
 !Android.mk
 !FakeHost.mk
+!FontHostConfiguration_android.cpp
