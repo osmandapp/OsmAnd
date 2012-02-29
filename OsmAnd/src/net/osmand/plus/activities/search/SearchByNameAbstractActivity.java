@@ -4,21 +4,22 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-
 import net.osmand.CollatorStringMatcher;
-import net.osmand.LogUtil;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.LogUtil;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import android.app.ListActivity;
+import net.osmand.plus.activities.OsmandListActivity;
+
+import org.apache.commons.logging.Log;
+
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.AsyncTask.Status;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -34,7 +35,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
-public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
+public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity {
 
 	private EditText searchText;
 	private AsyncTask<Object, ?, ?> initializeTask;

@@ -21,6 +21,7 @@ turn(Turn) == M :- turn(Turn, M).
 prepare_make_ut(Dist) == ['Dans ', D, ' préparez vous à faire demi tour'] :- distance(Dist) == D.
 make_ut(Dist) == ['Dans ', D, ' faites demi-tour '] :- distance(Dist) == D.
 make_ut == ['Faites demi-tour '].
+make_ut_wp == ['Faites demi-tour '].
 
 prepare_roundabout(Dist) == ['Préparez vous à entrer dans le rondpoint dans ', D] :- distance(Dist) == D.
 roundabout(Dist, _Angle, Exit) == ['Dans ', D, ' entrez dans le rond-point et prenez la ', E, 'sortie'] :- distance(Dist) == D, nth(Exit, E).
@@ -39,7 +40,7 @@ bear_left == ['serrez à gauche '].
 route_new_calc(Dist) == ['L itinéraire fait  ', D] :- distance(Dist) == D.
 route_recalc(Dist) == ['recalcul de l itinéraire, l itinéraire fait ', D] :- distance(Dist) == D.
 
-location_lost == ['g p s location lost '].
+location_lost == ['g p s signal lost '].
 
 
 %% 

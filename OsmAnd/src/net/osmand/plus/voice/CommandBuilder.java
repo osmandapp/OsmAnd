@@ -22,6 +22,7 @@ public class CommandBuilder {
 	protected static final String C_GO_AHEAD = "go_ahead";  //$NON-NLS-1$
 	protected static final String C_TURN = "turn";  //$NON-NLS-1$
 	protected static final String C_MAKE_UT = "make_ut";  //$NON-NLS-1$
+	protected static final String C_MAKE_UTWP = "make_ut_wp";  //$NON-NLS-1$
 	protected static final String C_PREAMBLE = "preamble";  //$NON-NLS-1$
 	protected static final String C_AND_ARRIVE_DESTINATION = "and_arrive_destination";  //$NON-NLS-1$
 	protected static final String C_THEN = "then";  //$NON-NLS-1$
@@ -95,6 +96,10 @@ public class CommandBuilder {
 		return addCommand(C_GO_AHEAD, dist);
 	}
 	
+	public CommandBuilder makeUTwp(){
+		return addCommand(C_MAKE_UTWP);
+	}
+
 	public CommandBuilder makeUT(){
 		return addCommand(C_MAKE_UT);
 	}

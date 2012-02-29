@@ -1,0 +1,125 @@
+<renderingStyle name="high-contrast-roads-2" depends="default" defaultColor="#F5FFFF" version="1">
+
+	<!--
+		Depends on All-Purpose Renderer (by Hardy Mueller), based on production version 2012-01-04
+	--> 
+
+	<!--
+		Try high contrast roads, suggested by Dirk Sommer: primary = #C00828, seconfary = #FF8000, tertiary = #F0C810
+	--> 
+
+
+	<order>
+	</order>
+
+
+	<text>
+	</text>
+
+
+	<point>
+	</point>
+
+
+	<polygon>
+	</polygon>
+
+
+	<line>
+		<group>
+			<filter tag="highway" value="motorway" maxzoom="13" color="#3838B0"/>
+			<filter tag="highway" value="motorway_link" maxzoom="13" color="#3838B0"/>
+			<filter tag="highway" value="trunk" maxzoom="13" color="#A01060"/>
+			<filter tag="highway" value="trunk_link" maxzoom="13" color="#A01060"/>
+			<groupFilter cap="ROUND">
+				<filter minzoom="5" maxzoom="9" strokeWidth="5"/>
+				<filter minzoom="10" maxzoom="10" strokeWidth="6"/>
+				<filter minzoom="11" maxzoom="11" strokeWidth="7"/>
+				<filter minzoom="12" maxzoom="12" strokeWidth="8"/>
+				<filter minzoom="13" maxzoom="13" strokeWidth="9"/>
+			</groupFilter>
+		</group>
+
+		<group>
+			<filter tag="highway" value="primary" maxzoom="13"/>
+			<filter tag="highway" value="primary_link" maxzoom="13"/>
+			<groupFilter color="#C00828" cap="ROUND">
+				<filter minzoom="7" maxzoom="9" strokeWidth="4"/>
+				<filter minzoom="10" maxzoom="10" strokeWidth="5"/>
+				<filter minzoom="11" maxzoom="11" strokeWidth="6"/>
+				<filter minzoom="12" maxzoom="12" strokeWidth="7"/>
+				<filter minzoom="13" maxzoom="13" strokeWidth="8"/>
+			</groupFilter>
+		</group>
+
+		<group>
+			<filter tag="highway" value="secondary" maxzoom="13"/>
+			<filter tag="highway" value="secondary_link" maxzoom="13"/>
+			<groupFilter color="#FF8000" color_2="#FF8000" shadowRadius="1" cap="ROUND">
+				<filter minzoom="9" maxzoom="9" strokeWidth="3"/>
+				<filter minzoom="10" maxzoom="10" strokeWidth="4"/>
+				<filter minzoom="11" maxzoom="11" strokeWidth="5"/>
+				<filter minzoom="12" maxzoom="12" strokeWidth="6"/>
+				<filter minzoom="13" maxzoom="13" strokeWidth="7"/>
+			</groupFilter>
+		</group>
+
+		<group>
+			<filter tag="highway" value="motorway" color="#3838B0" color_2="#3838B0"/>
+			<filter tag="highway" value="motorway_link" color="#3838B0" color_2="#3838B0"/>
+			<filter tag="highway" value="trunk" color="#A01060" color_2="#A01060"/>
+			<filter tag="highway" value="trunk_link" color="#A01060" color_2="#A01060"/>
+			<filter tag="highway" value="primary" color="#C00828" color_2="#C00828"/>
+			<filter tag="highway" value="primary_link" color="#C00828" color_2="#C00828"/>
+			<filter tag="highway" value="secondary" color="#FF8000" color_2="#FF8000"/>
+			<filter tag="highway" value="secondary_link" color="#FF8000" color_2="#FF8000"/>
+			<groupFilter shadowRadius="1" cap="ROUND">
+				<!-- Bridges -->
+				<filter layer="1" color="#000000" shadowRadius="0" cap="BUTT" cap_2="SQUARE">
+					<filter minzoom="14" maxzoom="15" strokeWidth="14" strokeWidth_2="12"/>
+					<filter minzoom="16" maxzoom="16" strokeWidth="17" strokeWidth_2="15"/>
+					<filter minzoom="17" maxzoom="17" strokeWidth="21" strokeWidth_2="19"/>
+					<filter minzoom="18" strokeWidth="26" strokeWidth_2="24"/>
+					<groupFilter nightMode="true" color="#ffffff"/>
+				</filter>
+				<filter>
+					<filter minzoom="14" maxzoom="14" strokeWidth="10"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth="12"/>
+					<filter minzoom="16" maxzoom="16" strokeWidth="15"/>
+					<filter minzoom="17" maxzoom="17" strokeWidth="19"/>
+					<filter minzoom="18" strokeWidth="24"/>
+					<groupFilter layer="-1" pathEffect="4_4" cap="BUTT"/>
+				</filter>
+			</groupFilter>
+		</group>
+
+		<group>
+			<filter tag="highway" value="tertiary"/>
+			<filter tag="highway" value="tertiary_link"/>
+			<groupFilter color="#F0C810" color_2="#F0C810" shadowRadius="1" cap="ROUND">
+				<filter minzoom="10" maxzoom="10" strokeWidth="3"/>
+				<filter minzoom="11" maxzoom="11" strokeWidth="4"/>
+				<filter minzoom="12" maxzoom="12" strokeWidth="5"/>
+				<filter minzoom="13" maxzoom="13" strokeWidth="6"/>
+				<!-- Bridges --> 
+				<filter layer="1" color="#000000" shadowRadius="0" cap="BUTT" cap_2="SQUARE">
+					<filter minzoom="13" maxzoom="14" strokeWidth="8" strokeWidth_2="6"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth="10" strokeWidth_2="8"/>
+					<filter minzoom="16" maxzoom="16" strokeWidth="12" strokeWidth_2="10"/>
+					<filter minzoom="17" maxzoom="17" strokeWidth="15" strokeWidth_2="13"/>
+					<filter minzoom="18" strokeWidth="20" strokeWidth_2="18"/>
+					<groupFilter nightMode="true" color="#ffffff"/>
+			 	</filter>
+				<filter>
+					<filter minzoom="14" maxzoom="14" strokeWidth="6"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth="8"/>
+					<filter minzoom="16" maxzoom="16" strokeWidth="10"/>
+					<filter minzoom="17" maxzoom="17" strokeWidth="13"/>
+					<filter minzoom="18" strokeWidth="18"/>
+					<groupFilter layer="-1" pathEffect="4_4" cap="BUTT"/>
+				</filter>
+			</groupFilter>
+		</group>
+
+	</line>
+</renderingStyle>

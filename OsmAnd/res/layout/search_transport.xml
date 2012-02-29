@@ -2,7 +2,6 @@
 <!-- This file is at /res/layout/list.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/RootLayout"
-    style="@style/WhiteText"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
@@ -27,7 +26,6 @@
 
         <TextView
             android:id="@+id/SearchAreaText"
-            style="@style/WhiteText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="" />
@@ -45,8 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_below="@+id/listView"
-            android:cacheColorHint="@color/activity_background"
-            android:divider="@drawable/tab_text_separator" >
+            style="@style/OsmandListView">
         </ListView>
 
         <ListView
@@ -54,8 +51,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true" 
-            android:cacheColorHint="@color/activity_background"
-            android:divider="@drawable/tab_text_separator" >
+            style="@style/OsmandListView" >
         </ListView>
     </RelativeLayout>
 

@@ -21,6 +21,7 @@ turn(Turn) == M :- turn(Turn, M).
 prepare_make_ut(Dist) == ['Za ', D, ' zawróć'] :- distance(Dist) == D.
 make_ut(Dist) ==  ['Za ', D, ' zawróć'] :- distance(Dist) == D.
 make_ut == ['Zawróć '].
+make_ut_wp == ['Zawróć '].
 
 prepare_roundabout(Dist) == ['Za ', D, ' wjedź na rondo'] :- distance(Dist) == D.
 roundabout(Dist, _Angle, Exit) == ['Za ', D, ' wjedź na rondo ', E, 'wyjazd'] :- distance(Dist) == D, nth(Exit, E).
@@ -39,7 +40,7 @@ bear_left == ['trzymaj się lewej '].
 route_new_calc(Dist) == ['Długość trasy to ', D] :- distance(Dist) == D.
 route_recalc(Dist) == ['Wyznaczam nową trasę , długość trasy to ', D] :- distance(Dist) == D.
 
-location_lost == ['g p s location lost '].
+location_lost == ['g p s signal lost '].
 
 
 %% 

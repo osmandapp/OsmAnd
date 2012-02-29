@@ -1,5 +1,8 @@
 package net.osmand.binary;
 
+
+import gnu.trove.list.array.TIntArrayList;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,14 +16,19 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.MapRoot;
+import net.osmand.binary.BinaryMapIndexReader.SearchFilter;
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.data.Building;
 import net.osmand.data.City;
+import net.osmand.data.MapObject;
 import net.osmand.data.Street;
+import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 
 import com.google.protobuf.CodedOutputStream;
@@ -56,6 +64,65 @@ public class BinaryInspector {
 	private static void print(String s) {
 		System.out.print(s);
 	}
+	
+	protected static class VerboseInfo {
+		boolean vaddress;
+		boolean vtransport;
+		boolean vpoi;
+		boolean vmap;
+		double lattop = 85;
+		double latbottom = -85;
+		double lonleft = -180;
+		double lonright = 180;
+		int zoom = 15;
+		
+		public boolean isVaddress() {
+			return vaddress;
+		}
+		
+		public int getZoom() {
+			return zoom;
+		}
+		
+		public boolean isVmap() {
+			return vmap;
+		}
+		public boolean isVpoi() {
+			return vpoi;
+		}
+		
+		public boolean isVtransport() {
+			return vtransport;
+		}
+		
+		public VerboseInfo(String[] params){
+			for(int i=0;i<params.length;i++){
+				if(params[i].equals("-vaddress")){
+					vaddress = true;
+				} else if(params[i].equals("-vmap")){
+					vmap = true;
+				} else if(params[i].equals("-vpoi")){
+					vpoi = true;
+				} else if(params[i].equals("-vtransport")){
+					vtransport = true;
+				} else if(params[i].startsWith("-zoom=")){
+					zoom = Integer.parseInt(params[i].substring("-zoom=".length()));
+				} else if(params[i].startsWith("-bbox=")){
+					String[] values = params[i].substring("-bbox=".length()).split(",");
+					lonleft = Double.parseDouble(values[0]);
+					lattop = Double.parseDouble(values[1]);
+					lonright = Double.parseDouble(values[2]);
+					latbottom = Double.parseDouble(values[3]);
+				}
+			}
+		}
+		
+		public boolean contains(MapObject o){
+			return lattop >= o.getLocation().getLatitude() && latbottom >= o.getLocation().getLatitude()
+					&& lonleft <= o.getLocation().getLongitude() && lonright >= o.getLocation().getLongitude();
+			
+		}
+	}
 
 	public static void inspector(String[] args) throws IOException {
 		if(args == null || args.length == 0){
@@ -63,10 +130,10 @@ public class BinaryInspector {
 			return;
 		}
 		String f = args[0];
-		if(f.charAt(0) == '-'){
+		if (f.charAt(0) == '-') {
 			// command
-			if(f.equals("-c") || f.equals("-combine")) {
-				if(args.length < 4){
+			if (f.equals("-c") || f.equals("-combine")) {
+				if (args.length < 4) {
 					printUsage("Too few parameters to extract (require minimum 4)");
 				} else {
 					Map<File, String> parts = new LinkedHashMap<File, String>();
@@ -77,29 +144,30 @@ public class BinaryInspector {
 							return;
 						}
 						parts.put(file, null);
-						if(i < args.length - 1){
-							if(args[i+1].startsWith("-") || args[i+1].startsWith("+")){
-								parts.put(file, args[i+1]);
+						if (i < args.length - 1) {
+							if (args[i + 1].startsWith("-") || args[i + 1].startsWith("+")) {
+								parts.put(file, args[i + 1]);
 								i++;
-							} 
+							}
 						}
 					}
 					List<Float> extracted = combineParts(new File(args[1]), parts);
-					if(extracted != null){
-						println("\n"+extracted.size()+" parts were successfully extracted to " + args[1]);
+					if (extracted != null) {
+						println("\n" + extracted.size() + " parts were successfully extracted to " + args[1]);
 					}
-				} 
-			} else if (f.equals("-v")) {
+				}
+			} else if (f.startsWith("-v")) {
 				if (args.length < 2) {
 					printUsage("Missing file parameter");
 				} else {
-					printFileInformation(args[1],true);
+					VerboseInfo vinfo = new VerboseInfo(args);
+					printFileInformation(args[args.length - 1], vinfo);
 				}
 			} else {
-				printUsage("Unknown command : "+ f);
+				printUsage("Unknown command : " + f);
 			}
 		} else {
-			printFileInformation(f,false);
+			printFileInformation(f, null);
 		}
 	}
 	public static final void writeInt(CodedOutputStream ous, int v) throws IOException {
@@ -297,7 +365,7 @@ public class BinaryInspector {
 		return format.format(new Object[]{l, t, r, b}); 
 	}
 	
-	public static void printFileInformation(String fileName,boolean verbose) throws IOException {
+	public static void printFileInformation(String fileName,VerboseInfo verbose) throws IOException {
 		File file = new File(fileName);
 		if(!file.exists()){
 			println("Binary OsmAnd index " + fileName + " was not found.");
@@ -306,7 +374,25 @@ public class BinaryInspector {
 		printFileInformation(file,verbose);
 	}
 	
-	public static void printFileInformation(File file, boolean verbose) throws IOException {
+	private static void formatPoint(BinaryMapDataObject o, int ind, StringBuilder b){
+		b.append((float)MapUtils.get31LongitudeX(o.getPoint31XTile(ind))).append(",").append((float)MapUtils.get31LatitudeY(o.getPoint31YTile(ind)));
+	}
+	
+	
+	private static void formatTags(BinaryMapDataObject o, StringBuilder b){
+		for (int i = 0; i < o.getTypes().length; i++) {
+			if (i > 0) {
+				b.append(", ");
+			}
+			b.append(o.getTagValue(i).tag + "=" + o.getTagValue(i).value);
+			if ((o.getTypes()[i] & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
+				b.append("(multipolygon)");
+			}
+		}
+		
+	}
+
+	public static void printFileInformation(File file, VerboseInfo verbose) throws IOException {
 		RandomAccessFile r = new RandomAccessFile(file.getAbsolutePath(), "r");
 		try {
 			BinaryMapIndexReader index = new BinaryMapIndexReader(r);
@@ -339,31 +425,73 @@ public class BinaryInspector {
 								formatBounds(mi.getLeft(), mi.getRight(), mi.getTop(), mi.getBottom()), 
 								i, j++));
 					}
-				} else if (p instanceof AddressRegion && verbose) {
+					if((verbose != null && verbose.isVmap())){
+						final StringBuilder b = new StringBuilder();
+						SearchRequest<BinaryMapDataObject> req = BinaryMapIndexReader.buildSearchRequest(MapUtils.get31TileNumberX(verbose.lonleft),
+								MapUtils.get31TileNumberX(verbose.lonright),
+								MapUtils.get31TileNumberY(verbose.lattop),
+								MapUtils.get31TileNumberY(verbose.latbottom), verbose.getZoom(),
+								new SearchFilter() {
+									@Override
+									public boolean accept(TIntArrayList types, MapIndex index) {
+										return true;
+									}
+								},
+								new ResultMatcher<BinaryMapDataObject>() {
+									@Override
+									public boolean publish(BinaryMapDataObject object) {
+										boolean way = object.getPointsLength() > 1;
+										b.setLength(0);
+										b.append(way ? "Way " : "Point ");
+										if(object.getName() != null){
+											b.append(object.getName());
+										}
+										b.append(" ").append((object.getId() >> 1)).append(" ");
+										formatTags(object, b);
+										b.append("   ");
+										for (int i = 0; i < object.getPointsLength(); i++) {
+											b.append(" ");
+											formatPoint(object, i, b);
+										}
+										println(b.toString());
+										return false;
+									}
+									@Override
+									public boolean isCancelled() {
+										return false;
+									}
+								});
+						index.searchMapIndex(req);
+					}
+				} else if (p instanceof AddressRegion && (verbose != null && verbose.isVaddress())) {
 					for(String region : index.getRegionNames()){
 						println("\tRegion:" + region);
 						for (City c : index.getCities(region, null)) {
 							index.preloadStreets(c, null);
-							println("\t\tCity:" + c.getName());
+							println("\t\tCity:" + c.getName() + getId(c));
 							for (Street t : c.getStreets()) {
-								print("\t\t\t" + t.getName());
-								index.preloadBuildings(t, null);
-								List<Building> buildings = t.getBuildings();
-								if (buildings != null && !buildings.isEmpty()) {
-									print(" (");
-									for (Building b : buildings) {
-										print(b.getName() + ",");
+								if (verbose.contains(t)) {
+									print("\t\t\t" + t.getName() + getId(t));
+									index.preloadBuildings(t, null);
+									List<Building> buildings = t.getBuildings();
+									if (buildings != null && !buildings.isEmpty()) {
+										print("\t\t\t\t (");
+										for (Building b : buildings) {
+											print(b.getName() + ",");
+										}
+										print(")");
 									}
-									print(")");
+									println("");
 								}
-								println("");
 							}
 						}
 						for (City c : index.getVillages(region, null,null,false)) {
-							index.preloadStreets(c, null);
-							println("\t\tVillage:" + c.getName());
-							for (Street t : c.getStreets()) {
-								println("\t\t\t" + t.getName());	
+							if (verbose.contains(c)) {
+								index.preloadStreets(c, null);
+								println("\t\tVillage:" + c.getName() + getId(c));
+								for (Street t : c.getStreets()) {
+									println("\t\t\t" + t.getName() + getId(t));
+								}
 							}
 						}
 					}
@@ -378,6 +506,10 @@ public class BinaryInspector {
 		}
 		
 	}
+	
+	private static String getId(MapObject o ){
+		return " " + (o.getId() >> 1);
+	}
 
 	public static void printUsage(String warning) {
 		if(warning != null){
@@ -385,9 +517,9 @@ public class BinaryInspector {
 		}
 		println("Inspector is console utility for working with binary indexes of OsmAnd.");
 		println("It allows print info about file, extract parts and merge indexes.");
-		println("\nUsage for print info : inspector [-v] [file]");
+		println("\nUsage for print info : inspector [-vaddress] [-vmap] [-vpoi] [-vtransport] [-zoom=Zoom] [-bbox=LeftLon,TopLat,RightLon,BottomLan] [file]");
 		println("  Prints information about [file] binary index of OsmAnd.");
-		println("  -v more verbouse output (like all cities and their streets)");
+		println("  -v.. more verbouse output (like all cities and their streets or all map objects with tags/values and coordinates)");
 		println("\nUsage for combining indexes : inspector -c file_to_create (file_from_extract ((+|-)parts_to_extract)? )*");
 		println("\tCreate new file of extracted parts from input file. [parts_to_extract] could be parts to include or exclude.");
 		println("  Example : inspector -c output_file input_file +1,2,3\n\tExtracts 1, 2, 3 parts (could be find in print info)");

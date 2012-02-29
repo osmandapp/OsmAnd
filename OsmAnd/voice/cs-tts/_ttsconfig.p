@@ -34,6 +34,8 @@ turn(Turn) == M :- turn(Turn, M).
 prepare_make_ut(Dist) == ['po', D, 'se budete otáčet zpět'] :- distance(Dist,locative) == D.
 make_ut(Dist) == ['po', D, 'se otočte zpět'] :- distance(Dist,locative) == D.
 make_ut == ['otočte se zpět'].
+make_ut_wp == ['vraťte se, jakmile to bude možné'].
+
 
 prepare_roundabout(Dist) == ['po', D, 'přijedete na kruhový objezd'] :- distance(Dist,locative) == D.
 roundabout(Dist, _Angle, Exit) == ['po', D, 'vjeďte na kruhový objezd', 'a zvolte', E, 'výjezd'] :- distance(Dist,locative) == D, nth(Exit, nominative, E).
@@ -53,7 +55,7 @@ bear_left == ['držte se vlevo'].
 route_new_calc(Dist) == ['cesta je dlouhá', D] :- distance(Dist,accusative) == D.
 route_recalc(Dist) == ['přepočítávám', D] :- distance(Dist,accusative) == D.
 
-location_lost == ['g p s location lost '].
+location_lost == ['Ztráta družicového signálu'].
 
 
 %% 

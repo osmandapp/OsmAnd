@@ -21,6 +21,32 @@
 	<string name="tip_Distance_Measurement">Creating Plans and Measuring distances</string>
 	<string name="tip_Distance_Measurement_t">\tPlanning tracks can be created, edited and saved to or loaded from a GPX file. 
 	    The cumulative distance is displayed from the first point to any of the points that make up the track. Select "Plan/Measure Distances" from the map menu.</string>
+	<string name="offline_poi_edition">Offline POI editing</string>
+	<string name="offline_poi_edition_descr">Always use offline POI editing</string>
+
+	<string name="tip_recent_changes_0_7_1_t">Changes in 0.7.1 :
+\n\t- Offline POI editing 
+\n\t- Live Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles)
+\n\t- Show currently recorded track on map
+\n\t- Direction detection: \'Make U-turn\' is indicated and announced when heading in opposite direction or after missing a turn
+\n\t- New voice prompt \'Route recalculated\'
+\n\t- Optical indication of an imminent turn within 100m by diretion arrow changing color
+\n\t- Actuality also of deactivated index files now shown on Download screen in dark green and dark blue
+\n\t- Other changes
+	</string>
+
+	<string name="update_poi_does_not_change_indexes">POI changes inside application do not affect downloaded map files, changes are saved to local file instead.</string>
+	<string name="local_openstreetmap_uploading_poi">Uploading POI...</string>
+	<string name="local_openstreetmap_poi_were_uploaded">{0} POI were uploaded</string>
+	<string name="local_openstreetmap_uploadall">Upload all POI</string>
+	<string name="local_openstreetmap_items"></string>
+	<string name="local_openstreetmap_show_poi">Show POI on map</string>
+	<string name="local_openstreetmap_upload">Upload modification to OSM</string>
+	<string name="local_openstreetmap_delete">Delete POI modification</string>
+	<string name="local_openstreetmap_descr_title">Asynchronous OSM POI Editing:</string>
+	<string name="local_openstreetmap_settings">Locally saved OSM points</string>
+	<string name="local_openstreetmap_settings_descr">Show and manage OSM points noted in local database</string>
+
 	<string name="live_monitoring_descr">Enable sending HTTP requests to a specified web service</string>
 	<string name="help_Distance_Measurement">A planning track can be created and saved to or loaded from a GPX file.
 	    \n\t- Create a track of new points using long touches at the desired locations, as described below.
@@ -65,7 +91,7 @@
 	<string name="index_name_russia">Europe/Asia - Russia</string>
 	<string name="index_name_africa">Africa</string>
 	<string name="index_name_asia">Asia</string>
-	<string name="index_name_australia">Australia</string>
+	<string name="index_name_oceania">Oceania</string>
 	<string name="index_name_other">Worldwide and topic maps</string>
 	<string name="index_name_wiki">Worldwide Wikipedia</string>
 	<string name="index_name_voice">Voice packs (recorded)</string>
@@ -153,12 +179,12 @@
 
 	<string name="native_library_not_supported">Native library is not supported on this device.</string>
 	<string name="init_native_library">Initializing native library&#8230;</string>
-	<string name="choose_auto_follow_route">Map view auto follow</string>
+	<string name="choose_auto_follow_route">Map view auto-center</string>
 	<string name="choose_auto_follow_route_descr">Time until map view returns to being synchronized with position</string>
 	<string name="auto_follow_route_never">Never</string>
-	<string name="auto_follow_route_navigation">Auto follow nav only</string>
-	<string name="auto_follow_route_navigation_descr">Use map view auto follow only while navigating.</string>
-	<string name="auto_follow_location_enabled">Map view auto follow in use.</string>
+	<string name="auto_follow_route_navigation">Auto-center nav only</string>
+	<string name="auto_follow_route_navigation_descr">Use map view auto-center only while navigating.</string>
+	<string name="auto_follow_location_enabled">Map view auto-center in use.</string>
 	
 	<string name="sendtoOSM_confirmation_msg">Send to OSM: %1$s?</string>
 	<string name="pref_vector_rendering">Vector renderer specific options</string>
@@ -179,7 +205,7 @@
 \n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
 \n\t- Implement POI search by name in big areas (countries)  
 \n\t- Fix flickering map screen for tablets (Issue 641)
-\n\t- Auto follow route option (Issue 356)
+\n\t- Map view auto-center option (Issue 356)
 \n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\'
 \n\t- POI data included in .obf file (all download indexes after 01/10/11) 
 \n\t- Voice prompt fixes (GPS position fix, omitting first command) 
@@ -193,7 +219,6 @@
 	<string name="poi_filter_by_name">Search by name</string>
 	<string name="old_poi_file_should_be_deleted">The POI data file \'%1$s\' is redundant and can be deleted.</string>
 	<string name="update_poi_file_not_found">Local file to maintain POI changes not found and could not be created.</string>
-	<string name="update_poi_does_not_change_indexes">POI changes inside application do not affect downloaded map files, changes are saved to local file instead.</string>
 
 	<string name="button_upgrade_osmandplus">Upgrade Osmand+</string>
 	<string name="map_version_changed_info">Server contains map files not compatible with your current version of the application. To download and use them, please upgrade the application to newer version.</string>
@@ -246,6 +271,9 @@
 	<string name="favorite_friends_category">Friends</string>
 	<string name="favorite_places_category">Places</string>
 	<string name="favorite_default_category">Others</string>
+
+	<string name="favourites_edit_dialog_name">Name</string>
+	<string name="favourites_edit_dialog_category">Category</string>
 
 	<string name="vector_map_not_needed">Not needed</string>
 	<string name="basemap_missing">Base world map (covering whole world at small zooms) is missing. Please consider downloading World_basemap_x.obf for a complete environment.</string>
@@ -453,7 +481,7 @@
 
 	<string name="use_osmand_routing_service">OsmAnd routing</string>
 	<string name="use_osmand_routing_service_descr">Use OsmAnd offline routing for long distances (experimental) instead of fallback to CloudMade</string>
-	<string name="osmand_routing_experimental">OsmAnd offline routing is an experimental feature and it doesn\'t work for distances of more than about 20 km.\n Routing service is temporarily switched to online CloudMade.</string>
+	<string name="osmand_routing_experimental">OsmAnd offline routing is an experimental feature and it does not work for distances of more than about 20 km.\n\nRouting service is temporarily switched to online CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
 	<string name="application_dir">Storage directory</string>
 	<string name="application_dir_change_warning">Changing the storage directory will not move or delete the data. This must be performed separately and outside OsmAnd. Continue anyway?</string>
@@ -659,7 +687,6 @@
 	<string name="search_online_address">Internet</string>
 	<string name="max_level_download_tile">Max. online zoom</string>
 	<string name="max_level_download_tile_descr">Choose maximum zoom level to download for online map tiles</string>
-	<string name="route_about">About route</string>
 	<string name="route_general_information">Total distance %1$s, travelling time %2$d h %3$d m.</string>
 	<string name="router_service_descr">Choose online or offline routing services</string>
 	<string name="router_service">Routing service</string>
@@ -672,7 +699,7 @@
 	<string name="downloading_file">Downloading file&#8230;</string>
 	<string name="downloading">Downloading&#8230;</string>
 	<string name="downloading_list_indexes">Downloading list of available regions&#8230;</string>
-	<string name="list_index_files_was_not_loaded">The list of regions was not retrieved from osmand.googlecode.com.</string>
+	<string name="list_index_files_was_not_loaded">The list of regions was not retrieved from osmand.net.</string>
     <string name="select_index_file_to_download">If you can\'t find your region, you can make it yourself. See osmand.net</string>
 	<string name="show_poi_on_map">Show on map</string>
 	<string name="fav_points_edited">Favorite point was edited</string>
@@ -681,7 +708,6 @@
 	<string name="only_show">Only show</string>
 	<string name="follow">Follow</string>
 	<string name="recalculate_route_to_your_location">Select mode of transportation (optional):</string>
-	<string name="follow_route">Routing directions</string>
 	<string name="mark_final_location_first">Please select destination first</string>
 	<string name="get_directions">Directions</string>
     <string name="show_gps_status">Show GPS Status</string>
@@ -740,7 +766,7 @@
     <string name="mark_point">Target</string>
     <string name="show_osm_bugs_descr">Show OpenStreetBugs on map</string>
     <string name="show_osm_bugs">Show OpenStreetBugs</string>
-    <string name="favourites_activity">List of favorite points</string>
+    <string name="favourites_activity">Favorites</string>
     <string name="add_to_favourite">Add to Favorites</string>
     <string name="use_english_names_descr">Select between native and English names</string>
     <string name="use_english_names">Use english names</string>

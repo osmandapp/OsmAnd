@@ -11,11 +11,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.views.TurnPathHelper;
-import android.app.ListActivity;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -26,7 +27,7 @@ import android.widget.TextView;
 /**
  * 
  */
-public class ShowRouteInfoActivity extends ListActivity {
+public class ShowRouteInfoActivity extends OsmandListActivity {
 
 
 	private RoutingHelper helper;
@@ -40,13 +41,12 @@ public class ShowRouteInfoActivity extends ListActivity {
 		lv.setId(android.R.id.list);
 		header = new TextView(this);
 		helper = ((OsmandApplication)getApplication()).getRoutingHelper();
-		
 		lv.addHeaderView(header);
 		setContentView(lv);
 		dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -73,7 +73,24 @@ public class ShowRouteInfoActivity extends ListActivity {
 			MapActivity.launchMapActivityMoveToTop(this);
 		}
 	}
-	
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuItem item = menu.add(0, 0, 0, getString(R.string.edit_filter_save_as_menu_item)+"...");
+		item.setIcon(android.R.drawable.ic_menu_save);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if(item.getItemId() == 0){
+			//mapActivityActions.saveDirections();
+		} else {
+			return false;
+		}
+		return true;
+	}
 
 	class RouteInfoAdapter extends ArrayAdapter<RouteDirectionInfo> {
 		RouteInfoAdapter(List<RouteDirectionInfo> list) {
@@ -96,7 +113,7 @@ public class ShowRouteInfoActivity extends ListActivity {
 			ImageView icon = (ImageView) row.findViewById(R.id.direction);
 			
 			if(!(icon.getDrawable() instanceof TurnPathHelper.RouteDrawable)){
-				icon.setImageDrawable(new TurnPathHelper.RouteDrawable());
+				icon.setImageDrawable(new TurnPathHelper.RouteDrawable(getResources()));
 			}
 			((TurnPathHelper.RouteDrawable) icon.getDrawable()).setRouteType(model.turnType);
 			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(model.distance, ShowRouteInfoActivity.this));
@@ -112,6 +129,5 @@ public class ShowRouteInfoActivity extends ListActivity {
 			return row;
 		}
 	}
-
 }
 

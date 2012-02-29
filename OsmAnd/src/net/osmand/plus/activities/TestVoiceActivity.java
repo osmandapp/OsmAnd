@@ -70,24 +70,25 @@ public class TestVoiceActivity extends Activity {
 	}
 	
 	private void addButtons(final LinearLayout ll, CommandPlayer p) {
-		addButton(ll, "Route was calculated (15350m)", builder(p).newRouteCalculated(15350));
+		addButton(ll, "New route was calculated (15350m)", builder(p).newRouteCalculated(15350));
 		addButton(ll, "After 1050m turn slightly left", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SL, 1050));
 		addButton(ll, "Turn left", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT));
 		addButton(ll, "Prepare to turn right after 320m", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 320));
-		addButton(ll, "After 370m turn sharp right", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, 370));
+		addButton(ll, "After 370m turn sharply right", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, 370));
 		addButton(ll, "Prepare to turn slighlty left after 850m then bear right", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_SL, 850).then().bearRight());
-		addButton(ll, "Turn sharp right then bear left", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH).then().bearLeft());
+		addButton(ll, "Turn sharply right then bear left", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH).then().bearLeft());
 		addButton(ll, "Prepare to make a U-turn after 400m", builder(p).prepareMakeUT(400));
-		addButton(ll, "Make a U-turn after 640m", builder(p).makeUT(640));
+		addButton(ll, "After 640m make a U-turn", builder(p).makeUT(640));
 		addButton(ll, "Make a U-turn", builder(p).makeUT());
+		addButton(ll, "When possible, make a U-turn", builder(p).makeUTwp());
 		addButton(ll, "Prepare to enter a roundabout after 750m", builder(p).prepareRoundAbout(750));
 		addButton(ll, "After 450m enter the roundabout and take the 1st exit", builder(p).roundAbout(450, 0, 1));
 		addButton(ll, "Roundabout: Take the 3rd exit", builder(p).roundAbout(0, 3));
 		addButton(ll, "GPS signal lost", builder(p).gpsLocationLost());
 		addButton(ll, "Route recalculated (23150m)", builder(p).routeRecalculated(23150));
 		addButton(ll, "Continue straight ahead", builder(p).goAhead());
-		addButton(ll, "Follow road for 2350m", builder(p).goAhead(2350));
-		addButton(ll, "Follow road for 800m and arrive at destination", builder(p).goAhead(800).andArriveAtDestination());
+		addButton(ll, "Follow the road for 2350m", builder(p).goAhead(2350));
+		addButton(ll, "Follow the road for 800m and arrive at destination", builder(p).goAhead(800).andArriveAtDestination());
 		addButton(ll, "Arrive at destination", builder(p).arrivedAtDestination());
 		ll.forceLayout();
 	}

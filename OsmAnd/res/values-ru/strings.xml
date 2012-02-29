@@ -1,6 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    	<string name="tip_recent_changes_0_7_0_t">Изменения в 0.7.0 :
+    <string name="tip_recent_changes_0_7_1_t">Изменения в 0.7.1 :
+\n\t- Offline POI редактирование
+\n\t- Live Tracking функциональность (использование и настройка web service в HowTo en)
+\n\t- Показывать текущий записываемый трек на карте
+\n\t- Другие изменения
+	</string>
+    <string name="update_poi_does_not_change_indexes">Измение POI в приложении не меняет POI данные загруженные из интернета, все изменения однако собираются в локальный файл.</string>
+	<string name="local_openstreetmap_uploading_poi">Загрузка POI</string>
+	<string name="local_openstreetmap_poi_were_uploaded">{0} POI были загружены</string>
+	<string name="local_openstreetmap_uploadall">Загрузить все POI</string>
+	<string name="local_openstreetmap_items"></string>
+	<string name="local_openstreetmap_show_poi">Показать POI на карте</string>
+	<string name="local_openstreetmap_upload">Загрузить изменения в OSM</string>
+	<string name="local_openstreetmap_delete">Удалить созданные POI</string>
+	<string name="local_openstreetmap_descr_title">Offline POI дополнение:</string>
+	<string name="local_openstreetmap_settings">Локальные Openstreetmap точки</string>
+	<string name="local_openstreetmap_settings_descr">POI сохраненные в локальную БД</string>
+    
+	<string name="live_monitoring_descr">Включить пересылку HTTP запросов на специальный web сервис</string>
+	<string name="live_monitoring">Включить Live слежение</string>
+	<string name="live_monitoring_interval_descr">Укажите интервал Live слежения</string>
+	<string name="live_monitoring_interval">Интервал Live слежения</string>
+	<string name="live_monitoring_url_descr">Укажите адрес Live слежения со следующими параметрами : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+	<string name="live_monitoring_url">Web адрес Live слежения</string>
+	<string name="gpx_monitoring_disabled_warn">Пожалуйста включите \'Записывать путь в GPX\' в Настройках</string>
+	<string name="show_current_gpx_title">Показывать текущий путь</string>
+    
+    <string name="tip_recent_changes_0_7_0_t">Изменения в 0.7.0 :
 \n\t- Offline Wikipedia карты со статьями
 \n\t- Обновление карт
 \n\t- Другие изменения
@@ -19,7 +46,7 @@
 	<string name="index_name_russia">Евразия - Россия</string>
 	<string name="index_name_africa">Африка</string>
 	<string name="index_name_asia">Азия</string>
-	<string name="index_name_australia">Австралия</string>
+	<string name="index_name_oceania">Океания</string>
 	<string name="index_name_other">Мировые карты</string>
 	<string name="index_name_wiki">Wikipedia по языкам</string>
 	<string name="index_name_voice">Голосовые данные (запись)</string>
@@ -82,7 +109,7 @@
 	<string name="poi_filter_by_name">Поиск по имени</string>
 	<string name="old_poi_file_should_be_deleted">POI данные \'%1$s\' устарели и могут быть удалены.</string>
 	<string name="update_poi_file_not_found">Локальный файл, который содержит обновляемые данные POI (при создании, удалении) не найден и не может быть создан.</string>
-	<string name="update_poi_does_not_change_indexes">Измение POI в приложении не меняет POI данные загруженные из интернета, все изменения однако собираются в локальный файл.</string>
+	
 
 	<string name="button_upgrade_osmandplus">Обновить Osmand+</string>
 	<string name="map_version_changed_info">На сервере данных были найдены файлы новее данной версии программы, чтобы использовать их, пожалуйста, обновите приложение.</string>
@@ -143,7 +170,7 @@
     <string name="local_index_gpx_info_speed">\nСредняя скорость : %1$s \nМаксимальная скорость : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nСредняя высота : %1$.0f метров\nМинимальная высота : %2$.0f метров\nМаксимальная высота : %3$.0f метров\nПодъем вверх : %4$.0f метров\nПодъем вниз : %5$.0f метров</string>
 	<string name="local_index_gpx_info">Путей : %1$d\nВсего точек : %2$d\nОтмечено точек : %3$d\nВсего расстояние : %4$s
-										\nНачало : %5$tD %5$tR\nОкончание : %6$tD %6$tR\n</string>
+										\nНачало : %5$tF,  %5$tR\nОкончание : %6$tF,  %6$tR\n</string>
 	<string name="local_index_installed">Издание</string>
 	<string name="local_index_items_backuped">%1$d из %2$d объектов успешно архивированы.</string>
 	<string name="local_index_items_deleted">%1$d из %2$d объектов успешно удалены.</string>
@@ -324,7 +351,7 @@
 	
 	<string name="use_osmand_routing_service">OsmAnd offline навигация</string>
 	<string name="use_osmand_routing_service_descr">Использовать offline навигацию на длинные расстояние (экспериментально)</string>
-	<string name="osmand_routing_experimental">OsmAnd offline навигация является экспериментальной и не работает на расстояния более 20 километров.\n В этом случае автоматически переключается на CloudMade.</string>
+	<string name="osmand_routing_experimental">OsmAnd offline навигация является экспериментальной и не работает на расстояния более 20 километров.\n\nВ этом случае автоматически переключается на CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Невозможно найти указанную директорию.</string>
 	<string name="application_dir">Директория приложения</string>
 	<string name="application_dir_change_warning">Изменение директории не переносит файлы автоматически. Вы должны это сделать самостоятельно. Продолжить?</string>
@@ -534,7 +561,6 @@
 	<string name="search_online_address">Интернет</string>
 	<string name="max_level_download_tile">Уровень детализации</string>
 	<string name="max_level_download_tile_descr">Выберите максимальный уровень для загрузки из интернета</string>
-	<string name="route_about">О маршруте</string>
 	<string name="route_general_information">Общая протяженность = %1$s, время в пути = %2$d ч. %3$d мин.</string>
 	<string name="router_service_descr">Выберите сервис для прокладки маршрута</string>
 	<string name="router_service">Прокладка маршрута</string>
@@ -547,9 +573,9 @@
 	<string name="downloading_file">Загрузка файла</string>
 	<string name="downloading">Загрузка...</string>
 	<string name="downloading_list_indexes">Загружается список доступных индексов</string>
-	<string name="list_index_files_was_not_loaded">Не найдены доступные индекс файлы на osmand.googlecode.com</string>
+	<string name="list_index_files_was_not_loaded">Не найдены доступные индекс файлы на osmand.net</string>
     <string name="select_index_file_to_download">Если вы не можете найти регион, вы можете создать его самостоятельно.
-Читайте на osmand.googlecode.com .</string>
+Читайте на osmand.net.</string>
 	<string name="show_poi_on_map">Показать на карте</string>
 	<string name="fav_points_edited">Отредактирована избранная точка</string>
 	<string name="fav_points_not_exist">Не существует избранных точек</string>
@@ -557,7 +583,6 @@
 	<string name="only_show">Только показать</string>
 	<string name="follow">Следовать</string>
 	<string name="recalculate_route_to_your_location">Пересчитывать маршрут в зависимости от местоположения</string>
-	<string name="follow_route">Следовать по маршруту</string>
 	<string name="mark_final_location_first">Отметьте сначала точку назначения</string>
 	<string name="get_directions">Маршрут</string>
 	<string name="gps_status_app_not_found">Приложение Gps status не найдено. Искать на маркете</string>

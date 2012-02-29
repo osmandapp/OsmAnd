@@ -2,8 +2,7 @@
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/tabhost"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    style="@style/OsmandActivity">
+    android:layout_height="fill_parent">
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" android:orientation="vertical">
@@ -17,9 +16,8 @@
                 android:background="@drawable/tab_back_button"
                 android:text="" />
 
-   		   <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-		  android:layout_marginLeft = "3dp" android:text="@string/select_search_position" android:layout_gravity="center_vertical|left"
-		  style="@style/OsmandActivity">
+   		  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+		  android:layout_marginLeft = "3dp" android:text="@string/select_search_position" android:layout_gravity="center_vertical|left">
    		  </TextView>
    		  <Spinner
                 android:id="@+id/SpinnerLocation"
@@ -33,10 +31,9 @@
             android:id="@android:id/tabs"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
-        <FrameLayout
+		<FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-             />
+            android:layout_height="fill_parent" />
     </LinearLayout>
 </TabHost>

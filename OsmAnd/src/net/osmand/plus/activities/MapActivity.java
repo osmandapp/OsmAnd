@@ -153,7 +153,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		settings = getMyApplication().getSettings();		
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		// Full screen is not used here
-//	     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
 		startProgressDialog = new ProgressDialog(this);
 		startProgressDialog.setCancelable(true);
@@ -413,7 +413,8 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		mapView.getAnimatedDraggingThread().startZooming(newZoom, changeLocation);
 		showAndHideMapPosition();
     }
-       
+
+    
 	public void backToMainMenu() {
 		final Dialog dlg = new Dialog(this, R.style.Dialog_Fullscreen);
 		final View menuView = (View) getLayoutInflater().inflate(R.layout.menu, null);
@@ -514,7 +515,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 			//some application/hardware needs that back button reacts on key up, so
 			//that they could do some key combinations with it...
     		// Victor : doing in that way doesn't close dialog properly!
-//			return true;
+    		// return true;
 		} else if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
 			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
 			// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -593,7 +594,9 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
     	}
     	getMyApplication().getResourceManager().getMapTileDownloader().removeDownloaderCallback(mapView);
     }
-       
+
+    
+    
     private void registerUnregisterSensor(Location location){
     	boolean currentShowingAngle = settings.SHOW_VIEW_ANGLE.get(); 
     	int currentMapRotation = settings.ROTATE_MAP.get();
@@ -677,25 +680,25 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 						mapLayers.getGpxLayer().addTrackPoint(pt);
 					}
 				}
-				if(settings.LIVE_MONITORING.get()){
-					liveMonitoringHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
-							location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
-				}
+			}
+			if(settings.LIVE_MONITORING.get()){
+				liveMonitoringHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
+						location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
 			}
 		}
+
    	
-    	registerUnregisterSensor(location);
-    	updateSpeedBearing(location);
-    	mapLayers.getLocationLayer().setLastKnownLocation(location);
-    	if(routingHelper.isFollowingMode()){
-    		if(location == null || 
-    				!location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
-    			// Update routing position  
-    			routingHelper.setCurrentLocation(location);
-    			// Check with delay that gps location is not lost
-    			if(location != null && routingHelper.getLeftDistance() > 0){
-    				Message msg = Message.obtain(uiHandler, new Runnable() {
-    					@Override
+		registerUnregisterSensor(location);
+		updateSpeedBearing(location);
+		mapLayers.getLocationLayer().setLastKnownLocation(location);
+		if(routingHelper.isFollowingMode()){
+			if(location == null || !location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
+				// Update routing position  
+				routingHelper.setCurrentLocation(location);
+				// Check with delay that gps location is not lost
+				if(location != null && routingHelper.getLeftDistance() > 0){
+					Message msg = Message.obtain(uiHandler, new Runnable() {
+						@Override
     					public void run() {
 							if (routingHelper.getLeftDistance() > 0 && settings.MAP_ACTIVITY_ENABLED.get()) {
 								routingHelper.getVoiceRouter().gpsLocationLost();
@@ -794,7 +797,8 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		return (routingHelper != null && routingHelper.isFollowingMode())
 				|| (System.currentTimeMillis() - lastTimeGPSLocationFixed) < USE_ONLY_GPS_INTERVAL || isRunningOnEmulator();
 	}
-    
+
+	
 	// Working with location listeners
 	private LocationListener networkListener = new LocationListener(){
 		
@@ -857,7 +861,8 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		public void onStatusChanged(String provider, int status, Bundle extras) {
 			if (LocationProvider.TEMPORARILY_UNAVAILABLE == status) {
 				if(routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0){
-					routingHelper.getVoiceRouter().gpsLocationLost();
+					//routingHelper.getVoiceRouter().gpsLocationLost();
+					// Suppress gpsLocationLost() prompt here for now, as it causes duplicate announcement and then also prompts when signal is found again
 				}
 			} else if (LocationProvider.OUT_OF_SERVICE == status) {
 				if(routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0){
@@ -937,9 +942,9 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 			//some application/hardware needs that back button reacts on key up, so
 			//that they could do some key combinations with it...
     		// Android 1.6 doesn't have onBackPressed() method it should be finish instead!
-//    		onBackPressed();
-//			return true;
-    	}  else if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
+    		// onBackPressed();
+    		// return true;
+    	} else if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
 			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 	    	return true;
 		} else 
@@ -1033,7 +1038,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		MenuItem navigateToPointMenu = menu.findItem(R.id.map_navigate_to_point);
 		if (navigateToPointMenu != null) {
 			if (settings.getPointToNavigate() != null) {
-				navigateToPointMenu.setTitle((routingHelper.isRouteCalculated() || routingHelper.isFollowingMode()) ? R.string.stop_routing : R.string.stop_navigation);
+				navigateToPointMenu.setTitle((routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()) ? R.string.stop_routing : R.string.stop_navigation);
 				navigateToPointMenu.setVisible(true);
 			} else {
 				navigateToPointMenu.setVisible(false);
@@ -1124,7 +1129,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 			return true;
 		case R.id.map_navigate_to_point:
 			if (mapLayers.getNavigationLayer().getPointToNavigate() != null) {
-				if(routingHelper.isRouteCalculated() || routingHelper.isFollowingMode()){
+				if(routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()){
 					routingHelper.setFinalAndCurrentLocation(null, routingHelper.getCurrentLocation(), routingHelper.getCurrentGPXRoute());
 				} else {
 					navigateToPoint(null);
@@ -1204,17 +1209,18 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 			builder.show();
 		}
 	}
-	       
-    protected void parseLaunchIntentLocation(){
-    	Intent intent = getIntent();
-    	if(intent != null && intent.getData() != null){
-    		Uri data = intent.getData();
-    		if("http".equalsIgnoreCase(data.getScheme()) && "download.osmand.net".equals(data.getHost()) &&
-    				"/go".equals( data.getPath())) {
-    			String lat = data.getQueryParameter("lat");
-    			String lon = data.getQueryParameter("lon");
-				if (lat != null && lon != null) {
-					try {
+
+	
+	protected void parseLaunchIntentLocation(){
+   	 	Intent intent = getIntent();
+		if(intent != null && intent.getData() != null){
+			Uri data = intent.getData();
+			if("http".equalsIgnoreCase(data.getScheme()) && "download.osmand.net".equals(data.getHost()) &&
+					"/go".equals( data.getPath())) {
+				String lat = data.getQueryParameter("lat");
+				String lon = data.getQueryParameter("lon");
+					if (lat != null && lon != null) {
+						try {
 						double lt = Double.parseDouble(lat);
 						double ln = Double.parseDouble(lon);
 						settings.setLastKnownMapLocation((float) lt, (float) ln);
@@ -1358,7 +1364,9 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 	public void setMapLinkedToLocation(boolean isMapLinkedToLocation) {
 		if(!isMapLinkedToLocation){
 			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
-			if(autoFollow > 0 && (!settings.AUTO_FOLLOW_ROUTE_NAV.get() || routingHelper.isFollowingMode())){
+			// try without AUTO_FOLLOW_ROUTE_NAV (see forum discussion 'Simplify our navigation preference menu')
+			//if(autoFollow > 0 && (!settings.AUTO_FOLLOW_ROUTE_NAV.get() || routingHelper.isFollowingMode())){
+			if(autoFollow > 0 && routingHelper.isFollowingMode()){
 				uiHandler.removeMessages(AUTO_FOLLOW_MSG_ID);
 				Message msg = Message.obtain(uiHandler, new Runnable() {
 					@Override

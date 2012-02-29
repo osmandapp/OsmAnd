@@ -237,7 +237,6 @@
 	<string name="search_online_address">Internet</string>
 	<string name="max_level_download_tile">Nível de zoom máx.</string>
 	<string name="max_level_download_tile_descr">Escolher um nível máximo de zoom para download</string>
-	<string name="route_about">Sobre a viagem</string>
 	<string name="route_general_information">Distância total = %1$s tempo de viagem, = %2$dh %3$dm.</string>
 	<string name="router_service_descr">Escolha o sistema de navegação</string>
 	<string name="router_service">Serviço de navegação</string>
@@ -250,7 +249,7 @@
 	<string name="downloading_file">Baixando arquivo...</string>
 	<string name="downloading">Baixando...</string>
 	<string name="downloading_list_indexes">Baixando lista de regiões disponíveis...</string>
-	<string name="list_index_files_was_not_loaded">Os arquivos de índice não puderam ser recuperados de osmand.googlecode.com.</string>
+	<string name="list_index_files_was_not_loaded">Os arquivos de índice não puderam ser recuperados de osmand.net.</string>
 	<string name="select_index_file_to_download">Se você não encontra a sua região, você pode criá-la. Veja osmand.net</string>
 	<string name="show_poi_on_map">Mostrar no mapa</string>
 	<string name="fav_points_edited">O favorito foi modificado</string>
@@ -259,7 +258,6 @@
 	<string name="only_show">Mostrar apenas</string>
 	<string name="follow">Siga</string>
 	<string name="recalculate_route_to_your_location">Recalculando a rota a partir da sua posição</string>
-	<string name="follow_route">Siga o caminho</string>
 	<string name="mark_final_location_first">Por favor, primeiro selecione um destino</string>
 	<string name="get_directions">Navegação</string>
 	<string name="gps_status_app_not_found">A aplicação de gestão de GPS não está instalada. Procurar no Market?</string>

@@ -53,7 +53,7 @@
 \n\t- dodano opcję autostartu nawigacji (zgłoszenie nr 356)
 \n\t- nawigacja wg śladu GPX przeniesiona została do menu \'Nawigacja\'
 \n\t- dane POI teraz są w plikach .obf
-\n\t- poprawiono błedy komunikatów głosowych (ustalenie pozycji GPS, pomijanie pierwszej komendy) 
+\n\t- poprawiono błędy komunikatów głosowych (ustalenie pozycji GPS, pomijanie pierwszej komendy) 
 \n\t- naprawiono inne, drobne błędy
 </string>
 <string name="file_can_not_be_renamed">Nazwa pliku nie może zostać zmieniona.</string>
@@ -119,7 +119,7 @@
 <string name="local_index_gpx_info_show">\n\nPrzytrzymaj dłużej, by pokazać na mapie</string>
 <string name="local_index_gpx_info_speed">\nŚrednia prędkość: %1$s \nMaksymalna prędkość: %2$s</string>
 <string name="local_index_gpx_info_elevation">\nŚrednia wysokość: %1$.0f m\nMinimalna wysokość: %2$.0f m\nMaksymalna wysokość: %3$.0f m\nWzniosy: %4$.0f m\nSpadki: %5$.0f m</string>
-<string name="local_index_gpx_info">Subtracks : %1$d\nWszystkie punkty: %2$d\nWay points : %3$d\nCałkowity dystans: %4$s\nCzas startu: %5$tD %5$tR\nCzas zakończenia: %6$tD %6$tR</string>
+<string name="local_index_gpx_info">Subtracks : %1$d\nWszystkie punkty: %2$d\nWay points : %3$d\nCałkowity dystans: %4$s\nCzas startu: %5$tF,  %5$tR\nCzas zakończenia: %6$tF,  %6$tR</string>
 <string name="local_index_installed">Wydanie</string>
 <string name="local_index_items_backuped">%1$d z %2$d zarchiwizowano.</string>
 <string name="local_index_items_deleted">%1$d z %2$d skasowano.</string>
@@ -158,7 +158,7 @@
 \n\t- wyszukiwanie głosowe w nawigacji za pomocą TTS
 \n\t- render mapy pokazuje więcej szczegółów
 \n\t- mapa podstawowa zawarta w aplikacji
-\n\t- ulepszenie routingu offline (ciągle experymentalny)
+\n\t- ulepszenie routingu offline (ciągle eksperymentalny)
 \n\t- opcje routingu dla GPX
 \n\t- aktualizacja interfejsu i poprawka wielu błędów
 </string>
@@ -336,7 +336,7 @@
 
 <string name="use_osmand_routing_service">OsmAnd routing</string>
 <string name="use_osmand_routing_service_descr">Użyj routingu offline dla długich tras (funkcjonalność eksperymentalna)</string>
-<string name="osmand_routing_experimental">Routing offline OsmAnd-a jest funcją eksperymentalną i nie działa dobrze dla odległości większych niż 20km.\n Usługa routująca jest automatycznie przełączana do CloudMade (online).</string>
+<string name="osmand_routing_experimental">Routing offline OsmAnd-a jest funkcją eksperymentalną i nie działa dobrze dla odległości większych niż 20km.\n\nUsługa routująca jest automatycznie przełączana do CloudMade (online).</string>
 <string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
 <string name="application_dir">Storage directory</string>
 <string name="application_dir_change_warning">Changing the storage directory will not move or delete the data. This must be performed separately and outside OsmAnd. Continue anyway?</string>
@@ -436,7 +436,7 @@
 <string name="import_fav">Import</string>
 <string name="export_fav">Eksport</string>
 <string name="error_occurred_loading_gpx">Wystąpił błąd podczas ładowania GPX</string>
-<string name="send_report">Wyslij zgłoszenie</string>
+<string name="send_report">Wyślij zgłoszenie</string>
 <string name="none_region_found">Brak danych offline na karcie SD. Pobierz je z Internetu.</string>
 <string name="poi_namefinder_query_empty">Wprowadź zapytanie by znaleźć POI</string>
 <string name="any_poi">Jakiekolwiek</string>
@@ -552,7 +552,6 @@
 <string name="search_online_address">Internet</string>
 <string name="max_level_download_tile">Maks. zoom online</string>
 <string name="max_level_download_tile_descr">Choose maximum zoom level to download for online map tiles</string>
-<string name="route_about">O trasie</string>
 <string name="route_general_information">Dystans całkowity %1$s, czas podróży %2$d h %3$d m.</string>
 <string name="router_service_descr">Wybierz usługę routującą (offline lub online)</string>
 <string name="router_service">Usługa routująca</string>
@@ -565,7 +564,7 @@
 <string name="downloading_file">Pobieranie pliku...</string>
 <string name="downloading">Pobieranie...</string>
 <string name="downloading_list_indexes">Pobieranie listy dostępnych regionów...</string>
-<string name="list_index_files_was_not_loaded">Lista regionów nie została pobrana z osmand.googlecode.com.</string>
+<string name="list_index_files_was_not_loaded">Lista regionów nie została pobrana z osmand.net.</string>
 <string name="select_index_file_to_download">If you can\'t find your region, you can make it yourself. See osmand.net</string>
 <string name="show_poi_on_map">Pokaż na mapie</string>
 <string name="fav_points_edited">Ulubiony punkt został zmieniony</string>
@@ -574,7 +573,6 @@
 <string name="only_show">Tylko pokaż</string>
 <string name="follow">Prowadź</string>
 <string name="recalculate_route_to_your_location">Wybierz rodzaj pojazdu (opcjonalnie) and guidance mode</string>
-<string name="follow_route">Prowadź</string>
 <string name="mark_final_location_first">Najpierw wybierz cel podróży</string>
 <string name="get_directions">Nawigacja</string>
 <string name="show_gps_status">Pokaż status GPS</string>

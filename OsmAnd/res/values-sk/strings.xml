@@ -1,5 +1,29 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="offline_poi_edition">Offline úprava POI bodov</string>
+	<string name="offline_poi_edition_descr">Ak chcete používať iba offline úpravu POI</string>
+	<string name="tip_recent_changes_0_7_1_t">Zmeny vo verzii 0.7.1 :
+\n\t- Offline úpravy POI
+\n\t- Možnosť stopovania naživo - pravidelné odosielanie súradníc do webovej služby (prečítajte si ako nastaviť Vašu webovú službu v článkoch Ako na to)
+\n\t- Zobrazenie aktuálne zaznamenávanej stopy na mape
+\n\t- Detekcia smeru jazdy: \'Otočte sa\' je indikované a oznámené pri smerovaní do opačného smeru alebo minutí odbočenia
+\n\t- Nový hlasový povel \'Cesta prepočítaná\'
+\n\t- Optická inidkácia najbližšieho odbočenia v 100 metroch zmenou farby smerovej šípky
+\n\t- Aktuálne sú tiež deaktivované súbory indexov vyznačené v Sťahovaniach ako tmavo zelené a tmavo modré
+\n\t- Iné zmeny
+	</string>
+
+	<string name="update_poi_does_not_change_indexes">Zmeny POI v aplikácii neovplyvnia stiahnuté mapové súbory, zmeny sú uložené namiesto toho v lokálnom súbore.</string>
+	<string name="local_openstreetmap_uploading_poi">Nahrávajú sa POI</string>
+	<string name="local_openstreetmap_poi_were_uploaded">{0} POI bolo nahratých</string>
+	<string name="local_openstreetmap_uploadall">Nahrať všetky POI</string>
+	<string name="local_openstreetmap_items"></string>
+	<string name="local_openstreetmap_show_poi">Zobraziť POI na mape</string>
+	<string name="local_openstreetmap_upload">Nahrať úpravu na OSM</string>
+	<string name="local_openstreetmap_delete">Vymazať úpravu POI</string>
+	<string name="local_openstreetmap_descr_title">Asynchrónna úprava Openstreetmap POI:</string>
+	<string name="local_openstreetmap_settings">Lokálne Openstreetmap body</string>
+	<string name="local_openstreetmap_settings_descr">Lokálne body uložené v databáze</string>
 	<string name="live_monitoring_descr">Zapnutie posielania HTTP požiadaviek na určenú webovú službu</string>
 	<string name="live_monitoring">Zapnúť stopovanie naživo</string>
 	<string name="live_monitoring_interval_descr">Určenie intervalu stopovania naživo</string>
@@ -27,7 +51,7 @@
 	<string name="index_name_russia">Európa/Ázia - Rusko</string>
 	<string name="index_name_africa">Afrika</string>
 	<string name="index_name_asia">Ázia</string>
-	<string name="index_name_australia">Austrália</string>
+	<string name="index_name_oceania">Oceánia</string>
 	<string name="index_name_other">Celosvetové a ostatné mapy</string>
 	<string name="index_name_wiki">Celosvetová Wikipedia</string>
 	<string name="index_name_voice">Hlasové balíky (zvukové)</string>
@@ -107,7 +131,6 @@
 	<string name="poi_filter_by_name">Hľadať podľa názvu</string>
 	<string name="old_poi_file_should_be_deleted">Súbor POI údajov \'%1$s\' je zbytočný a môže byť vymazaný.</string>
 	<string name="update_poi_file_not_found">Miestný súbor na udržiavanie POI zmien sa nenašiel a nemôže byť vytvorený.</string>
-	<string name="update_poi_does_not_change_indexes">Zmeny POI v aplikácii neovplyvnia stiahnuté mapové súbory, ale budú zozbierané v miestnom súbore.</string>
 	<string name="button_upgrade_osmandplus">Aktualizovať Osmand+</string>
 	<string name="map_version_changed_info">Na serveri sú nekompatibilné mapové súbory s Vašou aktuálnou verziou aplikácie. Na ich stiahnutie a použitie, prosím, aktualizujte aplikáciu na novšiu verziu.</string>
 	
@@ -167,7 +190,7 @@
 	<string name="local_index_gpx_info_speed">\nPriemerná rýchlosť : %1$s \nMaximálna rýchlosť : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nPriemerná nadm. výška : %1$.0f metrov\nNajnižšia nadm. výška : %2$.0f metrov\nNajvyššia nadm. výška : %3$.0f metrov\nStúpanie hore : %4$.0f metrov\nStúpanie dole : %5$.0f metrov</string>
 	<string name="local_index_gpx_info">Pod-stopy : %1$d\nCelkovo bodov : %2$d\nWay-pointy : %3$d\nCelková vzdialenosť : %4$s
-									   \nČas spustenia : %5$tD %5$tR\nČas ukončenia : %6$tD %6$tR</string>
+									   \nČas spustenia : %5$tF,  %5$tR\nČas ukončenia : %6$tF,  %6$tR</string>
 	<string name="local_index_installed">Vydanie</string>
 	<string name="local_index_items_backuped">%1$d položiek z %2$d úspešne zálohovaných.</string>
 	<string name="local_index_items_deleted">%1$d položiek z %2$d úspešne vymazaných.</string>
@@ -380,7 +403,7 @@
 	
 <string name="use_osmand_routing_service">OsmAnd offline rutovanie</string>
 <string name="use_osmand_routing_service_descr">Použitie offline rutovania na dlhé vzdialenosti (experimentálne) namiesto CloudMade</string>
-<string name="osmand_routing_experimental">OsmAnd offline rutovanie je experimentálna funkcia a nefunguje na vzdialenosť väčšiu ako 20 km.\n Rutovacia služba je dočasne prepnutá na online CloudMade.</string>
+<string name="osmand_routing_experimental">OsmAnd offline rutovanie je experimentálna funkcia a nefunguje na vzdialenosť väčšiu ako 20 km.\n\nRutovacia služba je dočasne prepnutá na online CloudMade.</string>
 <string name="specified_dir_doesnt_exist">Nedá sa nájsť určený adresár.</string>
 <string name="application_dir">Úložiskový adresár</string>
 <string name="application_dir_change_warning">Zmena úložiskového adresára nepresunie alebo nezmaže dát. Musíte to urobiť sami! Robíte to na vlastné riziko! Napriek tomu pokračovať?</string>
@@ -594,7 +617,6 @@
 <string name="search_online_address">Internet</string>
 <string name="max_level_download_tile">Max. úroveň priblíženia</string>
 <string name="max_level_download_tile_descr">Výber maximálnej úrovne priblíženia na stiahnutie</string>
-<string name="route_about">O ceste</string>
 <string name="route_general_information">Celková vzdialenosť %1$s, čas cestovania %2$d h %3$d m.</string>
 <string name="router_service_descr">Výber rutovacej služby</string>
 <string name="router_service">Rutovanie</string>
@@ -607,7 +629,7 @@
 <string name="downloading_file">Sťahuje sa súbor...</string>
 <string name="downloading">Sťahovanie...</string>
 <string name="downloading_list_indexes">Sťahuje sa zoznam dostupných oblastí</string>
-<string name="list_index_files_was_not_loaded">Zoznam oblastí nebol prijatý z osmand.googlecode.com.</string>
+<string name="list_index_files_was_not_loaded">Zoznam oblastí nebol prijatý z osmand.net.</string>
 <string name="select_index_file_to_download">Ak nemôžete nájsť Vašu oblasť, môžete si ju sami vytvoriť. Viď osmand.net</string>
 <string name="show_poi_on_map">Zobraziť na mape</string>
 <string name="fav_points_edited">Obľúbený bod bol upravený</string>
@@ -616,7 +638,6 @@
 <string name="only_show">Iba zobraziť</string>
 <string name="follow">Nasledovať</string>
 <string name="recalculate_route_to_your_location">Prepočítať cestu podľa vášho umiestnenia</string>
-<string name="follow_route">Nasledovať cestu</string>
 <string name="mark_final_location_first">Prosím, najskôr zvoľte cieľ</string>
 <string name="get_directions">Pokyny</string>
 <string name="show_gps_status">Zobraziť stav GPS</string>
@@ -683,7 +704,7 @@
 <string name="mark_point">Cieľ</string>
 <string name="show_osm_bugs_descr">Zobrazenie OpenStreetBugs na mape</string>
 <string name="show_osm_bugs">Zobraziť OpenStreetBugs</string>
-<string name="favourites_activity">Zoznam obľúbených bodov</string>
+<string name="favourites_activity">Obľúbené body</string>
 <string name="add_to_favourite">Pridať do Obľúbených</string>
 <string name="use_english_names_descr">Výber medzi domácimi a anglickými názvami</string>
 <string name="use_english_names">Použiť anglické názvy</string>

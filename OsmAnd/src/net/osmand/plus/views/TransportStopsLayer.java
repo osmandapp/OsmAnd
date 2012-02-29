@@ -10,7 +10,6 @@ import net.osmand.plus.TransportIndexRepository;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
@@ -35,7 +34,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		wmgr.getDefaultDisplay().getMetrics(dm);
 
 		pointAltUI = new Paint();
-		pointAltUI.setColor(Color.rgb(0, 0, 255));
+		pointAltUI.setColor(view.getResources().getColor(R.color.transport_stop));
 		pointAltUI.setAlpha(150);
 		pointAltUI.setAntiAlias(true);
 	}
@@ -97,11 +96,11 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			if (t.acceptTransportStop(n)) {
 				List<String> l;
 				if (!useName) {
-					l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0}"); //$NON-NLS-1$
+					l = t.getRouteDescriptionsForStop(n, "{1} {0}"); //$NON-NLS-1$
 				} else if (view.getSettings().USE_ENGLISH_NAMES.get()) {
-					l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0} - {3}"); //$NON-NLS-1$
+					l = t.getRouteDescriptionsForStop(n, "{1} {0} - {3}"); //$NON-NLS-1$
 				} else {
-					l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0} - {2}"); //$NON-NLS-1$
+					l = t.getRouteDescriptionsForStop(n, "{1} {0} - {2}"); //$NON-NLS-1$
 				}
 				if (l != null) {
 					for (String s : l) {

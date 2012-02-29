@@ -7,8 +7,8 @@ import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
@@ -31,7 +31,7 @@ public class GPXLayer extends OsmandMapLayer {
 	
 	private void initUI() {
 		paint = new Paint();
-		paint.setColor(Color.argb(180, 160, 10, 215));
+		paint.setColor(view.getResources().getColor(R.color.gpx_track));
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(14);
 		paint.setAntiAlias(true);

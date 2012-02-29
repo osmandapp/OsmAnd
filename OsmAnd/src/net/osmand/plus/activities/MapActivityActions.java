@@ -415,7 +415,7 @@ public class MapActivityActions implements DialogProvider {
 		builder.setTitle(R.string.show_route);
 		builder.setMessage(mapActivity.getRoutingHelper().getGeneralRouteInformation());
 		builder.setPositiveButton(R.string.default_buttons_save, saveDirections);
-		builder.setNeutralButton(R.string.route_about, showRoute);
+		builder.setNeutralButton(R.string.show_route, showRoute);
 		builder.setNegativeButton(R.string.close, null);
 		return builder.create();
     }
@@ -533,18 +533,17 @@ public class MapActivityActions implements DialogProvider {
 		};
     	
     	builder.setView(view);
+	builder.setTitle(R.string.get_directions);
     	if (followEnabled) {
-    		builder.setTitle(R.string.follow_route);
 			builder.setPositiveButton(R.string.follow, followCall);
 			builder.setNeutralButton(R.string.gpx_navigation, useGpxNavigation);
 			builder.setNegativeButton(R.string.only_show, onlyShowCall);
 		} else {
-			builder.setTitle(R.string.show_route);
-			view.findViewById(R.id.TextView).setVisibility(View.GONE);
-    		builder.setPositiveButton(R.string.show_gpx_route, onlyShowCall);
-    		builder.setNegativeButton(R.string.default_buttons_cancel, null);
-    	}
-    	builder.show();
+			// view.findViewById(R.id.TextView).setVisibility(View.GONE);
+			builder.setPositiveButton(R.string.show_gpx_route, onlyShowCall);
+			builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		}
+	builder.show();
     }
     
     protected OsmandApplication getMyApplication() {
@@ -652,7 +651,7 @@ public class MapActivityActions implements DialogProvider {
 		dlg.setContentView(R.layout.save_directions_dialog);
 		final EditText edit = (EditText) dlg.findViewById(R.id.FileNameEdit);
 		
-		edit.setText(MessageFormat.format("{0,date,dd-MM-yyyy}", new Date()));
+		edit.setText("_" + MessageFormat.format("{0,date,yyyy-MM-dd}", new Date()) + "_");
 		((Button) dlg.findViewById(R.id.Save)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

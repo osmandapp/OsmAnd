@@ -170,7 +170,7 @@
 <string name="local_index_gpx_info_show">\n\nAppui long pour afficher sur la carte</string>
 <string name="local_index_gpx_info_speed">\nVitesse moyenne : %1$s \nVitesse maximum : %2$s</string>
 <string name="local_index_gpx_info_elevation">\nAltitude moyenne : %1$.0f m\nAltitude minimum : %2$.0f m\nAltitude maximum : %3$.0f m\nMontées : %4$.0f m\nDescentes : %5$.0f m</string>
-<string name="local_index_gpx_info">Sections : %1$d\nPoints au total : %2$d\nPoints étapes : %3$d\nDistance totale : %4$s\nHeure de départ : %5$tD %5$tR\nHeure d\'arrivée : %6$tD %6$tR</string>
+<string name="local_index_gpx_info">Sections : %1$d\nPoints au total : %2$d\nPoints étapes : %3$d\nDistance totale : %4$s\nHeure de départ : %5$tF,  %5$tR\nHeure d\'arrivée : %6$tF,  %6$tR</string>
 <string name="local_index_installed">Édition</string>
 <string name="local_index_items_backuped">%1$d sur %2$d éléments sauvegardés.</string>
 <string name="local_index_items_deleted">%1$d sur %2$d éléments supprimés.</string>
@@ -355,7 +355,7 @@
 <string name="version_index_is_not_supported">La version \'\'{0}\'\' de l\'index n\'est pas supporté</string>
 <string name="use_osmand_routing_service">Navigation hors-ligne OsmAnd</string>
 <string name="use_osmand_routing_service_descr">Utiliser la navigation hors-ligne pour les longues distances (expérimental)</string>
-<string name="osmand_routing_experimental">La navigation hors-ligne OsmAnd est une fonction expérimentale ne fonctionnant pas pour une distance de plus de 20 km.\n Le service utilise alors automatiquement le service en-ligne CloudMade.</string>
+<string name="osmand_routing_experimental">La navigation hors-ligne OsmAnd est une fonction expérimentale ne fonctionnant pas pour une distance de plus de 20 km.\n\nLe service utilise alors automatiquement le service en-ligne CloudMade.</string>
 <string name="specified_dir_doesnt_exist">Le répertoire spécifié est introuvable.</string>
 <string name="application_dir">Répertoire de stockage</string>
 <string name="application_dir_change_warning">Le changement du répertoire de stockage ne déplacera pas vos données. Vous devrez alors le faire vous même ! Faites-le à vos risques et périls ! Continuer quand même ?</string>
@@ -550,7 +550,6 @@
 <string name="search_online_address">Internet</string>
 <string name="max_level_download_tile">Niveau de zoom max.</string>
 <string name="max_level_download_tile_descr">Choisir un niveau de zoom maximum pour le téléchargement</string>
-<string name="route_about">À propos du trajet</string>
 <string name="route_general_information">Distance totale = %1$s, temps de déplacement = %2$d h %3$d m.</string>
 <string name="router_service_descr">Choisir la source de l\'itinéraire à suivre</string>
 <string name="router_service">Itinéraire</string>
@@ -563,7 +562,7 @@
 <string name="downloading_file">Téléchargement du fichier...</string>
 <string name="downloading">Téléchargement...</string>
 <string name="downloading_list_indexes">Téléchargement de la liste des régions disponibles</string>
-<string name="list_index_files_was_not_loaded">Les fichiers d\'index ne sont pas de osmand.googlecode.com.</string>
+<string name="list_index_files_was_not_loaded">Les fichiers d\'index ne sont pas de osmand.net.</string>
 <string name="select_index_file_to_download">Si vous ne pouvez trouver votre région, vous pouvez la créer vous-même. (Voir sur osmand.net)</string>
 <string name="show_poi_on_map">Voir sur la carte</string>
 <string name="fav_points_edited">Le favoris a été modifié</string>
@@ -572,7 +571,6 @@
 <string name="only_show">Afficher seulement</string>
 <string name="follow">Suivre</string>
 <string name="recalculate_route_to_your_location">Recalculer le trajet à partir de votre emplacement</string>
-<string name="follow_route">Suivre le trajet</string>
 <string name="mark_final_location_first">Veuillez tout d\'abord sélectionner un point de destination</string>
 <string name="get_directions">Navigation</string>
 <string name="show_gps_status">Afficher le statut GPS</string>

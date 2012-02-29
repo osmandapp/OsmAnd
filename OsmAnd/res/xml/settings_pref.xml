@@ -76,8 +76,10 @@
 		<ListPreference android:title="@string/voice_provider" android:key="voice_provider" android:summary="@string/voice_provider_descr"></ListPreference>
 		<ListPreference android:key="auto_follow_route" android:title="@string/choose_auto_follow_route"
 			android:summary="@string/choose_auto_follow_route_descr"></ListPreference>
+		<!-- try without AUTO_FOLLOW_ROUTE_NAV (see forum discussion 'Simplify our navigation preference menu')
 		<CheckBoxPreference android:summary="@string/auto_follow_route_navigation_descr" android:title="@string/auto_follow_route_navigation"
 			android:key="auto_follow_route_navigation"></CheckBoxPreference>
+		-->
 		<CheckBoxPreference android:summary="@string/use_osmand_routing_service_descr" android:title="@string/use_osmand_routing_service"
 			android:key="use_osmand_routing_service"></CheckBoxPreference>	
 	</PreferenceScreen>
@@ -107,13 +109,16 @@
 			<EditTextPreference android:title="@string/user_name" android:summary="@string/user_name_descr" android:key="user_name"></EditTextPreference>
 			<EditTextPreference android:title="@string/user_password" android:password="true" android:summary="@string/user_password_descr"
 				android:key="user_password"></EditTextPreference>
+			<CheckBoxPreference android:summary="@string/offline_poi_edition_descr" android:title="@string/offline_poi_edition"
+				android:key="offline_poi_edition"></CheckBoxPreference>
+			<Preference android:title="@string/local_openstreetmap_settings" android:key="local_openstreetmap_points" android:summary="@string/local_openstreetmap_settings_descr"></Preference>
 		</PreferenceCategory>
 		<PreferenceCategory android:title="OsmAnd debugging and development">
 			<CheckBoxPreference android:key="native_rendering" android:title="Native rendering" android:summary="Vector maps may display faster. May not work well on some devices."></CheckBoxPreference>
 			<CheckBoxPreference android:summary="@string/trace_rendering_descr" android:title="@string/trace_rendering"
 				android:key="debug_rendering"></CheckBoxPreference>
 			<CheckBoxPreference android:key="animate_routing" android:title="Animate routing" android:summary="Simulate route progression manually"></CheckBoxPreference>
-			<Preference android:key="test_voice_commands" android:summary="Play commands of currently selected voice" android:title="Test voice commands"></Preference>
+			<Preference android:key="test_voice_commands" android:summary="Play commands of currently selected voice" android:title="Test voice prompts"></Preference>
 		</PreferenceCategory>
 	</PreferenceScreen>
 

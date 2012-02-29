@@ -1,5 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="offline_poi_edition">Offline editace POI</string>
+	<string name="offline_poi_edition_descr">Vždy používat offline editaci POI</string>
+
+	<string name="tip_recent_changes_0_7_1_t">Změny ve verzi 0.7.1 :
+	\n\t- offline editace POI
+	\n\t- přímý přenos pozice - pravidelně posílá souřadnice na webový server (návod jak nastavit vlastní webovou služby je v HowTo článcích)
+	\n\t- Zobrazení momentálně zaznamenávané trasy
+	\n\t- Detekce směru pohybu: indikace a hlášení \'Otočte se zpět\' v případě pohybu směrem od cíle nebo po minutí odbočky
+	\n\t- Obnovené hlasové hlášení \'Přepočítávám cestu\'
+	\n\t- Optická indikace blížící se odbočky během 100m pomocí změny barvy šipky
+	\n\t- Zobrazení aktuálnosti offline dat u deaktivovaných souborů (sekce Download) pomocí tmavě zelené a tmavě modré
+	\n\t- Další změny
+	\n\nSledujte také stránky české podpory osmand.cz
+	</string>
+
+	<string name="update_poi_does_not_change_indexes">Změny POI bodů v aplikaci nemají vliv na zobrazení stažených map, změny se ukládají do lokálního souboru.</string>
+	<string name="local_openstreetmap_uploading_poi">Odesílám POI...</string>
+	<string name="local_openstreetmap_poi_were_uploaded">{0} POI bylo odesláno</string>
+	<string name="local_openstreetmap_uploadall">Odeslat všechny POI</string>
+	<string name="local_openstreetmap_items"></string>
+	<string name="local_openstreetmap_show_poi">Zobrazit POI na mapě</string>
+	<string name="local_openstreetmap_upload">Odeslat změny do OSM</string>
+	<string name="local_openstreetmap_delete">Smazat změny POI</string>
+	<string name="local_openstreetmap_descr_title">Offline editace POI v Openstreetmap:</string>
+	<string name="local_openstreetmap_settings">Lokální body Openstreetmap</string>
+	<string name="local_openstreetmap_settings_descr">Lokální body uložené v databázi</string>
+
+
+	<string name="live_monitoring_descr">Zapnout přímé nahrávání pozice na HTTP server</string>
+	<string name="live_monitoring">Přímý přenos pozice</string>
+	<string name="live_monitoring_interval_descr">Zadejte interval nahrávání pozice na server</string>
+	<string name="live_monitoring_interval">Interval přímého přenosu</string>
+	<string name="live_monitoring_url_descr">Zadejte webovou adresu serveru pro přímý přenos pozice. Parametry: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+	<string name="live_monitoring_url">Server pro přímý přenos</string>
+	<string name="gpx_monitoring_disabled_warn">Prosím, zapněte funkci \'Uložit trasu do GPX\'</string>
+	<string name="show_current_gpx_title">Zobrazit aktuální trasu</string>
+
 	<string name="tip_recent_changes_0_7_0_t">Změny ve verzi 0.7.0 :
 	\n\t- Offline informace o místech z Wikipedie
 	\n\t- Aktualizované mapy
@@ -19,7 +56,7 @@
 	<string name="index_name_russia">Evropa/Asie - Rusko</string>
 	<string name="index_name_africa">Afrika</string>
 	<string name="index_name_asia">Asie</string>
-	<string name="index_name_australia">Austrálie</string>
+	<string name="index_name_oceania">Oceánie</string>
 	<string name="index_name_other">Mapy celého světa a tematické mapy</string>
 	<string name="index_name_wiki">Celý svět - Wikipedie</string>
 	<string name="index_name_voice">Hlasová data (audio)</string>
@@ -200,7 +237,6 @@
 	<string name="poi_filter_by_name">Hledat podle jména</string>
 	<string name="old_poi_file_should_be_deleted">Soubor s POI daty \'%1$s\' již není potřeba a může být smazán.</string>
 	<string name="update_poi_file_not_found">Lokální soubor pro úpravu POI bodů nebyl nalezen a ani nemohl být vytvořen.</string>
-	<string name="update_poi_does_not_change_indexes">Změny POI bodů v aplikaci neovlivní stažená mapová data, změny se namísto toho ukládají do lokálního souboru.</string>
 
 	<string name="button_upgrade_osmandplus">Upgradovat Osmand+</string>
 	<string name="map_version_changed_info">Na serveru jsou mapy nekompatibilní s vaší verzí aplikace. Prosím aktualizujte aplikaci na novější verzi, abyste data mohli používat.</string>
@@ -263,7 +299,7 @@
         <string name="local_index_gpx_info_speed">\nPrůměrná rychlost : %1$s \nMaximální rychlost : %2$s</string>
         <string name="local_index_gpx_info_elevation">\nPrůměrná výška : %1$.0f metrů\nStoupání : %2$.0f metrů\nKlesání : %3$.0f metrů</string>
         <string name="local_index_gpx_info">Podtrasy : %1$d\nCelkem bodů : %2$d\nTrasových bodů : %3$d\nCelková vzdálenost : %4$s
-                                                                           \nPočáteční čas : %5$tD %5$tR\nKoncový čas : %6$tD %6$tR</string>
+                                                                           \nPočáteční čas : %5$tF,  %5$tR\nKoncový čas : %6$tF,  %6$tR</string>
         <string name="local_index_installed">Vydání</string>
         <string name="local_index_items_backuped">Zálohováno %1$d položek z %2$d.</string>
         <string name="local_index_items_deleted">Smazáno %1$d položek z %2$d.</string>
@@ -617,7 +653,7 @@
   navigaci pro dlouhé vzdálenosti (experimentální)</string>
   <string name="osmand_routing_experimental">Offline navigace je
   experimentální a funguje jen pro vzdálenosti do 20
-  km.\nPak se navigace automaticky přepne na online CloudMade.</string>
+  km.\n\nPak se navigace automaticky přepne na online CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Nemohu najít zadaný adresář.</string>
   <string name="application_dir">Adresář pro data</string>
   <string name="application_dir_change_warning">Změna adresáře pro
@@ -827,7 +863,6 @@
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Maximální zvětšení</string>
   <string name="max_level_download_tile_descr">Jaké nejvyšší zvětšení mapy stahovat</string>
-  <string name="route_about">O cestě</string>
   <string name="route_general_information">Celková vzdálenost %1$s, doba cesty %2$d h %3$d m.</string>
   <string name="router_service_descr">Vyberte navigační službu</string>
   <string name="router_service">Navigace</string>
@@ -840,7 +875,7 @@
   <string name="downloading_file">Stahuji soubor...</string>
   <string name="downloading">Stahuji...</string>
   <string name="downloading_list_indexes">Stahuji seznam dostupných indexů</string>
-  <string name="list_index_files_was_not_loaded">Seznam indexů z osmand.googlecode.com nebyl stažen.</string>
+  <string name="list_index_files_was_not_loaded">Seznam indexů z osmand.net nebyl stažen.</string>
   <string name="select_index_file_to_download">Pokud nemůžete najít svou oblast, můžete si data vytvořit sami, viz osmand.net</string>
   <string name="show_poi_on_map">Ukázat na mapě</string>
   <string name="fav_points_edited">Oblíbené místo bylo upraveno</string>
@@ -849,7 +884,6 @@
   <string name="only_show">Jen ukázat</string>
   <string name="follow">Následovat</string>
   <string name="recalculate_route_to_your_location">Přepočítat cestu podle Vaší polohy</string>
-  <string name="follow_route">Následovat cestu</string>
   <string name="mark_final_location_first">Prosím zadejte nejprve cíl</string>
   <string name="get_directions">Navigace</string>
   <string name="show_gps_status">Ukázat stav GPS</string>

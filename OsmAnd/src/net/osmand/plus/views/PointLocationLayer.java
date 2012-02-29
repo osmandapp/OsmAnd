@@ -7,7 +7,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Paint.Style;
@@ -41,17 +40,17 @@ public class PointLocationLayer extends OsmandMapLayer {
 		locationPaint.setDither(true);
 		
 		area = new Paint();
-		area.setColor(Color.BLUE);
+		area.setColor(view.getResources().getColor(R.color.pos_area));
 		area.setAlpha(40);
 		
 		aroundArea = new Paint();
-		aroundArea.setColor(Color.rgb(112, 124, 220));
+		aroundArea.setColor(view.getResources().getColor(R.color.pos_around));
 		aroundArea.setStyle(Style.STROKE);
 		aroundArea.setStrokeWidth(1);
 		aroundArea.setAntiAlias(true);
 		
 		headingPaint = new Paint();
-		headingPaint.setColor(Color.BLUE);
+		headingPaint.setColor(view.getResources().getColor(R.color.pos_heading));
 		headingPaint.setAlpha(50);
 		headingPaint.setAntiAlias(true);
 		headingPaint.setStyle(Style.FILL);

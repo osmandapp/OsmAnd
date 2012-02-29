@@ -21,6 +21,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,6 +31,7 @@ import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
+import android.widget.TextView;
 
 
 public class SearchActivity extends TabActivity {
@@ -84,7 +86,6 @@ public class SearchActivity extends TabActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
-		setTheme(R.style.NiceActivity);
 		setContentView(R.layout.search_main);
 		
 		Button backButton = (Button) findViewById(R.id.search_back_button);
@@ -96,7 +97,7 @@ public class SearchActivity extends TabActivity {
 		});
 		
 		spinner = (Spinner) findViewById(R.id.SpinnerLocation);
-		spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, 
+		spinnerAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_text, 
 				new ArrayList<String>(Arrays.asList(new String[]{
 						getString(R.string.search_position_undefined),
 						getString(R.string.search_position_current_location),
@@ -104,7 +105,20 @@ public class SearchActivity extends TabActivity {
 						getString(R.string.search_position_favorites),
 						getString(R.string.search_position_address)
 					}))
-				);
+				) {
+			@Override
+			public View getDropDownView(int position, View convertView,
+					ViewGroup parent) {
+				View dropDownView = super.getDropDownView(position,
+						convertView, parent);
+				if (dropDownView instanceof TextView) {
+					((TextView) dropDownView).setTextColor(getResources()
+							.getColor(R.color.color_black));
+				}
+				return dropDownView;
+			}
+		};
+		spinnerAdapter.setDropDownViewResource(R.layout.my_spinner_text);
 		
 		
 		TabWidget tabs = (TabWidget) findViewById(android.R.id.tabs);

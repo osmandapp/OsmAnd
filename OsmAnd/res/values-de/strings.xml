@@ -1,5 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="offline_poi_edition">Offline POI Bearbeitung</string>
+	<string name="offline_poi_edition_descr">Immer Offline-POI-Bearbeitung verwenden</string>
+
+	<string name="tip_recent_changes_0_7_1_t">Changes in 0.7.1 :
+\n\t- Offline POI-Bearbeitung 
+\n\t- Live-Tracking Option: Koordinaten periodisch an einen Web-Service schicken (Setup-Anleitung für eigenen Web-Service in den HowTo-Artikeln)
+\n\t- Anzeige des gegenwärtig aufgezeichneten Tracks möglich
+\n\t- Richtungsüberprüfung: \'Bitte wenden\' wird jetzt angezeigt und angsagt bei entgegengesetzter Bewegungsrichtung oder bei verpasster Abzweigung
+\n\t- Neue Ansage \'Strecke neu berechnet\'
+\n\t- Optische Anzeige eines innerhalb 100m bevorstehenden Abbiegevorgangs durch Farbwehsel des Richtungspfeils
+\n\t- Die Aktualität auch der deaktivierten Karten wird jetzt im Donwload-Liste in dunkelgrün und dunkelblau angezeigt
+\n\t- Weitere Verbesserungen
+	</string>
+
+	<string name="update_poi_does_not_change_indexes">Das Bearbeiten von POIs innerhalb der Applikation beeinflusst nicht die Offline-Karten, sondern wird in einer eigenen Datei gespeichert.</string>
+	<string name="local_openstreetmap_uploading_poi">POI hochladen...</string>
+	<string name="local_openstreetmap_poi_were_uploaded">{0} POI wurden hochgeladen</string>
+	<string name="local_openstreetmap_uploadall">Alle POI hochladen</string>
+	<string name="local_openstreetmap_items"></string>
+	<string name="local_openstreetmap_show_poi">POI auf Karte zeigen</string>
+	<string name="local_openstreetmap_upload">POI Änderung auf OSM hochladen</string>
+	<string name="local_openstreetmap_delete">POI Änderung löschen</string>
+	<string name="local_openstreetmap_descr_title">Asynchrone OSM POI Bearbeitung:</string>
+	<string name="local_openstreetmap_settings">Lokal notierte OSM Punkte</string>
+	<string name="local_openstreetmap_settings_descr">Lokal vorgemerkte OSM Punkte anzeigen und verwalten</string>
+
 	<string name="live_monitoring_descr">Senden von HTTP-Daten an einen Web-Service</string>
 	<string name="live_monitoring">Live-Tracking aktivieren</string>
 	<string name="live_monitoring_interval_descr">Angabe des Live-Tracking Invervalls</string>
@@ -27,7 +53,7 @@
 	<string name="index_name_russia">Europa/Asien - Russland</string>
 	<string name="index_name_africa">Afrika</string>
 	<string name="index_name_asia">Asien</string>
-	<string name="index_name_australia">Australien</string>
+	<string name="index_name_oceania">Ozeanien</string>
 	<string name="index_name_other">Weltweite und thematische Karten</string>
 	<string name="index_name_wiki">Weltweite Wikipedia</string>
 	<string name="index_name_voice">Sprachpakete (Aufnahmen)</string>
@@ -119,7 +145,7 @@
 	<string name="auto_follow_route_never">Nie</string>
 	<string name="auto_follow_route_navigation">Nachführung nur bei Nav.</string>
 	<string name="auto_follow_route_navigation_descr">Kartennachführung erfolgt nur während Navigation (Routing)</string>
-	<string name="auto_follow_location_enabled">Kartennachführung aktiviert</string>
+	<string name="auto_follow_location_enabled">Kartennachführung aktiv</string>
 
 	<string name="sendtoOSM_confirmation_msg">An OSM schicken: %1$s?</string>
 	<string name="pref_vector_rendering">Vektor Renderer spezif. Optionen</string>
@@ -154,7 +180,6 @@
 	<string name="poi_filter_by_name">Nach Namen suchen</string>
 	<string name="old_poi_file_should_be_deleted">Die POI-Datei \'%1$s\' wird nicht mehr benötigt und kann gelöscht werden.</string>
 	<string name="update_poi_file_not_found">Lokale Datei für POI-Änderungen nicht gefunden und konnte nicht erstellt werden.</string>
-	<string name="update_poi_does_not_change_indexes">POI-Änderungen in der Applikation beeinflussen die herunergeladenen Kartendateien nicht, sondern werden in einer lokalen Datei gespeichert.</string>
 
 	<string name="button_upgrade_osmandplus">OsmAnd+ aktualisieren</string>
 	<string name="map_version_changed_info">Der Server enthält Karten die mit ihrer derzeitigen Anwendungsversion nicht kompatibel sind. Um sie zu laden und zu verwenden, aktualisieren Sie bitte auf die neueste Version.</string>
@@ -206,13 +231,16 @@
 	<string name="favorite_places_category">Orte</string>
 	<string name="favorite_default_category">Andere</string>
 
+	<string name="favourites_edit_dialog_name">Name</string>
+	<string name="favourites_edit_dialog_category">Kategorie</string>
+
 	<string name="vector_map_not_needed">Nicht verwendet</string>
 	<string name="basemap_missing">Die offline-Weltkarte für kleine Vergrößerungen ist noch nicht vorhanden. Bitte ggfls. World_basemap_x.obf herunterladen.</string>
 	<string name="vector_data_missing">Keine Offline-Daten vorhanden (SD-Karte). Bitte ggfls. herunterladen, damit Karten offline verwendet werden können.</string>
 	<string name="local_index_gpx_info_show">\n\nLang klicken für Optionen</string>
 	<string name="local_index_gpx_info_speed">\nDurchschn.geschw.: %1$s \nMax. Geschw.: %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nDurchschn.höhe: %1$.0f m\nMinimalhöhe: %2$.0f m\nMaximalhöhe: %3$.0f m\nAufstiege: %4$.0f m\nAbstiege: %5$.0f m</string>
-	<string name="local_index_gpx_info">Subtracks: %1$d\nPunkte insgesamt: %2$d\nWegpunkte: %3$d\nGesamtstrecke: %4$s\nStartzeit: %5$tD %5$tR\nEndzeit: %6$tD %6$tR</string>
+	<string name="local_index_gpx_info">Subtracks: %1$d\nPunkte insgesamt: %2$d\nWegpunkte: %3$d\nGesamtstrecke: %4$s\nStartzeit: %5$tF,  %5$tR\nEndzeit: %6$tF,  %6$tR</string>
 	<string name="local_index_installed">Edition</string>
 	<string name="local_index_items_backuped">%1$d von %2$d Datei(en) erfolgreich deaktiviert.</string>
 	<string name="local_index_items_deleted">%1$d von %2$d Datei(en) erfolgreich gelöscht.</string>
@@ -413,7 +441,7 @@
 					
 	<string name="use_osmand_routing_service">OsmAnd Routing</string>
 	<string name="use_osmand_routing_service_descr">OsmAnd Offlinerouting für große Entfernungen verwenden (experimentell) anstatt automatisch CloudMade zu nehmen</string>
-	<string name="osmand_routing_experimental">OsmAnd Offlinerouting ist noch experimentell und funktioniert nicht gut für Entfernungen über 20 km.\n Als Routingdienst wird temporär online CloudMade verwendet.</string>
+	<string name="osmand_routing_experimental">OsmAnd Offlinerouting ist noch experimentell und funktioniert nicht gut für Entfernungen über 20 km.\n\nAls Routingdienst wird temporär online CloudMade verwendet.</string>
 	<string name="specified_dir_doesnt_exist">Angegebener Ordner kann nicht gefunden werden.</string>
 	<string name="application_dir">Verzeichnis</string>
 	<string name="application_dir_change_warning">Das Wechseln des Verzeichnis verschiebt oder löscht keine Daten. Dies muss separat außerhalb von OsmAnd durchgeführt werden. Dennoch fortfahren?</string>
@@ -619,7 +647,6 @@
 	<string name="search_online_address">Internet</string>
 	<string name="max_level_download_tile">Max. Online-Zoom</string>
 	<string name="max_level_download_tile_descr">Maximale Vergrößerung bis zu der Online-Karten-Daten (Kacheln) aus dem Internet geladen werden</string>
-	<string name="route_about">Routeninformationen</string>
 	<string name="route_general_information">%1$s Gesamtentfernung\n%2$d:%3$d Reisezeit</string>
 	<string name="router_service_descr">Online- oder Offline-Dienst zur Streckenberechnung wählen</string>
 	<string name="router_service">Routingdienst</string>
@@ -632,7 +659,7 @@
 	<string name="downloading_file">Herunterladen der Datei ...</string>
 	<string name="downloading">Herunterladen ...</string>
 	<string name="downloading_list_indexes">Herunterladen einer Liste der verfügbaren Regionen ...</string>
-	<string name="list_index_files_was_not_loaded">Die Liste der Regionen wurde von osmand.googlecode.com nicht geladen.</string>
+	<string name="list_index_files_was_not_loaded">Die Liste der Regionen wurde von osmand.net nicht geladen.</string>
     <string name="select_index_file_to_download">Nicht vorhandene Regionen können selbst erstellt werden, siehe osmand.net.</string>
 	<string name="show_poi_on_map">Auf Karte zeigen</string>
 	<string name="fav_points_edited">Favorit wurde bearbeitet</string>
@@ -641,7 +668,6 @@
 	<string name="only_show">Nur anzeigen</string>
 	<string name="follow">Folgen</string>
 	<string name="recalculate_route_to_your_location">Transportmittel wählen (optional):</string>
-	<string name="follow_route">Route bestimmen</string>
 	<string name="mark_final_location_first">Bitte erst ein Ziel wählen</string>
 	<string name="get_directions">Route</string>
     <string name="show_gps_status">GPS-Status anzeigen</string>

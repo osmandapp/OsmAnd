@@ -83,7 +83,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 			}
 		};
 		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(sleft, sright, stop, sbottom, zoom,
-				poiTypeFilter, matcher);
+				poiTypeFilter, filter == null ? matcher : filter.getResultMatcher(matcher));
 		try {
 			List<Amenity> result = index.searchPoi(req);
 			amenities.addAll(result);

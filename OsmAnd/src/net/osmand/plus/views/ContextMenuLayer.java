@@ -143,7 +143,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		latLon = loc;
 		if(latLon != null){
 			if(description == null || description.length() == 0){
-				description = view.getContext().getString(R.string.point_on_map,
+				description = view.getContext().getString(R.string.point_on_map, 
 						latLon.getLatitude(), latLon.getLongitude());
 			}
 			textView.setText(description);

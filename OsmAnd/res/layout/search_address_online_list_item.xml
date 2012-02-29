@@ -6,18 +6,16 @@
 
     <TextView
         android:id="@+id/distance_label"
-        style="@style/WhiteText"
+        style="@style/ListText.Small"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:gravity="left"
-        android:textSize="20sp" />
+        android:gravity="left" />
 
     <TextView
         android:id="@+id/label"
-        style="@style/WhiteText"
+        style="@style/ListText.Small"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp" />
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

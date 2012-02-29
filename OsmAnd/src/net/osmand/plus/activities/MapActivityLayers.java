@@ -14,9 +14,10 @@ import java.util.Map.Entry;
 import net.osmand.Algoritms;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
-import net.osmand.ResultMatcher;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.OsmAndFormatter;
+import net.osmand.ResultMatcher;
 import net.osmand.data.AmenityType;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -354,8 +355,9 @@ public class MapActivityLayers {
 			}
 		};
 		Builder b = new AlertDialog.Builder(activity);
-		ListView list = new ListView(activity, null, R.style.NiceActivity);
-//		list.setBackgroundColor(R.color.color_white);
+		ListView list = new ListView(activity);
+//		list.setBackgroundColor(white);
+		list.setCacheColorHint(activity.getResources().getColor(R.color.color_transparent));
 		b.setView(list);
 		final List<String> layerNames = new ArrayList<String>();
 		for (int i = 0; i < layers.size(); i++) {
@@ -416,7 +418,6 @@ public class MapActivityLayers {
 		});
 		dlg.setCanceledOnTouchOutside(true);
 		dlg.show();
-		
 	}
 	
 	public void showGPXFileLayer(final OsmandMapTileView mapView){
@@ -569,7 +570,11 @@ public class MapActivityLayers {
 					activity.startActivity(newIntent);
 				} else {
 					getApplication().getSettings().setPoiFilterForMap(filterId);
-					poiMapLayer.setFilter(poiFilters.getFilterById(filterId));
+					PoiFilter f = poiFilters.getFilterById(filterId);
+					if(f != null){
+						f.clearNameFilter();
+					}
+					poiMapLayer.setFilter(f);
 					mapView.refreshMap();
 				}
 			}

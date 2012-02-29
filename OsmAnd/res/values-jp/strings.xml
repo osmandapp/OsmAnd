@@ -260,7 +260,7 @@ OSMコミュニティはこの問題をいち早く修正することができ�
 OsmAndを使用(実験版)</string>
      <string name="osmand_routing_experimental">OsmAndオフライン経路案内は実験的な機能であり
 20km以上の距離では動作しません。
-\n 経路案内サービスはオンラインのCloudMadeに自動的に切り替わります。</string>
+\n\n経路案内サービスはオンラインのCloudMadeに自動的に切り替わります。</string>
      <string name="specified_dir_doesnt_exist">指定されたディレクトリが見つかりません。</string>
      <string name="application_dir">記憶領域のディレクトリ</string>
      <string name="application_dir_change_warning">領域のディレクトリ変更は
@@ -510,7 +510,6 @@ POIの更新は利用できません</string>
      <string name="max_level_download_tile">最大オンラインズーム</string>
      <string name="max_level_download_tile_descr">オンラインマップタイル用にダウンロードする
 最大ズームレベルを選ぶ</string>
-     <string name="route_about">ルートについて</string>
      <string name="route_general_information">総距離 %1$s,
 移動時間 %2$d 時間 %3$d 分。</string>
      <string name="router_service_descr">オンラインまたはオフラインルーティングサービスを選択</string>
@@ -525,7 +524,7 @@ POIの更新は利用できません</string>
      <string name="downloading_file">ファイルをダウンロード中...</string>
      <string name="downloading">ダウンロード中...</string>
      <string name="downloading_list_indexes">利用可能な地域のリストをダウンロード中</string>
-     <string name="list_index_files_was_not_loaded">地域のリストはosmand.googlecode.com 
+     <string name="list_index_files_was_not_loaded">地域のリストはosmand.net 
 から参照されていません。</string>
  <string name="select_index_file_to_download">自分の地域が見つからない場合、
 自分で作ることができます。osmand.net を参照</string>
@@ -537,7 +536,6 @@ POIの更新は利用できません</string>
      <string name="follow">フォロー</string>
      <string
 name="recalculate_route_to_your_location">現在地に従ってルートを再計算中</string>
-     <string name="follow_route">ルートをフォロー</string>
      <string name="mark_final_location_first">最初に目的地を選んでください</string>
      <string name="get_directions">方向</string>
  <string name="show_gps_status">GPSステータスを表示</string>

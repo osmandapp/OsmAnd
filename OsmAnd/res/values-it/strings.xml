@@ -190,7 +190,7 @@
 	<string name="local_index_gpx_info_show">\n\nClick lungo per mostrare opzioni</string>
 	<string name="local_index_gpx_info_speed">\nVelocità media : %1$s \nVelocità massima : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nAltitudine media : %1$.0f m\nAltitudine minima : %2$.0f m\nAltitudine massima : %3$.0f m\nSalite : %4$.0f m\nDiscese : %5$.0f m</string>
-	<string name="local_index_gpx_info">Subtracks : %1$d\nPunti totali : %2$d\nWay points : %3$d\nDistanza totale : %4$s\nOra partenza : %5$tD %5$tR\nOra arrivo : %6$tD %6$tR</string>
+	<string name="local_index_gpx_info">Subtracks : %1$d\nPunti totali : %2$d\nWay points : %3$d\nDistanza totale : %4$s\nOra partenza : %5$tF,  %5$tR\nOra arrivo : %6$tF,  %6$tR</string>
 	<string name="local_index_installed">Edizione</string>
 	<string name="local_index_items_backuped">%1$d su %2$d oggetto/i backuppato/i.</string>
 	<string name="local_index_items_deleted">%1$d su %2$d oggetto/i eliminato/i.</string>
@@ -390,7 +390,7 @@
 
 	<string name="use_osmand_routing_service">Routing OsmAnd</string>
 	<string name="use_osmand_routing_service_descr">Usa il routing OsmAnd offline per lunghe distanze (sperimentale)</string>
-	<string name="osmand_routing_experimental">Il routing offline di OsmAnd è sperimentale e non funziona per distanze superiori ai 20 km.\n Il servizio routing viene cambiato temporaneo tramite CloudMade online.</string>
+	<string name="osmand_routing_experimental">Il routing offline di OsmAnd è sperimentale e non funziona per distanze superiori ai 20 km.\n\nIl servizio routing viene cambiato temporaneo tramite CloudMade online.</string>
 	<string name="specified_dir_doesnt_exist">Impossibile trovare la directory specificata.</string>
 	<string name="application_dir">Cartella deposito</string>
 	<string name="application_dir_change_warning">Il cambiamento della cartella non sposterà nè eliminerà i dati. Dovrà essere fatto manualmente al di fuori di OsmAnd. Continuare?</string>
@@ -596,7 +596,6 @@
 	<string name="search_online_address">Internet</string>
 	<string name="max_level_download_tile">Max zoom online</string>
 	<string name="max_level_download_tile_descr">Scegliere il massimo livello di zoom usando internet</string>
-	<string name="route_about">Info sul percorso</string>
 	<string name="route_general_information">Distanza totale = %1$s, tempo di viaggio = %2$d h %3$d m.</string>
 	<string name="router_service_descr">Scegliere il servizio di generazione percorso</string>
 	<string name="router_service">Generazione percorso</string>
@@ -609,7 +608,7 @@
 	<string name="downloading_file">Ricezione file...</string>
 	<string name="downloading">In ricezione...</string>
 	<string name="downloading_list_indexes">Ricezione lista regioni disponibili...</string>
-	<string name="list_index_files_was_not_loaded">I file di indice non sono stati trovati su osmand.googlecode.com.</string>
+	<string name="list_index_files_was_not_loaded">I file di indice non sono stati trovati su osmand.net.</string>
     <string name="select_index_file_to_download">Se non trovate la vostra zona potete generarla da voi. Consultare osmand.net</string>
 	<string name="show_poi_on_map">Visualizza sulla mappa</string>
 	<string name="fav_points_edited">Favorito modificato</string>
@@ -618,7 +617,6 @@
 	<string name="only_show">Visualizza solo</string>
 	<string name="follow">Segui</string>
 	<string name="recalculate_route_to_your_location">Ricalcolo del percorso relativamente alla vostra posizione</string>
-	<string name="follow_route">Seguire il percorso</string>
 	<string name="mark_final_location_first">Selezionare prima una destinazione</string>
 	<string name="get_directions">Percorsi</string>
     <string name="show_gps_status">Visualizzare lo stato del gps</string>

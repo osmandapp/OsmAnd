@@ -8,6 +8,7 @@ import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
+import net.osmand.plus.R;
 
 public class MiniMapControl extends MapInfoControl {
 	private float scaleCoefficient = MapInfoLayer.scaleCoefficient;
@@ -34,7 +35,7 @@ public class MiniMapControl extends MapInfoControl {
 		paintMiniRoute = new Paint();
 		paintMiniRoute.setStyle(Style.STROKE);
 		paintMiniRoute.setStrokeWidth(35 * scaleCoefficient);
-		paintMiniRoute.setColor(Color.BLUE);
+		paintMiniRoute.setColor(getResources().getColor(R.color.nav_track));
 		paintMiniRoute.setStrokeJoin(Join.ROUND);
 		paintMiniRoute.setStrokeCap(Cap.ROUND);
 		paintMiniRoute.setAntiAlias(true);

@@ -28,6 +28,7 @@ turn(Turn) == ['Nyt, ', M] :- turn(Turn, M).
 prepare_make_ut(Dist) == ['Valmistaudu kääntymään takaisin ', D, ' päästä'] :- distance(Dist, metrin) == D.
 make_ut(Dist) == ['Käänny takaisin ', D, ' päästä '] :- distance(Dist, metrin) == D.
 make_ut == ['Nyt, käänny takaisin '].
+make_ut_wp == ['Nyt, käänny takaisin '].
 
 prepare_roundabout(Dist) == ['Valmistaudu ajamaan liikenneympyrään ', D, ' päästä'] :- distance(Dist, metrin) == D.
 roundabout(Dist, _Angle, Exit) == ['Aja liikenneympyrään ', D, ' päästä ja ota ', E, ' liittymä'] :- distance(Dist, metrin) == D, nth(Exit, E).
@@ -46,7 +47,7 @@ bear_left == ['pidä vasen '].
 route_new_calc(Dist) == ['Matkan pituus on ', D] :- distance(Dist, metria) == D.
 route_recalc(Dist) == ['Reitin uudelleenlaskenta ', D] :- distance(Dist, metria) == D.	
 
-location_lost == ['g p s location lost '].
+location_lost == ['g p s signal lost '].
 
 
 %% 

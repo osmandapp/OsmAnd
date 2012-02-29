@@ -21,6 +21,7 @@ turn(Turn) == M :- turn(Turn, M).
 prepare_make_ut(Dist) == ['Через ', D, ' выполните разворот'] :- distance(Dist) == D.
 make_ut(Dist) ==  ['Через ', D, ' выполните разворот'] :- distance(Dist) == D.
 make_ut == ['Выполните разворот '].
+make_ut_wp == ['Выполните разворот '].
 
 prepare_roundabout(Dist) == ['Приготовьте через ', D, ' круг'] :- distance(Dist) == D.
 roundabout(Dist, _Angle, Exit) == ['Через ', D, ' круг, выполните ', E, 'съезд'] :- distance(Dist) == D, nth(Exit, E).
@@ -37,9 +38,9 @@ bear_right == ['держитесь правее '].
 bear_left == ['держитесь левее '].
 
 route_new_calc(Dist) == ['Маршрут составляет ', D] :- distance(Dist) == D.
-%route_recalc(Dist) == ['Route recalculated, the trip is ', D] :- distance(Dist) == D.
+route_recalc(Dist) == ['маршрут пересчитывается, расстояние ', D] :- distance(Dist) == D.
 
-%location_lost == ['g p s location lost '].
+location_lost == ['g p s потеря сигнала '].
 
 
 %% 

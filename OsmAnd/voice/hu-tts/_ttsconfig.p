@@ -14,32 +14,33 @@ turn('right', ['fordulj jobbra ']).
 turn('right_sh', ['fordulj élesen jobbra ']).
 turn('right_sl', ['fordulj enyhén jobbra ']).
 
-prepare_turn(Turn, Dist) == [D, ' múlva ', M] :- distance(Dist) == D, turn(Turn, M).
-turn(Turn, Dist) == [D, 'múlva ', M] :- distance(Dist) == D, turn(Turn, M).
+prepare_turn(Turn, Dist) == [D, ' múlva ', M] :- distance(Dist, no-t) == D, turn(Turn, M).
+turn(Turn, Dist) == [D, 'múlva ', M] :- distance(Dist, no-t) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
-prepare_make_ut(Dist) == [D, ' múlva készüj fel a visszafordulásra'] :- distance(Dist) == D.
-make_ut(Dist) == [D, ' múlva fordulj vissza '] :- distance(Dist) == D.
+prepare_make_ut(Dist) == [D, ' múlva készülj fel a visszafordulásra'] :- distance(Dist, no-t) == D.
+make_ut(Dist) == [D, ' múlva fordulj vissza '] :- distance(Dist, no-t) == D.
 make_ut == ['Fordulj vissza '].
+make_ut_wp == ['Fordulj vissza '].
 
-prepare_roundabout(Dist) == [D, ' múlva hajts be a köforgalomba'] :- distance(Dist) == D.
-roundabout(Dist, _Angle, Exit) == [D, ' múlva a körfrorgalomban ', E, 'kijáraton hajts ki'] :- distance(Dist) == D, nth(Exit, E).
+prepare_roundabout(Dist) == [D, ' múlva hajts be a körforgalomba'] :- distance(Dist, no-t) == D.
+roundabout(Dist, _Angle, Exit) == [D, ' múlva a körforgalomban ', E, 'kijáraton hajts ki'] :- distance(Dist, no-t) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['hajts ki ', E, 'kijáraton'] :- nth(Exit, E).
 
 go_ahead == ['Haladj tovább egyenesen '].
-go_ahead(Dist) == ['Menj tovább ', D, 't '] :- distance(Dist) == D.
+go_ahead(Dist) == ['Menj tovább ', D] :- distance(Dist, t) == D.
 
-and_arrive_destination == ['és megérkezel az uticélhoz '].
+and_arrive_destination == ['és megérkezel az úti célhoz '].
 
 then == ['majd '].
-reached_destination == ['megérkeztél az uticélhoz '].
+reached_destination == ['megérkeztél az úti célhoz '].
 bear_right == ['tarts jobbra '].
 bear_left == ['tarts balra '].
 
-route_new_calc(Dist) == ['Az útvonal ', D] :- distance(Dist) == D.
-route_recalc(Dist) == ['útvonal újratervezése, az útvonal ', D] :- distance(Dist) == D.
+route_new_calc(Dist) == ['Az útvonal ', D] :- distance(Dist, no-t) == D.
+route_recalc(Dist) == ['útvonal újratervezése, az útvonal ', D] :- distance(Dist, no-t) == D.
 
-location_lost == ['g p s location lost '].
+location_lost == ['nem található dzsípíesz pozíció '].
 
 
 %% 
@@ -63,11 +64,16 @@ nth(17, 'a tizenhetedik ').
 
 
 %%% distance measure
-distance(Dist) == [ X, ' méter'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist) == [ X, ' méter'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
-distance(Dist) == ['körülbelül 1 kilométer'] :- Dist < 1500.
-distance(Dist) == ['mintegy ', X, ' kilométer'] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance(Dist) == [ X, ' kilométer'] :- D is round(Dist/1000), num_atom(D, X).
+distance(Dist, no-t) == [ X, ' méter'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
+distance(Dist, t) == [ X, ' métert'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
+distance(Dist, no-t) == [ X, ' méter'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist, t) == [ X, ' métert'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist, no-t) == ['körülbelül 1 kilométer'] :- Dist < 1500.
+distance(Dist, t) == ['körülbelül 1 kilométert'] :- Dist < 1500.
+distance(Dist, no-t) == ['mintegy ', X, ' kilométer'] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
+distance(Dist, t) == ['mintegy ', X, ' kilométert'] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
+distance(Dist, no-t) == [ X, ' kilométer'] :- D is round(Dist/1000), num_atom(D, X).
+distance(Dist, t) == [ X, ' kilométert'] :- D is round(Dist/1000), num_atom(D, X).
 
 
 %% resolve command main method

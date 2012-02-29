@@ -8,6 +8,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MeasurementActivity;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
+import net.osmand.plus.routing.RoutingHelper.TurnType;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -60,6 +61,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private MapStackControl rightStack;
 	private MapStackControl leftStack;
 	private ViewGroup statusBar;
+
 	
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
@@ -306,9 +308,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 							if (Math.abs(toFindTime - cachedLeftTime) > 30000) {
 								cachedLeftTime = toFindTime;
 								if (DateFormat.is24HourFormat(map)) {
-									setText(DateFormat.format("kk:mm", toFindTime).toString(), null); //$NON-NLS-1$
+									setText(DateFormat.format("k:mm", toFindTime).toString(), null); //$NON-NLS-1$
 								} else {
-									setText(DateFormat.format("k:mm", toFindTime).toString(), 
+									setText(DateFormat.format("h:mm", toFindTime).toString(), 
 											DateFormat.format("aa", toFindTime).toString()); //$NON-NLS-1$
 								}
 								return true;
@@ -440,27 +442,38 @@ public class MapInfoLayer extends OsmandMapLayer {
 				boolean visible = false;
 				if (routeLayer != null && routeLayer.getHelper().isRouterEnabled() && routeLayer.getHelper().isFollowingMode()) {
 					int d = routeLayer.getHelper().getDistanceToNextRouteDirection();
-					if (d > 0 && !showMiniMap) {
-						visible = true;
-						RouteDirectionInfo next = routeLayer.getHelper().getNextRouteDirectionInfo();
-						if (next == null) {
-							if (turnType != null) {
-								turnType = null;
-								invalidate();
-							}
-						} else if (!Algoritms.objectEquals(turnType, next.turnType)) {
-							turnType = next.turnType;
+
+					// Issue 863
+					if (routeLayer.getHelper().makeUturnWhenPossible() == true) {
+						if (!showMiniMap) {
+							visible = true;
+							turnType = TurnType.valueOf(TurnType.TU);
 							TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
-							if (turnType.getExitOut() > 0) {
-								exitOut = turnType.getExitOut() + ""; //$NON-NLS-1$
-							} else {
-								exitOut = null;
-							}
 							invalidate();
 						}
-						if (distChanged(d, nextTurnDirection)) {
-							invalidate();
-							nextTurnDirection = d;
+					} else {
+						if (d > 0 && !showMiniMap) {
+							visible = true;
+							RouteDirectionInfo next = routeLayer.getHelper().getNextRouteDirectionInfo();
+							if (next == null) {
+								if (turnType != null) {
+									turnType = null;
+									invalidate();
+								}
+							} else if (!Algoritms.objectEquals(turnType, next.turnType)) {
+								turnType = next.turnType;
+								TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
+								if (turnType.getExitOut() > 0) {
+									exitOut = turnType.getExitOut() + ""; //$NON-NLS-1$
+								} else {
+									exitOut = null;
+								}
+								invalidate();
+							}
+							if (distChanged(d, nextTurnDirection)) {
+								invalidate();
+								nextTurnDirection = d;
+							}
 						}
 					}
 				}

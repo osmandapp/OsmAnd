@@ -8,7 +8,7 @@
 		</regions>
 				
 		<!-- 7. NEW ZEALAND-AUSTRALIA [SOURCE: GEOFABRIK.DE] -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/australia-oceania/{0}.osm.pbf" region_prefix="" region_suffix="_Australia"  skip="false">
+		<regions siteToDownload="http://download.geofabrik.de/osm/australia-oceania/{0}.osm.pbf" region_prefix="" region_suffix="_Oceania"  skip="false">
 			<region name="new-zealand" esize=""/>
 			<region name="new-caledonia" esize=""/>
 		</regions>			

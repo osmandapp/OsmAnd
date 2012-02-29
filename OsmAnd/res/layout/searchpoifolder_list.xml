@@ -7,6 +7,5 @@
 		android:paddingLeft="8dp" android:paddingRight="8dp"
 		android:paddingTop="2dp" android:layout_height="fill_parent" />
 	<TextView android:id="@+id/folder_label" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:textSize="25sp"
-		style="@style/WhiteText"/>
+		android:layout_height="wrap_content" style="@style/ListText"/>
 </LinearLayout>

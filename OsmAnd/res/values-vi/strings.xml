@@ -105,7 +105,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="local_index_gpx_info_show">\n\nGiữ một lúc để mở chi tiết hơn</string>
 	<string name="local_index_gpx_info_speed">\nTốc độ trung bình : %1$s \nTốc độ lớn nhất : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nĐộ cao trung bình : %1$.0f m\nĐộ cao thấp nhất : %2$.0f m\nĐộ cao cao nhất : %3$.0f m\nAscents : %4$.0f m\nDescents : %5$.0f m</string>
-	<string name="local_index_gpx_info">Subtracks : %1$d\nSố points : %2$d\nWay points : %3$d\nKhoảng cách : %4$s\nThời gian bắt đầu : %5$tD %5$tR\nThời gian kết thúc : %6$tD %6$tR</string>
+	<string name="local_index_gpx_info">Subtracks : %1$d\nSố points : %2$d\nWay points : %3$d\nKhoảng cách : %4$s\nThời gian bắt đầu : %5$tF,  %5$tR\nThời gian kết thúc : %6$tF,  %6$tR</string>
 	<string name="local_index_installed">Phiên bản</string>
 	<string name="local_index_items_backuped">%1$d của %2$d đối tượng được sao lưu thành công.</string>
 	<string name="local_index_items_deleted">%1$d của %2$d đối tượng được xóa thành công.</string>
@@ -332,7 +332,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="use_osmand_routing_service">Tìm đường OsmAnd</string>
 	<string name="use_osmand_routing_service_descr">Sử dụng tính năng tìm đường Offline với khoảng cách dài(đang thử nghiệm)</string>
 	<string name="osmand_routing_experimental">Tìm đường Offline trên OsmAnd là tính năng thử nghiệm và
-	nó không thể chạy được với khoảng cách trên 20km. Dịch vụ tìm được sẽ tự động chuyển sang dùng CloudMade.</string>
+	nó không thể chạy được với khoảng cách trên 20km.\n\nDịch vụ tìm được sẽ tự động chuyển sang dùng CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Không tìm thấy thư mục.</string>
 	<string name="application_dir">Thư mục lưu trữ</string>
 	<string name="application_dir_change_warning">Việc thay đổi thư mục lưu trữ sẽ không di dời hay xóa dữ liệu. Thao tác này phải được tiến hành ngoài ứng dụng OsmAnd</string>
@@ -548,7 +548,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="search_online_address">Internet</string>
 	<string name="max_level_download_tile">Online zoom lớn nhất</string>
 	<string name="max_level_download_tile_descr">Chọn tỉ lệ Zoom lớn nhất để tải về bản đồ tile online</string>
-	<string name="route_about">Thông tin về quãng đường</string>
 	<string name="route_general_information">Tổng khoảng cách %1$s, thời gian đi %2$d h %3$d m.</string>
 	<string name="router_service_descr">Chọn dịch vụ tìm đường Online hoặc Offline</string>
 	<string name="router_service">Dịch vụ tìm đường</string>
@@ -561,7 +560,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="downloading_file">Đang tải tập tin...</string>
 	<string name="downloading">Đang tải..</string>
 	<string name="downloading_list_indexes">Đang tải danh sách các khu vực hiện có...</string>
-	<string name="list_index_files_was_not_loaded">Không thể truy cập danh sách các khu vực có bản đồ từ osmand.googlecode.com.</string>
+	<string name="list_index_files_was_not_loaded">Không thể truy cập danh sách các khu vực có bản đồ từ osmand.net.</string>
     <string name="select_index_file_to_download">Nếu không có bản đồ trong khu vực bạn cần, bạn có thể tự làm bằng cách tham khảo hướng dẫn tại osmand.net</string>
 	<string name="show_poi_on_map">Hiện trên bản đồ</string>
 	<string name="fav_points_edited">Điểm ưa thích đã được chỉnh sửa</string>
@@ -570,7 +569,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="only_show">Chỉ hiện</string>
 	<string name="follow">Đi theo</string>
 	<string name="recalculate_route_to_your_location">Select mode of transportation (optional) and guidance mode</string>
-	<string name="follow_route">Hướng đi</string>
 	<string name="mark_final_location_first">Hãy chọn điểm cần đến</string>
 	<string name="get_directions">Hướng</string>
     <string name="show_gps_status">Hiện tín hiệu GPS</string>

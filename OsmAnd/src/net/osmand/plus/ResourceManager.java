@@ -797,7 +797,19 @@ public class ResourceManager {
 	}
 
 	public Map<String, String> getIndexFileNames() {
-		return indexFileNames;
+		return new LinkedHashMap<String, String>(indexFileNames);
+	}
+	
+	public Map<String, String> getBackupIndexes(Map<String, String> map) {
+		File file = context.getSettings().extendOsmandPath(BACKUP_PATH);
+		if (file != null && file.isDirectory()) {
+			for (File f : file.listFiles()) {
+				if (f != null && f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+					map.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$		
+				}
+			}
+		}
+		return map;
 	}
 	
 	public synchronized void reloadTilesFromFS(){

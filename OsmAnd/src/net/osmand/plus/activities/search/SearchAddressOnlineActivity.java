@@ -17,12 +17,12 @@ import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandListActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 
-import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,7 +38,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SearchAddressOnlineActivity extends ListActivity implements SearchActivityChild {
+public class SearchAddressOnlineActivity extends OsmandListActivity implements SearchActivityChild {
 	
 	private LatLon location;
 	private ProgressDialog progressDlg;

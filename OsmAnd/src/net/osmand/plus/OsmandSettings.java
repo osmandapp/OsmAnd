@@ -439,16 +439,26 @@ public class OsmandSettings {
 	public final OsmandPreference<String> USER_PASSWORD = 
 		new StringPreference("user_password", "", true);
 
+	// this value boolean is synchronized with settings_pref.xml preference offline POI edition
+	public final OsmandPreference<Boolean> OFFLINE_POI_EDITION = 
+		new BooleanPreference("offline_poi_edition", false, true);
+
+	public static final String LOCAL_OPENSTREETMAP_POINTS = "local_openstreetmap_points";
+
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<DayNightMode> DAYNIGHT_MODE = 
-		new EnumIntPreference<DayNightMode>("daynight_mode", DayNightMode.AUTO, false, DayNightMode.values()) {
+	public final CommonPreference<DayNightMode> DAYNIGHT_MODE = 
+		new EnumIntPreference<DayNightMode>("daynight_mode", DayNightMode.DAY, false, DayNightMode.values()) {
 		@Override
 		protected boolean setValue(SharedPreferences prefs, DayNightMode val) {
 			ctx.getDaynightHelper().setDayNightMode(val);
 			return super.setValue(prefs, val);
 		}
 	};
+	{
+		DAYNIGHT_MODE.setModeDefaultValue(ApplicationMode.CAR, DayNightMode.AUTO);
+		DAYNIGHT_MODE.setModeDefaultValue(ApplicationMode.BICYCLE, DayNightMode.AUTO);
+	}
 		
 	
 	// this value string is synchronized with settings_pref.xml preference name
@@ -526,13 +536,14 @@ public class OsmandSettings {
 	// seconds to auto_follow 
 	public final CommonPreference<Integer> AUTO_FOLLOW_ROUTE = new IntPreference("auto_follow_route", 0, false);
 	{
-		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.CAR, 7);
+		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.CAR, 10);
 		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.BICYCLE, 10);
 		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 15);
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Boolean> AUTO_FOLLOW_ROUTE_NAV = new BooleanPreference("auto_follow_route_navigation", true, false);
+	// try without AUTO_FOLLOW_ROUTE_NAV (see forum discussion 'Simplify our navigation preference menu')
+	//public final CommonPreference<Boolean> AUTO_FOLLOW_ROUTE_NAV = new BooleanPreference("auto_follow_route_navigation", true, false);
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final int ROTATE_MAP_NONE = 0;

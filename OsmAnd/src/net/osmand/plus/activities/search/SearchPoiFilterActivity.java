@@ -6,8 +6,6 @@ package net.osmand.plus.activities.search;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.android.apps.analytics.easytracking.TrackedListActivity;
-
 import net.osmand.osm.LatLon;
 import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmandSettings;
@@ -19,7 +17,6 @@ import net.osmand.plus.SearchByNameFilter;
 import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.OsmandApplication;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +27,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.apps.analytics.easytracking.TrackedListActivity;
 
 
 /**
@@ -144,13 +143,15 @@ public class SearchPoiFilterActivity extends TrackedListActivity {
 			ImageView icon = (ImageView) row.findViewById(R.id.folder_icon);
 			PoiFilter model = getItem(position);
 			label.setText(model.getName());
-			if(model.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID) || 
-					model.getFilterId().equals(PoiFilter.BY_NAME_FILTER_ID)){
-				label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+			if(model.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)) {
+				icon.setImageResource(android.R.drawable.ic_input_get);
+			} else if (model.getFilterId().equals(PoiFilter.BY_NAME_FILTER_ID)) {
+				//label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+				icon.setImageResource(android.R.drawable.ic_search_category_default);
 			} else {
-				label.setTypeface(Typeface.DEFAULT);
+//				label.setTypeface(Typeface.DEFAULT);
+				icon.setImageResource(model.isStandardFilter() ? R.drawable.folder : R.drawable.tab_icon_favourite_menu);
 			}
-			icon.setImageResource(model.isStandardFilter() ? R.drawable.folder : R.drawable.tab_icon_favourite_menu);
 			return (row);
 		}
 
