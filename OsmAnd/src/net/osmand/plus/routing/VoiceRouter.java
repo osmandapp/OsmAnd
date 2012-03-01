@@ -358,7 +358,7 @@ public class VoiceRouter {
 				if (makeUturnWhenPossible == false) {
 					//suppress "route recaluated" prompt for 60sec
 					if (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000) {
-						//suppress "route recaluated" prompt for GPX-rotuing, it makes no sense
+						//suppress "route recaluated" prompt for GPX-routing, it makes no sense
 						if (router.getCurrentGPXRoute() == null) {
 							play.routeRecalculated(router.getLeftDistance()).play();
 							lastTimeRouteRecalcAnnounced = System.currentTimeMillis();
