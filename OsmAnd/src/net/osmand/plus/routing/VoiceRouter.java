@@ -106,7 +106,7 @@ public class VoiceRouter {
 			DEFAULT_SPEED = 5;          //  18 km/h
 		} else {
 			PREPARE_DISTANCE = 1500;    // 125 sec
-			PREPARE_DISTANCE_END = 1320;//  45 sec
+			PREPARE_DISTANCE_END = 1200;// 100 sec
 			TURN_IN_DISTANCE = 300;     //  25 sec
 			TURN_IN_DISTANCE_END = 168; //  14 sec
 			TURN_DISTANCE = 60;         //   5 sec 
