@@ -105,8 +105,8 @@ public class VoiceRouter {
 			TURN_DISTANCE = 45;         //   9 sec  
 			DEFAULT_SPEED = 5;          //  18 km/h
 		} else {
-			PREPARE_DISTANCE = 720;     //  60 sec
-			PREPARE_DISTANCE_END = 540; //  45 sec
+			PREPARE_DISTANCE = 1500;    // 125 sec
+			PREPARE_DISTANCE_END = 1320;//  45 sec
 			TURN_IN_DISTANCE = 300;     //  25 sec
 			TURN_IN_DISTANCE_END = 168; //  14 sec
 			TURN_DISTANCE = 60;         //   5 sec 
@@ -142,7 +142,7 @@ public class VoiceRouter {
 	protected void updateStatus(Location currentLocation, boolean makeUturnWhenPossible){
 		//   Directly after turn:                goAhead (dist), unless:
 		// < PREPARE_LONG_DISTANCE     (3000m):  playPrepareTurn
-		// < PREPARE_DISTANCE           (720m):  playPrepareTurn
+		// < PREPARE_DISTANCE          (1500m):  playPrepareTurn
 		// < TURN_IN_DISTANCE  (300m or 25sec):  playMakeTurnIn
 		// < TURN_DISTANCE       (60m or 5sec):  playMakeTurn
 		float speed = DEFAULT_SPEED;
