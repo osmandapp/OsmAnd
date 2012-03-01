@@ -2,14 +2,21 @@
 
 LOCAL_PATH := $(call my-dir)
 
+include $(CLEAR_VARS)
+
+ifneq ($(OSMAND_NEON),true)
+LOCAL_MODULE := skia
+else
+LOCAL_MODULE := skia_neon
+LOCAL_ARM_NEON := true
+endif
+
 ifeq ($(SKIA_LOC),)
   SKIA_LOC := .
 endif
 ifeq ($(SKIA_ABS),)
   SKIA_ABS := $(LOCAL_PATH)
 endif
-
-include $(CLEAR_VARS)
 
 LOCAL_ARM_MODE := arm
 
@@ -23,12 +30,11 @@ ifneq ($(ARCH_ARM_HAVE_VFP),true)
 	LOCAL_CFLAGS += -DSK_SOFTWARE_FLOAT
 endif
 
-ifeq ($(ARCH_ARM_HAVE_NEON),true)
+ifeq ($(LOCAL_ARM_NEON),true)
 	LOCAL_CFLAGS += -D__ARM_HAVE_NEON
 endif
 
-LOCAL_MODULE := skia
-LOCAL_SRC_FILES:= \
+LOCAL_SRC_FILES := \
 	$(SKIA_LOC)/trunk/src/core/Sk64.cpp \
 	$(SKIA_LOC)/trunk/src/core/SkAAClip.cpp \
 	$(SKIA_LOC)/trunk/src/core/SkAdvancedTypefaceMetrics.cpp \
@@ -221,7 +227,7 @@ LOCAL_C_INCLUDES += \
 	
 ifeq ($(TARGET_ARCH),arm)
 
-ifeq ($(ARCH_ARM_HAVE_NEON),true)
+ifeq ($(LOCAL_ARM_NEON),true)
 LOCAL_SRC_FILES += \
 	$(SKIA_LOC)/trunk/src/opts/memset16_neon.S \
 	$(SKIA_LOC)/trunk/src/opts/memset32_neon.S
@@ -247,7 +253,7 @@ LOCAL_SHARED_LIBRARIES := \
 	libjpeg \
 	libutils \
 	libz
-
+	
 LOCAL_STATIC_LIBRARIES := \
 	libft2 \
 	libpng \
@@ -271,7 +277,7 @@ ifeq ($(NO_FALLBACK_FONT),true)
 	LOCAL_CFLAGS += -DNO_FALLBACK_FONT
 endif
 
-LOCAL_CFLAGS := \
+LOCAL_CFLAGS += \
 	-DSK_SCALAR_IS_FLOAT \
 	-DSK_CAN_USE_FLOAT \
 	-DSK_BUILD_FOR_ANDROID \
@@ -289,136 +295,6 @@ LOCAL_CPPFLAGS := \
 LOCAL_LDLIBS += -lz -llog
 
 include $(BUILD_STATIC_LIBRARY)
-
-#############################################################
-# Build the skia gpu (ganesh) library
-#
-
-# include $(CLEAR_VARS)
-
-# LOCAL_ARM_MODE := arm
-
-# ifneq ($(ARCH_ARM_HAVE_VFP),true)
-	# LOCAL_CFLAGS += -DSK_SOFTWARE_FLOAT
-# endif
-
-# ifeq ($(ARCH_ARM_HAVE_NEON),true)
-	# LOCAL_CFLAGS += -DGR_ANDROID_BUILD=1
-# endif
-
-# LOCAL_SRC_FILES:= \
-	# $(SKIA_LOC)/trunk/src/gpu/GrPrintf_skia.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/SkGLContext.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/SkGpuCanvas.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/SkGpuDevice.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/SkGr.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/SkGrFontScaler.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/SkGrTexturePixelRef.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/SkNullGLContext.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/android/SkNativeGLContext_android.cpp
-
-# LOCAL_SRC_FILES += \
-	# $(SKIA_LOC)/trunk/src/gpu/GrAAHairLinePathRenderer.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrAddPathRenderers_aahairline.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrAllocPool.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrAtlas.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrBufferAllocPool.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrClip.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrContext.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrDefaultPathRenderer.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrDrawTarget.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrGLCreateNullInterface.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrGLDefaultInterface_native.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrGLIndexBuffer.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrGLInterface.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrGLProgram.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrGLRenderTarget.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrGLSL.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrGLStencilBuffer.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrGLTexture.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrGLUtil.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrGLVertexBuffer.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrGpu.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrGpuFactory.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrGpuGL.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrGpuGLShaders.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrInOrderDrawBuffer.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrMatrix.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrMemory.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrPathRendererChain.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrPathRenderer.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrPathUtils.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrRectanizer.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrRenderTarget.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrResource.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrResourceCache.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrStencil.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrStencilBuffer.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrTesselatedPathRenderer.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrTextContext.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrTextStrike.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/GrTexture.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/gr_unittests.cpp \
-	# $(SKIA_LOC)/trunk/src/gpu/android/GrGLCreateNativeInterface_android.cpp
-  
-# LOCAL_STATIC_LIBRARIES := libskiatess
-# LOCAL_SHARED_LIBRARIES := \
-	# libcutils \
-	# libutils \
-	# libskia \
-	# libEGL \
-	# libGLESv2
-
-# LOCAL_C_INCLUDES += \
-	# $(SKIA_ABS)/trunk/include/core \
-	# $(SKIA_ABS)/trunk/include/config \
-	# $(SKIA_ABS)/trunk/include/gpu \
-	# $(SKIA_ABS)/trunk/src/core \
-	# $(SKIA_ABS)/trunk/src/gpu \
-	# $(SKIA_ABS)/trunk/third_party/glu
-
-# LOCAL_MODULE := libskiagpu
-# LOCAL_MODULE_TAGS := optional
-
-# include $(BUILD_STATIC_LIBRARY)
-
-# #############################################################
-# # Build the skia gpu (ganesh) library
-# #
-
-# include $(CLEAR_VARS)
-
-# LOCAL_ARM_MODE := arm
-
-# LOCAL_SRC_FILES := \
-	# third_party/glu/libtess/dict.c \
-	# third_party/glu/libtess/geom.c \
-	# third_party/glu/libtess/memalloc.c \
-	# third_party/glu/libtess/mesh.c \
-	# third_party/glu/libtess/normal.c \
-	# third_party/glu/libtess/priorityq.c \
-	# third_party/glu/libtess/render.c \
-	# third_party/glu/libtess/sweep.c \
-	# third_party/glu/libtess/tess.c \
-	# third_party/glu/libtess/tessmono.c
-
-# LOCAL_SHARED_LIBRARIES := \
-	# libcutils \
-	# libutils \
-	# libEGL \
-	# libGLESv2
-
-# LOCAL_C_INCLUDES += \
-  # $(LOCAL_PATH)/third_party/glu \
-  # $(LOCAL_PATH)/third_party/glu/libtess \
-  # frameworks/base/opengl/include
-
-# LOCAL_LDLIBS += -lpthread
-
-# LOCAL_MODULE:= libskiatess
-# LOCAL_MODULE_TAGS := optional
-
-# include $(BUILD_STATIC_LIBRARY)
 
 # Fix some errors
 BUILD_HOST_EXECUTABLE := $(LOCAL_PATH)/FakeHost.mk

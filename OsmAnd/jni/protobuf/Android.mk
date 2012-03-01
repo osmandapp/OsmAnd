@@ -13,10 +13,14 @@ CC_LITE_SRC_FILES := \
     google/protobuf/io/zero_copy_stream.cc                       \
     google/protobuf/io/zero_copy_stream_impl_lite.cc
     
-
 include $(CLEAR_VARS)
 
+ifneq ($(OSMAND_NEON),true)
 LOCAL_MODULE := proto
+else
+LOCAL_MODULE := proto_neon
+LOCAL_ARM_NEON := true
+endif
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_CPP_EXTENSION := .cc
