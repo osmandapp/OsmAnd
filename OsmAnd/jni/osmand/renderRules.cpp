@@ -105,7 +105,7 @@ void RenderingRulesStorage::initProperties() {
 	uint i = 0;
 	for (; i < sz; i++) {
 		jobject rulePrope = globalEnv()->CallObjectMethod(listProps, List_get, i);
-		bool input = globalEnv()->GetIntField(rulePrope, RenderingRuleProperty_input);
+		bool input = (globalEnv()->GetBooleanField(rulePrope, RenderingRuleProperty_input) == JNI_TRUE);
 		int type = globalEnv()->GetIntField(rulePrope, RenderingRuleProperty_type);
 		std::string name = getStringField(rulePrope, RenderingRuleProperty_attrName);
 		RenderingRuleProperty* prop = new RenderingRuleProperty(type, input, name, i);

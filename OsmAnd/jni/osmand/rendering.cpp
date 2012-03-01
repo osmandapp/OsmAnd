@@ -711,10 +711,14 @@ JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 		bitmap->setConfig(SkBitmap::kARGB_8888_Config, requestedBitmapWidth, requestedBitmapHeight);
 	else
 		bitmap->setConfig(SkBitmap::kRGB_565_Config, requestedBitmapWidth, requestedBitmapHeight);
-	bitmap->allocPixels();
 	
-	sprintf(debugMessage, "Allocated %d bytes!", bitmap->getSize());
+	void* bitmapData = malloc(bitmap->getSize());
+	
+	//TODO: Quite possible increase of speed - [re]allocate buffer only if size changed in greated direction?
+	sprintf(debugMessage, "Allocated %d bytes at %p", bitmap->getSize(), bitmapData);
 	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
+	
+	bitmap->setPixels(bitmapData);
 	
 	SkCanvas* canvas = new SkCanvas(*bitmap);
 	canvas->drawColor(defaultColor);
@@ -746,11 +750,7 @@ JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
     mergeRenderingContext(renderingContext, &rc);
     __android_log_print(ANDROID_LOG_WARN, "net.osmand", "End Rendering image");
 	
-	// Create byte array
-	jbyteArray bitmapByteArray = ienv->NewByteArray(bitmap->getSize());
-	ienv->SetByteArrayRegion(bitmapByteArray, 0, bitmap->getSize(), (jbyte*)bitmap->getPixels());
-
-    // delete  variables
+	// delete  variables
     delete paint;
     delete canvas;
     delete req;
@@ -763,8 +763,7 @@ JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 	sprintf(debugMessage, "Result class = %p", resultClass);
 	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
 	
-	/* Get the method ID for the String(char[]) constructor */
-	jmethodID resultClassCtorId = ienv->GetMethodID(resultClass, "<init>", "([BLjava/lang/String;)V");
+	jmethodID resultClassCtorId = ienv->GetMethodID(resultClass, "<init>", "(Ljava/nio/ByteBuffer;Ljava/lang/String;)V");
 	
 	sprintf(debugMessage, "Result class ctor = %p", resultClassCtorId);
 	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
@@ -774,14 +773,29 @@ JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 #else
     sprintf(debugMessage, "Native ok (init %d, rendering %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
 #endif
+
+	// Allocate ctor paramters
+	jobject bitmapBuffer = ienv->NewDirectByteBuffer(bitmapData, bitmap->getSize());
+	jstring message = globalEnv()->NewStringUTF(debugMessage);
 	
 	/* Construct a result object */
-	jobject resultObject = ienv->NewObject(resultClass, resultClassCtorId, bitmapByteArray, globalEnv()->NewStringUTF(debugMessage));
+	jobject resultObject = ienv->NewObject(resultClass, resultClassCtorId, bitmapBuffer, message);
 
-	/* Free local references */
-	ienv->DeleteLocalRef(bitmapByteArray);
-	ienv->DeleteLocalRef(resultClass);
 	return resultObject;
+}
+
+JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_releaseRenderingGenerationResults( JNIEnv* ienv, jobject obj,
+	jobject results) {
+	setGlobalEnv(ienv);
+	
+	jclass resultClass = ienv->FindClass("net/osmand/plus/render/NativeOsmandLibrary$RenderingGenerationResult");
+	if(!resultClass)
+		resultClass = ienv->FindClass("net/osmand/render/NativeOsmandLibrary$RenderingGenerationResult");
+	jfieldID resultClass_bitmapBuffer = globalEnv()->GetFieldID(resultClass, "bitmapBuffer", "Ljava/nio/ByteBuffer;");
+	jobject bitmapBuffer = globalEnv()->GetObjectField(results, resultClass_bitmapBuffer);
+	
+	void *buffer = ienv->GetDirectBufferAddress(bitmapBuffer);
+    free(buffer);
 }
 
 #ifdef __cplusplus

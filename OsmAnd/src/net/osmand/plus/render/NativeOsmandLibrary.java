@@ -1,12 +1,14 @@
 package net.osmand.plus.render;
 
-
 import org.apache.commons.logging.Log;
+
+import java.nio.ByteBuffer;
 
 import net.osmand.LogUtil;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+
 import android.graphics.Bitmap;
 
 public class NativeOsmandLibrary {
@@ -22,8 +24,15 @@ public class NativeOsmandLibrary {
 					try {
 						log.debug("Loading native stlport_shared..."); //$NON-NLS-1$
 						System.loadLibrary("stlport_shared");
-						log.debug("Loading native osmand..."); //$NON-NLS-1$
-						System.loadLibrary("osmand");
+						log.debug("Loading native cpufeatures_proxy..."); //$NON-NLS-1$
+						System.loadLibrary("cpufeatures_proxy");
+						if(!cpuHasNeonSupport()) {
+							log.debug("Loading native osmand..."); //$NON-NLS-1$
+							System.loadLibrary("osmand");
+						} else {
+							log.debug("Loading native osmand with NEON..."); //$NON-NLS-1$
+							System.loadLibrary("osmand_neon");
+						}
 						log.debug("Creating NativeOsmandLibrary instance..."); //$NON-NLS-1$
 						library = new NativeOsmandLibrary();
 						log.debug("Initializing rendering rules storage..."); //$NON-NLS-1$
@@ -34,7 +43,6 @@ public class NativeOsmandLibrary {
 						log.error("Failed to load native library", e); //$NON-NLS-1$
 						isNativeSupported = false;
 					}
-					
 				}
 			}
 		}
@@ -115,12 +123,12 @@ public class NativeOsmandLibrary {
 	}
 	
 	public static class RenderingGenerationResult {
-		public RenderingGenerationResult(byte[] bitmap, String msg) {
-			bitmapArray = bitmap;
+		public RenderingGenerationResult(ByteBuffer bitmap, String msg) {
+			bitmapBuffer = bitmap;
 			debugMessage = msg;
 		}
 	
-		public final byte[] bitmapArray;
+		public final ByteBuffer bitmapBuffer;
 		
 		public final String debugMessage;
 	}
@@ -129,12 +137,16 @@ public class NativeOsmandLibrary {
 
 	private static native boolean initBinaryMapFile(String filePath);
 	
-	private static native boolean initRenderingRulesStorage(RenderingRulesStorage storage);
+	private static native void initRenderingRulesStorage(RenderingRulesStorage storage);
 
 	private static native RenderingGenerationResult generateRendering(RenderingContext rc, int searchResultHandler,
 			int requestedBitmapWidth, int requestedBitmapHeight, boolean isTransparent, boolean useEnglishNames,
 			RenderingRuleSearchRequest render, int defaultColor);
+	public static native void releaseRenderingGenerationResults(RenderingGenerationResult results);
 
 	private static native int searchObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom, String mapnaem,
 			RenderingRuleSearchRequest request, boolean skipDuplicates, int searchResultHandler, Object objectWithInterruptedField);
+			
+	public static native int getCpuCount();
+	public static native boolean cpuHasNeonSupport();
 }
