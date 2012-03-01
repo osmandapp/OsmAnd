@@ -198,7 +198,6 @@ LOCAL_SRC_FILES := \
 	$(SKIA_LOC)/trunk/src/ports/SkMemory_malloc.cpp \
 	$(SKIA_LOC)/trunk/src/ports/SkOSFile_stdio.cpp \
 	$(SKIA_LOC)/trunk/src/ports/SkTime_Unix.cpp \
-	$(SKIA_LOC)/trunk/src/ports/SkThread_pthread.cpp \
 	$(SKIA_LOC)/trunk/src/utils/SkBoundaryPatch.cpp \
 	$(SKIA_LOC)/trunk/src/utils/SkCamera.cpp \
 	$(SKIA_LOC)/trunk/src/utils/SkColorMatrix.cpp \
@@ -224,6 +223,11 @@ LOCAL_SRC_FILES += \
 	FontHostConfiguration_android.cpp
 LOCAL_C_INCLUDES += \
 	$(SKIA_ABS)/trunk/src/ports
+	
+# We don't define SK_USE_POSIX_THREADS to remove SkMutex
+# Also, we include faked own SkThread_fake instead of SkThread_pthread
+LOCAL_SRC_FILES += \
+	SkThread_fake.cpp
 	
 ifeq ($(TARGET_ARCH),arm)
 
@@ -283,7 +287,6 @@ LOCAL_CFLAGS += \
 	-DSK_BUILD_FOR_ANDROID \
 	-DSK_BUILD_FOR_ANDROID_NDK \
 	-DSK_ALLOW_STATIC_GLOBAL_INITIALIZERS=0 \
-	-DSK_USE_POSIX_THREADS \
 	-DSK_RELEASE \
 	-DGR_RELEASE=1 \
 	-DNDEBUG
