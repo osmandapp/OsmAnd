@@ -225,9 +225,9 @@ public class OsmandRenderer {
 						+ "(%s points, %s points inside, %s of %s objects visible)\n" + res.debugMessage,//$NON-NLS-1$
 						time, rc.textRenderingTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
 				
-				if(res.bitmapArray != null) {
-					final ByteBuffer bitmapByteBuffer = ByteBuffer.wrap(res.bitmapArray);
-					bmp.copyPixelsFromBuffer(bitmapByteBuffer);
+				if(res.bitmapBuffer != null) {
+					bmp.copyPixelsFromBuffer(res.bitmapBuffer);
+					NativeOsmandLibrary.releaseRenderingGenerationResults(res);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
