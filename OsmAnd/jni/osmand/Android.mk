@@ -53,6 +53,6 @@ else
 LOCAL_STATIC_LIBRARIES := proto_neon skia_neon
 endif
 
-LOCAL_LDLIBS := -llog
+LOCAL_LDLIBS := -llog -ljnigraphics
 
 include $(BUILD_SHARED_LIBRARY)

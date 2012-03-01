@@ -4,6 +4,7 @@
 #include <jni.h>
 #include <math.h>
 #include <android/log.h>
+#include <android/bitmap.h>
 #include <stdio.h>
 #include <vector>
 #include <set>
@@ -697,10 +698,118 @@ void loadJNIRendering(){
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_generateRendering_1Direct( JNIEnv* ienv, jobject obj,
+		jobject renderingContext, jint searchResult,
+		jobject targetBitmap, 
+		jboolean useEnglishNames, jobject renderingRuleSearchRequest, jint defaultColor) {
+	setGlobalEnv(ienv);
+	
+	// Gain information about bitmap
+	AndroidBitmapInfo bitmapInfo;
+	if(AndroidBitmap_getInfo(ienv, targetBitmap, &bitmapInfo) != ANDROID_BITMAP_RESUT_SUCCESS) {
+		__android_log_print(ANDROID_LOG_ERROR, "net.osmand", "Failed to execute AndroidBitmap_getInfo");
+	}
+	
+	sprintf(debugMessage, "Creating SkBitmap in native w:%d h:%d s:%d f:%d!", bitmapInfo.width, bitmapInfo.height, bitmapInfo.stride, bitmapInfo.format);
+	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
+	
+	SkBitmap* bitmap = new SkBitmap();
+	if(bitmapInfo.format == ANDROID_BITMAP_FORMAT_RGBA_8888) {
+		int rowBytes = bitmapInfo.stride;
+		sprintf(debugMessage, "Row bytes for RGBA_8888 is %d", rowBytes);
+		__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
+		bitmap->setConfig(SkBitmap::kARGB_8888_Config, bitmapInfo.width, bitmapInfo.height, rowBytes);
+	} else if(bitmapInfo.format == ANDROID_BITMAP_FORMAT_RGB_565) {
+		int rowBytes = bitmapInfo.stride;
+		sprintf(debugMessage, "Row bytes for RGB_565 is %d", rowBytes);
+		__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
+		bitmap->setConfig(SkBitmap::kRGB_565_Config, bitmapInfo.width, bitmapInfo.height, rowBytes);
+	} else {
+		__android_log_print(ANDROID_LOG_ERROR, "net.osmand", "Unknown target bitmap format");
+	}
+	
+	void* lockedBitmapData = NULL;
+	if(AndroidBitmap_lockPixels(ienv, targetBitmap, &lockedBitmapData) != ANDROID_BITMAP_RESUT_SUCCESS || !lockedBitmapData) {
+		__android_log_print(ANDROID_LOG_ERROR, "net.osmand", "Failed to execute AndroidBitmap_lockPixels");
+	}
+	sprintf(debugMessage, "Locked %d bytes at %p", bitmap->getSize(), lockedBitmapData);
+	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
+	
+	bitmap->setPixels(lockedBitmapData);
+	
+	SkCanvas* canvas = new SkCanvas(*bitmap);
+	canvas->drawColor(defaultColor);
+
+	SkPaint* paint = new SkPaint;
+	paint->setAntiAlias(true);
+	__android_log_print(ANDROID_LOG_WARN, "net.osmand", "Initializing rendering");
+	watcher initObjects;
+	initObjects.start();
+
+	RenderingRuleSearchRequest* req = initSearchRequest(renderingRuleSearchRequest);
+    RenderingContext rc;
+    copyRenderingContext(renderingContext, &rc);
+    rc.useEnglishNames = useEnglishNames;
+    SearchResult* result = ((SearchResult*) searchResult);
+//    std::vector <BaseMapDataObject* > mapDataObjects = marshalObjects(binaryMapDataObjects);
+
+    __android_log_print(ANDROID_LOG_WARN, "net.osmand", "Rendering image");
+    initObjects.pause();
+    
+
+    // Main part do rendering
+    rc.nativeOperations.start();
+    if(result != NULL) {
+    	doRendering(result->result, canvas, paint, req, &rc);
+    }
+    rc.nativeOperations.pause();
+
+    mergeRenderingContext(renderingContext, &rc);
+    __android_log_print(ANDROID_LOG_WARN, "net.osmand", "End Rendering image");
+	if(AndroidBitmap_unlockPixels(ienv, targetBitmap) != ANDROID_BITMAP_RESUT_SUCCESS) {
+		__android_log_print(ANDROID_LOG_ERROR, "net.osmand", "Failed to execute AndroidBitmap_unlockPixels");
+	}
+	
+	// delete  variables
+    delete paint;
+    delete canvas;
+    delete req;
+	delete bitmap;
+//    deleteObjects(mapDataObjects);
+
+	jclass resultClass = ienv->FindClass("net/osmand/plus/render/NativeOsmandLibrary$RenderingGenerationResult");
+	if(!resultClass)
+		resultClass = ienv->FindClass("net/osmand/render/NativeOsmandLibrary$RenderingGenerationResult");
+	sprintf(debugMessage, "Result class = %p", resultClass);
+	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
+	
+	jmethodID resultClassCtorId = ienv->GetMethodID(resultClass, "<init>", "(Ljava/nio/ByteBuffer;Ljava/lang/String;)V");
+	
+	sprintf(debugMessage, "Result class ctor = %p", resultClassCtorId);
+	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
+
+#ifdef DEBUG_NAT_OPERATIONS
+    sprintf(debugMessage, "Native ok (init %d, native op %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
+#else
+    sprintf(debugMessage, "Native ok (init %d, rendering %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
+#endif
+	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
+
+	// Allocate ctor paramters
+	jstring message = globalEnv()->NewStringUTF(debugMessage);
+	
+	/* Construct a result object */
+	jobject resultObject = ienv->NewObject(resultClass, resultClassCtorId, NULL, message);
+
+	return resultObject;
+}
+
 void* bitmapData = NULL;
 size_t bitmapDataSize = 0;
-JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_generateRendering( JNIEnv* ienv, jobject obj,
-		jobject renderingContext, jint searchResult, jint requestedBitmapWidth, jint requestedBitmapHeight, jboolean isTransparent, 
+JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_generateRendering_1Indirect( JNIEnv* ienv, jobject obj,
+		jobject renderingContext, jint searchResult,
+		jint requestedBitmapWidth, jint requestedBitmapHeight, jint rowBytes, jboolean isTransparent, 
 		jboolean useEnglishNames, jobject renderingRuleSearchRequest, jint defaultColor) {
 	setGlobalEnv(ienv);
 	
@@ -709,11 +818,10 @@ JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 	
 	SkBitmap* bitmap = new SkBitmap();
 	if(isTransparent == JNI_TRUE)
-		bitmap->setConfig(SkBitmap::kARGB_8888_Config, requestedBitmapWidth, requestedBitmapHeight);
+		bitmap->setConfig(SkBitmap::kARGB_8888_Config, requestedBitmapWidth, requestedBitmapHeight, rowBytes);
 	else
-		bitmap->setConfig(SkBitmap::kRGB_565_Config, requestedBitmapWidth, requestedBitmapHeight);
+		bitmap->setConfig(SkBitmap::kRGB_565_Config, requestedBitmapWidth, requestedBitmapHeight, rowBytes);
 	
-	// re]allocate buffer only if size changed in greated direction?
 	if(bitmapData != NULL && bitmapDataSize != bitmap->getSize()) {
 		free(bitmapData);
 		bitmapData = NULL;
@@ -792,23 +900,6 @@ JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 	jobject resultObject = ienv->NewObject(resultClass, resultClassCtorId, bitmapBuffer, message);
 
 	return resultObject;
-}
-
-JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_releaseRenderingGenerationResults( JNIEnv* ienv, jobject obj,
-	jobject results) {
-	setGlobalEnv(ienv);
-	
-	// Not needed
-	/*
-	jclass resultClass = ienv->FindClass("net/osmand/plus/render/NativeOsmandLibrary$RenderingGenerationResult");
-	if(!resultClass)
-		resultClass = ienv->FindClass("net/osmand/render/NativeOsmandLibrary$RenderingGenerationResult");
-	jfieldID resultClass_bitmapBuffer = globalEnv()->GetFieldID(resultClass, "bitmapBuffer", "Ljava/nio/ByteBuffer;");
-	jobject bitmapBuffer = globalEnv()->GetObjectField(results, resultClass_bitmapBuffer);
-	
-	void *buffer = ienv->GetDirectBufferAddress(bitmapBuffer);
-    free(buffer);
-	*/
 }
 
 #ifdef __cplusplus
