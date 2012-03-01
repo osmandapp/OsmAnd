@@ -694,10 +694,11 @@ void loadJNIRendering(){
 	JUnidecode_unidecode = globalEnv()->GetStaticMethodID(JUnidecodeClass, "unidecode", "(Ljava/lang/String;)Ljava/lang/String;");
 }
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif
+void* bitmapData = NULL;
+size_t bitmapDataSize = 0;
 JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_generateRendering( JNIEnv* ienv, jobject obj,
 		jobject renderingContext, jint searchResult, jint requestedBitmapWidth, jint requestedBitmapHeight, jboolean isTransparent, 
 		jboolean useEnglishNames, jobject renderingRuleSearchRequest, jint defaultColor) {
@@ -712,11 +713,19 @@ JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 	else
 		bitmap->setConfig(SkBitmap::kRGB_565_Config, requestedBitmapWidth, requestedBitmapHeight);
 	
-	void* bitmapData = malloc(bitmap->getSize());
-	
-	//TODO: Quite possible increase of speed - [re]allocate buffer only if size changed in greated direction?
-	sprintf(debugMessage, "Allocated %d bytes at %p", bitmap->getSize(), bitmapData);
-	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
+	// re]allocate buffer only if size changed in greated direction?
+	if(bitmapData != NULL && bitmapDataSize != bitmap->getSize()) {
+		free(bitmapData);
+		bitmapData = NULL;
+		bitmapDataSize = 0;
+	}
+	if(bitmapData == NULL && bitmapDataSize == 0) {
+		bitmapDataSize = bitmap->getSize();
+		bitmapData = malloc(bitmapDataSize);
+		
+		sprintf(debugMessage, "Allocated %d bytes at %p", bitmapDataSize, bitmapData);
+		__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
+	}
 	
 	bitmap->setPixels(bitmapData);
 	
@@ -773,6 +782,7 @@ JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_genera
 #else
     sprintf(debugMessage, "Native ok (init %d, rendering %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
 #endif
+	__android_log_print(ANDROID_LOG_WARN, "net.osmand", debugMessage);
 
 	// Allocate ctor paramters
 	jobject bitmapBuffer = ienv->NewDirectByteBuffer(bitmapData, bitmap->getSize());
@@ -788,6 +798,8 @@ JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_releas
 	jobject results) {
 	setGlobalEnv(ienv);
 	
+	// Not needed
+	/*
 	jclass resultClass = ienv->FindClass("net/osmand/plus/render/NativeOsmandLibrary$RenderingGenerationResult");
 	if(!resultClass)
 		resultClass = ienv->FindClass("net/osmand/render/NativeOsmandLibrary$RenderingGenerationResult");
@@ -796,6 +808,7 @@ JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_releas
 	
 	void *buffer = ienv->GetDirectBufferAddress(bitmapBuffer);
     free(buffer);
+	*/
 }
 
 #ifdef __cplusplus
