@@ -91,22 +91,22 @@ public class VoiceRouter {
 		// lead time criterion only for TURN_IN and TURN
 		if(router.getAppMode() == ApplicationMode.PEDESTRIAN){
 			// prepare distance needed ?
-			PREPARE_DISTANCE = 200;     // 100 sec
-			PREPARE_DISTANCE_END = 150; //  75 sec
+			PREPARE_DISTANCE = 200;     //(100 sec)
+			PREPARE_DISTANCE_END = 150; //( 75 sec)
 			TURN_IN_DISTANCE = 100;     //  50 sec
 			TURN_IN_DISTANCE_END = 70;  //  35 sec
 			TURN_DISTANCE = 25;         //  12 sec
 			DEFAULT_SPEED = 2f;         //   7,2 km/h
 		} else if(router.getAppMode() == ApplicationMode.BICYCLE){
-			PREPARE_DISTANCE = 500;     // 100 sec
-			PREPARE_DISTANCE_END = 350; //  70 sec
+			PREPARE_DISTANCE = 500;     //(100 sec)
+			PREPARE_DISTANCE_END = 350; //( 70 sec)
 			TURN_IN_DISTANCE = 225;     //  45 sec
 			TURN_IN_DISTANCE_END = 80;  //  16 sec
 			TURN_DISTANCE = 45;         //   9 sec  
 			DEFAULT_SPEED = 5;          //  18 km/h
 		} else {
-			PREPARE_DISTANCE = 1500;    // 125 sec
-			PREPARE_DISTANCE_END = 1200;// 100 sec
+			PREPARE_DISTANCE = 1500;    //(125 sec)
+			PREPARE_DISTANCE_END = 1200;//(100 sec)
 			TURN_IN_DISTANCE = 300;     //  25 sec
 			TURN_IN_DISTANCE_END = 168; //  14 sec
 			TURN_DISTANCE = 60;         //   5 sec 
