@@ -1,6 +1,5 @@
-# This is built only for ARMv5
-ifneq ($(TARGET_ARCH_ABI),armeabi-v7a)
-ifneq ($(LOCAL_ARM_NEON),true)
+# Do not build for NEON
+ifneq ($(OSMAND_NEON),true)
 
 LOCAL_PATH := $(call my-dir)
 
@@ -18,5 +17,4 @@ include $(BUILD_SHARED_LIBRARY)
 
 $(call import-module,android/cpufeatures)
 
-endif
 endif

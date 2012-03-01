@@ -214,8 +214,13 @@ public class OsmandRenderer {
 					final Handler h = new Handler(Looper.getMainLooper());
 					notifyListenersWithDelay(rc, notifyList, h);
 				}
-				final NativeOsmandLibrary.RenderingGenerationResult res = library.generateRendering(rc, searchResultHandler,
-					bmp.getWidth(), bmp.getHeight(), bmp.hasAlpha(),
+				
+				// Native library will decide on it's own best way of rendering
+				// If res.bitmapBuffer is null, it indicates that rendering was done directly to
+				// memory of passed bitmap, but this is supported only on Android >= 2.2
+				final NativeOsmandLibrary.RenderingGenerationResult res = library.generateRendering(
+					rc, searchResultHandler,
+					bmp, bmp.getWidth(), bmp.getHeight(), bmp.getRowBytes(), bmp.hasAlpha(),
 					useEnglishNames, render, defaultColor);
 				rc.ended = true;
 				notifyListeners(notifyList);
@@ -224,9 +229,9 @@ public class OsmandRenderer {
 						+ "(%s points, %s points inside, %s of %s objects visible)\n" + res.debugMessage,//$NON-NLS-1$
 						time, rc.textRenderingTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
 				
+				// See upper note
 				if(res.bitmapBuffer != null) {
 					bmp.copyPixelsFromBuffer(res.bitmapBuffer);
-					NativeOsmandLibrary.releaseRenderingGenerationResults(res);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

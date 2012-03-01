@@ -26,6 +26,10 @@ public class NativeOsmandLibrary {
 						System.loadLibrary("stlport_shared");
 						log.debug("Loading native cpufeatures_proxy..."); //$NON-NLS-1$
 						System.loadLibrary("cpufeatures_proxy");
+						if(android.os.Build.VERSION.SDK_INT >= 8) {
+							log.debug("Loading jnigraphics, since Android >= 2.2 ..."); //$NON-NLS-1$
+							System.loadLibrary("jnigraphics");
+						}
 						if(!cpuHasNeonSupport()) {
 							log.debug("Loading native osmand..."); //$NON-NLS-1$
 							System.loadLibrary("osmand");
@@ -66,12 +70,16 @@ public class NativeOsmandLibrary {
 	}
 
 	public RenderingGenerationResult generateRendering(RenderingContext rc, NativeSearchResult searchResultHandler,
-			int requestedBitmapWidth, int requestedBitmapHeight, boolean isTransparent, 
+			Bitmap bitmap, int requestedBitmapWidth, int requestedBitmapHeight, int rowBytes, boolean isTransparent, 
 			boolean useEnglishNames, RenderingRuleSearchRequest render, int defaultColor) {
 		if (searchResultHandler == null) {
 			return new RenderingGenerationResult(null, "Error searchresult = null");
 		}
-		return generateRendering(rc, searchResultHandler.nativeHandler, requestedBitmapWidth, requestedBitmapHeight, isTransparent, useEnglishNames, render, defaultColor);
+		
+		if(android.os.Build.VERSION.SDK_INT >= 8) // Android 2.2+
+			return generateRendering_Direct(rc, searchResultHandler.nativeHandler, bitmap, useEnglishNames, render, defaultColor);
+		else
+			return generateRendering_Indirect(rc, searchResultHandler.nativeHandler, requestedBitmapWidth, requestedBitmapHeight, rowBytes, isTransparent, useEnglishNames, render, defaultColor);
 	}
 
 	/**
@@ -139,10 +147,12 @@ public class NativeOsmandLibrary {
 	
 	private static native void initRenderingRulesStorage(RenderingRulesStorage storage);
 
-	private static native RenderingGenerationResult generateRendering(RenderingContext rc, int searchResultHandler,
-			int requestedBitmapWidth, int requestedBitmapHeight, boolean isTransparent, boolean useEnglishNames,
+	private static native RenderingGenerationResult generateRendering_Indirect(RenderingContext rc, int searchResultHandler,
+			int requestedBitmapWidth, int requestedBitmapHeight, int rowBytes, boolean isTransparent, boolean useEnglishNames,
 			RenderingRuleSearchRequest render, int defaultColor);
-	public static native void releaseRenderingGenerationResults(RenderingGenerationResult results);
+	private static native RenderingGenerationResult generateRendering_Direct(RenderingContext rc, int searchResultHandler,
+			Bitmap bitmap, boolean useEnglishNames,
+			RenderingRuleSearchRequest render, int defaultColor);
 
 	private static native int searchObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom, String mapnaem,
 			RenderingRuleSearchRequest request, boolean skipDuplicates, int searchResultHandler, Object objectWithInterruptedField);
