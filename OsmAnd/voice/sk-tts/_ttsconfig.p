@@ -7,21 +7,21 @@ preamble - [].
 
 
 %% TURNS 
-turn('left', ['odbočte doľava']).
-turn('left_sh', ['odbočte ostro doľava']).
-turn('left_sl', ['odbočte mierne doľava']).
-turn('right', ['odbočte doprava']).
-turn('right_sh', ['odbočte ostro doprava']).
-turn('right_sl', ['odbočte mierne doprava']).
+turn('left', ['zahnite doľava']).
+turn('left_sh', ['zahnite prudko doľava']).
+turn('left_sl', ['zahnite mierne doľava']).
+turn('right', ['zahnite doprava']).
+turn('right_sh', ['zahnite prudko doprava']).
+turn('right_sl', ['zahnite mierne doprava']).
 
 pturn('left', ['doľava']).
-pturn('left_sh', ['ostro doľava']).
+pturn('left_sh', ['prudko doľava']).
 pturn('left_sl', ['mierne doľava']).
 pturn('right', ['doprava']).
-pturn('right_sh', ['ostro doprava']).
+pturn('right_sh', ['prudko doprava']).
 pturn('right_sl', ['mierne doprava']).
 
-prepare_turn(Turn, Dist) == ['o ', D, 'buďte pripravený odbočiť ', M] :- distance(Dist) == D, pturn(Turn, M).
+prepare_turn(Turn, Dist) == ['o ', D, 'buďte pripravený zahnúť ', M] :- distance(Dist) == D, pturn(Turn, M).
 turn(Turn, Dist) == ['o ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
@@ -47,7 +47,7 @@ bear_left == ['držte sa vľavo'].
 route_new_calc(Dist) == ['Cesta je dlhá ', D] :- distance(Dist) == D.	
 route_recalc(Dist) == ['Cesta prepočítaná, vzdialenosť ', D] :- distance(Dist) == D.
 
-location_lost == ['strata satelitného signálu '].
+location_lost == ['strata satelytného signálu '].
 
 
 %% 
