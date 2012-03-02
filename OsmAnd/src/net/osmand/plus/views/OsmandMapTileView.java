@@ -92,7 +92,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private BaseMapLayer mainLayer;
 	
 	private Map<OsmandMapLayer, Float> zOrders = new HashMap<OsmandMapLayer, Float>();
-
+	
 	// UI Part
 	// handler to refresh map (in ui thread - ui thread is not necessary, but msg queue is required).
 	protected Handler handler = new Handler();
@@ -124,7 +124,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		application = (OsmandApplication) context.getApplicationContext();
 		initView();
 	}
-
+	
 	// ///////////////////////////// INITIALIZING UI PART ///////////////////////////////////
 	public void initView() {
 		paintGrayFill = new Paint();
@@ -164,8 +164,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 		WindowManager mgr = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
 		dm = new DisplayMetrics();
-		mgr.getDefaultDisplay().getMetrics(dm);
-		
+		mgr.getDefaultDisplay().getMetrics(dm);		
 	}
 
 	@Override
@@ -540,7 +539,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			msg.what = 1;
 			handler.sendMessageDelayed(msg, 20);
 		}
-	}
+}
 
 	@Override
 	public void tileDownloaded(DownloadRequest request) {
@@ -711,8 +710,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		this.onClickListener = l;
 	}
 
-
-		public LatLon getLatLonFromScreenPoint(float x, float y) {
+	public LatLon getLatLonFromScreenPoint(float x, float y) {
 		float dx = x - getCenterPointX();
 		float dy = y - getCenterPointY();
 		float fy = calcDiffTileY(dx, dy);
@@ -721,14 +719,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		double longitude = MapUtils.getLongitudeFromTile(getZoom(), getXTile() + fx);
 		return new LatLon(latitude, longitude);
 	}
-
-	
-
 	
 	public AnimateDraggingMapThread getAnimatedDraggingThread() {
 		return animatedDraggingThread;
 	}
-
 	
 	private class MapTileViewMultiTouchZoomListener implements MultiTouchZoomListener {
 		private float initialMultiTouchZoom;
@@ -783,6 +777,12 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+			//Provide layers opportunity to move without dragging map
+			for (int i = layers.size() - 1; i >= 0; i--) {
+				if (layers.get(i).onFling(e1, e2, velocityX, velocityY)) {
+					return true;
+				}
+			}
 			animatedDraggingThread.startDragging(velocityX, velocityY, 
 						e1.getX(), e1.getY(), e2.getX(), e2.getY(), true);
 			return true;
@@ -809,6 +809,13 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 		@Override
 		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+			//Provide layers opportunity to scroll without dragging map
+			for (int i = layers.size() - 1; i >= 0; i--) {
+				if (layers.get(i).onScroll(e1, e2, distanceX, distanceY)) {
+					return true;
+				}
+			}
+			
 			dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
 			return true;
 		}
@@ -835,7 +842,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 	}
 
-
 	private class MapTileViewOnDoubleTapListener implements OnDoubleTapListener {
 		@Override
 		public boolean onDoubleTap(MotionEvent e) {
@@ -854,5 +860,4 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			return false;
 		}
 	}
-
 }

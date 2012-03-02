@@ -47,6 +47,7 @@ import net.osmand.plus.views.RouteInfoLayer;
 import net.osmand.plus.views.RouteLayer;
 import net.osmand.plus.views.TransportInfoLayer;
 import net.osmand.plus.views.TransportStopsLayer;
+import net.osmand.plus.views.PlanningLayer;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
@@ -93,6 +94,7 @@ public class MapActivityLayers {
 	private ContextMenuLayer contextMenuLayer;
 	private RouteInfoLayer routeInfoLayer;
 	private MapControlsLayer mapControlsLayer;
+	private PlanningLayer planningLayer;
 
 	public MapActivityLayers(MapActivity activity) {
 		this.activity = activity;
@@ -158,6 +160,9 @@ public class MapActivityLayers {
 		// 11. route info layer
 		mapControlsLayer = new MapControlsLayer(activity);
 		mapView.addLayer(mapControlsLayer, 11);
+		// 12. planningLayer for measurement and planning points and tracks
+		planningLayer = new PlanningLayer(activity);
+		mapView.addLayer(planningLayer, 12);
 
 	}
 	
@@ -311,9 +316,9 @@ public class MapActivityLayers {
 				} else if(layers.get(item) == R.string.layer_favorites){
 					settings.SHOW_FAVORITES.set(isChecked);
 				} else if(layers.get(item) == R.string.layer_gpx_layer){
+					gpxLayer.clearCurrentGPX();
 					if(getApplication().getGpxFileToDisplay() != null){
 						getApplication().setGpxFileToDisplay(null, false);
-						gpxLayer.clearCurrentGPX();
 					} else {
 						dialog.dismiss();
 						showGPXFileLayer(mapView);
@@ -434,14 +439,12 @@ public class MapActivityLayers {
 					}
 				}
 				
-				settings.SHOW_FAVORITES.set(true);
-				getApplication().setGpxFileToDisplay(toShow, result == null);
-				WptPt loc = toShow.findPointToShow();
-				if(loc != null){
-					mapView.getAnimatedDraggingThread().startMoving(loc.lat, loc.lon, 
-							mapView.getZoom(), true);
+				if(result != null && result.path.contains(getString(R.string.plan_file_name_prefix))){	//if a plan GPX file is loaded, add the points to the pointLocation layer
+					activity.getMeasurementActivity().showGPXPlan(result);
+				}else{
+					getApplication().setGpxFileToDisplay(toShow, result == null);
+					updateGPXLayer();
 				}
-				updateGPXLayer();
 				mapView.refreshMap();
 				return true;
 			}
@@ -765,5 +768,9 @@ public class MapActivityLayers {
 	
 	public OsmBugsLayer getOsmBugsLayer() {
 		return osmBugsLayer;
+	}
+	
+	public PlanningLayer getPlanningLayer() {
+		return planningLayer;
 	}
 }

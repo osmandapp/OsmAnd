@@ -374,6 +374,4 @@ public class NavigatePointActivity extends TrackedActivity implements SearchActi
 		return sb.toString();
 	}
 	
-	
-
 }

@@ -17,6 +17,8 @@
 
 <item android:title="@string/show_gps_status" android:id="@+id/map_show_gps_status" android:icon="@android:drawable/ic_menu_compass"></item> 
 <item android:id="@+id/map_show_point_options" android:title="@string/show_point_options"></item>
+<item android:id="@+id/map_calculate_distance" android:title="Plan/Measure Tracks" android:checkable="true" android:titleCondensed="Calc Distance" android:checked="false" android:enabled="true" android:visible="true"></item>
+<item android:id="@+id/map_GPX_plan" android:title="Load GPX Plan"></item>
 </group>
 
 

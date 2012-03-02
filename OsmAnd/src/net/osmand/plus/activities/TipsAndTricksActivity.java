@@ -7,6 +7,7 @@ import java.util.Arrays;
 import net.osmand.plus.R;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
@@ -30,12 +31,16 @@ public class TipsAndTricksActivity {
 			{R.string.tip_map_switch,R.string.tip_map_switch_t},
 			};
 
-	private final Context ctx;
+	private Context ctx = null;
 	private int numberOfShownTips = 0;
 	private boolean[] shownTips = new boolean[tipNamesAndDescriptions.length];
+	final Resources resources;
+	private MapActivity mapActivity;
 	
 	public TipsAndTricksActivity(Context ctx){
 		this.ctx = ctx;
+		this.mapActivity = (MapActivity) ctx;
+		resources = mapActivity.getResources();
 	}
 
 	public boolean areAllTipsShown(){
@@ -177,6 +182,4 @@ public class TipsAndTricksActivity {
 		});
 		return dlg;
 	}
-
-
 }

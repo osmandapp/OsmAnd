@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="warning_saved_OK">Saved as </string>
+    <string name="start_point">Start Point </string>    
+    <string name="warning_save_failed">Failed to save </string>
+    <string name="plan_file_name_prefix">plan_</string>
+    <string name="context_menu_item_load_GPX_plan">Load GPX plan file</string>
+    <string name="context_menu_item_save_plan">Save track as GPX plan file</string>
+    <string name="context_menu_item_start_measurement_mode">Plan/measure tracks</string>
+	<string name="context_menu_item_delete_point">Remove this point</string>
+	<string name="context_menu_item_clear_all_points">Remove all points</string>
+	<string name="context_menu_item_insert_point">Insert point before this</string>
+	<string name="context_menu_item_cancel">Cancel</string>
+	<string name="context_menu_item_display_point_info">Display point lat/lon.</string>
+	<string name="context_menu_item_display_distance_only">Display distance only.</string>
+	<string name="context_menu_item_end_measurement">End measuring</string>
+	<string name="context_menu_item_increase_point_size">Increase point size</string>
+	<string name="context_menu_item_decrease_point_size">Decrease point size</string>
+	<string name="context_menu_item_increase_point_selection_area">Increase selection area</string>
+	<string name="context_menu_item_decrease_point_selection_area">Decrease selection area</string>
+	<string name="tip_Distance_Measurement">Creating Plans and Measuring distances</string>
+	<string name="tip_Distance_Measurement_t">\tPlanning tracks can be created, edited and saved to or loaded from a GPX file. 
+	    The cumulative distance is displayed from the first point to any of the points that make up the track. Select "Plan/Measure Distances" from the map menu.</string>
 	<string name="offline_poi_edition">Offline POI editing</string>
 	<string name="offline_poi_edition_descr">Always use offline POI editing</string>
 
@@ -27,6 +48,23 @@
 	<string name="local_openstreetmap_settings_descr">Show and manage OSM points noted in local database</string>
 
 	<string name="live_monitoring_descr">Enable sending HTTP requests to a specified web service</string>
+	<string name="help_Distance_Measurement">A planning track can be created and saved to or loaded from a GPX file.
+	    \n\t- Create a track of new points using long touches at the desired locations, as described below.
+	    \n\t- Tap on the Menu button, any track point or an information text box to open a menu giving the option to save the track as as plan GPX file. 
+	    The saved file will be the same as any standard GPX file but will have \"plan_\" added as a prefix to the file name.
+	    \n\t- Saved gpx files can be reloaded, edited and saved as often as required.
+	    \n\t- GPX files can be loaded via the various menus described above or also from the map menu \"Define view\" option. 
+	    GPX Files that do not have the prefix \"plan_\" (e.g. saved GPS tracks) will not load as an editable track.
+		\n\nCreate new points on the track by using a long touch at the desired location.
+		\n\t- Points can be inserted before any existing point by tapping on the point and selecting \"Insert point before this\" option from the pop-up menu. Long touch 
+		anywhere on the map to insert the new point.
+		\n\nWhen Planning/Measurement mode is selected, the cumulative distance between points created on the map is displayed.
+		\n\nPoints can be dragged to a new location and the location and distance information will automatically be adjusted.
+		\n\n Various other display and control functions are available via the main menu or from the context menu opened by tapping a point or its information text box.
+		\n\t- Planning/Measurement mode can be turned on/off from the pop-up menus.
+		\n\t- Other editing options are also available via the menus.
+		\n\t- Long touch a text box to hide it. Tap on any point to provide options for displaying information.</string>
+	<string name="help_Distance_Measurement_t">Planning and Measurement</string>	
 	<string name="live_monitoring">Enable Live Tracking</string>
 	<string name="live_monitoring_interval_descr">Specify Live Tracking interval</string>
 	<string name="live_monitoring_interval">Live Tracking interval</string>
@@ -39,7 +77,7 @@
 	\n\t- Updated maps
 	\n\t- Other small features
 	</string>    
-	<string name="free_version_message">This free OsmAnd version is limited to %1$s downloads %2$s and does not support offline wikipedia articles.</string>
+	<string name="free_version_message">This free OsmAnd version is limited to %1$s downloads %2$s and doesn\'t support offline wikipedia articles.</string>
 	<string name="free_version_title">Free version</string>
 	<string name="poi_context_menu_showdescription">Show POI description</string>
 
@@ -233,7 +271,7 @@
 	<string name="favorite_friends_category">Friends</string>
 	<string name="favorite_places_category">Places</string>
 	<string name="favorite_default_category">Others</string>
-	
+
 	<string name="favourites_edit_dialog_name">Name</string>
 	<string name="favourites_edit_dialog_category">Category</string>
 
@@ -869,5 +907,5 @@
 <string name="edit_filter_delete_message">Filter {0} has been deleted</string>
 <string name="edit_filter_create_message">Filter {0} has been created</string>
 <string name="default_buttons_selectall">Select All</string>
-
+  
 </resources>

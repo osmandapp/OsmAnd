@@ -6,6 +6,7 @@ import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MeasurementActivity;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper.TurnType;
 import android.content.Context;
@@ -37,6 +38,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private final MapActivity map;
 	private final RouteLayer routeLayer;
 	private OsmandMapTileView view;
+	private final MeasurementActivity measurementActivity;
 	
 	private Paint paintText;
 	private Paint paintSubText;
@@ -53,6 +55,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private ImageView backToLocation;
 	private ImageView compassView;
 	private View progressBar;
+	private ImageView helpIconView;	// for Measurement mode help icon display
 	
 	// groups
 	private MapStackControl rightStack;
@@ -63,6 +66,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
 		this.routeLayer = layer;
+		measurementActivity = map.getMeasurementActivity();
 	}
 
 	@Override
@@ -192,6 +196,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// update data on draw
 		rightStack.updateInfo();
 		leftStack.updateInfo();
+		if(measurementActivity.getMeasureDistanceMode()) {		//Measurement Mode help icon display
+			helpIconView.setVisibility(View.VISIBLE);
+		}else{
+			helpIconView.setVisibility(View.GONE);	
+		}
 		if(view.getRotate() != cachedRotate) {
 			cachedRotate = view.getRotate();
 			compassView.invalidate();
@@ -529,6 +538,30 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextView space = new TextView(view.getContext());
 		statusBar.addView(space, params);
 
+		// help icon - add help icon for measurement mode only
+		final Drawable helpIconDrawable = view.getResources().getDrawable(R.drawable.help_icon);
+		helpIconDrawable.setVisible(true, true);
+		params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+		helpIconView = new ImageView(view.getContext())
+		{
+			@Override
+			public void onDraw(Canvas canvas){
+				helpIconDrawable.draw(canvas);
+			}
+		};
+		helpIconView.setVisibility(View.GONE);		
+		helpIconView.setImageDrawable(helpIconDrawable);
+		
+		helpIconView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+//				TipsAndTricksActivity tactivity = new TipsAndTricksActivity(map);
+//				tactivity.getHelpDialog();
+				map.getMeasurementActivity().getHelpDialog();
+			}
+		});
+		statusBar.addView(helpIconView, params);
+		
 		// Map and progress icon
 		Drawable globusDrawable = view.getResources().getDrawable(R.drawable.globus);
 		

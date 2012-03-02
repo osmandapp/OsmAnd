@@ -67,8 +67,6 @@ public class PointLocationLayer extends OsmandMapLayer {
 		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
 	}
-
-
 	
 	private RectF getHeadingRect(int locationX, int locationY){
 		int rad = Math.min(3 * view.getWidth() / 8, 3 * view.getHeight() / 8);
