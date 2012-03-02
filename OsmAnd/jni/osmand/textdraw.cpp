@@ -193,10 +193,10 @@ void drawWrappedText(RenderingContext* rc, SkCanvas* cv, TextDrawInfo* text, flo
 				pos++;
 			}
 			if(lastSpace == -1) {
-				NAT_COUNT(rc, drawTextOnCanvas(cv, text->text.substr(start, pos), text->centerX, text->centerY + line * (textSize + 2), paintText, text->textShadow));
+				PROFILE_NATIVE_OPERATION(rc, drawTextOnCanvas(cv, text->text.substr(start, pos), text->centerX, text->centerY + line * (textSize + 2), paintText, text->textShadow));
 				start = pos;
 			} else {
-				NAT_COUNT(rc, drawTextOnCanvas(cv, text->text.substr(start, lastSpace), text->centerX, text->centerY + line * (textSize + 2), paintText, text->textShadow));
+				PROFILE_NATIVE_OPERATION(rc, drawTextOnCanvas(cv, text->text.substr(start, lastSpace), text->centerX, text->centerY + line * (textSize + 2), paintText, text->textShadow));
 				start = lastSpace + 1;
 				limit += (start - pos) - 1;
 			}
@@ -204,7 +204,7 @@ void drawWrappedText(RenderingContext* rc, SkCanvas* cv, TextDrawInfo* text, flo
 
 		}
 	} else {
-		NAT_COUNT(rc, drawTextOnCanvas(cv, text->text, text->centerX, text->centerY, paintText, text->textShadow));
+		PROFILE_NATIVE_OPERATION(rc, drawTextOnCanvas(cv, text->text, text->centerX, text->centerY, paintText, text->textShadow));
 	}
 }
 
@@ -514,7 +514,7 @@ void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv) {
 				}
 				if (text->drawOnPath && text->path != NULL) {
 					if (text->textShadow > 0) {
-						paintText.setColor(WHITE_COLOR);
+						paintText.setColor(0xFFFFFFFF);
 						paintText.setStyle(SkPaint::kStroke_Style);
 						paintText.setStrokeWidth(2 + text->textShadow);
 						rc->nativeOperations.pause();

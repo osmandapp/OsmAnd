@@ -226,7 +226,7 @@ public class OsmandRenderer {
 				notifyListeners(notifyList);
 				long time = System.currentTimeMillis() - now;
 				rc.renderingDebugInfo = String.format("Rendering: %s ms  (%s text)\n"
-						+ "(%s points, %s points inside, %s of %s objects visible)\n" + res.debugMessage,//$NON-NLS-1$
+						+ "(%s points, %s points inside, %s of %s objects visible)\n",//$NON-NLS-1$
 						time, rc.textRenderingTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
 				
 				// See upper note

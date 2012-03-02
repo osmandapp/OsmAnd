@@ -73,7 +73,8 @@ public class NativeOsmandLibrary {
 			Bitmap bitmap, int requestedBitmapWidth, int requestedBitmapHeight, int rowBytes, boolean isTransparent, 
 			boolean useEnglishNames, RenderingRuleSearchRequest render, int defaultColor) {
 		if (searchResultHandler == null) {
-			return new RenderingGenerationResult(null, "Error searchresult = null");
+			log.error("Error searchresult = null"); //$NON-NLS-1$
+			return new RenderingGenerationResult(null);
 		}
 		
 		if(android.os.Build.VERSION.SDK_INT >= 8) // Android 2.2+
@@ -131,14 +132,11 @@ public class NativeOsmandLibrary {
 	}
 	
 	public static class RenderingGenerationResult {
-		public RenderingGenerationResult(ByteBuffer bitmap, String msg) {
+		public RenderingGenerationResult(ByteBuffer bitmap) {
 			bitmapBuffer = bitmap;
-			debugMessage = msg;
 		}
 	
 		public final ByteBuffer bitmapBuffer;
-		
-		public final String debugMessage;
 	}
 
 	private static native void deleteSearchResult(int searchResultHandle);
