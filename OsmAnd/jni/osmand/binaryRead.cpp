@@ -83,7 +83,7 @@ struct SearchQuery {
 	}
 
 	bool isCancelled(){
-		return globalEnv()->GetBooleanField(o, interruptedField);
+		return getGlobalJniEnv()->GetBooleanField(o, interruptedField);
 	}
 };
 
@@ -361,7 +361,7 @@ void loadJniBinaryRead() {
 extern "C" JNIEXPORT void JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_deleteSearchResult(JNIEnv* ienv,
 		jobject obj, jint searchResult) {
 	// DO NOT DO IT it can leads to messing thread that is not allowed
-	// setGlobalEnv(ienv);
+	// setGlobalJniEnv(ienv);
 	SearchResult* result = (SearchResult*) searchResult;
 	if(result != NULL){
 		delete result;
@@ -690,7 +690,7 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 		jobject obj, jint sleft, jint sright, jint stop, jint sbottom, jint zoom, jstring mapName,
 		jobject renderingRuleSearchRequest, bool skipDuplicates, jint searchResult, jobject objInterrupted) {
 	// TODO skipDuplicates not supported
-	setGlobalEnv(ienv);
+	setGlobalJniEnv(ienv);
 	SearchResult* result = (SearchResult*) searchResult;
 	if(result == NULL) {
 		result = new SearchResult();
@@ -702,9 +702,9 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 	}
 	BinaryMapFile* file =  i->second;
 	RenderingRuleSearchRequest* req = initSearchRequest(renderingRuleSearchRequest);
-	jclass clObjInterrupted = globalEnv()->GetObjectClass(objInterrupted);
+	jclass clObjInterrupted = getGlobalJniEnv()->GetObjectClass(objInterrupted);
 	jfieldID interruptedField =  getFid(clObjInterrupted, "interrupted", "Z");
-	globalEnv()->DeleteLocalRef(clObjInterrupted);
+	getGlobalJniEnv()->DeleteLocalRef(clObjInterrupted);
 	SearchQuery q(sleft,sright, stop, sbottom, req, objInterrupted, interruptedField);
 
 	fseek(file->f, 0, 0);
@@ -757,7 +757,7 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_initBinaryMapFile(JNIEnv* ienv,
 		jobject obj, jobject path) {
 	// Verify that the version of the library that we linked against is
-	setGlobalEnv(ienv);
+	setGlobalJniEnv(ienv);
 	const char* utf = ienv->GetStringUTFChars((jstring) path, NULL);
 	std::string inputName(utf);
 	ienv->ReleaseStringUTFChars((jstring) path, utf);

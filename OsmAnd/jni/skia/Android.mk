@@ -11,11 +11,27 @@ LOCAL_MODULE := skia_neon
 LOCAL_ARM_NEON := true
 endif
 
-ifeq ($(SKIA_LOC),)
-  SKIA_LOC := .
+ifeq ($(OSMAND_SKIA_LOC),)
+  OSMAND_SKIA_LOC := ./skia_library
 endif
-ifeq ($(SKIA_ABS),)
-  SKIA_ABS := $(LOCAL_PATH)
+ifeq ($(OSMAND_SKIA_ABS),)
+  OSMAND_SKIA_ABS := $(LOCAL_PATH)/skia_library
+endif
+
+ifeq ($(OSMAND_FREETYPE_ABS),)
+  OSMAND_FREETYPE_ABS := $(LOCAL_PATH)/../freetype/freetype_library
+endif
+ifeq ($(OSMAND_PNG_ABS),)
+  OSMAND_PNG_ABS := $(LOCAL_PATH)/../png/png_library
+endif
+ifeq ($(OSMAND_GIF_ABS),)
+  OSMAND_GIF_ABS := $(LOCAL_PATH)/../gif/gif_library
+endif
+ifeq ($(OSMAND_EXPAT_ABS),)
+  OSMAND_EXPAT_ABS := $(LOCAL_PATH)/../expat/expat_library
+endif
+ifeq ($(OSMAND_JPEG_ABS),)
+  OSMAND_JPEG_ABS := $(LOCAL_PATH)/../jpeg/jpeg_library
 endif
 
 LOCAL_ARM_MODE := arm
@@ -35,258 +51,263 @@ ifeq ($(LOCAL_ARM_NEON),true)
 endif
 
 LOCAL_SRC_FILES := \
-	$(SKIA_LOC)/trunk/src/core/Sk64.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkAAClip.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkAdvancedTypefaceMetrics.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkAlphaRuns.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkBitmap.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkBitmapProcShader.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkBitmapProcState.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkBitmapProcState_matrixProcs.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkBitmapSampler.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkBitmap_scroll.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkBlitMask_D32.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkBlitRow_D16.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkBlitRow_D32.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkBlitRow_D4444.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkBlitter.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkBlitter_4444.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkBlitter_A1.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkBlitter_A8.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkBlitter_ARGB32.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkBlitter_RGB16.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkBlitter_Sprite.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkBuffer.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkCanvas.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkChunkAlloc.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkClampRange.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkClipStack.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkColor.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkColorFilter.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkColorTable.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkConfig8888.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkComposeShader.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkConcaveToTriangles.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkCordic.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkCubicClipper.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkData.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkDebug.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkDeque.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkDevice.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkDither.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkDraw.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkEdgeBuilder.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkEdgeClipper.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkEdge.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkFilterProc.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkFlattenable.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkFloat.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkFloatBits.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkFontHost.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkGeometry.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkGlyphCache.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkGraphics.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkLineClipper.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkMallocPixelRef.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkMask.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkMaskFilter.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkMath.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkMatrix.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkMetaData.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkMMapStream.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkPackBits.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkPaint.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkPath.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkPathEffect.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkPathHeap.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkPathMeasure.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkPicture.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkPictureFlat.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkPicturePlayback.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkPictureRecord.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkPixelRef.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkPoint.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkProcSpriteBlitter.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkPtrRecorder.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkQuadClipper.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkRasterClip.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkRasterizer.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkRect.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkRefDict.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkRegion.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkRegion_path.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkScalar.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkScalerContext.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkScan.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkScan_AntiPath.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkScan_Antihair.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkScan_Hairline.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkScan_Path.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkShader.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkShape.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkSpriteBlitter_ARGB32.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkSpriteBlitter_RGB16.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkStream.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkString.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkStroke.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkStrokerPriv.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkTSearch.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkTypeface.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkTypefaceCache.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkUnPreMultiply.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkUtils.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkFlate.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkWriter32.cpp \
-	$(SKIA_LOC)/trunk/src/core/SkXfermode.cpp \
-	$(SKIA_LOC)/trunk/src/effects/Sk1DPathEffect.cpp \
-	$(SKIA_LOC)/trunk/src/effects/Sk2DPathEffect.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkAvoidXfermode.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkArithmeticMode.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkBitmapCache.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkBlurDrawLooper.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkBlurImageFilter.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkBlurMask.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkBlurMaskFilter.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkColorFilters.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkColorMatrixFilter.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkCornerPathEffect.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkDashPathEffect.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkDiscretePathEffect.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkEffects.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkEmbossMask.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkEmbossMaskFilter.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkGradientShader.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkGroupShape.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkKernel33MaskFilter.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkLayerDrawLooper.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkLayerRasterizer.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkPaintFlagsDrawFilter.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkPixelXorXfermode.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkPorterDuff.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkRectShape.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkTableColorFilter.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkTableMaskFilter.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkTestImageFilters.cpp \
-	$(SKIA_LOC)/trunk/src/effects/SkTransparentShader.cpp \
-	$(SKIA_LOC)/trunk/src/images/bmpdecoderhelper.cpp \
-	$(SKIA_LOC)/trunk/src/images/SkCreateRLEPixelRef.cpp \
-	$(SKIA_LOC)/trunk/src/images/SkFDStream.cpp \
-	$(SKIA_LOC)/trunk/src/images/SkFlipPixelRef.cpp \
-	$(SKIA_LOC)/trunk/src/images/SkImageDecoder.cpp \
-	$(SKIA_LOC)/trunk/src/images/SkImageDecoder_Factory.cpp \
-	$(SKIA_LOC)/trunk/src/images/SkImageDecoder_libbmp.cpp \
-	$(SKIA_LOC)/trunk/src/images/SkImageDecoder_libgif.cpp \
-	$(SKIA_LOC)/trunk/src/images/SkImageDecoder_libico.cpp \
-	$(SKIA_LOC)/trunk/src/images/SkImageDecoder_libpng.cpp \
-	$(SKIA_LOC)/trunk/src/images/SkImageDecoder_wbmp.cpp \
-	$(SKIA_LOC)/trunk/src/images/SkImageEncoder.cpp \
-	$(SKIA_LOC)/trunk/src/images/SkImageEncoder_Factory.cpp \
-	$(SKIA_LOC)/trunk/src/images/SkImageRef.cpp \
-	$(SKIA_LOC)/trunk/src/images/SkImageRefPool.cpp \
-	$(SKIA_LOC)/trunk/src/images/SkImageRef_GlobalPool.cpp \
-	$(SKIA_LOC)/trunk/src/images/SkMovie.cpp \
-	$(SKIA_LOC)/trunk/src/images/SkMovie_gif.cpp \
-	$(SKIA_LOC)/trunk/src/images/SkPageFlipper.cpp \
-	$(SKIA_LOC)/trunk/src/images/SkScaledBitmapSampler.cpp \
-	$(SKIA_LOC)/trunk/src/ports/SkDebug_android.cpp \
-	$(SKIA_LOC)/trunk/src/ports/SkGlobalInitialization_default.cpp \
-	$(SKIA_LOC)/trunk/src/ports/SkFontHost_FreeType.cpp \
-	$(SKIA_LOC)/trunk/src/ports/SkFontHost_sandbox_none.cpp	\
-	$(SKIA_LOC)/trunk/src/ports/SkFontHost_android.cpp \
-	$(SKIA_LOC)/trunk/src/ports/SkFontHost_gamma.cpp \
-	$(SKIA_LOC)/trunk/src/ports/SkFontHost_tables.cpp \
-	$(SKIA_LOC)/trunk/src/ports/SkMemory_malloc.cpp \
-	$(SKIA_LOC)/trunk/src/ports/SkOSFile_stdio.cpp \
-	$(SKIA_LOC)/trunk/src/ports/SkTime_Unix.cpp \
-	$(SKIA_LOC)/trunk/src/utils/SkBoundaryPatch.cpp \
-	$(SKIA_LOC)/trunk/src/utils/SkCamera.cpp \
-	$(SKIA_LOC)/trunk/src/utils/SkColorMatrix.cpp \
-	$(SKIA_LOC)/trunk/src/utils/SkCubicInterval.cpp \
-	$(SKIA_LOC)/trunk/src/utils/SkCullPoints.cpp \
-	$(SKIA_LOC)/trunk/src/utils/SkDumpCanvas.cpp \
-	$(SKIA_LOC)/trunk/src/utils/SkInterpolator.cpp \
-	$(SKIA_LOC)/trunk/src/utils/SkLayer.cpp \
-	$(SKIA_LOC)/trunk/src/utils/SkMatrix44.cpp \
-	$(SKIA_LOC)/trunk/src/utils/SkMeshUtils.cpp \
-	$(SKIA_LOC)/trunk/src/utils/SkNinePatch.cpp \
-	$(SKIA_LOC)/trunk/src/utils/SkNWayCanvas.cpp \
-	$(SKIA_LOC)/trunk/src/utils/SkOSFile.cpp \
-	$(SKIA_LOC)/trunk/src/utils/SkParse.cpp \
-	$(SKIA_LOC)/trunk/src/utils/SkParseColor.cpp \
-	$(SKIA_LOC)/trunk/src/utils/SkParsePath.cpp \
-	$(SKIA_LOC)/trunk/src/utils/SkProxyCanvas.cpp \
-	$(SKIA_LOC)/trunk/src/utils/SkSfntUtils.cpp \
-	$(SKIA_LOC)/trunk/src/utils/SkUnitMappers.cpp
+	$(OSMAND_SKIA_LOC)/src/core/Sk64.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkAAClip.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkAdvancedTypefaceMetrics.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkAlphaRuns.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkBitmap.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkBitmapProcShader.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkBitmapProcState.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkBitmapProcState_matrixProcs.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkBitmapSampler.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkBitmap_scroll.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkBlitMask_D32.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkBlitRow_D16.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkBlitRow_D32.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkBlitRow_D4444.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkBlitter.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkBlitter_4444.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkBlitter_A1.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkBlitter_A8.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkBlitter_ARGB32.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkBlitter_RGB16.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkBlitter_Sprite.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkBuffer.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkCanvas.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkChunkAlloc.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkClampRange.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkClipStack.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkColor.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkColorFilter.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkColorTable.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkComposeShader.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkConcaveToTriangles.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkCordic.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkCubicClipper.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkData.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkDebug.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkDeque.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkDevice.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkDither.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkDraw.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkEdgeBuilder.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkEdgeClipper.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkEdge.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkFilterProc.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkFlattenable.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkFloat.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkFloatBits.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkFontHost.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkGeometry.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkGlyphCache.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkGraphics.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkLineClipper.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkMallocPixelRef.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkMask.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkMaskFilter.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkMath.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkMatrix.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkMetaData.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkMMapStream.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkPackBits.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkPaint.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkPath.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkPathEffect.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkPathHeap.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkPathMeasure.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkPicture.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkPictureFlat.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkPicturePlayback.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkPictureRecord.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkPixelRef.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkPoint.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkProcSpriteBlitter.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkPtrRecorder.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkQuadClipper.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkRasterClip.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkRasterizer.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkRect.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkRefDict.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkRegion.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkRegion_path.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkScalar.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkScalerContext.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkScan.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkScan_AntiPath.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkScan_Antihair.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkScan_Hairline.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkScan_Path.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkShader.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkShape.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkSpriteBlitter_ARGB32.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkSpriteBlitter_RGB16.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkStream.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkString.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkStroke.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkStrokerPriv.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkTSearch.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkTypeface.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkTypefaceCache.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkUnPreMultiply.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkUtils.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkFlate.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkWriter32.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkXfermode.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/Sk1DPathEffect.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/Sk2DPathEffect.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkAvoidXfermode.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkArithmeticMode.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkBitmapCache.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkBlurDrawLooper.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkBlurImageFilter.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkBlurMask.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkBlurMaskFilter.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkColorFilters.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkColorMatrixFilter.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkCornerPathEffect.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkDashPathEffect.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkDiscretePathEffect.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkEffects.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkEmbossMask.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkEmbossMaskFilter.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkGradientShader.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkGroupShape.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkKernel33MaskFilter.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkLayerDrawLooper.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkLayerRasterizer.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkPaintFlagsDrawFilter.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkPixelXorXfermode.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkPorterDuff.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkRectShape.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkTableColorFilter.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkTableMaskFilter.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkTestImageFilters.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkTransparentShader.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/bmpdecoderhelper.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkCreateRLEPixelRef.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkFDStream.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkFlipPixelRef.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_Factory.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_libbmp.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_libgif.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_libico.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_libjpeg.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_libpng.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_wbmp.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkImageEncoder.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkImageEncoder_Factory.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkImageRef.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkImageRefPool.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkImageRef_GlobalPool.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkMovie.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkMovie_gif.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkPageFlipper.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkScaledBitmapSampler.cpp \
+	$(OSMAND_SKIA_LOC)/src/ports/SkDebug_android.cpp \
+	$(OSMAND_SKIA_LOC)/src/ports/SkGlobalInitialization_default.cpp \
+	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_FreeType.cpp \
+	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_sandbox_none.cpp	\
+	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_android.cpp \
+	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_gamma.cpp \
+	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_tables.cpp \
+	$(OSMAND_SKIA_LOC)/src/ports/SkMemory_malloc.cpp \
+	$(OSMAND_SKIA_LOC)/src/ports/SkOSFile_stdio.cpp \
+	$(OSMAND_SKIA_LOC)/src/ports/SkTime_Unix.cpp \
+	$(OSMAND_SKIA_LOC)/src/ports/SkThread_pthread.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkBoundaryPatch.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkCamera.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkColorMatrix.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkCubicInterval.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkCullPoints.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkDumpCanvas.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkInterpolator.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkLayer.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkMatrix44.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkMeshUtils.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkNinePatch.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkNWayCanvas.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkOSFile.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkParse.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkParseColor.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkParsePath.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkProxyCanvas.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkSfntUtils.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkUnitMappers.cpp
 
-# This file is replacement of $(SKIA_LOC)/trunk/src/ports/FontHostConfiguration_android.cpp 
+# This file is replacement of $(OSMAND_SKIA_LOC)/src/ports/FontHostConfiguration_android.cpp 
 LOCAL_SRC_FILES += \
 	FontHostConfiguration_android.cpp
 LOCAL_C_INCLUDES += \
-	$(SKIA_ABS)/trunk/src/ports
-	
-# We don't define SK_USE_POSIX_THREADS to remove SkMutex
-# Also, we include faked own SkThread_fake instead of SkThread_pthread
-LOCAL_SRC_FILES += \
-	SkThread_fake.cpp
+	$(OSMAND_SKIA_ABS)/src/ports
 	
 ifeq ($(TARGET_ARCH),arm)
 
 ifeq ($(LOCAL_ARM_NEON),true)
 LOCAL_SRC_FILES += \
-	$(SKIA_LOC)/trunk/src/opts/memset16_neon.S \
-	$(SKIA_LOC)/trunk/src/opts/memset32_neon.S
+	$(OSMAND_SKIA_LOC)/src/opts/memset16_neon.S \
+	$(OSMAND_SKIA_LOC)/src/opts/memset32_neon.S
 endif
 
 LOCAL_SRC_FILES += \
-	$(SKIA_LOC)/trunk/src/opts/opts_check_arm.cpp \
-	$(SKIA_LOC)/trunk/src/opts/memset.arm.S \
-	$(SKIA_LOC)/trunk/src/opts/SkBitmapProcState_opts_arm.cpp \
-	$(SKIA_LOC)/trunk/src/opts/SkBlitRow_opts_arm.cpp
+	$(OSMAND_SKIA_LOC)/src/opts/opts_check_arm.cpp \
+	$(OSMAND_SKIA_LOC)/src/opts/memset.arm.S \
+	$(OSMAND_SKIA_LOC)/src/opts/SkBitmapProcState_opts_arm.cpp \
+	$(OSMAND_SKIA_LOC)/src/opts/SkBlitRow_opts_arm.cpp
 		
 else
 
 LOCAL_SRC_FILES += \
-	$(SKIA_LOC)/trunk/src/opts/SkBlitRow_opts_none.cpp \
-	$(SKIA_LOC)/trunk/src/opts/SkBitmapProcState_opts_none.cpp \
-	$(SKIA_LOC)/trunk/src/opts/SkUtils_opts_none.cpp
+	$(OSMAND_SKIA_LOC)/src/opts/SkBlitRow_opts_none.cpp \
+	$(OSMAND_SKIA_LOC)/src/opts/SkBitmapProcState_opts_none.cpp \
+	$(OSMAND_SKIA_LOC)/src/opts/SkUtils_opts_none.cpp
 		
 endif
 
 LOCAL_SHARED_LIBRARIES := \
-	libcutils \
-	libjpeg \
 	libutils \
 	libz
 	
-LOCAL_STATIC_LIBRARIES := \
-	libft2 \
+ifeq ($(LOCAL_ARM_NEON),true)
+LOCAL_STATIC_LIBRARIES += \
+	libjpeg_neon \
+	libft2_static_neon \
+	libpng_neon \
+	libgif_neon \
+	libexpat_static_neon
+else
+LOCAL_STATIC_LIBRARIES += \
+	libjpeg \
+	libft2_static \
 	libpng \
 	libgif \
 	libexpat_static
+endif
 
 LOCAL_C_INCLUDES += \
-	$(SKIA_ABS)/trunk/src/core \
-	$(SKIA_ABS)/trunk/include/core \
-	$(SKIA_ABS)/trunk/include/config \
-	$(SKIA_ABS)/trunk/include/effects \
-	$(SKIA_ABS)/trunk/include/images \
-	$(SKIA_ABS)/trunk/include/utils \
-	$(SKIA_ABS)/trunk/include/xml \
-	$(SKIA_ABS)/android/third_party/externals/freetype/include \
-	$(SKIA_ABS)/android/third_party/externals/png \
-	$(SKIA_ABS)/android/third_party/externals/gif \
-	$(SKIA_ABS)/android/third_party/externals/expat/lib
+	$(LOCAL_PATH) \
+	$(OSMAND_SKIA_ABS)/src/core \
+	$(OSMAND_SKIA_ABS)/include/core \
+	$(OSMAND_SKIA_ABS)/include/config \
+	$(OSMAND_SKIA_ABS)/include/effects \
+	$(OSMAND_SKIA_ABS)/include/images \
+	$(OSMAND_SKIA_ABS)/include/utils \
+	$(OSMAND_SKIA_ABS)/include/xml \
+	$(OSMAND_FREETYPE_ABS)/include \
+	$(OSMAND_PNG_ABS) \
+	$(OSMAND_GIF_ABS) \
+	$(OSMAND_EXPAT_ABS)/lib \
+	$(OSMAND_JPEG_ABS)
 
 ifeq ($(NO_FALLBACK_FONT),true)
 	LOCAL_CFLAGS += -DNO_FALLBACK_FONT
 endif
 
 LOCAL_CFLAGS += \
-	-DSK_SCALAR_IS_FLOAT \
-	-DSK_CAN_USE_FLOAT \
 	-DSK_BUILD_FOR_ANDROID \
 	-DSK_BUILD_FOR_ANDROID_NDK \
 	-DSK_ALLOW_STATIC_GLOBAL_INITIALIZERS=0 \
+	-DSK_USE_POSIX_THREADS \
 	-DSK_RELEASE \
 	-DGR_RELEASE=1 \
 	-DNDEBUG
@@ -302,10 +323,3 @@ include $(BUILD_STATIC_LIBRARY)
 # Fix some errors
 BUILD_HOST_EXECUTABLE := $(LOCAL_PATH)/FakeHost.mk
 BUILD_HOST_STATIC_LIBRARY := $(LOCAL_PATH)/FakeHost.mk 
-
-# Import skia externals
-$(call import-add-path,$(SKIA_ABS)/android/third_party/externals)
-$(call import-module,expat)
-$(call import-module,freetype)
-$(call import-module,gif)
-$(call import-module,png)

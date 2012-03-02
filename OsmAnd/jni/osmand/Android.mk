@@ -8,8 +8,8 @@ ifeq ($(PROTOBUF),)
 endif
 
 # Set 'skia' folder only if it's not externally set
-ifeq ($(SKIA_ABS),)
-  SKIA_ABS := $(LOCAL_PATH)/../skia
+ifeq ($(OSMAND_SKIA_ABS),)
+  OSMAND_SKIA_ABS := $(LOCAL_PATH)/../skia/skia_library
 endif
 
 # Name of the local module
@@ -23,14 +23,15 @@ endif
 # Include paths
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
     $(PROTOBUF) \
-	$(SKIA_ABS)/trunk/include/core \
-	$(SKIA_ABS)/trunk/include/utils \
-	$(SKIA_ABS)/trunk/include/config \
-	$(SKIA_ABS)/trunk/include/effects \
-	$(SKIA_ABS)/trunk/include/utils/android \
-	$(SKIA_ABS)/trunk/src/core
+	$(LOCAL_PATH)/../skia \
+	$(OSMAND_SKIA_ABS)/include/core \
+	$(OSMAND_SKIA_ABS)/include/images \
+	$(OSMAND_SKIA_ABS)/include/utils \
+	$(OSMAND_SKIA_ABS)/include/config \
+	$(OSMAND_SKIA_ABS)/include/effects \
+	$(OSMAND_SKIA_ABS)/include/utils/android \
+	$(OSMAND_SKIA_ABS)/src/core
 	
-LOCAL_CPP_EXTENSION := .cpp
 LOCAL_SRC_FILES := \
 	common.cpp \
 	mapObjects.cpp \
@@ -46,6 +47,11 @@ LOCAL_CFLAGS := \
 	-DSK_USE_POSIX_THREADS \
 	-DSK_RELEASE \
 	-DGR_RELEASE=1
+	
+ifdef OSMAND_PROFILE_NATIVE_OPERATIONS
+LOCAL_CFLAGS += \
+	-DPROFILE_NATIVE_OPERATIONS
+endif
 
 ifneq ($(LOCAL_ARM_NEON),true)
 LOCAL_STATIC_LIBRARIES := proto skia

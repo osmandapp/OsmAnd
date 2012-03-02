@@ -1,0 +1,18 @@
+[submodule "OsmAnd/jni/jpeg/jpeg_library"]
+	path = OsmAnd/jni/jpeg/jpeg_library
+	url = https://android.googlesource.com/platform/external/jpeg.git
+[submodule "OsmAnd/jni/skia/skia_library"]
+	path = OsmAnd/jni/skia/skia_library
+	url = https://android.googlesource.com/platform/external/skia.git
+[submodule "OsmAnd/jni/png/png_library"]
+	path = OsmAnd/jni/png/png_library
+	url = https://android.googlesource.com/platform/external/libpng.git
+[submodule "OsmAnd/jni/freetype/freetype_library"]
+	path = OsmAnd/jni/freetype/freetype_library
+	url = https://android.googlesource.com/platform/external/freetype.git
+[submodule "OsmAnd/jni/expat/expat_library"]
+	path = OsmAnd/jni/expat/expat_library
+	url = https://android.googlesource.com/platform/external/expat.git
+[submodule "OsmAnd/jni/gif/gif_library"]
+	path = OsmAnd/jni/gif/gif_library
+	url = https://android.googlesource.com/platform/external/giflib.git
