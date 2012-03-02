@@ -36,24 +36,24 @@ std::vector <BaseMapDataObject* > marshalObjects(jobjectArray binaryMapDataObjec
 {
 	std::vector<BaseMapDataObject*> v;
 
-	const size_t size = globalEnv()->GetArrayLength(binaryMapDataObjects);
+	const size_t size = getGlobalJniEnv()->GetArrayLength(binaryMapDataObjects);
 	size_t i = 0;
 	for (; i < size; i++) {
-		jobject binaryMapDataObject = (jobject) globalEnv()->GetObjectArrayElement(binaryMapDataObjects, i);
-		if (globalEnv()->IsInstanceOf(binaryMapDataObject, MultiPolygonClass)) {
+		jobject binaryMapDataObject = (jobject) getGlobalJniEnv()->GetObjectArrayElement(binaryMapDataObjects, i);
+		if (getGlobalJniEnv()->IsInstanceOf(binaryMapDataObject, MultiPolygonClass)) {
 			MultiPolygonObject* o = new MultiPolygonObject();
 			v.push_back((BaseMapDataObject* )o);
-			o->layer = globalEnv()->CallIntMethod(binaryMapDataObject, MultiPolygon_getLayer);
+			o->layer = getGlobalJniEnv()->CallIntMethod(binaryMapDataObject, MultiPolygon_getLayer);
 			o->tag = getStringMethod(binaryMapDataObject, MultiPolygon_getTag);
 			o->value = getStringMethod(binaryMapDataObject, MultiPolygon_getValue);
 
-			int boundsCount = globalEnv()->CallIntMethod(binaryMapDataObject, MultiPolygon_getBoundsCount);
+			int boundsCount = getGlobalJniEnv()->CallIntMethod(binaryMapDataObject, MultiPolygon_getBoundsCount);
 			for (int ji = 0; ji < boundsCount; ji++) {
-				int cnt = globalEnv()->CallIntMethod(binaryMapDataObject, MultiPolygon_getBoundPointsCount, ji);
+				int cnt = getGlobalJniEnv()->CallIntMethod(binaryMapDataObject, MultiPolygon_getBoundPointsCount, ji);
 				std::vector<std::pair<int, int> > vs;
 				for (int js = 0; js < cnt; js++) {
-					int xt = globalEnv()->CallIntMethod(binaryMapDataObject, MultiPolygon_getPoint31XTile, js, ji);
-					int yt = globalEnv()->CallIntMethod(binaryMapDataObject, MultiPolygon_getPoint31YTile, js, ji);
+					int xt = getGlobalJniEnv()->CallIntMethod(binaryMapDataObject, MultiPolygon_getPoint31XTile, js, ji);
+					int yt = getGlobalJniEnv()->CallIntMethod(binaryMapDataObject, MultiPolygon_getPoint31YTile, js, ji);
 					vs.push_back( std::pair<int, int> (xt, yt) );
 				}
 
@@ -64,40 +64,40 @@ std::vector <BaseMapDataObject* > marshalObjects(jobjectArray binaryMapDataObjec
 
 
 		} else {
-			jintArray types = (jintArray) globalEnv()->CallObjectMethod(binaryMapDataObject, BinaryMapDataObject_getTypes);
+			jintArray types = (jintArray) getGlobalJniEnv()->CallObjectMethod(binaryMapDataObject, BinaryMapDataObject_getTypes);
 			if (types != NULL) {
 				MapDataObject* o = new MapDataObject();
-				jint sizeTypes = globalEnv()->GetArrayLength(types);
-				jint* els = globalEnv()->GetIntArrayElements(types, NULL);
+				jint sizeTypes = getGlobalJniEnv()->GetArrayLength(types);
+				jint* els = getGlobalJniEnv()->GetIntArrayElements(types, NULL);
 				int j = 0;
 				for (; j < sizeTypes; j++) {
 					int wholeType = els[j];
 					o->types.push_back(wholeType);
-					jobject pair = globalEnv()->CallObjectMethod(binaryMapDataObject, BinaryMapDataObject_getTagValue, j);
+					jobject pair = getGlobalJniEnv()->CallObjectMethod(binaryMapDataObject, BinaryMapDataObject_getTagValue, j);
 					if (pair != NULL) {
 						std::string tag = getStringField(pair, TagValuePair_tag);
 						std::string value = getStringField(pair, TagValuePair_value);
 						o->tagValues.push_back( std::pair<std:: string, std::string>(tag, value));
-						globalEnv()->DeleteLocalRef(pair);
+						getGlobalJniEnv()->DeleteLocalRef(pair);
 					} else {
-						o->tagValues.push_back( std::pair<std:: string, std::string>(EMPTY_STRING, EMPTY_STRING));
+						o->tagValues.push_back( std::pair<std:: string, std::string>(std::string(), std::string()));
 					}
 				}
 
-				jint sizePoints = globalEnv()->CallIntMethod(binaryMapDataObject, BinaryMapDataObject_getPointsLength);
+				jint sizePoints = getGlobalJniEnv()->CallIntMethod(binaryMapDataObject, BinaryMapDataObject_getPointsLength);
 				for (j = 0; j < sizePoints; j++) {
-					int tx = globalEnv()->CallIntMethod(binaryMapDataObject, BinaryMapDataObject_getPoint31XTile, j);
-					int ty = globalEnv()->CallIntMethod(binaryMapDataObject, BinaryMapDataObject_getPoint31YTile, j);
+					int tx = getGlobalJniEnv()->CallIntMethod(binaryMapDataObject, BinaryMapDataObject_getPoint31XTile, j);
+					int ty = getGlobalJniEnv()->CallIntMethod(binaryMapDataObject, BinaryMapDataObject_getPoint31YTile, j);
 					o->points.push_back(std::pair<int, int>(tx, ty));
 				}
 				o->name = getStringMethod(binaryMapDataObject, BinaryMapDataObject_getName);
-				o->highwayAttributes = globalEnv()->CallIntMethod(binaryMapDataObject, BinaryMapDataObject_getHighwayAttributes);
-				globalEnv()->ReleaseIntArrayElements(types, els, JNI_ABORT);
-				globalEnv()->DeleteLocalRef(types);
+				o->highwayAttributes = getGlobalJniEnv()->CallIntMethod(binaryMapDataObject, BinaryMapDataObject_getHighwayAttributes);
+				getGlobalJniEnv()->ReleaseIntArrayElements(types, els, JNI_ABORT);
+				getGlobalJniEnv()->DeleteLocalRef(types);
 				v.push_back((BaseMapDataObject* )o);
 			}
 		}
-		globalEnv()->DeleteLocalRef(binaryMapDataObject);
+		getGlobalJniEnv()->DeleteLocalRef(binaryMapDataObject);
 	}
 
 	return v;
@@ -115,38 +115,38 @@ void deleteObjects(std::vector <BaseMapDataObject* > & v)
 
 void loadJniMapObjects()
 {
-	MultiPolygonClass = globalRef(globalEnv()->FindClass("net/osmand/osm/MultyPolygon"));
-	MultiPolygon_getTag = globalEnv()->GetMethodID(MultiPolygonClass, "getTag", "()Ljava/lang/String;");
-	MultiPolygon_getValue = globalEnv()->GetMethodID(MultiPolygonClass, "getValue", "()Ljava/lang/String;");
-	MultiPolygon_getName = globalEnv()->GetMethodID(MultiPolygonClass, "getName", "(I)Ljava/lang/String;");
-	MultiPolygon_getLayer = globalEnv()->GetMethodID(MultiPolygonClass, "getLayer", "()I");
-	MultiPolygon_getPoint31XTile = globalEnv()->GetMethodID(MultiPolygonClass, "getPoint31XTile", "(II)I");
-	MultiPolygon_getPoint31YTile = globalEnv()->GetMethodID(MultiPolygonClass, "getPoint31YTile", "(II)I");
-	MultiPolygon_getBoundsCount = globalEnv()->GetMethodID(MultiPolygonClass, "getBoundsCount", "()I");
-	MultiPolygon_getBoundPointsCount = globalEnv()->GetMethodID(MultiPolygonClass, "getBoundPointsCount", "(I)I");
+	MultiPolygonClass = findClass("net/osmand/osm/MultyPolygon");
+	MultiPolygon_getTag = getGlobalJniEnv()->GetMethodID(MultiPolygonClass, "getTag", "()Ljava/lang/String;");
+	MultiPolygon_getValue = getGlobalJniEnv()->GetMethodID(MultiPolygonClass, "getValue", "()Ljava/lang/String;");
+	MultiPolygon_getName = getGlobalJniEnv()->GetMethodID(MultiPolygonClass, "getName", "(I)Ljava/lang/String;");
+	MultiPolygon_getLayer = getGlobalJniEnv()->GetMethodID(MultiPolygonClass, "getLayer", "()I");
+	MultiPolygon_getPoint31XTile = getGlobalJniEnv()->GetMethodID(MultiPolygonClass, "getPoint31XTile", "(II)I");
+	MultiPolygon_getPoint31YTile = getGlobalJniEnv()->GetMethodID(MultiPolygonClass, "getPoint31YTile", "(II)I");
+	MultiPolygon_getBoundsCount = getGlobalJniEnv()->GetMethodID(MultiPolygonClass, "getBoundsCount", "()I");
+	MultiPolygon_getBoundPointsCount = getGlobalJniEnv()->GetMethodID(MultiPolygonClass, "getBoundPointsCount", "(I)I");
 
-	BinaryMapDataObjectClass = globalRef(globalEnv()->FindClass("net/osmand/binary/BinaryMapDataObject"));
-	BinaryMapDataObject_getPointsLength = globalEnv()->GetMethodID(BinaryMapDataObjectClass, "getPointsLength", "()I");
-	BinaryMapDataObject_getPoint31YTile = globalEnv()->GetMethodID(BinaryMapDataObjectClass, "getPoint31YTile", "(I)I");
-	BinaryMapDataObject_getPoint31XTile = globalEnv()->GetMethodID(BinaryMapDataObjectClass, "getPoint31XTile", "(I)I");
-	BinaryMapDataObject_getHighwayAttributes = globalEnv()->GetMethodID(BinaryMapDataObjectClass, "getHighwayAttributes", "()I");
-	BinaryMapDataObject_getTypes = globalEnv()->GetMethodID(BinaryMapDataObjectClass, "getTypes", "()[I");
-	BinaryMapDataObject_getName = globalEnv()->GetMethodID(BinaryMapDataObjectClass, "getName", "()Ljava/lang/String;");
-	BinaryMapDataObject_getTagValue = globalEnv()->GetMethodID(BinaryMapDataObjectClass, "getTagValue",
+	BinaryMapDataObjectClass = findClass("net/osmand/binary/BinaryMapDataObject");
+	BinaryMapDataObject_getPointsLength = getGlobalJniEnv()->GetMethodID(BinaryMapDataObjectClass, "getPointsLength", "()I");
+	BinaryMapDataObject_getPoint31YTile = getGlobalJniEnv()->GetMethodID(BinaryMapDataObjectClass, "getPoint31YTile", "(I)I");
+	BinaryMapDataObject_getPoint31XTile = getGlobalJniEnv()->GetMethodID(BinaryMapDataObjectClass, "getPoint31XTile", "(I)I");
+	BinaryMapDataObject_getHighwayAttributes = getGlobalJniEnv()->GetMethodID(BinaryMapDataObjectClass, "getHighwayAttributes", "()I");
+	BinaryMapDataObject_getTypes = getGlobalJniEnv()->GetMethodID(BinaryMapDataObjectClass, "getTypes", "()[I");
+	BinaryMapDataObject_getName = getGlobalJniEnv()->GetMethodID(BinaryMapDataObjectClass, "getName", "()Ljava/lang/String;");
+	BinaryMapDataObject_getTagValue = getGlobalJniEnv()->GetMethodID(BinaryMapDataObjectClass, "getTagValue",
 			"(I)Lnet/osmand/binary/BinaryMapIndexReader$TagValuePair;");
 
-	TagValuePairClass = globalRef(globalEnv()->FindClass("net/osmand/binary/BinaryMapIndexReader$TagValuePair"));
-	TagValuePair_tag = globalEnv()->GetFieldID(TagValuePairClass, "tag", "Ljava/lang/String;");
-	TagValuePair_value = globalEnv()->GetFieldID(TagValuePairClass, "value", "Ljava/lang/String;");
+	TagValuePairClass = findClass("net/osmand/binary/BinaryMapIndexReader$TagValuePair");
+	TagValuePair_tag = getGlobalJniEnv()->GetFieldID(TagValuePairClass, "tag", "Ljava/lang/String;");
+	TagValuePair_value = getGlobalJniEnv()->GetFieldID(TagValuePairClass, "value", "Ljava/lang/String;");
 
 }
 
 
 void unloadJniMapObjects()
 {
-	globalEnv()->DeleteGlobalRef( MultiPolygonClass );
-	globalEnv()->DeleteGlobalRef( BinaryMapDataObjectClass );
-	globalEnv()->DeleteGlobalRef( TagValuePairClass );
+	getGlobalJniEnv()->DeleteGlobalRef( MultiPolygonClass );
+	getGlobalJniEnv()->DeleteGlobalRef( BinaryMapDataObjectClass );
+	getGlobalJniEnv()->DeleteGlobalRef( TagValuePairClass );
 }
 
 int getNegativeWayLayer(int type) {

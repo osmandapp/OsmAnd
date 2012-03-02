@@ -1,7 +1,0 @@
-*
-!.gitignore
-!.gclient
-!Android.mk
-!FakeHost.mk
-!FontHostConfiguration_android.cpp
-!SkThread_fake.cpp
