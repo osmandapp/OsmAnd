@@ -285,8 +285,6 @@ public class VoiceRouter {
 			}
 		}
 	}
-	
-	
 
 	private void playMakeTurn(RouteDirectionInfo next, RouteDirectionInfo nextNext) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
@@ -350,15 +348,15 @@ public class VoiceRouter {
 		}
 	}
 
-	public void newRouteIsCalculated(boolean updateRoute, boolean makeUturnWhenPossible) {
+	public void newRouteIsCalculated(boolean updateRoute, boolean suppressTurnPrompt) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if (play != null) {
 			if (updateRoute) {
-				//suppress "route recalculated" prompt while makeUturnWhenPossible is active
-				if (makeUturnWhenPossible == false) {
-					//suppress "route recaluated" prompt for 60sec
+				//suppress "route recalculated" prompt while suppressTurnPrompt is active
+				if (suppressTurnPrompt == false) {
+					//suppress "route recalculated" prompt for 60sec
 					if (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000) {
-						//suppress "route recaluated" prompt for GPX-routing, it makes no sense
+						//suppress "route recalculated" prompt for GPX-routing, it makes no sense
 						if (router.getCurrentGPXRoute() == null) {
 							play.routeRecalculated(router.getLeftDistance()).play();
 							lastTimeRouteRecalcAnnounced = System.currentTimeMillis();

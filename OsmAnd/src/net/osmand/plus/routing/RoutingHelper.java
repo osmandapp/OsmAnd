@@ -28,7 +28,7 @@ public class RoutingHelper {
 	
 	public static interface IRouteInformationListener {
 		
-		public void newRouteIsCalculated(boolean updateRoute, boolean makeUturnWhenpossible);
+		public void newRouteIsCalculated(boolean updateRoute, boolean suppressTurnPrompt);
 		
 		public void routeWasCancelled();
 	}
@@ -69,10 +69,15 @@ public class RoutingHelper {
 	private Handler uiHandler;
 
 	public static boolean makeUturnWhenPossible = false;
+	public static boolean suppressTurnPrompt = false;
 	public static int turnImminent = 0;
 
 	public static boolean makeUturnWhenPossible() {
 		return makeUturnWhenPossible;
+	}
+
+	public static boolean suppressTurnPrompt() {
+		return suppressTurnPrompt;
 	}
 
 	public static int turnImminent() {
@@ -212,13 +217,14 @@ public class RoutingHelper {
 	public void setCurrentLocation(Location currentLocation) {
 		if(finalLocation == null || currentLocation == null){
 			makeUturnWhenPossible = false;
+			suppressTurnPrompt = false;
 			turnImminent = 0;
 			return;
 		}
 		
 		makeUturnWhenPossible = false;
-		boolean calculateRoute  = false;
-		boolean suppressTurnPrompt  = false;
+		suppressTurnPrompt = false;
+		boolean calculateRoute = false;
 		synchronized (this) {
 			if(routeNodes.isEmpty() || routeNodes.size() <= currentRoute){
 				calculateRoute = true;
@@ -385,13 +391,13 @@ public class RoutingHelper {
 		currentDirectionInfo = 0;
 		currentRoute = 0;
 		if(isFollowingMode){
-			voiceRouter.newRouteIsCalculated(updateRoute, makeUturnWhenPossible);
+			voiceRouter.newRouteIsCalculated(updateRoute, suppressTurnPrompt);
 		} 
 		uiHandler.post(new Runnable() {
 			@Override
 			public void run() {
 				for (IRouteInformationListener l : listeners) {
-					l.newRouteIsCalculated(updateRoute, makeUturnWhenPossible);
+					l.newRouteIsCalculated(updateRoute, suppressTurnPrompt);
 				}
 			}
 		});
@@ -461,9 +467,9 @@ public class RoutingHelper {
 				dist += lastFixedLocation.distanceTo(routeNodes.get(currentRoute));
 			}
 
-			if (dist < 100 || makeUturnWhenPossible == true) {
+			if (dist <= 100 || makeUturnWhenPossible == true) {
 				turnImminent = 1;
-			} else if (dist < 3000) {
+			} else if (dist <= 3000) {
 				turnImminent = 0;
 			} else {
 				turnImminent = -1;

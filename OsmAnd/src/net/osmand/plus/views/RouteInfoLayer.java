@@ -135,7 +135,7 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 	}
 
 	@Override
-	public void newRouteIsCalculated(boolean updateRoute, boolean makeUturnWhenPossible) {
+	public void newRouteIsCalculated(boolean updateRoute, boolean suppressTurnPrompt) {
 		directionInfo = -1;
 		if (!routingHelper.isFollowingMode()) {
 			visible = true;
