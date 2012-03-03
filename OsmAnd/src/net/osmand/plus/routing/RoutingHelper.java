@@ -222,8 +222,6 @@ public class RoutingHelper {
 			return;
 		}
 		
-		makeUturnWhenPossible = false;
-		suppressTurnPrompt = false;
 		boolean calculateRoute = false;
 		synchronized (this) {
 			if(routeNodes.isEmpty() || routeNodes.size() <= currentRoute){
@@ -346,31 +344,7 @@ public class RoutingHelper {
 					}
 				}
 				
-				// 6. + 7. Direction detection, by Hardy, Feb 2012
-				if(routeNodes.size() > 0){
-					if (currentLocation.hasBearing() || lastFixedLocation != null) {
-						float bearing = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation.bearingTo(currentLocation);
-						float bearingRoute;
-						bearingRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
-						// 6. Suppress turn prompt if prescribed direction of motion is between 45 and 135 degrees off
-						if (Math.abs(bearing - bearingRoute) > 45f && 360 - Math.abs(bearing - bearingRoute) > 45f) {
-							// disregard upper bound to suppress turn prompt also for recalculated still-opposite route
-							//if (Math.abs(bearing - bearingRoute) <= 135f && 360 - Math.abs(bearing - bearingRoute) <= 135f) {
-								suppressTurnPrompt = true;
-								//log.info("Bearing is off from bearingRoute between >45 and <=135 degrees"); //$NON-NLS-1$
-							//}
-						}
-						// 7. Check necessity for unscheduled U-turn, Issue 863
-						if (Math.abs(bearing - bearingRoute) > 135f && 360 - Math.abs(bearing - bearingRoute) > 135f) {
-							float d = currentLocation.distanceTo(routeNodes.get(currentRoute));
-							if (d > 60) {
-								makeUturnWhenPossible = true;
-								turnImminent = 1;
-								//log.info("Bearing is opposite to bearingRoute"); //$NON-NLS-1$
-							}
-						}
-					}
-				}
+				directionDetection(currentLocation);
 
 				if ((suppressTurnPrompt == false && calculateRoute == false) || makeUturnWhenPossible == true) {
 					voiceRouter.updateStatus(currentLocation, makeUturnWhenPossible);
@@ -383,7 +357,41 @@ public class RoutingHelper {
 		}
 	}
 	
-	private synchronized void setNewRoute(RouteCalculationResult res){
+	public void directionDetection(Location currentLocation) {
+		makeUturnWhenPossible = false;
+		suppressTurnPrompt = false;
+		if(finalLocation == null || currentLocation == null){
+			turnImminent = 0;
+			return;
+		}
+		// 6. + 7. Direction detection, by Hardy, Feb 2012
+		if(routeNodes.size() > 0){
+			if (currentLocation.hasBearing() || lastFixedLocation != null) {
+				float bearing = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation.bearingTo(currentLocation);
+				float bearingRoute;
+				bearingRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
+				// 6. Suppress turn prompt if prescribed direction of motion is between 45 and 135 degrees off
+				if (Math.abs(bearing - bearingRoute) > 45f && 360 - Math.abs(bearing - bearingRoute) > 45f) {
+					// disregard upper bound to suppress turn prompt also for recalculated still-opposite route
+					//if (Math.abs(bearing - bearingRoute) <= 135f && 360 - Math.abs(bearing - bearingRoute) <= 135f) {
+						suppressTurnPrompt = true;
+						//log.info("Bearing is off from bearingRoute between >45 and <=135 degrees"); //$NON-NLS-1$
+					//}
+				}
+				// 7. Check necessity for unscheduled U-turn, Issue 863
+				if (Math.abs(bearing - bearingRoute) > 135f && 360 - Math.abs(bearing - bearingRoute) > 135f) {
+					float d = currentLocation.distanceTo(routeNodes.get(currentRoute));
+					if (d > 60) {
+						makeUturnWhenPossible = true;
+						turnImminent = 1;
+						//log.info("Bearing is opposite to bearingRoute"); //$NON-NLS-1$
+					}
+				}
+			}
+		}
+	}
+
+	private synchronized void setNewRoute(RouteCalculationResult res, Location start){
 		final boolean updateRoute = !routeNodes.isEmpty();
 		routeNodes = res.getLocations();
 		directionInfo = res.getDirections();
@@ -391,6 +399,7 @@ public class RoutingHelper {
 		currentDirectionInfo = 0;
 		currentRoute = 0;
 		if(isFollowingMode){
+			directionDetection(start);
 			voiceRouter.newRouteIsCalculated(updateRoute, suppressTurnPrompt);
 		} 
 		uiHandler.post(new Runnable() {
@@ -538,7 +547,7 @@ public class RoutingHelper {
 							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, gpxRoute, fastRouteMode);
 							synchronized (RoutingHelper.this) {
 								if (res.isCalculated()) {
-									setNewRoute(res);
+									setNewRoute(res, start);
 									// reset error wait interval
 									evalWaitInterval = 3001;
 								} else {
