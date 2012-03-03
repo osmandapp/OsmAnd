@@ -63,8 +63,7 @@ public class VoiceRouter {
 			pendingCommand = null;
 		}
 	}
-	
-	
+
 	public CommandPlayer getPlayer() {
 		return player;
 	}
