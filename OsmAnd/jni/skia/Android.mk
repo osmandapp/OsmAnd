@@ -200,6 +200,7 @@ LOCAL_SRC_FILES := \
 	$(OSMAND_SKIA_LOC)/src/images/SkImageRef.cpp \
 	$(OSMAND_SKIA_LOC)/src/images/SkImageRefPool.cpp \
 	$(OSMAND_SKIA_LOC)/src/images/SkImageRef_GlobalPool.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkJpegUtility.cpp \
 	$(OSMAND_SKIA_LOC)/src/images/SkMovie.cpp \
 	$(OSMAND_SKIA_LOC)/src/images/SkMovie_gif.cpp \
 	$(OSMAND_SKIA_LOC)/src/images/SkPageFlipper.cpp \

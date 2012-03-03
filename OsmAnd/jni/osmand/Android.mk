@@ -54,11 +54,25 @@ LOCAL_CFLAGS += \
 endif
 
 ifneq ($(LOCAL_ARM_NEON),true)
-LOCAL_STATIC_LIBRARIES := proto skia
+LOCAL_STATIC_LIBRARIES := \
+	proto \
+	libjpeg \
+	libft2_static \
+	libpng \
+	libgif \
+	libexpat_static
+LOCAL_WHOLE_STATIC_LIBRARIES := skia
 else
-LOCAL_STATIC_LIBRARIES := proto_neon skia_neon
+LOCAL_STATIC_LIBRARIES := \
+	proto_neon \
+	libjpeg_neon \
+	libft2_static_neon \
+	libpng_neon \
+	libgif_neon \
+	libexpat_static_neon
+LOCAL_WHOLE_STATIC_LIBRARIES := skia_neon
 endif
 
-LOCAL_LDLIBS := -llog -ljnigraphics
+LOCAL_LDLIBS := -lz -llog -ljnigraphics
 
 include $(BUILD_SHARED_LIBRARY)
