@@ -164,6 +164,8 @@ public class VoiceRouter {
 				}
 			}
 			return;
+		} else if (currentStatus == STATUS_UTWP_TOLD) {
+			currentStatus = STATUS_UNKNOWN;
 		}
 
 		RouteDirectionInfo next = router.getNextRouteDirectionInfo();
