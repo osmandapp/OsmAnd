@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.nio.ByteBuffer;
 import java.io.InputStream;
+import java.io.ByteArrayOutputStream;
 
 import org.apache.commons.logging.Log;
 
@@ -29,7 +30,7 @@ public class RenderingIcons {
 		return icons.containsKey(s);
 	}
 	
-	public static ByteBuffer getIconAsByteBuffer(Context ctx, String s) {
+	public static byte[] getIconRawData(Context ctx, String s) {
 		Integer resId = icons.get(s);
 		
 		// Quite bad error
@@ -37,23 +38,20 @@ public class RenderingIcons {
 			return null;
 			
 		try {
-			final AssetFileDescriptor iconAssetFd = ctx.getResources().openRawResourceFd(resId.intValue());
-			if(iconAssetFd == null)
-				return null;
-				
-			final long iconAssetLen = iconAssetFd.getLength();
-			final ByteBuffer iconByteBuffer = ByteBuffer.allocate((int)iconAssetLen);
-			final InputStream inputStream = iconAssetFd.createInputStream();
-			if(inputStream == null)
-				return null;
-				
-			long consumedBytes = 0;
-			while(consumedBytes < iconAssetLen) {
-				consumedBytes += inputStream.read(iconByteBuffer.array(), (int)(iconByteBuffer.arrayOffset() + consumedBytes), (int)(iconAssetLen - consumedBytes));
+			final InputStream inputStream = ctx.getResources().openRawResource(resId.intValue());
+			final ByteArrayOutputStream proxyOutputStream = new ByteArrayOutputStream(1024);
+            final byte[] ioBuffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(ioBuffer)) >= 0) {
+				proxyOutputStream.write(ioBuffer, 0, bytesRead);
 			}
-				
-			iconAssetFd.close();
-			return iconByteBuffer;
+			inputStream.close();
+			final byte[] bitmapData = proxyOutputStream.toByteArray();
+			log.info("Icon data length is " + bitmapData.length); //$NON-NLS-1$
+			
+			//if(android.graphics.BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length) == null)
+			//	throw new Exception();
+            return bitmapData;
 		} catch(Throwable e) {
 			log.error("Failed to get byte stream from icon", e); //$NON-NLS-1$
 			return null;

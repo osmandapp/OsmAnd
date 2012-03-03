@@ -143,6 +143,6 @@ struct RenderingContext
 
 float getDensityValue(RenderingContext* rc, float val);
 
-SkBitmap* getCachedBitmap(RenderingContext* rc, std::string bitmapResource);
+SkBitmap* getCachedBitmap(RenderingContext* rc, const std::string& bitmapResource);
 
 #endif /*_OSMAND_COMMON_H*/

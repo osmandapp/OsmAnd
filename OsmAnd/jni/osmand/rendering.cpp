@@ -493,14 +493,12 @@ void drawPoint(MapDataObject* mObj,	RenderingRuleSearchRequest* req, SkCanvas* c
 	std::string resId = req->getStringPropertyValue(req-> props()-> R_ICON);
 	SkBitmap* bmp = getCachedBitmap(rc, resId);
 	std::string name;
-	if (renderText) {
+	if (renderText)
 		name = mObj->name;
-	}
-	if (!bmp && name.length() == 0) {
+	
+	if (!bmp && name.length() == 0)
 		return;
-	}
-
-
+	
 	jint length = mObj->points.size();
 	rc->visible++;
 	float px = 0;
