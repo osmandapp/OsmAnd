@@ -12,7 +12,7 @@ import android.location.Location;
 
 
 public class VoiceRouter {
-	private final int STATUS_UTWP-TOLD = -1;
+	private final int STATUS_UTWP_TOLD = -1;
 	private final int STATUS_UNKNOWN = 0;
 	private final int STATUS_LONG_PREPARE = 1;
 	private final int STATUS_PREPARE = 2;
@@ -154,14 +154,14 @@ public class VoiceRouter {
 		// for Issue 863
 		if (makeUturnWhenPossible == true) {
 			//suppress "make UT when possible" message for 60sec
-			//try now replace by better mechanism via STATUS_UTWP-TOLD: Until turn in the right direction, or route is re-calculated in forward direction
+			//try now replace by better mechanism via STATUS_UTWP_TOLD: Until turn in the right direction, or route is re-calculated in forward direction
 			//if (System.currentTimeMillis() - lastTimeMakeUTwpAnnounced > 60000) {
-			if (currentStatus != STATUS_UTWP-TOLD) {
+			if (currentStatus != STATUS_UTWP_TOLD) {
 				CommandBuilder play = getNewCommandPlayerToPlay();
 				if(play != null){
 					play.makeUTwp().play();
 			//		lastTimeMakeUTwpAnnounced = System.currentTimeMillis();
-					currentStatus = STATUS_UTWP-TOLD;
+					currentStatus = STATUS_UTWP_TOLD;
 				}
 			}
 			return;

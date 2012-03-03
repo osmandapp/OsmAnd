@@ -404,7 +404,7 @@ public class RoutingHelper {
 			@Override
 			public void run() {
 				for (IRouteInformationListener l : listeners) {
-					l.newRouteIsCalculated(updateRoute, true);
+					l.newRouteIsCalculated(updateRoute, suppressTurnPrompt);
 				}
 			}
 		});
