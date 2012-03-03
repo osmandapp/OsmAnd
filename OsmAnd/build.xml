@@ -276,7 +276,7 @@
 	 	<!-- Requires 1) gcc, 2) make, 3) download android sources (skia) - specify branch 4) Define environment variable ANDROID_SRC -->	
 		<echo>Package helper running: nativeon</echo>
 	 	
-	 	    <exec command="${ndk.dir}/ndk-build V=1" failonerror="true"/>
+	 	    <exec command="${ndk.dir}/ndk-build -j 8 V=1" failonerror="true"/>
             <apkbuilder
                     outfolder="${out.absolute.dir}"
                     resourcefile="${resource.package.file.name}"
