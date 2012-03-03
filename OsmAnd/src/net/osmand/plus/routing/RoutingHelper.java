@@ -268,8 +268,6 @@ public class RoutingHelper {
 									proccesed = true;
 								}
 							}
-							
-							
 						}
 					}
 					if(proccesed){
