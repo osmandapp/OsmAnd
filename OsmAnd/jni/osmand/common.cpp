@@ -120,7 +120,7 @@ std::string getStringMethod(jobject o, jmethodID fid, int i)
 jclass jclass_RenderingContext = NULL;
 jfieldID jfield_RenderingContext_interrupted = NULL;
 jclass jclass_RenderingIcons = NULL;
-jmethodID jmethod_RenderingIcons_getIconAsByteBuffer = NULL;
+jmethodID jmethod_RenderingIcons_getIconRawData = NULL;
 jfieldID jfield_RenderingContext_leftX = NULL;
 jfieldID jfield_RenderingContext_topY = NULL;
 jfieldID jfield_RenderingContext_width = NULL;
@@ -172,9 +172,9 @@ void loadJniCommon()
 	jfield_RenderingContext_lastRenderedKey = getFid( jclass_RenderingContext, "lastRenderedKey", "I" );
 	
 	jclass_RenderingIcons = findClass("net/osmand/plus/render/RenderingIcons");
-	jmethod_RenderingIcons_getIconAsByteBuffer = getGlobalJniEnv()->GetStaticMethodID(jclass_RenderingIcons,
-		"getIconAsByteBuffer",
-		"(Landroid/content/Context;Ljava/lang/String;)Ljava/nio/ByteBuffer;");
+	jmethod_RenderingIcons_getIconRawData = getGlobalJniEnv()->GetStaticMethodID(jclass_RenderingIcons,
+		"getIconRawData",
+		"(Landroid/content/Context;Ljava/lang/String;)[B");
 }
 
 //TODO: Dead code
@@ -321,9 +321,11 @@ int ElapsedTimer::getElapsedTime()
 }
 
 std::hash_map<std::string, SkBitmap*> cachedBitmaps;
-
-SkBitmap* getCachedBitmap(RenderingContext* rc, std::string bitmapResource)
+SkBitmap* getCachedBitmap(RenderingContext* rc, const std::string& bitmapResource)
 {
+	if(bitmapResource.size() == 0)
+		return NULL;
+
 	// Try to find previously cached
 	std::hash_map<std::string, SkBitmap*>::iterator itPreviouslyCachedBitmap = cachedBitmaps.find(bitmapResource);
 	if (itPreviouslyCachedBitmap != cachedBitmaps.end())
@@ -331,15 +333,20 @@ SkBitmap* getCachedBitmap(RenderingContext* rc, std::string bitmapResource)
 	
 	rc->nativeOperations.pause();
 
+	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "getCachedBitmap : %s", bitmapResource.c_str());
+
 	jstring jstr = getGlobalJniEnv()->NewStringUTF(bitmapResource.c_str());
-	jobject javaIconByteBuffer = getGlobalJniEnv()->CallStaticObjectMethod(jclass_RenderingIcons, jmethod_RenderingIcons_getIconAsByteBuffer, rc->androidContext, jstr);
-	if(!javaIconByteBuffer)
+	jbyteArray javaIconRawData = (jbyteArray)getGlobalJniEnv()->CallStaticObjectMethod(jclass_RenderingIcons, jmethod_RenderingIcons_getIconRawData, rc->androidContext, jstr);
+	if(!javaIconRawData)
 		return NULL;
 
+	jbyte* bitmapBuffer = getGlobalJniEnv()->GetByteArrayElements(javaIconRawData, NULL);
+	size_t bufferLen = getGlobalJniEnv()->GetArrayLength(javaIconRawData);
+
+	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "getCachedBitmap : bitmap buffer len %d at %p", bufferLen, bitmapBuffer);
+	
 	// Decode bitmap
 	SkBitmap* iconBitmap = new SkBitmap();
-	void* bitmapBuffer = getGlobalJniEnv()->GetDirectBufferAddress(javaIconByteBuffer);
-	size_t bufferLen = getGlobalJniEnv()->GetDirectBufferCapacity(javaIconByteBuffer);
 	//TODO: JPEG is badly supported! At the moment it needs sdcard to be present (sic). Patch that
 	if(!SkImageDecoder::DecodeMemory(bitmapBuffer, bufferLen, iconBitmap))
 	{
@@ -347,7 +354,8 @@ SkBitmap* getCachedBitmap(RenderingContext* rc, std::string bitmapResource)
 		delete iconBitmap;
 
 		rc->nativeOperations.start();
-		getGlobalJniEnv()->DeleteLocalRef(javaIconByteBuffer);
+		getGlobalJniEnv()->ReleaseByteArrayElements(javaIconRawData, bitmapBuffer, JNI_ABORT);
+		getGlobalJniEnv()->DeleteLocalRef(javaIconRawData);
 		getGlobalJniEnv()->DeleteLocalRef(jstr);
 
 		throwNewException((std::string("Failed to decode ") + bitmapResource).c_str());
@@ -358,7 +366,8 @@ SkBitmap* getCachedBitmap(RenderingContext* rc, std::string bitmapResource)
 	
 	rc->nativeOperations.start();
 
-	getGlobalJniEnv()->DeleteLocalRef(javaIconByteBuffer);
+	getGlobalJniEnv()->ReleaseByteArrayElements(javaIconRawData, bitmapBuffer, JNI_ABORT);
+	getGlobalJniEnv()->DeleteLocalRef(javaIconRawData);
 	getGlobalJniEnv()->DeleteLocalRef(jstr);
 	
 	return iconBitmap;
