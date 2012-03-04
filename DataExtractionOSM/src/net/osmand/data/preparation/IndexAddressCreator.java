@@ -31,6 +31,7 @@ import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.data.DataTileManager;
+import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.data.WayBoundary;
 import net.osmand.data.preparation.DBStreetDAO.SimpleStreet;
@@ -75,9 +76,8 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	
 	private boolean saveAddressWays;
 	
-	private boolean debugFullNames = false; //true to see atached cityPart and boundaries to the street names
+	private boolean DEBUG_FULL_NAMES = false; //true to see atached cityPart and boundaries to the street names
 	
-	// TODO
 	Connection mapConnection;
 	DBStreetDAO streetDAO;
 
@@ -737,26 +737,20 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		}
 		pStatements.remove(pstat);
 	}
+	
+	
 
+	private static final int CITIES_TYPE = 1;
+	private static final int POSTCODES_TYPE = 2;
+	private static final int VILLAGES_TYPE = 3;
 
 	public void writeBinaryAddressIndex(BinaryMapIndexWriter writer, String regionName, IProgress progress) throws IOException, SQLException {
 		streetDAO.close();
 		closePreparedStatements(addressCityStat);
 		mapConnection.commit();
-		boolean readWayNodes = saveAddressWays;
 
 		writer.startWriteAddressIndex(regionName);
-		List<City> cities = readCities(mapConnection);
-		Collections.sort(cities, new Comparator<City>() {
-
-			@Override
-			public int compare(City o1, City o2) {
-				if (o1.getType() != o2.getType()) {
-					return (o1.getType().ordinal() - o2.getType().ordinal());
-				}
-				return Collator.getInstance().compare(o1.getName(), o2.getName());
-			}
-		});
+		Map<CityType, Collection<City>> cities = readCities(mapConnection);
 		PreparedStatement streetstat = mapConnection.prepareStatement(//
 				"SELECT A.id, A.name, A.name_en, A.latitude, A.longitude, "+ //$NON-NLS-1$
 				"B.id, B.name, B.name_en, B.latitude, B.longitude, B.postcode, A.cityPart "+ //$NON-NLS-1$
@@ -765,102 +759,119 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				//TODO this order by might slow the query a little bit
 				"WHERE A.city = ? ORDER BY C.name == A.cityPart DESC"); //$NON-NLS-1$
 		PreparedStatement waynodesStat = null;
-		if (readWayNodes) {
+		if (saveAddressWays) {
 			waynodesStat = mapConnection.prepareStatement("SELECT A.id, A.latitude, A.longitude FROM street_node A WHERE A.street = ? "); //$NON-NLS-1$
 		}
 
-		int j = 0;
-		int csize = cities.size(); 
-		for (; j < csize; j++) {
-			City c = cities.get(j);
-			if (c.getType() != CityType.CITY && c.getType() != CityType.TOWN) {
-				break;
-			}
-		}
-		progress.startTask(Messages.getString("IndexCreator.SERIALIZING_ADRESS"), j + ((csize - j) / 100 + 1)); //$NON-NLS-1$
-
-		Map<String, Set<Street>> postcodes = new TreeMap<String, Set<Street>>();
-		boolean writeCities = true;
-		
 		// collect suburbs with is in value
 		List<City> suburbs = new ArrayList<City>();
-		for(City s : cities){
-			if(s.getType() == CityType.SUBURB && s.getIsInValue() != null){
-				suburbs.add(s);
+		List<City> cityTowns = new ArrayList<City>();
+		List<City> villages = new ArrayList<City>();
+		for(CityType t : cities.keySet()) {
+			if(t == CityType.CITY || t == CityType.TOWN){
+				cityTowns.addAll(cities.get(t));
+			} else if(t == CityType.SUBURB){
+				suburbs.addAll(cities.get(t));
+			} else {
+				villages.addAll(cities.get(t));
 			}
 		}
 
-		// write cities and after villages
-		writer.startCityIndexes(false);
-		for (int i = 0; i < csize; i++) {
-			City c = cities.get(i);
-			List<City> listSuburbs = null;
-			for (City suburb : suburbs) {
-				if (suburb.getIsInValue().contains(c.getName().toLowerCase())) {
-					if(listSuburbs == null){
-						listSuburbs = new ArrayList<City>();
-					}
-					listSuburbs.add(suburb);
+		
+		progress.startTask(Messages.getString("IndexCreator.SERIALIZING_ADRESS"), cityTowns.size() + villages.size() / 100 + 1); //$NON-NLS-1$
+		Map<String, PostCode> postcodes = new TreeMap<String, PostCode>();
+		writeCityBlockIndex(writer, CITIES_TYPE,  streetstat, waynodesStat, suburbs, cityTowns, postcodes, progress);
+		writeCityBlockIndex(writer, VILLAGES_TYPE,  streetstat, waynodesStat, suburbs, villages, postcodes, progress);
+		
+		// write postcodes		
+		List<BinaryFileReference> refs = new ArrayList<BinaryFileReference>();		
+		writer.startCityBlockIndex(POSTCODES_TYPE);
+		ArrayList<PostCode> posts = new ArrayList<PostCode>(postcodes.values());
+		for (PostCode s : posts) {
+			refs.add(writer.writeCityHeader(s, -1));
+		}
+		for (int i = 0; i < posts.size(); i++) {
+			PostCode postCode = posts.get(i);
+			BinaryFileReference ref = refs.get(i);
+			writer.writeCityIndex(postCode, new ArrayList<Street>(postCode.getStreets()), null, ref);
+		}
+		writer.endCityBlockIndex();
+
+
+		progress.finishTask();
+
+		TODO writeNameIndex;
+		writer.endWriteAddressIndex();
+		writer.flush();
+		streetstat.close();
+		if (waynodesStat != null) {
+			waynodesStat.close();
+		}
+
+	}
+
+
+	private void writeCityBlockIndex(BinaryMapIndexWriter writer, int type, PreparedStatement streetstat, PreparedStatement waynodesStat,
+			List<City> suburbs, List<City> cities, Map<String, PostCode> postcodes, IProgress progress)			throws IOException, SQLException {
+		List<BinaryFileReference> refs = new ArrayList<BinaryFileReference>();		
+		// 1. write cities
+		writer.startCityBlockIndex(type);
+		for (City c : cities) {
+			refs.add(writer.writeCityHeader(c, c.getType().ordinal()));
+		}
+		for(int i=0; i<cities.size(); i++) {
+		    City city = cities.get(i);
+		    BinaryFileReference ref = refs.get(i);
+		    if(type == CITIES_TYPE) {
+		    	progress.progress(1);
+			} else {
+				if ((cities.size() - i) % 100 == 0) {
+					progress.progress(1);
 				}
 			}
-			if (writeCities) {
-				progress.progress(1);
-			} else if ((csize - i) % 100 == 0) {
-				progress.progress(1);
-			}
-			if (writeCities && c.getType() != CityType.CITY && c.getType() != CityType.TOWN) {
-				writer.endCityIndexes(false);
-				writer.startCityIndexes(true);
-				writeCities = false;
-			}
-
-			Map<Street, List<Node>> streetNodes = null;
-			if (readWayNodes) {
-				streetNodes = new LinkedHashMap<Street, List<Node>>();
+			Map<Street, List<Node>> streetNodes = waynodesStat == null ? null : new LinkedHashMap<Street, List<Node>>();
+			List<City> listSuburbs = null;
+			if (suburbs != null) {
+				for (City suburb : suburbs) {
+					if (suburb.getIsInValue().contains(city.getName().toLowerCase())) {
+						if (listSuburbs == null) {
+							listSuburbs = new ArrayList<City>();
+						}
+						listSuburbs.add(suburb);
+					}
+				}
 			}
 			long time = System.currentTimeMillis();
-			List<Street> streets = readStreetsBuildings(streetstat, c, waynodesStat, streetNodes, listSuburbs);
+			List<Street> streets = readStreetsBuildings(streetstat, city, waynodesStat, streetNodes, listSuburbs);
 			long f = System.currentTimeMillis() - time;
-			writer.writeCityIndex(c, streets, streetNodes);
+			writer.writeCityIndex(city, streets, streetNodes, ref);
 			int bCount = 0;
 			for (Street s : streets) {
 				bCount++;
 				for (Building b : s.getBuildings()) {
 					bCount++;
+					if(city.getPostcode() != null && b.getPostcode() == null) {
+						b.setPostcode(city.getPostcode());
+					}
 					if (b.getPostcode() != null) {
 						if (!postcodes.containsKey(b.getPostcode())) {
-							postcodes.put(b.getPostcode(), new LinkedHashSet<Street>(3));
+							PostCode p = new PostCode(b.getPostcode());
+							p.setLocation(b.getLocation().getLatitude(), b.getLocation().getLongitude());
+							postcodes.put(b.getPostcode(), p);
 						}
-						postcodes.get(b.getPostcode()).add(s);
+						postcodes.get(b.getPostcode()).registerStreet(s, false);
 					}
 				}
 			}
 			if (f > 500) {
 				if(logMapDataWarn != null) {
-					logMapDataWarn.info("! " + c.getName() + " ! " + f + " " + bCount + " streets " + streets.size());
+					logMapDataWarn.info("! " + city.getName() + " ! " + f + " " + bCount + " streets " + streets.size());
 				} else {
-					log.info("! " + c.getName() + " ! " + f + " " + bCount + " streets " + streets.size());
+					log.info("! " + city.getName() + " ! " + f + " " + bCount + " streets " + streets.size());
 				}
 			}
 		}
-		writer.endCityIndexes(!writeCities);
-
-		// write postcodes
-		writer.startPostcodes();
-		for (String s : postcodes.keySet()) {
-			writer.writePostcode(s, postcodes.get(s));
-		}
-		writer.endPostcodes();
-
-		progress.finishTask();
-
-		writer.endWriteAddressIndex();
-		writer.flush();
-		streetstat.close();
-		if (readWayNodes) {
-			waynodesStat.close();
-		}
-
+		writer.endCityBlockIndex();
 	}
 
 	public void commitToPutAllCities() throws SQLException {
@@ -976,7 +987,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 
 	private String identifyBestDistrict(final Street street, final String streetName, final String district,
 			final Map<String, List<StreetAndDistrict>> uniqueNames, Map<Street, List<Node>> streetNodes) {
-		String result = debugFullNames ?  district : ""; //TODO make it an option
+		String result = DEBUG_FULL_NAMES ?  district : ""; //TODO make it an option
 		List<StreetAndDistrict> sameStreets = uniqueNames.get(streetName);
 		if (sameStreets == null) {
 			sameStreets = new ArrayList<StreetAndDistrict>(1);
@@ -1008,20 +1019,29 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	}
 	
 
-	public List<City> readCities(Connection c) throws SQLException{
-		List<City> cities = new ArrayList<City>();
+	public Map<CityType, Collection<City>> readCities(Connection c) throws SQLException{
+		Map<CityType, Collection<City>> cities = new LinkedHashMap<City.CityType, Collection<City>>();
+		for(CityType t : CityType.values()) {
+			cities.put(t, new TreeSet<City>(new Comparator<City>() {
+				@Override
+				public int compare(City o1, City o2) {
+					return Collator.getInstance().compare(o1.getName(), o2.getName());
+				}
+			}));
+		}
 		Statement stat = c.createStatement();
 		ResultSet set = stat.executeQuery("select id, latitude, longitude , name , name_en , city_type from city"); //$NON-NLS-1$
 		while(set.next()){
-			City city = new City(CityType.valueFromString(set.getString(6)));
+			CityType type = CityType.valueFromString(set.getString(6));
+			City city = new City(type);
 			city.setName(set.getString(4));
 			city.setEnName(set.getString(5));
 			city.setLocation(set.getDouble(2), 
 					set.getDouble(3));
 			city.setId(set.getLong(1));
-			cities.add(city);
+			cities.get(type).add(city);
 			
-			if (debugFullNames) { //TODO make it an option...
+			if (DEBUG_FULL_NAMES) { 
 				Boundary cityB = cityBoundaries.get(city);
 				if (cityB != null) {
 					city.setName(city.getName() + " " + cityB.getAdminLevel() + ":" + cityB.getName());

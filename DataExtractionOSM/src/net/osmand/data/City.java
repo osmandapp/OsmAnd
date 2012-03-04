@@ -49,6 +49,7 @@ public class City extends MapObject {
 	// Be attentive ! Working with street names ignoring case
 	private Map<String, Street> streets = new TreeMap<String, Street>(Collator.getInstance()); 
 	private String isin = null;
+	private String postcode = null;
 	
 	public City(Node el){
 		super(el);
@@ -82,6 +83,14 @@ public class City extends MapObject {
 	
 	public void removeAllStreets(){
 		streets.clear();
+	}
+	
+	public String getPostcode() {
+		return postcode;
+	}
+	
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
 	}
 	
 	public Street registerStreet(Street street, boolean en){

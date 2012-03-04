@@ -226,7 +226,7 @@ message CityIndex {
 	required uint32 x = 5; // x tile of 24 zoom
 	required uint32 y = 6; // y tile of 24 zoom
 	
-	// shift from start CityIndex to cityBlockIndex
+	// shift from start CityIndex (without length) to cityBlockIndex
 	optional fixed32 shiftToCityBlockIndex = 10;
 }
 
