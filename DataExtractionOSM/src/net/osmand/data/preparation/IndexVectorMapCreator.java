@@ -73,6 +73,8 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 	private int zoomWaySmothness = 0;
 	private final Log logMapDataWarn;
+	
+	private static long notUsedId = 1 << 40; // million million  
 
 	public IndexVectorMapCreator(Log logMapDataWarn, MapZooms mapZooms, MapRenderingTypes renderingTypes, int zoomWaySmothness) {
 		this.logMapDataWarn = logMapDataWarn;
@@ -84,7 +86,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	}
 
 	public void indexMapRelationsAndMultiPolygons(Entity e, OsmDbAccessorContext ctx) throws SQLException {
-		indexHighwayRestrictions(e, ctx);
+//		indexHighwayRestrictions(e, ctx);
 		indexMultiPolygon(e, ctx);
 	}
 
@@ -152,14 +154,14 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 							"Multipolygon id : " + e.getId() + ", inner node out id : " + nodeOut.getId()); //$NON-NLS-1$
 				}
 
-				List<Node> outerWay = new ArrayList<Node>();
+				List<Node> outerWaySrc = new ArrayList<Node>();
 				List<List<Node>> innerWays = new ArrayList<List<Node>>();
 
 				TIntArrayList typeToSave = new TIntArrayList(typeUse);
-				long baseId = e.getId();
+				long baseId = 0;
 				for (List<Way> l : completedRings) {
 					boolean innerType = "inner".equals(entities.get(l.get(0))); //$NON-NLS-1$
-					if (!innerType && !outerWay.isEmpty()) {
+					if (!innerType && !outerWaySrc.isEmpty()) {
 						logMapDataWarn.warn("Map bug: Multipoligon contains many 'outer' borders.\n" + //$NON-NLS-1$
 								"Multipolygon id : " + e.getId() + ", outer way id : " + l.get(0).getId()); //$NON-NLS-1$
 						return;
@@ -169,16 +171,22 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 						toCollect = new ArrayList<Node>();
 						innerWays.add(toCollect);
 					} else {
-						toCollect = outerWay;
+						toCollect = outerWaySrc;
 					}
 
 					for (Way way : l) {
 						toCollect.addAll(way.getNodes());
 						if (!innerType) {
-							baseId = way.getId();
+							TIntArrayList out = multiPolygonsWays.put(way.getId(), typeToSave);
+							if(out == null){
+								baseId = way.getId();
+							}
 						}
-						multiPolygonsWays.put(way.getId(), typeToSave);
 					}
+				}
+				if(baseId == 0){
+					// use base id as well?
+					baseId = notUsedId ++;
 				}
 				nextZoom: for (int level = 0; level < mapZooms.size(); level++) {
 					renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), typeUse, addtypeUse, namesUse,
@@ -188,6 +196,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					}
 					long id = convertBaseIdToGeneratedId(baseId, level);
 					// simplify route
+					List<Node> outerWay = outerWaySrc;
 					int zoomToSimplify = mapZooms.getLevel(level).getMaxZoom() - 1;
 					if (zoomToSimplify < 15) {
 						outerWay = simplifyCycleWay(outerWay, zoomToSimplify);
@@ -487,8 +496,10 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				}
 				boolean hasMulti = e instanceof Way && multiPolygonsWays.containsKey(e.getId());
 				if (hasMulti) {
-					TIntArrayList set = multiPolygonsWays.get(e.getId());
-					typeUse.removeAll(set);
+					// avoid duplicate ids?
+//					TIntArrayList set = multiPolygonsWays.get(e.getId());
+//					typeUse.removeAll(set);
+					continue;
 				}
 				if (typeUse.isEmpty()) {
 					continue;
@@ -538,18 +549,9 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				rtree.Node root = rtree.getReadNode(rootIndex);
 				Rect rootBounds = calcBounds(root);
 				if (rootBounds != null) {
-					boolean last = nodeIsLastSubTree(rtree, rootIndex);
 					writer.startWriteMapLevelIndex(mapZooms.getLevel(i).getMinZoom(), mapZooms.getLevel(i).getMaxZoom(),
 							rootBounds.getMinX(), rootBounds.getMaxX(), rootBounds.getMinY(), rootBounds.getMaxY());
-					if (last) {
-						BinaryFileReference ref = writer.startMapTreeElement(rootBounds.getMinX(), rootBounds.getMaxX(),
-								rootBounds.getMinY(), rootBounds.getMaxY(), true);
-						bounds.put(rootIndex, ref);
-					}
-					writeBinaryMapTree(root, rtree, writer, bounds);
-					if (last) {
-						writer.endWriteMapTreeElement();
-					}
+					writeBinaryMapTree(root, rootBounds, rtree, writer, bounds);
 
 					writer.endWriteMapLevelIndex();
 				}
@@ -655,12 +657,11 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				long ptr = ((NonLeafElement) e[i]).getPtr();
 				rtree.Node ns = r.getReadNode(ptr);
 				writeBinaryMapBlock(ns, r, writer, selectData, bounds, tempStringTable, tempNames);
-				writer.endWriteMapTreeElement();
 			}
 		}
 	}
 
-	public void writeBinaryMapTree(rtree.Node parent, RTree r, BinaryMapIndexWriter writer, TLongObjectHashMap<BinaryFileReference> bounds)
+	public void writeBinaryMapTree(rtree.Node parent, Rect re, RTree r, BinaryMapIndexWriter writer, TLongObjectHashMap<BinaryFileReference> bounds)
 			throws IOException, RTreeException {
 		Element[] e = parent.getAllElements();
 		boolean containsLeaf = false;
@@ -669,19 +670,17 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				containsLeaf = true;
 			}
 		}
+		BinaryFileReference ref = writer.startMapTreeElement(re.getMinX(), re.getMaxX(), re.getMinY(), re.getMaxY(), containsLeaf);
+		if (ref != null) {
+			bounds.put(parent.getNodeIndex(), ref);
+		}
 		for (int i = 0; i < parent.getTotalElements(); i++) {
-			Rect re = e[i].getRect();
 			if (e[i].getElementType() != rtree.Node.LEAF_NODE) {
-				long ptr = ((NonLeafElement) e[i]).getPtr();
-				rtree.Node ns = r.getReadNode(ptr);
-				BinaryFileReference ref = writer.startMapTreeElement(re.getMinX(), re.getMaxX(), re.getMinY(), re.getMaxY(), containsLeaf);
-				if (ref != null) {
-					bounds.put(ns.getNodeIndex(), ref);
-				}
-				writeBinaryMapTree(ns, r, writer, bounds);
-				writer.endWriteMapTreeElement();
+				rtree.Node chNode = r.getReadNode(((NonLeafElement) e[i]).getPtr());
+				writeBinaryMapTree(chNode, e[i].getRect(), r, writer, bounds);
 			}
 		}
+		writer.endWriteMapTreeElement();
 	}
 
 	public Rect calcBounds(rtree.Node n) {
@@ -757,9 +756,9 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		boolean first = true;
 		long firstId = -1;
 		long lastId = -1;
-		ByteArrayOutputStream bnodes = new ByteArrayOutputStream();
-		ByteArrayOutputStream btypes = new ByteArrayOutputStream();
-		ByteArrayOutputStream baddtypes = new ByteArrayOutputStream();
+		ByteArrayOutputStream bNodes = new ByteArrayOutputStream();
+		ByteArrayOutputStream bTypes = new ByteArrayOutputStream();
+		ByteArrayOutputStream bAddtTypes = new ByteArrayOutputStream();
 		try {
 			for (Node n : nodes) {
 				if (n != null) {
@@ -768,8 +767,8 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 						first = false;
 					}
 					lastId = n.getId();
-					Algoritms.writeInt(bnodes, Float.floatToRawIntBits((float) n.getLatitude()));
-					Algoritms.writeInt(bnodes, Float.floatToRawIntBits((float) n.getLongitude()));
+					Algoritms.writeInt(bNodes, Float.floatToRawIntBits((float) n.getLatitude()));
+					Algoritms.writeInt(bNodes, Float.floatToRawIntBits((float) n.getLongitude()));
 				}
 			}
 		} catch (IOException e) {
@@ -780,13 +779,13 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		}
 		for (int j = 0; j < types.size(); j++) {
 			try {
-				Algoritms.writeInt(btypes, types.get(j));
+				Algoritms.writeInt(bTypes, types.get(j));
 			} catch (IOException e) {
 			}
 		}
 		for (int j = 0; j < addTypes.size(); j++) {
 			try {
-				Algoritms.writeInt(baddtypes, types.get(j));
+				Algoritms.writeInt(bAddtTypes, addTypes.get(j));
 			} catch (IOException e) {
 			}
 		}
@@ -794,9 +793,9 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		mapLowLevelBinaryStat.setLong(2, firstId);
 		mapLowLevelBinaryStat.setLong(3, lastId);
 		mapLowLevelBinaryStat.setString(4, name);
-		mapLowLevelBinaryStat.setBytes(5, bnodes.toByteArray());
-		mapLowLevelBinaryStat.setBytes(6, btypes.toByteArray());
-		mapLowLevelBinaryStat.setBytes(7, baddtypes.toByteArray());
+		mapLowLevelBinaryStat.setBytes(5, bNodes.toByteArray());
+		mapLowLevelBinaryStat.setBytes(6, bTypes.toByteArray());
+		mapLowLevelBinaryStat.setBytes(7, bAddtTypes.toByteArray());
 		mapLowLevelBinaryStat.setShort(8, (short) level);
 
 		addBatch(mapLowLevelBinaryStat);

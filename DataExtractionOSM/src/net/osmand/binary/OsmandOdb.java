@@ -4669,6 +4669,20 @@ public final class OsmandOdb {
       return dataObjects_.get(index);
     }
     
+    // optional uint32 rasterType = 13;
+    public static final int RASTERTYPE_FIELD_NUMBER = 13;
+    private boolean hasRasterType;
+    private int rasterType_ = 0;
+    public boolean hasRasterType() { return hasRasterType; }
+    public int getRasterType() { return rasterType_; }
+    
+    // optional bytes rasterImage = 14;
+    public static final int RASTERIMAGE_FIELD_NUMBER = 14;
+    private boolean hasRasterImage;
+    private com.google.protobuf.ByteString rasterImage_ = com.google.protobuf.ByteString.EMPTY;
+    public boolean hasRasterImage() { return hasRasterImage; }
+    public com.google.protobuf.ByteString getRasterImage() { return rasterImage_; }
+    
     // optional .StringTable stringTable = 15;
     public static final int STRINGTABLE_FIELD_NUMBER = 15;
     private boolean hasStringTable;
@@ -4697,6 +4711,12 @@ public final class OsmandOdb {
       for (net.osmand.binary.OsmandOdb.MapData element : getDataObjectsList()) {
         output.writeMessage(12, element);
       }
+      if (hasRasterType()) {
+        output.writeUInt32(13, getRasterType());
+      }
+      if (hasRasterImage()) {
+        output.writeBytes(14, getRasterImage());
+      }
       if (hasStringTable()) {
         output.writeMessage(15, getStringTable());
       }
@@ -4717,6 +4737,14 @@ public final class OsmandOdb {
       for (net.osmand.binary.OsmandOdb.MapData element : getDataObjectsList()) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(12, element);
+      }
+      if (hasRasterType()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(13, getRasterType());
+      }
+      if (hasRasterImage()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(14, getRasterImage());
       }
       if (hasStringTable()) {
         size += com.google.protobuf.CodedOutputStream
@@ -4904,6 +4932,12 @@ public final class OsmandOdb {
           }
           result.dataObjects_.addAll(other.dataObjects_);
         }
+        if (other.hasRasterType()) {
+          setRasterType(other.getRasterType());
+        }
+        if (other.hasRasterImage()) {
+          setRasterImage(other.getRasterImage());
+        }
         if (other.hasStringTable()) {
           mergeStringTable(other.getStringTable());
         }
@@ -4941,6 +4975,14 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.MapData.Builder subBuilder = net.osmand.binary.OsmandOdb.MapData.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addDataObjects(subBuilder.buildPartial());
+              break;
+            }
+            case 104: {
+              setRasterType(input.readUInt32());
+              break;
+            }
+            case 114: {
+              setRasterImage(input.readBytes());
               break;
             }
             case 122: {
@@ -5023,6 +5065,45 @@ public final class OsmandOdb {
       }
       public Builder clearDataObjects() {
         result.dataObjects_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // optional uint32 rasterType = 13;
+      public boolean hasRasterType() {
+        return result.hasRasterType();
+      }
+      public int getRasterType() {
+        return result.getRasterType();
+      }
+      public Builder setRasterType(int value) {
+        result.hasRasterType = true;
+        result.rasterType_ = value;
+        return this;
+      }
+      public Builder clearRasterType() {
+        result.hasRasterType = false;
+        result.rasterType_ = 0;
+        return this;
+      }
+      
+      // optional bytes rasterImage = 14;
+      public boolean hasRasterImage() {
+        return result.hasRasterImage();
+      }
+      public com.google.protobuf.ByteString getRasterImage() {
+        return result.getRasterImage();
+      }
+      public Builder setRasterImage(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasRasterImage = true;
+        result.rasterImage_ = value;
+        return this;
+      }
+      public Builder clearRasterImage() {
+        result.hasRasterImage = false;
+        result.rasterImage_ = getDefaultInstance().getRasterImage();
         return this;
       }
       
@@ -18624,90 +18705,91 @@ public final class OsmandOdb {
       "\n\016shiftToMapData\030\005 \001(\007\022\r\n\005ocean\030\006 \001(\010\022)\n" +
       "\005boxes\030\007 \003(\0132\032.OsmAndMapIndex.MapDataBox" +
       "\032-\n\rMapDataBlocks\022\034\n\005block\030\006 \003(\0132\r.MapDa" +
-      "taBlock\"`\n\014MapDataBlock\022\016\n\006baseId\030\n \001(\004\022" +
-      "\035\n\013dataObjects\030\014 \003(\0132\010.MapData\022!\n\013string" +
-      "Table\030\017 \001(\0132\014.StringTable\"\241\001\n\007MapData\022\023\n",
-      "\013coordinates\030\001 \001(\014\022\027\n\017areaCoordinates\030\002 " +
-      "\001(\014\022\037\n\027polygonInnerCoordinates\030\004 \003(\014\022\027\n\017" +
-      "additionalTypes\030\006 \001(\014\022\r\n\005types\030\007 \002(\014\022\023\n\013" +
-      "stringNames\030\n \001(\014\022\n\n\002id\030\014 \002(\022\"\222\002\n\022OsmAnd" +
-      "AddressIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en\030\002 " +
-      "\001(\t\022\"\n\nboundaries\030\003 \001(\0132\016.OsmAndTileBox\022" +
-      "/\n\006cities\030\006 \003(\0132\037.OsmAndAddressIndex.Cit" +
-      "iesIndex\022.\n\tnameIndex\030\007 \001(\0132\033.OsmAndAddr" +
-      "essNameIndexData\032X\n\013CitiesIndex\022\014\n\004type\030" +
-      "\002 \002(\r\022\032\n\006cities\030\005 \003(\0132\n.CityIndex\022\037\n\006blo",
-      "cks\030\007 \003(\0132\017.CityBlockIndex\"\301\001\n\032OsmAndAdd" +
-      "ressNameIndexData\022\"\n\005table\030\004 \002(\0132\023.Index" +
-      "edStringTable\022>\n\004atom\030\007 \003(\01320.OsmAndAddr" +
-      "essNameIndexData.AddressNameIndexData\032?\n" +
-      "\024AddressNameIndexData\022\'\n\004atom\030\004 \003(\0132\031.Ad" +
-      "dressNameIndexDataAtom\"v\n\030AddressNameInd" +
-      "exDataAtom\022\014\n\004name\030\001 \002(\t\022\016\n\006nameEn\030\002 \001(\t" +
-      "\022\014\n\004type\030\003 \002(\r\022\024\n\014shiftToIndex\030\005 \003(\007\022\030\n\020" +
-      "shiftToCityIndex\030\006 \003(\007\"~\n\tCityIndex\022\021\n\tc" +
-      "ity_type\030\001 \001(\r\022\014\n\004name\030\002 \002(\t\022\017\n\007name_en\030",
-      "\003 \001(\t\022\n\n\002id\030\004 \001(\004\022\t\n\001x\030\005 \002(\r\022\t\n\001y\030\006 \002(\r\022" +
-      "\035\n\025shiftToCityBlockIndex\030\n \001(\007\"l\n\016CityBl" +
-      "ockIndex\022\030\n\020shiftToCityIndex\030\004 \001(\007\022!\n\tbu" +
-      "ildings\030\020 \003(\0132\016.BuildingIndex\022\035\n\007streets" +
-      "\030\022 \003(\0132\014.StreetIndex\"\235\001\n\013StreetIndex\022\014\n\004" +
-      "name\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022\t\n\001x\030\003 \002(\021\022\t" +
-      "\n\001y\030\004 \002(\021\022\n\n\002id\030\006 \001(\004\022!\n\tbuildings\030\014 \003(\013" +
-      "2\016.BuildingIndex\022*\n\rintersections\030\005 \003(\0132" +
-      "\023.StreetIntersection\"_\n\022StreetIntersecti" +
-      "on\022\014\n\004name\030\002 \002(\t\022\017\n\007name_en\030\003 \001(\t\022\024\n\014int",
-      "ersectedX\030\004 \002(\021\022\024\n\014intersectedY\030\005 \002(\021\"\262\001" +
-      "\n\rBuildingIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en" +
-      "\030\002 \001(\t\022\r\n\005name2\030\003 \001(\t\022\020\n\010name_en2\030\004 \001(\t\022" +
-      "\025\n\rinterpolation\030\005 \001(\021\022\t\n\001x\030\007 \002(\021\022\t\n\001y\030\010" +
-      " \002(\021\022\n\n\002x2\030\t \001(\021\022\n\n\002y2\030\n \001(\021\022\n\n\002id\030\r \001(\004" +
-      "\022\020\n\010postcode\030\016 \001(\t\"2\n\017TransportRoutes\022\037\n" +
-      "\006routes\030\006 \003(\0132\017.TransportRoute\"\317\001\n\016Trans" +
-      "portRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003 \001(\r\022\020\n\010o" +
-      "perator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022\014\n\004name\030\006 \001(\r" +
-      "\022\017\n\007name_en\030\007 \001(\r\022\020\n\010distance\030\010 \001(\r\022(\n\013d",
-      "irectStops\030\017 \003(\0132\023.TransportRouteStop\022)\n" +
-      "\014reverseStops\030\020 \003(\0132\023.TransportRouteStop" +
-      "\"W\n\022TransportRouteStop\022\n\n\002id\030\001 \002(\022\022\n\n\002dx" +
-      "\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\014\n\004name\030\006 \002(\r\022\017\n\007name" +
-      "_en\030\007 \001(\r\"b\n\rTransportStop\022\n\n\002dx\030\001 \002(\021\022\n" +
-      "\n\002dy\030\002 \002(\021\022\n\n\002id\030\005 \002(\022\022\014\n\004name\030\006 \002(\r\022\017\n\007" +
-      "name_en\030\007 \001(\r\022\016\n\006routes\030\020 \003(\r\"\244\001\n\022Transp" +
-      "ortStopsTree\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(" +
-      "\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022%\n\010subtre" +
-      "es\030\007 \003(\0132\023.TransportStopsTree\022\035\n\005leafs\030\010",
-      " \003(\0132\016.TransportStop\022\016\n\006baseId\030\020 \001(\004\"\215\001\n" +
-      "\024OsmAndTransportIndex\022\014\n\004name\030\001 \001(\t\022 \n\006r" +
-      "outes\030\003 \001(\0132\020.TransportRoutes\022\"\n\005stops\030\006" +
-      " \001(\0132\023.TransportStopsTree\022!\n\013stringTable" +
-      "\030\t \002(\0132\014.StringTable\"\333\001\n\016OsmAndPoiIndex\022" +
-      "\014\n\004name\030\001 \002(\t\022\"\n\nboundaries\030\002 \002(\0132\016.OsmA" +
-      "ndTileBox\022-\n\017categoriesTable\030\003 \003(\0132\024.Osm" +
-      "AndCategoryTable\022&\n\tnameIndex\030\004 \001(\0132\023.Os" +
-      "mAndPoiNameIndex\022\034\n\005boxes\030\006 \003(\0132\r.OsmAnd" +
-      "PoiBox\022\"\n\007poiData\030\t \003(\0132\021.OsmAndPoiBoxDa",
-      "ta\"\270\001\n\022OsmAndPoiNameIndex\022\"\n\005table\030\003 \002(\013" +
-      "2\023.IndexedStringTable\0228\n\004data\030\005 \003(\0132*.Os" +
-      "mAndPoiNameIndex.OsmAndPoiNameIndexData\032" +
-      "D\n\026OsmAndPoiNameIndexData\022*\n\005atoms\030\003 \003(\013" +
-      "2\033.OsmAndPoiNameIndexDataAtom\"Q\n\032OsmAndP" +
-      "oiNameIndexDataAtom\022\014\n\004zoom\030\002 \001(\r\022\t\n\001x\030\003" +
-      " \001(\r\022\t\n\001y\030\004 \001(\r\022\017\n\007shiftTo\030\016 \001(\007\">\n\023OsmA" +
-      "ndCategoryTable\022\020\n\010category\030\001 \002(\t\022\025\n\rsub" +
-      "categories\030\003 \003(\t\"\227\001\n\014OsmAndPoiBox\022\014\n\004zoo" +
-      "m\030\001 \002(\r\022\014\n\004left\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022(\n\nca",
-      "tegories\030\004 \001(\0132\024.OsmAndPoiCategories\022\037\n\010" +
-      "subBoxes\030\n \003(\0132\r.OsmAndPoiBox\022\023\n\013shiftTo" +
-      "Data\030\016 \001(\007\")\n\023OsmAndPoiCategories\022\022\n\ncat" +
-      "egories\030\003 \003(\r\"^\n\020OsmAndPoiBoxData\022\014\n\004zoo" +
-      "m\030\001 \001(\r\022\t\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\022&\n\007poiData" +
-      "\030\005 \003(\0132\025.OsmAndPoiBoxDataAtom\"\255\001\n\024OsmAnd" +
-      "PoiBoxDataAtom\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\022" +
-      "\n\ncategories\030\004 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006name" +
-      "En\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\024\n\014openingHours\030\n \001" +
-      "(\t\022\014\n\004site\030\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004note\030",
-      "\r \001(\tB\023\n\021net.osmand.binary"
+      "taBlock\"\211\001\n\014MapDataBlock\022\016\n\006baseId\030\n \001(\004" +
+      "\022\035\n\013dataObjects\030\014 \003(\0132\010.MapData\022\022\n\nraste" +
+      "rType\030\r \001(\r\022\023\n\013rasterImage\030\016 \001(\014\022!\n\013stri",
+      "ngTable\030\017 \001(\0132\014.StringTable\"\241\001\n\007MapData\022" +
+      "\023\n\013coordinates\030\001 \001(\014\022\027\n\017areaCoordinates\030" +
+      "\002 \001(\014\022\037\n\027polygonInnerCoordinates\030\004 \003(\014\022\027" +
+      "\n\017additionalTypes\030\006 \001(\014\022\r\n\005types\030\007 \002(\014\022\023" +
+      "\n\013stringNames\030\n \001(\014\022\n\n\002id\030\014 \002(\022\"\222\002\n\022OsmA" +
+      "ndAddressIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en\030" +
+      "\002 \001(\t\022\"\n\nboundaries\030\003 \001(\0132\016.OsmAndTileBo" +
+      "x\022/\n\006cities\030\006 \003(\0132\037.OsmAndAddressIndex.C" +
+      "itiesIndex\022.\n\tnameIndex\030\007 \001(\0132\033.OsmAndAd" +
+      "dressNameIndexData\032X\n\013CitiesIndex\022\014\n\004typ",
+      "e\030\002 \002(\r\022\032\n\006cities\030\005 \003(\0132\n.CityIndex\022\037\n\006b" +
+      "locks\030\007 \003(\0132\017.CityBlockIndex\"\301\001\n\032OsmAndA" +
+      "ddressNameIndexData\022\"\n\005table\030\004 \002(\0132\023.Ind" +
+      "exedStringTable\022>\n\004atom\030\007 \003(\01320.OsmAndAd" +
+      "dressNameIndexData.AddressNameIndexData\032" +
+      "?\n\024AddressNameIndexData\022\'\n\004atom\030\004 \003(\0132\031." +
+      "AddressNameIndexDataAtom\"v\n\030AddressNameI" +
+      "ndexDataAtom\022\014\n\004name\030\001 \002(\t\022\016\n\006nameEn\030\002 \001" +
+      "(\t\022\014\n\004type\030\003 \002(\r\022\024\n\014shiftToIndex\030\005 \003(\007\022\030" +
+      "\n\020shiftToCityIndex\030\006 \003(\007\"~\n\tCityIndex\022\021\n",
+      "\tcity_type\030\001 \001(\r\022\014\n\004name\030\002 \002(\t\022\017\n\007name_e" +
+      "n\030\003 \001(\t\022\n\n\002id\030\004 \001(\004\022\t\n\001x\030\005 \002(\r\022\t\n\001y\030\006 \002(" +
+      "\r\022\035\n\025shiftToCityBlockIndex\030\n \001(\007\"l\n\016City" +
+      "BlockIndex\022\030\n\020shiftToCityIndex\030\004 \001(\007\022!\n\t" +
+      "buildings\030\020 \003(\0132\016.BuildingIndex\022\035\n\007stree" +
+      "ts\030\022 \003(\0132\014.StreetIndex\"\235\001\n\013StreetIndex\022\014" +
+      "\n\004name\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022\t\n\001x\030\003 \002(\021" +
+      "\022\t\n\001y\030\004 \002(\021\022\n\n\002id\030\006 \001(\004\022!\n\tbuildings\030\014 \003" +
+      "(\0132\016.BuildingIndex\022*\n\rintersections\030\005 \003(" +
+      "\0132\023.StreetIntersection\"_\n\022StreetIntersec",
+      "tion\022\014\n\004name\030\002 \002(\t\022\017\n\007name_en\030\003 \001(\t\022\024\n\014i" +
+      "ntersectedX\030\004 \002(\021\022\024\n\014intersectedY\030\005 \002(\021\"" +
+      "\262\001\n\rBuildingIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_" +
+      "en\030\002 \001(\t\022\r\n\005name2\030\003 \001(\t\022\020\n\010name_en2\030\004 \001(" +
+      "\t\022\025\n\rinterpolation\030\005 \001(\021\022\t\n\001x\030\007 \002(\021\022\t\n\001y" +
+      "\030\010 \002(\021\022\n\n\002x2\030\t \001(\021\022\n\n\002y2\030\n \001(\021\022\n\n\002id\030\r \001" +
+      "(\004\022\020\n\010postcode\030\016 \001(\t\"2\n\017TransportRoutes\022" +
+      "\037\n\006routes\030\006 \003(\0132\017.TransportRoute\"\317\001\n\016Tra" +
+      "nsportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003 \001(\r\022\020\n" +
+      "\010operator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022\014\n\004name\030\006 \001",
+      "(\r\022\017\n\007name_en\030\007 \001(\r\022\020\n\010distance\030\010 \001(\r\022(\n" +
+      "\013directStops\030\017 \003(\0132\023.TransportRouteStop\022" +
+      ")\n\014reverseStops\030\020 \003(\0132\023.TransportRouteSt" +
+      "op\"W\n\022TransportRouteStop\022\n\n\002id\030\001 \002(\022\022\n\n\002" +
+      "dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\014\n\004name\030\006 \002(\r\022\017\n\007na" +
+      "me_en\030\007 \001(\r\"b\n\rTransportStop\022\n\n\002dx\030\001 \002(\021" +
+      "\022\n\n\002dy\030\002 \002(\021\022\n\n\002id\030\005 \002(\022\022\014\n\004name\030\006 \002(\r\022\017" +
+      "\n\007name_en\030\007 \001(\r\022\016\n\006routes\030\020 \003(\r\"\244\001\n\022Tran" +
+      "sportStopsTree\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 " +
+      "\002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022%\n\010subt",
+      "rees\030\007 \003(\0132\023.TransportStopsTree\022\035\n\005leafs" +
+      "\030\010 \003(\0132\016.TransportStop\022\016\n\006baseId\030\020 \001(\004\"\215" +
+      "\001\n\024OsmAndTransportIndex\022\014\n\004name\030\001 \001(\t\022 \n" +
+      "\006routes\030\003 \001(\0132\020.TransportRoutes\022\"\n\005stops" +
+      "\030\006 \001(\0132\023.TransportStopsTree\022!\n\013stringTab" +
+      "le\030\t \002(\0132\014.StringTable\"\333\001\n\016OsmAndPoiInde" +
+      "x\022\014\n\004name\030\001 \002(\t\022\"\n\nboundaries\030\002 \002(\0132\016.Os" +
+      "mAndTileBox\022-\n\017categoriesTable\030\003 \003(\0132\024.O" +
+      "smAndCategoryTable\022&\n\tnameIndex\030\004 \001(\0132\023." +
+      "OsmAndPoiNameIndex\022\034\n\005boxes\030\006 \003(\0132\r.OsmA",
+      "ndPoiBox\022\"\n\007poiData\030\t \003(\0132\021.OsmAndPoiBox" +
+      "Data\"\270\001\n\022OsmAndPoiNameIndex\022\"\n\005table\030\003 \002" +
+      "(\0132\023.IndexedStringTable\0228\n\004data\030\005 \003(\0132*." +
+      "OsmAndPoiNameIndex.OsmAndPoiNameIndexDat" +
+      "a\032D\n\026OsmAndPoiNameIndexData\022*\n\005atoms\030\003 \003" +
+      "(\0132\033.OsmAndPoiNameIndexDataAtom\"Q\n\032OsmAn" +
+      "dPoiNameIndexDataAtom\022\014\n\004zoom\030\002 \001(\r\022\t\n\001x" +
+      "\030\003 \001(\r\022\t\n\001y\030\004 \001(\r\022\017\n\007shiftTo\030\016 \001(\007\">\n\023Os" +
+      "mAndCategoryTable\022\020\n\010category\030\001 \002(\t\022\025\n\rs" +
+      "ubcategories\030\003 \003(\t\"\227\001\n\014OsmAndPoiBox\022\014\n\004z",
+      "oom\030\001 \002(\r\022\014\n\004left\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022(\n\n" +
+      "categories\030\004 \001(\0132\024.OsmAndPoiCategories\022\037" +
+      "\n\010subBoxes\030\n \003(\0132\r.OsmAndPoiBox\022\023\n\013shift" +
+      "ToData\030\016 \001(\007\")\n\023OsmAndPoiCategories\022\022\n\nc" +
+      "ategories\030\003 \003(\r\"^\n\020OsmAndPoiBoxData\022\014\n\004z" +
+      "oom\030\001 \001(\r\022\t\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\022&\n\007poiDa" +
+      "ta\030\005 \003(\0132\025.OsmAndPoiBoxDataAtom\"\255\001\n\024OsmA" +
+      "ndPoiBoxDataAtom\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021" +
+      "\022\022\n\ncategories\030\004 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006na" +
+      "meEn\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\024\n\014openingHours\030\n",
+      " \001(\t\022\014\n\004site\030\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004not" +
+      "e\030\r \001(\tB\023\n\021net.osmand.binary"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -18792,7 +18874,7 @@ public final class OsmandOdb {
           internal_static_MapDataBlock_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_MapDataBlock_descriptor,
-              new java.lang.String[] { "BaseId", "DataObjects", "StringTable", },
+              new java.lang.String[] { "BaseId", "DataObjects", "RasterType", "RasterImage", "StringTable", },
               net.osmand.binary.OsmandOdb.MapDataBlock.class,
               net.osmand.binary.OsmandOdb.MapDataBlock.Builder.class);
           internal_static_MapData_descriptor =

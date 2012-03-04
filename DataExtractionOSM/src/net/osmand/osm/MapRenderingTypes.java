@@ -101,10 +101,16 @@ public class MapRenderingTypes {
 		rt.id = types.size();
 		String keyVal = constructRuleKey(tag, val);
 		if(types.containsKey(keyVal)){
-			throw new RuntimeException("Duplicate " + keyVal);
+			if(types.get(keyVal).nameCreated ) {
+				rt.id = types.get(keyVal).id;
+				types.put(keyVal, rt);
+			} else {
+				throw new RuntimeException("Duplicate " + keyVal);
+			}
+		} else {
+			types.put(keyVal, rt);
+			typeList.add(rt);
 		}
-		types.put(keyVal, rt);
-		typeList.add(rt);
 	}
 	
 	public MapRulType getNameRuleType() {
@@ -282,6 +288,7 @@ public class MapRenderingTypes {
 									mt = new MapRulType();
 									mt.tag = names[i];
 									mt.additional = true;
+									mt.nameCreated = true;
 									registerRuleType(names[i], null, mt);
 								}
 								rtype.names[i] = mt;
@@ -411,6 +418,7 @@ public class MapRenderingTypes {
 		int minzoom;
 		boolean additional;
 		MapRulType targetTagValue;
+		boolean nameCreated;
 		
 		// inner id
 		private int id;

@@ -51,6 +51,7 @@ public class DBStreetDAO extends AbstractIndexPartCreator
 	private PreparedStatement addressBuildingStat;
 	private PreparedStatement addressSearchStreetStat;
 	private PreparedStatement addressSearchBuildingStat;
+	private PreparedStatement addressRemoveBuildingStat;
 	private PreparedStatement addressSearchStreetNodeStat;
 	private PreparedStatement addressSearchStreetStatWithoutCityPart;
 
@@ -68,6 +69,7 @@ public class DBStreetDAO extends AbstractIndexPartCreator
         
         // create index on name ?
         stat.executeUpdate("create table building (id bigint, latitude double, longitude double, " +
+                         "name2 varchar(1024), name_en2 varchar(1024), lat2 double, lon2 double, interval int, interpolateType varchar(50), " +
 						"name varchar(1024), name_en varchar(1024), street bigint, postcode varchar(1024), primary key(street, id))");
         stat.executeUpdate("create index building_postcode on building (postcode)");
         stat.executeUpdate("create index building_street on building (street)");
@@ -81,11 +83,12 @@ public class DBStreetDAO extends AbstractIndexPartCreator
         
 		addressStreetStat = createPrepareStatement(mapConnection,"insert into street (id, latitude, longitude, name, name_en, city, citypart) values (?, ?, ?, ?, ?, ?, ?)");
 		addressStreetNodeStat = createPrepareStatement(mapConnection,"insert into street_node (id, latitude, longitude, street, way) values (?, ?, ?, ?, ?)");
-		addressBuildingStat = createPrepareStatement(mapConnection,"insert into building (id, latitude, longitude, name, name_en, street, postcode) values (?, ?, ?, ?, ?, ?, ?)");
+		addressBuildingStat = createPrepareStatement(mapConnection,"insert into building (id, latitude, longitude, name, name_en, street, postcode, name2, name_en2, lat2, lon2, interval, interpolateType) values (?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,? ,? ,?)");
 		addressSearchStreetStat = createPrepareStatement(mapConnection,"SELECT id,latitude,longitude FROM street WHERE ? = city AND ? = citypart AND ? = name");
 		addressSearchStreetStatWithoutCityPart = createPrepareStatement(mapConnection,"SELECT id,name,citypart,latitude,longitude FROM street WHERE ? = city AND ? = name");
 		addressStreetUpdateCityPart = createPrepareStatement(mapConnection,"UPDATE street SET citypart = ? WHERE id = ?");
 		addressSearchBuildingStat = createPrepareStatement(mapConnection,"SELECT id FROM building where ? = id");
+		addressRemoveBuildingStat = createPrepareStatement(mapConnection,"DELETE FROM building where ? = id");
 		addressSearchStreetNodeStat = createPrepareStatement(mapConnection,"SELECT way FROM street_node WHERE ? = way");
 	}
 	
@@ -114,6 +117,17 @@ public class DBStreetDAO extends AbstractIndexPartCreator
 			addressBuildingStat.setString(5, building.getEnName());
 			addressBuildingStat.setLong(6, streetId);
 			addressBuildingStat.setString(7, building.getPostcode() == null ? null : building.getPostcode().toUpperCase());
+			addressBuildingStat.setString(8, building.getName2());
+			addressBuildingStat.setString(9, building.getName2());
+			LatLon l = building.getLatLon2() ;
+			addressBuildingStat.setDouble(10, l == null? 0 : l.getLatitude());
+			addressBuildingStat.setDouble(11, l == null? 0 : l.getLongitude());
+			addressBuildingStat.setInt(12, building.getInterpolationInterval());
+			if(building.getInterpolationType() == null) {
+				addressBuildingStat.setString(13, null);
+			} else {
+				addressBuildingStat.setString(13, building.getInterpolationType().toString());
+			}
 			addBatch(addressBuildingStat);
 		}
 	}
@@ -177,6 +191,13 @@ public class DBStreetDAO extends AbstractIndexPartCreator
 		boolean exist = rs.next();
 		rs.close();
 		return exist;
+	}
+	
+	public boolean removeBuilding(Entity e) throws SQLException {
+		addressRemoveBuildingStat.setLong(1, e.getId());
+		boolean res = addressRemoveBuildingStat.execute();
+		commit();
+		return res;
 	}
 
 	public boolean findStreetNode(Entity e) throws SQLException {

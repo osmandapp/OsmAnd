@@ -27,6 +27,7 @@ import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.data.Boundary;
 import net.osmand.data.Building;
+import net.osmand.data.Building.BuildingInterpolation;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.data.DataTileManager;
@@ -654,6 +655,50 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	
 	public void iterateMainEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		// index not only buildings but also nodes that belongs to addr:interpolation ways
+		// currently not supported because nodes are indexed first with buildings 
+		if (e instanceof Way && e.getTag(OSMTagKey.ADDR_INTERPOLATION) != null ){
+			BuildingInterpolation type = null;
+			int interpolationInterval = 0;
+			if(e.getTag(OSMTagKey.ADDR_INTERPOLATION) != null) {
+				try {
+					type = BuildingInterpolation.valueOf(e.getTag(OSMTagKey.ADDR_INTERPOLATION).toUpperCase());
+				} catch (RuntimeException ex) {
+					try {
+						interpolationInterval = Integer.parseInt(e.getTag(OSMTagKey.ADDR_INTERPOLATION));
+					} catch(NumberFormatException ex2) {
+					}
+				}
+			}
+			if (type != null && interpolationInterval > 0) {
+				List<Node> nodesWithHno = new ArrayList<Node>();
+				for (Node n : ((Way) e).getNodes()) {
+					if (n.getTag(OSMTagKey.ADDR_HOUSE_NUMBER) != null && n.getTag(OSMTagKey.ADDR_STREET) != null) {
+						nodesWithHno.add(n);
+					}
+				}
+				if (nodesWithHno.size() > 1) {
+					for (int i = 1; i < nodesWithHno.size(); i++) {
+						Node first = nodesWithHno.get(i - 1);
+						Node second = nodesWithHno.get(i);
+						boolean exist = streetDAO.findBuilding(first);
+						if (exist) {
+							streetDAO.removeBuilding(first);
+						}
+						LatLon l = e.getLatLon();
+						Set<Long> idsOfStreet = getStreetInCity(first.getIsInNames(), first.getTag(OSMTagKey.ADDR_STREET), null, l);
+						if (!idsOfStreet.isEmpty()) {
+							Building building = new Building(first);
+							building.setInterpolationInterval(interpolationInterval);
+							building.setInterpolationType(type);
+							building.setName(first.getTag(OSMTagKey.ADDR_HOUSE_NUMBER));
+							building.setName2(second.getTag(OSMTagKey.ADDR_HOUSE_NUMBER));
+							building.setLatLon2(second.getLatLon());
+							streetDAO.writeBuilding(idsOfStreet, building);
+						}
+					}
+				}
+			}
+		} 
 		if (e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER) != null && e.getTag(OSMTagKey.ADDR_STREET) != null) {
 			boolean exist = streetDAO.findBuilding(e);
 			if (!exist) {
@@ -662,7 +707,26 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				Set<Long> idsOfStreet = getStreetInCity(e.getIsInNames(), e.getTag(OSMTagKey.ADDR_STREET), null, l);
 				if (!idsOfStreet.isEmpty()) {
 					Building building = new Building(e);
-					building.setName(e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER));
+					String hno = e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER);
+					int i = hno.indexOf('-');
+					if(i != -1) {
+						building.setInterpolationInterval(1);
+						if(e.getTag(OSMTagKey.ADDR_INTERPOLATION) != null) {
+							try {
+								building.setInterpolationType(BuildingInterpolation.valueOf(e.getTag(OSMTagKey.ADDR_INTERPOLATION).toUpperCase()));
+							} catch (RuntimeException ex) {
+								try {
+									building.setInterpolationInterval(Integer.parseInt(e.getTag(OSMTagKey.ADDR_INTERPOLATION)));
+								} catch(NumberFormatException ex2) {
+								}
+							}
+						}
+						building.setName(hno.substring(0, i));
+						building.setName2(hno.substring(i + 1));
+					} else {
+						building.setName(hno);
+					}
+					
 					streetDAO.writeBuilding(idsOfStreet, building);
 				}
 			}
@@ -751,10 +815,10 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		Map<CityType, Collection<City>> cities = readCities(mapConnection);
 		PreparedStatement streetstat = mapConnection.prepareStatement(//
 				"SELECT A.id, A.name, A.name_en, A.latitude, A.longitude, "+ //$NON-NLS-1$
-				"B.id, B.name, B.name_en, B.latitude, B.longitude, B.postcode, A.cityPart "+ //$NON-NLS-1$
+				"B.id, B.name, B.name_en, B.latitude, B.longitude, B.postcode, A.cityPart, "+ //$NON-NLS-1$
+				" B.name2, B.name_en2, B.lat2, B.lon2, B.interval, B.interpolateType " +
 				"FROM street A left JOIN building B ON B.street = A.id JOIN city C ON A.city = C.id " + //$NON-NLS-1$
 				//with this order by we get the streets directly in city to not have the suffix if duplication
-				//TODO this order by might slow the query a little bit
 				"WHERE A.city = ? ORDER BY C.name == A.cityPart DESC"); //$NON-NLS-1$
 		PreparedStatement waynodesStat = null;
 		if (saveAddressWays) {
@@ -772,7 +836,11 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				villages.addAll(cities.get(t));
 			}
 			if(t == CityType.SUBURB){
-				suburbs.addAll(cities.get(t));
+				for(City c : cities.get(t)){
+					if(c.getIsInValue() != null) {
+						suburbs.add(c);
+					}
+				}
 			}
 		}
 
@@ -949,7 +1017,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		while (set.next()) {
 			long streetId = set.getLong(1);
 			if (!visitedStreets.containsKey(streetId)) {
-				Street street = new Street(null);
+				Street street = new Street(city);
 				String streetName = set.getString(2);
 				street.setLocation(set.getDouble(4), set.getDouble(5));
 				street.setId(streetId);
@@ -982,6 +1050,20 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				b.setEnName(set.getString(8));
 				b.setLocation(set.getDouble(9), set.getDouble(10));
 				b.setPostcode(set.getString(11));
+				b.setName2(set.getString(13));
+				// no en name2 for now
+				b.setName2(set.getString(14));
+				double lat2 = set.getDouble(15);
+				double lon2 = set.getDouble(16);
+				if(lat2 != 0 || lon2 != 0) {
+					b.setLatLon2(new LatLon(lat2, lon2));
+				}
+				b.setInterpolationInterval(set.getInt(17));
+				String type = set.getString(18);
+				if(type != null){
+					b.setInterpolationType(BuildingInterpolation.valueOf(type));
+				}
+				
 				s.registerBuilding(b);
 			}
 		}

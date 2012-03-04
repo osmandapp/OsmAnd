@@ -1,15 +1,11 @@
 package net.osmand.data.preparation;
 
-import gnu.trove.TByteCollection;
-import gnu.trove.list.TLongList;
 import gnu.trove.list.array.TByteArrayList;
 import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.list.array.TLongArrayList;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -41,7 +37,6 @@ import net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData;
 import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapDataBox;
 import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapEncodingRule;
 import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapRootLevel;
-import net.osmand.binary.OsmandOdb.IndexedStringTable;
 import net.osmand.binary.OsmandOdb.OsmAndMapIndex;
 import net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex;
@@ -70,7 +65,6 @@ import net.sf.junidecode.Junidecode;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.CodedOutputStream;
-import com.google.protobuf.MessageLite;
 import com.google.protobuf.WireFormat;
 import com.google.protobuf.WireFormat.FieldType;
 
@@ -162,11 +156,11 @@ public class BinaryMapIndexWriter {
 		return codedOutStream.getWrittenBytes();
 	}
 
-	private void writeFixed32(long posToWrite, int value, long currentPosition) throws IOException {
-		raf.seek(posToWrite);
-		raf.writeInt(value);
-		raf.seek(currentPosition);
-	}
+//	private void writeFixed32(long posToWrite, int value, long currentPosition) throws IOException {
+//		raf.seek(posToWrite);
+//		raf.writeInt(value);
+//		raf.seek(currentPosition);
+//	}
 
 	private int writeInt32Size() throws IOException {
 		long filePointer = getFilePointer();
@@ -368,13 +362,13 @@ public class BinaryMapIndexWriter {
 			data.setCoordinates(ByteString.copyFrom(mapDataBuf.toArray()));
 		}
 
-		if (innerPolygonTypes.length > 0) {
+		if (innerPolygonTypes != null && innerPolygonTypes.length > 0) {
 			mapDataBuf.clear();
 			pcalcx = pleft;
 			pcalcy = ptop;
 			for (int i = 0; i < innerPolygonTypes.length / 8; i++) {
-				int x = Algoritms.parseIntFromBytes(coordinates, i * 8);
-				int y = Algoritms.parseIntFromBytes(coordinates, i * 8 + 4);
+				int x = Algoritms.parseIntFromBytes(innerPolygonTypes, i * 8);
+				int y = Algoritms.parseIntFromBytes(innerPolygonTypes, i * 8 + 4);
 				if (x == 0 && y == 0) {
 					if (mapDataBuf.size() > 0) {
 						data.addPolygonInnerCoordinates(ByteString.copyFrom(mapDataBuf.toArray()));
@@ -398,7 +392,7 @@ public class BinaryMapIndexWriter {
 		data.setTypes(ByteString.copyFrom(types));
 		TYPES_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapData.TYPES_FIELD_NUMBER)
 				+ CodedOutputStream.computeRawVarint32Size(types.length) + types.length;
-		if (additionalTypes.length > 0) {
+		if (additionalTypes != null && additionalTypes.length > 0) {
 			data.setAdditionalTypes(ByteString.copyFrom(additionalTypes));
 			TYPES_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapData.ADDITIONALTYPES_FIELD_NUMBER)
 					+ CodedOutputStream.computeRawVarint32Size(additionalTypes.length) + additionalTypes.length;
@@ -441,7 +435,7 @@ public class BinaryMapIndexWriter {
 	
 	
 	public void writeAddressNameIndex(Map<String, List<MapObject>> namesIndex) throws IOException {
-		checkPeekState(CITY_INDEX_INIT);
+		checkPeekState(ADDRESS_INDEX_INIT);
 		codedOutStream.writeTag(OsmAndAddressIndex.NAMEINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		preserveInt32Size();
 		
@@ -597,7 +591,28 @@ public class BinaryMapIndexWriter {
 			int by = MapUtils.get31TileNumberY(b.getLocation().getLatitude());
 			bbuilder.setX((bx - sx) >> 7);
 			bbuilder.setY((by - sy) >> 7);
-			TODO;
+			
+			String number2 = b.getName2();
+			if(!Algoritms.isEmpty(number2)){
+				LatLon loc = b.getLatLon2();
+				if(loc == null) {
+					bbuilder.setX((bx - sx) >> 7);
+					bbuilder.setY((by - sy) >> 7);
+				} else {
+					int bcx = MapUtils.get31TileNumberX(loc.getLongitude());
+					int bcy = MapUtils.get31TileNumberY(loc.getLatitude());
+					bbuilder.setX((bcx - sx) >> 7);
+					bbuilder.setY((bcy - sy) >> 7);
+				}
+				bbuilder.setName2(number2);
+				if(b.getInterpolationType() != null) {
+					bbuilder.setInterpolation(b.getInterpolationType().getValue());
+				} else if(b.getInterpolationInterval() > 0) {
+					bbuilder.setInterpolation(b.getInterpolationInterval());
+				} else {
+					bbuilder.setInterpolation(1);
+				}
+			}
 			bbuilder.setId(b.getId());
 			bbuilder.setName(b.getName());
 			if (checkEnNameToWrite(b)) {

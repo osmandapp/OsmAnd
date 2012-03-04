@@ -132,7 +132,13 @@ message MapDataBlock {
    // in future here can be optional raster tile
    repeated MapData dataObjects = 12;
 
+   optional uint32 rasterType = 13;
+
+   optional bytes rasterImage = 14;
+
    optional StringTable stringTable = 15;
+
+
 }
 
 

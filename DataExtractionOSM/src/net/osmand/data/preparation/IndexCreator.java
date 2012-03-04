@@ -629,8 +629,6 @@ public class IndexCreator {
 		creator.setIndexAddress(true);
 		creator.setIndexPOI(true);
 		creator.setIndexTransport(true);
-		// for NL
-//		creator.setCityAdminLevel("10");
 
 		creator.recreateOnlyBinaryFile = false;
 		creator.deleteDatabaseIndexes = true;
@@ -640,17 +638,8 @@ public class IndexCreator {
 		MapRenderingTypes rt = MapRenderingTypes.getDefault();// new MapRenderingTypes("/home/victor/projects/OsmAnd/data/testdata/roads_rendering_types.xml");
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
 		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
-//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/mecklenburg-vorpommern.osm.pbf"),
-//				new ConsoleProgressImplementation(1), null, zooms, rt, log);
-		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/download/RU-MOW.osm.bz2"),
+		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/luxembourg.osm.pbf"),
 				new ConsoleProgressImplementation(1), null, zooms, rt, log);
-		
-//		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes3.tmp.odb"));
-//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/stadion-dynamo.osm"),
-//				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), log);
-		
-		
-		
 		
 		
 		// world generation

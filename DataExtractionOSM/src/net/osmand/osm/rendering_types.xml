@@ -537,13 +537,6 @@
 	</category>
 
 	
-	<category name="geocache" >
-		<poi tag="amenity" poi:category="geocache" />
-		<type tag="geocache" value="found" minzoom="15" />
-		<type tag="geocache" value="not found" minzoom="15" />
-
-	</category>
-
 	<category name="amenity_other" poi:tag="amenity" poi:category="other">
 		<type tag="amenity" value="marketplace" minzoom="15" />
 		<type tag="amenity" value="courthouse" minzoom="15" />
