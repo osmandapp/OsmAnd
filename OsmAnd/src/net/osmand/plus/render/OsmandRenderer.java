@@ -199,7 +199,8 @@ public class OsmandRenderer {
 	 * @return if map could be replaced
 	 */
 	public void generateNewBitmapNative(RenderingContext rc, NativeOsmandLibrary library, 
-			NativeSearchResult searchResultHandler, Bitmap bmp, boolean useEnglishNames,
+			NativeSearchResult searchResultHandler, 
+			Bitmap bmp, boolean useEnglishNames,
 			RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList, int defaultColor) {
 		long now = System.currentTimeMillis();
 		if (rc.width > 0 && rc.height > 0 && searchResultHandler != null) {
@@ -213,13 +214,25 @@ public class OsmandRenderer {
 					final Handler h = new Handler(Looper.getMainLooper());
 					notifyListenersWithDelay(rc, notifyList, h);
 				}
-				String res = library.generateRendering(rc, searchResultHandler, bmp, useEnglishNames, render, defaultColor);
+				
+				// Native library will decide on it's own best way of rendering
+				// If res.bitmapBuffer is null, it indicates that rendering was done directly to
+				// memory of passed bitmap, but this is supported only on Android >= 2.2
+				final NativeOsmandLibrary.RenderingGenerationResult res = library.generateRendering(
+					rc, searchResultHandler,
+					bmp, bmp.getWidth(), bmp.getHeight(), bmp.getRowBytes(), bmp.hasAlpha(),
+					useEnglishNames, render, defaultColor);
 				rc.ended = true;
 				notifyListeners(notifyList);
 				long time = System.currentTimeMillis() - now;
 				rc.renderingDebugInfo = String.format("Rendering: %s ms  (%s text)\n"
-						+ "(%s points, %s points inside, %s of %s objects visible)\n" + res,//$NON-NLS-1$
+						+ "(%s points, %s points inside, %s of %s objects visible)\n",//$NON-NLS-1$
 						time, rc.textRenderingTime, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
+				
+				// See upper note
+				if(res.bitmapBuffer != null) {
+					bmp.copyPixelsFromBuffer(res.bitmapBuffer);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
