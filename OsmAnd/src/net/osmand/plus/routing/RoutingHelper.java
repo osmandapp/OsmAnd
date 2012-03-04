@@ -227,58 +227,9 @@ public class RoutingHelper {
 			if(routeNodes.isEmpty() || routeNodes.size() <= currentRoute){
 				calculateRoute = true;
 			} else {
-				// Check whether user follow by route in correct direction
-				
-				// 1. try to mark passed route (move forward)
-				float dist = currentLocation.distanceTo(routeNodes.get(currentRoute));
-				while(currentRoute + 1 < routeNodes.size()){
-					float newDist = currentLocation.distanceTo(routeNodes.get(currentRoute + 1));
-					boolean proccesed = false;
-					if (newDist < dist){
-						if(newDist > 150){
-							// may be that check is really not needed ? only for start position
-							if(currentRoute > 0 ){
-								// check that we are not far from the route (if we are on the route distance doesn't matter) 
-								float bearing = routeNodes.get(currentRoute - 1).bearingTo(routeNodes.get(currentRoute));
-								float bearingMovement = currentLocation.bearingTo(routeNodes.get(currentRoute));
-								float d = Math.abs(currentLocation.distanceTo(routeNodes.get(currentRoute)) * FloatMath.sin((bearingMovement - bearing)*3.14f/180f));
-								if(d > 50){
-									proccesed = true;
-								}
-							} else {
-								proccesed = true;
-							}
-							if(proccesed && log.isDebugEnabled()){
-								log.debug("Processed distance : " + newDist + " " + dist);  //$NON-NLS-1$//$NON-NLS-2$
-							}
-							
-						} else {
-							// case if you are getting close to the next point after turn
-							//  but you haven't turned before (could be checked bearing)
-							if(currentLocation.hasBearing() || lastFixedLocation != null){
-								float bearingToPoint = currentLocation.bearingTo(routeNodes.get(currentRoute));
-								float bearingBetweenPoints = routeNodes.get(currentRoute).bearingTo(routeNodes.get(currentRoute+1));
-								float bearing = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation.bearingTo(currentLocation);
-								if(Math.abs(bearing - bearingToPoint) >
-									Math.abs(bearing - bearingBetweenPoints)){
-									if(log.isDebugEnabled()){
-										log.debug("Processed point bearing : " + Math.abs(currentLocation.getBearing() - bearingToPoint) + " " //$NON-NLS-1$ //$NON-NLS-2$
-												+ Math.abs(currentLocation.getBearing() - bearingBetweenPoints));
-									}
-									proccesed = true;
-								}
-							}
-						}
-					}
-					if(proccesed){
-						// that node already passed
-						updateCurrentRoute(currentRoute + 1);
-						dist = newDist;
-					} else {
-						break;
-					}
-						
-				}
+				// 1.
+				tryMarkPassedRoute(currentLocation);
+
 				// 2. check if destination found
 				if(finishAtLocation(currentLocation)){
 					return;
@@ -342,6 +293,7 @@ public class RoutingHelper {
 					}
 				}
 				
+				// 6. + 7.
 				directionDetection(currentLocation);
 
 				if ((suppressTurnPrompt == false && calculateRoute == false) || makeUturnWhenPossible == true) {
@@ -355,6 +307,57 @@ public class RoutingHelper {
 		}
 	}
 	
+	public void tryMarkPassedRoute(Location currentLocation) {
+		// 1. try to mark passed route (move forward)
+		float dist = currentLocation.distanceTo(routeNodes.get(currentRoute));
+		while(currentRoute + 1 < routeNodes.size()){
+			float newDist = currentLocation.distanceTo(routeNodes.get(currentRoute + 1));
+			boolean processed = false;
+			if (newDist < dist){
+				if(newDist > 150){
+					// may be that check is really not needed ? only for start position
+					if(currentRoute > 0 ){
+						// check that we are not far from the route (if we are on the route distance doesn't matter) 
+						float bearing = routeNodes.get(currentRoute - 1).bearingTo(routeNodes.get(currentRoute));
+						float bearingMovement = currentLocation.bearingTo(routeNodes.get(currentRoute));
+						float d = Math.abs(currentLocation.distanceTo(routeNodes.get(currentRoute)) * FloatMath.sin((bearingMovement - bearing)*3.14f/180f));
+						if(d > 50){
+							processed = true;
+						}
+					} else {
+						processed = true;
+					}
+					if(processed && log.isDebugEnabled()){
+						log.debug("Processed distance : " + newDist + " " + dist);  //$NON-NLS-1$//$NON-NLS-2$
+					}
+				} else {
+					// case if you are getting close to the next point after turn
+					//  but you haven't turned before (could be checked bearing)
+					if(currentLocation.hasBearing() || lastFixedLocation != null){
+						float bearingToPoint = currentLocation.bearingTo(routeNodes.get(currentRoute));
+						float bearingBetweenPoints = routeNodes.get(currentRoute).bearingTo(routeNodes.get(currentRoute+1));
+						float bearing = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation.bearingTo(currentLocation);
+						if(Math.abs(bearing - bearingToPoint) >
+							Math.abs(bearing - bearingBetweenPoints)){
+							if(log.isDebugEnabled()){
+								log.debug("Processed point bearing : " + Math.abs(currentLocation.getBearing() - bearingToPoint) + " " //$NON-NLS-1$ //$NON-NLS-2$
+										+ Math.abs(currentLocation.getBearing() - bearingBetweenPoints));
+							}
+							processed = true;
+						}
+					}
+				}
+			}
+			if(processed){
+				// that node already passed
+				updateCurrentRoute(currentRoute + 1);
+				dist = newDist;
+			} else {
+				break;
+			}
+		}
+	}
+
 	public void directionDetection(Location currentLocation) {
 		makeUturnWhenPossible = false;
 		suppressTurnPrompt = false;
@@ -394,12 +397,15 @@ public class RoutingHelper {
 		routeNodes = res.getLocations();
 		directionInfo = res.getDirections();
 		listDistance = res.getListDistance();
-		currentDirectionInfo = 0;
 		currentRoute = 0;
+		currentDirectionInfo = 0;
 		if(isFollowingMode){
+			tryMarkPassedRoute(start);
 			directionDetection(start);
 			voiceRouter.newRouteIsCalculated(updateRoute, suppressTurnPrompt);
 		} 
+		currentRoute = 0;
+		currentDirectionInfo = 0;
 		uiHandler.post(new Runnable() {
 			@Override
 			public void run() {

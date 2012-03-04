@@ -178,7 +178,7 @@ public class VoiceRouter {
 		}
 		
 		
-		// the last turn say 
+		// after last turn say:
 		if(next == null || next.distance == 0) {
 			if(currentStatus <= STATUS_UNKNOWN && currentDirection > 0){
 				CommandBuilder play = getNewCommandPlayerToPlay();
