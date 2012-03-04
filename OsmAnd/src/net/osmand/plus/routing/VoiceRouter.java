@@ -184,8 +184,8 @@ public class VoiceRouter {
 				CommandBuilder play = getNewCommandPlayerToPlay();
 				if(play != null){
 					play.goAhead(router.getLeftDistance()).andArriveAtDestination().play();
+					currentStatus = STATUS_TOLD;
 				}
-				currentStatus = STATUS_TOLD;
 			}
 			return;
 		}
