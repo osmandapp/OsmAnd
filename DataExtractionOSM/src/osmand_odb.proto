@@ -195,6 +195,7 @@ message OsmAndAddressNameIndexData {
 
     repeated AddressNameIndexData atom = 7;
    	message AddressNameIndexData {
+   		// shift is measured from start (before length)
    		repeated AddressNameIndexDataAtom atom = 4;
 	}
 }
@@ -208,7 +209,7 @@ message AddressNameIndexDataAtom {
      required uint32 type = 3; 
 
      // mixed 
-     // shift from start AddressNameIndexDataAtom to ...Index      
+     // shift from start AddressNameIndexData (!) to ...Index
      repeated fixed32 shiftToIndex = 5;
      // optional used in case of type=street
      repeated fixed32 shiftToCityIndex = 6; 

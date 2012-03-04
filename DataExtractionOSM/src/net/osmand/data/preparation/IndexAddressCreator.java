@@ -17,7 +17,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -31,6 +30,7 @@ import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.data.DataTileManager;
+import net.osmand.data.MapObject;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.data.WayBoundary;
@@ -75,8 +75,8 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	private String[] normalizeSuffixes;
 	
 	private boolean saveAddressWays;
-	
 	private boolean DEBUG_FULL_NAMES = false; //true to see atached cityPart and boundaries to the street names
+	private final int ADDRESS_NAME_CHARACTERS_TO_INDEX = 4; 
 	
 	Connection mapConnection;
 	DBStreetDAO streetDAO;
@@ -655,8 +655,6 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	public void iterateMainEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		// index not only buildings but also nodes that belongs to addr:interpolation ways
 		if (e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER) != null && e.getTag(OSMTagKey.ADDR_STREET) != null) {
-			// TODO e.getTag(OSMTagKey.ADDR_CITY) could be used to find city however many cities could have same name!
-			// check that building is not registered already
 			boolean exist = streetDAO.findBuilding(e);
 			if (!exist) {
 				ctx.loadEntityData(e);
@@ -770,18 +768,21 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		for(CityType t : cities.keySet()) {
 			if(t == CityType.CITY || t == CityType.TOWN){
 				cityTowns.addAll(cities.get(t));
-			} else if(t == CityType.SUBURB){
-				suburbs.addAll(cities.get(t));
 			} else {
 				villages.addAll(cities.get(t));
+			}
+			if(t == CityType.SUBURB){
+				suburbs.addAll(cities.get(t));
 			}
 		}
 
 		
 		progress.startTask(Messages.getString("IndexCreator.SERIALIZING_ADRESS"), cityTowns.size() + villages.size() / 100 + 1); //$NON-NLS-1$
+		
+		Map<String, List<MapObject>> namesIndex = new TreeMap<String, List<MapObject>>(Collator.getInstance());
 		Map<String, PostCode> postcodes = new TreeMap<String, PostCode>();
-		writeCityBlockIndex(writer, CITIES_TYPE,  streetstat, waynodesStat, suburbs, cityTowns, postcodes, progress);
-		writeCityBlockIndex(writer, VILLAGES_TYPE,  streetstat, waynodesStat, suburbs, villages, postcodes, progress);
+		writeCityBlockIndex(writer, CITIES_TYPE,  streetstat, waynodesStat, suburbs, cityTowns, postcodes, namesIndex, progress);
+		writeCityBlockIndex(writer, VILLAGES_TYPE,  streetstat, waynodesStat, null, villages, postcodes, namesIndex, progress);
 		
 		// write postcodes		
 		List<BinaryFileReference> refs = new ArrayList<BinaryFileReference>();		
@@ -793,6 +794,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		for (int i = 0; i < posts.size(); i++) {
 			PostCode postCode = posts.get(i);
 			BinaryFileReference ref = refs.get(i);
+			putNamedMapObject(namesIndex, postCode, ref.getStartPointer());
 			writer.writeCityIndex(postCode, new ArrayList<Street>(postCode.getStreets()), null, ref);
 		}
 		writer.endCityBlockIndex();
@@ -800,7 +802,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 
 		progress.finishTask();
 
-		TODO writeNameIndex;
+		writer.writeAddressNameIndex(namesIndex);
 		writer.endWriteAddressIndex();
 		writer.flush();
 		streetstat.close();
@@ -809,10 +811,29 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		}
 
 	}
+	
+	
+	private void putNamedMapObject(Map<String, List<MapObject>> namesIndex, MapObject o, long fileOffset){
+		String name = o.getName();
+		if (name != null && name.length() > 0) {
+			if (name.length() > ADDRESS_NAME_CHARACTERS_TO_INDEX) {
+				name = name.substring(0, ADDRESS_NAME_CHARACTERS_TO_INDEX);
+			}
+			if (!namesIndex.containsKey(name)) {
+				namesIndex.put(name, new ArrayList<MapObject>());
+			}
+			namesIndex.get(name).add(o);
+			if (fileOffset > Integer.MAX_VALUE) {
+				throw new IllegalArgumentException("File offset > 2 GB.");
+			}
+			o.setFileOffset((int) fileOffset);
+		}
+	}
 
 
 	private void writeCityBlockIndex(BinaryMapIndexWriter writer, int type, PreparedStatement streetstat, PreparedStatement waynodesStat,
-			List<City> suburbs, List<City> cities, Map<String, PostCode> postcodes, IProgress progress)			throws IOException, SQLException {
+			List<City> suburbs, List<City> cities, Map<String, PostCode> postcodes, Map<String, List<MapObject>> namesIndex, IProgress progress)			
+					throws IOException, SQLException {
 		List<BinaryFileReference> refs = new ArrayList<BinaryFileReference>();		
 		// 1. write cities
 		writer.startCityBlockIndex(type);
@@ -822,6 +843,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		for(int i=0; i<cities.size(); i++) {
 		    City city = cities.get(i);
 		    BinaryFileReference ref = refs.get(i);
+		    putNamedMapObject(namesIndex, city, ref.getStartPointer());
 		    if(type == CITIES_TYPE) {
 		    	progress.progress(1);
 			} else {
@@ -846,8 +868,9 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			long f = System.currentTimeMillis() - time;
 			writer.writeCityIndex(city, streets, streetNodes, ref);
 			int bCount = 0;
+			// register postcodes and name index
 			for (Street s : streets) {
-				bCount++;
+				putNamedMapObject(namesIndex, s, s.getFileOffset());
 				for (Building b : s.getBuildings()) {
 					bCount++;
 					if(city.getPostcode() != null && b.getPostcode() == null) {
@@ -865,9 +888,9 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			}
 			if (f > 500) {
 				if(logMapDataWarn != null) {
-					logMapDataWarn.info("! " + city.getName() + " ! " + f + " " + bCount + " streets " + streets.size());
+					logMapDataWarn.info("! " + city.getName() + " ! " + f + " ms " + streets.size() + " streets " + bCount + " buildings");
 				} else {
-					log.info("! " + city.getName() + " ! " + f + " " + bCount + " streets " + streets.size());
+					log.info("! " + city.getName() + " ! " + f + " ms " + streets.size() + " streets " + bCount + " buildings");
 				}
 			}
 		}

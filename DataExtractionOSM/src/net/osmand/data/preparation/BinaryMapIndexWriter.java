@@ -29,11 +29,15 @@ import org.apache.commons.logging.LogFactory;
 import net.osmand.Algoritms;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.OsmandOdb;
+import net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom;
 import net.osmand.binary.OsmandOdb.CityBlockIndex;
 import net.osmand.binary.OsmandOdb.CityIndex;
 import net.osmand.binary.OsmandOdb.MapData;
 import net.osmand.binary.OsmandOdb.MapDataBlock;
+import net.osmand.binary.OsmandOdb.OsmAndAddressIndex;
 import net.osmand.binary.OsmandOdb.OsmAndAddressIndex.CitiesIndex;
+import net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData.AddressNameIndexData;
+import net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData;
 import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapDataBox;
 import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapEncodingRule;
 import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapRootLevel;
@@ -51,6 +55,7 @@ import net.osmand.binary.OsmandOdb.TransportRouteStop;
 import net.osmand.binary.OsmandOdb.OsmAndCategoryTable.Builder;
 import net.osmand.data.Building;
 import net.osmand.data.City;
+import net.osmand.data.City.CityType;
 import net.osmand.data.IndexConstants;
 import net.osmand.data.MapObject;
 import net.osmand.data.PostCode;
@@ -433,6 +438,54 @@ public class BinaryMapIndexWriter {
 		int len = writeInt32Size();
 		log.info("ADDRESS INDEX SIZE : " + len);
 	}
+	
+	
+	public void writeAddressNameIndex(Map<String, List<MapObject>> namesIndex) throws IOException {
+		checkPeekState(CITY_INDEX_INIT);
+		codedOutStream.writeTag(OsmAndAddressIndex.NAMEINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+		preserveInt32Size();
+		
+		Map<String, BinaryFileReference> res = writeIndexedTable(OsmAndAddressNameIndexData.TABLE_FIELD_NUMBER, namesIndex.keySet());
+		for(Entry<String, List<MapObject>> entry : namesIndex.entrySet()) {
+			BinaryFileReference ref = res.get(entry.getKey());
+			
+			codedOutStream.writeTag(OsmAndAddressNameIndexData.ATOM_FIELD_NUMBER, FieldType.MESSAGE.getWireType());
+			long pointer = getFilePointer();
+			if(ref != null) {
+				ref.writeReference(raf, getFilePointer());
+			}
+			AddressNameIndexData.Builder builder = AddressNameIndexData.newBuilder();
+			// collapse same name ?
+			for(MapObject o : entry.getValue()){
+				AddressNameIndexDataAtom.Builder atom = AddressNameIndexDataAtom.newBuilder();
+				atom.setName(o.getName());
+				if(checkEnNameToWrite(o)){
+					atom.setNameEn(o.getEnName());
+				}
+				int type = 1;
+				if (o instanceof City) {
+					CityType ct = ((City) o).getType();
+					if (ct != CityType.CITY && ct != CityType.TOWN) {
+						type = 3;
+					}
+				} else if(o instanceof PostCode) {
+					type = 2;
+				} else if(o instanceof Street) {
+					type = 4;
+				}
+				atom.setType(type); 
+				atom.addShiftToIndex((int) (pointer - o.getFileOffset()));
+				if(o instanceof Street){
+					atom.addShiftToCityIndex((int) (pointer - ((Street) o).getCity().getFileOffset()));
+				}
+				builder.addAtom(atom.build());
+			}
+			codedOutStream.writeMessageNoTag(builder.build());
+		}
+		
+		int len = writeInt32Size();
+		log.info("ADDRESS NAME INDEX SIZE : " + len);
+	}
 
 	private boolean checkEnNameToWrite(MapObject obj) {
 		if (obj.getEnName() == null || obj.getEnName().length() == 0) {
@@ -476,6 +529,7 @@ public class BinaryMapIndexWriter {
 		ref.writeReference(raf, startMessage);
 		CityBlockIndex.Builder cityInd = OsmandOdb.CityBlockIndex.newBuilder();
 		cityInd.setShiftToCityIndex((int) (startMessage - startCityBlock));
+		long currentPointer = startMessage + 4;
 		
 		int cx = MapUtils.get31TileNumberX(cityOrPostcode.getLocation().getLongitude());
 		int cy = MapUtils.get31TileNumberY(cityOrPostcode.getLocation().getLatitude());
@@ -494,9 +548,16 @@ public class BinaryMapIndexWriter {
 		String postcodeFilter = cityOrPostcode instanceof PostCode ? cityOrPostcode.getName() : null;
 		for (Street s : streets) {
 			StreetIndex streetInd = createStreetAndBuildings(s, cx, cy, postcodeFilter, mapNodeToStreet, wayNodes);
+			currentPointer += CodedOutputStream.computeTagSize(CityBlockIndex.STREETS_FIELD_NUMBER);
+			if(currentPointer > Integer.MAX_VALUE) {
+				throw new IllegalArgumentException("File offset > 2 GB.");
+			}
+			s.setFileOffset((int) currentPointer);
+			currentPointer += CodedOutputStream.computeMessageSizeNoTag(streetInd);
 			cityInd.addStreets(streetInd);
+			
 		}
-		codedOutStream.writeMessage(CitiesIndex.BLOCKS_FIELD_NUMBER, cityInd.build());
+		codedOutStream.writeMessageNoTag(cityInd.build());
 	}
 
 	public void startCityBlockIndex(int type) throws IOException {
@@ -801,11 +862,12 @@ public class BinaryMapIndexWriter {
 		preserveInt32Size();
 		
 		Map<PoiTileBox, List<BinaryFileReference>> fpToWriteSeeks = new LinkedHashMap<PoiTileBox, List<BinaryFileReference>>();
-		int previousSize = 0;
 		Map<String, BinaryFileReference> indexedTable = writeIndexedTable(OsmandOdb.OsmAndPoiNameIndex.TABLE_FIELD_NUMBER, namesIndex.keySet());
-		TODO;
 		for(Map.Entry<String, Set<PoiTileBox>> e : namesIndex.entrySet()) {
 			codedOutStream.writeTag(OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+			BinaryFileReference nameTableRef = indexedTable.get(e.getKey());
+			nameTableRef.writeReference(raf, getFilePointer());
+			
 			OsmAndPoiNameIndex.OsmAndPoiNameIndexData.Builder builder = OsmAndPoiNameIndex.OsmAndPoiNameIndexData.newBuilder();
 			List<PoiTileBox> tileBoxes = new ArrayList<PoiTileBox>(e.getValue());
 			for(PoiTileBox box : tileBoxes) {
@@ -820,8 +882,8 @@ public class BinaryMapIndexWriter {
 			OsmAndPoiNameIndex.OsmAndPoiNameIndexData msg = builder.build();
 			
 			codedOutStream.writeMessage(OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER, msg);
-			long endPointer = codedOutStream.getWrittenBytes();
-			indexedTable.get(e.getKey()).writeReference(raf, (int) (endPointer - msg.getSerializedSize() - startPoiIndex.getStartPointer()));
+			long endPointer = getFilePointer();
+			
 			// first message
 			int accumulateSize = 4;
 			for (int i = tileBoxes.size() - 1; i >= 0; i--) {
