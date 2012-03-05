@@ -180,7 +180,8 @@ public class VoiceRouter {
 		
 		// after last turn say:
 		if(next == null || next.distance == 0) {
-			if(currentStatus <= STATUS_UNKNOWN && currentDirection > 0){
+			// if(currentStatus <= STATUS_UNKNOWN && currentDirection > 0){  This caused this prompt to be suppressed when coming back from a UTwp situation
+			if(currentStatus <= STATUS_UNKNOWN){
 				CommandBuilder play = getNewCommandPlayerToPlay();
 				if(play != null){
 					play.goAhead(router.getLeftDistance()).andArriveAtDestination().play();
