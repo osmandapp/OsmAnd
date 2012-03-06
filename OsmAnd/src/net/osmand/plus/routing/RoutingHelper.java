@@ -71,6 +71,7 @@ public class RoutingHelper {
 	public static boolean makeUturnWhenPossible = false;
 	public static boolean suppressTurnPrompt = false;
 	public static int turnImminent = 0;
+	private long makeUTwpDetected = 0;
 
 	public static boolean makeUturnWhenPossible() {
 		return makeUturnWhenPossible;
@@ -382,18 +383,19 @@ public class RoutingHelper {
 				// 7. Check necessity for unscheduled U-turn, Issue 863
 				if (Math.abs(bearing - bearingRoute) > 135f && 360 - Math.abs(bearing - bearingRoute) > 135f) {
 					float d = currentLocation.distanceTo(routeNodes.get(currentRoute));
-					// tolerance 60m or 6sec. Time tolerance to avoid false positives after route recalculation in motion
-					if (currentLocation.hasSpeed()) {
-						if ((d > 60) && (d > (currentLocation.getSpeed() * 6f))) {
+					// 60m tolerance to allow for GPS inaccuracy
+					if (d > 60) {
+						if (makeUTwpDetected == 0) {
+							makeUTwpDetected = System.currentTimeMillis();
+						// require 5 sec since first detection, to avoid false positive announcements
+						} else if ((System.currentTimeMillis() - makeUTwpDetected > 5000)) {
 							makeUturnWhenPossible = true;
 							turnImminent = 1;
 							//log.info("Bearing is opposite to bearingRoute"); //$NON-NLS-1$
 						}
-					} else if (d > 60) {
-							makeUturnWhenPossible = true;
-							turnImminent = 1;
-							//log.info("Bearing is opposite to bearingRoute"); //$NON-NLS-1$
 					}
+				} else { 
+					makeUTwpDetected = 0;
 				}
 			}
 		}
