@@ -382,10 +382,17 @@ public class RoutingHelper {
 				// 7. Check necessity for unscheduled U-turn, Issue 863
 				if (Math.abs(bearing - bearingRoute) > 135f && 360 - Math.abs(bearing - bearingRoute) > 135f) {
 					float d = currentLocation.distanceTo(routeNodes.get(currentRoute));
-					if (d > 60) {
-						makeUturnWhenPossible = true;
-						turnImminent = 1;
-						//log.info("Bearing is opposite to bearingRoute"); //$NON-NLS-1$
+					// tolerance 60m or 6sec. Time tolerance to avoid false positives after route recalculation in motion
+					if (currentLocation.hasSpeed()) {
+						if ((d > 60) && (d > (currentLocation.getSpeed() * 6f))) {
+							makeUturnWhenPossible = true;
+							turnImminent = 1;
+							//log.info("Bearing is opposite to bearingRoute"); //$NON-NLS-1$
+						}
+					} else if (d > 60) {
+							makeUturnWhenPossible = true;
+							turnImminent = 1;
+							//log.info("Bearing is opposite to bearingRoute"); //$NON-NLS-1$
 					}
 				}
 			}
