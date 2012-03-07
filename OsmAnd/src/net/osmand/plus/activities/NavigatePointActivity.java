@@ -10,6 +10,7 @@ import com.google.android.apps.analytics.easytracking.TrackedActivity;
 import net.osmand.LogUtil;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchActivity;
@@ -78,7 +79,7 @@ public class NavigatePointActivity extends TrackedActivity implements SearchActi
 			loc = ((SearchActivity) getParent()).getSearchPoint();
 		}
 		if (loc == null) {
-			loc = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+			loc = OsmandApplication.getSettings().getLastKnownMapLocation();
 		}
 		initUI(loc.getLatitude(), loc.getLongitude());
 	}
@@ -238,14 +239,14 @@ public class NavigatePointActivity extends TrackedActivity implements SearchActi
 			double lon = convert(((TextView) findViewById(R.id.LongitudeEdit)).getText().toString());
 			
 			if(navigate){
-				OsmandSettings.getOsmandSettings(this).setPointToNavigate(lat, lon, getString(R.string.point_on_map, lat, lon));
+				OsmandApplication.getSettings().setPointToNavigate(lat, lon, getString(R.string.point_on_map, lat, lon));
 			} else {
 				// in case when it is dialog
 				if(activity != null) {
 					OsmandMapTileView v = activity.getMapView();
 					v.getAnimatedDraggingThread().startMoving(lat, lon, v.getZoom(), true);
 				} else {
-					OsmandSettings settings = OsmandSettings.getOsmandSettings(this);
+					OsmandSettings settings = OsmandApplication.getSettings();
 					settings.setMapLocationToShow(lat, lon, Math.max(12, settings.getLastKnownMapZoom()), 
 							getString(R.string.point_on_map, lat, lon));
 				}

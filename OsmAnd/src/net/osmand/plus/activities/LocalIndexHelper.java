@@ -202,7 +202,7 @@ public class LocalIndexHelper {
 	}
 	
 	public List<LocalIndexInfo> getLocalIndexData(LocalIndexType type, LoadLocalIndexTask loadTask){
-		OsmandSettings settings = OsmandSettings.getOsmandSettings(app.getApplicationContext());
+		OsmandSettings settings = OsmandApplication.getSettings();
 		Map<String, String> loadedMaps = app.getResourceManager().getIndexFileNames();
 		List<LocalIndexInfo> result = new ArrayList<LocalIndexInfo>();
 		

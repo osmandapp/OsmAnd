@@ -169,7 +169,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		String[] entries;
 		String[] entrieValues;
 		PreferenceScreen screen = getPreferenceScreen();
-		osmandSettings = OsmandSettings.getOsmandSettings(this);
+		osmandSettings = OsmandApplication.getSettings();
 		
 		registerBooleanPreference(osmandSettings.SHOW_VIEW_ANGLE,screen); 
 		registerBooleanPreference(osmandSettings.USE_TRACKBALL_FOR_MOVEMENTS,screen); 

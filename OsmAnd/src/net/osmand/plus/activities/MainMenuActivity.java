@@ -57,7 +57,7 @@ public class MainMenuActivity extends TrackedActivity {
 	
 	public void checkPreviousRunsForExceptions(boolean firstTime) {
 		long size = getPreferences(MODE_WORLD_READABLE).getLong(EXCEPTION_FILE_SIZE, 0);
-		final File file = OsmandSettings.getOsmandSettings(this).extendOsmandPath(OsmandApplication.EXCEPTION_PATH);
+		final File file = OsmandApplication.getSettings().extendOsmandPath(OsmandApplication.EXCEPTION_PATH);
 		if (file.exists() && file.length() > 0) {
 			if (size != file.length() && !firstTime) {
 				String msg = MessageFormat.format(getString(R.string.previous_run_crashed), OsmandApplication.EXCEPTION_PATH);

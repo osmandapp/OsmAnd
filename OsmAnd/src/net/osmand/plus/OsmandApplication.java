@@ -50,7 +50,13 @@ public class OsmandApplication extends Application {
 	RoutingHelper routingHelper = null;
 	FavouritesDbHelper favorites = null;
 	CommandPlayer player = null;
-	OsmandSettings osmandSettings;
+	
+	/**
+	 * Static reference to instance of settings class.
+	 * Transferred from OsmandSettings class to allow redefine actual instance behind it
+	 */
+	static OsmandSettings osmandSettings = null;
+	
 	DayNightHelper daynightHelper;
 	NavigationService navigationService;
 	RendererRegistry rendererRegistry;
@@ -69,7 +75,7 @@ public class OsmandApplication extends Application {
 		super.onCreate();
 		
 		long timeToStart = System.currentTimeMillis();
-		osmandSettings = OsmandSettings.getOsmandSettings(this);
+		osmandSettings = createOsmandSettingsInstance();
 		routingHelper = new RoutingHelper(osmandSettings, this, player);
 		manager = new ResourceManager(this);
 		daynightHelper = new DayNightHelper(this);
@@ -93,8 +99,23 @@ public class OsmandApplication extends Application {
 	public RendererRegistry getRendererRegistry() {
 		return rendererRegistry;
 	}
+	
+	/**
+	 * Creates instance of OsmandSettings
+	 * @return Reference to instance of OsmandSettings
+	 */
+	protected OsmandSettings createOsmandSettingsInstance() {
+		return new OsmandSettings(this);
+	}
 
-	public OsmandSettings getSettings() {
+	/**
+	 * Application settings
+	 * @return Reference to instance of OsmandSettings
+	 */
+	public static OsmandSettings getSettings() {
+		if(osmandSettings == null) {
+			LOG.error("Trying to access settings before they were created");
+		}
 		return osmandSettings;
 	}
 
@@ -347,8 +368,7 @@ public class OsmandApplication extends Application {
 			helper.close();
 
 			// restore backuped favorites to normal file
-			final File appDir = OsmandSettings.getOsmandSettings(this)
-					.extendOsmandPath(ResourceManager.APP_DIR);
+			final File appDir = OsmandApplication.getSettings().extendOsmandPath(ResourceManager.APP_DIR);
 			File save = new File(appDir, FavouritesDbHelper.FILE_TO_SAVE);
 			File bak = new File(appDir, FavouritesDbHelper.FILE_TO_BACKUP);
 			if (bak.exists() && (!save.exists() || bak.lastModified() > save.lastModified())) {

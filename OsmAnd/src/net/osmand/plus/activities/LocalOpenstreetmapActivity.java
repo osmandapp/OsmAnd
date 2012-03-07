@@ -220,7 +220,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 				int resId = menu.get(which);
 				if (info != null) {
 					if (resId == R.string.local_openstreetmap_show_poi) {
-						OsmandSettings settings = OsmandSettings.getOsmandSettings(LocalOpenstreetmapActivity.this);
+						OsmandSettings settings = OsmandApplication.getSettings();
 						settings.setMapLocationToShow(info.getLatitude(), info.getLongitude(), settings.getLastKnownMapZoom());
 						MapActivity.launchMapActivityMoveToTop(LocalOpenstreetmapActivity.this);
 					} else if (resId == R.string.local_openstreetmap_delete) {

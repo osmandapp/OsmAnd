@@ -8,6 +8,7 @@ import com.google.android.apps.analytics.easytracking.TrackedListActivity;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -80,7 +81,7 @@ public class SearchHistoryActivity extends TrackedListActivity  implements Searc
 			location = ((SearchActivity) getParent()).getSearchPoint();
 		}
 		if (location == null) {
-			location = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+			location = OsmandApplication.getSettings().getLastKnownMapLocation();
 		}
 
 		List<HistoryEntry> historyEntries = helper.getHistoryEntries(this);
@@ -108,12 +109,11 @@ public class SearchHistoryActivity extends TrackedListActivity  implements Searc
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						if (which == 0) {
-							OsmandSettings settings = OsmandSettings.getOsmandSettings(SearchHistoryActivity.this);
+							OsmandSettings settings = OsmandApplication.getSettings();
 							settings.setMapLocationToShow(entry.getLat(), entry.getLon(), settings.getLastKnownMapZoom(), null, entry
 									.getName(), null);
 						} else if (which == 1) {
-							OsmandSettings.getOsmandSettings(SearchHistoryActivity.this).setPointToNavigate(entry.getLat(), entry.getLon(),
-									null);
+							OsmandApplication.getSettings().setPointToNavigate(entry.getLat(), entry.getLon(), null);
 						}
 						MapActivity.launchMapActivityMoveToTop(SearchHistoryActivity.this);
 					}
@@ -131,7 +131,7 @@ public class SearchHistoryActivity extends TrackedListActivity  implements Searc
 
 	private void selectModel(HistoryEntry model) {
 		helper.selectEntry(model, this);
-		OsmandSettings settings = OsmandSettings.getOsmandSettings(SearchHistoryActivity.this);
+		OsmandSettings settings = OsmandApplication.getSettings();
 		settings.setMapLocationToShow(model.getLat(), model.getLon(), settings.getLastKnownMapZoom(), null, model.getName(), null);
 		MapActivity.launchMapActivityMoveToTop(this);
 	}

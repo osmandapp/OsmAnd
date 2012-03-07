@@ -414,7 +414,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	public OsmandSettings getSettings(){
 		if(settings == null){
-			settings = OsmandSettings.getOsmandSettings(getContext());
+			settings = OsmandApplication.getSettings();
 		}
 		return settings;
 	}

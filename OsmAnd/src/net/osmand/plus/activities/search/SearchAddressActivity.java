@@ -62,7 +62,7 @@ public class SearchAddressActivity extends Activity {
 		countryButton = (Button) findViewById(R.id.CountryButton);
 		buildingButton = (Button) findViewById(R.id.BuildingButton);
 		searchOnline = (Button) findViewById(R.id.SearchOnline);
-		osmandSettings = OsmandSettings.getOsmandSettings(SearchAddressActivity.this);
+		osmandSettings = OsmandApplication.getSettings();
 		attachListeners();
 	}
 	

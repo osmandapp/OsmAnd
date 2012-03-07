@@ -74,7 +74,7 @@ public class SearchTransportActivity extends TrackedListActivity implements Sear
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
-		settings = OsmandSettings.getOsmandSettings(this);
+		settings = OsmandApplication.getSettings();
 		
 		setContentView(R.layout.search_transport);
 		searchTransportLevel = (Button) findViewById(R.id.SearchTransportLevelButton);
@@ -140,7 +140,7 @@ public class SearchTransportActivity extends TrackedListActivity implements Sear
 			startPoint = ((SearchActivity) getParent()).getSearchPoint();
 		}
 		if (startPoint == null) {
-			startPoint = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+			startPoint = OsmandApplication.getSettings().getLastKnownMapLocation();
 		}
 		
 		LatLon pointToNavigate = settings.getPointToNavigate();

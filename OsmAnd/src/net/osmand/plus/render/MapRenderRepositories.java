@@ -95,7 +95,7 @@ public class MapRenderRepositories {
 		this.context = context;
 		this.renderer = new OsmandRenderer(context);
 		handler = new Handler(Looper.getMainLooper());
-		prefs = OsmandSettings.getOsmandSettings(context);
+		prefs = OsmandApplication.getSettings();
 	}
 
 	public Context getContext() {

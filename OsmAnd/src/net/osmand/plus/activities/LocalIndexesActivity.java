@@ -78,7 +78,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.local_index_descr_title, R.drawable.tab_settings_screen_icon);
 		setContentView(R.layout.local_index);
 		titleBar.afterSetContentView();
-		settings = OsmandSettings.getOsmandSettings(this);
+		settings = OsmandApplication.getSettings();
 		descriptionLoader = new LoadLocalIndexDescriptionTask();
 		listAdapter = new LocalIndexesAdapter();
 		
@@ -160,7 +160,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 						if (info != null && info.getGpxFile() != null) {
 							WptPt loc = info.getGpxFile().findPointToShow();
 							if (loc != null) {
-								OsmandSettings settings = OsmandSettings.getOsmandSettings(LocalIndexesActivity.this);
+								OsmandSettings settings = OsmandApplication.getSettings();
 								settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
 							}
 							((OsmandApplication) getApplication()).setGpxFileToDisplay(info.getGpxFile(), false);
@@ -632,7 +632,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 	}
 	
 	private void updateDescriptionTextWithSize(){
-		File dir = OsmandSettings.getOsmandSettings(this).extendOsmandPath("");
+		File dir = OsmandApplication.getSettings().extendOsmandPath("");
 		String size = formatGb.format(new Object[]{0});
 		if(dir.canRead()){
 			StatFs fs = new StatFs(dir.getAbsolutePath());

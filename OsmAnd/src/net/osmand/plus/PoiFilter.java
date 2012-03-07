@@ -147,7 +147,7 @@ public class PoiFilter {
 	
 	public ResultMatcher<Amenity> getResultMatcher(final ResultMatcher<Amenity> matcher){
 		if(nameFilter != null) {
-			final boolean en = OsmandSettings.getOsmandSettings(application).USE_ENGLISH_NAMES.get();
+			final boolean en = OsmandApplication.getSettings().USE_ENGLISH_NAMES.get();
 			return new ResultMatcher<Amenity>() {
 				@Override
 				public boolean publish(Amenity object) {
