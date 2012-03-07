@@ -3,7 +3,6 @@ package net.osmand.plus;
 
 import net.osmand.Version;
 import net.osmand.plus.activities.LiveMonitoringHelper;
-import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import android.app.AlarmManager;

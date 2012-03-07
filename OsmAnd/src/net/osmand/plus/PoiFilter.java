@@ -16,7 +16,6 @@ import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.IndexConstants;
 import net.osmand.osm.MapUtils;
-import net.osmand.plus.activities.OsmandApplication;
 
 public class PoiFilter {
 	

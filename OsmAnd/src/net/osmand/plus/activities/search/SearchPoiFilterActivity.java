@@ -8,6 +8,7 @@ import java.util.List;
 
 import net.osmand.osm.LatLon;
 import net.osmand.plus.NameFinderPoiFilter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.PoiFiltersHelper;
@@ -15,7 +16,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.SearchByNameFilter;
 import net.osmand.plus.activities.EditPOIFilterActivity;
-import net.osmand.plus.activities.OsmandApplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;

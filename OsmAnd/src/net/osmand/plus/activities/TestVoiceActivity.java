@@ -3,6 +3,7 @@
  */
 package net.osmand.plus.activities;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;

@@ -2,10 +2,10 @@ package net.osmand.plus.activities.search;
 
 import java.util.ArrayList;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
-import net.osmand.plus.activities.OsmandApplication;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;

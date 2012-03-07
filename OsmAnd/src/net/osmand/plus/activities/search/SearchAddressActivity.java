@@ -5,11 +5,11 @@ import java.text.MessageFormat;
 
 import net.osmand.Algoritms;
 import net.osmand.osm.LatLon;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmandApplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

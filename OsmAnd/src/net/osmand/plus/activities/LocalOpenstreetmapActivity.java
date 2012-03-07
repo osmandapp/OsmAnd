@@ -13,6 +13,7 @@ import net.osmand.OpenstreetmapUtil;
 import net.osmand.osm.EntityInfo;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
 import net.osmand.plus.OpenstreetmapsDbHelper;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
