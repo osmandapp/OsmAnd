@@ -40,7 +40,7 @@ public class LiveMonitoringHelper  {
 	
 	public void insertData(double lat, double lon, double alt, double speed, double hdop, long time, OsmandSettings settings){
 		if (time - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get() * 1000) {
-			LiveMonitoringData data = new LiveMonitoringData((float)lat, (float)lon,(float) alt,(float) speed,(float) hdop, time );
+			LiveMonitoringData data = new LiveMonitoringData((float) lat, (float) lon, (float) alt, (float) speed, (float) hdop, (time/1000));
 			new LiveSender().execute(data);
 			lastTimeUpdated = time;
 		}
