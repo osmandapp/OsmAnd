@@ -742,16 +742,17 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		speed *= 3.6;
    	 	if(speed < 4){
 			return currentZoom;
-		} else if(speed < 33){
-			// less than 33 - show 17 
+		} else if(speed < 23){
+			// less than 23 - show 17 
 			return 17;
-		} else if(speed < 53){
+		} else if(speed < 43){
 			return 16;
-		} else if(speed < 83){
+		} else if(speed < 63){
 			return 15;
+		} else if(speed < 83){
+			return 14;
 		}
-		// more than 80 - show 14 (it is slow)
-		return 14;
+		return 13;
 	}
 
 	public void navigateToPoint(LatLon point){
