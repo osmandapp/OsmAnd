@@ -162,7 +162,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 								OsmandSettings settings = OsmandSettings.getOsmandSettings(LocalIndexesActivity.this);
 								settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
 							}
-							((OsmandApplication) getApplication()).setGpxFileToDisplay(info.getGpxFile(), false);
+							getMyApplication().setGpxFileToDisplay(info.getGpxFile(), false);
 							MapActivity.launchMapActivityMoveToTop(LocalIndexesActivity.this);
 						}
 					} else if (resId == R.string.local_index_mi_rename) {
@@ -239,7 +239,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 
 		@Override
 		protected List<LocalIndexInfo> doInBackground(Activity... params) {
-			LocalIndexHelper helper = new LocalIndexHelper((OsmandApplication) getApplication());
+			LocalIndexHelper helper = new LocalIndexHelper(getMyApplication());
 			return helper.getAllLocalIndexData(this);
 		}
 
@@ -460,7 +460,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 
 		@Override
 		protected LocalIndexInfo[] doInBackground(LocalIndexInfo... params) {
-			LocalIndexHelper helper = new LocalIndexHelper((OsmandApplication) getApplication());
+			LocalIndexHelper helper = new LocalIndexHelper(getMyApplication());
 			for (LocalIndexInfo i : params) {
 				helper.updateDescription(i);
 			}
@@ -713,7 +713,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			}
 			@Override
 			protected List<String> doInBackground(Void... params) {
-				return ((OsmandApplication) getApplication()).getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS);
+				return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS);
 			}
 			
 		};

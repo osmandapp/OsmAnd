@@ -82,7 +82,7 @@
         <item name="android:background">@color/activity_background</item>
     </style>
     <style name="CustomTitleTheme" parent="OsmandTheme">
-        <item name="android:windowTitleSize">46dp</item>
+        <item name="android:windowTitleSize">52dp</item>
         <item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>
     </style>
     <style name="CustomTitleTheme.Preference" parent="CustomTitleTheme">

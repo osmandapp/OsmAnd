@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="40dp"
-    android:paddingTop="3dp"
+    android:layout_height="fill_parent"
     android:background="@drawable/tab_menu_item_small" >
 
-    <LinearLayout
+	<ImageView android:src="@drawable/indicator_custom_gray"
+	android:id="@+id/explist_indicator"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:paddingLeft="10dp"
+	android:layout_gravity="center_vertical"
+	/>
+
+    <TextView
+    	android:paddingLeft="10dp"
+        android:id="@+id/category_name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textSize="24sp" >
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right" >
 
         <CheckBox
             android:id="@+id/check_item"
@@ -18,13 +34,5 @@
             android:gravity="center_vertical"
             android:visibility="gone" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/category_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:textSize="24sp" >
-    </TextView>
 
 </LinearLayout>

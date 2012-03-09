@@ -261,7 +261,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		}
 
 		public void delete(OpenstreetmapPoint i) {
-			final AmenityIndexRepositoryOdb repo = ((OsmandApplication) getApplication()).getResourceManager().getUpdatablePoiDb();
+			final AmenityIndexRepositoryOdb repo = getMyApplication().getResourceManager().getUpdatablePoiDb();
 			android.util.Log.d(LogUtil.TAG, "Delete " + i);
 			db.deleteOpenstreetmap(i);
 			String c = i.getType();

@@ -79,11 +79,12 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 		setContentView(R.layout.favourites_list);
 		titleBar.afterSetContentView();
 		
-		helper = ((OsmandApplication)getApplication()).getFavorites();
+		
+		helper = getMyApplication().getFavorites();
 		favouritesAdapter = new FavouritesAdapter();
 		favouritesAdapter.setFavoriteGroups(helper.getFavoriteGroups());
 		getExpandableListView().setAdapter(favouritesAdapter);
-		
+
 		/* Add Context-Menu listener to the ListView. */
 		getExpandableListView().setOnCreateContextMenuListener(new View.OnCreateContextMenuListener(){
 
@@ -559,7 +560,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 		public boolean isChildSelectable(int groupPosition, int childPosition) {
 			return true;
 		}
-		
+	    
 		@Override
 		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 			View row = convertView;
@@ -567,11 +568,19 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 				LayoutInflater inflater = getLayoutInflater();
 				row = inflater.inflate(R.layout.favourites_list_category, parent, false);
 			}
+			ImageView indicator = (ImageView) row.findViewById(R.id.explist_indicator);
+			if (!isExpanded) {
+				if (getChildrenCount(groupPosition) == 0) {
+					indicator.setImageResource(R.drawable.list_activities_dot_marker1_empty);
+				} else {
+					indicator.setImageResource(R.drawable.list_activities_dot_marker1_content);
+				}
+			} else {
+				indicator.setImageResource(R.drawable.list_activities_dot_marker1_pressed);
+			}
 			TextView label = (TextView) row.findViewById(R.id.category_name);
 			final String model = getGroup(groupPosition);
-			List<FavouritePoint> ms = helper.getFavoriteGroups().get(model);
-			int sz = ms != null ? ms.size() : 0;
-			label.setText(model + " [" + sz +"]");
+			label.setText(model);
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
 			
 			if(selectionMode){

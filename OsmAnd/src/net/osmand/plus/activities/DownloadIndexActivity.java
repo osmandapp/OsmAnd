@@ -194,11 +194,10 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 
 	private void updateLoadedFiles() {
-		indexActivatedFileNames = ((OsmandApplication)getApplication()).getResourceManager().getIndexFileNames();
-		indexFileNames = ((OsmandApplication)getApplication()).getResourceManager().getIndexFileNames();
-		((OsmandApplication)getApplication()).getResourceManager().getBackupIndexes(indexFileNames);
+		indexActivatedFileNames = getMyApplication().getResourceManager().getIndexFileNames();
+		indexFileNames = getMyApplication().getResourceManager().getIndexFileNames();
+		getMyApplication().getResourceManager().getBackupIndexes(indexFileNames);
 	}
-	
 
 	private void downloadIndexList() {
 		showDialog(DIALOG_PROGRESS_LIST);
@@ -716,7 +715,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				}
 				// reindex vector maps all at one time
 				if (vectorMapsToReindex) {
-					ResourceManager manager = ((OsmandApplication) getApplication()).getResourceManager();
+					ResourceManager manager = getMyApplication().getResourceManager();
 					List<String> warnings = manager.indexingMaps(progress);
 					if (warnings.isEmpty() && !OsmandSettings.getOsmandSettings(getApplicationContext()).MAP_VECTOR_DATA.get()) {
 						warnings.add(getString(R.string.binary_map_download_success));
