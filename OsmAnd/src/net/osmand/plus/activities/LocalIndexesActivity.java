@@ -38,7 +38,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -74,7 +73,13 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.local_index_descr_title, R.drawable.tab_settings_screen_icon);
+		CustomTitleBar titleBar = new CustomTitleBarWithExtraButton(this, R.string.local_index_descr_title, R.drawable.tab_download_screen_icon, new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				asyncLoader.setResult(null);
+				startActivity(new Intent(LocalIndexesActivity.this, DownloadIndexActivity.class));
+			}
+		});
 		setContentView(R.layout.local_index);
 		titleBar.afterSetContentView();
 		settings = OsmandSettings.getOsmandSettings(this);
@@ -82,14 +87,13 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		listAdapter = new LocalIndexesAdapter();
 		
 		
-		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener() {
-
+		/*findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				asyncLoader.setResult(null);
 				startActivity(new Intent(LocalIndexesActivity.this, DownloadIndexActivity.class));
 			}
-		});
+		});*/
 		
 		getExpandableListView().setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
 			@Override
@@ -619,7 +623,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 				closeSelectionMode();
 			}
 		});
-		findViewById(R.id.DownloadButton).setVisibility(View.GONE);
+//		findViewById(R.id.DownloadButton).setVisibility(View.GONE);
 		findViewById(R.id.FillLayoutStart).setVisibility(View.VISIBLE);
 		findViewById(R.id.FillLayoutEnd).setVisibility(View.VISIBLE);
 		findViewById(R.id.DescriptionText).setVisibility(View.GONE);
@@ -643,7 +647,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 	
 	private void closeSelectionMode(){
 		selectionMode = false;
-		findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+//		findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
 		findViewById(R.id.DescriptionText).setVisibility(View.VISIBLE);
 		findViewById(R.id.FillLayoutStart).setVisibility(View.GONE);
 		findViewById(R.id.FillLayoutEnd).setVisibility(View.GONE);
@@ -723,7 +727,8 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 
 	
 
-	protected class LocalIndexesAdapter extends BaseExpandableListAdapter {
+	protected class LocalIndexesAdapter extends OsmandBaseExpandableListAdapter {
+		
 		Map<LocalIndexInfo, List<LocalIndexInfo>> data = new LinkedHashMap<LocalIndexInfo, List<LocalIndexInfo>>();
 		List<LocalIndexInfo> category = new ArrayList<LocalIndexInfo>();
 		List<LocalIndexInfo> filterCategory = null;
@@ -908,14 +913,8 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			if (group.isBackupedData()) {
 				t.append(" - ").append(getString(R.string.local_indexes_cat_backup));
 			}
+			adjustIndicator(groupPosition, isExpanded, v);
 			TextView nameView = ((TextView) v.findViewById(R.id.local_index_category_name));
-			t.append("  [").append(getChildrenCount(groupPosition));
-			if(getString(R.string.local_index_items).length() > 0){
-				t.append(" ").append(getString(R.string.local_index_items));
-			}
-			if(getString(R.string.local_index_items).length() > 0){
-				t.append(" ").append(getString(R.string.local_index_items));
-			}
 			List<LocalIndexInfo> list = data.get(group);
 			int size = 0;
 			for(int i=0; i<list.size(); i++){
@@ -929,9 +928,8 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			}
 			size = size / (1 << 10);
 			if(size > 0){
-				t.append(", ").append(size).append(" MB");
+				t.append(" [").append(size).append(" MB]");
 			}
-			t.append("]");
 			nameView.setText(t.toString());
 			if (!group.isBackupedData()) {
 				nameView.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);

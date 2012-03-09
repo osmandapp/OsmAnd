@@ -59,7 +59,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
@@ -129,7 +128,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			downloadListIndexThread = new DownloadIndexListThread(Version.getVersionAsURLParam(this));
 		}
 		// recreation upon rotation is prevented in manifest file
-		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.local_index_download, R.drawable.tab_settings_screen_icon);
+		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.local_index_download, R.drawable.tab_download_screen_icon);
 		setContentView(R.layout.download_index);
 		titleBar.afterSetContentView();
 	    tracker = GoogleAnalyticsTracker.getInstance();
@@ -833,7 +832,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	}
 	
 
-	protected class DownloadIndexAdapter extends BaseExpandableListAdapter implements Filterable {
+	protected class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implements Filterable {
 		
 		private DownloadIndexFilter myFilter;
 		private final Map<String, IndexItem> indexFiles;
@@ -964,6 +963,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			TextView item = (TextView) row.findViewById(R.id.download_index_category_name);
 			item.setText(group.name);
 			item.setLinkTextColor(Color.YELLOW);
+			adjustIndicator(groupPosition, isExpanded, v);
 			return row;
 		}
 

@@ -471,7 +471,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 	}
 	
 
-	class FavouritesAdapter extends BaseExpandableListAdapter {
+	class FavouritesAdapter extends OsmandBaseExpandableListAdapter {
 
 		Map<String, List<FavouritePoint>> sourceFavoriteGroups;
 		Map<String, List<FavouritePoint>> favoriteGroups = new LinkedHashMap<String, List<FavouritePoint>>();
@@ -568,16 +568,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 				LayoutInflater inflater = getLayoutInflater();
 				row = inflater.inflate(R.layout.favourites_list_category, parent, false);
 			}
-			ImageView indicator = (ImageView) row.findViewById(R.id.explist_indicator);
-			if (!isExpanded) {
-				if (getChildrenCount(groupPosition) == 0) {
-					indicator.setImageResource(R.drawable.list_activities_dot_marker1_empty);
-				} else {
-					indicator.setImageResource(R.drawable.list_activities_dot_marker1_content);
-				}
-			} else {
-				indicator.setImageResource(R.drawable.list_activities_dot_marker1_pressed);
-			}
+			adjustIndicator(groupPosition, isExpanded, row);
 			TextView label = (TextView) row.findViewById(R.id.category_name);
 			final String model = getGroup(groupPosition);
 			label.setText(model);
@@ -604,7 +595,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			}
 			return row;
 		}
-		
+
 		@Override
 		public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 			View row = convertView;

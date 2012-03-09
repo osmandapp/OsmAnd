@@ -8,9 +8,9 @@
    			android:text="" android:layout_marginLeft = "3dp" android:layout_marginRight = "3dp"
    			android:visibility="gone"/>  
 <LinearLayout android:id="@+id/LoadingPanel" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="3dp">
-   <Button android:id="@+id/DownloadButton" android:layout_width="wrap_content" android:layout_gravity="right" android:layout_height="wrap_content" android:text="@string/local_index_download"
-		android:layout_marginLeft = "3dp" android:layout_marginTop ="3dp" android:layout_marginRight = "3dp"/>
-   <TextView android:id="@+id/DescriptionText"  android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1"
+   <!-- Button android:id="@+id/DownloadButton" android:layout_width="wrap_content" android:layout_gravity="right" android:layout_height="wrap_content" android:text="@string/local_index_download"
+		android:layout_marginLeft = "3dp" android:layout_marginTop ="3dp" android:layout_marginRight = "3dp"/-->
+   <TextView android:id="@+id/DescriptionText"  android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1" android:layout_margin="3dp"
    			android:text="@string/local_index_description"/> 
    <LinearLayout android:id="@+id/FillLayoutStart"  android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1" android:visibility="gone"/>
    <Button android:id="@+id/ActionButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/local_index_download"
@@ -23,8 +23,16 @@
       android:layout_marginRight="5dp"/>
 </LinearLayout>
  
-
-<ExpandableListView android:id="@android:id/list" android:layout_width="fill_parent" android:layout_weight="1" android:layout_height="wrap_content" 
-		android:layout_marginLeft="3dp" android:layout_marginTop="3dp" android:layout_marginRight="3dp" ></ExpandableListView>
+<ExpandableListView
+    android:id="@android:id/list"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_weight="1"
+    android:groupIndicator="@android:color/transparent"
+    style="@style/OsmandListView" >
+</ExpandableListView>
 
 </LinearLayout>
