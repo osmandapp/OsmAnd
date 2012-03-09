@@ -7,6 +7,7 @@ import java.util.TimeZone;
 
 import net.osmand.LogUtil;
 import net.osmand.SunriseSunset;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.DayNightMode;
 
 import org.apache.commons.logging.Log;

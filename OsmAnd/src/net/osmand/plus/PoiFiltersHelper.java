@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.data.AmenityType;
-import net.osmand.plus.activities.OsmandApplication;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

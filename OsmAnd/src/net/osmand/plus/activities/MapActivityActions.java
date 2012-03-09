@@ -19,6 +19,7 @@ import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -212,8 +213,8 @@ public class MapActivityActions implements DialogProvider {
 				double longitude = args.getDouble(KEY_LONGITUDE);
 				String name = editText.getText().toString();
 				mapActivity.getSavingTrackHelper().insertPointData(latitude, longitude, System.currentTimeMillis(), name);
-				if(OsmandSettings.getOsmandSettings(mapActivity).SHOW_CURRENT_GPX_TRACK.get()) {
-					getMyApplication().favorites.addFavoritePointToGPXFile(new FavouritePoint(latitude, longitude, name, ""));
+				if(OsmandApplication.getSettings().SHOW_CURRENT_GPX_TRACK.get()) {
+					getMyApplication().getFavorites().addFavoritePointToGPXFile(new FavouritePoint(latitude, longitude, name, ""));
 				}
 				Toast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_waypoint_dialog_added), name), Toast.LENGTH_SHORT)
 							.show();
@@ -431,7 +432,7 @@ public class MapActivityActions implements DialogProvider {
     
     protected void getDirections(final double lat, final double lon, boolean followEnabled){
     	
-    	final OsmandSettings settings = OsmandSettings.getOsmandSettings(mapActivity);
+    	final OsmandSettings settings = OsmandApplication.getSettings();
     	final RoutingHelper routingHelper = mapActivity.getRoutingHelper();
     	
     	Builder builder = new AlertDialog.Builder(mapActivity);
@@ -563,7 +564,7 @@ public class MapActivityActions implements DialogProvider {
     public void navigateUsingGPX(final ApplicationMode appMode) {
 		final LatLon endForRouting = mapActivity.getPointToNavigate();
 		final MapActivityLayers mapLayers = mapActivity.getMapLayers();
-		final OsmandSettings settings = OsmandSettings.getOsmandSettings(mapActivity);
+		final OsmandSettings settings = OsmandApplication.getSettings();
     	final RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 		mapLayers.selectGPXFileLayer(new CallbackWithObject<GPXFile>() {
 			

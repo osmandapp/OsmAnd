@@ -6,6 +6,7 @@ import java.util.List;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import android.graphics.Canvas;
@@ -48,7 +49,7 @@ public class GPXLayer extends OsmandMapLayer {
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		settings = OsmandSettings.getOsmandSettings(view.getContext());
+		settings = OsmandApplication.getSettings();
 		initUI();
 	}
 

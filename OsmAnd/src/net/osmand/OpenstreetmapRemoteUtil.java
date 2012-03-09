@@ -24,6 +24,7 @@ import net.osmand.osm.EntityInfo;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.io.OsmBaseStorage;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 
@@ -95,8 +96,8 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			HttpConnectionParams.setConnectionTimeout(params, 15000);
 			DefaultHttpClient httpclient = new DefaultHttpClient(params);
 			if (doAuthenticate) {
-				UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(OsmandSettings.getOsmandSettings(ctx).USER_NAME.get() + ":" //$NON-NLS-1$
-						+ OsmandSettings.getOsmandSettings(ctx).USER_PASSWORD.get());
+				UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(OsmandApplication.getSettings().USER_NAME.get() + ":" //$NON-NLS-1$
+						+ OsmandApplication.getSettings().USER_PASSWORD.get());
 				httpclient.getCredentialsProvider().setCredentials(new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT), credentials);
 			}
 			HttpRequestBase method = null;
@@ -175,7 +176,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			connection.setRequestMethod(requestMethod);
 			StringBuilder responseBody = new StringBuilder();
 			if (doAuthenticate) {
-				String token = OsmandSettings.getOsmandSettings(ctx).USER_NAME.get() + ":" + OsmandSettings.getOsmandSettings(ctx).USER_PASSWORD.get(); //$NON-NLS-1$
+				String token = OsmandApplication.getSettings().USER_NAME.get() + ":" + OsmandApplication.getSettings().USER_PASSWORD.get(); //$NON-NLS-1$
 				connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 			connection.setDoInput(true);
@@ -333,7 +334,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				ser.startTag(null, stringAction.get(action));
 				ser.attribute(null, "version", "0.6"); //$NON-NLS-1$ //$NON-NLS-2$
 				ser.attribute(null, "generator", Version.getAppName(ctx)); //$NON-NLS-1$
-				writeNode(n, info, ser, changeSetId, OsmandSettings.getOsmandSettings(ctx).USER_NAME.get());
+				writeNode(n, info, ser, changeSetId, OsmandApplication.getSettings().USER_NAME.get());
 				ser.endTag(null, stringAction.get(action));
 				ser.endTag(null, "osmChange"); //$NON-NLS-1$
 				ser.endDocument();

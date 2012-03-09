@@ -2,10 +2,10 @@ package net.osmand.plus.voice;
 
 import java.io.File;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
-import net.osmand.plus.activities.OsmandApplication;
 import android.app.Activity;
 import android.os.Build;
 
@@ -15,7 +15,7 @@ public class CommandPlayerFactory
 		throws CommandPlayerException
 	{
 		if (voiceProvider != null){
-			File parent = OsmandSettings.getOsmandSettings(ctx).extendOsmandPath(ResourceManager.VOICE_PATH);
+			File parent = OsmandApplication.getSettings().extendOsmandPath(ResourceManager.VOICE_PATH);
 			File voiceDir = new File(parent, voiceProvider);
 			if(!voiceDir.exists()){
 				throw new CommandPlayerException(ctx.getString(R.string.voice_data_unavailable));

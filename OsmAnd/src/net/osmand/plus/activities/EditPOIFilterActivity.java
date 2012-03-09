@@ -11,6 +11,7 @@ import net.osmand.OsmAndFormatter;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapRenderingTypes;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.PoiFiltersHelper;
@@ -62,7 +63,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 			public void onClick(View v) {
 				Bundle extras = getIntent().getExtras();
 				boolean searchNearBy = true;
-				LatLon lastKnownMapLocation = OsmandSettings.getOsmandSettings(EditPOIFilterActivity.this).getLastKnownMapLocation();
+				LatLon lastKnownMapLocation = OsmandApplication.getSettings().getLastKnownMapLocation();
 				double latitude = lastKnownMapLocation != null ? lastKnownMapLocation.getLatitude() : 0;
 				double longitude = lastKnownMapLocation != null ? lastKnownMapLocation.getLongitude() : 0;
 				final Intent newIntent = new Intent(EditPOIFilterActivity.this, SearchPOIActivity.class);

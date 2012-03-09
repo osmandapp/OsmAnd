@@ -12,6 +12,7 @@ import net.osmand.FavouritePoint;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchActivity;
@@ -78,7 +79,7 @@ public class FavouritesListActivity extends TrackedListActivity implements Searc
 				location = ((SearchActivity) getParent()).getSearchPoint();
 			}
 			if (location == null) {
-				location = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+				location = OsmandApplication.getSettings().getLastKnownMapLocation();
 			}
 		}
 		locationUpdate(location);
@@ -128,11 +129,11 @@ public class FavouritesListActivity extends TrackedListActivity implements Searc
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if (which == 0) {
-					OsmandSettings settings = OsmandSettings.getOsmandSettings(FavouritesListActivity.this);
+					OsmandSettings settings = OsmandApplication.getSettings();
 					settings.setMapLocationToShow(entry.getLatitude(), entry.getLongitude(),  settings.getLastKnownMapZoom(), 
 							 null, getString(R.string.favorite)+" : " + entry.getName(), entry); //$NON-NLS-1$
 				} else if (which == 1) {
-					OsmandSettings.getOsmandSettings(FavouritesListActivity.this).setPointToNavigate(entry.getLatitude(),
+					OsmandApplication.getSettings().setPointToNavigate(entry.getLatitude(),
 							entry.getLongitude(), getString(R.string.favorite) + " : " + entry.getName());
 				}
 				MapActivity.launchMapActivityMoveToTop(FavouritesListActivity.this);
@@ -147,7 +148,7 @@ public class FavouritesListActivity extends TrackedListActivity implements Searc
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		
 		if (!isSelectFavoriteMode()) {
-			OsmandSettings settings = OsmandSettings.getOsmandSettings(this);
+			OsmandSettings settings = OsmandApplication.getSettings();
 			FavouritePoint point = favouritesAdapter.getItem(position);
 			settings.SHOW_FAVORITES.set(true);
 			settings.setMapLocationToShow(point.getLatitude(), point.getLongitude(), settings.getLastKnownMapZoom(), null,

@@ -8,6 +8,7 @@ import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.LogUtil;
 import net.osmand.osm.LatLon;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandListActivity;
@@ -57,7 +58,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		settings = OsmandSettings.getOsmandSettings(this);
+		settings = OsmandApplication.getSettings();
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.search_by_name);
 
