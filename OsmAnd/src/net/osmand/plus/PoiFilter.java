@@ -16,7 +16,6 @@ import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.IndexConstants;
 import net.osmand.osm.MapUtils;
-import net.osmand.plus.activities.OsmandApplication;
 
 public class PoiFilter {
 	
@@ -148,7 +147,7 @@ public class PoiFilter {
 	
 	public ResultMatcher<Amenity> getResultMatcher(final ResultMatcher<Amenity> matcher){
 		if(nameFilter != null) {
-			final boolean en = OsmandSettings.getOsmandSettings(application).USE_ENGLISH_NAMES.get();
+			final boolean en = OsmandApplication.getSettings().USE_ENGLISH_NAMES.get();
 			return new ResultMatcher<Amenity>() {
 				@Override
 				public boolean publish(Amenity object) {

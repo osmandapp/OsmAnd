@@ -34,9 +34,9 @@ import net.osmand.osm.MapUtils;
 import net.osmand.osm.MultyPolygon;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.RotatedTileBox;
-import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.render.NativeOsmandLibrary.NativeSearchResult;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -95,7 +95,7 @@ public class MapRenderRepositories {
 		this.context = context;
 		this.renderer = new OsmandRenderer(context);
 		handler = new Handler(Looper.getMainLooper());
-		prefs = OsmandSettings.getOsmandSettings(context);
+		prefs = OsmandApplication.getSettings();
 	}
 
 	public Context getContext() {

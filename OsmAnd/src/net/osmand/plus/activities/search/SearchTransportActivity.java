@@ -15,11 +15,11 @@ import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TransportIndexRepository;
 import net.osmand.plus.TransportIndexRepository.RouteInfoLocation;
-import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.activities.TransportRouteHelper;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import android.app.AlertDialog;
@@ -74,7 +74,7 @@ public class SearchTransportActivity extends TrackedListActivity implements Sear
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
-		settings = OsmandSettings.getOsmandSettings(this);
+		settings = OsmandApplication.getSettings();
 		
 		setContentView(R.layout.search_transport);
 		searchTransportLevel = (Button) findViewById(R.id.SearchTransportLevelButton);
@@ -140,7 +140,7 @@ public class SearchTransportActivity extends TrackedListActivity implements Sear
 			startPoint = ((SearchActivity) getParent()).getSearchPoint();
 		}
 		if (startPoint == null) {
-			startPoint = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+			startPoint = OsmandApplication.getSettings().getLastKnownMapLocation();
 		}
 		
 		LatLon pointToNavigate = settings.getPointToNavigate();

@@ -33,6 +33,7 @@ import net.osmand.plus.DownloadOsmandIndexesHelper.IndexItem;
 import net.osmand.plus.IndexFileList;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -184,7 +185,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		} else {
 			downloadIndexList();
 		}
-		if(getPackageName().equals(FREE_VERSION_NAME) && OsmandSettings.getOsmandSettings(this).checkFreeDownloadsNumberZero()){
+		if(getPackageName().equals(FREE_VERSION_NAME) && OsmandApplication.getSettings().checkFreeDownloadsNumberZero()){
 			Builder msg = new AlertDialog.Builder(this);
 			msg.setTitle(R.string.free_version_title);
 			msg.setMessage(getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS+"", ""));
@@ -459,7 +460,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
 	private Collection<String> listAlreadyDownloadedWithAlternatives() {
 		Set<String> files = new TreeSet<String>();
-		File externalStorageDirectory = OsmandSettings.getOsmandSettings(getApplicationContext()).getExternalStorageDirectory();
+		File externalStorageDirectory = OsmandApplication.getSettings().getExternalStorageDirectory();
 		// files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.POI_PATH),POI_INDEX_EXT,POI_INDEX_EXT_ZIP,POI_TABLE_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.APP_DIR),BINARY_MAP_INDEX_EXT,BINARY_MAP_INDEX_EXT_ZIP,BINARY_MAP_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.BACKUP_PATH),BINARY_MAP_INDEX_EXT,BINARY_MAP_INDEX_EXT_ZIP,BINARY_MAP_VERSION));
@@ -498,7 +499,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		String toCheckPostfix = null;
 		boolean unzipDir = false;
 		
-		File externalStorageDirectory = OsmandSettings.getOsmandSettings(getApplicationContext()).getExternalStorageDirectory();
+		File externalStorageDirectory = OsmandApplication.getSettings().getExternalStorageDirectory();
 		if(fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)){
 			parent = new File(externalStorageDirectory, ResourceManager.APP_DIR);
 			toSavePostfix = BINARY_MAP_INDEX_EXT;
@@ -553,7 +554,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
 	protected void downloadFilesCheckFreeVersion() {
 		if (getPackageName().equals(FREE_VERSION_NAME)) {
-			int total = OsmandSettings.getOsmandSettings(this).NUMBER_OF_FREE_DOWNLOADS.get() + entriesToDownload.size();
+			int total = OsmandApplication.getSettings().NUMBER_OF_FREE_DOWNLOADS.get() + entriesToDownload.size();
 			boolean wiki = false;
 			for (DownloadEntry es : entriesToDownload.values()) {
 				if (es.baseName.contains("_wiki")) {
@@ -581,7 +582,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			sz += es.sizeMB;
 		}
 		// get availabile space 
-		File dir = OsmandSettings.getOsmandSettings(this).extendOsmandPath("");
+		File dir = OsmandApplication.getSettings().extendOsmandPath("");
 		double asz = -1;
 		if(dir.canRead()){
 			StatFs fs = new StatFs(dir.getAbsolutePath());
@@ -643,7 +644,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 		public DownloadIndexesAsyncTask(ProgressDialogImplementation progressDialogImplementation) {
 			this.progress = progressDialogImplementation;
-			downloads = OsmandSettings.getOsmandSettings(DownloadIndexActivity.this).NUMBER_OF_FREE_DOWNLOADS;
+			downloads = OsmandApplication.getSettings().NUMBER_OF_FREE_DOWNLOADS;
 		}
 
 		@Override
@@ -718,10 +719,10 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				if (vectorMapsToReindex) {
 					ResourceManager manager = ((OsmandApplication) getApplication()).getResourceManager();
 					List<String> warnings = manager.indexingMaps(progress);
-					if (warnings.isEmpty() && !OsmandSettings.getOsmandSettings(getApplicationContext()).MAP_VECTOR_DATA.get()) {
+					if (warnings.isEmpty() && !OsmandApplication.getSettings().MAP_VECTOR_DATA.get()) {
 						warnings.add(getString(R.string.binary_map_download_success));
 						// Is it proper way to switch every tome to vector data?
-						OsmandSettings.getOsmandSettings(getApplicationContext()).MAP_VECTOR_DATA.set(true);
+						OsmandApplication.getSettings().MAP_VECTOR_DATA.set(true);
 					}
 					if (!warnings.isEmpty()) {
 						return warnings.get(0);

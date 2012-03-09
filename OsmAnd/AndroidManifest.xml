@@ -10,7 +10,7 @@
 	<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="4"/>  
 	
 	<application android:icon="@drawable/icon" android:label="@string/app_name" android:theme="@style/OsmandTheme"
-		android:debuggable="true" android:name="net.osmand.plus.activities.OsmandApplication" android:description="@string/app_description"
+		android:debuggable="true" android:name="net.osmand.plus.OsmandApplication"
 		android:backupAgent="net.osmand.plus.OsmandBackupAgent" android:restoreAnyVersion="true">
 		<activity android:name="net.osmand.plus.activities.MainMenuActivity"
 			android:label="@string/app_name">

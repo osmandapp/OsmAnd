@@ -1,6 +1,5 @@
 package net.osmand.plus;
 
-import net.osmand.plus.activities.OsmandApplication;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;

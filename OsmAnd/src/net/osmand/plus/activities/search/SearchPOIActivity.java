@@ -25,6 +25,7 @@ import net.osmand.osm.LatLon;
 import net.osmand.osm.OpeningHoursParser;
 import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
 import net.osmand.plus.NameFinderPoiFilter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
@@ -32,7 +33,6 @@ import net.osmand.plus.SearchByNameFilter;
 import net.osmand.plus.activities.CustomTitleBar;
 import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.activities.OsmandListActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -126,7 +126,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		showOnMap = (ImageButton) findViewById(R.id.ShowOnMap);
 		showFilter = (ImageButton) findViewById(R.id.ShowFilter);
 		
-		settings = OsmandSettings.getOsmandSettings(this);
+		settings = OsmandApplication.getSettings();
 		
 		searchPOILevel.setOnClickListener(new OnClickListener() {
 			@Override

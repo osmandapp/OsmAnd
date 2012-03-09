@@ -20,6 +20,7 @@ import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.DayNightMode;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -168,7 +169,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		String[] entries;
 		String[] entrieValues;
 		PreferenceScreen screen = getPreferenceScreen();
-		osmandSettings = OsmandSettings.getOsmandSettings(this);
+		osmandSettings = OsmandApplication.getSettings();
 		
 		registerBooleanPreference(osmandSettings.SHOW_VIEW_ANGLE,screen); 
 		registerBooleanPreference(osmandSettings.USE_TRACKBALL_FOR_MOVEMENTS,screen); 

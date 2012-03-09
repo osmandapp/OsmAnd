@@ -14,11 +14,11 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.activities.ApplicationMode;
-import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.activities.search.SearchHistoryHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.render.RenderingRulesStorage;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -33,22 +33,22 @@ import android.os.Environment;
 import android.widget.Toast;
 
 public class OsmandSettings {
-	// GLOBAL instance - make instance global for application
-	// if some problems appear it can be unique for Application (ApplicationContext)
-	private static OsmandSettings INSTANCE;
 	
-	public static OsmandSettings getOsmandSettings(Context ctx) {
-		if (INSTANCE == null) {
-			synchronized (ctx.getApplicationContext()) {
-				if (INSTANCE == null) {
-					INSTANCE = new OsmandSettings((OsmandApplication) ctx.getApplicationContext());
-				}
-			}
-		}
-		return INSTANCE;
+	/**
+	 * Exposes method to override default value of the preference
+	 * @author Alexey Pelykh
+	 *
+	 * @param <T> Type of preference value
+	 */
+	protected interface OsmandPreferenceWithOverridableDefault<T> {
+		/**
+		 * Overrides default value with given
+		 * @param newDefaultValue New default value
+		 */
+		void overrideDefaultValue(T newDefaultValue);
 	}
 	
-	public interface OsmandPreference<T> {
+	public interface OsmandPreference<T> extends OsmandPreferenceWithOverridableDefault<T> {
 		T get();
 		
 		boolean set(T obj);
@@ -72,8 +72,10 @@ public class OsmandSettings {
 	private List<TileSourceTemplate> internetAvailableSourceTemplates = null;
 	
 	// TODO make all layers profile preferenced????
-	private OsmandSettings(OsmandApplication ctx){
-		this.ctx = ctx;
+	protected OsmandSettings(OsmandApplication application) {
+		ctx = application;
+		
+		//TODO: Is it really intended to keep settings WORLD_READABLE?
 		globalPreferences = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		// start from default settings
 		currentMode = ApplicationMode.DEFAULT;
@@ -108,6 +110,11 @@ public class OsmandSettings {
 		@Override
 		public ApplicationMode get() {
 			return currentMode;
+		}
+		
+		@Override
+		public void overrideDefaultValue(ApplicationMode newDefaultValue) {
+			throw new UnsupportedOperationException();
 		}
 
 		@Override
@@ -234,6 +241,11 @@ public class OsmandSettings {
 			}
 		}
 		
+		@Override
+		public void overrideDefaultValue(T newDefaultValue) {
+			this.defaultValue = newDefaultValue;
+		}
+		
 		protected abstract T getValue(SharedPreferences prefs, T defaultValue);
 		
 		protected abstract boolean setValue(SharedPreferences prefs, T val);
@@ -285,7 +297,6 @@ public class OsmandSettings {
 		protected boolean setValue(SharedPreferences prefs, Boolean val) {
 			return prefs.edit().putBoolean(getId(), val).commit();
 		}
-
 	}
 	private class IntPreference extends CommonPreference<Integer> {
 

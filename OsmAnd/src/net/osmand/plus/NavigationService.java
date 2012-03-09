@@ -3,7 +3,6 @@ package net.osmand.plus;
 
 import net.osmand.Version;
 import net.osmand.plus.activities.LiveMonitoringHelper;
-import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import android.app.AlarmManager;
@@ -91,7 +90,7 @@ public class NavigationService extends Service implements LocationListener {
 		// initializing variables
 		setForeground(true);
 		handler = new Handler();
-		settings = OsmandSettings.getOsmandSettings(this);
+		settings = OsmandApplication.getSettings();
 		serviceOffInterval = settings.SERVICE_OFF_INTERVAL.get();
 		serviceOffProvider = settings.SERVICE_OFF_PROVIDER.get();
 		serviceError = settings.SERVICE_OFF_WAIT_INTERVAL.get();
