@@ -713,7 +713,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 					if(mapView.getZoom() != z && !mapView.mapIsAnimating()){
 						long now = System.currentTimeMillis();
 						// prevent ui hysteresis (check time interval for autozoom)
-						if((lastTimeAutoZooming - now) > 6500){
+						if(Math.abs(mapView.getZoom() - z) > 1 || (now - lastTimeAutoZooming) > 6500){
 							lastTimeAutoZooming = now;
 							mapView.setZoom(z);
 						}
