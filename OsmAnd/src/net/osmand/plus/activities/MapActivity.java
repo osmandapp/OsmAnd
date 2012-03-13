@@ -621,7 +621,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 			if(locationLayer.getLastKnownLocation() != null){
 				Location lastKnownLocation = locationLayer.getLastKnownLocation();
 				AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
-				int fZoom = mapView.getZoom() < 14 ? 14 : mapView.getZoom();
+				int fZoom = mapView.getZoom() < 13 ? 13 : mapView.getZoom();
 				thread.startMoving( lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), fZoom, false);
 			}
 		}
