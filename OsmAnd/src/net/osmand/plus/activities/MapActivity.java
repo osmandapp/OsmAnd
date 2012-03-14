@@ -64,6 +64,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings.Secure;
 import android.util.Log;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -739,20 +740,26 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 	}
 
 	public int defineZoomFromSpeed(float speed, int currentZoom){
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+		//correct for roughly constant "look ahead" distance on different screens, see Issue 914
+		int screenSizeCorrection = (int)Math.round(Math.log(((float)metrics.heightPixels)/320.0f) / Math.log(2.0f)); 
+
 		speed *= 3.6;
    	 	if(speed < 5){
 			return currentZoom;
 		// less than 23: show zoom 17 
 		} else if(speed < 23){
-			return 17;
+			return 17 + screenSizeCorrection;
 		} else if(speed < 43){
-			return 16;
+			return 16 + screenSizeCorrection;
 		} else if(speed < 63){
-			return 15;
+			return 15 + screenSizeCorrection;
 		} else if(speed < 83){
-			return 14;
+			return 14 + screenSizeCorrection;
 		}
-		return 13;
+		return 13 + screenSizeCorrection;
 	}
 
 	public void navigateToPoint(LatLon point){
