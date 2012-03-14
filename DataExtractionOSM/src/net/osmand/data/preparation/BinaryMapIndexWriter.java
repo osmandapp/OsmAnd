@@ -165,6 +165,7 @@ public class BinaryMapIndexWriter {
 	private int writeInt32Size() throws IOException {
 		long filePointer = getFilePointer();
 		BinaryFileReference ref = stackSizes.pop();
+		codedOutStream.flush();
 		int length = ref.writeReference(raf, filePointer);
 		return length;
 	}
@@ -203,7 +204,8 @@ public class BinaryMapIndexWriter {
 	public void endWriteMapLevelIndex() throws IOException {
 		popState(MAP_ROOT_LEVEL_INIT);
 		stackBounds.pop();
-		writeInt32Size();
+		int len = writeInt32Size();
+		log.info("MAP level SIZE : " + len);
 	}
 
 	public void writeMapEncodingRules(Map<String, MapRulType> types) throws IOException {
@@ -267,7 +269,9 @@ public class BinaryMapIndexWriter {
 		stackBounds.push(new Bounds(leftX, rightX, topY, bottomY));
 		BinaryFileReference ref = null;
 		if (containsLeaf) {
+			codedOutStream.writeTag(MapDataBox.SHIFTTOMAPDATA_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 			ref = BinaryFileReference.createShiftReference(getFilePointer(), fp);
+			codedOutStream.writeFixed32NoTag(0);
 		}
 		return ref;
 	}
@@ -294,7 +298,7 @@ public class BinaryMapIndexWriter {
 
 	public void writeMapDataBlock(MapDataBlock.Builder builder, Map<String, Integer> stringTable, BinaryFileReference ref)
 			throws IOException {
-		checkPeekState(MAP_INDEX_INIT);
+		checkPeekState(MAP_ROOT_LEVEL_INIT);
 		StringTable.Builder bs = OsmandOdb.StringTable.newBuilder();
 		for (String s : stringTable.keySet()) {
 			bs.addS(s);
@@ -304,11 +308,11 @@ public class BinaryMapIndexWriter {
 		int size = st.getSerializedSize();
 		STRING_TABLE_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapDataBlock.STRINGTABLE_FIELD_NUMBER)
 				+ CodedOutputStream.computeRawVarint32Size(size) + size;
-
+		codedOutStream.flush();
 		ref.writeReference(raf, getFilePointer());
 		MapDataBlock block = builder.build();
 		MAP_DATA_SIZE += block.getSerializedSize();
-		codedOutStream.writeMessage(OsmAndMapIndex.BLOCKS_FIELD_NUMBER, block);
+		codedOutStream.writeMessage(OsmAndMapIndex.MapRootLevel.BLOCKS_FIELD_NUMBER, block);
 	}
 
 	/**
@@ -333,7 +337,7 @@ public class BinaryMapIndexWriter {
 
 	private TByteArrayList mapDataBuf = new TByteArrayList();
 
-	public void writeMapData(long diffId, int pleft, int ptop, boolean area, byte[] coordinates, byte[] innerPolygonTypes, byte[] types,
+	public MapData writeMapData(long diffId, int pleft, int ptop, boolean area, byte[] coordinates, byte[] innerPolygonTypes, byte[] types,
 			byte[] additionalTypes, Map<MapRulType, String> names, Map<String, Integer> stringTable, MapDataBlock.Builder dataBlock)
 			throws IOException {
 
@@ -413,7 +417,7 @@ public class BinaryMapIndexWriter {
 
 		data.setId(diffId);
 		ID_SIZE += CodedOutputStream.computeSInt64Size(OsmandOdb.MapData.ID_FIELD_NUMBER, diffId);
-
+		return data.build();
 	}
 
 	public void startWriteAddressIndex(String name) throws IOException {
@@ -444,6 +448,7 @@ public class BinaryMapIndexWriter {
 			BinaryFileReference ref = res.get(entry.getKey());
 			
 			codedOutStream.writeTag(OsmAndAddressNameIndexData.ATOM_FIELD_NUMBER, FieldType.MESSAGE.getWireType());
+			codedOutStream.flush();
 			long pointer = getFilePointer();
 			if(ref != null) {
 				ref.writeReference(raf, getFilePointer());
@@ -520,6 +525,7 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeTag(CitiesIndex.BLOCKS_FIELD_NUMBER, FieldType.MESSAGE.getWireType());
 		long startMessage = getFilePointer();
 		long startCityBlock = ref.getStartPointer();
+		codedOutStream.flush();
 		ref.writeReference(raf, startMessage);
 		CityBlockIndex.Builder cityInd = OsmandOdb.CityBlockIndex.newBuilder();
 		cityInd.setShiftToCityIndex((int) (startMessage - startCityBlock));
@@ -881,6 +887,7 @@ public class BinaryMapIndexWriter {
 		for(Map.Entry<String, Set<PoiTileBox>> e : namesIndex.entrySet()) {
 			codedOutStream.writeTag(OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 			BinaryFileReference nameTableRef = indexedTable.get(e.getKey());
+			codedOutStream.flush();
 			nameTableRef.writeReference(raf, getFilePointer());
 			
 			OsmAndPoiNameIndex.OsmAndPoiNameIndexData.Builder builder = OsmAndPoiNameIndex.OsmAndPoiNameIndexData.newBuilder();

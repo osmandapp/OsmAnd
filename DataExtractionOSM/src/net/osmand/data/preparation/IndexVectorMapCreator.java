@@ -22,6 +22,7 @@ import java.util.Map;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
+import net.osmand.binary.OsmandOdb.MapData;
 import net.osmand.binary.OsmandOdb.MapDataBlock;
 import net.osmand.data.Boundary;
 import net.osmand.data.MapAlgorithms;
@@ -540,6 +541,9 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 			writer.startWriteMapIndex(regionName);
 			// write map encoding rules
 			writer.writeMapEncodingRules(renderingTypes.getEncodingRuleTypes());
+			
+			PreparedStatement selectData = mapConnection
+					.prepareStatement("SELECT area, coordinates, innerPolygons, types, additionalTypes, name FROM binary_map_objects WHERE id = ?");
 
 			// write map levels and map index
 			TLongObjectHashMap<BinaryFileReference> bounds = new TLongObjectHashMap<BinaryFileReference>();
@@ -552,24 +556,14 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					writer.startWriteMapLevelIndex(mapZooms.getLevel(i).getMinZoom(), mapZooms.getLevel(i).getMaxZoom(),
 							rootBounds.getMinX(), rootBounds.getMaxX(), rootBounds.getMinY(), rootBounds.getMaxY());
 					writeBinaryMapTree(root, rootBounds, rtree, writer, bounds);
+					
+					writeBinaryMapBlock(root, rtree, writer, selectData, bounds, new LinkedHashMap<String, Integer>(),
+								new LinkedHashMap<MapRenderingTypes.MapRulType, String>());
 
 					writer.endWriteMapLevelIndex();
 				}
 			}
-			// write map data blocks
 
-			PreparedStatement selectData = mapConnection
-					.prepareStatement("SELECT area, coordinates, innerPolygons, types, additionalTypes, name FROM binary_map_objects WHERE id = ?");
-			for (int i = 0; i < mapZooms.size(); i++) {
-				RTree rtree = mapTree[i];
-				long rootIndex = rtree.getFileHdr().getRootIndex();
-				rtree.Node root = rtree.getReadNode(rootIndex);
-				Rect rootBounds = calcBounds(root);
-				if (rootBounds != null) {
-					writeBinaryMapBlock(root, rtree, writer, selectData, bounds, new LinkedHashMap<String, Integer>(),
-							new LinkedHashMap<MapRenderingTypes.MapRulType, String>());
-				}
-			}
 
 			selectData.close();
 
@@ -642,8 +636,11 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					}
 					tempNames.clear();
 					decodeNames(rs.getString(6), tempNames);
-					writer.writeMapData(cid - baseId, re.getMinX(), re.getMinY(), rs.getBoolean(1), rs.getBytes(2), rs.getBytes(3),
+					MapData mapData = writer.writeMapData(cid - baseId, re.getMinX(), re.getMinY(), rs.getBoolean(1), rs.getBytes(2), rs.getBytes(3),
 							rs.getBytes(4), rs.getBytes(5), tempNames, tempStringTable, dataBlock);
+					if(mapData != null) {
+						dataBlock.addDataObjects(mapData);
+					}
 				} else {
 					logMapDataWarn.error("Something goes wrong with id = " + id); //$NON-NLS-1$
 				}

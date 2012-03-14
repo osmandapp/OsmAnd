@@ -46,7 +46,7 @@ public class BinaryInspector {
 //		inspector(new String[]{"-v","C:\\Users\\tpd\\osmand\\Housenumbers.obf"});
 		//inspector(new String[]{"/home/victor/projects/OsmAnd/data/osm-gen/saved/Belarus-newzooms-new-rt.obf"});
 //		inspector(new String[]{"/home/victor/projects/OsmAnd/download/spain/Spain_europe_1_small.obf"});
-		inspector(new String[]{"/home/victor/projects/OsmAnd/download/spain/Spain_europe_1.obf"});
+		inspector(new String[]{"/home/victor/projects/OsmAnd/data/osm-gen/Luxembourg.obf"});
 		
 		
 		// test case extract parts

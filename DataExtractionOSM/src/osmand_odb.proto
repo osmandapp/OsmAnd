@@ -96,6 +96,14 @@ message OsmAndMapIndex {
 		required int32 bottom = 6;
 
 		repeated MapDataBox boxes = 7;
+
+		repeated MapDataBlocks blocks = 8;
+	}
+
+	message MapDataBlocks {
+		// based coordinates can be specified
+		// for an array of blocks
+		repeated MapDataBlock block = 6;
 	}
 
 	message MapDataBox {
@@ -110,13 +118,6 @@ message OsmAndMapIndex {
 		optional bool ocean = 6;
 
 		repeated MapDataBox boxes = 7;
-	}
-
-	repeated MapDataBlocks blocks = 7;
-	message MapDataBlocks {
-		// based coordinates can be specified
-		// for an array of blocks
-		repeated MapDataBlock block = 6;
 	}
 }
 

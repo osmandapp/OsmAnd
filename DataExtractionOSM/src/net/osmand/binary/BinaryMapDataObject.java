@@ -10,9 +10,6 @@ public class BinaryMapDataObject {
 	protected int stringId = -1;
 	protected long id = 0;
 	
-	protected long[] restrictions = null;
-	protected int highwayAttributes = 0;
-	
 	protected String name;
 	
 	protected MapIndex mapIndex = null;
@@ -66,10 +63,6 @@ public class BinaryMapDataObject {
 	}
 	
 	
-	public int getHighwayAttributes() {
-		return highwayAttributes;
-	}
-	
 	public MapIndex getMapIndex() {
 		return mapIndex;
 	}
@@ -78,10 +71,6 @@ public class BinaryMapDataObject {
 		this.mapIndex = mapIndex;
 	}
 	
-	protected void setHighwayAttributes(int highwayAttributes) {
-		this.highwayAttributes = highwayAttributes;
-	}
-
 	public int getPointsLength(){
 		if(coordinates == null){
 			return 0;
@@ -95,31 +84,6 @@ public class BinaryMapDataObject {
 	public int getPoint31XTile(int ind) {
 		return coordinates[2 * ind];
 	}
-	
-	public int getRestrictionCount(){
-		if(restrictions == null){
-			return 0;
-		}
-		return restrictions.length;
-	}
-	
-	
-	protected void setRestrictions(long[] restrictions) {
-		this.restrictions = restrictions;
-	}
-	
-	protected long[] getRestrictions() {
-		return restrictions;
-	}
-	
-	public byte getRestrictionType(int k){
-		return (byte) (restrictions[k] & 7);
-	}
-	
-	public long getRestriction(int k){
-		long l = restrictions[k];
-		return ((l >> 3) << 1) | (id & 1l);
-	} 
 	
 
 }

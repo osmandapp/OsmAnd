@@ -12,6 +12,7 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -28,6 +29,9 @@ import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
+import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapDataBox;
+import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapEncodingRule;
+import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapRootLevel;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.Building;
@@ -125,6 +129,7 @@ public class BinaryMapIndexReader {
 				break;
 			case OsmandOdb.OsmAndStructure.DATECREATED_FIELD_NUMBER :
 				dateCreated = codedIS.readInt64();
+				log.info("Map was created " +new Date(dateCreated));
 				break;
 			case OsmandOdb.OsmAndStructure.MAPINDEX_FIELD_NUMBER:
 				MapIndex mapIndex = new MapIndex();
@@ -584,17 +589,7 @@ public class BinaryMapIndexReader {
 			case 0:
 				// encoding rules are required!
 				if(index.encodingRules.isEmpty()){
-					// init encoding rules by default
-					Map<String, MapRulType> map = MapRenderingTypes.getDefault().getEncodingRuleTypes();
-					for(String tags : map.keySet()){
-						MapRulType rt = map.get(tags);
-						if(rt.getType(null) != 0){
-							initMapEncodingRule(index, rt.getType(null), rt.getSubType(null), tags, null);
-						}
-						for (String value : rt.getValuesSet()) {
-							initMapEncodingRule(index, rt.getType(value), rt.getSubType(value), tags, value);
-						}
-					}
+					throw new IllegalStateException("Encoding rules are not defined for the map index");
 				}
 				return;
 			case OsmandOdb.OsmAndMapIndex.NAME_FIELD_NUMBER :
@@ -624,40 +619,39 @@ public class BinaryMapIndexReader {
 		}
 	}
 	
-	private void initMapEncodingRule(MapIndex index, int type, int subtype, String tag, String val) {
-		int ind = ((subtype << 5) | type);
+	private void initMapEncodingRule(MapIndex index, int type, int id, String tag, String val) {
 		if(!index.encodingRules.containsKey(tag)){
 			index.encodingRules.put(tag, new LinkedHashMap<String, Integer>());
 		}
-		index.encodingRules.get(tag).put(val, ind);
-		if(!index.decodingRules.containsKey(ind)){
-			index.decodingRules.put(ind, new TagValuePair(tag, val));
+		index.encodingRules.get(tag).put(val, id);
+		if(!index.decodingRules.containsKey(id)){
+			index.decodingRules.put(id, new TagValuePair(tag, val));
 		}
 	}
 	
 	private void readMapEncodingRule(MapIndex index) throws IOException {
-		int subtype = 0;
 		int type = 0;
 		String tags = null;
 		String val = null;
+		int id = 0;
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				initMapEncodingRule(index, type, subtype, tags, val);
+				initMapEncodingRule(index, type, id, tags, val);
 				return;
-			case OsmandOdb.MapEncodingRule.VALUE_FIELD_NUMBER :
+			case MapEncodingRule.VALUE_FIELD_NUMBER :
 				val = codedIS.readString().intern();
 				break;
-			case OsmandOdb.MapEncodingRule.TAG_FIELD_NUMBER :
+			case MapEncodingRule.TAG_FIELD_NUMBER :
 				tags = codedIS.readString().intern();
 				break;
-			case OsmandOdb.MapEncodingRule.SUBTYPE_FIELD_NUMBER :
-				subtype = codedIS.readUInt32();
-				break;
-			case OsmandOdb.MapEncodingRule.TYPE_FIELD_NUMBER :
+			case MapEncodingRule.TYPE_FIELD_NUMBER :
 				type = codedIS.readUInt32();
+				break;
+			case MapEncodingRule.ID_FIELD_NUMBER :
+				id = codedIS.readUInt32();
 				break;
 			default:
 				skipUnknownField(t);
@@ -674,25 +668,25 @@ public class BinaryMapIndexReader {
 			switch (tag) {
 			case 0:
 				return root;
-			case OsmandOdb.MapRootLevel.BOTTOM_FIELD_NUMBER :
+			case MapRootLevel.BOTTOM_FIELD_NUMBER :
 				root.bottom = codedIS.readInt32();
 				break;
-			case OsmandOdb.MapRootLevel.LEFT_FIELD_NUMBER :
+			case MapRootLevel.LEFT_FIELD_NUMBER :
 				root.left = codedIS.readInt32();
 				break;
-			case OsmandOdb.MapRootLevel.RIGHT_FIELD_NUMBER :
+			case MapRootLevel.RIGHT_FIELD_NUMBER :
 				root.right = codedIS.readInt32();
 				break;
-			case OsmandOdb.MapRootLevel.TOP_FIELD_NUMBER :
+			case MapRootLevel.TOP_FIELD_NUMBER :
 				root.top = codedIS.readInt32();
 				break;
-			case OsmandOdb.MapRootLevel.MAXZOOM_FIELD_NUMBER :
+			case MapRootLevel.MAXZOOM_FIELD_NUMBER :
 				root.maxZoom = codedIS.readInt32();
 				break;
-			case OsmandOdb.MapRootLevel.MINZOOM_FIELD_NUMBER :
+			case MapRootLevel.MINZOOM_FIELD_NUMBER :
 				root.minZoom = codedIS.readInt32();
 				break;
-			case OsmandOdb.MapRootLevel.ROOT_FIELD_NUMBER :
+			case MapRootLevel.BOXES_FIELD_NUMBER :
 				int length = readInt();
 				int filePointer = codedIS.getTotalBytesRead();
 				if (root.trees != null) {
@@ -707,6 +701,9 @@ public class BinaryMapIndexReader {
 				}
 				codedIS.seek(filePointer + length);
 				break;
+			case MapRootLevel.BLOCKS_FIELD_NUMBER :
+				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+				break;
 			default:
 				skipUnknownField(t);
 				break;
@@ -716,31 +713,26 @@ public class BinaryMapIndexReader {
 	}
 	
 	private void readMapTreeBounds(MapTree tree, int aleft, int aright, int atop, int abottom) throws IOException {
-		int init = 0;
 		while(true){
-			if(init == 0xf){
-				return;
-			}
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
 				return;
-			case OsmandOdb.MapTree.BOTTOM_FIELD_NUMBER :
+			case MapDataBox.BOTTOM_FIELD_NUMBER :
 				tree.bottom = codedIS.readSInt32() + abottom;
-				init |= 1;
 				break;
-			case OsmandOdb.MapTree.LEFT_FIELD_NUMBER :
+			case MapDataBox.LEFT_FIELD_NUMBER :
 				tree.left = codedIS.readSInt32() + aleft;
-				init |= 2;
 				break;
-			case OsmandOdb.MapTree.RIGHT_FIELD_NUMBER :
+			case MapDataBox.RIGHT_FIELD_NUMBER :
 				tree.right = codedIS.readSInt32() + aright;
-				init |= 4;
 				break;
-			case OsmandOdb.MapTree.TOP_FIELD_NUMBER :
+			case MapDataBox.TOP_FIELD_NUMBER :
 				tree.top = codedIS.readSInt32() + atop;
-				init |= 8;
+				break;
+			case MapDataBox.SHIFTTOMAPDATA_FIELD_NUMBER :
+				tree.mapDataBlock = codedIS.readFixed32() + tree.filePointer;
 				break;
 		
 			default:
@@ -825,23 +817,23 @@ public class BinaryMapIndexReader {
 					}
 				}
 				return;
-			case OsmandOdb.MapTree.BOTTOM_FIELD_NUMBER :
+			case MapDataBox.BOTTOM_FIELD_NUMBER :
 				cbottom = codedIS.readSInt32() + pbottom;
 				init |= 1;
 				break;
-			case OsmandOdb.MapTree.LEFT_FIELD_NUMBER :
+			case MapDataBox.LEFT_FIELD_NUMBER :
 				cleft = codedIS.readSInt32() + pleft;
 				init |= 2;
 				break;
-			case OsmandOdb.MapTree.RIGHT_FIELD_NUMBER :
+			case MapDataBox.RIGHT_FIELD_NUMBER :
 				cright = codedIS.readSInt32() + pright;
 				init |= 4;
 				break;
-			case OsmandOdb.MapTree.TOP_FIELD_NUMBER :
+			case MapDataBox.TOP_FIELD_NUMBER :
 				ctop = codedIS.readSInt32() + ptop;
 				init |= 8;
 				break;
-			case OsmandOdb.MapTree.LEAFS_FIELD_NUMBER :
+			case MapDataBox.LEAFS_FIELD_NUMBER :
 				int length = codedIS.readRawVarint32();
 				int oldLimit = codedIS.pushLimit(length);
 				if(lastIndexResult == -1){
@@ -856,7 +848,7 @@ public class BinaryMapIndexReader {
 				}
 				codedIS.popLimit(oldLimit);
 				break;
-			case OsmandOdb.MapTree.SUBTREES_FIELD_NUMBER :
+			case MapDataBox.BOXES_FIELD_NUMBER :
 				// left, ... already initialized 
 				length = readInt();
 				int filePointer = codedIS.getTotalBytesRead();
@@ -989,19 +981,6 @@ public class BinaryMapIndexReader {
 			switch (tag) {
 			case 0:
 				return dataObject;
-			case OsmandOdb.MapData.RESTRICTIONS_FIELD_NUMBER :
-				sizeL = codedIS.readRawVarint32();
-				TLongArrayList list = new TLongArrayList();
-				old = codedIS.pushLimit(sizeL);
-				while(codedIS.getBytesUntilLimit() > 0){
-					list.add(codedIS.readSInt64());
-				}
-				codedIS.popLimit(old);
-				dataObject.restrictions = list.toArray();
-				break;
-			case OsmandOdb.MapData.HIGHWAYMETA_FIELD_NUMBER :
-				dataObject.highwayAttributes = codedIS.readInt32();
-				break;
 			case OsmandOdb.MapData.ID_FIELD_NUMBER :
 				dataObject.id = codedIS.readSInt64();
 				break;
@@ -1284,15 +1263,6 @@ public class BinaryMapIndexReader {
 			return decodingRules.get(((subtype << 5) | type));
 		}
 		
-		public TagValuePair decodeType(int wholeType){
-			if((wholeType & 3) != MapRenderingTypes.POINT_TYPE ){
-				wholeType = (wholeType >> 2) & MapRenderingTypes.MASK_10;
-			} else {
-				wholeType >>= 2;
-			}
-			return decodingRules.get(wholeType);
-		}
-		
 	}
 	
 	public static class TagValuePair {
@@ -1389,6 +1359,8 @@ public class BinaryMapIndexReader {
 	private static class MapTree {
 		int filePointer = 0;
 		int length = 0;
+		
+		long mapDataBlock = 0;
 		
 		int left = 0;
 		int right = 0;

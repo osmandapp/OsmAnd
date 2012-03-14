@@ -6,7 +6,7 @@ public class IndexConstants {
 	// Important : Every time you change schema of db upgrade version!!! 
 	// If you want that new application support old index : put upgrade code in android app ResourceManager
 	public final static int POI_TABLE_VERSION = 1;
-	public final static int BINARY_MAP_VERSION = 1; // starts with 1
+	public final static int BINARY_MAP_VERSION = 2; // starts with 1
 	public final static int VOICE_VERSION = 0; //supported download versions
 	public final static int TTSVOICE_VERSION = 1; //supported download versions
 	
