@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="use_fluorescent_overlays">Fluorescentní barvy</string>
+	<string name="use_fluorescent_overlays_descr">Použít fluorescentní barvy pro zobrazení cest a tras</string>
 	<string name="offline_poi_edition">Offline editace POI</string>
 	<string name="offline_poi_edition_descr">Vždy používat offline editaci POI</string>
 
