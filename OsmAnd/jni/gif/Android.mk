@@ -18,7 +18,7 @@ LOCAL_C_INCLUDES += \
 
 LOCAL_CFLAGS += -Wno-format -DHAVE_CONFIG_H
 
-ifneq ($(OSMAND_NEON),true)
+ifneq ($(OSMAND_BUILDING_NEON_LIBRARY),true)
 LOCAL_MODULE := libgif
 else
 LOCAL_MODULE := libgif_neon

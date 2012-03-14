@@ -13,7 +13,7 @@ ifeq ($(OSMAND_SKIA_ABS),)
 endif
 
 # Name of the local module
-ifneq ($(OSMAND_NEON),true)
+ifneq ($(OSMAND_BUILDING_NEON_LIBRARY),true)
 LOCAL_MODULE := osmand
 else
 LOCAL_MODULE := osmand_neon

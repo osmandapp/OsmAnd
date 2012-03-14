@@ -50,7 +50,7 @@ LOCAL_CFLAGS += "-DFT2_BUILD_LIBRARY"
 
 LOCAL_CFLAGS += -O2
 
-ifneq ($(OSMAND_NEON),true)
+ifneq ($(OSMAND_BUILDING_NEON_LIBRARY),true)
 LOCAL_MODULE := libft2_static
 else
 LOCAL_MODULE := libft2_static_neon
