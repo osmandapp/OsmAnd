@@ -225,6 +225,7 @@ public class RoutingHelper {
 		
 		boolean calculateRoute = false;
 		synchronized (this) {
+			// 0. Route empty or needs to be extended? Then re-calculate route.
 			if(routeNodes.isEmpty() || routeNodes.size() <= currentRoute){
 				calculateRoute = true;
 			} else {
@@ -263,7 +264,7 @@ public class RoutingHelper {
 					}
 				}
 				
-				// 4. evaluate distance to the route and reevaluate if needed
+				// 4. >50m away from current routeNode? Then re-calculate route.
 				if(currentRoute > 0){
 					float bearing = routeNodes.get(currentRoute - 1).bearingTo(routeNodes.get(currentRoute));
 					float bearingMovement = currentLocation.bearingTo(routeNodes.get(currentRoute));
@@ -274,12 +275,12 @@ public class RoutingHelper {
 					}
 				} 
 				
-				// 5. also check bearing by summing distance
+				// 5. Sum distance to last and current route nodes
 				if(!calculateRoute){
 					float d = currentLocation.distanceTo(routeNodes.get(currentRoute));
 					if (d > 80) {
 						if (currentRoute > 0) {
-							// possibly that case is not needed (often it is covered by 4.)
+							// 5a. Greater than 2*distance between them? Then re-calculate route. (Case often covered by 4., but still needed.)
 							float f1 = currentLocation.distanceTo(routeNodes.get(currentRoute - 1)) + d;
 							float c = routeNodes.get(currentRoute - 1).distanceTo(routeNodes.get(currentRoute));
 							if (c * 2 < d + f1) {
@@ -287,7 +288,7 @@ public class RoutingHelper {
 								calculateRoute = true;
 							}
 						} else {
-							// that case is needed
+							// 5b. Too far from route start? Then re-calculate route.
 							log.info("Recalculate route, because too far from start : " + d); //$NON-NLS-1$
 							calculateRoute = true;
 						}
@@ -303,6 +304,12 @@ public class RoutingHelper {
 			}
 		}
 		lastFixedLocation = currentLocation;
+
+		// 8. Strange Direction? Then re-calculate route. (Added new, may possibly even replace triggers 4, 5a, 5b ?)
+		if(suppressTurnPrompt){
+			calculateRoute = true;
+		}
+
 		if(calculateRoute){
 			recalculateRouteInBackground(lastFixedLocation, finalLocation, currentGPXRoute);
 		}
