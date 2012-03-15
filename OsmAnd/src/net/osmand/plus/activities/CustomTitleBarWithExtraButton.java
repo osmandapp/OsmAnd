@@ -17,7 +17,7 @@ public class CustomTitleBarWithExtraButton extends CustomTitleBar {
 
 	@Override
 	protected int getTitleBarLayout() {
-		return R.layout.titlebar;
+		return R.layout.titlebar_extrabutton;
 	}
 	
 	@Override
@@ -27,8 +27,12 @@ public class CustomTitleBarWithExtraButton extends CustomTitleBar {
 		titleImg.setImageResource(getTitleImageRes());
 //		titleImg.setVisibility(View.GONE);
 		
-		titleImg.setBackgroundResource(R.drawable.tab_back_button_background);
+//		titleImg.setPadding(0, 0, 2, 0);
+//		titleImg.getLayoutParams().height = LayoutParams.WRAP_CONTENT;
+//		titleImg.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+//		titleImg.setBackgroundResource(R.drawable.tab_back_button_background);
 		titleImg.setOnClickListener(listener);
+//		titleImg.invalidate();
 //		
 //		Button extraButton = (Button)getActivity().findViewById(R.id.extra_button);
 //		extraButton.setVisibility(View.VISIBLE);
