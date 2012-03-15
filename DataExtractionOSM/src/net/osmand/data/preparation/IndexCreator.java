@@ -625,14 +625,14 @@ public class IndexCreator {
 		
 		long time = System.currentTimeMillis();
 		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/data/osm-gen/")); //$NON-NLS-1$
-		creator.setIndexMap(true);
-		creator.setIndexAddress(false);
+		creator.setIndexMap(false);
+		creator.setIndexAddress(true);
 		creator.setIndexPOI(false);
 		creator.setIndexTransport(false);
 
 		creator.recreateOnlyBinaryFile = false;
-		creator.deleteDatabaseIndexes = true;
-//		creator.deleteOsmDB = true;
+		creator.deleteDatabaseIndexes = false;
+//		creator.deleteOsmDB = false;
 				
 		creator.setZoomWaySmothness(2);
 		MapRenderingTypes rt = MapRenderingTypes.getDefault();// new MapRenderingTypes("/home/victor/projects/OsmAnd/data/testdata/roads_rendering_types.xml");

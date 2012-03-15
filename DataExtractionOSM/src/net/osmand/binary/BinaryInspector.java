@@ -46,7 +46,7 @@ public class BinaryInspector {
 //		inspector(new String[]{"-v","C:\\Users\\tpd\\osmand\\Housenumbers.obf"});
 		//inspector(new String[]{"/home/victor/projects/OsmAnd/data/osm-gen/saved/Belarus-newzooms-new-rt.obf"});
 //		inspector(new String[]{"/home/victor/projects/OsmAnd/download/spain/Spain_europe_1_small.obf"});
-		inspector(new String[]{"/home/victor/projects/OsmAnd/data/osm-gen/Luxembourg.obf"});
+		inspector(new String[]{"-vaddress", "/home/victor/projects/OsmAnd/data/osm-gen/Luxembourg.obf"});
 		
 		
 		// test case extract parts
@@ -470,31 +470,31 @@ public class BinaryInspector {
 				} else if (p instanceof AddressRegion && (verbose != null && verbose.isVaddress())) {
 					for(String region : index.getRegionNames()){
 						println("\tRegion:" + region);
-						for (City c : index.getCities(region, null)) {
-							index.preloadStreets(c, null);
-							println("\t\tCity:" + c.getName() + getId(c));
-							for (Street t : c.getStreets()) {
-								if (verbose.contains(t)) {
-									print("\t\t\t" + t.getName() + getId(t));
-									index.preloadBuildings(t, null);
-									List<Building> buildings = t.getBuildings();
-									if (buildings != null && !buildings.isEmpty()) {
-										print("\t\t\t\t (");
-										for (Building b : buildings) {
-											print(b.getName() + ",");
-										}
-										print(")");
-									}
-									println("");
-								}
-							}
-						}
-						for (City c : index.getVillages(region, null,null,false)) {
-							if (verbose.contains(c)) {
+						int[] cityType = new int[] {BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE,
+								BinaryMapAddressReaderAdapter.POSTCODES_TYPE, 
+								BinaryMapAddressReaderAdapter.VILLAGES_TYPE};
+						for (int j = 0; j < cityType.length; j++) {
+							int type = cityType[j];
+							for (City c : index.getCities(region, null, type)) {
+								println("\t\t"  + c + getId(c));
 								index.preloadStreets(c, null);
-								println("\t\tVillage:" + c.getName() + getId(c));
 								for (Street t : c.getStreets()) {
-									println("\t\t\t" + t.getName() + getId(t));
+									if (verbose.contains(t)) {
+										print("\t\t\t" + t.getName() + getId(t));
+//										if (type == BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE) {
+											index.preloadBuildings(t, null);
+											List<Building> buildings = t.getBuildings();
+											if (buildings != null && !buildings.isEmpty()) {
+												print("\t\t\t\t (");
+												for (Building b : buildings) {
+													print(b.getName() + ",");
+												}
+												print(")");
+											}
+//										}
+										println("");
+									}
+									
 								}
 							}
 						}
@@ -512,6 +512,9 @@ public class BinaryInspector {
 	}
 	
 	private static String getId(MapObject o ){
+		if(o.getId() == null) {
+			return " no id " ;
+		}
 		return " " + (o.getId() >> 1);
 	}
 

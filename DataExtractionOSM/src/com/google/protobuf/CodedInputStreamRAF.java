@@ -76,6 +76,7 @@ public final class CodedInputStreamRAF {
 
     lastTag = readRawVarint32();
     if (WireFormat.getTagFieldNumber(lastTag) == 0) {
+    	System.out.println(getTotalBytesRead());
       // If we actually read zero (or any tag number corresponding to field
       // number zero), that's not a valid tag.
       throw InvalidProtocolBufferException.invalidTag();

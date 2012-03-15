@@ -32,7 +32,6 @@ import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.MapObject;
-import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.data.WayBoundary;
 import net.osmand.data.preparation.DBStreetDAO.SimpleStreet;
@@ -848,19 +847,19 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		progress.startTask(Messages.getString("IndexCreator.SERIALIZING_ADRESS"), cityTowns.size() + villages.size() / 100 + 1); //$NON-NLS-1$
 		
 		Map<String, List<MapObject>> namesIndex = new TreeMap<String, List<MapObject>>(Collator.getInstance());
-		Map<String, PostCode> postcodes = new TreeMap<String, PostCode>();
+		Map<String, City> postcodes = new TreeMap<String, City>();
 		writeCityBlockIndex(writer, CITIES_TYPE,  streetstat, waynodesStat, suburbs, cityTowns, postcodes, namesIndex, progress);
 		writeCityBlockIndex(writer, VILLAGES_TYPE,  streetstat, waynodesStat, null, villages, postcodes, namesIndex, progress);
 		
 		// write postcodes		
 		List<BinaryFileReference> refs = new ArrayList<BinaryFileReference>();		
 		writer.startCityBlockIndex(POSTCODES_TYPE);
-		ArrayList<PostCode> posts = new ArrayList<PostCode>(postcodes.values());
-		for (PostCode s : posts) {
+		ArrayList<City> posts = new ArrayList<City>(postcodes.values());
+		for (City s : posts) {
 			refs.add(writer.writeCityHeader(s, -1));
 		}
 		for (int i = 0; i < posts.size(); i++) {
-			PostCode postCode = posts.get(i);
+			City postCode = posts.get(i);
 			BinaryFileReference ref = refs.get(i);
 			putNamedMapObject(namesIndex, postCode, ref.getStartPointer());
 			writer.writeCityIndex(postCode, new ArrayList<Street>(postCode.getStreets()), null, ref);
@@ -900,20 +899,20 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 
 
 	private void writeCityBlockIndex(BinaryMapIndexWriter writer, int type, PreparedStatement streetstat, PreparedStatement waynodesStat,
-			List<City> suburbs, List<City> cities, Map<String, PostCode> postcodes, Map<String, List<MapObject>> namesIndex, IProgress progress)			
-					throws IOException, SQLException {
-		List<BinaryFileReference> refs = new ArrayList<BinaryFileReference>();		
+			List<City> suburbs, List<City> cities, Map<String, City> postcodes, Map<String, List<MapObject>> namesIndex, IProgress progress)			
+			throws IOException, SQLException {
+		List<BinaryFileReference> refs = new ArrayList<BinaryFileReference>();
 		// 1. write cities
 		writer.startCityBlockIndex(type);
 		for (City c : cities) {
 			refs.add(writer.writeCityHeader(c, c.getType().ordinal()));
 		}
-		for(int i=0; i<cities.size(); i++) {
-		    City city = cities.get(i);
-		    BinaryFileReference ref = refs.get(i);
-		    putNamedMapObject(namesIndex, city, ref.getStartPointer());
-		    if(type == CITIES_TYPE) {
-		    	progress.progress(1);
+		for (int i = 0; i < cities.size(); i++) {
+			City city = cities.get(i);
+			BinaryFileReference ref = refs.get(i);
+			putNamedMapObject(namesIndex, city, ref.getStartPointer());
+			if (type == CITIES_TYPE) {
+				progress.progress(1);
 			} else {
 				if ((cities.size() - i) % 100 == 0) {
 					progress.progress(1);
@@ -941,21 +940,25 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				putNamedMapObject(namesIndex, s, s.getFileOffset());
 				for (Building b : s.getBuildings()) {
 					bCount++;
-					if(city.getPostcode() != null && b.getPostcode() == null) {
+					if (city.getPostcode() != null && b.getPostcode() == null) {
 						b.setPostcode(city.getPostcode());
 					}
 					if (b.getPostcode() != null) {
 						if (!postcodes.containsKey(b.getPostcode())) {
-							PostCode p = new PostCode(b.getPostcode());
+							City p = City.createPostcode(b.getPostcode());
 							p.setLocation(b.getLocation().getLatitude(), b.getLocation().getLongitude());
 							postcodes.put(b.getPostcode(), p);
 						}
-						postcodes.get(b.getPostcode()).registerStreet(s, false);
+						Street newS = new Street(postcodes.get(b.getPostcode()));
+						newS.setEnName(s.getEnName());
+						newS.setName(s.getName());
+						newS.registerBuildings(s.getBuildings());
+						newS.getWayNodes().addAll(s.getWayNodes());
 					}
 				}
 			}
 			if (f > 500) {
-				if(logMapDataWarn != null) {
+				if (logMapDataWarn != null) {
 					logMapDataWarn.info("! " + city.getName() + " ! " + f + " ms " + streets.size() + " streets " + bCount + " buildings");
 				} else {
 					log.info("! " + city.getName() + " ! " + f + " ms " + streets.size() + " streets " + bCount + " buildings");

@@ -47,6 +47,10 @@ public class Street extends MapObject {
 		buildings.add(building);
 	}
 	
+	public void registerBuildings(List<Building> buildings){
+		this.buildings.addAll(buildings);
+	}
+	
 	public List<Building> getBuildings() {
 		return buildings;
 	}

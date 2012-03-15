@@ -27,6 +27,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.StringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
+import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapDataBox;
@@ -37,7 +38,6 @@ import net.osmand.data.AmenityType;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
-import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
@@ -469,67 +469,29 @@ public class BinaryMapIndexReader {
 		throw new IllegalArgumentException(name);
 	}
 	
-	public List<PostCode> getPostcodes(String region, SearchRequest<MapObject> resultMatcher, StringMatcher nameMatcher) throws IOException {
-		List<PostCode> postcodes = new ArrayList<PostCode>();
-		AddressRegion r = getRegionByName(region);
-		if(r.postcodesOffset != -1){
-			codedIS.seek(r.postcodesOffset);
-			int len = readInt();
-			int old = codedIS.pushLimit(len);
-			addressAdapter.readPostcodes(postcodes, resultMatcher, nameMatcher);
-			codedIS.popLimit(old);
-		}
-		return postcodes;
-	}
 	
-	public PostCode getPostcodeByName(String region, String name) throws IOException {
+	public List<City> getCities(String region, SearchRequest<City> resultMatcher, 
+			int cityType) throws IOException {
+		List<City> cities = new ArrayList<City>();
 		AddressRegion r = getRegionByName(region);
-		if (r.postcodesOffset != -1) {
-			codedIS.seek(r.postcodesOffset);
-			int len = readInt();
-			int old = codedIS.pushLimit(len);
-			PostCode p = addressAdapter.findPostcode(name);
-			if (p != null) {
-				return p;
+		for(CitiesBlock block :  r.cities) {
+			if(block.type == cityType) {
+				codedIS.seek(block.filePointer);
+				int old = codedIS.pushLimit(block.length);
+				addressAdapter.readCities(cities, resultMatcher, null, false);
+				codedIS.popLimit(old);
 			}
-			codedIS.popLimit(old);
-		}
-		return null;
-	}
-	
-	public List<City> getCities(String region, SearchRequest<MapObject> resultMatcher) throws IOException {
-		List<City> cities = new ArrayList<City>();
-		AddressRegion r = getRegionByName(region);
-		if(r.citiesOffset != -1){
-			codedIS.seek(r.citiesOffset);
-			int len = readInt();
-			int old = codedIS.pushLimit(len);
-			addressAdapter.readCities(cities, resultMatcher, null, false);
-			codedIS.popLimit(old);
 		}
 		return cities;
 	}
 	
-	public List<City> getVillages(String region, SearchRequest<MapObject> resultMatcher, StringMatcher nameMatcher, boolean useEn) throws IOException {
-		List<City> cities = new ArrayList<City>();
-		AddressRegion r = getRegionByName(region);
-		if(r.villagesOffset != -1){
-			codedIS.seek(r.villagesOffset);
-			int len = readInt();
-			int old = codedIS.pushLimit(len);
-			addressAdapter.readCities(cities, resultMatcher, nameMatcher, useEn);
-			codedIS.popLimit(old);
-		}
-		return cities;
-	}
-
 	
 	public void preloadStreets(City c, SearchRequest<Street> resultMatcher) throws IOException {
 		checkAddressIndex(c.getFileOffset());
 		codedIS.seek(c.getFileOffset());
 		int size = codedIS.readRawVarint32();
 		int old = codedIS.pushLimit(size);
-		addressAdapter.readCity(c, c.getFileOffset(), true, resultMatcher, null, false);
+		addressAdapter.readCityStreets(resultMatcher, c);
 		codedIS.popLimit(old);
 	}
 	
@@ -732,7 +694,7 @@ public class BinaryMapIndexReader {
 				tree.top = codedIS.readSInt32() + atop;
 				break;
 			case MapDataBox.SHIFTTOMAPDATA_FIELD_NUMBER :
-				tree.mapDataBlock = codedIS.readFixed32() + tree.filePointer;
+				tree.mapDataBlock = readInt() + tree.filePointer;
 				break;
 		
 			default:

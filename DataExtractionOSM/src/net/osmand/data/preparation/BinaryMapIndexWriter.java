@@ -53,7 +53,6 @@ import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.data.IndexConstants;
 import net.osmand.data.MapObject;
-import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.data.TransportStop;
 import net.osmand.data.preparation.IndexPoiCreator.PoiTileBox;
@@ -463,12 +462,14 @@ public class BinaryMapIndexWriter {
 				}
 				int type = 1;
 				if (o instanceof City) {
-					CityType ct = ((City) o).getType();
-					if (ct != CityType.CITY && ct != CityType.TOWN) {
-						type = 3;
+					if (((City) o).isPostcode()) {
+						type = 2;
+					} else {
+						CityType ct = ((City) o).getType();
+						if (ct != CityType.CITY && ct != CityType.TOWN) {
+							type = 3;
+						}
 					}
-				} else if(o instanceof PostCode) {
-					type = 2;
 				} else if(o instanceof Street) {
 					type = 4;
 				}
@@ -503,7 +504,9 @@ public class BinaryMapIndexWriter {
 		if(cityType >= 0) {
 			cityInd.setCityType(cityType);
 		}
-		cityInd.setId(city.getId());
+		if(city.getId() != null) {
+			cityInd.setId(city.getId());
+		}
 		
 		cityInd.setName(city.getName());
 		if(checkEnNameToWrite(city)){
@@ -515,11 +518,12 @@ public class BinaryMapIndexWriter {
 		cityInd.setY(cy);
 		cityInd.setShiftToCityBlockIndex(0);
 		codedOutStream.writeMessageNoTag(cityInd.build());
-		return new BinaryFileReference(getFilePointer() - 4, startMessage);
+		codedOutStream.flush();
+		return BinaryFileReference.createShiftReference(getFilePointer() - 4, startMessage);
 		
 	}
 	
-	public void writeCityIndex(MapObject cityOrPostcode, List<Street> streets, Map<Street, List<Node>> wayNodes, 
+	public void writeCityIndex(City cityOrPostcode, List<Street> streets, Map<Street, List<Node>> wayNodes, 
 			BinaryFileReference ref) throws IOException {
 		checkPeekState(CITY_INDEX_INIT);
 		codedOutStream.writeTag(CitiesIndex.BLOCKS_FIELD_NUMBER, FieldType.MESSAGE.getWireType());
@@ -545,7 +549,7 @@ public class BinaryMapIndexWriter {
 				}
 			}
 		}
-		String postcodeFilter = cityOrPostcode instanceof PostCode ? cityOrPostcode.getName() : null;
+		String postcodeFilter = cityOrPostcode.isPostcode() ? cityOrPostcode.getName() : null;
 		for (Street s : streets) {
 			StreetIndex streetInd = createStreetAndBuildings(s, cx, cy, postcodeFilter, mapNodeToStreet, wayNodes);
 			currentPointer += CodedOutputStream.computeTagSize(CityBlockIndex.STREETS_FIELD_NUMBER);

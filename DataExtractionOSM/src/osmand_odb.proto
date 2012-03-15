@@ -187,7 +187,6 @@ message OsmAndAddressIndex {
 	    // the list of the cities and the blocks are synchronized by the order (so even empty block will be written)
 	    repeated CityIndex cities = 5;
 
-    	// encoded as fixed32 length delimited
     	repeated CityBlockIndex blocks = 7;
 	}
 
@@ -231,8 +230,8 @@ message CityIndex {
 	optional string name_en = 3;
 	optional uint64 id = 4;
 	
-	required uint32 x = 5; // x tile of 24 zoom
-	required uint32 y = 6; // y tile of 24 zoom
+	required uint32 x = 5; // x tile of 31 zoom
+	required uint32 y = 6; // y tile of 31 zoom
 	
 	// shift from start CityIndex (without length) to cityBlockIndex
 	optional fixed32 shiftToCityBlockIndex = 10;
