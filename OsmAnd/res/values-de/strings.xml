@@ -496,7 +496,7 @@
 	<string name="phone">Telefon</string>
 	<string name="download_type_to_filter">Filtern nach Typ</string>
 	<string name="use_high_res_maps">Hochauflösende Anzeige</string>
-	<string name="use_high_res_maps_descr">Verbesserte Kartenqualität für hochauflösende Geräte</string>
+	<string name="use_high_res_maps_descr">Unterdückt Streckung (Unschärfe) von Kartenkacheln auf manchen Anzeigen</string>
 	<string name="unknown_location">Position noch nicht ermittelt</string>
 	<string name="download_files">Laden</string>
 	<string name="context_menu_item_search_transport">Suche ÖPNV</string>

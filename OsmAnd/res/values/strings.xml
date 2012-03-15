@@ -500,7 +500,7 @@
 	<string name="phone">phone</string>
 	<string name="download_type_to_filter">type to filter</string>
 	<string name="use_high_res_maps">High resolution display</string>
-	<string name="use_high_res_maps_descr">Improve map display quality for high density devices</string>
+	<string name="use_high_res_maps_descr">Do not stretch (and blur) map tiles on high density displays</string>
 	<string name="unknown_location">Position unknown yet</string>
 	<string name="download_files">Download</string>
 	<string name="context_menu_item_search_transport">Search transport</string>
