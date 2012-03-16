@@ -418,6 +418,10 @@ public class RoutingHelper {
 		if(isFollowingMode){
 			tryMarkPassedRoute(start);
 			directionDetection(start);
+			// reset evalWaitInterval only if new route is in forward direction
+			if(!suppressTurnPrompt){
+				evalWaitInterval = 3001;
+			}
 			voiceRouter.newRouteIsCalculated(updateRoute, suppressTurnPrompt);
 		} 
 		currentRoute = 0;
@@ -569,7 +573,8 @@ public class RoutingHelper {
 								if (res.isCalculated()) {
 									setNewRoute(res, start);
 									// reset error wait interval
-									evalWaitInterval = 3001;
+									// reset evalWaitInterval in setNewRoute and only if new route is in forward direction
+									// evalWaitInterval = 3001;
 								} else {
 									evalWaitInterval = evalWaitInterval * 4 / 3;
 									if (evalWaitInterval > 120000) {
