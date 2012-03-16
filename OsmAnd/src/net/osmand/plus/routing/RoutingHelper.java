@@ -306,7 +306,7 @@ public class RoutingHelper {
 		lastFixedLocation = currentLocation;
 
 		// 8. Strange Direction? Then re-calculate route. (Added new, may possibly even replace triggers 4, 5a, 5b ?)
-		if(suppressTurnPrompt){
+		if(suppressTurnPrompt && (currentLocation.distanceTo(routeNodes.get(currentRoute) > 100) ){
 			calculateRoute = true;
 		}
 
