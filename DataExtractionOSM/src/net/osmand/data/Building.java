@@ -22,6 +22,15 @@ public class Building extends MapObject {
 		public int getValue() {
 			return val;
 		}
+		
+		public static BuildingInterpolation fromValue(int i){
+			for(BuildingInterpolation b : values()) {
+				if(b.val == i) {
+					return b;
+				}
+			}
+			return null;
+		}
 	}
 
 	public Building(Entity e){
@@ -67,6 +76,16 @@ public class Building extends MapObject {
 	
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
+	}
+	
+	@Override
+	public String toString() {
+		if(interpolationInterval !=0){
+			return name+"-"+name2 +" (+"+interpolationInterval+") ";
+		} else if(interpolationType != null) {
+			return name+"-"+name2 +" ("+interpolationType+") ";
+		}
+		return name;
 	}
 
 }

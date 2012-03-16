@@ -18,6 +18,7 @@ public class Street extends MapObject {
 	
 	private List<Building> buildings = new ArrayList<Building>(); 
 	private List<Way> wayNodes = null;
+	private List<Street> intersectedStreets = null;
 	private final City city;
 	private int indexInCity = -1;
 
@@ -47,8 +48,27 @@ public class Street extends MapObject {
 		buildings.add(building);
 	}
 	
-	public void registerBuildings(List<Building> buildings){
-		this.buildings.addAll(buildings);
+	public List<Street> getIntersectedStreets() {
+		if(intersectedStreets == null){
+			return Collections.emptyList();
+		}
+		return intersectedStreets;
+	}
+	
+	public void addIntersectedStreet(Street s){
+		if(intersectedStreets == null) {
+			intersectedStreets = new ArrayList<Street>();
+		}
+		intersectedStreets.add(s);
+	}
+	
+	public void registerBuildingCheckById(Building building){
+		for(Building b : buildings) {
+			if(b.getId().longValue() == building.getId().longValue()){
+				return;
+			}
+		}
+		buildings.add(building);
 	}
 	
 	public List<Building> getBuildings() {

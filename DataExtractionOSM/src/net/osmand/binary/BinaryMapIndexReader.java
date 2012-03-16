@@ -507,16 +507,6 @@ public class BinaryMapIndexReader {
 	}
 	
 	
-	public void preloadStreets(PostCode p, SearchRequest<Street> resultMatcher) throws IOException {
-		checkAddressIndex(p.getFileOffset());
-		
-		codedIS.seek(p.getFileOffset());
-		int size = codedIS.readRawVarint32();
-		int old = codedIS.pushLimit(size);
-		addressAdapter.readPostcode(p, p.getFileOffset(), null, true, null);
-		codedIS.popLimit(old);
-	}
-	
 	private void checkAddressIndex(int offset){
 		boolean ok = false;
 		for(AddressRegion r : addressIndexes){
@@ -538,6 +528,7 @@ public class BinaryMapIndexReader {
 		addressAdapter.readStreet(s, resultMatcher, true, 0, 0, null);
 		codedIS.popLimit(old);
 	}
+	
 	
 	/**
 	 * Map public methods 
@@ -1443,7 +1434,7 @@ public class BinaryMapIndexReader {
 		// test address index search
 		String reg = reader.getRegionNames().get(0);
 		final Map<String, Integer> streetFreq = new LinkedHashMap<String, Integer>();
-		List<City> cs = reader.getCities(reg, null);
+		List<City> cs = reader.getCities(reg, null, BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE);
 		for(City c : cs){
 			int buildings = 0;
 			reader.preloadStreets(c, null);
@@ -1454,24 +1445,8 @@ public class BinaryMapIndexReader {
 			}
 			println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings + " " + c.getEnName());
 		}
-		List<PostCode> postcodes = reader.getPostcodes(reg, buildAddressRequest((ResultMatcher<MapObject>) null), null);
-		for(PostCode c : postcodes){
-			reader.preloadStreets(c, buildAddressRequest((ResultMatcher<Street>) null));
-			println(c.getName());
-		}
-//			System.out.println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings + " " + c.getEnName());
-//		List<PostCode> postcodes = reader.getPostcodes(reg, buildAddressRequest((ResultMatcher<MapObject>) null), null);
-//		for(PostCode c : postcodes){
-//			reader.preloadStreets(c, buildAddressRequest((ResultMatcher<Street>) null));
-//			System.out.println(c.getName());
-//		}
 //		int[] count = new int[1];
-		List<City> villages = reader.getVillages(reg, buildAddressRequest((ResultMatcher<MapObject>) null), new StringMatcher() {
-			@Override
-			public boolean matches(String name) {
-				return true;
-			}
-		}, true);
+		List<City> villages = reader.getCities(reg, buildAddressRequest((ResultMatcher<City>) null), BinaryMapAddressReaderAdapter.VILLAGES_TYPE);
 		for(City v : villages) {
 			reader.preloadStreets(v,  null);
 			for(Street s : v.getStreets()){

@@ -485,9 +485,17 @@ public class BinaryInspector {
 											index.preloadBuildings(t, null);
 											List<Building> buildings = t.getBuildings();
 											if (buildings != null && !buildings.isEmpty()) {
-												print("\t\t\t\t (");
+												print("\t\t (");
 												for (Building b : buildings) {
-													print(b.getName() + ",");
+													print(b.toString() + ",");
+												}
+												print(")");
+											}
+											List<Street> streets = t.getIntersectedStreets();
+											if (streets != null && !streets.isEmpty()) {
+												print("\n\t\t\t\t\t\t\t x (");
+												for (Street s : streets) {
+													print(s.getName() +", ");
 												}
 												print(")");
 											}

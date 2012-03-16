@@ -592,6 +592,7 @@ public class BinaryMapIndexWriter {
 		streetBuilder.setX((sx - cx) >> 7);
 		streetBuilder.setY((sy - cy) >> 7);
 
+		street.sortBuildings();
 		for (Building b : street.getBuildings()) {
 			if (postcodeFilter != null && !postcodeFilter.equalsIgnoreCase(b.getPostcode())) {
 				continue;
@@ -638,7 +639,7 @@ public class BinaryMapIndexWriter {
 			Set<Street> checkedStreets = new TreeSet<Street>();
 			for (Node intersection : wayNodes.get(street)) {
 				for (Street streetJ : mapNodeToStreet.get(intersection.getId())) {
-					if (checkedStreets.contains(streetJ)) {
+					if (checkedStreets.contains(streetJ) || streetJ.getId().longValue() == street.getId().longValue()) {
 						continue;
 					}
 					checkedStreets.add(streetJ);

@@ -10,8 +10,8 @@ public class ToDoConstants {
 	
 	// Index
 	// Map QuadTree (skip small areas!!!)
-	// new Address
-	// slightly changed POI (check it)
+	// new Address test Name index!!!
+	// slightly changed POI (check it)!
 	// Routing index
 	// Identify coastline areas and pure ocean areas
 	

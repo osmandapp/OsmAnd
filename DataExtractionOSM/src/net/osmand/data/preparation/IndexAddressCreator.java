@@ -938,6 +938,8 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			// register postcodes and name index
 			for (Street s : streets) {
 				putNamedMapObject(namesIndex, s, s.getFileOffset());
+				
+				
 				for (Building b : s.getBuildings()) {
 					bCount++;
 					if (city.getPostcode() != null && b.getPostcode() == null) {
@@ -949,11 +951,18 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 							p.setLocation(b.getLocation().getLatitude(), b.getLocation().getLongitude());
 							postcodes.put(b.getPostcode(), p);
 						}
-						Street newS = new Street(postcodes.get(b.getPostcode()));
-						newS.setEnName(s.getEnName());
-						newS.setName(s.getName());
-						newS.registerBuildings(s.getBuildings());
-						newS.getWayNodes().addAll(s.getWayNodes());
+						City post = postcodes.get(b.getPostcode());
+						Street newS = post.getStreet(s.getName());
+						if(newS == null) {
+							newS = new Street(post);
+							newS.setName(s.getName());
+							newS.setEnName(s.getEnName());
+							newS.setLocation(s.getLocation().getLatitude(), s.getLocation().getLongitude());
+							//newS.getWayNodes().addAll(s.getWayNodes());
+							newS.setId(s.getId());
+							post.registerStreet(newS);
+						}
+						newS.registerBuildingCheckById(b);
 					}
 				}
 			}
@@ -1067,7 +1076,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 					b.setInterpolationType(BuildingInterpolation.valueOf(type));
 				}
 				
-				s.registerBuilding(b);
+				s.registerBuildingCheckById(b);
 			}
 		}
 

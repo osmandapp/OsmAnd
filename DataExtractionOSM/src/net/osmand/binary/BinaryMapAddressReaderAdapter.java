@@ -4,13 +4,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.OsmandOdb.OsmAndAddressIndex.CitiesIndex;
 import net.osmand.data.Building;
+import net.osmand.data.Building.BuildingInterpolation;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
-import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -159,6 +160,7 @@ public class BinaryMapAddressReaderAdapter {
 				codedIS.popLimit(oldLimit);
 				break;
 			case OsmandOdb.CityBlockIndex.BUILDINGS_FIELD_NUMBER :
+				// buildings for the town are not used now
 				skipUnknownField(t);
 			default:
 				skipUnknownField(t);
@@ -242,7 +244,7 @@ public class BinaryMapAddressReaderAdapter {
 		}
 	}
 	
-	protected Street readStreet(Street s, SearchRequest<Building> resultMatcher, boolean loadBuildings, int city24X, int city24Y, String postcodeFilter) throws IOException{
+	protected Street readStreet(Street s, SearchRequest<Building> buildingsMatcher, boolean loadBuildingsAndIntersected, int city24X, int city24Y, String postcodeFilter) throws IOException{
 		int x = 0;
 		int y = 0;
 		boolean loadLocation = city24X != 0 || city24Y != 0;
@@ -284,17 +286,24 @@ public class BinaryMapAddressReaderAdapter {
 				}
 				break;
 			case OsmandOdb.StreetIndex.INTERSECTIONS_FIELD_NUMBER :
-				// TODO
-				skipUnknownField(t);
+				int length = codedIS.readRawVarint32();
+				if(loadBuildingsAndIntersected){
+					int oldLimit = codedIS.pushLimit(length);
+					Street si = readIntersectedStreet(s.getCity(), x, y);
+					s.addIntersectedStreet(si);
+					codedIS.popLimit(oldLimit);
+				} else {
+					codedIS.skipRawBytes(length);
+				}
 				break;
 			case OsmandOdb.StreetIndex.BUILDINGS_FIELD_NUMBER :
 				int offset = codedIS.getTotalBytesRead();
-				int length = codedIS.readRawVarint32();
-				if(loadBuildings){
+				length = codedIS.readRawVarint32();
+				if(loadBuildingsAndIntersected){
 					int oldLimit = codedIS.pushLimit(length);
 					Building b = readBuilding(offset, x, y);
 					if (postcodeFilter == null || postcodeFilter.equalsIgnoreCase(b.getPostcode())) {
-						if (resultMatcher == null || resultMatcher.publish(b)) {
+						if (buildingsMatcher == null || buildingsMatcher.publish(b)) {
 							s.registerBuilding(b);
 						}
 					}
@@ -302,6 +311,42 @@ public class BinaryMapAddressReaderAdapter {
 				} else {
 					codedIS.skipRawBytes(length);
 				}
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+	
+	protected Street readIntersectedStreet(City c, int street24X, int street24Y) throws IOException{
+		int x = 0;
+		int y = 0;
+		Street s = new Street(c);
+		while(true){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				s.setLocation(MapUtils.getLatitudeFromTile(24, y), MapUtils.getLongitudeFromTile(24, x));
+				if(s.getEnName().length() == 0){
+					s.setEnName(Junidecode.unidecode(s.getName()));
+				}
+				return s;
+			case OsmandOdb.BuildingIndex.ID_FIELD_NUMBER :
+				s.setId(codedIS.readUInt64());
+				break;
+			case OsmandOdb.StreetIntersection.NAME_EN_FIELD_NUMBER:
+				s.setEnName(codedIS.readString());
+				break;
+			case OsmandOdb.StreetIntersection.NAME_FIELD_NUMBER:
+				s.setName(codedIS.readString());
+				break;
+			case OsmandOdb.StreetIntersection.INTERSECTEDX_FIELD_NUMBER :
+				x =  codedIS.readSInt32() + street24X;
+				break;
+			case OsmandOdb.StreetIntersection.INTERSECTEDY_FIELD_NUMBER :
+				y =  codedIS.readSInt32() + street24Y;
 				break;
 			default:
 				skipUnknownField(t);
@@ -334,6 +379,21 @@ public class BinaryMapAddressReaderAdapter {
 			case OsmandOdb.BuildingIndex.NAME_FIELD_NUMBER :
 				b.setName(codedIS.readString());
 				break;
+			case OsmandOdb.BuildingIndex.NAME_EN2_FIELD_NUMBER :
+				// no where to set now
+				codedIS.readString();
+				break;
+			case OsmandOdb.BuildingIndex.NAME2_FIELD_NUMBER :
+				b.setName2(codedIS.readString());
+				break;
+			case OsmandOdb.BuildingIndex.INTERPOLATION_FIELD_NUMBER :
+				int sint = codedIS.readSInt32();
+				if(sint > 0) {
+					b.setInterpolationInterval(sint);
+				} else {
+					b.setInterpolationType(BuildingInterpolation.fromValue(sint));
+				}
+				break;
 			case OsmandOdb.BuildingIndex.X_FIELD_NUMBER :
 				x =  codedIS.readSInt32() + street24X;
 				break;
@@ -350,164 +410,5 @@ public class BinaryMapAddressReaderAdapter {
 		}
 	}
 	
-	// 2 different quires : s2 == null -> fill possible streets, s2 != null return LatLon intersection 
-	private LatLon readIntersectedStreets(Street[] cityStreets, Street s, Street s2, LatLon parent, List<Street> streets) throws IOException {
-		int size = codedIS.readRawVarint32();
-		int old = codedIS.pushLimit(size);
-		boolean e = false;
-		while(!e){
-			int t = codedIS.readTag();
-			int tag = WireFormat.getTagFieldNumber(t);
-			switch (tag) {
-			case 0:
-				e = true;
-				break;
-			case OsmandOdb.InteresectedStreets.INTERSECTIONS_FIELD_NUMBER:
-				int nsize = codedIS.readRawVarint32();
-				int nold = codedIS.pushLimit(nsize);
-				int st1 = -1;
-				int st2 = -1;
-				int cx = 0;
-				int cy = 0;
-				boolean end = false;
-				while (!end) {
-					int nt = codedIS.readTag();
-					int ntag = WireFormat.getTagFieldNumber(nt);
-					switch (ntag) {
-					case 0:
-						end = true;
-						break;
-					case OsmandOdb.StreetIntersection.INTERSECTEDSTREET1_FIELD_NUMBER:
-						st1 = codedIS.readUInt32();
-						break;
-					case OsmandOdb.StreetIntersection.INTERSECTEDSTREET2_FIELD_NUMBER:
-						st2 = codedIS.readUInt32();
-						break;
-					case OsmandOdb.StreetIntersection.INTERSECTEDX_FIELD_NUMBER:
-						cx = codedIS.readSInt32();
-						break;
-					case OsmandOdb.StreetIntersection.INTERSECTEDY_FIELD_NUMBER:
-						cy = codedIS.readSInt32();
-						break;
-					default:
-						skipUnknownField(nt);
-					}
-				}
-				codedIS.popLimit(nold);
-				if (s2 == null) {
-					// find all intersections
-					if (st1 == s.getIndexInCity() && st2 != -1 && st2 < cityStreets.length && cityStreets[st2] != null) {
-						streets.add(cityStreets[st2]);
-					} else if (st2 == s.getIndexInCity() && st1 != -1 && st1 < cityStreets.length && cityStreets[st1] != null) {
-						streets.add(cityStreets[st1]);
-					}
-				} else {
-					if((st1 == s.getIndexInCity() && st2 == s2.getIndexInCity() ) || 
-							(st2 == s.getIndexInCity() && st1 == s2.getIndexInCity())) {
-						int x = (int) (MapUtils.getTileNumberX(24, parent.getLongitude()) + cx);
-						int y = (int) (MapUtils.getTileNumberY(24, parent.getLatitude()) + cy);
-						codedIS.popLimit(old);
-						return new LatLon(MapUtils.getLatitudeFromTile(24, y), MapUtils.getLongitudeFromTile(24, x));
-					}
-				}
-				
-				break;
-			default:
-				skipUnknownField(t);
-			}
-		}
-		codedIS.popLimit(old);
-		return null;
-	}
 	
-	// do not preload streets in city
-	protected LatLon findIntersectedStreets(City c, Street s, Street s2, List<Street> streets) throws IOException {
-		if(s.getIndexInCity() == -1){
-			return null;
-		}
-		codedIS.seek(c.getFileOffset());
-		int size = codedIS.readRawVarint32();
-		int old = codedIS.pushLimit(size);
-		while(true){
-			int t = codedIS.readTag();
-			int tag = WireFormat.getTagFieldNumber(t);
-			switch (tag) {
-			case 0:
-				codedIS.popLimit(old);
-				return null;
-			case OsmandOdb.CityIndex.INTERSECTIONS_FIELD_NUMBER :
-				Street[] cityStreets = new Street[c.getStreets().size()];
-				for(Street st : c.getStreets()){
-					if(st.getIndexInCity() >= 0 && st.getIndexInCity() < cityStreets.length){
-						cityStreets[st.getIndexInCity()] = st;
-					}
-				}
-				LatLon ret = readIntersectedStreets(cityStreets, s, s2, c.getLocation(), streets);
-				codedIS.popLimit(old);
-				return ret;
-			default:
-				skipUnknownField(t);
-			}
-		}
-		
-	}
-	
-	
-	
-	protected void readPostcodes(List<PostCode> postcodes, SearchRequest<MapObject> resultMatcher, StringMatcher nameMatcher) throws IOException{
-		while(true){
-			int t = codedIS.readTag();
-			int tag = WireFormat.getTagFieldNumber(t);
-			switch (tag) {
-			case 0:
-				return;
-			case OsmandOdb.PostcodesIndex.POSTCODES_FIELD_NUMBER :
-				int offset = codedIS.getTotalBytesRead();
-				int length = codedIS.readRawVarint32();
-				int oldLimit = codedIS.pushLimit(length);
-				final PostCode postCode = readPostcode(null, offset, null, false, null);
-				// support getEnName??
-				if (nameMatcher == null || nameMatcher.matches(postCode.getName())) {
-					if (resultMatcher == null || resultMatcher.publish(postCode)) {
-						postcodes.add(postCode);
-					}
-				}
-				codedIS.popLimit(oldLimit);
-				if(resultMatcher != null && resultMatcher.isCancelled()){
-					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-				}
-				break;
-			default:
-				skipUnknownField(t);
-				break;
-			}
-		}
-	}
-	
-	protected PostCode findPostcode(String name) throws IOException{
-		while(true){
-			int t = codedIS.readTag();
-			int tag = WireFormat.getTagFieldNumber(t);
-			switch (tag) {
-			case 0:
-				return null;
-			case OsmandOdb.PostcodesIndex.POSTCODES_FIELD_NUMBER :
-				int offset = codedIS.getTotalBytesRead();
-				int length = codedIS.readRawVarint32();
-				int oldLimit = codedIS.pushLimit(length);
-				PostCode p = readPostcode(null, offset, null, false, name);
-				codedIS.popLimit(oldLimit);
-				if(p != null){
-					return p;
-				}
-				break;
-			default:
-				skipUnknownField(t);
-				break;
-			}
-		}
-	}
-	
-	
-
 }
