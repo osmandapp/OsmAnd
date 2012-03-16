@@ -424,9 +424,7 @@ public class RoutingHelper {
 				evalWaitInterval = 3001;
 			} else {
 				evalWaitInterval = evalWaitInterval * 4 / 3;
-				if (evalWaitInterval > 120000) {
-					evalWaitInterval = 120000;
-				}
+				evalWaitInterval = Math.min(evalWaitInterval, 120000);
 			}
 
 			// trigger voice prompt only if new route is in forward direction (but see also additional 60sec timer for this message in voiceRouter)
@@ -586,9 +584,7 @@ public class RoutingHelper {
 									// evalWaitInterval = 3001;
 								} else {
 									evalWaitInterval = evalWaitInterval * 4 / 3;
-									if (evalWaitInterval > 120000) {
-										evalWaitInterval = 120000;
-									}
+									evalWaitInterval = Math.min(evalWaitInterval, 120000);
 								}
 								currentRunningJob = null;
 							}
