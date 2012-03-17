@@ -456,10 +456,11 @@ public class BinaryMapIndexWriter {
 			// collapse same name ?
 			for(MapObject o : entry.getValue()){
 				AddressNameIndexDataAtom.Builder atom = AddressNameIndexDataAtom.newBuilder();
-				atom.setName(o.getName());
-				if(checkEnNameToWrite(o)){
-					atom.setNameEn(o.getEnName());
-				}
+				// this is optional
+//				atom.setName(o.getName());
+//				if(checkEnNameToWrite(o)){
+//					atom.setNameEn(o.getEnName());
+//				}
 				int type = 1;
 				if (o instanceof City) {
 					if (((City) o).isPostcode()) {
@@ -527,13 +528,14 @@ public class BinaryMapIndexWriter {
 			BinaryFileReference ref) throws IOException {
 		checkPeekState(CITY_INDEX_INIT);
 		codedOutStream.writeTag(CitiesIndex.BLOCKS_FIELD_NUMBER, FieldType.MESSAGE.getWireType());
+		// 225489 223992+6710 = 230700
 		long startMessage = getFilePointer();
 		long startCityBlock = ref.getStartPointer();
 		codedOutStream.flush();
 		ref.writeReference(raf, startMessage);
 		CityBlockIndex.Builder cityInd = OsmandOdb.CityBlockIndex.newBuilder();
 		cityInd.setShiftToCityIndex((int) (startMessage - startCityBlock));
-		long currentPointer = startMessage + 4;
+		long currentPointer = startMessage + 4 + CodedOutputStream.computeTagSize(CityBlockIndex.SHIFTTOCITYINDEX_FIELD_NUMBER);
 		
 		int cx = MapUtils.get31TileNumberX(cityOrPostcode.getLocation().getLongitude());
 		int cy = MapUtils.get31TileNumberY(cityOrPostcode.getLocation().getLatitude());
@@ -561,7 +563,12 @@ public class BinaryMapIndexWriter {
 			cityInd.addStreets(streetInd);
 			
 		}
-		codedOutStream.writeMessageNoTag(cityInd.build());
+		CityBlockIndex block = cityInd.build();
+		int size = CodedOutputStream.computeRawVarint32Size( CodedOutputStream.computeMessageSizeNoTag(block));
+		codedOutStream.writeMessageNoTag(block);
+		for (Street s : streets) {
+			s.setFileOffset(s.getFileOffset() + size);
+		}
 	}
 
 	public void startCityBlockIndex(int type) throws IOException {

@@ -252,7 +252,7 @@ public class BinaryMapPoiReaderAdapter {
 				int length = readInt();
 				int oldLimit = codedIS.pushLimit(length);
 				dataOffsets = new TIntArrayList();
-				readIndexedStringTable(instance, query, "", dataOffsets, 0);
+				map.readIndexedStringTable(instance, query, "", dataOffsets, 0);
 				codedIS.popLimit(oldLimit);
 				break; }
 			case OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER : {
@@ -332,65 +332,6 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
-	private int readIndexedStringTable(Collator instance, String query, String prefix, TIntArrayList list, int charMatches) throws IOException {
-		String key = null;
-		while(true){
-			int t = codedIS.readTag();
-			int tag = WireFormat.getTagFieldNumber(t);
-			switch (tag) {
-			case 0:
-				return charMatches;
-			case OsmandOdb.IndexedStringTable.KEY_FIELD_NUMBER :
-				key = codedIS.readString();
-				if(prefix.length() > 0){
-					key = prefix + key;
-				}
-				// check query is part of key (the best matching)
-				if(CollatorStringMatcher.cmatches(instance, key, query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)){
-					if(query.length() >= charMatches){
-						if(query.length() > charMatches){
-							charMatches = query.length();
-							list.clear();
-						}
-					} else {
-						key = null;
-					}
-					// check key is part of query
-				} else if (CollatorStringMatcher.cmatches(instance, query, key, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
-					if (key.length() >= charMatches) {
-						if (key.length() > charMatches) {
-							charMatches = key.length();
-							list.clear();
-						}
-					} else {
-						key = null;
-					}
-				} else {
-					key = null;
-				}
-				break;
-			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER :
-				int val = codedIS.readUInt32();
-				if (key != null) {
-					list.add(val);
-				}
-				break;
-			case OsmandOdb.IndexedStringTable.SUBTABLES_FIELD_NUMBER :
-				int len = codedIS.readRawVarint32();
-				int oldLim = codedIS.pushLimit(len);
-				if (key != null) {
-					charMatches = readIndexedStringTable(instance, query, key, list, charMatches);
-				} else {
-					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-				}
-				codedIS.popLimit(oldLim);
-				break;
-			default:
-				skipUnknownField(t);
-				break;
-			}
-		}
-	}
 
 	protected void searchPoiIndex(int left31, int right31, int top31, int bottom31,
 			SearchRequest<Amenity> req, PoiRegion region) throws IOException {

@@ -209,16 +209,16 @@ message OsmAndAddressNameIndexData {
 
 
 message AddressNameIndexDataAtom {
-     required string name = 1;
+     optional string name = 1;
      optional string nameEn = 2;
      // 1 - city, 2 - postcode, 3 - village,  4 - street
      required uint32 type = 3; 
 
      // mixed 
      // shift from start AddressNameIndexData (!) to ...Index
-     repeated fixed32 shiftToIndex = 5;
+     repeated int32 shiftToIndex = 5;
      // optional used in case of type=street
-     repeated fixed32 shiftToCityIndex = 6; 
+     repeated int32 shiftToCityIndex = 6;
 }
 
 
@@ -243,9 +243,9 @@ message CityBlockIndex {
 	optional fixed32 shiftToCityIndex = 4;
 
 	// buildings that doesn't belong to the street
-	repeated BuildingIndex buildings = 16;
+	repeated BuildingIndex buildings = 10;
 	
-	repeated StreetIndex streets = 18; 
+	repeated StreetIndex streets = 12;
 }
 
 message StreetIndex {

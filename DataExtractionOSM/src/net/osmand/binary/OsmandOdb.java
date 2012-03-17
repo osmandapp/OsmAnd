@@ -7593,7 +7593,7 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_AddressNameIndexDataAtom_fieldAccessorTable;
     }
     
-    // required string name = 1;
+    // optional string name = 1;
     public static final int NAME_FIELD_NUMBER = 1;
     private boolean hasName;
     private java.lang.String name_ = "";
@@ -7614,7 +7614,7 @@ public final class OsmandOdb {
     public boolean hasType() { return hasType; }
     public int getType() { return type_; }
     
-    // repeated fixed32 shiftToIndex = 5;
+    // repeated int32 shiftToIndex = 5;
     public static final int SHIFTTOINDEX_FIELD_NUMBER = 5;
     private java.util.List<java.lang.Integer> shiftToIndex_ =
       java.util.Collections.emptyList();
@@ -7626,7 +7626,7 @@ public final class OsmandOdb {
       return shiftToIndex_.get(index);
     }
     
-    // repeated fixed32 shiftToCityIndex = 6;
+    // repeated int32 shiftToCityIndex = 6;
     public static final int SHIFTTOCITYINDEX_FIELD_NUMBER = 6;
     private java.util.List<java.lang.Integer> shiftToCityIndex_ =
       java.util.Collections.emptyList();
@@ -7642,7 +7642,6 @@ public final class OsmandOdb {
     }
     @Override
 	public final boolean isInitialized() {
-      if (!hasName) return false;
       if (!hasType) return false;
       return true;
     }
@@ -7661,10 +7660,10 @@ public final class OsmandOdb {
         output.writeUInt32(3, getType());
       }
       for (int element : getShiftToIndexList()) {
-        output.writeFixed32(5, element);
+        output.writeInt32(5, element);
       }
       for (int element : getShiftToCityIndexList()) {
-        output.writeFixed32(6, element);
+        output.writeInt32(6, element);
       }
       getUnknownFields().writeTo(output);
     }
@@ -7690,13 +7689,19 @@ public final class OsmandOdb {
       }
       {
         int dataSize = 0;
-        dataSize = 4 * getShiftToIndexList().size();
+        for (int element : getShiftToIndexList()) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(element);
+        }
         size += dataSize;
         size += 1 * getShiftToIndexList().size();
       }
       {
         int dataSize = 0;
-        dataSize = 4 * getShiftToCityIndexList().size();
+        for (int element : getShiftToCityIndexList()) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(element);
+        }
         size += dataSize;
         size += 1 * getShiftToCityIndexList().size();
       }
@@ -7936,28 +7941,28 @@ public final class OsmandOdb {
               setType(input.readUInt32());
               break;
             }
-            case 45: {
-              addShiftToIndex(input.readFixed32());
+            case 40: {
+              addShiftToIndex(input.readInt32());
               break;
             }
             case 42: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               while (input.getBytesUntilLimit() > 0) {
-                addShiftToIndex(input.readFixed32());
+                addShiftToIndex(input.readInt32());
               }
               input.popLimit(limit);
               break;
             }
-            case 53: {
-              addShiftToCityIndex(input.readFixed32());
+            case 48: {
+              addShiftToCityIndex(input.readInt32());
               break;
             }
             case 50: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               while (input.getBytesUntilLimit() > 0) {
-                addShiftToCityIndex(input.readFixed32());
+                addShiftToCityIndex(input.readInt32());
               }
               input.popLimit(limit);
               break;
@@ -7967,7 +7972,7 @@ public final class OsmandOdb {
       }
       
       
-      // required string name = 1;
+      // optional string name = 1;
       public boolean hasName() {
         return result.hasName();
       }
@@ -8027,7 +8032,7 @@ public final class OsmandOdb {
         return this;
       }
       
-      // repeated fixed32 shiftToIndex = 5;
+      // repeated int32 shiftToIndex = 5;
       public java.util.List<java.lang.Integer> getShiftToIndexList() {
         return java.util.Collections.unmodifiableList(result.shiftToIndex_);
       }
@@ -8061,7 +8066,7 @@ public final class OsmandOdb {
         return this;
       }
       
-      // repeated fixed32 shiftToCityIndex = 6;
+      // repeated int32 shiftToCityIndex = 6;
       public java.util.List<java.lang.Integer> getShiftToCityIndexList() {
         return java.util.Collections.unmodifiableList(result.shiftToCityIndex_);
       }
@@ -8687,8 +8692,8 @@ public final class OsmandOdb {
     public boolean hasShiftToCityIndex() { return hasShiftToCityIndex; }
     public int getShiftToCityIndex() { return shiftToCityIndex_; }
     
-    // repeated .BuildingIndex buildings = 16;
-    public static final int BUILDINGS_FIELD_NUMBER = 16;
+    // repeated .BuildingIndex buildings = 10;
+    public static final int BUILDINGS_FIELD_NUMBER = 10;
     private java.util.List<net.osmand.binary.OsmandOdb.BuildingIndex> buildings_ =
       java.util.Collections.emptyList();
     public java.util.List<net.osmand.binary.OsmandOdb.BuildingIndex> getBuildingsList() {
@@ -8699,8 +8704,8 @@ public final class OsmandOdb {
       return buildings_.get(index);
     }
     
-    // repeated .StreetIndex streets = 18;
-    public static final int STREETS_FIELD_NUMBER = 18;
+    // repeated .StreetIndex streets = 12;
+    public static final int STREETS_FIELD_NUMBER = 12;
     private java.util.List<net.osmand.binary.OsmandOdb.StreetIndex> streets_ =
       java.util.Collections.emptyList();
     public java.util.List<net.osmand.binary.OsmandOdb.StreetIndex> getStreetsList() {
@@ -8732,10 +8737,10 @@ public final class OsmandOdb {
         output.writeFixed32(4, getShiftToCityIndex());
       }
       for (net.osmand.binary.OsmandOdb.BuildingIndex element : getBuildingsList()) {
-        output.writeMessage(16, element);
+        output.writeMessage(10, element);
       }
       for (net.osmand.binary.OsmandOdb.StreetIndex element : getStreetsList()) {
-        output.writeMessage(18, element);
+        output.writeMessage(12, element);
       }
       getUnknownFields().writeTo(output);
     }
@@ -8753,11 +8758,11 @@ public final class OsmandOdb {
       }
       for (net.osmand.binary.OsmandOdb.BuildingIndex element : getBuildingsList()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(16, element);
+          .computeMessageSize(10, element);
       }
       for (net.osmand.binary.OsmandOdb.StreetIndex element : getStreetsList()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(18, element);
+          .computeMessageSize(12, element);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8981,13 +8986,13 @@ public final class OsmandOdb {
               setShiftToCityIndex(input.readFixed32());
               break;
             }
-            case 130: {
+            case 82: {
               net.osmand.binary.OsmandOdb.BuildingIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.BuildingIndex.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addBuildings(subBuilder.buildPartial());
               break;
             }
-            case 146: {
+            case 98: {
               net.osmand.binary.OsmandOdb.StreetIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.StreetIndex.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addStreets(subBuilder.buildPartial());
@@ -9016,7 +9021,7 @@ public final class OsmandOdb {
         return this;
       }
       
-      // repeated .BuildingIndex buildings = 16;
+      // repeated .BuildingIndex buildings = 10;
       public java.util.List<net.osmand.binary.OsmandOdb.BuildingIndex> getBuildingsList() {
         return java.util.Collections.unmodifiableList(result.buildings_);
       }
@@ -9067,7 +9072,7 @@ public final class OsmandOdb {
         return this;
       }
       
-      // repeated .StreetIndex streets = 18;
+      // repeated .StreetIndex streets = 12;
       public java.util.List<net.osmand.binary.OsmandOdb.StreetIndex> getStreetsList() {
         return java.util.Collections.unmodifiableList(result.streets_);
       }
@@ -18725,15 +18730,15 @@ public final class OsmandOdb {
       "dressNameIndexData.AddressNameIndexData\032" +
       "?\n\024AddressNameIndexData\022\'\n\004atom\030\004 \003(\0132\031." +
       "AddressNameIndexDataAtom\"v\n\030AddressNameI" +
-      "ndexDataAtom\022\014\n\004name\030\001 \002(\t\022\016\n\006nameEn\030\002 \001" +
-      "(\t\022\014\n\004type\030\003 \002(\r\022\024\n\014shiftToIndex\030\005 \003(\007\022\030" +
-      "\n\020shiftToCityIndex\030\006 \003(\007\"~\n\tCityIndex\022\021\n",
+      "ndexDataAtom\022\014\n\004name\030\001 \001(\t\022\016\n\006nameEn\030\002 \001" +
+      "(\t\022\014\n\004type\030\003 \002(\r\022\024\n\014shiftToIndex\030\005 \003(\005\022\030" +
+      "\n\020shiftToCityIndex\030\006 \003(\005\"~\n\tCityIndex\022\021\n",
       "\tcity_type\030\001 \001(\r\022\014\n\004name\030\002 \002(\t\022\017\n\007name_e" +
       "n\030\003 \001(\t\022\n\n\002id\030\004 \001(\004\022\t\n\001x\030\005 \002(\r\022\t\n\001y\030\006 \002(" +
       "\r\022\035\n\025shiftToCityBlockIndex\030\n \001(\007\"l\n\016City" +
       "BlockIndex\022\030\n\020shiftToCityIndex\030\004 \001(\007\022!\n\t" +
-      "buildings\030\020 \003(\0132\016.BuildingIndex\022\035\n\007stree" +
-      "ts\030\022 \003(\0132\014.StreetIndex\"\235\001\n\013StreetIndex\022\014" +
+      "buildings\030\n \003(\0132\016.BuildingIndex\022\035\n\007stree" +
+      "ts\030\014 \003(\0132\014.StreetIndex\"\235\001\n\013StreetIndex\022\014" +
       "\n\004name\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022\t\n\001x\030\003 \002(\021" +
       "\022\t\n\001y\030\004 \002(\021\022\n\n\002id\030\006 \001(\004\022!\n\tbuildings\030\014 \003" +
       "(\0132\016.BuildingIndex\022*\n\rintersections\030\005 \003(" +

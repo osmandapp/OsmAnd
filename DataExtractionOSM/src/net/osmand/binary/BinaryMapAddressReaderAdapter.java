@@ -1,21 +1,32 @@
 package net.osmand.binary;
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.io.IOException;
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import net.osmand.CollatorStringMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.LogUtil;
 import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom;
 import net.osmand.binary.OsmandOdb.OsmAndAddressIndex.CitiesIndex;
+import net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData;
+import net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData.AddressNameIndexData;
 import net.osmand.data.Building;
 import net.osmand.data.Building.BuildingInterpolation;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
+import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.sf.junidecode.Junidecode;
+
+import org.apache.commons.logging.Log;
 
 import com.google.protobuf.CodedInputStreamRAF;
 import com.google.protobuf.WireFormat;
@@ -27,10 +38,13 @@ public class BinaryMapAddressReaderAdapter {
 	public final static int VILLAGES_TYPE = 3;
 	public final static int STREET_TYPE = 4;
 	
+	private static final Log LOG = LogUtil.getLog(BinaryMapAddressReaderAdapter.class);
+	
 	public static class AddressRegion extends BinaryIndexPart {
 		String enName;
 		int indexNameOffset = -1;
 		List<CitiesBlock> cities = new ArrayList<BinaryMapAddressReaderAdapter.CitiesBlock>();
+		
 		LatLon calculatedCenter = null;
 	}
 	
@@ -402,6 +416,158 @@ public class BinaryMapAddressReaderAdapter {
 				break;
 			case OsmandOdb.BuildingIndex.POSTCODE_FIELD_NUMBER :
 				b.setPostcode(codedIS.readString());
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+
+	public void searchAddressDataByName(AddressRegion reg, SearchRequest<MapObject> req, int[] typeFilter) throws IOException {
+		TIntArrayList loffsets = new TIntArrayList();
+		Collator instance = Collator.getInstance();
+		instance.setStrength(Collator.PRIMARY);
+		CollatorStringMatcher matcher = new CollatorStringMatcher(instance, req.nameQuery, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+		long time = System.currentTimeMillis();
+		int indexOffset = 0;
+		while (true) {
+			if (req.isCancelled()) {
+				return;
+			}
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return;
+			case OsmAndAddressNameIndexData.TABLE_FIELD_NUMBER:
+				int length = readInt();
+				indexOffset = codedIS.getTotalBytesRead();
+				int oldLimit = codedIS.pushLimit(length);
+				// here offsets are sorted by distance
+				map.readIndexedStringTable(instance, req.nameQuery, "", loffsets, 0);
+				codedIS.popLimit(oldLimit);
+				break;
+			case OsmAndAddressNameIndexData.ATOM_FIELD_NUMBER:
+				// also offsets can be randomly skipped by limit
+				loffsets.sort();
+				TIntArrayList[] refs = new TIntArrayList[5];
+				for (int i = 0; i < refs.length; i++) {
+					refs[i] = new TIntArrayList();
+				}
+
+				LOG.info("Searched address structure in " + (System.currentTimeMillis() - time) + "ms. Found " + loffsets.size()
+						+ " subtress");
+				for (int j = 0; j < loffsets.size(); j++) {
+					int fp = indexOffset + loffsets.get(j);
+					codedIS.seek(fp);
+					int len = codedIS.readRawVarint32();
+					int oldLim = codedIS.pushLimit(len);
+					int stag = 0;
+					do {
+						int st = codedIS.readTag();
+						stag = WireFormat.getTagFieldNumber(st);
+						if(stag == AddressNameIndexData.ATOM_FIELD_NUMBER) {
+							int slen = codedIS.readRawVarint32();
+							int soldLim = codedIS.pushLimit(slen);
+							readAddressNameData(req, refs, fp);
+							codedIS.popLimit(soldLim);
+						} else if(stag != 0){
+							skipUnknownField(st);
+						}
+					} while(stag != 0);
+					
+					codedIS.popLimit(oldLim);
+					if (req.isCancelled()) {
+						return;
+					}
+				}
+				if (typeFilter == null) {
+					typeFilter = new int[] { CITY_TOWN_TYPE, POSTCODES_TYPE, VILLAGES_TYPE, STREET_TYPE };
+				}
+				for (int i = 0; i < typeFilter.length && !req.isCancelled(); i++) {
+					TIntArrayList list = refs[typeFilter[i]];
+					if (typeFilter[i] == STREET_TYPE) {
+						for (int j = 0; j < list.size() && !req.isCancelled(); j += 2) {
+							City obj = null;
+							{
+								codedIS.seek(list.get(j + 1));
+								int len = codedIS.readRawVarint32();
+								int old = codedIS.pushLimit(len);
+								obj = readCityHeader(null, list.get(j + 1), false);
+								codedIS.popLimit(old);
+							}
+							if (obj != null) {
+								System.out.println("STREET " + list.get(j) );
+								codedIS.seek(list.get(j));
+								int len = codedIS.readRawVarint32();
+								int old = codedIS.pushLimit(len);
+								LatLon l = obj.getLocation();
+								Street s = new Street(obj);
+								readStreet(s, null, false, MapUtils.get31TileNumberX(l.getLatitude()) >> 7,
+										MapUtils.get31TileNumberY(l.getLongitude()) >> 7, null);
+
+								if (matcher.matches(s.getName())) {
+									req.publish(s);
+								}
+								codedIS.popLimit(old);
+							}
+						}
+					} else {
+						list.sort();
+						for (int j = 0; j < list.size() && !req.isCancelled(); j++) {
+							codedIS.seek(list.get(j));
+							int len = codedIS.readRawVarint32();
+							int old = codedIS.pushLimit(len);
+							City obj = readCityHeader(matcher, list.get(j), false);
+							if (obj != null) {
+								req.publish(obj);
+							}
+							codedIS.popLimit(old);
+						}
+					}
+				}
+				LOG.info("Whole address search by name is done in " + (System.currentTimeMillis() - time) + "ms. Found "
+						+ req.getSearchResults().size());
+				return;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+
+	}
+
+	private void readAddressNameData(SearchRequest<MapObject> req, TIntArrayList[] refs, int fp) throws IOException {
+		TIntArrayList toAdd = null;
+		while(true){
+			if(req.isCancelled()){
+				return;
+			}
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return;
+			case AddressNameIndexDataAtom.NAMEEN_FIELD_NUMBER :
+				codedIS.readString();
+				break;
+			case AddressNameIndexDataAtom.NAME_FIELD_NUMBER :
+				codedIS.readString();
+				break;
+			case AddressNameIndexDataAtom.SHIFTTOCITYINDEX_FIELD_NUMBER :
+				if(toAdd != null) {
+					toAdd.add(fp - codedIS.readInt32());
+				}
+				break;
+			case AddressNameIndexDataAtom.SHIFTTOINDEX_FIELD_NUMBER :
+				if(toAdd != null) {
+					toAdd.add(fp - codedIS.readInt32());
+				}
+				break;
+			case AddressNameIndexDataAtom.TYPE_FIELD_NUMBER :
+				int type = codedIS.readInt32();
+				toAdd = refs[type];
 				break;
 			default:
 				skipUnknownField(t);

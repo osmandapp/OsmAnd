@@ -882,19 +882,36 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	
 	private void putNamedMapObject(Map<String, List<MapObject>> namesIndex, MapObject o, long fileOffset){
 		String name = o.getName();
-		if (name != null && name.length() > 0) {
-			if (name.length() > ADDRESS_NAME_CHARACTERS_TO_INDEX) {
-				name = name.substring(0, ADDRESS_NAME_CHARACTERS_TO_INDEX);
-			}
-			if (!namesIndex.containsKey(name)) {
-				namesIndex.put(name, new ArrayList<MapObject>());
-			}
-			namesIndex.get(name).add(o);
-			if (fileOffset > Integer.MAX_VALUE) {
-				throw new IllegalArgumentException("File offset > 2 GB.");
-			}
-			o.setFileOffset((int) fileOffset);
+		parsePrefix(name, o, namesIndex);
+		if (fileOffset > Integer.MAX_VALUE) {
+			throw new IllegalArgumentException("File offset > 2 GB.");
 		}
+		o.setFileOffset((int) fileOffset);
+	}
+	
+	private void parsePrefix(String name, MapObject data, Map<String, List<MapObject>> namesIndex) {
+		int prev = -1;
+		for (int i = 0; i <= name.length(); i++) {
+			if (i == name.length() || (!Character.isLetter(name.charAt(i)) && !Character.isDigit(name.charAt(i)) && name.charAt(i) != '\'')) {
+				if (prev != -1) {
+					String substr = name.substring(prev, i);
+					if (substr.length() > ADDRESS_NAME_CHARACTERS_TO_INDEX) {
+						substr = substr.substring(0, ADDRESS_NAME_CHARACTERS_TO_INDEX);
+					}
+					String val = substr.toLowerCase();
+					if(!namesIndex.containsKey(val)){
+						namesIndex.put(val, new ArrayList<MapObject>());
+					}
+					namesIndex.get(val).add(data);
+					prev = -1;
+				}
+			} else {
+				if(prev == -1){
+					prev = i;
+				}
+			}
+		}
+		
 	}
 
 
