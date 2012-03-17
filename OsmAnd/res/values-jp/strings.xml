@@ -186,7 +186,7 @@ OSMコミュニティはこの問題をいち早く修正することができ�
 全ての操作があります。</string>
 
      <string name="tip_initial">ヒントとテクニック</string>
-     <string name="tip_initial_t">\tOsmAndAccessは多くの機能を持つナビゲーションアプリケーションです。
+     <string name="tip_initial_t">\tOsmAndは多くの機能を持つナビゲーションアプリケーションです。
 \n\t基礎的な案内として、使い方のヒントとテクニックをいくつかメインメニュー画面からリンクしています。
 </string>
      <string name="next_button">次へ</string>
@@ -275,11 +275,11 @@ OsmAnd バージョンがインストールされています。全てのオフ�
      <string name="build_installed">ビルド {0} はインストール
 されました ({1})。</string>
      <string name="downloading_build">ビルドをダウンロード中...</string>
-     <string name="install_selected_build">本当にOsmAndAccessをインストールしますか
+     <string name="install_selected_build">本当にOsmAndをインストールしますか
  - {0} from {1} {2} MB.</string>
-     <string name="loading_builds_failed">OsmAndAccessビルドのリスト参照に失敗</string>
-     <string name="loading_builds">OsmAndAccess ビルドをロード中...</string>
-     <string name="select_build_to_install">インストールするOsmAndAccessのビルドをひとつ
+     <string name="loading_builds_failed">OsmAndビルドのリスト参照に失敗</string>
+     <string name="loading_builds">OsmAnd ビルドをロード中...</string>
+     <string name="select_build_to_install">インストールするOsmAndのビルドをひとつ
 選んでください</string>
      <string name="contribution_activity">貢献バージョン用の特別な画面</string>
 
@@ -313,7 +313,7 @@ MB)をダウンロードしますか?</string>
  <string name="index_settings_descr">オフライン用のデータを取得/更新</string>
  <string name="index_settings">オフラインデータ</string>
      <string name="osmand_service">背景サービス</string>
-     <string name="osmand_service_descr">画面オフの間OsmAndAccessを使うためのバックグラウンドサービスを実行</string>
+     <string name="osmand_service_descr">画面オフの間OsmAndを使うためのバックグラウンドサービスを実行</string>
      <string name="fast_route_mode">最速ルート</string>
      <string name="fast_route_mode_descr">有効化して最速ルートを計算するか
 無効化して最短ルートを採用</string>
@@ -447,7 +447,7 @@ name="maps_could_not_be_downloaded">このマップはダウンロードでき�
      <string name="route_head">前方</string>
      <string name="first_time_continue">続ける</string>
      <string name="first_time_download">地域をダウンロード</string>
-     <string name="first_time_msg">OsmAndAccessを選んでくれてありがとうございます。
+     <string name="first_time_msg">OsmAndを選んでくれてありがとうございます。
 \nアプリケーションの全ての機能を使うには地域のオフラインデータが必要です、
 、これはダウンロード(設定 -&gt; データ) または自分で準備することができます。
 その後で、あなたは住所で検索したり、POIを検索したり、交通機関を検索したり
@@ -478,7 +478,7 @@ name="maps_could_not_be_downloaded">このマップはダウンロードでき�
      <string name="default_buttons_ok">OK</string>
      <string name="show_transport_over_map_description">マップ上に公共交通機関乗り場を表示</string>
      <string name="show_transport_over_map">交通機関乗り場を表示</string>
-     <string name="hello">ナビゲーションアプリケーション OsmAndAccess</string>
+     <string name="hello">ナビゲーションアプリケーション OsmAnd</string>
      <string name="update_poi_success">POIデータは更新されました
 ({0} がロードされました)</string>
      <string name="update_poi_error_local">ローカルの索引更新中にエラー</string>

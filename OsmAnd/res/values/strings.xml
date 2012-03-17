@@ -283,7 +283,7 @@
 \n\tThe map context menu contains all actions referring to a point (location).</string>
 
 	<string name="tip_initial">Tips and Tricks</string>
-	<string name="tip_initial_t">\tOsmAndAccess is a navigation application with many features. 
+	<string name="tip_initial_t">\tOsmAnd is a navigation application with many features. 
 \n\tAs an basic introduction, some usage tips and tricks are linked on the main menu screen.</string>
 	<string name="next_button">Next</string>
 	<string name="previous_button">Previous</string>
@@ -357,10 +357,10 @@
 	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by new the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
 	<string name="downloading_build">Downloading build...</string>
-	<string name="install_selected_build">Continue to install OsmAndAccess - {0} from {1} {2} MB ?</string>
-	<string name="loading_builds_failed">Retrieving the list of OsmAndAccess builds failed</string>
-	<string name="loading_builds">Loading OsmAndAccess builds...</string>
-	<string name="select_build_to_install">Select one of the OsmAndAccess builds to install</string>
+	<string name="install_selected_build">Continue to install OsmAnd - {0} from {1} {2} MB ?</string>
+	<string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
+	<string name="loading_builds">Loading OsmAnd builds...</string>
+	<string name="select_build_to_install">Select one of the OsmAnd builds to install</string>
 	<string name="contribution_activity">Special activity for contribution version</string>
 
 	<string name="gps_status_app_not_found">GPS Status application not installed. Search in Market?</string>
@@ -388,7 +388,7 @@
     <string name="index_settings_descr">Download and manage offline maps and other data like GPX tracks</string>
     <string name="index_settings">Offline data</string>
 	<string name="osmand_service">Background service</string>
-	<string name="osmand_service_descr">Use to run OsmAndAccess while screen is off</string>
+	<string name="osmand_service_descr">Use to run OsmAnd while screen is off</string>
 	<string name="fast_route_mode">Fastest route</string>
 	<string name="fast_route_mode_descr">Enable to calculate fastest route or disable for shortest route </string>
 	<string name="tiles_to_download_estimated_size">At zoom {0} download {1} tiles ({2} MB)</string>
@@ -513,7 +513,7 @@
 	<string name="route_head">Head</string>
 	<string name="first_time_continue">Continue</string>
 	<string name="first_time_download">Download regions</string>
-	<string name="first_time_msg">Thank you for choosing OsmAndAccess. \nTo use all features of the application you need some regional offline data, which you can download (Settings, Offline Data) or prepare yourself. Afterwards, you will be able to search by address, search for POIs, and search for public transport.</string>
+	<string name="first_time_msg">Thank you for choosing OsmAnd. \nTo use all features of the application you need some regional offline data, which you can download (Settings, Offline Data) or prepare yourself. Afterwards, you will be able to search by address, search for POIs, and search for public transport.</string>
 	<string name="search_poi_location">Searching signal...</string>
 	<string name="search_near_map">Search near last map location</string>
 	<string name="search_nearby">Search nearby</string>
@@ -540,7 +540,7 @@
 	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">Show public transport stops on map</string>
 	<string name="show_transport_over_map">Show transport stops</string>
-	<string name="hello">Accessible navigation application OsmAndAccess</string>
+	<string name="hello">Navigation application OsmAnd</string>
 	<string name="update_poi_success">POI data was updated successfully ({0} were loaded)</string>
 	<string name="update_poi_error_local">Error updating local POI list</string>
 	<string name="update_poi_error_loading">Error while loading data from server</string>
@@ -690,7 +690,7 @@
     <string name="show_gps_coordinates_text">Show GPS coordinates on map</string>
     <string name="use_internet_to_download_tile">Use Internet to download missing map tiles</string>
     <string name="app_name">OsmAndAccess</string>
-    <string name="app_description">Accessible navigation application</string>
+    <string name="app_description">Navigation application</string>
 
 <string name="exit_Button">Exit</string>
 <string name="map_Button">Map</string>

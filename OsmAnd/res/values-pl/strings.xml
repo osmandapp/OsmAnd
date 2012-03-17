@@ -272,7 +272,7 @@
 \n\tThe map context menu contains all actions referring to a point (location).</string>
 
 <string name="tip_initial">Porady i sztuczki</string>
-<string name="tip_initial_t">\tOsmAndAccess Jest rozbudowanym programem do nawigacji satelitarnej. 
+<string name="tip_initial_t">\tOsmAnd Jest rozbudowanym programem do nawigacji satelitarnej. 
 \n\tAs an basic introduction, some usage tips and tricks are linked on the main menu screen.</string>
 <string name="next_button">Następny</string>
 <string name="previous_button">Poprzedni</string>
@@ -345,10 +345,10 @@
 <string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by new the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 <string name="build_installed">Build {0} successfully installed ({1}).</string>
 <string name="downloading_build">Downloading build...</string>
-<string name="install_selected_build">Continue to install OsmAndAccess - {0} from {1} {2} MB ?</string>
-<string name="loading_builds_failed">Retrieving the list of OsmAndAccess builds failed</string>
-<string name="loading_builds">Loading OsmAndAccess builds...</string>
-<string name="select_build_to_install">Select one of the OsmAndAccess builds to install</string>
+<string name="install_selected_build">Continue to install OsmAnd - {0} from {1} {2} MB ?</string>
+<string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
+<string name="loading_builds">Loading OsmAnd builds...</string>
+<string name="select_build_to_install">Select one of the OsmAnd builds to install</string>
 <string name="contribution_activity">Special activity for contribution version</string>
 
 <string name="gps_status_app_not_found">GPS Status application not installed. Search in Market?</string>
@@ -500,7 +500,7 @@
 <string name="route_head">Prosto</string>
 <string name="first_time_continue">Kontynuuj</string>
 <string name="first_time_download">Pobierz region</string>
-<string name="first_time_msg">Dziękujemy za wybranie programu OsmAndAccess.\nAby wykorzystać wszystkie możliwości programu potrzebujesz map interesującego Cię regionu, które możesz pobrać w Ustawieniach lub przygotować samemu. Po zrobieniu tego, będziesz mógł wyszukiwać adresy, POI i inne obiekty.</string>
+<string name="first_time_msg">Dziękujemy za wybranie programu OsmAnd.\nAby wykorzystać wszystkie możliwości programu potrzebujesz map interesującego Cię regionu, które możesz pobrać w Ustawieniach lub przygotować samemu. Po zrobieniu tego, będziesz mógł wyszukiwać adresy, POI i inne obiekty.</string>
 <string name="search_poi_location">Wyszukiwanie sygnału...</string>
 <string name="search_near_map">Szukaj w pobliżu ostatniej pozycji</string>
 <string name="search_nearby">Szukaj w pobliżu</string>
@@ -527,7 +527,7 @@
 <string name="default_buttons_ok">OK</string>
 <string name="show_transport_over_map_description">Pokaż na mapie przystanki transportu publicznego</string>
 <string name="show_transport_over_map">Pokaż przystanki</string>
-<string name="hello">Program do nawigacji satelitarnej OsmAndAccess</string>
+<string name="hello">Program do nawigacji satelitarnej OsmAnd</string>
 <string name="update_poi_success">POI data was updated successfully ({0} were loaded)</string>
 <string name="update_poi_error_local">Error updating local POI list</string>
 <string name="update_poi_error_loading">Error while loading data from server</string>

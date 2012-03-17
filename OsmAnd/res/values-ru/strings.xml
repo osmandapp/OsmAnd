@@ -223,7 +223,7 @@
 \n\tПосле этого появится окно с координатами, при нажатии на него откроется меню, при долгом нажатии - окно пропадет. Также контекстное меню доступно по кнопке Меню на карте.
 \n\tДействия в этом меню зависят от текущей выбранной точки (центр карты).</string>
 	<string name="tip_initial">Советы по использованию</string>
-	<string name="tip_initial_t">\tOsmAndAccess - навигационное приложение с большим количеством функций. 
+	<string name="tip_initial_t">\tOsmAnd - навигационное приложение с большим количеством функций. 
 \n\tЧтобы использовать его как можно лучше, следуйте советам по ссылке вверху меню.</string>
 	<string name="next_button">Следующий</string>
 	<string name="previous_button">Предыдущий</string>
@@ -296,10 +296,10 @@
 	<string name="osmand_net_previously_installed">У вас имеется предыдущая версия OsmAnd. Все офлайн данные поддерживаются новым приложением. Избранные точки можно экспортировать в старом и импортировать в новом.</string>
 	<string name="build_installed">Сборка {0} успешно установлена ({1}).</string>
 	<string name="downloading_build">Загружается сборка...</string>
-	<string name="install_selected_build">Вы уверены, что хотите установить OsmAndAccess - {0} от {1} {2} MB.</string>
-	<string name="loading_builds_failed">Не удалось получить список сборок OsmAndAccess</string>
-	<string name="loading_builds">Загружаются сборки OsmAndAccess...</string>
-	<string name="select_build_to_install">Выберите одну из сборок OsmAndAccess для установки</string>
+	<string name="install_selected_build">Вы уверены, что хотите установить OsmAnd - {0} от {1} {2} MB.</string>
+	<string name="loading_builds_failed">Не удалось получить список OsmAnd сборок</string>
+	<string name="loading_builds">Загружаются сборки OsmAnd...</string>
+	<string name="select_build_to_install">Выберите одну из OsmAnd сборок для установки</string>
 	
 	<string name="voice_is_not_available_msg">Голосовая навигация не доступна. Перейдите в настройки и укажите голосовые данные или загрузите их.</string>
 	<string name="voice_is_not_available_title">Голосовые данные не найдены</string>
@@ -325,7 +325,7 @@
     <string name="index_settings_descr">Загрузить и обновить данные для офлайн использования</string>
     <string name="index_settings">Данные</string>
 	<string name="osmand_service">Фоновый режим</string>
-	<string name="osmand_service_descr">Запустить OsmAndAccess в фоновом режиме для записи трека и навигации</string>
+	<string name="osmand_service_descr">Запустить OsmAnd в фоновом режиме для записи трека и навигации</string>
 	<string name="fast_route_mode">Наибыстрейший маршрут</string>
 	<string name="fast_route_mode_descr">Включите опцию для расчета наибыстрейшего маршрута или отключите для расчета кратчайшего.</string>
 	<string name="tiles_to_download_estimated_size">На масштабе {0} загрузить {1} тайлов ({2} Mb )</string>
@@ -444,7 +444,7 @@
 	<string name="route_head">Двигайтесь</string>
 	<string name="first_time_continue">Продолжить</string>
 	<string name="first_time_download">Загрузить индексы</string>
-	<string name="first_time_msg">Спасибо за то, что выбрали OsmAndAccess. \n
+	<string name="first_time_msg">Спасибо за то, что выбрали OsmAnd. \n
 Для полноценного использования приложения вам потребуются файлы индексы, которые необходимо загрузить (Настройки/Данные) или подготовить. После загрузки вам будет доступен : поиск по адресу, поиск POI, поиск транспорта.</string>
 	<string name="search_poi_location">Поиск сигнала...</string>
 	<string name="search_near_map">Искать вокруг выбранного центра карты</string>
@@ -473,7 +473,7 @@
 	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">Показать остановки транспорта на карте</string>
 	<string name="show_transport_over_map">Показать транспорт</string>
-	<string name="hello">Навигационное приложение OsmAndAccess</string>
+	<string name="hello">Навигационное приложение OsmAnd</string>
 	<string name="update_poi_success">Данные POI были успешно обновлены ({0} объектов загружено)</string>
 	<string name="update_poi_error_local">Ошибка сохранения POI в локальный индекс</string>
 	<string name="update_poi_error_loading">Ошибка загрузки данных с сервера</string>

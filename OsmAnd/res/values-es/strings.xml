@@ -155,7 +155,7 @@
 	<string name="finished_task">Terminado</string>
 	<string name="first_time_continue">Continuar</string>
 	<string name="first_time_download">Descargar índices</string>
-	<string name="first_time_msg">Gracias por descargar OsmAndAccess. \nPara poderusar todas las características de la aplicación requiere los archivos índices, que puede descargar(Opciones/Datos) o prepararlos usted mismo.Después de eso puede usar: búsqueda por dirección, POI, transporte.</string>
+	<string name="first_time_msg">Gracias por descargar OsmAnd. \nPara poderusar todas las características de la aplicación requiere los archivos índices, que puede descargar(Opciones/Datos) o prepararlos usted mismo.Después de eso puede usar: búsqueda por dirección, POI, transporte.</string>
 	<string name="follow">Seguir</string>
 	<string name="follow_route">Seguir la ruta</string>
 	<string name="general_settings">General</string>
@@ -166,7 +166,7 @@
 	<string name="gps_status_app_not_found">No se pudo encontrar el estado del Gps</string>
 	<string name="gpx_files_not_found">No se encontró los archivos GPX en el directorio /osmand/tracks</string>
 	<string name="gpx_option_reverse_route">Ruta inversa</string>
-	<string name="hello">Aplicación de navegación OsmAndAccess</string>
+	<string name="hello">Aplicación de navegación OsmAnd</string>
 	<string name="hide_poi_filter">Esconder filtro</string>
 	<string name="hint_search_online">Número de casa, calle, ciudad</string>
 	<string name="history">Historia</string>
@@ -258,7 +258,7 @@
 	<string name="osm_settings">OSM</string>
 	<string name="osm_settings_descr">Specify OSM settings: OSM login</string>
 	<string name="osmand_service">Background service</string>
-	<string name="osmand_service_descr">Run background service to use OsmAndAccess while screen off</string>
+	<string name="osmand_service_descr">Run background service to use OsmAnd while screen off</string>
 	<string name="phone">phone</string>
 	<string name="poi">POI</string>
 	<string name="poi_action_add">añadir</string>
