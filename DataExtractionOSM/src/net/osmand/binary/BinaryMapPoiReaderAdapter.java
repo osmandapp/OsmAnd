@@ -18,6 +18,7 @@ import net.osmand.CollatorStringMatcher;
 import net.osmand.LogUtil;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.MapUtils;
@@ -242,6 +243,7 @@ public class BinaryMapPoiReaderAdapter {
 	private TIntLongHashMap readPoiNameIndex(Collator instance, String query, SearchRequest<Amenity> req) throws IOException {
 		TIntLongHashMap offsets = new TIntLongHashMap();
 		TIntArrayList dataOffsets = null;
+		int offset = 0;
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -252,13 +254,13 @@ public class BinaryMapPoiReaderAdapter {
 				int length = readInt();
 				int oldLimit = codedIS.pushLimit(length);
 				dataOffsets = new TIntArrayList();
+				offset = codedIS.getTotalBytesRead();
 				map.readIndexedStringTable(instance, query, "", dataOffsets, 0);
 				codedIS.popLimit(oldLimit);
 				break; }
 			case OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER : {
 				if(dataOffsets != null){
-					dataOffsets.sort();
-					int offset = codedIS.getTotalBytesRead();
+					dataOffsets.sort(); // 1104125
 					for (int i = 0; i < dataOffsets.size(); i++) {
 						codedIS.seek(dataOffsets.get(i) + offset);
 						int len = codedIS.readRawVarint32();
@@ -288,7 +290,7 @@ public class BinaryMapPoiReaderAdapter {
 			switch (tag) {
 			case 0:
 				return;
-			case OsmandOdb.OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER :
+			case OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER :
 				int len = codedIS.readRawVarint32();
 				int oldLim = codedIS.pushLimit(len);
 				readPoiNameIndexDataAtom(offsets, req);
@@ -366,10 +368,8 @@ public class BinaryMapPoiReaderAdapter {
 				if(skipTiles != null){
 					skipTiles.clear();
 				}
-				
 				LOG.info("Searched poi structure in "+(System.currentTimeMillis() - time) + 
 						"ms. Found " + offsets.length +" subtress");
-				
 				for (int j = 0; j < offsets.length; j++) {
 					codedIS.seek(offsets[j] + indexOffset);
 					int len = readInt();

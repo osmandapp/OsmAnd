@@ -21,9 +21,12 @@ import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.MapRoot;
 import net.osmand.binary.BinaryMapIndexReader.SearchFilter;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
+import net.osmand.data.Amenity;
+import net.osmand.data.AmenityType;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
@@ -46,7 +49,7 @@ public class BinaryInspector {
 //		inspector(new String[]{"-v","C:\\Users\\tpd\\osmand\\Housenumbers.obf"});
 		//inspector(new String[]{"/home/victor/projects/OsmAnd/data/osm-gen/saved/Belarus-newzooms-new-rt.obf"});
 //		inspector(new String[]{"/home/victor/projects/OsmAnd/download/spain/Spain_europe_1_small.obf"});
-		inspector(new String[]{"-vaddress", "/home/victor/projects/OsmAnd/data/osm-gen/Luxembourg.obf"});
+		inspector(new String[]{"-vpoi", "/home/victor/projects/OsmAnd/data/osm-gen/Luxembourg.obf"});
 		
 		
 		// test case extract parts
@@ -430,83 +433,12 @@ public class BinaryInspector {
 								i, j++));
 					}
 					if((verbose != null && verbose.isVmap())){
-						final StringBuilder b = new StringBuilder();
-						SearchRequest<BinaryMapDataObject> req = BinaryMapIndexReader.buildSearchRequest(MapUtils.get31TileNumberX(verbose.lonleft),
-								MapUtils.get31TileNumberX(verbose.lonright),
-								MapUtils.get31TileNumberY(verbose.lattop),
-								MapUtils.get31TileNumberY(verbose.latbottom), verbose.getZoom(),
-								new SearchFilter() {
-									@Override
-									public boolean accept(TIntArrayList types, MapIndex index) {
-										return true;
-									}
-								},
-								new ResultMatcher<BinaryMapDataObject>() {
-									@Override
-									public boolean publish(BinaryMapDataObject object) {
-										boolean way = object.getPointsLength() > 1;
-										b.setLength(0);
-										b.append(way ? "Way " : "Point ");
-										if(object.getName() != null){
-											b.append(object.getName());
-										}
-										b.append(" ").append((object.getId() >> 1)).append(" ");
-										formatTags(object, b);
-										b.append("   ");
-										for (int i = 0; i < object.getPointsLength(); i++) {
-											b.append(" ");
-											formatPoint(object, i, b);
-										}
-										println(b.toString());
-										return false;
-									}
-									@Override
-									public boolean isCancelled() {
-										return false;
-									}
-								});
-						index.searchMapIndex(req);
+						printMapDetailInfo(verbose, index);
 					}
+				} else if(p instanceof PoiRegion && (verbose != null && verbose.isVpoi())){
+					printPOIDetailInfo(verbose, index);
 				} else if (p instanceof AddressRegion && (verbose != null && verbose.isVaddress())) {
-					for(String region : index.getRegionNames()){
-						println("\tRegion:" + region);
-						int[] cityType = new int[] {BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE,
-								BinaryMapAddressReaderAdapter.POSTCODES_TYPE, 
-								BinaryMapAddressReaderAdapter.VILLAGES_TYPE};
-						for (int j = 0; j < cityType.length; j++) {
-							int type = cityType[j];
-							for (City c : index.getCities(region, null, type)) {
-								println("\t\t"  + c + getId(c));
-								index.preloadStreets(c, null);
-								for (Street t : c.getStreets()) {
-									if (verbose.contains(t)) {
-										print("\t\t\t" + t.getName() + getId(t));
-//										if (type == BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE) {
-											index.preloadBuildings(t, null);
-											List<Building> buildings = t.getBuildings();
-											if (buildings != null && !buildings.isEmpty()) {
-												print("\t\t (");
-												for (Building b : buildings) {
-													print(b.toString() + ",");
-												}
-												print(")");
-											}
-											List<Street> streets = t.getIntersectedStreets();
-											if (streets != null && !streets.isEmpty()) {
-												print("\n\t\t\t\t\t\t\t x (");
-												for (Street s : streets) {
-													print(s.getName() +", ");
-												}
-												print(")");
-											}
-//										}
-										println("");
-									}
-									
-								}
-							}
-						}
-					}
+					printAddressDetailedInfo(verbose, index);
 				}
 				i++;
 			}
@@ -517,6 +449,112 @@ public class BinaryInspector {
 			throw e;
 		}
 		
+	}
+
+	private static void printAddressDetailedInfo(VerboseInfo verbose, BinaryMapIndexReader index) throws IOException {
+		for(String region : index.getRegionNames()){
+			println("\tRegion:" + region);
+			int[] cityType = new int[] {BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE,
+					BinaryMapAddressReaderAdapter.POSTCODES_TYPE, 
+					BinaryMapAddressReaderAdapter.VILLAGES_TYPE};
+			for (int j = 0; j < cityType.length; j++) {
+				int type = cityType[j];
+				for (City c : index.getCities(region, null, type)) {
+					println("\t\t"  + c + getId(c));
+					index.preloadStreets(c, null);
+					for (Street t : c.getStreets()) {
+						if (verbose.contains(t)) {
+							print("\t\t\t" + t.getName() + getId(t));
+//										if (type == BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE) {
+								index.preloadBuildings(t, null);
+								List<Building> buildings = t.getBuildings();
+								if (buildings != null && !buildings.isEmpty()) {
+									print("\t\t (");
+									for (Building b : buildings) {
+										print(b.toString() + ",");
+									}
+									print(")");
+								}
+								List<Street> streets = t.getIntersectedStreets();
+								if (streets != null && !streets.isEmpty()) {
+									print("\n\t\t\t\t\t\t\t x (");
+									for (Street s : streets) {
+										print(s.getName() +", ");
+									}
+									print(")");
+								}
+//										}
+							println("");
+						}
+						
+					}
+				}
+			}
+		}
+	}
+
+	private static void printMapDetailInfo(VerboseInfo verbose, BinaryMapIndexReader index) throws IOException {
+		final StringBuilder b = new StringBuilder();
+		SearchRequest<BinaryMapDataObject> req = BinaryMapIndexReader.buildSearchRequest(MapUtils.get31TileNumberX(verbose.lonleft),
+				MapUtils.get31TileNumberX(verbose.lonright),
+				MapUtils.get31TileNumberY(verbose.lattop),
+				MapUtils.get31TileNumberY(verbose.latbottom), verbose.getZoom(),
+				new SearchFilter() {
+					@Override
+					public boolean accept(TIntArrayList types, MapIndex index) {
+						return true;
+					}
+				},
+				new ResultMatcher<BinaryMapDataObject>() {
+					@Override
+					public boolean publish(BinaryMapDataObject object) {
+						boolean way = object.getPointsLength() > 1;
+						b.setLength(0);
+						b.append(way ? "Way " : "Point ");
+						if(object.getName() != null){
+							b.append(object.getName());
+						}
+						b.append(" ").append((object.getId() >> 1)).append(" ");
+						formatTags(object, b);
+						b.append("   ");
+						for (int i = 0; i < object.getPointsLength(); i++) {
+							b.append(" ");
+							formatPoint(object, i, b);
+						}
+						println(b.toString());
+						return false;
+					}
+					@Override
+					public boolean isCancelled() {
+						return false;
+					}
+				});
+		index.searchMapIndex(req);
+	}
+	
+	private static void printPOIDetailInfo(VerboseInfo verbose, BinaryMapIndexReader index) throws IOException {
+		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(MapUtils.get31TileNumberX(verbose.lonleft),
+				MapUtils.get31TileNumberX(verbose.lonright),
+				MapUtils.get31TileNumberY(verbose.lattop),
+				MapUtils.get31TileNumberY(verbose.latbottom), verbose.getZoom(),
+				new SearchPoiTypeFilter() {
+					@Override
+					public boolean accept(AmenityType type, String subcategory) {
+						return true;
+					}
+				},
+				new ResultMatcher<Amenity>() {
+					@Override
+					public boolean publish(Amenity object) {
+						println(object.toString() + " " + object.getLocation());
+						return false;
+					}
+					@Override
+					public boolean isCancelled() {
+						return false;
+					}
+				});
+		index.searchPoi(req);
 	}
 	
 	private static String getId(MapObject o ){

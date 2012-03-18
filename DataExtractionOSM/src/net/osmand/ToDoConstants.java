@@ -10,7 +10,7 @@ public class ToDoConstants {
 	
 	// Index
 	// Map QuadTree (skip small areas!!!)
-	// new Address test Name index!!!
+	// POI index exclude building hno from categories!!!
 	// slightly changed POI (check it)!
 	// Routing index
 	// Identify coastline areas and pure ocean areas
@@ -22,13 +22,6 @@ public class ToDoConstants {
 	
 //	    == Osmand application (TODO 127) ==
 	// TODO prepare C++ version of routing algorithm
-
-	// Map Refactoring
-//      Remove notification from OsmAndMapTileView (?)
-	
-//		=== Refactoring issues ===
-//	    !|| 125 || Introduce service layer rather than singletons and put all related into new package (services). Review architecture. Split some big classes. ||
-	
 
 
 	// DONE SWING

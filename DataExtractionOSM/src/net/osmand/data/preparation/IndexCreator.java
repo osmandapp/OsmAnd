@@ -627,8 +627,8 @@ public class IndexCreator {
 		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/data/osm-gen/")); //$NON-NLS-1$
 		creator.setIndexMap(false);
 		creator.setIndexAddress(true);
-		creator.setIndexPOI(false);
-		creator.setIndexTransport(false);
+		creator.setIndexPOI(true);
+		creator.setIndexTransport(true);
 
 		creator.recreateOnlyBinaryFile = false;
 		creator.deleteDatabaseIndexes = false;

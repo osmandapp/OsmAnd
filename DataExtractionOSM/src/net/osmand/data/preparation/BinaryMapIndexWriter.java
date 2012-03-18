@@ -827,11 +827,12 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeMessage(OsmAndTransportIndex.STRINGTABLE_FIELD_NUMBER, st.build());
 	}
 
-	public BinaryFileReference startWritePOIIndex(String name, int left31, int right31, int bottom31, int top31) throws IOException {
+	public long startWritePOIIndex(String name, int left31, int right31, int bottom31, int top31) throws IOException {
 		pushState(POI_INDEX_INIT, OSMAND_STRUCTURE_INIT);
 		codedOutStream.writeTag(OsmandOdb.OsmAndStructure.POIINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		stackBounds.push(new Bounds(0, 0, 0, 0)); // for poi index tree
-		BinaryFileReference startPoiIndex = preserveInt32Size();
+		preserveInt32Size();
+		long startPointer = getFilePointer();
 		if (name != null) {
 			codedOutStream.writeString(OsmandOdb.OsmAndPoiIndex.NAME_FIELD_NUMBER, name);
 		}
@@ -841,7 +842,7 @@ public class BinaryMapIndexWriter {
 		builder.setTop(top31);
 		builder.setBottom(bottom31);
 		codedOutStream.writeMessage(OsmandOdb.OsmAndPoiIndex.BOUNDARIES_FIELD_NUMBER, builder.build());
-		return startPoiIndex;
+		return startPointer;
 	}
 
 	public void endWritePOIIndex() throws IOException {
@@ -889,7 +890,7 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeMessage(OsmandOdb.OsmAndPoiBox.CATEGORIES_FIELD_NUMBER, builder.build());
 	}
 
-	public Map<PoiTileBox, List<BinaryFileReference>> writePoiNameIndex(Map<String, Set<PoiTileBox>> namesIndex, BinaryFileReference startPoiIndex) throws IOException {
+	public Map<PoiTileBox, List<BinaryFileReference>> writePoiNameIndex(Map<String, Set<PoiTileBox>> namesIndex, long startPoiIndex) throws IOException {
 		checkPeekState(POI_INDEX_INIT);
 		codedOutStream.writeTag(OsmandOdb.OsmAndPoiIndex.NAMEINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		preserveInt32Size();
@@ -897,7 +898,7 @@ public class BinaryMapIndexWriter {
 		Map<PoiTileBox, List<BinaryFileReference>> fpToWriteSeeks = new LinkedHashMap<PoiTileBox, List<BinaryFileReference>>();
 		Map<String, BinaryFileReference> indexedTable = writeIndexedTable(OsmandOdb.OsmAndPoiNameIndex.TABLE_FIELD_NUMBER, namesIndex.keySet());
 		for(Map.Entry<String, Set<PoiTileBox>> e : namesIndex.entrySet()) {
-			codedOutStream.writeTag(OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+			codedOutStream.writeTag(OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER, FieldType.MESSAGE.getWireType());
 			BinaryFileReference nameTableRef = indexedTable.get(e.getKey());
 			codedOutStream.flush();
 			nameTableRef.writeReference(raf, getFilePointer());
@@ -915,7 +916,7 @@ public class BinaryMapIndexWriter {
 			}
 			OsmAndPoiNameIndex.OsmAndPoiNameIndexData msg = builder.build();
 			
-			codedOutStream.writeMessage(OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER, msg);
+			codedOutStream.writeMessageNoTag(msg);
 			long endPointer = getFilePointer();
 			
 			// first message
@@ -925,7 +926,7 @@ public class BinaryMapIndexWriter {
 				if (!fpToWriteSeeks.containsKey(box)) {
 					fpToWriteSeeks.put(box, new ArrayList<BinaryFileReference>());
 				}
-				fpToWriteSeeks.get(box).add(net.osmand.data.preparation.BinaryFileReference.createShiftReference(endPointer - accumulateSize, startPoiIndex.getStartPointer()));
+				fpToWriteSeeks.get(box).add(net.osmand.data.preparation.BinaryFileReference.createShiftReference(endPointer - accumulateSize, startPoiIndex));
 				accumulateSize += CodedOutputStream.computeMessageSize(OsmAndPoiNameIndex.OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER,
 						msg.getAtoms(i));
 
@@ -993,11 +994,12 @@ public class BinaryMapIndexWriter {
 	public void startWritePoiData(int zoom, int x, int y, List<BinaryFileReference> fpPoiBox) throws IOException {
 		pushState(POI_DATA, POI_INDEX_INIT);
 		codedOutStream.writeTag(OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
-		BinaryFileReference startPoiData = preserveInt32Size();
+		long pointer = codedOutStream.getWrittenBytes();
+		preserveInt32Size();
 		codedOutStream.flush();
 		// write shift to that data
 		for (int i = 0; i < fpPoiBox.size(); i++) {
-			fpPoiBox.get(i).writeReference(raf, startPoiData.getStartPointer());
+			fpPoiBox.get(i).writeReference(raf, pointer);
 		}
 
 		codedOutStream.writeUInt32(OsmandOdb.OsmAndPoiBoxData.ZOOM_FIELD_NUMBER, zoom);
@@ -1011,7 +1013,7 @@ public class BinaryMapIndexWriter {
 		writeInt32Size();
 	}
 
-	public BinaryFileReference startWritePoiBox(int zoom, int tileX, int tileY, BinaryFileReference startPoiIndex, boolean end)
+	public BinaryFileReference startWritePoiBox(int zoom, int tileX, int tileY, long startPoiIndex, boolean end)
 			throws IOException {
 		checkPeekState(POI_INDEX_INIT, POI_BOX);
 		if (state.peek() == POI_INDEX_INIT) {
@@ -1036,7 +1038,7 @@ public class BinaryMapIndexWriter {
 
 		if (end) {
 			codedOutStream.writeTag(OsmandOdb.OsmAndPoiBox.SHIFTTODATA_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
-			BinaryFileReference shift = BinaryFileReference.createShiftReference(getFilePointer(), startPoiIndex.getStartPointer());
+			BinaryFileReference shift = BinaryFileReference.createShiftReference(getFilePointer(), startPoiIndex);
 			codedOutStream.writeFixed32NoTag(0);
 			return shift;
 		}

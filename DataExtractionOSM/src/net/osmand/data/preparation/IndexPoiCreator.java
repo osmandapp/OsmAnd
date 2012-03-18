@@ -292,7 +292,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		int left31 = minX;
 		int bottom31 = maxY;
 		int top31 = minY;
-		BinaryFileReference startFpPoiIndex = writer.startWritePOIIndex(regionName, left31, right31, bottom31, top31);
+		long startFpPoiIndex = writer.startWritePOIIndex(regionName, left31, right31, bottom31, top31);
 
 		// 2. write categories table
 		Map<String, Map<String, Integer>> categories = rootZoomsTree.node.categories;
@@ -420,7 +420,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 	}
 
 	private void writePoiBoxes(BinaryMapIndexWriter writer, Tree<PoiTileBox> tree, 
-			BinaryFileReference startFpPoiIndex, Map<PoiTileBox, List<BinaryFileReference>> fpToWriteSeeks,
+			long startFpPoiIndex, Map<PoiTileBox, List<BinaryFileReference>> fpToWriteSeeks,
 			Map<String, Map<String, Integer>> categories, Map<String, Integer> catIndexes) throws IOException, SQLException {
 		int x = tree.getNode().x;
 		int y = tree.getNode().y;

@@ -8,7 +8,6 @@ import net.osmand.ResultMatcher;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
-import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -32,20 +31,20 @@ public interface RegionAddressRepository {
 	
 
 	
-	public void preloadCities(ResultMatcher<MapObject> resultMatcher);
+	public void preloadCities(ResultMatcher<City> resultMatcher);
 	
 	public void preloadBuildings(Street street, ResultMatcher<Building> resultMatcher);
 	
-	public void preloadStreets(MapObject o, ResultMatcher<Street> resultMatcher);
+	public void preloadStreets(City o, ResultMatcher<Street> resultMatcher);
 	
 	
 	public List<MapObject> getLoadedCities();
 	
-	public PostCode getPostcode(String name);
+	public City getPostcode(String name);
 	
 	public City getCityById(Long id);
 	
-	public Street getStreetByName(MapObject cityOrPostcode, String name);
+	public Street getStreetByName(City cityOrPostcode, String name);
 	
 	public Building getBuildingByName(Street street, String name);
 	
@@ -56,9 +55,9 @@ public interface RegionAddressRepository {
 	public LatLon findStreetIntersection(Street street, Street street2);
 	
 	// TODO remove that method
-	public List<Street> fillWithSuggestedStreets(MapObject o, ResultMatcher<Street> resultMatcher, String... names);
+	public List<Street> fillWithSuggestedStreets(City o, ResultMatcher<Street> resultMatcher, String... names);
 	
-	public List<MapObject> fillWithSuggestedCities(String name, ResultMatcher<MapObject> resultMatcher, LatLon currentLocation);
+	public List<City> fillWithSuggestedCities(String name, ResultMatcher<City> resultMatcher, LatLon currentLocation);
 	
 	
 	

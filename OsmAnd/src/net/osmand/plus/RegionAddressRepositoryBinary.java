@@ -15,11 +15,11 @@ import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.LogUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapAddressReaderAdapter;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
-import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.osm.LatLon;
 
@@ -33,7 +33,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	
 	
 	private final LinkedHashMap<Long, City> cities = new LinkedHashMap<Long, City>();
-	private final Map<String, PostCode> postCodes;
+	private final Map<String, City> postCodes;
 	private boolean useEnglishNames = false;
 	private final Collator collator;
 	
@@ -42,7 +42,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		this.region = name;
  	    this.collator = Collator.getInstance();
  	    this.collator.setStrength(Collator.PRIMARY); //ignores also case
-		this.postCodes = new TreeMap<String, PostCode>(collator);
+		this.postCodes = new TreeMap<String, City>(collator);
 	}
 	
 	@Override
@@ -52,10 +52,11 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 	
 	@Override
-	public synchronized void preloadCities(ResultMatcher<MapObject> resultMatcher) {
+	public synchronized void preloadCities(ResultMatcher<City> resultMatcher) {
 		if (cities.isEmpty()) {
 			try {
-				List<City> cs = file.getCities(region, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
+				List<City> cs = file.getCities(region, BinaryMapIndexReader.buildAddressRequest(resultMatcher), 
+						BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE);
 				for (City c : cs) {
 					cities.put(c.getId(), c);
 				}
@@ -88,18 +89,13 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	}
 	
 	@Override
-	public synchronized void preloadStreets(MapObject o, ResultMatcher<Street> resultMatcher) {
-		assert o instanceof PostCode || o instanceof City;
-		Collection<Street> streets = o instanceof PostCode ? ((PostCode) o).getStreets() : ((City) o).getStreets();
+	public synchronized void preloadStreets(City o, ResultMatcher<Street> resultMatcher) {
+		Collection<Street> streets = o.getStreets();
 		if(!streets.isEmpty()){
 			return;
 		}
 		try {
-			if(o instanceof PostCode){
-				file.preloadStreets((PostCode) o, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
-			} else {
-				file.preloadStreets((City) o, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
-			}
+			file.preloadStreets(o, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
 		} catch (IOException e) {
 			log.error("Disk operation failed" , e); //$NON-NLS-1$
 		}
@@ -113,19 +109,16 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	
 	
 	@Override
-	public List<Street> fillWithSuggestedStreets(MapObject o, ResultMatcher<Street> resultMatcher, String... names) {
-		assert o instanceof PostCode || o instanceof City;
-		City city = (City) (o instanceof City ? o : null); 
-		PostCode post = (PostCode) (o instanceof PostCode ? o : null);
+	public List<Street> fillWithSuggestedStreets(City o, ResultMatcher<Street> resultMatcher, String... names) {
 		List<Street> streetsToFill = new ArrayList<Street>();	
 		if(names.length == 0){
 			preloadStreets(o, resultMatcher);
-			streetsToFill.addAll(post == null ? city.getStreets() : post.getStreets());
+			streetsToFill.addAll(o.getStreets());
 			return streetsToFill;
 		}
 		preloadStreets(o, null);
 		
-		Collection<Street> streets = post == null ? city.getStreets() : post.getStreets();
+		Collection<Street> streets =o.getStreets();
 		
 		// 1st step loading by starts with
 		for (StringMatcherMode mode : streetsCheckMode) {
@@ -148,8 +141,8 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 
 	@Override
-	public List<MapObject> fillWithSuggestedCities(String name, ResultMatcher<MapObject> resultMatcher, LatLon currentLocation) {
-		List<MapObject> citiesToFill = new ArrayList<MapObject>();
+	public List<City> fillWithSuggestedCities(String name, ResultMatcher<City> resultMatcher, LatLon currentLocation) {
+		List<City> citiesToFill = new ArrayList<City>();
 		if (cities.isEmpty()) {
 			preloadCities(resultMatcher);
 			citiesToFill.addAll(cities.values());
@@ -166,8 +159,9 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			if (name.length() >= 2 && Algoritms.containsDigit(name)) {
 				// also try to identify postcodes
 				String uName = name.toUpperCase();
-				for (PostCode code : file.getPostcodes(region, BinaryMapIndexReader.buildAddressRequest(resultMatcher), 
-						new CollatorStringMatcher(collator, uName, StringMatcherMode.CHECK_CONTAINS))) {
+				for (City code : file.getCities(region, BinaryMapIndexReader.buildAddressRequest(resultMatcher), 
+						new CollatorStringMatcher(collator, uName, StringMatcherMode.CHECK_CONTAINS), 
+						BinaryMapAddressReaderAdapter.POSTCODES_TYPE)) {
 					citiesToFill.add(code);
 					if (resultMatcher.isCancelled()) {
 						return citiesToFill;
