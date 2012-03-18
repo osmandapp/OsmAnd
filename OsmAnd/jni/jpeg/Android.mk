@@ -74,7 +74,7 @@ ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
 LOCAL_CFLAGS += -DANDROID_ARMV6_IDCT
 endif
 
-ifneq ($(OSMAND_NEON),true)
+ifneq ($(OSMAND_BUILDING_NEON_LIBRARY),true)
 LOCAL_MODULE := libjpeg
 else
 LOCAL_MODULE := libjpeg_neon

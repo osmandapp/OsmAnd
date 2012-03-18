@@ -10,10 +10,6 @@
 #include "common.h"
 #include "mapObjects.h"
 
-#define	INT_MAX		0x7fffffff	/* max value for an int */
-#define	INT_MIN		(-0x7fffffff-1)	/* min value for an int */
-
-char textMsg[1024] ;
 struct tagValueType {
 	int type;
 	std::string tag;
@@ -118,7 +114,7 @@ MultiPolygonObject* processMultiPolygon(int leftX, int rightX, int bottomY, int 
 				whole.push_back(int_pair(leftX, bottomY));
 				whole.push_back(int_pair(rightX, bottomY));
 				completedRings.push_back(whole);
-				__android_log_print(ANDROID_LOG_INFO, "net.osmand", "!!! Isolated island !!!");
+				__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "!!! Isolated island !!!");
 			}
 
 		}
@@ -161,14 +157,13 @@ void proccessMultiPolygons(std::map<tagValueType, std::vector<MapDataObject*> >&
 		completedRingNames.clear();
 		incompletedRingNames.clear();
 
-		sprintf(textMsg, "Process multipolygon %s %s direct list %d rev %d", val->first.tag.c_str(), val->first.value.c_str(), directList->size(), inverselist->size());
-		__android_log_print(ANDROID_LOG_INFO, "net.osmand", textMsg);
+		__android_log_print(ANDROID_LOG_INFO, LOG_TAG,  "Process multipolygon %s %s direct list %d rev %d", val->first.tag.c_str(), val->first.value.c_str(), directList->size(), inverselist->size());
 		MultiPolygonObject* pl = processMultiPolygon(leftX, rightX, bottomY, topY, completedRings, incompletedRings,
 				completedRingNames, incompletedRingNames, val->first, *directList, *inverselist, zoom);
 		if (pl != NULL) {
 			listPolygons.push_back(pl);
 		} else {
-			__android_log_print(ANDROID_LOG_INFO, "net.osmand", "Multipolygon skipped");
+			__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Multipolygon skipped");
 		}
 	}
 }
@@ -361,7 +356,7 @@ void unifyIncompletedRings(std::vector<std::vector<int_pair> >& incompletedRings
 //					System.err
 //							.println(MessageFormat.format(dbId + str, dx, dy, dsx, dsy, leftX + "", topY + "", rightX + "", bottomY + "")); //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 //				}
-			__android_log_print(ANDROID_LOG_INFO, "net.osmand", "Error processing multipolygon");
+			__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Error processing multipolygon");
 		} else {
 			nonvisitedRings.insert(j);
 		}

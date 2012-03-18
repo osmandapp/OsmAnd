@@ -45,7 +45,7 @@ extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
 	loadJniMapObjects();
 	loadJniBinaryRead();
 
-	__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "JNI_OnLoad completed");
+	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "JNI_OnLoad completed");
 
 	return JNI_VERSION_1_6;
 }
