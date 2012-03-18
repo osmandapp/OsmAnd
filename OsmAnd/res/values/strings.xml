@@ -191,7 +191,7 @@
 	<string name="show_gpx_route">Show on map</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_select_point">Select</string>
-	<string name="local_index_description">Download, activate, deactivate, or delete offline data. \nCurrent data on device (%1$s free space):</string>
+	<string name="local_index_description">Download, (de-)activate, or delete offline data. \nCurrent data on device (%1$s free):</string>
 	<string name="search_position_current_location_search">Searching position&#8230;</string>
 	<string name="search_position_current_location_found">Position (Found)</string>
 	<string name="search_position_address">Address&#8230;</string>
@@ -566,7 +566,7 @@
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">seconds</string>
 	<string name="int_min">min.</string>
-	<string name="background_service_int_descr">Set interval for location determination by background service</string>
+	<string name="background_service_int_descr">Set wake-up interval used by background service</string>
 	<string name="background_service_int">Positioning interval</string>
 	<string name="background_service_provider_descr">Choose location provider for background service</string>
 	<string name="background_service_provider">Location provider</string>
