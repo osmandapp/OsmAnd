@@ -10,9 +10,6 @@
 #include "common.h"
 #include "mapObjects.h"
 
-#define	INT_MAX		0x7fffffff	/* max value for an int */
-#define	INT_MIN		(-0x7fffffff-1)	/* min value for an int */
-
 struct tagValueType {
 	int type;
 	std::string tag;
@@ -160,7 +157,7 @@ void proccessMultiPolygons(std::map<tagValueType, std::vector<MapDataObject*> >&
 		completedRingNames.clear();
 		incompletedRingNames.clear();
 
-		__android_log_print(ANDROID_LOG_ERROR, LOG_TAG,  "Process multipolygon %s %s direct list %d rev %d", val->first.tag.c_str(), val->first.value.c_str(), directList->size(), inverselist->size());
+		__android_log_print(ANDROID_LOG_INFO, LOG_TAG,  "Process multipolygon %s %s direct list %d rev %d", val->first.tag.c_str(), val->first.value.c_str(), directList->size(), inverselist->size());
 		MultiPolygonObject* pl = processMultiPolygon(leftX, rightX, bottomY, topY, completedRings, incompletedRings,
 				completedRingNames, incompletedRingNames, val->first, *directList, *inverselist, zoom);
 		if (pl != NULL) {
