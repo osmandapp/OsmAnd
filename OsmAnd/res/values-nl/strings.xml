@@ -429,7 +429,7 @@
 	<string name="version_index_is_big_for_memory">De index \'\'{0}\'\' paste niet in het geheugen</string>
 	<string name="version_index_is_not_supported">De versie van index \'\'{0}\'\' wordt niet ondersteund</string>
 
-	<string name="use_osmand_routing_service">OsmAnd routing</string>
+	<string name="use_osmand_routing_service">OsmAnd routing >20km</string>
 	<string name="use_osmand_routing_service_descr">Gebruik OsmAnd offline routing voor lange afstanden (experimenteel) inplaats van CloudMade</string>
 	<string name="osmand_routing_experimental">OsmAnd offline routing is een experimentele functie en werkt niet voor afstanden van meer dan ongeveer 20 km.\n\nRouting service is tijdelijk omgeschakeld naar online CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Kan de opgegeven directory niet vinden.</string>

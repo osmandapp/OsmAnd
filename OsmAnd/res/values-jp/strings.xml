@@ -255,7 +255,7 @@ OSMコミュニティはこの問題をいち早く修正することができ�
      <string name="version_index_is_not_supported">索引 \'\'{0}\'\' のバージョンは
 サポートされていません</string>
 
-     <string name="use_osmand_routing_service">OsmAnd 経路案内</string>
+     <string name="use_osmand_routing_service">OsmAnd 経路案内 >20km</string>
      <string name="use_osmand_routing_service_descr">長距離のオフライン経路案内に
 OsmAndを使用(実験版)</string>
      <string name="osmand_routing_experimental">OsmAndオフライン経路案内は実験的な機能であり

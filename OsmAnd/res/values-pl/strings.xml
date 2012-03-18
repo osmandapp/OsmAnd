@@ -334,7 +334,7 @@
 <string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
 <string name="version_index_is_not_supported">The version of index \'\'{0}\'\' is not supported</string>
 
-<string name="use_osmand_routing_service">OsmAnd routing</string>
+<string name="use_osmand_routing_service">OsmAnd routing >20km</string>
 <string name="use_osmand_routing_service_descr">Użyj routingu offline dla długich tras (funkcjonalność eksperymentalna)</string>
 <string name="osmand_routing_experimental">Routing offline OsmAnd-a jest funkcją eksperymentalną i nie działa dobrze dla odległości większych niż 20km.\n\nUsługa routująca jest automatycznie przełączana do CloudMade (online).</string>
 <string name="specified_dir_doesnt_exist">Can not find specified directory.</string>

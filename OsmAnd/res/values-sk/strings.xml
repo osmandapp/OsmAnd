@@ -403,7 +403,7 @@
 	<string name="version_index_is_big_for_memory">Index \'\'{0}\'\' sa nezmestil do pamäti</string>
 	<string name="version_index_is_not_supported">Verzia indexu \'\'{0}\'\' nie je podporovaná</string>
 	
-<string name="use_osmand_routing_service">OsmAnd offline rutovanie</string>
+<string name="use_osmand_routing_service">OsmAnd offline rutovanie >20km</string>
 <string name="use_osmand_routing_service_descr">Použitie offline rutovania na dlhé vzdialenosti (experimentálne) namiesto CloudMade</string>
 <string name="osmand_routing_experimental">OsmAnd offline rutovanie je experimentálna funkcia a nefunguje na vzdialenosť väčšiu ako 20 km.\n\nRutovacia služba je dočasne prepnutá na online CloudMade.</string>
 <string name="specified_dir_doesnt_exist">Nedá sa nájsť určený adresár.</string>

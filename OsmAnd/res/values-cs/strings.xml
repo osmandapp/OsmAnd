@@ -650,7 +650,7 @@
   <string name="add_waypoint_dialog_added">Bod \'\'{0}\'\' byl přidán</string>
   <string name="add_waypoint_dialog_title">Přidat bod na zaznamenávanou GPX trasu</string>
   <string name="context_menu_item_add_waypoint">Přidat bod na GPX trasu</string>
-  <string name="use_osmand_routing_service">Navigace OsmAnd</string>
+  <string name="use_osmand_routing_service">Navigace OsmAnd >20km</string>
   <string name="use_osmand_routing_service_descr">Používat offline
   navigaci pro dlouhé vzdálenosti (experimentální)</string>
   <string name="osmand_routing_experimental">Offline navigace je

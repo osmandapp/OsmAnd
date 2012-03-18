@@ -349,7 +349,7 @@
 	<string name="version_index_is_not_supported">Версия индекса \'\'{0}\'\' не поддерживается</string>
 	
 	
-	<string name="use_osmand_routing_service">OsmAnd offline навигация</string>
+	<string name="use_osmand_routing_service">OsmAnd offline навигация >20км</string>
 	<string name="use_osmand_routing_service_descr">Использовать offline навигацию на длинные расстояние (экспериментально)</string>
 	<string name="osmand_routing_experimental">OsmAnd offline навигация является экспериментальной и не работает на расстояния более 20 километров.\n\nВ этом случае автоматически переключается на CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Невозможно найти указанную директорию.</string>

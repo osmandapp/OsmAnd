@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
 	<string name="offline_poi_edition">Offline POI szerkesztés</string>
 	<string name="offline_poi_edition_descr">POI szerkesztése mindig offline módban</string>
@@ -442,7 +442,7 @@
 	<string name="version_index_is_not_supported">\'\'{0}\'\' index verziója nem támogatott</string>
 	<string name="osmand_net_previously_installed">Ön már telepített egy korábbi OsmAnd verziót. Minden internettől független adat használható az új alkalmazással. A Kedvenc pontokat a régi alkalmazásból érdemes kimenteni és az újba betölteni</string>
 
-	<string name="use_osmand_routing_service">OsmAnd útvonaltervező</string>
+	<string name="use_osmand_routing_service">OsmAnd útvonaltervező >20km</string>
 	<string name="use_osmand_routing_service_descr">OsmAnd offline útvonaltervező használata nagy távolságokra is (kísérleti funkció) CloudMade-re váltás helyett.</string>
 	<string name="osmand_routing_experimental">Az OsmAnd offline útvonaltervezője kísérleti funkció és nem működik 20 kilométernél nagyobb távolságban.\n\nÁtmenetileg átállítva online Cluodmade-re.</string>
 	<string name="specified_dir_doesnt_exist">Nem található a megadott könyvtár.</string>
