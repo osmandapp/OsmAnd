@@ -12,15 +12,13 @@ public class ToDoConstants {
 	
 	// Map QuadTree (skip small areas!!!)
 	// POI index exclude building hno from categories!!!
-	// Routing index
+	// Routing index !!
 	// Identify coastline areas and pure ocean areas !!!
 	
-	// Polish UI with new builiding style
+
+	
+	// Polish UI with new builiding address search ...(Better completely new address search)
 	// Test images in the map 
-	
-	
-	// TODO
-	// Ref and other names are not provided as additional types (on level < 15)!
 	
 	
 //	    == Osmand application (TODO 127) ==

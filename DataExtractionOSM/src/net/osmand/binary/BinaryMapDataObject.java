@@ -26,9 +26,20 @@ public class BinaryMapDataObject {
 	
 	public String getName(){
 		if(objectNames == null){
-			return null;
+			return "";
 		}
-		return objectNames.get(mapIndex.nameEncodingType);
+		String name = objectNames.get(mapIndex.nameEncodingType);
+		if(name == null){
+			return "";
+		}
+		return name;
+	}
+	
+	public String getRef(){
+		if(mapIndex.refEncodingType != -1 && objectNames != null) {
+			return objectNames.get(mapIndex.refEncodingType);
+		}
+		return null;
 	}
 	
 	public TIntObjectHashMap<String> getObjectNames() {

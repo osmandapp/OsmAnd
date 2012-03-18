@@ -440,6 +440,7 @@ public class BinaryRoutePlanner {
 		return null;
 	}
 	
+	
 
 
 	private RouteSegment processIntersectionsWithWays(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments,
@@ -487,25 +488,25 @@ public class BinaryRoutePlanner {
 			if ((!alreadyVisited && processRoad) || oppositeConnectionFound) {
 				int type = -1;
 				if (!reverseWay) {
-					for (int i = 0; i < road.getRestrictionCount(); i++) {
-						if (road.getRestriction(i) == next.road.getId()) {
-							type = road.getRestrictionType(i);
+					for (int i = 0; i < getRestrictionCount(road); i++) {
+						if (getRestriction(road, i) == next.road.getId()) {
+							type = getRestrictionType(road, i);
 							break;
 						}
 					}
 				} else {
-					for (int i = 0; i < next.road.getRestrictionCount(); i++) {
-						if (next.road.getRestriction(i) == road.getId()) {
-							type = next.road.getRestrictionType(i);
+					for (int i = 0; i < getRestrictionCount(next.road); i++) {
+						if (getRestriction(next.road, i) == road.getId()) {
+							type = getRestrictionType(next.road, i);
 							break;
 						}
 						// Check if there is restriction only to the current road
-						if (next.road.getRestrictionType(i) == MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN
-								|| next.road.getRestrictionType(i) == MapRenderingTypes.RESTRICTION_ONLY_LEFT_TURN
-								|| next.road.getRestrictionType(i) == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
+						if (getRestrictionType(next.road, i) == MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN
+								|| getRestrictionType(next.road, i) == MapRenderingTypes.RESTRICTION_ONLY_LEFT_TURN
+								|| getRestrictionType(next.road, i) == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
 							// check if that restriction applies to considered junk
 							RouteSegment foundNext = inputNext;
-							while(foundNext != null && foundNext.getRoad().getId() != next.road.getRestriction(i)){
+							while(foundNext != null && foundNext.getRoad().getId() != getRestriction(next.road, i)){
 								foundNext = foundNext.next;
 							}
 							if(foundNext != null) {
@@ -618,6 +619,21 @@ public class BinaryRoutePlanner {
 
 
 	
+	private int getRestrictionType(BinaryMapDataObject road, int i) {
+		throw new UnsupportedOperationException();
+	}
+
+
+	private long getRestriction(BinaryMapDataObject road, int i) {
+		throw new UnsupportedOperationException();
+	}
+
+
+	private int getRestrictionCount(BinaryMapDataObject road) {
+		throw new UnsupportedOperationException();
+	}
+
+
 	private List<RouteSegmentResult> prepareResult(RoutingContext ctx, RouteSegment start, RouteSegment end, long startNanoTime,
 			RouteSegment finalDirectRoute, RouteSegment finalReverseRoute) {
 		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
@@ -681,9 +697,13 @@ public class BinaryRoutePlanner {
 					"    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\">", 
 					startLat+"", startLon+"", endLat+"", endLon+""));
 			for (RouteSegmentResult res : result) {
+				String name = res.object.getName();
+				if(res.object.getRef() != null) {
+					name += " " + res.object.getRef();
+				}
 				// (res.object.getId() >> 1)
 				System.out.println(MessageFormat.format("\t<segment id=\"{0}\" start=\"{1}\" end=\"{2}\" name=\"{3}\"/>", 
-						(res.object.getId() >> 1)+"", res.startPointIndex, res.endPointIndex, (res.object.getName()+"").replace(MapRenderingTypes.REF_CHAR, ' ')));
+						(res.object.getId() >> 1)+"", res.startPointIndex, res.endPointIndex, name));
 			}
 			System.out.println("</test>");
 		}

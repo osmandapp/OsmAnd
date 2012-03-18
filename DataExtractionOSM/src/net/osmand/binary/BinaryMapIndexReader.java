@@ -566,6 +566,10 @@ public class BinaryMapIndexReader {
 		index.encodingRules.get(tag).put(val, id);
 		if("name".equals(tag)){
 			index.nameEncodingType = id;
+		} else if("natural".equals(tag) && "coastline".equals(val)){
+			index.coastlineEncodingType = id;
+		} else if("ref".equals(tag)){
+			index.refEncodingType = id;
 		}
 		if(!index.decodingRules.containsKey(id)){
 			index.decodingRules.put(id, new TagValuePair(tag, val, type));
@@ -1316,6 +1320,8 @@ public class BinaryMapIndexReader {
 		Map<String, Map<String, Integer>> encodingRules = new LinkedHashMap<String, Map<String, Integer>>();
 		TIntObjectMap<TagValuePair> decodingRules = new TIntObjectHashMap<TagValuePair>();
 		int nameEncodingType = 0;
+		int refEncodingType = -1;
+		int coastlineEncodingType = 0;
 		
 		public List<MapRoot> getRoots() {
 			return roots;

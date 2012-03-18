@@ -142,7 +142,7 @@ public class CarRouter extends VehicleRouter {
 	@Override
 	public double defineSpeed(BinaryMapDataObject road) {
 		TagValuePair pair = road.getTagValue(0);
-		double speed = MapRenderingTypes.getMaxSpeedIfDefined(road.getHighwayAttributes()) / 3.6d;
+		double speed = MapRenderingTypes.getMaxSpeedIfDefined(getHighwayAttributes(road)) / 3.6d;
 		boolean highway = "highway".equals(pair.tag);
 		double priority = highway && autoPriorityValues.containsKey(pair.value) ? autoPriorityValues.get(pair.value) : 0.5d;
 		if (speed == 0 && highway) {

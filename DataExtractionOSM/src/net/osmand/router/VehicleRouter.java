@@ -24,8 +24,12 @@ public abstract class VehicleRouter {
 	public abstract boolean acceptPoint(TagValuePair pair);
 
 	
+	public int getHighwayAttributes(BinaryMapDataObject road){
+		throw new UnsupportedOperationException();
+	}
+	
 	public boolean isOneWay(BinaryMapDataObject road) {
-		int attributes = road.getHighwayAttributes();
+		int attributes = getHighwayAttributes(road);
 		return MapRenderingTypes.isOneWayWay(attributes) || MapRenderingTypes.isRoundabout(attributes);
 	}
 	
