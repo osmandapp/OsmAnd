@@ -33,6 +33,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 	private JTextField mapZooms;
 	private JTextField lineSmoothness;
 	private JTextField cityAdminLevel;
+	private JTextField osrmServerAddress;
 	private JTextField renderingTypesFile;
 	private JTextField pathToObfRoutingFile;
 
@@ -143,6 +144,27 @@ public class OsmExtractionPreferencesDialog extends JDialog {
         constr.gridx = 1;
         constr.gridy = 2;
         l.setConstraints(cityAdminLevel, constr);
+        
+        label = new JLabel(Messages.getString("OsmExtractionPreferencesDialog.OSRM.SERVER.ADDRESS"));
+        panel.add(label);
+        constr = new GridBagConstraints();
+        constr.ipadx = 5;
+        constr.gridx = 0;
+        constr.gridy = 3;
+        constr.anchor = GridBagConstraints.WEST;
+        l.setConstraints(label, constr);
+        
+        osrmServerAddress = new JTextField();
+        
+        osrmServerAddress.setText(DataExtractionSettings.getSettings().getOsrmServerAddress());
+        panel.add(osrmServerAddress);
+        constr = new GridBagConstraints();
+        constr.weightx = 1;
+        constr.fill = GridBagConstraints.HORIZONTAL;
+        constr.ipadx = 5;
+        constr.gridx = 1;
+        constr.gridy = 3;
+        l.setConstraints(osrmServerAddress, constr);
 		
 //		supressWarning = new JCheckBox();
 //		supressWarning.setText(Messages.getString("OsmExtractionPreferencesDialog.DUPLICATED.ID")); //$NON-NLS-1$
@@ -313,6 +335,9 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		}
 		if(!settings.getCityAdminLevel().equals(cityAdminLevel.getText())){
             settings.setCityAdminLevel(cityAdminLevel.getText());
+        }
+		if(!settings.getOsrmServerAddress().equals(osrmServerAddress.getText())){
+            settings.setOsrmServerAddress(osrmServerAddress.getText());
         }
 //		if(settings.isSupressWarningsForDuplicatedId() != supressWarning.isSelected()){
 //			settings.setSupressWarningsForDuplicatedId	(supressWarning.isSelected());
