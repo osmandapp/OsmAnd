@@ -320,17 +320,11 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		}
 	}
 	
-	private void parseAndSort(TIntArrayList ts, byte[] bs, byte[] bt) {
+	private void parseAndSort(TIntArrayList ts, byte[] bs) {
 		ts.clear();
 		if (bs != null && bs.length > 0) {
-			for (int j = 0; j < bs.length; j += 4) {
-				ts.add(Algoritms.parseIntFromBytes(bs, j));
-			}
-		}
-		
-		if (bt != null && bt.length > 0) {
-			for (int j = 0; j < bt.length; j += 4) {
-				ts.add(Algoritms.parseIntFromBytes(bt, j));
+			for (int j = 0; j < bs.length; j += 2) {
+				ts.add(Algoritms.parseSmallIntFromBytes(bs, j));
 			}
 		}
 		ts.sort();
@@ -353,6 +347,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		TLongHashSet visitedWays = new TLongHashSet();
 		ArrayList<Float> list = new ArrayList<Float>(100);
 		TIntArrayList temp = new TIntArrayList();
+		TIntArrayList tempAdd = new TIntArrayList();
 		while (rs.next()) {
 			if (lowLevelWays != -1) {
 				progress.progress(1);
@@ -370,7 +365,8 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 			long endNode = rs.getLong(3);
 
 			String name = rs.getString(5);
-			parseAndSort(typeUse, rs.getBytes(6), rs.getBytes(7));
+			parseAndSort(typeUse, rs.getBytes(6));
+			parseAndSort(addtypeUse, rs.getBytes(7));
 			
 			loadNodes(rs.getBytes(4), list);
 			ArrayList<Float> wayNodes = new ArrayList<Float>(list);
@@ -385,8 +381,9 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				// search by exact name
 				while (fs.next() && !combined) {
 					if (!visitedWays.contains(fs.getLong(1))) {
-						parseAndSort(temp, rs.getBytes(6), rs.getBytes(7));
-						if(temp.equals(namesUse)){
+						parseAndSort(temp, rs.getBytes(6));
+						parseAndSort(tempAdd, rs.getBytes(7));
+						if(temp.equals(typeUse) && tempAdd.equals(addtypeUse)){
 							combined = true;
 							long lid = fs.getLong(1);
 							startNode = fs.getLong(2);
@@ -416,8 +413,9 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				ResultSet fs = startStat.executeQuery();
 				while (fs.next() && !combined) {
 					if (!visitedWays.contains(fs.getLong(1))) {
-						parseAndSort(temp, rs.getBytes(6), rs.getBytes(7));
-						if (temp.equals(namesUse)) {
+						parseAndSort(temp, rs.getBytes(6));
+						parseAndSort(tempAdd, rs.getBytes(7));
+						if(temp.equals(typeUse) && tempAdd.equals(addtypeUse)){
 							combined = true;
 							long lid = fs.getLong(1);
 							if (!Algoritms.objectEquals(rs.getString(5), name)) {
@@ -443,6 +441,11 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 			boolean cycle = startNode == endNode;
 			if (cycle) {
 				skip = checkForSmallAreas(wNodes, zoom  + Math.min(zoomWaySmothness / 2, 3), 3, 4);
+			} else {
+				// coastline
+				if(!typeUse.contains(renderingTypes.getCoastlineRuleType().getInternalId())) {
+					skip = checkForSmallAreas(wNodes, zoom  + Math.min(zoomWaySmothness / 2, 3), 2, 8);
+				}
 			}
 			if (!skip) {
 				List<Node> res = new ArrayList<Node>();
@@ -546,7 +549,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					.prepareStatement("SELECT area, coordinates, innerPolygons, types, additionalTypes, name FROM binary_map_objects WHERE id = ?");
 
 			// write map levels and map index
-			TLongObjectHashMap<BinaryFileReference> bounds = new TLongObjectHashMap<BinaryFileReference>();
+			TLongObjectHashMap<BinaryFileReference> treeHeader = new TLongObjectHashMap<BinaryFileReference>();
 			for (int i = 0; i < mapZooms.size(); i++) {
 				RTree rtree = mapTree[i];
 				long rootIndex = rtree.getFileHdr().getRootIndex();
@@ -555,9 +558,9 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				if (rootBounds != null) {
 					writer.startWriteMapLevelIndex(mapZooms.getLevel(i).getMinZoom(), mapZooms.getLevel(i).getMaxZoom(),
 							rootBounds.getMinX(), rootBounds.getMaxX(), rootBounds.getMinY(), rootBounds.getMaxY());
-					writeBinaryMapTree(root, rootBounds, rtree, writer, bounds);
+					writeBinaryMapTree(root, rootBounds, rtree, writer, treeHeader);
 					
-					writeBinaryMapBlock(root, rtree, writer, selectData, bounds, new LinkedHashMap<String, Integer>(),
+					writeBinaryMapBlock(root,  rootBounds, rtree, writer, selectData, treeHeader, new LinkedHashMap<String, Integer>(),
 								new LinkedHashMap<MapRenderingTypes.MapRulType, String>());
 
 					writer.endWriteMapLevelIndex();
@@ -591,7 +594,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		StringBuilder b = new StringBuilder();
 		for (Map.Entry<MapRulType, String> e : tempNames.entrySet()) {
 			if (e.getValue() != null) {
-				b.append(SPECIAL_CHAR).append(e.getKey().getInternalId()).append(e.getValue());
+				b.append(SPECIAL_CHAR).append((char)e.getKey().getInternalId()).append(e.getValue());
 			}
 		}
 		return b.toString();
@@ -601,7 +604,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		int i = name.indexOf(SPECIAL_CHAR);
 		while (i != -1) {
 			int n = name.indexOf(SPECIAL_CHAR, i + 2);
-			char ch = name.charAt(i + 1);
+			int ch = (short) name.charAt(i + 1);
 			MapRulType rt = renderingTypes.getTypeByInternalId(ch);
 			if (n == -1) {
 				tempNames.put(rt, name.substring(i + 2));
@@ -612,7 +615,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		}
 	}
 
-	public void writeBinaryMapBlock(rtree.Node parent, RTree r, BinaryMapIndexWriter writer, PreparedStatement selectData,
+	public void writeBinaryMapBlock(rtree.Node parent, Rect parentBounds, RTree r, BinaryMapIndexWriter writer, PreparedStatement selectData,
 			TLongObjectHashMap<BinaryFileReference> bounds, Map<String, Integer> tempStringTable, Map<MapRulType, String> tempNames)
 			throws IOException, RTreeException, SQLException {
 		Element[] e = parent.getAllElements();
@@ -621,10 +624,10 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		BinaryFileReference ref = bounds.get(parent.getNodeIndex());
 		long baseId = 0;
 		for (int i = 0; i < parent.getTotalElements(); i++) {
-			Rect re = e[i].getRect();
 			if (e[i].getElementType() == rtree.Node.LEAF_NODE) {
 				long id = ((LeafElement) e[i]).getPtr();
 				selectData.setLong(1, id);
+				// selectData = mapConnection.prepareStatement("SELECT area, coordinates, innerPolygons, types, additionalTypes, name FROM binary_map_objects WHERE id = ?");
 				ResultSet rs = selectData.executeQuery();
 				if (rs.next()) {
 					long cid = convertGeneratedIdToObfWrite(id);
@@ -636,8 +639,24 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					}
 					tempNames.clear();
 					decodeNames(rs.getString(6), tempNames);
-					MapData mapData = writer.writeMapData(cid - baseId, re.getMinX(), re.getMinY(), rs.getBoolean(1), rs.getBytes(2), rs.getBytes(3),
-							rs.getBytes(4), rs.getBytes(5), tempNames, tempStringTable, dataBlock);
+					byte[] types = rs.getBytes(4);
+					typeUse.clear();
+					for (int j = 0; j < types.length; j += 2) {
+						int ids = Algoritms.parseSmallIntFromBytes(types, j);
+						typeUse.add(renderingTypes.getTypeByInternalId(ids).getTargetId());
+					}
+					byte[] addTypes = rs.getBytes(5);
+					addtypeUse.clear();
+					if (addTypes != null) {
+						for (int j = 0; j < addTypes.length; j += 2) {
+							int ids = Algoritms.parseSmallIntFromBytes(addTypes, j);
+							addtypeUse.add(renderingTypes.getTypeByInternalId(ids).getTargetId());
+						}
+					}
+					
+					
+					MapData mapData = writer.writeMapData(cid - baseId, parentBounds.getMinX(), parentBounds.getMinY(), rs.getBoolean(1), rs.getBytes(2), rs.getBytes(3),
+							typeUse, addtypeUse, tempNames, tempStringTable, dataBlock);
 					if(mapData != null) {
 						dataBlock.addDataObjects(mapData);
 					}
@@ -653,7 +672,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 			if (e[i].getElementType() != rtree.Node.LEAF_NODE) {
 				long ptr = ((NonLeafElement) e[i]).getPtr();
 				rtree.Node ns = r.getReadNode(ptr);
-				writeBinaryMapBlock(ns, r, writer, selectData, bounds, tempStringTable, tempNames);
+				writeBinaryMapBlock(ns, e[i].getRect(), r, writer, selectData, bounds, tempStringTable, tempNames);
 			}
 		}
 	}

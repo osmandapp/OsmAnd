@@ -9,11 +9,14 @@ public class ToDoConstants {
 	
 	
 	// Index
+	
 	// Map QuadTree (skip small areas!!!)
 	// POI index exclude building hno from categories!!!
-	// slightly changed POI (check it)!
 	// Routing index
-	// Identify coastline areas and pure ocean areas
+	// Identify coastline areas and pure ocean areas !!!
+	
+	// Polish UI with new builiding style
+	// Test images in the map 
 	
 	
 	// TODO

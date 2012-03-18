@@ -97,13 +97,7 @@ message OsmAndMapIndex {
 
 		repeated MapDataBox boxes = 7;
 
-		repeated MapDataBlocks blocks = 8;
-	}
-
-	message MapDataBlocks {
-		// based coordinates can be specified
-		// for an array of blocks
-		repeated MapDataBlock block = 6;
+		repeated MapDataBlock blocks = 15;
 	}
 
 	message MapDataBox {
@@ -133,10 +127,6 @@ message MapDataBlock {
    // in future here can be optional raster tile
    repeated MapData dataObjects = 12;
 
-   optional uint32 rasterType = 13;
-
-   optional bytes rasterImage = 14;
-
    optional StringTable stringTable = 15;
 
 
@@ -157,9 +147,15 @@ message MapData {
   required bytes types = 7;
 
   // repeated array<pair<tagId : raw_var_int, indexOfStringInParent : raw_var_int> >
-  optional bytes stringNames = 10; // in parent blocku
+  optional bytes stringNames = 10; // in parent block
+
 
   required sint64 id = 12; // delta encoded
+
+  optional uint32 rasterTileX = 13;
+  optional uint32 rasterTileY = 14;
+  optional bytes rasterBytes = 15;
+
 }
 
 

@@ -625,7 +625,7 @@ public class IndexCreator {
 		
 		long time = System.currentTimeMillis();
 		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/data/osm-gen/")); //$NON-NLS-1$
-		creator.setIndexMap(false);
+		creator.setIndexMap(true);
 		creator.setIndexAddress(true);
 		creator.setIndexPOI(true);
 		creator.setIndexTransport(true);

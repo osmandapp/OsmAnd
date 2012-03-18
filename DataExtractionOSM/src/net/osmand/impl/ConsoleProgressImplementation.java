@@ -59,7 +59,7 @@ public class ConsoleProgressImplementation implements IProgress {
 			this.lastPercentPrint = getCurrentPercent();
 			long now = System.currentTimeMillis();
 			if(now - lastTimePrinted >= deltaTimeToPrint || deltaTime < 0){
-				log.debug(MessageFormat.format("Done {0} %.", getCurrentPercent())); //$NON-NLS-1$
+				log.info(MessageFormat.format("Done {0} %.", getCurrentPercent())); //$NON-NLS-1$
 				lastTimePrinted = now;
 			}
 			

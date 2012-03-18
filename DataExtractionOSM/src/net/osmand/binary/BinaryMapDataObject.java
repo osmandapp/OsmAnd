@@ -1,16 +1,18 @@
 package net.osmand.binary;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 
 public class BinaryMapDataObject {
 	protected int[] coordinates = null;
+	protected int[][] polygonInnerCoordinates = null;
+	protected boolean area = false;
 	protected int[] types = null;
+	protected int[] additionalTypes = null;
 	
-	protected int stringId = -1;
+	protected TIntObjectHashMap<String> objectNames = null;
 	protected long id = 0;
-	
-	protected String name;
 	
 	protected MapIndex mapIndex = null;
 	
@@ -18,29 +20,39 @@ public class BinaryMapDataObject {
 	public BinaryMapDataObject(){
 	}
 	
-	protected void setStringId(int stringId) {
-		this.stringId = stringId;
-	}
-	
-	
 	protected void setCoordinates(int[] coordinates) {
 		this.coordinates = coordinates;
 	}
 	
-	protected int getStringId() {
-		return stringId;
+	public String getName(){
+		if(objectNames == null){
+			return null;
+		}
+		return objectNames.get(mapIndex.nameEncodingType);
 	}
 	
-	public void setName(String name) {
-		this.name = name;
+	public TIntObjectHashMap<String> getObjectNames() {
+		return objectNames;
 	}
 	
-	public String getName() {
-		return name;
+	public int[][] getPolygonInnerCoordinates() {
+		return polygonInnerCoordinates;
 	}
 	
 	public int[] getTypes(){
 		return types;
+	}
+	
+	public int[] getAdditionalTypes() {
+		return additionalTypes;
+	}
+	
+	public boolean isArea() {
+		return area;
+	}
+	
+	public void setArea(boolean area) {
+		this.area = area;
 	}
 	
 	public TagValuePair getTagValue(int indType){

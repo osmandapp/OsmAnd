@@ -226,14 +226,14 @@ public class BinaryMapIndexWriter {
 		Collections.sort(out, new Comparator<MapRulType>() {
 			@Override
 			public int compare(MapRulType o1, MapRulType o2) {
-				return o1.getFreq() - o2.getFreq();
+				return o2.getFreq() - o1.getFreq();
 			}
 		});
 
 		for (int i = 0; i < out.size(); i++) {
 			MapEncodingRule.Builder builder = OsmandOdb.OsmAndMapIndex.MapEncodingRule.newBuilder();
 			MapRulType rule = out.get(i);
-			rule.setTargetId(i);
+			rule.setTargetId(i + 1);
 
 			builder.setTag(rule.getTag());
 			if (rule.getValue() != null) {
@@ -242,8 +242,11 @@ public class BinaryMapIndexWriter {
 			builder.setMinZoom(rule.getMinzoom());
 			if (rule.isAdditional()) {
 				builder.setType(1);
+			} else if(rule.isOnlyNameRef()) {
+				builder.setType(2);
 			}
-			codedOutStream.writeMessage(OsmandOdb.OsmAndMapIndex.RULES_FIELD_NUMBER, builder.build());
+			MapEncodingRule rulet = builder.build();
+			codedOutStream.writeMessage(OsmandOdb.OsmAndMapIndex.RULES_FIELD_NUMBER, rulet);
 		}
 		long newfp = getFilePointer();
 		System.out.println("RENDERING SCHEMA takes " + (newfp - fp));
@@ -297,6 +300,7 @@ public class BinaryMapIndexWriter {
 
 	public void writeMapDataBlock(MapDataBlock.Builder builder, Map<String, Integer> stringTable, BinaryFileReference ref)
 			throws IOException {
+		
 		checkPeekState(MAP_ROOT_LEVEL_INIT);
 		StringTable.Builder bs = OsmandOdb.StringTable.newBuilder();
 		for (String s : stringTable.keySet()) {
@@ -307,11 +311,14 @@ public class BinaryMapIndexWriter {
 		int size = st.getSerializedSize();
 		STRING_TABLE_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapDataBlock.STRINGTABLE_FIELD_NUMBER)
 				+ CodedOutputStream.computeRawVarint32Size(size) + size;
+		
+		codedOutStream.writeTag(OsmAndMapIndex.MapRootLevel.BLOCKS_FIELD_NUMBER, FieldType.MESSAGE.getWireType());
+		
 		codedOutStream.flush();
 		ref.writeReference(raf, getFilePointer());
 		MapDataBlock block = builder.build();
 		MAP_DATA_SIZE += block.getSerializedSize();
-		codedOutStream.writeMessage(OsmAndMapIndex.MapRootLevel.BLOCKS_FIELD_NUMBER, block);
+		codedOutStream.writeMessageNoTag(block);
 	}
 
 	/**
@@ -336,8 +343,8 @@ public class BinaryMapIndexWriter {
 
 	private TByteArrayList mapDataBuf = new TByteArrayList();
 
-	public MapData writeMapData(long diffId, int pleft, int ptop, boolean area, byte[] coordinates, byte[] innerPolygonTypes, byte[] types,
-			byte[] additionalTypes, Map<MapRulType, String> names, Map<String, Integer> stringTable, MapDataBlock.Builder dataBlock)
+	public MapData writeMapData(long diffId, int pleft, int ptop, boolean area, byte[] coordinates, byte[] innerPolygonTypes, TIntArrayList typeUse,
+			TIntArrayList addtypeUse, Map<MapRulType, String> names, Map<String, Integer> stringTable, MapDataBlock.Builder dataBlock)
 			throws IOException {
 
 		MapData.Builder data = MapData.newBuilder();
@@ -391,14 +398,21 @@ public class BinaryMapIndexWriter {
 				}
 			}
 		}
-
-		data.setTypes(ByteString.copyFrom(types));
+		
+		mapDataBuf.clear();
+		for (int i = 0; i < typeUse.size() ; i++) {
+			writeRawVarint32(mapDataBuf, typeUse.get(i));;
+		}
+		data.setTypes(ByteString.copyFrom(mapDataBuf.toArray()));
 		TYPES_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapData.TYPES_FIELD_NUMBER)
-				+ CodedOutputStream.computeRawVarint32Size(types.length) + types.length;
-		if (additionalTypes != null && additionalTypes.length > 0) {
-			data.setAdditionalTypes(ByteString.copyFrom(additionalTypes));
-			TYPES_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapData.ADDITIONALTYPES_FIELD_NUMBER)
-					+ CodedOutputStream.computeRawVarint32Size(additionalTypes.length) + additionalTypes.length;
+				+ CodedOutputStream.computeRawVarint32Size(mapDataBuf.size()) + mapDataBuf.size();
+		if (addtypeUse != null && addtypeUse.size() > 0) {
+			mapDataBuf.clear();
+			for (int i = 0; i < addtypeUse.size() ; i++) {
+				writeRawVarint32(mapDataBuf, addtypeUse.get(i));;
+			}
+			data.setAdditionalTypes(ByteString.copyFrom(mapDataBuf.toArray()));
+			TYPES_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapData.ADDITIONALTYPES_FIELD_NUMBER);
 		}
 
 		mapDataBuf.clear();

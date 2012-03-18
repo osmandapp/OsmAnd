@@ -206,7 +206,7 @@
 
 	<category name="man_made" poi:tag="man_made" poi:category="man_made">
 		<type tag="building" minzoom="16" poi:category="" nameTags="addr:housenumber"/>
-		<type tag="addr:housenumber" minzoom="16" nameTags="addr:housenumber"/>
+		<type tag="addr:housenumber" minzoom="16" poi:category="" nameTags="addr:housenumber"/>
 		<type tag="man_made" value="wastewater_plant" minzoom="16" />
 		<type tag="man_made" value="water_works" minzoom="16" />
 		<type tag="man_made" value="works" minzoom="15" />

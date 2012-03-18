@@ -65,6 +65,7 @@ public class MapRenderingTypes {
 	private Map<String, AmenityType> amenityNameToType = null;
 
 	private MapRulType nameRuleType;
+	private MapRulType coastlineRuleType;
 	
 	public MapRenderingTypes(String fileName){
 		this.resourceName = fileName;
@@ -86,7 +87,8 @@ public class MapRenderingTypes {
 			typeList.clear();
 			nameRuleType = new MapRulType();
 			nameRuleType.tag = "name";
-			nameRuleType.additional = true;
+			nameRuleType.onlyNameRef = true;
+			nameRuleType.additional = false; 
 			registerRuleType("name", null, nameRuleType);
 			init();
 		}
@@ -97,24 +99,34 @@ public class MapRenderingTypes {
 		return typeList.get(id);
 	}
 	
-	private void registerRuleType(String tag, String val, MapRulType rt){
-		rt.id = types.size();
+	private MapRulType registerRuleType(String tag, String val, MapRulType rt){
 		String keyVal = constructRuleKey(tag, val);
+		if("natural".equals(tag) && "coastline".equals(val)) {
+			coastlineRuleType = rt;
+		}
 		if(types.containsKey(keyVal)){
-			if(types.get(keyVal).nameCreated ) {
+			if(types.get(keyVal).onlyNameRef ) {
 				rt.id = types.get(keyVal).id;
 				types.put(keyVal, rt);
+				typeList.set(rt.id, rt);
+				return rt;
 			} else {
 				throw new RuntimeException("Duplicate " + keyVal);
 			}
 		} else {
+			rt.id = types.size();
 			types.put(keyVal, rt);
 			typeList.add(rt);
+			return rt;
 		}
 	}
 	
 	public MapRulType getNameRuleType() {
 		return nameRuleType;
+	}
+	
+	public MapRulType getCoastlineRuleType() {
+		return coastlineRuleType;
 	}
 	
 	
@@ -148,10 +160,12 @@ public class MapRenderingTypes {
 					}
 				}
 
-				if (rType.additional) {
-					outaddTypes.add(rType.id);
-				} else {
-					outTypes.add(rType.id);
+				if (!rType.onlyNameRef) {
+					if (rType.additional) {
+						outaddTypes.add(rType.id);
+					} else {
+						outTypes.add(rType.id);
+					}
 				}
 			}
 		}
@@ -244,7 +258,6 @@ public class MapRenderingTypes {
 			}
 			long time = System.currentTimeMillis();
 			final SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
-			types = new LinkedHashMap<String, MapRenderingTypes.MapRulType>();
 			parser.parse(is, new DefaultHandler(){
 				
 				String poiParentCategory = null;
@@ -287,8 +300,8 @@ public class MapRenderingTypes {
 								if(mt == null){
 									mt = new MapRulType();
 									mt.tag = names[i];
-									mt.additional = true;
-									mt.nameCreated = true;
+									mt.onlyNameRef = true;
+									mt.additional = false;
 									registerRuleType(names[i], null, mt);
 								}
 								rtype.names[i] = mt;
@@ -418,7 +431,7 @@ public class MapRenderingTypes {
 		int minzoom;
 		boolean additional;
 		MapRulType targetTagValue;
-		boolean nameCreated;
+		boolean onlyNameRef;
 		
 		// inner id
 		private int id;
@@ -473,6 +486,10 @@ public class MapRenderingTypes {
 			return additional;
 		}
 		
+		public boolean isOnlyNameRef() {
+			return onlyNameRef;
+		}
+		
 		public int getFreq() {
 			return freq;
 		}
@@ -481,6 +498,10 @@ public class MapRenderingTypes {
 			return ++freq;
 		}
 		
+		@Override
+		public String toString() {
+			return tag + " " + value;
+		}
 	}
 	
 	// TODO Move to Routing Attributes and finalize 

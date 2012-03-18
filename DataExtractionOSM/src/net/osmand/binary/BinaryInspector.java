@@ -2,6 +2,7 @@ package net.osmand.binary;
 
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,6 +24,7 @@ import net.osmand.binary.BinaryMapIndexReader.MapRoot;
 import net.osmand.binary.BinaryMapIndexReader.SearchFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.data.Amenity;
@@ -31,7 +33,6 @@ import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
-import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 
 import com.google.protobuf.CodedOutputStream;
@@ -49,7 +50,7 @@ public class BinaryInspector {
 //		inspector(new String[]{"-v","C:\\Users\\tpd\\osmand\\Housenumbers.obf"});
 		//inspector(new String[]{"/home/victor/projects/OsmAnd/data/osm-gen/saved/Belarus-newzooms-new-rt.obf"});
 //		inspector(new String[]{"/home/victor/projects/OsmAnd/download/spain/Spain_europe_1_small.obf"});
-		inspector(new String[]{"-vpoi", "/home/victor/projects/OsmAnd/data/osm-gen/Luxembourg.obf"});
+		inspector(new String[]{/*"-vmap", */"/home/victor/projects/OsmAnd/data/osm-gen/Luxembourg.obf"});
 		
 		
 		// test case extract parts
@@ -386,18 +387,7 @@ public class BinaryInspector {
 	}
 	
 	
-	private static void formatTags(BinaryMapDataObject o, StringBuilder b){
-		for (int i = 0; i < o.getTypes().length; i++) {
-			if (i > 0) {
-				b.append(", ");
-			}
-			b.append(o.getTagValue(i).tag + "=" + o.getTagValue(i).value);
-			if ((o.getTypes()[i] & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
-				b.append("(multipolygon)");
-			}
-		}
-		
-	}
+	
 
 	public static void printFileInformation(File file, VerboseInfo verbose) throws IOException {
 		RandomAccessFile r = new RandomAccessFile(file.getAbsolutePath(), "r");
@@ -507,19 +497,66 @@ public class BinaryInspector {
 				},
 				new ResultMatcher<BinaryMapDataObject>() {
 					@Override
-					public boolean publish(BinaryMapDataObject object) {
-						boolean way = object.getPointsLength() > 1;
+					public boolean publish(BinaryMapDataObject obj) {
 						b.setLength(0);
-						b.append(way ? "Way " : "Point ");
-						if(object.getName() != null){
-							b.append(object.getName());
+						boolean multipolygon = obj.getPolygonInnerCoordinates() != null && obj.getPolygonInnerCoordinates().length > 0;
+						if(multipolygon ) {
+							b.append("Multipolygon");
+						} else {
+							b.append(obj.area? "Area" : (obj.getPointsLength() > 1? "Way" : "Point"));
 						}
-						b.append(" ").append((object.getId() >> 1)).append(" ");
-						formatTags(object, b);
-						b.append("   ");
-						for (int i = 0; i < object.getPointsLength(); i++) {
-							b.append(" ");
-							formatPoint(object, i, b);
+						int[] types = obj.getTypes();
+						b.append(" types [");
+						for(int j = 0; j<types.length; j++){
+							if(j > 0) {
+								b.append(", ");
+							}
+							TagValuePair pair = obj.getMapIndex().decodeType(types[j]);
+							if(pair == null) {
+								throw new NullPointerException("Type " + types[j] + "was not found");
+							}
+							b.append(pair.toSimpleString()+"("+types[j]+")");
+						}
+						b.append("]");
+						if(obj.getAdditionalTypes() != null){
+							b.append(" add_types [");
+							for(int j = 0; j<obj.getAdditionalTypes().length; j++){
+								if(j > 0) {
+									b.append(", ");
+								}
+								TagValuePair pair = obj.getMapIndex().decodeType(obj.getAdditionalTypes()[j]);
+								if(pair == null) {
+									throw new NullPointerException("Type " + obj.getAdditionalTypes()[j] + "was not found");
+								}
+								b.append(pair.toSimpleString()+"("+obj.getAdditionalTypes()[j]+")");
+								
+							}
+							b.append("]");
+						}
+						TIntObjectHashMap<String> names = obj.getObjectNames();
+						if(names != null && !names.isEmpty()) {
+							b.append(" Names [");
+							int[] keys = names.keys();
+							for(int j = 0; j<keys.length; j++){
+								if(j > 0) {
+									b.append(", ");
+								}
+								TagValuePair pair = obj.getMapIndex().decodeType(keys[j]);
+								if(pair == null) {
+									throw new NullPointerException("Type " + keys[j] + "was not found");
+								}
+								b.append(pair.toSimpleString()+"("+keys[j]+")");
+								b.append(" - ").append(names.get(keys[j]));
+							}
+							b.append("]");
+						}
+						
+						b.append(" id ").append((obj.getId() >> 1));
+						b.append(" lat/lon : ");
+						for(int i=0; i<obj.getPointsLength(); i++) {
+							float x = (float) MapUtils.get31LongitudeX(obj.getPoint31XTile(i));
+							float y = (float) MapUtils.get31LatitudeY(obj.getPoint31YTile(i));
+							b.append(x).append(" / ").append(y).append(" , ");
 						}
 						println(b.toString());
 						return false;
