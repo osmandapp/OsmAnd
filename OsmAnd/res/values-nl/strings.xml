@@ -11,10 +11,10 @@
 	<string name="local_openstreetmap_settings">Locale Openstreetmap Punten</string>
 	<string name="local_openstreetmap_settings_descr">Locale Punten bewaard in database</string>
 	<string name="live_monitoring_descr">Versturen HTTP verzoeken naar een webservice toestaan</string>
-	<string name="live_monitoring">Live Tracking toestaan</string>
+	<string name="live_monitoring">Online Live Tracking</string>
 	<string name="live_monitoring_interval_descr">Specificeer Live Tracking interval</string>
 	<string name="live_monitoring_interval">Live Tracking interval</string>
-	<string name="live_monitoring_url_descr">Specificeer het Live Tracking webadres met parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, hoogte={4}, snelheid={5}</string>
+	<string name="live_monitoring_url_descr">Specificeer het webadres met parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, hoogte={4}, snelheid={5}</string>
 	<string name="live_monitoring_url">Live Tracking webadres</string>
 	<string name="gpx_monitoring_disabled_warn">Eerst \'Log track to GPX\' toestaan in Tracking instellingen</string>
 	<string name="show_current_gpx_title">Toon huidige track</string>

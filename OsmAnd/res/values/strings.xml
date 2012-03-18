@@ -29,10 +29,10 @@
 	<string name="local_openstreetmap_settings_descr">Show and manage OSM points noted in local database</string>
 
 	<string name="live_monitoring_descr">Enable sending HTTP requests to a specified web service</string>
-	<string name="live_monitoring">Enable Live Tracking</string>
+	<string name="live_monitoring">Online Live Tracking</string>
 	<string name="live_monitoring_interval_descr">Specify Live Tracking interval</string>
 	<string name="live_monitoring_interval">Live Tracking interval</string>
-	<string name="live_monitoring_url_descr">Specify the Live Tracking web address with parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+	<string name="live_monitoring_url_descr">Specify the web address with parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
 	<string name="live_monitoring_url">Live Tracking web address</string>
 	<string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX\' Tracking settings</string>
 	<string name="show_current_gpx_title">Show current track</string>
