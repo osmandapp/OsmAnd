@@ -439,7 +439,7 @@
 	<string name="version_index_is_big_for_memory">Nicht genügend Speicher für Index \'\'{0}\'\' </string>
 	<string name="version_index_is_not_supported">Die Index-Version \'\'{0}\'\' wird nicht unterstützt</string>
 					
-	<string name="use_osmand_routing_service">OsmAnd Routing</string>
+	<string name="use_osmand_routing_service">OsmAnd Routing >20km</string>
 	<string name="use_osmand_routing_service_descr">OsmAnd Offlinerouting für große Entfernungen verwenden (experimentell) anstatt automatisch CloudMade zu nehmen</string>
 	<string name="osmand_routing_experimental">OsmAnd Offlinerouting ist noch experimentell und funktioniert nicht gut für Entfernungen über 20 km.\n\nAls Routingdienst wird temporär online CloudMade verwendet.</string>
 	<string name="specified_dir_doesnt_exist">Angegebener Ordner kann nicht gefunden werden.</string>

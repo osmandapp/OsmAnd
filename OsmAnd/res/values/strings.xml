@@ -443,7 +443,7 @@
 	<string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
 	<string name="version_index_is_not_supported">The version of index \'\'{0}\'\' is not supported</string>
 
-	<string name="use_osmand_routing_service">OsmAnd routing</string>
+	<string name="use_osmand_routing_service">Long range OsmAnd routing</string>
 	<string name="use_osmand_routing_service_descr">Use OsmAnd offline routing for long distances (experimental) instead of fallback to CloudMade</string>
 	<string name="osmand_routing_experimental">OsmAnd offline routing is an experimental feature and it does not work for distances of more than about 20 km.\n\nRouting service is temporarily switched to online CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
