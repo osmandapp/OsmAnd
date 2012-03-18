@@ -2,7 +2,7 @@ LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
 
-ifneq ($(OSMAND_NEON),true)
+ifneq ($(OSMAND_BUILDING_NEON_LIBRARY),true)
 LOCAL_MODULE := libexpat_static
 else
 LOCAL_MODULE := libexpat_static_neon

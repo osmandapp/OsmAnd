@@ -1,5 +1,5 @@
 # Do not build for NEON
-ifneq ($(OSMAND_NEON),true)
+ifneq ($(OSMAND_BUILDING_NEON_LIBRARY),true)
 
 LOCAL_PATH := $(call my-dir)
 

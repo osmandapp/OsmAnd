@@ -50,7 +50,7 @@ LOCAL_C_INCLUDES += $(common_C_INCLUDES) \
 LOCAL_SHARED_LIBRARIES := \
 	libz
 
-ifneq ($(OSMAND_NEON),true)
+ifneq ($(OSMAND_BUILDING_NEON_LIBRARY),true)
 LOCAL_MODULE := libpng
 else
 LOCAL_MODULE := libpng_neon
