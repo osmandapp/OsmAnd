@@ -153,6 +153,9 @@ public class MapRenderingTypes {
 				if (rType.minzoom > zoom) {
 					continue;
 				}
+				if(rType.targetTagValue != null) {
+					rType = rType.targetTagValue;
+				}
 				rType.freq++;
 				if (rType.names != null) {
 					for (int i = 0; i < rType.names.length; i++) {

@@ -1448,9 +1448,9 @@ public class BinaryMapIndexReader {
 	private static boolean testPoiSearch = false;
 	private static boolean testTransportSearch = false;
 	private static int sleft = MapUtils.get31TileNumberX(6.3);
-	private static int sright = MapUtils.get31TileNumberX(6.4);
-	private static int stop = MapUtils.get31TileNumberY(49.5);
-	private static int sbottom = MapUtils.get31TileNumberY(49.4);
+	private static int sright = MapUtils.get31TileNumberX(6.5);
+	private static int stop = MapUtils.get31TileNumberY(49.9);
+	private static int sbottom = MapUtils.get31TileNumberY(49.7);
 	private static int szoom = 15;
 	
 	private static void println(String s){
@@ -1696,7 +1696,7 @@ public class BinaryMapIndexReader {
 					b.append(pair.toSimpleString()+"("+types[j]+")");
 				}
 				b.append("]");
-				if(obj.getAdditionalTypes() != null){
+				if(obj.getAdditionalTypes() != null && obj.getAdditionalTypes().length > 0){
 					b.append(" add_types [");
 					for(int j = 0; j<obj.getAdditionalTypes().length; j++){
 						if(j > 0) {

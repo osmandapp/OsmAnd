@@ -50,7 +50,7 @@ public class BinaryInspector {
 //		inspector(new String[]{"-v","C:\\Users\\tpd\\osmand\\Housenumbers.obf"});
 		//inspector(new String[]{"/home/victor/projects/OsmAnd/data/osm-gen/saved/Belarus-newzooms-new-rt.obf"});
 //		inspector(new String[]{"/home/victor/projects/OsmAnd/download/spain/Spain_europe_1_small.obf"});
-		inspector(new String[]{/*"-vmap", */"/home/victor/projects/OsmAnd/data/osm-gen/Luxembourg.obf"});
+		inspector(new String[]{"-vmap","/home/victor/projects/OsmAnd/data/osm-gen/Luxembourg.obf"});
 		
 		
 		// test case extract parts
@@ -513,12 +513,14 @@ public class BinaryInspector {
 							}
 							TagValuePair pair = obj.getMapIndex().decodeType(types[j]);
 							if(pair == null) {
-								throw new NullPointerException("Type " + types[j] + "was not found");
+								System.err.println("Type " + types[j] + "was not found");
+								continue;
+//								throw new NullPointerException("Type " + obj.getAdditionalTypes()[j] + "was not found");
 							}
 							b.append(pair.toSimpleString()+"("+types[j]+")");
 						}
 						b.append("]");
-						if(obj.getAdditionalTypes() != null){
+						if(obj.getAdditionalTypes() != null && obj.getAdditionalTypes().length > 0){
 							b.append(" add_types [");
 							for(int j = 0; j<obj.getAdditionalTypes().length; j++){
 								if(j > 0) {
@@ -526,7 +528,9 @@ public class BinaryInspector {
 								}
 								TagValuePair pair = obj.getMapIndex().decodeType(obj.getAdditionalTypes()[j]);
 								if(pair == null) {
-									throw new NullPointerException("Type " + obj.getAdditionalTypes()[j] + "was not found");
+									System.err.println("Type " + obj.getAdditionalTypes()[j] + "was not found");
+									continue;
+//									throw new NullPointerException("Type " + obj.getAdditionalTypes()[j] + "was not found");
 								}
 								b.append(pair.toSimpleString()+"("+obj.getAdditionalTypes()[j]+")");
 								

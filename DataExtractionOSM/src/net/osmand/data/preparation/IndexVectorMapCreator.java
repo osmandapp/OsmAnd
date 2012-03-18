@@ -356,8 +356,8 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 			if (visitedWays.contains(id)) {
 				continue;
 			}
-
 			visitedWays.add(id);
+			
 			int level = rs.getInt(8);
 			int zoom = mapZooms.getLevel(level).getMaxZoom();
 
@@ -458,6 +458,8 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					insertBinaryMapRenderObjectIndex(mapTree[level], res, null, namesUse, id, false, typeUse, addtypeUse, false);
 				}
 			}
+			
+			// end cycle 
 
 		}
 
@@ -795,13 +797,13 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		}
 		for (int j = 0; j < types.size(); j++) {
 			try {
-				Algoritms.writeInt(bTypes, types.get(j));
+				Algoritms.writeSmallInt(bTypes, types.get(j));
 			} catch (IOException e) {
 			}
 		}
 		for (int j = 0; j < addTypes.size(); j++) {
 			try {
-				Algoritms.writeInt(bAddtTypes, addTypes.get(j));
+				Algoritms.writeSmallInt(bAddtTypes, addTypes.get(j));
 			} catch (IOException e) {
 			}
 		}
