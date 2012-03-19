@@ -27,9 +27,29 @@ public class CustomTitleBar {
 		this.activity.requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 	}
 	
+	protected int getTitleBarLayout() {
+		return R.layout.titlebar;
+	}
+	
 	public void afterSetContentView() {
-		activity.getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
+		activity.getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, getTitleBarLayout());
 		
+		initBackButton();
+		initText();
+		initImage();
+	}
+
+	protected void initImage() {
+		ImageView titleImg = (ImageView) activity.findViewById(R.id.title_image);
+		titleImg.setImageResource(titleImageRes);
+	}
+
+	protected void initText() {
+		TextView title = (TextView) activity.findViewById(R.id.title_text);
+		title.setText(titleStringRes);
+	}
+
+	protected void initBackButton() {
 		Button backButton = (Button) activity.findViewById(R.id.back_button);
 		backButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -37,10 +57,13 @@ public class CustomTitleBar {
 				activity.finish();
 			}
 		});
-		TextView title = (TextView) activity.findViewById(R.id.title_text);
-		title.setText(titleStringRes);
-		ImageView titleImg = (ImageView) activity.findViewById(R.id.title_image);
-		titleImg.setImageResource(titleImageRes);
 	}
 	
+	protected Activity getActivity() {
+		return activity;
+	}
+	
+	protected int getTitleImageRes() {
+		return titleImageRes;
+	}
 }

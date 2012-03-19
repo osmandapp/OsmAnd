@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent"
-	android:layout_height="wrap_content">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/tab_menu_item_small" >
 
-	<TextView android:id="@+id/download_index_category_name" android:gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:textSize="21sp" android:layout_marginTop="5dp" android:layout_marginLeft="40dp" android:autoLink="web"></TextView>
+    <ImageView
+        android:id="@+id/explist_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:src="@drawable/indicator_custom_gray" />
+
+    <TextView
+        android:id="@+id/download_index_category_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="0dp"
+        android:autoLink="web"
+        android:gravity="center_vertical"
+        android:textSize="21sp" >
+    </TextView>
 
 </LinearLayout>
