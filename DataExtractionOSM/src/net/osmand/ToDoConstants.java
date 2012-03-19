@@ -17,8 +17,15 @@ public class ToDoConstants {
 	
 
 	
-	// Polish UI with new builiding address search ...(Better completely new address search)
+
+	
+	// TO try & to test
 	// Test images in the map 
+	// Test new POI categories, dynamic POI text in ...
+	// Test rendering of 2 dimensional values 
+	// Polish UI with new builiding address search ...(Better completely new address search)
+	// Search for city in all indexes
+	// Test GeoIndexActivity
 	
 	
 //	    == Osmand application (TODO 127) ==

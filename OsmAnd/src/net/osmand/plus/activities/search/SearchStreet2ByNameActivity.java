@@ -3,7 +3,6 @@ package net.osmand.plus.activities.search;
 import java.util.List;
 
 import net.osmand.data.City;
-import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -14,8 +13,7 @@ import android.widget.TextView;
 
 public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<Street> {
 	private RegionAddressRepository region;
-	private City city;
-	private PostCode postcode;
+	private City cityOrPostcode;
 	private Street street1;
 	
 	
@@ -38,18 +36,12 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 			protected List<Street> doInBackground(Object... params) {
 				region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
 				if(region != null){
-					postcode = region.getPostcode(settings.getLastSearchedPostcode());
-					city = region.getCityById(settings.getLastSearchedCity());
-					if(postcode != null){
-						street1 = region.getStreetByName(postcode, (settings.getLastSearchedStreet()));
-						if(street1 != null){
-							city = street1.getCity();
-						}
-					} else if(city != null){
-						street1 = region.getStreetByName(city, (settings.getLastSearchedStreet()));
+					cityOrPostcode = region.getCityById(settings.getLastSearchedCity(), settings.getLastSearchedCityName());
+					if(cityOrPostcode != null){
+						street1 = region.getStreetByName(cityOrPostcode, (settings.getLastSearchedStreet()));
 					}
-					if(city != null && street1 != null){
-						return region.getStreetsIntersectStreets(city, street1);
+					if(cityOrPostcode != null && street1 != null){
+						return region.getStreetsIntersectStreets(street1);
 					}
 				}
 				return null;
@@ -66,7 +58,7 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 	
 	@Override
 	public void itemSelected(Street obj) {
-		settings.setLastSearchedIntersectedStreet(obj.getName(region.useEnglishNames()), region.findStreetIntersection(street1, obj));
+		settings.setLastSearchedIntersectedStreet(obj.getName(region.useEnglishNames()), obj.getLocation());
 		finish();
 	}
 }

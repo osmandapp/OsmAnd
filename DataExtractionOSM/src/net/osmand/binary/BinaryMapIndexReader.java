@@ -23,6 +23,7 @@ import net.osmand.Algoritms;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.LogUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.StringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
@@ -466,8 +467,11 @@ public class BinaryMapIndexReader {
 		throw new IllegalArgumentException(name);
 	}
 	
-	
-	public List<City> getCities(String region, SearchRequest<City> resultMatcher, 
+	public List<City> getCities(String region, SearchRequest<City> resultMatcher,  
+			int cityType) throws IOException {
+		return getCities(region, resultMatcher, null, false, cityType);
+	}
+	public List<City> getCities(String region, SearchRequest<City> resultMatcher, StringMatcher matcher, boolean useEn, 
 			int cityType) throws IOException {
 		List<City> cities = new ArrayList<City>();
 		AddressRegion r = getRegionByName(region);
@@ -475,7 +479,7 @@ public class BinaryMapIndexReader {
 			if(block.type == cityType) {
 				codedIS.seek(block.filePointer);
 				int old = codedIS.pushLimit(block.length);
-				addressAdapter.readCities(cities, resultMatcher, null, false);
+				addressAdapter.readCities(cities, resultMatcher, matcher, useEn);
 				codedIS.popLimit(old);
 			}
 		}
@@ -510,7 +514,8 @@ public class BinaryMapIndexReader {
 		codedIS.seek(s.getFileOffset());
 		int size = codedIS.readRawVarint32();
 		int old = codedIS.pushLimit(size);
-		addressAdapter.readStreet(s, resultMatcher, true, 0, 0, null);
+		City city = s.getCity();
+		addressAdapter.readStreet(s, resultMatcher, true, 0, 0, city != null  && city.isPostcode() ? city.getName() : null);
 		codedIS.popLimit(old);
 	}
 	
@@ -1163,6 +1168,8 @@ public class BinaryMapIndexReader {
 		request.resultMatcher = resultMatcher;
 		return request;
 	}
+	
+	
 	
 	public static <T> SearchRequest<T> buildAddressByNameRequest(ResultMatcher<T> resultMatcher, String nameRequest){
 		SearchRequest<T> request = new SearchRequest<T>();

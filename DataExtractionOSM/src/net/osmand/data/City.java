@@ -13,6 +13,8 @@ import net.osmand.osm.OSMSettings.OSMTagKey;
 
 
 public class City extends MapObject {
+	
+	private static long POSTCODE_INTERNAL_ID = -1000;
 
 	public enum CityType {
 		// that's tricky way to play with that numbers (to avoid including suburbs in city & vice verse)
@@ -65,13 +67,14 @@ public class City extends MapObject {
 		this.type = type;
 	}
 	
-	private City(String postcode) {
+	private City(String postcode, long id) {
 		this.type = null;
 		this.name = this.enName = postcode;
+		this.id = id;
 	}
 	
 	public static City createPostcode(String postcode){
-		return new City(postcode);
+		return new City(postcode, POSTCODE_INTERNAL_ID--);
 	}
 	
 	

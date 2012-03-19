@@ -38,26 +38,22 @@ public interface RegionAddressRepository {
 	public void preloadStreets(City o, ResultMatcher<Street> resultMatcher);
 	
 	
-	public List<MapObject> getLoadedCities();
+	public List<City> getLoadedCities();
 	
-	public City getPostcode(String name);
-	
-	public City getCityById(Long id);
+	// Returns city or postcode (if id < 0)
+	public City getCityById(long id, String name);
 	
 	public Street getStreetByName(City cityOrPostcode, String name);
 	
 	public Building getBuildingByName(Street street, String name);
 	
-	public List<Street> getStreetsIntersectStreets(City city, Street st);
+	public List<Street> getStreetsIntersectStreets(Street st);
 	
 	void addCityToPreloadedList(City city);
 	
-	public LatLon findStreetIntersection(Street street, Street street2);
-	
-	// TODO remove that method
-	public List<Street> fillWithSuggestedStreets(City o, ResultMatcher<Street> resultMatcher, String... names);
-	
 	public List<City> fillWithSuggestedCities(String name, ResultMatcher<City> resultMatcher, LatLon currentLocation);
+	
+	public List<MapObject> searchMapObjectsByName(String name, ResultMatcher<MapObject> resultMatcher);
 	
 	
 	

@@ -1,20 +1,18 @@
 package net.osmand.plus.activities.search;
 
+import gnu.trove.map.hash.TLongObjectHashMap;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.StringTokenizer;
 
 import net.osmand.OsmAndFormatter;
 import net.osmand.access.AccessibleToast;
+import net.osmand.ResultMatcher;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
-import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -230,66 +228,41 @@ public class GeoIntentActivity extends OsmandListActivity {
 			}
 
 			// search cities for found countries
-			Map<RegionAddressRepository, List<MapObject>> citiesForRegion = new HashMap<RegionAddressRepository, List<MapObject>>();
+			final List<MapObject> results = new ArrayList<MapObject>();
+			final List<MapObject> connectedStreets = new ArrayList<MapObject>();
 			for (RegionAddressRepository rar : countriesToSearch) {
-				List<MapObject> citiesFound = new ArrayList<MapObject>();
-				for (String maybeCity : elements) {
-					citiesFound.addAll(rar.fillWithSuggestedCities(maybeCity, null, null));
-				}
-				if (!citiesFound.isEmpty()) {
-					citiesForRegion.put(rar, citiesFound);
-				}
-			}
-			// no cities found, we should locate the country only
-			Map<MapObject, List<Street>> streetsForCity = new HashMap<MapObject, List<Street>>();
-			if (citiesForRegion.isEmpty()) {
-				for (RegionAddressRepository rar : countriesToSearch) {
-					List<MapObject> allcities = rar.fillWithSuggestedCities("", null, location);
-					findStreetsForCities(streetsForCity, rar, allcities);
-				}
-			} else {
-				// we have cities, now search for streets?
-				for (RegionAddressRepository rar : citiesForRegion.keySet()) {
-					findStreetsForCities(streetsForCity, rar,
-							citiesForRegion.get(rar));
-				}
-			}
+				final TLongObjectHashMap<City> cityIds = new TLongObjectHashMap<City>();
+				for (String element : elements) {
+					rar.searchMapObjectsByName(element, new ResultMatcher<MapObject>() {
+						@Override
+						public boolean publish(MapObject object) {
+							if (object instanceof City && object.getId() != null) {
+								cityIds.put(object.getId(), (City) object);
+							} else if(object instanceof Street) {
+								City c = ((Street)object).getCity();
+								if(c != null && c.getId() != null && cityIds.containsKey(c.getId().longValue())) {
+									connectedStreets.add((Street) object);
+									return false;
+								}
+							}
+							results.add(object);
+							return false;
+						}
 
-			// don't go deeper, now populate result list
-			Set<MapObject> results = new HashSet<MapObject>();
-			// add all found lists
-			for (List<Street> streets : streetsForCity.values()) {
-				results.addAll(streets);
+						@Override
+						public boolean isCancelled() {
+							return false;
+						}
+					});
+				}
 			}
-			// add all found cities for which street was not found
-			for (List<MapObject> cities : citiesForRegion.values()) {
-				cities.removeAll(streetsForCity.keySet());
-				results.addAll(cities);
-			}
-			// TODO add all regions for which city was not found
-			return results;
+			
+			
+			// add all other results to connected streets
+			connectedStreets.addAll(results);
+			return connectedStreets;
 		}
 
-		private void findStreetsForCities(
-				Map<MapObject, List<Street>> streetsForCity,
-				RegionAddressRepository rar, List<MapObject> allcities) {
-			for (MapObject city : allcities) {
-				List<Street> streets = rar.fillWithSuggestedStreets(city, null,
-						elements.toArray(new String[] {}));
-				// we must do this, or we will fill up the whole memory (streets
-				// are preloaded...)
-				// TODO some street iterator would be better, is it possible to
-				// create one?
-				if (city instanceof City) {
-					((City) city).removeAllStreets();
-				} else if (city instanceof PostCode) {
-					((PostCode) city).removeAllStreets();
-				}
-				if (!streets.isEmpty()) {
-					streetsForCity.put(city, streets);
-				}
-			}
-		}
 
 	}
 
@@ -314,12 +287,11 @@ public class GeoIntentActivity extends OsmandListActivity {
 			lonIndex = lonIndex > 0 ? lonIndex : geo.length();
 			if (latIndex > 0) {
 				try {
-					double latitude = Double.parseDouble(geo.substring(0,
-							latIndex));
-					double longitude = Double.parseDouble(geo.substring(
-							latIndex + 1, lonIndex));
+					double latitude = Double.parseDouble(geo.substring(0, latIndex));
+					double longitude = Double.parseDouble(geo.substring(latIndex + 1, lonIndex));
 					// TODO zoom is omited for now
 					point = new MapObject(new Node(latitude, longitude, -1)) {
+						private static final long serialVersionUID = -7028586132795853725L;
 					};
 					point.setName("Lat: " + latitude + ",Lon:" + longitude);
 				} catch (NumberFormatException e) {

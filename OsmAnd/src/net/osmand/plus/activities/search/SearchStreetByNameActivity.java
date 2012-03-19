@@ -8,7 +8,6 @@ import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.ResultMatcher;
 import net.osmand.data.City;
-import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -21,52 +20,45 @@ import android.widget.TextView;
 public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Street> {
 	private RegionAddressRepository region;
 	private City city;
-	private PostCode postcode;
 	
 	
 	@Override
 	public AsyncTask<Object, ?, ?> getInitializeTask() {
-		return new AsyncTask<Object, Street, List<Street>>(){
+		return new AsyncTask<Object, Street, List<Street>>() {
 			@Override
 			protected void onPostExecute(List<Street> result) {
-				((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_street);
+				((TextView) findViewById(R.id.Label)).setText(R.string.incremental_search_street);
 				progress.setVisibility(View.INVISIBLE);
 				finishInitializing(result);
 			}
-			
+
 			@Override
 			protected void onPreExecute() {
-				((TextView)findViewById(R.id.Label)).setText(R.string.loading_streets);
+				((TextView) findViewById(R.id.Label)).setText(R.string.loading_streets);
 				progress.setVisibility(View.VISIBLE);
 			}
-			
+
 			@Override
 			protected List<Street> doInBackground(Object... params) {
-				region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
-				if(region != null){
-					postcode = region.getPostcode(settings.getLastSearchedPostcode());
-					if (postcode == null) {
-						city = region.getCityById(settings.getLastSearchedCity());
-						if(city == null){
-							return null;
-						}
+				region = ((OsmandApplication) getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
+				if (region != null) {
+					city = region.getCityById(settings.getLastSearchedCity(), settings.getLastSearchedCityName());
+					if (city == null) {
+						return null;
 					}
-					region.preloadStreets(postcode == null ? city : postcode, new ResultMatcher<Street>() {
+					region.preloadStreets(city, new ResultMatcher<Street>() {
 						@Override
 						public boolean publish(Street object) {
 							addObjectToInitialList(object);
 							return true;
 						}
+
 						@Override
 						public boolean isCancelled() {
 							return false;
 						}
 					});
-					if(postcode != null){
-						return new ArrayList<Street>(postcode.getStreets());
-					} else {
-						return new ArrayList<Street>(city.getStreets());
-					}
+					return new ArrayList<Street>(city.getStreets());
 				}
 				return null;
 			}

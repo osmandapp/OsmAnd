@@ -5,7 +5,6 @@ import java.util.List;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Building;
 import net.osmand.data.City;
-import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -18,7 +17,6 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 	private RegionAddressRepository region;
 	private City city;
 	private Street street;
-	private PostCode postcode;
 	
 	@Override
 	public AsyncTask<Object, ?, ?> getInitializeTask() {
@@ -39,13 +37,8 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 			protected List<Building> doInBackground(Object... params) {
 				region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
 				if(region != null){
-					postcode = region.getPostcode(settings.getLastSearchedPostcode());
-					city = region.getCityById(settings.getLastSearchedCity());
-					if(postcode != null){
-						street = region.getStreetByName(postcode, settings.getLastSearchedStreet());
-					} else if(city != null){
-						street = region.getStreetByName(city, settings.getLastSearchedStreet());
-					}
+					city = region.getCityById(settings.getLastSearchedCity(), settings.getLastSearchedCityName());
+					street = region.getStreetByName(city, settings.getLastSearchedStreet());
 				}
 				if(street != null){
 					// preload here to avoid concurrent modification
@@ -66,16 +59,6 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 				return null;
 			}
 		};
-	}
-	
-	
-	
-	@Override
-	public boolean filterObject(Building obj, String filter) {
-		if (postcode != null && !postcode.getName().equalsIgnoreCase(obj.getPostcode())) {
-			return false;
-		}
-		return super.filterObject(obj, filter);
 	}
 	
 	@Override

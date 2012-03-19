@@ -81,7 +81,7 @@ public class IndexCreator {
 	private OsmDbAccessor accessor;
 	// constants to start process from the middle and save temporary results
 	private boolean recreateOnlyBinaryFile = false; // false;
-	private boolean deleteOsmDB = false;
+	private boolean deleteOsmDB = true;
 	private boolean deleteDatabaseIndexes = true;
 
 	private Object dbConn;
