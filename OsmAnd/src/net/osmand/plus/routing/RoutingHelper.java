@@ -416,7 +416,11 @@ public class RoutingHelper {
 		currentRoute = 0;
 		currentDirectionInfo = 0;
 		if(isFollowingMode){
-			tryMarkPassedRoute(start);
+			//tryMarkPassedRoute(start);
+			// try remove false route-recaluated prompts by checking direction to second route node
+			if(routeNodes.size() > 1){
+				currentRoute = 1;
+			}
 			directionDetection(start);
 
 			// set/reset evalWaitInterval only if new route is in forward direction
