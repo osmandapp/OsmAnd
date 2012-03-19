@@ -473,7 +473,7 @@
 	<string name="continuous_rendering">Continue kaartoplevering</string>
 	<string name="continuous_rendering_descr">Continue kaartoplevering inplaats van eenmalige oplevering van de hele kaart</string>
 	<string name="rendering_exception">Fout opgetreden bij kaartoplevering van het geselecteerde gebied</string>
-	<string name="rendering_out_of_memory">Niet genoeg geheugen om het geselecteerde gebied weer te geven</string>
+	<string name="rendering_out_of_memory">Niet genoeg werkgeheugen om het geselecteerde gebied weer te geven</string>
 	<string name="show_point_options">Locatie-opties</string>
 	<string name="renderer_load_sucess">Kaartgenerator sucesvol geladen</string>
 	<string name="renderer_load_exception">Fout opgetreden: kaartgenerator niet geladen</string>
