@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="use_fluorescent_overlays">Usa overlay fluorescenti</string>
+<string name="use_fluorescent_overlays">Overlay fluorescenti</string>
 	<string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per mostrare tracce e percorsi</string>
 	<string name="offline_poi_edition">Editing offline dei PDI</string>
 	<string name="offline_poi_edition_descr">Usa sempre l\'editing offline dei PDI</string>

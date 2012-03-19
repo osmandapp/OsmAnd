@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-<string name="use_fluorescent_overlays">Použiť žiarivejšie prekrytia</string>
+<string name="use_fluorescent_overlays">Žiarivejšie prekrytia</string>
 <string name="use_fluorescent_overlays_descr">Použije žiarivejšie farby pre zobrazenie stôp a ciest</string>
 	<string name="offline_poi_edition">Offline úprava POI bodov</string>
 	<string name="offline_poi_edition_descr">Ak chcete používať iba offline úpravu POI</string>
