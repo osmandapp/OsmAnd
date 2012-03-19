@@ -60,7 +60,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.download_files, R.drawable.tab_favorites_screen_icon);
+		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.download_files, R.drawable.tab_download_screen_icon);
 		setContentView(R.layout.download_builds);
 		titleBar.afterSetContentView();
 		

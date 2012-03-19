@@ -80,11 +80,12 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 		setContentView(R.layout.favourites_list);
 		titleBar.afterSetContentView();
 		
-		helper = ((OsmandApplication)getApplication()).getFavorites();
+		
+		helper = getMyApplication().getFavorites();
 		favouritesAdapter = new FavouritesAdapter();
 		favouritesAdapter.setFavoriteGroups(helper.getFavoriteGroups());
 		getExpandableListView().setAdapter(favouritesAdapter);
-		
+
 		/* Add Context-Menu listener to the ListView. */
 		getExpandableListView().setOnCreateContextMenuListener(new View.OnCreateContextMenuListener(){
 
@@ -471,7 +472,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 	}
 	
 
-	class FavouritesAdapter extends BaseExpandableListAdapter {
+	class FavouritesAdapter extends OsmandBaseExpandableListAdapter {
 
 		Map<String, List<FavouritePoint>> sourceFavoriteGroups;
 		Map<String, List<FavouritePoint>> favoriteGroups = new LinkedHashMap<String, List<FavouritePoint>>();
@@ -560,7 +561,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 		public boolean isChildSelectable(int groupPosition, int childPosition) {
 			return true;
 		}
-		
+	    
 		@Override
 		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 			View row = convertView;
@@ -568,11 +569,10 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 				LayoutInflater inflater = getLayoutInflater();
 				row = inflater.inflate(R.layout.favourites_list_category, parent, false);
 			}
+			adjustIndicator(groupPosition, isExpanded, row);
 			TextView label = (TextView) row.findViewById(R.id.category_name);
 			final String model = getGroup(groupPosition);
-			List<FavouritePoint> ms = helper.getFavoriteGroups().get(model);
-			int sz = ms != null ? ms.size() : 0;
-			label.setText(model + " [" + sz +"]");
+			label.setText(model);
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
 			
 			if(selectionMode){
@@ -596,7 +596,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			}
 			return row;
 		}
-		
+
 		@Override
 		public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 			View row = convertView;
