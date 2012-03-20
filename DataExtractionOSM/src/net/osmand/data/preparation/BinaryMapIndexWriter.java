@@ -358,8 +358,8 @@ public class BinaryMapIndexWriter {
 			int tx = (x - pcalcx) >> SHIFT_COORDINATES;
 			int ty = (y - pcalcy) >> SHIFT_COORDINATES;
 
-			writeRawVarint32(mapDataBuf, tx);
-			writeRawVarint32(mapDataBuf, ty);
+			writeRawVarint32(mapDataBuf, CodedOutputStream.encodeZigZag32(tx));
+			writeRawVarint32(mapDataBuf, CodedOutputStream.encodeZigZag32(ty));
 
 			pcalcx = pcalcx + (tx << SHIFT_COORDINATES);
 			pcalcy = pcalcy + (ty << SHIFT_COORDINATES);
@@ -390,8 +390,8 @@ public class BinaryMapIndexWriter {
 					int tx = (x - pcalcx) >> SHIFT_COORDINATES;
 					int ty = (y - pcalcy) >> SHIFT_COORDINATES;
 
-					writeRawVarint32(mapDataBuf, tx);
-					writeRawVarint32(mapDataBuf, ty);
+					writeRawVarint32(mapDataBuf, CodedOutputStream.encodeZigZag32(tx));
+					writeRawVarint32(mapDataBuf, CodedOutputStream.encodeZigZag32(ty));
 
 					pcalcx = pcalcx + (tx << SHIFT_COORDINATES);
 					pcalcy = pcalcy + (ty << SHIFT_COORDINATES);
