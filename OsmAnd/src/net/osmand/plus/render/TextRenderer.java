@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
-import net.osmand.osm.MapRenderingTypes;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -206,12 +206,6 @@ public class TextRenderer {
 		for (int i = 0; i < size; i++) {
 			TextDrawInfo text = rc.textToDraw.get(i);
 			if (text.text != null && text.text.length() > 0) {
-				int d = text.text.indexOf(MapRenderingTypes.DELIM_CHAR);
-				// not used now functionality
-				// possibly it will be used specifying english names after that character
-				if (d > 0) {
-					text.text = text.text.substring(0, d);
-				}
 				if (useEnglishNames) {
 					text.text = Junidecode.unidecode(text.text);
 				}
@@ -329,22 +323,14 @@ public class TextRenderer {
 		}
 	}
 	
-	public void renderText(String name, RenderingRuleSearchRequest render, RenderingContext rc, TagValuePair pair,
+	public void renderText(BinaryMapDataObject obj, RenderingRuleSearchRequest render, RenderingContext rc, TagValuePair pair,
 			float xMid, float yMid, Path path, PointF[] points) {
+		// TODO other render text
 		String ref = null;
-		if(name.charAt(0) == MapRenderingTypes.REF_CHAR){
-			ref = name.substring(1);
-			name = ""; //$NON-NLS-1$
-			for(int k = 0; k < ref.length(); k++){
-				if(ref.charAt(k) == MapRenderingTypes.REF_CHAR){
-					if(k < ref.length() - 1){
-						name = ref.substring(k + 1);
-					}
-					ref = ref.substring(0, k);
-					break;
-				}
-			}
+		if(obj.getMapIndex().refEncodingType >= 0 ) {
+			ref  = obj.getObjectNames().get(obj.getMapIndex().refEncodingType);
 		}
+		String name = obj.getObjectNames().get(obj.getMapIndex().nameEncodingType);
 		if(ref != null && ref.trim().length() > 0){
 			createTextDrawInfo(render, rc, pair, xMid, yMid, path, points, ref, true);
 		}

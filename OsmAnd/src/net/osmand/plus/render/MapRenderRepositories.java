@@ -366,7 +366,7 @@ public class MapRenderRepositories {
 				List<BinaryMapDataObject> res = c.searchMapIndex(searchRequest);
 				for (BinaryMapDataObject r : res) {
 					if (PerformanceFlags.checkForDuplicateObjectIds) {
-						if (ids.contains(r.getId())) {
+						if (ids.contains(r.getId()) && r.getId() > 0) {
 							// do not add object twice
 							continue;
 						}
@@ -375,10 +375,9 @@ public class MapRenderRepositories {
 					count++;
 
 					for (int i = 0; i < r.getTypes().length; i++) {
-						if ((r.getTypes()[i] & 0x3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
+						if (r.getTypes()[i] == r.getMapIndex().coastlineEncodingType) {
 							// multy polygon r.getId() >> 3
-							TagValuePair pair = r.getMapIndex().decodeType(MapRenderingTypes.getMainObjectType(r.getTypes()[i]),
-									MapRenderingTypes.getObjectSubType(r.getTypes()[i]));
+							TagValuePair pair = r.getMapIndex().decodeType(r.getTypes()[i]);
 							if (pair != null) {
 								pair = new TagValuePair(pair.tag, pair.value, r.getTypes()[i]);
 								if (!multiPolygons.containsKey(pair)) {
@@ -682,7 +681,6 @@ public class MapRenderRepositories {
 		// delete direction last bit (to not show point)
 		pl.setTag(type.tag);
 		pl.setValue(type.value);
-		pl.setLayer(MapRenderingTypes.getNegativeWayLayer(type.additionalAttribute));
 		long dbId = 0;
 		for (int km = 0; km < 2; km++) {
 			List<BinaryMapDataObject> list = km == 0 ? directList : inverselist;

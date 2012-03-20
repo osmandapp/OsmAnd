@@ -14,9 +14,10 @@ public class ToDoConstants {
 	// POI index exclude building hno from categories!!!
 	// Routing index !!
 	// Identify coastline areas and pure ocean areas !!!
-	
+	// Extract & remove the code with multipolygons
+	// render different texts
 
-	
+	// FIXME layer and renderer 1) FIXME Layer 2 2) FIXME oneway 1 
 
 	
 	// TO try & to test

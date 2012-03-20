@@ -398,14 +398,22 @@ public class OsmandRenderer {
 					for (int j = 0; j < o.getTypes().length; j++) {
 						// put(orderMap, BinaryMapDataObject.getOrder(o.getTypes()[j]), sh + j, init);
 						int wholeType = o.getTypes()[j];
-						int mask = wholeType & 3;
+						
+						int mask = MapRenderingTypes.POINT_TYPE;
+						if(o.getPointsLength() > 1) {
+							if(o.isArea()){
+								mask = MapRenderingTypes.POLYGON_TYPE;
+							} else {
+								mask = MapRenderingTypes.POLYLINE_TYPE;
+							}
+						}
 						int layer = 0;
 						if (mask != MapRenderingTypes.POINT_TYPE) {
-							layer = MapRenderingTypes.getNegativeWayLayer(wholeType);
+							// FIXME Layer
+//							layer = MapRenderingTypes.getNegativeWayLayer(wholeType);
 						}
 
-						TagValuePair pair = o.getMapIndex().decodeType(MapRenderingTypes.getMainObjectType(wholeType),
-								MapRenderingTypes.getObjectSubType(wholeType));
+						TagValuePair pair = o.getMapIndex().decodeType(wholeType);
 						if (pair != null) {
 							render.setTagValueZoomLayer(pair.tag, pair.value, rc.zoom, layer);
 							render.setIntFilter(render.ALL.R_ORDER_TYPE, mask);
@@ -447,25 +455,17 @@ public class OsmandRenderer {
 			}
 		} else {
 			int mainType = obj.getTypes()[l];
-			int t = mainType & 3;
-			int type = MapRenderingTypes.getMainObjectType(mainType);
-			int subtype = MapRenderingTypes.getObjectSubType(mainType);
-			TagValuePair pair = obj.getMapIndex().decodeType(type, subtype);
-			if (t == MapRenderingTypes.POINT_TYPE && !drawOnlyShadow) {
+			TagValuePair pair = obj.getMapIndex().decodeType(mainType);
+			if (obj.getPointsLength() == 1 && !drawOnlyShadow) {
 				drawPoint(obj, render, canvas, rc, pair, renderText);
-			} else if (t == MapRenderingTypes.POLYLINE_TYPE) {
-				int layer = MapRenderingTypes.getNegativeWayLayer(mainType);
-				drawPolyline(obj, render, canvas, rc, pair, layer, drawOnlyShadow);
-			} else if (t == MapRenderingTypes.POLYGON_TYPE && !drawOnlyShadow) {
+			} else if (!obj.isArea()) {
+				// FIXME Layer
+				// int layer = MapRenderingTypes.getNegativeWayLayer(mainType);
+				drawPolyline(obj, render, canvas, rc, pair, 0, drawOnlyShadow);
+			} else if (obj.isArea() && !drawOnlyShadow) {
 				drawPolygon(obj, render, canvas, rc, pair);
-			} else {
-				if (t == MapRenderingTypes.MULTY_POLYGON_TYPE && !(obj instanceof MultyPolygon)) {
-					// log this situation
-					return;
-				}
 			}
 		}
-
 	}
 
 
@@ -533,10 +533,7 @@ public class OsmandRenderer {
 				}
 			}
 			if (cnt > 0) {
-				String name = ((MultyPolygon) obj).getName(i);
-				if (name != null) {
-					textRenderer.renderText(name, render, rc, new TagValuePair(tag, value), xText / cnt, yText / cnt, null, null);
-				}
+				textRenderer.renderText(obj, render, rc, new TagValuePair(tag, value, 0), xText / cnt, yText / cnt, null, null);
 			}
 		}
 		canvas.drawPath(path, paint);
@@ -587,10 +584,7 @@ public class OsmandRenderer {
 			if (updatePaint(render, paint, 1, false, rc)) {
 				canvas.drawPath(path, paint);
 			}
-			String name = obj.getName();
-			if(name != null){
-				textRenderer.renderText(name, render, rc, pair, xText / len, yText / len, null, null);
-			}
+			textRenderer.renderText(obj, render, rc, pair, xText / len, yText / len, null, null);
 		}
 	}
 	
@@ -677,11 +671,7 @@ public class OsmandRenderer {
 		render.search(RenderingRulesStorage.POINT_RULES);
 		
 		String resId = render.getStringPropertyValue(render.ALL.R_ICON);
-		String name = null;
-		if (renderText) {
-			name = obj.getName();
-		}
-		if(resId == null && name == null){
+		if(resId == null && !renderText){
 			return;
 		}
 		int len = obj.getPointsLength();
@@ -704,8 +694,8 @@ public class OsmandRenderer {
 			ico.resId = resId;
 			rc.iconsToDraw.add(ico);
 		}
-		if (name != null && name.trim().length() > 0) {
-			textRenderer.renderText(name, render, rc, pair, ps.x, ps.y, null, null);
+		if (renderText) {
+			textRenderer.renderText(obj, render, rc, pair, ps.x, ps.y, null, null);
 		}
 
 	}
@@ -749,9 +739,10 @@ public class OsmandRenderer {
 			return;
 		}
 		boolean oneway = false;
-		if(rc.zoom >= 16 && "highway".equals(pair.tag) && MapRenderingTypes.isOneWayWay(obj.getHighwayAttributes())){ //$NON-NLS-1$
-			oneway = true;
-		}
+		//FIXME oneway
+//		if(rc.zoom >= 16 && "highway".equals(pair.tag) && MapRenderingTypes.isOneWayWay(obj.getHighwayAttributes())){ //$NON-NLS-1$
+//			oneway = true;
+//		}
 
 		rc.visible++;
 
@@ -760,7 +751,7 @@ public class OsmandRenderer {
 		float yMid = 0;
 		int middle = obj.getPointsLength() / 2;
 		PointF[] textPoints = null;
-		if (!drawOnlyShadow && obj.getName() != null && obj.getName().length() > 0) {
+		if (!drawOnlyShadow) {
 			textPoints = new PointF[length];
 		}
 
@@ -805,7 +796,7 @@ public class OsmandRenderer {
 				}
 			}
 			if (textPoints != null) {
-				textRenderer.renderText(obj.getName(), render, rc, pair, xMid, yMid, path, textPoints);
+				textRenderer.renderText(obj, render, rc, pair, xMid, yMid, path, textPoints);
 			}
 		}
 	}

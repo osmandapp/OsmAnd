@@ -1326,9 +1326,9 @@ public class BinaryMapIndexReader {
 		
 		Map<String, Map<String, Integer>> encodingRules = new LinkedHashMap<String, Map<String, Integer>>();
 		TIntObjectMap<TagValuePair> decodingRules = new TIntObjectHashMap<TagValuePair>();
-		int nameEncodingType = 0;
-		int refEncodingType = -1;
-		int coastlineEncodingType = 0;
+		public int nameEncodingType = 0;
+		public int refEncodingType = -1;
+		public int coastlineEncodingType = -1;
 		
 		public List<MapRoot> getRoots() {
 			return roots;
