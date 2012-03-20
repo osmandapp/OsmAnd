@@ -706,7 +706,6 @@
     <string name="settings_activity">Impostazioni</string>
     <string name="show_gps_coordinates_text">Visualizzare coordinate GPS sulla mappa</string>
     <string name="use_internet_to_download_tile">Utilizzare internet per scaricare i tasselli mancanti</string>
-    <string name="app_name">OsmAndAccess</string>
     <string name="app_description">Applicazione di navigazione</string>
 
 <string name="exit_Button">Uscita</string>

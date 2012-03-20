@@ -722,7 +722,6 @@
 <string name="settings_activity">Nastavenia</string>
 <string name="show_gps_coordinates_text">Zobraziť GPS súradnice na mape</string>
 <string name="use_internet_to_download_tile">Použiť internet na stiahnutie chýbajúcich mapových dlaždíc</string>
-<string name="app_name">OsmAndAccess</string>
 <string name="app_description">Navigačná aplikácia</string>
 
 <string name="exit_Button">Skončiť</string>
