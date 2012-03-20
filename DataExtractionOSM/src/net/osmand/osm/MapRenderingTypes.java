@@ -531,7 +531,7 @@ public class MapRenderingTypes {
 			}
 		} else if(e.getTag(OSMTagKey.BRIDGE) != null){
 			return 2;
-		} else if(e.getTag(OSMTagKey.TUNNEL) != null){
+		} else if(e.getTag(OSMTagKey.TUNNEL) != null && !e.getTag(OSMTagKey.TUNNEL).equalsIgnoreCase("no")){
 			return 1;
 		}
 		return 0;
@@ -969,6 +969,9 @@ public class MapRenderingTypes {
 		amenityTagValToType.put("amenity", AmenityType.OTHER);  //$NON-NLS-1$
 		amenityTagValToType.put("place", AmenityType.ADMINISTRATIVE);  //$NON-NLS-1$
 		amenityTagValToType.put("sport", AmenityType.SPORT);  //$NON-NLS-1$
+		
+		amenityTagValToType.put("osmwiki", AmenityType.OSMWIKI);  //$NON-NLS-1$
+		amenityTagValToType.put("user_defined", AmenityType.USER_DEFINED);  //$NON-NLS-1$
 	}
 	
 	

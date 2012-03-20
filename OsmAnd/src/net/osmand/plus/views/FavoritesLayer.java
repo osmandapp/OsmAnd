@@ -1,5 +1,6 @@
 package net.osmand.plus.views;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.access.AccessibleToast;
@@ -9,31 +10,25 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.R;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
-import android.graphics.Paint.Style;
 import android.util.DisplayMetrics;
-import android.util.FloatMath;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 
 	private static final int startZoom = 6;
-	private static final int radius = 15;
 	
 	private OsmandMapTileView view;
-	private Path path;
-	private Path pathDst;
 	private Paint paint;
-	private Matrix matrix;
-	private Paint paintBlack;
 	private DisplayMetrics dm;
 	private FavouritesDbHelper favorites;
+	private Bitmap favoriteIcon;
 	
 	
 	public FavoritesLayer(){
@@ -46,32 +41,15 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 		dm = new DisplayMetrics();
 		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
-		path = new Path();
-		pathDst = new Path();
-		int coef1 = (int) (radius * dm.density);
-		int coef2 = (int) (radius * dm.density/2);
-		float a = (float) (Math.PI/ 5);
-		path.moveTo(FloatMath.sin(0)*coef1, -FloatMath.cos(0)*coef1);
-		for (int j = 1; j < 10; j++) {
-			if (j % 2 == 1) {
-				path.lineTo(FloatMath.sin(j * a) * coef2, -FloatMath.cos(j * a) * coef2);
-			} else {
-				path.lineTo(FloatMath.sin(j * a) * coef1, -FloatMath.cos(j * a) * coef1);
-			}
-		}
-		matrix = new Matrix();
-		path.close();
 		
 		paint = new Paint();
-		paint.setStyle(Style.FILL);
-		paint.setARGB(200, 255, 150, 0);
-		paintBlack = new Paint();
-		paintBlack.setStyle(Style.STROKE);
-		paintBlack.setARGB(255, 0, 0, 0);
-		paintBlack.setAntiAlias(true);
-		paintBlack.setStrokeWidth(2);
+		paint.setAntiAlias(true);
+		paint.setFilterBitmap(true);
+		paint.setDither(true);
 		
 		favorites = view.getApplication().getFavorites();
+		
+		favoriteIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_favourite);
 		
 	}
 
@@ -83,23 +61,21 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 
 	@Override
 	public boolean drawInScreenPixels() {
-		return false;
+		return true;
 	}
 	
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		if (view.getZoom() >= startZoom) {
 			// request to load
 			for (FavouritePoint o : favorites.getFavouritePoints()) {
 				if (o.getLatitude() >= latLonBounds.bottom && o.getLatitude() <= latLonBounds.top  && o.getLongitude() >= latLonBounds.left 
 						&& o.getLongitude() <= latLonBounds.right ) {
-					int x = view.getMapXForPoint(o.getLongitude());
-					int y = view.getMapYForPoint(o.getLatitude());
-					matrix.setTranslate(x, y);
-					path.transform(matrix, pathDst);
-					canvas.drawPath(pathDst, paint);
-					canvas.drawPath(pathDst, paintBlack);
+					int x = view.getRotatedMapXForPoint(o.getLatitude(), o.getLongitude());
+					int y = view.getRotatedMapYForPoint(o.getLatitude(), o.getLongitude());
+					canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2, 
+							y - favoriteIcon.getHeight() / 2, paint);
 				}
 			}
 		}
@@ -111,28 +87,38 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 		return false;
 	}
 	
-	public FavouritePoint getFavoriteFromPoint(PointF point) {
-		FavouritePoint result = null;
-		float r = radius * dm.density;
+	public void getFavoriteFromPoint(PointF point, List<? super FavouritePoint> res) {
+		float r = 80;
 		int ex = (int) point.x;
 		int ey = (int) point.y;
+		int w = favoriteIcon.getWidth() / 2;
+		int h = favoriteIcon.getHeight() / 2;
 		for (FavouritePoint n : favorites.getFavouritePoints()) {
 			int x = view.getRotatedMapXForPoint(n.getLatitude(), n.getLongitude());
 			int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
-			if (Math.abs(x - ex) <= r && Math.abs(y - ey) <= r) {
-				r = Math.max(Math.abs(x - ex), Math.abs(y - ey));
-				result = n;
+			if (Math.abs(x - ex) <= w && Math.abs(y - ey) <= h) {
+				float newr = Math.max(Math.abs(x - ex), Math.abs(y - ey));
+				if (newr < r) {
+					res.add(n);
+				}
 			}
 		}
-		return result;
 	}
 
 	@Override
 	public boolean onSingleTap(PointF point) {
-		FavouritePoint fav = getFavoriteFromPoint(point);
-		if(fav != null){
-			String format = view.getContext().getString(R.string.favorite) + " : " + fav.getName();  //$NON-NLS-1$
-			AccessibleToast.makeText(view.getContext(), format, Toast.LENGTH_LONG).show();
+		List<FavouritePoint> favs = new ArrayList<FavouritePoint>();
+		getFavoriteFromPoint(point, favs);
+		if(!favs.isEmpty()){
+			StringBuilder res = new StringBuilder();
+			int i = 0;
+			for(FavouritePoint fav : favs) {
+				if (i++ > 0) {
+					res.append("\n\n");
+				}
+				res.append(view.getContext().getString(R.string.favorite) + " : " + fav.getName());  //$NON-NLS-1$
+			}
+			AccessibleToast.makeText(view.getContext(), res.toString(), Toast.LENGTH_LONG).show();
 			return true;
 		}
 		return false;
@@ -162,8 +148,8 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	}
 
 	@Override
-	public Object getPointObject(PointF point) {
-		return getFavoriteFromPoint(point);
+	public void collectObjectsFromPoint(PointF point, List<Object> res) {
+		getFavoriteFromPoint(point, res);
 	}
 
 	@Override

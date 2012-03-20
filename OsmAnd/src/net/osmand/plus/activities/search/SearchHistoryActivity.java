@@ -2,6 +2,9 @@ package net.osmand.plus.activities.search;
 
 import java.util.List;
 
+import com.google.android.apps.analytics.easytracking.TrackedActivity;
+import com.google.android.apps.analytics.easytracking.TrackedListActivity;
+
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -25,7 +28,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class SearchHistoryActivity extends ListActivity implements SearchActivityChild {
+public class SearchHistoryActivity extends TrackedListActivity  implements SearchActivityChild {
 	private LatLon location;
 	private SearchHistoryHelper helper;
 	private Button clearButton;
@@ -36,6 +39,8 @@ public class SearchHistoryActivity extends ListActivity implements SearchActivit
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ListView lv = new ListView(this);
+		lv.setCacheColorHint(getResources().getColor(R.color.activity_background));
+		lv.setDivider(getResources().getDrawable(R.drawable.tab_text_separator));
 		lv.setId(android.R.id.list);
 
 		setContentView(lv);
@@ -105,7 +110,7 @@ public class SearchHistoryActivity extends ListActivity implements SearchActivit
 						if (which == 0) {
 							OsmandSettings settings = OsmandSettings.getOsmandSettings(SearchHistoryActivity.this);
 							settings.setMapLocationToShow(entry.getLat(), entry.getLon(), settings.getLastKnownMapZoom(), null, entry
-									.getName());
+									.getName(), null);
 						} else if (which == 1) {
 							OsmandSettings.getOsmandSettings(SearchHistoryActivity.this).setPointToNavigate(entry.getLat(), entry.getLon(),
 									null);
@@ -127,7 +132,7 @@ public class SearchHistoryActivity extends ListActivity implements SearchActivit
 	private void selectModel(HistoryEntry model) {
 		helper.selectEntry(model, this);
 		OsmandSettings settings = OsmandSettings.getOsmandSettings(SearchHistoryActivity.this);
-		settings.setMapLocationToShow(model.getLat(), model.getLon(), settings.getLastKnownMapZoom(), null, model.getName());
+		settings.setMapLocationToShow(model.getLat(), model.getLon(), settings.getLastKnownMapZoom(), null, model.getName(), null);
 		MapActivity.launchMapActivityMoveToTop(this);
 	}
 

@@ -40,6 +40,7 @@ import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.render.NativeOsmandLibrary.NativeSearchResult;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
@@ -49,8 +50,8 @@ import org.apache.commons.logging.Log;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.RectF;
 import android.graphics.Bitmap.Config;
+import android.graphics.RectF;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
@@ -180,11 +181,14 @@ public class MapRenderRepositories {
 		}
 	}
 
-	public boolean updateMapIsNeeded(RotatedTileBox box) {
+	public boolean updateMapIsNeeded(RotatedTileBox box, DrawSettings drawSettings) {
 		if (files.isEmpty() || box == null) {
 			return false;
 		}
 		if (requestedBox == null) {
+			return true;
+		}
+		if (drawSettings.isForce()) {
 			return true;
 		}
 		if (requestedBox.getZoom() != box.getZoom()) {
@@ -505,6 +509,7 @@ public class MapRenderRepositories {
 			renderingReq.setIntFilter(renderingReq.ALL.R_MINZOOM, requestedBox.getZoom());
 			if(renderingReq.searchRenderingAttribute(RenderingRuleStorageProperties.A_SHADOW_RENDERING)) {
 				currentRenderingContext.shadowRenderingMode = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_INT_VALUE);
+				currentRenderingContext.shadowRenderingColor = renderingReq.getIntPropertyValue(renderingReq.ALL.R_SHADOW_COLOR);
 			}
 			currentRenderingContext.leftX = (float) requestedBox.getLeftTileX();
 			currentRenderingContext.topY = (float) requestedBox.getTopTileY();
@@ -548,7 +553,7 @@ public class MapRenderRepositories {
 			}
 			// Force to use rendering request in order to prevent Garbage Collector when it is used in C++
 			if(renderingReq != null){
-				System.out.println("Debug :" + renderingReq != null);				
+				log.info("Debug :" + renderingReq != null);				
 			}
 			String renderingDebugInfo = currentRenderingContext.renderingDebugInfo;
 			currentRenderingContext.ended = true;

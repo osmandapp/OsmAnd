@@ -104,7 +104,7 @@ public enum DBDialect {
 			//increased cache_size, by default it is 2000 and we have quite huge files...
 			//statement.executeUpdate("PRAGMA cache_size = 10000"); cache size could be probably contraproductive on slower disks?
 			statement.close();
-			System.out.println(String.format("SQLITE running in %s mode", SQLiteJDBCLoader.isNativeMode() ? "native" : "pure-java"));
+			log.info(String.format("SQLITE running in %s mode", SQLiteJDBCLoader.isNativeMode() ? "native" : "pure-java"));
 			return connection;
 		} else if (DBDialect.DERBY == this) {
 			try {

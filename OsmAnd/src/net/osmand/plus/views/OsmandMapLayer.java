@@ -10,7 +10,7 @@ public abstract class OsmandMapLayer {
 	
 	public abstract void initLayer(OsmandMapTileView view);
 	
-	public abstract void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode);
+	public abstract void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, DrawSettings settings);
 	
 	public abstract void destroyLayer();
 	
@@ -32,5 +32,26 @@ public abstract class OsmandMapLayer {
 	 */
 	public abstract boolean drawInScreenPixels();
 	
+	public static class DrawSettings {
+		private final boolean nightMode;
+		private final boolean force;
+
+		public DrawSettings(boolean nightMode) {
+			this(nightMode,false);
+		}
+
+		public DrawSettings(boolean nightMode, boolean force) {
+			this.nightMode = nightMode;
+			this.force = force;
+		}
+		
+		public boolean isForce() {
+			return force;
+		}
+		
+		public boolean isNightMode() {
+			return nightMode;
+		}
+	}
 
 }

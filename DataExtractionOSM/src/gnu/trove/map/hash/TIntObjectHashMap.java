@@ -20,22 +20,30 @@
 
 package gnu.trove.map.hash;
 
-import gnu.trove.map.TIntObjectMap;
+import gnu.trove.TIntCollection;
+import gnu.trove.function.TObjectFunction;
 import gnu.trove.impl.Constants;
 import gnu.trove.impl.HashFunctions;
-import gnu.trove.impl.hash.*;
+import gnu.trove.impl.hash.THashPrimitiveIterator;
+import gnu.trove.impl.hash.TIntHash;
+import gnu.trove.iterator.TIntIterator;
+import gnu.trove.iterator.TIntObjectIterator;
+import gnu.trove.map.TIntObjectMap;
 import gnu.trove.procedure.TIntObjectProcedure;
 import gnu.trove.procedure.TIntProcedure;
 import gnu.trove.procedure.TObjectProcedure;
-import gnu.trove.iterator.TIntIterator;
-import gnu.trove.iterator.TIntObjectIterator;
-import gnu.trove.iterator.TPrimitiveIterator;
-import gnu.trove.function.TObjectFunction;
 import gnu.trove.set.TIntSet;
-import gnu.trove.TIntCollection;
 
-import java.io.*;
-import java.util.*;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+import java.util.AbstractSet;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 
 //////////////////////////////////////////////////

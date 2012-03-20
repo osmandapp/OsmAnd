@@ -34,7 +34,6 @@ import net.osmand.osm.Entity.EntityType;
 import net.osmand.osm.OSMSettings.OSMTagKey;
 
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import rtree.Element;
 import rtree.IllegalValueException;
@@ -47,7 +46,6 @@ import rtree.Rect;
 
 public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
-	private static final Log log = LogFactory.getLog(IndexVectorMapCreator.class);
 	// map zoom levels <= 2^MAP_LEVELS
 	private static final int MAP_LEVELS_POWER = 3;  
 	private static final int MAP_LEVELS_MAX = 1 << MAP_LEVELS_POWER;
@@ -71,9 +69,11 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	private Connection mapConnection;
 	
 	private int zoomWaySmothness = 0;
+	private final Log logMapDataWarn;
 
 
-	public IndexVectorMapCreator() {
+	public IndexVectorMapCreator(Log logMapDataWarn) {
+		this.logMapDataWarn = logMapDataWarn;
 	}
 	
 	public void indexMapRelationsAndMultiPolygons(Entity e, OsmDbAccessorContext ctx) throws SQLException {
@@ -100,7 +100,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				}
 			}
 			if(!outerFound){
-				log.warn("Probably map bug: Multipoligon id=" + e.getId() + " contains only inner ways : "); //$NON-NLS-1$ //$NON-NLS-2$
+				logMapDataWarn.warn("Probably map bug: Multipoligon id=" + e.getId() + " contains only inner ways : "); //$NON-NLS-1$ //$NON-NLS-2$
 				return;
 			}
 
@@ -119,7 +119,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				}
 				// skip incompleted rings and do not add whole relation ?
 				if (!incompletedRings.isEmpty()) {
-					 // log.warn("In multipolygon  " + e.getId() + " there are incompleted ways : " + incompletedRings);
+					 logMapDataWarn.warn("In multipolygon  " + e.getId() + " there are incompleted ways : " + incompletedRings);
 					return;
 					// completedRings.addAll(incompletedRings);
 				}
@@ -130,7 +130,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					for (Way way : l) {
 						boolean inner = "inner".equals(entities.get(way)); //$NON-NLS-1$
 						if (innerType != inner) {
-							log.warn("Probably map bug: Multipoligon contains outer and inner ways.\n" +  //$NON-NLS-1$
+							logMapDataWarn.warn("Probably map bug: Multipoligon contains outer and inner ways.\n" +  //$NON-NLS-1$
 									"Way:" + way.getId() + " is strange part of completed ring. InnerType:" + innerType + " way inner: " + inner + " way inner string:" + entities.get(way)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 							return;
 						}
@@ -139,7 +139,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				
 				Node nodeOut = checkOuterWaysEncloseInnerWays(completedRings, entities);
 				if(nodeOut != null){
-					log.warn("Map bug: Multipoligon contains 'inner' way point outside of 'outer' border.\n" +  //$NON-NLS-1$
+					logMapDataWarn.warn("Map bug: Multipoligon contains 'inner' way point outside of 'outer' border.\n" +  //$NON-NLS-1$
 							"Multipolygon id : " + e.getId() + ", inner node out id : " + nodeOut.getId()); //$NON-NLS-1$
 				}
 
@@ -394,7 +394,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		int ind = 0;
 		int sh = 0;
 		if(typeUse.size() > 3){
-			log.error("Types for low index way more than 4"); //$NON-NLS-1$
+			logMapDataWarn.error("Types for low index way more than 4"); //$NON-NLS-1$
 		}
 		i |= (mainType << sh);
 		if (typeUse.size() > ind) {
@@ -715,7 +715,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 							 rs.getBytes(2), rs.getString(3),  
 							 rs.getInt(4),  rs.getBytes(5));
 				} else {
-					log.error("Something goes wrong with id = " + id); //$NON-NLS-1$
+					logMapDataWarn.error("Something goes wrong with id = " + id); //$NON-NLS-1$
 				}
 			} else {
 				long ptr = ((NonLeafElement) e[i]).getPtr();

@@ -1,5 +1,152 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="live_monitoring_descr">Zapnout přímé nahrávání pozice na HTTP server</string>
+	<string name="live_monitoring">Přímý přenos pozice</string>
+	<string name="live_monitoring_interval_descr">Zadejte interval nahrávání pozice na server</string>
+	<string name="live_monitoring_interval">Interval přímého přenosu</string>
+	<string name="live_monitoring_url_descr">Zadejte webovou adresu serveru pro přímý přenos pozice. Parametry: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+	<string name="live_monitoring_url">Server pro přímý přenos</string>
+	<string name="gpx_monitoring_disabled_warn">Prosím, zapněte funkci \'Uložit trasu do GPX\'</string>
+	<string name="show_current_gpx_title">Zobrazit aktuální trasu</string>
+
+	<string name="tip_recent_changes_0_7_0_t">Změny ve verzi 0.7.0 :
+	\n\t- Offline informace o místech z Wikipedie
+	\n\t- Aktualizované mapy
+	\n\t- Další drobné změny
+	</string>    
+	<string name="free_version_message">Tato bezplatná verze OsmAnd je omezena na %1$s downloady %2$s a nepodporuje offline data z Wikipedie.</string>
+	<string name="free_version_title">Bezplatná verze</string>
+	<string name="poi_context_menu_showdescription">Zobrazit popis POI</string>
+
+	<string name="index_name_north_america">Severní Amerika</string>
+	<string name="index_name_us">Severní Amerika - Spojené státy</string>
+	<string name="index_name_central_america">Střední Amerika</string>
+	<string name="index_name_south_america">Jižní Amerika</string>
+	<string name="index_name_europe">Evropa</string>
+	<string name="index_name_france">Evropa - Francie</string>
+	<string name="index_name_germany">Evropa - Německo</string>
+	<string name="index_name_russia">Evropa/Asie - Rusko</string>
+	<string name="index_name_africa">Afrika</string>
+	<string name="index_name_asia">Asie</string>
+	<string name="index_name_australia">Austrálie</string>
+	<string name="index_name_other">Mapy celého světa a tematické mapy</string>
+	<string name="index_name_wiki">Celý svět - Wikipedie</string>
+	<string name="index_name_voice">Hlasová data (audio)</string>
+	<string name="index_name_tts_voice">Hlasová data (TTS)</string>
+
+	<string name="amenity_type_wikiosm">Wikipedie (offline)</string>
+	<string name="amenity_type_user_defined">User defined</string>
+	<string name="fav_export_confirmation">Soubor se záložkami již existuje. Chcete ho nahradit?</string>
+<!-- this block re-worked for new Preferences structure -->
+	<string name="profile_settings">Nastavení profilu</string>
+	<string name="settings_preset">Uživatelský profil</string>
+	<string name="settings_preset_descr">Vyberte profil aplikace. (V každém profilu je možno upravit mapy, sledování a navigaci.)</string>
+	<string name="rendering_settings">- Mapa</string>
+	<string name="rendering_settings_descr">Nastavení zdroje mapy a způsobu vykreslování</string>
+	<string name="appearance_settings">- Zobrazení</string>
+	<string name="appearance_settings_descr">Nastavení vzhledu a chování aplikace a zobrazení mapy</string>
+	<string name="monitor_preferences">- Záznam trasy</string>
+	<string name="monitor_preferences_descr">Nastavení záznamu trasy na SD kartu</string>
+	<string name="routing_settings">- Navigace</string>
+	<string name="routing_settings_descr">Nastavení způsobu navigace</string>
+	<string name="global_settings">Obecná nastavení</string>
+	<string name="index_settings">Offline data</string>
+	<string name="index_settings_descr">Stáhnout a spravovat data pro použití offline (mapy, trasy, ...)</string>
+	<string name="general_settings">Obecné</string>
+	<string name="general_settings_descr">Nastavení displeje, jazyka, zvuku a dalších parametrů</string>
+	<string name="user_name">Jméno uživatele</string>
+	<string name="user_name_descr">Vaše uživatelské jméno na openstreetmap.org</string>
+	<string name="user_password">Heslo</string>
+	<string name="user_password_descr">Vaše heslo na openstreetmap.org</string>
+	<string name="osmand_service">Služba na pozadí</string>
+	<string name="osmand_service_descr">Povolit běh aplikace na pozadí a při vypnutém displeji</string>
+	<string name="tip_rotation_switching">Otáčení mapy</string>
+	<string name="tip_rotation_switching_t">
+	Můžete si zvolit, jak se mapa bude otáčet, pomocí menu
+	\Nastavení\' -> \Zobrazení\' -> \Otáčení mapy\'.
+	\n
+	Možnosti jsou:
+	\n\t
+	\'Neotáčet\' - Mapa se nebude otáčet. Sever bude stále nahoře.
+	\n\t
+	\'Ve směru pohybu\' - Mapa se bude natáčet podle toho, kterým
+	směrem se pohybujete.
+	\n\t
+	\'Podle kompasu\' - Mapa se bude natáčet podle kompasu.
+	\n
+	Pro rychlé přepnutí na otáčení podle kompasu a zpět klepněte na
+	střelku kompasu na zobrazení mapy.
+	</string>
+
+	<string name="switch_to_raster_map_to_see">
+	Vektorové mapy toto místo neobsahují. 
+	\n\t\n\tMapová data můžete stáhnout v \'Nastavení\' -> \'Offline data\', nebo přepnout na online mapy v \'Nastavení\' -> \'Mapa\'.
+	</string>
+  	<string name="binary_map_download_success">Stahování dokončeno. Na vektorové mapy můžete přepnout v menu (Vrstvy -> Mapa-> Vektorové mapy)</string>
+
+	<string name="tip_day_night_mode">Denní/noční režim</string>
+  <string name="tip_day_night_mode_t">
+    \t
+    OsmAnd dokáže ručně nebo automaticky přepínat mezi denním a
+    nočním barevným režimem.
+    \n\t
+    Pokud řídíte v noci, tmavší zobrazovací režim je vhodnější, neboť
+    méně oslňuje. Naopak, světlé zobrazení v denním režimu je
+    za denního světla lépe čitelné.
+    \n\t
+    Zobrazovací režim lze nastavit v \'Hlavní
+    Menu\'->\'Nastavení\'->\'Mapa\'->\'Denní/noční režim\'.
+    \n
+    Volby jsou následující:
+    \n\t
+    \'Východ/západ slunce\' - automatický režim, řízený polohou slunce
+    \n\t
+    \'Den\' - stále používat denní režim
+    \n\t
+    \'Noc\' - stále používat noční režim
+    \n\t
+    \'Senzor osvětlení\' - zobrazení mapy se řídí senzorem osvětlení
+    (pouze pokud je dostupný)
+  </string>
+
+  <string name="tip_osm_improve">Vylepšování Openstreetmap</string>
+  <string name="tip_osm_improve_t">
+    \t
+
+    OsmAnd využívá mapy založené na datech Openstreetmap.org a kromě
+    navigace umožňuje také vylepšování a pomoc projektu
+    Openstreetmap. Několika kliknutími tak můžete snadno vytvářet nové
+    body zájmu (POI) nebo hlášení o chybách OSM. Pro začátek je pouze
+    potřeba zadat přihlašovací informace v \'Nastavení\'->\'Obecné\'->\'OSM\'.
+
+    \n\t
+
+    Nové POI zadáte volbou \'Vytvořit POI\' v kontextovém menu
+    mapy. Pak můžete zadat informace o novém POI a stisknutím tlačítka
+    ho odeslat.
+
+    \n\t
+
+    Pokud v mapě najdete chybu, můžete ji nahlásit a přispět tak k
+    jejímu rychlejšímu opravení.
+
+    \n\t
+
+    Pro přidání OSM chyby použijte volbu \'Otevřít chybu OSM\' v
+    kontextovém menu mapy. Tím se otevře dialog, kde můžete zadat
+    detailní popis problému. Chybu odešlete tlačítkem Add.
+
+    \n\t
+
+    Pro tyto funkce potřebujete internetové připojení.
+  </string>
+<!-- end of string changes for new Preferences structure -->
+
+	<string name="download_files_not_enough_space">Nedostatek místa pro stažení %1$s MB dat (volné: %2$s).</string>
+	<string name="download_files_question_space">Stáhnout {0} soubor(y) ({1} MB)? Volné místo: {2} MB.</string>
+
+	<string name="show_zoom_level_descr">Zobrazovat permanentně stupeň zvětšení jako číslo namísto měřítka.</string>
+	<string name="show_zoom_level">Zobrazovat zvětšení</string>
 
 	<string name="tip_select_destination_point">Výbrat cíl</string>
 	<string name="tip_select_destination_point_t">
@@ -21,9 +168,6 @@
 	<string name="use_transparent_map_theme_descr">Použít průhledné ovládání mapy</string>
 	<string name="use_transparent_map_theme">Transparentní téma</string>
 	
-	<string name="appearance_settings_descr">Konfigurace vzhledu aplikace</string>
-	<string name="appearance_settings">Vzhled</string>
-
 	<string name="native_library_not_supported">Android native library není podporovaná na tomto zařízení.</string>
 	<string name="init_native_library">Inicializuji Android native library...</string>
 	<string name="choose_auto_follow_route">Nastavení automatického sledování</string>
@@ -35,9 +179,8 @@
 
 	<string name="pref_vector_rendering">Nastavení vektorového vykreslovače</string>
 	<string name="pref_overlay">Překryvná/podkresová vrstva</string>
-	<string name="pref_raster_map">Nastavení rastrové mapy</string>
+	<string name="pref_raster_map">Nastavení zdroje mapy</string>
 	<string name="pref_vector_map">Nastavení vektorové mapy</string>
-	<!-- string name="delete_confirmation_title">Chystáte se smazat</string -->
 	<string name="delete_confirmation_msg">Opravdu chcete smazat %1$s?</string>
 	<string name="city_type_suburb">Předměstí</string>
 	<string name="city_type_hamlet">Osada</string>
@@ -76,7 +219,7 @@
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 
 <string name="search_select_point">Vybrat</string>
-<string name="local_index_description">Stahnout nová, zálohovat nebo smazat existující data. \nOffline data na zařízení (%1$s dostupné)</string>
+<string name="local_index_description">Stahnout nová, zálohovat nebo smazat existující data. \nOffline data na zařízení (%1$s dostupné):</string>
 <string name="search_position_current_location_search">Hledané polohy...</string>
 <string name="search_position_current_location_found">Poloha [nalezeno]</string>
 <string name="search_position_address">Adresy...</string>
@@ -110,7 +253,7 @@
 	<string name="menu_save_directions">Uložit pokyny</string>
 	<string name="local_index_upload_gpx_description">Nahrát GPX soubory do OSM komunity. Budou použity k vylepšení map.</string>
 	<string name="local_index_items_uploaded">%1$d z %2$d položek byla úspěšně nahrána.</string>
-	<string name="local_index_mi_upload_gpx">Přispět do OSM...</string>
+	<string name="local_index_mi_upload_gpx">Přispět do OSM</string>
 
 	<string name="show_more_map_detail">Více mapových detailů</string>
 	<string name="show_more_map_detail_descr">Zobrazit některé detaily vektorové mapy (silnice, atd.) již při menším zvětšení</string>
@@ -130,7 +273,7 @@
         <string name="local_index_gpx_info_elevation">\nPrůměrná výška : %1$.0f metrů\nStoupání : %2$.0f metrů\nKlesání : %3$.0f metrů</string>
         <string name="local_index_gpx_info">Podtrasy : %1$d\nCelkem bodů : %2$d\nTrasových bodů : %3$d\nCelková vzdálenost : %4$s
                                                                            \nPočáteční čas : %5$tD %5$tR\nKoncový čas : %6$tD %6$tR</string>
-        <string name="local_index_installed">Instalováno</string>
+        <string name="local_index_installed">Vydání</string>
         <string name="local_index_items_backuped">Zálohováno %1$d položek z %2$d.</string>
         <string name="local_index_items_deleted">Smazáno %1$d položek z %2$d.</string>
         <string name="local_index_items_restored">Obnoveno %1$d položek z %2$d.</string>
@@ -140,7 +283,7 @@
         <string name="local_index_mi_backup">Zálohovat</string>
         <string name="local_index_mi_delete">Smazat</string>
         <string name="local_index_mi_reload">Znovu nahrát</string>
-        <string name="local_index_download">Stáhnout</string>
+        <string name="local_index_download">Stáhnout...</string>
         <string name="local_index_tile_data">Zdroj map. dlaždic: %1$s \nMinimální zvětšení : %2$d\nMaximální zvětšení : %3$d\nStahovatelné : %4$s \nStažené zvětšení : %5$s</string>
         <string name="local_index_poi_data">Data POI</string>
         <string name="local_index_address_data">Addresy</string>
@@ -240,45 +383,6 @@
     Modrá - označuje mapy a data, u kterých lze stáhnout novější verzi
   </string>
 
-  <string name="tip_day_night_mode">Denní/noční režim</string>
-  <string name="tip_day_night_mode_t">
-    \t
-
-    OsmAnd se dokáže ručně nebo automaticky přepínat mezi denním a
-    nočním barevným režimem.
-
-    \n\t
-
-    Pokud řídíte v noci, tmavší zobrazovací režim je vhodnější, neboť
-    méně oslňuje. Naopak, světlé zobrazení v denním režimu je
-    za denního světla lépe čitelné.
-
-    \n\t
-
-    Zobrazovací režim lze nastavit v \'Hlavní
-    Menu\'->\'Nastavení\'->\'Vzhled mapy\'->\'Denní/noční režim\'.
-
-    \n
-    Volby jsou následující:
-
-    \n\t
-
-    \'Východ/západ slunce\' - automatický režim, řízený polohou slunce
-
-    \n\t
-
-    \'Den\' - stále používat denní režim
-
-    \n\t
-
-    \'Noc\' - stále používat noční režim
-
-    \n\t
-
-    \'Senzor osvětlení\' - zobrazení mapy se řídí senzorem osvětlení
-    (pouze pokud je dostupný)
-  </string>
-
   <string name="tip_location_sharing">Sdílení polohy</string>
   <string name="tip_location_sharing_t">
     \t
@@ -319,66 +423,6 @@
     Zapnutím mapová vrstvy \'Oblíbené\' se všechna oblíbená místa
     zobrazí na mapě.
   </string>
-  <string name="tip_osm_improve">Vylepšování Openstreetmap</string>
-  <string name="tip_osm_improve_t">
-    \t
-
-    OsmAnd využívá mapy založené na datech Openstreetmap.org a kromě
-    navigace umožňuje také vylepšování a pomoc projektu
-    Openstreetmap. Několika kliknutími tak můžete snadno vytvářet nové
-    body zájmu (POI) nebo hlášení o chybách OSM. Pro začátek je pouze
-    potřeba zadat přihlašovací informace v \Hlavní
-    Menu\'->\'Nastavení\'->\'OSM\'.
-
-    \n\t
-
-    Nové POI zadáte volbou \'Vytvořit POI\' v kontextovém menu
-    mapy. Pak můžete zadat informace o novém POI a stisknutím tlačítka
-    ho odeslat.
-
-    \n\t
-
-    Pokud v mapě najdete chybu, můžete ji nahlásit a přispět tak k
-    jejímu rychlejšímu opravení.
-
-    \n\t
-
-    Pro přidání OSM chyby použijte volbu \'Otevřít chybu OSM\' v
-    kontextovém menu mapy. Tím se otevře dialog, kde můžete zadat
-    detailní popis problému. Chybu odešlete tlačítkem Add.
-
-    \n\t
-
-    Pro tyto funkce potřebujete internetové připojení.
-  </string>
-
-  <string name="tip_rotation_switching">Otáčení mapy</string>
-  <string name="tip_rotation_switching_t">
-    Můžete si zvolit, jak se mapa bude otáčet, pomocí menu
-    \Nastavení\' -> \Obecné\' -> \Otáčení mapy\'.
-
-    \n
-
-    Možosti jsou:
-
-    \n\t
-
-    \'Neotáčet\' - Mapa se nebude otáčet. Sever bude stále nahoře.
-
-    \n\t
-
-    \'Ve směru pohybu\' - Mapa se bude natáčet podle toho, kterým
-    směrem se pohybujete.
-
-    \n\t
-
-    \'Podle kompasu\' - Mapa se bude natáčet podle kompasu.
-
-    \n
-
-    Pro rychlé přepnutí na otáčení podle kompasu a zpět klepněte na
-    střelku kompasu na zobrazení mapy.
-  </string>
 
   <string name="tip_recent_changes">Poslední změny:</string>
   <string name="tip_recent_changes_0_6_6_t">
@@ -408,8 +452,7 @@
 
   <string name="internet_connection_required_for_online_route">
     Snažíte se použít online navigaci, ale nemáte internetové
-    připojení. Můžete vyzkoušet experimentální offline navigaci
-    (zapnete ji v menu Nastavení).
+    připojení.
   </string>
 
   <string name="tts_language_not_supported_title">Jazyk není podporován</string>
@@ -427,16 +470,8 @@
   <string name="gpx_option_destination_point">Použít současný cíl trasy</string>
   <string name="gpx_option_from_start_point">Projet celou trasu</string>
 
-  <string name="switch_to_raster_map_to_see">
-    Vektorové mapy toto místo neobsahují, zdroj map můžete přepnout v
-    menu (Layers -> Map Source...)
-  </string>
   <string name="switch_to_vector_map_to_see">
     Na vektorové mapy se můžete přepnout v menu (Vrstvy -> Zdroj
-    map... -> Vektorové mapy OSM)
-  </string>
-  <string name="binary_map_download_success">
-    Dokončeno. Na vektorové mapy se můžete přepnout v menu (Vrstvy -> Zdroj
     map... -> Vektorové mapy OSM)
   </string>
   <string name="choose_audio_stream">Kanál pro navádění</string>
@@ -490,7 +525,7 @@
     <u>Online OSM</u> - mapová klasifikace
   </string>
   <string name="error_doing_search">Při offline hledání došlo k chybě</string>
-  <string name="search_offline_geo_error">Nemohu rozpoznat geo intent:{0}</string>
+  <string name="search_offline_geo_error">Nemohu rozpoznat geo intent:\'%s\'</string>
   <string name="search_osm_offline">Hledat adresu pomocí offline map</string>
 
   <string name="system_locale">Systém</string>
@@ -576,7 +611,7 @@
   <string name="mile_per_hour">mph</string>
   <string name="mile">mi</string>
   <string name="send_location_way_choose_title">Sdílet polohu pomocí</string>
-  <string name="send_location_sms_pattern">Jsem tady : %1$s\n%2$s</string>
+  <string name="send_location_sms_pattern">Poloha : %1$s\n%2$s</string>
   <string name="send_location_email_pattern">
     Pro zobrazení polohy následujte link %1$s v prohlížeči nebo android
     intent link %2$s
@@ -591,7 +626,7 @@
   navigaci pro dlouhé vzdálenosti (experimentální)</string>
   <string name="osmand_routing_experimental">Offline navigace je
   experimentální a funguje jen pro vzdálenosti do 20
-  km.\nPak se navigace automaticky přepne na online Cloudmade.</string>
+  km.\n\nPak se navigace automaticky přepne na online CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Nemohu najít zadaný adresář.</string>
   <string name="application_dir">Adresář pro data</string>
   <string name="application_dir_change_warning">Změna adresáře pro
@@ -618,14 +653,6 @@
   <string name="select_all">Vybrat vše</string>
   <string name="reload">Načíst znovu</string>
 
-  <string name="general_settings_descr">Nastavení použití internetu, natočení mapy, orientace displeje a dalších</string>
-  <string name="general_settings">Obecné</string>
-  <string name="rendering_settings_descr">Nastavení zdroje mapy a vzhledu</string>
-  <string name="rendering_settings">Vzhled mapy</string>
-  <string name="index_settings_descr">Stáhnout nebo aktualizovat data pro použití offline</string>
-  <string name="index_settings">Offline data</string>
-  <string name="osmand_service">Služba na pozadí</string>
-  <string name="osmand_service_descr">Povolit běh aplikace na pozadí a při vypnutém displeji</string>
   <string name="fast_route_mode">Nejrychlejší trasa</string>
   <string name="fast_route_mode_descr">Zapněte pro výpočet nejrychlejší trasy, vypněte, pokud chcete hledat tu nejkratší</string>
   <string name="tiles_to_download_estimated_size">Pro zoom {0} je třeba stáhnout {1} dlaždic, celkem {2} MB</string>
@@ -664,12 +691,12 @@
   <string name="no_vector_map_loaded">Vektorové mapy nebyly načteny</string>
   <string name="map_route_by_gpx">Cestovat podle GPX</string>
   <string name="gpx_files_not_found">Soubory GPX nebyly nalezeny v adresáři /osmand/tracks</string>
-  <string name="layer_gpx_layer">GPX trasy...</string>
+  <string name="layer_gpx_layer">GPX trasa...</string>
   <string name="error_reading_gpx">Chyba při načítání dat GPX</string>
 
   <string name="vector_data">Vektorové mapy OSM</string>
   <string name="transport_context_menu">Hledat dopravu ze zastávky</string>
-  <string name="point_on_map">Bod na mapě\n Šíř. {0,number,#.####} Dél. {1,number,#.####}</string>
+  <string name="point_on_map">Poloha:\n Šíř. %1$.5f Dél. %2$.5f</string>
   <string name="osb_bug_name">Chyba</string>
   <string name="poi_context_menu_modify">Upravit POI</string>
   <string name="poi_context_menu_delete">Smazat POI</string>
@@ -722,8 +749,6 @@
   <string name="background_router_service_descr">Povolit službu pro dlouhodobé sledování polohy na pozadí</string>
   <string name="background_router_service">Sledování polohy</string>
   <string name="off_router_service_no_gps_available">Služba pro navigaci na pozadí vyžaduje zapnutý zdroj polohy.</string>
-  <string name="routing_settings_descr">Možnosti navigace</string>
-  <string name="routing_settings">Navigace</string>
   <string name="hide_poi_filter">Skrýt filtr</string>
   <string name="show_poi_filter">Zobrazit filtr</string>
   <string name="search_poi_filter">Filtr</string>
@@ -797,7 +822,6 @@
   <string name="search_history_street">Ulice: {0}, {1}</string>
   <string name="search_history_int_streets">Křižovatka ulic: {0} x {1} v {2}</string>
   <string name="search_history_building">Budova: {0}, {1}, {2}</string>
-  <string name="search_history_navigate_to">Navigovat na šíř. = {0}, dél. = {1}</string>
   <string name="favorite">Oblíbené</string>
   <string name="clear_all">Vymazat vše</string>
   <string name="history">Minulé</string>
@@ -812,8 +836,7 @@
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Maximální zvětšení</string>
   <string name="max_level_download_tile_descr">Jaké nejvyšší zvětšení mapy stahovat</string>
-  <string name="route_about">O cestě</string>
-  <string name="route_general_information">Celková vzdálenost {0}, doba cesty {1} h {2} m.</string>
+  <string name="route_general_information">Celková vzdálenost %1$s, doba cesty %2$d h %3$d m.</string>
   <string name="router_service_descr">Vyberte navigační službu</string>
   <string name="router_service">Navigace</string>
   <string name="sd_dir_not_accessible">Adresář pro uložení na SD kartě není dostupný</string>
@@ -825,7 +848,7 @@
   <string name="downloading_file">Stahuji soubor...</string>
   <string name="downloading">Stahuji...</string>
   <string name="downloading_list_indexes">Stahuji seznam dostupných indexů</string>
-  <string name="list_index_files_was_not_loaded">Seznam indexů z osmand.googlecode.com nebyl stažen.</string>
+  <string name="list_index_files_was_not_loaded">Seznam indexů z osmand.net nebyl stažen.</string>
   <string name="select_index_file_to_download">Pokud nemůžete najít svou oblast, můžete si data vytvořit sami, viz osmand.net</string>
   <string name="show_poi_on_map">Ukázat na mapě</string>
   <string name="fav_points_edited">Oblíbené místo bylo upraveno</string>
@@ -834,7 +857,6 @@
   <string name="only_show">Jen ukázat</string>
   <string name="follow">Následovat</string>
   <string name="recalculate_route_to_your_location">Přepočítat cestu podle Vaší polohy</string>
-  <string name="follow_route">Následovat cestu</string>
   <string name="mark_final_location_first">Prosím zadejte nejprve cíl</string>
   <string name="get_directions">Navigace</string>
   <string name="show_gps_status">Ukázat stav GPS</string>
@@ -872,10 +894,7 @@
   <string name="download_indexes">Stáhnout offline data</string>
   <string name="use_online_routing_descr">Použít internet k výpočtu trasy</string>
   <string name="use_online_routing">Použít online navigaci</string>
-  <string name="user_password_descr">Vaše heslo na OSM</string>
-  <string name="user_password">Heslo</string>
   <string name="osm_settings_descr">Nastavení OSM: přihlašovací údaje</string>
-  <string name="monitor_preferences_descr">Nastavení sledování</string>
   <string name="data_settings_descr">Volba jazyka, stažení a aktualizace dat</string>
   <string name="map_preferences_descr">Nastavení mapy: zdroj map, otáčení, vystředování, orientace obrazovky</string>
   <string name="data_settings">Data</string>
@@ -883,21 +902,16 @@
   <string name="auto_zoom_map_descr">Automaticky měnit zvětšení podle rychlosti pohybu</string>
   <string name="auto_zoom_map">Automaticky zoomovat</string>
   <string name="additional_settings">Další volby</string>
-  <string name="settings_preset_descr">Zvolit předdefinované nastavení</string>
-  <string name="settings_preset">Režim aplikace</string>
   <string name="settings">Nastavení</string>
   <string name="save_current_track_descr">Uloží aktuální trasu na SD kartu</string>
   <string name="save_current_track">Uložit aktuální trasu</string>
   <string name="save_track_interval_descr">Vyberte časový interval pro ukládání trasy</string>
   <string name="save_track_interval">Interval ukládání trasy</string>
-  <string name="monitor_preferences">Sledování</string>
   <string name="save_track_to_gpx_descrp">Trasy budou ukládány do adresáře s trasami, seskupené podle dní</string>
   <string name="save_track_to_gpx">Uložit trasu do GPX</string>
   <string name="navigate_to">Ukázat směr</string>
   <string name="update_tile">Aktualizovat mapu</string>
   <string name="reload_tile">Načíst znovu dlaždici</string>
-  <string name="user_name_descr">Vaše uživatelské jméno na OSM</string>
-  <string name="user_name">Jméno uživatele</string>
   <string name="mark_point">Cíl</string>
   <string name="show_osm_bugs_descr">Zobrazit na mapě OpenStreetBugs</string>
   <string name="show_osm_bugs">Zobrazit OpenStreetBugs</string>
@@ -923,7 +937,7 @@
 
   <string name="show_poi_over_map_description">Zobrazit POI na mapě (použít poslední vybraný filtr)</string>
   <string name="show_poi_over_map">Zobrazit POI</string>
-  <string name="map_tile_source_descr">Zvolte zdroj mapových dlaždic:</string>
+  <string name="map_tile_source_descr">Zvolte zdroj mapových dlaždic</string>
   <string name="map_tile_source">Zdroj mapových dlaždic</string>
   <string name="map_source">Zdroj map</string>
   <string name="use_internet">Používat internet</string>
@@ -989,14 +1003,12 @@
   <string name="add_favorite_dialog_default_favourite_name">Oblíbené</string>
   <string name="add_favorite_dialog_favourite_added_template">Oblíbené místo \'\'{0}\'\' bylo přidáno.</string>
 
-  <!-- string name="favourites_context_menu_title">Kontextové menu</string -->
   <string name="favourites_context_menu_navigate">Navigovat do</string>
   <string name="favourites_context_menu_edit">Upravit oblíbené</string>
   <string name="favourites_context_menu_delete">Smazat oblíbené</string>
-  <string name="favourites_edit_dialog_title">Přejmenovat oblíbené</string>
 
-  <string name="favourites_remove_dialog_title">
-    Opravdu chcete odstranit oblíbené místo?
+  <string name="favourites_remove_dialog_msg">
+    Opravdu chcete odstranit oblíbené místo \'%s\'?
   </string>
   <string name="favourites_remove_dialog_success">Oblíbené místo {0} bylo vymazáno.</string>
 

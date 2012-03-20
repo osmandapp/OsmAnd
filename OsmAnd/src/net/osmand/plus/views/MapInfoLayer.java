@@ -58,6 +58,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private MapStackControl rightStack;
 	private MapStackControl leftStack;
 	private ViewGroup statusBar;
+
 	
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
@@ -101,39 +102,36 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 	
 	public void applyTheme() {
-		int boxTop = R.drawable.box_top;
+		int boxTop = R.drawable.box_top_stack;
 		int boxTopR = R.drawable.box_top_r;
 		int boxTopL = R.drawable.box_top_l;
 		int expand = R.drawable.box_expand;
 		if(view.getSettings().TRANSPARENT_MAP_THEME.get()){
-			boxTop = R.drawable.box_top_t;
+			boxTop = R.drawable.box_top_t_stack;
 			boxTopR = R.drawable.box_top_rt;
 			boxTopL = R.drawable.box_top_lt;
+			expand = R.drawable.box_expand_t;
 		}
-		int i = 0;
-		for(MapInfoControl m : rightStack.getAllViews()){
-			m.setBackgroundDrawable(view.getResources().getDrawable(i == 0 ? boxTopR : boxTop).mutate());
-			i++;
-		}
-		rightStack.setExpandImageDrawable(view.getResources().getDrawable(expand).mutate());
-		i = 0;
-		for(MapInfoControl m : leftStack.getAllViews()){
-			m.setBackgroundDrawable(view.getResources().getDrawable(i < 2 ? boxTopL : boxTop).mutate());
-			i++;
-		}
-		leftStack.setExpandImageDrawable(view.getResources().getDrawable(expand).mutate());
-		statusBar.setBackgroundDrawable(view.getResources().getDrawable(boxTop).mutate());
+		rightStack.setTopDrawable(view.getResources().getDrawable(boxTopR));
+		rightStack.setStackDrawable(boxTop);
+		
+		leftStack.setTopDrawable(view.getResources().getDrawable(boxTopL));
+		leftStack.setStackDrawable(boxTop);
+		
+		leftStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
+		rightStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
+		statusBar.setBackgroundDrawable(view.getResources().getDrawable(boxTop));
 		showAltitude = view.getSettings().SHOW_ALTITUDE_INFO.get();
 	}
 	
 	public void createTopBarElements() {
 		// 1. Create view groups and controls
 		statusBar = createStatusBar();
-		statusBar.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_top).mutate());
+		statusBar.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_top));
 		
 		rightStack = new MapStackControl(view.getContext());
-		rightStack.addStackView(createDistanceControl());
 		rightStack.addStackView(createAltitudeControl());
+		rightStack.addStackView(createDistanceControl());
 		rightStack.addCollapsedView(createSpeedControl());
 		rightStack.addCollapsedView(createTimeControl());
 		
@@ -190,7 +188,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latlonBounds, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latlonBounds, RectF tilesRect, DrawSettings nightMode) {
 		// update data on draw
 		rightStack.updateInfo();
 		leftStack.updateInfo();
@@ -219,7 +217,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	private TextInfoControl createSpeedControl(){
-		final TextInfoControl speedControl = new TextInfoControl(map, 0, paintText, paintSubText) {
+		final TextInfoControl speedControl = new TextInfoControl(map, 3, paintText, paintSubText) {
 			private float cachedSpeed = 0;
 
 			@Override
@@ -278,6 +276,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		};
 		altitudeControl.setText(null, null);
+		altitudeControl.setImageDrawable(view.getResources().getDrawable(R.drawable.ic_altitude));
 		return altitudeControl;
 	}
 	
@@ -300,9 +299,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 							if (Math.abs(toFindTime - cachedLeftTime) > 30000) {
 								cachedLeftTime = toFindTime;
 								if (DateFormat.is24HourFormat(map)) {
-									setText(DateFormat.format("kk:mm", toFindTime).toString(), null); //$NON-NLS-1$
+									setText(DateFormat.format("k:mm", toFindTime).toString(), null); //$NON-NLS-1$
 								} else {
-									setText(DateFormat.format("k:mm aa", toFindTime).toString(), null); //$NON-NLS-1$
+									setText(DateFormat.format("h:mm", toFindTime).toString(), 
+											DateFormat.format("aa", toFindTime).toString()); //$NON-NLS-1$
 								}
 								return true;
 							}
@@ -345,6 +345,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextInfoControl distanceControl = new TextInfoControl(map, 0, paintText, paintSubText) {
 			private float[] calculations = new float[1];
 			private int cachedMeters = 0;
+			
 			
 			@Override
 			public boolean updateInfo() {
@@ -432,27 +433,38 @@ public class MapInfoLayer extends OsmandMapLayer {
 				boolean visible = false;
 				if (routeLayer != null && routeLayer.getHelper().isRouterEnabled() && routeLayer.getHelper().isFollowingMode()) {
 					int d = routeLayer.getHelper().getDistanceToNextRouteDirection();
-					if (d > 0 && !showMiniMap) {
-						visible = true;
-						RouteDirectionInfo next = routeLayer.getHelper().getNextRouteDirectionInfo();
-						if (next == null) {
-							if (turnType != null) {
-								turnType = null;
-								invalidate();
-							}
-						} else if (!Algoritms.objectEquals(turnType, next.turnType)) {
-							turnType = next.turnType;
+
+					// Issue 863
+					if (routeLayer.getHelper().makeUturnWhenPossible() == true) {
+						if (!showMiniMap) {
+							visible = true;
+							turnType = TurnType.valueOf(TurnType.TU);
 							TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
-							if (turnType.getExitOut() > 0) {
-								exitOut = turnType.getExitOut() + ""; //$NON-NLS-1$
-							} else {
-								exitOut = null;
-							}
 							invalidate();
 						}
-						if (distChanged(d, nextTurnDirection)) {
-							invalidate();
-							nextTurnDirection = d;
+					} else {
+						if (d > 0 && !showMiniMap) {
+							visible = true;
+							RouteDirectionInfo next = routeLayer.getHelper().getNextRouteDirectionInfo();
+							if (next == null) {
+								if (turnType != null) {
+									turnType = null;
+									invalidate();
+								}
+							} else if (!Algoritms.objectEquals(turnType, next.turnType)) {
+								turnType = next.turnType;
+								TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
+								if (turnType.getExitOut() > 0) {
+									exitOut = turnType.getExitOut() + ""; //$NON-NLS-1$
+								} else {
+									exitOut = null;
+								}
+								invalidate();
+							}
+							if (distChanged(d, nextTurnDirection)) {
+								invalidate();
+								nextTurnDirection = d;
+							}
 						}
 					}
 				}
@@ -547,8 +559,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		// Back to location icon 
 		params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		params.leftMargin = (int) (10 * scaleCoefficient);
-		params.rightMargin = (int) (1 * scaleCoefficient);
+		params.leftMargin = (int) (5 * scaleCoefficient);
+		params.rightMargin = (int) (5 * scaleCoefficient);
 		backToLocation = new ImageView(view.getContext());
 		backToLocation.setImageDrawable(view.getResources().getDrawable(R.drawable.back_to_loc));
 		backToLocation.setOnClickListener(new View.OnClickListener() {

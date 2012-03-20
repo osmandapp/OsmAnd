@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<regions_list>
+		<!-- 1.2 FRANCE [SOURCE: GEOFABRIK.DE] -->
+		<regions siteToDownload="http://download.geofabrik.de/osm/europe/france/{0}.osm.pbf" region_prefix="France_" 
+			skip="false" region_suffix="_Europe">
+			<region name="alsace" esize="" />
+			<region name="aquitaine" esize="" />
+			<region name="auvergne" esize="" />
+			<region name="basse-normandie" esize="" />
+			<region name="bourgogne" esize="" />
+			<region name="bretagne" esize="" />
+			<region name="centre" esize="" />
+			<region name="champagne-ardenne" esize="" />
+			<region name="corse" esize="" />
+			<region name="franche-comte" esize="" />
+			<region name="haute-normandie" esize="" />
+			<region name="ile-de-france" esize="" />
+			<region name="languedoc-roussillon" esize="" />
+			<region name="limousin" esize="" />
+			<region name="lorraine" esize="" />
+			<region name="midi-pyrenees" esize="" />
+			<region name="nord-pas-de-calais" esize="" />
+			<region name="pays-de-la-loire" esize="" />
+			<region name="picardie" esize="" />
+			<region name="poitou-charentes" esize="" />
+			<region name="provence-alpes-cote-d-azur" esize="" />
+			<region name="rhone-alpes" esize="" />
+		</regions>
+
+		<!-- 1.3 GERMANY [SOURCE: GEOFABRIK.DE] -->
+		<regions siteToDownload="http://download.geofabrik.de/osm/europe/germany/{0}.osm.pbf" region_prefix="Germany_" skip="false" 
+			region_suffix="_Europe">
+			<region name="baden-wuerttemberg" esize="" cityAdminLevel="7"/>
+			<region name="bayern" esize="" cityAdminLevel="7"/>
+			<region name="berlin" esize="" cityAdminLevel="7"/>
+			<region name="brandenburg" esize="" cityAdminLevel="7"/>
+			<region name="bremen" esize="" cityAdminLevel="7"/>
+			<region name="hamburg" esize="" cityAdminLevel="7"/>
+			<region name="hessen" esize="" cityAdminLevel="7"/>
+			<region name="mecklenburg-vorpommern" esize="" cityAdminLevel="7"/>
+			<region name="niedersachsen" esize="" cityAdminLevel="7"/>
+			<region name="nordrhein-westfalen" esize="" cityAdminLevel="7"/>
+			<region name="rheinland-pfalz" esize="" cityAdminLevel="7"/>
+			<region name="saarland" esize="" cityAdminLevel="7"/>
+			<region name="sachsen-anhalt" esize="" cityAdminLevel="7"/>
+			<region name="sachsen" esize="" cityAdminLevel="7"/>
+			<region name="schleswig-holstein" esize="" cityAdminLevel="7"/>
+			<region name="thueringen" esize="" cityAdminLevel="7"/>
+		</regions>
+
+			
+</regions_list> 

@@ -8,11 +8,9 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.TransportIndexRepository;
-import net.osmand.plus.views.OsmBugsLayer.OpenStreetBug;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
@@ -37,32 +35,31 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		wmgr.getDefaultDisplay().getMetrics(dm);
 
 		pointAltUI = new Paint();
-		pointAltUI.setColor(Color.rgb(0, 0, 255));
+		pointAltUI.setColor(view.getResources().getColor(R.color.transport_stop));
 		pointAltUI.setAlpha(150);
 		pointAltUI.setAntiAlias(true);
 	}
 	
-	public TransportStop getFromPoint(PointF point){
-		TransportStop result = null;
+	public void getFromPoint(PointF point, List<? super TransportStop> res) {
 		if (objects != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
 			int radius = getRadiusPoi(view.getZoom()) * 3 / 2;
+			int small = getRadiusPoi(view.getZoom());
 			try {
 				for (int i = 0; i < objects.size(); i++) {
 					TransportStop n = objects.get(i);
 					int x = view.getRotatedMapXForPoint(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 					int y = view.getRotatedMapYForPoint(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
-						radius = Math.max(Math.abs(x - ex), Math.abs(y - ey));
-						result = n;
+						radius = small;
+						res.add(n);
 					}
 				}
 			} catch (IndexOutOfBoundsException e) {
 				// that's really rare case, but is much efficient than introduce synchronized block
 			}
 		}
-		return result;
 	}
 	
 
@@ -71,9 +68,18 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	
 	@Override
 	public boolean onSingleTap(PointF point) {
-		TransportStop n = getFromPoint(point);
-		if(n != null){
-			AccessibleToast.makeText(view.getContext(), getStopDescription(n, true), Toast.LENGTH_LONG).show();
+		ArrayList<TransportStop> stops = new ArrayList<TransportStop >(); 
+		getFromPoint(point, stops);
+		if(!stops.isEmpty()){
+			StringBuilder res = new StringBuilder();
+			int i = 0;
+			for (TransportStop n : stops) {
+				if (i++ > 0) {
+					res.append("\n\n");
+				}
+				res.append(getStopDescription(n, true));
+			}
+			AccessibleToast.makeText(view.getContext(), res.toString(), Toast.LENGTH_LONG).show();
 			return true;
 		}
 		return false;
@@ -91,11 +97,11 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			if (t.acceptTransportStop(n)) {
 				List<String> l;
 				if (!useName) {
-					l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0}"); //$NON-NLS-1$
+					l = t.getRouteDescriptionsForStop(n, "{1} {0}"); //$NON-NLS-1$
 				} else if (view.getSettings().USE_ENGLISH_NAMES.get()) {
-					l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0} - {3}"); //$NON-NLS-1$
+					l = t.getRouteDescriptionsForStop(n, "{1} {0} - {3}"); //$NON-NLS-1$
 				} else {
-					l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0} - {2}"); //$NON-NLS-1$
+					l = t.getRouteDescriptionsForStop(n, "{1} {0} - {2}"); //$NON-NLS-1$
 				}
 				if (l != null) {
 					for (String s : l) {
@@ -123,7 +129,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		if (view.getZoom() >= startZoom) {
 			objects.clear();
 			view.getApplication().getResourceManager().searchTransportAsync(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, view.getZoom(), objects);
@@ -174,8 +180,8 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	}
 
 	@Override
-	public Object getPointObject(PointF point) {
-		return getFromPoint(point);
+	public void collectObjectsFromPoint(PointF point, List<Object> res) {
+		getFromPoint(point, res);
 	}
 
 	@Override

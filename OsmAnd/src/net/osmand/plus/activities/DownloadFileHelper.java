@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -24,7 +23,6 @@ import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.R;
-import net.osmand.plus.ResourceManager;
 
 public class DownloadFileHelper {
 	
@@ -34,6 +32,7 @@ public class DownloadFileHelper {
 	protected final long TIMEOUT_BETWEEN_DOWNLOADS = 8000;
 	private final Activity ctx;
 	private boolean interruptDownloading = false;
+	
 	
 	public DownloadFileHelper(Activity ctx){
 		this.ctx = ctx;
@@ -65,6 +64,7 @@ public class DownloadFileHelper {
 						}
 					}
 					HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+					conn.setRequestProperty("User-Agent", Version.getFullVersion(ctx)); //$NON-NLS-1$
 					conn.setReadTimeout(30000);
 					if (fileread > 0) {
 						String range = "bytes="+fileread + "-" + (length -1); //$NON-NLS-1$ //$NON-NLS-2$
@@ -137,11 +137,11 @@ public class DownloadFileHelper {
 			out = new FileOutputStream(fileToDownload);
 			try {
 				if(parts == 1){
-					URL url = new URL("http://download.osmand.net/download?file="+fileName + "&" + Version.getVersionAsURLParam());  //$NON-NLS-1$
+					URL url = new URL("http://download.osmand.net/download?file="+fileName + "&" + Version.getVersionAsURLParam(ctx));  //$NON-NLS-1$
 					downloadFile(fileName, out, url, null, indexOfAllFiles, progress, forceWifi);
 				} else {
 					for(int i=1; i<=parts; i++){
-						URL url = new URL("http://download.osmand.net/download?file="+fileName+"-"+i + "&" + Version.getVersionAsURLParam());  //$NON-NLS-1$
+						URL url = new URL("http://download.osmand.net/download?file="+fileName+"-"+i + "&" + Version.getVersionAsURLParam(ctx));  //$NON-NLS-1$
 						downloadFile(fileName, out, url, " ["+i+"/"+parts+"]", indexOfAllFiles, progress, forceWifi);
 					}
 				}
@@ -150,11 +150,8 @@ public class DownloadFileHelper {
 				out = null;
 			}
 
-			File toIndex = fileToDownload;
 			if (fileToDownload.getName().endsWith(".zip")) { //$NON-NLS-1$
-				if (!unzipToDir) {
-					toIndex = fileToUnZip;
-				} else {
+				if (unzipToDir) {
 					fileToUnZip.mkdirs();
 				}
 				ZipInputStream zipIn = new ZipInputStream(new FileInputStream(fileToDownload));
@@ -163,10 +160,13 @@ public class DownloadFileHelper {
 				while ((entry = zipIn.getNextEntry()) != null) {
 					int size = (int)entry.getSize();
 					progress.startTask(ctx.getString(R.string.unzipping_file), size);
+					if(entry.isDirectory() || entry.getName().endsWith(IndexConstants.GEN_LOG_EXT)){
+						continue;
+					}
 					File fs;
 					if (!unzipToDir) {
 						if (first) {
-							fs = toIndex;
+							fs = fileToUnZip;
 							first = false;
 						} else {
 							String name = entry.getName();
@@ -180,7 +180,6 @@ public class DownloadFileHelper {
 								}
 							}
 							fs = new File(fileToUnZip.getParent(), name);
-							toIndex = fs;
 						}
 					} else {
 						fs = new File(fileToUnZip, entry.getName());
@@ -193,31 +192,17 @@ public class DownloadFileHelper {
 						progress.progress(read);
 					}
 					out.close();
+					
+					if(dateModified != null){
+						fs.setLastModified(dateModified);
+					}
+					toReIndex.add(fs);
 				}
 				zipIn.close();
 				fileToDownload.delete(); // zip is no needed more
 			}
 
-			ArrayList<String> warnings = new ArrayList<String>();
-			ResourceManager manager = ((OsmandApplication) ctx.getApplicationContext()).getResourceManager();
-			if(dateModified != null){
-				toIndex.setLastModified(dateModified);
-			}
-			if (toIndex.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
-				// update poi index immediately
-				manager.indexingPoi(progress, warnings, toIndex);
-			}
-			if(dateModified != null){
-				toIndex.setLastModified(dateModified);
-				manager.updateIndexLastDateModified(toIndex);
-			}
-			toReIndex.add(toIndex);
-			if (warnings.isEmpty()) {
-				
-				showWarningCallback.showWarning(ctx.getString(R.string.download_index_success));
-			} else {
-				showWarningCallback.showWarning(warnings.get(0));
-			}
+			showWarningCallback.showWarning(ctx.getString(R.string.download_index_success));
 			return true;
 		} catch (IOException e) {
 			log.error("Exception ocurred", e); //$NON-NLS-1$

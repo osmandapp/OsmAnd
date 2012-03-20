@@ -51,6 +51,7 @@ import org.apache.commons.logging.LogFactory;
 public class IndexAddressCreator extends AbstractIndexPartCreator{
 	
 	private static final Log log = LogFactory.getLog(IndexAddressCreator.class);
+	private final Log logMapDataWarn;
 
 	private PreparedStatement addressCityStat;
 
@@ -78,6 +79,8 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	Connection mapConnection;
 	DBStreetDAO streetDAO;
 
+	
+
 	public static class StreetAndDistrict {
 		private final Street street;
 		private final String district;
@@ -96,7 +99,8 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		}
 	}
 	
-	public IndexAddressCreator(){
+	public IndexAddressCreator(Log logMapDataWarn){
+		this.logMapDataWarn = logMapDataWarn;
 		streetDAO = loadInMemory ? new CachedDBStreetDAO() : new DBStreetDAO();
 	}
 	
@@ -163,7 +167,11 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			}
 			allBoundaries.add(boundary);
 		} else if (boundary != null && !boundary.isClosedWay()){
-			System.out.println("Not using opened boundary: " + boundary);
+			if(logMapDataWarn != null) {
+				logMapDataWarn.warn("Not using opened boundary: " + boundary);
+			} else {
+				log.info("Not using opened boundary: " + boundary);
+			}
 		}
 	}
 
@@ -234,11 +242,21 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			// try to found the biggest area (not small center district)
 			if (oldBoundary.getAdminLevel() > boundary.getAdminLevel() && !oldBoundary.getName().equalsIgnoreCase(cityFound.getName())) {
 				cityBoundaries.put(cityFound, boundary);
-				System.out.println("City: " + cityFound.getName() + " boundary: " + boundary.getName());
+				String s = "City: " + cityFound.getName() + " boundary: " + boundary.getName();
+				if(logMapDataWarn != null) {
+					logMapDataWarn.info(s);
+				} else {
+					log.info(s);
+				}
 			} else if(boundary.getName().equalsIgnoreCase(cityFound.getName()) && 
 					!oldBoundary.getName().equalsIgnoreCase(cityFound.getName())){
 				cityBoundaries.put(cityFound, boundary);
-				System.out.println("City: " + cityFound.getName() + " boundary: " + boundary.getName());
+				String s = "City: " + cityFound.getName() + " boundary: " + boundary.getName();
+				if(logMapDataWarn != null) {
+					logMapDataWarn.info(s);
+				} else {
+					log.info(s);
+				}
 			} else if(oldBoundary.getAdminLevel() == boundary.getAdminLevel() && 
 					oldBoundary != boundary && boundary.getName().equalsIgnoreCase(oldBoundary.getName())){
 				if(!oldBoundary.isClosedWay() && !boundary.isClosedWay()){
@@ -248,7 +266,11 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			}
 		} else {
 			cityBoundaries.put(cityFound, boundary);
-			System.out.println("City: " + cityFound.getName() + " boundary: " + boundary.getName());
+			if(logMapDataWarn != null) {
+				logMapDataWarn.info("City: " + cityFound.getName() + " boundary: " + boundary.getName());
+			} else {
+				log.info("City: " + cityFound.getName() + " boundary: " + boundary.getName());
+			}
 		}
 		return oldBoundary;
 	}
@@ -814,7 +836,11 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				}
 			}
 			if (f > 500) {
-				System.out.println("! " + c.getName() + " ! " + f + " " + bCount + " streets " + streets.size()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				if(logMapDataWarn != null) {
+					logMapDataWarn.info("! " + c.getName() + " ! " + f + " " + bCount + " streets " + streets.size());
+				} else {
+					log.info("! " + c.getName() + " ! " + f + " " + bCount + " streets " + streets.size());
+				}
 			}
 		}
 		writer.endCityIndexes(!writeCities);

@@ -32,17 +32,17 @@
 	<string name="old_map_index_is_not_supported">O formato de mapa \'\'{0}\'\' não é suportado</string>
 	<string name="poi_filter_car_aid">Socorro para carro</string>
 	<string name="poi_filter_closest_poi">POI mais perto</string>
-	<string name="poi_filter_custom_filter">Filtro Personalisado</string>
+	<string name="poi_filter_custom_filter">Filtro Personalizado</string>
 	<string name="poi_filter_by_name">Procurar POI por nome</string>
 	<string name="poi_filter_food_shop">Supermercado</string>
-	<string name="poi_filter_for_tourists">Para touristas</string>
+	<string name="poi_filter_for_tourists">Para turistas</string>
 	<string name="poi_filter_fuel">Combustível</string>
 	<string name="poi_filter_namefinder">Pesquisa nome on-line</string>
 	<string name="reading_cached_tiles">Leitura do cache de imagens...</string>
 	<string name="version_index_is_big_for_memory">O índice \'\'{0}\'\' não coube na memória</string>
 	<string name="version_index_is_not_supported">A versão do índice \'\'{0}\'\' não é suportada</string>
 	<string name="voice_is_not_available_msg">Instrução de voz não disponível. Por favor, vá até configurações e escolha os dados de voz para download.</string>
-	<string name="voice_is_not_available_title">Nenhum dado voz especificado</string>
+	<string name="voice_is_not_available_title">Nenhum dado de voz especificado</string>
 	<string name="trace_rendering_descr">Marque esta opção para verificar o desempenho de renderização</string>
 	<string name="trace_rendering">Mostrar velocidade de renderização</string>
 	<string name="daynight_mode_day">Dia</string>
@@ -60,7 +60,7 @@
 	<string name="general_settings_descr">Configurar o uso da Internet, opções de visualização, e mais</string>
 	<string name="general_settings">Configurações Gerais</string>
 	<string name="rendering_settings_descr">Configurar a origem do mapa e sua aparência</string>
-	<string name="rendering_settings">Mapas</string>
+	<string name="rendering_settings">- Mapas</string>
 	<string name="index_settings_descr">Obter ou atualizar dados para uso offline</string>
 	<string name="index_settings">Dados offline</string>
 	<string name="osmand_service">Serviço de segundo plano</string>
@@ -100,11 +100,11 @@
 	<string name="gpx_option_reverse_route">Caminho reverso</string>
 	<string name="map_route_by_gpx">Navegar usando GPX</string>
 	<string name="gpx_files_not_found">Nenhum arquivo GPX encontrado no diretório /tracks</string>
-	<string name="layer_gpx_layer">Rotas GPX...</string>
+	<string name="layer_gpx_layer">Rota GPX...</string>
 	<string name="error_reading_gpx">Erro na leitura de dados GPX</string>
 	<string name="vector_data">Mapas vetoriais offline</string>
 	<string name="transport_context_menu">Procurar transporte na parada</string>
-	<string name="point_on_map">Ponto no mapa\n Lat {0,number,#.####} Long {1,number,#.####}</string>
+	<string name="point_on_map">Localização:\n Lat %1$.5f Long %2$.5f</string>
 	<string name="osb_bug_name">Bug</string>
 	<string name="poi_context_menu_modify">Modificar POI</string>
 	<string name="poi_context_menu_delete">Apagar POI</string>
@@ -157,7 +157,7 @@
 	<string name="background_router_service">Usar serviço em segundo plano</string>
 	<string name="off_router_service_no_gps_available">O serviço em segundo plano exige a ativação de alguma fonte de localização</string>
 	<string name="routing_settings_descr">Especifique opções da rota</string>
-	<string name="routing_settings">Navegação</string>
+	<string name="routing_settings">- Navegação</string>
 	<string name="hide_poi_filter">Ocultar filtro</string>
 	<string name="show_poi_filter">Mostrar filtro</string>
 	<string name="search_poi_filter">Filtro</string>
@@ -223,7 +223,6 @@
 	<string name="search_history_street">Rua : {0}, {1}</string>
 	<string name="search_history_int_streets">Interseção : {0} x {1} dans {2}</string>
 	<string name="search_history_building">Edifício : {0}, {1}, {2}</string>
-	<string name="search_history_navigate_to">Se mover para lat = {0}, long = {1}</string>
 	<string name="favorite">Favoritos</string>
 	<string name="clear_all">Apagar tudo</string>
 	<string name="history">Histórico</string>
@@ -238,8 +237,7 @@
 	<string name="search_online_address">Internet</string>
 	<string name="max_level_download_tile">Nível de zoom máx.</string>
 	<string name="max_level_download_tile_descr">Escolher um nível máximo de zoom para download</string>
-	<string name="route_about">Sobre a viagem</string>
-	<string name="route_general_information">Distância total = {0} tempo de viagem, = {1}h {2}m.</string>
+	<string name="route_general_information">Distância total = %1$s tempo de viagem, = %2$dh %3$dm.</string>
 	<string name="router_service_descr">Escolha o sistema de navegação</string>
 	<string name="router_service">Serviço de navegação</string>
 	<string name="sd_dir_not_accessible">Diretório do cartão SD inacessível</string>
@@ -251,7 +249,7 @@
 	<string name="downloading_file">Baixando arquivo...</string>
 	<string name="downloading">Baixando...</string>
 	<string name="downloading_list_indexes">Baixando lista de regiões disponíveis...</string>
-	<string name="list_index_files_was_not_loaded">Os arquivos de índice não puderam ser recuperados de osmand.googlecode.com.</string>
+	<string name="list_index_files_was_not_loaded">Os arquivos de índice não puderam ser recuperados de osmand.net.</string>
 	<string name="select_index_file_to_download">Se você não encontra a sua região, você pode criá-la. Veja osmand.net</string>
 	<string name="show_poi_on_map">Mostrar no mapa</string>
 	<string name="fav_points_edited">O favorito foi modificado</string>
@@ -260,7 +258,6 @@
 	<string name="only_show">Mostrar apenas</string>
 	<string name="follow">Siga</string>
 	<string name="recalculate_route_to_your_location">Recalculando a rota a partir da sua posição</string>
-	<string name="follow_route">Siga o caminho</string>
 	<string name="mark_final_location_first">Por favor, primeiro selecione um destino</string>
 	<string name="get_directions">Navegação</string>
 	<string name="gps_status_app_not_found">A aplicação de gestão de GPS não está instalada. Procurar no Market?</string>
@@ -315,10 +312,10 @@
 	<string name="settings_preset">Modo da aplicação</string>
 	<string name="settings">Configurações</string>
 	<string name="save_current_track_descr">Salvar a trilha atual no cartão SD agora</string>
-	<string name="save_current_track">slavar a trilha atual</string>
+	<string name="save_current_track">Salvar a trilha atual</string>
 	<string name="save_track_interval_descr">Escolher o intervalo entre posições nas trilhas</string>
 	<string name="save_track_interval">Intervalo de gravação</string>
-	<string name="monitor_preferences">Registro de trilhas</string>
+	<string name="monitor_preferences">- Registro de trilhas</string>
 	<string name="save_track_to_gpx_descrp">As trilhas serão gravadas no diretório tracks agrupadas por dia</string>
 	<string name="save_track_to_gpx">salvar trilhas em GPX</string>
 	<string name="navigate_to">Mover-se para o ponto</string>
@@ -352,7 +349,7 @@
 	<string name="map_view_3d">Visualização em 3D</string>
 	<string name="show_poi_over_map_description">Mostrar POI no mapa (use o último filtro)</string>
 	<string name="show_poi_over_map">Mostrar POI</string>
-	<string name="map_tile_source_descr">Escolha a fonte de imagens de mapa online ou offline:</string>
+	<string name="map_tile_source_descr">Escolha a fonte de imagens de mapa online ou offline</string>
 	<string name="map_tile_source">Fonte de imagens</string>
 	<string name="map_source">Origem do mapa</string>
 	<string name="use_internet">Utilizar Internet</string>
@@ -411,12 +408,10 @@
 	<string name="add_favorite_dialog_top_text">Digite o nome do favorito</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorito</string>
 	<string name="add_favorite_dialog_favourite_added_template">O ponto \'\'{0}\'\' foi adicionado aos favoritos.</string>
-	<!-- string name="favourites_context_menu_title">Menu contextual</string -->
 	<string name="favourites_context_menu_navigate">Mover-se para</string>
 	<string name="favourites_context_menu_edit">Modificar favorito</string>
 	<string name="favourites_context_menu_delete">Apagar favorito</string>
-	<string name="favourites_edit_dialog_title">Modificar nome do favorito</string>
-	<string name="favourites_remove_dialog_title">Você quer mesmo apagar este favorito?</string>
+	<string name="favourites_remove_dialog_msg">Você quer mesmo apagar este favorito \'%s\'?</string>
 	<string name="favourites_remove_dialog_success">Favorito {0} apagado com sucesso.</string>
 	
 	<string name="osb_add_dialog_title">Descrição do bug</string>

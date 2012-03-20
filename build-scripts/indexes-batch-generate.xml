@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<batch_process>
+	<process_attributes mapZooms="" renderingTypesFile="" zoomWaySmoothness="2" 
+		osmDbDialect="sqlite" mapDbDialect="sqlite"/>
+	
+	<!-- There are 3 subprocess : 	
+		 1. Download fresh osm files from servers to 'directory_for_osm_files' (override existings).
+		 2. Generate index files from all files in 'directory_for_osm_files' and put all indexes into 'directory_for_index_files'
+		 3. Upload index files from 'directory_for_index_files' to googlecode. 
+		 If directory directory_for_uploaded_files is specified all uploaded files will be moved to it 
+		 All these subprocess could be ran independently ! So you can create some files check them and after that try to upload on googlecode,
+		 or you can upload any file you have to googlecode (just put into 'directory_for_index_files')
+	 -->
+	 <!-- zoomWaySmoothness - 1-4, typical mapZooms - 8-10;11-12;13-14;15   -->
+	<process directory_for_osm_files=".work/osm" directory_for_index_files="/var/lib/jenkins/indexes" directory_for_generation=".work"
+		skipExistingIndexesAt="/var/lib/jenkins/indexes/uploaded"	indexPOI="true" indexMap="true"	indexTransport="true" indexAddress="true">
+		<!-- Add wget="C:/Program Files/GNUWin32/bin/wget.exe" to process, to use wget for download.
+			 On linux systems if wget is in your path it can be wget="wget" or you can make own script with wget command:
+			 wget="/path/to/script/wget.sh"
+			 Defaultly enabled parameter of wget is: &-&-read-timeout=5 that prevents hanging of download from  cloudmade/geofabrik server  
+		-->
+					
+	</process>
+</batch_process> 

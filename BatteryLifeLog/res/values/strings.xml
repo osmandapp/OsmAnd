@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="hello">Hello World, BatteryViewActivity!</string>
-    <string name="app_name">BatteryLifeLog</string>
-<string name="start_service">Запустить сервис</string>
-<string name="stop_service">Остановить сервис</string>
-<color name="background">#FFFFFF</color>
-<string name="batter_name_service">Batter Log service</string>
-</resources>

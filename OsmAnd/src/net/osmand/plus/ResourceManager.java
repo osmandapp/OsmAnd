@@ -26,8 +26,9 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.IndexConstants;
-import net.osmand.data.TransportStop;
+import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
+import net.osmand.data.TransportStop;
 import net.osmand.map.ITileSource;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -37,6 +38,7 @@ import net.osmand.plus.AsyncLoadingThread.TileLoadDownloadRequest;
 import net.osmand.plus.AsyncLoadingThread.TransportLoadRequest;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.render.RenderingRulesStorage;
 
 import org.apache.commons.logging.Log;
@@ -106,6 +108,8 @@ public class ResourceManager {
 	
 	protected final MapRenderRepositories renderer;
 	
+	protected final MapTileDownloader tileDownloader;
+	
 	public final AsyncLoadingThread asyncLoadingThread = new AsyncLoadingThread(this);
 	
 	protected boolean internetIsNotAccessible = false;
@@ -117,6 +121,8 @@ public class ResourceManager {
 		this.renderer = new MapRenderRepositories(context);
 		asyncLoadingThread.start();
 		
+		tileDownloader = MapTileDownloader.getInstance(Version.getFullVersion(context));
+		
 		resetStoreDirectory();
 		WindowManager mgr = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
 		DisplayMetrics dm = new DisplayMetrics();
@@ -124,8 +130,12 @@ public class ResourceManager {
 		// Only 8 MB (from 16 Mb whole mem) available for images : image 64K * 128 = 8 MB (8 bit), 64 - 16 bit, 32 - 32 bit
 		// at least 3*9?
 		float tiles = (dm.widthPixels / 256 + 2) * (dm.heightPixels / 256 + 2) * 3;
-		System.out.println("Tiles to load in memory : " + tiles);
+		log.info("Tiles to load in memory : " + tiles);
 		maxImgCacheSize = (int) (tiles) ; 
+	}
+	
+	public MapTileDownloader getMapTileDownloader() {
+		return tileDownloader;
 	}
 
 	
@@ -369,7 +379,7 @@ public class ResourceManager {
 	}
 	
 	private List<String> checkAssets(IProgress progress) {
-		if (!Version.APP_VERSION.equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get())) {
+		if (!Version.getFullVersion(context).equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get())) {
 			File file = context.getSettings().extendOsmandPath(APP_DIR);
 			file.mkdirs();
 			if(file.canWrite()){
@@ -377,7 +387,7 @@ public class ResourceManager {
 					progress.startTask(context.getString(R.string.installing_new_resources), -1); 
 					AssetManager assetManager = context.getAssets();
 					copyingAssets(assetManager, "", file, progress);
-					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(Version.APP_VERSION);
+					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(Version.getFullVersion(context));
 				} catch (IOException e) {
 					log.error(e.getMessage(), e);
 				} catch (XmlPullParserException e) {
@@ -466,7 +476,7 @@ public class ResourceManager {
 							if (index.hasTransportData()) {
 								try {
 									RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
-									transportRepositories.add(new TransportIndexRepositoryBinary(new BinaryMapIndexReader(raf)));
+									transportRepositories.add(new TransportIndexRepositoryBinary(new BinaryMapIndexReader(raf, index)));
 								} catch (IOException e) {
 									log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
 									warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
@@ -475,7 +485,7 @@ public class ResourceManager {
 							if(index.containsMapData()){
 								try {
 									RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
-									routingMapFiles.put(f.getAbsolutePath(), new BinaryMapIndexReader(raf, true));
+									routingMapFiles.put(f.getAbsolutePath(), new BinaryMapIndexReader(raf, index));
 								} catch (IOException e) {
 									log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
 									warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
@@ -484,7 +494,7 @@ public class ResourceManager {
 							if(index.containsPoiData()) {
 								try {
 									RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
-									amenityRepositories.add(new AmenityIndexRepositoryBinary(new BinaryMapIndexReader(raf)));
+									amenityRepositories.add(new AmenityIndexRepositoryBinary(new BinaryMapIndexReader(raf, index)));
 								} catch (IOException e) {
 									log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
 									warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
@@ -550,35 +560,13 @@ public class ResourceManager {
 		}
 		return false;
 	}
-	
+
+	// POI not supported any more
 	public void indexingPoi(final IProgress progress, List<String> warnings, File f) {
 		if (f.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
-			AmenityIndexRepositoryOdb repository = new AmenityIndexRepositoryOdb();
 			progress.startTask(context.getString(R.string.indexing_poi) + " " +  f.getName(), -1); //$NON-NLS-1$
 			try {
-				boolean initialized = repository.initialize(progress, f);
-				if (initialized) {
-					boolean covered = false;
-					for(AmenityIndexRepository r :  amenityRepositories){
-						if(r instanceof AmenityIndexRepositoryBinary){
-							double latC = (repository.dataBottomLatitude + repository.dataTopLatitude )/ 2;
-							double lonC = (repository.dataLeftLongitude + repository.dataRightLongitude) / 2;
-							if(r.checkContains(latC, lonC)){
-								covered = true;
-								break;
-							}
-						}
-					}
-					if(covered){
-						repository.close();
-						warnings.add(context.getString(R.string.old_poi_file_should_be_deleted, f.getName())); //$NON-NLS-1$
-					} else {
-						amenityRepositories.add(repository);
-						indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$
-					}
-				} else {
-					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
-				}
+				warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 			} catch (SQLiteException e) {
 				log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
 				warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
@@ -682,7 +670,7 @@ public class ResourceManager {
 				}
 			}
 			if(!repos.isEmpty()){
-				AmenityLoadRequest req = new AmenityLoadRequest(repos, zoom, filter);
+				AmenityLoadRequest req = asyncLoadingThread.new AmenityLoadRequest(repos, zoom, filter);
 				req.setBoundaries(topLatitude, leftLongitude, bottomLatitude, rightLongitude);
 				asyncLoadingThread.requestToLoadAmenities(req);
 			}
@@ -721,15 +709,15 @@ public class ResourceManager {
 			}
 		}
 		if(!repos.isEmpty()){
-			TransportLoadRequest req = new TransportLoadRequest(repos, zoom);
+			TransportLoadRequest req = asyncLoadingThread.new TransportLoadRequest(repos, zoom);
 			req.setBoundaries(topLatitude, leftLongitude, bottomLatitude, rightLongitude);
 			asyncLoadingThread.requestToLoadTransport(req);
 		}
 	}
 	
 	////////////////////////////////////////////// Working with map ////////////////////////////////////////////////
-	public boolean updateRenderedMapNeeded(RotatedTileBox rotatedTileBox){
-		return renderer.updateMapIsNeeded(rotatedTileBox);
+	public boolean updateRenderedMapNeeded(RotatedTileBox rotatedTileBox, DrawSettings drawSettings){
+		return renderer.updateMapIsNeeded(rotatedTileBox,drawSettings);
 	}
 	
 	public void updateRendererMap(RotatedTileBox rotatedTileBox){
@@ -809,7 +797,19 @@ public class ResourceManager {
 	}
 
 	public Map<String, String> getIndexFileNames() {
-		return indexFileNames;
+		return new LinkedHashMap<String, String>(indexFileNames);
+	}
+	
+	public Map<String, String> getBackupIndexes(Map<String, String> map) {
+		File file = context.getSettings().extendOsmandPath(BACKUP_PATH);
+		if (file != null && file.isDirectory()) {
+			for (File f : file.listFiles()) {
+				if (f != null && f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+					map.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$		
+				}
+			}
+		}
+		return map;
 	}
 	
 	public synchronized void reloadTilesFromFS(){

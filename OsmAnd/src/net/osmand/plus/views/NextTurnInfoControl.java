@@ -2,6 +2,8 @@ package net.osmand.plus.views;
 
 import net.osmand.OsmAndFormatter;
 import net.osmand.plus.routing.RoutingHelper.TurnType;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.R;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -9,6 +11,8 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
+
+
 
 public class NextTurnInfoControl extends MapInfoControl {
 
@@ -27,6 +31,9 @@ public class NextTurnInfoControl extends MapInfoControl {
 	private Paint paintBlack;
 	private Paint paintRouteDirection;
 
+	private boolean makeUturnWhenPossible;
+	private boolean turnImminent;
+
 	public NextTurnInfoControl(Context ctx, Paint textPaint, Paint subtextPaint) {
 		super(ctx);
 		this.textPaint = textPaint;
@@ -40,7 +47,7 @@ public class NextTurnInfoControl extends MapInfoControl {
 
 		paintRouteDirection = new Paint();
 		paintRouteDirection.setStyle(Style.FILL);
-		paintRouteDirection.setColor(Color.rgb(250, 222, 35));
+		paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow));
 		paintRouteDirection.setAntiAlias(true);
 		
 		pathTransform = new Matrix();
@@ -59,6 +66,12 @@ public class NextTurnInfoControl extends MapInfoControl {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		if (pathForTurn != null) {
+			turnImminent = RoutingHelper.turnImminent();
+			if (turnImminent == false) {
+				paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow));
+			} else {
+				paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_imminent));
+			}
 			// small indent
 			canvas.translate(0, 3 * scaleCoefficient);
 			canvas.drawPath(pathForTurn, paintRouteDirection);
@@ -69,6 +82,13 @@ public class NextTurnInfoControl extends MapInfoControl {
 			}
 			String text = OsmAndFormatter.getFormattedDistance(nextTurnDirection, getContext());
 			String subtext = null;
+
+			// Issue 863: distance "as soon as possible" should be displayed for unscheduled U-turn
+			makeUturnWhenPossible = RoutingHelper.makeUturnWhenPossible();
+			if (makeUturnWhenPossible == true) {
+				text = "ASAP";
+			}
+
 			int ls = text.lastIndexOf(' ');
 			float st = 0;
 			if (ls != -1) {
@@ -77,11 +97,10 @@ public class NextTurnInfoControl extends MapInfoControl {
 				st = textPaint.measureText(subtext);
 			}
 			float mt = textPaint.measureText(text);
-			drawShadowText(canvas, text, 
-					(getWWidth() - st - mt) / 2 - scaleCoefficient, getWHeight() - 5 * scaleCoefficient, textPaint);
+			float startX = Math.max((getWWidth() - st - mt) / 2, 2 * scaleCoefficient);
+			drawShadowText(canvas, text, startX, getWHeight() - 5 * scaleCoefficient, textPaint);
 			if (subtext != null) {
-				drawShadowText(canvas, subtext, (getWWidth() - st - mt) / 2 + 2 * scaleCoefficient + mt, getWHeight() - 5
-						* scaleCoefficient, subtextPaint);
+				drawShadowText(canvas, subtext, startX + 2 * scaleCoefficient + mt, getWHeight() - 5 * scaleCoefficient, subtextPaint);
 			}
 		}
 	}

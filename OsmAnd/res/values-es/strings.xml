@@ -143,13 +143,11 @@
 	<string name="favorite">Favorito</string>
 	<string name="favorites_Button">Favoritos</string>
 	<string name="favourites_activity">Lista de puntos favoritos</string>
-	<string name="favourites_context_menu_delete">Borrrar favorito</string>
+	<string name="favourites_context_menu_delete">Borrar favorito</string>
 	<string name="favourites_context_menu_edit">Editar favorite</string>
 	<string name="favourites_context_menu_navigate">Navegar a</string>
-	<!-- string name="favourites_context_menu_title">Menú contextual</string -->
-	<string name="favourites_edit_dialog_title">Renombrar favorito</string>
 	<string name="favourites_remove_dialog_success">Se borró el punto favorito {0}.</string>
-	<string name="favourites_remove_dialog_title">¿Está seguro/a?</string>
+	<string name="favourites_remove_dialog_msg">¿Está seguro/a borrar \'%s\'?</string>
 	<string name="filter_current_poiButton">Filtro</string>
 	<string name="filter_existing_indexes">Se descargó el filtro</string>
 	<string name="finished_task">Terminado</string>
@@ -157,7 +155,6 @@
 	<string name="first_time_download">Descargar índices</string>
 	<string name="first_time_msg">Gracias por descargar OsmAnd. \nPara poderusar todas las características de la aplicación requiere los archivos índices, que puede descargar(Opciones/Datos) o prepararlos usted mismo.Después de eso puede usar: búsqueda por dirección, POI, transporte.</string>
 	<string name="follow">Seguir</string>
-	<string name="follow_route">Seguir la ruta</string>
 	<string name="general_settings">General</string>
 	<string name="general_settings_descr">Configurar uso de internet, rotación de mapa, orientación de pantalla y otros</string>
 	<string name="get_directions">Indicaciones</string>
@@ -181,7 +178,7 @@
 	<string name="invalid_locations">Los lugares no son válidos</string>
 	<string name="items_were_selected">Se seleccionó {0} artículos</string>
 	<string name="layer_favorites">Favoritos</string>
-	<string name="layer_gpx_layer">Trazas GPX...</string>
+	<string name="layer_gpx_layer">Traza GPX...</string>
 	<string name="layer_map">Fuente de mapas...</string>
 	<string name="layer_osm_bugs">Fallos en Osm</string>
 	<string name="layer_poi">POI...</string>
@@ -189,7 +186,7 @@
 	<string name="layer_transport">Paradas de transporte</string>
 	<string name="layer_transport_route">Ruta de transporte</string>
 	<string name="layer_yandex_traffic">Tráfico Yandex</string>
-	<string name="list_index_files_was_not_loaded">Los archivos índices no son descargados de osmand.googlecode.com.</string>
+	<string name="list_index_files_was_not_loaded">Los archivos índices no son descargados de osmand.net.</string>
 	<string name="loading">Cargando...</string>
 	<string name="loading_cities">Cargando ciudades...</string>
 	<string name="loading_data">Cargando datos...</string>
@@ -210,7 +207,7 @@
 	<string name="map_source">Fuente de mapa</string>
 	<string name="map_specify_point">Especificar punto</string>
 	<string name="map_tile_source">Fuente de Tiles</string>
-	<string name="map_tile_source_descr">Elija la fuente de tiles: </string>
+	<string name="map_tile_source_descr">Elija la fuente de tiles</string>
 	<string name="map_view_3d">Vista de mapa 3D</string>
 	<string name="map_view_3d_descr">Habilitar la vista 3D del mapa</string>
 	<string name="maps_could_not_be_downloaded">Este mapa no se pudo descargar</string>
@@ -221,7 +218,7 @@
 	<string name="menu_layers">Representación</string>
 	<string name="menu_mute_off">Con sonido</string>
 	<string name="menu_mute_on">Mudo</string>
-	<string name="monitor_preferences">Monitoreo</string>
+	<string name="monitor_preferences">- Monitoreo</string>
 	<string name="monitor_preferences_descr">Especificar configuración de monitoreo</string>
 	<string name="navigate_point_cancel">Cancelar</string>
 	<string name="navigate_point_latitude">Latitud</string>
@@ -283,7 +280,7 @@
 	<string name="poi_remove_confirm_template">Borrar {0} (añadir comentario) ?</string>
 	<string name="poi_remove_success">se eliminó el POI</string>
 	<string name="poi_remove_title">Borrar POI</string>
-	<string name="point_on_map">Punto en el mapa\n Lat {0,number,#.####} Lon {1,number,#.####}</string>
+	<string name="point_on_map">Localización:\n Lat %1$.5f Lon %2$.5f</string>
 	<string name="position_on_map">Posición en el mapa</string>
 	<string name="position_on_map_bottom">Fondo</string>
 	<string name="position_on_map_center">Centro</string>
@@ -302,15 +299,14 @@
 	<string name="renderers_descr">Elegir estilo de visualización vectorial</string>
 	<string name="rendering_exception">Ocurrió un error al visualizar el área seleccionada</string>
 	<string name="rendering_out_of_memory">No hay suficiente memoria para mostrar el área seleccionada</string>
-	<string name="rendering_settings">Mapas</string>
+	<string name="rendering_settings">- Mapas</string>
 	<string name="rendering_settings_descr">Configurar fuente del mapa y apariencia</string>
 	<string name="rotate_map_bearing_opt">A la dirección del movimiento</string>
 	<string name="rotate_map_compass_opt">A la brújula</string>
 	<string name="rotate_map_none_opt">No rotar</string>
 	<string name="rotate_map_to_bearing">Rotar mapa</string>
 	<string name="rotate_map_to_bearing_descr">Seleccionar cómo rotar el mapa</string>
-	<string name="route_about">Acerca de ruta</string>
-	<string name="route_general_information">Distancia total = {0}, tiempo de viaje = {1} h {2} m.</string>
+	<string name="route_general_information">Distancia total = %1$s, tiempo de viaje = %2$d h %3$d m.</string>
 	<string name="route_head">Cabecera</string>
 	<string name="route_tl">Gire a la izquierda y siga</string>
 	<string name="route_tr">Gire a la derecha y siga</string>
@@ -321,7 +317,7 @@
 	<string name="route_tu">Haga giro en U y siga</string>
 	<string name="router_service">Rutas</string>
 	<string name="router_service_descr">Elija servicio de ruteo</string>
-	<string name="routing_settings">Ruteo</string>
+	<string name="routing_settings">- Ruteo</string>
 	<string name="routing_settings_descr">Especificar opciones de ruteo</string>
 	<string name="save_current_track">Guardar traza actual</string>
 	<string name="save_current_track_descr">Guardar traza actual a la SD</string>
@@ -347,7 +343,6 @@
 	<string name="search_history_building">Edificio : {0}, {1}, {2}</string>
 	<string name="search_history_city">Ciudad : {0}</string>
 	<string name="search_history_int_streets">Calles de intersección : {0} x {1} en {2}</string>
-	<string name="search_history_navigate_to">Navegar a lat = {0}, lon = {1}</string>
 	<string name="search_history_street">Calle : {0}, {1}</string>
 	<string name="search_near_map">Buscar cerca a la última localización</string>
 	<string name="search_nearby">Sitios cercanos</string>

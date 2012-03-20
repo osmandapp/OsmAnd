@@ -8,5 +8,5 @@
 		
 	</LinearLayout>
 	<ListView android:id="@android:id/list" android:layout_width="fill_parent" android:choiceMode="multipleChoice"
-		android:layout_height="fill_parent"></ListView>
+		android:layout_height="fill_parent" style="@style/OsmandListView"></ListView>
 </LinearLayout>

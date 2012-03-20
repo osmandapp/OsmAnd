@@ -407,7 +407,7 @@ uint32 CodedInputStream::ReadTagFallback() {
 
 // Osmand change ::
 int CodedInputStream::getTotalBytesRead() {
-    return total_bytes_read_ - (buffer_end_ - buffer_);
+    return total_bytes_read_ - (BufferSize() + buffer_size_after_limit_);
 }
 
 bool CodedInputStream::ReadVarint64Slow(uint64* value) {

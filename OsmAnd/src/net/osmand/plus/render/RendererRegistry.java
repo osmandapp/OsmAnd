@@ -34,6 +34,8 @@ public class RendererRegistry {
 	
 	public RendererRegistry(){
 		internalRenderers.put(DEFAULT_RENDER, "default.render.xml");
+		internalRenderers.put("winter+ski", "winter+ski.render.xml");
+		internalRenderers.put("high-contrast-roads", "high-contrast-roads.render.xml");
 	}
 	
 	public RenderingRulesStorage defaultRender() {

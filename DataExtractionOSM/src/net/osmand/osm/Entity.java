@@ -115,6 +115,14 @@ public abstract class Entity {
 		return tags.remove(key);
 	}
 	
+	public void removeTags(String[] keys){
+		if (tags != null){
+			for (String key : keys){
+				tags.remove(key);
+			}
+		}
+	}
+	
 	public String putTag(String key, String value){
 		if(tags == null){
 			tags = new LinkedHashMap<String, String>();

@@ -39,7 +39,7 @@ public class SearchByNameFilter extends PoiFilter {
 	}
 	
 	@Override
-	protected List<Amenity> searchAmenities(PoiFilter poiFilter, double lat, double lon, double topLatitude,
+	protected List<Amenity> searchAmenities(double lat, double lon, double topLatitude,
 			double bottomLatitude, double leftLongitude, double rightLongitude, ResultMatcher<Amenity> matcher) {
 		searchedAmenities.clear();
 		searchedAmenities = application.getResourceManager().searchAmenitiesByName(query, 

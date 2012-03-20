@@ -10,7 +10,6 @@ import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapExplorer;
-import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.IMapLocationListener;
@@ -21,6 +20,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 
 import org.apache.commons.logging.Log;
 
@@ -440,14 +440,16 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return settings;
 	}
 
-	private void refreshMapInternal() {
+	private void refreshMapInternal(boolean force) {
 		handler.removeMessages(1);
 		
 		// long time = System.currentTimeMillis();
 
 		boolean useInternet = getSettings().USE_INTERNET_TO_DOWNLOAD_TILES.get();
 		if (useInternet) {
-			MapTileDownloader.getInstance().refuseAllPreviousRequests();
+			if(application != null) {
+				application.getResourceManager().getMapTileDownloader().refuseAllPreviousRequests();
+			}
 		}
 		
 
@@ -492,7 +494,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 //							drawEmptyTile(canvas, x1, y1, ftileSize, nightMode);
 //						}
 //					}
-					drawOverMap(canvas, latlonRect, tilesRect, nightMode);
+					drawOverMap(canvas, latlonRect, tilesRect, new DrawSettings(nightMode,force));
 					
 //					log.info("Draw with layers " + (System.currentTimeMillis() - time));
 				} finally {
@@ -502,7 +504,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 	}
 	
-	private void drawOverMap(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode) {
+	private void drawOverMap(Canvas canvas, RectF latlonRect, RectF tilesRect, DrawSettings drawSettings) {
 		int w = getCenterPointX();
 		int h = getCenterPointY();
 
@@ -517,7 +519,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				if (!layer.drawInScreenPixels()) {
 					canvas.rotate(getRotate(), w, h);
 				}
-				layer.onDraw(canvas, latlonRect, tilesRect, nightMode);
+				layer.onDraw(canvas, latlonRect, tilesRect, drawSettings);
 				canvas.restore();
 			} catch (IndexOutOfBoundsException e) {
 				// skip it
@@ -543,11 +545,17 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	// this method could be called in non UI thread
 	public void refreshMap() {
-		if (!handler.hasMessages(1)) {
+		refreshMap(false);
+	}
+	
+	// this method could be called in non UI thread
+	public void refreshMap(final boolean force) {
+		if (!handler.hasMessages(1) || force) {
+			handler.removeMessages(1);
 			Message msg = Message.obtain(handler, new Runnable() {
 				@Override
 				public void run() {
-					refreshMapInternal();
+					refreshMapInternal(force);
 				}
 			});
 			msg.what = 1;

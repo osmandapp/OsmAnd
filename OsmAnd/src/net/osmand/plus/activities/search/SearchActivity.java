@@ -1,9 +1,9 @@
 package net.osmand.plus.activities.search;
 
 import java.io.Serializable;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Formatter;
 import java.util.Locale;
 
 import net.osmand.Algoritms;
@@ -21,13 +21,17 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
+import android.widget.TabWidget;
+import android.widget.TextView;
 
 
 public class SearchActivity extends TabActivity {
@@ -70,15 +74,30 @@ public class SearchActivity extends TabActivity {
 		public void locationUpdate(LatLon l);
 	}
 	
+	private View getTabIndicator(int imageId){
+		View r = getLayoutInflater().inflate(R.layout.search_main_tab_header, getTabHost(), false);
+		ImageView tabImage = (ImageView)r.findViewById(R.id.TabImage);
+		tabImage.setImageResource(imageId);
+		tabImage.setBackgroundResource(R.drawable.tab_icon_background);
+		return r;
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		setContentView(R.layout.search_main);
 		
+		Button backButton = (Button) findViewById(R.id.search_back_button);
+		backButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				SearchActivity.this.finish();
+			}
+		});
 		
 		spinner = (Spinner) findViewById(R.id.SpinnerLocation);
-		spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, 
+		spinnerAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_text, 
 				new ArrayList<String>(Arrays.asList(new String[]{
 						getString(R.string.search_position_undefined),
 						getString(R.string.search_position_current_location),
@@ -86,21 +105,39 @@ public class SearchActivity extends TabActivity {
 						getString(R.string.search_position_favorites),
 						getString(R.string.search_position_address)
 					}))
-				);
+				) {
+			@Override
+			public View getDropDownView(int position, View convertView,
+					ViewGroup parent) {
+				View dropDownView = super.getDropDownView(position,
+						convertView, parent);
+				if (dropDownView instanceof TextView) {
+					((TextView) dropDownView).setTextColor(getResources()
+							.getColor(R.color.color_black));
+				}
+				return dropDownView;
+			}
+		};
+		spinnerAdapter.setDropDownViewResource(R.layout.my_spinner_text);
 		
 		
-		TabHost host = getTabHost();
-		host.addTab(host.newTabSpec("Search_POI").setIndicator(getString(R.string.poi)).setContent(new Intent(this, SearchPoiFilterActivity.class))); //$NON-NLS-1$
-
-		addressSpec = host.newTabSpec("Search_Address").setIndicator(getString(R.string.address));
+		TabWidget tabs = (TabWidget) findViewById(android.R.id.tabs);
+		tabs.setBackgroundResource(R.drawable.tab_icon_background);
+		TabHost host = getTabHost(); 
+		host.addTab(host.newTabSpec("Search_POI").setIndicator(getTabIndicator(R.drawable.tab_search_poi_icon)).
+				setContent(new Intent(this, SearchPoiFilterActivity.class))); //$NON-NLS-1$
+		
+		addressSpec = host.newTabSpec("Search_Address").
+				setIndicator(getTabIndicator(R.drawable.tab_search_address_icon));
+		
 		setAddressSpecContent();
 
 		host.addTab(addressSpec);
-		host.addTab(host.newTabSpec("Search_Location").setIndicator(getString(R.string.search_tabs_location)).setContent(createIntent(NavigatePointActivity.class))); //$NON-NLS-1$
-		TabSpec transportTab = host.newTabSpec("Search_Transport").setIndicator(getString(R.string.transport)).setContent(createIntent(SearchTransportActivity.class));
+		host.addTab(host.newTabSpec("Search_Location").setIndicator(getTabIndicator(R.drawable.tab_search_location_icon)).setContent(createIntent(NavigatePointActivity.class))); //$NON-NLS-1$
+		TabSpec transportTab = host.newTabSpec("Search_Transport").setIndicator(getTabIndicator(R.drawable.tab_search_transport_icon)).setContent(createIntent(SearchTransportActivity.class));
 		host.addTab(transportTab); //$NON-NLS-1$
-		host.addTab(host.newTabSpec("Search_Favorites").setIndicator(getString(R.string.favorite)).setContent(createIntent(FavouritesListActivity.class))); //$NON-NLS-1$
-		host.addTab(host.newTabSpec("Search_History").setIndicator(getString(R.string.history)).setContent(createIntent(SearchHistoryActivity.class))); //$NON-NLS-1$
+		host.addTab(host.newTabSpec("Search_Favorites").setIndicator(getTabIndicator(R.drawable.tab_search_favorites_icon)).setContent(createIntent(FavouritesListActivity.class))); //$NON-NLS-1$
+		host.addTab(host.newTabSpec("Search_History").setIndicator(getTabIndicator(R.drawable.tab_search_history_icon)).setContent(createIntent(SearchHistoryActivity.class))); //$NON-NLS-1$
 		host.setCurrentTab(POI_TAB_INDEX);
 		
 		
@@ -243,8 +280,7 @@ public class SearchActivity extends TabActivity {
 	}
 	
 	private String formatLatLon(LatLon searchPoint){
-		MessageFormat format = new MessageFormat(" ({0,number,#.##};{1,number,#.##})", Locale.US);
-		return format.format(new Object[]{searchPoint.getLatitude(), searchPoint.getLongitude()});
+		return new Formatter(Locale.US).format(" %.2f;%.2f", searchPoint.getLatitude(), searchPoint.getLongitude()).toString();
 	}
 	
 	public void updateSearchPoint(LatLon searchPoint, String message, boolean showLoc){

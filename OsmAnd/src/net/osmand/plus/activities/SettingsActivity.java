@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import net.osmand.ResultMatcher;
+import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.RelativeDirectionStyle;
 import net.osmand.map.TileSourceManager;
@@ -68,12 +69,17 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	
 	private Preference saveCurrentTrack;
 	private Preference testVoiceCommands;
+	private Preference localOpenstreetmapPoints;
 
 	private EditTextPreference applicationDir;
+	private ListPreference applicationModePreference;
 	private ListPreference tileSourcePreference;
 	private ListPreference overlayPreference;
 	private ListPreference underlayPreference;
-	
+
+	private ListPreference dayNightModePreference;
+	private ListPreference routerServicePreference;
+
 	private CheckBoxPreference routeServiceEnabled;
 	private BroadcastReceiver broadcastReceiver;
 	
@@ -89,11 +95,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	
 	private Map<String, Map<String, ?>> listPrefValues = new LinkedHashMap<String, Map<String, ?>>();
 	
-	private void registerBooleanPreference(OsmandPreference<Boolean> b, PreferenceScreen screen){
+	private CheckBoxPreference registerBooleanPreference(OsmandPreference<Boolean> b, PreferenceScreen screen){
 		CheckBoxPreference p = (CheckBoxPreference) screen.findPreference(b.getId());
 		p.setOnPreferenceChangeListener(this);
 		screenPreferences.put(b.getId(), p);
 		booleanPreferences.put(b.getId(), b);
+		return p;
 	}
 	
 	private void registerSeekBarPreference(OsmandPreference<Integer> b, PreferenceScreen screen){
@@ -152,35 +159,47 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		return setFiles;
 	}
-	
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	CustomTitleBar titleBar = new CustomTitleBar(this, R.string.settings_activity, R.drawable.tab_settings_screen_icon, R.style.CustomTitleTheme_Preference);
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.settings_pref);
+		titleBar.afterSetContentView();
+		
 		String[] entries;
 		String[] entrieValues;
 		PreferenceScreen screen = getPreferenceScreen();
 		osmandSettings = OsmandSettings.getOsmandSettings(this);
 		
 		registerBooleanPreference(osmandSettings.SHOW_VIEW_ANGLE,screen); 
-	    registerBooleanPreference(osmandSettings.USE_TRACKBALL_FOR_MOVEMENTS,screen); 
-	    registerBooleanPreference(osmandSettings.SCROLL_MAP_BY_GESTURES,screen); 
-	    registerBooleanPreference(osmandSettings.USE_HIGH_RES_MAPS,screen); 
-	    registerBooleanPreference(osmandSettings.USE_ENGLISH_NAMES,screen); 
-	    registerBooleanPreference(osmandSettings.AUTO_ZOOM_MAP,screen); 
-	    registerBooleanPreference(osmandSettings.AUTO_FOLLOW_ROUTE_NAV,screen);
-	    registerBooleanPreference(osmandSettings.SAVE_TRACK_TO_GPX,screen); 
-	    registerBooleanPreference(osmandSettings.DEBUG_RENDERING_INFO,screen); 
-	    registerBooleanPreference(osmandSettings.FAST_ROUTE_MODE,screen);
-	    registerBooleanPreference(osmandSettings.USE_OSMAND_ROUTING_SERVICE_ALWAYS,screen); 
-	    registerBooleanPreference(osmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES,screen);
-	    registerBooleanPreference(osmandSettings.MAP_VECTOR_DATA,screen);
-	    registerBooleanPreference(osmandSettings.TRANSPARENT_MAP_THEME,screen);
-	    registerBooleanPreference(osmandSettings.TEST_ANIMATE_ROUTING,screen);
-	    registerBooleanPreference(osmandSettings.NATIVE_RENDERING,screen);
+		registerBooleanPreference(osmandSettings.USE_TRACKBALL_FOR_MOVEMENTS,screen); 
+		registerBooleanPreference(osmandSettings.SCROLL_MAP_BY_GESTURES,screen); 
+		registerBooleanPreference(osmandSettings.USE_HIGH_RES_MAPS,screen); 
+		registerBooleanPreference(osmandSettings.USE_ENGLISH_NAMES,screen); 
+		registerBooleanPreference(osmandSettings.AUTO_ZOOM_MAP,screen); 
+		// try without AUTO_FOLLOW_ROUTE_NAV (see forum discussion 'Simplify our navigation preference menu')
+		//registerBooleanPreference(osmandSettings.AUTO_FOLLOW_ROUTE_NAV,screen);
+		registerBooleanPreference(osmandSettings.SAVE_TRACK_TO_GPX,screen); 
+		registerBooleanPreference(osmandSettings.LIVE_MONITORING,screen);
+		registerBooleanPreference(osmandSettings.DEBUG_RENDERING_INFO,screen); 
+		registerBooleanPreference(osmandSettings.FAST_ROUTE_MODE,screen);
+		registerBooleanPreference(osmandSettings.USE_OSMAND_ROUTING_SERVICE_ALWAYS,screen); 
+		registerBooleanPreference(osmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES,screen);
+		registerBooleanPreference(osmandSettings.MAP_VECTOR_DATA,screen);
+		registerBooleanPreference(osmandSettings.TRANSPARENT_MAP_THEME,screen);
+		registerBooleanPreference(osmandSettings.TEST_ANIMATE_ROUTING,screen);
+		registerBooleanPreference(osmandSettings.SHOW_ALTITUDE_INFO,screen);
+		registerBooleanPreference(osmandSettings.SHOW_ZOOM_LEVEL,screen);
+		CheckBoxPreference nativeCheckbox = registerBooleanPreference(osmandSettings.NATIVE_RENDERING,screen);
+		//disable the checkbox if the library cannot be used
+		if (NativeOsmandLibrary.isLoaded() && !NativeOsmandLibrary.isSupported()) {
+			nativeCheckbox.setEnabled(false);
+		}
 	    
 		registerEditTextPreference(osmandSettings.USER_NAME, screen);
 		registerEditTextPreference(osmandSettings.USER_PASSWORD, screen);
+		registerEditTextPreference(osmandSettings.LIVE_MONITORING_URL, screen);
 		
 		
 		registerSeekBarPreference(osmandSettings.MAP_OVERLAY_TRANSPARENCY, screen);
@@ -208,7 +227,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		for(int i=0; i<entries.length; i++){
 			entries[i] = DayNightMode.values()[i].toHumanString(this);
 		}
-		registerListPreference(osmandSettings.DAYNIGHT_MODE, screen, entries,DayNightMode.values());
+		registerListPreference(osmandSettings.DAYNIGHT_MODE, screen, entries, DayNightMode.values());
 		
 		entries = new String[MetricsConstants.values().length];
 		for(int i=0; i<entries.length; i++){
@@ -217,7 +236,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerListPreference(osmandSettings.METRIC_SYSTEM, screen, entries, MetricsConstants.values());
 		
 		//getResources().getAssets().getLocales();
-		entrieValues = new String[] { "", "en", "cs", "de", "es", "jp", "fr", "hu", "it", "pl", "pt", "ru", "sk", "vi" };
+		entrieValues = new String[] { "", "en", "cs", "de", "es", "fr", "hu", "it", "jp", "nl", "pl", "pt", "ru", "sk", "vi" };
 		entries = new String[entrieValues.length];
 		entries[0] = getString(R.string.system_locale);
 		for (int i = 1; i < entries.length; i++) {
@@ -233,7 +252,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			entries[i - startZoom] = i + ""; //$NON-NLS-1$
 			intValues[i - startZoom] = i ;
 		}
-		registerListPreference(osmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE, screen, entries, intValues);
+		// try without, Issue 823:
+		// registerListPreference(osmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE, screen, entries, intValues);
 		
 		
 		intValues = new Integer[] { 0, 5, 10, 15, 20, 25, 30, 45, 60, 90};
@@ -275,8 +295,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerListPreference(osmandSettings.SERVICE_OFF_PROVIDER, screen, entries, entrieValues);
 		
 		registerTimeListPreference(osmandSettings.SAVE_TRACK_INTERVAL, screen, new int[]{1, 2, 3, 5, 10, 15, 20, 30}, new int[]{1, 2, 3, 5}, 1);
+		registerTimeListPreference(osmandSettings.LIVE_MONITORING_INTERVAL, screen, new int[]{1, 2, 3, 5, 10, 15, 20, 30}, new int[]{1, 2, 3, 5}, 1);
 		registerTimeListPreference(osmandSettings.SERVICE_OFF_INTERVAL, screen, 
-				new int[]{0, 30, 45, 60}, new int[]{2, 3, 5, 8, 10, 15, 20, 30, 40, 50, 70, 90}, 1000);
+				new int[]{0, 30, 45, 60}, new int[]{2, 3, 5, 10, 15, 30, 45, 60, 90}, 1000);
 		registerTimeListPreference(osmandSettings.SERVICE_OFF_WAIT_INTERVAL, screen, 
 				new int[]{15, 30, 45, 60, 90}, new int[]{2, 3, 5, 10}, 1000);
 		
@@ -299,13 +320,20 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		
 		createCustomRenderingProperties(false);
 		
+		applicationModePreference = (ListPreference) screen.findPreference(osmandSettings.APPLICATION_MODE.getId());
+		applicationModePreference.setOnPreferenceChangeListener(this);
+
 		tileSourcePreference = (ListPreference) screen.findPreference(osmandSettings.MAP_TILE_SOURCES.getId());
 		tileSourcePreference.setOnPreferenceChangeListener(this);
 		overlayPreference = (ListPreference) screen.findPreference(osmandSettings.MAP_OVERLAY.getId());
 		overlayPreference.setOnPreferenceChangeListener(this);
 		underlayPreference = (ListPreference) screen.findPreference(osmandSettings.MAP_UNDERLAY.getId());
 		underlayPreference.setOnPreferenceChangeListener(this);
-		
+
+		dayNightModePreference = (ListPreference) screen.findPreference(osmandSettings.DAYNIGHT_MODE.getId());
+		dayNightModePreference.setOnPreferenceChangeListener(this);
+		routerServicePreference = (ListPreference) screen.findPreference(osmandSettings.ROUTER_SERVICE.getId());
+		routerServicePreference.setOnPreferenceChangeListener(this);
 
 		Preference localIndexes =(Preference) screen.findPreference(OsmandSettings.LOCAL_INDEXES);
 		localIndexes.setOnPreferenceClickListener(this);
@@ -317,6 +345,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		routeServiceEnabled.setOnPreferenceChangeListener(this);
 		applicationDir = (EditTextPreference) screen.findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
 		applicationDir.setOnPreferenceChangeListener(this);
+		localOpenstreetmapPoints = (Preference) screen.findPreference(OsmandSettings.LOCAL_OPENSTREETMAP_POINTS);
+		localOpenstreetmapPoints.setOnPreferenceClickListener(this);
 		
 		
 		
@@ -459,6 +489,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		updateTileSourceSummary();
 		
 		updateApplicationDirTextAndSummary();
+
+		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  [" + ApplicationMode.toHumanString(osmandSettings.APPLICATION_MODE.get(), this) + "]");
+		dayNightModePreference.setSummary(getString(R.string.daynight_descr) + "  [" + osmandSettings.DAYNIGHT_MODE.get().toHumanString(this) + "]");
+		routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + osmandSettings.ROUTER_SERVICE.get() + "]");
     }
 
 	private void updateTileSourceSummary() {
@@ -466,12 +500,15 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		fillTileSourcesToPreference(overlayPreference, osmandSettings.MAP_OVERLAY.get(), true);
 		fillTileSourcesToPreference(underlayPreference, osmandSettings.MAP_UNDERLAY.get(), true);
 
-		String mapName = " " + osmandSettings.MAP_TILE_SOURCES.get(); //$NON-NLS-1$
-		String summary = tileSourcePreference.getSummary().toString();
-		if (summary.lastIndexOf(':') != -1) {
-			summary = summary.substring(0, summary.lastIndexOf(':') + 1);
-		}
-		tileSourcePreference.setSummary(summary + mapName);
+//		String mapName = " " + osmandSettings.MAP_TILE_SOURCES.get(); //$NON-NLS-1$
+//		String summary = tileSourcePreference.getSummary().toString();
+//		if (summary.lastIndexOf(':') != -1) {
+//			summary = summary.substring(0, summary.lastIndexOf(':') + 1);
+//		}
+//		tileSourcePreference.setSummary(summary + mapName);
+		tileSourcePreference.setSummary(getString(R.string.map_tile_source_descr) + "  [" + osmandSettings.MAP_TILE_SOURCES.get() + "]");
+		overlayPreference.setSummary(getString(R.string.map_overlay_descr) + "  [" + osmandSettings.MAP_OVERLAY.get() + "]");
+		underlayPreference.setSummary(getString(R.string.map_underlay_descr) + "  [" + osmandSettings.MAP_UNDERLAY.get() + "]");
 	}
 
 	private void fillTileSourcesToPreference(ListPreference tileSourcePreference, String value, boolean addNone) {
@@ -560,6 +597,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					Intent intent = getIntent();
 					finish();
 					startActivity(intent);
+				} else if (listPref.getId().equals(osmandSettings.DAYNIGHT_MODE.getId())) {
+					dayNightModePreference.setSummary(getString(R.string.daynight_descr) + "  [" + osmandSettings.DAYNIGHT_MODE.get().toHumanString(this)  + "]");
+				} else if (listPref.getId().equals(osmandSettings.ROUTER_SERVICE.getId())) {
+					routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + osmandSettings.ROUTER_SERVICE.get() + "]");
 				}
 			}
 			if (listPref.getId().equals(osmandSettings.RENDERER.getId())) {
@@ -609,8 +650,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				}
 				if(preference == underlayPreference){
 					osmandSettings.MAP_UNDERLAY.set(((String) newValue));
+					underlayPreference.setSummary(getString(R.string.map_underlay_descr) + "  [" + osmandSettings.MAP_UNDERLAY.get() + "]");
 				} else if(preference == overlayPreference){
 					osmandSettings.MAP_OVERLAY.set(((String) newValue));
+					overlayPreference.setSummary(getString(R.string.map_overlay_descr) + "  [" + osmandSettings.MAP_OVERLAY.get() + "]");
 				}
 			}
 		}
@@ -751,6 +794,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				helper.close();
 			}
 			return true;
+		} else if(preference == localOpenstreetmapPoints){
+			startActivity(new Intent(this, LocalOpenstreetmapActivity.class));
+			return true;
 		}
 		return false;
 	}
@@ -783,7 +829,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			AccessibleToast.makeText(activity, R.string.internet_not_available, Toast.LENGTH_LONG).show();
 			return;
 		}
-		final List<TileSourceTemplate> downloaded = TileSourceManager.downloadTileSourceTemplates();
+		final List<TileSourceTemplate> downloaded = TileSourceManager.downloadTileSourceTemplates(Version.getVersionAsURLParam(activity));
 		if(downloaded == null || downloaded.isEmpty()){
 			AccessibleToast.makeText(activity, R.string.error_io_error, Toast.LENGTH_SHORT).show();
 			return;

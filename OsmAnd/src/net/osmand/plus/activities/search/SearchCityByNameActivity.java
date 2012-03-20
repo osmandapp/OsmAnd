@@ -2,7 +2,6 @@ package net.osmand.plus.activities.search;
 
 import java.util.List;
 
-import net.osmand.Algoritms;
 import net.osmand.OsmAndFormatter;
 import net.osmand.ResultMatcher;
 import net.osmand.data.City;

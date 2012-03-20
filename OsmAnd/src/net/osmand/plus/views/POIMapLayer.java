@@ -9,6 +9,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.data.Amenity;
+import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
@@ -16,6 +17,8 @@ import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.EditingPOIActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.RenderingIcons;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -46,6 +49,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	private Paint point;
 	private OsmandMapTileView view;
 	private List<Amenity> objects = new ArrayList<Amenity>();
+	private final static int MAXIMUM_SHOW_AMENITIES = 5;
 	
 	private ResourceManager resourceManager;
 	private PoiFilter filter;
@@ -65,49 +69,62 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		this.filter = filter;
 	}
 	
-	public Amenity getAmenityFromPoint(PointF point){
-		Amenity result = null;
+	public void getAmenityFromPoint(PointF point, List<? super Amenity> am){
 		if (objects != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
+			int compare = getRadiusPoi(view.getZoom());
 			int radius = getRadiusPoi(view.getZoom()) * 3 / 2;
 			try {
 				for (int i = 0; i < objects.size(); i++) {
 					Amenity n = objects.get(i);
 					int x = view.getRotatedMapXForPoint(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 					int y = view.getRotatedMapYForPoint(n.getLocation().getLatitude(), n.getLocation().getLongitude());
-					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
-						radius = Math.max(Math.abs(x - ex), Math.abs(y - ey));
-						result = n;
+					if (Math.abs(x - ex) <= compare && Math.abs(y - ey) <= compare) {
+						compare = radius;
+						am.add(n);
 					}
 				}
 			} catch (IndexOutOfBoundsException e) {
 				// that's really rare case, but is much efficient than introduce synchronized block
 			}
 		}
-		return result;
 	}
 	
 
 	@Override
 	public boolean onSingleTap(PointF point) {
-		Amenity n = getAmenityFromPoint(point);
-		if(n != null){
-			String format = OsmAndFormatter.getPoiSimpleFormat(n, view.getContext(),
-					view.getSettings().USE_ENGLISH_NAMES.get());
-			if(n.getOpeningHours() != null){
-				format += "\n" + view.getContext().getString(R.string.opening_hours) +" : "+ n.getOpeningHours(); //$NON-NLS-1$ //$NON-NLS-2$
+		List<Amenity> am = new ArrayList<Amenity>();
+		getAmenityFromPoint(point, am);
+		if(!am.isEmpty()){
+			StringBuilder res = new StringBuilder();
+			for (int i = 0; i < MAXIMUM_SHOW_AMENITIES && i < am.size(); i++) {
+				Amenity n = am.get(i);
+				if (i > 0) {
+					res.append("\n\n");
+				}
+				buildPoiInformation(res, n);
 			}
-			if(n.getPhone() != null){
-				format += "\n" + view.getContext().getString(R.string.phone) +" : "+ n.getPhone(); //$NON-NLS-1$ //$NON-NLS-2$
-			}
-			if(n.getSite() != null){
-				format += "\n" + view.getContext().getString(R.string.website) +" : "+ n.getSite(); //$NON-NLS-1$ //$NON-NLS-2$
-			}
-			AccessibleToast.makeText(view.getContext(), format, Toast.LENGTH_SHORT).show();
+			AccessibleToast.makeText(view.getContext(), res.toString(), Toast.LENGTH_SHORT).show();
 			return true;
 		}
 		return false;
+	}
+
+
+	private StringBuilder buildPoiInformation(StringBuilder res, Amenity n) {
+		String format = OsmAndFormatter.getPoiSimpleFormat(n, view.getContext(), view.getSettings().USE_ENGLISH_NAMES.get());
+		res.append(" " + format);
+		if (n.getOpeningHours() != null) {
+			res.append("\n").append(view.getContext().getString(R.string.opening_hours)).append(" : ").append(n.getOpeningHours()); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		if (n.getPhone() != null) {
+			res.append("\n").append(view.getContext().getString(R.string.phone)).append(" : ").append(n.getPhone()); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		if (n.getSite() != null && n.getType() != AmenityType.OSMWIKI) {
+			res.append("\n").append(view.getContext().getString(R.string.website)).append(" : ").append(n.getSite()); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		return res;
 	}
 	
 	
@@ -119,7 +136,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		wmgr.getDefaultDisplay().getMetrics(dm);
 
 		pointAltUI = new Paint();
-		pointAltUI.setColor(Color.rgb(255, 128, 0));
+		pointAltUI.setColor(view.getApplication().getResources().getColor(R.color.poi_background));
 		pointAltUI.setAlpha(160);
 		pointAltUI.setStyle(Style.FILL);
 		
@@ -154,7 +171,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		
 		if (view.getZoom() >= startZoom) {
 			objects.clear();
@@ -286,25 +303,32 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	@Override
 	public OnClickListener getActionListener(List<String> actionsList, Object o) {
 		final Amenity a = (Amenity) o;
-		actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_modify));
-		actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_delete));
-		int ind = 2;
+		int ind = 0;
 		final int phoneIndex = a.getPhone() != null ? ind++ : -1;
 		final int siteIndex = a.getSite() != null ? ind++ : -1;
+		final int descriptionIndex = a.getDescription() != null ? ind++ : -1;
 		if(a.getPhone() != null){
 			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_call));
 		}
 		if(a.getSite() != null){
 			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_website));
 		}
+		if(a.getDescription() != null){
+			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_showdescription));
+		}
+		final int modifyInd = ind++;
+		actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_modify));
+		final int deleteInd = ind++;
+		actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_delete));
+		
 		final EditingPOIActivity edit = activity.getPoiActions();
 		return new DialogInterface.OnClickListener(){
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if (which == 0) {
+				if (which == modifyInd) {
 					edit.showEditDialog(a);
-				} else if(which == 1) {
+				} else if(which == deleteInd) {
 					edit.showDeleteDialog(a);
 				} else if (which == phoneIndex) {
 					try {
@@ -324,16 +348,25 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 						log.error("Failed to invoke call", e); //$NON-NLS-1$
 						AccessibleToast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
 					}
+				} else if (which == descriptionIndex) {
+					showDescriptionDialog(a);
 				} else {
 				}
 			}
 		};
 	}
 
+	private void showDescriptionDialog(Amenity a) {
+		Builder bs = new AlertDialog.Builder(view.getContext());
+		bs.setTitle(OsmAndFormatter.getPoiSimpleFormat(a, view.getContext(), view.getSettings().USE_ENGLISH_NAMES.get()));
+		bs.setMessage(a.getDescription());
+		bs.show();
+	}
+	
 	@Override
 	public String getObjectDescription(Object o) {
 		if(o instanceof Amenity){
-			return OsmAndFormatter.getPoiSimpleFormat((Amenity) o, view.getContext(), view.getSettings().USE_ENGLISH_NAMES.get());
+			return buildPoiInformation(new StringBuilder(), (Amenity) o).toString();
 		}
 		return null;
 	}
@@ -347,8 +380,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	@Override
-	public Object getPointObject(PointF point) {
-		return getAmenityFromPoint(point);
+	public void collectObjectsFromPoint(PointF point, List<Object> objects) {
+		getAmenityFromPoint(point, objects);
 	}
 
 	@Override

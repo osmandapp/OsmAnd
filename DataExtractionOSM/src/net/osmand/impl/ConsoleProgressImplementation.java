@@ -59,7 +59,7 @@ public class ConsoleProgressImplementation implements IProgress {
 			this.lastPercentPrint = getCurrentPercent();
 			long now = System.currentTimeMillis();
 			if(now - lastTimePrinted >= deltaTimeToPrint || deltaTime < 0){
-				System.out.println(MessageFormat.format("Done {0} %.", getCurrentPercent())); //$NON-NLS-1$
+				log.debug(MessageFormat.format("Done {0} %.", getCurrentPercent())); //$NON-NLS-1$
 				lastTimePrinted = now;
 			}
 			
@@ -80,7 +80,7 @@ public class ConsoleProgressImplementation implements IProgress {
 	public void startTask(String taskName, int work) {
 		if(!Algoritms.objectEquals(currentTask, taskName)){
 			this.currentTask = taskName;
-			log.info("Memory before task exec: " + Runtime.getRuntime().totalMemory() + " free : " + Runtime.getRuntime().freeMemory()); //$NON-NLS-1$ //$NON-NLS-2$
+			log.debug("Memory before task exec: " + Runtime.getRuntime().totalMemory() + " free : " + Runtime.getRuntime().freeMemory()); //$NON-NLS-1$ //$NON-NLS-2$
 			if (previousTaskStarted == 0) {
 				log.info(taskName + " started - " + work); //$NON-NLS-1$
 			} else {
@@ -95,7 +95,7 @@ public class ConsoleProgressImplementation implements IProgress {
 	public void startWork(int work) {
 		if(this.work != work){
 			this.work = work;
-			System.out.println("Amount of work was changed to " + work); //$NON-NLS-1$
+			log.info("Task " + currentTask + ": work total has changed to " + work); //$NON-NLS-1$
 		}
 		this.currentDone = 0;
 		this.lastPercentPrint = 0;

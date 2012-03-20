@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 
 import net.osmand.LogUtil;
-import net.osmand.Version;
 import net.osmand.data.IndexConstants;
 
 import org.apache.commons.logging.Log;
@@ -17,12 +16,12 @@ import android.content.Context;
 public class DownloadOsmandIndexesHelper {
 	private final static Log log = LogUtil.getLog(DownloadOsmandIndexesHelper.class);
 	
-	public static IndexFileList downloadIndexesListFromInternet(){
+	public static IndexFileList downloadIndexesListFromInternet(String versionAsUrl){
 		try {
 			log.debug("Start loading list of index files"); //$NON-NLS-1$
 			IndexFileList result = new IndexFileList();
 			try {
-				URL url = new URL("http://download.osmand.net/get_indexes?" + Version.getVersionAsURLParam()); //$NON-NLS-1$
+				URL url = new URL("http://download.osmand.net/get_indexes?" + versionAsUrl ); //$NON-NLS-1$
 				XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
 				parser.setInput(url.openStream(), "UTF-8"); //$NON-NLS-1$
 				int next;
@@ -76,9 +75,7 @@ public class DownloadOsmandIndexesHelper {
 		
 		public String getVisibleDescription(Context ctx){
 			String s = ""; //$NON-NLS-1$
-			if (fileName.endsWith(IndexConstants.POI_INDEX_EXT) || fileName.endsWith(IndexConstants.POI_INDEX_EXT_ZIP)) {
-				s = ctx.getString(R.string.poi);
-			} else if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)
+			if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)
 					|| fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
 				String lowerCase = description.toLowerCase();
 				if (lowerCase.contains("map")) { //$NON-NLS-1$
@@ -123,9 +120,8 @@ public class DownloadOsmandIndexesHelper {
 		}
 		
 		public boolean isAccepted(){
-			if (fileName.endsWith(addVersionToExt(IndexConstants.POI_INDEX_EXT, IndexConstants.POI_TABLE_VERSION)) //
-				|| fileName.endsWith(addVersionToExt(IndexConstants.POI_INDEX_EXT_ZIP, IndexConstants.POI_TABLE_VERSION)) //
-				|| fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT,IndexConstants.BINARY_MAP_VERSION)) //
+			// POI index download is not supported any longer
+			if (fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT,IndexConstants.BINARY_MAP_VERSION)) //
 				|| fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP,IndexConstants.BINARY_MAP_VERSION)) //
 				|| fileName.endsWith(addVersionToExt(IndexConstants.VOICE_INDEX_EXT_ZIP, IndexConstants.VOICE_VERSION))
 				|| fileName.endsWith(addVersionToExt(IndexConstants.TTSVOICE_INDEX_EXT_ZIP, IndexConstants.TTSVOICE_VERSION))) {

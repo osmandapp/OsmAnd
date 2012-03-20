@@ -1,9 +1,10 @@
-:- op('==', xfy, 500).
+﻿:- op('==', xfy, 500).
 version(101).
 language(fr).
 
 % before each announcement (beep)
 preamble - [].
+
 
 %% TURNS 
 turn('left', ['tournez à gauche ']).
@@ -13,35 +14,34 @@ turn('right', ['tournez à droite ']).
 turn('right_sh', ['tournez immédiatement à droite ']).
 turn('right_sl', ['tournez légèrement à droite ']).
 
-prepare_turn(Turn, Dist) == ['Dans ', D, ' préparez vous à ', M] :- 
-   distance(Dist) == D, turn(Turn, M).
-turn(Turn, Dist) == ['Dans ', D, M] :- 
-   distance(Dist) == D, turn(Turn, M).
+prepare_turn(Turn, Dist) == ['Dans ', D, ' préparez vous à ', M] :- distance(Dist) == D, turn(Turn, M).
+turn(Turn, Dist) == ['Dans ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
-prepare_make_ut(Dist) == ['Dans ', D, ' préparez vous à faire demi tour'] :- 
-  distance(Dist) == D.
-
-prepare_roundabout(Dist) == ['Préparez vous à entrer dans le rondpoint dans ', D] :- 
-  distance(Dist) == D.
-
-make_ut(Dist) == ['Dans ', D, ' faites demi-tour '] :- 
-   distance(Dist) == D.
+prepare_make_ut(Dist) == ['Dans ', D, ' préparez vous à faire demi tour'] :- distance(Dist) == D.
+make_ut(Dist) == ['Dans ', D, ' faites demi-tour '] :- distance(Dist) == D.
 make_ut == ['Faites demi-tour '].
+make_ut_wp == ['Faites demi-tour '].
 
+prepare_roundabout(Dist) == ['Préparez vous à entrer dans le rondpoint dans ', D] :- distance(Dist) == D.
 roundabout(Dist, _Angle, Exit) == ['Dans ', D, ' entrez dans le rond-point et prenez la ', E, 'sortie'] :- distance(Dist) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['prenez la ', E, 'sortie'] :- nth(Exit, E).
 
-and_arrive_destination == ['et arrivez à destination ']. % Miss and?
+go_ahead == ['Continuez tout droit '].
+go_ahead(Dist) == ['Continuez pendant ', D]:- distance(Dist) == D.
+
+and_arrive_destination == ['et arrivez à destination '].
+
 then == ['puis '].
 reached_destination == ['vous êtes arrivé à destination '].
 bear_right == ['serrez à droite '].
 bear_left == ['serrez à gauche '].
-route_recalc(_Dist) == []. % ['recalcul de l itinéraire '].  %nothing to said possibly beep? 
-route_new_calc(Dist) == ['L itinéraire fait  ', D] :- distance(Dist) == D. % nothing to said possibly beep?
 
-go_ahead(Dist) == ['Continuez pendant ', D]:- distance(Dist) == D.
-go_ahead == ['Continuez tout droit '].
+route_new_calc(Dist) == ['L itinéraire fait  ', D] :- distance(Dist) == D.
+route_recalc(Dist) == ['recalcul de l itinéraire, l itinéraire fait ', D] :- distance(Dist) == D.
+
+location_lost == ['g p s signal lost '].
+
 
 %% 
 nth(1, '1ère ').
@@ -62,6 +62,7 @@ nth(15, '15ème ').
 nth(16, '16ème ').
 nth(17, '17ème ').
 
+
 %%% distance measure
 distance(Dist) == [ X, ' metres'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
 distance(Dist) == [ X, ' metres'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
@@ -69,13 +70,13 @@ distance(Dist) == ['environ 1 kilometre '] :- Dist < 1500.
 distance(Dist) == ['environ ', X, ' kilomètres '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
 distance(Dist) == [ X, ' kilomètres '] :- D is round(Dist/1000), num_atom(D, X).
 
+
 %% resolve command main method
 %% if you are familar with Prolog you can input specific to the whole mechanism,
 %% by adding exception cases.
 flatten(X, Y) :- flatten(X, [], Y), !.
 flatten([], Acc, Acc).
-flatten([X|Y], Acc, Res):- 
-  flatten(Y, Acc, R), flatten(X, R, Res).
+flatten([X|Y], Acc, Res):- flatten(Y, Acc, R), flatten(X, R, Res).
 flatten(X, Acc, [X|Acc]).
 
 resolve(X, Y) :- resolve_impl(X,Z), flatten(Z, Y).

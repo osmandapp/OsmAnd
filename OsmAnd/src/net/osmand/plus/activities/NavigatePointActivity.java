@@ -2,9 +2,10 @@ package net.osmand.plus.activities;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.StringTokenizer;
+
+import com.google.android.apps.analytics.easytracking.TrackedActivity;
 
 import net.osmand.LogUtil;
 import net.osmand.osm.LatLon;
@@ -14,11 +15,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.views.OsmandMapTileView;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +28,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-public class NavigatePointActivity extends Activity implements SearchActivityChild {
+public class NavigatePointActivity extends TrackedActivity implements SearchActivityChild {
 	Dialog dlg;
 	MapActivity activity; 
 	int currentFormat = Location.FORMAT_DEGREES;
@@ -109,8 +111,11 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 	public void initUI(double latitude, double longitude){
 		latitude = MapUtils.checkLatitude(latitude);
 		longitude = MapUtils.checkLongitude(longitude);
-		((TextView)findViewById(R.id.LatitudeEdit)).setText(convert(latitude, Location.FORMAT_DEGREES));
-		((TextView)findViewById(R.id.LongitudeEdit)).setText(convert(longitude, Location.FORMAT_DEGREES));
+		final TextView latEdit = ((TextView)findViewById(R.id.LatitudeEdit));
+		final TextView lonEdit = ((TextView)findViewById(R.id.LongitudeEdit));
+		currentFormat = Location.FORMAT_DEGREES;
+		latEdit.setText(convert(latitude, Location.FORMAT_DEGREES));
+		lonEdit.setText(convert(longitude, Location.FORMAT_DEGREES));
 		((RadioButton)findViewById(R.id.Format1)).setChecked(true);
 		((RadioGroup)findViewById(R.id.RadioGroup)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
 
@@ -124,12 +129,13 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 				} else if(checkedId == R.id.Format3){
 					newFormat = Location.FORMAT_SECONDS;
 				}
+				currentFormat = newFormat;
 				try { 
 					double lat = convert(((TextView) findViewById(R.id.LatitudeEdit)).getText().toString());
 					double lon = convert(((TextView) findViewById(R.id.LongitudeEdit)).getText().toString());
 					((TextView) findViewById(R.id.ValidateTextView)).setVisibility(View.INVISIBLE);
-					((TextView)findViewById(R.id.LatitudeEdit)).setText(convert(lat, newFormat));
-					((TextView)findViewById(R.id.LongitudeEdit)).setText(convert(lon, newFormat));
+					latEdit.setText(convert(lat, newFormat));
+					lonEdit.setText(convert(lon, newFormat));
 				} catch (RuntimeException e) {
 					((TextView) findViewById(R.id.ValidateTextView)).setVisibility(View.VISIBLE);
 					((TextView) findViewById(R.id.ValidateTextView)).setText(R.string.invalid_locations);
@@ -154,6 +160,76 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 				showOnMap(false);
 			}
 		});
+		TextWatcher textWatcher = new TextWatcher() {
+			String pasteString = null;
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				pasteString = null; 
+				if(count > 3) {
+					pasteString = s.subSequence(start, start + count).toString();
+				}
+			}
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				
+				if(pasteString != null){
+					int latSt = -1;
+					int latEnd = -1;
+					int lonSt = -1;
+					int lonEnd = -1;
+					int step = 0; // 0 - init, 1- lat, 2-between, 3-lon
+					for (int i = 0; i < pasteString.length(); i++) {
+						char ch = pasteString.charAt(i);
+						if (Character.isDigit(ch)) {
+							if (step == 0 || step == 2){
+								int t = i;
+								if (i > 0 && pasteString.charAt(i - 1) == '-') {
+									t--;
+								}
+								if (step == 0) {
+									latSt = t;
+								} else {
+									lonSt = t;
+								}
+								step++;
+							}
+						} else if (ch == '.' || ch == ':' ) {
+							// do nothing here
+						} else {
+							if (step == 1) {
+								latEnd = i;
+								step++;
+							} else if (step == 3) {
+								lonEnd = i;
+								step++;
+								break;
+							}
+						}
+					}
+					
+					if(lonSt != -1){
+						if(lonEnd == -1){
+							lonEnd = pasteString.length();
+						}
+						try {
+							String latString = pasteString.substring(latSt, latEnd);
+							String lonString = pasteString.substring(lonSt, lonEnd);
+							Double.parseDouble(latString);
+							Double.parseDouble(lonString);
+							latEdit.setText(latString);
+							lonEdit.setText(lonString);
+						} catch (NumberFormatException e) {
+						}
+					}
+				}
+			}
+		};
+		latEdit.addTextChangedListener(textWatcher);
+		lonEdit.addTextChangedListener(textWatcher);
 	}
 	
 	public void showOnMap(boolean navigate){
@@ -162,7 +238,7 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 			double lon = convert(((TextView) findViewById(R.id.LongitudeEdit)).getText().toString());
 			
 			if(navigate){
-				OsmandSettings.getOsmandSettings(this).setPointToNavigate(lat, lon, MessageFormat.format(getString(R.string.search_history_navigate_to), lat, lon));
+				OsmandSettings.getOsmandSettings(this).setPointToNavigate(lat, lon, getString(R.string.point_on_map, lat, lon));
 			} else {
 				// in case when it is dialog
 				if(activity != null) {
@@ -171,7 +247,7 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 				} else {
 					OsmandSettings settings = OsmandSettings.getOsmandSettings(this);
 					settings.setMapLocationToShow(lat, lon, Math.max(12, settings.getLastKnownMapZoom()), 
-							MessageFormat.format(getString(R.string.search_history_navigate_to), lat, lon));
+							getString(R.string.point_on_map, lat, lon));
 				}
 			}
 			close();

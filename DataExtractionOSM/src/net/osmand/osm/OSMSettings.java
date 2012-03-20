@@ -53,6 +53,7 @@ public class OSMSettings {
 		
 		OPENING_HOURS("opening_hours"),  //$NON-NLS-1$
 		PHONE("phone"), //$NON-NLS-1$
+		DESCRIPTION("description"), //$NON-NLS-1$
 		WEBSITE("website"), //$NON-NLS-1$
 		URL("url"), //$NON-NLS-1$
 		WIKIPEDIA("wikipedia"), //$NON-NLS-1$

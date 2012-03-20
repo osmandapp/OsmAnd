@@ -1,11 +1,16 @@
 package net.osmand.plus;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import net.osmand.FavouritePoint;
+import net.osmand.GPXUtilities;
+import net.osmand.LogUtil;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,6 +19,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class FavouritesDbHelper extends SQLiteOpenHelper {
 
 	private static final int DATABASE_VERSION = 2;
+	private static final org.apache.commons.logging.Log log = LogUtil.getLog(FavouritesDbHelper.class);
 	public static final String FAVOURITE_DB_NAME = "favourite"; //$NON-NLS-1$
 	private static final String FAVOURITE_TABLE_NAME = "favourite"; //$NON-NLS-1$
 	private static final String FAVOURITE_COL_NAME = "name"; //$NON-NLS-1$
@@ -23,6 +29,9 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 	private static final String FAVOURITE_TABLE_CREATE = "CREATE TABLE " + FAVOURITE_TABLE_NAME + " (" + //$NON-NLS-1$ //$NON-NLS-2$
 			FAVOURITE_COL_NAME + " TEXT, " + FAVOURITE_COL_CATEGORY + " TEXT, " + //$NON-NLS-1$ //$NON-NLS-2$ 
 			FAVOURITE_COL_LAT + " double, " + FAVOURITE_COL_LON + " double);"; //$NON-NLS-1$ //$NON-NLS-2$
+	
+	public static final String FILE_TO_SAVE = "favourites.gpx"; //$NON-NLS-1$
+	public static final String FILE_TO_BACKUP = "favourites_bak.gpx"; //$NON-NLS-1$
 	
 	// externalize ?
 	private static final String GPX_GROUP = "Gpx"; 
@@ -52,6 +61,34 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 		}
 	}
 	
+	public void backupSilently() {
+		try {
+			exportFavorites(FILE_TO_BACKUP);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+	
+	public String exportFavorites() {
+		return exportFavorites(FILE_TO_SAVE);
+	}
+	
+	public String exportFavorites(String fileName) {
+		File f = new File(OsmandSettings.getOsmandSettings(context).extendOsmandPath(ResourceManager.APP_DIR), 
+				fileName);
+		GPXFile gpx = new GPXFile();
+		for (FavouritePoint p : getFavouritePoints()) {
+			if (p.isStored()) {
+				WptPt pt = new WptPt();
+				pt.lat = p.getLatitude();
+				pt.lon = p.getLongitude();
+				pt.name = p.getName() + "_" + p.getCategory();
+				gpx.points.add(pt);
+			}
+		}
+		return GPXUtilities.writeGpxFile(f, gpx, context);
+	}
+	
 	private void createCategories(SQLiteDatabase db){
 		addCategoryQuery(context.getString(R.string.favorite_home_category), db);
 		addCategoryQuery(context.getString(R.string.favorite_friends_category), db);
@@ -75,6 +112,16 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 			}
 			favoriteGroups.put(GPX_GROUP, favoritePointsFromGPXFile);
 		}
+		recalculateCachedFavPoints();
+	}
+	
+	public void addFavoritePointToGPXFile(FavouritePoint fp) {
+		fp.setCategory(GPX_GROUP);
+		fp.setStored(false);
+		if (!favoriteGroups.containsKey(GPX_GROUP)) {
+			favoriteGroups.put(GPX_GROUP, new ArrayList<FavouritePoint>());
+		}
+		favoriteGroups.get(GPX_GROUP).add(fp);
 		recalculateCachedFavPoints();
 	}
 	
@@ -117,6 +164,7 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 			db.execSQL("UPDATE " + FAVOURITE_TABLE_NAME + " SET latitude = ?, longitude = ? WHERE name = ?", new Object[] { lat, lon, p.getName() }); //$NON-NLS-1$ //$NON-NLS-2$ 
 			p.setLatitude(lat);
 			p.setLongitude(lon);
+			backupSilently();
 			return true;
 		}
 		return false;
@@ -144,6 +192,7 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 				cachedFavoritePoints.remove(fp);
 				fp.setStored(false);
 			}
+			backupSilently();
 			return true;
 		}
 		return false;
@@ -154,6 +203,7 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 		FavouritePoint fp = new FavouritePoint(0, 0, "", group);
 		if(deleteFavourite(fp)){
 			favoriteGroups.remove(group);
+			backupSilently();
 		}
 		return false;
 	}
@@ -181,6 +231,7 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 				cachedFavoritePoints.add(p);
 			}
 			p.setStored(true);
+			backupSilently();
 			return true;
 		}
 		return false;

@@ -2,10 +2,8 @@ package net.osmand.plus.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.Paint.Style;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
@@ -48,16 +46,7 @@ public abstract class MapInfoControl extends View {
 	}
 	
 	protected void drawShadowText(Canvas cv, String text, float centerX, float centerY, Paint textPaint) {
-		int c = textPaint.getColor();
-		textPaint.setStyle(Style.STROKE);
-		textPaint.setColor(Color.WHITE);
-		textPaint.setStrokeWidth(4);
-		cv.drawText(text, centerX, centerY, textPaint);
-		// reset
-		textPaint.setStrokeWidth(1);
-		textPaint.setStyle(Style.FILL);
-		textPaint.setColor(c);
-		cv.drawText(text, centerX, centerY, textPaint);
+		ShadowText.create(text).draw(cv, centerX, centerY, textPaint);
 	}
 	
 	@Override

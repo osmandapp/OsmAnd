@@ -13,8 +13,8 @@ import java.util.Map;
 import java.util.Set;
 
 import net.osmand.Algoritms;
-import net.osmand.IProgress;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.IProgress;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -22,34 +22,32 @@ import net.osmand.plus.activities.LocalIndexHelper.LocalIndexInfo;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ExpandableListActivity;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.os.StatFs;
-import android.os.AsyncTask.Status;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 
-public class LocalIndexesActivity extends ExpandableListActivity {
+public class LocalIndexesActivity extends OsmandExpandableListActivity {
 
 	private final static String URL_TO_UPLOAD_GPX = "http://download.osmand.net/upload_gpx.php";
 		
@@ -71,12 +69,14 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 
 	
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// requestWindowFeature(Window.FEATURE_NO_TITLE);
+		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.local_index_descr_title, R.drawable.tab_settings_screen_icon);
 		setContentView(R.layout.local_index);
+		titleBar.afterSetContentView();
 		settings = OsmandSettings.getOsmandSettings(this);
 		descriptionLoader = new LoadLocalIndexDescriptionTask();
 		listAdapter = new LocalIndexesAdapter();
@@ -106,22 +106,26 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		
 		setListAdapter(listAdapter);
 		updateDescriptionTextWithSize();
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	protected void onResume() {
-		super.onResume();
 		if (asyncLoader == null || asyncLoader.getResult() == null) {
+			// getLastNonConfigurationInstance method should be in onCreate() method 
+			// (onResume() doesn't work)
 			Object indexes = getLastNonConfigurationInstance();
 			asyncLoader = new LoadLocalIndexTask();
 			if (indexes instanceof List<?>) {
 				asyncLoader.setResult((List<LocalIndexInfo>) indexes);
-			} else {
-				asyncLoader.execute(this);
 			}
 		}
 	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (asyncLoader == null || asyncLoader.getResult() == null) {
+			asyncLoader = new LoadLocalIndexTask();
+			asyncLoader.execute(this);
+		}
+	}
+	
 	
 	private void showContextMenu(final LocalIndexInfo info) {
 		Builder builder = new AlertDialog.Builder(this);
@@ -158,7 +162,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 								OsmandSettings settings = OsmandSettings.getOsmandSettings(LocalIndexesActivity.this);
 								settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
 							}
-							((OsmandApplication) getApplication()).setGpxFileToDisplay(info.getGpxFile());
+							((OsmandApplication) getApplication()).setGpxFileToDisplay(info.getGpxFile(), false);
 							MapActivity.launchMapActivityMoveToTop(LocalIndexesActivity.this);
 						}
 					} else if (resId == R.string.local_index_mi_rename) {
@@ -174,7 +178,6 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 							}
 						});
 						confirm.setNegativeButton(R.string.default_buttons_no, null);
-						// confirm.setTitle(R.string.delete_confirmation_title);
 						confirm.setMessage(getString(R.string.delete_confirmation_msg, info.getFileName()));
 						confirm.show();
 					} else if (resId == R.string.local_index_mi_backup) {
@@ -194,7 +197,6 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 				}
 
 			});
-
 		}
 		builder.show();
 	}
@@ -389,8 +391,6 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 			findViewById(R.id.ProgressBar).setVisibility(View.GONE);
 			Toast.makeText(LocalIndexesActivity.this, result, Toast.LENGTH_LONG).show();
 			listAdapter.clear();
-			asyncLoader = new LoadLocalIndexTask();
-			asyncLoader.execute(LocalIndexesActivity.this);
 			reloadIndexes();
 			
 		}
@@ -527,11 +527,11 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, R.string.local_index_mi_backup, 0, R.string.local_index_mi_backup);
-		menu.add(0, R.string.local_index_mi_restore, 1, R.string.local_index_mi_restore);
-		menu.add(0, R.string.local_index_mi_delete, 2, R.string.local_index_mi_delete);
+		menu.add(0, R.string.local_index_mi_backup, 0, getString(R.string.local_index_mi_backup)+"...");
+		menu.add(0, R.string.local_index_mi_restore, 1, getString(R.string.local_index_mi_restore)+"...");
+		menu.add(0, R.string.local_index_mi_delete, 2, getString(R.string.local_index_mi_delete)+"...");
 		menu.add(0, R.string.local_index_mi_reload, 3, R.string.local_index_mi_reload);
-		menu.add(0, R.string.local_index_mi_upload_gpx, 4, R.string.local_index_mi_upload_gpx);
+		menu.add(0, R.string.local_index_mi_upload_gpx, 4, getString(R.string.local_index_mi_upload_gpx)+"...");
 		return true;
 	}
 	
@@ -683,6 +683,8 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 	
 
 	public void reloadIndexes() {
+		listAdapter.clear();
+		asyncLoader = new LoadLocalIndexTask();
 		AsyncTask<Void, String, List<String>> task = new AsyncTask<Void, String, List<String>>(){
 
 			@Override
@@ -701,6 +703,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 					}
 					Toast.makeText(LocalIndexesActivity.this, b.toString(), Toast.LENGTH_LONG).show();
 				}
+				asyncLoader.execute(LocalIndexesActivity.this);
 			}
 			
 			@Override
@@ -846,13 +849,13 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 			TextView viewName = ((TextView) v.findViewById(R.id.local_index_name));
 			viewName.setText(child.getName());
 			if (child.isNotSupported()) {
-				viewName.setTextColor(Color.RED);
+				viewName.setTextColor(getResources().getColor(R.color.localindex_notsupported));
 			} else if (child.isCorrupted()) {
-				viewName.setTextColor(Color.MAGENTA);
+				viewName.setTextColor(getResources().getColor(R.color.localindex_iscorrupted));
 			} else if (child.isLoaded()) {
-				viewName.setTextColor(Color.GREEN);
+				viewName.setTextColor(getResources().getColor(R.color.localindex_isloaded));
 			} else {
-				viewName.setTextColor(Color.LTGRAY);
+				viewName.setTextColor(getResources().getColor(R.color.localindex_unknown));
 			}
 			if (child.getSize() >= 0) {
 				String size;

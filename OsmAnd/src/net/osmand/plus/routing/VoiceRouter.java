@@ -3,6 +3,7 @@ package net.osmand.plus.routing;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper.TurnType;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
@@ -26,6 +27,9 @@ public class VoiceRouter {
 	private int currentDirection = 0;
  
 	private int currentStatus = STATUS_UNKNOWN;
+
+	private long lastTimeRouteRecalcAnnounced = 0;
+	private long lastTimeMakeUTwpAnnounced = 0;
 	
 	// default speed to have comfortable announcements (if actual speed is higher than it would be problem)
 	// Speed in m/s 
@@ -109,8 +113,7 @@ public class VoiceRouter {
 			DEFAULT_SPEED = 12;
 		}
 	}
-	
-	
+		
 	private boolean isDistanceLess(float currentSpeed, double dist, double etalon){
 		if(dist < etalon || (dist / currentSpeed < etalon / DEFAULT_SPEED)){
 			return true;
@@ -144,7 +147,7 @@ public class VoiceRouter {
 	 * Updates status of voice guidance 
 	 * @param currentLocation 
 	 */
-	protected void updateStatus(Location currentLocation){
+	protected void updateStatus(Location currentLocation, boolean makeUturnWhenPossible){
 		// directly after turn (go - ahead dist)
 		// < 800m prepare
 		// < 200m turn in
@@ -153,6 +156,21 @@ public class VoiceRouter {
 		if(currentLocation != null && currentLocation.hasSpeed()){
 			speed = Math.max(currentLocation.getSpeed(), speed);
 		}
+
+		// for Issue 863
+		if (makeUturnWhenPossible == true) {
+			//suppress "make UT when possible" message for 60sec
+			if (System.currentTimeMillis() - lastTimeMakeUTwpAnnounced > 60000) {
+				CommandBuilder play = getNewCommandPlayerToPlay();
+				if(play != null){
+					play.makeUTwp().play();
+					lastTimeMakeUTwpAnnounced = System.currentTimeMillis();
+				}
+			}
+			currentStatus = STATUS_UNKNOWN;
+			return;
+		}
+
 		RouteDirectionInfo next = router.getNextRouteDirectionInfo();
 		int dist = router.getDistanceToNextRouteDirection();
 		
@@ -302,7 +320,7 @@ public class VoiceRouter {
 			if (tParam != null) {
 				play.turn(tParam, dist);
 			} else if (next.turnType.isRoundAbout()) {
-				play.roundAbout(dist,  next.turnType.getTurnAngle(), next.turnType.getExitOut());
+				play.roundAbout(dist, next.turnType.getTurnAngle(), next.turnType.getExitOut());
 			} else if (next.turnType.getValue().equals(TurnType.TU) || next.turnType.getValue().equals(TurnType.TRU)) {
 				play.makeUT(dist);
 			} else {
@@ -393,11 +411,21 @@ public class VoiceRouter {
 		}
 	}
 
-	public void newRouteIsCalculated(boolean updateRoute) {
+	public void newRouteIsCalculated(boolean updateRoute, boolean makeUturnWhenPossible) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if (play != null) {
 			if (updateRoute) {
-				play.routeRecalculated(router.getLeftDistance()).play();
+				//suppress "route recalculated" prompt while makeUturnWhenPossible is active
+				if (makeUturnWhenPossible == false) {
+					//suppress "route recaluated" prompt for 60sec
+					if (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000) {
+						//suppress "route recaluated" prompt for GPX-rotuing, it makes no sense
+						if (router.getCurrentGPXRoute() == null) {
+							play.routeRecalculated(router.getLeftDistance()).play();
+							lastTimeRouteRecalcAnnounced = System.currentTimeMillis();
+						}
+					}
+				}
 			} else {
 				play.newRouteCalculated(router.getLeftDistance()).play();
 			}
@@ -425,7 +453,7 @@ public class VoiceRouter {
 	/**
 	 * Command to wait until voice player is initialized 
 	 */
-	private static class VoiceCommandPending {
+	private class VoiceCommandPending {
 		public static final int ROUTE_CALCULATED = 1;
 		public static final int ROUTE_RECALCULATED = 2;
 //		protected final long timestamp;
@@ -444,7 +472,13 @@ public class VoiceRouter {
 				if (type == ROUTE_CALCULATED) {
 					newCommand.newRouteCalculated(left).play();
 				} else if (type == ROUTE_RECALCULATED) {
-					newCommand.routeRecalculated(left).play();
+					//suppress "route recaluated" message for 60sec
+					if (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000) {
+						if (router.getCurrentGPXRoute() == null) {
+							newCommand.routeRecalculated(left).play();
+							lastTimeRouteRecalcAnnounced = System.currentTimeMillis();
+						}
+					}
 				}
 			}
 		}

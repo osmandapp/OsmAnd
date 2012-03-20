@@ -68,6 +68,18 @@ public class GPXUtilities {
 		public double ele = Double.NaN;
 		public double speed = 0;
 		public double hdop = Double.NaN;
+		
+		public WptPt(){}
+
+		public WptPt(double lat, double lon, long time, double ele, double speed, double hdop) {
+			this.lat = lat;
+			this.lon = lon;
+			this.time = time;
+			this.ele = ele;
+			this.speed = speed;
+			this.hdop = hdop;
+		}
+		
 	}
 	
 	
@@ -137,7 +149,7 @@ public class GPXUtilities {
 			serializer.startTag(null, "gpx"); //$NON-NLS-1$
 			serializer.attribute(null, "version", "1.1"); //$NON-NLS-1$ //$NON-NLS-2$
 			if(file.author == null ){
-				serializer.attribute(null, "creator", Version.APP_NAME_VERSION); //$NON-NLS-1$
+				serializer.attribute(null, "creator", Version.getAppName(ctx)); //$NON-NLS-1$
 			} else {
 				serializer.attribute(null, "creator", file.author); //$NON-NLS-1$
 			}

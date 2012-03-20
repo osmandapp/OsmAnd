@@ -1,14 +1,13 @@
 package net.osmand.plus.routing;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import net.osmand.access.AccessibleToast;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
-import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
@@ -30,7 +29,7 @@ public class RoutingHelper {
 	
 	public static interface IRouteInformationListener {
 		
-		public void newRouteIsCalculated(boolean updateRoute);
+		public void newRouteIsCalculated(boolean updateRoute, boolean makeUturnWhenpossible);
 		
 		public void routeWasCancelled();
 	}
@@ -70,20 +69,30 @@ public class RoutingHelper {
 
 	private Handler uiHandler;
 
+	public static boolean makeUturnWhenPossible = false;
+	public static boolean turnImminent = false;
+
+	public static boolean makeUturnWhenPossible() {
+		return makeUturnWhenPossible;
+	}
+
+	public static boolean turnImminent() {
+		return turnImminent;
+	}
 	
-	
-	
+
+
 	public RoutingHelper(OsmandSettings settings, Context context, CommandPlayer player){
 		this.settings = settings;
 		this.context = context;
 		voiceRouter = new VoiceRouter(this, player);
 		uiHandler = new Handler();
 	}
-	
+
 	public boolean isFollowingMode() {
 		return isFollowingMode;
 	}
-	
+
 	public void setFollowingMode(boolean isFollowingMode) {
 		this.isFollowingMode = isFollowingMode;
 	}
@@ -105,6 +114,8 @@ public class RoutingHelper {
 		this.routeNodes.clear();
 		listDistance = null;
 		directionInfo = null;
+		makeUturnWhenPossible = false;
+		turnImminent = false;
 		evalWaitInterval = 3000;
 		uiHandler.post(new Runnable() {
 			@Override
@@ -201,10 +212,14 @@ public class RoutingHelper {
 	
 	public void setCurrentLocation(Location currentLocation) {
 		if(finalLocation == null || currentLocation == null){
+			makeUturnWhenPossible = false;
+			turnImminent = false;
 			return;
 		}
 		
+		makeUturnWhenPossible = false;
 		boolean calculateRoute  = false;
+		boolean suppressTurnPrompt  = false;
 		synchronized (this) {
 			if(routeNodes.isEmpty() || routeNodes.size() <= currentRoute){
 				calculateRoute = true;
@@ -326,7 +341,7 @@ public class RoutingHelper {
 					}
 				}
 				
-				// 5. Also bearing could be checked (is it same direction)
+				// X. Also bearing could be checked (is it same direction)
 //				float bearing;
 //				if(currentLocation.hasBearing()){
 //					bearing = currentLocation.getBearing();
@@ -337,10 +352,46 @@ public class RoutingHelper {
 //				if (Math.abs(bearing - bearingRoute) > 60f && 360 - Math.abs(bearing - bearingRoute) > 60f) {
 //				      something wrong however it could be starting movement
 //				}
+
+				// 6. Suppress turn prompt if prescribed direction of motion is between 45 and 135 degrees off
+				if(routeNodes.size() > 0){
+					if (currentLocation.hasBearing() || lastFixedLocation != null) {
+						float bearing = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation.bearingTo(currentLocation);
+						float bearingRoute;
+						bearingRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
+						if (Math.abs(bearing - bearingRoute) > 45f && 360 - Math.abs(bearing - bearingRoute) > 45f) {
+							if (Math.abs(bearing - bearingRoute) <= 135f && 360 - Math.abs(bearing - bearingRoute) <= 135f) {
+								//float d = currentLocation.distanceTo(routeNodes.get(currentRoute));
+								//if (d > 50) {
+									suppressTurnPrompt = true;
+									//log.info("Bearing is off from bearingRoute between >45 and <=135 degrees"); //$NON-NLS-1$
+								//}
+							}
+						}
+					}
+				}
+
+				// 7. Check necessity for unscheduled U-turn, Issue 863
+				if(routeNodes.size() > 0){
+					if (currentLocation.hasBearing() || lastFixedLocation != null) {
+						float bearing = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation.bearingTo(currentLocation);
+						float bearingRoute;
+						bearingRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
+						if (Math.abs(bearing - bearingRoute) > 135f && 360 - Math.abs(bearing - bearingRoute) > 135f) {
+							float d = currentLocation.distanceTo(routeNodes.get(currentRoute));
+							if (d > 50) {
+								makeUturnWhenPossible = true;
+								turnImminent = true;
+								//log.info("Bearing is opposite to bearingRoute"); //$NON-NLS-1$
+							}
+						}
+					}
+				}
+				if ((suppressTurnPrompt == false && calculateRoute == false) || makeUturnWhenPossible == true) {
+					voiceRouter.updateStatus(currentLocation, makeUturnWhenPossible);
+				}
 			}
 		}
-		voiceRouter.updateStatus(currentLocation);
-
 		lastFixedLocation = currentLocation;
 		if(calculateRoute){
 			recalculateRouteInBackground(lastFixedLocation, finalLocation, currentGPXRoute);
@@ -355,13 +406,13 @@ public class RoutingHelper {
 		currentDirectionInfo = 0;
 		currentRoute = 0;
 		if(isFollowingMode){
-			voiceRouter.newRouteIsCalculated(updateRoute);
+			voiceRouter.newRouteIsCalculated(updateRoute, makeUturnWhenPossible);
 		} 
 		uiHandler.post(new Runnable() {
 			@Override
 			public void run() {
 				for (IRouteInformationListener l : listeners) {
-					l.newRouteIsCalculated(updateRoute);
+					l.newRouteIsCalculated(updateRoute, makeUturnWhenPossible);
 				}
 			}
 		});
@@ -384,7 +435,7 @@ public class RoutingHelper {
 		int dist = getLeftDistance();
 		int hours = getLeftTime() / (60 * 60);
 		int minutes = (getLeftTime() / 60) % 60;
-		return MessageFormat.format(context.getString(R.string.route_general_information), OsmAndFormatter.getFormattedDistance(dist, context),
+		return context.getString(R.string.route_general_information, OsmAndFormatter.getFormattedDistance(dist, context),
 				hours, minutes);
 	}
 	
@@ -430,8 +481,16 @@ public class RoutingHelper {
 			if(lastFixedLocation != null){
 				dist += lastFixedLocation.distanceTo(routeNodes.get(currentRoute));
 			}
+
+			if (dist < 100 || makeUturnWhenPossible == true) {
+				turnImminent = true;
+			} else {
+				turnImminent = false;
+			}
+
 			return dist;
 		}
+		turnImminent = false;
 		return 0;
 	}
 	
@@ -464,7 +523,11 @@ public class RoutingHelper {
 		if (serviceToUse == RouteService.OSMAND && !settings.USE_OSMAND_ROUTING_SERVICE_ALWAYS.get()) {
 			double distance = MapUtils.getDistance(end, start.getLatitude(), start.getLongitude());
 			if (distance > DISTANCE_TO_USE_OSMAND_ROUTER) {
-				showMessage(context.getString(R.string.osmand_routing_experimental));
+				// display 'temporarily switched to CloudMade' message only once per error wait period and not for GPX routes
+				if (evalWaitInterval == 3000 && settings.FOLLOW_THE_GPX_ROUTE.get() == null) {
+					showMessage(context.getString(R.string.osmand_routing_experimental), Toast.LENGTH_LONG);
+					evalWaitInterval = 3001;
+				}
 				serviceToUse = RouteService.CLOUDMADE;
 			}
 		}
@@ -478,15 +541,12 @@ public class RoutingHelper {
 					currentRunningJob = new Thread(new Runnable() {
 						@Override
 						public void run() {
-							if(service != RouteService.OSMAND && !settings.isInternetConnectionAvailable()){
-								showMessage(context.getString(R.string.internet_connection_required_for_online_route), Toast.LENGTH_LONG);
-							}
 							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, gpxRoute, fastRouteMode);
 							synchronized (RoutingHelper.this) {
 								if (res.isCalculated()) {
 									setNewRoute(res);
 									// reset error wait interval
-									evalWaitInterval = 3000;
+									evalWaitInterval = 3001;
 								} else {
 									evalWaitInterval = evalWaitInterval * 4 / 3;
 									if (evalWaitInterval > 120000) {
@@ -500,14 +560,17 @@ public class RoutingHelper {
 								int[] dist = res.getListDistance();
 								int l = dist != null && dist.length > 0 ? dist[0] : 0;
 								showMessage(context.getString(R.string.new_route_calculated_dist)
-										+ " : " + OsmAndFormatter.getFormattedDistance(l, context)); //$NON-NLS-1$
+										+ ": " + OsmAndFormatter.getFormattedDistance(l, context)); //$NON-NLS-1$
+							} else if (service != RouteService.OSMAND && !settings.isInternetConnectionAvailable()) {
+									showMessage(context.getString(R.string.error_calculating_route)
+										+ ":\n" + context.getString(R.string.internet_connection_required_for_online_route), Toast.LENGTH_LONG); //$NON-NLS-1$
 							} else {
 								if (res.getErrorMessage() != null) {
-									showMessage(context.getString(R.string.error_calculating_route) + " : " + res.getErrorMessage()); //$NON-NLS-1$
+									showMessage(context.getString(R.string.error_calculating_route) + ":\n" + res.getErrorMessage(), Toast.LENGTH_LONG); //$NON-NLS-1$
 								} else if (res.getLocations() == null) {
-									showMessage(context.getString(R.string.error_calculating_route_occured));
+									showMessage(context.getString(R.string.error_calculating_route_occured), Toast.LENGTH_LONG);
 								} else {
-									showMessage(context.getString(R.string.empty_route_calculated));
+									showMessage(context.getString(R.string.empty_route_calculated), Toast.LENGTH_LONG);
 								}
 							}
 							lastTimeEvaluatedRoute = System.currentTimeMillis();
@@ -585,11 +648,11 @@ public class RoutingHelper {
 	public static class TurnType {
 		public static final String C = "C"; // continue (go straight) //$NON-NLS-1$
 		public static final String TL = "TL"; // turn left //$NON-NLS-1$
-		public static final String TSLL = "TSLL"; // turn slight left //$NON-NLS-1$
-		public static final String TSHL = "TSHL"; // turn sharp left //$NON-NLS-1$
+		public static final String TSLL = "TSLL"; // turn slightly left //$NON-NLS-1$
+		public static final String TSHL = "TSHL"; // turn sharply left //$NON-NLS-1$
 		public static final String TR = "TR"; // turn right //$NON-NLS-1$
-		public static final String TSLR = "TSLR"; // turn slight right //$NON-NLS-1$
-		public static final String TSHR = "TSHR"; // turn sharp right //$NON-NLS-1$
+		public static final String TSLR = "TSLR"; // turn slightly right //$NON-NLS-1$
+		public static final String TSHR = "TSHR"; // turn sharply right //$NON-NLS-1$
 		public static final String TU = "TU"; // U-turn //$NON-NLS-1$
 		public static final String TRU = "TRU"; // Right U-turn //$NON-NLS-1$
 		public static String[] predefinedTypes = new String[] {C, TL, TSLL, TSHL, TR, TSLR, TSHR, TU, TRU}; 

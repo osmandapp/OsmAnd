@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -21,6 +22,10 @@ public class MapStackControl extends ViewGroup {
 	// by default opened
 	private boolean isCollapsed = false;
 	private boolean isCollapsible = true;
+	
+	private Drawable topDrawable;
+	List<Drawable> cacheStackDrawables = new ArrayList<Drawable>();
+	private int stackDrawable;
 
 	public MapStackControl(Context context) {
 		super(context);
@@ -28,22 +33,21 @@ public class MapStackControl extends ViewGroup {
 		final Bitmap arrowUp = BitmapFactory.decodeResource(context.getResources(), R.drawable.arrow_up);
 		final Paint paintImg = new Paint();
 		paintImg.setAntiAlias(true);
-		setChildrenDrawingOrderEnabled(true);
 		expandView = new ImageView(context) {
 			@Override
 			protected void onDraw(Canvas canvas) {
 				super.onDraw(canvas);
 				int cx = (getLeft() + getRight()) / 2 - getLeft();
-				int t = (int) (getBottom() - getTop() - 12 * MapInfoLayer.scaleCoefficient);
+				int t = (int) (10 * MapInfoLayer.scaleCoefficient); 
 
 				if (!isCollapsed) {
-					canvas.drawBitmap(arrowUp, cx - arrowUp.getWidth() / 2, t - arrowUp.getHeight(), paintImg);
+					canvas.drawBitmap(arrowUp, cx - arrowUp.getWidth() / 2, t , paintImg);
 				} else {
-					canvas.drawBitmap(arrowDown, cx - arrowDown.getWidth() / 2, t - arrowUp.getHeight(), paintImg);
+					canvas.drawBitmap(arrowDown, cx - arrowDown.getWidth() / 2, t , paintImg);
 				}
 			}
 		};
-		expandView.setImageDrawable(context.getResources().getDrawable(R.drawable.box_expand).mutate());
+		expandView.setImageDrawable(context.getResources().getDrawable(R.drawable.box_expand));
 		expandView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -58,6 +62,15 @@ public class MapStackControl extends ViewGroup {
 	public void setExpandImageDrawable(Drawable d) {
 		expandView.setImageDrawable(d);
 	}
+	
+	public void setTopDrawable(Drawable topDrawable) {
+		this.topDrawable = topDrawable;
+	}
+	
+	public void setStackDrawable(int stackDrawable) {
+		this.stackDrawable = stackDrawable;
+		this.cacheStackDrawables.clear();
+	}
 
 	public void updateInfo() {
 		for (MapInfoControl v : stackViews) {
@@ -70,23 +83,14 @@ public class MapStackControl extends ViewGroup {
 	}
 	
 	
-	@Override
-	protected int getChildDrawingOrder(int childCount, int i) {
-		// start from expand view
-		if (i == 0) {
-			return 0;
-		}
-		return childCount - i;
-	}
-
 	public void addStackView(MapInfoControl v) {
 		stackViews.add(v);
-		MapStackControl.this.addView(v);
+		MapStackControl.this.addView(v, 1);
 	}
 
 	public void addCollapsedView(MapInfoControl v) {
 		collapsedViews.add(v);
-		MapStackControl.this.addView(v);
+		MapStackControl.this.addView(v, 1);
 	}
 	
 	public List<MapInfoControl> getStackViews() {
@@ -111,15 +115,31 @@ public class MapStackControl extends ViewGroup {
 	public boolean isCollapsible() {
 		return isCollapsible;
 	}
+	
+	
+	private Drawable getStackDrawable(int i){
+		while(i >= cacheStackDrawables.size()) {
+			Drawable d = getResources().getDrawable(stackDrawable);
+			if(Build.VERSION_CODES.FROYO <=  Build.VERSION.SDK_INT) {
+				d = d.mutate();
+			}
+			cacheStackDrawables.add(d);
+		}
+		return cacheStackDrawables.get(i);
+	}
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		int w = 0;
 		int h = 0;
 		int prevBot = 0;
+		boolean first = true;
+		int cacheStack = 0;
 		if (stackViews != null) {
 			for (MapInfoControl c : stackViews) {
 				if (c.getVisibility() != View.GONE) {
+					c.setBackgroundDrawable(first ? topDrawable : getStackDrawable(cacheStack++ ));
+					first = false;
 					c.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 					w = Math.max(w, c.getMeasuredWidth());
 					if (h > 0) {
@@ -135,6 +155,8 @@ public class MapStackControl extends ViewGroup {
 				if (c.getVisibility() != View.GONE) {
 					isCollapsible = true;
 					if (!isCollapsed) {
+						c.setBackgroundDrawable(first ? topDrawable : getStackDrawable(cacheStack++ ));
+						first = false;
 						c.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 						w = Math.max(w, c.getMeasuredWidth());
 						h -= c.getPaddingBottom();
@@ -155,7 +177,7 @@ public class MapStackControl extends ViewGroup {
 				}
 			}
 			if (isCollapsible) {
-				h -= prevBot;
+//				h -= prevBot;
 				h += expandView.getDrawable().getMinimumHeight();
 				w = Math.max(w, expandView.getDrawable().getMinimumWidth());
 			}

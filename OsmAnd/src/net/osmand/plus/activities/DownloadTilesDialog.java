@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.LogUtil;
+import net.osmand.Version;
 import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
@@ -145,7 +146,7 @@ public class DownloadTilesDialog {
 			}
 		});
 		
-		final MapTileDownloader instance = MapTileDownloader.getInstance();
+		final MapTileDownloader instance = MapTileDownloader.getInstance(Version.getFullVersion(ctx));
 		
 		final ArrayList<IMapDownloaderCallback> previousCallbacks = 
 			new ArrayList<IMapDownloaderCallback>(instance.getDownloaderCallbacks());

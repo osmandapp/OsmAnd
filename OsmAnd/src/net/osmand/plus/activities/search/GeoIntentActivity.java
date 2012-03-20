@@ -25,12 +25,12 @@ import net.osmand.plus.RegionAddressRepository;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandApplication;
+import net.osmand.plus.activities.OsmandListActivity;
 import android.app.Dialog;
-import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -41,7 +41,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class GeoIntentActivity extends ListActivity {
+public class GeoIntentActivity extends OsmandListActivity {
 
 	private ProgressDialog progressDlg;
 	private LatLon location;

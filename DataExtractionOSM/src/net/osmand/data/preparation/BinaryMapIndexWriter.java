@@ -16,6 +16,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import net.osmand.Algoritms;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.OsmandOdb;
@@ -55,6 +58,7 @@ public class BinaryMapIndexWriter {
 	private RandomAccessFile raf;
 	private CodedOutputStream codedOutStream;
 	protected static final int SHIFT_COORDINATES = BinaryMapIndexReader.SHIFT_COORDINATES;
+	private static Log log = LogFactory.getLog(BinaryMapIndexWriter.class);
 	
 	private static class Bounds {
 		public Bounds(int leftX, int rightX, int topY, int bottomY) {
@@ -159,7 +163,7 @@ public class BinaryMapIndexWriter {
 	public void endWriteMapIndex() throws IOException{
 		popState(MAP_INDEX_INIT);
 		int len = writeInt32Size();
-		System.out.println("MAP INDEX SIZE : " + len);
+		log.info("MAP INDEX SIZE : " + len);
 	}
 		
 	public void startWriteMapLevelIndex(int minZoom, int maxZoom, int leftX, int rightX, int topY, int bottomY) throws IOException{
@@ -213,7 +217,7 @@ public class BinaryMapIndexWriter {
 		}
 		codedOutStream.flush();
 		long newfp = raf.getFilePointer();
-		System.out.println("RENDERING SCHEMA takes " + (newfp - fp));
+		log.info("RENDERING SCHEMA takes " + (newfp - fp));
 	}
 	
 	
@@ -424,7 +428,7 @@ public class BinaryMapIndexWriter {
 	public void endWriteAddressIndex() throws IOException {
 		popState(ADDRESS_INDEX_INIT);
 		int len = writeInt32Size();
-		System.out.println("ADDRESS INDEX SIZE : " + len);
+		log.info("ADDRESS INDEX SIZE : " + len);
 	}
 	
 	private boolean checkEnNameToWrite(MapObject obj){
@@ -506,7 +510,7 @@ public class BinaryMapIndexWriter {
 	public void endCityIndexes(boolean villages) throws IOException {
 		popState(villages ? VILLAGES_INDEX_INIT : CITY_INDEX_INIT);
 		int length = writeInt32Size();
-		System.out.println("CITIES size " + length + " " + villages);
+		log.info("CITIES size " + length + " " + villages);
 	}
 	
 	
@@ -519,7 +523,7 @@ public class BinaryMapIndexWriter {
 	public void endPostcodes() throws IOException {
 		popState(POSTCODES_INDEX_INIT);
 		int postcodes = writeInt32Size();
-		System.out.println("POSTCODES size " + postcodes);
+		log.info("POSTCODES size " + postcodes);
 	}
 	
 
@@ -623,7 +627,7 @@ public class BinaryMapIndexWriter {
 		popState(TRANSPORT_INDEX_INIT);
 		int len = writeInt32Size();
 		stackBounds.pop();
-		System.out.println("TRANSPORT INDEX SIZE : " + len);
+		log.info("TRANSPORT INDEX SIZE : " + len);
 	}
 	
 	public void writeTransportRoute(long idRoute, String routeName, String routeEnName, String ref, String operator, String type,
@@ -777,7 +781,7 @@ public class BinaryMapIndexWriter {
 		popState(POI_INDEX_INIT);
 		int len = writeInt32Size();
 		stackBounds.pop();
-		System.out.println("POI INDEX SIZE : " + len);
+		log.info("POI INDEX SIZE : " + len);
 	}
 	
 	public Map<String, Integer> writePOICategoriesTable(Map<String, Map<String, Integer>> categories) 
@@ -807,11 +811,11 @@ public class BinaryMapIndexWriter {
 	public void writePOICategories(TIntArrayList categories) throws IOException {
 		checkPeekState(POI_BOX);
 		OsmandOdb.OsmAndPoiCategories.Builder builder = OsmandOdb.OsmAndPoiCategories.newBuilder();
-		int prev = 0;
+		int prev = -1;
 		categories.sort();
 		for (int i = 0; i < categories.size(); i++) {
 			// avoid duplicates
-			if (i > 0 && prev != categories.get(i)) {
+			if (i == 0 || prev != categories.get(i)) {
 				builder.addCategories(categories.get(i));
 				prev = categories.get(i);
 			}
@@ -889,7 +893,7 @@ public class BinaryMapIndexWriter {
 	}
 
 	public void writePoiDataAtom(long id, int x24shift, int y24shift, String nameEn, String name, TIntArrayList types, String openingHours,
-			String site, String phone) throws IOException {
+			String site, String phone, String description) throws IOException {
 		checkPeekState(POI_DATA);
 		
 		OsmAndPoiBoxDataAtom.Builder builder = OsmandOdb.OsmAndPoiBoxDataAtom.newBuilder();
@@ -915,6 +919,9 @@ public class BinaryMapIndexWriter {
 		}
 		if(!Algoritms.isEmpty(phone)){
 			builder.setPhone(phone);
+		}
+		if(!Algoritms.isEmpty(description)){
+			builder.setNote(description);
 		}
 		
 		codedOutStream.writeMessage(OsmandOdb.OsmAndPoiBoxData.POIDATA_FIELD_NUMBER, builder.build());

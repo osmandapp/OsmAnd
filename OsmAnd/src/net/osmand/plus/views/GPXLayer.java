@@ -6,9 +6,9 @@ import java.util.List;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
-
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
@@ -25,10 +25,13 @@ public class GPXLayer extends OsmandMapLayer {
 	private Paint paint;
 
 	private Path path;
+
+	private OsmandSettings settings;
+	
 	
 	private void initUI() {
 		paint = new Paint();
-		paint.setColor(Color.argb(180, 160, 10, 215));
+		paint.setColor(view.getResources().getColor(R.color.gpx_track));
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(14);
 		paint.setAntiAlias(true);
@@ -42,13 +45,14 @@ public class GPXLayer extends OsmandMapLayer {
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
+		settings = OsmandSettings.getOsmandSettings(view.getContext());
 		initUI();
 	}
 
 	
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		List<List<WptPt>> points = this.points;
 		if(points.isEmpty()){
 			return;
@@ -97,8 +101,8 @@ public class GPXLayer extends OsmandMapLayer {
 	}
 	
 
-	public boolean isVisible(){
-		return !points.isEmpty();
+	public boolean isShowingCurrentTrack(){
+		return settings.SHOW_CURRENT_GPX_TRACK.get();
 	}
 	
 	
@@ -118,6 +122,21 @@ public class GPXLayer extends OsmandMapLayer {
 			}
 			points = tpoints;
 			
+		}
+	}
+	
+	public void addTrackPoint(WptPt pt){
+		if(points.size() == 0){
+			points.add(new ArrayList<WptPt>());
+		}
+		List<WptPt> last = points.get(points.size() - 1);
+		if(last.size() == 0 || last.get(last.size() - 1).time - pt.time < 6 * 60 * 1000) {
+			// 6 minutes same segment
+			last.add(pt);
+		} else {
+			ArrayList<WptPt> l = new ArrayList<WptPt>();
+			l.add(pt);
+			points.add(l);
 		}
 	}
 	

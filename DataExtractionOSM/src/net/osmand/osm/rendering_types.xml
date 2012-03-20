@@ -23,7 +23,7 @@
 		<subtype id="6" polygon="true" polyline="true" tag="highway" value="residential" minzoom="12" />
 		<subtype id="7" polygon="true" polyline="true" tag="highway" value="service" minzoom="12" />
 
-		<subtype id="32" polyline="true" tag="highway" value="unclassified" minzoom="12" />
+		<subtype id="8" polyline="true" tag="highway" value="unclassified" minzoom="12" />
 		<subtype id="8" polyline="true" tag="highway" value="road" minzoom="12" />
 		<subtype id="9" polyline="true" tag="highway" value="track" minzoom="12" />
 		<subtype id="10" polyline="true" tag="highway" value="path" minzoom="12" />
@@ -40,8 +40,8 @@
 		<!-- <subtype id="" polyline="true" tag="highway" value="bus_guideway" minzoom="15" />  -->
 
 		<subtype id="23" polyline="true" point="true" tag="highway" value="ford" minzoom="14" />
-		<subtype id="25" polyline="true" tag="highway" value="construction" minzoom="14" />
-		<subtype id="26" polyline="true" tag="highway" value="proposed" minzoom="14" />
+		<subtype id="25" polyline="true" tag="highway" value="construction" minzoom="12" />
+		<subtype id="26" polyline="true" tag="highway" value="proposed" minzoom="12" />
 
 		<!--  POINT SUBTYPES -->
 		<subtype id="35" point="true" tag="highway" value="mini_roundabout" minzoom="15" />

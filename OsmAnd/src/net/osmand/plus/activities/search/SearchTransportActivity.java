@@ -7,6 +7,8 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.android.apps.analytics.easytracking.TrackedListActivity;
+
 import net.osmand.Algoritms;
 import net.osmand.OsmAndFormatter;
 import net.osmand.data.TransportRoute;
@@ -40,10 +42,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 /**
- * @author Maxim Frolov
  * 
  */
-public class SearchTransportActivity extends ListActivity implements SearchActivityChild {
+public class SearchTransportActivity extends TrackedListActivity implements SearchActivityChild {
 
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
@@ -372,7 +373,7 @@ public class SearchTransportActivity extends ListActivity implements SearchActiv
 					toInsert --;
 				}
 				intermediateListAdapater.remove(null);
-				intermediateListAdapater.insert(null, routeInd);
+				intermediateListAdapater.insert(null, toInsert);
 				zoom = initialZoom;
 				searchTransport();	
 			}

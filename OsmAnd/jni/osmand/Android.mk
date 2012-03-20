@@ -1,5 +1,4 @@
 LOCAL_PATH := $(call my-dir)
-include $(CLEAR_VARS)
 
 #include $(CLEAR_VARS)
 #LOCAL_MODULE := skia2.2
@@ -34,12 +33,14 @@ include $(CLEAR_VARS)
 #include $(PREBUILT_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
+ifeq ($(ANDROID_SRC),)
+  ANDROID_SRC := /home/victor/projects/android/
+endif
 
-ANDROID_FOLDER := /home/victor/projects/android/
 #PROTOBUF_FOLDER := /home/victor/projects/OsmAnd/libs/protobuf-2.3.0/src
 PROTOBUF_FOLDER := $(LOCAL_PATH)/../protobuf
 
-SKIA_FOLDER := $(ANDROID_FOLDER)/external/skia
+SKIA_FOLDER := $(ANDROID_SRC)/external/skia
 SKIA_SRC := skia
 
 LOCAL_MODULE := osmand
@@ -52,8 +53,8 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(SKIA_FOLDER)/include/effects \
 	$(SKIA_FOLDER)/include/utils/android \
     $(SKIA_FOLDER)/src/core \
-    $(ANDROID_FOLDER)/system/core/include \
-    $(ANDROID_FOLDER)/frameworks/base/include
+    $(ANDROID_SRC)/system/core/include \
+    $(ANDROID_SRC)/frameworks/base/include
 
 LOCAL_CPP_EXTENSION := .cpp
 LOCAL_SRC_FILES := common.cpp mapObjects.cpp \

@@ -6,8 +6,8 @@ import java.util.List;
 import net.osmand.LogUtil;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.R;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
@@ -40,7 +40,7 @@ public class RouteLayer extends OsmandMapLayer {
 		boundsRect = new Rect(0, 0, view.getWidth(), view.getHeight());
 		tileRect = new RectF();
 		paint = new Paint();
-		paint.setColor(Color.BLUE);
+		paint.setColor(view.getResources().getColor(R.color.nav_track));
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(14);
 		paint.setAlpha(150);
@@ -59,7 +59,7 @@ public class RouteLayer extends OsmandMapLayer {
 	
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		path.reset();
 		if (helper.hasPointsToShow()) {
 			long time = System.currentTimeMillis();

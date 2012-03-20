@@ -19,6 +19,6 @@
 		<EditText android:layout_marginLeft = "5dp"  android:layout_marginRight = "5dp" android:layout_width="fill_parent" android:text="" android:id="@+id/SearchFilter" android:layout_height="wrap_content"/>
 	</LinearLayout>
 	<ListView android:id="@android:id/list" android:layout_width="fill_parent" 
-		android:layout_height="fill_parent"></ListView>
+		android:layout_height="fill_parent" style="@style/OsmandListView"></ListView>
 	
 </LinearLayout>

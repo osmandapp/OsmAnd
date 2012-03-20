@@ -20,7 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import net.osmand.data.preparation.MapZooms;
-import net.osmand.data.preparation.MapZooms.MapZoomPair;
 
 public class OsmExtractionPreferencesDialog extends JDialog {
 	

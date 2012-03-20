@@ -10,58 +10,50 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.RandomAccessFile;
-import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
+import java.util.logging.FileHandler;
+import java.util.logging.LogManager;
+import java.util.logging.Level;
+import java.util.logging.SimpleFormatter;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
-import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.MapCreatorVersion;
 import net.osmand.data.IndexConstants;
-import net.osmand.data.index.ExtractGooglecodeAuthorization.GooglecodeUploadTokens;
 import net.osmand.data.preparation.DBDialect;
 import net.osmand.data.preparation.IndexCreator;
 import net.osmand.data.preparation.MapZooms;
 import net.osmand.impl.ConsoleProgressImplementation;
 import net.osmand.osm.MapRenderingTypes;
+import net.osmand.swing.OsmExtractionUI;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.impl.Jdk14Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
-
 import rtree.RTree;
-
 
 
 public class IndexBatchCreator {
 	
-	
 	protected static final Log log = LogUtil.getLog(IndexBatchCreator.class);
-	private final static double MIN_SIZE_TO_UPLOAD = 0.015d;
-	private final static double MIN_SIZE_TO_NOT_ZIP = 2d;
-	private final static double MAX_SIZE_TO_NOT_SPLIT = 190d; 
-	private final static double MAX_UPLOAD_SIZE = 195d;
+	
+	public static final String GEN_LOG_EXT = ".gen.log";
 	
 	
 	public static class RegionCountries {
@@ -75,78 +67,63 @@ public class IndexBatchCreator {
 		public String cityAdminLevel;
 	}
 	
-	private boolean uploadToOsmandGooglecode = true;
-	
 	
 	// process atributtes
-	boolean downloadFiles = false;
-	boolean generateIndexes = false;
-	boolean uploadIndexes = false;
+	File skipExistingIndexes;
 	MapZooms mapZooms = null;
 	Integer zoomWaySmoothness = null; 
 	MapRenderingTypes types = MapRenderingTypes.getDefault();
-	boolean deleteFilesAfterUploading = true;
 	
 	File osmDirFiles;
 	File indexDirFiles;
-	File backupUploadedFiles;
+	File workDir;
 	
 	boolean indexPOI = false;
 	boolean indexTransport = false;
 	boolean indexAddress = false;
 	boolean indexMap = false;
 	
-	
-	String user;
-	String password;
-	
 	private String wget;
 	
-	String googlePassword = "";
-	String cookieHSID = "";
-	String cookieSID = "";
-	String pagegen = "";
-	String token = "";
-	private boolean local;
-	
-	
 	public static void main(String[] args) {
-		
 		IndexBatchCreator creator = new IndexBatchCreator();
+		OsmExtractionUI.configLogFile();
 		if(args == null || args.length == 0){
 			System.out.println("Please specify -local parameter or path to batch.xml configuration file as 1 argument.");
 			throw new IllegalArgumentException("Please specify -local parameter or path to batch.xml configuration file as 1 argument.");
 		}
 		String name = args[0];
 		InputStream stream;
+		InputStream regionsStream = null;
 		if(name.equals("-local")){
 			stream = IndexBatchCreator.class.getResourceAsStream("batch.xml");
-			creator.setLocal(true);
+			regionsStream = IndexBatchCreator.class.getResourceAsStream("regions.xml");
+			log.info("Using local settings");
 		} else {
 			try {
 				stream = new FileInputStream(name);
 			} catch (FileNotFoundException e) {
-				System.out.println("XML configuration file not found : " + name);
-				return;
+				throw new IllegalArgumentException("XML configuration file not found : " + name, e);
+			}
+			if (args.length > 1) {
+				try {
+					File regionsFile = new File(args[1]);
+					regionsStream = new FileInputStream(regionsFile);
+				} catch (FileNotFoundException e) {
+					throw new IllegalArgumentException("Please specify xml-file with regions to download", e); //$NON-NLS-1$
+				}
 			}
 		}
 		
-		if(args.length >= 2 &&  args[1] != null && args[1].startsWith("-gp")){
-			creator.googlePassword = args[1].substring(3);
-		}
-				
 		try {
 			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(stream);
-			creator.runBatch(doc);
-		} catch (SAXException e) {
-			System.out.println("XML configuration file could not be read from " + name);
-			e.printStackTrace();
-			log.error("XML configuration file could not be read from " + name, e);
-		} catch (IOException e) {
-			System.out.println("XML configuration file could not be read from " + name);
-			e.printStackTrace();
-			log.error("XML configuration file could not be read from " + name, e);
-		} catch (ParserConfigurationException e) {
+			Document regions = null;
+			if(regionsStream != null) {
+				name = args[1];
+				regions = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(regionsStream);
+			}
+			creator.runBatch(doc, regions);
+		} catch (Exception e) {
 			System.out.println("XML configuration file could not be read from " + name);
 			e.printStackTrace();
 			log.error("XML configuration file could not be read from " + name, e);
@@ -155,21 +132,17 @@ public class IndexBatchCreator {
 		}
 	}
 	
-	private void setLocal(boolean local) {
-		this.local = local;
-	}
-
-	public void runBatch(Document doc) throws SAXException, IOException, ParserConfigurationException{
+	public void runBatch(Document doc, Document regions) throws SAXException, IOException, ParserConfigurationException{
 		NodeList list = doc.getElementsByTagName("process");
 		if(list.getLength() != 1){
 			 throw new IllegalArgumentException("You should specify exactly 1 process element!");
 		}
 		Element process = (Element) list.item(0);
-		downloadFiles = Boolean.parseBoolean(process.getAttribute("downloadOsmFiles"));
-		generateIndexes = Boolean.parseBoolean(process.getAttribute("generateIndexes"));
-		uploadIndexes = Boolean.parseBoolean(process.getAttribute("uploadIndexes"));
-		deleteFilesAfterUploading = Boolean.parseBoolean(process.getAttribute("deleteFilesAfterUploading"));
-		IndexCreator.REMOVE_POI_DB = !Boolean.parseBoolean(process.getAttribute("keepPoiOdb"));
+		IndexCreator.REMOVE_POI_DB = true;
+		String file = process.getAttribute("skipExistingIndexesAt");
+		if (file != null && new File(file).exists()) {
+			skipExistingIndexes = new File(file);
+		}
 		wget = process.getAttribute("wget");
 		
 		indexPOI = Boolean.parseBoolean(process.getAttribute("indexPOI"));
@@ -185,7 +158,7 @@ public class IndexBatchCreator {
 	
 		String dir = process.getAttribute("directory_for_osm_files");
 		if(dir == null || !new File(dir).exists()) {
-			throw new IllegalArgumentException("Please specify directory with .osm or .osm.bz2 files as directory_for_osm_files (attribute)"); //$NON-NLS-1$
+			throw new IllegalArgumentException("Please specify directory with .osm or .osm.bz2 files as directory_for_osm_files (attribute)" + dir); //$NON-NLS-1$
 		}
 		osmDirFiles = new File(dir);
 		dir = process.getAttribute("directory_for_index_files");
@@ -193,77 +166,19 @@ public class IndexBatchCreator {
 			throw new IllegalArgumentException("Please specify directory with generated index files  as directory_for_index_files (attribute)"); //$NON-NLS-1$
 		}
 		indexDirFiles = new File(dir);
-		InputStream regionsStream = null;
-		if(downloadFiles){
-			dir = process.getAttribute("list_download_regions_file");
-			if(!Algoritms.isEmpty(dir)) {
-				File regionsFile = new File(dir);
-				if(!regionsFile.exists()){
-					if (local) {
-						regionsStream = IndexBatchCreator.class.getResourceAsStream("regions.xml");
-					}
-					if (regionsStream == null) {
-						throw new IllegalArgumentException("Please specify file with regions to download as list_download_regions_file (attribute)"); //$NON-NLS-1$
-					}
-				} else {
-					regionsStream = new FileInputStream(regionsFile);
-				}
-			} 
-		}
-		
-		dir = process.getAttribute("directory_for_uploaded_files");
-		if (dir != null) {
-			File file = new File(dir);
-			file.mkdirs();
-			if (file.exists()) {
-				backupUploadedFiles = file;
-			}
-		}
-		
-		
-		if(uploadIndexes){
-			list = doc.getElementsByTagName("authorization_info");
-			if(list.getLength() != 1){
-				 throw new IllegalArgumentException("You should specify exactly 1 authorization_info element to upload indexes!");
-			}
-			Element authorization = (Element) list.item(0);
-			uploadToOsmandGooglecode = Boolean.parseBoolean(process.getAttribute("upload_osmand_googlecode"));
-			if(uploadToOsmandGooglecode){
-				user = authorization.getAttribute("google_code_user"); 
-				password = authorization.getAttribute("google_code_password");
-				
-				cookieHSID = authorization.getAttribute("cookieHSID");
-				cookieSID = authorization.getAttribute("cookieSID");
-				pagegen = authorization.getAttribute("pagegen");
-				token = authorization.getAttribute("token");
-				if(googlePassword.length() > 0){
-					ExtractGooglecodeAuthorization gca = new ExtractGooglecodeAuthorization();
-					try {
-						GooglecodeUploadTokens tokens = gca.getGooglecodeTokensForUpload(user, googlePassword);
-						cookieHSID = tokens.getHsid();
-						cookieSID = tokens.getSid();
-						pagegen = tokens.getPagegen();
-						token = tokens.getToken();
-					} catch (IOException e) {
-						log.error("Error retrieving google tokens", e);
-					}
-				}
-			} else {
-				user = authorization.getAttribute("osmand_download_user");
-				password = authorization.getAttribute("osmand_download_password");
-			}
+		workDir = indexDirFiles;
+		dir = process.getAttribute("directory_for_generation");
+		if(dir != null && new File(dir).exists()) {
+			workDir = new File(dir);
 		}
 		
 		List<RegionCountries> countriesToDownload = new ArrayList<RegionCountries>();
 		parseCountriesToDownload(doc, countriesToDownload);
-		if(regionsStream != null){
-			Document innerDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(regionsStream);
-			parseCountriesToDownload(innerDoc, countriesToDownload);
+		if (regions != null) {
+			parseCountriesToDownload(regions, countriesToDownload);
 		}
 		
 		runBatch(countriesToDownload);
-		
-		
 	}
 
 	private void parseCountriesToDownload(Document doc, List<RegionCountries> countriesToDownload) {
@@ -285,6 +200,7 @@ public class IndexBatchCreator {
 					countries.nameSuffix = "";
 				}
 				NodeList ncountries = el.getElementsByTagName("region");
+				log.info("Region to download " +countries.siteToDownload);
 				for(int j=0; j< ncountries.getLength(); j++){
 					Element ncountry = (Element) ncountries.item(j);
 					String name = ncountry.getAttribute("name");
@@ -337,22 +253,16 @@ public class IndexBatchCreator {
 	}
 	
 	public void runBatch(List<RegionCountries> countriesToDownload ){
-		Set<String> alreadyUploadedFiles = new LinkedHashSet<String>();
 		Set<String> alreadyGeneratedFiles = new LinkedHashSet<String>();
-		if(downloadFiles){
-			downloadFilesAndGenerateIndex(countriesToDownload, alreadyGeneratedFiles, alreadyUploadedFiles);
+		if(!countriesToDownload.isEmpty()){
+			downloadFilesAndGenerateIndex(countriesToDownload, alreadyGeneratedFiles);
 		}
-		if(generateIndexes && !downloadFiles){
-			generatedIndexes(alreadyGeneratedFiles, alreadyUploadedFiles);
-		}
-		if(uploadIndexes){
-			uploadIndexes(alreadyUploadedFiles);
-		}
+		generatedIndexes(alreadyGeneratedFiles);
 	}
 	
 
 	
-	protected void downloadFilesAndGenerateIndex(List<RegionCountries> countriesToDownload, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles){
+	protected void downloadFilesAndGenerateIndex(List<RegionCountries> countriesToDownload, Set<String> alreadyGeneratedFiles){
 		// clean before downloading
 //		for(File f : osmDirFiles.listFiles()){
 //			log.info("Delete old file " + f.getName());  //$NON-NLS-1$
@@ -367,17 +277,26 @@ public class IndexBatchCreator {
 				name = name.toLowerCase();
 				RegionSpecificData regionSpecificData = regionCountries.regionNames.get(name);
 				String url = MessageFormat.format(site, name);
-				String country = prefix+name;
-				File toSave = downloadFile(url, country, suffix, alreadyGeneratedFiles, alreadyUploadedFiles);
-				if (toSave != null && generateIndexes) {
-					generateIndex(toSave, country, regionSpecificData, alreadyGeneratedFiles, alreadyUploadedFiles);
+				
+				String regionName = prefix + name;
+				String fileName = Algoritms.capitalizeFirstLetterAndLowercase(prefix + name + suffix);
+				if (skipExistingIndexes != null) {
+					File bmif = new File(skipExistingIndexes, fileName + "_" + IndexConstants.BINARY_MAP_VERSION
+							+ IndexConstants.BINARY_MAP_INDEX_EXT);
+					File bmifz = new File(skipExistingIndexes, bmif.getName() + ".zip");
+					if (bmif.exists() || bmifz.exists()) {
+						continue;
+					}
+				}
+				File toSave = downloadFile(url,  fileName);
+				if (toSave != null) {
+					generateIndex(toSave, regionName, regionSpecificData, alreadyGeneratedFiles);
 				}
 			}
 		}
-		System.out.println("DOWNLOADING FILES FINISHED");
 	}
 	
-	protected File downloadFile(String url, String country, String suffix, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
+	protected File downloadFile(String url, String regionName) {
 		String ext = ".osm";
 		if(url.endsWith(".osm.bz2")){
 			ext = ".osm.bz2";
@@ -385,16 +304,19 @@ public class IndexBatchCreator {
 			ext = ".osm.pbf";
 		}
 		File toIndex = null;
-		File saveTo = new File(osmDirFiles, country + suffix + ext);
+		File saveTo = new File(osmDirFiles, regionName + ext);
 		if (wget == null || wget.trim().length() == 0) {
-			toIndex = internalDownload(url, country, saveTo);
+			toIndex = internalDownload(url, saveTo);
 		} else {
-			toIndex = wgetDownload(url, country, saveTo);
+			toIndex = wgetDownload(url, saveTo);
+		}
+		if(toIndex == null) {
+			saveTo.delete();
 		}
 		return toIndex;
 	}
 
-	private File wgetDownload(String url, String country, File toSave) 
+	private File wgetDownload(String url,  File toSave) 
 	{
 		BufferedReader wgetOutput = null;
 		OutputStream wgetInput = null;
@@ -432,9 +354,8 @@ public class IndexBatchCreator {
 	}
 	
 	private final static int DOWNLOAD_DEBUG = 1 << 20;
-	private final static int MB = 1 << 20;
 	private final static int BUFFER_SIZE = 1 << 15;
-	private File internalDownload(String url, String country, File toSave) {
+	private File internalDownload(String url, File toSave) {
 		int count = 0;
 		int downloaded = 0;
 		int mbDownloaded = 0;
@@ -444,7 +365,7 @@ public class IndexBatchCreator {
 		try {
 			ostream = new FileOutputStream(toSave);
 			stream = new URL(url).openStream();
-			log.info("Downloading country " + country + " from " + url);  //$NON-NLS-1$//$NON-NLS-2$
+			log.info("Downloading country " + toSave.getName() + " from " + url);  //$NON-NLS-1$//$NON-NLS-2$
 			while ((count = stream.read(buffer)) != -1) {
 				ostream.write(buffer, 0, count);
 				downloaded += count;
@@ -474,29 +395,28 @@ public class IndexBatchCreator {
 		}
 	}
 	
-	protected void generatedIndexes(Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
+	protected void generatedIndexes(Set<String> alreadyGeneratedFiles) {
 		for (File f : getSortedFiles(osmDirFiles)) {
 			if (alreadyGeneratedFiles.contains(f.getName())) {
 				continue;
 			}
 			if (f.getName().endsWith(".osm.bz2") || f.getName().endsWith(".osm") || f.getName().endsWith(".osm.pbf")) {
-				generateIndex(f, null, null, alreadyGeneratedFiles, alreadyUploadedFiles);
+				generateIndex(f, null, null, alreadyGeneratedFiles);
 			}
 		}
-		System.out.println("GENERATING INDEXES FINISHED ");
+		log.info("GENERATING INDEXES FINISHED ");
 	}
 	
 	
 	
-	protected void generateIndex(File f, String rName, RegionSpecificData regionSpecificData, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
-		if (!generateIndexes) {
-			return;
-		}
+	protected void generateIndex(File f, String rName, RegionSpecificData regionSpecificData, Set<String> alreadyGeneratedFiles) {
 		try {
 			// be independent of previous results
 			RTree.clearCache();
 			
 			String regionName = f.getName();
+			log.warn("-------------------------------------------");
+			log.warn("----------- Generate " + f.getName() + "\n\n\n");
 			int i = f.getName().indexOf('.');
 			if (i > -1) {
 				regionName = Algoritms.capitalizeFirstLetterAndLowercase(f.getName().substring(0, i));
@@ -507,7 +427,7 @@ public class IndexBatchCreator {
 				rName = Algoritms.capitalizeFirstLetterAndLowercase(rName);
 			}
 			
-			IndexCreator indexCreator = new IndexCreator(indexDirFiles);
+			IndexCreator indexCreator = new IndexCreator(workDir);
 			indexCreator.setIndexAddress(indexAddress);
 			indexCreator.setIndexPOI(indexPOI);
 			indexCreator.setIndexTransport(indexTransport);
@@ -519,24 +439,53 @@ public class IndexBatchCreator {
 			if (regionSpecificData != null && regionSpecificData.cityAdminLevel != null) {
 				indexCreator.setCityAdminLevel(regionSpecificData.cityAdminLevel);
 			}
+			if(zoomWaySmoothness != null){
+				indexCreator.setZoomWaySmothness(zoomWaySmoothness);
+			}
 
-			String poiFileName = regionName + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT;
-			indexCreator.setPoiFileName(poiFileName);
 			String mapFileName = regionName + "_" + IndexConstants.BINARY_MAP_VERSION + IndexConstants.BINARY_MAP_INDEX_EXT;
 			indexCreator.setMapFileName(mapFileName);
 			try {
 				alreadyGeneratedFiles.add(f.getName());
-				indexCreator.generateIndexes(f, new ConsoleProgressImplementation(3),  null, mapZooms, types);
-				if(zoomWaySmoothness != null){
-					indexCreator.setZoomWaySmothness(zoomWaySmoothness);
+				Log warningsAboutMapData = null;
+				File logFileName = new File(workDir, mapFileName + GEN_LOG_EXT);
+				FileHandler fh = null;
+				// configure log path
+				try {
+
+					FileOutputStream fout = new FileOutputStream(logFileName);
+					fout.write((new Date() + "\n").getBytes());
+					fout.write((MapCreatorVersion.APP_MAP_CREATOR_FULL_NAME + "\n").getBytes());
+					fout.close();
+					fh = new FileHandler(logFileName.getAbsolutePath(), 5000000, 1, true);
+					fh.setFormatter(new SimpleFormatter());
+					fh.setLevel(Level.ALL);
+					Jdk14Logger jdk14Logger = new Jdk14Logger("tempLogger");
+					jdk14Logger.getLogger().setLevel(Level.ALL);
+					jdk14Logger.getLogger().setUseParentHandlers(false);
+					jdk14Logger.getLogger().addHandler(fh);
+					warningsAboutMapData = jdk14Logger;
+				} catch (SecurityException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
 				}
-				// Do not upload poi files any more
-//				if (indexPOI) {
-//					uploadIndex(new File(indexDirFiles, poiFileName), alreadyUploadedFiles);
-//				}
-				if (indexMap || indexAddress || indexTransport || indexPOI) {
-					uploadIndex(new File(indexDirFiles, mapFileName), alreadyUploadedFiles);
+				if (fh != null) {
+					LogManager.getLogManager().getLogger("").addHandler(fh);
 				}
+				try {
+					indexCreator.generateIndexes(f, new ConsoleProgressImplementation(3), null, mapZooms, types, warningsAboutMapData);
+				} finally {
+					if (fh != null) {
+						LogManager.getLogManager().getLogger("").removeHandler(fh);
+						fh.close();
+					}
+				}
+				File generated = new File(workDir, mapFileName);
+				generated.renameTo(new File(indexDirFiles, generated.getName()));
+
+				logFileName.renameTo(new File(indexDirFiles, logFileName.getName()));
+				
 			} catch (Exception e) {
 				log.error("Exception generating indexes for " + f.getName(), e); //$NON-NLS-1$ 
 			}
@@ -558,270 +507,4 @@ public class IndexBatchCreator {
 		});
 		return listFiles;
 	}
-	
-	protected void uploadIndexes(Set<String> alreadyUploadedFiles){
-		for(File f : getSortedFiles(indexDirFiles)){
-			if(!alreadyUploadedFiles.contains(f.getName()) && !f.isDirectory()){
-				uploadIndex(f, alreadyUploadedFiles);
-				if(!alreadyUploadedFiles.contains(f.getName())){
-					System.out.println("! NOT UPLOADED "  + f.getName());
-				}
-			}
-		}
-		System.out.println("UPLOADING INDEXES FINISHED ");
-		
-	}
-	
-	
-	
-	protected void uploadIndex(final File f, Set<String> alreadyUploadedFiles){
-		if(!uploadIndexes){
-			return;
-		}
-		
-		String fileName = f.getName();
-		log.info("Upload index " + fileName);
-		String summary;
-		double mbLengh = (double)f.length() / MB;
-		boolean zip = true;
-		if(fileName.endsWith(IndexConstants.POI_INDEX_EXT) || fileName.endsWith(IndexConstants.POI_INDEX_EXT_ZIP)){
-			summary = "POI index for " ;
-		} else if(fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)){
-			boolean addr = indexAddress;
-			boolean trans = indexTransport;
-			boolean map = indexMap;
-			boolean poi = indexPOI;
-			RandomAccessFile raf = null;
-			if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-				try {
-					raf = new RandomAccessFile(f, "r");
-					BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
-					trans = reader.hasTransportData();
-					map = reader.containsMapData();
-					addr = reader.containsAddressData();
-					poi = reader.containsPoiData();
-					reader.close();
-				} catch (Exception e) {
-					log.info("File with not be uploaded! Exception", e);
-					if (raf != null) {
-						try {
-							raf.close();
-						} catch (IOException e1) {
-						}
-					}
-					//do not upload probably corrupted file
-					return;
-				}
-			}
-			summary = " index for ";
-			boolean fir = true;
-			if (addr) {
-				summary = "Address" + (fir ? "" : ", ") + summary;
-				fir = false;
-			}
-			if (trans) {
-				summary = "Transport" + (fir ? "" : ", ") + summary;
-				fir = false;
-			}
-			if (poi) {
-				summary = "POI" + (fir ? "" : ", ") + summary;
-				fir = false;
-			}
-			if (map) {
-				summary = "Map" + (fir ? "" : ", ") + summary;
-				fir = false;
-			}
-			
-		} else { 
-			return;
-		}
-		
-		if(mbLengh < MIN_SIZE_TO_UPLOAD){
-			// do not upload small files
-			return;
-		}
-		File toUpload = f;
-		if(mbLengh > MIN_SIZE_TO_NOT_ZIP && (fileName.endsWith(".odb") || fileName.endsWith(".obf")) && zip){
-			String n = fileName;
-			if(fileName.endsWith(".odb")){
-				n = fileName.substring(0, fileName.length() - 4);
-			}
-			String zipFileName = n+".zip";
-			File zFile = new File(f.getParentFile(), zipFileName);
-			log.info("Zipping file " + fileName);
-			try {
-				ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(zFile));
-				zout.setLevel(9);
-				ZipEntry zEntry = new ZipEntry(fileName);
-				zEntry.setSize(f.length());
-				zout.putNextEntry(zEntry);
-				FileInputStream is = new FileInputStream(f);
-				byte[] BUFFER = new byte[8192];
-				int read = 0;
-				while((read = is.read(BUFFER)) != -1){
-					zout.write(BUFFER, 0, read);
-				}
-				is.close();
-				zout.close();
-			} catch (IOException e) {
-				log.error("Exception while zipping file", e);
-			}
-			if(f.delete()){
-				log.info("Source odb file was deleted");
-			}
-			toUpload = zFile;
-		}
-		
-		String regionName  = fileName.substring(0, fileName.lastIndexOf('_', fileName.indexOf('.')));
-		summary +=  regionName;
-		summary = summary.replace('_', ' ');
-		
-		List<File> splittedFiles = Collections.emptyList(); 
-		try {
-			splittedFiles = splitFiles(toUpload);
-			boolean uploaded = true;
-			for (File fs : splittedFiles) {
-				uploaded &= uploadFileToServer(fs, toUpload, summary);
-			}
-			// remove source file if file was splitted
-			if (uploaded) {
-				if (deleteFilesAfterUploading && toUpload.exists()) {
-					toUpload.delete();
-				} else if (backupUploadedFiles != null) {
-					File toBackup = new File(backupUploadedFiles, toUpload.getName());
-					if(toBackup.exists()){
-						toBackup.delete();
-					}
-					toUpload.renameTo(toBackup);
-				}
-			}
-			alreadyUploadedFiles.add(fileName);
-		} catch (IOException e) {
-			log.error("Input/output exception uploading " + fileName, e);
-		} finally {
-			// remove all splitted files
-			for(File fs : splittedFiles){
-				if(!fs.equals(toUpload)){
-					fs.delete();
-				}
-			}
-		}
-	}
-	
-	private List<File> splitFiles(File f) throws IOException {
-		double mbLengh = (double)f.length() / MB;
-		if(mbLengh < MAX_SIZE_TO_NOT_SPLIT) {
-			return Collections.singletonList(f);
-		} else {
-			ArrayList<File> arrayList = new ArrayList<File>();
-			FileInputStream in = new FileInputStream(f);
-			byte[] buffer = new byte[BUFFER_SIZE];
-			
-			int i = 1;
-			int read = 0;
-			while(read != -1){
-				File fout = new File(f.getParent(), f.getName() + "-"+i);
-				arrayList.add(fout);
-				FileOutputStream fo = new FileOutputStream(fout);
-				int limit = (int) (MAX_SIZE_TO_NOT_SPLIT * MB);
-				while(limit > 0 && ((read = in.read(buffer)) != -1)){
-					fo.write(buffer, 0, read);
-					limit -= read;
-				}
-				fo.flush();
-				fo.close();
-				i++;
-			}
-			
-			in.close();
-			
-			return arrayList;
-		}
-		
-	}
-	
-	private boolean uploadFileToServer(File f, File original, String summary) throws IOException {
-		if (f.length() / MB > MAX_UPLOAD_SIZE && uploadToOsmandGooglecode) {
-			System.err.println("ERROR : file " + f.getName() + " exceeded 200 mb!!! Could not be uploaded.");
-			return false; // restriction for google code
-		}
-		double originalLength = (double) original.length() / MB;
-		if (uploadToOsmandGooglecode) {
-			try {
-				DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName(), token, pagegen, cookieHSID, cookieSID);
-				if(f.getName().endsWith("obf.zip") && f.length() / MB < 5){
-					// try to delete without .zip part
-					DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName().substring(0, f.getName().length() - 4), 
-							token, pagegen, cookieHSID, cookieSID);
-				} else if(f.getName().endsWith("poi.zip") && f.length() / MB < 5){
-					// try to delete without .zip part
-					DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName().substring(0, f.getName().length() - 3) +"odb", 
-							token, pagegen, cookieHSID, cookieSID);
-				} else if(f.getName().endsWith(".zip-1") && f.length() / MB < 10){
-					DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName().substring(0, f.getName().length() - 2),
-							token, pagegen, cookieHSID, cookieSID);
-				}
-				try {
-					Thread.sleep(4000);
-				} catch (InterruptedException e) {
-					// wait 5 seconds
-				}
-			} catch (IOException e) {
-				log.warn("Deleting file from downloads" + f.getName() + " " + e.getMessage());
-			}
-		}
-		
-
-		MessageFormat dateFormat = new MessageFormat("{0,date,dd.MM.yyyy}", Locale.US);
-		MessageFormat numberFormat = new MessageFormat("{0,number,##.#}", Locale.US);
-		String size = numberFormat.format(new Object[] { originalLength });
-		String date = dateFormat.format(new Object[] { new Date(original.lastModified()) });
-		if (!uploadToOsmandGooglecode) {
-			uploadToDownloadOsmandNet(f, summary, size, date);
-		} else {
-			String descriptionFile = "{" + date + " : " + size + " MB}";
-			summary += " " + descriptionFile;
-			GoogleCodeUploadIndex uploader = new GoogleCodeUploadIndex();
-			uploader.setFileName(f.getAbsolutePath());
-			uploader.setTargetFileName(f.getName());
-			uploader.setProjectName("osmand");
-			uploader.setUserName(user);
-			uploader.setPassword(password);
-			uploader.setLabels("Type-Archive, Testdata");
-			uploader.setSummary(summary);
-			uploader.setDescription(summary);
-			uploader.upload();
-
-		}
-
-		return true;
-	}
-	
-	@SuppressWarnings("deprecation")
-	private void uploadToDownloadOsmandNet(File f, String description, String size, String date) throws IOException{
-		log.info("Uploading file " + f.getName() + " " + size + " MB " + date + " of " + description);
-		// Upload to ftp
-		FTPFileUpload upload = new FTPFileUpload();
-		upload.upload("download.osmand.net", user, password, "indexes/" + f.getName(), f, 1 << 15);
-		
-		
-		String url = "http://download.osmand.net/xml_update.php?";
-		url += "index="+URLEncoder.encode(f.getName());
-		url += "&description="+URLEncoder.encode(description);
-		url += "&date="+URLEncoder.encode(date);
-		url += "&size="+URLEncoder.encode(size);
-		url += "&action=update";
-		log.info("Updating index " + url);  //$NON-NLS-1$//$NON-NLS-2$
-		HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-		connection.setRequestMethod("POST");
-		connection.connect();
-		if(connection.getResponseCode() != HttpURLConnection.HTTP_OK){
-			log.error("Error updating indexes " + connection.getResponseMessage());
-		}
-		InputStream is = connection.getInputStream();
-		while(is.read() != -1);
-		connection.disconnect();
-		log.info("Finish updating index");
-	}
-	
 }

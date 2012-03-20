@@ -1,4 +1,4 @@
-% Czech navigation commands optimized for SVOX Classic TTS engine
+﻿% Czech navigation commands optimized for SVOX Classic TTS engine
 
 % TODO: 
 % maybe use "zahněte" instead of "odbočte"
@@ -27,37 +27,36 @@ pturn('right', ['vpravo']).
 pturn('right_sh', ['ostře vpravo']).
 pturn('right_sl', ['mírně vpravo']).
 
-prepare_turn(Turn, Dist) == ['po', D, 'budete odbočovat', M] :-
-                        distance(Dist,locative) == D, pturn(Turn, M).
-turn(Turn, Dist) == ['po', D, M] :- 
-                        distance(Dist,locative) == D, turn(Turn, M).
+prepare_turn(Turn, Dist) == ['po', D, 'budete odbočovat', M] :- distance(Dist,locative) == D, pturn(Turn, M).
+turn(Turn, Dist) == ['po', D, M] :- distance(Dist,locative) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
-prepare_make_ut(Dist) == ['po', D, 'se budete otáčet zpět'] :- 
-                distance(Dist,locative) == D.
-
-prepare_roundabout(Dist) == ['po', D, 'přijedete na kruhový objezd'] :- 
-                distance(Dist,locative) == D.
-
-make_ut(Dist) == ['po', D, 'se otočte zpět'] :- 
-                        distance(Dist,locative) == D.
+prepare_make_ut(Dist) == ['po', D, 'se budete otáčet zpět'] :- distance(Dist,locative) == D.
+make_ut(Dist) == ['po', D, 'se otočte zpět'] :- distance(Dist,locative) == D.
 make_ut == ['otočte se zpět'].
+make_ut_wp == ['otočte se zpět'].
 
-roundabout(Dist, _Angle, Exit) == ['po', D, 'vjeďte na kruhový objezd', 'a zvolte', E, 'výjezd'] :- 
-                distance(Dist,locative) == D, nth(Exit, nominative, E).
+
+prepare_roundabout(Dist) == ['po', D, 'přijedete na kruhový objezd'] :- distance(Dist,locative) == D.
+roundabout(Dist, _Angle, Exit) == ['po', D, 'vjeďte na kruhový objezd', 'a zvolte', E, 'výjezd'] :- distance(Dist,locative) == D, nth(Exit, nominative, E).
 roundabout(_Angle, Exit) == ['vyjeďte', E, 'výjezdem'] :- nth(Exit, instrumental, E).
 
-and_arrive_destination == ['a dorazíte do cíle']. % Miss and?
+% SVOX bug workaround - see below
+go_ahead == ['pokračujte rovně'].
+go_ahead(Dist) == ['pokračujte', D]:- distance(Dist,workaround) == D.
+
+and_arrive_destination == ['a dorazíte do cíle'].
+
 then == ['pak'].
 reached_destination == ['dorazili jste do cíle'].
 bear_right == ['držte se vpravo'].
 bear_left == ['držte se vlevo'].
-route_recalc(_Dist) == ['přepočítávám']. % nothing to said possibly beep?
-route_new_calc(Dist) == ['cesta je dlouhá', D] :- distance(Dist,accusative) == D. % nothing to said possibly beep?
 
-% SVOX bug workaround - see below
-go_ahead(Dist) == ['pokračujte', D]:- distance(Dist,workaround) == D.
-go_ahead == ['pokračujte rovně'].
+route_new_calc(Dist) == ['cesta je dlouhá', D] :- distance(Dist,accusative) == D.
+route_recalc(Dist) == ['přepočítávám', D] :- distance(Dist,accusative) == D.
+
+location_lost == ['Ztráta družicového signálu'].
+
 
 %% 
 nth(1, nominative, 'první').
@@ -95,6 +94,7 @@ nth(16, instrumental, 'šestnáctým').
 nth(17, nominative, 'sedmnáctý').
 nth(17, instrumental, 'sedmnáctým').
 
+
 %%% distance measure - accusative
 % workaround of wrong declination in SVOX
 % example: "pokracujte pet metru"
@@ -125,17 +125,15 @@ distance(Dist,locative) == ['přibližně jednom kilometru'] :- Dist < 1500.
 distance(Dist,locative) == ['přibližně', X, 'kilometrech'] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
 distance(Dist,locative) == [ X, 'kilometrech'] :- D is round(Dist/1000), num_atom(D, X).
 
+
 %% resolve command main method
 %% if you are familar with Prolog you can input specific to the whole mechanism,
 %% by adding exception cases.
 flatten(X, Y) :- flatten(X, [], Y), !.
 flatten([], Acc, Acc).
-flatten([X|Y], Acc, Res):- 
-                flatten(Y, Acc, R), flatten(X, R, Res).
+flatten([X|Y], Acc, Res):- flatten(Y, Acc, R), flatten(X, R, Res).
 flatten(X, Acc, [X|Acc]).
 
 resolve(X, Y) :- resolve_impl(X,Z), flatten(Z, Y).
 resolve_impl([],[]).
 resolve_impl([X|Rest], List) :- resolve_impl(Rest, Tail), ((X == L) -> append(L, Tail, List); List = Tail).
-
-

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<regions_list>
+		
+		<!--  Overview of regions -->
+		<!-- 1. Europe : 1.1 Great Britain 1.2 France 1.3  Germany -->
+		<!-- 2. Asia : 2.1 Russia and regions 2.2 Asia from geofabric 2.3 Rest asia from cloudmade  -->
+		<!-- 3. North america : 3.1 USA 3.2 Canada 3.3 Other north america + mexico  -->
+		<!-- 4. Central america  -->
+		<!-- 5. South america  -->
+		<!-- 6. Africa  -->
+		<!-- 7. Australia  -->
+		
+        <!-- Countries to download from geofabrik or cloudmade server -->
+		<!-- 1. EUROPE [SOURCE: GEOFABRIK.DE] -->
+		<regions siteToDownload="http://download.geofabrik.de/osm/europe/{0}.osm.pbf" region_prefix="" skip="false" region_suffix="_Europe">
+			<region name="albania" esize="6" />
+			<region name="andorra" esize="1" />
+			<region name="austria" esize="110" />
+			<region name="belarus" esize="45" />
+			<region name="belgium" esize="55" />
+			<region name="bosnia-herzegovina" esize="5" />
+			<region name="bulgaria" esize="15" />
+			<region name="croatia" esize="15" />
+			<region name="cyprus" esize="6" />
+			<region name="denmark" esize="80" />
+			<region name="estonia" esize="38" />
+			<region name="faroe_islands" esize="2" />
+			<region name="finland" esize="85" />
+			<region name="greece" esize="25" />
+			<region name="hungary" esize="20" />
+			<region name="iceland" esize="10" />
+			<region name="ireland" esize="30" />
+			<region name="isle_of_man" esize="1" />
+			<region name="kosovo" esize="10" />
+			<region name="latvia" esize="10" />
+			<region name="liechtenstein" esize="1" />
+			<region name="lithuania" esize="10" />
+			<region name="luxembourg" esize="10" />
+			<region name="macedonia" esize="10" />
+			<region name="malta" esize="1" />
+			<region name="moldova" esize="5" />
+			<region name="monaco" esize="1" />
+			<region name="montenegro" esize="2" />
+			<region name="norway" esize="65" />
+			<region name="poland" esize="90" />
+			<region name="portugal" esize="15" />
+			<region name="romania" esize="30" />
+			<region name="serbia" esize="15" />
+			<region name="slovakia" esize="80" cityAdminLevel="6"/>
+			<region name="slovenia" esize="15" />
+			<region name="spain" esize="150" />
+			<region name="sweden" esize="90" />
+			<region name="switzerland" esize="90" />
+			<region name="turkey" esize="20" />
+			<region name="ukraine" esize="25" />
+			
+			<region name="czech_republic" esize="180"/>
+			<region name="italy" esize="255"/>
+			<region name="netherlands" esize="450" cityAdminLevel="10"/>
+		</regions>
+
+		<!-- 1.1 GREAT BRITAIN [SOURCE: GEOFABRIK.DE] -->
+		<regions siteToDownload="http://download.geofabrik.de/osm/europe/great_britain/{0}.osm.pbf" region_prefix="GB_" skip="false" region_suffix="_Europe">
+			<region name="scotland" esize=""/>		
+			<region name="wales" esize="10"/>
+			<region name="england" esize="230"/>
+		</regions>
+							
+</regions_list> 

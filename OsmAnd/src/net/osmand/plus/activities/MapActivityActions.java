@@ -52,6 +52,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -92,6 +93,8 @@ public class MapActivityActions implements DialogProvider {
 	}
 	
 	private Bundle enhance(Bundle bundle, double latitude, double longitude, final int zoom) {
+		bundle.putDouble(KEY_LATITUDE, latitude);
+		bundle.putDouble(KEY_LONGITUDE, longitude);
 		bundle.putInt(KEY_ZOOM, zoom);
 		return bundle;
 	}
@@ -115,7 +118,7 @@ public class MapActivityActions implements DialogProvider {
 	
 	protected Dialog createAddFavouriteDialog(final Bundle args) {
     	Builder builder = new AlertDialog.Builder(mapActivity);
-		builder.setTitle(R.string.favourites_edit_dialog_title);
+		builder.setTitle(R.string.favourites_context_menu_edit);
 		final View v = mapActivity.getLayoutInflater().inflate(R.layout.favourite_edit_dialog, null, false);
 		final FavouritesDbHelper helper = getMyApplication().getFavorites();
 		builder.setView(v);
@@ -196,10 +199,12 @@ public class MapActivityActions implements DialogProvider {
     private Dialog createAddWaypointDialog(final Bundle args) {
     	Builder builder = new AlertDialog.Builder(mapActivity);
 		builder.setTitle(R.string.add_waypoint_dialog_title);
+		FrameLayout parent = new FrameLayout(mapActivity);
 		final EditText editText = new EditText(mapActivity);
 		editText.setId(R.id.TextView);
-		builder.setView(editText);
-		editText.setPadding(5, 0, 5, 0);
+		parent.setPadding(15, 0, 15, 0);
+		parent.addView(editText);
+		builder.setView(parent);
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
 			@Override
@@ -208,6 +213,9 @@ public class MapActivityActions implements DialogProvider {
 				double longitude = args.getDouble(KEY_LONGITUDE);
 				String name = editText.getText().toString();
 				mapActivity.getSavingTrackHelper().insertPointData(latitude, longitude, System.currentTimeMillis(), name);
+				if(OsmandSettings.getOsmandSettings(mapActivity).SHOW_CURRENT_GPX_TRACK.get()) {
+					getMyApplication().favorites.addFavoritePointToGPXFile(new FavouritePoint(latitude, longitude, name, ""));
+				}
 				AccessibleToast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_waypoint_dialog_added), name), Toast.LENGTH_SHORT)
 							.show();
 				dialog.dismiss();
@@ -359,7 +367,7 @@ public class MapActivityActions implements DialogProvider {
 					String email = mapActivity.getString(R.string.send_location_email_pattern, shortOsmUrl, appLink);
 					Intent intent = new Intent(Intent.ACTION_SEND);
 					intent.setType("vnd.android.cursor.dir/email"); //$NON-NLS-1$
-					intent.putExtra(Intent.EXTRA_SUBJECT, "Mine location"); //$NON-NLS-1$
+					intent.putExtra(Intent.EXTRA_SUBJECT, "Location"); //$NON-NLS-1$
 					intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(email));
 					intent.setType("text/html");
 					mapActivity.startActivity(Intent.createChooser(intent, getString(R.string.send_location)));
@@ -408,7 +416,7 @@ public class MapActivityActions implements DialogProvider {
 		builder.setTitle(R.string.show_route);
 		builder.setView(mapActivity.accessibleMessage(mapActivity.getRoutingHelper().getGeneralRouteInformation()));
 		builder.setPositiveButton(R.string.default_buttons_save, saveDirections);
-		builder.setNeutralButton(R.string.route_about, showRoute);
+		builder.setNeutralButton(R.string.show_route, showRoute);
 		builder.setNegativeButton(R.string.close, null);
 		return builder.create();
     }
@@ -502,7 +510,7 @@ public class MapActivityActions implements DialogProvider {
 				boolean changed = settings.APPLICATION_MODE.set(mode);
 				if (changed) {
 					mapActivity.updateApplicationModeSettings();	
-					mapActivity.getMapView().refreshMap();
+					mapActivity.getMapView().refreshMap(true);
 				}
 				
 				Location location = getLocationToStartFrom(lat, lon); 
@@ -526,18 +534,17 @@ public class MapActivityActions implements DialogProvider {
 		};
     	
     	builder.setView(view);
+	builder.setTitle(R.string.get_directions);
     	if (followEnabled) {
-    		builder.setTitle(R.string.follow_route);
 			builder.setPositiveButton(R.string.follow, followCall);
 			builder.setNeutralButton(R.string.gpx_navigation, useGpxNavigation);
 			builder.setNegativeButton(R.string.only_show, onlyShowCall);
 		} else {
-			builder.setTitle(R.string.show_route);
-			view.findViewById(R.id.TextView).setVisibility(View.GONE);
-    		builder.setPositiveButton(R.string.show_gpx_route, onlyShowCall);
-    		builder.setNegativeButton(R.string.default_buttons_cancel, null);
-    	}
-    	builder.show();
+			// view.findViewById(R.id.TextView).setVisibility(View.GONE);
+			builder.setPositiveButton(R.string.show_gpx_route, onlyShowCall);
+			builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		}
+	builder.show();
     }
     
     protected OsmandApplication getMyApplication() {
@@ -607,7 +614,7 @@ public class MapActivityActions implements DialogProvider {
 						if (changed) {
 							mapActivity.updateApplicationModeSettings();	
 						}
-						mapActivity.getMapView().refreshMap();
+						mapActivity.getMapView().refreshMap(changed);
 						if(endPoint != null){
 							settings.FOLLOW_THE_ROUTE.set(true);
 							settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
@@ -621,7 +628,7 @@ public class MapActivityActions implements DialogProvider {
 				builder.show();
 				return true;
 			}
-		}, false);
+		}, false, false);
 	}
     
     private ApplicationMode getAppMode(ToggleButton[] buttons, OsmandSettings settings){

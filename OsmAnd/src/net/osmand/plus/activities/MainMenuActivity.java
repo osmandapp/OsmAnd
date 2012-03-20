@@ -4,14 +4,15 @@ import java.io.File;
 import java.text.MessageFormat;
 import java.util.Random;
 
+import com.google.android.apps.analytics.easytracking.TrackedActivity;
+
 import net.osmand.Version;
-import net.osmand.access.AccessibleActivity;
+import net.osmand.access.AccessibleTrackedActivity;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.render.MapRenderRepositories;
-import net.osmand.plus.render.NativeOsmandLibrary;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -39,7 +40,7 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 
-public class MainMenuActivity extends AccessibleActivity {
+public class MainMenuActivity extends AccessibleTrackedActivity {
 
 	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
 	private static final String VECTOR_INDEXES_CHECK = "VECTOR_INDEXES_CHECK"; //$NON-NLS-1$
@@ -77,7 +78,7 @@ public class MainMenuActivity extends AccessibleActivity {
 						text.append("\nProduct : ").append(Build.PRODUCT); //$NON-NLS-1$
 						text.append("\nBuild : ").append(Build.DISPLAY); //$NON-NLS-1$
 						text.append("\nVersion : ").append(Build.VERSION.RELEASE); //$NON-NLS-1$
-						text.append("\nApp Version : ").append(Version.APP_NAME_VERSION); //$NON-NLS-1$
+						text.append("\nApp Version : ").append(Version.getAppName(MainMenuActivity.this)); //$NON-NLS-1$
 						try {
 							PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
 							if (info != null) {
@@ -130,13 +131,13 @@ public class MainMenuActivity extends AccessibleActivity {
 		rightview = (View) window.findViewById(R.id.SearchButton);
 		rightview.startAnimation(getAnimation(1, 0));
 		
-		String textVersion = Version.APP_VERSION + " " + Version.APP_DESCRIPTION;
+		String textVersion = Version.getAppVersion(activity);
 		final TextView textVersionView = (TextView) window.findViewById(R.id.TextVersion);
 		textVersionView.setText(textVersion);
 		SharedPreferences prefs = activity.getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
 		
 		// only one commit should be with contribution version flag
-//		 prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
+		// prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
 		if (prefs.contains(CONTRIBUTION_VERSION_FLAG)) {
 			SpannableString content = new SpannableString(textVersion);
 			content.setSpan(new ClickableSpan() {
@@ -245,7 +246,7 @@ public class MainMenuActivity extends AccessibleActivity {
 		if(!pref.contains(FIRST_TIME_APP_RUN)){
 			firstTime = true;
 			pref.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
-			pref.edit().putString(VERSION_INSTALLED, Version.APP_VERSION).commit();
+			pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(activity)).commit();
 			
 			applicationInstalledFirstTime();
 		} else {
@@ -254,8 +255,8 @@ public class MainMenuActivity extends AccessibleActivity {
 				pref.edit().putInt(TIPS_SHOW, ++i).commit();
 			}
 			boolean appVersionChanged = false;
-			if(!Version.APP_VERSION.equals(pref.getString(VERSION_INSTALLED, ""))){
-				pref.edit().putString(VERSION_INSTALLED, Version.APP_VERSION).commit();
+			if(!Version.getFullVersion(activity).equals(pref.getString(VERSION_INSTALLED, ""))){
+				pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(activity)).commit();
 				appVersionChanged = true;
 			}
 						

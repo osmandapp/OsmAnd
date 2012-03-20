@@ -13,6 +13,7 @@ import java.util.Locale;
 import net.osmand.access.AccessibleToast;
 import net.osmand.Algoritms;
 import net.osmand.FavouritePoint;
+import net.osmand.GPXUtilities;
 import net.osmand.LogUtil;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
@@ -110,8 +111,9 @@ public class OsmandApplication extends Application {
 		return poiFilters;
 	}
 	
-	public void setGpxFileToDisplay(GPXFile gpxFileToDisplay) {
+	public void setGpxFileToDisplay(GPXFile gpxFileToDisplay, boolean showCurrentGpxFile) {
 		this.gpxFileToDisplay = gpxFileToDisplay;
+		osmandSettings.SHOW_CURRENT_GPX_TRACK.set(showCurrentGpxFile);
 		if(gpxFileToDisplay == null){
 			getFavorites().setFavoritePointsFromGPXFile(null);
 		} else {
@@ -310,6 +312,20 @@ public class OsmandApplication extends Application {
 
 	}
 	
+	public String exportFavorites(File f) {
+		GPXFile gpx = new GPXFile();
+		for (FavouritePoint p : getFavorites().getFavouritePoints()) {
+			if (p.isStored()) {
+				WptPt pt = new WptPt();
+				pt.lat = p.getLatitude();
+				pt.lon = p.getLongitude();
+				pt.name = p.getName() + "_" + p.getCategory();
+				gpx.points.add(pt);
+			}
+		}
+		return GPXUtilities.writeGpxFile(f, gpx, this);
+	}
+	
 	private void startApplicationBackground() {
 		List<String> warnings = null;
 		try {
@@ -319,6 +335,7 @@ public class OsmandApplication extends Application {
 				boolean initialized = NativeOsmandLibrary.getLibrary(storage) != null;
 				if (!initialized) {
 					LOG.info("Native library could not loaded!");
+					osmandSettings.NATIVE_RENDERING.set(false);
 				}
 			}
 			warnings = manager.reloadIndexes(startDialog);
@@ -329,6 +346,17 @@ public class OsmandApplication extends Application {
 				warnings.addAll(helper.saveDataToGpx());
 			}
 			helper.close();
+			
+			// restore backuped favorites to normal file
+			final File appDir = OsmandSettings.getOsmandSettings(this).extendOsmandPath(ResourceManager.APP_DIR);
+			File save = new File(appDir, FavouritesDbHelper.FILE_TO_SAVE);
+			File bak = new File(appDir, FavouritesDbHelper.FILE_TO_BACKUP);
+			if (bak.exists() && (!save.exists() || bak.lastModified() > save.lastModified())) {
+				if (save.exists()) {
+					save.delete();
+				}
+				bak.renameTo(save);
+			}
 		} finally {
 			synchronized (OsmandApplication.this) {
 				final ProgressDialog toDismiss;

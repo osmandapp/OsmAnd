@@ -6,7 +6,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
@@ -34,7 +33,7 @@ public class PointNavigationLayer extends OsmandMapLayer {
 	private void initUI() {
 		
 		point = new Paint();
-		point.setColor(Color.rgb(250, 80, 80));
+		point.setColor(view.getResources().getColor(R.color.nav_point));
 		point.setAntiAlias(true);
 		point.setStyle(Style.FILL);
 
@@ -60,7 +59,7 @@ public class PointNavigationLayer extends OsmandMapLayer {
 
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		if(pointToNavigate == null){
 			return;
 		}

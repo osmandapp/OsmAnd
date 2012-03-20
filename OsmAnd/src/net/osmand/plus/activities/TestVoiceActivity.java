@@ -6,11 +6,7 @@ package net.osmand.plus.activities;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
-import net.osmand.plus.voice.CommandPlayerException;
-import net.osmand.plus.voice.CommandPlayerFactory;
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,25 +70,26 @@ public class TestVoiceActivity extends Activity {
 	}
 	
 	private void addButtons(final LinearLayout ll, CommandPlayer p) {
-		addButton(ll, "New route is calculated (15350 m)", builder(p).newRouteCalculated(15350));
-		addButton(ll, "Prepare 400 m make UT", builder(p).prepareMakeUT(400));
-		addButton(ll, "Prepare 320 m make right turn", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 320));
-		addButton(ll, "In 370 m make right sharp turn", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, 370));
-		addButton(ll, "In 1050 m make left slight turn", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SL, 1050));
-		addButton(ll, "Make left turn", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT));
-		addButton(ll, "Prepare right SL turn in 850 and then bear right", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT_SL, 850).then().bearRight());
-		addButton(ll, "Go ahead 800 and arrive at destination", builder(p).goAhead(800).andArriveAtDestination());
+		addButton(ll, "New route was calculated (15350m)", builder(p).newRouteCalculated(15350));
+		addButton(ll, "After 1050m turn slightly left", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SL, 1050));
+		addButton(ll, "Turn left", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT));
+		addButton(ll, "Prepare to turn right after 320m", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 320));
+		addButton(ll, "After 370m turn sharply right", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, 370));
+		addButton(ll, "Prepare to turn slighlty left after 850m then bear right", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_SL, 850).then().bearRight());
+		addButton(ll, "Turn sharply right then bear left", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH).then().bearLeft());
+		addButton(ll, "Prepare to make a U-turn after 400m", builder(p).prepareMakeUT(400));
+		addButton(ll, "After 640m make a U-turn", builder(p).makeUT(640));
+		addButton(ll, "Make a U-turn", builder(p).makeUT());
+		addButton(ll, "When possible, make a U-turn", builder(p).makeUTwp());
+		addButton(ll, "Prepare to enter a roundabout after 750m", builder(p).prepareRoundAbout(750));
+		addButton(ll, "After 450m enter the roundabout and take the 1st exit", builder(p).roundAbout(450, 0, 1));
+		addButton(ll, "Roundabout: Take the 3rd exit", builder(p).roundAbout(0, 3));
+		addButton(ll, "GPS signal lost", builder(p).gpsLocationLost());
+		addButton(ll, "Route recalculated (23150m)", builder(p).routeRecalculated(23150));
+		addButton(ll, "Continue straight ahead", builder(p).goAhead());
+		addButton(ll, "Follow the road for 2350m", builder(p).goAhead(2350));
+		addButton(ll, "Follow the road for 800m and arrive at destination", builder(p).goAhead(800).andArriveAtDestination());
 		addButton(ll, "Arrive at destination", builder(p).arrivedAtDestination());
-		addButton(ll, "Gps location lost", builder(p).gpsLocationLost());
-		addButton(ll, "Make UT in 640", builder(p).makeUT(640));
-		addButton(ll, "Make UT", builder(p).makeUT());
-		addButton(ll, "Route recalculated 23150", builder(p).routeRecalculated(23150));
-		addButton(ll, "Prepare roundabout 750", builder(p).prepareRoundAbout(750));
-		addButton(ll, "Roundabout 3 exit", builder(p).roundAbout(0, 3));
-		addButton(ll, "Go ahead", builder(p).goAhead());
-		addButton(ll, "Go ahead 2350 m", builder(p).goAhead(2350));
-		addButton(ll, "In 450 roundabout 1 exit", builder(p).roundAbout(450, 0, 1));
-		addButton(ll, "Rright sharp turn and then bear left", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH).then().bearLeft());
 		ll.forceLayout();
 	}
 	

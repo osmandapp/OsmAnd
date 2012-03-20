@@ -8,13 +8,10 @@ import org.apache.commons.logging.Log;
 
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.os.Looper;
-
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
-import net.osmand.data.MapTileDownloader;
 import net.osmand.data.TransportStop;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
@@ -36,7 +33,6 @@ public class AsyncLoadingThread extends Thread {
 	AmenityLoadRequest poiLoadRequest = null;
 	TransportLoadRequest transportLoadRequest = null;
 	
-	private static final MapTileDownloader downloader = MapTileDownloader.getInstance();
 	
 	private final ResourceManager resourceManger;
 
@@ -57,17 +53,17 @@ public class AsyncLoadingThread extends Thread {
 		asyncLoadingTransport = new Handler(h.getLooper());
 	}
 
-	private int calculateProgressStatus(){
+	private int calculateProgressStatus() {
 		int progress = 0;
-		if (downloader.isSomethingBeingDownloaded()) {
+		if (resourceManger.getMapTileDownloader() != null && resourceManger.getMapTileDownloader().isSomethingBeingDownloaded()) {
 			progress = BusyIndicator.STATUS_GREEN;
 		} else if (resourceManger.getContext().getRoutingHelper().isRouteBeingCalculated()) {
 			progress = BusyIndicator.STATUS_BLUE;
 		} else if (!requests.isEmpty()) {
 			progress = BusyIndicator.STATUS_BLACK;
-		} else if(poiLoadRequest != null && poiLoadRequest.isRunning()) {
+		} else if (poiLoadRequest != null && poiLoadRequest.isRunning()) {
 			progress = BusyIndicator.STATUS_BLACK;
-		} else if(transportLoadRequest != null && transportLoadRequest.isRunning()) {
+		} else if (transportLoadRequest != null && transportLoadRequest.isRunning()) {
 			progress = BusyIndicator.STATUS_BLACK;
 		}
 		return progress;
@@ -120,14 +116,14 @@ public class AsyncLoadingThread extends Thread {
 					} else if (req instanceof MapLoadRequest) {
 						if (!mapLoaded) {
 							MapLoadRequest r = (MapLoadRequest) req;
-							resourceManger.getRenderer().loadMap(r.tileBox, downloader.getDownloaderCallbacks());
+							resourceManger.getRenderer().loadMap(r.tileBox, resourceManger.getMapTileDownloader().getDownloaderCallbacks());
 							mapLoaded = true;
 						}
 					}
 				}
 				if (tileLoaded || amenityLoaded || transportLoaded || mapLoaded) {
 					// use downloader callback
-					for (IMapDownloaderCallback c : downloader.getDownloaderCallbacks()) {
+					for (IMapDownloaderCallback c : resourceManger.getMapTileDownloader().getDownloaderCallbacks()) {
 						c.tileDownloaded(null);
 					}
 				}
@@ -165,11 +161,11 @@ public class AsyncLoadingThread extends Thread {
 	}
 	
 	public boolean isFileCurrentlyDownloaded(File fileToSave) {
-		return downloader.isFileCurrentlyDownloaded(fileToSave);
+		return resourceManger.getMapTileDownloader().isFileCurrentlyDownloaded(fileToSave);
 	}
 
 	public void requestToDownload(TileLoadDownloadRequest req) {
-		downloader.requestToDownload(req);
+		resourceManger.getMapTileDownloader().requestToDownload(req);
 	}
 
 	protected static class TileLoadDownloadRequest extends DownloadRequest {
@@ -187,7 +183,7 @@ public class AsyncLoadingThread extends Thread {
 		}
 	}
 
-	protected static class MapObjectLoadRequest<T> implements ResultMatcher<T> {
+	protected class MapObjectLoadRequest<T> implements ResultMatcher<T> {
 		protected double topLatitude;
 		protected double bottomLatitude;
 		protected double leftLongitude;
@@ -219,7 +215,7 @@ public class AsyncLoadingThread extends Thread {
 		public void finish() {
 			running = false;
 			// use downloader callback
-			for (IMapDownloaderCallback c : downloader.getDownloaderCallbacks()) {
+			for (IMapDownloaderCallback c : resourceManger.getMapTileDownloader().getDownloaderCallbacks()) {
 				c.tileDownloaded(null);
 			}
 		}
@@ -236,7 +232,7 @@ public class AsyncLoadingThread extends Thread {
 
 	}
 
-	protected static class AmenityLoadRequest extends MapObjectLoadRequest<Amenity> {
+	protected class AmenityLoadRequest extends MapObjectLoadRequest<Amenity> {
 		private final List<AmenityIndexRepository> res;
 		private final PoiFilter filter;
 		private final int zoom;
@@ -279,7 +275,7 @@ public class AsyncLoadingThread extends Thread {
 
 	}
 
-	protected static class TransportLoadRequest extends MapObjectLoadRequest<TransportStop> {
+	protected class TransportLoadRequest extends MapObjectLoadRequest<TransportStop> {
 		private final List<TransportIndexRepository> repos;
 		private int zoom;
 

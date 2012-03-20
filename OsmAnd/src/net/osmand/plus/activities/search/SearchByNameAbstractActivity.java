@@ -6,16 +6,20 @@ import java.util.List;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.LogUtil;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import android.app.ListActivity;
+import net.osmand.plus.activities.OsmandListActivity;
+
+import org.apache.commons.logging.Log;
+
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.AsyncTask.Status;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -31,7 +35,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
-public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
+public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity {
 
 	private EditText searchText;
 	private AsyncTask<Object, ?, ?> initializeTask;
@@ -47,6 +51,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 	protected Collator collator;
 	protected NamesFilter namesFilter;
 	private String currentFilter = "";
+	private static final Log log = LogUtil.getLog(SearchByNameAbstractActivity.class); 
 	
 
 	@Override
@@ -170,6 +175,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public NamesAdapter getListAdapter() {
 		return (NamesAdapter) super.getListAdapter();
@@ -246,7 +252,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 		@Override
 		protected void publishResults(CharSequence constraint, FilterResults results) {
 			if(results != null && initializeTaskIsFinished()){
-				System.out.println("Search " + constraint + " finished in " + (System.currentTimeMillis() - startTime));
+				log.debug("Search " + constraint + " finished in " + (System.currentTimeMillis() - startTime));
 				progress.setVisibility(View.INVISIBLE);
 			}
 		}

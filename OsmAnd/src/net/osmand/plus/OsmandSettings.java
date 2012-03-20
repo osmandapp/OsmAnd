@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.RelativeDirectionStyle;
 import net.osmand.map.ITileSource;
@@ -199,6 +200,7 @@ public class OsmandSettings {
 		return internetConnectionAvailable;
 	}
 	
+	
 	/////////////// PREFERENCES classes ////////////////
 	
 	public abstract class CommonPreference<T> implements OsmandPreference<T> {
@@ -297,7 +299,7 @@ public class OsmandSettings {
 		}
 		
 		private BooleanPreference(String id, boolean defaultValue, boolean global, boolean cache) {
-			super(id, global, cache);
+			super(id, global, cache, defaultValue);
 		}
 		
 		@Override
@@ -433,7 +435,7 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_HIGH_RES_MAPS =
-		new BooleanPreference("use_high_res_maps", false, false, true);
+		new BooleanPreference("use_high_res_maps", false, true, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Float> MAP_TEXT_SIZE =
@@ -467,16 +469,22 @@ public class OsmandSettings {
 	public final OsmandPreference<String> USER_PASSWORD = 
 		new StringPreference("user_password", "", true);
 
+	public static final String LOCAL_OPENSTREETMAP_POINTS = "local_openstreetmap_points";
+
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<DayNightMode> DAYNIGHT_MODE = 
-		new EnumIntPreference<DayNightMode>("daynight_mode", DayNightMode.AUTO, false, DayNightMode.values()) {
+	public final CommonPreference<DayNightMode> DAYNIGHT_MODE = 
+		new EnumIntPreference<DayNightMode>("daynight_mode", DayNightMode.DAY, false, DayNightMode.values()) {
 		@Override
 		protected boolean setValue(SharedPreferences prefs, DayNightMode val) {
 			ctx.getDaynightHelper().setDayNightMode(val);
 			return super.setValue(prefs, val);
 		}
 	};
+	{
+		DAYNIGHT_MODE.setModeDefaultValue(ApplicationMode.CAR, DayNightMode.AUTO);
+		DAYNIGHT_MODE.setModeDefaultValue(ApplicationMode.BICYCLE, DayNightMode.AUTO);
+	}
 		
 	
 	// this value string is synchronized with settings_pref.xml preference name
@@ -507,6 +515,17 @@ public class OsmandSettings {
 		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.BICYCLE, 10);
 		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 20);
 	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<Boolean> LIVE_MONITORING = new BooleanPreference("live_monitoring", false, false);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<Integer> LIVE_MONITORING_INTERVAL = new IntPreference("live_monitoring_interval", 5, false);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<String> LIVE_MONITORING_URL = new StringPreference("live_monitoring_url", 
+			"http://example.com?lat={0}&lon={1}&timestamp={2}&hdop={3}&altitude={4}&speed={5}", false);
+
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_OSMAND_ROUTING_SERVICE_ALWAYS = 
@@ -543,13 +562,14 @@ public class OsmandSettings {
 	// seconds to auto_follow 
 	public final CommonPreference<Integer> AUTO_FOLLOW_ROUTE = new IntPreference("auto_follow_route", 0, false);
 	{
-		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.CAR, 7);
+		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.CAR, 10);
 		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.BICYCLE, 10);
 		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 15);
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Boolean> AUTO_FOLLOW_ROUTE_NAV = new BooleanPreference("auto_follow_route_navigation", true, false);
+	// try without AUTO_FOLLOW_ROUTE_NAV (see forum discussion 'Simplify our navigation preference menu')
+	//public final CommonPreference<Boolean> AUTO_FOLLOW_ROUTE_NAV = new BooleanPreference("auto_follow_route_navigation", true, false);
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final int ROTATE_MAP_NONE = 0;
@@ -588,7 +608,7 @@ public class OsmandSettings {
 			AudioManager.STREAM_MUSIC, true);
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> USE_ENGLISH_NAMES = new BooleanPreference("use_english_names", false, true);
+	public final OsmandPreference<Boolean> USE_ENGLISH_NAMES = new BooleanPreference("use_english_names", false, false);
 	
 	public boolean usingEnglishNames(){
 		return USE_ENGLISH_NAMES.get();
@@ -596,31 +616,31 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> MAP_VECTOR_DATA = new BooleanPreference("map_vector_data",
-			false, true);
+			false, false);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_OVERLAY = new StringPreference("map_overlay",
-			null, true);
+			null, false);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_UNDERLAY = new StringPreference("map_underlay",
-			null, true);
+			null, false);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Integer> MAP_OVERLAY_TRANSPARENCY = new IntPreference("overlay_transparency",
-			200, true);
+			200, false);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Integer> MAP_TRANSPARENCY = new IntPreference("map_transparency",
-			255, true);
+			255, false);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference("map_tile_sources",
-			TileSourceManager.getMapnikSource().getName(), true);
+			TileSourceManager.getMapnikSource().getName(), false);
 	
 	public List<TileSourceTemplate> getInternetAvailableSourceTemplates(){
 		if(internetAvailableSourceTemplates == null && isInternetConnectionAvailable()){
-			internetAvailableSourceTemplates = TileSourceManager.downloadTileSourceTemplates();
+			internetAvailableSourceTemplates = TileSourceManager.downloadTileSourceTemplates(Version.getVersionAsURLParam(ctx));
 		}
 		return internetAvailableSourceTemplates;
 	}
@@ -802,12 +822,19 @@ public class OsmandSettings {
 		return label;
 	}
 	
+	private Object objectToShow;
+	public Object getAndClearObjectToShow(){
+		Object objectToShow = this.objectToShow;
+		this.objectToShow = null;
+		return objectToShow;
+	}
+	
 	public int getMapZoomToShow() {
 		return globalPreferences.getInt(MAP_ZOOM_TO_SHOW, 5);
 	}
 	
 	public void setMapLocationToShow(double latitude, double longitude, int zoom, String historyDescription,
-			String labelToShow) {
+			String labelToShow, Object toShow) {
 		Editor edit = globalPreferences.edit();
 		edit.putFloat(MAP_LAT_TO_SHOW, (float) latitude);
 		edit.putFloat(MAP_LON_TO_SHOW, (float) longitude);
@@ -818,17 +845,18 @@ public class OsmandSettings {
 		}
 		edit.putInt(MAP_ZOOM_TO_SHOW, zoom);
 		edit.commit();
+		objectToShow = toShow;
 		if(historyDescription != null){
 			SearchHistoryHelper.getInstance().addNewItemToHistory(latitude, longitude, historyDescription, ctx);
 		}
 	}
 	
 	public void setMapLocationToShow(double latitude, double longitude, int zoom) {
-		setMapLocationToShow(latitude, longitude, zoom,  null, null);
+		setMapLocationToShow(latitude, longitude, zoom,  null, null, null);
 	}
 
 	public void setMapLocationToShow(double latitude, double longitude, int zoom, String historyDescription){
-		setMapLocationToShow(latitude, longitude, zoom, historyDescription, historyDescription);
+		setMapLocationToShow(latitude, longitude, zoom, historyDescription, historyDescription, null);
 	}
 
 	// Do not use that method if you want to show point on map. Use setMapLocationToShow
@@ -1067,6 +1095,9 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> SERVICE_OFF_INTERVAL = new IntPreference("service_off_interval", 
 			5 * 60 * 1000, true);
 	
+	public final CommonPreference<Boolean> SHOW_CURRENT_GPX_TRACK = 
+			new BooleanPreference("show_current_gpx_track", false, true, true);
+	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Integer> SERVICE_OFF_WAIT_INTERVAL = new IntPreference("service_off_wait_interval", 
 			90 * 1000, true);
@@ -1091,7 +1122,25 @@ public class OsmandSettings {
 	}
 	
 	public final CommonPreference<Boolean> SHOW_ALTITUDE_INFO = 
-			new BooleanPreference("show_altitude_info", false, false);
+			new BooleanPreference("show_altitude_info", false, false, true);
+	{
+		SHOW_ALTITUDE_INFO.setModeDefaultValue(ApplicationMode.CAR, false);
+	}
+	
+	public final CommonPreference<Boolean> SHOW_ZOOM_LEVEL = 
+			new BooleanPreference("show_zoom_level", false, false, true);
+	
+
+	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS = 
+			new IntPreference("free_downloads", 0, true);
+	
+	public boolean checkFreeDownloadsNumberZero(){
+		if(!globalPreferences.contains(NUMBER_OF_FREE_DOWNLOADS.getId())){
+			NUMBER_OF_FREE_DOWNLOADS.set(0);
+			return true;
+		}
+		return false;
+	}
 	
 	public enum DayNightMode {
 		AUTO(R.string.daynight_mode_auto), 

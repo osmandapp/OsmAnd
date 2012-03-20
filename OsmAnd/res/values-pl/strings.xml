@@ -19,14 +19,14 @@
 <string name="use_transparent_map_theme_descr">Użyj przezroczystych kontrolek mapy</string>
 <string name="use_transparent_map_theme">Przezroczysty styl</string>
 <string name="appearance_settings_descr">Konfiguruj wygląd aplikacji</string>
-<string name="appearance_settings">Wygląd</string>
+<string name="appearance_settings">- Wygląd</string>
 <string name="native_library_not_supported">Biblioteka renderowania natywnego nie jest obsługiwana na tym urządzeniu.</string>
 <string name="init_native_library">Inicjalizacja biblioteki renderowania natywnego...</string>
 
 <string name="sendtoOSM_confirmation_msg">Wysłać do OSM: %1$s?</string>
 <string name="pref_vector_rendering">Opcje dotyczące rendera wektorowego</string>
 <string name="pref_overlay">Overlay / underlay</string>
-<string name="pref_raster_map">Ustawienia mapy kafelkowej</string>
+<string name="pref_raster_map">Ustawienia źródło mapy</string>
 <string name="pref_vector_map">Ustawienia mapy wektorowej</string>
 
 <string name="choose_auto_follow_route">Auto-podążanie za pozycją</string>
@@ -36,7 +36,6 @@
 <string name="auto_follow_route_navigation_descr">Włącz podążanie za pozycją tylko w trybie nawigacji.</string>
 <string name="auto_follow_location_enabled">Podążanie za pozycją jest włączone.</string>
 
-<!-- string name="delete_confirmation_title">Usuwanie</string -->
 <string name="delete_confirmation_msg">Czy na pewno usunąć %1$s?</string>
 <string name="city_type_suburb">Dzielnica</string>
 <string name="city_type_hamlet">Przysiółek</string>
@@ -54,7 +53,7 @@
 \n\t- dodano opcję autostartu nawigacji (zgłoszenie nr 356)
 \n\t- nawigacja wg śladu GPX przeniesiona została do menu \'Nawigacja\'
 \n\t- dane POI teraz są w plikach .obf
-\n\t- poprawiono błedy komunikatów głosowych (ustalenie pozycji GPS, pomijanie pierwszej komendy) 
+\n\t- poprawiono błędy komunikatów głosowych (ustalenie pozycji GPS, pomijanie pierwszej komendy) 
 \n\t- naprawiono inne, drobne błędy
 </string>
 <string name="file_can_not_be_renamed">Nazwa pliku nie może zostać zmieniona.</string>
@@ -103,7 +102,7 @@
 <string name="menu_save_directions">Zapisz kierunki</string>
 <string name="local_index_upload_gpx_description">Wyślij ślady GPX do społeczności OSM. Pomoże to ulepszyć mapę.</string>
 <string name="local_index_items_uploaded">%1$d z %2$d został wysłany.</string>
-<string name="local_index_mi_upload_gpx">Wyślij do OSM...</string>
+<string name="local_index_mi_upload_gpx">Wyślij do OSM</string>
 
 <string name="show_more_map_detail">Pokaż więcej szczegółów na mapie</string>
 <string name="show_more_map_detail_descr">Pokazuje więcej szczegółów na mapie wektorowej na niższych poziomach powiększenia</string>
@@ -121,7 +120,7 @@
 <string name="local_index_gpx_info_speed">\nŚrednia prędkość: %1$s \nMaksymalna prędkość: %2$s</string>
 <string name="local_index_gpx_info_elevation">\nŚrednia wysokość: %1$.0f m\nMinimalna wysokość: %2$.0f m\nMaksymalna wysokość: %3$.0f m\nWzniosy: %4$.0f m\nSpadki: %5$.0f m</string>
 <string name="local_index_gpx_info">Subtracks : %1$d\nWszystkie punkty: %2$d\nWay points : %3$d\nCałkowity dystans: %4$s\nCzas startu: %5$tD %5$tR\nCzas zakończenia: %6$tD %6$tR</string>
-<string name="local_index_installed">Zainstalowano</string>
+<string name="local_index_installed">Wydanie</string>
 <string name="local_index_items_backuped">%1$d z %2$d zarchiwizowano.</string>
 <string name="local_index_items_deleted">%1$d z %2$d skasowano.</string>
 <string name="local_index_items_restored">%1$d z %2$d przywrócono.</string>
@@ -129,11 +128,11 @@
 <string name="local_index_action_do">Zamierzasz %1$s %2$s elementów. Kontynuować?</string>
 <string name="local_index_descr_title">Zarządzanie danymi offline</string>
 
-<string name="local_index_mi_restore">Przywróć...</string>
-<string name="local_index_mi_backup">Zarchiwizuj...</string>
-<string name="local_index_mi_delete">Skasuj...</string>
-<string name="local_index_mi_reload">Odśwież...</string>
-<string name="local_index_download">Pobierz</string>
+<string name="local_index_mi_restore">Przywróć</string>
+<string name="local_index_mi_backup">Zarchiwizuj</string>
+<string name="local_index_mi_delete">Skasuj</string>
+<string name="local_index_mi_reload">Odśwież</string>
+<string name="local_index_download">Pobierz...</string>
 <string name="local_index_tile_data">Dane kafelkowe: %1$s \nMinimalny zoom: %2$d\nMaksymalny zoom: %3$d\nMożliwe do pobrania: %4$s \nPobrano poziomy: %5$s</string>
 <string name="local_index_poi_data">Dane POI</string>
 <string name="local_index_address_data">Dane adresowe</string>
@@ -159,14 +158,14 @@
 \n\t- wyszukiwanie głosowe w nawigacji za pomocą TTS
 \n\t- render mapy pokazuje więcej szczegółów
 \n\t- mapa podstawowa zawarta w aplikacji
-\n\t- ulepszenie routingu offline (ciągle experymentalny)
+\n\t- ulepszenie routingu offline (ciągle eksperymentalny)
 \n\t- opcje routingu dla GPX
 \n\t- aktualizacja interfejsu i poprawka wielu błędów
 </string>
 <string name="voice_not_use">Nie używaj</string>
 <string name="voice_not_specified">Brak</string>
 <string name="installing_new_resources">Rozpakowywanie nowych danych...</string>
-<string name="internet_connection_required_for_online_route">Próbujesz użyć usługi online do wyznaczenia trasy, ale nie masz połączenia z Internetem. Możesz spróbować użyć ekperymentalnej obsługi routingu wbudowanej w program (wybierz w \'Ustawienia\' -&gt; \'Nawigacja\'.</string>
+<string name="internet_connection_required_for_online_route">Próbujesz użyć usługi online do wyznaczenia trasy, ale nie masz połączenia z Internetem.</string>
 <string name="tts_language_not_supported_title">Język niewspierany</string>
 <string name="tts_language_not_supported">Wybrany język jest niewspierany przez zainstalowany mechanizm TTS (text-to-speech). Czy chcesz odwiedzić Android Market, by poszukać innego silnika TTS? W innym przypadku zostanie użyty bieżący język.</string>
 <string name="tts_missing_language_data_title">Brakujące dane</string>
@@ -243,7 +242,7 @@
 \n\tAby wyświetlić wszystkie ulubione punkty bezpośrednio na mapie, włącz warstwę \'Ulubione\' w \'Zdefiniuj widok\'.</string>
 
 <string name="error_doing_search">Wystąpił błąd podczas wyszukiwania offline</string>
-<string name="search_offline_geo_error">Nie można zinterpretować {0}</string>
+<string name="search_offline_geo_error">Nie można zinterpretować \'%s\'</string>
 <string name="search_osm_offline">Wyszukaj adres korzystając z map offline</string>
 
 <string name="system_locale">System</string>
@@ -287,7 +286,7 @@
 <string name="mile_per_hour">mph</string>
 <string name="mile">mi</string>
 <string name="send_location_way_choose_title">Udostępnij pozycję GPS używając:</string>
-<string name="send_location_sms_pattern">Jestem tutaj: %1$s\n%2$s</string>
+<string name="send_location_sms_pattern">Pozycja: %1$s\n%2$s</string>
 <string name="send_location_email_pattern">To see location follow the web browser link %1$s or android intent link %2$s</string>
 <string name="send_location">Wyślij pozycję GPS</string>
 <string name="context_menu_item_share_location">Share location</string>
@@ -337,7 +336,7 @@
 
 <string name="use_osmand_routing_service">OsmAnd routing</string>
 <string name="use_osmand_routing_service_descr">Użyj routingu offline dla długich tras (funkcjonalność eksperymentalna)</string>
-<string name="osmand_routing_experimental">Routing offline OsmAnd-a jest funcją eksperymentalną i nie działa dobrze dla odległości większych niż 20km.\n Usługa routująca jest automatycznie przełączana do Cloudmade (online).</string>
+<string name="osmand_routing_experimental">Routing offline OsmAnd-a jest funkcją eksperymentalną i nie działa dobrze dla odległości większych niż 20km.\n\nUsługa routująca jest automatycznie przełączana do CloudMade (online).</string>
 <string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
 <string name="application_dir">Storage directory</string>
 <string name="application_dir_change_warning">Changing the storage directory will not move or delete the data. This must be performed separately and outside OsmAnd. Continue anyway?</string>
@@ -372,7 +371,7 @@
 <string name="general_settings_descr">Skonfiguruj użycie Internetu, opcje wyświetlania i inne</string>
 <string name="general_settings">Ustawienia główne</string>
 <string name="rendering_settings_descr">Skonfiguruj źródło mapy i wygląd</string>
-<string name="rendering_settings">Mapy</string>
+<string name="rendering_settings">- Mapy</string>
 <string name="index_settings_descr">Pobierz/zarządzaj mapami i danymi offline</string>
 <string name="index_settings">Dane offline</string>
 <string name="osmand_service">Usługa w tle</string>
@@ -415,12 +414,12 @@
 
 <string name="map_route_by_gpx">Trasa z wykorzystaniem GPX</string>
 <string name="gpx_files_not_found">GPX files not found in /tracks directory</string>
-<string name="layer_gpx_layer">Ślady GPX...</string>
+<string name="layer_gpx_layer">Ślad GPX...</string>
 <string name="error_reading_gpx">Błąd odczytu danych GPX</string>
 
 <string name="vector_data">Mapy wektorowe offline</string>
 <string name="transport_context_menu">Search transport at stop</string>
-<string name="point_on_map">Punkt na mapie:\n Szer. {0,number,#.####}\n Dł. {1,number,#.####}</string>
+<string name="point_on_map">Pozycja:\n Szer. %1$.5f\n Dł. %2$.5f</string>
 <string name="osb_bug_name">Błąd</string>
 <string name="poi_context_menu_modify">Modyfikuj POI</string>
 <string name="poi_context_menu_delete">Usuń POI</string>
@@ -437,7 +436,7 @@
 <string name="import_fav">Import</string>
 <string name="export_fav">Eksport</string>
 <string name="error_occurred_loading_gpx">Wystąpił błąd podczas ładowania GPX</string>
-<string name="send_report">Wyslij zgłoszenie</string>
+<string name="send_report">Wyślij zgłoszenie</string>
 <string name="none_region_found">Brak danych offline na karcie SD. Pobierz je z Internetu.</string>
 <string name="poi_namefinder_query_empty">Wprowadź zapytanie by znaleźć POI</string>
 <string name="any_poi">Jakiekolwiek</string>
@@ -474,7 +473,7 @@
 <string name="background_router_service">Użyj usługi w tle</string>
 <string name="off_router_service_no_gps_available">The background routing service requires a location source to be turned on.</string>
 <string name="routing_settings_descr">Skonfiguruj opcje routingu</string>
-<string name="routing_settings">Nawigacja</string>
+<string name="routing_settings">- Nawigacja</string>
 <string name="hide_poi_filter">Ukryj filtr</string>
 <string name="show_poi_filter">Pokaż filtr</string>
 <string name="search_poi_filter">Filtr</string>
@@ -539,7 +538,6 @@
 <string name="search_history_street">Ulica: {0}, {1}</string>
 <string name="search_history_int_streets">Przecięcie: {0} x {1} in {2}</string>
 <string name="search_history_building">Budynek: {0}, {1}, {2}</string>
-<string name="search_history_navigate_to">Naviguj do szer. = {0}, dł. = {1}</string>
 <string name="favorite">Ulubione</string>
 <string name="clear_all">Wyczyść wszystko</string>
 <string name="history">Historia</string>
@@ -554,8 +552,7 @@
 <string name="search_online_address">Internet</string>
 <string name="max_level_download_tile">Maks. zoom online</string>
 <string name="max_level_download_tile_descr">Choose maximum zoom level to download for online map tiles</string>
-<string name="route_about">O trasie</string>
-<string name="route_general_information">Dystans całkowity {0}, czas podróży {1} h {2} m.</string>
+<string name="route_general_information">Dystans całkowity %1$s, czas podróży %2$d h %3$d m.</string>
 <string name="router_service_descr">Wybierz usługę routującą (offline lub online)</string>
 <string name="router_service">Usługa routująca</string>
 <string name="sd_dir_not_accessible">Katalog zapisu na karcie SD jest niedostępny.</string>
@@ -567,7 +564,7 @@
 <string name="downloading_file">Pobieranie pliku...</string>
 <string name="downloading">Pobieranie...</string>
 <string name="downloading_list_indexes">Pobieranie listy dostępnych regionów...</string>
-<string name="list_index_files_was_not_loaded">Lista regionów nie została pobrana z osmand.googlecode.com.</string>
+<string name="list_index_files_was_not_loaded">Lista regionów nie została pobrana z osmand.net.</string>
 <string name="select_index_file_to_download">If you can\'t find your region, you can make it yourself. See osmand.net</string>
 <string name="show_poi_on_map">Pokaż na mapie</string>
 <string name="fav_points_edited">Ulubiony punkt został zmieniony</string>
@@ -576,7 +573,6 @@
 <string name="only_show">Tylko pokaż</string>
 <string name="follow">Prowadź</string>
 <string name="recalculate_route_to_your_location">Wybierz rodzaj pojazdu (opcjonalnie) and guidance mode</string>
-<string name="follow_route">Prowadź</string>
 <string name="mark_final_location_first">Najpierw wybierz cel podróży</string>
 <string name="get_directions">Nawigacja</string>
 <string name="show_gps_status">Pokaż status GPS</string>
@@ -631,8 +627,8 @@
 <string name="save_current_track_descr">Zapisz bieżący ślad do karty SD</string>
 <string name="save_current_track">Zapisz bieżący ślad</string>
 <string name="save_track_interval_descr">Choose positioning interval for tracks</string>
-<string name="save_track_interval">Track interval</string>
-<string name="monitor_preferences">Zapisywanie śladów</string>
+<string name="save_track_interval">Logging interval</string>
+<string name="monitor_preferences">- Zapisywanie śladów</string>
 <string name="save_track_to_gpx_descrp">Ślady zostaną zapisane do katalogu grupami wg dni</string>
 <string name="save_track_to_gpx">Zapisuj ślad do GPX</string>
 <string name="navigate_to">Nawiguj do</string>
@@ -665,7 +661,7 @@
 
 <string name="show_poi_over_map_description">Pokaż POI na mapie (używa ostatnio wybranego filtru)</string>
 <string name="show_poi_over_map">Pokaż POI</string>
-<string name="map_tile_source_descr">Wybierz źródło mapy kafelkowej (online lub offline): </string>
+<string name="map_tile_source_descr">Wybierz źródło mapy kafelkowej (online lub offline)</string>
 <string name="map_tile_source">Źródło mapy kafelkowej</string>
 <string name="map_source">Źródło mapy</string>
 <string name="use_internet">Korzystaj z Internetu</string>
@@ -736,13 +732,11 @@
 <string name="add_favorite_dialog_default_favourite_name">Ulubione</string>
 <string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>
 
-<!-- string name="favourites_context_menu_title">Menu kontekstowe</string -->
 <string name="favourites_context_menu_navigate">Nawiguj do</string>
 <string name="favourites_context_menu_edit">Edytuj</string>
 <string name="favourites_context_menu_delete">Usuń</string>
-<string name="favourites_edit_dialog_title">Zmień nazwę</string>
 
-<string name="favourites_remove_dialog_title">Czy na pewno chcesz usunąć ulubiony punkt?</string>
+<string name="favourites_remove_dialog_msg">Czy na pewno chcesz usunąć ulubiony punkt \'%s\'?</string>
 <string name="favourites_remove_dialog_success">Ulubiony punkt {0} został usunięty.</string>
 
 <string name="osb_add_dialog_title">Wprowadź opis błędu</string>

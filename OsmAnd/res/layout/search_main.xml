@@ -6,22 +6,34 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" android:orientation="vertical">
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal"> 
-   		   <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/search_back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="@drawable/tab_back_button"
+                android:text="" />
+
+   		  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 		  android:layout_marginLeft = "3dp" android:text="@string/select_search_position" android:layout_gravity="center_vertical|left">
    		  </TextView>
-   		   <Spinner android:layout_marginLeft = "5dp" android:id="@+id/SpinnerLocation"
-   		    android:drawSelectorOnTop="true" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
-  		</LinearLayout>
-  
+   		  <Spinner
+                android:id="@+id/SpinnerLocation"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/tab_search_panel_selector"
+                />
+	</LinearLayout>
         <TabWidget
             android:id="@android:id/tabs"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
-        <FrameLayout
+		<FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-             />
+            android:layout_height="fill_parent" />
     </LinearLayout>
 </TabHost>

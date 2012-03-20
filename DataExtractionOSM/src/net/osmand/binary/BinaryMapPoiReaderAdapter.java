@@ -433,7 +433,7 @@ public class BinaryMapPoiReaderAdapter {
 					codedIS.seek(offsets[j] + indexOffset);
 					int len = readInt();
 					int oldLim = codedIS.pushLimit(len);
-					readPoiData(left31, right31, top31, bottom31, req, req.getSearchResults(), region, skipTiles, zoomToSkip);
+					readPoiData(left31, right31, top31, bottom31, req, region, skipTiles, zoomToSkip);
 					codedIS.popLimit(oldLim);
 					if(req.isCancelled()){
 						return;
@@ -489,7 +489,7 @@ public class BinaryMapPoiReaderAdapter {
 	}
 
 	private void readPoiData(int left31, int right31, int top31, int bottom31, 
-			SearchRequest<Amenity> req, List<Amenity> result, PoiRegion region, TLongHashSet toSkip, int zSkip) throws IOException {
+			SearchRequest<Amenity> req, PoiRegion region, TLongHashSet toSkip, int zSkip) throws IOException {
 		int x = 0;
 		int y = 0;
 		int zoom = 0;
@@ -522,15 +522,17 @@ public class BinaryMapPoiReaderAdapter {
 						int yp = (int) MapUtils.getTileNumberY(zSkip, am.getLocation().getLatitude());
 						long val = (((long) xp) << zSkip) | yp;
 						if (!toSkip.contains(val)) {
-							toSkip.add(val);
-							result.add(am);
+							boolean publish = req.publish(am);
+							if(publish) {
+								toSkip.add(val);
+							}
 						}
 						if(zSkip <= zoom){
 							codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 							return;
 						}
 					} else {
-						result.add(am);
+						req.publish(am);
 					}
 				}
 				break;
@@ -617,6 +619,9 @@ public class BinaryMapPoiReaderAdapter {
 				break;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.PHONE_FIELD_NUMBER:
 				am.setPhone(codedIS.readString());
+				break;
+			case OsmandOdb.OsmAndPoiBoxDataAtom.NOTE_FIELD_NUMBER:
+				am.setDescription(codedIS.readString());
 				break;
 			default:
 				skipUnknownField(t);

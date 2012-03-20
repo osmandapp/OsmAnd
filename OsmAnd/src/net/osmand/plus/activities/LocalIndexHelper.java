@@ -205,17 +205,17 @@ public class LocalIndexHelper {
 		Map<String, String> loadedMaps = app.getResourceManager().getIndexFileNames();
 		List<LocalIndexInfo> result = new ArrayList<LocalIndexInfo>();
 		
-		loadVoiceData(settings.extendOsmandPath(ResourceManager.VOICE_PATH), result, false, loadTask);
-		loadObfData(settings.extendOsmandPath(ResourceManager.MAPS_PATH), result, false, loadTask, loadedMaps);
-		loadPoiData(settings.extendOsmandPath(ResourceManager.POI_PATH), result, false, loadTask);
-		loadGPXData(settings.extendOsmandPath(ResourceManager.GPX_PATH), result, false, loadTask);
 		loadTilesData(settings.extendOsmandPath(ResourceManager.TILES_PATH), result, false, loadTask);
-		
-		loadVoiceData(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), result, true, loadTask);
-		loadObfData(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), result, true, loadTask, loadedMaps);
-		loadPoiData(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), result, true, loadTask);
-		loadGPXData(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), result, true, loadTask);
 		loadTilesData(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), result, false, loadTask);
+		loadObfData(settings.extendOsmandPath(ResourceManager.MAPS_PATH), result, false, loadTask, loadedMaps);
+		loadObfData(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), result, true, loadTask, loadedMaps);
+		loadPoiData(settings.extendOsmandPath(ResourceManager.POI_PATH), result, false, loadTask);
+		loadPoiData(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), result, true, loadTask);
+		loadVoiceData(settings.extendOsmandPath(ResourceManager.VOICE_PATH), result, false, loadTask);
+		loadVoiceData(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), result, true, loadTask);
+		loadGPXData(settings.extendOsmandPath(ResourceManager.GPX_PATH), result, false, loadTask);
+		loadGPXData(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), result, true, loadTask);
+		
 		
 		return result;
 	}
@@ -390,12 +390,12 @@ public class LocalIndexHelper {
 
 
 	public enum LocalIndexType {
+		TILES_DATA(R.string.local_indexes_cat_tile),
+		MAP_DATA(R.string.local_indexes_cat_map),
+		POI_DATA(R.string.local_indexes_cat_poi),
 		VOICE_DATA(R.string.local_indexes_cat_voice),
 		TTS_VOICE_DATA(R.string.local_indexes_cat_tts),
-		TILES_DATA(R.string.local_indexes_cat_tile),
-		GPX_DATA(R.string.local_indexes_cat_gpx),
-		MAP_DATA(R.string.local_indexes_cat_map),
-		POI_DATA(R.string.local_indexes_cat_poi);
+		GPX_DATA(R.string.local_indexes_cat_gpx);
 		
 		private final int resId;
 

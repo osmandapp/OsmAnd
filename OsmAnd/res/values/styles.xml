@@ -44,4 +44,58 @@
 		<item name="@android:windowEnterAnimation">@anim/grow_from_bottom</item>
 		<item name="@android:windowExitAnimation">@anim/shrink_from_top</item>
 	</style>
+	
+	<!-- The gray theme related styles -->
+    <style name="WhiteTitleText" parent="android:style/TextAppearance.Large">
+    </style>
+    <style name="WhiteText" parent="android:style/TextAppearance">
+        <item name="android:textColor">@color/activity_text</item>
+    </style>
+    <style name="ListText">
+        <item name="android:textSize">25sp</item>
+    </style>
+    <style name="ListText.Small">
+        <item name="android:textSize">21sp</item>
+    </style>
+    <style name="OsmandDialog" parent="android:style/Theme.Light">
+        <item name="android:background">@color/color_white</item>
+        <item name="android:textColor">@color/color_black</item>
+    </style>
+    <style name="OsmandTheme" parent="@android:style/Theme">
+        
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@color/activity_background</item>
+        <item name="android:colorBackground">@color/activity_background</item>
+        <item name="android:colorBackgroundCacheHint">?android:attr/colorBackground</item>
+
+            
+        <item name="android:textColorPrimary">@color/activity_text</item>
+        <item name="android:textColorSecondary">@color/activity_text</item>
+        <item name="android:textColorTertiary">@color/activity_text</item>
+        
+        <item name="android:listViewStyle">@style/OsmandListView</item> <!-- makes problem on preference sub-screen, because, that is still black-->
+     </style>
+    <style name="Widget.DropDownItem" parent="@android:style/Widget.DropDownItem">
+		<item name="android:textColor">@color/color_black</item>
+    </style>
+    <style name="CustomWindowTitleBackground">
+        <item name="android:background">@color/activity_background</item>
+    </style>
+    <style name="CustomTitleTheme" parent="OsmandTheme">
+        <item name="android:windowTitleSize">46dp</item>
+        <item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>
+    </style>
+    <style name="CustomTitleTheme.Preference" parent="CustomTitleTheme">
+        <item name="android:windowBackground">@android:color/background_dark</item>
+        <item name="android:colorBackground">@android:color/background_dark</item>
+        <item name="android:colorBackgroundCacheHint">?android:attr/colorBackground</item>
+        </style>
+    <style name="OsmandListView" parent="@android:style/Widget.ListView">
+        <item name="android:divider">@drawable/tab_text_separator</item>
+    </style>
+    <style name="OsmandSpinner" parent="@android:style/Widget.TextView.SpinnerItem">
+        <item name="android:textColor">@color/color_black</item>
+    </style>
+    
+        
 </resources>

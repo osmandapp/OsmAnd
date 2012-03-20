@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<regions_list>
+		
+        <!-- 2. ASIA -->
+		<!-- 2.1 Russia [GIS-LAB.INFO] -->
+		<regions siteToDownload="http://gis-lab.info/data/osm/{0}/{0}.osm.bz2" region_prefix="Russia_"  skip="false" region_suffix="_Asia">
+			<region name="adygeya" esize=""/>
+			<region name="altay" esize=""/>
+			<region name="altayskiy" esize=""/>
+			<region name="amur" esize=""/>
+			<region name="arkhan" esize=""/>
+			<region name="astrakhan" esize=""/>
+			<region name="bashkir" esize=""/>
+			<region name="belgorod" esize=""/>
+			<region name="bryansk" esize=""/> 
+			<region name="buryat" esize=""/>
+			<region name="chechen" esize=""/>
+			<region name="chel" esize=""/>
+			<region name="chukot" esize=""/>
+			<region name="chuvash" esize=""/>
+			<region name="dagestan" esize=""/>
+			<region name="evrey" esize=""/>
+			<region name="ingush" esize=""/>
+			<region name="irkutsk" esize=""/>
+			<region name="ivanov" esize=""/>
+			<region name="kabardin" esize=""/>
+			<region name="kalinin" esize=""/>
+			<region name="kalmyk" esize=""/>
+			<region name="kaluzh" esize=""/>
+			<region name="kamch" esize=""/>
+			<region name="karach" esize=""/>
+			<region name="karel" esize=""/>
+			<region name="kemerovo" esize=""/>
+			<region name="khabar" esize=""/>
+			<region name="khakas" esize=""/>
+			<region name="khanty" esize=""/>
+			<region name="kirov" esize=""/>
+			<region name="komi" esize=""/>
+			<region name="kostrom" esize=""/>
+			<region name="krasnodar" esize=""/>
+			<region name="krasnoyarsk" esize=""/>
+			<region name="kurgan" esize=""/>
+			<region name="kursk" esize=""/>
+			<region name="leningrad" esize=""/>
+			<region name="lipetsk" esize=""/>
+			<region name="magadan" esize=""/>
+			<region name="mariyel" esize=""/>
+			<region name="mordov" esize=""/>
+			<region name="moscow" esize=""/>
+			<region name="mosobl" esize=""/>
+			<region name="murmansk" esize=""/>
+			<region name="nenec" esize=""/>
+			<region name="nizhegorod" esize=""/>
+			<region name="novgorod" esize=""/>
+			<region name="novosib" esize=""/>
+			<region name="omsk" esize=""/>
+			<region name="orenburg" esize=""/>
+			<region name="orlovsk" esize=""/>
+			<region name="osetiya" esize=""/>
+			<region name="penz" esize=""/>
+			<region name="perm" esize=""/>
+			<region name="prim" esize=""/>
+			<region name="pskov" esize=""/>
+			<region name="rostov" esize=""/>
+			<region name="ryazan" esize=""/>
+			<region name="sakhalin" esize=""/>
+			<region name="samar" esize=""/>
+			<region name="saratov" esize=""/>
+			<region name="smol" esize=""/>
+			<region name="stavrop" esize=""/>
+			<region name="stpeter" esize=""/>
+			<region name="sverdl" esize=""/>
+			<region name="tambov" esize=""/>
+			<region name="tatar" esize=""/>
+			<region name="tomsk" esize=""/>
+			<region name="tul" esize=""/>
+			<region name="tumen" esize=""/>
+			<region name="tver" esize=""/>
+			<region name="tyva" esize=""/>
+			<region name="udmurt" esize=""/>
+			<region name="ulyan" esize=""/>
+			<region name="vladimir" esize=""/>
+			<region name="volgograd" esize=""/>
+			<region name="vologda" esize=""/>
+			<region name="voronezh" esize=""/>
+			<region name="yakut" esize=""/>
+			<region name="yamal" esize=""/>
+			<region name="yarosl" esize=""/>
+			<region name="zabaikal" esize=""/>
+		</regions>
+		
+		<regions siteToDownload="http://downloads.cloudmade.com/asia/northern_asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia"  skip="true">
+      			<region name="russia" esize="820"/> 
+	        </regions>
+		
+			
+</regions_list> 

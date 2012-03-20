@@ -19,7 +19,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DialogProvider;
 import net.osmand.plus.activities.MapActivity;
-
 import org.apache.commons.logging.Log;
 
 import android.app.AlertDialog;
@@ -29,7 +28,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
@@ -101,11 +99,11 @@ public class OsmBugsLayer extends OsmandMapLayer implements ContextMenuLayer.ICo
 			
 		}
 		pointOpenedUI = new Paint();
-		pointOpenedUI.setColor(Color.RED);
+		pointOpenedUI.setColor(activity.getResources().getColor(R.color.osmbug_opened));
 		pointOpenedUI.setAlpha(200);
 		pointOpenedUI.setAntiAlias(true);
 		pointClosedUI = new Paint();
-		pointClosedUI.setColor(Color.GREEN);
+		pointClosedUI.setColor(activity.getResources().getColor(R.color.osmbug_closed));
 		pointClosedUI.setAlpha(200);
 		pointClosedUI.setAntiAlias(true);
 	}
@@ -131,7 +129,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements ContextMenuLayer.ICo
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		if (view.getZoom() >= startZoom) {
 			// request to load
 			requestToLoad(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, view.getZoom());
@@ -199,35 +197,42 @@ public class OsmBugsLayer extends OsmandMapLayer implements ContextMenuLayer.ICo
 		return false;
 	}
 	
-	public OpenStreetBug getBugFromPoint(PointF point){
-		OpenStreetBug result = null;
+	public void getBugFromPoint(PointF point, List<? super OpenStreetBug> res){
 		if (objects != null && view != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
 			int radius = getRadiusBug(view.getZoom()) * 3 / 2;
+			int small = getRadiusBug(view.getZoom()) * 3 / 4;
 			try {
 				for (int i = 0; i < objects.size(); i++) {
 					OpenStreetBug n = objects.get(i);
 					int x = view.getRotatedMapXForPoint(n.getLatitude(), n.getLongitude());
 					int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
 					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
-						radius = Math.max(Math.abs(x - ex), Math.abs(y - ey));
-						result = n;
+						radius = small;
+						res.add(n);
 					}
 				}
 			} catch (IndexOutOfBoundsException e) {
 				// that's really rare case, but is much efficient than introduce synchronized block
 			}
 		}
-		return result;
 	}
 
 	@Override
 	public boolean onSingleTap(PointF point) {
-		OpenStreetBug bug = getBugFromPoint(point);
-		if(bug != null){
-			String format = activity.getString(R.string.osb_bug_name)+ " : " + bug.getName(); //$NON-NLS-1$
-			AccessibleToast.makeText(activity, format, Toast.LENGTH_LONG).show();
+		ArrayList<OpenStreetBug> list = new ArrayList<OpenStreetBug>();
+		getBugFromPoint(point, list);
+		if(!list.isEmpty()){
+			StringBuilder res = new StringBuilder();
+			int i = 0;
+			for(OpenStreetBug o : list) {
+				if (i++ > 0) {
+					res.append("\n\n");
+				}
+				res.append(activity.getString(R.string.osb_bug_name)+ " : " + o.getName()); //$NON-NLS-1$
+			}
+			AccessibleToast.makeText(activity, res.toString(), Toast.LENGTH_LONG).show();
 			return true;
 		}
 		return false;
@@ -477,8 +482,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements ContextMenuLayer.ICo
 	}
 
 	@Override
-	public Object getPointObject(PointF point) {
-		return getBugFromPoint(point);
+	public void collectObjectsFromPoint(PointF point, List<Object> res) {
+		getBugFromPoint(point, res);
 	}
 
 	@Override

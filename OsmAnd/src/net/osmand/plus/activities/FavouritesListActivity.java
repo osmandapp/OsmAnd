@@ -6,6 +6,8 @@ package net.osmand.plus.activities;
 import java.util.Comparator;
 import java.util.List;
 
+import com.google.android.apps.analytics.easytracking.TrackedListActivity;
+
 import net.osmand.FavouritePoint;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
@@ -33,7 +35,7 @@ import android.widget.TextView;
 /**
  * 
  */
-public class FavouritesListActivity extends ListActivity implements SearchActivityChild {
+public class FavouritesListActivity extends TrackedListActivity implements SearchActivityChild {
 
 	public static final String SELECT_FAVORITE_POINT_INTENT_KEY = "SELECT_FAVORITE_POINT_INTENT_KEY"; 
 	public static final int SELECT_FAVORITE_POINT_RESULT_OK = 1;
@@ -48,6 +50,8 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 		super.onCreate(icicle);
 		ListView lv = new ListView(this);
 		lv.setId(android.R.id.list);
+		lv.setCacheColorHint(getResources().getColor(R.color.activity_background));
+		lv.setDivider(getResources().getDrawable(R.drawable.tab_text_separator));
 		setContentView(lv);
 
 		favouritesAdapter = new FavouritesAdapter(((OsmandApplication) getApplication()).getFavorites().getFavouritePoints());
@@ -126,7 +130,7 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 				if (which == 0) {
 					OsmandSettings settings = OsmandSettings.getOsmandSettings(FavouritesListActivity.this);
 					settings.setMapLocationToShow(entry.getLatitude(), entry.getLongitude(),  settings.getLastKnownMapZoom(), 
-							 null, getString(R.string.favorite)+" : " + entry.getName()); //$NON-NLS-1$
+							 null, getString(R.string.favorite)+" : " + entry.getName(), entry); //$NON-NLS-1$
 				} else if (which == 1) {
 					OsmandSettings.getOsmandSettings(FavouritesListActivity.this).setPointToNavigate(entry.getLatitude(),
 							entry.getLongitude(), getString(R.string.favorite) + " : " + entry.getName());
@@ -147,7 +151,7 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 			FavouritePoint point = favouritesAdapter.getItem(position);
 			settings.SHOW_FAVORITES.set(true);
 			settings.setMapLocationToShow(point.getLatitude(), point.getLongitude(), settings.getLastKnownMapZoom(), null,
-					getString(R.string.favorite) + " : " + point.getName()); //$NON-NLS-1$
+					getString(R.string.favorite) + " : " + point.getName(), point); //$NON-NLS-1$
 			MapActivity.launchMapActivityMoveToTop(FavouritesListActivity.this);
 		} else {
 			Intent intent = getIntent();

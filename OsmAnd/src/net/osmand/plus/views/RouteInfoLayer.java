@@ -142,7 +142,7 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 	}
 
 	@Override
-	public void newRouteIsCalculated(boolean updateRoute) {
+	public void newRouteIsCalculated(boolean updateRoute, boolean makeUturnWhenPossible) {
 		directionInfo = -1;
 		if (!routingHelper.isFollowingMode()) {
 			visible = true;
@@ -166,7 +166,7 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, DrawSettings nightMode) {
 		
 	}
 	

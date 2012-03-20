@@ -1,4 +1,7 @@
 <?php
+include 'autoload.php';
+use UnitedPrototype\GoogleAnalytics;
+
 function downloadFile($filename) {
 	if (!file_exists($filename)) {
 		header('HTTP/1.0 404 Not Found');
@@ -75,13 +78,41 @@ function update_count_of_downloads($file) {
    die(1);
  }
  $file = $_GET['file'];
- //Victor says not needed if we have awstats statistics per file
- //if(!isset($_SERVER['HTTP_RANGE']) ) {
- // update_count_of_downloads($file) ;
- //}
+ // not used now
+ if(!isset($_SERVER['HTTP_RANGE']) ) {
+    // old version
+    // update_count_of_downloads($file) ;
+      
+    $tracker = new GoogleAnalytics\Tracker('UA-28342846-1', 'download.osmand.net');
+    $visitor = new GoogleAnalytics\Visitor();
+    $visitor->setIpAddress($_SERVER['REMOTE_ADDR']);
+    $visitor->setUserAgent($_SERVER['HTTP_USER_AGENT']);
+    $visitor->setScreenResolution('1024x768');
+    // Assemble Session information
+    // (could also get unserialized from PHP session)
+    $session = new GoogleAnalytics\Session();
+
+    // Assemble Page information
+    $page = new GoogleAnalytics\Page('/download.php?'.$file);
+    $page->setTitle('Download file '.$file);
+
+    // Track page view
+    $tracker->trackPageview($page, $session, $visitor);
+    
+    $event = new GoogleAnalytics\Event('Download '.$_SERVER['HTTP_USER_AGENT'], 'App', $file,1);
+    $tracker->trackEvent($event, $session, $visitor);
+ }
  set_time_limit(0);
- if(isset($_GET['direct']) or !url_exists('http://osmand.googlecode.com/files/'.$file)) {
-    downloadFile('indexes/'.$file);
+ $xml = simplexml_load_file("indexes.xml");
+ $res = $xml->xpath('//region[@name="'.$file.'"]');
+ if (count($res) > 0) {
+ 	$node = $res[0];
+ 	if($node["local"]) {
+ 		downloadFile('indexes/'.$file);
+ 	}  else {
+ 		header('HTTP/1.1 302 Found');
+ 		header('Location: http://osmand.googlecode.com/files/'.$file);
+ 	}
  } else {
     header('HTTP/1.1 302 Found');
     header('Location: http://osmand.googlecode.com/files/'.$file);

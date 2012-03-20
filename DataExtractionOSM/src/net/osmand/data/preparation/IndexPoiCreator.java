@@ -95,7 +95,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		Algoritms.removeAllFiles(poiIndexFile);
 	}
 
-	private void checkEntity(Entity e) {
+	public void checkEntity(Entity e) {
 		String name = e.getTag(OSMTagKey.NAME);
 		if (name == null) {
 			String msg = "";
@@ -131,6 +131,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		poiPreparedStatement.setString(8, amenity.getOpeningHours());
 		poiPreparedStatement.setString(9, amenity.getSite());
 		poiPreparedStatement.setString(10, amenity.getPhone());
+		poiPreparedStatement.setString(11, amenity.getDescription());
 		addBatch(poiPreparedStatement);
 	}
 
@@ -147,8 +148,8 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		// create database structure
 		Statement stat = poiConnection.createStatement();
 		stat.executeUpdate("create table " + IndexConstants.POI_TABLE + //$NON-NLS-1$
-				"(id bigint, x int, y int, name_en varchar(1024), name varchar(1024), "
-				+ "type varchar(1024), subtype varchar(1024), opening_hours varchar(1024), phone varchar(1024), site varchar(1024),"
+				" (id bigint, x int, y int, name_en varchar(1024), name varchar(1024), "
+				+ "type varchar(1024), subtype varchar(1024), opening_hours varchar(1024), phone varchar(1024), site varchar(1024), description varchar(4096), "
 				+ "primary key(id, type, subtype))");
 		stat.executeUpdate("create index poi_loc on poi (x, y, type, subtype)");
 		stat.executeUpdate("create index poi_id on poi (id, type, subtype)");
@@ -157,8 +158,8 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 
 		// create prepared statment
 		poiPreparedStatement = poiConnection
-				.prepareStatement("INSERT INTO " + IndexConstants.POI_TABLE + "(id, x, y, name_en, name, type, subtype, opening_hours, site, phone) " + //$NON-NLS-1$//$NON-NLS-2$
-						"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				.prepareStatement("INSERT INTO " + IndexConstants.POI_TABLE + "(id, x, y, name_en, name, type, subtype, opening_hours, site, phone, description) " + //$NON-NLS-1$//$NON-NLS-2$
+						"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		pStatements.put(poiPreparedStatement, 0);
 
 		poiConnection.setAutoCommit(false);
@@ -204,7 +205,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		// 0. process all entities
 		ResultSet rs;
 		if(useInMemoryCreator) {
-			rs = poiConnection.createStatement().executeQuery("SELECT x,y,name,name_en,type,subtype, id, opening_hours, site, phone from poi");
+			rs = poiConnection.createStatement().executeQuery("SELECT x,y,name,name_en,type,subtype,id,opening_hours,site, phone, description from poi");
 		} else {
 			rs = poiConnection.createStatement().executeQuery("SELECT x,y,name,name_en,type,subtype from poi");
 		}
@@ -216,6 +217,8 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		int minY = Integer.MAX_VALUE;
 		int maxY = 0;
 		int count = 0;
+		ConsoleProgressImplementation console = new ConsoleProgressImplementation();
+		console.startWork(1000000);
 		while (rs.next()) {
 			int x = rs.getInt(1);
 			int y = rs.getInt(2);
@@ -225,7 +228,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 			maxY = Math.max(y, maxY);
 			if(count++ > 10000){
 				count = 0;
-				log.info("proccess 10000 entities");
+				console.progress(10000);
 			}
 
 			String name = rs.getString(3);
@@ -276,6 +279,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 				poiData.openingHours = rs.getString(8);
 				poiData.site = rs.getString(9);
 				poiData.phone = rs.getString(10);
+				poiData.description = rs.getString(11);
 				prevTree.getNode().poiData.add(poiData);
 				
 			}
@@ -342,7 +346,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 					buildTypeIds(type, subtype, categories, catIndexes, types);
 					int x24shift = (x31 >> 7) - (x << (24 - z));
 					int y24shift = (y31 >> 7) - (y << (24 - z));
-					writer.writePoiDataAtom(poi.id, x24shift, y24shift, poi.nameEn, poi.name, types, poi.openingHours, poi.site, poi.phone);	
+					writer.writePoiDataAtom(poi.id, x24shift, y24shift, poi.nameEn, poi.name, types, poi.openingHours, poi.site, poi.phone, poi.description);	
 				}
 				
 			} else {
@@ -368,8 +372,9 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 					String openingHours = rset.getString(8);
 					String site = rset.getString(9);
 					String phone = rset.getString(10);
+					String description =  rset.getString(11);
 
-					writer.writePoiDataAtom(id, x24shift, y24shift, nameEn, name, types, openingHours, site, phone);
+					writer.writePoiDataAtom(id, x24shift, y24shift, nameEn, name, types, openingHours, site, phone, description);
 				}
 				rset.close();
 			}
@@ -458,6 +463,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		String openingHours;
 		String phone;
 		String site;
+		String description;
 	}
 	
 	public static class PoiTileBox {
@@ -548,8 +554,10 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 				}
 			} else {
 				int sum = 0;
-				for (Tree<T> t : subtrees) {
-					sum += t.getSubTreesOnLevel(level - 1);
+				if (subtrees != null) {
+					for (Tree<T> t : subtrees) {
+						sum += t.getSubTreesOnLevel(level - 1);
+					}
 				}
 				return sum;
 			}

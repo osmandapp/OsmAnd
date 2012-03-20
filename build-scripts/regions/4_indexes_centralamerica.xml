@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<regions_list>
+				
+		<!--  4. CENTRAL AMERICA [SOURCE: GEOFABRIK.DE] -->
+		<regions siteToDownload="http://download.geofabrik.de/osm/{0}.osm.pbf" region_prefix=""  skip="true" region_suffix="">
+			<region name="central-america" esize=""/>
+		</regions>	
+		<regions siteToDownload="http://download.geofabrik.de/osm/central-america/{0}.osm.pbf" region_prefix=""  skip="false" region_suffix="_CentralAmerica">
+			<region name="belize" esize="" />
+			<region name="guatemala" esize="" />
+			<region name="haiti-and-domrep" esize="" />
+			<region name="mexico" esize="" />
+			
+		</regions>
+		<!--  4. CENTRAL AMERICA [SOURCE: CLOUDMADE.DE] -->
+		<regions siteToDownload="http://downloads.cloudmade.com/americas/central_america/{0}/{0}.osm.bz2" region_prefix=""  skip="false" region_suffix="_CentralAmerica">
+			<region name="costa_rica" esize="" />
+			<region name="el_salvador" esize="" />
+			<region name="honduras" esize="" />
+			<region name="nicaragua" esize="" />
+			<region name="panama" esize="" />
+		</regions>
+		
+		<!--  4. CENTRAL AMERICA/CARIBBEANS [SOURCE: CLOUDMADE.DE] -->
+		<regions siteToDownload="http://downloads.cloudmade.com/americas/caribbean/{0}/{0}.osm.bz2" region_prefix=""  skip="false" region_suffix="_CentralAmerica">
+			<region name="trinidad_and_tobago" esize="" />
+			<region name="puerto_rico" esize="" />
+			<region name="netherlands_antilles" esize="" />
+			<region name="grenada" esize="" />
+			<region name="jamaica" esize="" />
+			<region name="haiti" esize="" />
+			<region name="guadeloupe" esize="" />
+			<region name="cuba" esize="" />
+			<region name="dominica" esize="" />
+			<region name="dominican_republic" esize="" />
+			<region name="bahamas" esize="" />
+			<region name="aruba" esize="" />
+		</regions>
+							
+</regions_list> 

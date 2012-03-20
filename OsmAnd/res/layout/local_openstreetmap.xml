@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent" android:orientation="vertical">
+
+<LinearLayout android:id="@+id/UploadAll" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="3dp">
+   <Button android:id="@+id/UploadAllButton" android:layout_width="wrap_content" android:layout_gravity="right" android:layout_height="wrap_content" android:text="@string/local_openstreetmap_uploadall"
+		android:layout_marginLeft = "3dp" android:layout_marginTop ="3dp" android:layout_marginRight = "3dp"/>
+</LinearLayout>
+
+<ExpandableListView android:id="@android:id/list" android:layout_width="fill_parent" android:layout_weight="1" android:layout_height="wrap_content" 
+		android:layout_marginLeft="3dp" android:layout_marginTop="3dp" android:layout_marginRight="3dp" ></ExpandableListView>
+
+</LinearLayout>

@@ -14,7 +14,8 @@
 </TableRow>
 <TableRow>
 <Button android:text="&lt;Type&gt;" android:id="@+id/TypeButton" android:layout_width="wrap_content" android:layout_height="wrap_content"/> 
-<AutoCompleteTextView android:text="" android:id="@+id/Type" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content"  android:layout_width ="fill_parent"/>    
+<AutoCompleteTextView 
+    android:text="" android:id="@+id/Type" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content"  android:layout_width ="fill_parent"/>    
 <!--  <EditText android:text="" android:id="@+id/Type" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content" android:layout_width = "fill_parent" /> -->
 </TableRow>
 <TableRow>

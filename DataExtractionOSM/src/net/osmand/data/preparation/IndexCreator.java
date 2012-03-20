@@ -50,7 +50,7 @@ public class IndexCreator {
 	// Sqlite better to use only for 32-bit machines 
 	public static DBDialect dialect = DBDialect.SQLITE;
 	public static DBDialect mapDBDialect = DBDialect.SQLITE;
-	public static boolean REMOVE_POI_DB = false; 
+	public static boolean REMOVE_POI_DB = true; 
 
 	public static final int BATCH_SIZE = 5000;
 	public static final int BATCH_SIZE_OSM = 10000;
@@ -70,12 +70,9 @@ public class IndexCreator {
 	private int zoomWaySmothness = 2;
 
 	private String regionName;
-	private String poiFileName = null;
 	private String mapFileName = null;
 	private Long lastModifiedDate = null;
 	
-	
-
 	
 	private IndexTransportCreator indexTransportCreator;
 	private IndexPoiCreator indexPoiCreator;
@@ -96,7 +93,7 @@ public class IndexCreator {
 
 	public static final int DEFAULT_CITY_ADMIN_LEVEL = 8;
 	private String cityAdminLevel = "" + DEFAULT_CITY_ADMIN_LEVEL;
-	
+
 
 	public IndexCreator(File workingDir) {
 		this.workingDir = workingDir;
@@ -145,9 +142,6 @@ public class IndexCreator {
 		return dialect.getDatabaseConnection(fileName, log);
 	}
 
-	public void setPoiFileName(String poiFileName) {
-		this.poiFileName = poiFileName;
-	}
 
 	public void setNodesDBFile(File file) {
 		dbFile = file;
@@ -177,10 +171,7 @@ public class IndexCreator {
 	}
 
 	public String getPoiFileName() {
-		if (poiFileName == null) {
-			return IndexConstants.POI_INDEX_DIR + getRegionName() + IndexConstants.POI_INDEX_EXT;
-		}
-		return poiFileName;
+		return getRegionName() + IndexConstants.POI_INDEX_EXT;
 	}
 	
 	public String getCityAdminLevel() {
@@ -350,10 +341,13 @@ public class IndexCreator {
 
 	
 	public void generateIndexes(File readFile, IProgress progress, IOsmStorageFilter addFilter, MapZooms mapZooms,
-			MapRenderingTypes renderingTypes) throws IOException, SAXException, SQLException, InterruptedException {
+			MapRenderingTypes renderingTypes, Log logMapDataWarn) throws IOException, SAXException, SQLException, InterruptedException {
 //		if(LevelDBAccess.load()){
 //			dialect = DBDialect.NOSQL;
 //		}
+		if(logMapDataWarn == null) {
+			logMapDataWarn = log ;
+		}
 		
 		if (renderingTypes == null) {
 			renderingTypes = MapRenderingTypes.getDefault();
@@ -371,8 +365,8 @@ public class IndexCreator {
 		}
 		this.indexTransportCreator = new IndexTransportCreator();
 		this.indexPoiCreator = new IndexPoiCreator();
-		this.indexAddressCreator = new IndexAddressCreator();
-		this.indexMapCreator = new IndexVectorMapCreator();
+		this.indexAddressCreator = new IndexAddressCreator(logMapDataWarn);
+		this.indexMapCreator = new IndexVectorMapCreator(logMapDataWarn);
 		this.accessor = new OsmDbAccessor();
 		
 
@@ -650,13 +644,13 @@ public class IndexCreator {
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
 		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/mecklenburg-vorpommern.osm.pbf"),
-//				new ConsoleProgressImplementation(1), null, zooms, rt);
+//				new ConsoleProgressImplementation(1), null, zooms, rt, log);
 		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/download/RU-MOW.osm.bz2"),
-				new ConsoleProgressImplementation(1), null, zooms, rt);
+				new ConsoleProgressImplementation(1), null, zooms, rt, log);
 		
 //		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes3.tmp.odb"));
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/stadion-dynamo.osm"),
-//				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), null);
+//				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), log);
 		
 		
 		
@@ -674,18 +668,18 @@ public class IndexCreator {
 //		creator.generateIndexes(new File(
 //				"/home/victor/projects/OsmAnd/download/basemap/basemap_1.osm"
 //				), 
-//				new ConsoleProgressImplementation(1), null, mapZooms, null);
+//				new ConsoleProgressImplementation(1), null, mapZooms, log);
 		
 		
 
-		System.out.println("WHOLE GENERATION TIME :  " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
-		 System.out.println("COORDINATES_SIZE " + BinaryMapIndexWriter.COORDINATES_SIZE + " count " + BinaryMapIndexWriter.COORDINATES_COUNT); //$NON-NLS-1$ //$NON-NLS-2$
-		System.out.println("TYPES_SIZE " + BinaryMapIndexWriter.TYPES_SIZE); //$NON-NLS-1$
-		System.out.println("ID_SIZE " + BinaryMapIndexWriter.ID_SIZE); //$NON-NLS-1$
-		 System.out.println("- COORD_TYPES_ID SIZE " + (BinaryMapIndexWriter.COORDINATES_SIZE + BinaryMapIndexWriter.TYPES_SIZE + BinaryMapIndexWriter.ID_SIZE)); //$NON-NLS-1$
-		System.out.println("- MAP_DATA_SIZE " + BinaryMapIndexWriter.MAP_DATA_SIZE); //$NON-NLS-1$
-		System.out.println("- STRING_TABLE_SIZE " + BinaryMapIndexWriter.STRING_TABLE_SIZE); //$NON-NLS-1$
-		System.out.println("-- MAP_DATA_AND_STRINGS SIZE " + (BinaryMapIndexWriter.MAP_DATA_SIZE + BinaryMapIndexWriter.STRING_TABLE_SIZE)); //$NON-NLS-1$
+		log.info("WHOLE GENERATION TIME :  " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
+		log.info("COORDINATES_SIZE " + BinaryMapIndexWriter.COORDINATES_SIZE + " count " + BinaryMapIndexWriter.COORDINATES_COUNT); //$NON-NLS-1$ //$NON-NLS-2$
+		log.info("TYPES_SIZE " + BinaryMapIndexWriter.TYPES_SIZE); //$NON-NLS-1$
+		log.info("ID_SIZE " + BinaryMapIndexWriter.ID_SIZE); //$NON-NLS-1$
+		log.info("- COORD_TYPES_ID SIZE " + (BinaryMapIndexWriter.COORDINATES_SIZE + BinaryMapIndexWriter.TYPES_SIZE + BinaryMapIndexWriter.ID_SIZE)); //$NON-NLS-1$
+		log.info("- MAP_DATA_SIZE " + BinaryMapIndexWriter.MAP_DATA_SIZE); //$NON-NLS-1$
+		log.info("- STRING_TABLE_SIZE " + BinaryMapIndexWriter.STRING_TABLE_SIZE); //$NON-NLS-1$
+		log.info("-- MAP_DATA_AND_STRINGS SIZE " + (BinaryMapIndexWriter.MAP_DATA_SIZE + BinaryMapIndexWriter.STRING_TABLE_SIZE)); //$NON-NLS-1$
 
 	}
 }

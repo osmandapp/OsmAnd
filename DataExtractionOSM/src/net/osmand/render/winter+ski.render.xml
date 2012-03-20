@@ -1,0 +1,166 @@
+<renderingStyle name="winter" depends="default" defaultColor="#F5FFFF" version="1">
+
+	<!--
+		Depends on All-Purpose Renderer (by Hardy Mueller), v023
+	--> 
+
+	<!--
+		Display of ski runs worldwide need 'world-ski.obf' vector overlay map,
+		see http://www.pistes-nordiques.org/osmand-page
+		Thank you to Yves! 
+	--> 
+
+
+	<renderingAttribute name="defaultColor">
+		<filter noPolygons="true" attrColorValue="#00ffffff"/>
+		<filter nightMode="true" attrColorValue="#003333"/>
+		<filter attrColorValue="#F5FFFF"/>
+	</renderingAttribute>
+
+
+	<!-- input exact layer, orderType check tag, value -->
+	<!-- point = 1, line = 2, polygon = 3 -->
+	<order>
+		<!-- Winter: Layers -->
+		<group orderType="2">
+			<filter tag="oa_nordic" value="" order="57" shadowLevel="1"/>
+			<filter tag="oa_downhill" value="" order="57" shadowLevel="1"/>
+			<filter tag="oa_skitour" value="" order="57" shadowLevel="1"/>
+			<filter tag="oa_hike" value="" order="57" shadowLevel="1"/>
+		</group>
+	</order>
+
+
+	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom], textLength, ref, textOrder (default=100) -->
+	<text>
+		<!--Winter-->
+		<group>
+			<filter tag="oa_nordic" value="" textOrder="8"/>
+			<filter tag="oa_downhill" value="" textOrder="8"/>
+			<filter tag="oa_skitour" value="" textOrder="8"/>
+			<filter tag="oa_hike" value="" textOrder="8"/>
+			<groupFilter textOnPath="true" textColor="#00747B" textHaloRadius="1" textWrapWidth="5">
+				<filter minzoom="14" maxzoom="14" textSize="12"/>
+				<filter minzoom="15" maxzoom="15" textSize="13"/>
+				<filter minzoom="16" maxzoom="16" textSize="14"/>
+				<filter minzoom="17" maxzoom="17" textSize="16"/>
+				<filter minzoom="18" textSize="18"/>
+			</groupFilter>
+		</group>
+	</text>
+
+
+	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
+	<point>
+	</point>
+
+
+	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
+	<polygon>
+		<!--Winter landscape-->
+			<filter minzoom="10" color="#F5FFFF" tag="natural" value="land"/>
+			<filter minzoom="12" color="#F5FFFF" tag="natural" value="heath"/>
+			<filter minzoom="12" color="#F5FFFF" tag="landuse" value="farm"/>
+			<filter minzoom="12" color="#F5FFFF" tag="landuse" value="farmland"/>
+			<filter minzoom="12" color="#F5FFFF" tag="landuse" value="farmyard"/>
+			<filter minzoom="12" color="#F5FFFF" tag="landuse" value="greenfield"/>
+			<filter minzoom="12" color="#F5FFFF" tag="landuse" value="grass"/>
+			<filter minzoom="12" color="#F5FFFF" tag="landuse" value="meadow"/>
+			<filter minzoom="12" color="#F5FFFF" tag="landuse" value="brownfield"/>
+			<filter minzoom="12" maxzoom="13" color="#F5FFFF" tag="natural" value="field"/>
+				<filter minzoom="14" color="#F5FFFF" color_2="#F5FFFF" strokeWidth_2="1" tag="natural" value="field"/>
+
+			<filter minzoom="12" color="#F5FFFF" tag="landuse" value="village_green"/>
+			<filter minzoom="12" color="#F5FFFF" tag="leisure" value="park"/>
+			<filter minzoom="12" color="#F5FFFF" tag="leisure" value="garden"/>
+			<filter minzoom="12" color="#F5FFFF" tag="leisure" value="common"/>
+		<filter minzoom="11" shader="beach" color="#F5FFFF" tag="natural" value="beach"/>
+		<filter minzoom="12" shader="mud" color="#F5FFFF" tag="natural" value="mud"/>
+		<filter minzoom="12" shader="scrub" color="#F5FFFF" tag="natural" value="scrub"/>
+
+		<group>
+			<filter minzoom="9" color="#ABC4F6" tag="natural" value="wood"/>
+			<filter minzoom="9" color="#ABC4F6" tag="landuse" value="wood"/>
+			<filter minzoom="9" maxzoom="12" color="#ABC4F6" tag="landuse" value="forest"/>
+				<filter minzoom="13" color="#ABC4F6" tag="landuse" value="forest"/>
+			<groupFilter nightMode="true" color="#000034" shader=""/>
+		</group>
+
+	</polygon>
+
+
+	<line>
+		<!--Winter: Style work for ski pistes-->
+		<filter  minzoom="8" maxzoom="12" color="#6A6A6A" strokeWidth="1" tag="oa_nordic" value="unknow"/>
+		<filter  minzoom="8" maxzoom="12" color="#50D019" strokeWidth="1" tag="oa_nordic" value="novice"/>
+		<filter  minzoom="8" maxzoom="12" color="#1F19D0" strokeWidth="1" tag="oa_nordic" value="easy"/>    
+		<filter  minzoom="8" maxzoom="12" color="#D01A19" strokeWidth="1" tag="oa_nordic" value="intermediate"/>
+		<filter  minzoom="8" maxzoom="12" color="#3C3B37" strokeWidth="1" tag="oa_nordic" value="advanced"/>
+		<filter  minzoom="8" maxzoom="12" color="#FCB533" strokeWidth="1" tag="oa_nordic" value="expert"/>
+		<filter  minzoom="8" maxzoom="12" color="#3EB99A" strokeWidth="1" tag="oa_nordic" value="route"/>
+
+		<filter  minzoom="8" maxzoom="12" color="#6A6A6A" strokeWidth="1" pathEffect="6_3" tag="oa_hike" value="unknow"/>
+		<filter  minzoom="8" maxzoom="12" color="#50D019" strokeWidth="1" pathEffect="6_3" tag="oa_hike" value="novice"/>
+		<filter  minzoom="8" maxzoom="12" color="#1F19D0" strokeWidth="1" pathEffect="6_3" tag="oa_hike" value="easy"/>    
+		<filter  minzoom="8" maxzoom="12" color="#D01A19" strokeWidth="1" pathEffect="6_3" tag="oa_hike" value="intermediate"/>
+		<filter  minzoom="8" maxzoom="12" color="#3C3B37" strokeWidth="1" pathEffect="6_3" tag="oa_hike" value="advanced"/>
+		<filter  minzoom="8" maxzoom="12" color="#FCB533" strokeWidth="1" pathEffect="6_3" tag="oa_hike" value="expert"/>
+		<filter  minzoom="8" maxzoom="12" color="#3EB99A" strokeWidth="1" pathEffect="6_3" tag="oa_hike" value="route"/>
+
+		<filter  minzoom="8" maxzoom="12" color="#B7B7B7" color_2="#B7B7B7" shadowColor="#6A6A6A" shadowRadius="1" strokeWidth="4" tag="oa_downhill" value="unknow"/> 
+		<filter  minzoom="8" maxzoom="12" color="#69F148" color_2="#69F148" shadowColor="#50D019" shadowRadius="1" strokeWidth="4" tag="oa_downhill" value="novice"/> 
+		<filter  minzoom="8" maxzoom="12" color="#8880E5" color_2="#8880E5" shadowColor="#1F19D0" shadowRadius="1" strokeWidth="4" tag="oa_downhill" value="easy"/> 
+		<filter  minzoom="8" maxzoom="12" color="#FF5948" color_2="#FF5948" shadowColor="#D01A19" shadowRadius="1" strokeWidth="4" tag="oa_downhill" value="intermediate"/> 
+		<filter  minzoom="8" maxzoom="12" color="#808080" color_2="#808080" shadowColor="#3C3B37" shadowRadius="1" strokeWidth="4" tag="oa_downhill" value="advanced"/> 
+		<filter  minzoom="8" maxzoom="12" color="#FFC357" color_2="#FFC357" shadowColor="#FCB533" shadowRadius="1" strokeWidth="4" tag="oa_downhill" value="expert"/> 
+		<filter  minzoom="8" maxzoom="12" color="#F6F280" color_2="#F6F280" shadowColor="#FFF632" shadowRadius="1" strokeWidth="4" tag="oa_downhill" value="freeride"/>
+
+		<filter  minzoom="8" maxzoom="12" color="#B7B7B7" color_2="#B7B7B7" shadowColor="#6A6A6A" shadowRadius="2" strokeWidth="4" pathEffect="10_10" tag="oa_skitour" value="unknow"/> 
+		<filter  minzoom="8" maxzoom="12" color="#69F148" color_2="#69F148" shadowColor="#50D019" shadowRadius="2" strokeWidth="4" pathEffect="10_10" tag="oa_skitour" value="novice"/> 
+		<filter  minzoom="8" maxzoom="12" color="#8880E5" color_2="#8880E5" shadowColor="#1F19D0" shadowRadius="2" strokeWidth="4" pathEffect="10_10" tag="oa_skitour" value="easy"/> 
+		<filter  minzoom="8" maxzoom="12" color="#FF5948" color_2="#FF5948" shadowColor="#D01A19" shadowRadius="2" strokeWidth="4" pathEffect="10_10" tag="oa_skitour" value="intermediate"/> 
+		<filter  minzoom="8" maxzoom="12" color="#808080" color_2="#808080" shadowColor="#3C3B37" shadowRadius="2" strokeWidth="4" pathEffect="10_10" tag="oa_skitour" value="advanced"/> 
+		<filter  minzoom="8" maxzoom="12" color="#FFC357" color_2="#FFC357" shadowColor="#FCB533" shadowRadius="2" strokeWidth="4" pathEffect="10_10" tag="oa_skitour" value="expert"/> 
+		<filter  minzoom="8" maxzoom="12" color="#F6F280" color_2="#F6F280" shadowColor="#FFF632" shadowRadius="2" strokeWidth="4" pathEffect="10_10" tag="oa_skitour" value="freeride"/>
+		<filter  minzoom="8" maxzoom="12" color="#83D0BC" color_2="#83D0BC" shadowColor="#3EB99A" shadowRadius="2" strokeWidth="4" pathEffect="10_10" tag="oa_skitour" value="route"/>
+         
+		<filter  minzoom="13" color="#6A6A6A" strokeWidth="2" tag="oa_nordic" value="unknow"/>
+		<filter  minzoom="13" color="#50D019" strokeWidth="2" tag="oa_nordic" value="novice"/>
+		<filter  minzoom="13" color="#1F19D0" strokeWidth="2" tag="oa_nordic" value="easy"/>    
+		<filter  minzoom="13" color="#D01A19" strokeWidth="2" tag="oa_nordic" value="intermediate"/>
+		<filter  minzoom="13" color="#3C3B37" strokeWidth="2" tag="oa_nordic" value="advanced"/>
+		<filter  minzoom="13" color="#FCB533" strokeWidth="2" tag="oa_nordic" value="expert"/>
+		<filter  minzoom="13" color="#3EB99A" strokeWidth="2" tag="oa_nordic" value="route"/>
+
+		<filter  minzoom="13" color="#6A6A6A" strokeWidth="2" pathEffect="6_3" tag="oa_hike" value="unknow"/>
+		<filter  minzoom="13" color="#50D019" strokeWidth="2" pathEffect="6_3" tag="oa_hike" value="novice"/>
+		<filter  minzoom="13" color="#1F19D0" strokeWidth="2" pathEffect="6_3" tag="oa_hike" value="easy"/>    
+		<filter  minzoom="13" color="#D01A19" strokeWidth="2" pathEffect="6_3" tag="oa_hike" value="intermediate"/>
+		<filter  minzoom="13" color="#3C3B37" strokeWidth="2" pathEffect="6_3" tag="oa_hike" value="advanced"/>
+		<filter  minzoom="13" color="#FCB533" strokeWidth="2" pathEffect="6_3" tag="oa_hike" value="expert"/>
+		<filter  minzoom="13" color="#3EB99A" strokeWidth="2" pathEffect="6_3" tag="oa_hike" value="route"/>
+
+		<filter  minzoom="13" color="#B7B7B7" color_2="#B7B7B7" shadowColor="#6A6A6A" shadowRadius="1" strokeWidth="8" tag="oa_downhill" value="unknow"/> 
+		<filter  minzoom="13" color="#69F148" color_2="#69F148" shadowColor="#50D019" shadowRadius="1" strokeWidth="8" tag="oa_downhill" value="novice"/> 
+		<filter  minzoom="13" color="#8880E5" color_2="#8880E5" shadowColor="#1F19D0" shadowRadius="1" strokeWidth="8" tag="oa_downhill" value="easy"/> 
+		<filter  minzoom="13" color="#FF5948" color_2="#FF5948" shadowColor="#D01A19" shadowRadius="1" strokeWidth="8" tag="oa_downhill" value="intermediate"/> 
+		<filter  minzoom="13" color="#808080" color_2="#808080" shadowColor="#3C3B37" shadowRadius="1" strokeWidth="8" tag="oa_downhill" value="advanced"/> 
+		<filter  minzoom="13" color="#FFC357" color_2="#FFC357" shadowColor="#FCB533" shadowRadius="1" strokeWidth="8" tag="oa_downhill" value="expert"/> 
+		<filter  minzoom="13" color="#F6F280" color_2="#F6F280" shadowColor="#FFF632" shadowRadius="1" strokeWidth="8" tag="oa_downhill" value="freeride"/>
+
+		<filter  minzoom="13" color="#B7B7B7" color_2="#B7B7B7" shadowColor="#6A6A6A" shadowRadius="2" strokeWidth="8" pathEffect="10_10" tag="oa_skitour" value="unknow"/> 
+		<filter  minzoom="13" color="#69F148" color_2="#69F148" shadowColor="#50D019" shadowRadius="2" strokeWidth="8" pathEffect="10_10" tag="oa_skitour" value="novice"/> 
+		<filter  minzoom="13" color="#8880E5" color_2="#8880E5" shadowColor="#1F19D0" shadowRadius="2" strokeWidth="8" pathEffect="10_10" tag="oa_skitour" value="easy"/> 
+		<filter  minzoom="13" color="#FF5948" color_2="#FF5948" shadowColor="#D01A19" shadowRadius="2" strokeWidth="8" pathEffect="10_10" tag="oa_skitour" value="intermediate"/> 
+		<filter  minzoom="13" color="#808080" color_2="#808080" shadowColor="#3C3B37" shadowRadius="2" strokeWidth="8" pathEffect="10_10" tag="oa_skitour" value="advanced"/> 
+		<filter  minzoom="13" color="#FFC357" color_2="#FFC357" shadowColor="#FCB533" shadowRadius="2" strokeWidth="8" pathEffect="10_10" tag="oa_skitour" value="expert"/> 
+		<filter  minzoom="13" color="#F6F280" color_2="#F6F280" shadowColor="#FFF632" shadowRadius="2" strokeWidth="8" pathEffect="10_10" tag="oa_skitour" value="freeride"/>
+		<filter  minzoom="13" color="#83D0BC" color_2="#83D0BC" shadowColor="#3EB99A" shadowRadius="2" strokeWidth="8" pathEffect="10_10" tag="oa_skitour" value="route"/>
+         
+		<filter  minzoom="12" color="#444444" strokeWidth="6" tag="aerialway" value="cable_car"/>
+		<filter  minzoom="12" color="#444444" strokeWidth="6" tag="aerialway" value="gondola"/>
+		<filter  minzoom="12" color="#444444" strokeWidth="3" tag="aerialway" value="chair_lift"/>
+		<filter  minzoom="12" color="#444444" strokeWidth="3" tag="aerialway" value="mixed_lift"/>
+		<filter  minzoom="12" color="#444444" strokeWidth="1" tag="aerialway" value="drag_lift"/>
+	</line>
+</renderingStyle>

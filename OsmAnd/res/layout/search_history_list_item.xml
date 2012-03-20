@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="wrap_content" android:orientation="horizontal">
-	<TextView android:id="@+id/distance_label" android:layout_marginLeft="5dp"
-		android:layout_width="80dp" android:layout_height="fill_parent" android:gravity="left"
-		android:textSize="20sp"/>
-	<TextView android:id="@+id/label" android:layout_weight="1" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:textSize="20sp" />
-	<ImageButton android:id="@+id/remove" android:layout_width="wrap_content" android:background="@drawable/reset" 
-		android:paddingLeft="2dp" android:paddingRight="2dp"
-		android:paddingTop="2dp" android:layout_height="wrap_content" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/distance_label"
+        style="@style/ListText.Small"
+        android:layout_width="80dp"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="5dp"
+        android:gravity="left"/>
+
+    <TextView
+        android:id="@+id/label"
+        style="@style/ListText.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+    <ImageButton
+        android:id="@+id/remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/reset"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:paddingTop="2dp" />
+
 </LinearLayout>

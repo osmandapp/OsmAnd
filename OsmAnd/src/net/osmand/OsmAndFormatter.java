@@ -139,6 +139,10 @@ public class OsmAndFormatter {
 			return ctx.getString(R.string.amenity_type_historic);
 		case NATURAL:
 			return ctx.getString(R.string.amenity_type_natural);
+		case USER_DEFINED:
+			return ctx.getString(R.string.amenity_type_user_defined);
+		case OSMWIKI :
+			return ctx.getString(R.string.amenity_type_wikiosm);
 		case SHOP:
 			return ctx.getString(R.string.amenity_type_shop);
 		case LEISURE:
