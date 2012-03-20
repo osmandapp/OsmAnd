@@ -33,7 +33,7 @@ public class RoutingHelper {
 		public void routeWasCancelled();
 	}
 	
-	private final float LOCATION_TOLERANCE = 60;
+	private final float POSITION_TOLERANCE = 60;
 	
 	private final double DISTANCE_TO_USE_OSMAND_ROUTER = 20000;
 	
@@ -179,8 +179,8 @@ public class RoutingHelper {
 	
 	public boolean finishAtLocation(Location currentLocation) {
 		Location lastPoint = routeNodes.get(routeNodes.size() - 1);
-		if(currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < LOCATION_TOLERANCE){
-			if(lastFixedLocation != null && lastFixedLocation.distanceTo(lastPoint) < LOCATION_TOLERANCE){
+		if(currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < POSITION_TOLERANCE){
+			if(lastFixedLocation != null && lastFixedLocation.distanceTo(lastPoint) < POSITION_TOLERANCE){
 				showMessage(context.getString(R.string.arrived_at_destination));
 				voiceRouter.arrivedDestinationPoint();
 				clearCurrentRoute(null);
@@ -270,7 +270,7 @@ public class RoutingHelper {
 					float bearingRoute = routeNodes.get(currentRoute - 1).bearingTo(routeNodes.get(currentRoute));
 					float bearingToRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
 					float d = Math.abs(currentLocation.distanceTo(routeNodes.get(currentRoute)) * FloatMath.sin((bearingToRoute - bearingRoute)*3.14f/180f));
-					if(d > LOCATION_TOLERANCE) {
+					if(d > POSITION_TOLERANCE) {
 						log.info("Recalculate route, because correlation  : " + d); //$NON-NLS-1$
 						calculateRoute = true;
 					}
@@ -279,7 +279,7 @@ public class RoutingHelper {
 				// 5. Sum distance to last and current route nodes
 				if(!calculateRoute){
 					float d = currentLocation.distanceTo(routeNodes.get(currentRoute));
-					if (d > LOCATION_TOLERANCE) {
+					if (d > POSITION_TOLERANCE) {
 						if (currentRoute > 0) {
 							// 5a. Greater than 2*distance between them? Then re-calculate route. (Case often covered by 4., but still needed.)
 							float f1 = currentLocation.distanceTo(routeNodes.get(currentRoute - 1)) + d;
@@ -307,7 +307,7 @@ public class RoutingHelper {
 		lastFixedLocation = currentLocation;
 
 		// 8. Strange Direction? Then re-calculate route. (Added new, may possibly even replace triggers 4, 5a, 5b ?)
-		if(suppressTurnPrompt && (currentLocation.distanceTo(routeNodes.get(currentRoute)) > 2*LOCATION_TOLERANCE) ){
+		if(suppressTurnPrompt && (currentLocation.distanceTo(routeNodes.get(currentRoute)) > POSITION_TOLERANCE) ){
 			calculateRoute = true;
 		}
 
@@ -330,7 +330,7 @@ public class RoutingHelper {
 						float bearingRoute = routeNodes.get(currentRoute - 1).bearingTo(routeNodes.get(currentRoute));
 						float bearingToRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
 						float d = Math.abs(currentLocation.distanceTo(routeNodes.get(currentRoute)) * FloatMath.sin((bearingToRoute - bearingRoute)*3.14f/180f));
-						if(d > LOCATION_TOLERANCE){
+						if(d > POSITION_TOLERANCE){
 							processed = true;
 						}
 					} else {
@@ -390,7 +390,7 @@ public class RoutingHelper {
 				if (Math.abs(bearingMotion - bearingToRoute) > 135f && 360 - Math.abs(bearingMotion - bearingToRoute) > 135f) {
 					float d = currentLocation.distanceTo(routeNodes.get(currentRoute));
 					// 60m tolerance to allow for GPS inaccuracy
-					if (d > LOCATION_TOLERANCE) {
+					if (d > POSITION_TOLERANCE) {
 						if (makeUTwpDetected == 0) {
 							makeUTwpDetected = System.currentTimeMillis();
 						// require 5 sec since first detection, to avoid false positive announcements
