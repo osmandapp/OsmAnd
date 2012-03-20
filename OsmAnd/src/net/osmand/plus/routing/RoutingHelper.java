@@ -265,7 +265,7 @@ public class RoutingHelper {
 					}
 				}
 				
-				// 4. >60m away from current routeNode? Then re-calculate route.
+				// 4. >60m off current route (sideways)? Then re-calculate route.
 				if(currentRoute > 0){
 					float bearingRoute = routeNodes.get(currentRoute - 1).bearingTo(routeNodes.get(currentRoute));
 					float bearingToRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
