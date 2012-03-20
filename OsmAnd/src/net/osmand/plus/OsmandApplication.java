@@ -391,8 +391,10 @@ public class OsmandApplication extends Application {
 					uiHandler.post(new Runnable() {
 						@Override
 						public void run() {
-							if (toDismiss.getOwnerActivity() != null) {
-								toDismiss.getOwnerActivity().dismissDialog(PROGRESS_DIALOG);
+							if (toDismiss != null) {
+								//TODO handling this dialog is bad, we need a better standard way
+								toDismiss.dismiss();
+//								toDismiss.getOwnerActivity().dismissDialog(PROGRESS_DIALOG);
 							}
 						}
 					});

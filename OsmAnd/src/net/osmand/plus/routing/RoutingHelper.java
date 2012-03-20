@@ -115,7 +115,7 @@ public class RoutingHelper {
 		
 	}
 	
-	public void clearCurrentRoute(LatLon newFinalLocation) {
+	public synchronized void clearCurrentRoute(LatLon newFinalLocation) {
 		this.routeNodes.clear();
 		listDistance = null;
 		directionInfo = null;
