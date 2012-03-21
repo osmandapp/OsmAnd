@@ -15,7 +15,8 @@ public class ToDoConstants {
 	// Routing index !!
 	// Identify coastline areas and pure ocean areas !!!
 	// Extract & remove the code with multipolygons
-	// render different texts
+	// Render : different texts support render.xml
+	// Render : support additional tags in render.xml
 
 	// FIXME layer and renderer 1) FIXME Layer 2 2) FIXME oneway 1 
 

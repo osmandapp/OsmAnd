@@ -698,8 +698,9 @@ public class BinaryRoutePlanner {
 					startLat+"", startLon+"", endLat+"", endLon+""));
 			for (RouteSegmentResult res : result) {
 				String name = res.object.getName();
-				if(res.object.getRef() != null) {
-					name += " " + res.object.getRef();
+				String ref = res.object.getNameByType(res.object.getMapIndex().refEncodingType);
+				if(ref != null) {
+					name += " " + ref;
 				}
 				// (res.object.getId() >> 1)
 				System.out.println(MessageFormat.format("\t<segment id=\"{0}\" start=\"{1}\" end=\"{2}\" name=\"{3}\"/>", 

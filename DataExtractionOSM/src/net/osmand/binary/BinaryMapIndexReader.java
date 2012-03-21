@@ -3,6 +3,7 @@ package net.osmand.binary;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.set.hash.TIntHashSet;
 
 import java.io.File;
 import java.io.IOException;
@@ -564,22 +565,6 @@ public class BinaryMapIndexReader {
 		}
 	}
 	
-	private void initMapEncodingRule(MapIndex index, int type, int id, String tag, String val) {
-		if(!index.encodingRules.containsKey(tag)){
-			index.encodingRules.put(tag, new LinkedHashMap<String, Integer>());
-		}
-		index.encodingRules.get(tag).put(val, id);
-		if("name".equals(tag)){
-			index.nameEncodingType = id;
-		} else if("natural".equals(tag) && "coastline".equals(val)){
-			index.coastlineEncodingType = id;
-		} else if("ref".equals(tag)){
-			index.refEncodingType = id;
-		}
-		if(!index.decodingRules.containsKey(id)){
-			index.decodingRules.put(id, new TagValuePair(tag, val, type));
-		}
-	}
 	
 	private void readMapEncodingRule(MapIndex index, int id) throws IOException {
 		int type = 0;
@@ -590,7 +575,7 @@ public class BinaryMapIndexReader {
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				initMapEncodingRule(index, type, id, tags, val);
+				index.initMapEncodingRule(type, id, tags, val);
 				return;
 			case MapEncodingRule.VALUE_FIELD_NUMBER :
 				val = codedIS.readString().intern();
@@ -1329,6 +1314,10 @@ public class BinaryMapIndexReader {
 		public int nameEncodingType = 0;
 		public int refEncodingType = -1;
 		public int coastlineEncodingType = -1;
+		public int onewayAttribute = -1;
+		public int onewayReverseAttribute = -1;
+		public TIntHashSet positiveLayers = new TIntHashSet(2);
+		public TIntHashSet negativeLayers = new TIntHashSet(2);
 		
 		public List<MapRoot> getRoots() {
 			return roots;
@@ -1336,6 +1325,36 @@ public class BinaryMapIndexReader {
 		
 		public TagValuePair decodeType(int type){
 			return decodingRules.get(type);
+		}
+		
+		private void initMapEncodingRule(int type, int id, String tag, String val) {
+			if(!encodingRules.containsKey(tag)){
+				encodingRules.put(tag, new LinkedHashMap<String, Integer>());
+			}
+			encodingRules.get(tag).put(val, id);
+			if(!decodingRules.containsKey(id)){
+				decodingRules.put(id, new TagValuePair(tag, val, type));
+			}
+			
+			if("name".equals(tag)){
+				nameEncodingType = id;
+			} else if("natural".equals(tag) && "coastline".equals(val)){
+				coastlineEncodingType = id;
+			} else if("oneway".equals(tag) && "yes".equals(val)){
+				onewayAttribute = id;
+			} else if("oneway".equals(tag) && "-1".equals(val)){
+				onewayReverseAttribute = id;
+			} else if("ref".equals(tag)){
+				refEncodingType = id;
+			} else if("layer".equals(tag)){
+				if(val != null && !val.equals("0") && val.length() > 0) {
+					if(val.startsWith("-")) {
+						negativeLayers.add(id);
+					} else {
+						positiveLayers.add(id);
+					}
+				}
+			}
 		}
 		
 	}

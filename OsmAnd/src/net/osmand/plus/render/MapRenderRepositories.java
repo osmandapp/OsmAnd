@@ -374,18 +374,14 @@ public class MapRenderRepositories {
 					}
 					count++;
 
-					for (int i = 0; i < r.getTypes().length; i++) {
-						if (r.getTypes()[i] == r.getMapIndex().coastlineEncodingType) {
-							// multy polygon r.getId() >> 3
-							TagValuePair pair = r.getMapIndex().decodeType(r.getTypes()[i]);
-							if (pair != null) {
-								pair = new TagValuePair(pair.tag, pair.value, r.getTypes()[i]);
-								if (!multiPolygons.containsKey(pair)) {
-									multiPolygons.put(pair, new ArrayList<BinaryMapDataObject>());
-								}
-								multiPolygons.get(pair).add(r);
-							}
+					// TODO refactor !
+					if(r.containsType(r.getMapIndex().coastlineEncodingType)) {
+						TagValuePair pair = r.getMapIndex().decodeType(r.getMapIndex().coastlineEncodingType);
+						pair = new TagValuePair(pair.tag, pair.value, 0);
+						if (!multiPolygons.containsKey(pair)) {
+							multiPolygons.put(pair, new ArrayList<BinaryMapDataObject>());
 						}
+						multiPolygons.get(pair).add(r);
 					}
 					if (checkWhetherInterrupted()) {
 						return false;

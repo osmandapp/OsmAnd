@@ -453,7 +453,6 @@ public class RenderingRulesStorage {
 			 searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
 			searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 15);
 			searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 15);
-			 searchRequest.setIntFilter(storage.PROPS.R_ORDER_TYPE, 2);
 			//	searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
 			// searchRequest.setBooleanFilter(storage.PROPS.get("hmRendered"), true);
 			

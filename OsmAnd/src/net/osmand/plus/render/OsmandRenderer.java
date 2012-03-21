@@ -36,7 +36,6 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PathEffect;
 import android.graphics.PointF;
-import android.graphics.Xfermode;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Shader;
@@ -382,42 +381,37 @@ public class OsmandRenderer {
 				BinaryMapDataObject o = objects.get(i);
 				int sh = i << 8;
 				if (o instanceof MultyPolygon) {
-					int layer = ((MultyPolygon) o).getLayer();
-					render.setTagValueZoomLayer(((MultyPolygon) o).getTag(), ((MultyPolygon) o).getValue(), rc.zoom, layer);
-					render.setIntFilter(render.ALL.R_ORDER_TYPE, MapRenderingTypes.POLYGON_TYPE);
-					if(render.search(RenderingRulesStorage.ORDER_RULES)) {
-						int order = render.getIntPropertyValue(render.ALL.R_ORDER);
-						put(orderMap, order, sh, init);
-						if(render.isSpecified(render.ALL.R_SHADOW_LEVEL)){
-							rc.shadowLevelMin = Math.min(rc.shadowLevelMin, order);
-							rc.shadowLevelMax = Math.max(rc.shadowLevelMax, order);
-							render.clearValue(render.ALL.R_SHADOW_LEVEL);
-						}
-					}
+					//FIXME Multipolygon : 1
+//					int layer = ((MultyPolygon) o).getLayer();
+//					render.setTagValueZoomLayer(((MultyPolygon) o).getTag(), ((MultyPolygon) o).getValue(), rc.zoom, layer);
+//					render.setIntFilter(render.ALL.R_ORDER_TYPE, MapRenderingTypes.POLYGON_TYPE);
+//					if(render.search(RenderingRulesStorage.ORDER_RULES)) {
+//						int order = render.getIntPropertyValue(render.ALL.R_ORDER);
+//						put(orderMap, order, sh, init);
+//						if(render.isSpecified(render.ALL.R_SHADOW_LEVEL)){
+//							rc.shadowLevelMin = Math.min(rc.shadowLevelMin, order);
+//							rc.shadowLevelMax = Math.max(rc.shadowLevelMax, order);
+//							render.clearValue(render.ALL.R_SHADOW_LEVEL);
+//						}
+//					}
 				} else {
 					for (int j = 0; j < o.getTypes().length; j++) {
 						// put(orderMap, BinaryMapDataObject.getOrder(o.getTypes()[j]), sh + j, init);
 						int wholeType = o.getTypes()[j];
 						
-						int mask = MapRenderingTypes.POINT_TYPE;
-						if(o.getPointsLength() > 1) {
-							if(o.isArea()){
-								mask = MapRenderingTypes.POLYGON_TYPE;
-							} else {
-								mask = MapRenderingTypes.POLYLINE_TYPE;
-							}
-						}
 						int layer = 0;
-						if (mask != MapRenderingTypes.POINT_TYPE) {
-							// FIXME Layer
-//							layer = MapRenderingTypes.getNegativeWayLayer(wholeType);
+						if (o.getPointsLength() > 1) {
+							layer = o.getSimpleLayer();
 						}
 
 						TagValuePair pair = o.getMapIndex().decodeType(wholeType);
 						if (pair != null) {
 							render.setTagValueZoomLayer(pair.tag, pair.value, rc.zoom, layer);
-							render.setIntFilter(render.ALL.R_ORDER_TYPE, mask);
+							render.setBooleanFilter(render.ALL.R_AREA, o.isArea());
+							render.setBooleanFilter(render.ALL.R_POINT, o.getPointsLength() == 1);
+							render.setBooleanFilter(render.ALL.R_CYCLE, o.isCycle());
 							if (render.search(RenderingRulesStorage.ORDER_RULES)) {
+								o.setObjectType(render.getIntPropertyValue(render.ALL.R_OBJECT_TYPE));
 								int order = render.getIntPropertyValue(render.ALL.R_ORDER);
 								put(orderMap, order, sh + j, init);
 								if (render.isSpecified(render.ALL.R_SHADOW_LEVEL)) {
@@ -450,19 +444,18 @@ public class OsmandRenderer {
 			boolean renderText, boolean drawOnlyShadow) {
 		rc.allObjects++;
 		if (obj instanceof MultyPolygon) {
+			// TODO
 			if(!drawOnlyShadow){
 				drawMultiPolygon(obj, render, canvas, rc);
 			}
 		} else {
-			int mainType = obj.getTypes()[l];
-			TagValuePair pair = obj.getMapIndex().decodeType(mainType);
-			if (obj.getPointsLength() == 1 && !drawOnlyShadow) {
+			int type = obj.getObjectType();
+			TagValuePair pair = obj.getMapIndex().decodeType(obj.getTypes()[l]);
+			if (type == MapRenderingTypes.POINT_TYPE && !drawOnlyShadow) {
 				drawPoint(obj, render, canvas, rc, pair, renderText);
-			} else if (!obj.isArea()) {
-				// FIXME Layer
-				// int layer = MapRenderingTypes.getNegativeWayLayer(mainType);
-				drawPolyline(obj, render, canvas, rc, pair, 0, drawOnlyShadow);
-			} else if (obj.isArea() && !drawOnlyShadow) {
+			} else if (type == MapRenderingTypes.POLYLINE_TYPE) {
+				drawPolyline(obj, render, canvas, rc, pair, obj.getSimpleLayer(), drawOnlyShadow);
+			} else if (type == MapRenderingTypes.POLYGON_TYPE && !drawOnlyShadow) {
 				drawPolygon(obj, render, canvas, rc, pair);
 			}
 		}
@@ -738,11 +731,14 @@ public class OsmandRenderer {
 		if(!rendered || !updatePaint(render, paint, 0, false, rc)){
 			return;
 		}
-		boolean oneway = false;
-		//FIXME oneway
-//		if(rc.zoom >= 16 && "highway".equals(pair.tag) && MapRenderingTypes.isOneWayWay(obj.getHighwayAttributes())){ //$NON-NLS-1$
-//			oneway = true;
-//		}
+		int oneway = 0;
+		if(rc.zoom >= 16 && "highway".equals(pair.tag) ){ //$NON-NLS-1$
+			if(obj.containsAdditionalType(obj.getMapIndex().onewayAttribute)) {
+				oneway = 1;
+			} else if(obj.containsAdditionalType(obj.getMapIndex().onewayReverseAttribute)){
+				oneway = -1;
+			}
+		}
 
 		rc.visible++;
 
@@ -789,8 +785,8 @@ public class OsmandRenderer {
 				}
 			}
 			
-			if(oneway && !drawOnlyShadow){
-				Paint[] paints = getOneWayPaints();
+			if(oneway != 0 && !drawOnlyShadow){
+				Paint[] paints = oneway == -1? getReverseOneWayPaints() :  getOneWayPaints();
 				for (int i = 0; i < paints.length; i++) {
 					canvas.drawPath(path, paints[i]);
 				}
@@ -803,12 +799,40 @@ public class OsmandRenderer {
 
 		
 	private static Paint[] oneWay = null;
+	private static Paint[] reverseOneWay = null;
 	private static Paint oneWayPaint(){
 		Paint oneWay = new Paint();
 		oneWay.setStyle(Style.STROKE);
 		oneWay.setColor(0xff6c70d5);
 		oneWay.setAntiAlias(true);
 		return oneWay; 
+	}
+	
+	public static Paint[] getReverseOneWayPaints(){
+		if(reverseOneWay == null){
+			PathEffect arrowDashEffect1 = new DashPathEffect(new float[] { 0, 12, 10, 152 }, 0);
+			PathEffect arrowDashEffect2 = new DashPathEffect(new float[] { 0, 13, 9, 152 }, 1);
+			PathEffect arrowDashEffect3 = new DashPathEffect(new float[] { 0, 14, 2, 148 }, 1);
+			PathEffect arrowDashEffect4 = new DashPathEffect(new float[] { 0, 15, 1, 148 }, 1);
+			reverseOneWay = new Paint[4];
+			reverseOneWay[0] = oneWayPaint();
+			reverseOneWay[0].setStrokeWidth(1);
+			reverseOneWay[0].setPathEffect(arrowDashEffect1);
+			
+			reverseOneWay[1] = oneWayPaint();
+			reverseOneWay[1].setStrokeWidth(2);
+			reverseOneWay[1].setPathEffect(arrowDashEffect2);
+
+			reverseOneWay[2] = oneWayPaint();
+			reverseOneWay[2].setStrokeWidth(3);
+			reverseOneWay[2].setPathEffect(arrowDashEffect3);
+			
+			reverseOneWay[3] = oneWayPaint();			
+			reverseOneWay[3].setStrokeWidth(4);
+			reverseOneWay[3].setPathEffect(arrowDashEffect4);
+			
+		}
+		return oneWay;
 	}
 	
 	public static Paint[] getOneWayPaints(){

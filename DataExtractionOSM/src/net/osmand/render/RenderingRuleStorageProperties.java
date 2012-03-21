@@ -39,7 +39,10 @@ public class RenderingRuleStorageProperties {
 	public static final String ICON = "icon";
 	public static final String LAYER = "layer";
 	public static final String ORDER = "order";
-	public static final String ORDER_TYPE = "orderType";
+	public static final String OBJECT_TYPE = "objectType";
+	public static final String POINT = "point";
+	public static final String AREA = "area";
+	public static final String CYCLE = "cycle";
 	public static final String TAG = "tag";
 	public static final String VALUE = "value";
 	public static final String MINZOOM = "minzoom";
@@ -82,7 +85,10 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_ICON;
 	public RenderingRuleProperty R_LAYER;
 	public RenderingRuleProperty R_ORDER;
-	public RenderingRuleProperty R_ORDER_TYPE;
+	public RenderingRuleProperty R_POINT;
+	public RenderingRuleProperty R_AREA;
+	public RenderingRuleProperty R_CYCLE;
+	public RenderingRuleProperty R_OBJECT_TYPE;
 	public RenderingRuleProperty R_TAG;
 	public RenderingRuleProperty R_VALUE;
 	public RenderingRuleProperty R_MINZOOM;
@@ -121,11 +127,13 @@ public class RenderingRuleStorageProperties {
 		R_MAXZOOM = registerRuleInternal(RenderingRuleProperty.createInputLessIntProperty(MAXZOOM));
 		R_NIGHT_MODE = registerRuleInternal(RenderingRuleProperty.createInputBooleanProperty(NIGHT_MODE));
 		R_LAYER = registerRuleInternal(RenderingRuleProperty.createInputIntProperty(LAYER));
-		R_ORDER_TYPE = registerRuleInternal(RenderingRuleProperty.createInputIntProperty(ORDER_TYPE));
+		R_POINT = registerRuleInternal(RenderingRuleProperty.createInputBooleanProperty(POINT));
+		R_AREA = registerRuleInternal(RenderingRuleProperty.createInputBooleanProperty(AREA));
+		R_CYCLE = registerRuleInternal(RenderingRuleProperty.createInputBooleanProperty(CYCLE));
+		
 		R_TEXT_LENGTH = registerRuleInternal(RenderingRuleProperty.createInputIntProperty(TEXT_LENGTH));
 		R_REF = registerRuleInternal(RenderingRuleProperty.createInputBooleanProperty(REF));
 
-		
 		R_ATTR_INT_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ATTR_INT_VALUE));
 		R_ATTR_BOOL_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(ATTR_BOOL_VALUE));
 		R_ATTR_COLOR_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputColorProperty(ATTR_COLOR_VALUE));
@@ -133,6 +141,7 @@ public class RenderingRuleStorageProperties {
 		
 		// order - no sense to make it float
 		R_ORDER = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ORDER));
+		R_OBJECT_TYPE = registerRuleInternal(RenderingRuleProperty.createInputIntProperty(OBJECT_TYPE));
 		R_SHADOW_LEVEL = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(SHADOW_LEVEL));
 
 		// text properties

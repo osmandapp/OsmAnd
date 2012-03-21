@@ -326,11 +326,8 @@ public class TextRenderer {
 	public void renderText(BinaryMapDataObject obj, RenderingRuleSearchRequest render, RenderingContext rc, TagValuePair pair,
 			float xMid, float yMid, Path path, PointF[] points) {
 		// TODO other render text
-		String ref = null;
-		if(obj.getMapIndex().refEncodingType >= 0 ) {
-			ref  = obj.getObjectNames().get(obj.getMapIndex().refEncodingType);
-		}
-		String name = obj.getObjectNames().get(obj.getMapIndex().nameEncodingType);
+		String ref = obj.getNameByType(obj.getMapIndex().refEncodingType);
+		String name = obj.getNameByType(obj.getMapIndex().nameEncodingType);
 		if(ref != null && ref.trim().length() > 0){
 			createTextDrawInfo(render, rc, pair, xMid, yMid, path, points, ref, true);
 		}

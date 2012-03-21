@@ -3,6 +3,7 @@ package net.osmand.binary;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.osm.MapRenderingTypes;
 
 public class BinaryMapDataObject {
 	protected int[] coordinates = null;
@@ -10,6 +11,7 @@ public class BinaryMapDataObject {
 	protected boolean area = false;
 	protected int[] types = null;
 	protected int[] additionalTypes = null;
+	protected int objectType = MapRenderingTypes.POINT_TYPE;
 	
 	protected TIntObjectHashMap<String> objectNames = null;
 	protected long id = 0;
@@ -35,11 +37,12 @@ public class BinaryMapDataObject {
 		return name;
 	}
 	
-	public String getRef(){
-		if(mapIndex.refEncodingType != -1 && objectNames != null) {
-			return objectNames.get(mapIndex.refEncodingType);
-		}
-		return null;
+	public int getObjectType() {
+		return objectType;
+	}
+	
+	public void setObjectType(int objectType) {
+		this.objectType = objectType;
 	}
 	
 	public TIntObjectHashMap<String> getObjectNames() {
@@ -54,6 +57,35 @@ public class BinaryMapDataObject {
 		return types;
 	}
 	
+	public boolean containsType(int cachedType) {
+		if(cachedType != -1) {
+			for(int i=0; i<types.length; i++){
+				if(types[i] == cachedType) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean containsAdditionalType(int cachedType) {
+		if (cachedType != -1) {
+			for (int i = 0; i < additionalTypes.length; i++) {
+				if (additionalTypes[i] == cachedType) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public String getNameByType(int type) {
+		if(type != -1 && objectNames != null) {
+			return objectNames.get(type);
+		}
+		return null;
+	}
+	
 	public int[] getAdditionalTypes() {
 		return additionalTypes;
 	}
@@ -62,15 +94,20 @@ public class BinaryMapDataObject {
 		return area;
 	}
 	
+	public boolean isCycle(){
+		if(coordinates == null || coordinates.length < 2) {
+			return false;
+		}
+		return coordinates[0] == coordinates[coordinates.length - 2] && 
+				coordinates[1] == coordinates[coordinates.length - 1];
+	}
+	
 	public void setArea(boolean area) {
 		this.area = area;
 	}
 	
 	public TagValuePair getTagValue(int indType){
-		if(mapIndex == null){
-			return null;
-		}
-		return mapIndex.decodeType(types[indType]);
+		throw new UnsupportedOperationException("This functions is deprecated and should be deleted");
 	}
 	
 	public long getId() {
@@ -85,6 +122,20 @@ public class BinaryMapDataObject {
 		this.types = types;
 	}
 	
+	
+	public int getSimpleLayer(){
+		if(mapIndex != null) {
+			for (int i = 0; i < additionalTypes.length; i++) {
+				if (mapIndex.positiveLayers.contains(additionalTypes[i])) {
+					return 1;
+				} else if (mapIndex.negativeLayers.contains(additionalTypes[i])) {
+					return -1;
+				}
+			}
+			
+		}
+		return 0;
+	}
 	
 	public MapIndex getMapIndex() {
 		return mapIndex;
