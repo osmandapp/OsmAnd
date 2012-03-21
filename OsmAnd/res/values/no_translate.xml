@@ -4,7 +4,7 @@
     <string name="app_version">0.7.1</string>
     <!-- Not translatable -->
     <string name="ga_api_key">UA-28342846-2</string>
-    <string name="ga_dispatchPeriod">10</string>
-    <string name="ga_debug">true</string>
+    <string name="ga_dispatchPeriod">0</string>
+    <string name="ga_dryRun">true</string>
     
 </resources>
