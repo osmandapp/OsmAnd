@@ -316,7 +316,7 @@ public class RoutingHelper {
 		}
 	}
 	
-	public void tryMarkPassedRoute(Location currentLocation) {
+	public synchronized void tryMarkPassedRoute(Location currentLocation) {
 		// 1. try to mark passed route (move forward)
 		float dist = currentLocation.distanceTo(routeNodes.get(currentRoute));
 		while(currentRoute + 1 < routeNodes.size()){
@@ -366,7 +366,7 @@ public class RoutingHelper {
 		}
 	}
 
-	public void directionDetection(Location currentLocation) {
+	public synchronized void directionDetection(Location currentLocation) {
 		makeUturnWhenPossible = false;
 		suppressTurnPrompt = false;
 		if(finalLocation == null || currentLocation == null){
