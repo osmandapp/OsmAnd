@@ -87,45 +87,7 @@
 		<filter layer="-1" tag="" value="" order="10" objectType="2"/>
 		<filter tag="" value="" order="11" objectType="2"/>
 		
-		<group orderType="3">
-		    <filter layer="-1" tag="building" value="" order="1"/>
-			<filter tag="building" value="" order="64"/>
-
-			<filter tag="railway" value="" order="58"/>
-
-			<filter tag="highway" value="road" order="35"/>
-			<filter tag="highway" value="unclassified" order="35"/>
-			<filter tag="highway" value="residential" order="35"/>
-			<filter tag="highway" value="service" order="35"/>
-			<filter tag="highway" value="pedestrian" order="35"/>
-			<filter tag="highway" value="footway" order="35"/>
-			<filter tag="highway" value="" order="35"/>
-
-			<filter tag="aeroway" value="" order="35"/>
-
-			<filter tag="power" value="" order="7"/>
-			<filter tag="amenity" value="" order="7"/>
-			<filter tag="tourism" value="" order="7"/>
-			<filter tag="military" value="" order="7"/>
-			<filter tag="leisure" value="" order="7"/>
-
-			<filter tag="waterway" value="" order="6"/>
-
-			<filter tag="landuse" value="reservoir" order="5"/>
-			<filter tag="landuse" value="water" order="5"/>
-			<filter tag="landuse" value="" order="1"/>
-
-			<filter tag="natural" value="water" order="5"/>
-			<filter tag="natural" value="bay" order="5"/>
-			<filter tag="natural" value="coastline" order="1"/>
-			<filter tag="natural" value="" order="1"/>
-			<groupFilter>
-				<filter cycle="true"/>
-				<filter area="true"/>
-			</groupFilter>
-		</group>
-		
-		<group objectType="2">
+		<group objectType="2" cycle="false" area="false">
 			<!-- Over buildings -->
 			<filter tag="aerialway" value="" order="68"/>
 			<filter tag="power" value="" order="68"/>
@@ -233,6 +195,40 @@
 			<filter tag="admin_level" value="0" order="0"/>
 			<filter tag="admin_level" value="1" order="0"/>
 
+		</group>
+		
+			<group objectType="3">
+		    <filter layer="-1" tag="building" value="" order="1"/>
+			<filter tag="building" value="" order="64"/>
+
+			<filter tag="railway" value="" order="58"/>
+
+			<filter tag="highway" value="road" order="35"/>
+			<filter tag="highway" value="unclassified" order="35"/>
+			<filter tag="highway" value="residential" order="35"/>
+			<filter tag="highway" value="service" order="35"/>
+			<filter tag="highway" value="pedestrian" order="35"/>
+			<filter tag="highway" value="footway" order="35"/>
+			<filter tag="highway" value="" order="35"/>
+
+			<filter tag="aeroway" value="" order="35"/>
+
+			<filter tag="power" value="" order="7"/>
+			<filter tag="amenity" value="" order="7"/>
+			<filter tag="tourism" value="" order="7"/>
+			<filter tag="military" value="" order="7"/>
+			<filter tag="leisure" value="" order="7"/>
+
+			<filter tag="waterway" value="" order="6"/>
+
+			<filter tag="landuse" value="reservoir" order="5"/>
+			<filter tag="landuse" value="water" order="5"/>
+			<filter tag="landuse" value="" order="1"/>
+
+			<filter tag="natural" value="water" order="5"/>
+			<filter tag="natural" value="bay" order="5"/>
+			<filter tag="natural" value="coastline" order="1"/>
+			<filter tag="natural" value="" order="1"/>
 		</group>
 
 

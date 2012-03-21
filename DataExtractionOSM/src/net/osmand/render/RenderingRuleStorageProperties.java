@@ -141,7 +141,7 @@ public class RenderingRuleStorageProperties {
 		
 		// order - no sense to make it float
 		R_ORDER = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ORDER));
-		R_OBJECT_TYPE = registerRuleInternal(RenderingRuleProperty.createInputIntProperty(OBJECT_TYPE));
+		R_OBJECT_TYPE = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(OBJECT_TYPE));
 		R_SHADOW_LEVEL = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(SHADOW_LEVEL));
 
 		// text properties
