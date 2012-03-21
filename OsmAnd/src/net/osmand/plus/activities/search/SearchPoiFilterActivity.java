@@ -9,7 +9,6 @@ import java.util.List;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;

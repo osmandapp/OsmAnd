@@ -8,7 +8,6 @@ import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 
 public class MiniMapControl extends MapInfoControl {

@@ -18,7 +18,7 @@
 	</string>
 
 	<string name="update_poi_does_not_change_indexes">Změny POI bodů v aplikaci nemají vliv na zobrazení stažených map, změny se ukládají do lokálního souboru.</string>
-	<string name="local_openstreetmap_uploading_poi">Odesílám POI...</string>
+	<string name="local_openstreetmap_uploading_poi">Odesílám POI…</string>
 	<string name="local_openstreetmap_poi_were_uploaded">{0} POI bylo odesláno</string>
 	<string name="local_openstreetmap_uploadall">Odeslat všechny POI</string>
 	<string name="local_openstreetmap_items"></string>
@@ -81,7 +81,7 @@
 	<string name="routing_settings_descr">Nastavení způsobu navigace</string>
 	<string name="global_settings">Obecná nastavení</string>
 	<string name="index_settings">Offline data</string>
-	<string name="index_settings_descr">Stáhnout a spravovat data pro použití offline (mapy, trasy, ...)</string>
+	<string name="index_settings_descr">Stáhnout a spravovat data pro použití offline (mapy, trasy, …)</string>
 	<string name="general_settings">Obecné</string>
 	<string name="general_settings_descr">Nastavení displeje, jazyka, zvuku a dalších parametrů</string>
 	<string name="user_name">Jméno uživatele</string>
@@ -199,7 +199,7 @@
 	<string name="use_transparent_map_theme">Transparentní téma</string>
 	
 	<string name="native_library_not_supported">Android native library není podporovaná na tomto zařízení.</string>
-	<string name="init_native_library">Inicializuji Android native library...</string>
+	<string name="init_native_library">Inicializuji Android native library…</string>
 	<string name="choose_auto_follow_route">Nastavení automatického sledování</string>
 	<string name="choose_auto_follow_route_descr">Zadejte interval pro automatické vrácení mapy na vaši pozici</string>
 	<string name="auto_follow_route_never">Nikdy</string>
@@ -249,13 +249,13 @@
 
 <string name="search_select_point">Vybrat</string>
 <string name="local_index_description">Stahnout nová, zálohovat nebo smazat existující data. \nOffline data na zařízení (%1$s dostupné):</string>
-<string name="search_position_current_location_search">Hledané polohy...</string>
+<string name="search_position_current_location_search">Hledané polohy…</string>
 <string name="search_position_current_location_found">Poloha [nalezeno]</string>
-<string name="search_position_address">Adresy...</string>
-<string name="search_position_favorites">Oblíbených...</string>
+<string name="search_position_address">Adresy…</string>
+<string name="search_position_favorites">Oblíbených…</string>
 <string name="search_position_undefined">Nedefinováno</string>
 <string name="search_position_fixed">Souřadnic</string>
-<string name="search_position_current_location">Momentální polohy...</string>
+<string name="search_position_current_location">Momentální polohy…</string>
 <string name="search_position_map_view">Posledního místa na mapě</string>
 
 <string name="select_search_position">Hledat v okolí :</string>
@@ -312,7 +312,7 @@
         <string name="local_index_mi_backup">Zálohovat</string>
         <string name="local_index_mi_delete">Smazat</string>
         <string name="local_index_mi_reload">Znovu nahrát</string>
-        <string name="local_index_download">Stáhnout...</string>
+        <string name="local_index_download">Stáhnout…</string>
         <string name="local_index_tile_data">Zdroj map. dlaždic: %1$s \nMinimální zvětšení : %2$d\nMaximální zvětšení : %3$d\nStahovatelné : %4$s \nStažené zvětšení : %5$s</string>
         <string name="local_index_poi_data">Data POI</string>
         <string name="local_index_address_data">Addresy</string>
@@ -366,7 +366,7 @@
 	<string name="poi_filter_for_tourists">Pro turisty</string>
 	<string name="poi_filter_fuel">Čerpací stanice</string>
 	<string name="poi_filter_namefinder">Online NameFinder</string>
-	<string name="reading_cached_tiles">Načítám uložené dlaždice...</string>
+	<string name="reading_cached_tiles">Načítám uložené dlaždice…</string>
 	<string name="version_index_is_big_for_memory">Index \'\'{0}\'\' se nevejde do paměti</string>
 	<string name="version_index_is_not_supported">Verze indexu \'\'{0}\'\' není podporována</string>
 
@@ -376,10 +376,10 @@
     exportovat a po instalaci importovat.
   </string>
   <string name="build_installed">Balíček {0} úspěšně instalován ({1}).</string>
-  <string name="downloading_build">Stahuji balíček...</string>
+  <string name="downloading_build">Stahuji balíček…</string>
   <string name="install_selected_build">Opravdu chcete instalovat OsmAnd - {0} z {1} {2} MB.</string>
   <string name="loading_builds_failed">Stahování seznamu balíčků selhalo.</string>
-  <string name="loading_builds">Načítám balíčky...</string>
+  <string name="loading_builds">Načítám balíčky…</string>
   <string name="select_build_to_install">Vyberte balíček OsmAnd k nainstalování</string>
   <string name="contribution_activity">Speciální aktivita pro vývojovou verzi</string>
 
@@ -477,7 +477,7 @@
   <string name="voice_not_use">Nepoužívat</string>
   <string name="voice_not_specified">Žádný</string>
 
-  <string name="installing_new_resources">Rozbaluji nová data...</string>
+  <string name="installing_new_resources">Rozbaluji nová data…</string>
 
   <string name="internet_connection_required_for_online_route">
     Snažíte se použít online navigaci, ale nemáte internetové
@@ -501,7 +501,7 @@
 
   <string name="switch_to_vector_map_to_see">
     Na vektorové mapy se můžete přepnout v menu (Vrstvy -> Zdroj
-    map... -> Vektorové mapy OSM)
+    map… -> Vektorové mapy OSM)
   </string>
   <string name="choose_audio_stream">Kanál pro navádění</string>
   <string name="choose_audio_stream_descr">
@@ -521,12 +521,12 @@
   <string name="map_transparency_descr">Upravit průhlednost základní mapy</string>
   <string name="map_transparency">Průhlednost základní mapy</string>
   <string name="modify_transparency">Upravit průhlednost</string>
-  <string name="layer_underlay">Podkres mapy...</string>
+  <string name="layer_underlay">Podkres mapy…</string>
   <string name="map_underlay">Podkresová mapa</string>
   <string name="map_underlay_descr">
     Vyberte mapu zobrazenou pod základní mapou
   </string>
-  <string name="layer_overlay">Překryvná mapa...</string>
+  <string name="layer_overlay">Překryvná mapa…</string>
   <string name="default_none">Žádná</string>
   <string name="map_overlay">Překryvná mapa</string>
   <string name="map_overlay_descr">
@@ -543,7 +543,7 @@
   <string name="internet_not_available">
     Internetové připojení není dostupné
   </string>
-  <string name="install_more">Instalovat další...</string>
+  <string name="install_more">Instalovat další…</string>
   <string name="level_to_switch_vector_raster_descr">
     Úroveň zvětšení, od které se zobrazení přepne z rastrového na
     vektorové.
@@ -569,7 +569,7 @@
 
     \n\t
 
-    Volbou \'Zdroj map...\' můžete změnit předdefinovaný zdroj
+    Volbou \'Zdroj map…\' můžete změnit předdefinovaný zdroj
     mapových dlaždic, nebo vybrat data vytvořená ručně pomocí
     OsmAnd Map Creatoru na PC.
   </string>
@@ -720,7 +720,7 @@
   <string name="no_vector_map_loaded">Vektorové mapy nebyly načteny</string>
   <string name="map_route_by_gpx">Cestovat podle GPX</string>
   <string name="gpx_files_not_found">Soubory GPX nebyly nalezeny v adresáři /osmand/tracks</string>
-  <string name="layer_gpx_layer">GPX trasa...</string>
+  <string name="layer_gpx_layer">GPX trasa…</string>
   <string name="error_reading_gpx">Chyba při načítání dat GPX</string>
 
   <string name="vector_data">Vektorové mapy OSM</string>
@@ -754,12 +754,12 @@
   <string name="layer_favorites">Oblíbené</string>
   <string name="layer_osm_bugs">Chyby OSM</string>
   <string name="layer_transport">Zastávky</string>
-  <string name="layer_poi">POI...</string>
-  <string name="layer_map">Zdroj map...</string>
+  <string name="layer_poi">POI…</string>
+  <string name="layer_map">Zdroj map…</string>
   <string name="menu_layers">Vrstvy</string>
   <string name="continue_follow_previous_route">Předchozí cesta nebyla dokončená. Následovat dál?</string>
   <string name="context_menu_item_search_poi">Hledat POI</string>
-  <string name="context_menu_item_show_route">Cestovat od...</string>
+  <string name="context_menu_item_show_route">Cestovat od…</string>
   <string name="use_trackball_descr">Použít trackball k posouvání mapy</string>
   <string name="use_trackball">Použít trackball</string>
   <string name="background_service_wait_int_descr">Vyberte čekací dobu pro určení polohy</string>
@@ -785,14 +785,14 @@
   <string name="menu_mute_on">Zvuk je vypnut</string>
   <string name="voice_provider_descr">Vybrat hlasová data pro navigaci</string>
   <string name="voice_provider">Hlasová data</string>
-  <string name="voice_data_initializing">Inicializuji hlasová data...</string>
+  <string name="voice_data_initializing">Inicializuji hlasová data…</string>
   <string name="voice_data_not_supported">Nepodporovaná verze hlasových dat</string>
   <string name="voice_data_corrupted">Zvolené hlasové údaje jsou poškozené</string>
   <string name="voice_data_unavailable">Současné hlasové údaje jsou nejsou dostupné</string>
   <string name="stop_routing">Zastavit navigaci</string>
   <string name="sd_unmounted">SD karta není dostupná.\nNeuvidíte mapu a nebudete moci ani nic najít.</string>
   <string name="sd_mounted_ro">SD karta má zakázaný zápis.\nMůžete prohlížet jen přednačtenou mapu a nelze stahovat mapy z internetu.</string>
-  <string name="unzipping_file">Rozbaluji soubor...</string>
+  <string name="unzipping_file">Rozbaluji soubor…</string>
   <string name="route_tr">Odbočte vpravo a pokračujte</string>
   <string name="route_tshr">Odbočte ostře vpravo a pokračujte</string>
   <string name="route_tslr">Odbočte mírně vpravo a pokračujte</string>
@@ -813,7 +813,7 @@
     nebo připravit sami. Poté budete moci hledat podle adres, hledat
     body zájmu (POI) a spojení veřejnou dopravou.
   </string>
-  <string name="search_poi_location">Hledám signál...</string>
+  <string name="search_poi_location">Hledám signál…</string>
   <string name="search_near_map">Hledat poblíž poslední polohy</string>
   <string name="search_nearby">Hledat poblíž</string>
   <string name="map_orientation_default">Automaticky</string>
@@ -854,11 +854,11 @@
   <string name="favorite">Oblíbené</string>
   <string name="clear_all">Vymazat vše</string>
   <string name="history">Minulé</string>
-  <string name="uploading_data">Odesílám data...</string>
+  <string name="uploading_data">Odesílám data…</string>
   <string name="uploading">Odesílám</string>
   <string name="search_nothing_found">Nic nebylo nalezeno</string>
   <string name="searching">Hledám</string>
-  <string name="searching_address">Hledám adresu...</string>
+  <string name="searching_address">Hledám adresu…</string>
   <string name="search_osm_nominatim">Hledat adresu pomocí OSM Nominatim</string>
   <string name="hint_search_online">Číslo domu, ulice, město</string>
   <string name="search_offline_address">Offline</string>
@@ -874,8 +874,8 @@
   <string name="address">Adresa</string>
   <string name="download_index_success">Index úspěšně stažen</string>
   <string name="error_io_error">Došlo k chybě vstupu/výstupu</string>
-  <string name="downloading_file">Stahuji soubor...</string>
-  <string name="downloading">Stahuji...</string>
+  <string name="downloading_file">Stahuji soubor…</string>
+  <string name="downloading">Stahuji…</string>
   <string name="downloading_list_indexes">Stahuji seznam dostupných indexů</string>
   <string name="list_index_files_was_not_loaded">Seznam indexů z osmand.net nebyl stažen.</string>
   <string name="select_index_file_to_download">Pokud nemůžete najít svou oblast, můžete si data vytvořit sami, viz osmand.net</string>
@@ -890,17 +890,17 @@
   <string name="get_directions">Navigace</string>
   <string name="show_gps_status">Ukázat stav GPS</string>
   <string name="opening_hours">Otevírací doba</string>
-  <string name="opening_changeset">Otevírám sadu změn...</string>
-  <string name="closing_changeset">Zavírám sadu změn...</string>
-  <string name="commiting_node">Odesílám uzel...</string>
-  <string name="loading_poi_obj">Načítám POI...</string>
+  <string name="opening_changeset">Otevírám sadu změn…</string>
+  <string name="closing_changeset">Zavírám sadu změn…</string>
+  <string name="commiting_node">Odesílám uzel…</string>
+  <string name="loading_poi_obj">Načítám POI…</string>
   <string name="auth_failed">Autorizace selhala</string>
   <string name="failed_op">chyba</string>
-  <string name="converting_names">Převádím místní/anglická jména...</string>
-  <string name="loading_streets_buildings">Načítám ulice/budovy...</string>
-  <string name="loading_postcodes">Načítám PSČ...</string>
-  <string name="loading_streets">Načítám ulice...</string>
-  <string name="loading_cities">Načítám města...</string>
+  <string name="converting_names">Převádím místní/anglická jména…</string>
+  <string name="loading_streets_buildings">Načítám ulice/budovy…</string>
+  <string name="loading_postcodes">Načítám PSČ…</string>
+  <string name="loading_streets">Načítám ulice…</string>
+  <string name="loading_cities">Načítám města…</string>
   <string name="loading">Loading</string>
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">Chyba při ukládání GPX</string>
@@ -913,9 +913,9 @@
   <string name="go_back_to_osmand">Vrátit se k mapě OsmAnd</string>
   <string name="close">Zavřít</string>
   <string name="loading_data">Načítám data</string>
-  <string name="reading_indexes">Načítám indexy...</string>
+  <string name="reading_indexes">Načítám indexy…</string>
   <string name="previous_run_crashed">Aplikace minule selhala. Soubor s hlášením je v {0}. Prosím ohlaste problém a přiložte hlášení o chybě.</string>
-  <string name="saving_gpx_tracks">Ukládám GPX trasy na SD...</string>
+  <string name="saving_gpx_tracks">Ukládám GPX trasy na SD…</string>
   <string name="finished_task">Hotovo</string>
   <string name="reload_indexes_descr">Znovu načte data z SD karty</string>
   <string name="reload_indexes">Znovu načíst data</string>

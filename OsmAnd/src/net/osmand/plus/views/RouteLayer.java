@@ -5,7 +5,6 @@ import java.util.List;
 
 import net.osmand.LogUtil;
 import net.osmand.osm.MapUtils;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.R;
 import android.graphics.Canvas;

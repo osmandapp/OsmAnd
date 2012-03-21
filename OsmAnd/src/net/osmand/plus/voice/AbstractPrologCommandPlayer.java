@@ -11,7 +11,6 @@ import java.util.List;
 
 import net.osmand.LogUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 

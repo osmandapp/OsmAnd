@@ -3,7 +3,6 @@ package net.osmand.plus.activities.search;
 import java.util.ArrayList;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
 import android.os.Bundle;

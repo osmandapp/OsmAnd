@@ -13,7 +13,6 @@ import java.util.Date;
 import java.util.List;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 

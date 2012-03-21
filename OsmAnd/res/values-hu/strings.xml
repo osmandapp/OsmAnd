@@ -15,7 +15,7 @@
 	</string>
 
 	<string name="update_poi_does_not_change_indexes">Az alkalmazáson belüli POI módosítások nincsenek hatással a letöltött térképre, a változások helyi fájlban tárolódnak.</string>
-	<string name="local_openstreetmap_uploading_poi">POI feltöltése...</string>
+	<string name="local_openstreetmap_uploading_poi">POI feltöltése…</string>
 	<string name="local_openstreetmap_poi_were_uploaded">{0} POI feltöltve</string>
 	<string name="local_openstreetmap_uploadall">Összes POI feltöltése</string>
 	<string name="local_openstreetmap_items"></string>

@@ -23,7 +23,6 @@ import net.osmand.plus.TransportIndexRepository.RouteInfoLocation;
 import net.osmand.plus.activities.TransportRouteHelper;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;

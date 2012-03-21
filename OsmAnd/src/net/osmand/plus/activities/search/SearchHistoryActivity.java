@@ -2,7 +2,6 @@ package net.osmand.plus.activities.search;
 
 import java.util.List;
 
-import com.google.android.apps.analytics.easytracking.TrackedActivity;
 import com.google.android.apps.analytics.easytracking.TrackedListActivity;
 
 import net.osmand.OsmAndFormatter;
@@ -15,7 +14,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.activities.search.SearchHistoryHelper.HistoryEntry;
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;

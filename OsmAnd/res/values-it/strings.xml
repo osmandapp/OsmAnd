@@ -17,7 +17,7 @@
 	</string>
 
 	<string name="update_poi_does_not_change_indexes">I cambiamenti dei PDI all\'interno dell\'applicazione non si riflettono nelle mappe scaricate, i cambiamenti sono salvati in un file locale.</string>
-	<string name="local_openstreetmap_uploading_poi">Caricando i PDI...</string>
+	<string name="local_openstreetmap_uploading_poi">Caricando i PDI…</string>
 	<string name="local_openstreetmap_poi_were_uploaded">{0} PDI sono stati caricati</string>
 	<string name="local_openstreetmap_uploadall">Carica tutti i PDI</string>
 	<string name="local_openstreetmap_items"></string>
@@ -175,13 +175,13 @@
 	<string name="poi_filter_nominatim">Nominatim Online</string>
 	<string name="search_select_point">Seleziona</string>
 	<string name="local_index_description">Scarica nuovi dati, sposta, salva o cancella dati esistenti. \nDati attualmente nel dispositivo (%1$s disponibile):</string>
-	<string name="search_position_current_location_search">Cerca posizione...</string>
+	<string name="search_position_current_location_search">Cerca posizione…</string>
 	<string name="search_position_current_location_found">Posizione [Trovata]</string>
-	<string name="search_position_address">Indirizzi...</string>
-	<string name="search_position_favorites">Preferiti...</string>
+	<string name="search_position_address">Indirizzi…</string>
+	<string name="search_position_favorites">Preferiti…</string>
 	<string name="search_position_undefined">Non definito</string>
 	<string name="search_position_fixed">Punto</string>
-	<string name="search_position_current_location">Posizione corrente...</string>
+	<string name="search_position_current_location">Posizione corrente…</string>
 	<string name="search_position_map_view">Ultima vista mappa</string>
 
 	<string name="select_search_position">Cerca vicino :</string>
@@ -238,7 +238,7 @@
 	<string name="local_index_mi_backup">Backup</string>
 	<string name="local_index_mi_delete">Elimina</string>
 	<string name="local_index_mi_reload">Ricarica</string>
-	<string name="local_index_download">Scarica...</string>
+	<string name="local_index_download">Scarica…</string>
 	<string name="local_index_tile_data">Dati tile: %1$s \nZoom minimo : %2$d\nZoom massimo : %3$d\nScaricabile : %4$s \nZoom scaricati : %5$s</string>
 	<string name="local_index_poi_data">Dati PDI</string>
 	<string name="local_index_address_data">Dati indirizzi</string>
@@ -270,7 +270,7 @@
 	</string>
 	<string name="voice_not_use">Non usare</string>
 	<string name="voice_not_specified">Nessuna</string>
-	<string name="installing_new_resources">Installando nuovi file...</string>
+	<string name="installing_new_resources">Installando nuovi file…</string>
 	<string name="internet_connection_required_for_online_route">Stai per usare un servizio di routing online ma non sei su internet.</string>
 	<string name="tts_language_not_supported_title">Lingua non supportata</string>
 	<string name="tts_language_not_supported">La lingua selezionata non è supportata nel motore TTS (text-to-speech) Android installato. Vuoi vedere nel Market un altro motore TTS? Altrimenti verrà utilizzata la lingua TTS di default.</string>
@@ -281,7 +281,7 @@
 	<string name="gpx_option_destination_point">Usa il punto di destinazione attuale</string>
 	<string name="gpx_option_from_start_point">Passa lungo tutto il percorso</string>
 
-	<string name="switch_to_vector_map_to_see">Puoi selezionare le mappe vettoriali offline (Definisci vista -> Fonte Mappa... -> Mappe vettoriali offline) per visualizzare la mappa.</string>
+	<string name="switch_to_vector_map_to_see">Puoi selezionare le mappe vettoriali offline (Definisci vista -> Fonte Mappa… -> Mappe vettoriali offline) per visualizzare la mappa.</string>
 	<string name="choose_audio_stream">Output per la guida vocale</string>
 	<string name="choose_audio_stream_descr">Scegli il canale per la guida vocale (dipendente dal sistema)</string>
 	<string name="voice_stream_voice_call">Stream chiamate vocali</string>
@@ -293,10 +293,10 @@
 	<string name="map_transparency_descr">Modifica trasparenza mappa di sfondo</string>
 	<string name="map_transparency">Trasparenza mappa di sfondo</string>
 	<string name="modify_transparency">Modica la trasparenza</string>
-	<string name="layer_underlay">Mappa di sfondo...</string>
+	<string name="layer_underlay">Mappa di sfondo…</string>
 	<string name="map_underlay">Mappa di sfondo</string>
 	<string name="map_underlay_descr">Scegli mappa di sfondo</string>
-	<string name="layer_overlay">Mappa di overlay...</string>
+	<string name="layer_overlay">Mappa di overlay…</string>
 	<string name="default_none">Nessuna</string>
 	<string name="map_overlay">Mappa di overlay</string>
 	<string name="map_overlay_descr">Scegli mappa di overlay</string>
@@ -305,7 +305,7 @@
 	<string name="tile_source_already_installed">La mappa è già installata, verrà aggiornata</string>
 	<string name="select_tile_source_to_install">Seleziona le mappe (tile) da installare o aggiornare</string>
 	<string name="internet_not_available">Connessione internet richiesta ma non disponibile</string>
-	<string name="install_more">Installa altro...</string>
+	<string name="install_more">Installa altro…</string>
 
 	<string name="tip_update_index">Aggiornamento Dati Offline</string>
 	<string name="tip_update_index_t">\tAvere dati aggiornati è importante. Osmand fornisce un download manager che controlla gli aggiornamenti disponibili.
@@ -340,7 +340,7 @@
 
 	<string name="tip_map_switch">Fonte Mappa</string>
 	<string name="tip_map_switch_t">\tIl modo più veloce per cambiare la fonte per la mappa e i layers è tramite \'Menu\' -> \'Definisci Vista\' in vista mappa.
-\n\tSotto \'Fonte mappa...\' puoi scegliere tra le mappe vettoriali pre caricate, fonti predefinite (online), mappe create manualmente utilizzando OsmAndMapCreator sul PC.
+\n\tSotto \'Fonte mappa…\' puoi scegliere tra le mappe vettoriali pre caricate, fonti predefinite (online), mappe create manualmente utilizzando OsmAndMapCreator sul PC.
 \n\tOsmAnd supporta anche fonti personalizzate.</string>
 
 	<string name="tip_app_mode">Modo Applicazione</string>
@@ -403,10 +403,10 @@
 	<string name="amenity_type_sustenance">Sostentamento</string>
 	<string name="amenity_type_tourism">Turismo</string>
 	<string name="amenity_type_transportation">Trasporto</string>
-	<string name="indexing_address">Indicizzazione indirizzi...</string>
-	<string name="indexing_map">Indicizzazione mappa...</string>
-	<string name="indexing_poi">Indicizzazione PDI...</string>
-	<string name="indexing_transport">Indicizzazione trasporti...</string>
+	<string name="indexing_address">Indicizzazione indirizzi…</string>
+	<string name="indexing_map">Indicizzazione mappa…</string>
+	<string name="indexing_poi">Indicizzazione PDI…</string>
+	<string name="indexing_transport">Indicizzazione trasporti…</string>
 	<string name="input_output_error">Errore di I/O</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
@@ -419,7 +419,7 @@
 	<string name="poi_filter_for_tourists">Per Turisti</string>
 	<string name="poi_filter_fuel">Benzina</string>
 	<string name="poi_filter_namefinder">Ricerca nomi Online</string>
-	<string name="reading_cached_tiles">Lettura tiles dalla cache...</string>
+	<string name="reading_cached_tiles">Lettura tiles dalla cache…</string>
 	<string name="version_index_is_big_for_memory">L\'indice \'\'{0}\'\' è troppo grande per l\'attuale memoria</string>
 	<string name="version_index_is_not_supported">La versione di indice \'\'{0}\'\' non è supportata</string>
 
@@ -432,10 +432,10 @@
 
 	<string name="osmand_net_previously_installed">E\' stata trovata una versione precedente di OsmAnd. Tutti i dati verranno supportati dalla nuova applicazione. I Preferiti devono essere esportati dalla vecchia applicazione e importati manualmente nella nuova.</string>
 	<string name="build_installed">Build {0} installata ({1}).</string>
-	<string name="downloading_build">Scaricamento build...</string>
+	<string name="downloading_build">Scaricamento build…</string>
 	<string name="install_selected_build">Continua l\'installazione di OsmAnd - {0} di {1} {2} MB ?</string>
 	<string name="loading_builds_failed">Caricamento lista build di OsmAnd fallito</string>
-	<string name="loading_builds">Caricamento build OsmAnd...</string>
+	<string name="loading_builds">Caricamento build OsmAnd…</string>
 	<string name="select_build_to_install">Seleziona una buil OsmAnd da installare</string>
 	<string name="contribution_activity">Attività speciale per la versione a pagamento</string>
 
@@ -495,7 +495,7 @@
 
 	<string name="map_route_by_gpx">Percorso tramite GPX</string>
 	<string name="gpx_files_not_found">File GPX non trovato nella cartella /tracks</string>
-	<string name="layer_gpx_layer">Percorso GPX...</string>
+	<string name="layer_gpx_layer">Percorso GPX…</string>
 	<string name="error_reading_gpx">Errore lettura dati GPX</string>
 
 	<string name="vector_data">Mappe vettoriali offline</string>
@@ -529,8 +529,8 @@
 	<string name="layer_favorites">Preferiti</string>
 	<string name="layer_osm_bugs">Bug OSM</string>
 	<string name="layer_transport">Fermate trasporto pubblico</string>
-	<string name="layer_poi">PDI...</string>
-	<string name="layer_map">Tipo Mappa...</string>
+	<string name="layer_poi">PDI…</string>
+	<string name="layer_map">Tipo Mappa…</string>
 	<string name="menu_layers">Presentazione</string>
 	<string name="continue_follow_previous_route">Percorso incompleto. Continuare a seguirlo?</string>
 	<string name="context_menu_item_search_poi">Cercare PDI</string>
@@ -560,14 +560,14 @@
 	<string name="menu_mute_on">Voce non attiva</string>
 	<string name="voice_provider_descr">Scegliere la voce da utilizzare</string>
 	<string name="voice_provider">Dati voce</string>
-	<string name="voice_data_initializing">Dati voce in preparazione...</string>
+	<string name="voice_data_initializing">Dati voce in preparazione…</string>
 	<string name="voice_data_not_supported">La versione dei dati vocali differisce dalla versione supportata dall\'applicazione</string>
 	<string name="voice_data_corrupted">I dati voce specificati sono corrotti</string>
 	<string name="voice_data_unavailable">Dati voce non disponibili</string>
 	<string name="stop_routing">Ferma il routing</string>
 	<string name="sd_unmounted">Scheda SD attualmente non accessibile. \nImpossibile vedere le mappe e cercare alcunchè.</string>
 	<string name="sd_mounted_ro">Scheda SD attualmente accessibile in sola lettura. \nImpossibile effettuare download da internet e solo le mappe precaricate sono visibili.</string>
-	<string name="unzipping_file">File in decompressione...</string>
+	<string name="unzipping_file">File in decompressione…</string>
 	<string name="route_tr">Svoltare a destra e continuare</string>
 	<string name="route_tshr">Svoltare stretto a destra e continuare</string>
 	<string name="route_tslr">Svoltare leggermente a destra e continuare</string>
@@ -579,7 +579,7 @@
 	<string name="first_time_continue">Continuare</string>
 	<string name="first_time_download">Download indici</string>
 	<string name="first_time_msg">Grazie per aver scelto OsmAnd. \nPer utilizzare tutte le caratteristiche dell\'applicazione sono necessari i file di indice, che possono essere scaricati (Impostazioni/Dati) o creati da voi. Sarà poi possibile :cercare indirizzi, PDI, trasporti pubblici.</string>
-	<string name="search_poi_location">Ricerca posizione PDI...</string>
+	<string name="search_poi_location">Ricerca posizione PDI…</string>
 	<string name="search_near_map">Ricerca vicino all\'ultima posizione sulla mappa</string>
 	<string name="search_nearby">Ricerca vicino</string>
 	<string name="map_orientation_default">Default</string>
@@ -620,11 +620,11 @@
 	<string name="favorite">Preferito</string>
 	<string name="clear_all">Eliminare tutto</string>
 	<string name="history">Recenti</string>
-	<string name="uploading_data">Invio dati...</string>
-	<string name="uploading">Invio...</string>
+	<string name="uploading_data">Invio dati…</string>
+	<string name="uploading">Invio…</string>
 	<string name="search_nothing_found">Trovato nulla</string>
-	<string name="searching">Ricerca...</string>
-	<string name="searching_address">Ricerca indirizzo...</string>
+	<string name="searching">Ricerca…</string>
+	<string name="searching_address">Ricerca indirizzo…</string>
 	<string name="search_osm_nominatim">Ricerca indirizzo con OSM Nominatim</string>
 	<string name="hint_search_online">Numero civico, strada, città</string>
 	<string name="search_offline_address">Offline</string>
@@ -640,9 +640,9 @@
 	<string name="address">Indirizzo</string>
 	<string name="download_index_success">Download completato</string>
 	<string name="error_io_error">Errore di Input/Output.</string>
-	<string name="downloading_file">Ricezione file...</string>
-	<string name="downloading">In ricezione...</string>
-	<string name="downloading_list_indexes">Ricezione lista regioni disponibili...</string>
+	<string name="downloading_file">Ricezione file…</string>
+	<string name="downloading">In ricezione…</string>
+	<string name="downloading_list_indexes">Ricezione lista regioni disponibili…</string>
 	<string name="list_index_files_was_not_loaded">I file di indice non sono stati trovati su osmand.net.</string>
     <string name="select_index_file_to_download">Se non trovate la vostra zona potete generarla da voi. Consultare osmand.net</string>
 	<string name="show_poi_on_map">Visualizza sulla mappa</string>
@@ -656,18 +656,18 @@
 	<string name="get_directions">Percorsi</string>
     <string name="show_gps_status">Visualizzare lo stato del gps</string>
 	<string name="opening_hours">Orari di apertura</string>
-	<string name="opening_changeset">Apertura...</string>
-	<string name="closing_changeset">Chiusura...</string>
-	<string name="commiting_node">Invio oggetto...</string>
-	<string name="loading_poi_obj">Caricamento PDI...</string>
+	<string name="opening_changeset">Apertura…</string>
+	<string name="closing_changeset">Chiusura…</string>
+	<string name="commiting_node">Invio oggetto…</string>
+	<string name="loading_poi_obj">Caricamento PDI…</string>
 	<string name="auth_failed">Autorizzazione fallita</string>
 	<string name="failed_op">Fallito</string>
-	<string name="converting_names">Conversione nomi locali/nomi inglesi...</string>
-	<string name="loading_streets_buildings">Caricamento strade/civici...</string>
-	<string name="loading_postcodes">Caricamento CAP...</string>
-	<string name="loading_streets">Caricamento strade...</string>
-	<string name="loading_cities">Caricamento città...</string>
-	<string name="loading">Caricamento...</string>
+	<string name="converting_names">Conversione nomi locali/nomi inglesi…</string>
+	<string name="loading_streets_buildings">Caricamento strade/civici…</string>
+	<string name="loading_postcodes">Caricamento CAP…</string>
+	<string name="loading_streets">Caricamento strade…</string>
+	<string name="loading_cities">Caricamento città…</string>
+	<string name="loading">Caricamento…</string>
 	<string name="poi">PDI</string>
 	<string name="error_occurred_saving_gpx">Errore durante il salvataggio GPX</string>
 	<string name="error_calculating_route">Errore di calcolo percorso</string>
@@ -678,10 +678,10 @@
 	<string name="invalid_locations">Luoghi invalidi</string>
 	<string name="go_back_to_osmand">Ritornare alla mappa OsmAnd</string>
 	<string name="close">Chiudi</string>
-	<string name="loading_data">Caricamento dati...</string>
-	<string name="reading_indexes">Lettura indici...</string>
+	<string name="loading_data">Caricamento dati…</string>
+	<string name="reading_indexes">Lettura indici…</string>
 	<string name="previous_run_crashed">Il precedente avvio dell\'applicazione si è interrotto. Il file di log è posizionato in {0}. Vi preghiamo di inviare una segnalazione allegando il file di log.</string>
-	<string name="saving_gpx_tracks">Salvataggio tracce gpx sulla scheda SD...</string>
+	<string name="saving_gpx_tracks">Salvataggio tracce gpx sulla scheda SD…</string>
 	<string name="finished_task">Finito</string>
     <string name="reload_indexes_descr">Ricarica dei dati dalla scheda SD</string>
     <string name="reload_indexes">Ricarica indici</string>

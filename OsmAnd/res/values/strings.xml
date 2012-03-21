@@ -18,7 +18,7 @@
 	</string>
 
 	<string name="update_poi_does_not_change_indexes">POI changes inside application do not affect downloaded map files, changes are saved to local file instead.</string>
-	<string name="local_openstreetmap_uploading_poi">Uploading POI...</string>
+	<string name="local_openstreetmap_uploading_poi">Uploading POI…</string>
 	<string name="local_openstreetmap_poi_were_uploaded">{0} POI were uploaded</string>
 	<string name="local_openstreetmap_uploadall">Upload all POI</string>
 	<string name="local_openstreetmap_items"></string>
