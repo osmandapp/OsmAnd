@@ -192,22 +192,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 		
 		LatLon latLon = view.getLatLonFromScreenPoint(point.x, point.y);
-		StringBuilder description = new StringBuilder(); 
+		String description = getSelectedObjectDescription();
 		
 		if (!selectedObjects.isEmpty()) {
-			if (selectedObjects.size() > 1) {
-				description.append("1. ");
-			}
-			description.append(selectedContextProvider.getObjectDescription(selectedObjects.get(0)));
-			for (int i = 1; i < selectedObjects.size(); i++) {
-				description.append("\n" + (i + 1) + ". ").append(selectedContextProvider.getObjectDescription(selectedObjects.get(i)));
-			}
 			LatLon l = selectedContextProvider.getObjectLocation(selectedObjects.get(0));
 			if (l != null) {
 				latLon = l;
 			}
 		}
-		setLocation(latLon, description.toString());
+		setLocation(latLon, description);
 		view.refreshMap();
 		return true;
 	}
@@ -240,6 +233,19 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			for (int i = 1; i < selectedObjects.size(); i++)
 				name.append("\n" + (i + 1) + ". ").append(selectedContextProvider.getObjectName(selectedObjects.get(i)));
 			return name.toString();
+		}
+		return null;
+	}
+	
+	public String getSelectedObjectDescription(){
+		if(!selectedObjects.isEmpty() && selectedContextProvider != null){
+			StringBuilder description = new StringBuilder(); 
+			if (selectedObjects.size() > 1)
+				description.append("1. ");
+			description.append(selectedContextProvider.getObjectDescription(selectedObjects.get(0)));
+			for (int i = 1; i < selectedObjects.size(); i++)
+				description.append("\n" + (i + 1) + ". ").append(selectedContextProvider.getObjectDescription(selectedObjects.get(i)));
+			return description.toString();
 		}
 		return null;
 	}
