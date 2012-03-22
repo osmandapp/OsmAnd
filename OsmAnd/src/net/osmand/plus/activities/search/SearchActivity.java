@@ -74,11 +74,12 @@ public class SearchActivity extends TabActivity {
 		public void locationUpdate(LatLon l);
 	}
 	
-	private View getTabIndicator(int imageId){
+	private View getTabIndicator(int imageId, int stringId){
 		View r = getLayoutInflater().inflate(R.layout.search_main_tab_header, getTabHost(), false);
 		ImageView tabImage = (ImageView)r.findViewById(R.id.TabImage);
 		tabImage.setImageResource(imageId);
 		tabImage.setBackgroundResource(R.drawable.tab_icon_background);
+		tabImage.setContentDescription(getString(stringId));
 		return r;
 	}
 	
@@ -124,20 +125,20 @@ public class SearchActivity extends TabActivity {
 		TabWidget tabs = (TabWidget) findViewById(android.R.id.tabs);
 		tabs.setBackgroundResource(R.drawable.tab_icon_background);
 		TabHost host = getTabHost(); 
-		host.addTab(host.newTabSpec("Search_POI").setIndicator(getTabIndicator(R.drawable.tab_search_poi_icon)).
+		host.addTab(host.newTabSpec("Search_POI").setIndicator(getTabIndicator(R.drawable.tab_search_poi_icon, R.string.poi)).
 				setContent(new Intent(this, SearchPoiFilterActivity.class))); //$NON-NLS-1$
 		
 		addressSpec = host.newTabSpec("Search_Address").
-				setIndicator(getTabIndicator(R.drawable.tab_search_address_icon));
+                    setIndicator(getTabIndicator(R.drawable.tab_search_address_icon, R.string.address));
 		
 		setAddressSpecContent();
 
 		host.addTab(addressSpec);
-		host.addTab(host.newTabSpec("Search_Location").setIndicator(getTabIndicator(R.drawable.tab_search_location_icon)).setContent(createIntent(NavigatePointActivity.class))); //$NON-NLS-1$
-		TabSpec transportTab = host.newTabSpec("Search_Transport").setIndicator(getTabIndicator(R.drawable.tab_search_transport_icon)).setContent(createIntent(SearchTransportActivity.class));
+		host.addTab(host.newTabSpec("Search_Location").setIndicator(getTabIndicator(R.drawable.tab_search_location_icon, R.string.search_tabs_location)).setContent(createIntent(NavigatePointActivity.class))); //$NON-NLS-1$
+		TabSpec transportTab = host.newTabSpec("Search_Transport").setIndicator(getTabIndicator(R.drawable.tab_search_transport_icon, R.string.transport)).setContent(createIntent(SearchTransportActivity.class));
 		host.addTab(transportTab); //$NON-NLS-1$
-		host.addTab(host.newTabSpec("Search_Favorites").setIndicator(getTabIndicator(R.drawable.tab_search_favorites_icon)).setContent(createIntent(FavouritesListActivity.class))); //$NON-NLS-1$
-		host.addTab(host.newTabSpec("Search_History").setIndicator(getTabIndicator(R.drawable.tab_search_history_icon)).setContent(createIntent(SearchHistoryActivity.class))); //$NON-NLS-1$
+		host.addTab(host.newTabSpec("Search_Favorites").setIndicator(getTabIndicator(R.drawable.tab_search_favorites_icon, R.string.favorite)).setContent(createIntent(FavouritesListActivity.class))); //$NON-NLS-1$
+		host.addTab(host.newTabSpec("Search_History").setIndicator(getTabIndicator(R.drawable.tab_search_history_icon, R.string.history)).setContent(createIntent(SearchHistoryActivity.class))); //$NON-NLS-1$
 		host.setCurrentTab(POI_TAB_INDEX);
 		
 		
