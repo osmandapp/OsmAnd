@@ -87,20 +87,33 @@
 		<filter layer="-1" tag="" value="" order="10" objectType="2"/>
 		<filter tag="" value="" order="11" objectType="2"/>
 		
-		<group objectType="2" cycle="false" area="false">
+		<group objectType="3">
+			<type tag="railway" value="platform" order="30" />
+			<type tag="railway" value="station"  order="30"/>
+		</group>
+		
+		<group objectType="2" area="false">
 			<!-- Over buildings -->
 			<filter tag="aerialway" value="" order="68"/>
-			<filter tag="power" value="" order="68"/>
+			<filter tag="power" value="line" order="68"/>
+			<filter layer="1" tag="railway" value="" order="66"/>
+			<filter tag="railway" value="" order="58"/>
+			<filter layer="1" tag="waterway" value="" order="66"/>
+			<filter tag="waterway" value="" order="18"/>
 
 			<!-- Under highways unless appMode=default -->
 			<filter appMode="pedestrian" tag="admin_level" value="" order="34"/>
 			<filter appMode="bicycle" tag="admin_level" value="" order="34"/>
 			<filter appMode="car" tag="admin_level" value="" order="34"/>
+			<!-- Below sea level -->
+			<filter tag="admin_level" value="0" order="0"/>
+			<filter tag="admin_level" value="1" order="0"/>
 			<filter tag="admin_level" value="" order="62"/>
+			
 			<filter tag="administrative" value="" order="62"/>
-
-			 <filter layer="1" tag="railway" value="" order="66"/>
-			<filter tag="railway" value="" order="58"/>
+			 
+			<filter tag="contour" value="" order="15"/>
+				 
 
 			<!-- Highways: 35-57, bridges 66+/-1 -->
 			 <filter layer="1" tag="highway" value="motorway" order="66" shadowLevel="1"/>
@@ -186,23 +199,15 @@
 			<filter appMode="pedestrian" tag="highway" value="bridleway" order="59"/>
 			<filter tag="highway" value="bridleway" order="35"/>
 
-			 <filter layer="1" tag="waterway" value="" order="66"/>
-			<filter tag="waterway" value="" order="18"/>
-
-			<filter tag="contour" value="" order="15"/>
-
-			<!-- Below sea level -->
-			<filter tag="admin_level" value="0" order="0"/>
-			<filter tag="admin_level" value="1" order="0"/>
-
 		</group>
 		
-			<group objectType="3">
+		<group objectType="3">
+		
 		    <filter layer="-1" tag="building" value="" order="1"/>
 			<filter tag="building" value="" order="64"/>
 
-			<filter tag="railway" value="" order="58"/>
-
+			<filter tag="railway" value="" order="30"/>
+		
 			<filter tag="highway" value="road" order="35"/>
 			<filter tag="highway" value="unclassified" order="35"/>
 			<filter tag="highway" value="residential" order="35"/>
@@ -1148,7 +1153,7 @@
 			<filter tag="highway" value="steps" color="#fa5073" pathEffect="1_2" color_3="#fa5073" pathEffect_3="1_2">
 				<filter appMode="pedestrian" minzoom="16" strokeWidth="4" pathEffect="2_2" strokeWidth_3="4" pathEffect_3="2_2"/>
 				<filter hmRendered="true" minzoom="14" strokeWidth="4" strokeWidth_3="4"/>
-					<filter minzoom="16" strokeWidth="4" strokeWidth_3="4"/>
+				<filter minzoom="16" strokeWidth="4" strokeWidth_3="4"/>
 			</filter>
 
 			<filter tag="highway" value="bridleway" color="#339900" pathEffect="2_2" color_3="#339900" pathEffect_3="2_2">

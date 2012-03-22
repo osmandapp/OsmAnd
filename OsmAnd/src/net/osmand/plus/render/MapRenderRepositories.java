@@ -30,7 +30,6 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.IndexConstants;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
-import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.MultyPolygon;
 import net.osmand.plus.OsmandApplication;
@@ -316,25 +315,21 @@ public class MapRenderRepositories {
 				public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex root) {
 					for (int j = 0; j < types.size(); j++) {
 						int type = types.get(j);
-						int mask = type & 3;
 						TagValuePair pair = root.decodeType(type);
 						if (pair != null) {
-							if(mask == MapRenderingTypes.MULTY_POLYGON_TYPE){
-								mask = RenderingRulesStorage.POLYGON_RULES;
-							}
-							renderingReq.setIntFilter(renderingReq.ALL.R_MINZOOM, zoom);
-							renderingReq.setStringFilter(renderingReq.ALL.R_TAG, pair.tag);
-							renderingReq.setStringFilter(renderingReq.ALL.R_VALUE, pair.value);
-							if (renderingReq.search(mask, false)) {
-								return true;
-							}
-							if (mask == RenderingRulesStorage.POINT_RULES) {
+							// TODO is it fast enough ?
+							for (int i = 1; i <= 3; i++) {
+								renderingReq.setIntFilter(renderingReq.ALL.R_MINZOOM, zoom);
 								renderingReq.setStringFilter(renderingReq.ALL.R_TAG, pair.tag);
 								renderingReq.setStringFilter(renderingReq.ALL.R_VALUE, pair.value);
-								if (renderingReq.search(RenderingRulesStorage.TEXT_RULES, false)) {
+								if (renderingReq.search(i, false)) {
 									return true;
 								}
-
+							}
+							renderingReq.setStringFilter(renderingReq.ALL.R_TAG, pair.tag);
+							renderingReq.setStringFilter(renderingReq.ALL.R_VALUE, pair.value);
+							if (renderingReq.search(RenderingRulesStorage.TEXT_RULES, false)) {
+								return true;
 							}
 						}
 					}
@@ -342,7 +337,7 @@ public class MapRenderRepositories {
 				}
 
 			};
-			if (zoom > 17) {
+			if (zoom > 16) {
 				searchFilter = null;
 			}
 			// search lower level zooms only in basemap for now :) before it was intersection of maps on zooms 5-7
