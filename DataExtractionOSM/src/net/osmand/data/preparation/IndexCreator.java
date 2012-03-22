@@ -626,12 +626,12 @@ public class IndexCreator {
 		long time = System.currentTimeMillis();
 		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/data/osm-gen/")); //$NON-NLS-1$
 		creator.setIndexMap(true);
-		creator.setIndexAddress(false);
-		creator.setIndexPOI(false);
-		creator.setIndexTransport(false);
+		creator.setIndexAddress(true);
+		creator.setIndexPOI(true);
+		creator.setIndexTransport(true);
 
-		creator.recreateOnlyBinaryFile = false;
-		creator.deleteDatabaseIndexes = false;
+//		creator.recreateOnlyBinaryFile = false;
+//		creator.deleteDatabaseIndexes = true;
 //		creator.deleteOsmDB = false;
 				
 		creator.setZoomWaySmothness(2);
