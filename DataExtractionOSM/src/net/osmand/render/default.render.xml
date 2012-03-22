@@ -87,12 +87,12 @@
 		<filter layer="-1" tag="" value="" order="10" objectType="2"/>
 		<filter tag="" value="" order="11" objectType="2"/>
 		
-		<group objectType="3">
+		<group objectType="3" point="false">
 			<type tag="railway" value="platform" order="30" />
 			<type tag="railway" value="station"  order="30"/>
 		</group>
 		
-		<group objectType="2" area="false">
+		<group objectType="2" area="false" point="false">
 			<!-- Over buildings -->
 			<filter tag="aerialway" value="" order="68"/>
 			<filter tag="power" value="line" order="68"/>
@@ -201,7 +201,7 @@
 
 		</group>
 		
-		<group objectType="3">
+		<group objectType="3" point="false">
 		
 		    <filter layer="-1" tag="building" value="" order="1"/>
 			<filter tag="building" value="" order="64"/>
