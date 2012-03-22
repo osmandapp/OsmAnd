@@ -237,8 +237,19 @@ public class TextRenderer {
 						if (text.shieldRes != null) {
 							Bitmap ico = RenderingIcons.getIcon(context, text.shieldRes);
 							if (ico != null) {
-								cv.drawBitmap(ico, text.centerX - ico.getWidth() / 2 - 0.5f,
-										text.centerY - ico.getHeight() / 2 - rc.getDensityValue(4.5f), paintIcon);
+								
+								if (rc.highResMode) {
+									float left = text.centerX - rc.getDensityValue(ico.getWidth() / 2) - 0.5f;
+									float top = text.centerY - rc.getDensityValue(ico.getHeight() / 2) - rc.getDensityValue(4.5f);
+									Rect rec = new Rect(0, 0, ico.getWidth(), ico.getHeight());
+									cv.drawBitmap(ico, rec,
+											new RectF(left, top, left + rc.getDensityValue(ico.getWidth()), top
+													+ rc.getDensityValue(ico.getHeight())), paintIcon);
+								} else {
+									float left = text.centerX - ico.getWidth() / 2 - 0.5f;
+									float top = text.centerY - ico.getHeight() / 2 - rc.getDensityValue(4.5f);
+									cv.drawBitmap(ico, left, top, paintIcon);
+								}
 							}
 						}
 
@@ -298,7 +309,7 @@ public class TextRenderer {
 			if(render.getIntPropertyValue(render.ALL.R_TEXT_SIZE) > 0){
 				TextDrawInfo text = new TextDrawInfo(name);
 				text.fillProperties(render, xMid, yMid);
-				paintText.setTextSize(text.textSize);
+				paintText.setTextSize(rc.getDensityValue(text.textSize));
 				Rect bs = new Rect();
 				paintText.getTextBounds(name, 0, name.length(), bs);
 				text.bounds = new RectF(bs);

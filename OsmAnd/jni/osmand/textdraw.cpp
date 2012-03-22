@@ -534,10 +534,15 @@ void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv) {
 					if (text->shieldRes.length() > 0) {
 						SkBitmap* ico = getCachedBitmap(rc, text->shieldRes);
 						if (ico != NULL) {
-							rc->nativeOperations.pause();
-							cv->drawBitmap(*ico, text->centerX - ico->width() / 2 - 0.5f,
-									text->centerY - ico->height() / 2 - getDensityValue(rc, 4.5f), &paintIcon);
-							rc->nativeOperations.start();
+							if(rc->highResMode) {
+								float left = text->centerX - getDensityValue(rc, ico->width() / 2) - 0.5f;
+								float top =text->centerY - getDensityValue(rc, ico->height() / 2) - getDensityValue(rc, 4.5f);
+								SkRect r = SkRect::MakeXYWH(left, top, getDensityValue(rc, ico->width()), getDensityValue(rc, ico->height()));
+								PROFILE_NATIVE_OPERATION(rc, cv->drawBitmapRect(*ico, (SkIRect*) NULL, r, &paintIcon));
+							} else {
+								PROFILE_NATIVE_OPERATION(rc, cv->drawBitmap(*ico, text->centerX - ico->width() / 2 - 0.5f,
+									text->centerY - ico->height() / 2 - getDensityValue(rc, 4.5f), &paintIcon));
+							}
 						}
 					}
 					drawWrappedText(rc, cv, text, textSize, paintText);

@@ -738,7 +738,7 @@
 		<filter minzoom="15" icon="sport_ski" tag="sport" value="skiing"/>
 		<filter minzoom="16" icon="sport_diving" tag="sport" value="diving"/>
 		<filter minzoom="15" icon="theme_park" tag="tourism" value="theme_park"/>
-		<filter minzoom="16" icon="amenity_bench" tag="amenity" value="bench"/>
+		<filter minzoom="17" icon="amenity_bench" tag="amenity" value="bench"/>
 		<filter minzoom="15" icon="leisure_sports_centre" tag="leisure" value="sports_centre"/>
 		<filter minzoom="16" icon="bird_hide" tag="leisure" value="bird_hide"/>
 

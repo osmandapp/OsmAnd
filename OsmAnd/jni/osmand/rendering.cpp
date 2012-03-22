@@ -560,38 +560,45 @@ void drawObject(RenderingContext* rc, BaseMapDataObject* mapObject, SkCanvas* cv
 
 void drawIconsOverCanvas(RenderingContext* rc, SkCanvas* canvas)
 {
-    int skewConstant = (int) getDensityValue(rc, 16);
-    int iconsW = rc -> width / skewConstant;
-    int iconsH = rc -> height / skewConstant;
-    int len = (iconsW * iconsH) / 32;
-    int alreadyDrawnIcons[len];
-    memset(alreadyDrawnIcons, 0, sizeof(int)*len);
-    size_t ji = 0;
-    SkPaint p;
-    p.setStyle(SkPaint::kStroke_Style);
-    for(;ji< rc->iconsToDraw.size(); ji++)
-    {
-        IconDrawInfo icon = rc->iconsToDraw.at(ji);
-        if (icon.y >= 0 && icon.y < rc -> height && icon.x >= 0 && icon.x < rc -> width &&
-            icon.bmp != NULL) {
-                int z = (((int) icon.x / skewConstant) + ((int) icon.y / skewConstant) * iconsW);
-                int i = z / 32;
-                if (i >= len) {
-                    continue;
-                }
-                int ind = alreadyDrawnIcons[i];
-                int b = z % 32;
-                // check bit b if it is set
-                if (((ind >> b) & 1) == 0) {
-                    alreadyDrawnIcons[i] = ind | (1 << b);
-                    SkBitmap* ico = icon.bmp;
-                    PROFILE_NATIVE_OPERATION(rc, canvas->drawBitmap(*ico, icon.x - ico->width() / 2, icon.y - ico->height() / 2, &p));
-                }
-        }
-        if(rc->interrupted()){
-            return;
-        }
-    }
+	int skewConstant = (int) getDensityValue(rc, 16);
+	int iconsW = rc -> width / skewConstant;
+	int iconsH = rc -> height / skewConstant;
+	int len = (iconsW * iconsH) / 32;
+	int alreadyDrawnIcons[len];
+	memset(alreadyDrawnIcons, 0, sizeof(int)*len);
+	size_t ji = 0;
+	SkPaint p;
+	p.setStyle(SkPaint::kStroke_Style);
+	for(;ji< rc->iconsToDraw.size(); ji++)
+	{
+		IconDrawInfo icon = rc->iconsToDraw.at(ji);
+		if (icon.y >= 0 && icon.y < rc -> height && icon.x >= 0 && icon.x < rc -> width &&
+			icon.bmp != NULL) {
+				int z = (((int) icon.x / skewConstant) + ((int) icon.y / skewConstant) * iconsW);
+				int i = z / 32;
+				if (i >= len) {
+					continue;
+				}
+				int ind = alreadyDrawnIcons[i];
+				int b = z % 32;
+				// check bit b if it is set
+				if (((ind >> b) & 1) == 0) {
+					alreadyDrawnIcons[i] = ind | (1 << b);
+					SkBitmap* ico = icon.bmp;
+					if(rc->highResMode) {
+						float left = icon.x - getDensityValue(rc, ico->width() / 2);
+						float top = icon.y - getDensityValue(rc, ico->height() / 2);
+						SkRect r = SkRect::MakeXYWH(left, top, getDensityValue(rc, ico->width()), getDensityValue(rc, ico->height()));
+						PROFILE_NATIVE_OPERATION(rc, canvas->drawBitmapRect(*ico, (SkIRect*) NULL, r, &p));
+					} else {
+						PROFILE_NATIVE_OPERATION(rc, canvas->drawBitmap(*ico, icon.x - ico->width() / 2, icon.y - ico->height() / 2, &p));
+					}
+				}
+		}
+		if(rc->interrupted()){
+			return;
+		}
+	}
 }
 
 std::hash_map<int, std::vector<int> > sortObjectsByProperOrder(std::vector <BaseMapDataObject* > mapDataObjects,
