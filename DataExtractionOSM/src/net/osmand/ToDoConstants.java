@@ -13,15 +13,15 @@ public class ToDoConstants {
 	// Map QuadTree (skip small areas!!!)
 	// POI index exclude building hno from categories!!!
 	// Routing index !!
+	
 	// Identify coastline areas and pure ocean areas !!!
-	// Extract & remove the code with multipolygons
+	// TODO Delete/Extract the code with multipolygons ! (coastline))
+	
 	// Render : different texts support render.xml
 	// Render : support additional tags in render.xml
-
-	// FIXME layer and renderer 1) FIXME Layer 2 2) FIXME oneway 1 
-
 	
-	// TO try & to test
+	
+	// ------ TO try & to test ----
 	// Test images in the map 
 	// Test new POI categories, dynamic POI text in ...
 	// Test rendering of 2 dimensional values 
