@@ -3,9 +3,9 @@ LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
 ifneq ($(OSMAND_BUILDING_NEON_LIBRARY),true)
-LOCAL_MODULE := libexpat_static
+LOCAL_MODULE := expat_static
 else
-LOCAL_MODULE := libexpat_static_neon
+LOCAL_MODULE := expat_static_neon
 LOCAL_ARM_NEON := true
 endif
 
@@ -15,6 +15,8 @@ endif
 ifeq ($(OSMAND_EXPAT_ABS),)
   OSMAND_EXPAT_ABS := $(LOCAL_PATH)/expat_library
 endif
+
+ifneq ($(OSMAND_USE_PREBUILT),true)
 
 LOCAL_SRC_FILES := \
 	$(OSMAND_EXPAT_LOC)/lib/xmlparse.c \
@@ -28,3 +30,9 @@ LOCAL_C_INCLUDES += \
 	$(OSMAND_EXPAT_ABS)/lib
 
 include $(BUILD_STATIC_LIBRARY)
+
+else
+LOCAL_SRC_FILES := \
+	../../jni-prebuilt/$(TARGET_ARCH_ABI)/lib$(LOCAL_MODULE).a
+include $(PREBUILT_STATIC_LIBRARY)
+endif

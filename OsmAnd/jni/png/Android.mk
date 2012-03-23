@@ -8,6 +8,17 @@ ifeq ($(OSMAND_PNG_ABS),)
   OSMAND_PNG_ABS := $(LOCAL_PATH)/png_library
 endif
 
+LOCAL_SHARED_LIBRARIES := \
+	libz
+
+ifneq ($(OSMAND_BUILDING_NEON_LIBRARY),true)
+LOCAL_MODULE := png
+else
+LOCAL_MODULE := png_neon
+endif
+
+ifneq ($(OSMAND_USE_PREBUILT),true)
+
 common_SRC_FILES := \
 	$(OSMAND_PNG_LOC)/png.c \
 	$(OSMAND_PNG_LOC)/pngerror.c \
@@ -47,15 +58,11 @@ LOCAL_SRC_FILES := $(common_SRC_FILES)
 LOCAL_CFLAGS += $(common_CFLAGS)
 LOCAL_C_INCLUDES += $(common_C_INCLUDES) \
 	external/zlib
-LOCAL_SHARED_LIBRARIES := \
-	libz
-
-ifneq ($(OSMAND_BUILDING_NEON_LIBRARY),true)
-LOCAL_MODULE := libpng
-else
-LOCAL_MODULE := libpng_neon
-endif
 
 include $(BUILD_STATIC_LIBRARY)
 
-
+else
+LOCAL_SRC_FILES := \
+	../../jni-prebuilt/$(TARGET_ARCH_ABI)/lib$(LOCAL_MODULE).a
+include $(PREBUILT_STATIC_LIBRARY)
+endif

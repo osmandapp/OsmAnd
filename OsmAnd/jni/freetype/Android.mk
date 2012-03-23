@@ -13,6 +13,15 @@ ifeq ($(OSMAND_FREETYPE_ABS),)
   OSMAND_FREETYPE_ABS := $(LOCAL_PATH)/freetype_library
 endif
 
+ifneq ($(OSMAND_BUILDING_NEON_LIBRARY),true)
+LOCAL_MODULE := ft2_static
+else
+LOCAL_MODULE := ft2_static_neon
+LOCAL_ARM_NEON := true
+endif
+
+ifneq ($(OSMAND_USE_PREBUILT),true)
+
 LOCAL_SRC_FILES:= \
 	$(OSMAND_FREETYPE_LOC)/src/base/ftbbox.c \
 	$(OSMAND_FREETYPE_LOC)/src/base/ftbitmap.c \
@@ -50,11 +59,10 @@ LOCAL_CFLAGS += "-DFT2_BUILD_LIBRARY"
 
 LOCAL_CFLAGS += -O2
 
-ifneq ($(OSMAND_BUILDING_NEON_LIBRARY),true)
-LOCAL_MODULE := libft2_static
-else
-LOCAL_MODULE := libft2_static_neon
-LOCAL_ARM_NEON := true
-endif
-
 include $(BUILD_STATIC_LIBRARY)
+
+else
+LOCAL_SRC_FILES := \
+	../../jni-prebuilt/$(TARGET_ARCH_ABI)/lib$(LOCAL_MODULE).a
+include $(PREBUILT_STATIC_LIBRARY)
+endif
