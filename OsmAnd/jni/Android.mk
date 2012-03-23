@@ -1,5 +1,9 @@
 OSMAND_MAKEFILES := $(all-subdir-makefiles)
 
+ifdef $(wildcard Local.mk)
+include Local.mk
+endif
+
 # Protect from previous builds
 ifneq ($(TARGET_ARCH_ABI),armeabi-v7a)
 OSMAND_BUILDING_NEON_LIBRARY := false

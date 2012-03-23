@@ -5,3 +5,4 @@ raw/
 obj/
 cpd.xml
 libs/
+jni/Local.mk
