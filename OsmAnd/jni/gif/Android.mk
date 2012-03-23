@@ -8,6 +8,14 @@ ifeq ($(OSMAND_GIF_ABS),)
   OSMAND_GIF_ABS := $(LOCAL_PATH)/gif_library
 endif
 
+ifneq ($(OSMAND_BUILDING_NEON_LIBRARY),true)
+LOCAL_MODULE := gif
+else
+LOCAL_MODULE := gif_neon
+endif
+
+ifneq ($(OSMAND_USE_PREBUILT),true)
+
 LOCAL_SRC_FILES := \
 	$(OSMAND_GIF_LOC)/dgif_lib.c \
 	$(OSMAND_GIF_LOC)/gifalloc.c \
@@ -18,10 +26,10 @@ LOCAL_C_INCLUDES += \
 
 LOCAL_CFLAGS += -Wno-format -DHAVE_CONFIG_H
 
-ifneq ($(OSMAND_BUILDING_NEON_LIBRARY),true)
-LOCAL_MODULE := libgif
-else
-LOCAL_MODULE := libgif_neon
-endif
-
 include $(BUILD_STATIC_LIBRARY)
+
+else
+LOCAL_SRC_FILES := \
+	../../jni-prebuilt/$(TARGET_ARCH_ABI)/lib$(LOCAL_MODULE).a
+include $(PREBUILT_STATIC_LIBRARY)
+endif

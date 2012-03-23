@@ -34,6 +34,8 @@ ifeq ($(OSMAND_JPEG_ABS),)
   OSMAND_JPEG_ABS := $(LOCAL_PATH)/../jpeg/jpeg_library
 endif
 
+ifneq ($(OSMAND_USE_PREBUILT),true)
+
 LOCAL_ARM_MODE := arm
 
 # need a flag to tell the C side when we're on devices with large memory
@@ -320,6 +322,12 @@ LOCAL_CPPFLAGS := \
 LOCAL_LDLIBS += -lz -llog
 
 include $(BUILD_STATIC_LIBRARY)
+
+else
+LOCAL_SRC_FILES := \
+	../../jni-prebuilt/$(TARGET_ARCH_ABI)/lib$(LOCAL_MODULE).a
+include $(PREBUILT_STATIC_LIBRARY)
+endif
 
 # Fix some errors
 BUILD_HOST_EXECUTABLE := $(LOCAL_PATH)/FakeHost.mk
