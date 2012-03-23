@@ -54,7 +54,7 @@ public:
 };
 
 
-std::vector <BaseMapDataObject* > marshalObjects(jobjectArray binaryMapDataObjects);
+//std::vector <BaseMapDataObject* > marshalObjects(jobjectArray binaryMapDataObjects);
 
 void deleteObjects(std::vector <BaseMapDataObject* > & v);
 

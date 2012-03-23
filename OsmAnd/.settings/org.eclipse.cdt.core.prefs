@@ -1,3 +1,13 @@
+#Fri Mar 23 17:29:32 CET 2012
 eclipse.preferences.version=1
+environment/project/com.android.toolchain.gcc.128294115/ANDROID_NDK/delimiter=\:
+environment/project/com.android.toolchain.gcc.128294115/ANDROID_NDK/operation=replace
+environment/project/com.android.toolchain.gcc.128294115/ANDROID_NDK/value=/home/victor/projects/android-ndk-r7b/
+environment/project/com.android.toolchain.gcc.128294115/OSMAND_USE_PREBUILT/delimiter=\:
+environment/project/com.android.toolchain.gcc.128294115/OSMAND_USE_PREBUILT/operation=append
+environment/project/com.android.toolchain.gcc.128294115/OSMAND_USE_PREBUILT/value=true
+environment/project/com.android.toolchain.gcc.128294115/PATH/delimiter=\:
+environment/project/com.android.toolchain.gcc.128294115/PATH/operation=replace
+environment/project/com.android.toolchain.gcc.128294115/PATH/value=/home/victor/projects/android-ndk-r7b\:/usr/lib/lightdm/lightdm\:/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/usr/games
 environment/project/com.android.toolchain.gcc.128294115/append=true
 environment/project/com.android.toolchain.gcc.128294115/appendContributed=true
