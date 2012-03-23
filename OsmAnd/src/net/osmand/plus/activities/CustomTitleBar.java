@@ -31,6 +31,7 @@ public class CustomTitleBar {
 		activity.getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		
 		Button backButton = (Button) activity.findViewById(R.id.back_button);
+		backButton.setContentDescription(activity.getString(R.string.close));
 		backButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
