@@ -834,4 +834,6 @@
 	<string name="i_am_here">Я здесь</string>
 	<string name="zoom_by_trackball_descr">Менять масштаб карты горизонтальными движениями трекбола</string>
 	<string name="zoom_by_trackball">Использовать трекбол для изменения масштаба</string>
+	<string name="accessibility_preferences_descr">Настройки для невизуального доступа</string>
+	<string name="accessibility_preferences">Специальные возможности</string>
 </resources>

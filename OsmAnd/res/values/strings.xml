@@ -916,4 +916,6 @@
 <string name="i_am_here">I am here</string>
 <string name="zoom_by_trackball_descr">Change map zooming by horizontal trackball moves</string>
 <string name="zoom_by_trackball">Use trackball for zoom control</string>
+<string name="accessibility_preferences_descr">Accessibility related preferences</string>
+<string name="accessibility_preferences">Accessibility</string>
 </resources>
