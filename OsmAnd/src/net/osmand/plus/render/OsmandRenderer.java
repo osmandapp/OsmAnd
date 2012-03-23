@@ -36,11 +36,11 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PathEffect;
 import android.graphics.PointF;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Shader;
+import android.graphics.Path.FillType;
 import android.graphics.Shader.TileMode;
 import android.os.Handler;
 import android.os.Looper;
@@ -471,10 +471,10 @@ public class OsmandRenderer {
 	}
 
 
-	private PointF calcPoint(BinaryMapDataObject o, int ind, RenderingContext rc){
+	private PointF calcPoint(int xt, int yt, RenderingContext rc){
 		rc.pointCount ++;
-		float tx = o.getPoint31XTile(ind) / rc.tileDivisor;
-		float ty = o.getPoint31YTile(ind) / rc.tileDivisor;
+		float tx = xt / rc.tileDivisor;
+		float ty = yt / rc.tileDivisor;
 		float dTileX = tx - rc.leftX;
 		float dTileY = ty - rc.topY;
 		float x = rc.cosRotateTileSize * dTileX - rc.sinRotateTileSize * dTileY;
@@ -485,6 +485,10 @@ public class OsmandRenderer {
 			rc.pointInsideCount++;
 		}
 		return rc.tempPoint;
+	}
+	
+	private PointF calcPoint(BinaryMapDataObject o, int ind, RenderingContext rc){
+		return calcPoint(o.getPoint31XTile(ind), o.getPoint31YTile(ind), rc);
 	}
 
 	private PointF calcMultiPolygonPoint(MultyPolygon o, int i, int b, RenderingContext rc){
@@ -578,6 +582,20 @@ public class OsmandRenderer {
 				path.moveTo(p.x, p.y);
 			} else {
 				path.lineTo(p.x, p.y);
+			}
+		}
+		int[][] polygonInnerCoordinates = obj.getPolygonInnerCoordinates();
+		if (polygonInnerCoordinates != null && path != null) {
+			path.setFillType(FillType.EVEN_ODD);
+			for (int j = 0; j < polygonInnerCoordinates.length; j++) {
+				for (int i = 0; i < polygonInnerCoordinates[j].length; i += 2) {
+					PointF p = calcPoint(polygonInnerCoordinates[j][i], polygonInnerCoordinates[j][i + 1], rc);
+					if (i == 0) {
+						path.moveTo(p.x, p.y);
+					} else {
+						path.lineTo(p.x, p.y);
+					}
+				}
 			}
 		}
 
