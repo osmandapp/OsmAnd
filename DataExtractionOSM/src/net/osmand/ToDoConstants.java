@@ -11,7 +11,6 @@ public class ToDoConstants {
 	// Index
 	
 	// Map QuadTree (skip small areas!!!)
-	// POI index exclude building hno from categories!!!
 	// Routing index !!
 	
 	// Identify coastline areas and pure ocean areas !!!
@@ -19,6 +18,8 @@ public class ToDoConstants {
 	
 	// Render : different texts support render.xml
 	// Render : support additional tags in render.xml
+	
+	// TODO native
 	
 	
 	// ------ TO try & to test ----

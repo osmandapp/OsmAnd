@@ -50,7 +50,7 @@ public class BinaryInspector {
 //		inspector(new String[]{"-v","C:\\Users\\tpd\\osmand\\Housenumbers.obf"});
 		//inspector(new String[]{"/home/victor/projects/OsmAnd/data/osm-gen/saved/Belarus-newzooms-new-rt.obf"});
 //		inspector(new String[]{"/home/victor/projects/OsmAnd/download/spain/Spain_europe_1_small.obf"});
-		inspector(new String[]{"/home/victor/projects/OsmAnd/data/osm-gen/Luxembourg.obf"});
+		inspector(new String[]{"-vpoi", "/home/victor/projects/OsmAnd/data/osm-gen/Luxembourg.obf"});
 		
 		
 		// test case extract parts
@@ -426,7 +426,7 @@ public class BinaryInspector {
 						printMapDetailInfo(verbose, index);
 					}
 				} else if(p instanceof PoiRegion && (verbose != null && verbose.isVpoi())){
-					printPOIDetailInfo(verbose, index);
+					printPOIDetailInfo(verbose, index, (PoiRegion) p);
 				} else if (p instanceof AddressRegion && (verbose != null && verbose.isVaddress())) {
 					printAddressDetailedInfo(verbose, index);
 				}
@@ -573,7 +573,7 @@ public class BinaryInspector {
 		index.searchMapIndex(req);
 	}
 	
-	private static void printPOIDetailInfo(VerboseInfo verbose, BinaryMapIndexReader index) throws IOException {
+	private static void printPOIDetailInfo(VerboseInfo verbose, BinaryMapIndexReader index, PoiRegion p) throws IOException {
 		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(MapUtils.get31TileNumberX(verbose.lonleft),
 				MapUtils.get31TileNumberX(verbose.lonright),
 				MapUtils.get31TileNumberY(verbose.lattop),
@@ -596,6 +596,12 @@ public class BinaryInspector {
 					}
 				});
 		index.searchPoi(req);
+		println("Categories : ");
+		for(int i =0; i< p.categories.size(); i++) {
+			println(p.categories.get(i) + " - " + p.subcategories.get(i));	
+		}
+		
+		
 	}
 	
 	private static String getId(MapObject o ){
