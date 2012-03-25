@@ -2,6 +2,7 @@ package net.osmand.data.preparation;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
+import gnu.trove.procedure.TObjectProcedure;
 import gnu.trove.set.hash.TLongHashSet;
 
 import java.io.ByteArrayOutputStream;
@@ -26,6 +27,7 @@ import net.osmand.binary.OsmandOdb.MapData;
 import net.osmand.binary.OsmandOdb.MapDataBlock;
 import net.osmand.data.Boundary;
 import net.osmand.data.MapAlgorithms;
+import net.osmand.data.WayBoundary;
 import net.osmand.osm.Entity;
 import net.osmand.osm.Entity.EntityId;
 import net.osmand.osm.Entity.EntityType;
@@ -33,6 +35,7 @@ import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapRenderingTypes.MapRulType;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
+import net.osmand.osm.WayChain;
 import net.osmand.osm.OSMSettings.OSMTagKey;
 import net.osmand.osm.Relation;
 import net.osmand.osm.Way;
@@ -49,6 +52,8 @@ import rtree.RTreeInsertException;
 import rtree.Rect;
 
 public class IndexVectorMapCreator extends AbstractIndexPartCreator {
+	
+	
 
 	// map zoom levels <= 2^MAP_LEVELS
 	private static final int MAP_LEVELS_POWER = 3;
@@ -56,7 +61,10 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	private MapRenderingTypes renderingTypes;
 	private MapZooms mapZooms;
 
-	Map<Long, TIntArrayList> multiPolygonsWays;
+	Map<Long, TIntArrayList> multiPolygonsWays = new LinkedHashMap<Long, TIntArrayList>();
+	
+	
+	
 	private Map<Long, List<Long>> highwayRestrictions = new LinkedHashMap<Long, List<Long>>();
 
 	// local purpose to speed up processing cache allocation
@@ -66,6 +74,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	TIntArrayList addtypeUse = new TIntArrayList(8);
 	List<Long> restrictionsUse = new ArrayList<Long>(8);
 
+	private CoastlineProcessor coastlineProcessor = new CoastlineProcessor();
 	private PreparedStatement mapBinaryStat;
 	private PreparedStatement mapLowLevelBinaryStat;
 	private int lowLevelWays = -1;
@@ -75,14 +84,13 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	private int zoomWaySmothness = 0;
 	private final Log logMapDataWarn;
 	
-	private static long notUsedId = 1 << 40; // million million  
+	private static long notUsedId = - 1 << 40; // million million  
 
 	public IndexVectorMapCreator(Log logMapDataWarn, MapZooms mapZooms, MapRenderingTypes renderingTypes, int zoomWaySmothness) {
 		this.logMapDataWarn = logMapDataWarn;
 		this.mapZooms = mapZooms;
 		this.zoomWaySmothness = zoomWaySmothness;
 		this.renderingTypes = renderingTypes;
-		this.multiPolygonsWays = new LinkedHashMap<Long, TIntArrayList>();
 		lowLevelWays = -1;
 	}
 
@@ -180,14 +188,14 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 						if (!innerType) {
 							TIntArrayList out = multiPolygonsWays.put(way.getId(), typeToSave);
 							if(out == null){
-								baseId = way.getId();
+								baseId = -way.getId();
 							}
 						}
 					}
 				}
 				if(baseId == 0){
 					// use base id as well?
-					baseId = notUsedId ++;
+					baseId = notUsedId --;
 				}
 				nextZoom: for (int level = 0; level < mapZooms.size(); level++) {
 					renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), typeUse, addtypeUse, namesUse,
@@ -494,6 +502,13 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		if (e instanceof Way || e instanceof Node) {
 			// manipulate what kind of way to load
 			ctx.loadEntityData(e);
+			if(e instanceof Way && "coastline".equals(e.getTag(OSMTagKey.NATURAL))){
+				coastlineProcessor.processCoastline((Way) e);
+				return;
+			} else if(true){
+				// FIXME
+				return;
+			}
 			for (int level = 0; level < mapZooms.size(); level++) {
 				boolean area = renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), typeUse, addtypeUse, namesUse,
 						tempNameUse);
@@ -502,9 +517,8 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				}
 				boolean hasMulti = e instanceof Way && multiPolygonsWays.containsKey(e.getId());
 				if (hasMulti) {
-					// avoid duplicate ids?
-//					TIntArrayList set = multiPolygonsWays.get(e.getId());
-//					typeUse.removeAll(set);
+					TIntArrayList set = multiPolygonsWays.get(e.getId());
+					typeUse.removeAll(set);
 					continue;
 				}
 				if (typeUse.isEmpty()) {
@@ -520,8 +534,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					// simplify route
 					int zoomToSimplify = mapZooms.getLevel(level).getMaxZoom() - 1;
 					if (zoomToSimplify < 15) {
-						boolean cycle = ((Way) e).getNodeIds().get(0).longValue() == ((Way) e).getNodeIds()
-								.get(((Way) e).getNodeIds().size() - 1).longValue();
+						boolean cycle = ((Way) e).getFirstNodeId() == ((Way) e).getLastNodeId();
 						if (cycle) {
 							res = simplifyCycleWay(((Way) e).getNodes(), zoomToSimplify);
 						} else {
@@ -539,7 +552,11 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		}
 	}
 
+	
+
 	public void writeBinaryMapIndex(BinaryMapIndexWriter writer, String regionName) throws IOException, SQLException {
+		coastlineProcessor.processCoastlines();
+		
 		closePreparedStatements(mapBinaryStat, mapLowLevelBinaryStat);
 		mapConnection.commit();
 		try {
@@ -578,6 +595,8 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 			throw new IllegalStateException(e);
 		}
 	}
+
+	
 
 	private long convertBaseIdToGeneratedId(long baseId, int level) {
 		if (level >= MAP_LEVELS_MAX) {

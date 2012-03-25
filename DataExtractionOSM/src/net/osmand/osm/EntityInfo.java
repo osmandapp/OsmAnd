@@ -13,6 +13,14 @@ public class EntityInfo {
 	String action;
 	
 	
+	public EntityInfo() {
+	}
+
+	public EntityInfo(String version) {
+		this.version = version;
+	}
+	
+	
 	public String getAction() {
 		return action;
 	}

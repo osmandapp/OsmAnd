@@ -294,10 +294,10 @@ public class OsmBaseStorage extends DefaultHandler {
 	}
 	
 	public synchronized void parseOSMPbf(final InputStream stream, final IProgress progress, final boolean entityInfo) throws IOException {
-		BinaryParser parser = new BinaryParser(){
-			public void updateProgress(int count){
+		BinaryParser parser = new BinaryParser() {
+			public void updateProgress(int count) {
 				progressEntity += count;
-				if(progress != null && progressEntity > moduleProgress &&	!progress.isIndeterminate()){
+				if (progress != null && progressEntity > moduleProgress && !progress.isIndeterminate()) {
 					try {
 						progressEntity = 0;
 						progress.remaining(stream.available());
@@ -306,7 +306,7 @@ public class OsmBaseStorage extends DefaultHandler {
 					}
 				}
 			}
-			
+
 			public void registerEntity(EntityType type, Entity e, EntityInfo info) {
 				EntityId entityId = new EntityId(type, e.getId());
 				if (acceptEntityToLoad(entityId, e)) {
@@ -319,11 +319,11 @@ public class OsmBaseStorage extends DefaultHandler {
 					}
 				}
 			}
-			
+
 			@Override
 			protected void parse(HeaderBlock header) {
 			}
-			
+
 			private DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); //$NON-NLS-1$
 
 			@Override
@@ -338,12 +338,12 @@ public class OsmBaseStorage extends DefaultHandler {
 				long lon = 0;
 				int keyInd = 0;
 				boolean tagsEmpty = n.getKeysValsCount() == 0;
-				for(int i=0; i<n.getIdCount(); i++){
+				for (int i = 0; i < n.getIdCount(); i++) {
 					id += n.getId(i);
 					lat += n.getLat(i);
 					lon += n.getLon(i);
 					Node node = new Node(parseLat(lat), parseLon(lon), id);
-					
+
 					if (entityInfo && n.getDenseinfo() != null) {
 						info = new EntityInfo();
 						changeset += n.getDenseinfo().getChangeset(i);
@@ -370,14 +370,14 @@ public class OsmBaseStorage extends DefaultHandler {
 				}
 				updateProgress(n.getIdCount());
 			}
-			
-			protected EntityInfo parseEntityInfo(Info i){
+
+			protected EntityInfo parseEntityInfo(Info i) {
 				EntityInfo info = new EntityInfo();
-				info.setChangeset(i.getChangeset()+""); //$NON-NLS-1$
+				info.setChangeset(i.getChangeset() + ""); //$NON-NLS-1$
 				info.setTimestamp(format.format(getDate(i)));
 				info.setUser(getStringById(i.getUserSid()));
-				info.setUid(i.getUid()+""); //$NON-NLS-1$
-				info.setVersion(i.getVersion()+""); //$NON-NLS-1$
+				info.setUid(i.getUid() + ""); //$NON-NLS-1$
+				info.setVersion(i.getVersion() + ""); //$NON-NLS-1$
 				info.setVisible("true"); //$NON-NLS-1$
 				return info;
 			}
@@ -386,15 +386,15 @@ public class OsmBaseStorage extends DefaultHandler {
 			protected void parseNodes(List<crosby.binary.Osmformat.Node> n) {
 				EntityInfo info = null;
 				int nsize = n.size();
-				for(int i=0; i<nsize; i++){
+				for (int i = 0; i < nsize; i++) {
 					crosby.binary.Osmformat.Node nod = n.get(i);
 					Node e = new Node(parseLat(nod.getLat()), parseLon(nod.getLon()), nod.getId());
-					for(int j=0; j<nod.getKeysCount(); j++){
+					for (int j = 0; j < nod.getKeysCount(); j++) {
 						String key = getStringById(nod.getKeys(j));
 						String val = getStringById(nod.getVals(j));
 						e.putTag(key, val);
 					}
-					if(entityInfo){
+					if (entityInfo) {
 						info = parseEntityInfo(nod.getInfo());
 					}
 					registerEntity(EntityType.NODE, e, info);
@@ -406,28 +406,34 @@ public class OsmBaseStorage extends DefaultHandler {
 			protected void parseRelations(List<crosby.binary.Osmformat.Relation> r) {
 				EntityInfo info = null;
 				int rsize = r.size();
-				for(int i=0; i<rsize; i++){
+				for (int i = 0; i < rsize; i++) {
 					crosby.binary.Osmformat.Relation rel = r.get(i);
 					Relation e = new Relation(rel.getId());
 					long id = 0;
-					for(int j=0; j<rel.getMemidsCount(); j++){
+					for (int j = 0; j < rel.getMemidsCount(); j++) {
 						id += rel.getMemids(j);
 						String role = getStringById(rel.getRolesSid(j));
 						MemberType t = rel.getTypes(j);
 						EntityType ts = EntityType.NODE;
-						switch(t){
-						case NODE : ts = EntityType.NODE; break;
-						case WAY : ts = EntityType.WAY; break;
-						case RELATION : ts = EntityType.RELATION; break;
+						switch (t) {
+						case NODE:
+							ts = EntityType.NODE;
+							break;
+						case WAY:
+							ts = EntityType.WAY;
+							break;
+						case RELATION:
+							ts = EntityType.RELATION;
+							break;
 						}
 						e.addMember(id, ts, role);
 					}
-					for(int j=0; j<rel.getKeysCount(); j++){
+					for (int j = 0; j < rel.getKeysCount(); j++) {
 						String key = getStringById(rel.getKeys(j));
 						String val = getStringById(rel.getVals(j));
 						e.putTag(key, val);
 					}
-					if(entityInfo){
+					if (entityInfo) {
 						info = parseEntityInfo(rel.getInfo());
 					}
 					registerEntity(EntityType.RELATION, e, info);
@@ -439,20 +445,20 @@ public class OsmBaseStorage extends DefaultHandler {
 			protected void parseWays(List<crosby.binary.Osmformat.Way> w) {
 				EntityInfo info = null;
 				int wsize = w.size();
-				for(int i=0; i<wsize; i++){
+				for (int i = 0; i < wsize; i++) {
 					crosby.binary.Osmformat.Way way = w.get(i);
 					Way e = new Way(way.getId());
 					long id = 0;
-					for(int j=0; j<way.getRefsCount(); j++){
+					for (int j = 0; j < way.getRefsCount(); j++) {
 						id += way.getRefs(j);
 						e.addNode(id);
 					}
-					for(int j=0; j<way.getKeysCount(); j++){
+					for (int j = 0; j < way.getKeysCount(); j++) {
 						String key = getStringById(way.getKeys(j));
 						String val = getStringById(way.getVals(j));
 						e.putTag(key, val);
 					}
-					if(entityInfo){
+					if (entityInfo) {
 						info = parseEntityInfo(way.getInfo());
 					}
 					registerEntity(EntityType.WAY, e, info);
@@ -463,7 +469,7 @@ public class OsmBaseStorage extends DefaultHandler {
 			@Override
 			public void complete() {
 			}
-			
+
 		};
 		
 		this.progressEntity = 0;

@@ -1,5 +1,7 @@
 package net.osmand.data.preparation;
 
+import gnu.trove.list.array.TLongArrayList;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -134,12 +136,13 @@ public class OsmDbCreator implements IOsmStorageFilter {
 		if (e instanceof Node) {
 			ArraySerializer.value(builder, ((float) ((Node) e).getLatitude()) + "", false);
 			ArraySerializer.value(builder, ((float) ((Node) e).getLongitude()) + "", false);
-		} else if(e instanceof Way){
+		} else if (e instanceof Way) {
 			ArraySerializer.startArray(builder, false);
 			boolean f = true;
-			for(Long l : ((Way)e).getNodeIds()) {
-				ArraySerializer.value(builder, l.longValue() +"", f);
-				 f = false;
+			TLongArrayList nodeIds = ((Way) e).getNodeIds();
+			for (int j = 0; j < nodeIds.size(); j++) {
+				ArraySerializer.value(builder, nodeIds.get(j) + "", f);
+				f = false;
 			}
 			ArraySerializer.endArray(builder);
 		} else {
@@ -207,10 +210,11 @@ public class OsmDbCreator implements IOsmStorageFilter {
 				} else if (e instanceof Way) {
 					allWays++;
 					short ord = 0;
-					for (Long i : ((Way) e).getNodeIds()) {
+					TLongArrayList nodeIds = ((Way) e).getNodeIds();
+					for (int j=0; j<nodeIds.size(); j++) {
 						currentWaysCount++;
 						prepWays.setLong(1, e.getId());
-						prepWays.setLong(2, i);
+						prepWays.setLong(2, nodeIds.get(j));
 						prepWays.setLong(3, ord++);
 						prepWays.addBatch();
 					}

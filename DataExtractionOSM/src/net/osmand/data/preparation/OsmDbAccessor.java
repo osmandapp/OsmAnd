@@ -83,7 +83,7 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 			
 			pselectNode = dbConn.prepareStatement("select n.latitude, n.longitude, t.skeys, t.value from node n left join tags t on n.id = t.id and t.type = 0 where n.id = ?"); //$NON-NLS-1$
 			pselectWay = dbConn.prepareStatement("select w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " + //$NON-NLS-1$
-					"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 inner join node n on w.node = n.id " + //$NON-NLS-1$
+					"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 left join node n on w.node = n.id " + //$NON-NLS-1$
 					"where w.id = ? order by w.ord"); //$NON-NLS-1$
 			pselectRelation = dbConn.prepareStatement("select r.member, r.type, r.role, r.ord, t.skeys, t.value " + //$NON-NLS-1$
 					"from relations r left join tags t on r.id = t.id and t.type = 2 and r.ord = 0 " + //$NON-NLS-1$
@@ -92,7 +92,7 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		
 			iterateNodes = dbConn.prepareStatement("select n.id, n.latitude, n.longitude, t.skeys, t.value from node n inner join tags t on n.id = t.id and t.type = 0 order by n.id"); //$NON-NLS-1$
 			iterateWays  = dbConn.prepareStatement("select w.id, w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " + //$NON-NLS-1$
-					"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 inner join node n on w.node = n.id " + //$NON-NLS-1$
+					"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 left join node n on w.node = n.id " + //$NON-NLS-1$
 					"order by w.id, w.ord"); //$NON-NLS-1$
 			iterateWayBoundaries = dbConn.prepareStatement("select t.id from tags t where t.skeys = \"" + OSMTagKey.BOUNDARY.getValue() + "\""); //$NON-NLS-1$
 			iterateRelations = dbConn.prepareStatement("select r.id, t.skeys, t.value  from relations r inner join tags t on t.id = r.id and t.type = 2 and r.ord = 0"); //$NON-NLS-1$
@@ -598,8 +598,12 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 							e.putTag(rs.getString(4), rs.getString(5));
 						}
 						if (newEntity || ord > 0) {
-							((Way) e).addNode(new Node(rs.getDouble(6), rs
+							if(rs.getObject(6) == null) {
+								((Way) e).addNode(rs.getLong(2));
+							} else {
+								((Way) e).addNode(new Node(rs.getDouble(6), rs
 									.getDouble(7), rs.getLong(2)));
+							}
 						}
 					} else {
 						if (newEntity) {

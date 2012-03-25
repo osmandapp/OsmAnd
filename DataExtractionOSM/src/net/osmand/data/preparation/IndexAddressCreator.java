@@ -310,10 +310,9 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				boundary.computeIsClosedWay();
 			} else if (e instanceof Way) {
 				if (!visitedBoundaryWays.contains(e.getId())) {
-					List<Long> nodeIds = ((Way) e).getNodeIds();
 					boolean closed = false;
-					if(nodeIds.size() > 0){
-						closed = Algoritms.objectEquals(nodeIds.get(0), nodeIds.get(nodeIds.size() - 1));
+					if(((Way) e).getNodeIds().size() > 1){
+						closed = ((Way) e).getFirstNodeId() == ((Way) e).getLastNodeId();
 					}
 					boundary = new WayBoundary(closed);
 					boundary.setName(e.getTag(OSMTagKey.NAME));

@@ -22,6 +22,8 @@ import static net.osmand.osm.io.OsmBaseStorage.ELEM_RELATION;
 import static net.osmand.osm.io.OsmBaseStorage.ELEM_TAG;
 import static net.osmand.osm.io.OsmBaseStorage.ELEM_WAY;
 
+import gnu.trove.list.array.TLongArrayList;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -108,9 +110,10 @@ public class OsmStorageWriter {
 			writeStartElement(streamWriter, ELEM_WAY, INDENT);
 			streamWriter.writeAttribute(ATTR_ID, w.getId()+"");
 			writeEntityAttributes(streamWriter, w, entityInfo.get(EntityId.valueOf(w)));
-			for(Long r : w.getNodeIds()){
+			TLongArrayList ids = w.getNodeIds();
+			for(int i=0; i< ids.size(); i++){
 				writeStartElement(streamWriter, ELEM_ND, INDENT2);
-				streamWriter.writeAttribute(ATTR_REF, r+"");
+				streamWriter.writeAttribute(ATTR_REF, ids.get(i)+"");
 				writeEndElement(streamWriter, INDENT2);
 			}
 			writeTags(streamWriter, w);
