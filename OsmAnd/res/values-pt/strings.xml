@@ -358,6 +358,7 @@
 	<string name="settings_activity">Configurações</string>
 	<string name="show_gps_coordinates_text">Mostrar as coordenadas GPS no mapa</string>
 	<string name="use_internet_to_download_tile">Use a Internet para baixar as imagens que faltam</string>
+	<string name="app_name">OsmAnd</string>
 	<string name="app_description">Aplicação de navegação</string>
 	<string name="exit_Button">Sair</string>
 	<string name="map_Button">Mapa</string>

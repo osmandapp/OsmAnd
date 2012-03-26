@@ -754,6 +754,7 @@
     <string name="settings_activity">Einstellungen</string>
     <string name="show_gps_coordinates_text">GPS-Koordinaten auf der Karte anzeigen</string>
     <string name="use_internet_to_download_tile">Fehlende Kartenteile aus dem Internet nachladen</string>
+    <string name="app_name">OsmAnd</string>
     <string name="app_description">Navigationsanwendung OsmAnd</string>
 
 <string name="exit_Button">Beenden</string>

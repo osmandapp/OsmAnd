@@ -666,6 +666,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
     <string name="settings_activity">Thiết lập</string>
     <string name="show_gps_coordinates_text">Hiện tọa độ GPS trên bản đồ</string>
     <string name="use_internet_to_download_tile">Dùng Internet để tải các tile bị thiếu</string>
+    <string name="app_name">OsmAnd</string>
     <string name="app_description">Ứng dụng dẫn đường cá nhân</string>
 
 <string name="exit_Button">Thoát</string>

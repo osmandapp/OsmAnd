@@ -660,6 +660,7 @@
 <string name="settings_activity">Paramètres</string>
 <string name="show_gps_coordinates_text">Afficher les coordonnées GPS sur la carte</string>
 <string name="use_internet_to_download_tile">Utiliser internet pour télécharger les carreaux manquants</string>
+<string name="app_name">OsmAnd</string>
 <string name="app_description">Application de navigation</string>
 <string name="exit_Button">Quitter</string>
 <string name="map_Button">Carte</string>

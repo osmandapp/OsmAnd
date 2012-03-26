@@ -67,10 +67,10 @@ public class MainMenuActivity extends AccessibleTrackedActivity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Intent intent = new Intent(Intent.ACTION_SEND);
-						intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "poretsky@mlbox.ru" }); //$NON-NLS-1$
+						intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "osmand.app@gmail.com" }); //$NON-NLS-1$
 						intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
 						intent.setType("vnd.android.cursor.dir/email"); //$NON-NLS-1$
-						intent.putExtra(Intent.EXTRA_SUBJECT, "OsmAndAccess bug"); //$NON-NLS-1$
+						intent.putExtra(Intent.EXTRA_SUBJECT, "OsmAnd bug"); //$NON-NLS-1$
 						StringBuilder text = new StringBuilder();
 						text.append("\nDevice : ").append(Build.DEVICE); //$NON-NLS-1$
 						text.append("\nBrand : ").append(Build.BRAND); //$NON-NLS-1$

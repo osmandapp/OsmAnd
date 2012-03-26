@@ -946,6 +946,7 @@
   <string name="settings_activity">Nastavení</string>
   <string name="show_gps_coordinates_text">Ukázat GPS souřadnice na mapě</string>
   <string name="use_internet_to_download_tile">Stahovat chybějící části mapy z internetu</string>
+  <string name="app_name">OsmAnd</string>
   <string name="app_description">Navigační aplikace</string>
 
   <string name="exit_Button">Konec</string>

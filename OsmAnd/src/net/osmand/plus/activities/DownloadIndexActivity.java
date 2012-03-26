@@ -134,9 +134,8 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		setContentView(R.layout.download_index);
 		titleBar.afterSetContentView();
 	    tracker = GoogleAnalyticsTracker.getInstance();
-	    tracker.setDryRun(true);
 	    // Start the tracker in manual dispatch mode...
-	    tracker.startNewSession(getString(R.string.ga_api_key), this);
+	    tracker.startNewSession(getString(R.string.ga_api_key), 60, this);
 	    setCustomVarsToTracker();
 	    tracker.trackPageView("/download.activity?" +Version.getVersionAsURLParam(this));
 		

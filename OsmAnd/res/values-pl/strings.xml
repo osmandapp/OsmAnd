@@ -670,6 +670,7 @@
 <string name="settings_activity">Ustawienia</string>
 <string name="show_gps_coordinates_text">Pokaż współrzędne GPS na mapie</string>
 <string name="use_internet_to_download_tile">Use Internet to download missing map tiles</string>
+<string name="app_name">OsmAnd</string>
 <string name="app_description">Program do nawigacji satelitarnej</string>
 
 <string name="exit_Button">Wyjście</string>

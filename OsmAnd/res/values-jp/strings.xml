@@ -638,6 +638,7 @@ name="recalculate_route_to_your_location">現在地に従ってルートを再�
  <string name="show_gps_coordinates_text">マップ上にGPS座標を表示</string>
  <string name="use_internet_to_download_tile">見つからないマップタイルのダウンロードに
 インターネットを使用</string>
+ <string name="app_name">OsmAnd</string>
  <string name="app_description">ナビゲーションアプリケーション</string>
 
 <string name="exit_Button">戻る</string>
