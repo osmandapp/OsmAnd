@@ -33,7 +33,7 @@
 		<type tag="highway" value="tertiary" minzoom="10" nameTags="ref"/>
 		<type tag="highway" value="tertiary_link" minzoom="11" nameTags="ref"/>
 		<type tag="highway" value="residential" minzoom="12" nameTags="ref"/>
-		<type tag="highway" value="service" minzoom="13" nameTags="ref"/>
+		<type tag="highway" value="service" minzoom="12" nameTags="ref"/>
 
 		<type tag="highway" value="unclassified" minzoom="12" nameTags="ref"/>
 		<type tag="highway" value="road" minzoom="12"  nameTags="ref"/>
@@ -70,19 +70,19 @@
 	</category>
 
 	<category name="tracktype">
-		<type tag="tracktype" value="grade1" minzoom="13" additional="true"/>
-		<type tag="tracktype" value="grade2" minzoom="13" additional="true"/>
-		<type tag="tracktype" value="grade3" minzoom="13" additional="true"/>
-		<type tag="tracktype" value="grade4" minzoom="13" additional="true"/>
-		<type tag="tracktype" value="grade5" minzoom="13" additional="true"/>
+		<type tag="tracktype" value="grade1" minzoom="12" additional="true"/>
+		<type tag="tracktype" value="grade2" minzoom="12" additional="true"/>
+		<type tag="tracktype" value="grade3" minzoom="12" additional="true"/>
+		<type tag="tracktype" value="grade4" minzoom="12" additional="true"/>
+		<type tag="tracktype" value="grade5" minzoom="12" additional="true"/>
 	</category>
 	
 	<category name="cycleway">
-		<type tag="cycleway" value="lane" minzoom="13"/>
-		<type tag="cycleway" value="opposite_lane" minzoom="13"/>
-		<type tag="cycleway" minzoom="13"/>
-		<type tag="cycleway:left" target:tag="cycleway" minzoom="13"/>
-		<type tag="cycleway:right" target:tag="cycleway" minzoom="13"/>
+		<type tag="cycleway" value="lane" minzoom="12"/>
+		<type tag="cycleway" value="opposite_lane" minzoom="12"/>
+		<type tag="cycleway" minzoom="12"/>
+		<type tag="cycleway:left" target:tag="cycleway" minzoom="12"/>
+		<type tag="cycleway:right" target:tag="cycleway" minzoom="12"/>
 	</category>	
 	
 	
@@ -111,7 +111,7 @@
 		<type tag="barrier" value="cycle_barrier" minzoom="15" />
 		<type tag="barrier" value="block" minzoom="15" />
 		<type tag="barrier" value="cattle_grid" minzoom="15" />
-		<type tag="barrier" value="toll_booth" minzoom="15" />
+		<type tag="barrier" value="toll_booth" minzoom="14" />
 		<type tag="barrier" value="entrance" minzoom="15" />
 		<type tag="barrier" value="gate" minzoom="15" />
 		<type tag="highway" value="gate" minzoom="15"  poi:category="barrier"/>
@@ -207,8 +207,8 @@
 	<category name="man_made" poi:tag="man_made" poi:category="man_made">
 		<type tag="building" minzoom="16" poi:category="" nameTags="addr:housenumber"/>
 		<type tag="addr:housenumber" minzoom="16" poi:category="" nameTags="addr:housenumber"/>
-		<type tag="man_made" value="wastewater_plant" minzoom="16" />
-		<type tag="man_made" value="water_works" minzoom="16" />
+		<type tag="man_made" value="wastewater_plant" minzoom="15" />
+		<type tag="man_made" value="water_works" minzoom="15" />
 		<type tag="man_made" value="works" minzoom="15" />
 		<type tag="man_made" value="cutline" minzoom="15" />
 		<type tag="man_made" value="groyne" minzoom="13" />
@@ -341,15 +341,15 @@
 
 
 	<category name="emergency" poi:tag="emergency" poi:category="emergency">
-		<type tag="emergency" value="ambulance_station" minzoom="16" />
-		<type tag="emergency" value="ses_station" minzoom="16" />
-		<type tag="emergency" value="fire_extinguisher" minzoom="16" />
-		<type tag="emergency" value="fire_flapper" minzoom="16" />
-		<type tag="emergency" value="fire_hose" minzoom="16" />
-		<type tag="emergency" value="fire_hydrant" minzoom="16" />
-		<type tag="emergency" value="phone" minzoom="16" />
-		<type tag="emergency" value="siren" minzoom="16" />
-		<type tag="amenity" value="fire_station" minzoom="16" poi:category="emergency"/>
+		<type tag="emergency" value="ambulance_station" minzoom="15" />
+		<type tag="emergency" value="ses_station" minzoom="15" />
+		<type tag="emergency" value="fire_extinguisher" minzoom="15" />
+		<type tag="emergency" value="fire_flapper" minzoom="15" />
+		<type tag="emergency" value="fire_hose" minzoom="15" />
+		<type tag="emergency" value="fire_hydrant" minzoom="15" />
+		<type tag="emergency" value="phone" minzoom="15" />
+		<type tag="emergency" value="siren" minzoom="15" />
+		<type tag="amenity" value="fire_station" minzoom="15" poi:category="emergency"/>
 	</category>
 
 
