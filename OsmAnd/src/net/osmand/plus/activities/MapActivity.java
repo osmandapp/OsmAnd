@@ -22,6 +22,7 @@ import net.osmand.map.IMapLocationListener;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.BusyIndicator;
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -67,6 +68,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings.Secure;
 import android.util.Log;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -686,7 +688,7 @@ public class MapActivity extends AccessibleTrackedActivity implements IMapLocati
 			if(locationLayer.getLastKnownLocation() != null){
 				Location lastKnownLocation = locationLayer.getLastKnownLocation();
 				AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
-				int fZoom = mapView.getZoom() < 14 ? 14 : mapView.getZoom();
+				int fZoom = mapView.getZoom() < 13 ? 13 : mapView.getZoom();
 				thread.startMoving( lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), fZoom, false);
 			}
 		}
@@ -778,8 +780,8 @@ public class MapActivity extends AccessibleTrackedActivity implements IMapLocati
 					int z = defineZoomFromSpeed(location.getSpeed(), mapView.getZoom());
 					if(mapView.getZoom() != z && !mapView.mapIsAnimating()){
 						long now = System.currentTimeMillis();
-						// prevent ui hysterisis (check time interval for autozoom)
-						if(Math.abs(mapView.getZoom() - z) > 1 || (lastTimeAutoZooming - now) > 6500){
+						// prevent ui hysteresis (check time interval for autozoom)
+						if(Math.abs(mapView.getZoom() - z) > 1 || (now - lastTimeAutoZooming) > 6500){
 							lastTimeAutoZooming = now;
 							mapView.setZoom(z);
 						}
@@ -805,19 +807,26 @@ public class MapActivity extends AccessibleTrackedActivity implements IMapLocati
 	}
 
 	public int defineZoomFromSpeed(float speed, int currentZoom){
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+		//correct for roughly constant "look ahead" distance on different screens, see Issue 914
+		int screenSizeCorrection = (int)Math.round(Math.log(((float)metrics.heightPixels)/320.0f) / Math.log(2.0f)); 
+
 		speed *= 3.6;
-   	 	if(speed < 4){
+   	 	if(speed < 5){
 			return currentZoom;
-		} else if(speed < 33){
-			// less than 33 - show 17 
-			return 17;
-		} else if(speed < 53){
-			return 16;
+		// less than 23: show zoom 17 
+		} else if(speed < 23){
+			return 17 + screenSizeCorrection;
+		} else if(speed < 43){
+			return 16 + screenSizeCorrection;
+		} else if(speed < 63){
+			return 15 + screenSizeCorrection;
 		} else if(speed < 83){
-			return 15;
+			return 14 + screenSizeCorrection;
 		}
-		// more than 80 - show 14 (it is slow)
-		return 14;
+		return 13 + screenSizeCorrection;
 	}
 
 	public void navigateToPoint(LatLon point){
@@ -1148,69 +1157,78 @@ public class MapActivity extends AccessibleTrackedActivity implements IMapLocati
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.map_show_settings:
+		final int itemId = item.getItemId();
+		if (itemId == R.id.map_show_settings) {
 			final Intent intentSettings = new Intent(MapActivity.this,
 					SettingsActivity.class);
 			startActivity(intentSettings);
 			return true;
-		case R.id.map_where_am_i:
+		} else if (itemId == R.id.map_where_am_i) {
 			whereAmIDialog();
 			return true;
-		case R.id.map_show_gps_status:
+		} else if (itemId == R.id.map_show_gps_status) {
 			startGpsStatusIntent();
 			return true;
-		case R.id.map_get_directions:
-			if(routingHelper.isRouteCalculated()){
+		} else if (itemId == R.id.map_get_directions) {
+			if (routingHelper.isRouteCalculated()) {
 				mapActions.aboutRoute();
 			} else {
 				Location loc = getLastKnownLocation();
 				if (loc != null) {
-					mapActions.getDirections(loc.getLatitude(), loc.getLongitude(), true);
+					mapActions.getDirections(loc.getLatitude(),
+							loc.getLongitude(), true);
 				} else {
-					mapActions.getDirections(mapView.getLatitude(), mapView.getLongitude(), true);
+					mapActions.getDirections(mapView.getLatitude(),
+							mapView.getLongitude(), true);
 				}
 			}
 			return true;
-		case R.id.map_layers:
+		} else if (itemId == R.id.map_layers) {
 			mapLayers.openLayerSelectionDialog(mapView);
 			return true;
-		case R.id.map_specify_point:
+		} else if (itemId == R.id.map_specify_point) {
 			// next 2 lines replaced for Issue 493, replaced by new 3 lines
 			// NavigatePointActivity dlg = new NavigatePointActivity(this);
 			// dlg.showDialog();
-			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
-			// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			Intent newIntent = new Intent(MapActivity.this,
+					SearchActivity.class);
+			// causes wrong position caching:
+			// newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			LatLon mapLoc = getMapLocation();
 			newIntent.putExtra(SearchActivity.SEARCH_LAT, mapLoc.getLatitude());
-			newIntent.putExtra(SearchActivity.SEARCH_LON, mapLoc.getLongitude());
+			newIntent
+					.putExtra(SearchActivity.SEARCH_LON, mapLoc.getLongitude());
 			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(newIntent);
 			return true;
-		case R.id.map_mute:
+		} else if (itemId == R.id.map_mute) {
 			routingHelper.getVoiceRouter().setMute(
 					!routingHelper.getVoiceRouter().isMute());
 			return true;
-		case R.id.map_navigate_to_point:
+		} else if (itemId == R.id.map_navigate_to_point) {
 			if (mapLayers.getNavigationLayer().getPointToNavigate() != null) {
-				if(routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()){
-					routingHelper.setFinalAndCurrentLocation(null, routingHelper.getCurrentLocation(), routingHelper.getCurrentGPXRoute());
+				if (routingHelper.isRouteCalculated()
+						|| routingHelper.isFollowingMode()
+						|| routingHelper.isRouteBeingCalculated()) {
+					routingHelper.setFinalAndCurrentLocation(null,
+							routingHelper.getCurrentLocation(),
+							routingHelper.getCurrentGPXRoute());
 				} else {
 					navigateToPoint(null);
 				}
 			} else {
-			navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
-		}
+				navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
+			}
 			mapView.refreshMap();
 			return true;
-		case R.id.map_show_point_options:
+		} else if (itemId == R.id.map_show_point_options) {
 			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 			return true;
-		case R.id.map_animate_route:
-			//animate moving on route
+		} else if (itemId == R.id.map_animate_route) {
+			// animate moving on route
 			routeAnimation.startStopRouteAnimation(routingHelper, this);
-			return true;			
-		default:
+			return true;
+		} else {
 			return super.onOptionsItemSelected(item);
 		}
 	}

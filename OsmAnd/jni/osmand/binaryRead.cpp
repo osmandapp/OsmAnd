@@ -17,8 +17,6 @@
 #include "multipolygons.h"
 #include "proto/osmand_odb.pb.h"
 
-char errorMsg[1024];
-#define	INT_MAX		0x7fffffff	/* max value for an int */
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
 using namespace google::protobuf;
 using namespace google::protobuf::internal;
@@ -83,7 +81,7 @@ struct SearchQuery {
 	}
 
 	bool isCancelled(){
-		return globalEnv()->GetBooleanField(o, interruptedField);
+		return getGlobalJniEnv()->GetBooleanField(o, interruptedField);
 	}
 };
 
@@ -347,8 +345,7 @@ bool initMapStructure(io::CodedInputStream* input, BinaryMapFile* file) {
 		}
 	}
 	if (version != versionConfirm) {
-		__android_log_print(ANDROID_LOG_WARN, "net.osmand",
-				"Corrupted file. It should be ended as it starts with version");
+		__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Corrupted file. It should be ended as it starts with version");
 		return false;
 	}
 	return true;
@@ -361,7 +358,7 @@ void loadJniBinaryRead() {
 extern "C" JNIEXPORT void JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_deleteSearchResult(JNIEnv* ienv,
 		jobject obj, jint searchResult) {
 	// DO NOT DO IT it can leads to messing thread that is not allowed
-	// setGlobalEnv(ienv);
+	// setGlobalJniEnv(ienv);
 	SearchResult* result = (SearchResult*) searchResult;
 	if(result != NULL){
 		delete result;
@@ -690,7 +687,7 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 		jobject obj, jint sleft, jint sright, jint stop, jint sbottom, jint zoom, jstring mapName,
 		jobject renderingRuleSearchRequest, bool skipDuplicates, jint searchResult, jobject objInterrupted) {
 	// TODO skipDuplicates not supported
-	setGlobalEnv(ienv);
+	setGlobalJniEnv(ienv);
 	SearchResult* result = (SearchResult*) searchResult;
 	if(result == NULL) {
 		result = new SearchResult();
@@ -702,9 +699,9 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 	}
 	BinaryMapFile* file =  i->second;
 	RenderingRuleSearchRequest* req = initSearchRequest(renderingRuleSearchRequest);
-	jclass clObjInterrupted = globalEnv()->GetObjectClass(objInterrupted);
+	jclass clObjInterrupted = getGlobalJniEnv()->GetObjectClass(objInterrupted);
 	jfieldID interruptedField =  getFid(clObjInterrupted, "interrupted", "Z");
-	globalEnv()->DeleteLocalRef(clObjInterrupted);
+	getGlobalJniEnv()->DeleteLocalRef(clObjInterrupted);
 	SearchQuery q(sleft,sright, stop, sbottom, req, objInterrupted, interruptedField);
 
 	fseek(file->f, 0, 0);
@@ -746,9 +743,8 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 
 	proccessMultiPolygons(multyPolygons, q.left, q.right, q.bottom, q.top, q.zoom, result->result);
 	if(q.result.size() > 0) {
-		sprintf(errorMsg, "Search : tree - read( %d), accept( %d), objs - visit( %d), accept(%d), in result(%d) ", q.numberOfReadSubtrees,
-				q.numberOfAcceptedSubtrees, q.numberOfVisitedObjects, q.numberOfAcceptedObjects, result->result.size());
-		__android_log_print(ANDROID_LOG_INFO, "net.osmand", errorMsg);
+		__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Search : tree - read( %d), accept( %d), objs - visit( %d), accept(%d), in result(%d) ", q.numberOfReadSubtrees,
+			q.numberOfAcceptedSubtrees, q.numberOfVisitedObjects, q.numberOfAcceptedObjects, result->result.size());
 	}
 	delete req;
 	return (jint)result;
@@ -757,7 +753,7 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_initBinaryMapFile(JNIEnv* ienv,
 		jobject obj, jobject path) {
 	// Verify that the version of the library that we linked against is
-	setGlobalEnv(ienv);
+	setGlobalJniEnv(ienv);
 	const char* utf = ienv->GetStringUTFChars((jstring) path, NULL);
 	std::string inputName(utf);
 	ienv->ReleaseStringUTFChars((jstring) path, utf);
@@ -771,8 +767,7 @@ extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLi
 
 	FILE* file = fopen(inputName.c_str(), "r");
 	if (file == NULL) {
-		sprintf(errorMsg, "File could not be open to read from C : %s", inputName.c_str());
-		__android_log_print(ANDROID_LOG_WARN, "net.osmand", errorMsg);
+		__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "File could not be open to read from C : %s", inputName.c_str());
 		return false;
 	}
 	BinaryMapFile* mapFile = new BinaryMapFile();
@@ -782,8 +777,7 @@ extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLi
 	io::CodedInputStream cis(&input);
 	cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
 	if (!initMapStructure(&cis, mapFile)) {
-		sprintf(errorMsg, "File not initialised : %s", inputName.c_str());
-		__android_log_print(ANDROID_LOG_WARN, "net.osmand", errorMsg);
+		__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "File not initialised : %s", inputName.c_str());
 		delete mapFile;
 		return false;
 	}

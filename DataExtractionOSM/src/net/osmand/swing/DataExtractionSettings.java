@@ -172,6 +172,14 @@ public class DataExtractionSettings {
 		preferences.put("cityAdminLevel", s);
 	}
 	
+	public String getOsrmServerAddress(){
+		return preferences.get("osrmServerAddress", "http://127.0.0.1:5000");
+	}
+	
+	public void setOsrmServerAddress(String s){
+		preferences.put("osrmServerAddress", s);
+	}
+	
 	public boolean isSupressWarningsForDuplicatedId(){
 		return preferences.getBoolean("supress_duplicated_id", true);
 	}

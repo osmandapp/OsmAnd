@@ -15,9 +15,9 @@ import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -435,7 +435,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	public OsmandSettings getSettings(){
 		if(settings == null){
-			settings = OsmandSettings.getOsmandSettings(getContext());
+			settings = OsmandApplication.getSettings();
 		}
 		return settings;
 	}

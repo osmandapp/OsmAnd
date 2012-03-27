@@ -6,6 +6,7 @@ import java.util.List;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import android.graphics.Canvas;
@@ -31,21 +32,24 @@ public class GPXLayer extends OsmandMapLayer {
 	
 	private void initUI() {
 		paint = new Paint();
-		paint.setColor(view.getResources().getColor(R.color.gpx_track));
+		if (view.getSettings().FLUORESCENT_OVERLAYS.get()) {
+			paint.setColor(view.getResources().getColor(R.color.gpx_track_fluorescent));
+		} else {
+			paint.setColor(view.getResources().getColor(R.color.gpx_track));
+		}
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(14);
 		paint.setAntiAlias(true);
 		paint.setStrokeCap(Cap.ROUND);
 		paint.setStrokeJoin(Join.ROUND);
-		
-		
+
 		path = new Path();
 	}
-	
+
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		settings = OsmandSettings.getOsmandSettings(view.getContext());
+		settings = OsmandApplication.getSettings();
 		initUI();
 	}
 
@@ -53,6 +57,7 @@ public class GPXLayer extends OsmandMapLayer {
 	
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
+		initUI(); //to change color immediately when needed
 		List<List<WptPt>> points = this.points;
 		if(points.isEmpty()){
 			return;

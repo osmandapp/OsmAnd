@@ -9,6 +9,7 @@ import java.util.Locale;
 import net.osmand.Algoritms;
 import net.osmand.FavouritePoint;
 import net.osmand.osm.LatLon;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.FavouritesListActivity;
@@ -155,7 +156,7 @@ public class SearchActivity extends TabActivity {
 						searchAroundCurrentLocation = false;
 						endSearchCurrentLocation();
 						if (position == POSITION_LAST_MAP_VIEW) {
-							OsmandSettings settings = OsmandSettings.getOsmandSettings(SearchActivity.this);
+							OsmandSettings settings = OsmandApplication.getSettings();
 							updateSearchPoint(settings.getLastKnownMapLocation(), getString(R.string.search_position_fixed), true);
 						} else if (position == POSITION_FAVORITES) {
 							Intent intent = new Intent(SearchActivity.this, FavouritesListActivity.class);
@@ -266,7 +267,7 @@ public class SearchActivity extends TabActivity {
 		}
 		
 		if(searchPoint == null){
-			LatLon last = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+			LatLon last = OsmandApplication.getSettings().getLastKnownMapLocation();
 			if(!Algoritms.objectEquals(reqSearchPoint, last)){
 				reqSearchPoint = last;
 				updateSearchPoint(last, getString(R.string.search_position_fixed), true);

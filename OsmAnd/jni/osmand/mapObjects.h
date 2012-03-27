@@ -14,7 +14,7 @@ class BaseMapDataObject
 {
 
 public :
-	static const unsigned int UNDEFINED_STRING = 0x7fffffff;
+	static const unsigned int UNDEFINED_STRING = INT_MAX;
     const int type;
     static const int MAP_DATA_OBJECT = 1;
     static const int MULTI_POLYGON = 2;

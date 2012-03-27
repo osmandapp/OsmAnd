@@ -8,6 +8,7 @@ import net.osmand.OsmAndFormatter;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.RelativeDirectionStyle;
 import net.osmand.osm.LatLon;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 
@@ -44,20 +45,20 @@ public class NavigationInfo {
         private int value;
 
         public RelativeDirection() {
-            style = OsmandSettings.getOsmandSettings(context).DIRECTION_STYLE.get();
+            style = settings.DIRECTION_STYLE.get();
             clear();
         }
 
         // The argument must be not null as well as the currentLocation
         // and currentLocation must have bearing.
         public RelativeDirection(final Location point) {
-            style = OsmandSettings.getOsmandSettings(context).DIRECTION_STYLE.get();
+            style = settings.DIRECTION_STYLE.get();
             value = directionTo(point, currentLocation.getBearing());
         }
 
         // The first argument must be not null as well as the currentLocation.
         public RelativeDirection(final Location point, float heading) {
-            style = OsmandSettings.getOsmandSettings(context).DIRECTION_STYLE.get();
+            style = settings.DIRECTION_STYLE.get();
             value = directionTo(point, heading);
         }
 
@@ -68,7 +69,7 @@ public class NavigationInfo {
         // The first argument must be not null as well as the currentLocation.
         public boolean update(final Location point, float heading) {
             boolean result = false;
-            final RelativeDirectionStyle newStyle = OsmandSettings.getOsmandSettings(context).DIRECTION_STYLE.get();
+            final RelativeDirectionStyle newStyle = settings.DIRECTION_STYLE.get();
             if (style != newStyle) {
                 style = newStyle;
                 result = true;
@@ -134,6 +135,7 @@ public class NavigationInfo {
 
     private Handler uiHandler = new Handler();
     private final Context context;
+    private final OsmandSettings settings;
     private Location currentLocation;
     private RelativeDirection lastDirection;
     private long lastNotificationTime;
@@ -142,6 +144,7 @@ public class NavigationInfo {
 
     public NavigationInfo(final Context context) {
         this.context = context;
+        settings = ((OsmandApplication)context.getApplicationContext()).getSettings();
         currentLocation = null;
         lastDirection = new RelativeDirection();
         lastNotificationTime = SystemClock.uptimeMillis();
@@ -237,7 +240,7 @@ public class NavigationInfo {
     public synchronized void setLocation(Location location) {
         currentLocation = location;
         if (autoAnnounce) {
-            final LatLon point = OsmandSettings.getOsmandSettings(context).getPointToNavigate();
+            final LatLon point = settings.getPointToNavigate();
             if (point != null) {
                 if ((currentLocation != null) && currentLocation.hasBearing()) {
                     final long now = SystemClock.uptimeMillis();

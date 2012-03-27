@@ -45,6 +45,10 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 
 public class MapRouterLayer implements MapPanelLayer {
 
@@ -102,7 +106,7 @@ public class MapRouterLayer implements MapPanelLayer {
 			}
 		};
 		menu.add(end);
-		Action route = new AbstractAction("Calculate YOURS route") {
+		Action route_YOURS = new AbstractAction("Calculate YOURS route") {
 			private static final long serialVersionUID = 507156107455281238L;
 
 			@Override
@@ -110,7 +114,7 @@ public class MapRouterLayer implements MapPanelLayer {
 				new Thread(){
 					@Override
 					public void run() {
-						List<Way> ways = route(startRoute, endRoute);
+						List<Way> ways = route_YOURS(startRoute, endRoute);
 						DataTileManager<Way> points = new DataTileManager<Way>();
 						points.setZoom(11);
 						for(Way w : ways){
@@ -122,8 +126,8 @@ public class MapRouterLayer implements MapPanelLayer {
 				}.start();
 			}
 		};
-		menu.add(route);
-		Action altroute = new AbstractAction("Calculate CloudMade route") {
+		menu.add(route_YOURS);
+		Action route_CloudMate = new AbstractAction("Calculate CloudMade route") {
 			private static final long serialVersionUID = 507156107455281238L;
 
 			@Override
@@ -131,7 +135,7 @@ public class MapRouterLayer implements MapPanelLayer {
 				new Thread() {
 					@Override
 					public void run() {
-						List<Way> ways = alternateRoute(startRoute, endRoute);
+						List<Way> ways = route_CloudMate(startRoute, endRoute);
 						DataTileManager<Way> points = new DataTileManager<Way>();
 						points.setZoom(11);
 						for (Way w : ways) {
@@ -143,7 +147,28 @@ public class MapRouterLayer implements MapPanelLayer {
 				}.start();
 			}
 		};
-		menu.add(altroute);
+		menu.add(route_CloudMate);
+		Action route_OSRM = new AbstractAction("Calculate OSRM route") {
+			private static final long serialVersionUID = 2292361745482584520L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new Thread() {
+					@Override
+					public void run() {
+						List<Way> ways = route_OSRM(startRoute, endRoute);
+						DataTileManager<Way> points = new DataTileManager<Way>();
+						points.setZoom(11);
+						for (Way w : ways) {
+							LatLon n = w.getLatLon();
+							points.registerObject(n.getLatitude(), n.getLongitude(), w);
+						}
+						map.setPoints(points);
+					}
+				}.start();
+			}
+		};
+		menu.add(route_OSRM);
 		Action selfRoute = new AbstractAction("Calculate OsmAnd route") {
 			private static final long serialVersionUID = 507156107455281238L;
 
@@ -186,7 +211,7 @@ public class MapRouterLayer implements MapPanelLayer {
 	// 5. max_heigtht, max_width, min_speed, ...
 	// 6. incline ?
 
-	public static List<Way> route(LatLon start, LatLon end){
+	public static List<Way> route_YOURS(LatLon start, LatLon end){
 		List<Way> res = new ArrayList<Way>();
 		long time = System.currentTimeMillis();
 		System.out.println("Route from " + start + " to " + end);
@@ -258,7 +283,7 @@ public class MapRouterLayer implements MapPanelLayer {
 	
 
 		
-	public List<Way> alternateRoute(LatLon start, LatLon end) {
+	public List<Way> route_CloudMate(LatLon start, LatLon end) {
 		List<Way> res = new ArrayList<Way>();
 		long time = System.currentTimeMillis();
 		System.out.println("Cloud made route from " + start + " to " + end);
@@ -329,6 +354,118 @@ public class MapRouterLayer implements MapPanelLayer {
 				ExceptionHandler.handle(e);
 			}
 			System.out.println("Finding cloudmade routes " + res.size() + " " + (System.currentTimeMillis() - time) + " ms");
+		}
+		return res;
+	}
+	
+	private static Double[] decodeGooglePolylinesFlow(String encodedData) {
+        final List<Double> decodedValues = new ArrayList<Double>(); 
+        int rawDecodedValue = 0;
+        int carriage = 0;
+        for (int x = 0, xx = encodedData.length(); x < xx; ++x) {
+            int i = encodedData.charAt(x);
+            i -= 63;
+            int _5_bits = i << (32 - 5) >>> (32 - 5);
+            rawDecodedValue |= _5_bits << carriage;
+            carriage += 5;
+            boolean isLast = (i & (1 << 5)) == 0;
+            if (isLast) {
+                boolean isNegative = (rawDecodedValue & 1) == 1;
+                rawDecodedValue >>>= 1;
+                if (isNegative) {
+                	rawDecodedValue = ~rawDecodedValue;
+                }
+                decodedValues.add(((double)rawDecodedValue) / 1e5);
+                carriage = 0;
+                rawDecodedValue = 0;
+            }
+        }
+        return decodedValues.toArray(new Double[decodedValues.size()]);
+    }
+	public static List<Way> route_OSRM(LatLon start, LatLon end){
+		List<Way> res = new ArrayList<Way>();
+		long time = System.currentTimeMillis();
+		System.out.println("Route from " + start + " to " + end);
+		if (start != null && end != null) {
+			try {
+				StringBuilder uri = new StringBuilder();
+				uri.append(DataExtractionSettings.getSettings().getOsrmServerAddress());
+				uri.append("/viaroute?");
+				uri.append("&loc=").append(start.getLatitude()).append(",").append(start.getLongitude());
+				uri.append("&loc=").append(end.getLatitude()).append(",").append(end.getLongitude());
+				uri.append("&output=json");
+				uri.append("&instructions=false");
+				uri.append("&geomformat=cmp");
+
+				URL url = new URL(uri.toString());
+				URLConnection connection = url.openConnection();
+				StringBuilder content = new StringBuilder();
+				BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+				{
+					String s = null;
+					boolean fist = true;
+					while ((s = reader.readLine()) != null) {
+						if (fist) {
+							fist = false;
+						}
+						content.append(s).append("\n");
+					}
+					System.out.println(content);
+				}
+				
+				final JSONObject jsonContent = (JSONObject)new JSONTokener(content.toString()).nextValue();
+				
+				// Encoded as https://developers.google.com/maps/documentation/utilities/polylinealgorithm
+				final String routeGeometry = jsonContent.getString("route_geometry");
+				final Double[] route = decodeGooglePolylinesFlow(routeGeometry);
+				double latitude = 0.0;
+				double longitude = 0.0;
+				Way w = new Way(-1);
+				for(int routePointIdx = 0; routePointIdx < route.length / 2; routePointIdx++) {
+					latitude += route[routePointIdx * 2 + 0];
+					longitude += route[routePointIdx * 2 + 1];
+					
+					w.addNode(new net.osmand.osm.Node(latitude, longitude, -1));
+				}
+				
+				if (!w.getNodes().isEmpty()) {
+					res.add(w);
+				}
+
+				/*DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+				DocumentBuilder dom = factory.newDocumentBuilder();
+				Document doc = dom.parse(new InputSource(new StringReader(content.toString())));
+				NodeList list = doc.getElementsByTagName("coordinates");
+				for(int i=0; i<list.getLength(); i++){
+					Node item = list.item(i);
+					String str = item.getTextContent();
+					int st = 0;
+					int next = 0;
+					Way w = new Way(-1);
+					while((next = str.indexOf('\n', st)) != -1){
+						String coordinate = str.substring(st, next + 1);
+						int s = coordinate.indexOf(',');
+						if (s != -1) {
+							try {
+								double lon = Double.parseDouble(coordinate.substring(0, s));
+								double lat = Double.parseDouble(coordinate.substring(s + 1));
+								w.addNode(new net.osmand.osm.Node(lat, lon, -1));
+							} catch (NumberFormatException e) {
+							}
+						}
+						st = next + 1;
+					}
+					if(!w.getNodes().isEmpty()){
+						res.add(w);
+					}
+					
+				}*/
+			} catch (IOException e) {
+				ExceptionHandler.handle(e);
+			} catch (JSONException e) {
+				ExceptionHandler.handle(e);
+			}
+			System.out.println("Finding routes " + res.size() + " " + (System.currentTimeMillis() - time) + " ms");
 		}
 		return res;
 	}

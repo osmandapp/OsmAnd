@@ -28,9 +28,9 @@ import net.osmand.OsmAndFormatter;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ApplicationMode;
-import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper.TurnType;
 import net.osmand.router.BicycleRouter;
@@ -655,7 +655,7 @@ public class RouteProvider {
 			}
 			return new RouteCalculationResult(res, null, start, end, null);
 		} catch (OutOfMemoryError e) {
-			return new RouteCalculationResult("Not enough memory");
+			return new RouteCalculationResult("Not enough process memory");
 		}
 	}
 	

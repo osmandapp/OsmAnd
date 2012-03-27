@@ -15,6 +15,7 @@ import net.osmand.OsmAndFormatter;
 import net.osmand.Version;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -85,7 +86,7 @@ public class SearchAddressOnlineActivity extends OsmandListActivity implements S
 				searchPlaces(searchText.getText().toString());
 			}
 		});
-		location = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+		location = OsmandApplication.getSettings().getLastKnownMapLocation();
 		
 		if (lastResult != null) {
 			setListAdapter(lastResult);
@@ -107,7 +108,7 @@ public class SearchAddressOnlineActivity extends OsmandListActivity implements S
 			location = ((SearchActivity) getParent()).getSearchPoint();
 		}
 		if (location == null) {
-			location = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+			location = OsmandApplication.getSettings().getLastKnownMapLocation();
 		}
 	}
 	
@@ -210,7 +211,7 @@ public class SearchAddressOnlineActivity extends OsmandListActivity implements S
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		Place item = ((PlacesAdapter) getListAdapter()).getItem(position);
-		OsmandSettings settings = OsmandSettings.getOsmandSettings(this);
+		OsmandSettings settings = OsmandApplication.getSettings();
 		settings.setMapLocationToShow(item.lat, item.lon,
 				Math.max(15, settings.getLastKnownMapZoom()), getString(R.string.address)+ " : " + item.displayName); //$NON-NLS-1$
 		MapActivity.launchMapActivityMoveToTop(this);

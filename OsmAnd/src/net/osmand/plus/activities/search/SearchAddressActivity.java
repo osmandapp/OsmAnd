@@ -5,11 +5,11 @@ import java.text.MessageFormat;
 
 import net.osmand.Algoritms;
 import net.osmand.osm.LatLon;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmandApplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -62,7 +62,7 @@ public class SearchAddressActivity extends Activity {
 		countryButton = (Button) findViewById(R.id.CountryButton);
 		buildingButton = (Button) findViewById(R.id.BuildingButton);
 		searchOnline = (Button) findViewById(R.id.SearchOnline);
-		osmandSettings = OsmandSettings.getOsmandSettings(SearchAddressActivity.this);
+		osmandSettings = OsmandApplication.getSettings();
 		attachListeners();
 	}
 	

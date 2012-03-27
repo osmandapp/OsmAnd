@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.text.MessageFormat;
 
 import net.osmand.LogUtil;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 
@@ -30,7 +31,7 @@ public class LiveMonitoringHelper  {
 
 	public LiveMonitoringHelper(Context ctx){
 		this.ctx = ctx;
-		settings = OsmandSettings.getOsmandSettings(ctx);
+		settings = OsmandApplication.getSettings();
 	}
 	
 	public boolean isLiveMonitoringEnabled(){

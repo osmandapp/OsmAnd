@@ -1,6 +1,7 @@
 package net.osmand.plus.activities;
 
 import net.osmand.plus.R;
+import net.osmand.plus.OsmandApplication;
 import android.app.ExpandableListActivity;
 import android.widget.ExpandableListView;
 
@@ -14,5 +15,9 @@ public abstract class OsmandExpandableListActivity extends
 		ExpandableListView view = getExpandableListView();
 		view.setCacheColorHint(getResources().getColor(R.color.activity_background));
 		view.setDivider(getResources().getDrawable(R.drawable.tab_text_separator));
+	}
+
+	protected OsmandApplication getMyApplication() {
+		return (OsmandApplication)getApplication();
 	}
 }

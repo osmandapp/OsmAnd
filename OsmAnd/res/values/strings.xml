@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="rendering_out_of_memory">Not enough process memory to display selected area</string>
+	<string name="use_fluorescent_overlays">Fluorescent overlays</string>
+	<string name="use_fluorescent_overlays_descr">Use fluorescent colors to display tracks and routes</string>
+	<string name="offline_poi_edition">Offline POI editing</string>
+	<string name="offline_poi_edition_descr">Always use offline POI editing</string>
+
 	<string name="tip_recent_changes_0_7_1_t">Changes in 0.7.1 :
 \n\t- Offline POI editing 
 \n\t- Live Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles)
@@ -12,22 +18,22 @@
 	</string>
 
 	<string name="update_poi_does_not_change_indexes">POI changes inside application do not affect downloaded map files, changes are saved to local file instead.</string>
-	<string name="local_openstreetmap_uploading_poi">Uploading POI...</string>
+	<string name="local_openstreetmap_uploading_poi">Uploading POI…</string>
 	<string name="local_openstreetmap_poi_were_uploaded">{0} POI were uploaded</string>
-	<string name="local_openstreetmap_uploadall">Upload All POI</string>
+	<string name="local_openstreetmap_uploadall">Upload all POI</string>
 	<string name="local_openstreetmap_items"></string>
-	<string name="local_openstreetmap_show_poi">Show POI on Map</string>
+	<string name="local_openstreetmap_show_poi">Show POI on map</string>
 	<string name="local_openstreetmap_upload">Upload modification to OSM</string>
 	<string name="local_openstreetmap_delete">Delete POI modification</string>
-	<string name="local_openstreetmap_descr_title">Asynchrone Openstreetmap POI Edition:</string>
-	<string name="local_openstreetmap_settings">Local Openstreetmap Points</string>
-	<string name="local_openstreetmap_settings_descr">Local Points Saved in DB</string>
+	<string name="local_openstreetmap_descr_title">Asynchronous OSM POI Editing:</string>
+	<string name="local_openstreetmap_settings">Locally saved OSM points</string>
+	<string name="local_openstreetmap_settings_descr">Show and manage OSM points noted in local database</string>
 
 	<string name="live_monitoring_descr">Enable sending HTTP requests to a specified web service</string>
-	<string name="live_monitoring">Enable Live Tracking</string>
+	<string name="live_monitoring">Online Live Tracking</string>
 	<string name="live_monitoring_interval_descr">Specify Live Tracking interval</string>
 	<string name="live_monitoring_interval">Live Tracking interval</string>
-	<string name="live_monitoring_url_descr">Specify the Live Tracking web address with parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+	<string name="live_monitoring_url_descr">Specify the web address with parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
 	<string name="live_monitoring_url">Live Tracking web address</string>
 	<string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX\' Tracking settings</string>
 	<string name="show_current_gpx_title">Show current track</string>
@@ -50,7 +56,7 @@
 	<string name="index_name_russia">Europe/Asia - Russia</string>
 	<string name="index_name_africa">Africa</string>
 	<string name="index_name_asia">Asia</string>
-	<string name="index_name_australia">Australia</string>
+	<string name="index_name_oceania">Oceania</string>
 	<string name="index_name_other">Worldwide and topic maps</string>
 	<string name="index_name_wiki">Worldwide Wikipedia</string>
 	<string name="index_name_voice">Voice packs (recorded)</string>
@@ -138,12 +144,12 @@
 
 	<string name="native_library_not_supported">Native library is not supported on this device.</string>
 	<string name="init_native_library">Initializing native library&#8230;</string>
-	<string name="choose_auto_follow_route">Map view auto-center</string>
+	<string name="choose_auto_follow_route">Auto-center map view</string>
 	<string name="choose_auto_follow_route_descr">Time until map view returns to being synchronized with position</string>
 	<string name="auto_follow_route_never">Never</string>
 	<string name="auto_follow_route_navigation">Auto-center nav only</string>
-	<string name="auto_follow_route_navigation_descr">Use map view auto-center only while navigating.</string>
-	<string name="auto_follow_location_enabled">Map view auto-center in use.</string>
+	<string name="auto_follow_route_navigation_descr">Auto-center map view only while navigating.</string>
+	<string name="auto_follow_location_enabled">Auto-center map view in use.</string>
 	
 	<string name="sendtoOSM_confirmation_msg">Send to OSM: %1$s?</string>
 	<string name="pref_vector_rendering">Vector renderer specific options</string>
@@ -164,7 +170,7 @@
 \n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
 \n\t- Implement POI search by name in big areas (countries)  
 \n\t- Fix flickering map screen for tablets (Issue 641)
-\n\t- Map view auto-center option (Issue 356)
+\n\t- Auto-center map view option (Issue 356)
 \n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\'
 \n\t- POI data included in .obf file (all download indexes after 01/10/11) 
 \n\t- Voice prompt fixes (GPS position fix, omitting first command) 
@@ -186,7 +192,7 @@
 	<string name="show_gpx_route">Show on map</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_select_point">Select</string>
-	<string name="local_index_description">Download, activate, deactivate, or delete offline data. \nCurrent data on device (%1$s free space):</string>
+	<string name="local_index_description">Download, (de-)activate, or delete offline data. \nCurrent data on device (%1$s free):</string>
 	<string name="search_position_current_location_search">Searching position&#8230;</string>
 	<string name="search_position_current_location_found">Position (Found)</string>
 	<string name="search_position_address">Address&#8230;</string>
@@ -240,7 +246,7 @@
 	<string name="local_index_gpx_info_show">\n\nLong click for options</string>
 	<string name="local_index_gpx_info_speed">\nAverage speed : %1$s \nMaximum speed : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nAverage altitude : %1$.0f m\nMinimum altitude : %2$.0f m\nMaximum altitude : %3$.0f m\nAscents : %4$.0f m\nDescents : %5$.0f m</string>
-	<string name="local_index_gpx_info">Subtracks : %1$d\nTotal points : %2$d\nWay points : %3$d\nTotal distance : %4$s\nStart time : %5$tD %5$tR\nEnd time : %6$tD %6$tR</string>
+	<string name="local_index_gpx_info">Subtracks : %1$d\nTotal points : %2$d\nWay points : %3$d\nTotal distance : %4$s\nStart time : %5$tF,  %5$tR\nEnd time : %6$tF,  %6$tR</string>
 	<string name="local_index_installed">Edition</string>
 	<string name="local_index_items_backuped">%1$d of %2$d item(s) successfully deactivated.</string>
 	<string name="local_index_items_deleted">%1$d of %2$d item(s) successfully deleted.</string>
@@ -439,7 +445,7 @@
 	<string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
 	<string name="version_index_is_not_supported">The version of index \'\'{0}\'\' is not supported</string>
 
-	<string name="use_osmand_routing_service">OsmAnd routing</string>
+	<string name="use_osmand_routing_service">OsmAnd routing >20km</string>
 	<string name="use_osmand_routing_service_descr">Use OsmAnd offline routing for long distances (experimental) instead of fallback to CloudMade</string>
 	<string name="osmand_routing_experimental">OsmAnd offline routing is an experimental feature and it does not work for distances of more than about 20 km.\n\nRouting service is temporarily switched to online CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
@@ -483,7 +489,6 @@
 	<string name="continuous_rendering">Continuous rendering</string>
 	<string name="continuous_rendering_descr">Display continuous rendering instead of image-at-once</string>
 	<string name="rendering_exception">Error occurred while rendering selected area</string>
-	<string name="rendering_out_of_memory">Not enough memory to display selected area</string>
 	<string name="show_point_options">Location options</string>
 	<string name="renderer_load_sucess">Renderer sucessfully loaded</string>
 	<string name="renderer_load_exception">Exception occured: renderer was not loaded</string>
@@ -496,7 +501,7 @@
 	<string name="phone">phone</string>
 	<string name="download_type_to_filter">type to filter</string>
 	<string name="use_high_res_maps">High resolution display</string>
-	<string name="use_high_res_maps_descr">Improve map display quality for high density devices</string>
+	<string name="use_high_res_maps_descr">Do not stretch (and blur) map tiles on high density displays</string>
 	<string name="unknown_location">Position unknown yet</string>
 	<string name="download_files">Download</string>
 	<string name="context_menu_item_search_transport">Search transport</string>
@@ -563,7 +568,7 @@
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">seconds</string>
 	<string name="int_min">min.</string>
-	<string name="background_service_int_descr">Set interval for location determination by background service</string>
+	<string name="background_service_int_descr">Set wake-up interval used by background service</string>
 	<string name="background_service_int">Positioning interval</string>
 	<string name="background_service_provider_descr">Choose location provider for background service</string>
 	<string name="background_service_provider">Location provider</string>

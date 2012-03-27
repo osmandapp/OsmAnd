@@ -11,10 +11,10 @@
 	<string name="local_openstreetmap_settings">Locale Openstreetmap Punten</string>
 	<string name="local_openstreetmap_settings_descr">Locale Punten bewaard in database</string>
 	<string name="live_monitoring_descr">Versturen HTTP verzoeken naar een webservice toestaan</string>
-	<string name="live_monitoring">Live Tracking toestaan</string>
+	<string name="live_monitoring">Online Live Tracking</string>
 	<string name="live_monitoring_interval_descr">Specificeer Live Tracking interval</string>
 	<string name="live_monitoring_interval">Live Tracking interval</string>
-	<string name="live_monitoring_url_descr">Specificeer het Live Tracking webadres met parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, hoogte={4}, snelheid={5}</string>
+	<string name="live_monitoring_url_descr">Specificeer het webadres met parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, hoogte={4}, snelheid={5}</string>
 	<string name="live_monitoring_url">Live Tracking webadres</string>
 	<string name="gpx_monitoring_disabled_warn">Eerst \'Log track to GPX\' toestaan in Tracking instellingen</string>
 	<string name="show_current_gpx_title">Toon huidige track</string>
@@ -37,14 +37,14 @@
 	<string name="index_name_russia">Europa/Azië - Rusland</string>
 	<string name="index_name_africa">Afrika</string>
 	<string name="index_name_asia">Azië</string>
-	<string name="index_name_australia">Australië</string>
+	<string name="index_name_oceania">Oceanië</string>
 	<string name="index_name_other">Wereldkaart en topografische kaart</string>
 	<string name="index_name_wiki">Wereldwijde Wikipedia</string>
 	<string name="index_name_voice">Stembestanden (opnamen)</string>
 	<string name="index_name_tts_voice">Stembestanden (stemgenerator)</string>
 
 	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
-	<string name="amenity_type_user_defined">Gebruikergedefinieerd</string>
+	<string name="amenity_type_user_defined">Zelfgedefinieerd</string>
 	<string name="fav_export_confirmation">Favorietenbestand bestaat al, wilt u dit vervangen?</string>
 <!-- this block re-worked for new Preferences structure -->
 	<string name="profile_settings">Profielspecifieke instellingen</string>
@@ -229,7 +229,7 @@
 	<string name="local_index_gpx_info_show">\n\nLange klik voor opties</string>
 	<string name="local_index_gpx_info_speed">\nGemiddelde snelheid : %1$s \nMaximum snelheid : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nGemiddelde hoogte : %1$.0f m\nMinimum hoogte : %2$. m\nMaximum hoogte : %3$. m\nStijgingen : %4$. m\nDalingen : %5$. m</string>
-	<string name="local_index_gpx_info">Subtracks : %1$d\nTotaal aantal punten : %2$d\nRoutepunten : %3$d\nTotale afstand : %4$s\nStarttijd : %5$tD %5$tR\nEindtijd : %6$tD %6$tR</string>
+	<string name="local_index_gpx_info">Subtracks : %1$d\nTotaal aantal punten : %2$d\nRoutepunten : %3$d\nTotale afstand : %4$s\nStarttijd : %5$tF,  %5$tR\nEindtijd : %6$tF,  %6$tR</string>
 	<string name="local_index_installed">Editie</string>
 	<string name="local_index_items_backuped">%1$d van %2$d gegevens succesvol gedeactiveerd.</string>
 	<string name="local_index_items_deleted">%1$d van %2$d gegevens succesvol verwijderd.</string>
@@ -399,7 +399,7 @@
 	<string name="amenity_type_historic">Historisch</string>
 	<string name="amenity_type_landuse">Landgebruik</string>
 	<string name="amenity_type_leisure">Vrije tijd</string>
-	<string name="amenity_type_manmade">Door de mens gemaakt</string>
+	<string name="amenity_type_manmade">Artificieel</string>
 	<string name="amenity_type_military">Militair</string>
 	<string name="amenity_type_natural">Natuur</string>
 	<string name="amenity_type_office">Kantoor</string>
@@ -420,7 +420,7 @@
 	<string name="old_map_index_is_not_supported">Verouderd kaartformaat \'\'{0}\'\' wordt niet ondersteund</string>
 	<string name="poi_filter_car_aid">Auto hulp</string>
 	<string name="poi_filter_closest_poi">Interessepunten</string>
-	<string name="poi_filter_custom_filter">Zelfgedefinieerd filter</string>
+	<string name="poi_filter_custom_filter">Eigen filter</string>
 	<string name="poi_filter_food_shop">Levensmiddelen</string>
 	<string name="poi_filter_for_tourists">Voor toeristen</string>
 	<string name="poi_filter_fuel">Brandstof</string>
@@ -429,7 +429,7 @@
 	<string name="version_index_is_big_for_memory">De index \'\'{0}\'\' paste niet in het geheugen</string>
 	<string name="version_index_is_not_supported">De versie van index \'\'{0}\'\' wordt niet ondersteund</string>
 
-	<string name="use_osmand_routing_service">OsmAnd routing</string>
+	<string name="use_osmand_routing_service">OsmAnd routing >20km</string>
 	<string name="use_osmand_routing_service_descr">Gebruik OsmAnd offline routing voor lange afstanden (experimenteel) inplaats van CloudMade</string>
 	<string name="osmand_routing_experimental">OsmAnd offline routing is een experimentele functie en werkt niet voor afstanden van meer dan ongeveer 20 km.\n\nRouting service is tijdelijk omgeschakeld naar online CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Kan de opgegeven directory niet vinden.</string>
@@ -473,7 +473,7 @@
 	<string name="continuous_rendering">Continue kaartoplevering</string>
 	<string name="continuous_rendering_descr">Continue kaartoplevering inplaats van eenmalige oplevering van de hele kaart</string>
 	<string name="rendering_exception">Fout opgetreden bij kaartoplevering van het geselecteerde gebied</string>
-	<string name="rendering_out_of_memory">Niet genoeg geheugen om het geselecteerde gebied weer te geven</string>
+	<string name="rendering_out_of_memory">Niet genoeg werkgeheugen om het geselecteerde gebied weer te geven</string>
 	<string name="show_point_options">Locatie-opties</string>
 	<string name="renderer_load_sucess">Kaartgenerator sucesvol geladen</string>
 	<string name="renderer_load_exception">Fout opgetreden: kaartgenerator niet geladen</string>
@@ -652,7 +652,7 @@
 	<string name="list_index_files_was_not_loaded">De lijst van regio\'s werd niet geladen van osmand.googlecode.com.</string>
     <string name="select_index_file_to_download">Als u uw regio niet kan vinden, dan kunt u deze zelf maken. Zie osmand.net</string>
 	<string name="show_poi_on_map">Toon op kaart</string>
-	<string name="fav_points_edited">Favoriet point is bewerkt</string>
+	<string name="fav_points_edited">Favoriet punt is bewerkt</string>
 	<string name="fav_points_not_exist">Er bestaan geen favoriete punten</string>
 	<string name="update_existing">Vervang</string>
 	<string name="only_show">Alleen tonen</string>
@@ -797,7 +797,7 @@
 <string name="default_buttons_yes">Ja</string>
 <string name="default_buttons_cancel">Annuleer</string>
 <string name="default_buttons_apply">Toepassen</string>
-<string name="default_buttons_add">Toevoegen</string>
+<string name="default_buttons_add">Voeg toe</string>
 <string name="default_buttons_no">Nee</string>
 <string name="add_favorite_dialog_top_text">Type naam van favoriet</string>
 <string name="add_favorite_dialog_default_favourite_name">Favoriet</string>
@@ -835,7 +835,7 @@
 <string name="poi_remove_title">Verwijder interessepunt</string>
 <string name="default_buttons_delete">Verwijder</string>
 <string name="poi_remove_success">interessepunt is verwijderd</string>
-<string name="poi_action_add">toevoegen</string>
+<string name="poi_action_add">Voeg toe</string>
 <string name="poi_action_change">wijzigen</string>
 <string name="poi_action_succeded_template">Actie {0} succesvol verwerkt</string>
 <string name="poi_error_unexpected_template">Fout opgetreden bij het uitvoeren van actie {0}.</string>

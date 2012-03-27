@@ -25,8 +25,7 @@
 
 <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center">
     <Button android:layout_width="125dp" android:layout_height="wrap_content" android:id="@+id/ShowOnMap" android:text="@string/search_shown_on_map"></Button>
-    <Button android:layout_width="125dp" android:layout_toRightOf="@id/ShowOnMap" 
-    	android:layout_height="wrap_content" android:id="@+id/Cancel" android:text="@string/navigate_point_cancel" > </Button>
+    <Button android:layout_width="125dp" android:layout_height="wrap_content" android:id="@+id/Cancel" android:text="@string/navigate_point_cancel" > </Button>
 </LinearLayout>
 
 </LinearLayout>

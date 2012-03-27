@@ -29,11 +29,12 @@ public class RoutingHelper {
 	
 	public static interface IRouteInformationListener {
 		
-		public void newRouteIsCalculated(boolean updateRoute, boolean makeUturnWhenpossible);
+		public void newRouteIsCalculated(boolean updateRoute, boolean suppressTurnPrompt);
 		
 		public void routeWasCancelled();
 	}
 	
+	private final float POSITION_TOLERANCE = 60;
 	
 	private final double DISTANCE_TO_USE_OSMAND_ROUTER = 20000;
 	
@@ -70,13 +71,19 @@ public class RoutingHelper {
 	private Handler uiHandler;
 
 	public static boolean makeUturnWhenPossible = false;
-	public static boolean turnImminent = false;
+	public static boolean suppressTurnPrompt = false;
+	public static int turnImminent = 0;
+	private long makeUTwpDetected = 0;
 
 	public static boolean makeUturnWhenPossible() {
 		return makeUturnWhenPossible;
 	}
 
-	public static boolean turnImminent() {
+	public static boolean suppressTurnPrompt() {
+		return suppressTurnPrompt;
+	}
+
+	public static int turnImminent() {
 		return turnImminent;
 	}
 	
@@ -110,12 +117,12 @@ public class RoutingHelper {
 		
 	}
 	
-	public void clearCurrentRoute(LatLon newFinalLocation) {
+	public synchronized void clearCurrentRoute(LatLon newFinalLocation) {
 		this.routeNodes.clear();
 		listDistance = null;
 		directionInfo = null;
 		makeUturnWhenPossible = false;
-		turnImminent = false;
+		turnImminent = 0;
 		evalWaitInterval = 3000;
 		uiHandler.post(new Runnable() {
 			@Override
@@ -173,8 +180,8 @@ public class RoutingHelper {
 	
 	public boolean finishAtLocation(Location currentLocation) {
 		Location lastPoint = routeNodes.get(routeNodes.size() - 1);
-		if(currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < 60){
-			if(lastFixedLocation != null && lastFixedLocation.distanceTo(lastPoint) < 60){
+		if(currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < POSITION_TOLERANCE){
+			if(lastFixedLocation != null && lastFixedLocation.distanceTo(lastPoint) < POSITION_TOLERANCE){
 				showMessage(context.getString(R.string.arrived_at_destination));
 				voiceRouter.arrivedDestinationPoint();
 				clearCurrentRoute(null);
@@ -213,71 +220,20 @@ public class RoutingHelper {
 	public void setCurrentLocation(Location currentLocation) {
 		if(finalLocation == null || currentLocation == null){
 			makeUturnWhenPossible = false;
-			turnImminent = false;
+			suppressTurnPrompt = false;
+			turnImminent = 0;
 			return;
 		}
 		
-		makeUturnWhenPossible = false;
-		boolean calculateRoute  = false;
-		boolean suppressTurnPrompt  = false;
+		boolean calculateRoute = false;
 		synchronized (this) {
+			// 0. Route empty or needs to be extended? Then re-calculate route.
 			if(routeNodes.isEmpty() || routeNodes.size() <= currentRoute){
 				calculateRoute = true;
 			} else {
-				// Check whether user follow by route in correct direction
-				
-				// 1. try to mark passed route (move forward)
-				float dist = currentLocation.distanceTo(routeNodes.get(currentRoute));
-				while(currentRoute + 1 < routeNodes.size()){
-					float newDist = currentLocation.distanceTo(routeNodes.get(currentRoute + 1));
-					boolean proccesed = false;
-					if (newDist < dist){
-						if(newDist > 150){
-							// may be that check is really not needed ? only for start position
-							if(currentRoute > 0 ){
-								// check that we are not far from the route (if we are on the route distance doesn't matter) 
-								float bearing = routeNodes.get(currentRoute - 1).bearingTo(routeNodes.get(currentRoute));
-								float bearingMovement = currentLocation.bearingTo(routeNodes.get(currentRoute));
-								float d = Math.abs(currentLocation.distanceTo(routeNodes.get(currentRoute)) * FloatMath.sin((bearingMovement - bearing)*3.14f/180f));
-								if(d > 50){
-									proccesed = true;
-								}
-							} else {
-								proccesed = true;
-							}
-							if(proccesed && log.isDebugEnabled()){
-								log.debug("Processed distance : " + newDist + " " + dist);  //$NON-NLS-1$//$NON-NLS-2$
-							}
-							
-						} else {
-							// case if you are getting close to the next point after turn
-							//  but you haven't turned before (could be checked bearing)
-							if(currentLocation.hasBearing() || lastFixedLocation != null){
-								float bearingToPoint = currentLocation.bearingTo(routeNodes.get(currentRoute));
-								float bearingBetweenPoints = routeNodes.get(currentRoute).bearingTo(routeNodes.get(currentRoute+1));
-								float bearing = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation.bearingTo(currentLocation);
-								if(Math.abs(bearing - bearingToPoint) >
-									Math.abs(bearing - bearingBetweenPoints)){
-									if(log.isDebugEnabled()){
-										log.debug("Processed point bearing : " + Math.abs(currentLocation.getBearing() - bearingToPoint) + " " //$NON-NLS-1$ //$NON-NLS-2$
-												+ Math.abs(currentLocation.getBearing() - bearingBetweenPoints));
-									}
-									proccesed = true;
-								}
-							}
-							
-							
-						}
-					}
-					if(proccesed){
-						// that node already passed
-						updateCurrentRoute(currentRoute + 1);
-						dist = newDist;
-					} else {
-						break;
-					}
-						
-				}
+				// 1.
+				tryMarkPassedRoute(currentLocation);
+
 				// 2. check if destination found
 				if(finishAtLocation(currentLocation)){
 					return;
@@ -285,12 +241,12 @@ public class RoutingHelper {
 				
 				// 3. check if closest location already passed
 				if(currentRoute + 1 < routeNodes.size()){
-					float bearing = routeNodes.get(currentRoute).bearingTo(routeNodes.get(currentRoute + 1));
-					float bearingMovement = currentLocation.bearingTo(routeNodes.get(currentRoute));
+					float bearingRouteNext = routeNodes.get(currentRoute).bearingTo(routeNodes.get(currentRoute + 1));
+					float bearingToRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
 					// only 35 degrees for that case because it wrong catches sharp turns 
-					if(Math.abs(bearing - bearingMovement) > 140 && Math.abs(bearing - bearingMovement) < 220){
+					if(Math.abs(bearingRouteNext - bearingToRoute) > 140 && Math.abs(bearingRouteNext - bearingToRoute) < 220){
 						if(log.isDebugEnabled()){
-							log.debug("Processed point movement bearing  : "+bearingMovement +" bearing " + bearing); //$NON-NLS-1$ //$NON-NLS-2$
+							log.debug("Processed point bearingToRoute : "+ bearingToRoute +" bearingRouteNext " + bearingRouteNext); //$NON-NLS-1$ //$NON-NLS-2$
 						}
 						updateCurrentRoute(currentRoute + 1);
 					}
@@ -299,34 +255,34 @@ public class RoutingHelper {
 				// 3.5 check that we already pass very sharp turn by missing one point (so our turn is sharper than expected)
 				// instead of that rule possible could be introduced another if the dist < 5m mark the location as already passed
 				if(currentRoute + 2 < routeNodes.size()){
-					float bearing = routeNodes.get(currentRoute + 1).bearingTo(routeNodes.get(currentRoute + 2));
-					float bearingMovement = currentLocation.bearingTo(routeNodes.get(currentRoute + 1));
+					float bearingRouteNextNext = routeNodes.get(currentRoute + 1).bearingTo(routeNodes.get(currentRoute + 2));
+					float bearingToRouteNext = currentLocation.bearingTo(routeNodes.get(currentRoute + 1));
 					// only 15 degrees for that case because it wrong catches sharp turns 
-					if(Math.abs(bearing - bearingMovement) > 165 && Math.abs(bearing - bearingMovement) < 195){
+					if(Math.abs(bearingRouteNextNext - bearingToRouteNext) > 165 && Math.abs(bearingRouteNextNext - bearingToRouteNext) < 195){
 						if(log.isDebugEnabled()){
-							log.debug("Processed point movement bearing 2 : "+bearingMovement +" bearing " + bearing); //$NON-NLS-1$ //$NON-NLS-2$
+							log.debug("Processed point bearingToRouteNext : "+ bearingToRouteNext +" bearingRouteNextNext " + bearingRouteNextNext); //$NON-NLS-1$ //$NON-NLS-2$
 						}
 						updateCurrentRoute(currentRoute + 2);
 					}
 				}
 				
-				// 4. evaluate distance to the route and reevaluate if needed
+				// 4. >60m off current route (sideways)? Then re-calculate route.
 				if(currentRoute > 0){
-					float bearing = routeNodes.get(currentRoute - 1).bearingTo(routeNodes.get(currentRoute));
-					float bearingMovement = currentLocation.bearingTo(routeNodes.get(currentRoute));
-					float d = Math.abs(currentLocation.distanceTo(routeNodes.get(currentRoute)) * FloatMath.sin((bearingMovement - bearing)*3.14f/180f));
-					if(d > 50) {
+					float bearingRoute = routeNodes.get(currentRoute - 1).bearingTo(routeNodes.get(currentRoute));
+					float bearingToRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
+					float d = Math.abs(currentLocation.distanceTo(routeNodes.get(currentRoute)) * FloatMath.sin((bearingToRoute - bearingRoute)*3.14f/180f));
+					if(d > POSITION_TOLERANCE) {
 						log.info("Recalculate route, because correlation  : " + d); //$NON-NLS-1$
 						calculateRoute = true;
 					}
 				} 
 				
-				// 5. also check bearing by summing distance
+				// 5. Sum distance to last and current route nodes
 				if(!calculateRoute){
 					float d = currentLocation.distanceTo(routeNodes.get(currentRoute));
-					if (d > 80) {
+					if (d > POSITION_TOLERANCE) {
 						if (currentRoute > 0) {
-							// possibly that case is not needed (often it is covered by 4.)
+							// 5a. Greater than 2*distance between them? Then re-calculate route. (Case often covered by 4., but still needed.)
 							float f1 = currentLocation.distanceTo(routeNodes.get(currentRoute - 1)) + d;
 							float c = routeNodes.get(currentRoute - 1).distanceTo(routeNodes.get(currentRoute));
 							if (c * 2 < d + f1) {
@@ -334,85 +290,158 @@ public class RoutingHelper {
 								calculateRoute = true;
 							}
 						} else {
-							// that case is needed
+							// 5b. Too far from route start? Then re-calculate route.
 							log.info("Recalculate route, because too far from start : " + d); //$NON-NLS-1$
 							calculateRoute = true;
 						}
 					}
 				}
 				
-				// X. Also bearing could be checked (is it same direction)
-//				float bearing;
-//				if(currentLocation.hasBearing()){
-//					bearing = currentLocation.getBearing();
-//				} else if(lastFixedLocation != null){
-//					bearing = lastFixedLocation.bearingTo(currentLocation);
-//				}
-//				bearingRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
-//				if (Math.abs(bearing - bearingRoute) > 60f && 360 - Math.abs(bearing - bearingRoute) > 60f) {
-//				      something wrong however it could be starting movement
-//				}
+				// 6. + 7.
+				directionDetection(currentLocation);
 
-				// 6. Suppress turn prompt if prescribed direction of motion is between 45 and 135 degrees off
-				if(routeNodes.size() > 0){
-					if (currentLocation.hasBearing() || lastFixedLocation != null) {
-						float bearing = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation.bearingTo(currentLocation);
-						float bearingRoute;
-						bearingRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
-						if (Math.abs(bearing - bearingRoute) > 45f && 360 - Math.abs(bearing - bearingRoute) > 45f) {
-							if (Math.abs(bearing - bearingRoute) <= 135f && 360 - Math.abs(bearing - bearingRoute) <= 135f) {
-								//float d = currentLocation.distanceTo(routeNodes.get(currentRoute));
-								//if (d > 50) {
-									suppressTurnPrompt = true;
-									//log.info("Bearing is off from bearingRoute between >45 and <=135 degrees"); //$NON-NLS-1$
-								//}
-							}
-						}
-					}
-				}
-
-				// 7. Check necessity for unscheduled U-turn, Issue 863
-				if(routeNodes.size() > 0){
-					if (currentLocation.hasBearing() || lastFixedLocation != null) {
-						float bearing = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation.bearingTo(currentLocation);
-						float bearingRoute;
-						bearingRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
-						if (Math.abs(bearing - bearingRoute) > 135f && 360 - Math.abs(bearing - bearingRoute) > 135f) {
-							float d = currentLocation.distanceTo(routeNodes.get(currentRoute));
-							if (d > 50) {
-								makeUturnWhenPossible = true;
-								turnImminent = true;
-								//log.info("Bearing is opposite to bearingRoute"); //$NON-NLS-1$
-							}
-						}
-					}
-				}
 				if ((suppressTurnPrompt == false && calculateRoute == false) || makeUturnWhenPossible == true) {
 					voiceRouter.updateStatus(currentLocation, makeUturnWhenPossible);
 				}
 			}
 		}
 		lastFixedLocation = currentLocation;
+
+		// 8. Strange Direction? Then re-calculate route. (Added new, may possibly even replace triggers 4, 5a, 5b ?)
+		if(suppressTurnPrompt && (currentLocation.distanceTo(routeNodes.get(currentRoute)) > POSITION_TOLERANCE) ){
+			calculateRoute = true;
+		}
+
 		if(calculateRoute){
 			recalculateRouteInBackground(lastFixedLocation, finalLocation, currentGPXRoute);
 		}
 	}
 	
-	private synchronized void setNewRoute(RouteCalculationResult res){
+	public synchronized void tryMarkPassedRoute(Location currentLocation) {
+		// 1. try to mark passed route (move forward)
+		float dist = currentLocation.distanceTo(routeNodes.get(currentRoute));
+		while(currentRoute + 1 < routeNodes.size()){
+			float newDist = currentLocation.distanceTo(routeNodes.get(currentRoute + 1));
+			boolean processed = false;
+			if (newDist < dist){
+				if(newDist > 150){
+					// may be that check is really not needed ? only for start position
+					if(currentRoute > 0 ){
+						// check that we are not far from the route (if we are on the route distance doesn't matter) 
+						float bearingRoute = routeNodes.get(currentRoute - 1).bearingTo(routeNodes.get(currentRoute));
+						float bearingToRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
+						float d = Math.abs(currentLocation.distanceTo(routeNodes.get(currentRoute)) * FloatMath.sin((bearingToRoute - bearingRoute)*3.14f/180f));
+						if(d > POSITION_TOLERANCE){
+							processed = true;
+						}
+					} else {
+						processed = true;
+					}
+					if(processed && log.isDebugEnabled()){
+						log.debug("Processed distance : " + newDist + " " + dist);  //$NON-NLS-1$//$NON-NLS-2$
+					}
+				} else {
+					// case if you are getting close to the next point after turn
+					//  but you have not yet turned (could be checked bearing)
+					if(currentLocation.hasBearing() || lastFixedLocation != null){
+						float bearingToRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
+						float bearingRouteNext = routeNodes.get(currentRoute).bearingTo(routeNodes.get(currentRoute+1));
+						float bearingMotion = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation.bearingTo(currentLocation);
+						if(Math.abs(bearingMotion - bearingToRoute) > Math.abs(bearingMotion - bearingRouteNext)){
+							if(log.isDebugEnabled()){
+								log.debug("Processed point bearing deltas : " + Math.abs(currentLocation.getBearing() - bearingToRoute) + " " //$NON-NLS-1$ //$NON-NLS-2$
+										+ Math.abs(currentLocation.getBearing() - bearingRouteNext));
+							}
+							processed = true;
+						}
+					}
+				}
+			}
+			if(processed){
+				// that node already passed
+				updateCurrentRoute(currentRoute + 1);
+				dist = newDist;
+			} else {
+				break;
+			}
+		}
+	}
+
+	public synchronized void directionDetection(Location currentLocation) {
+		makeUturnWhenPossible = false;
+		suppressTurnPrompt = false;
+		if(finalLocation == null || currentLocation == null){
+			turnImminent = 0;
+			return;
+		}
+		// 6. + 7. Direction detection, by Hardy, Feb 2012
+		if(routeNodes.size() > 0){
+			if (currentLocation.hasBearing() || lastFixedLocation != null) {
+				float bearingMotion = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation.bearingTo(currentLocation);
+				float bearingToRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
+				// 6. Suppress turn prompt if prescribed direction of motion is between 45 and 135 degrees off
+				if (Math.abs(bearingMotion - bearingToRoute) > 45f && 360 - Math.abs(bearingMotion - bearingToRoute) > 45f) {
+					// disregard upper bound to suppress turn prompt also for recalculated still-opposite route
+					//if (Math.abs(bearingMotion - bearingToRoute) <= 135f && 360 - Math.abs(bearingMotion - bearingToRoute) <= 135f) {
+						suppressTurnPrompt = true;
+						//log.info("bearingMotion is off from bearingToRoute between >45 and <=135 degrees"); //$NON-NLS-1$
+					//}
+				}
+				// 7. Check necessity for unscheduled U-turn, Issue 863
+				if (Math.abs(bearingMotion - bearingToRoute) > 135f && 360 - Math.abs(bearingMotion - bearingToRoute) > 135f) {
+					float d = currentLocation.distanceTo(routeNodes.get(currentRoute));
+					// 60m tolerance to allow for GPS inaccuracy
+					if (d > POSITION_TOLERANCE) {
+						if (makeUTwpDetected == 0) {
+							makeUTwpDetected = System.currentTimeMillis();
+						// require 5 sec since first detection, to avoid false positive announcements
+						} else if ((System.currentTimeMillis() - makeUTwpDetected > 5000)) {
+							makeUturnWhenPossible = true;
+							turnImminent = 1;
+							//log.info("bearingMotion is opposite to bearingRoute"); //$NON-NLS-1$
+						}
+					}
+				} else { 
+					makeUTwpDetected = 0;
+				}
+			}
+		}
+	}
+
+	private synchronized void setNewRoute(RouteCalculationResult res, Location start){
 		final boolean updateRoute = !routeNodes.isEmpty();
 		routeNodes = res.getLocations();
 		directionInfo = res.getDirections();
 		listDistance = res.getListDistance();
-		currentDirectionInfo = 0;
 		currentRoute = 0;
+		currentDirectionInfo = 0;
 		if(isFollowingMode){
-			voiceRouter.newRouteIsCalculated(updateRoute, makeUturnWhenPossible);
+			//tryMarkPassedRoute(start);
+			// try remove false route-recaluated prompts by checking direction to second route node
+			if(routeNodes.size() > 1){
+				currentRoute = 1;
+			}
+			directionDetection(start);
+
+			// set/reset evalWaitInterval only if new route is in forward direction
+			if(!suppressTurnPrompt){
+				evalWaitInterval = 3001;
+			} else {
+				evalWaitInterval = evalWaitInterval * 4 / 3;
+				evalWaitInterval = Math.min(evalWaitInterval, 120000);
+			}
+
+			// trigger voice prompt only if new route is in forward direction (but see also additional 60sec timer for this message in voiceRouter)
+			voiceRouter.newRouteIsCalculated(updateRoute, suppressTurnPrompt);
 		} 
+		currentRoute = 0;
+		currentDirectionInfo = 0;
+
 		uiHandler.post(new Runnable() {
 			@Override
 			public void run() {
 				for (IRouteInformationListener l : listeners) {
-					l.newRouteIsCalculated(updateRoute, makeUturnWhenPossible);
+					l.newRouteIsCalculated(updateRoute, suppressTurnPrompt);
 				}
 			}
 		});
@@ -482,15 +511,24 @@ public class RoutingHelper {
 				dist += lastFixedLocation.distanceTo(routeNodes.get(currentRoute));
 			}
 
-			if (dist < 100 || makeUturnWhenPossible == true) {
-				turnImminent = true;
+			if (dist <= 100 || makeUturnWhenPossible == true) {
+				turnImminent = 1;
+			} else if (dist <= 3000) {
+				turnImminent = 0;
 			} else {
-				turnImminent = false;
+				turnImminent = -1;
+			}
+
+			//Show turnImminent for at least 5 sec (changed to 6 for device delay) if moving, cut off at 300m to avoid speed artifacts
+			if(lastFixedLocation != null && lastFixedLocation.hasSpeed()){
+				if ((dist < (lastFixedLocation.getSpeed() * 6f)) && (dist < 300)) {
+					turnImminent = 1;
+				}
 			}
 
 			return dist;
 		}
-		turnImminent = false;
+		turnImminent = 0;
 		return 0;
 	}
 	
@@ -523,7 +561,7 @@ public class RoutingHelper {
 		if (serviceToUse == RouteService.OSMAND && !settings.USE_OSMAND_ROUTING_SERVICE_ALWAYS.get()) {
 			double distance = MapUtils.getDistance(end, start.getLatitude(), start.getLongitude());
 			if (distance > DISTANCE_TO_USE_OSMAND_ROUTER) {
-				// display 'temporarily switched to CloudMade' message only once per error wait period and not for GPX routes
+				// display 'temporarily switched to CloudMade' message only once per session (and never for GPX routes), mark all subsequent resets as '3001'
 				if (evalWaitInterval == 3000 && settings.FOLLOW_THE_GPX_ROUTE.get() == null) {
 					showMessage(context.getString(R.string.osmand_routing_experimental), Toast.LENGTH_LONG);
 					evalWaitInterval = 3001;
@@ -544,14 +582,13 @@ public class RoutingHelper {
 							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, gpxRoute, fastRouteMode);
 							synchronized (RoutingHelper.this) {
 								if (res.isCalculated()) {
-									setNewRoute(res);
+									setNewRoute(res, start);
 									// reset error wait interval
-									evalWaitInterval = 3001;
+									// set/reset evalWaitInterval in setNewRoute and only if new route is in forward direction
+									// evalWaitInterval = 3001;
 								} else {
 									evalWaitInterval = evalWaitInterval * 4 / 3;
-									if (evalWaitInterval > 120000) {
-										evalWaitInterval = 120000;
-									}
+									evalWaitInterval = Math.min(evalWaitInterval, 120000);
 								}
 								currentRunningJob = null;
 							}

@@ -64,8 +64,9 @@ nth(17, 'seventeenth ').
 
 
 %%% distance measure
-distance(Dist) == [ X, ' feet'] :- Dist < 100, D is round(Dist/10/0.3048)*10, num_atom(D, X).
-distance(Dist) == [ X, ' feet'] :- Dist < 1000, D is round(2*Dist/100/0.3048)*50, num_atom(D, X).
+distance(Dist) == [ X, ' feet'] :- Dist < 160, D is round(2*Dist/100/0.3048)*50, num_atom(D, X).
+distance(Dist) == [ X, ' tenth of a mile'] :- Dist < 241, D is round(Dist/161), num_atom(D, X).
+distance(Dist) == [ X, ' tenths of a mile'] :- Dist < 1529, D is round(Dist/161), num_atom(D, X).
 distance(Dist) == ['about 1 mile '] :- Dist < 2414.
 distance(Dist) == ['about ', X, ' miles '] :- Dist < 16093, D is round(Dist/1609), num_atom(D, X).
 distance(Dist) == [ X, ' miles '] :- D is round(Dist/1609), num_atom(D, X).

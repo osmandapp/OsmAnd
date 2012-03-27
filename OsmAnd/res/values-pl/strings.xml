@@ -21,7 +21,7 @@
 <string name="appearance_settings_descr">Konfiguruj wygląd aplikacji</string>
 <string name="appearance_settings">- Wygląd</string>
 <string name="native_library_not_supported">Biblioteka renderowania natywnego nie jest obsługiwana na tym urządzeniu.</string>
-<string name="init_native_library">Inicjalizacja biblioteki renderowania natywnego...</string>
+<string name="init_native_library">Inicjalizacja biblioteki renderowania natywnego…</string>
 
 <string name="sendtoOSM_confirmation_msg">Wysłać do OSM: %1$s?</string>
 <string name="pref_vector_rendering">Opcje dotyczące rendera wektorowego</string>
@@ -71,13 +71,13 @@
 <string name="poi_filter_nominatim">Online Nominatim</string>
 <string name="search_select_point">Wybierz</string>
 <string name="local_index_description">Pobierz nowe, zarchiwizuj lub usuń istniejące dane. \nIstniejące dane offline na urządzeniu (%1$s jest dostępne):</string>
-<string name="search_position_current_location_search">Ustal pozycję GPS...</string>
+<string name="search_position_current_location_search">Ustal pozycję GPS…</string>
 <string name="search_position_current_location_found">Pozycja [ustalona]</string>
-<string name="search_position_address">Adres...</string>
-<string name="search_position_favorites">Ulubione...</string>
+<string name="search_position_address">Adres…</string>
+<string name="search_position_favorites">Ulubione…</string>
 <string name="search_position_undefined">Niezdefiniowane</string>
 <string name="search_position_fixed">Ustalono</string>
-<string name="search_position_current_location">Obecna pozycja...</string>
+<string name="search_position_current_location">Obecna pozycja…</string>
 <string name="search_position_map_view">Ostatni widok mapy</string>
 
 <string name="select_search_position">Pozycja:</string>
@@ -119,7 +119,7 @@
 <string name="local_index_gpx_info_show">\n\nPrzytrzymaj dłużej, by pokazać na mapie</string>
 <string name="local_index_gpx_info_speed">\nŚrednia prędkość: %1$s \nMaksymalna prędkość: %2$s</string>
 <string name="local_index_gpx_info_elevation">\nŚrednia wysokość: %1$.0f m\nMinimalna wysokość: %2$.0f m\nMaksymalna wysokość: %3$.0f m\nWzniosy: %4$.0f m\nSpadki: %5$.0f m</string>
-<string name="local_index_gpx_info">Subtracks : %1$d\nWszystkie punkty: %2$d\nWay points : %3$d\nCałkowity dystans: %4$s\nCzas startu: %5$tD %5$tR\nCzas zakończenia: %6$tD %6$tR</string>
+<string name="local_index_gpx_info">Subtracks : %1$d\nWszystkie punkty: %2$d\nWay points : %3$d\nCałkowity dystans: %4$s\nCzas startu: %5$tF,  %5$tR\nCzas zakończenia: %6$tF,  %6$tR</string>
 <string name="local_index_installed">Wydanie</string>
 <string name="local_index_items_backuped">%1$d z %2$d zarchiwizowano.</string>
 <string name="local_index_items_deleted">%1$d z %2$d skasowano.</string>
@@ -132,7 +132,7 @@
 <string name="local_index_mi_backup">Zarchiwizuj</string>
 <string name="local_index_mi_delete">Skasuj</string>
 <string name="local_index_mi_reload">Odśwież</string>
-<string name="local_index_download">Pobierz...</string>
+<string name="local_index_download">Pobierz…</string>
 <string name="local_index_tile_data">Dane kafelkowe: %1$s \nMinimalny zoom: %2$d\nMaksymalny zoom: %3$d\nMożliwe do pobrania: %4$s \nPobrano poziomy: %5$s</string>
 <string name="local_index_poi_data">Dane POI</string>
 <string name="local_index_address_data">Dane adresowe</string>
@@ -164,7 +164,7 @@
 </string>
 <string name="voice_not_use">Nie używaj</string>
 <string name="voice_not_specified">Brak</string>
-<string name="installing_new_resources">Rozpakowywanie nowych danych...</string>
+<string name="installing_new_resources">Rozpakowywanie nowych danych…</string>
 <string name="internet_connection_required_for_online_route">Próbujesz użyć usługi online do wyznaczenia trasy, ale nie masz połączenia z Internetem.</string>
 <string name="tts_language_not_supported_title">Język niewspierany</string>
 <string name="tts_language_not_supported">Wybrany język jest niewspierany przez zainstalowany mechanizm TTS (text-to-speech). Czy chcesz odwiedzić Android Market, by poszukać innego silnika TTS? W innym przypadku zostanie użyty bieżący język.</string>
@@ -182,9 +182,9 @@
 \n\t\'Względem kompasu\' - mapa będzie obracana na podstawie odczytu z wbudowanego kompasu
 \n\tPodpowiedź: Aby szybko przełączyć się między kompasem, a jedną z pozostałych opcji można dotknąć ikonki kompasu na mapie.</string>
 
-<string name="switch_to_raster_map_to_see">Obecna pozycja nie ma pokrycia w zainstalowanych mapach offline. Możesz przełączyć źródło mapy w menu \'Zdefiniuj widok\' -&gt; \'Źródło mapy...\' lub zainstalować dodatkowe mapy wektorowe.</string>
-<string name="switch_to_vector_map_to_see">Możesz włączyć mapy offline używając menu (Zdefiniuj widok -&gt; Źródło mapy... -&gt; Wektorowe mapy offline) by zobaczyć mapę.</string>
-<string name="binary_map_download_success">Zakończono. Możesz włączyć mapy offline używając menu (Zdefiniuj widok -&gt; Źródło mapy... -&gt; Wektorowe mapy offline).</string>
+<string name="switch_to_raster_map_to_see">Obecna pozycja nie ma pokrycia w zainstalowanych mapach offline. Możesz przełączyć źródło mapy w menu \'Zdefiniuj widok\' -&gt; \'Źródło mapy…\' lub zainstalować dodatkowe mapy wektorowe.</string>
+<string name="switch_to_vector_map_to_see">Możesz włączyć mapy offline używając menu (Zdefiniuj widok -&gt; Źródło mapy… -&gt; Wektorowe mapy offline) by zobaczyć mapę.</string>
+<string name="binary_map_download_success">Zakończono. Możesz włączyć mapy offline używając menu (Zdefiniuj widok -&gt; Źródło mapy… -&gt; Wektorowe mapy offline).</string>
 <string name="choose_audio_stream">Wyjście głosu nawigatora</string>
 <string name="choose_audio_stream_descr">Wybierz kanał do odtwarzania głosu nawigatora (zależne od możliwości systemu)</string>
 <string name="voice_stream_voice_call">Kanał głosowy</string>
@@ -196,10 +196,10 @@
 <string name="map_transparency_descr">Zmień przezroczystość warstwy bazowej</string>
 <string name="map_transparency">Przezroczystość warstwy bazowej</string>
 <string name="modify_transparency">Zmień przezroczystość</string>
-<string name="layer_underlay">Mapa podstawowa...</string>
+<string name="layer_underlay">Mapa podstawowa…</string>
 <string name="map_underlay">Mapa podstawowa</string>
 <string name="map_underlay_descr">Wybierz warstwę podstawową (underlay)</string>
-<string name="layer_overlay">Nakładka...</string>
+<string name="layer_overlay">Nakładka…</string>
 <string name="default_none">Brak</string>
 <string name="map_overlay">Nakładka</string>
 <string name="map_overlay_descr">Wybierz nakładkę (overlay)</string>
@@ -208,7 +208,7 @@
 <string name="tile_source_already_installed">Mapa jest już zainstalowana, ustawienia zostaną zaktualizowane</string>
 <string name="select_tile_source_to_install">Zaznacz mapy (kafelkowe) do zainstalowania lub zaktualizowania</string>
 <string name="internet_not_available">Połączenie internetowe, wymagane dla tej operacji, jest niedostępne</string>
-<string name="install_more">Zainstaluj więcej...</string>
+<string name="install_more">Zainstaluj więcej…</string>
 
 <string name="tip_update_index">Aktualizacja danych offline</string>
 <string name="tip_update_index_t">\tPosiadanie aktualnych danych to podstawa. Osmand posiada menedżera pobierania danych offline, który może sprawdzić i pobrać dostępne aktualizacje.
@@ -251,7 +251,7 @@
 
 <string name="tip_map_switch">Źródło mapy</string>
 <string name="tip_map_switch_t">\tNajszybszą drogą zmiany źródła mapy jest naciśnięcie i wyświetlanych warstw \'Menu\' -&gt; \'Zdefiniuj widok\'.
-\n\tPod pozycją \'Źródło mapy...\' możesz wybrać ściągniętą wcześniej mapę wektorową offline, predefiniowane źródła map kafelkowych lub wcześniej utworzone mapy na PC (np. za pomocą programu OsmAndMapCreator).
+\n\tPod pozycją \'Źródło mapy…\' możesz wybrać ściągniętą wcześniej mapę wektorową offline, predefiniowane źródła map kafelkowych lub wcześniej utworzone mapy na PC (np. za pomocą programu OsmAndMapCreator).
 \n\tOsmAnd wspiera także nietypowe źródła map.</string>
 
 <string name="tip_app_mode">Profil działania</string>
@@ -314,10 +314,10 @@
 <string name="amenity_type_sustenance">Jedzenie</string>
 <string name="amenity_type_tourism">Turystyka</string>
 <string name="amenity_type_transportation">Transport publiczny</string>
-<string name="indexing_address">Indeksowanie adresów...</string>
-<string name="indexing_map">Indeksowanie map...</string>
-<string name="indexing_poi">Indeksowanie POI...</string>
-<string name="indexing_transport">Indeksowanie transportu pub....</string>
+<string name="indexing_address">Indeksowanie adresów…</string>
+<string name="indexing_map">Indeksowanie map…</string>
+<string name="indexing_poi">Indeksowanie POI…</string>
+<string name="indexing_transport">Indeksowanie transportu pub….</string>
 <string name="input_output_error">Wystąpił błąd wejścia/wyjścia</string>
 <string name="km">km</string>
 <string name="km_h">km/h</string>
@@ -330,11 +330,11 @@
 <string name="poi_filter_for_tourists">Dla turystów</string>
 <string name="poi_filter_fuel">Tankowanie</string>
 <string name="poi_filter_namefinder">Online NameFinder</string>
-<string name="reading_cached_tiles">Wczytywanie zachowanych kafelków...</string>
+<string name="reading_cached_tiles">Wczytywanie zachowanych kafelków…</string>
 <string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
 <string name="version_index_is_not_supported">The version of index \'\'{0}\'\' is not supported</string>
 
-<string name="use_osmand_routing_service">OsmAnd routing</string>
+<string name="use_osmand_routing_service">OsmAnd routing >20km</string>
 <string name="use_osmand_routing_service_descr">Użyj routingu offline dla długich tras (funkcjonalność eksperymentalna)</string>
 <string name="osmand_routing_experimental">Routing offline OsmAnd-a jest funkcją eksperymentalną i nie działa dobrze dla odległości większych niż 20km.\n\nUsługa routująca jest automatycznie przełączana do CloudMade (online).</string>
 <string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
@@ -343,10 +343,10 @@
 
 <string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by new the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 <string name="build_installed">Build {0} successfully installed ({1}).</string>
-<string name="downloading_build">Downloading build...</string>
+<string name="downloading_build">Downloading build…</string>
 <string name="install_selected_build">Continue to install OsmAnd - {0} from {1} {2} MB ?</string>
 <string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
-<string name="loading_builds">Loading OsmAnd builds...</string>
+<string name="loading_builds">Loading OsmAnd builds…</string>
 <string name="select_build_to_install">Select one of the OsmAnd builds to install</string>
 <string name="contribution_activity">Special activity for contribution version</string>
 
@@ -414,7 +414,7 @@
 
 <string name="map_route_by_gpx">Trasa z wykorzystaniem GPX</string>
 <string name="gpx_files_not_found">GPX files not found in /tracks directory</string>
-<string name="layer_gpx_layer">Ślad GPX...</string>
+<string name="layer_gpx_layer">Ślad GPX…</string>
 <string name="error_reading_gpx">Błąd odczytu danych GPX</string>
 
 <string name="vector_data">Mapy wektorowe offline</string>
@@ -448,8 +448,8 @@
 <string name="layer_favorites">Ulubione</string>
 <string name="layer_osm_bugs">OSM bugs</string>
 <string name="layer_transport">Przystanki</string>
-<string name="layer_poi">POI...</string>
-<string name="layer_map">Źródło mapy...</string>
+<string name="layer_poi">POI…</string>
+<string name="layer_map">Źródło mapy…</string>
 <string name="menu_layers">Zdefiniuj widok</string>
 <string name="continue_follow_previous_route">Poprzednia trasa nie została ukończona. Czy chcesz kontynuować?</string>
 <string name="context_menu_item_search_poi">Szukaj POI</string>
@@ -481,14 +481,14 @@
 <string name="menu_mute_on">Wł. dźwięk</string>
 <string name="voice_provider_descr">Wybierz głos nawigatora</string>
 <string name="voice_provider">Głos nawigatora</string>
-<string name="voice_data_initializing">Inicjalizacja danych głosowych...</string>
+<string name="voice_data_initializing">Inicjalizacja danych głosowych…</string>
 <string name="voice_data_not_supported">Niewspierana wersja danych głosowych</string>
 <string name="voice_data_corrupted">Specified voice data is corrupted</string>
 <string name="voice_data_unavailable">Selected voice data is not available</string>
 <string name="stop_routing">Zatrzymaj routing</string>
 <string name="sd_unmounted">SD card is not accessible.\nYou won\'t be able to see maps or find things.</string>
 <string name="sd_mounted_ro">SD card is read-only.\nYou can only see the preloaded map and can\'t download from the Internet.</string>
-<string name="unzipping_file">Rozpakowywanie pliku...</string>
+<string name="unzipping_file">Rozpakowywanie pliku…</string>
 <string name="route_tr">Skręć w prawo i jedź</string>
 <string name="route_tshr">Skręć ostro w prawo i jedź</string>
 <string name="route_tslr">Skręć łagodnie w prawo i jedź</string>
@@ -500,7 +500,7 @@
 <string name="first_time_continue">Kontynuuj</string>
 <string name="first_time_download">Pobierz region</string>
 <string name="first_time_msg">Dziękujemy za wybranie programu OsmAnd.\nAby wykorzystać wszystkie możliwości programu potrzebujesz map interesującego Cię regionu, które możesz pobrać w Ustawieniach lub przygotować samemu. Po zrobieniu tego, będziesz mógł wyszukiwać adresy, POI i inne obiekty.</string>
-<string name="search_poi_location">Wyszukiwanie sygnału...</string>
+<string name="search_poi_location">Wyszukiwanie sygnału…</string>
 <string name="search_near_map">Szukaj w pobliżu ostatniej pozycji</string>
 <string name="search_nearby">Szukaj w pobliżu</string>
 <string name="map_orientation_default">Jak w urządzeniu</string>
@@ -541,11 +541,11 @@
 <string name="favorite">Ulubione</string>
 <string name="clear_all">Wyczyść wszystko</string>
 <string name="history">Historia</string>
-<string name="uploading_data">Wysyłanie danych...</string>
-<string name="uploading">Wysyłanie...</string>
+<string name="uploading_data">Wysyłanie danych…</string>
+<string name="uploading">Wysyłanie…</string>
 <string name="search_nothing_found">Nic nie znaleziono</string>
-<string name="searching">Szukanie...</string>
-<string name="searching_address">Szukanie adresu...</string>
+<string name="searching">Szukanie…</string>
+<string name="searching_address">Szukanie adresu…</string>
 <string name="search_osm_nominatim">Znajdź adres używając wyszukiwarki OSM Nominatim</string>
 <string name="hint_search_online">Numer domu, ulica, miejscowość</string>
 <string name="search_offline_address">Offline</string>
@@ -561,9 +561,9 @@
 <string name="address">Adres</string>
 <string name="download_index_success">Pobieranie zakończone</string>
 <string name="error_io_error">Wystąpił błąd wejścia/wyjścia</string>
-<string name="downloading_file">Pobieranie pliku...</string>
-<string name="downloading">Pobieranie...</string>
-<string name="downloading_list_indexes">Pobieranie listy dostępnych regionów...</string>
+<string name="downloading_file">Pobieranie pliku…</string>
+<string name="downloading">Pobieranie…</string>
+<string name="downloading_list_indexes">Pobieranie listy dostępnych regionów…</string>
 <string name="list_index_files_was_not_loaded">Lista regionów nie została pobrana z osmand.net.</string>
 <string name="select_index_file_to_download">If you can\'t find your region, you can make it yourself. See osmand.net</string>
 <string name="show_poi_on_map">Pokaż na mapie</string>
@@ -577,18 +577,18 @@
 <string name="get_directions">Nawigacja</string>
 <string name="show_gps_status">Pokaż status GPS</string>
 <string name="opening_hours">Godziny otwarcia</string>
-<string name="opening_changeset">Opening changeset...</string>
-<string name="closing_changeset">Closing changeset...</string>
-<string name="commiting_node">Committing node...</string>
-<string name="loading_poi_obj">Wczytywanie POI...</string>
+<string name="opening_changeset">Opening changeset…</string>
+<string name="closing_changeset">Closing changeset…</string>
+<string name="commiting_node">Committing node…</string>
+<string name="loading_poi_obj">Wczytywanie POI…</string>
 <string name="auth_failed">Autoryzacja nie powiodła się</string>
 <string name="failed_op">nie powiodło się</string>
-<string name="converting_names">Konwertowanie natywnych/angielskich nazw...</string>
-<string name="loading_streets_buildings">Wczytywanie ulic/budynków...</string>
-<string name="loading_postcodes">Wczytywanie kodów pocztowych...</string>
-<string name="loading_streets">Wczytywanie ulic...</string>
-<string name="loading_cities">Wczytywanie miast...</string>
-<string name="loading">Wczytywanie...</string>
+<string name="converting_names">Konwertowanie natywnych/angielskich nazw…</string>
+<string name="loading_streets_buildings">Wczytywanie ulic/budynków…</string>
+<string name="loading_postcodes">Wczytywanie kodów pocztowych…</string>
+<string name="loading_streets">Wczytywanie ulic…</string>
+<string name="loading_cities">Wczytywanie miast…</string>
+<string name="loading">Wczytywanie…</string>
 <string name="poi">POI</string>
 <string name="error_occurred_saving_gpx">Błąd podczas zapisywania śladu GPX</string>
 <string name="error_calculating_route">Błąd obliczania trasy</string>
@@ -599,10 +599,10 @@
 <string name="invalid_locations">Pozycje są niepoprawne</string>
 <string name="go_back_to_osmand">Wróć do mapy</string>
 <string name="close">Zamknij</string>
-<string name="loading_data">Ładowanie danych...</string>
-<string name="reading_indexes">Wczytywanie danych lokalnych...</string>
+<string name="loading_data">Ładowanie danych…</string>
+<string name="reading_indexes">Wczytywanie danych lokalnych…</string>
 <string name="previous_run_crashed">Program poprzednio uległ awarii. Log z informacjami jest w {0}. Wyślij zgłoszenie i załącz ten plik.</string>
-<string name="saving_gpx_tracks">Zapisywanie śladów GPX do karty SD...</string>
+<string name="saving_gpx_tracks">Zapisywanie śladów GPX do karty SD…</string>
 <string name="finished_task">Zakończono</string>
 <string name="reload_indexes_descr">Wczytaj ponownie dane wektorowe map i inne dane z karty SD</string>
 <string name="reload_indexes">Wczytaj ponownie dane offline</string>

@@ -23,7 +23,7 @@ make_ut(Dist) == ['Dans ', D, ' faites demi-tour '] :- distance(Dist) == D.
 make_ut == ['Faites demi-tour '].
 make_ut_wp == ['Faites demi-tour '].
 
-prepare_roundabout(Dist) == ['Préparez vous à entrer dans le rondpoint dans ', D] :- distance(Dist) == D.
+prepare_roundabout(Dist) == ['Préparez vous à entrer dans le rond-point dans ', D] :- distance(Dist) == D.
 roundabout(Dist, _Angle, Exit) == ['Dans ', D, ' entrez dans le rond-point et prenez la ', E, 'sortie'] :- distance(Dist) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['prenez la ', E, 'sortie'] :- nth(Exit, E).
 
@@ -40,7 +40,7 @@ bear_left == ['serrez à gauche '].
 route_new_calc(Dist) == ['L itinéraire fait  ', D] :- distance(Dist) == D.
 route_recalc(Dist) == ['recalcul de l itinéraire, l itinéraire fait ', D] :- distance(Dist) == D.
 
-location_lost == ['g p s signal lost '].
+location_lost == ['signal g p s perdu '].
 
 
 %% 
@@ -64,9 +64,9 @@ nth(17, '17ème ').
 
 
 %%% distance measure
-distance(Dist) == [ X, ' metres'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist) == [ X, ' metres'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
-distance(Dist) == ['environ 1 kilometre '] :- Dist < 1500.
+distance(Dist) == [ X, ' mètres'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
+distance(Dist) == [ X, ' mètres'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist) == ['environ 1 kilomètre '] :- Dist < 1500.
 distance(Dist) == ['environ ', X, ' kilomètres '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
 distance(Dist) == [ X, ' kilomètres '] :- D is round(Dist/1000), num_atom(D, X).
 
