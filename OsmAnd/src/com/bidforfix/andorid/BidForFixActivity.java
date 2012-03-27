@@ -72,7 +72,7 @@ public abstract class BidForFixActivity extends ListActivity {
 	protected void onPrepareDialog(int id, Dialog dialog) {
 		switch (id) {
 		case LOAD_ITEMS:
-			dialog.setTitle("Loading");
+			dialog.setTitle(R.string.bidforfix_loading);
 			loadItemTask = new LoadItemsTask((ProgressDialog)dialog);
 			loadItemTask.execute();
 			return;
@@ -112,7 +112,7 @@ public abstract class BidForFixActivity extends ListActivity {
 		@Override
 		protected void onPostExecute(Integer result) {
 			super.onPostExecute(result);
-			//set the adapater (clear,set)
+			//set the adapter (clear,set)
 			setListAdapter(new BFFIssueArrayAdapter(BidForFixActivity.this, getHelper().getList()));
 			dismissDialog(LOAD_ITEMS);
 		}
@@ -154,16 +154,16 @@ public abstract class BidForFixActivity extends ListActivity {
 			ViewHolder holder = (ViewHolder) rowView.getTag();
 			BFFIssue s = values.get(position);
 			holder.text.setText(s.getName());
-			holder.support.setText("18 Supporters");
-			int funded = random.nextInt(100);
-			holder.funded.setText("funded: "+funded+"%");
+			holder.support.setText(context.getString(R.string.bidforfix_supporters, s.getBids_count()));
+			int funded = s.getPercent();
+			holder.funded.setText(context.getString(R.string.bidforfix_funded, funded));
 			
 			List<PieItem> PieData = new ArrayList<PieItem>();
         	PieItem item       = new PieItem();
         	item.Count = funded;
         	item.Color = 0xFF72B123; 
         	PieItem item2       = new PieItem();
-        	item2.Count = 100-funded;
+        	item2.Count = Math.max(100,funded)-funded;
         	item2.Color = 0xFFDDDDDD;
         	
         	PieData.add(item);
@@ -185,17 +185,8 @@ public abstract class BidForFixActivity extends ListActivity {
             // Draw Pie Vien on Bitmap canvas
             //------------------------------------------------------------------------------------------
             pieChartView.draw(new Canvas(mBackgroundImage));
-            pieChartView = null;
-
+            
             holder.image.setImageBitmap(mBackgroundImage);
-        	//MaxCount += ItemCount;
-//			if (s.startsWith("Windows7") || s.startsWith("iPhone")
-//					|| s.startsWith("Solaris")) {
-//				holder.image.setImageResource(R.drawable.no);
-//			} else {
-//				holder.image.setImageResource(R.drawable.ok);
-//			}
-
 			return rowView;
 		}
 	}

@@ -7,9 +7,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,19 +44,35 @@ public class BidForFixHelper {
 
 	private final String cancelButton;
 
-	public static class BFFIssue {
+	public static class BFFIssue implements Comparable<BFFIssue> {
 		private final String link;
 		private final String name;
 		private final String shortname;
 		private final String descripton;
+		private final int percent;
+		private final int bids_count;
+		private final int position;
 
 		public BFFIssue(JSONObject jsonObject) {
 			this.link = getValue(jsonObject, "link");
 			this.name = getValue(jsonObject, "name");
 			this.shortname = getValue(jsonObject, "short_name");
 			this.descripton = getValue(jsonObject, "description");
+			this.percent = getInt(jsonObject, "percent");
+			this.bids_count = getInt(jsonObject, "bids_count");
+			this.position = getInt(jsonObject, "position");
 		}
 
+		
+		private int getInt(JSONObject jsonObject, String key) {
+			try {
+				return jsonObject.getInt(key);
+			} catch (JSONException e) {
+				// ignore
+			}
+			return 0;
+		}
+		
 		private String getValue(JSONObject jsonObject, String key) {
 			try {
 				return jsonObject.getString(key);
@@ -66,13 +82,13 @@ public class BidForFixHelper {
 			return null;
 		}
 
-		public BFFIssue(String link, String name, String shortname,
-				String descripton) {
-			this.link = link;
-			this.name = name;
-			this.shortname = shortname;
-			this.descripton = descripton;
-		}
+//		public BFFIssue(String link, String name, String shortname,
+//				String descripton) {
+//			this.link = link;
+//			this.name = name;
+//			this.shortname = shortname;
+//			this.descripton = descripton;
+//		}
 
 		public String getDescripton() {
 			return descripton;
@@ -93,6 +109,19 @@ public class BidForFixHelper {
 		public String getShortname() {
 			return shortname;
 		}
+		
+		public int getBids_count() {
+			return bids_count;
+		}
+		
+		public int getPercent() {
+			return percent;
+		}
+
+		@Override
+		public int compareTo(BFFIssue another) {
+			return another != null ? this.position - another.position : 1;
+		}
 	}
 
 	public BidForFixHelper(String project, String supportButton, String cancelButton) {
@@ -112,7 +141,7 @@ public class BidForFixHelper {
 	public void loadList() {
 		if (isReloadNeeded()) {
 			BufferedReader in = null;
-			String url = "http://www.bidforfix.com/p/" + project + "/issues/";
+			String url = "http://www.bidforfix.com/p/" + project + "/issues/?count=20";
 			try {
 				URL twitter = new URL(url);
 				URLConnection tc = twitter.openConnection();
@@ -133,6 +162,7 @@ public class BidForFixHelper {
 						bffIssues.add(new BFFIssue(jo));
 					}
 				}
+				Collections.sort(bffIssues);
 				initialized = new Date();
 			} catch (MalformedURLException e) {
 				initialized = new Date(Long.MAX_VALUE); //bad url, don't try anymore
