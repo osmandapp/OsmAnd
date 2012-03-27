@@ -3,10 +3,9 @@ package net.osmand.plus.activities.search;
 import java.util.ArrayList;
 
 import net.osmand.access.AccessibleToast;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
-import net.osmand.plus.activities.OsmandApplication;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +33,7 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 
 	@Override
 	public void itemSelected(RegionAddressRepository obj) {
-		OsmandSettings.getOsmandSettings(this).setLastSearchedRegion(obj.getName(), obj.getEstimatedRegionCenter());
+		OsmandApplication.getSettings().setLastSearchedRegion(obj.getName(), obj.getEstimatedRegionCenter());
 		finish();
 	}
 	

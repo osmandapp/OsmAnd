@@ -40,10 +40,13 @@ public class RouteLayer extends OsmandMapLayer {
 		boundsRect = new Rect(0, 0, view.getWidth(), view.getHeight());
 		tileRect = new RectF();
 		paint = new Paint();
-		paint.setColor(view.getResources().getColor(R.color.nav_track));
+		if (view.getSettings().FLUORESCENT_OVERLAYS.get()) {
+			paint.setColor(view.getResources().getColor(R.color.nav_track_fluorescent));
+		} else {
+			paint.setColor(view.getResources().getColor(R.color.nav_track));
+		}
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(14);
-		paint.setAlpha(150);
 		paint.setAntiAlias(true);
 		paint.setStrokeCap(Cap.ROUND);
 		paint.setStrokeJoin(Join.ROUND);
@@ -60,6 +63,7 @@ public class RouteLayer extends OsmandMapLayer {
 	
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
+		initUI(); //to change color immediately when needed
 		path.reset();
 		if (helper.hasPointsToShow()) {
 			long time = System.currentTimeMillis();

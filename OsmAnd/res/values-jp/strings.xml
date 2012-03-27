@@ -11,7 +11,7 @@
 \n\t\'お気に入り\'内で長押しすることで任意のお気に入り地点へナビゲート
 することができます</string>
 
-     <string name="installing_new_resources">新しいデータを解凍中...</string>
+     <string name="installing_new_resources">新しいデータを解凍中…</string>
      <string
 name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
@@ -40,13 +40,13 @@ name="internet_connection_required_for_online_route">オンライン経路案内
 
      <string name="switch_to_raster_map_to_see">現在の位置は
 あなたのオフラインベクターマップではカバーされていません、
-追加でベクターマップをダウンロードする場合、メニュー(ビュー定義 -> マップソース...)
+追加でベクターマップをダウンロードする場合、メニュー(ビュー定義 -> マップソース…)
 でマップソースを切り替えられます。</string>
      <string name="switch_to_vector_map_to_see">マップを見るには
-メニュー(ビュー定義 -> マップソース... -> オフラインベクターマップ)
+メニュー(ビュー定義 -> マップソース… -> オフラインベクターマップ)
 でオフラインベクターマップに切り替えられます。</string>
      <string name="binary_map_download_success">成功。
-メニュー(ビュー定義 -> マップソース... -> オフラインベクターマップ)で
+メニュー(ビュー定義 -> マップソース… -> オフラインベクターマップ)で
 オフラインベクターマップに切り替えられます。</string>
      <string name="choose_audio_stream">音声案内ストリーム</string>
      <string name="choose_audio_stream_descr">音声案内を再生するにはチャンネルを
@@ -61,10 +61,10 @@ name="internet_connection_required_for_online_route">オンライン経路案内
      <string name="map_transparency_descr">ベースマップ透過性を変更</string>
      <string name="map_transparency">ベースマップ透過性</string>
      <string name="modify_transparency">透明度を変更</string>
-     <string name="layer_underlay">アンダーレイマップ...</string>
+     <string name="layer_underlay">アンダーレイマップ…</string>
      <string name="map_underlay">アンダーレイマップ</string>
      <string name="map_underlay_descr">アンダーレイマップを選択</string>
-     <string name="layer_overlay">オーバーレイマップ...</string>
+     <string name="layer_overlay">オーバーレイマップ…</string>
      <string name="default_none">無し</string>
      <string name="map_overlay">オーバーレイマップ</string>
      <string name="map_overlay_descr">オーバーレイマップを選択</string>
@@ -76,7 +76,7 @@ name="internet_connection_required_for_online_route">オンライン経路案内
 更新する(タイル)マップを選んでください</string>
      <string name="internet_not_available">操作に必要なインターネット接続が
 利用できません</string>
-     <string name="install_more">インストールを続ける...</string>
+     <string name="install_more">インストールを続ける…</string>
 
      <string name="tip_update_index">オフラインデータの更新</string>
      <string name="tip_update_index_t">\t最新のマップデータを持っていることは
@@ -153,7 +153,7 @@ OSMコミュニティはこの問題をいち早く修正することができ�
      <string name="tip_map_switch">マップソース</string>
      <string name="tip_map_switch_t">\t表示中のマップソース及びレイヤーを変更する
 いちばん早い方法はマップメニューの\'メニュー\' -> \'ビュー定義\'を押すことです。
-\n\t\'マップソース...\'の下で、プリロード済オフラインベクターマップ、
+\n\t\'マップソース…\'の下で、プリロード済オフラインベクターマップ、
 定義済(オンライン)タイルソース、PC上のOsmAndMapCreatorなどを使って手動作成されたマップ
 などを選択することができます。
 \n\tOsmAndはカスタムソースもサポートします。</string>
@@ -249,13 +249,13 @@ OSMコミュニティはこの問題をいち早く修正することができ�
      <string name="poi_filter_for_tourists">観光(For tourists)</string>
      <string name="poi_filter_fuel">燃料(Fuel)</string>
      <string name="poi_filter_namefinder">オンラインNameFinder</string>
-     <string name="reading_cached_tiles">キャッシュ済タイル読み込み中...</string>
+     <string name="reading_cached_tiles">キャッシュ済タイル読み込み中…</string>
      <string name="version_index_is_big_for_memory">The index
 \'\'{0}\'\' did not fit into memory</string>
      <string name="version_index_is_not_supported">索引 \'\'{0}\'\' のバージョンは
 サポートされていません</string>
 
-     <string name="use_osmand_routing_service">OsmAnd 経路案内</string>
+     <string name="use_osmand_routing_service">OsmAnd 経路案内 >20km</string>
      <string name="use_osmand_routing_service_descr">長距離のオフライン経路案内に
 OsmAndを使用(実験版)</string>
      <string name="osmand_routing_experimental">OsmAndオフライン経路案内は実験的な機能であり
@@ -274,11 +274,11 @@ OsmAnd バージョンがインストールされています。全てのオフ�
 新しい方にインポートしてください。</string>
      <string name="build_installed">ビルド {0} はインストール
 されました ({1})。</string>
-     <string name="downloading_build">ビルドをダウンロード中...</string>
+     <string name="downloading_build">ビルドをダウンロード中…</string>
      <string name="install_selected_build">本当にOsmAndをインストールしますか
  - {0} from {1} {2} MB.</string>
      <string name="loading_builds_failed">OsmAndビルドのリスト参照に失敗</string>
-     <string name="loading_builds">OsmAnd ビルドをロード中...</string>
+     <string name="loading_builds">OsmAnd ビルドをロード中…</string>
      <string name="select_build_to_install">インストールするOsmAndのビルドをひとつ
 選んでください</string>
      <string name="contribution_activity">貢献バージョン用の特別な画面</string>
@@ -356,7 +356,7 @@ name="maps_could_not_be_downloaded">このマップはダウンロードでき�
      <string name="map_route_by_gpx">GPXを使ったルート</string>
      <string name="gpx_files_not_found">GPXファイルが/tracks directory
 にありません</string>
-     <string name="layer_gpx_layer">GPXトラック...</string>
+     <string name="layer_gpx_layer">GPXトラック…</string>
      <string name="error_reading_gpx">GPXデータ読み込みエラー</string>
 
      <string name="vector_data">オフラインベクターマップ</string>
@@ -392,8 +392,8 @@ name="maps_could_not_be_downloaded">このマップはダウンロードでき�
      <string name="layer_favorites">お気に入り</string>
      <string name="layer_osm_bugs">OSM bugs</string>
      <string name="layer_transport">交通機関乗り場</string>
-     <string name="layer_poi">POI...</string>
-     <string name="layer_map">マップソース...</string>
+     <string name="layer_poi">POI…</string>
+     <string name="layer_map">マップソース…</string>
      <string name="menu_layers">ビュー定義</string>
      <string name="continue_follow_previous_route">以前の経路案内が終わっていません。続けますか？</string>
      <string name="context_menu_item_search_poi">POIを検索</string>
@@ -428,7 +428,7 @@ name="maps_could_not_be_downloaded">このマップはダウンロードでき�
      <string name="voice_not_use">なし</string>
      <string name="voice_provider_descr">経路案内用の音声案内を選択</string>
      <string name="voice_provider">音声案内</string>
-     <string name="voice_data_initializing">音声データを初期化中...</string>
+     <string name="voice_data_initializing">音声データを初期化中…</string>
      <string name="voice_data_not_supported">サポートしていない音声データのバージョン</string>
      <string name="voice_data_corrupted">指定した音声データは破損しています</string>
      <string name="voice_data_unavailable">選択した音声データは利用できません</string>
@@ -436,7 +436,7 @@ name="maps_could_not_be_downloaded">このマップはダウンロードでき�
      <string name="sd_unmounted">SDカードにアクセスできません。\nマップを参照したり何かを探したりすることはできません。</string>
      <string name="sd_mounted_ro">SDカードは読み取り専用です。
 \nプリロードマップだけを見ることができ、インターネットからのダウンロードはできません。</string>
-     <string name="unzipping_file">ファイルを解凍中...</string>
+     <string name="unzipping_file">ファイルを解凍中…</string>
      <string name="route_tr">右折して進む</string>
      <string name="route_tshr">鋭く右折して進む</string>
      <string name="route_tslr">ゆるやかに右折して進む</string>
@@ -452,7 +452,7 @@ name="maps_could_not_be_downloaded">このマップはダウンロードでき�
 、これはダウンロード(設定 -&gt; データ) または自分で準備することができます。
 その後で、あなたは住所で検索したり、POIを検索したり、交通機関を検索したり
 することができます。</string>
-     <string name="search_poi_location">シグナルを探査中...</string>
+     <string name="search_poi_location">シグナルを探査中…</string>
      <string name="search_near_map">前回のマップ位置近くを検索</string>
      <string name="search_nearby">近くを検索</string>
      <string name="map_orientation_default">端末装置と同じ</string>
@@ -498,11 +498,11 @@ POIの更新は利用できません</string>
      <string name="favorite">お気に入り</string>
      <string name="clear_all">全てクリア</string>
      <string name="history">履歴</string>
-     <string name="uploading_data">データをアップロード中...</string>
+     <string name="uploading_data">データをアップロード中…</string>
      <string name="uploading">アップロード中</string>
      <string name="search_nothing_found">何も見つかりません</string>
      <string name="searching">検索中</string>
-     <string name="searching_address">住所を検索中...</string>
+     <string name="searching_address">住所を検索中…</string>
      <string name="search_osm_nominatim">OSM Nominatimを使って住所を検索</string>
      <string name="hint_search_online">番地、町名、市町村</string>
      <string name="search_offline_address">オフライン</string>
@@ -521,8 +521,8 @@ POIの更新は利用できません</string>
      <string name="address">住所</string>
      <string name="download_index_success">ダウンロード完了</string>
      <string name="error_io_error">I/O エラー発生</string>
-     <string name="downloading_file">ファイルをダウンロード中...</string>
-     <string name="downloading">ダウンロード中...</string>
+     <string name="downloading_file">ファイルをダウンロード中…</string>
+     <string name="downloading">ダウンロード中…</string>
      <string name="downloading_list_indexes">利用可能な地域のリストをダウンロード中</string>
      <string name="list_index_files_was_not_loaded">地域のリストはosmand.net 
 から参照されていません。</string>
@@ -540,17 +540,17 @@ name="recalculate_route_to_your_location">現在地に従ってルートを再�
      <string name="get_directions">方向</string>
  <string name="show_gps_status">GPSステータスを表示</string>
      <string name="opening_hours">営業時間</string>
-     <string name="opening_changeset">変更セットを開いています...</string>
-     <string name="closing_changeset">変更セットを閉じています...</string>
-     <string name="commiting_node">ノードをコミットしています...</string>
-     <string name="loading_poi_obj">POIをロード中...</string>
+     <string name="opening_changeset">変更セットを開いています…</string>
+     <string name="closing_changeset">変更セットを閉じています…</string>
+     <string name="commiting_node">ノードをコミットしています…</string>
+     <string name="loading_poi_obj">POIをロード中…</string>
      <string name="auth_failed">認証に失敗</string>
      <string name="failed_op">失敗</string>
-     <string name="converting_names">現地/英語 名称を変換中...</string>
-     <string name="loading_streets_buildings">通り/建物をロード中...</string>
-     <string name="loading_postcodes">郵便番号をロード中...</string>
-     <string name="loading_streets">通りをロード中...</string>
-     <string name="loading_cities">市町村をロード中...</string>
+     <string name="converting_names">現地/英語 名称を変換中…</string>
+     <string name="loading_streets_buildings">通り/建物をロード中…</string>
+     <string name="loading_postcodes">郵便番号をロード中…</string>
+     <string name="loading_streets">通りをロード中…</string>
+     <string name="loading_cities">市町村をロード中…</string>
      <string name="loading">ロード中</string>
      <string name="poi">POI</string>
      <string name="error_occurred_saving_gpx">GPX保存中にエラー</string>
@@ -562,11 +562,11 @@ name="recalculate_route_to_your_location">現在地に従ってルートを再�
      <string name="invalid_locations">位置が不適切です</string>
      <string name="go_back_to_osmand">OsmAnd マップに戻る</string>
      <string name="close">閉じる</string>
-     <string name="loading_data">データをロード中...</string>
-     <string name="reading_indexes">索引を読み込み中...</string>
+     <string name="loading_data">データをロード中…</string>
+     <string name="reading_indexes">索引を読み込み中…</string>
      <string name="previous_run_crashed">前回のアプリケーション実行はクラッシュしました。
 ログファイルは{0}にあります。ログファイルを添付して問題をレポートしてください。</string>
-     <string name="saving_gpx_tracks">GPXトラックをSDに保存中...</string>
+     <string name="saving_gpx_tracks">GPXトラックをSDに保存中…</string>
      <string name="finished_task">終了</string>
  <string name="reload_indexes_descr">オフラインベクターマップと索引をSDカードからリロード</string>
  <string name="reload_indexes">オフラインデータをリロード</string>

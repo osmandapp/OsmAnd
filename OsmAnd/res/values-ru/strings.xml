@@ -46,7 +46,7 @@
 	<string name="index_name_russia">Евразия - Россия</string>
 	<string name="index_name_africa">Африка</string>
 	<string name="index_name_asia">Азия</string>
-	<string name="index_name_australia">Австралия</string>
+	<string name="index_name_oceania">Океания</string>
 	<string name="index_name_other">Мировые карты</string>
 	<string name="index_name_wiki">Wikipedia по языкам</string>
 	<string name="index_name_voice">Голосовые данные (запись)</string>
@@ -85,7 +85,7 @@
 	<string name="appearance_settings_descr">Настроить внешний вид карты</string>
 	<string name="appearance_settings">- Внешний вид</string>
 	<string name="native_library_not_supported">Нативная библиотека не поддерживается на этом устройстве.</string>
-	<string name="init_native_library">Инициализация нативной библиотеки...</string>
+	<string name="init_native_library">Инициализация нативной библиотеки…</string>
 	<string name="choose_auto_follow_route">Настройки автовозрата карты</string>
 	<string name="choose_auto_follow_route_descr">Выберите время, через которое карта вернется к текущей позиции</string>
 	<string name="auto_follow_route_never">Никогда</string>
@@ -119,13 +119,13 @@
 	<string name="poi_filter_nominatim">Nominatim (интернет)</string>
 	<string name="search_select_point">Выбрать</string>
 	<string name="local_index_description">Офлайн данные доступные на SD карточке. Вы можете загрузить новые, архивировать и удалить данные. Доступно %1$s.</string>
-	<string name="search_position_current_location_search">Поиск позиции...</string>
+	<string name="search_position_current_location_search">Поиск позиции…</string>
 	<string name="search_position_current_location_found">Точка [Найдена]</string>
-	<string name="search_position_address">Адрес...</string>
-	<string name="search_position_favorites">Избранные...</string>
+	<string name="search_position_address">Адрес…</string>
+	<string name="search_position_favorites">Избранные…</string>
 	<string name="search_position_undefined">Неопределенно</string>
 	<string name="search_position_fixed">Точка</string>
-	<string name="search_position_current_location">Текущая точка...</string>
+	<string name="search_position_current_location">Текущая точка…</string>
 	<string name="search_position_map_view">Вид карты</string>
 	
 	<string name="select_search_position">Искать рядом :</string>
@@ -170,7 +170,7 @@
     <string name="local_index_gpx_info_speed">\nСредняя скорость : %1$s \nМаксимальная скорость : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nСредняя высота : %1$.0f метров\nМинимальная высота : %2$.0f метров\nМаксимальная высота : %3$.0f метров\nПодъем вверх : %4$.0f метров\nПодъем вниз : %5$.0f метров</string>
 	<string name="local_index_gpx_info">Путей : %1$d\nВсего точек : %2$d\nОтмечено точек : %3$d\nВсего расстояние : %4$s
-										\nНачало : %5$tD %5$tR\nОкончание : %6$tD %6$tR\n</string>
+										\nНачало : %5$tF,  %5$tR\nОкончание : %6$tF,  %6$tR\n</string>
 	<string name="local_index_installed">Издание</string>
 	<string name="local_index_items_backuped">%1$d из %2$d объектов успешно архивированы.</string>
 	<string name="local_index_items_deleted">%1$d из %2$d объектов успешно удалены.</string>
@@ -183,7 +183,7 @@
 	<string name="local_index_mi_backup">Архив</string>
 	<string name="local_index_mi_delete">Удалить</string>
 	<string name="local_index_mi_reload">Обновить</string>
-	<string name="local_index_download">Загрузить...</string>
+	<string name="local_index_download">Загрузить…</string>
 	<string name="local_index_tile_data">Тайловые данные : %1$s \nМинимальный уровень : %2$d\nМаксимальный уровень : %3$d\nЗагружаемый : %4$s \nУровни загружены : %5$s</string>
 	<string name="local_index_poi_data">POI</string>
 	<string name="local_index_address_data">Адрес</string>
@@ -211,11 +211,11 @@
 \n\t- Улучшение offline роутинга (все еще экспериментально)
 \n\t- Дополнительные опции при роутинге по GPX
 \n\t- Обновление графики и исправление ошибок
-\n\t- Yandex трафик слой теперь можно использовать как обычный слой покрытия (необходимо установить - Больше...) 
+\n\t- Yandex трафик слой теперь можно использовать как обычный слой покрытия (необходимо установить - Больше…) 
 	</string>
 	<string name="voice_not_use">Не использовать</string>
 	<string name="voice_not_specified">Нету</string>
-	<string name="installing_new_resources">Распаковываются новые данные...</string>
+	<string name="installing_new_resources">Распаковываются новые данные…</string>
 	<string name="internet_connection_required_for_online_route">Вы собираетесь использовать интернет маршрутизацию, но у вас нет активного интернет соединения.</string>
 	<string name="tts_language_not_supported_title">Язык не поддерживается</string>
 	<string name="tts_language_not_supported">Выбранный язык не поддерживается Android TTS (text-to-speech). Хотите найти в маркете другой TTS? Иначе язык TTS по умолчанию будет использован.</string>
@@ -226,9 +226,9 @@
 	<string name="gpx_option_destination_point">Использовать текущую точку назначения</string>
 	<string name="gpx_option_from_start_point">Пройти весь путь от начала</string>
 
-	<string name="switch_to_raster_map_to_see">Для текущей позиции векторные данные не загружены, вы можете переключиться к растровым через меню (Слои -> Источник карты...) или загрузить необходимые данные.</string>
-	<string name="switch_to_vector_map_to_see">Вы можете переключиться к offline  векторным картам через меню (Слои -> Источник карты... -> Векторные карты), чтобы увидеть карту.</string>
-	<string name="binary_map_download_success">Загрузка успешна. Вы можете переключиться к offline векторным картам через меню Слои -> Источник карты... -> Векторные карты.</string>
+	<string name="switch_to_raster_map_to_see">Для текущей позиции векторные данные не загружены, вы можете переключиться к растровым через меню (Слои -> Источник карты…) или загрузить необходимые данные.</string>
+	<string name="switch_to_vector_map_to_see">Вы можете переключиться к offline  векторным картам через меню (Слои -> Источник карты… -> Векторные карты), чтобы увидеть карту.</string>
+	<string name="binary_map_download_success">Загрузка успешна. Вы можете переключиться к offline векторным картам через меню Слои -> Источник карты… -> Векторные карты.</string>
 	<string name="choose_audio_stream">Голосовые инструкции</string>
 	<string name="choose_audio_stream_descr">Выберите канал для голосовых инструкций (зависит от системы)</string>
 	<string name="voice_stream_voice_call">Поток голосовых звонков</string>
@@ -240,10 +240,10 @@
 	<string name="map_transparency_descr">Изменить прозрачность основной карты</string>
 	<string name="map_transparency">Прозрачность карты</string>
 	<string name="modify_transparency">Изменить прозрачность</string>
-	<string name="layer_underlay">Карта подложки...</string>
+	<string name="layer_underlay">Карта подложки…</string>
 	<string name="map_underlay">Карта подложки</string>
 	<string name="map_underlay_descr">Выберите слой подложки для основной карты </string>
-	<string name="layer_overlay">Карта покрытия...</string>
+	<string name="layer_overlay">Карта покрытия…</string>
 	<string name="default_none">Нету</string>
 	<string name="map_overlay">Карта покрытия</string>
 	<string name="map_overlay_descr">Выберите слой для покрытия основной карты</string>
@@ -252,7 +252,7 @@
 	<string name="tile_source_already_installed">Карта уже установлена, настройки будут обновлены</string>
 	<string name="select_tile_source_to_install">Выберите карты для установки или обновления</string>
 	<string name="internet_not_available">Интернет соединение не доступно</string>
-	<string name="install_more">Загрузить еще...</string>
+	<string name="install_more">Загрузить еще…</string>
 	<string name="level_to_switch_vector_raster_descr">Максимальный масштаб для использования векторных карт вместо растровых</string>
 	<string name="level_to_switch_vector_raster">Векторные карты</string>
 	
@@ -271,7 +271,7 @@
 	<string name="preferred_locale">Локализация</string>
 	<string name="tip_map_switch">Источник карты</string>
 	<string name="tip_map_switch_t">Наиболее быстрый способ изменить источник карты и слои \'Меню\'->\'Слои\'.
-\n\tПод \'Карта источник...\' вы можете выбрать из предопределенных типов или собственных, созданных OsmAndMapCreator на PC.
+\n\tПод \'Карта источник…\' вы можете выбрать из предопределенных типов или собственных, созданных OsmAndMapCreator на PC.
 \n\tOsmAnd поддерживает пользовательские источники.</string>
 	<string name="tip_app_mode">Режим работы</string>
 	<string name="tip_app_mode_t">OsmAnd поддерживает различные типовые режимы отображения карты.
@@ -344,12 +344,12 @@
 	<string name="poi_filter_for_tourists">Для туристов</string>
 	<string name="poi_filter_fuel">Заправки</string>
 	<string name="poi_filter_namefinder">NameFinder (интернет)</string>
-	<string name="reading_cached_tiles">Чтение кэшированных тайлов...</string>
+	<string name="reading_cached_tiles">Чтение кэшированных тайлов…</string>
 	<string name="version_index_is_big_for_memory">Индекс \'\'{0}\'\' не помещается в памяти</string>
 	<string name="version_index_is_not_supported">Версия индекса \'\'{0}\'\' не поддерживается</string>
 	
 	
-	<string name="use_osmand_routing_service">Автономная навигация OsmAnd</string>
+	<string name="use_osmand_routing_service">Автономная навигация OsmAnd >20км</string>
 	<string name="use_osmand_routing_service_descr">Использовать offline навигацию на длинные расстояние (экспериментально)</string>
 	<string name="osmand_routing_experimental">Автономная навигация OsmAnd является экспериментальной и не работает на расстояния более 20 километров.\n\nВ этом случае автоматически переключается на CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Невозможно найти указанную директорию.</string>
@@ -358,10 +358,10 @@
 	
 	<string name="osmand_net_previously_installed">У вас имеется предыдущая версия OsmAnd. Все офлайн данные поддерживаются новым приложением. Избранные точки можно экспортировать в старом и импортировать в новом.</string>
 	<string name="build_installed">Сборка {0} успешно установлена ({1}).</string>
-	<string name="downloading_build">Загружается сборка...</string>
+	<string name="downloading_build">Загружается сборка…</string>
 	<string name="install_selected_build">Вы уверены, что хотите установить OsmAnd - {0} от {1} {2} MB.</string>
 	<string name="loading_builds_failed">Не удалось получить список OsmAnd сборок</string>
-	<string name="loading_builds">Загружаются сборки OsmAnd...</string>
+	<string name="loading_builds">Загружаются сборки OsmAnd…</string>
 	<string name="select_build_to_install">Выберите одну из OsmAnd сборок для установки</string>
 	
 	<string name="voice_is_not_available_msg">Голосовая навигация не доступна. Перейдите в настройки и укажите голосовые данные или загрузите их.</string>
@@ -424,7 +424,7 @@
 	<string name="no_vector_map_loaded">Векторные карты не загружены в приложение</string>
 	<string name="map_route_by_gpx">Навигация по GPX</string>
 	<string name="gpx_files_not_found">GPX файлы были не найдены в /osmand/tracks директории</string>
-	<string name="layer_gpx_layer">GPX трек...</string>
+	<string name="layer_gpx_layer">GPX трек…</string>
 	<string name="error_reading_gpx">Ошибка при чтении gpx файла</string>
 	<string name="vector_data">Векторные osm карты</string>
 	
@@ -457,8 +457,8 @@
 	<string name="layer_favorites">Избранные</string>
 	<string name="layer_osm_bugs">Osm bugs</string>
 	<string name="layer_transport">Остановки транспорта</string>
-	<string name="layer_poi">POI...</string>
-	<string name="layer_map">Карта источник...</string>
+	<string name="layer_poi">POI…</string>
+	<string name="layer_map">Карта источник…</string>
 	<string name="menu_layers">Слои</string>
 	<string name="continue_follow_previous_route">Предыдущий маршрут был не закончен. Продолжить следовать по нему?</string>
 	<string name="context_menu_item_search_poi">Искать POI</string>
@@ -489,7 +489,7 @@
 	<string name="menu_mute_on">Звук</string>
 	<string name="voice_provider_descr">Выберите голос для маршрутизации</string>
 	<string name="voice_provider">Голосовые данные</string>
-	<string name="voice_data_initializing">Инициализируются голосовые данные...</string>
+	<string name="voice_data_initializing">Инициализируются голосовые данные…</string>
 	<string name="voice_data_not_supported">Голосовые данные не поддерживаются текущей версией приложения</string>
 	<string name="voice_data_corrupted">Выбранные голосовые данные не правильного формата</string>
 	<string name="voice_data_unavailable">Выбранные голосовые данные не доступны</string>
@@ -509,7 +509,7 @@
 	<string name="first_time_download">Загрузить индексы</string>
 	<string name="first_time_msg">Спасибо за то, что выбрали OsmAnd. \n
 Для полноценного использования приложения вам потребуются файлы индексы, которые необходимо загрузить (Настройки/Данные) или подготовить. После загрузки вам будет доступен : поиск по адресу, поиск POI, поиск транспорта.</string>
-	<string name="search_poi_location">Поиск сигнала...</string>
+	<string name="search_poi_location">Поиск сигнала…</string>
 	<string name="search_near_map">Искать вокруг выбранного центра карты</string>
 	<string name="search_nearby">Искать рядом</string>
 	<string name="map_orientation_default">По умолчанию</string>
@@ -551,11 +551,11 @@
 	<string name="favorite">Избранное</string>
 	<string name="clear_all">Очистить все</string>
 	<string name="history">История</string>
-	<string name="uploading_data">Загрузка данных...</string>
+	<string name="uploading_data">Загрузка данных…</string>
 	<string name="uploading">Загрузка</string>
 	<string name="search_nothing_found">По вашему запросу ничего не найдено</string>
 	<string name="searching">Поиск</string>
-	<string name="searching_address">Поиск адреса...</string>
+	<string name="searching_address">Поиск адреса…</string>
 	<string name="search_osm_nominatim">Поиск адреса используя Osm Nominatim</string>
 	<string name="hint_search_online">Город, улица, дом</string>
 	<string name="search_offline_address">Локальный</string>
@@ -572,7 +572,7 @@
 	<string name="download_index_success">Индекс успешно загружен</string>
 	<string name="error_io_error">Произошла ошибка ввода/вывода.</string>
 	<string name="downloading_file">Загрузка файла</string>
-	<string name="downloading">Загрузка...</string>
+	<string name="downloading">Загрузка…</string>
 	<string name="downloading_list_indexes">Загружается список доступных индексов</string>
 	<string name="list_index_files_was_not_loaded">Не найдены доступные индекс файлы на osmand.net</string>
     <string name="select_index_file_to_download">Если вы не можете найти регион, вы можете создать его самостоятельно.
@@ -595,11 +595,11 @@
 	<string name="loading_poi_obj">Загрузка poi </string>
 	<string name="auth_failed">Авторизация не прошла</string>
 	<string name="failed_op">, ошибка</string>
-	<string name="converting_names">Конвертация имен английский/родных...</string>
-	<string name="loading_streets_buildings">Загружаются дома/улицы...</string>
-	<string name="loading_postcodes">Загружаются почтовые индексы...</string>
-	<string name="loading_streets">Загружаются улицы...</string>
-	<string name="loading_cities">Загружаются города...</string>
+	<string name="converting_names">Конвертация имен английский/родных…</string>
+	<string name="loading_streets_buildings">Загружаются дома/улицы…</string>
+	<string name="loading_postcodes">Загружаются почтовые индексы…</string>
+	<string name="loading_streets">Загружаются улицы…</string>
+	<string name="loading_cities">Загружаются города…</string>
 	<string name="loading">Загрузка</string>
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">Ошибка во время сохранения пути в gpx</string>
@@ -613,9 +613,9 @@
 	<string name="close">Закрыть</string>
 	<string name="help">Помощь</string>
 	<string name="loading_data">Загрузка данных</string>
-	<string name="reading_indexes">Чтение индексов...</string>
+	<string name="reading_indexes">Чтение индексов…</string>
 	<string name="previous_run_crashed">Предыдущий запуск приложения был неудачен. Лог файл в {0}.  Пожалуйста откройте баг и присоедините лог файл.</string>
-	<string name="saving_gpx_tracks">Сохранение gpx путей на SD...</string>
+	<string name="saving_gpx_tracks">Сохранение gpx путей на SD…</string>
 	<string name="finished_task">Окончен</string>
 	<string name="reload_indexes_descr">Перезагрузить индексы с SD</string>
     <string name="reload_indexes">Обновить индексы</string>

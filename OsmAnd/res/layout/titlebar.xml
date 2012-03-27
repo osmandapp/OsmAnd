@@ -1,37 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/RelativeLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="horizontal" >
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/tab_title_headline_background"
+    android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/back_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="top"
-            android:background="@drawable/tab_back_button"
-            android:text="" />
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="top"
+        android:background="@drawable/tab_back_button"
+        android:text="" />
 
-        <ImageView
-            android:id="@+id/title_image"
+    <!--
+            Button
+            android:id="@+id/extra_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="27dp"
-            android:src="@drawable/tab_favorites_screen_icon" />
+            android:layout_alignParentTop="true"
+            android:layout_gravity="top"
+            android:background="@drawable/tab_back_button"
+            android:visibility="gone"
+            android:text="" /
+    -->
 
-        <TextView
-            android:id="@+id/title_text"
-            style="@style/WhiteTitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="29dp"
-            android:layout_toRightOf="@+id/back_button"
-            android:text="@string/favourites_activity" />
+    <net.osmand.plus.activities.FontFitTextView
+        android:id="@+id/title_text"
+        style="@style/WhiteTitleText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="22dp"
+        android:layout_toLeftOf="@+id/title_image"
+        android:layout_toRightOf="@+id/back_button"
+        android:text="@string/favourites_activity" />
+
+    <ImageView
+        android:id="@+id/title_image"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="top"
+        android:src="@drawable/tab_favorites_screen_icon" />
 
 </RelativeLayout>

@@ -1,20 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent" android:orientation="vertical" android:id="@+id/MainLayout">
-  
-<!--TextView android:id="@+id/Label" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:text="@string/select_index_file_to_download"></TextView-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/MainLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
-<EditText android:id="@+id/search_box" 
+    <!-- TextView android:id="@+id/Label" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:text="@string/select_index_file_to_download"></TextView -->
+
+    <EditText
+        android:id="@+id/search_box"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
         android:hint="@string/download_type_to_filter"
         android:inputType="text"
-        android:layout_marginLeft="3dp" android:layout_marginRight="3dp"
-        android:maxLines="1"/>
-<ExpandableListView android:id="@android:id/list" android:layout_width="fill_parent" android:layout_weight="1" android:layout_height="0dp" 
-		android:layout_marginLeft="3dp" android:layout_marginTop="3dp" android:layout_marginRight="3dp" />
-<Button android:id="@+id/DownloadButton" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:text="@string/download_files"
-		android:layout_marginLeft = "3dp" android:layout_marginTop ="3dp" android:layout_marginRight = "3dp" android:visibility="gone"/>
+        android:maxLines="1" />
+
+    <ExpandableListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_weight="1"
+        android:groupIndicator="@android:color/transparent"
+    	style="@style/OsmandListView" />
+
+    <Button
+        android:id="@+id/DownloadButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="3dp"
+        android:gravity="center"
+        android:text="@string/download_files"
+        android:visibility="gone" />
+
 </LinearLayout>

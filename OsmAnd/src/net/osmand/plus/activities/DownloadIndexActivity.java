@@ -32,7 +32,7 @@ import net.osmand.data.IndexConstants;
 import net.osmand.plus.DownloadOsmandIndexesHelper;
 import net.osmand.plus.DownloadOsmandIndexesHelper.IndexItem;
 import net.osmand.plus.IndexFileList;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
@@ -60,7 +60,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
@@ -130,7 +129,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			downloadListIndexThread = new DownloadIndexListThread(Version.getVersionAsURLParam(this));
 		}
 		// recreation upon rotation is prevented in manifest file
-		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.local_index_download, R.drawable.tab_settings_screen_icon);
+		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.local_index_download, R.drawable.tab_download_screen_icon);
 		setContentView(R.layout.download_index);
 		titleBar.afterSetContentView();
 	    tracker = GoogleAnalyticsTracker.getInstance();
@@ -185,7 +184,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		} else {
 			downloadIndexList();
 		}
-		if(getPackageName().equals(FREE_VERSION_NAME) && OsmandSettings.getOsmandSettings(this).checkFreeDownloadsNumberZero()){
+		if(getPackageName().equals(FREE_VERSION_NAME) && OsmandApplication.getSettings().checkFreeDownloadsNumberZero()){
 			Builder msg = new AlertDialog.Builder(this);
 			msg.setTitle(R.string.free_version_title);
 			msg.setMessage(getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS+"", ""));
@@ -195,11 +194,10 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 
 	private void updateLoadedFiles() {
-		indexActivatedFileNames = ((OsmandApplication)getApplication()).getResourceManager().getIndexFileNames();
-		indexFileNames = ((OsmandApplication)getApplication()).getResourceManager().getIndexFileNames();
-		((OsmandApplication)getApplication()).getResourceManager().getBackupIndexes(indexFileNames);
+		indexActivatedFileNames = getMyApplication().getResourceManager().getIndexFileNames();
+		indexFileNames = getMyApplication().getResourceManager().getIndexFileNames();
+		getMyApplication().getResourceManager().getBackupIndexes(indexFileNames);
 	}
-	
 
 	private void downloadIndexList() {
 		showDialog(DIALOG_PROGRESS_LIST);
@@ -460,7 +458,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
 	private Collection<String> listAlreadyDownloadedWithAlternatives() {
 		Set<String> files = new TreeSet<String>();
-		File externalStorageDirectory = OsmandSettings.getOsmandSettings(getApplicationContext()).getExternalStorageDirectory();
+		File externalStorageDirectory = OsmandApplication.getSettings().getExternalStorageDirectory();
 		// files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.POI_PATH),POI_INDEX_EXT,POI_INDEX_EXT_ZIP,POI_TABLE_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.APP_DIR),BINARY_MAP_INDEX_EXT,BINARY_MAP_INDEX_EXT_ZIP,BINARY_MAP_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.BACKUP_PATH),BINARY_MAP_INDEX_EXT,BINARY_MAP_INDEX_EXT_ZIP,BINARY_MAP_VERSION));
@@ -499,7 +497,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		String toCheckPostfix = null;
 		boolean unzipDir = false;
 		
-		File externalStorageDirectory = OsmandSettings.getOsmandSettings(getApplicationContext()).getExternalStorageDirectory();
+		File externalStorageDirectory = OsmandApplication.getSettings().getExternalStorageDirectory();
 		if(fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)){
 			parent = new File(externalStorageDirectory, ResourceManager.APP_DIR);
 			toSavePostfix = BINARY_MAP_INDEX_EXT;
@@ -554,7 +552,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
 	protected void downloadFilesCheckFreeVersion() {
 		if (getPackageName().equals(FREE_VERSION_NAME)) {
-			int total = OsmandSettings.getOsmandSettings(this).NUMBER_OF_FREE_DOWNLOADS.get() + entriesToDownload.size();
+			int total = OsmandApplication.getSettings().NUMBER_OF_FREE_DOWNLOADS.get() + entriesToDownload.size();
 			boolean wiki = false;
 			for (DownloadEntry es : entriesToDownload.values()) {
 				if (es.baseName.contains("_wiki")) {
@@ -582,7 +580,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			sz += es.sizeMB;
 		}
 		// get availabile space 
-		File dir = OsmandSettings.getOsmandSettings(this).extendOsmandPath("");
+		File dir = OsmandApplication.getSettings().extendOsmandPath("");
 		double asz = -1;
 		if(dir.canRead()){
 			StatFs fs = new StatFs(dir.getAbsolutePath());
@@ -644,7 +642,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 		public DownloadIndexesAsyncTask(ProgressDialogImplementation progressDialogImplementation) {
 			this.progress = progressDialogImplementation;
-			downloads = OsmandSettings.getOsmandSettings(DownloadIndexActivity.this).NUMBER_OF_FREE_DOWNLOADS;
+			downloads = OsmandApplication.getSettings().NUMBER_OF_FREE_DOWNLOADS;
 		}
 
 		@Override
@@ -717,12 +715,12 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				}
 				// reindex vector maps all at one time
 				if (vectorMapsToReindex) {
-					ResourceManager manager = ((OsmandApplication) getApplication()).getResourceManager();
+					ResourceManager manager = getMyApplication().getResourceManager();
 					List<String> warnings = manager.indexingMaps(progress);
-					if (warnings.isEmpty() && !OsmandSettings.getOsmandSettings(getApplicationContext()).MAP_VECTOR_DATA.get()) {
+					if (warnings.isEmpty() && !OsmandApplication.getSettings().MAP_VECTOR_DATA.get()) {
 						warnings.add(getString(R.string.binary_map_download_success));
 						// Is it proper way to switch every tome to vector data?
-						OsmandSettings.getOsmandSettings(getApplicationContext()).MAP_VECTOR_DATA.set(true);
+						OsmandApplication.getSettings().MAP_VECTOR_DATA.set(true);
 					}
 					if (!warnings.isEmpty()) {
 						return warnings.get(0);
@@ -815,8 +813,8 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			} else if(lc.contains("_asia_")) {
 				nameId = R.string.index_name_asia;
 				order = 50;
-			} else if(lc.contains("australia")) {
-				nameId = R.string.index_name_australia;
+			} else if(lc.contains("_oceania_") || lc.contains("australia") ) {
+				nameId = R.string.index_name_oceania;
 				order = 70;
 			} else if(lc.contains("_wiki_")) {
 				nameId = R.string.index_name_wiki;
@@ -835,7 +833,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	}
 	
 
-	protected class DownloadIndexAdapter extends BaseExpandableListAdapter implements Filterable {
+	protected class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implements Filterable {
 		
 		private DownloadIndexFilter myFilter;
 		private final Map<String, IndexItem> indexFiles;
@@ -966,6 +964,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			TextView item = (TextView) row.findViewById(R.id.download_index_category_name);
 			item.setText(group.name);
 			item.setLinkTextColor(Color.YELLOW);
+			adjustIndicator(groupPosition, isExpanded, v);
 			return row;
 		}
 
@@ -1001,12 +1000,16 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				} else {
 					if(e.getDate() != null){
 						if(e.getDate().equals(indexActivatedFileNames.get(sfName))){
+							item.setText(item.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : " + indexActivatedFileNames.get(sfName));
 							item.setTextColor(getResources().getColor(R.color.act_index_uptodate)); //GREEN
 						} else if (e.getDate().equals(indexFileNames.get(sfName))) {
+							item.setText(item.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : " + indexFileNames.get(sfName));
 							item.setTextColor(getResources().getColor(R.color.deact_index_uptodate)); //DARK_GREEN
 						} else if (indexActivatedFileNames.containsKey(sfName)) {
+							item.setText(item.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : " +  indexActivatedFileNames.get(sfName));
 							item.setTextColor(getResources().getColor(R.color.act_index_updateable)); //LIGHT_BLUE
 						} else {
+							item.setText(item.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : " +  indexFileNames.get(sfName));
 							item.setTextColor(getResources().getColor(R.color.deact_index_updateable)); //DARK_BLUE
 						}
 					} else {

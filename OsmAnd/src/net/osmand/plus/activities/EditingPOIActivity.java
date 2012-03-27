@@ -22,6 +22,7 @@ import net.osmand.osm.OpeningHoursParser;
 import net.osmand.osm.OpeningHoursParser.BasicDayOpeningHourRule;
 import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import android.app.AlertDialog;
@@ -73,8 +74,8 @@ public class EditingPOIActivity implements DialogProvider {
 	public EditingPOIActivity(MapActivity uiContext){
 		this.ctx = uiContext;
 
-		OsmandSettings settings = OsmandSettings.getOsmandSettings(ctx);
-		if(!settings.isInternetConnectionAvailable(true)){
+		OsmandSettings settings = OsmandApplication.getSettings();
+		if(settings.OFFLINE_POI_EDITION.get() || !settings.isInternetConnectionAvailable(true)){
 			this.openstreetmapUtil = new OpenstreetmapLocalUtil(ctx);
 		} else {
 			this.openstreetmapUtil = new OpenstreetmapRemoteUtil(ctx, ctx.getMapView());
@@ -117,7 +118,7 @@ public class EditingPOIActivity implements DialogProvider {
 	private void prepareDeleteDialog(Dialog dlg, Bundle args) {
 		Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
 		dlg.setTitle(MessageFormat.format(this.ctx.getMapView().getResources().getString(R.string.poi_remove_confirm_template), 
-				OsmAndFormatter.getPoiStringWithoutType(a, OsmandSettings.getOsmandSettings(ctx).usingEnglishNames())));
+				OsmAndFormatter.getPoiStringWithoutType(a, OsmandApplication.getSettings().usingEnglishNames())));
 	}
 	
 	private Dialog createDeleteDialog(final Bundle args) {

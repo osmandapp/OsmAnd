@@ -1,0 +1,18 @@
+<osmand_types>
+	<!-- 3 different types for polygon="true" that object will be rendered as polygon, polyline ="true" as line, point ="true" - as point -->
+	<!--  You can combine any 3 types. -->
+	<!-- building="true" means that object will be rendered as polygon (default building) + center point icon -->
+
+
+	<!--  Restrictions of  types format. -->
+	<!-- 1) 31 (5 bytes) maximum number of different types  -->
+	<!-- 2) In each type only 31 (5 bytes) different polyline and polygon (in sum) subtypes available. -->
+	<!-- 3) In each type only 127 (7 bytes) all different subtypes available -->
+	<!-- TODO Try to not change id of types and subtypes, some of the constants are hardcoded (for rendering order, rendering). -->
+
+	<type id="17" name="natural">
+		<subtype id="30" polyline="true" tag="contour" value="elevation" minzoom="8" />
+
+	</type>
+
+</osmand_types>

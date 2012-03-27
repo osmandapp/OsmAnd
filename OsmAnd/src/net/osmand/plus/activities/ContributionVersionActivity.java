@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 import net.osmand.access.AccessibleToast;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 
@@ -60,11 +60,11 @@ public class ContributionVersionActivity extends OsmandListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.download_files, R.drawable.tab_favorites_screen_icon);
+		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.download_files, R.drawable.tab_download_screen_icon);
 		setContentView(R.layout.download_builds);
 		titleBar.afterSetContentView();
 		
-		String installDate = OsmandSettings.getOsmandSettings(this).CONTRIBUTION_INSTALL_APP_DATE.get();
+		String installDate = OsmandApplication.getSettings().CONTRIBUTION_INSTALL_APP_DATE.get();
 		if(installDate != null){
 			try {
 				currentInstalledDate = dateFormat.parse(installDate);
@@ -137,7 +137,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 					MessageFormat.format(getString(R.string.build_installed), currentSelectedBuild.tag, dateFormat
 							.format(currentSelectedBuild.date)), Toast.LENGTH_LONG).show();
 		}
-		OsmandSettings.getOsmandSettings(this).CONTRIBUTION_INSTALL_APP_DATE.set(dateFormat.format(d));
+		OsmandApplication.getSettings().CONTRIBUTION_INSTALL_APP_DATE.set(dateFormat.format(d));
 	}
 	
 	protected void executeThreadOperation(int operationId) throws Exception {

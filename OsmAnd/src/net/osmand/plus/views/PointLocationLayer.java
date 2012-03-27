@@ -41,7 +41,6 @@ public class PointLocationLayer extends OsmandMapLayer {
 		
 		area = new Paint();
 		area.setColor(view.getResources().getColor(R.color.pos_area));
-		area.setAlpha(40);
 		
 		aroundArea = new Paint();
 		aroundArea.setColor(view.getResources().getColor(R.color.pos_around));
@@ -51,7 +50,6 @@ public class PointLocationLayer extends OsmandMapLayer {
 		
 		headingPaint = new Paint();
 		headingPaint.setColor(view.getResources().getColor(R.color.pos_heading));
-		headingPaint.setAlpha(50);
 		headingPaint.setAntiAlias(true);
 		headingPaint.setStyle(Style.FILL);
 		

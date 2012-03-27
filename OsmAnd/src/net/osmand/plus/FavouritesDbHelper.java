@@ -74,8 +74,7 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 	}
 	
 	public String exportFavorites(String fileName) {
-		File f = new File(OsmandSettings.getOsmandSettings(context).extendOsmandPath(ResourceManager.APP_DIR), 
-				fileName);
+		File f = new File(OsmandApplication.getSettings().extendOsmandPath(ResourceManager.APP_DIR), fileName);
 		GPXFile gpx = new GPXFile();
 		for (FavouritePoint p : getFavouritePoints()) {
 			if (p.isStored()) {

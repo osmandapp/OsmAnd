@@ -14,6 +14,7 @@ import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LogUtil;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ResourceManager;
 
@@ -124,7 +125,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	 */
 	public List<String> saveDataToGpx() {
 		List<String> warnings = new ArrayList<String>();
-		File dir = OsmandSettings.getOsmandSettings(ctx).getExternalStorageDirectory();
+		File dir = OsmandApplication.getSettings().getExternalStorageDirectory();
 		if (dir.canWrite()) {
 			dir = new File(dir, ResourceManager.GPX_PATH);
 			dir.mkdirs();

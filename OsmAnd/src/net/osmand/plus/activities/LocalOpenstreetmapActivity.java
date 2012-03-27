@@ -13,6 +13,7 @@ import net.osmand.OpenstreetmapUtil;
 import net.osmand.osm.EntityInfo;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
 import net.osmand.plus.OpenstreetmapsDbHelper;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
@@ -219,7 +220,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 				int resId = menu.get(which);
 				if (info != null) {
 					if (resId == R.string.local_openstreetmap_show_poi) {
-						OsmandSettings settings = OsmandSettings.getOsmandSettings(LocalOpenstreetmapActivity.this);
+						OsmandSettings settings = OsmandApplication.getSettings();
 						settings.setMapLocationToShow(info.getLatitude(), info.getLongitude(), settings.getLastKnownMapZoom());
 						MapActivity.launchMapActivityMoveToTop(LocalOpenstreetmapActivity.this);
 					} else if (resId == R.string.local_openstreetmap_delete) {
@@ -261,7 +262,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		}
 
 		public void delete(OpenstreetmapPoint i) {
-			final AmenityIndexRepositoryOdb repo = ((OsmandApplication) getApplication()).getResourceManager().getUpdatablePoiDb();
+			final AmenityIndexRepositoryOdb repo = getMyApplication().getResourceManager().getUpdatablePoiDb();
 			android.util.Log.d(LogUtil.TAG, "Delete " + i);
 			db.deleteOpenstreetmap(i);
 			String c = i.getType();

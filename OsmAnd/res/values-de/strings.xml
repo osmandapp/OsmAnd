@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="rendering_out_of_memory">Zu wenig Prozess-Speicher zum Anzeigen des gewählten Gebietes</string>
+	<string name="use_fluorescent_overlays">Fluoreszierende Overlays</string>
+	<string name="use_fluorescent_overlays_descr">Fluoreszierende Anzeige von Tracks und Routen</string>
+	<string name="offline_poi_edition">Offline POI Bearbeitung</string>
+	<string name="offline_poi_edition_descr">Immer Offline-POI-Bearbeitung verwenden</string>
+
 	<string name="tip_recent_changes_0_7_1_t">Changes in 0.7.1 :
 \n\t- Offline POI-Bearbeitung 
 \n\t- Live-Tracking Option: Koordinaten periodisch an einen Web-Service schicken (Setup-Anleitung für eigenen Web-Service in den HowTo-Artikeln)
@@ -12,16 +18,16 @@
 	</string>
 
 	<string name="update_poi_does_not_change_indexes">Das Bearbeiten von POIs innerhalb der Applikation beeinflusst nicht die Offline-Karten, sondern wird in einer eigenen Datei gespeichert.</string>
-	<string name="local_openstreetmap_uploading_poi">POI hochladen...</string>
+	<string name="local_openstreetmap_uploading_poi">POI hochladen…</string>
 	<string name="local_openstreetmap_poi_were_uploaded">{0} POI wurden hochgeladen</string>
 	<string name="local_openstreetmap_uploadall">Alle POI hochladen</string>
 	<string name="local_openstreetmap_items"></string>
 	<string name="local_openstreetmap_show_poi">POI auf Karte zeigen</string>
 	<string name="local_openstreetmap_upload">POI Änderung auf OSM hochladen</string>
 	<string name="local_openstreetmap_delete">POI Änderung löschen</string>
-	<string name="local_openstreetmap_descr_title">Asynchrone Openstreetmap POI Edition:</string>
-	<string name="local_openstreetmap_settings">Lokale Openstreetmap Punkte</string>
-	<string name="local_openstreetmap_settings_descr">Lokale Punkte in DB gespeichert</string>
+	<string name="local_openstreetmap_descr_title">Asynchrone OSM POI Bearbeitung:</string>
+	<string name="local_openstreetmap_settings">Lokal notierte OSM Punkte</string>
+	<string name="local_openstreetmap_settings_descr">Lokal vorgemerkte OSM Punkte anzeigen und verwalten</string>
 
 	<string name="live_monitoring_descr">Senden von HTTP-Daten an einen Web-Service</string>
 	<string name="live_monitoring">Live-Tracking aktivieren</string>
@@ -50,7 +56,7 @@
 	<string name="index_name_russia">Europa/Asien - Russland</string>
 	<string name="index_name_africa">Afrika</string>
 	<string name="index_name_asia">Asien</string>
-	<string name="index_name_australia">Australien</string>
+	<string name="index_name_oceania">Ozeanien</string>
 	<string name="index_name_other">Weltweite und thematische Karten</string>
 	<string name="index_name_wiki">Weltweite Wikipedia</string>
 	<string name="index_name_voice">Sprachpakete (Aufnahmen)</string>
@@ -136,7 +142,7 @@
 	<string name="use_transparent_map_theme_descr">Transparente Schaltflächen verwenden</string>
 	<string name="use_transparent_map_theme">Transparentes Layout</string>
 	<string name="native_library_not_supported">Native library wird auf diesem Gerät nicht unterstützt.</string>
-	<string name="init_native_library">Native Library wird initialisiert ...</string>
+	<string name="init_native_library">Native Library wird initialisiert …</string>
 	<string name="choose_auto_follow_route">Kartenanzeige nachführen</string>
 	<string name="choose_auto_follow_route_descr">Wartezeit für Rückkehr zur Kartennachführung</string>
 	<string name="auto_follow_route_never">Nie</string>
@@ -185,13 +191,13 @@
 	<string name="show_gpx_route">Auf Karte anzeigen</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_select_point">Auswählen</string>
-	<string name="search_position_current_location_search">Suche Position ...</string>
+	<string name="search_position_current_location_search">Suche Position …</string>
 	<string name="search_position_current_location_found">Position (gefunden)</string>
-	<string name="search_position_address">Addresse ...</string>
-	<string name="search_position_favorites">Favoriten ...</string>
+	<string name="search_position_address">Addresse …</string>
+	<string name="search_position_favorites">Favoriten …</string>
 	<string name="search_position_undefined">Undefiniert</string>
 	<string name="search_position_fixed">Festgelegt</string>
-	<string name="search_position_current_location">Aktuelle Position ...</string>
+	<string name="search_position_current_location">Aktuelle Position …</string>
 	<string name="search_position_map_view">Letzte Kartenposition</string>
 	
 	<string name="select_search_position">Suche nahe:</string>
@@ -237,7 +243,7 @@
 	<string name="local_index_gpx_info_show">\n\nLang klicken für Optionen</string>
 	<string name="local_index_gpx_info_speed">\nDurchschn.geschw.: %1$s \nMax. Geschw.: %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nDurchschn.höhe: %1$.0f m\nMinimalhöhe: %2$.0f m\nMaximalhöhe: %3$.0f m\nAufstiege: %4$.0f m\nAbstiege: %5$.0f m</string>
-	<string name="local_index_gpx_info">Subtracks: %1$d\nPunkte insgesamt: %2$d\nWegpunkte: %3$d\nGesamtstrecke: %4$s\nStartzeit: %5$tD %5$tR\nEndzeit: %6$tD %6$tR</string>
+	<string name="local_index_gpx_info">Subtracks: %1$d\nPunkte insgesamt: %2$d\nWegpunkte: %3$d\nGesamtstrecke: %4$s\nStartzeit: %5$tF,  %5$tR\nEndzeit: %6$tF,  %6$tR</string>
 	<string name="local_index_installed">Edition</string>
 	<string name="local_index_items_backuped">%1$d von %2$d Datei(en) erfolgreich deaktiviert.</string>
 	<string name="local_index_items_deleted">%1$d von %2$d Datei(en) erfolgreich gelöscht.</string>
@@ -245,12 +251,12 @@
 	<string name="local_index_no_items_to_do">Aktion %1$s: Keine Dateien vorhanden</string>
 	<string name="local_index_action_do">%1$s: %2$s Datei(en). Fortfahren?</string>
 	<string name="local_index_descr_title">Offline-Daten Manager</string>
-	<string name="local_index_description">Herunterladen, Aktivieren, Deaktivieren und Löschen von Offline-Daten.\nLokal vorhandene Dateien (%1$s freier Speicher):</string>
+	<string name="local_index_description">Herunterladen, (De-)Aktivieren und Löschen von Offline-Daten.\nLokal vorhandene Dateien (%1$s frei):</string>
 	<string name="local_index_mi_restore">Aktivieren</string>
 	<string name="local_index_mi_backup">Deaktivieren</string>
 	<string name="local_index_mi_delete">Löschen</string>
 	<string name="local_index_mi_reload">Aktualisieren</string>	
-	<string name="local_index_download">Herunterladen ...</string>
+	<string name="local_index_download">Herunterladen …</string>
 	<string name="local_index_tile_data">Kacheldaten: %1$s \nMinimale Vergrößerung: %2$d\nMaximale Vergrößerung: %3$d\nHerunterladbar: %4$s \nHeruntegeladene Vergrößerungen: %5$s</string>
 	<string name="local_index_poi_data">POI-Daten</string>
 	<string name="local_index_address_data">Adress-Daten</string>
@@ -281,7 +287,7 @@
 	<string name="voice_not_specified">Keine</string>
 	<string name="trace_rendering">Rendering Debug Info</string>
 	<string name="trace_rendering_descr">Flag zur Prüfung der Rendering-Performance (Geschwindigkeit des Offline-Bildaufbaus)</string>
-	<string name="installing_new_resources">Entpacke neue Daten ...</string>
+	<string name="installing_new_resources">Entpacke neue Daten …</string>
 	<string name="internet_connection_required_for_online_route">Ein Online-Routingdienst ist ausgewählt, aber es besteht keine Internetverbindung.</string>
 	<string name="tts_language_not_supported_title">Sprache nicht unterstützt</string>
 	<string name="tts_language_not_supported">Die gewählte Sprache wird von der installierten Android TTS-Engine nicht unterstützt. Soll im Market nach einer anderen TTS-Engine gesucht werden? Andernfalls wird die voreingestellte Standard-Sprache verwendet.</string>
@@ -292,7 +298,7 @@
 	<string name="gpx_option_destination_point">Derzeitiges Ziel verwenden</string>
 	<string name="gpx_option_from_start_point">Gesamten Track durchlaufen</string>
 
-	<string name="switch_to_vector_map_to_see">Offline-Vektor-Karte für diese Lokation vorhanden.\n\t\n\tFür Verwendung aktivieren: \'Menu\' -> \'Darstellung\' -> \'Kartenquelle...\' -> \'Offline-Vektor-Karten\'.</string>
+	<string name="switch_to_vector_map_to_see">Offline-Vektor-Karte für diese Lokation vorhanden.\n\t\n\tFür Verwendung aktivieren: \'Menu\' -> \'Darstellung\' -> \'Kartenquelle…\' -> \'Offline-Vektor-Karten\'.</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
 	<string name="choose_audio_stream_descr">Ausgabemodus für Sprachansagen wählen (Systemabhängig)</string>
 	<string name="voice_stream_voice_call">wie Anrufe</string>
@@ -305,10 +311,10 @@
 	<string name="map_transparency_descr">Transparenz der Hauptkarte ändern</string>
 	<string name="map_transparency">Kartentransparenz</string>
 	<string name="modify_transparency">Transparenz ändern</string>
-	<string name="layer_underlay">Underlay-Karte ...</string>
+	<string name="layer_underlay">Underlay-Karte …</string>
 	<string name="map_underlay">Underlay-Karte</string>
 	<string name="map_underlay_descr">Wähle Underlay-Karte</string>
-	<string name="layer_overlay">Overlay-Karte ...</string>
+	<string name="layer_overlay">Overlay-Karte …</string>
 	<string name="default_none">Keine</string>
 	<string name="map_overlay">Overlay-Karte</string>
 	<string name="map_overlay_descr">Wähle Overlay-Karte</string>
@@ -317,7 +323,7 @@
 	<string name="tile_source_already_installed">Karte schon installiert, Einstellungen werden aktualisiert</string>
 	<string name="select_tile_source_to_install">Kartenauswahl (Installation oder Update)</string>
 	<string name="internet_not_available">Internet Verbindung erforderlich aber nicht verfügbar</string>
-	<string name="install_more">Weitere installieren ...</string>
+	<string name="install_more">Weitere installieren …</string>
 
 	<string name="tip_update_index">Update der Offline-Daten</string>
 	<string name="tip_update_index_t">\tAktuelle Kartendaten sind natürlich wichtig. OsmAnd bietet einen Download-Manager, mit dem man die Verfügbarkeit neuerer Offline-Daten prüfen kann.
@@ -353,7 +359,7 @@
 
 	<string name="tip_map_switch">Kartenquelle</string>
 	<string name="tip_map_switch_t">\tDer schnellste Weg zum Wechseln der Kartenquelle ist via \'Menü\'-> \'Darstellung\' aus der Kartenansicht heraus.
-\n\tUnter \'Kartenquelle ...\' kann man wählen zwischen vordefinierten Quellen für Online- oder Offline-Kacheln, Offline-Vektor-Karten, oder selbst auf dem PC (z.B. via OsmAndMapCreator) erstellten Karten.
+\n\tUnter \'Kartenquelle …\' kann man wählen zwischen vordefinierten Quellen für Online- oder Offline-Kacheln, Offline-Vektor-Karten, oder selbst auf dem PC (z.B. via OsmAndMapCreator) erstellten Karten.
 \n\tOsmAnd unterstützt auch selbst definierte Quellen.</string>
 
 	<string name="tip_app_mode">Nutzerprofile</string>
@@ -416,10 +422,10 @@
 	<string name="amenity_type_sustenance">Gastronomie</string>
 	<string name="amenity_type_tourism">Touristik</string>
 	<string name="amenity_type_transportation">ÖPNV</string>
-	<string name="indexing_address">Indiziere Adressen ...</string>
-	<string name="indexing_map">Indiziere Karte ...</string>
-	<string name="indexing_poi">Indiziere POI ...</string>
-	<string name="indexing_transport">Indiziere ÖPNV ...</string>
+	<string name="indexing_address">Indiziere Adressen …</string>
+	<string name="indexing_map">Indiziere Karte …</string>
+	<string name="indexing_poi">Indiziere POI …</string>
+	<string name="indexing_transport">Indiziere ÖPNV …</string>
 	<string name="input_output_error">I/O Fehler aufgetreten</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
@@ -432,11 +438,11 @@
 	<string name="poi_filter_for_tourists">Für Touristen</string>
 	<string name="poi_filter_fuel">Tankstelle</string>
 	<string name="poi_filter_namefinder">Online Namens-Finder</string>
-	<string name="reading_cached_tiles">Lese gepufferte Kacheln ...</string>
+	<string name="reading_cached_tiles">Lese gepufferte Kacheln …</string>
 	<string name="version_index_is_big_for_memory">Nicht genügend Speicher für Index \'\'{0}\'\' </string>
 	<string name="version_index_is_not_supported">Die Index-Version \'\'{0}\'\' wird nicht unterstützt</string>
 					
-	<string name="use_osmand_routing_service">OsmAnd Routing</string>
+	<string name="use_osmand_routing_service">OsmAnd Routing >20km</string>
 	<string name="use_osmand_routing_service_descr">OsmAnd Offlinerouting für große Entfernungen verwenden (experimentell) anstatt automatisch CloudMade zu nehmen</string>
 	<string name="osmand_routing_experimental">OsmAnd Offlinerouting ist noch experimentell und funktioniert nicht gut für Entfernungen über 20 km.\n\nAls Routingdienst wird temporär online CloudMade verwendet.</string>
 	<string name="specified_dir_doesnt_exist">Angegebener Ordner kann nicht gefunden werden.</string>
@@ -445,10 +451,10 @@
 
 	<string name="osmand_net_previously_installed">Eine Vorversion von OsmAnd ist installiert. Alle Offline-Daten werden weiter unterstützt. Favoriten müssen aber in der Vorversion exportiert und anschließend in die neue Version importiert werden.</string>
 	<string name="build_installed">Build {0} erfolgreich installiert ({1}).</string>
-	<string name="downloading_build">Lade Build ...</string>
+	<string name="downloading_build">Lade Build …</string>
 	<string name="install_selected_build">Installation OsmAnd - {0} von {1} {2} MB. Fortfahren?</string>
 	<string name="loading_builds_failed">Laden der Liste von OsmAnd-Builds ist fehlgeschlagen</string>
-	<string name="loading_builds">Lade OsmAnd-Builds ...</string>
+	<string name="loading_builds">Lade OsmAnd-Builds …</string>
 	<string name="select_build_to_install">Auswählen eines OsmAnd-Builds für die Installation</string>
 	<string name="contribution_activity">Aktion speziell für die Contribution Version</string>
 	
@@ -480,7 +486,6 @@
 	<string name="continuous_rendering">Kontin. Kartenaufbau</string>
 	<string name="continuous_rendering_descr">Wähle zwischen kontinuierlichem Kartenaufbau oder Bilddarstellung auf einmal</string>
 	<string name="rendering_exception">Fehler aufgetreten beim Rendern des gewählten Gebietes</string>
-	<string name="rendering_out_of_memory">Zu wenig Speicher zum Anzeigen des gewählten Gebietes</string>
 	<string name="show_point_options">Optionen für Lokation</string>
 	<string name="renderer_load_sucess">Renderer erfolgreich geladen</string>
 	<string name="renderer_load_exception">Fehler aufgetreten: Renderer wurde nicht geladen</string>
@@ -493,7 +498,7 @@
 	<string name="phone">Telefon</string>
 	<string name="download_type_to_filter">Filtern nach Typ</string>
 	<string name="use_high_res_maps">Hochauflösende Anzeige</string>
-	<string name="use_high_res_maps_descr">Verbesserte Kartenqualität für hochauflösende Geräte</string>
+	<string name="use_high_res_maps_descr">Unterdückt Streckung (Unschärfe) von Kartenkacheln auf manchen Anzeigen</string>
 	<string name="unknown_location">Position noch nicht ermittelt</string>
 	<string name="download_files">Laden</string>
 	<string name="context_menu_item_search_transport">Suche ÖPNV</string>
@@ -507,7 +512,7 @@
 	<string name="no_vector_map_loaded">Offline-Daten wurden nicht geladen</string>
 	<string name="map_route_by_gpx">Route mittels GPX</string>
 	<string name="gpx_files_not_found">Keine GPX-Dateien gefunden in /tracks-Ordner</string>
-	<string name="layer_gpx_layer">GPX-Track ...</string>
+	<string name="layer_gpx_layer">GPX-Track …</string>
 	<string name="error_reading_gpx">Fehler beim Lesen der GPX-Daten</string>
 
 	<string name="vector_data">Offline-Vektor-Karten</string>
@@ -541,8 +546,8 @@
 	<string name="layer_favorites">Favoriten</string>
 	<string name="layer_osm_bugs">OSM-Fehlerbericht</string>
 	<string name="layer_transport">ÖPNV-Haltestellen</string>
-	<string name="layer_poi">POI ...</string>
-	<string name="layer_map">Kartenquelle ...</string>
+	<string name="layer_poi">POI …</string>
+	<string name="layer_map">Kartenquelle …</string>
 	<string name="menu_layers">Darstellung</string>
 	<string name="continue_follow_previous_route">Die vorherige Navigation wurde nicht beendet. Wollen Sie mit ihr fortfahren?</string>
 	<string name="context_menu_item_search_poi">Suche POI</string>
@@ -573,14 +578,14 @@
 	<string name="voice_not_use">Nicht verwenden</string>
 	<string name="voice_provider_descr">Sprachpaket für Navigation auswählen</string>
 	<string name="voice_provider">Sprachansagen</string>
-	<string name="voice_data_initializing">Sprachansagen werden initialisiert ...</string>
+	<string name="voice_data_initializing">Sprachansagen werden initialisiert …</string>
 	<string name="voice_data_not_supported">Sprachpaket-Version wird nicht unterstützt.</string>
 	<string name="voice_data_corrupted">Sprachpaket ist defekt</string>
 	<string name="voice_data_unavailable">Das aktuelle Sprachpaket ist nicht verfügbar</string>
 	<string name="stop_routing">Navig.stoppen</string>
 	<string name="sd_unmounted">Die SD-Karte ist nicht verfügbar. \nKarte lässt sich nicht darstellen.</string>
 	<string name="sd_mounted_ro">Die SD-Karte befindet sich im Nur-Lesen Modus. \nSie können nur vorgeladene Karten sehen. Der Internetdownload ist deaktiviert.</string>
-	<string name="unzipping_file">Datei wird entpackt ...</string>
+	<string name="unzipping_file">Datei wird entpackt …</string>
 	<string name="route_tr">rechts abbiegen</string>
 	<string name="route_tshr">scharf rechts abbiegen</string>
 	<string name="route_tslr">halb rechts abbiegen</string>
@@ -592,7 +597,7 @@
 	<string name="first_time_continue">Weiter</string>
 	<string name="first_time_download">Offline-Daten herunterladen</string>
 	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. \nUm alle Funktionen verwenden zu können, sind Offline-Daten erforderlich, die Sie in den Einstellungen unter Offline-Daten herunterladen oder selbst erstellen können. Danach können Sie Adressen, POI und ÖPNV finden.</string>
-	<string name="search_poi_location">Suche Signal ...</string>
+	<string name="search_poi_location">Suche Signal …</string>
 	<string name="search_near_map">Suche um Lokation</string>
 	<string name="search_nearby">Suche um Aufenthaltsort</string>
 	<string name="map_orientation_default">je nach Geräteorientierung</string>
@@ -633,11 +638,11 @@
 	<string name="favorite">Favoriten</string>
 	<string name="clear_all">Alles löschen</string>
 	<string name="history">Verlauf</string>
-	<string name="uploading_data">Daten hochladen ...</string>
-	<string name="uploading">Hochladen ...</string>
+	<string name="uploading_data">Daten hochladen …</string>
+	<string name="uploading">Hochladen …</string>
 	<string name="search_nothing_found">Kein Treffer</string>
-	<string name="searching">Suchen ...</string>
-	<string name="searching_address">Adresse suchen ...</string>
+	<string name="searching">Suchen …</string>
+	<string name="searching_address">Adresse suchen …</string>
 	<string name="search_osm_nominatim">Adresse suchen mit Osm Nominatim</string>
 	<string name="hint_search_online">Hausnummer, Straße, Ort</string>
 	<string name="search_offline_address">Offline</string>
@@ -653,9 +658,9 @@
 	<string name="address">Adresse</string>
 	<string name="download_index_success">Daten erfolgreich heruntergeladen</string>
 	<string name="error_io_error">I/O Fehler aufgetreten.</string>
-	<string name="downloading_file">Herunterladen der Datei ...</string>
-	<string name="downloading">Herunterladen ...</string>
-	<string name="downloading_list_indexes">Herunterladen einer Liste der verfügbaren Regionen ...</string>
+	<string name="downloading_file">Herunterladen der Datei …</string>
+	<string name="downloading">Herunterladen …</string>
+	<string name="downloading_list_indexes">Herunterladen einer Liste der verfügbaren Regionen …</string>
 	<string name="list_index_files_was_not_loaded">Die Liste der Regionen wurde von osmand.net nicht geladen.</string>
     <string name="select_index_file_to_download">Nicht vorhandene Regionen können selbst erstellt werden, siehe osmand.net.</string>
 	<string name="show_poi_on_map">Auf Karte zeigen</string>
@@ -669,18 +674,18 @@
 	<string name="get_directions">Route</string>
     <string name="show_gps_status">GPS-Status anzeigen</string>
 	<string name="opening_hours">Öffnungszeiten</string>
-	<string name="opening_changeset">Öffne Changeset ...</string>
-	<string name="closing_changeset">Schließe Changeset ...</string>
-	<string name="commiting_node">Übertrage Knoten ...</string>
-	<string name="loading_poi_obj">POI wird geladen ...</string>
+	<string name="opening_changeset">Öffne Changeset …</string>
+	<string name="closing_changeset">Schließe Changeset …</string>
+	<string name="commiting_node">Übertrage Knoten …</string>
+	<string name="loading_poi_obj">POI wird geladen …</string>
 	<string name="auth_failed">Autorisierung fehlgeschlagen</string>
 	<string name="failed_op">fehlgeschlagen</string>
-	<string name="converting_names">Konvertiere einheimische/englische Namen ...</string>
-	<string name="loading_streets_buildings">Lade Straßen und Hausnr. ...</string>
-	<string name="loading_postcodes">Lade Postleitzahlen ...</string>
-	<string name="loading_streets">Lade Straßen ...</string>
-	<string name="loading_cities">Lade Orte ...</string>
-	<string name="loading">Laden ...</string>
+	<string name="converting_names">Konvertiere einheimische/englische Namen …</string>
+	<string name="loading_streets_buildings">Lade Straßen und Hausnr. …</string>
+	<string name="loading_postcodes">Lade Postleitzahlen …</string>
+	<string name="loading_streets">Lade Straßen …</string>
+	<string name="loading_cities">Lade Orte …</string>
+	<string name="loading">Laden …</string>
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">Fehler während des Speicherns aufgetreten</string>
 	<string name="error_calculating_route">Fehler während der Routenberechnung</string>
@@ -691,10 +696,10 @@
 	<string name="invalid_locations">Koordinaten sind ungültig!</string>
 	<string name="go_back_to_osmand">zurück zu OsmAnd</string>
 	<string name="close">Schließen</string>
-	<string name="loading_data">Daten werden geladen ...</string>
-	<string name="reading_indexes">Verarbeite Indizes ...</string>
+	<string name="loading_data">Daten werden geladen …</string>
+	<string name="reading_indexes">Verarbeite Indizes …</string>
 	<string name="previous_run_crashed">Die vorherige Programminstanz war abgestürzt. Logdatei unter {0}. Fehler bitte melden und Logdatei anhängen.</string>
-	<string name="saving_gpx_tracks">GPX-Track wird auf der SD-Karte gespeichert...</string>
+	<string name="saving_gpx_tracks">GPX-Track wird auf der SD-Karte gespeichert…</string>
 	<string name="finished_task">Abgeschlossen</string>
     <string name="reload_indexes_descr">Offline-Vektor-Karten und Adressdaten von SD-Karte neu laden</string>
     <string name="reload_indexes">Offline-Daten erneut einbinden</string>

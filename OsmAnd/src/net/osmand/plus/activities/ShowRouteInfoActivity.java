@@ -6,6 +6,7 @@ package net.osmand.plus.activities;
 import java.util.List;
 
 import net.osmand.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.RoutingHelper;
@@ -67,7 +68,7 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 		RouteDirectionInfo item = ((RouteInfoAdapter)getListAdapter()).getItem(position - 1);
 		Location loc = helper.getLocationFromRouteDirection(item);
 		if(loc != null){
-			OsmandSettings settings = OsmandSettings.getOsmandSettings(this);
+			OsmandSettings settings = OsmandApplication.getSettings();
 			settings.setMapLocationToShow(loc.getLatitude(),loc.getLongitude(),
 					Math.max(13, settings.getLastKnownMapZoom()));
 			MapActivity.launchMapActivityMoveToTop(this);

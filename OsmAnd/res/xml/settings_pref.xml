@@ -46,6 +46,7 @@
 			android:key="use_english_names"></CheckBoxPreference>
 		<CheckBoxPreference android:key="show_altitude_info" android:title="@string/show_altitude_info" android:summary="@string/show_altitude_info_descr"/>
 		<CheckBoxPreference android:key="transparent_map_theme" android:title="@string/use_transparent_map_theme" android:summary="@string/use_transparent_map_theme_descr"/>
+		<CheckBoxPreference android:key="fluorescent_overlays" android:title="@string/use_fluorescent_overlays" android:summary="@string/use_fluorescent_overlays_descr"/>
 		<CheckBoxPreference android:key="show_zoom_level" android:title="@string/show_zoom_level" android:summary="@string/show_zoom_level_descr"/>
 	</PreferenceScreen>
 
@@ -109,6 +110,8 @@
 			<EditTextPreference android:title="@string/user_name" android:summary="@string/user_name_descr" android:key="user_name"></EditTextPreference>
 			<EditTextPreference android:title="@string/user_password" android:password="true" android:summary="@string/user_password_descr"
 				android:key="user_password"></EditTextPreference>
+			<CheckBoxPreference android:summary="@string/offline_poi_edition_descr" android:title="@string/offline_poi_edition"
+				android:key="offline_poi_edition"></CheckBoxPreference>
 			<Preference android:title="@string/local_openstreetmap_settings" android:key="local_openstreetmap_points" android:summary="@string/local_openstreetmap_settings_descr"></Preference>
 		</PreferenceCategory>
 		<PreferenceCategory android:title="OsmAnd debugging and development">

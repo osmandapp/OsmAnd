@@ -40,7 +40,7 @@ bear_left == ['trzymaj się lewej '].
 route_new_calc(Dist) == ['Długość trasy to ', D] :- distance(Dist) == D.
 route_recalc(Dist) == ['Wyznaczam nową trasę , długość trasy to ', D] :- distance(Dist) == D.
 
-location_lost == ['g p s signal lost '].
+location_lost == ['Utracono sygnał g p s '].
 
 
 %% 
