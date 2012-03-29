@@ -144,7 +144,7 @@ public class NavigationInfo {
 
     public NavigationInfo(final Context context) {
         this.context = context;
-        settings = ((OsmandApplication)context.getApplicationContext()).getSettings();
+        settings = ((OsmandApplication)(context.getApplicationContext())).getSettings();
         currentLocation = null;
         lastDirection = new RelativeDirection();
         lastNotificationTime = SystemClock.uptimeMillis();

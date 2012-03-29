@@ -113,7 +113,7 @@ public class MapActivity extends AccessibleTrackedActivity implements IMapLocati
 	final private MapActivityActions mapActions = new MapActivityActions(this);
 	private EditingPOIActivity poiActions;
 	final private MapActivityLayers mapLayers = new MapActivityLayers(this);
-	final private NavigationInfo navigationInfo = new NavigationInfo(this);
+	private NavigationInfo navigationInfo;
 	
 	private SavingTrackHelper savingTrackHelper;
 	private LiveMonitoringHelper liveMonitoringHelper;
@@ -157,6 +157,7 @@ public class MapActivity extends AccessibleTrackedActivity implements IMapLocati
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		settings = getMyApplication().getSettings();		
+		navigationInfo = new NavigationInfo(this);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		// Full screen is not used here
 		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
