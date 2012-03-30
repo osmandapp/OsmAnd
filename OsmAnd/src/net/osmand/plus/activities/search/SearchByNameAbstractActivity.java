@@ -173,9 +173,6 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		if(locationToSearch == null){
 			locationToSearch = settings.getLastKnownMapLocation();
 		}
-		//WORKAROUND there might be some kind of bug that makes the edit text password like
-		//http://code.google.com/p/osmand/issues/detail?id=936
-		searchText.setTransformationMethod(null);
 	}
 	
 	@SuppressWarnings("unchecked")

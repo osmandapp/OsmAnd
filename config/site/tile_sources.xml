@@ -73,6 +73,9 @@
    <tile_source name="Freemap.sk-atlas" url_template="http://t1.freemap.sk/A/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="16" tile_size="256" img_density="16" avg_img_size="18000" />
    <tile_source name="Freemap.sk-hiking" url_template="http://t1.freemap.sk/T/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="16" tile_size="256" img_density="16" avg_img_size="18000" />
    <tile_source name="Freemap.sk-cycle" url_template="http://t1.freemap.sk/C/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="16" tile_size="256" img_density="16" avg_img_size="18000" />
+   <tile_source name="Thai-English Map" url_template="http://a.tile.osm-tools.org/osm_then/${z}/${x}/${y}.png" ext=".png" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/>
+   <tile_source name="OSM Poland (contour lines)" url_template="http://osm.trail.pl/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/> 
+<tile_source name="OSM Poland" url_template="http://osm.trail.pl/bezpoziomic/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/> 
 <!--
    <tile_source rule="wms_tile" url_template="http://wms.latlon.org" name="Genshtab (BLR)" layer="gshtab" ext=".jpg" min_zoom="5" max_zoom="17" tile_size="256" img_density="32" avg_img_size="18000"/>  NOT WORK ?-->
 
