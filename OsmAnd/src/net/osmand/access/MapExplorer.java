@@ -56,7 +56,7 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
             }
             return true;
         }
-        return false;
+        return ((l2 != null) && !l2.isEmpty());
     }
 
     // Find touched objects if any and emit accessible toast message
