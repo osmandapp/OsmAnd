@@ -81,7 +81,9 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
             if (contextMenuLayer != null) {
                 contextMenuLayer.setSelections(newSelections, contextProvider);
                 if (!newSelections.isEmpty())
-                    mapView.showMessage(contextMenuLayer.getSelectedObjectDescription());
+                    mapView.showMessage(mapView.getSettings().USE_SHORT_OBJECT_NAMES.get() ?
+                                        contextMenuLayer.getSelectedObjectName() :
+                                        contextMenuLayer.getSelectedObjectDescription());
             }
             selectedObjects = newSelections;
         }
