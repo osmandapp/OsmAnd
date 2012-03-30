@@ -177,6 +177,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerBooleanPreference(osmandSettings.USE_TRACKBALL_FOR_MOVEMENTS,screen); 
 		registerBooleanPreference(osmandSettings.ZOOM_BY_TRACKBALL,screen); 
 		registerBooleanPreference(osmandSettings.SCROLL_MAP_BY_GESTURES,screen); 
+		registerBooleanPreference(osmandSettings.USE_SHORT_OBJECT_NAMES,screen); 
 		registerBooleanPreference(osmandSettings.USE_HIGH_RES_MAPS,screen); 
 		registerBooleanPreference(osmandSettings.USE_ENGLISH_NAMES,screen); 
 		registerBooleanPreference(osmandSettings.AUTO_ZOOM_MAP,screen); 

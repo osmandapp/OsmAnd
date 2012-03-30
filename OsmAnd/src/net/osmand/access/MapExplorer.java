@@ -56,7 +56,7 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
             }
             return true;
         }
-        return false;
+        return ((l2 != null) && !l2.isEmpty());
     }
 
     // Find touched objects if any and emit accessible toast message
@@ -81,7 +81,9 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
             if (contextMenuLayer != null) {
                 contextMenuLayer.setSelections(newSelections, contextProvider);
                 if (!newSelections.isEmpty())
-                    mapView.showMessage(contextMenuLayer.getSelectedObjectDescription());
+                    mapView.showMessage(mapView.getSettings().USE_SHORT_OBJECT_NAMES.get() ?
+                                        contextMenuLayer.getSelectedObjectName() :
+                                        contextMenuLayer.getSelectedObjectDescription());
             }
             selectedObjects = newSelections;
         }

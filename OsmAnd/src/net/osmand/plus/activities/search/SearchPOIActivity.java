@@ -90,7 +90,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	private static final int MIN_DISTANCE_TO_RESEARCH = 70;
 	private static final int MIN_DISTANCE_TO_UPDATE = 6;
 
-	private NavigationInfo navigationInfo = new NavigationInfo(this);
+	private NavigationInfo navigationInfo;
 
 
 	private Button searchPOILevel;
@@ -118,6 +118,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
+		navigationInfo = new NavigationInfo(this);
 		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.searchpoi_activity, R.drawable.tab_search_poi_icon);
 		setContentView(R.layout.searchpoi);
 		titleBar.afterSetContentView();
