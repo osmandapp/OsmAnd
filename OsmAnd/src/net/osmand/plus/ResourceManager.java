@@ -141,6 +141,12 @@ public class ResourceManager {
 	public void resetStoreDirectory() {
 		dirWithTiles = context.getSettings().extendOsmandPath(TILES_PATH);
 		dirWithTiles.mkdirs();
+		// ".nomedia" indicates there are no pictures and no music to list in this dir for the Gallery app
+		try {
+			new FileOutputStream( context.getSettings().extendOsmandPath(APP_DIR + ".nomedia") ).close(); //$NON-NLS-1$
+		}
+		catch( Exception e ) {
+		}
 	}
 	
 	public OsmandApplication getContext() {
