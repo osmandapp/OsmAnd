@@ -185,43 +185,53 @@ public class CoastlineProcessor {
 				int nextLonMaximum = ind + 1;
 				double lonEnd = first.getLongitude();
 				double latPeek = first.getLatitude();
-				double latLocPeek = first.getLatitude();
+				int latPeekInd = ind;
+				int latLocPeekInd = ind;
 				for (int j = ind + 1; j < chain.size(); j++) {
 					if (directionToRight) {
 						if (chain.get(j).getLatitude() <= latPeek) {
 							latPeek = chain.get(j).getLatitude();
+							latPeekInd = j;
 						}
 						if (chain.get(j).getLongitude() >= lonEnd) {
 							nextLonMaximum = j;
 							lonEnd = chain.get(j).getLongitude();
-							latLocPeek = latPeek;
+							latLocPeekInd = latPeekInd;
 						} else if (chain.get(j).getLongitude() < first.getLongitude()) {
 							break;
 						}
 					} else {
 						if (chain.get(j).getLatitude() >= latPeek) {
 							latPeek = chain.get(j).getLatitude();
+							latPeekInd = j;
 						}
 						if (chain.get(j).getLongitude() <= lonEnd) {
 							nextLonMaximum = j;
 							lonEnd = chain.get(j).getLongitude();
-							latLocPeek = latPeek;
+							latLocPeekInd = latPeekInd;
 						} else if (chain.get(j).getLongitude() > first.getLongitude()) {
 							break;
 						}
 					}
 				}
-				for (int i = ind; i <= nextLonMaximum; i++) {
+				if(latLocPeekInd > ind) {
+					for (int i = ind; i <= latLocPeekInd; i++) {
+						subChain.add(chain.get(i));
+					}
+					Node ned = new Node(chain.get(latLocPeekInd).getLatitude(), first.getLongitude(), nodeId++);
+					subChain.add(ned);
+					subChain.add(first);
+					chains.add(subChain);
+					subChain= new ArrayList<Node>();
+				}
+				
+				for (int i = latLocPeekInd; i <= nextLonMaximum; i++) {
 					subChain.add(chain.get(i));
 				}
-				Node ned = new Node(latLocPeek, lonEnd, nodeId++);
+				Node ned = new Node(chain.get(latLocPeekInd).getLatitude(), lonEnd, nodeId++);
 				subChain.add(ned);
-				if (latLocPeek != first.getLatitude()) {
-					ned = new Node(latLocPeek, first.getLongitude(), nodeId++);
-					subChain.add(ned);
-				}
 				ind = nextLonMaximum;
-				subChain.add(first);
+				subChain.add(chain.get(latLocPeekInd));
 				chains.add(subChain);
 
 			}
