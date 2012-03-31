@@ -124,7 +124,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				hideZoomLevelInTime();
 			}
 		}
-		if (showZoomLevel || view.getSettings().SHOW_ZOOM_LEVEL.get()) {
+		if (showZoomLevel || !view.getSettings().SHOW_RULER.get()) {
 			drawZoomLevel(canvas);
 		} else {
 			drawRuler(canvas);

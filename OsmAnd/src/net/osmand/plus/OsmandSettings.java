@@ -1115,8 +1115,8 @@ public class OsmandSettings {
 		SHOW_ALTITUDE_INFO.setModeDefaultValue(ApplicationMode.CAR, false);
 	}
 	
-	public final CommonPreference<Boolean> SHOW_ZOOM_LEVEL = 
-			new BooleanPreference("show_zoom_level", false, false, true);
+	public final CommonPreference<Boolean> SHOW_RULER = 
+			new BooleanPreference("show_ruler", true, false, true);
 	
 
 	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS = 

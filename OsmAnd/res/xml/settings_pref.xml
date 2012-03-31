@@ -47,7 +47,7 @@
 		<CheckBoxPreference android:key="show_altitude_info" android:title="@string/show_altitude_info" android:summary="@string/show_altitude_info_descr"/>
 		<CheckBoxPreference android:key="transparent_map_theme" android:title="@string/use_transparent_map_theme" android:summary="@string/use_transparent_map_theme_descr"/>
 		<CheckBoxPreference android:key="fluorescent_overlays" android:title="@string/use_fluorescent_overlays" android:summary="@string/use_fluorescent_overlays_descr"/>
-		<CheckBoxPreference android:key="show_zoom_level" android:title="@string/show_zoom_level" android:summary="@string/show_zoom_level_descr"/>
+		<CheckBoxPreference android:key="show_ruler" android:title="@string/show_ruler_level" android:summary="@string/show_ruler_level_descr"/>
 	</PreferenceScreen>
 
 
