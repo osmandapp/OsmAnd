@@ -62,10 +62,10 @@
 		<PreferenceCategory android:title="@string/live_monitoring">
 			<CheckBoxPreference android:summary="@string/live_monitoring_descr" android:title="@string/live_monitoring"
 				android:key="live_monitoring"></CheckBoxPreference>
-			<ListPreference android:summary="@string/live_monitoring_interval_descr" android:title="@string/live_monitoring_interval"
-				android:key="live_monitoring_interval"></ListPreference>
 			<EditTextPreference android:summary="@string/live_monitoring_url_descr" android:title="@string/live_monitoring_url"
 				android:key="live_monitoring_url"/>
+			<ListPreference android:summary="@string/live_monitoring_interval_descr" android:title="@string/live_monitoring_interval"
+				android:key="live_monitoring_interval"></ListPreference>
 		</PreferenceCategory>
 	</PreferenceScreen>
 
