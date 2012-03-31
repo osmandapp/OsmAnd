@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import net.osmand.LogUtil;
 import net.osmand.Version;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
@@ -20,8 +21,8 @@ import net.osmand.plus.views.OsmandMapTileView;
 import org.apache.commons.logging.Log;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Rect;
@@ -50,11 +51,11 @@ public class DownloadTilesDialog {
 	public void openDialog(){
 		BaseMapLayer mainLayer = mapView.getMainLayer();
 		if(!(mainLayer instanceof MapTileLayer) || !((MapTileLayer) mainLayer).isVisible()){
-			Toast.makeText(ctx, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
+			AccessibleToast.makeText(ctx, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
 		}
 		final ITileSource mapSource = ((MapTileLayer) mainLayer).getMap();
 		if(mapSource == null || !mapSource.couldBeDownloadedFromInternet()){
-			Toast.makeText(ctx, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
+			AccessibleToast.makeText(ctx, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
 			return;
 		}
 		final int max = mapSource.getMaximumZoomSupported();

@@ -16,6 +16,7 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.osm.Entity;
 import net.osmand.osm.Entity.EntityId;
@@ -385,10 +386,10 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			
 		} catch (IOException e) {
 			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
-			Toast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
 		} catch (SAXException e) {
 			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
-			Toast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
 		}
 		return null;
 	}
@@ -417,10 +418,10 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			
 		} catch (IOException e) {
 			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
-			Toast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
 		} catch (SAXException e) {
 			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
-			Toast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
 		}
 		return null;
 	}
@@ -429,7 +430,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		view.post(new Runnable(){
 			@Override
 			public void run() {
-				Toast.makeText(ctx, msg, Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(ctx, msg, Toast.LENGTH_LONG).show();
 			}
 		});
 	}

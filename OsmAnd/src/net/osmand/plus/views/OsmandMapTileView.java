@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.LogUtil;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.IMapLocationListener;
@@ -23,23 +24,24 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Paint.Style;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
 import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.view.WindowManager;
 import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.GestureDetector.OnGestureListener;
+import android.view.MotionEvent;
+import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
+import android.view.SurfaceView;
+import android.view.WindowManager;
+import android.widget.Toast;
 
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback {
 
@@ -202,6 +204,16 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	public List<OsmandMapLayer> getLayers() {
 		return layers;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public <T extends OsmandMapLayer> T getLayerByClass(Class<T> cl) {
+		for(OsmandMapLayer lr : layers) {
+			if(cl.isInstance(cl)){
+				return (T) lr;
+			}
+		}
+		return null;
 	}
 
 	public OsmandApplication getApplication() {
@@ -729,11 +741,24 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return animatedDraggingThread;
 	}
 
+	public void showMessage(final String msg) {
+		handler.post(new Runnable() {
+			@Override
+			public void run() {
+				AccessibleToast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
+			}
+		});
+	}
+
 	
 	private class MapTileViewMultiTouchZoomListener implements MultiTouchZoomListener {
 		private float initialMultiTouchZoom;
 		private PointF initialMultiTouchCenterPoint;
 		private LatLon initialMultiTouchLocation;
+		private float x1;
+		private float y1;
+		private float x2;
+		private float y2;
 		
 		@Override
 		public void onZoomEnded(float distance, float relativeToStart) {
@@ -741,6 +766,14 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			float calcZoom = initialMultiTouchZoom + dz;
 			setZoom(Math.round(calcZoom));
 			zoomPositionChanged(getZoom());
+		}
+		
+		@Override
+		public void onGestureInit(float x1, float y1, float x2, float y2) {
+			this.x1 = x1;
+			this.y1 = y1;
+			this.x2 = x2;
+			this.y2 = y2;
 		}
 
 		@Override

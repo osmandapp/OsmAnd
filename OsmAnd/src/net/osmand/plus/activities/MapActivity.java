@@ -4,14 +4,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.android.apps.analytics.easytracking.TrackedActivity;
-
 import net.osmand.Algoritms;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LogUtil;
 import net.osmand.Version;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.IMapLocationListener;
@@ -63,8 +62,8 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings.Secure;
-import android.util.Log;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -77,6 +76,8 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.Toast;
+
+import com.google.android.apps.analytics.easytracking.TrackedActivity;
 
 public class MapActivity extends TrackedActivity implements IMapLocationListener, SensorEventListener {
 
@@ -96,6 +97,9 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 	private static final int AUTO_FOLLOW_MSG_ID = 8; 
 	private static final int LOST_LOCATION_MSG_ID = 10;
 	private static final long LOST_LOCATION_CHECK_DELAY = 20000;
+	
+	private static final int LONG_KEYPRESS_MSG_ID = 28;
+	private static final int LONG_KEYPRESS_DELAY = 500;
 	
 	private long lastTimeAutoZooming = 0;
 	
@@ -162,7 +166,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 			public void onDismiss(DialogInterface dialog) {
 				OsmandApplication app = ((OsmandApplication) getApplication());
 				if (settings.MAP_VECTOR_DATA.get() && app.getResourceManager().getRenderer().isEmpty()) {
-					Toast.makeText(MapActivity.this, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(MapActivity.this, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
 				}
 			}
 		});
@@ -627,7 +631,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 			}
 		}
 		if(locationLayer.getLastKnownLocation() == null){
-			Toast.makeText(this, R.string.unknown_location, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(this, R.string.unknown_location, Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -967,9 +971,9 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		if(Environment.MEDIA_MOUNTED.equals(state)){
 			// ok
 		} else if(Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)){
-			Toast.makeText(this, R.string.sd_mounted_ro, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(this, R.string.sd_mounted_ro, Toast.LENGTH_LONG).show();
 		} else {
-			Toast.makeText(this, R.string.sd_unmounted, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(this, R.string.sd_unmounted, Toast.LENGTH_LONG).show();
 		}
 	}
 	
@@ -1337,7 +1341,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 					@Override
 					public void run() {
 						if (settings.MAP_ACTIVITY_ENABLED.get()) {
-							Toast.makeText(MapActivity.this, R.string.auto_follow_location_enabled, Toast.LENGTH_SHORT).show();
+							AccessibleToast.makeText(MapActivity.this, R.string.auto_follow_location_enabled, Toast.LENGTH_SHORT).show();
 							backToLocationImpl();
 						}
 					}

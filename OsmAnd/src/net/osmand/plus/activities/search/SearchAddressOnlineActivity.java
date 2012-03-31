@@ -12,6 +12,7 @@ import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.Version;
+import net.osmand.access.AccessibleToast;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandApplication;
@@ -187,7 +188,7 @@ public class SearchAddressOnlineActivity extends OsmandListActivity implements S
 			@Override
 			public void run() {
 				if(places == null){
-					Toast.makeText(SearchAddressOnlineActivity.this, getString(warning), Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(SearchAddressOnlineActivity.this, getString(warning), Toast.LENGTH_LONG).show();
 				} else {
 					lastResult = new PlacesAdapter(places);
 					setListAdapter(lastResult);

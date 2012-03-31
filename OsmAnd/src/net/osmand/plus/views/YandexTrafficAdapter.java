@@ -9,6 +9,7 @@ import java.net.URL;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
+import net.osmand.access.AccessibleToast;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -32,7 +33,7 @@ public class YandexTrafficAdapter  extends MapTileAdapter {
 	
 	@Override
 	public void onInit() {
-		Toast.makeText(view.getContext(), R.string.thanks_yandex_traffic, Toast.LENGTH_LONG).show();
+		AccessibleToast.makeText(view.getContext(), R.string.thanks_yandex_traffic, Toast.LENGTH_LONG).show();
 	}
 	
 	@Override

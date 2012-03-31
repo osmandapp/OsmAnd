@@ -3,7 +3,6 @@ package net.osmand.plus.routing;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper.TurnType;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
@@ -180,9 +179,7 @@ public class VoiceRouter {
 		if(next == null || next.distance == 0) {
 			// if(currentStatus <= STATUS_UNKNOWN && currentDirection > 0){  This caused this prompt to be suppressed when coming back from a UTwp situation
 			if(currentStatus <= STATUS_UNKNOWN){
-				CommandBuilder play = getNewCommandPlayerToPlay();
-				if(play != null){
-					play.goAhead(router.getLeftDistance()).andArriveAtDestination().play();
+				if (playGoAheadToDestination()) {
 					currentStatus = STATUS_TOLD;
 				}
 			}
@@ -231,6 +228,64 @@ public class VoiceRouter {
 			}
 			nextStatusAfter(STATUS_UNKNOWN);
 		}
+	}
+
+	public void announceCurrentDirection() {
+		Location currentLocation = router.getCurrentLocation();
+		RouteDirectionInfo next = router.getNextRouteDirectionInfo();
+		int dist = router.getDistanceToNextRouteDirection();
+		float speed = DEFAULT_SPEED;
+
+		if(currentLocation != null && currentLocation.hasSpeed()){
+			speed = Math.max(currentLocation.getSpeed(), speed);
+		}
+
+		switch (currentStatus) {
+		case STATUS_UNKNOWN:
+			if ((currentDirection > 0) && ((next == null) || (next.distance == 0))) {
+				playGoAheadToDestination();
+			} else {
+				playGoAhead(dist);
+			}
+			break;
+		case STATUS_TOLD:
+			if (currentDirection > 0) {
+				playGoAheadToDestination();
+			}
+			break;
+		case STATUS_TURN:
+			if(next.distance < TURN_IN_DISTANCE_END) {
+				playMakeTurn(next, router.getNextNextRouteDirectionInfo());
+			} else {
+				playMakeTurn(next, null);
+			}
+			break;
+		case STATUS_TURN_IN:
+			if(isDistanceLess(speed, next.distance, TURN_DISTANCE) || next.distance < TURN_IN_DISTANCE_END) {
+				playMakeTurnIn(next, dist, router.getNextNextRouteDirectionInfo());
+			} else {
+				playMakeTurnIn(next, dist, null);
+			}
+			break;
+		case STATUS_PREPARE:
+			playPrepareTurn(next, dist);
+			break;
+		case STATUS_LONG_PREPARE:
+			playPrepareTurn(next, dist);
+			break;
+		default:
+			break;
+		}
+	}
+
+
+	private boolean playGoAheadToDestination() {
+		CommandBuilder play = getNewCommandPlayerToPlay();
+		if(play != null){
+			play.goAhead(router.getLeftDistance()).andArriveAtDestination().play();
+			return true;
+		}
+		return false;
 	}
 
 	private void playGoAhead(int dist) {

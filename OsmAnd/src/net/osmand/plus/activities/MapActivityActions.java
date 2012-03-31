@@ -13,6 +13,7 @@ import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.LogUtil;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.map.ITileSource;
 import net.osmand.osm.LatLon;
@@ -144,7 +145,7 @@ public class MapActivityActions implements DialogProvider {
 				point.setCategory(cat.getText().toString());
 				boolean added = helper.addFavourite(point);
 				if (added) {
-					Toast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_favorite_dialog_favourite_added_template), point.getName()), Toast.LENGTH_SHORT)
+					AccessibleToast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_favorite_dialog_favourite_added_template), point.getName()), Toast.LENGTH_SHORT)
 							.show();
 				}
 				mapActivity.getMapView().refreshMap();
@@ -158,7 +159,7 @@ public class MapActivityActions implements DialogProvider {
 		final Collection<FavouritePoint> points = helper.getFavouritePoints();
 		final String[] names = new String[points.size()];
 		if(names.length == 0){
-			Toast.makeText(mapActivity, getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
+			AccessibleToast.makeText(mapActivity, getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
 			helper.close();
 			return null;
 		}
@@ -182,7 +183,7 @@ public class MapActivityActions implements DialogProvider {
 				FavouritePoint fv = favs[which];
 				FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
 				if(helper.editFavourite(fv, point.getLatitude(), point.getLongitude())){
-					Toast.makeText(mapActivity, getString(R.string.fav_points_edited), Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(mapActivity, getString(R.string.fav_points_edited), Toast.LENGTH_SHORT).show();
 				}
 				mapActivity.getMapView().refreshMap();
 			}
@@ -216,7 +217,7 @@ public class MapActivityActions implements DialogProvider {
 				if(OsmandApplication.getSettings().SHOW_CURRENT_GPX_TRACK.get()) {
 					getMyApplication().getFavorites().addFavoritePointToGPXFile(new FavouritePoint(latitude, longitude, name, ""));
 				}
-				Toast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_waypoint_dialog_added), name), Toast.LENGTH_SHORT)
+				AccessibleToast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_waypoint_dialog_added), name), Toast.LENGTH_SHORT)
 							.show();
 				dialog.dismiss();
 			}
@@ -241,12 +242,12 @@ public class MapActivityActions implements DialogProvider {
 				int zoom = args.getInt(KEY_ZOOM);
 				BaseMapLayer mainLayer = mapView.getMainLayer();
 				if(!(mainLayer instanceof MapTileLayer) || !((MapTileLayer) mainLayer).isVisible()){
-					Toast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
 					return;
 				}
 				final ITileSource mapSource = ((MapTileLayer) mainLayer).getMap();
 				if(mapSource == null || !mapSource.couldBeDownloadedFromInternet()){
-					Toast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
 					return;
 				}
 				Rect pixRect = new Rect(0, 0, mapView.getWidth(), mapView.getHeight());
@@ -283,16 +284,16 @@ public class MapActivityActions implements DialogProvider {
     
     protected void updatePoiDb(int zoom, double latitude, double longitude){
     	if(zoom < 15){
-    		Toast.makeText(mapActivity, getString(R.string.update_poi_is_not_available_for_zoom), Toast.LENGTH_SHORT).show();
+    		AccessibleToast.makeText(mapActivity, getString(R.string.update_poi_is_not_available_for_zoom), Toast.LENGTH_SHORT).show();
     		return;
     	}
     	final AmenityIndexRepositoryOdb repo = ((OsmandApplication) mapActivity.getApplication()).
     								getResourceManager().getUpdatablePoiDb();
     	if(repo == null){
-    		Toast.makeText(mapActivity, getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_LONG).show();
+    		AccessibleToast.makeText(mapActivity, getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_LONG).show();
     		return;
     	} else {
-    		Toast.makeText(mapActivity, getString(R.string.update_poi_does_not_change_indexes), Toast.LENGTH_LONG).show();
+    		AccessibleToast.makeText(mapActivity, getString(R.string.update_poi_does_not_change_indexes), Toast.LENGTH_LONG).show();
     	}
     	final OsmandMapTileView mapView = mapActivity.getMapView();
     	Rect pixRect = new Rect(-mapView.getWidth()/2, -mapView.getHeight()/2, 3*mapView.getWidth()/2, 3*mapView.getHeight()/2);
@@ -338,7 +339,7 @@ public class MapActivityActions implements DialogProvider {
     	mapActivity.runOnUiThread(new Runnable(){
 			@Override
 			public void run() {
-				Toast.makeText(mapActivity, msg, Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(mapActivity, msg, Toast.LENGTH_LONG).show();
 			}
     	});
     }
@@ -424,7 +425,7 @@ public class MapActivityActions implements DialogProvider {
     private boolean checkPointToNavigate(){
     	MapActivityLayers mapLayers = mapActivity.getMapLayers();
     	if(mapLayers.getNavigationLayer().getPointToNavigate() == null){
-			Toast.makeText(mapActivity, R.string.mark_final_location_first, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(mapActivity, R.string.mark_final_location_first, Toast.LENGTH_LONG).show();
 			return false;
 		}
     	return true;
@@ -702,7 +703,7 @@ public class MapActivityActions implements DialogProvider {
 		@Override
 		protected void onPostExecute(String result) {
 			if(result != null){
-				Toast.makeText(mapActivity, result, Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(mapActivity, result, Toast.LENGTH_LONG).show();
 			}
 		}
 		

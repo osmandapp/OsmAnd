@@ -27,7 +27,9 @@ public class MultiTouchSupport {
     	
     	public void onZooming(float distance, float relativeToStart);
     	
-    	public void onZoomEnded(float distance, float relativeToStart); 
+    	public void onZoomEnded(float distance, float relativeToStart);
+    	
+    	public void onGestureInit(float x1, float y1, float x2, float y2);
     	
     }
     
@@ -95,6 +97,7 @@ public class MultiTouchSupport {
 			previousZoom = distance / zoomStartedDistance;
 			if (actionCode == ACTION_POINTER_DOWN) {
 				centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
+				listener.onGestureInit(x1, y1, x2, y2);
 				listener.onZoomStarted(distance, centerPoint);
 				zoomStartedDistance = distance;
 				inZoomMode = true;

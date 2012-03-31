@@ -19,6 +19,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.OsmAndFormatter;
+import net.osmand.access.AccessibleToast;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.FavouritesDbHelper;
@@ -294,7 +295,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 				public void onClick(DialogInterface dialog, int which) {
 					boolean deleted = helper.deleteFavourite(point);
 					if (deleted) {
-						Toast.makeText(FavouritesActivity.this,
+						AccessibleToast.makeText(FavouritesActivity.this,
 								MessageFormat.format(resources.getString(R.string.favourites_remove_dialog_success), point.getName()),
 								Toast.LENGTH_SHORT).show();
 						favouritesAdapter.synchronizeGroups();
@@ -343,9 +344,9 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 		final File tosave = new File(appDir, FavouritesDbHelper.FILE_TO_SAVE);
 		if(item.getItemId() == EXPORT_ID){
 			if(favouritesAdapter.isEmpty()){
-				Toast.makeText(this, R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(this, R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
 			} else if(!appDir.exists()){
-				Toast.makeText(this, R.string.sd_dir_not_accessible, Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(this, R.string.sd_dir_not_accessible, Toast.LENGTH_LONG).show();
 			} else {
 				final AsyncTask<Void, Void, String> exportTask = new AsyncTask<Void, Void, String>(){
 					@Override
@@ -362,11 +363,11 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 					protected void onPostExecute(String warning) {
 						hideProgressBar();
 						if(warning == null){
-							Toast.makeText(
+							AccessibleToast.makeText(
 									FavouritesActivity.this,
 									MessageFormat.format(getString(R.string.fav_saved_sucessfully), tosave.getAbsolutePath()), Toast.LENGTH_LONG).show();
 						} else {
-							Toast.makeText(FavouritesActivity.this, warning, Toast.LENGTH_LONG).show();
+							AccessibleToast.makeText(FavouritesActivity.this, warning, Toast.LENGTH_LONG).show();
 						}
 					};
 				};
@@ -388,7 +389,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			}
 		} else if(item.getItemId() == IMPORT_ID){
 			if(!tosave.exists()){
-				Toast.makeText(this, MessageFormat.format(getString(R.string.fav_file_to_load_not_found), tosave.getAbsolutePath()), Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(this, MessageFormat.format(getString(R.string.fav_file_to_load_not_found), tosave.getAbsolutePath()), Toast.LENGTH_LONG).show();
 			} else {
 				new AsyncTask<Void, FavouritePoint, String>(){
 					@Override
@@ -440,9 +441,9 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 					protected void onPostExecute(String warning) {
 						hideProgressBar();
 						if(warning == null){
-							Toast.makeText(FavouritesActivity.this, R.string.fav_imported_sucessfully, Toast.LENGTH_SHORT).show();
+							AccessibleToast.makeText(FavouritesActivity.this, R.string.fav_imported_sucessfully, Toast.LENGTH_SHORT).show();
 						} else {
-							Toast.makeText(FavouritesActivity.this, warning, Toast.LENGTH_LONG).show();
+							AccessibleToast.makeText(FavouritesActivity.this, warning, Toast.LENGTH_LONG).show();
 						}
 						favouritesAdapter.synchronizeGroups();
 						favouritesAdapter.sort(new Comparator<FavouritePoint>(){

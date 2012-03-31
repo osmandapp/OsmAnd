@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.Version;
+import net.osmand.access.AccessibleToast;
+import net.osmand.access.RelativeDirectionStyle;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -18,7 +20,6 @@ import net.osmand.plus.activities.search.SearchHistoryHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.render.RenderingRulesStorage;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -408,11 +409,32 @@ public class OsmandSettings {
 	public final OsmandPreference<MetricsConstants> METRIC_SYSTEM = new EnumIntPreference<MetricsConstants>(
 			"default_metric_system", MetricsConstants.KILOMETERS_AND_METERS, true, true, MetricsConstants.values());
 
+	public String getId() {
+		return "direction_style";
+	};
+
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	// cache of metrics constants as they are used very often
+	public final OsmandPreference<RelativeDirectionStyle> DIRECTION_STYLE = new EnumIntPreference<RelativeDirectionStyle>(
+			"direction_style", RelativeDirectionStyle.SIDEWISE, true, true, RelativeDirectionStyle.values());
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_TRACKBALL_FOR_MOVEMENTS =
 		new BooleanPreference("use_trackball_for_movements", true, true);
 	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> ZOOM_BY_TRACKBALL =
+		new BooleanPreference("zoom_by_trackball", true, true);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> SCROLL_MAP_BY_GESTURES =
+		new BooleanPreference("scroll_map_by_gestures", true, true);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> USE_SHORT_OBJECT_NAMES =
+		new BooleanPreference("use_short_object_names", false, true);
+		
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_HIGH_RES_MAPS =
@@ -684,7 +706,7 @@ public class OsmandSettings {
 		} else if (dir.isDirectory() && !dir.getName().startsWith(".")) {
 			TileSourceTemplate t = TileSourceManager.createTileSourceTemplate(dir);
 			if (warnWhenSelected && !t.isRuleAcceptable()) {
-				Toast.makeText(ctx, ctx.getString(R.string.warning_tile_layer_not_downloadable, dir.getName()), Toast.LENGTH_SHORT).show();
+				AccessibleToast.makeText(ctx, ctx.getString(R.string.warning_tile_layer_not_downloadable, dir.getName()), Toast.LENGTH_SHORT).show();
 			}
 			if (!TileSourceManager.isTileSourceMetaInfoExist(dir)) {
 				TileSourceTemplate ret = checkAmongAvailableTileSources(dir, knownTemplates);

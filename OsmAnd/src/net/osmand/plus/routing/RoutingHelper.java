@@ -7,6 +7,7 @@ import java.util.List;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
+import net.osmand.access.AccessibleToast;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
@@ -626,7 +627,7 @@ public class RoutingHelper {
 		uiHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				Toast.makeText(context, msg, length).show();
+				AccessibleToast.makeText(context, msg, length).show();
 			}
 		});
 	}

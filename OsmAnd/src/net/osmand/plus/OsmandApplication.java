@@ -13,10 +13,10 @@ import java.util.Locale;
 import net.osmand.Algoritms;
 import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
-import net.osmand.LogUtil;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.plus.R;
+import net.osmand.LogUtil;
+import net.osmand.access.AccessibleToast;
 import net.osmand.plus.activities.DayNightHelper;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
@@ -27,7 +27,6 @@ import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.voice.CommandPlayerFactory;
 import net.osmand.render.RenderingRulesStorage;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -426,7 +425,7 @@ public class OsmandApplication extends Application {
 		uiHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				Toast.makeText(uiContext, b.toString(), Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(uiContext, b.toString(), Toast.LENGTH_LONG).show();
 			}
 		});
 	}

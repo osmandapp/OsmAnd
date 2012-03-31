@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.StringTokenizer;
 
 import net.osmand.OsmAndFormatter;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.PostCode;
@@ -105,7 +106,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 			@Override
 			public void run() {
 				if (places == null) {
-					Toast.makeText(GeoIntentActivity.this, getString(warning),
+					AccessibleToast.makeText(GeoIntentActivity.this, getString(warning),
 							Toast.LENGTH_LONG).show();
 				} else {
 					setListAdapter(new MapObjectAdapter(places));
@@ -325,7 +326,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 					runOnUiThread(new Runnable() {
 						@Override
 						public void run() {
-							Toast.makeText(GeoIntentActivity.this,
+							AccessibleToast.makeText(GeoIntentActivity.this,
 									getString(R.string.search_offline_geo_error, geo),
 									Toast.LENGTH_LONG);
 						}

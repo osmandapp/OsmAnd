@@ -8,6 +8,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import net.osmand.OsmAndFormatter;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapRenderingTypes;
@@ -123,7 +124,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if (helper.removePoiFilter(filter)) {
-						Toast.makeText(
+						AccessibleToast.makeText(
 								EditPOIFilterActivity.this,
 								MessageFormat.format(EditPOIFilterActivity.this.getText(R.string.edit_filter_delete_message).toString(),
 										filter.getName()), Toast.LENGTH_SHORT).show();
@@ -145,7 +146,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 				public void onClick(DialogInterface dialog, int which) {
 					PoiFilter nFilter = new PoiFilter(editText.getText().toString(), null, filter.getAcceptedTypes(), (OsmandApplication) getApplication());
 					if (helper.createPoiFilter(nFilter)) {
-						Toast.makeText(
+						AccessibleToast.makeText(
 								EditPOIFilterActivity.this,
 								MessageFormat.format(EditPOIFilterActivity.this.getText(R.string.edit_filter_create_message).toString(),
 										editText.getText().toString()), Toast.LENGTH_SHORT).show();

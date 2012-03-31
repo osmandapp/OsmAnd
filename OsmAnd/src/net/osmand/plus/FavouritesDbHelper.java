@@ -8,9 +8,9 @@ import java.util.Map;
 
 import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
-import net.osmand.LogUtil;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.LogUtil;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

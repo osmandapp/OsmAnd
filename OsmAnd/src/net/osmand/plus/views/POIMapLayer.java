@@ -7,6 +7,7 @@ import java.util.List;
 
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
@@ -20,16 +21,16 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PointF;
-import android.graphics.RectF;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
+import android.graphics.PointF;
+import android.graphics.RectF;
 import android.net.Uri;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
@@ -104,7 +105,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				}
 				buildPoiInformation(res, n);
 			}
-			Toast.makeText(view.getContext(), res.toString(), Toast.LENGTH_SHORT).show();
+			AccessibleToast.makeText(view.getContext(), res.toString(), Toast.LENGTH_SHORT).show();
 			return true;
 		}
 		return false;
@@ -335,7 +336,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 						view.getContext().startActivity(intent);
 					} catch (RuntimeException e) {
 						log.error("Failed to invoke call", e); //$NON-NLS-1$
-						Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+						AccessibleToast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
 					}
 				} else if (which == siteIndex) {
 					try {
@@ -344,7 +345,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 						view.getContext().startActivity(intent);
 					} catch (RuntimeException e) {
 						log.error("Failed to invoke call", e); //$NON-NLS-1$
-						Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+						AccessibleToast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
 					}
 				} else if (which == descriptionIndex) {
 					showDescriptionDialog(a);

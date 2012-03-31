@@ -2,12 +2,13 @@ package net.osmand.plus.views;
 
 import java.util.List;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.LatLon;
+import net.osmand.plus.R;
 import net.osmand.plus.TransportIndexRepository.RouteInfoLocation;
 import net.osmand.plus.activities.TransportRouteHelper;
-import net.osmand.plus.R;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -138,7 +139,7 @@ public class TransportInfoLayer extends OsmandMapLayer {
 						int x = view.getRotatedMapXForPoint(location.getLatitude(), location.getLongitude());
 						int y = view.getRotatedMapYForPoint(location.getLatitude(), location.getLongitude());
 						if (Math.abs(x - ex) < getRadius() * 3 /2 && Math.abs(y - ey) < getRadius() * 3 /2) {
-							Toast.makeText(view.getContext(), st.getName(view.getSettings().USE_ENGLISH_NAMES.get()) + " : " + //$NON-NLS-1$
+							AccessibleToast.makeText(view.getContext(), st.getName(view.getSettings().USE_ENGLISH_NAMES.get()) + " : " + //$NON-NLS-1$
 									route.getType() + " " + route.getRef() //$NON-NLS-1$
 							, Toast.LENGTH_LONG).show();
 							return true;

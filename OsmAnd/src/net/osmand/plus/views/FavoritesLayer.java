@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.FavouritePoint;
+import net.osmand.access.AccessibleToast;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.R;
@@ -117,7 +118,7 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 				}
 				res.append(view.getContext().getString(R.string.favorite) + " : " + fav.getName());  //$NON-NLS-1$
 			}
-			Toast.makeText(view.getContext(), res.toString(), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(view.getContext(), res.toString(), Toast.LENGTH_LONG).show();
 			return true;
 		}
 		return false;

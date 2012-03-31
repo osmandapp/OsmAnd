@@ -3,6 +3,7 @@ package net.osmand.plus.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
@@ -77,7 +78,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				}
 				res.append(getStopDescription(n, true));
 			}
-			Toast.makeText(view.getContext(), res.toString(), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(view.getContext(), res.toString(), Toast.LENGTH_LONG).show();
 			return true;
 		}
 		return false;

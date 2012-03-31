@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -106,7 +107,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 		}
 		if(operationId == DOWNLOAD_BUILDS_LIST){
 			if(e != null){
-				Toast.makeText(this, getString(R.string.loading_builds_failed) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(this, getString(R.string.loading_builds_failed) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
 				finish();
 			} else {
 				setListAdapter(new OsmandBuildsAdapter(downloadedBuilds));
@@ -131,7 +132,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 
 	private void updateInstalledApp(boolean showMessage, Date d) {
 		if (showMessage) {
-			Toast.makeText(
+			AccessibleToast.makeText(
 					this,
 					MessageFormat.format(getString(R.string.build_installed), currentSelectedBuild.tag, dateFormat
 							.format(currentSelectedBuild.date)), Toast.LENGTH_LONG).show();

@@ -216,12 +216,12 @@
 	<string name="voice_not_use">Не использовать</string>
 	<string name="voice_not_specified">Нету</string>
 	<string name="installing_new_resources">Распаковываются новые данные…</string>
-	<string name="internet_connection_required_for_online_route">Вы собираетесь использовать интернет роутинг, но у вас нет активного интернет соединения.</string>
+		<string name="internet_connection_required_for_online_route">Вы собираетесь использовать интернет маршрутизацию, но у вас нет активного интернет соединения.</string>
 	<string name="tts_language_not_supported_title">Язык не поддерживается</string>
-	<string name="tts_language_not_supported">Выбранный язык не поддерживается Android TTS (text-to-speech). Хотите найти в маркте другой TTS? Иначе язык TTS по умолчанию будет использован.</string>
+	<string name="tts_language_not_supported">Выбранный язык не поддерживается Android TTS (text-to-speech). Хотите найти в маркете другой TTS? Иначе язык TTS по умолчанию будет использован.</string>
 	<string name="tts_missing_language_data_title">Данные отсутсвуют</string>
-	<string name="tts_missing_language_data">Для данного языка отсутсвуют TTS данные. Вы хотите загрузить их из Маркета?</string>
-
+	<string name="tts_missing_language_data">Для данного языка отсутствуют TTS данные. Вы хотите загрузить их из Маркета?</string>
+	
 	<string name="gpx_option_reverse_route">Выбрать обратное направление пути</string>
 	<string name="gpx_option_destination_point">Использовать текущую точку назначения</string>
 	<string name="gpx_option_from_start_point">Пройти весь путь от начала</string>
@@ -259,11 +259,11 @@
 	<string name="tip_osm_improve">Улучшить Openstreetmap</string>
 	<string name="tip_osm_improve_t">OsmAnd использует данные Openstreetmap.org data и имеет возможности улучшения этих данных. Вы можете добавить POI или сообщить о неточности на карте !
 \nПрежде всего необходимо ввести свои инициалы  \'Меню\'->\'Настройки\'->\'OSM\'.
-\n\tДля добавления POI используйет \'Добавить POI\' в контекстном меню карты.
+\n\tДля добавления POI используйте \'Добавить POI\' в контекстном меню карты.
 \n\tЕсли вы нашли неточность на карте, вы можете сообщить об этом Openstreetmap сообществу.
 \n\tНе забывайте, что для этих функций вам понадобится интернет!</string>
 	<string name="create_poi_link_to_osm_doc"><u>Интернет OSM</u> классификация</string>
-	<string name="error_doing_search">Ошибка offline поиска</string>
+	<string name="error_doing_search">Ошибка автономного поиска</string>
     <string name="search_offline_geo_error">Невозможно разобрать запрос : \'%s\'</string>
 	<string name="search_osm_offline">Поиск адреса используя offline карты</string>
 	<string name="system_locale">Системная</string>
@@ -272,7 +272,7 @@
 	<string name="tip_map_switch">Источник карты</string>
 	<string name="tip_map_switch_t">Наиболее быстрый способ изменить источник карты и слои \'Меню\'->\'Слои\'.
 \n\tПод \'Карта источник…\' вы можете выбрать из предопределенных типов или собственных, созданных OsmAndMapCreator на PC.
-\n\tOsmAnd поддерживает custom источники.</string>
+\n\tOsmAnd поддерживает пользовательские источники.</string>
 	<string name="tip_app_mode">Режим работы</string>
 	<string name="tip_app_mode_t">OsmAnd поддерживает различные типовые режимы отображения карты.
 \n\tВы можете изменить режим в \'Меню\'->\'Настройки\'->\'Режим работы\', при этом меняется большинство настроек карты.</string>
@@ -349,9 +349,9 @@
 	<string name="version_index_is_not_supported">Версия индекса \'\'{0}\'\' не поддерживается</string>
 	
 	
-	<string name="use_osmand_routing_service">OsmAnd offline навигация >20км</string>
+	<string name="use_osmand_routing_service">Автономная навигация OsmAnd >20км</string>
 	<string name="use_osmand_routing_service_descr">Использовать offline навигацию на длинные расстояние (экспериментально)</string>
-	<string name="osmand_routing_experimental">OsmAnd offline навигация является экспериментальной и не работает на расстояния более 20 километров.\n\nВ этом случае автоматически переключается на CloudMade.</string>
+	<string name="osmand_routing_experimental">Автономная навигация OsmAnd является экспериментальной и не работает на расстояния более 20 километров.\n\nВ этом случае автоматически переключается на CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Невозможно найти указанную директорию.</string>
 	<string name="application_dir">Директория приложения</string>
 	<string name="application_dir_change_warning">Изменение директории не переносит файлы автоматически. Вы должны это сделать самостоятельно. Продолжить?</string>
@@ -785,4 +785,57 @@
 	<string name="edit_filter_delete_message">Фильтр {0} удален</string>
 	<string name="edit_filter_create_message">Фильтр {0} создан</string>
 	<string name="default_buttons_selectall">Выделить все</string>
+	
+	<string name="backToMenu">Главное меню</string>
+	<string name="zoomOut">Уменьшить масштаб</string>
+	<string name="zoomIn">Увеличить масштаб</string>
+	<string name="zoomIs">Масштаб</string>
+
+	<string name="show_details">Подробности</string>
+	<string name="help">Помощь</string>
+	<string name="back_to_location">Вернуться</string>
+	<string name="north">север</string>
+	<string name="north_north_east">северо-северо-восток</string>
+	<string name="north_east">северо-восток</string>
+	<string name="east_north_east">восток-северо-восток</string>
+	<string name="east">восток</string>
+	<string name="east_south_east">восток-юго-восток</string>
+	<string name="south_east">юго-восток</string>
+	<string name="south_south_east">юго-юго-восток</string>
+	<string name="south">юг</string>
+	<string name="south_south_west">юго-юго-запад</string>
+	<string name="south_west">юго-запад</string>
+	<string name="west_south_west">запад-юго-запад</string>
+	<string name="west">запад</string>
+	<string name="west_north_west">запад-северо-запад</string>
+	<string name="north_west">северо-запад</string>
+	<string name="north_north_west">северо-северо-запад</string>
+	<string name="front">Вперед</string>
+	<string name="front_right">Направо вперед</string>
+	<string name="right">Направо</string>
+	<string name="back_right">Направо назад</string>
+	<string name="back">Назад</string>
+	<string name="back_left">Налево назад</string>
+	<string name="left">Налево</string>
+	<string name="front_left">Налево вперед</string>
+	<string name="oclock">ч.</string>
+	<string name="towards">на</string>
+	<string name="accuracy">Точность</string>
+	<string name="altitude">Высота</string>
+	<string name="no_info">Нет информации</string>
+	<string name="direction_style_sidewise">По сторонам (8 секторов)</string>
+	<string name="direction_style_clockwise">По циферблату (12 секторов)</string>
+	<string name="settings_direction_style">Стиль указания направлений</string>
+	<string name="settings_direction_style_descr">Выберите стиль указания относительных направлений во время движения</string>
+	<string name="auto_announce_on">Включить автооповещение</string>
+	<string name="auto_announce_off">Выключить автооповещение</string>
+	<string name="scroll_map_by_gestures_descr">Перемещать карту посредством жестов на сенсорном экране</string>
+	<string name="scroll_map_by_gestures">Естественное управление картой</string>
+	<string name="i_am_here">Я здесь</string>
+	<string name="zoom_by_trackball_descr">Менять масштаб карты горизонтальными движениями трекбола</string>
+	<string name="zoom_by_trackball">Использовать трекбол для изменения масштаба</string>
+	<string name="use_short_object_names_descr">Использовать краткие названия объектов при исследовании карты</string>
+	<string name="use_short_object_names">Использовать краткие названия объектов</string>
+	<string name="accessibility_preferences_descr">Настройки для невизуального доступа</string>
+	<string name="accessibility_preferences">Специальные возможности</string>
 </resources>

@@ -23,6 +23,7 @@ import java.util.Set;
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
+import net.osmand.access.AccessibleToast;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -32,9 +33,9 @@ import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.MultyPolygon;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.render.NativeOsmandLibrary.NativeSearchResult;
@@ -581,7 +582,7 @@ public class MapRenderRepositories {
 				handler.post(new Runnable() {
 					@Override
 					public void run() {
-						Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+						AccessibleToast.makeText(context, msg, Toast.LENGTH_LONG).show();
 					}
 				});
 			}
@@ -590,7 +591,7 @@ public class MapRenderRepositories {
 			handler.post(new Runnable() {
 				@Override
 				public void run() {
-					Toast.makeText(context, R.string.rendering_exception, Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(context, R.string.rendering_exception, Toast.LENGTH_SHORT).show();
 				}
 			});
 		} catch (OutOfMemoryError e) {
@@ -600,7 +601,7 @@ public class MapRenderRepositories {
 			handler.post(new Runnable() {
 				@Override
 				public void run() {
-					Toast.makeText(context, R.string.rendering_out_of_memory, Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(context, R.string.rendering_out_of_memory, Toast.LENGTH_SHORT).show();
 				}
 			});
 		} finally {

@@ -12,15 +12,17 @@ import java.util.Set;
 
 import net.osmand.ResultMatcher;
 import net.osmand.Version;
+import net.osmand.access.AccessibleToast;
+import net.osmand.access.RelativeDirectionStyle;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.NavigationService;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.DayNightMode;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -50,10 +52,10 @@ import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceCategory;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
@@ -172,7 +174,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		osmandSettings = OsmandApplication.getSettings();
 		
 		registerBooleanPreference(osmandSettings.SHOW_VIEW_ANGLE,screen); 
-		registerBooleanPreference(osmandSettings.USE_TRACKBALL_FOR_MOVEMENTS,screen); 
+		registerBooleanPreference(osmandSettings.USE_TRACKBALL_FOR_MOVEMENTS,screen);
+		registerBooleanPreference(osmandSettings.ZOOM_BY_TRACKBALL,screen); 
+		registerBooleanPreference(osmandSettings.SCROLL_MAP_BY_GESTURES,screen); 
+		registerBooleanPreference(osmandSettings.USE_SHORT_OBJECT_NAMES,screen);
 		registerBooleanPreference(osmandSettings.USE_HIGH_RES_MAPS,screen); 
 		registerBooleanPreference(osmandSettings.USE_ENGLISH_NAMES,screen); 
 		registerBooleanPreference(osmandSettings.AUTO_ZOOM_MAP,screen); 
@@ -270,6 +275,14 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			entries[i] = (int) (floatValues[i] * 100) +" %";
 		}
 		registerListPreference(osmandSettings.MAP_TEXT_SIZE, screen, entries, floatValues);
+		
+		entries = new String[RelativeDirectionStyle.values().length];
+		for(int i=0; i<entries.length; i++){
+			entries[i] = RelativeDirectionStyle.toHumanString(RelativeDirectionStyle.values()[i], this);
+		}
+		registerListPreference(osmandSettings.DIRECTION_STYLE, screen, entries, RelativeDirectionStyle.values());
+		
+
 		
 		startZoom = 1;
 		endZoom = 18;
@@ -565,7 +578,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			if (boolPref.getId().equals(osmandSettings.MAP_VECTOR_DATA.getId())) {
 				MapRenderRepositories r = ((OsmandApplication)getApplication()).getResourceManager().getRenderer();
 				if(r.isEmpty()){
-					Toast.makeText(this, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(this, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
 					return false;
 				}
 			}
@@ -613,9 +626,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			}
 			if (listPref.getId().equals(osmandSettings.RENDERER.getId())) {
 				if(changed){
-					Toast.makeText(this, R.string.renderer_load_sucess, Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(this, R.string.renderer_load_sucess, Toast.LENGTH_SHORT).show();
 				} else {
-					Toast.makeText(this, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(this, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 				}
 				createCustomRenderingProperties(true);
 			}
@@ -675,7 +688,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		File path = new File(newDir);
 		path.mkdirs();
 		if(!path.canRead() || !path.exists()){
-			Toast.makeText(this, R.string.specified_dir_doesnt_exist, Toast.LENGTH_LONG).show()	;
+			AccessibleToast.makeText(this, R.string.specified_dir_doesnt_exist, Toast.LENGTH_LONG).show()	;
 			return;
 		}
 		
@@ -735,7 +748,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				protected void onPostExecute(Void result) {
 					progressDlg.dismiss();
 					if (!NativeOsmandLibrary.isNativeSupported(storage)) {
-						Toast.makeText(SettingsActivity.this, R.string.native_library_not_supported, Toast.LENGTH_LONG).show();
+						AccessibleToast.makeText(SettingsActivity.this, R.string.native_library_not_supported, Toast.LENGTH_LONG).show();
 					}
 				};
 			}.execute();
@@ -769,7 +782,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-					Toast.makeText(SettingsActivity.this, b.toString(), Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(SettingsActivity.this, b.toString(), Toast.LENGTH_LONG).show();
 
 				}
 			});
@@ -834,12 +847,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		final OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
 		final Map<String, String> entriesMap = settings.getTileSourceEntries();
 		if(!settings.isInternetConnectionAvailable(true)){
-			Toast.makeText(activity, R.string.internet_not_available, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(activity, R.string.internet_not_available, Toast.LENGTH_LONG).show();
 			return;
 		}
 		final List<TileSourceTemplate> downloaded = TileSourceManager.downloadTileSourceTemplates(Version.getVersionAsURLParam(activity));
 		if(downloaded == null || downloaded.isEmpty()){
-			Toast.makeText(activity, R.string.error_io_error, Toast.LENGTH_SHORT).show();
+			AccessibleToast.makeText(activity, R.string.error_io_error, Toast.LENGTH_SHORT).show();
 			return;
 		}
 		Builder builder = new AlertDialog.Builder(activity);
@@ -854,7 +867,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 				selected[which] = isChecked;
 				if(entriesMap.containsKey(downloaded.get(which).getName()) && isChecked){
-					Toast.makeText(activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
 				}
 			}
 		});

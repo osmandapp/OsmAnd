@@ -4,8 +4,8 @@ import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.MapUtils;
-import net.osmand.plus.R;
 import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import android.content.Context;
@@ -20,9 +20,9 @@ import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -258,7 +258,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private void initZoomButtons(final OsmandMapTileView view, FrameLayout parent) {
 		int minimumWidth = view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumWidth();
 		
-		ImageView bottomShadow = new ImageView(view.getContext());
+		Context ctx = view.getContext();
+		ImageView bottomShadow = new ImageView(ctx);
 		bottomShadow.setBackgroundResource(R.drawable.bottom_shadow);
 		android.widget.FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT,
 					Gravity.BOTTOM);
@@ -272,20 +273,22 @@ public class MapControlsLayer extends OsmandMapLayer {
 		
 		zoomShadow = view.getResources().getDrawable(R.drawable.zoom_background);
 		
-		zoomInButton = new Button(view.getContext());
+		zoomInButton = new Button(ctx);
 		zoomInButton.setBackgroundResource(R.drawable.map_zoom_in);
 		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 					Gravity.BOTTOM | Gravity.RIGHT);
 		params.setMargins(0, 0, 0, 0);
+		zoomInButton.setContentDescription(ctx.getString(R.string.zoomIn));
 		parent.addView(zoomInButton, params);
 		
 		
-		zoomOutButton = new Button(view.getContext());
+		zoomOutButton = new Button(ctx);
 		zoomOutButton.setBackgroundResource(R.drawable.map_zoom_out);
 		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 					Gravity.BOTTOM | Gravity.RIGHT);
 		
 		params.setMargins(0, 0, minimumWidth , 0);
+		zoomOutButton.setContentDescription(ctx.getString(R.string.zoomOut));
 		parent.addView(zoomOutButton, params);
 		
 		zoomInButton.setOnClickListener(new View.OnClickListener() {

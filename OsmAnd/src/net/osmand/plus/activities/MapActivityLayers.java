@@ -18,12 +18,13 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.OsmAndFormatter;
 import net.osmand.ResultMatcher;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.AmenityType;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;
@@ -216,7 +217,7 @@ public class MapActivityLayers {
 		ResourceManager rm = app.getResourceManager();
 		if(vectorData && !app.isApplicationInitializing()){
 			if(rm.getRenderer().isEmpty()){
-				Toast.makeText(activity, activity.getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(activity, activity.getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
 				vectorData = false;
 			}
 		}
@@ -424,7 +425,7 @@ public class MapActivityLayers {
 				GPXFile toShow = result;
 				if (toShow == null) {
 					if(!settings.SAVE_TRACK_TO_GPX.get()){
-						Toast.makeText(activity, R.string.gpx_monitoring_disabled_warn, Toast.LENGTH_SHORT).show();
+						AccessibleToast.makeText(activity, R.string.gpx_monitoring_disabled_warn, Toast.LENGTH_SHORT).show();
 						return true;
 					}
 					Map<String, GPXFile> data = activity.getSavingTrackHelper().collectRecordedData();
@@ -488,7 +489,7 @@ public class MapActivityLayers {
 		}
 		
 		if(list.isEmpty()){
-			Toast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
 		}
 		if(!list.isEmpty() || showCurrentGpx){
 			Builder builder = new AlertDialog.Builder(activity);
@@ -515,7 +516,7 @@ public class MapActivityLayers {
 									@Override
 									public void run() {
 										if (res.warning != null) {
-											Toast.makeText(activity, res.warning, Toast.LENGTH_LONG).show();
+											AccessibleToast.makeText(activity, res.warning, Toast.LENGTH_LONG).show();
 										} else {
 											callbackWithObject.processResult(res);
 										}
@@ -631,7 +632,7 @@ public class MapActivityLayers {
 				if (layerKey.equals(layerOsmVector)) {
 					MapRenderRepositories r = ((OsmandApplication) getApplication()).getResourceManager().getRenderer();
 					if (r.isEmpty()) {
-						Toast.makeText(activity, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
+						AccessibleToast.makeText(activity, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
 						return;
 					} else {
 						settings.MAP_VECTOR_DATA.set(true);

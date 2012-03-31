@@ -11,6 +11,7 @@ import net.osmand.OpenstreetmapLocalUtil;
 import net.osmand.OpenstreetmapRemoteUtil;
 import net.osmand.OpenstreetmapUtil;
 import net.osmand.OsmAndFormatter;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.EntityInfo;
@@ -86,7 +87,7 @@ public class EditingPOIActivity implements DialogProvider {
 		if(n != null){
 			showPOIDialog(DIALOG_EDIT_POI, n, editA.getType(), editA.getSubType());
 		} else {
-			Toast.makeText(ctx, ctx.getString(R.string.poi_error_poi_not_found), Toast.LENGTH_SHORT).show();
+			AccessibleToast.makeText(ctx, ctx.getString(R.string.poi_error_poi_not_found), Toast.LENGTH_SHORT).show();
 		}
 	}
 	
@@ -106,7 +107,7 @@ public class EditingPOIActivity implements DialogProvider {
 	public void showDeleteDialog(Amenity a){
 		final Node n = openstreetmapUtil.loadNode(a);
 		if(n == null){
-			Toast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
 			return;
 		}
 		dialogBundle.putSerializable(KEY_AMENITY, a);
@@ -135,7 +136,7 @@ public class EditingPOIActivity implements DialogProvider {
 				commitNode(OpenstreetmapUtil.Action.DELETE, n, openstreetmapUtil.getEntityInfo(), c, new Runnable(){
 					@Override
 					public void run() {
-						Toast.makeText(ctx, ctx.getResources().getString(R.string.poi_remove_success), Toast.LENGTH_LONG).show();
+						AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.poi_remove_success), Toast.LENGTH_LONG).show();
 						if(ctx.getMapView() != null){
 							ctx.getMapView().refreshMap();
 						}						
@@ -279,7 +280,7 @@ public class EditingPOIActivity implements DialogProvider {
 				commitNode(action, n, openstreetmapUtil.getEntityInfo(), commentText.getText().toString(), new Runnable() {
 					@Override
 					public void run() {
-						Toast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_action_succeded_template), msg),
+						AccessibleToast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_action_succeded_template), msg),
 								Toast.LENGTH_LONG).show();
 						if (ctx.getMapView() != null) {
 							ctx.getMapView().refreshMap();
@@ -322,7 +323,7 @@ public class EditingPOIActivity implements DialogProvider {
 	private Dialog createOpenHoursDlg(){
 		List<OpeningHoursRule> time = OpeningHoursParser.parseOpenedHours(openingHours.getText().toString());
 		if(time == null){
-			Toast.makeText(ctx, ctx.getString(R.string.opening_hours_not_supported), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(ctx, ctx.getString(R.string.opening_hours_not_supported), Toast.LENGTH_LONG).show();
 			return null;
 		}
 		
@@ -367,10 +368,10 @@ public class EditingPOIActivity implements DialogProvider {
 			@Override
 			public void run() {
 				if (repo == null) {
-					Toast.makeText(app, app.getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(app, app.getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_LONG).show();
 					return;
 				} else {
-					Toast.makeText(app, app.getString(R.string.update_poi_does_not_change_indexes), Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(app, app.getString(R.string.update_poi_does_not_change_indexes), Toast.LENGTH_LONG).show();
 				}
 			}
 		});
@@ -394,7 +395,7 @@ public class EditingPOIActivity implements DialogProvider {
 	
 	public void commitNode(final OpenstreetmapUtil.Action action, final Node n, final EntityInfo info, final String comment, final Runnable successAction) {
 		if (info == null && OpenstreetmapUtil.Action.CREATE != action) {
-			Toast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();
 			return;
 		}
 		final ProgressDialog progress = ProgressDialog.show(ctx, ctx.getString(R.string.uploading), ctx.getString(R.string.uploading_data));

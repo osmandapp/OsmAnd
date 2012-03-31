@@ -51,6 +51,7 @@ public class CustomTitleBar {
 
 	protected void initBackButton() {
 		Button backButton = (Button) activity.findViewById(R.id.back_button);
+		backButton.setContentDescription(activity.getString(R.string.close));
 		backButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

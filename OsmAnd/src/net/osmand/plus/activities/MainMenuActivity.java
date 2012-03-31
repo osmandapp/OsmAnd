@@ -4,8 +4,6 @@ import java.io.File;
 import java.text.MessageFormat;
 import java.util.Random;
 
-import com.google.android.apps.analytics.easytracking.TrackedActivity;
-
 import net.osmand.Version;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -14,9 +12,9 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.render.MapRenderRepositories;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,12 +30,14 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
+
+import com.google.android.apps.analytics.easytracking.TrackedActivity;
 
 public class MainMenuActivity extends TrackedActivity {
 

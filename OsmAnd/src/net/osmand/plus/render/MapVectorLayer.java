@@ -1,5 +1,6 @@
 package net.osmand.plus.render;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -107,7 +108,7 @@ public class MapVectorLayer extends BaseMapLayer {
 					// Arguments : 1. Map request to read data slows whole process // 2. It works in operating memory
 					if (warningToSwitchMapShown < 3) {
 						if (!resourceManager.getRenderer().containsLatLonMapData(view.getLatitude(), view.getLongitude(), view.getZoom())) {
-							Toast.makeText(view.getContext(), R.string.switch_to_raster_map_to_see, Toast.LENGTH_LONG).show();
+							AccessibleToast.makeText(view.getContext(), R.string.switch_to_raster_map_to_see, Toast.LENGTH_LONG).show();
 							warningToSwitchMapShown++;
 						}
 					}

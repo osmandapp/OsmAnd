@@ -27,6 +27,7 @@ import java.util.TreeSet;
 
 import net.osmand.IProgress;
 import net.osmand.Version;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.DownloadOsmandIndexesHelper;
 import net.osmand.plus.DownloadOsmandIndexesHelper.IndexItem;
@@ -234,7 +235,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 						entriesToDownload.put(es.getFileName(), createDownloadEntry(es));
 					}
 				}
-				Toast.makeText(this, MessageFormat.format(getString(R.string.items_were_selected), selected), Toast.LENGTH_SHORT).show();
+				AccessibleToast.makeText(this, MessageFormat.format(getString(R.string.items_were_selected), selected), Toast.LENGTH_SHORT).show();
 				listAdapter.notifyDataSetInvalidated();
 				if(selected > 0){
 					findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
@@ -291,7 +292,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 								uiActivity.showDialog(DownloadIndexActivity.DIALOG_MAP_VERSION_UPDATE);
 							}
 						} else {
-							Toast.makeText(uiActivity, R.string.list_index_files_was_not_loaded, Toast.LENGTH_LONG).show();
+							AccessibleToast.makeText(uiActivity, R.string.list_index_files_was_not_loaded, Toast.LENGTH_LONG).show();
 						}
 					}
 				});
@@ -521,7 +522,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		}
 		final DownloadEntry entry;
 		if(parent == null || !parent.exists()){
-			Toast.makeText(DownloadIndexActivity.this, getString(R.string.sd_dir_not_accessible), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(DownloadIndexActivity.this, getString(R.string.sd_dir_not_accessible), Toast.LENGTH_LONG).show();
 			entry = null;
 		} else {
 			entry = new DownloadEntry();
@@ -586,7 +587,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			asz = (((long) fs.getAvailableBlocks()) * fs.getBlockSize()) / (1 << 20);
 		}
 		if(asz != -1 && asz < sz ){
-			Toast.makeText(this, getString(R.string.download_files_not_enough_space, sz, asz), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(this, getString(R.string.download_files_not_enough_space, sz, asz), Toast.LENGTH_LONG).show();
 		} else {
 			Builder builder = new AlertDialog.Builder(this);
 			if (asz > 0 && sz/asz > 0.8) {
@@ -653,7 +654,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 					findViewById(R.id.DownloadButton).setVisibility(
 							entriesToDownload.isEmpty() ? View.GONE : View.VISIBLE);
 				} else if(o instanceof String) {
-					Toast.makeText(DownloadIndexActivity.this, (String) o, Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(DownloadIndexActivity.this, (String) o, Toast.LENGTH_LONG).show();
 				}
 			}
 			super.onProgressUpdate(values);
@@ -672,7 +673,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		@Override
 		protected void onPostExecute(String result) {
 			if(result != null){
-				Toast.makeText(DownloadIndexActivity.this, result, Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(DownloadIndexActivity.this, result, Toast.LENGTH_LONG).show();
 			}
 			View mainView = findViewById(R.id.MainLayout);
 			if(mainView != null){
