@@ -68,7 +68,7 @@
 <!-- this block re-worked for new Preferences structure -->
 	<string name="profile_settings">Profile Specific Settings</string>
 	<string name="settings_preset">User Profile</string>
-	<string name="settings_preset_descr">Select a use profile. (Each profiles\'s Map, Tracking, and Navigation settings can be customized below.)</string>
+	<string name="settings_preset_descr">Select a user profile. Each profile contains specific settings, which can be customized below.</string>
 	<string name="rendering_settings">- Map configuration</string>
 	<string name="rendering_settings_descr">Configure maps and map sources</string>
 	<string name="appearance_settings">- Map appearance</string>
@@ -76,21 +76,22 @@
 	<string name="monitor_preferences">- Tracking</string>
 	<string name="monitor_preferences_descr">Specify tracking settings</string>
 	<string name="routing_settings">- Navigation</string>
-	<string name="routing_settings_descr">Specify routing options</string>
+	<string name="routing_settings_descr">Specify navigation options</string>
 	<string name="global_settings">Global Settings</string>
 	<string name="index_settings">Offline Data</string>
-	<string name="index_settings_descr">Download and manage offline maps and other data like GPX tracks</string>
+	<string name="index_settings_descr">Download and manage offline maps and other data such as GPX tracks</string>
 	<string name="general_settings">General Settings</string>
-	<string name="general_settings_descr">Configure display and other global settings</string>
+	<string name="general_settings_descr">Configure global settings</string>
 	<string name="global_app_settings">Global app settings</string>
 	<string name="user_name">Your OSM user name</string>
 	<string name="user_name_descr">Needed for openstreetmap.org submissions</string>
 	<string name="user_password">Your OSM password</string>
 	<string name="user_password_descr">Needed for openstreetmap.org submissions</string>
-	<string name="osmand_service">Background Service</string>
+	<string name="osmand_service">Background settings</string>
 	<string name="osmand_service_descr">Use to run OsmAnd while screen is off</string>
 
-	<string name="tip_rotation_switching">Map Rotation</string>
+	 
+	<string name="tip_rotation_switching">Map Orientation</string>
 	<string name="tip_rotation_switching_t">\tYou can choose whether and how the map display is rotated in \'Settings\' -> \'Map appearance\' -> \'Map rotation\'.
 	\n\tThe choices are:
 	\n\t\'Don\'t rotate\' - Map will not be rotated. North will be always up
@@ -335,7 +336,7 @@
 	\n\t\'Green\' - indicates data files identical on device and server
 	\n\t\'Blue\' - indicates available updates on server</string>
 
-	<string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector rendering instead of map tiles</string>
+	<string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector maps</string>
 	<string name="level_to_switch_vector_raster">Min. vector zoom level</string>
 
 	<string name="tip_location_sharing">Location Sharing</string>
@@ -492,7 +493,7 @@
 	<string name="renderer_load_sucess">Renderer sucessfully loaded</string>
 	<string name="renderer_load_exception">Exception occured: renderer was not loaded</string>
 	<string name="renderers">Vector renderer</string>
-	<string name="renderers_descr">Choose (offline) vector map appearance</string>
+	<string name="renderers_descr">Choose rendering appearance</string>
 
 	<string name="poi_context_menu_website">Show POI website</string>
 	<string name="poi_context_menu_call">Show POI phone</string>
@@ -527,8 +528,8 @@
 	<string name="rotate_map_compass_opt">To compass</string>
 	<string name="rotate_map_bearing_opt">To direction of movement</string>
     <string name="rotate_map_none_opt">Don\'t rotate</string>
-	<string name="rotate_map_to_bearing_descr">Select how to rotate map</string>
-    <string name="rotate_map_to_bearing">Map rotation</string>
+	<string name="rotate_map_to_bearing_descr">Select how map is oriented</string>
+    <string name="rotate_map_to_bearing">Map orientation</string>
 	<string name="show_route">Route details</string>
 	<string name="fav_imported_sucessfully">Favorites succesfully imported</string>
 	<string name="fav_file_to_load_not_found">GPX file containing favorites is not found at {0}</string>
@@ -566,12 +567,12 @@
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">seconds</string>
 	<string name="int_min">min.</string>
-	<string name="background_service_int_descr">Set wake-up interval used by background service</string>
-	<string name="background_service_int">Positioning interval</string>
-	<string name="background_service_provider_descr">Choose location provider for background service</string>
+	<string name="background_service_int_descr">Set wake-up interval used by background </string>
+	<string name="background_service_int">Wake-up interval</string>
+	<string name="background_service_provider_descr">Choose location provider while running in background mode</string>
 	<string name="background_service_provider">Location provider</string>
-	<string name="background_router_service_descr">Enable background service to track position over long time periods</string>
-	<string name="background_router_service">Use background service</string>
+	<string name="background_router_service_descr">Runs OsmAnd in the background to track your location while screen is off</string>
+	<string name="background_router_service">Run in the background</string>
 	<string name="off_router_service_no_gps_available">The background routing service requires a location source to be turned on.</string>
 	<string name="hide_poi_filter">Hide filter</string>
 	<string name="show_poi_filter">Show filter</string>
@@ -605,7 +606,7 @@
 	<string name="map_orientation_default">Same as device</string>
 	<string name="map_orientation_portrait">Portrait</string>
 	<string name="map_orientation_landscape">Landscape</string>
-	<string name="map_screen_orientation">Map screen orientation</string>
+	<string name="map_screen_orientation">Screen orientation</string>
 	<string name="map_screen_orientation_descr">Choose screen orientation</string>
 	<string name="opening_hours_not_supported">Opening hours format is not supported for editing</string>
 	<string name="add_new_rule">Add new rule</string>

@@ -21,9 +21,9 @@
 		</PreferenceCategory>
 		<PreferenceCategory android:title="@string/pref_overlay">
 			<ListPreference android:title="@string/map_overlay" android:summary="@string/map_overlay_descr" android:key="map_overlay"></ListPreference>
+			<ListPreference android:title="@string/map_underlay" android:summary="@string/map_underlay_descr" android:key="map_underlay"></ListPreference>
 			<net.osmand.plus.views.SeekBarPreference android:key="overlay_transparency" android:defaultValue="0" android:max="255" 
 				android:dialogMessage="@string/modify_transparency" android:title="@string/overlay_transparency" android:summary="@string/overlay_transparency_descr"/>
-			<ListPreference android:title="@string/map_underlay" android:summary="@string/map_underlay_descr" android:key="map_underlay"></ListPreference>
 			<net.osmand.plus.views.SeekBarPreference android:key="map_transparency" android:defaultValue="0" android:max="255" 
 				android:dialogMessage="@string/modify_transparency" android:title="@string/map_transparency" android:summary="@string/map_transparency_descr"/>
 		</PreferenceCategory>
