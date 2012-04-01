@@ -381,11 +381,15 @@ public class OsmandSettings {
 
 		@Override
 		protected E getValue(SharedPreferences prefs, E defaultValue) {
-			int i = prefs.getInt(getId(), -1);
-			if(i < 0 || i >= values.length){
-				return defaultValue;
+			try {
+				int i = prefs.getInt(getId(), -1);
+				if(i >= 0 && i < values.length){
+					return values[i];
+				}
+			} catch (ClassCastException ex) {
+				setValue(prefs, defaultValue);
 			}
-			return values[i];
+			return defaultValue;
 		}
 		
 		@Override
