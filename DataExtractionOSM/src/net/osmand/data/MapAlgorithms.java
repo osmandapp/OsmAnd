@@ -173,12 +173,12 @@ public class MapAlgorithms {
 		}
 
 		// calculate middle Y
-		int mask = 0xffffffff;
+		long mask = 0xffffffffl;
 		long middleY = 0;
 		for (int i = 0; i < c.size(); i++) {
-			middleY += (c.get(i) & mask);
+			middleY =  middleY +  (long)(c.get(i) & mask);
 		}
-		middleY /= (long) c.size();
+		middleY = middleY /(long) c.size();
 
 		double clockwiseSum = 0;
 
@@ -211,9 +211,9 @@ public class MapAlgorithms {
 					}
 				}
 				previousX = rX;
-				prevX = x;
-				prevY = y;
 			}
+			prevX = x;
+			prevY = y;
 		}
 		if (firstX != Integer.MIN_VALUE) {
 			boolean clockwise = (!firstDirectionUp) == (previousX < firstX);
@@ -262,8 +262,8 @@ public class MapAlgorithms {
 		// prev node above line
 		// x,y node below line
 		if (prevY > y) {
-			int tx = prevX;
-			int ty = prevY;
+			int tx = x;
+			int ty = y;
 			x = prevX;
 			y = prevY;
 			prevX = tx;

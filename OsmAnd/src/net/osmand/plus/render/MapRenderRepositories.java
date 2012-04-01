@@ -624,8 +624,8 @@ public class MapRenderRepositories {
 	}
 
 	/// MULTI POLYGONS (coastline)
-	private List<BinaryMapDataObject> processCoastlines(List<BinaryMapDataObject> coastLines, int leftX, int rightX, int bottomY, int topY, 
- int zoom) {
+	private List<BinaryMapDataObject> processCoastlines(List<BinaryMapDataObject> coastLines, int leftX, int rightX, 
+			int bottomY, int topY, int zoom) {
 		List<TLongList> completedRings = new ArrayList<TLongList>();
 		List<TLongList> uncompletedRings = new ArrayList<TLongList>();
 		List<BinaryMapDataObject> result = new ArrayList<BinaryMapDataObject>(coastLines.size());
@@ -670,7 +670,7 @@ public class MapRenderRepositories {
 			unifyIncompletedRings(uncompletedRings, completedRings, leftX, rightX, bottomY, topY, dbId, zoom);
 		}
 		boolean clockwiseFound = false;
-		int mask = 0xffffffff;
+		long mask = 0xffffffffl;
 		for (int i = 0; i < completedRings.size(); i++) {
 			TLongList ring = completedRings.get(i);
 			int[] coordinates = new int[ring.size() * 2];
@@ -699,7 +699,7 @@ public class MapRenderRepositories {
 			o.setMapIndex(mapIndex);
 			result.add(o);
 		}
-		if (!clockwiseFound) {
+		if (!clockwiseFound && uncompletedRings.size() == 0) {
 			// add complete water tile
 			BinaryMapDataObject o = new BinaryMapDataObject(new int[] { leftX, topY, rightX, topY, rightX, bottomY, leftX, bottomY, leftX,
 					topY }, new int[] { mapIndex.coastlineEncodingType }, null, dbId);

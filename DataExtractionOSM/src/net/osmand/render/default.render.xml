@@ -204,7 +204,7 @@
 		
 		<group objectType="3" point="false">
 		
-		    <filter layer="-1" tag="building" value="" order="1"/>
+		    <filter layer="-1" tag="building" value="" order="6"/>
 			<filter tag="building" value="" order="64"/>
 
 			<filter tag="railway" value="" order="30"/>
@@ -233,7 +233,7 @@
 
 			<filter tag="natural" value="water" order="5"/>
 			<filter tag="natural" value="bay" order="5"/>
-			<filter tag="natural" value="land" order="2"/>
+			<filter tag="natural" value="land" order="6"/>
 			<filter tag="natural" value="coastline" order="1"/>
 			<filter tag="natural" value="" order="1"/>
 		</group>
@@ -824,7 +824,8 @@
 
 		<!-- Water, night color 330099 -->
 		<group>
-			<filter minzoom="1" tag="natural" value="coastline" color_2="#111111" strokeWidth_2="1"/>
+		   <!-- FIXME delete this block -->
+			<filter minzoom="1" tag="natural" value="coastline" color_2="#ffdd00" strokeWidth_2="1"/>
 			<filter minzoom="4" tag="natural" value="water"/>
 			<filter minzoom="4" tag="natural" value="lake"/>
 			<filter minzoom="4" tag="natural" value="bay"/>
