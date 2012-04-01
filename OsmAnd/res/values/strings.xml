@@ -676,7 +676,7 @@
 	<string name="route_tsll">Turn slightly left and go</string>
 	<string name="route_tu">Make U-turn and go</string>
 	<string name="route_head">Head</string>
-	<string name="first_time_continue">No, Thanks</string>
+	<string name="first_time_continue">Later</string>
 	<string name="first_time_download">Download regions</string>
 	<string name="first_time_msg">Thank you for choosing OsmAnd. \nTo use the major features of this application, you will need some regional offline data, which you can download (use Settings, Offline Data). Afterwards, you will be able to search by address, look up POIs and find public transportation.</string>
 	<string name="search_poi_location">Searching for signal&#8230;</string>

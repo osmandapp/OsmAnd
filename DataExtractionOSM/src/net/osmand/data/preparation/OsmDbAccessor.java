@@ -150,7 +150,11 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 					int ord = rs.getInt(2);
 					if (ord > 0 || first) {
 						first = false;
-						((Way) e).addNode(new Node(rs.getDouble(5), rs.getDouble(6), rs.getLong(1)));
+						if(rs.getObject(5) != null) {
+							((Way) e).addNode(new Node(rs.getDouble(5), rs.getDouble(6), rs.getLong(1)));
+						} else {
+							((Way) e).addNode(rs.getLong(1));
+						}
 					}
 				}
 				rs.close();
@@ -199,9 +203,6 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 						if (ord == 0 && rs.getObject(3) != null) {
 							way.putTag(rs.getString(3), rs.getString(4));
 						}
-					}
-					if (way.getNodes() == null) {
-						System.err.println("Strange, way with id:" + i.getId() + " has no nodes?");
 					}
 					rs.close();
 				}

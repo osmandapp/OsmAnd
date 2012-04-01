@@ -534,10 +534,10 @@ public class BinaryMapIndexReader {
 			switch (tag) {
 			case 0:
 				// encoding rules are required!
-				index.finishInitializingTags();
 				if(index.encodingRules.isEmpty()){
 					throw new IllegalStateException("Encoding rules are not defined for the map index");
 				}
+				index.finishInitializingTags();
 				return;
 			case OsmandOdb.OsmAndMapIndex.NAME_FIELD_NUMBER :
 				index.setName(codedIS.readString());
@@ -1331,7 +1331,7 @@ public class BinaryMapIndexReader {
 		}
 
 		public void finishInitializingTags() {
-			coastlineBrokenEncodingType = encodingRules.size() * 2;
+			coastlineBrokenEncodingType = decodingRules.size() * 2 + 1;
 			initMapEncodingRule(0, coastlineBrokenEncodingType, "natural", "coastline_broken");
 		}
 		

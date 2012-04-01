@@ -627,7 +627,7 @@ public class MapRenderRepositories {
 	private List<BinaryMapDataObject> processCoastlines(List<BinaryMapDataObject> coastLines, int leftX, int rightX, int bottomY, int topY, 
  int zoom) {
 		List<TLongList> completedRings = new ArrayList<TLongList>();
-		List<TLongList> incompletedRings = new ArrayList<TLongList>();
+		List<TLongList> uncompletedRings = new ArrayList<TLongList>();
 		List<BinaryMapDataObject> result = new ArrayList<BinaryMapDataObject>(coastLines.size());
 		MapIndex mapIndex = null;
 		long dbId = 0;
@@ -653,7 +653,7 @@ public class MapRenderRepositories {
 				boolean inside = leftX <= x && x <= rightX && y >= topY && y <= bottomY;
 				boolean lineEnded = calculateLineCoordinates(inside, x, y, pinside, px, py, leftX, rightX, bottomY, topY, coordinates);
 				if (lineEnded) {
-					combineMultipolygonLine(completedRings, incompletedRings, coordinates);
+					combineMultipolygonLine(completedRings, uncompletedRings, coordinates);
 					// create new line if it goes outside
 					coordinates = new TLongArrayList();
 				}
@@ -661,13 +661,13 @@ public class MapRenderRepositories {
 				py = y;
 				pinside = inside;
 			}
-			combineMultipolygonLine(completedRings, incompletedRings, coordinates);
+			combineMultipolygonLine(completedRings, uncompletedRings, coordinates);
 		}
-		if (completedRings.size() == 0 && incompletedRings.size() == 0) {
+		if (completedRings.size() == 0 && uncompletedRings.size() == 0) {
 			return result;
 		}
-		if (incompletedRings.size() > 0) {
-			unifyIncompletedRings(incompletedRings, completedRings, leftX, rightX, bottomY, topY, dbId, zoom);
+		if (uncompletedRings.size() > 0) {
+			unifyIncompletedRings(uncompletedRings, completedRings, leftX, rightX, bottomY, topY, dbId, zoom);
 		}
 		boolean clockwiseFound = false;
 		int mask = 0xffffffff;
@@ -687,8 +687,9 @@ public class MapRenderRepositories {
 			result.add(o);
 		}
 		
-		for (int i = 0; i < incompletedRings.size(); i++) {
-			TLongList ring = incompletedRings.get(i);
+		// draw uncompleted for debug purpose
+		for (int i = 0; i < uncompletedRings.size(); i++) {
+			TLongList ring = uncompletedRings.get(i);
 			int[] coordinates = new int[ring.size() * 2];
 			for (int j = 0; j < ring.size(); j++) {
 				coordinates[j * 2] = (int) (ring.get(j) >> 32);
@@ -702,6 +703,7 @@ public class MapRenderRepositories {
 			// add complete water tile
 			BinaryMapDataObject o = new BinaryMapDataObject(new int[] { leftX, topY, rightX, topY, rightX, bottomY, leftX, bottomY, leftX,
 					topY }, new int[] { mapIndex.coastlineEncodingType }, null, dbId);
+			o.setMapIndex(mapIndex);
 			log.info("!!! Isolated islands !!!"); //$NON-NLS-1$
 			result.add(o);
 
@@ -744,11 +746,13 @@ public class MapRenderRepositories {
 		}
 	}
 
-	private void unifyIncompletedRings(List<TLongList> incompletedRings, List<TLongList> completedRings, int leftX, int rightX, int bottomY, int topY, long dbId, int zoom) {
+	private void unifyIncompletedRings(List<TLongList> toProcces, List<TLongList> completedRings, int leftX, int rightX, int bottomY, int topY, long dbId, int zoom) {
 		int mask = 0xffffffff;
+		List<TLongList> uncompletedRings = new ArrayList<TLongList>(toProcces);
+		toProcces.clear();
 		Set<Integer> nonvisitedRings = new LinkedHashSet<Integer>();
-		for (int j = 0; j < incompletedRings.size(); j++) {
-			TLongList i = incompletedRings.get(j);
+		for (int j = 0; j < uncompletedRings.size(); j++) {
+			TLongList i = uncompletedRings.get(j);
 			int x = (int) (i.get(i.size() - 1) >> 32);
 			int y = (int) (i.get(i.size() - 1) & mask);
 			int sx = (int) (i.get(0) >> 32);
@@ -775,12 +779,13 @@ public class MapRenderRepositories {
 					System.err
 							.println(MessageFormat.format(dbId + str, dx, dy, dsx, dsy, leftX + "", topY + "", rightX + "", bottomY + "")); //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 				}
+				toProcces.add(i);
 			} else {
 				nonvisitedRings.add(j);
 			}
 		}
-		for (int j = 0; j < incompletedRings.size(); j++) {
-			TLongList i = incompletedRings.get(j);
+		for (int j = 0; j < uncompletedRings.size(); j++) {
+			TLongList i = uncompletedRings.get(j);
 			if (!nonvisitedRings.contains(j)) {
 				continue;
 			}
@@ -808,7 +813,7 @@ public class MapRenderRepositories {
 					// BEGIN find closest nonvisited start (including current)
 					int mindiff = UNDEFINED_MIN_DIFF;
 					for (Integer ni : nonvisitedRings) {
-						TLongList cni = incompletedRings.get(ni);
+						TLongList cni = uncompletedRings.get(ni);
 						int csx = (int) (cni.get(0) >> 32);
 						int csy = (int) (cni.get(0) & mask);
 						if (h % 4 == 0) {
@@ -877,7 +882,7 @@ public class MapRenderRepositories {
 					nonvisitedRings.remove(j);
 					break;
 				} else {
-					i.addAll(incompletedRings.get(nextRingIndex));
+					i.addAll(uncompletedRings.get(nextRingIndex));
 					nonvisitedRings.remove(nextRingIndex);
 					// get last point and start again going clockwise
 					x = (int) (i.get(i.size() - 1) >> 32);

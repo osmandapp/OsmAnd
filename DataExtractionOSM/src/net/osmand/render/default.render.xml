@@ -199,7 +199,7 @@
 			<filter appMode="pedestrian" tag="highway" value="bridleway" order="59"/>
 			<filter tag="highway" value="bridleway" order="35"/>
 			
-			<filter tag="natural" value="coastline_broken" order="4"/>
+			<filter tag="natural" value="coastline_broken" order="25"/>
 		</group>
 		
 		<group objectType="3" point="false">
@@ -824,7 +824,7 @@
 
 		<!-- Water, night color 330099 -->
 		<group>
-			<filter minzoom="1" tag="natural" value="coastline" color_2="#464646" strokeWidth_2="0.5"/>
+			<filter minzoom="1" tag="natural" value="coastline" color_2="#111111" strokeWidth_2="1"/>
 			<filter minzoom="4" tag="natural" value="water"/>
 			<filter minzoom="4" tag="natural" value="lake"/>
 			<filter minzoom="4" tag="natural" value="bay"/>
@@ -958,7 +958,7 @@
 
 
 	<line>
-	    <filter minzoom="1" tag="natural" value="coastline_broken" color="#000000" strokeWidth_2="1.5"/>
+	    <filter minzoom="1" tag="natural" value="coastline_broken" color="#111111" strokeWidth="2.5"/>
 		<group>
 			<filter hmRendered="true" tag="highway" value="motorway" maxzoom="13" color="#809bff"/>
 				<filter tag="highway" value="motorway" maxzoom="13" color="#a58dff"/>
