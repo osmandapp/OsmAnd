@@ -1,23 +1,21 @@
 package net.osmand.access;
 
-import java.lang.Math;
 import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.views.ContextMenuLayer;
+import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.PointF;
 import android.util.DisplayMetrics;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.WindowManager;
-import android.view.GestureDetector.OnGestureListener;
 
 // Provide touch exploration mode for map view
 // when scrolling it by gestures is disabled.
@@ -77,7 +75,7 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
             contextProvider = this;
         }
         if (different(newSelections, selectedObjects)) {
-            ContextMenuLayer contextMenuLayer = mapView.getContextMenuLayer();
+            ContextMenuLayer contextMenuLayer = mapView.getLayerByClass(ContextMenuLayer.class);
             if (contextMenuLayer != null) {
                 contextMenuLayer.setSelections(newSelections, contextProvider);
                 if (!newSelections.isEmpty())
@@ -96,7 +94,7 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
     public boolean onDown(MotionEvent e) {
         if (mapView.getSettings().SCROLL_MAP_BY_GESTURES.get())
             return fallback.onDown(e);
-        ContextMenuLayer contextMenuLayer = mapView.getContextMenuLayer();
+        ContextMenuLayer contextMenuLayer = mapView.getLayerByClass(ContextMenuLayer.class);
         if (contextMenuLayer != null)
             contextMenuLayer.setSelections(null, null);
         selectedObjects = null;

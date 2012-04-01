@@ -6,6 +6,7 @@ package net.osmand.plus.activities.search;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmandApplication;
@@ -117,7 +118,7 @@ public class SearchPoiFilterActivity extends TrackedListActivity {
 		if(!(filter instanceof NameFinderPoiFilter)){
 			ResourceManager rm = ((OsmandApplication) getApplication()).getResourceManager();
 			if(!rm.containsAmenityRepositoryToSearch(filter instanceof SearchByNameFilter)){
-				Toast.makeText(this, R.string.data_to_search_poi_not_available, Toast.LENGTH_LONG);
+				AccessibleToast.makeText(this, R.string.data_to_search_poi_not_available, Toast.LENGTH_LONG);
 				return;
 			}
 		}

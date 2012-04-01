@@ -216,12 +216,12 @@
 	<string name="voice_not_use">Не использовать</string>
 	<string name="voice_not_specified">Нету</string>
 	<string name="installing_new_resources">Распаковываются новые данные…</string>
-	<string name="internet_connection_required_for_online_route">Вы собираетесь использовать интернет маршрутизацию, но у вас нет активного интернет соединения.</string>
+		<string name="internet_connection_required_for_online_route">Вы собираетесь использовать интернет маршрутизацию, но у вас нет активного интернет соединения.</string>
 	<string name="tts_language_not_supported_title">Язык не поддерживается</string>
 	<string name="tts_language_not_supported">Выбранный язык не поддерживается Android TTS (text-to-speech). Хотите найти в маркете другой TTS? Иначе язык TTS по умолчанию будет использован.</string>
 	<string name="tts_missing_language_data_title">Данные отсутсвуют</string>
 	<string name="tts_missing_language_data">Для данного языка отсутствуют TTS данные. Вы хотите загрузить их из Маркета?</string>
-
+	
 	<string name="gpx_option_reverse_route">Выбрать обратное направление пути</string>
 	<string name="gpx_option_destination_point">Использовать текущую точку назначения</string>
 	<string name="gpx_option_from_start_point">Пройти весь путь от начала</string>
@@ -263,7 +263,7 @@
 \n\tЕсли вы нашли неточность на карте, вы можете сообщить об этом Openstreetmap сообществу.
 \n\tНе забывайте, что для этих функций вам понадобится интернет!</string>
 	<string name="create_poi_link_to_osm_doc"><u>Интернет OSM</u> классификация</string>
-	<string name="error_doing_search">Ошибка offline поиска</string>
+	<string name="error_doing_search">Ошибка автономного поиска</string>
     <string name="search_offline_geo_error">Невозможно разобрать запрос : \'%s\'</string>
 	<string name="search_osm_offline">Поиск адреса используя offline карты</string>
 	<string name="system_locale">Системная</string>
@@ -449,7 +449,6 @@
 	<string name="none_region_found">Не найден ни один индекс на SD карточке. Можете загрузить их с интернета.</string>
 	<string name="poi_namefinder_query_empty">Введите запрос для поиска POI</string>
 	<string name="any_poi">Все</string>
-	<string name="back_to_location">Вернуться</string>
 	<string name="layer_transport_route">Маршрут на транспорте</string>
 	<string name="thanks_yandex_traffic">Спасибо Yandex за то, что они предоставили информацию о пробках. Установите Yandex как домашнюю страницу.</string>
 	<string name="layer_yandex_traffic">Yandex трафик</string>
@@ -611,7 +610,6 @@
 	<string name="invalid_locations">Координаты неправильные</string>
 	<string name="go_back_to_osmand">Вернуться к карте OsmAnd</string>
 	<string name="close">Закрыть</string>
-	<string name="help">Помощь</string>
 	<string name="loading_data">Загрузка данных</string>
 	<string name="reading_indexes">Чтение индексов…</string>
 	<string name="previous_run_crashed">Предыдущий запуск приложения был неудачен. Лог файл в {0}.  Пожалуйста откройте баг и присоедините лог файл.</string>
@@ -643,7 +641,6 @@
     <string name="save_track_to_gpx_descrp">Сохранять путь в gpx формате в папку track</string>
     <string name="save_track_to_gpx">Мониторить</string>
     <string name="navigate_to">Идти к</string>
-    <string name="show_details">Подробности</string>
     <string name="update_tile">Обновить карту</string>
     <string name="reload_tile">Обновить часть карты</string>
     <string name="user_name_descr">Указать имя пользователя для работы с OSM</string>
@@ -788,12 +785,15 @@
 	<string name="edit_filter_delete_message">Фильтр {0} удален</string>
 	<string name="edit_filter_create_message">Фильтр {0} создан</string>
 	<string name="default_buttons_selectall">Выделить все</string>
-
+	
 	<string name="backToMenu">Главное меню</string>
 	<string name="zoomOut">Уменьшить масштаб</string>
 	<string name="zoomIn">Увеличить масштаб</string>
 	<string name="zoomIs">Масштаб</string>
 
+	<string name="show_details">Подробности</string>
+	<string name="help">Помощь</string>
+	<string name="back_to_location">Вернуться</string>
 	<string name="north">север</string>
 	<string name="north_north_east">северо-северо-восток</string>
 	<string name="north_east">северо-восток</string>

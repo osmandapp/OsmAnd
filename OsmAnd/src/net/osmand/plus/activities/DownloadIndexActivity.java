@@ -28,6 +28,7 @@ import java.util.TreeSet;
 import net.osmand.access.AccessibleToast;
 import net.osmand.IProgress;
 import net.osmand.Version;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.DownloadOsmandIndexesHelper;
 import net.osmand.plus.DownloadOsmandIndexesHelper.IndexItem;
@@ -588,7 +589,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			asz = (((long) fs.getAvailableBlocks()) * fs.getBlockSize()) / (1 << 20);
 		}
 		if(asz != -1 && asz < sz ){
-			Toast.makeText(this, getString(R.string.download_files_not_enough_space, sz, asz), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(this, getString(R.string.download_files_not_enough_space, sz, asz), Toast.LENGTH_LONG).show();
 		} else {
 			Builder builder = new AlertDialog.Builder(this);
 			if (asz > 0 && sz/asz > 0.8) {

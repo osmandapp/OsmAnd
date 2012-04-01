@@ -1,6 +1,5 @@
 package net.osmand.access;
 
-import java.lang.Math;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +10,7 @@ import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.location.Location;

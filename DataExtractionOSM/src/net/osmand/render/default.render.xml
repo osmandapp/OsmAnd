@@ -8,13 +8,13 @@
 	-->
 
 	<!-- Types : string, int, boolean; possibleValues comma separated possible values for int/string -->
-	<renderingProperty attr="hmRendered" name="Show more map detail" description="Default renderer: Increase amount of map detail shown"
+	<renderingProperty attr="hmRendered" name="Show more map detail" description="Increase amount of map detail shown"
 		type="boolean" possibleValues=""/>
-	<renderingProperty attr="contourLines" name="Show contour lines" description="Default renderer: Display in map if available (zoom level 14 and up). Separate SRTM-file may be needed."
+	<renderingProperty attr="contourLines" name="Show contour lines" description="Display in map if available (zoom level 14 and up). Separate SRTM-file may be needed."
 		type="boolean" possibleValues=""/>
-	<renderingProperty attr="appMode" name="Rendering mode" description="Default renderer: Map optimization for respective User Profile"
+	<renderingProperty attr="appMode" name="Rendering mode" description="Map optimization for respective User Profile"
 		type="string" possibleValues="default,car,bicycle,pedestrian"/>
-	<renderingProperty attr="noPolygons" name="No polygons" description="Default renderer: Make all areal land features on map transparent"
+	<renderingProperty attr="noPolygons" name="No polygons" description="Make all areal land features on map transparent"
 		type="boolean" possibleValues=""/>
 
 	<!-- 0 - no shadow, 1 - one step, 2 - blur shadow, 3 - solid shadow -->	

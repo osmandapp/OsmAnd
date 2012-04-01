@@ -1,7 +1,5 @@
 package net.osmand.access;
 
-import java.lang.Math;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.accessibility.AccessibilityEvent;

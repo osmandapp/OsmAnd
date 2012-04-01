@@ -14,14 +14,14 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import net.osmand.GPXUtilities;
-import net.osmand.OsmAndFormatter;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.OsmAndFormatter;
 import net.osmand.binary.BinaryIndexPart;
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.MapRoot;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;

@@ -5,8 +5,6 @@ import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
-import com.google.android.apps.analytics.easytracking.TrackedActivity;
-
 import net.osmand.LogUtil;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -28,6 +26,8 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.google.android.apps.analytics.easytracking.TrackedActivity;
 
 public class NavigatePointActivity extends TrackedActivity implements SearchActivityChild {
 	Dialog dlg;

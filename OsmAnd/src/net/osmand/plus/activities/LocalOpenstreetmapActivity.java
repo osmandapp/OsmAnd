@@ -10,6 +10,7 @@ import net.osmand.LogUtil;
 import net.osmand.OpenstreetmapPoint;
 import net.osmand.OpenstreetmapRemoteUtil;
 import net.osmand.OpenstreetmapUtil;
+import net.osmand.access.AccessibleToast;
 import net.osmand.osm.EntityInfo;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
 import net.osmand.plus.OpenstreetmapsDbHelper;
@@ -185,7 +186,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		protected void onPostExecute(Integer result) {
 			listAdapter.notifyDataSetChanged();
 			if(result != null){
-				Toast.makeText(LocalOpenstreetmapActivity.this, MessageFormat.format(getString(R.string.local_openstreetmap_poi_were_uploaded), result.intValue()), Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(LocalOpenstreetmapActivity.this, MessageFormat.format(getString(R.string.local_openstreetmap_poi_were_uploaded), result.intValue()), Toast.LENGTH_LONG).show();
 			}
 			removeDialog(DIALOG_PROGRESS_UPLOAD);
 		}

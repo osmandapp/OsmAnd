@@ -2,6 +2,7 @@ package net.osmand.plus;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.Version;
+import net.osmand.access.AccessibleToast;
 import net.osmand.plus.activities.LiveMonitoringHelper;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.routing.RoutingHelper;
@@ -23,8 +24,8 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.PowerManager;
-import android.os.SystemClock;
 import android.os.PowerManager.WakeLock;
+import android.os.SystemClock;
 import android.widget.Toast;
 
 public class NavigationService extends Service implements LocationListener {
