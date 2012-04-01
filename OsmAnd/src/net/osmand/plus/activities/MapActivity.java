@@ -4,18 +4,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.android.apps.analytics.easytracking.TrackedActivity;
-
-import net.osmand.access.AccessibleToast;
-import net.osmand.access.AccessibleTrackedActivity;
-import net.osmand.access.NavigationInfo;
-
 import net.osmand.Algoritms;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LogUtil;
 import net.osmand.Version;
+import net.osmand.access.AccessibleToast;
+import net.osmand.access.AccessibleTrackedActivity;
+import net.osmand.access.NavigationInfo;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.IMapLocationListener;

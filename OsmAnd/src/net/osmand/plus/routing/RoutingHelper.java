@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;

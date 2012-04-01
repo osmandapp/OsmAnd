@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.LogUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.osm.LatLon;

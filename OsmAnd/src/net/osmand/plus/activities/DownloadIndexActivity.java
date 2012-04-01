@@ -25,7 +25,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.IProgress;
 import net.osmand.Version;
 import net.osmand.access.AccessibleToast;

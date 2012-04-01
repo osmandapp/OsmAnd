@@ -15,13 +15,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.osmand.access.AccessibleToast;
-import net.osmand.access.NavigationInfo;
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
+import net.osmand.access.NavigationInfo;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;

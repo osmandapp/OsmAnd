@@ -3,7 +3,6 @@ package net.osmand.plus.activities;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
