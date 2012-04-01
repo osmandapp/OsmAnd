@@ -8,12 +8,12 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.CallbackWithObject;
 import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.LogUtil;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.map.ITileSource;
 import net.osmand.osm.LatLon;

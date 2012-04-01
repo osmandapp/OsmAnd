@@ -3,6 +3,7 @@
  */
 package net.osmand.plus.activities;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
@@ -13,10 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.LinearLayout.LayoutParams;
 
 /**
  * Test Voice activity
@@ -56,7 +57,7 @@ public class TestVoiceActivity extends Activity {
 			public void run() {
 				CommandPlayer p = app.getRoutingHelper().getVoiceRouter().getPlayer();
 				if (p == null) {
-					Toast.makeText(TestVoiceActivity.this, "Voice player not initialized", Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(TestVoiceActivity.this, "Voice player not initialized", Toast.LENGTH_SHORT).show();
 				} else {
 					addButtons(ll, p);
 				}

@@ -14,8 +14,8 @@ public enum RelativeDirectionStyle {
         this.key = key;
     }
 
-    public static String toHumanString(RelativeDirectionStyle style, Context ctx) {
-        return ctx.getResources().getString(style.key);
+    public String toHumanString(Context ctx) {
+        return ctx.getResources().getString(key);
     }
 
 }

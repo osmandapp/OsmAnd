@@ -17,12 +17,12 @@ import net.osmand.access.RelativeDirectionStyle;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.NavigationService;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.DayNightMode;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -52,10 +52,10 @@ import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceCategory;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
@@ -174,10 +174,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		osmandSettings = OsmandApplication.getSettings();
 		
 		registerBooleanPreference(osmandSettings.SHOW_VIEW_ANGLE,screen); 
-		registerBooleanPreference(osmandSettings.USE_TRACKBALL_FOR_MOVEMENTS,screen); 
+		registerBooleanPreference(osmandSettings.USE_TRACKBALL_FOR_MOVEMENTS,screen);
 		registerBooleanPreference(osmandSettings.ZOOM_BY_TRACKBALL,screen); 
 		registerBooleanPreference(osmandSettings.SCROLL_MAP_BY_GESTURES,screen); 
-		registerBooleanPreference(osmandSettings.USE_SHORT_OBJECT_NAMES,screen); 
+		registerBooleanPreference(osmandSettings.USE_SHORT_OBJECT_NAMES,screen);
 		registerBooleanPreference(osmandSettings.USE_HIGH_RES_MAPS,screen); 
 		registerBooleanPreference(osmandSettings.USE_ENGLISH_NAMES,screen); 
 		registerBooleanPreference(osmandSettings.AUTO_ZOOM_MAP,screen); 
@@ -194,7 +194,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerBooleanPreference(osmandSettings.TEST_ANIMATE_ROUTING,screen);
 		registerBooleanPreference(osmandSettings.SHOW_ALTITUDE_INFO,screen);
 		registerBooleanPreference(osmandSettings.FLUORESCENT_OVERLAYS,screen);
-		registerBooleanPreference(osmandSettings.SHOW_ZOOM_LEVEL,screen);
+		registerBooleanPreference(osmandSettings.SHOW_RULER,screen);
 		CheckBoxPreference nativeCheckbox = registerBooleanPreference(osmandSettings.NATIVE_RENDERING,screen);
 		//disable the checkbox if the library cannot be used
 		if (NativeOsmandLibrary.isLoaded() && !NativeOsmandLibrary.isSupported()) {
@@ -276,6 +276,14 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		registerListPreference(osmandSettings.MAP_TEXT_SIZE, screen, entries, floatValues);
 		
+		entries = new String[RelativeDirectionStyle.values().length];
+		for(int i=0; i<entries.length; i++){
+			entries[i] = RelativeDirectionStyle.values()[i].toHumanString(this);
+		}
+		registerListPreference(osmandSettings.DIRECTION_STYLE, screen, entries, RelativeDirectionStyle.values());
+		
+
+		
 		startZoom = 1;
 		endZoom = 18;
 		entries = new String[endZoom - startZoom + 1];
@@ -312,12 +320,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			entries[i] = ApplicationMode.toHumanString(ApplicationMode.values()[i], this);
 		}
 		registerListPreference(osmandSettings.APPLICATION_MODE, screen, entries, ApplicationMode.values());
-		
-		entries = new String[RelativeDirectionStyle.values().length];
-		for(int i=0; i<entries.length; i++){
-			entries[i] = RelativeDirectionStyle.toHumanString(RelativeDirectionStyle.values()[i], this);
-		}
-		registerListPreference(osmandSettings.DIRECTION_STYLE, screen, entries, RelativeDirectionStyle.values());
 		
 		Collection<String> rendererNames = getMyApplication().getRendererRegistry().getRendererNames();
 		entries = (String[]) rendererNames.toArray(new String[rendererNames.size()]);
@@ -746,7 +748,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				protected void onPostExecute(Void result) {
 					progressDlg.dismiss();
 					if (!NativeOsmandLibrary.isNativeSupported(storage)) {
-						Toast.makeText(SettingsActivity.this, R.string.native_library_not_supported, Toast.LENGTH_LONG).show();
+						AccessibleToast.makeText(SettingsActivity.this, R.string.native_library_not_supported, Toast.LENGTH_LONG).show();
 					}
 				};
 			}.execute();

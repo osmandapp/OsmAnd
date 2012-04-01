@@ -21,9 +21,9 @@
 		</PreferenceCategory>
 		<PreferenceCategory android:title="@string/pref_overlay">
 			<ListPreference android:title="@string/map_overlay" android:summary="@string/map_overlay_descr" android:key="map_overlay"></ListPreference>
+			<ListPreference android:title="@string/map_underlay" android:summary="@string/map_underlay_descr" android:key="map_underlay"></ListPreference>
 			<net.osmand.plus.views.SeekBarPreference android:key="overlay_transparency" android:defaultValue="0" android:max="255" 
 				android:dialogMessage="@string/modify_transparency" android:title="@string/overlay_transparency" android:summary="@string/overlay_transparency_descr"/>
-			<ListPreference android:title="@string/map_underlay" android:summary="@string/map_underlay_descr" android:key="map_underlay"></ListPreference>
 			<net.osmand.plus.views.SeekBarPreference android:key="map_transparency" android:defaultValue="0" android:max="255" 
 				android:dialogMessage="@string/modify_transparency" android:title="@string/map_transparency" android:summary="@string/map_transparency_descr"/>
 		</PreferenceCategory>
@@ -47,7 +47,7 @@
 		<CheckBoxPreference android:key="show_altitude_info" android:title="@string/show_altitude_info" android:summary="@string/show_altitude_info_descr"/>
 		<CheckBoxPreference android:key="transparent_map_theme" android:title="@string/use_transparent_map_theme" android:summary="@string/use_transparent_map_theme_descr"/>
 		<CheckBoxPreference android:key="fluorescent_overlays" android:title="@string/use_fluorescent_overlays" android:summary="@string/use_fluorescent_overlays_descr"/>
-		<CheckBoxPreference android:key="show_zoom_level" android:title="@string/show_zoom_level" android:summary="@string/show_zoom_level_descr"/>
+		<CheckBoxPreference android:key="show_ruler" android:title="@string/show_ruler_level" android:summary="@string/show_ruler_level_descr"/>
 	</PreferenceScreen>
 
 
@@ -62,10 +62,10 @@
 		<PreferenceCategory android:title="@string/live_monitoring">
 			<CheckBoxPreference android:summary="@string/live_monitoring_descr" android:title="@string/live_monitoring"
 				android:key="live_monitoring"></CheckBoxPreference>
-			<ListPreference android:summary="@string/live_monitoring_interval_descr" android:title="@string/live_monitoring_interval"
-				android:key="live_monitoring_interval"></ListPreference>
 			<EditTextPreference android:summary="@string/live_monitoring_url_descr" android:title="@string/live_monitoring_url"
 				android:key="live_monitoring_url"/>
+			<ListPreference android:summary="@string/live_monitoring_interval_descr" android:title="@string/live_monitoring_interval"
+				android:key="live_monitoring_interval"></ListPreference>
 		</PreferenceCategory>
 	</PreferenceScreen>
 
@@ -132,8 +132,7 @@
 		<ListPreference android:key="service_off_wait_interval" android:title="@string/background_service_wait_int"
 			android:summary="@string/background_service_wait_int_descr"></ListPreference>
 	</PreferenceScreen>
-
-
+	
 	<PreferenceScreen android:key="accessibility_preferences" android:title="@string/accessibility_preferences" android:summary="@string/accessibility_preferences_descr">
 		<ListPreference android:summary="@string/settings_direction_style_descr" android:title="@string/settings_direction_style" android:key="direction_style"></ListPreference>
 		<CheckBoxPreference android:key="zoom_by_trackball" android:title="@string/zoom_by_trackball" android:summary="@string/zoom_by_trackball_descr"></CheckBoxPreference>

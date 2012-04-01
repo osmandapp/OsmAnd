@@ -28,23 +28,24 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Paint.Style;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
 import android.view.GestureDetector;
+import android.view.GestureDetector.OnDoubleTapListener;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
+import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.WindowManager;
-import android.view.GestureDetector.OnDoubleTapListener;
-import android.view.GestureDetector.OnGestureListener;
 import android.view.SurfaceHolder.Callback;
 import android.widget.Toast;
 
@@ -215,6 +216,16 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	public List<OsmandMapLayer> getLayers() {
 		return layers;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public <T extends OsmandMapLayer> T getLayerByClass(Class<T> cl) {
+		for(OsmandMapLayer lr : layers) {
+			if(cl.isInstance(cl)){
+				return (T) lr;
+			}
+		}
+		return null;
 	}
 
 	public OsmandApplication getApplication() {
@@ -751,11 +762,11 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	public void showMessage(final String msg) {
-		handler.post(new Runnable(){
-				@Override
-				public void run() {
-					AccessibleToast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
-				}
+		handler.post(new Runnable() {
+			@Override
+			public void run() {
+				AccessibleToast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
+			}
 		});
 	}
 

@@ -11,12 +11,12 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PointF;
-import android.graphics.RectF;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
+import android.graphics.Path;
+import android.graphics.PointF;
+import android.graphics.RectF;
 
 public class GPXLayer extends OsmandMapLayer {
 	

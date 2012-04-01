@@ -4,8 +4,8 @@ import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.MapUtils;
-import net.osmand.plus.R;
 import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import android.content.Context;
@@ -20,9 +20,9 @@ import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -124,7 +124,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				hideZoomLevelInTime();
 			}
 		}
-		if (showZoomLevel || view.getSettings().SHOW_ZOOM_LEVEL.get()) {
+		if (showZoomLevel || !view.getSettings().SHOW_RULER.get()) {
 			drawZoomLevel(canvas);
 		} else {
 			drawRuler(canvas);

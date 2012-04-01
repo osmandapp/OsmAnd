@@ -1,5 +1,58 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="show_ruler_level_descr">Display ruler on the map</string>
+	<string name="show_ruler_level">Display ruler</string>
+	
+	<string name="backToMenu">Back To Menu</string>
+	<string name="zoomOut">Zoom out</string>
+	<string name="zoomIn">Zoom in</string>
+	<string name="zoomIs">Zoom is</string>
+	
+	<string name="north">north</string>
+	<string name="north_north_east">north-north-east</string>
+	<string name="north_east">north-east</string>
+	<string name="east_north_east">east-north-east</string>
+	<string name="east">east</string>
+	<string name="east_south_east">east-south-east</string>
+	<string name="south_east">south-east</string>
+	<string name="south_south_east">south-south-east</string>
+	<string name="south">south</string>
+	<string name="south_south_west">south-south-west</string>
+	<string name="south_west">south-west</string>
+	<string name="west_south_west">west-south-west</string>
+	<string name="west">west</string>
+	<string name="west_north_west">west-north-west</string>
+	<string name="north_west">north-west</string>
+	<string name="north_north_west">north-north-west</string>
+	<string name="front">Front</string>
+	<string name="front_right">Front right</string>
+	<string name="right">Right</string>
+	<string name="back_right">Back right</string>
+	<string name="back">Back</string>
+	<string name="back_left">Back left</string>
+	<string name="left">Left</string>
+	<string name="front_left">Front left</string>
+	<string name="oclock">o\'clock</string>
+	<string name="towards">towards</string>
+	<string name="accuracy">Accuracy</string>
+	<string name="altitude">Altitude</string>
+	<string name="no_info">No info</string>
+	<string name="direction_style_sidewise">Sidewise (8 sectors)</string>
+	<string name="direction_style_clockwise">Clockwise (12 sectors)</string>
+	<string name="settings_direction_style">Direction style</string>
+	<string name="settings_direction_style_descr">Choose style to express relative directions while moving</string>
+	<string name="auto_announce_on">Start autoannouncing</string>
+	<string name="auto_announce_off">Stop autoannouncing</string>
+	<string name="scroll_map_by_gestures_descr">Scroll map by gestures on the touchscreen</string>
+	<string name="scroll_map_by_gestures">Natural map scrolling</string>
+	<string name="i_am_here">I am here</string>
+	<string name="zoom_by_trackball_descr">Change map zooming by horizontal trackball moves</string>
+	<string name="zoom_by_trackball">Use trackball for zoom control</string>
+	<string name="use_short_object_names_descr">Use short object names in touch exploration mode</string>
+	<string name="use_short_object_names">Use object names</string>
+	<string name="accessibility_preferences_descr">Accessibility related preferences</string>
+	<string name="accessibility_preferences">Accessibility</string>
+	
 	<string name="rendering_out_of_memory">Not enough process memory to display selected area</string>
 	<string name="use_fluorescent_overlays">Fluorescent overlays</string>
 	<string name="use_fluorescent_overlays_descr">Use fluorescent colors to display tracks and routes</string>
@@ -26,10 +79,10 @@
 	<string name="local_openstreetmap_upload">Upload modification to OSM</string>
 	<string name="local_openstreetmap_delete">Delete POI modification</string>
 	<string name="local_openstreetmap_descr_title">Asynchronous OSM POI Editing:</string>
-	<string name="local_openstreetmap_settings">Locally saved OSM points</string>
-	<string name="local_openstreetmap_settings_descr">Show and manage OSM points noted in local database</string>
+	<string name="local_openstreetmap_settings">Locally saved OSM POIs</string>
+	<string name="local_openstreetmap_settings_descr">Show and manage OSM POIs noted in local database</string>
 
-	<string name="live_monitoring_descr">Enable sending HTTP requests to a specified web service</string>
+	<string name="live_monitoring_descr">Send tracking to a specified web service</string>
 	<string name="live_monitoring">Online Live Tracking</string>
 	<string name="live_monitoring_interval_descr">Specify Live Tracking interval</string>
 	<string name="live_monitoring_interval">Live Tracking interval</string>
@@ -68,7 +121,7 @@
 <!-- this block re-worked for new Preferences structure -->
 	<string name="profile_settings">Profile Specific Settings</string>
 	<string name="settings_preset">User Profile</string>
-	<string name="settings_preset_descr">Select a use profile. (Each profiles\'s Map, Tracking, and Navigation settings can be customized below.)</string>
+	<string name="settings_preset_descr">Select a user profile. Each profile contains specific settings, which can be customized below.</string>
 	<string name="rendering_settings">- Map configuration</string>
 	<string name="rendering_settings_descr">Configure maps and map sources</string>
 	<string name="appearance_settings">- Map appearance</string>
@@ -76,21 +129,22 @@
 	<string name="monitor_preferences">- Tracking</string>
 	<string name="monitor_preferences_descr">Specify tracking settings</string>
 	<string name="routing_settings">- Navigation</string>
-	<string name="routing_settings_descr">Specify routing options</string>
+	<string name="routing_settings_descr">Specify navigation options</string>
 	<string name="global_settings">Global Settings</string>
 	<string name="index_settings">Offline Data</string>
-	<string name="index_settings_descr">Download and manage offline maps and other data like GPX tracks</string>
+	<string name="index_settings_descr">Download and manage offline maps and other data such as GPX tracks</string>
 	<string name="general_settings">General Settings</string>
-	<string name="general_settings_descr">Configure display and other global settings</string>
+	<string name="general_settings_descr">Configure global settings</string>
 	<string name="global_app_settings">Global app settings</string>
 	<string name="user_name">Your OSM user name</string>
 	<string name="user_name_descr">Needed for openstreetmap.org submissions</string>
 	<string name="user_password">Your OSM password</string>
 	<string name="user_password_descr">Needed for openstreetmap.org submissions</string>
-	<string name="osmand_service">Background Service</string>
+	<string name="osmand_service">Background settings</string>
 	<string name="osmand_service_descr">Use to run OsmAnd while screen is off</string>
 
-	<string name="tip_rotation_switching">Map Rotation</string>
+	 
+	<string name="tip_rotation_switching">Map Orientation</string>
 	<string name="tip_rotation_switching_t">\tYou can choose whether and how the map display is rotated in \'Settings\' -> \'Map appearance\' -> \'Map rotation\'.
 	\n\tThe choices are:
 	\n\t\'Don\'t rotate\' - Map will not be rotated. North will be always up
@@ -122,8 +176,7 @@
 
 	<string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>
 	<string name="download_files_question_space">Free space now {2} MB! Download {0} file(s) ({1} MB)?</string>
-	<string name="show_zoom_level_descr">Permanently show zoom level instead of ruler.</string>
-	<string name="show_zoom_level">Show zoom level</string>
+	
 	<string name="tip_select_destination_point">Select Destination</string>
 	<string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
 \n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).</string> 
@@ -145,7 +198,7 @@
 	<string name="native_library_not_supported">Native library is not supported on this device.</string>
 	<string name="init_native_library">Initializing native library&#8230;</string>
 	<string name="choose_auto_follow_route">Auto-center map view</string>
-	<string name="choose_auto_follow_route_descr">Time until map view returns to being synchronized with position</string>
+	<string name="choose_auto_follow_route_descr">Time until map view synchronizes with current position</string>
 	<string name="auto_follow_route_never">Never</string>
 	<string name="auto_follow_route_navigation">Auto-center nav only</string>
 	<string name="auto_follow_route_navigation_descr">Auto-center map view only while navigating.</string>
@@ -240,10 +293,10 @@
 	<string name="favourites_edit_dialog_name">Name</string>
 	<string name="favourites_edit_dialog_category">Category</string>
 
-	<string name="vector_map_not_needed">Not needed</string>
-	<string name="basemap_missing">Base world map (covering whole world at small zooms) is missing. Please consider downloading World_basemap_x.obf for a complete environment.</string>
+	<string name="vector_map_not_needed">No, thanks</string>
+	<string name="basemap_missing">Base world map (covering the whole world at small zooms) is missing. Please consider downloading World_basemap_x.obf for a complete environment.</string>
 	<string name="vector_data_missing">On board (\'offline\') data is missing on SD card. Please consider to download it in order to use maps offline.</string>
-	<string name="local_index_gpx_info_show">\n\nLong click for options</string>
+	<string name="local_index_gpx_info_show">\n\nPress and hold for options</string>
 	<string name="local_index_gpx_info_speed">\nAverage speed : %1$s \nMaximum speed : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nAverage altitude : %1$.0f m\nMinimum altitude : %2$.0f m\nMaximum altitude : %3$.0f m\nAscents : %4$.0f m\nDescents : %5$.0f m</string>
 	<string name="local_index_gpx_info">Subtracks : %1$d\nTotal points : %2$d\nWay points : %3$d\nTotal distance : %4$s\nStart time : %5$tF,  %5$tR\nEnd time : %6$tF,  %6$tR</string>
@@ -285,14 +338,14 @@
 \n\t- Text To Speech engine for voice navigation
 \n\t- Make map renderer more detailed
 \n\t- Basemap for whole world packaged with app
-\n\t- Tweak offline routing (still experimental)
-\n\t- GPX routing options
+\n\t- Tweak offline navigation (still experimental)
+\n\t- GPX navigation options
 \n\t- UI update and large bug fixing
 	</string>
 	<string name="voice_not_use">Do not use</string>
 	<string name="voice_not_specified">None</string>
 	<string name="installing_new_resources">Unpacking new data&#8230;</string>
-	<string name="internet_connection_required_for_online_route">An online routing service is selected but no internet connection is available.</string>
+	<string name="internet_connection_required_for_online_route">An online navigation service is selected but no internet connection is available.</string>
 	<string name="tts_language_not_supported_title">Language not supported</string>
 	<string name="tts_language_not_supported">The selected language is not supported by the installed Android TTS (text-to-speech) engine. Do you want to go to the Market to look for another TTS engine? Otherwise the preset TTS language will be used.</string>
 	<string name="tts_missing_language_data_title">Missing data</string>
@@ -335,7 +388,7 @@
 	\n\t\'Green\' - indicates data files identical on device and server
 	\n\t\'Blue\' - indicates available updates on server</string>
 
-	<string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector rendering instead of map tiles</string>
+	<string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector maps</string>
 	<string name="level_to_switch_vector_raster">Min. vector zoom level</string>
 
 	<string name="tip_location_sharing">Location Sharing</string>
@@ -369,15 +422,15 @@
 \n\tYou can change profiles in \'Menu\' -> \'Settings\' -> \'User Profile\', or when creating a route.</string>
 
 	<string name="tip_navigation">Navigation</string>
-	<string name="tip_navigation_t">\tBefore starting a navigation (routing) you need to select a destination. Afterwards press \'Menu\' -> \'Directions\' on map and select the navigation type.</string>
+	<string name="tip_navigation_t">\tBefore starting a navigation you need to select a destination. Afterwards press \'Menu\' -> \'Directions\' on map and select the navigation type.</string>
 
 	<string name="tip_search">Searching</string>
 	<string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite.
 \n\tPressing \'Search\' in the main menu opens the search activities. For all hits a context menu offers 2 options: \'Set as destination\' or \'Show on map\'.</string>
 
 	<string name="tip_map_context_menu">Map Context Menu</string>
-	<string name="tip_map_context_menu_t">\tThe map context menu is available by long pressing on the map or by pressing the trackball button.
-\n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or long press on it to hide the box again.)
+	<string name="tip_map_context_menu_t">\tThe map context menu is available by pressing and holding on the map or by pressing the trackball button.
+\n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or press and hold on it to hide the box again.)
 \n\tThe map context menu contains all actions referring to a point (location).</string>
 
 	<string name="tip_initial">Tips and Tricks</string>
@@ -388,7 +441,7 @@
 	<string name="info_button">Info</string>
 
 	<string name="unit_of_length_descr">Change units of length and speed</string>
-	<string name="unit_of_length">Unit of length</string>
+	<string name="unit_of_length">Unit of measure</string>
 	<string name="si_mi_foots">Miles/feet</string>
 	<string name="si_mi_yard">Miles/yards</string>
 	<string name="si_km_m">Kilometers/meters</string>
@@ -445,9 +498,9 @@
 	<string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
 	<string name="version_index_is_not_supported">The version of index \'\'{0}\'\' is not supported</string>
 
-	<string name="use_osmand_routing_service">OsmAnd routing >20km</string>
-	<string name="use_osmand_routing_service_descr">Use OsmAnd offline routing for long distances (experimental) instead of fallback to CloudMade</string>
-	<string name="osmand_routing_experimental">OsmAnd offline routing is an experimental feature and it does not work for distances of more than about 20 km.\n\nRouting service is temporarily switched to online CloudMade.</string>
+	<string name="use_osmand_routing_service">OsmAnd navigation >20km</string>
+	<string name="use_osmand_routing_service_descr">Use OsmAnd offline navigation applies only to routes > 20 km (experimental)</string>
+	<string name="osmand_routing_experimental">OsmAnd offline routing is an experimental feature and it does not work for distances of more than about 20 km.\n\nNavigation service is temporarily switched to online CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
 	<string name="application_dir">Storage directory</string>
 	<string name="application_dir_change_warning">Changing the storage directory will not move or delete the data. This must be performed separately and outside OsmAnd. Continue anyway?</string>
@@ -493,7 +546,7 @@
 	<string name="renderer_load_sucess">Renderer sucessfully loaded</string>
 	<string name="renderer_load_exception">Exception occured: renderer was not loaded</string>
 	<string name="renderers">Vector renderer</string>
-	<string name="renderers_descr">Choose (offline) vector map appearance</string>
+	<string name="renderers_descr">Choose rendering appearance</string>
 
 	<string name="poi_context_menu_website">Show POI website</string>
 	<string name="poi_context_menu_call">Show POI phone</string>
@@ -528,8 +581,8 @@
 	<string name="rotate_map_compass_opt">To compass</string>
 	<string name="rotate_map_bearing_opt">To direction of movement</string>
     <string name="rotate_map_none_opt">Don\'t rotate</string>
-	<string name="rotate_map_to_bearing_descr">Select how to rotate map</string>
-    <string name="rotate_map_to_bearing">Map rotation</string>
+	<string name="rotate_map_to_bearing_descr">Select how map is oriented</string>
+    <string name="rotate_map_to_bearing">Map orientation</string>
 	<string name="show_route">Route details</string>
 	<string name="fav_imported_sucessfully">Favorites succesfully imported</string>
 	<string name="fav_file_to_load_not_found">GPX file containing favorites is not found at {0}</string>
@@ -568,19 +621,19 @@
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">seconds</string>
 	<string name="int_min">min.</string>
-	<string name="background_service_int_descr">Set wake-up interval used by background service</string>
-	<string name="background_service_int">Positioning interval</string>
-	<string name="background_service_provider_descr">Choose location provider for background service</string>
+	<string name="background_service_int_descr">Set wake-up interval used by background </string>
+	<string name="background_service_int">Wake-up interval</string>
+	<string name="background_service_provider_descr">Choose location provider while running in background mode</string>
 	<string name="background_service_provider">Location provider</string>
-	<string name="background_router_service_descr">Enable background service to track position over long time periods</string>
-	<string name="background_router_service">Use background service</string>
-	<string name="off_router_service_no_gps_available">The background routing service requires a location source to be turned on.</string>
+	<string name="background_router_service_descr">Runs OsmAnd in the background to track your location while screen is off</string>
+	<string name="background_router_service">Run in the background</string>
+	<string name="off_router_service_no_gps_available">The background navigation service requires a location source to be turned on.</string>
 	<string name="hide_poi_filter">Hide filter</string>
 	<string name="show_poi_filter">Show filter</string>
 	<string name="search_poi_filter">Filter</string>
 	<string name="menu_mute_off">Sound is on</string>
 	<string name="menu_mute_on">Sound is off</string>
-	<string name="voice_provider_descr">Select voice guidance for routing</string>
+	<string name="voice_provider_descr">Select voice guidance for navigation</string>
 	<string name="voice_provider">Voice guidance</string>
 	<string name="voice_data_initializing">Initializing voice data&#8230;</string>
 	<string name="voice_data_not_supported">Unsupported version of voice data</string>
@@ -600,14 +653,14 @@
 	<string name="route_head">Head</string>
 	<string name="first_time_continue">Continue</string>
 	<string name="first_time_download">Download regions</string>
-	<string name="first_time_msg">Thank you for choosing OsmAnd. \nTo use all features of the application you need some regional offline data, which you can download (Settings, Offline Data) or prepare yourself. Afterwards, you will be able to search by address, search for POIs, and search for public transport.</string>
-	<string name="search_poi_location">Searching signal&#8230;</string>
+	<string name="first_time_msg">Thank you for choosing OsmAnd. \nTo use the major features of this application, you will need some regional offline data, which you can download (use Settings, Offline Data). Afterwards, you will be able to search by address, look up POIs and find public transportation.</string>
+	<string name="search_poi_location">Searching for signal&#8230;</string>
 	<string name="search_near_map">Search near last map location</string>
 	<string name="search_nearby">Search nearby</string>
 	<string name="map_orientation_default">Same as device</string>
 	<string name="map_orientation_portrait">Portrait</string>
 	<string name="map_orientation_landscape">Landscape</string>
-	<string name="map_screen_orientation">Map screen orientation</string>
+	<string name="map_screen_orientation">Screen orientation</string>
 	<string name="map_screen_orientation_descr">Choose screen orientation</string>
 	<string name="opening_hours_not_supported">Opening hours format is not supported for editing</string>
 	<string name="add_new_rule">Add new rule</string>
@@ -654,8 +707,8 @@
 	<string name="max_level_download_tile">Max. online zoom</string>
 	<string name="max_level_download_tile_descr">Choose maximum zoom level to download for online map tiles</string>
 	<string name="route_general_information">Total distance %1$s, travelling time %2$d h %3$d m.</string>
-	<string name="router_service_descr">Choose online or offline routing services</string>
-	<string name="router_service">Routing service</string>
+	<string name="router_service_descr">Choose online or offline navigation service</string>
+	<string name="router_service">Navigation service</string>
 	<string name="sd_dir_not_accessible">Save directory on SD card not accessible</string>
 	<string name="download_question">Download {0} - {1} ?</string>
 	<string name="download_question_exist">Offline data for {0} already exists ({1}). Do you want to update it ({2}) ?</string>
@@ -703,7 +756,7 @@
 	<string name="help">Help</string>
 	<string name="loading_data">Loading data&#8230;</string>
 	<string name="reading_indexes">Reading local data&#8230;</string>
-	<string name="previous_run_crashed">Previous application run crashed. Log file is at {0}. Please report the issue and attach log file.</string>
+	<string name="previous_run_crashed">Last OsmAnd run crashed. Log file is at {0}. Please report the issue and attach the log file.</string>
 	<string name="saving_gpx_tracks">Saving GPX tracks to SD&#8230;</string>
 	<string name="finished_task">Finished</string>
     <string name="reload_indexes_descr">Re-read offline vector maps and data from SD card</string>
@@ -737,7 +790,7 @@
     <string name="favourites_activity">Favorites</string>
     <string name="add_to_favourite">Add to Favorites</string>
     <string name="use_english_names_descr">Select between native and English names</string>
-    <string name="use_english_names">Use english names</string>
+    <string name="use_english_names">Use English names</string>
     <string name="app_settings">Application settings</string>
     <string name="search_address">Search address</string>
     <string name="choose_building">Choose building</string>
@@ -747,7 +800,7 @@
     <string name="position_on_map_descr">Choose location of position marker on the map</string>
     <string name="position_on_map">Position marker</string>
     <string name="map_specify_point">Set as destination</string>
-    <string name="show_view_angle_descr">Display viewing direction based on compass</string>
+    <string name="show_view_angle_descr">Display viewing direction on the map</string>
     <string name="show_view_angle">Display viewing direction</string>
     <string name="stop_navigation">Clear destin.</string>
     <string name="navigate_to_point">Set as dest.</string>
@@ -875,54 +928,4 @@
 <string name="edit_filter_delete_message">Filter {0} has been deleted</string>
 <string name="edit_filter_create_message">Filter {0} has been created</string>
 <string name="default_buttons_selectall">Select All</string>
-
-<string name="backToMenu">Back To Menu</string>
-<string name="zoomOut">Zoom out</string>
-<string name="zoomIn">Zoom in</string>
-<string name="zoomIs">Zoom is</string>
-
-<string name="north">north</string>
-<string name="north_north_east">north-north-east</string>
-<string name="north_east">north-east</string>
-<string name="east_north_east">east-north-east</string>
-<string name="east">east</string>
-<string name="east_south_east">east-south-east</string>
-<string name="south_east">south-east</string>
-<string name="south_south_east">south-south-east</string>
-<string name="south">south</string>
-<string name="south_south_west">south-south-west</string>
-<string name="south_west">south-west</string>
-<string name="west_south_west">west-south-west</string>
-<string name="west">west</string>
-<string name="west_north_west">west-north-west</string>
-<string name="north_west">north-west</string>
-<string name="north_north_west">north-north-west</string>
-<string name="front">Front</string>
-<string name="front_right">Front right</string>
-<string name="right">Right</string>
-<string name="back_right">Back right</string>
-<string name="back">Back</string>
-<string name="back_left">Back left</string>
-<string name="left">Left</string>
-<string name="front_left">Front left</string>
-<string name="oclock">o\'clock</string>
-<string name="towards">towards</string>
-<string name="accuracy">Accuracy</string>
-<string name="altitude">Altitude</string>
-<string name="no_info">No info</string>
-<string name="direction_style_sidewise">Sidewise (8 sectors)</string>
-<string name="direction_style_clockwise">Clockwise (12 sectors)</string>
-<string name="settings_direction_style">Direction style</string>
-<string name="settings_direction_style_descr">Choose style to express relative directions while moving</string>
-<string name="auto_announce_on">Start autoannouncing</string>
-<string name="auto_announce_off">Stop autoannouncing</string>
-<string name="scroll_map_by_gestures_descr">Scroll map by gestures on the touchscreen</string>
-<string name="scroll_map_by_gestures">Natural map scrolling</string>
-<string name="i_am_here">I am here</string>
-<string name="zoom_by_trackball_descr">Change map zooming by horizontal trackball moves</string>
-<string name="zoom_by_trackball">Use trackball for zoom control</string>
-<string name="use_short_object_names_descr">Use short object names in touch exploration mode</string>
-<string name="use_short_object_names">Use object names</string>
-<string name="accessibility_preferences_descr">Accessibility related preferences</string>
-<string name="accessibility_preferences">Accessibility</string>
 </resources>

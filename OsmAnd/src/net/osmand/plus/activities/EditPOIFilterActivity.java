@@ -7,8 +7,8 @@ import java.text.MessageFormat;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.OsmAndFormatter;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapRenderingTypes;

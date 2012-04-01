@@ -15,12 +15,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.osmand.access.AccessibleToast;
-import net.osmand.access.NavigationInfo;
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.ResultMatcher;
+import net.osmand.access.AccessibleToast;
+import net.osmand.access.NavigationInfo;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
@@ -305,7 +305,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 				}
 				
 				String s = typesToString(map);
-				Toast.makeText(this, getString(R.string.poi_query_by_name_matches_categories) + s, Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(this, getString(R.string.poi_query_by_name_matches_categories) + s, Toast.LENGTH_LONG).show();
 			}
 		}
 	}
@@ -403,7 +403,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	private void onLongClick(final Amenity amenity) {
 		String format = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.USE_ENGLISH_NAMES.get());
 		if (amenity.getOpeningHours() != null) {
-			Toast.makeText(this, format + "  " + getString(R.string.opening_hours) + " : " + amenity.getOpeningHours(), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(this, format + "  " + getString(R.string.opening_hours) + " : " + amenity.getOpeningHours(), Toast.LENGTH_LONG).show();
 		}
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(SearchPOIActivity.this);
@@ -592,7 +592,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 			searchPOILevel.setText(R.string.search_POI_level_btn);
 			if (isNameFinderFilter()) {
 				if (!Algoritms.isEmpty(((NameFinderPoiFilter) filter).getLastError())) {
-					Toast.makeText(SearchPOIActivity.this, ((NameFinderPoiFilter) filter).getLastError(), Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(SearchPOIActivity.this, ((NameFinderPoiFilter) filter).getLastError(), Toast.LENGTH_LONG).show();
 				}
 				amenityAdapter.setNewModel(result, "");
 				showOnMap.setEnabled(amenityAdapter.getCount() > 0);

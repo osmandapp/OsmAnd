@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 // This class serves as a delegate of accessibility service
 // providing a sort of touch exploration capability

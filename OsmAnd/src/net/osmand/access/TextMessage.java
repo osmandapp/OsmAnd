@@ -1,12 +1,7 @@
 package net.osmand.access;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.osmand.plus.R;
-
 import android.content.Context;
-import android.text.TextUtils.SimpleStringSplitter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;

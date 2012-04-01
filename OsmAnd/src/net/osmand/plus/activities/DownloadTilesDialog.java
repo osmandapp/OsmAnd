@@ -3,9 +3,9 @@ package net.osmand.plus.activities;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.LogUtil;
 import net.osmand.Version;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
@@ -21,8 +21,8 @@ import net.osmand.plus.views.OsmandMapTileView;
 import org.apache.commons.logging.Log;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Rect;
