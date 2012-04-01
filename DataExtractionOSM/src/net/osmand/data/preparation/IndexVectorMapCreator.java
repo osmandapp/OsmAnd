@@ -502,13 +502,10 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		if (e instanceof Way || e instanceof Node) {
 			// manipulate what kind of way to load
 			ctx.loadEntityData(e);
-			if(e instanceof Way && "coastline".equals(e.getTag(OSMTagKey.NATURAL))){
-				coastlineProcessor.processCoastline((Way) e);
-				return;
-			} else if(true){
-				// FIXME
-				return;
-			}
+//			if(e instanceof Way && "coastline".equals(e.getTag(OSMTagKey.NATURAL))){
+//				coastlineProcessor.processCoastline((Way) e);
+//				return;
+//			}
 			for (int level = 0; level < mapZooms.size(); level++) {
 				boolean area = renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), typeUse, addtypeUse, namesUse,
 						tempNameUse);

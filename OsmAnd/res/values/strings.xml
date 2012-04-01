@@ -534,7 +534,7 @@
 	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by new the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
 	<string name="downloading_build">Downloading build&#8230;</string>
-	<string name="install_selected_build">Continue to install OsmAnd - {0} from {1} {2} MB ?</string>
+	<string name="install_selected_build">Do you want to install OsmAnd - {0} from {1} {2} MB ?</string>
 	<string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
 	<string name="loading_builds">Loading OsmAnd builds&#8230;</string>
 	<string name="select_build_to_install">Select one of the OsmAnd builds to install</string>
@@ -676,7 +676,7 @@
 	<string name="route_tsll">Turn slightly left and go</string>
 	<string name="route_tu">Make U-turn and go</string>
 	<string name="route_head">Head</string>
-	<string name="first_time_continue">Continue</string>
+	<string name="first_time_continue">No, Thanks</string>
 	<string name="first_time_download">Download regions</string>
 	<string name="first_time_msg">Thank you for choosing OsmAnd. \nTo use the major features of this application, you will need some regional offline data, which you can download (use Settings, Offline Data). Afterwards, you will be able to search by address, look up POIs and find public transportation.</string>
 	<string name="search_poi_location">Searching for signal&#8230;</string>

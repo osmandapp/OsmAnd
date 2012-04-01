@@ -534,6 +534,7 @@ public class BinaryMapIndexReader {
 			switch (tag) {
 			case 0:
 				// encoding rules are required!
+				index.finishInitializingTags();
 				if(index.encodingRules.isEmpty()){
 					throw new IllegalStateException("Encoding rules are not defined for the map index");
 				}
@@ -1314,6 +1315,8 @@ public class BinaryMapIndexReader {
 		public int nameEncodingType = 0;
 		public int refEncodingType = -1;
 		public int coastlineEncodingType = -1;
+		public int coastlineBrokenEncodingType = -1;
+		public int landEncodingType = -1;
 		public int onewayAttribute = -1;
 		public int onewayReverseAttribute = -1;
 		public TIntHashSet positiveLayers = new TIntHashSet(2);
@@ -1325,6 +1328,11 @@ public class BinaryMapIndexReader {
 		
 		public TagValuePair decodeType(int type){
 			return decodingRules.get(type);
+		}
+
+		public void finishInitializingTags() {
+			coastlineBrokenEncodingType = encodingRules.size() * 2;
+			initMapEncodingRule(0, coastlineBrokenEncodingType, "natural", "coastline_broken");
 		}
 		
 		private void initMapEncodingRule(int type, int id, String tag, String val) {
@@ -1340,6 +1348,8 @@ public class BinaryMapIndexReader {
 				nameEncodingType = id;
 			} else if("natural".equals(tag) && "coastline".equals(val)){
 				coastlineEncodingType = id;
+			} else if("natural".equals(tag) && "land".equals(val)){
+				landEncodingType = id;
 			} else if("oneway".equals(tag) && "yes".equals(val)){
 				onewayAttribute = id;
 			} else if("oneway".equals(tag) && "-1".equals(val)){

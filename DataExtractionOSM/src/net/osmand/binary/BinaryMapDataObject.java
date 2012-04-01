@@ -22,6 +22,14 @@ public class BinaryMapDataObject {
 	public BinaryMapDataObject(){
 	}
 	
+	public BinaryMapDataObject(int[] coordinates, int[] types, int[][] polygonInnerCoordinates, long id){
+		this.polygonInnerCoordinates = polygonInnerCoordinates;
+		this.coordinates = coordinates;
+		this.additionalTypes = new int[0];
+		this.types = types;
+		this.id = id;
+	}
+	
 	protected void setCoordinates(int[] coordinates) {
 		this.coordinates = coordinates;
 	}

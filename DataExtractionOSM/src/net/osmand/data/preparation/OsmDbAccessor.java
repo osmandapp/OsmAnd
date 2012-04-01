@@ -190,7 +190,11 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 						int ord = rs.getInt(2);
 						if (ord > 0 || first) {
 							first = false;
-							way.addNode(new Node(rs.getDouble(5), rs.getDouble(6), rs.getLong(1)));
+							if(rs.getObject(5) != null) {
+								way.addNode(new Node(rs.getDouble(5), rs.getDouble(6), rs.getLong(1)));
+							} else {
+								way.addNode(rs.getLong(1));
+							}
 						}
 						if (ord == 0 && rs.getObject(3) != null) {
 							way.putTag(rs.getString(3), rs.getString(4));

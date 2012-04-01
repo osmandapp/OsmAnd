@@ -15,7 +15,6 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.osm.MapRenderingTypes;
-import net.osmand.osm.MultyPolygon;
 import net.osmand.plus.render.NativeOsmandLibrary.NativeSearchResult;
 import net.osmand.plus.render.TextRenderer.TextDrawInfo;
 import net.osmand.render.RenderingRuleProperty;
@@ -385,49 +384,34 @@ public class OsmandRenderer {
 		TIntObjectHashMap<TIntArrayList> orderMap = new TIntObjectHashMap<TIntArrayList>();
 		if (render != null) {
 			render.clearState();
-			
+
 			for (int i = 0; i < sz; i++) {
 				BinaryMapDataObject o = objects.get(i);
 				int sh = i << 8;
-				if (o instanceof MultyPolygon) {
-					//FIXME Multipolygon : 1
-//					int layer = ((MultyPolygon) o).getLayer();
-//					render.setTagValueZoomLayer(((MultyPolygon) o).getTag(), ((MultyPolygon) o).getValue(), rc.zoom, layer);
-//					render.setIntFilter(render.ALL.R_ORDER_TYPE, MapRenderingTypes.POLYGON_TYPE);
-//					if(render.search(RenderingRulesStorage.ORDER_RULES)) {
-//						int order = render.getIntPropertyValue(render.ALL.R_ORDER);
-//						put(orderMap, order, sh, init);
-//						if(render.isSpecified(render.ALL.R_SHADOW_LEVEL)){
-//							rc.shadowLevelMin = Math.min(rc.shadowLevelMin, order);
-//							rc.shadowLevelMax = Math.max(rc.shadowLevelMax, order);
-//							render.clearValue(render.ALL.R_SHADOW_LEVEL);
-//						}
-//					}
-				} else {
-					for (int j = 0; j < o.getTypes().length; j++) {
-						// put(orderMap, BinaryMapDataObject.getOrder(o.getTypes()[j]), sh + j, init);
-						int wholeType = o.getTypes()[j];
-						
-						int layer = 0;
-						if (o.getPointsLength() > 1) {
-							layer = o.getSimpleLayer();
-						}
 
-						TagValuePair pair = o.getMapIndex().decodeType(wholeType);
-						if (pair != null) {
-							render.setTagValueZoomLayer(pair.tag, pair.value, rc.zoom, layer);
-							render.setBooleanFilter(render.ALL.R_AREA, o.isArea());
-							render.setBooleanFilter(render.ALL.R_POINT, o.getPointsLength() == 1);
-							render.setBooleanFilter(render.ALL.R_CYCLE, o.isCycle());
-							if (render.search(RenderingRulesStorage.ORDER_RULES)) {
-								o.setObjectType(render.getIntPropertyValue(render.ALL.R_OBJECT_TYPE));
-								int order = render.getIntPropertyValue(render.ALL.R_ORDER);
-								put(orderMap, order, sh + j, init);
-								if (render.isSpecified(render.ALL.R_SHADOW_LEVEL)) {
-									rc.shadowLevelMin = Math.min(rc.shadowLevelMin, order);
-									rc.shadowLevelMax = Math.max(rc.shadowLevelMax, order);
-									render.clearValue(render.ALL.R_SHADOW_LEVEL);
-								}
+				for (int j = 0; j < o.getTypes().length; j++) {
+					// put(orderMap, BinaryMapDataObject.getOrder(o.getTypes()[j]), sh + j, init);
+					int wholeType = o.getTypes()[j];
+
+					int layer = 0;
+					if (o.getPointsLength() > 1) {
+						layer = o.getSimpleLayer();
+					}
+
+					TagValuePair pair = o.getMapIndex().decodeType(wholeType);
+					if (pair != null) {
+						render.setTagValueZoomLayer(pair.tag, pair.value, rc.zoom, layer);
+						render.setBooleanFilter(render.ALL.R_AREA, o.isArea());
+						render.setBooleanFilter(render.ALL.R_POINT, o.getPointsLength() == 1);
+						render.setBooleanFilter(render.ALL.R_CYCLE, o.isCycle());
+						if (render.search(RenderingRulesStorage.ORDER_RULES)) {
+							o.setObjectType(render.getIntPropertyValue(render.ALL.R_OBJECT_TYPE));
+							int order = render.getIntPropertyValue(render.ALL.R_ORDER);
+							put(orderMap, order, sh + j, init);
+							if (render.isSpecified(render.ALL.R_SHADOW_LEVEL)) {
+								rc.shadowLevelMin = Math.min(rc.shadowLevelMin, order);
+								rc.shadowLevelMax = Math.max(rc.shadowLevelMax, order);
+								render.clearValue(render.ALL.R_SHADOW_LEVEL);
 							}
 						}
 
@@ -452,21 +436,14 @@ public class OsmandRenderer {
 	protected void drawObj(BinaryMapDataObject obj, RenderingRuleSearchRequest render, Canvas canvas, RenderingContext rc, int l,
 			boolean renderText, boolean drawOnlyShadow) {
 		rc.allObjects++;
-		if (obj instanceof MultyPolygon) {
-			// TODO
-			if(!drawOnlyShadow){
-				drawMultiPolygon(obj, render, canvas, rc);
-			}
-		} else {
-			int type = obj.getObjectType();
-			TagValuePair pair = obj.getMapIndex().decodeType(obj.getTypes()[l]);
-			if (type == MapRenderingTypes.POINT_TYPE && !drawOnlyShadow) {
-				drawPoint(obj, render, canvas, rc, pair, renderText);
-			} else if (type == MapRenderingTypes.POLYLINE_TYPE) {
-				drawPolyline(obj, render, canvas, rc, pair, obj.getSimpleLayer(), drawOnlyShadow);
-			} else if (type == MapRenderingTypes.POLYGON_TYPE && !drawOnlyShadow) {
-				drawPolygon(obj, render, canvas, rc, pair);
-			}
+		int type = obj.getObjectType();
+		TagValuePair pair = obj.getMapIndex().decodeType(obj.getTypes()[l]);
+		if (type == MapRenderingTypes.POINT_TYPE && !drawOnlyShadow) {
+			drawPoint(obj, render, canvas, rc, pair, renderText);
+		} else if (type == MapRenderingTypes.POLYLINE_TYPE) {
+			drawPolyline(obj, render, canvas, rc, pair, obj.getSimpleLayer(), drawOnlyShadow);
+		} else if (type == MapRenderingTypes.POLYGON_TYPE && !drawOnlyShadow) {
+			drawPolygon(obj, render, canvas, rc, pair);
 		}
 	}
 
@@ -491,68 +468,9 @@ public class OsmandRenderer {
 		return calcPoint(o.getPoint31XTile(ind), o.getPoint31YTile(ind), rc);
 	}
 
-	private PointF calcMultiPolygonPoint(MultyPolygon o, int i, int b, RenderingContext rc){
-		rc.pointCount ++;
-		float tx = o.getPoint31XTile(i, b)/ rc.tileDivisor;
-		float ty = o.getPoint31YTile(i, b) / rc.tileDivisor;
-		float dTileX = tx - rc.leftX;
-		float dTileY = ty - rc.topY;
-		float x = rc.cosRotateTileSize * dTileX - rc.sinRotateTileSize * dTileY;
-		float y = rc.sinRotateTileSize * dTileX + rc.cosRotateTileSize * dTileY;
-		rc.tempPoint.set(x, y);
-		if(rc.tempPoint.x >= 0 && rc.tempPoint.x < rc.width && 
-				rc.tempPoint.y >= 0 && rc.tempPoint.y < rc.height){
-			rc.pointInsideCount++;
-		}
-		return rc.tempPoint;
-	}
 
 	public void clearCachedResources(){
 		shaders.clear();
-	}
-	
-	private void drawMultiPolygon(BinaryMapDataObject obj, RenderingRuleSearchRequest render, Canvas canvas, RenderingContext rc) {
-		String tag = ((MultyPolygon)obj).getTag();
-		String value = ((MultyPolygon)obj).getValue();
-		if(render == null || tag == null){
-			return;
-		}
-		render.setInitialTagValueZoom(tag, value, rc.zoom);
-		boolean rendered = render.search(RenderingRulesStorage.POLYGON_RULES);
-		if(!rendered || !updatePaint(render, paint, 0, true, rc)){
-			return;
-		}
-		rc.visible++;
-		Path path = new Path();
-		for (int i = 0; i < ((MultyPolygon) obj).getBoundsCount(); i++) {
-			int cnt = ((MultyPolygon) obj).getBoundPointsCount(i);
-			float xText = 0;
-			float yText = 0;
-			for (int j = 0; j < cnt; j++) {
-				PointF p = calcMultiPolygonPoint((MultyPolygon) obj, j, i, rc);
-				xText += p.x;
-				yText += p.y;
-				if (j == 0) {
-					path.moveTo(p.x, p.y);
-				} else {
-					path.lineTo(p.x, p.y);
-				}
-			}
-			if (cnt > 0) {
-				textRenderer.renderText(obj, render, rc, new TagValuePair(tag, value, 0), xText / cnt, yText / cnt, null, null);
-			}
-		}
-		canvas.drawPath(path, paint);
-		// for test purpose 
-//		paint.setStyle(Style.STROKE);
-//		paint.setStrokeWidth(1.5f);
-//		paint.setColor(Color.BLACK);
-//		paint.setPathEffect(null);
-//		canvas.drawPath(path, paint);
-		
-		if (updatePaint(render, paint, 1, false, rc)) {
-			canvas.drawPath(path, paint);
-		}
 	}
 	
 	private void drawPolygon(BinaryMapDataObject obj, RenderingRuleSearchRequest render, Canvas canvas, RenderingContext rc, TagValuePair pair) {

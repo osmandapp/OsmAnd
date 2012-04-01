@@ -198,7 +198,8 @@
 			 <filter layer="1" tag="highway" value="bridleway" order="67"/>
 			<filter appMode="pedestrian" tag="highway" value="bridleway" order="59"/>
 			<filter tag="highway" value="bridleway" order="35"/>
-
+			
+			<filter tag="natural" value="coastline_broken" order="4"/>
 		</group>
 		
 		<group objectType="3" point="false">
@@ -232,6 +233,7 @@
 
 			<filter tag="natural" value="water" order="5"/>
 			<filter tag="natural" value="bay" order="5"/>
+			<filter tag="natural" value="land" order="2"/>
 			<filter tag="natural" value="coastline" order="1"/>
 			<filter tag="natural" value="" order="1"/>
 		</group>
@@ -822,7 +824,7 @@
 
 		<!-- Water, night color 330099 -->
 		<group>
-			<filter minzoom="1" tag="natural" value="coastline"/>
+			<filter minzoom="1" tag="natural" value="coastline" color_2="#464646" strokeWidth_2="0.5"/>
 			<filter minzoom="4" tag="natural" value="water"/>
 			<filter minzoom="4" tag="natural" value="lake"/>
 			<filter minzoom="4" tag="natural" value="bay"/>
@@ -847,9 +849,15 @@
 		</group>
 
 
+	 <group>
+	 	<filter noPolygons="true"  tag="natural" value="land" color="#00ffffff"/>
+	 	<filter nightMode="true"  tag="natural" value="land" color="#003333"/>
+		<filter tag="natural" value="land" color="#f1eae4"/>
+	 </group>
+
 		<!-- Open nature, night color 004333 -->
 		<group>
-			<filter minzoom="10" color="#f2efe9" tag="natural" value="land"/>
+			
 			<filter minzoom="12" color="#ffffc0" tag="natural" value="heath"/>
 			<filter minzoom="12" color="#ead8bd" tag="landuse" value="farm"/>
 			<filter minzoom="12" color="#ead8bd" tag="landuse" value="farmland"/>
@@ -944,12 +952,13 @@
 		<filter minzoom="9" shader="glacier" color="#100000" color_2="#99ccff" strokeWidth_2="2" tag="natural" value="glacier"/>
 		<filter minzoom="10" shader="danger" color="#100000" tag="military" value="danger_area"/>
 		<filter minzoom="9" shader="nr2" color="#abdf96" color_2="#66cc33" strokeWidth_2="1" tag="leisure" value="nature_reserve"/>
-	<groupFilter noPolygons="true" color="#00ffffff" color_2="#00ffffff" shader=""/>
+		<groupFilter noPolygons="true" color="#00ffffff" color_2="#00ffffff" shader=""/>
 	</group>
 	</polygon>
 
 
 	<line>
+	    <filter minzoom="1" tag="natural" value="coastline_broken" color="#000000" strokeWidth_2="1.5"/>
 		<group>
 			<filter hmRendered="true" tag="highway" value="motorway" maxzoom="13" color="#809bff"/>
 				<filter tag="highway" value="motorway" maxzoom="13" color="#a58dff"/>

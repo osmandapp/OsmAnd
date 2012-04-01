@@ -1,5 +1,7 @@
 package net.osmand.data;
 
+import gnu.trove.list.TLongList;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -165,6 +167,66 @@ public class MapAlgorithms {
 		return clockwiseSum >= 0;
 	}
 	
+	public static boolean isClockwiseWay(TLongList c) {
+		if (c.size() == 0) {
+			return true;
+		}
+
+		// calculate middle Y
+		int mask = 0xffffffff;
+		long middleY = 0;
+		for (int i = 0; i < c.size(); i++) {
+			middleY += (c.get(i) & mask);
+		}
+		middleY /= (long) c.size();
+
+		double clockwiseSum = 0;
+
+		boolean firstDirectionUp = false;
+		int previousX = Integer.MIN_VALUE;
+		int firstX = Integer.MIN_VALUE;
+
+		int prevX = (int) (c.get(0) >> 32);
+		int prevY = (int) (c.get(0) & mask);
+
+		for (int i = 1; i < c.size(); i++) {
+			int x = (int) (c.get(i) >> 32);
+			int y = (int) (c.get(i) & mask);
+			int rX = ray_intersect_x(prevX, prevY, x, y, (int) middleY);
+			if (rX != Integer.MIN_VALUE) {
+				boolean skipSameSide = (y <= middleY) == (prevY <= middleY);
+				if (skipSameSide) {
+					continue;
+				}
+				boolean directionUp = prevY >= middleY;
+				if (firstX == Integer.MIN_VALUE) {
+					firstDirectionUp = directionUp;
+					firstX = rX;
+				} else {
+					boolean clockwise = (!directionUp) == (previousX < rX);
+					if (clockwise) {
+						clockwiseSum += Math.abs(previousX - rX);
+					} else {
+						clockwiseSum -= Math.abs(previousX - rX);
+					}
+				}
+				previousX = rX;
+				prevX = x;
+				prevY = y;
+			}
+		}
+		if (firstX != Integer.MIN_VALUE) {
+			boolean clockwise = (!firstDirectionUp) == (previousX < firstX);
+			if (clockwise) {
+				clockwiseSum += Math.abs(previousX - firstX);
+			} else {
+				clockwiseSum -= Math.abs(previousX - firstX);
+			}
+		}
+
+		return clockwiseSum >= 0;
+	}
+	
 	// try to intersect from left to right
 	public static double ray_intersect_lon(Node node, Node node2, double latitude, double longitude) {
 		// a node below
@@ -193,6 +255,33 @@ public class MapAlgorithms {
 					return -360d;
 				}
 			}
+		}
+	}
+	
+	public static int ray_intersect_x(int prevX, int prevY, int x, int y, int middleY) {
+		// prev node above line
+		// x,y node below line
+		if (prevY > y) {
+			int tx = prevX;
+			int ty = prevY;
+			x = prevX;
+			y = prevY;
+			prevX = tx;
+			prevY = ty;
+		}
+		if (y == middleY || prevY == middleY) {
+			middleY -= 1;
+		}
+		if (prevY > middleY || y < middleY) {
+			return Integer.MIN_VALUE;
+		} else {
+			if (y == prevY) {
+				// the node on the boundary !!!
+				return x;
+			}
+			// that tested on all cases (left/right)
+			double rx = x + ((double) middleY - y) * ((double) x - prevX) / (((double) y - prevY));
+			return (int) rx;
 		}
 	}
 }
