@@ -5,7 +5,6 @@ import gnu.trove.set.hash.TIntHashSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.access.AccessibleToast;

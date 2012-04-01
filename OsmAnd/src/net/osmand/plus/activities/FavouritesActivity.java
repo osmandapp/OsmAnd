@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;

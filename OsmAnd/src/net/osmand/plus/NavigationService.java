@@ -1,6 +1,6 @@
 package net.osmand.plus;
 
-import net.osmand.access.AccessibleToast;
+
 import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.activities.LiveMonitoringHelper;

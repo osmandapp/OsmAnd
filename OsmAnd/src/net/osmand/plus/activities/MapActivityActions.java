@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.CallbackWithObject;
 import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
