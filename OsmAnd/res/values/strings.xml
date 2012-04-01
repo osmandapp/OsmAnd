@@ -438,6 +438,7 @@
 \n\tAs an basic introduction, some usage tips and tricks are linked on the main menu screen.</string>
 	<string name="next_button">Next</string>
 	<string name="previous_button">Previous</string>
+	<string name="info_button">Info</string>
 
 	<string name="unit_of_length_descr">Change units of length and speed</string>
 	<string name="unit_of_length">Unit of measure</string>
@@ -595,6 +596,7 @@
 	<string name="poi_namefinder_query_empty">Input search query to find POI</string>
 	<string name="any_poi">Any</string>
 
+	<string name="back_to_location">Back to location</string>
 	<string name="layer_transport_route">Transport route</string>
 	<string name="thanks_yandex_traffic">Thanks to Yandex for traffic information.</string>
 	<string name="layer_yandex_traffic">Yandex traffic</string>
@@ -751,6 +753,7 @@
 	<string name="invalid_locations">Coordinates are invalid!</string>
 	<string name="go_back_to_osmand">Go back to OsmAnd map</string>
 	<string name="close">Close</string>
+	<string name="help">Help</string>
 	<string name="loading_data">Loading data&#8230;</string>
 	<string name="reading_indexes">Reading local data&#8230;</string>
 	<string name="previous_run_crashed">Last OsmAnd run crashed. Log file is at {0}. Please report the issue and attach the log file.</string>
@@ -778,6 +781,7 @@
     <string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
     <string name="save_track_to_gpx">Log track to GPX</string>
     <string name="navigate_to">Set as destination</string>
+    <string name="show_details">Show details</string>
     <string name="update_tile">Update map</string>
     <string name="reload_tile">Reload tile</string>
     <string name="mark_point">Target</string>
@@ -924,5 +928,4 @@
 <string name="edit_filter_delete_message">Filter {0} has been deleted</string>
 <string name="edit_filter_create_message">Filter {0} has been created</string>
 <string name="default_buttons_selectall">Select All</string>
-
 </resources>

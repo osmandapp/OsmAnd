@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<net.osmand.access.AccessibleLayout xmlns:android="http://schemas.android.com/apk/res/android"
+class="net.osmand.access.AccessibleLayout"
 android:layout_width="fill_parent" android:layout_height="fill_parent" android:background="@drawable/background">
 	<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical">
   		<LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center_horizontal">
@@ -8,18 +9,20 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
   			android:orientation="horizontal"  android:id="@+id/Headliner" android:layout_marginLeft="8dp" android:layout_marginRight="8dp">
   				<ImageView android:src="@drawable/icon_small" android:layout_marginLeft="4dp" android:layout_marginTop="4dp"
   				android:layout_height="wrap_content" android:layout_width="wrap_content"/>
-  				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/AppName"
-  				android:layout_marginLeft="2dp" android:layout_marginTop="3dp" 
-				android:text="@string/app_name" android:textColor="#000000" android:typeface="serif" android:textSize="20sp"/>
-				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1"
-				android:layout_marginLeft="12dp" android:layout_marginTop="3dp" android:layout_marginBottom="3dp" android:text="@string/app_version" android:gravity="right"
-				android:textColor="#000000" android:typeface="serif" android:id="@+id/TextVersion" android:textSize="13sp"/> 
-				<ImageView android:id="@+id/HelpButton" android:clickable="true" android:layout_marginTop="7dp" android:layout_marginLeft="4dp" 
+  				<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:orientation="vertical" android:gravity="center_horizontal">
+  					<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/AppName"
+  					android:layout_marginLeft="2dp" android:layout_marginTop="3dp" 
+					android:text="@string/app_name" android:textColor="#000000" android:typeface="serif" android:textSize="20sp"/>
+					<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1"
+					android:layout_marginLeft="2dp" android:layout_marginTop="3dp" android:layout_marginBottom="3dp" android:text="@string/app_version"
+					android:textColor="#000000" android:typeface="serif" android:id="@+id/TextVersion" android:textSize="13sp"/> 
+				</LinearLayout>
+				<ImageButton android:id="@+id/HelpButton" android:layout_marginTop="7dp" android:layout_marginLeft="4dp" 
   				android:layout_height="wrap_content" android:layout_width="wrap_content" android:src="@drawable/help_icon"
-  				android:focusable="true"/>				  
-				<ImageView android:layout_marginRight="2dp" android:clickable="true" android:id="@+id/CloseButton"
+  				android:contentDescription="@string/help"/>				  
+				<ImageButton android:layout_marginRight="2dp" android:id="@+id/CloseButton"
 				android:layout_marginTop="7dp" android:layout_height="wrap_content" android:layout_width="wrap_content"
-				android:layout_marginLeft="0dp" android:src="@drawable/headliner_close" android:focusable="true"/>		  
+				android:layout_marginLeft="0dp" android:src="@drawable/headliner_close" android:contentDescription="@string/close"/>		  
 			</LinearLayout>
 		</LinearLayout>
 		<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
@@ -75,4 +78,4 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 			</TableRow>
 		</TableLayout>
 	</LinearLayout>  
-</FrameLayout>
+</net.osmand.access.AccessibleLayout>

@@ -2,7 +2,9 @@ package net.osmand.plus.views;
 
 
 import net.osmand.osm.LatLon;
+import net.osmand.access.AccessibilityDelegate;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.ShowRouteInfoActivity;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
@@ -35,7 +37,8 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 	
 	
 	
-	public RouteInfoLayer(RoutingHelper routingHelper, LinearLayout layout, ContextMenuLayer contextMenu){
+	public RouteInfoLayer(RoutingHelper routingHelper, MapActivity activity, ContextMenuLayer contextMenu){
+		final LinearLayout layout = (LinearLayout) activity.findViewById(R.id.RouteLayout);
 		this.routingHelper = routingHelper;
 		this.contextMenu = contextMenu;
 		prev = (Button) layout.findViewById(R.id.PreviousButton);
@@ -44,6 +47,10 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 		routingHelper.addListener(this);
 		attachListeners();
 		updateVisibility();
+
+		activity.accessibleContent.add(prev);
+		activity.accessibleContent.add(next);
+		activity.accessibleContent.add(info);
 	}
 	
 	@Override

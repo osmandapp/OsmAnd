@@ -381,11 +381,15 @@ public class OsmandSettings {
 
 		@Override
 		protected E getValue(SharedPreferences prefs, E defaultValue) {
-			int i = prefs.getInt(getId(), -1);
-			if(i < 0 || i >= values.length){
-				return defaultValue;
+			try {
+				int i = prefs.getInt(getId(), -1);
+				if(i >= 0 && i < values.length){
+					return values[i];
+				}
+			} catch (ClassCastException ex) {
+				setValue(prefs, defaultValue);
 			}
-			return values[i];
+			return defaultValue;
 		}
 		
 		@Override
@@ -408,11 +412,6 @@ public class OsmandSettings {
 	// cache of metrics constants as they are used very often
 	public final OsmandPreference<MetricsConstants> METRIC_SYSTEM = new EnumIntPreference<MetricsConstants>(
 			"default_metric_system", MetricsConstants.KILOMETERS_AND_METERS, true, true, MetricsConstants.values());
-
-	public String getId() {
-		return "direction_style";
-	};
-
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	// cache of metrics constants as they are used very often

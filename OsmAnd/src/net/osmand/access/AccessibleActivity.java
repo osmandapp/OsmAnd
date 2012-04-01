@@ -1,8 +1,15 @@
 package net.osmand.access;
 
+import net.osmand.access.AccessibleContent;
+import net.osmand.access.TextMessage;
+import net.osmand.plus.R;
+
 import android.app.Activity;
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 
 // Provide some additional accessibility means for activity view elements.
 //

@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.LogUtil;
+import net.osmand.OsmAndFormatter;
 import net.osmand.access.AccessibleToast;
+import net.osmand.access.MapExplorer;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.IMapLocationListener;
@@ -15,6 +17,8 @@ import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 
@@ -36,11 +40,13 @@ import android.util.FloatMath;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.GestureDetector.OnGestureListener;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.WindowManager;
+import android.view.SurfaceHolder.Callback;
 import android.widget.Toast;
 
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback {
@@ -92,6 +98,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private List<OsmandMapLayer> layers = new ArrayList<OsmandMapLayer>();
 	
 	private BaseMapLayer mainLayer;
+	private ContextMenuLayer contextMenuLayer;
 	
 	private Map<OsmandMapLayer, Float> zOrders = new HashMap<OsmandMapLayer, Float>();
 
@@ -160,7 +167,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		getHolder().addCallback(this);
 
 		animatedDraggingThread = new AnimateDraggingMapThread(this);
-		gestureDetector = new GestureDetector(getContext(), new MapTileViewOnGestureListener());
+		gestureDetector = new GestureDetector(getContext(), new MapExplorer(this, new MapTileViewOnGestureListener()));
 		multiTouchSupport = new MultiTouchSupport(getContext(), new MapTileViewMultiTouchZoomListener());
 		gestureDetector.setOnDoubleTapListener(new MapTileViewOnDoubleTapListener());
 
@@ -182,6 +189,11 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		return false;
 	}
 
 	public void addLayer(OsmandMapLayer layer, float zOrder) {
@@ -218,6 +230,14 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	public OsmandApplication getApplication() {
 		return application;
+	}
+
+	public void setContextMenuLayer(ContextMenuLayer layer) {
+		contextMenuLayer = layer;
+	}
+
+	public ContextMenuLayer getContextMenuLayer() {
+		return contextMenuLayer;
 	}
 
 	// ///////////////////////// NON UI PART (could be extracted in common) /////////////////////////////
@@ -765,9 +785,17 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			float dz = (float) (Math.log(relativeToStart) / Math.log(2) * 1.5);
 			float calcZoom = initialMultiTouchZoom + dz;
 			setZoom(Math.round(calcZoom));
-			zoomPositionChanged(getZoom());
+			final int newZoom = getZoom();
+			zoomPositionChanged(newZoom);
+			if (newZoom != initialMultiTouchZoom) {
+				showMessage(getContext().getString(R.string.zoomIs) + " " + String.valueOf(newZoom)); //$NON-NLS-1$
+			} else {
+				final LatLon p1 = getLatLonFromScreenPoint(x1, y1);
+				final LatLon p2 = getLatLonFromScreenPoint(x2, y2);
+				showMessage(OsmAndFormatter.getFormattedDistance((float)MapUtils.getDistance(p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude()), getContext()));
+			}
 		}
-		
+
 		@Override
 		public void onGestureInit(float x1, float y1, float x2, float y2) {
 			this.x1 = x1;

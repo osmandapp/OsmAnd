@@ -278,7 +278,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		
 		entries = new String[RelativeDirectionStyle.values().length];
 		for(int i=0; i<entries.length; i++){
-			entries[i] = RelativeDirectionStyle.toHumanString(RelativeDirectionStyle.values()[i], this);
+			entries[i] = RelativeDirectionStyle.values()[i].toHumanString(this);
 		}
 		registerListPreference(osmandSettings.DIRECTION_STYLE, screen, entries, RelativeDirectionStyle.values());
 		

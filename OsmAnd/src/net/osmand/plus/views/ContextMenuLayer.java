@@ -63,6 +63,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	
 	@Override
 	public void destroyLayer() {
+		view.setContextMenuLayer(null);
 	}
 
 	@Override
@@ -96,6 +97,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		textView.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
 		textPadding = new Rect();
 		textView.getBackground().getPadding(textPadding);
+
+		view.setContextMenuLayer(this);
 	}
 
 	@Override
@@ -150,8 +153,26 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 	
 
+	public void setSelections(List<Object> selections, IContextMenuProvider contextProvider) {
+		if (selections != null) {
+			selectedObjects = selections;
+		} else {
+			selectedObjects.clear();
+		}
+		if (!selectedObjects.isEmpty()) {
+			selectedContextProvider = contextProvider;
+			latLon = contextProvider.getObjectLocation(selectedObjects.get(0));
+		}
+	}
+
 	@Override
 	public boolean onLongPressEvent(PointF point) {
+		if (!view.getSettings().SCROLL_MAP_BY_GESTURES.get()) {
+			if (!selectedObjects.isEmpty())
+				view.showMessage(activity.getNavigationHint(latLon));
+			return true;
+		}
+		
 		if(pressedInTextView(point.x, point.y)){
 			setLocation(null, ""); //$NON-NLS-1$
 			view.refreshMap();
@@ -171,22 +192,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 		
 		LatLon latLon = view.getLatLonFromScreenPoint(point.x, point.y);
-		StringBuilder description = new StringBuilder(); 
+		String description = getSelectedObjectDescription();
 		
 		if (!selectedObjects.isEmpty()) {
-			if (selectedObjects.size() > 1) {
-				description.append("1. ");
-			}
-			description.append(selectedContextProvider.getObjectDescription(selectedObjects.get(0)));
-			for (int i = 1; i < selectedObjects.size(); i++) {
-				description.append("\n" + (i + 1) + ". ").append(selectedContextProvider.getObjectDescription(selectedObjects.get(i)));
-			}
 			LatLon l = selectedContextProvider.getObjectLocation(selectedObjects.get(0));
 			if (l != null) {
 				latLon = l;
 			}
 		}
-		setLocation(latLon, description.toString());
+		setLocation(latLon, description);
 		view.refreshMap();
 		return true;
 	}
@@ -212,17 +226,37 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	
 	public String getSelectedObjectName(){
 		if(!selectedObjects.isEmpty() && selectedContextProvider != null){
-			return selectedContextProvider.getObjectName(selectedObjects);
+			StringBuilder name = new StringBuilder(); 
+			if (selectedObjects.size() > 1)
+				name.append("1. ");
+			name.append(selectedContextProvider.getObjectName(selectedObjects.get(0)));
+			for (int i = 1; i < selectedObjects.size(); i++)
+				name.append("\n" + (i + 1) + ". ").append(selectedContextProvider.getObjectName(selectedObjects.get(i)));
+			return name.toString();
+		}
+		return null;
+	}
+	
+	public String getSelectedObjectDescription(){
+		if(!selectedObjects.isEmpty() && selectedContextProvider != null){
+			StringBuilder description = new StringBuilder(); 
+			if (selectedObjects.size() > 1)
+				description.append("1. ");
+			description.append(selectedContextProvider.getObjectDescription(selectedObjects.get(0)));
+			for (int i = 1; i < selectedObjects.size(); i++)
+				description.append("\n" + (i + 1) + ". ").append(selectedContextProvider.getObjectDescription(selectedObjects.get(i)));
+			return description.toString();
 		}
 		return null;
 	}
 
 	@Override
 	public boolean onSingleTap(PointF point) {
-		if (pressedInTextView(point.x, point.y)) {
+		boolean nativeMode = view.getSettings().SCROLL_MAP_BY_GESTURES.get();
+		if ((!nativeMode) || pressedInTextView(point.x, point.y)) {
 			if (!selectedObjects.isEmpty()) {
 				showContextMenuForSelectedObjects();
-			} else {
+			} else if (nativeMode) {
 				activity.contextMenuPoint(latLon.getLatitude(), latLon.getLongitude());
 			}
 			return true;

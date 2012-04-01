@@ -7,7 +7,6 @@ import java.util.Arrays;
 import net.osmand.plus.R;
 import android.app.Dialog;
 import android.content.Context;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -105,7 +104,6 @@ public class TipsAndTricksActivity {
 		final Dialog dlg = new Dialog(ctx);
 		dlg.setContentView(R.layout.tips_and_tricks);
 		final TextView tipDescription = (TextView) dlg.findViewById(R.id.TipDescription);
-		tipDescription.setMovementMethod(ScrollingMovementMethod.getInstance());
 		int nextInd = 0;
 		final TIntArrayList toShow = new TIntArrayList();
 		final int[] historyInd = new int[1];

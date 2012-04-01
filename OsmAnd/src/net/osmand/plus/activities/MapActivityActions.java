@@ -233,7 +233,7 @@ public class MapActivityActions implements DialogProvider {
     
     private Dialog createReloadTitleDialog(final Bundle args) {
     	Builder builder = new AlertDialog.Builder(mapActivity);
-    	builder.setMessage(R.string.context_menu_item_update_map_confirm);
+    	builder.setView(mapActivity.accessibleMessage(R.string.context_menu_item_update_map_confirm));
     	builder.setNegativeButton(R.string.default_buttons_cancel, null);
     	final OsmandMapTileView mapView = mapActivity.getMapView();
     	builder.setPositiveButton(R.string.context_menu_item_update_map, new DialogInterface.OnClickListener(){
@@ -415,7 +415,7 @@ public class MapActivityActions implements DialogProvider {
 		};
 		Builder builder = new AlertDialog.Builder(mapActivity);
 		builder.setTitle(R.string.show_route);
-		builder.setMessage(mapActivity.getRoutingHelper().getGeneralRouteInformation());
+		builder.setView(mapActivity.accessibleMessage(mapActivity.getRoutingHelper().getGeneralRouteInformation()));
 		builder.setPositiveButton(R.string.default_buttons_save, saveDirections);
 		builder.setNeutralButton(R.string.show_route, showRoute);
 		builder.setNegativeButton(R.string.close, null);
