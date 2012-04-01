@@ -10,6 +10,7 @@ import java.net.URL;
 import net.osmand.access.AccessibleToast;
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
+import net.osmand.access.AccessibleToast;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;

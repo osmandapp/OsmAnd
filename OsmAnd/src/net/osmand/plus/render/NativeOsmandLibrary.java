@@ -1,13 +1,13 @@
 package net.osmand.plus.render;
 
-import org.apache.commons.logging.Log;
-
 import java.nio.ByteBuffer;
 
 import net.osmand.LogUtil;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+
+import org.apache.commons.logging.Log;
 
 import android.graphics.Bitmap;
 

@@ -14,12 +14,14 @@ import java.util.regex.Pattern;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.LogUtil;
+import net.osmand.access.AccessibleToast;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DialogProvider;
 import net.osmand.plus.activities.MapActivity;
+
 import org.apache.commons.logging.Log;
 
 import android.app.AlertDialog;

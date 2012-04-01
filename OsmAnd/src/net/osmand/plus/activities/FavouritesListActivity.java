@@ -6,8 +6,6 @@ package net.osmand.plus.activities;
 import java.util.Comparator;
 import java.util.List;
 
-import com.google.android.apps.analytics.easytracking.TrackedListActivity;
-
 import net.osmand.FavouritePoint;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
@@ -19,8 +17,8 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +29,8 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.android.apps.analytics.easytracking.TrackedListActivity;
 
 /**
  * 

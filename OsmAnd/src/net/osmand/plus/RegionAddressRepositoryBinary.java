@@ -12,9 +12,9 @@ import java.util.TreeMap;
 
 import net.osmand.Algoritms;
 import net.osmand.CollatorStringMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.LogUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Building;
 import net.osmand.data.City;

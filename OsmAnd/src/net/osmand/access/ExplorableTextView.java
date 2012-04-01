@@ -1,7 +1,5 @@
 package net.osmand.access;
 
-import java.lang.Math;
-
 import android.content.Context;
 import android.text.Layout;
 import android.text.method.ArrowKeyMovementMethod;

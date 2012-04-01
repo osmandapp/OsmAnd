@@ -6,8 +6,8 @@ import java.util.List;
 
 import com.google.android.apps.analytics.easytracking.TrackedActivity;
 
-import net.osmand.access.AccessibleTrackedActivity;
 import net.osmand.access.AccessibleToast;
+import net.osmand.access.AccessibleTrackedActivity;
 import net.osmand.access.NavigationInfo;
 
 import net.osmand.Algoritms;
@@ -67,8 +67,8 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings.Secure;
-import android.util.Log;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -103,7 +103,7 @@ public class MapActivity extends AccessibleTrackedActivity implements IMapLocati
 	
 	private static final int LONG_KEYPRESS_MSG_ID = 28;
 	private static final int LONG_KEYPRESS_DELAY = 500;
-
+	
 	private long lastTimeAutoZooming = 0;
 	
 	private long lastTimeGPSLocationFixed = 0;
@@ -1409,7 +1409,7 @@ public class MapActivity extends AccessibleTrackedActivity implements IMapLocati
 					@Override
 					public void run() {
 						if (settings.MAP_ACTIVITY_ENABLED.get()) {
-							Toast.makeText(MapActivity.this, R.string.auto_follow_location_enabled, Toast.LENGTH_SHORT).show();
+							AccessibleToast.makeText(MapActivity.this, R.string.auto_follow_location_enabled, Toast.LENGTH_SHORT).show();
 							backToLocationImpl();
 						}
 					}

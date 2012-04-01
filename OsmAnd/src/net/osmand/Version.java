@@ -4,7 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import net.osmand.plus.R;
-
 import android.content.Context;
 
 public class Version {

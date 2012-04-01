@@ -1,7 +1,5 @@
 package net.osmand.access;
 
-import com.google.android.apps.analytics.easytracking.TrackedActivity;
-
 import net.osmand.access.AccessibleContent;
 import net.osmand.access.TextMessage;
 import net.osmand.plus.R;
@@ -12,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+
+import com.google.android.apps.analytics.easytracking.TrackedActivity;
 
 // Provide some additional accessibility means for activity view elements.
 //

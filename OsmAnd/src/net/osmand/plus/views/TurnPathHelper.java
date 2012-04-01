@@ -1,16 +1,16 @@
 package net.osmand.plus.views;
 
-import net.osmand.plus.routing.RoutingHelper.TurnType;
 import net.osmand.plus.R;
+import net.osmand.plus.routing.RoutingHelper.TurnType;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Paint.Style;
 import android.graphics.drawable.Drawable;
 import android.util.FloatMath;
 

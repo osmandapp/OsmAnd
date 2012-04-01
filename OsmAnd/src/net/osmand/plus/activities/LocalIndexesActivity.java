@@ -15,6 +15,7 @@ import java.util.Set;
 import net.osmand.Algoritms;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IProgress;
+import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -220,14 +221,14 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 					String newName = editText.getText().toString();
 					File dest = new File(f.getParentFile(), newName);
 					if (dest.exists()) {
-						Toast.makeText(LocalIndexesActivity.this, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
+						AccessibleToast.makeText(LocalIndexesActivity.this, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
 					} else {
 						if(f.renameTo(dest)){
 							asyncLoader = new LoadLocalIndexTask();
 							asyncLoader.execute(LocalIndexesActivity.this);
 							reloadIndexes();
 						} else {
-							Toast.makeText(LocalIndexesActivity.this, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
+							AccessibleToast.makeText(LocalIndexesActivity.this, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
 						}
 					}
 					
@@ -394,7 +395,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		@Override
 		protected void onPostExecute(String result) {
 			findViewById(R.id.ProgressBar).setVisibility(View.GONE);
-			Toast.makeText(LocalIndexesActivity.this, result, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(LocalIndexesActivity.this, result, Toast.LENGTH_LONG).show();
 			listAdapter.clear();
 			reloadIndexes();
 			
@@ -444,7 +445,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 					}
 					b.append(values[i]);
 				}
-				Toast.makeText(LocalIndexesActivity.this, b.toString(), Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(LocalIndexesActivity.this, b.toString(), Toast.LENGTH_LONG).show();
 			}
 		}
 		
@@ -456,7 +457,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		@Override
 		protected void onPostExecute(String result) {
 			findViewById(R.id.ProgressBar).setVisibility(View.GONE);
-			Toast.makeText(LocalIndexesActivity.this, result, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(LocalIndexesActivity.this, result, Toast.LENGTH_LONG).show();
 		}
 
 	}
@@ -583,7 +584,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		final String actionButton = value;
 		if(listAdapter.getGroupCount() == 0){
 			listAdapter.cancelFilter();
-			Toast.makeText(LocalIndexesActivity.this, getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
+			AccessibleToast.makeText(LocalIndexesActivity.this, getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
 			return;
 		}
 		collapseAllGroups();
@@ -597,7 +598,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			@Override
 			public void onClick(View v) {
 				if(selectedItems.isEmpty()){
-					Toast.makeText(LocalIndexesActivity.this, getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(LocalIndexesActivity.this, getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
 					return;
 				}
 				
@@ -706,7 +707,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 						}
 						b.append(w);
 					}
-					Toast.makeText(LocalIndexesActivity.this, b.toString(), Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(LocalIndexesActivity.this, b.toString(), Toast.LENGTH_LONG).show();
 				}
 				asyncLoader.execute(LocalIndexesActivity.this);
 			}

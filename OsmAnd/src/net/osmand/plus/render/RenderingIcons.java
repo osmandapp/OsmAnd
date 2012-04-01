@@ -1,10 +1,14 @@
 package net.osmand.plus.render;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.io.InputStream;
-import java.io.ByteArrayOutputStream;
+
+import net.osmand.LogUtil;
+import net.osmand.plus.R;
+import net.osmand.plus.R.drawable;
 
 import org.apache.commons.logging.Log;
 
@@ -12,9 +16,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
-import net.osmand.plus.R;
-import net.osmand.plus.R.drawable;
-import net.osmand.LogUtil;
 
 public class RenderingIcons {
 	private static final Log log = LogUtil.getLog(RenderingIcons.class);

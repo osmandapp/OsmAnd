@@ -1,7 +1,7 @@
 package net.osmand.plus.activities;
 
-import net.osmand.plus.R;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import android.app.ExpandableListActivity;
 import android.widget.ExpandableListView;
 
