@@ -299,6 +299,32 @@ public class OsmandSettings {
 			return prefs.edit().putBoolean(getId(), val).commit();
 		}
 	}
+	
+	private class BooleanAccessibilityPreference extends BooleanPreference {
+
+		private BooleanAccessibilityPreference(String id, boolean defaultValue, boolean global) {
+			super(id, defaultValue, global);
+		}
+		
+		private BooleanAccessibilityPreference(String id, boolean defaultValue, boolean global, boolean cache) {
+			super(id, defaultValue, global, cache);
+		}
+		
+		@Override
+		protected Boolean getValue(SharedPreferences prefs, Boolean defaultValue) {
+			return ctx.accessibilityEnabled() ?
+				super.getValue(prefs, defaultValue) :
+				defaultValue;
+		}
+
+		@Override
+		protected boolean setValue(SharedPreferences prefs, Boolean val) {
+			return ctx.accessibilityEnabled() ?
+				super.setValue(prefs, val) :
+				false;
+		}
+	}
+
 	private class IntPreference extends CommonPreference<Integer> {
 
 
@@ -424,15 +450,19 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> ZOOM_BY_TRACKBALL =
-		new BooleanPreference("zoom_by_trackball", true, true);
+		new BooleanAccessibilityPreference("zoom_by_trackball", true, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SCROLL_MAP_BY_GESTURES =
-		new BooleanPreference("scroll_map_by_gestures", true, true);
+		new BooleanAccessibilityPreference("scroll_map_by_gestures", true, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_SHORT_OBJECT_NAMES =
-		new BooleanPreference("use_short_object_names", false, true);
+		new BooleanAccessibilityPreference("use_short_object_names", false, true);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> ACCESSIBILITY_EXTENSIONS =
+		new BooleanAccessibilityPreference("accessibility_extensions", false, true);
 		
 	
 	// this value string is synchronized with settings_pref.xml preference name

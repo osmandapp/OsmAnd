@@ -138,6 +138,7 @@
 		<CheckBoxPreference android:key="zoom_by_trackball" android:title="@string/zoom_by_trackball" android:summary="@string/zoom_by_trackball_descr"></CheckBoxPreference>
 		<CheckBoxPreference android:key="scroll_map_by_gestures" android:title="@string/scroll_map_by_gestures" android:summary="@string/scroll_map_by_gestures_descr"></CheckBoxPreference>
 		<CheckBoxPreference android:key="use_short_object_names" android:title="@string/use_short_object_names" android:summary="@string/use_short_object_names_descr"></CheckBoxPreference>
+		<CheckBoxPreference android:key="accessibility_extensions" android:title="@string/accessibility_extensions" android:summary="@string/accessibility_extensions_descr"></CheckBoxPreference>
 	</PreferenceScreen>
 </PreferenceCategory>
 

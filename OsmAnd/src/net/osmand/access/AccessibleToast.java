@@ -1,6 +1,7 @@
 package net.osmand.access;
 
 import net.osmand.access.TextMessage;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
 import android.content.Context;
@@ -16,18 +17,28 @@ public class AccessibleToast extends Toast {
         super(context);
     }
 
+    private static boolean accessibilityExtensions(Context context) {
+        return ((OsmandApplication)(context.getApplicationContext())).getSettings().ACCESSIBILITY_EXTENSIONS.get();
+    }
+
     public static Toast makeText(Context context, int msg, int duration) {
-        final Toast toast = new AccessibleToast(context);
-        toast.setView(TextMessage.makeView(context, msg, R.layout.notification));
-        toast.setDuration(duration);
-        return toast;
+        if (accessibilityExtensions(context)) {
+            final Toast toast = new AccessibleToast(context);
+            toast.setView(TextMessage.makeView(context, msg, R.layout.notification));
+            toast.setDuration(duration);
+            return toast;
+        }
+        return Toast.makeText(context, msg, duration);
     }
 
     public static Toast makeText(Context context, CharSequence msg, int duration) {
-        final Toast toast = new AccessibleToast(context);
-        toast.setView(TextMessage.makeView(context, msg, R.layout.notification));
-        toast.setDuration(duration);
-        return toast;
+        if (accessibilityExtensions(context)) {
+            final Toast toast = new AccessibleToast(context);
+            toast.setView(TextMessage.makeView(context, msg, R.layout.notification));
+            toast.setDuration(duration);
+            return toast;
+        }
+        return Toast.makeText(context, msg, duration);
     }
 
     @Override
