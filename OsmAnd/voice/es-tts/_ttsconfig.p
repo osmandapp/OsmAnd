@@ -1,4 +1,4 @@
-:- op('==', xfy, 500).
+﻿:- op('==', xfy, 500).
 version(101).
 language(es).
 
@@ -14,17 +14,17 @@ turn('right', ['gira a la derecha ']).
 turn('right_sh', ['gira fuerte a la derecha ']).
 turn('right_sl', ['gira leve a la derecha ']).
 
-prepare_turn(Turn, Dist) == ['Después de', D,' prepararse para ', M] :- distance(Dist) == D, turn(Turn, M).
-turn(Turn, Dist) == ['Después de ', D, M] :- distance(Dist) == D, turn(Turn, M).
+prepare_turn(Turn, Dist) == ['Tras', D,' prepararse para ', M] :- distance(Dist) == D, turn(Turn, M).
+turn(Turn, Dist) == ['Tras ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
-prepare_make_ut(Dist) == [ 'Después de ', D,' prepararse para dar la vuelta'] :- distance(Dist) == D.
-make_ut(Dist) == [' Después de', D, ' da la vuelta'] :- distance(Dist) == D.
+prepare_make_ut(Dist) == [ 'Tras ', D,' prepararse para dar la vuelta'] :- distance(Dist) == D.
+make_ut(Dist) == [' Tras', D, ' da la vuelta'] :- distance(Dist) == D.
 make_ut == ['da la vuelta'].
-make_ut_wp == ['Cuando posible, da la vuelta'].
+make_ut_wp == ['Cuando sea posible, da la vuelta'].
 
-prepare_roundabout(Dist) == [ 'Después de ', D,' prepararse para entrar '] :- distance(Dist) == D.
-roundabout(Dist, _Angle, Exit) == ['Después de ', D, ' entra a la glorieta y toma la ', E ] :- distance(Dist) == D, nth(Exit, E).
+prepare_roundabout(Dist) == [ 'Tras ', D,' prepararse para entrar en la rotonda'] :- distance(Dist) == D.
+roundabout(Dist, _Angle, Exit) == ['Tras ', D, ' entra en la rotonda y toma la ', E ] :- distance(Dist) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['toma la ', E ] :- nth(Exit, E).
 
 go_ahead == ['Continue así '].
@@ -32,7 +32,7 @@ go_ahead(Dist) == ['Continue por ',  D]:- distance(Dist) == D.
 
 and_arrive_destination == ['y llegará a su destino'].
 
-then == ['Después '].
+then == ['Luego '].
 reached_destination == ['ha llegado a su destino'].
 bear_right == ['manténga a la derecha'].
 bear_left == ['manténga a la izquierda'].
@@ -40,7 +40,7 @@ bear_left == ['manténga a la izquierda'].
 route_new_calc(Dist) == ['El viaje es ', D] :- distance(Dist) == D.  
 route_recalc(Dist) == ['Ruta recalculada, el viaje es ', D] :- distance(Dist) == D.
 
-location_lost == ['g p s señal perdido '].
+location_lost == ['señal g p s perdida '].
 
 
 %% 
@@ -54,13 +54,13 @@ nth(7, 'séptima salida').
 nth(8, 'octava salida').
 nth(9, 'novena salida').
 nth(10, 'décima salida').
-nth(11, 'salida once').
-nth(12, 'salida doce').
-nth(13, 'salida trece').
-nth(14, 'salida catorce').
-nth(15, 'salida quince').
-nth(16, 'salida diezseis').
-nth(17, 'salida diezsiete').
+nth(11, 'undécima salida').
+nth(12, 'duodécima salida').
+nth(13, 'decimotercera salida').
+nth(14, 'decimocuarta salida').
+nth(15, 'decimoquinta salida').
+nth(16, 'decimosexta salida').
+nth(17, 'decimoséptima salida').
 
 
 %%% distance measure
