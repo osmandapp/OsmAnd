@@ -11,18 +11,18 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import net.osmand.IProgress;
+import net.osmand.LogUtil;
+import net.osmand.Version;
+import net.osmand.data.IndexConstants;
+import net.osmand.plus.R;
+
 import org.apache.commons.logging.Log;
 
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-
-import net.osmand.IProgress;
-import net.osmand.LogUtil;
-import net.osmand.Version;
-import net.osmand.data.IndexConstants;
-import net.osmand.plus.R;
 
 public class DownloadFileHelper {
 	

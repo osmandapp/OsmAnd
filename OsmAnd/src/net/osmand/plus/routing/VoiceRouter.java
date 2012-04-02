@@ -3,7 +3,6 @@ package net.osmand.plus.routing;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper.TurnType;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
@@ -180,8 +179,9 @@ public class VoiceRouter {
 		if(next == null || next.distance == 0) {
 			// if(currentStatus <= STATUS_UNKNOWN && currentDirection > 0){  This caused this prompt to be suppressed when coming back from a UTwp situation
 			if(currentStatus <= STATUS_UNKNOWN){
-				if (playGoAheadToDestination())
+				if (playGoAheadToDestination()) {
 					currentStatus = STATUS_TOLD;
+				}
 			}
 			return;
 		}

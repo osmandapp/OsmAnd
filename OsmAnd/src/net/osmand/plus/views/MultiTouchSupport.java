@@ -27,9 +27,9 @@ public class MultiTouchSupport {
     	
     	public void onZooming(float distance, float relativeToStart);
     	
-    	public void onZoomEnded(float distance, float relativeToStart); 
+    	public void onZoomEnded(float distance, float relativeToStart);
     	
-    	public void onGestureInit(float x1, float y1, float x2, float y2); 
+    	public void onGestureInit(float x1, float y1, float x2, float y2);
     	
     }
     

@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.Algoritms;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
@@ -19,12 +18,13 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.OsmAndFormatter;
 import net.osmand.ResultMatcher;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.AmenityType;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;
@@ -425,7 +425,7 @@ public class MapActivityLayers {
 				GPXFile toShow = result;
 				if (toShow == null) {
 					if(!settings.SAVE_TRACK_TO_GPX.get()){
-						Toast.makeText(activity, R.string.gpx_monitoring_disabled_warn, Toast.LENGTH_SHORT).show();
+						AccessibleToast.makeText(activity, R.string.gpx_monitoring_disabled_warn, Toast.LENGTH_SHORT).show();
 						return true;
 					}
 					Map<String, GPXFile> data = activity.getSavingTrackHelper().collectRecordedData();

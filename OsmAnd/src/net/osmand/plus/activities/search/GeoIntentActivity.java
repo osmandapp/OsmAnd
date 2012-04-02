@@ -10,8 +10,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.OsmAndFormatter;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.PostCode;

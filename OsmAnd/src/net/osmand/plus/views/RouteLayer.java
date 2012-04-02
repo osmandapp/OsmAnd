@@ -5,17 +5,17 @@ import java.util.List;
 
 import net.osmand.LogUtil;
 import net.osmand.osm.MapUtils;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.R;
+import net.osmand.plus.routing.RoutingHelper;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Paint.Cap;
+import android.graphics.Paint.Join;
+import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Paint.Cap;
-import android.graphics.Paint.Join;
-import android.graphics.Paint.Style;
 import android.location.Location;
 import android.util.Log;
 

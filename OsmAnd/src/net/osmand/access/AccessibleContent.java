@@ -1,13 +1,12 @@
 package net.osmand.access;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.graphics.Rect;
 import android.os.SystemClock;
-import android.view.accessibility.AccessibilityEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.accessibility.AccessibilityEvent;
 
 // Provide some additional accessibility means for individual view elements.
 // These elements will be spoken on touch. Thus, you can slide your finger

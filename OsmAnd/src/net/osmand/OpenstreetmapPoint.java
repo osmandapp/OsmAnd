@@ -2,7 +2,6 @@ package net.osmand;
 
 import java.io.Serializable;
 
-import net.osmand.OpenstreetmapRemoteUtil;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.Node;
 import net.osmand.osm.OSMSettings.OSMTagKey;

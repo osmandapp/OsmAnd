@@ -20,7 +20,6 @@ import net.osmand.plus.activities.search.SearchHistoryHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.render.RenderingRulesStorage;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -67,7 +66,6 @@ public class OsmandSettings {
 	private SharedPreferences defaultProfilePreferences;
 	private SharedPreferences profilePreferences;
 	private ApplicationMode currentMode;
-	private RelativeDirectionStyle relativeDirectionStyle;
 	
 	// cache variables
 	private long lastTimeInternetConnectionChecked = 0;
@@ -89,12 +87,6 @@ public class OsmandSettings {
 			currentMode = readApplicationMode();
 			profilePreferences = getProfilePreferences(currentMode);
 //		}
-
-		try {
-			relativeDirectionStyle = RelativeDirectionStyle.valueOf(globalPreferences.getString(DIRECTION_STYLE.getId(), RelativeDirectionStyle.SIDEWISE.name()));
-		} catch (IllegalArgumentException e) {
-			relativeDirectionStyle = RelativeDirectionStyle.SIDEWISE;
-		}
 	}
 	
 	public static String getSharedPreferencesName(ApplicationMode mode){
@@ -170,29 +162,6 @@ public class OsmandSettings {
 		}
 	}
 	
-	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<RelativeDirectionStyle> DIRECTION_STYLE = new OsmandPreference<RelativeDirectionStyle>(){
-		@Override
-		public String getId() {
-			return "direction_style";
-		};
-
-		@Override
-		public RelativeDirectionStyle get() {
-			return relativeDirectionStyle;
-		}
-
-		@Override
-		public void overrideDefaultValue(RelativeDirectionStyle newDefaultValue) {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public boolean set(RelativeDirectionStyle style) {
-			relativeDirectionStyle = style;
-			return globalPreferences.edit().putString(getId(), style.name()).commit();
-		}
-	}; 
 
 	// Check internet connection available every 15 seconds
 	public boolean isInternetConnectionAvailable(){
@@ -412,11 +381,15 @@ public class OsmandSettings {
 
 		@Override
 		protected E getValue(SharedPreferences prefs, E defaultValue) {
-			int i = prefs.getInt(getId(), -1);
-			if(i < 0 || i >= values.length){
-				return defaultValue;
+			try {
+				int i = prefs.getInt(getId(), -1);
+				if(i >= 0 && i < values.length){
+					return values[i];
+				}
+			} catch (ClassCastException ex) {
+				setValue(prefs, defaultValue);
 			}
-			return values[i];
+			return defaultValue;
 		}
 		
 		@Override
@@ -439,7 +412,11 @@ public class OsmandSettings {
 	// cache of metrics constants as they are used very often
 	public final OsmandPreference<MetricsConstants> METRIC_SYSTEM = new EnumIntPreference<MetricsConstants>(
 			"default_metric_system", MetricsConstants.KILOMETERS_AND_METERS, true, true, MetricsConstants.values());
-
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	// cache of metrics constants as they are used very often
+	public final OsmandPreference<RelativeDirectionStyle> DIRECTION_STYLE = new EnumIntPreference<RelativeDirectionStyle>(
+			"direction_style", RelativeDirectionStyle.SIDEWISE, true, true, RelativeDirectionStyle.values());
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_TRACKBALL_FOR_MOVEMENTS =
@@ -456,7 +433,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_SHORT_OBJECT_NAMES =
 		new BooleanPreference("use_short_object_names", false, true);
-	
+		
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_HIGH_RES_MAPS =
@@ -1159,8 +1136,8 @@ public class OsmandSettings {
 		SHOW_ALTITUDE_INFO.setModeDefaultValue(ApplicationMode.CAR, false);
 	}
 	
-	public final CommonPreference<Boolean> SHOW_ZOOM_LEVEL = 
-			new BooleanPreference("show_zoom_level", false, false, true);
+	public final CommonPreference<Boolean> SHOW_RULER = 
+			new BooleanPreference("show_ruler", true, false, true);
 	
 
 	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS = 

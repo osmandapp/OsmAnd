@@ -2,8 +2,6 @@ package net.osmand.plus.activities.search;
 
 import java.util.List;
 
-import com.google.android.apps.analytics.easytracking.TrackedListActivity;
-
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -26,6 +24,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.android.apps.analytics.easytracking.TrackedListActivity;
 
 public class SearchHistoryActivity extends TrackedListActivity  implements SearchActivityChild {
 	private LatLon location;

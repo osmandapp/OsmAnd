@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.CollatorStringMatcher;
-import net.osmand.ResultMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.ResultMatcher;
 import net.osmand.data.City;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
