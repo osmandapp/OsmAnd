@@ -108,7 +108,7 @@ message OsmAndMapIndex {
 
 		//shift from mapdatabox start to message MapDataBlock
 		optional fixed32 shiftToMapData = 5;
-
+		// true (byte = 1) - full ocean, false (byte = 0) - full land
 		optional bool ocean = 6;
 
 		repeated MapDataBox boxes = 7;

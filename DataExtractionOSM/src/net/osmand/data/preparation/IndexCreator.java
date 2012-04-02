@@ -639,8 +639,12 @@ public class IndexCreator {
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
 //		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/luxembourg.osm.pbf"),
-		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/cuba2.osm.bz2"),
+//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/cuba2.osm.bz2"),
+//				new ConsoleProgressImplementation(1), null, zooms, rt, log);
+		zooms = MapZooms.parseZooms("1-5;6-9;10-12");
+		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/basemap/10m_coastline_out.osm"),
 				new ConsoleProgressImplementation(1), null, zooms, rt, log);
+		
 		
 		
 		// world generation

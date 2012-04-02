@@ -252,7 +252,12 @@ public class BinaryMapIndexWriter {
 		System.out.println("RENDERING SCHEMA takes " + (newfp - fp));
 	}
 
+	
 	public BinaryFileReference startMapTreeElement(int leftX, int rightX, int topY, int bottomY, boolean containsLeaf) throws IOException {
+		return startMapTreeElement(leftX, rightX, topY, bottomY, containsLeaf, false, false);
+	}
+	
+	public BinaryFileReference startMapTreeElement(int leftX, int rightX, int topY, int bottomY, boolean containsObjects, boolean ocean, boolean land) throws IOException {
 		checkPeekState(MAP_ROOT_LEVEL_INIT, MAP_TREE);
 		if (state.peek() == MAP_ROOT_LEVEL_INIT) {
 			codedOutStream.writeTag(MapRootLevel.BOXES_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
@@ -268,9 +273,12 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeSInt32(MapDataBox.RIGHT_FIELD_NUMBER, rightX - bounds.rightX);
 		codedOutStream.writeSInt32(MapDataBox.TOP_FIELD_NUMBER, topY - bounds.topY);
 		codedOutStream.writeSInt32(MapDataBox.BOTTOM_FIELD_NUMBER, bottomY - bounds.bottomY);
+		if(ocean || land) {
+			codedOutStream.writeBool(MapDataBox.OCEAN_FIELD_NUMBER, ocean);
+		}
 		stackBounds.push(new Bounds(leftX, rightX, topY, bottomY));
 		BinaryFileReference ref = null;
-		if (containsLeaf) {
+		if (containsObjects) {
 			codedOutStream.writeTag(MapDataBox.SHIFTTOMAPDATA_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 			ref = BinaryFileReference.createShiftReference(getFilePointer(), fp);
 			codedOutStream.writeFixed32NoTag(0);

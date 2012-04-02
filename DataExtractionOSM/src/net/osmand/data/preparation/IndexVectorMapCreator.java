@@ -552,7 +552,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	
 
 	public void writeBinaryMapIndex(BinaryMapIndexWriter writer, String regionName) throws IOException, SQLException {
-		coastlineProcessor.processCoastlines();
+//		coastlineProcessor.processCoastlines();
 		
 		closePreparedStatements(mapBinaryStat, mapLowLevelBinaryStat);
 		mapConnection.commit();

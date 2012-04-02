@@ -382,14 +382,18 @@ public class MapRenderRepositories {
 				}
 			}
 
+			String coastlineTime = "";
 			if(!coastLines.isEmpty()) {
+				long ms = System.currentTimeMillis();
+				 
 				List<BinaryMapDataObject> pcoastlines = processCoastlines(coastLines, leftX, rightX, bottomY, topY, zoom);
 				tempList.addAll(pcoastlines);
+				coastlineTime = "(coastline " + (System.currentTimeMillis() -  ms) + " ms )";
 			}
 			if (count > 0) {
 				log.info(String.format("BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", //$NON-NLS-1$
 						cBottomLatitude, cTopLatitude, cLeftLongitude, cRightLongitude, zoom));
-				log.info(String.format("Searching: %s ms  (%s results found)", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
+				log.info(String.format("Searching: %s ms  %s (%s results found)", System.currentTimeMillis() - now, coastlineTime, count)); //$NON-NLS-1$
 			}
 		
 
