@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.RelativeDirectionStyle;
@@ -381,11 +382,16 @@ public class OsmandSettings {
 
 		@Override
 		protected E getValue(SharedPreferences prefs, E defaultValue) {
-			int i = prefs.getInt(getId(), -1);
-			if(i < 0 || i >= values.length){
-				return defaultValue;
+			try {
+				int i = prefs.getInt(getId(), -1);
+				if(i < 0 || i >= values.length){
+					return defaultValue;
+				}
+				return values[i];
+			} catch (Exception e) {
+				android.util.Log.e(LogUtil.TAG, "Error getting value for: " + this.getId(), e);
+				return defaultValue; 
 			}
-			return values[i];
 		}
 		
 		@Override
