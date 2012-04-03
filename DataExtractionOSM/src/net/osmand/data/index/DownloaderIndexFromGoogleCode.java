@@ -9,10 +9,8 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import net.osmand.LogUtil;
@@ -24,19 +22,6 @@ import org.apache.commons.logging.Log;
 public class DownloaderIndexFromGoogleCode {
 
 	private final static Log log = LogUtil.getLog(DownloaderIndexFromGoogleCode.class);
-	/**
-	 * @param args
-	 * @throws URISyntaxException 
-	 * @throws IOException 
-	 */
-	public static void main(String[] args) throws URISyntaxException, IOException {
-		Map<String, String> files = DownloaderIndexFromGoogleCode.getContent(new LinkedHashMap<String, String>(),
-				".zip");
-		for(String s : files.keySet()){
-			System.out.println(s + " " + files.get(s)); //$NON-NLS-1$
-		}
-
-	}
 	
 	
 	private static Map<String, String> getContent(Map<String, String> files,
@@ -105,7 +90,7 @@ public class DownloaderIndexFromGoogleCode {
 	}
 	
 	public static Map<String, String> getIndexFiles(Map<String, String> files){
-		return getContent(files, "voice.zip", "poi.zip", "obf", "obf.zip", "poi.odb");
+		return getContent(files, ".zip", ".obf");
 	}
 	
 	public static URL getInputStreamToLoadIndex(String indexName) throws IOException{
