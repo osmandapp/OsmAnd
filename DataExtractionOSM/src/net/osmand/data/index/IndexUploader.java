@@ -1,8 +1,10 @@
 package net.osmand.data.index;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -14,10 +16,17 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
+
+import net.osmand.Algoritms;
+import net.osmand.LogUtil;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.IndexConstants;
+import net.osmand.data.index.ExtractGooglecodeAuthorization.GooglecodeUploadTokens;
 
 import org.apache.commons.logging.Log;
 
@@ -27,14 +36,24 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
-import net.osmand.Algoritms;
-import net.osmand.LogUtil;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.data.IndexConstants;
-
 /**
- * This helper will find obf and zip files, create description for them, and zip them, or update the description. This helper also can
- * upload files through ssh.
+ * This helper will find obf and zip files, create description for them, and zip them, or update the description. 
+ * This helper also can upload files through ssh,ftp or to googlecode.
+ * 
+ * IndexUploader dir targetDir [--ff=file] [-ssh|-ftp|-google] [--password=|--user=|--url=|--path=|--gpassword=|--privKey=|--knownHosts=]
+ *    --ff     file with names of files to be uploaded from the dir, supporting regexp
+ *    One of:
+ *    -ssh    to upload to ssh site
+ *    -fpt    to upload to ftp site
+ *    -google to upload to googlecode of osmand
+ *    Additional params:
+ *    --user       user to use for ftp,ssh,google
+ *    --password   password to use for ftp,ssh,google (gmail password to retrieve tokens for deleting files)
+ *    --url        url to use for ssh,ftp
+ *    --path       path in url to use for ssh,ftp
+ *    --gpassword  googlecode password to use for google
+ *    --privKey    priv key for ssh
+ *    --knownHosts known hosts for ssh
  * 
  * @author Pavol Zibrita <pavol.zibrita@gmail.com>
  */
@@ -76,7 +95,8 @@ public class IndexUploader {
 
 	private File directory;
 	private File targetDirectory;
-	private UploadCredentials uploadCredentials;
+	private UploadCredentials uploadCredentials = new DummyCredentials();
+	private FileFilter fileFilter = new FileFilter();
 
 	public IndexUploader(String path, String targetPath) throws IndexUploadException {
 		directory = new File(path);
@@ -98,7 +118,7 @@ public class IndexUploader {
 			}
 			IndexUploader indexUploader = new IndexUploader(srcPath, targetPath);
 			if(args.length > 2) {
-				indexUploader.parseUploadCredentials(args, 2);
+				indexUploader.parseParameters(args, 2);
 			}
 			indexUploader.run();
 		} catch (IndexUploadException e) {
@@ -106,29 +126,37 @@ public class IndexUploader {
 		}
 	}
 	
+	private void parseParameters(String[] args, int start) throws IndexUploadException {
+		int idx = parseFilter(args, start);
+		if (args.length > idx) {
+			parseUploadCredentials(args, idx);
+		}
+	}
 	
-	public void parseUploadCredentials(String[] args, int start) {
+	private int parseFilter(String[] args, int start) throws IndexUploadException {
+		if (args[start].startsWith("--ff=")) {
+			try {
+				fileFilter = new FilePatternFileFilter(args[start].substring("--ff=".length()));
+			} catch (IOException e) {
+				throw new IndexUploadException(e.getMessage());
+			}
+			return start+1;
+		}
+		return start;
+	}
+
+	protected void parseUploadCredentials(String[] args, int start) throws IndexUploadException {
 		if ("-ssh".equals(args[start])) {
 			uploadCredentials = new UploadSSHCredentials();
 		} else if ("-ftp".equals(args[start])) {
-			uploadCredentials = new UploadCredentials();
+			uploadCredentials = new UploadFTPCredentials();
+		} else if ("-google".equals(args[start])){
+			uploadCredentials = new UploadToGoogleCodeCredentials();
 		} else {
 			return;
 		}
 		for (int i = start + 1; i < args.length; i++) {
-			if (args[i].startsWith("--url=")) {
-				uploadCredentials.url = args[i].substring("--url=".length());
-			} else if (args[i].startsWith("--password=")) {
-				uploadCredentials.password = args[i].substring("--password=".length());
-			} else if (args[i].startsWith("--user=")) {
-				uploadCredentials.user = args[i].substring("--user=".length());
-			} else if (args[i].startsWith("--path=")) {
-				uploadCredentials.path = args[i].substring("--path=".length());
-			} else if (args[i].startsWith("--privKey=")) {
-				((UploadSSHCredentials) uploadCredentials).privateKey = args[i].substring("--privKey=".length());
-			} else if (args[i].startsWith("--knownHosts=")) {
-				((UploadSSHCredentials) uploadCredentials).knownHosts = args[i].substring("--knownHosts=".length());
-			}
+			uploadCredentials.parseParameter(args[i]);
 		}
 	}
 
@@ -136,37 +164,85 @@ public class IndexUploader {
 		this.uploadCredentials = uploadCredentials;
 	}
 
-	public void run() {
-		// take files before whole upload process
-		File[] listFiles = directory.listFiles();
-		for (File f : listFiles) {
-			try {
-				if (!f.isFile() || f.getName().endsWith(IndexBatchCreator.GEN_LOG_EXT)) {
-					continue;
-				}
-				log.info("Process file " + f.getName());
-				File unzipped = unzip(f);
-				String description = getDescription(unzipped);
-				File logFile = new File(f.getParentFile(), unzipped.getName() + IndexBatchCreator.GEN_LOG_EXT);
-				List<File> files = new ArrayList<File>();
-				files.add(unzipped);
-				if(logFile.exists()) {
-					files.add(logFile);
-				}
-				File zFile = new File(f.getParentFile(), unzipped.getName() + ".zip");
-				zip(files, zFile, description, unzipped.lastModified());
-				unzipped.delete(); // delete the unzipped file
-				if(logFile.exists()){
-					logFile.delete();
-				}
-				if(uploadCredentials != null) {
-					uploadIndex(zFile, description, uploadCredentials);
-				}
-			} catch (OneFileException e) {
-				log.error(f.getName() + ": " + e.getMessage(), e);
-			} catch (RuntimeException e) {
-				log.error(f.getName() + ": " + e.getMessage(), e);
+	protected static class FileFilter {
+		
+		protected boolean fileCanBeUploaded(File f) {
+			return f.isFile() && !f.getName().endsWith(IndexBatchCreator.GEN_LOG_EXT);
+		}
+		
+	}
+	
+	protected static class FilePatternFileFilter extends FileFilter {
+
+		private List<Pattern> matchers = new ArrayList<Pattern>();
+		
+		public FilePatternFileFilter(String file) throws IOException {
+			File f = new File(file);
+			if (f.exists()) {
+				readPatterns(f);
 			}
+		}
+
+		private void readPatterns(File f) throws IOException {
+			BufferedReader reader = new BufferedReader(new FileReader(f));
+			try {
+				String line;
+				while ((line = reader.readLine()) != null) {
+					matchers.add(Pattern.compile(line));
+				}
+			} finally {
+				Algoritms.closeStream(reader);
+			}
+		}
+		
+		@Override
+		protected boolean fileCanBeUploaded(File f) {
+			if (!super.fileCanBeUploaded(f)) {
+				return false;
+			}
+			for (Pattern p : matchers)  {
+				if (p.matcher(f.getName()).matches()) {
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+	
+	public void run() throws IndexUploadException {
+		// take files before whole upload process
+		try {
+			uploadCredentials.connect();
+			File[] listFiles = directory.listFiles();
+			for (File f : listFiles) {
+				try {
+					if (!fileFilter.fileCanBeUploaded(f)) {
+						continue;
+					}
+					log.info("Process file " + f.getName());
+					File unzipped = unzip(f);
+					String description = getDescription(unzipped);
+					File logFile = new File(f.getParentFile(), unzipped.getName() + IndexBatchCreator.GEN_LOG_EXT);
+					List<File> files = new ArrayList<File>();
+					files.add(unzipped);
+					if(logFile.exists()) {
+						files.add(logFile);
+					}
+					File zFile = new File(f.getParentFile(), unzipped.getName() + ".zip");
+					zip(files, zFile, description, unzipped.lastModified());
+					unzipped.delete(); // delete the unzipped file
+					if(logFile.exists()){
+						logFile.delete();
+					}
+					uploadIndex(zFile, description, uploadCredentials);
+				} catch (OneFileException e) {
+					log.error(f.getName() + ": " + e.getMessage(), e);
+				} catch (RuntimeException e) {
+					log.error(f.getName() + ": " + e.getMessage(), e);
+				}
+			}
+		} finally {
+			uploadCredentials.disconnect();
 		}
 	}
 
@@ -350,27 +426,128 @@ public class IndexUploader {
 	}
 	
 	
-	public static class UploadCredentials {
+	public abstract static class UploadCredentials {
 		String password;
 		String user;
 		String url;
 		String path;
+		
+		protected void parseParameter(String param) throws IndexUploadException {
+			if (param.startsWith("--url=")) {
+				url = param.substring("--url=".length());
+			} else if (param.startsWith("--password=")) {
+				password = param.substring("--password=".length());
+			} else if (param.startsWith("--user=")) {
+				user = param.substring("--user=".length());
+			} else if (param.startsWith("--path=")) {
+				path = param.substring("--path=".length());
+			}
+		}
+
+		public void disconnect() {
+			//if the uploading needs to close a session
+		}
+
+		public void connect() throws IndexUploadException {
+			//if the uploading needs to open a session
+		}
+
+		public abstract void upload(IndexUploader uploader, File toUpload, String summary, String size,	String date) throws IOException, JSchException;
+	}
+	
+	public static class DummyCredentials extends UploadCredentials {
+		@Override
+		public void upload(IndexUploader uploader, File toUpload,
+				String summary, String size, String date) throws IOException,
+				JSchException {
+			//do nothing
+		}	
+	}
+	
+	public static class UploadFTPCredentials extends UploadCredentials {
+		@Override
+		public void upload(IndexUploader uploader, File toUpload,
+				String summary, String size, String date) throws IOException,
+				JSchException {
+			uploader.uploadToFTP(toUpload, summary, size, date, this);
+		}
 	}
 	
 	public static class UploadSSHCredentials extends UploadCredentials {
 		String privateKey;
 		String knownHosts;
+		
+		@Override
+		protected void parseParameter(String param) throws IndexUploadException {
+			super.parseParameter(param);
+			
+			if (param.startsWith("--privKey=")) {
+				privateKey = param.substring("--privKey=".length());
+			} else if (param.startsWith("--knownHosts=")) {
+				knownHosts = param.substring("--knownHosts=".length());
+			}
+		}
+		
+		@Override
+		public void upload(IndexUploader uploader, File toUpload,
+				String summary, String size, String date) throws IOException, JSchException {
+			uploader.uploadToSSH(toUpload, summary, size, date, this);
+		}
 	}
 	
 	public static class UploadToGoogleCodeCredentials extends UploadCredentials {
-		String token;
-		String pagegen;
-		String cookieHSID;
-		String cookieSID;
+		GooglecodeUploadTokens ggtokens;
+		String gpassword;
+		
+		@Override
+		protected void parseParameter(String param) throws IndexUploadException {
+			super.parseParameter(param);
+
+			if (param.startsWith("--gpassword=")) {
+				gpassword = param.substring("--gpassword=".length());
+			}
+			if (gpassword != null && user != null && ggtokens == null) {
+				ExtractGooglecodeAuthorization tool = new ExtractGooglecodeAuthorization();
+				try {
+					ggtokens = tool.getGooglecodeTokensForUpload(user, gpassword);
+				} catch (IOException e) {
+					throw new IndexUploadException(e.getMessage());
+				}
+			}
+		}
+		
+		@Override
+		public void connect() throws IndexUploadException {
+			if (ggtokens == null || user == null || password == null) {
+				throw new IndexUploadException("Not enought googlecode credentials entered!");
+			}
+		}
+		
+		@Override
+		public void upload(IndexUploader uploader, File toUpload,
+				String summary, String size, String date) throws IOException,
+				JSchException {
+			String descriptionFile = "{" + date + " : " + size + " MB}";
+			summary += " " + descriptionFile;
+
+			List<File> splittedFiles = Collections.emptyList();
+			try {
+				splittedFiles = uploader.splitFiles(toUpload);
+				for (File fs : splittedFiles) {
+					uploader.uploadToGoogleCode(fs, summary, this);
+				}
+			} finally {
+				// remove all splitted files
+				for (File fs : splittedFiles) {
+					if (!fs.equals(toUpload)) {
+						fs.delete();
+					}
+				}
+			}
+		}
 	}
 	
 
-	@Deprecated
 	public void uploadToGoogleCode(File f, String summary, UploadToGoogleCodeCredentials gc) throws IOException {
 		if (f.length() / MB > MAX_UPLOAD_SIZE) {
 			System.err.println("ERROR : file " + f.getName() + " exceeded 200 mb!!! Could not be uploaded.");
@@ -378,18 +555,15 @@ public class IndexUploader {
 			// restriction for google code
 		}
 		try {
-			DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName(), gc.token, gc.pagegen, gc.cookieHSID, gc.cookieSID);
+			DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName(), gc.ggtokens);
 			if (f.getName().endsWith("obf.zip") && f.length() / MB < 5) {
 				// try to delete without .zip part
-				DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName().substring(0, f.getName().length() - 4), gc.token,
-						gc.pagegen, gc.cookieHSID, gc.cookieSID);
+				DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName().substring(0, f.getName().length() - 4), gc.ggtokens);
 			} else if (f.getName().endsWith("poi.zip") && f.length() / MB < 5) {
 				// try to delete without .zip part
-				DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName().substring(0, f.getName().length() - 3) + "odb",
-						gc.token, gc.pagegen, gc.cookieHSID, gc.cookieSID);
+				DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName().substring(0, f.getName().length() - 3) + "odb", gc.ggtokens);
 			} else if (f.getName().endsWith(".zip-1")) {
-				DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName().substring(0, f.getName().length() - 2), gc.token,
-						gc.pagegen, gc.cookieHSID, gc.cookieSID);
+				DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName().substring(0, f.getName().length() - 2), gc.ggtokens);
 			}
 			try {
 				Thread.sleep(4000);
@@ -419,31 +593,7 @@ public class IndexUploader {
 		String size = numberFormat.format(new Object[] { originalLength });
 		String date = dateFormat.format(new Object[] { new Date(toUpload.lastModified()) });
 		try {
-			if (credentials instanceof UploadToGoogleCodeCredentials) {
-				
-				String descriptionFile = "{" + date + " : " + size + " MB}";
-				summary += " " + descriptionFile;
-
-				List<File> splittedFiles = Collections.emptyList();
-				try {
-					splittedFiles = splitFiles(toUpload);
-					for (File fs : splittedFiles) {
-						uploadToGoogleCode(fs, summary, (UploadToGoogleCodeCredentials) credentials);
-					}
-
-				} finally {
-					// remove all splitted files
-					for (File fs : splittedFiles) {
-						if (!fs.equals(toUpload)) {
-							fs.delete();
-						}
-					}
-				}
-			} else if(credentials instanceof UploadSSHCredentials){
-				uploadToSSH(toUpload, summary, size, date, (UploadSSHCredentials) credentials);
-			} else {
-				uploadToFTP(toUpload, summary, size, date, credentials);
-			}
+			credentials.upload(this,toUpload,summary,size,date);
 		} catch (IOException e) {
 			log.error("Input/output exception uploading " + toUpload.getName(), e);
 			return false;
