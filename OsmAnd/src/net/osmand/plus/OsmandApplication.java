@@ -38,6 +38,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Handler;
 import android.text.format.DateFormat;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
 
 public class OsmandApplication extends Application {
@@ -463,6 +464,10 @@ public class OsmandApplication extends Application {
 			}
 
 		}
+	}
+
+	public boolean accessibilityEnabled() {
+		return ((AccessibilityManager)getSystemService(ACCESSIBILITY_SERVICE)).isEnabled();
 	}
 
 }

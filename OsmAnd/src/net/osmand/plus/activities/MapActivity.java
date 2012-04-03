@@ -10,6 +10,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LogUtil;
 import net.osmand.Version;
+import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.AccessibleTrackedActivity;
 import net.osmand.access.NavigationInfo;
@@ -330,8 +331,8 @@ public class MapActivity extends AccessibleTrackedActivity implements IMapLocati
 		if (pointToNavigate == null && gpxPath == null) {
 			notRestoreRoutingMode();
 		} else {
-			Builder builder = new AlertDialog.Builder(MapActivity.this);
-			builder.setView(accessibleMessage(R.string.continue_follow_previous_route));
+			Builder builder = new AccessibleAlertBuilder(MapActivity.this);
+			builder.setMessage(R.string.continue_follow_previous_route);
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -1240,8 +1241,8 @@ public class MapActivity extends AccessibleTrackedActivity implements IMapLocati
 		if (resolved != null) {
 			startActivity(intent);
 		} else {
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setView(accessibleMessage(getString(R.string.gps_status_app_not_found)));
+			AlertDialog.Builder builder = new AccessibleAlertBuilder(this);
+			builder.setMessage(getString(R.string.gps_status_app_not_found));
 			builder.setPositiveButton(
 					getString(R.string.default_buttons_yes),
 					new DialogInterface.OnClickListener() {

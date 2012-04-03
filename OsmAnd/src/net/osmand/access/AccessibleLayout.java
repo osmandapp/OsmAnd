@@ -1,5 +1,7 @@
 package net.osmand.access;
 
+import net.osmand.plus.OsmandApplication;
+
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.SystemClock;
@@ -72,44 +74,46 @@ public class AccessibleLayout extends FrameLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        int action = event.getAction();
-        View newTouch;
-        switch (action) {
-        case MotionEvent.ACTION_MOVE:
-            newTouch = findTouch(event);
-            if ((newTouch != null) && (newTouch != nowTouched)) {
-                if (newTouch.isClickable()) {
-                    float x = event.getX();
-                    float y = event.getY();
-                    float pressure = event.getPressure();
-                    float size = event.getSize();
-                    int metaState = event.getMetaState();
-                    float xPrecision = event.getXPrecision();
-                    float yPrecision = event.getYPrecision();
-                    int deviceId = event.getDeviceId();
-                    int edgeFlags = event.getEdgeFlags();
-                    event.setAction(MotionEvent.ACTION_CANCEL);
-                    super.dispatchTouchEvent(event);
-                    long now = SystemClock.uptimeMillis();
-                    event.recycle();
-                    event = MotionEvent.obtain(now, now, MotionEvent.ACTION_DOWN, x, y, pressure, size,
-                                               metaState, xPrecision, yPrecision, deviceId, edgeFlags);
+        final boolean swallow = ((OsmandApplication)(getContext().getApplicationContext())).getSettings().ACCESSIBILITY_EXTENSIONS.get();
+        if (swallow) {
+            int action = event.getAction();
+            View newTouch;
+            switch (action) {
+            case MotionEvent.ACTION_MOVE:
+                newTouch = findTouch(event);
+                if ((newTouch != null) && (newTouch != nowTouched)) {
+                    if (newTouch.isClickable()) {
+                        float x = event.getX();
+                        float y = event.getY();
+                        float pressure = event.getPressure();
+                        float size = event.getSize();
+                        int metaState = event.getMetaState();
+                        float xPrecision = event.getXPrecision();
+                        float yPrecision = event.getYPrecision();
+                        int deviceId = event.getDeviceId();
+                        int edgeFlags = event.getEdgeFlags();
+                        event.setAction(MotionEvent.ACTION_CANCEL);
+                        super.dispatchTouchEvent(event);
+                        long now = SystemClock.uptimeMillis();
+                        event.recycle();
+                        event = MotionEvent.obtain(now, now, MotionEvent.ACTION_DOWN, x, y, pressure, size,
+                                                   metaState, xPrecision, yPrecision, deviceId, edgeFlags);
+                    }
+                    newTouch.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
                 }
-                newTouch.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
+                nowTouched = newTouch;
+                break;
+            case MotionEvent.ACTION_DOWN:
+                nowTouched = findTouch(event);
+                if (nowTouched != null)
+                    nowTouched.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
+                break;
+            default:
+                nowTouched = null;
+                break;
             }
-            nowTouched = newTouch;
-            break;
-        case MotionEvent.ACTION_DOWN:
-            nowTouched = findTouch(event);
-            if (nowTouched != null)
-                nowTouched.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
-            break;
-        default:
-            nowTouched = null;
-            break;
         }
-        super.dispatchTouchEvent(event);
-        return true;
+        return super.dispatchTouchEvent(event) || swallow;
     }
 
 }

@@ -1,15 +1,9 @@
 package net.osmand.access;
 
 import net.osmand.access.AccessibleContent;
-import net.osmand.access.TextMessage;
-import net.osmand.plus.R;
 
 import android.app.Activity;
-import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.View;
-import android.widget.TextView;
 
 // Provide some additional accessibility means for activity view elements.
 //
@@ -22,22 +16,6 @@ public class AccessibleActivity extends Activity implements AccessibleContent.Ca
     // List of accessible views. Use accessibleContent.add(element)
     // to add element to it.
     public final AccessibleContent accessibleContent = new AccessibleContent();
-
-    // Below are two helper methods to improve AlertDialog accessibility.
-    //
-    // Since usual message in an AlertDialog that is set by
-    // AlertDialog.Builder.setMessage() is spoken only once at the best case
-    // and there is no way to repeat it, use following two methods
-    // to wrap it into a View and set it by AlertDialog.Builder.setView().
-    // Such message will be focusable and so it can be repeated by selecting.
-
-    public View accessibleMessage(CharSequence msg) {
-        return TextMessage.makeView(this, msg);
-    }
-
-    public View accessibleMessage(int msgid) {
-        return TextMessage.makeView(this, msgid);
-    }
 
     @Override
     public boolean dispatchNativeTouchEvent(MotionEvent event) {
