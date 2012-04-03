@@ -14,8 +14,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
@@ -40,8 +42,10 @@ import com.jcraft.jsch.Session;
  * This helper will find obf and zip files, create description for them, and zip them, or update the description. 
  * This helper also can upload files through ssh,ftp or to googlecode.
  * 
- * IndexUploader dir targetDir [--ff=file] [-ssh|-ftp|-google] [--password=|--user=|--url=|--path=|--gpassword=|--privKey=|--knownHosts=]
+ * IndexUploader dir targetDir [--ff=file] [--fp=ptns] [--dp=ptns] [-ssh|-ftp|-google] [--password=|--user=|--url=|--path=|--gpassword=|--privKey=|--knownHosts=]
  *    --ff     file with names of files to be uploaded from the dir, supporting regexp
+ *    --fp     comma separated names of files to be uploaded from the dir, supporting regexp  
+ *    --dp     comma separated names of files to be delete on remote system, supporting regexp
  *    One of:
  *    -ssh    to upload to ssh site
  *    -fpt    to upload to ftp site
@@ -97,6 +101,7 @@ public class IndexUploader {
 	private File targetDirectory;
 	private UploadCredentials uploadCredentials = new DummyCredentials();
 	private FileFilter fileFilter = new FileFilter();
+	private FileFilter deleteFileFilter = null;
 
 	public IndexUploader(String path, String targetPath) throws IndexUploadException {
 		directory = new File(path);
@@ -134,13 +139,32 @@ public class IndexUploader {
 	}
 	
 	private int parseFilter(String[] args, int start) throws IndexUploadException {
+		FileFilter fileFilter = null;
 		if (args[start].startsWith("--ff=")) {
 			try {
-				fileFilter = new FilePatternFileFilter(args[start].substring("--ff=".length()));
+				if(fileFilter == null) {
+					fileFilter = new FileFilter();
+				}
+				fileFilter.parseFile(args[start].substring("--ff=".length()));
 			} catch (IOException e) {
 				throw new IndexUploadException(e.getMessage());
 			}
-			return start+1;
+			start++;
+		}
+		if (args[start].startsWith("--fp=")) {
+			if(fileFilter == null) {
+				fileFilter = new FileFilter();
+			}
+			fileFilter.parseCSV(args[start].substring("--fp=".length()));
+			start++;
+		}
+		if (args[start].startsWith("--dp=")) {
+			deleteFileFilter = new FileFilter();
+			deleteFileFilter.parseCSV(args[start].substring("--dp=".length()));
+			start++;
+		}
+		if(fileFilter != null) {
+			this.fileFilter = fileFilter;
 		}
 		return start;
 	}
@@ -166,17 +190,19 @@ public class IndexUploader {
 
 	protected static class FileFilter {
 		
-		protected boolean fileCanBeUploaded(File f) {
-			return f.isFile() && !f.getName().endsWith(IndexBatchCreator.GEN_LOG_EXT);
+		private List<Pattern> matchers = null;
+		
+		public void parseCSV(String patterns){
+			String[] s = patterns.split(",");
+			if(matchers == null) {
+				matchers = new ArrayList<Pattern>();
+			}
+			for(String p : s) {
+				matchers.add(Pattern.compile(p.trim()));
+			}
 		}
 		
-	}
-	
-	protected static class FilePatternFileFilter extends FileFilter {
-
-		private List<Pattern> matchers = new ArrayList<Pattern>();
-		
-		public FilePatternFileFilter(String file) throws IOException {
+		public void parseFile(String file) throws IOException{
 			File f = new File(file);
 			if (f.exists()) {
 				readPatterns(f);
@@ -187,6 +213,9 @@ public class IndexUploader {
 			BufferedReader reader = new BufferedReader(new FileReader(f));
 			try {
 				String line;
+				if(matchers == null) {
+					matchers = new ArrayList<Pattern>();
+				}
 				while ((line = reader.readLine()) != null) {
 					matchers.add(Pattern.compile(line));
 				}
@@ -195,17 +224,23 @@ public class IndexUploader {
 			}
 		}
 		
-		@Override
-		protected boolean fileCanBeUploaded(File f) {
-			if (!super.fileCanBeUploaded(f)) {
-				return false;
+		public boolean patternMatches(String name){
+			if(matchers == null) {
+				return true;
 			}
 			for (Pattern p : matchers)  {
-				if (p.matcher(f.getName()).matches()) {
+				if (p.matcher(name).matches()) {
 					return true;
 				}
 			}
 			return false;
+		}
+		
+		protected boolean fileCanBeUploaded(File f) {
+			if (!f.isFile() && !f.getName().endsWith(IndexBatchCreator.GEN_LOG_EXT)) {
+				return false;
+			}
+			return patternMatches(f.getName());
 		}
 	}
 	
@@ -241,6 +276,22 @@ public class IndexUploader {
 					log.error(f.getName() + ": " + e.getMessage(), e);
 				}
 			}
+			if(deleteFileFilter != null) {
+				if(uploadCredentials instanceof UploadToGoogleCodeCredentials) {
+					Map<String, String> files = DownloaderIndexFromGoogleCode.getIndexFiles(new LinkedHashMap<String, String>());
+					for (String f : files.keySet()) {
+						System.out.println("File on googlecode " + f + " " + files.get(f));
+						if (deleteFileFilter.patternMatches(f)) {
+							log.info("About to delete " + f);
+						}
+					}
+					
+					//DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName(), ((UploadToGoogleCodeCredentials)uploadCredentials).ggtokens);
+				} else {
+					log.error("Delete file filter is not supported with this credentions (method) " + uploadCredentials);
+				}
+			}
+			
 		} finally {
 			uploadCredentials.disconnect();
 		}
