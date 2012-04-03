@@ -278,6 +278,7 @@ public class IndexUploader {
 			}
 			if(deleteFileFilter != null) {
 				if(uploadCredentials instanceof UploadToGoogleCodeCredentials) {
+					log.info("About to delete files from googlecode");
 					Map<String, String> files = DownloaderIndexFromGoogleCode.getIndexFiles(new LinkedHashMap<String, String>());
 					for (String f : files.keySet()) {
 						System.out.println("File on googlecode " + f + " " + files.get(f));

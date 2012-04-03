@@ -100,21 +100,16 @@ public class DownloaderIndexFromGoogleCode {
 	
 
 	private static String getIndexFiles(Map<String, String> files, String content, String prevFile, String ext){
-		int i = 0;
-		int prevI = -1;
-		if((i = content.indexOf(ext, i)) != -1) {
-			if(prevI > i){
-				files.put(prevFile, null);
-				prevI = i;
-			}
+		int i = content.indexOf(ext, 0);
+		if (i != -1) {
 			int j = i - 1;
 			while (content.charAt(j) == '_' || Character.isLetterOrDigit(content.charAt(j)) || content.charAt(j) == '-') {
 				j--;
 			}
-			if(content.substring(j + 1, i).endsWith("_")){ //$NON-NLS-1$
+			if (content.substring(j + 1, i).endsWith("_")) { //$NON-NLS-1$
 				prevFile = content.substring(j + 1, i) + ext;
 			}
-			
+
 		}
 		if (prevFile != null && ((i = content.indexOf('{')) != -1)) {
 			int j = content.indexOf('}');
