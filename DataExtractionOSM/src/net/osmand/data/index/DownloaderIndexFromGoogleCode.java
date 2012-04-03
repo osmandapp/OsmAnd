@@ -94,7 +94,7 @@ public class DownloaderIndexFromGoogleCode {
 	}
 	
 	public static Map<String, String> getIndexFiles(Map<String, String> files){
-		return getContent(files, ".obf", ".zip");
+		return getContent(files, ".obf", ".zip", ".zip-1", ".zip-2", ".zip-3", ".zip-4");
 	}
 	
 	public static URL getInputStreamToLoadIndex(String indexName) throws IOException{
