@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import net.osmand.LogUtil;
@@ -22,7 +23,10 @@ import org.apache.commons.logging.Log;
 public class DownloaderIndexFromGoogleCode {
 
 	private final static Log log = LogUtil.getLog(DownloaderIndexFromGoogleCode.class);
-	
+
+	public static void main(String[] args) {
+		System.out.println(DownloaderIndexFromGoogleCode.getIndexFiles(new LinkedHashMap<String, String>()));
+	}
 	
 	private static Map<String, String> getContent(Map<String, String> files,
 			String... ext) {
@@ -90,7 +94,7 @@ public class DownloaderIndexFromGoogleCode {
 	}
 	
 	public static Map<String, String> getIndexFiles(Map<String, String> files){
-		return getContent(files, ".zip", ".obf");
+		return getContent(files, ".obf", ".zip");
 	}
 	
 	public static URL getInputStreamToLoadIndex(String indexName) throws IOException{
