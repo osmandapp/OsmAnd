@@ -522,11 +522,8 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		if(parent != null) {
 			parent.mkdirs();
 			// ".nomedia" indicates there are no pictures and no music to list in this dir for the Gallery and Music apps
-			if( preventMediaIndexing ) {
-				try{
-					new File(parent, ".nomedia").createNewFile(); //$NON-NLS-1$
-				} catch( Exception e ) {
-				}
+			if( preventMediaIndexing ) {				
+				new File(parent, ".nomedia").createNewFile(); //$NON-NLS-1$	
 			}
 		}
 		final DownloadEntry entry;
