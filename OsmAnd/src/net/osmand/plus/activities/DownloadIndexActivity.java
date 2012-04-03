@@ -10,6 +10,7 @@ import static net.osmand.data.IndexConstants.VOICE_VERSION;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -523,7 +524,11 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			parent.mkdirs();
 			// ".nomedia" indicates there are no pictures and no music to list in this dir for the Gallery and Music apps
 			if( preventMediaIndexing ) {				
-				new File(parent, ".nomedia").createNewFile(); //$NON-NLS-1$	
+				try {
+					new File(parent, ".nomedia").createNewFile();//$NON-NLS-1$	
+				} catch (IOException e) {
+					// swallow io exception
+				} 
 			}
 		}
 		final DownloadEntry entry;
