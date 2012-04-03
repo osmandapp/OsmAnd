@@ -102,7 +102,7 @@ public class NavigationInfo {
         private int directionTo(final Location point, float heading) {
             final float bearing = currentLocation.bearingTo(point) - heading;
             final int nSectors = (style == RelativeDirectionStyle.CLOCKWISE) ? 12 : direction.length;
-            int sector = (int)Math.round(Math.abs(bearing) * (float)nSectors / FULL_CIRCLE) % nSectors;
+            int sector = Math.round(Math.abs(bearing) * (float)nSectors / FULL_CIRCLE) % nSectors;
             if ((bearing < 0) && (sector != 0))
                 sector = nSectors - sector;
             return sector;
@@ -160,7 +160,7 @@ public class NavigationInfo {
 
     // The argument must be not null as well as the currentLocation
     private String absoluteDirectionString(float bearing) {
-        int direction = (int)Math.round(Math.abs(bearing) * (float)cardinal.length / FULL_CIRCLE) % cardinal.length;
+        int direction = Math.round(Math.abs(bearing) * (float)cardinal.length / FULL_CIRCLE) % cardinal.length;
         if ((bearing < 0) && (direction != 0))
             direction = cardinal.length - direction;
         return getString(cardinal[direction]);
