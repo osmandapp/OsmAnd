@@ -5,7 +5,7 @@ import java.text.MessageFormat;
 import java.util.Random;
 
 import net.osmand.Version;
-import net.osmand.access.AccessibleTrackedActivity;
+import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -38,7 +38,9 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 
-public class MainMenuActivity extends AccessibleTrackedActivity {
+import com.google.android.apps.analytics.easytracking.TrackedActivity;
+
+public class MainMenuActivity extends TrackedActivity {
 
 	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
 	private static final String VECTOR_INDEXES_CHECK = "VECTOR_INDEXES_CHECK"; //$NON-NLS-1$
@@ -59,8 +61,8 @@ public class MainMenuActivity extends AccessibleTrackedActivity {
 		if (file.exists() && file.length() > 0) {
 			if (size != file.length() && !firstTime) {
 				String msg = MessageFormat.format(getString(R.string.previous_run_crashed), OsmandApplication.EXCEPTION_PATH);
-				Builder builder = new AlertDialog.Builder(MainMenuActivity.this);
-				builder.setView(accessibleMessage(msg)).setNeutralButton(getString(R.string.close), null);
+				Builder builder = new AccessibleAlertBuilder(MainMenuActivity.this);
+				builder.setMessage(msg).setNeutralButton(getString(R.string.close), null);
 				builder.setPositiveButton(R.string.send_report, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -288,13 +290,13 @@ public class MainMenuActivity extends AccessibleTrackedActivity {
 		}
 		
 		if(netOsmandWasInstalled){
-			Builder builder = new AlertDialog.Builder(this);
-			builder.setView(accessibleMessage(R.string.osmand_net_previously_installed));
+			Builder builder = new AccessibleAlertBuilder(this);
+			builder.setMessage(R.string.osmand_net_previously_installed);
 			builder.setPositiveButton(R.string.default_buttons_ok, null);
 			builder.show();
 		} else {
-			Builder builder = new AlertDialog.Builder(this);
-			builder.setView(accessibleMessage(R.string.first_time_msg));
+			Builder builder = new AccessibleAlertBuilder(this);
+			builder.setMessage(R.string.first_time_msg);
 			builder.setPositiveButton(R.string.first_time_download, new DialogInterface.OnClickListener() {
 
 				@Override
@@ -314,11 +316,11 @@ public class MainMenuActivity extends AccessibleTrackedActivity {
 		boolean check = pref.getBoolean(VECTOR_INDEXES_CHECK, true);
 		// do not show each time 
 		if (check && new Random().nextInt() % 5 == 1) {
-			Builder builder = new AlertDialog.Builder(this);
+			Builder builder = new AccessibleAlertBuilder(this);
 			if(maps.isEmpty()){
-				builder.setView(accessibleMessage(R.string.vector_data_missing));
+				builder.setMessage(R.string.vector_data_missing);
 			} else if(!maps.basemapExists()){
-				builder.setView(accessibleMessage(R.string.basemap_missing));
+				builder.setMessage(R.string.basemap_missing);
 			} else {
 				return;
 			}
