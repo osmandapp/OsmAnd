@@ -284,4 +284,91 @@ public class MapAlgorithms {
 			return (int) rx;
 		}
 	}
+	
+	/**
+	 * outx,outy are the coordinates out of the box
+	 * inx,iny are the coordinates from the box
+	 * @return -1 if there is no instersection or x<<32 | y
+	 */
+	public static long calculateIntersection(int inx, int iny, int outx, int outy, int leftX, int rightX, int bottomY, int topY) {
+		int by = -1;
+		int bx = -1;
+		// firstly try to search if the line goes in
+		if (outy < topY && iny >= topY) {
+			int tx = (int) (outx + ((double) (inx - outx) * (topY - outy)) / (iny - outy));
+			if (leftX <= tx && tx <= rightX) {
+				bx = tx;
+				by = topY;
+				return (((long) bx) << 32) | ((long) by);
+			}
+		}
+		if (outy > bottomY && iny <= bottomY) {
+			int tx = (int) (outx + ((double) (inx - outx) * (outy - bottomY)) / (outy - iny));
+			if (leftX <= tx && tx <= rightX) {
+				bx = tx;
+				by = bottomY;
+				return (((long) bx) << 32) | ((long) by);
+			}
+		}
+		if (outx < leftX && inx >= leftX) {
+			int ty = (int) (outy + ((double) (iny - outy) * (leftX - outx)) / (inx - outx));
+			if (ty >= topY && ty <= bottomY) {
+				by = ty;
+				bx = leftX;
+				return (((long) bx) << 32) | ((long) by);
+			}
+
+		}
+		if (outx > rightX && inx <= rightX) {
+			int ty = (int) (outy + ((double) (iny - outy) * (outx - rightX)) / (outx - inx));
+			if (ty >= topY && ty <= bottomY) {
+				by = ty;
+				bx = rightX;
+				return (((long) bx) << 32) | ((long) by);
+			}
+
+		}
+
+		// try to search if point goes out
+		if (outy > topY && iny <= topY) {
+			int tx = (int) (outx + ((double) (inx - outx) * (topY - outy)) / (iny - outy));
+			if (leftX <= tx && tx <= rightX) {
+				bx = tx;
+				by = topY;
+				return (((long) bx) << 32) | ((long) by);
+			}
+		}
+		if (outy < bottomY && iny >= bottomY) {
+			int tx = (int) (outx + ((double) (inx - outx) * (outy - bottomY)) / (outy - iny));
+			if (leftX <= tx && tx <= rightX) {
+				bx = tx;
+				by = bottomY;
+				return (((long) bx) << 32) | ((long) by);
+			}
+		}
+		if (outx > leftX && inx <= leftX) {
+			int ty = (int) (outy + ((double) (iny - outy) * (leftX - outx)) / (inx - outx));
+			if (ty >= topY && ty <= bottomY) {
+				by = ty;
+				bx = leftX;
+				return (((long) bx) << 32) | ((long) by);
+			}
+
+		}
+		if (outx < rightX && inx >= rightX) {
+			int ty = (int) (outy + ((double) (iny - outy) * (outx - rightX)) / (outx - inx));
+			if (ty >= topY && ty <= bottomY) {
+				by = ty;
+				bx = rightX;
+				return (((long) bx) << 32) | ((long) by);
+			}
+
+		}
+
+		if (outx == rightX || outx == leftX || outy == topY || outy == bottomY) {
+			bx = outx;
+			by = outy;
+		}
+		return -1l;
+	}
 }

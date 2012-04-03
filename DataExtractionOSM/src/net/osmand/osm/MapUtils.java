@@ -178,6 +178,11 @@ public class MapUtils {
 				latitude -= 180;
 			}
 		}
+		if(latitude < -85.0511) {
+			return -85.0511;
+ 		} else if(latitude > 85.0511){
+ 			return 85.0511;
+ 		}
 		return latitude;
 	}
 	

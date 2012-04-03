@@ -438,7 +438,7 @@ public class MapRenderRepositories {
 			RenderingRuleSearchRequest renderingReq = new RenderingRuleSearchRequest(storage);
 			renderingReq.setBooleanFilter(renderingReq.ALL.R_NIGHT_MODE, nightMode);
 			for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
-				CommonPreference<String> settings = app.getSettings().getCustomRenderProperty(customProp.getAttrName());
+				CommonPreference<String> settings = OsmandApplication.getSettings().getCustomRenderProperty(customProp.getAttrName());
 				String res = settings.get();
 				if (!Algoritms.isEmpty(res)) {
 					if (customProp.isString()) {
@@ -913,7 +913,7 @@ public class MapRenderRepositories {
 		boolean lineEnded = false;
 		if (pinside) {
 			if (!inside) {
-				long is = calculateIntersection(x, y, px, py, leftX, rightX, bottomY, topY);
+				long is = MapAlgorithms.calculateIntersection(x, y, px, py, leftX, rightX, bottomY, topY);
 				if (is == -1) {
 					// it is an error (!)
 					is = (((long) px) << 32) | ((long) py);
@@ -924,7 +924,7 @@ public class MapRenderRepositories {
 				coordinates.add((((long) x) << 32) | ((long) y));
 			}
 		} else {
-			long is = calculateIntersection(x, y, px, py, leftX, rightX, bottomY, topY);
+			long is = MapAlgorithms.calculateIntersection(x, y, px, py, leftX, rightX, bottomY, topY);
 			if (inside) {
 				// assert is != -1;
 				coordinates.add(is);
@@ -933,7 +933,7 @@ public class MapRenderRepositories {
 				int bx = (int) (is >> 32);
 				int by = (int) (is & 0xffffffff);
 				coordinates.add(is);
-				is = calculateIntersection(x, y, bx, by, leftX, rightX, bottomY, topY);
+				is = MapAlgorithms.calculateIntersection(x, y, bx, by, leftX, rightX, bottomY, topY);
 				coordinates.add(is);
 				lineEnded = true;
 			}
@@ -942,90 +942,7 @@ public class MapRenderRepositories {
 		return lineEnded;
 	}
 
-	/**
-	 * @return -1 if there is no instersection or x<<32 | y
-	 */
-	private long calculateIntersection(int x, int y, int px, int py, int leftX, int rightX, int bottomY, int topY) {
-		int by = -1;
-		int bx = -1;
-		// firstly try to search if the line goes in
-		if (py < topY && y >= topY) {
-			int tx = (int) (px + ((double) (x - px) * (topY - py)) / (y - py));
-			if (leftX <= tx && tx <= rightX) {
-				bx = tx;
-				by = topY;
-				return (((long) bx) << 32) | ((long) by);
-			}
-		}
-		if (py > bottomY && y <= bottomY) {
-			int tx = (int) (px + ((double) (x - px) * (py - bottomY)) / (py - y));
-			if (leftX <= tx && tx <= rightX) {
-				bx = tx;
-				by = bottomY;
-				return (((long) bx) << 32) | ((long) by);
-			}
-		}
-		if (px < leftX && x >= leftX) {
-			int ty = (int) (py + ((double) (y - py) * (leftX - px)) / (x - px));
-			if (ty >= topY && ty <= bottomY) {
-				by = ty;
-				bx = leftX;
-				return (((long) bx) << 32) | ((long) by);
-			}
-
-		}
-		if (px > rightX && x <= rightX) {
-			int ty = (int) (py + ((double) (y - py) * (px - rightX)) / (px - x));
-			if (ty >= topY && ty <= bottomY) {
-				by = ty;
-				bx = rightX;
-				return (((long) bx) << 32) | ((long) by);
-			}
-
-		}
-
-		// try to search if point goes out
-		if (py > topY && y <= topY) {
-			int tx = (int) (px + ((double) (x - px) * (topY - py)) / (y - py));
-			if (leftX <= tx && tx <= rightX) {
-				bx = tx;
-				by = topY;
-				return (((long) bx) << 32) | ((long) by);
-			}
-		}
-		if (py < bottomY && y >= bottomY) {
-			int tx = (int) (px + ((double) (x - px) * (py - bottomY)) / (py - y));
-			if (leftX <= tx && tx <= rightX) {
-				bx = tx;
-				by = bottomY;
-				return (((long) bx) << 32) | ((long) by);
-			}
-		}
-		if (px > leftX && x <= leftX) {
-			int ty = (int) (py + ((double) (y - py) * (leftX - px)) / (x - px));
-			if (ty >= topY && ty <= bottomY) {
-				by = ty;
-				bx = leftX;
-				return (((long) bx) << 32) | ((long) by);
-			}
-
-		}
-		if (px < rightX && x >= rightX) {
-			int ty = (int) (py + ((double) (y - py) * (px - rightX)) / (px - x));
-			if (ty >= topY && ty <= bottomY) {
-				by = ty;
-				bx = rightX;
-				return (((long) bx) << 32) | ((long) by);
-			}
-
-		}
-
-		if (px == rightX || px == leftX || py == topY || py == bottomY) {
-			bx = px;
-			by = py;
-		}
-		return -1l;
-	}
+	
 
 
 }

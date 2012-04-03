@@ -311,8 +311,10 @@ public class BinaryMapIndexWriter {
 		
 		checkPeekState(MAP_ROOT_LEVEL_INIT);
 		StringTable.Builder bs = OsmandOdb.StringTable.newBuilder();
-		for (String s : stringTable.keySet()) {
-			bs.addS(s);
+		if (stringTable != null) {
+			for (String s : stringTable.keySet()) {
+				bs.addS(s);
+			}
 		}
 		StringTable st = bs.build();
 		builder.setStringTable(st);
@@ -424,14 +426,16 @@ public class BinaryMapIndexWriter {
 		}
 
 		mapDataBuf.clear();
-		for (Entry<MapRulType, String> s : names.entrySet()) {
-			writeRawVarint32(mapDataBuf, s.getKey().getTargetId());
-			Integer ls = stringTable.get(s.getValue());
-			if (ls == null) {
-				ls = stringTable.size();
-				stringTable.put(s.getValue(), ls);
+		if (names != null) {
+			for (Entry<MapRulType, String> s : names.entrySet()) {
+				writeRawVarint32(mapDataBuf, s.getKey().getTargetId());
+				Integer ls = stringTable.get(s.getValue());
+				if (ls == null) {
+					ls = stringTable.size();
+					stringTable.put(s.getValue(), ls);
+				}
+				writeRawVarint32(mapDataBuf, ls);
 			}
-			writeRawVarint32(mapDataBuf, ls);
 		}
 		STRING_TABLE_SIZE += mapDataBuf.size();
 		data.setStringNames(ByteString.copyFrom(mapDataBuf.toArray()));

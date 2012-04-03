@@ -122,10 +122,12 @@ public class MapRenderingTypes {
 	}
 	
 	public MapRulType getNameRuleType() {
+		getEncodingRuleTypes();
 		return nameRuleType;
 	}
 	
 	public MapRulType getCoastlineRuleType() {
+		getEncodingRuleTypes();
 		return coastlineRuleType;
 	}
 	
@@ -156,7 +158,7 @@ public class MapRenderingTypes {
 				if(rType.targetTagValue != null) {
 					rType = rType.targetTagValue;
 				}
-				rType.freq++;
+				rType.updateFreq();
 				if (rType.names != null) {
 					for (int i = 0; i < rType.names.length; i++) {
 						tempList.add(rType.names[i]);
@@ -658,25 +660,5 @@ public class MapRenderingTypes {
 	
 	
 	
-	public static void main(String[] args) {
-//		MapRenderingTypes def = MapRenderingTypes.getDefault();
-//		long ts = System.currentTimeMillis();
-//		Map<String, Map<String, AmenityType>> amenityMap = def.getAmenityTagValToTypeMap();
-//		for(String s : amenityMap.keySet()){
-//			System.out.println(s + " - " + amenityMap.get(s));
-//		}
-//		Map<AmenityType, Map<String, String>> amenityType = def.getAmenityTypeNameToTagVal();
-//		for(AmenityType s : amenityType.keySet()){
-//			Map<String, String> map = amenityType.get(s);
-//			for(String t : map.keySet()){
-//				System.out.println(s + " - " + t + " " + map.get(t));
-//			}
-//		}
-//		System.out.println(def.getAmenityNameToType());
-
-		
-//		def.initAmenityMap();
-	}
-
 }
 
