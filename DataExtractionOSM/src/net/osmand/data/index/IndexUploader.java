@@ -402,7 +402,7 @@ public class IndexUploader {
 			File toUpload = zipFile;
 			boolean uploaded = uploadFileToServer(toUpload, summary, uc);
 			// remove source file if file was splitted
-			if (uploaded && targetDirectory != null) {
+			if (uploaded && targetDirectory != null && !targetDirectory.equals(directory)) {
 				File toBackup = new File(targetDirectory, toUpload.getName());
 				if (toBackup.exists()) {
 					toBackup.delete();
