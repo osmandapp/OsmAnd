@@ -127,8 +127,8 @@ public class DownloaderIndexFromGoogleCode {
 		return prevFile;
 	}
 	
-	public static Map<String, String> getIndexFiles(Map<String, String> files, String... ext){
-		return getContent(files, ext);
+	public static Map<String, String> getIndexFiles(Map<String, String> files){
+		return getContent(files, "voice.zip", "poi.zip", "obf", "obf.zip", "poi.odb");
 	}
 	
 	public static URL getInputStreamToLoadIndex(String indexName) throws IOException{
