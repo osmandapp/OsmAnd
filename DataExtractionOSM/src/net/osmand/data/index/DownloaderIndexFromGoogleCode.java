@@ -12,6 +12,7 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import net.osmand.LogUtil;
@@ -29,29 +30,12 @@ public class DownloaderIndexFromGoogleCode {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws URISyntaxException, IOException {
-//		Map<String, String> files = DownloaderIndexFromGoogleCode.getContent(new LinkedHashMap<String, String>(),
-//				BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT,
-//				BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT_ZIP,
-//				VOICE_VERSION + VOICE_INDEX_EXT_ZIP);
-//		for(String s : files.keySet()){
-//			System.out.println(s + " " + files.get(s)); //$NON-NLS-1$
-//		}
+		Map<String, String> files = DownloaderIndexFromGoogleCode.getContent(new LinkedHashMap<String, String>(),
+				".zip");
+		for(String s : files.keySet()){
+			System.out.println(s + " " + files.get(s)); //$NON-NLS-1$
+		}
 
-		
-//		String odb = ""; //$NON-NLS-1$
-		// put your cookies and personal information for delete
-		
-//		String cookieHSID = ""; //$NON-NLS-1$
-//		String cookieSID = ""; //$NON-NLS-1$
-//		String pagegen = ""; //$NON-NLS-1$
-//		String token = ""; //$NON-NLS-1$
-//		
-//		for(String odb : indexFiles.keySet()){
-//			System.out.println("DELETING " + odb);
-//			deleteFileFromGoogleDownloads(odb, token, pagegen, cookieHSID,cookieSID);
-//		}
-//		System.out.println("DELETED " + indexFiles.size());
-		
 	}
 	
 	
@@ -103,12 +87,10 @@ public class DownloaderIndexFromGoogleCode {
 		int i = content.indexOf(ext, 0);
 		if (i != -1) {
 			int j = i - 1;
-			while (content.charAt(j) == '_' || Character.isLetterOrDigit(content.charAt(j)) || content.charAt(j) == '-') {
+			while (content.charAt(j) == '_' || Character.isLetterOrDigit(content.charAt(j)) || content.charAt(j) == '-' || content.charAt(j) == '.') {
 				j--;
 			}
-			if (content.substring(j + 1, i).endsWith("_")) { //$NON-NLS-1$
-				prevFile = content.substring(j + 1, i) + ext;
-			}
+			prevFile = content.substring(j + 1, i) + ext;
 
 		}
 		if (prevFile != null && ((i = content.indexOf('{')) != -1)) {

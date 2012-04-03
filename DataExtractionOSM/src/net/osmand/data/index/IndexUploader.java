@@ -81,6 +81,10 @@ public class IndexUploader {
 		public IndexUploadException(String message) {
 			super(message);
 		}
+		
+		public IndexUploadException(String message, Throwable e) {
+			super(message, e);
+		}
 
 	}
 
@@ -281,13 +285,15 @@ public class IndexUploader {
 					log.info("About to delete files from googlecode");
 					Map<String, String> files = DownloaderIndexFromGoogleCode.getIndexFiles(new LinkedHashMap<String, String>());
 					for (String f : files.keySet()) {
-						System.out.println("File on googlecode " + f + " " + files.get(f));
-						if (deleteFileFilter.patternMatches(f)) {
+						if (deleteFileFilter.patternMatches(f)) {							
 							log.info("About to delete " + f);
+							try {
+								DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f, ((UploadToGoogleCodeCredentials)uploadCredentials).ggtokens);
+							} catch (IOException e) {
+								throw new IndexUploadException("Delete " + f + " was failed", e);
+							}
 						}
 					}
-					
-					//DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName(), ((UploadToGoogleCodeCredentials)uploadCredentials).ggtokens);
 				} else {
 					log.error("Delete file filter is not supported with this credentions (method) " + uploadCredentials);
 				}
