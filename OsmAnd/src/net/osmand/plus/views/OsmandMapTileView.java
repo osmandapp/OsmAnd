@@ -46,7 +46,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.WindowManager;
-import android.view.SurfaceHolder.Callback;
 import android.widget.Toast;
 
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback {
@@ -193,7 +192,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		return false;
+		return application.accessibilityEnabled() ? false : super.onKeyDown(keyCode, event);
 	}
 
 	public void addLayer(OsmandMapLayer layer, float zOrder) {
@@ -787,15 +786,17 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			setZoom(Math.round(calcZoom));
 			final int newZoom = getZoom();
 			zoomPositionChanged(newZoom);
-			if (newZoom != initialMultiTouchZoom) {
-				showMessage(getContext().getString(R.string.zoomIs) + " " + String.valueOf(newZoom)); //$NON-NLS-1$
-			} else {
-				final LatLon p1 = getLatLonFromScreenPoint(x1, y1);
-				final LatLon p2 = getLatLonFromScreenPoint(x2, y2);
-				showMessage(OsmAndFormatter.getFormattedDistance((float)MapUtils.getDistance(p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude()), getContext()));
+			if (application.accessibilityEnabled()) {
+				if (newZoom != initialMultiTouchZoom) {
+					showMessage(getContext().getString(R.string.zoomIs) + " " + String.valueOf(newZoom)); //$NON-NLS-1$
+				} else {
+					final LatLon p1 = getLatLonFromScreenPoint(x1, y1);
+					final LatLon p2 = getLatLonFromScreenPoint(x2, y2);
+					showMessage(OsmAndFormatter.getFormattedDistance((float)MapUtils.getDistance(p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude()), getContext()));
+				}
 			}
 		}
-
+		
 		@Override
 		public void onGestureInit(float x1, float y1, float x2, float y2) {
 			this.x1 = x1;
