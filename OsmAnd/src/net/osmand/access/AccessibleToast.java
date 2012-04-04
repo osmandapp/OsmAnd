@@ -17,17 +17,23 @@ public class AccessibleToast extends Toast {
     }
 
     public static Toast makeText(Context context, int msg, int duration) {
-        final Toast toast = new AccessibleToast(context);
-        toast.setView(TextMessage.makeView(context, msg, R.layout.notification));
-        toast.setDuration(duration);
-        return toast;
+        if (TextMessage.accessibilityExtensions(context)) {
+            final Toast toast = new AccessibleToast(context);
+            toast.setView(TextMessage.makeView(context, msg, R.layout.notification));
+            toast.setDuration(duration);
+            return toast;
+        }
+        return Toast.makeText(context, msg, duration);
     }
 
     public static Toast makeText(Context context, CharSequence msg, int duration) {
-        final Toast toast = new AccessibleToast(context);
-        toast.setView(TextMessage.makeView(context, msg, R.layout.notification));
-        toast.setDuration(duration);
-        return toast;
+        if (TextMessage.accessibilityExtensions(context)) {
+            final Toast toast = new AccessibleToast(context);
+            toast.setView(TextMessage.makeView(context, msg, R.layout.notification));
+            toast.setDuration(duration);
+            return toast;
+        }
+        return Toast.makeText(context, msg, duration);
     }
 
     @Override
