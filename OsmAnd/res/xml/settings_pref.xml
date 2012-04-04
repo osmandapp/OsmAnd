@@ -133,6 +133,9 @@
 			android:summary="@string/background_service_wait_int_descr"></ListPreference>
 	</PreferenceScreen>
 	
+</PreferenceCategory>
+
+<PreferenceCategory android:key="accessibility">
 	<PreferenceScreen android:key="accessibility_preferences" android:title="@string/accessibility_preferences" android:summary="@string/accessibility_preferences_descr">
 		<ListPreference android:summary="@string/settings_direction_style_descr" android:title="@string/settings_direction_style" android:key="direction_style"></ListPreference>
 		<CheckBoxPreference android:key="zoom_by_trackball" android:title="@string/zoom_by_trackball" android:summary="@string/zoom_by_trackball_descr"></CheckBoxPreference>
@@ -141,6 +144,5 @@
 		<CheckBoxPreference android:key="accessibility_extensions" android:title="@string/accessibility_extensions" android:summary="@string/accessibility_extensions_descr"></CheckBoxPreference>
 	</PreferenceScreen>
 </PreferenceCategory>
-
 
 </PreferenceScreen>

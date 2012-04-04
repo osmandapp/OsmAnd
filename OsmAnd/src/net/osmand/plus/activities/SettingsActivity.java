@@ -458,6 +458,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     }
     
     public void updateAllSettings(){
+        if (!getMyApplication().accessibilityEnabled()) {
+            PreferenceCategory accessibilityPrefs = ((PreferenceCategory)(getPreferenceScreen().findPreference("accessibility")));
+            if (accessibilityPrefs != null)
+                accessibilityPrefs.removeAll();
+        }
+
     	for(OsmandPreference<Boolean> b : booleanPreferences.values()){
     		CheckBoxPreference pref = (CheckBoxPreference) screenPreferences.get(b.getId());
     		pref.setChecked(b.get());
