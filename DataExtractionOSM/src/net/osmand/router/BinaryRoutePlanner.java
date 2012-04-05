@@ -218,7 +218,7 @@ public class BinaryRoutePlanner {
 				return roadPriorityComparator(o1.distanceFromStart, o1.distanceToEnd, o2.distanceFromStart, o2.distanceToEnd, 0.5);
 			}
 		};
-		
+
 		PriorityQueue<RouteSegment> graphDirectSegments = new PriorityQueue<RouteSegment>(50, segmentsComparator);
 		PriorityQueue<RouteSegment> graphReverseSegments = new PriorityQueue<RouteSegment>(50, segmentsComparator);
 		
@@ -231,7 +231,7 @@ public class BinaryRoutePlanner {
 		int startX = start.road.getPoint31XTile(start.segmentStart);
 		int startY = start.road.getPoint31YTile(start.segmentStart);
 		// for start : f(start) = g(start) + h(start) = 0 + h(start) = h(start)
-		start.distanceToEnd = squareRootDist(startX, startY, targetEndX, targetEndY) / ctx.getRouter().getMaxDefaultSpeed();
+		start.distanceToEnd = h(ctx, targetEndX, targetEndY, startX, startY);
 		end.distanceToEnd = start.distanceToEnd;
 		
 		// because first point of the start is not visited do the same as in cycle but only for one point
@@ -278,6 +278,11 @@ public class BinaryRoutePlanner {
 			}
 			if(ctx.planRouteIn2Directions()){
 				inverse = nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) > 0;
+				if (graphDirectSegments.size() * 1.3 > graphReverseSegments.size()) {
+					inverse = true;
+				} else 	if (graphDirectSegments.size() < 1.3 * graphReverseSegments.size()) {
+					inverse = false;
+				}
 				// make it more simmetrical with dynamic prioritizing it makes big sense
 //				inverse = !inverse;
 			} else {
@@ -292,7 +297,33 @@ public class BinaryRoutePlanner {
 		return prepareResult(ctx, start, end, startNanoTime, finalDirectRoute, finalReverseRoute);
 		
 	}
+
+
+	private double h(final RoutingContext ctx, int targetEndX, int targetEndY,
+			int startX, int startY) {
+		double distance = squareRootDist(startX, startY, targetEndX, targetEndY);
+		return distance / ctx.getRouter().getMaxDefaultSpeed(); // + distance * 0.5;
+	}
 	
+	protected static double h(RoutingContext ctx, double distToFinalPoint, RouteSegment next) {
+		double result = distToFinalPoint / ctx.getRouter().getMaxDefaultSpeed();
+		if(ctx.isUseDynamicRoadPrioritising() && next != null){
+			double priority = ctx.getRouter().getRoadPriorityToCalculateRoute(next.road);
+			result /= priority;
+		}
+		return result; // + distToFinalPoint * 0.5;
+	}
+	
+	private double g(RoutingContext ctx, double distOnRoadToPass,
+			RouteSegment segment, int segmentEnd, double obstaclesTime,
+			RouteSegment next, double speed) {
+		double result = segment.distanceFromStart + distOnRoadToPass / speed; // + distOnRoadToPass*0.5;
+		// calculate turn time
+		result += ctx.getRouter().calculateTurnTime(segment, next, segmentEnd);
+		// add obstacles time
+		result += obstaclesTime;
+		return result;
+	}
 
 	private void visitAllStartSegments(final RoutingContext ctx, RouteSegment start, PriorityQueue<RouteSegment> graphDirectSegments,
 			TLongObjectHashMap<RouteSegment> visitedSegments, int startX, int startY) throws IOException {
@@ -494,11 +525,7 @@ public class BinaryRoutePlanner {
 						return oppSegment;
 					}
 					
-					double distanceToEnd = distToFinalPoint / ctx.getRouter().getMaxDefaultSpeed();
-					if(ctx.isUseDynamicRoadPrioritising()){
-						double priority = ctx.getRouter().getRoadPriorityToCalculateRoute(next.road);
-						distanceToEnd /= priority;
-					}
+					double distanceToEnd = h(ctx, distToFinalPoint, next);
 
 					// Using A* routing algorithm
 					// g(x) - calculate distance to that point and calculate time
@@ -507,12 +534,7 @@ public class BinaryRoutePlanner {
 						speed = ctx.getRouter().getMinDefaultSpeed();
 					}
 
-					double distanceFromStart = segment.distanceFromStart + distOnRoadToPass / speed;
-					// calculate turn time
-					distanceFromStart += ctx.getRouter().calculateTurnTime(segment, next, segmentEnd);
-					// add obstacles time
-					distanceFromStart += obstaclesTime;
-
+					double distanceFromStart = g(ctx, distOnRoadToPass, segment, segmentEnd, obstaclesTime, next, speed);
 
 					// segment.getRoad().getId() >> 1
 					if (next.parentRoute == null
@@ -559,7 +581,7 @@ public class BinaryRoutePlanner {
 		return null;
 	}
 
-	
+
 	
 	private List<RouteSegmentResult> prepareResult(RoutingContext ctx, RouteSegment start, RouteSegment end, long startNanoTime,
 			RouteSegment finalDirectRoute, RouteSegment finalReverseRoute) {
