@@ -147,7 +147,7 @@
 	<string name="choose_auto_follow_route_descr">Wartezeit für Rückkehr zur Kartennachführung</string>
 	<string name="auto_follow_route_never">Nie</string>
 	<string name="auto_follow_route_navigation">Nachführung nur bei Nav.</string>
-	<string name="auto_follow_route_navigation_descr">Kartennachführung erfolgt nur während Navigation (Routing)</string>
+	<string name="auto_follow_route_navigation_descr">Kartennachführung erfolgt nur während Navigation</string>
 	<string name="auto_follow_location_enabled">Kartennachführung aktiv</string>
 
 	<string name="sendtoOSM_confirmation_msg">An OSM schicken: %1$s?</string>
@@ -169,7 +169,7 @@
 \n\t- Völlig neu entwickelte Suche (POI, Addressen)! Adress-Suche wesentlich beschleunigt. Einheitliche Suche mit vielen Optionen.
 \n\t- POI namentliche Suche in großen Regionen / Ländern  
 \n\t- Flackernde Kartenanzeige für Tablets behoben (Issue 641)
-\n\t- Auto follow route Option (Issue 356)
+\n\t- Auto-center Option (Issue 356)
 \n\t- GPX Navigation verschoben zu \'Route\' und \'Route speichern\' verschoben zu \'Routeninformationen\'
 \n\t- POI Daten sind nun in .obf-Datei enthalten (alle Indexes ab 01/10/11) 
 \n\t- Sprachansagen verbessert (GPS-Positions-Bestimmung, keine Auslassung des ersten Kommandos) 
@@ -279,8 +279,8 @@
 \n\t- Text-To-Speech (TTS) Sprachansagensupport
 \n\t- Anzeige von mehr Details in den Landkarten
 \n\t- World_Basemap für die ganze Welt in der Applikation enthalten
-\n\t- Verbesserungen im Offlinerouting (immer noch experimentell)
-\n\t- GPX-Routing-Optionen
+\n\t- Verbesserungen der Offline-Navigation (immer noch experimentell)
+\n\t- GPX-Navigations-Optionen
 \n\t- Update der Bedienoberfläche und viele Bug-Fixes
 	</string>
 
@@ -288,7 +288,7 @@
 	<string name="trace_rendering">Rendering Debug Info</string>
 	<string name="trace_rendering_descr">Flag zur Prüfung der Rendering-Performance (Geschwindigkeit des Offline-Bildaufbaus)</string>
 	<string name="installing_new_resources">Entpacke neue Daten …</string>
-	<string name="internet_connection_required_for_online_route">Ein Online-Routingdienst ist ausgewählt, aber es besteht keine Internetverbindung.</string>
+	<string name="internet_connection_required_for_online_route">Ein Online-Navigationsdienst ist ausgewählt, aber es besteht keine Internetverbindung.</string>
 	<string name="tts_language_not_supported_title">Sprache nicht unterstützt</string>
 	<string name="tts_language_not_supported">Die gewählte Sprache wird von der installierten Android TTS-Engine nicht unterstützt. Soll im Market nach einer anderen TTS-Engine gesucht werden? Andernfalls wird die voreingestellte Standard-Sprache verwendet.</string>
 	<string name="tts_missing_language_data_title">Fehlendes Sprachpaket</string>
@@ -367,7 +367,7 @@
 \n\tDas Profil wechselt unter \'Menü\' -> \'Einstellungen\' -> \'Nutzerprofil\', oder auch beim Berechnen einer Route.</string>
 
 	<string name="tip_navigation">Navigation</string>
-	<string name="tip_navigation_t">\tVor dem Starten der Navigationsfunktion (Routen) ist ein Ziel zu wählen. Danach wählt man \'Menu\' -> \'Route\' in der Karte, und wählt den Navigationstyp.</string>
+	<string name="tip_navigation_t">\tVor dem Starten der Navigationsfunktion ist ein Ziel zu wählen. Danach wählt man \'Menu\' -> \'Navigation\' in der Karte, und wählt den Navigationstyp.</string>
 
 	<string name="tip_search">Suchen</string>
 	<string name="tip_search_t">\tMan kann Orte direkt in der Karte suchen, oder über Adresse, Koordinaten, als POI, oder als abgespeicherter Favorit.
@@ -442,9 +442,9 @@
 	<string name="version_index_is_big_for_memory">Nicht genügend Speicher für Index \'\'{0}\'\' </string>
 	<string name="version_index_is_not_supported">Die Index-Version \'\'{0}\'\' wird nicht unterstützt</string>
 					
-	<string name="use_osmand_routing_service">OsmAnd Routing >20km</string>
-	<string name="use_osmand_routing_service_descr">OsmAnd Offlinerouting für große Entfernungen verwenden (experimentell) anstatt automatisch CloudMade zu nehmen</string>
-	<string name="osmand_routing_experimental">OsmAnd Offlinerouting ist noch experimentell und funktioniert nicht gut für Entfernungen über 20 km.\n\nAls Routingdienst wird temporär online CloudMade verwendet.</string>
+	<string name="use_osmand_routing_service">OsmAnd Navigation >20km</string>
+	<string name="use_osmand_routing_service_descr">OsmAnd Offline-Navigation für große Entfernungen verwenden (experimentell) anstatt automatisch CloudMade zu nehmen</string>
+	<string name="osmand_routing_experimental">OsmAnd Offline-Navigation ist noch experimentell und funktioniert nicht gut für Entfernungen über 20 km.\n\nAls Navigationsdienst wird temporär online CloudMade verwendet.</string>
 	<string name="specified_dir_doesnt_exist">Angegebener Ordner kann nicht gefunden werden.</string>
 	<string name="application_dir">Verzeichnis</string>
 	<string name="application_dir_change_warning">Das Wechseln des Verzeichnis verschiebt oder löscht keine Daten. Dies muss separat außerhalb von OsmAnd durchgeführt werden. Dennoch fortfahren?</string>
@@ -510,7 +510,7 @@
 	<string name="map_index">Karte</string>
 	<string name="voice">Ansagen</string>
 	<string name="no_vector_map_loaded">Offline-Daten wurden nicht geladen</string>
-	<string name="map_route_by_gpx">Route mittels GPX</string>
+	<string name="map_route_by_gpx">Navigation mittels GPX</string>
 	<string name="gpx_files_not_found">Keine GPX-Dateien gefunden in /tracks-Ordner</string>
 	<string name="layer_gpx_layer">GPX-Track …</string>
 	<string name="error_reading_gpx">Fehler beim Lesen der GPX-Daten</string>
@@ -569,7 +569,7 @@
 	<string name="background_service_provider">Positionsbestimmung</string>
 	<string name="background_router_service_descr">Aktiviere Service für Verwendung von OsmAnd während Anzeige aus ist</string>
 	<string name="background_router_service">Hintergrundservice</string>
-	<string name="off_router_service_no_gps_available">Hintergrunddienst zur Routenberechnung erfordert aktiviertes GPS.</string>
+	<string name="off_router_service_no_gps_available">Die Hintergrundnavigation erfordert aktiviertes GPS.</string>
 	<string name="hide_poi_filter">Filter verstecken</string>
 	<string name="show_poi_filter">Filter zeigen</string>
 	<string name="search_poi_filter">Filter</string>
@@ -650,8 +650,8 @@
 	<string name="max_level_download_tile">Max. Online-Zoom</string>
 	<string name="max_level_download_tile_descr">Maximale Vergrößerung bis zu der Online-Karten-Daten (Kacheln) aus dem Internet geladen werden</string>
 	<string name="route_general_information">%1$s Gesamtentfernung\n%2$d:%3$d Reisezeit</string>
-	<string name="router_service_descr">Online- oder Offline-Dienst zur Streckenberechnung wählen</string>
-	<string name="router_service">Routingdienst</string>
+	<string name="router_service_descr">Online- oder Offline-Dienst zur Routenberechnung wählen</string>
+	<string name="router_service">Navigationsdienst</string>
 	<string name="sd_dir_not_accessible"> Auf das Verzeichnis auf der SD-Karte kann nicht zugegriffen werden</string>
 	<string name="download_question">Herunterladen {0} - {1}?</string>
 	<string name="download_question_exist">Offline Daten für {0} existieren schon ({1}). Wollen Sie die überschreiben ({2})?</string>
@@ -671,7 +671,7 @@
 	<string name="follow">Folgen</string>
 	<string name="recalculate_route_to_your_location">Transportmittel wählen (optional):</string>
 	<string name="mark_final_location_first">Bitte erst ein Ziel wählen</string>
-	<string name="get_directions">Route</string>
+	<string name="get_directions">Navigation</string>
     <string name="show_gps_status">GPS-Status anzeigen</string>
 	<string name="opening_hours">Öffnungszeiten</string>
 	<string name="opening_changeset">Öffne Changeset …</string>
@@ -705,8 +705,8 @@
     <string name="reload_indexes">Offline-Daten erneut einbinden</string>
     <string name="download_indexes_descr">Lade oder aktualisiere Offline-Vektor-Karten und Adressdaten aus dem Internet</string>
     <string name="download_indexes">Offline-Daten herunterladen</string>
-    <string name="use_online_routing_descr">Internet zur Streckenberechnung verwenden</string>
-    <string name="use_online_routing">Online-Streckenberechnung</string>
+    <string name="use_online_routing_descr">Internet zur Routenberechnung verwenden</string>
+    <string name="use_online_routing">Online-Navigation</string>
     <string name="osm_settings_descr">Einstellungen für OpenStreetMap.org (OSM)</string>
     <string name="data_settings_descr">Dateneinstellungen festlegen: Sprache, Daten laden oder aktualisieren</string>
     <string name="data_settings">Daten</string>

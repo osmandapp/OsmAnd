@@ -118,7 +118,7 @@ public class BinaryInspector {
 		}
 		
 		public boolean contains(MapObject o){
-			return lattop >= o.getLocation().getLatitude() && latbottom >= o.getLocation().getLatitude()
+			return lattop >= o.getLocation().getLatitude() && latbottom <= o.getLocation().getLatitude()
 					&& lonleft <= o.getLocation().getLongitude() && lonright >= o.getLocation().getLongitude();
 			
 		}

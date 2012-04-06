@@ -118,7 +118,8 @@ function updateGoogleCodeIndexes($update=false) {
 				$zip->close();
 				if (isset($mapNodes[$indexName])) {
 					$exdate = DateTime::createFromFormat('d.m.Y', $mapNodes[$indexName]->getAttribute("date"));
-					if($stat['mtime'] < $exdate->getTimestamp()) {
+                    $localdate = DateTime::createFromFormat('d.m.Y', $date);
+                    if($localdate->getTimestamp() <= $exdate->getTimestamp()) {
 						continue;
 					}
 					$out = $mapNodes[$indexName];

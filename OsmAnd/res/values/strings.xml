@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="show_ruler_level_descr">Display ruler on the map</string>
 	<string name="show_ruler_level">Display ruler</string>
@@ -174,7 +174,7 @@
 	\n\t\'Light sensor\' - map appearance is controlled by light sensor of your device (only if equipped)</string>	
 
 	<string name="tip_osm_improve">Improving OSM Data</string>
-	<string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and routing- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks!
+	<string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and navigation- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks!
 	\n\tFor this you need to first provide your OSM login information in \'Settings\' -> \'General settings\' -> \'OSM\'.
 	\n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it.
 	\n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem.
@@ -508,7 +508,7 @@
 
 	<string name="use_osmand_routing_service">OsmAnd navigation >20km</string>
 	<string name="use_osmand_routing_service_descr">Use OsmAnd offline navigation applies only to routes > 20 km (experimental)</string>
-	<string name="osmand_routing_experimental">OsmAnd offline routing is an experimental feature and it does not work for distances of more than about 20 km.\n\nNavigation service is temporarily switched to online CloudMade.</string>
+	<string name="osmand_routing_experimental">OsmAnd offline navigation is an experimental feature and it does not work for distances of more than about 20 km.\n\nNavigation service is temporarily switched to online CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
 	<string name="application_dir">Storage directory</string>
 	<string name="application_dir_change_warning">Changing the storage directory will not move or delete the data. This must be performed separately and outside OsmAnd. Continue anyway?</string>
@@ -575,7 +575,7 @@
 	<string name="voice">Voice</string>
 	<string name="no_vector_map_loaded">Vector maps were not loaded</string>
 	
-	<string name="map_route_by_gpx">Route using GPX</string>
+	<string name="map_route_by_gpx">Navigate using GPX</string>
 	<string name="gpx_files_not_found">GPX files not found in /tracks directory</string>
 	<string name="layer_gpx_layer">GPX track&#8230;</string>
 	<string name="error_reading_gpx">Error reading GPX data</string>
@@ -615,7 +615,7 @@
 	<string name="layer_poi">POI&#8230;</string>
 	<string name="layer_map">Map source&#8230;</string>
 	<string name="menu_layers">Define view</string>
-	<string name="continue_follow_previous_route">Previous route was unfinished. Continue following it?</string>
+	<string name="continue_follow_previous_route">Previous navigation was unfinished. Continue following it?</string>
 	<string name="context_menu_item_search_poi">Search POI</string>
 	<string name="context_menu_item_show_route">Show route from here</string>
 	<string name="use_trackball_descr">Use trackball to move map</string>
@@ -647,7 +647,7 @@
 	<string name="voice_data_not_supported">Unsupported version of voice data</string>
 	<string name="voice_data_corrupted">Specified voice data is corrupted</string>
 	<string name="voice_data_unavailable">Selected voice data is not available</string>
-	<string name="stop_routing">Stop routing</string>
+	<string name="stop_routing">Stop navigtn.</string>
 	<string name="sd_unmounted">SD card is not accessible.\nYou won\'t be able to see maps or find things.</string>
 	<string name="sd_mounted_ro">SD card is read-only.\nYou can only see the preloaded map and can\'t download from the Internet.</string>
 	<string name="unzipping_file">Unzipping file&#8230;</string>
@@ -772,7 +772,7 @@
     <string name="download_indexes_descr">Download or update data for offline use from the Internet</string>
     <string name="download_indexes">Download offline data</string>
     <string name="use_online_routing_descr">Use Internet to calculate route</string>
-    <string name="use_online_routing">Use online routing</string>
+    <string name="use_online_routing">Use online navigation</string>
     <string name="osm_settings_descr">Specify Openstreetmap.org (OSM) settings needed for OSM submissions</string>
     <string name="data_settings_descr">Specify language, download/reload data</string>
     <string name="data_settings">Data</string>
