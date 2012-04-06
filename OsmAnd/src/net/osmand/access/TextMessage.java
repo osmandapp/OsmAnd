@@ -25,8 +25,4 @@ public class TextMessage {
         return layout;
     }
 
-    public static boolean accessibilityExtensions(Context context) {
-        return ((OsmandApplication)(context.getApplicationContext())).getSettings().ACCESSIBILITY_EXTENSIONS.get();
-    }
-
 }
