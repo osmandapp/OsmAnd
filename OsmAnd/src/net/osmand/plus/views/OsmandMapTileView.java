@@ -18,7 +18,6 @@ import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 
@@ -97,7 +96,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private List<OsmandMapLayer> layers = new ArrayList<OsmandMapLayer>();
 	
 	private BaseMapLayer mainLayer;
-	private ContextMenuLayer contextMenuLayer;
 	
 	private Map<OsmandMapLayer, Float> zOrders = new HashMap<OsmandMapLayer, Float>();
 
@@ -229,14 +227,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	public OsmandApplication getApplication() {
 		return application;
-	}
-
-	public void setContextMenuLayer(ContextMenuLayer layer) {
-		contextMenuLayer = layer;
-	}
-
-	public ContextMenuLayer getContextMenuLayer() {
-		return contextMenuLayer;
 	}
 
 	// ///////////////////////// NON UI PART (could be extracted in common) /////////////////////////////
