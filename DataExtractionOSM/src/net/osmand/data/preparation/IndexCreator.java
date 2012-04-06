@@ -641,7 +641,10 @@ public class IndexCreator {
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/luxembourg.osm.pbf"),
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/cuba2.osm.bz2"),
 //				new ConsoleProgressImplementation(1), null, zooms, rt, log);
-		zooms = MapZooms.parseZooms("1-5;6-14");
+		// ;6-8;9-14
+		zooms = MapZooms.parseZooms("1-3;4-6;7-9;10-14");
+		creator.setRegionName("basemap");
+		creator.setMapFileName("basemap_coastlines.obf");
 		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/basemap/10m_coastline_out.osm"),
 				new ConsoleProgressImplementation(1), null, zooms, rt, log);
 		

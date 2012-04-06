@@ -59,12 +59,12 @@ public class MapRenderRepositories {
 
 	private final static Log log = LogUtil.getLog(MapRenderRepositories.class);
 	private final Context context;
+	private final static int BASEMAP_ZOOM = 7;
 	private Handler handler;
 	private Map<String, BinaryMapIndexReader> files = new LinkedHashMap<String, BinaryMapIndexReader>();
 	private Set<String> nativeFiles = new HashSet<String>();
 	private OsmandRenderer renderer;
 
-	private static String BASEMAP_NAME = "basemap";
 
 	// lat/lon box of requested vector data
 	private RectF cObjectsBox = new RectF();
@@ -229,8 +229,8 @@ public class MapRenderRepositories {
 	}
 
 	public boolean basemapExists() {
-		for (String f : files.keySet()) {
-			if (f.toLowerCase().contains(BASEMAP_NAME)) {
+		for (BinaryMapIndexReader f : files.values()) {
+			if (f.isBasemap()) {
 				return true;
 			}
 		}
@@ -245,21 +245,9 @@ public class MapRenderRepositories {
 		int bottomY = MapUtils.get31TileNumberY(dataBox.bottom);
 		int topY = MapUtils.get31TileNumberY(dataBox.top);
 		long now = System.currentTimeMillis();
-		// search lower level zooms only in basemap for now :) before it was intersection of maps on zooms 5-7
-		boolean basemapSearch = false;
-		if (zoom <= 7) {
-			for (String f : files.keySet()) {
-				if (f.toLowerCase().contains(BASEMAP_NAME)) {
-					basemapSearch = true;
-					break;
-				}
-			}
-		}
+		// TODO coastline/land tiles 
 		NativeSearchResult resultHandler = null;
 		for (String mapName : files.keySet()) {
-			if (basemapSearch && !mapName.toLowerCase().contains(BASEMAP_NAME)) {
-				continue;
-			}
 			BinaryMapIndexReader reader = files.get(mapName);
 			if(!reader.containsMapData(leftX, topY, rightX, bottomY, zoom)) {
 				continue;
@@ -301,10 +289,12 @@ public class MapRenderRepositories {
 		}
 		try {
 			int count = 0;
-			ArrayList<BinaryMapDataObject> tempList = new ArrayList<BinaryMapDataObject>();
+			ArrayList<BinaryMapDataObject> tempResult = new ArrayList<BinaryMapDataObject>();
+			ArrayList<BinaryMapDataObject> basemapResult = new ArrayList<BinaryMapDataObject>();
 			System.gc(); // to clear previous objects
 			TLongSet ids = new TLongHashSet();
 			List<BinaryMapDataObject> coastLines = new ArrayList<BinaryMapDataObject>();
+			List<BinaryMapDataObject> basemapCoastLines = new ArrayList<BinaryMapDataObject>();
 			int leftX = MapUtils.get31TileNumberX(cLeftLongitude);
 			int rightX = MapUtils.get31TileNumberX(cRightLongitude);
 			int bottomY = MapUtils.get31TileNumberY(cBottomLatitude);
@@ -340,56 +330,81 @@ public class MapRenderRepositories {
 			if (zoom > 16) {
 				searchFilter = null;
 			}
-			// search lower level zooms only in basemap for now :) before it was intersection of maps on zooms 5-7
-			boolean basemapSearch = false;
-			if (zoom <= 7) {
-				for (String f : files.keySet()) {
-					if (f.toLowerCase().contains(BASEMAP_NAME)) {
-						basemapSearch = true;
-						break;
-					}
-				}
-			}
-
-			for (String mapName : files.keySet()) {
-				if (basemapSearch && !mapName.toLowerCase().contains(BASEMAP_NAME)) {
-					continue;
-				}
-				
-				BinaryMapIndexReader c = files.get(mapName);
-				searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom, searchFilter);
+			boolean ocean = false;
+			MapIndex mi = null;
+			searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom, searchFilter);
+			for (BinaryMapIndexReader c  : files.values()) {
+				searchRequest.clearSearchResults();
 				List<BinaryMapDataObject> res = c.searchMapIndex(searchRequest);
-				for (BinaryMapDataObject r : res) {
-					if (PerformanceFlags.checkForDuplicateObjectIds) {
-						if (ids.contains(r.getId()) && r.getId() > 0) {
-							// do not add object twice
-							continue;
+					for (BinaryMapDataObject r : res) {
+						if (PerformanceFlags.checkForDuplicateObjectIds) {
+							if (ids.contains(r.getId()) && r.getId() > 0) {
+								// do not add object twice
+								continue;
+							}
+							ids.add(r.getId());
 						}
-						ids.add(r.getId());
-					}
-					count++;
+						count++;
 
-					if(r.containsType(r.getMapIndex().coastlineEncodingType)){
-						coastLines.add(r);
-					} else {
-						// do not mess coastline and other types
-						tempList.add(r);	
+						if (r.containsType(r.getMapIndex().coastlineEncodingType)) {
+							if(c.isBasemap()){
+								basemapCoastLines.add(r);
+							} else {
+								coastLines.add(r);
+							}
+						} else {
+							// do not mess coastline and other types
+							if(c.isBasemap()){
+								basemapResult.add(r);
+							} else {
+								tempResult.add(r);
+							}
+						}
+						if (checkWhetherInterrupted()) {
+							return false;
+						}
 					}
-					if (checkWhetherInterrupted()) {
-						return false;
-					}
-					
+				
+				if(searchRequest.isOcean() ){
+					mi = c.getMapIndexes().get(0);
+					ocean = true;
+				} else if(searchRequest.isLand()) {
+					mi = c.getMapIndexes().get(0);
 				}
 			}
 
 			String coastlineTime = "";
+			boolean addBasemapCoastlines = zoom <= BASEMAP_ZOOM;
+			boolean emptyData = zoom > BASEMAP_ZOOM && tempResult.isEmpty() && coastLines.isEmpty() ;
+			
 			if(!coastLines.isEmpty()) {
 				long ms = System.currentTimeMillis();
-				 
-				List<BinaryMapDataObject> pcoastlines = processCoastlines(coastLines, leftX, rightX, bottomY, topY, zoom);
-				tempList.addAll(pcoastlines);
+				List<BinaryMapDataObject> pcoastlines = processCoastlines(coastLines, leftX, rightX, bottomY, topY, zoom, 
+						basemapCoastLines.isEmpty());
+				addBasemapCoastlines = pcoastlines.isEmpty() || addBasemapCoastlines;
+				tempResult.addAll(pcoastlines);
+				coastlineTime = "(coastline " + (System.currentTimeMillis() -  ms) + " ms )";
+			} else if(basemapCoastLines.isEmpty() && mi != null){
+				BinaryMapDataObject o = new BinaryMapDataObject(new int[] { leftX, topY, rightX, topY, rightX, bottomY, leftX, bottomY, leftX,
+						topY }, new int[] { ocean ? mi.coastlineEncodingType : (mi.landEncodingType) }, null, -1);
+				o.setMapIndex(mi);
+				tempResult.add(o);
+			}
+			if(addBasemapCoastlines){
+				long ms = System.currentTimeMillis();
+				List<BinaryMapDataObject> pcoastlines = processCoastlines(basemapCoastLines, leftX, rightX, bottomY, topY, zoom, true);
+				tempResult.addAll(pcoastlines);
 				coastlineTime = "(coastline " + (System.currentTimeMillis() -  ms) + " ms )";
 			}
+			if(emptyData && tempResult.size() > 0){
+				BinaryMapDataObject o = tempResult.get(0);
+				o.putObjectName(o.getMapIndex().nameEncodingType, context.getString(R.string.switch_to_raster_map_to_see));
+			}
+			if(zoom <= BASEMAP_ZOOM || tempResult.isEmpty()) {
+				tempResult.addAll(basemapResult);
+			}
+			
+			
 			if (count > 0) {
 				log.info(String.format("BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", //$NON-NLS-1$
 						cBottomLatitude, cTopLatitude, cLeftLongitude, cRightLongitude, zoom));
@@ -397,7 +412,7 @@ public class MapRenderRepositories {
 			}
 		
 
-			cObjects = tempList;
+			cObjects = tempResult;
 			cObjectsBox = dataBox;
 		} catch (IOException e) {
 			log.debug("Search failed", e); //$NON-NLS-1$
@@ -484,6 +499,7 @@ public class MapRenderRepositories {
 				} else {
 					cNativeObjects = null;
 					loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingReq, nightMode);
+					
 				}
 				if (!loaded || checkWhetherInterrupted()) {
 					return;
@@ -629,7 +645,7 @@ public class MapRenderRepositories {
 
 	/// MULTI POLYGONS (coastline)
 	private List<BinaryMapDataObject> processCoastlines(List<BinaryMapDataObject> coastLines, int leftX, int rightX, 
-			int bottomY, int topY, int zoom) {
+			int bottomY, int topY, int zoom, boolean showIncompleted) {
 		List<TLongList> completedRings = new ArrayList<TLongList>();
 		List<TLongList> uncompletedRings = new ArrayList<TLongList>();
 		List<BinaryMapDataObject> result = new ArrayList<BinaryMapDataObject>(coastLines.size());
@@ -672,6 +688,11 @@ public class MapRenderRepositories {
 		}
 		if (uncompletedRings.size() > 0) {
 			unifyIncompletedRings(uncompletedRings, completedRings, leftX, rightX, bottomY, topY, dbId, zoom);
+		}
+		if(!showIncompleted && uncompletedRings.size() > 0){
+			result.clear();
+			return result;
+			
 		}
 		boolean clockwiseFound = false;
 		long mask = 0xffffffffl;

@@ -9,7 +9,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Iterator;
@@ -17,14 +16,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.xml.stream.XMLStreamException;
 
 import net.osmand.Algoritms;
 import net.osmand.binary.OsmandOdb.MapData;
 import net.osmand.binary.OsmandOdb.MapDataBlock;
-import net.osmand.binary.OsmandOdb.MapDataBlock.Builder;
 import net.osmand.data.MapAlgorithms;
 import net.osmand.data.preparation.MapZooms.MapZoomPair;
 import net.osmand.osm.Entity;
@@ -54,20 +51,21 @@ public class CoastlineProcessor {
 	public static final byte TILE_ZOOMLEVEL = 12;
 	private static final byte BITMASK = 0x3;
 	private static final int BITS_COUNT = (1 << TILE_ZOOMLEVEL) * (1 << TILE_ZOOMLEVEL);
-
+	private BitSet seaTileInfo = new BitSet(BITS_COUNT);
+	private BitSet landTileInfo = new BitSet(BITS_COUNT);
 	
 	private final int zoomWaySmothness;
 	private final MapRenderingTypes renderingTypes;
 	private final MapZooms mapZooms;
 	private final Log logMapDataWarn;
-	private SimplisticQuadTree quadTree;
+	private SimplisticQuadTree[] quadTrees;
 	
 	private static class SimplisticQuadTree {
-		public boolean ocean;
-		public boolean land;
 		int zoom;
 		int x;
 		int y;
+		boolean ocean;
+		boolean land;
 		
 		public SimplisticQuadTree(int x, int y, int zoom) {
 			this.x = x;
@@ -76,7 +74,8 @@ public class CoastlineProcessor {
 		}
 		
 		SimplisticQuadTree[] children = null;
-		List<Way> coastlines = null;
+		Map<MapZoomPair,List<Way>> coastlines = null;
+		
 		
 		public SimplisticQuadTree[] getAllChildren(){
 			initChildren();
@@ -87,11 +86,23 @@ public class CoastlineProcessor {
 			return children != null;
 		}
 		
-		public void addCoastline(Way w){
+		public void addCoastline(MapZoomPair p, Way w){
+			
 			if(coastlines == null) {
-				coastlines = new ArrayList<Way>();
+				coastlines = new LinkedHashMap<MapZooms.MapZoomPair, List<Way>>();
 			}
-			coastlines.add(w);
+			if(!coastlines.containsKey(p)){
+				coastlines.put(p, new ArrayList<Way>());
+			}
+			coastlines.get(p).add(w);
+		}
+		
+		public boolean coastlinesDefined(MapZoomPair p){
+			return coastlines != null && coastlines.get(p) != null;
+		}
+		
+		public List<Way> getCoastlines(MapZoomPair p) {
+			return coastlines.get(p);
 		}
 		
 		public SimplisticQuadTree getOrCreateSubTree(int x, int y, int zm) {
@@ -127,10 +138,15 @@ public class CoastlineProcessor {
 		this.mapZooms = mapZooms;
 		this.renderingTypes = renderingTypes;
 		this.zoomWaySmothness = zoomWaySmothness;
-		quadTree = constructTilesQuadTree();
+		constructBitSetInfo();
+		quadTrees = new SimplisticQuadTree[mapZooms.getLevels().size()];
+		for (int i=0;i< mapZooms.getLevels().size(); i++) {
+			MapZoomPair p = mapZooms.getLevels().get(i);
+			quadTrees[i] = constructTilesQuadTree(Math.min(p.getMaxZoom() - 1, 1));
+		}
 	}
 
-	private void constructBitSetInfo(BitSet seaTileInfo , BitSet landTileInfo) {
+	private void constructBitSetInfo() {
 		try {
 			
 			InputStream stream = CoastlineProcessor.class.getResourceAsStream("oceantiles_12.dat.bz2");
@@ -167,7 +183,7 @@ public class CoastlineProcessor {
 		}
 	}
 	
-	private boolean isWaterTile(BitSet seaTileInfo, int x, int y, int zoom) {
+	private boolean isWaterTile(int x, int y, int zoom) {
 		if (zoom >= TILE_ZOOMLEVEL) {
 			int x1 = x >> (zoom - TILE_ZOOMLEVEL);
 			int y1 = y >> (zoom - TILE_ZOOMLEVEL);
@@ -190,7 +206,7 @@ public class CoastlineProcessor {
 		}
 	}
 	
-	private boolean isLandTile(BitSet landTileInfo, int x, int y, int zoom) {
+	private boolean isLandTile(int x, int y, int zoom) {
 		if (zoom >= TILE_ZOOMLEVEL) {
 			int x1 = x >> (zoom - TILE_ZOOMLEVEL);
 			int y1 = y >> (zoom - TILE_ZOOMLEVEL);
@@ -213,83 +229,75 @@ public class CoastlineProcessor {
 		}
 	}
 	
-	public SimplisticQuadTree constructTilesQuadTree(){
+	public SimplisticQuadTree constructTilesQuadTree(int maxZoom){
 		SimplisticQuadTree rootTree = new SimplisticQuadTree(0, 0, 0);
 
-		BitSet seaTileInfo = new BitSet(BITS_COUNT);
-		BitSet landTileInfo = new BitSet(BITS_COUNT);
-		constructBitSetInfo(seaTileInfo, landTileInfo);
+		
 		int baseZoom = 4;
 		int tiles = 1 << baseZoom;
 		ArrayList<SimplisticQuadTree> toVisit = new ArrayList<SimplisticQuadTree>();
-		int cnt = 0;
 		for (int x = 0; x < tiles; x++) {
 			for (int y = 0; y < tiles; y++) {
 				toVisit.add(rootTree.getOrCreateSubTree(x, y, baseZoom));
 			}
 		}
-		int ntc = 0;
-		for (int zoom = baseZoom; zoom <= TILE_ZOOMLEVEL && !toVisit.isEmpty(); zoom++) {
-			cnt = 0;
+		initializeQuadTree(rootTree, baseZoom, maxZoom, toVisit);
+		return rootTree;
+
+	}
+
+	protected ArrayList<SimplisticQuadTree> initializeQuadTree(SimplisticQuadTree rootTree, int baseZoom, int maxZoom,
+			ArrayList<SimplisticQuadTree> toVisit) {
+		for (int zoom = baseZoom; zoom <= maxZoom && !toVisit.isEmpty(); zoom++) {
 			ArrayList<SimplisticQuadTree> newToVisit = new ArrayList<SimplisticQuadTree>();
 			for (SimplisticQuadTree subtree : toVisit) {
 				int x = subtree.x;
 				int y = subtree.y;
-				if (isWaterTile(seaTileInfo, x, y, zoom)) {
-					cnt++;
+				if (isWaterTile(x, y, zoom)) {
 					rootTree.getOrCreateSubTree(x, y, zoom).ocean = true;
-				} else if (isLandTile(landTileInfo, x, y, zoom)) {
+				} else if (isLandTile(x, y, zoom)) {
 					rootTree.getOrCreateSubTree(x, y, zoom).land = true;
-					cnt++;
 				} else if(zoom < TILE_ZOOMLEVEL){
 					SimplisticQuadTree[] vis = rootTree.getOrCreateSubTree(x, y, zoom).getOrCreateSubTree(x, y, zoom)
 							.getAllChildren();
 					for (SimplisticQuadTree t : vis) {
 						newToVisit.add(t);
 					}
-				} else {
-					ntc ++;
 				}
 			}
-//			System.out.println(" Zoom " + zoom + " count " + cnt);
 			toVisit = newToVisit;
 		}
-//		System.out.println("Not covered " + ntc + " from " + (float) ntc / ((1 << TILE_ZOOMLEVEL) * (1<<TILE_ZOOMLEVEL)));
-		return rootTree;
-
+		return toVisit;
 	}
 	
 	
 
-	public void writeCoastlinesFile(BinaryMapIndexWriter writer) throws IOException {
-		writeCoastlinesFile(writer, quadTree);
-	}
-	
-	private void writeCoastlinesFile(BinaryMapIndexWriter writer, SimplisticQuadTree simplisticQuadTree) throws IOException {
-		writer.startWriteMapIndex("Coastline");
+	public void writeCoastlinesFile(BinaryMapIndexWriter writer, String regionName) throws IOException {
+		writer.startWriteMapIndex(regionName);
 		// write map encoding rules
 		writer.writeMapEncodingRules(renderingTypes.getEncodingRuleTypes());
 
-		// TODO zooms file iterate in cycle
-		MapZoomPair p = mapZooms.getLevels().get(mapZooms.getLevels().size() - 1);
-		// write map levels and map index
-		writer.startWriteMapLevelIndex(p.getMinZoom(), p.getMinZoom(), 0, 0, (1 << 31) - 1, (1 << 31) - 1);
-		
-		Map<SimplisticQuadTree, BinaryFileReference> refs = new LinkedHashMap<CoastlineProcessor.SimplisticQuadTree, BinaryFileReference>();
-		writeBinaryMapTree(simplisticQuadTree, writer, refs);
+		int i = 0;
+		for (MapZoomPair p : mapZooms.getLevels()) {
+			// write map levels and map index
+			writer.startWriteMapLevelIndex(p.getMinZoom(), p.getMaxZoom(), 0, (1 << 31) - 1, 0, (1 << 31) - 1);
 
-		// without data blocks
-		writeBinaryMapBlock(simplisticQuadTree, writer, refs);
+			Map<SimplisticQuadTree, BinaryFileReference> refs = new LinkedHashMap<CoastlineProcessor.SimplisticQuadTree, BinaryFileReference>();
+			writeBinaryMapTree(quadTrees[i], writer, refs, p);
 
-		writer.endWriteMapLevelIndex();
+			// without data blocks
+			writeBinaryMapBlock(quadTrees[i], writer, refs, p);
 
+			writer.endWriteMapLevelIndex();
+			i++;
+		}
 		writer.endWriteMapIndex();
 		writer.flush();
 
 	}
 
 	private void writeBinaryMapBlock(SimplisticQuadTree simplisticQuadTree, BinaryMapIndexWriter writer,
-			Map<SimplisticQuadTree, BinaryFileReference> refs) throws IOException {
+			Map<SimplisticQuadTree, BinaryFileReference> refs, MapZoomPair p) throws IOException {
 		Iterator<Entry<SimplisticQuadTree, BinaryFileReference>> it = refs.entrySet().iterator();
 		TIntArrayList type = new TIntArrayList();
 		type.add(renderingTypes.getCoastlineRuleType().getTargetId());
@@ -299,10 +307,12 @@ public class CoastlineProcessor {
 			MapDataBlock.Builder dataBlock = MapDataBlock.newBuilder();
 			SimplisticQuadTree quad = e.getKey();
 			
-			for (Way w : quad.coastlines) {
+			for (Way w : quad.getCoastlines(p)) {
 				dataBlock.setBaseId(w.getId());
+				List<Node> res = new ArrayList<Node>();
+				MapAlgorithms.simplifyDouglasPeucker(w.getNodes(), p.getMaxZoom() - 2 + 8 + zoomWaySmothness, 3, res);
 				ByteArrayOutputStream bcoordinates = new ByteArrayOutputStream();
-				for (Node n : w.getNodes()) {
+				for (Node n : res) {
 					if (n != null) {
 						int y = MapUtils.get31TileNumberY(n.getLatitude());
 						int x = MapUtils.get31TileNumberX(n.getLongitude());
@@ -323,34 +333,40 @@ public class CoastlineProcessor {
 	}
 
 	private void writeBinaryMapTree(SimplisticQuadTree quadTree, BinaryMapIndexWriter writer,
-			Map<SimplisticQuadTree, BinaryFileReference> refs) throws IOException {
+			Map<SimplisticQuadTree, BinaryFileReference> refs, MapZoomPair p) throws IOException {
 		int xL = (quadTree.x) << (31 - quadTree.zoom);
-		int xR = (quadTree.x + 1) << (31 - quadTree.zoom) - 1;
+		int xR = ((quadTree.x + 1) << (31 - quadTree.zoom)) - 1;
 		int yT = (quadTree.y) << (31 - quadTree.zoom);
-		int yB = (quadTree.y + 1) << (31 - quadTree.zoom) - 1;
-		BinaryFileReference ref = writer.startMapTreeElement(xL, xR, yT, yB, false, 
-				quadTree.ocean, quadTree.land);
+		int yB = ((quadTree.y + 1) << (31 - quadTree.zoom)) - 1;
+		boolean defined = quadTree.coastlinesDefined(p);
+		boolean ocean = false;
+		boolean land = false;
+		if (!defined) {
+			ocean = quadTree.ocean ||  isWaterTile(quadTree.x, quadTree.y, quadTree.zoom);
+			land = quadTree.land || isLandTile(quadTree.x, quadTree.y, quadTree.zoom);
+		}
+		BinaryFileReference ref = writer.startMapTreeElement(xL, xR, yT, yB, defined, ocean, land);
 		if (ref != null) {
 			refs.put(quadTree, ref);
 		}
-		
+
 		if (quadTree.areChildrenDefined()) {
 			SimplisticQuadTree[] allChildren = quadTree.getAllChildren();
 
 			for (SimplisticQuadTree ch : allChildren) {
-				writeBinaryMapTree(ch, writer, refs);
+				writeBinaryMapTree(ch, writer, refs, p);
 			}
 		}
 		writer.endWriteMapTreeElement();
-		
+
 	}
 	
 	public void processCoastline(Way e) {
-//		for(MapZoomPair p : mapZooms.getLevels()) {
 		renderingTypes.getCoastlineRuleType().updateFreq();
-		MapZoomPair p = mapZooms.getLevels().get(mapZooms.getLevels().size() - 1);
-		{
-			int z = (p.getMinZoom() + p.getMaxZoom()) / 2;
+		int ij = 0;
+		for(MapZoomPair p : mapZooms.getLevels()) {
+			SimplisticQuadTree quadTree = quadTrees[ij++];
+			int z = Math.min((p.getMinZoom() + p.getMaxZoom()) / 2, p.getMinZoom() + 3);
 			List<Node> ns = e.getNodes();
 			if(ns.size() < 2) {
 				return;
@@ -380,20 +396,29 @@ public class CoastlineProcessor {
 						int nx31 = MapUtils.get31TileNumberX(next.getLongitude());
 						int ny31 = MapUtils.get31TileNumberY(next.getLatitude());
 						// increase boundaries to drop into another tile
-						int leftX = (tilex << (31 - z)) - 1; 
+						int leftX = (tilex << (31 - z)) - 1;
 						int rightX = (tilex + 1) << (31 - z);
-						if( rightX < 0 ){
+						if (rightX < 0) {
 							rightX = Integer.MAX_VALUE;
 						}
-						int topY = (tiley << (31 - z)) - 1; 
+						int topY = (tiley << (31 - z)) - 1;
 						int bottomY = (tiley + 1) << (31 - z);
-						if( bottomY < 0 ){
+						if (bottomY < 0) {
 							bottomY = Integer.MAX_VALUE;
 						}
-						
+
 						long inter = MapAlgorithms.calculateIntersection(px31, py31, nx31, ny31, leftX, rightX, bottomY, topY);
 						int cy31 = (int) inter;
 						int cx31 = (int) (inter >> 32l);
+						if (inter == -1) {
+							cx31 = nx31;
+							cy31 = ny31;
+							i++;
+							logMapDataWarn.warn("Can't find intersection for " + MapUtils.get31LongitudeX(px31) + ","
+									+ MapUtils.get31LatitudeY(py31) + " - " + +MapUtils.get31LongitudeX(nx31) + ","
+									+ MapUtils.get31LatitudeY(ny31));
+						}
+
 						prevNode = new Node(MapUtils.get31LatitudeY(cy31), MapUtils.get31LongitudeX(cx31), -1000);
 						px31 = cx31;
 						py31 = cy31;
@@ -409,16 +434,16 @@ public class CoastlineProcessor {
 						System.err.println("Tile " + tilex + " / " + tiley + " at " + z + " can not be found");
 					}
 				}
-				quad.addCoastline(w);
-			}
+				quad.addCoastline(p, w);
 			
+			}
 		}
 	}
 
 		
 	
 	
-	///////////////////////////// OLD CODE ///////////////////////////////
+	///////////////////////////// NOT USED CODE  TO DELETE ///////////////////////////////
 	
 	public void processCoastlineOld(Way e) {
 		WayChain chain = null;

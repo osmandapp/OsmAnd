@@ -98,7 +98,6 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	}
 
 	public void indexMapRelationsAndMultiPolygons(Entity e, OsmDbAccessorContext ctx) throws SQLException {
-//		indexHighwayRestrictions(e, ctx);
 		indexMultiPolygon(e, ctx);
 	}
 
@@ -558,7 +557,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		closePreparedStatements(mapBinaryStat, mapLowLevelBinaryStat);
 		mapConnection.commit();
 		if(COASTLINE_PROCESS) {
-			coastlineProcessor.writeCoastlinesFile(writer);
+			coastlineProcessor.writeCoastlinesFile(writer, regionName);
 			return;
 		}
 		try {

@@ -46,13 +46,7 @@ public class BinaryInspector {
 	public static void main(String[] args) throws IOException {
 		inspector(args);
 		// test cases show info
-//		inspector(new String[]{"/home/victor/projects/OsmAnd/temp/Belarus_europe.obf"});
-//		inspector(new String[]{"-v","C:\\Users\\tpd\\osmand\\Housenumbers.obf"});
-		//inspector(new String[]{"/home/victor/projects/OsmAnd/data/osm-gen/saved/Belarus-newzooms-new-rt.obf"});
-//		inspector(new String[]{"/home/victor/projects/OsmAnd/download/spain/Spain_europe_1_small.obf"});
-		inspector(new String[]{"-vpoi", "/home/victor/projects/OsmAnd/data/osm-gen/10m_coastline_out.obf" 
-				/*"/home/victor/projects/OsmAnd/data/osm-gen/Luxembourg.obf"*/});
-		
+		inspector(new String[]{"/home/victor/projects/OsmAnd/data/osm-gen/basemap_coastlines"});
 		
 		
 		// test case extract parts
@@ -519,7 +513,7 @@ public class BinaryInspector {
 								continue;
 //								throw new NullPointerException("Type " + obj.getAdditionalTypes()[j] + "was not found");
 							}
-							b.append(pair.toSimpleString()+"("+types[j]+")");
+							b.append(pair.toSimpleString()+" ("+types[j]+")");
 						}
 						b.append("]");
 						if(obj.getAdditionalTypes() != null && obj.getAdditionalTypes().length > 0){

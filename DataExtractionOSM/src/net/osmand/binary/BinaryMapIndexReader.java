@@ -60,6 +60,7 @@ public class BinaryMapIndexReader {
 	private int version;
 	private long dateCreated;
 	// keep them immutable inside
+	private boolean basemap = false;
 	private List<MapIndex> mapIndexes = new ArrayList<MapIndex>();
 	private List<PoiRegion> poiIndexes = new ArrayList<PoiRegion>();
 	private List<AddressRegion> addressIndexes = new ArrayList<AddressRegion>();
@@ -72,6 +73,8 @@ public class BinaryMapIndexReader {
 	private final BinaryMapPoiReaderAdapter poiAdapter;
 	private final BinaryMapAddressReaderAdapter addressAdapter;
 	
+	private static String BASEMAP_NAME = "basemap";
+
 	
 	public BinaryMapIndexReader(final RandomAccessFile raf) throws IOException {
 		this(raf, false);
@@ -90,6 +93,7 @@ public class BinaryMapIndexReader {
 		addressIndexes = new ArrayList<AddressRegion>(referenceToSameFile.addressIndexes);
 		transportIndexes = new ArrayList<TransportIndex>(referenceToSameFile.transportIndexes);
 		indexes = new ArrayList<BinaryIndexPart>(referenceToSameFile.indexes);
+		basemap = referenceToSameFile.basemap;
 	}
 	
 	public BinaryMapIndexReader(final RandomAccessFile raf, boolean readOnlyMapData) throws IOException {
@@ -136,6 +140,7 @@ public class BinaryMapIndexReader {
 				mapIndex.filePointer = codedIS.getTotalBytesRead();
 				int oldLimit = codedIS.pushLimit(mapIndex.length);
 				readMapIndex(mapIndex);
+				basemap = basemap || mapIndex.isBaseMap();
 				codedIS.popLimit(oldLimit);
 				codedIS.seek(mapIndex.filePointer + mapIndex.length);
 				mapIndexes.add(mapIndex);
@@ -213,6 +218,14 @@ public class BinaryMapIndexReader {
 	
 	public List<BinaryIndexPart> getIndexes() {
 		return indexes;
+	}
+	
+	public List<MapIndex> getMapIndexes() {
+		return mapIndexes;
+	}
+	
+	public boolean isBasemap() {
+		return basemap;
 	}
 	
 	public boolean containsMapData(){
@@ -668,6 +681,13 @@ public class BinaryMapIndexReader {
 			case MapDataBox.TOP_FIELD_NUMBER :
 				tree.top = codedIS.readSInt32() + atop;
 				break;
+			case MapDataBox.OCEAN_FIELD_NUMBER :
+				if(codedIS.readBool()) {
+					tree.ocean = Boolean.TRUE;
+				} else {
+					tree.ocean = Boolean.FALSE;
+				}
+				break;
 			case MapDataBox.SHIFTTOMAPDATA_FIELD_NUMBER :
 				tree.mapDataBlock = readInt() + tree.filePointer;
 				break;
@@ -852,7 +872,12 @@ public class BinaryMapIndexReader {
 				foundSubtrees.add(current);
 				break;
 			case MapDataBox.OCEAN_FIELD_NUMBER :
-				current.ocean = codedIS.readBool();
+				if(codedIS.readBool()) {
+					current.ocean = Boolean.TRUE;
+				} else {
+					current.ocean = Boolean.FALSE;
+				}
+				req.publishOceanTile(current.ocean);
 				break;
 			case MapDataBox.BOXES_FIELD_NUMBER :
 				// left, ... already initialized
@@ -860,8 +885,8 @@ public class BinaryMapIndexReader {
 				child.length = readInt();
 				child.filePointer = codedIS.getTotalBytesRead();
 				int oldLimit = codedIS.pushLimit(child.length);
-				if(current.ocean){
-					child.ocean = true;
+				if(current.ocean != null ){
+					child.ocean = current.ocean;
 				}
 				searchMapTreeBounds(child, current, req, foundSubtrees);
 				codedIS.popLimit(oldLimit);
@@ -1228,6 +1253,9 @@ public class BinaryMapIndexReader {
 	
 	public static class SearchRequest<T> {
 		private List<T> searchResults = new ArrayList<T>();
+		private boolean land = false;
+		private boolean ocean = false;
+		
 		private ResultMatcher<T> resultMatcher;
 		
 		// 31 zoom tiles
@@ -1276,6 +1304,14 @@ public class BinaryMapIndexReader {
 			return false;
 		}
 		
+		protected void publishOceanTile(boolean ocean){
+			if(ocean) {
+				this.ocean = true;
+			} else {
+				this.land = true;
+			}
+		}
+		
 		public List<T> getSearchResults() {
 			return searchResults;
 		}
@@ -1294,11 +1330,21 @@ public class BinaryMapIndexReader {
 			return false;
 		}
 		
+		public boolean isOcean() {
+			return ocean;
+		}
+		
+		public boolean isLand() {
+			return land;
+		}
+		
 		public void clearSearchResults(){
 			// recreate whole list to allow GC collect old data 
 			searchResults = new ArrayList<T>();
 			cacheCoordinates.clear();
 			cacheTypes.clear();
+			land = false;
+			ocean = false;
 			numberOfVisitedObjects = 0;
 			numberOfAcceptedObjects = 0;
 			numberOfReadSubtrees = 0;
@@ -1331,8 +1377,13 @@ public class BinaryMapIndexReader {
 		}
 
 		public void finishInitializingTags() {
-			coastlineBrokenEncodingType = decodingRules.size() * 2 + 1;
+			int free = decodingRules.size() * 2 + 1;
+			coastlineBrokenEncodingType = free++;
 			initMapEncodingRule(0, coastlineBrokenEncodingType, "natural", "coastline_broken");
+			if(landEncodingType == -1){
+				landEncodingType = free++;
+				initMapEncodingRule(0, landEncodingType, "natural", "land");
+			}
 		}
 		
 		private void initMapEncodingRule(int type, int id, String tag, String val) {
@@ -1366,7 +1417,10 @@ public class BinaryMapIndexReader {
 				}
 			}
 		}
-		
+
+		public boolean isBaseMap(){
+			return name != null && name.toLowerCase().contains(BASEMAP_NAME);
+		}
 	}
 	
 	public static class TagValuePair {
@@ -1455,7 +1509,7 @@ public class BinaryMapIndexReader {
 		int length = 0;
 		
 		long mapDataBlock = 0;
-		boolean ocean = false;
+		Boolean ocean = null;
 		
 		int left = 0;
 		int right = 0;
@@ -1480,6 +1534,12 @@ public class BinaryMapIndexReader {
 		}
 		public int getFilePointer() {
 			return filePointer;
+		}
+		
+		@Override
+		public String toString(){
+			return "Top Lat " + ((float) MapUtils.get31LatitudeY(top)) + " lon " + ((float) MapUtils.get31LongitudeX(left))
+					+ " Bottom lat " + ((float) MapUtils.get31LatitudeY(bottom)) + " lon " + ((float) MapUtils.get31LongitudeX(right));
 		}
 		
 	}

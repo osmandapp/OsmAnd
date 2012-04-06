@@ -355,6 +355,8 @@
 			<filter minzoom="14" textSize="14" ref="false"/>
 		</filter>
 
+		<filter minzoom="3" textSize="14" textColor="#9d6c9d" textWrapWidth="35" tag="natural" value="coastline"/>
+		<filter minzoom="3" textSize="14" textColor="#9d6c9d" textWrapWidth="35" tag="natural" value="land"/>
 		<!-- Location names -->
 		<filter minzoom="3" textSize="14" textColor="#9d6c9d" textWrapWidth="20" tag="place" value="country"/>
 		<filter minzoom="4" textSize="14" textColor="#9d6c9d" textWrapWidth="20" tag="place" value="state"/>

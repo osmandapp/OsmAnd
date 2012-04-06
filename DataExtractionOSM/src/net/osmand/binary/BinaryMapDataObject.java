@@ -57,6 +57,13 @@ public class BinaryMapDataObject {
 		return objectNames;
 	}
 	
+	public void putObjectName(int type, String name){
+		if(objectNames == null){
+			objectNames = new TIntObjectHashMap<String>();
+		}
+		objectNames.put(type, name);
+	}
+	
 	public int[][] getPolygonInnerCoordinates() {
 		return polygonInnerCoordinates;
 	}

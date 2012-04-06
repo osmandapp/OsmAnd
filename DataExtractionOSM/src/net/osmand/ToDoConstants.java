@@ -12,8 +12,8 @@ public class ToDoConstants {
 	
 	// Map QuadTree (skip small areas!!!)
 	// Routing index !!
-	
-	// Identify coastline areas and pure ocean areas !!!
+	 
+	// Identify coastline areas and pure ocean areas !!! Show high zoom level for coatline if coastline is broken
 	// TODO Delete/Extract the code with multipolygons ! (coastline))
 	
 	// Render : different texts support render.xml
