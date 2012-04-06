@@ -340,9 +340,9 @@
 			</groupFilter>
 		</group>
 		<filter tag="highway" value="motorway_junction" textColor="#00008b" textHaloRadius="1" textWrapWidth="16" textMinDistance="10" textOrder="6">
-			<filter appMode="car" minzoom="13" maxzoom="13" textSize="16" ref="true"/>
-			<filter appMode="car" minzoom="14" textSize="16" ref="false"/>
-			<filter minzoom="14" textSize="14" ref="false"/>
+			<filter appMode="car" minzoom="12" maxzoom="13" textSize="16" ref="true"/>
+			<filter appMode="car" minzoom="13" textSize="16" ref="false"/>
+			<filter minzoom="13" textSize="13" ref="false"/>
 		</filter>
 
 		<!-- Location names -->
