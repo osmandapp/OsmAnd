@@ -10,8 +10,8 @@
 	<!-- Types : string, int, boolean; possibleValues comma separated possible values for int/string -->
 	<renderingProperty attr="hmRendered" name="Show more map detail" description="Increase amount of map detail shown"
 		type="boolean" possibleValues=""/>
-	<renderingProperty attr="contourLines" name="Show contour lines" description="Display in map if available (zoom level 14 and up). Separate SRTM-file may be needed."
-		type="boolean" possibleValues=""/>
+	<renderingProperty attr="contourLines" name="Show contour lines" description="Select minimum zoom level to display in map if available. Separate SRTM-file may be needed."
+		type="string" possibleValues="never,13,12,11"/>
 	<renderingProperty attr="appMode" name="Rendering mode" description="Map optimization for respective User Profile"
 		type="string" possibleValues="default,car,bicycle,pedestrian"/>
 	<renderingProperty attr="noPolygons" name="No polygons" description="Make all areal land features on map transparent"
@@ -340,9 +340,9 @@
 			</groupFilter>
 		</group>
 		<filter tag="highway" value="motorway_junction" textColor="#00008b" textHaloRadius="1" textWrapWidth="16" textMinDistance="10" textOrder="6">
-			<filter appMode="car" minzoom="12" maxzoom="13" textSize="16" ref="true"/>
-			<filter appMode="car" minzoom="13" textSize="16" ref="false"/>
-			<filter minzoom="13" textSize="13" ref="false"/>
+			<filter appMode="car" minzoom="13" maxzoom="13" textSize="16" ref="true"/>
+			<filter appMode="car" minzoom="14" textSize="16" ref="false"/>
+			<filter minzoom="14" textSize="14" ref="false"/>
 		</filter>
 
 		<!-- Location names -->
@@ -365,8 +365,12 @@
 		</group>
 
 		<!-- Natural -->
-		<filter contourLines="true" nightMode="false" minzoom="14" maxzoom="16" textSize="12" textColor="#444444" textOnPath="true" tag="contour" value=""/>
-			<filter contourLines="true" nightMode="true" minzoom="14" maxzoom="16" textSize="12" textColor="#777777" textOnPath="true" tag="contour" value=""/>
+		<filter contourLines="11" nightMode="false" minzoom="13" textSize="12" textColor="#444444" textOnPath="true" tag="contour" value=""/>
+		<filter contourLines="12" nightMode="false" minzoom="13" textSize="12" textColor="#444444" textOnPath="true" tag="contour" value=""/>
+		<filter contourLines="13" nightMode="false" minzoom="13" textSize="12" textColor="#444444" textOnPath="true" tag="contour" value=""/>
+			<filter contourLines="11" nightMode="true" minzoom="13" textSize="12" textColor="#777777" textOnPath="true" tag="contour" value=""/>
+			<filter contourLines="12" nightMode="true" minzoom="13" textSize="12" textColor="#777777" textOnPath="true" tag="contour" value=""/>
+			<filter contourLines="13" nightMode="true" minzoom="13" textSize="12" textColor="#777777" textOnPath="true" tag="contour" value=""/>
 		<filter minzoom="13" textSize="12" textColor="#000000" textWrapWidth="10" tag="natural" value="wood" textOrder="10"/>
 		<filter minzoom="15" textSize="12" textColor="#09dd09" textWrapWidth="15" tag="natural" value="park" textOrder="10"/>
 		<filter minzoom="14" textSize="12" textColor="#6699cc" textHaloRadius="1" textWrapWidth="20" tag="natural" value="beach" textOrder="10"/>
@@ -1166,7 +1170,9 @@
 
 		<filter tag="highway" value="proposed" minzoom="12" color="#ff6600" strokeWidth="8" color_2="#9f9f9f" strokeWidth_2="6" pathEffect_2="9_3"/>
 
-		<filter contourLines="true" tag="contour" value="elevation" minzoom="14" color="#54ff7c00" strokeWidth="1"/>
+		<filter contourLines="11" tag="contour" value="elevation" minzoom="11" color="#54ff7c00" strokeWidth="1"/>
+		<filter contourLines="12" tag="contour" value="elevation" minzoom="12" color="#54ff7c00" strokeWidth="1"/>
+		<filter contourLines="13" tag="contour" value="elevation" minzoom="13" color="#54ff7c00" strokeWidth="1"/>
 
 		<!-- Barriers -->
 		<filter minzoom="16" color="#000000" strokeWidth="1" tag="highway" value="gate"/>
