@@ -1,4 +1,4 @@
-:- op('==', xfy, 500).
+﻿:- op('==', xfy, 500).
 version(101).
 language(es).
 
@@ -6,64 +6,78 @@ language(es).
 preamble - [].
 
 
-%% TURNS 
-turn('left', ['gira a izquierda ']).
+%% TURNS
+
+turn('left', ['gira a la izquierda ']).
 turn('left_sh', ['gira fuerte a la izquierda ']).
-turn('left_sl', ['gira leve a la izquierda ']).
+turn('left_sl', ['gira levemente a la izquierda ']).
 turn('right', ['gira a la derecha ']).
 turn('right_sh', ['gira fuerte a la derecha ']).
-turn('right_sl', ['gira leve a la derecha ']).
+turn('right_sl', ['gira levemente a la derecha ']).
 
-prepare_turn(Turn, Dist) == ['Después de', D,' prepararse para ', M] :- distance(Dist) == D, turn(Turn, M).
-turn(Turn, Dist) == ['Después de ', D, M] :- distance(Dist) == D, turn(Turn, M).
+turn_inf('left', ['girar a la izquierda ']).
+turn_inf('left_sh', ['girar fuerte a la izquierda ']).
+turn_inf('left_sl', ['girar levemente a la izquierda ']).
+turn_inf('right', ['girar a la derecha ']).
+turn_inf('right_sh', ['girar fuerte a la derecha ']).
+turn_inf('right_sl', ['girar levemente a la derecha ']).
+
+prepare_turn(Turn, Dist) == ['Prepárate para ', M, ' tras ', D] :- distance(Dist) == D, turn_inf(Turn, M).
+turn(Turn, Dist) == ['Tras ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
-prepare_make_ut(Dist) == [ 'Después de ', D,' prepararse para dar la vuelta'] :- distance(Dist) == D.
-make_ut(Dist) == [' Después de', D, ' da la vuelta'] :- distance(Dist) == D.
-make_ut == ['da la vuelta'].
-make_ut_wp == ['Cuando posible, da la vuelta'].
+prepare_make_ut(Dist) == [ 'Prepárate para dar la vuelta tras ', D] :- distance(Dist) == D.
+make_ut(Dist) == ['Tras ', D, ' da la vuelta'] :- distance(Dist) == D.
+make_ut == ['Da la vuelta'].
+make_ut_wp == ['Cuando sea posible, da la vuelta'].
 
-prepare_roundabout(Dist) == [ 'Después de ', D,' prepararse para entrar '] :- distance(Dist) == D.
-roundabout(Dist, _Angle, Exit) == ['Después de ', D, ' entra a la glorieta y toma la ', E ] :- distance(Dist) == D, nth(Exit, E).
-roundabout(_Angle, Exit) == ['toma la ', E ] :- nth(Exit, E).
-
-go_ahead == ['Continue así '].
-go_ahead(Dist) == ['Continue por ',  D]:- distance(Dist) == D.
-
-and_arrive_destination == ['y llegará a su destino'].
-
-then == ['Después '].
-reached_destination == ['ha llegado a su destino'].
-bear_right == ['manténga a la derecha'].
-bear_left == ['manténga a la izquierda'].
-
-route_new_calc(Dist) == ['El viaje es ', D] :- distance(Dist) == D.  
-route_recalc(Dist) == ['Ruta recalculada, el viaje es ', D] :- distance(Dist) == D.
-
-location_lost == ['g p s señal perdido '].
+prepare_roundabout(Dist) == [ 'Prepárate para entrar en la rotonda tras ', D] :- distance(Dist) == D.
+roundabout(Dist, _Angle, Exit) == ['Tras ', D, ' entra en la rotonda y toma la ', E, ' salida' ] :- distance(Dist) == D, nth(Exit, E).
+roundabout(_Angle, Exit) == ['toma la ', E, ' salida' ] :- nth(Exit, E).
 
 
-%% 
-nth(1, 'primera salida').
-nth(2, 'segunda salida').
-nth(3, 'tercera salida').
-nth(4, 'cuarta salida').
-nth(5, 'quinta salida').
-nth(6, 'sexta salida').
-nth(7, 'séptima salida').
-nth(8, 'octava salida').
-nth(9, 'novena salida').
-nth(10, 'décima salida').
-nth(11, 'salida once').
-nth(12, 'salida doce').
-nth(13, 'salida trece').
-nth(14, 'salida catorce').
-nth(15, 'salida quince').
-nth(16, 'salida diezseis').
-nth(17, 'salida diezsiete').
+go_ahead == ['Continúa recto'].
+go_ahead(Dist) == ['Sigue la vía durante ', D]:- distance(Dist) == D.
+
+
+and_arrive_destination == ['y llegarás a tu destino'].
+
+then == ['. Luego '].
+
+reached_destination == ['has llegado a tu destino'].
+
+bear_right == ['mantente a la derecha'].
+bear_left == ['mantente a la izquierda'].
+
+route_new_calc(Dist) == ['El camino es ', D] :- distance(Dist) == D.
+route_recalc(Dist) == ['Ruta recalculada, distancia ', D] :- distance(Dist) == D.
+
+location_lost == ['señal g p s perdida '].
+
+
+%%
+
+nth(1, 'primera').
+nth(2, 'segunda').
+nth(3, 'tercera').
+nth(4, 'cuarta').
+nth(5, 'quinta').
+nth(6, 'sexta').
+nth(7, 'séptima').
+nth(8, 'octava').
+nth(9, 'novena').
+nth(10, 'décima').
+nth(11, 'undécima').
+nth(12, 'duodécima').
+nth(13, 'decimotercera').
+nth(14, 'decimocuarta').
+nth(15, 'decimoquinta').
+nth(16, 'decimosexta').
+nth(17, 'decimoséptima').
 
 
 %%% distance measure
+
 distance(Dist) == [ X, ' metros'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
 distance(Dist) == [ X, ' metros'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
 distance(Dist) == ['cerca de un kilómetro '] :- Dist < 1500.
@@ -74,10 +88,12 @@ distance(Dist) == [ X, ' kilómetros '] :- D is round(Dist/1000), num_atom(D, X)
 %% resolve command main method
 %% if you are familar with Prolog you can input specific to the whole mechanism,
 %% by adding exception cases.
+
 flatten(X, Y) :- flatten(X, [], Y), !.
 flatten([], Acc, Acc).
 flatten([X|Y], Acc, Res):- flatten(Y, Acc, R), flatten(X, R, Res).
 flatten(X, Acc, [X|Acc]).
+
 
 resolve(X, Y) :- resolve_impl(X,Z), flatten(Z, Y).
 resolve_impl([],[]).

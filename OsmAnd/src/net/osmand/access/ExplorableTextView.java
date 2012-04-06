@@ -36,17 +36,11 @@ public class ExplorableTextView extends TextView {
     }
 
 
-    // Test if accessibility extensions are requested.
-    private boolean accessibilityExtensions() {
-        return ((OsmandApplication)(getContext().getApplicationContext())).getSettings().ACCESSIBILITY_EXTENSIONS.get();
-    }
-
-
     // Overridden callback methods to provide accessible exploration means.
 
     @Override
     public boolean dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
-        if (!accessibilityExtensions())
+        if (!OsmandApplication.getSettings().ACCESSIBILITY_EXTENSIONS.get())
             return super.dispatchPopulateAccessibilityEvent(event);
         cursorTrackingEnabled = false;
         boolean result = super.dispatchPopulateAccessibilityEvent(event);
@@ -67,7 +61,7 @@ public class ExplorableTextView extends TextView {
 
     @Override
     protected MovementMethod getDefaultMovementMethod() {
-        if (accessibilityExtensions())
+        if (OsmandApplication.getSettings().ACCESSIBILITY_EXTENSIONS.get())
             return ArrowKeyMovementMethod.getInstance();
         return super.getDefaultMovementMethod();
     }
@@ -75,7 +69,7 @@ public class ExplorableTextView extends TextView {
     @Override
     protected void onTextChanged(CharSequence text, int start, int before, int after) {
         super.onTextChanged(text, start, before, after);
-        if (accessibilityExtensions() && !isFocused()) {
+        if (OsmandApplication.getSettings().ACCESSIBILITY_EXTENSIONS.get() && !isFocused()) {
             selectionLength = Math.min(text.length(), AccessibilityEvent.MAX_TEXT_LENGTH);
             sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED);
         }
@@ -84,7 +78,7 @@ public class ExplorableTextView extends TextView {
     @Override
     protected void onSelectionChanged(int start, int end) {
         super.onSelectionChanged(start, end);
-        if (accessibilityExtensions() && cursorTrackingEnabled && isFocused()) {
+        if (OsmandApplication.getSettings().ACCESSIBILITY_EXTENSIONS.get() && cursorTrackingEnabled && isFocused()) {
             if (end >= getText().length()) {
                 cursor = getText().length();
             } else if (cursor != end) {

@@ -16,6 +16,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LogUtil;
+import net.osmand.access.AccessibilityMode;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.activities.DayNightHelper;
 import net.osmand.plus.activities.SavingTrackHelper;
@@ -467,6 +468,11 @@ public class OsmandApplication extends Application {
 	}
 
 	public boolean accessibilityEnabled() {
+		final AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.get();
+		if (mode == AccessibilityMode.ON)
+			return true;
+		else if (mode == AccessibilityMode.OFF)
+			return false;
 		return ((AccessibilityManager)getSystemService(ACCESSIBILITY_SERVICE)).isEnabled();
 	}
 

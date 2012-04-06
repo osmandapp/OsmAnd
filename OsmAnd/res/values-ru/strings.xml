@@ -786,6 +786,12 @@
 	<string name="edit_filter_create_message">Фильтр {0} создан</string>
 	<string name="default_buttons_selectall">Выделить все</string>
 	
+	<string name="accessibility_mode">Режим специальных возможностей</string>
+	<string name="accessibility_mode_descr">Включает дополнительные возможности для невизуального доступа</string>
+	<string name="accessibility_on">Включен</string>
+	<string name="accessibility_off">Выключен</string>
+	<string name="accessibility_default">Согласно общей установке в системе</string>
+	
 	<string name="backToMenu">Главное меню</string>
 	<string name="zoomOut">Уменьшить масштаб</string>
 	<string name="zoomIn">Увеличить масштаб</string>

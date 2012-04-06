@@ -63,7 +63,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	
 	@Override
 	public void destroyLayer() {
-		view.setContextMenuLayer(null);
 	}
 
 	@Override
@@ -97,8 +96,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		textView.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
 		textPadding = new Rect();
 		textView.getBackground().getPadding(textPadding);
-
-		view.setContextMenuLayer(this);
 	}
 
 	@Override

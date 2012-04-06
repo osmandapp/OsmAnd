@@ -406,32 +406,41 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 			AccessibleToast.makeText(this, format + "  " + getString(R.string.opening_hours) + " : " + amenity.getOpeningHours(), Toast.LENGTH_LONG).show();
 		}
 		
+		List<String> items = new ArrayList<String>();
+		items.add(getString(R.string.show_poi_on_map));
+		items.add(getString(R.string.navigate_to));
+		if (((OsmandApplication)getApplication()).accessibilityEnabled())
+			items.add(getString(R.string.show_details));
+
 		AlertDialog.Builder builder = new AlertDialog.Builder(SearchPOIActivity.this);
 		builder.setTitle(format);
-		builder.setItems(new String[]{getString(R.string.show_poi_on_map), getString(R.string.navigate_to), getString(R.string.show_details)}, new DialogInterface.OnClickListener(){
+		builder.setItems(items.toArray(new String[items.size()]), new DialogInterface.OnClickListener(){
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if(which == 2){
 					showPOIDetails(amenity, settings.usingEnglishNames());
-				} else {
-					if(which == 0){
-						int z = settings.getLastKnownMapZoom();
-						String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.usingEnglishNames());
-						String name = getString(R.string.poi)+" : " + poiSimpleFormat;
-						settings.setMapLocationToShow( 
-								amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 
-								Math.max(16, z), name, name, amenity);
-					} else if(which == 1){
-						LatLon l = amenity.getLocation();
-						String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.usingEnglishNames());
-						settings.setPointToNavigate(l.getLatitude(), l.getLongitude(), getString(R.string.poi)+" : " + poiSimpleFormat);
-					}
-					if(filter != null){
-						settings.setPoiFilterForMap(filter.getFilterId());
-						settings.SHOW_POI_OVER_MAP.set(true);
-					}
+					return;
 				}
+				if(which == 0){
+					int z = settings.getLastKnownMapZoom();
+					String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.usingEnglishNames());
+					String name = getString(R.string.poi)+" : " + poiSimpleFormat;
+					settings.setMapLocationToShow( 
+							amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 
+							Math.max(16, z), name, name, amenity);
+				} else if(which == 1){
+					LatLon l = amenity.getLocation();
+					String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.usingEnglishNames());
+					settings.setPointToNavigate(l.getLatitude(), l.getLongitude(), getString(R.string.poi)+" : " + poiSimpleFormat);
+				}
+				if(filter != null){
+					settings.setPoiFilterForMap(filter.getFilterId());
+					settings.SHOW_POI_OVER_MAP.set(true);
+				}
+				
+				MapActivity.launchMapActivityMoveToTop(SearchPOIActivity.this);
+				
 			}
 			
 		});

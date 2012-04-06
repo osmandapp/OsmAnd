@@ -141,7 +141,7 @@ public class NavigationInfo {
 
     public NavigationInfo(final Context context) {
         this.context = context;
-        settings = ((OsmandApplication)(context.getApplicationContext())).getSettings();
+        settings = OsmandApplication.getSettings();
         currentLocation = null;
         lastDirection = new RelativeDirection();
         lastNotificationTime = SystemClock.uptimeMillis();
@@ -236,7 +236,7 @@ public class NavigationInfo {
 
     public synchronized void setLocation(Location location) {
         currentLocation = location;
-        if (autoAnnounce) {
+        if (autoAnnounce && ((OsmandApplication)(context.getApplicationContext())).accessibilityEnabled()) {
             final LatLon point = settings.getPointToNavigate();
             if (point != null) {
                 if ((currentLocation != null) && currentLocation.hasBearing()) {

@@ -414,7 +414,8 @@ public class MapActivity extends AccessibleTrackedActivity implements IMapLocati
 	public void changeZoom(int newZoom){
 		boolean changeLocation = settings.AUTO_ZOOM_MAP.get();
 		mapView.getAnimatedDraggingThread().startZooming(newZoom, changeLocation);
-		AccessibleToast.makeText(this, getString(R.string.zoomIs) + " " + String.valueOf(newZoom), Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
+		if (getMyApplication().accessibilityEnabled())
+			AccessibleToast.makeText(this, getString(R.string.zoomIs) + " " + String.valueOf(newZoom), Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 		showAndHideMapPosition();
 	}
 
@@ -520,7 +521,7 @@ public class MapActivity extends AccessibleTrackedActivity implements IMapLocati
 			//that they could do some key combinations with it...
 			// Victor : doing in that way doesn't close dialog properly!
 			//return true;
-		} else if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
+		} else if (getMyApplication().accessibilityEnabled() && (keyCode == KeyEvent.KEYCODE_DPAD_CENTER)) {
 			if (!uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
 				Message msg = Message.obtain(uiHandler, new Runnable() {
 						@Override
@@ -1014,7 +1015,9 @@ public class MapActivity extends AccessibleTrackedActivity implements IMapLocati
    			//onBackPressed();
 			//return true;
 		} else if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
-			if (uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
+			if (!getMyApplication().accessibilityEnabled()) {
+				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
+			} else if (uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
 				uiHandler.removeMessages(LONG_KEYPRESS_MSG_ID);
 				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 			}
@@ -1163,7 +1166,11 @@ public class MapActivity extends AccessibleTrackedActivity implements IMapLocati
 			startActivity(intentSettings);
 			return true;
 		} else if (itemId == R.id.map_where_am_i) {
-			whereAmIDialog();
+			if (getMyApplication().accessibilityEnabled()) {
+				whereAmIDialog();
+			} else {
+				backToLocationImpl();
+			}
 			return true;
 		} else if (itemId == R.id.map_show_gps_status) {
 			startGpsStatusIntent();
