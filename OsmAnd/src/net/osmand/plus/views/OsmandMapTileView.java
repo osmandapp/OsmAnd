@@ -220,7 +220,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	@SuppressWarnings("unchecked")
 	public <T extends OsmandMapLayer> T getLayerByClass(Class<T> cl) {
 		for(OsmandMapLayer lr : layers) {
-			if(cl.isInstance(cl)){
+			if(cl.isInstance(lr)){
 				return (T) lr;
 			}
 		}
