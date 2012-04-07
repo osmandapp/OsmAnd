@@ -144,6 +144,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		paintTextIcon = new Paint();
 		paintTextIcon.setTextSize(12 * dm.density);
 		paintTextIcon.setTextAlign(Align.CENTER);
+		paintTextIcon.setAntiAlias(true);
 		
 		point = new Paint();
 		point.setColor(Color.GRAY);
