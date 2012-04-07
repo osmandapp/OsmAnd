@@ -338,7 +338,93 @@ public class IndexCreator {
 			indexTransportCreator.createDatabaseStructure(mapConnection, mapDBDialect, getRTreeTransportStopsFileName());
 		}
 	}
+	
+	public void generateBasemapIndex(File readFile, IProgress progress, IOsmStorageFilter addFilter, MapZooms mapZooms,
+			MapRenderingTypes renderingTypes, Log logMapDataWarn) throws IOException, SAXException, SQLException, InterruptedException {
+		if (logMapDataWarn == null) {
+			logMapDataWarn = log;
+		}
+		if (logMapDataWarn == null) {
+			logMapDataWarn = log;
+		}
 
+		if (renderingTypes == null) {
+			renderingTypes = MapRenderingTypes.getDefault();
+		}
+		if (mapZooms == null) {
+			mapZooms = MapZooms.getDefault();
+		}
+
+		// clear previous results and setting variables
+		if (readFile != null && regionName == null) {
+			int i = readFile.getName().indexOf('.');
+			if (i > -1) {
+				regionName = Algoritms.capitalizeFirstLetterAndLowercase(readFile.getName().substring(0, i));
+			}
+		}
+		try {
+			this.accessor = new OsmDbAccessor();
+			createPlainOsmDb(progress, readFile, addFilter);
+			// 2. Create index connections and index structure
+
+			final BasemapProcessor processor = new BasemapProcessor(logMapDataWarn, mapZooms, renderingTypes, zoomWaySmothness);
+
+			progress.setGeneralProgress("[50 / 100]");
+			progress.startTask(Messages.getString("IndexCreator.PROCESS_OSM_NODES"), accessor.getAllNodes());
+			accessor.iterateOverEntities(progress, EntityType.NODE, new OsmDbVisitor() {
+				@Override
+				public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
+					ctx.loadEntityData(e);
+					processor.processEntity(e);
+				}
+			});
+			progress.setGeneralProgress("[70 / 100]");
+			progress.startTask(Messages.getString("IndexCreator.PROCESS_OSM_WAYS"), accessor.getAllWays());
+			accessor.iterateOverEntities(progress, EntityType.WAY, new OsmDbVisitor() {
+				@Override
+				public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
+					ctx.loadEntityData(e);
+					processor.processEntity(e);
+				}
+			});
+			mapFile = new File(workingDir, getMapFileName());
+			// to save space
+			mapFile.getParentFile().mkdirs();
+			if (mapFile.exists()) {
+				mapFile.delete();
+			}
+			mapRAFile = new RandomAccessFile(mapFile, "rw");
+			BinaryMapIndexWriter writer = new BinaryMapIndexWriter(mapRAFile);
+
+			progress.setGeneralProgress("[95 of 100]");
+			progress.startTask("Writing map index to binary file...", -1);
+			processor.writeCoastlinesFile(writer, regionName);
+			progress.finishTask();
+			writer.close();
+			mapRAFile.close();
+			log.info("Finish writing binary file"); //$NON-NLS-1$
+		} catch (RuntimeException e) {
+			log.error("Log exception", e); //$NON-NLS-1$
+			throw e;
+		} catch (SQLException e) {
+			log.error("Log exception", e); //$NON-NLS-1$
+			throw e;
+		} catch (IOException e) {
+			log.error("Log exception", e); //$NON-NLS-1$
+			throw e;
+		} catch (SAXException e) {
+			log.error("Log exception", e); //$NON-NLS-1$
+			throw e;
+		} finally {
+			try {
+				accessor.closeReadingConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (RuntimeException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	public void generateIndexes(File readFile, IProgress progress, IOsmStorageFilter addFilter, MapZooms mapZooms,
 			MapRenderingTypes renderingTypes, Log logMapDataWarn) throws IOException, SAXException, SQLException, InterruptedException {
@@ -366,7 +452,7 @@ public class IndexCreator {
 		this.indexTransportCreator = new IndexTransportCreator();
 		this.indexPoiCreator = new IndexPoiCreator(renderingTypes);
 		this.indexAddressCreator = new IndexAddressCreator(logMapDataWarn);
-		this.indexMapCreator = new IndexVectorMapCreator(logMapDataWarn,mapZooms, renderingTypes, zoomWaySmothness);
+		this.indexMapCreator = new IndexVectorMapCreator(logMapDataWarn, mapZooms, renderingTypes, zoomWaySmothness);
 		this.accessor = new OsmDbAccessor();
 
 		// init address
@@ -642,10 +728,10 @@ public class IndexCreator {
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/cuba2.osm.bz2"),
 //				new ConsoleProgressImplementation(1), null, zooms, rt, log);
 		// ;6-8;9-14
-		zooms = MapZooms.parseZooms("1-3;4-6;7-9;10-14");
+		zooms = MapZooms.parseZooms("1-3;4-6;7-9;10-");
 		creator.setRegionName("basemap");
 		creator.setMapFileName("basemap_coastlines.obf");
-		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/basemap/10m_coastline_out.osm"),
+		creator.generateBasemapIndex(new File("/home/victor/projects/OsmAnd/data/basemap/10m_coastline_out.osm"),
 				new ConsoleProgressImplementation(1), null, zooms, rt, log);
 		
 		

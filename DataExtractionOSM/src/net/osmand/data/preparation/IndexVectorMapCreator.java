@@ -60,8 +60,6 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	private static final int MAP_LEVELS_MAX = 1 << MAP_LEVELS_POWER;
 	private MapRenderingTypes renderingTypes;
 	private MapZooms mapZooms;
-	
-	private boolean COASTLINE_PROCESS = true;
 
 	Map<Long, TIntArrayList> multiPolygonsWays = new LinkedHashMap<Long, TIntArrayList>();
 	
@@ -76,7 +74,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	TIntArrayList addtypeUse = new TIntArrayList(8);
 	List<Long> restrictionsUse = new ArrayList<Long>(8);
 
-	private CoastlineProcessor coastlineProcessor;
+	private BasemapProcessor basemapProcessor;
 	private PreparedStatement mapBinaryStat;
 	private PreparedStatement mapLowLevelBinaryStat;
 	private int lowLevelWays = -1;
@@ -93,7 +91,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		this.mapZooms = mapZooms;
 		this.zoomWaySmothness = zoomWaySmothness;
 		this.renderingTypes = renderingTypes;
-		this.coastlineProcessor = new CoastlineProcessor(logMapDataWarn, mapZooms, renderingTypes, zoomWaySmothness);
+		this.basemapProcessor = new BasemapProcessor(logMapDataWarn, mapZooms, renderingTypes, zoomWaySmothness);
 		lowLevelWays = -1;
 	}
 
@@ -504,10 +502,6 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		if (e instanceof Way || e instanceof Node) {
 			// manipulate what kind of way to load
 			ctx.loadEntityData(e);
-			if (e instanceof Way && "coastline".equals(e.getTag(OSMTagKey.NATURAL)) && COASTLINE_PROCESS) {
-				coastlineProcessor.processCoastline((Way) e);
-				return;
-			}
 			for (int level = 0; level < mapZooms.size(); level++) {
 				boolean area = renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), typeUse, addtypeUse, namesUse,
 						tempNameUse);
@@ -556,10 +550,6 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	public void writeBinaryMapIndex(BinaryMapIndexWriter writer, String regionName) throws IOException, SQLException {
 		closePreparedStatements(mapBinaryStat, mapLowLevelBinaryStat);
 		mapConnection.commit();
-		if(COASTLINE_PROCESS) {
-			coastlineProcessor.writeCoastlinesFile(writer, regionName);
-			return;
-		}
 		try {
 			writer.startWriteMapIndex(regionName);
 			// write map encoding rules

@@ -2,11 +2,8 @@ package net.osmand.data.preparation;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.procedure.TObjectProcedure;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -17,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.xml.stream.XMLStreamException;
 
 import net.osmand.Algoritms;
 import net.osmand.binary.OsmandOdb.MapData;
@@ -25,20 +21,17 @@ import net.osmand.binary.OsmandOdb.MapDataBlock;
 import net.osmand.data.MapAlgorithms;
 import net.osmand.data.preparation.MapZooms.MapZoomPair;
 import net.osmand.osm.Entity;
-import net.osmand.osm.Entity.EntityId;
-import net.osmand.osm.EntityInfo;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.Way;
 import net.osmand.osm.WayChain;
-import net.osmand.osm.io.OsmBaseStorage;
-import net.osmand.osm.io.OsmStorageWriter;
+import net.osmand.osm.OSMSettings.OSMTagKey;
 
 import org.apache.commons.logging.Log;
 import org.apache.tools.bzip2.CBZip2InputStream;
 
-public class CoastlineProcessor {
+public class BasemapProcessor {
 	TLongObjectHashMap<WayChain> coastlinesEndPoint = new TLongObjectHashMap<WayChain>();
 	TLongObjectHashMap<WayChain> coastlinesStartPoint = new TLongObjectHashMap<WayChain>();
 	
@@ -133,7 +126,7 @@ public class CoastlineProcessor {
 	}
 	
 	
-	public CoastlineProcessor(Log logMapDataWarn, MapZooms mapZooms, MapRenderingTypes renderingTypes, int zoomWaySmothness) {
+	public BasemapProcessor(Log logMapDataWarn, MapZooms mapZooms, MapRenderingTypes renderingTypes, int zoomWaySmothness) {
 		this.logMapDataWarn = logMapDataWarn;
 		this.mapZooms = mapZooms;
 		this.renderingTypes = renderingTypes;
@@ -142,14 +135,14 @@ public class CoastlineProcessor {
 		quadTrees = new SimplisticQuadTree[mapZooms.getLevels().size()];
 		for (int i=0;i< mapZooms.getLevels().size(); i++) {
 			MapZoomPair p = mapZooms.getLevels().get(i);
-			quadTrees[i] = constructTilesQuadTree(Math.min(p.getMaxZoom() - 1, 1));
+			quadTrees[i] = constructTilesQuadTree(Math.min(p.getMaxZoom() - 1, 12));
 		}
 	}
 
 	private void constructBitSetInfo() {
 		try {
 			
-			InputStream stream = CoastlineProcessor.class.getResourceAsStream("oceantiles_12.dat.bz2");
+			InputStream stream = BasemapProcessor.class.getResourceAsStream("oceantiles_12.dat.bz2");
 			if (stream.read() != 'B' || stream.read() != 'Z') {
 				throw new RuntimeException("The source stream must start with the characters BZ if it is to be read as a BZip2 stream."); //$NON-NLS-1$
 			}
@@ -282,7 +275,7 @@ public class CoastlineProcessor {
 			// write map levels and map index
 			writer.startWriteMapLevelIndex(p.getMinZoom(), p.getMaxZoom(), 0, (1 << 31) - 1, 0, (1 << 31) - 1);
 
-			Map<SimplisticQuadTree, BinaryFileReference> refs = new LinkedHashMap<CoastlineProcessor.SimplisticQuadTree, BinaryFileReference>();
+			Map<SimplisticQuadTree, BinaryFileReference> refs = new LinkedHashMap<BasemapProcessor.SimplisticQuadTree, BinaryFileReference>();
 			writeBinaryMapTree(quadTrees[i], writer, refs, p);
 
 			// without data blocks
@@ -310,7 +303,7 @@ public class CoastlineProcessor {
 			for (Way w : quad.getCoastlines(p)) {
 				dataBlock.setBaseId(w.getId());
 				List<Node> res = new ArrayList<Node>();
-				MapAlgorithms.simplifyDouglasPeucker(w.getNodes(), p.getMaxZoom() - 2 + 8 + zoomWaySmothness, 3, res);
+				MapAlgorithms.simplifyDouglasPeucker(w.getNodes(), p.getMaxZoom() - 1 + 8 + zoomWaySmothness, 3, res);
 				ByteArrayOutputStream bcoordinates = new ByteArrayOutputStream();
 				for (Node n : res) {
 					if (n != null) {
@@ -361,12 +354,18 @@ public class CoastlineProcessor {
 
 	}
 	
+	public void processEntity(Entity e) {
+		if(e instanceof Way && "coastline".equals(e.getTag(OSMTagKey.NATURAL))) {
+			processCoastline((Way) e);
+		}
+	}
+	
 	public void processCoastline(Way e) {
 		renderingTypes.getCoastlineRuleType().updateFreq();
 		int ij = 0;
-		for(MapZoomPair p : mapZooms.getLevels()) {
+		for(MapZoomPair zoomPair : mapZooms.getLevels()) {
 			SimplisticQuadTree quadTree = quadTrees[ij++];
-			int z = Math.min((p.getMinZoom() + p.getMaxZoom()) / 2, p.getMinZoom() + 3);
+			int z = Math.min((zoomPair.getMinZoom() + zoomPair.getMaxZoom()) / 2 - 1, zoomPair.getMinZoom() + 1);
 			List<Node> ns = e.getNodes();
 			if(ns.size() < 2) {
 				return;
@@ -434,272 +433,11 @@ public class CoastlineProcessor {
 						System.err.println("Tile " + tilex + " / " + tiley + " at " + z + " can not be found");
 					}
 				}
-				quad.addCoastline(p, w);
+				quad.addCoastline(zoomPair, w);
 			
 			}
 		}
 	}
 
-		
-	
-	
-	///////////////////////////// NOT USED CODE  TO DELETE ///////////////////////////////
-	
-	public void processCoastlineOld(Way e) {
-		WayChain chain = null;
-		if(coastlinesEndPoint.contains(e.getFirstNodeId())){
-			chain = coastlinesEndPoint.remove(e.getFirstNodeId());
-			chain.append(e);
-			coastlinesEndPoint.put(chain.getLastNode(), chain);
-		}
-		if(coastlinesStartPoint.contains(e.getLastNodeId())) {
-			WayChain chain2 = coastlinesStartPoint.remove(e.getLastNodeId());
-			if(chain == null) {
-				chain = chain2;
-				chain.prepend(e);
-				coastlinesStartPoint.put(chain.getFistNode(), chain);
-			} else if(chain2 != chain) {
-				// remove chain 2
-				coastlinesEndPoint.remove(chain2.getLastNode());
-				chain.append(chain2);
-				coastlinesEndPoint.put(chain.getLastNode(), chain);
-			} else {
-				// cycle detected : skip it
-			}
-		}
-		if(chain == null) {
-			chain = new WayChain(e);
-			coastlinesEndPoint.put(chain.getLastNode(), chain);
-			coastlinesStartPoint.put(chain.getFistNode(), chain);
-		}
-	}
-	
-	private long nodeId = 1 << 100;
-	
-	private class CoastlineTile {
-		List<List<Node>> chains = new ArrayList<List<Node>>();
-		List<List<Node>> islands = new ArrayList<List<Node>>();
-		
-		double lleft = 0;
-		double lright = 0;
-		double ltop = 0;
-		double lbottom = 0;
-
-		private CoastlineTile(List<Node> chain) {
-			ltop = lbottom = chain.get(0).getLatitude();
-			lleft = lright = chain.get(0).getLongitude();
-			addChain(chain);
-		}
-		
-		public boolean intersect(CoastlineTile t) {
-			if (lleft > t.lright || lright < t.lleft || ltop < t.lbottom || lbottom > t.ltop) {
-				return false;
-			}
-			return true;
-		}
-		
-		public void combineTiles(CoastlineTile t) {
-			for(List<Node> chain : t.chains) {
-				addSimpleChain(chain);
-			}
-			for(List<Node> island : t.islands) {
-				addIsland(island);
-			}
-		}
-
-		public boolean contains(List<Node> chain) {
-			for (int i = 0; i < chain.size(); i++) {
-				if (lleft <= chain.get(i).getLongitude() && lright >= chain.get(i).getLongitude()) {
-					if (lbottom <= chain.get(i).getLatitude() && ltop >= chain.get(i).getLatitude()) {
-						return true;
-					}
-				}
-			}
-			return false;
-		}
-		
-		private void addSimpleChain(List<Node> chain) {
-			updateBoundaries(chain);
-			chains.add(chain);
-		}
-		
-		public void addChain(List<Node> chain) {
-			updateBoundaries(chain);
-			int ind = 0;
-			while (ind < chain.size() - 1) {
-				List<Node> subChain = new ArrayList<Node>();
-				Node first = chain.get(ind);
-				boolean directionToRight = chain.get(ind + 1).getLongitude() > first.getLongitude();
-				int nextLonMaximum = ind + 1;
-				double lonEnd = first.getLongitude();
-				double latPeek = first.getLatitude();
-				int latPeekInd = ind;
-				int latLocPeekInd = ind;
-				for (int j = ind + 1; j < chain.size(); j++) {
-					if (directionToRight) {
-						if (chain.get(j).getLatitude() <= latPeek) {
-							latPeek = chain.get(j).getLatitude();
-							latPeekInd = j;
-						}
-						if (chain.get(j).getLongitude() >= lonEnd) {
-							nextLonMaximum = j;
-							lonEnd = chain.get(j).getLongitude();
-							latLocPeekInd = latPeekInd;
-						} else if (chain.get(j).getLongitude() < first.getLongitude()) {
-							break;
-						}
-					} else {
-						if (chain.get(j).getLatitude() >= latPeek) {
-							latPeek = chain.get(j).getLatitude();
-							latPeekInd = j;
-						}
-						if (chain.get(j).getLongitude() <= lonEnd) {
-							nextLonMaximum = j;
-							lonEnd = chain.get(j).getLongitude();
-							latLocPeekInd = latPeekInd;
-						} else if (chain.get(j).getLongitude() > first.getLongitude()) {
-							break;
-						}
-					}
-				}
-				if(latLocPeekInd > ind) {
-					for (int i = ind; i <= latLocPeekInd; i++) {
-						subChain.add(chain.get(i));
-					}
-					Node ned = new Node(chain.get(latLocPeekInd).getLatitude(), first.getLongitude(), nodeId++);
-					subChain.add(ned);
-					subChain.add(first);
-					chains.add(subChain);
-					subChain= new ArrayList<Node>();
-				}
-				
-				for (int i = latLocPeekInd; i <= nextLonMaximum; i++) {
-					subChain.add(chain.get(i));
-				}
-				Node ned = new Node(chain.get(latLocPeekInd).getLatitude(), lonEnd, nodeId++);
-				subChain.add(ned);
-				ind = nextLonMaximum;
-				subChain.add(chain.get(latLocPeekInd));
-				chains.add(subChain);
-
-			}
-		}
-		
-		public void addIsland(List<Node> chain){
-			updateBoundaries(chain);
-			islands.add(chain);
-		}
-		
-		public void updateBoundaries(List<Node> chain) {
-			for (int i = 0; i < chain.size(); i++) {
-				lleft = Math.min(lleft, chain.get(i).getLongitude());
-				lright = Math.max(lright, chain.get(i).getLongitude());
-				ltop = Math.max(ltop, chain.get(i).getLatitude());
-				lbottom = Math.min(lbottom, chain.get(i).getLatitude());
-			}
-		}
-	
-	}
-	
-	public void processCoastlines() {
-		System.out.println("Way chains " + coastlinesStartPoint.size());
-		final List<CoastlineTile> processed = new ArrayList<CoastlineTile>();
-		final List<List<Node>> islands = new ArrayList<List<Node>>();
-		coastlinesStartPoint.forEachValue(new TObjectProcedure<WayChain>() {
-			@Override
-			public boolean execute(WayChain object) {
-				boolean closed = object.getFistNode() == object.getLastNode();
-				if (!closed) {
-					List<Node> ns = object.getChainNodes();
-					boolean update = true;
-					CoastlineTile tile = new CoastlineTile(ns);
-					while (update) {
-						Iterator<CoastlineTile> it = processed.iterator();
-						update = false;
-						while (it.hasNext()) {
-							CoastlineTile newTile = it.next();
-							if (newTile.intersect(tile)) {
-								it.remove();
-								newTile.combineTiles(tile);
-								tile = newTile;
-								update = true;
-								break;
-							}
-						}
-					}
-					processed.add(0, tile);
-					
-					System.out.println((closed ? "Closed " : "Not closed ") + "way sizes " + object.getWays().size() + " ids "
-							+ object.getWays());
-				} else {
-					List<Node> nodes = object.getChainNodes();
-					Way w = new Way(-1, nodes);
-					if(w.getFirstNodeId() != w.getLastNodeId()) {
-						w.addNode(w.getNodes().get(0));
-					}
-					if(MapAlgorithms.isClockwiseWay(w)) {
-						if(!object.isIncomplete()) {
-							System.out.println("??? Lake " + object.getWays());
-						}
-					} else {
-						islands.add(w.getNodes());
-					}
-				}
-				return true;
-			}
-		});
-		for(List<Node> island : islands) {
-			boolean log = true;
-			for(CoastlineTile ts : processed) {
-				if(ts.contains(island)){
-					ts.addIsland(island);
-					log = false;
-					break;
-				}
-			}
-			if(log) {
-				System.out.println("Island missed");
-			}
-		}
-		OsmBaseStorage st = new OsmBaseStorage();
-		OsmStorageWriter writer = new OsmStorageWriter();
-		Map<EntityId, Entity> entities = st.getRegisteredEntities();
-		for(CoastlineTile ts : processed) {
-			System.out.println("Coastline Tile  left,top,right,bottom : " +((float)ts.lleft)+","
-					+((float)ts.ltop)+","+((float)ts.lright)+","+((float)ts.lbottom));
-			System.out.println(" Chains " + ts.chains.size() + " islands " + ts.islands.size());
-			for(List<Node> ns : ts.chains) {
-				registerWay(entities, st.getRegisteredEntityInfo(),  ns);
-			}
-			for(List<Node> ns : ts.islands) {
-				registerWay(entities, st.getRegisteredEntityInfo(), ns);
-			}
-		}
-		try {
-			writer.saveStorage(new FileOutputStream("/home/victor/projects/OsmAnd/data/osm-maps/check_coastline.osm"), st, null, true);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (XMLStreamException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-	}
-
-
-
-	long id = 10000;
-	private void registerWay(Map<EntityId, Entity> entities, Map<EntityId, EntityInfo> map, List<Node> ns) {
-		Way w = new Way(id++, ns);
-		for(Node n : ns) {
-			entities.put(EntityId.valueOf(n), n);
-			map.put(EntityId.valueOf(n), new EntityInfo("1"));
-		}
-		entities.put(EntityId.valueOf(w), w);
-		map.put(EntityId.valueOf(w), new EntityInfo("1"));
-	}
-	
-		
 	
 }
