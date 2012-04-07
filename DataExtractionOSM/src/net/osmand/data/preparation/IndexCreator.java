@@ -339,8 +339,8 @@ public class IndexCreator {
 		}
 	}
 	
-	public void generateBasemapIndex(File readFile, IProgress progress, IOsmStorageFilter addFilter, MapZooms mapZooms,
-			MapRenderingTypes renderingTypes, Log logMapDataWarn) throws IOException, SAXException, SQLException, InterruptedException {
+	public void generateBasemapIndex(IProgress progress, IOsmStorageFilter addFilter, MapZooms mapZooms,
+			MapRenderingTypes renderingTypes, Log logMapDataWarn, String regionName, File... readFiles) throws IOException, SAXException, SQLException, InterruptedException {
 		if (logMapDataWarn == null) {
 			logMapDataWarn = log;
 		}
@@ -356,37 +356,37 @@ public class IndexCreator {
 		}
 
 		// clear previous results and setting variables
-		if (readFile != null && regionName == null) {
-			int i = readFile.getName().indexOf('.');
-			if (i > -1) {
-				regionName = Algoritms.capitalizeFirstLetterAndLowercase(readFile.getName().substring(0, i));
-			}
-		}
 		try {
-			this.accessor = new OsmDbAccessor();
-			createPlainOsmDb(progress, readFile, addFilter);
-			// 2. Create index connections and index structure
-
+			
 			final BasemapProcessor processor = new BasemapProcessor(logMapDataWarn, mapZooms, renderingTypes, zoomWaySmothness);
+			
+			for (File readFile : readFiles) {
+				this.accessor = new OsmDbAccessor();
+				createPlainOsmDb(progress, readFile, addFilter);
+				// 2. Create index connections and index structure
 
-			progress.setGeneralProgress("[50 / 100]");
-			progress.startTask(Messages.getString("IndexCreator.PROCESS_OSM_NODES"), accessor.getAllNodes());
-			accessor.iterateOverEntities(progress, EntityType.NODE, new OsmDbVisitor() {
-				@Override
-				public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
-					ctx.loadEntityData(e);
-					processor.processEntity(e);
-				}
-			});
-			progress.setGeneralProgress("[70 / 100]");
-			progress.startTask(Messages.getString("IndexCreator.PROCESS_OSM_WAYS"), accessor.getAllWays());
-			accessor.iterateOverEntities(progress, EntityType.WAY, new OsmDbVisitor() {
-				@Override
-				public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
-					ctx.loadEntityData(e);
-					processor.processEntity(e);
-				}
-			});
+				progress.setGeneralProgress("[50 / 100]");
+				progress.startTask(Messages.getString("IndexCreator.PROCESS_OSM_NODES"), accessor.getAllNodes());
+				accessor.iterateOverEntities(progress, EntityType.NODE, new OsmDbVisitor() {
+					@Override
+					public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
+						ctx.loadEntityData(e);
+						processor.processEntity(e);
+					}
+				});
+				progress.setGeneralProgress("[70 / 100]");
+				progress.startTask(Messages.getString("IndexCreator.PROCESS_OSM_WAYS"), accessor.getAllWays());
+				accessor.iterateOverEntities(progress, EntityType.WAY, new OsmDbVisitor() {
+					@Override
+					public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
+						ctx.loadEntityData(e);
+						processor.processEntity(e);
+					}
+				});
+				accessor.closeReadingConnection();
+			}
+			
+			
 			mapFile = new File(workingDir, getMapFileName());
 			// to save space
 			mapFile.getParentFile().mkdirs();
@@ -415,14 +415,6 @@ public class IndexCreator {
 		} catch (SAXException e) {
 			log.error("Log exception", e); //$NON-NLS-1$
 			throw e;
-		} finally {
-			try {
-				accessor.closeReadingConnection();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (RuntimeException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 	
@@ -729,10 +721,9 @@ public class IndexCreator {
 //				new ConsoleProgressImplementation(1), null, zooms, rt, log);
 		// ;6-8;9-14
 		zooms = MapZooms.parseZooms("1-3;4-6;7-9;10-");
-		creator.setRegionName("basemap");
 		creator.setMapFileName("basemap_coastlines.obf");
-		creator.generateBasemapIndex(new File("/home/victor/projects/OsmAnd/data/basemap/10m_coastline_out.osm"),
-				new ConsoleProgressImplementation(1), null, zooms, rt, log);
+		creator.generateBasemapIndex(new ConsoleProgressImplementation(1), null, zooms, rt, log, "basemap", 
+				new File("/home/victor/projects/OsmAnd/data/basemap/10m_coastline_out.osm"));
 		
 		
 		
