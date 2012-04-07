@@ -214,7 +214,7 @@
 \n\t- Yandex трафик слой теперь можно использовать как обычный слой покрытия (необходимо установить - Больше…) 
 	</string>
 	<string name="voice_not_use">Не использовать</string>
-	<string name="voice_not_specified">Нету</string>
+	<string name="voice_not_specified">Нет</string>
 	<string name="installing_new_resources">Распаковываются новые данные…</string>
 		<string name="internet_connection_required_for_online_route">Вы собираетесь использовать интернет маршрутизацию, но у вас нет активного интернет соединения.</string>
 	<string name="tts_language_not_supported_title">Язык не поддерживается</string>
@@ -244,7 +244,7 @@
 	<string name="map_underlay">Карта подложки</string>
 	<string name="map_underlay_descr">Выберите слой подложки для основной карты </string>
 	<string name="layer_overlay">Карта покрытия…</string>
-	<string name="default_none">Нету</string>
+	<string name="default_none">Нет</string>
 	<string name="map_overlay">Карта покрытия</string>
 	<string name="map_overlay_descr">Выберите слой для покрытия основной карты</string>
 	<string name="map_vector_data">Векторные карты</string>
@@ -522,7 +522,7 @@
 	<string name="transport_Stop">Остановка</string>
 	<string name="transport_stops">остановок</string>
 	
-	<string name="transport_search_none">нету</string>
+	<string name="transport_search_none">нет</string>
 	<string name="transport_search_after">Маршрут после</string>	
 	<string name="transport_search_before">Маршрут до</string>
 	<string name="transport_finish_search">Закончить поиск</string>
