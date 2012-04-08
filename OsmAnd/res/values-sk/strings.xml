@@ -1,5 +1,59 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+<string name="show_ruler_level_descr">Zobrazí pravítko na mape</string>
+	<string name="show_ruler_level">Zobraziť pravítko</string>
+
+	<string name="backToMenu">Späť na ponuku</string>
+	<string name="zoomOut">Oddialiť</string>
+	<string name="zoomIn">Priblížiť</string>
+	<string name="zoomIs">Priblíženie je</string>
+
+	<string name="north">severne</string>
+	<string name="north_north_east">severo-severo-východne</string>
+	<string name="north_east">severo-východne</string>
+	<string name="east_north_east">východo-severo-východne</string>
+	<string name="east">východne</string>
+	<string name="east_south_east">východo-juho-východne</string>
+	<string name="south_east">juho-východne</string>
+	<string name="south_south_east">juho-juho-východne</string>
+	<string name="south">južne</string>
+	<string name="south_south_west">juho-juho-západne</string>
+	<string name="south_west">juho-západne</string>
+	<string name="west_south_west">západo-juho-západne</string>
+	<string name="west">západne</string>
+	<string name="west_north_west">západo-severo-západne</string>
+	<string name="north_west">severo-západne</string>
+	<string name="north_north_west">severo-severo-západne</string>
+	<string name="front">Vpredu</string>
+	<string name="front_right">Vpredu vpravo</string>
+	<string name="right">Vpravo</string>
+	<string name="back_right">Vzadu vpravo</string>
+	<string name="back">Vzadu</string>
+	<string name="back_left">Vzadu vľavo</string>
+	<string name="left">Vľavo</string>
+	<string name="front_left">Vpredu vľavo</string>
+	<string name="oclock">hodín</string>
+	<string name="towards">k</string>
+	<string name="accuracy">Presnosť</string>
+	<string name="altitude">Nadm. výška</string>
+	<string name="no_info">Žiadne info</string>
+	<string name="direction_style_sidewise">Bokom (8 sektorov)</string>
+	<string name="direction_style_clockwise">V smere hod. ručičiek (12 sektorov)</string>
+	<string name="settings_direction_style">Štýl smerovania</string>
+	<string name="settings_direction_style_descr">Výber štýlu na vyjadrenie relatívneho smerovania počas pohybu</string>
+	<string name="auto_announce_on">Spustiť autom. oznamovanie</string>
+	<string name="auto_announce_off">Zastaviť autom. oznamovanie</string>
+	<string name="scroll_map_by_gestures_descr">Posúvať mapu pohybmi po obrazovke</string>
+	<string name="scroll_map_by_gestures">Prirodzené posúvanie mapy</string>
+	<string name="i_am_here">Tu som</string>
+	<string name="zoom_by_trackball_descr">Zmeniť priblíženie mapy horizontálnymi pohybmi trackballu</string>
+	<string name="zoom_by_trackball">Použiť trackball na približovanie</string>
+	<string name="use_short_object_names_descr">Použiť skrátené názvy objektov v režime prezerania dotykom</string>
+	<string name="use_short_object_names">Použiť názvy objektov</string>
+	<string name="accessibility_preferences_descr">Predvoľby týkajúce sa prístupnosti</string>
+	<string name="accessibility_preferences">Prístupnosť</string>
+
+	<string name="rendering_out_of_memory">Nedostatok procesnej pamäte na zobrazenie zvolenej oblasti</string>
 <string name="use_fluorescent_overlays">Žiarivejšie prekrytia</string>
 <string name="use_fluorescent_overlays_descr">Použije žiarivejšie farby pre zobrazenie stôp a ciest</string>
 	<string name="offline_poi_edition">Offline úprava POI bodov</string>
@@ -453,7 +507,6 @@
 <string name="continuous_rendering">Postupné vykresľovanie</string>
 <string name="continuous_rendering_descr">Výber medzi postupným alebo celoobrazovým vykresľovaním</string>
 <string name="rendering_exception">Nastala chyba pri vykresľovaní vybranej oblasti</string>
-<string name="rendering_out_of_memory">Nedostatok pamäte na zobrazenie vybranej oblasti</string>
 <string name="show_point_options">Možnosti bodu</string>
 <string name="renderer_load_sucess">Vykresľovač bol úspešne načítaný</string>
 <string name="renderer_load_exception">Nastala výnimka: vykresľovač nebol načítaný</string>

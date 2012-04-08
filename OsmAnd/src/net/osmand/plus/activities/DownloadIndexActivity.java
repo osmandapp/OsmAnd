@@ -10,6 +10,7 @@ import static net.osmand.data.IndexConstants.VOICE_VERSION;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -496,6 +497,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		String toSavePostfix = null;
 		String toCheckPostfix = null;
 		boolean unzipDir = false;
+		boolean preventMediaIndexing = false;
 		
 		File externalStorageDirectory = OsmandApplication.getSettings().getExternalStorageDirectory();
 		if(fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)){
@@ -511,14 +513,23 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			toSavePostfix = VOICE_INDEX_EXT_ZIP;
 			toCheckPostfix = ""; //$NON-NLS-1$
 			unzipDir = true;
+			preventMediaIndexing = true;
 		} else if(fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)){
 			parent = new File(externalStorageDirectory, ResourceManager.VOICE_PATH);
 			toSavePostfix = TTSVOICE_INDEX_EXT_ZIP;
 			toCheckPostfix = ""; //$NON-NLS-1$
 			unzipDir = true;
 		}
-		if(parent != null){
+		if(parent != null) {
 			parent.mkdirs();
+			// ".nomedia" indicates there are no pictures and no music to list in this dir for the Gallery and Music apps
+			if( preventMediaIndexing ) {				
+				try {
+					new File(parent, ".nomedia").createNewFile();//$NON-NLS-1$	
+				} catch (IOException e) {
+					// swallow io exception
+				} 
+			}
 		}
 		final DownloadEntry entry;
 		if(parent == null || !parent.exists()){
