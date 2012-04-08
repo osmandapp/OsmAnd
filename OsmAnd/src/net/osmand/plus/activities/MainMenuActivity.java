@@ -193,7 +193,7 @@ public class MainMenuActivity extends Activity {
 		settingsButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent settings = new Intent(activity, SettingsActivity.class);
+				final Intent settings = new Intent(activity, OsmandApplication.getInterfaceClasses().SettingsActivityClass());
 				activity.startActivity(settings);
 			}
 		});
