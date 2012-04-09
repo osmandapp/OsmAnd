@@ -1,6 +1,7 @@
 package net.osmand.access;
 
 import net.osmand.access.TextMessage;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
 import android.app.AlertDialog.Builder;
@@ -35,14 +36,14 @@ public class AccessibleAlertBuilder extends Builder {
 
     @Override
     public Builder setMessage(CharSequence msg) {
-        if (TextMessage.accessibilityExtensions(context))
+        if (OsmandApplication.getSettings().ACCESSIBILITY_EXTENSIONS.get())
             return setView(TextMessage.makeView(context, msg, R.layout.alert));
         return super.setMessage(msg);
     }
 
     @Override
     public Builder setMessage(int msgid) {
-        if (TextMessage.accessibilityExtensions(context))
+        if (OsmandApplication.getSettings().ACCESSIBILITY_EXTENSIONS.get())
             return setView(TextMessage.makeView(context, msgid, R.layout.alert));
         return super.setMessage(msgid);
     }

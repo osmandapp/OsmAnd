@@ -15,11 +15,13 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1"
 				android:layout_marginLeft="24dp" android:layout_marginTop="8dp" android:layout_marginBottom="8dp" android:text="@string/app_version" android:gravity="right"
 				android:textColor="#000000" android:typeface="serif" android:id="@+id/TextVersion" android:textSize="20sp"/>
-				<ImageButton android:id="@+id/HelpButton" android:layout_marginRight="0dp" android:layout_marginTop="9dp"
+				<ImageView android:id="@+id/HelpButton" android:layout_marginRight="0dp" android:layout_marginTop="9dp"
+				android:contentDescription="@string/help"
 				android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="7dp" 
-				android:contentDescription="@string/help" android:src="@drawable/help_icon"/>
-				<ImageButton android:src="@drawable/headliner_close" android:layout_marginRight="4dp" android:id="@+id/CloseButton"
-				android:layout_marginTop="9dp" android:contentDescription="@string/close"
+				android:focusable="true" android:clickable="true" android:src="@drawable/help_icon"/>
+				<ImageView android:src="@drawable/headliner_close" android:layout_marginRight="4dp" android:id="@+id/CloseButton"
+				android:contentDescription="@string/close"
+				android:layout_marginTop="9dp" android:focusable="true" android:clickable="true"
 				android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="0dp"/>
 			</LinearLayout>
 		</LinearLayout>

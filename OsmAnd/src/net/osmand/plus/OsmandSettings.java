@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.Version;
+import net.osmand.access.AccessibilityMode;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.RelativeDirectionStyle;
 import net.osmand.map.ITileSource;
@@ -443,6 +444,11 @@ public class OsmandSettings {
 	// cache of metrics constants as they are used very often
 	public final OsmandPreference<RelativeDirectionStyle> DIRECTION_STYLE = new EnumIntPreference<RelativeDirectionStyle>(
 			"direction_style", RelativeDirectionStyle.SIDEWISE, true, true, RelativeDirectionStyle.values());
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	// cache of metrics constants as they are used very often
+	public final OsmandPreference<AccessibilityMode> ACCESSIBILITY_MODE = new EnumIntPreference<AccessibilityMode>(
+			"accessibility_mode", AccessibilityMode.DEFAULT, true, true, AccessibilityMode.values());
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_TRACKBALL_FOR_MOVEMENTS =
