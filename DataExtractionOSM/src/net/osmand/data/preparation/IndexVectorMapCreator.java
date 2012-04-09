@@ -2,7 +2,6 @@ package net.osmand.data.preparation;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.procedure.TObjectProcedure;
 import gnu.trove.set.hash.TLongHashSet;
 
 import java.io.ByteArrayOutputStream;
@@ -27,7 +26,6 @@ import net.osmand.binary.OsmandOdb.MapData;
 import net.osmand.binary.OsmandOdb.MapDataBlock;
 import net.osmand.data.Boundary;
 import net.osmand.data.MapAlgorithms;
-import net.osmand.data.WayBoundary;
 import net.osmand.osm.Entity;
 import net.osmand.osm.Entity.EntityId;
 import net.osmand.osm.Entity.EntityType;
@@ -35,7 +33,6 @@ import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapRenderingTypes.MapRulType;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
-import net.osmand.osm.WayChain;
 import net.osmand.osm.OSMSettings.OSMTagKey;
 import net.osmand.osm.Relation;
 import net.osmand.osm.Way;
@@ -72,9 +69,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	List<MapRulType> tempNameUse = new ArrayList<MapRenderingTypes.MapRulType>();
 	Map<MapRulType, String> namesUse = new LinkedHashMap<MapRenderingTypes.MapRulType, String>();
 	TIntArrayList addtypeUse = new TIntArrayList(8);
-	List<Long> restrictionsUse = new ArrayList<Long>(8);
 
-	private BasemapProcessor basemapProcessor;
 	private PreparedStatement mapBinaryStat;
 	private PreparedStatement mapLowLevelBinaryStat;
 	private int lowLevelWays = -1;
@@ -91,7 +86,6 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		this.mapZooms = mapZooms;
 		this.zoomWaySmothness = zoomWaySmothness;
 		this.renderingTypes = renderingTypes;
-		this.basemapProcessor = new BasemapProcessor(logMapDataWarn, mapZooms, renderingTypes, zoomWaySmothness);
 		lowLevelWays = -1;
 	}
 
@@ -208,13 +202,13 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					List<Node> outerWay = outerWaySrc;
 					int zoomToSimplify = mapZooms.getLevel(level).getMaxZoom() - 1;
 					if (zoomToSimplify < 15) {
-						outerWay = simplifyCycleWay(outerWay, zoomToSimplify);
+						outerWay = simplifyCycleWay(outerWay, zoomToSimplify, zoomWaySmothness);
 						if (outerWay == null) {
 							continue nextZoom;
 						}
 						List<List<Node>> newinnerWays = new ArrayList<List<Node>>();
 						for (List<Node> ls : innerWays) {
-							ls = simplifyCycleWay(ls, zoomToSimplify);
+							ls = simplifyCycleWay(ls, zoomToSimplify, zoomWaySmothness);
 							if (ls != null) {
 								newinnerWays.add(ls);
 							}
@@ -299,7 +293,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		}
 	}
 
-	protected List<Node> simplifyCycleWay(List<Node> ns, int zoom) throws SQLException {
+	public static List<Node> simplifyCycleWay(List<Node> ns, int zoom, int zoomWaySmothness) throws SQLException {
 		if (checkForSmallAreas(ns, zoom + Math.min(zoomWaySmothness / 2, 3), 2, 4)) {
 			return null;
 		}
@@ -339,7 +333,6 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	}
 
 	public void processingLowLevelWays(IProgress progress) throws SQLException {
-		restrictionsUse.clear();
 		mapLowLevelBinaryStat.executeBatch();
 		mapLowLevelBinaryStat.close();
 		pStatements.remove(mapLowLevelBinaryStat);
@@ -473,7 +466,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 	}
 
-	private boolean checkForSmallAreas(List<Node> nodes, int zoom, int minz, int maxz) {
+	private static boolean checkForSmallAreas(List<Node> nodes, int zoom, int minz, int maxz) {
 		int minX = Integer.MAX_VALUE;
 		int maxX = Integer.MIN_VALUE;
 		int minY = Integer.MAX_VALUE;
@@ -529,7 +522,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					if (zoomToSimplify < 15) {
 						boolean cycle = ((Way) e).getFirstNodeId() == ((Way) e).getLastNodeId();
 						if (cycle) {
-							res = simplifyCycleWay(((Way) e).getNodes(), zoomToSimplify);
+							res = simplifyCycleWay(((Way) e).getNodes(), zoomToSimplify, zoomWaySmothness);
 						} else {
 							String ename = namesUse.get(renderingTypes.getNameRuleType());
 							insertLowLevelMapBinaryObject(level, zoomToSimplify, typeUse, addtypeUse, id, ((Way) e).getNodes(), ename);
@@ -652,17 +645,17 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					tempNames.clear();
 					decodeNames(rs.getString(6), tempNames);
 					byte[] types = rs.getBytes(4);
-					typeUse.clear();
+					int[] typeUse = new int[types.length / 2];
 					for (int j = 0; j < types.length; j += 2) {
 						int ids = Algoritms.parseSmallIntFromBytes(types, j);
-						typeUse.add(renderingTypes.getTypeByInternalId(ids).getTargetId());
+						typeUse[j / 2] = renderingTypes.getTypeByInternalId(ids).getTargetId();
 					}
 					byte[] addTypes = rs.getBytes(5);
-					addtypeUse.clear();
+					int[] addtypeUse = new int[addTypes.length / 2];
 					if (addTypes != null) {
 						for (int j = 0; j < addTypes.length; j += 2) {
 							int ids = Algoritms.parseSmallIntFromBytes(addTypes, j);
-							addtypeUse.add(renderingTypes.getTypeByInternalId(ids).getTargetId());
+							addtypeUse[j / 2] = renderingTypes.getTypeByInternalId(ids).getTargetId();
 						}
 					}
 					

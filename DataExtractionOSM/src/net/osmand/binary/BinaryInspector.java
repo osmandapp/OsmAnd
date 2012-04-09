@@ -46,7 +46,7 @@ public class BinaryInspector {
 	public static void main(String[] args) throws IOException {
 		inspector(args);
 		// test cases show info
-		inspector(new String[]{"/home/victor/projects/OsmAnd/data/osm-gen/basemap_coastlines.obf"});
+		inspector(new String[]{"-vmap", "-zoom=3","/home/victor/projects/OsmAnd/data/osm-gen/basemap_all.obf"});
 		
 		
 		// test case extract parts

@@ -81,8 +81,8 @@
 		<!-- point has order 128 -->
 		<filter tag="" value="" point="true" order="128" objectType="1"/>
 		<!-- default polygon -->
-		<filter cycle="true" layer="-1" tag="" value="" order="1" objectType="3"/>
-		<filter area="true" layer="-1" tag="" value="" order="1" objectType="3"/>
+		<filter cycle="true" layer="-1" tag="" value="" order="3" objectType="3"/>
+		<filter area="true" layer="-1" tag="" value="" order="3" objectType="3"/>
 		<!-- default line -->
 		<filter layer="-1" tag="" value="" order="10" objectType="2"/>
 		<filter tag="" value="" order="11" objectType="2"/>
@@ -229,13 +229,13 @@
 
 			<filter tag="landuse" value="reservoir" order="5"/>
 			<filter tag="landuse" value="water" order="5"/>
-			<filter tag="landuse" value="" order="1"/>
+			<filter tag="landuse" value="" order="3"/>
 
 			<filter tag="natural" value="water" order="5"/>
 			<filter tag="natural" value="bay" order="5"/>
-			<filter tag="natural" value="land" order="6"/>
+			<filter tag="natural" value="land" order="2"/>
 			<filter tag="natural" value="coastline" order="1"/>
-			<filter tag="natural" value="" order="1"/>
+			<filter tag="natural" value="" order="3"/>
 		</group>
 
 

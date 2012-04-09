@@ -241,7 +241,9 @@ public class IndexCreator {
 			
 			@Override
 			public boolean acceptEntityToLoad(OsmBaseStorage storage, EntityId entityId, Entity entity) {
-				indexAddressCreator.registerCityIfNeeded(entity);
+				if(indexAddressCreator != null) {
+					indexAddressCreator.registerCityIfNeeded(entity);
+				}
 				// accept to allow db creator parse it
 				return true;
 			}
@@ -275,11 +277,11 @@ public class IndexCreator {
 		}
 	}
 	
-	private boolean createPlainOsmDb(IProgress progress, File readFile, IOsmStorageFilter addFilter) throws SQLException, FileNotFoundException, IOException, SAXException{
+	private boolean createPlainOsmDb(IProgress progress, File readFile, IOsmStorageFilter addFilter, boolean deletePrevious) throws SQLException, FileNotFoundException, IOException, SAXException{
 //		dbFile = new File(workingDir, TEMP_NODES_DB);
 		// initialize db file
-		boolean loadFromExistingFile = dbFile != null && dialect.databaseFileExists(dbFile);
-		if (dbFile == null) {
+		boolean loadFromExistingFile = dbFile != null && dialect.databaseFileExists(dbFile) && !deletePrevious;
+		if (dbFile == null || deletePrevious) {
 			dbFile = new File(workingDir, TEMP_NODES_DB);
 			// to save space
 			if (dialect.databaseFileExists(dbFile)) {
@@ -362,7 +364,7 @@ public class IndexCreator {
 			
 			for (File readFile : readFiles) {
 				this.accessor = new OsmDbAccessor();
-				createPlainOsmDb(progress, readFile, addFilter);
+				createPlainOsmDb(progress, readFile, addFilter, true);
 				// 2. Create index connections and index structure
 
 				progress.setGeneralProgress("[50 / 100]");
@@ -398,7 +400,7 @@ public class IndexCreator {
 
 			progress.setGeneralProgress("[95 of 100]");
 			progress.startTask("Writing map index to binary file...", -1);
-			processor.writeCoastlinesFile(writer, regionName);
+			processor.writeBasemapFile(writer, regionName);
 			progress.finishTask();
 			writer.close();
 			mapRAFile.close();
@@ -460,7 +462,7 @@ public class IndexCreator {
 		try {
 			// ////////////////////////////////////////////////////////////////////////
 			// 1. creating nodes db to fast access for all nodes and simply import all relations, ways, nodes to it
-			boolean loadFromExistingFile = createPlainOsmDb(progress, readFile, addFilter);
+			boolean loadFromExistingFile = createPlainOsmDb(progress, readFile, addFilter, false);
 			
 			// do not create temp map file and rtree files
 			if (recreateOnlyBinaryFile) {
@@ -715,18 +717,24 @@ public class IndexCreator {
 		creator.setZoomWaySmothness(2);
 		MapRenderingTypes rt = MapRenderingTypes.getDefault();// new MapRenderingTypes("/home/victor/projects/OsmAnd/data/testdata/roads_rendering_types.xml");
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
-		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
+//		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/luxembourg.osm.pbf"),
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/cuba2.osm.bz2"),
 //				new ConsoleProgressImplementation(1), null, zooms, rt, log);
-		// ;6-8;9-14
-		zooms = MapZooms.parseZooms("1-3;4-6;7-9;10-");
-		creator.setMapFileName("basemap_coastlines.obf");
+		
+//		zooms = MapZooms.parseZooms("1-3;4-6;7-9;10-");
+//		creator.setMapFileName("basemap_coastlines.obf");
+		zooms = MapZooms.parseZooms("1-3;4-5;6-7;8-9;10-");
+		creator.setMapFileName("basemap_a.obf");
+		
+		File basemapParent = new File("/home/victor/projects/OsmAnd/data/basemap");
 		creator.generateBasemapIndex(new ConsoleProgressImplementation(1), null, zooms, rt, log, "basemap", 
-				new File("/home/victor/projects/OsmAnd/data/basemap/10m_coastline_out.osm"));
-		
-		
-		
+				new File(basemapParent, "10m_coastline_out.osm"),
+				new File(basemapParent, "10m_admin_level_out.osm"),
+				new File(basemapParent, "10m_rivers.osm"),
+				new File(basemapParent, "10m_lakes_out.osm"),
+				new File(basemapParent, "10m_populated_places_out.osm")
+		);
 		// world generation
 //		MapZooms mapZooms = new MapZooms();
 //		MapZoomPair pair1 = new MapZooms.MapZoomPair(1, 3);

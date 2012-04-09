@@ -374,14 +374,14 @@ public class MapRenderRepositories {
 			}
 
 			String coastlineTime = "";
-			boolean addBasemapCoastlines = zoom <= BASEMAP_ZOOM;
+			boolean addBasemapCoastlines = true;
 			boolean emptyData = zoom > BASEMAP_ZOOM && tempResult.isEmpty() && coastLines.isEmpty() ;
 			
 			if(!coastLines.isEmpty()) {
 				long ms = System.currentTimeMillis();
 				List<BinaryMapDataObject> pcoastlines = processCoastlines(coastLines, leftX, rightX, bottomY, topY, zoom, 
 						basemapCoastLines.isEmpty());
-				addBasemapCoastlines = pcoastlines.isEmpty() || addBasemapCoastlines;
+				addBasemapCoastlines = pcoastlines.isEmpty() || zoom <= BASEMAP_ZOOM;
 				tempResult.addAll(pcoastlines);
 				coastlineTime = "(coastline " + (System.currentTimeMillis() -  ms) + " ms )";
 			} else if(basemapCoastLines.isEmpty() && mi != null){
@@ -397,10 +397,16 @@ public class MapRenderRepositories {
 				coastlineTime = "(coastline " + (System.currentTimeMillis() -  ms) + " ms )";
 			}
 			if(emptyData && tempResult.size() > 0){
-				BinaryMapDataObject o = tempResult.get(0);
+				// message
+				BinaryMapDataObject p = tempResult.get(0);
+				// avoid overflow int errors
+				BinaryMapDataObject o = new BinaryMapDataObject(new int[] { leftX + (rightX - leftX) / 2, topY + (bottomY - topY) / 2 },
+						new int[] { p.getMapIndex().coastlineEncodingType }, null, -1);
+				o.setMapIndex(p.getMapIndex());
 				o.putObjectName(o.getMapIndex().nameEncodingType, context.getString(R.string.switch_to_raster_map_to_see));
+				tempResult.add(o);
 			}
-			if(zoom <= BASEMAP_ZOOM || tempResult.isEmpty()) {
+			if(zoom <= BASEMAP_ZOOM || emptyData) {
 				tempResult.addAll(basemapResult);
 			}
 			

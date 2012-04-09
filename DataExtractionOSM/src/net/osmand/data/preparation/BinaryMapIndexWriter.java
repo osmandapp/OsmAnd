@@ -352,8 +352,8 @@ public class BinaryMapIndexWriter {
 
 	private TByteArrayList mapDataBuf = new TByteArrayList();
 
-	public MapData writeMapData(long diffId, int pleft, int ptop, boolean area, byte[] coordinates, byte[] innerPolygonTypes, TIntArrayList typeUse,
-			TIntArrayList addtypeUse, Map<MapRulType, String> names, Map<String, Integer> stringTable, MapDataBlock.Builder dataBlock)
+	public MapData writeMapData(long diffId, int pleft, int ptop, boolean area, byte[] coordinates, byte[] innerPolygonTypes, int[] typeUse,
+			int[] addtypeUse, Map<MapRulType, String> names, Map<String, Integer> stringTable, MapDataBlock.Builder dataBlock)
 			throws IOException {
 
 		MapData.Builder data = MapData.newBuilder();
@@ -409,16 +409,16 @@ public class BinaryMapIndexWriter {
 		}
 		
 		mapDataBuf.clear();
-		for (int i = 0; i < typeUse.size() ; i++) {
-			writeRawVarint32(mapDataBuf, typeUse.get(i));;
+		for (int i = 0; i < typeUse.length ; i++) {
+			writeRawVarint32(mapDataBuf, typeUse[i]);
 		}
 		data.setTypes(ByteString.copyFrom(mapDataBuf.toArray()));
 		TYPES_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapData.TYPES_FIELD_NUMBER)
 				+ CodedOutputStream.computeRawVarint32Size(mapDataBuf.size()) + mapDataBuf.size();
-		if (addtypeUse != null && addtypeUse.size() > 0) {
+		if (addtypeUse != null && addtypeUse.length > 0) {
 			mapDataBuf.clear();
-			for (int i = 0; i < addtypeUse.size() ; i++) {
-				writeRawVarint32(mapDataBuf, addtypeUse.get(i));;
+			for (int i = 0; i < addtypeUse.length ; i++) {
+				writeRawVarint32(mapDataBuf, addtypeUse[i]);
 			}
 			data.setAdditionalTypes(ByteString.copyFrom(mapDataBuf.toArray()));
 			TYPES_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapData.ADDITIONALTYPES_FIELD_NUMBER);
