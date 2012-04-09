@@ -1023,14 +1023,15 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 			}
 			return true;
-		} else 
+		} else if (settings.ZOOM_BY_TRACKBALL.get()) {
 			// Parrot device has only dpad left and right
 			if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
 				changeZoom(mapView.getZoom() - 1);
 				return true;
-		} else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
-			changeZoom(mapView.getZoom() + 1);
-			return true;
+			} else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+				changeZoom(mapView.getZoom() + 1);
+				return true;
+			}
 		}
 		return super.onKeyUp(keyCode,event);
 	}
