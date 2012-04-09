@@ -10,6 +10,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LogUtil;
 import net.osmand.Version;
+import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
@@ -328,7 +329,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		if (pointToNavigate == null && gpxPath == null) {
 			notRestoreRoutingMode();
 		} else {
-			Builder builder = new AlertDialog.Builder(MapActivity.this);
+			Builder builder = new AccessibleAlertBuilder(MapActivity.this);
 			builder.setMessage(R.string.continue_follow_previous_route);
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
@@ -1175,7 +1176,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		if (resolved != null) {
 			startActivity(intent);
 		} else {
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			AlertDialog.Builder builder = new AccessibleAlertBuilder(this);
 			builder.setMessage(getString(R.string.gps_status_app_not_found));
 			builder.setPositiveButton(
 					getString(R.string.default_buttons_yes),
