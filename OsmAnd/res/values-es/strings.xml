@@ -16,7 +16,7 @@
 \n\t- Otros cambios</string>
 
 <string name="update_poi_does_not_change_indexes">Los cambios a POIs dentro de la aplicación no afectan a los archivos de mapa descargados; los cambios se guardan en un archivo local.</string>
-<string name="local_openstreetmap_uploading_poi">Enviando POIs&#8230</string>
+<string name="local_openstreetmap_uploading_poi">Enviando POIs…</string>
 <string name="local_openstreetmap_poi_were_uploaded">{0} POIs enviados</string>
 <string name="local_openstreetmap_uploadall">Enviar todos los POIs</string>
 <string name="local_openstreetmap_items"></string>
@@ -328,7 +328,7 @@
 
 <string name="tip_update_index">Actualizar datos descargados</string>
 <string name="tip_update_index_t">\tEs esencial tener datos de mapa actualizados. Osmand proporciona un gestor de descargas que puede comprobar la disponibilidad de actualizaciones de los datos descargados.
-\n\tPara comprobar las actualizaciones vaya a \'Opciones\' -> \'Datos descargados\' -> \'Descargar&#8230\'. Tras recuperar de Internet la lista de regiones, puede seleccionar la opción \'Menú' -> \'Filtrar descargados\' para buscar actualizaciones sólo para datos que estén ya en su dispositivo.
+\n\tPara comprobar las actualizaciones vaya a \'Opciones\' -> \'Datos descargados\' -> \'Descargar…\'. Tras recuperar de Internet la lista de regiones, puede seleccionar la opción \'Menú\' -> \'Filtrar descargados\' para buscar actualizaciones sólo para datos que estén ya en su dispositivo.
 \n\tLa disponibilidad de actualizaciones se indica por los siguientes colores:
 \n\t\'Verde\' - indica archivos idénticos en el dispositivo y en el servidor
 \n\t\'Azul\' - indica actualizaciones disponibles en el servidor</string>
