@@ -245,7 +245,7 @@
 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom], textLength, ref, textOrder (default=100) -->
 	<text>
 		<!-- Highway refs -->
-		<filter minzoom="10" tag="highway" value="motorway" ref="true" textMinDistance="150" textColor="#ffffff" textSize="12" textBold="true" textOrder="7">
+		<filter minzoom="10" tag="highway" value="motorway" nameTag="ref" textMinDistance="150" textColor="#ffffff" textSize="12" textBold="true" textOrder="7">
 			<filter textLength="1" textShield="mot_shield1"/>
 			<filter textLength="2" textShield="mot_shield2"/>
 			<filter textLength="3" textShield="mot_shield3"/>
@@ -253,7 +253,7 @@
 			<filter textLength="5" textShield="mot_shield5"/>
 			<filter textLength="6" textShield="mot_shield6"/>
 		</filter>
-		<filter minzoom="10" tag="highway" value="trunk" ref="true" textMinDistance="150" textColor="#ffffff" textSize="12" textBold="true" textOrder="7">
+		<filter minzoom="10" tag="highway" value="trunk" nameTag="ref" textMinDistance="150" textColor="#ffffff" textSize="12" textBold="true" textOrder="7">
 			<filter textLength="1" textShield="tru_shield1"/>
 			<filter textLength="2" textShield="tru_shield2"/>
 			<filter textLength="3" textShield="tru_shield3"/>
@@ -261,7 +261,7 @@
 			<filter textLength="5" textShield="tru_shield5"/>
 			<filter textLength="6" textShield="tru_shield6"/>
 		</filter>
-		<filter minzoom="11" tag="highway" value="primary" ref="true" textMinDistance="150" textColor="#ffffff" textSize="12" textBold="true" textOrder="8">
+		<filter minzoom="11" tag="highway" value="primary" nameTag="ref" textMinDistance="150" textColor="#ffffff" textSize="12" textBold="true" textOrder="8">
 			<filter textLength="1" textShield="pri_shield1"/>
 			<filter textLength="2" textShield="pri_shield2"/>
 			<filter textLength="3" textShield="pri_shield3"/>
@@ -269,7 +269,7 @@
 			<filter textLength="5" textShield="pri_shield5"/>
 			<filter textLength="6" textShield="pri_shield6"/>
 		</filter>
-		<filter minzoom="13" tag="highway" value="secondary" ref="true" textMinDistance="150" textColor="#ffffff" textSize="12" textBold="true" textOrder="9">
+		<filter minzoom="13" tag="highway" value="secondary" nameTag="ref" textMinDistance="150" textColor="#ffffff" textSize="12" textBold="true" textOrder="9">
 			<filter textLength="1" textShield="sec_shield1"/>
 			<filter textLength="2" textShield="sec_shield2"/>
 			<filter textLength="3" textShield="sec_shield3"/>
@@ -277,7 +277,7 @@
 			<filter textLength="5" textShield="sec_shield5"/>
 			<filter textLength="6" textShield="sec_shield6"/>
 		</filter>
-		<filter minzoom="14" tag="highway" value="tertiary" ref="true" textMinDistance="150" textColor="#ffffff" textSize="12" textBold="true" textOrder="10">
+		<filter minzoom="14" tag="highway" value="tertiary" nameTag="ref" textMinDistance="150" textColor="#ffffff" textSize="12" textBold="true" textOrder="10">
 			<filter textLength="1" textShield="ter_shield1"/>
 			<filter textLength="2" textShield="ter_shield2"/>
 			<filter textLength="3" textShield="ter_shield3"/>
@@ -288,14 +288,14 @@
 
 		<!-- Highway text -->
 		<group>
-			<filter tag="highway" value="motorway" ref="false" textOrder="6"/>
-			<filter tag="highway" value="motorway_link" ref="false" textOrder="7"/>
-			<filter tag="highway" value="trunk" ref="false" textOrder="6"/>
-			<filter tag="highway" value="trunk_link" ref="false" textOrder="7"/>
-			<filter tag="highway" value="primary" ref="false" textOrder="7"/>
-			<filter tag="highway" value="primary_link" ref="false" textOrder="8"/>
-			<filter tag="highway" value="secondary" ref="false" textOrder="8"/>
-			<filter tag="highway" value="secondary_link" ref="false" textOrder="9"/>
+			<filter tag="highway" value="motorway" nameTag=""  textOrder="6"/>
+			<filter tag="highway" value="motorway_link" nameTag="" textOrder="7"/>
+			<filter tag="highway" value="trunk" nameTag="" textOrder="6"/>
+			<filter tag="highway" value="trunk_link" nameTag="" textOrder="7"/>
+			<filter tag="highway" value="primary" nameTag="" textOrder="7"/>
+			<filter tag="highway" value="primary_link" nameTag="" textOrder="8"/>
+			<filter tag="highway" value="secondary" nameTag="" textOrder="8"/>
+			<filter tag="highway" value="secondary_link" nameTag="" textOrder="9"/>
 			<groupFilter textOnPath="true">
 				<filter minzoom="13" maxzoom="13" textSize="12"/>
 				<filter minzoom="14" maxzoom="14" textSize="13"/>
@@ -306,8 +306,8 @@
 			</groupFilter>
 		</group>
 		<group>
-			<filter tag="highway" value="tertiary" ref="false" textOrder="8"/>
-			<filter tag="highway" value="tertiary_link" ref="false" textOrder="9"/>
+			<filter tag="highway" value="tertiary" nameTag="" textOrder="8"/>
+			<filter tag="highway" value="tertiary_link" nameTag="" textOrder="9"/>
 
 			<filter tag="highway" value="road" textOrder="9"/>
 			<filter tag="highway" value="unclassified" textOrder="9"/>
@@ -350,9 +350,9 @@
 			</groupFilter>
 		</group>
 		<filter tag="highway" value="motorway_junction" textColor="#00008b" textHaloRadius="1" textWrapWidth="16" textMinDistance="10" textOrder="6">
-			<filter appMode="car" minzoom="13" maxzoom="13" textSize="16" ref="true"/>
-			<filter appMode="car" minzoom="14" textSize="16" ref="false"/>
-			<filter minzoom="14" textSize="14" ref="false"/>
+			<filter appMode="car" minzoom="13" maxzoom="13" textSize="16" nameTag="ref"/>
+			<filter appMode="car" minzoom="14" textSize="16" nameTag=""/>
+			<filter minzoom="14" textSize="14" nameTag=""/>
 		</filter>
 
 		<filter minzoom="3" textSize="14" textColor="#9d6c9d" textWrapWidth="35" tag="natural" value="coastline"/>
@@ -422,10 +422,10 @@
 
 		<!-- Aeroway -->
 		<filter minzoom="11" textSize="12" textColor="#6692da" textHaloRadius="1" textDy="7" tag="aeroway" value="aerodrome"/>
-		<filter minzoom="14" textSize="12" textColor="#333333" textOnPath="true" textMinDistance="50" tag="aeroway" value="runway" ref="true"/>
-		<filter minzoom="15" textSize="12" textColor="#333333" textOnPath="true" textMinDistance="50" tag="aeroway" value="taxiway" ref="true"/>
+		<filter minzoom="14" textSize="12" textColor="#333333" textOnPath="true" textMinDistance="50" tag="aeroway" value="runway" nameTag="ref"/>
+		<filter minzoom="15" textSize="12" textColor="#333333" textOnPath="true" textMinDistance="50" tag="aeroway" value="taxiway" nameTag="ref"/>
 		<filter minzoom="10" textSize="12" textColor="#6692da" textHaloRadius="1" textBold="true" textDy="7" tag="aeroway" value="airport"/>
-		<filter minzoom="17" textSize="12" textColor="#aa66cc" textWrapWidth="10" tag="aeroway" value="gate" ref="true"/>
+		<filter minzoom="17" textSize="12" textColor="#aa66cc" textWrapWidth="10" tag="aeroway" value="gate" nameTag="ref"/>
 		<filter minzoom="14" textSize="12" textColor="#6666ff" textDy="7" tag="aerialway" value="station"/>
 
 		<!-- Buildings -->

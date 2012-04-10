@@ -1,5 +1,8 @@
 package net.osmand.plus.render;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.procedure.TIntObjectProcedure;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -301,10 +304,10 @@ public class TextRenderer {
 	}
 	
 	private void createTextDrawInfo(RenderingRuleSearchRequest render, RenderingContext rc, TagValuePair pair, float xMid, float yMid,
-			Path path, PointF[] points, String name, boolean ref) {
+			Path path, PointF[] points, String name, String tagName) {
 		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
 		render.setIntFilter(render.ALL.R_TEXT_LENGTH, name.length());
-		render.setBooleanFilter(render.ALL.R_REF, ref);
+		render.setStringFilter(render.ALL.R_NAME_TAG, tagName);
 		if(render.search(RenderingRulesStorage.TEXT_RULES)){
 			if(render.getIntPropertyValue(render.ALL.R_TEXT_SIZE) > 0){
 				TextDrawInfo text = new TextDrawInfo(name);
@@ -334,17 +337,20 @@ public class TextRenderer {
 		}
 	}
 	
-	public void renderText(BinaryMapDataObject obj, RenderingRuleSearchRequest render, RenderingContext rc, TagValuePair pair,
-			float xMid, float yMid, Path path, PointF[] points) {
-		// TODO other render text
-		String ref = obj.getNameByType(obj.getMapIndex().refEncodingType);
-		String name = obj.getNameByType(obj.getMapIndex().nameEncodingType);
-		if(ref != null && ref.trim().length() > 0){
-			createTextDrawInfo(render, rc, pair, xMid, yMid, path, points, ref, true);
-		}
-
-		if(name != null && name.trim().length() > 0){
-			createTextDrawInfo(render, rc, pair, xMid, yMid, path, points, name, false);
+	public void renderText(final BinaryMapDataObject obj, final RenderingRuleSearchRequest render, final RenderingContext rc, 
+			final TagValuePair pair, final float xMid, final float yMid, final Path path, final PointF[] points) {
+		TIntObjectHashMap<String> map = obj.getObjectNames();
+		if (map != null) {
+			map.forEachEntry(new TIntObjectProcedure<String>() {
+				@Override
+				public boolean execute(int tag, String name) {
+					if (name != null && name.trim().length() > 0) {
+						createTextDrawInfo(render, rc, pair, xMid, yMid, path, points, name, tag == obj.getMapIndex().nameEncodingType ? ""
+								: obj.getMapIndex().decodeType(tag).tag);
+					}
+					return true;
+				}
+			});
 		}
 	}
 

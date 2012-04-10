@@ -15,7 +15,7 @@ public class RenderingRuleStorageProperties {
 	public static final String ATTR_STRING_VALUE = "attrStringValue";
 	
 	public static final String TEXT_LENGTH = "textLength";
-	public static final String REF = "ref";
+	public static final String NAME_TAG = "nameTag";
 	public static final String TEXT_SHIELD = "textShield";
 	public static final String SHADOW_RADIUS = "shadowRadius";
 	public static final String SHADOW_COLOR = "shadowColor";
@@ -61,7 +61,7 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_ATTR_COLOR_VALUE;
 	public RenderingRuleProperty R_ATTR_STRING_VALUE;
 	public RenderingRuleProperty R_TEXT_LENGTH;
-	public RenderingRuleProperty R_REF;
+	public RenderingRuleProperty R_NAME_TAG;
 	public RenderingRuleProperty R_TEXT_SHIELD;
 	public RenderingRuleProperty R_SHADOW_RADIUS;
 	public RenderingRuleProperty R_SHADOW_COLOR;
@@ -132,7 +132,7 @@ public class RenderingRuleStorageProperties {
 		R_CYCLE = registerRuleInternal(RenderingRuleProperty.createInputBooleanProperty(CYCLE));
 		
 		R_TEXT_LENGTH = registerRuleInternal(RenderingRuleProperty.createInputIntProperty(TEXT_LENGTH));
-		R_REF = registerRuleInternal(RenderingRuleProperty.createInputBooleanProperty(REF));
+		R_NAME_TAG = registerRuleInternal(RenderingRuleProperty.createInputStringProperty(NAME_TAG));
 
 		R_ATTR_INT_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ATTR_INT_VALUE));
 		R_ATTR_BOOL_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(ATTR_BOOL_VALUE));
