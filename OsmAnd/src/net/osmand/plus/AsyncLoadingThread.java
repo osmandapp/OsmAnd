@@ -176,8 +176,8 @@ public class AsyncLoadingThread extends Thread {
 		public final ITileSource tileSource;
 
 		public TileLoadDownloadRequest(File dirWithTiles, String url, File fileToSave, String tileId, ITileSource source, int tileX,
-				int tileY, int zoom) {
-			super(url, fileToSave, tileX, tileY, zoom);
+				int tileY, int zoom, boolean multiPageXml) {
+			super(url, fileToSave, tileX, tileY, zoom, multiPageXml);
 			this.dirWithTiles = dirWithTiles;
 			this.tileSource = source;
 			this.tileId = tileId;

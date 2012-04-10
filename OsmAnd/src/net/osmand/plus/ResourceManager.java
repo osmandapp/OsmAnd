@@ -309,7 +309,7 @@ public class ResourceManager {
 				}
 			}
 			TileLoadDownloadRequest req = new TileLoadDownloadRequest(dirWithTiles, url, toSave, 
-					tileId, map, x, y, zoom);
+					tileId, map, x, y, zoom, map.getTileFormat().equals(".xml"));
 			if(sync){
 				return getRequestedImageTile(req);
 			} else {

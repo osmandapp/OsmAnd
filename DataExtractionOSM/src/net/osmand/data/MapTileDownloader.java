@@ -15,6 +15,20 @@ import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import javax.xml.transform.Source;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.Result;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.Result;
+import java.io.InputStream;
+
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
@@ -79,14 +93,16 @@ public class MapTileDownloader {
 		public final int xTile;
 		public final int yTile;
 		public final String url;
+		public boolean multiPageXml;
 		public boolean error;
 		
-		public DownloadRequest(String url, File fileToSave, int xTile, int yTile, int zoom) {
+		public DownloadRequest(String url, File fileToSave, int xTile, int yTile, int zoom, boolean multiPageXml) {
 			this.url = url;
 			this.fileToSave = fileToSave;
 			this.xTile = xTile;
 			this.yTile = yTile;
 			this.zoom = zoom;
+			this.multiPageXml = multiPageXml;
 		}
 		
 		public DownloadRequest(String url, File fileToSave) {
@@ -95,6 +111,7 @@ public class MapTileDownloader {
 			xTile = -1;
 			yTile = -1;
 			zoom = -1;
+			multiPageXml = false;
 		}
 		
 		public void setError(boolean error){
@@ -162,7 +179,6 @@ public class MapTileDownloader {
 		}
 	}
 	
-	
 	private class DownloadMapWorker implements Runnable, Comparable<DownloadMapWorker> {
 		
 		private DownloadRequest request;
@@ -182,36 +198,39 @@ public class MapTileDownloader {
 				if(log.isDebugEnabled()){
 					log.debug("Start downloading tile : " + request.url); //$NON-NLS-1$
 				}
-				long time = System.currentTimeMillis();
-				try {
-					request.fileToSave.getParentFile().mkdirs();
-					URL url = new URL(request.url);
-					URLConnection connection = url.openConnection();
-					connection.setRequestProperty("User-Agent", USER_AGENT); //$NON-NLS-1$
-					connection.setConnectTimeout(35000);
-					BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
-					FileOutputStream stream = null;
-					try {
-						stream = new FileOutputStream(request.fileToSave);
-						Algoritms.streamCopy(inputStream, stream);
-						stream.flush();
-					} finally {
-						Algoritms.closeStream(inputStream);
-						Algoritms.closeStream(stream);
-					}
-					if (log.isDebugEnabled()) {
-						log.debug("Downloading tile : " + request.url + " successfull " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-					}
-				} catch (UnknownHostException e) {
-					currentErrors++;
-					request.setError(true);
-					log.error("UnknownHostException, cannot download tile " + request.url + " " + e.getMessage()); //$NON-NLS-1$  //$NON-NLS-2$
-				} catch (IOException e) {
-					currentErrors++;
-					request.setError(true);
-					log.warn("Cannot download tile : " + request.url, e); //$NON-NLS-1$
-				} finally {
+				if( request.multiPageXml ) {
+					request.setError(multiPageXmlDownload(request.url, request.fileToSave));
+					if( request.error )
+						currentErrors++;
 					currentlyDownloaded.remove(request.fileToSave);
+				} else {
+					long time = System.currentTimeMillis();
+					try {
+						BufferedInputStream inputStream = new BufferedInputStream(simpleDownload(request.url), 8 * 1024);
+						FileOutputStream stream = null;
+						request.fileToSave.getParentFile().mkdirs();
+						try {
+							stream = new FileOutputStream(request.fileToSave);
+							Algoritms.streamCopy(inputStream, stream);
+							stream.flush();
+						} finally {
+							Algoritms.closeStream(inputStream);
+							Algoritms.closeStream(stream);
+						}
+						if (log.isDebugEnabled()) {
+							log.debug("Downloading tile : " + request.url + " successfull " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						}
+					} catch (UnknownHostException e) {
+						currentErrors++;
+						request.setError(true);
+						log.error("UnknownHostException, cannot download tile " + request.url + " " + e.getMessage()); //$NON-NLS-1$  //$NON-NLS-2$
+					} catch (IOException e) {
+						currentErrors++;
+						request.setError(true);
+						log.warn("Cannot download tile : " + request.url, e); //$NON-NLS-1$
+					} finally {
+						currentlyDownloaded.remove(request.fileToSave);
+					}
 				}
 				if (!request.error) {
 					for (IMapDownloaderCallback c : new ArrayList<IMapDownloaderCallback>(callbacks)) {
@@ -220,7 +239,82 @@ public class MapTileDownloader {
 				}
 			}
 				
-		} 
+		}
+		
+		InputStream simpleDownload(String request) throws UnknownHostException, IOException {
+			URL url = new URL(request);
+			URLConnection connection = url.openConnection();
+			connection.setRequestProperty("User-Agent", USER_AGENT); //$NON-NLS-1$
+			connection.setConnectTimeout(35000);
+			return connection.getInputStream();
+		}
+		
+		boolean multiPageXmlDownload(String url, File fileToSave) {
+			// A complicated download request, as the name implies
+			// It will fetch several XML pages and reformat them into the single contiguous XML document
+			boolean success = false;
+			try {
+				long time = System.currentTimeMillis();
+				DocumentBuilder xmlParser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+				Document doc = xmlParser.parse(simpleDownload(url));
+				NodeList rootNodeList = doc.getElementsByTagName("folder"); //$NON-NLS-1$
+				if( rootNodeList.getLength() == 0 )
+					throw new IOException("Failed to parse XML output from the server: there is no root \"folder\" node"); //$NON-NLS-1$
+				Node rootNode = rootNodeList.item(0);
+				if( rootNode.getAttributes().getNamedItem("found") == null || //$NON-NLS-1$
+					rootNode.getAttributes().getNamedItem("count") == null ) //$NON-NLS-1$
+					throw new IOException("Failed to parse XML output from the server: there are no \"found\" or \"count\" attributes"); //$NON-NLS-1$
+				int total = Integer.parseInt(rootNode.getAttributes().getNamedItem("found").getNodeValue()); //$NON-NLS-1$
+				int perPage = Integer.parseInt(rootNode.getAttributes().getNamedItem("count").getNodeValue()); //$NON-NLS-1$
+				int pagesToGo = (int)Math.ceil((double)total/(double)perPage);
+				rootNodeList = null;
+				rootNode = null;
+
+				fileToSave.getParentFile().mkdirs();
+				FileOutputStream out = new FileOutputStream(fileToSave);
+				out.write(("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<folder total=\"" + total + "\">").getBytes("UTF-8"));
+
+				StreamResult xmlOut = new StreamResult(out);
+				Transformer transformer = TransformerFactory.newInstance().newTransformer();
+				for( int i = 1; i <= pagesToGo; i++ ) {
+					if( i > 1 ) {
+						if(log.isDebugEnabled()){
+							log.debug("Continuing to download tile : " + url + "&page=" + i); //$NON-NLS-1$
+						}
+						doc = xmlParser.parse(simpleDownload(url + "&page=" + i)); //$NON-NLS-1$
+					}
+					NodeList nodes = doc.getElementsByTagName("place"); //$NON-NLS-1$
+					// NodeList is not a subclass of a Java List class, and is not iterable, that's so lame
+					for( int ii = 0; ii < nodes.getLength(); ii++ ) {
+						transformer.setOutputProperty(javax.xml.transform.OutputKeys.OMIT_XML_DECLARATION, "yes");
+						transformer.transform( new DOMSource(nodes.item(ii)), xmlOut );
+					}
+				}
+				out.write(("</folder>").getBytes("UTF-8"));
+				out.close();
+				// This command will save the file to disk
+				//TransformerFactory.newInstance().newTransformer().transform( new DOMSource(doc), new StreamResult(new FileOutputStream(fileToSave)) );
+				if(log.isDebugEnabled()){
+					log.debug("Downloading tile : " + url + " successfull " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				}
+				success = true;
+			} catch (UnknownHostException e) {
+				log.error("UnknownHostException, cannot download tile " + request.url + " " + e.getMessage()); //$NON-NLS-1$  //$NON-NLS-2$
+				return false;
+			} catch (IOException e) {
+				log.warn("Cannot download tile : " + url, e); //$NON-NLS-1$
+				return false;
+			} catch (Exception e) {
+				log.warn("Cannot download tile : " + url, e); //$NON-NLS-1$
+				return false;
+			} finally {
+				Runtime.getRuntime().gc(); // All this stuff eats lot of RAM
+				if( !success ) {
+					fileToSave.delete();
+				}
+			}
+			return true;
+		}
 		
 		@Override
 		public int compareTo(DownloadMapWorker o) {
