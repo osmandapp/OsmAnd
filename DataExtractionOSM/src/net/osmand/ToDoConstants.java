@@ -14,6 +14,7 @@ public class ToDoConstants {
 	// Routing index !!
 	 
 	// Identify coastline areas and pure ocean areas !!! Show high zoom level for coatline if coastline is broken
+    // TODO native support!	
 	// TODO Delete/Extract the code with multipolygons ! (coastline))
 	
 	// Render : different texts support render.xml

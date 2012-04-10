@@ -59,7 +59,7 @@ public class MapRenderRepositories {
 
 	private final static Log log = LogUtil.getLog(MapRenderRepositories.class);
 	private final Context context;
-	private final static int BASEMAP_ZOOM = 7;
+	private final static int BASEMAP_ZOOM = 11;
 	private Handler handler;
 	private Map<String, BinaryMapIndexReader> files = new LinkedHashMap<String, BinaryMapIndexReader>();
 	private Set<String> nativeFiles = new HashSet<String>();
@@ -384,17 +384,20 @@ public class MapRenderRepositories {
 				addBasemapCoastlines = pcoastlines.isEmpty() || zoom <= BASEMAP_ZOOM;
 				tempResult.addAll(pcoastlines);
 				coastlineTime = "(coastline " + (System.currentTimeMillis() -  ms) + " ms )";
-			} else if(basemapCoastLines.isEmpty() && mi != null){
+			} 			
+			if(addBasemapCoastlines){
+				addBasemapCoastlines = false;
+				long ms = System.currentTimeMillis();
+				List<BinaryMapDataObject> pcoastlines = processCoastlines(basemapCoastLines, leftX, rightX, bottomY, topY, zoom, true);
+				addBasemapCoastlines = pcoastlines.isEmpty();
+				tempResult.addAll(pcoastlines);
+				coastlineTime = "(coastline " + (System.currentTimeMillis() -  ms) + " ms )";
+			}
+			if(addBasemapCoastlines && mi != null){
 				BinaryMapDataObject o = new BinaryMapDataObject(new int[] { leftX, topY, rightX, topY, rightX, bottomY, leftX, bottomY, leftX,
 						topY }, new int[] { ocean ? mi.coastlineEncodingType : (mi.landEncodingType) }, null, -1);
 				o.setMapIndex(mi);
 				tempResult.add(o);
-			}
-			if(addBasemapCoastlines){
-				long ms = System.currentTimeMillis();
-				List<BinaryMapDataObject> pcoastlines = processCoastlines(basemapCoastLines, leftX, rightX, bottomY, topY, zoom, true);
-				tempResult.addAll(pcoastlines);
-				coastlineTime = "(coastline " + (System.currentTimeMillis() -  ms) + " ms )";
 			}
 			if(emptyData && tempResult.size() > 0){
 				// message

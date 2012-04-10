@@ -368,6 +368,7 @@ public class MapAlgorithms {
 		if (outx == rightX || outx == leftX || outy == topY || outy == bottomY) {
 			bx = outx;
 			by = outy;
+			//return (((long) bx) << 32) | ((long) by);
 		}
 		return -1l;
 	}

@@ -58,27 +58,10 @@ Creates 10m_lakes.osm
 3. Open in Josm and simply save
 // 4. Run IndexCreator
 
+-------------------------
+roads
+1. perl shp2osm.pl 10m-roads/10m_roads.shp |  sed 's/Type/highway/g;s/"Major Highway"/primary/g;s/"Secondary Highway"/secondary/g'  > 10m_roads_out.osm
 
---------------------------------------------------------------------------------
-II Merging
-BASH : 
-  echo "<?xml version='1.0' encoding='UTF-8'?>" > basemap_1.osm;
-  echo "<osm version='0.6' generator='JOSM'>" >> basemap_1.osm;
-
-  cat 10m_coastline_out.osm   | sed -r "s/'-([0-9]*)'/'-\11'/" | tail -n+3 | sed 's/<\/osm>//' >> basemap_1.osm;
-  cat 10m_admin_level_out.osm | sed -r "s/'-([0-9]*)'/'-\12'/" | tail -n+3 | sed 's/<\/osm>//' >> basemap_1.osm;
-  cat 10m_populated_places_out.osm | xmllint --format - | sed -r 's/"-([0-9]*)"/"-\13"/' | tail -n+3 | sed 's/<\/osm>//' >> basemap_1.osm;
-  cat 10m_rivers.osm          | sed -r "s/'-([0-9]*)'/'-\14'/" | tail -n+3 | sed 's/<\/osm>//' >> basemap_1.osm;
-  cat 10m_lakes_out.osm       | sed -r "s/'-([0-9]*)'/'-\15'/" | tail -n+3 | sed 's/<\/osm>//' >> basemap_1.osm;
-  echo '</osm>' >> basemap_1.osm;
-
-TEST : 
-  echo "<?xml version='1.0' encoding='UTF-8'?>" > basemap_1.osm;
-  echo "<osm version='0.6' generator='JOSM'>" >> basemap_1.osm;
-
-
-  echo '</osm>' >> basemap_1.osm;
-  cat 10m_rivers.osm          | sed -r "s/'-([0-9]*)'/'-\14'/" | tail -n+3 | sed 's/<\/osm>//' >> basemap_1.osm;
 
 READY : basemap_1.osm [1-3, 4-5,6-7].
 

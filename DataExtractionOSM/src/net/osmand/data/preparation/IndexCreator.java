@@ -724,31 +724,17 @@ public class IndexCreator {
 		
 //		zooms = MapZooms.parseZooms("1-3;4-6;7-9;10-");
 //		creator.setMapFileName("basemap_coastlines.obf");
-		zooms = MapZooms.parseZooms("1-3;4-5;6-7;8-9;10-");
-		creator.setMapFileName("basemap_a.obf");
+		zooms = MapZooms.parseZooms("1-2;3;4-5;6-7;8-9;10-");
+		creator.setMapFileName("basemap_2.obf");
 		
-		File basemapParent = new File("/home/victor/projects/OsmAnd/data/basemap");
+		File basemapParent = new File("/home/victor/projects/OsmAnd/data/basemap/ready/");
 		creator.generateBasemapIndex(new ConsoleProgressImplementation(1), null, zooms, rt, log, "basemap", 
 				new File(basemapParent, "10m_coastline_out.osm"),
-				new File(basemapParent, "10m_admin_level_out.osm"),
+				new File(basemapParent, "10m_admin_level.osm"),
 				new File(basemapParent, "10m_rivers.osm"),
-				new File(basemapParent, "10m_lakes_out.osm"),
-				new File(basemapParent, "10m_populated_places_out.osm")
+				new File(basemapParent, "10m_lakes.osm"),
+				new File(basemapParent, "10m_populated_places.osm")
 		);
-		// world generation
-//		MapZooms mapZooms = new MapZooms();
-//		MapZoomPair pair1 = new MapZooms.MapZoomPair(1, 3);
-//		MapZoomPair pair2 = new MapZooms.MapZoomPair(4, 5);
-//		MapZoomPair pair3 = new MapZooms.MapZoomPair(6, 7);
-//		
-//		mapZooms.setLevels(Arrays.asList(pair1, pair2, pair3));
-//		// for coastline
-//		creator.setZoomWaySmothness(2);
-//		creator.generateIndexes(new File(
-//				"/home/victor/projects/OsmAnd/download/basemap/basemap_1.osm"
-//				), 
-//				new ConsoleProgressImplementation(1), null, mapZooms, log);
-		
 		
 
 		log.info("WHOLE GENERATION TIME :  " + (System.currentTimeMillis() - time)); //$NON-NLS-1$

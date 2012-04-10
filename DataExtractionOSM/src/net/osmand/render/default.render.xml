@@ -106,8 +106,8 @@
 			<filter appMode="bicycle" tag="admin_level" value="" order="34"/>
 			<filter appMode="car" tag="admin_level" value="" order="34"/>
 			<!-- Below sea level -->
-			<filter tag="admin_level" value="0" order="0"/>
-			<filter tag="admin_level" value="1" order="0"/>
+			<filter tag="admin_level" value="0" order="3"/>
+			<filter tag="admin_level" value="1" order="3"/>
 			<filter tag="admin_level" value="" order="62"/>
 			
 			<filter tag="administrative" value="" order="62"/>

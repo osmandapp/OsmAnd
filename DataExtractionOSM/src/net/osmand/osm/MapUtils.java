@@ -219,6 +219,9 @@ public class MapUtils {
 	 */
 	
 	public static double getTileNumberX(float zoom, double longitude){
+		if(longitude == 180d) {
+			return getPowZoom(zoom) - 1;
+		}
 		longitude = checkLongitude(longitude);
 		return (longitude + 180d)/360d * getPowZoom(zoom);
 	}
