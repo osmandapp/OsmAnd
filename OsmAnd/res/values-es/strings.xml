@@ -76,12 +76,12 @@
 <string name="routing_settings">- Navegación</string>
 <string name="routing_settings_descr">Especifica las opciones de ruteo</string>
 <string name="global_settings">Opciones Globales</string>
-<string name="index_settings">Datos sin conexión</string>
+<string name="index_settings">Datos descargados</string>
 <string name="index_settings_descr">Descarga y gestiona mapas y otros datos tales como trazas GPX</string>
 <string name="general_settings">Opciones Generales</string>
 <string name="general_settings_descr">Configura la presentación y otras opciones globales</string>
 <string name="global_app_settings">Opciones Globales de la aplicación</string>
-<string name="user_name">Su nombre de usuario OSM</string>
+<string name="user_name">Su usuario OSM</string>
 <string name="user_name_descr">Necesario para envíos a openstreetmap.org</string>
 <string name="user_password">Su clave OSM</string>
 <string name="user_password_descr">Necesario para envíos a openstreetmap.org</string>
@@ -149,7 +149,7 @@
 <string name="auto_follow_route_navigation_descr">Autocentra la vista del mapa sólo durante la navegación.</string>
 <string name="auto_follow_location_enabled">Autocentrado de la vista del mapa activado.</string>
 
-<string name="sendtoOSM_confirmation_msg">Enviar a OSM: %1$s?</string>
+<string name="sendtoOSM_confirmation_msg">¿Enviar a OSM: %1$s?</string>
 <string name="pref_vector_rendering">Opciones específicas del dibujo de vectores</string>
 <string name="pref_overlay">Capas sobrepuesta/subyacente</string>
 <string name="pref_raster_map">Opciones de fuente del mapa</string>
@@ -190,7 +190,7 @@
 <string name="show_gpx_route">Mostrar en el mapa</string>
 <string name="poi_filter_nominatim">Nominatim en línea</string>
 <string name="search_select_point">Seleccionar</string>
-<string name="local_index_description">Descargar, (des-)activar, o borrar datos descargados. \nDatos actuales en el dispositivo (%1$s disponible):</string>
+<string name="local_index_description">Descargar, (des-)activar, o borrar datos descargados. \nDatos actuales en el dispositivo (disponible %1$s):</string>
 <string name="search_position_current_location_search">Buscando posición&#8230;</string>
 <string name="search_position_current_location_found">Posición (Encontrado)</string>
 <string name="search_position_address">Dirección&#8230;</string>
@@ -198,7 +198,7 @@
 <string name="search_position_undefined">Indefinido</string>
 <string name="search_position_fixed">Fijado</string>
 <string name="search_position_current_location">Posición actual&#8230;</string>
-<string name="search_position_map_view">éltima vista del mapa</string>
+<string name="search_position_map_view">Última vista del mapa</string>
 
 <string name="select_search_position">Buscar cerca:</string>
 <string name="context_menu_item_search">Busca cerca de aquí</string>
@@ -242,7 +242,7 @@
 <string name="basemap_missing">El mapa mundial base (cubriendo todo el mundo a niveles de zoom pequeños) no está disponible. Por favor, considere descargar World_basemap_x.obf para tener un entorno completo.</string>
 <string name="vector_data_missing">No hay datos (\'descargados\') en la tarjeta SD. Por favor, considere descargarlos para usar mapas sin conexión.</string>
 <string name="local_index_gpx_info_show">\n\nPulsación larga para opciones</string>
-<string name="local_index_gpx_info_speed">\nValocidad media: %1$s \nVelocidad máxima: %2$s</string>
+<string name="local_index_gpx_info_speed">\nVelocidad media: %1$s \nVelocidad máxima: %2$s</string>
 <string name="local_index_gpx_info_elevation">\nAltitud media: %1$.0f m\nAltitud mínima: %2$.0f m\nAltitud máxima: %3$.0f m\nAscensos: %4$.0f m\nDescensos : %5$.0f m</string>
 <string name="local_index_gpx_info">Subtrazas: %1$d\nPuntos totales: %2$d\nPuntos de paso: %3$d\nDistancia total: %4$s\nHora de inicio: %5$tF, %5$tR\nHora de fin: %6$tF, %6$tR</string>
 <string name="local_index_installed">Edición</string>
@@ -251,7 +251,7 @@
 <string name="local_index_items_restored">%1$d de %2$d elemento(s) correctamente activado(s).</string>
 <string name="local_index_no_items_to_do">No hay elementos para %1$s</string>
 <string name="local_index_action_do">Está a punto de %1$s %2$s elemento(s). ¿Continuar?</string>
-<string name="local_index_descr_title">Gestor de datos descargados</string>
+<string name="local_index_descr_title">Gestor de datos</string>
 
 <string name="local_index_mi_restore">Activar</string>
 <string name="local_index_mi_backup">Desactivar</string>
@@ -302,7 +302,7 @@
 
 <string name="switch_to_vector_map_to_see">Mapa vectorial descargado para esta localización. \n\t\n\tPara usarlo active \'Menú\' -> \'Definir vista\' -> \'Fuente del mapa&#8230;\' -> \'Mapas vectoriales descargados\'.</string>
 <string name="choose_audio_stream">Salida de guías de voz</string>
-<string name="choose_audio_stream_descr">Elija el canal para reproducir indicaciones por voz (dependiente del sistema)</string>
+<string name="choose_audio_stream_descr">Elegir el canal para reproducir indicaciones por voz (dependiente del sistema)</string>
 <string name="voice_stream_voice_call">Audio de llamada de voz</string>
 <string name="voice_stream_notification">Audio de Notificación</string>
 <string name="voice_stream_music">Audio de Media/música</string>
@@ -384,7 +384,7 @@
 <string name="next_button">Siguiente</string>
 <string name="previous_button">Anterior</string>
 
-<string name="unit_of_length_descr">Cambia las unidades de longitud y velocidad</string>
+<string name="unit_of_length_descr">Cambiar las unidades de longitud y velocidad</string>
 <string name="unit_of_length">Unidad de longitud</string>
 <string name="si_mi_foots">Millas/pies</string>
 <string name="si_mi_yard">Millas/yardas</string>
@@ -497,7 +497,7 @@
 <string name="poi_context_menu_call">Mostrar teléfono del POI</string>
 <string name="website">sitio web</string>
 <string name="phone">teléfono</string>
-<string name="download_type_to_filter">escribir para filtrar</string>
+<string name="download_type_to_filter">escriba el filtro</string>
 <string name="use_high_res_maps">Pantalla de alta resolución</string>
 <string name="use_high_res_maps_descr">No estirar (y hacer borroso) teselas de mapa en pantallas de alta densidad</string>
 <string name="unknown_location">Posición aún desconocida</string>
@@ -556,8 +556,8 @@
 <string name="context_menu_item_show_route">Ruta desde aquí</string>
 <string name="use_trackball_descr">Usar trackball para mover el mapa</string>
 <string name="use_trackball">Usar trackball</string>
-<string name="background_service_wait_int_descr">Fijar el intervalo para determinar la posición del servicio de localización de fondo</string>
-<string name="background_service_wait_int">Intervalo de posicionamiento</string>
+<string name="background_service_wait_int_descr">Fijar el tiempo de espera máximo para determinar cada lectura de posición por el servicio de fondo</string>
+<string name="background_service_wait_int">Máx. espera lectura</string>
 <string name="service_stop_background_service">Apagar servicio de navegación de fondo</string>
 <string name="where_am_i">¿Dónde estoy?</string>
 <string name="process_navigation_service">Servicio de navegación Osmand</string>
@@ -565,8 +565,8 @@
 <string name="gps_provider">GPS</string>
 <string name="int_seconds">segundos</string>
 <string name="int_min">min.</string>
-<string name="background_service_int_descr">Fijar el intervalo para determinar la posición del servicio de localización de fondo</string>
-<string name="background_service_int">Intervalo de posicionamiento</string>
+<string name="background_service_int_descr">Fijar el intervalo entre lecturas del servicio de fondo</string>
+<string name="background_service_int">Intervalo de lectura</string>
 <string name="background_service_provider_descr">Elegir el proveedor de localización para el servicio de fondo</string>
 <string name="background_service_provider">Proveedor de Localización</string>
 <string name="background_router_service_descr">Habilitar el servicio de fondo para seguir la posición durante períodos largos</string>
@@ -651,7 +651,7 @@
 <string name="max_level_download_tile">Máx. zoom a descargar</string>
 <string name="max_level_download_tile_descr">Elija nivel máximo de zoom para descargar teselas de mapas de Internet</string>
 <string name="route_general_information">Distancia total %1$s, tiempo de viaje %2$d h %3$d m.</string>
-<string name="router_service_descr">Elija servicios de ruteo con conexión o sin conexión</string>
+<string name="router_service_descr">Elegir servicio de ruteo, con conexión o sin conexión</string>
 <string name="router_service">Servicio de ruteo</string>
 <string name="sd_dir_not_accessible">El directorio de almacenamiento en la tarjeta SD no está disponible</string>
 <string name="download_question">¿Descargar {0} - {1} ?</string>
