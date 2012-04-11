@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <osmand_types>
 	<!-- currently  name tags are indexed with name and additional in nameTags separated by comma-->
 	
@@ -10,13 +10,13 @@
 	<type tag="layer" value="0" minzoom="10" additional="true"/>
 	<type tag="layer" value="1" minzoom="10" additional="true"/>
 	<type tag="layer" value="-1" minzoom="10" additional="true"/>
-	<type tag="layer" value="+1" target:value="1" minzoom="10" additional="true"/>
-	<type tag="layer" value="2" target:value="1" minzoom="10" additional="true"/>
-	<type tag="layer" value="+2" target:value="1" minzoom="10" additional="true"/>
-	<type tag="layer" value="-2" target:value="-1" minzoom="10" additional="true"/>
-	<type tag="layer" value="3" target:value="1" minzoom="10" additional="true"/>
-	<type tag="layer" value="+3" target:value="1" minzoom="10" additional="true"/>
-	<type tag="layer" value="-3" target:value="-1" minzoom="10" additional="true"/>
+	<type tag="layer" value="+1" target_value="1" minzoom="10" additional="true"/>
+	<type tag="layer" value="2" target_value="1" minzoom="10" additional="true"/>
+	<type tag="layer" value="+2" target_value="1" minzoom="10" additional="true"/>
+	<type tag="layer" value="-2" target_value="-1" minzoom="10" additional="true"/>
+	<type tag="layer" value="3" target_value="1" minzoom="10" additional="true"/>
+	<type tag="layer" value="+3" target_value="1" minzoom="10" additional="true"/>
+	<type tag="layer" value="-3" target_value="-1" minzoom="10" additional="true"/>
 	
 	<type tag="bridge" minzoom="10" additional="true"/>
 	<type tag="tunnel" minzoom="10" additional="true"/>
@@ -61,11 +61,11 @@
 		<type tag="highway" value="give_way" minzoom="16" />
 		<type tag="highway" value="traffic_signals" minzoom="16" />
 		<type tag="highway" value="motorway_junction" minzoom="13" />
-		<type tag="highway" value="bus_stop" minzoom="15" poi:category="transportation"/>
-		<type tag="highway" value="platform" minzoom="15" poi:category="transportation"/>
-		<type tag="highway" value="turning_circle" minzoom="16" poi:category="transportation"/>
-		<type tag="highway" value="emergency_access_point" minzoom="16" poi:category="transportation"/>
-		<type tag="highway" value="speed_camera" minzoom="16" poi:category="transportation"/>
+		<type tag="highway" value="bus_stop" minzoom="15" poi_category="transportation"/>
+		<type tag="highway" value="platform" minzoom="15" poi_category="transportation"/>
+		<type tag="highway" value="turning_circle" minzoom="16" poi_category="transportation"/>
+		<type tag="highway" value="emergency_access_point" minzoom="16" poi_category="transportation"/>
+		<type tag="highway" value="speed_camera" minzoom="16" poi_category="transportation"/>
 		<type tag="highway" value="street_lamp" minzoom="16" />
 	</category>
 
@@ -81,12 +81,12 @@
 		<type tag="cycleway" value="lane" minzoom="12"/>
 		<type tag="cycleway" value="opposite_lane" minzoom="12"/>
 		<type tag="cycleway" minzoom="12"/>
-		<type tag="cycleway:left" target:tag="cycleway" minzoom="12"/>
-		<type tag="cycleway:right" target:tag="cycleway" minzoom="12"/>
+		<type tag="cycleway:left" target_tag="cycleway" minzoom="12"/>
+		<type tag="cycleway:right" target_tag="cycleway" minzoom="12"/>
 	</category>	
 	
 	
-	<category name="traffic_calming" poi:tag="traffic_calming" poi:category="barrier" poi:prefix="traffic_calming_">
+	<category name="traffic_calming" poi_tag="traffic_calming" poi_category="barrier" poi_prefix="traffic_calming_">
 		<type tag="traffic_calming" value="yes" minzoom="16" />
 		<type tag="traffic_calming" value="bump" minzoom="16" />
 		<type tag="traffic_calming" value="chicane" minzoom="16" />
@@ -97,16 +97,16 @@
 		<type tag="traffic_calming" value="choker" minzoom="16" />
 	</category>
 
-	<category name="barrier" poi:tag="barrier" poi:category="barrier">
+	<category name="barrier" poi_tag="barrier" poi_category="barrier">
 		<type tag="barrier" value="hedge" minzoom="15" />
 		<type tag="natural" value="hedge" minzoom="15" />
 		<type tag="barrier" value="fence" minzoom="15" />
-		<type tag="fenced" value="yes" minzoom="15" target:tag="barrier" target:value="fence" poi:category="barrier"/>
+		<type tag="fenced" value="yes" minzoom="15" target_tag="barrier" target_value="fence" poi_category="barrier"/>
 		<type tag="barrier" value="wall" minzoom="15" />
 		<type tag="barrier" value="ditch" minzoom="15" />
 		<type tag="barrier" value="retaining_wall" minzoom="15" />
 		<type tag="barrier" value="city_wall" minzoom="13" />
-		<type tag="historic" value="city_walls" minzoom="13" target:tag="barrier" target:value="city_wall"  poi:category="barrier"/>
+		<type tag="historic" value="city_walls" minzoom="13" target_tag="barrier" target_value="city_wall"  poi_category="barrier"/>
 		<type tag="barrier" value="bollard" minzoom="15" />
 		<type tag="barrier" value="cycle_barrier" minzoom="15" />
 		<type tag="barrier" value="block" minzoom="15" />
@@ -114,7 +114,7 @@
 		<type tag="barrier" value="toll_booth" minzoom="14" />
 		<type tag="barrier" value="entrance" minzoom="15" />
 		<type tag="barrier" value="gate" minzoom="15" />
-		<type tag="highway" value="gate" minzoom="15"  poi:category="barrier"/>
+		<type tag="highway" value="gate" minzoom="15"  poi_category="barrier"/>
 		<type tag="barrier" value="lift_gate" minzoom="15" />
 		<type tag="barrier" value="stile" minzoom="15" />
 		<type tag="barrier" value="horse_stile" minzoom="15" />
@@ -125,31 +125,31 @@
 	</category>
 
 
-	<category name="waterway"  poi:tag="waterway" poi:category="man_made">
-		<type tag="waterway" value="stream" minzoom="13" poi:category="natural"/>
-		<type tag="waterway" value="riverbank" minzoom="8" poi:category="natural"/>
-		<type tag="waterway" value="river" minzoom="5" poi:category="natural"/>
-		<type tag="waterway" value="canal" minzoom="10" poi:category="natural"/>
-		<type tag="waterway" value="ditch" minzoom="13" poi:category="natural"/>
-		<type tag="waterway" value="drain" minzoom="13" poi:category="natural"/>
-		<type tag="waterway" value="dock" minzoom="10" poi:prefix="water_"/>
-		<type tag="waterway" value="lock_gate" minzoom="15" poi:prefix="water_"/>
-		<type tag="waterway" value="lock" minzoom="15" poi:prefix="water_"/>
-		<type tag="waterway" value="turning_point" minzoom="15" poi:prefix="water_"/>
+	<category name="waterway"  poi_tag="waterway" poi_category="man_made">
+		<type tag="waterway" value="stream" minzoom="13" poi_category="natural"/>
+		<type tag="waterway" value="riverbank" minzoom="8" poi_category="natural"/>
+		<type tag="waterway" value="river" minzoom="5" poi_category="natural"/> <!-- Example of user defined category poi_category="user_defined" -->
+		<type tag="waterway" value="canal" minzoom="10" poi_category="natural"/>
+		<type tag="waterway" value="ditch" minzoom="13" poi_category="natural"/>
+		<type tag="waterway" value="drain" minzoom="13" poi_category="natural"/>
+		<type tag="waterway" value="dock" minzoom="10" poi_prefix="water_"/>
+		<type tag="waterway" value="lock_gate" minzoom="15" poi_prefix="water_"/>
+		<type tag="waterway" value="lock" minzoom="15" poi_prefix="water_"/>
+		<type tag="waterway" value="turning_point" minzoom="15" poi_prefix="water_"/>
 		<type tag="waterway" value="boatyard" minzoom="15" />
-		<type tag="waterway" value="weir" minzoom="15" poi:prefix="water_"/>
+		<type tag="waterway" value="weir" minzoom="15" poi_prefix="water_"/>
 		<type tag="waterway" value="dam" minzoom="13" />
-		<type tag="waterway" value="mill_pond" minzoom="13" poi:prefix="water_"/>
+		<type tag="waterway" value="mill_pond" minzoom="13" poi_prefix="water_"/>
 
 	</category>
 
-	<category name="railway" poi:tag="railway" poi:category="transportation" poi:prefix="railway_">
-		<type tag="railway" value="rail" minzoom="7" poi:prefix=""/>
-		<type tag="railway" value="tram" minzoom="13" poi:prefix=""/>
-		<type tag="railway" value="light_rail" minzoom="13" poi:prefix=""/>
+	<category name="railway" poi_tag="railway" poi_category="transportation" poi_prefix="railway_">
+		<type tag="railway" value="rail" minzoom="7" poi_prefix=""/>
+		<type tag="railway" value="tram" minzoom="13" poi_prefix=""/>
+		<type tag="railway" value="light_rail" minzoom="13" poi_prefix=""/>
 		<type tag="railway" value="abandoned" minzoom="15" />
 		<type tag="railway" value="disused" minzoom="15" />
-		<type tag="railway" value="subway" minzoom="13" poi:prefix=""/>
+		<type tag="railway" value="subway" minzoom="13" poi_prefix=""/>
 		<type tag="railway" value="preserved" minzoom="13" />
 		<type tag="railway" value="narrow_gauge" minzoom="15" />
 		<type tag="railway" value="construction" minzoom="15" />
@@ -158,29 +158,29 @@
 		<type tag="railway" value="platform" minzoom="15" />
 		<type tag="railway" value="station" minzoom="12" />
 		<type tag="railway" value="turntable" minzoom="15" />
-		<type tag="railway" value="halt" minzoom="15" poi:prefix=""/>
-		<type tag="railway" value="tram_stop" minzoom="15" poi:prefix=""/>
+		<type tag="railway" value="halt" minzoom="15" poi_prefix=""/>
+		<type tag="railway" value="tram_stop" minzoom="15" poi_prefix=""/>
 		<type tag="railway" value="crossing" minzoom="15" />
 		<type tag="railway" value="level_crossing" minzoom="15" />
-		<type tag="railway" value="subway_entrance" minzoom="15" poi:prefix=""/>
+		<type tag="railway" value="subway_entrance" minzoom="15" poi_prefix=""/>
 		<type tag="railway" value="buffer_stop" minzoom="15" />
 	</category>
 
 
-	<category name="aeroway" poi:tag="aeroway" poi:category="transportation">
+	<category name="aeroway" poi_tag="aeroway" poi_category="transportation">
 		<type tag="aeroway" value="aerodrome" minzoom="12" />
 		<type tag="aeroway" value="terminal" minzoom="15" />
 		<type tag="aeroway" value="helipad" minzoom="12" />
-		<type tag="aeroway" value="runway" minzoom="11" poi:prefix="aeroway_"/>
-		<type tag="aeroway" value="taxiway" minzoom="12" poi:prefix="aeroway_"/>
-		<type tag="aeroway" value="apron" minzoom="12" poi:prefix="aeroway_"/>
+		<type tag="aeroway" value="runway" minzoom="11" poi_prefix="aeroway_"/>
+		<type tag="aeroway" value="taxiway" minzoom="12" poi_prefix="aeroway_"/>
+		<type tag="aeroway" value="apron" minzoom="12" poi_prefix="aeroway_"/>
 		<type tag="aeroway" value="airport" minzoom="11" />
 		<type tag="aeroway" value="gate" minzoom="15" nameTags="ref" />
 		<type tag="aeroway" value="windsock" minzoom="15" />
 	</category>
 
 
-	<category name="aerialway" poi:tag="aerialway" poi:category="transportation" poi:prefix="aerialway_">
+	<category name="aerialway" poi_tag="aerialway" poi_category="transportation" poi_prefix="aerialway_">
 		<type tag="aerialway" value="cable_car" minzoom="13" />
 		<type tag="aerialway" value="gondola" minzoom="13" />
 		<type tag="aerialway" value="chair_lift" minzoom="13" />
@@ -188,7 +188,7 @@
 		<type tag="aerialway" value="drag_lift" minzoom="13" />
 		<type tag="aerialway" value="goods" minzoom="15" />
 		<type tag="aerialway" value="station" minzoom="15" />
-		<type tag="aerialway" value="pylon" minzoom="15" poi:category=""/>
+		<type tag="aerialway" value="pylon" minzoom="15" poi_category=""/>
 
 	</category>
 
@@ -197,16 +197,16 @@
 		<type tag="power" value="pole" minzoom="15" />
 		<type tag="power" value="line" minzoom="13" />
 		<type tag="power" value="minor_line" minzoom="15" />
-		<type tag="power" value="station" minzoom="13" poi:category="man_made" poi:prefix="power_"/>
-		<type tag="power" value="sub_station" minzoom="13" poi:category="man_made" poi:prefix="power_"/>
-		<type tag="power" value="generator" minzoom="15" poi:category="man_made" poi:prefix="power_"/>
-		<type tag="power" value="cable_distribution_cabinet" minzoom="15" poi:category="man_made" poi:prefix="power_"/>
+		<type tag="power" value="station" minzoom="13" poi_category="man_made" poi_prefix="power_"/>
+		<type tag="power" value="sub_station" minzoom="13" poi_category="man_made" poi_prefix="power_"/>
+		<type tag="power" value="generator" minzoom="15" poi_category="man_made" poi_prefix="power_"/>
+		<type tag="power" value="cable_distribution_cabinet" minzoom="15" poi_category="man_made" poi_prefix="power_"/>
 	</category>
 
 
-	<category name="man_made" poi:tag="man_made" poi:category="man_made">
-		<type tag="building" minzoom="16" poi:category="" nameTags="addr:housenumber"/>
-		<type tag="addr:housenumber" minzoom="16" poi:category="" nameTags="addr:housenumber"/>
+	<category name="man_made" poi_tag="man_made" poi_category="man_made">
+		<type tag="building" minzoom="16" poi_category="" nameTags="addr:housenumber"/>
+		<type tag="addr:housenumber" minzoom="16" poi_category="" nameTags="addr:housenumber"/>
 		<type tag="man_made" value="wastewater_plant" minzoom="15" />
 		<type tag="man_made" value="water_works" minzoom="15" />
 		<type tag="man_made" value="works" minzoom="15" />
@@ -234,7 +234,7 @@
 	</category>
 
 
-	<category name="leisure" poi:tag="leisure" poi:category="leisure">
+	<category name="leisure" poi_tag="leisure" poi_category="leisure">
 		<type tag="leisure" value="dog_park" minzoom="15" />
 		<type tag="leisure" value="sports_centre" minzoom="13" />
 		<type tag="leisure" value="golf_course" minzoom="12" />
@@ -246,7 +246,7 @@
 		<type tag="leisure" value="slipway" minzoom="15" />
 		<type tag="leisure" value="fishing" minzoom="15" />
 		<type tag="leisure" value="nature_reserve" minzoom="10" />
-		<type tag="natural" value="park" minzoom="12" poi:category="leisure"/>
+		<type tag="natural" value="park" minzoom="12" poi_category="leisure"/>
 		<type tag="leisure" value="park" minzoom="12" />
 		<type tag="leisure" value="recreation_ground" minzoom="12" />
 		<type tag="leisure" value="playground" minzoom="15" />
@@ -259,7 +259,7 @@
 	</category>
 
 
-	<category name="office" poi:tag="office" poi:category="office" >
+	<category name="office" poi_tag="office" poi_category="office" >
 		<type tag="office" value="accountant" minzoom="15" />
 		<type tag="office" value="architect" minzoom="15" />
 		<type tag="office" value="company" minzoom="15" />
@@ -274,11 +274,11 @@
 		<type tag="office" value="research" minzoom="15" />
 		<type tag="office" value="telecommunication" minzoom="15" />
 		<type tag="office" value="travel_agent" minzoom="15" />
-		<type tag="amenity" value="architect_office" minzoom="15" target:tag="office" target:value="architect" poi:category="office"/>
+		<type tag="amenity" value="architect_office" minzoom="15" target_tag="office" target_value="architect" poi_category="office"/>
 	</category>
 
 
-	<category name="shop" poi:tag="shop" poi:category="shop" >
+	<category name="shop" poi_tag="shop" poi_category="shop" >
 		<type tag="shop" value="alcohol" minzoom="15" />
 		<type tag="shop" value="bakery" minzoom="15" />
 		<type tag="shop" value="beauty" minzoom="15" />
@@ -340,7 +340,7 @@
 	</category>
 
 
-	<category name="emergency" poi:tag="emergency" poi:category="emergency">
+	<category name="emergency" poi_tag="emergency" poi_category="emergency">
 		<type tag="emergency" value="ambulance_station" minzoom="15" />
 		<type tag="emergency" value="ses_station" minzoom="15" />
 		<type tag="emergency" value="fire_extinguisher" minzoom="15" />
@@ -349,11 +349,11 @@
 		<type tag="emergency" value="fire_hydrant" minzoom="15" />
 		<type tag="emergency" value="phone" minzoom="15" />
 		<type tag="emergency" value="siren" minzoom="15" />
-		<type tag="amenity" value="fire_station" minzoom="15" poi:category="emergency"/>
+		<type tag="amenity" value="fire_station" minzoom="15" poi_category="emergency"/>
 	</category>
 
 
-	<category name="tourism" poi:tag="tourism" poi:category="tourism" >
+	<category name="tourism" poi_tag="tourism" poi_category="tourism" >
 		<type tag="tourism" value="attraction" minzoom="13" />
 		<type tag="tourism" value="artwork" minzoom="15" />
 		<type tag="tourism" value="camp_site" minzoom="13" />
@@ -373,7 +373,7 @@
 	</category>
 
 
-	<category name="historic" poi:tag="historic" poi:category="historic">
+	<category name="historic" poi_tag="historic" poi_category="historic">
 		<type tag="historic" value="archaeological_site" minzoom="15" />
 		<type tag="historic" value="battlefield" minzoom="15" />
 		<type tag="historic" value="castle" minzoom="15" />
@@ -390,42 +390,42 @@
 
 	<category name="landuse">
 		<type tag="landuse" value="allotments" minzoom="10" />
-		<type tag="landuse" value="basin" minzoom="10" poi:category="landuse"/>
+		<type tag="landuse" value="basin" minzoom="10" poi_category="landuse"/>
 		<type tag="landuse" value="brownfield" minzoom="12" />
-		<type tag="landuse" value="cemetery" minzoom="11" poi:category="landuse"/>
-		<type tag="landuse" value="grave_yard" minzoom="15" poi:category="landuse"/>
+		<type tag="landuse" value="cemetery" minzoom="11" poi_category="landuse"/>
+		<type tag="landuse" value="grave_yard" minzoom="15" poi_category="landuse"/>
 		<type tag="landuse" value="commercial" minzoom="10" />
 		<type tag="landuse" value="construction" minzoom="12" />
 		<type tag="landuse" value="farm" minzoom="12" />
 		<type tag="landuse" value="farmland" minzoom="12" />
 		<type tag="landuse" value="farmyard" minzoom="12" />
-		<type tag="landuse" value="forest" minzoom="8" poi:category="landuse"/>
+		<type tag="landuse" value="forest" minzoom="8" poi_category="landuse"/>
 		<type tag="landuse" value="garages" minzoom="12" />
 		<type tag="landuse" value="grass" minzoom="12" />
 		<type tag="landuse" value="greenfield" minzoom="12" />
 		<type tag="landuse" value="greenhouse_horticulture" minzoom="12" />
 		<type tag="landuse" value="industrial" minzoom="10" />
 		<type tag="landuse" value="landfill" minzoom="12" />
-		<type tag="landuse" value="meadow" minzoom="12" poi:category="landuse"/>
-		<type tag="landuse" value="military" minzoom="10" poi:category="landuse"/>
-		<type tag="landuse" value="orchard" minzoom="12" poi:category="landuse"/>
+		<type tag="landuse" value="meadow" minzoom="12" poi_category="landuse"/>
+		<type tag="landuse" value="military" minzoom="10" poi_category="landuse"/>
+		<type tag="landuse" value="orchard" minzoom="12" poi_category="landuse"/>
 		<type tag="landuse" value="railway" minzoom="12" />
-		<type tag="landuse" value="recreation_ground" minzoom="12" poi:category="landuse"/>
-		<type tag="landuse" value="conservation" minzoom="10" poi:category="landuse"/>
-		<type tag="landuse" value="village_green" minzoom="12" poi:category="landuse"/>
-		<type tag="landuse" value="reservoir" minzoom="7" poi:category="landuse"/>
-		<type tag="landuse" value="water" minzoom="7" poi:category="landuse"/>
+		<type tag="landuse" value="recreation_ground" minzoom="12" poi_category="landuse"/>
+		<type tag="landuse" value="conservation" minzoom="10" poi_category="landuse"/>
+		<type tag="landuse" value="village_green" minzoom="12" poi_category="landuse"/>
+		<type tag="landuse" value="reservoir" minzoom="7" poi_category="landuse"/>
+		<type tag="landuse" value="water" minzoom="7" poi_category="landuse"/>
 		<type tag="landuse" value="residential" minzoom="10" />
 		<type tag="landuse" value="retail" minzoom="12" />
-		<type tag="landuse" value="salt_pond" minzoom="10" poi:category="landuse"/>
-		<type tag="landuse" value="quarry" minzoom="12" poi:category="landuse"/>
-		<type tag="landuse" value="vineyard" minzoom="12" poi:category="landuse"/>
+		<type tag="landuse" value="salt_pond" minzoom="10" poi_category="landuse"/>
+		<type tag="landuse" value="quarry" minzoom="12" poi_category="landuse"/>
+		<type tag="landuse" value="vineyard" minzoom="12" poi_category="landuse"/>
 		<type tag="landuse" value="field" minzoom="12" />
-		<type tag="natural" value="field" minzoom="12" target:tag="landuse" target:value="field" poi:category="" />
+		<type tag="natural" value="field" minzoom="12" target_tag="landuse" target_value="field" poi_category="" />
 	</category>
 
 
-	<category name="military" poi:category="military" poi:tag="military">
+	<category name="military" poi_category="military" poi_tag="military">
 		<type tag="military" value="airfield" minzoom="12" />
 		<type tag="military" value="bunker" minzoom="15" />
 		<type tag="military" value="barracks" minzoom="13" />
@@ -435,7 +435,7 @@
 	</category>
 
 
-	<category name="natural" poi:category="natural" poi:tag="natural">
+	<category name="natural" poi_category="natural" poi_tag="natural">
 		<!-- coastline is polyline !!! -->
 		<type tag="natural" value="coastline" minzoom="1" />
 		<type tag="natural" value="bay" minzoom="5" />
@@ -445,7 +445,7 @@
 		<type tag="natural" value="fell" minzoom="13" />
 		<type tag="natural" value="glacier" minzoom="7" />
 		<type tag="natural" value="heath" minzoom="11" />
-		<type tag="natural" value="land" minzoom="10" poi:category="" />
+		<type tag="natural" value="land" minzoom="10" poi_category="" />
 		<type tag="natural" value="marsh" minzoom="11" />
 		<type tag="natural" value="mud" minzoom="11" />
 		<type tag="natural" value="peak" minzoom="11" nameTags="ele" />
@@ -454,24 +454,24 @@
 		<type tag="natural" value="scrub" minzoom="11" />
 		<type tag="natural" value="spring" minzoom="14" />
 		<type tag="natural" value="stone" minzoom="15" />
-		<type tag="natural" value="tree" minzoom="15" poi:category="" />
+		<type tag="natural" value="tree" minzoom="15" poi_category="" />
 		<type tag="natural" value="volcano" minzoom="11" />
 		<type tag="natural" value="water" minzoom="4" />
 		<type tag="natural" value="lake" minzoom="4" />
 		<type tag="natural" value="wetland" minzoom="10" />
 		<type tag="natural" value="wood" minzoom="8" />
 		<type tag="landuse" value="wood" minzoom="8" 
-				target:tag="natural" target:value="wood" poi:category="natural" />
+				target_tag="natural" target_value="wood" poi_category="natural" />
 		<type tag="contour" value="elevation" minzoom="8" />
 	</category>
 	
-	<category name="geocache" poi:tag="geocache" poi:category="geocache">
+	<category name="geocache" poi_tag="geocache" poi_category="geocache">
 		<type tag="geocache" value="found" minzoom="15" />
 		<type tag="geocache" value="not found" minzoom="15" />
 	</category>
 
 	<!-- Amenities  -->
-	<category name="sustenance" poi:category="sustenance">
+	<category name="sustenance" poi_category="sustenance">
 		<type tag="amenity" value="restaurant" minzoom="15" />
 		<type tag="amenity" value="cafe" minzoom="15" />
 		<type tag="amenity" value="food_court" minzoom="15" />
@@ -483,7 +483,7 @@
 		<type tag="amenity" value="bbq" minzoom="15" />
 	</category>
 
-	<category name="education" poi:category="education">
+	<category name="education" poi_category="education">
 		<type tag="amenity" value="kindergarten" minzoom="15" />
 		<type tag="amenity" value="school" minzoom="15" />
 		<type tag="amenity" value="college" minzoom="15" />
@@ -491,7 +491,7 @@
 		<type tag="amenity" value="university" minzoom="15" />
 	</category>
 
-	<category name="transportation" poi:category="transportation">
+	<category name="transportation" poi_category="transportation">
 		<type tag="amenity" value="parking" minzoom="15" />
 		<type tag="amenity" value="bicycle_parking" minzoom="15" />
 		<type tag="amenity" value="ferry_terminal" minzoom="12" />
@@ -506,14 +506,14 @@
 	</category>
 
 
-	<category name="finance" poi:category="finance">
+	<category name="finance" poi_category="finance">
 		<type tag="amenity" value="atm" minzoom="15" />
 		<type tag="amenity" value="bank" minzoom="15" />
 		<type tag="amenity" value="bureau_de_change" minzoom="15" />
 	</category>
 
 
-	<category name="healthcare" poi:category="healthcare">
+	<category name="healthcare" poi_category="healthcare">
 		<type tag="amenity" value="pharmacy" minzoom="15" />
 		<type tag="amenity" value="hospital" minzoom="15" />
 		<type tag="amenity" value="baby_hatch" minzoom="15" />
@@ -523,7 +523,7 @@
 		<type tag="amenity" value="first_aid" minzoom="15" />
 	</category>
 
-	<category name="entertainment" poi:category="entertainment">
+	<category name="entertainment" poi_category="entertainment">
 		<type tag="amenity" value="arts_centre" minzoom="15" />
 		<type tag="amenity" value="cinema" minzoom="15" />
 		<type tag="amenity" value="community_centre" minzoom="15" />
@@ -537,7 +537,7 @@
 	</category>
 
 	
-	<category name="amenity_other" poi:tag="amenity" poi:category="other">
+	<category name="amenity_other" poi_tag="amenity" poi_category="other">
 		<type tag="amenity" value="marketplace" minzoom="15" />
 		<type tag="amenity" value="courthouse" minzoom="15" />
 		<type tag="amenity" value="crematorium" minzoom="15" />
@@ -566,7 +566,7 @@
 
 
 	<!-- administrative place-->
-	<category name="administrative" poi:tag="place" poi:category="administrative" >
+	<category name="administrative" poi_tag="place" poi_category="administrative" >
 		<type tag="place" value="continent" minzoom="1" />
 		<type tag="place" value="country" minzoom="2" />
 		<type tag="place" value="state" minzoom="3" />
@@ -605,7 +605,7 @@
 
 
 	<!-- sport -->
-	<category name="sport" poi:tag="sport" poi:category="sport">
+	<category name="sport" poi_tag="sport" poi_category="sport">
 		<type tag="sport" value="9pin" minzoom="15" />
 		<type tag="sport" value="10pin" minzoom="15" />
 		<type tag="sport" value="archery" minzoom="15" />
@@ -655,4 +655,5 @@
 		<type tag="sport" value="volleyball" minzoom="15" />
 	</category>
 	
+	<category name="osmwiki" poi_tag="osmwiki" poi_category="osmwiki"/>
 </osmand_types>

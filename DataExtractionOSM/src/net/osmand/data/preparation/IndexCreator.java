@@ -705,9 +705,9 @@ public class IndexCreator {
 		
 		long time = System.currentTimeMillis();
 		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/data/osm-gen/")); //$NON-NLS-1$
-		creator.setIndexMap(true);
+		creator.setIndexMap(false);
 		creator.setIndexAddress(false);
-		creator.setIndexPOI(false);
+		creator.setIndexPOI(true);
 		creator.setIndexTransport(false);
 
 //		creator.deleteDatabaseIndexes = false;
@@ -717,24 +717,24 @@ public class IndexCreator {
 		creator.setZoomWaySmothness(2);
 		MapRenderingTypes rt = MapRenderingTypes.getDefault();// new MapRenderingTypes("/home/victor/projects/OsmAnd/data/testdata/roads_rendering_types.xml");
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
-//		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
-//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/luxembourg.osm.pbf"),
+		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
+		creator.setMapFileName("Luxembourg_poi.obf");
+		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/luxembourg.osm.pbf"),
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/cuba2.osm.bz2"),
-//				new ConsoleProgressImplementation(1), null, zooms, rt, log);
+				new ConsoleProgressImplementation(1), null, zooms, rt, log);
 		
-//		zooms = MapZooms.parseZooms("1-3;4-6;7-9;10-");
-//		creator.setMapFileName("basemap_coastlines.obf");
-		zooms = MapZooms.parseZooms("1-2;3;4-5;6-7;8-9;10-");
-		creator.setMapFileName("basemap_2.obf");
 		
-		File basemapParent = new File("/home/victor/projects/OsmAnd/data/basemap/ready/");
-		creator.generateBasemapIndex(new ConsoleProgressImplementation(1), null, zooms, rt, log, "basemap", 
-				new File(basemapParent, "10m_coastline_out.osm"),
-				new File(basemapParent, "10m_admin_level.osm"),
-				new File(basemapParent, "10m_rivers.osm"),
-				new File(basemapParent, "10m_lakes.osm"),
-				new File(basemapParent, "10m_populated_places.osm")
-		);
+		// BASEMAP generation
+//		zooms = MapZooms.parseZooms("1-2;3;4-5;6-7;8-9;10-");
+//		creator.setMapFileName("basemap_2.obf");
+//		File basemapParent = new File("/home/victor/projects/OsmAnd/data/basemap/ready/");
+//		creator.generateBasemapIndex(new ConsoleProgressImplementation(1), null, zooms, rt, log, "basemap", 
+//				new File(basemapParent, "10m_coastline_out.osm"),
+//				new File(basemapParent, "10m_admin_level.osm"),
+//				new File(basemapParent, "10m_rivers.osm"),
+//				new File(basemapParent, "10m_lakes.osm"),
+//				new File(basemapParent, "10m_populated_places.osm")
+//		);
 		
 
 		log.info("WHOLE GENERATION TIME :  " + (System.currentTimeMillis() - time)); //$NON-NLS-1$

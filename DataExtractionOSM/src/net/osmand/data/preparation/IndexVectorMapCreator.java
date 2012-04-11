@@ -651,8 +651,9 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 						typeUse[j / 2] = renderingTypes.getTypeByInternalId(ids).getTargetId();
 					}
 					byte[] addTypes = rs.getBytes(5);
-					int[] addtypeUse = new int[addTypes.length / 2];
+					int[] addtypeUse = null ;
 					if (addTypes != null) {
+						addtypeUse = new int[addTypes.length / 2];
 						for (int j = 0; j < addTypes.length; j += 2) {
 							int ids = Algoritms.parseSmallIntFromBytes(addTypes, j);
 							addtypeUse[j / 2] = renderingTypes.getTypeByInternalId(ids).getTargetId();

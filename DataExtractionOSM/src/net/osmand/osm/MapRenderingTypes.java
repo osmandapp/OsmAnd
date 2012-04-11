@@ -271,9 +271,9 @@ public class MapRenderingTypes {
 				public void startElement(String uri, String localName, String name, Attributes attributes) throws SAXException {
 					name = parser.isNamespaceAware() ? localName : name;
 					if(name.equals("category")){ //$NON-NLS-1$
-						poiParentCategory = attributes.getValue("poi:category");
-						poiParentPrefix = attributes.getValue("poi:prefix");
-						String tag = attributes.getValue("poi:tag");
+						poiParentCategory = attributes.getValue("poi_category");
+						poiParentPrefix = attributes.getValue("poi_prefix");
+						String tag = attributes.getValue("poi_tag");
 						if (tag != null) {
 							MapRulType rtype = new MapRulType();
 							rtype.poiCategory = AmenityType.valueOf(poiParentCategory.toUpperCase());
@@ -312,8 +312,8 @@ public class MapRenderingTypes {
 								rtype.names[i] = mt;
 							}
 						}
-						String targetTag = attributes.getValue("target:tag");
-						String targetValue = attributes.getValue("target:value");
+						String targetTag = attributes.getValue("target_tag");
+						String targetValue = attributes.getValue("target_value");
 						if (targetTag != null || targetValue != null) {
 							if(targetTag == null){
 								targetTag = rtype.tag;
@@ -334,7 +334,7 @@ public class MapRenderingTypes {
 							rtype.poiPrefix = poiParentPrefix;
 						}
 						
-						String poiCategory = attributes.getValue("poi:category");
+						String poiCategory = attributes.getValue("poi_category");
 						if(poiCategory != null){
 							rtype.poiSpecified = true;
 							if(poiCategory.length() == 0) {
@@ -343,7 +343,7 @@ public class MapRenderingTypes {
 								rtype.poiCategory = AmenityType.valueOf(poiCategory.toUpperCase());
 							}
 						}
-						String poiPrefix = attributes.getValue("poi:prefix");
+						String poiPrefix = attributes.getValue("poi_prefix");
 						if(poiPrefix != null){
 							rtype.poiPrefix = poiPrefix;
 						}

@@ -46,7 +46,7 @@ public class BinaryInspector {
 	public static void main(String[] args) throws IOException {
 		inspector(args);
 		// test cases show info
-		inspector(new String[]{"/home/victor/projects/OsmAnd/data/osm-gen/basemap_n.obf"});
+		// inspector(new String[]{"-vpoi", "/home/victor/projects/OsmAnd/data/osm-gen/Luxembourg_poi.obf"});
 		
 		
 		// test case extract parts
