@@ -41,7 +41,7 @@
    <tile_source rule="yandex_traffic" name="Yandex Traffic RU"/>
    
 
-   <tile_source name="Wikimapia vector" url_template="http://api.wikimapia.org/?function=box&key=B921A53A-7045BB68-17739604-B7F22FE1-991E4FA5-00D55A1F-96FD5589-EEB0D704&x={1}&y={2}&z={0}&count=100&language=en&format=xml&pack=gzip" ext=".xml" min_zoom="1" max_zoom="18" tile_size="256" img_density="32" avg_img_size="100000"/>
+   <tile_source name="Wikimapia vector" url_template="http://api.wikimapia.org/?function=box&key=B921A53A-7045BB68-17739604-B7F22FE1-991E4FA5-00D55A1F-96FD5589-EEB0D704&x={1}&y={2}&z={0}&count=100&language=en&format=xml&pack=gzip" ext=".xml" min_zoom="1" max_zoom="21" tile_size="256" img_density="32" avg_img_size="100000"/>
 
    <tile_source rule="beanshell" name="Wikimapia" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000" ext="png"
    url_template='String getTileUrl(int z, int x, int y) {  return "http://"+"i"+(x%4 + (y%4)*4)+".wikimapia.org/?x="+x+"&amp;y="+y+"&amp;zoom="+z;}'/>

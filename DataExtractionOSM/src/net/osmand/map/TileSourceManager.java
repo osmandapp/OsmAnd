@@ -319,8 +319,9 @@ public class TileSourceManager {
 		return new TileSourceTemplate("CycleMap", "http://b.tile.opencyclemap.org/cycle/{0}/{1}/{2}.png", ".png", 16, 1, 256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 	}
 
+	// TODO: this is for testing only, the Wikimapia source will go into the tile_sources.xml file
 	public static TileSourceTemplate getWikimapiaSource(){
-		return new TileSourceTemplate("Wikimapia vector", "http://api.wikimapia.org/?function=box&key=B921A53A-7045BB68-17739604-B7F22FE1-991E4FA5-00D55A1F-96FD5589-EEB0D704&x={1}&y={2}&z={0}&count=100&language=en&format=xml&pack=gzip", ".xml", 18, 1, 256, 32, 100000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		return new TileSourceTemplate("Wikimapia vector", "http://api.wikimapia.org/?function=box&key=B921A53A-7045BB68-17739604-B7F22FE1-991E4FA5-00D55A1F-96FD5589-EEB0D704&x={1}&y={2}&z={0}&count=100&language=en&format=xml&pack=gzip", ".xml", 21, 1, 256, 32, 100000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 
