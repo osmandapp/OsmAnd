@@ -472,6 +472,9 @@ public class TileSourceManager {
 					
 					@Override
 					public Class<?> loadClass(String className) throws ClassNotFoundException {
+						if(className.equals("Math") || className.equals("java.lang.Math")) {
+							return Math.class;
+						}
 						throw new ClassNotFoundException("Error requesting " + className);
 					}
 				});
