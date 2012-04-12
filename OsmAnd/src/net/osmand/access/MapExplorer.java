@@ -75,16 +75,15 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
             contextProvider = this;
         }
         if (different(newSelections, selectedObjects)) {
-            // FIXME Map explorer
-//            ContextMenuLayer contextMenuLayer = mapView.getContextMenuLayer();
-//            if (contextMenuLayer != null) {
-//                contextMenuLayer.setSelections(newSelections, contextProvider);
-//                if (!newSelections.isEmpty())
-//                    mapView.showMessage(mapView.getSettings().USE_SHORT_OBJECT_NAMES.get() ?
-//                                        contextMenuLayer.getSelectedObjectName() :
-//                                        contextMenuLayer.getSelectedObjectDescription());
-//            }
-//            selectedObjects = newSelections;
+            ContextMenuLayer contextMenuLayer = mapView.getLayerByClass(ContextMenuLayer.class);
+            if (contextMenuLayer != null) {
+                contextMenuLayer.setSelections(newSelections, contextProvider);
+                if (!newSelections.isEmpty())
+                    mapView.showMessage(mapView.getSettings().USE_SHORT_OBJECT_NAMES.get() ?
+                                        contextMenuLayer.getSelectedObjectName() :
+                                        contextMenuLayer.getSelectedObjectDescription());
+            }
+            selectedObjects = newSelections;
         }
     }
 
@@ -96,9 +95,8 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
         if (mapView.getSettings().SCROLL_MAP_BY_GESTURES.get())
             return fallback.onDown(e);
         ContextMenuLayer contextMenuLayer = mapView.getLayerByClass(ContextMenuLayer.class);
-        // FIXME
-//        if (contextMenuLayer != null)
-//            contextMenuLayer.setSelections(null, null);
+        if (contextMenuLayer != null)
+            contextMenuLayer.setSelections(null, null);
         selectedObjects = null;
         describePointedObjects(e);
         return false;

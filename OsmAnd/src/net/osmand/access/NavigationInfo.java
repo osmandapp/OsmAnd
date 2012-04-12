@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.OsmAndFormatter;
+import net.osmand.access.AccessibleToast;
+import net.osmand.access.RelativeDirectionStyle;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -100,7 +102,7 @@ public class NavigationInfo {
         private int directionTo(final Location point, float heading) {
             final float bearing = currentLocation.bearingTo(point) - heading;
             final int nSectors = (style == RelativeDirectionStyle.CLOCKWISE) ? 12 : direction.length;
-            int sector = (int)Math.round(Math.abs(bearing) * (float)nSectors / FULL_CIRCLE) % nSectors;
+            int sector = Math.round(Math.abs(bearing) * (float)nSectors / FULL_CIRCLE) % nSectors;
             if ((bearing < 0) && (sector != 0))
                 sector = nSectors - sector;
             return sector;
@@ -139,7 +141,7 @@ public class NavigationInfo {
 
     public NavigationInfo(final Context context) {
         this.context = context;
-        settings = ((OsmandApplication)(context.getApplicationContext())).getSettings();
+        settings = OsmandApplication.getSettings();
         currentLocation = null;
         lastDirection = new RelativeDirection();
         lastNotificationTime = SystemClock.uptimeMillis();
@@ -158,7 +160,7 @@ public class NavigationInfo {
 
     // The argument must be not null as well as the currentLocation
     private String absoluteDirectionString(float bearing) {
-        int direction = (int)Math.round(Math.abs(bearing) * (float)cardinal.length / FULL_CIRCLE) % cardinal.length;
+        int direction = Math.round(Math.abs(bearing) * (float)cardinal.length / FULL_CIRCLE) % cardinal.length;
         if ((bearing < 0) && (direction != 0))
             direction = cardinal.length - direction;
         return getString(cardinal[direction]);
@@ -234,7 +236,7 @@ public class NavigationInfo {
 
     public synchronized void setLocation(Location location) {
         currentLocation = location;
-        if (autoAnnounce) {
+        if (autoAnnounce && ((OsmandApplication)(context.getApplicationContext())).accessibilityEnabled()) {
             final LatLon point = settings.getPointToNavigate();
             if (point != null) {
                 if ((currentLocation != null) && currentLocation.hasBearing()) {

@@ -5,6 +5,7 @@ import java.text.MessageFormat;
 import java.util.Random;
 
 import net.osmand.Version;
+import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -60,7 +61,7 @@ public class MainMenuActivity extends TrackedActivity {
 		if (file.exists() && file.length() > 0) {
 			if (size != file.length() && !firstTime) {
 				String msg = MessageFormat.format(getString(R.string.previous_run_crashed), OsmandApplication.EXCEPTION_PATH);
-				Builder builder = new AlertDialog.Builder(MainMenuActivity.this);
+				Builder builder = new AccessibleAlertBuilder(MainMenuActivity.this);
 				builder.setMessage(msg).setNeutralButton(getString(R.string.close), null);
 				builder.setPositiveButton(R.string.send_report, new DialogInterface.OnClickListener() {
 					@Override
@@ -289,12 +290,12 @@ public class MainMenuActivity extends TrackedActivity {
 		}
 		
 		if(netOsmandWasInstalled){
-			Builder builder = new AlertDialog.Builder(this);
+			Builder builder = new AccessibleAlertBuilder(this);
 			builder.setMessage(R.string.osmand_net_previously_installed);
 			builder.setPositiveButton(R.string.default_buttons_ok, null);
 			builder.show();
 		} else {
-			Builder builder = new AlertDialog.Builder(this);
+			Builder builder = new AccessibleAlertBuilder(this);
 			builder.setMessage(R.string.first_time_msg);
 			builder.setPositiveButton(R.string.first_time_download, new DialogInterface.OnClickListener() {
 
@@ -315,7 +316,7 @@ public class MainMenuActivity extends TrackedActivity {
 		boolean check = pref.getBoolean(VECTOR_INDEXES_CHECK, true);
 		// do not show each time 
 		if (check && new Random().nextInt() % 5 == 1) {
-			Builder builder = new AlertDialog.Builder(this);
+			Builder builder = new AccessibleAlertBuilder(this);
 			if(maps.isEmpty()){
 				builder.setMessage(R.string.vector_data_missing);
 			} else if(!maps.basemapExists()){

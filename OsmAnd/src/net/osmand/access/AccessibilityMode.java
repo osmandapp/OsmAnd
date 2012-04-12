@@ -3,14 +3,15 @@ package net.osmand.access;
 import net.osmand.plus.R;
 import android.content.Context;
 
-public enum RelativeDirectionStyle {
+public enum AccessibilityMode {
 
-    SIDEWISE(R.string.direction_style_sidewise),
-    CLOCKWISE(R.string.direction_style_clockwise);
+    ON(R.string.accessibility_on),
+    OFF(R.string.accessibility_off),
+    DEFAULT(R.string.accessibility_default);
 
     private final int key;
 
-    RelativeDirectionStyle(int key) {
+    AccessibilityMode(int key) {
         this.key = key;
     }
 

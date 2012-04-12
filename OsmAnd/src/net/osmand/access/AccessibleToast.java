@@ -1,6 +1,9 @@
 package net.osmand.access;
 
+import net.osmand.access.TextMessage;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+
 import android.content.Context;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.Toast;
@@ -15,25 +18,23 @@ public class AccessibleToast extends Toast {
     }
 
     public static Toast makeText(Context context, int msg, int duration) {
-    	if(true){
-    		// currently disabled (waiting for settings)
-    		return Toast.makeText(context, msg, duration);
-    	}
-        final Toast toast = new AccessibleToast(context);
-        toast.setView(TextMessage.makeView(context, msg, R.layout.notification));
-        toast.setDuration(duration);
-        return toast;
+        if (OsmandApplication.getSettings().ACCESSIBILITY_EXTENSIONS.get()) {
+            final Toast toast = new AccessibleToast(context);
+            toast.setView(TextMessage.makeView(context, msg, R.layout.notification));
+            toast.setDuration(duration);
+            return toast;
+        }
+        return Toast.makeText(context, msg, duration);
     }
 
     public static Toast makeText(Context context, CharSequence msg, int duration) {
-    	if(true){
-    		// currently disabled (waiting for settings)
-    		return Toast.makeText(context, msg, duration);
-    	}
-        final Toast toast = new AccessibleToast(context);
-        toast.setView(TextMessage.makeView(context, msg, R.layout.notification));
-        toast.setDuration(duration);
-        return toast;
+        if (OsmandApplication.getSettings().ACCESSIBILITY_EXTENSIONS.get()) {
+            final Toast toast = new AccessibleToast(context);
+            toast.setView(TextMessage.makeView(context, msg, R.layout.notification));
+            toast.setDuration(duration);
+            return toast;
+        }
+        return Toast.makeText(context, msg, duration);
     }
 
     @Override

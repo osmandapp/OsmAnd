@@ -4,6 +4,7 @@ import gnu.trove.list.array.TIntArrayList;
 
 import java.util.Arrays;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.app.Dialog;
 import android.content.Context;
@@ -105,7 +106,8 @@ public class TipsAndTricksActivity {
 		final Dialog dlg = new Dialog(ctx);
 		dlg.setContentView(R.layout.tips_and_tricks);
 		final TextView tipDescription = (TextView) dlg.findViewById(R.id.TipDescription);
-		tipDescription.setMovementMethod(ScrollingMovementMethod.getInstance());
+		if (!OsmandApplication.getSettings().ACCESSIBILITY_EXTENSIONS.get())
+			tipDescription.setMovementMethod(ScrollingMovementMethod.getInstance());
 		int nextInd = 0;
 		final TIntArrayList toShow = new TIntArrayList();
 		final int[] historyInd = new int[1];
