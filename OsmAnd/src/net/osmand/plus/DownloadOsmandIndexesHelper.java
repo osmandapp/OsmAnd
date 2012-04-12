@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import net.osmand.LogUtil;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.activities.DownloadIndexActivity.AssetDownloadEntry;
 import net.osmand.plus.activities.DownloadIndexActivity.DownloadEntry;
@@ -27,6 +28,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
+import android.widget.Toast;
 
 public class DownloadOsmandIndexesHelper {
 	private final static Log log = LogUtil.getLog(DownloadOsmandIndexesHelper.class);
@@ -36,6 +38,7 @@ public class DownloadOsmandIndexesHelper {
 		if (result == null) {
 			result = new IndexFileList();
 		}
+		//add all tts files from assets
 		listVoiceAssets(result, amanager, pm);
 		return result;
 	}
@@ -58,18 +61,11 @@ public class DownloadOsmandIndexesHelper {
 			for (String voice : list) {
 				File destFile = new File(voicePath, voice + File.separatorChar + "_ttsconfig.p");
 				String key = voice + ext;
-				IndexItem internetVoiceFile = result.getIndexFiles().get(key);
 				String assetName = "voice" + File.separatorChar + voice + File.separatorChar + "ttsconfig.p";
-				if (internetVoiceFile == null) {
-//					result.getIndexFiles().remove(key);
-//					result.add(key, new AssetIndexItem(key, internetVoiceFile.getDescription(), internetVoiceFile.getDate(), internetVoiceFile.getSize(), internetVoiceFile.getParts(), assetName, destFile.getPath()));
-//				} else {
-					result.add(key, new AssetIndexItem(key, "voice", date, "0.1", "", assetName, destFile.getPath()));
-				}
+				result.add(key, new AssetIndexItem(key, "voice", date, "0.1", "", assetName, destFile.getPath()));
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("Error while loading tts files from assets", e); //$NON-NLS-1$
 		}
 	}
 
@@ -133,7 +129,7 @@ public class DownloadOsmandIndexesHelper {
 		}
 		
 		@Override
-		public DownloadEntry createDownloadEntry() {
+		public DownloadEntry createDownloadEntry(Context ctx) {
 			return new AssetDownloadEntry(assetName, destFile);
 		}
 	}
@@ -204,7 +200,8 @@ public class DownloadOsmandIndexesHelper {
 			if (fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT,IndexConstants.BINARY_MAP_VERSION)) //
 				|| fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP,IndexConstants.BINARY_MAP_VERSION)) //
 				|| fileName.endsWith(addVersionToExt(IndexConstants.VOICE_INDEX_EXT_ZIP, IndexConstants.VOICE_VERSION))
-				|| fileName.endsWith(addVersionToExt(IndexConstants.TTSVOICE_INDEX_EXT_ZIP, IndexConstants.TTSVOICE_VERSION))) {
+				//|| fileName.endsWith(addVersionToExt(IndexConstants.TTSVOICE_INDEX_EXT_ZIP, IndexConstants.TTSVOICE_VERSION)) drop support for downloading tts files from inet
+				) {
 				return true;
 			}
 			return false;
@@ -232,7 +229,7 @@ public class DownloadOsmandIndexesHelper {
 			return parts;
 		}
 		
-		public DownloadEntry createDownloadEntry() {
+		public DownloadEntry createDownloadEntry(Context ctx) {
 			IndexItem item = this;
 			String fileName = item.getFileName();
 			File parent = null;
@@ -275,7 +272,7 @@ public class DownloadOsmandIndexesHelper {
 			}
 			final DownloadEntry entry;
 			if(parent == null || !parent.exists()){
-//				AccessibleToast.makeText(DownloadIndexActivity.this, getString(R.string.sd_dir_not_accessible), Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(ctx, ctx.getString(R.string.sd_dir_not_accessible), Toast.LENGTH_LONG).show();
 				entry = null;
 			} else {
 				entry = new DownloadEntry();

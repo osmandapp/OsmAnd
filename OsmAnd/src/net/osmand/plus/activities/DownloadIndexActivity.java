@@ -233,7 +233,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 					IndexItem es = listAdapter.getChild(0, i);
 					if(!entriesToDownload.containsKey(es.getFileName())){
 						selected++;
-						entriesToDownload.put(es.getFileName(), es.createDownloadEntry());
+						entriesToDownload.put(es.getFileName(), es.createDownloadEntry(DownloadIndexActivity.this));
 					}
 				}
 				AccessibleToast.makeText(this, MessageFormat.format(getString(R.string.items_were_selected), selected), Toast.LENGTH_SHORT).show();
@@ -417,7 +417,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			return true;
 		}
 		
-		final DownloadEntry entry = e.createDownloadEntry();
+		final DownloadEntry entry = e.createDownloadEntry(DownloadIndexActivity.this);
 		if (entry != null) {
 			// if(!fileToUnzip.exists()){
 			// builder.setMessage(MessageFormat.format(getString(R.string.download_question), baseName, extractDateAndSize(e.getValue())));
