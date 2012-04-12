@@ -79,6 +79,12 @@
 <!--
    <tile_source rule="wms_tile" url_template="http://wms.latlon.org" name="Genshtab (BLR)" layer="gshtab" ext=".jpg" min_zoom="5" max_zoom="17" tile_size="256" img_density="32" avg_img_size="18000"/>  NOT WORK ?-->
 
+  <tile_source name="Geofabrik.routing_eu" url_template="http://tools.geofabrik.de/osmi/tiles/routing/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="16" tile_size="256" img_density="16" avg_img_size="18000" />
+  <tile_source name="Geofabrik.routing_non_eu" url_template="http://tools.geofabrik.de/osmi/tiles/routing_non_eu/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="16" tile_size="256" img_density="16" avg_img_size="18000" />
+  <tile_source name="Geofabrik.addresses_eu" url_template="http://tools.geofabrik.de/osmi/tiles/addresses/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="16" tile_size="256" img_density="16" avg_img_size="18000" />
+  <tile_source name="Geofabrik.highways_eu" url_template="http://tools.geofabrik.de/osmi/tiles/highways/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="16" tile_size="256" img_density="16" avg_img_size="18000" />
+
+
 <!--
 	// WMS layers : http://whoots.mapwarper.net/tms/{$z}/{$x}/{$y}/ {layer}/{Path}
 	// 1. Landsat http://onearth.jpl.nasa.gov/wms.cgi global_mosaic (NOT WORK)
