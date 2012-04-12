@@ -1,11 +1,14 @@
 package net.osmand.render;
 
+import net.osmand.binary.BinaryMapDataObject;
+
 
 public class RenderingRuleSearchRequest {
 
 	private final RenderingRulesStorage storage;
 	RenderingRuleProperty[] props;
 	int[] values;
+	BinaryMapDataObject object;
 	float[] fvalues;
 
 	int[] savedValues;
@@ -39,7 +42,7 @@ public class RenderingRuleSearchRequest {
 		assert p.isInputProperty();
 		values[p.getId()] = filter;
 	}
-
+	
 	public void setBooleanFilter(RenderingRuleProperty p, boolean filter) {
 		assert p.isInputProperty();
 		values[p.getId()] = filter ? RenderingRuleProperty.TRUE_VALUE : RenderingRuleProperty.FALSE_VALUE;
@@ -55,6 +58,7 @@ public class RenderingRuleSearchRequest {
 	public void clearState() {
 		System.arraycopy(savedValues, 0, values, 0, values.length);
 		System.arraycopy(savedFvalues, 0, fvalues, 0, fvalues.length);
+		object = null;
 	}
 	
 	public void clearValue(RenderingRuleProperty p) {
@@ -65,15 +69,21 @@ public class RenderingRuleSearchRequest {
 		}
 	}
 	
-	public void setInitialTagValueZoom(String tag, String val, int zoom){
+	public BinaryMapDataObject getObject() {
+		return object;
+	}
+	
+	public void setInitialTagValueZoom(String tag, String val, int zoom, BinaryMapDataObject obj){
 		clearState();
+		object = obj;
 		setIntFilter(ALL.R_MINZOOM, zoom);
 		setIntFilter(ALL.R_MAXZOOM, zoom);
 		setStringFilter(ALL.R_TAG, tag);
 		setStringFilter(ALL.R_VALUE, val);
 	}
 	
-	public void setTagValueZoomLayer(String tag, String val, int zoom, int layer){
+	public void setTagValueZoomLayer(String tag, String val, int zoom, int layer, BinaryMapDataObject obj){
+		object = obj;
 		setIntFilter(ALL.R_MINZOOM, zoom);
 		setIntFilter(ALL.R_MAXZOOM, zoom);
 		setIntFilter(ALL.R_LAYER, layer);
@@ -142,9 +152,9 @@ public class RenderingRuleSearchRequest {
 			if (rp.isInputProperty()) {
 				boolean match;
 				if (rp.isFloat()) {
-					match = rp.accept(rule.getFloatProp(i), fvalues[rp.getId()]);
+					match = rp.accept(rule.getFloatProp(i), fvalues[rp.getId()], this);
 				} else {
-					match = rp.accept(rule.getIntProp(i), values[rp.getId()]);
+					match = rp.accept(rule.getIntProp(i), values[rp.getId()], this);
 				}
 				if (!match) {
 					return false;
@@ -221,6 +231,10 @@ public class RenderingRuleSearchRequest {
 	public int getIntPropertyValue(RenderingRuleProperty property, int defValue) {
 		int val = values[property.getId()];
 		return val == -1 ? defValue : val;
+	}
+	
+	/**/ RenderingRulesStorage getStorage() {
+		return storage;
 	}
 
 }

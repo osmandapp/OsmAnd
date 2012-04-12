@@ -1368,6 +1368,14 @@ public class BinaryMapIndexReader {
 		public TIntHashSet positiveLayers = new TIntHashSet(2);
 		public TIntHashSet negativeLayers = new TIntHashSet(2);
 		
+		public Integer getRule(String t, String v){
+			Map<String, Integer> m = encodingRules.get(t);
+			if(m != null){
+				return m.get(v);
+			}
+			return null;
+		}
+		
 		public List<MapRoot> getRoots() {
 			return roots;
 		}

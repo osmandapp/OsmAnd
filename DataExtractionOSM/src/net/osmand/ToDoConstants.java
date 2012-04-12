@@ -17,20 +17,18 @@ public class ToDoConstants {
 	// TODO Delete/Extract the code with multipolygons ! (coastline))
 	
 	// Render : support additional tags in render.xml
-	
 	// ------ TO try & to test ----
-	// Test images in the map 
-	// Test new POI categories, dynamic POI text in ...
 	// Test rendering of 2 dimensional values 
 	// Polish UI with new building address search ...(Better completely new address search)
 	// Search for city in all indexes
 	// Test GeoIndexActivity
+	
+	// TODO images in the map index ? 
 	
 	
 //	    == Osmand application (TODO 127) ==
 	// TODO prepare C++ version of routing algorithm
 
 
-	// DONE SWING
 	
 }

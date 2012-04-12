@@ -179,6 +179,8 @@
 			<filter appMode="bicycle" tag="highway" value="byway" order="59"/>
 			<filter tag="highway" value="byway" order="37"/>
 
+             <!--  Additional attributes can be used in that way --> 
+             <!--  additional="tracktype=grade1"  -->
 			 <filter layer="1" tag="highway" value="track" order="67"/>
 			<filter appMode="pedestrian" tag="highway" value="track" order="60"/>
 			<filter tag="highway" value="track" order="37"/>

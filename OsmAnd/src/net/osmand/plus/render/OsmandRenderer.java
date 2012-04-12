@@ -400,7 +400,7 @@ public class OsmandRenderer {
 
 					TagValuePair pair = o.getMapIndex().decodeType(wholeType);
 					if (pair != null) {
-						render.setTagValueZoomLayer(pair.tag, pair.value, rc.zoom, layer);
+						render.setTagValueZoomLayer(pair.tag, pair.value, rc.zoom, layer, o);
 						render.setBooleanFilter(render.ALL.R_AREA, o.isArea());
 						render.setBooleanFilter(render.ALL.R_POINT, o.getPointsLength() == 1);
 						render.setBooleanFilter(render.ALL.R_CYCLE, o.isCycle());
@@ -483,7 +483,7 @@ public class OsmandRenderer {
 		Path path = null;
 		
 		// rc.main.color = Color.rgb(245, 245, 245);
-		render.setInitialTagValueZoom(pair.tag, pair.value, zoom);
+		render.setInitialTagValueZoom(pair.tag, pair.value, zoom, obj);
 		boolean rendered = render.search(RenderingRulesStorage.POLYGON_RULES);
 		if(!rendered || !updatePaint(render, paint, 0, true, rc)){
 			return;
@@ -605,7 +605,7 @@ public class OsmandRenderer {
 		if(render == null || pair == null){
 			return;
 		}
-		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
+		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom, obj);
 		render.search(RenderingRulesStorage.POINT_RULES);
 		
 		String resId = render.getStringPropertyValue(render.ALL.R_ICON);
@@ -670,7 +670,7 @@ public class OsmandRenderer {
 		if(length < 2){
 			return;
 		}
-		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
+		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom, obj);
 		render.setIntFilter(render.ALL.R_LAYER, layer);
 		boolean rendered = render.search(RenderingRulesStorage.LINE_RULES);
 		if(!rendered || !updatePaint(render, paint, 0, false, rc)){

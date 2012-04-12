@@ -149,11 +149,8 @@ message MapData {
   // repeated array<pair<tagId : raw_var_int, indexOfStringInParent : raw_var_int> >
   optional bytes stringNames = 10; // in parent block
 
-
   required sint64 id = 12; // delta encoded
 
-  optional uint32 rasterTileX = 13;
-  optional uint32 rasterTileY = 14;
   optional bytes rasterBytes = 15;
 
 }

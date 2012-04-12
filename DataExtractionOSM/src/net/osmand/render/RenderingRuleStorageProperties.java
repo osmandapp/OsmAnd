@@ -47,6 +47,7 @@ public class RenderingRuleStorageProperties {
 	public static final String VALUE = "value";
 	public static final String MINZOOM = "minzoom";
 	public static final String MAXZOOM = "maxzoom";
+	public static final String ADDITIONAL = "additional";
 	public static final String NIGHT_MODE = "nightMode";
 	public static final String TEXT_DY = "textDy";
 	public static final String TEXT_SIZE = "textSize";
@@ -92,6 +93,7 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_TAG;
 	public RenderingRuleProperty R_VALUE;
 	public RenderingRuleProperty R_MINZOOM;
+	public RenderingRuleProperty R_ADDITIONAL;
 	public RenderingRuleProperty R_SHADOW_LEVEL;
 	public RenderingRuleProperty R_MAXZOOM;
 	public RenderingRuleProperty R_NIGHT_MODE;
@@ -123,6 +125,7 @@ public class RenderingRuleStorageProperties {
 	public void createDefaultRenderingRuleProperties() {
 		R_TAG = registerRuleInternal(RenderingRuleProperty.createInputStringProperty(TAG));
 		R_VALUE = registerRuleInternal(RenderingRuleProperty.createInputStringProperty(VALUE));
+		R_ADDITIONAL = registerRuleInternal(RenderingRuleProperty.createAdditionalStringProperty(ADDITIONAL));
 		R_MINZOOM = registerRuleInternal(RenderingRuleProperty.createInputGreaterIntProperty(MINZOOM));
 		R_MAXZOOM = registerRuleInternal(RenderingRuleProperty.createInputLessIntProperty(MAXZOOM));
 		R_NIGHT_MODE = registerRuleInternal(RenderingRuleProperty.createInputBooleanProperty(NIGHT_MODE));

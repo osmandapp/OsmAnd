@@ -656,4 +656,7 @@
 	</category>
 	
 	<category name="osmwiki" poi_tag="osmwiki" poi_category="osmwiki"/>
+	
+	<category name="tiles">
+	</category>
 </osmand_types>

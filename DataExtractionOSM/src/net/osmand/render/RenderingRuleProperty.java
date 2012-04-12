@@ -2,6 +2,7 @@ package net.osmand.render;
 
 
 import net.osmand.LogUtil;
+import net.osmand.binary.BinaryMapDataObject;
 
 import org.apache.commons.logging.Log;
 
@@ -110,14 +111,14 @@ public class RenderingRuleProperty {
 		return type == INT_TYPE  || type == STRING_TYPE || type == COLOR_TYPE || type == BOOLEAN_TYPE; 
 	}
 	
-	public boolean accept(int ruleValue, int renderingProperty){
+	public boolean accept(int ruleValue, int renderingProperty, RenderingRuleSearchRequest req){
 		if(!isIntParse() || !input){
 			return false;
 		}
 		return ruleValue == renderingProperty;
 	}
 	
-	public boolean accept(float ruleValue, float renderingProperty){
+	public boolean accept(float ruleValue, float renderingProperty, RenderingRuleSearchRequest req){
 		if(type != FLOAT_TYPE || !input){
 			return false;
 		}
@@ -209,7 +210,7 @@ public class RenderingRuleProperty {
 	public static RenderingRuleProperty createInputLessIntProperty(String name){
 		return new RenderingRuleProperty(name, INT_TYPE, true) {
 			@Override
-			public boolean accept(int ruleValue, int renderingProperty) {
+			public boolean accept(int ruleValue, int renderingProperty, RenderingRuleSearchRequest req) {
 				if(!isIntParse() || !input){
 					return false;
 				}
@@ -221,11 +222,36 @@ public class RenderingRuleProperty {
 	public static RenderingRuleProperty createInputGreaterIntProperty(String name){
 		return new RenderingRuleProperty(name, INT_TYPE, true) {
 			@Override
-			public boolean accept(int ruleValue, int renderingProperty) {
+			public boolean accept(int ruleValue, int renderingProperty, RenderingRuleSearchRequest req) {
 				if(!isIntParse() || !input){
 					return false;
 				}
 				return ruleValue <= renderingProperty;
+			}
+		};
+	}
+	
+	public static RenderingRuleProperty createAdditionalStringProperty(String name) {
+		return new RenderingRuleProperty(name, STRING_TYPE, true) {
+			@Override
+			public boolean accept(int ruleValue, int renderingProperty, RenderingRuleSearchRequest req) {
+				BinaryMapDataObject obj = req.getObject();
+				if (obj == null) {
+					return true;
+				}
+				String val = req.getStorage().getStringValue(ruleValue);
+				int i = val.indexOf('=');
+				if (i != -1) {
+					String ts = val.substring(0, i);
+					String vs = val.substring(i + 1);
+					Integer ruleInd = req.getObject().getMapIndex().getRule(ts, vs);
+					if (ruleInd != null) {
+						if (req.getObject().containsAdditionalType(ruleInd)) {
+							return true;
+						}
+					}
+				}
+				return false;
 			}
 		};
 	}

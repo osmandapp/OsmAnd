@@ -303,9 +303,9 @@ public class TextRenderer {
 		}
 	}
 	
-	private void createTextDrawInfo(RenderingRuleSearchRequest render, RenderingContext rc, TagValuePair pair, float xMid, float yMid,
+	private void createTextDrawInfo(BinaryMapDataObject o, RenderingRuleSearchRequest render, RenderingContext rc, TagValuePair pair, float xMid, float yMid,
 			Path path, PointF[] points, String name, String tagName) {
-		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom);
+		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom, o);
 		render.setIntFilter(render.ALL.R_TEXT_LENGTH, name.length());
 		render.setStringFilter(render.ALL.R_NAME_TAG, tagName);
 		if(render.search(RenderingRulesStorage.TEXT_RULES)){
@@ -345,7 +345,7 @@ public class TextRenderer {
 				@Override
 				public boolean execute(int tag, String name) {
 					if (name != null && name.trim().length() > 0) {
-						createTextDrawInfo(render, rc, pair, xMid, yMid, path, points, name, tag == obj.getMapIndex().nameEncodingType ? ""
+						createTextDrawInfo(obj, render, rc, pair, xMid, yMid, path, points, name, tag == obj.getMapIndex().nameEncodingType ? ""
 								: obj.getMapIndex().decodeType(tag).tag);
 					}
 					return true;
