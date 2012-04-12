@@ -44,14 +44,11 @@ import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.StatFs;
 import android.text.Editable;
@@ -69,8 +66,6 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
@@ -104,25 +99,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	private EditText filterText;
 	private DownloadFileHelper downloadFileHelper = null;
 	
-	private GoogleAnalyticsTracker tracker;
-
-
-	private void setCustomVarsToTracker(){
-		tracker.setCustomVar(1, "App", Version.getFullVersion(this));
-		tracker.setCustomVar(2, "Device", Build.DEVICE);
-		tracker.setCustomVar(3, "Brand", Build.BRAND);
-		tracker.setCustomVar(4, "Model", Build.MODEL);
-		tracker.setCustomVar(5, "Package", getPackageName());
-		try {
-			PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
-			if (info != null) {
-				tracker.setCustomVar(6, "Version name", info.versionName);
-				tracker.setCustomVar(7, "Version code", info.versionCode+"");
-			}
-		} catch (NameNotFoundException e) {
-		}
-	}
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -133,11 +109,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.local_index_download, R.drawable.tab_download_screen_icon);
 		setContentView(R.layout.download_index);
 		titleBar.afterSetContentView();
-	    tracker = GoogleAnalyticsTracker.getInstance();
-	    // Start the tracker in manual dispatch mode...
-	    tracker.startNewSession(getString(R.string.ga_api_key), 60, this);
-	    setCustomVarsToTracker();
-	    tracker.trackPageView("/download.activity?" +Version.getVersionAsURLParam(this));
 		
 		downloadFileHelper = new DownloadFileHelper(this);
 		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener(){
@@ -365,15 +336,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			case DIALOG_PROGRESS_FILE:
 				DownloadIndexesAsyncTask task = new DownloadIndexesAsyncTask(new ProgressDialogImplementation(progressFileDlg,true));
 				String[] indexes = entriesToDownload.keySet().toArray(new String[0]);
-				String v = Version.getAppName(this);
-				if(Version.isProductionVersion(this)){
-					v = Version.getFullVersion(this);
-				} else {
-					v +=" test";
-				}
-				for(String index : indexes) {
-					tracker.trackEvent(v, Version.getAppName(this), index, 1);
-				}
 				task.execute(indexes);
 				break;
 			case DIALOG_PROGRESS_LIST:
@@ -557,7 +519,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		tracker.stopSession();
 		if(isFinishing()){
 			downloadFileHelper.setInterruptDownloading(true);
 		}
@@ -626,8 +587,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			}
 			updateLoadedFiles();
 			((DownloadIndexAdapter) getExpandableListAdapter()).notifyDataSetInvalidated();
-			tracker.dispatch();
-			
 		}
 		
 		@Override
