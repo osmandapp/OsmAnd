@@ -302,22 +302,24 @@ public class BinaryRoutePlanner {
 	private double h(final RoutingContext ctx, int targetEndX, int targetEndY,
 			int startX, int startY) {
 		double distance = squareRootDist(startX, startY, targetEndX, targetEndY);
-		return distance / ctx.getRouter().getMaxDefaultSpeed(); // + distance * 0.5;
+		//TODO add possible turn time and barrier according the distance
+		return distance / ctx.getRouter().getMaxDefaultSpeed();
 	}
 	
-	protected static double h(RoutingContext ctx, double distToFinalPoint, RouteSegment next) {
+	protected static double h(RoutingContext ctx, double distToFinalPoint, RouteSegment actual, RouteSegment next) {
 		double result = distToFinalPoint / ctx.getRouter().getMaxDefaultSpeed();
 		if(ctx.isUseDynamicRoadPrioritising() && next != null){
 			double priority = ctx.getRouter().getRoadPriorityToCalculateRoute(next.road);
 			result /= priority;
 		}
-		return result; // + distToFinalPoint * 0.5;
+		//TODO add possible turn time and barrier according the distance
+		return result; 
 	}
 	
 	private double g(RoutingContext ctx, double distOnRoadToPass,
 			RouteSegment segment, int segmentEnd, double obstaclesTime,
 			RouteSegment next, double speed) {
-		double result = segment.distanceFromStart + distOnRoadToPass / speed; // + distOnRoadToPass*0.5;
+		double result = segment.distanceFromStart + distOnRoadToPass / speed;
 		// calculate turn time
 		result += ctx.getRouter().calculateTurnTime(segment, next, segmentEnd);
 		// add obstacles time
@@ -480,7 +482,8 @@ public class BinaryRoutePlanner {
 			
 			/* next.road.getId() >> 1 (3) != road.getId() >> 1 (3) - used that line for debug with osm map */
 			// road.id could be equal on roundabout, but we should accept them
-			if ((!visitedSegments.contains(nts) && processRoad) || oppositeConnectionFound) {
+			boolean alreadyVisited = visitedSegments.contains(nts);
+			if ((!alreadyVisited && processRoad) || oppositeConnectionFound) {
 				int type = -1;
 				if (!reverseWay) {
 					for (int i = 0; i < road.getRestrictionCount(); i++) {
@@ -525,7 +528,7 @@ public class BinaryRoutePlanner {
 						return oppSegment;
 					}
 					
-					double distanceToEnd = h(ctx, distToFinalPoint, next);
+					double distanceToEnd = h(ctx, distToFinalPoint, segment, next);
 
 					// Using A* routing algorithm
 					// g(x) - calculate distance to that point and calculate time
@@ -566,6 +569,33 @@ public class BinaryRoutePlanner {
 						}
 					}
 
+				}
+			} else if (alreadyVisited) {
+				//the segment was already visited! We need to follow better route.
+				if (segment.distanceFromStart < next.distanceFromStart) {
+					// Using A* routing algorithm
+					// g(x) - calculate distance to that point and calculate time
+					double speed = ctx.getRouter().defineSpeed(road);
+					if (speed == 0) {
+						speed = ctx.getRouter().getMinDefaultSpeed();
+					}
+					next.distanceFromStart = g(ctx, distOnRoadToPass, segment, segmentEnd, obstaclesTime, next, speed);
+					RouteSegment findAndReplace = next.parentRoute;
+					int theend = next.parentSegmentEnd;
+					next.parentRoute = segment;
+					next.parentSegmentEnd = segment.road.getPointsLength()-1; //TODO I don't understand yet the segments correctly, this might be not correct
+					//REPLACE all that are branches of the next.parentRoute, because better way was found.
+					//TODO check which segments are in priority queue and update it. Probably, it can currently confuse the queue implementation!
+					//TODO all leaves of branches that exists from the updateSegment should be updated and leaves also updated in the priority queue
+					// --- this will speed up a little because the branches should be 'faster'
+					for (Object s : visitedSegments.values()) {
+						//what about cycles???
+						RouteSegment updateSegment = (RouteSegment)s;
+						if (s != null && updateSegment.parentRoute == findAndReplace && updateSegment.parentSegmentEnd == theend && s != segment) {
+							updateSegment.parentRoute = segment;
+							updateSegment.parentSegmentEnd = segment.road.getPointsLength()-1; //TODO I don't understand yet the segments correctly, this might be not correct
+						}
+					}
 				}
 			}
 			next = next.next;

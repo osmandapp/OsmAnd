@@ -33,13 +33,13 @@ public class CarRouter extends VehicleRouter {
 		//car are able to enter in highway=pedestrian with restrictions
 
 		autoPriorityValues.put("motorway", 1.5);
-		autoPriorityValues.put("motorway_link", 0.9);
+		autoPriorityValues.put("motorway_link", 1.3); 
 		autoPriorityValues.put("trunk", 1.5);
-		autoPriorityValues.put("trunk_link", 0.9);
+		autoPriorityValues.put("trunk_link", 1.3);
 		autoPriorityValues.put("primary", 1.3d);
-		autoPriorityValues.put("primary_link", 0.9d);
+		autoPriorityValues.put("primary_link", 1.1d);
 		autoPriorityValues.put("secondary", 1.1d);
-		autoPriorityValues.put("secondary_link", 0.9d);
+		autoPriorityValues.put("secondary_link", 1.0d);
 		autoPriorityValues.put("tertiary", 0.85d);
 		autoPriorityValues.put("tertiary_link", 0.85d);
 		autoPriorityValues.put("unclassified", 0.7d);
