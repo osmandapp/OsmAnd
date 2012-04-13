@@ -77,9 +77,7 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.Toast;
 
-import com.google.android.apps.analytics.easytracking.TrackedActivity;
-
-public class MapActivity extends TrackedActivity implements IMapLocationListener, SensorEventListener {
+public class MapActivity extends Activity implements IMapLocationListener, SensorEventListener {
 
 	private static final String GPS_STATUS_ACTIVITY = "com.eclipsim.gpsstatus2.GPSStatus"; //$NON-NLS-1$
 	private static final String GPS_STATUS_COMPONENT = "com.eclipsim.gpsstatus2"; //$NON-NLS-1$
@@ -98,8 +96,8 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 	private static final int LOST_LOCATION_MSG_ID = 10;
 	private static final long LOST_LOCATION_CHECK_DELAY = 20000;
 	
-	private static final int LONG_KEYPRESS_MSG_ID = 28;
-	private static final int LONG_KEYPRESS_DELAY = 500;
+//	private static final int LONG_KEYPRESS_MSG_ID = 28;
+//	private static final int LONG_KEYPRESS_DELAY = 500;
 	
 	private long lastTimeAutoZooming = 0;
 	
@@ -142,6 +140,7 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		Notification notification = new Notification(R.drawable.icon, "", //$NON-NLS-1$
 				System.currentTimeMillis());
+		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 		notification.setLatestEventInfo(this, Version.getAppName(this),
 				getString(R.string.go_back_to_osmand), PendingIntent.getActivity(
 						this, 0, notificationIndent,
@@ -240,6 +239,8 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 	@Override
 	protected void onResume() {
 		super.onResume();
+		cancelNotification();
+		
 		if (settings.MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
 			setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
 			// can't return from this method we are not sure if activity will be recreated or not
@@ -589,10 +590,15 @@ public class MapActivity extends TrackedActivity implements IMapLocationListener
 		super.onDestroy();
 		savingTrackHelper.close();
 		routeAnimation.close();
-		if(mNotificationManager != null){
-			mNotificationManager.cancel(APP_NOTIFICATION_ID);
-		}
+		cancelNotification();
 		getMyApplication().getResourceManager().getMapTileDownloader().removeDownloaderCallback(mapView);
+	}
+
+	private void cancelNotification() {
+		if(mNotificationManager == null){
+			mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		}
+		mNotificationManager.cancel(APP_NOTIFICATION_ID);
 	}
 
 

@@ -1,9 +1,8 @@
 package net.osmand.access;
 
+import android.app.Activity;
 import android.view.MotionEvent;
 import android.view.View;
-
-import com.google.android.apps.analytics.easytracking.TrackedActivity;
 
 // Provide some additional accessibility means for activity view elements.
 //
@@ -11,7 +10,7 @@ import com.google.android.apps.analytics.easytracking.TrackedActivity;
 // and then add view elements you wish to be accessible
 // to the accessibleContent list.
 //
-public class AccessibleTrackedActivity extends TrackedActivity implements AccessibleContent.Callback {
+public class AccessibleTrackedActivity extends Activity implements AccessibleContent.Callback {
 
     // List of accessible views. Use accessibleContent.add(element)
     // to add element to it.

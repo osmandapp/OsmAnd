@@ -14,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.views.OsmandMapTileView;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.location.Location;
@@ -27,9 +28,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.google.android.apps.analytics.easytracking.TrackedActivity;
-
-public class NavigatePointActivity extends TrackedActivity implements SearchActivityChild {
+public class NavigatePointActivity extends Activity implements SearchActivityChild {
 	Dialog dlg;
 	MapActivity activity; 
 	int currentFormat = Location.FORMAT_DEGREES;
