@@ -39,6 +39,7 @@ import net.osmand.plus.AsyncLoadingThread.TransportLoadRequest;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.plus.render.WikimapiaRenderer;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -71,6 +72,8 @@ public class ResourceManager {
 	public static final String TILES_PATH = APP_DIR+"tiles/"; //$NON-NLS-1$
 	public static final String TEMP_SOURCE_TO_LOAD = "temp"; //$NON-NLS-1$
 	public static final String VECTOR_MAP = "#vector_map"; //$NON-NLS-1$
+	public static final String WIKIMAPIA_XML_TILE = ".xml.gz"; //$NON-NLS-1$
+	public static final String TILE_FILE_EXT = ".tile"; //$NON-NLS-1$
 	
 	
 	private static final Log log = LogUtil.getLog(ResourceManager.class);
@@ -167,7 +170,7 @@ public class ResourceManager {
 			for(File c : f.listFiles()){
 				indexImageTilesFS(prefix +f.getName() +"/" , c); //$NON-NLS-1$
 			}
-		} else if(f.getName().endsWith(".tile")){ //$NON-NLS-1$
+		} else if(f.getName().endsWith(TILE_FILE_EXT)){
 			imagesOnFS.put(prefix + f.getName(), Boolean.TRUE);
 		} else if(f.getName().endsWith(".sqlitedb")){ //$NON-NLS-1$
 			// nothing to do here
@@ -267,7 +270,7 @@ public class ResourceManager {
 			builder.append('/');
 		}
 		builder.append(zoom).append('/').append(x).append('/').append(y).
-				append(map == null ? ".jpg" : map.getTileFormat()).append(".tile"); //$NON-NLS-1$ //$NON-NLS-2$
+				append(map == null ? ".jpg" : map.getTileFormat()).append(TILE_FILE_EXT); //$NON-NLS-1$
 		return builder.toString();
 	}
 	
@@ -309,7 +312,7 @@ public class ResourceManager {
 				}
 			}
 			TileLoadDownloadRequest req = new TileLoadDownloadRequest(dirWithTiles, url, toSave, 
-					tileId, map, x, y, zoom, map.getTileFormat().equals(".xml"));
+					tileId, map, x, y, zoom, map.getTileFormat().equals(WIKIMAPIA_XML_TILE));
 			if(sync){
 				return getRequestedImageTile(req);
 			} else {
@@ -344,7 +347,11 @@ public class ResourceManager {
 				File en = new File(req.dirWithTiles, req.tileId);
 				if (en.exists()) {
 					try {
-						bmp = BitmapFactory.decodeFile(en.getAbsolutePath());
+						if(en.getAbsolutePath().endsWith(WIKIMAPIA_XML_TILE + TILE_FILE_EXT)) {
+							bmp = WikimapiaRenderer.render(en.getAbsolutePath(), req.xTile, req.yTile, req.zoom);
+						} else {
+							bmp = BitmapFactory.decodeFile(en.getAbsolutePath());
+						}
 					} catch (OutOfMemoryError e) {
 						log.error("Out of memory error", e); //$NON-NLS-1$
 						clearTiles();

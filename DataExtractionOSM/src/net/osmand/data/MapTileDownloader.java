@@ -28,6 +28,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.Result;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.zip.GZIPOutputStream;
 
 
 import net.osmand.Algoritms;
@@ -271,7 +273,7 @@ public class MapTileDownloader {
 				rootNode = null;
 
 				fileToSave.getParentFile().mkdirs();
-				FileOutputStream out = new FileOutputStream(fileToSave);
+				OutputStream out = new GZIPOutputStream(new FileOutputStream(fileToSave));
 				out.write(("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<folder total=\"" + total + "\">").getBytes("UTF-8"));
 
 				StreamResult xmlOut = new StreamResult(out);
