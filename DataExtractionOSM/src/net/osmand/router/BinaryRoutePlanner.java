@@ -2,6 +2,7 @@ package net.osmand.router;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
+import gnu.trove.procedure.TObjectProcedure;
 
 import java.io.IOException;
 import java.text.MessageFormat;
@@ -580,22 +581,26 @@ public class BinaryRoutePlanner {
 						speed = ctx.getRouter().getMinDefaultSpeed();
 					}
 					next.distanceFromStart = g(ctx, distOnRoadToPass, segment, segmentEnd, obstaclesTime, next, speed);
-					RouteSegment findAndReplace = next.parentRoute;
-					int theend = next.parentSegmentEnd;
+					//TODO calculate also the H heuristic, if this segment is in priority queue
+					final RouteSegment findAndReplace = next.parentRoute;
+					final RouteSegment actual = segment;
+					final int theend = next.parentSegmentEnd;
 					next.parentRoute = segment;
 					next.parentSegmentEnd = segment.road.getPointsLength()-1; //TODO I don't understand yet the segments correctly, this might be not correct
 					//REPLACE all that are branches of the next.parentRoute, because better way was found.
 					//TODO check which segments are in priority queue and update it. Probably, it can currently confuse the queue implementation!
 					//TODO all leaves of branches that exists from the updateSegment should be updated and leaves also updated in the priority queue
 					// --- this will speed up a little because the branches should be 'faster'
-					for (Object s : visitedSegments.values()) {
-						//what about cycles???
-						RouteSegment updateSegment = (RouteSegment)s;
-						if (s != null && updateSegment.parentRoute == findAndReplace && updateSegment.parentSegmentEnd == theend && s != segment) {
-							updateSegment.parentRoute = segment;
-							updateSegment.parentSegmentEnd = segment.road.getPointsLength()-1; //TODO I don't understand yet the segments correctly, this might be not correct
+					visitedSegments.forEachValue(new TObjectProcedure<BinaryRoutePlanner.RouteSegment>() {
+						@Override
+						public boolean execute(RouteSegment updateSegment) {
+							if (updateSegment != null && updateSegment.parentRoute == findAndReplace && updateSegment.parentSegmentEnd == theend && updateSegment != actual) {
+								updateSegment.parentRoute = actual;
+								updateSegment.parentSegmentEnd = actual.road.getPointsLength()-1; //TODO I don't understand yet the segments correctly, this might be not correct
+							}
+							return false;
 						}
-					}
+					});
 				}
 			}
 			next = next.next;
