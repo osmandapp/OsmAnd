@@ -173,7 +173,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		
-		if (view.getZoom() >= startZoom || nightMode.isForce()) {
+		if (view.getZoom() >= startZoom) {
 			objects.clear();
 			resourceManager.searchAmenitiesAsync(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, view.getZoom(), filter, objects);
 			int r = getRadiusPoi(view.getZoom());

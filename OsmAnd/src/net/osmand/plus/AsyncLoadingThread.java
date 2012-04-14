@@ -267,8 +267,17 @@ public class AsyncLoadingThread extends Thread {
 			};
 		}
 
+		private boolean repoHasChange() {
+			for (AmenityIndexRepository r : res) {
+				if (r.hasChange()) {
+					r.clearChange();
+					return true;
+				}
+			}
+			return false;
+		}
 		public boolean recalculateRequest(AmenityLoadRequest req) {
-			if (this.zoom != req.zoom || !Algoritms.objectEquals(this.filter, req.filter)) {
+			if (this.zoom != req.zoom || !Algoritms.objectEquals(this.filter, req.filter) || req.repoHasChange()) {
 				return true;
 			}
 			return !isContains(req.topLatitude, req.leftLongitude, req.bottomLatitude, req.rightLongitude);

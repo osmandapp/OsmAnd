@@ -106,6 +106,14 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 	}
 
 	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (db != null) {
+			db.close();
+		}
+	}
+	
+	@Override
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
 			case DIALOG_PROGRESS_UPLOAD:

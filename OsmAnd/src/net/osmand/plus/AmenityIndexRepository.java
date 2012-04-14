@@ -27,5 +27,9 @@ public interface AmenityIndexRepository {
 
 	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom,
 			PoiFilter filter, ResultMatcher<Amenity> matcher);
+
+	public boolean hasChange();
+
+	public void clearChange();
 	
 }
