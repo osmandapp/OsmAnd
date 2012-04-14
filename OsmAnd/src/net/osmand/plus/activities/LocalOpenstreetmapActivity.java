@@ -19,8 +19,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -29,12 +27,13 @@ import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
-import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,14 +41,13 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 
 	/** dialogs **/
 	protected static final int DIALOG_PROGRESS_UPLOAD = 0;
+	protected static final int MENU_GROUP = 0;
 
 	private LocalOpenstreetmapAdapter listAdapter;
 
 	private OpenstreetmapsDbHelper db;
 
 	private OpenstreetmapRemoteUtil remote;
-
-	private ProgressDialog progressPointDlg = null;
 
 	protected OpenstreetmapPoint[] toUpload;
 
@@ -60,37 +58,23 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		setContentView(R.layout.local_openstreetmap);
 		listAdapter = new LocalOpenstreetmapAdapter();
 
-		getExpandableListView().setOnChildClickListener(new OnChildClickListener() {
-			
-			@Override
-			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-				final OpenstreetmapPoint point = (OpenstreetmapPoint) listAdapter.getChild(groupPosition, childPosition);
-				showContextMenu(point);
-				return true;
-			}
-		});
 		getExpandableListView().setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
 			@Override
 			public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 				long packedPos = ((ExpandableListContextMenuInfo)menuInfo).packedPosition;
 				int group = ExpandableListView.getPackedPositionGroup(packedPos);
 				int child = ExpandableListView.getPackedPositionChild(packedPos);
+				MenuInflater inflater = getMenuInflater();
 				if (child >= 0 && group >= 0) {
-					final OpenstreetmapPoint point = (OpenstreetmapPoint) listAdapter.getChild(group, child);
-					showContextMenu(point);
+				    inflater.inflate(R.menu.localosm_child, menu);
+				} else if (group >= 0) { //group menu
+				    inflater.inflate(R.menu.localosm_group, menu);
 				}
 			}
 		});
-		
 		setListAdapter(listAdapter);
 
 		db = new OpenstreetmapsDbHelper(this);
-		List<OpenstreetmapPoint> l = db.getOpenstreetmapPoints();
-		android.util.Log.d(LogUtil.TAG, "List of POI " + l.size() + " length");
-		for (OpenstreetmapPoint p : l) {
-			listAdapter.addOpenstreetmapPoint(p);
-		}
-		listAdapter.notifyDataSetChanged();
 
 		remote = new OpenstreetmapRemoteUtil(this, this.getWindow().getDecorView());
 
@@ -99,12 +83,53 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 
 			@Override
 			public void onClick(View v) {
+				//NOTE, the order of upload is important, there can be more edits per one POI!!
 				toUpload = listAdapter.values().toArray(new OpenstreetmapPoint[0]);
 				showDialog(DIALOG_PROGRESS_UPLOAD);
 			}
 		});
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		listAdapter.clear();
+		List<OpenstreetmapPoint> l = db.getOpenstreetmapPoints();
+		android.util.Log.d(LogUtil.TAG, "List of POI " + l.size() + " length");
+		for (OpenstreetmapPoint p : l) {
+			listAdapter.addOpenstreetmapPoint(p);
+		}
+		listAdapter.notifyDataSetChanged();
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		long packedPos = ((ExpandableListContextMenuInfo)item.getMenuInfo()).packedPosition;
+		int group = ExpandableListView.getPackedPositionGroup(packedPos);
+		int child = ExpandableListView.getPackedPositionChild(packedPos);
+	    switch (item.getItemId()) {
+	        case R.id.showpoi:
+				OsmandSettings settings = OsmandApplication.getSettings();
+				OpenstreetmapPoint info = (OpenstreetmapPoint) listAdapter.getChild(group, child);
+				settings.setMapLocationToShow(info.getLatitude(), info.getLongitude(), settings.getLastKnownMapZoom());
+				MapActivity.launchMapActivityMoveToTop(LocalOpenstreetmapActivity.this);
+	            return true;
+	        case R.id.deletepoimod:
+				info = (OpenstreetmapPoint) listAdapter.getChild(group, child);
+				listAdapter.delete(info);
+	            return true;
+	        case R.id.uploadpoimods:
+				List<OpenstreetmapPoint> list = listAdapter.data.get(group);
+				if (list != null) {
+					toUpload = list.toArray(new OpenstreetmapPoint[] {});
+					showDialog(DIALOG_PROGRESS_UPLOAD);
+					return true;
+				}
+	        default:
+	            return super.onContextItemSelected(item);
+	    }
+	}
+	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
@@ -117,12 +142,11 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
 			case DIALOG_PROGRESS_UPLOAD:
-				progressPointDlg = ProgressDialogImplementation.createProgressDialog(
+				return ProgressDialogImplementation.createProgressDialog(
 						LocalOpenstreetmapActivity.this,
 						getString(R.string.uploading),
 						getString(R.string.local_openstreetmap_uploading_poi),
 						ProgressDialog.STYLE_HORIZONTAL).getDialog();
-				return progressPointDlg;
 		}
 		return null;
 	}
@@ -131,7 +155,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 	protected void onPrepareDialog(int id, Dialog dialog, Bundle args) {
 		switch (id) {
 		case DIALOG_PROGRESS_UPLOAD:
-			UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(progressPointDlg, remote,
+			UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask((ProgressDialog) dialog, remote,
 					toUpload.length);
 			uploadTask.execute(toUpload);
 			break;
@@ -214,45 +238,9 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 
 	}
 	
-	private void showContextMenu(final OpenstreetmapPoint info) {
-		Builder builder = new AlertDialog.Builder(this);
-		final List<Integer> menu = new ArrayList<Integer>();
-
-		menu.add(R.string.local_openstreetmap_show_poi);
-		menu.add(R.string.local_openstreetmap_upload);
-		menu.add(R.string.local_openstreetmap_delete);
-
-		String[] values = new String[menu.size()];
-		for (int i = 0; i < values.length; i++) {
-			values[i] = getString(menu.get(i));
-		}
-		builder.setItems(values, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				int resId = menu.get(which);
-				if (info != null) {
-					if (resId == R.string.local_openstreetmap_show_poi) {
-						OsmandSettings settings = OsmandApplication.getSettings();
-						settings.setMapLocationToShow(info.getLatitude(), info.getLongitude(), settings.getLastKnownMapZoom());
-						MapActivity.launchMapActivityMoveToTop(LocalOpenstreetmapActivity.this);
-					} else if (resId == R.string.local_openstreetmap_delete) {
-						listAdapter.delete(info);
-					} else if (resId == R.string.local_openstreetmap_upload) {
-						toUpload = new OpenstreetmapPoint[]{info};
-						showDialog(DIALOG_PROGRESS_UPLOAD);
-					}
-				}
-			}
-			});
-
-		builder.show();
-	}
-	
-
 	protected class LocalOpenstreetmapAdapter extends BaseExpandableListAdapter {
-		Map<String, List<OpenstreetmapPoint>> data = new LinkedHashMap<String, List<OpenstreetmapPoint>>();
-		List<String> category = new ArrayList<String>();
-		List<String> filterCategory = null;
+		Map<Long, List<OpenstreetmapPoint>> data = new LinkedHashMap<Long, List<OpenstreetmapPoint>>();
+		List<Long> category = new ArrayList<Long>();
 		
 
 		public LocalOpenstreetmapAdapter() {
@@ -261,7 +249,6 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		public void clear() {
 			data.clear();
 			category.clear();
-			filterCategory = null;
 			notifyDataSetChanged();
 		}
 
@@ -277,32 +264,25 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 			final AmenityIndexRepositoryOdb repo = getMyApplication().getResourceManager().getUpdatablePoiDb();
 			android.util.Log.d(LogUtil.TAG, "Delete " + i);
 			db.deleteOpenstreetmap(i);
-			String c = i.getType();
+			Long c = i.getId();
 			if(c != null){
-				data.get(c).remove(i);
-				// We need to re-insert the POI if it is a delete or modify
+				List<OpenstreetmapPoint> list = data.get(c);
+				list.remove(i);
+				if (list.isEmpty()) {
+					data.remove(c);
+					category.remove(c);
+				}
 				repo.deleteAmenities(i.getId() << 1);
+				// We need to re-insert the POI if it is a delete or modify
+				for (OpenstreetmapPoint p : list) {
+					remote.updateNodeInIndexes(LocalOpenstreetmapActivity.this, p.getAction(), p.getEntity(), p.getEntity());
+				}
 				repo.clearCache();
 			}
 			listAdapter.notifyDataSetChanged();
 		}
 		
 		public void cancelFilter(){
-			filterCategory = null;
-			notifyDataSetChanged();
-		}
-		
-		public void filterCategories(String... types) {
-			List<String> filter = new ArrayList<String>();
-			List<String> source = filterCategory == null ? category : filterCategory;
-			for (String info : source) {
-				for (String ts : types) {
-					if (info.compareTo(ts) == 0) {
-						filter.add(info);
-					}
-				}
-			}
-			filterCategory = filter;
 			notifyDataSetChanged();
 		}
 		
@@ -310,15 +290,15 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 			int found = -1;
 			// search from end
 			for (int i = category.size() - 1; i >= 0; i--) {
-				String cat = category.get(i);
-				if (cat.compareTo(info.getType()) == 0) {
+				Long cat = category.get(i);
+				if (cat.compareTo(info.getId()) == 0) {
 					found = i;
 					break;
 				}
 			}
 			if (found == -1) {
 				found = category.size();
-				category.add(info.getType());
+				category.add(info.getId());
 			}
 			if (!data.containsKey(category.get(found))) {
 				data.put(category.get(found), new ArrayList<OpenstreetmapPoint>());
@@ -328,7 +308,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 
 		@Override
 		public OpenstreetmapPoint getChild(int groupPosition, int childPosition) {
-			String cat = filterCategory != null ? filterCategory.get(groupPosition) : category.get(groupPosition);
+			Long cat = category.get(groupPosition);
 			return data.get(cat).get(childPosition);
 		}
 
@@ -362,12 +342,13 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		@Override
 		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 			View v = convertView;
-			String group = getGroup(groupPosition);
+			Long group = getGroup(groupPosition);
 			if (v == null) {
 				LayoutInflater inflater = getLayoutInflater();
 				v = inflater.inflate(net.osmand.plus.R.layout.local_openstreetmap_list_item_category, parent, false);
 			}
-			StringBuilder t = new StringBuilder(group);
+			StringBuilder t = new StringBuilder();
+			t.append(" id:").append(group);
 			TextView nameView = ((TextView) v.findViewById(R.id.local_openstreetmap_category_name));
 			t.append("  [").append(getChildrenCount(groupPosition));
 			if(getString(R.string.local_openstreetmap_items).length() > 0){
@@ -384,18 +365,18 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 
 		@Override
 		public int getChildrenCount(int groupPosition) {
-			String cat = filterCategory != null ? filterCategory.get(groupPosition) : category.get(groupPosition);
+			Long cat = category.get(groupPosition);
 			return data.get(cat).size();
 		}
 
 		@Override
-		public String getGroup(int groupPosition) {
-			return filterCategory == null ?  category.get(groupPosition)  : filterCategory.get(groupPosition);
+		public Long getGroup(int groupPosition) {
+			return category.get(groupPosition);
 		}
 
 		@Override
 		public int getGroupCount() {
-			return filterCategory == null ?  category.size() : filterCategory.size();
+			return category.size();
 		}
 
 		@Override
