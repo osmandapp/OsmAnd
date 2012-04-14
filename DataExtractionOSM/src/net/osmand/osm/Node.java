@@ -17,6 +17,12 @@ public class Node extends Entity implements Serializable {
 		this.longitude = longitude;
 	}
 	
+	public Node(Node n, long newId) {
+		super(n, newId);
+		this.latitude = n.latitude;
+		this.longitude = n.longitude;
+	}
+
 	public double getLatitude() {
 		return latitude;
 	}

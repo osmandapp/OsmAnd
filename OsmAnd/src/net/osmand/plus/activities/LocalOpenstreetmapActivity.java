@@ -12,6 +12,7 @@ import net.osmand.OpenstreetmapRemoteUtil;
 import net.osmand.OpenstreetmapUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.osm.EntityInfo;
+import net.osmand.osm.Node;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
 import net.osmand.plus.OpenstreetmapsDbHelper;
 import net.osmand.plus.OsmandApplication;
@@ -158,7 +159,9 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 				if (OpenstreetmapUtil.Action.CREATE != p.getAction()) {
 					entityInfo = remote.loadNode(p.getEntity());
 				}
-				if (remote.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo, p.getComment())) {
+				Node n;
+				if ((n = remote.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo, p.getComment())) != null) {
+					remote.updateNodeInIndexes(LocalOpenstreetmapActivity.this, p.getAction(), n, p.getEntity());
 					publishProgress(p);
 					uploaded++;
 				}
