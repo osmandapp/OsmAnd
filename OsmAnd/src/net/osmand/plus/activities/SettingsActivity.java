@@ -71,6 +71,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private Preference saveCurrentTrack;
 	private Preference testVoiceCommands;
 	private Preference localOpenstreetmapPoints;
+	private Preference bidforfix;
 
 	private EditTextPreference applicationDir;
 	private ListPreference applicationModePreference;
@@ -172,6 +173,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		String[] entrieValues;
 		PreferenceScreen screen = getPreferenceScreen();
 		osmandSettings = OsmandApplication.getSettings();
+
+//		BidForFixHelper bidForFixHelper = getMyApplication().getBidForFix();
+//		bidForFixHelper.generatePreferenceList(screen, getString(R.string.support_new_features), this);
 		
 		registerBooleanPreference(osmandSettings.SHOW_VIEW_ANGLE,screen); 
 		registerBooleanPreference(osmandSettings.USE_TRACKBALL_FOR_MOVEMENTS,screen);
@@ -354,8 +358,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		applicationDir.setOnPreferenceChangeListener(this);
 		localOpenstreetmapPoints = (Preference) screen.findPreference(OsmandSettings.LOCAL_OPENSTREETMAP_POINTS);
 		localOpenstreetmapPoints.setOnPreferenceClickListener(this);
-		
-		
+		bidforfix = (Preference) screen.findPreference("bidforfix");
+		bidforfix.setOnPreferenceClickListener(this);
 		
 		broadcastReceiver = new BroadcastReceiver(){
 			@Override
@@ -817,6 +821,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			return true;
 		} else if(preference == localOpenstreetmapPoints){
 			startActivity(new Intent(this, LocalOpenstreetmapActivity.class));
+			return true;
+		} else if(preference == bidforfix){
+			startActivity(new Intent(this, OsmandBidForFixActivity.class));
 			return true;
 		}
 		return false;

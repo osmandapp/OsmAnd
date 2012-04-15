@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="default_buttons_support">Support</string>
+	<string name="support_new_features">Support new features</string>
+
     <string name="show_ruler_level_descr">Display ruler on the map</string>
 	<string name="show_ruler_level">Display ruler</string>
 	
