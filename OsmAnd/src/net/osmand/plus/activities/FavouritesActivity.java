@@ -406,7 +406,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 						}
 						for(WptPt p : res.points){
 							if(!existedPoints.contains(p.name)){
-								String categoryName = FavouritesActivity.this.getString(R.string.favorite_default_category);
+								String categoryName = "";
 								int c;
 								String name = p.name;
 								if(name == null){
