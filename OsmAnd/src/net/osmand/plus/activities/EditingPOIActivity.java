@@ -21,7 +21,6 @@ import net.osmand.osm.OSMSettings.OSMTagKey;
 import net.osmand.osm.OpeningHoursParser;
 import net.osmand.osm.OpeningHoursParser.BasicDayOpeningHourRule;
 import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
-import net.osmand.plus.AmenityIndexRepositoryOdb;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -33,6 +32,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -138,7 +138,7 @@ public class EditingPOIActivity implements DialogProvider {
 					public void run() {
 						AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.poi_remove_success), Toast.LENGTH_LONG).show();
 						if(ctx.getMapView() != null){
-							ctx.getMapView().refreshMap();
+							ctx.getMapView().refreshMap(true);
 						}						
 					}
 				});
@@ -235,7 +235,8 @@ public class EditingPOIActivity implements DialogProvider {
 		((Button)dlg.findViewById(R.id.Cancel)).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				ctx.dismissDialog(dialogID);
+				//we must do remove, because there are two dialogs EDIT,CREATE using same variables!!
+				ctx.removeDialog(dialogID);
 			}
 		});
 		((Button)dlg.findViewById(R.id.Commit)).setOnClickListener(new View.OnClickListener(){
@@ -283,9 +284,9 @@ public class EditingPOIActivity implements DialogProvider {
 						AccessibleToast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_action_succeded_template), msg),
 								Toast.LENGTH_LONG).show();
 						if (ctx.getMapView() != null) {
-							ctx.getMapView().refreshMap();
+							ctx.getMapView().refreshMap(true);
 						}
-						ctx.dismissDialog(dialogID);
+						ctx.removeDialog(dialogID);
 					}
 				});
 			}
@@ -359,61 +360,34 @@ public class EditingPOIActivity implements DialogProvider {
 		return builder.create();
 	}
 	
-	
-	private void updateNodeInIndexes(OpenstreetmapUtil.Action action, Node n) {
-		final OsmandApplication app = ctx.getMyApplication();
-		final AmenityIndexRepositoryOdb repo = app.getResourceManager().getUpdatablePoiDb();
-		ctx.getMapView().post(new Runnable() {
-			
-			@Override
-			public void run() {
-				if (repo == null) {
-					AccessibleToast.makeText(app, app.getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_LONG).show();
-					return;
-				} else {
-					AccessibleToast.makeText(app, app.getString(R.string.update_poi_does_not_change_indexes), Toast.LENGTH_LONG).show();
-				}
-			}
-		});
-		
-		// delete all amenities with same id
-		if (OpenstreetmapUtil.Action.DELETE == action || OpenstreetmapUtil.Action.MODIFY == action) {
-			repo.deleteAmenities(n.getId() << 1);
-			repo.clearCache();
-		}
-		// add amenities
-		if (OpenstreetmapUtil.Action.DELETE != action) {
-			List<Amenity> ams = Amenity.parseAmenities(n, new ArrayList<Amenity>());
-			for (Amenity a : ams) {
-				repo.addAmenity(a);
-				repo.clearCache();
-			}
-		}
-
-	}
-	
-	
 	public void commitNode(final OpenstreetmapUtil.Action action, final Node n, final EntityInfo info, final String comment, final Runnable successAction) {
 		if (info == null && OpenstreetmapUtil.Action.CREATE != action) {
 			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();
 			return;
 		}
-		final ProgressDialog progress = ProgressDialog.show(ctx, ctx.getString(R.string.uploading), ctx.getString(R.string.uploading_data));
-		new Thread(new Runnable() {
-
+		new AsyncTask<Void, Void, Node>() {
+			ProgressDialog progress;
 			@Override
-			public void run() {
-				try {
-					if (openstreetmapUtil.commitNodeImpl(action, n, info, comment)) {
-						updateNodeInIndexes(action, n);
-						ctx.getMapView().post(successAction);
-					}
-				} finally {
-					progress.dismiss();
-				}
-
+			protected void onPreExecute() {
+				progress = ProgressDialog.show(ctx, ctx.getString(R.string.uploading), ctx.getString(R.string.uploading_data));
+				super.onPreExecute();
 			}
-		}, "EditingPoi").start(); //$NON-NLS-1$
+			@Override
+			protected Node doInBackground(Void... params) {
+				Node node = null;
+				if ((node = openstreetmapUtil.commitNodeImpl(action, n, info, comment)) != null) {
+					openstreetmapUtil.updateNodeInIndexes(ctx, action, node, n);
+				}
+				return node;
+			}
+			@Override
+			protected void onPostExecute(Node result) {
+				progress.dismiss();
+				if (result != null) {
+					successAction.run();
+				}
+			};
+		}.execute();
 	}
 
 

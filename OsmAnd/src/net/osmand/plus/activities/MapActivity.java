@@ -10,9 +10,9 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LogUtil;
 import net.osmand.Version;
+import net.osmand.access.AccessibleActivity;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
-import net.osmand.access.AccessibleTrackedActivity;
 import net.osmand.access.NavigationInfo;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
@@ -80,7 +80,7 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.Toast;
 
-public class MapActivity extends AccessibleTrackedActivity implements IMapLocationListener, SensorEventListener {
+public class MapActivity extends AccessibleActivity implements IMapLocationListener, SensorEventListener {
 
 	private static final String GPS_STATUS_ACTIVITY = "com.eclipsim.gpsstatus2.GPSStatus"; //$NON-NLS-1$
 	private static final String GPS_STATUS_COMPONENT = "com.eclipsim.gpsstatus2"; //$NON-NLS-1$
@@ -144,6 +144,7 @@ public class MapActivity extends AccessibleTrackedActivity implements IMapLocati
 		notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		Notification notification = new Notification(R.drawable.icon, "", //$NON-NLS-1$
 				System.currentTimeMillis());
+		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 		notification.setLatestEventInfo(this, Version.getAppName(this),
 				getString(R.string.go_back_to_osmand), PendingIntent.getActivity(
 						this, 0, notificationIndent,
@@ -243,6 +244,8 @@ public class MapActivity extends AccessibleTrackedActivity implements IMapLocati
 	@Override
 	protected void onResume() {
 		super.onResume();
+		cancelNotification();
+		
 		if (settings.MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
 			setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
 			// can't return from this method we are not sure if activity will be recreated or not
@@ -651,10 +654,15 @@ public class MapActivity extends AccessibleTrackedActivity implements IMapLocati
 		super.onDestroy();
 		savingTrackHelper.close();
 		routeAnimation.close();
-		if(mNotificationManager != null){
-			mNotificationManager.cancel(APP_NOTIFICATION_ID);
-		}
+		cancelNotification();
 		getMyApplication().getResourceManager().getMapTileDownloader().removeDownloaderCallback(mapView);
+	}
+
+	private void cancelNotification() {
+		if(mNotificationManager == null){
+			mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		}
+		mNotificationManager.cancel(APP_NOTIFICATION_ID);
 	}
 
 

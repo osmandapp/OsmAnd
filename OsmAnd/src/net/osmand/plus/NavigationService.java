@@ -122,7 +122,7 @@ public class NavigationService extends Service implements LocationListener {
 		};
 		registerReceiver(broadcastReceiver, new IntentFilter(OSMAND_STOP_SERVICE_ACTION));
 		Intent notificationIntent = new Intent(OSMAND_STOP_SERVICE_ACTION);
-		Notification notification = new Notification(R.drawable.icon, "", //$NON-NLS-1$
+		Notification notification = new Notification(R.drawable.bgs_icon, "", //$NON-NLS-1$
 				System.currentTimeMillis());
 		notification.flags = Notification.FLAG_NO_CLEAR;
 		notification.setLatestEventInfo(this, Version.getAppName(this),

@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.OpenstreetmapPoint;
@@ -88,7 +89,24 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 		}
 		return false;
 	}
-	
+
+	public boolean deleteAllPOIModifications(long id) {
+		checkOpenstreetmapPoints();
+		SQLiteDatabase db = getWritableDatabase();
+		if (db != null) {
+			db.execSQL("DELETE FROM " + OPENSTREETMAP_TABLE_NAME +
+					" WHERE " + OPENSTREETMAP_COL_ID + " = ?", new Object[] { id }); //$NON-NLS-1$ //$NON-NLS-2$
+			//remove all associated actions with that POI
+			for (Iterator<OpenstreetmapPoint> it = cachedOpenstreetmapPoints.iterator(); it.hasNext();) {
+				if (it.next().getId() == id) {
+					it.remove();
+				}
+			};
+			return true;
+		}
+		return false;
+	}
+
 	private void checkOpenstreetmapPoints(){
 		SQLiteDatabase db = getWritableDatabase();
 		if (db != null) {
@@ -117,6 +135,19 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 			}
 			query.close();
 		}
+	}
+
+	public long getMinID() {
+		SQLiteDatabase db = getReadableDatabase();
+		long minID = 0;
+		if (db != null) {
+			Cursor query = db.rawQuery("SELECT MIN(" + OPENSTREETMAP_COL_ID + ") FROM " + OPENSTREETMAP_TABLE_NAME, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			if (query.moveToFirst()) {
+				minID = query.getLong(0);
+			}
+			query.close();
+		}
+		return minID;
 	}
 
 }

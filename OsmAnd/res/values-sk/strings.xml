@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-<string name="show_ruler_level_descr">Zobrazí pravítko na mape</string>
+	<string name="default_buttons_support">Podpora</string>
+	<string name="support_new_features">Podporiť nové funkcie</string>
+	<string name="show_ruler_level_descr">Zobrazí pravítko na mape</string>
 	<string name="show_ruler_level">Zobraziť pravítko</string>
 
 	<string name="backToMenu">Späť na ponuku</string>

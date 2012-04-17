@@ -16,6 +16,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.SearchByNameFilter;
 import net.osmand.plus.activities.EditPOIFilterActivity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,14 +29,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.apps.analytics.easytracking.TrackedListActivity;
-
 
 /**
  * @author Maxim Frolov
  * 
  */
-public class SearchPoiFilterActivity extends TrackedListActivity {
+public class SearchPoiFilterActivity extends ListActivity {
 
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;

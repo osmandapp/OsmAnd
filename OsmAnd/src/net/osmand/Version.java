@@ -51,4 +51,14 @@ public class Version {
 			throw new IllegalStateException(e);
 		}
 	}
+	
+	public static String getVersionForTracker(Context ctx) {
+		String v = Version.getAppName(ctx);
+		if(Version.isProductionVersion(ctx)){
+			v = Version.getFullVersion(ctx);
+		} else {
+			v +=" test";
+		}
+		return v;
+	}
 }

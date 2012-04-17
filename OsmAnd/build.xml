@@ -38,9 +38,6 @@
          This file is an integral part of the build system for your
          application and should be checked into Version Control Systems. -->
     <loadproperties srcFile="project.properties" />
-	
-	<!-- specify java.compilerArgs if they were not specified -->
-	<property name="java.compilerargs" value=""/>
 
     <!-- quick check on sdk.dir -->
     <fail
@@ -161,7 +158,6 @@
                 <src path="${source.absolute.dir}" />
 		
 				<!-- osmchange -->
-				<compilerarg value="-Xlint"/>
 				<src path="${use.absolute.dir}" />
 				<exclude name="**/LogUtil.java" />
 				<exclude name="**/OsmStorageWriter.java" />
