@@ -16,6 +16,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import android.app.AlertDialog;
+import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -30,12 +31,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.android.apps.analytics.easytracking.TrackedListActivity;
-
 /**
  * 
  */
-public class FavouritesListActivity extends TrackedListActivity implements SearchActivityChild {
+public class FavouritesListActivity extends ListActivity implements SearchActivityChild {
 
 	public static final String SELECT_FAVORITE_POINT_INTENT_KEY = "SELECT_FAVORITE_POINT_INTENT_KEY"; 
 	public static final int SELECT_FAVORITE_POINT_RESULT_OK = 1;

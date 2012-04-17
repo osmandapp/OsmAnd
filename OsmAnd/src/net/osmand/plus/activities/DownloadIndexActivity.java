@@ -12,8 +12,6 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -46,12 +44,11 @@ import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.StatFs;
 import android.text.Editable;
@@ -69,8 +66,6 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
@@ -104,40 +99,16 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	private EditText filterText;
 	private DownloadFileHelper downloadFileHelper = null;
 	
-	private GoogleAnalyticsTracker tracker;
-
-
-	private void setCustomVarsToTracker(){
-		tracker.setCustomVar(1, "App", Version.getFullVersion(this));
-		tracker.setCustomVar(2, "Device", Build.DEVICE);
-		tracker.setCustomVar(3, "Brand", Build.BRAND);
-		tracker.setCustomVar(4, "Model", Build.MODEL);
-		tracker.setCustomVar(5, "Package", getPackageName());
-		try {
-			PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
-			if (info != null) {
-				tracker.setCustomVar(6, "Version name", info.versionName);
-				tracker.setCustomVar(7, "Version code", info.versionCode+"");
-			}
-		} catch (NameNotFoundException e) {
-		}
-	}
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if(downloadListIndexThread == null) {
-			downloadListIndexThread = new DownloadIndexListThread(Version.getVersionAsURLParam(this));
+			downloadListIndexThread = new DownloadIndexListThread(getPackageManager(), getAssets(),Version.getVersionAsURLParam(this));
 		}
 		// recreation upon rotation is prevented in manifest file
 		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.local_index_download, R.drawable.tab_download_screen_icon);
 		setContentView(R.layout.download_index);
 		titleBar.afterSetContentView();
-	    tracker = GoogleAnalyticsTracker.getInstance();
-	    // Start the tracker in manual dispatch mode...
-	    tracker.startNewSession(getString(R.string.ga_api_key), 60, this);
-	    setCustomVarsToTracker();
-	    tracker.trackPageView("/download.activity?" +Version.getVersionAsURLParam(this));
 		
 		downloadFileHelper = new DownloadFileHelper(this);
 		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener(){
@@ -223,7 +194,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if(item.getItemId() == RELOAD_ID){
 			//re-create the thread
-			downloadListIndexThread = new DownloadIndexListThread(Version.getVersionAsURLParam(this));
+			downloadListIndexThread = new DownloadIndexListThread(getPackageManager(), getAssets(),Version.getVersionAsURLParam(this));
 			downloadIndexList();
 		} else {
 			final DownloadIndexAdapter listAdapter = (DownloadIndexAdapter)getExpandableListAdapter();
@@ -233,7 +204,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 					IndexItem es = listAdapter.getChild(0, i);
 					if(!entriesToDownload.containsKey(es.getFileName())){
 						selected++;
-						entriesToDownload.put(es.getFileName(), createDownloadEntry(es));
+						entriesToDownload.put(es.getFileName(), es.createDownloadEntry(DownloadIndexActivity.this));
 					}
 				}
 				AccessibleToast.makeText(this, MessageFormat.format(getString(R.string.items_were_selected), selected), Toast.LENGTH_SHORT).show();
@@ -265,10 +236,14 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	private static class DownloadIndexListThread extends Thread {
 		private DownloadIndexActivity uiActivity = null;
 		private IndexFileList indexFiles = null;
-		private final String versionUrlParam; 
+		private final String versionUrlParam;
+		private final AssetManager amanager;
+		private final PackageManager pm; 
 		
-		public DownloadIndexListThread(String versionUrlParam){
+		public DownloadIndexListThread(PackageManager pm, AssetManager amanager, String versionUrlParam){
 			super("DownloadIndexes"); //$NON-NLS-1$
+			this.pm = pm;
+			this.amanager = amanager;
 			this.versionUrlParam = versionUrlParam;
 		}
 		public void setUiActivity(DownloadIndexActivity uiActivity) {
@@ -281,7 +256,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		
 		@Override
 		public void run() {
-			indexFiles = DownloadOsmandIndexesHelper.downloadIndexesListFromInternet(versionUrlParam);
+			indexFiles = DownloadOsmandIndexesHelper.getIndexesList(pm, amanager, versionUrlParam);
 			if(uiActivity != null) {
 				uiActivity.removeDialog(DIALOG_PROGRESS_LIST);
 				uiActivity.runOnUiThread(new Runnable() {
@@ -361,15 +336,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			case DIALOG_PROGRESS_FILE:
 				DownloadIndexesAsyncTask task = new DownloadIndexesAsyncTask(new ProgressDialogImplementation(progressFileDlg,true));
 				String[] indexes = entriesToDownload.keySet().toArray(new String[0]);
-				String v = Version.getAppName(this);
-				if(Version.isProductionVersion(this)){
-					v = Version.getFullVersion(this);
-				} else {
-					v +=" test";
-				}
-				for(String index : indexes) {
-					tracker.trackEvent(v, Version.getAppName(this), index, 1);
-				}
 				task.execute(indexes);
 				break;
 			case DIALOG_PROGRESS_LIST:
@@ -378,7 +344,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 					downloadListIndexThread.start();
 				} else if(downloadListIndexThread.getState() == Thread.State.TERMINATED){
 					// possibly exception occurred we don't have cache of files
-					downloadListIndexThread = new DownloadIndexListThread(Version.getVersionAsURLParam(this));
+					downloadListIndexThread = new DownloadIndexListThread(getPackageManager(), getAssets(),Version.getVersionAsURLParam(this));
 					downloadListIndexThread.setUiActivity(this);
 					downloadListIndexThread.start();
 				}
@@ -413,7 +379,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			return true;
 		}
 		
-		final DownloadEntry entry = createDownloadEntry(e);
+		final DownloadEntry entry = e.createDownloadEntry(DownloadIndexActivity.this);
 		if (entry != null) {
 			// if(!fileToUnzip.exists()){
 			// builder.setMessage(MessageFormat.format(getString(R.string.download_question), baseName, extractDateAndSize(e.getValue())));
@@ -491,76 +457,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		return files;
 	}
 
-	private DownloadEntry createDownloadEntry(IndexItem item) {
-		String fileName = item.getFileName();
-		File parent = null;
-		String toSavePostfix = null;
-		String toCheckPostfix = null;
-		boolean unzipDir = false;
-		boolean preventMediaIndexing = false;
-		
-		File externalStorageDirectory = OsmandApplication.getSettings().getExternalStorageDirectory();
-		if(fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)){
-			parent = new File(externalStorageDirectory, ResourceManager.APP_DIR);
-			toSavePostfix = BINARY_MAP_INDEX_EXT;
-			toCheckPostfix = BINARY_MAP_INDEX_EXT;
-		} else if(fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)){
-			parent = new File(externalStorageDirectory, ResourceManager.APP_DIR);
-			toSavePostfix = BINARY_MAP_INDEX_EXT_ZIP;
-			toCheckPostfix = BINARY_MAP_INDEX_EXT;
-		} else if(fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)){
-			parent = new File(externalStorageDirectory, ResourceManager.VOICE_PATH);
-			toSavePostfix = VOICE_INDEX_EXT_ZIP;
-			toCheckPostfix = ""; //$NON-NLS-1$
-			unzipDir = true;
-			preventMediaIndexing = true;
-		} else if(fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)){
-			parent = new File(externalStorageDirectory, ResourceManager.VOICE_PATH);
-			toSavePostfix = TTSVOICE_INDEX_EXT_ZIP;
-			toCheckPostfix = ""; //$NON-NLS-1$
-			unzipDir = true;
-		}
-		if(parent != null) {
-			parent.mkdirs();
-			// ".nomedia" indicates there are no pictures and no music to list in this dir for the Gallery and Music apps
-			if( preventMediaIndexing ) {				
-				try {
-					new File(parent, ".nomedia").createNewFile();//$NON-NLS-1$	
-				} catch (IOException e) {
-					// swallow io exception
-				} 
-			}
-		}
-		final DownloadEntry entry;
-		if(parent == null || !parent.exists()){
-			AccessibleToast.makeText(DownloadIndexActivity.this, getString(R.string.sd_dir_not_accessible), Toast.LENGTH_LONG).show();
-			entry = null;
-		} else {
-			entry = new DownloadEntry();
-			int ls = fileName.lastIndexOf('_');
-			entry.baseName = fileName.substring(0, ls);
-			entry.fileToSave = new File(parent, entry.baseName + toSavePostfix);
-			entry.unzip = unzipDir;
-			SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy"); //$NON-NLS-1$
-			try {
-				Date d = format.parse(item.getDate());
-				entry.dateModified = d.getTime();
-			} catch (ParseException e1) {
-			}
-			try {
-				entry.sizeMB = Double.parseDouble(item.getSize());
-			} catch (NumberFormatException e1) {
-			}
-			entry.parts = 1;
-			if(item.getParts() != null){
-				entry.parts = Integer.parseInt(item.getParts());
-			}
-			entry.fileToUnzip = new File(parent, entry.baseName + toCheckPostfix);
-		}
-		return entry;
-	}
-	
-	
 	protected void downloadFilesCheckFreeVersion() {
 		if (getPackageName().equals(FREE_VERSION_NAME)) {
 			int total = OsmandApplication.getSettings().NUMBER_OF_FREE_DOWNLOADS.get() + entriesToDownload.size();
@@ -623,7 +519,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		tracker.stopSession();
 		if(isFinishing()){
 			downloadFileHelper.setInterruptDownloading(true);
 		}
@@ -692,8 +587,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			}
 			updateLoadedFiles();
 			((DownloadIndexAdapter) getExpandableListAdapter()).notifyDataSetInvalidated();
-			tracker.dispatch();
-			
 		}
 		
 		@Override
@@ -707,9 +600,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 					if (entry != null) {
 						String indexOfAllFiles = filesToDownload.length <= 1 ? "" : (" [" + (i + 1) + "/"
 								+ filesToDownload.length + "]");
-						boolean result = downloadFileHelper.downloadFile(filename, 
-								entry.fileToSave, entry.fileToUnzip, entry.unzip, progress, entry.dateModified,
-								entry.parts, filesToReindex, indexOfAllFiles, this, forceWifi);
+						boolean result = entry.downloadFile(downloadFileHelper, filename, filesToReindex, progress, indexOfAllFiles, this, forceWifi, getAssets()); 
 						if (result) {
 							entriesToDownload.remove(filename);
 							downloads.set(downloads.get() + 1);
@@ -755,7 +646,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		}
 	}
 	
-	private static class DownloadEntry {
+	public static class DownloadEntry {
 		public File fileToSave;
 		public File fileToUnzip;
 		public boolean unzip;
@@ -763,6 +654,36 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		public double sizeMB;
 		public String baseName;
 		public int parts;
+		
+		public boolean downloadFile(DownloadFileHelper downloadFileHelper, String filename, List<File> filesToReindex,
+				IProgress progress, String indexOfAllFiles,
+				DownloadIndexesAsyncTask downloadIndexesAsyncTask,
+				boolean forceWifi, AssetManager assetManager) throws InterruptedException {
+			return 	downloadFileHelper.downloadFile(filename, 
+					fileToSave, fileToUnzip, unzip, progress, dateModified,
+					parts, filesToReindex, indexOfAllFiles, downloadIndexesAsyncTask, forceWifi);
+		}
+	}
+	
+	public static class AssetDownloadEntry extends DownloadEntry {
+		public AssetDownloadEntry(String assetName, String fileName) {
+			fileToUnzip = new File(fileName);
+			fileToSave = new File(assetName);
+		}
+
+		@Override
+		public boolean downloadFile(DownloadFileHelper downloadFileHelper,
+				String filename, List<File> filesToReindex, IProgress progress,
+				String indexOfAllFiles,
+				DownloadIndexesAsyncTask downloadIndexesAsyncTask,
+				boolean forceWifi, AssetManager assetManager) throws InterruptedException {
+			try {
+				ResourceManager.copyAssets(assetManager, fileToSave.getPath(), fileToUnzip);
+				return true;
+			} catch (IOException e) {
+				return false;
+			}
+		}
 	}
 	
 	private static class IndexItemCategory implements Comparable<IndexItemCategory> {

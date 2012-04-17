@@ -106,7 +106,15 @@ public abstract class Entity {
 	public Entity(long id) {
 		this.id = id;
 	}
-	
+
+	public Entity(Entity copy, long id) {
+		this.id = id;
+		for (String t : copy.getTagKeySet()) {
+			putTag(t, copy.getTag(t));
+		}
+		this.dataLoaded = copy.dataLoaded;
+	}
+
 	public long getId() {
 		return id;
 	}

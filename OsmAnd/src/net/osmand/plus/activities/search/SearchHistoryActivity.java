@@ -12,6 +12,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.activities.search.SearchHistoryHelper.HistoryEntry;
 import android.app.AlertDialog;
+import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,9 +26,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.android.apps.analytics.easytracking.TrackedListActivity;
-
-public class SearchHistoryActivity extends TrackedListActivity  implements SearchActivityChild {
+public class SearchHistoryActivity extends ListActivity  implements SearchActivityChild {
 	private LatLon location;
 	private SearchHistoryHelper helper;
 	private Button clearButton;

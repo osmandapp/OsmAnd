@@ -40,6 +40,16 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
 
 	@Override
+	public boolean hasChange() {
+		return false; //no change ever
+	}
+	
+	@Override
+	public void clearChange() {
+		//nothing to do
+	}
+	
+	@Override
 	public boolean checkContains(double latitude, double longitude) {
 		return index.containsPoiData(latitude, longitude);
 	}
