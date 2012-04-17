@@ -30,7 +30,7 @@
 			<region name="greece" esize="25" />
 			<region name="hungary" esize="20" />
 			<region name="iceland" esize="10" />
-			<region name="ireland" esize="30" />
+			<region name="ireland-and-northern-ireland" esize="30" />
 			<region name="isle_of_man" esize="1" />
 			<region name="italy" esize="255"/>
 			<region name="kosovo" esize="10" />
