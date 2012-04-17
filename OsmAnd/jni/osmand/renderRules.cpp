@@ -424,6 +424,16 @@ bool RenderingRuleSearchRequest::visitRule(RenderingRule* rule, bool loadOutput)
 				match = rule->intProperties[i] <= values[rp->id];
 			} else if (rp == PROPS->R_MAXZOOM) {
 				match = rule->intProperties[i] >= values[rp->id];
+			} else if (rp == PROPS->R_ADDITIONAL) {
+				if(obj == NULL){
+					return true;
+				}
+				std::string val = storage->getDictionaryValue(rule->intProperties[i]);
+				int i = val.find('=');
+				if(i >= 0) {
+					return obj->containsAdditional(val.substr(0, i), val.substr(i+1));
+				}
+				return false;
 			} else {
 				match = rule->intProperties[i] == values[rp->id];
 			}
@@ -462,19 +472,22 @@ bool RenderingRuleSearchRequest::visitRule(RenderingRule* rule, bool loadOutput)
 }
 
 void RenderingRuleSearchRequest::clearState() {
+	obj = NULL;
 	memcpy(values, savedValues, storage->getPropertiesSize() * sizeof(int));
 	memcpy(fvalues, savedFvalues, storage->getPropertiesSize() * sizeof(float));
 }
 
-void RenderingRuleSearchRequest::setInitialTagValueZoom(std::string tag, std::string value, int zoom) {
+void RenderingRuleSearchRequest::setInitialTagValueZoom(std::string tag, std::string value, int zoom, MapDataObject* obj) {
 	clearState();
+	this->obj = obj;
 	setIntFilter(PROPS->R_MINZOOM, zoom);
 	setIntFilter(PROPS->R_MAXZOOM, zoom);
 	setStringFilter(PROPS->R_TAG, tag);
 	setStringFilter(PROPS->R_VALUE, value);
 }
 
-void RenderingRuleSearchRequest::setTagValueZoomLayer(std::string tag, std::string val, int zoom, int layer) {
+void RenderingRuleSearchRequest::setTagValueZoomLayer(std::string tag, std::string val, int zoom, int layer, MapDataObject* obj) {
+	this->obj = obj;
 	setIntFilter(PROPS->R_MINZOOM, zoom);
 	setIntFilter(PROPS->R_MAXZOOM, zoom);
 	setIntFilter(PROPS->R_LAYER, layer);

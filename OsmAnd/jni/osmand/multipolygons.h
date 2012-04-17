@@ -38,7 +38,7 @@ void processMultipolygonLine(std::vector<std::vector<int_pair> >& completedRings
 void unifyIncompletedRings(std::vector<std::vector<int_pair> >& incompletedRings, std::vector<std::vector<int_pair> >& completedRings, std::vector<std::string> &completedRingNames,
 			std::vector<std::string> &incompletedRingNames, int leftX, int rightX, int bottomY, int topY, long dbId, int zoom);
 
-MultiPolygonObject* processMultiPolygon(int leftX, int rightX, int bottomY, int topY,
+MapDataObject* processMultiPolygon(int leftX, int rightX, int bottomY, int topY,
 		std::vector<std::vector<int_pair > >& completedRings, std::vector<std::vector<int_pair> >& incompletedRings,
 		std::vector<std::string>& completedRingNames, std::vector<std::string>& incompletedRingNames,
 		const tagValueType&  type, std::vector<MapDataObject* > & directList, std::vector<MapDataObject*>& inverselist,
@@ -127,7 +127,7 @@ MultiPolygonObject* processMultiPolygon(int leftX, int rightX, int bottomY, int 
 
 static std::vector<MapDataObject*> EMPTY_LIST;
 void proccessMultiPolygons(std::map<tagValueType, std::vector<MapDataObject*> >& multyPolygons, int leftX,
-		int rightX, int bottomY, int topY, int zoom, std::vector<BaseMapDataObject*>& listPolygons) {
+		int rightX, int bottomY, int topY, int zoom, std::vector<MapDataObject*>& listPolygons) {
 	std::vector<std::vector<int_pair> > completedRings;
 	std::vector<std::vector<int_pair> > incompletedRings;
 	std::vector<std::string> completedRingNames;
@@ -158,13 +158,14 @@ void proccessMultiPolygons(std::map<tagValueType, std::vector<MapDataObject*> >&
 		incompletedRingNames.clear();
 
 		__android_log_print(ANDROID_LOG_INFO, LOG_TAG,  "Process multipolygon %s %s direct list %d rev %d", val->first.tag.c_str(), val->first.value.c_str(), directList->size(), inverselist->size());
-		MultiPolygonObject* pl = processMultiPolygon(leftX, rightX, bottomY, topY, completedRings, incompletedRings,
-				completedRingNames, incompletedRingNames, val->first, *directList, *inverselist, zoom);
-		if (pl != NULL) {
-			listPolygons.push_back(pl);
-		} else {
-			__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Multipolygon skipped");
-		}
+		// FIXME
+//		MultiPolygonObject* pl = processMultiPolygon(leftX, rightX, bottomY, topY, completedRings, incompletedRings,
+//				completedRingNames, incompletedRingNames, val->first, *directList, *inverselist, zoom);
+//		if (pl != NULL) {
+//			listPolygons.push_back(pl);
+//		} else {
+//			__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Multipolygon skipped");
+//		}
 	}
 }
 

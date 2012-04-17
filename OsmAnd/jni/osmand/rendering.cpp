@@ -6,6 +6,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <vector>
+#include <algorithm>
 #include <set>
 #include <hash_map>
 #include <time.h>
@@ -30,12 +31,12 @@
 jclass jclass_JUnidecode;
 jmethodID jmethod_JUnidecode_unidecode;
 
-void calcPoint(MapDataObject* mObj, jint ind, RenderingContext* rc)
+void calcPoint(std::pair<int, int>  c, RenderingContext* rc)
 {
     rc->pointCount++;
 
-    float tx = mObj->points.at(ind).first/ (rc->tileDivisor);
-    float ty = mObj->points.at(ind).second / (rc->tileDivisor);
+	float tx = c.first/ (rc->tileDivisor);
+	float ty = c.second / (rc->tileDivisor);
 
     float dTileX = tx - rc->leftX;
     float dTileY = ty - rc->topY;
@@ -46,20 +47,6 @@ void calcPoint(MapDataObject* mObj, jint ind, RenderingContext* rc)
         rc->pointInsideCount++;
 }
 
-void calcMultipolygonPoint(int xt, int yt, jint ind, jint b, RenderingContext* rc)
-{
-    rc->pointCount++;
-    float tx = xt/ (rc->tileDivisor);
-    float ty = yt / (rc->tileDivisor);
-
-    float dTileX = tx - rc->leftX;
-    float dTileY = ty - rc->topY;
-    rc->calcX = rc->cosRotateTileSize * dTileX - rc->sinRotateTileSize * dTileY;
-    rc->calcY = rc->sinRotateTileSize * dTileX + rc->cosRotateTileSize * dTileY;
-
-    if (rc->calcX >= 0 && rc->calcX < rc->width && rc->calcY >= 0 && rc->calcY < rc->height)
-        rc->pointInsideCount++;
-}
 
 std::hash_map<std::string, SkPathEffect*> pathEffects;
 SkPathEffect* getDashEffect(std::string input)
@@ -197,65 +184,38 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
     return 1;
 }
 
-void drawPointText(RenderingRuleSearchRequest* req, RenderingContext* rc, std::string tag, std::string value, float xText, float yText, std::string name, SkPath* path)
-{
-    if(rc->useEnglishNames)
-    {
-        jstring n = getGlobalJniEnv()->NewStringUTF(name.c_str());
-        name = getString((jstring) getGlobalJniEnv()->CallStaticObjectMethod(jclass_JUnidecode, jmethod_JUnidecode_unidecode, n));
-        getGlobalJniEnv()->DeleteLocalRef(n);
-    }
+void renderText(MapDataObject* obj, RenderingRuleSearchRequest* req, RenderingContext* rc, std::string tag,
+		std::string value, float xText, float yText, SkPath* path) {
+	std::hash_map<std::string, std::string>::iterator it = obj->objectNames.begin();
+	while (it != obj->objectNames.end()) {
+		if (it->second.length() > 0) {
+			std::string name = it->second;
+			if (rc->useEnglishNames) {
+				jstring n = getGlobalJniEnv()->NewStringUTF(name.c_str());
+				name = getString(
+						(jstring) getGlobalJniEnv()->CallStaticObjectMethod(jclass_JUnidecode,
+								jmethod_JUnidecode_unidecode, n));
+				getGlobalJniEnv()->DeleteLocalRef(n);
+			}
+			req->setInitialTagValueZoom(tag, value, rc->zoom, obj);
+			req->setIntFilter(req->props()->R_TEXT_LENGTH, name.length());
+			std::string tagName = it->first == "name" ? "" : it->first;
+			req->setStringFilter(req->props()->R_NAME_TAG, tagName);
+			if (req->searchRule(RenderingRulesStorage::TEXT_RULES)
+					&& req->getIntPropertyValue(req->props()->R_TEXT_SIZE) > 0) {
+				TextDrawInfo* info = new TextDrawInfo(name);
+				info->drawOnPath = (path != NULL) && (req->getIntPropertyValue(req->props()->R_TEXT_ON_PATH, 0) > 0);
+				if (path != NULL)
+					info->path = new SkPath(*path);
 
-    if (name.at(0) == REF_CHAR)
-    {
-        std::string ref = name.substr(1);
-        name = "";
-        for (uint k = 0; k < ref.length(); k++)
-        {
-            if (ref.at(k) == REF_CHAR)
-            {
-                if (k < ref.length() - 1) 
-                {
-                    name = ref.substr(k + 1);
-                }
-                ref = ref.substr(0, k);
-                break;
-            }
-        }
-        if (ref.length() > 0)
-        {
-            req->setInitialTagValueZoom(tag, value, rc->zoom);
-            req->setIntFilter(req->props()->R_TEXT_LENGTH, ref.length());
-            req->setBooleanFilter(req->props()->R_REF, true);
-            if (req->searchRule(RenderingRulesStorage::TEXT_RULES))
-            {
-                if (req->getIntPropertyValue(req->props()->R_TEXT_SIZE) > 0)
-                {
-                    TextDrawInfo* text = new TextDrawInfo(ref);
-                    fillTextProperties(text, req, xText, yText);
-                    if (path != NULL)
-                        text->path = new SkPath(*path);
+				fillTextProperties(info, req, xText, yText);
+				rc->textToDraw.push_back(info);
+			}
+		}
 
-                    rc->textToDraw.push_back(text);
-                }
-            }
-        }
-    }
+		it++;
+	}
 
-    req->setInitialTagValueZoom(tag, value, rc->zoom);
-    req->setIntFilter(req->props()->R_TEXT_LENGTH, name.length());
-    req->setBooleanFilter(req->props()->R_REF, false);
-    if (req->searchRule(RenderingRulesStorage::TEXT_RULES) &&
-        req->getIntPropertyValue(req->props()->R_TEXT_SIZE) > 0)
-    {
-        TextDrawInfo* info = new TextDrawInfo(name);
-        info->drawOnPath = (path != NULL) && (req->getIntPropertyValue(req->props()->R_TEXT_ON_PATH, 0) > 0);
-        if (path != NULL)
-            info->path = new SkPath(*path);
-
-        fillTextProperties(info, req, xText, yText);
-        rc->textToDraw.push_back(info);
-    }
 }
 
 void drawPolylineShadow(SkCanvas* cv, SkPaint* paint, RenderingContext* rc, SkPath* path, int shadowColor, int shadowRadius)
@@ -320,241 +280,183 @@ void drawOneWayPaints(RenderingContext* rc, SkCanvas* cv, SkPath* p) {
     }
 }
 
-bool isOneWayWay(int highwayAttributes) {
-    return (highwayAttributes & 1) > 0;
-}
 
-bool isRoundabout(int highwayAttributes) {
-    return ((highwayAttributes >> 2) & 1) > 0;
-}
 
 void drawPolyline(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
-    RenderingContext* rc, std::pair<std::string, std::string> pair, int layer, int drawOnlyShadow) {
-        jint length = mObj->points.size();
-        if (length < 2) {
-            return;
-        }
-        std::string tag = pair.first;
-        std::string value = pair.second;
+	RenderingContext* rc, tag_value pair, int layer, int drawOnlyShadow) {
+	jint length = mObj->points.size();
+	if (length < 2) {
+		return;
+	}
+	std::string tag = pair.first;
+	std::string value = pair.second;
 
-        req->setInitialTagValueZoom(tag, value, rc->zoom);
-        req->setIntFilter(req->props()->R_LAYER, layer);
-        bool oneway = false;
-        if (rc->zoom >= 16 && "highway" == pair.first && isOneWayWay(mObj->highwayAttributes)) {
-            oneway = true;
-        }
+	req->setInitialTagValueZoom(tag, value, rc->zoom, mObj);
+	req->setIntFilter(req->props()->R_LAYER, layer);
+	bool rendered = req->searchRule(2);
+	if (!rendered || !updatePaint(req, paint, 0, 0, rc)) {
+		return;
+	}
+	int oneway = 0;
+	if (rc->zoom >= 16 && pair.first == "highway") {
+		if (mObj->containsAdditional("oneway", "yes")) {
+			oneway = 1;
+		} else if (mObj->containsAdditional("oneway", "-1")) {
+			oneway = -1;
+		}
+	}
 
-        bool rendered = req->searchRule(2);
-        if (!rendered || !updatePaint(req, paint, 0, 0, rc)) {
-            return;
-        }
-
-        rc->visible++;
-        SkPath path;
-        int i = 0;
-        SkPoint middlePoint;
-        int middle = length / 2;
-        for (; i < length; i++) {
-            calcPoint(mObj, i, rc);
-            if (i == 0) {
-                path.moveTo(rc->calcX, rc->calcY);
-            } else {
-                if(i == middle){
-                    middlePoint.set(rc->calcX, rc->calcY);
-                }
-                path.lineTo(rc->calcX, rc->calcY);
-            }
-        }
-        if (i > 0) {
-            if (drawOnlyShadow) {
-                int shadowColor = req->getIntPropertyValue(req->props()->R_SHADOW_COLOR);
-                int shadowRadius = req->getIntPropertyValue(req->props()->R_SHADOW_RADIUS);
-                drawPolylineShadow(cv, paint, rc, &path, shadowColor, shadowRadius);
-            } else {
-                PROFILE_NATIVE_OPERATION(rc, cv->drawPath(path, *paint));
-                if (updatePaint(req, paint, 1, 0, rc)) {
-                    PROFILE_NATIVE_OPERATION(rc, cv->drawPath(path, *paint));
-                    if (updatePaint(req, paint, 2, 0, rc)) {
-                        PROFILE_NATIVE_OPERATION(rc, cv->drawPath(path, *paint));
-                    }
-                }
-                if (oneway && !drawOnlyShadow) {
-                    drawOneWayPaints(rc, cv, &path);
-                }
-                if (!drawOnlyShadow && mObj->name.length() > 0) {
-                    drawPointText(req, rc,pair.first, pair.second, middlePoint.fX, middlePoint.fY, mObj->name,
-                        &path);
-                }
-            }
-        }
-}
-
-void drawMultiPolygon(MultiPolygonObject* mapObject,RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
-    RenderingContext* rc) {
-        if (req == NULL) {
-            return;
-        }
-        req->setInitialTagValueZoom(mapObject->tag, mapObject->value, rc->zoom);
-        bool rendered = req->searchRule(3);
-
-        if (!rendered || !updatePaint(req, paint, 0, 1, rc)) {
-            return;
-        }
-
-        int boundsCount = mapObject->points.size();
-        rc->visible++;
-        SkPath path;
-
-        for (int i = 0; i < boundsCount; i++) {
-            int cnt = mapObject->points.at(i).size();
-            float xText = 0;
-            float yText = 0;
-            for (int j = 0; j < cnt; j++) {
-                std::pair<int,int> pair = mapObject->points.at(i).at(j);
-                calcMultipolygonPoint(pair.first, pair.second, j, i, rc);
-                xText += rc->calcX;
-                yText += rc->calcY;
-                if (j == 0) {
-                    path.moveTo(rc->calcX, rc->calcY);
-                } else {
-                    path.lineTo(rc->calcX, rc->calcY);
-                }
-            }
-            if (cnt > 0) {
-                std::string name = mapObject->names.at(i);
-                if (name.length() > 0) {
-                    drawPointText(req, rc, mapObject->tag, mapObject->value, xText / cnt, yText / cnt, name, NULL);
-                }
-            }
-        }
-
-        PROFILE_NATIVE_OPERATION(rc, cv->drawPath(path, *paint));
-        // for test purpose
-        //	paint->setStyle(SkPaint::kStroke_Style);
-        //	paint->setStrokeWidth(2);
-        //	paint->setPathEffect(NULL);
-        //	paint->setColor(BLACK_COLOR);
-        //	PROFILE_NATIVE_OPERATION(rc, cv->drawPath(path, *paint));
-        if (updatePaint(req, paint, 1, 0, rc)) {
-            PROFILE_NATIVE_OPERATION(rc, cv->drawPath(path, *paint));
-        }
+	rc->visible++;
+	SkPath path;
+	int i = 0;
+	SkPoint middlePoint;
+	int middle = length / 2;
+	for (; i < length; i++) {
+		calcPoint(mObj->points.at(i), rc);
+		if (i == 0) {
+			path.moveTo(rc->calcX, rc->calcY);
+		} else {
+			if (i == middle) {
+				middlePoint.set(rc->calcX, rc->calcY);
+			}
+			path.lineTo(rc->calcX, rc->calcY);
+		}
+	}
+	if (i > 0) {
+		if (drawOnlyShadow) {
+			int shadowColor = req->getIntPropertyValue(req->props()->R_SHADOW_COLOR);
+			int shadowRadius = req->getIntPropertyValue(req->props()->R_SHADOW_RADIUS);
+			drawPolylineShadow(cv, paint, rc, &path, shadowColor, shadowRadius);
+		} else {
+			PROFILE_NATIVE_OPERATION(rc, cv->drawPath(path, *paint));
+			if (updatePaint(req, paint, 1, 0, rc)) {
+				PROFILE_NATIVE_OPERATION(rc, cv->drawPath(path, *paint));
+				if (updatePaint(req, paint, 2, 0, rc)) {
+					PROFILE_NATIVE_OPERATION(rc, cv->drawPath(path, *paint));
+				}
+			}
+			if (oneway && !drawOnlyShadow) {
+				drawOneWayPaints(rc, cv, &path);
+			}
+			if (!drawOnlyShadow) {
+				renderText(mObj, req, rc, pair.first, pair.second, middlePoint.fX, middlePoint.fY, &path);
+			}
+		}
+	}
 }
 
 
 void drawPolygon(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
-    RenderingContext* rc, std::pair<std::string, std::string> pair) {
-        jint length = mObj->points.size();
-        if (length <= 2) {
-            return;
-        }
-        std::string tag = pair.first;
-        std::string value = pair.second;
+	RenderingContext* rc, tag_value pair) {
+	jint length = mObj->points.size();
+	if (length <= 2) {
+		return;
+	}
+	std::string tag = pair.first;
+	std::string value = pair.second;
 
-        req->setInitialTagValueZoom(tag, value, rc->zoom);
-        bool rendered = req->searchRule(3);
+	req->setInitialTagValueZoom(tag, value, rc->zoom, mObj);
+	bool rendered = req->searchRule(3);
 
-        float xText = 0;
-        float yText = 0;
-        if (!rendered || !updatePaint(req, paint, 0, 1, rc)) {
-            return;
-        }
+	float xText = 0;
+	float yText = 0;
+	if (!rendered || !updatePaint(req, paint, 0, 1, rc)) {
+		return;
+	}
 
-        rc->visible++;
-        SkPath path;
-        int i = 0;
-        for (; i < length; i++) {
-            calcPoint(mObj, i, rc);
-            if (i == 0) {
-                path.moveTo(rc->calcX, rc->calcY);
-            } else {
-                path.lineTo(rc->calcX, rc->calcY);
-            }
-            xText += rc->calcX;
-            yText += rc->calcY;
-        }
+	rc->visible++;
+	SkPath path;
+	int i = 0;
+	for (; i < length; i++) {
+		calcPoint(mObj->points.at(i), rc);
+		if (i == 0) {
+			path.moveTo(rc->calcX, rc->calcY);
+		} else {
+			path.lineTo(rc->calcX, rc->calcY);
+		}
+		xText += rc->calcX;
+		yText += rc->calcY;
+	}
+	std::vector<coordinates> polygonInnerCoordinates = mObj->polygonInnerCoordinates;
+	if (polygonInnerCoordinates.size() > 0) {
+		path.setFillType(SkPath::kEvenOdd_FillType);
+		for (int j = 0; j < polygonInnerCoordinates.size(); j++) {
+			coordinates cs = polygonInnerCoordinates.at(j);
+			for (int i = 0; i < cs.size(); i++) {
+				calcPoint(cs[i], rc);
+				if (i == 0) {
+					path.moveTo(rc->calcX, rc->calcY);
+				} else {
+					path.lineTo(rc->calcX, rc->calcY);
+				}
+			}
+		}
+	}
 
-        PROFILE_NATIVE_OPERATION(rc, cv->drawPath(path, *paint));
-        if (updatePaint(req, paint, 1, 0, rc)) {
-            PROFILE_NATIVE_OPERATION(rc, cv->drawPath(path, *paint));
-        }
-        std::string name = mObj->name;
-        if (name.length() > 0) {
-            drawPointText(req, rc, tag, value, xText / length, yText / length, name, NULL);
-        }
+	PROFILE_NATIVE_OPERATION(rc, cv->drawPath(path, *paint));
+	if (updatePaint(req, paint, 1, 0, rc)) {
+		PROFILE_NATIVE_OPERATION(rc, cv->drawPath(path, *paint));
+	}
+
+	renderText(mObj, req, rc, pair.first, pair.second, xText / length, yText / length, NULL);
 }
 
 void drawPoint(MapDataObject* mObj,	RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
-    RenderingContext* rc, std::pair<std::string, std::string>  pair, int renderText)
+	RenderingContext* rc, std::pair<std::string, std::string>  pair, int renderTxt)
 {
-    std::string tag = pair.first;
-    std::string value = pair.second;
+	std::string tag = pair.first;
+	std::string value = pair.second;
 
-    req->setInitialTagValueZoom(tag, value, rc->zoom);
-    req->searchRule(1);
-    std::string resId = req->getStringPropertyValue(req-> props()-> R_ICON);
-    SkBitmap* bmp = getCachedBitmap(rc, resId);
-    std::string name;
-    if (renderText)
-        name = mObj->name;
+	req->setInitialTagValueZoom(tag, value, rc->zoom, mObj);
+	req->searchRule(1);
+	std::string resId = req->getStringPropertyValue(req-> props()-> R_ICON);
+	SkBitmap* bmp = getCachedBitmap(rc, resId);
+	
+	if (!bmp && !renderText)
+		return;
+	
+	jint length = mObj->points.size();
+	rc->visible++;
+	float px = 0;
+	float py = 0;
+	int i = 0;
+	for (; i < length; i++) {
+		calcPoint(mObj->points.at(i), rc);
+		px += rc->calcX;
+		py += rc->calcY;
+	}
+	if (length > 1) {
+		px /= length;
+		py /= length;
+	}
 
-    if (!bmp && name.length() == 0)
-        return;
-
-    jint length = mObj->points.size();
-    rc->visible++;
-    float px = 0;
-    float py = 0;
-    int i = 0;
-    for (; i < length; i++) {
-        calcPoint(mObj, i, rc);
-        px += rc->calcX;
-        py += rc->calcY;
-    }
-    if (length > 1) {
-        px /= length;
-        py /= length;
-    }
-
-    if (bmp != NULL) {
-        IconDrawInfo ico;
-        ico.x = px;
-        ico.y = py;
-        ico.bmp = bmp;
-        rc->iconsToDraw.push_back(ico);
-    }
-    if (name.length() > 0) {
-        drawPointText(req, rc, tag, value, px, py, name, NULL);
-    }
+	if (bmp != NULL) {
+		IconDrawInfo ico;
+		ico.x = px;
+		ico.y = py;
+		ico.bmp = bmp;
+		rc->iconsToDraw.push_back(ico);
+	}
+	if (renderTxt) {
+		renderText(mObj, req, rc, pair.first, pair.second, px, py, NULL);
+	}
 
 }
 
-void drawObject(RenderingContext* rc, BaseMapDataObject* mapObject, SkCanvas* cv, RenderingRuleSearchRequest* req,
-    SkPaint* paint, int l, int renderText, int drawOnlyShadow) {
-        rc->allObjects++;
-        if (mapObject-> type == BaseMapDataObject::MULTI_POLYGON) {
-            if (!drawOnlyShadow) {
-                drawMultiPolygon((MultiPolygonObject*) mapObject, req, cv, paint, rc);
-            }
-            return;
-        }
-        MapDataObject* mObj = (MapDataObject*) mapObject;
-
-        jint mainType = mObj->types.at(l);
-        int t = mainType & 3;
-
-        std::pair<std::string, std::string> pair = mObj->tagValues.at(l);
-        if (t == 1 && !drawOnlyShadow) {
-            // point
-            drawPoint(mObj, req, cv, paint, rc, pair, renderText);
-        } else if (t == 2) {
-            // polyline
-            int layer = getNegativeWayLayer(mainType);
-            //			__android_log_print(ANDROID_LOG_WARN, LOG_TAG, "Draw polyline");
-            drawPolyline(mObj, req, cv, paint, rc, pair, layer, drawOnlyShadow);
-        } else if (t == 3 && !drawOnlyShadow) {
-            // polygon
-            drawPolygon(mObj, req, cv, paint, rc, pair);
-        }
+void drawObject(RenderingContext* rc, MapDataObject* mObj, SkCanvas* cv, RenderingRuleSearchRequest* req,
+	SkPaint* paint, int l, int renderText, int drawOnlyShadow) {
+		rc->allObjects++;
+		int t = mObj->objectType;
+		tag_value pair = mObj->types.at(l);
+		if (t == 1 && !drawOnlyShadow) {
+			// point
+			drawPoint(mObj, req, cv, paint, rc, pair, renderText);
+		} else if (t == 2) {
+			drawPolyline(mObj, req, cv, paint, rc, pair, mObj->getSimpleLayer(), drawOnlyShadow);
+		} else if (t == 3 && !drawOnlyShadow) {
+			// polygon
+			drawPolygon(mObj, req, cv, paint, rc, pair);
+		}
 }
 
 
@@ -601,117 +503,98 @@ void drawIconsOverCanvas(RenderingContext* rc, SkCanvas* canvas)
 	}
 }
 
-std::hash_map<int, std::vector<int> > sortObjectsByProperOrder(std::vector <BaseMapDataObject* > mapDataObjects,
-    RenderingRuleSearchRequest* req, RenderingContext* rc) {
-        std::hash_map<int, std::vector<int> > orderMap;
-        if (req != NULL) {
-            req->clearState();
-            const size_t size = mapDataObjects.size();
-            size_t i = 0;
-            for (; i < size; i++) {
-                uint sh = i << 8;
-                BaseMapDataObject* obj = mapDataObjects.at(i);
-                if (obj->type == BaseMapDataObject::MULTI_POLYGON) {
-                    MultiPolygonObject* mobj = (MultiPolygonObject*) obj;
+std::hash_map<int, std::vector<int> > sortObjectsByProperOrder(std::vector <MapDataObject* > mapDataObjects,
+	RenderingRuleSearchRequest* req, RenderingContext* rc) {
+	std::hash_map<int, std::vector<int> > orderMap;
+	if (req != NULL) {
+		req->clearState();
+		const int size = mapDataObjects.size();
+		int i = 0;
+		for (; i < size; i++) {
+			uint sh = i << 8;
+			MapDataObject* mobj = mapDataObjects[i];
+			size_t sizeTypes = mobj->types.size();
+			size_t j = 0;
+			for (; j < sizeTypes; j++) {
+				int layer = mobj->getSimpleLayer();
+				tag_value pair = mobj->types[j];
+				req->setTagValueZoomLayer(pair.first, pair.second, rc->zoom, layer, mobj);
+				req->setIntFilter(req->props()->R_AREA, mobj->area);
+				req->setIntFilter(req->props()->R_POINT, mobj->points.size() == 1);
+				req->setIntFilter(req->props()->R_CYCLE, mobj->cycle());
+				if (req->searchRule(RenderingRulesStorage::ORDER_RULES)) {
+					mobj->objectType = req->getIntPropertyValue(req->props()->R_OBJECT_TYPE);
+					int order = req->getIntPropertyValue(req->props()->R_ORDER);
+					orderMap[order].push_back(sh + j);
+					if (req->getIntPropertyValue(req->props()->R_SHADOW_LEVEL) > 0) {
+						rc->shadowLevelMin = std::min(rc->shadowLevelMin, order);
+						rc->shadowLevelMax = std::max(rc->shadowLevelMax, order);
+						req->clearIntvalue(req->props()->R_SHADOW_LEVEL);
+					}
+				}
 
-                    req->setTagValueZoomLayer(mobj->tag, mobj->value, rc->zoom, mobj->layer);
-                    req->setIntFilter(req->props()->R_ORDER_TYPE, RenderingRulesStorage::POLYGON_RULES);
-                    if (req->searchRule(RenderingRulesStorage::ORDER_RULES)) {
-                        int order = req->getIntPropertyValue(req->props()->R_ORDER);
-                        orderMap[order].push_back(sh);
-                        if (req->getIntPropertyValue(req->props()->R_SHADOW_LEVEL) > 0) {
-                            rc->shadowLevelMin = std::min(rc->shadowLevelMin, order);
-                            rc->shadowLevelMax = std::max(rc->shadowLevelMax, order);
-                            req->clearIntvalue(req->props()->R_SHADOW_LEVEL);
-                        }
-                    }
-                } else {
-                    MapDataObject* mobj = (MapDataObject*) obj;
-                    size_t sizeTypes = mobj->types.size();
-                    size_t j = 0;
-                    for (; j < sizeTypes; j++) {
-                        int wholeType = mobj->types.at(j);
-                        int mask = wholeType & 3;
-                        int layer = 0;
-                        if (mask != 1) {
-                            layer = getNegativeWayLayer(wholeType);
-                        }
-                        std::pair<std::string, std::string> pair = mobj->tagValues.at(j);
-                        req->setTagValueZoomLayer(pair.first, pair.second, rc->zoom, layer);
-                        req->setIntFilter(req->props()->R_ORDER_TYPE, mask);
-                        if (req->searchRule(RenderingRulesStorage::ORDER_RULES)) {
-                            int order = req->getIntPropertyValue(req->props()->R_ORDER);
-                            orderMap[order].push_back(sh + j);
-                            if (req->getIntPropertyValue(req->props()->R_SHADOW_LEVEL) > 0) {
-                                rc->shadowLevelMin = std::min(rc->shadowLevelMin, order);
-                                rc->shadowLevelMax = std::max(rc->shadowLevelMax, order);
-                                req->clearIntvalue(req->props()->R_SHADOW_LEVEL);
-                            }
-                        }
-                    }
-
-                }
-            }
-        }
-        return orderMap;
+			}
+		}
+	}
+	return orderMap;
 }
 
-void doRendering(std::vector <BaseMapDataObject* > mapDataObjects, SkCanvas* canvas, SkPaint* paint,
-    RenderingRuleSearchRequest* req, RenderingContext* rc) {
-        // put in order map
-        std::hash_map<int, std::vector<int> > orderMap = sortObjectsByProperOrder(mapDataObjects, req, rc);
-        std::set<int> keys;
-        std::hash_map<int, std::vector<int> >::iterator it = orderMap.begin();
-        while(it != orderMap.end())
-        {
-            keys.insert(it->first);
-            it++;
-        }
-        bool shadowDrawn = false;
+void doRendering(std::vector <MapDataObject* > mapDataObjects, SkCanvas* canvas, SkPaint* paint,
+	RenderingRuleSearchRequest* req, RenderingContext* rc) {
+		// put in order map
+		std::hash_map<int, std::vector<int> > orderMap = sortObjectsByProperOrder(mapDataObjects, req, rc);
+		std::set<int> keys;
+		std::hash_map<int, std::vector<int> >::iterator it = orderMap.begin();
+		while(it != orderMap.end())
+		{
+			keys.insert(it->first);
+			it++;
+		}
+		bool shadowDrawn = false;
 
-        for (std::set<int>::iterator ks = keys.begin(); ks != keys.end() ; ks++) {
-            if (!shadowDrawn && *ks >= rc->shadowLevelMin && *ks <= rc->shadowLevelMax &&
-                rc->shadowRenderingMode > 1) {
-                    for (std::set<int>::iterator ki = ks; ki != keys.end() ; ki++) {
-                        if (*ki > rc->shadowLevelMax || rc->interrupted()) {
-                            break;
-                        }
-                        std::vector<int> list = orderMap[*ki];
-                        for (std::vector<int>::iterator ls = list.begin(); ls != list.end(); ls++) {
-                            int i = *ls;
-                            int ind = i >> 8;
-                            int l = i & 0xff;
-                            BaseMapDataObject* mapObject = mapDataObjects.at(ind);
+		for (std::set<int>::iterator ks = keys.begin(); ks != keys.end() ; ks++) {
+			if (!shadowDrawn && *ks >= rc->shadowLevelMin && *ks <= rc->shadowLevelMax &&
+				rc->shadowRenderingMode > 1) {
+					for (std::set<int>::iterator ki = ks; ki != keys.end() ; ki++) {
+						if (*ki > rc->shadowLevelMax || rc->interrupted()) {
+							break;
+						}
+						std::vector<int> list = orderMap[*ki];
+						for (std::vector<int>::iterator ls = list.begin(); ls != list.end(); ls++) {
+							int i = *ls;
+							int ind = i >> 8;
+							int l = i & 0xff;
+							MapDataObject* mapObject = mapDataObjects.at(ind);
 
-                            // show text only for main type
-                            drawObject(rc, mapObject, canvas, req, paint, l, l == 0, true);
-                        }
-                    }
-                    shadowDrawn = true;
-            }
+							// show text only for main type
+							drawObject(rc, mapObject, canvas, req, paint, l, l == 0, true);
+						}
+					}
+					shadowDrawn = true;
+			}
 
-            std::vector<int> list = orderMap[*ks];
-            for (std::vector<int>::iterator ls = list.begin(); ls != list.end(); ls++) {
-                int i = *ls;
-                int ind = i >> 8;
-                int l = i & 0xff;
+			std::vector<int> list = orderMap[*ks];
+			for (std::vector<int>::iterator ls = list.begin(); ls != list.end(); ls++) {
+				int i = *ls;
+				int ind = i >> 8;
+				int l = i & 0xff;
 
-                BaseMapDataObject* mapObject = mapDataObjects.at(ind);
-                // show text only for main type
-                drawObject(rc, mapObject, canvas, req, paint, l, l == 0, false);
-            }
-            rc->lastRenderedKey = *ks;
-            if (rc->interrupted()) {
-                return;
-            }
+				MapDataObject* mapObject = mapDataObjects.at(ind);
+				// show text only for main type
+				drawObject(rc, mapObject, canvas, req, paint, l, l == 0, false);
+			}
+			rc->lastRenderedKey = *ks;
+			if (rc->interrupted()) {
+				return;
+			}
 
-        }
+		}
 
-        drawIconsOverCanvas(rc, canvas);
+		drawIconsOverCanvas(rc, canvas);
 
-        rc->textRendering.start();
-        drawTextOverCanvas(rc, canvas);
-        rc->textRendering.pause();
+		rc->textRendering.start();
+		drawTextOverCanvas(rc, canvas);
+		rc->textRendering.pause();
 }
 
 void loadJniRendering()

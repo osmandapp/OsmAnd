@@ -3,66 +3,81 @@
 
 #include <jni.h>
 #include <vector>
+#include <hash_map>
 #include <string>
 
 #include "common.h"
 
 typedef std::pair<std::string, std::string> tag_value;
 typedef std::pair<int, int> int_pair;
+typedef std::vector< std::pair<int, int> > coordinates;
 
-class BaseMapDataObject
+
+class MapDataObject
 {
-
-public :
 	static const unsigned int UNDEFINED_STRING = INT_MAX;
-    const int type;
-    static const int MAP_DATA_OBJECT = 1;
-    static const int MULTI_POLYGON = 2;
-    long long id;
-    unsigned int stringId;
-    std::string name;
-protected :
-	BaseMapDataObject(int t) : type(t), id(0), stringId(UNDEFINED_STRING){ }
+public:
 
+	std::vector<tag_value>  types;
+	std::vector<tag_value>  additionalTypes;
+	int objectType;
+	coordinates  points;
+	std::vector < coordinates > polygonInnerCoordinates;
+
+	std::hash_map< std::string, unsigned int> stringIds;
+
+	std::hash_map< std::string, std::string > objectNames;
+	bool area;
+	long long id;
+
+	//
+
+	bool cycle(){
+		return points[0] == points[points.size() -1];
+	}
+	bool containsAdditional(std::string key, std::string val) {
+		std::vector<tag_value>::iterator it = additionalTypes.begin();
+		while (it != additionalTypes.end()) {
+			if (it->first == key) {
+				return it->second == val;
+			}
+			it++;
+		}
+		return false;
+	}
+
+	int getSimpleLayer() {
+		std::vector<tag_value>::iterator it = additionalTypes.begin();
+		while (it != additionalTypes.end()) {
+			if (it->first == "layer") {
+				if(it->second.length() > 0) {
+					if(it->second[0] == '-'){
+						return -1;
+					} else {
+						return 0;
+					}
+				} else {
+					return 0;
+				}
+			}
+			it++;
+		}
+		return 0;
+	}
 };
 
 struct SearchResult {
-	std::vector< BaseMapDataObject*> result;
-};
-
-class MultiPolygonObject : public BaseMapDataObject
-{
-public:
-	MultiPolygonObject() : BaseMapDataObject(MULTI_POLYGON)	{	}
-	std::string tag;
-	std::string value;
-	std::vector< std::string > names;
-	int layer;
-	std::vector< std::vector< int_pair> > points;
-};
-
-
-class MapDataObject : public BaseMapDataObject
-{
-public:
-	MapDataObject() : BaseMapDataObject(MAP_DATA_OBJECT)	{	}
-
-	std::vector< int>  types;
-	std::vector< int_pair >  points;
-	std::vector< tag_value >  tagValues;
-	int highwayAttributes;
+	std::vector< MapDataObject* > result;
 };
 
 
 //std::vector <BaseMapDataObject* > marshalObjects(jobjectArray binaryMapDataObjects);
 
-void deleteObjects(std::vector <BaseMapDataObject* > & v);
+void deleteObjects(std::vector <MapDataObject* > & v);
 
 void loadJniMapObjects();
 
 void unloadJniMapObjects();
 
-// 0 - normal, -1 - under, 1 - bridge,over
-int getNegativeWayLayer(int type);
 
 #endif /*_OSMAND_MAP_OBJECTS_H*/

@@ -3,6 +3,7 @@
 
 #include <jni.h>
 #include <string>
+#include <mapObjects.h>
 
 class RenderingRuleProperty
 {
@@ -128,7 +129,6 @@ public:
 	RenderingRuleProperty* R_ICON;
 	RenderingRuleProperty* R_LAYER;
 	RenderingRuleProperty* R_ORDER;
-	RenderingRuleProperty* R_ORDER_TYPE;
 	RenderingRuleProperty* R_TAG;
 	RenderingRuleProperty* R_VALUE;
 	RenderingRuleProperty* R_MINZOOM;
@@ -140,6 +140,12 @@ public:
 	RenderingRuleProperty* R_TEXT_COLOR;
 	RenderingRuleProperty* R_TEXT_HALO_RADIUS;
 	RenderingRuleProperty* R_TEXT_WRAP_WIDTH;
+	RenderingRuleProperty* R_ADDITIONAL;
+	RenderingRuleProperty* R_OBJECT_TYPE;
+	RenderingRuleProperty* R_POINT;
+	RenderingRuleProperty* R_AREA;
+	RenderingRuleProperty* R_CYCLE;
+	RenderingRuleProperty* R_NAME_TAG;
 
 	RenderingRulesStorageProperties(RenderingRulesStorage* storage)
 	{
@@ -168,7 +174,6 @@ public:
 		R_ICON = storage->getProperty("icon");
 		R_LAYER = storage->getProperty("layer");
 		R_ORDER = storage->getProperty("order");
-		R_ORDER_TYPE = storage->getProperty("orderType");
 		R_TAG = storage->getProperty("tag");
 		R_VALUE = storage->getProperty("value");
 		R_MINZOOM = storage->getProperty("minzoom");
@@ -180,6 +185,12 @@ public:
 		R_TEXT_HALO_RADIUS = storage->getProperty("textHaloRadius");
 		R_TEXT_WRAP_WIDTH = storage->getProperty("textWrapWidth");
 		R_SHADOW_LEVEL = storage->getProperty("shadowLevel");
+		R_ADDITIONAL = storage->getProperty("additional");
+		R_OBJECT_TYPE = storage->getProperty("objectType");
+		R_POINT = storage->getProperty("point");
+		R_AREA = storage->getProperty("area");
+		R_CYCLE = storage->getProperty("cycle");
+		R_CYCLE = storage->getProperty("nameTag");
 
 	}
 
@@ -197,6 +208,7 @@ private :
 	int* savedValues;
 	float* savedFvalues;
 	bool searchResult;
+	MapDataObject* obj;
 
 	bool searchInternal(int state, int tagKey, int valueKey, bool loadOutput);
 	void initObject(jobject rrs);
@@ -230,9 +242,9 @@ public:
 
 	void clearState();
 
-	void setInitialTagValueZoom(std::string tag, std::string value, int zoom);
+	void setInitialTagValueZoom(std::string tag, std::string value, int zoom, MapDataObject* obj);
 
-	void setTagValueZoomLayer(std::string tag, std::string val, int zoom, int layer);
+	void setTagValueZoomLayer(std::string tag, std::string val, int zoom, int layer, MapDataObject* obj);
 
 };
 

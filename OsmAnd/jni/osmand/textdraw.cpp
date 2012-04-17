@@ -13,8 +13,6 @@
 #include "common.h"
 #include "renderRules.h"
 
-const char REF_CHAR = ((char)0x0019);
-const char DELIM_CHAR = ((char)0x0018);
 
 template <typename T> class quad_tree {
 private :
@@ -490,13 +488,6 @@ void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv) {
 	for (uint i = 0; i < size; i++) {
 		TextDrawInfo* text = rc->textToDraw.at(i);
 		if (text->text.length() > 0) {
-			size_t d = text->text.find(DELIM_CHAR);
-			// not used now functionality
-			// possibly it will be used specifying english names after that character
-			if (d > 0) {
-				text->text = text->text.substr(0, d);
-			}
-
 			// sest text size before finding intersection (it is used there)
 			float textSize = getDensityValue(rc, text->textSize);
 			paintText.setTextSize(textSize);

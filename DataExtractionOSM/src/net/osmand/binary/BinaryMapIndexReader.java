@@ -780,14 +780,6 @@ public class BinaryMapIndexReader {
 			case MapDataBlock.BASEID_FIELD_NUMBER:
 				baseId = codedIS.readUInt64();
 				break;
-//			case MapDataBlock.RASTERTYPE_FIELD_NUMBER:
-//				// not used now
-//				codedIS.readUInt32();
-//				break;
-//			case MapDataBlock.RASTERIMAGE_FIELD_NUMBER:
-//				// not used now
-//				codedIS.readBytes();
-//				break;
 			case MapDataBlock.DATAOBJECTS_FIELD_NUMBER:
 				int length = codedIS.readRawVarint32();
 				int oldLimit = codedIS.pushLimit(length);
