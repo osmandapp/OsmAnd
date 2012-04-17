@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.LogUtil;
+import net.osmand.OsmAndFormatter;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
@@ -15,6 +16,7 @@ import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 
@@ -765,7 +767,17 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			float dz = (float) (Math.log(relativeToStart) / Math.log(2) * 1.5);
 			float calcZoom = initialMultiTouchZoom + dz;
 			setZoom(Math.round(calcZoom));
-			zoomPositionChanged(getZoom());
+			final int newZoom = getZoom();
+			zoomPositionChanged(newZoom);
+			if (application.accessibilityEnabled()) {
+				if (newZoom != initialMultiTouchZoom) {
+					showMessage(getContext().getString(R.string.zoomIs) + " " + String.valueOf(newZoom)); //$NON-NLS-1$
+				} else {
+					final LatLon p1 = getLatLonFromScreenPoint(x1, y1);
+					final LatLon p2 = getLatLonFromScreenPoint(x2, y2);
+					showMessage(OsmAndFormatter.getFormattedDistance((float)MapUtils.getDistance(p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude()), getContext()));
+				}
+			}
 		}
 		
 		@Override
