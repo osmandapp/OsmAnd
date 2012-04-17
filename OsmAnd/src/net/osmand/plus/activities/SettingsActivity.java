@@ -12,6 +12,7 @@ import java.util.Set;
 
 import net.osmand.ResultMatcher;
 import net.osmand.Version;
+import net.osmand.access.AccessibilityMode;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.RelativeDirectionStyle;
 import net.osmand.map.TileSourceManager;
@@ -81,6 +82,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
 	private ListPreference dayNightModePreference;
 	private ListPreference routerServicePreference;
+
+	private ListPreference accessibilityModePreference;
+	private ListPreference directionStylePreference;
 
 	private CheckBoxPreference routeServiceEnabled;
 	private BroadcastReceiver broadcastReceiver;
@@ -182,6 +186,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerBooleanPreference(osmandSettings.ZOOM_BY_TRACKBALL,screen); 
 		registerBooleanPreference(osmandSettings.SCROLL_MAP_BY_GESTURES,screen); 
 		registerBooleanPreference(osmandSettings.USE_SHORT_OBJECT_NAMES,screen);
+		registerBooleanPreference(osmandSettings.ACCESSIBILITY_EXTENSIONS,screen);
 		registerBooleanPreference(osmandSettings.USE_HIGH_RES_MAPS,screen); 
 		registerBooleanPreference(osmandSettings.USE_ENGLISH_NAMES,screen); 
 		registerBooleanPreference(osmandSettings.AUTO_ZOOM_MAP,screen); 
@@ -280,9 +285,15 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		registerListPreference(osmandSettings.MAP_TEXT_SIZE, screen, entries, floatValues);
 		
+		entries = new String[AccessibilityMode.values().length];
+		for(int i=0; i<entries.length; i++){
+			entries[i] = AccessibilityMode.values()[i].toHumanString(this);
+		}
+		registerListPreference(osmandSettings.ACCESSIBILITY_MODE, screen, entries, AccessibilityMode.values());
+		
 		entries = new String[RelativeDirectionStyle.values().length];
 		for(int i=0; i<entries.length; i++){
-			entries[i] = RelativeDirectionStyle.toHumanString(RelativeDirectionStyle.values()[i], this);
+			entries[i] = RelativeDirectionStyle.values()[i].toHumanString(this);
 		}
 		registerListPreference(osmandSettings.DIRECTION_STYLE, screen, entries, RelativeDirectionStyle.values());
 		
@@ -345,6 +356,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		dayNightModePreference.setOnPreferenceChangeListener(this);
 		routerServicePreference = (ListPreference) screen.findPreference(osmandSettings.ROUTER_SERVICE.getId());
 		routerServicePreference.setOnPreferenceChangeListener(this);
+
+		accessibilityModePreference = (ListPreference)screen.findPreference(osmandSettings.ACCESSIBILITY_MODE.getId());
+		accessibilityModePreference.setOnPreferenceChangeListener(this);
+		directionStylePreference = (ListPreference)screen.findPreference(osmandSettings.DIRECTION_STYLE.getId());
+		directionStylePreference.setOnPreferenceChangeListener(this);
 
 		Preference localIndexes =(Preference) screen.findPreference(OsmandSettings.LOCAL_INDEXES);
 		localIndexes.setOnPreferenceClickListener(this);
@@ -505,6 +521,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		dayNightModePreference.setSummary(getString(R.string.daynight_descr) + "  [" + osmandSettings.DAYNIGHT_MODE.get().toHumanString(this) + "]");
 		routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + osmandSettings.ROUTER_SERVICE.get() + "]");
 
+		accessibilityModePreference.setSummary(getString(R.string.accessibility_mode_descr) + "  [" + osmandSettings.ACCESSIBILITY_MODE.get().toHumanString(this) + "]");
+		directionStylePreference.setSummary(getString(R.string.settings_direction_style_descr) + "  [" + osmandSettings.DIRECTION_STYLE.get().toHumanString(this) + "]");
+
 /*
 		// TODO: Add Profile name to screen title (only, not to Preference title) of Profile specific settings
 		PreferenceScreen screen = getPreferenceScreen();
@@ -626,6 +645,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					dayNightModePreference.setSummary(getString(R.string.daynight_descr) + "  [" + osmandSettings.DAYNIGHT_MODE.get().toHumanString(this)  + "]");
 				} else if (listPref.getId().equals(osmandSettings.ROUTER_SERVICE.getId())) {
 					routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + osmandSettings.ROUTER_SERVICE.get() + "]");
+				} else if (listPref.getId().equals(osmandSettings.ACCESSIBILITY_MODE.getId())) {
+					PreferenceCategory accessibilityOptions = ((PreferenceCategory)(getPreferenceScreen().findPreference("accessibility_options")));
+					if (accessibilityOptions != null)
+						accessibilityOptions.setEnabled(getMyApplication().accessibilityEnabled());
+					accessibilityModePreference.setSummary(getString(R.string.accessibility_mode_descr) + "  [" + osmandSettings.ACCESSIBILITY_MODE.get().toHumanString(this) + "]");
+				} else if (listPref.getId().equals(osmandSettings.DIRECTION_STYLE.getId())) {
+					directionStylePreference.setSummary(getString(R.string.settings_direction_style_descr) + "  [" + osmandSettings.DIRECTION_STYLE.get().toHumanString(this) + "]");
 				}
 			}
 			if (listPref.getId().equals(osmandSettings.RENDERER.getId())) {

@@ -2,6 +2,8 @@ package net.osmand.access;
 
 import java.util.ArrayList;
 
+import net.osmand.plus.OsmandApplication;
+
 import android.graphics.Rect;
 import android.os.SystemClock;
 import android.view.MotionEvent;
@@ -19,7 +21,7 @@ import android.view.accessibility.AccessibilityEvent;
 //
 public class AccessibleContent extends ArrayList<View> {
 
-    public interface Callback {
+    protected interface Callback {
         public boolean dispatchNativeTouchEvent(MotionEvent event);
     }
 
@@ -36,39 +38,41 @@ public class AccessibleContent extends ArrayList<View> {
     }
 
     public boolean dispatchTouchEvent(MotionEvent event, Callback callback) {
-        int action = event.getAction();
-        View newTouch;
-        switch (action) {
-        case MotionEvent.ACTION_MOVE:
-            newTouch = findTouch(event);
-            if ((newTouch != null) && (newTouch != nowTouched)) {
-                float x = event.getX();
-                float y = event.getY();
-                float pressure = event.getPressure();
-                float size = event.getSize();
-                int metaState = event.getMetaState();
-                float xPrecision = event.getXPrecision();
-                float yPrecision = event.getYPrecision();
-                int deviceId = event.getDeviceId();
-                int edgeFlags = event.getEdgeFlags();
-                event.setAction(MotionEvent.ACTION_CANCEL);
-                callback.dispatchNativeTouchEvent(event);
-                newTouch.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
-                long now = SystemClock.uptimeMillis();
-                event.recycle();
-                event = MotionEvent.obtain(now, now, MotionEvent.ACTION_DOWN, x, y, pressure, size,
-                                           metaState, xPrecision, yPrecision, deviceId, edgeFlags);
+        if (OsmandApplication.getSettings().ACCESSIBILITY_EXTENSIONS.get()) {
+            int action = event.getAction();
+            View newTouch;
+            switch (action) {
+            case MotionEvent.ACTION_MOVE:
+                newTouch = findTouch(event);
+                if ((newTouch != null) && (newTouch != nowTouched)) {
+                    float x = event.getX();
+                    float y = event.getY();
+                    float pressure = event.getPressure();
+                    float size = event.getSize();
+                    int metaState = event.getMetaState();
+                    float xPrecision = event.getXPrecision();
+                    float yPrecision = event.getYPrecision();
+                    int deviceId = event.getDeviceId();
+                    int edgeFlags = event.getEdgeFlags();
+                    event.setAction(MotionEvent.ACTION_CANCEL);
+                    callback.dispatchNativeTouchEvent(event);
+                    newTouch.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
+                    long now = SystemClock.uptimeMillis();
+                    event.recycle();
+                    event = MotionEvent.obtain(now, now, MotionEvent.ACTION_DOWN, x, y, pressure, size,
+                                               metaState, xPrecision, yPrecision, deviceId, edgeFlags);
+                }
+                nowTouched = newTouch;
+                break;
+            case MotionEvent.ACTION_DOWN:
+                nowTouched = findTouch(event);
+                if (nowTouched != null)
+                    nowTouched.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
+                break;
+            default:
+                nowTouched = null;
+                break;
             }
-            nowTouched = newTouch;
-            break;
-        case MotionEvent.ACTION_DOWN:
-            nowTouched = findTouch(event);
-            if (nowTouched != null)
-                nowTouched.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
-            break;
-        default:
-            nowTouched = null;
-            break;
         }
         return callback.dispatchNativeTouchEvent(event);
     }
