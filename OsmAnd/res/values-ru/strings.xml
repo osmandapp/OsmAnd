@@ -608,7 +608,7 @@
 	<string name="new_route_calculated_dist">Проложен новый путь, расстояние</string>
 	<string name="arrived_at_destination">Вы прибыли в пункт назначения</string>
 	<string name="invalid_locations">Координаты неправильные</string>
-	<string name="go_back_to_osmand">Вернуться к OsmAnd карте</string>
+	<string name="go_back_to_osmand">Вернуться к карте OsmAnd</string>
 	<string name="close">Закрыть</string>
 	<string name="loading_data">Загрузка данных</string>
 	<string name="reading_indexes">Чтение индексов…</string>
@@ -786,6 +786,12 @@
 	<string name="edit_filter_create_message">Фильтр {0} создан</string>
 	<string name="default_buttons_selectall">Выделить все</string>
 	
+	<string name="accessibility_mode">Режим специальных возможностей</string>
+	<string name="accessibility_mode_descr">Включает дополнительные возможности для невизуального доступа</string>
+	<string name="accessibility_on">Включен</string>
+	<string name="accessibility_off">Выключен</string>
+	<string name="accessibility_default">Согласно общей установке в системе</string>
+	
 	<string name="backToMenu">Главное меню</string>
 	<string name="zoomOut">Уменьшить масштаб</string>
 	<string name="zoomIn">Увеличить масштаб</string>
@@ -836,6 +842,8 @@
 	<string name="zoom_by_trackball">Использовать трекбол для изменения масштаба</string>
 	<string name="use_short_object_names_descr">Использовать краткие названия объектов при исследовании карты</string>
 	<string name="use_short_object_names">Использовать краткие названия объектов</string>
+	<string name="accessibility_extensions_descr">Дополнительные возможности невизуального доступа для старых версий Android</string>
+	<string name="accessibility_extensions">Дополнительные возможности невизуального доступа</string>
 	<string name="accessibility_preferences_descr">Настройки для невизуального доступа</string>
 	<string name="accessibility_preferences">Специальные возможности</string>
 </resources>

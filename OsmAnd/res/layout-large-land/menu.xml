@@ -15,9 +15,11 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 				android:layout_marginLeft="24dp" android:layout_marginTop="8dp" android:layout_marginBottom="8dp" android:text="@string/app_version" android:gravity="right"
 				android:textColor="#000000" android:typeface="serif" android:id="@+id/TextVersion" android:textSize="18sp"/> 
 				<ImageView android:src="@drawable/help_icon" android:id="@+id/HelpButton" android:layout_marginTop="9dp"
+				android:contentDescription="@string/help"
 				android:focusable="true" android:clickable="true"
 				android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="6dp"/>
 				<ImageView android:src="@drawable/headliner_close" android:layout_marginRight="4dp" android:id="@+id/CloseButton"
+				android:contentDescription="@string/close"
 				android:layout_marginTop="9dp" android:focusable="true" android:clickable="true"
 				android:layout_height="wrap_content" android:layout_width="wrap_content"/>
 			</LinearLayout>
