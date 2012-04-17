@@ -12,6 +12,7 @@ import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
+import net.osmand.access.NavigationInfo;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.IMapLocationListener;
@@ -97,8 +98,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private static final int LOST_LOCATION_MSG_ID = 10;
 	private static final long LOST_LOCATION_CHECK_DELAY = 20000;
 	
-//	private static final int LONG_KEYPRESS_MSG_ID = 28;
-//	private static final int LONG_KEYPRESS_DELAY = 500;
+	private static final int LONG_KEYPRESS_MSG_ID = 28;
+	private static final int LONG_KEYPRESS_DELAY = 500;
 	
 	private long lastTimeAutoZooming = 0;
 	
@@ -109,6 +110,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	final private MapActivityActions mapActions = new MapActivityActions(this);
 	private EditingPOIActivity poiActions;
 	final private MapActivityLayers mapLayers = new MapActivityLayers(this);
+	private NavigationInfo navigationInfo;
 	
 	private SavingTrackHelper savingTrackHelper;
 	private LiveMonitoringHelper liveMonitoringHelper;
@@ -153,6 +155,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		settings = getMyApplication().getSettings();		
+		navigationInfo = new NavigationInfo(this);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		// Full screen is not used here
 		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -520,6 +523,18 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			//that they could do some key combinations with it...
 			// Victor : doing in that way doesn't close dialog properly!
 			//return true;
+		} else if (getMyApplication().accessibilityEnabled() && (keyCode == KeyEvent.KEYCODE_DPAD_CENTER)) {
+			if (!uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
+				Message msg = Message.obtain(uiHandler, new Runnable() {
+						@Override
+						public void run() {
+							emitNavigationHint();
+						}
+					});
+				msg.what = LONG_KEYPRESS_MSG_ID;
+				uiHandler.sendMessageDelayed(msg, LONG_KEYPRESS_DELAY);
+			}
+			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
 			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
 			// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -544,6 +559,26 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}
 		return super.onKeyDown(keyCode, event);
 	}
+
+    public String getNavigationHint(LatLon point) {
+        String hint = navigationInfo.getDirectionString(point, mapLayers.getLocationLayer().getHeading());
+        if (hint == null)
+            hint = getString(R.string.no_info);
+        return hint;
+    }
+
+    private void emitNavigationHint() {
+        final LatLon point = settings.getPointToNavigate();
+        if (point != null) {
+            if (routingHelper.isRouteCalculated()) {
+                routingHelper.getVoiceRouter().announceCurrentDirection();
+            } else {
+                AccessibleToast.makeText(this, getNavigationHint(point), Toast.LENGTH_LONG).show();
+            }
+        } else {
+            AccessibleToast.makeText(this, R.string.mark_final_location_first, Toast.LENGTH_SHORT).show();
+        }
+    }
 
 	public void setMapLocation(double lat, double lon){
 		mapView.setLatLon(lat, lon);
@@ -700,6 +735,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		registerUnregisterSensor(location);
 		updateSpeedBearing(location);
 		mapLayers.getLocationLayer().setLastKnownLocation(location);
+		navigationInfo.setLocation(location);
 		if(routingHelper.isFollowingMode()){
 			if(location == null || !location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
 				// Update routing position  
@@ -961,7 +997,12 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
    			//onBackPressed();
 			//return true;
 		} else if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
-			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
+			if (!getMyApplication().accessibilityEnabled()) {
+				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
+			} else if (uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
+				uiHandler.removeMessages(LONG_KEYPRESS_MSG_ID);
+				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
+			}
 			return true;
 		} else 
 			// Parrot device has only dpad left and right

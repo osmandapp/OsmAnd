@@ -38,6 +38,7 @@ import android.util.FloatMath;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.GestureDetector.OnGestureListener;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
@@ -184,6 +185,11 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		return application.accessibilityEnabled() ? false : super.onKeyDown(keyCode, event);
 	}
 
 	public void addLayer(OsmandMapLayer layer, float zOrder) {
