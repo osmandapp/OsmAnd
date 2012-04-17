@@ -580,6 +580,31 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
         }
     }
 
+    private void whereAmIDialog() {
+        final List<String> items = new ArrayList<String>();
+        items.add(getString(R.string.show_location));
+        items.add(getString(R.string.show_details));
+        AlertDialog.Builder menu = new AlertDialog.Builder(this);
+        menu.setItems(items.toArray(new String[items.size()]),
+                      new DialogInterface.OnClickListener() {
+                          @Override
+                          public void onClick(DialogInterface dialog, int item) {
+                              dialog.dismiss();
+                              switch (item) {
+                              case 0:
+                                  backToLocationImpl();
+                                  break;
+                              case 1:
+                                  navigationInfo.show(settings.getPointToNavigate(), mapLayers.getLocationLayer().getHeading());
+                                  break;
+                              default:
+                                  break;
+                              }
+                          }
+                      });
+        menu.show();
+    }
+
 	public void setMapLocation(double lat, double lon){
 		mapView.setLatLon(lat, lon);
 		locationChanged(lat, lon, this);
@@ -1147,7 +1172,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			startActivity(intentSettings);
 			return true;
 		} else if (itemId == R.id.map_where_am_i) {
-			backToLocationImpl();
+			if (getMyApplication().accessibilityEnabled()) {
+				whereAmIDialog();
+			} else {
+				backToLocationImpl();
+			}
 			return true;
 		} else if (itemId == R.id.map_show_gps_status) {
 			startGpsStatusIntent();
