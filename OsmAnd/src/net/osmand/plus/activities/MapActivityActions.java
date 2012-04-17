@@ -141,7 +141,7 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
-				final FavouritesDbHelper helper = ((OsmandApplication)mapActivity.getApplication()).getFavorites();
+				final FavouritesDbHelper helper = mapActivity.getMyApplication().getFavorites();
 				point.setName(editText.getText().toString());
 				point.setCategory(cat.getText().toString());
 				boolean added = helper.addFavourite(point);
@@ -149,7 +149,7 @@ public class MapActivityActions implements DialogProvider {
 					AccessibleToast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_favorite_dialog_favourite_added_template), point.getName()), Toast.LENGTH_SHORT)
 							.show();
 				}
-				mapActivity.getMapView().refreshMap();
+				mapActivity.getMapView().refreshMap(true);
 			}
 		});
 		return builder.create();

@@ -15,16 +15,19 @@ import org.apache.commons.logging.Log;
 
 import android.content.Context;
 
-public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
+public class OpenstreetmapLocalUtil extends AbstractOpenstreetmapUtil {
 	
 	private final Context ctx;
 	private final OpenstreetmapsDbHelper db;
+	//temporal IDs for not yet uploaded new POIs
+	private long nextid;
 
 	public final static Log log = LogUtil.getLog(OpenstreetmapLocalUtil.class);
 
 	public OpenstreetmapLocalUtil(Context uiContext){
 		this.ctx = uiContext;
 		this.db = new OpenstreetmapsDbHelper(ctx);
+		this.nextid = Math.min(-2,db.getMinID());
 	}
 
 	@Override
@@ -33,12 +36,21 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 	}
 	
 	@Override
-	public boolean commitNodeImpl(Action action, Node n, EntityInfo info, String comment){
+	public Node commitNodeImpl(Action action, Node n, EntityInfo info, String comment){
+		Node newNode = n;
+		if (n.getId() == -1) {
+			newNode = new Node(n,--nextid); //generate local id for the created node
+		}
 		OpenstreetmapPoint p = new OpenstreetmapPoint();
-		p.setEntity(n);
+		p.setEntity(newNode);
 		p.setAction(action);
 		p.setComment(comment);
-		return db.addOpenstreetmap(p);
+		if (p.getAction() == Action.DELETE && newNode.getId() < 0) { //if it is our local poi
+			db.deleteAllPOIModifications(p.getId());
+		} else {
+			db.addOpenstreetmap(p);
+		}
+		return newNode;
 	}
 	
 	@Override

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/showpoi" android:title="@string/local_openstreetmap_show_poi"></item>
+    <item android:id="@+id/deletepoimod" android:title="@string/local_openstreetmap_delete"></item>
+    
+
+</menu>

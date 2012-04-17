@@ -49,7 +49,7 @@ import android.util.Xml;
 import android.view.View;
 import android.widget.Toast;
 
-public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
+public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 	
 //	private final static String SITE_API = "http://api06.dev.openstreetmap.org/";
 	private final static String SITE_API = "http://api.openstreetmap.org/"; //$NON-NLS-1$
@@ -313,16 +313,17 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	}
 
 	@Override
-	public boolean commitNodeImpl(Action action, Node n, EntityInfo info, String comment){
+	public Node commitNodeImpl(Action action, final Node n, EntityInfo info, String comment){
 		if (isNewChangesetRequired()){
 			changeSetId = openChangeSet(comment);
 			changeSetTimeStamp = System.currentTimeMillis();
 		}
 		if(changeSetId < 0){
-			return false;
+			return null;
 		}
 
 		try {
+			Node newN = n;
 			StringWriter writer = new StringWriter(256);
 			XmlSerializer ser = Xml.newSerializer();
 			try {
@@ -353,18 +354,14 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 						int end = res.indexOf("\"", i); //$NON-NLS-1$
 						if (end > 0) {
 							newId = Long.parseLong(res.substring(i, end));
-							Node newN = new Node(n.getLatitude(), n.getLongitude(), newId);
-							for (String t : n.getTagKeySet()) {
-								newN.putTag(t, n.getTag(t));
-							}
-							n = newN;
+							newN = new Node(n, newId);
 						}
 					}
 				}
 				changeSetTimeStamp = System.currentTimeMillis();
-				return true;
+				return newN;
 			}
-			return false;
+			return null;
 		} finally {
 			// reuse changeset, do not close
 			//closeChangeSet(changeSetId);

@@ -41,9 +41,7 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.render.RenderingRulesStorage;
 
 import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -390,7 +388,7 @@ public class ResourceManager {
 				try {
 					progress.startTask(context.getString(R.string.installing_new_resources), -1); 
 					AssetManager assetManager = context.getAssets();
-					copyingAssets(assetManager, "", file, progress);
+					updateAssets(assetManager, file, progress);
 					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(Version.getFullVersion(context));
 				} catch (IOException e) {
 					log.error(e.getMessage(), e);
@@ -402,36 +400,28 @@ public class ResourceManager {
 		return Collections.emptyList();
 	}
 
-	private void copyingAssets(AssetManager assetManager, String ref, File dir, IProgress progress) throws IOException, XmlPullParserException {
-		XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser(); 
-		
-		Map<String, String> resourcesToCopy = new LinkedHashMap<String, String>();
-		InputStream open = assetManager.open("distributed_assets.xml");
-		parser.setInput(open, "UTF-8");
-		int next = 0;
-		while((next = parser.next()) != XmlPullParser.END_DOCUMENT){
-			if(next == XmlPullParser.START_TAG && parser.getName().equals("asset")){
-				String in = parser.getAttributeValue(null, "name");
-				String out = parser.getAttributeValue(null, "destination");
-				resourcesToCopy.put(in, out);
+	private void updateAssets(AssetManager assetManager, File appdir, IProgress progress) throws IOException, XmlPullParserException {
+		String[] voices = assetManager.list("voice");
+		File voicePath = context.getSettings().extendOsmandPath(ResourceManager.VOICE_PATH);
+		for (String voice : voices) {
+			if (new File(voicePath,voice).exists()) {
+				copyAssets(assetManager, new File("voice", voice + File.separatorChar + "ttsconfig.p").getPath(), new File(voicePath, voice + File.separatorChar + "_ttsconfig.p"));
 			}
 		}
-		open.close();
-		
-		for (String asset : resourcesToCopy.keySet()) {
-			String destination = resourcesToCopy.get(asset);
-			File file = new File(dir, destination);
-			if(file.exists()){
-				Algoritms.removeAllFiles(file);
-			}
-			file.getParentFile().mkdirs();
-			InputStream is = assetManager.open(asset, AssetManager.ACCESS_STREAMING);
-			FileOutputStream out = new FileOutputStream(file);
-			Algoritms.streamCopy(is, out);
-			out.close();
-			is.close();
+	}
+
+	//TODO consider some other place for this method?
+	public static void copyAssets(AssetManager assetManager, String assetName,
+			File file) throws IOException {
+		if(file.exists()){
+			Algoritms.removeAllFiles(file);
 		}
-		
+		file.getParentFile().mkdirs();
+		InputStream is = assetManager.open(assetName, AssetManager.ACCESS_STREAMING);
+		FileOutputStream out = new FileOutputStream(file);
+		Algoritms.streamCopy(is, out);
+		Algoritms.closeStream(out);
+		Algoritms.closeStream(is);
 	}
 
 	private void initRenderers(IProgress progress) {

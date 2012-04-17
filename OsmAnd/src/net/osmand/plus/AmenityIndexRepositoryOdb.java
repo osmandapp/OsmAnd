@@ -43,6 +43,8 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 	
 	
 	private final String[] columns = new String[]{"id", "x", "y", "name", "name_en", "type", "subtype", "opening_hours", "phone", "site"};        //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$//$NON-NLS-5$//$NON-NLS-6$//$NON-NLS-7$//$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$
+	private boolean changes = false;
+	
 	@Override
 	public List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom, PoiFilter filter, 
 			List<Amenity> amenities, ResultMatcher<Amenity> matcher){
@@ -177,11 +179,14 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 				new Object[] { MapUtils.get31TileNumberX(a.getLocation().getLongitude()), MapUtils.get31TileNumberY(a.getLocation().getLatitude()),  
 			a.getOpeningHours(), a.getName(), a.getEnName(), AmenityType.valueToString(a.getType()), a.getSubType(),
 			a.getSite(), a.getPhone(),  a.getId()});
+		
+		changes = true;
 		return true;
 	}
 	
 	public boolean deleteAmenities(long id){
 		db.execSQL("DELETE FROM " + IndexConstants.POI_TABLE+ " WHERE id="+id); //$NON-NLS-1$ //$NON-NLS-2$
+		changes = true;
 		return true;
 	}
 	
@@ -227,9 +232,19 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 		}
 		stat.close();
 		updateMaxMinBoundaries(IndexConstants.POI_TABLE);
-		
+		changes = true;
 	}
 
+	@Override
+	public boolean hasChange() {
+		return changes;
+	}
+	
+	@Override
+	public void clearChange() {
+		changes = false;
+	}
+	
 	private final static String SITE_API = "http://api.openstreetmap.org/"; //$NON-NLS-1$
 	
 	public static void createAmenityIndexRepository(File file) {
