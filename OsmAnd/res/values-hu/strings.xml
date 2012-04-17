@@ -544,7 +544,6 @@
 	<string name="continuous_rendering">Folyamatos megjelenítés</string>
 	<string name="continuous_rendering_descr">Renderelés folyamatos megjelenítése, vagy csak a kész térképé</string>
 	<string name="rendering_exception">Hiba történt a kiválasztott terület megjelenítésekor</string>
-	<string name="rendering_out_of_memory">Nincs elég memória a terület megjelenítéséhez</string>
 	<string name="show_point_options">Pont beállítások</string>
 	<string name="renderer_load_sucess">Megjelenítő stílus betöltve</string>
 	<string name="renderer_load_exception">Hiba: nem tölthető be a megjelenítő stílus</string>
