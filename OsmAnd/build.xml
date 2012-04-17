@@ -1,42 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="OsmAnd" default="help">
 
-    <!-- The local.properties file is created and updated by the 'android' tool.
-         It contains the path to the SDK. It should *NOT* be checked into
-         Version Control Systems. -->
     <property file="local.properties" />
-
-    <!-- The ant.properties file can be created by you. It is only edited by the
-         'android' tool to add properties to it.
-         This is the place to change some Ant specific build properties.
-         Here are some properties you may want to change/update:
-
-         source.dir
-             The name of the source directory. Default is 'src'.
-         out.dir
-             The name of the output directory. Default is 'bin'.
-
-         For other overridable properties, look at the beginning of the rules
-         files in the SDK, at tools/ant/build.xml
-
-         Properties related to the SDK location or the project target should
-         be updated using the 'android' tool with the 'update' action.
-
-         This file is an integral part of the build system for your
-         application and should be checked into Version Control Systems.
-
-         -->
     <property file="ant.properties" />
-
-    <!-- The project.properties file is created and updated by the 'android'
-         tool, as well as ADT.
-
-         This contains project specific properties such as project target, and library
-         dependencies. Lower level build properties are stored in ant.properties
-         (or in .classpath for Eclipse projects).
-
-         This file is an integral part of the build system for your
-         application and should be checked into Version Control Systems. -->
     <loadproperties srcFile="project.properties" />
 
     <!-- quick check on sdk.dir -->
@@ -45,96 +11,181 @@
             unless="sdk.dir"
     />
 
-
-<!-- extension targets. Uncomment the ones where you want to do custom work
-     in between standard targets -->
-<!--
-
-    /* This is typically used for code obfuscation.
-       Compiled code location: ${out.classes.absolute.dir}
-       If this is not done in place, override ${out.dex.input.absolute.dir} */
-    <target name="-post-compile">
-    </target>
--->
-	<property name="use.dir" value="../DataExtractionOSM/src/" />
-	<property name="use.absolute.dir" location="${use.dir}" />
-	<property name="raw.absolute.dir" location="raw" />
-	<property name="base.dir" location="." />
+    <property name="use.dir" value="../DataExtractionOSM/src/" />
+    <property name="use.absolute.dir" location="${use.dir}" />
+    <property name="raw.absolute.dir" location="raw" />
+    <property name="base.dir" location="." />
 	
-	<target name="-package-resources">
-		<echo>Packaging resources and assets...</echo>
-		<exec executable="${aapt}">
-			<!-- failonerror="true"> -->
-			<arg value="package" />
-			<arg value="-f" />
-			<arg value="-M" />
-			<arg value="${base.dir}/AndroidManifest.xml" />
-			<arg value="-S" />
-			<arg value="${resource.absolute.dir}" />
-			<arg value="-A" />
-			<arg value="${asset.absolute.dir}" />
-			<arg value="-I" />
-			<arg value="${android.jar}" />
-			<arg value="-F" />
-			<arg value="${out.absolute.dir}/${resource.package.file.name}" />
-			<arg value="${raw.absolute.dir}" />
-		</exec>
-	</target>
+	<!-- Altered generic setup -->
+	<!-- Workaround issue that Android SDK17 has a bug that by default and unchangable looks for jars inside libs folder -->
+	<!-- http://code.google.com/p/android/issues/detail?id=28446 -->
+    <target name="-setup">
+        <if>
+            <condition>
+                <not><isset property="setup.done" /></not>
+            </condition>
+            <then>
+                <echo>Creating output directories if needed...</echo>
+                <mkdir dir="${resource.absolute.dir}" />
+                <mkdir dir="${jar.libs.absolute.dir}" />
+                <mkdir dir="${out.absolute.dir}" />
+                <mkdir dir="${out.res.absolute.dir}" />
 
-	<target name="-pre-build">
-		<delete dir="${raw.absolute.dir}" verbose="${verbose}" />
-		<mkdir dir="${raw.absolute.dir}/classes" />
-		<copy todir="${raw.absolute.dir}">
-			<fileset dir="${use.absolute.dir}">
-				<exclude name="**/*.java" />
-			</fileset>
-		</copy>
-		<if> 
-		  <condition>
-		  		<isset property="net.osmand" />
-		  </condition>
-		  <then>
-		  	<replaceregexp file="AndroidManifest.xml" match='"@drawable/icon"' replace='"@drawable/icon_free"' byline="true" />
-		  	<replaceregexp file="AndroidManifest.xml" match='package="net.osmand.plus"' replace='package="net.osmand"' byline="true" />
-		  	<replaceregexp file="AndroidManifest.xml" match='android:process="net.osmand.plus"' replace='android:process="net.osmand"' byline="true" />
-		  	<replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;Osmand&lt;' byline="true" />
-		  </then>
-		  <else>
-		  	<replaceregexp file="AndroidManifest.xml" match='"@drawable/icon_free"' replace='"@drawable/icon"' byline="true" />
-		  	<replaceregexp file="AndroidManifest.xml" match='package="net.osmand"' replace='package="net.osmand.plus"' byline="true" />
-		  	<replaceregexp file="AndroidManifest.xml" match='android:process="net.osmand"' replace='android:process="net.osmand.plus"' byline="true" />
-		  </else>
-		</if>
-		<if> 
+                <property name="setup.done" value="true" />
+                <echo>Gathering info for ${ant.project.name}...</echo>
+                <!-- load project properties, resolve Android target, library dependencies
+                     and set some properties with the results.
+                     All property names are passed as parameters ending in -Out -->
+                <setup
+                        projectTypeOut="android.project.type"
+                        androidJarFileOut="android.jar"
+                        androidAidlFileOut="android.aidl"
+                        renderScriptExeOut="renderscript"
+                        renderScriptIncludeDirOut="android.rs"
+                        bootclasspathrefOut="android.target.classpath"
+                        projectLibrariesRootOut="project.libraries"
+                        projectLibrariesJarsOut="original.project.libraries.jars"
+                        projectLibrariesResOut="project.libraries.res"
+                        projectLibrariesPackageOut="project.libraries.package"
+                        projectLibrariesLibsOut="project.libraries.libs"
+                        targetApiOut="target.api"
+                        verbose="${verbose}"
+                />
+				
+				<!-- osmchange -->
+				<path id="project.libraries.jars">
+					<path refid="original.project.libraries.jars"/>
+					<fileset dir="${jar.libs.absolute.dir}">
+						<include name="*.jar"/>
+					</fileset>
+				</path>
+				<!-- osmchange -->
+
+                <!-- sets a few boolean based on android.project.type
+                     to make the if task easier -->
+                <condition property="project.is.library" else="false">
+                    <equals arg1="${android.project.type}" arg2="library" />
+                </condition>
+                <condition property="project.is.test" else="false">
+                    <equals arg1="${android.project.type}" arg2="test" />
+                </condition>
+
+                <!-- If a test project, resolve absolute path to tested project. -->
+                <if condition="${project.is.test}">
+                    <then>
+                        <property name="tested.project.absolute.dir" location="${tested.project.dir}" />
+                    </then>
+                </if>
+            </then>
+        </if>
+    </target>
+	
+	<!-- Puts the project's resources into the output package file
+         This actually can create multiple resource package in case
+         Some custom apk with specific configuration have been
+         declared in default.properties.
+         -->
+    <target name="-package-resources" depends="-crunch">
+        <aapt executable="${aapt}"
+				command="package"
+				versioncode="${version.code}"
+				versionname="${version.name}"
+				debug="${build.is.packaging.debug}"
+				manifest="AndroidManifest.xml"
+				assets="${asset.absolute.dir}"
+				androidjar="${android.jar}"
+				apkfolder="${out.absolute.dir}"
+				nocrunch="${build.packaging.nocrunch}"
+				resourcefilename="${resource.package.file.name}"
+				resourcefilter="${aapt.resource.filter}"
+				projectLibrariesResName="project.libraries.res"
+				projectLibrariesPackageName="project.libraries.package"
+				previousBuildType="${build.last.target}"
+				buildType="${build.target}">
+			<res path="${out.res.absolute.dir}" />
+			<res path="${resource.absolute.dir}" />
+		</aapt>
+		
+		<!-- osmchange -->
+		<echo>Packaging extra raw resources...</echo>
+		<zip destfile="${out.absolute.dir}/${resource.package.file.name}"
+			basedir="${raw.absolute.dir}"
+			update="true" />
+		<!-- osmchange -->
+    </target>
+
+	<!-- Extra target -->
+    <target name="-pre-build">
+        <delete dir="${raw.absolute.dir}" verbose="${verbose}" />
+        <mkdir dir="${raw.absolute.dir}/classes" />
+        <copy todir="${raw.absolute.dir}">
+            <fileset dir="${use.absolute.dir}">
+                <exclude name="**/*.java" />
+            </fileset>
+        </copy>
+        <if>
+            <condition>
+                <isset property="net.osmand" />
+            </condition>
+            <then>
+                <replaceregexp file="AndroidManifest.xml" match='"@drawable/icon"' replace='"@drawable/icon_free"' byline="true" />
+                <replaceregexp file="AndroidManifest.xml" match='package="net.osmand.plus"' replace='package="net.osmand"' byline="true" />
+                <replaceregexp file="AndroidManifest.xml" match='android:process="net.osmand.plus"' replace='android:process="net.osmand"' byline="true" />
+                <replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;Osmand&lt;' byline="true" />
+            </then>
+            <else>
+                <replaceregexp file="AndroidManifest.xml" match='"@drawable/icon_free"' replace='"@drawable/icon"' byline="true" />
+                <replaceregexp file="AndroidManifest.xml" match='package="net.osmand"' replace='package="net.osmand.plus"' byline="true" />
+                <replaceregexp file="AndroidManifest.xml" match='android:process="net.osmand"' replace='android:process="net.osmand.plus"' byline="true" />
+            </else>
+        </if>
+        <if>
+            <condition>
+                <isset property="net.osmand.plus" />
+            </condition>
+            <then>
+                <replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;Osmand+&lt;' byline="true" />
+            </then>
+        </if>
+        <if>
+            <condition>
+                <isset property="build.version" />
+            </condition>
+            <then>
+                <replaceregexp file="res/values/no_translate.xml" match='"app_version"&gt;(.*)&lt;' replace='"app_version"&gt;${build.version}&lt;' byline="true" />
+            </then>
+        </if>
+		
+		<!-- Native section -->
+		<if>
 			<condition>
-			 	<isset property="net.osmand.plus" />
+				<isset property="nativeoff"/>
 			</condition>
 			<then>
-			  	<replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;Osmand+&lt;' byline="true" />
- 		    </then>
+				<echo>Not using native, excluding from build</echo>
+				<move file="${native.libs.absolute.dir}" tofile="${native.libs.absolute.dir}.skipped"/>
+			</then>
+			<else>
+				<fail message="ndk.dir is missing. Make sure to generate local.properties or to inject it through an env var" unless="ndk.dir"/>
+				<echo>Building native code</echo>
+
+				<exec command="sh ${ndk.dir}/ndk-build -j8 V=1 OSMAND_ARM_ONLY=true" failonerror="true"/>
+			</else>
 		</if>
-		<if> 
-		  <condition>
-	  		<isset property="build.version" />
-		  </condition>
-		  <then>
-		  	 <replaceregexp file="res/values/no_translate.xml" match='"app_version"&gt;(.*)&lt;' replace='"app_version"&gt;${build.version}&lt;' byline="true" />
-		  </then>
-		 </if>
-	</target>
+    </target>
 
-
-    <!-- Compiles this project's .java files into .class files. -->
+	<!-- Compiles this project's .java files into .class files. -->
     <target name="-compile" depends="-build-setup, -pre-build, -code-gen, -pre-compile">
         <do-only-if-manifest-hasCode elseText="hasCode = false. Skipping...">
-        	<!-- Osmand plus support -->
-        	<mkdir dir="${gen.absolute.dir}/net/osmand/plus"/>
-        	<copy todir="${gen.absolute.dir}/net/osmand/plus">
-        		<fileset dir="${gen.absolute.dir}/net/osmand">
-        			<include name="R.java" />
-        		</fileset>
-        	</copy>
-        	<replaceregexp file="${gen.absolute.dir}/net/osmand/plus/R.java" match='package net.osmand;' replace='package net.osmand.plus;' byline="true" />
+			<!-- osmchange : Osmand plus support -->
+            <mkdir dir="${gen.absolute.dir}/net/osmand/plus"/>
+            <copy todir="${gen.absolute.dir}/net/osmand/plus">
+                <fileset dir="${gen.absolute.dir}/net/osmand">
+                    <include name="R.java" />
+                </fileset>
+            </copy>
+            <replaceregexp file="${gen.absolute.dir}/net/osmand/plus/R.java" match='package net.osmand;' replace='package net.osmand.plus;' byline="true" />
+			<!-- osmchange : Osmand plus support -->
             <!-- If android rules are used for a test project, its classpath should include
                  tested project's location -->
             <condition property="extensible.classpath"
@@ -146,7 +197,7 @@
                     value="${tested.project.absolute.dir}/${jar.libs.dir}"
                     else="${jar.libs.dir}">
                 <isset property="tested.project.absolute.dir" />
-            </condition>
+            </condition>              
             <javac encoding="${java.encoding}"
                     source="${java.source}" target="${java.target}"
                     debug="true" extdirs="" includeantruntime="false"
@@ -154,26 +205,26 @@
                     bootclasspathref="android.target.classpath"
                     verbose="${verbose}"
                     classpath="${extensible.classpath}"
-                    classpathref="jar.libs.ref">
+                    classpathref="project.libraries.jars"
+                    fork="${need.javac.fork}">
                 <src path="${source.absolute.dir}" />
-		
-				<!-- osmchange -->
-				<src path="${use.absolute.dir}" />
-				<exclude name="**/LogUtil.java" />
-				<exclude name="**/OsmStorageWriter.java" />
-				<exclude name="**/net/osmand/data/index/" />
-				<exclude name="**/net/osmand/data/preparation/" />
-				<exclude name="**/net/osmand/osm/util/" />
-				<exclude name="**/net/osmand/swing/" />
-				<exclude name="**/rtree/" />
-				<!-- osmchange -->
-
-                <src path="${gen.absolute.dir}" />
+				<src path="${gen.absolute.dir}" />
                 <classpath>
                     <fileset dir="${extensible.libs.classpath}" includes="*.jar" />
                 </classpath>
                 <compilerarg line="${java.compilerargs}" />
+				<!-- osmchange -->
+                <src path="${use.absolute.dir}" />
+                <exclude name="**/LogUtil.java" />
+                <exclude name="**/OsmStorageWriter.java" />
+                <exclude name="**/net/osmand/data/index/" />
+                <exclude name="**/net/osmand/data/preparation/" />
+                <exclude name="**/net/osmand/osm/util/" />
+                <exclude name="**/net/osmand/swing/" />
+                <exclude name="**/rtree/" />
+                <!-- osmchange -->
             </javac>
+                
             <!-- if the project is a library then we generate a jar file -->
             <if condition="${project.is.library}">
                 <then>
@@ -187,8 +238,13 @@
                             <echo>Custom jar packaging exclusion: ${android.package.excludes}</echo>
                         </then>
                     </if>
+
+                    <propertybyreplace name="manifest.package.path" input="${manifest.package}" replace="." with="/" />
+
                     <jar destfile="${out.library.jar.file}">
-                        <fileset dir="${out.classes.absolute.dir}" excludes="**/R.class **/R$*.class"/>
+                        <fileset dir="${out.classes.absolute.dir}"
+                                includes="**/*.class"
+                                excludes="${manifest.package.path}/R.class ${manifest.package.path}/R$*.class ${manifest.package.path}/Manifest.class ${manifest.package.path}/Manifest$*.class ${manifest.package.path}/BuildConfig.class"/>
                         <fileset dir="${source.absolute.dir}" excludes="**/*.java ${android.package.excludes}" />
                     </jar>
                 </then>
@@ -204,22 +260,31 @@
                                mode="overwrite"
                                instrpath="${out.absolute.dir}/classes"
                                outdir="${out.absolute.dir}/classes">
+                            <filter excludes="${manifest.package}.R,${manifest.package}.R$$*,${manifest.package}.BuildConfig" />
+                            <filter value="${emma.filter}" />
                         </instr>
-                        <!-- TODO: exclusion filters on R*.class and allowing custom exclusion from
-                             user defined file -->
                     </emma>
                 </then>
             </if>
         </do-only-if-manifest-hasCode>
     </target>
-
-
-	<!--taskdef classname="net.bluecow.googlecode.ant.GoogleCodeUploadTask" 
+	
+    <!--taskdef classname="net.bluecow.googlecode.ant.GoogleCodeUploadTask" 
         classpath="ant-lib/ant-googlecode-0.0.2.jar" name="gcupload"/-->
 
-	<path id="lib.path">
-		<fileset dir="ant-lib" includes="*.jar" />
-	</path>
+    <path id="lib.path">
+        <fileset dir="ant-lib" includes="*.jar" />
+    </path>
+	
+	<target name="debug-nondk">
+        <property name="nativeoff" value="true"/>
+        <antcall target="debug"/>
+    </target>
+	
+	<target name="-post-package" if="nativeoff">
+		<echo>Restoring ${native.libs.absolute.dir} to it's place...</echo>
+		<move file="${native.libs.absolute.dir}.skipped" tofile="${native.libs.absolute.dir}"/>
+	</target>
 
     <!-- Import the actual build file.
 
@@ -239,78 +304,20 @@
          In all cases you must update the value of version-tag below to read 'custom' instead of an integer,
          in order to avoid having your file be overridden by tools such as "android update project"
     -->
-    <!-- version-tag: 1 -->
+    <!-- version-tag: custom -->
     <import file="${sdk.dir}/tools/ant/build.xml" />
 
-    <macrodef name="package-helper">
-        <element name="extra-jars" optional="yes" />
-        <sequential>
-	<if>
-	 <condition>
-	 	<isset property="nativeoff"/>
-	 </condition>
-	 <then>
-		<echo>Package helper running: nativeoff</echo>
-            <apkbuilder
-                    outfolder="${out.absolute.dir}"
-                    resourcefile="${resource.package.file.name}"
-                    apkfilepath="${out.packaged.file}"
-                    debugpackaging="${build.is.packaging.debug}"
-                    debugsigning="${build.is.signing.debug}"
-                    verbose="${verbose}"
-                    hascode="${manifest.hasCode}"
-                    previousBuildType="${build.last.is.packaging.debug}/${build.last.is.signing.debug}"
-                    buildType="${build.is.packaging.debug}/${build.is.signing.debug}">
-                <dex path="${intermediate.dex.file}"/>
-                <sourcefolder path="${source.absolute.dir}"/>
-                <jarfile refid="jar.libs.ref" />
-                <extra-jars/>
-            </apkbuilder>
-	</then>
-	 <else>
-	 	<fail message="ndk.dir is missing. Make sure to generate local.properties  or to inject it through an env var" unless="ndk.dir"/>
-	 	<!-- Requires 1) gcc, 2) make, 3) download android sources (skia) - specify branch 4) Define environment variable ANDROID_SRC -->	
-		<echo>Package helper running: nativeon</echo>
-	 	
-	 	    <exec command="${ndk.dir}/ndk-build -j 8 V=1" failonerror="true"/>
-            <apkbuilder
-                    outfolder="${out.absolute.dir}"
-                    resourcefile="${resource.package.file.name}"
-                    apkfilepath="${out.packaged.file}"
-                    debugpackaging="${build.is.packaging.debug}"
-                    debugsigning="${build.is.signing.debug}"
-                    verbose="${verbose}"
-                    hascode="${manifest.hasCode}"
-                    previousBuildType="${build.last.is.packaging.debug}/${build.last.is.signing.debug}"
-                    buildType="${build.is.packaging.debug}/${build.is.signing.debug}">
-                <dex path="${intermediate.dex.file}"/>
-                <sourcefolder path="${source.absolute.dir}"/>
-                <jarfile refid="jar.libs.ref" />
-                <nativefolder path="${native.libs.absolute.dir}" />
-                <nativefolder refid="project.libraries.libs" />
-                <extra-jars/>
-            </apkbuilder>
-	 </else>
-	</if>
-        </sequential>
-    </macrodef>
+    <taskdef name="cpd" classname="net.sourceforge.pmd.cpd.CPDTask" classpathref="lib.path"/>
 
-	<target name="debug-nondk">
-	 	<property name="nativeoff" value="true"/>
-        <antcall target="debug"/>
-	</target>
-	
-	<taskdef name="cpd" classname="net.sourceforge.pmd.cpd.CPDTask" classpathref="lib.path"/>
-	 
-	<target name="cpd" description="Search for cut-and-pasted code">
-	  <property name="cpd.report.xml" location="cpd.xml"/>
-	  <cpd minimumTokenCount="100" format="xml" outputFile="${cpd.report.xml}"
-	      ignoreLiterals="true" ignoreIdentifiers="true">
-	    <fileset dir="${source.absolute.dir}" includes="**/*.java"/>
-	  </cpd>
-	</target>
+    <target name="cpd" description="Search for cut-and-pasted code">
+        <property name="cpd.report.xml" location="cpd.xml"/>
+        <cpd minimumTokenCount="100" format="xml" outputFile="${cpd.report.xml}"
+            ignoreLiterals="true" ignoreIdentifiers="true">
+            <fileset dir="${source.absolute.dir}" includes="**/*.java"/>
+        </cpd>
+    </target>
 
-	<!-- NOT used now for night builds could be deleted 
+    <!-- NOT used now for night builds could be deleted 
 	<typedef resource="org/tigris/subversion/svnant/svnantlib.xml" classpathref="lib.path" />
 	<target name="update">
 		<svn svnkit="true">
