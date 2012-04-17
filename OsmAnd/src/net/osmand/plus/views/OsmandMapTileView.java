@@ -9,6 +9,7 @@ import java.util.Map;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.access.AccessibleToast;
+import net.osmand.access.MapExplorer;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.IMapLocationListener;
@@ -163,7 +164,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		getHolder().addCallback(this);
 
 		animatedDraggingThread = new AnimateDraggingMapThread(this);
-		gestureDetector = new GestureDetector(getContext(), new MapTileViewOnGestureListener());
+		gestureDetector = new GestureDetector(getContext(), new MapExplorer(this, new MapTileViewOnGestureListener()));
 		multiTouchSupport = new MultiTouchSupport(getContext(), new MapTileViewMultiTouchZoomListener());
 		gestureDetector.setOnDoubleTapListener(new MapTileViewOnDoubleTapListener());
 
@@ -217,7 +218,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	@SuppressWarnings("unchecked")
 	public <T extends OsmandMapLayer> T getLayerByClass(Class<T> cl) {
 		for(OsmandMapLayer lr : layers) {
-			if(cl.isInstance(cl)){
+			if(cl.isInstance(lr)){
 				return (T) lr;
 			}
 		}
