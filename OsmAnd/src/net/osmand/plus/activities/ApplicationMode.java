@@ -19,8 +19,8 @@ public enum ApplicationMode {
 		this.key = key;
 	}
 
-	public static String toHumanString(ApplicationMode m, Context ctx) {
-		return ctx.getResources().getString(m.key);
+	public String toHumanString(Context ctx) {
+		return ctx.getResources().getString(key);
 	}
 
 }

@@ -57,6 +57,8 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.util.AttributeSet;
+import android.view.View;
 import android.widget.Toast;
 
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
@@ -321,7 +323,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		
 		entries = new String[ApplicationMode.values().length];
 		for(int i=0; i<entries.length; i++){
-			entries[i] = ApplicationMode.toHumanString(ApplicationMode.values()[i], this);
+			entries[i] = ApplicationMode.values()[i].toHumanString(this);
 		}
 		registerListPreference(osmandSettings.APPLICATION_MODE, screen, entries, ApplicationMode.values());
 		
@@ -501,7 +503,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		
 		updateApplicationDirTextAndSummary();
 
-		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  [" + ApplicationMode.toHumanString(osmandSettings.APPLICATION_MODE.get(), this) + "]");
+		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  [" + osmandSettings.APPLICATION_MODE.get().toHumanString(this) + "]");
 		dayNightModePreference.setSummary(getString(R.string.daynight_descr) + "  [" + osmandSettings.DAYNIGHT_MODE.get().toHumanString(this) + "]");
 		routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + osmandSettings.ROUTER_SERVICE.get() + "]");
 
@@ -797,6 +799,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	@Override
 	public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
 			Preference preference) {
+		//customize the sub-preference title according the selected profile
+		if (preference.getKey() != null && preference instanceof PreferenceScreen && 
+				((PreferenceCategory)findPreference("profile_dep_cat")).findPreference(preference.getKey()) != null) {
+			PreferenceScreen scr = (PreferenceScreen)preference;
+			scr.getDialog().setTitle(scr.getTitle() + " [" + osmandSettings.APPLICATION_MODE.get().toHumanString(this) + "]");
+		}
+		
 		if (preference == applicationDir) {
 			return true;
 		}
