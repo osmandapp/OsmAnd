@@ -7,7 +7,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -82,14 +81,6 @@ public class BidForFixHelper {
 			return null;
 		}
 
-//		public BFFIssue(String link, String name, String shortname,
-//				String descripton) {
-//			this.link = link;
-//			this.name = name;
-//			this.shortname = shortname;
-//			this.descripton = descripton;
-//		}
-
 		public String getDescripton() {
 			return descripton;
 		}
@@ -141,7 +132,7 @@ public class BidForFixHelper {
 	public void loadList() {
 		if (isReloadNeeded()) {
 			BufferedReader in = null;
-			String url = "http://www.bidforfix.com/p/" + project + "/issues/?count=20";
+			String url = "http://www.bidforfix.com/p/" + project + "/issues/";
 			try {
 				URL twitter = new URL(url);
 				URLConnection tc = twitter.openConnection();
@@ -162,7 +153,6 @@ public class BidForFixHelper {
 						bffIssues.add(new BFFIssue(jo));
 					}
 				}
-				Collections.sort(bffIssues);
 				initialized = new Date();
 			} catch (MalformedURLException e) {
 				initialized = new Date(Long.MAX_VALUE); //bad url, don't try anymore
