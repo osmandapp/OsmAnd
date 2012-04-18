@@ -190,7 +190,7 @@ public:
 		R_POINT = storage->getProperty("point");
 		R_AREA = storage->getProperty("area");
 		R_CYCLE = storage->getProperty("cycle");
-		R_CYCLE = storage->getProperty("nameTag");
+		R_NAME_TAG = storage->getProperty("nameTag");
 
 	}
 

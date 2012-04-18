@@ -267,11 +267,10 @@ bool readMapLevel(io::CodedInputStream* input, MapRoot* root) {
 			break;
 		}
 		case OsmAndMapIndex_MapRootLevel::kBoxesFieldNumber: {
-			uint32 length;
-			readInt(input, &length);
-			int filePointer = input->getTotalBytesRead();
-			int oldLimit = input->PushLimit(length);
 			MapTreeBounds bounds;
+			readInt(input, &bounds.length);
+			bounds.filePointer = input->getTotalBytesRead();
+			int oldLimit = input->PushLimit(bounds.length);
 			readMapTreeBounds(input, &bounds, root);
 			root->bounds.push_back(bounds);
 			input->Skip(input->BytesUntilLimit());
@@ -399,6 +398,7 @@ bool initMapStructure(io::CodedInputStream* input, BinaryMapFile* file) {
 			readInt(input, &mapIndex.length);
 			mapIndex.filePointer = input->getTotalBytesRead();
 			int oldLimit = input->PushLimit(mapIndex.length);
+			__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Map index %d length %d", mapIndex.filePointer, mapIndex.length);
 			readMapIndex(input, &mapIndex);
 			input->PopLimit(oldLimit);
 			input->Seek(mapIndex.filePointer + mapIndex.length);
@@ -496,7 +496,7 @@ bool acceptTypes(SearchQuery* req, std::vector<tag_value>& types, MapIndex* root
 
 MapDataObject* readMapDataObject(io::CodedInputStream* input, MapTreeBounds* tree, SearchQuery* req,
 			MapIndex* root) {
-	uint32 tag = input->ReadTag();
+	uint32 tag = WireFormatLite::GetTagFieldNumber(input->ReadTag());
 	bool area = MapData::kAreaCoordinatesFieldNumber == tag;
 	if(!area && MapData::kCoordinatesFieldNumber != tag) {
 		return NULL;
@@ -538,6 +538,7 @@ MapDataObject* readMapDataObject(io::CodedInputStream* input, MapTreeBounds* tre
 			maxY = max(maxY, y);
 		}
 	}
+	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Object %d %d %d %d", maxX, minX, minY, maxY);
 	if (!contains) {
 		if (maxX >= req->left && minX <= req->right && minY <= req->bottom && maxY >= req->top) {
 			contains = true;
@@ -725,9 +726,9 @@ bool searchMapTreeBounds(io::CodedInputStream* input, MapTreeBounds* current, Ma
 				child->ocean = current->ocean;
 			}
 			searchMapTreeBounds(input, child, current, req, foundSubtrees);
-			delete child;
 			input->PopLimit(oldLimit);
 			input->Seek(child->filePointer + child->length);
+			delete child;
 			break;
 		}
 		default: {
@@ -784,7 +785,6 @@ bool readMapDataBlocks(io::CodedInputStream* input, SearchQuery* req, MapTreeBou
 			uint32 length;
 			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &length)));
 			int oldLimit = input->PushLimit(length);
-
 			MapDataObject* mapObject = readMapDataObject(input, tree, req, root);
 			if (mapObject != NULL) {
 				mapObject->id += baseId;
@@ -827,6 +827,7 @@ void searchMapData(io::CodedInputStream* input, MapRoot* root, MapIndex* ind, Se
 		searchMapTreeBounds(input, i, root, req, &foundSubtrees);
 		input->PopLimit(oldLimit);
 
+
 		sort(foundSubtrees.begin(), foundSubtrees.end(), sortTreeBounds);
 		uint32 length;
 		for (std::vector<MapTreeBounds>::iterator tree = foundSubtrees.begin();
@@ -835,7 +836,7 @@ void searchMapData(io::CodedInputStream* input, MapRoot* root, MapIndex* ind, Se
 				return;
 			}
 			input->Seek(tree->mapDataBlock);
-			WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &tree->mapDataBlock);
+			WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &length);
 			int oldLimit = input->PushLimit(length);
 			readMapDataBlocks(input, req, tree, ind);
 			input->PopLimit(oldLimit);
@@ -905,6 +906,8 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 //	}
 //
 //	proccessMultiPolygons(multyPolygons, q.left, q.right, q.bottom, q.top, q.zoom, result->result);
+	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Search : tree - read( %d), accept( %d), objs - visit( %d), accept(%d), in result(%d) ", q.numberOfReadSubtrees,
+				q.numberOfAcceptedSubtrees, q.numberOfVisitedObjects, q.numberOfAcceptedObjects, result->result.size());
 	if(q.result.size() > 0) {
 		__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Search : tree - read( %d), accept( %d), objs - visit( %d), accept(%d), in result(%d) ", q.numberOfReadSubtrees,
 			q.numberOfAcceptedSubtrees, q.numberOfVisitedObjects, q.numberOfAcceptedObjects, result->result.size());
