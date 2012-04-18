@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
+import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.Node;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
 import net.osmand.plus.OsmandApplication;
@@ -46,7 +47,7 @@ public abstract class AbstractOpenstreetmapUtil implements OpenstreetmapUtil  {
 		}
 		// add amenities
 		if (OpenstreetmapUtil.Action.DELETE != action) {
-			List<Amenity> ams = Amenity.parseAmenities(n, new ArrayList<Amenity>());
+			List<Amenity> ams = Amenity.parseAmenities(MapRenderingTypes.getDefault(), n, new ArrayList<Amenity>());
 			for (Amenity a : ams) {
 				repo.addAmenity(a);
 				repo.clearCache();
