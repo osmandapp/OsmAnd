@@ -6,6 +6,20 @@
     <string name="show_ruler_level_descr">Vonalzó rajzolása a térképre</string>
 <string name="show_ruler_level">Vonalzó megjelenítése</string>
 
+<string name="info_button">Információ</string>
+<string name="back_to_location">Vissza a pozícióra</string>
+<string name="help">Segítség</string>
+    <string name="show_details">Részletek megmutatása</string>
+
+<string name="accessibility_extensions_descr">Akadálymentesítési kiegészítés régi Android verzióhoz</string>
+<string name="accessibility_extensions">Akadálymentesítési kiegészítés</string>
+<string name="accessibility_mode">Akadálymentesítési mód</string>
+<string name="accessibility_mode_descr">Akadálymentesítési lehetőségek bekapcsolása</string>
+<string name="accessibility_on">Bekapcsol</string>
+<string name="accessibility_off">Kikapcsol</string>
+<string name="accessibility_default">Rendszerbeállítás szerint</string>
+
+
 <string name="backToMenu">Vissza a menübe</string>
 <string name="zoomOut">Kicsinyít</string>
 <string name="zoomIn">Nagyít</string>
