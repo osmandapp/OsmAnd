@@ -232,7 +232,7 @@
 	<string name="choose_audio_stream">Голосовые инструкции</string>
 	<string name="choose_audio_stream_descr">Выберите канал для голосовых инструкций (зависит от системы)</string>
 	<string name="voice_stream_voice_call">Поток голосовых звонков</string>
-	<string name="voice_stream_notification">Потом нотификаций</string>
+	<string name="voice_stream_notification">Поток нотификаций</string>
 	<string name="voice_stream_music">Поток музыки</string>
 	<string name="warning_tile_layer_not_downloadable">Слой карты %1$s не может быть загружен приложением, попробуйте установить его заново.</string>
 	<string name="overlay_transparency_descr">Изменить прозрачность карты покрытия</string>
