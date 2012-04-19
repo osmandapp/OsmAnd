@@ -1,6 +1,7 @@
 package net.osmand.plus.views;
 
 import net.osmand.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.TurnType;
@@ -31,8 +32,8 @@ public class NextTurnInfoControl extends MapInfoControl {
 	private Paint paintBlack;
 	private Paint paintRouteDirection;
 
-	private boolean makeUturnWhenPossible;
-	private int turnImminent;
+	protected boolean makeUturnWhenPossible;
+	protected int turnImminent;
 
 	public NextTurnInfoControl(Context ctx, Paint textPaint, Paint subtextPaint) {
 		super(ctx);
@@ -66,7 +67,6 @@ public class NextTurnInfoControl extends MapInfoControl {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		if (pathForTurn != null) {
-			turnImminent = RoutingHelper.turnImminent();
 			if (turnImminent == 1) {
 				paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_imminent));
 			} else if (turnImminent == 0) {
@@ -85,8 +85,6 @@ public class NextTurnInfoControl extends MapInfoControl {
 			String text = OsmAndFormatter.getFormattedDistance(nextTurnDirection, getContext());
 			String subtext = null;
 
-			// Issue 863: distance "as soon as possible" should be displayed for unscheduled U-turn
-			makeUturnWhenPossible = RoutingHelper.makeUturnWhenPossible();
 			if (makeUturnWhenPossible == true) {
 				text = "ASAP";
 			}

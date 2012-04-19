@@ -70,20 +70,22 @@ public class RoutingHelper {
 
 	private Handler uiHandler;
 
-	public static boolean makeUturnWhenPossible = false;
-	public static boolean suppressTurnPrompt = false;
-	public static int turnImminent = 0;
+	
+	// TODO vshcherb review !
+	private boolean makeUturnWhenPossible = false;
+	private boolean suppressTurnPrompt = false;
+	private int turnImminent = 0;
 	private long makeUTwpDetected = 0;
 
-	public static boolean makeUturnWhenPossible() {
+	public boolean makeUturnWhenPossible() {
 		return makeUturnWhenPossible;
 	}
 
-	public static boolean suppressTurnPrompt() {
+	public boolean suppressTurnPrompt() {
 		return suppressTurnPrompt;
 	}
 
-	public static int turnImminent() {
+	public int turnImminent() {
 		return turnImminent;
 	}
 	

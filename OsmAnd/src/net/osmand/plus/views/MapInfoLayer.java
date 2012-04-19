@@ -6,6 +6,7 @@ import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper.TurnType;
 import android.content.Context;
@@ -425,17 +426,19 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return miniMapControl;
 	}
 	
+	
 	private NextTurnInfoControl createNextInfoControl() {
+		final RoutingHelper routingHelper = routeLayer.getHelper();
 		final NextTurnInfoControl nextTurnInfo = new NextTurnInfoControl(map, paintText, paintSubText) {
 			
 			@Override
 			public boolean updateInfo() {
 				boolean visible = false;
-				if (routeLayer != null && routeLayer.getHelper().isRouterEnabled() && routeLayer.getHelper().isFollowingMode()) {
+				if (routeLayer != null && routingHelper.isRouterEnabled() && routingHelper.isFollowingMode()) {
 					int d = routeLayer.getHelper().getDistanceToNextRouteDirection();
 
-					// Issue 863
-					if (routeLayer.getHelper().makeUturnWhenPossible() == true) {
+					makeUturnWhenPossible = routingHelper.makeUturnWhenPossible();
+					if (routingHelper.makeUturnWhenPossible() == true) {
 						if (!showMiniMap) {
 							visible = true;
 							turnType = TurnType.valueOf(TurnType.TU);
@@ -464,6 +467,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 							if (distChanged(d, nextTurnDirection)) {
 								invalidate();
 								nextTurnDirection = d;
+							}
+							if(turnImminent != routingHelper.turnImminent()){
+								turnImminent = routingHelper.turnImminent();
+								invalidate();
 							}
 						}
 					}
