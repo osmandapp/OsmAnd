@@ -157,6 +157,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 				new UploadGPXFilesTask(descr.getText().toString(), tags.getText().toString(), vis.getText().toString()).execute(info);
 			}
 		});
+		bldr.show();
 		return true;
 	}
 	

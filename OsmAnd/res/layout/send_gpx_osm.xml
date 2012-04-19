@@ -6,23 +6,23 @@
    <TextView android:id="@+id/DescriptionTextTop"  android:layout_marginLeft="5dp" android:layout_marginBottom="5dp"
             android:textSize="20sp" android:gravity="center_horizontal"
   			android:layout_height="wrap_content" android:text="@string/send_files_to_osm"></TextView>
-  <TableRow>
+  <TableRow android:layout_width="fill_parent">
   <TextView android:id="@+id/TextView"  android:layout_marginLeft="5dp"
   			android:layout_height="wrap_content" android:text="@string/gpx_description_txt"></TextView>
   <EditText android:text="" android:id="@+id/DescriptionText" android:minLines="3" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
-  			android:layout_height="wrap_content" ></EditText>
+  			android:layout_height="wrap_content" android:layout_width="fill_parent"></EditText>
   </TableRow>
-  <TableRow>
+  <TableRow android:layout_width="fill_parent">
   <TextView android:id="@+id/TextView" android:layout_marginLeft="5dp"
   			android:layout_height="wrap_content" android:text="@string/gpx_tags_txt"></TextView>
   <EditText android:id="@+id/TagsText" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
-  			android:layout_height="wrap_content"  android:text="osmand"></EditText>
+  			android:layout_height="wrap_content"  android:text="osmand" android:layout_width="fill_parent"></EditText>
   </TableRow>
-  <TableRow>
+  <TableRow android:layout_width="fill_parent">
   <TextView android:id="@+id/TextView" android:layout_marginLeft="5dp"
   			android:layout_height="wrap_content" android:text="@string/gpx_visibility_txt"></TextView>
   <EditText android:id="@+id/VisibilityText" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
-  			android:layout_height="wrap_content"  android:text="private"></EditText>
+  			android:layout_height="wrap_content"  android:text="private" android:layout_width="fill_parent"></EditText>
   </TableRow>
 
 
