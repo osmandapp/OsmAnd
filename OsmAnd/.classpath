@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="lib/tuprolog.jar"/>
 	<classpathentry kind="lib" path="lib/junidecode-0.1.jar"/>
 	<classpathentry kind="lib" path="lib/bsh-core-2.0b4.jar"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

@@ -10,10 +10,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Map;
 import java.util.zip.GZIPOutputStream;
 
 import net.osmand.LogUtil;
@@ -245,23 +245,87 @@ public class Algoritms {
 		return false;
 	}
 	
-	private static final String BOUNDARY = "CowMooCowMooCowCowCow"; //$NON-NLS-1$
-	public static String uploadFile(String urlText, File fileToUpload, String formName, boolean gzip){
+	public static String sendGetRequest(String urlText, String userNamePassword){
 		URL url;
 		try {
+			log.info("GET : " + urlText);
+			url = new URL(urlText);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setDoInput(true);
+			conn.setDoOutput(false);
+			conn.setRequestMethod("GET");
+			if(userNamePassword != null) {
+				conn.setRequestProperty("Authorization", "Basic " + Base64.encode(userNamePassword)); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+			
+	        conn.setRequestProperty("User-Agent", "Osmand"); //$NON-NLS-1$ //$NON-NLS-2$
+			log.info("Response code and message : " + conn.getResponseCode() + " " + conn.getResponseMessage());
+			if(conn.getResponseCode() != 200){
+				return conn.getResponseMessage();
+			}
+			InputStream is = conn.getInputStream();
+			StringBuilder responseBody = new StringBuilder();
+			if (is != null) {
+				BufferedReader in = new BufferedReader(new InputStreamReader(is, "UTF-8")); //$NON-NLS-1$
+				String s;
+				boolean first = true;
+				while ((s = in.readLine()) != null) {
+					if(first){
+						first = false;
+					} else {
+						responseBody.append("\n"); //$NON-NLS-1$
+					}
+					responseBody.append(s);
+					
+				}
+				is.close();
+			}
+			String response = responseBody.toString();
+			log.info("Response : " + response);
+			if(response.startsWith("OK")){
+				return null;
+			}
+			return response;
+		} catch (IOException e) {
+			log.error(e.getMessage(), e);
+			return e.getMessage();
+		}
+	}
+	
+	private static final String BOUNDARY = "CowMooCowMooCowCowCow"; //$NON-NLS-1$
+	public static String uploadFile(String urlText, File fileToUpload, String userNamePassword, String formName, boolean gzip, Map<String, String> additionalMapData){
+		URL url;
+		try {
+			boolean firstPrm =!urlText.contains("?");
+			for (String key : additionalMapData.keySet()) {
+				urlText += (firstPrm ? "?" : "&") + key + "=" + URLEncoder.encode(additionalMapData.get(key), "UTF-8");
+				firstPrm = false;
+			}
 			log.info("Start uploading file to " + urlText + " " +fileToUpload.getName());
 			url = new URL(urlText);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
 			conn.setRequestMethod("POST");
+			if(userNamePassword != null) {
+				conn.setRequestProperty("Authorization", "Basic " + Base64.encode(userNamePassword)); //$NON-NLS-1$ //$NON-NLS-2$
+			}
 			
 	        conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY); //$NON-NLS-1$ //$NON-NLS-2$
 	        conn.setRequestProperty("User-Agent", "Osmand"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	        OutputStream ous = conn.getOutputStream();
+//			for (String key : additionalMapData.keySet()) {
+//				ous.write(("--" + BOUNDARY + "\r\n").getBytes());
+//				ous.write(("content-disposition: form-data; name=\"" + key + "\"\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
+//				ous.write((additionalMapData.get(key) + "\r\n").getBytes());
+//			}
 			ous.write(("--" + BOUNDARY+"\r\n").getBytes());
-			ous.write(("content-disposition: form-data; name=\""+formName+"\"; filename=\"" + fileToUpload.getName() + "\"\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
+			String filename = fileToUpload.getName();
+			if(gzip){
+				filename+=".gz";
+			}
+			ous.write(("content-disposition: form-data; name=\""+formName+"\"; filename=\"" + filename + "\"\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
 	        ous.write(("Content-Type: application/octet-stream\r\n\r\n").getBytes()); //$NON-NLS-1$
 	        InputStream fis = new FileInputStream(fileToUpload);
 			BufferedInputStream bis = new BufferedInputStream(fis, 20 * 1024);
@@ -304,10 +368,7 @@ public class Algoritms {
 			}
 			String response = responseBody.toString();
 			log.info("Response : " + response);
-			if(response.startsWith("OK")){
-				return null;
-			}
-			return response;
+			return null;
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
 			return e.getMessage();
@@ -315,12 +376,4 @@ public class Algoritms {
 	}
 
 	
-	private final static String URL_TO_UPLOAD_GPX = "http://download.osmand.net/upload_gpx.php";
-	public static void main(String[] args) throws UnsupportedEncodingException {
-		File file = new File("/home/victor/projects/OsmAnd/git/config/site/welcome.msg");
-		String url = URL_TO_UPLOAD_GPX + "?author=" + URLEncoder.encode("222", "UTF-8") + "&wd="
-				+ URLEncoder.encode("222", "UTF-8") + "&file="
-				+ URLEncoder.encode(file.getName(), "UTF-8");
-		Algoritms.uploadFile(url, file, "filename", true);
-	}
 }

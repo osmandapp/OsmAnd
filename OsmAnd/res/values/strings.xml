@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="send_files_to_osm">Send GPX files to OSM?</string>
+    <string name="gpx_visibility_txt">Visibility</string>
+    <string name="gpx_tags_txt">Tags</string>
+    <string name="gpx_description_txt">Description</string>
+    <string name="validate_gpx_upload_name_pwd">Please specify OSM user name and password to upload GPX files.</string>
+    
     <string name="default_buttons_support">Support</string>
 	<string name="support_new_features">Support new features</string>
 
@@ -220,7 +226,6 @@
 	<string name="auto_follow_route_navigation_descr">Auto-center map view only while navigating.</string>
 	<string name="auto_follow_location_enabled">Auto-center map view in use.</string>
 	
-	<string name="sendtoOSM_confirmation_msg">Send to OSM: %1$s?</string>
 	<string name="pref_vector_rendering">Vector renderer specific options</string>
 	<string name="pref_overlay">Overlay / underlay</string>
 	<string name="pref_raster_map">Map source settings</string>

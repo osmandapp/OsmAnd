@@ -1,8 +1,6 @@
 package net.osmand.plus.activities;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -15,6 +13,7 @@ import java.util.Set;
 import net.osmand.Algoritms;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IProgress;
+import net.osmand.OpenstreetmapRemoteUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -25,6 +24,7 @@ import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -50,8 +50,6 @@ import android.widget.Toast;
 
 public class LocalIndexesActivity extends OsmandExpandableListActivity {
 
-	private final static String URL_TO_UPLOAD_GPX = "http://download.osmand.net/upload_gpx.php";
-		
 	private LoadLocalIndexTask asyncLoader;
 	private LocalIndexesAdapter listAdapter;
 	private LoadLocalIndexDescriptionTask descriptionLoader;
@@ -132,6 +130,36 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		}
 	}
 	
+	public boolean sendGPXFiles(final LocalIndexInfo... info){
+		String name = OsmandApplication.getSettings().USER_NAME.get();
+		String pwd = OsmandApplication.getSettings().USER_PASSWORD.get();
+		if(Algoritms.isEmpty(name) || Algoritms.isEmpty(pwd)){
+			AccessibleToast.makeText(this, R.string.validate_gpx_upload_name_pwd, Toast.LENGTH_LONG).show();
+			return false;
+		}
+		Builder bldr = new AlertDialog.Builder(this);
+		LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		final View view = inflater.inflate(R.layout.send_gpx_osm, null);
+		final EditText descr = (EditText) view.findViewById(R.id.DescriptionText);
+		if(info.length > 0 && info[0].getFileName() != null) {
+			int dt = info[0].getFileName().indexOf('.');
+			descr.setText(info[0].getFileName().substring(0, dt));
+		}
+		final EditText tags = (EditText) view.findViewById(R.id.TagsText);
+		final EditText vis = (EditText) view.findViewById(R.id.VisibilityText);
+		
+		bldr.setView(view);
+		bldr.setNegativeButton(R.string.default_buttons_yes, null);
+		bldr.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				new UploadGPXFilesTask(descr.getText().toString(), tags.getText().toString(), vis.getText().toString()).execute(info);
+			}
+		});
+		return true;
+	}
+	
 	
 	private void showContextMenu(final LocalIndexInfo info) {
 		Builder builder = new AlertDialog.Builder(this);
@@ -189,16 +217,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 					} else if (resId == R.string.local_index_mi_backup) {
 						new LocalIndexOperationTask(BACKUP_OPERATION).execute(info);
 					} else if (resId == R.string.local_index_mi_upload_gpx) {
-						Builder confirm = new AlertDialog.Builder(LocalIndexesActivity.this);
-						confirm.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								new UploadGPXFilesTask().execute(info);
-							}
-						});
-						confirm.setNegativeButton(R.string.default_buttons_no, null);
-						confirm.setMessage(getString(R.string.sendtoOSM_confirmation_msg, info.getFileName()));
-						confirm.show();
+						sendGPXFiles(info);
 					}
 				}
 
@@ -404,6 +423,17 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 	
 	
 	public class UploadGPXFilesTask extends AsyncTask<LocalIndexInfo, String, String> {
+		
+		private final String visibility;
+		private final String description;
+		private final String tagstring;
+
+		public UploadGPXFilesTask(String description, String tagstring, String visibility){
+			this.description = description;
+			this.tagstring = tagstring;
+			this.visibility = visibility;
+			
+		}
 
 		@Override
 		protected String doInBackground(LocalIndexInfo... params) {
@@ -412,17 +442,8 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			for (LocalIndexInfo info : params) {
 				if (!isCancelled()) {
 					String warning = null;
-					try {
-						File file = new File(info.getPathToData());
-						String userName = settings.USER_NAME.get();
-						String pwd = settings.USER_PASSWORD.get();
-						String url = URL_TO_UPLOAD_GPX + "?author=" + URLEncoder.encode(userName, "UTF-8") + "&wd="
-								+ URLEncoder.encode(pwd, "UTF-8") + "&file="
-								+ URLEncoder.encode(file.getName(), "UTF-8");
-						warning = Algoritms.uploadFile(url, file, "filename", true);
-					} catch (UnsupportedEncodingException e) {
-						warning = e.getMessage();
-					}
+					File file = new File(info.getPathToData());
+					warning = OpenstreetmapRemoteUtil.uploadGPXFile(tagstring, description, visibility, file);
 					total++;
 					if (warning == null) {
 						count++;
@@ -559,7 +580,8 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		} else if(actionResId == R.string.local_index_mi_restore){
 			operationTask = new LocalIndexOperationTask(RESTORE_OPERATION);
 		} else if(actionResId == R.string.local_index_mi_upload_gpx){
-			operationTask = new UploadGPXFilesTask();
+			sendGPXFiles(selectedItems.toArray(new LocalIndexInfo[selectedItems.size()]));
+			operationTask = null;
 		} else {
 			operationTask = null;
 		}

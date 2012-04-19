@@ -3,6 +3,7 @@ package net.osmand;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,6 +15,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import net.osmand.access.AccessibleToast;
@@ -87,6 +89,19 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 	public EntityInfo getEntityInfo() {
 		return entityInfo;
 	}
+	
+	private final static String URL_TO_UPLOAD_GPX = " http://api.openstreetmap.org/api/0.6/gpx/create";
+
+	public static String uploadGPXFile(String tagstring, String description, String visibility, File f) {
+		String url = URL_TO_UPLOAD_GPX; 
+		Map<String, String> additionalData = new LinkedHashMap<String, String>();
+		additionalData.put("description", description);
+		additionalData.put("tags", tagstring);
+		additionalData.put("visibility", visibility);
+		return Algoritms.uploadFile(url, f, OsmandApplication.getSettings().USER_NAME.get()+":"+
+				OsmandApplication.getSettings().USER_PASSWORD.get(), "file", true, additionalData);
+	}
+	
 	
 	protected String sendRequsetThroughHttpClient(String url, String requestMethod, String requestBody, String userOperation, boolean doAuthenticate) {
 		StringBuilder responseBody = new StringBuilder();
