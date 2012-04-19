@@ -43,7 +43,7 @@
         <activity android:name="net.osmand.plus.activities.ShowRouteInfoActivity" android:label="@string/show_route"></activity>
         <activity android:name="net.osmand.plus.activities.FavouritesListActivity"></activity>
         <activity android:name="net.osmand.plus.activities.FavouritesActivity"></activity>
-        <activity android:name="net.osmand.plus.activities.ContributionVersionActivity" android:label="@string/contribution_activity"></activity>
+        <activity android:name="net.osmand.plus.activities.ContributionVersionActivity" android:configChanges="keyboardHidden|orientation" android:label="@string/contribution_activity"></activity>
         
         
         <activity android:name="net.osmand.plus.activities.search.SearchPOIActivity" android:label="@string/searchpoi_activity"></activity>
