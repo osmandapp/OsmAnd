@@ -73,6 +73,6 @@ LOCAL_STATIC_LIBRARIES := \
 LOCAL_WHOLE_STATIC_LIBRARIES := skia_neon
 endif
 
-LOCAL_LDLIBS := -lz -llog -ljnigraphics
+LOCAL_LDLIBS := -lz -llog -ldl
 
 include $(BUILD_SHARED_LIBRARY)
