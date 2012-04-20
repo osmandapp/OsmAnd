@@ -1,6 +1,7 @@
 #include <jni.h>
 #include <android/log.h>
 #include <android/bitmap.h>
+#include <dlfcn.h>
 
 #include <math.h>
 #include <stdio.h>
@@ -717,10 +718,32 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 	jobject targetBitmap, 
 	jboolean useEnglishNames, jobject renderingRuleSearchRequest, jint defaultColor) {
 		setGlobalJniEnv(ienv);
+		
+		// libJniGraphics interface
+		typedef int (*PTR_AndroidBitmap_getInfo)(JNIEnv*, jobject, AndroidBitmapInfo*);
+		typedef int (*PTR_AndroidBitmap_lockPixels)(JNIEnv*, jobject, void**);
+		typedef int (*PTR_AndroidBitmap_unlockPixels)(JNIEnv*, jobject);
+		static PTR_AndroidBitmap_getInfo dl_AndroidBitmap_getInfo = 0;
+		static PTR_AndroidBitmap_lockPixels dl_AndroidBitmap_lockPixels = 0;
+		static PTR_AndroidBitmap_unlockPixels dl_AndroidBitmap_unlockPixels = 0;
+		static void* module_libjnigraphics = 0;
+		
+		if(!module_libjnigraphics)
+		{
+			module_libjnigraphics = dlopen("jnigraphics", RTLD_LAZY);
+			if(!module_libjnigraphics)
+			{
+				__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to load jnigraphics via dlopen, will going to crash");
+				return NULL;
+			}
+			dl_AndroidBitmap_getInfo = (PTR_AndroidBitmap_getInfo)dlsym(module_libjnigraphics, "AndroidBitmap_getInfo");
+			dl_AndroidBitmap_lockPixels = (PTR_AndroidBitmap_lockPixels)dlsym(module_libjnigraphics, "AndroidBitmap_lockPixels");
+			dl_AndroidBitmap_unlockPixels = (PTR_AndroidBitmap_unlockPixels)dlsym(module_libjnigraphics, "AndroidBitmap_unlockPixels");
+		}
 
 		// Gain information about bitmap
 		AndroidBitmapInfo bitmapInfo;
-		if(AndroidBitmap_getInfo(getGlobalJniEnv(), targetBitmap, &bitmapInfo) != ANDROID_BITMAP_RESUT_SUCCESS)
+		if(dl_AndroidBitmap_getInfo(getGlobalJniEnv(), targetBitmap, &bitmapInfo) != ANDROID_BITMAP_RESUT_SUCCESS)
 			__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to execute AndroidBitmap_getInfo");
 
 		__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Creating SkBitmap in native w:%d h:%d s:%d f:%d!", bitmapInfo.width, bitmapInfo.height, bitmapInfo.stride, bitmapInfo.format);
@@ -739,7 +762,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 		}
 
 		void* lockedBitmapData = NULL;
-		if(AndroidBitmap_lockPixels(getGlobalJniEnv(), targetBitmap, &lockedBitmapData) != ANDROID_BITMAP_RESUT_SUCCESS || !lockedBitmapData) {
+		if(dl_AndroidBitmap_lockPixels(getGlobalJniEnv(), targetBitmap, &lockedBitmapData) != ANDROID_BITMAP_RESUT_SUCCESS || !lockedBitmapData) {
 			__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to execute AndroidBitmap_lockPixels");
 		}
 		__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Locked %d bytes at %p", bitmap->getSize(), lockedBitmapData);
@@ -775,7 +798,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 
 		pushToJavaRenderingContext(renderingContext, &rc);
 		__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "End Rendering image");
-		if(AndroidBitmap_unlockPixels(ienv, targetBitmap) != ANDROID_BITMAP_RESUT_SUCCESS) {
+		if(dl_AndroidBitmap_unlockPixels(ienv, targetBitmap) != ANDROID_BITMAP_RESUT_SUCCESS) {
 			__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to execute AndroidBitmap_unlockPixels");
 		}
 
