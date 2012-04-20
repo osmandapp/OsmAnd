@@ -664,7 +664,7 @@ public class ResourceManager {
 				}
 			}
 			if(!repos.isEmpty()){
-				AmenityLoadRequest req = asyncLoadingThread.new AmenityLoadRequest(repos, zoom, filter);
+				AmenityLoadRequest req = asyncLoadingThread.new AmenityLoadRequest(repos, zoom, filter, filter.getFilterByName());
 				req.setBoundaries(topLatitude, leftLongitude, bottomLatitude, rightLongitude);
 				asyncLoadingThread.requestToLoadAmenities(req);
 			}

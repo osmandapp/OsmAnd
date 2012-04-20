@@ -6,6 +6,7 @@ import java.util.Stack;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
+import net.osmand.OsmAndFormatter;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
@@ -237,12 +238,27 @@ public class AsyncLoadingThread extends Thread {
 		private final List<AmenityIndexRepository> res;
 		private final PoiFilter filter;
 		private final int zoom;
+		private String filterByName;
 
-		public AmenityLoadRequest(List<AmenityIndexRepository> repos, int zoom, PoiFilter filter) {
+		public AmenityLoadRequest(List<AmenityIndexRepository> repos, int zoom, PoiFilter filter, String nameFilter) {
 			super();
 			this.res = repos;
 			this.zoom = zoom;
 			this.filter = filter;
+			this.filterByName = nameFilter;
+			if(this.filterByName != null) {
+				this.filterByName = this.filterByName.toLowerCase().trim();
+			}
+		}
+		
+		@Override
+		public boolean publish(Amenity object) {
+			if(filterByName == null || filterByName.length() == 0) {
+				return true;
+			} else {
+				String lower = OsmAndFormatter.getPoiStringWithoutType(object, OsmandApplication.getSettings().usingEnglishNames()).toLowerCase();
+				return lower.indexOf(filterByName) != -1;
+			}
 		}
 
 		public Runnable prepareToRun() {

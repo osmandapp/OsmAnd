@@ -129,6 +129,7 @@ public class OsmandApplication extends Application {
 		}
 		return osmandSettings;
 	}
+	
 
 	public PoiFiltersHelper getPoiFilters() {
 		if (poiFilters == null) {
