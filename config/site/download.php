@@ -82,12 +82,12 @@ function update_count_of_downloads($file) {
     // old version
     // update_count_of_downloads($file) ;
 
-   if (!isset($_GET['event']) {
+   if (!isset($_GET['event'])) {
      $eventno = 1;
    } else {
      $eventno = $_GET['event'];
    }
-   if (isset($_GET['osmandver']) {
+   if (isset($_GET['osmandver'])) {
      $app = $_GET['osmandver'];
    } else {
      $app = 'Download '.$_SERVER['HTTP_USER_AGENT'];
