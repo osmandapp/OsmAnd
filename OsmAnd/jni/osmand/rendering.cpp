@@ -728,18 +728,22 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 		static PTR_AndroidBitmap_unlockPixels dl_AndroidBitmap_unlockPixels = 0;
 		static void* module_libjnigraphics = 0;
 		
-		if(!module_libjnigraphics)
-		{
-			module_libjnigraphics = dlopen("jnigraphics", RTLD_LAZY);
-			if(!module_libjnigraphics)
-			{
-				__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to load jnigraphics via dlopen, will going to crash");
-				return NULL;
-			}
-			dl_AndroidBitmap_getInfo = (PTR_AndroidBitmap_getInfo)dlsym(module_libjnigraphics, "AndroidBitmap_getInfo");
-			dl_AndroidBitmap_lockPixels = (PTR_AndroidBitmap_lockPixels)dlsym(module_libjnigraphics, "AndroidBitmap_lockPixels");
-			dl_AndroidBitmap_unlockPixels = (PTR_AndroidBitmap_unlockPixels)dlsym(module_libjnigraphics, "AndroidBitmap_unlockPixels");
+		 if(!module_libjnigraphics)
+		  {
+//		   module_libjnigraphics = dlopen("jnigraphics", RTLD_NOW | RTLD_NOLOAD);
+//		   if(!module_libjnigraphics) {
+			   module_libjnigraphics = dlopen("jnigraphics", RTLD_NOW);
+//		   }
+		   	if(!module_libjnigraphics)
+		   	   {
+		    __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to load jnigraphics via dlopen, will going to crash");
+		    return NULL;
+		  }
+		  dl_AndroidBitmap_getInfo = (PTR_AndroidBitmap_getInfo)dlsym(module_libjnigraphics, "AndroidBitmap_getInfo");
+		  dl_AndroidBitmap_lockPixels = (PTR_AndroidBitmap_lockPixels)dlsym(module_libjnigraphics, "AndroidBitmap_lockPixels");
+		  dl_AndroidBitmap_unlockPixels = (PTR_AndroidBitmap_unlockPixels)dlsym(module_libjnigraphics, "AndroidBitmap_unlockPixels");
 		}
+
 
 		// Gain information about bitmap
 		AndroidBitmapInfo bitmapInfo;

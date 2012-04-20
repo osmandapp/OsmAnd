@@ -77,10 +77,12 @@ public class NativeOsmandLibrary {
 			return new RenderingGenerationResult(null);
 		}
 		
-		if(android.os.Build.VERSION.SDK_INT >= 8) // Android 2.2+
+		// Android 2.2+
+		if(android.os.Build.VERSION.SDK_INT >= 8 && false) { 
 			return generateRendering_Direct(rc, searchResultHandler.nativeHandler, bitmap, useEnglishNames, render, defaultColor);
-		else
+		} else {
 			return generateRendering_Indirect(rc, searchResultHandler.nativeHandler, requestedBitmapWidth, requestedBitmapHeight, rowBytes, isTransparent, useEnglishNames, render, defaultColor);
+		}
 	}
 
 	/**

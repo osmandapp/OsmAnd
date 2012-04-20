@@ -341,8 +341,6 @@ SkBitmap* getCachedBitmap(RenderingContext* rc, const std::string& bitmapResourc
 	jbyte* bitmapBuffer = getGlobalJniEnv()->GetByteArrayElements(javaIconRawData, NULL);
 	size_t bufferLen = getGlobalJniEnv()->GetArrayLength(javaIconRawData);
 
-	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "getCachedBitmap : bitmap buffer len %d at %p", bufferLen, bitmapBuffer);
-	
 	// Decode bitmap
 	SkBitmap* iconBitmap = new SkBitmap();
 	//TODO: JPEG is badly supported! At the moment it needs sdcard to be present (sic). Patch that
