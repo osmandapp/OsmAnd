@@ -81,10 +81,9 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 				WptPt pt = new WptPt();
 				pt.lat = p.getLatitude();
 				pt.lon = p.getLongitude();
+				pt.name = p.getName();
 				if (p.getCategory().length() > 0)
-					pt.name = p.getName() + "_" + p.getCategory();
-				else
-					pt.name = p.getName();
+					pt.category = p.getCategory();
 				gpx.points.add(pt);
 			}
 		}

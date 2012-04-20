@@ -405,21 +405,23 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 							return res.warning;
 						}
 						for(WptPt p : res.points){
-							if(!existedPoints.contains(p.name)){
-								String categoryName = "";
-								int c;
-								String name = p.name;
-								if(name == null){
-									name = "";
-								}
-								if((c = p.name.lastIndexOf('_')) != -1){
-									categoryName = p.name.substring(c + 1);
-									name = p.name.substring(0, c);
-								}
-								FavouritePoint fp = new FavouritePoint(p.lat, p.lon, name, categoryName);
-								if (helper.addFavourite(fp)) {
-									publishProgress(fp);
-								}
+							if(existedPoints.contains(p.name) || existedPoints.contains(p.name + "_" + p.category)){
+								continue;
+							}
+							int c;
+							String name = p.name;
+							String categoryName = p.category != null ? p.category : "";
+							if(name == null){
+								name = "";
+							}
+							//old way to store the category, in name.
+							if("".equals(categoryName.trim()) && (c = p.name.lastIndexOf('_')) != -1) {
+								categoryName = p.name.substring(c + 1);
+								name = p.name.substring(0, c);
+							}
+							FavouritePoint fp = new FavouritePoint(p.lat, p.lon, name, categoryName);
+							if (helper.addFavourite(fp)) {
+								publishProgress(fp);
 							}
 						}
 						return null;
