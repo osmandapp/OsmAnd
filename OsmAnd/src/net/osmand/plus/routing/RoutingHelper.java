@@ -306,12 +306,12 @@ public class RoutingHelper {
 					voiceRouter.updateStatus(currentLocation, makeUturnWhenPossible);
 				}
 			}
-		}
-		lastFixedLocation = currentLocation;
+			lastFixedLocation = currentLocation;
 
-		// 8. Strange Direction? Then re-calculate route. (Added new, may possibly even replace triggers 4, 5a, 5b ?)
-		if(suppressTurnPrompt && (routeNodes.isEmpty() || (currentLocation.distanceTo(routeNodes.get(currentRoute)) > POSITION_TOLERANCE))){
-			calculateRoute = true;
+			// 8. Strange Direction? Then re-calculate route. (Added new, may possibly even replace triggers 4, 5a, 5b ?)
+			if(suppressTurnPrompt && (routeNodes.isEmpty() || (currentLocation.distanceTo(routeNodes.get(currentRoute)) > POSITION_TOLERANCE))){
+				calculateRoute = true;
+			}
 		}
 
 		if(calculateRoute){
