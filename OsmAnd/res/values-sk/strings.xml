@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="send_files_to_osm">Odoslať GPX súbory do OSM?</string>	
+	<string name="gpx_visibility_txt">Viditeľnosť</string>	
+	<string name="gpx_tags_txt">Tagy</string>	
+	<string name="gpx_description_txt">Popis</string>	
+	<string name="validate_gpx_upload_name_pwd">Prosím, určťe OSM užívateľské meno a heslo pre nahratie GPX súborov.</string>
+	
 	<string name="default_buttons_support">Podpora</string>
 	<string name="support_new_features">Podporiť nové funkcie</string>
 	<string name="show_ruler_level_descr">Zobrazí pravítko na mape</string>
@@ -156,7 +162,6 @@
 	<string name="auto_follow_route_navigation_descr">Povoliť autom. nasledovanie pozície iba v režime navigácie.</string>
 	<string name="auto_follow_location_enabled">Automatické nasledovanie je povolené.</string>
 
-	<string name="sendtoOSM_confirmation_msg">Odoslať do OSM: %1$s?</string>
 	<string name="pref_vector_rendering">Vektorové vykresľovanie</string>
 	<string name="pref_overlay">Prekrývacia/podkladová</string>
 	<string name="pref_raster_map">Nastavenia zdrojovej mapy</string>
