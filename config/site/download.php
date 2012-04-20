@@ -72,7 +72,6 @@ function update_count_of_downloads($file) {
  }
 }
 
-
  if(!isset($_GET['file']) ) {
    header('HTTP/1.0 404 Not Found');
    die(1);
@@ -82,6 +81,17 @@ function update_count_of_downloads($file) {
  if(!isset($_SERVER['HTTP_RANGE']) ) {
     // old version
     // update_count_of_downloads($file) ;
+
+   if (!isset($_GET['event']) {
+     $eventno = 1;
+   } else {
+     $eventno = $_GET['event'];
+   }
+   if (isset($_GET['osmandver']) {
+     $app = $_GET['osmandver'];
+   } else {
+     $app = 'Download '.$_SERVER['HTTP_USER_AGENT'];
+   }
       
     $tracker = new GoogleAnalytics\Tracker('UA-28342846-1', 'download.osmand.net');
     $visitor = new GoogleAnalytics\Visitor();
@@ -99,7 +109,7 @@ function update_count_of_downloads($file) {
     // Track page view
     $tracker->trackPageview($page, $session, $visitor);
     
-    $event = new GoogleAnalytics\Event('Download '.$_SERVER['HTTP_USER_AGENT'], 'App', $file,1);
+    $event = new GoogleAnalytics\Event($app, 'App', $file, $eventno);
     $tracker->trackEvent($event, $session, $visitor);
  }
  set_time_limit(0);

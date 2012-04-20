@@ -46,7 +46,7 @@ public class Version {
 
 	public static String getVersionAsURLParam(Context ctx) {
 		try {
-			return "osmandver=" + URLEncoder.encode(getFullVersion(ctx), "UTF-8");
+			return "osmandver=" + URLEncoder.encode(getVersionForTracker(ctx), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			throw new IllegalStateException(e);
 		}

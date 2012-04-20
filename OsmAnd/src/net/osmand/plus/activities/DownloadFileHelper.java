@@ -137,11 +137,11 @@ public class DownloadFileHelper {
 			out = new FileOutputStream(fileToDownload);
 			try {
 				if(parts == 1){
-					URL url = new URL("http://download.osmand.net/download?file="+fileName + "&" + Version.getVersionAsURLParam(ctx));  //$NON-NLS-1$
+					URL url = new URL("http://download.osmand.net/download?event=2&file="+fileName + "&" + Version.getVersionAsURLParam(ctx));  //$NON-NLS-1$
 					downloadFile(fileName, out, url, null, indexOfAllFiles, progress, forceWifi);
 				} else {
 					for(int i=1; i<=parts; i++){
-						URL url = new URL("http://download.osmand.net/download?file="+fileName+"-"+i + "&" + Version.getVersionAsURLParam(ctx));  //$NON-NLS-1$
+						URL url = new URL("http://download.osmand.net/download?event=2&file="+fileName+"-"+i + "&" + Version.getVersionAsURLParam(ctx));  //$NON-NLS-1$
 						downloadFile(fileName, out, url, " ["+i+"/"+parts+"]", indexOfAllFiles, progress, forceWifi);
 					}
 				}
