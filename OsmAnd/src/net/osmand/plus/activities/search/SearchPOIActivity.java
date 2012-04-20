@@ -419,11 +419,6 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 					String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.usingEnglishNames());
 					settings.setPointToNavigate(l.getLatitude(), l.getLongitude(), getString(R.string.poi)+" : " + poiSimpleFormat);
 				}
-				if(filter != null){
-					settings.setPoiFilterForMap(filter.getFilterId());
-					settings.SHOW_POI_OVER_MAP.set(true);
-				}
-				
 				MapActivity.launchMapActivityMoveToTop(SearchPOIActivity.this);
 				
 			}
@@ -515,10 +510,6 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 
 	@Override
 	public void onListItemClick(ListView parent, View v, int position, long id) {
-		if(filter != null){
-			settings.setPoiFilterForMap(filter.getFilterId());
-			settings.SHOW_POI_OVER_MAP.set(true);
-		}
 		int z = settings.getLastKnownMapZoom();
 		Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
 		String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, this, settings.usingEnglishNames());
