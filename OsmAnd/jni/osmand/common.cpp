@@ -333,8 +333,6 @@ SkBitmap* getCachedBitmap(RenderingContext* rc, const std::string& bitmapResourc
 	
 	rc->nativeOperations.pause();
 
-	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "getCachedBitmap : %s", bitmapResource.c_str());
-
 	jstring jstr = getGlobalJniEnv()->NewStringUTF(bitmapResource.c_str());
 	jbyteArray javaIconRawData = (jbyteArray)getGlobalJniEnv()->CallStaticObjectMethod(jclass_RenderingIcons, jmethod_RenderingIcons_getIconRawData, rc->androidContext, jstr);
 	if(!javaIconRawData)
