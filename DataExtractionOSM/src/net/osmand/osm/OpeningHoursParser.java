@@ -1,5 +1,9 @@
 package net.osmand.osm;
 
+import gnu.trove.list.array.TIntArrayList;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -17,57 +21,56 @@ public class OpeningHoursParser {
 	
 	public static class BasicDayOpeningHourRule  implements OpeningHoursRule {
 		private boolean[] days = new boolean[7];
-		private int startTime = -1;
-		private int endTime = - 1;
+		private TIntArrayList startTime = new TIntArrayList();
+		private TIntArrayList endTime = new TIntArrayList();
 		
 		public boolean[] getDays() {
 			return days;
 		}
 		
-		public void setStartTime(int startTime) {
-			this.startTime = startTime;
-		}
-		public int getStartTime() {
-			return startTime;
+		public void setStartEndTime(int startTime, int endTime) {
+			this.startTime.add(startTime);
+			this.endTime.add(endTime);
 		}
 		
-		public int getEndTime() {
-			return endTime;
+		public int getStartTime(int idx) {
+			return startTime.get(idx);
 		}
-		public void setEndTime(int endTime) {
-			this.endTime = endTime;
+		
+		public int getEndTime(int idx) {
+			return endTime.get(idx);
 		}
 		
 		@Override
 		public boolean isOpenedForTime(Calendar cal) {
-			if(startTime == -1){
-				return false;
-			}
-			int i = cal.get(Calendar.DAY_OF_WEEK);
-			int d = (i + 5) % 7;
-			int p = d - 1;
-			if(p < 0){
-				p+=7;
-			}
-			int time = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE);
-			// one day working 10 - 20 (not 20 - 04)
-			if(startTime < endTime || endTime == -1){
-				if(days[d]){
-					if(time >= startTime && (endTime == -1 || time <= endTime)){
+			for (int ij = 0; ij < startTime.size(); ij++) {
+				int i = cal.get(Calendar.DAY_OF_WEEK);
+				int d = (i + 5) % 7;
+				int p = d - 1;
+				if(p < 0){
+					p+=7;
+				}
+				int time = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE);
+				int startTime = this.startTime.get(ij);
+				int endTime = this.endTime.get(ij);
+				// one day working 10 - 20 (not 20 - 04)
+				if (startTime < endTime || endTime == -1) {
+					if (days[d]) {
+						if (time >= startTime && (endTime == -1 || time <= endTime)) {
+							return true;
+						}
+					}
+				} else {
+					if (time >= startTime && days[p]) {
+						// check in previous day
+						return true;
+					} else if (time <= endTime && days[d]) {
+						// check in previous day
 						return true;
 					}
 				}
-				return false;
-			} else {
-				if (time >= startTime && days[p]) {
-					// check in previous day
-					return true;
-				} else if (time <= endTime && days[d]) {
-					// check in previous day
-					return true;
-				}
-				return false;
 			}
+			return false;
 		}
 		@Override
 		public String toRuleString() {
@@ -95,17 +98,22 @@ public class OpeningHoursParser {
 					open24_7 = false;
 				}
 			}
-			if(open24_7 && startTime == 0 && endTime / 60 == 24){
+			if(open24_7 && startTime.get(0) == 0 && endTime.get(0) / 60 == 24){
 				return "24/7";
 			}
-			int stHour = startTime / 60;
-			int stTime = startTime - stHour * 60;
-			int enHour = endTime / 60;
-			int enTime = endTime - enHour * 60;
 			b.append(" "); //$NON-NLS-1$
-			formatTime(stHour, stTime, b);
-			b.append("-"); //$NON-NLS-1$
-			formatTime(enHour, enTime, b);
+			for (int i = 0; i < startTime.size(); i++) {
+				if(i > 0) {
+					b.append(", ");
+				}
+				int stHour = startTime.get(i) / 60;
+				int stTime = startTime.get(i) - stHour * 60;
+				int enHour = endTime.get(i) / 60;
+				int enTime = endTime.get(i) - enHour * 60;
+				formatTime(stHour, stTime, b);
+				b.append("-"); //$NON-NLS-1$
+				formatTime(enHour, enTime, b);
+			}
 			return b.toString();
 		}
 		
@@ -125,8 +133,7 @@ public class OpeningHoursParser {
 		boolean[] days = basic.getDays();
 		if("24/7".equals(r)){
 			Arrays.fill(days, true);
-			basic.setStartTime(0);
-			basic.setEndTime(24*60);
+			basic.setStartEndTime(0, 24*60);
 			return basic;
 		}
 		
@@ -170,26 +177,37 @@ public class OpeningHoursParser {
 		if(previousDay == -1){
 			return null;
 		}
-		String time = r.substring(k);
-		String[] stEnd = time.split("-"); //$NON-NLS-1$
-		if(stEnd.length != 2){
-			return null;
-		}
-		int st;
-		int end;
-		try {
-			int i1 = stEnd[0].indexOf(':');
-			int i2 = stEnd[1].indexOf(':');
-			if(i1 == -1 || i2 == -1){
+		String timeSubstr = r.substring(k);
+		String[] times = timeSubstr.split(",");
+		boolean timesExist = true;
+		for (String time : times) {
+			time = time.trim();
+			if(time.length() == 0){
+				continue;
+			}
+			String[] stEnd = time.split("-"); //$NON-NLS-1$
+			if (stEnd.length != 2) {
+				continue;
+			}
+			timesExist = true;
+			int st;
+			int end;
+			try {
+				int i1 = stEnd[0].indexOf(':');
+				int i2 = stEnd[1].indexOf(':');
+				if (i1 == -1 || i2 == -1) {
+					return null;
+				}
+				st = Integer.parseInt(stEnd[0].substring(0, i1).trim()) * 60 + Integer.parseInt(stEnd[0].substring(i1 + 1).trim());
+				end = Integer.parseInt(stEnd[1].substring(0, i2).trim()) * 60 + Integer.parseInt(stEnd[1].substring(i2 + 1).trim());
+			} catch (NumberFormatException e) {
 				return null;
 			}
-			st = Integer.parseInt(stEnd[0].substring(0, i1).trim())* 60 + Integer.parseInt(stEnd[0].substring(i1 + 1).trim());
-			end = Integer.parseInt(stEnd[1].substring(0, i2).trim())* 60 + Integer.parseInt(stEnd[1].substring(i2 + 1).trim());
-		} catch (NumberFormatException e) {
+			basic.setStartEndTime(st, end);
+		}
+		if(!timesExist){
 			return null;
 		}
-		basic.setStartTime(st);
-		basic.setEndTime(end);
 		return basic;
 	}
 	
@@ -241,8 +259,19 @@ public class OpeningHoursParser {
 		b.append(t);
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
+		
 		List<OpeningHoursRule> hours = parseOpenedHours("Mo-Fr 08:30-14:40; Sa 08:00 - 14:00"); //$NON-NLS-1$
+		System.out.println(hours);
+		System.out.println(toStringOpenedHours(hours));
+		hours = parseOpenedHours("Mo-Fr 08:30-14:40,15:00-19:00"); //$NON-NLS-1$
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new SimpleDateFormat("dd.MM.yyyy hh:mm").parse("20.04.2012 14:00"));
+		System.out.println("true="+hours.get(0).isOpenedForTime(cal));
+		cal.setTime(new SimpleDateFormat("dd.MM.yyyy hh:mm").parse("20.04.2012 15:50"));
+		System.out.println("true="+hours.get(0).isOpenedForTime(cal));
+		cal.setTime(new SimpleDateFormat("dd.MM.yyyy hh:mm").parse("20.04.2012 14:50"));
+		System.out.println("false="+hours.get(0).isOpenedForTime(cal));
 		System.out.println(hours);
 		System.out.println(toStringOpenedHours(hours));
 		hours = parseOpenedHours("Mo, We-Fr, Th, Sa 08:30-14:40; Sa 08:00 - 14:00"); //$NON-NLS-1$

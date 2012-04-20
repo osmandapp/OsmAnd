@@ -202,13 +202,12 @@ public class AHSupermarketResolver {
 						String closed = obj.get("U")+"";
 						int start = Integer.parseInt(opened.substring(0, 2)) * 60 + Integer.parseInt(opened.substring(2));
 						int end = Integer.parseInt(closed.substring(0, 2)) * 60 + Integer.parseInt(closed.substring(2));
-						if(prev != null && prev.getStartTime() == start && prev.getEndTime() == end){
+						if(prev != null && prev.getStartTime(0) == start && prev.getEndTime(0) == end){
 							prev.getDays()[i] = true;
 						} else {
 							BasicDayOpeningHourRule rule = new OpeningHoursParser.BasicDayOpeningHourRule();
 							rule.getDays()[i] = true;
-							rule.setStartTime(start);
-							rule.setEndTime(end);
+							rule.setStartEndTime(start, end);
 							prev = rule;
 							rules.add(rule);
 						}
