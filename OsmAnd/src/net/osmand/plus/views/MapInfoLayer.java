@@ -559,7 +559,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		progressBar.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				map.backToLocationImpl();
+				map.getMapLayers().selectMapLayer(view);
 			}
 		});
 		fl.addView(progressBar, fparams);
