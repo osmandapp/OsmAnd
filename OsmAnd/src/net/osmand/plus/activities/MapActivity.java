@@ -739,6 +739,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				if(!mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()){
 					mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(true);
 				}
+				if (settings.AUTO_FOLLOW_ROUTE.get() > 0 && routingHelper.isFollowingMode()
+						&& !uiHandler.hasMessages(AUTO_FOLLOW_MSG_ID)) {
+					backToLocationWithDelay(1);
+				}
 			}
 		} else {
 			if(mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()){
@@ -1336,27 +1340,30 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		return isMapLinkedToLocation;
 	}
 	
+	
 	public void setMapLinkedToLocation(boolean isMapLinkedToLocation) {
 		if(!isMapLinkedToLocation){
 			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
-			// try without AUTO_FOLLOW_ROUTE_NAV (see forum discussion 'Simplify our navigation preference menu')
-			//if(autoFollow > 0 && (!settings.AUTO_FOLLOW_ROUTE_NAV.get() || routingHelper.isFollowingMode())){
 			if(autoFollow > 0 && routingHelper.isFollowingMode()){
-				uiHandler.removeMessages(AUTO_FOLLOW_MSG_ID);
-				Message msg = Message.obtain(uiHandler, new Runnable() {
-					@Override
-					public void run() {
-						if (settings.MAP_ACTIVITY_ENABLED.get()) {
-							AccessibleToast.makeText(MapActivity.this, R.string.auto_follow_location_enabled, Toast.LENGTH_SHORT).show();
-							backToLocationImpl();
-						}
-					}
-				});
-				msg.what = AUTO_FOLLOW_MSG_ID;
-				uiHandler.sendMessageDelayed(msg, autoFollow * 1000);
+				backToLocationWithDelay(autoFollow);
 			}
 		}
 		this.isMapLinkedToLocation = isMapLinkedToLocation;
+	}
+
+	private void backToLocationWithDelay(int delay) {
+		uiHandler.removeMessages(AUTO_FOLLOW_MSG_ID);
+		Message msg = Message.obtain(uiHandler, new Runnable() {
+			@Override
+			public void run() {
+				if (settings.MAP_ACTIVITY_ENABLED.get()) {
+					AccessibleToast.makeText(MapActivity.this, R.string.auto_follow_location_enabled, Toast.LENGTH_SHORT).show();
+					backToLocationImpl();
+				}
+			}
+		});
+		msg.what = AUTO_FOLLOW_MSG_ID;
+		uiHandler.sendMessageDelayed(msg, delay * 1000);
 	}
 
 }
