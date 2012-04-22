@@ -74,7 +74,6 @@ public class RoutingHelper {
 	// TODO vshcherb review !
 	private boolean makeUturnWhenPossible = false;
 	private boolean suppressTurnPrompt = false;
-	private int turnImminent = 0;
 	private long makeUTwpDetected = 0;
 
 	public boolean makeUturnWhenPossible() {
@@ -84,11 +83,6 @@ public class RoutingHelper {
 	public boolean suppressTurnPrompt() {
 		return suppressTurnPrompt;
 	}
-
-	public int turnImminent() {
-		return turnImminent;
-	}
-	
 
 
 	public RoutingHelper(OsmandSettings settings, Context context, CommandPlayer player){
@@ -124,7 +118,6 @@ public class RoutingHelper {
 		listDistance = null;
 		directionInfo = null;
 		makeUturnWhenPossible = false;
-		turnImminent = 0;
 		evalWaitInterval = 3000;
 		uiHandler.post(new Runnable() {
 			@Override
@@ -223,7 +216,6 @@ public class RoutingHelper {
 		if(finalLocation == null || currentLocation == null){
 			makeUturnWhenPossible = false;
 			suppressTurnPrompt = false;
-			turnImminent = 0;
 			return;
 		}
 		
@@ -373,7 +365,6 @@ public class RoutingHelper {
 		makeUturnWhenPossible = false;
 		suppressTurnPrompt = false;
 		if(finalLocation == null || currentLocation == null){
-			turnImminent = 0;
 			return;
 		}
 		// 6. + 7. Direction detection, by Hardy, Feb 2012
@@ -399,7 +390,6 @@ public class RoutingHelper {
 						// require 5 sec since first detection, to avoid false positive announcements
 						} else if ((System.currentTimeMillis() - makeUTwpDetected > 5000)) {
 							makeUturnWhenPossible = true;
-							turnImminent = 1;
 							//log.info("bearingMotion is opposite to bearingRoute"); //$NON-NLS-1$
 						}
 					}
@@ -503,34 +493,65 @@ public class RoutingHelper {
 		return Collections.emptyList();
 	}
 	
-	public int getDistanceToNextRouteDirection() {
+	public synchronized int getDistanceToNextRouteDirection() {
 		if (directionInfo != null && currentDirectionInfo < directionInfo.size()) {
 			int dist = listDistance[currentRoute];
 			if (currentDirectionInfo < directionInfo.size() - 1) {
 				dist -= listDistance[directionInfo.get(currentDirectionInfo + 1).routePointOffset];
 			}
-			if(lastFixedLocation != null){
+			if (lastFixedLocation != null) {
 				dist += lastFixedLocation.distanceTo(routeNodes.get(currentRoute));
 			}
-
-			if (dist <= 100 || makeUturnWhenPossible == true) {
-				turnImminent = 1;
-			} else if (dist <= 3000) {
-				turnImminent = 0;
-			} else {
-				turnImminent = -1;
-			}
-
-			//Show turnImminent for at least 5 sec (changed to 6 for device delay) if moving, cut off at 300m to avoid speed artifacts
-			if(lastFixedLocation != null && lastFixedLocation.hasSpeed()){
-				if ((dist < (lastFixedLocation.getSpeed() * 6f)) && (dist < 300)) {
-					turnImminent = 1;
-				}
-			}
-
 			return dist;
 		}
-		turnImminent = 0;
+		return 0;
+	}
+	
+	public synchronized int getNextTurnImminent() {
+		if (directionInfo != null && currentDirectionInfo < directionInfo.size()) {
+			if (makeUturnWhenPossible) {
+				return 1;
+			}
+			int dist = getDistanceToNextRouteDirection();
+			// Show turnImminent for at least 5 sec (changed to 6 for device delay) if moving, cut off at 300m to avoid speed artifacts
+			if (lastFixedLocation != null && lastFixedLocation.hasSpeed()) {
+				if ((dist < (lastFixedLocation.getSpeed() * 6f)) && (dist < 300)) {
+					return 1;
+				}
+			}
+			if (dist <= 140) {
+				return 1;
+			} else if (dist <= 3000) {
+				return 0;
+			} else {
+				return -1;
+			}
+		}
+		return 0;
+	}
+	
+	public synchronized int getNextNextTurnImminent() {
+		if (directionInfo != null && currentDirectionInfo < directionInfo.size() - 1) {
+			int dist = getDistanceToNextNextRouteDirection();
+			if (dist <= 140) {
+				return 1;
+			} else if (dist <= 3000) {
+				return 0;
+			} else {
+				return -1;
+			}
+		}
+		return 0;
+	}
+	
+	public synchronized int getDistanceToNextNextRouteDirection() {
+		if (directionInfo != null && currentDirectionInfo < directionInfo.size() - 1) {
+			int dist = listDistance[directionInfo.get(currentDirectionInfo + 1).routePointOffset];
+			if (currentDirectionInfo < directionInfo.size() - 2) {
+				dist -= listDistance[directionInfo.get(currentDirectionInfo + 2).routePointOffset];
+			}
+			return dist;
+		}
 		return 0;
 	}
 	
@@ -692,9 +713,11 @@ public class RoutingHelper {
 		public static final String TR = "TR"; // turn right //$NON-NLS-1$
 		public static final String TSLR = "TSLR"; // turn slightly right //$NON-NLS-1$
 		public static final String TSHR = "TSHR"; // turn sharply right //$NON-NLS-1$
+		public static final String KL = "KL"; // keep left //$NON-NLS-1$
+		public static final String KR = "KR"; // keep right//$NON-NLS-1$
 		public static final String TU = "TU"; // U-turn //$NON-NLS-1$
 		public static final String TRU = "TRU"; // Right U-turn //$NON-NLS-1$
-		public static String[] predefinedTypes = new String[] {C, TL, TSLL, TSHL, TR, TSLR, TSHR, TU, TRU}; 
+		public static String[] predefinedTypes = new String[] {C, KL, KR, TL, TSLL, TSHL, TR, TSLR, TSHR, TU, TRU}; 
 		
 		
 		public static TurnType valueOf(String s){

@@ -137,8 +137,9 @@ public class MapStackControl extends ViewGroup {
 		int cacheStack = 0;
 		if (stackViews != null) {
 			for (MapInfoControl c : stackViews) {
+				cacheStack++;
 				if (c.getVisibility() != View.GONE) {
-					c.setBackgroundDrawable(first ? topDrawable : getStackDrawable(cacheStack++ ));
+					c.setBackgroundDrawable(first ? topDrawable : getStackDrawable(cacheStack));
 					first = false;
 					c.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 					w = Math.max(w, c.getMeasuredWidth());
@@ -152,10 +153,11 @@ public class MapStackControl extends ViewGroup {
 			}
 			isCollapsible = false;
 			for (MapInfoControl c : collapsedViews) {
+				cacheStack++;
 				if (c.getVisibility() != View.GONE) {
 					isCollapsible = true;
 					if (!isCollapsed) {
-						c.setBackgroundDrawable(first ? topDrawable : getStackDrawable(cacheStack++ ));
+						c.setBackgroundDrawable(first ? topDrawable : getStackDrawable(cacheStack));
 						first = false;
 						c.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 						w = Math.max(w, c.getMeasuredWidth());

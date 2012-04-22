@@ -126,8 +126,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private Dialog progressDlg = null;
 	// App settings
 	private OsmandSettings settings;
-	// Store previous map rotation settings for rotate button
-	private Integer previousMapRotate = null;
 
 	private RouteAnimation routeAnimation = new RouteAnimation();
 
@@ -938,14 +936,12 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	
 	
 	public void switchRotateMapMode(){
-		if(settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS){
-			previousMapRotate = settings.ROTATE_MAP.get();
-			settings.ROTATE_MAP.set(OsmandSettings.ROTATE_MAP_COMPASS);
-		} else if(previousMapRotate != null){
-			settings.ROTATE_MAP.set(previousMapRotate);
-		} else {
-			settings.ROTATE_MAP.set(settings.ROTATE_MAP.getProfileDefaultValue());
+		int vl = (settings.ROTATE_MAP.get() + 1) % 3;
+		Location loc = getLastKnownLocation();
+		if(vl == OsmandSettings.ROTATE_MAP_BEARING && (loc == null || !loc.hasBearing())){
+			vl = (vl + 1) % 3;
 		}
+		settings.ROTATE_MAP.set(vl);
 		registerUnregisterSensor(getLastKnownLocation());
 		if(settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS){
 			mapView.setRotate(0);

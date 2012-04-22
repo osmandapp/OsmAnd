@@ -1,9 +1,7 @@
 package net.osmand.plus.views;
 
 import net.osmand.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.TurnType;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -18,14 +16,16 @@ import android.graphics.Path;
 public class NextTurnInfoControl extends MapInfoControl {
 
 	private float scaleCoefficient = MapInfoLayer.scaleCoefficient;
-	private final float width = 72 * scaleCoefficient;
-	private final float height = 75 * scaleCoefficient;
+	private final float width;
+	private final float height ;
+	private static final float miniCoeff = 2.5f;
 
 	protected Path pathForTurn = new Path();
 
 	protected TurnType turnType = null;
 	protected String exitOut = null;
 	protected int nextTurnDirection = 0;
+	
 
 	private final Paint textPaint;
 	private final Paint subtextPaint;
@@ -34,11 +34,13 @@ public class NextTurnInfoControl extends MapInfoControl {
 
 	protected boolean makeUturnWhenPossible;
 	protected int turnImminent;
+	private final boolean horisontalMini;
 
-	public NextTurnInfoControl(Context ctx, Paint textPaint, Paint subtextPaint) {
+	public NextTurnInfoControl(Context ctx, Paint textPaint, Paint subtextPaint, boolean horisontalMini) {
 		super(ctx);
 		this.textPaint = textPaint;
 		this.subtextPaint = subtextPaint;
+		this.horisontalMini = horisontalMini;
 
 		paintBlack = new Paint();
 		paintBlack.setStyle(Style.STROKE);
@@ -52,15 +54,31 @@ public class NextTurnInfoControl extends MapInfoControl {
 		paintRouteDirection.setAntiAlias(true);
 		
 		pathTransform = new Matrix();
-		pathTransform.postScale(scaleCoefficient, scaleCoefficient);
+		if (horisontalMini) {
+			pathTransform.postScale(scaleCoefficient / miniCoeff, scaleCoefficient / miniCoeff);
+			width = 72 * scaleCoefficient / miniCoeff;
+			height = 72 * scaleCoefficient / miniCoeff;
+		} else {
+			pathTransform.postScale(scaleCoefficient, scaleCoefficient);
+			width = 72 * scaleCoefficient;
+			height = 72 * scaleCoefficient;
+		}
+		
 	}
 
 	protected Matrix pathTransform = new Matrix();
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		int h = (int) (5 * scaleCoefficient + Math.max(textPaint.getTextSize(), subtextPaint.getTextSize()));
-		setWDimensions((int) width, (int) height + h);
+		int h = 0;
+		int w = 0;
+		if (!horisontalMini) {
+			h = (int) (8 * scaleCoefficient + Math.max(textPaint.getTextSize(), subtextPaint.getTextSize()));
+		} else {
+			h = (int) (6 * scaleCoefficient);
+			w = (int) textPaint.measureText(OsmAndFormatter.getFormattedDistance(nextTurnDirection, getContext()));
+		}
+		setWDimensions((int) width + w, (int) height + h);
 	}
 
 	@Override
@@ -78,7 +96,7 @@ public class NextTurnInfoControl extends MapInfoControl {
 			canvas.translate(0, 3 * scaleCoefficient);
 			canvas.drawPath(pathForTurn, paintRouteDirection);
 			canvas.drawPath(pathForTurn, paintBlack);
-			if (exitOut != null) {
+			if (exitOut != null && !horisontalMini) {
 				drawShadowText(canvas, exitOut, (getWWidth()) / 2 - 7 * scaleCoefficient, 
 						getWHeight() / 2 - textPaint.getTextSize() / 2 + 3 * scaleCoefficient, textPaint);
 			}
@@ -97,10 +115,19 @@ public class NextTurnInfoControl extends MapInfoControl {
 				st = textPaint.measureText(subtext);
 			}
 			float mt = textPaint.measureText(text);
-			float startX = Math.max((getWWidth() - st - mt) / 2, 2 * scaleCoefficient);
-			drawShadowText(canvas, text, startX, getWHeight() - 5 * scaleCoefficient, textPaint);
-			if (subtext != null) {
-				drawShadowText(canvas, subtext, startX + 2 * scaleCoefficient + mt, getWHeight() - 5 * scaleCoefficient, subtextPaint);
+			if (!horisontalMini) {
+				float startX = Math.max((getWWidth() - st - mt) / 2, 2 * scaleCoefficient);
+				drawShadowText(canvas, text, startX, getWHeight() - 5 * scaleCoefficient, textPaint);
+				if (subtext != null) {
+					drawShadowText(canvas, subtext, startX + 2 * scaleCoefficient + mt, getWHeight() - 5 * scaleCoefficient, subtextPaint);
+				}
+			} else {
+				drawShadowText(canvas, text, 72 * scaleCoefficient / miniCoeff + 2 * scaleCoefficient,
+						height / 2 + 5 * scaleCoefficient, textPaint);
+				if (subtext != null) {
+					drawShadowText(canvas, subtext, 72 * scaleCoefficient / miniCoeff +  mt
+							+ 2 * scaleCoefficient, height / 2 + 5 * scaleCoefficient, subtextPaint);
+				}
 			}
 		}
 	}

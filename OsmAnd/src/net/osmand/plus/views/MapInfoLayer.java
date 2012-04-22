@@ -41,6 +41,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	
 	private Paint paintText;
 	private Paint paintSubText;
+	private Paint paintSmallText;
+	private Paint paintSmallSubText;
 	private Paint paintImg;
 	
 	private float cachedRotate = 0;
@@ -59,6 +61,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private MapStackControl rightStack;
 	private MapStackControl leftStack;
 	private ViewGroup statusBar;
+
+	
 
 	
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
@@ -89,8 +93,20 @@ public class MapInfoLayer extends OsmandMapLayer {
 		paintSubText.setStyle(Style.FILL_AND_STROKE);
 		paintSubText.setColor(Color.BLACK);
 		paintSubText.setTextSize(15 * scaleCoefficient);
-		
 		paintSubText.setAntiAlias(true);
+		
+		paintSmallText = new Paint();
+		paintSmallText.setStyle(Style.FILL_AND_STROKE);
+		paintSmallText.setColor(Color.BLACK);
+		paintSmallText.setTextSize(15 * scaleCoefficient);
+		paintSmallText.setAntiAlias(true);
+		paintSmallText.setStrokeWidth(4);
+
+		paintSmallSubText = new Paint();
+		paintSmallSubText.setStyle(Style.FILL_AND_STROKE);
+		paintSmallSubText.setColor(Color.BLACK);
+		paintSmallSubText.setTextSize(12 * scaleCoefficient);
+		paintSmallSubText.setAntiAlias(true);
 		
 		paintImg = new Paint();
 		paintImg.setDither(true);
@@ -139,6 +155,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		leftStack = new MapStackControl(view.getContext());
 		leftStack.addStackView(createNextInfoControl());
 		leftStack.addStackView(createMiniMapControl());
+		leftStack.addStackView(createNextNextInfoControl());
 		
 		// 2. Preparations
 		Rect topRectPadding = new Rect();
@@ -401,7 +418,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 		
 	private MiniMapControl createMiniMapControl() {
-		MiniMapControl miniMapControl = new MiniMapControl(map, view) {
+		final MiniMapControl miniMapControl = new MiniMapControl(map, view) {
 			@Override
 			public boolean updateInfo() {
 				boolean visible = false;
@@ -420,17 +437,81 @@ public class MapInfoLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(View v) {
 				showMiniMap = false;
+				miniMapControl.invalidate();
 				view.refreshMap();
 			}
 		});
 		return miniMapControl;
 	}
 	
+	private NextTurnInfoControl createNextNextInfoControl() {
+		final RoutingHelper routingHelper = routeLayer.getHelper();
+		final NextTurnInfoControl nextTurnInfo = new NextTurnInfoControl(map, paintSmallText, paintSmallSubText, true) {
+			@Override
+			public boolean updateInfo() {
+				boolean visible = false;
+				if (routeLayer != null && routingHelper.isRouterEnabled() && routingHelper.isFollowingMode()) {
+					int d = routingHelper.getDistanceToNextNextRouteDirection();
+					if (d > 0 && !showMiniMap) {
+						visible = true;
+						RouteDirectionInfo next = routingHelper.getNextNextRouteDirectionInfo();
+						if (next == null) {
+							if (turnType != null) {
+								turnType = null;
+								invalidate();
+							}
+						} else if (!Algoritms.objectEquals(turnType, next.turnType)) {
+							turnType = next.turnType;
+							TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
+							invalidate();
+						}
+						if (distChanged(d, nextTurnDirection)) {
+							invalidate();
+							nextTurnDirection = d;
+						}
+						if (turnImminent != routingHelper.getNextNextTurnImminent()) {
+							turnImminent = routingHelper.getNextNextTurnImminent();
+							invalidate();
+						}
+					}
+				}
+				updateVisibility(visible);
+
+				return true;
+			}
+		};
+		nextTurnInfo.setOnClickListener(new View.OnClickListener() {
+//			int i = 0;
+			@Override
+			public void onClick(View v) {
+				// uncomment to test turn info rendering
+//				final int l = TurnType.predefinedTypes.length;
+//				final int exits = 5;
+//				i++;
+//				if (i % (l + exits) >= l ) {
+//					nextTurnInfo.turnType = TurnType.valueOf("EXIT" + (i % (l + exits) - l + 1));
+//					nextTurnInfo.exitOut = (i % (l + exits) - l + 1)+"";
+//					float a = 180 - (i % (l + exits) - l + 1) * 50;
+//					nextTurnInfo.turnType.setTurnAngle(a < 0 ? a + 360 : a);
+//				} else {
+//					nextTurnInfo.turnType = TurnType.valueOf(TurnType.predefinedTypes[i % (TurnType.predefinedTypes.length + exits)]);
+//					nextTurnInfo.exitOut = "";
+//				}
+//				nextTurnInfo.turnImminent = (nextTurnInfo.turnImminent + 1) % 3;
+//				nextTurnInfo.nextTurnDirection = 580;
+//				TurnPathHelper.calcTurnPath(nextTurnInfo.pathForTurn, nextTurnInfo.turnType,nextTurnInfo.pathTransform);
+				showMiniMap = true;
+				view.refreshMap();
+			}
+		});
+		// initial state
+		nextTurnInfo.setVisibility(View.GONE);
+		return nextTurnInfo;
+	}
 	
 	private NextTurnInfoControl createNextInfoControl() {
 		final RoutingHelper routingHelper = routeLayer.getHelper();
-		final NextTurnInfoControl nextTurnInfo = new NextTurnInfoControl(map, paintText, paintSubText) {
-			
+		final NextTurnInfoControl nextTurnInfo = new NextTurnInfoControl(map, paintText, paintSubText, false) {
 			@Override
 			public boolean updateInfo() {
 				boolean visible = false;
@@ -468,8 +549,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 								invalidate();
 								nextTurnDirection = d;
 							}
-							if(turnImminent != routingHelper.turnImminent()){
-								turnImminent = routingHelper.turnImminent();
+							if(turnImminent != routingHelper.getNextTurnImminent()){
+								turnImminent = routingHelper.getNextTurnImminent();
 								invalidate();
 							}
 						}
@@ -491,10 +572,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 //					nextTurnInfo.turnType = TurnType.valueOf("EXIT" + (i % (l + exits) - l + 1));
 //					float a = 180 - (i % (l + exits) - l + 1) * 50;
 //					nextTurnInfo.turnType.setTurnAngle(a < 0 ? a + 360 : a);
+//					nextTurnInfo.exitOut = (i % (l + exits) - l + 1)+"";
 //				} else {
 //					nextTurnInfo.turnType = TurnType.valueOf(TurnType.predefinedTypes[i % (TurnType.predefinedTypes.length + exits)]);
+//					nextTurnInfo.exitOut = "";
 //				}
-				nextTurnInfo.invalidate();
+//				nextTurnInfo.turnImminent = (nextTurnInfo.turnImminent + 1) % 3;
+//				nextTurnInfo.nextTurnDirection = 580;
+//				TurnPathHelper.calcTurnPath(nextTurnInfo.pathForTurn, nextTurnInfo.turnType,nextTurnInfo.pathTransform);
 				showMiniMap = true;
 				view.refreshMap();
 			}

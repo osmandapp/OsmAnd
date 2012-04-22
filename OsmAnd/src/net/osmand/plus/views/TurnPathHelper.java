@@ -27,7 +27,7 @@ public class TurnPathHelper {
 
 		int th = 12; // thickness
 		pathForTurn.moveTo(wa / 2, ha - 1);
-		float sarrowL = 23; // side of arrow ?
+		float sarrowL = 22; // side of arrow ?
 		float harrowL = (float) Math.sqrt(2) * sarrowL; // hypotenuse of arrow
 		float spartArrowL = (float) ((sarrowL - th / Math.sqrt(2)) / 2);
 		float hpartArrowL = (float) (harrowL - th) / 2;
@@ -43,8 +43,8 @@ public class TurnPathHelper {
 			pathForTurn.rLineTo(0, h);
 		} else if (TurnType.TR.equals(turnType.getValue())|| TurnType.TL.equals(turnType.getValue())) {
 			int b = TurnType.TR.equals(turnType.getValue())? 1 : -1;
-			float quadShiftX = 22;
-			float quadShiftY = 22;
+			float quadShiftX = 18;
+			float quadShiftY = 18;
 			int wl = 10; // width
 			int h = (int) (ha - quadShiftY - harrowL + hpartArrowL - 5);
 			int sl = wl + th / 2;
@@ -62,6 +62,36 @@ public class TurnPathHelper {
 			pathForTurn.rLineTo(-b * wl, 0);
 			pathForTurn.rQuadTo(-b * (quadShiftX + th), 0, -b * (quadShiftX + th), quadShiftY + th);
 			pathForTurn.rLineTo(0, h);
+		} else if (TurnType.KL.equals(turnType.getValue()) || TurnType.KR.equals(turnType.getValue())) {
+			int b = TurnType.KR.equals(turnType.getValue())? 1 : -1;
+			float quadShiftX = 14;
+			float quadShiftY = 14;
+			th = 10;
+			spartArrowL = (float) ((sarrowL - th / Math.sqrt(2)) / 2);
+			hpartArrowL = (float) (harrowL - th) / 2;
+			int h = 12;
+			int lh = 15;
+			int sl = th / 2;
+			
+			pathForTurn.rMoveTo(-b * (sl + 10), 0);
+			pathForTurn.rLineTo(0, -lh);
+			// 1st arc
+			pathForTurn.rQuadTo(0, -quadShiftY, b * quadShiftX, -quadShiftY);
+			// 2nd arc
+			pathForTurn.rQuadTo(b * quadShiftX, 0, b * quadShiftX, -quadShiftY);
+			// center
+			pathForTurn.rLineTo(0, -h);
+			pathForTurn.rLineTo(b*hpartArrowL, 0);
+			pathForTurn.rLineTo(-b*harrowL / 2, -harrowL / 2); // center
+			pathForTurn.rLineTo(-b*harrowL / 2, harrowL / 2);
+			pathForTurn.rLineTo(b*hpartArrowL, 0);
+			pathForTurn.rLineTo(0, h );
+			// 2nd arc
+			pathForTurn.rQuadTo(0, quadShiftY - th, -b * (quadShiftX - th), quadShiftY- th);
+			//1st arc
+			pathForTurn.rQuadTo(-b * (quadShiftX + th), 0, -b * (quadShiftX + th ), quadShiftY + th);
+			pathForTurn.rLineTo(0, lh );
+
 		} else if (TurnType.TSLR.equals(turnType.getValue()) || TurnType.TSLL.equals(turnType.getValue())) {
 			int b = TurnType.TSLR.equals(turnType.getValue()) ? 1 : -1;
 			int h = 24;
