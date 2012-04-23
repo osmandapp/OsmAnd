@@ -803,7 +803,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		if (preference.getKey() != null && preference instanceof PreferenceScreen && 
 				((PreferenceCategory)findPreference("profile_dep_cat")).findPreference(preference.getKey()) != null) {
 			PreferenceScreen scr = (PreferenceScreen)preference;
-			scr.getDialog().setTitle(scr.getTitle() + " [" + osmandSettings.APPLICATION_MODE.get().toHumanString(this) + "]");
+			String title = scr.getTitle().toString();
+			if(title.startsWith("-")){
+				title = title.substring(1);
+			}
+			scr.getDialog().setTitle("   " + title + " [" + osmandSettings.APPLICATION_MODE.get().toHumanString(this) + "]");
 		}
 		
 		if (preference == applicationDir) {
