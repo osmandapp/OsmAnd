@@ -24,11 +24,12 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.text.TextPaint;
+import android.text.Paint;
 import android.util.FloatMath;
 
 public class TextRenderer {
 
-	private TextPaint paintText;
+	private Paint paintText;
 	private final Context context;
 	private Paint paintIcon;
 
@@ -77,7 +78,7 @@ public class TextRenderer {
 
 	public TextRenderer(Context context) {
 		this.context = context;
-		paintText = new TextPaint();
+		paintText = new Paint();
 		paintText.setStyle(Style.FILL);
 		paintText.setStrokeWidth(1);
 		paintText.setColor(Color.BLACK);
@@ -89,7 +90,7 @@ public class TextRenderer {
 		paintIcon.setStyle(Style.STROKE);
 	}
 
-	public TextPaint getPaintText() {
+	public Paint getPaintText() {
 		return paintText;
 	}
 
