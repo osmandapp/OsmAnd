@@ -24,7 +24,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.text.TextPaint;
-import android.text.Paint;
 import android.util.FloatMath;
 
 public class TextRenderer {
