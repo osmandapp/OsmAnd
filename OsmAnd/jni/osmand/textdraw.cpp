@@ -147,14 +147,13 @@ void drawTextOnCanvas(SkCanvas* cv, std::string text, float centerX, float cente
 		paintText.setStyle(SkPaint::kStroke_Style);
 		paintText.setColor(-1); // white
 		paintText.setStrokeWidth(2 + textShadow);
-		// FIXME test black areas...
-		// cv->drawText(text.c_str(), text.length(), centerX, centerY, paintText);
+		cv->drawText(text.c_str(), text.length(), centerX, centerY, paintText);
 // reset
 		paintText.setStrokeWidth(2);
 		paintText.setStyle(SkPaint::kFill_Style);
 		paintText.setColor(c);
 	}
-	// cv->drawText(text.data(), text.length(), centerX, centerY, paintText);
+	cv->drawText(text.data(), text.length(), centerX, centerY, paintText);
 }
 
 
@@ -468,6 +467,10 @@ bool textOrder(TextDrawInfo* text1, TextDrawInfo* text2) {
 
 SkTypeface* serif = SkTypeface::CreateFromName("Droid Serif", SkTypeface::kNormal);
 void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv) {
+	if(true) {
+		// FIXME comment out (after testing)
+	 	return;
+	}
 	SkRect r = SkRect::MakeLTRB(0, 0, rc->width, rc->height);
 	r.inset(-100, -100);
 	quad_tree<TextDrawInfo*> boundsIntersect(r, 4, 0.6);
