@@ -147,13 +147,14 @@ void drawTextOnCanvas(SkCanvas* cv, std::string text, float centerX, float cente
 		paintText.setStyle(SkPaint::kStroke_Style);
 		paintText.setColor(-1); // white
 		paintText.setStrokeWidth(2 + textShadow);
-		cv->drawText(text.c_str(), text.length(), centerX, centerY, paintText);
+		// FIXME test black areas...
+		// cv->drawText(text.c_str(), text.length(), centerX, centerY, paintText);
 // reset
 		paintText.setStrokeWidth(2);
 		paintText.setStyle(SkPaint::kFill_Style);
 		paintText.setColor(c);
 	}
-	cv->drawText(text.data(), text.length(), centerX, centerY, paintText);
+	// cv->drawText(text.data(), text.length(), centerX, centerY, paintText);
 }
 
 
