@@ -107,10 +107,15 @@
 		</aapt>
 		
 		<!-- osmchange -->
-		<echo>Packaging extra raw resources...</echo>
-		<zip destfile="${out.absolute.dir}/${resource.package.file.name}"
-			basedir="${raw.absolute.dir}"
-			update="true" />
+		<echo>Packaging aditional OsmAnd resources and assets... to ${out.packaged.file} from ${raw.absolute.dir}</echo>
+		<exec executable="${aapt}">
+			<!-- failonerror="true"> -->
+			<arg value="package" />
+			<arg value="-u" />
+			<arg value="-F" />
+			<arg value="${out.absolute.dir}/${resource.package.file.name}" />
+			<arg value="${raw.absolute.dir}" />
+		</exec>
 		<!-- osmchange -->
     </target>
 
