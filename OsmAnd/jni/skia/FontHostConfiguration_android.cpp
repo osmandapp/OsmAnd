@@ -255,6 +255,8 @@ void getFontFamilies(SkTDArray<FontFamily*> &fontFamilies) {
 				}
 			}
 		}
+		if(newFontFamily != NULL)
+			*fontFamilies.append() = newFontFamily;
 	}
 	//===============================================================================
 	// End of addition
