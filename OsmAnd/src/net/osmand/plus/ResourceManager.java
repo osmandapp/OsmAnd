@@ -337,7 +337,12 @@ public class ResourceManager {
 			}
 			Bitmap bmp = null;
 			if (req.tileSource instanceof SQLiteTileSource) {
+				try {
 				bmp = ((SQLiteTileSource) req.tileSource).getImage(req.xTile, req.yTile, req.zoom);
+				} catch (OutOfMemoryError e) {
+					log.error("Out of memory error", e); //$NON-NLS-1$
+					clearTiles();
+				}
 			} else {
 				File en = new File(req.dirWithTiles, req.tileId);
 				if (en.exists()) {

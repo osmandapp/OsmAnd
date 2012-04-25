@@ -19,7 +19,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDiskIOException;
 import android.database.sqlite.SQLiteStatement;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Rect;
+
 
 public class SQLiteTileSource implements ITileSource {
 
@@ -33,7 +37,11 @@ public class SQLiteTileSource implements ITileSource {
 	private SQLiteDatabase db;
 	private final File file;
 	private int minZoom = 1;
-	private int maxZoom = 17;
+	private int maxZoom = 17; 
+	private int baseZoom = 17; //Default base zoom
+
+	final int margin = 1;
+	final int tileSize = 256;
 	
 	public SQLiteTileSource(File f, List<TileSourceTemplate> toFindUrl){
 		this.file = f;
@@ -82,7 +90,7 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public int getTileSize() {
-		return base != null ? base.getTileSize() : 256;
+		return base != null ? base.getTileSize() : tileSize;
 	}
 
 	@Override
@@ -139,7 +147,8 @@ public class SQLiteTileSource implements ITileSource {
 				long z;
 				z = db.compileStatement("SELECT minzoom FROM info").simpleQueryForLong(); //$NON-NLS-1$
 				if (z < 17 && z >= 0)
-					maxZoom = 17 - (int)z;
+					baseZoom = 17 - (int)z; // sqlite base zoom, =11 for SRTM hillshade
+					maxZoom = 17; // Cheat to have tiles request even if zoom level not in sqlite	
 				z = db.compileStatement("SELECT maxzoom FROM info").simpleQueryForLong(); //$NON-NLS-1$
 				if (z < 17 && z >= 0)
 					minZoom = 17 - (int)z;
@@ -154,14 +163,15 @@ public class SQLiteTileSource implements ITileSource {
 		if(db == null){
 			return false;
 		}
-		Cursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE z = ? LIMIT 1", new String[] {(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-		try {
-			boolean e = cursor.moveToFirst();
-			cursor.close();
-			return e;
-		} catch (SQLiteDiskIOException e) {
-			return false;
-		}
+		return true; // Always true in resampling mode
+//		Cursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE z = ? LIMIT 1", new String[] {(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+//		try {
+//			boolean e = cursor.moveToFirst();
+//			cursor.close();
+//			return e;
+//		} catch (SQLiteDiskIOException e) {
+//			return false;
+//		}
 	}
 	
 	public boolean exists(int x, int y, int zoom) {
@@ -169,13 +179,17 @@ public class SQLiteTileSource implements ITileSource {
 		if(db == null){
 			return false;
 		}
+		//return true; // Cheat to test resampling /o modifying ressourceManager
 		long time = System.currentTimeMillis();
-		Cursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		int n = zoom - baseZoom;
+		int base_xtile = x >> n;
+		int base_ytile = y >> n;
+		Cursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {base_xtile+"", base_ytile+"",(17 - baseZoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 		try {
 			boolean e = cursor.moveToFirst();
 			cursor.close();
 			if (log.isDebugEnabled()) {
-				log.debug("Checking tile existance x = " + x + " y = " + y + " z = " + zoom + " for " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				log.debug("Checking parent tile existance x = " + base_xtile + " y = " + base_ytile + " z = " + baseZoom + " for " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			}
 			return e;
 		} catch (SQLiteDiskIOException e) {
@@ -191,23 +205,118 @@ public class SQLiteTileSource implements ITileSource {
 		return db.isDbLockedByOtherThreads();
 	}
 
+	private Bitmap getMetaTile(int x, int y, int zoom, int flags) {
+		// return a (tileSize+2*margin)^2 tile around a given tile
+		// based on its neighbor. This is needed to have a nice bilinear resampling
+		// on tile edges. Margin of 1 is enough for bilinear resampling.
+
+		SQLiteDatabase db = getDatabase();
+		if(db == null){
+			return null;
+		}
+		
+		Bitmap stitchedImage = Bitmap.createBitmap(tileSize + 2 * margin, tileSize + 2 * margin, Config.ARGB_8888);
+		Canvas canvas = new Canvas(stitchedImage);
+
+		for (int dx = -1; dx <= 1; dx++) {
+			for (int dy = -1; dy <= 1; dy++) {
+				if ((flags & (0x400 >> (4 * (dy + 1) + (dx + 1)))) == 0)
+					continue;
+
+
+				int xOff, yOff, w, h;
+				int dstx, dsty;
+				Cursor cursor = db.rawQuery(
+						"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?",
+						new String[] {(x + dx) + "", (y + dy) + "", (17 - zoom) + ""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+				byte[] blob = null;
+				if(cursor.moveToFirst()) {
+					blob = cursor.getBlob(0);
+				}
+				cursor.close();
+				if (dx < 0) xOff = tileSize - margin; else xOff = 0;
+				if (dx == 0) w = tileSize; else w = margin;
+				if (dy < 0) yOff = tileSize - margin; else yOff = 0;
+				if (dy == 0) h = tileSize; else h = margin;
+				dstx = dx * tileSize + xOff + margin;
+				dsty = dy * tileSize + yOff + margin;
+				if(blob != null){
+
+					Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
+					blob = null;
+					Rect src = new Rect(xOff, yOff, xOff + w, yOff + h);
+					Rect dst = new Rect(dstx, dsty, dstx + w, dsty + h);
+					canvas.drawBitmap(Tile, src, dst, null);
+					Tile.recycle();
+				}
+			}
+		}
+		return stitchedImage; // return a tileSize+2*margin size image
+		
+	}
+	
 	public Bitmap getImage(int x, int y, int zoom) {
 		SQLiteDatabase db = getDatabase();
 		if(db == null){
 			return null;
 		}
-		Cursor cursor = db.rawQuery("SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-		byte[] blob = null;
-		if(cursor.moveToFirst()) {
-			blob = cursor.getBlob(0);
+		if ( zoom <= baseZoom) {
+			// return the normal tile if exists
+			Cursor cursor = db.rawQuery("SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+			byte[] blob = null;
+			if(cursor.moveToFirst()) {
+				blob = cursor.getBlob(0);
+			}
+			cursor.close();
+			if(blob != null){
+				return BitmapFactory.decodeByteArray(blob, 0, blob.length);
+			}
+			return null;
+		} else {
+			// return a resampled tile from its last parent
+			int n = zoom - baseZoom;
+			int base_xtile = x >> n;
+			int base_ytile = y >> n;
+
+			int scaledSize= tileSize >> n;
+			int offset_x=  x - (base_xtile << n);
+			int offset_y=  y - (base_ytile << n);
+			int flags = 0x020;
+
+			if (scaledSize < 8)
+				return null;
+
+			if (offset_x == 0)
+				flags |= 0x444;
+			else if (offset_x == (1 << n) - 1)
+				flags |= 0x111;
+			if (offset_y == 0)
+				flags |= 0x700;
+			else if (offset_y == (1 << n) - 1)
+				flags |= 0x007;
+
+			Bitmap metaTile = getMetaTile(base_xtile, base_ytile, baseZoom, flags);
+
+			if(metaTile != null){
+				// in tile space:
+				int delta_px = scaledSize * offset_x;
+				int delta_py = scaledSize * offset_y;
+				
+				Bitmap xn = Bitmap.createBitmap(metaTile,
+						delta_px,
+						delta_py,
+						scaledSize + 2 * margin,
+						scaledSize + 2 * margin);
+				metaTile.recycle();
+				int scaleto = tileSize + ((2 * margin) << n);
+				Bitmap scaled = Bitmap.createScaledBitmap(xn,scaleto,scaleto,true);
+				xn.recycle();
+				return Bitmap.createBitmap(scaled, (margin << n), (margin << n), tileSize, tileSize);
+			}
+			return null;
 		}
-		cursor.close();
-		if(blob != null){
-			return BitmapFactory.decodeByteArray(blob, 0, blob.length);
-		}
-		return null;
 	}
-	
+	 
 	public ITileSource getBase() {
 		return base;
 	}
