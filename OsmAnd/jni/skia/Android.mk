@@ -84,12 +84,14 @@ LOCAL_SRC_FILES := \
 	$(OSMAND_SKIA_LOC)/src/core/SkColorTable.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkComposeShader.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkConcaveToTriangles.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkConfig8888.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkCordic.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkCubicClipper.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkData.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkDebug.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkDeque.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkDevice.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkDeviceProfile.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkDither.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkDraw.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkEdgeBuilder.cpp \
@@ -177,6 +179,7 @@ LOCAL_SRC_FILES := \
 	$(OSMAND_SKIA_LOC)/src/effects/SkKernel33MaskFilter.cpp \
 	$(OSMAND_SKIA_LOC)/src/effects/SkLayerDrawLooper.cpp \
 	$(OSMAND_SKIA_LOC)/src/effects/SkLayerRasterizer.cpp \
+	$(OSMAND_SKIA_LOC)/src/effects/SkMorphologyImageFilter.cpp \
 	$(OSMAND_SKIA_LOC)/src/effects/SkPaintFlagsDrawFilter.cpp \
 	$(OSMAND_SKIA_LOC)/src/effects/SkPixelXorXfermode.cpp \
 	$(OSMAND_SKIA_LOC)/src/effects/SkPorterDuff.cpp \
@@ -186,6 +189,7 @@ LOCAL_SRC_FILES := \
 	$(OSMAND_SKIA_LOC)/src/effects/SkTestImageFilters.cpp \
 	$(OSMAND_SKIA_LOC)/src/effects/SkTransparentShader.cpp \
 	$(OSMAND_SKIA_LOC)/src/images/bmpdecoderhelper.cpp \
+	$(OSMAND_SKIA_LOC)/src/images/SkBitmapRegionDecoder.cpp \
 	$(OSMAND_SKIA_LOC)/src/images/SkCreateRLEPixelRef.cpp \
 	$(OSMAND_SKIA_LOC)/src/images/SkFDStream.cpp \
 	$(OSMAND_SKIA_LOC)/src/images/SkFlipPixelRef.cpp \
@@ -216,13 +220,15 @@ LOCAL_SRC_FILES := \
 	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_tables.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkMemory_malloc.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkOSFile_stdio.cpp \
-	$(OSMAND_SKIA_LOC)/src/ports/SkTime_Unix.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkThread_pthread.cpp \
+	$(OSMAND_SKIA_LOC)/src/ports/SkTime_Unix.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkBase64.cpp \
 	$(OSMAND_SKIA_LOC)/src/utils/SkBoundaryPatch.cpp \
 	$(OSMAND_SKIA_LOC)/src/utils/SkCamera.cpp \
 	$(OSMAND_SKIA_LOC)/src/utils/SkColorMatrix.cpp \
 	$(OSMAND_SKIA_LOC)/src/utils/SkCubicInterval.cpp \
 	$(OSMAND_SKIA_LOC)/src/utils/SkCullPoints.cpp \
+	$(OSMAND_SKIA_LOC)/src/utils/SkDeferredCanvas.cpp \
 	$(OSMAND_SKIA_LOC)/src/utils/SkDumpCanvas.cpp \
 	$(OSMAND_SKIA_LOC)/src/utils/SkInterpolator.cpp \
 	$(OSMAND_SKIA_LOC)/src/utils/SkLayer.cpp \
@@ -310,7 +316,6 @@ LOCAL_CFLAGS += \
 	-DSK_BUILD_FOR_ANDROID \
 	-DSK_BUILD_FOR_ANDROID_NDK \
 	-DSK_ALLOW_STATIC_GLOBAL_INITIALIZERS=0 \
-	-DSK_USE_POSIX_THREADS \
 	-DSK_RELEASE \
 	-DGR_RELEASE=1 \
 	-DNDEBUG
