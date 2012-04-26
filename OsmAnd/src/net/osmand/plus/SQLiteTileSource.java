@@ -138,10 +138,10 @@ public class SQLiteTileSource implements ITileSource {
 			try {
 				long z;
 				z = db.compileStatement("SELECT minzoom FROM info").simpleQueryForLong(); //$NON-NLS-1$
-				if (z < 17 && z >= 0)
+				if (z < 17)
 					maxZoom = 17 - (int)z;
 				z = db.compileStatement("SELECT maxzoom FROM info").simpleQueryForLong(); //$NON-NLS-1$
-				if (z < 17 && z >= 0)
+				if (z < 17)
 					minZoom = 17 - (int)z;
 			} catch (RuntimeException e) {
 			}
