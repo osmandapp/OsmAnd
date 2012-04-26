@@ -578,7 +578,7 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 //				rs.setFetchSize(1000); !! not working for SQLite would case troubles probably
 				Entity prevEntity = null;
 
-				long prevId = -1;
+				long prevId = Long.MIN_VALUE;
 				while (rs.next()) {
 					long curId = rs.getLong(1);
 					boolean newEntity = curId != prevId;
