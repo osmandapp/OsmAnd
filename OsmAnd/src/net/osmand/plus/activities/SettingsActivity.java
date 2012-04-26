@@ -203,7 +203,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerBooleanPreference(osmandSettings.SHOW_RULER,screen);
 		CheckBoxPreference nativeCheckbox = registerBooleanPreference(osmandSettings.NATIVE_RENDERING,screen);
 		//disable the checkbox if the library cannot be used
-		if (NativeOsmandLibrary.isLoaded() && !NativeOsmandLibrary.isSupported()) {
+		if ((NativeOsmandLibrary.isLoaded() && !NativeOsmandLibrary.isSupported()) || 
+				osmandSettings.NATIVE_RENDERING_FAILED.get()) {
 			nativeCheckbox.setEnabled(false);
 		}
 	    

@@ -364,18 +364,24 @@ public class OsmandApplication extends Application {
 	}
 
 	private void startApplicationBackground() {
-		List<String> warnings = null;
+		List<String> warnings = new ArrayList<String>();
 		try {
-			if (osmandSettings.NATIVE_RENDERING.get()) {
+			if(osmandSettings.NATIVE_RENDERING_FAILED.get()){
+				osmandSettings.NATIVE_RENDERING.set(false);
+				osmandSettings.NATIVE_RENDERING_FAILED.set(false);
+				warnings.add(getString(R.string.native_library_not_supported));
+			} else if (osmandSettings.NATIVE_RENDERING.get()) {
+				osmandSettings.NATIVE_RENDERING_FAILED.set(true);
 				startDialog.startTask(getString(R.string.init_native_library), -1);
 				RenderingRulesStorage storage = rendererRegistry.getCurrentSelectedRenderer();
 				boolean initialized = NativeOsmandLibrary.getLibrary(storage) != null;
+				osmandSettings.NATIVE_RENDERING_FAILED.set(false);
 				if (!initialized) {
 					LOG.info("Native library could not loaded!");
 					osmandSettings.NATIVE_RENDERING.set(false);
 				}
 			}
-			warnings = manager.reloadIndexes(startDialog);
+			warnings.addAll(manager.reloadIndexes(startDialog));
 			player = null;
 			SavingTrackHelper helper = new SavingTrackHelper(OsmandApplication.this);
 			if (helper.hasDataToSave()) {
