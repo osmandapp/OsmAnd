@@ -228,7 +228,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 	private void initBackToMenuButton(final OsmandMapTileView view, FrameLayout parent) {
 		android.widget.FrameLayout.LayoutParams params;
-		backToMenuButton = new Button(view.getContext());
+		Context ctx = view.getContext();
+		backToMenuButton = new Button(ctx);
+		backToMenuButton.setContentDescription(ctx.getString(R.string.backToMenu));
 		backToMenuButton.setBackgroundResource(R.drawable.map_btn_menu);
 		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 					Gravity.BOTTOM | Gravity.LEFT);
@@ -244,6 +246,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 				activity.backToMainMenu();
 			}
 		});
+		
+		activity.accessibleContent.add(backToMenuButton);
 	}
 	
 	private void initRuler(OsmandMapTileView view, FrameLayout parent) {
@@ -290,6 +294,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		params.setMargins(0, 0, minimumWidth , 0);
 		zoomOutButton.setContentDescription(ctx.getString(R.string.zoomOut));
 		parent.addView(zoomOutButton, params);
+		
+		activity.accessibleContent.add(zoomInButton);
+		activity.accessibleContent.add(zoomOutButton);
 		
 		zoomInButton.setOnClickListener(new View.OnClickListener() {
 			@Override

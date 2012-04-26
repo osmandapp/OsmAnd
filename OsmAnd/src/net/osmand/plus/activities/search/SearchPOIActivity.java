@@ -20,6 +20,7 @@ import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
+import net.osmand.access.NavigationInfo;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
@@ -89,6 +90,8 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	private static final int MIN_DISTANCE_TO_RESEARCH = 70;
 	private static final int MIN_DISTANCE_TO_UPDATE = 6;
 
+	private NavigationInfo navigationInfo;
+
 
 	private Button searchPOILevel;
 	private ImageButton showOnMap;
@@ -115,6 +118,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
+		navigationInfo = new NavigationInfo(this);
 		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.searchpoi_activity, R.drawable.tab_search_poi_icon);
 		setContentView(R.layout.searchpoi);
 		titleBar.afterSetContentView();
@@ -347,6 +351,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	
 	public void setLocation(Location l){
 		registerUnregisterSensor(l);
+		navigationInfo.setLocation(l);
 		boolean handled = false;
 		if (l != null && filter != null) {
 			Location searchedLocation = getSearchedLocation();
@@ -401,12 +406,22 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 			AccessibleToast.makeText(this, format + "  " + getString(R.string.opening_hours) + " : " + amenity.getOpeningHours(), Toast.LENGTH_LONG).show();
 		}
 		
+		List<String> items = new ArrayList<String>();
+		items.add(getString(R.string.show_poi_on_map));
+		items.add(getString(R.string.navigate_to));
+		if (((OsmandApplication)getApplication()).accessibilityEnabled())
+			items.add(getString(R.string.show_details));
+
 		AlertDialog.Builder builder = new AlertDialog.Builder(SearchPOIActivity.this);
 		builder.setTitle(format);
-		builder.setItems(new String[]{getString(R.string.show_poi_on_map), getString(R.string.navigate_to)}, new DialogInterface.OnClickListener(){
+		builder.setItems(items.toArray(new String[items.size()]), new DialogInterface.OnClickListener(){
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				if(which == 2){
+					showPOIDetails(amenity, settings.usingEnglishNames());
+					return;
+				}
 				if(which == 0){
 					int z = settings.getLastKnownMapZoom();
 					String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.usingEnglishNames());
@@ -762,7 +777,33 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		}
 	}
 
-	
+	private void showPOIDetails(final Amenity amenity, boolean en) {
+		AlertDialog.Builder b = new AlertDialog.Builder(SearchPOIActivity.this);
+		b.setTitle(OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, en));
+		b.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		});
+		List<String> attributes = new ArrayList<String>();
+		String direction = navigationInfo.getDirectionString(amenity.getLocation(), heading);
+		if (direction != null)
+			attributes.add(direction);
+		if (amenity.getPhone() != null) 
+			attributes.add(getString(R.string.phone) + " " + amenity.getPhone());
+		if (amenity.getOpeningHours() != null)
+			attributes.add(getString(R.string.opening_hours) + " " + amenity.getOpeningHours());
+		attributes.add(getString(R.string.navigate_point_latitude) + " " + Double.toString(amenity.getLocation().getLatitude()));
+		attributes.add(getString(R.string.navigate_point_longitude) + " " + Double.toString(amenity.getLocation().getLongitude()));
+		b.setItems(attributes.toArray(new String[attributes.size()]),
+			new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+				}
+			});
+		b.show();
+	}
+
 	// Working with location listeners
 	private LocationListener networkListener = new LocationListener(){
 		@Override
