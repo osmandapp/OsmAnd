@@ -174,7 +174,7 @@
 				<fail message="ndk.dir is missing. Make sure to generate local.properties or to inject it through an env var" unless="ndk.dir"/>
 				<echo>Building native code</echo>
 
-				<exec command="sh ${ndk.dir}/ndk-build -j8 V=1 OSMAND_ARM_ONLY=true" failonerror="true"/>
+				<exec command="sh ${ndk.dir}/ndk-build -j8 V=1" failonerror="true"/>
 			</else>
 		</if>
     </target>
