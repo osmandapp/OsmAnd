@@ -21,6 +21,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.LogUtil;
+import net.osmand.access.AccessibilityMode;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.activities.DayNightHelper;
 import net.osmand.plus.activities.SavingTrackHelper;
@@ -43,6 +44,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Handler;
 import android.text.format.DateFormat;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
 
 import com.bidforfix.andorid.BidForFixHelper;
@@ -488,4 +490,14 @@ public class OsmandApplication extends Application {
 
 		}
 	}
+
+	public boolean accessibilityEnabled() {
+		final AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.get();
+		if (mode == AccessibilityMode.ON)
+			return true;
+		else if (mode == AccessibilityMode.OFF)
+			return false;
+		return ((AccessibilityManager)getSystemService(ACCESSIBILITY_SERVICE)).isEnabled();
+	}
+
 }

@@ -13,6 +13,7 @@ import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.LogUtil;
+import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.map.ITileSource;
@@ -233,7 +234,7 @@ public class MapActivityActions implements DialogProvider {
 
     
     private Dialog createReloadTitleDialog(final Bundle args) {
-    	Builder builder = new AlertDialog.Builder(mapActivity);
+    	Builder builder = new AccessibleAlertBuilder(mapActivity);
     	builder.setMessage(R.string.context_menu_item_update_map_confirm);
     	builder.setNegativeButton(R.string.default_buttons_cancel, null);
     	final OsmandMapTileView mapView = mapActivity.getMapView();
@@ -414,7 +415,7 @@ public class MapActivityActions implements DialogProvider {
 				saveDirections();
 			}
 		};
-		Builder builder = new AlertDialog.Builder(mapActivity);
+		Builder builder = new AccessibleAlertBuilder(mapActivity);
 		builder.setTitle(R.string.show_route);
 		builder.setMessage(mapActivity.getRoutingHelper().getGeneralRouteInformation());
 		builder.setPositiveButton(R.string.default_buttons_save, saveDirections);

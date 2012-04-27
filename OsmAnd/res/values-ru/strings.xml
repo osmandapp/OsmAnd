@@ -478,7 +478,7 @@
 	<string name="background_service_provider">Источник позиционирования</string>
 	<string name="background_router_service_descr">Включить фоновый сервис для обновления через долгий период времени</string>
 	<string name="background_router_service">Сервис навигации</string>
-	<string name="off_router_service_no_gps_available">Сервис маршрутизации OsmAnd включен, отключив позиционирование, он перестает вести по маршруту.</string>
+	<string name="off_router_service_no_gps_available">Сервис маршрутизации OsmAnd включен, если отключить позиционирование, он перестанет вести по маршруту.</string>
 	<string name="routing_settings_descr">Изменить настройки навигации</string>
 	<string name="routing_settings">- Навигация</string>
 	<string name="hide_poi_filter">Скрыть фильтр</string>

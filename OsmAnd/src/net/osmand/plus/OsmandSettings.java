@@ -8,8 +8,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.LogUtil;
 import net.osmand.Version;
+import net.osmand.access.AccessibilityMode;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.RelativeDirectionStyle;
 import net.osmand.map.ITileSource;
@@ -300,6 +300,32 @@ public class OsmandSettings {
 			return prefs.edit().putBoolean(getId(), val).commit();
 		}
 	}
+	
+	private class BooleanAccessibilityPreference extends BooleanPreference {
+
+		private BooleanAccessibilityPreference(String id, boolean defaultValue, boolean global) {
+			super(id, defaultValue, global);
+		}
+		
+		private BooleanAccessibilityPreference(String id, boolean defaultValue, boolean global, boolean cache) {
+			super(id, defaultValue, global, cache);
+		}
+		
+		@Override
+		protected Boolean getValue(SharedPreferences prefs, Boolean defaultValue) {
+			return ctx.accessibilityEnabled() ?
+				super.getValue(prefs, defaultValue) :
+				defaultValue;
+		}
+
+		@Override
+		protected boolean setValue(SharedPreferences prefs, Boolean val) {
+			return ctx.accessibilityEnabled() ?
+				super.setValue(prefs, val) :
+				false;
+		}
+	}
+
 	private class IntPreference extends CommonPreference<Integer> {
 
 
@@ -384,14 +410,13 @@ public class OsmandSettings {
 		protected E getValue(SharedPreferences prefs, E defaultValue) {
 			try {
 				int i = prefs.getInt(getId(), -1);
-				if(i < 0 || i >= values.length){
-					return defaultValue;
+				if(i >= 0 && i < values.length){
+					return values[i];
 				}
-				return values[i];
-			} catch (Exception e) {
-				android.util.Log.e(LogUtil.TAG, "Error getting value for: " + this.getId(), e);
-				return defaultValue; 
+			} catch (ClassCastException ex) {
+				setValue(prefs, defaultValue);
 			}
+			return defaultValue;
 		}
 		
 		@Override
@@ -414,11 +439,6 @@ public class OsmandSettings {
 	// cache of metrics constants as they are used very often
 	public final OsmandPreference<MetricsConstants> METRIC_SYSTEM = new EnumIntPreference<MetricsConstants>(
 			"default_metric_system", MetricsConstants.KILOMETERS_AND_METERS, true, true, MetricsConstants.values());
-
-	public String getId() {
-		return "direction_style";
-	};
-
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	// cache of metrics constants as they are used very often
@@ -426,20 +446,29 @@ public class OsmandSettings {
 			"direction_style", RelativeDirectionStyle.SIDEWISE, true, true, RelativeDirectionStyle.values());
 	
 	// this value string is synchronized with settings_pref.xml preference name
+	// cache of metrics constants as they are used very often
+	public final OsmandPreference<AccessibilityMode> ACCESSIBILITY_MODE = new EnumIntPreference<AccessibilityMode>(
+			"accessibility_mode", AccessibilityMode.DEFAULT, true, true, AccessibilityMode.values());
+	
+	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_TRACKBALL_FOR_MOVEMENTS =
 		new BooleanPreference("use_trackball_for_movements", true, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> ZOOM_BY_TRACKBALL =
-		new BooleanPreference("zoom_by_trackball", true, true);
+		new BooleanAccessibilityPreference("zoom_by_trackball", true, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SCROLL_MAP_BY_GESTURES =
-		new BooleanPreference("scroll_map_by_gestures", true, true);
+		new BooleanAccessibilityPreference("scroll_map_by_gestures", true, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_SHORT_OBJECT_NAMES =
-		new BooleanPreference("use_short_object_names", false, true);
+		new BooleanAccessibilityPreference("use_short_object_names", false, true);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> ACCESSIBILITY_EXTENSIONS =
+		new BooleanAccessibilityPreference("accessibility_extensions", false, true);
 		
 	
 	// this value string is synchronized with settings_pref.xml preference name
