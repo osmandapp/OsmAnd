@@ -193,11 +193,12 @@ public class NavigationService extends Service implements LocationListener {
     				handler.sendMessageDelayed(msg, LOST_LOCATION_CHECK_DELAY);
 				}
 			}
-			
+			// use because there is a bug on some devices with location.getTime()
+			long locationTime = System.currentTimeMillis();
 			savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
-					location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
+					location.getSpeed(), location.getAccuracy(), locationTime, settings);
 			liveMonitoringHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
-					location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
+					location.getSpeed(), location.getAccuracy(), locationTime, settings);
 			if(routingHelper.isFollowingMode()){
 				routingHelper.setCurrentLocation(location);
 			}

@@ -736,14 +736,16 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		if(Log.isLoggable(LogUtil.TAG, Log.DEBUG)){
 			Log.d(LogUtil.TAG, "Location changed " + location.getProvider()); //$NON-NLS-1$
 		}
-		if(location != null ){
+		if(location != null ) {
+			// use because there is a bug on some devices with location.getTime()
+			long locationTime = System.currentTimeMillis();
 			// write only with 50 meters accuracy
 			if (!location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
 				if (settings.SAVE_TRACK_TO_GPX.get()) {
 					savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
-							location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
+							location.getSpeed(), location.getAccuracy(), locationTime, settings);
 					if (settings.SHOW_CURRENT_GPX_TRACK.get()) {
-						WptPt pt = new GPXUtilities.WptPt(location.getLatitude(), location.getLongitude(), location.getTime(),
+						WptPt pt = new GPXUtilities.WptPt(location.getLatitude(), location.getLongitude(), locationTime,
 								location.getAltitude(), location.getSpeed(), location.getAccuracy());
 						mapLayers.getGpxLayer().addTrackPoint(pt);
 					}
