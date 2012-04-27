@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="tip_recent_changes_0_7_2_t">Changes in 0.7.2 :
+\n\t- Native rendering for all devices
+\n\t- Offline POI editing
+\n\t- Accessibility
+\n\t- Lots of bug fixes
+	</string>
     <string name="send_files_to_osm">Send GPX files to OSM?</string>
     <string name="gpx_visibility_txt">Visibility</string>
     <string name="gpx_tags_txt">Tags</string>
