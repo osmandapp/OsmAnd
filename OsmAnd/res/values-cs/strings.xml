@@ -1,5 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
+    <string name="gpx_visibility_txt">Viditelnost</string>
+    <string name="gpx_tags_txt">Tagy</string>
+    <string name="gpx_description_txt">Popis</string>
+    <string name="validate_gpx_upload_name_pwd">Prosím zadejte vaše uživatelské jméno a heslo pro přístup do OSM, aby bylo možné nahrát soubory GPX.</string>
+    
+    <string name="default_buttons_support">Podpora</string>
+	<string name="support_new_features">Podpora nových funkcí</string>
+
+    <string name="show_ruler_level_descr">Zobrazovat měřítko na mapě</string>
+	<string name="show_ruler_level">Měřítko</string>
+	
+	<string name="info_button">Informace</string>
+	<string name="back_to_location">Zpět na zobrazení pozice</string>
+	<string name="help">Nápověda</string>
+    <string name="show_details">Zobrazit detaily</string>
+	
+	<string name="accessibility_extensions_descr">Moduly pro Usnadnění pro starší verze Androidu</string>
+	<string name="accessibility_extensions">Moduly pro Usnadnění</string>
+	<string name="accessibility_mode">Režim usnadnění</string>
+	<string name="accessibility_mode_descr">Aktivuje funkce usnadnění</string>
+	<string name="accessibility_on">Zapnuto</string>
+	<string name="accessibility_off">Vypnuto</string>
+	<string name="accessibility_default">Podle systémového nastavení</string>
+	
+	<string name="backToMenu">Zpět do menu</string>
+	<string name="zoomOut">Zmenšit</string>
+	<string name="zoomIn">Zvětšit</string>
+	<string name="zoomIs">Zvětšení je </string>
+	
+	<string name="north">sever</string>
+	<string name="north_north_east">severoseverovýchod</string>
+	<string name="north_east">severovýchod</string>
+	<string name="east_north_east">východovýchodosever</string>
+	<string name="east">východ</string>
+	<string name="east_south_east">východovýchodojih</string>
+	<string name="south_east">jihovýchod</string>
+	<string name="south_south_east">jihojihovýchod</string>
+	<string name="south">jih</string>
+	<string name="south_south_west">jihojihozápad</string>
+	<string name="south_west">jihozápad</string>
+	<string name="west_south_west">západozápadojih</string>
+	<string name="west">západ</string>
+	<string name="west_north_west">západozápadosever</string>
+	<string name="north_west">severozápad</string>
+	<string name="north_north_west">severoseverozápad</string>
+	<string name="front">Vpředu</string>
+	<string name="front_right">Vpravo vpředu</string>
+	<string name="right">Vpravo</string>
+	<string name="back_right">Vpravo vzadu</string>
+	<string name="back">Vzadu</string>
+	<string name="back_left">Vlevo vzadu</string>
+	<string name="left">Vlevo</string>
+	<string name="front_left">Vlevo vpředu</string>
+	<string name="oclock">hodin</string>
+	<string name="towards">směrem</string>
+	<string name="accuracy">Přesnost</string>
+	<string name="altitude">Nadmořská výška</string>
+	<string name="no_info">Žádné informace</string>
+	<string name="direction_style_sidewise">Podle stran (8 sektorů)</string>
+	<string name="direction_style_clockwise">Podle hodin (12 sektorů)</string>
+	<string name="settings_direction_style">Styl interpretace směrů</string>
+	<string name="settings_direction_style_descr">Vyberte způsob vyjádření relativního směru pohybu</string>
+	<string name="auto_announce_on">Spustit automatické hlášení</string>
+	<string name="auto_announce_off">Zastavit automatické hlášení</string>
+	<string name="scroll_map_by_gestures_descr">Posouvat mapu pohybem prstů po dotykovém displeji</string>
+	<string name="scroll_map_by_gestures">Přirozené posouvání mapy</string>
+	<string name="i_am_here">Jsem zde</string>
+	<string name="zoom_by_trackball_descr">Měnit zvětšení vodorovnými pohyby trackballu</string>
+	<string name="zoom_by_trackball">Ovládat zvětšení pomocí trackballu</string>
+	<string name="use_short_object_names_descr">Použít krátká jména objektů</string>  <!-- FIXME "in touch exploration mode" -->
+	<string name="use_short_object_names">Krátká jména objektů</string>
+	<string name="accessibility_preferences_descr">Konfigurace usnadnění pro uživatele s omezením zraku</string>
+	<string name="accessibility_preferences">Usnadnění</string>
+
 	<string name="use_fluorescent_overlays">Fluorescentní barvy</string>
 	<string name="use_fluorescent_overlays_descr">Použít fluorescentní barvy pro zobrazení cest a tras</string>
 	<string name="offline_poi_edition">Offline editace POI</string>
