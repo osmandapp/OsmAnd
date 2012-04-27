@@ -490,8 +490,8 @@ POIの更新は利用できません</string>
      <string name="context_menu_item_update_poi">POIを更新</string>
      <string name="context_menu_item_update_map_confirm">インターネット経由で
 ローカルデータを更新しますか?</string>
-     <string name="search_history_city">市町村: {0}</string>
-     <string name="search_history_street">町名: {0}, {1}</string>
+     <string name="search_history_city">市町村:\n {0}</string>
+     <string name="search_history_street">町名:\n {0}, {1}</string>
      <string name="search_history_int_streets">交差点: {0} x
 {1} in {2}</string>
      <string name="search_history_building">建物: {0}, {1}, {2}</string>

@@ -661,8 +661,8 @@
 <string name="update_poi_is_not_available_for_zoom">Aktualizácia POI nie je dostupná pre nízke úrovne priblíženia</string>
 <string name="context_menu_item_update_poi">Aktualizovať POI</string>
 <string name="context_menu_item_update_map_confirm">Naozaj chcete aktualizovať lokálne údaje z internetu?</string>
-<string name="search_history_city">Mesto: {0}</string>
-<string name="search_history_street">Ulica: {0}, {1}</string>
+<string name="search_history_city">Mesto:\n {0}</string>
+<string name="search_history_street">Ulica:\n {0}, {1}</string>
 <string name="search_history_int_streets">Pretínajúce ulice: {0} x {1} v {2}</string>
 <string name="search_history_building">Adresa: {0}, {1}, {2}</string>
 <string name="favorite">Obľúbené</string>

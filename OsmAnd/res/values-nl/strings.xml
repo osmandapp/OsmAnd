@@ -619,8 +619,8 @@
 	<string name="update_poi_is_not_available_for_zoom">Het vernieuwen van interessepunten is niet beschikbaar bij lage zoomniveaus</string>
 	<string name="context_menu_item_update_poi">Actualisatie interessepunt</string>
 	<string name="context_menu_item_update_map_confirm">Locale gegevens via Internet actualiseren?</string>
-	<string name="search_history_city">Stad: {0}</string>
-	<string name="search_history_street">Straat: {0}, {1}</string>
+	<string name="search_history_city">Stad:\n {0}</string>
+	<string name="search_history_street">Straat:\n {0}, {1}</string>
 	<string name="search_history_int_streets">Kruispunt: {0} x {1} in {2}</string>
 	<string name="search_history_building">Gebouw: {0}, {1}, {2}</string>
 	<string name="favorite">Favoriet</string>

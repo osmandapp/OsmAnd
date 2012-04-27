@@ -543,8 +543,8 @@
 	<string name="update_poi_is_not_available_for_zoom">Обновление POI не доступно для такой большой области</string>
 	<string name="context_menu_item_update_poi">Обновить POI</string>
 	<string name="context_menu_item_update_map_confirm">Вы действительно хотите обновить локальные данные, загрузив их из Интернета?</string>
-	<string name="search_history_city">Город : {0}</string>
-	<string name="search_history_street">Улица : {0}, {1}</string>
+	<string name="search_history_city">Город:\n {0}</string>
+	<string name="search_history_street">Улица:\n {0}, {1}</string>
 	<string name="search_history_int_streets">Пересечение улиц : {0} x {1} в {2}</string>
 	<string name="search_history_building">Здание : {0}, {1}, {2}</string>
 	<string name="favorite">Избранное</string>

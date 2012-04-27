@@ -594,8 +594,8 @@
 <string name="update_poi_is_not_available_for_zoom">Mise à jour de PI n\'est pas disponible pour un petit niveau de zoom</string>
 <string name="context_menu_item_update_poi">Points d\'Intérêts</string>
 <string name="context_menu_item_update_map_confirm">Sélectionnez les données que vous voulez mettre à jour depuis internet</string>
-<string name="search_history_city">Ville : {0}</string>
-<string name="search_history_street">Rue : {0}, {1}</string>
+<string name="search_history_city">Ville:\n {0}</string>
+<string name="search_history_street">Rue:\n {0}, {1}</string>
 <string name="search_history_int_streets">Intersections : {0} x {1} dans {2}</string>
 <string name="search_history_building">Édifice : {0}, {1}, {2}</string>
 <string name="favorite">Favoris</string>

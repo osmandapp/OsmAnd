@@ -129,7 +129,7 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 				if (which == 0) {
 					OsmandSettings settings = OsmandApplication.getSettings();
 					settings.setMapLocationToShow(entry.getLatitude(), entry.getLongitude(),  settings.getLastKnownMapZoom(), 
-							 null, getString(R.string.favorite)+" : " + entry.getName(), entry); //$NON-NLS-1$
+							 null, getString(R.string.favorite)+":\n " + entry.getName(), entry); //$NON-NLS-1$
 				} else if (which == 1) {
 					OsmandApplication.getSettings().setPointToNavigate(entry.getLatitude(),
 							entry.getLongitude(), getString(R.string.favorite) + " : " + entry.getName());
@@ -150,7 +150,7 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 			FavouritePoint point = favouritesAdapter.getItem(position);
 			settings.SHOW_FAVORITES.set(true);
 			settings.setMapLocationToShow(point.getLatitude(), point.getLongitude(), settings.getLastKnownMapZoom(), null,
-					getString(R.string.favorite) + " : " + point.getName(), point); //$NON-NLS-1$
+					getString(R.string.favorite) + ": \n " + point.getName(), point); //$NON-NLS-1$
 			MapActivity.launchMapActivityMoveToTop(FavouritesListActivity.this);
 		} else {
 			Intent intent = getIntent();

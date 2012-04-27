@@ -232,7 +232,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			OsmandSettings settings = OsmandApplication.getSettings();
 			settings.SHOW_FAVORITES.set(true);
 			settings.setMapLocationToShow(point.getLatitude(), point.getLongitude(), 
-					Math.max(12, settings.getLastKnownMapZoom()), null, getString(R.string.favorite)+" : " + point.getName(), point);
+					Math.max(12, settings.getLastKnownMapZoom()), null, getString(R.string.favorite)+":\n " + point.getName(), point);
 			MapActivity.launchMapActivityMoveToTop(FavouritesActivity.this);
 		}
 		return true;
@@ -248,7 +248,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			OsmandSettings settings = OsmandApplication.getSettings();
 			settings.SHOW_FAVORITES.set(true);
 			settings.setMapLocationToShow(point.getLatitude(), point.getLongitude(), 
-					Math.max(12, settings.getLastKnownMapZoom()), null, getString(R.string.favorite)+" : " + point.getName(), point);
+					Math.max(12, settings.getLastKnownMapZoom()), null, getString(R.string.favorite)+":\n " + point.getName(), point);
 			MapActivity.launchMapActivityMoveToTop(this);
 		} else if (aItem.getItemId() == NAVIGATE_TO) {
 			OsmandApplication.getSettings().setPointToNavigate(point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName());

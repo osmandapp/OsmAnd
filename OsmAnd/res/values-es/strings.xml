@@ -632,8 +632,8 @@
 <string name="update_poi_is_not_available_for_zoom">No se puede actualizar POIs para niveles de zoom pequeños</string>
 <string name="context_menu_item_update_poi">Actualizar POI</string>
 <string name="context_menu_item_update_map_confirm">¿Desea actualizar datos locales vía Internet?</string>
-<string name="search_history_city">Ciudad: {0}</string>
-<string name="search_history_street">Calle: {0}, {1}</string>
+<string name="search_history_city">Ciudad:\n {0}</string>
+<string name="search_history_street">Calle:\n {0}, {1}</string>
 <string name="search_history_int_streets">Intersección: {0} x {1} en {2}</string>
 <string name="search_history_building">Edificio: {0}, {1}, {2}</string>
 <string name="favorite">Favorito</string>

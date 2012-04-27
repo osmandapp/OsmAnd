@@ -708,8 +708,8 @@
 	<string name="update_poi_is_not_available_for_zoom">Nem lehet a POI-kat frissíteni kis nagyítás mellett</string>
 	<string name="context_menu_item_update_poi">POI-k frissítése</string>
 	<string name="context_menu_item_update_map_confirm">Biztos, hogy a helyi adatokat internetről frissíti?</string>
-	<string name="search_history_city">Település: {0}</string>
-	<string name="search_history_street">Utca: {0}, {1}</string>
+	<string name="search_history_city">Település:\n {0}</string>
+	<string name="search_history_street">Utca:\n {0}, {1}</string>
 	<string name="search_history_int_streets">Kereszteződés: {0} és {1}, {2}</string>
 	<string name="search_history_building">Épület: {0}, {1}, {2}</string>
 	<string name="favorite">Kedvenc</string>

@@ -847,8 +847,8 @@
   <string name="update_poi_is_not_available_for_zoom">POI nelze aktualizovat při malém zvětšení</string>
   <string name="context_menu_item_update_poi">Aktualizovat POI</string>
   <string name="context_menu_item_update_map_confirm">Opravdu chcete aktualizovat lokální data z internetu?</string>
-  <string name="search_history_city">Město: {0}</string>
-  <string name="search_history_street">Ulice: {0}, {1}</string>
+  <string name="search_history_city">Město:\n {0}</string>
+  <string name="search_history_street">Ulice:\n {0}, {1}</string>
   <string name="search_history_int_streets">Křižovatka ulic: {0} x {1} v {2}</string>
   <string name="search_history_building">Budova: {0}, {1}, {2}</string>
   <string name="favorite">Oblíbené</string>
