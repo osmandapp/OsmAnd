@@ -22,6 +22,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.widget.FrameLayout.LayoutParams;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ContextMenuLayer extends OsmandMapLayer {
@@ -47,10 +48,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private List<Object> selectedObjects = new ArrayList<Object>();
 	
 	private TextView textView;
+	private ImageView closeButton;
 	private DisplayMetrics dm;
 	private OsmandMapTileView view;
 	private int BASE_TEXT_SIZE = 170;
 	private int SHADOW_OF_LEG = 5;
+	private int CLOSE_BTN = 3;
 	
 	private final MapActivity activity;
 	private Drawable boxLeg;
@@ -78,6 +81,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 		BASE_TEXT_SIZE = (int) (BASE_TEXT_SIZE * scaleCoefficient);
 		SHADOW_OF_LEG = (int) (SHADOW_OF_LEG * scaleCoefficient);
+		CLOSE_BTN = (int) (CLOSE_BTN * scaleCoefficient);
 		
 		boxLeg = view.getResources().getDrawable(R.drawable.box_leg);
 		boxLeg.setBounds(0, 0, boxLeg.getMinimumWidth(), boxLeg.getMinimumHeight());
@@ -96,6 +100,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		textView.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
 		textPadding = new Rect();
 		textView.getBackground().getPadding(textPadding);
+		
+		closeButton = new ImageView(view.getContext());
+		lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		closeButton.setLayoutParams(lp);
+		closeButton.setImageDrawable(view.getResources().getDrawable(R.drawable.headliner_close));
+		closeButton.setClickable(true);
 	}
 
 	@Override
@@ -115,6 +125,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				int c = textView.getLineCount();
 				
 				textView.draw(canvas);
+				canvas.translate(textView.getWidth() - closeButton.getWidth() - CLOSE_BTN, CLOSE_BTN);
+				closeButton.draw(canvas);
 				if (c == 0) {
 					// special case relayout after on draw method
 					layoutText();
@@ -133,6 +145,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		int h = (int) ((textView.getPaint().getTextSize() + 4) * textView.getLineCount());
 		
 		textView.layout(0, -padding.bottom, w, h + padding.top);
+		int minw = closeButton.getDrawable().getMinimumWidth();
+		int minh = closeButton.getDrawable().getMinimumHeight();
+		closeButton.layout(0, 0, minw, minh);
 	}
 	
 	public void setLocation(LatLon loc, String description){
@@ -170,7 +185,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return true;
 		}
 		
-		if(pressedInTextView(point.x, point.y)){
+		if(pressedInTextView(point.x, point.y) > 0){
 			setLocation(null, ""); //$NON-NLS-1$
 			view.refreshMap();
 			return true;
@@ -207,18 +222,23 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return true;
 	}
 	
-	public boolean pressedInTextView(float px, float py) {
+	public int pressedInTextView(float px, float py) {
 		if (latLon != null) {
 			Rect bs = textView.getBackground().getBounds();
+			Rect closes = closeButton.getDrawable().getBounds();
 			int x = (int) (px - view.getRotatedMapXForPoint(latLon.getLatitude(), latLon.getLongitude()));
 			int y = (int) (py - view.getRotatedMapYForPoint(latLon.getLatitude(), latLon.getLongitude()));
 			x += bs.width() / 2;
 			y += bs.height() + boxLeg.getMinimumHeight() - SHADOW_OF_LEG;
-			if (bs.contains(x, y)) {
-				return true;
+			int dclosex = x - bs.width() + CLOSE_BTN + closes.width();
+			int dclosey = y + CLOSE_BTN;
+			if(closes.intersects(dclosex - CLOSE_BTN, dclosey - CLOSE_BTN, dclosex + CLOSE_BTN, dclosey + CLOSE_BTN)) {
+				return 2;
+			} else if (bs.contains(x, y)) {
+				return 1;
 			}
 		}
-		return false;
+		return 0;
 	}
 	
 	public String getSelectedObjectName(){
@@ -250,7 +270,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	@Override
 	public boolean onSingleTap(PointF point) {
 		boolean nativeMode = view.getSettings().SCROLL_MAP_BY_GESTURES.get();
-		if ((!nativeMode) || pressedInTextView(point.x, point.y)) {
+		int val = pressedInTextView(point.x, point.y);
+		if (val == 2) {
+			setLocation(null, ""); //$NON-NLS-1$
+			view.refreshMap();
+			return true;
+		} else if (val == 1 || !nativeMode) {
 			if (!selectedObjects.isEmpty()) {
 				showContextMenuForSelectedObjects();
 			} else if (nativeMode) {
@@ -292,8 +317,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public boolean onTouchEvent(MotionEvent event) {
 		if (latLon != null) {
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
-				if(pressedInTextView(event.getX(), event.getY())){
+				int vl = pressedInTextView(event.getX(), event.getY());
+				if(vl == 1){
 					textView.setPressed(true);
+					view.refreshMap();
+				} else if(vl == 2){
+					closeButton.setPressed(true);
 					view.refreshMap();
 				}
 			}
@@ -301,6 +330,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
 			if(textView.isPressed()) {
 				textView.setPressed(false);
+				view.refreshMap();
+			}
+			if(closeButton.isPressed()) {
+				closeButton.setPressed(false);
 				view.refreshMap();
 			}
 		}
