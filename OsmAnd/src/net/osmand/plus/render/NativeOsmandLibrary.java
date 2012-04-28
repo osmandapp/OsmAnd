@@ -16,6 +16,12 @@ public class NativeOsmandLibrary {
 	
 	private static NativeOsmandLibrary library;
 	private static Boolean isNativeSupported = null;
+	
+	public static NativeOsmandLibrary getLoadedLibrary(){
+		synchronized (NativeOsmandLibrary.class) {
+			return library;
+		}
+	}
 
 	public static NativeOsmandLibrary getLibrary(RenderingRulesStorage storage) {
 		if (!isLoaded()) {
@@ -120,6 +126,10 @@ public class NativeOsmandLibrary {
 	public boolean initMapFile(String filePath) {
 		return initBinaryMapFile(filePath);
 	}
+	
+	public boolean closeMapFile(String filePath) {
+		return closeBinaryMapFile(filePath);
+	}
 
 	public static class NativeSearchResult {
 		private int nativeHandler;
@@ -148,6 +158,8 @@ public class NativeOsmandLibrary {
 	private static native void deleteSearchResult(int searchResultHandle);
 
 	private static native boolean initBinaryMapFile(String filePath);
+	
+	private static native boolean closeBinaryMapFile(String filePath);
 	
 	private static native void initRenderingRulesStorage(RenderingRulesStorage storage);
 

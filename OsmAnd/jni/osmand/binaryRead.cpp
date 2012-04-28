@@ -920,6 +920,18 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 	return (jint)result;
 }
 
+extern "C" JNIEXPORT void JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_closeBinaryMapFile(JNIEnv* ienv,
+		jobject path) {
+	const char* utf = ienv->GetStringUTFChars((jstring) path, NULL);
+	std::string inputName(utf);
+	ienv->ReleaseStringUTFChars((jstring) path, utf);
+	std::map<std::string, BinaryMapFile*>::iterator iterator;
+	if ((iterator = openFiles.find(inputName)) != openFiles.end()) {
+		delete iterator->second;
+		openFiles.erase(iterator);
+	}
+}
+
 extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_initBinaryMapFile(JNIEnv* ienv,
 		jobject obj, jobject path) {
 	// Verify that the version of the library that we linked against is

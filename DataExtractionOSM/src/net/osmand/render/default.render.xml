@@ -88,8 +88,8 @@
 		<filter tag="" value="" order="11" objectType="2"/>
 		
 		<group objectType="3" point="false">
-			<type tag="railway" value="platform" order="30" />
-			<type tag="railway" value="station"  order="30"/>
+			<filter tag="railway" value="platform" order="30" />
+			<filter tag="railway" value="station"  order="30"/>
 		</group>
 		
 		<group objectType="2" area="false" point="false">

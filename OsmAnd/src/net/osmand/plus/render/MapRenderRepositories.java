@@ -58,7 +58,7 @@ import android.widget.Toast;
 public class MapRenderRepositories {
 
 	private final static Log log = LogUtil.getLog(MapRenderRepositories.class);
-	private final Context context;
+	private final OsmandApplication context;
 	private final static int BASEMAP_ZOOM = 11;
 	private Handler handler;
 	private Map<String, BinaryMapIndexReader> files = new LinkedHashMap<String, BinaryMapIndexReader>();
@@ -91,7 +91,7 @@ public class MapRenderRepositories {
 	private SearchRequest<BinaryMapDataObject> searchRequest;
 	private OsmandSettings prefs;
 
-	public MapRenderRepositories(Context context) {
+	public MapRenderRepositories(OsmandApplication context) {
 		this.context = context;
 		this.renderer = new OsmandRenderer(context);
 		handler = new Handler(Looper.getMainLooper());
@@ -136,8 +136,22 @@ public class MapRenderRepositories {
 			}
 			throw oome;
 		}
+		long val = System.currentTimeMillis();
 		if (log.isDebugEnabled()) {
-			log.debug("Initializing db " + file.getAbsolutePath() + " " + (System.currentTimeMillis() - start) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			log.debug("Initializing db " + file.getAbsolutePath() + " " + (val - start) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		}
+		NativeOsmandLibrary nativeLib = prefs.NATIVE_RENDERING.get() ? NativeOsmandLibrary.getLoadedLibrary() : null;
+		if (nativeLib != null) {
+			start = val;
+			if (!nativeLib.initMapFile(file.getAbsolutePath())) {
+				log.debug("Initializing native db " + file.getAbsolutePath() + " failed!"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			} else {
+				nativeFiles.add(file.getAbsolutePath());
+				val = System.currentTimeMillis();
+				if (log.isDebugEnabled()) {
+					log.debug("Initializing native db " + file.getAbsolutePath() + " " + (val - start) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				}
+			}
 		}
 		return reader;
 	}
@@ -152,7 +166,14 @@ public class MapRenderRepositories {
 
 	protected void closeConnection(BinaryMapIndexReader c, String file) {
 		files.remove(file);
-		nativeFiles.remove(file);
+		if(nativeFiles.contains(file)){
+			NativeOsmandLibrary lib = NativeOsmandLibrary.getLoadedLibrary();
+			if(lib != null) {
+				lib.closeMapFile(file);
+				nativeFiles.remove(file);
+			}
+		}
+		
 		try {
 			c.close();
 		} catch (IOException e) {
@@ -245,13 +266,10 @@ public class MapRenderRepositories {
 		int bottomY = MapUtils.get31TileNumberY(dataBox.bottom);
 		int topY = MapUtils.get31TileNumberY(dataBox.top);
 		long now = System.currentTimeMillis();
-		// TODO coastline/land tiles 
+
+		// additionally initialize
 		NativeSearchResult resultHandler = null;
 		for (String mapName : files.keySet()) {
-			BinaryMapIndexReader reader = files.get(mapName);
-			if(!reader.containsMapData(leftX, topY, rightX, bottomY, zoom)) {
-				continue;
-			}
 			if (!nativeFiles.contains(mapName)) {
 				nativeFiles.add(mapName);
 				if (!library.initMapFile(mapName)) {
@@ -259,6 +277,15 @@ public class MapRenderRepositories {
 				}
 				log.debug("Native resource " + mapName + " initialized"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
+		}
+		
+		// TODO coastline/land tiles 
+		for (String mapName : files.keySet()) {
+			BinaryMapIndexReader reader = files.get(mapName);
+			if(!reader.containsMapData(leftX, topY, rightX, bottomY, zoom)) {
+				continue;
+			}
+			
 			resultHandler = library.searchObjectsForRendering(leftX, rightX, topY, bottomY, zoom, mapName, renderingReq,
 					PerformanceFlags.checkForDuplicateObjectIds, resultHandler, this);
 			if (checkWhetherInterrupted()) {
