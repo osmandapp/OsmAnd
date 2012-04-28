@@ -99,21 +99,10 @@ public class NativeOsmandLibrary {
 	 * @param searchResultHandle
 	 *            - must be null if there is no need to append to previous results returns native handle to results
 	 */
-	public NativeSearchResult searchObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom, String mapName,
-			RenderingRuleSearchRequest request, boolean skipDuplicates, NativeSearchResult searchResultHandler,
-			Object objectWithInterruptedField) {
-		if (searchResultHandler == null) {
-			return new NativeSearchResult(searchObjectsForRendering(sleft, sright, stop, sbottom, zoom, mapName, request, skipDuplicates,
-					0, objectWithInterruptedField));
-		} else {
-			int res = searchObjectsForRendering(sleft, sright, stop, sbottom, zoom, mapName, request, skipDuplicates,
-					searchResultHandler.nativeHandler, objectWithInterruptedField);
-			if (res == searchResultHandler.nativeHandler) {
-				return searchResultHandler;
-			}
-			return new NativeSearchResult(res);
-		}
-
+	public NativeSearchResult searchObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom,
+			RenderingRuleSearchRequest request, boolean skipDuplicates, Object objectWithInterruptedField) {
+		return new NativeSearchResult(searchNativeObjectsForRendering(sleft, sright, stop, sbottom, zoom, request, skipDuplicates,
+				objectWithInterruptedField));
 	}
 
 	public void deleteSearchResult(NativeSearchResult searchResultHandler) {
@@ -170,8 +159,8 @@ public class NativeOsmandLibrary {
 			Bitmap bitmap, boolean useEnglishNames,
 			RenderingRuleSearchRequest render, int defaultColor);
 
-	private static native int searchObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom, String mapnaem,
-			RenderingRuleSearchRequest request, boolean skipDuplicates, int searchResultHandler, Object objectWithInterruptedField);
+	private static native int searchNativeObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom, 
+			RenderingRuleSearchRequest request, boolean skipDuplicates, Object objectWithInterruptedField);
 			
 	public static native int getCpuCount();
 	public static native boolean cpuHasNeonSupport();

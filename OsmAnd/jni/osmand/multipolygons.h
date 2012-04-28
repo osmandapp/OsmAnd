@@ -10,23 +10,6 @@
 #include "common.h"
 #include "mapObjects.h"
 
-struct tagValueType {
-	int type;
-	std::string tag;
-	std::string value;
-
-	tagValueType(tag_value t, int type) : type(type) {
-		tag = t.first;
-		value = t.second;
-	}
-
-};
-bool operator==(const tagValueType& __x, const tagValueType& __y) {
-	return __x.type == __y.type;
-}
-bool operator<(const tagValueType& __x, const tagValueType& __y) {
-	return __x.type < __y.type;
-}
 /// !!! Fuly copied from MapRenderRepositories.java, should be carefully synchroinized
 bool isClockwiseWay(std::vector<int_pair>& c) ;
 bool calculateLineCoordinates(bool inside, int x, int y, bool pinside, int px, int py, int leftX, int rightX,
@@ -37,6 +20,8 @@ void processMultipolygonLine(std::vector<std::vector<int_pair> >& completedRings
 
 void unifyIncompletedRings(std::vector<std::vector<int_pair> >& incompletedRings, std::vector<std::vector<int_pair> >& completedRings, std::vector<std::string> &completedRingNames,
 			std::vector<std::string> &incompletedRingNames, int leftX, int rightX, int bottomY, int topY, long dbId, int zoom);
+
+
 
 MapDataObject* processMultiPolygon(int leftX, int rightX, int bottomY, int topY,
 		std::vector<std::vector<int_pair > >& completedRings, std::vector<std::vector<int_pair> >& incompletedRings,
@@ -123,6 +108,12 @@ MapDataObject* processMultiPolygon(int leftX, int rightX, int bottomY, int topY,
 	pl->names = completedRingNames;
 	pl->points = completedRings;
 	return pl;
+}
+
+
+void processCoastlines(std::vector<MapDataObject*>&  coastLines, int leftX, int rightX,
+			int bottomY, int topY, int zoom, bool showIncompleted, std::vector<MapDataObject*>& res) {
+
 }
 
 static std::vector<MapDataObject*> EMPTY_LIST;

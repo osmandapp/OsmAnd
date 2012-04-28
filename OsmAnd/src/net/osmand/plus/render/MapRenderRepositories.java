@@ -267,8 +267,7 @@ public class MapRenderRepositories {
 		int topY = MapUtils.get31TileNumberY(dataBox.top);
 		long now = System.currentTimeMillis();
 
-		// additionally initialize
-		NativeSearchResult resultHandler = null;
+		// check that everything is initialized
 		for (String mapName : files.keySet()) {
 			if (!nativeFiles.contains(mapName)) {
 				nativeFiles.add(mapName);
@@ -279,19 +278,14 @@ public class MapRenderRepositories {
 			}
 		}
 		
-		// TODO coastline/land tiles 
-		for (String mapName : files.keySet()) {
-			BinaryMapIndexReader reader = files.get(mapName);
-			if(!reader.containsMapData(leftX, topY, rightX, bottomY, zoom)) {
-				continue;
-			}
-			
-			resultHandler = library.searchObjectsForRendering(leftX, rightX, topY, bottomY, zoom, mapName, renderingReq,
-					PerformanceFlags.checkForDuplicateObjectIds, resultHandler, this);
-			if (checkWhetherInterrupted()) {
-				library.deleteSearchResult(resultHandler);
-				return false;
-			}
+		NativeSearchResult resultHandler = library.searchObjectsForRendering(leftX, rightX, topY, bottomY, zoom, renderingReq,
+				PerformanceFlags.checkForDuplicateObjectIds, this);
+		if (checkWhetherInterrupted()) {
+			library.deleteSearchResult(resultHandler);
+			return false;
+		}
+		if(cNativeObjects != null) {
+			library.deleteSearchResult(cNativeObjects);
 		}
 		cNativeObjects = resultHandler;
 		cObjectsBox = dataBox;

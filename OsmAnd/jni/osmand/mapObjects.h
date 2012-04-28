@@ -46,6 +46,17 @@ public:
 		return false;
 	}
 
+	bool contains(std::string key, std::string val) {
+		std::vector<tag_value>::iterator it = types.begin();
+		while (it != types.end()) {
+			if (it->first == key) {
+				return it->second == val;
+			}
+			it++;
+		}
+		return false;
+	}
+
 	int getSimpleLayer() {
 		std::vector<tag_value>::iterator it = additionalTypes.begin();
 		while (it != additionalTypes.end()) {
@@ -69,11 +80,6 @@ public:
 struct SearchResult {
 	std::vector< MapDataObject* > result;
 	int count;
-	std::vector< MapDataObject* > tempResult;
-	std::vector< MapDataObject* > basemapResult;
-	std::vector< MapDataObject* > coastLines;
-	std::vector< MapDataObject* > basemapCoastLines;
-
 };
 
 

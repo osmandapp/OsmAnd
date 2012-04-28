@@ -16,6 +16,7 @@
 #include "renderRules.h"
 #include "common.h"
 #include "mapObjects.h"
+#include "multipolygons.h"
 //#include "multipolygons.h"
 #include "proto/osmand_odb.pb.h"
 
@@ -24,6 +25,7 @@ using namespace google::protobuf;
 using namespace google::protobuf::internal;
 
 static const int MAP_VERSION = 2;
+static const int BASEMAP_ZOOM = 11;
 
 
 
@@ -187,6 +189,11 @@ struct BinaryMapFile {
 	std::string inputName;
 	vector<MapIndex> mapIndexes;
 	FILE* f;
+	bool basemap;
+
+	bool isBasemap(){
+		return basemap;
+	}
 
 	~BinaryMapFile() {
 		fclose(f);
@@ -410,6 +417,7 @@ bool initMapStructure(io::CodedInputStream* input, BinaryMapFile* file) {
 			input->PopLimit(oldLimit);
 			input->Seek(mapIndex.filePointer + mapIndex.length);
 			file->mapIndexes.push_back(mapIndex);
+			file->basemap = file->basemap || mapIndex.name.find("basemap") != string::npos;
 			break;
 		}
 		case OsmAndStructure::kVersionConfirmFieldNumber: {
@@ -443,9 +451,6 @@ extern "C" JNIEXPORT void JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 		jobject obj, jint searchResult) {
 	SearchResult* result = (SearchResult*) searchResult;
 	if(result != NULL){
-		deleteObjects(result->basemapCoastLines);
-		deleteObjects(result->result);
-		deleteObjects(result->coastLines);
 		deleteObjects(result->result);
 		delete result;
 	}
@@ -850,74 +855,149 @@ void searchMapData(io::CodedInputStream* input, MapRoot* root, MapIndex* ind, Se
 
 }
 
-extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_searchObjectsForRendering(JNIEnv* ienv,
-		jobject obj, jint sleft, jint sright, jint stop, jint sbottom, jint zoom, jstring mapName,
-		jobject renderingRuleSearchRequest, bool skipDuplicates, jint searchResult, jobject objInterrupted) {
-	// TODO skipDuplicates not supported
-	SearchResult* result = (SearchResult*) searchResult;
-	if(result == NULL) {
-		result = new SearchResult();
-	}
-	std::string map = getString(ienv, mapName);
-	std::map<std::string, BinaryMapFile*>::iterator i = openFiles.find(map);
-	if(i == openFiles.end()) {
-		return (jint) result;
-	}
-	BinaryMapFile* file =  i->second;
+
+
+
+extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_searchNativeObjectsForRendering(JNIEnv* ienv,
+		jobject obj, jint sleft, jint sright, jint stop, jint sbottom, jint zoom, jobject renderingRuleSearchRequest, bool skipDuplicates, jobject objInterrupted) {
 	RenderingRuleSearchRequest* req = initSearchRequest(ienv, renderingRuleSearchRequest);
 	jclass clObjInterrupted = ienv->GetObjectClass(objInterrupted);
 	jfieldID interruptedField =  getFid(ienv, clObjInterrupted, "interrupted", "Z");
 	ienv->DeleteLocalRef(clObjInterrupted);
+
 	SearchQuery q(sleft,sright, stop, sbottom, req, objInterrupted, interruptedField, ienv);
 	q.zoom = zoom;
 
-	fseek(file->f, 0, 0);
-	io::FileInputStream input(fileno(file->f));
-	input.SetCloseOnDelete(false);
-	io::CodedInputStream cis(&input);
-	cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
-	if(req != NULL){
-		req->clearState();
-	}
+	SearchResult* searchRes = new SearchResult();
+	std::map<std::string, BinaryMapFile*>::iterator i = openFiles.begin();
+	std::hash_set<long long> ids;
+	int count = 0;
+	bool ocean = false;
+	std::vector< MapDataObject* > tempResult;
+	std::vector< MapDataObject* > basemapResult;
+	std::vector< MapDataObject* > coastLines;
+	std::vector< MapDataObject* > basemapCoastLines;
 
-	for(vector<MapIndex>::iterator mapIndex = file->mapIndexes.begin();
-			mapIndex != file->mapIndexes.end(); mapIndex++) {
-		for (vector<MapRoot>::iterator mapLevel = mapIndex->levels.begin(); mapLevel != mapIndex->levels.end();
-				mapLevel++) {
-			if (q.isCancelled()) {
-				break;
-			}
-			if(mapLevel->minZoom <= zoom && mapLevel->maxZoom >= zoom) {
-				if(mapLevel->right >= q.left &&  q.right >= mapLevel->left &&
-						mapLevel->bottom >= q.top && q.bottom >= mapLevel->top) {
-					searchMapData(&cis, mapLevel, mapIndex, &q);
+	for (; i != openFiles.end() && !q.isCancelled(); i++) {
+		BinaryMapFile* file = i->second;
+		fseek(file->f, 0, 0);
+		io::FileInputStream input(fileno(file->f));
+		input.SetCloseOnDelete(false);
+		io::CodedInputStream cis(&input);
+		cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
+		if (req != NULL) {
+			req->clearState();
+		}
+		q.result.clear();
+		for (vector<MapIndex>::iterator mapIndex = file->mapIndexes.begin(); mapIndex != file->mapIndexes.end();
+				mapIndex++) {
+			for (vector<MapRoot>::iterator mapLevel = mapIndex->levels.begin(); mapLevel != mapIndex->levels.end();
+					mapLevel++) {
+				if (q.isCancelled()) {
+					break;
+				}
+				if (mapLevel->minZoom <= zoom && mapLevel->maxZoom >= zoom) {
+					if (mapLevel->right >= q.left && q.right >= mapLevel->left && mapLevel->bottom >= q.top
+							&& q.bottom >= mapLevel->top) {
+						searchMapData(&cis, mapLevel, mapIndex, &q);
+					}
 				}
 			}
 		}
+		if (!q.isCancelled()) {
+			std::vector<MapDataObject*>::iterator r = q.result.begin();
+			tempResult.reserve(q.result.size() + tempResult.size());
+			for (; r != q.result.end(); r++) {
+				if (skipDuplicates && (*r)->id > 0) {
+					if (ids.find((*r)->id) != ids.end()) {
+						continue;
+					}
+					ids.insert((*r)->id);
+				}
+			}
+			count++;
+			if ((*r)->contains("natural", "coastline")) {
+				if (i->second->isBasemap()) {
+					basemapCoastLines.push_back(*r);
+				} else {
+					coastLines.push_back(*r);
+				}
+			} else {
+				// do not mess coastline and other types
+				if (i->second->isBasemap()) {
+					basemapResult.push_back(*r);
+				} else {
+					tempResult.push_back(*r);
+				}
+			}
+
+			if (q.ocean) {
+				ocean = true;
+			}
+		}
+
 	}
-	result->result.insert(result->result.end(), q.result.begin(), q.result.end());
-	// FIXME process multi polygons
-//	std::map<tagValueType, std::vector<MapDataObject*> > multyPolygons;
-//	std::vector<MapDataObject*>::iterator mdo = q.result.begin();
-//	for(;mdo!= q.result.end(); mdo++) {
-//		for(size_t j = 0; j<(*mdo)->types.size(); j++) {
-//			int type = (*mdo)->types.at(j);
-//			if((type & 0x3) == RenderingRulesStorage::MULTI_POLYGON_TYPE) {
-//				tagValueType tagValue((*mdo)->tagValues.at(j), type);
-//				multyPolygons[tagValue].push_back(*mdo);
-//			}
-//		}
-//	}
-//
-//	proccessMultiPolygons(multyPolygons, q.left, q.right, q.bottom, q.top, q.zoom, result->result);
-	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Search : tree - read( %d), accept( %d), objs - visit( %d), accept(%d), in result(%d) ", q.numberOfReadSubtrees,
-				q.numberOfAcceptedSubtrees, q.numberOfVisitedObjects, q.numberOfAcceptedObjects, result->result.size());
-	if(q.result.size() > 0) {
-		__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Search : tree - read( %d), accept( %d), objs - visit( %d), accept(%d), in result(%d) ", q.numberOfReadSubtrees,
-			q.numberOfAcceptedSubtrees, q.numberOfVisitedObjects, q.numberOfAcceptedObjects, result->result.size());
+	if (q.isCancelled()) {
+		deleteObjects(coastLines);
+		deleteObjects(tempResult);
+		deleteObjects(basemapCoastLines);
+		deleteObjects(basemapResult);
+	} else {
+		bool addBasemapCoastlines = true;
+		bool emptyData = zoom > BASEMAP_ZOOM && tempResult.empty() && coastLines.empty();
+
+		if (!coastLines.empty()) {
+			// TODO suspicious memory leak?
+			std::vector< MapDataObject* > pcoastlines;
+			processCoastlines(coastLines, sleft, sright, sbottom, stop, zoom,
+					basemapCoastLines.empty(), pcoastlines);
+			addBasemapCoastlines = pcoastlines.empty() || zoom <= BASEMAP_ZOOM;
+			tempResult.insert(tempResult.end(), pcoastlines.begin(), pcoastlines.end());
+		}
+		if (addBasemapCoastlines) {
+			addBasemapCoastlines = false;
+			// TODO suspicious memory leak?
+			std::vector< MapDataObject* > pcoastlines;
+			processCoastlines(basemapCoastLines, sleft, sright, sbottom,
+					stop, zoom, true, pcoastlines);
+			addBasemapCoastlines = pcoastlines.empty();
+			tempResult.insert(tempResult.end(), pcoastlines.begin(), pcoastlines.end());
+		}
+		if (addBasemapCoastlines) {
+			MapDataObject* o = new MapDataObject();
+			o->points.push_back(int_pair(sleft, stop));
+			o->points.push_back(int_pair(sright, stop));
+			o->points.push_back(int_pair(sright, sbottom));
+			o->points.push_back(int_pair(sleft, sbottom));
+			o->points.push_back(int_pair(sleft, stop));
+			if (ocean) {
+				o->types.push_back(tag_value("natural", "coastline"));
+			} else {
+				o->types.push_back(tag_value("natural", "land"));
+			}
+			tempResult.push_back(o);
+		}
+		if (emptyData) {
+			// message
+			// avoid overflow int errors
+			MapDataObject* o = new MapDataObject();
+			o->points.push_back(int_pair(sleft + (sright - sleft) / 2, stop + (sbottom - stop) / 2 ));
+			o->types.push_back(tag_value("natural", "coastline"));
+			// TODO string
+			o->objectNames["name"]="Switch To See";
+			tempResult.push_back(o);
+		}
+		if (zoom <= BASEMAP_ZOOM || emptyData) {
+			tempResult.insert(tempResult.end(), basemapResult.begin(), basemapResult.end());
+		}
+		searchRes->result.insert(searchRes->result.end(), tempResult.begin(), tempResult.end());
+		__android_log_print(ANDROID_LOG_INFO, LOG_TAG,
+				"Search : tree - read( %d), accept( %d), objs - visit( %d), accept(%d), in result(%d) ",
+				q.numberOfReadSubtrees, q.numberOfAcceptedSubtrees, q.numberOfVisitedObjects, q.numberOfAcceptedObjects,
+				searchRes->result.size());
 	}
 	delete req;
-	return (jint)result;
+	return (jint)searchRes;
 }
 
 extern "C" JNIEXPORT void JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_closeBinaryMapFile(JNIEnv* ienv,
