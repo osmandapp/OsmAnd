@@ -300,7 +300,7 @@ public class IndexBatchCreator {
 		String ext = ".osm";
 		if(url.endsWith(".osm.bz2")){
 			ext = ".osm.bz2";
-		} else if(url.endsWith(".osm.pbf")){
+		} else if(url.endsWith(".pbf")){
 			ext = ".osm.pbf";
 		}
 		File toIndex = null;
