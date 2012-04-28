@@ -89,7 +89,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		textView = new TextView(view.getContext());
 		LayoutParams lp = new LayoutParams(BASE_TEXT_SIZE, LayoutParams.WRAP_CONTENT);
 		textView.setLayoutParams(lp);
-		textView.setTextSize(15 * dm.scaledDensity);
+		textView.setTextSize(15);
 		textView.setTextColor(Color.argb(255, 0, 0, 0));
 		textView.setMinLines(1);
 //		textView.setMaxLines(15);
