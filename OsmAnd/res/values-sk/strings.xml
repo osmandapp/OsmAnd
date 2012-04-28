@@ -16,6 +16,19 @@
 	<string name="support_new_features">Podporiť nové funkcie</string>
 	<string name="show_ruler_level_descr">Zobrazí pravítko na mape</string>
 	<string name="show_ruler_level">Zobraziť pravítko</string>
+	
+	<string name="info_button">Info</string>
+	<string name="back_to_location">Späť na umiestnenie</string>
+	<string name="help">Pomocník</string>
+	<string name="show_details">Zobraziť podrobnosti</string>
+
+	<string name="accessibility_extensions_descr">Rozšírenia prístupnosti pre staršie verzie Androidu</string>
+	<string name="accessibility_extensions">Rozšírenia prístupnosti</string>
+	<string name="accessibility_mode">Režim prístupnosti</string>
+	<string name="accessibility_mode_descr">Zapnutie funkcií prístupnosti</string>
+	<string name="accessibility_on">Zapnutý</string>
+	<string name="accessibility_off">Vypnutý</string>
+	<string name="accessibility_default">Podľa globálnych nastavení systému</string>
 
 	<string name="backToMenu">Späť na ponuku</string>
 	<string name="zoomOut">Oddialiť</string>
