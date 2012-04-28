@@ -191,11 +191,11 @@ void renderText(MapDataObject* obj, RenderingRuleSearchRequest* req, RenderingCo
 		if (it->second.length() > 0) {
 			std::string name = it->second;
 			if (rc->useEnglishNames) {
-				jstring n = getGlobalJniEnv()->NewStringUTF(name.c_str());
-				name = getString(
-						(jstring) getGlobalJniEnv()->CallStaticObjectMethod(jclass_JUnidecode,
+				jstring n = rc->env->NewStringUTF(name.c_str());
+				name = getString(rc->env,
+						(jstring) rc->env->CallStaticObjectMethod(jclass_JUnidecode,
 								jmethod_JUnidecode_unidecode, n));
-				getGlobalJniEnv()->DeleteLocalRef(n);
+				rc->env->DeleteLocalRef(n);
 			}
 			req->setInitialTagValueZoom(tag, value, rc->zoom, obj);
 			req->setIntFilter(req->props()->R_TEXT_LENGTH, name.length());
@@ -597,17 +597,16 @@ void doRendering(std::vector <MapDataObject* > mapDataObjects, SkCanvas* canvas,
 		rc->textRendering.pause();
 }
 
-void loadJniRendering()
+void loadJniRendering(JNIEnv* env)
 {
-    jclass_JUnidecode = findClass("net/sf/junidecode/Junidecode");
-    jmethod_JUnidecode_unidecode = getGlobalJniEnv()->GetStaticMethodID(jclass_JUnidecode, "unidecode", "(Ljava/lang/String;)Ljava/lang/String;");
+    jclass_JUnidecode = findClass(env, "net/sf/junidecode/Junidecode");
+    jmethod_JUnidecode_unidecode = env->GetStaticMethodID(jclass_JUnidecode, "unidecode", "(Ljava/lang/String;)Ljava/lang/String;");
 }
 
 extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_generateRendering_1Direct( JNIEnv* ienv, jobject obj,
     jobject renderingContext, jint searchResult,
     jobject targetBitmap, 
     jboolean useEnglishNames, jobject renderingRuleSearchRequest, jint defaultColor) {
-        setGlobalJniEnv(ienv);
 
         // libJniGraphics interface
         typedef int (*PTR_AndroidBitmap_getInfo)(JNIEnv*, jobject, AndroidBitmapInfo*);
@@ -642,7 +641,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 
         // Gain information about bitmap
         AndroidBitmapInfo bitmapInfo;
-        if(dl_AndroidBitmap_getInfo(getGlobalJniEnv(), targetBitmap, &bitmapInfo) != ANDROID_BITMAP_RESUT_SUCCESS)
+        if(dl_AndroidBitmap_getInfo(ienv, targetBitmap, &bitmapInfo) != ANDROID_BITMAP_RESUT_SUCCESS)
             __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to execute AndroidBitmap_getInfo");
 
         __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Creating SkBitmap in native w:%d h:%d s:%d f:%d!", bitmapInfo.width, bitmapInfo.height, bitmapInfo.stride, bitmapInfo.format);
@@ -661,7 +660,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
         }
 
         void* lockedBitmapData = NULL;
-        if(dl_AndroidBitmap_lockPixels(getGlobalJniEnv(), targetBitmap, &lockedBitmapData) != ANDROID_BITMAP_RESUT_SUCCESS || !lockedBitmapData) {
+        if(dl_AndroidBitmap_lockPixels(ienv, targetBitmap, &lockedBitmapData) != ANDROID_BITMAP_RESUT_SUCCESS || !lockedBitmapData) {
             __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to execute AndroidBitmap_lockPixels");
         }
         __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Locked %d bytes at %p", bitmap->getSize(), lockedBitmapData);
@@ -677,9 +676,9 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
         ElapsedTimer initObjects;
         initObjects.start();
 
-        RenderingRuleSearchRequest* req = initSearchRequest(renderingRuleSearchRequest);
+        RenderingRuleSearchRequest* req = initSearchRequest(ienv, renderingRuleSearchRequest);
         RenderingContext rc;
-        pullFromJavaRenderingContext(renderingContext, &rc);
+        pullFromJavaRenderingContext(ienv, renderingContext, &rc);
         rc.useEnglishNames = useEnglishNames;
         SearchResult* result = ((SearchResult*) searchResult);
         //    std::vector <BaseMapDataObject* > mapDataObjects = marshalObjects(binaryMapDataObjects);
@@ -695,7 +694,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
         }
         rc.nativeOperations.pause();
 
-        pushToJavaRenderingContext(renderingContext, &rc);
+        pushToJavaRenderingContext(ienv, renderingContext, &rc);
         __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "End Rendering image");
         if(dl_AndroidBitmap_unlockPixels(ienv, targetBitmap) != ANDROID_BITMAP_RESUT_SUCCESS) {
             __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to execute AndroidBitmap_unlockPixels");
@@ -708,9 +707,9 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
         delete bitmap;
         //    deleteObjects(mapDataObjects);
 
-        jclass resultClass = findClass("net/osmand/plus/render/NativeOsmandLibrary$RenderingGenerationResult");
+        jclass resultClass = findClass(ienv, "net/osmand/plus/render/NativeOsmandLibrary$RenderingGenerationResult");
 
-        jmethodID resultClassCtorId = getGlobalJniEnv()->GetMethodID(resultClass, "<init>", "(Ljava/nio/ByteBuffer;)V");
+        jmethodID resultClassCtorId = ienv->GetMethodID(resultClass, "<init>", "(Ljava/nio/ByteBuffer;)V");
 
 #ifdef DEBUG_NAT_OPERATIONS
         __android_log_print(ANDROID_LOG_INFO, LOG_TAG,"Native ok (init %d, native op %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
@@ -719,7 +718,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 #endif
 
         /* Construct a result object */
-        jobject resultObject = getGlobalJniEnv()->NewObject(resultClass, resultClassCtorId, NULL);
+        jobject resultObject = ienv->NewObject(resultClass, resultClassCtorId, NULL);
 
         return resultObject;
 }
@@ -730,7 +729,6 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
     jobject renderingContext, jint searchResult,
     jint requestedBitmapWidth, jint requestedBitmapHeight, jint rowBytes, jboolean isTransparent, 
     jboolean useEnglishNames, jobject renderingRuleSearchRequest, jint defaultColor) {
-        setGlobalJniEnv(ienv);
 
         __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Creating SkBitmap in native w:%d h:%d!", requestedBitmapWidth, requestedBitmapHeight);
 
@@ -763,9 +761,9 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
         ElapsedTimer initObjects;
         initObjects.start();
 
-        RenderingRuleSearchRequest* req = initSearchRequest(renderingRuleSearchRequest);
+        RenderingRuleSearchRequest* req = initSearchRequest(ienv, renderingRuleSearchRequest);
         RenderingContext rc;
-        pullFromJavaRenderingContext(renderingContext, &rc);
+        pullFromJavaRenderingContext(ienv, renderingContext, &rc);
         rc.useEnglishNames = useEnglishNames;
         SearchResult* result = ((SearchResult*) searchResult);
         //    std::vector <BaseMapDataObject* > mapDataObjects = marshalObjects(binaryMapDataObjects);
@@ -781,7 +779,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
         }
         rc.nativeOperations.pause();
 
-        pushToJavaRenderingContext(renderingContext, &rc);
+        pushToJavaRenderingContext(ienv, renderingContext, &rc);
         __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "End Rendering image");
 
         // delete  variables
@@ -791,7 +789,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
         delete bitmap;
         //    deleteObjects(mapDataObjects);
 
-        jclass resultClass = findClass("net/osmand/plus/render/NativeOsmandLibrary$RenderingGenerationResult");
+        jclass resultClass = findClass(ienv, "net/osmand/plus/render/NativeOsmandLibrary$RenderingGenerationResult");
 
         jmethodID resultClassCtorId = ienv->GetMethodID(resultClass, "<init>", "(Ljava/nio/ByteBuffer;)V");
 

@@ -23,6 +23,8 @@
 using namespace google::protobuf;
 using namespace google::protobuf::internal;
 
+static const int MAP_VERSION = 2;
+
 
 
 struct BinaryMapFile;
@@ -65,6 +67,7 @@ struct SearchQuery {
 	int bottom;
 	int zoom;
 	std::vector< MapDataObject*> result;
+	JNIEnv* env;
 
 	jobject o;
 	jfieldID interruptedField;
@@ -78,15 +81,19 @@ struct SearchQuery {
 	int numberOfReadSubtrees;
 	int numberOfAcceptedSubtrees;
 
-	SearchQuery(int l, int r, int t, int b, RenderingRuleSearchRequest* req, jobject o,	jfieldID interruptedField) :
+	SearchQuery(int l, int r, int t, int b, RenderingRuleSearchRequest* req, jobject o,	jfieldID interruptedField, JNIEnv* env) :
 			req(req), left(l), right(r), top(t), bottom(b), o(o), interruptedField(interruptedField) {
 		numberOfAcceptedObjects = numberOfVisitedObjects = 0;
 		numberOfAcceptedSubtrees = numberOfReadSubtrees = 0;
 		ocean = land = false;
+		this->env = env;
 	}
 
 	bool isCancelled(){
-		return getGlobalJniEnv()->GetBooleanField(o, interruptedField);
+		if(env != NULL) {
+			return env->GetBooleanField(o, interruptedField);
+		}
+		return false;
 	}
 };
 
@@ -424,23 +431,21 @@ bool initMapStructure(io::CodedInputStream* input, BinaryMapFile* file) {
 		__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Corrupted file. It should be ended as it starts with version");
 		return false;
 	}
-	if (version != 2) {
+	if (version != MAP_VERSION) {
 		__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Version of the file is not supported.");
 		return false;
 	}
 	return true;
 }
 
-void loadJniBinaryRead() {
-}
-
 
 extern "C" JNIEXPORT void JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_deleteSearchResult(JNIEnv* ienv,
 		jobject obj, jint searchResult) {
-	// DO NOT DO IT it can leads to messing thread that is not allowed
-	// setGlobalJniEnv(ienv);
 	SearchResult* result = (SearchResult*) searchResult;
 	if(result != NULL){
+		deleteObjects(result->basemapCoastLines);
+		deleteObjects(result->result);
+		deleteObjects(result->coastLines);
 		deleteObjects(result->result);
 		delete result;
 	}
@@ -849,22 +854,21 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 		jobject obj, jint sleft, jint sright, jint stop, jint sbottom, jint zoom, jstring mapName,
 		jobject renderingRuleSearchRequest, bool skipDuplicates, jint searchResult, jobject objInterrupted) {
 	// TODO skipDuplicates not supported
-	setGlobalJniEnv(ienv);
 	SearchResult* result = (SearchResult*) searchResult;
 	if(result == NULL) {
 		result = new SearchResult();
 	}
-	std::string map = getString(mapName);
+	std::string map = getString(ienv, mapName);
 	std::map<std::string, BinaryMapFile*>::iterator i = openFiles.find(map);
 	if(i == openFiles.end()) {
 		return (jint) result;
 	}
 	BinaryMapFile* file =  i->second;
-	RenderingRuleSearchRequest* req = initSearchRequest(renderingRuleSearchRequest);
-	jclass clObjInterrupted = getGlobalJniEnv()->GetObjectClass(objInterrupted);
-	jfieldID interruptedField =  getFid(clObjInterrupted, "interrupted", "Z");
-	getGlobalJniEnv()->DeleteLocalRef(clObjInterrupted);
-	SearchQuery q(sleft,sright, stop, sbottom, req, objInterrupted, interruptedField);
+	RenderingRuleSearchRequest* req = initSearchRequest(ienv, renderingRuleSearchRequest);
+	jclass clObjInterrupted = ienv->GetObjectClass(objInterrupted);
+	jfieldID interruptedField =  getFid(ienv, clObjInterrupted, "interrupted", "Z");
+	ienv->DeleteLocalRef(clObjInterrupted);
+	SearchQuery q(sleft,sright, stop, sbottom, req, objInterrupted, interruptedField, ienv);
 	q.zoom = zoom;
 
 	fseek(file->f, 0, 0);
@@ -919,7 +923,6 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_initBinaryMapFile(JNIEnv* ienv,
 		jobject obj, jobject path) {
 	// Verify that the version of the library that we linked against is
-	setGlobalJniEnv(ienv);
 	const char* utf = ienv->GetStringUTFChars((jstring) path, NULL);
 	std::string inputName(utf);
 	ienv->ReleaseStringUTFChars((jstring) path, utf);

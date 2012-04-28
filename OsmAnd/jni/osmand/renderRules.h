@@ -59,10 +59,10 @@ private:
 	std::hash_map<std::string,  RenderingRuleProperty*> propertyMap;
 
 
-	RenderingRule* createRenderingRule(jobject rRule);
-	void initDictionary();
-	void initProperties();
-	void initRules();
+	RenderingRule* createRenderingRule(JNIEnv* env, jobject rRule);
+	void initDictionary(JNIEnv* env);
+	void initProperties(JNIEnv* env);
+	void initRules(JNIEnv* env);
 
 public:
 	// No rules for multipolygon !!!
@@ -73,12 +73,12 @@ public:
     const static int POLYGON_RULES = 3;
     const static int TEXT_RULES = 4;
     const static int ORDER_RULES = 5;
-	RenderingRulesStorage(jobject storage) :
+	RenderingRulesStorage(JNIEnv* env, jobject storage) :
 			javaStorage(storage) {
 		tagValueGlobalRules = new std::hash_map<int, RenderingRule >[SIZE_STATES];
-		initDictionary();
-		initProperties();
-		initRules();
+		initDictionary(env);
+		initProperties(env);
+		initRules(env);
 	}
 
 	~RenderingRulesStorage() {
@@ -211,10 +211,10 @@ private :
 	MapDataObject* obj;
 
 	bool searchInternal(int state, int tagKey, int valueKey, bool loadOutput);
-	void initObject(jobject rrs);
+	void initObject(JNIEnv* env, jobject rrs);
 	bool visitRule(RenderingRule* rule, bool loadOutput);
 public:
-	RenderingRuleSearchRequest(jobject rrs);
+	RenderingRuleSearchRequest(JNIEnv* env, jobject rrs);
 
 	~RenderingRuleSearchRequest();
 
@@ -249,10 +249,10 @@ public:
 };
 
 
-RenderingRuleSearchRequest* initSearchRequest(jobject renderingRuleSearchRequest);
+RenderingRuleSearchRequest* initSearchRequest(JNIEnv* env, jobject renderingRuleSearchRequest);
 
-void loadJNIRenderingRules();
+void loadJNIRenderingRules(JNIEnv* env);
 
-void unloadJniRenderRules();
+void unloadJniRenderRules(JNIEnv* env);
 
 #endif

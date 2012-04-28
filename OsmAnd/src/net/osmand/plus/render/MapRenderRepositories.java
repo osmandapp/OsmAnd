@@ -274,7 +274,7 @@ public class MapRenderRepositories {
 		return true;
 	}
 
-	private boolean loadVectorData(RectF dataBox, final int zoom, final RenderingRuleSearchRequest renderingReq, final boolean nightMode) {
+	private boolean loadVectorData(RectF dataBox, final int zoom, final RenderingRuleSearchRequest renderingReq) {
 		double cBottomLatitude = dataBox.bottom;
 		double cTopLatitude = dataBox.top;
 		double cLeftLongitude = dataBox.left;
@@ -288,10 +288,10 @@ public class MapRenderRepositories {
 			return true;
 		}
 		try {
+			System.gc(); // to clear previous objects
 			int count = 0;
 			ArrayList<BinaryMapDataObject> tempResult = new ArrayList<BinaryMapDataObject>();
 			ArrayList<BinaryMapDataObject> basemapResult = new ArrayList<BinaryMapDataObject>();
-			System.gc(); // to clear previous objects
 			TLongSet ids = new TLongHashSet();
 			List<BinaryMapDataObject> coastLines = new ArrayList<BinaryMapDataObject>();
 			List<BinaryMapDataObject> basemapCoastLines = new ArrayList<BinaryMapDataObject>();
@@ -507,7 +507,7 @@ public class MapRenderRepositories {
 					loaded = loadVectorDataNative(dataBox, requestedBox.getZoom(), renderingReq, nativeLib);
 				} else {
 					cNativeObjects = null;
-					loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingReq, nightMode);
+					loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingReq);
 					
 				}
 				if (!loaded || checkWhetherInterrupted()) {

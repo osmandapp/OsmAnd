@@ -17,24 +17,22 @@
 
 struct RenderingContext;
 
-JNIEnv* getGlobalJniEnv();
-JNIEnv* setGlobalJniEnv(JNIEnv*);
 
 // Android helpers
 extern const char* const LOG_TAG;
 
 // JNI Helpers
-void throwNewException(const char* msg);
-jclass findClass(const char* className, bool mustHave = true);
-std::string getString(jstring st);
-std::string getStringMethod(jobject o, jmethodID fid, int i);
-std::string getStringMethod(jobject o, jmethodID fid);
-std::string getStringField(jobject o, jfieldID fid);
-jobject newGlobalRef(jobject o);
-jfieldID getFid(jclass cls, const char* fieldName, const char* sig);
+void throwNewException(JNIEnv* env, const char* msg);
+jclass findClass(JNIEnv* env, const char* className, bool mustHave = true);
+std::string getString(JNIEnv* env, jstring st);
+std::string getStringMethod(JNIEnv* env, jobject o, jmethodID fid, int i);
+std::string getStringMethod(JNIEnv* env, jobject o, jmethodID fid);
+std::string getStringField(JNIEnv* env, jobject o, jfieldID fid);
+jobject newGlobalRef(JNIEnv* env, jobject o);
+jfieldID getFid(JNIEnv* env, jclass cls, const char* fieldName, const char* sig);
 
-void pullFromJavaRenderingContext(jobject jrc, RenderingContext* rc);
-void pushToJavaRenderingContext(jobject jrc, RenderingContext* rc);
+void pullFromJavaRenderingContext(JNIEnv* env, jobject jrc, RenderingContext* rc);
+void pushToJavaRenderingContext(JNIEnv* env, jobject jrc, RenderingContext* rc);
 
 class ElapsedTimer
 {
@@ -101,6 +99,7 @@ struct RenderingContext
 	jobject javaRenderingContext;
 
 	jobject androidContext;
+	JNIEnv* env;
 	bool useEnglishNames;
 
 	std::vector<TextDrawInfo*> textToDraw;

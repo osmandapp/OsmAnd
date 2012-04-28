@@ -1,13 +1,8 @@
-#ifndef _OSMAND_MAP_OBJECTSTagValuePairClass
+#ifndef _OSMAND_MAP_OBJECTS
 #define _OSMAND_MAP_OBJECTS
-
-#include <jni.h>
-#include <vector>
 
 #include "common.h"
 #include "mapObjects.h"
-
-
 
 void deleteObjects(std::vector <MapDataObject* > & v)
 {
@@ -16,17 +11,6 @@ void deleteObjects(std::vector <MapDataObject* > & v)
 		delete v.at(i);
 	}
 	v.clear();
-}
-
-
-void loadJniMapObjects()
-{
-
-}
-
-
-void unloadJniMapObjects()
-{
 }
 
 #endif /*_OSMAND_MAP_OBJECTS*/

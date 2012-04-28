@@ -68,16 +68,16 @@ public:
 
 struct SearchResult {
 	std::vector< MapDataObject* > result;
+	int count;
+	std::vector< MapDataObject* > tempResult;
+	std::vector< MapDataObject* > basemapResult;
+	std::vector< MapDataObject* > coastLines;
+	std::vector< MapDataObject* > basemapCoastLines;
+
 };
 
 
-//std::vector <BaseMapDataObject* > marshalObjects(jobjectArray binaryMapDataObjects);
-
 void deleteObjects(std::vector <MapDataObject* > & v);
-
-void loadJniMapObjects();
-
-void unloadJniMapObjects();
 
 
 #endif /*_OSMAND_MAP_OBJECTS_H*/
