@@ -210,7 +210,7 @@ public class OsmandRenderer {
 			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			rc.density = dm.density;
 			try {
-				if(Looper.getMainLooper() != null){
+				if(Looper.getMainLooper() != null && library.useDirectRendering()) {
 					final Handler h = new Handler(Looper.getMainLooper());
 					notifyListenersWithDelay(rc, notifyList, h);
 				}
@@ -335,7 +335,7 @@ public class OsmandRenderer {
 					notifyListenersWithDelay(rc, notifyList, h);
 				}
 			}
-		}, 700);
+		}, 800);
 	}
 
 	private void drawIconsOverCanvas(RenderingContext rc, Canvas cv) {

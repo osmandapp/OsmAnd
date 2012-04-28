@@ -68,6 +68,10 @@ public class NativeOsmandLibrary {
 		}
 		return isSupported();
 	}
+	
+	public boolean useDirectRendering(){
+		return android.os.Build.VERSION.SDK_INT >= 8;
+	}
 
 	public RenderingGenerationResult generateRendering(RenderingContext rc, NativeSearchResult searchResultHandler,
 			Bitmap bitmap, int requestedBitmapWidth, int requestedBitmapHeight, int rowBytes, boolean isTransparent, 
