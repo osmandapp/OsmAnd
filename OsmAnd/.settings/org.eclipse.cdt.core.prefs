@@ -1,8 +1,11 @@
-#Wed Apr 18 11:27:32 CEST 2012
+#Sat Apr 28 21:24:53 CEST 2012
 eclipse.preferences.version=1
 environment/project/com.android.toolchain.gcc.128294115/ANDROID_NDK/delimiter=\:
 environment/project/com.android.toolchain.gcc.128294115/ANDROID_NDK/operation=replace
 environment/project/com.android.toolchain.gcc.128294115/ANDROID_NDK/value=/home/victor/projects/android-ndk-r7c/
+environment/project/com.android.toolchain.gcc.128294115/OSMAND_ARMv7a_ONLY/delimiter=\:
+environment/project/com.android.toolchain.gcc.128294115/OSMAND_ARMv7a_ONLY/operation=append
+environment/project/com.android.toolchain.gcc.128294115/OSMAND_ARMv7a_ONLY/value=true
 environment/project/com.android.toolchain.gcc.128294115/OSMAND_USE_PREBUILT/delimiter=\:
 environment/project/com.android.toolchain.gcc.128294115/OSMAND_USE_PREBUILT/operation=append
 environment/project/com.android.toolchain.gcc.128294115/OSMAND_USE_PREBUILT/value=true

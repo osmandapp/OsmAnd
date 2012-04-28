@@ -412,7 +412,6 @@ bool initMapStructure(io::CodedInputStream* input, BinaryMapFile* file) {
 			readInt(input, &mapIndex.length);
 			mapIndex.filePointer = input->getTotalBytesRead();
 			int oldLimit = input->PushLimit(mapIndex.length);
-			__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Map index %d length %d", mapIndex.filePointer, mapIndex.length);
 			readMapIndex(input, &mapIndex);
 			input->PopLimit(oldLimit);
 			input->Seek(mapIndex.filePointer + mapIndex.length);
@@ -548,7 +547,6 @@ MapDataObject* readMapDataObject(io::CodedInputStream* input, MapTreeBounds* tre
 			maxY = max(maxY, y);
 		}
 	}
-	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Object %d %d %d %d", maxX, minX, minY, maxY);
 	if (!contains) {
 		if (maxX >= req->left && minX <= req->right && minY <= req->bottom && maxY >= req->top) {
 			contains = true;
@@ -859,13 +857,14 @@ void searchMapData(io::CodedInputStream* input, MapRoot* root, MapIndex* ind, Se
 
 
 extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_searchNativeObjectsForRendering(JNIEnv* ienv,
-		jobject obj, jint sleft, jint sright, jint stop, jint sbottom, jint zoom, jobject renderingRuleSearchRequest, bool skipDuplicates, jobject objInterrupted) {
+		jobject obj, jint sleft, jint sright, jint stop, jint sbottom, jint zoom,
+		jobject renderingRuleSearchRequest, bool skipDuplicates, jobject objInterrupted, jstring msgNothingFound) {
 	RenderingRuleSearchRequest* req = initSearchRequest(ienv, renderingRuleSearchRequest);
 	jclass clObjInterrupted = ienv->GetObjectClass(objInterrupted);
-	jfieldID interruptedField =  getFid(ienv, clObjInterrupted, "interrupted", "Z");
+	jfieldID interruptedField = getFid(ienv, clObjInterrupted, "interrupted", "Z");
 	ienv->DeleteLocalRef(clObjInterrupted);
 
-	SearchQuery q(sleft,sright, stop, sbottom, req, objInterrupted, interruptedField, ienv);
+	SearchQuery q(sleft, sright, stop, sbottom, req, objInterrupted, interruptedField, ienv);
 	q.zoom = zoom;
 
 	SearchResult* searchRes = new SearchResult();
@@ -873,10 +872,10 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 	std::hash_set<long long> ids;
 	int count = 0;
 	bool ocean = false;
-	std::vector< MapDataObject* > tempResult;
-	std::vector< MapDataObject* > basemapResult;
-	std::vector< MapDataObject* > coastLines;
-	std::vector< MapDataObject* > basemapCoastLines;
+	std::vector<MapDataObject*> basemapResult;
+	std::vector<MapDataObject*> tempResult;
+	std::vector<MapDataObject*> coastLines;
+	std::vector<MapDataObject*> basemapCoastLines;
 
 	for (; i != openFiles.end() && !q.isCancelled(); i++) {
 		BinaryMapFile* file = i->second;
@@ -899,6 +898,7 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 				if (mapLevel->minZoom <= zoom && mapLevel->maxZoom >= zoom) {
 					if (mapLevel->right >= q.left && q.right >= mapLevel->left && mapLevel->bottom >= q.top
 							&& q.bottom >= mapLevel->top) {
+						__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Search map %s", mapIndex->name.c_str());
 						searchMapData(&cis, mapLevel, mapIndex, &q);
 					}
 				}
@@ -908,34 +908,35 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 			std::vector<MapDataObject*>::iterator r = q.result.begin();
 			tempResult.reserve(q.result.size() + tempResult.size());
 			for (; r != q.result.end(); r++) {
-				if (skipDuplicates && (*r)->id > 0) {
+				// TODO skip duplicates doesn't work correctly with basemap (id < 0?)
+				if (skipDuplicates && (*r)->id > 0 && false) {
 					if (ids.find((*r)->id) != ids.end()) {
 						continue;
 					}
 					ids.insert((*r)->id);
 				}
-			}
-			count++;
-			if ((*r)->contains("natural", "coastline")) {
-				if (i->second->isBasemap()) {
-					basemapCoastLines.push_back(*r);
-				} else {
-					coastLines.push_back(*r);
-				}
-			} else {
-				// do not mess coastline and other types
-				if (i->second->isBasemap()) {
-					basemapResult.push_back(*r);
-				} else {
-					tempResult.push_back(*r);
-				}
-			}
 
-			if (q.ocean) {
-				ocean = true;
+				count++;
+				if ((*r)->contains("natural", "coastline")) {
+					if (i->second->isBasemap()) {
+						basemapCoastLines.push_back(*r);
+					} else {
+						coastLines.push_back(*r);
+					}
+				} else {
+					// do not mess coastline and other types
+					if (i->second->isBasemap()) {
+						basemapResult.push_back(*r);
+					} else {
+						tempResult.push_back(*r);
+					}
+				}
+
+				if (q.ocean) {
+					ocean = true;
+				}
 			}
 		}
-
 	}
 	if (q.isCancelled()) {
 		deleteObjects(coastLines);
@@ -945,24 +946,22 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 	} else {
 		bool addBasemapCoastlines = true;
 		bool emptyData = zoom > BASEMAP_ZOOM && tempResult.empty() && coastLines.empty();
-
 		if (!coastLines.empty()) {
-			// TODO suspicious memory leak?
-			std::vector< MapDataObject* > pcoastlines;
-			processCoastlines(coastLines, sleft, sright, sbottom, stop, zoom,
-					basemapCoastLines.empty(), pcoastlines);
+			std::vector<MapDataObject*> pcoastlines;
+			processCoastlines(coastLines, sleft, sright, sbottom, stop, zoom, basemapCoastLines.empty(), pcoastlines);
 			addBasemapCoastlines = pcoastlines.empty() || zoom <= BASEMAP_ZOOM;
 			tempResult.insert(tempResult.end(), pcoastlines.begin(), pcoastlines.end());
 		}
 		if (addBasemapCoastlines) {
 			addBasemapCoastlines = false;
-			// TODO suspicious memory leak?
-			std::vector< MapDataObject* > pcoastlines;
-			processCoastlines(basemapCoastLines, sleft, sright, sbottom,
-					stop, zoom, true, pcoastlines);
+			std::vector<MapDataObject*> pcoastlines;
+			processCoastlines(basemapCoastLines, sleft, sright, sbottom, stop, zoom, true, pcoastlines);
 			addBasemapCoastlines = pcoastlines.empty();
 			tempResult.insert(tempResult.end(), pcoastlines.begin(), pcoastlines.end());
 		}
+		// processCoastlines always create new objects
+		deleteObjects(basemapCoastLines);
+		deleteObjects(coastLines);
 		if (addBasemapCoastlines) {
 			MapDataObject* o = new MapDataObject();
 			o->points.push_back(int_pair(sleft, stop));
@@ -981,10 +980,9 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 			// message
 			// avoid overflow int errors
 			MapDataObject* o = new MapDataObject();
-			o->points.push_back(int_pair(sleft + (sright - sleft) / 2, stop + (sbottom - stop) / 2 ));
+			o->points.push_back(int_pair(sleft + (sright - sleft) / 2, stop + (sbottom - stop) / 2));
 			o->types.push_back(tag_value("natural", "coastline"));
-			// TODO string
-			o->objectNames["name"]="Switch To See";
+			o->objectNames["name"] = getString(ienv, msgNothingFound);
 			tempResult.push_back(o);
 		}
 		if (zoom <= BASEMAP_ZOOM || emptyData) {
@@ -997,7 +995,7 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 				searchRes->result.size());
 	}
 	delete req;
-	return (jint)searchRes;
+	return (jint) searchRes;
 }
 
 extern "C" JNIEXPORT void JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_closeBinaryMapFile(JNIEnv* ienv,

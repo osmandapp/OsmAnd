@@ -15,148 +15,99 @@ bool isClockwiseWay(std::vector<int_pair>& c) ;
 bool calculateLineCoordinates(bool inside, int x, int y, bool pinside, int px, int py, int leftX, int rightX,
 		int bottomY, int topY, std::vector<int_pair>& coordinates);
 
-void processMultipolygonLine(std::vector<std::vector<int_pair> >& completedRings, std::vector<std::vector<int_pair> >& incompletedRings,
-			std::vector<std::string> &completedRingsNames, std::vector<std::string> &incompletedRingsNames, std::vector<int_pair> & coordinates, std::string name);
+void combineMultipolygonLine(std::vector<coordinates>& completedRings, std::vector<coordinates>& incompletedRings,
+			coordinates& coordinates);
 
-void unifyIncompletedRings(std::vector<std::vector<int_pair> >& incompletedRings, std::vector<std::vector<int_pair> >& completedRings, std::vector<std::string> &completedRingNames,
-			std::vector<std::string> &incompletedRingNames, int leftX, int rightX, int bottomY, int topY, long dbId, int zoom);
+void unifyIncompletedRings(std::vector<std::vector<int_pair> >& incompletedRings, std::vector<std::vector<int_pair> >& completedRings,
+			int leftX, int rightX, int bottomY, int topY, long dbId, int zoom);
 
 
-
-MapDataObject* processMultiPolygon(int leftX, int rightX, int bottomY, int topY,
-		std::vector<std::vector<int_pair > >& completedRings, std::vector<std::vector<int_pair> >& incompletedRings,
-		std::vector<std::string>& completedRingNames, std::vector<std::string>& incompletedRingNames,
-		const tagValueType&  type, std::vector<MapDataObject* > & directList, std::vector<MapDataObject*>& inverselist,
-		int zoom) {
-	MultiPolygonObject* pl = new MultiPolygonObject();
-	// delete direction last bit (to not show point)
-	pl->tag = type.tag;
-	pl->value = type.value;
-	pl->layer = getNegativeWayLayer(type.type);
+void processCoastlines(std::vector<MapDataObject*>&  coastLines, int leftX, int rightX, int bottomY, int topY, int zoom,
+		bool showIncompleted, std::vector<MapDataObject*>& res) {
+	std::vector<coordinates> completedRings;
+	std::vector<coordinates > uncompletedRings;
+	std::vector<MapDataObject*>::iterator val = coastLines.begin();
+	res.reserve(coastLines.size());
 	long long dbId = 0;
-	for (int km = 0; km < 2; km++) {
-		std::vector<MapDataObject* >::iterator o = (km == 0 ? directList.begin() : inverselist.begin());
-		std::vector<MapDataObject* >::iterator oEnd = (km == 0 ? directList.end() : inverselist.end());
-		for (; o != oEnd; o++) {
-			int len = (*o)->points.size();
-			if (len < 2) {
-				continue;
-			}
-			dbId = (*o)->id >> 1;
-			std::vector<int_pair> coordinates;
-			int_pair p = (*o)->points.at(km == 0 ? 0 : len - 1);
-			int px = p.first;
-			int py = p.second;
-			int x = p.first;
-			int y = p.second;
-			bool pinside = leftX <= x && x <= rightX && y >= topY && y <= bottomY;
-			if (pinside) {
-				coordinates.push_back(int_pair(x, y));
-			}
-			for (int i = 1; i < len; i++) {
-				int_pair cp = (*o)->points.at(km == 0 ? i : len - i - 1);
-				x = cp.first;
-				y = cp.second;
-				bool inside = leftX <= x && x <= rightX && y >= topY && y <= bottomY;
-				bool lineEnded = calculateLineCoordinates(inside, x, y, pinside, px, py, leftX, rightX, bottomY, topY,
-						coordinates);
-				if (lineEnded) {
-					processMultipolygonLine(completedRings, incompletedRings, completedRingNames, incompletedRingNames,
-							coordinates, (*o)->name);
-					// create new line if it goes outside
-					coordinates.clear();
-				}
-				px = x;
-				py = y;
-				pinside = inside;
-			}
-			processMultipolygonLine(completedRings, incompletedRings, completedRingNames, incompletedRingNames,
-					coordinates, (*o)->name);
+	for (; val != coastLines.end(); val++) {
+		MapDataObject* o = *val;
+		int len = o->points.size();
+		if (len < 2) {
+			continue;
 		}
-	}
-	if (completedRings.size() == 0 && incompletedRings.size() == 0) {
-		return NULL;
-	}
-	if (incompletedRings.size() > 0) {
-		unifyIncompletedRings(incompletedRings, completedRings, completedRingNames, incompletedRingNames, leftX, rightX,
-				bottomY, topY, dbId, zoom);
-	} else {
-		// due to self intersection small objects (for low zooms check only coastline)
-		if (zoom >= 13 || ("natural" == type.tag && "coastline" == type.value)) {
-			bool clockwiseFound = false;
-			std::vector<std::vector<int_pair> > ::iterator c = completedRings.begin();
-			for (; c != completedRings.end(); c++) {
-				if (isClockwiseWay(*c)) {
-					clockwiseFound = true;
-					break;
-				}
-			}
-			if (!clockwiseFound) {
-				// add whole bound
-				std::vector<int_pair> whole;
-				whole.push_back(int_pair(leftX, topY));
-				whole.push_back(int_pair(rightX, topY));
-				whole.push_back(int_pair(leftX, bottomY));
-				whole.push_back(int_pair(rightX, bottomY));
-				completedRings.push_back(whole);
-				__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "!!! Isolated island !!!");
-			}
-
+		dbId = o->id >> 1;
+		coordinates* cs = new coordinates();
+		int px = o->points.at(0).first;
+		int py = o->points.at(0).second;
+		int x = px;
+		int y = py;
+		bool pinside = leftX <= x && x <= rightX && y >= topY && y <= bottomY;
+		if (pinside) {
+			cs->push_back(int_pair(x, y));
 		}
-	}
-
-	pl->names = completedRingNames;
-	pl->points = completedRings;
-	return pl;
-}
-
-
-void processCoastlines(std::vector<MapDataObject*>&  coastLines, int leftX, int rightX,
-			int bottomY, int topY, int zoom, bool showIncompleted, std::vector<MapDataObject*>& res) {
-
-}
-
-static std::vector<MapDataObject*> EMPTY_LIST;
-void proccessMultiPolygons(std::map<tagValueType, std::vector<MapDataObject*> >& multyPolygons, int leftX,
-		int rightX, int bottomY, int topY, int zoom, std::vector<MapDataObject*>& listPolygons) {
-	std::vector<std::vector<int_pair> > completedRings;
-	std::vector<std::vector<int_pair> > incompletedRings;
-	std::vector<std::string> completedRingNames;
-	std::vector<std::string> incompletedRingNames;
-	std::map<tagValueType, std::vector<MapDataObject*> >::iterator val = multyPolygons.begin();
-	for (; val != multyPolygons.end(); val++) {
-		std::vector<MapDataObject*>* directList;
-		std::vector<MapDataObject*>* inverselist;
-		if (((val->first.type >> 15) & 1) == 1) {
-			tagValueType directType = val->first;
-			directType.type = val->first.type & ((1 << 15) - 1);
-			if (multyPolygons.find(directType) == multyPolygons.end()) {
-				inverselist = &val->second;
-				directList = &EMPTY_LIST;
-			} else {
-				// continue on inner boundaries
-				continue;
+		for (int i = 1; i < len; i++) {
+			x = o->points.at(i).first;
+			y = o->points.at(i).second;
+			bool inside = leftX <= x && x <= rightX && y >= topY && y <= bottomY;
+			bool lineEnded = calculateLineCoordinates(inside, x, y, pinside, px, py, leftX, rightX, bottomY, topY, *cs);
+			if (lineEnded) {
+				combineMultipolygonLine(completedRings, uncompletedRings, *cs);
+				// create new line if it goes outside
+				cs = new coordinates();
 			}
+			px = x;
+			py = y;
+			pinside = inside;
+		}
+		combineMultipolygonLine(completedRings, uncompletedRings, *cs);
+	}
+			uncompletedRings.size() );
+	if (completedRings.size() == 0 && uncompletedRings.size() == 0) {
+		return;
+	}
+	if (uncompletedRings.size() > 0) {
+		unifyIncompletedRings(uncompletedRings, completedRings, leftX, rightX, bottomY, topY, dbId, zoom);
+	}
+	if (!showIncompleted && uncompletedRings.size() > 0) {
+		res.clear();
+		return;
+	}
+	bool clockwiseFound = false;
+	for (int i = 0; i < completedRings.size(); i++) {
+		bool clockwise = isClockwiseWay(completedRings[i]);
+		clockwiseFound = clockwiseFound || clockwise;
+		MapDataObject* o = new MapDataObject();
+		o->points = completedRings[i];
+		if (clockwise) {
+			o->types.push_back(tag_value("natural", "coastline"));
 		} else {
-			tagValueType inverseType = val->first;
-			inverseType.type = val->first.type | (1 << 15);
-			directList = &val->second;
-			inverselist = &multyPolygons[inverseType];
+			o->types.push_back(tag_value("natural", "land"));
 		}
-		completedRings.clear();
-		incompletedRings.clear();
-		completedRingNames.clear();
-		incompletedRingNames.clear();
+		o->id = dbId;
+		o->area = true;
+		res.push_back(o);
+	}
 
-		__android_log_print(ANDROID_LOG_INFO, LOG_TAG,  "Process multipolygon %s %s direct list %d rev %d", val->first.tag.c_str(), val->first.value.c_str(), directList->size(), inverselist->size());
-		// FIXME
-//		MultiPolygonObject* pl = processMultiPolygon(leftX, rightX, bottomY, topY, completedRings, incompletedRings,
-//				completedRingNames, incompletedRingNames, val->first, *directList, *inverselist, zoom);
-//		if (pl != NULL) {
-//			listPolygons.push_back(pl);
-//		} else {
-//			__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Multipolygon skipped");
-//		}
+	// draw uncompleted for debug purpose
+	for (int i = 0; i < uncompletedRings.size(); i++) {
+		MapDataObject* o = new MapDataObject();
+		o->points = uncompletedRings[i];
+		o->types.push_back(tag_value("natural", "coastline_broken"));
+		//res.push_back(o);
+	}
+	if (!clockwiseFound && uncompletedRings.size() == 0) {
+		// add complete water tile
+		MapDataObject* o = new MapDataObject();
+		o->points.push_back(int_pair(leftX, topY));
+		o->points.push_back(int_pair(rightX, topY));
+		o->points.push_back(int_pair(rightX, bottomY));
+		o->points.push_back(int_pair(leftX, bottomY));
+		o->points.push_back(int_pair(leftX, topY));
+		o->id = dbId;
+		o->types.push_back(tag_value("natural", "coastline"));
+		__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "!!! Isolated islands !!!");
+		res.push_back(o);
+
 	}
 }
 
@@ -165,8 +116,8 @@ int ray_intersect_x(int prevX, int prevY, int x, int y, int middleY) {
 	// prev node above line
 	// x,y node below line
 	if (prevY > y) {
-		int tx = prevX;
-		int ty = prevY;
+		int tx = x;
+		int ty = y;
 		x = prevX;
 		y = prevY;
 		prevX = tx;
@@ -195,11 +146,11 @@ bool isClockwiseWay(std::vector<int_pair>& c) {
 	}
 
 	// calculate middle Y
-	long middleY = 0;
+	long long middleY = 0;
 	for (size_t i = 0; i < c.size(); i++) {
 		middleY += c.at(i).second;
 	}
-	middleY /= (long) c.size();
+	middleY /= (long long) c.size();
 
 	double clockwiseSum = 0;
 
@@ -232,9 +183,9 @@ bool isClockwiseWay(std::vector<int_pair>& c) {
 				}
 			}
 			previousX = rX;
-			prevX = x;
-			prevY = y;
 		}
+		prevX = x;
+		prevY = y;
 	}
 
 	if (firstX != INT_MIN) {
@@ -251,19 +202,16 @@ bool isClockwiseWay(std::vector<int_pair>& c) {
 
 
 
-void processMultipolygonLine(std::vector<std::vector<int_pair> >& completedRings, std::vector<std::vector<int_pair> >& incompletedRings,
-			std::vector<std::string> &completedRingsNames,
-		std::vector<std::string> &incompletedRingsNames, std::vector<int_pair> & coordinates, std::string name) {
+void combineMultipolygonLine(std::vector<coordinates>& completedRings, std::vector<coordinates>& incompletedRings,
+			coordinates& coordinates) {
 	if (coordinates.size() > 0) {
 		if (coordinates.at(0) == coordinates.at(coordinates.size() - 1)) {
 			completedRings.push_back(coordinates);
-			completedRingsNames.push_back(name);
 		} else {
 			bool add = true;
 			for (size_t k = 0; k < incompletedRings.size();) {
 				bool remove = false;
 				std::vector<int_pair> i = incompletedRings.at(k);
-				std::string oldName = incompletedRingsNames.at(k);
 				if (coordinates.at(0) == i.at(i.size() - 1)) {
 					std::vector<int_pair>::iterator tit =  coordinates.begin();
 					i.insert(i.end(), ++tit, coordinates.end());
@@ -278,26 +226,17 @@ void processMultipolygonLine(std::vector<std::vector<int_pair> >& completedRings
 					std::vector<std::vector<int_pair> >::iterator ti = incompletedRings.begin();
 					ti += k;
 					incompletedRings.erase(ti);
-					std::vector<std::string> :: iterator tis = incompletedRingsNames.begin();
-					tis += k;
-					incompletedRingsNames.erase(tis);
 				} else {
 					k++;
 				}
 				if (coordinates.at(0) == coordinates.at(coordinates.size() - 1)) {
 					completedRings.push_back(coordinates);
-					if (oldName.length() > 0) {
-						completedRingsNames.push_back(oldName);
-					} else {
-						completedRingsNames.push_back(name);
-					}
 					add = false;
 					break;
 				}
 			}
 			if (add) {
 				incompletedRings.push_back(coordinates);
-				incompletedRingsNames.push_back(name);
 			}
 		}
 	}
@@ -313,14 +252,14 @@ int safelyAddDelta(int number, int delta) {
 	return res;
 }
 
-void unifyIncompletedRings(std::vector<std::vector<int_pair> >& incompletedRings, std::vector<std::vector<int_pair> >& completedRings,
-		std::vector<std::string> &completedRingNames, std::vector<std::string> & incompletedRingsNames,
+void unifyIncompletedRings(std::vector<std::vector<int_pair> >& toProccess, std::vector<std::vector<int_pair> >& completedRings,
 		int leftX, int rightX, int bottomY, int topY, long dbId, int zoom) {
 	std::set<int> nonvisitedRings;
-	std::vector<std::vector<int_pair> >::iterator ir = incompletedRings.begin();
-	std::vector<std::string>::iterator irs = incompletedRingsNames.begin();
+	std::vector<coordinates > incompletedRings(toProccess);
+	toProccess.clear();
+	std::vector<coordinates >::iterator ir = incompletedRings.begin();
 	int j = 0;
-	for (j = 0; ir != incompletedRings.end(); ir++, irs++, j++) {
+	for (j = 0; ir != incompletedRings.end(); ir++,j++) {
 		int x = ir->at(0).first;
 		int y = ir->at(0).second;
 		int sx = ir->at(ir->size() - 1).first;
@@ -332,30 +271,14 @@ void unifyIncompletedRings(std::vector<std::vector<int_pair> >& incompletedRings
 		// However this situation could happen because of broken multipolygons (so it should data causes app error)
 		// that's why these exceptions could be replaced with return; statement.
 		if (!end || !st) {
-			// TODO message
-//				float dx = (float) MapUtils.get31LongitudeX(x);
-//				float dsx = (float) MapUtils.get31LongitudeX(sx);
-//				float dy = (float) MapUtils.get31LatitudeY(y);
-//				float dsy = (float) MapUtils.get31LatitudeY(sy);
-//				String str;
-//				if (!end) {
-//					str = " Start point (to close) not found : end_x = {0}, end_y = {1}, start_x = {2}, start_y = {3} : bounds {4} {5} - {6} {7}"; //$NON-NLS-1$
-//					System.err
-//							.println(MessageFormat.format(dbId + str, dx, dy, dsx, dsy, leftX + "", topY + "", rightX + "", bottomY + "")); //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-//				}
-//				if (!st) {
-//					str = " End not found : end_x = {0}, end_y = {1}, start_x = {2}, start_y = {3} : bounds {4} {5} - {6} {7}"; //$NON-NLS-1$
-//					System.err
-//							.println(MessageFormat.format(dbId + str, dx, dy, dsx, dsy, leftX + "", topY + "", rightX + "", bottomY + "")); //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-//				}
 			__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Error processing multipolygon");
+			toProccess.push_back(*ir);
 		} else {
 			nonvisitedRings.insert(j);
 		}
 	}
 	ir = incompletedRings.begin();
-	irs = incompletedRingsNames.begin();
-	for (j = 0; ir != incompletedRings.end(); ir++, irs++, j++) {
+	for (j = 0; ir != incompletedRings.end(); ir++, j++) {
 		if (nonvisitedRings.find(j) == nonvisitedRings.end()) {
 			continue;
 		}
@@ -465,7 +388,6 @@ void unifyIncompletedRings(std::vector<std::vector<int_pair> >& incompletedRings
 		}
 
 		completedRings.push_back(*ir);
-		completedRingNames.push_back(*irs);
 	}
 
 }

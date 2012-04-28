@@ -12,6 +12,7 @@
 
 #include "common.h"
 #include "renderRules.h"
+#include "utf8.cpp"
 
 
 template <typename T> class quad_tree {
@@ -138,20 +139,20 @@ bool isLetterOrDigit(char c)
 	return c != ' ';
 }
 
-void drawTextOnCanvas(SkCanvas* cv, std::string text, float centerX, float centerY, SkPaint& paintText,
+void drawTextOnCanvas(SkCanvas* cv, const char* text, uint16_t len, float centerX, float centerY, SkPaint& paintText,
 		float textShadow) {
 	if (textShadow > 0) {
 		int c = paintText.getColor();
 		paintText.setStyle(SkPaint::kStroke_Style);
 		paintText.setColor(-1); // white
 		paintText.setStrokeWidth(2 + textShadow);
-		cv->drawText(text.c_str(), text.length(), centerX, centerY, paintText);
+		cv->drawText(text, len, centerX, centerY, paintText);
 // reset
 		paintText.setStrokeWidth(2);
 		paintText.setStyle(SkPaint::kFill_Style);
 		paintText.setColor(c);
 	}
-	cv->drawText(text.data(), text.length(), centerX, centerY, paintText);
+	cv->drawText(text, len, centerX, centerY, paintText);
 }
 
 
@@ -162,47 +163,35 @@ void drawWrappedText(RenderingContext* rc, SkCanvas* cv, TextDrawInfo* text, flo
 	}
 
 	if(text->text.length() > text->textWrap) {
-		int start = 0;
+		const char* c_str = text->text.c_str();
 		int end = text->text.length();
-		int lastSpace = -1;
 		int line = 0;
 		int pos = 0;
-		int limit = 0;
-		while(pos < end) {
-			lastSpace = -1;
-			limit += text->textWrap;
-			// in UTF-8 all non ASCII characters has 2 or more characters
-			int symbolsRead = 0;
-			int utf8pos = pos;
-			while(symbolsRead < limit && pos < end) {
-				if(utf8pos == pos) {
-					if(text->text.at(pos) <= 128) {
-						symbolsRead++;
-						if(!isLetterOrDigit(text->text.at(pos))) {
-							lastSpace = pos;
-						}
-						utf8pos ++;
-					}
+		int start = 0;
+		while(start < end) {
+			const char* p_str = c_str;
+			int lastSpace = -1;
+			int prevPos = -1;
+			do {
+				int lastSpace = nextWord((uint8_t*)p_str);
+				if (lastSpace == -1) {
+					pos = end;
 				} else {
-					// here could be code to determine if UTF-8 is ended (currently only 2 chars)
-					symbolsRead++;
-					utf8pos = pos + 1;
+					p_str += lastSpace;
+					if(pos != start && pos - start + lastSpace >= text->textWrap){
+						break;
+					}
+					pos += lastSpace;
 				}
-				pos++;
-			}
-			if(lastSpace == -1) {
-				PROFILE_NATIVE_OPERATION(rc, drawTextOnCanvas(cv, text->text.substr(start, pos), text->centerX, text->centerY + line * (textSize + 2), paintText, text->textShadow));
-				start = pos;
-			} else {
-				PROFILE_NATIVE_OPERATION(rc, drawTextOnCanvas(cv, text->text.substr(start, lastSpace), text->centerX, text->centerY + line * (textSize + 2), paintText, text->textShadow));
-				start = lastSpace + 1;
-				limit += (start - pos) - 1;
-			}
-			line++;
+			} while(pos < end && (pos - start) < text->textWrap);
 
+			PROFILE_NATIVE_OPERATION(rc, drawTextOnCanvas(cv, c_str, pos - start , text->centerX, text->centerY + line * (textSize + 2), paintText, text->textShadow));
+			c_str += (pos - start);
+			start = pos;
+			line++;
 		}
 	} else {
-		PROFILE_NATIVE_OPERATION(rc, drawTextOnCanvas(cv, text->text, text->centerX, text->centerY, paintText, text->textShadow));
+		PROFILE_NATIVE_OPERATION(rc, drawTextOnCanvas(cv, text->text.data(), text->text.length(), text->centerX, text->centerY, paintText, text->textShadow));
 	}
 }
 

@@ -21,7 +21,7 @@ public:
 	std::vector<tag_value>  types;
 	std::vector<tag_value>  additionalTypes;
 	int objectType;
-	coordinates  points;
+	coordinates points;
 	std::vector < coordinates > polygonInnerCoordinates;
 
 	std::hash_map< std::string, unsigned int> stringIds;

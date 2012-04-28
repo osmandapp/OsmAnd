@@ -963,7 +963,7 @@
 
 
 	<line>
-	    <filter minzoom="1" tag="natural" value="coastline_broken" color="#111111" strokeWidth="2.5"/>
+	    <filter minzoom="1" tag="natural" value="coastline_broken" color="#111111" strokeWidth="2"/>
 		<group>
 			<filter hmRendered="true" tag="highway" value="motorway" maxzoom="13" color="#809bff"/>
 				<filter tag="highway" value="motorway" maxzoom="13" color="#a58dff"/>

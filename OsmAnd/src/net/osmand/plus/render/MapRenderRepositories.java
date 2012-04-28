@@ -279,7 +279,7 @@ public class MapRenderRepositories {
 		}
 		
 		NativeSearchResult resultHandler = library.searchObjectsForRendering(leftX, rightX, topY, bottomY, zoom, renderingReq,
-				PerformanceFlags.checkForDuplicateObjectIds, this);
+				PerformanceFlags.checkForDuplicateObjectIds, this, context.getString(R.string.switch_to_raster_map_to_see));
 		if (checkWhetherInterrupted()) {
 			library.deleteSearchResult(resultHandler);
 			return false;

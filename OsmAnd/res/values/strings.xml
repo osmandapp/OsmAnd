@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Offline data), or switch to online maps.</string>
     <string name="tip_recent_changes_0_7_2_t">Changes in 0.7.2 :
 \n\t- Native rendering for all devices
 \n\t- Offline POI editing
@@ -180,7 +181,6 @@
 	\n\t\'To compass\' - Map will continuously be aligned with device compass reading
 	\n\tHint: To quickly change between rotation by compass and the one you selected in settings, you can simply tap on the compass needle in map view.</string>
 
-	<string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Offline data), or switch to online maps.</string>
 	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Settings\' -> \'Map configuration\' -> \'Offline vector maps\'.</string>
 
 	<string name="tip_day_night_mode">Day/Night Mode</string>

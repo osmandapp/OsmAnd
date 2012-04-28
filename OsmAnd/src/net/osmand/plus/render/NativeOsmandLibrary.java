@@ -100,9 +100,9 @@ public class NativeOsmandLibrary {
 	 *            - must be null if there is no need to append to previous results returns native handle to results
 	 */
 	public NativeSearchResult searchObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom,
-			RenderingRuleSearchRequest request, boolean skipDuplicates, Object objectWithInterruptedField) {
+			RenderingRuleSearchRequest request, boolean skipDuplicates, Object objectWithInterruptedField, String msgIfNothingFound) {
 		return new NativeSearchResult(searchNativeObjectsForRendering(sleft, sright, stop, sbottom, zoom, request, skipDuplicates,
-				objectWithInterruptedField));
+				objectWithInterruptedField, msgIfNothingFound));
 	}
 
 	public void deleteSearchResult(NativeSearchResult searchResultHandler) {
@@ -160,7 +160,7 @@ public class NativeOsmandLibrary {
 			RenderingRuleSearchRequest render, int defaultColor);
 
 	private static native int searchNativeObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom, 
-			RenderingRuleSearchRequest request, boolean skipDuplicates, Object objectWithInterruptedField);
+			RenderingRuleSearchRequest request, boolean skipDuplicates, Object objectWithInterruptedField, String msgIfNothingFound);
 			
 	public static native int getCpuCount();
 	public static native boolean cpuHasNeonSupport();
