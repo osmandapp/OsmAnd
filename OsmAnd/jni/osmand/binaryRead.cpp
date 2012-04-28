@@ -361,6 +361,7 @@ extern "C" JNIEXPORT void JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 	// setGlobalJniEnv(ienv);
 	SearchResult* result = (SearchResult*) searchResult;
 	if(result != NULL){
+		deleteObjects(result->result);
 		delete result;
 	}
 }
