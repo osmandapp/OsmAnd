@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="tip_recent_changes_0_7_2_t">Zmeny vo verzii 0.7.2 :
+	\n\t- Natívne vykresľovanie pre všetky zariadenia
+	\n\t- Offline upravovanie POI bodov
+	\n\t- Prístupnosť
+	\n\t- Veľa opravených chýb
+	</string>
 	<string name="send_files_to_osm">Odoslať GPX súbory do OSM?</string>	
 	<string name="gpx_visibility_txt">Viditeľnosť</string>	
 	<string name="gpx_tags_txt">Tagy</string>	
