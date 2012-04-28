@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <regions_list>
 		<!-- 1.4 ITALY [SOURCE: GFOSS.it] -->		
-		<regions siteToDownload="http://download.gfoss.it/osm/osm/regioni/{0}.osm.bz2" region_prefix="Italy_" skip="true" 
+		<regions siteToDownload="http://download.gfoss.it/osm/osm/regioni/{0}.pbf" region_prefix="Italy_" skip="true" 
 			region_suffix="_Europe">
 			<region name="abruzzo" esize="" cityAdminLevel="4"/>
 			<region name="basilicata" esize="" cityAdminLevel="4"/>
 			<region name="calabria" esize="" cityAdminLevel="4"/>
 			<region name="campania" esize="" cityAdminLevel="4"/>
 			<region name="emilia-romagna" esize="" cityAdminLevel="4"/>
-			<region name="friuli-venezia_giulia.osm" esize="" cityAdminLevel="4"/>
+			<region name="friuli-venezia_giulia" esize="" cityAdminLevel="4"/>
 			<region name="lazio" esize="" cityAdminLevel="4"/>
 			<region name="liguria" esize="" cityAdminLevel="4"/>
 			<region name="lombardia" esize="" cityAdminLevel="4"/>
@@ -20,6 +20,7 @@
 			<region name="sicilia" esize="" cityAdminLevel="4"/>
 			<region name="toscana" esize="" cityAdminLevel="4"/>
 			<region name="trentino-alto_adige" esize="" cityAdminLevel="4"/>
+			<region name="umbria" esize="" cityAdminLevel="4"/>
 			<region name="valle_d_aosta" esize="" cityAdminLevel="4"/>
 			<region name="veneto" esize="" cityAdminLevel="4"/>
 		</regions>
