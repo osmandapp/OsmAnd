@@ -168,7 +168,7 @@
 			</condition>
 			<then>
 				<echo>Not using native, excluding from build</echo>
-				<move file="${native.libs.absolute.dir}" tofile="${native.libs.absolute.dir}.skipped"/>
+				<move file="${native.libs.absolute.dir}/*/**" tofile="${native.libs.absolute.dir}.skipped" />
 			</then>
 			<else>
 				<fail message="ndk.dir is missing. Make sure to generate local.properties or to inject it through an env var" unless="ndk.dir"/>
