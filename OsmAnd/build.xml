@@ -180,16 +180,16 @@
 
 	<!-- Compiles this project's .java files into .class files. -->
     <target name="-compile" depends="-build-setup, -pre-build, -code-gen, -pre-compile">
+    	<!-- osmchange : Osmand plus support -->
+    	<mkdir dir="${gen.absolute.dir}/net/osmand/plus"/>
+    	     <copy todir="${gen.absolute.dir}/net/osmand/plus">
+    	          <fileset dir="${gen.absolute.dir}/net/osmand">
+    	              <include name="R.java" />
+    	          </fileset>
+    	     </copy>
+    	<replaceregexp file="${gen.absolute.dir}/net/osmand/plus/R.java" match='package net.osmand;' replace='package net.osmand.plus;' byline="true" />
+    	<!-- osmchange : Osmand plus support -->
         <do-only-if-manifest-hasCode elseText="hasCode = false. Skipping...">
-			<!-- osmchange : Osmand plus support -->
-            <mkdir dir="${gen.absolute.dir}/net/osmand/plus"/>
-            <copy todir="${gen.absolute.dir}/net/osmand/plus">
-                <fileset dir="${gen.absolute.dir}/net/osmand">
-                    <include name="R.java" />
-                </fileset>
-            </copy>
-            <replaceregexp file="${gen.absolute.dir}/net/osmand/plus/R.java" match='package net.osmand;' replace='package net.osmand.plus;' byline="true" />
-			<!-- osmchange : Osmand plus support -->
             <!-- If android rules are used for a test project, its classpath should include
                  tested project's location -->
             <condition property="extensible.classpath"
