@@ -11,9 +11,6 @@ public class ToDoConstants {
 	// Index
 	// Map QuadTree (skip small areas!!!)
 	// Routing index !!
-	 
-    // TODO native support!	
-	// TODO Delete/Extract the code with multipolygons ! (coastline))
 	
 	// ------ TO try & to test ----
 	// Polish UI with new building address search ...(Better completely new address search)
