@@ -1,4 +1,4 @@
-OSMAND_MAKEFILES := $(all-subdir-makefiles)
+OSMAND_MAKEFILES := ../Osmand-kernel/Android.mk
 
 # Protect from previous builds
 ifneq ($(TARGET_ARCH_ABI),armeabi-v7a)

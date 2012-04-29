@@ -330,7 +330,7 @@ include $(BUILD_STATIC_LIBRARY)
 
 else
 LOCAL_SRC_FILES := \
-	../../jni-prebuilt/$(TARGET_ARCH_ABI)/lib$(LOCAL_MODULE).a
+	../jni-prebuilt/$(TARGET_ARCH_ABI)/lib$(LOCAL_MODULE).a
 include $(PREBUILT_STATIC_LIBRARY)
 endif
 
