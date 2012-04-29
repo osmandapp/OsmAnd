@@ -61,7 +61,6 @@ void processCoastlines(std::vector<MapDataObject*>&  coastLines, int leftX, int 
 		}
 		combineMultipolygonLine(completedRings, uncompletedRings, *cs);
 	}
-			uncompletedRings.size() );
 	if (completedRings.size() == 0 && uncompletedRings.size() == 0) {
 		return;
 	}
