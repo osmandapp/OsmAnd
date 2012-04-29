@@ -30,6 +30,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.MapCreatorVersion;
+import net.osmand.data.IndexConstants;
 import net.osmand.data.preparation.IndexCreator;
 import net.osmand.impl.ConsoleProgressImplementation;
 
@@ -133,7 +134,12 @@ public class WikiIndexer {
 						ic.setIndexAddress(false);
 						ic.generateIndexes(outFile, new ConsoleProgressImplementation(3), null, null, null, log);
 						// final step
-						new File(workPath, ic.getMapFileName()).renameTo(new File(targetPath, ic.getMapFileName()));
+						String targetMapFileName = ic.getMapFileName();
+						targetMapFileName = 
+								targetMapFileName.substring(0, targetMapFileName.length() - IndexConstants.BINARY_MAP_INDEX_EXT.length()) +
+								"_" + IndexConstants.BINARY_MAP_VERSION + IndexConstants.BINARY_MAP_INDEX_EXT;
+								
+						new File(workPath, ic.getMapFileName()).renameTo(new File(targetPath, targetMapFileName));
 					}
 				}
 			} catch (WikiIndexerException e) {

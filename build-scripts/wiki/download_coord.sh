@@ -76,5 +76,3 @@ download_coord hu;
 download_coord te;
 download_coord ht;
 download_coord ceb;
-
-
