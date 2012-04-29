@@ -1,7 +1,7 @@
 APP_STL := stlport_shared
 APP_ABI := all
 APP_CPPFLAGS := -fno-rtti -fno-exceptions
-
+OSMAND_USE_PREBUILT := true
 
 ifdef OSMAND_X86_ONLY
 APP_ABI := x86

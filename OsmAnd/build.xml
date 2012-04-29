@@ -172,8 +172,7 @@
 			</then>
 			<else>
 				<fail message="ndk.dir is missing. Make sure to generate local.properties or to inject it through an env var" unless="ndk.dir"/>
-				<echo>Building native code</echo>
-
+				<echo>Building native code prebuilt : ${OSMAND_USE_PREBUILT}</echo>
 				<exec command="sh ${ndk.dir}/ndk-build -j8 V=1" failonerror="true"/>
 			</else>
 		</if>
