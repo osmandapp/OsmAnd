@@ -1,5 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="tip_recent_changes_0_7_2_t">Изменения в 0.7.2 :
+\n\t- Быстрый рендеринг для всех устройств
+\n\t- Offline POI редактирование
+\n\t- Дополнительные возможности (Accessibility)
+\n\t- Большое количество исправлений и улучшений
+	</string>
+    <string name="send_files_to_osm">Отправить GPX файлы в OSM?</string>
+    <string name="gpx_visibility_txt">Видимость</string>
+    <string name="gpx_tags_txt">Теги</string>
+    <string name="gpx_description_txt">Описание</string>
+    <string name="validate_gpx_upload_name_pwd">Пожалуйста укажите OSM пользователя и его пароль для загрузки GPX файлов.</string>
+    
+    <string name="default_buttons_support">Поддержка</string>
+	<string name="support_new_features">Поддержать разработку новых функций</string>
+
+    <string name="show_ruler_level_descr">Показывать масштабную линейку</string>
+	<string name="show_ruler_level">Показывать масштаб</string>
+	
+	<string name="info_button">Информация</string>
+	
+	
+	<string name="use_fluorescent_overlays">Флуорисцентные цвета</string>
+	<string name="use_fluorescent_overlays_descr">Использовать флуорисцентные цвета для отображения треков</string>
+	<string name="offline_poi_edition">Offline POI редактирование</string>
+	<string name="offline_poi_edition_descr">Всегда использовать offline POI редактирование</string>
+    
     <string name="tip_recent_changes_0_7_1_t">Изменения в 0.7.1 :
 \n\t- Offline POI редактирование
 \n\t- Live Tracking функциональность (использование и настройка web service в HowTo en)
@@ -398,7 +424,7 @@
 	<string name="continuous_rendering">Непрерывный рендеринг</string>
 	<string name="continuous_rendering_descr">Выберите способ как отрисовывать карту</string>
 	<string name="rendering_exception">Во время отображения карты произошла непредвиденная ошибка</string>
-	<string name="rendering_out_of_memory">Ошибка : недостаточно памяти, чтобы отобразить карту</string>
+	<string name="rendering_out_of_memory">Ошибка : недостаточно памяти процесса, чтобы отобразить карту</string>
 	<string name="show_point_options">Контекстное меню</string>
 	<string name="renderer_load_sucess">Стиль успешно загружен</string>
 	<string name="renderer_load_exception">Произошла ошибка во время загрузки данного стиля</string>
