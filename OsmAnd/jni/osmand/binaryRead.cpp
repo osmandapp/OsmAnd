@@ -730,7 +730,7 @@ bool searchMapTreeBounds(io::CodedInputStream* input, MapTreeBounds* current, Ma
 			readInt(input, &child->length);
 			child->filePointer = input->getTotalBytesRead();
 			int oldLimit = input->PushLimit(child->length);
-			if (current->ocean != -1) {
+			if (current->ocean) {
 				child->ocean = current->ocean;
 			}
 			searchMapTreeBounds(input, child, current, req, foundSubtrees);
@@ -904,6 +904,9 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 				}
 			}
 		}
+		if (q.ocean) {
+			ocean = true;
+		}
 		if (!q.isCancelled()) {
 			std::vector<MapDataObject*>::iterator r = q.result.begin();
 			tempResult.reserve(q.result.size() + tempResult.size());
@@ -930,10 +933,6 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 					} else {
 						tempResult.push_back(*r);
 					}
-				}
-
-				if (q.ocean) {
-					ocean = true;
 				}
 			}
 		}
