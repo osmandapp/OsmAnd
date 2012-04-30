@@ -1,28 +1,14 @@
-default : all
-
-JAVA  := $$JAVA_HOME/bin/java
-JAVAC := $$JAVA_HOME/bin/javac
-CXX       := g++
-STRIP     := strip
-LIBNAME := osmand.lib
-
-#LOCAL_PATH := $(call my-dir)
 LOCAL_PATH := .
-PROTOBUF := $(LOCAL_PATH)/../protobuf
-OSMAND_SKIA_ABS := $(LOCAL_PATH)/../skia/skia_library
+PREBUILT_DIR = ../jni-prebuilt/linux-x86/
+LIBNAME := osmand.lib
+include Common.mk
 
-LOCAL_C_INCLUDES := -I$(LOCAL_PATH) \
-    -I$(PROTOBUF) \
-	-I$(LOCAL_PATH)/../skia \
-	-I$(OSMAND_SKIA_ABS)/include/core \
-	-I$(OSMAND_SKIA_ABS)/include/images \
-	-I$(OSMAND_SKIA_ABS)/include/utils \
-	-I$(OSMAND_SKIA_ABS)/include/config \
-	-I$(OSMAND_SKIA_ABS)/include/effects \
-	-I$(OSMAND_SKIA_ABS)/include/utils/android \
-	-I$(OSMAND_SKIA_ABS)/src/core
-	
-#For hash_map compilation -Wno-deprecated
+LDFLAGS = -Wl,--hash-style=both -shared
+LDLIBS = -L$(PREBUILT_DIR) -lskia -lproto
+CPP_FILE_EXTENSION = cpp
+OBJECTS = $(LOCAL_SRC_FILES:src/%.$(CPP_FILE_EXTENSION)=build/obj/%.o)
+
+C_INCLUDES := $(addprefix -I, $(LOCAL_C_INCLUDES))
 
 CPPFLAGS := \
 	-DGOOGLE_PROTOBUF_NO_RTTI \
@@ -30,31 +16,20 @@ CPPFLAGS := \
 	-DSK_RELEASE \
 	-DGR_RELEASE=1 \
 	-c -fpic -I$(JAVA_HOME)/include \
-	-DLINUX_BUILD \
-	$(LOCAL_C_INCLUDES)
+	-DHAVING_HASH \
+	$(C_INCLUDES)
+
+$(PREBUILT_DIR)/$(LIBNAME) : build/$(LIBNAME) 
+	cp build/$(LIBNAME) $(PREBUILT_DIR)/$(LIBNAME)
+
+
+build/$(LIBNAME): $(OBJECTS) $(PREBUILT_DIR)/libskia.a $(PREBUILT_DIR)/libproto.a 
+	$(CXX) $(LDFLAGS) -o build/$(LIBNAME)  $(OBJECTS) $(LDLIBS)
+	strip build/$(LIBNAME)
 	
-# LDFLAGS contains flags passed to the compiler for use during linking
-LDFLAGS = -Wl,--hash-style=both
-# LIBS contains libraries to link with
-LDLIBS = -L/home/victor/projects/OsmAnd/git/Osmand-kernel/jni-prebuilt/x86/ -lskia -lproto -lpng -ljpeg -lgif -lft2_static -lexpat_static -lrt -lm
-
-TARGET = $(shell basename `pwd`)
-SOURCES = osmand_log.cpp \
-	common.cpp \
-	mapObjects.cpp \
-	renderRules.cpp \
-	rendering.cpp \
-	binaryRead.cpp
-DEPS = $(wildcard *.h)
-OBJECTS = $(SOURCES:%.cpp=%.o)
-
-all: $(LIBNAME)
-
-$(OBJECTS): $(SOURCES) $(DEPS)
-
-$(LIBNAME): $(OBJECTS)
-	$(CXX) $(LDFLAGS) -o $(LIBNAME)  $(OBJECTS) $(LDLIBS)
-	$(STRIP) $(LIBNAME)
+build/obj/%.o : src/%.$(CPP_FILE_EXTENSION) $(LOCAL_C_INCLUDES)
+	@mkdir -p `dirname $@`
+	$(CXX) -o $@ -c src/$*.$(CPP_FILE_EXTENSION) $(CPPFLAGS)
 	
 clean:
-	$(RM) $(OBJECTS) $(TARGET) 
+	$(RM) $(OBJECTS) build/$(LIBNAME)

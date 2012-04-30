@@ -1,6 +1,7 @@
 LOCAL_PATH := $(call my-dir)
-include Common.mk
+
 include $(CLEAR_VARS)
+include $(LOCAL_PATH)/Common.mk
 
 ifneq ($(OSMAND_BUILDING_NEON_LIBRARY),true)
 LOCAL_MODULE := proto

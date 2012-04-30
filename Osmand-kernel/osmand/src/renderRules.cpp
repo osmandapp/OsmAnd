@@ -6,14 +6,10 @@
 #include <iterator>
 #include <string>
 #include <vector>
-#ifdef LINUX_BUILD
-#include <ext/hash_map>
-using namespace __gnu_cxx;
-#else
-#include <hash_map>
-#endif
-#include "renderRules.h"
 #include "common.h"
+#include "renderRules.h"
+
+
 
 jclass ListClass;
 jmethodID List_size;
@@ -56,7 +52,7 @@ RenderingRuleProperty* RenderingRulesStorage::getProperty(int i) {
 }
 
 RenderingRule* RenderingRulesStorage::getRule(int state, int itag, int ivalue) {
-	hash_map<int, RenderingRule>::iterator it = (tagValueGlobalRules[state]).find(
+	HMAP::hash_map<int, RenderingRule>::iterator it = (tagValueGlobalRules[state]).find(
 			(itag << SHIFT_TAG_VAL) | ivalue);
 	if (it == tagValueGlobalRules[state].end()) {
 		return NULL;
@@ -65,7 +61,7 @@ RenderingRule* RenderingRulesStorage::getRule(int state, int itag, int ivalue) {
 }
 
 RenderingRuleProperty* RenderingRulesStorage::getProperty(const char* st) {
-	hash_map<std::string, RenderingRuleProperty*>::iterator i = propertyMap.find(st);
+	HMAP::hash_map<std::string, RenderingRuleProperty*>::iterator i = propertyMap.find(st);
 	if (i == propertyMap.end()) {
 		return NULL;
 	}

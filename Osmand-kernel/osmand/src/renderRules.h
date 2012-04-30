@@ -3,6 +3,7 @@
 
 #include <jni.h>
 #include <string>
+#include "common.h"
 #include "mapObjects.h"
 
 class RenderingRuleProperty

@@ -4,9 +4,12 @@
 #include <jni.h>
 #include <string>
 #include <vector>
+
 #include <hash_map>
 #include <hash_set>
-#ifdef LINUX_BUILD
+
+#ifdef HAVING_HASH
+
 #define HMAP __gnu_cxx
 namespace __gnu_cxx {
   template<>
@@ -36,8 +39,11 @@ namespace __gnu_cxx {
 }
 
 #else
-#define HMAP std
+
+#define HMAP
+
 #endif
+
 using namespace std;
 
 #include <SkPath.h>

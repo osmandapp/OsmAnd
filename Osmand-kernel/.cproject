@@ -67,7 +67,7 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="com.android.toolchain.gcc.128294115.1197161253" name="common.cpp" rcbsApplicability="disable" resourcePath="osmand/common.cpp" toolsToInvoke="com.android.tool.compiler.g++.1543637239.697408162">
+					<fileInfo id="com.android.toolchain.gcc.128294115.1197161253" name="common.cpp" rcbsApplicability="disable" resourcePath="osmand/src/common.cpp" toolsToInvoke="com.android.tool.compiler.g++.1543637239.697408162">
 						<tool id="com.android.tool.compiler.g++.1543637239.697408162" name="Android G++" superClass="com.android.tool.compiler.g++.1543637239">
 							<option id="gnu.cpp.compiler.option.include.paths.816070414" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 								<listOptionValue builtIn="false" value="/usr/include/linux/"/>
