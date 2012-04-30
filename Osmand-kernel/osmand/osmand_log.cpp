@@ -2,7 +2,7 @@
 #define _OSMAND_LOG_CPP
 
 
-#ifdef _ANDROID_BUILD
+#ifdef ANDROID_BUILD
 #include <android/log.h>
 
 const char* const LOG_TAG = "net.osmand:native";

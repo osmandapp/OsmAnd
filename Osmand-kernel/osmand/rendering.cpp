@@ -1,6 +1,5 @@
 #include <jni.h>
 #include "osmand_log.h"
-#include <android/bitmap.h>
 #include <dlfcn.h>
 
 #include <math.h>
@@ -8,7 +7,12 @@
 #include <vector>
 #include <algorithm>
 #include <set>
+#ifdef LINUX_BUILD
+#include <ext/hash_map>
+using namespace __gnu_cxx;
+#else
 #include <hash_map>
+#endif
 #include <time.h>
 
 #include <SkTypes.h>
@@ -186,7 +190,7 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
 
 void renderText(MapDataObject* obj, RenderingRuleSearchRequest* req, RenderingContext* rc, std::string tag,
 		std::string value, float xText, float yText, SkPath* path) {
-	std::hash_map<std::string, std::string>::iterator it = obj->objectNames.begin();
+	hash_map<std::string, std::string>::iterator it = obj->objectNames.begin();
 	while (it != obj->objectNames.end()) {
 		if (it->second.length() > 0) {
 			std::string name = it->second;
@@ -542,9 +546,9 @@ std::hash_map<int, std::vector<int> > sortObjectsByProperOrder(std::vector <MapD
 void doRendering(std::vector <MapDataObject* > mapDataObjects, SkCanvas* canvas, SkPaint* paint,
 	RenderingRuleSearchRequest* req, RenderingContext* rc) {
 		// put in order map
-		std::hash_map<int, std::vector<int> > orderMap = sortObjectsByProperOrder(mapDataObjects, req, rc);
+		hash_map<int, std::vector<int> > orderMap = sortObjectsByProperOrder(mapDataObjects, req, rc);
 		std::set<int> keys;
-		std::hash_map<int, std::vector<int> >::iterator it = orderMap.begin();
+		hash_map<int, std::vector<int> >::iterator it = orderMap.begin();
 		while(it != orderMap.end())
 		{
 			keys.insert(it->first);
@@ -602,6 +606,9 @@ void loadJniRendering(JNIEnv* env)
     jclass_JUnidecode = findClass(env, "net/sf/junidecode/Junidecode");
     jmethod_JUnidecode_unidecode = env->GetStaticMethodID(jclass_JUnidecode, "unidecode", "(Ljava/lang/String;)Ljava/lang/String;");
 }
+
+#ifdef ANDROID_BUILD
+#include <android/bitmap.h>
 
 extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_generateRendering_1Direct( JNIEnv* ienv, jobject obj,
     jobject renderingContext, jint searchResult,
@@ -697,7 +704,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
         pushToJavaRenderingContext(ienv, renderingContext, &rc);
         osmand_log_print(LOG_INFO, "End Rendering image");
         if(dl_AndroidBitmap_unlockPixels(ienv, targetBitmap) != ANDROID_BITMAP_RESUT_SUCCESS) {
-        	osmand_log_print(LOG_ERROR, "Failed to execute AndroidBitmap_unlockPixels");
+             osmand_log_print(LOG_ERROR, "Failed to execute AndroidBitmap_unlockPixels");
         }
 
         // delete  variables
@@ -722,6 +729,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 
         return resultObject;
 }
+#endif
 
 void* bitmapData = NULL;
 size_t bitmapDataSize = 0;

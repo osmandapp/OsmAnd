@@ -6,7 +6,12 @@
 #include <iterator>
 #include <string>
 #include <vector>
+#ifdef LINUX_BUILD
+#include <ext/hash_map>
+using namespace __gnu_cxx;
+#else
 #include <hash_map>
+#endif
 #include "renderRules.h"
 #include "common.h"
 
@@ -51,7 +56,7 @@ RenderingRuleProperty* RenderingRulesStorage::getProperty(int i) {
 }
 
 RenderingRule* RenderingRulesStorage::getRule(int state, int itag, int ivalue) {
-	std::hash_map<int, RenderingRule>::iterator it = (tagValueGlobalRules[state]).find(
+	hash_map<int, RenderingRule>::iterator it = (tagValueGlobalRules[state]).find(
 			(itag << SHIFT_TAG_VAL) | ivalue);
 	if (it == tagValueGlobalRules[state].end()) {
 		return NULL;
@@ -60,7 +65,7 @@ RenderingRule* RenderingRulesStorage::getRule(int state, int itag, int ivalue) {
 }
 
 RenderingRuleProperty* RenderingRulesStorage::getProperty(const char* st) {
-	std::hash_map<std::string, RenderingRuleProperty*>::iterator i = propertyMap.find(st);
+	hash_map<std::string, RenderingRuleProperty*>::iterator i = propertyMap.find(st);
 	if (i == propertyMap.end()) {
 		return NULL;
 	}

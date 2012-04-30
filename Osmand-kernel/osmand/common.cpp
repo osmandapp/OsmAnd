@@ -5,6 +5,12 @@
 #include <SkBitmap.h>
 #include <SkImageDecoder.h>
 #include <jni.h>
+#include <time.h>
+
+// constant CLOCK_MONOTONIC is included in linux time.h
+#ifdef LINUX_BUILD
+	#include <linux/time.h>
+#endif
 
 #include "common.h"
 #include "osmand_log.h"
@@ -314,7 +320,7 @@ SkBitmap* getCachedBitmap(RenderingContext* rc, const std::string& bitmapResourc
 		return NULL;
 
 	jbyte* bitmapBuffer = env->GetByteArrayElements(javaIconRawData, NULL);
-	size_t bufferLen = env->GetArrayLength(javaIconRawData);
+	jint bufferLen = env->GetArrayLength(javaIconRawData);
 
 	// Decode bitmap
 	SkBitmap* iconBitmap = new SkBitmap();

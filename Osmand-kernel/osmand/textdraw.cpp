@@ -1,7 +1,13 @@
 #include <vector>
 #include <set>
 #include <algorithm>
+#include <math.h>
+#ifdef LINUX_BUILD
+#include <ext/hash_map>
+using namespace __gnu_cxx;
+#else
 #include <hash_map>
+#endif
 #include <time.h>
 #include <jni.h>
 #include "SkTypes.h"
@@ -24,7 +30,7 @@ private :
 		SkRect bounds;
 
 		node(SkRect& b) : bounds(b) {
-            std::memset(children,0,4*sizeof(node*));
+            memset(children,0,4*sizeof(node*));
 		}
 
 		~node() {
@@ -211,7 +217,7 @@ bool calculatePathToRotate(RenderingContext* rc, TextDrawInfo* p) {
 			py += points[i].fY - points[i - 1].fY;
 		}
 		if (px != 0 || py != 0) {
-			p->pathRotate = std::atan2(py, px);
+			p->pathRotate = atan2(py, px);
 		}
 		return true;
 	}
@@ -231,7 +237,7 @@ bool calculatePathToRotate(RenderingContext* rc, TextDrawInfo* p) {
 		bool inside = points[i].fX >= 0 && points[i].fX <= rc->width &&
 				points[i].fY >= 0 && points[i].fY <= rc->height;
 		if (i > 0) {
-			float d = std::sqrt(
+			float d = sqrt(
 					(points[i].fX - points[i - 1].fX) * (points[i].fX - points[i - 1].fX)
 							+ (points[i].fY - points[i - 1].fY) * (points[i].fY - points[i - 1].fY));
 			distances.push_back(d);
@@ -302,12 +308,12 @@ bool calculatePathToRotate(RenderingContext* rc, TextDrawInfo* p) {
 		py += points[i].fY - points[i - 1].fY;
 	}
 	float scale = 0.5f;
-	float plen = std::sqrt(px * px + py * py);
+	float plen = sqrt(px * px + py * py);
 	// vector ox,oy orthogonal to px,py to measure height
 	float ox = -py;
 	float oy = px;
 	if(plen > 0) {
-		float rot = std::atan2(py, px);
+		float rot = atan2(py, px);
 		if (rot < 0) rot += M_PI * 2;
 		if (rot > M_PI_2 && rot < 3 * M_PI_2) {
 			rot += M_PI;
@@ -400,7 +406,10 @@ bool intersects(SkRect tRect, float tRot, TextDrawInfo* s)
 bool intersects(TextDrawInfo* t, TextDrawInfo* s) {
 	return intersects(t->bounds, t->pathRotate, s);
 }
-std::vector<TextDrawInfo*> search;
+inline float max(float a, float b) {
+  return a > b ? a : b;
+}
+vector<TextDrawInfo*> searchText;
 bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDrawInfo*>& boundIntersections, TextDrawInfo* text,
 		SkPaint* paintText, SkPaint* paintIcon) {
 	paintText->measureText(text->text.c_str(), text->text.length(), &text->bounds);
@@ -422,20 +431,20 @@ bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDraw
 
 	// for text purposes
 //	drawTestBox(cv, &text->bounds, text->pathRotate, paintIcon, text->text, NULL/*paintText*/);
-	boundIntersections.query_in_box(text->bounds, search);
-	for (uint i = 0; i < search.size(); i++) {
-		TextDrawInfo* t = search.at(i);
+	boundIntersections.query_in_box(text->bounds, searchText);
+	for (uint i = 0; i < searchText.size(); i++) {
+		TextDrawInfo* t = searchText.at(i);
 		if (intersects(text, t)) {
 			return true;
 		}
 	}
 	if(text->minDistance > 0) {
 		SkRect boundsSearch = text->bounds;
-		boundsSearch.inset(-getDensityValue(rc, std::max(5.0f, text->minDistance)), -getDensityValue(rc, 15));
-		boundIntersections.query_in_box(boundsSearch, search);
+		boundsSearch.inset(-getDensityValue(rc, max(5.0f, text->minDistance)), -getDensityValue(rc, 15));
+		boundIntersections.query_in_box(boundsSearch, searchText);
 //		drawTestBox(cv, &boundsSearch, text->pathRotate, paintIcon, text->text, paintText);
-		for (uint i = 0; i < search.size(); i++) {
-			TextDrawInfo* t = search.at(i);
+		for (uint i = 0; i < searchText.size(); i++) {
+			TextDrawInfo* t = searchText.at(i);
 			if (t->minDistance > 0 && t->text == text->text && intersects(boundsSearch, text->pathRotate,  t)) {
 				return true;
 			}

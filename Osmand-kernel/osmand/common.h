@@ -4,7 +4,11 @@
 #include <jni.h>
 #include <string>
 #include <vector>
+#ifdef LINUX_BUILD
+#include <ext/hash_map>
+#else
 #include <hash_map>
+#endif
 
 #include <SkPath.h>
 #include <SkBitmap.h>

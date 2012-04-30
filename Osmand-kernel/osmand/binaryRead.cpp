@@ -8,8 +8,17 @@
 #include <fstream>
 #include <algorithm>
 #include <map>
+#include <string>
+
+#ifdef LINUX_BUILD
+#include <ext/hash_map>
+#include <ext/hash_set>
+using namespace __gnu_cxx;
+#else
 #include <hash_map>
 #include <hash_set>
+#endif
+
 #include "google/protobuf/io/zero_copy_stream_impl.h"
 #include "google/protobuf/wire_format_lite.h"
 #include "google/protobuf/wire_format_lite.cc"
@@ -127,7 +136,7 @@ struct MapIndex {
 	std::string name;
 	vector<MapRoot> levels;
 
-	std::hash_map<int, tag_value > decodingRules;
+	hash_map<int, tag_value > decodingRules;
 	// DEFINE hash
 	//std::hash_map<tag_value, int> encodingRules;
 
@@ -138,8 +147,8 @@ struct MapIndex {
 	int landEncodingType;
 	int onewayAttribute ;
 	int onewayReverseAttribute ;
-	std::hash_set< int > positiveLayers;
-	std::hash_set< int > negativeLayers;
+	hash_set< int > positiveLayers;
+	hash_set< int > negativeLayers;
 
 	MapIndex(){
 		nameEncodingType = refEncodingType = coastlineBrokenEncodingType = coastlineEncodingType = -1;
@@ -559,10 +568,10 @@ MapDataObject* readMapDataObject(io::CodedInputStream* input, MapTreeBounds* tre
 	}
 
 	// READ types
-	std::vector< coordinates > innercoordinates;
-	std::vector< tag_value > additionalTypes;
-	std::vector< tag_value > types;
-	std::hash_map< std::string, unsigned int> stringIds;
+	vector< coordinates > innercoordinates;
+	vector< tag_value > additionalTypes;
+	vector< tag_value > types;
+	hash_map< std::string, unsigned int> stringIds;
 	bool loop = true;
 	while (loop) {
 		uint32 t = input->ReadTag();
@@ -773,14 +782,14 @@ bool readMapDataBlocks(io::CodedInputStream* input, SearchQuery* req, MapTreeBou
 			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &length)));
 			int oldLimit = input->PushLimit(length);
 			if(results.size() > 0) {
-				std::vector<std::string> stringTable;
+				vector<std::string> stringTable;
 				readStringTable(input, stringTable);
 				MapDataObject* o;
 				for (std::vector<MapDataObject*>::iterator obj = results.begin(); obj != results.end(); obj++) {
 					if ((*obj)->stringIds.size() > 0) {
-						std::hash_map<std::string, unsigned int >::iterator  val=(*obj)->stringIds.begin();
+						hash_map<std::string, unsigned int >::iterator  val=(*obj)->stringIds.begin();
 						while(val != (*obj)->stringIds.end()){
-							(*obj)->objectNames[val->first]=stringTable.at(val->second);
+							(*obj)->objectNames[val->first]=stringTable[val->second];
 							val++;
 						}
 					}
@@ -869,8 +878,8 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 	q.zoom = zoom;
 
 	SearchResult* searchRes = new SearchResult();
-	std::map<std::string, BinaryMapFile*>::iterator i = openFiles.begin();
-	std::hash_set<long long> ids;
+	map<std::string, BinaryMapFile*>::iterator i = openFiles.begin();
+	hash_set<long long> ids;
 	int count = 0;
 	bool ocean = false;
 	std::vector<MapDataObject*> basemapResult;
@@ -910,7 +919,7 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 		}
 		if (!q.isCancelled()) {
 			std::vector<MapDataObject*>::iterator r = q.result.begin();
-			tempResult.reserve(q.result.size() + tempResult.size());
+			tempResult.reserve((size_t)(q.result.size() + tempResult.size()));
 			for (; r != q.result.end(); r++) {
 				// TODO skip duplicates doesn't work correctly with basemap (id < 0?)
 				if (skipDuplicates && (*r)->id > 0 && false) {

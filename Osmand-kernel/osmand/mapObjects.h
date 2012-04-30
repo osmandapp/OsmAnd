@@ -3,14 +3,20 @@
 
 #include <jni.h>
 #include <vector>
+#ifdef LINUX_BUILD
+#include <ext/hash_map>
+using namespace __gnu_cxx;
+#else
 #include <hash_map>
+using namespace std;
+#endif
 #include <string>
 
 #include "common.h"
 
-typedef std::pair<std::string, std::string> tag_value;
-typedef std::pair<int, int> int_pair;
-typedef std::vector< std::pair<int, int> > coordinates;
+typedef pair<std::string, std::string> tag_value;
+typedef pair<int, int> int_pair;
+typedef vector< pair<int, int> > coordinates;
 
 
 class MapDataObject
@@ -24,9 +30,9 @@ public:
 	coordinates points;
 	std::vector < coordinates > polygonInnerCoordinates;
 
-	std::hash_map< std::string, unsigned int> stringIds;
+	hash_map< std::string, unsigned int> stringIds;
 
-	std::hash_map< std::string, std::string > objectNames;
+	hash_map< std::string, std::string > objectNames;
 	bool area;
 	long long id;
 

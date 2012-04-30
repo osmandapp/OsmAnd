@@ -2,7 +2,11 @@
 #include <stdio.h>
 #include <map>
 #include <set>
+#ifdef LINUX_BUILD
+#include <ext/hash_map>
+#else
 #include <hash_map>
+#endif
 
 
 #include "renderRules.h"

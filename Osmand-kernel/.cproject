@@ -29,14 +29,23 @@
 							<tool id="com.android.tool.compiler.g++.1543637239" name="Android G++" superClass="com.android.tool.compiler.g++">
 								<option id="gnu.cpp.compiler.option.include.paths.757537552" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="/usr/include"/>
-									<listOptionValue builtIn="false" value="/home/victor/projects/android-ndk-r7c/sources/cxx-stl/stlport/stlport"/>
+									<listOptionValue builtIn="false" value="/usr/include/linux"/>
+									<listOptionValue builtIn="false" value="/usr/include/i386-linux-gnu"/>
+									<listOptionValue builtIn="false" value="/usr/include/c++/4.6"/>
+									<listOptionValue builtIn="false" value="/usr/include/c++/4.6/i686-linux-gnu"/>
+									<listOptionValue builtIn="false" value="/usr/include/c++/4.6/backward"/>
+									<listOptionValue builtIn="false" value="/usr/include/c++/4.6/tr1"/>
+									<listOptionValue builtIn="false" value="/usr/lib/gcc/i686-linux-gnu/4.6/include/"/>
 									<listOptionValue builtIn="false" value="/usr/lib/jvm/java-6-sun-1.6.0.26/include"/>
+									<listOptionValue builtIn="false" value="/usr/lib/jvm/java-6-sun-1.6.0.26/include/linux"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Osmand-kernel/protobuf/}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Osmand-kernel/cpufeatures_proxy}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Osmand-kernel/jpeg/jpeg_library}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Osmand-kernel/skia/skia_library}&quot;"/>
 									<listOptionValue builtIn="false" value="/home/victor/projects/android-ndk-r7c/platforms/android-3/arch-arm/usr/include"/>
-									<listOptionValue builtIn="false" value="/usr/lib/jvm/java-6-sun-1.6.0.26/include/linux"/>
+								</option>
+								<option id="gnu.cpp.compiler.option.preprocessor.def.1044210753" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="LINUX_BUILD=true"/>
 								</option>
 								<inputType id="com.android.tool.compiler.g++.input.478508689" superClass="com.android.tool.compiler.g++.input"/>
 							</tool>
@@ -58,6 +67,24 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="com.android.toolchain.gcc.128294115.1197161253" name="common.cpp" rcbsApplicability="disable" resourcePath="osmand/common.cpp" toolsToInvoke="com.android.tool.compiler.g++.1543637239.697408162">
+						<tool id="com.android.tool.compiler.g++.1543637239.697408162" name="Android G++" superClass="com.android.tool.compiler.g++.1543637239">
+							<option id="gnu.cpp.compiler.option.include.paths.816070414" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+								<listOptionValue builtIn="false" value="/usr/include/linux/"/>
+								<listOptionValue builtIn="false" value="/usr/include"/>
+								<listOptionValue builtIn="false" value="/home/victor/projects/android-ndk-r7c/sources/cxx-stl/stlport/stlport"/>
+								<listOptionValue builtIn="false" value="/usr/lib/jvm/java-6-sun-1.6.0.26/include"/>
+								<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Osmand-kernel/protobuf/}&quot;"/>
+								<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Osmand-kernel/cpufeatures_proxy}&quot;"/>
+								<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Osmand-kernel/jpeg/jpeg_library}&quot;"/>
+								<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Osmand-kernel/skia/skia_library}&quot;"/>
+								<listOptionValue builtIn="false" value="/home/victor/projects/android-ndk-r7c/platforms/android-3/arch-arm/usr/include"/>
+								<listOptionValue builtIn="false" value="/usr/lib/jvm/java-6-sun-1.6.0.26/include/linux"/>
+								<listOptionValue builtIn="false" value="/usr/lib/gcc/i686-linux-gnu/4.6.3/include"/>
+							</option>
+							<inputType id="com.android.tool.compiler.g++.input.311247229" superClass="com.android.tool.compiler.g++.input"/>
+						</tool>
+					</fileInfo>
 					<sourceEntries>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
@@ -79,16 +106,7 @@
 		<scannerConfigBuildInfo instanceId="com.android.toolchain.gcc.128294115;com.android.toolchain.gcc.128294115.2047610242;com.android.tool.compiler.g++.592567664;com.android.tool.compiler.g++.input.893364443">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile"/>
 		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="com.android.toolchain.gcc.128294115;com.android.toolchain.gcc.128294115.724578803;com.android.tool.compiler.c.1707562195;com.android.tool.compiler.c.input.1747499585">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile"/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="com.android.toolchain.gcc.128294115;com.android.toolchain.gcc.128294115.2047610242;com.android.tool.compiler.c.720867356;com.android.tool.compiler.c.input.1326523466">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile"/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="com.android.toolchain.gcc.128294115;com.android.toolchain.gcc.128294115.1436946720;com.android.tool.compiler.g++.1800289881;com.android.tool.compiler.g++.input.1857432244">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile"/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="com.android.toolchain.gcc.128294115;com.android.toolchain.gcc.128294115.1436946720;com.android.tool.compiler.c.935108432;com.android.tool.compiler.c.input.446006655">
+		<scannerConfigBuildInfo instanceId="com.android.toolchain.gcc.128294115;com.android.toolchain.gcc.128294115.1197161253;com.android.tool.compiler.g++.1543637239.697408162;com.android.tool.compiler.g++.input.311247229">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile"/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="com.android.toolchain.gcc.128294115;com.android.toolchain.gcc.128294115.2018451624;com.android.tool.compiler.g++.1543637239;com.android.tool.compiler.g++.input.478508689">
@@ -97,7 +115,19 @@
 		<scannerConfigBuildInfo instanceId="com.android.toolchain.gcc.128294115;com.android.toolchain.gcc.128294115.724578803;com.android.tool.compiler.g++.1036636492;com.android.tool.compiler.g++.input.325212280">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile"/>
 		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.android.toolchain.gcc.128294115;com.android.toolchain.gcc.128294115.2047610242;com.android.tool.compiler.c.720867356;com.android.tool.compiler.c.input.1326523466">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.android.toolchain.gcc.128294115;com.android.toolchain.gcc.128294115.1436946720;com.android.tool.compiler.c.935108432;com.android.tool.compiler.c.input.446006655">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile"/>
+		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="com.android.toolchain.gcc.128294115;com.android.toolchain.gcc.128294115.2018451624;com.android.tool.compiler.c.1571517563;com.android.tool.compiler.c.input.1589735828">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.android.toolchain.gcc.128294115;com.android.toolchain.gcc.128294115.724578803;com.android.tool.compiler.c.1707562195;com.android.tool.compiler.c.input.1747499585">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.android.toolchain.gcc.128294115;com.android.toolchain.gcc.128294115.1436946720;com.android.tool.compiler.g++.1800289881;com.android.tool.compiler.g++.input.1857432244">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile"/>
 		</scannerConfigBuildInfo>
 	</storageModule>
