@@ -15,7 +15,8 @@
 // GNU General Public License for more details.
 //
 ///////////////////////////////////////////////////////////////////
-
+#ifndef _UTF_8_CPP
+#define _UTF_8_CPP
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -113,3 +114,4 @@ int nextWord(uint8_t* s) {
   }
   return -1;
 }
+#endif

@@ -2,12 +2,6 @@
 #include <set>
 #include <algorithm>
 #include <math.h>
-#ifdef LINUX_BUILD
-#include <ext/hash_map>
-using namespace __gnu_cxx;
-#else
-#include <hash_map>
-#endif
 #include <time.h>
 #include <jni.h>
 #include "SkTypes.h"
@@ -367,10 +361,14 @@ inline float sqr(float a){
 	return a*a;
 }
 
+inline float absFloat(float a){
+	return a > 0 ? a : -a;
+}
+
 bool intersects(SkRect tRect, float tRot, TextDrawInfo* s)
 {
 	float sRot = s->pathRotate;
-	if (abs(tRot) < M_PI / 15 && abs(sRot) < M_PI / 15) {
+	if (absFloat(tRot) < M_PI / 15 && absFloat(sRot) < M_PI / 15) {
 		return SkRect::Intersects(tRect, s->bounds);
 	}
 	float dist = sqrt(sqr(tRect.centerX() - s->bounds.centerX()) + sqr(tRect.centerY() - s->bounds.centerY()));
@@ -380,7 +378,7 @@ bool intersects(SkRect tRect, float tRot, TextDrawInfo* s)
 	SkRect sRect = s->bounds;
 
 	// difference close to 90/270 degrees
-	if(abs(cos(tRot-sRot)) < 0.3 ){
+	if(absFloat(cos(tRot-sRot)) < 0.3 ){
 		// rotate one rectangle to 90 degrees
 		tRot += M_PI_2;
 		tRect = SkRect::MakeXYWH(tRect.centerX() -  tRect.height() / 2, tRect.centerY() -  tRect.width() / 2,
@@ -388,7 +386,7 @@ bool intersects(SkRect tRect, float tRot, TextDrawInfo* s)
 	}
 
 	// determine difference close to 180/0 degrees
-	if(abs(sin(tRot-sRot)) < 0.3){
+	if(absFloat(sin(tRot-sRot)) < 0.3){
 		// rotate t box
 		// (calculate offset for t center suppose we rotate around s center)
 		float diff = atan2(tRect.centerY() - sRect.centerY(), tRect.centerX() - sRect.centerX());

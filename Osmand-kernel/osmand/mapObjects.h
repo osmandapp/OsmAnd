@@ -3,14 +3,8 @@
 
 #include <jni.h>
 #include <vector>
-#ifdef LINUX_BUILD
-#include <ext/hash_map>
-using namespace __gnu_cxx;
-#else
-#include <hash_map>
-using namespace std;
-#endif
 #include <string>
+#include <limits.h>
 
 #include "common.h"
 
@@ -30,9 +24,9 @@ public:
 	coordinates points;
 	std::vector < coordinates > polygonInnerCoordinates;
 
-	hash_map< std::string, unsigned int> stringIds;
+	HMAP::hash_map< std::string, unsigned int> stringIds;
 
-	hash_map< std::string, std::string > objectNames;
+	HMAP::hash_map< std::string, std::string > objectNames;
 	bool area;
 	long long id;
 

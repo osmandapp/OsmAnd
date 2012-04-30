@@ -3,7 +3,7 @@
 
 #include <jni.h>
 #include <string>
-#include <mapObjects.h>
+#include "mapObjects.h"
 
 class RenderingRuleProperty
 {
@@ -52,11 +52,11 @@ class RenderingRulesStorage
 private:
 	const static int SHIFT_TAG_VAL = 16;
 	const static int SIZE_STATES = 7;
-	std::hash_map<std::string, int> dictionaryMap;
+	HMAP::hash_map<std::string, int> dictionaryMap;
 	std::vector<std::string> dictionary;
-	std::hash_map<int, RenderingRule>* tagValueGlobalRules;
+	HMAP::hash_map<int, RenderingRule>* tagValueGlobalRules;
 	std::vector<RenderingRuleProperty> properties;
-	std::hash_map<std::string,  RenderingRuleProperty*> propertyMap;
+	HMAP::hash_map<std::string,  RenderingRuleProperty*> propertyMap;
 
 
 	RenderingRule* createRenderingRule(JNIEnv* env, jobject rRule);
@@ -75,7 +75,7 @@ public:
     const static int ORDER_RULES = 5;
 	RenderingRulesStorage(JNIEnv* env, jobject storage) :
 			javaStorage(storage) {
-		tagValueGlobalRules = new std::hash_map<int, RenderingRule >[SIZE_STATES];
+		tagValueGlobalRules = new HMAP::hash_map<int, RenderingRule >[SIZE_STATES];
 		initDictionary(env);
 		initProperties(env);
 		initRules(env);

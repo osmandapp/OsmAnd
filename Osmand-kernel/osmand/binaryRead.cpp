@@ -10,15 +10,6 @@
 #include <map>
 #include <string>
 
-#ifdef LINUX_BUILD
-#include <ext/hash_map>
-#include <ext/hash_set>
-using namespace __gnu_cxx;
-#else
-#include <hash_map>
-#include <hash_set>
-#endif
-
 #include "google/protobuf/io/zero_copy_stream_impl.h"
 #include "google/protobuf/wire_format_lite.h"
 #include "google/protobuf/wire_format_lite.cc"
@@ -29,6 +20,7 @@ using namespace __gnu_cxx;
 #include "multipolygons.h"
 //#include "multipolygons.h"
 #include "proto/osmand_odb.pb.h"
+using namespace std;
 
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
 using namespace google::protobuf;
@@ -127,18 +119,18 @@ struct MapTreeBounds {
 struct MapRoot: MapTreeBounds {
 	int minZoom ;
 	int maxZoom ;
-	vector<MapTreeBounds> bounds;
+	std::vector<MapTreeBounds> bounds;
 };
 
 struct MapIndex {
 	uint32 length;
 	int filePointer;
 	std::string name;
-	vector<MapRoot> levels;
+	std::vector<MapRoot> levels;
 
-	hash_map<int, tag_value > decodingRules;
+	HMAP::hash_map<int, tag_value > decodingRules;
 	// DEFINE hash
-	//std::hash_map<tag_value, int> encodingRules;
+	//HMAP::hash_map<tag_value, int> encodingRules;
 
 	int nameEncodingType;
 	int refEncodingType;
@@ -147,8 +139,8 @@ struct MapIndex {
 	int landEncodingType;
 	int onewayAttribute ;
 	int onewayReverseAttribute ;
-	hash_set< int > positiveLayers;
-	hash_set< int > negativeLayers;
+	HMAP::hash_set< int > positiveLayers;
+	HMAP::hash_set< int > negativeLayers;
 
 	MapIndex(){
 		nameEncodingType = refEncodingType = coastlineBrokenEncodingType = coastlineEncodingType = -1;
@@ -197,7 +189,7 @@ struct MapIndex {
 
 struct BinaryMapFile {
 	std::string inputName;
-	vector<MapIndex> mapIndexes;
+	std::vector<MapIndex> mapIndexes;
 	FILE* f;
 	bool basemap;
 
@@ -551,10 +543,10 @@ MapDataObject* readMapDataObject(io::CodedInputStream* input, MapTreeBounds* tre
 			contains = true;
 		}
 		if (!contains) {
-			minX = min(minX, x);
-			maxX = max(maxX, x);
-			minY = min(minY, y);
-			maxY = max(maxY, y);
+			minX = std::min(minX, x);
+			maxX = std::max(maxX, x);
+			minY = std::min(minY, y);
+			maxY = std::max(maxY, y);
 		}
 	}
 	if (!contains) {
@@ -568,10 +560,10 @@ MapDataObject* readMapDataObject(io::CodedInputStream* input, MapTreeBounds* tre
 	}
 
 	// READ types
-	vector< coordinates > innercoordinates;
-	vector< tag_value > additionalTypes;
-	vector< tag_value > types;
-	hash_map< std::string, unsigned int> stringIds;
+	std::vector< coordinates > innercoordinates;
+	std::vector< tag_value > additionalTypes;
+	std::vector< tag_value > types;
+	HMAP::hash_map< std::string, unsigned int> stringIds;
 	bool loop = true;
 	while (loop) {
 		uint32 t = input->ReadTag();
@@ -782,12 +774,12 @@ bool readMapDataBlocks(io::CodedInputStream* input, SearchQuery* req, MapTreeBou
 			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &length)));
 			int oldLimit = input->PushLimit(length);
 			if(results.size() > 0) {
-				vector<std::string> stringTable;
+				std::vector<std::string> stringTable;
 				readStringTable(input, stringTable);
 				MapDataObject* o;
 				for (std::vector<MapDataObject*>::iterator obj = results.begin(); obj != results.end(); obj++) {
 					if ((*obj)->stringIds.size() > 0) {
-						hash_map<std::string, unsigned int >::iterator  val=(*obj)->stringIds.begin();
+						HMAP::hash_map<std::string, unsigned int >::iterator  val=(*obj)->stringIds.begin();
 						while(val != (*obj)->stringIds.end()){
 							(*obj)->objectNames[val->first]=stringTable[val->second];
 							val++;
@@ -839,10 +831,10 @@ void searchMapData(io::CodedInputStream* input, MapRoot* root, MapIndex* ind, Se
 		if (i->right < req->left || i->left > req->right || i->top > req->bottom || i->bottom < req->top) {
 			continue;
 		}
-		vector<MapTreeBounds> foundSubtrees;
+		std::vector<MapTreeBounds> foundSubtrees;
 		input->Seek(i->filePointer);
 		int oldLimit = input->PushLimit(i->length);
-		searchMapTreeBounds(input, i, root, req, &foundSubtrees);
+		searchMapTreeBounds(input, &(*i), root, req, &foundSubtrees);
 		input->PopLimit(oldLimit);
 
 
@@ -856,7 +848,7 @@ void searchMapData(io::CodedInputStream* input, MapRoot* root, MapIndex* ind, Se
 			input->Seek(tree->mapDataBlock);
 			WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &length);
 			int oldLimit = input->PushLimit(length);
-			readMapDataBlocks(input, req, tree, ind);
+			readMapDataBlocks(input, req, &(*tree), ind);
 			input->PopLimit(oldLimit);
 		}
 	}
@@ -879,7 +871,7 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 
 	SearchResult* searchRes = new SearchResult();
 	map<std::string, BinaryMapFile*>::iterator i = openFiles.begin();
-	hash_set<long long> ids;
+	HMAP::hash_set<long long> ids;
 	int count = 0;
 	bool ocean = false;
 	std::vector<MapDataObject*> basemapResult;
@@ -898,9 +890,9 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 			req->clearState();
 		}
 		q.result.clear();
-		for (vector<MapIndex>::iterator mapIndex = file->mapIndexes.begin(); mapIndex != file->mapIndexes.end();
+		for (std::vector<MapIndex>::iterator mapIndex = file->mapIndexes.begin(); mapIndex != file->mapIndexes.end();
 				mapIndex++) {
-			for (vector<MapRoot>::iterator mapLevel = mapIndex->levels.begin(); mapLevel != mapIndex->levels.end();
+			for (std::vector<MapRoot>::iterator mapLevel = mapIndex->levels.begin(); mapLevel != mapIndex->levels.end();
 					mapLevel++) {
 				if (q.isCancelled()) {
 					break;
@@ -909,7 +901,7 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 					if (mapLevel->right >= q.left && q.right >= mapLevel->left && mapLevel->bottom >= q.top
 							&& q.bottom >= mapLevel->top) {
 						osmand_log_print(LOG_INFO, "Search map %s", mapIndex->name.c_str());
-						searchMapData(&cis, mapLevel, mapIndex, &q);
+						searchMapData(&cis, &(*mapLevel), &(*mapIndex), &q);
 					}
 				}
 			}

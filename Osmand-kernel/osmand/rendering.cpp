@@ -7,12 +7,6 @@
 #include <vector>
 #include <algorithm>
 #include <set>
-#ifdef LINUX_BUILD
-#include <ext/hash_map>
-using namespace __gnu_cxx;
-#else
-#include <hash_map>
-#endif
 #include <time.h>
 
 #include <SkTypes.h>
@@ -52,7 +46,7 @@ void calcPoint(std::pair<int, int>  c, RenderingContext* rc)
 }
 
 
-std::hash_map<std::string, SkPathEffect*> pathEffects;
+HMAP::hash_map<std::string, SkPathEffect*> pathEffects;
 SkPathEffect* getDashEffect(std::string input)
 {
     if(pathEffects.find(input) != pathEffects.end())
@@ -190,7 +184,7 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
 
 void renderText(MapDataObject* obj, RenderingRuleSearchRequest* req, RenderingContext* rc, std::string tag,
 		std::string value, float xText, float yText, SkPath* path) {
-	hash_map<std::string, std::string>::iterator it = obj->objectNames.begin();
+	HMAP::hash_map<std::string, std::string>::iterator it = obj->objectNames.begin();
 	while (it != obj->objectNames.end()) {
 		if (it->second.length() > 0) {
 			std::string name = it->second;
@@ -507,9 +501,9 @@ void drawIconsOverCanvas(RenderingContext* rc, SkCanvas* canvas)
 	}
 }
 
-std::hash_map<int, std::vector<int> > sortObjectsByProperOrder(std::vector <MapDataObject* > mapDataObjects,
+HMAP::hash_map<int, std::vector<int> > sortObjectsByProperOrder(std::vector <MapDataObject* > mapDataObjects,
 	RenderingRuleSearchRequest* req, RenderingContext* rc) {
-	std::hash_map<int, std::vector<int> > orderMap;
+	HMAP::hash_map<int, std::vector<int> > orderMap;
 	if (req != NULL) {
 		req->clearState();
 		const int size = mapDataObjects.size();
@@ -546,9 +540,9 @@ std::hash_map<int, std::vector<int> > sortObjectsByProperOrder(std::vector <MapD
 void doRendering(std::vector <MapDataObject* > mapDataObjects, SkCanvas* canvas, SkPaint* paint,
 	RenderingRuleSearchRequest* req, RenderingContext* rc) {
 		// put in order map
-		hash_map<int, std::vector<int> > orderMap = sortObjectsByProperOrder(mapDataObjects, req, rc);
+		HMAP::hash_map<int, std::vector<int> > orderMap = sortObjectsByProperOrder(mapDataObjects, req, rc);
 		std::set<int> keys;
-		hash_map<int, std::vector<int> >::iterator it = orderMap.begin();
+		HMAP::hash_map<int, std::vector<int> >::iterator it = orderMap.begin();
 		while(it != orderMap.end())
 		{
 			keys.insert(it->first);

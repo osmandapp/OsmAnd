@@ -1,16 +1,11 @@
 #include <string>
 #include <vector>
-#include <hash_map>
 #include <SkPath.h>
 #include <SkBitmap.h>
 #include <SkImageDecoder.h>
 #include <jni.h>
 #include <time.h>
 
-// constant CLOCK_MONOTONIC is included in linux time.h
-#ifdef LINUX_BUILD
-	#include <linux/time.h>
-#endif
 
 #include "common.h"
 #include "osmand_log.h"
@@ -300,7 +295,7 @@ int ElapsedTimer::getElapsedTime()
 	return elapsedTime / 1e6;
 }
 
-std::hash_map<std::string, SkBitmap*> cachedBitmaps;
+HMAP::hash_map<std::string, SkBitmap*> cachedBitmaps;
 SkBitmap* getCachedBitmap(RenderingContext* rc, const std::string& bitmapResource)
 {
 	JNIEnv* env = rc->env;
@@ -308,7 +303,7 @@ SkBitmap* getCachedBitmap(RenderingContext* rc, const std::string& bitmapResourc
 		return NULL;
 
 	// Try to find previously cached
-	std::hash_map<std::string, SkBitmap*>::iterator itPreviouslyCachedBitmap = cachedBitmaps.find(bitmapResource);
+	HMAP::hash_map<std::string, SkBitmap*>::iterator itPreviouslyCachedBitmap = cachedBitmaps.find(bitmapResource);
 	if (itPreviouslyCachedBitmap != cachedBitmaps.end())
 		return itPreviouslyCachedBitmap->second;
 	

@@ -4,11 +4,41 @@
 #include <jni.h>
 #include <string>
 #include <vector>
-#ifdef LINUX_BUILD
-#include <ext/hash_map>
-#else
 #include <hash_map>
+#include <hash_set>
+#ifdef LINUX_BUILD
+#define HMAP __gnu_cxx
+namespace __gnu_cxx {
+  template<>
+  struct hash<std::string>
+  {
+    hash<char*> h;
+    size_t operator()(const std::string &s) const
+    {
+      return h(s.c_str());
+    };
+  };
+  template<>
+    struct hash<long long int>
+    {
+      size_t
+      operator()(long long int __x) const
+    { return __x; }
+  };
+
+  template<>
+    struct hash<unsigned long long int>
+    {
+      size_t
+      operator()(unsigned long long int __x) const
+      { return __x; }
+    };
+}
+
+#else
+#define HMAP std
 #endif
+using namespace std;
 
 #include <SkPath.h>
 #include <SkBitmap.h>
