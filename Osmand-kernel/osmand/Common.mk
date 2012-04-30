@@ -17,6 +17,7 @@ LOCAL_SRC_FILES := \
 	src/osmand_log.cpp \
 	src/common.cpp \
 	src/mapObjects.cpp \
+	src/multipolygons.cpp \
 	src/renderRules.cpp \
 	src/rendering.cpp \
 	src/binaryRead.cpp

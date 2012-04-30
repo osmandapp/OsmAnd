@@ -1,11 +1,12 @@
+LOCAL_PATH = .
 include Common.mk
 
-CPP_FILE_EXTENSION = cpp
-LIBNAME := libproto.a
+CPP_FILE_EXTENSION = c
+LIBNAME := libft2.a
 PREBUILT_DIR = ../jni-prebuilt/linux-x86/
 OBJECTS = $(LOCAL_SRC_FILES:%.$(CPP_FILE_EXTENSION)=build/obj/%.o)
-CPPFLAGS := -DGOOGLE_PROTOBUF_NO_RTTI -I.
-LDLIBS = -lpthread
+C_INCLUDES := $(addprefix -I, $(LOCAL_C_INCLUDES))
+CPPFLAGS = $(LOCAL_CFLAGS) $(C_INCLUDES)
 
 target : $(PREBUILT_DIR)/$(LIBNAME)
 

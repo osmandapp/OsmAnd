@@ -1,10 +1,15 @@
 LOCAL_PATH := .
 PREBUILT_DIR = ../jni-prebuilt/linux-x86/
 LIBNAME := osmand.lib
-include Common.mk
+RUNFILE := osmand_main
+include ./Common.mk
+
+LOCAL_SRC_FILES += src/osmand_main.cpp
 
 LDFLAGS = -Wl,--hash-style=both -shared
-LDLIBS = -L$(PREBUILT_DIR) -lskia -lproto
+LDRUNFLAGS = -Wl,--hash-style=both
+
+LDLIBS = -L$(PREBUILT_DIR) -lskia -lproto -lpthread -lrt -lft2
 CPP_FILE_EXTENSION = cpp
 OBJECTS = $(LOCAL_SRC_FILES:src/%.$(CPP_FILE_EXTENSION)=build/obj/%.o)
 
@@ -18,8 +23,16 @@ CPPFLAGS := \
 	-c -fpic -I$(JAVA_HOME)/include \
 	-DHAVING_HASH \
 	$(C_INCLUDES)
+	
+target : ../$(RUNFILE)	
+#target : $(PREBUILT_DIR)/$(LIBNAME) ../$(RUNFILE)
 
-$(PREBUILT_DIR)/$(LIBNAME) : build/$(LIBNAME) 
+
+../$(RUNFILE) : $(OBJECTS) $(PREBUILT_DIR)/libskia.a $(PREBUILT_DIR)/libproto.a
+	$(CXX) $(LDRUNFLAGS) -o ../$(RUNFILE)  $(OBJECTS) $(LDLIBS)
+	@chmod +x ../$(RUNFILE)
+
+$(PREBUILT_DIR)/$(LIBNAME) : build/$(LIBNAME)  
 	cp build/$(LIBNAME) $(PREBUILT_DIR)/$(LIBNAME)
 
 

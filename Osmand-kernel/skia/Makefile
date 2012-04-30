@@ -12,6 +12,7 @@ LOCAL_SRC_FILES += \
 	$(OSMAND_SKIA_LOC)/src/ports/SkThread_pthread.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkDebug_stdio.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_FreeType.cpp \
+	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_linux.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkOSFile_stdio.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkTime_Unix.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkMemory_malloc.cpp \
@@ -40,7 +41,7 @@ build/$(LIBNAME): $(OBJECTS)
 	ar -rf build/$(LIBNAME) $(OBJECTS)
 	cp build/$(LIBNAME) ../jni-prebuilt/linux-x86/$(LIBNAME)
 	
-build/obj/%.o :
+build/obj/%.o : %.$(CPP_FILE_EXTENSION) $(LOCAL_C_INCLUDES)
 	@mkdir -p `dirname $@`
 	$(CXX) -o $@ -c $*.$(CPP_FILE_EXTENSION) $(CPPFLAGS)
 

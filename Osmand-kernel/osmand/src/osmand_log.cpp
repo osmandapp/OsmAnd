@@ -25,7 +25,7 @@ void osmand_log_print(int type, const char* msg, ...) {
 	va_list args;
 	va_start( args, msg);
 	// TODO by type
-	printf(msg, msg, args);
+	printf(msg, args);
 	va_end(args);
 }
 
