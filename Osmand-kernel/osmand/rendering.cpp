@@ -1,5 +1,5 @@
 #include <jni.h>
-#include <android/log.h>
+#include "osmand_log.h"
 #include <android/bitmap.h>
 #include <dlfcn.h>
 
@@ -621,16 +621,16 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
         {
             module_libjnigraphics = dlopen("jnigraphics", /*RTLD_NOLOAD*/0x0004);
             if(!module_libjnigraphics) {
-                __android_log_print(ANDROID_LOG_WARN, LOG_TAG, "jnigraphics was not found in loaded libraries");
+            	osmand_log_print(LOG_WARN,  "jnigraphics was not found in loaded libraries");
                 module_libjnigraphics = dlopen("jnigraphics", RTLD_NOW);
             }
             if(!module_libjnigraphics) {
-                __android_log_print(ANDROID_LOG_WARN, LOG_TAG, "jnigraphics was not loaded in default location");
+                osmand_log_print(LOG_WARN,  "jnigraphics was not loaded in default location");
                 module_libjnigraphics = dlopen("/system/lib/libjnigraphics.so", RTLD_NOW);
             }
             if(!module_libjnigraphics)
             {
-                __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to load jnigraphics via dlopen, will going to crash");
+                osmand_log_print(LOG_ERROR,  "Failed to load jnigraphics via dlopen, will going to crash");
                 return NULL;
             }
             dl_AndroidBitmap_getInfo = (PTR_AndroidBitmap_getInfo)dlsym(module_libjnigraphics, "AndroidBitmap_getInfo");
@@ -642,28 +642,28 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
         // Gain information about bitmap
         AndroidBitmapInfo bitmapInfo;
         if(dl_AndroidBitmap_getInfo(ienv, targetBitmap, &bitmapInfo) != ANDROID_BITMAP_RESUT_SUCCESS)
-            __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to execute AndroidBitmap_getInfo");
+        	osmand_log_print(LOG_ERROR, "Failed to execute AndroidBitmap_getInfo");
 
-        __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Creating SkBitmap in native w:%d h:%d s:%d f:%d!", bitmapInfo.width, bitmapInfo.height, bitmapInfo.stride, bitmapInfo.format);
+        osmand_log_print(LOG_INFO, "Creating SkBitmap in native w:%d h:%d s:%d f:%d!", bitmapInfo.width, bitmapInfo.height, bitmapInfo.stride, bitmapInfo.format);
 
         SkBitmap* bitmap = new SkBitmap();
         if(bitmapInfo.format == ANDROID_BITMAP_FORMAT_RGBA_8888) {
             int rowBytes = bitmapInfo.stride;
-            __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Row bytes for RGBA_8888 is %d", rowBytes);
+            osmand_log_print(LOG_INFO,  "Row bytes for RGBA_8888 is %d", rowBytes);
             bitmap->setConfig(SkBitmap::kARGB_8888_Config, bitmapInfo.width, bitmapInfo.height, rowBytes);
         } else if(bitmapInfo.format == ANDROID_BITMAP_FORMAT_RGB_565) {
             int rowBytes = bitmapInfo.stride;
-            __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Row bytes for RGB_565 is %d", rowBytes);
+            osmand_log_print(LOG_INFO,  "Row bytes for RGB_565 is %d", rowBytes);
             bitmap->setConfig(SkBitmap::kRGB_565_Config, bitmapInfo.width, bitmapInfo.height, rowBytes);
         } else {
-            __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Unknown target bitmap format");
+            osmand_log_print(LOG_ERROR,  "Unknown target bitmap format");
         }
 
         void* lockedBitmapData = NULL;
         if(dl_AndroidBitmap_lockPixels(ienv, targetBitmap, &lockedBitmapData) != ANDROID_BITMAP_RESUT_SUCCESS || !lockedBitmapData) {
-            __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to execute AndroidBitmap_lockPixels");
+            osmand_log_print(LOG_ERROR,  "Failed to execute AndroidBitmap_lockPixels");
         }
-        __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Locked %d bytes at %p", bitmap->getSize(), lockedBitmapData);
+        osmand_log_print(LOG_INFO,  "Locked %d bytes at %p", bitmap->getSize(), lockedBitmapData);
 
         bitmap->setPixels(lockedBitmapData);
 
@@ -672,7 +672,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 
         SkPaint* paint = new SkPaint;
         paint->setAntiAlias(true);
-        __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Initializing rendering");
+        osmand_log_print(LOG_INFO, "Initializing rendering");
         ElapsedTimer initObjects;
         initObjects.start();
 
@@ -683,7 +683,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
         SearchResult* result = ((SearchResult*) searchResult);
         //    std::vector <BaseMapDataObject* > mapDataObjects = marshalObjects(binaryMapDataObjects);
 
-        __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Rendering image");
+        osmand_log_print(LOG_INFO,  "Rendering image");
         initObjects.pause();
 
 
@@ -695,9 +695,9 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
         rc.nativeOperations.pause();
 
         pushToJavaRenderingContext(ienv, renderingContext, &rc);
-        __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "End Rendering image");
+        osmand_log_print(LOG_INFO, "End Rendering image");
         if(dl_AndroidBitmap_unlockPixels(ienv, targetBitmap) != ANDROID_BITMAP_RESUT_SUCCESS) {
-            __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Failed to execute AndroidBitmap_unlockPixels");
+        	osmand_log_print(LOG_ERROR, "Failed to execute AndroidBitmap_unlockPixels");
         }
 
         // delete  variables
@@ -712,9 +712,9 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
         jmethodID resultClassCtorId = ienv->GetMethodID(resultClass, "<init>", "(Ljava/nio/ByteBuffer;)V");
 
 #ifdef DEBUG_NAT_OPERATIONS
-        __android_log_print(ANDROID_LOG_INFO, LOG_TAG,"Native ok (init %d, native op %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
+        osmand_log_print(LOG_INFO, LOG_TAG,"Native ok (init %d, native op %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
 #else
-        __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Native ok (init %d, rendering %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
+        osmand_log_print(LOG_INFO,  "Native ok (init %d, rendering %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
 #endif
 
         /* Construct a result object */
@@ -730,7 +730,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
     jint requestedBitmapWidth, jint requestedBitmapHeight, jint rowBytes, jboolean isTransparent, 
     jboolean useEnglishNames, jobject renderingRuleSearchRequest, jint defaultColor) {
 
-        __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Creating SkBitmap in native w:%d h:%d!", requestedBitmapWidth, requestedBitmapHeight);
+        osmand_log_print(LOG_INFO,  "Creating SkBitmap in native w:%d h:%d!", requestedBitmapWidth, requestedBitmapHeight);
 
         SkBitmap* bitmap = new SkBitmap();
         if(isTransparent == JNI_TRUE)
@@ -747,7 +747,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
             bitmapDataSize = bitmap->getSize();
             bitmapData = malloc(bitmapDataSize);
 
-            __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Allocated %d bytes at %p", bitmapDataSize, bitmapData);
+            osmand_log_print(LOG_INFO,  "Allocated %d bytes at %p", bitmapDataSize, bitmapData);
         }
 
         bitmap->setPixels(bitmapData);
@@ -757,7 +757,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 
         SkPaint* paint = new SkPaint;
         paint->setAntiAlias(true);
-        __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Initializing rendering");
+        osmand_log_print(LOG_INFO,  "Initializing rendering");
         ElapsedTimer initObjects;
         initObjects.start();
 
@@ -768,7 +768,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
         SearchResult* result = ((SearchResult*) searchResult);
         //    std::vector <BaseMapDataObject* > mapDataObjects = marshalObjects(binaryMapDataObjects);
 
-        __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Rendering image");
+        osmand_log_print(LOG_INFO,  "Rendering image");
         initObjects.pause();
 
 
@@ -780,7 +780,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
         rc.nativeOperations.pause();
 
         pushToJavaRenderingContext(ienv, renderingContext, &rc);
-        __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "End Rendering image");
+        osmand_log_print(LOG_INFO,  "End Rendering image");
 
         // delete  variables
         delete paint;
@@ -794,9 +794,9 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
         jmethodID resultClassCtorId = ienv->GetMethodID(resultClass, "<init>", "(Ljava/nio/ByteBuffer;)V");
 
 #ifdef DEBUG_NAT_OPERATIONS
-        __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Native ok (init %d, native op %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
+        osmand_log_print(LOG_INFO,  "Native ok (init %d, native op %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
 #else
-        __android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Native ok (init %d, rendering %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
+        osmand_log_print(LOG_INFO,  "Native ok (init %d, rendering %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
 #endif
 
         // Allocate ctor paramters

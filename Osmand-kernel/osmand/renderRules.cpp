@@ -2,7 +2,7 @@
 #define _OSMAND_RENDER_RULES
 
 #include <jni.h>
-#include <android/log.h>
+#include "osmand_log.h"
 #include <iterator>
 #include <string>
 #include <vector>

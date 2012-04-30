@@ -2,7 +2,8 @@
 #define _OSMAND_BINARY_READ
 
 #include <math.h>
-#include <android/log.h>
+
+#include <osmand_log.h>
 #include <stdio.h>
 #include <fstream>
 #include <algorithm>
@@ -435,11 +436,11 @@ bool initMapStructure(io::CodedInputStream* input, BinaryMapFile* file) {
 		}
 	}
 	if (version != versionConfirm) {
-		__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Corrupted file. It should be ended as it starts with version");
+		osmand_log_print(LOG_ERROR, "Corrupted file. It should be ended as it starts with version");
 		return false;
 	}
 	if (version != MAP_VERSION) {
-		__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Version of the file is not supported.");
+		osmand_log_print(LOG_ERROR, "Version of the file is not supported.");
 		return false;
 	}
 	return true;
@@ -898,7 +899,7 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 				if (mapLevel->minZoom <= zoom && mapLevel->maxZoom >= zoom) {
 					if (mapLevel->right >= q.left && q.right >= mapLevel->left && mapLevel->bottom >= q.top
 							&& q.bottom >= mapLevel->top) {
-						__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "Search map %s", mapIndex->name.c_str());
+						osmand_log_print(LOG_INFO, "Search map %s", mapIndex->name.c_str());
 						searchMapData(&cis, mapLevel, mapIndex, &q);
 					}
 				}
@@ -988,7 +989,7 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 			tempResult.insert(tempResult.end(), basemapResult.begin(), basemapResult.end());
 		}
 		searchRes->result.insert(searchRes->result.end(), tempResult.begin(), tempResult.end());
-		__android_log_print(ANDROID_LOG_INFO, LOG_TAG,
+		osmand_log_print(LOG_INFO,
 				"Search : tree - read( %d), accept( %d), objs - visit( %d), accept(%d), in result(%d) ",
 				q.numberOfReadSubtrees, q.numberOfAcceptedSubtrees, q.numberOfVisitedObjects, q.numberOfAcceptedObjects,
 				searchRes->result.size());
@@ -1025,7 +1026,7 @@ extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLi
 
 	FILE* file = fopen(inputName.c_str(), "r");
 	if (file == NULL) {
-		__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "File could not be open to read from C : %s", inputName.c_str());
+		osmand_log_print(LOG_ERROR, "File could not be open to read from C : %s", inputName.c_str());
 		return false;
 	}
 	BinaryMapFile* mapFile = new BinaryMapFile();
@@ -1035,7 +1036,7 @@ extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLi
 	io::CodedInputStream cis(&input);
 	cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
 	if (!initMapStructure(&cis, mapFile)) {
-		__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "File not initialised : %s", inputName.c_str());
+		osmand_log_print(LOG_ERROR, "File not initialised : %s", inputName.c_str());
 		delete mapFile;
 		return false;
 	}

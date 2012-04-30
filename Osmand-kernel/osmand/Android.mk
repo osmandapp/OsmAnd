@@ -33,6 +33,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 	$(OSMAND_SKIA_ABS)/src/core
 	
 LOCAL_SRC_FILES := \
+	osmand_log.cpp \
 	common.cpp \
 	mapObjects.cpp \
 	renderRules.cpp \

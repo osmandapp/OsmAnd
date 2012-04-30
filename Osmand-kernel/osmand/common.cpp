@@ -1,15 +1,14 @@
-#include <android/log.h>
-
 #include <string>
 #include <vector>
 #include <hash_map>
 #include <SkPath.h>
 #include <SkBitmap.h>
 #include <SkImageDecoder.h>
+#include <jni.h>
 
 #include "common.h"
+#include "osmand_log.h"
 
-const char* const LOG_TAG = "net.osmand:native";
 
 JavaVM* globalJVM = NULL;
 // Forward declarations
@@ -27,14 +26,14 @@ extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
 	loadJniCommon(globalJniEnv);
 	loadJniRendering(globalJniEnv);
 	loadJniRenderingRules(globalJniEnv);
-	__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "JNI_OnLoad completed");
+	osmand_log_print(LOG_INFO, "JNI_OnLoad completed");
 
 	return JNI_VERSION_1_6;
 }
 
 void throwNewException(JNIEnv* env, const char* msg)
 {
-	__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, msg);
+	osmand_log_print(LOG_ERROR, msg);
 	env->ThrowNew(env->FindClass("java/lang/Exception"), msg);
 }
 
@@ -194,9 +193,9 @@ void pullFromJavaRenderingContext(JNIEnv* env, jobject jrc, RenderingContext* rc
 
 void pushToJavaRenderingContext(JNIEnv* env, jobject jrc, RenderingContext* rc)
 {
-	env->SetIntField( jrc, jfield_RenderingContext_pointCount, rc->pointCount);
-	env->SetIntField( jrc, jfield_RenderingContext_pointInsideCount, rc->pointInsideCount);
-	env->SetIntField( jrc, jfield_RenderingContext_visible, rc->visible);
+	env->SetIntField( jrc, jfield_RenderingContext_pointCount, (jint) rc->pointCount);
+	env->SetIntField( jrc, jfield_RenderingContext_pointInsideCount, (jint)rc->pointInsideCount);
+	env->SetIntField( jrc, jfield_RenderingContext_visible, (jint)rc->visible);
 	env->SetIntField( jrc, jfield_RenderingContext_allObjects, rc->allObjects);
 	env->SetIntField( jrc, jfield_RenderingContext_textRenderingTime, rc->textRendering.getElapsedTime());
 	env->SetIntField( jrc, jfield_RenderingContext_lastRenderedKey, rc->lastRenderedKey);

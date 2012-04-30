@@ -6,7 +6,7 @@ function download {
 cd ~/wiki/src;
 download en English;
 download de German;
-download nl Netherlands;
+download nl Dutch;
 download fr French;
 download ru Russian;
 download es Spanish;

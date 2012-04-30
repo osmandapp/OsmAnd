@@ -1,5 +1,4 @@
 
-#include <android/log.h>
 #include <stdio.h>
 #include <map>
 #include <set>
@@ -104,7 +103,7 @@ void processCoastlines(std::vector<MapDataObject*>&  coastLines, int leftX, int 
 		o->points.push_back(int_pair(leftX, topY));
 		o->id = dbId;
 		o->types.push_back(tag_value("natural", "coastline"));
-		__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "!!! Isolated islands !!!");
+		osmand_log_print(LOG_ERROR,  "!!! Isolated islands !!!");
 		res.push_back(o);
 
 	}
@@ -270,7 +269,7 @@ void unifyIncompletedRings(std::vector<std::vector<int_pair> >& toProccess, std:
 		// However this situation could happen because of broken multipolygons (so it should data causes app error)
 		// that's why these exceptions could be replaced with return; statement.
 		if (!end || !st) {
-			__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "Error processing multipolygon");
+			osmand_log_print(LOG_ERROR, "Error processing multipolygon");
 			toProccess.push_back(*ir);
 		} else {
 			nonvisitedRings.insert(j);
