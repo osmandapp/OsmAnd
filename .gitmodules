@@ -1,18 +1,18 @@
-[submodule "jpeg_library"]
-	path = Osmand-kernel//jpeg/jpeg_library
+[submodule "Osmand-kernel/jpeg/jpeg_library"]
+	path = Osmand-kernel/jpeg/jpeg_library
 	url = https://android.googlesource.com/platform/external/jpeg.git
-[submodule "skia_library"]
+[submodule "Osmand-kernel/skia/skia_library"]
 	path = Osmand-kernel/skia/skia_library
 	url = https://android.googlesource.com/platform/external/skia.git
-[submodule "png_library"]
+[submodule "Osmand-kernel/png/png_library"]
 	path = Osmand-kernel/png/png_library
 	url = https://android.googlesource.com/platform/external/libpng.git
-[submodule "freetype_library"]
-	path = Osmand-kernel//freetype/freetype_library
+[submodule "Osmand-kernel/freetype/freetype_library"]
+	path = Osmand-kernel/freetype/freetype_library
 	url = https://android.googlesource.com/platform/external/freetype.git
-[submodule "expat_library"]
+[submodule "Osmand-kernel/expat/expat_library"]
 	path = Osmand-kernel/expat/expat_library
 	url = https://android.googlesource.com/platform/external/expat.git
-[submodule "gif_library"]
+[submodule "Osmand-kernel/gif/gif_library"]
 	path = Osmand-kernel/gif/gif_library
 	url = https://android.googlesource.com/platform/external/giflib.git
