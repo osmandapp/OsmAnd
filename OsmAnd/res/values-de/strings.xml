@@ -10,10 +10,10 @@
 \n\t- Offline POI-Bearbeitung 
 \n\t- Live-Tracking Option: Koordinaten periodisch an einen Web-Service schicken (Setup-Anleitung für eigenen Web-Service in den HowTo-Artikeln)
 \n\t- Anzeige des gegenwärtig aufgezeichneten Tracks möglich
-\n\t- Richtungsüberprüfung: \'Bitte wenden\' wird jetzt angezeigt und angsagt bei entgegengesetzter Bewegungsrichtung oder bei verpasster Abzweigung
+\n\t- Richtungsüberprüfung: \'Bitte wenden\' wird jetzt angezeigt und angesagt bei entgegengesetzter Bewegungsrichtung oder bei verpasster Abzweigung
 \n\t- Neue Ansage \'Strecke neu berechnet\'
-\n\t- Optische Anzeige eines innerhalb 100m bevorstehenden Abbiegevorgangs durch Farbwehsel des Richtungspfeils
-\n\t- Die Aktualität auch der deaktivierten Karten wird jetzt im Donwload-Liste in dunkelgrün und dunkelblau angezeigt
+\n\t- Optische Anzeige eines innerhalb 100m bevorstehenden Abbiegevorgangs durch Farbwechsel des Richtungspfeils
+\n\t- Die Aktualität auch der deaktivierten Karten wird jetzt im Download-Liste in dunkelgrün und dunkelblau angezeigt
 \n\t- Weitere Verbesserungen
 	</string>
 
@@ -34,7 +34,7 @@
 	<string name="live_monitoring_interval_descr">Angabe des Live-Tracking Invervalls</string>
 	<string name="live_monitoring_interval">Live-Tracking Intervall</string>
 	<string name="live_monitoring_url_descr">Spezifikation der Live-Tracking Web-Addresse mit Datenübergabe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
-	<string name="live_monitoring_url">Live-Tracking Web-Addresse</string>
+	<string name="live_monitoring_url">Live-Tracking Web-Adresse</string>
 	<string name="gpx_monitoring_disabled_warn">Bitte Positions-Logging in den Einstellungen aktivieren</string>
 	<string name="show_current_gpx_title">Aktuellen Track anzeigen</string>
 	<string name="tip_recent_changes_0_7_0_t">Änderungen in 0.7.0 :
@@ -79,7 +79,7 @@
 	<string name="routing_settings_descr">Navigationsoptionen</string>
 	<string name="global_settings">Globale Einstellungen</string>
 	<string name="index_settings">Offline-Daten</string>
-	<string name="index_settings_descr">Laden und Verwalten von Landkarten und Daten für Offlineverwendung</string>
+	<string name="index_settings_descr">Laden und Verwalten von Landkarten und Daten für Offline-Verwendung</string>
 	<string name="general_settings">Allgemein</string>
 	<string name="general_settings_descr">Konfiguration der Anzeige und anderer allgemeiner Einstellungen</string>
 	<string name="global_app_settings">Globale Einstellungen</string>
@@ -141,7 +141,7 @@
 	<string name="show_altitude_info">Höhe anzeigen</string>
 	<string name="use_transparent_map_theme_descr">Transparente Schaltflächen verwenden</string>
 	<string name="use_transparent_map_theme">Transparentes Layout</string>
-	<string name="native_library_not_supported">Native library wird auf diesem Gerät nicht unterstützt.</string>
+	<string name="native_library_not_supported">Native Library wird auf diesem Gerät nicht unterstützt.</string>
 	<string name="init_native_library">Native Library wird initialisiert …</string>
 	<string name="choose_auto_follow_route">Kartenanzeige nachführen</string>
 	<string name="choose_auto_follow_route_descr">Wartezeit für Rückkehr zur Kartennachführung</string>
@@ -193,7 +193,7 @@
 	<string name="search_select_point">Auswählen</string>
 	<string name="search_position_current_location_search">Suche Position …</string>
 	<string name="search_position_current_location_found">Position (gefunden)</string>
-	<string name="search_position_address">Addresse …</string>
+	<string name="search_position_address">Adresse …</string>
 	<string name="search_position_favorites">Favoriten …</string>
 	<string name="search_position_undefined">Undefiniert</string>
 	<string name="search_position_fixed">Festgelegt</string>
@@ -351,7 +351,7 @@
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> Klassifizierung mit Bildern</string>
     <string name="error_doing_search">Fehler in der Offlinesuche aufgetreten</string>
     <string name="search_offline_geo_error">Konnte geointent nicht verarbeiten: \'%s\'</string>
-	<string name="search_osm_offline">Adressuche mit Offline-Daten</string>
+	<string name="search_osm_offline">Adresssuche mit Offline-Daten</string>
 
 	<string name="system_locale">Systemeinstellung</string>
 	<string name="preferred_locale_descr">Anzeigesprache wählen</string>
