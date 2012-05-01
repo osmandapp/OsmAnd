@@ -907,7 +907,10 @@ extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLi
 	const char* utf = ienv->GetStringUTFChars((jstring) path, NULL);
 	std::string inputName(utf);
 	ienv->ReleaseStringUTFChars((jstring) path, utf);
+	return (initBinaryMapFile(inputName) != NULL);
+}
 
+BinaryMapFile* initBinaryMapFile(std::string inputName) {
 	GOOGLE_PROTOBUF_VERIFY_VERSION;
 	std::map<std::string, BinaryMapFile*>::iterator iterator;
 	if ((iterator = openFiles.find(inputName)) != openFiles.end()) {
@@ -918,7 +921,7 @@ extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLi
 	FILE* file = fopen(inputName.c_str(), "r");
 	if (file == NULL) {
 		osmand_log_print(LOG_ERROR, "File could not be open to read from C : %s", inputName.c_str());
-		return false;
+		return NULL;
 	}
 	BinaryMapFile* mapFile = new BinaryMapFile();
 	mapFile->f = file;
@@ -929,12 +932,12 @@ extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLi
 	if (!initMapStructure(&cis, mapFile)) {
 		osmand_log_print(LOG_ERROR, "File not initialised : %s", inputName.c_str());
 		delete mapFile;
-		return false;
+		return NULL;
 	}
 	mapFile->inputName = inputName;
 
 	openFiles.insert(std::pair<std::string, BinaryMapFile*>(inputName, mapFile));
-	return true;
+	return mapFile;
 }
 
 #undef DO_

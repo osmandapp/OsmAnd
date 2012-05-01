@@ -119,5 +119,6 @@ struct BinaryMapFile {
 extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_initBinaryMapFile(JNIEnv* ienv,
 		jobject obj, jobject path);
 
+BinaryMapFile* initBinaryMapFile(std::string inputName);
 
 #endif
