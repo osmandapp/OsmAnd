@@ -16,6 +16,9 @@
 #include "mapObjects.h"
 #include "renderRules.h"
 
+static const int MAP_VERSION = 2;
+static const int BASEMAP_ZOOM = 11;
+
 
 struct MapTreeBounds {
 	uint32 length;
@@ -107,6 +110,8 @@ struct MapIndex {
 
 struct BinaryMapFile {
 	std::string inputName;
+	uint32 version;
+	uint64 dateCreated;
 	std::vector<MapIndex> mapIndexes;
 	FILE* f;
 	bool basemap;

@@ -16,8 +16,6 @@ using google::protobuf::io::FileInputStream;
 using google::protobuf::internal::WireFormatLite;
 //using namespace google::protobuf::internal;
 
-static const int MAP_VERSION = 2;
-static const int BASEMAP_ZOOM = 11;
 
 std::map< std::string, BinaryMapFile* > openFiles;
 
@@ -287,13 +285,16 @@ bool readMapIndex(CodedInputStream* input, MapIndex* mapIndex) {
 // display google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)
 bool initMapStructure(CodedInputStream* input, BinaryMapFile* file) {
 	uint32 tag;
-	uint32 version = -1;
 	uint32 versionConfirm = -2;
 	while ((tag = input->ReadTag()) != 0) {
 		switch (WireFormatLite::GetTagFieldNumber(tag)) {
 		// required uint32 version = 1;
 		case OsmAndStructure::kVersionFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &version)));
+			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &file->version)));
+			break;
+		}
+		case OsmAndStructure::kDateCreatedFieldNumber: {
+			DO_((WireFormatLite::ReadPrimitive<uint64, WireFormatLite::TYPE_UINT64>(input, &file->dateCreated)));
 			break;
 		}
 		case OsmAndStructure::kMapIndexFieldNumber: {
@@ -323,11 +324,11 @@ bool initMapStructure(CodedInputStream* input, BinaryMapFile* file) {
 		}
 		}
 	}
-	if (version != versionConfirm) {
+	if (file->version != versionConfirm) {
 		osmand_log_print(LOG_ERROR, "Corrupted file. It should be ended as it starts with version");
 		return false;
 	}
-	if (version != MAP_VERSION) {
+	if (file->version != MAP_VERSION) {
 		osmand_log_print(LOG_ERROR, "Version of the file is not supported.");
 		return false;
 	}

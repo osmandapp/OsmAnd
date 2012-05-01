@@ -33,7 +33,7 @@ typedef uint32_t uint32;
 typedef uint64_t uint64;
 #endif
 
-#ifdef HASH_MAP_GNU
+#ifndef ANDROID
 
 #define HMAP __gnu_cxx
 namespace __gnu_cxx {
