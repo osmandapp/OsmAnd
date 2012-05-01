@@ -195,10 +195,6 @@
 	střelku kompasu na zobrazení mapy.
 	</string>
 
-	<string name="switch_to_raster_map_to_see">
-	Vektorové mapy toto místo neobsahují. 
-	\n\t\n\tMapová data můžete stáhnout v \'Nastavení\' -> \'Offline data\', nebo přepnout na online mapy v \'Nastavení\' -> \'Mapa\'.
-	</string>
   	<string name="binary_map_download_success">Stahování dokončeno. Na vektorové mapy můžete přepnout v menu (Vrstvy -> Mapa-> Vektorové mapy)</string>
 
 	<string name="tip_day_night_mode">Denní/noční režim</string>
