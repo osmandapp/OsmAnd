@@ -20,8 +20,8 @@ CPPFLAGS := \
 	-DSK_ALLOW_STATIC_GLOBAL_INITIALIZERS=0 \
 	-DSK_RELEASE \
 	-DGR_RELEASE=1 \
-	-c -fpic -I$(JAVA_HOME)/include \
-	-DHAVING_HASH \
+	-c -Fpic -I$(JAVA_HOME)/include \
+	-DHASH_MAP_GNU \
 	$(C_INCLUDES)
 	
 target : ../$(RUNFILE)	

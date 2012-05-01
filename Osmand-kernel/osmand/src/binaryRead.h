@@ -3,14 +3,18 @@
 
 #include <stdio.h>
 #include <fstream>
-#include <algorithm>
 #include <map>
 #include <string>
 #include <stdint.h>
-#include "google/protobuf/wire_format_lite.h"
-#include "common.h"
-#include "mapObjects.h"
 
+
+#include "mapObjects.h"
+#include "multipolygons.h"
+#include "common.h"
+
+
+#include "mapObjects.h"
+#include "renderRules.h"
 
 
 struct MapTreeBounds {
@@ -116,8 +120,18 @@ struct BinaryMapFile {
 	}
 };
 
+struct SearchQuery;
+struct SearchResult;
+
 extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_initBinaryMapFile(JNIEnv* ienv,
 		jobject obj, jobject path);
+
+extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_searchNativeObjectsForRendering(JNIEnv* ienv,
+		jobject obj, jint sleft, jint sright, jint stop, jint sbottom, jint zoom,
+		jobject renderingRuleSearchRequest, bool skipDuplicates, jobject objInterrupted, jstring msgNothingFound);
+
+SearchResult* searchObjectsForRendering(SearchQuery* q, RenderingRuleSearchRequest* req,
+		bool skipDuplicates, std::string msgNothingFound);
 
 BinaryMapFile* initBinaryMapFile(std::string inputName);
 
