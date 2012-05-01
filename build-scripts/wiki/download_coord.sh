@@ -5,6 +5,7 @@ function download_coord {
   wget --quiet --output-document="$1"wiki.sql.gz http://toolserver.org/~dispenser/dumps/coord_"$1"wiki.sql.gz
   echo "Start import $1";
   gunzip -c "$1"wiki.sql.gz | mysql wiki;
+  echo "create index name_$1_ind USING HASH ON coord_$1wiki (gc_name);" | mysql wiki
 }
 
 cd ~/wiki/src_sql;
