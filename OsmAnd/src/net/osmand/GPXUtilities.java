@@ -237,10 +237,6 @@ public class GPXUtilities {
 		}
 	}
 
-	public static class Extensions extends GPXExtensions {
-		
-	}
-	
 	public static class GPXFile extends GPXExtensions {
 		public String author;
 		public List<Track> tracks = new ArrayList<Track>();
@@ -294,9 +290,6 @@ public class GPXUtilities {
 				WptPt wptPt = parseWptAttributes(parser);
 				points.add(wptPt);
 				parserState.push(wptPt);
-			} else if (tag.equals("extensions")) {
-				Extensions ext = new Extensions();
-				parserState.push(ext);
 			}
 		}
 		
