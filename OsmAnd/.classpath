@@ -5,9 +5,5 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="lib" path="libs/bsh-core-2.0b4.jar"/>
-	<classpathentry kind="lib" path="libs/bzip2-20090327.jar"/>
-	<classpathentry kind="lib" path="libs/junidecode-0.1.jar"/>
-	<classpathentry kind="lib" path="libs/tuprolog.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
