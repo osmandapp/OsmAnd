@@ -205,4 +205,14 @@ float getDensityValue(RenderingContext* rc, float val);
 
 SkBitmap* getCachedBitmap(RenderingContext* rc, const std::string& bitmapResource);
 
+
+int get31TileNumberX(double longitude);
+int get31TileNumberY( double latitude);
+
+double getLongitudeFromTile(float zoom, double x) ;
+double getLatitudeFromTile(float zoom, double y);
+
+double get31LongitudeX(int tileX);
+double get31LatitudeY(int tileY);
+
 #endif /*_OSMAND_COMMON_H*/

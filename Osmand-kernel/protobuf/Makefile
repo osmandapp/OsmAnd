@@ -1,6 +1,6 @@
 include Common.mk
 
-CPP_FILE_EXTENSION = cpp
+CPP_FILE_EXTENSION = cc
 LIBNAME := libproto.a
 PREBUILT_DIR = ../jni-prebuilt/linux-x86/
 OBJECTS = $(LOCAL_SRC_FILES:%.$(CPP_FILE_EXTENSION)=build/obj/%.o)

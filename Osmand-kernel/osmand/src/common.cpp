@@ -5,6 +5,7 @@
 #include <SkImageDecoder.h>
 #include <jni.h>
 #include <time.h>
+#include <math.h>
 
 
 #include "common.h"
@@ -344,4 +345,81 @@ SkBitmap* getCachedBitmap(RenderingContext* rc, const std::string& bitmapResourc
 	
 	return iconBitmap;
 }
+
+inline double getPowZoom(float zoom){
+	if(zoom >= 0 && zoom - floor(zoom) < 0.05f){
+		return 1 << ((int)zoom);
+	} else {
+		return pow(2, zoom);
+	}
+}
+
+
+double checkLongitude(double longitude) {
+	while (longitude < -180 || longitude > 180) {
+		if (longitude < 0) {
+			longitude += 360;
+		} else {
+			longitude -= 360;
+		}
+	}
+	return longitude;
+}
+
+double checkLatitude(double latitude) {
+	while (latitude < -90 || latitude > 90) {
+		if (latitude < 0) {
+			latitude += 180;
+		} else {
+			latitude -= 180;
+		}
+	}
+	if (latitude < -85.0511) {
+		return -85.0511;
+	} else if (latitude > 85.0511) {
+		return 85.0511;
+	}
+	return latitude;
+}
+
+inline double toRadians(double angdeg) {
+        return angdeg / 180 * M_PI;
+}
+
+int get31TileNumberX(double longitude){
+	longitude = checkLongitude(longitude);
+	long l = 1l << 31;
+	return (int)((longitude + 180)/360 * l);
+}
+
+int get31TileNumberY( double latitude){
+	latitude = checkLatitude(latitude);
+	double eval = log(tan(toRadians(latitude)) + 1/cos(toRadians(latitude)) );
+		long l = 1l << 31;
+		if(eval > M_PI){
+			eval = M_PI;
+		}
+		return  (int) ((1 - eval / M_PI) / 2 * l);
+}
+
+double getLongitudeFromTile(float zoom, double x) {
+		return x / getPowZoom(zoom) * 360.0 - 180.0;
+}
+
+
+double getLatitudeFromTile(float zoom, double y){
+	int sign = y < 0 ? -1 : 1;
+	double result = atan(sign*sinh(M_PI * (1 - 2 * y / getPowZoom(zoom)))) * 180. / M_PI;
+	return result;
+}
+
+double get31LongitudeX(int tileX){
+	return getLongitudeFromTile(21, tileX /1024.);
+}
+
+double get31LatitudeY(int tileY){
+	return getLatitudeFromTile(21, tileY /1024.);
+
+}
+
 

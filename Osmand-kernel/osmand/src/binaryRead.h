@@ -41,11 +41,27 @@ struct MapRoot: MapTreeBounds {
 	std::vector<MapTreeBounds> bounds;
 };
 
+enum PART_INDEXES {
+	MAP_INDEX = 1,
+	POI_INDEX,
+	ADDRESS_INDEX,
+	TRANSPORT_INDEX,
+	ROUTING_INDEX,
+};
 
-struct MapIndex {
+struct BinaryPartIndex {
 	uint32 length;
 	int filePointer;
+	PART_INDEXES type;
 	std::string name;
+
+	BinaryPartIndex(PART_INDEXES tp) : type(tp) {}
+};
+
+
+
+struct MapIndex : BinaryPartIndex {
+
 	std::vector<MapRoot> levels;
 
 	HMAP::hash_map<int, tag_value > decodingRules;
@@ -62,7 +78,7 @@ struct MapIndex {
 	HMAP::hash_set< int > positiveLayers;
 	HMAP::hash_set< int > negativeLayers;
 
-	MapIndex(){
+	MapIndex() : BinaryPartIndex(MAP_INDEX) {
 		nameEncodingType = refEncodingType = coastlineBrokenEncodingType = coastlineEncodingType = -1;
 		landEncodingType = onewayAttribute = onewayReverseAttribute = -1;
 	}
@@ -113,6 +129,7 @@ struct BinaryMapFile {
 	uint32 version;
 	uint64 dateCreated;
 	std::vector<MapIndex> mapIndexes;
+	std::vector<BinaryPartIndex*> indexes;
 	FILE* f;
 	bool basemap;
 

@@ -59,19 +59,66 @@ public:
 //
 //		}
 
-void printFileInformation(const char* fileName, VerboseInfo* info) {
+
+const char* formatBounds(int left, int right, int top, int bottom){
+	float l = get31LongitudeX(left);
+	float r = get31LongitudeX(right);
+	float t = get31LatitudeY(top);
+	float b = get31LatitudeY(bottom);
+	char* ch = new char[150];
+	sprintf(ch, "(left top - right bottom) : %g, %g NE - %g, %g NE", l, t,r, b);
+	return ch;
+}
+
+
+void printFileInformation(const char* fileName, VerboseInfo* verbose) {
 	BinaryMapFile* file = initBinaryMapFile(fileName);
-	std::vector<MapIndex>::iterator it = file->mapIndexes.begin();
+	std::vector<BinaryPartIndex*>::iterator its = file->indexes.begin();
 	time_t date = file->dateCreated/1000;
 	printf("Obf file.\n Version %d, basemap %d, date %s \n", file->version,
 			file->basemap, ctime(&date));
 
-	for (; it != file->mapIndexes.end(); it++) {
-		printf("  Name : %s \n", it.base()->name.c_str());
-		std::vector<MapRoot>::iterator rt = it.base()->levels.begin();
-		for (; rt != it.base()->levels.end(); rt++) {
-			printf("  Level : %d - %d  size %d\n", rt->minZoom, rt->maxZoom, rt->length);
+	int i = 1;
+	for (; its != file->indexes.end(); its++, i++) {
+		BinaryPartIndex* it = *its;
+		std::string partname = "";
+		if (it->type == MAP_INDEX) {
+			partname = "Map";
+		} else if (it->type == TRANSPORT_INDEX) {
+			partname = "Transport";
+		} else if (it->type == POI_INDEX) {
+			partname = "Poi";
+		} else if (it->type == ADDRESS_INDEX) {
+			partname = "Address";
 		}
+		printf("%d. %s data %s - %d bytes\n", i, partname.c_str(), it->name.c_str(), it->length);
+		if (it->type == MAP_INDEX) {
+			MapIndex* m = ((MapIndex*) it);
+			int j = 1;
+			std::vector<MapRoot>::iterator rt = m->levels.begin();
+			for (; rt != m->levels.end(); rt++) {
+				const char* ch = formatBounds(rt->left, rt->right, rt->top, rt->bottom);
+				printf("\t%d.%d Map level minZoom = %d, maxZoom = %d, size = %d bytes \n\t\t Bounds %s \n",
+						i, j++, rt->minZoom, rt->maxZoom, rt->length, ch);
+			}
+			if ((verbose != NULL && verbose->vmap)) {
+				// FIXME
+				//printMapDetailInfo(verbose, index);
+			}
+		} else if (it->type == TRANSPORT_INDEX) {
+			// FIXME
+//			TransportIndex ti = ((TransportIndex) p);
+//			int sh = (31 - BinaryMapIndexReader.TRANSPORT_STOP_ZOOM);
+//			println(
+//					"\t Bounds "
+//							+ formatBounds(ti.getLeft() << sh, ti.getRight() << sh, ti.getTop() << sh,
+//									ti.getBottom() << sh));
+		} else if (it->type == POI_INDEX && (verbose != NULL && verbose->vpoi)) {
+			//printPOIDetailInfo(verbose, index, (PoiRegion) p);
+		} else if (it->type == ADDRESS_INDEX && (verbose != NULL && verbose->vaddress)) {
+//			printAddressDetailedInfo(verbose, index);
+		}
+
 	}
 }
 

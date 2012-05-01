@@ -306,6 +306,7 @@ bool initMapStructure(CodedInputStream* input, BinaryMapFile* file) {
 			input->PopLimit(oldLimit);
 			input->Seek(mapIndex.filePointer + mapIndex.length);
 			file->mapIndexes.push_back(mapIndex);
+			file->indexes.push_back(new MapIndex(mapIndex));
 			file->basemap = file->basemap || mapIndex.name.find("basemap") != string::npos;
 			break;
 		}
