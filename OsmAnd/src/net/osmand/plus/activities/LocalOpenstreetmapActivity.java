@@ -107,26 +107,26 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		long packedPos = ((ExpandableListContextMenuInfo)item.getMenuInfo()).packedPosition;
 		int group = ExpandableListView.getPackedPositionGroup(packedPos);
 		int child = ExpandableListView.getPackedPositionChild(packedPos);
-	    switch (item.getItemId()) {
-	        case R.id.showpoi:
-				OsmandSettings settings = OsmandApplication.getSettings();
-				OpenstreetmapPoint info = (OpenstreetmapPoint) listAdapter.getChild(group, child);
-				settings.setMapLocationToShow(info.getLatitude(), info.getLongitude(), settings.getLastKnownMapZoom());
-				MapActivity.launchMapActivityMoveToTop(LocalOpenstreetmapActivity.this);
-	            return true;
-	        case R.id.deletepoimod:
-				info = (OpenstreetmapPoint) listAdapter.getChild(group, child);
-				listAdapter.delete(info);
-	            return true;
-	        case R.id.uploadpoimods:
-				List<OpenstreetmapPoint> list = listAdapter.data.get(group);
-				if (list != null) {
-					toUpload = list.toArray(new OpenstreetmapPoint[] {});
-					showDialog(DIALOG_PROGRESS_UPLOAD);
-					return true;
-				}
-	        default:
-	            return super.onContextItemSelected(item);
+		int itemId = item.getItemId();
+	    if(itemId == R.id.showpoi) {
+			OsmandSettings settings = OsmandApplication.getSettings();
+			OpenstreetmapPoint info = (OpenstreetmapPoint) listAdapter.getChild(group, child);
+			settings.setMapLocationToShow(info.getLatitude(), info.getLongitude(), settings.getLastKnownMapZoom());
+			MapActivity.launchMapActivityMoveToTop(LocalOpenstreetmapActivity.this);
+			return true;
+	    } else if(itemId == R.id.deletepoimod) {
+			info = (OpenstreetmapPoint) listAdapter.getChild(group, child);
+			listAdapter.delete(info);
+			return true;
+	    } else if(itemId == R.id.uploadpoimods) {
+			List<OpenstreetmapPoint> list = listAdapter.data.get(group);
+			if (list != null) {
+				toUpload = list.toArray(new OpenstreetmapPoint[] {});
+				showDialog(DIALOG_PROGRESS_UPLOAD);
+				return true;
+			}
+	    } else {
+			return super.onContextItemSelected(item);
 	    }
 	}
 	
