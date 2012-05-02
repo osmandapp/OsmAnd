@@ -115,7 +115,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 			MapActivity.launchMapActivityMoveToTop(LocalOpenstreetmapActivity.this);
 			return true;
 	    } else if(itemId == R.id.deletepoimod) {
-			info = (OpenstreetmapPoint) listAdapter.getChild(group, child);
+			OpenstreetmapPoint info = (OpenstreetmapPoint) listAdapter.getChild(group, child);
 			listAdapter.delete(info);
 			return true;
 	    } else if(itemId == R.id.uploadpoimods) {
@@ -125,9 +125,9 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 				showDialog(DIALOG_PROGRESS_UPLOAD);
 				return true;
 			}
-	    } else {
-			return super.onContextItemSelected(item);
 	    }
+		
+		return super.onContextItemSelected(item);
 	}
 	
 	@Override
