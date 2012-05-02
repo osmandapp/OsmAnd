@@ -500,12 +500,15 @@ public class GPXUtilities {
 				}
 			    res.points.clear();
 			}
+		} catch (RuntimeException e) {
+			log.error("Error reading gpx", e); //$NON-NLS-1$
+			res.warning = ctx.getString(R.string.error_reading_gpx) + " " + e.getMessage();
 		} catch (XmlPullParserException e) {
 			log.error("Error reading gpx", e); //$NON-NLS-1$
-			res.warning = ctx.getString(R.string.error_reading_gpx);
+			res.warning = ctx.getString(R.string.error_reading_gpx) + " " + e.getMessage();
 		} catch (IOException e) {
 			log.error("Error reading gpx", e); //$NON-NLS-1$
-			res.warning = ctx.getString(R.string.error_reading_gpx);
+			res.warning = ctx.getString(R.string.error_reading_gpx) + " " + e.getMessage();
 		}
 
 		return res;
