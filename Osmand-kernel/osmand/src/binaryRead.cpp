@@ -48,43 +48,6 @@ bool skipUnknownFields(CodedInputStream* input, int tag) {
 }
 
 
-struct SearchQuery {
-	RenderingRuleSearchRequest* req;
-	int left;
-	int right;
-	int top;
-	int bottom;
-	int zoom;
-	std::vector< MapDataObject*> result;
-	JNIEnv* env;
-
-	jobject o;
-	jfieldID interruptedField;
-
-	coordinates cacheCoordinates;
-	bool ocean;
-	bool land;
-
-	int numberOfVisitedObjects;
-	int numberOfAcceptedObjects;
-	int numberOfReadSubtrees;
-	int numberOfAcceptedSubtrees;
-
-	SearchQuery(int l, int r, int t, int b, RenderingRuleSearchRequest* req, jobject o,	jfieldID interruptedField, JNIEnv* env) :
-			req(req), left(l), right(r), top(t), bottom(b), o(o), interruptedField(interruptedField) {
-		numberOfAcceptedObjects = numberOfVisitedObjects = 0;
-		numberOfAcceptedSubtrees = numberOfReadSubtrees = 0;
-		ocean = land = false;
-		this->env = env;
-	}
-
-	bool isCancelled(){
-		if(env != NULL) {
-			return env->GetBooleanField(o, interruptedField);
-		}
-		return false;
-	}
-};
 
 
 bool readMapTreeBounds(CodedInputStream* input, MapTreeBounds* tree, MapRoot* root) {
@@ -337,14 +300,6 @@ bool initMapStructure(CodedInputStream* input, BinaryMapFile* file) {
 }
 
 
-extern "C" JNIEXPORT void JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_deleteSearchResult(JNIEnv* ienv,
-		jobject obj, jint searchResult) {
-	SearchResult* result = (SearchResult*) searchResult;
-	if(result != NULL){
-		deleteObjects(result->result);
-		delete result;
-	}
-}
 
 bool readStringTable(CodedInputStream* input, std::vector<std::string>& list) {
 	uint32 tag;
@@ -745,21 +700,6 @@ void searchMapData(CodedInputStream* input, MapRoot* root, MapIndex* ind, Search
 }
 
 
-JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_searchNativeObjectsForRendering(JNIEnv* ienv,
-		jobject obj, jint sleft, jint sright, jint stop, jint sbottom, jint zoom,
-		jobject renderingRuleSearchRequest, bool skipDuplicates, jobject objInterrupted, jstring msgNothingFound) {
-	RenderingRuleSearchRequest* req = initSearchRequest(ienv, renderingRuleSearchRequest);
-	jclass clObjInterrupted = ienv->GetObjectClass(objInterrupted);
-	jfieldID interruptedField = getFid(ienv, clObjInterrupted, "interrupted", "Z");
-	ienv->DeleteLocalRef(clObjInterrupted);
-
-	SearchQuery q(sleft, sright, stop, sbottom, req, objInterrupted, interruptedField, ienv);
-	q.zoom = zoom;
-
-	SearchResult* res = searchObjectsForRendering(&q, req, skipDuplicates, getString(ienv, msgNothingFound));
-	delete req;
-	return (jint) res;
-}
 
 
 SearchResult* searchObjectsForRendering(SearchQuery* q, RenderingRuleSearchRequest* req,
@@ -893,25 +833,12 @@ SearchResult* searchObjectsForRendering(SearchQuery* q, RenderingRuleSearchReque
 	return searchRes;
 }
 
-extern "C" JNIEXPORT void JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_closeBinaryMapFile(JNIEnv* ienv,
-		jobject path) {
-	const char* utf = ienv->GetStringUTFChars((jstring) path, NULL);
-	std::string inputName(utf);
-	ienv->ReleaseStringUTFChars((jstring) path, utf);
+bool closeBinaryMapFile(std::string inputName) {
 	std::map<std::string, BinaryMapFile*>::iterator iterator;
 	if ((iterator = openFiles.find(inputName)) != openFiles.end()) {
 		delete iterator->second;
 		openFiles.erase(iterator);
 	}
-}
-
-extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_initBinaryMapFile(JNIEnv* ienv,
-		jobject obj, jobject path) {
-	// Verify that the version of the library that we linked against is
-	const char* utf = ienv->GetStringUTFChars((jstring) path, NULL);
-	std::string inputName(utf);
-	ienv->ReleaseStringUTFChars((jstring) path, utf);
-	return (initBinaryMapFile(inputName) != NULL);
 }
 
 BinaryMapFile* initBinaryMapFile(std::string inputName) {

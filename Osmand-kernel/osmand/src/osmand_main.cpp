@@ -1,4 +1,5 @@
 #include "binaryRead.h"
+#include "rendering.h"
 #include <stdio.h>
 #include <time.h>
 

@@ -142,19 +142,64 @@ struct BinaryMapFile {
 	}
 };
 
-struct SearchQuery;
+struct ResultPublisher {
+	std::vector< MapDataObject*> result;
+
+	bool publish(MapDataObject* r) {
+		result.push_back(r);
+		return true;
+	}
+	bool isCancelled() {
+		return false;
+	}
+};
+
+struct SearchQuery {
+	RenderingRuleSearchRequest* req;
+	int left;
+	int right;
+	int top;
+	int bottom;
+	int zoom;
+	std::vector< MapDataObject*> result;
+	JNIEnv* env;
+
+	jobject o;
+	jfieldID interruptedField;
+
+	coordinates cacheCoordinates;
+	bool ocean;
+	bool land;
+
+	int numberOfVisitedObjects;
+	int numberOfAcceptedObjects;
+	int numberOfReadSubtrees;
+	int numberOfAcceptedSubtrees;
+
+	SearchQuery(int l, int r, int t, int b, RenderingRuleSearchRequest* req, jobject o,	jfieldID interruptedField, JNIEnv* env) :
+			req(req), left(l), right(r), top(t), bottom(b), o(o), interruptedField(interruptedField) {
+		numberOfAcceptedObjects = numberOfVisitedObjects = 0;
+		numberOfAcceptedSubtrees = numberOfReadSubtrees = 0;
+		ocean = land = false;
+		this->env = env;
+	}
+
+	bool isCancelled(){
+		if(env != NULL) {
+			return env->GetBooleanField(o, interruptedField);
+		}
+		return false;
+	}
+};
+
+
 struct SearchResult;
-
-extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_initBinaryMapFile(JNIEnv* ienv,
-		jobject obj, jobject path);
-
-extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_searchNativeObjectsForRendering(JNIEnv* ienv,
-		jobject obj, jint sleft, jint sright, jint stop, jint sbottom, jint zoom,
-		jobject renderingRuleSearchRequest, bool skipDuplicates, jobject objInterrupted, jstring msgNothingFound);
 
 SearchResult* searchObjectsForRendering(SearchQuery* q, RenderingRuleSearchRequest* req,
 		bool skipDuplicates, std::string msgNothingFound);
 
 BinaryMapFile* initBinaryMapFile(std::string inputName);
+
+bool closeBinaryMapFile(std::string inputName);
 
 #endif
