@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<assets>
+	<!-- Supported modes: -->
+	<!-- 	overwriteOnlyIfExists - Overwrites file only if file with same name exists on target system -->
+	<!-- 	alwaysCopyOnFirstInstall - Copies file on first install, always -->
+	<!-- 	alwaysOverwriteOrCopy - Copies or overwrites file unconditionally -->
+	<!-- 	copyOnlyIfDoesNotExist - Copies file only this file is not present on target system -->
+	<asset source="voice/cs-tts/ttsconfig.p" destination="voice/cs-tts/ttsconfig.p" mode="overwriteOnlyIfExists|alwaysCopyOnFirstInstall" /> 
+	<asset source="voice/de-tts/ttsconfig.p" destination="voice/de-tts/ttsconfig.p" mode="overwriteOnlyIfExists|alwaysCopyOnFirstInstall" /> 
+	<asset source="voice/en-miles-tts/ttsconfig.p" destination="voice/en-miles-tts/ttsconfig.p" mode="overwriteOnlyIfExists|alwaysCopyOnFirstInstall" /> 
+	<asset source="voice/en-tts/ttsconfig.p" destination="voice/en-tts/ttsconfig.p" mode="overwriteOnlyIfExists|alwaysCopyOnFirstInstall" /> 
+	<asset source="voice/es-tts/ttsconfig.p" destination="voice/es-tts/ttsconfig.p" mode="overwriteOnlyIfExists|alwaysCopyOnFirstInstall" /> 
+	<asset source="voice/fi-tts/ttsconfig.p" destination="voice/fi-tts/ttsconfig.p" mode="overwriteOnlyIfExists|alwaysCopyOnFirstInstall" /> 
+	<asset source="voice/fr-tts/ttsconfig.p" destination="voice/fr-tts/ttsconfig.p" mode="overwriteOnlyIfExists|alwaysCopyOnFirstInstall" /> 
+	<asset source="voice/hu-tts/ttsconfig.p" destination="voice/hu-tts/ttsconfig.p" mode="overwriteOnlyIfExists|alwaysCopyOnFirstInstall" /> 
+	<asset source="voice/it-tts/ttsconfig.p" destination="voice/it-tts/ttsconfig.p" mode="overwriteOnlyIfExists|alwaysCopyOnFirstInstall" /> 
+	<asset source="voice/nl-tts/ttsconfig.p" destination="voice/nl-tts/ttsconfig.p" mode="overwriteOnlyIfExists|alwaysCopyOnFirstInstall" /> 
+	<asset source="voice/pl-tts/ttsconfig.p" destination="voice/pl-tts/ttsconfig.p" mode="overwriteOnlyIfExists|alwaysCopyOnFirstInstall" /> 
+	<asset source="voice/ru-tts/ttsconfig.p" destination="voice/ru-tts/ttsconfig.p" mode="overwriteOnlyIfExists|alwaysCopyOnFirstInstall" /> 
+	<asset source="voice/sk-tts/ttsconfig.p" destination="voice/sk-tts/ttsconfig.p" mode="overwriteOnlyIfExists|alwaysCopyOnFirstInstall" /> 
+	<asset source="voice/sv-tts/ttsconfig.p" destination="voice/sv-tts/ttsconfig.p" mode="overwriteOnlyIfExists|alwaysCopyOnFirstInstall" /> 
+	<asset source="voice/zh-tts/ttsconfig.p" destination="voice/zh-tts/ttsconfig.p" mode="overwriteOnlyIfExists|alwaysCopyOnFirstInstall" /> 
+</assets>
