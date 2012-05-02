@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -472,7 +473,7 @@ public class GPXUtilities {
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
 		try {
 			XmlPullParser parser = Xml.newPullParser();
-			parser.setInput(f, "UTF-8"); //$NON-NLS-1$
+			parser.setInput(new InputStreamReader(f)); //$NON-NLS-1$
 			Stack<GPXExtensions> parserState = new Stack<GPXExtensions>();
 			parserState.push(res);
 			int tok;
@@ -484,7 +485,7 @@ public class GPXUtilities {
 					GPXExtensions parse = parserState.peek();
 					String tag = parser.getName();
 					if (!parse.parseEnd(tag,parserState)) {
-						log.error("Bad ending tag: " + tag + " for element " + parse.getClass());
+						log.debug("Bad ending tag: " + tag + " for element " + parse.getClass());
 					}
 				}
 			}
