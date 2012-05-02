@@ -154,6 +154,14 @@
         </if>
         <if>
             <condition>
+                <isset property="build.version.code" />
+            </condition>
+            <then>
+                <replaceregexp file="AndroidManifest.xml" match='android:versionCode="(.*)"' replace='android:versionCode="${build.version.code}"' byline="true" />
+            </then>
+        </if>
+        <if>
+            <condition>
                 <isset property="build.version" />
             </condition>
             <then>
