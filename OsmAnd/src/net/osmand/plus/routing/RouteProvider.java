@@ -564,7 +564,7 @@ public class RouteProvider {
 			uri.append("&v=motorcar"); //$NON-NLS-1$
 		}
 		uri.append("&fast=").append(fast ? "1" : "0").append("&layer=mapnik"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-
+		log.info("URL route " + uri);
 		URL url = new URL(uri.toString());
 		URLConnection connection = url.openConnection();
 		DocumentBuilder dom = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -684,6 +684,7 @@ public class RouteProvider {
 			}
 		}
 		uri.append("?lang=").append(Locale.getDefault().getLanguage()); //$NON-NLS-1$
+		log.info("URL route " + uri);
 		URL url = new URL(uri.toString());
 		URLConnection connection = url.openConnection();
 		GPXFile gpxFile = GPXUtilities.loadGPXFile(ctx, connection.getInputStream(), false);
@@ -821,6 +822,7 @@ public class RouteProvider {
 		//TODO if we would get instructions from the service, we could use this language setting
 		//.append("&language=").append(Locale.getDefault().getLanguage());
 		
+		log.info("URL route " + request.toString());
 		URI uri = URI.create(request.toString());
 		URL url = uri.toURL(); 
 		URLConnection connection = url.openConnection();
