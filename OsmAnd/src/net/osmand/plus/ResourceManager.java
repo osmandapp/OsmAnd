@@ -1,6 +1,5 @@
 package net.osmand.plus;
 
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -41,7 +40,9 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.render.RenderingRulesStorage;
 
 import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -382,13 +383,15 @@ public class ResourceManager {
 	
 	private List<String> checkAssets(IProgress progress) {
 		if (!Version.getFullVersion(context).equalsIgnoreCase(OsmandApplication.getSettings().PREVIOUS_INSTALLED_VERSION.get())) {
-			File file = OsmandApplication.getSettings().extendOsmandPath(APP_DIR);
-			file.mkdirs();
-			if(file.canWrite()){
+			File applicationDataDir = OsmandApplication.getSettings().extendOsmandPath(APP_DIR);
+			applicationDataDir.mkdirs();
+			if(applicationDataDir.canWrite()){
 				try {
 					progress.startTask(context.getString(R.string.installing_new_resources), -1); 
 					AssetManager assetManager = context.getAssets();
-					updateAssets(assetManager, file, progress);
+					boolean isFirstInstall = !OsmandApplication.getSettings().PREVIOUS_INSTALLED_VERSION.getPreferences().
+							contains(OsmandApplication.getSettings().PREVIOUS_INSTALLED_VERSION.getId()); 
+					unpackBundledAssets(assetManager, applicationDataDir, progress, isFirstInstall);
 					OsmandApplication.getSettings().PREVIOUS_INSTALLED_VERSION.set(Version.getFullVersion(context));
 				} catch (IOException e) {
 					log.error(e.getMessage(), e);
@@ -400,19 +403,63 @@ public class ResourceManager {
 		return Collections.emptyList();
 	}
 
-	private void updateAssets(AssetManager assetManager, File appdir, IProgress progress) throws IOException, XmlPullParserException {
-		String[] voices = assetManager.list("voice");
-		File voicePath = OsmandApplication.getSettings().extendOsmandPath(ResourceManager.VOICE_PATH);
-		for (String voice : voices) {
-			if (new File(voicePath,voice).exists()) {
-				copyAssets(assetManager, new File("voice", voice + File.separatorChar + "ttsconfig.p").getPath(), new File(voicePath, voice + File.separatorChar + "_ttsconfig.p"));
+	private final static String ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall = "alwaysCopyOnFirstInstall";
+	private final static String ASSET_COPY_MODE__overwriteOnlyIfExists = "overwriteOnlyIfExists";
+	private final static String ASSET_COPY_MODE__alwaysOverwriteOrCopy = "alwaysOverwriteOrCopy";
+	private final static String ASSET_COPY_MODE__copyOnlyIfDoesNotExist = "copyOnlyIfDoesNotExist";
+	private void unpackBundledAssets(AssetManager assetManager, File appDataDir, IProgress progress, boolean isFirstInstall) throws IOException, XmlPullParserException {
+		XmlPullParser xmlParser = XmlPullParserFactory.newInstance().newPullParser(); 
+		InputStream isBundledAssetsXml = assetManager.open("bundled_assets.xml");
+		xmlParser.setInput(isBundledAssetsXml, "UTF-8");
+		
+		int next = 0;
+		while ((next = xmlParser.next()) != XmlPullParser.END_DOCUMENT) {
+			if (next == XmlPullParser.START_TAG && xmlParser.getName().equals("asset")) {
+				final String source = xmlParser.getAttributeValue(null, "source");
+				final String destination = xmlParser.getAttributeValue(null, "destination");
+				final String combinedMode = xmlParser.getAttributeValue(null, "mode");
+				
+				final String[] modes = combinedMode.split("\\|");
+				if(modes.length == 0) {
+					log.error("Mode '" + combinedMode + "' is not valid");
+					continue;
+				}
+				String installMode = null;
+				String copyMode = null;
+				for(String mode : modes) {
+					if(ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(mode))
+						installMode = mode;
+					else if(ASSET_COPY_MODE__overwriteOnlyIfExists.equals(mode) ||
+							ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(mode) ||
+							ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(mode))
+						copyMode = mode;
+					else
+						log.error("Mode '" + mode + "' is unknown");
+				}
+				
+				final File destinationFile = new File(appDataDir, destination);
+				
+				boolean unconditional = false;
+				if(installMode != null)
+					unconditional = unconditional || (ASSET_INSTALL_MODE__alwaysCopyOnFirstInstall.equals(installMode) && isFirstInstall);
+				if(copyMode == null)
+					log.error("No copy mode was defined for " + source);
+				unconditional = unconditional || ASSET_COPY_MODE__alwaysOverwriteOrCopy.equals(copyMode);
+				
+				boolean shouldCopy = unconditional;
+				shouldCopy = shouldCopy || (ASSET_COPY_MODE__overwriteOnlyIfExists.equals(copyMode) && destinationFile.exists());
+				shouldCopy = shouldCopy || (ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode) && !destinationFile.exists());
+				
+				if(shouldCopy)
+					copyAssets(assetManager, source, destinationFile);
 			}
 		}
+		
+		isBundledAssetsXml.close();
 	}
 
 	//TODO consider some other place for this method?
-	public static void copyAssets(AssetManager assetManager, String assetName,
-			File file) throws IOException {
+	public static void copyAssets(AssetManager assetManager, String assetName, File file) throws IOException {
 		if(file.exists()){
 			Algoritms.removeAllFiles(file);
 		}
