@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="switch_to_raster_map_to_see">Keine Offline-Karten für dieses Gebiet verfügbar. Lade welche im Einstellungs-Menü (Offline-Daten) herunter oder stelle auf Online-Karten um.</string>
+	<string name="switch_to_raster_map_to_see">Keine Offline-Vektor-Karte für dieses Gebiet vorhanden.\n\t\n\tBitte Vektor-Karte laden via \'Einstellungen\' -> \'Offline-Daten\', oder Online-Karte verwenden via \'Einstellungen\' -> \'Landkarten\'.</string>
     <string name="tip_recent_changes_0_7_2_t">Änderungen in 0.7.2 :
 \n\t- Native rendering auf allen Geräten
 \n\t- Editiere POIs offline
@@ -180,7 +180,6 @@
 	\n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt
 	\n\tTipp: Um schnell zwischen der Kompassnachführung und der in den Einstellungen gewählten Option zu wechseln, einfach auf die Kompassnadel in der Kartenansicht drücken.</string>
 
-	<string name="switch_to_raster_map_to_see">Keine Offline-Vektor-Karte für diese Lokation vorhanden.\n\t\n\tBitte Vektor-Karte laden via \'Einstellungen\' -> \'Offline-Daten\', oder Online-Karte verwenden via \'Einstellungen\' -> \'Landkarten\'.</string>
 	<string name="binary_map_download_success">Download erfolgreich.\n\t\n\tFür Verwendung aktivieren: \'Einstellungen\' -> \'Landkarten\' -> \'Offline-Vektor-Karten\'.</string>
 
 	<string name="tip_day_night_mode">Tag/Nacht Modus</string>
