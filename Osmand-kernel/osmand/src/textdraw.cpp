@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <math.h>
 #include <time.h>
-#include <jni.h>
 #include "SkTypes.h"
 #include "SkTypeface.h"
 #include "SkCanvas.h"

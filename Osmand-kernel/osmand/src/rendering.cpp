@@ -1,6 +1,5 @@
-#include <jni.h>
 #include "osmand_log.h"
-#include <dlfcn.h>
+
 
 #include <math.h>
 #include <stdio.h>
@@ -27,8 +26,6 @@
 #include "textdraw.cpp"
 #include "mapObjects.h"
 
-jclass jclass_JUnidecode;
-jmethodID jmethod_JUnidecode_unidecode;
 
 void calcPoint(std::pair<int, int>  c, RenderingContext* rc)
 {
@@ -189,13 +186,7 @@ void renderText(MapDataObject* obj, RenderingRuleSearchRequest* req, RenderingCo
 	while (it != obj->objectNames.end()) {
 		if (it->second.length() > 0) {
 			std::string name = it->second;
-			if (rc->useEnglishNames) {
-				jstring n = rc->env->NewStringUTF(name.c_str());
-				name = getString(rc->env,
-						(jstring) rc->env->CallStaticObjectMethod(jclass_JUnidecode,
-								jmethod_JUnidecode_unidecode, n));
-				rc->env->DeleteLocalRef(n);
-			}
+			name =rc->getTranslatedString(name);
 			req->setInitialTagValueZoom(tag, value, rc->zoom, obj);
 			req->setIntFilter(req->props()->R_TEXT_LENGTH, name.length());
 			std::string tagName = it->first == "name" ? "" : it->first;
@@ -601,10 +592,4 @@ void doRendering(std::vector <MapDataObject* > mapDataObjects, SkCanvas* canvas,
 
 	delete paint;
 	rc->nativeOperations.pause();
-}
-
-void loadJniRendering(JNIEnv* env)
-{
-    jclass_JUnidecode = findClass(env, "net/sf/junidecode/Junidecode");
-    jmethod_JUnidecode_unidecode = env->GetStaticMethodID(jclass_JUnidecode, "unidecode", "(Ljava/lang/String;)Ljava/lang/String;");
 }

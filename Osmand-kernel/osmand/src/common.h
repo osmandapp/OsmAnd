@@ -1,7 +1,6 @@
 #ifndef _OSMAND_COMMON_H
 #define _OSMAND_COMMON_H
 
-#include <jni.h>
 #include <string>
 #include <vector>
 
@@ -83,19 +82,6 @@ using namespace std;
 struct RenderingContext;
 
 
-// JNI Helpers
-void throwNewException(JNIEnv* env, const char* msg);
-jclass findClass(JNIEnv* env, const char* className, bool mustHave = true);
-std::string getString(JNIEnv* env, jstring st);
-std::string getStringMethod(JNIEnv* env, jobject o, jmethodID fid, int i);
-std::string getStringMethod(JNIEnv* env, jobject o, jmethodID fid);
-std::string getStringField(JNIEnv* env, jobject o, jfieldID fid);
-jobject newGlobalRef(JNIEnv* env, jobject o);
-jfieldID getFid(JNIEnv* env, jclass cls, const char* fieldName, const char* sig);
-
-void pullFromJavaRenderingContext(JNIEnv* env, jobject jrc, RenderingContext* rc);
-void pushToJavaRenderingContext(JNIEnv* env, jobject jrc, RenderingContext* rc);
-
 class ElapsedTimer
 {
 private:
@@ -155,13 +141,11 @@ struct IconDrawInfo
 struct RenderingContext
 {
 	RenderingContext();
-	~RenderingContext();
-	bool interrupted();
+	virtual ~RenderingContext();
 
-	jobject javaRenderingContext;
-
-	jobject androidContext;
-	JNIEnv* env;
+	virtual bool interrupted();
+	virtual SkBitmap* getCachedBitmap(const std::string& bitmapResource);
+	virtual std::string getTranslatedString(const std::string& src);
 	bool useEnglishNames;
 
 	std::vector<TextDrawInfo*> textToDraw;
@@ -200,6 +184,7 @@ struct RenderingContext
 	// not expect any shadow
 	int shadowLevelMin;
 	int shadowLevelMax;
+
 };
 
 float getDensityValue(RenderingContext* rc, float val);

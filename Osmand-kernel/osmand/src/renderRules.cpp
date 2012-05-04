@@ -43,6 +43,16 @@ jfieldID RenderingRuleSearchRequest_fvalues;
 jfieldID RenderingRuleSearchRequest_savedValues;
 jfieldID RenderingRuleSearchRequest_savedFvalues;
 
+/// TODO Forward declaration
+jobject newGlobalRef(JNIEnv* env, jobject o);
+void throwNewException(JNIEnv* env, const char* msg);
+jfieldID getFid(JNIEnv* env, jclass cls, const char* fieldName, const char* sig);
+std::string getStringField(JNIEnv* env, jobject o, jfieldID fid);
+jclass findClass(JNIEnv* env, const char* className, bool mustHave = true);
+
+
+
+
 int RenderingRulesStorage::getPropertiesSize() {
 	return properties.size();
 }
