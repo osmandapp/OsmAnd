@@ -1,7 +1,6 @@
 #ifndef _OSMAND_RENDER_RULES_H
 #define _OSMAND_RENDER_RULES_H
 
-#include <jni.h>
 #include <string>
 #include "common.h"
 #include "mapObjects.h"
@@ -50,7 +49,8 @@ public:
 
 class RenderingRulesStorage
 {
-private:
+	// TODO make private
+public:
 	const static int SHIFT_TAG_VAL = 16;
 	const static int SIZE_STATES = 7;
 	HMAP::hash_map<std::string, int> dictionaryMap;
@@ -59,11 +59,6 @@ private:
 	std::vector<RenderingRuleProperty> properties;
 	HMAP::hash_map<std::string,  RenderingRuleProperty*> propertyMap;
 
-
-	RenderingRule* createRenderingRule(JNIEnv* env, jobject rRule);
-	void initDictionary(JNIEnv* env);
-	void initProperties(JNIEnv* env);
-	void initRules(JNIEnv* env);
 
 public:
 	// No rules for multipolygon !!!
@@ -74,19 +69,16 @@ public:
     const static int POLYGON_RULES = 3;
     const static int TEXT_RULES = 4;
     const static int ORDER_RULES = 5;
-	RenderingRulesStorage(JNIEnv* env, jobject storage) :
-			javaStorage(storage) {
+	RenderingRulesStorage(void* storage) :
+			storageId(storage) {
 		tagValueGlobalRules = new HMAP::hash_map<int, RenderingRule >[SIZE_STATES];
-		initDictionary(env);
-		initProperties(env);
-		initRules(env);
 	}
 
 	~RenderingRulesStorage() {
 		delete[] tagValueGlobalRules;
 		// proper
 	}
-	jobject javaStorage;
+	void* storageId;
 
 	int getPropertiesSize();
 
@@ -101,6 +93,7 @@ public:
 	int getDictionaryValue(std::string s);
 
 };
+
 
 class RenderingRulesStorageProperties
 {
@@ -201,8 +194,6 @@ public:
 class RenderingRuleSearchRequest
 {
 private :
-	jobject renderingRuleSearch;
-	RenderingRulesStorage* storage;
 	RenderingRulesStorageProperties* PROPS;
 	int* values;
 	float* fvalues;
@@ -212,10 +203,11 @@ private :
 	MapDataObject* obj;
 
 	bool searchInternal(int state, int tagKey, int valueKey, bool loadOutput);
-	void initObject(JNIEnv* env, jobject rrs);
 	bool visitRule(RenderingRule* rule, bool loadOutput);
 public:
-	RenderingRuleSearchRequest(JNIEnv* env, jobject rrs);
+	RenderingRulesStorage* storage;
+
+	RenderingRuleSearchRequest(RenderingRulesStorage* storage);
 
 	~RenderingRuleSearchRequest();
 
@@ -247,13 +239,11 @@ public:
 
 	void setTagValueZoomLayer(std::string tag, std::string val, int zoom, int layer, MapDataObject* obj);
 
+	void externalInitialize(int* values, float* fvalues,	int* savedValues,	float* savedFvalues);
+
 };
 
 
-RenderingRuleSearchRequest* initSearchRequest(JNIEnv* env, jobject renderingRuleSearchRequest);
 
-void loadJNIRenderingRules(JNIEnv* env);
-
-void unloadJniRenderRules(JNIEnv* env);
 
 #endif

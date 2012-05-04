@@ -1,20 +1,19 @@
 #ifndef _JAVA_WRAP_CPP
 #define _JAVA_WRAP_CPP
 
-#include "common.h"
-#include "java_wrap.h"
-#include "binaryRead.h"
-#include "rendering.h"
 #include <dlfcn.h>
 #include <SkBitmap.h>
 #include <SkCanvas.h>
 #include <SkImageDecoder.h>
+#include "java_renderRules.h"
+#include "common.h"
+#include "java_wrap.h"
+#include "binaryRead.h"
+#include "rendering.h"
 
 JavaVM* globalJVM = NULL;
-// Forward declarations
-void loadJniCommon(JNIEnv* env);
+void loadJniRenderingContext(JNIEnv* env);
 void loadJniRenderingRules(JNIEnv* env);
-
 extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
 {
 	JNIEnv* globalJniEnv;
@@ -22,7 +21,7 @@ extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
 		return JNI_ERR; /* JNI version not supported */
 	globalJVM = vm;
 
-	loadJniCommon(globalJniEnv);
+	loadJniRenderingContext(globalJniEnv);
 	loadJniRenderingRules(globalJniEnv);
 	osmand_log_print(LOG_INFO, "JNI_OnLoad completed");
 
@@ -58,6 +57,33 @@ extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLi
 }
 
 
+
+
+// Global object
+HMAP::hash_map<void*, RenderingRulesStorage*> cachedStorages;
+
+RenderingRulesStorage* getStorage(JNIEnv* env, jobject storage) {
+	if (cachedStorages.find(storage) == cachedStorages.end()) {
+		cachedStorages[storage] = createRenderingRulesStorage(env, storage);
+	}
+	return cachedStorages[storage];
+}
+extern "C" JNIEXPORT void JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_initRenderingRulesStorage(JNIEnv* ienv,
+		jobject obj, jobject storage) {
+	getStorage(ienv, storage);
+}
+
+
+RenderingRuleSearchRequest* initSearchRequest(JNIEnv* env, jobject renderingRuleSearchRequest) {
+	jobject storage = env->GetObjectField(renderingRuleSearchRequest, RenderingRuleSearchRequest_storage);
+	RenderingRulesStorage* st = getStorage(env, storage);
+	env->DeleteLocalRef(storage);
+	RenderingRuleSearchRequest* res = new RenderingRuleSearchRequest(st);
+	initRenderingRuleSearchRequest(env, res, renderingRuleSearchRequest);
+	return res;
+}
+
+
 extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_searchNativeObjectsForRendering(JNIEnv* ienv,
 		jobject obj, jint sleft, jint sright, jint stop, jint sbottom, jint zoom,
 		jobject renderingRuleSearchRequest, bool skipDuplicates, jobject objInterrupted, jstring msgNothingFound) {
@@ -75,9 +101,9 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 	return (jint) res;
 }
 
-RenderingRuleSearchRequest* initSearchRequest(JNIEnv* env, jobject renderingRuleSearchRequest) {
-	return new RenderingRuleSearchRequest(env, renderingRuleSearchRequest);
-}
+
+//////////////////////////////////////////
+///////////// JNI RENDERING //////////////
 
 #ifdef ANDROID_BUILD
 #include <android/bitmap.h>
@@ -277,6 +303,9 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 }
 
 
+///////////////////////////////////////////////
+//////////  JNI Rendering Context //////////////
+
 jclass jclass_JUnidecode;
 jmethodID jmethod_JUnidecode_unidecode;
 jclass jclass_RenderingContext = NULL;
@@ -306,7 +335,7 @@ jfieldID jfield_RenderingContext_ctx = NULL;
 jfieldID jfield_RenderingContext_textRenderingTime = NULL;
 jfieldID jfield_RenderingContext_lastRenderedKey = NULL;
 
-void loadJniCommon(JNIEnv* env)
+void loadJniRenderingContext(JNIEnv* env)
 {
 	jclass_RenderingContext = findClass(env, "net/osmand/plus/render/OsmandRenderer$RenderingContext");
 	jfield_RenderingContext_interrupted = getFid(env, jclass_RenderingContext, "interrupted", "Z");

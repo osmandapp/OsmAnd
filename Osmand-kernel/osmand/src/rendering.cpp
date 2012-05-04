@@ -274,7 +274,7 @@ void drawOneWayPaints(RenderingContext* rc, SkCanvas* cv, SkPath* p) {
 
 void drawPolyline(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
 	RenderingContext* rc, tag_value pair, int layer, int drawOnlyShadow) {
-	jint length = mObj->points.size();
+	size_t length = mObj->points.size();
 	if (length < 2) {
 		return;
 	}
@@ -338,7 +338,7 @@ void drawPolyline(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas
 
 void drawPolygon(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas* cv, SkPaint* paint,
 	RenderingContext* rc, tag_value pair) {
-	jint length = mObj->points.size();
+	size_t length = mObj->points.size();
 	if (length <= 2) {
 		return;
 	}
@@ -405,7 +405,7 @@ void drawPoint(MapDataObject* mObj,	RenderingRuleSearchRequest* req, SkCanvas* c
 	if (!bmp && !renderText)
 		return;
 	
-	jint length = mObj->points.size();
+	size_t length = mObj->points.size();
 	rc->visible++;
 	float px = 0;
 	float py = 0;

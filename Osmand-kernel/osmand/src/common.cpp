@@ -2,7 +2,6 @@
 #include <vector>
 #include <SkPath.h>
 #include <SkBitmap.h>
-#include <jni.h>
 #include <time.h>
 #include <math.h>
 

@@ -61,6 +61,14 @@ namespace __gnu_cxx {
       operator()(unsigned long long int __x) const
       { return __x; }
     };
+
+  	  template<>
+      struct hash<void*>
+      {
+        size_t
+        operator()(void* __x) const
+      { return (size_t) __x; }
+    };
 }
 
 
@@ -69,6 +77,8 @@ namespace __gnu_cxx {
 #define HMAP
 
 #endif
+
+
 
 using namespace std;
 
