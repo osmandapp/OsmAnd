@@ -34,12 +34,12 @@ void calcPoint(std::pair<int, int>  c, RenderingContext* rc)
 	float tx = c.first/ (rc->tileDivisor);
 	float ty = c.second / (rc->tileDivisor);
 
-    float dTileX = tx - rc->leftX;
-    float dTileY = ty - rc->topY;
+    float dTileX = tx - rc->getLeft();
+    float dTileY = ty - rc->getTop();
     rc->calcX = rc->cosRotateTileSize * dTileX - rc->sinRotateTileSize * dTileY;
     rc->calcY = rc->sinRotateTileSize * dTileX + rc->cosRotateTileSize * dTileY;
 
-    if (rc->calcX >= 0 && rc->calcX < rc->width && rc->calcY >= 0 && rc->calcY < rc->height)
+    if (rc->calcX >= 0 && rc->calcX < rc->getWidth()&& rc->calcY >= 0 && rc->calcY < rc->getHeight())
         rc->pointInsideCount++;
 }
 
@@ -167,7 +167,7 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
     }
 
     // do not check shadow color here
-    if (rc->shadowRenderingMode == 1 && ind == 0)
+    if (rc->getShadowRenderingMode() == 1 && ind == 0)
     {
         int shadowColor = req->getIntPropertyValue(req->props()->R_SHADOW_COLOR);
         int shadowLayer = req->getIntPropertyValue(req->props()->R_SHADOW_RADIUS);
@@ -187,7 +187,7 @@ void renderText(MapDataObject* obj, RenderingRuleSearchRequest* req, RenderingCo
 		if (it->second.length() > 0) {
 			std::string name = it->second;
 			name =rc->getTranslatedString(name);
-			req->setInitialTagValueZoom(tag, value, rc->zoom, obj);
+			req->setInitialTagValueZoom(tag, value, rc->getZoom(), obj);
 			req->setIntFilter(req->props()->R_TEXT_LENGTH, name.length());
 			std::string tagName = it->first == "name" ? "" : it->first;
 			req->setStringFilter(req->props()->R_NAME_TAG, tagName);
@@ -211,7 +211,7 @@ void renderText(MapDataObject* obj, RenderingRuleSearchRequest* req, RenderingCo
 void drawPolylineShadow(SkCanvas* cv, SkPaint* paint, RenderingContext* rc, SkPath* path, int shadowColor, int shadowRadius)
 {
     // blurred shadows
-    if (rc->shadowRenderingMode == 2 && shadowRadius > 0) {
+    if (rc->getShadowRenderingMode() == 2 && shadowRadius > 0) {
         // simply draw shadow? difference from option 3 ?
         // paint->setColor(0xffffffff);
         paint->setLooper(new SkBlurDrawLooper(shadowRadius, 0, 0, shadowColor))->unref();
@@ -219,7 +219,7 @@ void drawPolylineShadow(SkCanvas* cv, SkPaint* paint, RenderingContext* rc, SkPa
     }
 
     // option shadow = 3 with solid border
-    if (rc->shadowRenderingMode == 3 && shadowRadius > 0) {
+    if (rc->getShadowRenderingMode() == 3 && shadowRadius > 0) {
         paint->setLooper(NULL);
         paint->setStrokeWidth(paint->getStrokeWidth() + shadowRadius * 2);
         //		paint->setColor(0xffbababa);
@@ -281,14 +281,14 @@ void drawPolyline(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas
 	std::string tag = pair.first;
 	std::string value = pair.second;
 
-	req->setInitialTagValueZoom(tag, value, rc->zoom, mObj);
+	req->setInitialTagValueZoom(tag, value, rc->getZoom(), mObj);
 	req->setIntFilter(req->props()->R_LAYER, layer);
 	bool rendered = req->searchRule(2);
 	if (!rendered || !updatePaint(req, paint, 0, 0, rc)) {
 		return;
 	}
 	int oneway = 0;
-	if (rc->zoom >= 16 && pair.first == "highway") {
+	if (rc->getZoom() >= 16 && pair.first == "highway") {
 		if (mObj->containsAdditional("oneway", "yes")) {
 			oneway = 1;
 		} else if (mObj->containsAdditional("oneway", "-1")) {
@@ -345,7 +345,7 @@ void drawPolygon(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas*
 	std::string tag = pair.first;
 	std::string value = pair.second;
 
-	req->setInitialTagValueZoom(tag, value, rc->zoom, mObj);
+	req->setInitialTagValueZoom(tag, value, rc->getZoom(), mObj);
 	bool rendered = req->searchRule(3);
 
 	float xText = 0;
@@ -397,7 +397,7 @@ void drawPoint(MapDataObject* mObj,	RenderingRuleSearchRequest* req, SkCanvas* c
 	std::string tag = pair.first;
 	std::string value = pair.second;
 
-	req->setInitialTagValueZoom(tag, value, rc->zoom, mObj);
+	req->setInitialTagValueZoom(tag, value, rc->getZoom(), mObj);
 	req->searchRule(1);
 	std::string resId = req->getStringPropertyValue(req-> props()-> R_ICON);
 	SkBitmap* bmp = getCachedBitmap(rc, resId);
@@ -452,9 +452,9 @@ void drawObject(RenderingContext* rc, MapDataObject* mObj, SkCanvas* cv, Renderi
 
 void drawIconsOverCanvas(RenderingContext* rc, SkCanvas* canvas)
 {
-	int skewConstant = (int) getDensityValue(rc, 16);
-	int iconsW = rc -> width / skewConstant;
-	int iconsH = rc -> height / skewConstant;
+	int skewConstant = (int) rc->getDensityValue(16);
+	int iconsW = rc -> getWidth() / skewConstant;
+	int iconsH = rc -> getHeight() / skewConstant;
 	int len = (iconsW * iconsH) / 32;
 	int alreadyDrawnIcons[len];
 	memset(alreadyDrawnIcons, 0, sizeof(int)*len);
@@ -464,30 +464,26 @@ void drawIconsOverCanvas(RenderingContext* rc, SkCanvas* canvas)
 	for(;ji< rc->iconsToDraw.size(); ji++)
 	{
 		IconDrawInfo icon = rc->iconsToDraw.at(ji);
-		if (icon.y >= 0 && icon.y < rc -> height && icon.x >= 0 && icon.x < rc -> width &&
-			icon.bmp != NULL) {
-				int z = (((int) icon.x / skewConstant) + ((int) icon.y / skewConstant) * iconsW);
-				int i = z / 32;
-				if (i >= len) {
-					continue;
-				}
-				int ind = alreadyDrawnIcons[i];
-				int b = z % 32;
-				// check bit b if it is set
-				if (((ind >> b) & 1) == 0) {
-					alreadyDrawnIcons[i] = ind | (1 << b);
-					SkBitmap* ico = icon.bmp;
-					if(rc->highResMode) {
-						float left = icon.x - getDensityValue(rc, ico->width() / 2);
-						float top = icon.y - getDensityValue(rc, ico->height() / 2);
-						SkRect r = SkRect::MakeXYWH(left, top, getDensityValue(rc, ico->width()), getDensityValue(rc, ico->height()));
-						PROFILE_NATIVE_OPERATION(rc, canvas->drawBitmapRect(*ico, (SkIRect*) NULL, r, &p));
-					} else {
-						PROFILE_NATIVE_OPERATION(rc, canvas->drawBitmap(*ico, icon.x - ico->width() / 2, icon.y - ico->height() / 2, &p));
-					}
-				}
+		if (icon.y >= 0 && icon.y < rc->getHeight() && icon.x >= 0 && icon.x < rc->getWidth() && icon.bmp != NULL) {
+			int z = (((int) icon.x / skewConstant) + ((int) icon.y / skewConstant) * iconsW);
+			int i = z / 32;
+			if (i >= len) {
+				continue;
+			}
+			int ind = alreadyDrawnIcons[i];
+			int b = z % 32;
+			// check bit b if it is set
+			if (((ind >> b) & 1) == 0) {
+				alreadyDrawnIcons[i] = ind | (1 << b);
+				SkBitmap* ico = icon.bmp;
+				float left = icon.x - rc->getDensityValue(ico->width() / 2);
+				float top = icon.y - rc->getDensityValue(ico->height() / 2);
+				SkRect r = SkRect::MakeXYWH(left, top, rc->getDensityValue(ico->width()),
+						rc->getDensityValue(ico->height()));
+				PROFILE_NATIVE_OPERATION(rc, canvas->drawBitmapRect(*ico, (SkIRect*) NULL, r, &p));
+			}
 		}
-		if(rc->interrupted()){
+		if (rc->interrupted()) {
 			return;
 		}
 	}
@@ -508,7 +504,7 @@ HMAP::hash_map<int, std::vector<int> > sortObjectsByProperOrder(std::vector <Map
 			for (; j < sizeTypes; j++) {
 				int layer = mobj->getSimpleLayer();
 				tag_value pair = mobj->types[j];
-				req->setTagValueZoomLayer(pair.first, pair.second, rc->zoom, layer, mobj);
+				req->setTagValueZoomLayer(pair.first, pair.second, rc->getZoom(), layer, mobj);
 				req->setIntFilter(req->props()->R_AREA, mobj->area);
 				req->setIntFilter(req->props()->R_POINT, mobj->points.size() == 1);
 				req->setIntFilter(req->props()->R_CYCLE, mobj->cycle());
@@ -548,7 +544,7 @@ void doRendering(std::vector <MapDataObject* > mapDataObjects, SkCanvas* canvas,
 	bool shadowDrawn = false;
 
 	for (std::set<int>::iterator ks = keys.begin(); ks != keys.end(); ks++) {
-		if (!shadowDrawn && *ks >= rc->shadowLevelMin && *ks <= rc->shadowLevelMax && rc->shadowRenderingMode > 1) {
+		if (!shadowDrawn && *ks >= rc->shadowLevelMin && *ks <= rc->shadowLevelMax && rc->getShadowRenderingMode() > 1) {
 			for (std::set<int>::iterator ki = ks; ki != keys.end(); ki++) {
 				if (*ki > rc->shadowLevelMax || rc->interrupted()) {
 					break;

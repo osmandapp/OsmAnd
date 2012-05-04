@@ -32,8 +32,6 @@ extern "C" JNIEXPORT void JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 		jobject obj, jint searchResult) {
 	ResultPublisher* result = (ResultPublisher*) searchResult;
 	if(result != NULL){
-		// destructor will delete result
-//		deleteObjects(result->result);
 		delete result;
 	}
 }
@@ -177,7 +175,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 	RenderingRuleSearchRequest* req = initSearchRequest(ienv, renderingRuleSearchRequest);
 	JNIRenderingContext rc;
 	pullFromJavaRenderingContext(ienv, renderingContext, &rc);
-	rc.useEnglishNames = useEnglishNames;
+	rc.setUseEnglishNames(useEnglishNames);
 	ResultPublisher* result = ((ResultPublisher*) searchResult);
 	//    std::vector <BaseMapDataObject* > mapDataObjects = marshalObjects(binaryMapDataObjects);
 
@@ -263,7 +261,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
         RenderingRuleSearchRequest* req = initSearchRequest(ienv, renderingRuleSearchRequest);
         JNIRenderingContext rc;
         pullFromJavaRenderingContext(ienv, renderingContext, &rc);
-        rc.useEnglishNames = useEnglishNames;
+        rc.setUseEnglishNames(useEnglishNames);
         ResultPublisher* result = ((ResultPublisher*) searchResult);
         //    std::vector <BaseMapDataObject* > mapDataObjects = marshalObjects(binaryMapDataObjects);
 
@@ -329,8 +327,6 @@ jfieldID jfield_RenderingContext_density = NULL;
 jfieldID jfield_RenderingContext_highResMode = NULL;
 jfieldID jfield_RenderingContext_mapTextSize = NULL;
 jfieldID jfield_RenderingContext_shadowRenderingMode = NULL;
-jfieldID jfield_RenderingContext_shadowLevelMin = NULL;
-jfieldID jfield_RenderingContext_shadowLevelMax = NULL;
 jfieldID jfield_RenderingContext_ctx = NULL;
 jfieldID jfield_RenderingContext_textRenderingTime = NULL;
 jfieldID jfield_RenderingContext_lastRenderedKey = NULL;
@@ -356,8 +352,6 @@ void loadJniRenderingContext(JNIEnv* env)
 	jfield_RenderingContext_highResMode = getFid(env,  jclass_RenderingContext, "highResMode", "Z" );
 	jfield_RenderingContext_mapTextSize = getFid(env,  jclass_RenderingContext, "mapTextSize", "F" );
 	jfield_RenderingContext_shadowRenderingMode = getFid(env,  jclass_RenderingContext, "shadowRenderingMode", "I" );
-	jfield_RenderingContext_shadowLevelMin = getFid(env,  jclass_RenderingContext, "shadowLevelMin", "I" );
-	jfield_RenderingContext_shadowLevelMax = getFid(env,  jclass_RenderingContext, "shadowLevelMax", "I" );
 	jfield_RenderingContext_ctx = getFid(env,  jclass_RenderingContext, "ctx", "Landroid/content/Context;" );
 	jfield_RenderingContext_textRenderingTime = getFid(env,  jclass_RenderingContext, "textRenderingTime", "I" );
 	jfield_RenderingContext_lastRenderedKey = getFid(env,  jclass_RenderingContext, "lastRenderedKey", "I" );
@@ -374,32 +368,22 @@ void loadJniRenderingContext(JNIEnv* env)
 void pullFromJavaRenderingContext(JNIEnv* env, jobject jrc, JNIRenderingContext* rc)
 {
 	rc->env = env;
-	rc->leftX = env->GetFloatField( jrc, jfield_RenderingContext_leftX );
-	rc->topY = env->GetFloatField( jrc, jfield_RenderingContext_topY );
-	rc->width = env->GetIntField( jrc, jfield_RenderingContext_width );
-	rc->height = env->GetIntField( jrc, jfield_RenderingContext_height );
+	rc->setLocation(env->GetFloatField( jrc, jfield_RenderingContext_leftX ), env->GetFloatField( jrc, jfield_RenderingContext_topY ));
+	rc->setDimension(env->GetIntField( jrc, jfield_RenderingContext_width ), env->GetIntField( jrc, jfield_RenderingContext_height ));
 
-	rc->zoom = env->GetIntField( jrc, jfield_RenderingContext_zoom );
-	rc->rotate = env->GetFloatField( jrc, jfield_RenderingContext_rotate );
-	rc->tileDivisor = env->GetFloatField( jrc, jfield_RenderingContext_tileDivisor );
+	rc->setZoom(env->GetIntField( jrc, jfield_RenderingContext_zoom ));
+	rc->setRotate(env->GetFloatField( jrc, jfield_RenderingContext_rotate ));
 
-	rc->pointCount = env->GetIntField( jrc, jfield_RenderingContext_pointCount );
-	rc->pointInsideCount = env->GetIntField( jrc, jfield_RenderingContext_pointInsideCount );
-	rc->visible = env->GetIntField( jrc, jfield_RenderingContext_visible );
-	rc->allObjects = env->GetIntField( jrc, jfield_RenderingContext_allObjects );
-
-	rc->cosRotateTileSize = env->GetFloatField( jrc, jfield_RenderingContext_cosRotateTileSize );
-	rc->sinRotateTileSize = env->GetFloatField( jrc, jfield_RenderingContext_sinRotateTileSize );
-	rc->density = env->GetFloatField( jrc, jfield_RenderingContext_density );
-	rc->highResMode = env->GetBooleanField( jrc, jfield_RenderingContext_highResMode );
-	rc->mapTextSize = env->GetFloatField( jrc, jfield_RenderingContext_mapTextSize );
-
-	rc->shadowRenderingMode = env->GetIntField( jrc, jfield_RenderingContext_shadowRenderingMode );
-	rc->shadowLevelMin = env->GetIntField( jrc, jfield_RenderingContext_shadowLevelMin );
-	rc->shadowLevelMax = env->GetIntField( jrc, jfield_RenderingContext_shadowLevelMax );
+	float density = env->GetFloatField( jrc, jfield_RenderingContext_density );
+	bool highResMode = env->GetBooleanField( jrc, jfield_RenderingContext_highResMode );
+	float mapTextSize = env->GetFloatField( jrc, jfield_RenderingContext_mapTextSize );
+	if (highResMode && density > 1) {
+		rc->setDensityScale(density * mapTextSize);
+	} else {
+		rc->setDensityScale(mapTextSize);
+	}
+	rc->setShadowRenderingMode(env->GetIntField( jrc, jfield_RenderingContext_shadowRenderingMode ));
 	rc->androidContext = env->GetObjectField(jrc, jfield_RenderingContext_ctx );
-	rc->lastRenderedKey = 0;
-
 	rc->javaRenderingContext = jrc;
 }
 
@@ -457,7 +441,7 @@ SkBitmap* JNIRenderingContext::getCachedBitmap(const std::string& bitmapResource
 }
 
 std::string JNIRenderingContext::getTranslatedString(const std::string& name) {
-	if (this->useEnglishNames) {
+	if (this->isUsingEnglishNames()) {
 		jstring n = this->env->NewStringUTF(name.c_str());
 		std::string res = getString(this->env,
 				(jstring) this->env->CallStaticObjectMethod(jclass_JUnidecode, jmethod_JUnidecode_unidecode, n));

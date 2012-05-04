@@ -30,9 +30,6 @@ IconDrawInfo::IconDrawInfo()
 {
 }
 
-RenderingContext::RenderingContext()
-{
-}
 
 RenderingContext::~RenderingContext()
 {
@@ -47,14 +44,6 @@ bool RenderingContext::interrupted()
 }
 
 
-
-float getDensityValue(RenderingContext* rc, float val)
-{
-	if (rc->highResMode && rc->density > 1)
-		return val * rc->density * rc->mapTextSize;
-	else
-		return val * rc->mapTextSize;
-}
 
 ElapsedTimer::ElapsedTimer()
 	: elapsedTime(0)
@@ -168,9 +157,6 @@ double checkLatitude(double latitude) {
 	return latitude;
 }
 
-inline double toRadians(double angdeg) {
-        return angdeg / 180 * M_PI;
-}
 
 int get31TileNumberX(double longitude){
 	longitude = checkLongitude(longitude);

@@ -227,8 +227,8 @@ bool calculatePathToRotate(RenderingContext* rc, TextDrawInfo* p) {
 
 	float normalTextLen = 1.5 * textw;
 	for (i = 0; i < len; i++) {
-		bool inside = points[i].fX >= 0 && points[i].fX <= rc->width &&
-				points[i].fY >= 0 && points[i].fY <= rc->height;
+		bool inside = points[i].fX >= 0 && points[i].fX <= rc->getWidth() &&
+				points[i].fY >= 0 && points[i].fY <= rc->getHeight();
 		if (i > 0) {
 			float d = sqrt(
 					(points[i].fX - points[i - 1].fX) * (points[i].fX - points[i - 1].fX)
@@ -411,7 +411,7 @@ bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDraw
 		SkPaint* paintText, SkPaint* paintIcon) {
 	paintText->measureText(text->text.c_str(), text->text.length(), &text->bounds);
 	// make wider
-	text->bounds.inset(-getDensityValue(rc, 3), -getDensityValue(rc, 10));
+	text->bounds.inset(-rc->getDensityValue( 3), -rc->getDensityValue(10));
 
 	bool display = calculatePathToRotate(rc, text);
 	if (!display) {
@@ -437,7 +437,7 @@ bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDraw
 	}
 	if(text->minDistance > 0) {
 		SkRect boundsSearch = text->bounds;
-		boundsSearch.inset(-getDensityValue(rc, max(5.0f, text->minDistance)), -getDensityValue(rc, 15));
+		boundsSearch.inset(-rc->getDensityValue(max(5.0f, text->minDistance)), -rc->getDensityValue(15));
 		boundIntersections.query_in_box(boundsSearch, searchText);
 //		drawTestBox(cv, &boundsSearch, text->pathRotate, paintIcon, text->text, paintText);
 		for (uint i = 0; i < searchText.size(); i++) {
@@ -460,7 +460,7 @@ bool textOrder(TextDrawInfo* text1, TextDrawInfo* text2) {
 
 SkTypeface* serif = SkTypeface::CreateFromName("Droid Serif", SkTypeface::kNormal);
 void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv) {
-	SkRect r = SkRect::MakeLTRB(0, 0, rc->width, rc->height);
+	SkRect r = SkRect::MakeLTRB(0, 0, rc->getWidth(), rc->getHeight());
 	r.inset(-100, -100);
 	quad_tree<TextDrawInfo*> boundsIntersect(r, 4, 0.6);
 
@@ -484,7 +484,7 @@ void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv) {
 		TextDrawInfo* text = rc->textToDraw.at(i);
 		if (text->text.length() > 0) {
 			// sest text size before finding intersection (it is used there)
-			float textSize = getDensityValue(rc, text->textSize);
+			float textSize = rc->getDensityValue(text->textSize);
 			paintText.setTextSize(textSize);
 			paintText.setFakeBoldText(text->bold);
 			paintText.setColor(text->textColor);
@@ -520,15 +520,12 @@ void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv) {
 					if (text->shieldRes.length() > 0) {
 						SkBitmap* ico = getCachedBitmap(rc, text->shieldRes);
 						if (ico != NULL) {
-							if(rc->highResMode) {
-								float left = text->centerX - getDensityValue(rc, ico->width() / 2) - 0.5f;
-								float top =text->centerY - getDensityValue(rc, ico->height() / 2) - getDensityValue(rc, 4.5f);
-								SkRect r = SkRect::MakeXYWH(left, top, getDensityValue(rc, ico->width()), getDensityValue(rc, ico->height()));
-								PROFILE_NATIVE_OPERATION(rc, cv->drawBitmapRect(*ico, (SkIRect*) NULL, r, &paintIcon));
-							} else {
-								PROFILE_NATIVE_OPERATION(rc, cv->drawBitmap(*ico, text->centerX - ico->width() / 2 - 0.5f,
-									text->centerY - ico->height() / 2 - getDensityValue(rc, 4.5f), &paintIcon));
-							}
+							float left = text->centerX - rc->getDensityValue(ico->width() / 2) - 0.5f;
+							float top = text->centerY - rc->getDensityValue(ico->height() / 2)
+									- rc->getDensityValue(4.5f);
+							SkRect r = SkRect::MakeXYWH(left, top, rc->getDensityValue(ico->width()),
+									rc->getDensityValue(ico->height()));
+							PROFILE_NATIVE_OPERATION(rc, cv->drawBitmapRect(*ico, (SkIRect*) NULL, r, &paintIcon));
 						}
 					}
 					drawWrappedText(rc, cv, text, textSize, paintText);

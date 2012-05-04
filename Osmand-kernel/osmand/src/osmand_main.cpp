@@ -123,6 +123,43 @@ void printFileInformation(const char* fileName, VerboseInfo* verbose) {
 	}
 }
 
+SkColor defaultMapColor = SK_ColorLTGRAY;
+void runSimpleRendering(int zoom, int left, int right, int top, int bottom, int rowBytes) {
+	// TODO
+	initBinaryMapFile("");
+	// TODO not implemented (read storage from file)
+	RenderingRulesStorage* st = NULL; //createRenderingRulesStorage(env, storage);
+	RenderingRuleSearchRequest* req = new RenderingRuleSearchRequest(st);
+	// TODO init rule search request
+//	initRenderingRuleSearchRequest(env, res, renderingRuleSearchRequest);
+
+	SearchQuery q(left, right, top, bottom, req, new ResultPublisher());
+	q.zoom = zoom;
+	ResultPublisher* res = searchObjectsForRendering(&q, req, true, "Nothing found");
+
+	SkBitmap* bitmap = new SkBitmap();
+	bitmap->setConfig(SkBitmap::kRGB_565_Config, 800, 800, rowBytes);
+//	  size_t bitmapDataSize = bitmap->getSize();
+//	  void* bitmapData bitmapData = malloc(bitmapDataSize);
+//	       bitmap->setPixels(bitmapData);
+
+	osmand_log_print(LOG_INFO, "Initializing rendering");
+	ElapsedTimer initObjects;
+	initObjects.start();
+
+	RenderingContext rc;
+	osmand_log_print(LOG_INFO, "Rendering image");
+	initObjects.pause();
+	SkCanvas* canvas = new SkCanvas(*bitmap);
+	canvas->drawColor(defaultMapColor);
+	doRendering(res->result, canvas, req, &rc);
+
+	osmand_log_print(LOG_INFO, "End Rendering image");
+	osmand_log_print(LOG_INFO, "Native ok (init %d, rendering %d) ", initObjects.getElapsedTime(),
+			rc.nativeOperations.getElapsedTime());
+	return;
+}
+
 int main(int argc, char **argv) {
 	if (argc <= 1) {
 		printUsage("");

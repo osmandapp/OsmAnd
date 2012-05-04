@@ -91,6 +91,9 @@ using namespace std;
 
 struct RenderingContext;
 
+inline double toRadians(double angdeg) {
+	return angdeg / 180 * M_PI;
+}
 
 class ElapsedTimer
 {
@@ -150,18 +153,9 @@ struct IconDrawInfo
 
 struct RenderingContext
 {
-	RenderingContext();
-	virtual ~RenderingContext();
-
-	virtual bool interrupted();
-	virtual SkBitmap* getCachedBitmap(const std::string& bitmapResource);
-	virtual std::string getTranslatedString(const std::string& src);
+private :
+	// parameters
 	bool useEnglishNames;
-
-	std::vector<TextDrawInfo*> textToDraw;
-	std::vector<IconDrawInfo> iconsToDraw;
-	bool highResMode;
-	float mapTextSize;
 	float density;
 
 	float leftX;
@@ -171,8 +165,13 @@ struct RenderingContext
 
 	int zoom;
 	float rotate;
-	float tileDivisor;
+	// int shadowRenderingMode = 0; // no shadow (minumum CPU)
+	// int shadowRenderingMode = 1; // classic shadow (the implementaton in master)
+	// int shadowRenderingMode = 2; // blur shadow (most CPU, but still reasonable)
+	// int shadowRenderingMode = 3; solid border (CPU use like classic version or even smaller)
+	int shadowRenderingMode;
 
+public:
 	// debug purpose
 	int pointCount;
 	int pointInsideCount;
@@ -182,22 +181,102 @@ struct RenderingContext
 	class ElapsedTimer textRendering;
 	class ElapsedTimer nativeOperations;
 
-	// use to calculate points
-	float calcX;
-	float calcY;
+// because they used in 3rd party functions
+public :
+	static const int TILE_SIZE = 256;
 
+
+	// calculated
+	float tileDivisor;
 	float cosRotateTileSize;
 	float sinRotateTileSize;
 
-	int shadowRenderingMode;
+	std::vector<TextDrawInfo*> textToDraw;
+	std::vector<IconDrawInfo> iconsToDraw;
+	// use to calculate points
+	float calcX;
+	float calcY;
 
 	// not expect any shadow
 	int shadowLevelMin;
 	int shadowLevelMax;
 
-};
+public:
+	RenderingContext() : shadowLevelMax(0), shadowLevelMin(256), density(true), useEnglishNames(false){
+		setRotate(0);
+		setZoom(15);
+	}
+	virtual ~RenderingContext();
 
-float getDensityValue(RenderingContext* rc, float val);
+	virtual bool interrupted();
+	virtual SkBitmap* getCachedBitmap(const std::string& bitmapResource);
+	virtual std::string getTranslatedString(const std::string& src);
+
+	void setZoom(int z) {
+		this->zoom = z;
+		this->tileDivisor = (1 << (31 - z));
+	}
+	void setRotate(float rot) {
+		this->rotate = rot;
+		this->cosRotateTileSize = cos(toRadians(rot)) * TILE_SIZE;
+		this->sinRotateTileSize = sin(toRadians(rot)) * TILE_SIZE;
+	}
+
+	void setLocation(double leftX, double topY) {
+		this->leftX = leftX;
+		this->topY = topY;
+	}
+
+	void setDimension(int width, int height) {
+		this->width = width;
+		this->height = height;
+	}
+
+	inline int getShadowRenderingMode(){
+		return shadowRenderingMode;
+	}
+
+	inline int getWidth(){
+		return width;
+	}
+
+	inline int getHeight(){
+		return height;
+	}
+
+	inline int getZoom() {
+		return zoom;
+	}
+
+	inline float getLeft() {
+		return leftX;
+	}
+
+	inline float getTop() {
+		return topY;
+	}
+
+	void setShadowRenderingMode(int mode){
+		this->shadowRenderingMode = mode;
+	}
+
+	void setDensityScale(float val) {
+		density = val;
+	}
+
+	float getDensityValue(float val) {
+		return val * density;
+	}
+
+	void setUseEnglishNames(bool b){
+		this->useEnglishNames = b;
+	}
+
+	bool isUsingEnglishNames(){
+		return this->useEnglishNames;
+	}
+
+};
 
 SkBitmap* getCachedBitmap(RenderingContext* rc, const std::string& bitmapResource);
 
