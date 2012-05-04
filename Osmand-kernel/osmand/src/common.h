@@ -9,6 +9,7 @@
 #include <hash_set>
 #include <SkPath.h>
 #include <SkBitmap.h>
+#include "osmand_log.h"
 
 
 #ifdef _MSC_VER

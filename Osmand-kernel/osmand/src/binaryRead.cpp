@@ -518,7 +518,7 @@ bool searchMapTreeBounds(CodedInputStream* input, MapTreeBounds* current, MapTre
 	int si;
 	req->numberOfReadSubtrees++;
 	while ((tag = input->ReadTag()) != 0) {
-		if (req->isCancelled()) {
+		if (req->publisher->isCancelled()) {
 			return false;
 		}
 		if (init == 0xf) {
@@ -604,7 +604,7 @@ bool readMapDataBlocks(CodedInputStream* input, SearchQuery* req, MapTreeBounds*
 	int tag;
 	std::vector< MapDataObject* > results;
 	while ((tag = input->ReadTag()) != 0) {
-		if (req->isCancelled()) {
+		if (req->publisher->isCancelled()) {
 			return false;
 		}
 		switch (WireFormatLite::GetTagFieldNumber(tag)) {
@@ -642,8 +642,8 @@ bool readMapDataBlocks(CodedInputStream* input, SearchQuery* req, MapTreeBounds*
 			MapDataObject* mapObject = readMapDataObject(input, tree, req, root);
 			if (mapObject != NULL) {
 				mapObject->id += baseId;
+				req->publish(mapObject);
 				results.push_back(mapObject);
-				req->result.push_back(mapObject);
 			}
 			input->Skip(input->BytesUntilLimit());
 			input->PopLimit(oldLimit);
@@ -669,7 +669,7 @@ void searchMapData(CodedInputStream* input, MapRoot* root, MapIndex* ind, Search
 	// search
 	for (std::vector<MapTreeBounds>::iterator i = root->bounds.begin();
 			i != root->bounds.end(); i++) {
-		if (req->isCancelled()) {
+		if (req->publisher->isCancelled()) {
 			return;
 		}
 		if (i->right < req->left || i->left > req->right || i->top > req->bottom || i->bottom < req->top) {
@@ -686,7 +686,7 @@ void searchMapData(CodedInputStream* input, MapRoot* root, MapIndex* ind, Search
 		uint32 length;
 		for (std::vector<MapTreeBounds>::iterator tree = foundSubtrees.begin();
 					tree != foundSubtrees.end(); tree++) {
-			if (req->isCancelled()) {
+			if (req->publisher->isCancelled()) {
 				return;
 			}
 			input->Seek(tree->mapDataBlock);
@@ -702,9 +702,8 @@ void searchMapData(CodedInputStream* input, MapRoot* root, MapIndex* ind, Search
 
 
 
-SearchResult* searchObjectsForRendering(SearchQuery* q, RenderingRuleSearchRequest* req,
+ResultPublisher* searchObjectsForRendering(SearchQuery* q, RenderingRuleSearchRequest* req,
 		bool skipDuplicates, std::string msgNothingFound) {
-	SearchResult* searchRes = new SearchResult();
 	map<std::string, BinaryMapFile*>::iterator i = openFiles.begin();
 	HMAP::hash_set<long long> ids;
 	int count = 0;
@@ -714,7 +713,7 @@ SearchResult* searchObjectsForRendering(SearchQuery* q, RenderingRuleSearchReque
 	std::vector<MapDataObject*> coastLines;
 	std::vector<MapDataObject*> basemapCoastLines;
 
-	for (; i != openFiles.end() && !q->isCancelled(); i++) {
+	for (; i != openFiles.end() && !q->publisher->isCancelled(); i++) {
 		BinaryMapFile* file = i->second;
 		fseek(file->f, 0, 0);
 		FileInputStream input(fileno(file->f));
@@ -724,12 +723,12 @@ SearchResult* searchObjectsForRendering(SearchQuery* q, RenderingRuleSearchReque
 		if (req != NULL) {
 			req->clearState();
 		}
-		q->result.clear();
+		q->publisher->result.clear();
 		for (std::vector<MapIndex>::iterator mapIndex = file->mapIndexes.begin(); mapIndex != file->mapIndexes.end();
 				mapIndex++) {
 			for (std::vector<MapRoot>::iterator mapLevel = mapIndex->levels.begin(); mapLevel != mapIndex->levels.end();
 					mapLevel++) {
-				if (q->isCancelled()) {
+				if (q->publisher->isCancelled()) {
 					break;
 				}
 				if (mapLevel->minZoom <= q->zoom && mapLevel->maxZoom >= q->zoom) {
@@ -744,10 +743,10 @@ SearchResult* searchObjectsForRendering(SearchQuery* q, RenderingRuleSearchReque
 		if (q->ocean) {
 			ocean = true;
 		}
-		if (!q->isCancelled()) {
-			std::vector<MapDataObject*>::iterator r = q->result.begin();
-			tempResult.reserve((size_t)(q->result.size() + tempResult.size()));
-			for (; r != q->result.end(); r++) {
+		if (!q->publisher->isCancelled()) {
+			std::vector<MapDataObject*>::iterator r = q->publisher->result.begin();
+			tempResult.reserve((size_t)(q->publisher->result.size() + tempResult.size()));
+			for (; r != q->publisher->result.end(); r++) {
 				// TODO skip duplicates doesn't work correctly with basemap (id < 0?)
 				if (skipDuplicates && (*r)->id > 0 && false) {
 					if (ids.find((*r)->id) != ids.end()) {
@@ -774,7 +773,9 @@ SearchResult* searchObjectsForRendering(SearchQuery* q, RenderingRuleSearchReque
 			}
 		}
 	}
-	if (q->isCancelled()) {
+
+	// sort results/ analyze coastlines and publish back to publisher
+	if (q->publisher->isCancelled()) {
 		deleteObjects(coastLines);
 		deleteObjects(tempResult);
 		deleteObjects(basemapCoastLines);
@@ -824,13 +825,14 @@ SearchResult* searchObjectsForRendering(SearchQuery* q, RenderingRuleSearchReque
 		if (q->zoom <= BASEMAP_ZOOM || emptyData) {
 			tempResult.insert(tempResult.end(), basemapResult.begin(), basemapResult.end());
 		}
-		searchRes->result.insert(searchRes->result.end(), tempResult.begin(), tempResult.end());
+		q->publisher->result.clear();
+		q->publisher->publish(tempResult);
 		osmand_log_print(LOG_INFO,
 				"Search : tree - read( %d), accept( %d), objs - visit( %d), accept(%d), in result(%d) ",
 				q->numberOfReadSubtrees, q->numberOfAcceptedSubtrees, q->numberOfVisitedObjects, q->numberOfAcceptedObjects,
-				searchRes->result.size());
+				q->publisher->result.size());
 	}
-	return searchRes;
+	return q->publisher;
 }
 
 bool closeBinaryMapFile(std::string inputName) {
@@ -838,7 +840,9 @@ bool closeBinaryMapFile(std::string inputName) {
 	if ((iterator = openFiles.find(inputName)) != openFiles.end()) {
 		delete iterator->second;
 		openFiles.erase(iterator);
+		return true;
 	}
+	return false;
 }
 
 BinaryMapFile* initBinaryMapFile(std::string inputName) {

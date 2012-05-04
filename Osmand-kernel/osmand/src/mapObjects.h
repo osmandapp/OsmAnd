@@ -1,7 +1,6 @@
 #ifndef _OSMAND_MAP_OBJECTS_H
 #define _OSMAND_MAP_OBJECTS_H
 
-#include <jni.h>
 #include <vector>
 #include <string>
 #include <limits.h>
@@ -77,10 +76,6 @@ public:
 	}
 };
 
-struct SearchResult {
-	std::vector< MapDataObject* > result;
-	int count;
-};
 
 
 void deleteObjects(std::vector <MapDataObject* > & v);

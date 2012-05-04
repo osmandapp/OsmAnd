@@ -149,8 +149,15 @@ struct ResultPublisher {
 		result.push_back(r);
 		return true;
 	}
+	bool publish(std::vector<MapDataObject*> r) {
+		result.insert(result.begin(), r.begin(), r.end());
+		return true;
+	}
 	bool isCancelled() {
 		return false;
+	}
+	virtual ~ResultPublisher() {
+		deleteObjects(result);
 	}
 };
 
@@ -161,11 +168,7 @@ struct SearchQuery {
 	int top;
 	int bottom;
 	int zoom;
-	std::vector< MapDataObject*> result;
-	JNIEnv* env;
-
-	jobject o;
-	jfieldID interruptedField;
+	ResultPublisher* publisher;
 
 	coordinates cacheCoordinates;
 	bool ocean;
@@ -176,26 +179,23 @@ struct SearchQuery {
 	int numberOfReadSubtrees;
 	int numberOfAcceptedSubtrees;
 
-	SearchQuery(int l, int r, int t, int b, RenderingRuleSearchRequest* req, jobject o,	jfieldID interruptedField, JNIEnv* env) :
-			req(req), left(l), right(r), top(t), bottom(b), o(o), interruptedField(interruptedField) {
+	SearchQuery(int l, int r, int t, int b, RenderingRuleSearchRequest* req, ResultPublisher* publisher) :
+			req(req), left(l), right(r), top(t), bottom(b),publisher(publisher) {
+		if(publisher == NULL) {
+			publisher = new ResultPublisher();
+		}
 		numberOfAcceptedObjects = numberOfVisitedObjects = 0;
 		numberOfAcceptedSubtrees = numberOfReadSubtrees = 0;
 		ocean = land = false;
-		this->env = env;
 	}
 
-	bool isCancelled(){
-		if(env != NULL) {
-			return env->GetBooleanField(o, interruptedField);
-		}
-		return false;
+	bool publish(MapDataObject* obj) {
+		return publisher->publish(obj);
 	}
 };
 
 
-struct SearchResult;
-
-SearchResult* searchObjectsForRendering(SearchQuery* q, RenderingRuleSearchRequest* req,
+ResultPublisher* searchObjectsForRendering(SearchQuery* q, RenderingRuleSearchRequest* req,
 		bool skipDuplicates, std::string msgNothingFound);
 
 BinaryMapFile* initBinaryMapFile(std::string inputName);

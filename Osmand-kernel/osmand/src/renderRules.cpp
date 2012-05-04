@@ -495,9 +495,6 @@ void RenderingRuleSearchRequest::setTagValueZoomLayer(std::string tag, std::stri
 	setStringFilter(PROPS->R_VALUE, val);
 }
 
-RenderingRuleSearchRequest* initSearchRequest(JNIEnv* env, jobject renderingRuleSearchRequest) {
-	return new RenderingRuleSearchRequest(env, renderingRuleSearchRequest);
-}
 
 void loadJniRenderingRules(JNIEnv* env) {
 	RenderingRuleClass = findClass(env, "net/osmand/render/RenderingRule");
