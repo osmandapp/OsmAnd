@@ -1,5 +1,6 @@
 #include "binaryRead.h"
 #include "rendering.h"
+#include <SkImageEncoder.h>
 #include <stdio.h>
 #include <time.h>
 
@@ -13,10 +14,49 @@ void printUsage(std::string info) {
 	}
 	println("Inspector is console utility for working with binary indexes of OsmAnd.");
 	println("It allows print info about file, extract parts and merge indexes.");
-	println("\nUsage for print info : inspector [-vaddress] [-vmap] [-vpoi] [-vtransport] [-zoom=Zoom] [-bbox=LeftLon,TopLat,RightLon,BottomLan] [file]");
+	println("\nUsage for print info : inspector [-renderingOutputFile=..] [-vaddress] [-vmap] [-vpoi] [-vtransport] [-zoom=Zoom] [-bbox=LeftLon,TopLat,RightLon,BottomLan] [file]");
 	println("  Prints information about [file] binary index of OsmAnd.");
 	println("  -v.. more verbouse output (like all cities and their streets or all map objects with tags/values and coordinates)");
+	println("  -renderingOutputFile= renders for specified zoom, bbox into a file");
 }
+
+class RenderingInfo {
+public:
+	float left, right, top, bottom;
+	double lattop, latbottom, lonleft, lonright;
+	std::string tileFileName;
+	int zoom;
+	int width ;
+	int height;
+
+	RenderingInfo(int argc, char **params) {
+		lattop = 85;
+		latbottom = -85;
+		lonleft = -180;
+		lonright = 180;
+		width = 500;
+		height = 500;
+		zoom = 15;
+		for (int i = 1; i != argc; ++i) {
+			if (strcmp(params[i], "-renderingOutputFile=") == 0) {
+				tileFileName = (char*) (params[i] + strlen("-renderingOutputFile="));
+			} else {
+				int z = 0;
+				if (sscanf(params[i], "-zoom=%d", &z) != EOF) {
+					zoom = z;
+				} else if (sscanf(params[i], "-bbox=%le,%le,%le,%le", &lonleft, &lattop, &lonright, &latbottom) != EOF) {
+				}
+			}
+		}
+
+		left = getTileNumberX(zoom, lonleft);
+		top = getTileNumberY(zoom, lattop);
+		right= getTileNumberX(zoom, lonright);
+		bottom= getTileNumberY(zoom, latbottom);
+		width = (right-left)*TILE_SIZE;
+		height = (bottom-top)*TILE_SIZE;
+	}
+};
 
 class VerboseInfo {
 public:
@@ -124,21 +164,26 @@ void printFileInformation(const char* fileName, VerboseInfo* verbose) {
 }
 
 SkColor defaultMapColor = SK_ColorLTGRAY;
-void runSimpleRendering(int zoom, int left, int right, int top, int bottom, int rowBytes) {
-	// TODO
-	initBinaryMapFile("");
+void runSimpleRendering(const char* fileName, RenderingInfo* info) {
+	initBinaryMapFile(fileName);
+	if(info->width > 10000 || info->height > 10000) {
+		osmand_log_print(LOG_ERROR, "We don't rendering images more than 10000x10000");
+		return;
+	}
+
+
 	// TODO not implemented (read storage from file)
 	RenderingRulesStorage* st = NULL; //createRenderingRulesStorage(env, storage);
 	RenderingRuleSearchRequest* req = new RenderingRuleSearchRequest(st);
 	// TODO init rule search request
 //	initRenderingRuleSearchRequest(env, res, renderingRuleSearchRequest);
 
-	SearchQuery q(left, right, top, bottom, req, new ResultPublisher());
-	q.zoom = zoom;
+	SearchQuery q(floor(info->left), floor(info->right), ceil(info->top), ceil(info->bottom), req, new ResultPublisher());
+	q.zoom = info->zoom;
 	ResultPublisher* res = searchObjectsForRendering(&q, req, true, "Nothing found");
 
 	SkBitmap* bitmap = new SkBitmap();
-	bitmap->setConfig(SkBitmap::kRGB_565_Config, 800, 800, rowBytes);
+	bitmap->setConfig(SkBitmap::kRGB_565_Config, info->width, info->height);
 //	  size_t bitmapDataSize = bitmap->getSize();
 //	  void* bitmapData bitmapData = malloc(bitmapDataSize);
 //	       bitmap->setPixels(bitmapData);
@@ -148,6 +193,12 @@ void runSimpleRendering(int zoom, int left, int right, int top, int bottom, int 
 	initObjects.start();
 
 	RenderingContext rc;
+	rc.setLocation(info->left, info->top);
+	rc.setDimension(info->width, info->height);
+	rc.setZoom(info->zoom);
+	rc.setRotate(0);
+	rc.setDensityScale(1);
+	rc.setShadowRenderingMode(2);
 	osmand_log_print(LOG_INFO, "Rendering image");
 	initObjects.pause();
 	SkCanvas* canvas = new SkCanvas(*bitmap);
@@ -157,6 +208,14 @@ void runSimpleRendering(int zoom, int left, int right, int top, int bottom, int 
 	osmand_log_print(LOG_INFO, "End Rendering image");
 	osmand_log_print(LOG_INFO, "Native ok (init %d, rendering %d) ", initObjects.getElapsedTime(),
 			rc.nativeOperations.getElapsedTime());
+
+	if(!SkImageEncoder::EncodeFile(info->tileFileName.c_str(), *bitmap, SkImageEncoder::kPNG_Type, 0)) {
+		osmand_log_print(LOG_ERROR, "FAIL to save tile to %s", info->tileFileName.c_str());
+	} else {
+		osmand_log_print(LOG_INFO, "Tile successfully saved to %s", info->tileFileName.c_str());
+	}
+	delete canvas;
+	delete bitmap;
 	return;
 }
 
@@ -174,6 +233,13 @@ int main(int argc, char **argv) {
 			} else {
 				VerboseInfo* vinfo = new VerboseInfo(argc, argv);
 				printFileInformation(argv[argc -1], vinfo);
+			}
+		} else if (f[1]=='r') {
+			if (argc < 2) {
+				printUsage("Missing file parameter");
+			} else {
+				RenderingInfo* info = new RenderingInfo(argc, argv);
+				runSimpleRendering(argv[argc -1], info);
 			}
 		} else {
 			printUsage("Unknown command");

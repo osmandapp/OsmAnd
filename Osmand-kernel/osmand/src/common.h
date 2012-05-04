@@ -151,6 +151,7 @@ struct IconDrawInfo
 	float y;
 };
 
+static const int TILE_SIZE = 256;
 struct RenderingContext
 {
 private :
@@ -183,8 +184,6 @@ public:
 
 // because they used in 3rd party functions
 public :
-	static const int TILE_SIZE = 256;
-
 
 	// calculated
 	float tileDivisor;
@@ -289,5 +288,7 @@ double getLatitudeFromTile(float zoom, double y);
 
 double get31LongitudeX(int tileX);
 double get31LatitudeY(int tileY);
+double getTileNumberX(float zoom, double longitude);
+double getTileNumberY(float zoom, double latitude);
 
 #endif /*_OSMAND_COMMON_H*/

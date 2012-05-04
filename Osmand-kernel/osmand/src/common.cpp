@@ -195,3 +195,24 @@ double get31LatitudeY(int tileY){
 }
 
 
+double getTileNumberX(float zoom, double longitude) {
+	if (longitude == 180.) {
+		return getPowZoom(zoom) - 1;
+	}
+	longitude = checkLongitude(longitude);
+	return (longitude + 180.) / 360. * getPowZoom(zoom);
+}
+
+
+double getTileNumberY(float zoom, double latitude) {
+	latitude = checkLatitude(latitude);
+	double eval = log(tan(toRadians(latitude)) + 1 / cos(toRadians(latitude)));
+	if (isinf(eval) || isnan(eval)) {
+		latitude = latitude < 0 ? -89.9 : 89.9;
+		eval = log(tan(toRadians(latitude)) + 1 / cos(toRadians(latitude)));
+	}
+	double result = (1 - eval / M_PI) / 2 * getPowZoom(zoom);
+	return result;
+}
+
+
