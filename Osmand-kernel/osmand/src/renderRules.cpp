@@ -1,55 +1,396 @@
 #ifndef _OSMAND_RENDER_RULES
 #define _OSMAND_RENDER_RULES
 
-#include "osmand_log.h"
+
 #include <iterator>
 #include <string>
 #include <vector>
+#include <stack>
+#include <expat.h>
+#include "osmand_log.h"
 #include "common.h"
 #include "renderRules.h"
 
 
-
-int RenderingRulesStorage::getPropertiesSize() {
-	return properties.size();
+/**
+ * Parse the color string, and return the corresponding color-int.
+ * Supported formats are:
+ * #RRGGBB
+ * #AARRGGBB
+ */
+int parseColor(string colorString) {
+	if (colorString[0] == '#') {
+		// Use a long to avoid rollovers on #ffXXXXXX
+		char** end;
+		long color = strtol(colorString.c_str() + 1, end , 16);
+		if (colorString.size() == 7) {
+			// Set the alpha value
+			color |= 0x00000000ff000000;
+		} else if (colorString.size() != 9) {
+			osmand_log_print(LOG_ERROR, "Unknown color %s", colorString.c_str());
+		}
+		return (int) color;
+	}
+	osmand_log_print(LOG_ERROR, "Unknown color %s", colorString.c_str());
+	return -1;
 }
 
-RenderingRuleProperty* RenderingRulesStorage::getProperty(int i) {
-	return &properties.at(i);
+string colorToString(int color) {
+	string s;
+	osmand_log_print(LOG_ERROR, "FIXME color to string %hd", color);
+	return s;
+}
+
+
+RenderingRule::RenderingRule(map<string, string> attrs, RenderingRulesStorage* storage) {
+	properties.reserve(attrs.size());
+	intProperties.assign(attrs.size(), -1);
+	map<string, string>::iterator it = attrs.begin();
+	int i = 0;
+	for (; it != attrs.end(); it++) {
+		HMAP::hash_map<std::string, RenderingRuleProperty*>::iterator find = storage->PROPS.properties.find(it->first);
+		if (find == storage->PROPS.properties.end()) {
+			osmand_log_print(LOG_ERROR, "Property %s was not found in registry", it->first.c_str());
+		}
+		i++;
+		RenderingRuleProperty* property = find->second;
+		properties.push_back(property);
+
+		if (property->isString()) {
+			intProperties[i] = storage->getDictionaryValue(it->second);
+		} else if (property->isFloat()) {
+			if (floatProperties.size() == 0) {
+				// lazy creates
+				floatProperties.assign(attrs.size(), - 1);
+			}
+			floatProperties[i] = property->parseFloatValue(it->second);
+		} else {
+			intProperties[i] = property->parseIntValue(it->second);
+		}
+	}
+}
+
+string RenderingRule::getStringPropertyValue(string property, RenderingRulesStorage* storage) {
+	int i = getPropertyIndex(property);
+	if (i >= 0) {
+		return storage->getStringValue(intProperties[i]);
+	}
+	return "";
+}
+
+float RenderingRule::getFloatPropertyValue(string property) {
+	int i = getPropertyIndex(property);
+	if (i >= 0) {
+		return floatProperties[i];
+	}
+	return 0;
+}
+
+string RenderingRule::getColorPropertyValue(string property) {
+	int i = getPropertyIndex(property);
+	if (i >= 0) {
+		return colorToString(intProperties[i]);
+	}
+	return "";
+}
+
+int RenderingRule::getIntPropertyValue(string property) {
+	int i = getPropertyIndex(property);
+	if (i >= 0) {
+		return intProperties[i];
+	}
+	return -1;
 }
 
 RenderingRule* RenderingRulesStorage::getRule(int state, int itag, int ivalue) {
-	HMAP::hash_map<int, RenderingRule>::iterator it = (tagValueGlobalRules[state]).find(
+	HMAP::hash_map<int, RenderingRule*>::iterator it = (tagValueGlobalRules[state]).find(
 			(itag << SHIFT_TAG_VAL) | ivalue);
 	if (it == tagValueGlobalRules[state].end()) {
 		return NULL;
 	}
-	return &(*it).second;
+	return (*it).second;
 }
 
-RenderingRuleProperty* RenderingRulesStorage::getProperty(const char* st) {
-	HMAP::hash_map<std::string, RenderingRuleProperty*>::iterator i = propertyMap.find(st);
-	if (i == propertyMap.end()) {
-		return NULL;
+
+void RenderingRulesStorage::registerGlobalRule(RenderingRule* rr, int state) {
+
+	int tag = rr->getIntPropertyValue(this->PROPS.R_TAG->attrName);
+	if (tag == -1) {
+		osmand_log_print(LOG_ERROR, "Attribute tag should be specified for root filter ");
 	}
-	return (*i).second;
-}
-
-std::string RenderingRulesStorage::getDictionaryValue(int i) {
-	if (i < 0) {
-		return std::string();
+	int value = rr->getIntPropertyValue(this->PROPS.R_VALUE->attrName);
+	if (value == -1) {
+		// attrsMap.toString()
+		osmand_log_print(LOG_ERROR, "Attribute tag should be specified for root filter ");
 	}
-	return dictionary.at(i);
+	int key = (tag << SHIFT_TAG_VAL) + value;
+	RenderingRule* toInsert = rr;
+	RenderingRule* previous = tagValueGlobalRules[state][key];
+	if (previous != NULL) {
+		// all root rules should have at least tag/value
+		toInsert = createTagValueRootWrapperRule(key, previous);
+		toInsert->ifElseChildren.push_back(rr);
+	}
+	tagValueGlobalRules[state][key] = toInsert;
 }
 
-int RenderingRulesStorage::getDictionaryValue(std::string s) {
-	return dictionaryMap[s];
+RenderingRule* RenderingRulesStorage::createTagValueRootWrapperRule(int tagValueKey, RenderingRule* previous) {
+	if (previous->properties.size() > 2) {
+		map<string, string> m;
+		m["tag"] = getTagString(tagValueKey);
+		m["value"] = getValueString(tagValueKey);
+		RenderingRule* toInsert = new RenderingRule(m, this);
+		toInsert->ifElseChildren.push_back(previous);
+		return toInsert;
+	} else {
+		return previous;
+	}
+}
+
+struct GroupRules {
+	RenderingRule* singleRule;
+	map<string, string> groupAttributes;
+	vector<RenderingRule*> children;
+	vector<GroupRules> childrenGroups;
+
+	GroupRules(RenderingRule* singleRule = NULL) : singleRule(singleRule) {
+	}
+
+	inline bool isGroup(){
+		return singleRule == NULL;
+	}
+
+	void addGroupFilter(RenderingRule* rr) {
+		for (vector<RenderingRule*>::iterator ch = children.begin(); ch != children.end(); ch++) {
+			(*ch)->ifChildren.push_back(rr);
+		}
+		for (vector<GroupRules>::iterator gch = childrenGroups.begin(); gch != childrenGroups.end(); gch++) {
+			gch->addGroupFilter(rr);
+		}
+	}
+
+	void registerGlobalRules(RenderingRulesStorage* storage, int state) {
+		for (vector<RenderingRule*>::iterator ch = children.begin(); ch != children.end(); ch++) {
+			storage->registerGlobalRule(*ch, state);
+		}
+		for (vector<GroupRules>::iterator gch = childrenGroups.begin(); gch != childrenGroups.end(); gch++) {
+			gch->registerGlobalRules(storage, state);
+		}
+	}
+};
+
+class RenderingRulesHandler {
+	friend class RenderingRulesStorage;
+	int state;
+	stack<GroupRules> st;
+	RenderingRulesStorageResolver* resolver;
+	RenderingRulesStorage* dependsStorage;
+	RenderingRulesStorage* storage;
+
+
+	RenderingRulesHandler(RenderingRulesStorageResolver* resolver, RenderingRulesStorage* storage) :
+			storage(storage), resolver(resolver), dependsStorage(NULL) {
+	}
+
+	RenderingRulesStorage* getDependsStorage() {
+		return dependsStorage;
+	}
+
+	static map<string, string>& parseAttributes(const char **atts, map<string, string>& m) {
+		while (atts != 0) {
+			m[string(*(atts++))] = string(*(atts++));
+		}
+		return m;
+	}
+
+	static void startElementHandler(void *data, const char *tag, const char **atts) {
+		RenderingRulesHandler* t = (RenderingRulesHandler*) data;
+		int len = strlen(tag);
+		string name(tag);
+		if (len == 6 && "filter" == name) {
+			map<string, string> attrsMap;
+			if (t->st.size() > 0 && t->st.top().isGroup()) {
+				attrsMap.insert(t->st.top().groupAttributes.begin(), t->st.top().groupAttributes.end());
+			}
+			parseAttributes(atts, attrsMap);
+			RenderingRule* renderingRule = new RenderingRule(attrsMap,t->storage);
+			if (t->st.size() > 0 && t->st.top().isGroup()) {
+				t->st.top().children.push_back(renderingRule);
+			} else if (t->st.size() > 0 && !t->st.top().isGroup()) {
+				RenderingRule* parent = t->st.top().singleRule;
+				t->st.top().singleRule->ifElseChildren.push_back(renderingRule);
+			} else {
+				t->storage->registerGlobalRule(renderingRule, t->state);
+			}
+			t->st.push(GroupRules(renderingRule));
+		} else if ("groupFilter" == name) { //$NON-NLS-1$
+			map<string, string> attrsMap;
+			parseAttributes(atts, attrsMap);
+			RenderingRule* renderingRule = new RenderingRule(attrsMap,t->storage);
+			if (t->st.size() > 0 && t->st.top().isGroup()) {
+				GroupRules parent = ((GroupRules) t->st.top());
+				t->st.top().addGroupFilter(renderingRule);
+			} else if (t->st.size() > 0 && !t->st.top().isGroup()) {
+				t->st.top().singleRule->ifChildren.push_back(renderingRule);
+			} else {
+				osmand_log_print(LOG_ERROR, "Group filter without parent");
+			}
+			t->st.push(GroupRules(renderingRule));
+		} else if ("group" == name) { //$NON-NLS-1$
+			GroupRules groupRules;
+			if (t->st.size() > 0 && t->st.top().isGroup()) {
+				groupRules.groupAttributes.insert(t->st.top().groupAttributes.begin(), t->st.top().groupAttributes.end());
+				t->st.top().childrenGroups.push_back(groupRules);
+			}
+			parseAttributes(atts, groupRules.groupAttributes);
+			t->st.push(groupRules);
+		} else if ("order" == name) { //$NON-NLS-1$
+			t->state = RenderingRulesStorage::ORDER_RULES;
+		} else if ("text" == name) { //$NON-NLS-1$
+			t->state = RenderingRulesStorage::TEXT_RULES;
+		} else if ("point" == name) { //$NON-NLS-1$
+			t->state = RenderingRulesStorage::POINT_RULES;
+		} else if ("line" == name) { //$NON-NLS-1$
+			t->state = RenderingRulesStorage::LINE_RULES;
+		} else if ("polygon" == name) { //$NON-NLS-1$
+			t->state = RenderingRulesStorage::POLYGON_RULES;
+		} else if ("renderingAttribute" == name) { //$NON-NLS-1$
+			map<string, string> attrsMap;
+			parseAttributes(atts, attrsMap);
+			string attr = attrsMap["name"];
+			RenderingRule* root = new RenderingRule(map<string, string>(),t->storage);
+			t->storage->renderingAttributes[name] = root;
+			t->st.push(GroupRules(root));
+		} else if ("renderingProperty" == name) {
+			map<string, string> attrsMap;
+			parseAttributes(atts, attrsMap);
+			string attr = attrsMap["attr"];
+			RenderingRuleProperty* prop;
+			string type = attrsMap["type"];
+			if ("boolean" == type) {
+				prop = RenderingRuleProperty::createInputBooleanProperty(attr);
+			} else if ("string" == type) {
+				prop = RenderingRuleProperty::createInputStringProperty(attr);
+			} else {
+				prop = RenderingRuleProperty::createInputIntProperty(attr);
+			}
+			prop->description = attrsMap["description"];
+			prop->name = attrsMap["name"];
+			string possible = attrsMap["possibleValues"];
+			if (possible != "") {
+				int n;
+				int p = 0;
+				while ((n = possible.find(',', p)) != string::npos) {
+					prop->possibleValues.push_back(possible.substr(p, n));
+					p = n + 1;
+				}
+				prop->possibleValues.push_back(possible.substr(p));
+			}
+			t->storage->PROPS.registerRule(prop);
+		} else if ("renderingStyle" == name) {
+			map<string, string> attrsMap;
+			parseAttributes(atts, attrsMap);
+			string depends = attrsMap["depends"];
+			if (depends.size() > 0 && t->resolver != NULL) {
+				t->dependsStorage = t->resolver->resolve(depends, t->resolver);
+			}
+			if (t->dependsStorage != NULL) {
+				// copy dictionary
+				t->storage->dictionary = t->dependsStorage->dictionary;
+				t->storage->dictionaryMap = t->dependsStorage->dictionaryMap;
+				t->storage->PROPS.merge(t->dependsStorage->PROPS);
+			}
+			//renderingName = attrsMap["name"];
+		} else {
+			osmand_log_print(LOG_WARN, "Unknown tag : %s", name.c_str());
+		}
+
+	}
+
+
+	static void endElementHandler(void *data, const char *tag) {
+		int len = strlen(tag);
+		RenderingRulesHandler* t = (RenderingRulesHandler*) data;
+		string name(tag);
+		if ("filter" == name) { //$NON-NLS-1$
+			t->st.pop();
+		} else if ("group" == name) { //$NON-NLS-1$
+			GroupRules group = t->st.top();
+			t->st.pop();
+			if (t->st.size() == 0) {
+				group.registerGlobalRules(t->storage,t->state);
+			}
+		} else if ("groupFilter" == name) { //$NON-NLS-1$
+			t->st.pop();
+		} else if ("renderingAttribute" == name) { //$NON-NLS-1$
+			t->st.pop();
+		}
+	}
+
+};
+
+void RenderingRulesStorage::parseRulesFromXmlInputStream(const char* filename, RenderingRulesStorageResolver* resolver) {
+	XML_Parser parser = XML_ParserCreate(NULL);
+	RenderingRulesHandler* handler = new RenderingRulesHandler(resolver, this);
+	XML_SetUserData(parser, handler);
+	XML_SetElementHandler(parser, RenderingRulesHandler::startElementHandler, RenderingRulesHandler::endElementHandler);
+	FILE *file = fopen(filename, "r");
+	if (file == NULL) {
+		return;
+	}
+	char buffer[512];
+	bool done = false;
+	while (!done) {
+		fgets(buffer, sizeof(buffer), file);
+		int len = strlen(buffer);
+		if (feof(file) != 0) {
+			done = true;
+		}
+		if (XML_Parse(parser, buffer, len, done) == XML_STATUS_ERROR) {
+			return;
+		}
+	}
+
+	RenderingRulesStorage* depends = handler->getDependsStorage();
+	if (depends != NULL) {
+		// merge results
+		// dictionary and props are already merged
+		map<std::string,  RenderingRule*>::iterator it = depends->renderingAttributes.begin();
+		for(;it != depends->renderingAttributes.end(); it++) {
+			map<std::string,  RenderingRule*>::iterator o = renderingAttributes.find(it->first);
+			if (o != renderingAttributes.end()) {
+				std::vector<RenderingRule*>::iterator list = it->second->ifElseChildren.begin();
+				for (;list != it->second->ifElseChildren.end(); list++) {
+					o->second->ifElseChildren.push_back(*list);
+				}
+			} else {
+				renderingAttributes[it->first] = it->second;
+			}
+		}
+
+		for (int i = 0; i < SIZE_STATES; i++) {
+			if (depends->tagValueGlobalRules[i].empty()) {
+				continue;
+			}
+			HMAP::hash_map<int, RenderingRule*>::iterator it = depends->tagValueGlobalRules[i].begin();
+			for (; it != depends->tagValueGlobalRules[i].begin(); it++) {
+				HMAP::hash_map<int, RenderingRule*>::iterator o = tagValueGlobalRules[i].find(it->first);
+				RenderingRule* toInsert = it->second;
+				if (o != tagValueGlobalRules[i].end()) {
+					toInsert = createTagValueRootWrapperRule(it->first, o->second);
+					toInsert->ifElseChildren.push_back(it->second);
+				}
+				tagValueGlobalRules[i][it->first] = toInsert;
+			}
+		}
+
+	}
 }
 
 
 RenderingRuleSearchRequest::RenderingRuleSearchRequest(RenderingRulesStorage* storage)  {
 	this->storage = storage;
-	PROPS = new RenderingRulesStorageProperties(this->storage);
+	PROPS = &this->storage->PROPS;
 	clearState();
 }
 
@@ -213,13 +554,13 @@ bool RenderingRuleSearchRequest::visitRule(RenderingRule* rule, bool loadOutput)
 	}
 	size_t j;
 	for (j = 0; j < rule->ifElseChildren.size(); j++) {
-		bool match = visitRule(&rule->ifElseChildren.at(j), loadOutput);
+		bool match = visitRule(rule->ifElseChildren.at(j), loadOutput);
 		if (match) {
 			break;
 		}
 	}
 	for (j = 0; j < rule->ifChildren.size(); j++) {
-		visitRule(&rule->ifChildren.at(j), loadOutput);
+		visitRule(rule->ifChildren.at(j), loadOutput);
 	}
 	return true;
 
@@ -227,8 +568,8 @@ bool RenderingRuleSearchRequest::visitRule(RenderingRule* rule, bool loadOutput)
 
 void RenderingRuleSearchRequest::clearState() {
 	obj = NULL;
-	memcpy(values, savedValues, storage->getPropertiesSize() * sizeof(int));
-	memcpy(fvalues, savedFvalues, storage->getPropertiesSize() * sizeof(float));
+	memcpy(values, savedValues, storage->PROPS.properties.size() * sizeof(int));
+	memcpy(fvalues, savedFvalues, storage->PROPS.properties.size() * sizeof(float));
 }
 
 void RenderingRuleSearchRequest::setInitialTagValueZoom(std::string tag, std::string value, int zoom, MapDataObject* obj) {

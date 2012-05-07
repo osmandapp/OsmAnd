@@ -9,7 +9,7 @@ LOCAL_SRC_FILES += src/osmand_main.cpp
 LDFLAGS = -Wl,--hash-style=both -shared
 LDRUNFLAGS = -Wl,--hash-style=both
 
-LDLIBS = -L$(PREBUILT_DIR) -lskia -lproto -lpthread -lrt -lft2
+LDLIBS = -L$(PREBUILT_DIR) -lskia -lproto -lpthread -lrt -lft2 -lexpat
 CPP_FILE_EXTENSION = cpp
 OBJECTS = $(LOCAL_SRC_FILES:src/%.$(CPP_FILE_EXTENSION)=build/obj/%.o)
 

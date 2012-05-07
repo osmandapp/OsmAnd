@@ -2,18 +2,53 @@
 #define _OSMAND_RENDER_RULES_H
 
 #include <string>
+#include <map>
 #include "common.h"
 #include "mapObjects.h"
 
+
+/**
+ * Parse the color string, and return the corresponding color-int.
+ * Supported formats are:
+ * #RRGGBB
+ * #AARRGGBB
+ */
+int parseColor(string colorString) ;
+string colorToString(int color);
+
+const static int TRUE_VALUE = 1;
+const static int FALSE_VALUE = 0;
+
+// Foward declaration of classes
+class RenderingRuleProperty;
+class RenderingRule;
+class RenderingRulesStorage;
+class RenderingRulesHandler;
+class RenderingRulesStorageResolver;
+class RenderingRulesStorageProperties;
+class RenderingRuleSearchRequest;
+
 class RenderingRuleProperty
 {
-public:
+private:
 	int type;
+	const static int INT_TYPE = 1;
+	const static int FLOAT_TYPE = 2;
+	const static int STRING_TYPE = 3;
+	const static int COLOR_TYPE = 4;
+	const static int BOOLEAN_TYPE = 5;
+
+public:
 	bool input;
 	std::string attrName;
 	// order in
 	int id;
-	RenderingRuleProperty(int type, bool input, std::string& name, int id) :
+	// use for custom rendering rule properties
+	string name;
+	string description;
+	vector<string> possibleValues;
+
+	RenderingRuleProperty(std::string& name, int type, bool input, int id = -1) :
 			type(type), input(input), attrName(name), id(id) {
 	}
 
@@ -21,18 +56,78 @@ public:
 		return type == FLOAT_TYPE;
 	}
 
+	bool isColor() {
+		return type == COLOR_TYPE;
+	}
 
-private:
-	const static int INT_TYPE = 1;
-	const static int FLOAT_TYPE = 2;
-	const static int STRING_TYPE = 3;
-	const static int COLOR_TYPE = 4;
-	const static int BOOLEAN_TYPE = 5;
+	bool isString() {
+		return type == STRING_TYPE;
+	}
+
+	bool isIntParse() {
+		return type == INT_TYPE || type == STRING_TYPE || type == COLOR_TYPE || type == BOOLEAN_TYPE;
+	}
+
+	int parseIntValue(string value) {
+		if (type == INT_TYPE) {
+			return atoi(value.c_str());
+		} else if (type == BOOLEAN_TYPE) {
+			return value == "true" ? TRUE_VALUE : FALSE_VALUE;
+		} else if (type == STRING_TYPE) {
+			// requires dictionary to parse
+			return -1;
+		} else if (type == COLOR_TYPE) {
+			return parseColor(value);
+		} else {
+			return -1;
+		}
+	}
+
+	float parseFloatValue(string value) {
+		if (type == FLOAT_TYPE) {
+			return atof(value.c_str());
+		} else {
+			return -1;
+		}
+	}
+
+	static RenderingRuleProperty* createOutputIntProperty(string name) {
+		return new RenderingRuleProperty(name, INT_TYPE, false);
+	}
+
+	static RenderingRuleProperty* createOutputBooleanProperty(string name) {
+		return new RenderingRuleProperty(name, BOOLEAN_TYPE, false);
+	}
+
+	static RenderingRuleProperty* createInputBooleanProperty(string name) {
+		return new RenderingRuleProperty(name, BOOLEAN_TYPE, true);
+	}
+
+	static RenderingRuleProperty* createOutputFloatProperty(string name) {
+		return new RenderingRuleProperty(name, FLOAT_TYPE, false);
+	}
+
+	static RenderingRuleProperty* createOutputStringProperty(string name) {
+		return new RenderingRuleProperty(name, STRING_TYPE, false);
+	}
+
+	static RenderingRuleProperty* createInputIntProperty(string name) {
+		return new RenderingRuleProperty(name, INT_TYPE, true);
+	}
+
+	static RenderingRuleProperty* createInputColorProperty(string name) {
+		return new RenderingRuleProperty(name, COLOR_TYPE, true);
+	}
+
+	static RenderingRuleProperty* createOutputColorProperty(string name) {
+		return new RenderingRuleProperty(name, COLOR_TYPE, false);
+	}
+
+	static RenderingRuleProperty* createInputStringProperty(string name) {
+		return new RenderingRuleProperty(name, STRING_TYPE, true);
+	}
 
 };
-
-const static int TRUE_VALUE = 1;
-const static int FALSE_VALUE = 0;
 
 
 class RenderingRule
@@ -41,57 +136,39 @@ public:
 	std::vector<RenderingRuleProperty*> properties;
 	std::vector<int> intProperties;
 	std::vector<float> floatProperties;
-	std::vector<RenderingRule> ifElseChildren;
-	std::vector<RenderingRule> ifChildren;
+	std::vector<RenderingRule*> ifElseChildren;
+	std::vector<RenderingRule*> ifChildren;
 
+	RenderingRule (map<string, string> attrs, RenderingRulesStorage* storage);
+private :
+	inline int getPropertyIndex(string property) {
+		for (int i = 0; i < properties.size(); i++) {
+			RenderingRuleProperty* prop = properties[i];
+			if (prop->attrName == property) {
+				return i;
+			}
+		}
+		return -1;
+	}
+public :
+	string getStringPropertyValue(string property, RenderingRulesStorage* storage);
+
+	float getFloatPropertyValue(string property);
+
+	string getColorPropertyValue(string property);
+
+	int getIntPropertyValue(string property);
 };
 
 
-class RenderingRulesStorage
-{
-	// TODO make private
-public:
-	const static int SHIFT_TAG_VAL = 16;
-	const static int SIZE_STATES = 7;
-	HMAP::hash_map<std::string, int> dictionaryMap;
-	std::vector<std::string> dictionary;
-	HMAP::hash_map<int, RenderingRule>* tagValueGlobalRules;
-	std::vector<RenderingRuleProperty> properties;
-	HMAP::hash_map<std::string,  RenderingRuleProperty*> propertyMap;
 
+
+class RenderingRulesStorageResolver {
 
 public:
-	// No rules for multipolygon !!!
-	const static int MULTI_POLYGON_TYPE = 0;
+	virtual RenderingRulesStorage* resolve(string name, RenderingRulesStorageResolver* ref) = 0;
 
-    const static int POINT_RULES = 1;
-    const static int LINE_RULES = 2;
-    const static int POLYGON_RULES = 3;
-    const static int TEXT_RULES = 4;
-    const static int ORDER_RULES = 5;
-	RenderingRulesStorage(void* storage) :
-			storageId(storage) {
-		tagValueGlobalRules = new HMAP::hash_map<int, RenderingRule >[SIZE_STATES];
-	}
-
-	~RenderingRulesStorage() {
-		delete[] tagValueGlobalRules;
-		// proper
-	}
-	void* storageId;
-
-	int getPropertiesSize();
-
-	RenderingRuleProperty* getProperty(int i);
-
-	RenderingRule* getRule(int state, int itag, int ivalue);
-
-	RenderingRuleProperty* getProperty(const char* st);
-
-	std::string getDictionaryValue(int i);
-
-	int getDictionaryValue(std::string s);
-
+	virtual ~RenderingRulesStorageResolver();
 };
 
 
@@ -140,54 +217,209 @@ public:
 	RenderingRuleProperty* R_AREA;
 	RenderingRuleProperty* R_CYCLE;
 	RenderingRuleProperty* R_NAME_TAG;
+	RenderingRuleProperty* R_ATTR_INT_VALUE;
+	RenderingRuleProperty* R_ATTR_COLOR_VALUE;
+	RenderingRuleProperty* R_ATTR_BOOL_VALUE;
+	RenderingRuleProperty* R_ATTR_STRING_VALUE;
 
-	RenderingRulesStorageProperties(RenderingRulesStorage* storage)
-	{
-		R_TEXT_LENGTH = storage->getProperty("textLength");
-		R_REF = storage->getProperty("ref");
-		R_TEXT_SHIELD = storage->getProperty("textShield");
-		R_SHADOW_RADIUS = storage->getProperty("shadowRadius");
-		R_SHADOW_COLOR = storage->getProperty("shadowColor");
-		R_SHADER = storage->getProperty("shader");
-		R_CAP_3 = storage->getProperty("cap_3");
-		R_CAP_2 = storage->getProperty("cap_2");
-		R_CAP = storage->getProperty("cap");
-		R_PATH_EFFECT_3 = storage->getProperty("pathEffect_3");
-		R_PATH_EFFECT_2 = storage->getProperty("pathEffect_2");
-		R_PATH_EFFECT = storage->getProperty("pathEffect");
-		R_STROKE_WIDTH_3 = storage->getProperty("strokeWidth_3");
-		R_STROKE_WIDTH_2 = storage->getProperty("strokeWidth_2");
-		R_STROKE_WIDTH = storage->getProperty("strokeWidth");
-		R_COLOR_3 = storage->getProperty("color_3");
-		R_COLOR = storage->getProperty("color");
-		R_COLOR_2 = storage->getProperty("color_2");
-		R_TEXT_BOLD = storage->getProperty("textBold");
-		R_TEXT_ORDER = storage->getProperty("textOrder");
-		R_TEXT_MIN_DISTANCE = storage->getProperty("textMinDistance");
-		R_TEXT_ON_PATH = storage->getProperty("textOnPath");
-		R_ICON = storage->getProperty("icon");
-		R_LAYER = storage->getProperty("layer");
-		R_ORDER = storage->getProperty("order");
-		R_TAG = storage->getProperty("tag");
-		R_VALUE = storage->getProperty("value");
-		R_MINZOOM = storage->getProperty("minzoom");
-		R_MAXZOOM = storage->getProperty("maxzoom");
-		R_NIGHT_MODE = storage->getProperty("nightMode");
-		R_TEXT_DY = storage->getProperty("textDy");
-		R_TEXT_SIZE = storage->getProperty("textSize");
-		R_TEXT_COLOR = storage->getProperty("textColor");
-		R_TEXT_HALO_RADIUS = storage->getProperty("textHaloRadius");
-		R_TEXT_WRAP_WIDTH = storage->getProperty("textWrapWidth");
-		R_SHADOW_LEVEL = storage->getProperty("shadowLevel");
-		R_ADDITIONAL = storage->getProperty("additional");
-		R_OBJECT_TYPE = storage->getProperty("objectType");
-		R_POINT = storage->getProperty("point");
-		R_AREA = storage->getProperty("area");
-		R_CYCLE = storage->getProperty("cycle");
-		R_NAME_TAG = storage->getProperty("nameTag");
+	HMAP::hash_map<string, RenderingRuleProperty*> properties;
+	vector<RenderingRuleProperty*> rules;
+	vector<RenderingRuleProperty*> customRules;
 
+	inline RenderingRuleProperty* getProperty(const char* st) {
+		HMAP::hash_map<std::string, RenderingRuleProperty*>::iterator i = properties.find(st);
+		if (i == properties.end()) {
+			return NULL;
+		}
+		return (*i).second;
 	}
 
+	inline RenderingRuleProperty* getProperty(std::string& st) {
+		HMAP::hash_map<std::string, RenderingRuleProperty*>::iterator i = properties.find(st);
+		if (i == properties.end()) {
+			return NULL;
+		}
+		return (*i).second;
+	}
+
+	RenderingRuleProperty* registerRule(RenderingRuleProperty* p) {
+		RenderingRuleProperty* pr = getProperty(p->attrName);
+		if (pr != NULL) {
+			return pr;
+		}
+		RenderingRuleProperty* ps = registerRuleInternal(p);
+		customRules.push_back(ps);
+		return ps;
+	}
+
+	void merge(RenderingRulesStorageProperties& props) {
+		vector<RenderingRuleProperty*>::iterator t = props.customRules.begin();
+		for (; t != props.customRules.end(); t++) {
+			customRules.push_back(*t);
+			properties[(*t)->attrName] = *t;
+		}
+	}
+
+	RenderingRulesStorageProperties(bool initDefault) {
+		if (initDefault) {
+			createDefaultProperties();
+		}
+	}
+
+	RenderingRuleProperty* registerRuleInternal(RenderingRuleProperty* p) {
+		if (getProperty(p->attrName) == NULL) {
+			properties[p->attrName] = p;
+			p->id = rules.size();
+			rules.push_back(p);
+		}
+		return getProperty(p->attrName);
+	}
+
+private:
+	void createDefaultProperties() {
+		R_TAG = registerRuleInternal(RenderingRuleProperty::createInputStringProperty("tag"));
+		R_VALUE = registerRuleInternal(RenderingRuleProperty::createInputStringProperty("value"));
+		R_ADDITIONAL = registerRuleInternal(RenderingRuleProperty::createInputStringProperty("additional"));
+		R_MINZOOM = registerRuleInternal(RenderingRuleProperty::createInputIntProperty("minzoom"));
+		R_MAXZOOM = registerRuleInternal(RenderingRuleProperty::createInputIntProperty("maxzoom"));
+		R_NIGHT_MODE = registerRuleInternal(RenderingRuleProperty::createInputBooleanProperty("nightMode"));
+		R_LAYER = registerRuleInternal(RenderingRuleProperty::createInputIntProperty("layer"));
+		R_POINT = registerRuleInternal(RenderingRuleProperty::createInputBooleanProperty("point"));
+		R_AREA = registerRuleInternal(RenderingRuleProperty::createInputBooleanProperty("area"));
+		R_CYCLE = registerRuleInternal(RenderingRuleProperty::createInputBooleanProperty("cycle"));
+
+		R_TEXT_LENGTH = registerRuleInternal(RenderingRuleProperty::createInputIntProperty("textLength"));
+		R_NAME_TAG = registerRuleInternal(RenderingRuleProperty::createInputStringProperty("nameTag"));
+
+		R_ATTR_INT_VALUE = registerRuleInternal(RenderingRuleProperty::createOutputIntProperty("attrIntValue"));
+		R_ATTR_BOOL_VALUE = registerRuleInternal(RenderingRuleProperty::createOutputBooleanProperty("attrBoolValue"));
+		R_ATTR_COLOR_VALUE = registerRuleInternal(RenderingRuleProperty::createOutputColorProperty("attrColorValue"));
+		R_ATTR_STRING_VALUE = registerRuleInternal(
+				RenderingRuleProperty::createOutputStringProperty("attrStringValue"));
+
+		// order - no sense to make it float
+		R_ORDER = registerRuleInternal(RenderingRuleProperty::createOutputIntProperty("order"));
+		R_OBJECT_TYPE = registerRuleInternal(RenderingRuleProperty::createOutputIntProperty("objectType"));
+		R_SHADOW_LEVEL = registerRuleInternal(RenderingRuleProperty::createOutputIntProperty("shadowLevel"));
+
+		// text properties
+		R_TEXT_WRAP_WIDTH = registerRuleInternal(RenderingRuleProperty::createOutputIntProperty("textWrapWidth"));
+		R_TEXT_DY = registerRuleInternal(RenderingRuleProperty::createOutputIntProperty("textDy"));
+		R_TEXT_HALO_RADIUS = registerRuleInternal(RenderingRuleProperty::createOutputIntProperty("textHaloRadius"));
+		R_TEXT_SIZE = registerRuleInternal(RenderingRuleProperty::createOutputIntProperty("textSize"));
+		R_TEXT_ORDER = registerRuleInternal(RenderingRuleProperty::createOutputIntProperty("textOrder"));
+		R_TEXT_MIN_DISTANCE = registerRuleInternal(RenderingRuleProperty::createOutputIntProperty("textMinDistance"));
+		R_TEXT_SHIELD = registerRuleInternal(RenderingRuleProperty::createOutputStringProperty("textShield"));
+
+		R_TEXT_COLOR = registerRuleInternal(RenderingRuleProperty::createOutputColorProperty("textColor"));
+		R_TEXT_BOLD = registerRuleInternal(RenderingRuleProperty::createOutputBooleanProperty("textBold"));
+		R_TEXT_ON_PATH = registerRuleInternal(RenderingRuleProperty::createOutputBooleanProperty("textOnPath"));
+
+		// point
+		R_ICON = registerRuleInternal(RenderingRuleProperty::createOutputStringProperty("icon"));
+
+		// polygon/way
+		R_COLOR = registerRuleInternal(RenderingRuleProperty::createOutputColorProperty("color"));
+		R_COLOR_2 = registerRuleInternal(RenderingRuleProperty::createOutputColorProperty("color_2"));
+		R_COLOR_3 = registerRuleInternal(RenderingRuleProperty::createOutputColorProperty("color_3"));
+		R_STROKE_WIDTH = registerRuleInternal(RenderingRuleProperty::createOutputFloatProperty("strokeWidth"));
+		R_STROKE_WIDTH_2 = registerRuleInternal(RenderingRuleProperty::createOutputFloatProperty("strokeWidth_2"));
+		R_STROKE_WIDTH_3 = registerRuleInternal(RenderingRuleProperty::createOutputFloatProperty("strokeWidth_3"));
+
+		R_PATH_EFFECT = registerRuleInternal(RenderingRuleProperty::createOutputStringProperty("pathEffect"));
+		R_PATH_EFFECT_2 = registerRuleInternal(RenderingRuleProperty::createOutputStringProperty("pathEffect_2"));
+		R_PATH_EFFECT_3 = registerRuleInternal(RenderingRuleProperty::createOutputStringProperty("pathEffect_3"));
+		R_CAP = registerRuleInternal(RenderingRuleProperty::createOutputStringProperty("cap"));
+		R_CAP_2 = registerRuleInternal(RenderingRuleProperty::createOutputStringProperty("cap_2"));
+		R_CAP_3 = registerRuleInternal(RenderingRuleProperty::createOutputStringProperty("cap_3"));
+
+		R_SHADER = registerRuleInternal(RenderingRuleProperty::createOutputStringProperty("shader"));
+		R_SHADOW_COLOR = registerRuleInternal(RenderingRuleProperty::createOutputColorProperty("shadowColor"));
+		R_SHADOW_RADIUS = registerRuleInternal(RenderingRuleProperty::createOutputIntProperty("shadowRadius"));
+	}
+
+};
+
+class RenderingRulesStorage
+{
+
+private:
+	friend class RenderingRulesHandler;
+	HMAP::hash_map<std::string, int> dictionaryMap;
+	std::vector<std::string> dictionary;
+	const static int SHIFT_TAG_VAL = 16;
+	const static int SIZE_STATES = 7;
+
+	// TODO make private
+public:
+	HMAP::hash_map<int, RenderingRule*>* tagValueGlobalRules;
+	map<std::string, RenderingRule*> renderingAttributes;
+public:
+	RenderingRulesStorageProperties PROPS;
+	// No rules for multipolygon !!!
+	const static int MULTI_POLYGON_TYPE = 0;
+
+	const static int POINT_RULES = 1;
+	const static int LINE_RULES = 2;
+	const static int POLYGON_RULES = 3;
+	const static int TEXT_RULES = 4;
+	const static int ORDER_RULES = 5;
+	RenderingRulesStorage(void* storage, bool createDefProperties = true) : storageId(storage),
+			PROPS(createDefProperties) {
+		tagValueGlobalRules = new HMAP::hash_map<int, RenderingRule*>[SIZE_STATES];
+	}
+
+	~RenderingRulesStorage() {
+		delete[] tagValueGlobalRules;
+		// proper
+	}
+	void* storageId;
+
+	RenderingRule* getRule(int state, int itag, int ivalue);
+
+	void registerGlobalRule(RenderingRule* rr, int state);
+
+	int registerString(string d) {
+		int res;
+		dictionaryMap[d] = res = dictionary.size();
+		dictionary.push_back(d);
+		return res;
+	}
+
+	inline std::string getDictionaryValue(int i) {
+		if (i < 0) {
+			return std::string();
+		}
+		return dictionary.at(i);
+	}
+
+	inline int getDictionaryValue(std::string s) {
+		return dictionaryMap[s];
+	}
+
+	void parseRulesFromXmlInputStream(const char* filename, RenderingRulesStorageResolver* resolver);
+
+	inline string getStringValue(int i) {
+		return dictionary[i];
+	}
+
+private:
+	RenderingRule* createTagValueRootWrapperRule(int tagValueKey, RenderingRule* previous);
+
+
+	inline string getValueString(int tagValueKey) {
+		return getStringValue(tagValueKey & ((1 << SHIFT_TAG_VAL) - 1));
+	}
+
+	inline string getTagString(int tagValueKey) {
+		return getStringValue(tagValueKey >> SHIFT_TAG_VAL);
+	}
+
+	inline int getTagValueKey(string tag, string value) {
+		int itag = getDictionaryValue(tag);
+		int ivalue = getDictionaryValue(value);
+		return (itag << SHIFT_TAG_VAL) | ivalue;
+	}
 };
 
 
