@@ -54,7 +54,6 @@ RenderingRule::RenderingRule(map<string, string>& attrs, RenderingRulesStorage* 
 	for (; it != attrs.end(); it++) {
 		RenderingRuleProperty* property = storage->PROPS.getProperty(it->first.c_str());
 		if (property == NULL) {
-			printf("Property %s was not found in registry", it->first.c_str());
 			osmand_log_print(LOG_ERROR, "Property %s was not found in registry", it->first.c_str());
 			return ;
 		}
@@ -307,6 +306,8 @@ class RenderingRulesHandler {
 				t->storage->dictionary = t->dependsStorage->dictionary;
 				t->storage->dictionaryMap = t->dependsStorage->dictionaryMap;
 				t->storage->PROPS.merge(t->dependsStorage->PROPS);
+			} else if (depends.size() > 0) {
+				osmand_log_print(LOG_ERROR, "!Dependent rendering style was not resolved : %s", depends.c_str());
 			}
 			//renderingName = attrsMap["name"];
 		} else {
@@ -520,6 +521,16 @@ RenderingRulesStorageProperties* RenderingRuleSearchRequest::props() {
 
 bool RenderingRuleSearchRequest::searchRule(int state) {
 	return search(state, true);
+}
+
+bool RenderingRuleSearchRequest::searchRenderingAttribute(string attribute) {
+	searchResult = false;
+	RenderingRule* rule = storage->getRenderingAttributeRule(attribute);
+	if (rule == NULL) {
+		return false;
+	}
+	searchResult = visitRule(rule, true);
+	return searchResult;
 }
 
 bool RenderingRuleSearchRequest::search(int state, bool loadOutput) {

@@ -340,6 +340,8 @@ private:
 	}
 
 };
+static string A_DEFAULT_COLOR="defaultColor";
+static string A_SHADOW_RENDERING="shadowRendering";
 
 class RenderingRulesStorage
 {
@@ -404,6 +406,10 @@ public:
 	}
 
 	void parseRulesFromXmlInputStream(const char* filename, RenderingRulesStorageResolver* resolver);
+
+	RenderingRule* getRenderingAttributeRule(string attribute) {
+		return renderingAttributes[attribute];
+	}
 
 	inline string getStringValue(int i) {
 		return dictionary[i];
@@ -489,9 +495,27 @@ public:
 
 	bool isSpecified(RenderingRuleProperty* p);
 
+	bool searchRenderingAttribute(string attribute);
+
+
 };
 
 
+class BasePathRenderingRulesStorageResolver : public RenderingRulesStorageResolver {
+public:
+	string path;
+	BasePathRenderingRulesStorageResolver(string  path) : path(path) {
 
+	}
+	virtual RenderingRulesStorage* resolve(string name, RenderingRulesStorageResolver* ref) {
+		string file = path;
+		file += name;
+		file+=".render.xml";
+		RenderingRulesStorage* st = new RenderingRulesStorage(file.c_str());
+		st->parseRulesFromXmlInputStream(file.c_str(), this);
+		return st;
+	}
+	virtual ~BasePathRenderingRulesStorageResolver() {}
+};
 
 #endif

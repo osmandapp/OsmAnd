@@ -702,7 +702,7 @@ void searchMapData(CodedInputStream* input, MapRoot* root, MapIndex* ind, Search
 
 
 
-ResultPublisher* searchObjectsForRendering(SearchQuery* q, RenderingRuleSearchRequest* req,
+ResultPublisher* searchObjectsForRendering(SearchQuery* q,
 		bool skipDuplicates, std::string msgNothingFound) {
 	map<std::string, BinaryMapFile*>::iterator i = openFiles.begin();
 	HMAP::hash_set<long long> ids;
@@ -720,8 +720,8 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, RenderingRuleSearchRe
 		input.SetCloseOnDelete(false);
 		CodedInputStream cis(&input);
 		cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
-		if (req != NULL) {
-			req->clearState();
+		if (q->req != NULL) {
+			q->req->clearState();
 		}
 		q->publisher->result.clear();
 		for (std::vector<MapIndex>::iterator mapIndex = file->mapIndexes.begin(); mapIndex != file->mapIndexes.end();

@@ -160,22 +160,24 @@ double checkLatitude(double latitude) {
 
 int get31TileNumberX(double longitude){
 	longitude = checkLongitude(longitude);
-	long l = 1l << 31;
+	long long int l =  1;
+	l <<= 31;
 	return (int)((longitude + 180)/360 * l);
 }
 
-int get31TileNumberY( double latitude){
+int get31TileNumberY(double latitude) {
 	latitude = checkLatitude(latitude);
-	double eval = log(tan(toRadians(latitude)) + 1/cos(toRadians(latitude)) );
-		long l = 1l << 31;
-		if(eval > M_PI){
-			eval = M_PI;
-		}
-		return  (int) ((1 - eval / M_PI) / 2 * l);
+	double eval = log(tan(toRadians(latitude)) + 1 / cos(toRadians(latitude)));
+	long long int l =  1;
+	l <<= 31;
+	if (eval > M_PI) {
+		eval = M_PI;
+	}
+	return (int) ((1 - eval / M_PI) / 2 * l);
 }
 
 double getLongitudeFromTile(float zoom, double x) {
-		return x / getPowZoom(zoom) * 360.0 - 180.0;
+	return x / getPowZoom(zoom) * 360.0 - 180.0;
 }
 
 

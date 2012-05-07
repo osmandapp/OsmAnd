@@ -23,39 +23,45 @@ void printUsage(std::string info) {
 
 class RenderingInfo {
 public:
-	float left, right, top, bottom;
-	double lattop, latbottom, lonleft, lonright;
+	int left, right, top, bottom;
+	double lattop, lonleft;
+	int tileWX, tileHY;
 	std::string tileFileName;
 	int zoom;
 	int width ;
 	int height;
 
 	RenderingInfo(int argc, char **params) {
+		double l1, l2;
+		char s[40];
+		int z, z1, z2 ;
 		lattop = 85;
-		latbottom = -85;
+		tileHY = 2;
 		lonleft = -180;
-		lonright = 180;
-		width = 500;
-		height = 500;
+		tileWX = 2;
 		zoom = 15;
 		for (int i = 1; i != argc; ++i) {
 			if (strcmp(params[i], "-renderingOutputFile=") == 0) {
 				tileFileName = (char*) (params[i] + strlen("-renderingOutputFile="));
-			} else {
-				int z = 0;
-				if (sscanf(params[i], "-zoom=%d", &z) != EOF) {
-					zoom = z;
-				} else if (sscanf(params[i], "-bbox=%le,%le,%le,%le", &lonleft, &lattop, &lonright, &latbottom) != EOF) {
-				}
+			} else if (sscanf(params[i], "-renderingOutputFile=%s", &s)) {
+				tileFileName = s;
+			} else if (sscanf(params[i], "-zoom=%d", &z)) {
+				zoom = z;
+			} else if (sscanf(params[i], "-lbox=%lg,%lg", &l1, &l2)) {
+				lonleft = l1;
+				lattop = l2;
+			} else if (sscanf(params[i], "-lt=%d,%d", &z1, &z2)) {
+				tileWX = z1;
+				tileWX = z2;
 			}
 		}
 
-		left = getTileNumberX(zoom, lonleft);
-		top = getTileNumberY(zoom, lattop);
-		right= getTileNumberX(zoom, lonright);
-		bottom= getTileNumberY(zoom, latbottom);
-		width = (right-left)*TILE_SIZE;
-		height = (bottom-top)*TILE_SIZE;
+		left = get31TileNumberX(lonleft);
+		top = get31TileNumberY(lattop);
+		right = left + tileWX * (1 << (31 - zoom));
+		bottom = top + tileHY * (1 << (31 - zoom));
+		width = tileWX * TILE_SIZE;
+		height = tileHY * TILE_SIZE;
 	}
 };
 
@@ -164,78 +170,86 @@ void printFileInformation(const char* fileName, VerboseInfo* verbose) {
 	}
 }
 
-SkColor defaultMapColor = SK_ColorLTGRAY;
-void runSimpleRendering(const char* fileName, RenderingInfo* info) {
-	initBinaryMapFile(fileName);
-	if(info->width > 10000 || info->height > 10000) {
+
+void runSimpleRendering(string fileName, string renderingFileName, RenderingInfo* info) {
+	SkColor defaultMapColor = SK_ColorLTGRAY;
+
+	BinaryMapFile* mf = initBinaryMapFile(fileName.c_str());
+	osmand_log_print(LOG_INFO, "Init %d (success) binary map file %s.", mf->version, fileName.c_str());
+
+	if (info->width > 10000 || info->height > 10000) {
 		osmand_log_print(LOG_ERROR, "We don't rendering images more than 10000x10000");
 		return;
 	}
 
-
-	// TODO not implemented (read storage from file)
-	RenderingRulesStorage* st = NULL; //createRenderingRulesStorage(env, storage);
-	RenderingRuleSearchRequest* req = new RenderingRuleSearchRequest(st);
-	// TODO init rule search request
-//	initRenderingRuleSearchRequest(env, res, renderingRuleSearchRequest);
-
-	SearchQuery q(floor(info->left), floor(info->right), ceil(info->top), ceil(info->bottom), req, new ResultPublisher());
+	osmand_log_print(LOG_INFO, "Rendering info bounds(%d, %d, %d, %d) zoom(%d), width/height(%d/%d) tilewidth/tileheight(%d/%d) fileName(%s)",
+			info->left, info->top, info->right, info->bottom, info->zoom, info->width, info->height, info->tileWX, info->tileHY, info->tileFileName.c_str());
+	RenderingRulesStorage* st = new RenderingRulesStorage(renderingFileName.c_str());
+	st->parseRulesFromXmlInputStream(renderingFileName.c_str(), NULL);
+	RenderingRuleSearchRequest* searchRequest = new RenderingRuleSearchRequest(st);
+	SearchQuery q(floor(info->left), floor(info->right), ceil(info->top), ceil(info->bottom), searchRequest,
+			new ResultPublisher());
 	q.zoom = info->zoom;
-	ResultPublisher* res = searchObjectsForRendering(&q, req, true, "Nothing found");
+
+	ResultPublisher* res = searchObjectsForRendering(&q, true, "Nothing found");
+	osmand_log_print(LOG_INFO, "Found %d objects", res->result.size());
 
 	SkBitmap* bitmap = new SkBitmap();
 	bitmap->setConfig(SkBitmap::kRGB_565_Config, info->width, info->height);
-//	  size_t bitmapDataSize = bitmap->getSize();
-//	  void* bitmapData bitmapData = malloc(bitmapDataSize);
-//	       bitmap->setPixels(bitmapData);
 
-	osmand_log_print(LOG_INFO, "Initializing rendering");
+	size_t bitmapDataSize = bitmap->getSize();
+	void* bitmapData = malloc(bitmapDataSize);
+	bitmap->setPixels(bitmapData);
+
+	osmand_log_print(LOG_INFO, "Initializing rendering style and rendering context");
 	ElapsedTimer initObjects;
 	initObjects.start();
 
 	RenderingContext rc;
+	searchRequest->clearState();
+	searchRequest->setIntFilter(st->PROPS.R_MINZOOM, info->zoom);
+	if (searchRequest->searchRenderingAttribute(A_DEFAULT_COLOR)) {
+		defaultMapColor = searchRequest->getIntPropertyValue(searchRequest->props()->R_ATTR_COLOR_VALUE);
+	}
+	searchRequest->clearState();
+	searchRequest->setIntFilter(st->PROPS.R_MINZOOM, info->zoom);
+	if (searchRequest->searchRenderingAttribute(A_SHADOW_RENDERING)) {
+		rc.setShadowRenderingMode(searchRequest->getIntPropertyValue(searchRequest->props()->R_ATTR_INT_VALUE));
+		//rc.setShadowRenderingColor(searchRequest->getIntPropertyValue(searchRequest->props()->R_SHADOW_COLOR));
+	}
 	rc.setLocation(info->left, info->top);
 	rc.setDimension(info->width, info->height);
 	rc.setZoom(info->zoom);
 	rc.setRotate(0);
 	rc.setDensityScale(1);
-	rc.setShadowRenderingMode(2);
 	osmand_log_print(LOG_INFO, "Rendering image");
 	initObjects.pause();
 	SkCanvas* canvas = new SkCanvas(*bitmap);
 	canvas->drawColor(defaultMapColor);
-	doRendering(res->result, canvas, req, &rc);
 
+	doRendering(res->result, canvas, searchRequest, &rc);
 	osmand_log_print(LOG_INFO, "End Rendering image");
 	osmand_log_print(LOG_INFO, "Native ok (init %d, rendering %d) ", initObjects.getElapsedTime(),
 			rc.nativeOperations.getElapsedTime());
-
-	if(!SkImageEncoder::EncodeFile(info->tileFileName.c_str(), *bitmap, SkImageEncoder::kPNG_Type, 0)) {
+	for(int i=100; i<200; i++) {
+		printf("\n");
+		for(int j=100; j<200; j++) {
+			printf("%s ", colorToString(bitmap->getColor(i,j)).c_str());
+		}
+	}
+	if (!SkImageEncoder::EncodeFile(info->tileFileName.c_str(), *bitmap, SkImageEncoder::kPNG_Type, 100)) {
 		osmand_log_print(LOG_ERROR, "FAIL to save tile to %s", info->tileFileName.c_str());
 	} else {
 		osmand_log_print(LOG_INFO, "Tile successfully saved to %s", info->tileFileName.c_str());
 	}
 	delete canvas;
 	delete bitmap;
+	free(bitmapData);
 	return;
 }
 
-class BasePathRenderingRulesStorageResolver : public RenderingRulesStorageResolver {
-public:
-	string path;
-	BasePathRenderingRulesStorageResolver(string  path) : path(path) {
 
-	}
-	virtual RenderingRulesStorage* resolve(string name, RenderingRulesStorageResolver* ref) {
-		string file = path;
-		file += name;
-		file+=".render.xml";
-		RenderingRulesStorage* st = new RenderingRulesStorage(file.c_str());
-		st->parseRulesFromXmlInputStream(file.c_str(), this);
-		return st;
-	}
-	virtual ~BasePathRenderingRulesStorageResolver() {}
-};
+
 void testRenderingRuleStorage(const char* basePath, const char* name) {
 	string filePath = string(basePath) + string(name);
 	RenderingRulesStorage* st = new RenderingRulesStorage(filePath.c_str());
@@ -256,12 +270,21 @@ void testRenderingRuleStorage(const char* basePath, const char* name) {
 	searchRequest->printDebugResult();
 }
 
+
+
 int main(int argc, char **argv) {
 	if (argc <= 1) {
+		// 1. Test Rendering rule storage
 //		testRenderingRuleStorage("/home/victor/projects/OsmAnd/git/DataExtractionOSM/src/net/osmand/render/",
 //				"test_depends.render.xml"
 //				"default.render.xml"
 //				);
+		// 2. Test simple rendering
+		char** tst = new char*[5] {"", "-renderingOutputFile=/home/victor/1.png","-zoom=11", "-lt=3,3", "-lbox=-80,22"};
+		RenderingInfo* info = new RenderingInfo(5, tst);
+		runSimpleRendering(string("/home/victor/projects/OsmAnd/data/osm-gen/Cuba2.obf"),
+				string("/home/victor/projects/OsmAnd/git/DataExtractionOSM/src/net/osmand/render/default.render.xml"), info);
+		printf("\n\n");
 		printUsage("");
 		return 1;
 	}
@@ -279,8 +302,9 @@ int main(int argc, char **argv) {
 			if (argc < 2) {
 				printUsage("Missing file parameter");
 			} else {
-				RenderingInfo* info = new RenderingInfo(argc, argv);
-				runSimpleRendering(argv[argc -1], info);
+				osmand_log_print(LOG_ERROR, "FIXME functionality");
+//				RenderingInfo* info = new RenderingInfo(argc, argv);
+//				runSimpleRendering(argv[argc -1], info);
 			}
 		} else {
 			printUsage("Unknown command");

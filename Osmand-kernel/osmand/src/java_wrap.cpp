@@ -94,7 +94,7 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 	SearchQuery q(sleft, sright, stop, sbottom, req, j);
 	q.zoom = zoom;
 
-	ResultPublisher* res = searchObjectsForRendering(&q, req, skipDuplicates, getString(ienv, msgNothingFound));
+	ResultPublisher* res = searchObjectsForRendering(&q, skipDuplicates, getString(ienv, msgNothingFound));
 	delete req;
 	return (jint) res;
 }

@@ -195,8 +195,7 @@ struct SearchQuery {
 };
 
 
-ResultPublisher* searchObjectsForRendering(SearchQuery* q, RenderingRuleSearchRequest* req,
-		bool skipDuplicates, std::string msgNothingFound);
+ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, std::string msgNothingFound);
 
 BinaryMapFile* initBinaryMapFile(std::string inputName);
 
