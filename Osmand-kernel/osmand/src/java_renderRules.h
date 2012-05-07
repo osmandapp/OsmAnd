@@ -40,7 +40,8 @@ jfieldID RenderingRuleSearchRequest_savedValues;
 jfieldID RenderingRuleSearchRequest_savedFvalues;
 
 RenderingRule* createRenderingRule(JNIEnv* env, jobject rRule, RenderingRulesStorage* st) {
-	RenderingRule* rule = new RenderingRule(map<string,string>(),st);
+	map<string,string> empty;
+	RenderingRule* rule = new RenderingRule(empty,st);
 	jobjectArray props = (jobjectArray) env->GetObjectField(rRule, RenderingRule_properties);
 	jintArray intProps = (jintArray) env->GetObjectField(rRule, RenderingRule_intProperties);
 	jfloatArray floatProps = (jfloatArray) env->GetObjectField(rRule, RenderingRule_floatProperties);
@@ -171,10 +172,10 @@ void initRenderingRuleSearchRequest(JNIEnv* env, RenderingRuleSearchRequest* r, 
 	jobjectArray oa = (jobjectArray) env->GetObjectField(rrs, RenderingRuleSearchRequest_props);
 	sz = env->GetArrayLength(oa);
 	std::vector<RenderingRuleProperty*> requestProps;
-	int* values;
-	float* fvalues;
-	int* savedValues;
-	float* savedFvalues;
+	vector<int> values;
+	vector<float> fvalues;
+	vector<int> savedValues;
+	vector<float> savedFvalues;
 
 	for (jsize i = 0; i < sz; i++) {
 		jobject prop = env->GetObjectArrayElement(oa, i);
@@ -186,7 +187,7 @@ void initRenderingRuleSearchRequest(JNIEnv* env, RenderingRuleSearchRequest* r, 
 	env->DeleteLocalRef(oa);
 	sz = r->storage->PROPS.properties.size();
 	{
-		values = new int[sz];
+		values.resize(sz , 0);
 		jintArray ia = (jintArray) env->GetObjectField(rrs, RenderingRuleSearchRequest_values);
 		jint* ie = env->GetIntArrayElements(ia, NULL);
 		for (int i = 0; i < sz; i++) {
@@ -197,7 +198,7 @@ void initRenderingRuleSearchRequest(JNIEnv* env, RenderingRuleSearchRequest* r, 
 	}
 
 	{
-		fvalues = new float[sz];
+		fvalues .resize(sz , 0);
 		jfloatArray ia = (jfloatArray) env->GetObjectField(rrs, RenderingRuleSearchRequest_fvalues);
 		jfloat* ie = env->GetFloatArrayElements(ia, NULL);
 		for (int i = 0; i < sz; i++) {
@@ -208,7 +209,7 @@ void initRenderingRuleSearchRequest(JNIEnv* env, RenderingRuleSearchRequest* r, 
 	}
 
 	{
-		savedValues = new int[sz];
+		savedValues.resize(sz , 0);
 		jintArray ia = (jintArray) env->GetObjectField(rrs, RenderingRuleSearchRequest_values);
 		jint* ie = env->GetIntArrayElements(ia, NULL);
 		for (int i = 0; i < sz; i++) {
@@ -219,7 +220,7 @@ void initRenderingRuleSearchRequest(JNIEnv* env, RenderingRuleSearchRequest* r, 
 	}
 
 	{
-		savedFvalues = new float[sz];
+		savedFvalues .resize(sz , 0);
 		jfloatArray ia = (jfloatArray) env->GetObjectField(rrs, RenderingRuleSearchRequest_fvalues);
 		jfloat* ie = env->GetFloatArrayElements(ia, NULL);
 		for (int i = 0; i < sz; i++) {

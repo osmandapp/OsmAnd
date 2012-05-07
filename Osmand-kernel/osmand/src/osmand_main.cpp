@@ -1,4 +1,5 @@
 #include "binaryRead.h"
+#include "renderRules.h"
 #include "rendering.h"
 #include <SkImageEncoder.h>
 #include <stdio.h>
@@ -219,8 +220,48 @@ void runSimpleRendering(const char* fileName, RenderingInfo* info) {
 	return;
 }
 
+class BasePathRenderingRulesStorageResolver : public RenderingRulesStorageResolver {
+public:
+	string path;
+	BasePathRenderingRulesStorageResolver(string  path) : path(path) {
+
+	}
+	virtual RenderingRulesStorage* resolve(string name, RenderingRulesStorageResolver* ref) {
+		string file = path;
+		file += name;
+		file+=".render.xml";
+		RenderingRulesStorage* st = new RenderingRulesStorage(file.c_str());
+		st->parseRulesFromXmlInputStream(file.c_str(), this);
+		return st;
+	}
+	virtual ~BasePathRenderingRulesStorageResolver() {}
+};
+void testRenderingRuleStorage(const char* basePath, const char* name) {
+	string filePath = string(basePath) + string(name);
+	RenderingRulesStorage* st = new RenderingRulesStorage(filePath.c_str());
+	st->parseRulesFromXmlInputStream(filePath.c_str(),
+			new BasePathRenderingRulesStorageResolver(string(basePath)));
+	st->printDebug(RenderingRulesStorage::TEXT_RULES);
+	RenderingRuleSearchRequest* searchRequest = new RenderingRuleSearchRequest(st);
+	searchRequest->setStringFilter(st->PROPS.R_TAG, "highway");
+	searchRequest->setStringFilter(st->PROPS.R_VALUE, "motorway");
+	searchRequest->setIntFilter(st->PROPS.R_LAYER, 1);
+	searchRequest->setIntFilter(st->PROPS.R_MINZOOM, 15);
+	searchRequest->setIntFilter(st->PROPS.R_MAXZOOM, 15);
+	//	searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
+	// searchRequest.setBooleanFilter(storage.PROPS.get("hmRendered"), true);
+
+	bool res = searchRequest->search(RenderingRulesStorage::LINE_RULES, true);
+	printf("Result %d\n", res);
+	searchRequest->printDebugResult();
+}
+
 int main(int argc, char **argv) {
 	if (argc <= 1) {
+//		testRenderingRuleStorage("/home/victor/projects/OsmAnd/git/DataExtractionOSM/src/net/osmand/render/",
+//				"test_depends.render.xml"
+//				"default.render.xml"
+//				);
 		printUsage("");
 		return 1;
 	}

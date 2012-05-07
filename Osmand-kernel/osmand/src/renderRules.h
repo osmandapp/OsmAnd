@@ -139,7 +139,8 @@ public:
 	std::vector<RenderingRule*> ifElseChildren;
 	std::vector<RenderingRule*> ifChildren;
 
-	RenderingRule (map<string, string> attrs, RenderingRulesStorage* storage);
+	RenderingRule(map<string, string>& attrs, RenderingRulesStorage* storage);
+	void printDebugRenderingRule(string indent, RenderingRulesStorage * st);
 private :
 	inline int getPropertyIndex(string property) {
 		for (int i = 0; i < properties.size(); i++) {
@@ -168,7 +169,7 @@ class RenderingRulesStorageResolver {
 public:
 	virtual RenderingRulesStorage* resolve(string name, RenderingRulesStorageResolver* ref) = 0;
 
-	virtual ~RenderingRulesStorageResolver();
+	virtual ~RenderingRulesStorageResolver() {}
 };
 
 
@@ -364,16 +365,17 @@ public:
 	const static int POLYGON_RULES = 3;
 	const static int TEXT_RULES = 4;
 	const static int ORDER_RULES = 5;
-	RenderingRulesStorage(void* storage, bool createDefProperties = true) : storageId(storage),
+	RenderingRulesStorage(const void* storage, bool createDefProperties = true) : storageId(storage),
 			PROPS(createDefProperties) {
 		tagValueGlobalRules = new HMAP::hash_map<int, RenderingRule*>[SIZE_STATES];
+		getDictionaryValue("");
 	}
 
 	~RenderingRulesStorage() {
 		delete[] tagValueGlobalRules;
 		// proper
 	}
-	void* storageId;
+	const void* storageId;
 
 	RenderingRule* getRule(int state, int itag, int ivalue);
 
@@ -394,7 +396,11 @@ public:
 	}
 
 	inline int getDictionaryValue(std::string s) {
-		return dictionaryMap[s];
+		HMAP::hash_map<std::string, int>::iterator it = dictionaryMap.find(s);
+		if(it == dictionaryMap.end()) {
+			return registerString(s);
+		}
+		return it->second;
 	}
 
 	void parseRulesFromXmlInputStream(const char* filename, RenderingRulesStorageResolver* resolver);
@@ -402,6 +408,8 @@ public:
 	inline string getStringValue(int i) {
 		return dictionary[i];
 	}
+
+	void printDebug(int state);
 
 private:
 	RenderingRule* createTagValueRootWrapperRule(int tagValueKey, RenderingRule* previous);
@@ -427,10 +435,10 @@ class RenderingRuleSearchRequest
 {
 private :
 	RenderingRulesStorageProperties* PROPS;
-	int* values;
-	float* fvalues;
-	int* savedValues;
-	float* savedFvalues;
+	vector<int> values;
+	vector<float> fvalues;
+	vector<int> savedValues;
+	vector<float> savedFvalues;
 	bool searchResult;
 	MapDataObject* obj;
 
@@ -467,11 +475,19 @@ public:
 
 	void clearState();
 
+	void saveState();
+
 	void setInitialTagValueZoom(std::string tag, std::string value, int zoom, MapDataObject* obj);
 
 	void setTagValueZoomLayer(std::string tag, std::string val, int zoom, int layer, MapDataObject* obj);
 
 	void externalInitialize(int* values, float* fvalues,	int* savedValues,	float* savedFvalues);
+
+	void printDebugResult();
+
+	void externalInitialize(vector<int>& vs, vector<float>& fvs, vector<int>& sVs, vector<float>& sFvs);
+
+	bool isSpecified(RenderingRuleProperty* p);
 
 };
 

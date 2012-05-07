@@ -22,7 +22,7 @@ int parseColor(string colorString) {
 	if (colorString[0] == '#') {
 		// Use a long to avoid rollovers on #ffXXXXXX
 		char** end;
-		long color = strtol(colorString.c_str() + 1, end , 16);
+		long color = strtol(colorString.c_str() + 1, NULL, 16);
 		if (colorString.size() == 7) {
 			// Set the alpha value
 			color |= 0x00000000ff000000;
@@ -36,24 +36,28 @@ int parseColor(string colorString) {
 }
 
 string colorToString(int color) {
-	string s;
-	osmand_log_print(LOG_ERROR, "FIXME color to string %hd", color);
-	return s;
+	char c[9];
+	if ((0xFF000000 & color) == 0xFF000000) {
+		sprintf(c, "%x", (color & 0x00FFFFFF));
+	} else {
+		sprintf(c, "%x", color);
+	}
+	return string(c);
 }
 
 
-RenderingRule::RenderingRule(map<string, string> attrs, RenderingRulesStorage* storage) {
+RenderingRule::RenderingRule(map<string, string>& attrs, RenderingRulesStorage* storage) {
 	properties.reserve(attrs.size());
 	intProperties.assign(attrs.size(), -1);
 	map<string, string>::iterator it = attrs.begin();
 	int i = 0;
 	for (; it != attrs.end(); it++) {
-		HMAP::hash_map<std::string, RenderingRuleProperty*>::iterator find = storage->PROPS.properties.find(it->first);
-		if (find == storage->PROPS.properties.end()) {
+		RenderingRuleProperty* property = storage->PROPS.getProperty(it->first.c_str());
+		if (property == NULL) {
+			printf("Property %s was not found in registry", it->first.c_str());
 			osmand_log_print(LOG_ERROR, "Property %s was not found in registry", it->first.c_str());
+			return ;
 		}
-		i++;
-		RenderingRuleProperty* property = find->second;
 		properties.push_back(property);
 
 		if (property->isString()) {
@@ -67,6 +71,7 @@ RenderingRule::RenderingRule(map<string, string> attrs, RenderingRulesStorage* s
 		} else {
 			intProperties[i] = property->parseIntValue(it->second);
 		}
+		i++;
 	}
 }
 
@@ -197,8 +202,9 @@ class RenderingRulesHandler {
 	}
 
 	static map<string, string>& parseAttributes(const char **atts, map<string, string>& m) {
-		while (atts != 0) {
-			m[string(*(atts++))] = string(*(atts++));
+		while (*atts != NULL) {
+			m[string(atts[0])] = string(atts[1]);
+			atts += 2;
 		}
 		return m;
 	}
@@ -221,8 +227,10 @@ class RenderingRulesHandler {
 				t->st.top().singleRule->ifElseChildren.push_back(renderingRule);
 			} else {
 				t->storage->registerGlobalRule(renderingRule, t->state);
+
 			}
-			t->st.push(GroupRules(renderingRule));
+			GroupRules gr(renderingRule);
+			t->st.push(gr);
 		} else if ("groupFilter" == name) { //$NON-NLS-1$
 			map<string, string> attrsMap;
 			parseAttributes(atts, attrsMap);
@@ -240,7 +248,6 @@ class RenderingRulesHandler {
 			GroupRules groupRules;
 			if (t->st.size() > 0 && t->st.top().isGroup()) {
 				groupRules.groupAttributes.insert(t->st.top().groupAttributes.begin(), t->st.top().groupAttributes.end());
-				t->st.top().childrenGroups.push_back(groupRules);
 			}
 			parseAttributes(atts, groupRules.groupAttributes);
 			t->st.push(groupRules);
@@ -258,7 +265,8 @@ class RenderingRulesHandler {
 			map<string, string> attrsMap;
 			parseAttributes(atts, attrsMap);
 			string attr = attrsMap["name"];
-			RenderingRule* root = new RenderingRule(map<string, string>(),t->storage);
+			map<string, string> empty;
+			RenderingRule* root = new RenderingRule(empty,t->storage);
 			t->storage->renderingAttributes[name] = root;
 			t->st.push(GroupRules(root));
 		} else if ("renderingProperty" == name) {
@@ -319,6 +327,8 @@ class RenderingRulesHandler {
 			t->st.pop();
 			if (t->st.size() == 0) {
 				group.registerGlobalRules(t->storage,t->state);
+			} else if(t->st.top().isGroup()){
+				t->st.top().childrenGroups.push_back(group);
 			}
 		} else if ("groupFilter" == name) { //$NON-NLS-1$
 			t->st.pop();
@@ -329,6 +339,36 @@ class RenderingRulesHandler {
 
 };
 
+
+void RenderingRule::printDebugRenderingRule(string indent, RenderingRulesStorage * st) {
+	indent += "   ";
+	printf("\n%s", indent.c_str());
+	vector<RenderingRuleProperty*>::iterator pp = properties.begin();
+	for (; pp != properties.end(); pp++) {
+		printf(" %s=", (*pp)->attrName.c_str());
+		if ((*pp)->isString()) {
+			printf("\"%s\"", getStringPropertyValue((*pp)->attrName, st).c_str());
+		} else if ((*pp)->isFloat()) {
+			printf("%f", getFloatPropertyValue((*pp)->attrName));
+		} else if ((*pp)->isColor()) {
+			printf("%s", getColorPropertyValue((*pp)->attrName).c_str());
+		} else if ((*pp)->isIntParse()) {
+			printf("%d", getIntPropertyValue((*pp)->attrName));
+		}
+	}
+	vector<RenderingRule*>::iterator it = ifElseChildren.begin();
+	for (; it != ifElseChildren.end(); it++) {
+		(*it)->printDebugRenderingRule(indent, st);
+	}
+}
+void RenderingRulesStorage::printDebug(int state) {
+	HMAP::hash_map<int, RenderingRule*>::iterator it = tagValueGlobalRules[state].begin();
+	for (; it != tagValueGlobalRules[state].end(); it++) {
+		printf("\n\n%s : %s", getTagString(it->first).c_str(), getValueString(it->first).c_str());
+		it->second->printDebugRenderingRule(string(""), this);
+	}
+}
+
 void RenderingRulesStorage::parseRulesFromXmlInputStream(const char* filename, RenderingRulesStorageResolver* resolver) {
 	XML_Parser parser = XML_ParserCreate(NULL);
 	RenderingRulesHandler* handler = new RenderingRulesHandler(resolver, this);
@@ -336,6 +376,7 @@ void RenderingRulesStorage::parseRulesFromXmlInputStream(const char* filename, R
 	XML_SetElementHandler(parser, RenderingRulesHandler::startElementHandler, RenderingRulesHandler::endElementHandler);
 	FILE *file = fopen(filename, "r");
 	if (file == NULL) {
+		osmand_log_print(LOG_ERROR, "File can not be open %s", filename);
 		return;
 	}
 	char buffer[512];
@@ -373,7 +414,7 @@ void RenderingRulesStorage::parseRulesFromXmlInputStream(const char* filename, R
 				continue;
 			}
 			HMAP::hash_map<int, RenderingRule*>::iterator it = depends->tagValueGlobalRules[i].begin();
-			for (; it != depends->tagValueGlobalRules[i].begin(); it++) {
+			for (; it != depends->tagValueGlobalRules[i].end(); it++) {
 				HMAP::hash_map<int, RenderingRule*>::iterator o = tagValueGlobalRules[i].find(it->first);
 				RenderingRule* toInsert = it->second;
 				if (o != tagValueGlobalRules[i].end()) {
@@ -390,16 +431,24 @@ void RenderingRulesStorage::parseRulesFromXmlInputStream(const char* filename, R
 
 RenderingRuleSearchRequest::RenderingRuleSearchRequest(RenderingRulesStorage* storage)  {
 	this->storage = storage;
-	PROPS = &this->storage->PROPS;
-	clearState();
+	PROPS = &(this->storage->PROPS);
+	this->values.resize(PROPS->properties.size(), 0);
+	this->fvalues.resize(PROPS->properties.size(), 0);
+	HMAP::hash_map<string, RenderingRuleProperty*>::iterator it = PROPS->properties.begin();
+	for (; it != PROPS->properties.end(); it++) {
+		if (!it->second->isColor()) {
+			values[it->second->id] = -1;
+		}
+	}
+	saveState();
+}
+
+void RenderingRuleSearchRequest::saveState() {
+	this->savedFvalues = fvalues;
+	this->savedValues = values;
 }
 
 RenderingRuleSearchRequest::~RenderingRuleSearchRequest() {
-	delete PROPS;
-	delete[] fvalues;
-	delete[] values;
-	delete[] savedFvalues;
-	delete[] savedValues;
 }
 
 int RenderingRuleSearchRequest::getIntPropertyValue(RenderingRuleProperty* prop) {
@@ -444,11 +493,11 @@ void RenderingRuleSearchRequest::setIntFilter(RenderingRuleProperty* p, int filt
 	}
 }
 
-void RenderingRuleSearchRequest::externalInitialize(int* vs, float* fvs, int* sVs, float* sFvs){
+void RenderingRuleSearchRequest::externalInitialize(vector<int>& vs, vector<float>& fvs, vector<int>& sVs, vector<float>& sFvs){
 	this->values = vs;
 	this->fvalues = fvs;
-	this->savedFvalues = sFvs;
 	this->savedValues = sVs;
+	this->savedFvalues = sFvs;
 
 }
 void RenderingRuleSearchRequest::clearIntvalue(RenderingRuleProperty* p) {
@@ -568,8 +617,8 @@ bool RenderingRuleSearchRequest::visitRule(RenderingRule* rule, bool loadOutput)
 
 void RenderingRuleSearchRequest::clearState() {
 	obj = NULL;
-	memcpy(values, savedValues, storage->PROPS.properties.size() * sizeof(int));
-	memcpy(fvalues, savedFvalues, storage->PROPS.properties.size() * sizeof(float));
+	values = savedValues;
+	fvalues = savedFvalues;
 }
 
 void RenderingRuleSearchRequest::setInitialTagValueZoom(std::string tag, std::string value, int zoom, MapDataObject* obj) {
@@ -588,6 +637,45 @@ void RenderingRuleSearchRequest::setTagValueZoomLayer(std::string tag, std::stri
 	setIntFilter(PROPS->R_LAYER, layer);
 	setStringFilter(PROPS->R_TAG, tag);
 	setStringFilter(PROPS->R_VALUE, val);
+}
+
+bool RenderingRuleSearchRequest::isSpecified(RenderingRuleProperty* p) {
+	if (p->isFloat()) {
+		return fvalues[p->id] != 0;
+	} else {
+		int val = values[p->id];
+		if (p->isColor()) {
+			return val != 0;
+		} else {
+			return val != -1;
+		}
+	}
+}
+
+void RenderingRuleSearchRequest::printDebugResult() {
+	if (searchResult) {
+		printf("\n Found : ");
+		HMAP::hash_map<string, RenderingRuleProperty*>::iterator it = PROPS->properties.begin();
+		for (; it != PROPS->properties.end(); ++it) {
+			RenderingRuleProperty* rp = it->second;
+			if (!rp->input && isSpecified(rp)) {
+				printf(" %s=", rp->attrName.c_str());
+				if (rp->isString()) {
+					printf("\"%s\"", getStringPropertyValue(rp).c_str());
+				} else if (rp->isFloat()) {
+					printf("%f", getFloatPropertyValue(rp));
+				} else if (rp->isColor()) {
+					printf("%s", colorToString(getIntPropertyValue(rp)).c_str());
+				} else if (rp->isIntParse()) {
+					printf("%d", getIntPropertyValue(rp));
+				}
+			}
+		}
+		printf("\n");
+	} else {
+		printf("\nNot found\n");
+	}
+
 }
 
 

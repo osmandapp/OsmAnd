@@ -124,9 +124,8 @@ public class RenderingRulesStorage {
 								if (rule != null) {
 									RenderingRule toInsert = createTagValueRootWrapperRule(keys[j], rule);
 									toInsert.addIfElseChildren(dependsRule);
-								} else {
-									tagValueGlobalRules[i].put(keys[j], dependsRule);
 								}
+								tagValueGlobalRules[i].put(keys[j], dependsRule);
 							}
 						}
 					} else {
@@ -443,7 +442,7 @@ public class RenderingRulesStorage {
 		};
 		storage.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream("test_depends.render.xml"), 
 				resolver);
-//		storage.printDebug(ORDER_RULES, System.out);
+		storage.printDebug(TEXT_RULES, System.out);
 //		long tm = System.nanoTime();
 //		int count = 100000;
 //		for (int i = 0; i < count; i++) {

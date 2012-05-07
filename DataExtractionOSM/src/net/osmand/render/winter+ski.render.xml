@@ -22,7 +22,7 @@
 	<!-- point = 1, line = 2, polygon = 3 -->
 	<order>
 		<!-- Winter: Layers -->
-		<group orderType="2">
+		<group objectType="2">
 			<filter tag="oa_nordic" value="" order="57" shadowLevel="1"/>
 			<filter tag="oa_downhill" value="" order="57" shadowLevel="1"/>
 			<filter tag="oa_skitour" value="" order="57" shadowLevel="1"/>

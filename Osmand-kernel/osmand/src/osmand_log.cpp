@@ -14,6 +14,8 @@ void osmand_log_print(int type, const char* msg, ...) {
 		__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, msg, args);
 	} else if(type == LOG_INFO) {
 		__android_log_print(ANDROID_LOG_INFO, LOG_TAG, msg, args);
+	} else if(type == LOG_WARN) {
+		__android_log_print(ANDROID_LOG_WARN, LOG_TAG, msg, args);
 	} else {
 		__android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, msg, args);
 	}
@@ -28,8 +30,17 @@ const char* const LOG_TAG = "net.osmand:native";
 void osmand_log_print(int type, const char* msg, ...) {
 	va_list args;
 	va_start( args, msg);
-	// TODO by type
-	printf(msg, args);
+	if(type == LOG_ERROR) {
+		printf("ERROR: ");
+	} else if(type == LOG_INFO) {
+		printf("INFO: ");
+	} else if(type == LOG_WARN) {
+		printf("WARN: ");
+	} else {
+		printf("DEBUG: ");
+	}
+	vprintf(msg, args);
+	printf("\n");
 	va_end(args);
 }
 
