@@ -201,7 +201,8 @@ public :
 	int shadowLevelMax;
 
 public:
-	RenderingContext() : shadowLevelMax(0), shadowLevelMin(256), density(true), useEnglishNames(false){
+	RenderingContext() : shadowLevelMax(0), shadowLevelMin(256), density(true), useEnglishNames(false), pointCount(0),
+		pointInsideCount(0), visible(0), allObjects(0){
 		setRotate(0);
 		setZoom(15);
 	}
@@ -290,5 +291,7 @@ double get31LongitudeX(int tileX);
 double get31LatitudeY(int tileY);
 double getTileNumberX(float zoom, double longitude);
 double getTileNumberY(float zoom, double latitude);
+
+double getPowZoom(float zoom);
 
 #endif /*_OSMAND_COMMON_H*/

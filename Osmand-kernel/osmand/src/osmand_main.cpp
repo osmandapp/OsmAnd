@@ -217,7 +217,10 @@ void runSimpleRendering(string fileName, string renderingFileName, RenderingInfo
 		rc.setShadowRenderingMode(searchRequest->getIntPropertyValue(searchRequest->props()->R_ATTR_INT_VALUE));
 		//rc.setShadowRenderingColor(searchRequest->getIntPropertyValue(searchRequest->props()->R_SHADOW_COLOR));
 	}
-	rc.setLocation(info->left, info->top);
+	rc.setLocation(
+			((double)info->left)/getPowZoom(31-info->zoom),
+			((double)info->top)/getPowZoom(31-info->zoom)
+			);
 	rc.setDimension(info->width, info->height);
 	rc.setZoom(info->zoom);
 	rc.setRotate(0);
@@ -226,18 +229,12 @@ void runSimpleRendering(string fileName, string renderingFileName, RenderingInfo
 	initObjects.pause();
 	SkCanvas* canvas = new SkCanvas(*bitmap);
 	canvas->drawColor(defaultMapColor);
-
 	doRendering(res->result, canvas, searchRequest, &rc);
 	osmand_log_print(LOG_INFO, "End Rendering image");
 	osmand_log_print(LOG_INFO, "Native ok (init %d, rendering %d) ", initObjects.getElapsedTime(),
 			rc.nativeOperations.getElapsedTime());
-	for(int i=100; i<200; i++) {
-		printf("\n");
-		for(int j=100; j<200; j++) {
-			printf("%s ", colorToString(bitmap->getColor(i,j)).c_str());
-		}
-	}
-	if (!SkImageEncoder::EncodeFile(info->tileFileName.c_str(), *bitmap, SkImageEncoder::kPNG_Type, 100)) {
+	SkImageEncoder* enc = SkImageEncoder::Create(SkImageEncoder::kPNG_Type);
+	if (enc != NULL && !enc->encodeFile(info->tileFileName.c_str(), *bitmap, 100)) {
 		osmand_log_print(LOG_ERROR, "FAIL to save tile to %s", info->tileFileName.c_str());
 	} else {
 		osmand_log_print(LOG_INFO, "Tile successfully saved to %s", info->tileFileName.c_str());
@@ -280,7 +277,7 @@ int main(int argc, char **argv) {
 //				"default.render.xml"
 //				);
 		// 2. Test simple rendering
-		char** tst = new char*[5] {"", "-renderingOutputFile=/home/victor/1.png","-zoom=11", "-lt=3,3", "-lbox=-80,22"};
+		char** tst = new char*[5] {"", "-renderingOutputFile=/home/victor/1.png","-zoom=11", "-lt=5,5", "-lbox=-80,22"};
 		RenderingInfo* info = new RenderingInfo(5, tst);
 		runSimpleRendering(string("/home/victor/projects/OsmAnd/data/osm-gen/Cuba2.obf"),
 				string("/home/victor/projects/OsmAnd/git/DataExtractionOSM/src/net/osmand/render/default.render.xml"), info);

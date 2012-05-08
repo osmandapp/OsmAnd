@@ -266,7 +266,7 @@ class RenderingRulesHandler {
 			string attr = attrsMap["name"];
 			map<string, string> empty;
 			RenderingRule* root = new RenderingRule(empty,t->storage);
-			t->storage->renderingAttributes[name] = root;
+			t->storage->renderingAttributes[attr] = root;
 			t->st.push(GroupRules(root));
 		} else if ("renderingProperty" == name) {
 			map<string, string> attrsMap;

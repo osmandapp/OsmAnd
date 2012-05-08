@@ -435,18 +435,18 @@ void drawPoint(MapDataObject* mObj,	RenderingRuleSearchRequest* req, SkCanvas* c
 
 void drawObject(RenderingContext* rc, MapDataObject* mObj, SkCanvas* cv, RenderingRuleSearchRequest* req,
 	SkPaint* paint, int l, int renderText, int drawOnlyShadow) {
-		rc->allObjects++;
-		int t = mObj->objectType;
-		tag_value pair = mObj->types.at(l);
-		if (t == 1 && !drawOnlyShadow) {
-			// point
-			drawPoint(mObj, req, cv, paint, rc, pair, renderText);
-		} else if (t == 2) {
-			drawPolyline(mObj, req, cv, paint, rc, pair, mObj->getSimpleLayer(), drawOnlyShadow);
-		} else if (t == 3 && !drawOnlyShadow) {
-			// polygon
-			drawPolygon(mObj, req, cv, paint, rc, pair);
-		}
+	rc->allObjects++;
+	int t = mObj->objectType;
+	tag_value pair = mObj->types.at(l);
+	if (t == 1 && !drawOnlyShadow) {
+		// point
+		drawPoint(mObj, req, cv, paint, rc, pair, renderText);
+	} else if (t == 2) {
+		drawPolyline(mObj, req, cv, paint, rc, pair, mObj->getSimpleLayer(), drawOnlyShadow);
+	} else if (t == 3 && !drawOnlyShadow) {
+		// polygon
+		drawPolygon(mObj, req, cv, paint, rc, pair);
+	}
 }
 
 
@@ -529,7 +529,6 @@ void doRendering(std::vector <MapDataObject* > mapDataObjects, SkCanvas* canvas,
 		RenderingRuleSearchRequest* req,
 		RenderingContext* rc) {
 	rc->nativeOperations.start();
-
 	SkPaint* paint = new SkPaint;
 	paint->setAntiAlias(true);
 
@@ -537,12 +536,12 @@ void doRendering(std::vector <MapDataObject* > mapDataObjects, SkCanvas* canvas,
 	HMAP::hash_map<int, std::vector<int> > orderMap = sortObjectsByProperOrder(mapDataObjects, req, rc);
 	std::set<int> keys;
 	HMAP::hash_map<int, std::vector<int> >::iterator it = orderMap.begin();
+
 	while (it != orderMap.end()) {
 		keys.insert(it->first);
 		it++;
 	}
 	bool shadowDrawn = false;
-
 	for (std::set<int>::iterator ks = keys.begin(); ks != keys.end(); ks++) {
 		if (!shadowDrawn && *ks >= rc->shadowLevelMin && *ks <= rc->shadowLevelMax && rc->getShadowRenderingMode() > 1) {
 			for (std::set<int>::iterator ki = ks; ki != keys.end(); ki++) {
@@ -557,6 +556,7 @@ void doRendering(std::vector <MapDataObject* > mapDataObjects, SkCanvas* canvas,
 					MapDataObject* mapObject = mapDataObjects.at(ind);
 
 					// show text only for main type
+
 					drawObject(rc, mapObject, canvas, req, paint, l, l == 0, true);
 				}
 			}
@@ -588,4 +588,7 @@ void doRendering(std::vector <MapDataObject* > mapDataObjects, SkCanvas* canvas,
 
 	delete paint;
 	rc->nativeOperations.pause();
+	osmand_log_print(LOG_INFO,  "Native ok (rendering %d, text %d ms) \n (%d points, %d points inside, %d of %d objects visible)\n",
+				rc->nativeOperations.getElapsedTime(),	rc->textRendering.getElapsedTime(),
+				rc->pointCount, rc->pointInsideCount, rc->visible, rc->allObjects);
 }
