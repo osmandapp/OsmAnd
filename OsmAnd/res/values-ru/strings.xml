@@ -32,7 +32,7 @@
 \n\t- Показывать текущий записываемый трек на карте
 \n\t- Другие изменения
 	</string>
-    <string name="update_poi_does_not_change_indexes">Измение POI в приложении не меняет POI загруженные из интернета, однако все изменения сохраняются в локальный файл.</string>
+    <string name="update_poi_does_not_change_indexes">Изменение POI в приложении не меняет POI загруженные из интернета, однако все изменения сохраняются в локальный файл.</string>
 	<string name="local_openstreetmap_uploading_poi">Загрузка POI</string>
 	<string name="local_openstreetmap_poi_were_uploaded">{0} POI были загружены</string>
 	<string name="local_openstreetmap_uploadall">Загрузить все POI</string>
