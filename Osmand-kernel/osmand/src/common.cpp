@@ -2,6 +2,7 @@
 #include <vector>
 #include <SkPath.h>
 #include <SkBitmap.h>
+#include <SkImageDecoder.h>
 #include <time.h>
 #include <math.h>
 
@@ -92,6 +93,23 @@ int ElapsedTimer::getElapsedTime()
 }
 
 SkBitmap* RenderingContext::getCachedBitmap(const std::string& bitmapResource) {
+	if (defaultIconsDir.size() > 0) {
+		string fl = string(defaultIconsDir + "h_" + bitmapResource + ".png");
+		FILE* f = fopen(fl.c_str(), "r");
+		if (f == NULL) {
+			fl = string(defaultIconsDir + "g_" + bitmapResource + ".png");
+			f = fopen(fl.c_str(), "r");
+		}
+		if (f != NULL) {
+			fclose(f);
+			osmand_log_print(LOG_INFO, "Open file %s", fl.c_str());
+			SkBitmap* bmp = new SkBitmap();
+			if (!SkImageDecoder::DecodeFile(fl.c_str(), bmp)) {
+				return NULL;
+			}
+			return bmp;
+		}
+	}
 	return NULL;
 }
 

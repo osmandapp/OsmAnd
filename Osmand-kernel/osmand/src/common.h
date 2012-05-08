@@ -171,6 +171,7 @@ private :
 	// int shadowRenderingMode = 2; // blur shadow (most CPU, but still reasonable)
 	// int shadowRenderingMode = 3; solid border (CPU use like classic version or even smaller)
 	int shadowRenderingMode;
+	string defaultIconsDir;
 
 public:
 	// debug purpose
@@ -211,6 +212,10 @@ public:
 	virtual bool interrupted();
 	virtual SkBitmap* getCachedBitmap(const std::string& bitmapResource);
 	virtual std::string getTranslatedString(const std::string& src);
+
+	void setDefaultIconsDir(string path) {
+		defaultIconsDir = path;
+	}
 
 	void setZoom(int z) {
 		this->zoom = z;

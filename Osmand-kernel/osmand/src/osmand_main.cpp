@@ -27,13 +27,15 @@ public:
 	double lattop, lonleft;
 	int tileWX, tileHY;
 	std::string tileFileName;
+	std::string renderingFileName;
+	std::string imagesFileName;
 	int zoom;
 	int width ;
 	int height;
 
 	RenderingInfo(int argc, char **params) {
 		double l1, l2;
-		char s[40];
+		char s[100];
 		int z, z1, z2 ;
 		lattop = 85;
 		tileHY = 2;
@@ -41,10 +43,12 @@ public:
 		tileWX = 2;
 		zoom = 15;
 		for (int i = 1; i != argc; ++i) {
-			if (strcmp(params[i], "-renderingOutputFile=") == 0) {
-				tileFileName = (char*) (params[i] + strlen("-renderingOutputFile="));
-			} else if (sscanf(params[i], "-renderingOutputFile=%s", &s)) {
+			if (sscanf(params[i], "-renderingOutputFile=%s", s)) {
 				tileFileName = s;
+			} else if (sscanf(params[i], "-imagesBasePathFile=%s", s)) {
+				imagesFileName = s;
+			} else if (sscanf(params[i], "-renderingStyleFile=%s", s)) {
+				renderingFileName = s;
 			} else if (sscanf(params[i], "-zoom=%d", &z)) {
 				zoom = z;
 			} else if (sscanf(params[i], "-lbox=%lg,%lg", &l1, &l2)) {
@@ -52,7 +56,7 @@ public:
 				lattop = l2;
 			} else if (sscanf(params[i], "-lt=%d,%d", &z1, &z2)) {
 				tileWX = z1;
-				tileWX = z2;
+				tileHY = z2;
 			}
 		}
 
@@ -80,6 +84,8 @@ public:
 		lonleft = -180;
 		lonright = 180;
 		zoom = 15;
+		int z;
+		double l1, l2, l3, l4;
 		for (int i = 1; i != argc; ++i) {
 			if (strcmp(params[i], "-vaddress") == 0) {
 				vaddress = true;
@@ -89,13 +95,14 @@ public:
 				vpoi = true;
 			} else if (strcmp(params[i], "-vtransport") == 0) {
 				vtransport = true;
-			} else {
-				int z = 0;
-				if (sscanf(params[i], "-zoom=%d", &z) != EOF) {
-					zoom = z;
-				} else if (sscanf(params[i], "-bbox=%le,%le,%le,%le", &lonleft, &lattop, &lonright, &latbottom) != EOF) {
+			} else if (sscanf(params[i], "-zoom=%d", &z)) {
+				zoom = z;
+			} else if (sscanf(params[i], "-bbox=%le,%le,%le,%le", &l1, &l2, &l3, &l4)) {
+				lonleft = l1;
+				lattop = l2;
+				lonright = l3;
+				latbottom = l4;
 
-				}
 			}
 		}
 	}
@@ -171,14 +178,11 @@ void printFileInformation(const char* fileName, VerboseInfo* verbose) {
 }
 
 
-void runSimpleRendering(string fileName, string renderingFileName, RenderingInfo* info) {
+void runSimpleRendering( string renderingFileName, string resourceDir, RenderingInfo* info) {
 	SkColor defaultMapColor = SK_ColorLTGRAY;
 
-	BinaryMapFile* mf = initBinaryMapFile(fileName.c_str());
-	osmand_log_print(LOG_INFO, "Init %d (success) binary map file %s.", mf->version, fileName.c_str());
-
 	if (info->width > 10000 || info->height > 10000) {
-		osmand_log_print(LOG_ERROR, "We don't rendering images more than 10000x10000");
+		osmand_log_print(LOG_ERROR, "We don't rendering images more than 10000x10000 ");
 		return;
 	}
 
@@ -206,6 +210,7 @@ void runSimpleRendering(string fileName, string renderingFileName, RenderingInfo
 	initObjects.start();
 
 	RenderingContext rc;
+	rc.setDefaultIconsDir(resourceDir);
 	searchRequest->clearState();
 	searchRequest->setIntFilter(st->PROPS.R_MINZOOM, info->zoom);
 	if (searchRequest->searchRenderingAttribute(A_DEFAULT_COLOR)) {
@@ -277,11 +282,6 @@ int main(int argc, char **argv) {
 //				"default.render.xml"
 //				);
 		// 2. Test simple rendering
-		char** tst = new char*[5] {"", "-renderingOutputFile=/home/victor/1.png","-zoom=11", "-lt=5,5", "-lbox=-80,22"};
-		RenderingInfo* info = new RenderingInfo(5, tst);
-		runSimpleRendering(string("/home/victor/projects/OsmAnd/data/osm-gen/Cuba2.obf"),
-				string("/home/victor/projects/OsmAnd/git/DataExtractionOSM/src/net/osmand/render/default.render.xml"), info);
-		printf("\n\n");
 		printUsage("");
 		return 1;
 	}
@@ -299,9 +299,16 @@ int main(int argc, char **argv) {
 			if (argc < 2) {
 				printUsage("Missing file parameter");
 			} else {
-				osmand_log_print(LOG_ERROR, "FIXME functionality");
-//				RenderingInfo* info = new RenderingInfo(argc, argv);
-//				runSimpleRendering(argv[argc -1], info);
+				RenderingInfo* info = new RenderingInfo(argc, argv);
+				char s[100];
+				for (int i = 1; i != argc; ++i) {
+					if (sscanf(argv[i], "-renderingInputFile=%s", s)) {
+						BinaryMapFile* mf = initBinaryMapFile(s);
+						osmand_log_print(LOG_INFO, "Init %d (success) binary map file %s.", mf->version,
+								mf->inputName.c_str());
+					}
+				}
+				runSimpleRendering(info->renderingFileName, info->imagesFileName, info);
 			}
 		} else {
 			printUsage("Unknown command");
