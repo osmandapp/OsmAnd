@@ -1,15 +1,12 @@
 package net.osmand.swing;
 
 import java.awt.image.BufferedImage;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
 import javax.imageio.stream.MemoryCacheImageInputStream;
 
 import org.xml.sax.SAXException;
@@ -106,17 +103,7 @@ public class NativeSwingRendering extends NativeLibrary {
 		
 		double latTop = 22.5;
 		double lonLeft = -80;
-		float tileX = 2;
-		float tileY = 2;
 		int zoom = 11;
-		
-		double latBottom = MapUtils.getLatitudeFromTile(zoom, MapUtils.getTileNumberY(zoom, latTop) + tileY);
-		double lonRight = MapUtils.getLongitudeFromTile(zoom, MapUtils.getTileNumberX(zoom, lonLeft) + tileX);
-		int sleft = MapUtils.get31TileNumberX(lonLeft);
-		int sright = MapUtils.get31TileNumberX(lonRight);
-		int stop = MapUtils.get31TileNumberY(latTop);
-		int sbottom = MapUtils.get31TileNumberY(latBottom);
-		
-		MapPanel.showMainWindow(512, 512, lib.renderImage(sleft, sright, stop, sbottom, zoom));
+		MapPanel.showMainWindow(512, 512, latTop, lonLeft, zoom, lib);
 	}
 }

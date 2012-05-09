@@ -280,8 +280,6 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_NativeLibrary_generateRende
 	if (result != NULL) {
 		doRendering(result->result, canvas, req, &rc);
 	}
-	delete canvas;
-	delete req;
 	pushToJavaRenderingContext(ienv, renderingContext, &rc);
 
 	jclass resultClass = findClass(ienv, "net/osmand/NativeLibrary$RenderingGenerationResult");
@@ -299,7 +297,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_NativeLibrary_generateRende
 	if(encodePNG) {
 		SkImageEncoder* enc = SkImageEncoder::Create(SkImageEncoder::kPNG_Type);
 		SkDynamicMemoryWStream* stream = new SkDynamicMemoryWStream();
-		enc->encodeStream(stream, *bitmap, 50);
+		enc->encodeStream(stream, *bitmap, 80);
 		// clean previous data
 		free(bitmapData);
 		bitmapDataSize = stream->bytesWritten();
@@ -310,6 +308,8 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_NativeLibrary_generateRende
 	bitmapBuffer = ienv->NewDirectByteBuffer(bitmapData, bitmapDataSize);
 
 	// delete  variables
+	delete canvas;
+	delete req;
 	delete bitmap;
 
 	/* Construct a result object */
