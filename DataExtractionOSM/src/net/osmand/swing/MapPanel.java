@@ -199,6 +199,11 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 
 	public static void main(String[] args) throws IOException {
+		showMainWindow(512, 512, null);
+	}
+
+
+	public static void showMainWindow(int wx, int hy, NativeSwingRendering rendering) {
 		JFrame frame = new JFrame(Messages.getString("MapPanel.MAP.VIEW")); //$NON-NLS-1$
 	    try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -207,6 +212,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		}
 		
 		final MapPanel panel = new MapPanel(DataExtractionSettings.getSettings().getTilesDirectory());
+		panel.nativeRenderingImg = img;
 	    frame.addWindowListener(new WindowAdapter(){
 	    	@Override
 	    	public void windowClosing(WindowEvent e) {
@@ -222,15 +228,17 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	    JMenuBar bar = new JMenuBar();
 	    bar.add(getMenuToChooseSource(panel));
 	    frame.setJMenuBar(bar);
-	    frame.setSize(512, 512);
+	    frame.setSize(wx, hy);
 	    frame.setVisible(true);
-
 	}
 
 	private File tilesLocation = null;
 	
 	// name of source map 
 	private ITileSource map = TileSourceManager.getMapnikSource();
+	
+	private NativeSwingRendering nativeLibRendering;
+	private Image nativeRenderingImg;
 	
 	// zoom level
 	private int zoom = 1;
@@ -343,7 +351,9 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		if (images != null) {
+		if(nativeLibRendering != null) {
+			g.drawImage(nativeRenderingImg, 0, 0, this);
+		} else if (images != null) {
 			for (int i = 0; i < images.length; i++) {
 				for (int j = 0; j < images[i].length; j++) {
 					if (images[i][j] == null) {

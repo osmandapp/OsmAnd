@@ -369,7 +369,9 @@ public:
 	RenderingRulesStorage(const void* storage, bool createDefProperties = true) : storageId(storage),
 			PROPS(createDefProperties) {
 		tagValueGlobalRules = new HMAP::hash_map<int, RenderingRule*>[SIZE_STATES];
-		getDictionaryValue("");
+		if(createDefProperties) {
+			getDictionaryValue("");
+		}
 	}
 
 	~RenderingRulesStorage() {

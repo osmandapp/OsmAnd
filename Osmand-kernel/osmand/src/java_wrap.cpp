@@ -5,6 +5,8 @@
 #include <SkBitmap.h>
 #include <SkCanvas.h>
 #include <SkImageDecoder.h>
+#include <SkImageEncoder.h>
+#include <SkStream.h>
 #include "java_renderRules.h"
 #include "common.h"
 #include "java_wrap.h"
@@ -62,7 +64,6 @@ extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_NativeLibrary_initBinaryMa
 
 
 
-
 // Global object
 HMAP::hash_map<void*, RenderingRulesStorage*> cachedStorages;
 
@@ -117,9 +118,8 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_NativeLibrary_searchNativeObje
 #ifdef ANDROID_BUILD
 #include <android/bitmap.h>
 
-extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_generateRendering_1Direct( JNIEnv* ienv, jobject obj,
-    jobject renderingContext, jint searchResult,
-    jobject targetBitmap, jboolean useEnglishNames, jobject renderingRuleSearchRequest, jint defaultColor) {
+extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_generateRenderingDirect( JNIEnv* ienv, jobject obj,
+    jobject renderingContext, jint searchResult, jobject targetBitmap, jobject renderingRuleSearchRequest) {
 
 	// libJniGraphics interface
 	typedef int (*PTR_AndroidBitmap_getInfo)(JNIEnv*, jobject, AndroidBitmapInfo*);
@@ -215,7 +215,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 	delete bitmap;
 	//    deleteObjects(mapDataObjects);
 
-	jclass resultClass = findClass(ienv, "net/osmand/NativeLibrary$8RenderingGenerationResult");
+	jclass resultClass = findClass(ienv, "net/osmand/NativeLibrary$RenderingGenerationResult");
 
 	jmethodID resultClassCtorId = ienv->GetMethodID(resultClass, "<init>", "(Ljava/nio/ByteBuffer;)V");
 
@@ -237,78 +237,85 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 
 void* bitmapData = NULL;
 size_t bitmapDataSize = 0;
-extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_generateRendering_1Indirect( JNIEnv* ienv, jobject obj,
-    jobject renderingContext, jint searchResult,
-    jint requestedBitmapWidth, jint requestedBitmapHeight, jint rowBytes, jboolean isTransparent,
-    jboolean useEnglishNames, jobject renderingRuleSearchRequest, jint defaultColor) {
+extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_NativeLibrary_generateRenderingIndirect( JNIEnv* ienv,
+		jobject obj, jobject renderingContext, jint searchResult, jboolean isTransparent,
+		jobject renderingRuleSearchRequest, jboolean encodePNG) {
 
-        osmand_log_print(LOG_INFO,  "Creating SkBitmap in native w:%d h:%d!", requestedBitmapWidth, requestedBitmapHeight);
+	JNIRenderingContext rc;
+	pullFromJavaRenderingContext(ienv, renderingContext, &rc);
 
-        SkBitmap* bitmap = new SkBitmap();
-        if(isTransparent == JNI_TRUE)
-            bitmap->setConfig(SkBitmap::kARGB_8888_Config, requestedBitmapWidth, requestedBitmapHeight, rowBytes);
-        else
-            bitmap->setConfig(SkBitmap::kRGB_565_Config, requestedBitmapWidth, requestedBitmapHeight, rowBytes);
+	osmand_log_print(LOG_INFO, "Creating SkBitmap in native w:%d h:%d!", rc.getWidth(), rc.getHeight());
 
-        if(bitmapData != NULL && bitmapDataSize != bitmap->getSize()) {
-            free(bitmapData);
-            bitmapData = NULL;
-            bitmapDataSize = 0;
-        }
-        if(bitmapData == NULL && bitmapDataSize == 0) {
-            bitmapDataSize = bitmap->getSize();
-            bitmapData = malloc(bitmapDataSize);
+	SkBitmap* bitmap = new SkBitmap();
+	if (isTransparent == JNI_TRUE)
+		bitmap->setConfig(SkBitmap::kARGB_8888_Config, rc.getWidth(), rc.getHeight(), 0);
+	else
+		bitmap->setConfig(SkBitmap::kRGB_565_Config, rc.getWidth(), rc.getHeight(), 0);
 
-            osmand_log_print(LOG_INFO,  "Allocated %d bytes at %p", bitmapDataSize, bitmapData);
-        }
+	if (bitmapData != NULL && bitmapDataSize != bitmap->getSize()) {
+		free(bitmapData);
+		bitmapData = NULL;
+		bitmapDataSize = 0;
+	}
+	if (bitmapData == NULL && bitmapDataSize == 0) {
+		bitmapDataSize = bitmap->getSize();
+		bitmapData = malloc(bitmapDataSize);
+		osmand_log_print(LOG_INFO, "Allocated %d bytes at %p", bitmapDataSize, bitmapData);
+	}
 
-        bitmap->setPixels(bitmapData);
+	bitmap->setPixels(bitmapData);
+	ElapsedTimer initObjects;
+	initObjects.start();
 
+	RenderingRuleSearchRequest* req = initSearchRequest(ienv, renderingRuleSearchRequest);
 
-        osmand_log_print(LOG_INFO,  "Initializing rendering");
-        ElapsedTimer initObjects;
-        initObjects.start();
+	ResultPublisher* result = ((ResultPublisher*) searchResult);
+	//    std::vector <BaseMapDataObject* > mapDataObjects = marshalObjects(binaryMapDataObjects);
 
-        RenderingRuleSearchRequest* req = initSearchRequest(ienv, renderingRuleSearchRequest);
-        JNIRenderingContext rc;
-        pullFromJavaRenderingContext(ienv, renderingContext, &rc);
-        rc.setUseEnglishNames(useEnglishNames);
-        ResultPublisher* result = ((ResultPublisher*) searchResult);
-        //    std::vector <BaseMapDataObject* > mapDataObjects = marshalObjects(binaryMapDataObjects);
+	initObjects.pause();
+	// Main part do rendering
 
-        osmand_log_print(LOG_INFO,  "Rendering image");
-        initObjects.pause();
-        // Main part do rendering
+	SkCanvas* canvas = new SkCanvas(*bitmap);
+	canvas->drawColor(rc.getDefaultColor());
+	if (result != NULL) {
+		doRendering(result->result, canvas, req, &rc);
+	}
+	delete canvas;
+	delete req;
+	pushToJavaRenderingContext(ienv, renderingContext, &rc);
 
-        SkCanvas* canvas = new SkCanvas(*bitmap);
-        canvas->drawColor(defaultColor);
-        if(result != NULL) {
-            doRendering(result->result, canvas, req, &rc);
-        }
-        pushToJavaRenderingContext(ienv, renderingContext, &rc);
-        osmand_log_print(LOG_INFO,  "End Rendering image");
+	jclass resultClass = findClass(ienv, "net/osmand/NativeLibrary$RenderingGenerationResult");
 
-        // delete  variables
-        delete canvas;
-        delete req;
-        delete bitmap;
-        jclass resultClass = findClass(ienv, "net/osmand/plus/render/NativeOsmandLibrary$RenderingGenerationResult");
-
-        jmethodID resultClassCtorId = ienv->GetMethodID(resultClass, "<init>", "(Ljava/nio/ByteBuffer;)V");
+	jmethodID resultClassCtorId = ienv->GetMethodID(resultClass, "<init>", "(Ljava/nio/ByteBuffer;)V");
 
 #ifdef DEBUG_NAT_OPERATIONS
-        osmand_log_print(LOG_INFO,  "Native ok (init %d, native op %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
+	osmand_log_print(LOG_INFO, "Native ok (init %d, native op %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
 #else
-        osmand_log_print(LOG_INFO,  "Native ok (init %d, rendering %d) ", initObjects.getElapsedTime(), rc.nativeOperations.getElapsedTime());
+	osmand_log_print(LOG_INFO, "Native ok (init %d, rendering %d) ", initObjects.getElapsedTime(),
+			rc.nativeOperations.getElapsedTime());
 #endif
+	// Allocate ctor paramters
+	jobject bitmapBuffer;
+	if(encodePNG) {
+		SkImageEncoder* enc = SkImageEncoder::Create(SkImageEncoder::kPNG_Type);
+		SkDynamicMemoryWStream* stream = new SkDynamicMemoryWStream();
+		enc->encodeStream(stream, *bitmap, 50);
+		// clean previous data
+		free(bitmapData);
+		bitmapDataSize = stream->bytesWritten();
+		bitmapData = malloc(bitmapDataSize);
 
-        // Allocate ctor paramters
-        jobject bitmapBuffer = ienv->NewDirectByteBuffer(bitmapData, bitmap->getSize());
+		stream->copyTo(bitmapData);
+	}
+	bitmapBuffer = ienv->NewDirectByteBuffer(bitmapData, bitmapDataSize);
 
-        /* Construct a result object */
-        jobject resultObject = ienv->NewObject(resultClass, resultClassCtorId, bitmapBuffer);
+	// delete  variables
+	delete bitmap;
 
-        return resultObject;
+	/* Construct a result object */
+	jobject resultObject = ienv->NewObject(resultClass, resultClassCtorId, bitmapBuffer);
+
+	return resultObject;
 }
 
 
@@ -325,12 +332,14 @@ jfieldID jfield_RenderingContext_width = NULL;
 jfieldID jfield_RenderingContext_height = NULL;
 jfieldID jfield_RenderingContext_zoom = NULL;
 jfieldID jfield_RenderingContext_rotate = NULL;
+jfieldID jfield_RenderingContext_useEnglishNames = NULL;
 jfieldID jfield_RenderingContext_pointCount = NULL;
 jfieldID jfield_RenderingContext_pointInsideCount = NULL;
 jfieldID jfield_RenderingContext_visible = NULL;
 jfieldID jfield_RenderingContext_allObjects = NULL;
 jfieldID jfield_RenderingContext_density = NULL;
 jfieldID jfield_RenderingContext_shadowRenderingMode = NULL;
+jfieldID jfield_RenderingContext_defaultColor = NULL;
 jfieldID jfield_RenderingContext_textRenderingTime = NULL;
 jfieldID jfield_RenderingContext_lastRenderedKey = NULL;
 
@@ -346,12 +355,14 @@ void loadJniRenderingContext(JNIEnv* env)
 	jfield_RenderingContext_height = getFid(env,  jclass_RenderingContext, "height", "I" );
 	jfield_RenderingContext_zoom = getFid(env,  jclass_RenderingContext, "zoom", "I" );
 	jfield_RenderingContext_rotate = getFid(env,  jclass_RenderingContext, "rotate", "F" );
+	jfield_RenderingContext_useEnglishNames = getFid(env,  jclass_RenderingContext, "useEnglishNames", "Z" );
 	jfield_RenderingContext_pointCount = getFid(env,  jclass_RenderingContext, "pointCount", "I" );
 	jfield_RenderingContext_pointInsideCount = getFid(env,  jclass_RenderingContext, "pointInsideCount", "I" );
 	jfield_RenderingContext_visible = getFid(env,  jclass_RenderingContext, "visible", "I" );
 	jfield_RenderingContext_allObjects = getFid(env,  jclass_RenderingContext, "allObjects", "I" );
 	jfield_RenderingContext_density = getFid(env,  jclass_RenderingContext, "density", "F" );
 	jfield_RenderingContext_shadowRenderingMode = getFid(env,  jclass_RenderingContext, "shadowRenderingMode", "I" );
+	jfield_RenderingContext_defaultColor = getFid(env,  jclass_RenderingContext, "defaultColor", "I" );
 	jfield_RenderingContext_textRenderingTime = getFid(env,  jclass_RenderingContext, "textRenderingTime", "I" );
 	jfield_RenderingContext_lastRenderedKey = getFid(env,  jclass_RenderingContext, "lastRenderedKey", "I" );
 	jmethod_RenderingContext_getIconRawData = env->GetMethodID(jclass_RenderingContext,
@@ -372,6 +383,8 @@ void pullFromJavaRenderingContext(JNIEnv* env, jobject jrc, JNIRenderingContext*
 	rc->setRotate(env->GetFloatField( jrc, jfield_RenderingContext_rotate ));
 	rc->setDensityScale(env->GetFloatField( jrc, jfield_RenderingContext_density ));
 	rc->setShadowRenderingMode(env->GetIntField( jrc, jfield_RenderingContext_shadowRenderingMode ));
+	rc->setDefaultColor(env->GetIntField( jrc, jfield_RenderingContext_defaultColor ));
+	rc->setUseEnglishNames(env->GetBooleanField( jrc, jfield_RenderingContext_useEnglishNames ));
 	rc->javaRenderingContext = jrc;
 }
 

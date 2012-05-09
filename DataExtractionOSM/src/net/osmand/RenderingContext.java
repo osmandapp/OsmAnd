@@ -17,6 +17,8 @@ public class RenderingContext {
 	// FIELDS OF THAT CLASS ARE USED IN C++
 	public boolean interrupted = false;
 	public boolean nightMode = false;
+	public boolean useEnglishNames = false;
+	public int defaultColor = 0xf1eee8;
 
 	public RenderingContext() {
 	}

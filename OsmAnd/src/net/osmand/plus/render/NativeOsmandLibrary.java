@@ -80,8 +80,7 @@ public class NativeOsmandLibrary extends NativeLibrary {
 	}
 
 	public RenderingGenerationResult generateRendering(RenderingContext rc, NativeSearchResult searchResultHandler,
-			Bitmap bitmap, int requestedBitmapWidth, int requestedBitmapHeight, int rowBytes, boolean isTransparent, 
-			boolean useEnglishNames, RenderingRuleSearchRequest render, int defaultColor) {
+			Bitmap bitmap, boolean isTransparent, RenderingRuleSearchRequest render) {
 		if (searchResultHandler == null) {
 			log.error("Error searchresult = null"); //$NON-NLS-1$
 			return new RenderingGenerationResult(null);
@@ -89,16 +88,15 @@ public class NativeOsmandLibrary extends NativeLibrary {
 		
 		// Android 2.2+
 		if(android.os.Build.VERSION.SDK_INT >= 8) { 
-			return generateRendering_Direct(rc, searchResultHandler.nativeHandler, bitmap, useEnglishNames, render, defaultColor);
+			return generateRenderingDirect(rc, searchResultHandler.nativeHandler, bitmap, render);
 		} else {
-			return generateRendering_Indirect(rc, searchResultHandler.nativeHandler, requestedBitmapWidth, requestedBitmapHeight, rowBytes, isTransparent, useEnglishNames, render, defaultColor);
+			return generateRenderingIndirect(rc, searchResultHandler.nativeHandler, isTransparent, render, false);
 		}
 	}
 
 	
-	private static native RenderingGenerationResult generateRendering_Direct(RenderingContext rc, int searchResultHandler,
-			Bitmap bitmap, boolean useEnglishNames,
-			RenderingRuleSearchRequest render, int defaultColor);
+	private static native RenderingGenerationResult generateRenderingDirect(RenderingContext rc, int searchResultHandler,
+			Bitmap bitmap, RenderingRuleSearchRequest render);
 			
 	public static native int getCpuCount();
 	public static native boolean cpuHasNeonSupport();

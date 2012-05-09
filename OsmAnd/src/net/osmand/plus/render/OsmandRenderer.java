@@ -157,8 +157,7 @@ public class OsmandRenderer {
 	 */
 	public void generateNewBitmapNative(RenderingContext rc, NativeOsmandLibrary library, 
 			NativeSearchResult searchResultHandler, 
-			Bitmap bmp, boolean useEnglishNames,
-			RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList, int defaultColor) {
+			Bitmap bmp, RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList) {
 		long now = System.currentTimeMillis();
 		if (rc.width > 0 && rc.height > 0 && searchResultHandler != null) {
 			// init rendering context
@@ -175,9 +174,7 @@ public class OsmandRenderer {
 				// If res.bitmapBuffer is null, it indicates that rendering was done directly to
 				// memory of passed bitmap, but this is supported only on Android >= 2.2
 				final NativeLibrary.RenderingGenerationResult res = library.generateRendering(
-					rc, searchResultHandler,
-					bmp, bmp.getWidth(), bmp.getHeight(), bmp.getRowBytes(), bmp.hasAlpha(),
-					useEnglishNames, render, defaultColor);
+					rc, searchResultHandler, bmp, bmp.hasAlpha(), render);
 				rc.ended = true;
 				notifyListeners(notifyList);
 				long time = System.currentTimeMillis() - now;
@@ -195,8 +192,8 @@ public class OsmandRenderer {
 		}
 	}
 	
-	public void generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, boolean useEnglishNames,
-			RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList, int defaultColor) {
+	public void generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, 
+			RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList) {
 		long now = System.currentTimeMillis();
 
 		if (objects != null && !objects.isEmpty() && rc.width > 0 && rc.height > 0) {
@@ -206,8 +203,8 @@ public class OsmandRenderer {
 			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			// fill area
 			Canvas cv = new Canvas(bmp);
-			if (defaultColor != 0) {
-				cv.drawColor(defaultColor);
+			if (rc.defaultColor != 0) {
+				cv.drawColor(rc.defaultColor);
 			}
 			// put in order map
 			TIntObjectHashMap<TIntArrayList> orderMap = sortObjectsByProperOrder(rc, objects, render);
@@ -267,7 +264,7 @@ public class OsmandRenderer {
 			drawIconsOverCanvas(rc, cv);
 
 			notifyListeners(notifyList);
-			textRenderer.drawTextOverCanvas(rc, cv, useEnglishNames);
+			textRenderer.drawTextOverCanvas(rc, cv, rc.useEnglishNames);
 
 			long time = System.currentTimeMillis() - now;
 			rc.renderingDebugInfo = String.format("Rendering: %s ms  (%s text)\n"

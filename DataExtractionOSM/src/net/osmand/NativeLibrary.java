@@ -66,9 +66,8 @@ public class NativeLibrary {
 	protected static native void initRenderingRulesStorage(RenderingRulesStorage storage);
 
 
-	protected static native RenderingGenerationResult generateRendering_Indirect(RenderingContext rc, int searchResultHandler,
-			int requestedBitmapWidth, int requestedBitmapHeight, int rowBytes, boolean isTransparent, boolean useEnglishNames,
-			RenderingRuleSearchRequest render, int defaultColor);
+	protected static native RenderingGenerationResult generateRenderingIndirect(RenderingContext rc, int searchResultHandler,
+			boolean isTransparent, RenderingRuleSearchRequest render, boolean encodePng);
 	
 	protected static native int searchNativeObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom, 
 			RenderingRuleSearchRequest request, boolean skipDuplicates, Object objectWithInterruptedField, String msgIfNothingFound);

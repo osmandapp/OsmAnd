@@ -163,6 +163,7 @@ private :
 	float topY;
 	int width;
 	int height;
+	int defaultColor;
 
 	int zoom;
 	float rotate;
@@ -206,6 +207,7 @@ public:
 		pointInsideCount(0), visible(0), allObjects(0){
 		setRotate(0);
 		setZoom(15);
+		setDefaultColor(0xf1eee8);
 	}
 	virtual ~RenderingContext();
 
@@ -221,6 +223,11 @@ public:
 		this->zoom = z;
 		this->tileDivisor = (1 << (31 - z));
 	}
+
+	void setDefaultColor(int z) {
+			this->defaultColor = z;
+	}
+
 	void setRotate(float rot) {
 		this->rotate = rot;
 		this->cosRotateTileSize = cos(toRadians(rot)) * TILE_SIZE;
@@ -243,6 +250,10 @@ public:
 
 	inline int getWidth(){
 		return width;
+	}
+
+	inline int getDefaultColor(){
+		return defaultColor;
 	}
 
 	inline int getHeight(){

@@ -346,6 +346,7 @@ bool acceptTypes(SearchQuery* req, std::vector<tag_value>& types, MapIndex* root
 			return true;
 		}
 	}
+
 	return false;
 }
 

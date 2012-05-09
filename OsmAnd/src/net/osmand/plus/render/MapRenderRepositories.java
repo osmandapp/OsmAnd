@@ -539,11 +539,10 @@ public class MapRenderRepositories {
 			final long searchTime = System.currentTimeMillis() - now;
 
 			currentRenderingContext = new OsmandRenderer.RenderingContext(context);
-			int fillColor = 0xf1eee8;
 			renderingReq.clearState();
 			renderingReq.setIntFilter(renderingReq.ALL.R_MINZOOM, requestedBox.getZoom());
 			if(renderingReq.searchRenderingAttribute(RenderingRuleStorageProperties.A_DEFAULT_COLOR)) {
-				fillColor = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_COLOR_VALUE);
+				currentRenderingContext.defaultColor = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_COLOR_VALUE);
 			}
 			renderingReq.clearState();
 			renderingReq.setIntFilter(renderingReq.ALL.R_MINZOOM, requestedBox.getZoom());
@@ -558,6 +557,7 @@ public class MapRenderRepositories {
 			currentRenderingContext.width = (int) (requestedBox.getTileWidth() * OsmandRenderer.TILE_SIZE);
 			currentRenderingContext.height = (int) (requestedBox.getTileHeight() * OsmandRenderer.TILE_SIZE);
 			currentRenderingContext.nightMode = nightMode;
+			currentRenderingContext.useEnglishNames = prefs.USE_ENGLISH_NAMES.get();
 			currentRenderingContext.setDensityValue(prefs.USE_HIGH_RES_MAPS.get(), 
 					prefs.MAP_TEXT_SIZE.get(), renderer.getDensity());
 			if (checkWhetherInterrupted()) {
@@ -585,11 +585,9 @@ public class MapRenderRepositories {
 			
 			
 			if(nativeLib != null) {
-				renderer.generateNewBitmapNative(currentRenderingContext, nativeLib, cNativeObjects, bmp, prefs.USE_ENGLISH_NAMES.get(), renderingReq,
-						notifyList, fillColor);
+				renderer.generateNewBitmapNative(currentRenderingContext, nativeLib, cNativeObjects, bmp, renderingReq, notifyList);
 			} else {
-				renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, prefs.USE_ENGLISH_NAMES.get(), renderingReq,
-						notifyList, fillColor);
+				renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, renderingReq, notifyList);
 			}
 			// Force to use rendering request in order to prevent Garbage Collector when it is used in C++
 			if(renderingReq != null){
