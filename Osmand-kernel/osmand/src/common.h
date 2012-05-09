@@ -207,7 +207,7 @@ public:
 		pointInsideCount(0), visible(0), allObjects(0){
 		setRotate(0);
 		setZoom(15);
-		setDefaultColor(0xf1eee8);
+		setDefaultColor(0xfff1eee8);
 	}
 	virtual ~RenderingContext();
 
@@ -225,7 +225,7 @@ public:
 	}
 
 	void setDefaultColor(int z) {
-			this->defaultColor = z;
+		this->defaultColor = z;
 	}
 
 	void setRotate(float rot) {

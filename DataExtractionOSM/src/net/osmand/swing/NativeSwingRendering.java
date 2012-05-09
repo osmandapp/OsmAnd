@@ -1,6 +1,7 @@
 package net.osmand.swing;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
@@ -21,10 +22,11 @@ import net.osmand.render.RenderingRulesStorage.RenderingRulesStorageResolver;
 public class NativeSwingRendering extends NativeLibrary {
 
 	static {
-		System.load("/home/victor/projects/OsmAnd/git/Osmand-kernel/jni-prebuilt/linux-x86/osmand.lib");
+//		System.load("/home/victor/projects/OsmAnd/git/Osmand-kernel/jni-prebuilt/linux-x86/osmand.lib");
 	}
 	
 	RenderingRulesStorage storage;
+	private final File baseDirRC;
 	
 	private RenderingRulesStorage getDefault() throws SAXException, IOException{
 		RenderingRulesStorage storage = new RenderingRulesStorage();
@@ -45,7 +47,8 @@ public class NativeSwingRendering extends NativeLibrary {
 		return storage;
 	}
 	
-	public NativeSwingRendering(){
+	public NativeSwingRendering(File baseDirRC){
+		this.baseDirRC = baseDirRC;
 		try {
 			storage = getDefault();
 		} catch (SAXException e) {
@@ -58,7 +61,9 @@ public class NativeSwingRendering extends NativeLibrary {
 	
 	
 	public BufferedImage renderImage(int sleft, int sright, int stop, int sbottom, int zoom) throws IOException {
-		RenderingContext rctx = new RenderingContext();
+		long time = -System.currentTimeMillis();
+		RenderingContext rctx = new RenderingContext(baseDirRC);
+		
 		RenderingRuleSearchRequest request = new RenderingRuleSearchRequest(storage);
 		NativeSearchResult res = searchObjectsForRendering(sleft, sright, stop, sbottom, zoom, request, true, 
 					rctx, "Nothing found");
@@ -69,10 +74,10 @@ public class NativeSwingRendering extends NativeLibrary {
 		rctx.height = (int) ((sbottom - stop) / MapUtils.getPowZoom(31 - zoom - 8));
 		rctx.shadowRenderingMode = 2;
 		rctx.zoom = zoom;
-		
+		long search = time + System.currentTimeMillis();
 		final RenderingGenerationResult rres = NativeSwingRendering.generateRenderingIndirect(rctx, res.nativeHandler,  
 				false, request, true);
-		System.out.println(rres.bitmapBuffer.capacity());
+		long rendering = time + System.currentTimeMillis() - search;
 		InputStream inputStream = new InputStream() {
 			int nextInd = 0;
 			@Override
@@ -92,18 +97,40 @@ public class NativeSwingRendering extends NativeLibrary {
 		ImageReader reader = readers.next();
 		reader.setInput(new MemoryCacheImageInputStream(inputStream), true);
 		BufferedImage img = reader.read(0);
+		long last = time + System.currentTimeMillis() - rendering;
+		System.out.println(" TIMES search - " + search + " rendering - " + rendering + " unpack - " + last);
 		return img;
+	}
+	
+	public void initFilesInDir(File filesDir){
+		File[] lf = filesDir.listFiles();
+		for(File f : lf){
+			if(f.getName().endsWith(".obf")) {
+				initMapFile(f.getAbsolutePath());
+			}
+		}
 	}
 	
 	
 	public static void main(String[] args) throws SAXException, IOException {
-		NativeSwingRendering lib = new NativeSwingRendering();
-		lib.initMapFile("/home/victor/projects/OsmAnd/data/osm-gen/Cuba2.obf");
-		lib.initMapFile("/home/victor/projects/OsmAnd/data/osm-gen/basemap_2.obf");
-		
+		System.load("/home/victor/projects/OsmAnd/git/Osmand-kernel/jni-prebuilt/linux-x86/osmand.lib");
+		NativeSwingRendering lib = new NativeSwingRendering(
+				new File("/home/victor/projects/OsmAnd/git/OsmAnd/res/drawable-mdpi/"));
+		lib.initFilesInDir(new File("/home/victor/projects/OsmAnd/data/version2"));		
 		double latTop = 22.5;
 		double lonLeft = -80;
 		int zoom = 11;
-		MapPanel.showMainWindow(512, 512, latTop, lonLeft, zoom, lib);
+		
+		float tileX = 2;
+		float tileY = 2;
+		double latBottom = MapUtils.getLatitudeFromTile(zoom, MapUtils.getTileNumberY(zoom, latTop) + tileY);
+		double lonRight = MapUtils.getLongitudeFromTile(zoom, MapUtils.getTileNumberX(zoom, lonLeft) + tileX);
+		int sleft = MapUtils.get31TileNumberX(lonLeft);
+		int sright = MapUtils.get31TileNumberX(lonRight);
+		int stop = MapUtils.get31TileNumberY(latTop);
+		int sbottom = MapUtils.get31TileNumberY(latBottom);
+		lib.renderImage(sleft, sright, stop, sbottom, zoom);
+		
+		MapPanel.showMainWindow(512, 512, lib);
 	}
 }

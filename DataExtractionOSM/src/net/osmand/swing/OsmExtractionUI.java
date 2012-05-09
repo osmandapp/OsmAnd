@@ -130,10 +130,9 @@ public class OsmExtractionUI implements IMapLocationListener {
 	private JCheckBox buildMapIndex;
 	private JCheckBox buildTransportIndex;
 	private JCheckBox normalizingStreets;
+	private JCheckBox showOfflineIndex;
 
 	private String regionName;
-		
-	
 	
 	public OsmExtractionUI(){
 		createUI();
@@ -211,8 +210,18 @@ public class OsmExtractionUI implements IMapLocationListener {
 		buildTransportIndex.setText(Messages.getString("OsmExtractionUI.BUILD_TRANSPORT")); //$NON-NLS-1$
 		panel.add(buildTransportIndex);
 		buildTransportIndex.setSelected(true);
-
 		
+		showOfflineIndex = new JCheckBox();
+		showOfflineIndex.setText("Use Offline");
+		panel.add(showOfflineIndex);
+		showOfflineIndex.setSelected(false);
+		showOfflineIndex.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				NativePreferencesDialog dlg = new NativePreferencesDialog(frame);
+				dlg.showDialog();
+			}
+		});
 		
 	}
 	

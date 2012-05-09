@@ -64,6 +64,9 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 	private static final long serialVersionUID = 1L;
 	
+	private static final int EXPAND_X = 100;
+	private static final int EXPAND_Y = 100;
+	
 	protected static final Log log = LogUtil.getLog(MapPanel.class);
 	public static final int divNonLoadedImage = 16;
 	
@@ -202,14 +205,11 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 
 	public static void main(String[] args) throws IOException {
-		LatLon def = DataExtractionSettings.getSettings().getDefaultLocation();
-		showMainWindow(512, 512, def.getLatitude(), def.getLongitude(),
-				DataExtractionSettings.getSettings().getDefaultZoom(), null);
+		showMainWindow(512, 512, null);
 	}
 
 
-	public static void showMainWindow(int wx, int hy,  
-			double latitude, double longitude, int zoom, NativeSwingRendering nativeLib) {
+	public static MapPanel showMainWindow(int wx, int hy, NativeSwingRendering nativeLib) {
 		JFrame frame = new JFrame(Messages.getString("MapPanel.MAP.VIEW")); //$NON-NLS-1$
 	    try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -219,9 +219,9 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		
 		final MapPanel panel = new MapPanel(DataExtractionSettings.getSettings().getTilesDirectory());
 		panel.nativeLibRendering = nativeLib;
-		panel.longitude = longitude;
-		panel.latitude = latitude;
-		panel.zoom = zoom;
+//		panel.longitude = longitude;
+//		panel.latitude = latitude;
+//		panel.zoom = zoom;
 	    frame.addWindowListener(new WindowAdapter(){
 	    	@Override
 	    	public void windowClosing(WindowEvent e) {
@@ -238,9 +238,8 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	    bar.add(getMenuToChooseSource(panel));
 	    frame.setJMenuBar(bar);
 	    frame.setSize(wx, hy);
-	    NativeRendererRunnable runable = panel.new NativeRendererRunnable(512, 512);
-		runable.run();
-//	    frame.setVisible(true);
+	    frame.setVisible(true);
+	    return panel;
 	}
 
 	private File tilesLocation = null;
@@ -251,6 +250,8 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	private NativeSwingRendering nativeLibRendering;
 	private NativeRendererRunnable lastAddedRunnable;
 	private Image nativeRenderingImg;
+	private LatLon nativeLatLon;
+	private int nativeZoom;
 	
 	private ThreadPoolExecutor nativeRenderer = new ThreadPoolExecutor(1, 1, 30, TimeUnit.SECONDS, 
 			new ArrayBlockingQueue<Runnable>(1));
@@ -367,7 +368,14 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	@Override
 	protected void paintComponent(Graphics g) {
 		if(nativeLibRendering != null) {
-			g.drawImage(nativeRenderingImg, 0, 0, this);
+			// TODO : 1. zoom scale 2. extend margin (these are center positions)
+			if (zoom == nativeZoom) {
+				int shx = (int) ((-MapUtils.getTileNumberX(zoom, longitude) + MapUtils.getTileNumberX(zoom, nativeLatLon.getLongitude())) * getTileSize());
+				int shy = (int) ((-MapUtils.getTileNumberY(zoom, latitude) + MapUtils.getTileNumberY(zoom, nativeLatLon.getLatitude())) * getTileSize());
+				shx -= EXPAND_X;
+				shy -= EXPAND_Y;
+				g.drawImage(nativeRenderingImg, shx, shy, this);
+			}
 		} else if (images != null) {
 			for (int i = 0; i < images.length; i++) {
 				for (int j = 0; j < images[i].length; j++) {
@@ -490,18 +498,23 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	public void prepareImage(){
 		if(nativeLibRendering != null) {
 			prepareNativeImage();
+			
 		} else {
 			prepareRasterImage(DataExtractionSettings.getSettings().useInternetToLoadImages());
 		}
 	}
 	
 	private synchronized void prepareNativeImage() {
-		nativeRenderer.getQueue().clear();
 		NativeRendererRunnable runnable = new NativeRendererRunnable(getWidth(), getHeight());
 		if(lastAddedRunnable == null || !lastAddedRunnable.contains(runnable)) {
 			lastAddedRunnable = runnable;
+			nativeRenderer.getQueue().clear();
 			nativeRenderer.execute(runnable);
 		}
+		for(MapPanelLayer l : layers){
+			l.prepareToDraw();
+		}
+		repaint();
 	}
 
 
@@ -860,24 +873,28 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		private int stop;
 		private int sbottom;
 		private int z;
-		private int EXPAND_X = 100;
-		private int EXPAND_Y = 100;
+		private LatLon latLon;
 		private final int cf;
 
 		public NativeRendererRunnable(int w, int h) {
 			int tileSize = getTileSize();
+			latLon = new LatLon(latitude, longitude);
 			this.z = zoom;
-			cf = (1 << (31 - zoom)) / tileSize;
-			sleft = MapUtils.get31TileNumberX(longitude) - (w / 2) * cf; 
-			sright = MapUtils.get31TileNumberX(longitude) + (w / 2) * cf;
-			stop = MapUtils.get31TileNumberY(latitude) - (h / 2) * cf;
-			sbottom = MapUtils.get31TileNumberY(latitude) + (h / 2) * cf;
+			cf = (1 << (31 - z)) / tileSize;
+			sleft = MapUtils.get31TileNumberX(latLon.getLongitude()) - (w / 2) * cf; 
+			sright = MapUtils.get31TileNumberX(latLon.getLongitude()) + (w / 2) * cf;
+			stop = MapUtils.get31TileNumberY(latLon.getLatitude()) - (h / 2) * cf;
+			sbottom = MapUtils.get31TileNumberY(latLon.getLatitude()) + (h / 2) * cf;
 		}
+		
 		public boolean contains(NativeRendererRunnable r) {
 			if(r.sright > sright + EXPAND_X * cf || 
 					r.sleft < sleft - EXPAND_X * cf || 
 				r.stop < stop - EXPAND_Y * cf || 
 				r.sbottom > sbottom + EXPAND_Y * cf) {
+				return false;
+			}
+			if(r.z != z){
 				return false;
 			}
 			return true;
@@ -889,7 +906,10 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		public void run() {
 			if (nativeRenderer.getQueue().isEmpty()) {
 				try {
-					nativeRenderingImg = nativeLibRendering.renderImage(sleft, sright, stop, sbottom, z);
+					nativeRenderingImg = nativeLibRendering.renderImage(sleft - EXPAND_X * cf, 
+							sright + EXPAND_X * cf, stop - EXPAND_Y * cf, sbottom + EXPAND_Y * cf, z);
+					nativeLatLon = latLon;
+					nativeZoom = z;
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
