@@ -20,7 +20,6 @@ extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
 	if(vm->GetEnv((void **)&globalJniEnv, JNI_VERSION_1_6))
 		return JNI_ERR; /* JNI version not supported */
 	globalJVM = vm;
-
 	loadJniRenderingContext(globalJniEnv);
 	loadJniRenderingRules(globalJniEnv);
 	osmand_log_print(LOG_INFO, "JNI_OnLoad completed");
@@ -28,7 +27,7 @@ extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
 	return JNI_VERSION_1_6;
 }
 
-extern "C" JNIEXPORT void JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_deleteSearchResult(JNIEnv* ienv,
+extern "C" JNIEXPORT void JNICALL Java_net_osmand_NativeLibrary_deleteSearchResult(JNIEnv* ienv,
 		jobject obj, jint searchResult) {
 	ResultPublisher* result = (ResultPublisher*) searchResult;
 	if(result != NULL){
@@ -37,7 +36,7 @@ extern "C" JNIEXPORT void JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 }
 
 
-extern "C" JNIEXPORT void JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_closeBinaryMapFile(JNIEnv* ienv,
+extern "C" JNIEXPORT void JNICALL Java_net_osmand_NativeLibrary_closeBinaryMapFile(JNIEnv* ienv,
 		jobject path) {
 	const char* utf = ienv->GetStringUTFChars((jstring) path, NULL);
 	std::string inputName(utf);
@@ -45,13 +44,19 @@ extern "C" JNIEXPORT void JNICALL Java_net_osmand_plus_render_NativeOsmandLibrar
 	closeBinaryMapFile(inputName);
 }
 
-extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_initBinaryMapFile(JNIEnv* ienv,
+extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_NativeLibrary_initBinaryMapFile(JNIEnv* ienv,
 		jobject obj, jobject path) {
 	// Verify that the version of the library that we linked against is
 	const char* utf = ienv->GetStringUTFChars((jstring) path, NULL);
 	std::string inputName(utf);
 	ienv->ReleaseStringUTFChars((jstring) path, utf);
-	return (initBinaryMapFile(inputName) != NULL);
+	BinaryMapFile* fl = initBinaryMapFile(inputName);
+	if(fl == NULL) {
+		osmand_log_print(LOG_WARN, "File %s was not initialized", inputName.c_str());
+	} else {
+		osmand_log_print(LOG_INFO, "File %s is initialized.", fl->inputName.c_str());
+	}
+	return fl != NULL;
 }
 
 
@@ -66,7 +71,7 @@ RenderingRulesStorage* getStorage(JNIEnv* env, jobject storage) {
 	}
 	return cachedStorages[storage];
 }
-extern "C" JNIEXPORT void JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_initRenderingRulesStorage(JNIEnv* ienv,
+extern "C" JNIEXPORT void JNICALL Java_net_osmand_NativeLibrary_initRenderingRulesStorage(JNIEnv* ienv,
 		jobject obj, jobject storage) {
 	getStorage(ienv, storage);
 }
@@ -82,13 +87,16 @@ RenderingRuleSearchRequest* initSearchRequest(JNIEnv* env, jobject renderingRule
 }
 
 
-extern "C" JNIEXPORT jint JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_searchNativeObjectsForRendering(JNIEnv* ienv,
+extern "C" JNIEXPORT jint JNICALL Java_net_osmand_NativeLibrary_searchNativeObjectsForRendering(JNIEnv* ienv,
 		jobject obj, jint sleft, jint sright, jint stop, jint sbottom, jint zoom,
 		jobject renderingRuleSearchRequest, bool skipDuplicates, jobject objInterrupted, jstring msgNothingFound) {
 	RenderingRuleSearchRequest* req = initSearchRequest(ienv, renderingRuleSearchRequest);
-	jclass clObjInterrupted = ienv->GetObjectClass(objInterrupted);
-	jfieldID interruptedField = getFid(ienv, clObjInterrupted, "interrupted", "Z");
-	ienv->DeleteLocalRef(clObjInterrupted);
+	jfieldID interruptedField = 0;
+	if(objInterrupted != NULL) {
+		jclass clObjInterrupted = ienv->GetObjectClass(objInterrupted);
+		interruptedField = getFid(ienv, clObjInterrupted, "interrupted", "Z");
+		ienv->DeleteLocalRef(clObjInterrupted);
+	}
 
 	ResultJNIPublisher* j = new ResultJNIPublisher( objInterrupted, interruptedField, ienv);
 	SearchQuery q(sleft, sright, stop, sbottom, req, j);
@@ -204,7 +212,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 	delete bitmap;
 	//    deleteObjects(mapDataObjects);
 
-	jclass resultClass = findClass(ienv, "net/osmand/plus/render/NativeOsmandLibrary$RenderingGenerationResult");
+	jclass resultClass = findClass(ienv, "net/osmand/NativeLibrary$8RenderingGenerationResult");
 
 	jmethodID resultClassCtorId = ienv->GetMethodID(resultClass, "<init>", "(Ljava/nio/ByteBuffer;)V");
 
@@ -308,32 +316,26 @@ jclass jclass_JUnidecode;
 jmethodID jmethod_JUnidecode_unidecode;
 jclass jclass_RenderingContext = NULL;
 jfieldID jfield_RenderingContext_interrupted = NULL;
-jclass jclass_RenderingIcons = NULL;
-jmethodID jmethod_RenderingIcons_getIconRawData = NULL;
 jfieldID jfield_RenderingContext_leftX = NULL;
 jfieldID jfield_RenderingContext_topY = NULL;
 jfieldID jfield_RenderingContext_width = NULL;
 jfieldID jfield_RenderingContext_height = NULL;
 jfieldID jfield_RenderingContext_zoom = NULL;
 jfieldID jfield_RenderingContext_rotate = NULL;
-jfieldID jfield_RenderingContext_tileDivisor = NULL;
 jfieldID jfield_RenderingContext_pointCount = NULL;
 jfieldID jfield_RenderingContext_pointInsideCount = NULL;
 jfieldID jfield_RenderingContext_visible = NULL;
 jfieldID jfield_RenderingContext_allObjects = NULL;
-jfieldID jfield_RenderingContext_cosRotateTileSize = NULL;
-jfieldID jfield_RenderingContext_sinRotateTileSize = NULL;
 jfieldID jfield_RenderingContext_density = NULL;
-jfieldID jfield_RenderingContext_highResMode = NULL;
-jfieldID jfield_RenderingContext_mapTextSize = NULL;
 jfieldID jfield_RenderingContext_shadowRenderingMode = NULL;
-jfieldID jfield_RenderingContext_ctx = NULL;
 jfieldID jfield_RenderingContext_textRenderingTime = NULL;
 jfieldID jfield_RenderingContext_lastRenderedKey = NULL;
 
+jmethodID jmethod_RenderingContext_getIconRawData = NULL;
+
 void loadJniRenderingContext(JNIEnv* env)
 {
-	jclass_RenderingContext = findClass(env, "net/osmand/plus/render/OsmandRenderer$RenderingContext");
+	jclass_RenderingContext = findClass(env, "net/osmand/RenderingContext");
 	jfield_RenderingContext_interrupted = getFid(env, jclass_RenderingContext, "interrupted", "Z");
 	jfield_RenderingContext_leftX = getFid(env,  jclass_RenderingContext, "leftX", "F" );
 	jfield_RenderingContext_topY = getFid(env,  jclass_RenderingContext, "topY", "F" );
@@ -341,25 +343,17 @@ void loadJniRenderingContext(JNIEnv* env)
 	jfield_RenderingContext_height = getFid(env,  jclass_RenderingContext, "height", "I" );
 	jfield_RenderingContext_zoom = getFid(env,  jclass_RenderingContext, "zoom", "I" );
 	jfield_RenderingContext_rotate = getFid(env,  jclass_RenderingContext, "rotate", "F" );
-	jfield_RenderingContext_tileDivisor = getFid(env,  jclass_RenderingContext, "tileDivisor", "F" );
 	jfield_RenderingContext_pointCount = getFid(env,  jclass_RenderingContext, "pointCount", "I" );
 	jfield_RenderingContext_pointInsideCount = getFid(env,  jclass_RenderingContext, "pointInsideCount", "I" );
 	jfield_RenderingContext_visible = getFid(env,  jclass_RenderingContext, "visible", "I" );
 	jfield_RenderingContext_allObjects = getFid(env,  jclass_RenderingContext, "allObjects", "I" );
-	jfield_RenderingContext_cosRotateTileSize = getFid(env,  jclass_RenderingContext, "cosRotateTileSize", "F" );
-	jfield_RenderingContext_sinRotateTileSize = getFid(env,  jclass_RenderingContext, "sinRotateTileSize", "F" );
 	jfield_RenderingContext_density = getFid(env,  jclass_RenderingContext, "density", "F" );
-	jfield_RenderingContext_highResMode = getFid(env,  jclass_RenderingContext, "highResMode", "Z" );
-	jfield_RenderingContext_mapTextSize = getFid(env,  jclass_RenderingContext, "mapTextSize", "F" );
 	jfield_RenderingContext_shadowRenderingMode = getFid(env,  jclass_RenderingContext, "shadowRenderingMode", "I" );
-	jfield_RenderingContext_ctx = getFid(env,  jclass_RenderingContext, "ctx", "Landroid/content/Context;" );
 	jfield_RenderingContext_textRenderingTime = getFid(env,  jclass_RenderingContext, "textRenderingTime", "I" );
 	jfield_RenderingContext_lastRenderedKey = getFid(env,  jclass_RenderingContext, "lastRenderedKey", "I" );
+	jmethod_RenderingContext_getIconRawData = env->GetMethodID(jclass_RenderingContext,
+				"getIconRawData", "(Ljava/lang/String;)[B");
 
-	jclass_RenderingIcons = findClass(env, "net/osmand/plus/render/RenderingIcons");
-	jmethod_RenderingIcons_getIconRawData = env->GetStaticMethodID(jclass_RenderingIcons,
-		"getIconRawData",
-		"(Landroid/content/Context;Ljava/lang/String;)[B");
 
 	jclass_JUnidecode = findClass(env, "net/sf/junidecode/Junidecode");
     jmethod_JUnidecode_unidecode = env->GetStaticMethodID(jclass_JUnidecode, "unidecode", "(Ljava/lang/String;)Ljava/lang/String;");
@@ -373,17 +367,8 @@ void pullFromJavaRenderingContext(JNIEnv* env, jobject jrc, JNIRenderingContext*
 
 	rc->setZoom(env->GetIntField( jrc, jfield_RenderingContext_zoom ));
 	rc->setRotate(env->GetFloatField( jrc, jfield_RenderingContext_rotate ));
-
-	float density = env->GetFloatField( jrc, jfield_RenderingContext_density );
-	bool highResMode = env->GetBooleanField( jrc, jfield_RenderingContext_highResMode );
-	float mapTextSize = env->GetFloatField( jrc, jfield_RenderingContext_mapTextSize );
-	if (highResMode && density > 1) {
-		rc->setDensityScale(density * mapTextSize);
-	} else {
-		rc->setDensityScale(mapTextSize);
-	}
+	rc->setDensityScale(env->GetFloatField( jrc, jfield_RenderingContext_density ));
 	rc->setShadowRenderingMode(env->GetIntField( jrc, jfield_RenderingContext_shadowRenderingMode ));
-	rc->androidContext = env->GetObjectField(jrc, jfield_RenderingContext_ctx );
 	rc->javaRenderingContext = jrc;
 }
 
@@ -396,8 +381,6 @@ void pushToJavaRenderingContext(JNIEnv* env, jobject jrc, JNIRenderingContext* r
 	env->SetIntField( jrc, jfield_RenderingContext_allObjects, rc->allObjects);
 	env->SetIntField( jrc, jfield_RenderingContext_textRenderingTime, rc->textRendering.getElapsedTime());
 	env->SetIntField( jrc, jfield_RenderingContext_lastRenderedKey, rc->lastRenderedKey);
-
-	env->DeleteLocalRef(rc->androidContext);
 }
 
 bool JNIRenderingContext::interrupted()
@@ -408,7 +391,8 @@ bool JNIRenderingContext::interrupted()
 SkBitmap* JNIRenderingContext::getCachedBitmap(const std::string& bitmapResource) {
 	JNIEnv* env = this->env;
 	jstring jstr = env->NewStringUTF(bitmapResource.c_str());
-	jbyteArray javaIconRawData = (jbyteArray)env->CallStaticObjectMethod(jclass_RenderingIcons, jmethod_RenderingIcons_getIconRawData, this->androidContext, jstr);
+	jbyteArray javaIconRawData = (jbyteArray)env->CallObjectMethod(this->javaRenderingContext, jmethod_RenderingContext_getIconRawData, jstr);
+	env->DeleteLocalRef(jstr);
 	if(!javaIconRawData)
 		return NULL;
 
@@ -435,7 +419,6 @@ SkBitmap* JNIRenderingContext::getCachedBitmap(const std::string& bitmapResource
 
 	env->ReleaseByteArrayElements(javaIconRawData, bitmapBuffer, JNI_ABORT);
 	env->DeleteLocalRef(javaIconRawData);
-	env->DeleteLocalRef(jstr);
 
 	return iconBitmap;
 }

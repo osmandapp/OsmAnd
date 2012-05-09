@@ -1,8 +1,8 @@
 package net.osmand.plus.render;
 
-import java.nio.ByteBuffer;
 
 import net.osmand.LogUtil;
+import net.osmand.NativeLibrary;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -11,7 +11,7 @@ import org.apache.commons.logging.Log;
 
 import android.graphics.Bitmap;
 
-public class NativeOsmandLibrary {
+public class NativeOsmandLibrary extends NativeLibrary {
 	private static final Log log = LogUtil.getLog(NativeOsmandLibrary.class);
 	
 	private static NativeOsmandLibrary library;
@@ -95,72 +95,10 @@ public class NativeOsmandLibrary {
 		}
 	}
 
-	/**
-	 * @param searchResultHandle
-	 *            - must be null if there is no need to append to previous results returns native handle to results
-	 */
-	public NativeSearchResult searchObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom,
-			RenderingRuleSearchRequest request, boolean skipDuplicates, Object objectWithInterruptedField, String msgIfNothingFound) {
-		return new NativeSearchResult(searchNativeObjectsForRendering(sleft, sright, stop, sbottom, zoom, request, skipDuplicates,
-				objectWithInterruptedField, msgIfNothingFound));
-	}
-
-	public void deleteSearchResult(NativeSearchResult searchResultHandler) {
-		if (searchResultHandler.nativeHandler != 0) {
-			deleteSearchResult(searchResultHandler.nativeHandler);
-			searchResultHandler.nativeHandler = 0;
-		}
-	}
 	
-	public boolean initMapFile(String filePath) {
-		return initBinaryMapFile(filePath);
-	}
-	
-	public boolean closeMapFile(String filePath) {
-		return closeBinaryMapFile(filePath);
-	}
-
-	public static class NativeSearchResult {
-		private int nativeHandler;
-
-		private NativeSearchResult(int nativeHandler) {
-			this.nativeHandler = nativeHandler;
-		}
-
-		@Override
-		protected void finalize() throws Throwable {
-			if (nativeHandler != 0) {
-				super.finalize();
-			}
-			deleteSearchResult(nativeHandler);
-		}
-	}
-	
-	public static class RenderingGenerationResult {
-		public RenderingGenerationResult(ByteBuffer bitmap) {
-			bitmapBuffer = bitmap;
-		}
-	
-		public final ByteBuffer bitmapBuffer;
-	}
-
-	private static native void deleteSearchResult(int searchResultHandle);
-
-	private static native boolean initBinaryMapFile(String filePath);
-	
-	private static native boolean closeBinaryMapFile(String filePath);
-	
-	private static native void initRenderingRulesStorage(RenderingRulesStorage storage);
-
-	private static native RenderingGenerationResult generateRendering_Indirect(RenderingContext rc, int searchResultHandler,
-			int requestedBitmapWidth, int requestedBitmapHeight, int rowBytes, boolean isTransparent, boolean useEnglishNames,
-			RenderingRuleSearchRequest render, int defaultColor);
 	private static native RenderingGenerationResult generateRendering_Direct(RenderingContext rc, int searchResultHandler,
 			Bitmap bitmap, boolean useEnglishNames,
 			RenderingRuleSearchRequest render, int defaultColor);
-
-	private static native int searchNativeObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom, 
-			RenderingRuleSearchRequest request, boolean skipDuplicates, Object objectWithInterruptedField, String msgIfNothingFound);
 			
 	public static native int getCpuCount();
 	public static native boolean cpuHasNeonSupport();

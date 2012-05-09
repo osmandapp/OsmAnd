@@ -11,11 +11,12 @@ import java.util.Map;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
+import net.osmand.NativeLibrary;
+import net.osmand.NativeLibrary.NativeSearchResult;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.osm.MapRenderingTypes;
-import net.osmand.plus.render.NativeOsmandLibrary.NativeSearchResult;
 import net.osmand.plus.render.TextRenderer.TextDrawInfo;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -72,77 +73,32 @@ public class OsmandRenderer {
 		String resId;
 	}
 	
-	static enum ShadowRenderingMode {
-		// int shadowRenderingMode = 0; // no shadow (minumum CPU)
-		// int shadowRenderingMode = 1; // classic shadow (the implementaton in master)
-		// int shadowRenderingMode = 2; // blur shadow (most CPU, but still reasonable)
-		// int shadowRenderingMode = 3; solid border (CPU use like classic version or even smaller)
-		NO_SHADOW(0),
-		ONE_STEP(1),
-		BLUR_SHADOW(2),
-		SOLID_SHADOW(3);
-		public final int value;
-		ShadowRenderingMode(int v) {
-			this.value = v;
-		}
-	}
+	
+	
 
-	/*package*/ static class RenderingContext {
-		// FIELDS OF THAT CLASS ARE USED IN C++
-		public boolean interrupted = false;
-		public boolean nightMode = false;
-		public boolean highResMode = false;
-		public float mapTextSize = 1;
-		public float density = 1;
-		public final Context ctx;
-
+	/* package */static class RenderingContext extends net.osmand.RenderingContext {
 		List<TextDrawInfo> textToDraw = new ArrayList<TextDrawInfo>();
 		List<IconDrawInfo> iconsToDraw = new ArrayList<IconDrawInfo>();
-		
+		final Context ctx;
+
 		public RenderingContext(Context ctx) {
 			this.ctx = ctx;
 		}
 
-		float leftX;
-		float topY;
-		int width;
-		int height;
-
-		int zoom;
-		float rotate;
-		float tileDivisor;
-
-		// debug purpose
-		int pointCount = 0;
-		int pointInsideCount = 0;
-		int visible = 0;
-		int allObjects = 0;
-		int textRenderingTime = 0;
-		int lastRenderedKey = 0;
-
 		// use to calculate points
+		float tileDivisor;
 		PointF tempPoint = new PointF();
 		float cosRotateTileSize;
 		float sinRotateTileSize;
-		
-		// be aware field is using in C++
-		int shadowRenderingMode = ShadowRenderingMode.BLUR_SHADOW.value;
-		int shadowRenderingColor = 0xff969696;
-		
-		// not expect any shadow
+
 		int shadowLevelMin = 256;
 		int shadowLevelMax = 0;
 
-		String renderingDebugInfo;
-		
 		boolean ended = false;
 		
-		float getDensityValue(float val) {
-			if (highResMode && density > 1) {
-				return val * density * mapTextSize;
-			} else {
-				return val * mapTextSize;
-			}
+		@Override
+		protected byte[] getIconRawData(String data) {
+			return RenderingIcons.getIconRawData(ctx, data);
 		}
 	}
 
@@ -209,7 +165,6 @@ public class OsmandRenderer {
 			rc.tileDivisor = (int) (1 << (31 - rc.zoom));
 			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
-			rc.density = dm.density;
 			try {
 				if(Looper.getMainLooper() != null && library.useDirectRendering()) {
 					final Handler h = new Handler(Looper.getMainLooper());
@@ -219,7 +174,7 @@ public class OsmandRenderer {
 				// Native library will decide on it's own best way of rendering
 				// If res.bitmapBuffer is null, it indicates that rendering was done directly to
 				// memory of passed bitmap, but this is supported only on Android >= 2.2
-				final NativeOsmandLibrary.RenderingGenerationResult res = library.generateRendering(
+				final NativeLibrary.RenderingGenerationResult res = library.generateRendering(
 					rc, searchResultHandler,
 					bmp, bmp.getWidth(), bmp.getHeight(), bmp.getRowBytes(), bmp.hasAlpha(),
 					useEnglishNames, render, defaultColor);
@@ -249,8 +204,6 @@ public class OsmandRenderer {
 			rc.tileDivisor = (int) (1 << (31 - rc.zoom));
 			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
-			rc.density = dm.density;
-
 			// fill area
 			Canvas cv = new Canvas(bmp);
 			if (defaultColor != 0) {
@@ -338,6 +291,10 @@ public class OsmandRenderer {
 			}
 		}, 800);
 	}
+	
+	public float getDensity(){
+		return dm.density;
+	}
 
 	private void drawIconsOverCanvas(RenderingContext rc, Canvas cv) {
 		int skewConstant = (int) rc.getDensityValue(16);
@@ -359,7 +316,7 @@ public class OsmandRenderer {
 						// check bit b if it is set
 						if (((ind >> b) & 1) == 0) {
 							alreadyDrawnIcons[i] = ind | (1 << b);
-							if(rc.highResMode) {
+							if(rc.getDensityValue(1) != 1) {
 								float left = icon.x - rc.getDensityValue(ico.getWidth() / 2);
 								float top = icon.y - rc.getDensityValue(ico.getHeight() / 2);
 								cv.drawBitmap(ico, null, new RectF(left, top, left + rc.getDensityValue(ico.getWidth()), top

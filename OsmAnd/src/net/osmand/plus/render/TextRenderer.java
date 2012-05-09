@@ -240,8 +240,7 @@ public class TextRenderer {
 						if (text.shieldRes != null) {
 							Bitmap ico = RenderingIcons.getIcon(context, text.shieldRes);
 							if (ico != null) {
-								
-								if (rc.highResMode) {
+								if (rc.getDensityValue(1) != 1) {
 									float left = text.centerX - rc.getDensityValue(ico.getWidth() / 2) - 0.5f;
 									float top = text.centerY - rc.getDensityValue(ico.getHeight() / 2) - rc.getDensityValue(4.5f);
 									Rect rec = new Rect(0, 0, ico.getWidth(), ico.getHeight());

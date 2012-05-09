@@ -14,7 +14,7 @@ struct ResultJNIPublisher : ResultPublisher {
 	}
 
 	bool isCancelled() {
-		if (env != NULL) {
+		if (env != NULL && o != NULL) {
 			return env->GetBooleanField(o, interruptedField);
 		}
 		return false;
@@ -24,9 +24,8 @@ struct ResultJNIPublisher : ResultPublisher {
 struct JNIRenderingContext : RenderingContext
 {
 	jobject javaRenderingContext;
-	jobject androidContext;
 	JNIEnv* env;
-	JNIRenderingContext() : javaRenderingContext(NULL), androidContext(NULL) {
+	JNIRenderingContext() : javaRenderingContext(NULL){
 	}
 
 	virtual SkBitmap* getCachedBitmap(const std::string& bitmapResource);

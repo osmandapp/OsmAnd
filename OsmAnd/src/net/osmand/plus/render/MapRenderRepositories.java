@@ -1,5 +1,6 @@
 package net.osmand.plus.render;
 
+
 import gnu.trove.list.TLongList;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
@@ -22,6 +23,7 @@ import java.util.Set;
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
+import net.osmand.NativeLibrary.NativeSearchResult;
 import net.osmand.access.AccessibleToast;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -37,7 +39,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.RotatedTileBox;
-import net.osmand.plus.render.NativeOsmandLibrary.NativeSearchResult;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.render.RenderingRuleProperty;
@@ -557,8 +558,8 @@ public class MapRenderRepositories {
 			currentRenderingContext.width = (int) (requestedBox.getTileWidth() * OsmandRenderer.TILE_SIZE);
 			currentRenderingContext.height = (int) (requestedBox.getTileHeight() * OsmandRenderer.TILE_SIZE);
 			currentRenderingContext.nightMode = nightMode;
-			currentRenderingContext.highResMode = prefs.USE_HIGH_RES_MAPS.get();
-			currentRenderingContext.mapTextSize = prefs.MAP_TEXT_SIZE.get();
+			currentRenderingContext.setDensityValue(prefs.USE_HIGH_RES_MAPS.get(), 
+					prefs.MAP_TEXT_SIZE.get(), renderer.getDensity());
 			if (checkWhetherInterrupted()) {
 				return;
 			}
