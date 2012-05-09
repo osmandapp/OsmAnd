@@ -2,6 +2,7 @@
 #define _OSMAND_RENDER_RULES_H
 
 #include <string>
+#include <vector>
 #include <map>
 #include "common.h"
 #include "mapObjects.h"
@@ -276,7 +277,6 @@ public:
 		return getProperty(p->attrName);
 	}
 
-private:
 	void createDefaultProperties() {
 		R_TAG = registerRuleInternal(RenderingRuleProperty::createInputStringProperty("tag"));
 		R_VALUE = registerRuleInternal(RenderingRuleProperty::createInputStringProperty("value"));
@@ -351,10 +351,9 @@ private:
 	HMAP::hash_map<std::string, int> dictionaryMap;
 	std::vector<std::string> dictionary;
 	const static int SHIFT_TAG_VAL = 16;
-	const static int SIZE_STATES = 7;
-
 	// TODO make private
 public:
+	const static int SIZE_STATES = 7;
 	HMAP::hash_map<int, RenderingRule*>* tagValueGlobalRules;
 	map<std::string, RenderingRule*> renderingAttributes;
 public:

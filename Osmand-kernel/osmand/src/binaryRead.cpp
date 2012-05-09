@@ -702,8 +702,7 @@ void searchMapData(CodedInputStream* input, MapRoot* root, MapIndex* ind, Search
 
 
 
-ResultPublisher* searchObjectsForRendering(SearchQuery* q,
-		bool skipDuplicates, std::string msgNothingFound) {
+ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, std::string msgNothingFound) {
 	map<std::string, BinaryMapFile*>::iterator i = openFiles.begin();
 	HMAP::hash_set<long long> ids;
 	int count = 0;

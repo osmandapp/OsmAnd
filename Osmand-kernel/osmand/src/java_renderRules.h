@@ -139,13 +139,14 @@ void initProperties(JNIEnv* env, RenderingRulesStorage* st, jobject javaStorage)
 		st->PROPS.registerRuleInternal(prop);
 		env->DeleteLocalRef(rulePrope);
 	}
+	st->PROPS.createDefaultProperties();
 	env->DeleteLocalRef(props);
 	env->DeleteLocalRef(listProps);
 
 }
 
 void initRules(JNIEnv* env, RenderingRulesStorage* st, jobject javaStorage) {
-	for (int i = 1; i < st->tagValueGlobalRules->size(); i++) {
+	for (int i = 1; i < RenderingRulesStorage::SIZE_STATES; i++) {
 		jobjectArray rules = (jobjectArray) env->CallObjectMethod(javaStorage, RenderingRulesStorage_getRules, i);
 		jsize len = env->GetArrayLength(rules);
 		for (jsize j = 0; j < len; j++) {

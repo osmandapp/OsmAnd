@@ -11,6 +11,7 @@
 #include "binaryRead.h"
 #include "rendering.h"
 
+
 JavaVM* globalJVM = NULL;
 void loadJniRenderingContext(JNIEnv* env);
 void loadJniRenderingRules(JNIEnv* env);
@@ -71,11 +72,12 @@ RenderingRulesStorage* getStorage(JNIEnv* env, jobject storage) {
 	}
 	return cachedStorages[storage];
 }
+
+
 extern "C" JNIEXPORT void JNICALL Java_net_osmand_NativeLibrary_initRenderingRulesStorage(JNIEnv* ienv,
 		jobject obj, jobject storage) {
 	getStorage(ienv, storage);
 }
-
 
 RenderingRuleSearchRequest* initSearchRequest(JNIEnv* env, jobject renderingRuleSearchRequest) {
 	jobject storage = env->GetObjectField(renderingRuleSearchRequest, RenderingRuleSearchRequest_storage);
@@ -102,9 +104,10 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_NativeLibrary_searchNativeObje
 	SearchQuery q(sleft, sright, stop, sbottom, req, j);
 	q.zoom = zoom;
 
+
 	ResultPublisher* res = searchObjectsForRendering(&q, skipDuplicates, getString(ienv, msgNothingFound));
 	delete req;
-	return (jint) res;
+	return (jint) j;
 }
 
 

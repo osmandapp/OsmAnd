@@ -25,7 +25,8 @@ CPPFLAGS := \
 	$(C_INCLUDES)
 	
 #target : ../$(RUNFILE)	
-target : $(PREBUILT_DIR)/$(LIBNAME) ../$(RUNFILE)
+target : $(PREBUILT_DIR)/$(LIBNAME)
+#target : $(PREBUILT_DIR)/$(LIBNAME) ../$(RUNFILE)
 
 
 ../$(RUNFILE) : $(OBJECTS) $(PREBUILT_DIR)/libskia.a $(PREBUILT_DIR)/libproto.a

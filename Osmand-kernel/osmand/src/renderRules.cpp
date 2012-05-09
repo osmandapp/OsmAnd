@@ -98,6 +98,7 @@ string RenderingRule::getColorPropertyValue(string property) {
 	return "";
 }
 
+
 int RenderingRule::getIntPropertyValue(string property) {
 	int i = getPropertyIndex(property);
 	if (i >= 0) {
@@ -117,7 +118,6 @@ RenderingRule* RenderingRulesStorage::getRule(int state, int itag, int ivalue) {
 
 
 void RenderingRulesStorage::registerGlobalRule(RenderingRule* rr, int state) {
-
 	int tag = rr->getIntPropertyValue(this->PROPS.R_TAG->attrName);
 	if (tag == -1) {
 		osmand_log_print(LOG_ERROR, "Attribute tag should be specified for root filter ");
@@ -130,6 +130,7 @@ void RenderingRulesStorage::registerGlobalRule(RenderingRule* rr, int state) {
 	int key = (tag << SHIFT_TAG_VAL) + value;
 	RenderingRule* toInsert = rr;
 	RenderingRule* previous = tagValueGlobalRules[state][key];
+
 	if (previous != NULL) {
 		// all root rules should have at least tag/value
 		toInsert = createTagValueRootWrapperRule(key, previous);
