@@ -35,7 +35,9 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 	private JTextField cityAdminLevel;
 	private JTextField osrmServerAddress;
 	private JTextField renderingTypesFile;
-	private JTextField pathToObfRoutingFile;
+	private JTextField nativeLibFile;
+	private JTextField nativeFilesDirectory;
+	private JTextField renderingStyleFile;
 
 	private JCheckBox useInternet;
 
@@ -51,7 +53,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
     }
 	
 	public void showDialog(){
-		setSize(700, 380);
+		setSize(700, 500);
         double x = getParent().getBounds().getCenterX();
         double y = getParent().getBounds().getCenterY();
         setLocation((int) x - getWidth() / 2, (int) y - getHeight() / 2);
@@ -102,7 +104,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		constr.anchor = GridBagConstraints.WEST;
 		l.setConstraints(useInternet, constr);
 		
-		JLabel label = new JLabel("Path to obf files (test routing, comma separated) : ");
+		JLabel label = new JLabel("Directory with obf binary files (routing, rendering): ");
 		panel.add(label);
 		constr = new GridBagConstraints();
 		constr.ipadx = 5;
@@ -111,17 +113,17 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		constr.anchor = GridBagConstraints.WEST;
 		l.setConstraints(label, constr);
 		
-		pathToObfRoutingFile = new JTextField();
+		nativeFilesDirectory = new JTextField();
 		
-		pathToObfRoutingFile.setText(DataExtractionSettings.getSettings().getDefaultRoutingFilePath());
-		panel.add(pathToObfRoutingFile);
+		nativeFilesDirectory.setText(DataExtractionSettings.getSettings().getBinaryFilesDir());
+		panel.add(nativeFilesDirectory);
 		constr = new GridBagConstraints();
 		constr.weightx = 1;
 		constr.fill = GridBagConstraints.HORIZONTAL;
 		constr.ipadx = 5;
 		constr.gridx = 1;
 		constr.gridy = 1;
-		l.setConstraints(pathToObfRoutingFile, constr);
+		l.setConstraints(nativeFilesDirectory, constr);
 		
 		
 		label = new JLabel("City admin level : ");
@@ -165,6 +167,46 @@ public class OsmExtractionPreferencesDialog extends JDialog {
         constr.gridx = 1;
         constr.gridy = 3;
         l.setConstraints(osrmServerAddress, constr);
+        
+        label = new JLabel("Rendering style file : ");
+        panel.add(label);
+        constr = new GridBagConstraints();
+        constr.ipadx = 5;
+        constr.gridx = 0;
+        constr.gridy = 4;
+        constr.anchor = GridBagConstraints.WEST;
+        l.setConstraints(label, constr);
+        
+        renderingStyleFile = new JTextField();
+        renderingStyleFile.setText(DataExtractionSettings.getSettings().getRenderXmlPath());
+        panel.add(renderingStyleFile);
+        constr = new GridBagConstraints();
+        constr.weightx = 1;
+        constr.fill = GridBagConstraints.HORIZONTAL;
+        constr.ipadx = 5;
+        constr.gridx = 1;
+        constr.gridy = 4;
+        l.setConstraints(renderingStyleFile, constr);
+        
+        label = new JLabel("Native lib file (osmand.lib): ");
+        panel.add(label);
+        constr = new GridBagConstraints();
+        constr.ipadx = 5;
+        constr.gridx = 0;
+        constr.gridy = 5;
+        constr.anchor = GridBagConstraints.WEST;
+        l.setConstraints(label, constr);
+        
+        nativeLibFile = new JTextField();
+        nativeLibFile.setText(DataExtractionSettings.getSettings().getNativeLibFile());
+        panel.add(nativeLibFile);
+        constr = new GridBagConstraints();
+        constr.weightx = 1;
+        constr.fill = GridBagConstraints.HORIZONTAL;
+        constr.ipadx = 5;
+        constr.gridx = 1;
+        constr.gridy = 5;
+        l.setConstraints(nativeLibFile, constr);
 		
 //		supressWarning = new JCheckBox();
 //		supressWarning.setText(Messages.getString("OsmExtractionPreferencesDialog.DUPLICATED.ID")); //$NON-NLS-1$
@@ -320,6 +362,9 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		if(settings.useInternetToLoadImages() != useInternet.isSelected()){
 			settings.setUseInterentToLoadImages(useInternet.isSelected());
 		}
+		if(!settings.getNativeLibFile().equals(nativeLibFile.getText())){
+			settings.setNativeLibFile(nativeLibFile.getText());
+		}
 		
 		if(!settings.getLineSmoothness().equals(lineSmoothness.getText())){
 			settings.setLineSmoothness(lineSmoothness.getText());
@@ -330,15 +375,19 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		if(!settings.getMapRenderingTypesFile().equals(renderingTypesFile.getText())){
 			settings.setMapRenderingTypesFile(renderingTypesFile.getText());
 		}
-		if(!settings.getDefaultRoutingFilePath().equals(pathToObfRoutingFile.getText())){
-			settings.setDefaultRoutingPath(pathToObfRoutingFile.getText());
-		}
 		if(!settings.getCityAdminLevel().equals(cityAdminLevel.getText())){
             settings.setCityAdminLevel(cityAdminLevel.getText());
         }
 		if(!settings.getOsrmServerAddress().equals(osrmServerAddress.getText())){
             settings.setOsrmServerAddress(osrmServerAddress.getText());
         }
+		if(!settings.getBinaryFilesDir().equals(nativeFilesDirectory.getText())){
+			settings.setBinaryFilesDir(nativeFilesDirectory.getText());
+		}
+		
+		if(!settings.getRenderXmlPath().equals(renderingStyleFile.getText())){
+			settings.setRenderXmlPath(renderingStyleFile.getText());
+		}
 //		if(settings.isSupressWarningsForDuplicatedId() != supressWarning.isSelected()){
 //			settings.setSupressWarningsForDuplicatedId	(supressWarning.isSelected());
 //		}

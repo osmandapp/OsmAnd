@@ -17,6 +17,24 @@
 JavaVM* globalJVM = NULL;
 void loadJniRenderingContext(JNIEnv* env);
 void loadJniRenderingRules(JNIEnv* env);
+
+static int simplePngSize = 93;
+static void* simplePng = new uint8[simplePngSize]{
+		0x89 ,0x50 ,0x4E ,0x47 ,0x0D ,0x0A ,0x1A ,0x0A ,
+		0x00 ,0x00 ,0x00 ,0x0D ,0x49 ,0x48 ,0x44 ,0x52 ,
+		0x00 ,0x00 ,0x00 ,0x06 ,0x00 ,0x00 ,0x00 ,0x06 ,
+		0x08 ,0x03 ,0x00 ,0x00 ,0x00 ,0xD7 ,0x12 ,0x1F ,
+		0x7A ,0x00 ,0x00 ,0x00 ,0x03 ,0x50 ,0x4C ,0x54 ,
+		0x45 ,0x20 ,0x97 ,0xCE ,0xDD ,0xEB ,0x88 ,0x50 ,
+		0x00 ,0x00 ,0x00 ,0x15 ,0x49 ,0x44 ,0x41 ,0x54 ,
+		0x78 ,0xDA ,0x8D ,0xC1 ,0x01 ,0x01 ,0x00 ,0x00 ,
+		0x00 ,0x80 ,0x90 ,0xFE ,0xAF ,0x76 ,0x21 ,0xDA ,
+		0x00 ,0x00 ,0x2A ,0x00 ,0x01 ,0xD0 ,0x79 ,0x58 ,
+		0x1D ,0x00 ,0x00 ,0x00 ,0x00 ,0x49 ,0x45 ,0x4E ,
+		0x44 ,0xAE ,0x42 ,0x60 ,0x82
+};
+
+
 extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
 {
 	JNIEnv* globalJniEnv;
@@ -25,8 +43,19 @@ extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
 	globalJVM = vm;
 	loadJniRenderingContext(globalJniEnv);
 	loadJniRenderingRules(globalJniEnv);
-	osmand_log_print(LOG_INFO, "JNI_OnLoad completed");
+	// Encode and decode png (bug in PC Java linking, currently using -Bsymbolic?)
+	/*SkBitmap* bmp = new SkBitmap();
+	if(!SkImageDecoder::DecodeMemory(simplePng, simplePngSize, bmp)) {
+		osmand_log_print(LOG_INFO, "Initialization jni : decode png failed!");
+		return JNI_VERSION_1_6;
+	}
+	SkImageEncoder* enc = SkImageEncoder::Create(SkImageEncoder::kPNG_Type);
+	SkDynamicMemoryWStream* stream = new SkDynamicMemoryWStream();
+	enc->encodeStream(stream, *bmp, 80);
+	delete stream;
+	delete bmp;*/
 
+	osmand_log_print(LOG_INFO, "JNI_OnLoad completed");
 	return JNI_VERSION_1_6;
 }
 
@@ -186,7 +215,6 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 	RenderingRuleSearchRequest* req = initSearchRequest(ienv, renderingRuleSearchRequest);
 	JNIRenderingContext rc;
 	pullFromJavaRenderingContext(ienv, renderingContext, &rc);
-	rc.setUseEnglishNames(useEnglishNames);
 	ResultPublisher* result = ((ResultPublisher*) searchResult);
 	//    std::vector <BaseMapDataObject* > mapDataObjects = marshalObjects(binaryMapDataObjects);
 
@@ -304,6 +332,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_NativeLibrary_generateRende
 		bitmapData = malloc(bitmapDataSize);
 
 		stream->copyTo(bitmapData);
+		delete enc;
 	}
 	bitmapBuffer = ienv->NewDirectByteBuffer(bitmapData, bitmapDataSize);
 
@@ -428,7 +457,6 @@ SkBitmap* JNIRenderingContext::getCachedBitmap(const std::string& bitmapResource
 		this->nativeOperations.start();
 		env->ReleaseByteArrayElements(javaIconRawData, bitmapBuffer, JNI_ABORT);
 		env->DeleteLocalRef(javaIconRawData);
-		env->DeleteLocalRef(jstr);
 
 		throwNewException(env, (std::string("Failed to decode ") + bitmapResource).c_str());
 

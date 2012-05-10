@@ -5,6 +5,7 @@ OSMAND_SKIA_ABS := $(LOCAL_PATH)/../skia/skia_library
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/src \
     $(PROTOBUF) \
 	$(LOCAL_PATH)/../skia \
+	$(LOCAL_PATH)/../expat/expat_library/lib \
 	$(OSMAND_SKIA_ABS)/include/core \
 	$(OSMAND_SKIA_ABS)/include/images \
 	$(OSMAND_SKIA_ABS)/include/utils \

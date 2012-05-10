@@ -30,7 +30,7 @@ public class NativePreferencesDialog extends JDialog {
 
 	private JTextField nativeFilesDirectory;
 	private JTextField renderingStyleFile;
-	private JTextField nativeLibFile;
+	private boolean okPressed;
 
 	
 	public NativePreferencesDialog(Component parent){
@@ -89,7 +89,7 @@ public class NativePreferencesDialog extends JDialog {
 		
 		nativeFilesDirectory = new JTextField();
 		
-		nativeFilesDirectory.setText(DataExtractionSettings.getSettings().getDefaultWorkingDir().getAbsolutePath());
+		nativeFilesDirectory.setText(DataExtractionSettings.getSettings().getBinaryFilesDir());
 		panel.add(nativeFilesDirectory);
 		constr = new GridBagConstraints();
 		constr.weightx = 1;
@@ -99,27 +99,6 @@ public class NativePreferencesDialog extends JDialog {
 		constr.gridy = 1;
 		l.setConstraints(nativeFilesDirectory, constr);
 		
-		
-		label = new JLabel("City admin level : ");
-        panel.add(label);
-        constr = new GridBagConstraints();
-        constr.ipadx = 5;
-        constr.gridx = 0;
-        constr.gridy = 2;
-        constr.anchor = GridBagConstraints.WEST;
-        l.setConstraints(label, constr);
-        
-        nativeLibFile = new JTextField();
-        
-        nativeLibFile.setText(DataExtractionSettings.getSettings().getCityAdminLevel());
-        panel.add(nativeLibFile);
-        constr = new GridBagConstraints();
-        constr.weightx = 1;
-        constr.fill = GridBagConstraints.HORIZONTAL;
-        constr.ipadx = 5;
-        constr.gridx = 1;
-        constr.gridy = 2;
-        l.setConstraints(nativeLibFile, constr);
         
         label = new JLabel("Rendering style file : ");
         panel.add(label);
@@ -131,7 +110,7 @@ public class NativePreferencesDialog extends JDialog {
         l.setConstraints(label, constr);
         
         renderingStyleFile = new JTextField();
-        renderingStyleFile.setText(DataExtractionSettings.getSettings().getOsrmServerAddress());
+        renderingStyleFile.setText(DataExtractionSettings.getSettings().getRenderXmlPath());
         panel.add(renderingStyleFile);
         constr = new GridBagConstraints();
         constr.weightx = 1;
@@ -151,6 +130,7 @@ public class NativePreferencesDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				saveProperties();
+				okPressed = true;
 				setVisible(false);
 			}
 			
@@ -166,25 +146,20 @@ public class NativePreferencesDialog extends JDialog {
 	
 	
 	public void saveProperties(){
-		// TODO
-//		DataExtractionSettings settings = DataExtractionSettings.getSettings();
-//		if(!settings.getSuffixesToNormalizeStreetsString().equals(streetSuffixes.getText())){
-//			settings.setSuffixesToNormalizeStreets(streetSuffixes.getText());
-//		}
-//		if(!settings.getDefaultSuffixesToNormalizeStreetsString().equals(streetDefaultSuffixes.getText())){
-//			settings.setDefaultSuffixesToNormalizeStreets(streetDefaultSuffixes.getText());
-//		}
-//		if(settings.useInternetToLoadImages() != useInternet.isSelected()){
-//			settings.setUseInterentToLoadImages(useInternet.isSelected());
-//		}
-//		
-//		if(!settings.getLineSmoothness().equals(lineSmoothness.getText())){
-//			settings.setLineSmoothness(lineSmoothness.getText());
-//		}
+		DataExtractionSettings settings = DataExtractionSettings.getSettings();
+		if(!settings.getBinaryFilesDir().equals(nativeFilesDirectory.getText())){
+			settings.setBinaryFilesDir(nativeFilesDirectory.getText());
+		}
+		
+		if(!settings.getRenderXmlPath().equals(renderingStyleFile.getText())){
+			settings.setRenderXmlPath(renderingStyleFile.getText());
+		}
 		
 	}
 	
-
+	public boolean isOkPressed() {
+		return okPressed;
+	}
 
 }
 

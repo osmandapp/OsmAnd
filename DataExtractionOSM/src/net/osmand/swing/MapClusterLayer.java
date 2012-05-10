@@ -123,7 +123,8 @@ public class MapClusterLayer implements MapPanelLayer {
 	
 	private List<Way> clustering(double lat, double lon, Set<String> roads) throws IOException{
 		List<Way> res = new ArrayList<Way>();
-		File[] files = DataExtractionSettings.getSettings().getDefaultRoutingFile();
+		//TODO DataExtractionSettings.getSettings().getBinaryFilesDir()
+		File[] files = new File[0];
 		BinaryMapIndexReader[] rs = new BinaryMapIndexReader[files.length];
 		for(int i=0; i<files.length; i++){
 			RandomAccessFile raf = new RandomAccessFile(files[i], "r"); //$NON-NLS-1$ //$NON-NLS-2$

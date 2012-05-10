@@ -364,6 +364,12 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		return getHeight() / 2;
 	}
 
+	public NativeSwingRendering getNativeLibrary() {
+		return nativeLibRendering;
+	}
+	public void setNativeLibrary( NativeSwingRendering nl) {
+		nativeLibRendering = nl;
+	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -910,7 +916,8 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 							sright + EXPAND_X * cf, stop - EXPAND_Y * cf, sbottom + EXPAND_Y * cf, z);
 					nativeLatLon = latLon;
 					nativeZoom = z;
-				} catch (IOException e) {
+				} catch (Exception e) {
+					log.error(e.getMessage(), e);
 					e.printStackTrace();
 				}
 				repaint();

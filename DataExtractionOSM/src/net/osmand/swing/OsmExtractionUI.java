@@ -218,11 +218,38 @@ public class OsmExtractionUI implements IMapLocationListener {
 		showOfflineIndex.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				NativePreferencesDialog dlg = new NativePreferencesDialog(frame);
-				dlg.showDialog();
+				if(showOfflineIndex.isSelected()) {
+					NativePreferencesDialog dlg = new NativePreferencesDialog(frame);
+					dlg.showDialog();
+					if(dlg.isOkPressed()) {
+						initNativeRendering();
+					} else {
+						showOfflineIndex.setSelected(false);
+					}
+				} else {
+					mapPanel.setNativeLibrary(null);
+				}
 			}
 		});
-		
+	}
+	
+	private void initNativeRendering() {
+		NativeSwingRendering lib = NativeSwingRendering.loadLibrary(
+				DataExtractionSettings.getSettings().getNativeLibFile());
+		if(lib != null) {
+			try {
+				lib.initFilesInDir(new File(DataExtractionSettings.getSettings().getBinaryFilesDir()));
+				lib.loadRuleStorage(DataExtractionSettings.getSettings().getRenderXmlPath());
+				mapPanel.setNativeLibrary(lib);
+				mapPanel.repaint();
+			} catch (SAXException e) {
+				log.error(e.getMessage(), e);
+				throw new RuntimeException(e);
+			} catch (IOException e) {
+				log.error(e.getMessage(), e);
+				throw new RuntimeException(e);
+			}
+		}
 	}
 	
 	public void fillMenuWithActions(final JMenuBar bar){

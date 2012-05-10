@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RenderingContext {
 	static enum ShadowRenderingMode {
@@ -71,11 +73,13 @@ public class RenderingContext {
 		return val * density;
 	}
 	
+	private Map<String, byte[]> precache = new HashMap<String, byte[]>(); 
+	
 	protected byte[] getIconRawData(String data) {
 		if(iconsBaseDir != null) {
-			File fs = new File(iconsBaseDir+"/h_"+data+".png");
+			File fs = new File(iconsBaseDir.getAbsolutePath()+"/h_"+data+".png");
 			if(!fs.exists()) {
-				fs = new File(iconsBaseDir+"/g_"+data+".png");
+				fs = new File(iconsBaseDir.getAbsolutePath()+"/g_"+data+".png");
 			}
 			if (fs.exists()) {
 				try {
@@ -84,6 +88,7 @@ public class RenderingContext {
 					int l = fis.read(dta);
 					fis.close();
 					if (l == dta.length) {
+						precache.put(data, dta);
 						return dta;
 					} else {
 						System.err.println("Read data " + l + " however was expected " + dta.length + " for " + data);

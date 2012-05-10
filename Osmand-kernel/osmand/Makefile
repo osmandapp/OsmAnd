@@ -6,10 +6,12 @@ include ./Common.mk
 
 LOCAL_SRC_FILES += src/osmand_main.cpp
 
-LDFLAGS = -Wl,--hash-style=both -shared
+#LDFLAGS = -Wl,--hash-style=both -fPIC
+LDFLAGS = -Wall -fPIC -Wl,-Bsymbolic
 LDRUNFLAGS = -Wl,--hash-style=both
+#  --trace -Bsymbolic -Bsymbolic-functions
 
-LDLIBS = -L$(PREBUILT_DIR) -lskia -lproto -lpthread -lrt -lft2 -lexpat -lpng -lz
+LDLIBS = -L$(PREBUILT_DIR) -lskia -lproto -lpthread -lrt -lft2 -lexpat -lz -lpng 
 CPP_FILE_EXTENSION = cpp
 OBJECTS = $(LOCAL_SRC_FILES:src/%.$(CPP_FILE_EXTENSION)=build/obj/%.o)
 
@@ -29,17 +31,16 @@ target : $(PREBUILT_DIR)/$(LIBNAME)
 #target : $(PREBUILT_DIR)/$(LIBNAME) ../$(RUNFILE)
 
 
-../$(RUNFILE) : $(OBJECTS) $(PREBUILT_DIR)/libskia.a $(PREBUILT_DIR)/libproto.a
+../$(RUNFILE) : $(OBJECTS) $(PREBUILT_DIR)/libskia.a $(PREBUILT_DIR)/libproto.a Makefile
 	$(CXX) $(LDRUNFLAGS) -o ../$(RUNFILE)  $(OBJECTS) $(LDLIBS)
 	@chmod +x ../$(RUNFILE)
 
-$(PREBUILT_DIR)/$(LIBNAME) : build/$(LIBNAME)  
+$(PREBUILT_DIR)/$(LIBNAME) : build/$(LIBNAME)
 	cp build/$(LIBNAME) $(PREBUILT_DIR)/$(LIBNAME)
 
 
-build/$(LIBNAME): $(OBJECTS) $(PREBUILT_DIR)/libskia.a $(PREBUILT_DIR)/libproto.a 
-	$(CXX) $(LDFLAGS) -o build/$(LIBNAME)  $(OBJECTS) $(LDLIBS)
-	strip build/$(LIBNAME)
+build/$(LIBNAME): $(OBJECTS) $(PREBUILT_DIR)/libskia.a $(PREBUILT_DIR)/libproto.a Makefile
+	$(CXX) -shared -o build/$(LIBNAME) $(OBJECTS) $(LDFLAGS) $(LDLIBS)
 	
 build/obj/%.o : src/%.$(CPP_FILE_EXTENSION) $(LOCAL_C_INCLUDES)
 	@mkdir -p `dirname $@`

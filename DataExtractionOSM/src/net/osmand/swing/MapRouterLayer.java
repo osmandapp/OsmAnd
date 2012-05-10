@@ -473,7 +473,8 @@ public class MapRouterLayer implements MapPanelLayer {
 	public List<Way> selfRoute(LatLon start, LatLon end) {
 		List<Way> res = new ArrayList<Way>();
 		long time = System.currentTimeMillis();
-		File[] files = DataExtractionSettings.getSettings().getDefaultRoutingFile();
+		// TODO DataExtractionSettings.getSettings().getBinaryFilesDir()
+		File[] files = new File[0];
 		if(files == null){
 			JOptionPane.showMessageDialog(OsmExtractionUI.MAIN_APP.getFrame(), "Please specify obf file in settings", "Obf file not found", 
 					JOptionPane.ERROR_MESSAGE);

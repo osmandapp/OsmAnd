@@ -42,41 +42,6 @@ public class DataExtractionSettings {
 		preferences.put("working_dir", path.getAbsolutePath());
 	}
 	
-	
-	public File[] getDefaultRoutingFile(){
-		String routingFile = preferences.get("routing_file", null);
-		if(routingFile == null){
-			return null;
-		}
-		String[] files = routingFile.split(",");
-		List<File> fs = new ArrayList<File>();
-		for(String f : files){
-			if(new File(f.trim()).exists()){
-				fs.add(new File(f.trim()));
-			}
-		}
-		
-		return fs.toArray(new File[fs.size()]);
-	}
-	
-    public String getDefaultRoutingFilePath(){
-    	File[] file = getDefaultRoutingFile();
-		String path = "";
-		if (file != null) {
-			for (int i = 0; i < file.length; i++) {
-				if (i > 0) {
-					path += ", ";
-				}
-				path += file[i].getAbsolutePath();
-			}
-		}
-		return path;
-    }
-	
-	public void setDefaultRoutingPath(String path){
-		preferences.put("routing_file", path);
-	}
-	
 	public LatLon getDefaultLocation(){
 		double lat = preferences.getDouble("default_lat",  53.9);
 		double lon = preferences.getDouble("default_lon",  27.56);
@@ -171,6 +136,41 @@ public class DataExtractionSettings {
 	public void setCityAdminLevel(String s){
 		preferences.put("cityAdminLevel", s);
 	}
+	
+	public String getNativeLibFile(){
+		String fl = preferences.get("nativeLibFile", null);
+		if(fl != null) {
+			return fl;
+		}
+		return getDefaultWorkingDir().getAbsolutePath() +"/osmand.lib";
+	}
+	
+	public void setNativeLibFile(String file){
+		preferences.put("nativeLibFile", file);
+	}
+	
+	public String getRenderXmlPath(){
+		return preferences.get("renderXmlPath", "default.render.xml");
+	}
+	
+	public void setRenderXmlPath(String file){
+		preferences.put("renderXmlPath", file);
+	}
+	
+	
+
+	public String getBinaryFilesDir(){
+		String fl = preferences.get("binaryFilesDir", null);
+		if(fl != null) {
+			return fl;
+		}
+		return getDefaultWorkingDir().getAbsolutePath();
+	}
+	
+	public void setBinaryFilesDir(String file){
+		preferences.put("binaryFilesDir", file);
+	}
+	
 	
 	public String getOsrmServerAddress(){
 		return preferences.get("osrmServerAddress", "http://127.0.0.1:5000");
