@@ -112,12 +112,12 @@
 				android:key="offline_poi_edition"></CheckBoxPreference>
 			<Preference android:title="@string/local_openstreetmap_settings" android:key="local_openstreetmap_points" android:summary="@string/local_openstreetmap_settings_descr"></Preference>
 		</PreferenceCategory>
-		<PreferenceCategory android:title="OsmAnd debugging and development">
-			<CheckBoxPreference android:key="native_rendering" android:title="Native rendering" android:summary="Vector maps may display faster. May not work well on some devices."></CheckBoxPreference>
+		<PreferenceCategory android:title="@string/debugging_and_development">
+			<CheckBoxPreference android:key="native_rendering" android:title="@string/native_rendering" android:summary="@string/vector_maps_may_display_faster_on_some_devices"></CheckBoxPreference>
 			<CheckBoxPreference android:summary="@string/trace_rendering_descr" android:title="@string/trace_rendering"
 				android:key="debug_rendering"></CheckBoxPreference>
-			<CheckBoxPreference android:key="animate_routing" android:title="Animate routing" android:summary="Simulate route progression manually"></CheckBoxPreference>
-			<Preference android:key="test_voice_commands" android:summary="Play commands of currently selected voice" android:title="Test voice prompts"></Preference>
+			<CheckBoxPreference android:key="animate_routing" android:title="@string/animate_routing" android:summary="@string/simulate_route_progression_manually"></CheckBoxPreference>
+			<Preference android:key="test_voice_commands" android:summary="@string/play_commands_of_currently_selected_voice" android:title="@string/test_voice_prompts"></Preference>
 		</PreferenceCategory>
 	</PreferenceScreen>
 
