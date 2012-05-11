@@ -2,7 +2,7 @@
 <resources>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektorkarten werden eventuell schneller angezeigt. Funktioniert nur auf manchen Geräten.</string>
 	<string name="simulate_route_progression_manually">Simuliere die Navigation</string>
-	<string name="play_commands_of_currently_selected_voice">Spiele Anweisungen der aktuell ausgewählten Stimme ab</string>
+	<string name="play_commands_of_currently_selected_voice">Spiele Befehle der aktuell ausgewählten Stimme ab</string>
 	<string name="debugging_and_development">OsmAnd Debugging und Entwicklung</string>
 	<string name="native_rendering">Native rendering</string>
 	<string name="animate_routing">Simuliere Navigation</string>
