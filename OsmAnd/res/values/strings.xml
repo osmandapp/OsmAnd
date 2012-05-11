@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="vector_maps_may_display_faster_on_some_devices">Vector maps may display faster. May not work well on some devices.</string>
+	<string name="simulate_route_progression_manually">Simulate route progression manually</string>
+	<string name="play_commands_of_currently_selected_voice">Play commands of currently selected voice</string>
 	<string name="debugging_and_development">OsmAnd debugging and development</string>
 	<string name="native_rendering">Native rendering</string>
 	<string name="animate_routing">Animate routing</string>
