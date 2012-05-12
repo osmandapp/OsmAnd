@@ -11,7 +11,10 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.MemoryCacheImageInputStream;
 
+import org.omg.stub.java.rmi._Remote_Stub;
 import org.xml.sax.SAXException;
+
+import resources._R;
 
 import net.osmand.NativeLibrary;
 import net.osmand.RenderingContext;
@@ -23,7 +26,6 @@ import net.osmand.render.RenderingRulesStorage.RenderingRulesStorageResolver;
 public class NativeSwingRendering extends NativeLibrary {
 
 	RenderingRulesStorage storage;
-	private final File baseDirRC;
 	
 	public void loadRuleStorage(String path) throws SAXException, IOException{
 		RenderingRulesStorage storage = new RenderingRulesStorage();
@@ -48,8 +50,7 @@ public class NativeSwingRendering extends NativeLibrary {
 		this.storage = storage;
 	}
 	
-	public NativeSwingRendering(File baseDirRC){
-		this.baseDirRC = baseDirRC;
+	public NativeSwingRendering(){
 		try {
 			loadRuleStorage(null);
 		} catch (SAXException e) {
@@ -64,7 +65,12 @@ public class NativeSwingRendering extends NativeLibrary {
 	
 	public BufferedImage renderImage(int sleft, int sright, int stop, int sbottom, int zoom) throws IOException {
 		long time = -System.currentTimeMillis();
-		RenderingContext rctx = new RenderingContext(baseDirRC);
+		RenderingContext rctx = new RenderingContext() {
+			@Override
+			protected byte[] getIconRawData(String data) {
+				return _R.getIconData(data);
+			}
+		};
 		
 		RenderingRuleSearchRequest request = new RenderingRuleSearchRequest(storage);
 		NativeSearchResult res = searchObjectsForRendering(sleft, sright, stop, sbottom, zoom, request, true, 
@@ -117,8 +123,7 @@ public class NativeSwingRendering extends NativeLibrary {
 	public static NativeSwingRendering loadLibrary(String path){
 		if(loaded == null) {
 			System.load(path);
-			// TODO images !!!
-			loaded = new NativeSwingRendering(new File("/home/victor/projects/OsmAnd/git/OsmAnd/res/drawable-mdpi/"));
+			loaded = new NativeSwingRendering();
 		}
 		return loaded;
 	}

@@ -1,11 +1,5 @@
 package net.osmand;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class RenderingContext {
 	static enum ShadowRenderingMode {
@@ -20,7 +14,6 @@ public class RenderingContext {
 			this.value = v;
 		}
 	}
-	private File iconsBaseDir;
 
 	// FIELDS OF THAT CLASS ARE USED IN C++
 	public boolean interrupted = false;
@@ -31,10 +24,6 @@ public class RenderingContext {
 	public RenderingContext() {
 	}
 	
-	public RenderingContext(File iconsBaseDir){
-		this.iconsBaseDir = iconsBaseDir;
-		
-	}
 
 	public float leftX;
 	public float topY;
@@ -73,31 +62,7 @@ public class RenderingContext {
 		return val * density;
 	}
 	
-	private Map<String, byte[]> precache = new HashMap<String, byte[]>(); 
-	
 	protected byte[] getIconRawData(String data) {
-		if(iconsBaseDir != null) {
-			File fs = new File(iconsBaseDir.getAbsolutePath()+"/h_"+data+".png");
-			if(!fs.exists()) {
-				fs = new File(iconsBaseDir.getAbsolutePath()+"/g_"+data+".png");
-			}
-			if (fs.exists()) {
-				try {
-					byte[] dta = new byte[(int) fs.length()];
-					FileInputStream fis = new FileInputStream(fs);
-					int l = fis.read(dta);
-					fis.close();
-					if (l == dta.length) {
-						precache.put(data, dta);
-						return dta;
-					} else {
-						System.err.println("Read data " + l + " however was expected " + dta.length + " for " + data);
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 		return null;
 	}
 }

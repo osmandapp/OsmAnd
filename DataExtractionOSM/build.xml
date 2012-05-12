@@ -6,6 +6,8 @@
 	<property name="file.to.upload" value="OsmAndMapCreator-nightbuild.zip"/>
 	<property name="src.dir" value="src"/>
 	<property name="src.absolute.dir" location="${src.dir}" />
+	<property name="icons.dir" value="icons/resources"/>
+	<property name="icons.absolute.dir" location="${icons.dir}" />
 	<property name="bin.dir" value="bin"/>
 	<property name="bin.absolute.dir" location="${bin.dir}" />
 	<property name="lib.dir" value="lib"/>
@@ -25,6 +27,16 @@
 	<target name="-dirs">
 	   <mkdir dir="${bin.absolute.dir}"/>
 	</target>
+	
+	<target name="-copy-resources">
+	   <mkdir dir="${icons.absolute.dir}"/>
+		<copy todir="${icons.absolute.dir}">
+			<fileset dir="../OsmAnd/res/drawable-mdpi/">
+				<include name="h_*.png"/>
+				<include name="g_*.png"/>
+			 </fileset>
+		</copy>
+	</target>
 
 	<target name="-version" if="build.version">
 	   <replace file="src/net/osmand/MapCreatorVersion.java" token="String APP_DESCRIPTION" value="String APP_DESCRIPTION=&quot;${build.version}&quot;;//"/>
@@ -34,7 +46,7 @@
 	   <delete dir="${bin.absolute.dir}"/>
 	</target>
 
-	<target name="compile" depends="-dirs,-version">
+	<target name="compile" depends="-copy-resources,-dirs,-version">
 	 <copy todir="${bin.absolute.dir}">
 	   <fileset dir="${src.absolute.dir}">
 		<exclude name="**/*.java" />
@@ -49,7 +61,7 @@
 	  />
 	</target>
 
-	<target name="jar" depends="-dirs">
+	<target name="jar" depends="-copy-resources, -dirs">
 		<manifestclasspath property="lib.list" jarfile="OsmAndMapCreator.jar">
 			<classpath refid="build.path"/>
 		</manifestclasspath>
