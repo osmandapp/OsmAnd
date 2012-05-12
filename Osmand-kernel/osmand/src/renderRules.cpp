@@ -390,6 +390,7 @@ void RenderingRulesStorage::parseRulesFromXmlInputStream(const char* filename, R
 			done = true;
 		}
 		if (XML_Parse(parser, buffer, len, done) == XML_STATUS_ERROR) {
+			fclose(file);
 			return;
 		}
 	}
@@ -428,6 +429,7 @@ void RenderingRulesStorage::parseRulesFromXmlInputStream(const char* filename, R
 		}
 
 	}
+	fclose(file);
 }
 
 
