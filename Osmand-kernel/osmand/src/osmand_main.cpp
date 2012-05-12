@@ -191,8 +191,8 @@ void runSimpleRendering( string renderingFileName, string resourceDir, Rendering
 	RenderingRulesStorage* st = new RenderingRulesStorage(renderingFileName.c_str());
 	st->parseRulesFromXmlInputStream(renderingFileName.c_str(), NULL);
 	RenderingRuleSearchRequest* searchRequest = new RenderingRuleSearchRequest(st);
-	SearchQuery q(floor(info->left), floor(info->right), ceil(info->top), ceil(info->bottom), searchRequest,
-			new ResultPublisher());
+	ResultPublisher* publisher = new ResultPublisher()
+	SearchQuery q(floor(info->left), floor(info->right), ceil(info->top), ceil(info->bottom), searchRequest, publisher);
 	q.zoom = info->zoom;
 
 	ResultPublisher* res = searchObjectsForRendering(&q, true, "Nothing found");
@@ -244,6 +244,7 @@ void runSimpleRendering( string renderingFileName, string resourceDir, Rendering
 	} else {
 		osmand_log_print(LOG_INFO, "Tile successfully saved to %s", info->tileFileName.c_str());
 	}
+	delete publisher;
 	delete canvas;
 	delete bitmap;
 	free(bitmapData);
