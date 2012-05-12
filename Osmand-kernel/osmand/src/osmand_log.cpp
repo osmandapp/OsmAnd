@@ -11,13 +11,13 @@ void osmand_log_print(int type, const char* msg, ...) {
 	va_list args;
 	va_start( args, msg);
 	if(type == LOG_ERROR) {
-		__android_log_print(ANDROID_LOG_ERROR, LOG_TAG, msg, args);
+		__android_log_vprint(ANDROID_LOG_ERROR, LOG_TAG, msg, args);
 	} else if(type == LOG_INFO) {
-		__android_log_print(ANDROID_LOG_INFO, LOG_TAG, msg, args);
+		__android_log_vprint(ANDROID_LOG_INFO, LOG_TAG, msg, args);
 	} else if(type == LOG_WARN) {
-		__android_log_print(ANDROID_LOG_WARN, LOG_TAG, msg, args);
+		__android_log_vprint(ANDROID_LOG_WARN, LOG_TAG, msg, args);
 	} else {
-		__android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, msg, args);
+		__android_log_vprint(ANDROID_LOG_DEBUG, LOG_TAG, msg, args);
 	}
 	va_end(args);
 }
