@@ -3,12 +3,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import net.osmand.LogUtil;
+
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 
 public class _R {
-	private static final Log log = LogFactory.getLog(_R.class);
+	private static final Log log = LogUtil.getLog(_R.class);
 
 	public static byte[] getIconData(String data) {
 		InputStream io = _R.class.getResourceAsStream("h_" + data + ".png");

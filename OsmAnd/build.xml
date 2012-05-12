@@ -236,6 +236,7 @@
                 <exclude name="**/net/osmand/data/preparation/" />
                 <exclude name="**/net/osmand/osm/util/" />
                 <exclude name="**/net/osmand/swing/" />
+            	<exclude name="**/resources/" />
                 <exclude name="**/rtree/" />
                 <!-- osmchange -->
             </javac>
