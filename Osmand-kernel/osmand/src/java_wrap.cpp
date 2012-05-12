@@ -18,7 +18,7 @@ JavaVM* globalJVM = NULL;
 void loadJniRenderingContext(JNIEnv* env);
 void loadJniRenderingRules(JNIEnv* env);
 
-static int simplePngSize = 93;
+static const int simplePngSize = 93;
 static void* simplePng = new uint8[simplePngSize]{
 		0x89 ,0x50 ,0x4E ,0x47 ,0x0D ,0x0A ,0x1A ,0x0A ,
 		0x00 ,0x00 ,0x00 ,0x0D ,0x49 ,0x48 ,0x44 ,0x52 ,
@@ -60,7 +60,7 @@ extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
 }
 
 extern "C" JNIEXPORT void JNICALL Java_net_osmand_NativeLibrary_deleteSearchResult(JNIEnv* ienv,
-		jobject obj, jint searchResult) {
+		jobject obj, jlong searchResult) {
 	ResultPublisher* result = (ResultPublisher*) searchResult;
 	if(result != NULL){
 		delete result;
@@ -119,7 +119,7 @@ RenderingRuleSearchRequest* initSearchRequest(JNIEnv* env, jobject renderingRule
 }
 
 
-extern "C" JNIEXPORT jint JNICALL Java_net_osmand_NativeLibrary_searchNativeObjectsForRendering(JNIEnv* ienv,
+extern "C" JNIEXPORT jlong JNICALL Java_net_osmand_NativeLibrary_searchNativeObjectsForRendering(JNIEnv* ienv,
 		jobject obj, jint sleft, jint sright, jint stop, jint sbottom, jint zoom,
 		jobject renderingRuleSearchRequest, bool skipDuplicates, jobject objInterrupted, jstring msgNothingFound) {
 	RenderingRuleSearchRequest* req = initSearchRequest(ienv, renderingRuleSearchRequest);
@@ -137,7 +137,7 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_NativeLibrary_searchNativeObje
 
 	ResultPublisher* res = searchObjectsForRendering(&q, skipDuplicates, getString(ienv, msgNothingFound));
 	delete req;
-	return (jint) j;
+	return (jlong) j;
 }
 
 
@@ -148,7 +148,7 @@ extern "C" JNIEXPORT jint JNICALL Java_net_osmand_NativeLibrary_searchNativeObje
 #include <android/bitmap.h>
 
 extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLibrary_generateRenderingDirect( JNIEnv* ienv, jobject obj,
-    jobject renderingContext, jint searchResult, jobject targetBitmap, jobject renderingRuleSearchRequest) {
+    jobject renderingContext, jlong searchResult, jobject targetBitmap, jobject renderingRuleSearchRequest) {
 
 	// libJniGraphics interface
 	typedef int (*PTR_AndroidBitmap_getInfo)(JNIEnv*, jobject, AndroidBitmapInfo*);
@@ -266,7 +266,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 void* bitmapData = NULL;
 size_t bitmapDataSize = 0;
 extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_NativeLibrary_generateRenderingIndirect( JNIEnv* ienv,
-		jobject obj, jobject renderingContext, jint searchResult, jboolean isTransparent,
+		jobject obj, jobject renderingContext, jlong searchResult, jboolean isTransparent,
 		jobject renderingRuleSearchRequest, jboolean encodePNG) {
 
 	JNIRenderingContext rc;

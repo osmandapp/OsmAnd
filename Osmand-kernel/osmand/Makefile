@@ -22,7 +22,7 @@ CPPFLAGS := \
 	-DSK_ALLOW_STATIC_GLOBAL_INITIALIZERS=0 \
 	-DSK_RELEASE \
 	-DGR_RELEASE=1 \
-	-c -Fpic -I$(JAVA_HOME)/include \
+	-c -fPIC -I$(JAVA_HOME)/include \
 	-DHASH_MAP_GNU \
 	$(C_INCLUDES)
 	

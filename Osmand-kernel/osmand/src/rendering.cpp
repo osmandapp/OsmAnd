@@ -248,21 +248,25 @@ void drawOneWayPaints(RenderingContext* rc, SkCanvas* cv, SkPath* p) {
         p->setStrokeWidth(1);
         p->setPathEffect(arrowDashEffect1)->unref();
         oneWayPaints.push_back(*p);
+        delete p;
 
         p = oneWayPaint();
         p->setStrokeWidth(2);
         p->setPathEffect(arrowDashEffect2)->unref();
         oneWayPaints.push_back(*p);
+        delete p;
 
         p = oneWayPaint();
         p->setStrokeWidth(3);
         p->setPathEffect(arrowDashEffect3)->unref();
         oneWayPaints.push_back(*p);
+        delete p;
 
         p = oneWayPaint();
         p->setStrokeWidth(4);
         p->setPathEffect(arrowDashEffect4)->unref();
         oneWayPaints.push_back(*p);
+        delete p;
     }
 
     for (size_t i = 0; i < oneWayPaints.size(); i++) {

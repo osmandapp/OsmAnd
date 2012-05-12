@@ -181,9 +181,6 @@ struct SearchQuery {
 
 	SearchQuery(int l, int r, int t, int b, RenderingRuleSearchRequest* req, ResultPublisher* publisher) :
 			req(req), left(l), right(r), top(t), bottom(b),publisher(publisher) {
-		if(publisher == NULL) {
-			publisher = new ResultPublisher();
-		}
 		numberOfAcceptedObjects = numberOfVisitedObjects = 0;
 		numberOfAcceptedSubtrees = numberOfReadSubtrees = 0;
 		ocean = land = false;
