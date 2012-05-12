@@ -29,6 +29,7 @@ CPPFLAGS := -DSK_RELEASE \
 	-DNDEBUG \
 	-fno-rtti \
 	-fno-exceptions \
+	-fPIC \
 	$(C_INCLUDES)
 	
 LDLIBS = -lpthread

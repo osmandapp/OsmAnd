@@ -364,7 +364,7 @@ MapDataObject* readMapDataObject(CodedInputStream* input, MapTreeBounds* tree, S
 	int px = tree->left & MASK_TO_READ;
 	int py = tree->top & MASK_TO_READ;
 	bool contains = false;
-	long long id = 0;
+	int64 id = 0;
 	int minX = INT_MAX;
 	int maxX = 0;
 	int minY = INT_MAX;
@@ -484,10 +484,10 @@ MapDataObject* readMapDataObject(CodedInputStream* input, MapTreeBounds* tree, S
 			break;
 		default: {
 			if (WireFormatLite::GetTagWireType(t) == WireFormatLite::WIRETYPE_END_GROUP) {
-				return false;
+				return NULL;
 			}
 			if (!skipUnknownFields(input, t)) {
-				return false;
+				return NULL;
 			}
 			break;
 		}
@@ -601,7 +601,7 @@ bool searchMapTreeBounds(CodedInputStream* input, MapTreeBounds* current, MapTre
 }
 
 bool readMapDataBlocks(CodedInputStream* input, SearchQuery* req, MapTreeBounds* tree, MapIndex* root) {
-	long long baseId = 0;
+	int64 baseId = 0;
 	int tag;
 	std::vector< MapDataObject* > results;
 	while ((tag = input->ReadTag()) != 0) {

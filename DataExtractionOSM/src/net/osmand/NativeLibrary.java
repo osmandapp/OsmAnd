@@ -17,8 +17,8 @@ public class NativeLibrary {
 	
 	public static class NativeSearchResult {
 
-		public int nativeHandler;
-		private NativeSearchResult(int nativeHandler) {
+		public long nativeHandler;
+		private NativeSearchResult(long nativeHandler) {
 			this.nativeHandler = nativeHandler;
 		}
 
@@ -57,7 +57,7 @@ public class NativeLibrary {
 	}
 
 
-	protected static native void deleteSearchResult(int searchResultHandle);
+	protected static native void deleteSearchResult(long searchResultHandle);
 
 	protected static native boolean initBinaryMapFile(String filePath);
 	
@@ -66,10 +66,10 @@ public class NativeLibrary {
 	protected static native void initRenderingRulesStorage(RenderingRulesStorage storage);
 
 
-	protected static native RenderingGenerationResult generateRenderingIndirect(RenderingContext rc, int searchResultHandler,
+	protected static native RenderingGenerationResult generateRenderingIndirect(RenderingContext rc, long searchResultHandler,
 			boolean isTransparent, RenderingRuleSearchRequest render, boolean encodePng);
 	
-	protected static native int searchNativeObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom, 
+	protected static native long searchNativeObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom, 
 			RenderingRuleSearchRequest request, boolean skipDuplicates, Object objectWithInterruptedField, String msgIfNothingFound);
 
 }

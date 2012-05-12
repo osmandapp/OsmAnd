@@ -95,7 +95,7 @@ public class NativeOsmandLibrary extends NativeLibrary {
 	}
 
 	
-	private static native RenderingGenerationResult generateRenderingDirect(RenderingContext rc, int searchResultHandler,
+	private static native RenderingGenerationResult generateRenderingDirect(RenderingContext rc, long searchResultHandler,
 			Bitmap bitmap, RenderingRuleSearchRequest render);
 			
 	public static native int getCpuCount();
