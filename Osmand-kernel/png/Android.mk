@@ -1,6 +1,6 @@
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
-
+include $(LOCAL_PATH)/Common.mk
 LOCAL_SHARED_LIBRARIES := \
 	libz
 
@@ -9,7 +9,6 @@ LOCAL_MODULE := png
 else
 LOCAL_MODULE := png_neon
 endif
-LIBPNG
 ifneq ($(OSMAND_USE_PREBUILT),true)
 
 common_CFLAGS := -fvisibility=hidden ## -fomit-frame-pointer
