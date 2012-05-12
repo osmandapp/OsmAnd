@@ -191,7 +191,7 @@ void runSimpleRendering( string renderingFileName, string resourceDir, Rendering
 	RenderingRulesStorage* st = new RenderingRulesStorage(renderingFileName.c_str());
 	st->parseRulesFromXmlInputStream(renderingFileName.c_str(), NULL);
 	RenderingRuleSearchRequest* searchRequest = new RenderingRuleSearchRequest(st);
-	ResultPublisher* publisher = new ResultPublisher()
+	ResultPublisher* publisher = new ResultPublisher();
 	SearchQuery q(floor(info->left), floor(info->right), ceil(info->top), ceil(info->bottom), searchRequest, publisher);
 	q.zoom = info->zoom;
 
