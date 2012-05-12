@@ -484,10 +484,10 @@ MapDataObject* readMapDataObject(CodedInputStream* input, MapTreeBounds* tree, S
 			break;
 		default: {
 			if (WireFormatLite::GetTagWireType(t) == WireFormatLite::WIRETYPE_END_GROUP) {
-				return false;
+				return NULL;
 			}
 			if (!skipUnknownFields(input, t)) {
-				return false;
+				return NULL;
 			}
 			break;
 		}
