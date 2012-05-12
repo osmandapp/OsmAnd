@@ -9,6 +9,7 @@ LOCAL_MODULE := png
 else
 LOCAL_MODULE := png_neon
 endif
+LIBPNG
 ifneq ($(OSMAND_USE_PREBUILT),true)
 
 common_CFLAGS := -fvisibility=hidden ## -fomit-frame-pointer
