@@ -4,12 +4,19 @@ include $(CLEAR_VARS)
 LOCAL_SHARED_LIBRARIES := \
 	libz
 
+ifeq ($(OSMAND_PNG_LOC),)
+  OSMAND_PNG_LOC := ./png_library
+endif
+ifeq ($(OSMAND_PNG_ABS),)
+  OSMAND_PNG_ABS := $(LOCAL_PATH)/png_library
+endif
+
 ifneq ($(OSMAND_BUILDING_NEON_LIBRARY),true)
 LOCAL_MODULE := png
 else
 LOCAL_MODULE := png_neon
 endif
-LIBPNG
+
 ifneq ($(OSMAND_USE_PREBUILT),true)
 
 common_CFLAGS := -fvisibility=hidden ## -fomit-frame-pointer
@@ -27,6 +34,25 @@ common_C_INCLUDES +=
 
 common_COPY_HEADERS_TO := libpng
 common_COPY_HEADERS := png.h pngconf.h pngusr.h
+
+LOCAL_SRC_FILES := \
+	$(OSMAND_PNG_LOC)/png.c \
+	$(OSMAND_PNG_LOC)/pngerror.c \
+	$(OSMAND_PNG_LOC)/pnggccrd.c \
+	$(OSMAND_PNG_LOC)/pngget.c \
+	$(OSMAND_PNG_LOC)/pngmem.c \
+	$(OSMAND_PNG_LOC)/pngpread.c \
+	$(OSMAND_PNG_LOC)/pngread.c \
+	$(OSMAND_PNG_LOC)/pngrio.c \
+	$(OSMAND_PNG_LOC)/pngrtran.c \
+	$(OSMAND_PNG_LOC)/pngrutil.c \
+	$(OSMAND_PNG_LOC)/pngset.c \
+	$(OSMAND_PNG_LOC)/pngtrans.c \
+	$(OSMAND_PNG_LOC)/pngvcrd.c \
+	$(OSMAND_PNG_LOC)/pngwio.c \
+	$(OSMAND_PNG_LOC)/pngwrite.c \
+	$(OSMAND_PNG_LOC)/pngwtran.c \
+	$(OSMAND_PNG_LOC)/pngwutil.c
 
 LOCAL_CFLAGS += $(common_CFLAGS)
 LOCAL_C_INCLUDES += $(common_C_INCLUDES) \
