@@ -824,6 +824,8 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 		}
 		if (q->zoom <= BASEMAP_ZOOM || emptyData) {
 			tempResult.insert(tempResult.end(), basemapResult.begin(), basemapResult.end());
+		} else {
+			deleteObjects(basemapResult);
 		}
 		q->publisher->result.clear();
 		q->publisher->publish(tempResult);
