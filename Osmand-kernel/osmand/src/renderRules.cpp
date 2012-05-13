@@ -47,6 +47,7 @@ string colorToString(int color) {
 
 
 RenderingRule::RenderingRule(map<string, string>& attrs, RenderingRulesStorage* storage) {
+	storage->childRules.push_back(this);
 	properties.reserve(attrs.size());
 	intProperties.assign(attrs.size(), -1);
 	map<string, string>::iterator it = attrs.begin();

@@ -363,6 +363,7 @@ public:
 	const static int SIZE_STATES = 7;
 	HMAP::hash_map<int, RenderingRule*>* tagValueGlobalRules;
 	map<std::string, RenderingRule*> renderingAttributes;
+	std::vector<RenderingRule*> childRules;
 public:
 	RenderingRulesStorageProperties PROPS;
 	// No rules for multipolygon !!!
@@ -382,8 +383,10 @@ public:
 	}
 
 	~RenderingRulesStorage() {
+		for (std::vector<RenderingRule*>::iterator rr = childRules.begin(); rr != childRules.end(); rr++) {
+			delete *rr;
+		}
 		delete[] tagValueGlobalRules;
-		// proper
 	}
 	const void* storageId;
 
