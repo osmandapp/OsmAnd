@@ -318,4 +318,5 @@ int main(int argc, char **argv) {
 		printFileInformation(f, NULL);
 	}
 
+	SkGraphics::PurgeFontCache();
 }
