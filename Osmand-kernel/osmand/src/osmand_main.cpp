@@ -2,6 +2,7 @@
 #include "renderRules.h"
 #include "rendering.h"
 #include <SkImageEncoder.h>
+#include <SkGraphics.h>
 #include <stdio.h>
 #include <time.h>
 
@@ -244,7 +245,10 @@ void runSimpleRendering( string renderingFileName, string resourceDir, Rendering
 	} else {
 		osmand_log_print(LOG_INFO, "Tile successfully saved to %s", info->tileFileName.c_str());
 	}
+	delete enc;
 	delete publisher;
+	delete searchRequest;
+	delete st;
 	delete canvas;
 	delete bitmap;
 	free(bitmapData);
@@ -310,6 +314,11 @@ int main(int argc, char **argv) {
 					}
 				}
 				runSimpleRendering(info->renderingFileName, info->imagesFileName, info);
+				for (int i = 1; i != argc; ++i) {
+					if (sscanf(argv[i], "-renderingInputFile=%s", s)) {
+						closeBinaryMapFile(s);
+					}
+				}
 			}
 		} else {
 			printUsage("Unknown command");
