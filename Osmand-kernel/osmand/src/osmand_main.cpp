@@ -319,6 +319,7 @@ int main(int argc, char **argv) {
 						closeBinaryMapFile(s);
 					}
 				}
+				delete info;
 			}
 		} else {
 			printUsage("Unknown command");
