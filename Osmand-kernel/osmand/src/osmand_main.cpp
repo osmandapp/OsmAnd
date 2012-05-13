@@ -328,4 +328,5 @@ int main(int argc, char **argv) {
 	}
 
 	SkGraphics::PurgeFontCache();
+	purgeCachedBitmaps();
 }
