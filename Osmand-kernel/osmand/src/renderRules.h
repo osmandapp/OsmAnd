@@ -268,6 +268,13 @@ public:
 		}
 	}
 
+	~RenderingRulesStorageProperties() {
+		vector<RenderingRuleProperty*>::iterator it = rules.begin();
+		for (; it != rules.end(); it++) {
+			delete *it;
+		}
+	}
+
 	RenderingRuleProperty* registerRuleInternal(RenderingRuleProperty* p) {
 		if (getProperty(p->attrName) == NULL) {
 			properties[p->attrName] = p;
