@@ -468,6 +468,7 @@ void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv) {
 	paintIcon.setStyle(SkPaint::kStroke_Style);
 	paintIcon.setStrokeWidth(1);
 	paintIcon.setColor(0xff000000);
+	paintIcon.setFilterBitmap(true);
 	SkPaint paintText;
 	paintText.setStyle(SkPaint::kFill_Style);
 	paintText.setStrokeWidth(1);
