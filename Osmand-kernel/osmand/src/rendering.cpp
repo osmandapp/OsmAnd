@@ -465,6 +465,7 @@ void drawIconsOverCanvas(RenderingContext* rc, SkCanvas* canvas)
 	size_t ji = 0;
 	SkPaint p;
 	p.setStyle(SkPaint::kStroke_Style);
+	p.setFilterBitmap(true);
 	for(;ji< rc->iconsToDraw.size(); ji++)
 	{
 		IconDrawInfo icon = rc->iconsToDraw.at(ji);
