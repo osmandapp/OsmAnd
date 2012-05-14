@@ -268,6 +268,13 @@ public:
 		}
 	}
 
+	~RenderingRulesStorageProperties() {
+		vector<RenderingRuleProperty*>::iterator it = rules.begin();
+		for (; it != rules.end(); it++) {
+			delete *it;
+		}
+	}
+
 	RenderingRuleProperty* registerRuleInternal(RenderingRuleProperty* p) {
 		if (getProperty(p->attrName) == NULL) {
 			properties[p->attrName] = p;
@@ -356,6 +363,7 @@ public:
 	const static int SIZE_STATES = 7;
 	HMAP::hash_map<int, RenderingRule*>* tagValueGlobalRules;
 	map<std::string, RenderingRule*> renderingAttributes;
+	std::vector<RenderingRule*> childRules;
 public:
 	RenderingRulesStorageProperties PROPS;
 	// No rules for multipolygon !!!
@@ -375,8 +383,10 @@ public:
 	}
 
 	~RenderingRulesStorage() {
+		for (std::vector<RenderingRule*>::iterator rr = childRules.begin(); rr != childRules.end(); rr++) {
+			delete *rr;
+		}
 		delete[] tagValueGlobalRules;
-		// proper
 	}
 	const void* storageId;
 

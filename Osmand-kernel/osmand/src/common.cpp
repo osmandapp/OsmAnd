@@ -134,6 +134,13 @@ SkBitmap* getCachedBitmap(RenderingContext* rc, const std::string& bitmapResourc
 	return iconBitmap;
 }
 
+void purgeCachedBitmaps() {
+	HMAP::hash_map<std::string, SkBitmap*>::iterator it = cachedBitmaps.begin();
+	for (; it != cachedBitmaps.end(); it++) {
+		delete it->second;
+	}
+}
+
 std::string RenderingContext::getTranslatedString(const std::string& src) {
 	return src;
 }

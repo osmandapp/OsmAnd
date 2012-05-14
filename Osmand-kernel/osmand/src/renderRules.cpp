@@ -47,6 +47,7 @@ string colorToString(int color) {
 
 
 RenderingRule::RenderingRule(map<string, string>& attrs, RenderingRulesStorage* storage) {
+	storage->childRules.push_back(this);
 	properties.reserve(attrs.size());
 	intProperties.assign(attrs.size(), -1);
 	map<string, string>::iterator it = attrs.begin();
@@ -379,6 +380,8 @@ void RenderingRulesStorage::parseRulesFromXmlInputStream(const char* filename, R
 	FILE *file = fopen(filename, "r");
 	if (file == NULL) {
 		osmand_log_print(LOG_ERROR, "File can not be open %s", filename);
+		XML_ParserFree(parser);
+		delete handler;
 		return;
 	}
 	char buffer[512];
@@ -391,6 +394,8 @@ void RenderingRulesStorage::parseRulesFromXmlInputStream(const char* filename, R
 		}
 		if (XML_Parse(parser, buffer, len, done) == XML_STATUS_ERROR) {
 			fclose(file);
+			XML_ParserFree(parser);
+			delete handler;
 			return;
 		}
 	}
@@ -429,6 +434,8 @@ void RenderingRulesStorage::parseRulesFromXmlInputStream(const char* filename, R
 		}
 
 	}
+	XML_ParserFree(parser);
+	delete handler;
 	fclose(file);
 }
 

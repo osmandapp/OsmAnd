@@ -269,7 +269,7 @@ bool initMapStructure(CodedInputStream* input, BinaryMapFile* file) {
 			input->PopLimit(oldLimit);
 			input->Seek(mapIndex.filePointer + mapIndex.length);
 			file->mapIndexes.push_back(mapIndex);
-			file->indexes.push_back(new MapIndex(mapIndex));
+			file->indexes.push_back(&file->mapIndexes.back());
 			file->basemap = file->basemap || mapIndex.name.find("basemap") != string::npos;
 			break;
 		}
@@ -824,6 +824,8 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 		}
 		if (q->zoom <= BASEMAP_ZOOM || emptyData) {
 			tempResult.insert(tempResult.end(), basemapResult.begin(), basemapResult.end());
+		} else {
+			deleteObjects(basemapResult);
 		}
 		q->publisher->result.clear();
 		q->publisher->publish(tempResult);

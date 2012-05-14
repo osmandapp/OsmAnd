@@ -295,7 +295,7 @@ public:
 };
 
 SkBitmap* getCachedBitmap(RenderingContext* rc, const std::string& bitmapResource);
-
+void purgeCachedBitmaps();
 
 int get31TileNumberX(double longitude);
 int get31TileNumberY( double latitude);

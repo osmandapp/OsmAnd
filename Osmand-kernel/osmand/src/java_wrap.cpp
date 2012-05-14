@@ -69,7 +69,7 @@ extern "C" JNIEXPORT void JNICALL Java_net_osmand_NativeLibrary_deleteSearchResu
 
 
 extern "C" JNIEXPORT void JNICALL Java_net_osmand_NativeLibrary_closeBinaryMapFile(JNIEnv* ienv,
-		jobject path) {
+		jobject obj, jobject path) {
 	const char* utf = ienv->GetStringUTFChars((jstring) path, NULL);
 	std::string inputName(utf);
 	ienv->ReleaseStringUTFChars((jstring) path, utf);
