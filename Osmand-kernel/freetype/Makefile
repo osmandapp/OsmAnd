@@ -1,4 +1,5 @@
 LOCAL_PATH = .
+include ../Makefile.vars
 include Common.mk
 
 CPP_FILE_EXTENSION = c

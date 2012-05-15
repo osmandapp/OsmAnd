@@ -7,7 +7,7 @@ LIBNAME := libpng.a
 PREBUILT_DIR = ../jni-prebuilt/$(os)-$(arch)/
 OBJECTS = $(LOCAL_SRC_FILES:%.$(CPP_FILE_EXTENSION)=build/obj-$(os)-$(arch)/%.o)
 C_INCLUDES := $(addprefix -I, $(LOCAL_C_INCLUDES))
-CPPFLAGS = $(LOCAL_CFLAGS) $(C_INCLUDES)
+CPPFLAGS = $(LOCAL_CFLAGS) $(C_INCLUDES) $(CPP_OS_FLAGS)
 
 target : $(PREBUILT_DIR)/$(LIBNAME)
 

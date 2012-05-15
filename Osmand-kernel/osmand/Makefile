@@ -3,6 +3,8 @@ include ../Makefile.vars
 include ./Common.mk
 PREBUILT_DIR = ../jni-prebuilt/$(os)-$(arch)/
 LIBNAME := osmand.lib
+LIBOSNAME := osmand-$(os)-$(arch).lib
+
 RUNFILE := osmand_main
 
 LOCAL_SRC_FILES += src/osmand_main.cpp
@@ -36,12 +38,12 @@ target : $(PREBUILT_DIR)/$(LIBNAME)
 	$(CXX) $(LDRUNFLAGS) -o ../$(RUNFILE)  $(OBJECTS) $(LDLIBS)
 	@chmod +x ../$(RUNFILE)
 
-$(PREBUILT_DIR)/$(LIBNAME) : build/$(LIBNAME)
-	cp build/$(LIBNAME) $(PREBUILT_DIR)/$(LIBNAME)
+$(PREBUILT_DIR)/$(LIBNAME) : build/$(LIBOSNAME)
+	cp build/$(LIBOSNAME) $(PREBUILT_DIR)/$(LIBNAME)
 
 
-build/$(LIBNAME): $(OBJECTS) $(PREBUILT_DIR)/libskia.a $(PREBUILT_DIR)/libproto.a Makefile
-	$(CXX) -shared -o build/$(LIBNAME) $(OBJECTS) $(LDFLAGS) $(LDLIBS)
+build/$(LIBOSNAME): $(OBJECTS) $(PREBUILT_DIR)/libskia.a $(PREBUILT_DIR)/libproto.a Makefile
+	$(CXX) -shared -o build/$(LIBOSNAME) $(OBJECTS) $(LDFLAGS) $(LDLIBS)
 	
 build/obj-$(os)-$(arch)/%.o : src/%.$(CPP_FILE_EXTENSION) $(LOCAL_C_INCLUDES)
 	@mkdir -p `dirname $@`
