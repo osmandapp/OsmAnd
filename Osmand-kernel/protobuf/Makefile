@@ -1,9 +1,10 @@
+include ../Makefile.vars
 include Common.mk
 
 CPP_FILE_EXTENSION = cc
 LIBNAME := libproto.a
-PREBUILT_DIR = ../jni-prebuilt/linux-x86/
-OBJECTS = $(LOCAL_SRC_FILES:%.$(CPP_FILE_EXTENSION)=build/obj/%.o)
+PREBUILT_DIR = ../jni-prebuilt/$(os)-$(arch)/
+OBJECTS = $(LOCAL_SRC_FILES:%.$(CPP_FILE_EXTENSION)=build/obj-$(os)-$(arch)/%.o)
 CPPFLAGS := -DGOOGLE_PROTOBUF_NO_RTTI -I. -fPIC
 LDLIBS = -lpthread
 
@@ -15,7 +16,7 @@ $(PREBUILT_DIR)/$(LIBNAME) : build/$(LIBNAME)
 build/$(LIBNAME): $(OBJECTS) 
 	ar -rf build/$(LIBNAME) $(OBJECTS)
 	
-build/obj/%.o : %.$(CPP_FILE_EXTENSION) $(LOCAL_C_INCLUDES)
+build/obj-$(os)-$(arch)/%.o : %.$(CPP_FILE_EXTENSION) $(LOCAL_C_INCLUDES)
 	@mkdir -p `dirname $@`
 	$(CXX) -o $@ -c $*.$(CPP_FILE_EXTENSION) $(CPPFLAGS)
 

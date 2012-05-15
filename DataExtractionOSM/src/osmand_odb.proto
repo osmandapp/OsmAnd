@@ -31,6 +31,9 @@ message OsmAndStructure {
    // encoded as fixed32 length delimited
    repeated OsmAndMapIndex mapIndex = 6;
    
+   // encoded as fixed32 length delimited
+   repeated OsmAndRoutingIndex routingIndex = 9;
+
    // last field should version again (to check consistency)
    required uint32 versionConfirm = 32;
 }
@@ -450,5 +453,81 @@ message OsmAndPoiBoxDataAtom {
   optional string site = 11;
   optional string phone = 12;
   optional string note = 13;
-  
 }
+
+/**
+ * Id table 1-based. Map of sequential ids to real ids
+ * [1,2,3....n] -> [a1, ... an]
+ * a1,.. an - sorted set of longs
+ */
+message IdTable {
+   // diff between 2 ids
+   repeated uint64 routeId = 1;
+   // diff between 2 ids
+   repeated uint64 pointId = 2;
+}
+
+message RestrictionData {
+	required int32 type = 1;
+	required int32 from = 2;
+	required int32 to = 3;
+	optional int32 via = 4;
+}
+
+message RoutePoint {
+	// array of delta x,y sint32 (CodedIinputStream) >> 5
+	// first x delta to Tree.left, y to delta Tree.top (next delta to previous)
+	required bytes point = 1;
+	optional uint32 pointId = 2;
+	// array of raw var int types
+	optional bytes types = 4;
+}
+
+message RouteData {
+  	repeated RoutePoint points = 1;
+	// array of raw var int types
+  	required bytes types = 7;
+
+  	required int32 routeId = 12; // id internal
+}
+
+message OsmAndRoutingIndex {
+	required string name = 1;
+	repeated RouteEncodingRule rules = 2;
+	message RouteEncodingRule {
+		required string tag = 3;
+		required string value = 5;
+		// it is optional because natural order in block of rules
+		// is the same as id (id is 1-based and order)
+		optional uint32 id = 7;
+	}
+
+	// encoded as fixed32 length delimited
+	repeated RouteDataBox rootBoxes = 3;
+
+	repeated RouteDataBlock blocks = 5;
+	message RouteDataBox {
+		// for root box is absolute coordinates
+		required sint32 left = 1; // delta encoded
+		required sint32 right = 2; // delta encoded
+		required sint32 top = 3; // delta encoded
+		required sint32 bottom = 4; // delta encoded
+
+		//shift from routeDataBox start to message RouteDataBlock
+		optional fixed32 shiftToData = 5;
+		repeated RouteDataBox boxes = 7;
+	}
+
+	message RouteDataBlock {
+	// coordinates can take much space 4*4*count of data blocks=
+	//   required sint32 left = 1; // delta encoded
+	//   required sint32 right = 2; // delta encoded
+	//   required sint32 top = 3; // delta encoded
+	//   required sint32 bottom = 4; // delta encoded
+		optional IdTable idTable = 5;
+		repeated RouteData dataObjects = 6;
+		repeated RestrictionData restrictions = 7;
+	}
+
+}
+

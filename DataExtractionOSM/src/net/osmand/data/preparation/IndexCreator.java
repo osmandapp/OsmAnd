@@ -64,6 +64,7 @@ public class IndexCreator {
 	private boolean indexPOI;
 	private boolean indexTransport;
 	private boolean indexAddress;
+	private boolean indexRouting = true;
 
 	private boolean normalizeStreets = true; // true by default
 	private boolean saveAddressWays = true; // true by default
@@ -78,6 +79,7 @@ public class IndexCreator {
 	private IndexPoiCreator indexPoiCreator;
 	private IndexAddressCreator indexAddressCreator;
 	private IndexVectorMapCreator indexMapCreator;
+	private IndexRouteCreator indexRouteCreator;
 	private OsmDbAccessor accessor;
 	// constants to start process from the middle and save temporary results
 	private boolean recreateOnlyBinaryFile = false; // false;
@@ -101,6 +103,10 @@ public class IndexCreator {
 
 	public void setIndexAddress(boolean indexAddress) {
 		this.indexAddress = indexAddress;
+	}
+	
+	public void setIndexRouting(boolean indexRouting) {
+		this.indexRouting = indexRouting;
 	}
 
 	public void setIndexMap(boolean indexMap) {
@@ -185,6 +191,14 @@ public class IndexCreator {
 	public String getRTreeMapIndexNonPackFileName() {
 		return mapFile.getAbsolutePath() + ".rtree"; //$NON-NLS-1$
 	}
+	
+	public String getRTreeRouteIndexNonPackFileName() {
+		return mapFile.getAbsolutePath() + ".rte"; //$NON-NLS-1$
+	}
+	
+	public String getRTreeRouteIndexPackFileName() {
+		return mapFile.getAbsolutePath() + ".prte"; //$NON-NLS-1$
+	}
 
 	public String getRTreeTransportStopsFileName() {
 		return mapFile.getAbsolutePath() + ".trans"; //$NON-NLS-1$
@@ -212,6 +226,9 @@ public class IndexCreator {
 		}
 		if (indexAddress) {
 			indexAddressCreator.iterateMainEntity(e, ctx);
+		}
+		if (indexRouting) {
+			indexRouteCreator.iterateMainEntity(e, ctx);
 		}
 	}
 
@@ -330,6 +347,9 @@ public class IndexCreator {
 		if (indexMap) {
 			indexMapCreator.createDatabaseStructure(mapConnection, mapDBDialect, getRTreeMapIndexNonPackFileName());
 		}
+		if (indexRouting) {
+			indexRouteCreator.createDatabaseStructure(mapConnection, mapDBDialect, getRTreeRouteIndexNonPackFileName());
+		}
 		if (indexAddress) {
 			indexAddressCreator.createDatabaseStructure(mapConnection, mapDBDialect);
 		}
@@ -447,6 +467,7 @@ public class IndexCreator {
 		this.indexPoiCreator = new IndexPoiCreator(renderingTypes);
 		this.indexAddressCreator = new IndexAddressCreator(logMapDataWarn);
 		this.indexMapCreator = new IndexVectorMapCreator(logMapDataWarn, mapZooms, renderingTypes, zoomWaySmothness);
+		this.indexRouteCreator = new IndexRouteCreator(logMapDataWarn);
 		this.accessor = new OsmDbAccessor();
 
 		// init address
@@ -473,6 +494,9 @@ public class IndexCreator {
 				try {
 					if (indexMap) {
 						indexMapCreator.createRTreeFiles(getRTreeMapIndexPackFileName());
+					}
+					if (indexRouting) {
+						indexRouteCreator.createRTreeFiles(getRTreeRouteIndexPackFileName());
 					}
 					if (indexTransport) {
 						indexTransportCreator.createRTreeFile(getRTreeTransportStopsPackFileName());
@@ -505,7 +529,7 @@ public class IndexCreator {
 				}
 
 				// 3.2 index address relations
-				if (indexAddress || indexMap) {
+				if (indexAddress || indexMap || indexRouting) {
 					progress.setGeneralProgress("[30 / 100]"); //$NON-NLS-1$
 					progress.startTask(Messages.getString("IndexCreator.PREINDEX_BOUNDARIES_RELATIONS"), accessor.getAllRelations()); //$NON-NLS-1$
 					accessor.iterateOverEntities(progress, EntityType.RELATION, new OsmDbVisitor() {
@@ -517,6 +541,9 @@ public class IndexCreator {
 							}
 							if (indexMap) {
 								indexMapCreator.indexMapRelationsAndMultiPolygons(e, ctx);
+							}
+							if (indexRouting) {
+								indexRouteCreator.indexRelations(e, ctx);
 							}
 						}
 					});
@@ -596,6 +623,9 @@ public class IndexCreator {
 					progress.startTask(Messages.getString("IndexCreator.PACK_RTREE_MAP"), -1); //$NON-NLS-1$
 					indexMapCreator.packRtreeFiles(getRTreeMapIndexNonPackFileName(), getRTreeMapIndexPackFileName());
 				}
+				if(indexRouting) {
+					indexRouteCreator.packRtreeFiles(getRTreeRouteIndexNonPackFileName(), getRTreeRouteIndexPackFileName());
+				}
 
 				if (indexTransport) {
 					progress.setGeneralProgress("[90 / 100]"); //$NON-NLS-1$
@@ -615,6 +645,11 @@ public class IndexCreator {
 					progress.setGeneralProgress("[95 of 100]");
 					progress.startTask("Writing map index to binary file...", -1);
 					indexMapCreator.writeBinaryMapIndex(writer, regionName);
+				}
+				if (indexRouting) {
+					progress.setGeneralProgress("[95 of 100]");
+					progress.startTask("Writing route index to binary file...", -1);
+					indexRouteCreator.writeBinaryMapIndex(writer, regionName);
 				}
 
 				if (indexAddress) {
@@ -663,6 +698,8 @@ public class IndexCreator {
 				indexTransportCreator.commitAndCloseFiles(getRTreeTransportStopsFileName(), getRTreeTransportStopsPackFileName(),
 						deleteDatabaseIndexes);
 				indexMapCreator.commitAndCloseFiles(getRTreeMapIndexNonPackFileName(), getRTreeMapIndexPackFileName(),
+						deleteDatabaseIndexes);
+				indexRouteCreator.commitAndCloseFiles(getRTreeRouteIndexPackFileName(), getRTreeRouteIndexPackFileName(),
 						deleteDatabaseIndexes);
 
 				if (mapConnection != null) {

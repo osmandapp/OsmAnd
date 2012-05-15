@@ -1,7 +1,8 @@
 LOCAL_PATH = .
+include ../Makefile.vars
 include Common.mk
 
-PREBUILT_DIR = ../jni-prebuilt/linux-x86/
+PREBUILT_DIR = ../jni-prebuilt/$(os)-$(arch)/
 LIBNAME := libskia.a
 
 CPP_FILE_EXTENSION = cpp
@@ -19,7 +20,7 @@ LOCAL_SRC_FILES += \
 	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_gamma.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkGlobalInitialization_default.cpp
 	
-OBJECTS = $(LOCAL_SRC_FILES:%.$(CPP_FILE_EXTENSION)=build/obj/%.o)
+OBJECTS = $(LOCAL_SRC_FILES:%.$(CPP_FILE_EXTENSION)=build/obj-$(os)-$(arch)/%.o)
 C_INCLUDES := $(addprefix -I, $(LOCAL_C_INCLUDES))
 
 CPPFLAGS := -DSK_RELEASE \
@@ -43,7 +44,7 @@ build/$(LIBNAME): $(OBJECTS)
 	ar -rf build/$(LIBNAME) $(OBJECTS)
 	cp build/$(LIBNAME) ../jni-prebuilt/linux-x86/$(LIBNAME)
 	
-build/obj/%.o : %.$(CPP_FILE_EXTENSION) $(LOCAL_C_INCLUDES)
+build/obj-$(os)-$(arch)/%.o : %.$(CPP_FILE_EXTENSION) $(LOCAL_C_INCLUDES)
 	@mkdir -p `dirname $@`
 	$(CXX) -o $@ -c $*.$(CPP_FILE_EXTENSION) $(CPPFLAGS)
 

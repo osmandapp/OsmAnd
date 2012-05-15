@@ -1,8 +1,9 @@
 LOCAL_PATH := .
-PREBUILT_DIR = ../jni-prebuilt/linux-x86/
+include ../Makefile.vars
+include ./Common.mk
+PREBUILT_DIR = ../jni-prebuilt/$(os)-$(arch)/
 LIBNAME := osmand.lib
 RUNFILE := osmand_main
-include ./Common.mk
 
 LOCAL_SRC_FILES += src/osmand_main.cpp
 
@@ -13,7 +14,7 @@ LDRUNFLAGS = -Wl,--hash-style=both
 
 LDLIBS = -L$(PREBUILT_DIR) -lskia -lproto -lpthread -lrt -lft2 -lexpat -lz -lpng 
 CPP_FILE_EXTENSION = cpp
-OBJECTS = $(LOCAL_SRC_FILES:src/%.$(CPP_FILE_EXTENSION)=build/obj/%.o)
+OBJECTS = $(LOCAL_SRC_FILES:src/%.$(CPP_FILE_EXTENSION)=build/obj-$(os)-$(arch)/%.o)
 
 C_INCLUDES := $(addprefix -I, $(LOCAL_C_INCLUDES))
 
@@ -42,7 +43,7 @@ $(PREBUILT_DIR)/$(LIBNAME) : build/$(LIBNAME)
 build/$(LIBNAME): $(OBJECTS) $(PREBUILT_DIR)/libskia.a $(PREBUILT_DIR)/libproto.a Makefile
 	$(CXX) -shared -o build/$(LIBNAME) $(OBJECTS) $(LDFLAGS) $(LDLIBS)
 	
-build/obj/%.o : src/%.$(CPP_FILE_EXTENSION) $(LOCAL_C_INCLUDES)
+build/obj-$(os)-$(arch)/%.o : src/%.$(CPP_FILE_EXTENSION) $(LOCAL_C_INCLUDES)
 	@mkdir -p `dirname $@`
 	$(CXX) -o $@ -c src/$*.$(CPP_FILE_EXTENSION) $(CPPFLAGS)
 	

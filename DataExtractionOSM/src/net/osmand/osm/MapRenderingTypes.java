@@ -37,16 +37,6 @@ public class MapRenderingTypes {
 
 	private static final Log log = LogUtil.getLog(MapRenderingTypes.class);
 	
-	/** standard schema :	 
-	 	polygon : ll aaaaa ttttt 11 : 14 bits
-	 	multi   : ll aaaaa ttttt 00 : 14 bits  
-				    t - object type, a - area subtype,l - layer
-		polyline :   ll ppppp ttttt 10 : 14 bits  
-				   t - object type, p - polyline object type, l - layer 
-		point :   ssss ssss ttttt 10 : 15 bits  
-				   t - object type, s - subtype
-	 */
-
 	// keep sync ! not change values
 	public final static int MULTY_POLYGON_TYPE = 0;
 	public final static int POLYGON_TYPE = 3;

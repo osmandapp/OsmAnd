@@ -1,3 +1,4 @@
+include Makefile.vars
 build : 
 	cd protobuf; $(MAKE)
 	cd png; $(MAKE)
