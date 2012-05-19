@@ -43,9 +43,10 @@ import com.jcraft.jsch.Session;
  * This helper will find obf and zip files, create description for them, and zip them, or update the description. 
  * This helper also can upload files through ssh,ftp or to googlecode.
  * 
- * IndexUploader dir targetDir [--ff=file] [--fp=ptns] [--dp=ptns] [-ssh|-ftp|-google] [--password=|--user=|--url=|--path=|--gpassword=|--privKey=|--knownHosts=]
+ * IndexUploader dir targetDir [--ff=file] [--fp=ptns] [--ep=ptns] [--dp=ptns] [-ssh|-ftp|-google] [--password=|--user=|--url=|--path=|--gpassword=|--privKey=|--knownHosts=]
  *    --ff     file with names of files to be uploaded from the dir, supporting regexp
  *    --fp     comma separated names of files to be uploaded from the dir, supporting regexp  
+ *    --ep     comma separated names of files to be excluded from upload, supporting regexp
  *    --dp     comma separated names of files to be delete on remote system, supporting regexp
  *    One of:
  *    -ssh    to upload to ssh site
@@ -163,6 +164,14 @@ public class IndexUploader {
 			fileFilter.parseCSV(args[start].substring("--fp=".length()));
 			start++;
 		}
+		if (args[start].startsWith("--ep=")) {
+			if(fileFilter == null) {
+				throw new NullPointerException();
+			}
+			fileFilter.parseExcludeCSV(args[start].substring("--ep=".length()));
+			start++;
+		}
+		
 		if (args[start].startsWith("--dp=")) {
 			deleteFileFilter = new FileFilter();
 			deleteFileFilter.parseCSV(args[start].substring("--dp=".length()));
@@ -196,6 +205,7 @@ public class IndexUploader {
 	protected static class FileFilter {
 		
 		private List<Pattern> matchers = null;
+		private List<Pattern> exculdeMatchers = null;
 		
 		public void parseCSV(String patterns){
 			String[] s = patterns.split(",");
@@ -204,6 +214,16 @@ public class IndexUploader {
 			}
 			for(String p : s) {
 				matchers.add(Pattern.compile(p.trim()));
+			}
+		}
+		
+		public void parseExcludeCSV(String patterns){
+			String[] s = patterns.split(",");
+			if(exculdeMatchers == null) {
+				exculdeMatchers = new ArrayList<Pattern>();
+			}
+			for(String p : s) {
+				exculdeMatchers.add(Pattern.compile(p.trim()));
 			}
 		}
 		
@@ -230,6 +250,9 @@ public class IndexUploader {
 		}
 		
 		public boolean patternMatches(String name){
+			return internalPatternMatches(name, matchers);
+		}
+		public boolean internalPatternMatches(String name, List<Pattern> matchers ){
 			if(matchers == null) {
 				return true;
 			}
@@ -245,7 +268,11 @@ public class IndexUploader {
 			if (!f.isFile() && !f.getName().endsWith(IndexBatchCreator.GEN_LOG_EXT)) {
 				return false;
 			}
-			return patternMatches(f.getName());
+			boolean matches = internalPatternMatches(f.getName(), matchers);
+			if(matches && exculdeMatchers != null && internalPatternMatches(f.getName(), exculdeMatchers)) {
+				return false;
+			}
+			return matches;
 		}
 	}
 	
