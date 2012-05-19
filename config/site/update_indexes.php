@@ -52,8 +52,7 @@ function updateGoogleCodeIndexes($update=false) {
 	 		$size = trim(substr($description, $i1 + 1, $i2 - $i1 -1));
 	 		$description = trim(substr($description, 0, $i));
 
-	 		if(strpos($indexName,"voice.zip") || strpos($indexName,"_1.poi.zip") ||
-	 		strpos($indexName,"_1.poi.odb") || strpos($indexName,"_1.obf")) {
+	 		if(strpos($indexName,"voice.zip") || strpos($indexName,".obf")) {
 	 			$ipart = strpos($indexName,"zip-");
 	 			$part = 1;
 	 			$base = $indexName;
