@@ -64,7 +64,8 @@ public class IndexCreator {
 	private boolean indexPOI;
 	private boolean indexTransport;
 	private boolean indexAddress;
-	private boolean indexRouting = true;
+	// FIXME
+	private boolean indexRouting /*= true*/;
 
 	private boolean normalizeStreets = true; // true by default
 	private boolean saveAddressWays = true; // true by default
@@ -496,7 +497,8 @@ public class IndexCreator {
 						indexMapCreator.createRTreeFiles(getRTreeMapIndexPackFileName());
 					}
 					if (indexRouting) {
-						indexRouteCreator.createRTreeFiles(getRTreeRouteIndexPackFileName());
+						// FIXME
+//						indexRouteCreator.createRTreeFiles(getRTreeRouteIndexPackFileName());
 					}
 					if (indexTransport) {
 						indexTransportCreator.createRTreeFile(getRTreeTransportStopsPackFileName());
@@ -624,7 +626,8 @@ public class IndexCreator {
 					indexMapCreator.packRtreeFiles(getRTreeMapIndexNonPackFileName(), getRTreeMapIndexPackFileName());
 				}
 				if(indexRouting) {
-					indexRouteCreator.packRtreeFiles(getRTreeRouteIndexNonPackFileName(), getRTreeRouteIndexPackFileName());
+					// FIXME
+//					indexRouteCreator.packRtreeFiles(getRTreeRouteIndexNonPackFileName(), getRTreeRouteIndexPackFileName());
 				}
 
 				if (indexTransport) {
@@ -649,7 +652,8 @@ public class IndexCreator {
 				if (indexRouting) {
 					progress.setGeneralProgress("[95 of 100]");
 					progress.startTask("Writing route index to binary file...", -1);
-					indexRouteCreator.writeBinaryMapIndex(writer, regionName);
+					// FIXME
+//					indexRouteCreator.writeBinaryMapIndex(writer, regionName);
 				}
 
 				if (indexAddress) {

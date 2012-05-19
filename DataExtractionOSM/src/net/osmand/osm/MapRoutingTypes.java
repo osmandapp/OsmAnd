@@ -3,8 +3,10 @@ package net.osmand.osm;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -33,7 +35,8 @@ public class MapRoutingTypes {
 		TAGS_TO_SAVE.add("tracktype");
 	}
 	
-	private Map<String, MapRouteType> types = new LinkedHashMap<String, MapRoutingTypes.MapRouteType>(); 
+	private Map<String, MapRouteType> types = new LinkedHashMap<String, MapRoutingTypes.MapRouteType>();
+	private List<MapRouteType> listTypes = new ArrayList<MapRoutingTypes.MapRouteType>(); 
 	
 	public static String constructRuleKey(String tag, String val) {
 		if(val == null || val.length() == 0){
@@ -94,14 +97,19 @@ public class MapRoutingTypes {
 		return true;
 	}
 	
+	public MapRouteType getTypeByInternalId(int id) {
+		return listTypes.get(id - 1);
+	}
+	
 	private MapRouteType registerRule(String tag, String val) {
 		String id = constructRuleKey(tag, val);
 		if(!types.containsKey(id)) {
 			MapRouteType rt = new MapRouteType();
-			rt.id = types.size();
+			rt.id = types.size() + 1;
 			rt.tag = tag;
 			rt.value = val;
 			types.put(id, rt);
+			listTypes.add(rt);
 		}
 		MapRouteType type = types.get(id);
 		type.count ++;
@@ -111,8 +119,17 @@ public class MapRoutingTypes {
 	public static class MapRouteType {
 		int count = 0;
 		int id;
+		int targetId;
 		String tag;
 		String value;
+		
+		public int getInternalId() {
+			return id;
+		}
+		
+		public int getTargetId() {
+			return targetId;
+		}
 		
 	}
 }

@@ -49,8 +49,6 @@ import rtree.RTreeInsertException;
 import rtree.Rect;
 
 public class IndexVectorMapCreator extends AbstractIndexPartCreator {
-	
-	
 
 	// map zoom levels <= 2^MAP_LEVELS
 	private static final int MAP_LEVELS_POWER = 3;
@@ -60,10 +58,6 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 	Map<Long, TIntArrayList> multiPolygonsWays = new LinkedHashMap<Long, TIntArrayList>();
 	
-	
-	
-	private Map<Long, List<Long>> highwayRestrictions = new LinkedHashMap<Long, List<Long>>();
-
 	// local purpose to speed up processing cache allocation
 	TIntArrayList typeUse = new TIntArrayList(8);
 	List<MapRulType> tempNameUse = new ArrayList<MapRenderingTypes.MapRulType>();
@@ -952,43 +946,4 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		return zoomWaySmothness;
 	}
 
-	// TODO restrictions should be moved to different creator (Routing Map creator)
-	private void indexHighwayRestrictions(Entity e, OsmDbAccessorContext ctx) throws SQLException {
-		if (e instanceof Relation && "restriction".equals(e.getTag(OSMTagKey.TYPE))) { //$NON-NLS-1$
-			String val = e.getTag("restriction"); //$NON-NLS-1$
-			if (val != null) {
-				byte type = -1;
-				if ("no_right_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_NO_RIGHT_TURN;
-				} else if ("no_left_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_NO_LEFT_TURN;
-				} else if ("no_u_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_NO_U_TURN;
-				} else if ("no_straight_on".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON;
-				} else if ("only_right_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN;
-				} else if ("only_left_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_ONLY_LEFT_TURN;
-				} else if ("only_straight_on".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON;
-				}
-				if (type != -1) {
-					ctx.loadEntityData(e);
-					Collection<EntityId> fromL = ((Relation) e).getMemberIds("from"); //$NON-NLS-1$
-					Collection<EntityId> toL = ((Relation) e).getMemberIds("to"); //$NON-NLS-1$
-					if (!fromL.isEmpty() && !toL.isEmpty()) {
-						EntityId from = fromL.iterator().next();
-						EntityId to = toL.iterator().next();
-						if (from.getType() == EntityType.WAY) {
-							if (!highwayRestrictions.containsKey(from.getId())) {
-								highwayRestrictions.put(from.getId(), new ArrayList<Long>(4));
-							}
-							highwayRestrictions.get(from.getId()).add((to.getId() << 3) | (long) type);
-						}
-					}
-				}
-			}
-		}
-	}
 }
