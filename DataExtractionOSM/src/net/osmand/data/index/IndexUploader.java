@@ -258,6 +258,10 @@ public class IndexUploader {
 					if (!fileFilter.fileCanBeUploaded(f)) {
 						continue;
 					}
+					if(!uploadCredentials.checkIfUploadNeededByTimestamp(f.getName(), f.lastModified())) {
+						log.info("File skipped because timestamp was not changed " + f.getName() );
+						continue;
+					}
 					log.info("Process file " + f.getName());
 					File unzipped = unzip(f);
 					String description = getDescription(unzipped);
@@ -335,6 +339,9 @@ public class IndexUploader {
 			try {
 				raf = new RandomAccessFile(f, "r");
 				BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
+				if(reader.getVersion() != IndexConstants.BINARY_MAP_VERSION) {
+					throw new OneFileException("Uploader version is not compatible " + reader.getVersion() + " to current " + IndexConstants.BINARY_MAP_VERSION);
+				}
 				summary = " index for ";
 				boolean fir = true;
 				if (reader.containsAddressData()) {
@@ -501,6 +508,10 @@ public class IndexUploader {
 				path = param.substring("--path=".length());
 			}
 		}
+		
+		public boolean checkIfUploadNeededByTimestamp(String filename, long time) {
+			return true;
+		}
 
 		public void disconnect() {
 			//if the uploading needs to close a session
@@ -579,6 +590,15 @@ public class IndexUploader {
 			if (ggtokens == null || user == null || password == null) {
 				throw new IndexUploadException("Not enought googlecode credentials entered!");
 			}
+		}
+		
+		@Override
+		public boolean checkIfUploadNeededByTimestamp(String filename, long time) {
+			String date = new MessageFormat("{0,date,dd.MM.yyyy}", Locale.US).format(new Date(time));
+			if (uploaded.containsKey(filename) && date.equals(uploaded.get(filename))) {
+				return false;
+			}
+			return true;
 		}
 		
 		@Override
