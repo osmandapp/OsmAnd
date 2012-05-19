@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -567,6 +568,7 @@ public class IndexUploader {
 	public static class UploadToGoogleCodeCredentials extends UploadCredentials {
 		GooglecodeUploadTokens ggtokens;
 		String gpassword;
+		private Map<String, String> uploaded = new HashMap<String, String>();
 		
 		@Override
 		protected void parseParameter(String param) throws IndexUploadException {
@@ -590,6 +592,14 @@ public class IndexUploader {
 			if (ggtokens == null || user == null || password == null) {
 				throw new IndexUploadException("Not enought googlecode credentials entered!");
 			}
+			Map<String, String> uploadedDes = DownloaderIndexFromGoogleCode.getIndexFiles(new HashMap<String, String>());
+			for(String fileName : uploadedDes.keySet()) {
+				String description = uploadedDes.get(fileName);
+				int o = description.indexOf('{');
+				if(o != -1 && description.length() > o + 11) {
+					uploaded.put(fileName, description.substring(o+1, o+11));
+				}
+			}
 		}
 		
 		@Override
@@ -605,6 +615,9 @@ public class IndexUploader {
 		public void upload(IndexUploader uploader, File toUpload,
 				String summary, String size, String date) throws IOException,
 				JSchException {
+			if (uploaded.containsKey(toUpload.getName()) && date.equals(uploaded.get(toUpload.getName()))) {
+				return;
+			}
 			String descriptionFile = "{" + date + " : " + size + " MB}";
 			summary += " " + descriptionFile;
 
@@ -612,6 +625,9 @@ public class IndexUploader {
 			try {
 				splittedFiles = uploader.splitFiles(toUpload);
 				for (File fs : splittedFiles) {
+					if (uploaded.containsKey(fs.getName()) && date.equals(uploaded.get(fs.getName()))) {
+						return;
+					}
 					uploader.uploadToGoogleCode(fs, summary, this);
 				}
 			} finally {
