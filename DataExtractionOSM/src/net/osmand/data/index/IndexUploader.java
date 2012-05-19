@@ -259,7 +259,8 @@ public class IndexUploader {
 					if (!fileFilter.fileCanBeUploaded(f)) {
 						continue;
 					}
-					if(!uploadCredentials.checkIfUploadNeededByTimestamp(f.getName(), f.lastModified())) {
+					long timestampCreated = f.lastModified();
+					if(!uploadCredentials.checkIfUploadNeededByTimestamp(f.getName(), timestampCreated)) {
 						log.info("File skipped because timestamp was not changed " + f.getName() );
 						continue;
 					}
@@ -267,17 +268,17 @@ public class IndexUploader {
 					File unzipped = unzip(f);
 					File logFile = new File(f.getParentFile(), unzipped.getName() + IndexBatchCreator.GEN_LOG_EXT);
 					try {
-					String description = getDescription(unzipped);
-					
-					List<File> files = new ArrayList<File>();
-					files.add(unzipped);
-					if(logFile.exists()) {
-						files.add(logFile);
-					}
-					File zFile = new File(f.getParentFile(), unzipped.getName() + ".zip");
-					zip(files, zFile, description, unzipped.lastModified());
-					
-					uploadIndex(zFile, description, uploadCredentials);
+						String description = getDescription(unzipped);
+
+						List<File> files = new ArrayList<File>();
+						files.add(unzipped);
+						if (logFile.exists()) {
+							files.add(logFile);
+						}
+						File zFile = new File(f.getParentFile(), unzipped.getName() + ".zip");
+						zip(files, zFile, description, timestampCreated);
+
+						uploadIndex(zFile, description, uploadCredentials);
 					} finally {
 						if (!f.getName().equals(unzipped.getName())) {
 							unzipped.delete(); // delete the unzipped file
