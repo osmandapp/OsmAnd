@@ -604,7 +604,7 @@ public class IndexUploader {
 		
 		@Override
 		public boolean checkIfUploadNeededByTimestamp(String filename, long time) {
-			String date = new MessageFormat("{0,date,dd.MM.yyyy}", Locale.US).format(new Date(time));
+			String date = new MessageFormat("{0,date,dd.MM.yyyy}", Locale.US).format(new Object[]{new Date(time)});
 			if (uploaded.containsKey(filename) && date.equals(uploaded.get(filename))) {
 				return false;
 			}
