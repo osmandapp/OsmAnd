@@ -265,8 +265,10 @@ public class IndexUploader {
 					}
 					log.info("Process file " + f.getName());
 					File unzipped = unzip(f);
-					String description = getDescription(unzipped);
 					File logFile = new File(f.getParentFile(), unzipped.getName() + IndexBatchCreator.GEN_LOG_EXT);
+					try {
+					String description = getDescription(unzipped);
+					
 					List<File> files = new ArrayList<File>();
 					files.add(unzipped);
 					if(logFile.exists()) {
@@ -274,11 +276,16 @@ public class IndexUploader {
 					}
 					File zFile = new File(f.getParentFile(), unzipped.getName() + ".zip");
 					zip(files, zFile, description, unzipped.lastModified());
-					unzipped.delete(); // delete the unzipped file
-					if(logFile.exists()){
-						logFile.delete();
-					}
+					
 					uploadIndex(zFile, description, uploadCredentials);
+					} finally {
+						if (!f.getName().equals(unzipped.getName())) {
+							unzipped.delete(); // delete the unzipped file
+						}
+						if (logFile.exists()) {
+							logFile.delete();
+						}
+					}
 				} catch (OneFileException e) {
 					log.error(f.getName() + ": " + e.getMessage(), e);
 				} catch (RuntimeException e) {
