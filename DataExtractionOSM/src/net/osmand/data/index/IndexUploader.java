@@ -608,6 +608,9 @@ public class IndexUploader {
 			if (uploaded.containsKey(filename) && date.equals(uploaded.get(filename))) {
 				return false;
 			}
+			if(!checkIfUploadNeededByTimestamp(filename+"-1", time)) {
+				return false; 
+			}
 			return true;
 		}
 		
