@@ -27,8 +27,6 @@ import android.widget.TextView;
 
 public class ContextMenuLayer extends OsmandMapLayer {
 	
-	
-
 	public interface IContextMenuProvider {
 	
 		public void collectObjectsFromPoint(PointF point, List<Object> o);
@@ -41,7 +39,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		
 		public DialogInterface.OnClickListener getActionListener(List<String> actionsList, Object o);
 	}
-	
 
 	private LatLon latLon;
 	private IContextMenuProvider selectedContextProvider;

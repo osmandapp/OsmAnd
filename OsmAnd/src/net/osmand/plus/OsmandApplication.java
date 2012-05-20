@@ -125,7 +125,7 @@ public class OsmandApplication extends Application {
 	 * Application settings
 	 * @return Reference to instance of OsmandSettings
 	 */
-	public static OsmandSettings getSettings() {
+	public OsmandSettings getSettings() {
 		if(osmandSettings == null) {
 			LOG.error("Trying to access settings before they were created");
 		}

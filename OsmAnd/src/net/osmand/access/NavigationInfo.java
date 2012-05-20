@@ -141,7 +141,7 @@ public class NavigationInfo {
 
     public NavigationInfo(final Context context) {
         this.context = context;
-        settings = OsmandApplication.getSettings();
+        settings = ((OsmandApplication) context.getApplicationContext()).getSettings();
         currentLocation = null;
         lastDirection = new RelativeDirection();
         lastNotificationTime = SystemClock.uptimeMillis();
@@ -265,48 +265,47 @@ public class NavigationInfo {
 
 
     // Show all available info
-    public void show(final LatLon point, Float heading) {
-        final List<String> attributes = new ArrayList<String>();
-        String item;
+	public void show(final LatLon point, Float heading) {
+		final List<String> attributes = new ArrayList<String>();
+		String item;
 
-        item = getDirectionString(point, heading);
-        if (item != null)
-            attributes.add(item);
-        item = getSpeedString();
-        if (item != null)
-            attributes.add(item);
-        item = getAccuracyString();
-        if (item != null)
-            attributes.add(item);
-        item = getAltitudeString();
-        if (item != null)
-            attributes.add(item);
-        if (attributes.isEmpty())
-            attributes.add(getString(R.string.no_info));
+		item = getDirectionString(point, heading);
+		if (item != null)
+			attributes.add(item);
+		item = getSpeedString();
+		if (item != null)
+			attributes.add(item);
+		item = getAccuracyString();
+		if (item != null)
+			attributes.add(item);
+		item = getAltitudeString();
+		if (item != null)
+			attributes.add(item);
+		if (attributes.isEmpty())
+			attributes.add(getString(R.string.no_info));
 
-        AlertDialog.Builder info = new AlertDialog.Builder(context);
-        if (point != null)
-            info.setPositiveButton(autoAnnounce ? R.string.auto_announce_off : R.string.auto_announce_on,
-                                   new DialogInterface.OnClickListener() {
-                                       @Override
-                                       public void onClick(DialogInterface dialog, int id) {
-                                           autoAnnounce = !autoAnnounce;
-                                           dialog.cancel();
-                                       }
-                                   });
-        info.setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                }
-            });
-        info.setItems(attributes.toArray(new String[attributes.size()]),
-                      new DialogInterface.OnClickListener() {
-                          @Override
-                          public void onClick(DialogInterface dialog, int which) {
-                          }
-                      });
-        info.show();
-    }
+		AlertDialog.Builder info = new AlertDialog.Builder(context);
+		if (point != null)
+			info.setPositiveButton(autoAnnounce ? R.string.auto_announce_off : R.string.auto_announce_on,
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int id) {
+							autoAnnounce = !autoAnnounce;
+							dialog.cancel();
+						}
+					});
+		info.setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		});
+		info.setItems(attributes.toArray(new String[attributes.size()]), new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+			}
+		});
+		info.show();
+	}
 
 }

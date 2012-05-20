@@ -23,6 +23,7 @@ import net.osmand.data.AmenityType;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.PoiFilter;
@@ -40,7 +41,6 @@ import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MapTileLayer;
-import net.osmand.plus.views.OsmBugsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.POIMapLayer;
 import net.osmand.plus.views.PointLocationLayer;
@@ -84,7 +84,6 @@ public class MapActivityLayers {
 	private MapTileLayer underlayLayer;
 	private GPXLayer gpxLayer;
 	private RouteLayer routeLayer;
-	private OsmBugsLayer osmBugsLayer;
 	private POIMapLayer poiMapLayer;
 	private FavoritesLayer favoritesLayer;
 	private TransportStopsLayer transportStopsLayer;
@@ -132,7 +131,7 @@ public class MapActivityLayers {
 		mapView.addLayer(routeLayer, 1);
 		
 		// 2. osm bugs layer
-		osmBugsLayer = new OsmBugsLayer(activity);
+		
 		// 3. poi layer
 		poiMapLayer = new POIMapLayer(activity);
 		// 4. favorites layer
@@ -160,7 +159,8 @@ public class MapActivityLayers {
 		// 11. route info layer
 		mapControlsLayer = new MapControlsLayer(activity);
 		mapView.addLayer(mapControlsLayer, 11);
-
+		
+		OsmandPlugin.createLayers(mapView, activity);
 	}
 	
 	
@@ -173,13 +173,7 @@ public class MapActivityLayers {
 				mapView.removeLayer(transportStopsLayer);
 			}
 		}
-		if(mapView.getLayers().contains(osmBugsLayer) != settings.SHOW_OSM_BUGS.get()){
-			if(settings.SHOW_OSM_BUGS.get()){
-				mapView.addLayer(osmBugsLayer, 2);
-			} else {
-				mapView.removeLayer(osmBugsLayer);
-			}
-		}
+		
 
 		if(mapView.getLayers().contains(poiMapLayer) != settings.SHOW_POI_OVER_MAP.get()){
 			if(settings.SHOW_POI_OVER_MAP.get()){
@@ -196,6 +190,7 @@ public class MapActivityLayers {
 				mapView.removeLayer(favoritesLayer);
 			}
 		}
+		OsmandPlugin.refreshLayers(mapView);
 		updateGPXLayer();
 	}
 	
@@ -765,7 +760,4 @@ public class MapActivityLayers {
 		return poiMapLayer;
 	}
 	
-	public OsmBugsLayer getOsmBugsLayer() {
-		return osmBugsLayer;
-	}
 }

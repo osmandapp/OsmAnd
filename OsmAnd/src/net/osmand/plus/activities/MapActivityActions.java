@@ -1,5 +1,7 @@
 package net.osmand.plus.activities;
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -22,9 +24,11 @@ import net.osmand.osm.MapUtils;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
+import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
@@ -709,6 +713,67 @@ public class MapActivityActions implements DialogProvider {
 			}
 		}
 		
+	}
+	
+	public void contextMenuPoint(final double latitude, final double longitude, List<String> additionalItems, 
+			final DialogInterface.OnClickListener additionalActions) {
+		Builder builder = new AlertDialog.Builder(mapActivity);
+		final int sizeAdditional = additionalActions == null || additionalItems == null ? 0 : additionalItems.size();
+		List<String> actions = new ArrayList<String>();
+		if (sizeAdditional > 0) {
+			actions.addAll(additionalItems);
+		}
+		final OsmandMapTileView mapView = mapActivity.getMapView();
+		final TIntArrayList contextMenuStandardActions = new TIntArrayList();
+		contextMenuStandardActions.add(new int[] { R.string.context_menu_item_navigate_point,
+				R.string.context_menu_item_show_route, R.string.context_menu_item_search, R.string.context_menu_item_add_favorite,
+				R.string.context_menu_item_share_location, R.string.context_menu_item_add_waypoint});
+		OsmandPlugin.registerContextMenu(latitude, longitude, contextMenuStandardActions);
+		if(mapView.getMainLayer() instanceof MapTileLayer) {
+			contextMenuStandardActions.add(R.string.context_menu_item_update_map);
+			contextMenuStandardActions.add(R.string.context_menu_item_download_map);
+		}
+		
+		for (int j = 0; j < contextMenuStandardActions.size(); j++) {
+			actions.add(mapActivity.getString(contextMenuStandardActions.get(j)));
+		}
+
+		builder.setItems(actions.toArray(new String[actions.size()]), new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				if (which < sizeAdditional) {
+					additionalActions.onClick(dialog, which);
+					return;
+				}
+				int standardId = contextMenuStandardActions.get(which - sizeAdditional);
+				if(OsmandPlugin.contextMenuAction(standardId, latitude, longitude)) {
+					// Plugin action
+				} else if (standardId == R.string.context_menu_item_navigate_point) {
+					mapActivity.navigateToPoint(new LatLon(latitude, longitude));
+				} else if (standardId == R.string.context_menu_item_show_route) {
+					getDirections(latitude, longitude, false);
+				} else if (standardId == R.string.context_menu_item_search) {
+					Intent intent = new Intent(mapActivity, SearchActivity.class);
+					intent.putExtra(SearchActivity.SEARCH_LAT, latitude);
+					intent.putExtra(SearchActivity.SEARCH_LON, longitude);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					mapActivity.startActivity(intent);
+				} else if (standardId == R.string.context_menu_item_add_favorite) {
+					addFavouritePoint(latitude, longitude);
+				} else if (standardId == R.string.context_menu_item_share_location) {
+					shareLocation(latitude, longitude, mapView.getZoom());
+				} else if (standardId == R.string.context_menu_item_add_waypoint) {
+					addWaypoint(latitude, longitude);
+				} else if (standardId == R.string.context_menu_item_update_map) {
+					reloadTile(mapView.getZoom(), latitude, longitude);
+				} else if (standardId == R.string.context_menu_item_download_map) {
+					DownloadTilesDialog dlg = new DownloadTilesDialog(mapActivity, (OsmandApplication) mapActivity.getApplication(), mapView);
+					dlg.openDialog();
+				}
+			}
+		});
+		builder.create().show();
 	}
 
 	@Override

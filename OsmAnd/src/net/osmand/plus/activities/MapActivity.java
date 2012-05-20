@@ -21,6 +21,7 @@ import net.osmand.osm.LatLon;
 import net.osmand.plus.BusyIndicator;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -29,7 +30,6 @@ import net.osmand.plus.routing.RouteAnimation;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
-import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointLocationLayer;
 import android.app.Activity;
@@ -109,7 +109,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
     /** Called when the activity is first created. */
 	private OsmandMapTileView mapView;
 	final private MapActivityActions mapActions = new MapActivityActions(this);
-	private EditingPOIActivity poiActions;
 	final private MapActivityLayers mapLayers = new MapActivityLayers(this);
 	private NavigationInfo navigationInfo;
 	
@@ -183,7 +182,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			}
 
 		});
-		poiActions = new EditingPOIActivity(this);
+		
 		getMyApplication().getResourceManager().getMapTileDownloader().addDownloaderCallback(new IMapDownloaderCallback(){
 			@Override
 			public void tileDownloaded(DownloadRequest request) {
@@ -235,8 +234,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 		
 		addDialogProvider(mapActions);
-		addDialogProvider(poiActions);
-		addDialogProvider(mapLayers.getOsmBugsLayer());
+		OsmandPlugin.onMapActivityCreate(this);
 	}
 
 	@Override
@@ -385,7 +383,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		return ((OsmandApplication) getApplication());
 	}
 
-	private void addDialogProvider(DialogProvider dp) {
+	public void addDialogProvider(DialogProvider dp) {
 		dialogProviders.add(dp);
 	}
 	
@@ -1312,84 +1310,18 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	
 		
 	public void contextMenuPoint(final double latitude, final double longitude){
-		contextMenuPoint(latitude, longitude, null, null);
+		mapActions.contextMenuPoint(latitude, longitude, null, null);
 	}
 	
 	public void contextMenuPoint(final double latitude, final double longitude, List<String> additionalItems, 
-			final DialogInterface.OnClickListener additionalActions){
-		Builder builder = new AlertDialog.Builder(this);
-		final int sizeAdditional = additionalActions == null || additionalItems == null ? 0 : additionalItems.size();
-		List<String> actions = new ArrayList<String>();
-		if(sizeAdditional > 0){
-			actions.addAll(additionalItems);
-		}
-		final int[] contextMenuStandardActions = new int[]{
-			R.string.context_menu_item_navigate_point,
-			R.string.context_menu_item_show_route,
-			R.string.context_menu_item_search,
-			R.string.context_menu_item_add_favorite,
-			R.string.context_menu_item_share_location,
-			R.string.context_menu_item_create_poi,
-			R.string.context_menu_item_add_waypoint,
-			R.string.context_menu_item_open_bug,
-			//MapTileLayer menu actions
-			R.string.context_menu_item_update_map,
-			R.string.context_menu_item_download_map
-		};
-		int actionsToUse = (mapView.getMainLayer() instanceof MapTileLayer) ? contextMenuStandardActions.length : contextMenuStandardActions.length - 2;
-		for(int j = 0; j<actionsToUse; j++){
-			actions.add(getResources().getString(contextMenuStandardActions[j]));
-		}
-	
-		builder.setItems(actions.toArray(new String[actions.size()]), new DialogInterface.OnClickListener(){
-
-		@Override
-		public void onClick(DialogInterface dialog, int which) {
-			if(which < sizeAdditional){
-				additionalActions.onClick(dialog, which);
-				return;
-			}
-			int standardId = contextMenuStandardActions[which - sizeAdditional];
-			if(standardId == R.string.context_menu_item_navigate_point){
-				navigateToPoint(new LatLon(latitude, longitude));
-			} else if(standardId == R.string.context_menu_item_show_route){
-				mapActions.getDirections(latitude, longitude, false);
-			} else if(standardId == R.string.context_menu_item_search){
-				Intent intent = new Intent(MapActivity.this, SearchActivity.class);
-				intent.putExtra(SearchActivity.SEARCH_LAT, latitude);
-				intent.putExtra(SearchActivity.SEARCH_LON, longitude);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-			} else if(standardId == R.string.context_menu_item_add_favorite){
-				mapActions.addFavouritePoint(latitude, longitude);
-			} else if(standardId == R.string.context_menu_item_share_location){
-				mapActions.shareLocation(latitude, longitude, mapView.getZoom());
-			} else if(standardId == R.string.context_menu_item_create_poi){
-				getPoiActions().showCreateDialog(latitude, longitude);
-			} else if(standardId == R.string.context_menu_item_add_waypoint){
-				mapActions.addWaypoint(latitude, longitude);
-			} else if(standardId == R.string.context_menu_item_open_bug){
-				mapLayers.getOsmBugsLayer().openBug(latitude, longitude);
-			} else if(standardId == R.string.context_menu_item_update_map){
-				mapActions.reloadTile(mapView.getZoom(), latitude, longitude);
-			} else if(standardId == R.string.context_menu_item_download_map){
-				DownloadTilesDialog dlg = new DownloadTilesDialog(MapActivity.this, 
-						(OsmandApplication) getApplication(), mapView);
-				dlg.openDialog();
-			}
-		}
-	});
-	builder.create().show();
+			final DialogInterface.OnClickListener additionalActions) {
+		mapActions.contextMenuPoint(latitude, longitude, additionalItems, additionalActions);
 	}
-
+	
 	public MapActivityActions getMapActions() {
 		return mapActions;
 	}
 
-	public EditingPOIActivity getPoiActions() {
-		return poiActions;
-	}
-	
 	public MapActivityLayers getMapLayers() {
 		return mapLayers;
 	}

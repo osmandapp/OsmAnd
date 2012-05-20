@@ -305,7 +305,7 @@ public class IndexUploader {
 						File zFile = new File(f.getParentFile(), unzipped.getName() + ".zip");
 						zip(files, zFile, description, timestampCreated);
 
-						uploadIndex(zFile, description, uploadCredentials);
+						uploadIndex(f, zFile, description, uploadCredentials);
 					} finally {
 						if (!f.getName().equals(unzipped.getName()) || 
 							(targetDirectory != null && !targetDirectory.equals(directory))) {
@@ -491,13 +491,12 @@ public class IndexUploader {
 
 	}
 
-	private void uploadIndex(File zipFile, String summary, UploadCredentials uc) {
+	private void uploadIndex(File srcFile, File zipFile, String summary, UploadCredentials uc) {
 		double mbLengh = (double) zipFile.length() / MB;
 		String fileName = zipFile.getName();
 		if (mbLengh < MIN_SIZE_TO_UPLOAD) {
 			log.info("Skip uploading index due to size " + fileName);
 			// do not upload small files
-			return;
 		}
 		try {
 			log.info("Upload index " + fileName);
@@ -510,6 +509,9 @@ public class IndexUploader {
 					toBackup.delete();
 				}
 				toUpload.renameTo(toBackup);
+				if(srcFile.equals(zipFile)){
+					srcFile.delete();
+				}
 			}
 		} catch (IOException e) {
 			log.error("Input/output exception uploading " + fileName, e);

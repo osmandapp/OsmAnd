@@ -11,11 +11,12 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
-import net.osmand.plus.activities.EditingPOIActivity;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.render.RenderingIcons;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -54,10 +55,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	private ResourceManager resourceManager;
 	private PoiFilter filter;
 	private DisplayMetrics dm;
-	private final MapActivity activity;
 	
 	public POIMapLayer(MapActivity activity) {
-		this.activity = activity;
 	}
 
 	
@@ -307,30 +306,27 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		final int phoneIndex = a.getPhone() != null ? ind++ : -1;
 		final int siteIndex = a.getSite() != null ? ind++ : -1;
 		final int descriptionIndex = a.getDescription() != null ? ind++ : -1;
+		if(a.getDescription() != null){
+			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_showdescription));
+		}
 		if(a.getPhone() != null){
 			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_call));
 		}
 		if(a.getSite() != null){
 			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_website));
 		}
-		if(a.getDescription() != null){
-			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_showdescription));
+		final OsmEditingPlugin editingPlugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+		final int modifyInd = editingPlugin != null ? ind++ : -1;
+		final int deleteInd = editingPlugin != null ? ind++ : -1;
+		if (editingPlugin != null) {
+			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_modify));
+			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_delete));
 		}
-		final int modifyInd = ind++;
-		actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_modify));
-		final int deleteInd = ind++;
-		actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_delete));
 		
-		final EditingPOIActivity edit = activity.getPoiActions();
 		return new DialogInterface.OnClickListener(){
-
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if (which == modifyInd) {
-					edit.showEditDialog(a);
-				} else if(which == deleteInd) {
-					edit.showDeleteDialog(a);
-				} else if (which == phoneIndex) {
+				if (which == phoneIndex) {
 					try {
 						Intent intent = new Intent(Intent.ACTION_VIEW);
 						intent.setData(Uri.parse("tel:"+a.getPhone())); //$NON-NLS-1$
@@ -350,6 +346,10 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 					}
 				} else if (which == descriptionIndex) {
 					showDescriptionDialog(a);
+				} else if (which == modifyInd) {
+					editingPlugin.getPoiActions().showEditDialog(a);
+				} else if(which == deleteInd) {
+					editingPlugin.getPoiActions().showDeleteDialog(a);
 				} else {
 				}
 			}

@@ -1,4 +1,4 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.osmedit;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -24,6 +24,9 @@ import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.DialogProvider;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OpeningHoursView;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
