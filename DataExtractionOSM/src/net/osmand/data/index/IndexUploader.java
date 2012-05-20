@@ -307,7 +307,8 @@ public class IndexUploader {
 
 						uploadIndex(zFile, description, uploadCredentials);
 					} finally {
-						if (!f.getName().equals(unzipped.getName())) {
+						if (!f.getName().equals(unzipped.getName()) || 
+							(targetDirectory != null && !targetDirectory.equals(directory))) {
 							unzipped.delete(); // delete the unzipped file
 						}
 						if (logFile.exists()) {
