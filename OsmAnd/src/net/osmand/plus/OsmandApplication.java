@@ -92,6 +92,12 @@ public class OsmandApplication extends Application {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 		}
+		timeToStart = System.currentTimeMillis();
+		OsmandPlugin.initPlugins(this);
+		
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
+		}
 	}
 
 	@Override

@@ -38,6 +38,13 @@ public abstract class OsmandPlugin {
 	 */
 	public abstract boolean init(OsmandApplication app);
 	
+	
+	public static void initPlugins(OsmandApplication app) {
+		for (OsmandPlugin plugin : plugins) {
+			plugin.init(app);
+		}
+	}
+	
 	/**
 	 * ????
 	 */

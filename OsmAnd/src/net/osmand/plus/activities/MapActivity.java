@@ -108,8 +108,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	
     /** Called when the activity is first created. */
 	private OsmandMapTileView mapView;
-	final private MapActivityActions mapActions = new MapActivityActions(this);
-	final private MapActivityLayers mapLayers = new MapActivityLayers(this);
+	private MapActivityActions mapActions;
+	private MapActivityLayers mapLayers;
 	private NavigationInfo navigationInfo;
 	
 	private SavingTrackHelper savingTrackHelper;
@@ -152,7 +152,9 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		settings = getMyApplication().getSettings();		
+		settings = getMyApplication().getSettings();	
+		mapActions = new MapActivityActions(this);
+		mapLayers = new MapActivityLayers(this);
 		navigationInfo = new NavigationInfo(this);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		// Full screen is not used here
