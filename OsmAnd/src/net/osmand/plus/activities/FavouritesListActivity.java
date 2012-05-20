@@ -43,6 +43,7 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 	private LatLon location;
 
 	private boolean selectFavoriteMode;
+	private OsmandSettings settings;
 	
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -53,6 +54,7 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 		lv.setDivider(getResources().getDrawable(R.drawable.tab_text_separator));
 		setContentView(lv);
 
+		settings = ((OsmandApplication) getApplication()).getSettings();
 		favouritesAdapter = new FavouritesAdapter(((OsmandApplication) getApplication()).getFavorites().getFavouritePoints());
 		setListAdapter(favouritesAdapter);
 	}
@@ -77,7 +79,7 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 				location = ((SearchActivity) getParent()).getSearchPoint();
 			}
 			if (location == null) {
-				location = OsmandApplication.getSettings().getLastKnownMapLocation();
+				location = settings.getLastKnownMapLocation();
 			}
 		}
 		locationUpdate(location);
@@ -127,11 +129,10 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if (which == 0) {
-					OsmandSettings settings = OsmandApplication.getSettings();
 					settings.setMapLocationToShow(entry.getLatitude(), entry.getLongitude(),  settings.getLastKnownMapZoom(), 
 							 null, getString(R.string.favorite)+":\n " + entry.getName(), entry); //$NON-NLS-1$
 				} else if (which == 1) {
-					OsmandApplication.getSettings().setPointToNavigate(entry.getLatitude(),
+					settings.setPointToNavigate(entry.getLatitude(),
 							entry.getLongitude(), getString(R.string.favorite) + " : " + entry.getName());
 				}
 				MapActivity.launchMapActivityMoveToTop(FavouritesListActivity.this);
@@ -146,7 +147,6 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		
 		if (!isSelectFavoriteMode()) {
-			OsmandSettings settings = OsmandApplication.getSettings();
 			FavouritePoint point = favouritesAdapter.getItem(position);
 			settings.SHOW_FAVORITES.set(true);
 			settings.setMapLocationToShow(point.getLatitude(), point.getLongitude(), settings.getLastKnownMapZoom(), null,

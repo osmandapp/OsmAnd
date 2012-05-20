@@ -28,6 +28,7 @@ import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.io.OsmBaseStorage;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 
 import org.apache.commons.logging.Log;
@@ -80,9 +81,12 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 
 	public final static Log log = LogUtil.getLog(OpenstreetmapRemoteUtil.class);
 
+	private OsmandSettings settings;
+
 	public OpenstreetmapRemoteUtil(Context uiContext, View view){
 		this.ctx = uiContext;
 		this.view = view;
+		settings = ((OsmandApplication) uiContext.getApplicationContext()).getSettings();
 	}
 
 	@Override
@@ -92,14 +96,14 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 	
 	private final static String URL_TO_UPLOAD_GPX = " http://api.openstreetmap.org/api/0.6/gpx/create";
 
-	public static String uploadGPXFile(String tagstring, String description, String visibility, File f) {
+	public String uploadGPXFile(String tagstring, String description, String visibility, File f) {
 		String url = URL_TO_UPLOAD_GPX; 
 		Map<String, String> additionalData = new LinkedHashMap<String, String>();
 		additionalData.put("description", description);
 		additionalData.put("tags", tagstring);
 		additionalData.put("visibility", visibility);
-		return Algoritms.uploadFile(url, f, OsmandApplication.getSettings().USER_NAME.get()+":"+
-				OsmandApplication.getSettings().USER_PASSWORD.get(), "file", true, additionalData);
+		return Algoritms.uploadFile(url, f, settings.USER_NAME.get()+":"+
+				settings.USER_PASSWORD.get(), "file", true, additionalData);
 	}
 	
 	
@@ -111,8 +115,8 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 			HttpConnectionParams.setConnectionTimeout(params, 15000);
 			DefaultHttpClient httpclient = new DefaultHttpClient(params);
 			if (doAuthenticate) {
-				UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(OsmandApplication.getSettings().USER_NAME.get() + ":" //$NON-NLS-1$
-						+ OsmandApplication.getSettings().USER_PASSWORD.get());
+				UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(settings.USER_NAME.get() + ":" //$NON-NLS-1$
+						+ settings.USER_PASSWORD.get());
 				httpclient.getCredentialsProvider().setCredentials(new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT), credentials);
 			}
 			HttpRequestBase method = null;
@@ -191,7 +195,7 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 			connection.setRequestMethod(requestMethod);
 			StringBuilder responseBody = new StringBuilder();
 			if (doAuthenticate) {
-				String token = OsmandApplication.getSettings().USER_NAME.get() + ":" + OsmandApplication.getSettings().USER_PASSWORD.get(); //$NON-NLS-1$
+				String token = settings.USER_NAME.get() + ":" + settings.USER_PASSWORD.get(); //$NON-NLS-1$
 				connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 			connection.setDoInput(true);
@@ -350,7 +354,7 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 				ser.startTag(null, stringAction.get(action));
 				ser.attribute(null, "version", "0.6"); //$NON-NLS-1$ //$NON-NLS-2$
 				ser.attribute(null, "generator", Version.getAppName(ctx)); //$NON-NLS-1$
-				writeNode(n, info, ser, changeSetId, OsmandApplication.getSettings().USER_NAME.get());
+				writeNode(n, info, ser, changeSetId, settings.USER_NAME.get());
 				ser.endTag(null, stringAction.get(action));
 				ser.endTag(null, "osmChange"); //$NON-NLS-1$
 				ser.endDocument();

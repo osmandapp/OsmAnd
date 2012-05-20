@@ -15,7 +15,7 @@ public class AccessibleActivity extends Activity implements AccessibleContent.Ca
 
     // List of accessible views. Use accessibleContent.add(element)
     // to add element to it.
-    public final AccessibleContent accessibleContent = new AccessibleContent();
+    public final AccessibleContent accessibleContent = new AccessibleContent(this);
 
     @Override
     public boolean dispatchNativeTouchEvent(MotionEvent event) {

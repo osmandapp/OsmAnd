@@ -138,11 +138,11 @@ public class ResourceManager {
 
 	
 	public void resetStoreDirectory() {
-		dirWithTiles = OsmandApplication.getSettings().extendOsmandPath(TILES_PATH);
+		dirWithTiles = context.getSettings().extendOsmandPath(TILES_PATH);
 		dirWithTiles.mkdirs();
 		// ".nomedia" indicates there are no pictures and no music to list in this dir for the Gallery app
 		try {
-			OsmandApplication.getSettings().extendOsmandPath(TILES_PATH + ".nomedia").createNewFile(); //$NON-NLS-1$
+			context.getSettings().extendOsmandPath(TILES_PATH + ".nomedia").createNewFile(); //$NON-NLS-1$
 		} catch( Exception e ) {
 		}
 	}
@@ -382,17 +382,17 @@ public class ResourceManager {
 	}
 	
 	private List<String> checkAssets(IProgress progress) {
-		if (!Version.getFullVersion(context).equalsIgnoreCase(OsmandApplication.getSettings().PREVIOUS_INSTALLED_VERSION.get())) {
-			File applicationDataDir = OsmandApplication.getSettings().extendOsmandPath(APP_DIR);
+		if (!Version.getFullVersion(context).equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get())) {
+			File applicationDataDir = context.getSettings().extendOsmandPath(APP_DIR);
 			applicationDataDir.mkdirs();
 			if(applicationDataDir.canWrite()){
 				try {
 					progress.startTask(context.getString(R.string.installing_new_resources), -1); 
 					AssetManager assetManager = context.getAssets();
-					boolean isFirstInstall = !OsmandApplication.getSettings().PREVIOUS_INSTALLED_VERSION.getPreferences().
-							contains(OsmandApplication.getSettings().PREVIOUS_INSTALLED_VERSION.getId()); 
+					boolean isFirstInstall = !context.getSettings().PREVIOUS_INSTALLED_VERSION.getPreferences().
+							contains(context.getSettings().PREVIOUS_INSTALLED_VERSION.getId()); 
 					unpackBundledAssets(assetManager, applicationDataDir, progress, isFirstInstall);
-					OsmandApplication.getSettings().PREVIOUS_INSTALLED_VERSION.set(Version.getFullVersion(context));
+					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(Version.getFullVersion(context));
 				} catch (IOException e) {
 					log.error(e.getMessage(), e);
 				} catch (XmlPullParserException e) {
@@ -472,7 +472,7 @@ public class ResourceManager {
 	}
 
 	private void initRenderers(IProgress progress) {
-		File file = OsmandApplication.getSettings().extendOsmandPath(APP_DIR + IndexConstants.RENDERERS_DIR);
+		File file = context.getSettings().extendOsmandPath(APP_DIR + IndexConstants.RENDERERS_DIR);
 		file.mkdirs();
 		Map<String, File> externalRenderers = new LinkedHashMap<String, File>(); 
 		if (file.exists() && file.canRead()) {
@@ -484,7 +484,7 @@ public class ResourceManager {
 			}
 		}
 		context.getRendererRegistry().setExternalRenderers(externalRenderers);
-		String r = OsmandApplication.getSettings().RENDERER.get();
+		String r = context.getSettings().RENDERER.get();
 		if(r != null){
 			RenderingRulesStorage obj = context.getRendererRegistry().getRenderer(r);
 			if(obj != null){
@@ -494,7 +494,7 @@ public class ResourceManager {
 	}
 
 	public List<String> indexingMaps(final IProgress progress) {
-		File file = OsmandApplication.getSettings().extendOsmandPath(MAPS_PATH);
+		File file = context.getSettings().extendOsmandPath(MAPS_PATH);
 		file.mkdirs();
 		List<String> warnings = new ArrayList<String>();
 		renderer.clearAllResources();
@@ -559,7 +559,7 @@ public class ResourceManager {
 	
 	// POI INDEX //
 	private List<String> indexingPoi(final IProgress progress) {
-		File file = OsmandApplication.getSettings().extendOsmandPath(POI_PATH);
+		File file = context.getSettings().extendOsmandPath(POI_PATH);
 		file.mkdirs();
 		List<String> warnings = new ArrayList<String>();
 		if (file.exists() && file.canRead()) {
@@ -567,7 +567,7 @@ public class ResourceManager {
 				indexingPoi(progress, warnings, f);
 			}
 		}
-		File updatablePoiDbFile = OsmandApplication.getSettings().extendOsmandPath(MINE_POI_DB);
+		File updatablePoiDbFile = context.getSettings().extendOsmandPath(MINE_POI_DB);
 		if(updatablePoiDbFile.exists() && updatablePoiDbFile.canRead()){
 			tryToOpenUpdatablePoiDb(updatablePoiDbFile);
 		}
@@ -576,7 +576,7 @@ public class ResourceManager {
 	
 	public AmenityIndexRepositoryOdb getUpdatablePoiDb() {
 		if (updatablePoiDb == null) {
-			File updatablePoiDbFile = OsmandApplication.getSettings().extendOsmandPath(MINE_POI_DB);
+			File updatablePoiDbFile = context.getSettings().extendOsmandPath(MINE_POI_DB);
 			if (!tryToOpenUpdatablePoiDb(updatablePoiDbFile)) {
 				if (updatablePoiDbFile.exists()) {
 					updatablePoiDbFile.delete();
@@ -842,7 +842,7 @@ public class ResourceManager {
 	}
 	
 	public Map<String, String> getBackupIndexes(Map<String, String> map) {
-		File file = OsmandApplication.getSettings().extendOsmandPath(BACKUP_PATH);
+		File file = context.getSettings().extendOsmandPath(BACKUP_PATH);
 		if (file != null && file.isDirectory()) {
 			for (File f : file.listFiles()) {
 				if (f != null && f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {

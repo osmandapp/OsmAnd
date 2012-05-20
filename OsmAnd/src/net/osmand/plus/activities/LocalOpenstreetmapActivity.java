@@ -109,7 +109,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		int child = ExpandableListView.getPackedPositionChild(packedPos);
 		int itemId = item.getItemId();
 	    if(itemId == R.id.showpoi) {
-			OsmandSettings settings = OsmandApplication.getSettings();
+			OsmandSettings settings = getMyApplication().getSettings();
 			OpenstreetmapPoint info = (OpenstreetmapPoint) listAdapter.getChild(group, child);
 			settings.setMapLocationToShow(info.getLatitude(), info.getLongitude(), settings.getLastKnownMapZoom());
 			MapActivity.launchMapActivityMoveToTop(LocalOpenstreetmapActivity.this);

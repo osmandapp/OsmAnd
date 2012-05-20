@@ -72,7 +72,7 @@ public class SearchTransportActivity extends ListActivity implements SearchActiv
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
-		settings = OsmandApplication.getSettings();
+		settings = ((OsmandApplication) getApplication()).getSettings();
 		
 		setContentView(R.layout.search_transport);
 		searchTransportLevel = (Button) findViewById(R.id.SearchTransportLevelButton);
@@ -138,7 +138,7 @@ public class SearchTransportActivity extends ListActivity implements SearchActiv
 			startPoint = ((SearchActivity) getParent()).getSearchPoint();
 		}
 		if (startPoint == null) {
-			startPoint = OsmandApplication.getSettings().getLastKnownMapLocation();
+			startPoint = settings.getLastKnownMapLocation();
 		}
 		
 		LatLon pointToNavigate = settings.getPointToNavigate();

@@ -35,11 +35,13 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 	
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
+	private OsmandSettings settings;
 	
 	// dialog constructor
 	public NavigatePointActivity(MapActivity activity){
 		this.activity = activity;
 		dlg =  new Dialog(activity);
+		settings = ((OsmandApplication) activity.getApplication()).getSettings();
 	}
 	// activity constructor
 	public NavigatePointActivity() {
@@ -60,6 +62,7 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 		setContentView(R.layout.navigate_point);
 		setTitle(R.string.map_specify_point);
 		((Button) findViewById(R.id.Cancel)).setText(getString(R.string.navigate_to));
+		settings = ((OsmandApplication) getApplication()).getSettings();
 	}
 	
 	@Override
@@ -78,7 +81,7 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 			loc = ((SearchActivity) getParent()).getSearchPoint();
 		}
 		if (loc == null) {
-			loc = OsmandApplication.getSettings().getLastKnownMapLocation();
+			loc = settings.getLastKnownMapLocation();
 		}
 		initUI(loc.getLatitude(), loc.getLongitude());
 	}
@@ -238,14 +241,13 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 			double lon = convert(((TextView) findViewById(R.id.LongitudeEdit)).getText().toString());
 			
 			if(navigate){
-				OsmandApplication.getSettings().setPointToNavigate(lat, lon, getString(R.string.point_on_map, lat, lon));
+				settings.setPointToNavigate(lat, lon, getString(R.string.point_on_map, lat, lon));
 			} else {
 				// in case when it is dialog
 				if(activity != null) {
 					OsmandMapTileView v = activity.getMapView();
 					v.getAnimatedDraggingThread().startMoving(lat, lon, v.getZoom(), true);
 				} else {
-					OsmandSettings settings = OsmandApplication.getSettings();
 					settings.setMapLocationToShow(lat, lon, Math.max(12, settings.getLastKnownMapZoom()), 
 							getString(R.string.point_on_map, lat, lon));
 				}

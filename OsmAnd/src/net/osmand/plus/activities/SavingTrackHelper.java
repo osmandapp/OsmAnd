@@ -125,7 +125,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	 */
 	public List<String> saveDataToGpx() {
 		List<String> warnings = new ArrayList<String>();
-		File dir = OsmandApplication.getSettings().getExternalStorageDirectory();
+		File dir = ((OsmandApplication) ctx.getApplicationContext()).getSettings().getExternalStorageDirectory();
 		if (dir.canWrite()) {
 			dir = new File(dir, ResourceManager.GPX_PATH);
 			dir.mkdirs();

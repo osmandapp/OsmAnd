@@ -58,7 +58,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		settings = OsmandApplication.getSettings();
+		settings = ((OsmandApplication) getApplication()).getSettings();
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.search_by_name);
 

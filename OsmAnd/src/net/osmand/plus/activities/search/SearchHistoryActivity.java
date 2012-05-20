@@ -78,7 +78,7 @@ public class SearchHistoryActivity extends ListActivity  implements SearchActivi
 			location = ((SearchActivity) getParent()).getSearchPoint();
 		}
 		if (location == null) {
-			location = OsmandApplication.getSettings().getLastKnownMapLocation();
+			location = ((OsmandApplication) getApplication()).getSettings().getLastKnownMapLocation();
 		}
 
 		List<HistoryEntry> historyEntries = helper.getHistoryEntries(this);
@@ -106,11 +106,11 @@ public class SearchHistoryActivity extends ListActivity  implements SearchActivi
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						if (which == 0) {
-							OsmandSettings settings = OsmandApplication.getSettings();
+							OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
 							settings.setMapLocationToShow(entry.getLat(), entry.getLon(), settings.getLastKnownMapZoom(), null, entry
 									.getName(), null);
 						} else if (which == 1) {
-							OsmandApplication.getSettings().setPointToNavigate(entry.getLat(), entry.getLon(), null);
+							((OsmandApplication) getApplication()).getSettings().setPointToNavigate(entry.getLat(), entry.getLon(), null);
 						}
 						MapActivity.launchMapActivityMoveToTop(SearchHistoryActivity.this);
 					}
@@ -128,7 +128,7 @@ public class SearchHistoryActivity extends ListActivity  implements SearchActivi
 
 	private void selectModel(HistoryEntry model) {
 		helper.selectEntry(model, this);
-		OsmandSettings settings = OsmandApplication.getSettings();
+		OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
 		settings.setMapLocationToShow(model.getLat(), model.getLon(), settings.getLastKnownMapZoom(), null, model.getName(), null);
 		MapActivity.launchMapActivityMoveToTop(this);
 	}

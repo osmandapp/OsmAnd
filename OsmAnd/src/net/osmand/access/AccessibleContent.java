@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.osmand.plus.OsmandApplication;
 
+import android.content.Context;
 import android.graphics.Rect;
 import android.os.SystemClock;
 import android.view.MotionEvent;
@@ -27,8 +28,13 @@ public class AccessibleContent extends ArrayList<View> {
 
     private final Rect testFrame = new Rect();
     private View nowTouched;
+	private final Context ctx;
 
-    private View findTouch(MotionEvent event) {
+    public AccessibleContent(Context ctx) {
+		this.ctx = ctx;
+	}
+
+	private View findTouch(MotionEvent event) {
         int x = (int)event.getX();
         int y = (int)event.getY();
         for (View v : this)
@@ -38,7 +44,7 @@ public class AccessibleContent extends ArrayList<View> {
     }
 
     public boolean dispatchTouchEvent(MotionEvent event, Callback callback) {
-        if (OsmandApplication.getSettings().ACCESSIBILITY_EXTENSIONS.get()) {
+        if (((OsmandApplication) ctx.getApplicationContext()).getSettings().ACCESSIBILITY_EXTENSIONS.get()) {
             int action = event.getAction();
             View newTouch;
             switch (action) {

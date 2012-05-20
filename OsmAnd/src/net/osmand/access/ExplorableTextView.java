@@ -1,6 +1,7 @@
 package net.osmand.access;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 
 import android.content.Context;
 import android.text.Layout;
@@ -35,12 +36,16 @@ public class ExplorableTextView extends TextView {
         super(context, attrs, style);
     }
 
+    
+    public OsmandSettings getSettings(){
+    	return ((OsmandApplication) getContext().getApplicationContext()).getSettings();
+    }
 
     // Overridden callback methods to provide accessible exploration means.
 
     @Override
     public boolean dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
-        if (!OsmandApplication.getSettings().ACCESSIBILITY_EXTENSIONS.get())
+        if (!getSettings().ACCESSIBILITY_EXTENSIONS.get())
             return super.dispatchPopulateAccessibilityEvent(event);
         cursorTrackingEnabled = false;
         boolean result = super.dispatchPopulateAccessibilityEvent(event);
@@ -61,7 +66,7 @@ public class ExplorableTextView extends TextView {
 
     @Override
     protected MovementMethod getDefaultMovementMethod() {
-        if (OsmandApplication.getSettings().ACCESSIBILITY_EXTENSIONS.get())
+        if (getSettings().ACCESSIBILITY_EXTENSIONS.get())
             return ArrowKeyMovementMethod.getInstance();
         return super.getDefaultMovementMethod();
     }
@@ -69,7 +74,7 @@ public class ExplorableTextView extends TextView {
     @Override
     protected void onTextChanged(CharSequence text, int start, int before, int after) {
         super.onTextChanged(text, start, before, after);
-        if (OsmandApplication.getSettings().ACCESSIBILITY_EXTENSIONS.get() && !isFocused()) {
+        if (getSettings().ACCESSIBILITY_EXTENSIONS.get() && !isFocused()) {
             selectionLength = Math.min(text.length(), AccessibilityEvent.MAX_TEXT_LENGTH);
             sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED);
         }
@@ -78,7 +83,7 @@ public class ExplorableTextView extends TextView {
     @Override
     protected void onSelectionChanged(int start, int end) {
         super.onSelectionChanged(start, end);
-        if (OsmandApplication.getSettings().ACCESSIBILITY_EXTENSIONS.get() && cursorTrackingEnabled && isFocused()) {
+        if (getSettings().ACCESSIBILITY_EXTENSIONS.get() && cursorTrackingEnabled && isFocused()) {
             if (end >= getText().length()) {
                 cursor = getText().length();
             } else if (cursor != end) {

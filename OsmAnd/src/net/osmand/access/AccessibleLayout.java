@@ -74,7 +74,7 @@ public class AccessibleLayout extends FrameLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        final boolean swallow = OsmandApplication.getSettings().ACCESSIBILITY_EXTENSIONS.get();
+        final boolean swallow = ((OsmandApplication) getContext().getApplicationContext()).accessibilityExtensions();
         if (swallow) {
             int action = event.getAction();
             View newTouch;

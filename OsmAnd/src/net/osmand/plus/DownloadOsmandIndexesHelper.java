@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import net.osmand.LogUtil;
+import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.activities.DownloadIndexActivity.AssetDownloadEntry;
@@ -33,21 +34,25 @@ import android.widget.Toast;
 public class DownloadOsmandIndexesHelper {
 	private final static Log log = LogUtil.getLog(DownloadOsmandIndexesHelper.class);
 
-	public static IndexFileList getIndexesList(PackageManager pm, AssetManager amanager, String versionAsUrl) {
-		IndexFileList result = downloadIndexesListFromInternet(versionAsUrl);
+	public static IndexFileList getIndexesList(Context ctx) {
+		PackageManager pm =ctx.getPackageManager();
+		AssetManager amanager = ctx.getAssets();
+		String versionUrlParam = Version.getVersionAsURLParam(ctx);
+		IndexFileList result = downloadIndexesListFromInternet(versionUrlParam);
 		if (result == null) {
 			result = new IndexFileList();
 		}
 		//add all tts files from assets
-		listVoiceAssets(result, amanager, pm);
+		listVoiceAssets(result, amanager, pm, ((OsmandApplication) ctx.getApplicationContext()).getSettings());
 		return result;
 	}
 	
-	private static void listVoiceAssets(IndexFileList result, AssetManager amanager, PackageManager pm) {
+	private static void listVoiceAssets(IndexFileList result, AssetManager amanager, PackageManager pm, 
+			OsmandSettings settings) {
 		String[] list;
 		try {
 			String ext = IndexItem.addVersionToExt(IndexConstants.TTSVOICE_INDEX_EXT_ZIP, IndexConstants.TTSVOICE_VERSION);
-			File voicePath = OsmandApplication.getSettings().extendOsmandPath(ResourceManager.VOICE_PATH);
+			File voicePath = settings.extendOsmandPath(ResourceManager.VOICE_PATH);
 			list = amanager.list("voice");
 			String date = "";
 			try {
@@ -238,7 +243,7 @@ public class DownloadOsmandIndexesHelper {
 			boolean unzipDir = false;
 			boolean preventMediaIndexing = false;
 			
-			File externalStorageDirectory = OsmandApplication.getSettings().getExternalStorageDirectory();
+			File externalStorageDirectory = ((OsmandApplication) ctx.getApplicationContext()).getSettings().getExternalStorageDirectory();
 			if(fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)){
 				parent = new File(externalStorageDirectory, ResourceManager.APP_DIR);
 				toSavePostfix = BINARY_MAP_INDEX_EXT;

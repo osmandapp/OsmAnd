@@ -15,7 +15,6 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IProgress;
 import net.osmand.OpenstreetmapRemoteUtil;
 import net.osmand.access.AccessibleToast;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -82,7 +81,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		});
 		setContentView(R.layout.local_index);
 		titleBar.afterSetContentView();
-		settings = OsmandApplication.getSettings();
+		settings = getMyApplication().getSettings();
 		descriptionLoader = new LoadLocalIndexDescriptionTask();
 		listAdapter = new LocalIndexesAdapter();
 		
@@ -131,8 +130,8 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 	}
 	
 	public boolean sendGPXFiles(final LocalIndexInfo... info){
-		String name = OsmandApplication.getSettings().USER_NAME.get();
-		String pwd = OsmandApplication.getSettings().USER_PASSWORD.get();
+		String name = settings.USER_NAME.get();
+		String pwd = settings.USER_PASSWORD.get();
 		if(Algoritms.isEmpty(name) || Algoritms.isEmpty(pwd)){
 			AccessibleToast.makeText(this, R.string.validate_gpx_upload_name_pwd, Toast.LENGTH_LONG).show();
 			return false;
@@ -194,7 +193,6 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 						if (info != null && info.getGpxFile() != null) {
 							WptPt loc = info.getGpxFile().findPointToShow();
 							if (loc != null) {
-								OsmandSettings settings = OsmandApplication.getSettings();
 								settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
 							}
 							getMyApplication().setGpxFileToDisplay(info.getGpxFile(), false);
@@ -444,7 +442,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 				if (!isCancelled()) {
 					String warning = null;
 					File file = new File(info.getPathToData());
-					warning = OpenstreetmapRemoteUtil.uploadGPXFile(tagstring, description, visibility, file);
+					warning = new OpenstreetmapRemoteUtil(LocalIndexesActivity.this, null).uploadGPXFile(tagstring, description, visibility, file);
 					total++;
 					if (warning == null) {
 						count++;
@@ -660,7 +658,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 	}
 	
 	private void updateDescriptionTextWithSize(){
-		File dir = OsmandApplication.getSettings().extendOsmandPath("");
+		File dir = getMyApplication().getSettings().extendOsmandPath("");
 		String size = formatGb.format(new Object[]{0});
 		if(dir.canRead()){
 			StatFs fs = new StatFs(dir.getAbsolutePath());

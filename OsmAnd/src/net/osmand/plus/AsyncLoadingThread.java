@@ -256,7 +256,7 @@ public class AsyncLoadingThread extends Thread {
 			if(filterByName == null || filterByName.length() == 0) {
 				return true;
 			} else {
-				String lower = OsmAndFormatter.getPoiStringWithoutType(object, OsmandApplication.getSettings().usingEnglishNames()).toLowerCase();
+				String lower = OsmAndFormatter.getPoiStringWithoutType(object, resourceManger.getContext().getSettings().usingEnglishNames()).toLowerCase();
 				return lower.indexOf(filterByName) != -1;
 			}
 		}

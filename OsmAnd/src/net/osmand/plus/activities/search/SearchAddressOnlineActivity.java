@@ -47,6 +47,7 @@ public class SearchAddressOnlineActivity extends OsmandListActivity implements S
 	private final static Log log = LogUtil.getLog(SearchAddressOnlineActivity.class);
 
 	private static PlacesAdapter lastResult = null;
+	private OsmandSettings settings;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,8 @@ public class SearchAddressOnlineActivity extends OsmandListActivity implements S
 		} else {
 			searchOffline.setVisibility(View.INVISIBLE);
 		}
+		
+		settings = ((OsmandApplication) getApplication()).getSettings();
 		
 		final EditText searchText = (EditText) findViewById(R.id.SearchText);
 		
@@ -86,7 +89,7 @@ public class SearchAddressOnlineActivity extends OsmandListActivity implements S
 				searchPlaces(searchText.getText().toString());
 			}
 		});
-		location = OsmandApplication.getSettings().getLastKnownMapLocation();
+		location = settings.getLastKnownMapLocation();
 		
 		if (lastResult != null) {
 			setListAdapter(lastResult);
@@ -108,7 +111,7 @@ public class SearchAddressOnlineActivity extends OsmandListActivity implements S
 			location = ((SearchActivity) getParent()).getSearchPoint();
 		}
 		if (location == null) {
-			location = OsmandApplication.getSettings().getLastKnownMapLocation();
+			location = settings.getLastKnownMapLocation();
 		}
 	}
 	
@@ -211,7 +214,6 @@ public class SearchAddressOnlineActivity extends OsmandListActivity implements S
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		Place item = ((PlacesAdapter) getListAdapter()).getItem(position);
-		OsmandSettings settings = OsmandApplication.getSettings();
 		settings.setMapLocationToShow(item.lat, item.lon,
 				Math.max(15, settings.getLastKnownMapZoom()), getString(R.string.address)+ " : " + item.displayName); //$NON-NLS-1$
 		MapActivity.launchMapActivityMoveToTop(this);

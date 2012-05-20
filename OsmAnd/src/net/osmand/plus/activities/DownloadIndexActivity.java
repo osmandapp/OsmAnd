@@ -25,13 +25,13 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import net.osmand.IProgress;
-import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.DownloadOsmandIndexesHelper;
 import net.osmand.plus.DownloadOsmandIndexesHelper.IndexItem;
 import net.osmand.plus.IndexFileList;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
@@ -42,9 +42,9 @@ import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.net.Uri;
@@ -98,17 +98,21 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
     private TextWatcher textWatcher ;
 	private EditText filterText;
 	private DownloadFileHelper downloadFileHelper = null;
+	private OsmandSettings settings;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		settings = ((OsmandApplication) getApplication()).getSettings();
 		if(downloadListIndexThread == null) {
-			downloadListIndexThread = new DownloadIndexListThread(getPackageManager(), getAssets(),Version.getVersionAsURLParam(this));
+			downloadListIndexThread = new DownloadIndexListThread(this);
 		}
 		// recreation upon rotation is prevented in manifest file
 		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.local_index_download, R.drawable.tab_download_screen_icon);
 		setContentView(R.layout.download_index);
 		titleBar.afterSetContentView();
+		
+		
 		
 		downloadFileHelper = new DownloadFileHelper(this);
 		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener(){
@@ -156,7 +160,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		} else {
 			downloadIndexList();
 		}
-		if(getPackageName().equals(FREE_VERSION_NAME) && OsmandApplication.getSettings().checkFreeDownloadsNumberZero()){
+		if(getPackageName().equals(FREE_VERSION_NAME) && settings.checkFreeDownloadsNumberZero()){
 			Builder msg = new AlertDialog.Builder(this);
 			msg.setTitle(R.string.free_version_title);
 			msg.setMessage(getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS+"", ""));
@@ -194,7 +198,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if(item.getItemId() == RELOAD_ID){
 			//re-create the thread
-			downloadListIndexThread = new DownloadIndexListThread(getPackageManager(), getAssets(),Version.getVersionAsURLParam(this));
+			downloadListIndexThread = new DownloadIndexListThread(this);
 			downloadIndexList();
 		} else {
 			final DownloadIndexAdapter listAdapter = (DownloadIndexAdapter)getExpandableListAdapter();
@@ -236,15 +240,12 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	private static class DownloadIndexListThread extends Thread {
 		private DownloadIndexActivity uiActivity = null;
 		private IndexFileList indexFiles = null;
-		private final String versionUrlParam;
-		private final AssetManager amanager;
-		private final PackageManager pm; 
+		private final Context ctx; 
 		
-		public DownloadIndexListThread(PackageManager pm, AssetManager amanager, String versionUrlParam){
-			super("DownloadIndexes"); //$NON-NLS-1$
-			this.pm = pm;
-			this.amanager = amanager;
-			this.versionUrlParam = versionUrlParam;
+		public DownloadIndexListThread(Context ctx){
+			super("DownloadIndexes");
+			this.ctx = ctx;
+			
 		}
 		public void setUiActivity(DownloadIndexActivity uiActivity) {
 			this.uiActivity = uiActivity;
@@ -256,7 +257,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		
 		@Override
 		public void run() {
-			indexFiles = DownloadOsmandIndexesHelper.getIndexesList(pm, amanager, versionUrlParam);
+			indexFiles = DownloadOsmandIndexesHelper.getIndexesList(ctx);
 			if(uiActivity != null) {
 				uiActivity.removeDialog(DIALOG_PROGRESS_LIST);
 				uiActivity.runOnUiThread(new Runnable() {
@@ -344,7 +345,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 					downloadListIndexThread.start();
 				} else if(downloadListIndexThread.getState() == Thread.State.TERMINATED){
 					// possibly exception occurred we don't have cache of files
-					downloadListIndexThread = new DownloadIndexListThread(getPackageManager(), getAssets(),Version.getVersionAsURLParam(this));
+					downloadListIndexThread = new DownloadIndexListThread(this);
 					downloadListIndexThread.setUiActivity(this);
 					downloadListIndexThread.start();
 				}
@@ -425,7 +426,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
 	private Collection<String> listAlreadyDownloadedWithAlternatives() {
 		Set<String> files = new TreeSet<String>();
-		File externalStorageDirectory = OsmandApplication.getSettings().getExternalStorageDirectory();
+		File externalStorageDirectory = settings.getExternalStorageDirectory();
 		// files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.POI_PATH),POI_INDEX_EXT,POI_INDEX_EXT_ZIP,POI_TABLE_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.APP_DIR),BINARY_MAP_INDEX_EXT,BINARY_MAP_INDEX_EXT_ZIP,BINARY_MAP_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.BACKUP_PATH),BINARY_MAP_INDEX_EXT,BINARY_MAP_INDEX_EXT_ZIP,BINARY_MAP_VERSION));
@@ -459,7 +460,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 	protected void downloadFilesCheckFreeVersion() {
 		if (getPackageName().equals(FREE_VERSION_NAME)) {
-			int total = OsmandApplication.getSettings().NUMBER_OF_FREE_DOWNLOADS.get() + entriesToDownload.size();
+			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get() + entriesToDownload.size();
 			boolean wiki = false;
 			for (DownloadEntry es : entriesToDownload.values()) {
 				if (es.baseName.contains("_wiki")) {
@@ -487,7 +488,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			sz += es.sizeMB;
 		}
 		// get availabile space 
-		File dir = OsmandApplication.getSettings().extendOsmandPath("");
+		File dir = settings.extendOsmandPath("");
 		double asz = -1;
 		if(dir.canRead()){
 			StatFs fs = new StatFs(dir.getAbsolutePath());
@@ -548,7 +549,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 		public DownloadIndexesAsyncTask(ProgressDialogImplementation progressDialogImplementation) {
 			this.progress = progressDialogImplementation;
-			downloads = OsmandApplication.getSettings().NUMBER_OF_FREE_DOWNLOADS;
+			downloads = settings.NUMBER_OF_FREE_DOWNLOADS;
 		}
 
 		@Override
@@ -619,10 +620,10 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				if (vectorMapsToReindex) {
 					ResourceManager manager = getMyApplication().getResourceManager();
 					List<String> warnings = manager.indexingMaps(progress);
-					if (warnings.isEmpty() && !OsmandApplication.getSettings().MAP_VECTOR_DATA.get()) {
+					if (warnings.isEmpty() && !settings.MAP_VECTOR_DATA.get()) {
 						warnings.add(getString(R.string.binary_map_download_success));
 						// Is it proper way to switch every tome to vector data?
-						OsmandApplication.getSettings().MAP_VECTOR_DATA.set(true);
+						settings.MAP_VECTOR_DATA.set(true);
 					}
 					if (!warnings.isEmpty()) {
 						return warnings.get(0);

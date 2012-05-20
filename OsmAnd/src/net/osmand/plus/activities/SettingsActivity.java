@@ -178,7 +178,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		String[] entries;
 		String[] entrieValues;
 		PreferenceScreen screen = getPreferenceScreen();
-		osmandSettings = OsmandApplication.getSettings();
+		osmandSettings = getMyApplication().getSettings();
 
 //		BidForFixHelper bidForFixHelper = getMyApplication().getBidForFix();
 //		bidForFixHelper.generatePreferenceList(screen, getString(R.string.support_new_features), this);

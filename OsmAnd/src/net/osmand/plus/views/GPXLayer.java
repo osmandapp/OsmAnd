@@ -49,7 +49,7 @@ public class GPXLayer extends OsmandMapLayer {
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		settings = OsmandApplication.getSettings();
+		settings = view.getSettings();
 		initUI();
 	}
 

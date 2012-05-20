@@ -59,11 +59,7 @@ public class OsmandApplication extends Application {
 	FavouritesDbHelper favorites = null;
 	CommandPlayer player = null;
 	
-	/**
-	 * Static reference to instance of settings class.
-	 * Transferred from OsmandSettings class to allow redefine actual instance behind it
-	 */
-	static OsmandSettings osmandSettings = null;
+	OsmandSettings osmandSettings = null;
 	
 	DayNightHelper daynightHelper;
 	NavigationService navigationService;
@@ -393,7 +389,7 @@ public class OsmandApplication extends Application {
 			helper.close();
 
 			// restore backuped favorites to normal file
-			final File appDir = OsmandApplication.getSettings().extendOsmandPath(ResourceManager.APP_DIR);
+			final File appDir = getSettings().extendOsmandPath(ResourceManager.APP_DIR);
 			File save = new File(appDir, FavouritesDbHelper.FILE_TO_SAVE);
 			File bak = new File(appDir, FavouritesDbHelper.FILE_TO_BACKUP);
 			if (bak.exists() && (!save.exists() || bak.lastModified() > save.lastModified())) {
@@ -489,6 +485,10 @@ public class OsmandApplication extends Application {
 			}
 
 		}
+	}
+	
+	public boolean accessibilityExtensions(){
+		return osmandSettings.ACCESSIBILITY_EXTENSIONS.get();
 	}
 
 	public boolean accessibilityEnabled() {

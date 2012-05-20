@@ -73,11 +73,12 @@ public class EditingPOIActivity implements DialogProvider {
 	private static final String KEY_AMENITY = "amenity";
 
 	private Bundle dialogBundle = new Bundle();
+	private OsmandSettings settings;
 
 	public EditingPOIActivity(MapActivity uiContext){
 		this.ctx = uiContext;
 
-		OsmandSettings settings = OsmandApplication.getSettings();
+		settings = ((OsmandApplication) uiContext.getApplication()).getSettings();
 		if(settings.OFFLINE_POI_EDITION.get() || !settings.isInternetConnectionAvailable(true)){
 			this.openstreetmapUtil = new OpenstreetmapLocalUtil(ctx);
 		} else {
@@ -121,7 +122,7 @@ public class EditingPOIActivity implements DialogProvider {
 	private void prepareDeleteDialog(Dialog dlg, Bundle args) {
 		Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
 		dlg.setTitle(MessageFormat.format(this.ctx.getMapView().getResources().getString(R.string.poi_remove_confirm_template), 
-				OsmAndFormatter.getPoiStringWithoutType(a, OsmandApplication.getSettings().usingEnglishNames())));
+				OsmAndFormatter.getPoiStringWithoutType(a, settings.usingEnglishNames())));
 	}
 	
 	private Dialog createDeleteDialog(final Bundle args) {

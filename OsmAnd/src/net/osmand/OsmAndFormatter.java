@@ -18,7 +18,7 @@ public class OsmAndFormatter {
 	private final static float FOOTS_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
 	
 	public static double calculateRoundedDist(double distInMeters, Context ctx) {
-		OsmandSettings settings = OsmandApplication.getSettings();
+		OsmandSettings settings = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		double mainUnitInMeter = 1;
 		double metersInSecondUnit = METERS_IN_KILOMETER; 
@@ -51,7 +51,7 @@ public class OsmAndFormatter {
 	}
 	
 	public static String getFormattedDistance(float meters, Context ctx) {
-		OsmandSettings settings = OsmandApplication.getSettings();
+		OsmandSettings settings = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		int mainUnitStr;
 		float mainUnitInMeters;
@@ -84,7 +84,7 @@ public class OsmAndFormatter {
 	}
 
 	public static String getFormattedAlt(double alt, Context ctx) {
-		OsmandSettings settings = OsmandApplication.getSettings();
+		OsmandSettings settings = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 			return ((int) alt) + " " + ctx.getString(R.string.m);
@@ -94,7 +94,7 @@ public class OsmAndFormatter {
 	}
 	
 	public static String getFormattedSpeed(float metersperseconds, Context ctx) {
-		OsmandSettings settings = OsmandApplication.getSettings();
+		OsmandSettings settings = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		float kmh = metersperseconds * 3.6f;
 		if(mc == MetricsConstants.KILOMETERS_AND_METERS){

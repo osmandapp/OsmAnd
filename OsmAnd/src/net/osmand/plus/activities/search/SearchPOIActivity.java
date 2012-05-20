@@ -131,7 +131,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		showOnMap = (ImageButton) findViewById(R.id.ShowOnMap);
 		showFilter = (ImageButton) findViewById(R.id.ShowFilter);
 		
-		settings = OsmandApplication.getSettings();
+		settings = ((OsmandApplication) getApplication()).getSettings();
 		
 		searchPOILevel.setOnClickListener(new OnClickListener() {
 			@Override

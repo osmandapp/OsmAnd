@@ -14,7 +14,7 @@ public class CommandPlayerFactory
 		throws CommandPlayerException
 	{
 		if (voiceProvider != null){
-			File parent = OsmandApplication.getSettings().extendOsmandPath(ResourceManager.VOICE_PATH);
+			File parent = osmandApplication.getSettings().extendOsmandPath(ResourceManager.VOICE_PATH);
 			File voiceDir = new File(parent, voiceProvider);
 			if(!voiceDir.exists()){
 				throw new CommandPlayerException(ctx.getString(R.string.voice_data_unavailable));

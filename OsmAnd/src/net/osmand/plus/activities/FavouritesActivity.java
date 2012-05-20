@@ -202,7 +202,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		final LatLon mapLocation = OsmandApplication.getSettings().getLastKnownMapLocation();
+		final LatLon mapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 		favouritesAdapter.synchronizeGroups();
 		
 //		Sort Favs by distance on Search tab, but sort alphabetically here
@@ -229,7 +229,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			}
 		} else {
 			FavouritePoint point = (FavouritePoint) favouritesAdapter.getChild(groupPosition, childPosition);
-			OsmandSettings settings = OsmandApplication.getSettings();
+			OsmandSettings settings = getMyApplication().getSettings();
 			settings.SHOW_FAVORITES.set(true);
 			settings.setMapLocationToShow(point.getLatitude(), point.getLongitude(), 
 					Math.max(12, settings.getLastKnownMapZoom()), null, getString(R.string.favorite)+":\n " + point.getName(), point);
@@ -245,13 +245,13 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 		int group = ExpandableListView.getPackedPositionGroup(((ExpandableListContextMenuInfo)menuInfo).packedPosition);
 		final FavouritePoint point = (FavouritePoint) favouritesAdapter.getChild(group, child);
 		if (aItem.getItemId() == SHOW_ON_MAP) {
-			OsmandSettings settings = OsmandApplication.getSettings();
+			OsmandSettings settings = getMyApplication().getSettings();
 			settings.SHOW_FAVORITES.set(true);
 			settings.setMapLocationToShow(point.getLatitude(), point.getLongitude(), 
 					Math.max(12, settings.getLastKnownMapZoom()), null, getString(R.string.favorite)+":\n " + point.getName(), point);
 			MapActivity.launchMapActivityMoveToTop(this);
 		} else if (aItem.getItemId() == NAVIGATE_TO) {
-			OsmandApplication.getSettings().setPointToNavigate(point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName());
+			getMyApplication().getSettings().setPointToNavigate(point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName());
 			MapActivity.launchMapActivityMoveToTop(this);
 		} else if (aItem.getItemId() == EDIT_ITEM) {
 			Builder builder = new AlertDialog.Builder(this);
@@ -340,7 +340,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		final File appDir = OsmandApplication.getSettings().extendOsmandPath(ResourceManager.APP_DIR);
+		final File appDir = getMyApplication().getSettings().extendOsmandPath(ResourceManager.APP_DIR);
 		final File tosave = new File(appDir, FavouritesDbHelper.FILE_TO_SAVE);
 		if(item.getItemId() == EXPORT_ID){
 			if(favouritesAdapter.isEmpty()){
@@ -617,7 +617,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			} else {
 				icon.setImageResource(R.drawable.opened_poi);
 			}
-			LatLon lastKnownMapLocation = OsmandApplication.getSettings().getLastKnownMapLocation();
+			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(), 
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
 			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist, FavouritesActivity.this));

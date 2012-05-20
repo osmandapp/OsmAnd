@@ -88,7 +88,7 @@ public class SearchPoiFilterActivity extends ListActivity {
 			searchAround = ((SearchActivity) getParent()).isSearchAroundCurrentLocation();
 		}
 		if (loc == null && !searchAround) {
-			loc = OsmandApplication.getSettings().getLastKnownMapLocation();
+			loc = ((OsmandApplication) getApplication()).getSettings().getLastKnownMapLocation();
 		}
 		if(loc != null && !searchAround) {
 			intentToLaunch.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());

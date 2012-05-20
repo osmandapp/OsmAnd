@@ -96,7 +96,7 @@ public class MapRenderRepositories {
 		this.context = context;
 		this.renderer = new OsmandRenderer(context);
 		handler = new Handler(Looper.getMainLooper());
-		prefs = OsmandApplication.getSettings();
+		prefs = context.getSettings();
 	}
 
 	public Context getContext() {
@@ -484,7 +484,7 @@ public class MapRenderRepositories {
 			RenderingRuleSearchRequest renderingReq = new RenderingRuleSearchRequest(storage);
 			renderingReq.setBooleanFilter(renderingReq.ALL.R_NIGHT_MODE, nightMode);
 			for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
-				CommonPreference<String> settings = OsmandApplication.getSettings().getCustomRenderProperty(customProp.getAttrName());
+				CommonPreference<String> settings = prefs.getCustomRenderProperty(customProp.getAttrName());
 				String res = settings.get();
 				if (!Algoritms.isEmpty(res)) {
 					if (customProp.isString()) {

@@ -18,7 +18,7 @@ public class AccessibleToast extends Toast {
     }
 
     public static Toast makeText(Context context, int msg, int duration) {
-        if (OsmandApplication.getSettings().ACCESSIBILITY_EXTENSIONS.get()) {
+        if (((OsmandApplication) context.getApplicationContext()).accessibilityExtensions()) {
             final Toast toast = new AccessibleToast(context);
             toast.setView(TextMessage.makeView(context, msg, R.layout.notification));
             toast.setDuration(duration);
@@ -28,7 +28,7 @@ public class AccessibleToast extends Toast {
     }
 
     public static Toast makeText(Context context, CharSequence msg, int duration) {
-        if (OsmandApplication.getSettings().ACCESSIBILITY_EXTENSIONS.get()) {
+        if (((OsmandApplication) context.getApplicationContext()).accessibilityExtensions()) {
             final Toast toast = new AccessibleToast(context);
             toast.setView(TextMessage.makeView(context, msg, R.layout.notification));
             toast.setDuration(duration);

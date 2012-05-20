@@ -80,9 +80,11 @@ public class MapActivityActions implements DialogProvider {
 	private Bundle dialogBundle = new Bundle();
 	
 	private final MapActivity mapActivity;
+	private OsmandSettings settings;
 
 	public MapActivityActions(MapActivity mapActivity){
 		this.mapActivity = mapActivity;
+		settings = mapActivity.getMyApplication().getSettings();
 	}
 
 	protected void addFavouritePoint(final double latitude, final double longitude){
@@ -220,7 +222,7 @@ public class MapActivityActions implements DialogProvider {
 				double longitude = args.getDouble(KEY_LONGITUDE);
 				String name = editText.getText().toString();
 				mapActivity.getSavingTrackHelper().insertPointData(latitude, longitude, System.currentTimeMillis(), name);
-				if(OsmandApplication.getSettings().SHOW_CURRENT_GPX_TRACK.get()) {
+				if(settings.SHOW_CURRENT_GPX_TRACK.get()) {
 					getMyApplication().getFavorites().addFavoritePointToGPXFile(new FavouritePoint(latitude, longitude, name, ""));
 				}
 				AccessibleToast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_waypoint_dialog_added), name), Toast.LENGTH_SHORT)
@@ -439,7 +441,6 @@ public class MapActivityActions implements DialogProvider {
     
     protected void getDirections(final double lat, final double lon, boolean followEnabled){
     	
-    	final OsmandSettings settings = OsmandApplication.getSettings();
     	final RoutingHelper routingHelper = mapActivity.getRoutingHelper();
     	
     	Builder builder = new AlertDialog.Builder(mapActivity);
@@ -571,7 +572,6 @@ public class MapActivityActions implements DialogProvider {
     public void navigateUsingGPX(final ApplicationMode appMode) {
 		final LatLon endForRouting = mapActivity.getPointToNavigate();
 		final MapActivityLayers mapLayers = mapActivity.getMapLayers();
-		final OsmandSettings settings = OsmandApplication.getSettings();
     	final RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 		mapLayers.selectGPXFileLayer(new CallbackWithObject<GPXFile>() {
 			

@@ -31,7 +31,7 @@ public class LiveMonitoringHelper  {
 
 	public LiveMonitoringHelper(Context ctx){
 		this.ctx = ctx;
-		settings = OsmandApplication.getSettings();
+		settings = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
 	}
 	
 	public boolean isLiveMonitoringEnabled(){

@@ -68,6 +68,7 @@ public class SearchActivity extends TabActivity {
 	private LocationListener locationListener = null;
 	private ArrayAdapter<String> spinnerAdapter;
 	private Spinner spinner;
+	private OsmandSettings settings;
 	
 	
 	public interface SearchActivityChild {
@@ -89,6 +90,7 @@ public class SearchActivity extends TabActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		setContentView(R.layout.search_main);
+		settings = ((OsmandApplication) getApplication()).getSettings();
 		
 		Button backButton = (Button) findViewById(R.id.search_back_button);
 		backButton.setOnClickListener(new View.OnClickListener() {
@@ -156,7 +158,6 @@ public class SearchActivity extends TabActivity {
 						searchAroundCurrentLocation = false;
 						endSearchCurrentLocation();
 						if (position == POSITION_LAST_MAP_VIEW) {
-							OsmandSettings settings = OsmandApplication.getSettings();
 							updateSearchPoint(settings.getLastKnownMapLocation(), getString(R.string.search_position_fixed), true);
 						} else if (position == POSITION_FAVORITES) {
 							Intent intent = new Intent(SearchActivity.this, FavouritesListActivity.class);
@@ -267,7 +268,7 @@ public class SearchActivity extends TabActivity {
 		}
 		
 		if(searchPoint == null){
-			LatLon last = OsmandApplication.getSettings().getLastKnownMapLocation();
+			LatLon last = settings.getLastKnownMapLocation();
 			if(!Algoritms.objectEquals(reqSearchPoint, last)){
 				reqSearchPoint = last;
 				updateSearchPoint(last, getString(R.string.search_position_fixed), true);
