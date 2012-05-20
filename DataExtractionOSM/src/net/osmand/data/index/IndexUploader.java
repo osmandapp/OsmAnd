@@ -376,7 +376,7 @@ public class IndexUploader {
 				raf = new RandomAccessFile(f, "r");
 				BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
 				if(reader.getVersion() != IndexConstants.BINARY_MAP_VERSION) {
-					throw new OneFileException("Uploader version is not compatible " + reader.getVersion() + " to current " + IndexConstants.BINARY_MAP_VERSION);
+					throw new OneFileException("Uploader version ("+IndexConstants.BINARY_MAP_VERSION+") is not compatible to file version " + reader.getVersion());
 				}
 				summary = " index for ";
 				boolean fir = true;
