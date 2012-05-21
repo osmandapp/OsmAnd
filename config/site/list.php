@@ -159,7 +159,7 @@ $d = $d*-1;
              "<th><A HREF=\"list.php?sortby=cmp_size&d=$d\">Size</A></th>".
              "<th><A HREF=\"list.php?sortby=cmp_description&d=$d\">Description</A></th></tr>";
 foreach ($a as $item) {
-      echo "<tr><td><A HREF=\"download.php?file=$item->file\">".$item->file."</A>".
+      echo "<tr><td><A HREF=\"/download.php?file=$item->file\">".$item->file."</A>".
            "</td><td>".$item->date.
            "</td><td>".$item->size.
            "</td><td>".$item->description.
