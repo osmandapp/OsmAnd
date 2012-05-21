@@ -180,19 +180,19 @@
 	<string name="osmand_service_descr">Für Verwendung von OsmAnd bei ausgeschalteter Anzeige</string>
 
 	<string name="tip_rotation_switching">Kartenrotation</string>
-	<string name="tip_rotation_switching_t">\tMan kann unter \'Einstellungen\' -> \'Kartendarstellung\' -> \'Kartenrotation\' wählen, in welche Richtung die Anzeige der Landkarte ausgerichtet werden soll.
+	<string name="tip_rotation_switching_t">\tSie können unter \'Einstellungen\' -> \'Kartendarstellung\' -> \'Kartenrotation\' wählen, in welche Richtung die Anzeige der Landkarte ausgerichtet werden soll.
 	\n\tZur Wahl stehen:
 	\n\t\'Keine Rotation\' - Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben
 	\n\t\'Nach Bewegungsrichtung\' - Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt
 	\n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt
 	\n\tTipp: Um schnell zwischen der Kompassnachführung und der in den Einstellungen gewählten Option zu wechseln, einfach auf die Kompassnadel in der Kartenansicht drücken.</string>
 
-	<string name="binary_map_download_success">Download erfolgreich.\n\t\n\tFür Verwendung aktivieren: \'Einstellungen\' -> \'Landkarten\' -> \'Offline-Vektor-Karten\'.</string>
+	<string name="binary_map_download_success">Download erfolgreich.\n\t\n\tAktivieren unter: \'Einstellungen\' -> \'Kartenkonfiguration\' -> \'Offline-Vektor-Karten\'</string>
 
 	<string name="tip_day_night_mode">Tag/Nacht Modus</string>
 	<string name="tip_day_night_mode_t">\tDie Anzeige von Offline-Vektor-Karten kann für einige Anzeigemodi zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden.
 	\n\tInsbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
-	\n\tDer Umschaltmechanismus kann in \'Einstellungen\' -> \'Landkarten\' -> \'Tag/Nacht Modus\' gewählt werden.
+	\n\tDer Umschaltmechanismus kann unter \'Einstellungen\' -> \'Anzeigenkonfiguration\' -> \'Tag/Nacht Modus\' geändert werden.
 	\n\tZur Auswahl stehen:
 	\n\t\'Sonnenaufgang/-untergang\' - automatischer Modus (Voreinstellung)
 	\n\t\'Tag\' - permanente Tagesansicht
@@ -200,12 +200,12 @@
 	\n\t\'Umgebungslicht-Sensor\' - automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden)</string>	
 
 	<string name="tip_osm_improve">OSM Bearbeitung</string>
-	<string name="tip_osm_improve_t">\tOsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM), und kann (neben Kartenanzeige und Navigation) auch zur Verbesserung der OSM-Daten verwendet werden. Man kann mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden.
-	\n\tDazu muss man zunächst unter \'Einstellungen\' -> \'Allgemein\' -> \'OSM\' seine OSM-Login-Daten hinterlegen.
-	\n\tUm einen neuen POI zu erzeugen, verwendet man die Option \'POI erstellen\' im Karten-Kontextmenu. Danach werden die Informationen zum POI eingetragen und über die Menüführung zu OSM hochgeladen.
-	\n\tGefundene Fehler auf den Karten kann man direkt berichten, und die OSM-Community kann diese schneller beheben.
-	\n\tOSM Fehlerberichte erstellt man mit dem Menü \'OSM Fehlerbericht einsenden\' im \'Karten-Kontextmenü\'.
-	\n\tFür alle OSM-Aktivitäten wird eine Internetverbindung benötigt.</string>
+	<string name="tip_osm_improve_t">\tOsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM), und kann (neben Kartenanzeige und Navigation) auch zur Verbesserung der OSM-Daten verwendet werden. Sie können mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden.
+	\n\tDazu müssen Sie zunächst unter \'Einstellungen\' -> \'Allgemein\' unter dem Menüpunkt 'OSM' Ihre OSM-Login-Daten hinterlegen.
+	\n\tEinen neuen POI erstellen Sie ganz einfach mittels \'POI erstellen\' im Karten-Kontextmenü. Anschließend die Informationen zum POI eintragen und über die Menüführung zu OSM hochladen. Fertig!
+	\n\tGefundene Fehler auf der Karte können direkt gemeldet werden.
+	\n\tOSM Fehlerberichte erstellen Sie mittels \'OSM Fehlerbericht einsenden\' im Karten-Kontextmenü.
+	\n\tAchtung: Für alle OSM-Aktivitäten wird eine Internetverbindung benötigt.</string>
 <!-- end of string changes for new menu structure -->
 
 	<string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
@@ -213,8 +213,8 @@
 	<string name="show_zoom_level_descr">Immer Zoom-Level statt Maßstab anzeigen.</string>
 	<string name="show_zoom_level">Zoom-Level zeigen</string>
 	<string name="tip_select_destination_point">Ziel wählen</string>
-	<string name="tip_select_destination_point_t">\tEin Ziel kann direkt in der Karte gewählt werden (via Kontextmenü, \'Als Ziel wählen\'), in allen Such-Funktionen, oder in der Favoritenliste via langes Drücken. 
-\n\tDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd in der Karte die Entfernung und die Richtung (oranges Dreieck).</string>
+	<string name="tip_select_destination_point_t">\tEin Ziel kann direkt in der Karte gewählt werden via Kontextmenü -> \'Als Ziel wählen\', aus der Such-Funktion heraus oder über die Favoritenliste durch langes Drücken. 
+\n\tDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd in der Karte die Entfernung und die Richtung (oranges Dreieck) an.</string>
 
 	<string name="tip_recent_changes_0_6_9_t">Änderungen in 0.6.9 :
 \n\t- Verbesserte Offline-Kartenanzeige
@@ -414,27 +414,27 @@
 	<string name="install_more">Weitere installieren …</string>
 
 	<string name="tip_update_index">Update der Offline-Daten</string>
-	<string name="tip_update_index_t">\tAktuelle Kartendaten sind natürlich wichtig. OsmAnd bietet einen Download-Manager, mit dem man die Verfügbarkeit neuerer Offline-Daten prüfen kann.
-	\n\tUpdates sucht man via \'Hauptmenü\' -> \'Einstellungen\' -> \'Offline-Vektor-Karten\' -> \'Offline-Daten herunterladen\'.
-	\n\tNachdem die Liste verfügbarer Offline-Daten geladen ist, kann auf Wunsch mit der Option \'Menü\' -> \'Filter Gespeicherte\' auf Updates eingegrenzt werden, zu denen auf dem Gerät bereits Vorgänger existieren.
+	<string name="tip_update_index_t">\tAktuelle Kartendaten sind natürlich wichtig. OsmAnd bietet einen Download-Manager, mit dem Sie die Verfügbarkeit neuerer Offline-Daten prüfen können.
+	\n\tUpdates finden Sie via \'Hauptmenü\' -> \'Einstellungen\' -> \'Offline-Daten\'.
+	\n\tNachdem die Liste verfügbarer Offline-Daten geladen wurde, kann auf Wunsch mit der Option \'Menü\' -> \'Filter Gespeicherte\' auf Updates eingegrenzt werden, zu denen auf dem Gerät bereits Vorgänger existieren.
 	\n\tAngezeigt werden verfügbare Updates nach dem folgenden Farbschema:
-	\n\t\'Grün\' - zeigt Übereinstimmung der Offline-Daten mit dem Server an
-	\n\t\'Blau\' - zeigt an, dass Offline-Daten über Server aktualisiert werden können</string>
+	\n\t\'Grün\' - Daten sind aktuell
+	\n\t\'Blau\' - neuere Version vorhanden</string>
 	
 	<string name="level_to_switch_vector_raster_descr">Minimaler Zoomlevel bis zu dem Offline-Vektor-Karten (statt Kacheln) verwendet werden sollen</string>
 	<string name="level_to_switch_vector_raster">Min. Vektor-Zoomlevel</string>
 
 	<string name="tip_location_sharing">Lokation mitteilen</string>
-	<string name="tip_location_sharing_t">\tWollen Sie eine interessante Lokation Freunden oder Familie mitteilen?
-	\n\tMit OsmAnd kann man jeden Aufenthaltsort leicht mit Anderen teilen.
-	\n\tDies geschieht im \'Karten-Kontextmenü\' via \'Lokation mitteilen\'.
-	\n\tDann wählt man einen Übertragungsweg, zur Wahl stehen: E-Mail, SMS, oder man kann einfach die Lokationskoordinaten in die Ablage (Clipboard) kopieren.</string>
+	<string name="tip_location_sharing_t">\tWollen Sie einen interessanten Ort Freunden oder Familie mitteilen?
+	\n\tMit OsmAnd kann jeder Aufenthaltsort leicht mit Anderen geteilt werden.
+	\n\tDazu einfach im Karten-Kontextmenü die Option \'Lokation mitteilen\' auswählen.
+	\n\tZur Auswahl stehen mehrere Übertragungswege: E-Mail, SMS, oder die Lokationskoordinaten einfach in die Ablage (Clipboard) kopieren.</string>
 
 	<string name="tip_favorites">Favoriten</string>
-	<string name="tip_favorites_t">\tOft verwendete Lokationen (Punkte) kann man als Favoriten speichern.
-	\n\tEinen Favoriten erstellt man im Karten-Kontextmenü mittels \'Als Favorit speichern\', und Angabe eines Namens dafür.
-	\n\t Favoriten sind leicht zugänglich über \'Hauptmenü\' -> \'Favoriten\'. Ein Kontextmenü für jeden Favoriten bietet dort \'Als Ziel wählen\', \'Bearbeiten\' oder \'Löschen\'.
-	\n\tUm alle Favoriten in der Karte anzuzeigen, wählt man \'Favoriten\' unter \'Karten-Kontextmenü\' -> \'Darstellung\'.</string>
+	<string name="tip_favorites_t">\tOrte, die Sie sich merken möchten, können Sie als Favoriten speichern.
+	\n\tEinen Favoriten erstellen Sie im Karten-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar.
+	\n\t Favoriten sind leicht zugänglich über \'Hauptmenü\' -> \'Favoriten\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Ziel wählen oder einfach nur auf der Karte anzeigen lassen.
+	\n\tSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' -> \'Darstellung\' einen Haken bei \'Favoriten\' setzen.</string>
 
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> Klassifizierung mit Bildern</string>
     <string name="error_doing_search">Fehler in der Offlinesuche aufgetreten</string>
@@ -446,24 +446,24 @@
 	<string name="preferred_locale">Anzeigesprache</string>
 
 	<string name="tip_map_switch">Kartenquelle</string>
-	<string name="tip_map_switch_t">\tDer schnellste Weg zum Wechseln der Kartenquelle ist via \'Menü\'-> \'Darstellung\' aus der Kartenansicht heraus.
-\n\tUnter \'Kartenquelle …\' kann man wählen zwischen vordefinierten Quellen für Online- oder Offline-Kacheln, Offline-Vektor-Karten, oder selbst auf dem PC (z.B. via OsmAndMapCreator) erstellten Karten.
+	<string name="tip_map_switch_t">\tDurch drücken auf den Globus in der Kartenansicht, können Sie schnell zwischen den Kartenquellen wechseln. Alternativ in der Kartenansicht via \'Menü\' -> \'Darstellung\' den Punkt 'Kartenquelle...' auswählen.
+\n\tSie können zwischen vordefinierten Quellen für Online- oder Offline-Kacheln, Offline-Vektor-Karten, oder selbst auf dem PC (z.B. via OsmAndMapCreator) erstellten Karten wählen.
 \n\tOsmAnd unterstützt auch selbst definierte Quellen.</string>
 
 	<string name="tip_app_mode">Nutzerprofile</string>
 	<string name="tip_app_mode_t">\tOsmAnd unterstützt verschiedene (individuell anpassbare) Profile für unterschiedliche Einsatzzwecke.
-\n\tDas Profil wechselt unter \'Menü\' -> \'Einstellungen\' -> \'Nutzerprofil\', oder auch beim Berechnen einer Route.</string>
+\n\tDas Profil kann unter \'Menü\' -> \'Einstellungen\' -> \'Nutzerprofil\' gewechselt werden, oder auch beim Berechnen einer Route.</string>
 
 	<string name="tip_navigation">Navigation</string>
-	<string name="tip_navigation_t">\tVor dem Starten der Navigationsfunktion ist ein Ziel zu wählen. Danach wählt man \'Menu\' -> \'Navigation\' in der Karte, und wählt den Navigationstyp.</string>
+	<string name="tip_navigation_t">\tVor dem Starten der Navigationsfunktion ist ein Ziel zu wählen. Anschließend kann mittels \'Menü\' -> \'Navigation\' das Navigations-Menü gestartet werden. Dort können Sie optional noch den Routing-Typ (Auto, Fahrrad, Fußgänger) ändern und schließlich die Route berechnen lassen.</string>
 
 	<string name="tip_search">Suchen</string>
-	<string name="tip_search_t">\tMan kann Orte direkt in der Karte suchen, oder über Adresse, Koordinaten, als POI, oder als abgespeicherter Favorit.
-\n\t\'Suche\' im Hauptmenü öffnet die Suchaktivitäten. Ein Kontextmenü für einen Treffer bietet 2 Optionen: \'Als Ziel wählen\' oder \'Zeige auf der Karte\'.</string>
+	<string name="tip_search_t">\tSie können Orte über Eingabe der Adresse, Angabe der Koordinaten, als POI, oder mittels Ihrer Favoriten suchen.
+\n\tUnter \'Suche\' im Hauptmenü finden Sie alle genannten Such-Möglichkeiten. Ein Kontextmenü für einen Treffer bietet zwei Optionen: \'Als Ziel wählen\' oder \'Auf Karte zeigen\'.</string>
 
 	<string name="tip_map_context_menu">Kontextmenü in der Karte</string>
 	<string name="tip_map_context_menu_t">\tDas Karten-Kontextmenü wird über ein langes Drücken auf einen Punkt in der Karte oder das Drücken des Trackball-Knopfes in der Kartenansicht aufgerufen.
-\n\tEs erscheint eine Koordinatenanzeige: Kurzes Drücken darauf öffnet das Kontextmenü (langes Drücken entfernt die Punktanzeige wieder).
+\n\tEs erscheint eine Koordinatenanzeige: Kurzes Drücken darauf öffnet das Kontextmenü, langes Drücken entfernt es wieder.
 \n\tDas Karten-Kontextmenü enthält alle Aktionen im Zusammenhang mit einem Kartenpunkt.</string>
 
 	<string name="tip_initial">Tipps und Tricks</string>
