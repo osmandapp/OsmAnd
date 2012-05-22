@@ -1,6 +1,5 @@
 package net.osmand.plus.activities;
 
-import gnu.trove.list.array.TIntArrayList;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -22,6 +21,8 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.data.AmenityType;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -246,68 +247,57 @@ public class MapActivityLayers {
 	}
 	
 	public void openLayerSelectionDialog(final OsmandMapTileView mapView){
-		
-		final TIntArrayList layers = new TIntArrayList();
-		final TIntArrayList selectedList = new TIntArrayList();
-		final TIntArrayList iconList = new TIntArrayList();
 		final OsmandSettings settings = getApplication().getSettings();
-		layers.add(R.string.layer_map);
-		iconList.add(R.drawable.list_activities_map_src);
-		selectedList.add(-1);
-		layers.add(R.string.layer_poi);
-		iconList.add(R.drawable.list_activities_poi);
-		selectedList.add(settings.SHOW_POI_OVER_MAP.get() ? 1 : 0);
-		if(settings.SHOW_POI_OVER_MAP.get()){
-			layers.add(R.string.layer_poi_label);
-			selectedList.add(settings.SHOW_POI_LABEL.get() ? 1 : 0);
-			iconList.add(0);
-		}
-		layers.add(R.string.layer_favorites);
-		iconList.add(R.drawable.list_activities_favorites);
-		selectedList.add(settings.SHOW_FAVORITES.get() ? 1 : 0);
-		layers.add(R.string.layer_gpx_layer);
-		selectedList.add(getApplication().getGpxFileToDisplay() != null ? 1 : 0);
-		iconList.add(R.drawable.list_activities_gpx_tracks);
+		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
+		adapter.registerSelectedItem(R.string.layer_map, -1, R.drawable.list_activities_map_src);
+		adapter.registerSelectedItem(R.string.layer_poi, settings.SHOW_POI_OVER_MAP.get() ? 1 : 0, 
+				R.drawable.list_activities_poi);
+		adapter.registerSelectedItem(R.string.layer_poi_label, settings.SHOW_POI_LABEL.get() ? 1 : 0, 
+				0);
+		adapter.registerSelectedItem(R.string.layer_favorites, settings.SHOW_FAVORITES.get() ? 1 : 0, 
+				R.drawable.list_activities_favorites);
+		adapter.registerSelectedItem(R.string.layer_gpx_layer, 
+				getApplication().getGpxFileToDisplay() != null ? 1 : 0,  R.drawable.list_activities_gpx_tracks);
 		if(routeInfoLayer.couldBeVisible()){
-			layers.add(R.string.layer_route);
-			selectedList.add(routeInfoLayer.isUserDefinedVisible() ? 1 : 0);
-			iconList.add(0);
+			adapter.registerSelectedItem(R.string.layer_route, 
+					routeInfoLayer.isUserDefinedVisible() ? 1 : 0,  0);
 		}
-		layers.add(R.string.layer_transport);
-		selectedList.add(settings.SHOW_TRANSPORT_OVER_MAP.get() ? 1 : 0);
-		iconList.add(R.drawable.list_activities_transport_stops);
+		adapter.registerSelectedItem(R.string.layer_transport, settings.SHOW_TRANSPORT_OVER_MAP.get() ? 1 : 0, 
+				R.drawable.list_activities_transport_stops);
 		if(TransportRouteHelper.getInstance().routeIsCalculated()){
-			layers.add(R.string.layer_transport_route);
-			selectedList.add(routeInfoLayer.isUserDefinedVisible() ? 1 : 0);
-			iconList.add(0);
+			adapter.registerSelectedItem(R.string.layer_transport_route, 
+					routeInfoLayer.isUserDefinedVisible() ? 1 : 0, 0);
 		}
-		layers.add(R.string.layer_osm_bugs);
-		selectedList.add(settings.SHOW_OSM_BUGS.get() ? 1 : 0);
-		iconList.add(R.drawable.list_activities_osm_bugs);
 		
-		layers.add(R.string.layer_overlay);
-		selectedList.add(overlayLayer.getMap() != null ? 1 : 0);
-		iconList.add(R.drawable.list_activities_overlay_map);
-		layers.add(R.string.layer_underlay);
-		selectedList.add(underlayLayer.getMap() != null ? 1 : 0);
-		iconList.add(R.drawable.list_activities_underlay_map);
+		
+		adapter.registerSelectedItem(R.string.layer_overlay, overlayLayer.getMap() != null ? 1 : 0, 
+				R.drawable.list_activities_overlay_map);
+		adapter.registerSelectedItem(R.string.layer_underlay, underlayLayer.getMap() != null ? 1 : 0, 
+				R.drawable.list_activities_underlay_map);
+		
+		OsmandPlugin.registerLayerContextMenu(mapView, adapter);
+		
 		
 		final OnMultiChoiceClickListener listener = new DialogInterface.OnMultiChoiceClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int item, boolean isChecked) {
-				if (layers.get(item) == R.string.layer_map) {
+				int itemId = adapter.getItemId(item);
+				OnContextMenuClick clck = adapter.getClickAdapter(item);
+				if(clck != null) {
+					clck.onContextMenuClick(itemId, item, isChecked);
+				} else if (itemId == R.string.layer_map) {
 					dialog.dismiss();
 					selectMapLayer(mapView);
-				} else if(layers.get(item) == R.string.layer_poi){
+				} else if(itemId == R.string.layer_poi){
 					if(isChecked){
 						selectPOIFilterLayer(mapView);
 					}
 					settings.SHOW_POI_OVER_MAP.set(isChecked);
-				} else if(layers.get(item) == R.string.layer_poi_label){
+				} else if(itemId == R.string.layer_poi_label){
 					settings.SHOW_POI_LABEL.set(isChecked);
-				} else if(layers.get(item) == R.string.layer_favorites){
+				} else if(itemId == R.string.layer_favorites){
 					settings.SHOW_FAVORITES.set(isChecked);
-				} else if(layers.get(item) == R.string.layer_gpx_layer){
+				} else if(itemId == R.string.layer_gpx_layer){
 					if(getApplication().getGpxFileToDisplay() != null){
 						getApplication().setGpxFileToDisplay(null, false);
 						gpxLayer.clearCurrentGPX();
@@ -315,15 +305,13 @@ public class MapActivityLayers {
 						dialog.dismiss();
 						showGPXFileLayer(mapView);
 					}
-				} else if(layers.get(item) == R.string.layer_route){
+				} else if(itemId == R.string.layer_route){
 					routeInfoLayer.setVisible(isChecked);
-				} else if(layers.get(item) == R.string.layer_transport_route){
+				} else if(itemId == R.string.layer_transport_route){
 					transportInfoLayer.setVisible(isChecked);
-				} else if(layers.get(item) == R.string.layer_transport){
+				} else if(itemId == R.string.layer_transport){
 					settings.SHOW_TRANSPORT_OVER_MAP.set(isChecked);
-				} else if(layers.get(item) == R.string.layer_osm_bugs){
-					settings.SHOW_OSM_BUGS.set(isChecked);
-				} else if(layers.get(item) == R.string.layer_overlay){
+				} else if(itemId == R.string.layer_overlay){
 					if(overlayLayer.getMap() != null){
 						settings.MAP_OVERLAY.set(null);
 						updateMapSource(mapView, null);
@@ -332,7 +320,7 @@ public class MapActivityLayers {
 						selectMapOverlayLayer(mapView, settings.MAP_OVERLAY, settings.MAP_OVERLAY_TRANSPARENCY, 
 								overlayLayer);
 					}
-				} else if(layers.get(item) == R.string.layer_underlay){
+				} else if(itemId == R.string.layer_underlay){
 					if(underlayLayer.getMap() != null){
 						settings.MAP_UNDERLAY.set(null);
 						updateMapSource(mapView, null);
@@ -351,31 +339,26 @@ public class MapActivityLayers {
 //		list.setBackgroundColor(white);
 		list.setCacheColorHint(activity.getResources().getColor(R.color.color_transparent));
 		b.setView(list);
-		final List<String> layerNames = new ArrayList<String>();
-		for (int i = 0; i < layers.size(); i++) {
-			layerNames.add(getString(layers.get(i)));
-
-		}
 		final AlertDialog dlg = b.create();
 		final int minWidth = activity.getResources().getDrawable(R.drawable.list_activities_favorites).getMinimumWidth();
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.layers_list_activity_item, 
-				layerNames) {
+		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(activity, R.layout.layers_list_activity_item, 
+				adapter.getItemNames()) {
 			@Override
 			public View getView(final int position, View convertView, ViewGroup parent) {
 				View row = activity.getLayoutInflater().inflate(R.layout.layers_list_activity_item, null);
-				((TextView) row.findViewById(R.id.title)).setText(layerNames.get(position));
-				if(iconList.get(position) != 0) {
-					Drawable d = activity.getResources().getDrawable(iconList.get(position));
+				((TextView) row.findViewById(R.id.title)).setText(adapter.getItemName(position));
+				if(adapter.getImageId(position) != 0) {
+					Drawable d = activity.getResources().getDrawable(adapter.getImageId(position));
 					((ImageView) row.findViewById(R.id.icon)).setImageDrawable(d);
 				} else {
 					LinearLayout.LayoutParams layoutParams = (android.widget.LinearLayout.LayoutParams) ((ImageView) row.findViewById(R.id.icon)).getLayoutParams();
 					layoutParams.leftMargin = minWidth;
 				}
 				final CheckBox ch = ((CheckBox) row.findViewById(R.id.check_item));
-				if(selectedList.get(position) == -1){
+				if(adapter.getSelection(position) == -1){
 					ch.setVisibility(View.INVISIBLE);
 				} else {
-					ch.setChecked(selectedList.get(position) > 0);
+					ch.setChecked(adapter.getSelection(position) > 0);
 					ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 						@Override
 						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -396,15 +379,15 @@ public class MapActivityLayers {
 				return row;
 			}
 		};
-		list.setAdapter(adapter);
+		list.setAdapter(arrayAdapter);
 		list.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if(selectedList.get(position) >= 0) {
+				if(adapter.getSelection(position) >= 0) {
 					CheckBox ch = ((CheckBox) view.findViewById(R.id.check_item));
 					ch.setChecked(!ch.isChecked());
 				} else {
-					listener.onClick(dlg, position, selectedList.get(position) > 0);
+					listener.onClick(dlg, position, adapter.getSelection(position) > 0);
 				}
 			}
 		});

@@ -11,18 +11,16 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.render.RenderingIcons;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -298,62 +296,46 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public boolean drawInScreenPixels() {
 		return true;
 	}
-
 	@Override
-	public OnClickListener getActionListener(List<String> actionsList, Object o) {
-		final Amenity a = (Amenity) o;
-		int ind = 0;
-		final int phoneIndex = a.getPhone() != null ? ind++ : -1;
-		final int siteIndex = a.getSite() != null ? ind++ : -1;
-		final int descriptionIndex = a.getDescription() != null ? ind++ : -1;
-		if(a.getDescription() != null){
-			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_showdescription));
-		}
-		if(a.getPhone() != null){
-			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_call));
-		}
-		if(a.getSite() != null){
-			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_website));
-		}
-		final OsmEditingPlugin editingPlugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
-		final int modifyInd = editingPlugin != null ? ind++ : -1;
-		final int deleteInd = editingPlugin != null ? ind++ : -1;
-		if (editingPlugin != null) {
-			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_modify));
-			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_delete));
-		}
-		
-		return new DialogInterface.OnClickListener(){
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				if (which == phoneIndex) {
-					try {
-						Intent intent = new Intent(Intent.ACTION_VIEW);
-						intent.setData(Uri.parse("tel:"+a.getPhone())); //$NON-NLS-1$
-						view.getContext().startActivity(intent);
-					} catch (RuntimeException e) {
-						log.error("Failed to invoke call", e); //$NON-NLS-1$
-						AccessibleToast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+	public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {
+		if(o instanceof Amenity) {
+			final Amenity a = (Amenity) o;
+			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked) {
+					if (itemId == R.string.poi_context_menu_call) {
+						try {
+							Intent intent = new Intent(Intent.ACTION_VIEW);
+							intent.setData(Uri.parse("tel:"+a.getPhone())); //$NON-NLS-1$
+							view.getContext().startActivity(intent);
+						} catch (RuntimeException e) {
+							log.error("Failed to invoke call", e); //$NON-NLS-1$
+							AccessibleToast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+						}
+					} else if (itemId == R.string.poi_context_menu_website) {
+						try {
+							Intent intent = new Intent(Intent.ACTION_VIEW);
+							intent.setData(Uri.parse(a.getSite())); 
+							view.getContext().startActivity(intent);
+						} catch (RuntimeException e) {
+							log.error("Failed to invoke call", e); //$NON-NLS-1$
+							AccessibleToast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+						}
+					} else if (itemId == R.string.poi_context_menu_showdescription) {
+						showDescriptionDialog(a);
 					}
-				} else if (which == siteIndex) {
-					try {
-						Intent intent = new Intent(Intent.ACTION_VIEW);
-						intent.setData(Uri.parse(a.getSite())); 
-						view.getContext().startActivity(intent);
-					} catch (RuntimeException e) {
-						log.error("Failed to invoke call", e); //$NON-NLS-1$
-						AccessibleToast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-					}
-				} else if (which == descriptionIndex) {
-					showDescriptionDialog(a);
-				} else if (which == modifyInd) {
-					editingPlugin.getPoiActions().showEditDialog(a);
-				} else if(which == deleteInd) {
-					editingPlugin.getPoiActions().showDeleteDialog(a);
-				} else {
 				}
+			};
+			if(a.getDescription() != null){
+				adapter.registerItem(R.string.poi_context_menu_showdescription, 0, listener, -1);
 			}
-		};
+			if(a.getPhone() != null){
+				adapter.registerItem(R.string.poi_context_menu_call, 0, listener, -1);
+			}
+			if(a.getSite() != null){
+				adapter.registerItem(R.string.poi_context_menu_website, 0, listener, -1);
+			}
+		}
 	}
 
 	private void showDescriptionDialog(Amenity a) {

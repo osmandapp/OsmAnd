@@ -9,7 +9,6 @@ import net.osmand.osm.LatLon;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.R;
 import android.content.Context;
-import android.content.DialogInterface.OnClickListener;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -124,12 +123,6 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 		return false;
 	}
 
-
-	@Override
-	public OnClickListener getActionListener(List<String> actionsList, Object o) {
-		return null;
-	}
-	
 
 	@Override
 	public String getObjectDescription(Object o) {

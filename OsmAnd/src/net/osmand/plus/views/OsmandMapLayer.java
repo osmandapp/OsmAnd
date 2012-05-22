@@ -1,5 +1,6 @@
 package net.osmand.plus.views;
 
+import net.osmand.plus.ContextMenuAdapter;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.RectF;
@@ -13,6 +14,8 @@ public abstract class OsmandMapLayer {
 	public abstract void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, DrawSettings settings);
 	
 	public abstract void destroyLayer();
+	
+	public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {}
 	
 	public boolean onSingleTap(PointF point) {
 		return false;

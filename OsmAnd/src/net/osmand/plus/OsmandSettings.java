@@ -4,9 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.StringTokenizer;
 
 import net.osmand.Version;
 import net.osmand.access.AccessibilityMode;
@@ -73,21 +77,18 @@ public class OsmandSettings {
 	private boolean internetConnectionAvailable = true;
 	private List<TileSourceTemplate> internetAvailableSourceTemplates = null;
 	
-	// TODO make all layers profile preferenced????
 	protected OsmandSettings(OsmandApplication application) {
 		ctx = application;
-		
-		//TODO: Is it really intended to keep settings WORLD_READABLE?
+
+		// TODO: Is it really intended to keep settings WORLD_READABLE?
 		globalPreferences = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		// start from default settings
 		currentMode = ApplicationMode.DEFAULT;
-		
+
 		defaultProfilePreferences = getProfilePreferences(ApplicationMode.DEFAULT);
 		profilePreferences = defaultProfilePreferences;
-//		if(FOLLOW_TO_THE_ROUTE.get()){
-			currentMode = readApplicationMode();
-			profilePreferences = getProfilePreferences(currentMode);
-//		}
+		currentMode = readApplicationMode();
+		profilePreferences = getProfilePreferences(currentMode);
 	}
 	
 	public static String getSharedPreferencesName(ApplicationMode mode){
@@ -425,6 +426,39 @@ public class OsmandSettings {
 		}
 
 	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	private final OsmandPreference<String> ENABLED_PLUGINS = 
+		new StringPreference("enabled_plugins", "", true);
+	
+	public Set<String> getEnabledPlugins(){
+		String plugs = ENABLED_PLUGINS.get();
+		StringTokenizer toks = new StringTokenizer(plugs, ",");
+		Set<String> res = new LinkedHashSet<String>();
+		while(toks.hasMoreTokens()) {
+			res.add(toks.nextToken());
+		}
+		return res;
+	}
+	
+	public void enablePlugin(String pluginId, boolean enable){
+		Set<String> set = getEnabledPlugins();
+		if(enable){
+			set.add(pluginId);
+		} else {
+			set.remove(pluginId);
+		}
+		StringBuilder serialization = new StringBuilder();
+		Iterator<String> it = set.iterator();
+		while(it.hasNext()){
+			serialization.append(it.next());
+			if(it.hasNext()) {
+				serialization.append(",");
+			}
+		}
+		ENABLED_PLUGINS.set(serialization.toString());
+	}
+	
 	/////////////// PREFERENCES classes ////////////////
 	
 	// this value string is synchronized with settings_pref.xml preference name

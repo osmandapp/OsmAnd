@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0 :
+\n\t- Plugin functionality
+\n\t- New offline map data support
+\n\t- Lots of bug fixes
+	</string>
+    <string name="osm_editing_plugin_description">This plugin is intented to improve OSM quality. It allows to collect/modify OSM POI objects, open/comment OSM bugs and send recorded GPX  (requires OSM credentials).</string>
+    <string name="osm_editing_plugin_name">Osm Editing</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vector maps may display faster. May not work well on some devices.</string>
 	<string name="simulate_route_progression_manually">Simulate route progression manually</string>
 	<string name="play_commands_of_currently_selected_voice">Play commands of currently selected voice</string>

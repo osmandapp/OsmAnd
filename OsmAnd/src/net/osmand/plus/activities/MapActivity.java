@@ -19,6 +19,7 @@ import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.BusyIndicator;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -316,6 +317,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			getMyApplication().getResourceManager().setBusyIndicator(new BusyIndicator(this, progress));
 		}
 
+		OsmandPlugin.onMapActivityResume(this);
 		getMyApplication().getDaynightHelper().onMapResume();
 		mapView.refreshMap(true);
 	}
@@ -650,6 +652,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		OsmandPlugin.onMapActivityDestroy(this);
 		savingTrackHelper.close();
 		routeAnimation.close();
 		cancelNotification();
@@ -981,6 +984,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		settings.MAP_ACTIVITY_ENABLED.set(false);
 		getMyApplication().getResourceManager().interruptRendering();
 		getMyApplication().getResourceManager().setBusyIndicator(null);
+		OsmandPlugin.onMapActivityPause(this);
 	}
 	
 	public void updateApplicationModeSettings(){
@@ -1315,9 +1319,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		mapActions.contextMenuPoint(latitude, longitude, null, null);
 	}
 	
-	public void contextMenuPoint(final double latitude, final double longitude, List<String> additionalItems, 
-			final DialogInterface.OnClickListener additionalActions) {
-		mapActions.contextMenuPoint(latitude, longitude, additionalItems, additionalActions);
+	public void contextMenuPoint(final double latitude, final double longitude, ContextMenuAdapter adapter, Object selectedObj) {
+		mapActions.contextMenuPoint(latitude, longitude, adapter, selectedObj);
 	}
 	
 	public MapActivityActions getMapActions() {

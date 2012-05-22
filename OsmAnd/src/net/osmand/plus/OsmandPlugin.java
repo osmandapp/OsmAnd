@@ -1,9 +1,9 @@
 package net.osmand.plus;
 
-import gnu.trove.list.array.TIntArrayList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
@@ -11,27 +11,22 @@ import net.osmand.plus.views.OsmandMapTileView;
 
 public abstract class OsmandPlugin {
 	
-	private static List<OsmandPlugin> plugins = new ArrayList<OsmandPlugin>();  
+	private static List<OsmandPlugin> installedPlugins = new ArrayList<OsmandPlugin>();  
+	private static List<OsmandPlugin> activePlugins = new ArrayList<OsmandPlugin>();
 	static {
-		plugins.add(new OsmEditingPlugin());
-	}
-	
-	public static List<OsmandPlugin> getAvailablePlugins(){
-		return plugins;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public static <T extends OsmandPlugin> T getEnabledPlugin(Class<T> clz) {
-		for(OsmandPlugin lr : plugins) {
-			if(clz.isInstance(lr)){
-				return (T) lr;
-			}
-		}
-		return null;
+		installedPlugins.add(new OsmEditingPlugin());
 	}
 	
 	
 	public abstract String getId();
+	
+	public abstract String getDescription();
+	
+	public abstract String getName();
+	
+	public String getVersion() {
+		return "";
+	}
 	
 	/**
 	 * Initialize plugin runs just after creation
@@ -40,8 +35,14 @@ public abstract class OsmandPlugin {
 	
 	
 	public static void initPlugins(OsmandApplication app) {
-		for (OsmandPlugin plugin : plugins) {
-			plugin.init(app);
+		OsmandSettings settings = app.getSettings();
+		Set<String> enabledPlugins = settings.getEnabledPlugins();
+		for (OsmandPlugin plugin : installedPlugins) {
+			if (enabledPlugins.contains(plugin.getId())) {
+				if (plugin.init(app)) {
+					activePlugins.add(plugin);
+				}
+			}
 		}
 	}
 	
@@ -51,7 +52,7 @@ public abstract class OsmandPlugin {
 	public abstract void updateLayers(OsmandMapTileView mapView);
 	
 	public static void refreshLayers(OsmandMapTileView mapView) {
-		for (OsmandPlugin plugin : plugins) {
+		for (OsmandPlugin plugin : activePlugins) {
 			plugin.updateLayers(mapView);
 		}
 	}
@@ -59,36 +60,77 @@ public abstract class OsmandPlugin {
 	
 	public abstract void registerLayers(MapActivity activity);
 
-	public static void createLayers(OsmandMapTileView mapView, MapActivity activity) {
-		for (OsmandPlugin plugin : plugins) {
-			plugin.registerLayers(activity);
-		}
+	public void mapActivityCreate(MapActivity activity) { }
+	
+	public void mapActivityResume(MapActivity activity) { }
+	
+	public void mapActivityPause(MapActivity activity) { }
+	
+	public void mapActivityDestroy(MapActivity activity) { }
+	
+	
+	public abstract void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter);
+	
+	public abstract void registerMapContextMenuActions(MapActivity mapActivity, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj);
+	
+	public static List<OsmandPlugin> getAvailablePlugins(){
+		return installedPlugins;
 	}
 	
-	public abstract void mapActivityCreate(MapActivity activity);
-
+	public static List<OsmandPlugin> getEnabledPlugins(){
+		return activePlugins;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T extends OsmandPlugin> T getEnabledPlugin(Class<T> clz) {
+		for(OsmandPlugin lr : activePlugins) {
+			if(clz.isInstance(lr)){
+				return (T) lr;
+			}
+		}
+		return null;
+	}
+	
 	public static void onMapActivityCreate(MapActivity activity) {
-		for (OsmandPlugin plugin : plugins) {
+		for (OsmandPlugin plugin : activePlugins) {
 			plugin.mapActivityCreate(activity);
 		}
 	}
 	
-	public abstract boolean handleContextMenuAction(int resId, double latitude, double longitude);
-	
-	public abstract void registerContextMenuActions(double latitude, double longitude, TIntArrayList list);
-	
-	public static void registerContextMenu(double latitude, double longitude, TIntArrayList list) {
-		for (OsmandPlugin plugin : plugins) {
-			plugin.registerContextMenuActions(latitude, longitude, list);
+	public static void onMapActivityResume(MapActivity activity) {
+		for (OsmandPlugin plugin : activePlugins) {
+			plugin.mapActivityResume(activity);
 		}
 	}
 	
-	public static boolean contextMenuAction(int resId, double latitude, double longitude) {
-		for (OsmandPlugin plugin : plugins) {
-			if(plugin.handleContextMenuAction(resId, latitude, longitude)){
-				return true;
-			}
+	public static void onMapActivityPause(MapActivity activity) {
+		for (OsmandPlugin plugin : activePlugins) {
+			plugin.mapActivityPause(activity);
 		}
-		return false;
+	}
+	
+	public static void onMapActivityDestroy(MapActivity activity) {
+		for (OsmandPlugin plugin : activePlugins) {
+			plugin.mapActivityDestroy(activity);
+		}
+	}
+	
+	
+	public static void createLayers(OsmandMapTileView mapView, MapActivity activity) {
+		for (OsmandPlugin plugin : activePlugins) {
+			plugin.registerLayers(activity);
+		}
+	}
+	
+	public static void registerMapContextMenu(MapActivity map, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj) {
+		for (OsmandPlugin plugin : activePlugins) {
+			plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
+		}
+	}
+
+	public static void registerLayerContextMenu(OsmandMapTileView mapView, ContextMenuAdapter adapter) {
+		for (OsmandPlugin plugin : activePlugins) {
+			plugin.registerLayerContextMenuActions(mapView, adapter);
+		}
 	}
 }

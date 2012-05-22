@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.osm.LatLon;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import android.app.AlertDialog;
@@ -37,7 +38,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		
 		public String getObjectName(Object o);
 		
-		public DialogInterface.OnClickListener getActionListener(List<String> actionsList, Object o);
 	}
 
 	private LatLon latLon;
@@ -284,6 +284,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	private void showContextMenuForSelectedObjects() {
+		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter(activity);
 		if(selectedObjects.size() > 1){
 			Builder builder = new AlertDialog.Builder(view.getContext());
 			String[] d = new String[selectedObjects.size()];
@@ -294,21 +295,22 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			builder.setItems(d, new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					// single selection at 0
-					selectedObjects.set(0, selectedObjects.get(which));
-					ArrayList<String> l = new ArrayList<String>();
-					OnClickListener listener = selectedContextProvider.getActionListener(l, selectedObjects.get(0));
-					activity.contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), l, listener);
+					Object selectedObj = selectedObjects.get(which);
+					for(OsmandMapLayer layer : view.getLayers()) {
+						layer.populateObjectContextMenu(selectedObj, menuAdapter);
+					}
+					activity.contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), menuAdapter, selectedObj);
 				}
 			});
 			builder.show();
 		} else {
-			ArrayList<String> l = new ArrayList<String>();
-			OnClickListener listener = selectedContextProvider.getActionListener(l, selectedObjects.get(0));
-			activity.contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), l, listener);
+			Object selectedObj = selectedObjects.get(0);
+			for(OsmandMapLayer layer : view.getLayers()) {
+				layer.populateObjectContextMenu(selectedObj, menuAdapter);
+			}
+			activity.contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), menuAdapter, selectedObj);
 		}
 	}
-
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {

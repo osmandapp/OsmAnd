@@ -1,6 +1,5 @@
 package net.osmand.plus.activities;
 
-import gnu.trove.list.array.TIntArrayList;
 
 import java.io.File;
 import java.text.MessageFormat;
@@ -22,6 +21,8 @@ import net.osmand.map.ITileSource;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -715,40 +716,32 @@ public class MapActivityActions implements DialogProvider {
 		
 	}
 	
-	public void contextMenuPoint(final double latitude, final double longitude, List<String> additionalItems, 
-			final DialogInterface.OnClickListener additionalActions) {
+	public void contextMenuPoint(final double latitude, final double longitude, final ContextMenuAdapter iadapter, Object selectedObj) {
+		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter(mapActivity) : iadapter;  
 		Builder builder = new AlertDialog.Builder(mapActivity);
-		final int sizeAdditional = additionalActions == null || additionalItems == null ? 0 : additionalItems.size();
-		List<String> actions = new ArrayList<String>();
-		if (sizeAdditional > 0) {
-			actions.addAll(additionalItems);
-		}
 		final OsmandMapTileView mapView = mapActivity.getMapView();
-		final TIntArrayList contextMenuStandardActions = new TIntArrayList();
-		contextMenuStandardActions.add(new int[] { R.string.context_menu_item_navigate_point,
-				R.string.context_menu_item_show_route, R.string.context_menu_item_search, R.string.context_menu_item_add_favorite,
-				R.string.context_menu_item_share_location, R.string.context_menu_item_add_waypoint});
-		OsmandPlugin.registerContextMenu(latitude, longitude, contextMenuStandardActions);
-		if(mapView.getMainLayer() instanceof MapTileLayer) {
-			contextMenuStandardActions.add(R.string.context_menu_item_update_map);
-			contextMenuStandardActions.add(R.string.context_menu_item_download_map);
+		
+		adapter.registerItem(R.string.context_menu_item_navigate_point);
+		adapter.registerItem(R.string.context_menu_item_show_route);
+		adapter.registerItem(R.string.context_menu_item_search);
+		adapter.registerItem(R.string.context_menu_item_add_favorite);
+		adapter.registerItem(R.string.context_menu_item_share_location);
+		adapter.registerItem(R.string.context_menu_item_add_waypoint);
+		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
+		
+		if (mapView.getMainLayer() instanceof MapTileLayer) {
+			adapter.registerItem(R.string.context_menu_item_update_map);
+			adapter.registerItem(R.string.context_menu_item_download_map);
 		}
 		
-		for (int j = 0; j < contextMenuStandardActions.size(); j++) {
-			actions.add(mapActivity.getString(contextMenuStandardActions.get(j)));
-		}
-
-		builder.setItems(actions.toArray(new String[actions.size()]), new DialogInterface.OnClickListener() {
+		builder.setItems(adapter.getItemNames(), new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if (which < sizeAdditional) {
-					additionalActions.onClick(dialog, which);
-					return;
-				}
-				int standardId = contextMenuStandardActions.get(which - sizeAdditional);
-				if(OsmandPlugin.contextMenuAction(standardId, latitude, longitude)) {
-					// Plugin action
+				int standardId = adapter.getItemId(which );
+				OnContextMenuClick click = adapter.getClickAdapter(which);
+				if(click != null) {
+					click.onContextMenuClick(standardId, which, false);
 				} else if (standardId == R.string.context_menu_item_navigate_point) {
 					mapActivity.navigateToPoint(new LatLon(latitude, longitude));
 				} else if (standardId == R.string.context_menu_item_show_route) {

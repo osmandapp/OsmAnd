@@ -1,6 +1,8 @@
 package net.osmand.plus.osmedit;
 
-import gnu.trove.list.array.TIntArrayList;
+import net.osmand.data.Amenity;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -9,8 +11,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 
 public class OsmEditingPlugin extends OsmandPlugin {
-	private static final String ID = "osm.editing.plugin";
+	private static final String ID = "osm.editing";
 	private OsmandSettings settings;
+	private OsmandApplication app;
 	
 	@Override
 	public String getId() {
@@ -19,6 +22,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	
 	@Override
 	public boolean init(OsmandApplication app) {
+		this.app = app;
 		settings = app.getSettings();
 		return true;
 	}
@@ -53,23 +57,65 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public EditingPOIActivity getPoiActions() {
 		return poiActions;
 	}
-
+	
 	@Override
-	public boolean handleContextMenuAction(int resId, final double latitude, final double longitude) {
-		if (resId == R.string.context_menu_item_create_poi) {
-			poiActions.showCreateDialog(latitude, longitude);
-			return true;
-		} else if (resId == R.string.context_menu_item_open_bug) {
-			osmBugsLayer.openBug(latitude, longitude);
-			return true;
+	public void registerMapContextMenuActions(MapActivity mapActivity, final double latitude, final double longitude, ContextMenuAdapter adapter,
+			Object selectedObj) {
+		if(selectedObj instanceof Amenity) {
+			final Amenity a = (Amenity) selectedObj;
+			OnContextMenuClick alist = new OnContextMenuClick() {
+				
+				@Override
+				public void onContextMenuClick(int resId, int pos, boolean isChecked) {
+					if (resId == R.string.poi_context_menu_delete) {
+						getPoiActions().showDeleteDialog(a);
+					} else if (resId == R.string.poi_context_menu_modify) {
+						getPoiActions().showEditDialog(a);
+					}
+				}
+			};
+			adapter.registerItem(R.string.poi_context_menu_modify, 0, alist, 1);
+			adapter.registerItem(R.string.poi_context_menu_delete, 0, alist, 2);
 		}
-		return false;
+		OnContextMenuClick listener = new OnContextMenuClick() {
+			
+			@Override
+			public void onContextMenuClick(int resId, int pos, boolean isChecked) {
+				if (resId == R.string.context_menu_item_create_poi) {
+					poiActions.showCreateDialog(latitude, longitude);
+				} else if (resId == R.string.context_menu_item_open_bug) {
+					osmBugsLayer.openBug(latitude, longitude);
+				}
+			}
+		};
+		adapter.registerItem(R.string.context_menu_item_create_poi, 0, listener, -1);
+		adapter.registerItem(R.string.context_menu_item_open_bug, 0, listener, -1);
 	}
 
 	@Override
-	public void registerContextMenuActions(double latitude, double longitude, TIntArrayList list) {
-		list.add(R.string.context_menu_item_create_poi);
-		list.add(R.string.context_menu_item_open_bug);
+	public void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter) {
+		adapter.registerSelectedItem(R.string.layer_osm_bugs, settings.SHOW_OSM_BUGS.get() ? 1 : 0, R.drawable.list_activities_osm_bugs,
+				new OnContextMenuClick() {
+
+					@Override
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked) {
+						if (itemId == R.string.layer_osm_bugs) {
+							settings.SHOW_OSM_BUGS.set(isChecked);
+						}
+
+					}
+				}, 5);
+
+	}
+
+	@Override
+	public String getDescription() {
+		return app.getString(R.string.osm_editing_plugin_description);
+	}
+
+	@Override
+	public String getName() {
+		return app.getString(R.string.osm_editing_plugin_name);
 	}
 
 }

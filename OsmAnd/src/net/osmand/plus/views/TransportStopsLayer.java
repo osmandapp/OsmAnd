@@ -9,7 +9,6 @@ import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.TransportIndexRepository;
 import android.content.Context;
-import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
@@ -155,12 +154,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	public boolean onLongPressEvent(PointF point) {
 		return false;
 	}
-
-	@Override
-	public OnClickListener getActionListener(List<String> actionsList, Object o) {
-		return null;
-	}
-
 
 	@Override
 	public String getObjectDescription(Object o) {

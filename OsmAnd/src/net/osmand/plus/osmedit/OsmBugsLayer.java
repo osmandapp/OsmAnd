@@ -16,14 +16,14 @@ import java.util.regex.Pattern;
 import net.osmand.LogUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.osm.LatLon;
-import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DialogProvider;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.OsmandMapLayer;
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
@@ -33,7 +33,6 @@ import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
@@ -451,25 +450,26 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		return builder.create();
 	}
 	
-	
 	@Override
-	public OnClickListener getActionListener(List<String> actionsList, Object o) {
-		final OpenStreetBug bug = (OpenStreetBug) o;
-		actionsList.add(activity.getString(R.string.osb_comment_menu_item));
-		actionsList.add(activity.getString(R.string.osb_close_menu_item));
-		return new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				if (which == 0) {
-					commentBug(bug);
-				} else if (which == 1) {
-					closeBug(bug);
+	public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {
+		if(o instanceof OpenStreetBug) {
+			final OpenStreetBug bug = (OpenStreetBug) o;
+			OnContextMenuClick listener = new OnContextMenuClick() {
+				
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked) {
+					if (itemId == R.string.osb_comment_menu_item) {
+						commentBug(bug);
+					} else if (itemId == R.string.osb_close_menu_item) {
+						closeBug(bug);
+					}
 				}
-			}
-		};
+			};
+			adapter.registerItem(R.string.osb_comment_menu_item, 0, listener, -1);
+			adapter.registerItem(R.string.osb_close_menu_item, 0, listener, -1);
+		}
 	}
-
-
+	
 	@Override
 	public String getObjectDescription(Object o) {
 		if(o instanceof OpenStreetBug){
