@@ -86,9 +86,9 @@ public class PluginsActivity extends OsmandListActivity {
 			description.setText(plugin.getDescription());
 			boolean enabled = enabledPlugins.contains(plugin.getId());
 			boolean toBeEnabled = restartPlugins.contains(plugin.getId());
-			description.setTextColor(toBeEnabled? colorGreen : Color.GRAY);
-			nameView.setTextColor(toBeEnabled? colorGreen : Color.GRAY);
-			description.setTypeface(enabled? Typeface.DEFAULT_BOLD : Typeface.DEFAULT);
+			description.setTextColor(toBeEnabled? colorGreen : (enabled? Color.LTGRAY : Color.GRAY));
+			nameView.setTextColor(toBeEnabled? colorGreen : (enabled? Color.LTGRAY : Color.GRAY));
+//			description.setTypeface(enabled? Typeface.DEFAULT_BOLD : Typeface.DEFAULT);
 			nameView.setTypeface(enabled? Typeface.DEFAULT_BOLD : Typeface.DEFAULT);
 
 			return row;
