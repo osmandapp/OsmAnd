@@ -58,8 +58,6 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
-import android.util.AttributeSet;
-import android.view.View;
 import android.widget.Toast;
 
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
@@ -75,6 +73,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private Preference testVoiceCommands;
 	private Preference localOpenstreetmapPoints;
 	private Preference bidforfix;
+	private Preference plugins;
 
 	private EditTextPreference applicationDir;
 	private ListPreference applicationModePreference;
@@ -379,6 +378,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		localOpenstreetmapPoints.setOnPreferenceClickListener(this);
 		bidforfix = (Preference) screen.findPreference("bidforfix");
 		bidforfix.setOnPreferenceClickListener(this);
+		plugins = (Preference) screen.findPreference("plugins");
+		plugins.setOnPreferenceClickListener(this);
 		
 		broadcastReceiver = new BroadcastReceiver(){
 			@Override
@@ -864,6 +865,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			return true;
 		} else if(preference == bidforfix){
 			startActivity(new Intent(this, OsmandBidForFixActivity.class));
+			return true;
+		} else if(preference == plugins){
+			startActivity(new Intent(this, PluginsActivity.class));
 			return true;
 		}
 		return false;

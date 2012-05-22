@@ -60,6 +60,7 @@ public class ContextMenuAdapter {
 		itemNames.add(pos, ctx.getString(stringResId));
 		selectedList.insert(pos, selected);
 		iconList.insert(pos, icon);
+		listeners.add(listener);
 	}
 	
 	public void registerSelectedItem(int stringResId, int selected, int icon) {

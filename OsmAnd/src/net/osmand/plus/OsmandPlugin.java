@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+
+import net.osmand.LogUtil;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -13,9 +16,7 @@ public abstract class OsmandPlugin {
 	
 	private static List<OsmandPlugin> installedPlugins = new ArrayList<OsmandPlugin>();  
 	private static List<OsmandPlugin> activePlugins = new ArrayList<OsmandPlugin>();
-	static {
-		installedPlugins.add(new OsmEditingPlugin());
-	}
+	private static final Log LOG = LogUtil.getLog(OsmandPlugin.class);
 	
 	
 	public abstract String getId();
@@ -36,11 +37,16 @@ public abstract class OsmandPlugin {
 	
 	public static void initPlugins(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
+		installedPlugins.add(new OsmEditingPlugin(app));
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
 		for (OsmandPlugin plugin : installedPlugins) {
 			if (enabledPlugins.contains(plugin.getId())) {
-				if (plugin.init(app)) {
-					activePlugins.add(plugin);
+				try {
+					if (plugin.init(app)) {
+						activePlugins.add(plugin);
+					}
+				} catch (Exception e) {
+					LOG.error("Plugin initialization failed " + plugin.getId(), e);
 				}
 			}
 		}

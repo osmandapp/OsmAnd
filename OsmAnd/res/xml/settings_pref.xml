@@ -119,6 +119,8 @@
 			<Preference android:key="test_voice_commands" android:summary="@string/play_commands_of_currently_selected_voice" android:title="@string/test_voice_prompts"></Preference>
 		</PreferenceCategory>
 	</PreferenceScreen>
+	
+	<Preference android:title="@string/prefs_plugins" android:summary="@string/prefs_plugins_descr" android:key="plugins"/>
 
 	<PreferenceScreen android:title="@string/osmand_service" android:summary="@string/osmand_service_descr">
 		<CheckBoxPreference android:summary="@string/background_router_service_descr" android:title="@string/background_router_service"

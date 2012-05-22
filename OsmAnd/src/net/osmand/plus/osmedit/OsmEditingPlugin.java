@@ -20,9 +20,12 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return ID;
 	}
 	
+	public OsmEditingPlugin(OsmandApplication app) {
+		this.app = app;
+	}
+	
 	@Override
 	public boolean init(OsmandApplication app) {
-		this.app = app;
 		settings = app.getSettings();
 		return true;
 	}
