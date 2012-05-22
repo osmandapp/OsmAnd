@@ -14,7 +14,6 @@
 \n\t- Toegankelijkheidsopties
 \n\t- Veel bugs opgelost
 	</string>
-	
     <string name="send_files_to_osm">GPX bestanden naar OSM sturen?</string>
     <string name="gpx_visibility_txt">Zichtbaarheid</string>
     <string name="gpx_tags_txt">Tags</string>
@@ -89,6 +88,7 @@
 	<string name="use_fluorescent_overlays_descr">Gebruik fluoriserende kleuren voor de weergave van tracks and routes</string>
 	<string name="offline_poi_edition">Offline interessepunt-bewerking</string>
 	<string name="offline_poi_edition_descr">Gebruik altijd offline interessepunt-bewerking</string>
+	
 	<string name="tip_recent_changes_0_7_1_t">Wijzigingen in 0.7.1 :
 \n\t- Offline bewerken van interessepunten 
 \n\t- Live Tracking optie - zend coordinaten naar web service (lees voor het opzetten van je eigen webservice de HowTo Artikelen)
@@ -137,8 +137,8 @@
 	<string name="index_name_germany">Europa - Duitsland</string>
 	<string name="index_name_russia">Europa/Azi렭 Rusland</string>
 	<string name="index_name_africa">Afrika</string>
-	<string name="index_name_asia">Azi뼯string>
-	<string name="index_name_oceania">Oceani뼯string>
+	<string name="index_name_asia">Azi뼯</string>
+	<string name="index_name_oceania">Oceani뼯</string>
 	<string name="index_name_other">Wereldkaart en topografische kaart</string>
 	<string name="index_name_wiki">Wereldwijde Wikipedia</string>
 	<string name="index_name_voice">Stembestanden (opnamen)</string>
@@ -177,7 +177,6 @@
 	\n\t\'In de beweegrichting\' - de kaart wordt permanent aangepast aan uw beweegrichting
 	\n\t\'Naar kompas\' - de kaartkanteling wordt permanent aangepast aan de ingebouwde kompas
 	\n\tHint: Om snel te wisslen van rotatie-instelling, toets de kompasnaald in het kaartscherm.</string>
-	<string name="switch_to_raster_map_to_see">Geen offline vectorkaart aanwezig voor deze locatie.\n\t\n\tU kunt deze downloaden in \'Instellingen\' -> \'Offline gegevens\', of schakel om naar online kaarten via \'Instellingen\' -> \'Kaart configuratie\'.</string>
 	<string name="binary_map_download_success">Download succesvol.\n\t\n\tOm te gebruiken \'Instellingen\' -> \'Kaart configuratie\' -> \'Offline vector kaarten\'.</string>
 	<string name="tip_day_night_mode">Dag/Nacht Modus</string>
 	<string name="tip_day_night_mode_t">\tDe kaartweegave kan voor sommige vectorkaarten worden ingesteld op dag (helderder) en nacht (donkerder).
@@ -356,7 +355,6 @@
 \n\t- GPX routing options
 \n\t- UI actualisatie and large bug fixing
 	</string>
-	
 <!-- End: this block not translated, is obsolete -->
 	<string name="voice_not_use">Niet gebruiken</string>
 	<string name="voice_not_specified">Niet gespecificeerd</string>

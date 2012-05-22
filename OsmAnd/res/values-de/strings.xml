@@ -201,7 +201,7 @@
 
 	<string name="tip_osm_improve">OSM Bearbeitung</string>
 	<string name="tip_osm_improve_t">\tOsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM), und kann (neben Kartenanzeige und Navigation) auch zur Verbesserung der OSM-Daten verwendet werden. Sie können mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden.
-	\n\tDazu müssen Sie zunächst unter \'Einstellungen\' -> \'Allgemein\' unter dem Menüpunkt 'OSM' Ihre OSM-Login-Daten hinterlegen.
+	\n\tDazu müssen Sie zunächst unter \'Einstellungen\' -> \'Allgemein\' unter dem Menüpunkt \'OSM\' Ihre OSM-Login-Daten hinterlegen.
 	\n\tEinen neuen POI erstellen Sie ganz einfach mittels \'POI erstellen\' im Karten-Kontextmenü. Anschließend die Informationen zum POI eintragen und über die Menüführung zu OSM hochladen. Fertig!
 	\n\tGefundene Fehler auf der Karte können direkt gemeldet werden.
 	\n\tOSM Fehlerberichte erstellen Sie mittels \'OSM Fehlerbericht einsenden\' im Karten-Kontextmenü.
@@ -446,7 +446,7 @@
 	<string name="preferred_locale">Anzeigesprache</string>
 
 	<string name="tip_map_switch">Kartenquelle</string>
-	<string name="tip_map_switch_t">\tDurch drücken auf den Globus in der Kartenansicht, können Sie schnell zwischen den Kartenquellen wechseln. Alternativ in der Kartenansicht via \'Menü\' -> \'Darstellung\' den Punkt 'Kartenquelle...' auswählen.
+	<string name="tip_map_switch_t">\tDurch drücken auf den Globus in der Kartenansicht, können Sie schnell zwischen den Kartenquellen wechseln. Alternativ in der Kartenansicht via \'Menü\' -> \'Darstellung\' den Punkt \'Kartenquelle...\' auswählen.
 \n\tSie können zwischen vordefinierten Quellen für Online- oder Offline-Kacheln, Offline-Vektor-Karten, oder selbst auf dem PC (z.B. via OsmAndMapCreator) erstellten Karten wählen.
 \n\tOsmAnd unterstützt auch selbst definierte Quellen.</string>
 
