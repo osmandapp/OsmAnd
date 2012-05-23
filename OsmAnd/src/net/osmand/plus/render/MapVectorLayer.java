@@ -1,6 +1,5 @@
 package net.osmand.plus.render;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.RotatedTileBox;
@@ -85,19 +84,17 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings drawSettings) {
-		if(!visible){
+		if (!visible) {
 			return;
 		}
-		if(!isVectorDataVisible() && tileLayer != null){
+		if (!isVectorDataVisible() && tileLayer != null) {
 			tileLayer.drawTileMap(canvas, tilesRect);
 			resourceManager.getRenderer().interruptLoadingMap();
 		} else {
 			if (!view.isZooming()) {
 				pixRect.set(0, 0, view.getWidth(), view.getHeight());
 				updateRotatedTileBox();
-				//TODO passing of nithMode and appMode could be probably something more general? These are
-				//renderer properties, so, we should check if renderer properties are changed somehow...
-				if (resourceManager.updateRenderedMapNeeded(rotatedTileBox,drawSettings)) {
+				if (resourceManager.updateRenderedMapNeeded(rotatedTileBox, drawSettings)) {
 					// pixRect.set(-view.getWidth(), -view.getHeight() / 2, 2 * view.getWidth(), 3 * view.getHeight() / 2);
 					pixRect.set(-view.getWidth() / 3, -view.getHeight() / 4, 4 * view.getWidth() / 3, 5 * view.getHeight() / 4);
 					updateRotatedTileBox();
@@ -105,7 +102,7 @@ public class MapVectorLayer extends BaseMapLayer {
 				}
 
 			}
-			
+
 			MapRenderRepositories renderer = resourceManager.getRenderer();
 			drawRenderedMap(canvas, renderer.getBitmap(), renderer.getBitmapLocation());
 			drawRenderedMap(canvas, renderer.getPrevBitmap(), renderer.getPrevBmpLocation());

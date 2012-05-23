@@ -74,8 +74,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		
 		EditTextPreference userName = activity.createEditTextPreference(settings.USER_NAME, R.string.user_name, R.string.user_name_descr);
 		cat.addPreference(userName);
-		userName.getEditText().setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 		EditTextPreference pwd = activity.createEditTextPreference(settings.USER_PASSWORD, R.string.user_password, R.string.user_password_descr);
+		pwd.getEditText().setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 		cat.addPreference(pwd);
 		
 		CheckBoxPreference poiEdit = activity.createCheckBoxPreference(settings.OFFLINE_POI_EDITION, 

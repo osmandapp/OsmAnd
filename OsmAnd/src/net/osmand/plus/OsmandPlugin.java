@@ -10,9 +10,13 @@ import org.apache.commons.logging.Log;
 import android.preference.PreferenceScreen;
 
 import net.osmand.LogUtil;
+import net.osmand.access.AccessibilityPlugin;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.background.OsmandBackgroundServicePlugin;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.extrasettings.OsmandExtraSettings;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -41,7 +45,11 @@ public abstract class OsmandPlugin {
 	
 	public static void initPlugins(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
+		installedPlugins.add(new OsmandMonitoringPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
+		installedPlugins.add(new OsmandBackgroundServicePlugin(app));
+		installedPlugins.add(new AccessibilityPlugin(app));
+		installedPlugins.add(new OsmandExtraSettings(app));
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
 		
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
@@ -87,6 +95,10 @@ public abstract class OsmandPlugin {
 	public void mapActivityDestroy(MapActivity activity) { }
 	
 	public void settingsActivityCreate(SettingsActivity activity, PreferenceScreen screen) {}
+	
+	public void settingsActivityDestroy(final SettingsActivity activity){}
+	
+	public void settingsActivityUpdate(final SettingsActivity activity){}
 	
 	public void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter) {}
 	
@@ -144,6 +156,18 @@ public abstract class OsmandPlugin {
 	public static void onSettingsActivityCreate(SettingsActivity activity, PreferenceScreen screen) {
 		for (OsmandPlugin plugin : activePlugins) {
 			plugin.settingsActivityCreate(activity, screen);
+		}
+	}
+	
+	public static void onSettingsActivityDestroy(SettingsActivity activity) {
+		for (OsmandPlugin plugin : activePlugins) {
+			plugin.settingsActivityDestroy(activity);
+		}
+	}
+	
+	public static void onSettingsActivityUpdate(SettingsActivity activity) {
+		for (OsmandPlugin plugin : activePlugins) {
+			plugin.settingsActivityUpdate(activity);
 		}
 	}
 	

@@ -1,11 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="osmand_background_plugin_description">This plugin allows to use routing and tracking in energy safe mode with screen off. It runs background service which wakes GPS up in a certain interval and records GPX or does routing instructions.</string>
+    <string name="osmand_background_plugin_name">Screen Off features</string>
+    <string name="osmand_accessibility_description">This plugin enables special accessibility features.</string>
+    <string name="osmand_accessibility_name">Accessibility</string>
+    <string name="extra_settings">Extra settings</string>
+    <string name="osmand_monitoring_description">This plugin allows you to record your trips, save GPX files and do live monitoring based on a web service.  </string>
+    <string name="osmand_monitoring_name">Monitoring</string>
+    <string name="osmand_extra_settings_description">This plugin allows you to highly customized application based on some issues and using your device prerequisites</string>
+    <string name="osmand_extra_settings_name">Extra settings</string>
     <string name="osmand_development_plugin_description">This plugin enables development features (animate routing) and display additional information such as rendering time.</string>
     <string name="osmand_development_plugin_name">Osmand Development</string>
-    <string name="plugins_screen">Plugins</string>
+    <string name="plugins_screen">Plugin Manager</string>
     <string name="select_plugin_to_activate">Touch a plugin item to activate it. To take an effect application restart may require.</string>
     <string name="prefs_plugins_descr">Plugins enable extra functionality builtin in the application such as Tracking, Tile Maps, Battery Saving features, Accessibility and many others.</string>
-    <string name="prefs_plugins">Plugins</string>
+    <string name="prefs_plugins">Plugin Manager</string>
     <string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0 :
 \n\t- Plugin functionality
 \n\t- New offline map data support
