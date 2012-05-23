@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="plugins_screen">Zásuvné moduly</string>
+	<string name="select_plugin_to_activate">Ťuknutím na zásuvný modul ho aktivujete. Pre aplikovanie zmien je vyžadovaný reštart aplikácie.</string>
+   	<string name="prefs_plugins_descr">Zás. moduly povoľujú extra funkcie vstavané do aplikácie ako stopovanie, mapové dlaždice, funkcie šetrenia batérie, prístupnosť a mnoho iného.</string>
+    	<string name="prefs_plugins">Zásuvné moduly</string>
+    	<string name="tip_recent_changes_0_8_0_t">Zmeny v 0.8.0 :
+	\n\t- Funkcia zásuvných modulov
+	\n\t- Podpora nových offline mapových dát
+	\n\t- Mnoho opravených chýb
+	</string>
+   	 <string name="osm_editing_plugin_description">Tento zás. modul je zameraný na zlepšovanie OSM kvality. Umožňuje zbierať/upravovať OSM POI objekty, otvoriť/komentovať OSM chyby a odosielať zaznamenané GPX (vyžaduje OSM prihlásenie).</string>
+    	<string name="osm_editing_plugin_name">Osm upravovanie</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektorové mapy môžu byť zobrazované rýchlejšie. Nemusí správne fungovať na niektorých zariadeniach.</string>
     	<string name="simulate_route_progression_manually">Ručné simulovanie priebehu cesty</string>
     	<string name="play_commands_of_currently_selected_voice">Prehranie povelov pre aktuálne zvolený hlas</string>
