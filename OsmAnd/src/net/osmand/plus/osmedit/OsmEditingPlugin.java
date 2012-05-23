@@ -1,5 +1,13 @@
 package net.osmand.plus.osmedit;
 
+import android.content.Intent;
+import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceCategory;
+import android.preference.PreferenceScreen;
+import android.text.InputType;
 import net.osmand.data.Amenity;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -8,6 +16,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 
 public class OsmEditingPlugin extends OsmandPlugin {
@@ -54,7 +63,37 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		poiActions = new EditingPOIActivity(activity);
 		activity.addDialogProvider(poiActions);
 		activity.addDialogProvider(osmBugsLayer);
+	}
+	
+	@Override
+	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
+		PreferenceScreen general = (PreferenceScreen) screen.findPreference(SettingsActivity.SCREEN_ID_GENERAL_SETTINGS);
+		PreferenceCategory cat = new PreferenceCategory(app);
+		cat.setTitle(R.string.osm_settings);
+		general.addPreference(cat);
 		
+		EditTextPreference userName = activity.createEditTextPreference(settings.USER_NAME, R.string.user_name, R.string.user_name_descr);
+		cat.addPreference(userName);
+		userName.getEditText().setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+		EditTextPreference pwd = activity.createEditTextPreference(settings.USER_PASSWORD, R.string.user_password, R.string.user_password_descr);
+		cat.addPreference(pwd);
+		
+		CheckBoxPreference poiEdit = activity.createCheckBoxPreference(settings.OFFLINE_POI_EDITION, 
+				R.string.offline_poi_edition, R.string.offline_poi_edition_descr);
+		cat.addPreference(poiEdit);
+		
+		Preference pref = new Preference(app);
+		pref.setTitle(R.string.local_openstreetmap_settings);
+		pref.setSummary(R.string.local_openstreetmap_settings_descr);
+		pref.setKey("local_openstreetmap_points");
+		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				activity.startActivity(new Intent(activity, LocalOpenstreetmapActivity.class));
+				return true;
+			}
+		});
+		cat.addPreference(pref);
 	}
 	
 	public EditingPOIActivity getPoiActions() {

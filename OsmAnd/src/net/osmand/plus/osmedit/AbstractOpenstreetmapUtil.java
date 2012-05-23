@@ -1,4 +1,5 @@
-package net.osmand;
+package net.osmand.plus.osmedit;
+
 
 import java.util.ArrayList;
 import java.util.List;

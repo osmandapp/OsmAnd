@@ -16,7 +16,8 @@ public class ToDoConstants {
 	// Polish UI with new building address search ...(Better completely new address search)
 	// Search for city in all indexes
 	// Test GeoIndexActivity
-	// TODO images in the map index ? 
+	// TODO images in the map index ?
+	// Plugin OsmEditingPlugin Send GPX files
 	
 	
 //	    == Osmand application (TODO 127) ==

@@ -545,8 +545,6 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> OFFLINE_POI_EDITION = 
 		new BooleanPreference("offline_poi_edition", false, true);
 
-	public static final String LOCAL_OPENSTREETMAP_POINTS = "local_openstreetmap_points";
-
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<DayNightMode> DAYNIGHT_MODE = 

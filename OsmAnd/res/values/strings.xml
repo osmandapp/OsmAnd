@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="osmand_development_plugin_description">This plugin enables development features (animate routing) and display additional information such as rendering time.</string>
+    <string name="osmand_development_plugin_name">Osmand Development</string>
     <string name="plugins_screen">Plugins</string>
-    <string name="select_plugin_to_activate">Touch a plugin item to activate it. Application restart is needed to take an effect.</string>
+    <string name="select_plugin_to_activate">Touch a plugin item to activate it. To take an effect application restart may require.</string>
     <string name="prefs_plugins_descr">Plugins enable extra functionality builtin in the application such as Tracking, Tile Maps, Battery Saving features, Accessibility and many others.</string>
     <string name="prefs_plugins">Plugins</string>
     <string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0 :

@@ -1,4 +1,4 @@
-package net.osmand;
+package net.osmand.plus.osmedit;
 
 import net.osmand.data.Amenity;
 import net.osmand.osm.EntityInfo;

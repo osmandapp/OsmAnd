@@ -13,13 +13,13 @@ import java.util.Set;
 import net.osmand.Algoritms;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IProgress;
-import net.osmand.OpenstreetmapRemoteUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexInfo;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.osmedit.OpenstreetmapRemoteUtil;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -442,6 +442,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 				if (!isCancelled()) {
 					String warning = null;
 					File file = new File(info.getPathToData());
+					// FIXME should be plugin functionality and do not use remote util directly
 					warning = new OpenstreetmapRemoteUtil(LocalIndexesActivity.this, null).uploadGPXFile(tagstring, description, visibility, file);
 					total++;
 					if (warning == null) {

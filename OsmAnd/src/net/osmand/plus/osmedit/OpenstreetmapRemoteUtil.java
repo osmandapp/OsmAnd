@@ -1,4 +1,4 @@
-package net.osmand;
+package net.osmand.plus.osmedit;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,6 +18,10 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import net.osmand.Algoritms;
+import net.osmand.Base64;
+import net.osmand.LogUtil;
+import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.osm.Entity;

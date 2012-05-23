@@ -1,11 +1,9 @@
-package net.osmand.plus;
+package net.osmand.plus.osmedit;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import net.osmand.OpenstreetmapPoint;
-import net.osmand.OpenstreetmapRemoteUtil;
 import net.osmand.osm.Node;
 import net.osmand.osm.OSMSettings.OSMTagKey;
 import android.content.Context;

@@ -19,6 +19,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.DayNightMode;
@@ -67,11 +68,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	public static final int SCREEN_NAVIGATION_SETTINGS = 2;
 	public static final int SCREEN_MONITORING_SETTINGS = 3;
 	
+	public static final String SCREEN_ID_GENERAL_SETTINGS = "general_settings";
+	public static final String SCREEN_ID_NAVIGATION_SETTINGS = "routing_settings";
+	public static final String SCREEN_ID_MONITORING_SETTINGS = "monitor_settings";
+	
 	private static final String MORE_VALUE = "MORE_VALUE";
 	
 	private Preference saveCurrentTrack;
-	private Preference testVoiceCommands;
-	private Preference localOpenstreetmapPoints;
 	private Preference bidforfix;
 	private Preference plugins;
 
@@ -102,7 +105,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	
 	private Map<String, Map<String, ?>> listPrefValues = new LinkedHashMap<String, Map<String, ?>>();
 	
-	private CheckBoxPreference registerBooleanPreference(OsmandPreference<Boolean> b, PreferenceScreen screen){
+	public CheckBoxPreference registerBooleanPreference(OsmandPreference<Boolean> b, PreferenceScreen screen){
 		CheckBoxPreference p = (CheckBoxPreference) screen.findPreference(b.getId());
 		p.setOnPreferenceChangeListener(this);
 		screenPreferences.put(b.getId(), p);
@@ -110,14 +113,14 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		return p;
 	}
 	
-	private void registerSeekBarPreference(OsmandPreference<Integer> b, PreferenceScreen screen){
+	public void registerSeekBarPreference(OsmandPreference<Integer> b, PreferenceScreen screen){
 		SeekBarPreference p = (SeekBarPreference) screen.findPreference(b.getId());
 		p.setOnPreferenceChangeListener(this);
 		screenPreferences.put(b.getId(), p);
 		seekBarPreferences.put(b.getId(), b);
 	}
 	
-	private <T> void registerListPreference(OsmandPreference<T> b, PreferenceScreen screen, String[] names, T[] values){
+	public <T> void registerListPreference(OsmandPreference<T> b, PreferenceScreen screen, String[] names, T[] values){
 		ListPreference p = (ListPreference) screen.findPreference(b.getId());
 		p.setOnPreferenceChangeListener(this);
 		LinkedHashMap<String, Object> vals = new LinkedHashMap<String, Object>();
@@ -130,14 +133,34 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 	}
 	
-	private void registerEditTextPreference(OsmandPreference<String> b, PreferenceScreen screen){
+	public void registerEditTextPreference(OsmandPreference<String> b, PreferenceScreen screen){
 		EditTextPreference p = (EditTextPreference) screen.findPreference(b.getId());
 		p.setOnPreferenceChangeListener(this);
 		screenPreferences.put(b.getId(), p);
 		editTextPreferences.put(b.getId(), b);
 	}
 	
-	private  void registerTimeListPreference(OsmandPreference<Integer> b, PreferenceScreen screen, int[] seconds, int[] minutes, int coeff){
+	public EditTextPreference createEditTextPreference(OsmandPreference<String> b, int title, int summary){
+		EditTextPreference p = new EditTextPreference(this);
+		p.setTitle(title);
+		p.setSummary(summary);
+		p.setOnPreferenceChangeListener(this);
+		screenPreferences.put(b.getId(), p);
+		editTextPreferences.put(b.getId(), b);
+		return p;
+	}
+	
+	public CheckBoxPreference createCheckBoxPreference(OsmandPreference<Boolean> b, int title, int summary){
+		CheckBoxPreference p = new CheckBoxPreference(this);
+		p.setTitle(title);
+		p.setSummary(summary);
+		p.setOnPreferenceChangeListener(this);
+		screenPreferences.put(b.getId(), p);
+		booleanPreferences.put(b.getId(), b);
+		return p;
+	}
+	
+	public void registerTimeListPreference(OsmandPreference<Integer> b, PreferenceScreen screen, int[] seconds, int[] minutes, int coeff){
 		int minutesLength = minutes == null? 0 : minutes.length;
     	int secondsLength = seconds == null? 0 : seconds.length;
     	Integer[] ints = new Integer[secondsLength + minutesLength];
@@ -181,6 +204,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
 //		BidForFixHelper bidForFixHelper = getMyApplication().getBidForFix();
 //		bidForFixHelper.generatePreferenceList(screen, getString(R.string.support_new_features), this);
+		OsmandPlugin.onSettingsActivityCreate(this, screen);
 		
 		registerBooleanPreference(osmandSettings.SHOW_VIEW_ANGLE,screen); 
 		registerBooleanPreference(osmandSettings.USE_TRACKBALL_FOR_MOVEMENTS,screen);
@@ -191,17 +215,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerBooleanPreference(osmandSettings.USE_HIGH_RES_MAPS,screen); 
 		registerBooleanPreference(osmandSettings.USE_ENGLISH_NAMES,screen); 
 		registerBooleanPreference(osmandSettings.AUTO_ZOOM_MAP,screen); 
-		// try without AUTO_FOLLOW_ROUTE_NAV (see forum discussion 'Simplify our navigation preference menu')
-		//registerBooleanPreference(osmandSettings.AUTO_FOLLOW_ROUTE_NAV,screen);
 		registerBooleanPreference(osmandSettings.SAVE_TRACK_TO_GPX,screen); 
 		registerBooleanPreference(osmandSettings.LIVE_MONITORING,screen);
-		registerBooleanPreference(osmandSettings.DEBUG_RENDERING_INFO,screen); 
 		registerBooleanPreference(osmandSettings.FAST_ROUTE_MODE,screen);
 		registerBooleanPreference(osmandSettings.USE_OSMAND_ROUTING_SERVICE_ALWAYS,screen); 
 		registerBooleanPreference(osmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES,screen);
 		registerBooleanPreference(osmandSettings.MAP_VECTOR_DATA,screen);
 		registerBooleanPreference(osmandSettings.TRANSPARENT_MAP_THEME,screen);
-		registerBooleanPreference(osmandSettings.TEST_ANIMATE_ROUTING,screen);
 		registerBooleanPreference(osmandSettings.SHOW_ALTITUDE_INFO,screen);
 		registerBooleanPreference(osmandSettings.FLUORESCENT_OVERLAYS,screen);
 		registerBooleanPreference(osmandSettings.SHOW_RULER,screen);
@@ -212,9 +232,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			nativeCheckbox.setEnabled(false);
 		}
 	    
-		registerEditTextPreference(osmandSettings.USER_NAME, screen);
-		registerEditTextPreference(osmandSettings.USER_PASSWORD, screen);
-		registerBooleanPreference(osmandSettings.OFFLINE_POI_EDITION, screen);
+		
 		registerEditTextPreference(osmandSettings.LIVE_MONITORING_URL, screen);
 		
 		
@@ -368,14 +386,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		localIndexes.setOnPreferenceClickListener(this);
 		saveCurrentTrack =(Preference) screen.findPreference(OsmandSettings.SAVE_CURRENT_TRACK);
 		saveCurrentTrack.setOnPreferenceClickListener(this);
-		testVoiceCommands =(Preference) screen.findPreference("test_voice_commands");
-		testVoiceCommands.setOnPreferenceClickListener(this);
 		routeServiceEnabled =(CheckBoxPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_ENABLED);
 		routeServiceEnabled.setOnPreferenceChangeListener(this);
 		applicationDir = (EditTextPreference) screen.findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
 		applicationDir.setOnPreferenceChangeListener(this);
-		localOpenstreetmapPoints = (Preference) screen.findPreference(OsmandSettings.LOCAL_OPENSTREETMAP_POINTS);
-		localOpenstreetmapPoints.setOnPreferenceClickListener(this);
 		bidforfix = (Preference) screen.findPreference("bidforfix");
 		bidforfix.setOnPreferenceClickListener(this);
 		plugins = (Preference) screen.findPreference("plugins");
@@ -396,11 +410,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			int s = intent.getIntExtra(INTENT_KEY_SETTINGS_SCREEN, 0);
 			String pref = null;
 			if(s == SCREEN_GENERAL_SETTINGS){
-				pref = "general_settings";
+				pref = SCREEN_ID_GENERAL_SETTINGS;
 			} else if(s == SCREEN_NAVIGATION_SETTINGS){
-				pref = "routing_settings";
+				pref = SCREEN_ID_NAVIGATION_SETTINGS;
 			} else if(s == SCREEN_MONITORING_SETTINGS){
-				pref = "monitor_settings";
+				pref = SCREEN_ID_MONITORING_SETTINGS;
 			} 
 			if(pref != null){
 				Preference toOpen = screen.findPreference(pref);
@@ -849,9 +863,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		if(preference.getKey().equals(OsmandSettings.LOCAL_INDEXES)){
 			startActivity(new Intent(this, LocalIndexesActivity.class));
 			return true;
-		} else if(preference == testVoiceCommands){
-			startActivity(new Intent(this, TestVoiceActivity.class));
-			return true;
 		} else if(preference == saveCurrentTrack){
 			SavingTrackHelper helper = new SavingTrackHelper(this);
 			if (helper.hasDataToSave()) {
@@ -859,9 +870,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			} else {
 				helper.close();
 			}
-			return true;
-		} else if(preference == localOpenstreetmapPoints){
-			startActivity(new Intent(this, LocalOpenstreetmapActivity.class));
 			return true;
 		} else if(preference == bidforfix){
 			startActivity(new Intent(this, OsmandBidForFixActivity.class));
