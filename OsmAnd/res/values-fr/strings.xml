@@ -67,10 +67,6 @@
    <string name="profile_settings">Paramètres de profil</string>
    <string name="settings_preset">Profil d\'utilisation</string>
    <string name="settings_preset_descr">Sélectionner un profil d\'utilisation. (Pour chaque profil, il est possible de configurer une source de carte, le suivi et la navigation, voir plus bas.)</string>
-   <string name="rendering_settings">- Sources de carte</string>
-   <string name="rendering_settings_descr">Configurer la source et les propriétés des cartes</string>
-   <string name="appearance_settings">- Style d\'affichage</string>
-   <string name="appearance_settings_descr">Configurer le style de l\'affichage de la carte</string>
    <string name="monitor_preferences">- Traces</string>
    <string name="monitor_preferences_descr">Configurer les paramètres d\'enregistrement du parcours</string>
    <string name="routing_settings">- Navigation</string>

@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 <PreferenceCategory android:title="@string/profile_settings" android:key="profile_dep_cat">
 	<ListPreference android:summary="@string/settings_preset_descr" android:title="@string/settings_preset" android:key="application_mode"></ListPreference>
-	<PreferenceScreen android:key="appearance_settings" android:title="@string/appearance_settings" android:summary="@string/appearance_settings_descr">
+	<PreferenceScreen android:key="appearance_settings" android:title="@string/map_settings" android:summary="@string/map_settings_descr">
 	    <ListPreference android:key="rotate_map" android:title="@string/rotate_map_to_bearing" android:summary="@string/rotate_map_to_bearing_descr"></ListPreference>
 		<ListPreference android:key="daynight_mode" android:title="@string/daynight" android:summary="@string/daynight_descr"></ListPreference>
 		<CheckBoxPreference android:key="show_view_angle" android:title="@string/show_view_angle" android:summary="@string/show_view_angle_descr"></CheckBoxPreference>

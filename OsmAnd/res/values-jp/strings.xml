@@ -308,8 +308,7 @@ MB)をダウンロードしますか?</string>
 
      <string name="general_settings_descr">インターネット利用、表示オプション、その他の構成</string>
  <string name="general_settings">全般設定</string>
-     <string name="rendering_settings_descr">マップソースと外観の構成</string>
- <string name="rendering_settings">- マップ</string>
+     
  <string name="index_settings_descr">オフライン用のデータを取得/更新</string>
  <string name="index_settings">オフラインデータ</string>
      <string name="osmand_service">背景サービス</string>

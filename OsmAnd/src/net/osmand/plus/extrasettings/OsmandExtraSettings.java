@@ -83,6 +83,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		
 		PreferenceCategory vectorSettings = new PreferenceCategory(app);
 		vectorSettings.setTitle(R.string.pref_vector_rendering);
+		vectorSettings.setKey("custom_vector_rendering");
 		appearance.addPreference(vectorSettings);
 	}
 }

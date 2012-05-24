@@ -18,8 +18,6 @@
 <string name="show_altitude_info">Pokaż wysokość</string>
 <string name="use_transparent_map_theme_descr">Użyj przezroczystych kontrolek mapy</string>
 <string name="use_transparent_map_theme">Przezroczysty styl</string>
-<string name="appearance_settings_descr">Konfiguruj wygląd aplikacji</string>
-<string name="appearance_settings">- Wygląd</string>
 <string name="native_library_not_supported">Biblioteka renderowania natywnego nie jest obsługiwana na tym urządzeniu.</string>
 <string name="init_native_library">Inicjalizacja biblioteki renderowania natywnego…</string>
 
@@ -370,8 +368,6 @@
 
 <string name="general_settings_descr">Skonfiguruj użycie Internetu, opcje wyświetlania i inne</string>
 <string name="general_settings">Ustawienia główne</string>
-<string name="rendering_settings_descr">Skonfiguruj źródło mapy i wygląd</string>
-<string name="rendering_settings">- Mapy</string>
 <string name="index_settings_descr">Pobierz/zarządzaj mapami i danymi offline</string>
 <string name="index_settings">Dane offline</string>
 <string name="osmand_service">Usługa w tle</string>

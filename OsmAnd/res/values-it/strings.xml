@@ -51,10 +51,6 @@
 	<string name="profile_settings">Impostazioni particolari per il profilo</string>
 	<string name="settings_preset">Profilo d\'uso</string>
 	<string name="settings_preset_descr">Seleziona un profilo d\'uso. (Ogni impostazione del profilo per la Mappa, Tracking, e Navigazione può essere personalizzato sotto.)</string>
-	<string name="rendering_settings">Configura mappa</string>
-	<string name="rendering_settings_descr">Configura mappe e sorgenti delle mappe</string>
-	<string name="appearance_settings">Aspetto della mappa</string>
-	<string name="appearance_settings_descr">Configura l\'aspetto della mappa</string>
 	<string name="monitor_preferences">Tracking</string>
 	<string name="monitor_preferences_descr">Specifica le impostazioni di tracking</string>
 	<string name="routing_settings">Navigazione</string>

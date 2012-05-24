@@ -366,8 +366,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 
 	<string name="general_settings_descr">Các thiết lập chung cho ứng dụng</string>
     <string name="general_settings">Thiết lập chung</string>
-	<string name="rendering_settings_descr">Các thiết lập và hiển thị cho bản đồ</string>
-    <string name="rendering_settings">- Bản đồ</string>
     <string name="index_settings_descr">Tải và Quản lý bản đồ Offline hoặc các dữ liệu khác(GPX)</string>
     <string name="index_settings">Dữ liệu Offline</string>
 	<string name="osmand_service">Chạy ngầm</string>

@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-
     <!--
     	 Disclaimer : 
          If you are going to translate strings, please make sure : 
@@ -9,6 +8,11 @@
          If you are making/correcting english translations make sure :
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     -->
+    <string name="online_map_settings">Online Map</string>
+	<string name="online_map_settings_descr">Configure online map sources</string>
+	<string name="map_settings">- Map settings</string>
+	<string name="map_settings_descr">Configure map display</string>
+	
 	<string name="osmand_rastermaps_plugin_description">This plugin allows to use large variety of online tile maps such as an overlay or as a base map. The maps could be prepared offline and copied to osmand folder.</string>
     <string name="osmand_rastermaps_plugin_name">Online maps</string>
     <string name="osmand_background_plugin_description">This plugin allows to use routing and tracking in energy safe mode with screen off. It runs background service which wakes GPS up in a certain interval and records GPX or does routing instructions.</string>
@@ -191,10 +195,7 @@
 	<string name="profile_settings">Profile Specific Settings</string>
 	<string name="settings_preset">User Profile</string>
 	<string name="settings_preset_descr">Select a user profile. Each profile contains specific settings, which can be customized below.</string>
-	<string name="rendering_settings">- Map configuration</string>
-	<string name="rendering_settings_descr">Configure maps and map sources</string>
-	<string name="appearance_settings">- Map appearance</string>
-	<string name="appearance_settings_descr">Configure map display</string>
+	
 	<string name="monitor_preferences">- Tracking</string>
 	<string name="monitor_preferences_descr">Specify tracking settings</string>
 	<string name="routing_settings">- Navigation</string>

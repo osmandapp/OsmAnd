@@ -150,10 +150,6 @@
 	<string name="profile_settings">Profielspecifieke instellingen</string>
 	<string name="settings_preset">Gebruiksprofiel</string>
 	<string name="settings_preset_descr">Selecteer een profiel. (Elke profielinstelling, kaart, tracking en navigatie kan hieronder ingesteld worden.)</string>
-	<string name="rendering_settings">- Kaartconfiguratie</string>
-	<string name="rendering_settings_descr">Configureer kaarten en kaartbronnen</string>
-	<string name="appearance_settings">- Kaartpresentatie</string>
-	<string name="appearance_settings_descr">Configureer kaartpresentatie</string>
 	<string name="monitor_preferences">- Tracking</string>
 	<string name="monitor_preferences_descr">Specifieke tracking-instellingen</string>
 	<string name="routing_settings">- Navigatie</string>
