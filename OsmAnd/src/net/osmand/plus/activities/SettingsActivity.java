@@ -25,7 +25,6 @@ import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
-import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.views.SeekBarPreference;
@@ -62,17 +61,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	public static final String SCREEN_ID_GENERAL_SETTINGS = "general_settings";
 	public static final String SCREEN_ID_NAVIGATION_SETTINGS = "routing_settings";
 	public static final String SCREEN_ID_MONITORING_SETTINGS = "monitor_settings";
-	
-	private static final String MORE_VALUE = "MORE_VALUE";
+	public static final String MORE_VALUE = "MORE_VALUE";
 	
 	private Preference bidforfix;
 	private Preference plugins;
 
 	private EditTextPreference applicationDir;
 	private ListPreference applicationModePreference;
-	private ListPreference tileSourcePreference;
-	private ListPreference overlayPreference;
-	private ListPreference underlayPreference;
 
 	private ListPreference dayNightModePreference;
 	private ListPreference routerServicePreference;
@@ -112,6 +107,17 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		p.setOnPreferenceChangeListener(this);
 		screenPreferences.put(b.getId(), p);
 		seekBarPreferences.put(b.getId(), b);
+	}
+	
+	public SeekBarPreference createSeekBarPreference(OsmandPreference<Integer> b, int title, int summary, int dialogTextId,
+			int defValue, int maxValue){
+		SeekBarPreference p = new SeekBarPreference(this, dialogTextId, defValue, maxValue);
+		p.setTitle(title);
+		p.setSummary(summary);
+		p.setOnPreferenceChangeListener(this);
+		screenPreferences.put(b.getId(), p);
+		seekBarPreferences.put(b.getId(), b);
+		return p;
 	}
 	
 	public <T> void registerListPreference(OsmandPreference<T> b, PreferenceScreen screen, String[] names, T[] values){
@@ -226,22 +232,16 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerBooleanPreference(osmandSettings.AUTO_ZOOM_MAP,screen); 
 		registerBooleanPreference(osmandSettings.FAST_ROUTE_MODE,screen);
 		registerBooleanPreference(osmandSettings.USE_OSMAND_ROUTING_SERVICE_ALWAYS,screen); 
-		registerBooleanPreference(osmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES,screen);
-		registerBooleanPreference(osmandSettings.MAP_VECTOR_DATA,screen);
-		registerBooleanPreference(osmandSettings.TRANSPARENT_MAP_THEME,screen);
+		
+		
 		registerBooleanPreference(osmandSettings.SHOW_ALTITUDE_INFO,screen);
-		registerBooleanPreference(osmandSettings.FLUORESCENT_OVERLAYS,screen);
-		registerBooleanPreference(osmandSettings.SHOW_RULER,screen);
+		
 		CheckBoxPreference nativeCheckbox = registerBooleanPreference(osmandSettings.NATIVE_RENDERING,screen);
 		//disable the checkbox if the library cannot be used
 		if ((NativeOsmandLibrary.isLoaded() && !NativeOsmandLibrary.isSupported()) || 
 				osmandSettings.NATIVE_RENDERING_FAILED.get()) {
 			nativeCheckbox.setEnabled(false);
 		}
-	    
-		
-		registerSeekBarPreference(osmandSettings.MAP_OVERLAY_TRANSPARENCY, screen);
-		registerSeekBarPreference(osmandSettings.MAP_TRANSPARENCY, screen);
 		
 		// List preferences
 		registerListPreference(osmandSettings.ROTATE_MAP, screen, 
@@ -251,10 +251,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerListPreference(osmandSettings.MAP_SCREEN_ORIENTATION, screen, 
 				new String[] {getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)},
 				new Integer[] {ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
-		
-		registerListPreference(osmandSettings.POSITION_ON_MAP, screen,
-				new String[] {getString(R.string.position_on_map_center), getString(R.string.position_on_map_bottom)},
-				new Integer[] {OsmandSettings.CENTER_CONSTANT, OsmandSettings.BOTTOM_CONSTANT});
 		
 		
 		entries = new String[DayNightMode.values().length];
@@ -276,20 +272,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		entries = new String[] { getString(R.string.system_locale), 
 				"English", "Czech", "German", "Spanish", "French", "Hungarian", "Italian", "Japanese", "Dutch", "Polish", "Portuguese", "Russian", "Slovak", "Vietnamese" };;
 		registerListPreference(osmandSettings.PREFERRED_LOCALE, screen, entries, entrieValues);
-		
-		int startZoom = 12;
-		int endZoom = 19;
-		entries = new String[endZoom - startZoom + 1];
-		Integer[] intValues = new Integer[endZoom - startZoom + 1];
-		for (int i = startZoom; i <= endZoom; i++) {
-			entries[i - startZoom] = i + ""; //$NON-NLS-1$
-			intValues[i - startZoom] = i ;
-		}
-		// try without, Issue 823:
-		// registerListPreference(osmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE, screen, entries, intValues);
+
 		
 		
-		intValues = new Integer[] { 0, 5, 10, 15, 20, 25, 30, 45, 60, 90};
+		
+		Integer[] intValues = new Integer[] { 0, 5, 10, 15, 20, 25, 30, 45, 60, 90};
 		entries = new String[intValues.length];
 		entries[0] = getString(R.string.auto_follow_route_never);
 		for (int i = 1; i < intValues.length; i++) {
@@ -304,16 +291,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		registerListPreference(osmandSettings.MAP_TEXT_SIZE, screen, entries, floatValues);
 
-		startZoom = 1;
-		endZoom = 18;
-		entries = new String[endZoom - startZoom + 1];
-		intValues = new Integer[endZoom - startZoom + 1];
-		for (int i = startZoom; i <= endZoom; i++) {
-			entries[i - startZoom] = i + ""; //$NON-NLS-1$
-			intValues[i - startZoom] = i ;
-		}
-		registerListPreference(osmandSettings.LEVEL_TO_SWITCH_VECTOR_RASTER, screen, entries, intValues);
-		
 		entries = new String[RouteService.values().length];
 		for(int i=0; i<entries.length; i++){
 			entries[i] = RouteService.values()[i].getName();
@@ -337,19 +314,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		applicationModePreference = (ListPreference) screen.findPreference(osmandSettings.APPLICATION_MODE.getId());
 		applicationModePreference.setOnPreferenceChangeListener(this);
 
-		tileSourcePreference = (ListPreference) screen.findPreference(osmandSettings.MAP_TILE_SOURCES.getId());
-		tileSourcePreference.setOnPreferenceChangeListener(this);
-		overlayPreference = (ListPreference) screen.findPreference(osmandSettings.MAP_OVERLAY.getId());
-		overlayPreference.setOnPreferenceChangeListener(this);
-		underlayPreference = (ListPreference) screen.findPreference(osmandSettings.MAP_UNDERLAY.getId());
-		underlayPreference.setOnPreferenceChangeListener(this);
-
 		dayNightModePreference = (ListPreference) screen.findPreference(osmandSettings.DAYNIGHT_MODE.getId());
 		dayNightModePreference.setOnPreferenceChangeListener(this);
 		routerServicePreference = (ListPreference) screen.findPreference(osmandSettings.ROUTER_SERVICE.getId());
 		routerServicePreference.setOnPreferenceChangeListener(this);
-
-		
 
 		Preference localIndexes =(Preference) screen.findPreference(OsmandSettings.LOCAL_INDEXES);
 		localIndexes.setOnPreferenceClickListener(this);
@@ -386,29 +354,31 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private void createCustomRenderingProperties(boolean update) {
 		RenderingRulesStorage renderer = getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		PreferenceCategory cat = (PreferenceCategory) findPreference("custom_vector_rendering");
-		cat.removeAll();
-		if(renderer != null){
-			for(RenderingRuleProperty p : renderer.PROPS.getCustomRules()){
-				CommonPreference<String> custom = getMyApplication().getSettings().getCustomRenderProperty(p.getAttrName());
-				ListPreference lp = new ListPreference(this);
-				lp.setOnPreferenceChangeListener(this);
-				lp.setKey(custom.getId());
-				lp.setTitle(p.getName());
-				lp.setSummary(p.getDescription());
-				cat.addPreference(lp);
-				
-				LinkedHashMap<String, Object> vals = new LinkedHashMap<String, Object>();
-				screenPreferences.put(custom.getId(), lp);
-				listPreferences.put(custom.getId(), custom);
-				listPrefValues.put(custom.getId(), vals);
-				String[] names = p.getPossibleValues();
-				for(int i=0; i<names.length; i++){
-					vals.put(names[i], names[i]);
+		if (cat != null) {
+			cat.removeAll();
+			if (renderer != null) {
+				for (RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
+					CommonPreference<String> custom = getMyApplication().getSettings().getCustomRenderProperty(p.getAttrName());
+					ListPreference lp = new ListPreference(this);
+					lp.setOnPreferenceChangeListener(this);
+					lp.setKey(custom.getId());
+					lp.setTitle(p.getName());
+					lp.setSummary(p.getDescription());
+					cat.addPreference(lp);
+
+					LinkedHashMap<String, Object> vals = new LinkedHashMap<String, Object>();
+					screenPreferences.put(custom.getId(), lp);
+					listPreferences.put(custom.getId(), custom);
+					listPrefValues.put(custom.getId(), vals);
+					String[] names = p.getPossibleValues();
+					for (int i = 0; i < names.length; i++) {
+						vals.put(names[i], names[i]);
+					}
+
 				}
-				
-			}
-			if(update) {
-				updateAllSettings();
+				if (update) {
+					updateAllSettings();
+				}
 			}
 		}
 		
@@ -487,65 +457,15 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     	}
     	
     	OsmandPlugin.onSettingsActivityUpdate(this);
-    	// Specific properties
-		updateTileSourceSummary();
 		
 		updateApplicationDirTextAndSummary();
 
 		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  [" + osmandSettings.APPLICATION_MODE.get().toHumanString(this) + "]");
 		dayNightModePreference.setSummary(getString(R.string.daynight_descr) + "  [" + osmandSettings.DAYNIGHT_MODE.get().toHumanString(this) + "]");
 		routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + osmandSettings.ROUTER_SERVICE.get() + "]");
-
     }
 
-	private void updateTileSourceSummary() {
-		fillTileSourcesToPreference(tileSourcePreference, osmandSettings.MAP_TILE_SOURCES.get(), false);
-		fillTileSourcesToPreference(overlayPreference, osmandSettings.MAP_OVERLAY.get(), true);
-		fillTileSourcesToPreference(underlayPreference, osmandSettings.MAP_UNDERLAY.get(), true);
-
-//		String mapName = " " + osmandSettings.MAP_TILE_SOURCES.get(); //$NON-NLS-1$
-//		String summary = tileSourcePreference.getSummary().toString();
-//		if (summary.lastIndexOf(':') != -1) {
-//			summary = summary.substring(0, summary.lastIndexOf(':') + 1);
-//		}
-//		tileSourcePreference.setSummary(summary + mapName);
-		tileSourcePreference.setSummary(getString(R.string.map_tile_source_descr) + "  [" + osmandSettings.MAP_TILE_SOURCES.get() + "]");
-		overlayPreference.setSummary(getString(R.string.map_overlay_descr) + "  [" + osmandSettings.MAP_OVERLAY.get() + "]");
-		underlayPreference.setSummary(getString(R.string.map_underlay_descr) + "  [" + osmandSettings.MAP_UNDERLAY.get() + "]");
-	}
-
-	private void fillTileSourcesToPreference(ListPreference tileSourcePreference, String value, boolean addNone) {
-		Map<String, String> entriesMap = osmandSettings.getTileSourceEntries();
-		int add = addNone ? 1 : 0;
-		String[] entries = new String[entriesMap.size() + 1 + add];
-		String[] values = new String[entriesMap.size() + 1 + add];
-		int ki = 0;
-		if(addNone){
-			entries[ki] = getString(R.string.default_none);
-			values[ki] = "";
-			ki++;
-		}
-		if (value == null) {
-			value = "";
-		}
-		
-		for(Map.Entry<String, String> es : entriesMap.entrySet()){
-			entries[ki] = es.getValue();
-			values[ki] = es.getKey();
-			ki++;
-		}
-		entries[ki] = getString(R.string.install_more);
-		values[ki] = MORE_VALUE;
-		fill(tileSourcePreference, entries, values, value);
-	}
-
   
-	private void fill(ListPreference component, String[] list, String[] values, String selected) {
-		component.setEntries(list);
-		component.setEntryValues(values);
-		component.setValue(selected);
-	}
-    
     
 	@SuppressWarnings("unchecked")
 	@Override
@@ -557,13 +477,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		OsmandPreference<String> editPref = editTextPreferences.get(preference.getKey());
 		if(boolPref != null){
 			boolPref.set((Boolean)newValue);
-			if (boolPref.getId().equals(osmandSettings.MAP_VECTOR_DATA.getId())) {
-				MapRenderRepositories r = ((OsmandApplication)getApplication()).getResourceManager().getRenderer();
-				if(r.isEmpty()){
-					AccessibleToast.makeText(this, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
-					return false;
-				}
-			}
 			if (boolPref.getId().equals(osmandSettings.NATIVE_RENDERING.getId())) {
 				if(((Boolean)newValue).booleanValue()) {
 					loadNativeLibrary();
@@ -617,36 +530,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		} else if(preference == applicationDir){
 			warnAboutChangingStorage((String) newValue);
 			return false;
-		} else if (preference == tileSourcePreference  || preference == overlayPreference 
-				|| preference == underlayPreference) {
-			if(MORE_VALUE.equals(newValue)){
-				SettingsActivity.installMapLayers(this, new ResultMatcher<TileSourceTemplate>() {
-					@Override
-					public boolean isCancelled() { return false;}
-
-					@Override
-					public boolean publish(TileSourceTemplate object) {
-						if(object == null){
-							updateTileSourceSummary();
-						}
-						return true;
-					}
-				});
-			} else if(preference == tileSourcePreference){
-				osmandSettings.MAP_TILE_SOURCES.set((String) newValue);
-				updateTileSourceSummary();
-			} else {
-				if(((String) newValue).length() == 0){
-					newValue = null;
-				}
-				if(preference == underlayPreference){
-					osmandSettings.MAP_UNDERLAY.set(((String) newValue));
-					underlayPreference.setSummary(getString(R.string.map_underlay_descr) + "  [" + osmandSettings.MAP_UNDERLAY.get() + "]");
-				} else if(preference == overlayPreference){
-					osmandSettings.MAP_OVERLAY.set(((String) newValue));
-					overlayPreference.setSummary(getString(R.string.map_overlay_descr) + "  [" + osmandSettings.MAP_OVERLAY.get() + "]");
-				}
-			}
 		}
 		return true;
 	}

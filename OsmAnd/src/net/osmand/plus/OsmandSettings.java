@@ -685,7 +685,7 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> MAP_VECTOR_DATA = new BooleanPreference("map_vector_data",
-			false, false);
+			true, false);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_OVERLAY = new StringPreference("map_overlay",

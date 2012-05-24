@@ -18,6 +18,7 @@ import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.extrasettings.OsmandExtraSettings;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 
 public abstract class OsmandPlugin {
@@ -42,9 +43,13 @@ public abstract class OsmandPlugin {
 	 */
 	public abstract boolean init(OsmandApplication app);
 	
+	public void disable(OsmandApplication app) {};
+	
 	
 	public static void initPlugins(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
+		OsmandRasterMapsPlugin rasterMapsPlugin = new OsmandRasterMapsPlugin(app);
+		installedPlugins.add(rasterMapsPlugin);
 		installedPlugins.add(new OsmandMonitoringPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
 		installedPlugins.add(new OsmandBackgroundServicePlugin(app));
@@ -53,6 +58,22 @@ public abstract class OsmandPlugin {
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
 		
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
+		// update special plugin state
+		if (!enabledPlugins.contains(rasterMapsPlugin.getId())) {
+			if (settings.MAP_VECTOR_DATA.get()) {
+				if(settings.MAP_OVERLAY.get() != null) {
+					settings.MAP_OVERLAY.set(null);
+				}
+				if(settings.MAP_UNDERLAY.get() != null) {
+					settings.MAP_UNDERLAY.set(null);
+				}
+			} else {
+				settings.enablePlugin(rasterMapsPlugin.getId(), true);
+				enabledPlugins = settings.getEnabledPlugins();
+			}
+		} 
+		
+		
 		for (OsmandPlugin plugin : installedPlugins) {
 			if (enabledPlugins.contains(plugin.getId())) {
 				try {
@@ -73,6 +94,7 @@ public abstract class OsmandPlugin {
 			}
 			activePlugins.add(plugin);
 		} else {
+			plugin.disable(app);
 			activePlugins.remove(plugin);
 		}
 		app.getSettings().enablePlugin(plugin.getId(), enable);

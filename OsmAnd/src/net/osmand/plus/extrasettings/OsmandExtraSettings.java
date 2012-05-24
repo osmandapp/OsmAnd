@@ -62,5 +62,27 @@ public class OsmandExtraSettings extends OsmandPlugin {
 				new Integer[] {AudioManager.STREAM_MUSIC, AudioManager.STREAM_NOTIFICATION, AudioManager.STREAM_VOICE_CALL},
 				R.string.choose_audio_stream, R.string.choose_audio_stream_descr);
 		cat.addPreference(lp);
+		
+		
+		PreferenceScreen appearance = (PreferenceScreen) screen.findPreference("appearance_settings");
+		cat = new PreferenceCategory(app);
+		cat.setTitle(R.string.extra_settings);
+		appearance.addPreference(cat);
+		
+		cat.addPreference(activity.createCheckBoxPreference(settings.TRANSPARENT_MAP_THEME, 
+				R.string.use_transparent_map_theme, R.string.use_transparent_map_theme_descr));
+		cat.addPreference(activity.createCheckBoxPreference(settings.SHOW_RULER, 
+				R.string.show_ruler_level, R.string.show_ruler_level_descr));
+		cat.addPreference(activity.createCheckBoxPreference(settings.FLUORESCENT_OVERLAYS,
+				R.string.use_fluorescent_overlays, R.string.use_fluorescent_overlays_descr));
+		
+		cat.addPreference(activity.createListPreference(settings.POSITION_ON_MAP,
+				new String[] { activity.getString(R.string.position_on_map_center), activity.getString(R.string.position_on_map_bottom) },
+				new Integer[] { OsmandSettings.CENTER_CONSTANT, OsmandSettings.BOTTOM_CONSTANT }, R.string.position_on_map,
+				R.string.position_on_map_descr));
+		
+		PreferenceCategory vectorSettings = new PreferenceCategory(app);
+		vectorSettings.setTitle(R.string.pref_vector_rendering);
+		appearance.addPreference(vectorSettings);
 	}
 }

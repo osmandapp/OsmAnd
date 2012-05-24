@@ -61,6 +61,25 @@ public class SeekBarPreference extends DialogPreference implements
 		maxValue = attrs.getAttributeIntValue(ANDROID_NS, MAX_VALUE_ID, 100);
 
 	}
+	
+	/**
+	 * Default constructor.
+	 * 
+	 * @param context
+	 *            The application context.
+	 * @param attrs
+	 *            The attribute set, containing the text, title, values, and
+	 *            range for the slider dialog.
+	 */
+	public SeekBarPreference(final Context context, int dialogTextId, int defValue, int maxValue) {
+		super(context, null);
+		this.context = context;
+		dialogText = context.getResources().getString(dialogTextId);
+		valueText = null;
+		this.defaultValue = defValue;
+		this.maxValue = maxValue;
+
+	}
 
 	public int getMax() {
 		return maxValue;
@@ -120,7 +139,7 @@ public class SeekBarPreference extends DialogPreference implements
 			if (shouldPersist()) {
 				persistInt(valueToSave);
 			}
-			callChangeListener(new Integer(valueToSave));
+			callChangeListener(Integer.valueOf(valueToSave));
 		} else {
 			this.valueToSave = value;
 		}

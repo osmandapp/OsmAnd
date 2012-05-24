@@ -14,11 +14,13 @@ import net.osmand.Algoritms;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IProgress;
 import net.osmand.access.AccessibleToast;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexInfo;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.osmedit.OpenstreetmapRemoteUtil;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -166,7 +168,9 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		final List<Integer> menu = new ArrayList<Integer>();
 		if(info.getType() == LocalIndexType.GPX_DATA){
 			menu.add(R.string.show_gpx_route);
-			menu.add(R.string.local_index_mi_upload_gpx);
+			if(OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) instanceof OsmandDevelopmentPlugin) {
+				menu.add(R.string.local_index_mi_upload_gpx);
+			}
 			descriptionLoader = new LoadLocalIndexDescriptionTask();
 			descriptionLoader.execute(info);
 		}
@@ -558,7 +562,9 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		menu.add(0, R.string.local_index_mi_restore, 1, getString(R.string.local_index_mi_restore)+"...");
 		menu.add(0, R.string.local_index_mi_delete, 2, getString(R.string.local_index_mi_delete)+"...");
 		menu.add(0, R.string.local_index_mi_reload, 3, R.string.local_index_mi_reload);
-		menu.add(0, R.string.local_index_mi_upload_gpx, 4, getString(R.string.local_index_mi_upload_gpx)+"...");
+		if(OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) instanceof OsmandDevelopmentPlugin) {
+			menu.add(0, R.string.local_index_mi_upload_gpx, 4, getString(R.string.local_index_mi_upload_gpx)+"...");
+		}
 		return true;
 	}
 	
