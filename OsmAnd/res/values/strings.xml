@@ -10,39 +10,39 @@
     -->
     <string name="online_map_settings">Online Map</string>
 	<string name="online_map_settings_descr">Configure online map sources</string>
-	<string name="map_settings">- Map settings</string>
+	<string name="map_settings">- Map Settings</string>
 	<string name="map_settings_descr">Configure map display</string>
 	
-	<string name="osmand_rastermaps_plugin_description">This plugin allows to use large variety of online tile maps such as an overlay or as a base map. The maps could be prepared offline and copied to osmand folder.</string>
-    <string name="osmand_rastermaps_plugin_name">Online maps</string>
-    <string name="osmand_background_plugin_description">This plugin allows to use routing and tracking in energy safe mode with screen off. It runs background service which wakes GPS up in a certain interval and records GPX or does routing instructions.</string>
-    <string name="osmand_background_plugin_name">Screen Off features</string>
-    <string name="osmand_accessibility_description">This plugin enables special accessibility features.</string>
+	<string name="osmand_rastermaps_plugin_description">This plugin facilitates using a variety of online or cached tile maps as base map or as overlay / underlay maps. The maps can also be prepared offline and copied to the Osmand folder.</string>
+    <string name="osmand_rastermaps_plugin_name">Online Maps</string>
+    <string name="osmand_background_plugin_description">This plugin allows navigating and tracking in power saving (screen off) mode. It runs a background service periodically waking up the GPS to record a track point or give a navigation prompt.</string>
+    <string name="osmand_background_plugin_name">Screen Off Features</string>
+    <string name="osmand_accessibility_description">This plugin configures special accessibility features.</string>
     <string name="osmand_accessibility_name">Accessibility</string>
     <string name="extra_settings">Extra settings</string>
-    <string name="osmand_monitoring_description">This plugin allows you to record your trips, save GPX files and do live monitoring based on a web service.  </string>
-    <string name="osmand_monitoring_name">Monitoring</string>
-    <string name="osmand_extra_settings_description">This plugin allows you to highly customized application based on some issues and using your device prerequisites</string>
-    <string name="osmand_extra_settings_name">Extra settings</string>
-    <string name="osmand_development_plugin_description">This plugin enables development features (animate routing) and display additional information such as rendering time.</string>
+    <string name="osmand_monitoring_description">This plugin facilitates recording your trips to GPX files or live monitoring using a web service.</string>
+    <string name="osmand_monitoring_name">Tracking + Monitoring</string>
+    <string name="osmand_extra_settings_description">This plugin facilitates extra customization of the map appearance enables more device-specific settings.</string>
+    <string name="osmand_extra_settings_name">Extra Settings</string>
+    <string name="osmand_development_plugin_description">This plugin enables development and debugging features like animated navigation or rendering performance display.</string>
     <string name="osmand_development_plugin_name">Osmand Development</string>
     <string name="plugins_screen">Plugin Manager</string>
-    <string name="select_plugin_to_activate">Touch a plugin item to activate it. To take an effect application restart may require.</string>
-    <string name="prefs_plugins_descr">Plugins enable extra functionality builtin in the application such as Tracking, Tile Maps, Battery Saving features, Accessibility and many others.</string>
+    <string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting Osmand may be required.)</string>
+    <string name="prefs_plugins_descr">Plugins enable the configuration of extra functionality built in the application like tracking, tile maps, screen off mode, accessibility settings, and others.</string>
     <string name="prefs_plugins">Plugin Manager</string>
     <string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0 :
 \n\t- Plugin functionality
 \n\t- New offline map data support
 \n\t- Lots of bug fixes
 	</string>
-    <string name="osm_editing_plugin_description">This plugin is intented to improve OSM quality. It allows to collect/modify OSM POI objects, open/comment OSM bugs and send recorded GPX  (requires OSM credentials).</string>
+    <string name="osm_editing_plugin_description">This plugin facilitates OSM feedback. It allows to collect/modify OSM POI objects, open/comment OSM bugs, and contribute recorded GPX files (requires OSM credentials).</string>
     <string name="osm_editing_plugin_name">Osm Editing</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vector maps may display faster. May not work well on some devices.</string>
 	<string name="simulate_route_progression_manually">Simulate route progression manually</string>
 	<string name="play_commands_of_currently_selected_voice">Play commands of currently selected voice</string>
 	<string name="debugging_and_development">OsmAnd debugging and development</string>
 	<string name="native_rendering">Native rendering</string>
-	<string name="animate_routing">Animate routing</string>
+	<string name="animate_routing">Animate navigation</string>
 	<string name="test_voice_prompts">Test voice prompts</string>    
 	<string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Offline data), or switch to online maps.</string>
     <string name="tip_recent_changes_0_7_2_t">Changes in 0.7.2 :
@@ -156,11 +156,11 @@
 	<string name="local_openstreetmap_settings_descr">Show and manage OSM POIs noted in local database</string>
 
 	<string name="live_monitoring_descr">Send tracking to a specified web service</string>
-	<string name="live_monitoring">Online Live Tracking</string>
-	<string name="live_monitoring_interval_descr">Specify Live Tracking interval</string>
-	<string name="live_monitoring_interval">Live Tracking interval</string>
+	<string name="live_monitoring">Online live tracking</string>
+	<string name="live_monitoring_interval_descr">Specify live tracking interval</string>
+	<string name="live_monitoring_interval">Live tracking interval</string>
 	<string name="live_monitoring_url_descr">Specify the web address with parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
-	<string name="live_monitoring_url">Live Tracking web address</string>
+	<string name="live_monitoring_url">Live tracking web address</string>
 	<string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX\' Tracking settings</string>
 	<string name="show_current_gpx_title">Show current track</string>
 	<string name="tip_recent_changes_0_7_0_t">Changes in 0.7.0 :
