@@ -382,8 +382,6 @@
 	<string name="default_none">Geen</string>
 	<string name="map_overlay">Overlay kaart</string>
 	<string name="map_overlay_descr">Selecteer overlay kaart</string>
-	<string name="map_vector_data">Offline vectorkaarten</string>
-	<string name="map_vector_data_descr">Gebruik downloaded vectorkaarten</string>
 	<string name="tile_source_already_installed">Kaart is al geïnstalleerd, instellingen worden geactualiseerd</string>
 	<string name="select_tile_source_to_install">Selecteer (kaartsegment) kaarten om te installeren of te actualiseren</string>
 	<string name="internet_not_available">De benodigde Internetverbinding voor deze actie is niet beschikbaar</string>

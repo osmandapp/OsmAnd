@@ -611,8 +611,6 @@
   <string name="map_overlay_descr">
     Vyberte mapu zobrazenou nad základní mapou
   </string>
-  <string name="map_vector_data">Vektorové mapy</string>
-  <string name="map_vector_data_descr">Použít stažené vektorové mapy</string>
   <string name="tile_source_already_installed">
     Mapa je již nainstalovaná, aktualizuji nastavení
   </string>

@@ -371,8 +371,6 @@
 	<string name="default_none">Žiadna</string>
 	<string name="map_overlay">Prekrývacia mapa</string>
 	<string name="map_overlay_descr">Výber mapy na prekrytie</string>
-	<string name="map_vector_data">Offline vektorové mapy</string>
-	<string name="map_vector_data_descr">Použitie stiahnutých vektorových máp</string>
 	<string name="tile_source_already_installed">Mapa je už nainštalovaná, nastavenia budú zaktualizované</string>
 	<string name="select_tile_source_to_install">Vyberte mapy na inštaláciu alebo aktualizáciu</string>
 	<string name="internet_not_available">Internetové pripojenie potrebné pre operáciu nie je dostupné</string>

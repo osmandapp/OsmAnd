@@ -315,8 +315,6 @@
 <string name="default_none">Ninguno</string>
 <string name="map_overlay">Mapa superpuesto</string>
 <string name="map_overlay_descr">Elija mapa superpuesto</string>
-<string name="map_vector_data">Mapas descargados</string>
-<string name="map_vector_data_descr">Usar mapas vectoriales descargados</string>
 <string name="tile_source_already_installed">El mapa ya está instalado, se actualizarán las opciones</string>
 <string name="select_tile_source_to_install">Seleccione mapas (teselas) a instalar o actualizar</string>
 <string name="internet_not_available">No está disponible la conexión a Internet que se necesita para la operación</string>

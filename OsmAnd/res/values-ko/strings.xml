@@ -404,8 +404,6 @@
 	<string name="default_none">없음</string>
 	<string name="map_overlay">오버레이 맵</string>
 	<string name="map_overlay_descr">오버레이 맵을 선택합니다</string>
-	<string name="map_vector_data">오프라인 벡터 맵</string>
-	<string name="map_vector_data_descr">다운로드한 벡터 맵을 사용합니다</string>
 	<string name="tile_source_already_installed">맵이 이미 설치되어, 설정이 갱신될 것입니다</string>
 	<string name="select_tile_source_to_install">설치 또는 갱신할 (타일) 맵을 선택합니다</string>
 	<string name="internet_not_available">동작에 필요한 인터넷 연결이 되지 않습니다</string>

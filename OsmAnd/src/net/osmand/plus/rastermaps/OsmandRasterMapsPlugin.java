@@ -242,7 +242,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		grp.addPreference(cat);
 		
 		CheckBoxPreference mapVectorData = activity.createCheckBoxPreference(settings.MAP_ONLINE_DATA,
-				R.string.map_vector_data, R.string.map_vector_data_descr);
+				R.string.map_online_data, R.string.map_online_data_descr);
 //		final OnPreferenceChangeListener parent = mapVectorData.getOnPreferenceChangeListener();
 //		MapRenderRepositories r = app.getResourceManager().getRenderer();
 //		if(r.isEmpty()){

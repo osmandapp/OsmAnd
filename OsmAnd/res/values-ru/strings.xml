@@ -272,8 +272,6 @@
 	<string name="default_none">Нет</string>
 	<string name="map_overlay">Карта покрытия</string>
 	<string name="map_overlay_descr">Выберите слой для покрытия основной карты</string>
-	<string name="map_vector_data">Векторные карты</string>
-	<string name="map_vector_data_descr">Использовать загруженные векторные карты</string>
 	<string name="tile_source_already_installed">Карта уже установлена, настройки будут обновлены</string>
 	<string name="select_tile_source_to_install">Выберите карты для установки или обновления</string>
 	<string name="internet_not_available">Интернет соединение не доступно</string>

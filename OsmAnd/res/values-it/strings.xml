@@ -296,8 +296,6 @@
 	<string name="default_none">Nessuna</string>
 	<string name="map_overlay">Mappa di overlay</string>
 	<string name="map_overlay_descr">Scegli mappa di overlay</string>
-	<string name="map_vector_data">Mappe vettoriali offline</string>
-	<string name="map_vector_data_descr">Usa le mappe vettoriali scaricate</string>
 	<string name="tile_source_already_installed">La mappa è già installata, verrà aggiornata</string>
 	<string name="select_tile_source_to_install">Seleziona le mappe (tile) da installare o aggiornare</string>
 	<string name="internet_not_available">Connessione internet richiesta ma non disponibile</string>

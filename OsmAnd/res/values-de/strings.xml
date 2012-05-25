@@ -402,8 +402,6 @@
 	<string name="default_none">Keine</string>
 	<string name="map_overlay">Overlay-Karte</string>
 	<string name="map_overlay_descr">Wähle Overlay-Karte</string>
-	<string name="map_vector_data">Offline-Vektor-Karten</string>
-	<string name="map_vector_data_descr">Verwende Offline-Vektor-Karten</string>
 	<string name="tile_source_already_installed">Karte schon installiert, Einstellungen werden aktualisiert</string>
 	<string name="select_tile_source_to_install">Kartenauswahl (Installation oder Update)</string>
 	<string name="internet_not_available">Internet Verbindung erforderlich aber nicht verfügbar</string>

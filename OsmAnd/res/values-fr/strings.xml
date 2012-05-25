@@ -302,8 +302,6 @@
 <string name="default_none">Aucune</string>
 <string name="map_overlay">Sur-couche de la carte</string>
 <string name="map_overlay_descr">Chosir la carte en sur-couche</string>
-<string name="map_vector_data">Cartes vectorielles</string>
-<string name="map_vector_data_descr">Utiliser les cartes vectorielles téléchargées</string>
 <string name="tile_source_already_installed">Carte déjà installée, paramètres seront mis à jour</string>
 <string name="select_tile_source_to_install">Sélectioner les cartes à installer ou mettre à jour</string>
 <string name="internet_not_available">Connexion Internet nécessaire pour cette opération non disponible</string>

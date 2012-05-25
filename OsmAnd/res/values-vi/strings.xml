@@ -190,8 +190,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="default_none">Không</string>
 	<string name="map_overlay">Chồng phủ bản đồ</string>
 	<string name="map_overlay_descr">Chọn bản đồ cần chồng phủ</string>
-	<string name="map_vector_data">Bản đồ vector Offline</string>
-	<string name="map_vector_data_descr">Sử dụng bản đồ vector đã tải</string>
 	<string name="tile_source_already_installed">Bản đồ đã được cài, các thiết lập sẽ được cập nhật</string>
 	<string name="select_tile_source_to_install">Chọn bản đồ cần cài đặt hoặc cập nhật</string>
 	<string name="internet_not_available">Không vào được Internet</string>

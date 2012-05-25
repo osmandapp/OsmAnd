@@ -201,8 +201,6 @@
 <string name="default_none">Brak</string>
 <string name="map_overlay">Nakładka</string>
 <string name="map_overlay_descr">Wybierz nakładkę (overlay)</string>
-<string name="map_vector_data">Wektorowe mapy offline</string>
-<string name="map_vector_data_descr">Użyj pobranych map wektorowych</string>
 <string name="tile_source_already_installed">Mapa jest już zainstalowana, ustawienia zostaną zaktualizowane</string>
 <string name="select_tile_source_to_install">Zaznacz mapy (kafelkowe) do zainstalowania lub zaktualizowania</string>
 <string name="internet_not_available">Połączenie internetowe, wymagane dla tej operacji, jest niedostępne</string>
