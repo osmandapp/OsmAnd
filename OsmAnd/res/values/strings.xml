@@ -8,6 +8,9 @@
          If you are making/correcting english translations make sure :
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     -->
+    <string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
+    <string name="map_online_data">Online maps</string>
+	<string name="map_online_data_descr">Use online maps (download and save them on sdcard)</string>
     <string name="online_map_settings">Online Map</string>
 	<string name="online_map_settings_descr">Configure online or cached tile map sources</string>
 	<string name="map_settings">- Map Settings</string>
@@ -442,8 +445,6 @@
 	<string name="default_none">None</string>
 	<string name="map_overlay">Overlay map</string>
 	<string name="map_overlay_descr">Choose overlay map</string>
-	<string name="map_vector_data">Offline vector maps</string>
-	<string name="map_vector_data_descr">Use downloaded vector maps</string>
 	<string name="tile_source_already_installed">Map is already installed, settings will be updated</string>
 	<string name="select_tile_source_to_install">Select (tile) maps to install or update</string>
 	<string name="internet_not_available">Internet connection required for operation is not available</string>

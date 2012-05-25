@@ -110,7 +110,8 @@ public class MapVectorLayer extends BaseMapLayer {
 	}
 
 
-	private void drawRenderedMap(Canvas canvas, Bitmap bmp, RotatedTileBox bmpLoc) {
+	private boolean drawRenderedMap(Canvas canvas, Bitmap bmp, RotatedTileBox bmpLoc) {
+		boolean shown = false;
 		if (bmp != null && bmpLoc != null) {
 			float rot = bmpLoc.getRotate();
 			float mult = (float) MapUtils.getPowZoom(view.getZoom() - bmpLoc.getZoom());
@@ -131,9 +132,11 @@ public class MapVectorLayer extends BaseMapLayer {
 					* view.getTileSize());
 			if(!bmp.isRecycled()){
 				canvas.drawBitmap(bmp, null, destImage, paintImg);
+				shown = true;
 			}
 			canvas.rotate(rot, view.getCenterPointX(), view.getCenterPointY());
 		}
+		return shown;
 	}
 
 	

@@ -58,22 +58,6 @@ public abstract class OsmandPlugin {
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
 		
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
-		// update special plugin state
-		if (!enabledPlugins.contains(rasterMapsPlugin.getId())) {
-			if (settings.MAP_VECTOR_DATA.get()) {
-				if(settings.MAP_OVERLAY.get() != null) {
-					settings.MAP_OVERLAY.set(null);
-				}
-				if(settings.MAP_UNDERLAY.get() != null) {
-					settings.MAP_UNDERLAY.set(null);
-				}
-			} else {
-				settings.enablePlugin(rasterMapsPlugin.getId(), true);
-				enabledPlugins = settings.getEnabledPlugins();
-			}
-		} 
-		
-		
 		for (OsmandPlugin plugin : installedPlugins) {
 			if (enabledPlugins.contains(plugin.getId())) {
 				try {
@@ -101,10 +85,7 @@ public abstract class OsmandPlugin {
 		return true;
 	}
 	
-	/**
-	 * ????
-	 */
-	public void updateLayers(OsmandMapTileView mapView) {};
+	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {};
 	
 	public abstract void registerLayers(MapActivity activity);
 
@@ -122,13 +103,13 @@ public abstract class OsmandPlugin {
 	
 	public void settingsActivityUpdate(final SettingsActivity activity){}
 	
-	public void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter) {}
+	public void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {}
 	
 	public void registerMapContextMenuActions(MapActivity mapActivity, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj) {}
 	
-	public static void refreshLayers(OsmandMapTileView mapView) {
+	public static void refreshLayers(OsmandMapTileView mapView, MapActivity activity) {
 		for (OsmandPlugin plugin : activePlugins) {
-			plugin.updateLayers(mapView);
+			plugin.updateLayers(mapView, activity);
 		}
 	}
 	
@@ -206,9 +187,9 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	public static void registerLayerContextMenu(OsmandMapTileView mapView, ContextMenuAdapter adapter) {
+	public static void registerLayerContextMenu(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {
 		for (OsmandPlugin plugin : activePlugins) {
-			plugin.registerLayerContextMenuActions(mapView, adapter);
+			plugin.registerLayerContextMenuActions(mapView, adapter, mapActivity);
 		}
 	}
 

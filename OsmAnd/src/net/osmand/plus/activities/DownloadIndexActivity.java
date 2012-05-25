@@ -620,11 +620,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				if (vectorMapsToReindex) {
 					ResourceManager manager = getMyApplication().getResourceManager();
 					List<String> warnings = manager.indexingMaps(progress);
-					if (warnings.isEmpty() && !settings.MAP_VECTOR_DATA.get()) {
-						warnings.add(getString(R.string.binary_map_download_success));
-						// Is it proper way to switch every tome to vector data?
-						settings.MAP_VECTOR_DATA.set(true);
-					}
 					if (!warnings.isEmpty()) {
 						return warnings.get(0);
 					}

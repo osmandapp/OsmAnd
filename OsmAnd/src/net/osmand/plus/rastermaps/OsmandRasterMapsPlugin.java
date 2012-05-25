@@ -1,16 +1,30 @@
 package net.osmand.plus.rastermaps;
 
+import java.util.ArrayList;
 import java.util.Map;
 
+import net.osmand.Algoritms;
 import net.osmand.ResultMatcher;
+import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.activities.DownloadTilesDialog;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.views.BaseMapLayer;
+import net.osmand.plus.views.MapTileLayer;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.SeekBarPreference;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -26,6 +40,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	private ListPreference tileSourcePreference;
 	private ListPreference overlayPreference;
 	private ListPreference underlayPreference;
+	
+	private MapTileLayer overlayLayer;
+	private MapTileLayer underlayLayer;
 	
 	public OsmandRasterMapsPlugin(OsmandApplication app) {
 		this.app = app;
@@ -51,6 +68,154 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 	@Override
 	public void registerLayers(MapActivity activity) {
+		underlayLayer = new MapTileLayer(false);
+		// mapView.addLayer(underlayLayer, -0.5f);
+		overlayLayer = new MapTileLayer(false);
+		// mapView.addLayer(overlayLayer, 0.7f);
+	}
+	
+	@Override
+	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
+		updateMapLayers(mapView, null, activity.getMapLayers());
+	}
+	
+	
+	public void updateMapLayers(OsmandMapTileView mapView, CommonPreference<String> settingsToWarnAboutMap,
+			final MapActivityLayers layers) {
+		overlayLayer.setAlpha(settings.MAP_OVERLAY_TRANSPARENCY.get());
+		updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, 0.7f, settings.MAP_OVERLAY == settingsToWarnAboutMap);
+		updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, -0.5f, settings.MAP_UNDERLAY == settingsToWarnAboutMap);
+		layers.updateMapSource(mapView, settingsToWarnAboutMap);
+	}
+	
+	public void updateLayer(OsmandMapTileView mapView, OsmandSettings settings,
+			MapTileLayer layer, CommonPreference<String> preference, float layerOrder, boolean warnWhenSelected) {
+		ITileSource overlay = settings.getTileSourceByName(preference.get(), warnWhenSelected);
+		if(!Algoritms.objectEquals(overlay, layer.getMap())){
+			if(overlay == null){
+				mapView.removeLayer(layer);
+			} else {
+				mapView.addLayer(layer, layerOrder);
+			}
+			layer.setMap(overlay);
+			mapView.refreshMap();
+		}
+	}
+	
+	public void selectMapOverlayLayer(final OsmandMapTileView mapView, 
+			final CommonPreference<String> mapPref, final CommonPreference<Integer> transparencyPref,
+			final MapActivity activity,
+			final BaseMapLayer... transparencyToChange){
+		final OsmandSettings settings = app.getSettings();
+		final MapActivityLayers layers = activity.getMapLayers();
+		Map<String, String> entriesMap = settings.getTileSourceEntries();
+		final ArrayList<String> keys = new ArrayList<String>(entriesMap.keySet());
+		Builder builder = new AlertDialog.Builder(activity);
+		final String[] items = new String[entriesMap.size() + 1];
+		int i = 0;
+		for(String it : entriesMap.values()){
+			items[i++] = it;
+		}
+		
+		items[i] = app.getString(R.string.install_more);
+		builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				if (which == items.length - 1){
+					SettingsActivity.installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {
+						TileSourceTemplate template = null;
+						int count = 0;
+						@Override
+						public boolean publish(TileSourceTemplate object) {
+							if(object == null){
+								if(count == 1){
+									mapPref.set(template.getName());
+									layers.getMapControlsLayer().showAndHideTransparencyBar(transparencyPref, transparencyToChange);
+									updateMapLayers(mapView, mapPref, layers);
+								} else {
+									selectMapOverlayLayer(mapView, mapPref, transparencyPref, activity, transparencyToChange);
+								}
+							} else {
+								count ++;
+								template = object;
+							}
+							return false;
+						}
+						
+						@Override
+						public boolean isCancelled() {
+							return false;
+						}
+					});
+				} else {
+					mapPref.set(keys.get(which));
+					layers.getMapControlsLayer().showAndHideTransparencyBar(transparencyPref, transparencyToChange);
+					updateMapLayers(mapView, mapPref, layers);
+				}
+				dialog.dismiss();
+			}
+			
+		});
+		builder.show();
+	}
+	
+	@Override
+	public void registerLayerContextMenuActions(final OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
+		final MapActivityLayers layers = mapActivity.getMapLayers();
+		OnContextMenuClick listener = new OnContextMenuClick() {
+			@Override
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				if (itemId == R.string.layer_map) {
+					dialog.dismiss();
+					layers.selectMapLayer(mapView);
+				} else if(itemId == R.string.layer_overlay){
+					if(overlayLayer.getMap() != null){
+						settings.MAP_OVERLAY.set(null);
+						updateMapLayers(mapView, null, layers);
+					} else {
+						dialog.dismiss();
+						selectMapOverlayLayer(mapView, settings.MAP_OVERLAY, settings.MAP_OVERLAY_TRANSPARENCY, mapActivity, 
+								overlayLayer);
+					}
+				} else if(itemId == R.string.layer_underlay){
+					if(underlayLayer.getMap() != null){
+						settings.MAP_UNDERLAY.set(null);
+						updateMapLayers(mapView, null, layers);
+					} else {
+						dialog.dismiss();
+						selectMapOverlayLayer(mapView, settings.MAP_UNDERLAY,settings.MAP_TRANSPARENCY,
+								mapActivity, layers.getMapTileLayer(), layers.getMapVectorLayer());
+					}
+				}
+			}
+		};
+		adapter.registerSelectedItem(R.string.layer_map, -1, R.drawable.list_activities_map_src, listener, 0);
+		adapter.registerSelectedItem(R.string.layer_overlay, overlayLayer.getMap() != null ? 1 : 0, 
+				R.drawable.list_activities_overlay_map, listener, -1);
+		adapter.registerSelectedItem(R.string.layer_underlay, underlayLayer.getMap() != null ? 1 : 0, 
+				R.drawable.list_activities_underlay_map, listener, -1);
+	}
+	
+	
+	@Override
+	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude, ContextMenuAdapter adapter,
+			Object selectedObj) {
+		final OsmandMapTileView mapView = mapActivity.getMapView();
+		if (mapView.getMainLayer() instanceof MapTileLayer) {
+			OnContextMenuClick listener = new OnContextMenuClick() {
+				@Override
+				public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
+					if (resId == R.string.context_menu_item_update_map) {
+						mapActivity.getMapActions().reloadTile(mapView.getZoom(), latitude, longitude);
+					} else if (resId == R.string.context_menu_item_download_map) {
+						DownloadTilesDialog dlg = new DownloadTilesDialog(mapActivity, (OsmandApplication) mapActivity.getApplication(), mapView);
+						dlg.openDialog();
+					}
+				}
+			};
+			adapter.registerItem(R.string.context_menu_item_update_map, 0, listener, -1);
+			adapter.registerItem(R.string.context_menu_item_download_map, 0, listener, -1);
+		}
 	}
 	
 	@Override
@@ -76,7 +241,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		cat.setTitle(R.string.pref_raster_map);
 		grp.addPreference(cat);
 		
-		CheckBoxPreference mapVectorData = activity.createCheckBoxPreference(settings.MAP_VECTOR_DATA, 
+		CheckBoxPreference mapVectorData = activity.createCheckBoxPreference(settings.MAP_ONLINE_DATA,
 				R.string.map_vector_data, R.string.map_vector_data_descr);
 //		final OnPreferenceChangeListener parent = mapVectorData.getOnPreferenceChangeListener();
 //		MapRenderRepositories r = app.getResourceManager().getRenderer();

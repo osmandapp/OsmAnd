@@ -1,15 +1,18 @@
 package net.osmand.plus.monitoring;
 
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
@@ -47,6 +50,20 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 	@Override
 	public void registerLayers(MapActivity activity) {
+	}
+	
+	@Override
+	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude, ContextMenuAdapter adapter,
+			Object selectedObj) {
+		OnContextMenuClick listener = new OnContextMenuClick() {
+			@Override
+			public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
+				if (resId == R.string.context_menu_item_add_waypoint) {
+					mapActivity.getMapActions().addWaypoint(latitude, longitude);
+				}
+			}
+		};
+		adapter.registerItem(R.string.context_menu_item_add_waypoint, 0, listener, -1);
 	}
 	
 

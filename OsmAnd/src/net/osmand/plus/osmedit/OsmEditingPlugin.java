@@ -1,5 +1,6 @@
 package net.osmand.plus.osmedit;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -43,7 +44,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	private EditingPOIActivity poiActions;
 	
 	@Override
-	public void updateLayers(OsmandMapTileView mapView){
+	public void updateLayers(OsmandMapTileView mapView, MapActivity activity){
 		if(mapView.getLayers().contains(osmBugsLayer) != settings.SHOW_OSM_BUGS.get()){
 			if(settings.SHOW_OSM_BUGS.get()){
 				mapView.addLayer(osmBugsLayer, 2);
@@ -108,7 +109,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			OnContextMenuClick alist = new OnContextMenuClick() {
 				
 				@Override
-				public void onContextMenuClick(int resId, int pos, boolean isChecked) {
+				public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
 					if (resId == R.string.poi_context_menu_delete) {
 						getPoiActions().showDeleteDialog(a);
 					} else if (resId == R.string.poi_context_menu_modify) {
@@ -122,7 +123,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			
 			@Override
-			public void onContextMenuClick(int resId, int pos, boolean isChecked) {
+			public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
 				if (resId == R.string.context_menu_item_create_poi) {
 					poiActions.showCreateDialog(latitude, longitude);
 				} else if (resId == R.string.context_menu_item_open_bug) {
@@ -135,12 +136,12 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter) {
+	public void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {
 		adapter.registerSelectedItem(R.string.layer_osm_bugs, settings.SHOW_OSM_BUGS.get() ? 1 : 0, R.drawable.list_activities_osm_bugs,
 				new OnContextMenuClick() {
 
 					@Override
-					public void onContextMenuClick(int itemId, int pos, boolean isChecked) {
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 						if (itemId == R.string.layer_osm_bugs) {
 							settings.SHOW_OSM_BUGS.set(isChecked);
 						}

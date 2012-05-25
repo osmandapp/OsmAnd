@@ -200,7 +200,7 @@ public class MapActivityActions implements DialogProvider {
 		return b.create();
 	}
 	
-    protected void addWaypoint(final double latitude, final double longitude){
+    public void addWaypoint(final double latitude, final double longitude){
     	String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
     	enhance(dialogBundle,latitude,longitude, name);
     	mapActivity.showDialog(DIALOG_ADD_WAYPOINT);
@@ -234,58 +234,13 @@ public class MapActivityActions implements DialogProvider {
 		return builder.create();
     }
     
-    protected void reloadTile(final int zoom, final double latitude, final double longitude){
+    public void reloadTile(final int zoom, final double latitude, final double longitude){
     	enhance(dialogBundle,latitude,longitude,zoom);
     	mapActivity.showDialog(DIALOG_RELOAD_TITLE);
     }
 
     
-    private Dialog createReloadTitleDialog(final Bundle args) {
-    	Builder builder = new AccessibleAlertBuilder(mapActivity);
-    	builder.setMessage(R.string.context_menu_item_update_map_confirm);
-    	builder.setNegativeButton(R.string.default_buttons_cancel, null);
-    	final OsmandMapTileView mapView = mapActivity.getMapView();
-    	builder.setPositiveButton(R.string.context_menu_item_update_map, new DialogInterface.OnClickListener(){
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				int zoom = args.getInt(KEY_ZOOM);
-				BaseMapLayer mainLayer = mapView.getMainLayer();
-				if(!(mainLayer instanceof MapTileLayer) || !((MapTileLayer) mainLayer).isVisible()){
-					AccessibleToast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
-					return;
-				}
-				final ITileSource mapSource = ((MapTileLayer) mainLayer).getMap();
-				if(mapSource == null || !mapSource.couldBeDownloadedFromInternet()){
-					AccessibleToast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
-					return;
-				}
-				Rect pixRect = new Rect(0, 0, mapView.getWidth(), mapView.getHeight());
-		    	RectF tilesRect = new RectF();
-		    	mapView.calculateTileRectangle(pixRect, mapView.getCenterPointX(), mapView.getCenterPointY(), 
-		    			mapView.getXTile(), mapView.getYTile(), tilesRect);
-		    	int left = (int) FloatMath.floor(tilesRect.left);
-				int top = (int) FloatMath.floor(tilesRect.top);
-				int width = (int) (FloatMath.ceil(tilesRect.right) - left);
-				int height = (int) (FloatMath.ceil(tilesRect.bottom) - top);
-				for (int i = 0; i <width; i++) {
-					for (int j = 0; j< height; j++) {
-						((OsmandApplication)mapActivity.getApplication()).getResourceManager().
-								clearTileImageForMap(null, mapSource, i + left, j + top, zoom);	
-					}
-				}
-				
-				
-				mapView.refreshMap();
-			}
-    	});
-    	builder.setNeutralButton(R.string.context_menu_item_update_poi, new DialogInterface.OnClickListener(){
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				updatePoiDb(args.getInt(KEY_ZOOM), args.getDouble(KEY_LATITUDE), args.getDouble(KEY_LONGITUDE));
-			}
-    	});
-		return builder.create();
-    }
+    
     
     protected String getString(int res){
     	return mapActivity.getString(res);
@@ -726,13 +681,8 @@ public class MapActivityActions implements DialogProvider {
 		adapter.registerItem(R.string.context_menu_item_search);
 		adapter.registerItem(R.string.context_menu_item_add_favorite);
 		adapter.registerItem(R.string.context_menu_item_share_location);
-		adapter.registerItem(R.string.context_menu_item_add_waypoint);
-		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
 		
-		if (mapView.getMainLayer() instanceof MapTileLayer) {
-			adapter.registerItem(R.string.context_menu_item_update_map);
-			adapter.registerItem(R.string.context_menu_item_download_map);
-		}
+		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
 		
 		builder.setItems(adapter.getItemNames(), new DialogInterface.OnClickListener() {
 
@@ -741,7 +691,7 @@ public class MapActivityActions implements DialogProvider {
 				int standardId = adapter.getItemId(which );
 				OnContextMenuClick click = adapter.getClickAdapter(which);
 				if(click != null) {
-					click.onContextMenuClick(standardId, which, false);
+					click.onContextMenuClick(standardId, which, false, dialog);
 				} else if (standardId == R.string.context_menu_item_navigate_point) {
 					mapActivity.navigateToPoint(new LatLon(latitude, longitude));
 				} else if (standardId == R.string.context_menu_item_show_route) {
@@ -756,18 +706,60 @@ public class MapActivityActions implements DialogProvider {
 					addFavouritePoint(latitude, longitude);
 				} else if (standardId == R.string.context_menu_item_share_location) {
 					shareLocation(latitude, longitude, mapView.getZoom());
-				} else if (standardId == R.string.context_menu_item_add_waypoint) {
-					addWaypoint(latitude, longitude);
-				} else if (standardId == R.string.context_menu_item_update_map) {
-					reloadTile(mapView.getZoom(), latitude, longitude);
-				} else if (standardId == R.string.context_menu_item_download_map) {
-					DownloadTilesDialog dlg = new DownloadTilesDialog(mapActivity, (OsmandApplication) mapActivity.getApplication(), mapView);
-					dlg.openDialog();
-				}
+				} 
 			}
 		});
 		builder.create().show();
 	}
+	
+	private Dialog createReloadTitleDialog(final Bundle args) {
+    	Builder builder = new AccessibleAlertBuilder(mapActivity);
+    	builder.setMessage(R.string.context_menu_item_update_map_confirm);
+    	builder.setNegativeButton(R.string.default_buttons_cancel, null);
+    	final OsmandMapTileView mapView = mapActivity.getMapView();
+    	builder.setPositiveButton(R.string.context_menu_item_update_map, new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				int zoom = args.getInt(KEY_ZOOM);
+				BaseMapLayer mainLayer = mapView.getMainLayer();
+				if(!(mainLayer instanceof MapTileLayer) || !((MapTileLayer) mainLayer).isVisible()){
+					AccessibleToast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
+					return;
+				}
+				final ITileSource mapSource = ((MapTileLayer) mainLayer).getMap();
+				if(mapSource == null || !mapSource.couldBeDownloadedFromInternet()){
+					AccessibleToast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
+					return;
+				}
+				Rect pixRect = new Rect(0, 0, mapView.getWidth(), mapView.getHeight());
+		    	RectF tilesRect = new RectF();
+		    	mapView.calculateTileRectangle(pixRect, mapView.getCenterPointX(), mapView.getCenterPointY(), 
+		    			mapView.getXTile(), mapView.getYTile(), tilesRect);
+		    	int left = (int) FloatMath.floor(tilesRect.left);
+				int top = (int) FloatMath.floor(tilesRect.top);
+				int width = (int) (FloatMath.ceil(tilesRect.right) - left);
+				int height = (int) (FloatMath.ceil(tilesRect.bottom) - top);
+				for (int i = 0; i <width; i++) {
+					for (int j = 0; j< height; j++) {
+						((OsmandApplication)mapActivity.getApplication()).getResourceManager().
+								clearTileImageForMap(null, mapSource, i + left, j + top, zoom);	
+					}
+				}
+				
+				
+				mapView.refreshMap();
+			}
+    	});
+    	builder.setNeutralButton(R.string.context_menu_item_update_poi, new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				updatePoiDb(args.getInt(KEY_ZOOM), args.getDouble(KEY_LATITUDE), args.getDouble(KEY_LONGITUDE));
+			}
+    	});
+		return builder.create();
+    }
+	
+	
 
 	@Override
 	public Dialog onCreateDialog(int id) {

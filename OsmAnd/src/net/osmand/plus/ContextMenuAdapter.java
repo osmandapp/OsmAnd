@@ -1,15 +1,17 @@
 package net.osmand.plus;
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.util.ArrayList;
 
-import gnu.trove.list.array.TIntArrayList;
 import android.content.Context;
+import android.content.DialogInterface;
 
 public class ContextMenuAdapter {
 	
 	public interface OnContextMenuClick {
 		
-		public void onContextMenuClick(int itemId, int pos, boolean isChecked);
+		public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog);
 	}
 	
 	private final Context ctx;
