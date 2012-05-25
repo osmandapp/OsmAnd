@@ -7,9 +7,18 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 
+import android.preference.PreferenceScreen;
+
 import net.osmand.LogUtil;
+import net.osmand.access.AccessibilityPlugin;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.background.OsmandBackgroundServicePlugin;
+import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.extrasettings.OsmandExtraSettings;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 
 public abstract class OsmandPlugin {
@@ -34,10 +43,20 @@ public abstract class OsmandPlugin {
 	 */
 	public abstract boolean init(OsmandApplication app);
 	
+	public void disable(OsmandApplication app) {};
+	
 	
 	public static void initPlugins(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
+		OsmandRasterMapsPlugin rasterMapsPlugin = new OsmandRasterMapsPlugin(app);
+		installedPlugins.add(rasterMapsPlugin);
+		installedPlugins.add(new OsmandMonitoringPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
+		installedPlugins.add(new OsmandBackgroundServicePlugin(app));
+		installedPlugins.add(new AccessibilityPlugin(app));
+		installedPlugins.add(new OsmandExtraSettings(app));
+		installedPlugins.add(new OsmandDevelopmentPlugin(app));
+		
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
 		for (OsmandPlugin plugin : installedPlugins) {
 			if (enabledPlugins.contains(plugin.getId())) {
@@ -52,17 +71,21 @@ public abstract class OsmandPlugin {
 		}
 	}
 	
-	/**
-	 * ????
-	 */
-	public abstract void updateLayers(OsmandMapTileView mapView);
-	
-	public static void refreshLayers(OsmandMapTileView mapView) {
-		for (OsmandPlugin plugin : activePlugins) {
-			plugin.updateLayers(mapView);
+	public static boolean enablePlugin(OsmandApplication app, OsmandPlugin plugin, boolean enable) {
+		if (enable) {
+			if (!plugin.init(app)) {
+				return false;
+			}
+			activePlugins.add(plugin);
+		} else {
+			plugin.disable(app);
+			activePlugins.remove(plugin);
 		}
+		app.getSettings().enablePlugin(plugin.getId(), enable);
+		return true;
 	}
-
+	
+	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {};
 	
 	public abstract void registerLayers(MapActivity activity);
 
@@ -74,10 +97,21 @@ public abstract class OsmandPlugin {
 	
 	public void mapActivityDestroy(MapActivity activity) { }
 	
+	public void settingsActivityCreate(SettingsActivity activity, PreferenceScreen screen) {}
 	
-	public abstract void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter);
+	public void settingsActivityDestroy(final SettingsActivity activity){}
 	
-	public abstract void registerMapContextMenuActions(MapActivity mapActivity, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj);
+	public void settingsActivityUpdate(final SettingsActivity activity){}
+	
+	public void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {}
+	
+	public void registerMapContextMenuActions(MapActivity mapActivity, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj) {}
+	
+	public static void refreshLayers(OsmandMapTileView mapView, MapActivity activity) {
+		for (OsmandPlugin plugin : activePlugins) {
+			plugin.updateLayers(mapView, activity);
+		}
+	}
 	
 	public static List<OsmandPlugin> getAvailablePlugins(){
 		return installedPlugins;
@@ -122,6 +156,25 @@ public abstract class OsmandPlugin {
 	}
 	
 	
+	public static void onSettingsActivityCreate(SettingsActivity activity, PreferenceScreen screen) {
+		for (OsmandPlugin plugin : activePlugins) {
+			plugin.settingsActivityCreate(activity, screen);
+		}
+	}
+	
+	public static void onSettingsActivityDestroy(SettingsActivity activity) {
+		for (OsmandPlugin plugin : activePlugins) {
+			plugin.settingsActivityDestroy(activity);
+		}
+	}
+	
+	public static void onSettingsActivityUpdate(SettingsActivity activity) {
+		for (OsmandPlugin plugin : activePlugins) {
+			plugin.settingsActivityUpdate(activity);
+		}
+	}
+	
+
 	public static void createLayers(OsmandMapTileView mapView, MapActivity activity) {
 		for (OsmandPlugin plugin : activePlugins) {
 			plugin.registerLayers(activity);
@@ -134,9 +187,10 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	public static void registerLayerContextMenu(OsmandMapTileView mapView, ContextMenuAdapter adapter) {
+	public static void registerLayerContextMenu(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {
 		for (OsmandPlugin plugin : activePlugins) {
-			plugin.registerLayerContextMenuActions(mapView, adapter);
+			plugin.registerLayerContextMenuActions(mapView, adapter, mapActivity);
 		}
 	}
+
 }

@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import net.osmand.OpenstreetmapLocalUtil;
-import net.osmand.OpenstreetmapRemoteUtil;
-import net.osmand.OpenstreetmapUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;

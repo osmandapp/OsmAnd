@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.osmand.plus.activities;
+package net.osmand.plus.development;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;

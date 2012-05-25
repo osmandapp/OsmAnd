@@ -1,22 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="plugins_screen">Plugins</string>
-    <string name="select_plugin_to_activate">Touch a plugin item to activate it. Application restart is needed to take an effect.</string>
-    <string name="prefs_plugins_descr">Plugins enable extra functionality builtin in the application such as Tracking, Tile Maps, Battery Saving features, Accessibility and many others.</string>
-    <string name="prefs_plugins">Plugins</string>
+    <!--
+    	 Disclaimer : 
+         If you are going to translate strings, please make sure : 
+         1. There is no duplicate strings by name
+         2. Every apostrophe is started with quote (look others).
+         If you are making/correcting english translations make sure :
+         1. All your modified/created strings are in the top of the file (to make easier find what's translated).
+    -->
+    <string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
+    <string name="map_online_data">Online maps</string>
+	<string name="map_online_data_descr">Use online maps (download and save them on sdcard)</string>
+    <string name="online_map_settings">Online Map</string>
+	<string name="online_map_settings_descr">Configure online or cached tile map sources</string>
+	<string name="map_settings">- Map Settings</string>
+	<string name="map_settings_descr">Configure the map display</string>
+	
+	<string name="osmand_rastermaps_plugin_description">This plugin facilitates using a variety of online or cached tile maps as base map or as overlay / underlay maps. The maps can also be prepared offline and copied to the Osmand folder.</string>
+    <string name="osmand_rastermaps_plugin_name">Online Maps</string>
+    <string name="osmand_background_plugin_description">This plugin allows navigating and tracking in power saving (screen off) mode. It runs a background service periodically waking up the GPS to record a track point or give a navigation prompt.</string>
+    <string name="osmand_background_plugin_name">Screen Off Features</string>
+    <string name="osmand_accessibility_description">This plugin configures special accessibility features.</string>
+    <string name="osmand_accessibility_name">Accessibility</string>
+    <string name="extra_settings">Extra settings</string>
+    <string name="osmand_monitoring_description">This plugin facilitates recording your trips to GPX files or live monitoring using a web service.</string>
+    <string name="osmand_monitoring_name">Tracking + Monitoring</string>
+    <string name="osmand_extra_settings_description">This plugin facilitates extra customization of the map appearance enables more device-specific settings.</string>
+    <string name="osmand_extra_settings_name">Extra Settings</string>
+    <string name="osmand_development_plugin_description">This plugin enables development and debugging features like animated navigation or rendering performance display.</string>
+    <string name="osmand_development_plugin_name">Osmand Development</string>
+    <string name="plugins_screen">Plugin Manager</string>
+    <string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting Osmand may be required.)</string>
+    <string name="prefs_plugins_descr">Plugins provide extra functionality already contained in the application like tracking, tile maps, screen off mode, accessibility settings, and others.</string>
+    <string name="prefs_plugins">Plugin Manager</string>
     <string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0 :
 \n\t- Plugin functionality
 \n\t- New offline map data support
 \n\t- Lots of bug fixes
 	</string>
-    <string name="osm_editing_plugin_description">This plugin is intented to improve OSM quality. It allows to collect/modify OSM POI objects, open/comment OSM bugs and send recorded GPX  (requires OSM credentials).</string>
+    <string name="osm_editing_plugin_description">This plugin facilitates OSM feedback. It allows to collect/modify OSM POI objects, open/comment OSM bugs, and contribute recorded GPX files (requires OSM credentials).</string>
     <string name="osm_editing_plugin_name">Osm Editing</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vector maps may display faster. May not work well on some devices.</string>
 	<string name="simulate_route_progression_manually">Simulate route progression manually</string>
 	<string name="play_commands_of_currently_selected_voice">Play commands of currently selected voice</string>
 	<string name="debugging_and_development">OsmAnd debugging and development</string>
 	<string name="native_rendering">Native rendering</string>
-	<string name="animate_routing">Animate routing</string>
+	<string name="animate_routing">Animate navigation</string>
 	<string name="test_voice_prompts">Test voice prompts</string>    
 	<string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Offline data), or switch to online maps.</string>
     <string name="tip_recent_changes_0_7_2_t">Changes in 0.7.2 :
@@ -130,11 +159,11 @@
 	<string name="local_openstreetmap_settings_descr">Show and manage OSM POIs noted in local database</string>
 
 	<string name="live_monitoring_descr">Send tracking to a specified web service</string>
-	<string name="live_monitoring">Online Live Tracking</string>
-	<string name="live_monitoring_interval_descr">Specify Live Tracking interval</string>
-	<string name="live_monitoring_interval">Live Tracking interval</string>
+	<string name="live_monitoring">Online live tracking</string>
+	<string name="live_monitoring_interval_descr">Specify live tracking interval</string>
+	<string name="live_monitoring_interval">Live tracking interval</string>
 	<string name="live_monitoring_url_descr">Specify the web address with parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
-	<string name="live_monitoring_url">Live Tracking web address</string>
+	<string name="live_monitoring_url">Live tracking web address</string>
 	<string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX\' Tracking settings</string>
 	<string name="show_current_gpx_title">Show current track</string>
 	<string name="tip_recent_changes_0_7_0_t">Changes in 0.7.0 :
@@ -169,16 +198,13 @@
 	<string name="profile_settings">Profile Specific Settings</string>
 	<string name="settings_preset">User Profile</string>
 	<string name="settings_preset_descr">Select a user profile. Each profile contains specific settings, which can be customized below.</string>
-	<string name="rendering_settings">- Map configuration</string>
-	<string name="rendering_settings_descr">Configure maps and map sources</string>
-	<string name="appearance_settings">- Map appearance</string>
-	<string name="appearance_settings_descr">Configure map display</string>
+	
 	<string name="monitor_preferences">- Tracking</string>
 	<string name="monitor_preferences_descr">Specify tracking settings</string>
 	<string name="routing_settings">- Navigation</string>
 	<string name="routing_settings_descr">Specify navigation options</string>
 	<string name="global_settings">Global Settings</string>
-	<string name="index_settings">Offline Data</string>
+	<string name="index_settings">Offline Data (Download)</string>
 	<string name="index_settings_descr">Download and manage offline maps and other data such as GPX tracks</string>
 	<string name="general_settings">General Settings</string>
 	<string name="general_settings_descr">Configure global settings</string>
@@ -187,7 +213,7 @@
 	<string name="user_name_descr">Needed for openstreetmap.org submissions</string>
 	<string name="user_password">Your OSM password</string>
 	<string name="user_password_descr">Needed for openstreetmap.org submissions</string>
-	<string name="osmand_service">Background settings</string>
+	<string name="osmand_service">Background Settings</string>
 	<string name="osmand_service_descr">Use to run OsmAnd while screen is off</string>
 
 	 
@@ -419,8 +445,6 @@
 	<string name="default_none">None</string>
 	<string name="map_overlay">Overlay map</string>
 	<string name="map_overlay_descr">Choose overlay map</string>
-	<string name="map_vector_data">Offline vector maps</string>
-	<string name="map_vector_data_descr">Use downloaded vector maps</string>
 	<string name="tile_source_already_installed">Map is already installed, settings will be updated</string>
 	<string name="select_tile_source_to_install">Select (tile) maps to install or update</string>
 	<string name="internet_not_available">Internet connection required for operation is not available</string>

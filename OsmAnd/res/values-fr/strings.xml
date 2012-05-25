@@ -67,10 +67,6 @@
    <string name="profile_settings">Paramètres de profil</string>
    <string name="settings_preset">Profil d\'utilisation</string>
    <string name="settings_preset_descr">Sélectionner un profil d\'utilisation. (Pour chaque profil, il est possible de configurer une source de carte, le suivi et la navigation, voir plus bas.)</string>
-   <string name="rendering_settings">- Sources de carte</string>
-   <string name="rendering_settings_descr">Configurer la source et les propriétés des cartes</string>
-   <string name="appearance_settings">- Style d\'affichage</string>
-   <string name="appearance_settings_descr">Configurer le style de l\'affichage de la carte</string>
    <string name="monitor_preferences">- Traces</string>
    <string name="monitor_preferences_descr">Configurer les paramètres d\'enregistrement du parcours</string>
    <string name="routing_settings">- Navigation</string>
@@ -306,8 +302,6 @@
 <string name="default_none">Aucune</string>
 <string name="map_overlay">Sur-couche de la carte</string>
 <string name="map_overlay_descr">Chosir la carte en sur-couche</string>
-<string name="map_vector_data">Cartes vectorielles</string>
-<string name="map_vector_data_descr">Utiliser les cartes vectorielles téléchargées</string>
 <string name="tile_source_already_installed">Carte déjà installée, paramètres seront mis à jour</string>
 <string name="select_tile_source_to_install">Sélectioner les cartes à installer ou mettre à jour</string>
 <string name="internet_not_available">Connexion Internet nécessaire pour cette opération non disponible</string>

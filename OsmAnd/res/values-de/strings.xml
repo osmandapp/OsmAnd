@@ -158,10 +158,6 @@
 	<string name="profile_settings">Profilspezifische Einstellungen</string>
 	<string name="settings_preset">Nutzerprofil</string>
 	<string name="settings_preset_descr">Verwendungszweck. (Einstellungen für Karten, Logging und Navigation werden für jedes Profil separat gespeichert.)</string>
-	<string name="rendering_settings">- Kartenkonfiguration</string>
-	<string name="rendering_settings_descr">Kartenquellen und -parametrisierung</string>
-	<string name="appearance_settings">- Anzeigenkonfiguration</string>
-	<string name="appearance_settings_descr">Kartendarstellung und Anzeigeelemente</string>
 	<string name="monitor_preferences">- Positions-Logging</string>
 	<string name="monitor_preferences_descr">Positions-Logging konfigurieren</string>
 	<string name="routing_settings">- Navigation</string>
@@ -406,8 +402,6 @@
 	<string name="default_none">Keine</string>
 	<string name="map_overlay">Overlay-Karte</string>
 	<string name="map_overlay_descr">Wähle Overlay-Karte</string>
-	<string name="map_vector_data">Offline-Vektor-Karten</string>
-	<string name="map_vector_data_descr">Verwende Offline-Vektor-Karten</string>
 	<string name="tile_source_already_installed">Karte schon installiert, Einstellungen werden aktualisiert</string>
 	<string name="select_tile_source_to_install">Kartenauswahl (Installation oder Update)</string>
 	<string name="internet_not_available">Internet Verbindung erforderlich aber nicht verfügbar</string>

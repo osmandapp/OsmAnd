@@ -1,4 +1,4 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.osmedit;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -7,18 +7,15 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.LogUtil;
-import net.osmand.OpenstreetmapPoint;
-import net.osmand.OpenstreetmapRemoteUtil;
-import net.osmand.OpenstreetmapUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.osm.EntityInfo;
 import net.osmand.osm.Node;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
-import net.osmand.plus.OpenstreetmapsDbHelper;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandExpandableListActivity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -199,7 +196,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 				}
 			}
 
-			return new Integer(uploaded);
+			return Integer.valueOf(uploaded);
 		}
 
 		@Override

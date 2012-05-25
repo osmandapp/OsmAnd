@@ -68,8 +68,6 @@ name="internet_connection_required_for_online_route">オンライン経路案内
      <string name="default_none">無し</string>
      <string name="map_overlay">オーバーレイマップ</string>
      <string name="map_overlay_descr">オーバーレイマップを選択</string>
-     <string name="map_vector_data">オフラインベクターマップ</string>
-     <string name="map_vector_data_descr">ダウンロードしたベクターマップを使用</string>
      <string name="tile_source_already_installed">マップは既に
 インストール済です、設定を更新します</string>
      <string name="select_tile_source_to_install">インストールまたは
@@ -308,8 +306,7 @@ MB)をダウンロードしますか?</string>
 
      <string name="general_settings_descr">インターネット利用、表示オプション、その他の構成</string>
  <string name="general_settings">全般設定</string>
-     <string name="rendering_settings_descr">マップソースと外観の構成</string>
- <string name="rendering_settings">- マップ</string>
+     
  <string name="index_settings_descr">オフライン用のデータを取得/更新</string>
  <string name="index_settings">オフラインデータ</string>
      <string name="osmand_service">背景サービス</string>

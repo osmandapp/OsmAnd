@@ -457,7 +457,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			OnContextMenuClick listener = new OnContextMenuClick() {
 				
 				@Override
-				public void onContextMenuClick(int itemId, int pos, boolean isChecked) {
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					if (itemId == R.string.osb_comment_menu_item) {
 						commentBug(bug);
 					} else if (itemId == R.string.osb_close_menu_item) {

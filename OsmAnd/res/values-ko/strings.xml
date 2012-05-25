@@ -158,10 +158,6 @@
 	<string name="profile_settings">특정 설정 프로파일</string>
 	<string name="settings_preset">사용자 프로파일</string>
 	<string name="settings_preset_descr">사용자 프로파일을 선택합니다. (각 프로파일의 맵, 트래킹, 네비게이션 설정은 아래처럼 지정할 수 있습니다.)</string>
-	<string name="rendering_settings">- 맵 설정</string>
-	<string name="rendering_settings_descr">맵과 맵 소스를 설정합니다</string>
-	<string name="appearance_settings">- 맵 모양</string>
-	<string name="appearance_settings_descr">맵 모양을 설정합니다</string>
 	<string name="monitor_preferences">- 트래킹</string>
 	<string name="monitor_preferences_descr">트래킹 옵션을 설정합니다</string>
 	<string name="routing_settings">- 네비게이션</string>
@@ -408,8 +404,6 @@
 	<string name="default_none">없음</string>
 	<string name="map_overlay">오버레이 맵</string>
 	<string name="map_overlay_descr">오버레이 맵을 선택합니다</string>
-	<string name="map_vector_data">오프라인 벡터 맵</string>
-	<string name="map_vector_data_descr">다운로드한 벡터 맵을 사용합니다</string>
 	<string name="tile_source_already_installed">맵이 이미 설치되어, 설정이 갱신될 것입니다</string>
 	<string name="select_tile_source_to_install">설치 또는 갱신할 (타일) 맵을 선택합니다</string>
 	<string name="internet_not_available">동작에 필요한 인터넷 연결이 되지 않습니다</string>

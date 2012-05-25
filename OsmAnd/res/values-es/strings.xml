@@ -67,10 +67,6 @@
 <string name="profile_settings">Opciones específicas por perfil</string>
 <string name="settings_preset">Perfil de usuario</string>
 <string name="settings_preset_descr">Selecciona un perfil de uso. (Las opciones de Mapa, Seguimiento y Navegación puede cambiarse para cada perfil)</string>
-<string name="rendering_settings">- Configuración de Mapa</string>
-<string name="rendering_settings_descr">Configura los mapas y los orígenes de mapas</string>
-<string name="appearance_settings">- Aspecto de mapas</string>
-<string name="appearance_settings_descr">Configura la presentación de mapas</string>
 <string name="monitor_preferences">- Seguimiento</string>
 <string name="monitor_preferences_descr">Especifica los parámetros de seguimiento</string>
 <string name="routing_settings">- Navegación</string>
@@ -319,8 +315,6 @@
 <string name="default_none">Ninguno</string>
 <string name="map_overlay">Mapa superpuesto</string>
 <string name="map_overlay_descr">Elija mapa superpuesto</string>
-<string name="map_vector_data">Mapas descargados</string>
-<string name="map_vector_data_descr">Usar mapas vectoriales descargados</string>
 <string name="tile_source_already_installed">El mapa ya está instalado, se actualizarán las opciones</string>
 <string name="select_tile_source_to_install">Seleccione mapas (teselas) a instalar o actualizar</string>
 <string name="internet_not_available">No está disponible la conexión a Internet que se necesita para la operación</string>

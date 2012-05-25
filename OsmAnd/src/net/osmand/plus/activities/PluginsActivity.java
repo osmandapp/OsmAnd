@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PluginsActivity extends OsmandListActivity {
 	
@@ -45,14 +46,16 @@ public class PluginsActivity extends OsmandListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		OsmandPlugin item = getListAdapter().getItem(position);
-		boolean enable = true;
-		if(restartPlugins.contains(item.getId())) {
-			restartPlugins.remove(item.getId());
-			enable = false;
-		} else {
-			restartPlugins.add(item.getId());
+		boolean enable = !restartPlugins.contains(item.getId());
+
+		boolean ok = OsmandPlugin.enablePlugin(((OsmandApplication) getApplication()), item, enable);
+		if (ok) {
+			if (!enable) {
+				restartPlugins.remove(item.getId());
+			} else {
+				restartPlugins.add(item.getId());
+			}
 		}
-		((OsmandApplication) getApplication()).getSettings().enablePlugin(item.getId(), enable);
 		getListAdapter().notifyDataSetInvalidated();
 	}
 	
@@ -86,9 +89,9 @@ public class PluginsActivity extends OsmandListActivity {
 			description.setText(plugin.getDescription());
 			boolean enabled = enabledPlugins.contains(plugin.getId());
 			boolean toBeEnabled = restartPlugins.contains(plugin.getId());
-			description.setTextColor(toBeEnabled? colorGreen : Color.GRAY);
-			nameView.setTextColor(toBeEnabled? colorGreen : Color.GRAY);
-			description.setTypeface(enabled? Typeface.DEFAULT_BOLD : Typeface.DEFAULT);
+			description.setTextColor(toBeEnabled? colorGreen : Color.LTGRAY);
+			nameView.setTextColor(toBeEnabled? colorGreen : Color.LTGRAY);
+//			description.setTypeface(enabled? Typeface.DEFAULT_BOLD : Typeface.DEFAULT);
 			nameView.setTypeface(enabled? Typeface.DEFAULT_BOLD : Typeface.DEFAULT);
 
 			return row;

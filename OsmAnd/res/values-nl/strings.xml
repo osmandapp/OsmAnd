@@ -9,7 +9,7 @@
 	<string name="test_voice_prompts">Test stem-instructies</string>    
 	<string name="switch_to_raster_map_to_see">Geen offline vectorkaart aanwezig voor deze locatie. Je kan deze downloaden via Instellingen (Offline gegevens), of overschakelen naar online kaarten.</string>
     <string name="tip_recent_changes_0_7_2_t">Wijzigingen in 0.7.2 :
-\n\t- Interne kaartgeneratie voor alle apparaten
+\n\t- Interne kaartgeneratie op alle apparaten
 \n\t- Offline interessepunt-bewerking
 \n\t- Toegankelijkheidsopties
 \n\t- Veel bugs opgelost
@@ -135,10 +135,10 @@
 	<string name="index_name_europe">Europa</string>
 	<string name="index_name_france">Europa - Frankrijk</string>
 	<string name="index_name_germany">Europa - Duitsland</string>
-	<string name="index_name_russia">Europa/Azi렭 Rusland</string>
+	<string name="index_name_russia">Europa/Azië - Rusland</string>
 	<string name="index_name_africa">Afrika</string>
-	<string name="index_name_asia">Azi뼯</string>
-	<string name="index_name_oceania">Oceani뼯</string>
+	<string name="index_name_asia">Azië</string>
+	<string name="index_name_oceania">Oceanië</string>
 	<string name="index_name_other">Wereldkaart en topografische kaart</string>
 	<string name="index_name_wiki">Wereldwijde Wikipedia</string>
 	<string name="index_name_voice">Stembestanden (opnamen)</string>
@@ -150,10 +150,6 @@
 	<string name="profile_settings">Profielspecifieke instellingen</string>
 	<string name="settings_preset">Gebruiksprofiel</string>
 	<string name="settings_preset_descr">Selecteer een profiel. (Elke profielinstelling, kaart, tracking en navigatie kan hieronder ingesteld worden.)</string>
-	<string name="rendering_settings">- Kaartconfiguratie</string>
-	<string name="rendering_settings_descr">Configureer kaarten en kaartbronnen</string>
-	<string name="appearance_settings">- Kaartpresentatie</string>
-	<string name="appearance_settings_descr">Configureer kaartpresentatie</string>
 	<string name="monitor_preferences">- Tracking</string>
 	<string name="monitor_preferences_descr">Specifieke tracking-instellingen</string>
 	<string name="routing_settings">- Navigatie</string>
@@ -190,7 +186,7 @@
 	<string name="tip_osm_improve">Verbeter OSM gegevens</string>
 	<string name="tip_osm_improve_t">\tOsmAnd gebruikt kaarten, gebaseerd op Openstreetmap.org (OSM) gegevens en kan -behalve voor kaartweergave en navigatie- gebruikt worden om de kwaliteit van OSM gegevens te verbeteren. U kunt eenvoudig met een paar klikken interessepunten of OSM foutrapporten uploaden!
 	\n\tHiervoor moet u eerst uw OSM login informatie opgeven bij \'Instellingen\' -> \'Algemene instellingen\' -> \'OSM\'.
-	\n\tOm een nieuw interessepunt toe te voegen, gebruik de optie \'Cre즲 interessepunt\' in het kaartcontextmenu. Vervolg met het ingeven van de informatie over het interessepunt bij \'Cre즲 interessepunt\' en sla deze wijziging op.
+	\n\tOm een nieuw interessepunt toe te voegen, gebruik de optie \'Creëer interessepunt\' in het kaartcontextmenu. Vervolg met het ingeven van de informatie over het interessepunt bij \'Creëer interessepunt\' en sla deze wijziging op.
 	\n\tFouten in de kaarten kunnen direct worden gerapporteerd via OSM bug, de OSM groep kan het probleem dan sneller oplossen.
 	\n\Om een fout te rapporteren, gebruik de optie \'Open OSM bug\' in het kaartcontextmenu. Geef daar een gedetailleerde beschrijving van het probleem en stuur het op met de \'Toevoegen\' knop.
 	\n\tEr is een Internetverbinding nodig voor het aanmelden van bugs en interessepunten.</string>
@@ -252,7 +248,7 @@
 	<string name="file_can_not_be_renamed">Bestandsnaam kan niet worden gewijzigd.</string>
 	<string name="file_with_name_already_exists">Er bestaat al een bestand met die naam.</string>
 	<string name="gpx_navigation">GPX route</string>
-	<string name="poi_query_by_name_matches_categories">Meerdere interessepunt categorie쮠gevonden in zoekaktie :</string>
+	<string name="poi_query_by_name_matches_categories">Meerdere interessepunt categorieën gevonden in zoekaktie :</string>
 	<string name="data_to_search_poi_not_available">Locale gegevens voor het zoeken van interessepunten is niet aanwezig.</string>
 	<string name="poi_filter_by_name">Zoek op naam</string>
 	<string name="old_poi_file_should_be_deleted">Het interessepuntenbestand \'%1$s\' is redundant en kan worden verwijderd.</string>
@@ -361,9 +357,9 @@
 	<string name="installing_new_resources">Installeren nieuwe gegevens&#8230;</string>
 	<string name="internet_connection_required_for_online_route">Een online route-service is geselecteerd, maar er is geen internetverbinding beschikbaar.</string>
 	<string name="tts_language_not_supported_title">Taal niet ondersteund</string>
-	<string name="tts_language_not_supported">De geselecteerde taal is niet ondersteund door de ge௳talleerde Android stemgenerator. Wilt u een andere stemgenerator zoeken in de Market? Anders wordt de huidige stemgenerator gebruikt.</string>
+	<string name="tts_language_not_supported">De geselecteerde taal is niet ondersteund door de geïnstalleerde Android stemgenerator. Wilt u een andere stemgenerator zoeken in de Market? Anders wordt de huidige stemgenerator gebruikt.</string>
 	<string name="tts_missing_language_data_title">Ontbrekende gegevens</string>
-	<string name="tts_missing_language_data">Geen gegevens voor de geselecteerde taal ge௳talleerd. Wilt u naar de Market gaan om deze te installeren?</string>
+	<string name="tts_missing_language_data">Geen gegevens voor de geselecteerde taal geïnstalleerd. Wilt u naar de Market gaan om deze te installeren?</string>
 	<string name="gpx_option_reverse_route">Keer GPX richting om</string>
 	<string name="gpx_option_destination_point">Gebruik huidige bestemming</string>
 	<string name="gpx_option_from_start_point">Toon het gehele spoor</string>
@@ -386,9 +382,7 @@
 	<string name="default_none">Geen</string>
 	<string name="map_overlay">Overlay kaart</string>
 	<string name="map_overlay_descr">Selecteer overlay kaart</string>
-	<string name="map_vector_data">Offline vectorkaarten</string>
-	<string name="map_vector_data_descr">Gebruik downloaded vectorkaarten</string>
-	<string name="tile_source_already_installed">Kaart is al ge௳talleerd, instellingen worden geactualiseerd</string>
+	<string name="tile_source_already_installed">Kaart is al geïnstalleerd, instellingen worden geactualiseerd</string>
 	<string name="select_tile_source_to_install">Selecteer (kaartsegment) kaarten om te installeren of te actualiseren</string>
 	<string name="internet_not_available">De benodigde Internetverbinding voor deze actie is niet beschikbaar</string>
 	<string name="install_more">Installeer meer&#8230;</string>
@@ -398,8 +392,8 @@
 	\n\tDe beschikbaarheid van updates wordt weergegeven in de volgende kleuren:
 	\n\t\'Groen\' - De gegevens op uw apparaat en op de server zijn identiek
 	\n\t\'Blauw\' - Er is een update beschikbaar op de server
-	\n\t\'Donker Groen\' - gedeactiveerde kaart: is up to date
-	\n\t\'Donker Blauw\' - gedeactiveerde kaart: Er is een update beschikbaar
+	\n\t\'Donker Groen\' - gedeactiveerde kaart, deze is up-to-date
+	\n\t\'Donker Blauw\' - gedeactiveerde kaart, er is een update beschikbaar
 	</string>
 	<string name="level_to_switch_vector_raster_descr">Minimum zoomniveau om vectorkaarten inplaats van (raster)kaartsegmenten te gebruiken.</string>
 	<string name="level_to_switch_vector_raster">Min. vector zoomniveau</string>
@@ -407,7 +401,7 @@
 	<string name="tip_location_sharing_t">\tU kunt de locatie van interessepunten op uw tocht delen met familie of vrienden.
 	\n\tOm een locatie te delen:
 	\n\tGebruik het \'Kaart contextmenu\' -> \'Deel locatie\' menu.
-	\n\tSelecteer dan de methode van delen van uw locatie. De opties zijn: E-Mail, SMS(tekst), of kopieer de locatieco��naten naar het prikbord.</string>
+	\n\tSelecteer dan de methode van delen van uw locatie. De opties zijn: E-Mail, SMS(tekst), of kopieer de locatiecoördinaten naar het prikbord.</string>
 	<string name="tip_favorites">Favorieten</string>
 	<string name="tip_favorites_t">\tVaak gebruikte punten kunnen worden bewaard als Favorieten.
 \n\tOm een punt als Favoriet te bewaren, ga naar het kaartcontextmenu, selecteer de optie \'Voeg toe aan favorieten\' en geef het dan een naam. Nadat het bewaard is, is het te toegankelijk via \'Hoofdmenu\' -> \'Favorieten\'.
@@ -426,7 +420,7 @@
 \n\tOsmAnd ondersteunt ook eigen kaartbronnen.</string>
 	<string name="tip_app_mode">Gebruikersprofiel</string>
 	<string name="tip_app_mode_t">\tOsmAnd ondersteunt verschillende (aanpasbare) programmaprofielen voor verschillende toepassingen.
-\n\tU kunt profielen wijzigen in \'Menu\' -> \'Instellingen\' -> \'Gebruikersprofiel\', of bij het cre쳥n van een route.</string>
+\n\tU kunt profielen wijzigen in \'Menu\' -> \'Instellingen\' -> \'Gebruikersprofiel\', of bij het creëren van een route.</string>
 	<string name="tip_navigation">Navigatie</string>
 	<string name="tip_navigation_t">\tVoordat u een navigatie start (routing), moet u eerst een bestemming kiezen. Druk daarna op \'Menu\' -> \'Navigeer\' op de kaart en selecteer het type navigatie.</string>
 	<string name="tip_search">Zoeken</string>
@@ -434,7 +428,7 @@
 \n\tDoor in het hoofdmenu op \'Zoeken\' te drukken, worden de zoekacties geopend. Voor elk gevonden resultaat, biedt het contextmenu 2 opties: \'Selecteer als bestemming\' of \'Toon op kaart\'.</string>
 	<string name="tip_map_context_menu">Kaart-ContextMenu</string>
 	<string name="tip_map_context_menu_t">\tHet kaart-contextmenu is beschikbaar door een lange druk op de kaart of door op de trackball knop te drukken.
-\n\tDit toont een venster met de puntco��naten. Om de kaart-contextmenu dialoog te openen, druk er op. (Een lange druk verbergt het venster weer)
+\n\tDit toont een venster met de puntcoördinaten. Om de kaart-contextmenu dialoog te openen, druk er op. (Een lange druk verbergt het venster weer)
 \n\tHet kaart-contextmenu bevat alle acties met betrekking tot een punt (locatie).</string>
 	<string name="tip_initial">Tips and Trucs</string>
 	<string name="tip_initial_t">\tOsmAnd is a navigatieprogramma met vele features. 
@@ -479,10 +473,10 @@
 	<string name="amenity_type_sustenance">Horeca</string>
 	<string name="amenity_type_tourism">Toerisme</string>
 	<string name="amenity_type_transportation">Vervoer</string>
-	<string name="indexing_address">adres wordt ge௤exeerd&#8230;</string>
-	<string name="indexing_map">kaart wordt ge௤exeerd&#8230;</string>
-	<string name="indexing_poi">interessepunt wordt ge௤exeerd&#8230;</string>
-	<string name="indexing_transport">vervoer wordt ge௤exeerd&#8230;</string>
+	<string name="indexing_address">adres wordt geïndexeerd&#8230;</string>
+	<string name="indexing_map">kaart wordt geïndexeerd&#8230;</string>
+	<string name="indexing_poi">interessepunt wordt geïndexeerd&#8230;</string>
+	<string name="indexing_transport">vervoer wordt geïndexeerd&#8230;</string>
 	<string name="input_output_error">datatransportfout opgetreden</string>
 	<string name="km">km</string>
 	<string name="km_h">km/u</string>
@@ -504,15 +498,15 @@
 	<string name="specified_dir_doesnt_exist">Kan de opgegeven directory niet vinden.</string>
 	<string name="application_dir">Opslagdirectory</string>
 	<string name="application_dir_change_warning">Wijziging van de opslagdirectory verplaatst of verwijdert de gegevens niet. Dit moet u afzonderlijk en buiten OsmAnd doen. Toch doorgaan?</string>
-	<string name="osmand_net_previously_installed">Een oudere OsmAnd versie is al ge௳talleerd. Alle offline gegevens worden ondersteund door het nieuwe programma, maar Favorieten moeten worden ge칰orteerd in het oude programma en later worden geரorteerd door het nieuwe.</string>
-	<string name="build_installed">Versie {0} succesvol ge௳talleerd ({1}).</string>
+	<string name="osmand_net_previously_installed">Een oudere OsmAnd versie is al geïnstalleerd. Alle offline gegevens worden ondersteund door het nieuwe programma, maar Favorieten moeten worden geëxporteerd in het oude programma en later worden geïmporteerd door het nieuwe.</string>
+	<string name="build_installed">Versie {0} succesvol geïnstalleerd ({1}).</string>
 	<string name="downloading_build">Downloading versie&#8230;</string>
 	<string name="install_selected_build">Doorgaan met de installatie van OsmAnd - {0} van {1} {2} MB ?</string>
 	<string name="loading_builds_failed">Het ophalen van de lijst van OsmAndversies is mislukt</string>
 	<string name="loading_builds">OsmAnd versies&#8230; worden geladen</string>
 	<string name="select_build_to_install">Selecteer een van de OsmAnd versies om te installeren</string>
 	<string name="contribution_activity">Speciale actie voor contributie-versies</string>
-	<string name="gps_status_app_not_found">GPS Status programma niet ge௳talleerd. Zoeken in Market?</string>
+	<string name="gps_status_app_not_found">GPS Status programma niet geïnstalleerd. Zoeken in Market?</string>
 	<string name="voice_is_not_available_msg">Stem-begeleiding is niet aanwezig. Ga naar instellingen, selecteer een stem-gegevens pakket, en download deze.</string>
 	<string name="voice_is_not_available_title">Geen stem-begeleiding geselecteerd</string>
 	<string name="daynight_mode_day">Dag</string>
@@ -574,7 +568,7 @@
 	<string name="rotate_map_to_bearing_descr">Selecteer hoe de kaart roteert</string>
     <string name="rotate_map_to_bearing">Kaartrotatie</string>
 	<string name="show_route">Route-details</string>
-	<string name="fav_imported_sucessfully">Favorieten succesvol geரorteerd</string>
+	<string name="fav_imported_sucessfully">Favorieten succesvol geïmporteerd</string>
 	<string name="fav_file_to_load_not_found">GPX bestand met favorieten niet gevonden op {0}</string>
 	<string name="fav_saved_sucessfully">Favorieten succesvol opgeslagen in {0}</string>
 	<string name="no_fav_to_save">Geen favorieten om op te slaan</string>
@@ -595,7 +589,7 @@
 	<string name="layer_poi">interessepunt&#8230;</string>
 	<string name="layer_map">Kaartbron&#8230;</string>
 	<string name="menu_layers">Definieer beeld</string>
-	<string name="continue_follow_previous_route">Vorige route was niet be쪮digd. Doorgaan met die route?</string>
+	<string name="continue_follow_previous_route">Vorige route was niet beëindigd. Doorgaan met die route?</string>
 	<string name="context_menu_item_search_poi">Zoek interessepunt</string>
 	<string name="context_menu_item_show_route">Toon route vanaf hier</string>
 	<string name="use_trackball_descr">Gebruik trackball om de kaart te verschuiven</string>
@@ -648,7 +642,7 @@
 	<string name="map_orientation_default">Zelfde als apparaat-instelling</string>
 	<string name="map_orientation_portrait">Staand</string>
 	<string name="map_orientation_landscape">Liggend</string>
-	<string name="map_screen_orientation">Kaartscherm-ori쯴atie</string>
+	<string name="map_screen_orientation">Kaartscherm-oriëntatie</string>
 	<string name="map_screen_orientation_descr">Selecteer scherm-orientation</string>
 	<string name="opening_hours_not_supported">Openingtijden-formaat kan niet gewijzigd worden</string>
 	<string name="add_new_rule">Voeg nieuwe regel toe</string>
@@ -737,7 +731,7 @@
 	<string name="empty_route_calculated">Fout: berekende route is leeg</string>					
 	<string name="new_route_calculated_dist">Nieuwe route berekend, afstand</string>
 	<string name="arrived_at_destination">U bent aangekomen op uw bestemming</string>
-	<string name="invalid_locations">Co��naten zijn ongeldig!</string>
+	<string name="invalid_locations">Coördinaten zijn ongeldig!</string>
 	<string name="go_back_to_osmand">Ga terug naar de OsmAnd kaart</string>
 	<string name="close">Sluiten</string>
 	<string name="loading_data">Gegevens worden geladen&#8230;</string>
@@ -800,7 +794,7 @@
     <string name="show_location">Toon locatie</string>
     <string name="map_preferences">Kaart</string>
     <string name="settings_activity">Instellingen</string>
-    <string name="show_gps_coordinates_text">Toon GPS co��naten op kaart</string>
+    <string name="show_gps_coordinates_text">Toon GPS coördinaten op kaart</string>
     <string name="use_internet_to_download_tile">Gebruik het Internet om ontbrekende kaartsegmenten te downloaden</string>
     <string name="app_description">Navigatieprogramma</string>
 	<string name="exit_Button">Afsluiten</string>
@@ -843,7 +837,7 @@
 	<string name="context_menu_item_add_favorite">Voeg toe aan favorieten</string>
 	<string name="context_menu_item_update_map">Actualiseer kaart</string>
 	<string name="context_menu_item_open_bug">Open OSM bug</string>
-	<string name="context_menu_item_create_poi">Cre즲 interessepunt</string>
+	<string name="context_menu_item_create_poi">Creëer interessepunt</string>
 	<string name="default_buttons_yes">Ja</string>
 	<string name="default_buttons_cancel">Annuleer</string>
 	<string name="default_buttons_apply">Toepassen</string>
@@ -873,7 +867,7 @@
 	<string name="osb_close_dialog_success">Bug is afgesloten</string>
 	<string name="osb_close_dialog_error">Fout opgetreden: bug is niet afgesloten</string>
 	<string name="poi_edit_title">Bewerk interessepunt</string>
-	<string name="poi_create_title">Cre즲 interessepunt</string>
+	<string name="poi_create_title">Creëer interessepunt</string>
 	<string name="poi_error_poi_not_found">Punt niet gevonden of voorziening is niet een enkel punt</string>
 	<string name="poi_remove_confirm_template">Verwijderen {0} (geef commentaar)?</string>
 	<string name="poi_remove_title">Verwijder interessepunt</string>

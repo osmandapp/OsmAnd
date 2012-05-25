@@ -59,8 +59,6 @@
 	<string name="reload">Atualizar</string>
 	<string name="general_settings_descr">Configurar o uso da Internet, opções de visualização, e mais</string>
 	<string name="general_settings">Configurações Gerais</string>
-	<string name="rendering_settings_descr">Configurar a origem do mapa e sua aparência</string>
-	<string name="rendering_settings">- Mapas</string>
 	<string name="index_settings_descr">Obter ou atualizar dados para uso offline</string>
 	<string name="index_settings">Dados offline</string>
 	<string name="osmand_service">Serviço de segundo plano</string>

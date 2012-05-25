@@ -545,8 +545,6 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> OFFLINE_POI_EDITION = 
 		new BooleanPreference("offline_poi_edition", false, true);
 
-	public static final String LOCAL_OPENSTREETMAP_POINTS = "local_openstreetmap_points";
-
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<DayNightMode> DAYNIGHT_MODE = 
@@ -575,11 +573,6 @@ public class OsmandSettings {
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX = new BooleanPreference("save_track_to_gpx", false, false);
-	{
-		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.CAR, true);
-		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.BICYCLE, true);
-		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
-	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference("fast_route_mode", true, false);
@@ -691,24 +684,24 @@ public class OsmandSettings {
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Boolean> MAP_VECTOR_DATA = new BooleanPreference("map_vector_data",
-			false, false);
+	public final CommonPreference<Boolean> MAP_ONLINE_DATA = new BooleanPreference("map_online_data",
+			false, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_OVERLAY = new StringPreference("map_overlay",
-			null, false);
+			null, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_UNDERLAY = new StringPreference("map_underlay",
-			null, false);
+			null, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Integer> MAP_OVERLAY_TRANSPARENCY = new IntPreference("overlay_transparency",
-			200, false);
+			200, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Integer> MAP_TRANSPARENCY = new IntPreference("map_transparency",
-			255, false);
+			255, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference("map_tile_sources",

@@ -164,16 +164,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		startProgressDialog = new ProgressDialog(this);
 		startProgressDialog.setCancelable(true);
 		((OsmandApplication) getApplication()).checkApplicationIsBeingInitialized(this, startProgressDialog);
-		// Do some action on close
-		startProgressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-			@Override
-			public void onDismiss(DialogInterface dialog) {
-				OsmandApplication app = ((OsmandApplication) getApplication());
-				if (settings.MAP_VECTOR_DATA.get() && app.getResourceManager().getRenderer().isEmpty()) {
-					AccessibleToast.makeText(MapActivity.this, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
-				}
-			}
-		});
 		parseLaunchIntentLocation();
 		
 		mapView = (OsmandMapTileView) findViewById(R.id.MapView);
@@ -183,7 +173,14 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				showAndHideMapPosition();
 				return MapActivity.this.onTrackballEvent(e);
 			}
-
+		});
+		
+		// Do some action on close
+		startProgressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+			@Override
+			public void onDismiss(DialogInterface dialog) {
+				mapView.refreshMap();
+			}
 		});
 		
 		getMyApplication().getResourceManager().getMapTileDownloader().addDownloaderCallback(new IMapDownloaderCallback(){
@@ -260,7 +257,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		}
 
-		mapLayers.updateMapSource(mapView, null);
 		updateApplicationModeSettings();
 
 		mapLayers.getPoiMapLayer().setFilter(settings.getPoiFilterForMap((OsmandApplication) getApplication()));
@@ -1001,7 +997,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		registerUnregisterSensor(getLastKnownLocation());
 		mapLayers.getMapInfoLayer().applyTheme();
 		mapLayers.updateLayers(mapView);
-		mapLayers.updateMapSource(mapView, settings.MAP_TILE_SOURCES);
+		
 		getMyApplication().getDaynightHelper().setDayNightMode(settings.DAYNIGHT_MODE.get());
 	}
 	

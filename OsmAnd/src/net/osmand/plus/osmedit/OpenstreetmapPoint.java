@@ -1,4 +1,4 @@
-package net.osmand;
+package net.osmand.plus.osmedit;
 
 import java.io.Serializable;
 

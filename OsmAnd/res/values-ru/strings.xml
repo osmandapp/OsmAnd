@@ -108,8 +108,7 @@
 	<string name="show_altitude_info">Показывать высоты</string>
 	<string name="use_transparent_map_theme_descr">Использовать прозрачные информационные элементы на карте</string>
 	<string name="use_transparent_map_theme">Прозрачная тема</string>
-	<string name="appearance_settings_descr">Настроить внешний вид карты</string>
-	<string name="appearance_settings">- Внешний вид</string>
+	
 	<string name="native_library_not_supported">Нативная библиотека не поддерживается на этом устройстве.</string>
 	<string name="init_native_library">Инициализация нативной библиотеки…</string>
 	<string name="choose_auto_follow_route">Настройки автовозрата карты</string>
@@ -273,8 +272,6 @@
 	<string name="default_none">Нет</string>
 	<string name="map_overlay">Карта покрытия</string>
 	<string name="map_overlay_descr">Выберите слой для покрытия основной карты</string>
-	<string name="map_vector_data">Векторные карты</string>
-	<string name="map_vector_data_descr">Использовать загруженные векторные карты</string>
 	<string name="tile_source_already_installed">Карта уже установлена, настройки будут обновлены</string>
 	<string name="select_tile_source_to_install">Выберите карты для установки или обновления</string>
 	<string name="internet_not_available">Интернет соединение не доступно</string>
@@ -409,9 +406,7 @@
 	<string name="reload">Перезагрузить</string>
 	<string name="general_settings_descr">Настроить использование интернета, выбрать ориентацию экрана, вращение карты и другое</string>
     <string name="general_settings">Общие</string>
-	<string name="rendering_settings_descr">Выбрать источник карты и конфигурацию</string>
-    <string name="rendering_settings">- Настройка карты</string>
-    <string name="index_settings_descr">Загрузить и обновить данные для офлайн использования</string>
+	<string name="index_settings_descr">Загрузить и обновить данные для офлайн использования</string>
     <string name="index_settings">Данные</string>
 	<string name="osmand_service">Фоновый режим</string>
 	<string name="osmand_service_descr">Запустить OsmAnd в фоновом режиме для записи трека и навигации</string>

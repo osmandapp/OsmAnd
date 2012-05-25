@@ -21,6 +21,7 @@ import net.osmand.plus.render.RenderingIcons;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -302,7 +303,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			final Amenity a = (Amenity) o;
 			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
-				public void onContextMenuClick(int itemId, int pos, boolean isChecked) {
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					if (itemId == R.string.poi_context_menu_call) {
 						try {
 							Intent intent = new Intent(Intent.ACTION_VIEW);
