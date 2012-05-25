@@ -386,7 +386,7 @@ public class OsmandSettings {
 
 		@Override
 		protected boolean setValue(SharedPreferences prefs, String val) {
-			return prefs.edit().putString(getId(), val).commit();
+			return prefs.edit().putString(getId(), val.trim()).commit();
 		}
 
 	}
