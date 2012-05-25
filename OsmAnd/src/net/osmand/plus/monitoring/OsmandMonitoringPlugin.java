@@ -1,5 +1,8 @@
 package net.osmand.plus.monitoring;
 
+import org.apache.commons.logging.Log;
+
+import net.osmand.LogUtil;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -22,6 +25,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	private static final String ID = "osmand.monitoring";
 	private OsmandSettings settings;
 	private OsmandApplication app;
+	private static final Log log = LogUtil.getLog(OsmandMonitoringPlugin.class);
 	
 	public OsmandMonitoringPlugin(OsmandApplication app) {
 		this.app = app;
@@ -69,6 +73,12 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	@Override
 	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
+		Preference offlineData = screen.findPreference("index_settings");
+		if(offlineData == null) {
+			log.error("OsmandMonitoringPlugin: Index settings preference not found !!!");
+		} else {
+			offlineData.setSummary(offlineData.getSummary() + " "+ app.getString(R.string.gpx_index_settings_descr));
+		}
 		PreferenceScreen grp = screen.getPreferenceManager().createPreferenceScreen(activity);
 		grp.setTitle(R.string.monitor_preferences);
 		grp.setSummary(R.string.monitor_preferences_descr);

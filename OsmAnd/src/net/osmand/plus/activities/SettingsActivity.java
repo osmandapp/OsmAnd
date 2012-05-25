@@ -655,6 +655,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				title = title.substring(1);
 			}
 			scr.getDialog().setTitle("   " + title + " [" + osmandSettings.APPLICATION_MODE.get().toHumanString(this) + "]");
+		} else if(preference instanceof PreferenceScreen){
+			PreferenceScreen scr = (PreferenceScreen)preference;
+			String title = scr.getTitle().toString();
+			scr.getDialog().setTitle("   " + title);
 		}
 		
 		if (preference == applicationDir) {

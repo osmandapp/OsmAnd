@@ -8,6 +8,8 @@ package net.osmand;
 public class ToDoConstants {
 	
 	
+	// MAKE worldwide downloadable by default 
+	
 	// Index
 	// Map QuadTree (skip small areas!!!)
 	// Routing index !!

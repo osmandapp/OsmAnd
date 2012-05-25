@@ -33,6 +33,9 @@ import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.os.StatFs;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -83,6 +86,8 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		});
 		setContentView(R.layout.local_index);
 		titleBar.afterSetContentView();
+		
+		
 		settings = getMyApplication().getSettings();
 		descriptionLoader = new LoadLocalIndexDescriptionTask();
 		listAdapter = new LocalIndexesAdapter();
@@ -671,8 +676,22 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			StatFs fs = new StatFs(dir.getAbsolutePath());
 			size = formatGb.format(new Object[]{(float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30) }); 
 		}
-		((TextView) findViewById(R.id.DescriptionText)).setText(
-				getString(R.string.local_index_description, size));
+		TextView ds = (TextView) findViewById(R.id.DescriptionText);
+		String text = getString(R.string.local_index_description, size);
+		int l = text.indexOf(',');
+		if(l == -1) {
+			l = text.length();
+		}
+		SpannableString content = new SpannableString(text);
+		content.setSpan(new ClickableSpan() {
+			@Override
+			public void onClick(View widget) {
+				asyncLoader.setResult(null);
+				startActivity(new Intent(LocalIndexesActivity.this, DownloadIndexActivity.class));					
+			}
+		}, 0, l, 0);
+		ds.setText(content);
+		ds.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 	
 	private void closeSelectionMode(){

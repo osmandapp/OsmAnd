@@ -391,8 +391,8 @@ public class LocalIndexHelper {
 
 
 	public enum LocalIndexType {
-		TILES_DATA(R.string.local_indexes_cat_tile),
 		MAP_DATA(R.string.local_indexes_cat_map),
+		TILES_DATA(R.string.local_indexes_cat_tile),
 		POI_DATA(R.string.local_indexes_cat_poi),
 		VOICE_DATA(R.string.local_indexes_cat_voice),
 		TTS_VOICE_DATA(R.string.local_indexes_cat_tts),

@@ -8,6 +8,12 @@
          If you are making/correcting english translations make sure :
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     -->
+    <string name="select_index_file_to_download">Nothing was found. If you can\'t find your region manually, you can make it yourself (see osmand.net).</string>
+    <string name="local_indexes_cat_tile">Online Map data</string>
+	<string name="local_indexes_cat_map">Offline Map data</string>
+    <string name="gpx_index_settings_descr"> (includes GPX analyzer)</string>
+    <string name="index_settings_descr">Download, view details and manage offline maps</string>
+    <string name="local_index_description">Download, (de-)activate, or delete offline data. \nTo see more details click on the item. \nCurrent data on device (%1$s free):</string>
     <string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
     <string name="map_online_data">Online maps</string>
 	<string name="map_online_data_descr">Use online maps (download and save them on sdcard)</string>
@@ -31,7 +37,7 @@
     <string name="osmand_development_plugin_name">Osmand Development</string>
     <string name="plugins_screen">Plugin Manager</string>
     <string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting Osmand may be required.)</string>
-    <string name="prefs_plugins_descr">Plugins provide extra functionality already contained in the application like tracking, tile maps, screen off mode, accessibility settings, and others.</string>
+    <string name="prefs_plugins_descr">Plugins provide extra functionality bundled within the application like tracking, tile maps, screen off mode, accessibility settings, and others.</string>
     <string name="prefs_plugins">Plugin Manager</string>
     <string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0 :
 \n\t- Plugin functionality
@@ -197,7 +203,7 @@
 <!-- this block re-worked for new Preferences structure -->
 	<string name="profile_settings">Profile Specific Settings</string>
 	<string name="settings_preset">User Profile</string>
-	<string name="settings_preset_descr">Select a user profile. Each profile contains specific settings, which can be customized below.</string>
+	<string name="settings_preset_descr">Select a user profile. Each profile contains the set of specific settings.</string>
 	
 	<string name="monitor_preferences">- Tracking</string>
 	<string name="monitor_preferences_descr">Specify tracking settings</string>
@@ -205,7 +211,6 @@
 	<string name="routing_settings_descr">Specify navigation options</string>
 	<string name="global_settings">Global Settings</string>
 	<string name="index_settings">Offline Data (Download)</string>
-	<string name="index_settings_descr">Download and manage offline maps and other data such as GPX tracks</string>
 	<string name="general_settings">General Settings</string>
 	<string name="general_settings_descr">Configure global settings</string>
 	<string name="global_app_settings">Global app settings</string>
@@ -316,7 +321,6 @@
 	<string name="show_gpx_route">Show on map</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_select_point">Select</string>
-	<string name="local_index_description">Download, (de-)activate, or delete offline data. \nCurrent data on device (%1$s free):</string>
 	<string name="search_position_current_location_search">Searching position&#8230;</string>
 	<string name="search_position_current_location_found">Position (Found)</string>
 	<string name="search_position_address">Address&#8230;</string>
@@ -394,8 +398,6 @@
 	<string name="local_indexes_cat_tts">Voice data (TTS)</string>
 	<string name="local_indexes_cat_voice">Voice data (recorded)</string>
 	<string name="local_indexes_cat_gpx">GPX data</string>
-	<string name="local_indexes_cat_tile">Map data (tiles)</string>
-	<string name="local_indexes_cat_map">Map data (vector)</string>
 	<string name="local_indexes_cat_poi">POI data</string>
 
 	<string name="ttsvoice">TTS Voice</string>
@@ -786,7 +788,6 @@
 	<string name="downloading">Downloading&#8230;</string>
 	<string name="downloading_list_indexes">Downloading list of available regions&#8230;</string>
 	<string name="list_index_files_was_not_loaded">The list of regions was not retrieved from osmand.net.</string>
-    <string name="select_index_file_to_download">If you can\'t find your region, you can make it yourself. See osmand.net</string>
 	<string name="show_poi_on_map">Show on map</string>
 	<string name="fav_points_edited">Favorite point was edited</string>
 	<string name="fav_points_not_exist">No favorite points exist</string>

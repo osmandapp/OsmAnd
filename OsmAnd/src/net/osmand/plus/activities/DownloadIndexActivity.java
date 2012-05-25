@@ -703,7 +703,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		final Map<String, IndexItemCategory> cats = new TreeMap<String, DownloadIndexActivity.IndexItemCategory>();
 		for(IndexItem i : indexItems){
 			int nameId = R.string.index_name_other;
-			int order = 12;
+			int order = 0;
 			String lc = i.getFileName().toLowerCase();
 			if(lc.endsWith(".voice.zip")) {
 				nameId = R.string.index_name_voice;
@@ -893,6 +893,12 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			item.setText(group.name);
 			item.setLinkTextColor(Color.YELLOW);
 			adjustIndicator(groupPosition, isExpanded, v);
+			int cp = getChildrenCount(groupPosition);
+			if(cp < 10 && !isExpanded) {
+				getExpandableListView().expandGroup(groupPosition);
+			} else if(cp > 50 && isExpanded){
+				getExpandableListView().collapseGroup(groupPosition);
+			}
 			return row;
 		}
 
