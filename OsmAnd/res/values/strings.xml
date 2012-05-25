@@ -9,9 +9,9 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     -->
     <string name="online_map_settings">Online Map</string>
-	<string name="online_map_settings_descr">Configure online map sources</string>
+	<string name="online_map_settings_descr">Configure online or cached tile map sources</string>
 	<string name="map_settings">- Map Settings</string>
-	<string name="map_settings_descr">Configure map display</string>
+	<string name="map_settings_descr">Configure the map display</string>
 	
 	<string name="osmand_rastermaps_plugin_description">This plugin facilitates using a variety of online or cached tile maps as base map or as overlay / underlay maps. The maps can also be prepared offline and copied to the Osmand folder.</string>
     <string name="osmand_rastermaps_plugin_name">Online Maps</string>
@@ -28,7 +28,7 @@
     <string name="osmand_development_plugin_name">Osmand Development</string>
     <string name="plugins_screen">Plugin Manager</string>
     <string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting Osmand may be required.)</string>
-    <string name="prefs_plugins_descr">Plugins enable the configuration of extra functionality built in the application like tracking, tile maps, screen off mode, accessibility settings, and others.</string>
+    <string name="prefs_plugins_descr">Plugins provide extra functionality already contained in the application like tracking, tile maps, screen off mode, accessibility settings, and others.</string>
     <string name="prefs_plugins">Plugin Manager</string>
     <string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0 :
 \n\t- Plugin functionality
@@ -201,7 +201,7 @@
 	<string name="routing_settings">- Navigation</string>
 	<string name="routing_settings_descr">Specify navigation options</string>
 	<string name="global_settings">Global Settings</string>
-	<string name="index_settings">Offline Data</string>
+	<string name="index_settings">Offline Data (Download)</string>
 	<string name="index_settings_descr">Download and manage offline maps and other data such as GPX tracks</string>
 	<string name="general_settings">General Settings</string>
 	<string name="general_settings_descr">Configure global settings</string>
@@ -210,7 +210,7 @@
 	<string name="user_name_descr">Needed for openstreetmap.org submissions</string>
 	<string name="user_password">Your OSM password</string>
 	<string name="user_password_descr">Needed for openstreetmap.org submissions</string>
-	<string name="osmand_service">Background settings</string>
+	<string name="osmand_service">Background Settings</string>
 	<string name="osmand_service_descr">Use to run OsmAnd while screen is off</string>
 
 	 
