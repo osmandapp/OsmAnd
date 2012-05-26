@@ -746,8 +746,8 @@ public class IndexCreator {
 		
 		long time = System.currentTimeMillis();
 		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/data/osm-gen/")); //$NON-NLS-1$
-		creator.setIndexMap(false);
-		creator.setIndexAddress(false);
+		creator.setIndexMap(true);
+		creator.setIndexAddress(true);
 		creator.setIndexPOI(true);
 		creator.setIndexTransport(false);
 
@@ -758,10 +758,11 @@ public class IndexCreator {
 		creator.setZoomWaySmothness(2);
 		MapRenderingTypes rt = MapRenderingTypes.getDefault();// new MapRenderingTypes("/home/victor/projects/OsmAnd/data/testdata/roads_rendering_types.xml");
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
-		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
-		creator.setMapFileName("Luxembourg_poi.obf");
-		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/luxembourg.osm.pbf"),
+//		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
+//		creator.setMapFileName("Luxembourg_poi.obf");
+//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/luxembourg.osm.pbf"),
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/cuba2.osm.bz2"),
+		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/temp/map.osm"),
 				new ConsoleProgressImplementation(1), null, zooms, rt, log);
 		
 		

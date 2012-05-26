@@ -27,8 +27,6 @@ import net.osmand.binary.OsmandOdb.MapDataBlock;
 import net.osmand.data.Boundary;
 import net.osmand.data.MapAlgorithms;
 import net.osmand.osm.Entity;
-import net.osmand.osm.Entity.EntityId;
-import net.osmand.osm.Entity.EntityType;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapRenderingTypes.MapRulType;
 import net.osmand.osm.MapUtils;
@@ -243,6 +241,20 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		}
 		return toReturn;
 	}
+	
+	private List<Way> reverse(List<Way> l) {
+		Collections.reverse(l);
+		for(Way w : l){
+			w.getNodeIds().reverse();
+			Collections.reverse(w.getNodes());
+		}
+		return l;
+	}
+	
+	private List<Way> appendLists(List<Way> w1, List<Way> w2){
+		w1.addAll(w2);
+		return w1;
+	}
 
 	private void combineMultiPolygons(Way w, List<List<Way>> completedRings, List<List<Way>> incompletedRings) {
 		long lId = w.getEntityIds().get(w.getEntityIds().size() - 1).getId().longValue();
@@ -261,14 +273,21 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				long lastId = last.getEntityIds().get(last.getEntityIds().size() - 1).getId().longValue();
 				long firstId = first.getEntityIds().get(0).getId().longValue();
 				if (fId == lastId) {
-					i.addAll(l);
 					remove = true;
-					l = i;
+					l = appendLists(i, l);
 					fId = firstId;
 				} else if (lId == firstId) {
-					l.addAll(i);
+					l = appendLists(l, i);
 					remove = true;
 					lId = lastId;
+				} else if (lId == lastId) {
+					l = appendLists(l, reverse(i));
+					remove = true;
+					lId = firstId;
+				} else if (fId == firstId) {
+					l = appendLists(reverse(i), l);
+					remove = true;
+					fId = lastId;
 				}
 				if (remove) {
 					incompletedRings.remove(k);
