@@ -121,13 +121,6 @@ public class ResourceManager {
 		
 		tileDownloader = MapTileDownloader.getInstance(Version.getFullVersion(context));
 		
-		// ".nomedia" indicates there are no pictures and no music to list in this dir for the Gallery app
-		try {
-			context.getSettings()
-					.extendOsmandPath(APP_DIR + ".nomedia").createNewFile(); //$NON-NLS-1$
-		} catch (Exception e) {
-		}
-		
 		resetStoreDirectory();
 		WindowManager mgr = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
 		DisplayMetrics dm = new DisplayMetrics();
@@ -149,7 +142,7 @@ public class ResourceManager {
 		dirWithTiles.mkdirs();
 		// ".nomedia" indicates there are no pictures and no music to list in this dir for the Gallery app
 		try {
-			context.getSettings().extendOsmandPath(TILES_PATH + ".nomedia").createNewFile(); //$NON-NLS-1$
+			context.getSettings().extendOsmandPath(APP_DIR + ".nomedia").createNewFile(); //$NON-NLS-1$
 		} catch( Exception e ) {
 		}
 	}
