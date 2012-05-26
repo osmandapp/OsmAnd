@@ -95,6 +95,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	public CheckBoxPreference createCheckBoxPreference(OsmandPreference<Boolean> b, int title, int summary){
 		CheckBoxPreference p = new CheckBoxPreference(this);
 		p.setTitle(title);
+		p.setKey(b.getId());
 		p.setSummary(summary);
 		p.setOnPreferenceChangeListener(this);
 		screenPreferences.put(b.getId(), p);
@@ -113,6 +114,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			int defValue, int maxValue){
 		SeekBarPreference p = new SeekBarPreference(this, dialogTextId, defValue, maxValue);
 		p.setTitle(title);
+		p.setKey(b.getId());
 		p.setSummary(summary);
 		p.setOnPreferenceChangeListener(this);
 		screenPreferences.put(b.getId(), p);
@@ -128,6 +130,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	public <T> ListPreference createListPreference(OsmandPreference<T> b, String[] names, T[] values, int title, int summary){
 		ListPreference p = new ListPreference(this);
 		p.setTitle(title);
+		p.setKey(b.getId());
 		p.setDialogTitle(title);
 		p.setSummary(summary);
 		prepareListPreference(b, names, values, p);
@@ -156,6 +159,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	public EditTextPreference createEditTextPreference(OsmandPreference<String> b, int title, int summary){
 		EditTextPreference p = new EditTextPreference(this);
 		p.setTitle(title);
+		p.setKey(b.get());
 		p.setDialogTitle(title);
 		p.setSummary(summary);
 		p.setOnPreferenceChangeListener(this);
