@@ -63,9 +63,23 @@ public class ProgressDialogImplementation implements IProgress {
 	public ProgressDialogImplementation(final ProgressDialog dlg){
 		this(dlg, false);
 	}
+	
 
 	public static ProgressDialogImplementation createProgressDialog(Context ctx, String title, String message, int style) {
-		ProgressDialog dlg = new ProgressDialog(ctx);
+		return createProgressDialog(ctx, title, message, style, null);
+	}
+	
+	public static ProgressDialogImplementation createProgressDialog(Context ctx, String title, String message, int style, final DialogInterface.OnCancelListener listener) {
+		ProgressDialog dlg = new ProgressDialog(ctx) {
+			@Override
+			public void cancel() {
+				if(listener != null) {
+					listener.onCancel(this);
+				}  else {
+					super.cancel();
+				}
+			}
+		};
 		dlg.setTitle(title);
 		dlg.setMessage(message);
 		dlg.setIndeterminate(style == ProgressDialog.STYLE_HORIZONTAL); // re-set in mViewUpdateHandler.handleMessage above

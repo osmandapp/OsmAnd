@@ -14,8 +14,8 @@ import net.osmand.plus.DownloadOsmandIndexesHelper.IndexItem;
 public class IndexFileList implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	IndexItem basemap;
 	TreeMap<String, IndexItem> indexFiles = new TreeMap<String, IndexItem>(new Comparator<String>(){
-		private static final long serialVersionUID = 1L;
 		
 		@Override
 		public int compare(String object1, String object2) {
@@ -45,6 +45,9 @@ public class IndexFileList implements Serializable {
 		if (indexItem.isAccepted()) {
 			indexFiles.put(name, indexItem);
 		}
+		if(name.toLowerCase().startsWith("world_basemap")) {
+			basemap = indexItem;
+		}
 	}
 
 	public boolean isAcceptable() {
@@ -53,6 +56,10 @@ public class IndexFileList implements Serializable {
 
 	public Map<String, IndexItem> getIndexFiles() {
 		return indexFiles;
+	}
+	
+	public IndexItem getBasemap() {
+		return basemap;
 	}
 
 	public boolean isIncreasedMapVersion() {

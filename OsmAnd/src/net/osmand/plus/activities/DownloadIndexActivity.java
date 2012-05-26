@@ -44,6 +44,7 @@ import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Color;
@@ -264,6 +265,14 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 					@Override
 					public void run() {
 						if (indexFiles != null) {
+							boolean basemapExists = ((OsmandApplication) uiActivity.getApplication()).getResourceManager().containsBasemap();
+							if(!basemapExists && indexFiles.getBasemap() != null) {
+								uiActivity.entriesToDownload.put(indexFiles.getBasemap().getFileName(), 
+										indexFiles.getBasemap().createDownloadEntry(ctx));
+								AccessibleToast.makeText(uiActivity, R.string.basemap_was_selected_to_download, 
+										Toast.LENGTH_LONG).show();
+								uiActivity.findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+							}
 							uiActivity.setListAdapter(uiActivity.new DownloadIndexAdapter(indexFiles.getIndexFiles()));
 							if (indexFiles.isIncreasedMapVersion()) {
 								uiActivity.showDialog(DownloadIndexActivity.DIALOG_MAP_VERSION_UPDATE);
@@ -311,19 +320,18 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 						DownloadIndexActivity.this,
 						getString(R.string.downloading),
 						getString(R.string.downloading_file),
-						ProgressDialog.STYLE_HORIZONTAL);
+						ProgressDialog.STYLE_HORIZONTAL,
+						new DialogInterface.OnCancelListener() {
+							@Override
+							public void onCancel(DialogInterface dialog) {
+								makeSureUserCancelDownload(dialog);
+							}
+						});
 				progressFileDlg = progress.getDialog();
-				progressFileDlg.setOnCancelListener(new DialogInterface.OnCancelListener() {
-					@Override
-					public void onCancel(DialogInterface dialog) {
-						downloadFileHelper.setInterruptDownloading(true);
-					}
-				});
 				progressFileDlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
 					@Override
 					public void onDismiss(DialogInterface dialog) {
 						downloadFileHelper.setInterruptDownloading(true);
-						
 					}
 				});
 				return progress.getDialog();
@@ -359,6 +367,20 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
 	public ExpandableListAdapter getListAdapter() {
 		return super.getExpandableListAdapter();
+	}
+	
+	private void makeSureUserCancelDownload(final DialogInterface dlg) {
+		Builder bld = new AlertDialog.Builder(this);
+		bld.setTitle(getString(R.string.default_buttons_cancel));
+		bld.setMessage(R.string.confirm_interrupt_download);
+		bld.setPositiveButton(R.string.default_buttons_yes, new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dlg.dismiss();
+			}
+		});
+		bld.setNegativeButton(R.string.default_buttons_no, null);
+		bld.show();
 	}
 	
 	
@@ -769,9 +791,32 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 		public DownloadIndexAdapter(Map<String, IndexItem> indexFiles) {
 			this.indexFiles = new LinkedHashMap<String, IndexItem>(indexFiles);
-			list.clear();
-			list.addAll(categorizeIndexItems(indexFiles.values()));
+			List<IndexItemCategory> cats = categorizeIndexItems(indexFiles.values());
+			synchronized (this) {
+				list.clear();
+				list.addAll(cats);
+			}
 			getFilter().filter(filterText.getText());
+		}
+		
+		public void collapseTrees(final CharSequence constraint){
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					synchronized (DownloadIndexAdapter.this) {
+						final ExpandableListView expandableListView = getExpandableListView();
+						for (int i = 0; i < getGroupCount(); i++) {
+							int cp = getChildrenCount(i);
+							if (cp < 7) {
+								expandableListView.expandGroup(i);
+							} else {
+								expandableListView.collapseGroup(i);
+							}
+						}
+					}
+				}
+			});
+			
 		}
 
 		public Map<String, IndexItem> getIndexFiles() {
@@ -783,8 +828,11 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			for(IndexItem i : indexFiles) {
 				this.indexFiles.put(i.getFileName(), i);
 			}
-			list.clear();
-			list.addAll(categorizeIndexItems(indexFiles));
+			List<IndexItemCategory> cats = categorizeIndexItems(indexFiles);
+			synchronized (this) {
+				list.clear();
+				list.addAll(cats);
+			}
 			notifyDataSetChanged();
 		}
 		
@@ -830,18 +878,21 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				}
 				return results;
 			}
-
+			
 			@SuppressWarnings("unchecked")
 			@Override
 			protected void publishResults(CharSequence constraint, FilterResults results) {
-				list.clear();
-				Collection<IndexItem> items = (Collection<IndexItem>) results.values;
-				if (items != null && !items.isEmpty()) {
-					list.addAll(categorizeIndexItems(items));
-				} else {
-					list.add(new IndexItemCategory(getResources().getString(R.string.select_index_file_to_download),1));
+				synchronized (DownloadIndexAdapter.this) {
+					list.clear();
+					Collection<IndexItem> items = (Collection<IndexItem>) results.values;
+					if (items != null && !items.isEmpty()) {
+						list.addAll(categorizeIndexItems(items));
+					} else {
+						list.add(new IndexItemCategory(getResources().getString(R.string.select_index_file_to_download), 1));
+					}
 				}
 				notifyDataSetChanged();
+				collapseTrees(constraint);
 			}
 		}
 
@@ -893,12 +944,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			item.setText(group.name);
 			item.setLinkTextColor(Color.YELLOW);
 			adjustIndicator(groupPosition, isExpanded, v);
-			int cp = getChildrenCount(groupPosition);
-			if(cp < 10 && !isExpanded) {
-				getExpandableListView().expandGroup(groupPosition);
-			} else if(cp > 50 && isExpanded){
-				getExpandableListView().collapseGroup(groupPosition);
-			}
 			return row;
 		}
 

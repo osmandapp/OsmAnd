@@ -12,8 +12,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import net.osmand.Algoritms;
@@ -101,6 +103,8 @@ public class ResourceManager {
 	protected final List<TransportIndexRepository> transportRepositories = new ArrayList<TransportIndexRepository>();
 	
 	protected final Map<String, String> indexFileNames = new LinkedHashMap<String, String>();
+	
+	protected final Set<String> basemapFileNames = new LinkedHashSet<String>();
 	
 	protected final Map<String, BinaryMapIndexReader> routingMapFiles = new LinkedHashMap<String, BinaryMapIndexReader>();
 	
@@ -507,6 +511,9 @@ public class ResourceManager {
 						if (index == null) {
 							warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 						} else {
+							if(index.isBasemap()) {
+								basemapFileNames.add(f.getName());
+							}
 							indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$
 							for(String rName : index.getRegionNames()) {
 								// skip duplicate names (don't make collision between getName() and name in the map)
@@ -810,6 +817,7 @@ public class ResourceManager {
 	public synchronized void close(){
 		imagesOnFS.clear();
 		indexFileNames.clear();
+		basemapFileNames.clear();
 		renderer.clearAllResources();
 		closeAmenities();
 		closeRouteFiles();
@@ -839,6 +847,10 @@ public class ResourceManager {
 
 	public Map<String, String> getIndexFileNames() {
 		return new LinkedHashMap<String, String>(indexFileNames);
+	}
+	
+	public boolean containsBasemap(){
+		return !basemapFileNames.isEmpty();
 	}
 	
 	public Map<String, String> getBackupIndexes(Map<String, String> map) {

@@ -678,7 +678,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		}
 		TextView ds = (TextView) findViewById(R.id.DescriptionText);
 		String text = getString(R.string.local_index_description, size);
-		int l = text.indexOf(',');
+		int l = text.indexOf('.');
 		if(l == -1) {
 			l = text.length();
 		}
