@@ -1,9 +1,32 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-	<string name="plugins_screen">Zásuvné moduly</string>
+    <string name="map_online_plugin_is_not_installed">Povoľte zásuvný modul s online mapami na výber rozličných mapových zdrojov</string>
+    <string name="map_online_data">Online mapy</string>
+    <string name="map_online_data_descr">Použitie online máp (ich stiahnutie a uloženie na SD kartu)</string>
+    <string name="online_map_settings">Online mapa</string>
+    <string name="online_map_settings_descr">Konfigurácia online mapových zdrojov</string>
+    <string name="map_settings">- Nastavenia mapy</string>
+    <string name="map_settings_descr">Konfigurácia mapového zobrazenia</string>
+    <string name="osmand_rastermaps_plugin_description">Tento zás. modul umožní používanie širokej škály online máp ako prekrývacej alebo ako základnej mapy. Mapa môže byť pripravená offline a skopírovaná do zložky osmand.</string>
+    <string name="osmand_rastermaps_plugin_name">Online mapy</string>
+    <string name="osmand_background_plugin_description">Tento zás. modul umožní používať navigáciu a stopovanie v úspornom režime s vypnutou obrazovkou. Spustí službu na pozadí, ktorá prebúdza GPS v danom intervale a zaznamenáva GPX alebo hlási hlasové povely.</string>
+    <string name="osmand_background_plugin_name">Funkcie vypnutia obrazovky</string>
+    <string name="osmand_accessibility_description">Tento zásuvný modul umožňuje špeciálne funkcie pre prístupnosť.</string>
+    <string name="osmand_accessibility_name">Prístupnosť</string>
+    <string name="extra_settings">Extra nastavenia</string>
+    <string name="osmand_monitoring_description">Tento zás. modul Vám umožní zaznamenávať Vae cesty, ukladať GPX súbory a vykonávať živé sledovanie založené na webovej službe.</string>
+    <string name="osmand_monitoring_name">Monitorovanie</string>
+    <string name="osmand_extra_settings_description">Tento zás. modul Vám poskytne vysokú prispôsobiteľnosť aplikácie, podľa použitia a predpokladoch Vášho zariadenia.</string>
+    <string name="osmand_extra_settings_name">Extra nastavenia</string>
+    <string name="osmand_development_plugin_description">Tento zás. modul povolí vývojárske funkci (animovanie rutovania) a zobrazí dodatočné informácie ako vykresľovací čas.</string>
+    <string name="osmand_development_plugin_name">Vývoj Osmand-u</string>
+	<string name="plugins_screen">Správca zásuvných modulov</string>
+	<string name="select_plugin_to_activate">Ťuknutím na zásuvný modul ho aktivujete. Pre aplikovanie zmien môže byť vyžadovaný reštart.</string>
+   	<string name="prefs_plugins_descr">Zás. moduly povoľujú extra funkcie vstavané do aplikácie ako stopovanie, mapové dlaždice, funkcie šetrenia batérie, prístupnosť a mnoho iného.</string>
+    	<string name="prefs_plugins">Správca zásuvných modulov</string>
 	<string name="select_plugin_to_activate">Ťuknutím na zásuvný modul ho aktivujete. Pre aplikovanie zmien je vyžadovaný reštart aplikácie.</string>
    	<string name="prefs_plugins_descr">Zás. moduly povoľujú extra funkcie vstavané do aplikácie ako stopovanie, mapové dlaždice, funkcie šetrenia batérie, prístupnosť a mnoho iného.</string>
-    	<string name="prefs_plugins">Zásuvné moduly</string>
+    	<string name="prefs_plugins">Správca zásuvných modulov</string>
     	<string name="tip_recent_changes_0_8_0_t">Zmeny v 0.8.0 :
 	\n\t- Funkcia zásuvných modulov
 	\n\t- Podpora nových offline mapových dát
