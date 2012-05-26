@@ -24,6 +24,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
@@ -627,6 +628,9 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 						if (result) {
 							entriesToDownload.remove(filename);
 							downloads.set(downloads.get() + 1);
+							if(entry.existingBackupFile != null) {
+								Algoritms.removeAllFiles(entry.existingBackupFile);
+							}
 							publishProgress(entry);
 						}
 					}
@@ -672,6 +676,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		public double sizeMB;
 		public String baseName;
 		public int parts;
+		public File existingBackupFile;
 		
 		public boolean downloadFile(DownloadFileHelper downloadFileHelper, String filename, List<File> filesToReindex,
 				IProgress progress, String indexOfAllFiles,

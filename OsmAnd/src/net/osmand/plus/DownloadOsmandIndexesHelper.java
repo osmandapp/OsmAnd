@@ -242,24 +242,23 @@ public class DownloadOsmandIndexesHelper {
 			String toCheckPostfix = null;
 			boolean unzipDir = false;
 			boolean preventMediaIndexing = false;
-			
-			File externalStorageDirectory = ((OsmandApplication) ctx.getApplicationContext()).getSettings().getExternalStorageDirectory();
+			OsmandSettings settings = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
 			if(fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)){
-				parent = new File(externalStorageDirectory, ResourceManager.APP_DIR);
+				parent = settings.extendOsmandPath(ResourceManager.APP_DIR);
 				toSavePostfix = BINARY_MAP_INDEX_EXT;
 				toCheckPostfix = BINARY_MAP_INDEX_EXT;
 			} else if(fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)){
-				parent = new File(externalStorageDirectory, ResourceManager.APP_DIR);
+				parent = settings.extendOsmandPath(ResourceManager.APP_DIR);
 				toSavePostfix = BINARY_MAP_INDEX_EXT_ZIP;
 				toCheckPostfix = BINARY_MAP_INDEX_EXT;
 			} else if(fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)){
-				parent = new File(externalStorageDirectory, ResourceManager.VOICE_PATH);
+				parent = settings.extendOsmandPath(ResourceManager.VOICE_PATH);
 				toSavePostfix = VOICE_INDEX_EXT_ZIP;
 				toCheckPostfix = ""; //$NON-NLS-1$
 				unzipDir = true;
 				preventMediaIndexing = true;
 			} else if(fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)){
-				parent = new File(externalStorageDirectory, ResourceManager.VOICE_PATH);
+				parent = settings.extendOsmandPath(ResourceManager.VOICE_PATH);
 				toSavePostfix = TTSVOICE_INDEX_EXT_ZIP;
 				toCheckPostfix = ""; //$NON-NLS-1$
 				unzipDir = true;
@@ -296,10 +295,14 @@ public class DownloadOsmandIndexesHelper {
 				} catch (NumberFormatException e1) {
 				}
 				entry.parts = 1;
-				if(item.getParts() != null){
+				if (item.getParts() != null) {
 					entry.parts = Integer.parseInt(item.getParts());
 				}
 				entry.fileToUnzip = new File(parent, entry.baseName + toCheckPostfix);
+				File backup = settings.extendOsmandPath(ResourceManager.BACKUP_PATH + entry.fileToUnzip.getName());
+				if (backup.exists()) {
+					entry.existingBackupFile = backup;
+				}
 			}
 			return entry;
 		}
