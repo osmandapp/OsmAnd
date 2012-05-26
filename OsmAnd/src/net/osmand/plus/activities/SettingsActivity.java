@@ -159,7 +159,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	public EditTextPreference createEditTextPreference(OsmandPreference<String> b, int title, int summary){
 		EditTextPreference p = new EditTextPreference(this);
 		p.setTitle(title);
-		p.setKey(b.get());
+		p.setKey(b.getId());
 		p.setDialogTitle(title);
 		p.setSummary(summary);
 		p.setOnPreferenceChangeListener(this);
