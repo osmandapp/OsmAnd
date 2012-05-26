@@ -247,6 +247,10 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			// can't return from this method we are not sure if activity will be recreated or not
 		}
 		mapLayers.getNavigationLayer().setPointToNavigate(settings.getPointToNavigate());
+		Location loc = getLastKnownLocation();
+		if (loc != null && (System.currentTimeMillis() - loc.getTime()) > 30 * 1000) {
+			setLocation(null);
+		}
 
 		currentScreenOrientation = getWindow().getWindowManager().getDefaultDisplay().getOrientation();
 
@@ -702,12 +706,13 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 	}
 
+	// location not null!
 	private void updateSpeedBearing(Location location) {
 		// For network/gps it's bad way (not accurate). It's widely used for testing purposes
 		// possibly keep using only for emulator case
 		PointLocationLayer locationLayer = mapLayers.getLocationLayer();
 		if (isRunningOnEmulator()
-			&& locationLayer.getLastKnownLocation() != null && location != null) {
+			&& locationLayer.getLastKnownLocation() != null) {
 			if (locationLayer.getLastKnownLocation().distanceTo(location) > 3) {
 				float d = location.distanceTo(locationLayer.getLastKnownLocation());
 				long time = location.getTime() - locationLayer.getLastKnownLocation().getTime();
@@ -724,7 +729,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				location.setSpeed(speed);
 			}
 		}
-		if(locationLayer.getLastKnownLocation() != null && location != null && location.hasBearing()){
+		if(locationLayer.getLastKnownLocation() != null && location.hasBearing()){
 			if(locationLayer.getLastKnownLocation().distanceTo(location) > 10 && !isRunningOnEmulator()){
 				location.setBearing(locationLayer.getLastKnownLocation().bearingTo(location));
 			}
@@ -754,11 +759,13 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				liveMonitoringHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
 						location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
 			}
+			
+			updateSpeedBearing(location);
 		}
 
 	
 		registerUnregisterSensor(location);
-		updateSpeedBearing(location);
+		
 		mapLayers.getLocationLayer().setLastKnownLocation(location);
 		navigationInfo.setLocation(location);
 		if(routingHelper.isFollowingMode()){
@@ -1171,8 +1178,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	public boolean onOptionsItemSelected(MenuItem item) {
 		final int itemId = item.getItemId();
 		if (itemId == R.id.map_show_settings) {
-			final Intent intentSettings = new Intent(MapActivity.this,
-					SettingsActivity.class);
+			final Intent intentSettings = new Intent(MapActivity.this, SettingsActivity.class);
 			startActivity(intentSettings);
 			return true;
 		} else if (itemId == R.id.map_where_am_i) {
@@ -1191,44 +1197,22 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			} else {
 				Location loc = getLastKnownLocation();
 				if (loc != null) {
-					mapActions.getDirections(loc.getLatitude(),
-							loc.getLongitude(), true);
+					mapActions.getDirections(loc.getLatitude(), loc.getLongitude(), true);
 				} else {
-					mapActions.getDirections(mapView.getLatitude(),
-							mapView.getLongitude(), true);
+					mapActions.getDirections(mapView.getLatitude(), mapView.getLongitude(), true);
 				}
 			}
 			return true;
 		} else if (itemId == R.id.map_layers) {
 			mapLayers.openLayerSelectionDialog(mapView);
 			return true;
-		} else if (itemId == R.id.map_specify_point) {
-			// next 2 lines replaced for Issue 493, replaced by new 3 lines
-			// NavigatePointActivity dlg = new NavigatePointActivity(this);
-			// dlg.showDialog();
-			Intent newIntent = new Intent(MapActivity.this,
-					SearchActivity.class);
-			// causes wrong position caching:
-			// newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-			LatLon mapLoc = getMapLocation();
-			newIntent.putExtra(SearchActivity.SEARCH_LAT, mapLoc.getLatitude());
-			newIntent
-					.putExtra(SearchActivity.SEARCH_LON, mapLoc.getLongitude());
-			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(newIntent);
-			return true;
 		} else if (itemId == R.id.map_mute) {
-			routingHelper.getVoiceRouter().setMute(
-					!routingHelper.getVoiceRouter().isMute());
+			routingHelper.getVoiceRouter().setMute(!routingHelper.getVoiceRouter().isMute());
 			return true;
 		} else if (itemId == R.id.map_navigate_to_point) {
 			if (mapLayers.getNavigationLayer().getPointToNavigate() != null) {
-				if (routingHelper.isRouteCalculated()
-						|| routingHelper.isFollowingMode()
-						|| routingHelper.isRouteBeingCalculated()) {
-					routingHelper.setFinalAndCurrentLocation(null,
-							routingHelper.getCurrentLocation(),
-							routingHelper.getCurrentGPXRoute());
+				if (routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()) {
+					routingHelper.setFinalAndCurrentLocation(null, routingHelper.getCurrentLocation(), routingHelper.getCurrentGPXRoute());
 				} else {
 					navigateToPoint(null);
 				}

@@ -677,8 +677,9 @@ public class MapActivityActions implements DialogProvider {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		
 		adapter.registerItem(R.string.context_menu_item_navigate_point);
-		adapter.registerItem(R.string.context_menu_item_show_route);
 		adapter.registerItem(R.string.context_menu_item_search);
+		adapter.registerItem(R.string.context_menu_item_directions);
+		adapter.registerItem(R.string.context_menu_item_show_route);
 		adapter.registerItem(R.string.context_menu_item_add_favorite);
 		adapter.registerItem(R.string.context_menu_item_share_location);
 		
@@ -695,7 +696,17 @@ public class MapActivityActions implements DialogProvider {
 				} else if (standardId == R.string.context_menu_item_navigate_point) {
 					mapActivity.navigateToPoint(new LatLon(latitude, longitude));
 				} else if (standardId == R.string.context_menu_item_show_route) {
-					getDirections(latitude, longitude, false);
+					if(checkPointToNavigate()) {
+						getDirections(latitude, longitude, false);
+					}
+				} else if (standardId == R.string.context_menu_item_directions) {
+					Location loc = mapActivity.getLastKnownLocation();
+					if (loc != null) {
+						mapActivity.navigateToPoint(new LatLon(latitude, longitude));
+						getDirections(loc.getLatitude(), loc.getLongitude(), true);
+					} else {
+						AccessibleToast.makeText(mapActivity, R.string.unknown_from_location, Toast.LENGTH_LONG).show();
+					}
 				} else if (standardId == R.string.context_menu_item_search) {
 					Intent intent = new Intent(mapActivity, SearchActivity.class);
 					intent.putExtra(SearchActivity.SEARCH_LAT, latitude);
