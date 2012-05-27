@@ -434,7 +434,6 @@ public class IndexBatchCreator {
 			indexCreator.setIndexMap(indexMap);
 			indexCreator.setLastModifiedDate(f.lastModified());
 			indexCreator.setNormalizeStreets(true);
-			indexCreator.setSaveAddressWays(true);
 			indexCreator.setRegionName(rName);
 			if (regionSpecificData != null && regionSpecificData.cityAdminLevel != null) {
 				indexCreator.setCityAdminLevel(regionSpecificData.cityAdminLevel);

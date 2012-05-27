@@ -68,7 +68,6 @@ public class IndexCreator {
 	private boolean indexRouting /*= true*/;
 
 	private boolean normalizeStreets = true; // true by default
-	private boolean saveAddressWays = true; // true by default
 	private int zoomWaySmothness = 2;
 
 	private String regionName;
@@ -120,10 +119,6 @@ public class IndexCreator {
 
 	public void setIndexTransport(boolean indexTransport) {
 		this.indexTransport = indexTransport;
-	}
-
-	public void setSaveAddressWays(boolean saveAddressWays) {
-		this.saveAddressWays = saveAddressWays;
 	}
 
 	public void setNormalizeStreets(boolean normalizeStreets) {
@@ -478,7 +473,7 @@ public class IndexCreator {
 			normalizeDefaultSuffixes = DataExtractionSettings.getSettings().getDefaultSuffixesToNormalizeStreets();
 			normalizeSuffixes = DataExtractionSettings.getSettings().getSuffixesToNormalizeStreets();
 		}
-		indexAddressCreator.initSettings(normalizeStreets, normalizeDefaultSuffixes, normalizeSuffixes, saveAddressWays, cityAdminLevel);
+		indexAddressCreator.initSettings(normalizeStreets, normalizeDefaultSuffixes, normalizeSuffixes, cityAdminLevel);
 
 		// Main generation method
 		try {
@@ -745,7 +740,7 @@ public class IndexCreator {
 	public static void main(String[] args) throws IOException, SAXException, SQLException, InterruptedException {
 		long time = System.currentTimeMillis();
 		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/data/osm-gen/")); //$NON-NLS-1$
-		creator.setIndexMap(true);
+		creator.setIndexMap(false);
 		creator.setIndexAddress(true);
 		creator.setIndexPOI(true);
 		creator.setIndexTransport(false);
