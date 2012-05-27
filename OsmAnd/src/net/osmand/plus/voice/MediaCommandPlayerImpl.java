@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import net.osmand.LogUtil;
+import net.osmand.plus.OsmandApplication;
 
 import org.apache.commons.logging.Log;
 
@@ -30,6 +31,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	// indicates that player is ready to play first file
 	private volatile boolean playNext = true;
 	private List<String> filesToPlay = Collections.synchronizedList(new ArrayList<String>());
+	private int streamType;
 
 	
 	public MediaCommandPlayerImpl(Context ctx, String voiceProvider)
@@ -37,6 +39,14 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	{
 		super(ctx, voiceProvider, CONFIG_FILE, MEDIA_VOICE_VERSION);
 		mediaPlayer = new MediaPlayer();
+		OsmandApplication osmApp = (OsmandApplication) ctx.getApplicationContext();
+		this.streamType = osmApp.getSettings().AUDIO_STREAM_GUIDANCE.get();  
+		mediaPlayer.setAudioStreamType(streamType);
+	}
+	
+	@Override
+	public void updateAudioStream(int streamType) {
+		this.streamType = streamType;
 	}
 	
 	@Override
@@ -82,6 +92,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer {
 							public void onCompletion(MediaPlayer mp) {
 								mp.release();
 								mediaPlayer = new MediaPlayer();
+								mediaPlayer.setAudioStreamType(streamType);
 								int sleep = 60;
 								boolean delay = true;
 								while (!filesToPlay.isEmpty() && delay) {

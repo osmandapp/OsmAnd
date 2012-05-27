@@ -10,6 +10,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LogUtil;
 import net.osmand.Version;
+import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.AccessibleActivity;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
@@ -545,7 +546,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			startActivity(newIntent);
 			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			return true;
-		} else if (!routingHelper.isFollowingMode()) {
+		} else if (!routingHelper.isFollowingMode() && OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class) != null) {
+			// Find more appropriate plugin for it?
 			if (keyCode == KeyEvent.KEYCODE_VOLUME_UP && event.getRepeatCount() == 0) {
 				if (mapView.isZooming()) {
 					changeZoom(mapView.getZoom() + 2);

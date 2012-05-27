@@ -6,8 +6,11 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.voice.CommandPlayer;
 import android.media.AudioManager;
 import android.preference.ListPreference;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 
@@ -61,6 +64,19 @@ public class OsmandExtraSettings extends OsmandPlugin {
 				app.getString(R.string.voice_stream_voice_call)},
 				new Integer[] {AudioManager.STREAM_MUSIC, AudioManager.STREAM_NOTIFICATION, AudioManager.STREAM_VOICE_CALL},
 				R.string.choose_audio_stream, R.string.choose_audio_stream_descr);
+		final OnPreferenceChangeListener prev = lp.getOnPreferenceChangeListener();
+		lp.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				prev.onPreferenceChange(preference, newValue);
+				CommandPlayer player = app.getPlayer();
+				if(player != null) {
+					player.updateAudioStream(settings.AUDIO_STREAM_GUIDANCE.get());
+				}
+				return true;
+			}
+		});
 		cat.addPreference(lp);
 		
 		

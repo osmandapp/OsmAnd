@@ -15,4 +15,6 @@ public interface CommandPlayer {
 	public abstract void clear();
 
 	public abstract List<String> execute(List<Struct> listStruct);
+	
+	public abstract void updateAudioStream(int streamType);
 }

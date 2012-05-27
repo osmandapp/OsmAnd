@@ -1,10 +1,12 @@
 package net.osmand.plus.voice;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
 import net.osmand.Algoritms;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsActivity;
 import alice.tuprolog.Struct;
@@ -53,6 +55,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	private TextToSpeech mTts;
 	private Context mTtsContext;
 	private String language;
+	private HashMap<String, String> params = new HashMap<String, String>();
 
 	protected TTSCommandPlayerImpl(Activity ctx, String voiceProvider)
 			throws CommandPlayerException {
@@ -65,8 +68,12 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			throw new CommandPlayerException(
 					ctx.getString(R.string.voice_data_corrupted));
 		}
-		initializeEngine(ctx.getApplicationContext(), ctx);
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		initializeEngine(app, ctx);
+		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, app.getSettings().AUDIO_STREAM_GUIDANCE.get().toString());
 	}
+	
+	
 
 	@Override
 	public void playCommands(CommandBuilder builder) {
@@ -76,11 +83,11 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			for (String s : execute) {
 				bld.append(s).append(' ');
 			}
-			mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, null);
+			mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params);
 		}
 	}
 
-	private void initializeEngine(final Context ctx, final Activity act)
+	private void initializeEngine(final OsmandApplication ctx, final Activity act)
 	{
 		if (mTts != null && mTtsContext != ctx) {
 			internalClear();
@@ -163,6 +170,11 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	
 	public static boolean isMyData(File voiceDir) {
 		return new File(voiceDir, CONFIG_FILE).exists();
+	}
+
+	@Override
+	public void updateAudioStream(int streamType) {
+		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, streamType+"");		
 	}
 
 }
