@@ -18,6 +18,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DialogProvider;
@@ -365,7 +366,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				String text = ((EditText)openBug.findViewById(R.id.BugMessage)).getText().toString();
 				String author = ((EditText)openBug.findViewById(R.id.AuthorName)).getText().toString();
 				// do not set name as author it is ridiculous in that case
-				view.getApplication().getSettings().USER_OSM_BUG_NAME.set(author);
+				((OsmandApplication) activity.getApplication()).getSettings().USER_OSM_BUG_NAME.set(author);
 				boolean bug = createNewBug(latitude, longitude, text, author);
 		    	if (bug) {
 		    		AccessibleToast.makeText(activity, activity.getResources().getString(R.string.osb_add_dialog_success), Toast.LENGTH_LONG).show();
@@ -382,7 +383,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	
 
 	public void openBug(final double latitude, final double longitude){
-		OsmandSettings settings = view.getApplication().getSettings();
+		OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
 		openBugAlertDialog(latitude, longitude, "", settings.USER_OSM_BUG_NAME.get());
 	}
 	
@@ -396,7 +397,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		builder.setTitle(R.string.osb_comment_dialog_title);
 		final View view = activity.getLayoutInflater().inflate(R.layout.open_bug, null);
 		builder.setView(view);
-		((EditText)view.findViewById(R.id.AuthorName)).setText(this.view.getApplication().getSettings().USER_OSM_BUG_NAME.get());
+		((EditText)view.findViewById(R.id.AuthorName)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_OSM_BUG_NAME.get());
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.osb_comment_dialog_add_button, new DialogInterface.OnClickListener() {
 			@Override
@@ -404,7 +405,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				OpenStreetBug bug = (OpenStreetBug) args.getSerializable(KEY_BUG);
 				String text = ((EditText)view.findViewById(R.id.BugMessage)).getText().toString();
 				String author = ((EditText)view.findViewById(R.id.AuthorName)).getText().toString();
-				OsmBugsLayer.this.view.getApplication().getSettings().USER_OSM_BUG_NAME.set(author);
+				((OsmandApplication) OsmBugsLayer.this.activity.getApplication()).getSettings().USER_OSM_BUG_NAME.set(author);
 				boolean added = addingComment(bug.getId(), text, author);
 		    	if (added) {
 		    		AccessibleToast.makeText(activity, activity.getResources().getString(R.string.osb_comment_dialog_success), Toast.LENGTH_LONG).show();
