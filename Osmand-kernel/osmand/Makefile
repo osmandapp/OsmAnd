@@ -14,7 +14,7 @@ LDFLAGS = -Wall -fPIC -Wl,-Bsymbolic
 LDRUNFLAGS = -Wl,--hash-style=both
 #  --trace -Bsymbolic -Bsymbolic-functions
 
-LDLIBS = -L$(PREBUILT_DIR) -lskia -lproto -lpthread -lrt -lft2 -lexpat -lz -lpng 
+LDLIBS = -L$(PREBUILT_DIR) -lskia -lproto -lpthread -lrt -lft2 -lexpat -lpng -lz 
 CPP_FILE_EXTENSION = cpp
 OBJECTS = $(LOCAL_SRC_FILES:src/%.$(CPP_FILE_EXTENSION)=build/obj-$(os)-$(arch)/%.o)
 
@@ -30,8 +30,8 @@ CPPFLAGS := \
 	$(C_INCLUDES)
 	
 #target : ../$(RUNFILE)	
-target : $(PREBUILT_DIR)/$(LIBNAME)
-#target : $(PREBUILT_DIR)/$(LIBNAME) ../$(RUNFILE)
+#target : $(PREBUILT_DIR)/$(LIBNAME)
+target : $(PREBUILT_DIR)/$(LIBNAME) ../$(RUNFILE)
 
 
 ../$(RUNFILE) : $(OBJECTS) $(PREBUILT_DIR)/libskia.a $(PREBUILT_DIR)/libproto.a Makefile
@@ -45,7 +45,7 @@ $(PREBUILT_DIR)/$(LIBNAME) : build/$(LIBOSNAME)
 build/$(LIBOSNAME): $(OBJECTS) $(PREBUILT_DIR)/libskia.a $(PREBUILT_DIR)/libproto.a Makefile
 	$(CXX) -shared -o build/$(LIBOSNAME) $(OBJECTS) $(LDFLAGS) $(LDLIBS)
 	
-build/obj-$(os)-$(arch)/%.o : src/%.$(CPP_FILE_EXTENSION) $(LOCAL_C_INCLUDES)
+build/obj-$(os)-$(arch)/%.o : src/%.$(CPP_FILE_EXTENSION) $(LOCAL_C_INCLUDES) src/textdraw.cpp
 	@mkdir -p `dirname $@`
 	$(CXX) -o $@ -c src/$*.$(CPP_FILE_EXTENSION) $(CPPFLAGS)
 	

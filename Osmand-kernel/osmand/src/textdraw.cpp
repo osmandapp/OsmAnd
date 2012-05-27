@@ -11,7 +11,8 @@
 
 #include "common.h"
 #include "renderRules.h"
-#include "utf8.cpp"
+//#include "utf8.cpp"
+#include "utf8/unchecked.h"
 
 
 template <typename T> class quad_tree {
@@ -155,6 +156,19 @@ void drawTextOnCanvas(SkCanvas* cv, const char* text, uint16_t len, float center
 }
 
 
+int nextWord(uint8_t* s, int* charRead) {
+	uint8_t* init = s;
+	while((*s) != 0) {
+		uint32_t tp = utf8::unchecked::next(s);
+		(*charRead) ++;
+		if(tp == ' ' || tp == '\t') {
+			return (s - init);
+		}
+	}
+	return -1;
+
+}
+
 void drawWrappedText(RenderingContext* rc, SkCanvas* cv, TextDrawInfo* text, float textSize, SkPaint& paintText) {
 	if(text->textWrap == 0) {
 		// set maximum for all text
@@ -171,18 +185,19 @@ void drawWrappedText(RenderingContext* rc, SkCanvas* cv, TextDrawInfo* text, flo
 			const char* p_str = c_str;
 			int lastSpace = -1;
 			int prevPos = -1;
+			int charRead = 0;
 			do {
-				int lastSpace = nextWord((uint8_t*)p_str);
+				int lastSpace = nextWord((uint8_t*)p_str, &charRead);
 				if (lastSpace == -1) {
 					pos = end;
 				} else {
 					p_str += lastSpace;
-					if(pos != start && pos - start + lastSpace >= text->textWrap){
+					if(pos != start && charRead >= text->textWrap){
 						break;
 					}
 					pos += lastSpace;
 				}
-			} while(pos < end && (pos - start) < text->textWrap);
+			} while(pos < end && charRead < text->textWrap);
 
 			PROFILE_NATIVE_OPERATION(rc, drawTextOnCanvas(cv, c_str, pos - start , text->centerX, text->centerY + line * (textSize + 2), paintText, text->textShadow));
 			c_str += (pos - start);
