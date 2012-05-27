@@ -24,6 +24,7 @@ import net.osmand.LogUtil;
 import net.osmand.access.AccessibilityMode;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.activities.DayNightHelper;
+import net.osmand.plus.activities.InterfaceClasses;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -65,6 +66,11 @@ public class OsmandApplication extends Application {
 	 */
 	static OsmandSettings osmandSettings = null;
 	
+	/**
+	 * Static reference to instance of interface classes proxy
+	 */
+	static InterfaceClasses interfaceClasses = null;
+	
 	DayNightHelper daynightHelper;
 	NavigationService navigationService;
 	RendererRegistry rendererRegistry;
@@ -85,6 +91,7 @@ public class OsmandApplication extends Application {
 		
 		long timeToStart = System.currentTimeMillis();
 		osmandSettings = createOsmandSettingsInstance();
+		interfaceClasses = createInterfaceClassesInstance();
 		routingHelper = new RoutingHelper(osmandSettings, this, player);
 		manager = new ResourceManager(this);
 		daynightHelper = new DayNightHelper(this);
@@ -111,6 +118,21 @@ public class OsmandApplication extends Application {
 
 	public RendererRegistry getRendererRegistry() {
 		return rendererRegistry;
+	}
+	
+	/**
+	 * Creates instance of InterfaceClasses
+	 * @return Reference to instance of InterfaceClasses
+	 */
+	protected InterfaceClasses createInterfaceClassesInstance() {
+		return new InterfaceClasses();
+	}
+	
+	public static InterfaceClasses getInterfaceClasses() {
+		if(interfaceClasses == null) {
+			LOG.error("Trying to access interface classes before they were created");
+		}
+		return interfaceClasses;
 	}
 	
 	/**
@@ -267,7 +289,7 @@ public class OsmandApplication extends Application {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								Intent intent = new Intent(uiContext,
-										SettingsActivity.class);
+										OsmandApplication.getInterfaceClasses().SettingsActivityClass());
 								intent.putExtra(
 										SettingsActivity.INTENT_KEY_SETTINGS_SCREEN,
 										SettingsActivity.SCREEN_NAVIGATION_SETTINGS);
