@@ -84,8 +84,8 @@
 		<!-- default polygon -->
 		<filter cycle="true" layer="-1" tag="" value="" order="3" objectType="3"/>
 		<filter area="true" layer="-1" tag="" value="" order="3" objectType="3"/>
-		<filter cycle="true" tag="" value="" order="3" objectType="7"/>
-		<filter area="true" tag="" value="" order="3" objectType="7"/>
+		<filter cycle="true" tag="" value="" order="7" objectType="3"/>
+		<filter area="true" tag="" value="" order="7" objectType="3"/>
 		<!-- default line -->
 		<filter layer="-1" tag="" value="" order="10" objectType="2"/>
 		<filter tag="" value="" order="11" objectType="2"/>
