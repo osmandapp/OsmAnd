@@ -76,7 +76,7 @@
 
 
 	<!-- input layer check tag, value, point, cycle, area -->
-	<!-- output !  objectType point = 1, line = 2, polygon = 3  and order -->
+	<!-- output ! objectType point = 1, line = 2, polygon = 3 and order -->
 	<order>
 		<!-- point has order 128 -->
 		<filter tag="" value="" point="true" order="128" objectType="1"/>
@@ -89,32 +89,27 @@
 		
 		<group objectType="3" point="false">
 			<filter tag="railway" value="platform" order="30" />
-			<filter tag="railway" value="station"  order="30"/>
+			<filter tag="railway" value="station" order="30"/>
 		</group>
 		
 		<group objectType="2" area="false" point="false">
 			<!-- Over buildings -->
 			<filter tag="aerialway" value="" order="68"/>
 			<filter tag="power" value="line" order="68"/>
+			<filter tag="power" value="minor_line" order="68"/>
 			<filter layer="1" tag="railway" value="" order="66"/>
 			<filter tag="railway" value="" order="58"/>
 			<filter layer="1" tag="waterway" value="" order="66"/>
 			<filter tag="waterway" value="" order="18"/>
 
-			<!-- Under highways unless appMode=default -->
+			<!-- Admin_levels under highways unless appMode=default -->
 			<filter appMode="pedestrian" tag="admin_level" value="" order="34"/>
 			<filter appMode="bicycle" tag="admin_level" value="" order="34"/>
 			<filter appMode="car" tag="admin_level" value="" order="34"/>
-			<!-- Below sea level -->
-			<filter tag="admin_level" value="0" order="3"/>
-			<filter tag="admin_level" value="1" order="3"/>
 			<filter tag="admin_level" value="" order="62"/>
-			
-			<filter tag="administrative" value="" order="62"/>
-			 
-			<filter tag="contour" value="" order="15"/>
-				 
 
+			<filter tag="administrative" value="" order="62"/>
+				 
 			<!-- Highways: 35-57, bridges 66+/-1 -->
 			 <filter layer="1" tag="highway" value="motorway" order="66" shadowLevel="1"/>
 			<filter tag="highway" value="motorway" order="57" shadowLevel="1"/>
@@ -179,8 +174,7 @@
 			<filter appMode="bicycle" tag="highway" value="byway" order="59"/>
 			<filter tag="highway" value="byway" order="37"/>
 
-             <!--  Additional attributes can be used in that way --> 
-             <!--  additional="tracktype=grade1"  -->
+		<!-- Additional attributes can be used in this way: additional="tracktype=grade1" -->
 			 <filter layer="1" tag="highway" value="track" order="67"/>
 			<filter appMode="pedestrian" tag="highway" value="track" order="60"/>
 			<filter tag="highway" value="track" order="37"/>
@@ -199,14 +193,15 @@
 
 			 <filter layer="1" tag="highway" value="bridleway" order="67"/>
 			<filter appMode="pedestrian" tag="highway" value="bridleway" order="59"/>
-			<filter tag="highway" value="bridleway" order="35"/>
+			<filter tag="highway" value="bridleway" order="36"/>
 			
 			<filter tag="natural" value="coastline_broken" order="25"/>
+
+			<filter tag="contour" value="" order="15"/>
 		</group>
 		
 		<group objectType="3" point="false">
-		
-		    <filter layer="-1" tag="building" value="" order="6"/>
+			<filter layer="-1" tag="building" value="" order="6"/>
 			<filter tag="building" value="" order="64"/>
 
 			<filter tag="railway" value="" order="30"/>
@@ -239,8 +234,6 @@
 			<filter tag="natural" value="coastline" order="1"/>
 			<filter tag="natural" value="" order="3"/>
 		</group>
-
-
 	</order>
 
 
@@ -290,7 +283,7 @@
 
 		<!-- Highway text -->
 		<group>
-			<filter tag="highway" value="motorway" nameTag=""  textOrder="6"/>
+			<filter tag="highway" value="motorway" nameTag="" textOrder="6"/>
 			<filter tag="highway" value="motorway_link" nameTag="" textOrder="7"/>
 			<filter tag="highway" value="trunk" nameTag="" textOrder="6"/>
 			<filter tag="highway" value="trunk_link" nameTag="" textOrder="7"/>
@@ -855,8 +848,8 @@
 
 
 	 <group>
-	 	<filter noPolygons="true"  tag="natural" value="land" color="#00ffffff"/>
-	 	<filter nightMode="true"  tag="natural" value="land" color="#003333"/>
+	 	<filter noPolygons="true" tag="natural" value="land" color="#00ffffff"/>
+	 	<filter nightMode="true" tag="natural" value="land" color="#003333"/>
 		<filter tag="natural" value="land" color="#f1eae4"/>
 	 </group>
 
@@ -963,7 +956,7 @@
 
 
 	<line>
-	    <filter minzoom="1" tag="natural" value="coastline_broken" color="#111111" strokeWidth="2"/>
+		<filter minzoom="1" tag="natural" value="coastline_broken" color="#111111" strokeWidth="2"/>
 		<group>
 			<filter hmRendered="true" tag="highway" value="motorway" maxzoom="13" color="#809bff"/>
 				<filter tag="highway" value="motorway" maxzoom="13" color="#a58dff"/>
