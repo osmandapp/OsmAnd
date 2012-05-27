@@ -124,8 +124,10 @@ public class RenderingRulesStorage {
 								if (rule != null) {
 									RenderingRule toInsert = createTagValueRootWrapperRule(keys[j], rule);
 									toInsert.addIfElseChildren(dependsRule);
+									tagValueGlobalRules[i].put(keys[j], toInsert);
+								} else {
+									tagValueGlobalRules[i].put(keys[j], dependsRule);
 								}
-								tagValueGlobalRules[i].put(keys[j], dependsRule);
 							}
 						}
 					} else {
@@ -405,23 +407,7 @@ public class RenderingRulesStorage {
 	}
 	
 	private static void printRenderingRule(String indent, RenderingRule rr, PrintStream out){
-		indent += "   ";
-		out.print("\n"+indent);
-		for(RenderingRuleProperty p : rr.getProperties()){
-			out.print(" " + p.getAttrName() + "= ");
-			if(p.isString()){
-				out.print("\"" + rr.getStringPropertyValue(p.getAttrName()) + "\"");
-			} else if(p.isFloat()){
-				out.print(rr.getFloatPropertyValue(p.getAttrName()));
-			} else if(p.isColor()){
-				out.print(rr.getColorPropertyValue(p.getAttrName()));
-			} else if(p.isIntParse()){
-				out.print(rr.getIntPropertyValue(p.getAttrName()));
-			} 
-		}
-		for(RenderingRule rc : rr.getIfElseChildren()){
-			printRenderingRule(indent, rc, out);
-		}
+		out.print(rr.toString(indent, new StringBuilder()).toString());
 	}
 	
 	
@@ -440,21 +426,21 @@ public class RenderingRulesStorage {
 				return depends;
 			}
 		};
-		storage.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream("test_depends.render.xml"), resolver);
-		storage.printDebug(TEXT_RULES, System.out);
+		storage.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream("winter+ski.render.xml"), resolver);
+//		storage.printDebug(TEXT_RULES, System.out);
 //		long tm = System.nanoTime();
 //		int count = 100000;
 //		for (int i = 0; i < count; i++) {
 			RenderingRuleSearchRequest searchRequest = new RenderingRuleSearchRequest(storage);
-			searchRequest.setStringFilter(storage.PROPS.R_TAG, "highway");
-			searchRequest.setStringFilter(storage.PROPS.R_VALUE, "motorway");
+			searchRequest.setStringFilter(storage.PROPS.R_TAG, "landuse");
+			searchRequest.setStringFilter(storage.PROPS.R_VALUE, "wood");
 			 searchRequest.setIntFilter(storage.PROPS.R_LAYER, 1);
 			searchRequest.setIntFilter(storage.PROPS.R_MINZOOM, 15);
 			searchRequest.setIntFilter(storage.PROPS.R_MAXZOOM, 15);
 			//	searchRequest.setBooleanFilter(storage.PROPS.R_NIGHT_MODE, true);
 			// searchRequest.setBooleanFilter(storage.PROPS.get("hmRendered"), true);
 			
-			boolean res = searchRequest.search(LINE_RULES);
+			boolean res = searchRequest.search(POLYGON_RULES);
 			System.out.println("Result " + res);
 			printResult(searchRequest,  System.out);
 //		}

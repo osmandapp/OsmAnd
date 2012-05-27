@@ -128,5 +128,36 @@ public class RenderingRule {
 		}
 		ifElseChildren.add(rr);
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder bls = new StringBuilder();
+		toString("", bls);
+		return bls.toString();
+	}
+	
+	public StringBuilder toString(String indent, StringBuilder bls ) {
+		bls.append("RenderingRule [");
+		for(RenderingRuleProperty p : getProperties()){
+			bls.append(" " + p.getAttrName() + "= ");
+			if(p.isString()){
+				bls.append("\"" + getStringPropertyValue(p.getAttrName()) + "\"");
+			} else if(p.isFloat()){
+				bls.append(getFloatPropertyValue(p.getAttrName()));
+			} else if(p.isColor()){
+				bls.append(getColorPropertyValue(p.getAttrName()));
+			} else if(p.isIntParse()){
+				bls.append(getIntPropertyValue(p.getAttrName()));
+			} 
+		}
+		bls.append("]");
+		indent += "   ";
+		for(RenderingRule rc : getIfElseChildren()){
+			bls.append("\n"+indent);			
+			rc.toString(indent, bls);
+		}
+		
+		return bls;
+	}
 
 }

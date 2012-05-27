@@ -48,8 +48,7 @@ public class BinaryInspector {
 		// test cases show info
 		
 		
-		inspector(new String[]{"-vaddress", "/home/victor/projects/OsmAnd/data/osm-gen/Map.obf"});
-//		 inspector(new String[]{"-vaddress", "-bbox=18.05,48.33,18.12,48.28", "/home/victor/projects/OsmAnd/temp/Slovakia_europe.obf"});
+//		 inspector(new String[]{"-vaddress", "-bbox=-121.785,37.35,-121.744,37.33", ""});
 		// test case extract parts
 		// test case 
 	}
