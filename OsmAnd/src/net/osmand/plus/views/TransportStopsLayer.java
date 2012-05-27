@@ -3,16 +3,25 @@ package net.osmand.plus.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.OsmAndFormatter;
 import net.osmand.access.AccessibleToast;
+import net.osmand.data.Amenity;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.LatLon;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.TransportIndexRepository;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.net.Uri;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -163,6 +172,13 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		return null;
 	}
 	
+	private void showDescriptionDialog(TransportStop a) {
+		Builder bs = new AlertDialog.Builder(view.getContext());
+		bs.setTitle(a.getName(view.getSettings().usingEnglishNames()));
+		bs.setMessage(getStopDescription(a, true));
+		bs.show();
+	}
+	
 	@Override
 	public String getObjectName(Object o) {
 		if(o instanceof TransportStop){
@@ -182,6 +198,20 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			return ((TransportStop)o).getLocation();
 		}
 		return null;
+	}
+	
+	@Override
+	public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {
+		if(o instanceof TransportStop){
+			final TransportStop a = (TransportStop) o;
+			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					showDescriptionDialog(a);
+				}
+			};
+			adapter.registerItem(R.string.poi_context_menu_showdescription, 0, listener, -1);
+		}
 	}
 
 
