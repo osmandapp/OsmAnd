@@ -28,12 +28,14 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.os.StatFs;
 import android.text.SpannableString;
+import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.ContextMenu;
@@ -688,6 +690,12 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			public void onClick(View widget) {
 				asyncLoader.setResult(null);
 				startActivity(new Intent(LocalIndexesActivity.this, DownloadIndexActivity.class));					
+			}
+			
+			@Override
+			public void updateDrawState(TextPaint ds) {
+				super.updateDrawState(ds);
+				ds.setColor(Color.GREEN);
 			}
 		}, 0, l, 0);
 		ds.setText(content);
