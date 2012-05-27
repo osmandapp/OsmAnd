@@ -23,11 +23,8 @@
 	<string name="plugins_screen">Správca zásuvných modulov</string>
 	<string name="select_plugin_to_activate">Ťuknutím na zásuvný modul ho aktivujete. Pre aplikovanie zmien môže byť vyžadovaný reštart.</string>
    	<string name="prefs_plugins_descr">Zás. moduly povoľujú extra funkcie vstavané do aplikácie ako stopovanie, mapové dlaždice, funkcie šetrenia batérie, prístupnosť a mnoho iného.</string>
-    	<string name="prefs_plugins">Správca zásuvných modulov</string>
-	<string name="select_plugin_to_activate">Ťuknutím na zásuvný modul ho aktivujete. Pre aplikovanie zmien je vyžadovaný reštart aplikácie.</string>
-   	<string name="prefs_plugins_descr">Zás. moduly povoľujú extra funkcie vstavané do aplikácie ako stopovanie, mapové dlaždice, funkcie šetrenia batérie, prístupnosť a mnoho iného.</string>
-    	<string name="prefs_plugins">Správca zásuvných modulov</string>
-    	<string name="tip_recent_changes_0_8_0_t">Zmeny v 0.8.0 :
+    <string name="prefs_plugins">Správca zásuvných modulov</string>
+   	<string name="tip_recent_changes_0_8_0_t">Zmeny v 0.8.0 :
 	\n\t- Funkcia zásuvných modulov
 	\n\t- Podpora nových offline mapových dát
 	\n\t- Mnoho opravených chýb
