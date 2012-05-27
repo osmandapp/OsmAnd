@@ -40,6 +40,7 @@ import net.osmand.router.CarRouter;
 import net.osmand.router.PedestrianRouter;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
+import net.osmand.router.VehicleRouter;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -145,7 +146,10 @@ public class RouteProvider {
 		private List<RouteDirectionInfo> directions;
 		private final String errorMessage;
 		private int[] listDistance = null;
-		
+		private Double[] speeds = null;
+		public Double[] getSpeeds() {
+			return speeds;
+		}
 		public RouteCalculationResult(String errorMessage) {
 			this(null, null, null, null, errorMessage);
 		}
@@ -158,6 +162,17 @@ public class RouteProvider {
 			}
 		}
 		
+		public RouteCalculationResult(List<Location> res, List<Double> speeds, List<RouteDirectionInfo> directions, Location start, LatLon end, String errorMessage) {
+			if(speeds!=null && !speeds.isEmpty()){
+				this.speeds=speeds.toArray(new Double[0]);
+			}
+			this.directions = directions;
+			this.errorMessage = errorMessage;
+			this.locations = res;
+			if (res != null) {
+				prepareResult(start, end);
+			}
+		}
 		public List<Location> getLocations() {
 			return locations;
 		}
@@ -372,6 +387,7 @@ public class RouteProvider {
 
 		List<RouteDirectionInfo> directions = new ArrayList<RouteDirectionInfo>();
 		int[] listDistance = res.getListDistance();
+		Double[] speeds=res.getSpeeds();
 		List<Location> locations = res.getLocations();
 		
 		
@@ -455,7 +471,12 @@ public class RouteProvider {
 				
 				// calculate for previousRoute 
 				previousInfo.distance = listDistance[previousLocation]- listDistance[i];
-				previousInfo.expectedTime = (int) (previousInfo.distance / speed);
+				double tempSpeed=speed;
+				if(speeds!=null && speeds[previousLocation]!=null && speeds[i]!=null){
+					tempSpeed=(speeds[previousLocation]+speeds[i])/2;
+				}
+				/*10 second delay at each node/turn*/
+				previousInfo.expectedTime = (int) (previousInfo.distance / tempSpeed)+10;
 				previousInfo.descriptionRoute += " " + OsmAndFormatter.getFormattedDistance(previousInfo.distance, ctx); //$NON-NLS-1$
 
 				previousInfo = new RouteDirectionInfo();
@@ -472,7 +493,12 @@ public class RouteProvider {
 		} 
 			
 		previousInfo.distance = listDistance[previousLocation];
-		previousInfo.expectedTime = (int) (previousInfo.distance / speed);
+		double tempSpeed=speed;
+		if(speeds!=null && speeds[previousLocation]!=null ){
+			tempSpeed=speeds[previousLocation];
+		}
+		/*10 second delay at each node/turn*/
+		previousInfo.expectedTime = (int) (previousInfo.distance / tempSpeed)+10;
 		previousInfo.descriptionRoute += " " + OsmAndFormatter.getFormattedDistance(previousInfo.distance, ctx); //$NON-NLS-1$
 		
 		// add last direction go straight (to show arrow in screen after all turns)
@@ -515,14 +541,19 @@ public class RouteProvider {
 					
 					// add turn because it was missed
 					RouteDirectionInfo toAdd = directions.get(currentDirection);
-					float calcSpeed = toAdd.expectedTime == 0 ? speed :((float) toAdd.distance / toAdd.expectedTime);
+					tempSpeed=speed;
+					if(speeds!=null && speeds[currentDirection]!=null){
+						tempSpeed=speeds[currentDirection];
+					}
+					float calcSpeed = toAdd.expectedTime == 0 ? (float)tempSpeed :((float) toAdd.distance / toAdd.expectedTime);
 					
 					if(i > 0){
 						// update previous
 						RouteDirectionInfo previous = res.directions.get(i - 1);
 						calcSpeed = previous.expectedTime == 0 ? calcSpeed :((float) previous.distance / previous.expectedTime);
 						previous.distance = listDistance[previous.routePointOffset] - listDistance[toAdd.routePointOffset];
-						previous.expectedTime = (int) ((float) previous.distance / calcSpeed); 
+						/*10 second delay at each node/turn*/
+						previous.expectedTime = (int) ((float) previous.distance / calcSpeed)+10; 
 					}
 					toAdd.distance = listDistance[toAdd.routePointOffset] - distanceAfter;
 					toAdd.expectedTime = (int) ((float) toAdd.distance / calcSpeed);
@@ -635,14 +666,19 @@ public class RouteProvider {
 		List<Location> res = new ArrayList<Location>();
 		try {
 			List<RouteSegmentResult> result = router.searchRoute(ctx, st, en);
+			List<Double> speeds = new ArrayList<Double>();
+			VehicleRouter vhr=ctx.getRouter();
 			for (RouteSegmentResult s : result) {
 				boolean plus = s.startPointIndex < s.endPointIndex;
 				int i = s.startPointIndex;
+				/*Considering actual driving speed on road is 2/3 of max speed*/
+				double speed=vhr.defineSpeed(s.object)*2/3;
 				while (true) {
 					Location n = new Location(""); //$NON-NLS-1$
 					n.setLatitude(MapUtils.get31LatitudeY(s.object.getPoint31YTile(i)));
 					n.setLongitude(MapUtils.get31LongitudeX(s.object.getPoint31XTile(i)));
 					res.add(n);
+					speeds.add(speed);
 					if (i == s.endPointIndex) {
 						break;
 					}
@@ -653,7 +689,7 @@ public class RouteProvider {
 					}
 				}
 			}
-			return new RouteCalculationResult(res, null, start, end, null);
+			return new RouteCalculationResult(res, speeds, null, start, end, null);
 		} catch (OutOfMemoryError e) {
 			return new RouteCalculationResult("Not enough process memory");
 		}
