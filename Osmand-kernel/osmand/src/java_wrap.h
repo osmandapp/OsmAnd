@@ -97,12 +97,17 @@ std::string getString(JNIEnv* env, jstring jstr)
 
 std::string getStringMethod(JNIEnv* env, jobject o, jmethodID fid)
 {
-	return getString(env, (jstring)env->CallObjectMethod(o, fid));
+	jstring js = (jstring)env->CallObjectMethod(o, fid);
+	std::string s = getString(env, js);
+	env->DeleteLocalRef(js);
+	return s;
 }
 
-std::string getStringMethod(JNIEnv* env, jobject o, jmethodID fid, int i)
-{
-	return getString(env, (jstring)env->CallObjectMethod(o, fid, i));
+std::string getStringMethod(JNIEnv* env, jobject o, jmethodID fid, int i) {
+	jstring js = (jstring) env->CallObjectMethod(o, fid, i);
+	std::string s = getString(env, js);
+	env->DeleteLocalRef(js);
+	return s;
 }
 
 #endif
