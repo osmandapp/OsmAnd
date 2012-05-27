@@ -46,18 +46,9 @@ public class BinaryInspector {
 	public static void main(String[] args) throws IOException {
 		inspector(args);
 		// test cases show info
-//		 inspector(new String[]{"/home/victor/projects/OsmAnd/data/osm-gen/Luxembourg.obf"});
-		
-		
+		 inspector(new String[]{"-vmap", "/home/victor/projects/OsmAnd/data/osm-gen/Map.obf"});
 		// test case extract parts
-//		inspector(new String[]{"-c", "E:\\Information\\OSM maps\\osmand\\Netherlands-addr-trans.map.obf", 
-//				"E:\\Information\\OSM maps\\osmand\\Netherlands.map.obf", "-1"});
-		
 		// test case 
-//		inspector(new String[]{"-c", "E:\\Information\\OSM maps\\osmand\\Netherlands-addr-trans.map.obf", 
-//				"E:\\Information\\OSM maps\\osmand\\Netherlands.map.obf", "-1",
-//				"E:\\Information\\OSM maps\\osmand\\Belarus_4.map.obf", "E:\\Information\\OSM maps\\osmand\\Minsk.map.obf"});
-//		inspector(new String[]{"E:\\Information\\OSM maps\\osmand\\Netherlands-addr-trans.map.obf"});
 	}
 	
 	private static void println(String s) {

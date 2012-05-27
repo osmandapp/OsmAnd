@@ -438,9 +438,8 @@ void drawPoint(MapDataObject* mObj,	RenderingRuleSearchRequest* req, SkCanvas* c
 }
 
 void drawObject(RenderingContext* rc, MapDataObject* mObj, SkCanvas* cv, RenderingRuleSearchRequest* req,
-	SkPaint* paint, int l, int renderText, int drawOnlyShadow) {
+	SkPaint* paint, int l, int renderText, int drawOnlyShadow, int t) {
 	rc->allObjects++;
-	int t = mObj->objectType;
 	tag_value pair = mObj->types.at(l);
 	if (t == 1 && !drawOnlyShadow) {
 		// point
@@ -514,9 +513,9 @@ HMAP::hash_map<int, std::vector<int> > sortObjectsByProperOrder(std::vector <Map
 				req->setIntFilter(req->props()->R_POINT, mobj->points.size() == 1);
 				req->setIntFilter(req->props()->R_CYCLE, mobj->cycle());
 				if (req->searchRule(RenderingRulesStorage::ORDER_RULES)) {
-					mobj->objectType = req->getIntPropertyValue(req->props()->R_OBJECT_TYPE);
+					int objectType = req->getIntPropertyValue(req->props()->R_OBJECT_TYPE);
 					int order = req->getIntPropertyValue(req->props()->R_ORDER);
-					orderMap[order].push_back(sh + j);
+					orderMap[(order << 2)|objectType].push_back(sh + j);
 					if (req->getIntPropertyValue(req->props()->R_SHADOW_LEVEL) > 0) {
 						rc->shadowLevelMin = std::min(rc->shadowLevelMin, order);
 						rc->shadowLevelMax = std::max(rc->shadowLevelMax, order);
@@ -548,9 +547,9 @@ void doRendering(std::vector <MapDataObject* > mapDataObjects, SkCanvas* canvas,
 	}
 	bool shadowDrawn = false;
 	for (std::set<int>::iterator ks = keys.begin(); ks != keys.end(); ks++) {
-		if (!shadowDrawn && *ks >= rc->shadowLevelMin && *ks <= rc->shadowLevelMax && rc->getShadowRenderingMode() > 1) {
+		if (!shadowDrawn && ((*ks)>>2) >= rc->shadowLevelMin && ((*ks)>>2) <= rc->shadowLevelMax && rc->getShadowRenderingMode() > 1) {
 			for (std::set<int>::iterator ki = ks; ki != keys.end(); ki++) {
-				if (*ki > rc->shadowLevelMax || rc->interrupted()) {
+				if (((*ki)>>2) > rc->shadowLevelMax || rc->interrupted()) {
 					break;
 				}
 				std::vector<int> list = orderMap[*ki];
@@ -562,7 +561,7 @@ void doRendering(std::vector <MapDataObject* > mapDataObjects, SkCanvas* canvas,
 
 					// show text only for main type
 
-					drawObject(rc, mapObject, canvas, req, paint, l, l == 0, true);
+					drawObject(rc, mapObject, canvas, req, paint, l, l == 0, true, (*ki)&3);
 				}
 			}
 			shadowDrawn = true;
@@ -576,9 +575,9 @@ void doRendering(std::vector <MapDataObject* > mapDataObjects, SkCanvas* canvas,
 
 			MapDataObject* mapObject = mapDataObjects.at(ind);
 			// show text only for main type
-			drawObject(rc, mapObject, canvas, req, paint, l, l == 0, false);
+			drawObject(rc, mapObject, canvas, req, paint, l, l == 0, false, (*ks)&3);
 		}
-		rc->lastRenderedKey = *ks;
+		rc->lastRenderedKey = (*ks) >>2;
 		if (rc->interrupted()) {
 			return;
 		}

@@ -217,9 +217,9 @@ public class OsmandRenderer {
 			boolean shadowDrawn = false;
 
 			for (int k = 0; k < keys.length; k++) {
-				if (!shadowDrawn && keys[k] >= rc.shadowLevelMin && keys[k] <= rc.shadowLevelMax && rc.shadowRenderingMode > 1) {
+				if (!shadowDrawn && (keys[k]>>2) >= rc.shadowLevelMin && (keys[k]>>2) <= rc.shadowLevelMax && rc.shadowRenderingMode > 1) {
 					for (int ki = k; ki < keys.length; ki++) {
-						if (keys[ki] > rc.shadowLevelMax || rc.interrupted) {
+						if ((keys[ki]>>2) > rc.shadowLevelMax || rc.interrupted) {
 							break;
 						}
 						TIntArrayList list = orderMap.get(keys[ki]);
@@ -230,7 +230,7 @@ public class OsmandRenderer {
 							BinaryMapDataObject obj = objects.get(ind);
 
 							// show text only for main type
-							drawObj(obj, render, cv, rc, l, l == 0, true);
+							drawObj(obj, render, cv, rc, l, l == 0, true, (keys[ki] & 3));
 							objCount++;
 						}
 					}
@@ -248,10 +248,10 @@ public class OsmandRenderer {
 					BinaryMapDataObject obj = objects.get(ind);
 
 					// show text only for main type
-					drawObj(obj, render, cv, rc, l, l == 0, false);
+					drawObj(obj, render, cv, rc, l, l == 0, false, (keys[k] & 3));
 					objCount++;
 				}
-				rc.lastRenderedKey = keys[k];
+				rc.lastRenderedKey = (keys[k] >> 2);
 				if (objCount > 25) {
 					notifyListeners(notifyList);
 					objCount = 0;
@@ -359,9 +359,9 @@ public class OsmandRenderer {
 						render.setBooleanFilter(render.ALL.R_POINT, o.getPointsLength() == 1);
 						render.setBooleanFilter(render.ALL.R_CYCLE, o.isCycle());
 						if (render.search(RenderingRulesStorage.ORDER_RULES)) {
-							o.setObjectType(render.getIntPropertyValue(render.ALL.R_OBJECT_TYPE));
+							int objectType = render.getIntPropertyValue(render.ALL.R_OBJECT_TYPE);
 							int order = render.getIntPropertyValue(render.ALL.R_ORDER);
-							put(orderMap, order, sh + j, init);
+							put(orderMap, (order << 2) | objectType, sh + j, init);
 							if (render.isSpecified(render.ALL.R_SHADOW_LEVEL)) {
 								rc.shadowLevelMin = Math.min(rc.shadowLevelMin, order);
 								rc.shadowLevelMax = Math.max(rc.shadowLevelMax, order);
@@ -388,9 +388,8 @@ public class OsmandRenderer {
 	}
 
 	protected void drawObj(BinaryMapDataObject obj, RenderingRuleSearchRequest render, Canvas canvas, RenderingContext rc, int l,
-			boolean renderText, boolean drawOnlyShadow) {
+			boolean renderText, boolean drawOnlyShadow, int type) {
 		rc.allObjects++;
-		int type = obj.getObjectType();
 		TagValuePair pair = obj.getMapIndex().decodeType(obj.getTypes()[l]);
 		if (type == MapRenderingTypes.POINT_TYPE && !drawOnlyShadow) {
 			drawPoint(obj, render, canvas, rc, pair, renderText);

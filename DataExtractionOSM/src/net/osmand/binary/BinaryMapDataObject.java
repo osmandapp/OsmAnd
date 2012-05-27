@@ -45,13 +45,6 @@ public class BinaryMapDataObject {
 		return name;
 	}
 	
-	public int getObjectType() {
-		return objectType;
-	}
-	
-	public void setObjectType(int objectType) {
-		this.objectType = objectType;
-	}
 	
 	public TIntObjectHashMap<String> getObjectNames() {
 		return objectNames;

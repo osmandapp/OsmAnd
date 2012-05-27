@@ -355,42 +355,42 @@ public class MapRenderRepositories {
 			boolean ocean = false;
 			MapIndex mi = null;
 			searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom, searchFilter);
-			for (BinaryMapIndexReader c  : files.values()) {
+			for (BinaryMapIndexReader c : files.values()) {
 				searchRequest.clearSearchResults();
 				List<BinaryMapDataObject> res = c.searchMapIndex(searchRequest);
-					for (BinaryMapDataObject r : res) {
-						if (PerformanceFlags.checkForDuplicateObjectIds) {
-							if (ids.contains(r.getId()) && r.getId() > 0) {
-								// do not add object twice
-								continue;
-							}
-							ids.add(r.getId());
+				for (BinaryMapDataObject r : res) {
+					if (PerformanceFlags.checkForDuplicateObjectIds) {
+						if (ids.contains(r.getId()) && r.getId() > 0) {
+							// do not add object twice
+							continue;
 						}
-						count++;
+						ids.add(r.getId());
+					}
+					count++;
 
-						if (r.containsType(r.getMapIndex().coastlineEncodingType)) {
-							if(c.isBasemap()){
-								basemapCoastLines.add(r);
-							} else {
-								coastLines.add(r);
-							}
+					if (r.containsType(r.getMapIndex().coastlineEncodingType)) {
+						if (c.isBasemap()) {
+							basemapCoastLines.add(r);
 						} else {
-							// do not mess coastline and other types
-							if(c.isBasemap()){
-								basemapResult.add(r);
-							} else {
-								tempResult.add(r);
-							}
+							coastLines.add(r);
 						}
-						if (checkWhetherInterrupted()) {
-							return false;
+					} else {
+						// do not mess coastline and other types
+						if (c.isBasemap()) {
+							basemapResult.add(r);
+						} else {
+							tempResult.add(r);
 						}
 					}
-				
-				if(searchRequest.isOcean() ){
+					if (checkWhetherInterrupted()) {
+						return false;
+					}
+				}
+
+				if (searchRequest.isOcean()) {
 					mi = c.getMapIndexes().get(0);
 					ocean = true;
-				} else if(searchRequest.isLand()) {
+				} else if (searchRequest.isLand()) {
 					mi = c.getMapIndexes().get(0);
 				}
 			}

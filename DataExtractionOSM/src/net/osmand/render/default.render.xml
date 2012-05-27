@@ -76,6 +76,7 @@
 
 
 	<!-- input layer check tag, value, point, cycle, area -->
+	<!-- Order should be between 0 and 255 (integer) -->
 	<!-- output ! objectType point = 1, line = 2, polygon = 3 and order -->
 	<order>
 		<!-- point has order 128 -->
@@ -83,6 +84,8 @@
 		<!-- default polygon -->
 		<filter cycle="true" layer="-1" tag="" value="" order="3" objectType="3"/>
 		<filter area="true" layer="-1" tag="" value="" order="3" objectType="3"/>
+		<filter cycle="true" tag="" value="" order="3" objectType="7"/>
+		<filter area="true" tag="" value="" order="3" objectType="7"/>
 		<!-- default line -->
 		<filter layer="-1" tag="" value="" order="10" objectType="2"/>
 		<filter tag="" value="" order="11" objectType="2"/>
