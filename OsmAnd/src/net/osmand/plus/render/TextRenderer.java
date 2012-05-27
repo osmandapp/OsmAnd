@@ -26,7 +26,6 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
-import android.text.TextPaint;
 import android.util.FloatMath;
 
 public class TextRenderer {
@@ -284,7 +283,7 @@ public class TextRenderer {
 					}
 					pos++;
 				}
-				if (lastSpace == -1) {
+				if (lastSpace == -1 || pos == end) {
 					drawTextOnCanvas(cv, text.text.substring(start, pos), text.centerX, text.centerY + line * (textSize + 2), paintText,
 							text.textShadow);
 					start = pos;

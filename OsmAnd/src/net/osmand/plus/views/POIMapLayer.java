@@ -253,7 +253,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 					}
 					pos++;
 				}
-				if(lastSpace == -1){
+				if(lastSpace == -1 || (pos == end)){
 					drawShadowText(cv, text.substring(start, pos), x, y + line * (textSize + 2));
 					start = pos;
 				} else {
