@@ -1213,6 +1213,10 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			if (mapLayers.getNavigationLayer().getPointToNavigate() != null) {
 				if (routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()) {
 					routingHelper.setFinalAndCurrentLocation(null, routingHelper.getCurrentLocation(), routingHelper.getCurrentGPXRoute());
+					// restore default mode
+					boolean changed = settings.APPLICATION_MODE.set(ApplicationMode.DEFAULT);
+					updateApplicationModeSettings();
+					mapView.refreshMap(changed);
 				} else {
 					navigateToPoint(null);
 				}
