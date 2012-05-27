@@ -22,7 +22,7 @@ void unifyIncompletedRings(std::vector<std::vector<int_pair> >& incompletedRings
 			int leftX, int rightX, int bottomY, int topY, long dbId, int zoom);
 
 
-void processCoastlines(std::vector<MapDataObject*>&  coastLines, int leftX, int rightX, int bottomY, int topY, int zoom,
-		bool showIncompleted, std::vector<MapDataObject*>& res);
+bool processCoastlines(std::vector<MapDataObject*>&  coastLines, int leftX, int rightX, int bottomY, int topY, int zoom,
+		bool showIfThereIncompleted, bool addDebugIncompleted, std::vector<MapDataObject*>& res);
 
 #endif
