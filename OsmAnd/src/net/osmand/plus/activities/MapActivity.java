@@ -138,7 +138,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	private List<DialogProvider> dialogProviders = new ArrayList<DialogProvider>(2);
 	
 	private Notification getNotification(){
-		Intent notificationIndent = new Intent(this, MapActivity.class);
+		Intent notificationIndent = new Intent(this, OsmandIntents.getMapActivity());
 		notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		Notification notification = new Notification(R.drawable.icon, "", //$NON-NLS-1$
 				System.currentTimeMillis());
@@ -451,7 +451,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		settingsButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent settings = new Intent(MapActivity.this, SettingsActivity.class);
+				final Intent settings = new Intent(MapActivity.this, OsmandIntents.getSettingsActivity());
 				MapActivity.this.startActivity(settings);
 				dlg.dismiss();
 			}
@@ -461,7 +461,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		favouritesButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent favorites = new Intent(MapActivity.this, FavouritesActivity.class);
+				final Intent favorites = new Intent(MapActivity.this, OsmandIntents.getFavoritesActivity());
 				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				MapActivity.this.startActivity(favorites);
 				dlg.dismiss();
@@ -476,7 +476,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 
 				getMyApplication().closeApplication();
 				// 1. Work for almost all cases when user open apps from main menu
-				Intent newIntent = new Intent(MapActivity.this, MainMenuActivity.class);
+				Intent newIntent = new Intent(MapActivity.this, OsmandIntents.getMainMenuActivity());
 				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				newIntent.putExtra(MainMenuActivity.APP_EXIT_KEY, MainMenuActivity.APP_EXIT_CODE);
 				startActivity(newIntent);
@@ -493,7 +493,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		searchButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent search = new Intent(MapActivity.this, SearchActivity.class);
+				final Intent search = new Intent(MapActivity.this, OsmandIntents.getSearchActivity());
 				LatLon loc = getMapLocation();
 				search.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
 				search.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
@@ -537,7 +537,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			}
 			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
-			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
+			Intent newIntent = new Intent(MapActivity.this, OsmandIntents.getSearchActivity());
 			// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			LatLon loc = getMapLocation();
 			newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
@@ -1178,7 +1178,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	public boolean onOptionsItemSelected(MenuItem item) {
 		final int itemId = item.getItemId();
 		if (itemId == R.id.map_show_settings) {
-			final Intent intentSettings = new Intent(MapActivity.this, SettingsActivity.class);
+			final Intent intentSettings = new Intent(MapActivity.this, OsmandIntents.getSettingsActivity());
 			startActivity(intentSettings);
 			return true;
 		} else if (itemId == R.id.map_where_am_i) {
@@ -1320,7 +1320,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	}
 	
 	public static void launchMapActivityMoveToTop(Activity activity){
-		Intent newIntent = new Intent(activity, MapActivity.class);
+		Intent newIntent = new Intent(activity, OsmandIntents.getMapActivity());
 		newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		activity.startActivity(newIntent);
 	}

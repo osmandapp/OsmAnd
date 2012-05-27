@@ -12,7 +12,6 @@ import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.render.MapRenderRepositories;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -185,7 +184,7 @@ public class MainMenuActivity extends Activity {
 		showMap.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent mapIndent = new Intent(activity, MapActivity.class);
+				final Intent mapIndent = new Intent(activity, OsmandIntents.getMapActivity());
 				activity.startActivityForResult(mapIndent, 0);
 			}
 		});
@@ -193,7 +192,7 @@ public class MainMenuActivity extends Activity {
 		settingsButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent settings = new Intent(activity, SettingsActivity.class);
+				final Intent settings = new Intent(activity, OsmandIntents.getSettingsActivity());
 				activity.startActivity(settings);
 			}
 		});
@@ -202,7 +201,7 @@ public class MainMenuActivity extends Activity {
 		favouritesButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent favorites = new Intent(activity, FavouritesActivity.class);
+				final Intent favorites = new Intent(activity, OsmandIntents.getFavoritesActivity());
 				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				activity.startActivity(favorites);
 			}
@@ -228,7 +227,7 @@ public class MainMenuActivity extends Activity {
 		searchButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent search = new Intent(activity, SearchActivity.class);
+				final Intent search = new Intent(activity, OsmandIntents.getSearchActivity());
 				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				activity.startActivity(search);
 			}
