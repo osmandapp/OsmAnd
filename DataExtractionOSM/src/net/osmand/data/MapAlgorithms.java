@@ -285,9 +285,14 @@ public class MapAlgorithms {
 		}
 	}
 	
+	
+
+	private static long combine2Points(int x, int y) {
+		return (((long) x ) <<32) | ((long)y );
+	}
 	/**
-	 * outx,outy are the coordinates out of the box
-	 * inx,iny are the coordinates from the box
+	 * outx,outy are the coordinates out of the box 
+	 * inx,iny are the coordinates from the box (NOT IMPORTANT in/out, just one should be in second out)
 	 * @return -1 if there is no instersection or x<<32 | y
 	 */
 	public static long calculateIntersection(int inx, int iny, int outx, int outy, int leftX, int rightX, int bottomY, int topY) {
@@ -299,7 +304,7 @@ public class MapAlgorithms {
 			if (leftX <= tx && tx <= rightX) {
 				bx = tx;
 				by = topY;
-				return (((long) bx) << 32) | ((long) by);
+				return combine2Points(bx, by);
 			}
 		}
 		if (outy > bottomY && iny <= bottomY) {
@@ -307,7 +312,7 @@ public class MapAlgorithms {
 			if (leftX <= tx && tx <= rightX) {
 				bx = tx;
 				by = bottomY;
-				return (((long) bx) << 32) | ((long) by);
+				return combine2Points(bx, by);
 			}
 		}
 		if (outx < leftX && inx >= leftX) {
@@ -315,7 +320,7 @@ public class MapAlgorithms {
 			if (ty >= topY && ty <= bottomY) {
 				by = ty;
 				bx = leftX;
-				return (((long) bx) << 32) | ((long) by);
+				return combine2Points(bx, by);
 			}
 
 		}
@@ -324,7 +329,7 @@ public class MapAlgorithms {
 			if (ty >= topY && ty <= bottomY) {
 				by = ty;
 				bx = rightX;
-				return (((long) bx) << 32) | ((long) by);
+				return combine2Points(bx, by);
 			}
 
 		}
@@ -335,7 +340,7 @@ public class MapAlgorithms {
 			if (leftX <= tx && tx <= rightX) {
 				bx = tx;
 				by = topY;
-				return (((long) bx) << 32) | ((long) by);
+				return combine2Points(bx, by);
 			}
 		}
 		if (outy < bottomY && iny >= bottomY) {
@@ -343,7 +348,7 @@ public class MapAlgorithms {
 			if (leftX <= tx && tx <= rightX) {
 				bx = tx;
 				by = bottomY;
-				return (((long) bx) << 32) | ((long) by);
+				return combine2Points(bx, by);
 			}
 		}
 		if (outx > leftX && inx <= leftX) {
@@ -351,7 +356,7 @@ public class MapAlgorithms {
 			if (ty >= topY && ty <= bottomY) {
 				by = ty;
 				bx = leftX;
-				return (((long) bx) << 32) | ((long) by);
+				return combine2Points(bx, by);
 			}
 
 		}
@@ -360,7 +365,7 @@ public class MapAlgorithms {
 			if (ty >= topY && ty <= bottomY) {
 				by = ty;
 				bx = rightX;
-				return (((long) bx) << 32) | ((long) by);
+				return combine2Points(bx, by);
 			}
 
 		}

@@ -401,18 +401,16 @@ public class MapRenderRepositories {
 			
 			if(!coastLines.isEmpty()) {
 				long ms = System.currentTimeMillis();
-				List<BinaryMapDataObject> pcoastlines = processCoastlines(coastLines, leftX, rightX, bottomY, topY, zoom, 
-						basemapCoastLines.isEmpty());
-				addBasemapCoastlines = pcoastlines.isEmpty() || zoom <= BASEMAP_ZOOM;
-				tempResult.addAll(pcoastlines);
+				boolean coastlinesWereAdded = processCoastlines(coastLines, leftX, rightX, bottomY, topY, zoom, 
+						basemapCoastLines.isEmpty(), true, tempResult);
+				addBasemapCoastlines = !coastlinesWereAdded || zoom <= BASEMAP_ZOOM;
 				coastlineTime = "(coastline " + (System.currentTimeMillis() -  ms) + " ms )";
 			} 			
 			if(addBasemapCoastlines){
-				addBasemapCoastlines = false;
 				long ms = System.currentTimeMillis();
-				List<BinaryMapDataObject> pcoastlines = processCoastlines(basemapCoastLines, leftX, rightX, bottomY, topY, zoom, true);
-				addBasemapCoastlines = pcoastlines.isEmpty();
-				tempResult.addAll(pcoastlines);
+				boolean coastlinesWereAdded = processCoastlines(basemapCoastLines, leftX, rightX, bottomY, topY, zoom, 
+						true, true, tempResult);
+				addBasemapCoastlines = !coastlinesWereAdded;
 				coastlineTime = "(coastline " + (System.currentTimeMillis() -  ms) + " ms )";
 			}
 			if(addBasemapCoastlines && mi != null){
@@ -673,11 +671,11 @@ public class MapRenderRepositories {
 	}
 
 	/// MULTI POLYGONS (coastline)
-	private List<BinaryMapDataObject> processCoastlines(List<BinaryMapDataObject> coastLines, int leftX, int rightX, 
-			int bottomY, int topY, int zoom, boolean showIncompleted) {
+	// returns true if coastlines were added!
+	private boolean processCoastlines(List<BinaryMapDataObject> coastLines, int leftX, int rightX, 
+			int bottomY, int topY, int zoom, boolean doNotAddIfIncompleted, boolean addDebugIncompleted, List<BinaryMapDataObject> result) {
 		List<TLongList> completedRings = new ArrayList<TLongList>();
 		List<TLongList> uncompletedRings = new ArrayList<TLongList>();
-		List<BinaryMapDataObject> result = new ArrayList<BinaryMapDataObject>(coastLines.size());
 		MapIndex mapIndex = null;
 		long dbId = 0;
 		for (BinaryMapDataObject o : coastLines) {
@@ -694,7 +692,7 @@ public class MapRenderRepositories {
 			int y = py;
 			boolean pinside = leftX <= x && x <= rightX && y >= topY && y <= bottomY;
 			if (pinside) {
-				coordinates.add((((long) x) << 32) | ((long) y));
+				coordinates.add(combine2Points(x, y));
 			}
 			for (int i = 1; i < len; i++) {
 				x = o.getPoint31XTile(i);
@@ -713,18 +711,29 @@ public class MapRenderRepositories {
 			combineMultipolygonLine(completedRings, uncompletedRings, coordinates);
 		}
 		if (completedRings.size() == 0 && uncompletedRings.size() == 0) {
-			return result;
+			return false;
 		}
 		if (uncompletedRings.size() > 0) {
 			unifyIncompletedRings(uncompletedRings, completedRings, leftX, rightX, bottomY, topY, dbId, zoom);
 		}
-		if(!showIncompleted && uncompletedRings.size() > 0){
-			result.clear();
-			return result;
-			
+		long mask = 0xffffffffl;
+		// draw uncompleted for debug purpose
+		for (int i = 0; i < uncompletedRings.size(); i++) {
+			TLongList ring = uncompletedRings.get(i);
+			int[] coordinates = new int[ring.size() * 2];
+			for (int j = 0; j < ring.size(); j++) {
+				coordinates[j * 2] = (int) (ring.get(j) >> 32);
+				coordinates[j * 2 + 1] = (int) (ring.get(j) & mask);
+			}
+			BinaryMapDataObject o = new BinaryMapDataObject(coordinates, new int[] { mapIndex.coastlineBrokenEncodingType }, null, dbId);
+			o.setMapIndex(mapIndex);
+			result.add(o);
+		}
+		if(!doNotAddIfIncompleted && uncompletedRings.size() > 0){
+			return false;
 		}
 		boolean clockwiseFound = false;
-		long mask = 0xffffffffl;
+		
 		for (int i = 0; i < completedRings.size(); i++) {
 			TLongList ring = completedRings.get(i);
 			int[] coordinates = new int[ring.size() * 2];
@@ -741,18 +750,6 @@ public class MapRenderRepositories {
 			result.add(o);
 		}
 		
-		// draw uncompleted for debug purpose
-		for (int i = 0; i < uncompletedRings.size(); i++) {
-			TLongList ring = uncompletedRings.get(i);
-			int[] coordinates = new int[ring.size() * 2];
-			for (int j = 0; j < ring.size(); j++) {
-				coordinates[j * 2] = (int) (ring.get(j) >> 32);
-				coordinates[j * 2 + 1] = (int) (ring.get(j) & mask);
-			}
-			BinaryMapDataObject o = new BinaryMapDataObject(coordinates, new int[] { mapIndex.coastlineBrokenEncodingType}, null, dbId);
-			o.setMapIndex(mapIndex);
-			result.add(o);
-		}
 		if (!clockwiseFound && uncompletedRings.size() == 0) {
 			// add complete water tile
 			BinaryMapDataObject o = new BinaryMapDataObject(new int[] { leftX, topY, rightX, topY, rightX, bottomY, leftX, bottomY, leftX,
@@ -762,23 +759,27 @@ public class MapRenderRepositories {
 			result.add(o);
 
 		}
-		return result;
+		return true;
 	}
-
+	
+	private boolean eq(long i1, long i2){
+		return i1 == i2;
+	}
+	
 	private void combineMultipolygonLine(List<TLongList> completedRings, List<TLongList> incompletedRings,	TLongList coordinates) {
 		if (coordinates.size() > 0) {
-			if (coordinates.get(0) == coordinates.get(coordinates.size() - 1)) {
+			if (eq(coordinates.get(0), coordinates.get(coordinates.size() - 1))) {
 				completedRings.add(coordinates);
 			} else {
 				boolean add = true;
 				for (int k = 0; k < incompletedRings.size();) {
 					boolean remove = false;
 					TLongList i = incompletedRings.get(k);
-					if (coordinates.get(0) == i.get(i.size() - 1)) {
+					if (eq(coordinates.get(0), i.get(i.size() - 1))) {
 						i.addAll(coordinates.subList(1, coordinates.size()));
 						remove = true;
 						coordinates = i;
-					} else if (coordinates.get(coordinates.size() - 1) == i.get(0)) {
+					} else if (eq(coordinates.get(coordinates.size() - 1), i.get(0))) {
 						coordinates.addAll(i.subList(1, i.size()));
 						remove = true;
 					}
@@ -787,7 +788,7 @@ public class MapRenderRepositories {
 					} else {
 						k++;
 					}
-					if (coordinates.get(0) == coordinates.get(coordinates.size() - 1)) {
+					if (eq(coordinates.get(0), coordinates.get(coordinates.size() - 1))) {
 						completedRings.add(coordinates);
 						add = false;
 						break;
@@ -958,6 +959,10 @@ public class MapRenderRepositories {
 		return res;
 	}
 	
+	private static long combine2Points(int x, int y) {
+		return (((long) x ) <<32) | ((long)y );
+	}
+	
 	private boolean calculateLineCoordinates(boolean inside, int x, int y, boolean pinside, int px, int py, int leftX, int rightX,
 			int bottomY, int topY, TLongList coordinates) {
 		boolean lineEnded = false;
@@ -966,19 +971,19 @@ public class MapRenderRepositories {
 				long is = MapAlgorithms.calculateIntersection(x, y, px, py, leftX, rightX, bottomY, topY);
 				if (is == -1) {
 					// it is an error (!)
-					is = (((long) px) << 32) | ((long) py);
+					is = combine2Points(px, py);
 				}
 				coordinates.add(is);
 				lineEnded = true;
 			} else {
-				coordinates.add((((long) x) << 32) | ((long) y));
+				coordinates.add(combine2Points(x, y));
 			}
 		} else {
 			long is = MapAlgorithms.calculateIntersection(x, y, px, py, leftX, rightX, bottomY, topY);
 			if (inside) {
 				// assert is != -1;
 				coordinates.add(is);
-				coordinates.add((((long) x) << 32) | ((long) y));
+				coordinates.add(combine2Points(x, y));
 			} else if (is != -1) {
 				int bx = (int) (is >> 32);
 				int by = (int) (is & 0xffffffff);

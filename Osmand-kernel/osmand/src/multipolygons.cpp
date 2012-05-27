@@ -4,12 +4,12 @@
 #include "multipolygons.h"
 #include "osmand_log.h"
 
-void processCoastlines(std::vector<MapDataObject*>&  coastLines, int leftX, int rightX, int bottomY, int topY, int zoom,
-		bool showIncompleted, std::vector<MapDataObject*>& res) {
+// returns true if coastlines were added!
+bool processCoastlines(std::vector<MapDataObject*>&  coastLines, int leftX, int rightX, int bottomY, int topY, int zoom,
+		bool showIfThereIncompleted, bool addDebugIncompleted, std::vector<MapDataObject*>& res) {
 	std::vector<coordinates> completedRings;
 	std::vector<coordinates > uncompletedRings;
 	std::vector<MapDataObject*>::iterator val = coastLines.begin();
-	res.reserve(coastLines.size());
 	long long dbId = 0;
 	for (; val != coastLines.end(); val++) {
 		MapDataObject* o = *val;
@@ -44,14 +44,23 @@ void processCoastlines(std::vector<MapDataObject*>&  coastLines, int leftX, int 
 		combineMultipolygonLine(completedRings, uncompletedRings, *cs);
 	}
 	if (completedRings.size() == 0 && uncompletedRings.size() == 0) {
-		return;
+		return false;
 	}
 	if (uncompletedRings.size() > 0) {
 		unifyIncompletedRings(uncompletedRings, completedRings, leftX, rightX, bottomY, topY, dbId, zoom);
 	}
-	if (!showIncompleted && uncompletedRings.size() > 0) {
-		res.clear();
-		return;
+	if (addDebugIncompleted) {
+		// draw uncompleted for debug purpose
+		for (int i = 0; i < uncompletedRings.size(); i++) {
+			MapDataObject* o = new MapDataObject();
+			o->points = uncompletedRings[i];
+			o->types.push_back(tag_value("natural", "coastline_broken"));
+			res.push_back(o);
+		}
+
+	}
+	if (!showIfThereIncompleted && uncompletedRings.size() > 0) {
+		return false;
 	}
 	bool clockwiseFound = false;
 	for (int i = 0; i < completedRings.size(); i++) {
@@ -69,13 +78,6 @@ void processCoastlines(std::vector<MapDataObject*>&  coastLines, int leftX, int 
 		res.push_back(o);
 	}
 
-	// draw uncompleted for debug purpose
-	for (int i = 0; i < uncompletedRings.size(); i++) {
-		MapDataObject* o = new MapDataObject();
-		o->points = uncompletedRings[i];
-		o->types.push_back(tag_value("natural", "coastline_broken"));
-		//res.push_back(o);
-	}
 	if (!clockwiseFound && uncompletedRings.size() == 0) {
 		// add complete water tile
 		MapDataObject* o = new MapDataObject();
@@ -90,6 +92,7 @@ void processCoastlines(std::vector<MapDataObject*>&  coastLines, int leftX, int 
 		res.push_back(o);
 
 	}
+	return true;
 }
 
 // Copied from MapAlgorithms

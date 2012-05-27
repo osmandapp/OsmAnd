@@ -96,9 +96,11 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					boolean inner = "inner".equals(entities.get(es)); //$NON-NLS-1$
 					if (!inner) {
 						outerFound = true;
-						for (String t : es.getTagKeySet()) {
-							e.putTag(t, es.getTag(t));
-						}
+						// This is incorrect (it should be intersection of all boundaries)
+						// Currently it causes an issue with coastline (if one line is coastline)
+//						for (String t : es.getTagKeySet()) {
+//							e.putTag(t, es.getTag(t));
+//						}
 						break;
 					}
 				}
@@ -518,7 +520,6 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				if (hasMulti) {
 					TIntArrayList set = multiPolygonsWays.get(e.getId());
 					typeUse.removeAll(set);
-					continue;
 				}
 				if (typeUse.isEmpty()) {
 					continue;

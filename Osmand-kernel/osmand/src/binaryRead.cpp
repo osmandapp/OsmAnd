@@ -784,17 +784,15 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 		bool addBasemapCoastlines = true;
 		bool emptyData = q->zoom > BASEMAP_ZOOM && tempResult.empty() && coastLines.empty();
 		if (!coastLines.empty()) {
-			std::vector<MapDataObject*> pcoastlines;
-			processCoastlines(coastLines, q->left, q->right, q->bottom, q->top, q->zoom, basemapCoastLines.empty(), pcoastlines);
-			addBasemapCoastlines = pcoastlines.empty() || q->zoom <= BASEMAP_ZOOM;
-			tempResult.insert(tempResult.end(), pcoastlines.begin(), pcoastlines.end());
+			bool coastlinesWereAdded = processCoastlines(coastLines, q->left, q->right, q->bottom, q->top, q->zoom,
+					basemapCoastLines.empty(), true, tempResult);
+			addBasemapCoastlines = !coastlinesWereAdded || q->zoom <= BASEMAP_ZOOM;
 		}
 		if (addBasemapCoastlines) {
 			addBasemapCoastlines = false;
-			std::vector<MapDataObject*> pcoastlines;
-			processCoastlines(basemapCoastLines, q->left, q->right, q->bottom, q->top, q->zoom, true, pcoastlines);
-			addBasemapCoastlines = pcoastlines.empty();
-			tempResult.insert(tempResult.end(), pcoastlines.begin(), pcoastlines.end());
+			bool coastlinesWereAdded = processCoastlines(basemapCoastLines, q->left, q->right, q->bottom, q->top, q->zoom,
+					true, true, tempResult);
+			addBasemapCoastlines = !coastlinesWereAdded;
 		}
 		// processCoastlines always create new objects
 		deleteObjects(basemapCoastLines);

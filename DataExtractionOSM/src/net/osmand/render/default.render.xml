@@ -195,8 +195,7 @@
 			<filter appMode="pedestrian" tag="highway" value="bridleway" order="59"/>
 			<filter tag="highway" value="bridleway" order="36"/>
 			
-			<filter tag="natural" value="coastline_broken" order="25"/>
-
+			<filter tag="natural" value="coastline_broken" order="35"/>
 			<filter tag="contour" value="" order="15"/>
 		</group>
 		

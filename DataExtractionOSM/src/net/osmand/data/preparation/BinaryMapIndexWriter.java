@@ -359,19 +359,19 @@ public class BinaryMapIndexWriter {
 		MapData.Builder data = MapData.newBuilder();
 		// calculate size
 		mapDataBuf.clear();
-		int pcalcx = pleft;
-		int pcalcy = ptop;
+		int pcalcx = (pleft >> SHIFT_COORDINATES);
+		int pcalcy = (ptop >> SHIFT_COORDINATES);
 		for (int i = 0; i < coordinates.length / 8; i++) {
 			int x = Algoritms.parseIntFromBytes(coordinates, i * 8);
 			int y = Algoritms.parseIntFromBytes(coordinates, i * 8 + 4);
-			int tx = (x - pcalcx) >> SHIFT_COORDINATES;
-			int ty = (y - pcalcy) >> SHIFT_COORDINATES;
+			int tx = (x >> SHIFT_COORDINATES) - pcalcx;
+			int ty = (y >> SHIFT_COORDINATES) - pcalcy;
 
 			writeRawVarint32(mapDataBuf, CodedOutputStream.encodeZigZag32(tx));
 			writeRawVarint32(mapDataBuf, CodedOutputStream.encodeZigZag32(ty));
 
-			pcalcx = pcalcx + (tx << SHIFT_COORDINATES);
-			pcalcy = pcalcy + (ty << SHIFT_COORDINATES);
+			pcalcx = pcalcx + tx ;
+			pcalcy = pcalcy + ty ;
 		}
 		COORDINATES_SIZE += CodedOutputStream.computeRawVarint32Size(mapDataBuf.size())
 				+ CodedOutputStream.computeTagSize(MapData.COORDINATES_FIELD_NUMBER) + mapDataBuf.size();
@@ -383,8 +383,8 @@ public class BinaryMapIndexWriter {
 
 		if (innerPolygonTypes != null && innerPolygonTypes.length > 0) {
 			mapDataBuf.clear();
-			pcalcx = pleft;
-			pcalcy = ptop;
+			pcalcx = (pleft >> SHIFT_COORDINATES);
+			pcalcy = (ptop >> SHIFT_COORDINATES);
 			for (int i = 0; i < innerPolygonTypes.length / 8; i++) {
 				int x = Algoritms.parseIntFromBytes(innerPolygonTypes, i * 8);
 				int y = Algoritms.parseIntFromBytes(innerPolygonTypes, i * 8 + 4);
@@ -393,17 +393,17 @@ public class BinaryMapIndexWriter {
 						data.addPolygonInnerCoordinates(ByteString.copyFrom(mapDataBuf.toArray()));
 						mapDataBuf.clear();
 					}
-					pcalcx = pleft;
-					pcalcy = ptop;
+					pcalcx = (pleft >> SHIFT_COORDINATES);
+					pcalcy = (ptop >> SHIFT_COORDINATES);
 				} else {
-					int tx = (x - pcalcx) >> SHIFT_COORDINATES;
-					int ty = (y - pcalcy) >> SHIFT_COORDINATES;
+					int tx = (x >> SHIFT_COORDINATES) - pcalcx;
+					int ty = (y >> SHIFT_COORDINATES) - pcalcy;
 
 					writeRawVarint32(mapDataBuf, CodedOutputStream.encodeZigZag32(tx));
 					writeRawVarint32(mapDataBuf, CodedOutputStream.encodeZigZag32(ty));
 
-					pcalcx = pcalcx + (tx << SHIFT_COORDINATES);
-					pcalcy = pcalcy + (ty << SHIFT_COORDINATES);
+					pcalcx = pcalcx + tx ;
+					pcalcy = pcalcy + ty ;
 				}
 			}
 		}
