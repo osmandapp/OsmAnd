@@ -361,17 +361,28 @@ public class BinaryMapIndexWriter {
 		mapDataBuf.clear();
 		int pcalcx = (pleft >> SHIFT_COORDINATES);
 		int pcalcy = (ptop >> SHIFT_COORDINATES);
-		for (int i = 0; i < coordinates.length / 8; i++) {
+		int len = coordinates.length / 8;
+		int delta = 1;
+		for (int i = 0; i < len; i+= delta) {
 			int x = Algoritms.parseIntFromBytes(coordinates, i * 8);
 			int y = Algoritms.parseIntFromBytes(coordinates, i * 8 + 4);
 			int tx = (x >> SHIFT_COORDINATES) - pcalcx;
 			int ty = (y >> SHIFT_COORDINATES) - pcalcy;
-
 			writeRawVarint32(mapDataBuf, CodedOutputStream.encodeZigZag32(tx));
 			writeRawVarint32(mapDataBuf, CodedOutputStream.encodeZigZag32(ty));
-
 			pcalcx = pcalcx + tx ;
 			pcalcy = pcalcy + ty ;
+			delta = 1;
+			// keep first/latest point untouched
+			// just try to skip some points very close to this point
+			while (i + delta < len - 1) {
+				int nx = Algoritms.parseIntFromBytes(coordinates, (i + delta) * 8);
+				int ny = Algoritms.parseIntFromBytes(coordinates, (i + delta) * 8 + 4);
+				if ((Math.abs(x - nx)) >> SHIFT_COORDINATES > 7 || (Math.abs(y - ny)) >> SHIFT_COORDINATES > 7) {
+					break;
+				}
+				delta++;
+			}
 		}
 		COORDINATES_SIZE += CodedOutputStream.computeRawVarint32Size(mapDataBuf.size())
 				+ CodedOutputStream.computeTagSize(MapData.COORDINATES_FIELD_NUMBER) + mapDataBuf.size();
@@ -385,7 +396,8 @@ public class BinaryMapIndexWriter {
 			mapDataBuf.clear();
 			pcalcx = (pleft >> SHIFT_COORDINATES);
 			pcalcy = (ptop >> SHIFT_COORDINATES);
-			for (int i = 0; i < innerPolygonTypes.length / 8; i++) {
+			len = innerPolygonTypes.length / 8;
+			for (int i = 0; i < len; i+= delta) {
 				int x = Algoritms.parseIntFromBytes(innerPolygonTypes, i * 8);
 				int y = Algoritms.parseIntFromBytes(innerPolygonTypes, i * 8 + 4);
 				if (x == 0 && y == 0) {
@@ -404,6 +416,23 @@ public class BinaryMapIndexWriter {
 
 					pcalcx = pcalcx + tx ;
 					pcalcy = pcalcy + ty ;
+					delta = 1;
+					// keep first/latest point untouched
+					// just try to skip some points very close to this point
+					while (i + delta < len - 1) {
+						int nx = Algoritms.parseIntFromBytes(innerPolygonTypes, (i + delta) * 8);
+						int ny = Algoritms.parseIntFromBytes(innerPolygonTypes, (i + delta) * 8 + 4);
+						if(nx == 0 && ny == 0) {
+							if(delta > 1) {
+								delta --;
+							}
+							break;
+						}
+						if ((Math.abs(x - nx)) >> SHIFT_COORDINATES > 7 || (Math.abs(y - ny)) >> SHIFT_COORDINATES > 7) {
+							break;
+						}
+						delta++;
+					}
 				}
 			}
 		}

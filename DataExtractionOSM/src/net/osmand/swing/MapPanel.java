@@ -566,9 +566,25 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	}
 	
 	
+	public int getMaximumZoomSupported(){
+		if(nativeLibRendering != null) {
+			return 21;
+		}
+		if (map == null) {
+			return 18;
+		}
+		return map.getMaximumZoomSupported();
+	}
+	
+	public int getMinimumZoomSupported(){
+		if(nativeLibRendering != null || map == null) {
+			return 1;
+		}
+		return map.getMinimumZoomSupported();
+	}
 	
 	public void setZoom(int zoom){
-		if(map != null && (zoom > map.getMaximumZoomSupported() || zoom < map.getMinimumZoomSupported())){
+		if(map != null && (zoom > getMaximumZoomSupported() || zoom < getMinimumZoomSupported())){
 			return;
 		}
 		this.zoom = zoom;
@@ -690,12 +706,12 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		}
 		if(e.getID() == KeyEvent.KEY_TYPED){
 			if(e.getKeyChar() == '+' || e.getKeyChar() == '=' ){
-				if(zoom < map.getMaximumZoomSupported()){
+				if(zoom < getMaximumZoomSupported()){
 					zoom ++;
 					processed = true;
 				}
 			} else if(e.getKeyChar() == '-'){
-				if(zoom > map.getMinimumZoomSupported()){
+				if(zoom > getMinimumZoomSupported()){
 					zoom --;
 					processed = true;
 				}
