@@ -372,17 +372,7 @@ public class BinaryMapIndexWriter {
 			writeRawVarint32(mapDataBuf, CodedOutputStream.encodeZigZag32(ty));
 			pcalcx = pcalcx + tx ;
 			pcalcy = pcalcy + ty ;
-			delta = 1;
-			// keep first/latest point untouched
-			// just try to skip some points very close to this point
-			while (i + delta < len - 1) {
-				int nx = Algoritms.parseIntFromBytes(coordinates, (i + delta) * 8);
-				int ny = Algoritms.parseIntFromBytes(coordinates, (i + delta) * 8 + 4);
-				if ((Math.abs(x - nx)) >> SHIFT_COORDINATES > 7 || (Math.abs(y - ny)) >> SHIFT_COORDINATES > 7) {
-					break;
-				}
-				delta++;
-			}
+			delta = skipSomeNodes(coordinates, len, i, x, y, false);
 		}
 		COORDINATES_SIZE += CodedOutputStream.computeRawVarint32Size(mapDataBuf.size())
 				+ CodedOutputStream.computeTagSize(MapData.COORDINATES_FIELD_NUMBER) + mapDataBuf.size();
@@ -416,23 +406,7 @@ public class BinaryMapIndexWriter {
 
 					pcalcx = pcalcx + tx ;
 					pcalcy = pcalcy + ty ;
-					delta = 1;
-					// keep first/latest point untouched
-					// just try to skip some points very close to this point
-					while (i + delta < len - 1) {
-						int nx = Algoritms.parseIntFromBytes(innerPolygonTypes, (i + delta) * 8);
-						int ny = Algoritms.parseIntFromBytes(innerPolygonTypes, (i + delta) * 8 + 4);
-						if(nx == 0 && ny == 0) {
-							if(delta > 1) {
-								delta --;
-							}
-							break;
-						}
-						if ((Math.abs(x - nx)) >> SHIFT_COORDINATES > 7 || (Math.abs(y - ny)) >> SHIFT_COORDINATES > 7) {
-							break;
-						}
-						delta++;
-					}
+					delta = skipSomeNodes(coordinates, len, i, x, y ,false);
 				}
 			}
 		}
@@ -471,6 +445,37 @@ public class BinaryMapIndexWriter {
 		data.setId(diffId);
 		ID_SIZE += CodedOutputStream.computeSInt64Size(OsmandOdb.MapData.ID_FIELD_NUMBER, diffId);
 		return data.build();
+	}
+	
+	private static double orthogonalDistance(int x, int y, int x1, int y1, int x2, int y2) {
+		int A = (x - x1);
+		int B = (y - y1);
+		int C = (x2 - x1);
+		int D = (y2 - y1);
+		return Math.abs(A * D - C * B) / Math.sqrt(C * C + D * D);
+	}
+
+	private int skipSomeNodes(byte[] coordinates, int len, int i, int x, int y, boolean multi) {
+		int delta;
+		delta = 1;
+		// keep first/latest point untouched
+		// simplified douglas\peuker
+		// just try to skip some points very close to this point
+		while (i + delta < len - 1) {
+			int nx = Algoritms.parseIntFromBytes(coordinates, (i + delta) * 8);
+			int ny = Algoritms.parseIntFromBytes(coordinates, (i + delta) * 8 + 4);
+			int nnx = Algoritms.parseIntFromBytes(coordinates, (i + delta + 1) * 8);
+			int nny = Algoritms.parseIntFromBytes(coordinates, (i + delta + 1) * 8 + 4);
+			if(nnx == 0 && nny == 0) {
+				break;
+			}
+			double dist = orthogonalDistance(nx, ny, x, y, nnx, nny);
+			if (dist > 31 ) {
+				break;
+			}
+			delta++;
+		}
+		return delta;
 	}
 
 	public void startWriteAddressIndex(String name) throws IOException {
