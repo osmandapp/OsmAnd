@@ -502,6 +502,7 @@ MapDataObject* readMapDataObject(CodedInputStream* input, MapTreeBounds* tree, S
 	dataObject->additionalTypes = additionalTypes;
 	dataObject->types = types;
 	dataObject->id = id;
+	dataObject->area = area;
 	dataObject->stringIds = stringIds;
 	dataObject->polygonInnerCoordinates = innercoordinates;
 
