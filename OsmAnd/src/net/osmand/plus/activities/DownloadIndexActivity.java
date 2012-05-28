@@ -15,10 +15,8 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -82,8 +80,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	protected static final int DIALOG_PROGRESS_FILE = 1;
 	protected static final int DIALOG_PROGRESS_LIST = 2;
 	
-	/** other **/
-	private static final int MB = 1 << 20;
     public static final String FILTER_KEY = "filter";
 	
 	private static DownloadIndexListThread downloadListIndexThread;
@@ -934,7 +930,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			TextView item = (TextView) row.findViewById(R.id.download_item);
 			TextView description = (TextView) row.findViewById(R.id.download_descr);
 			IndexItem e = (IndexItem) getChild(groupPosition, childPosition);
-			item.setText(e.getVisibleDescription(DownloadIndexActivity.this) + "\n" + e.getVisibleName()); //$NON-NLS-1$
+			item.setText((e.getVisibleDescription(DownloadIndexActivity.this) + "\n" + e.getVisibleName()).trim()); //$NON-NLS-1$
 			description.setText(e.getDate() + "\n" + e.getSize() + " MB");
 			
 			CheckBox ch = (CheckBox) row.findViewById(R.id.check_download_item);

@@ -7,65 +7,65 @@ preamble - [].
 
 
 %% TURNS 
-turn('left', ['pagriezt pa kreisi ']).
-turn('left_sh', ['strauji pagriezt pa kreisi ']).
-turn('left_sl', ['griezties pa kreisi ']).
-turn('right', ['pagriezt pa labi ']).
-turn('right_sh', ['pagriezt pa labi ']).
-turn('right_sl', ['griezties pa labi ']).
+turn('left', ['griezties pa kreisi ']).
+turn('left_sh', ['strauji pagriezties pa kreisi ']).
+turn('left_sl', ['pagriezties pa kreisi ']).
+turn('right', ['griezties pa labi ']).
+turn('right_sh', ['strauji pagriezties pa labi ']).
+turn('right_sl', ['pagriezties pa labi ']).
 
-prepare_turn(Turn, Dist) == ['PÃ§c ', D, ' pagriezties ', M] :- distance(Dist) == D, turn(Turn, M).
-turn(Turn, Dist) == ['PÃ§c ', D, M] :- distance(Dist) == D, turn(Turn, M).
+prepare_turn(Turn, Dist) == ['Pçc ', D, ' pagriezties ', M] :- distance(Dist) == D, turn(Turn, M).
+turn(Turn, Dist) == ['Pçc ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
-prepare_make_ut(Dist) == ['Gatavojaties apgriezties pÃ§c ', D] :- distance(Dist) == D.
-make_ut(Dist) == ['PÃ§c ', D, ' apgrieÃ¾aties '] :- distance(Dist) == D.
-make_ut == ['ApgrieÃ¾aties '].
-make_ut_wp == ['ApgrieÃ¾aties pie pirmÃ¢s iespÃ§jas '].
+prepare_make_ut(Dist) == ['Gatavojaties apgriezties pçc ', D] :- distance(Dist) == D.
+make_ut(Dist) == ['Pçc ', D, ' apgrieşaties '] :- distance(Dist) == D.
+make_ut == ['Apgrieşaties '].
+make_ut_wp == ['Apgrieşaties pie pirmâs iespçjas '].
 
-prepare_roundabout(Dist) == ['Sagatvojaties lokveida kustÃ®bai ', D] :- distance(Dist) == D.
-roundabout(Dist, _Angle, Exit) == ['PÃ§c ', D, ' iebrauciet lokveida krustojumÃ¢, un tad brauciet ', E, 'pagriezienÃ¢'] :- distance(Dist) == D, nth(Exit, E).
-roundabout(_Angle, Exit) == ['turaties pa ', E, 'exit'] :- nth(Exit, E).
+prepare_roundabout(Dist) == ['Sagatvojaties lokveida kustîbai ', D] :- distance(Dist) == D.
+roundabout(Dist, _Angle, Exit) == ['Pçc ', D, ' iebrauciet lokveida krustojumâ, un tad brauciet ', E, 'pagriezienâ'] :- distance(Dist) == D, nth(Exit, E).
+roundabout(_Angle, Exit) == ['izbrauciet ', E, 'izbrauktuvç'] :- nth(Exit, E).
 
-go_ahead == ['Dodaties taisni uz priekÃ°u '].
-go_ahead(Dist) == ['Brauciet pa ceÃ¯u ', D]:- distance(Dist) == D.
+go_ahead == ['Dodaties taisni uz priekğu '].
+go_ahead(Dist) == ['Brauciet pa ceïu ', D]:- distance(Dist) == D.
 
-and_arrive_destination == ['un ierodaties galapunktÃ¢ '].
+and_arrive_destination == ['un ierodaties galapunktâ '].
 
-then == ['then '].
-reached_destination == ['jÃ»s esiet nokÃ¯uvis galapunktÃ¢ '].
+then == ['tad '].
+reached_destination == ['jûs esiet nokïuvis galapunktâ '].
 bear_right == ['turieties pa labi '].
 bear_left == ['turieties pa kreisi '].
 
 route_new_calc(Dist) == ['Brauciens ir ', D] :- distance(Dist) == D.
-route_recalc(Dist) == ['MarÃ°ruts ir pÃ¢rrÃ§Ã­inÃ¢ts, attÃ¢lums ', D] :- distance(Dist) == D.
+route_recalc(Dist) == ['Marğruts ir pârçíinâts, attâlums ', D] :- distance(Dist) == D.
 
-location_lost == ['pazudis g p s signÃ¢ls '].
+location_lost == ['pazudis g p s signâls '].
 
 
 %% 
 nth(1, 'pirmais ').
 nth(2, 'otrais ').
-nth(3, 'treÃ°ais ').
+nth(3, 'treğais ').
 nth(4, 'ceturtais ').
 nth(5, 'piektais ').
 nth(6, 'sestais ').
-nth(7, 'septÃ®tais ').
+nth(7, 'septîtais ').
 nth(8, 'astotais ').
-nth(9, 'devÃ®tais ').
+nth(9, 'devîtais ').
 nth(10, 'desmit ').
 nth(11, 'vienpadsmitais ').
 nth(12, 'divpadsmitais ').
-nth(13, 'trÃ®spadsmitais ').
-nth(14, 'Ã¨etrpadsmitais ').
+nth(13, 'trîspadsmitais ').
+nth(14, 'èetrpadsmitais ').
 nth(15, 'piecpadsmitais ').
-nth(16, 'seÃ°padsmitais ').
-nth(17, 'septiÃ²padsmitais ').
+nth(16, 'seğpadsmitais ').
+nth(17, 'septiòpadsmitais ').
 
 
 %%% distance measure
-distance(Dist) == [ X, ' meters'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist) == [ X, ' meters'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist) == [ X, ' meteriem'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
+distance(Dist) == [ X, ' meteriem'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
 distance(Dist) == ['aptuveni 1 kilometers '] :- Dist < 1500.
 distance(Dist) == ['aptuveni ', X, ' kilometeri '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
 distance(Dist) == [ X, ' kilometri '] :- D is round(Dist/1000), num_atom(D, X).

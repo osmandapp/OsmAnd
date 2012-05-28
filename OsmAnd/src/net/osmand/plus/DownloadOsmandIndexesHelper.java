@@ -195,9 +195,9 @@ public class DownloadOsmandIndexesHelper {
 		public String getVisibleName(){
 			int l = fileName.lastIndexOf('_');
 			String name = fileName.substring(0, l < 0 ? fileName.length() : l).replace('_', ' ');
-			if (fileName.endsWith(".zip")) { //$NON-NLS-1$
-				name += " (zip)"; //$NON-NLS-1$
-			}
+//			if (fileName.endsWith(".zip")) { //$NON-NLS-1$
+//				name += " (zip)"; //$NON-NLS-1$
+//			}
 			return name;
 		}
 		
