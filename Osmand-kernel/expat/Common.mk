@@ -1,5 +1,5 @@
-OSMAND_EXPAT_ABS := ./expat_library
-OSMAND_EXPAT_LOC := $(LOCAL_PATH)/expat_library
+OSMAND_EXPAT_LOC := ./expat_library
+OSMAND_EXPAT_ABS := $(LOCAL_PATH)/expat_library
 
 # Include paths
 LOCAL_C_INCLUDES += \
