@@ -516,6 +516,11 @@ HMAP::hash_map<int, std::vector<int> > sortObjectsByProperOrder(std::vector <Map
 					int objectType = req->getIntPropertyValue(req->props()->R_OBJECT_TYPE);
 					int order = req->getIntPropertyValue(req->props()->R_ORDER);
 					orderMap[(order << 2)|objectType].push_back(sh + j);
+					// polygon
+					if(objectType == 3) {
+						// add icon point all the time
+						orderMap[(128 << 2)|1].push_back(sh + j);
+					}
 					if (req->getIntPropertyValue(req->props()->R_SHADOW_LEVEL) > 0) {
 						rc->shadowLevelMin = std::min(rc->shadowLevelMin, order);
 						rc->shadowLevelMax = std::max(rc->shadowLevelMax, order);

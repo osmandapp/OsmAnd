@@ -144,7 +144,7 @@ public class OsmandRenderer {
 		return shaders.get(resId);
 	}
 	
-	private void put(TIntObjectHashMap<TIntArrayList> map, int k, int v, int init){
+	private void put(TIntObjectHashMap<TIntArrayList> map, int k, int v){
 		if(!map.containsKey(k)){
 			map.put(k, new TIntArrayList());
 		}
@@ -334,7 +334,6 @@ public class OsmandRenderer {
 	private TIntObjectHashMap<TIntArrayList> sortObjectsByProperOrder(RenderingContext rc, List<BinaryMapDataObject> objects,
 			RenderingRuleSearchRequest render) {
 		int sz = objects.size();
-		int init = sz / 4;
 		TIntObjectHashMap<TIntArrayList> orderMap = new TIntObjectHashMap<TIntArrayList>();
 		if (render != null) {
 			render.clearState();
@@ -361,7 +360,11 @@ public class OsmandRenderer {
 						if (render.search(RenderingRulesStorage.ORDER_RULES)) {
 							int objectType = render.getIntPropertyValue(render.ALL.R_OBJECT_TYPE);
 							int order = render.getIntPropertyValue(render.ALL.R_ORDER);
-							put(orderMap, (order << 2) | objectType, sh + j, init);
+							put(orderMap, (order << 2) | objectType, sh + j);
+							if(objectType == 3) {
+								// add icon point all the time
+								put(orderMap,(128 << 2)|1, sh + j);
+							}
 							if (render.isSpecified(render.ALL.R_SHADOW_LEVEL)) {
 								rc.shadowLevelMin = Math.min(rc.shadowLevelMin, order);
 								rc.shadowLevelMax = Math.max(rc.shadowLevelMax, order);
