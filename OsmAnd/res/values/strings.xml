@@ -23,7 +23,7 @@
     <string name="local_index_description">Download or update offline data. \nTo see more details click on the item, to deactivate or delete offline data press and hold. \nCurrent data on device (%1$s free):</string>
     <string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
     <string name="map_online_data">Online maps</string>
-	<string name="map_online_data_descr">Use online maps (download and save them on sdcard)</string>
+	<string name="map_online_data_descr">Use online maps (download and cache them on SD card)</string>
     <string name="online_map_settings">Online Map</string>
 	<string name="online_map_settings_descr">Configure online or cached tile map sources</string>
 	<string name="map_settings">- Map Settings</string>
@@ -41,7 +41,7 @@
     <string name="osmand_extra_settings_description">This plugin facilitates extra customization of the map appearance enables more device-specific settings.</string>
     <string name="osmand_extra_settings_name">Extra Settings</string>
     <string name="osmand_development_plugin_description">This plugin enables development and debugging features like animated navigation or rendering performance display.</string>
-    <string name="osmand_development_plugin_name">Osmand Development</string>
+    <string name="osmand_development_plugin_name">OsmAnd Development</string>
     <string name="plugins_screen">Plugin Manager</string>
     <string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting Osmand may be required.)</string>
     <string name="prefs_plugins_descr">Plugins provide extra functionality bundled within the application like tracking, tile maps, screen off mode, accessibility settings, and others.</string>
@@ -52,7 +52,7 @@
 \n\t- Lots of bug fixes
 	</string>
     <string name="osm_editing_plugin_description">This plugin facilitates OSM feedback. It allows to collect/modify OSM POI objects, open/comment OSM bugs, and contribute recorded GPX files (requires OSM credentials).</string>
-    <string name="osm_editing_plugin_name">Osm Editing</string>
+    <string name="osm_editing_plugin_name">OSM Editing</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vector maps may display faster. May not work well on some devices.</string>
 	<string name="simulate_route_progression_manually">Simulate route progression manually</string>
 	<string name="play_commands_of_currently_selected_voice">Play commands of currently selected voice</string>
