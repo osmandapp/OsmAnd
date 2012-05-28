@@ -22,8 +22,7 @@ LOCAL_SRC_FILES:= \
 	$(OSMAND_PNG_LOC)/pngwutil.c
 
 LOCAL_C_INCLUDES += \
-	$(OSMAND_PNG_ABS)/
+	$(OSMAND_EXPAT_ABS) \
+	$(OSMAND_EXPAT_ABS)/lib
 
-LOCAL_CFLAGS += -W -Wall
-LOCAL_CFLAGS += -fPIC -DPIC -fvisibility=hidden -fpermissive
 
