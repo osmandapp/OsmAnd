@@ -406,7 +406,7 @@ public class BinaryMapIndexWriter {
 
 					pcalcx = pcalcx + tx ;
 					pcalcy = pcalcy + ty ;
-					delta = skipSomeNodes(coordinates, len, i, x, y ,false);
+					delta = skipSomeNodes(innerPolygonTypes, len, i, x, y ,true);
 				}
 			}
 		}
