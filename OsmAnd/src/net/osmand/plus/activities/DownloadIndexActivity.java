@@ -407,41 +407,12 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		if (entry != null) {
 			// if(!fileToUnzip.exists()){
 			// builder.setMessage(MessageFormat.format(getString(R.string.download_question), baseName, extractDateAndSize(e.getValue())));
-			if (entry.fileToUnzip.exists()) {
-				Builder builder = new AlertDialog.Builder(this);
-				MessageFormat format;
-				if (entry.fileToUnzip.isDirectory()) {
-					format = new MessageFormat("{0,date,dd.MM.yyyy}", Locale.US); //$NON-NLS-1$
-				} else {
-					format = new MessageFormat("{0,date,dd.MM.yyyy}, {1, number,##.#} MB", Locale.US); //$NON-NLS-1$
-				}
-				String description = format.format(new Object[] { new Date(entry.fileToUnzip.lastModified()),
-						((float) entry.fileToUnzip.length() / MB) });
-				String descriptionEx = e.getDate() + ", " +e.getSize() + " MB"; 
-				builder.setMessage(MessageFormat.format(getString(R.string.download_question_exist), entry.baseName, description,
-						descriptionEx));
-
-				builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						entriesToDownload.put(e.getFileName(), entry);
-						int x = getListView().getScrollX();
-						int y = getListView().getScrollY();
-						findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
-						getListView().scrollTo(x, y);
-						ch.setChecked(!ch.isChecked());
-					}
-				});
-				builder.setNegativeButton(R.string.default_buttons_no, null);
-				builder.show();
-			} else {
-				entriesToDownload.put(e.getFileName(), entry);
-				int x = getListView().getScrollX();
-				int y = getListView().getScrollY();
-				findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
-				getListView().scrollTo(x, y);
-				ch.setChecked(!ch.isChecked());
-			}
+			entriesToDownload.put(e.getFileName(), entry);
+			int x = getListView().getScrollX();
+			int y = getListView().getScrollY();
+			findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+			getListView().scrollTo(x, y);
+			ch.setChecked(!ch.isChecked());
 		}
 		return true;
 	}

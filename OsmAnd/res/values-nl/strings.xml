@@ -259,13 +259,6 @@
 	<string name="show_gpx_route">Toon op kaart</string>
 	<string name="poi_filter_nominatim">Online Zoeken</string>
 	<string name="search_select_point">Selecteer</string>
-	<string name="local_index_description">Download, activeer, deactiveer, of verwijder locale gegevens. \nHuidige gegevens op het apparaat (%1$s vrije ruimte):</string>
-	<string name="search_position_current_location_search">Positie zoeken&#8230;</string>
-	<string name="search_position_current_location_found">Positie (gevonden)</string>
-	<string name="search_position_address">Adres&#8230;</string>
-	<string name="search_position_favorites">Favorieten&#8230;</string>
-	<string name="search_position_undefined">Ongedefinieerd</string>
-	<string name="search_position_fixed">Verankerd</string>
 	<string name="search_position_current_location">Huidige positie&#8230;</string>
 	<string name="search_position_map_view">Laatste kaartweergave</string>
 	<string name="select_search_position">Zoek dichtbij :</string>

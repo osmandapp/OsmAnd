@@ -674,7 +674,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		if(preference.getKey().equals(OsmandSettings.LOCAL_INDEXES)){
-			startActivity(new Intent(this, LocalIndexesActivity.class));
+			if(getMyApplication().getResourceManager().getIndexFileNames().isEmpty()) {
+				startActivity(new Intent(this, OsmandIntents.getDownloadIndexActivity()));
+			} else {
+				startActivity(new Intent(this, OsmandIntents.getLocalIndexActivity()));
+			}
 			return true;
 		} else if(preference == bidforfix){
 			startActivity(new Intent(this, OsmandBidForFixActivity.class));

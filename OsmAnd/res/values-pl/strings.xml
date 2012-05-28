@@ -68,7 +68,6 @@
 <string name="show_gpx_route">Pokaż na mapie</string>
 <string name="poi_filter_nominatim">Online Nominatim</string>
 <string name="search_select_point">Wybierz</string>
-<string name="local_index_description">Pobierz nowe, zarchiwizuj lub usuń istniejące dane. \nIstniejące dane offline na urządzeniu (%1$s jest dostępne):</string>
 <string name="search_position_current_location_search">Ustal pozycję GPS…</string>
 <string name="search_position_current_location_found">Pozycja [ustalona]</string>
 <string name="search_position_address">Adres…</string>

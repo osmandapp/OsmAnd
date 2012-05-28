@@ -170,7 +170,6 @@
 	<string name="show_gpx_route">Visualizza</string>
 	<string name="poi_filter_nominatim">Nominatim Online</string>
 	<string name="search_select_point">Seleziona</string>
-	<string name="local_index_description">Scarica nuovi dati, sposta, salva o cancella dati esistenti. \nDati attualmente nel dispositivo (%1$s disponibile):</string>
 	<string name="search_position_current_location_search">Cerca posizione…</string>
 	<string name="search_position_current_location_found">Posizione [Trovata]</string>
 	<string name="search_position_address">Indirizzi…</string>

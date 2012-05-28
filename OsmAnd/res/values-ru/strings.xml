@@ -143,7 +143,6 @@
 	<string name="show_gpx_route">Показать на карте</string>
 	<string name="poi_filter_nominatim">Nominatim (интернет)</string>
 	<string name="search_select_point">Выбрать</string>
-	<string name="local_index_description">Офлайн данные доступные на SD карточке. Вы можете загрузить новые, архивировать и удалить данные. Доступно %1$s.</string>
 	<string name="search_position_current_location_search">Поиск позиции…</string>
 	<string name="search_position_current_location_found">Точка [Найдена]</string>
 	<string name="search_position_address">Адрес…</string>

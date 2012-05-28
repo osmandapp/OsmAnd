@@ -269,7 +269,6 @@
 	<string name="show_gpx_route">Mutasd a térképen</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_select_point">Választás</string>
-	<string name="local_index_description">Új offline adat letöltése, aktiválása/deaktiválása, törlése.\nJelenlegi adatok az eszközön (szabad hely: %1$s):</string>
 	<string name="search_position_current_location_search">Pozíció keresése&#8230;</string>
 	<string name="search_position_current_location_found">Pozíció [Megtalálva]</string>
 	<string name="search_position_address">Cím&#8230;</string>

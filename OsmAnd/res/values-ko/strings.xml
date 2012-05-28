@@ -275,7 +275,6 @@
 	<string name="show_gpx_route">맵 상에 표시</string>
 	<string name="poi_filter_nominatim">온라인 지명</string>
 	<string name="search_select_point">선택</string>
-	<string name="local_index_description">오프라인 데이터를 다운로드, 활성화, 비활성화, 또는 삭제합니다. \n장치의 현재 데이터 (%1$s 빈 공간):</string>
 	<string name="search_position_current_location_search">위치 검색&#8230;</string>
 	<string name="search_position_current_location_found">위치 (발견)</string>
 	<string name="search_position_address">주소&#8230;</string>

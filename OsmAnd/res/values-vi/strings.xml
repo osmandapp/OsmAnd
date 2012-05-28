@@ -54,7 +54,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="show_gpx_route">Hiển thị trên bản đồ</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_select_point">Chọn</string>
-	<string name="local_index_description">Tải mới hoặc di chuyển để sao lưu hoặc xóa dữ liệu hiện tại.\nDữ liệu offline hiện có trên máy (%1$s không gian trống):</string>
 	<string name="search_position_current_location_search">Đang tìm vị trí…</string>
 	<string name="search_position_current_location_found">Vị trí (Đã tìm thấy)</string>
 	<string name="search_position_address">Địa chỉ…</string>

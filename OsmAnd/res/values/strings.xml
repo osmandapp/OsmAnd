@@ -8,6 +8,7 @@
          If you are making/correcting english translations make sure :
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     -->
+    <string name="download_link_and_local_description">Download or update offline data. \nTo see more details click on the item, to deactivate or delete offline data press and hold. \nCurrent data on device (%1$s free):</string>
     <string name="unknown_from_location">Start location is not determined yet</string>
     <string name="unknown_location">Location is not found yet</string>
     <string name="context_menu_item_directions">Directions to here</string>
@@ -20,7 +21,6 @@
 	<string name="local_indexes_cat_map">Offline Map data</string>
     <string name="gpx_index_settings_descr"> (includes GPX analyzer)</string>
     <string name="index_settings_descr">Download, view details and manage offline maps</string>
-    <string name="local_index_description">Download or update offline data. \nTo see more details click on the item, to deactivate or delete offline data press and hold. \nCurrent data on device (%1$s free):</string>
     <string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
     <string name="map_online_data">Online maps</string>
 	<string name="map_online_data_descr">Use online maps (download and cache them on SD card)</string>

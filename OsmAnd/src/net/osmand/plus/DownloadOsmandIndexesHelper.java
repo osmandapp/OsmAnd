@@ -158,31 +158,32 @@ public class DownloadOsmandIndexesHelper {
 			String s = ""; //$NON-NLS-1$
 			if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)
 					|| fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
-				String lowerCase = description.toLowerCase();
-				if (lowerCase.contains("map")) { //$NON-NLS-1$
-					if (s.length() > 0) {
-						s += ", "; //$NON-NLS-1$
-					}
-					s += ctx.getString(R.string.map_index);
-				}
-				if (lowerCase.contains("poi")) { //$NON-NLS-1$
-					if (s.length() > 0) {
-						s += ", "; //$NON-NLS-1$
-					}
-					s += ctx.getString(R.string.poi);
-				}
-				if (lowerCase.contains("transport")) { //$NON-NLS-1$
-					if (s.length() > 0) {
-						s += ", "; //$NON-NLS-1$
-					}
-					s += ctx.getString(R.string.transport);
-				}
-				if (lowerCase.contains("address")) { //$NON-NLS-1$
-					if (s.length() > 0 ) {
-						s += ", "; //$NON-NLS-1$
-					}
-					s += ctx.getString(R.string.address);
-				}
+				// Takes too much space 
+//				String lowerCase = description.toLowerCase();
+//				if (lowerCase.contains("map")) { //$NON-NLS-1$
+//					if (s.length() > 0) {
+//						s += ", "; //$NON-NLS-1$
+//					}
+//					s += ctx.getString(R.string.map_index);
+//				}
+//				if (lowerCase.contains("poi")) { //$NON-NLS-1$
+//					if (s.length() > 0) {
+//						s += ", "; //$NON-NLS-1$
+//					}
+//					s += ctx.getString(R.string.poi);
+//				}
+//				if (lowerCase.contains("transport")) { //$NON-NLS-1$
+//					if (s.length() > 0) {
+//						s += ", "; //$NON-NLS-1$
+//					}
+//					s += ctx.getString(R.string.transport);
+//				}
+//				if (lowerCase.contains("address")) { //$NON-NLS-1$
+//					if (s.length() > 0 ) {
+//						s += ", "; //$NON-NLS-1$
+//					}
+//					s += ctx.getString(R.string.address);
+//				}
 			} else if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
 				s = ctx.getString(R.string.voice);
 			} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {

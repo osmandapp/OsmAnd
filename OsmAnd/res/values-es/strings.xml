@@ -186,7 +186,6 @@
 <string name="show_gpx_route">Mostrar en el mapa</string>
 <string name="poi_filter_nominatim">Nominatim en línea</string>
 <string name="search_select_point">Seleccionar</string>
-<string name="local_index_description">Descargar, (des-)activar, o borrar datos descargados. \nDatos actuales en el dispositivo (disponible %1$s):</string>
 <string name="search_position_current_location_search">Buscando posición&#8230;</string>
 <string name="search_position_current_location_found">Posición (Encontrado)</string>
 <string name="search_position_address">Dirección&#8230;</string>

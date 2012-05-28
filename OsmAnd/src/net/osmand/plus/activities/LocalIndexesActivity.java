@@ -679,7 +679,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			size = formatGb.format(new Object[]{(float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30) }); 
 		}
 		TextView ds = (TextView) findViewById(R.id.DescriptionText);
-		String text = getString(R.string.local_index_description, size);
+		String text = getString(R.string.download_link_and_local_description, size);
 		int l = text.indexOf('.');
 		if(l == -1) {
 			l = text.length();
