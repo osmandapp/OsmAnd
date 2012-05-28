@@ -279,8 +279,6 @@
 	<string name="local_indexes_cat_tts">TTS голосовые данные</string>
 	<string name="local_indexes_cat_voice">Голосовые данные</string>
 	<string name="local_indexes_cat_gpx">GPX данные</string>
-	<string name="local_indexes_cat_tile">Растровые карты</string>
-	<string name="local_indexes_cat_map">Векторные карты</string>
 	<string name="local_indexes_cat_poi">POI данные</string>
 	
 	<string name="ttsvoice">TTS Голос</string>
@@ -323,7 +321,6 @@
 	<string name="overlay_transparency">Прозрачность покрытия</string>
 	<string name="map_transparency_descr">Изменить прозрачность основной карты</string>
 	<string name="map_transparency">Прозрачность карты</string>
-	<string name="modify_transparency">Изменить прозрачность</string>
 	<string name="layer_underlay">Карта подложки…</string>
 	<string name="map_underlay">Карта подложки</string>
 	<string name="map_underlay_descr">Выберите слой подложки для основной карты</string>
@@ -465,7 +462,6 @@
 	<string name="reload">Перезагрузить</string>
 	<string name="general_settings_descr">Настроить использование интернета, выбрать ориентацию экрана, вращение карты и другое</string>
     <string name="general_settings">Общие</string>
-	<string name="index_settings_descr">Загрузить и обновить данные для офлайн использования</string>
     <string name="index_settings">Данные</string>
 	<string name="osmand_service">Фоновый режим</string>
 	<string name="osmand_service_descr">Запустить OsmAnd в фоновом режиме для записи трека и навигации</string>
@@ -586,8 +582,6 @@
 	<string name="route_head">Двигайтесь</string>
 	<string name="first_time_continue">Продолжить</string>
 	<string name="first_time_download">Загрузить индексы</string>
-	<string name="first_time_msg">Спасибо за то, что выбрали OsmAnd. \n
-Для полноценного использования приложения вам потребуются файлы индексы, которые необходимо загрузить (Настройки/Данные) или подготовить. После загрузки вам будет доступен : поиск по адресу, поиск POI, поиск транспорта.</string>
 	<string name="search_poi_location">Поиск сигнала…</string>
 	<string name="search_near_map">Искать вокруг выбранного центра карты</string>
 	<string name="search_nearby">Искать рядом</string>
@@ -654,8 +648,6 @@
 	<string name="downloading">Загрузка…</string>
 	<string name="downloading_list_indexes">Загружается список доступных индексов</string>
 	<string name="list_index_files_was_not_loaded">Не найдены доступные индекс файлы на osmand.net</string>
-    <string name="select_index_file_to_download">Если вы не можете найти регион, вы можете создать его самостоятельно.
-Читайте на osmand.net.</string>
 	<string name="show_poi_on_map">Показать на карте</string>
 	<string name="fav_points_edited">Отредактирована избранная точка</string>
 	<string name="fav_points_not_exist">Не существует избранных точек</string>
