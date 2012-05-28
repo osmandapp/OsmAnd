@@ -165,6 +165,12 @@
 		<type tag="railway" value="subway_entrance" minzoom="15" poi_prefix=""/>
 		<type tag="railway" value="buffer_stop" minzoom="15" />
 	</category>
+	
+	<category name="public_transport" poi_tag="public_transport" poi_category="transportation" poi_prefix="public_transport_">
+		<type tag="public_transport" value="platform" minzoom="15" />
+		<type tag="public_transport" value="station" minzoom="15" />
+		<type tag="public_transport" value="stop_position" minzoom="15" poi_prefix=""/>
+	</category>
 
 
 	<category name="aeroway" poi_tag="aeroway" poi_category="transportation">

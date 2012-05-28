@@ -30,7 +30,7 @@ public class OsmandIntents {
 	}
 	
 	public static Class<? extends Activity> getLocalIndexActivity() {
-		return DownloadIndexActivity.class;
+		return LocalIndexesActivity.class;
 	}
 
 }

@@ -90,9 +90,15 @@
 		<filter layer="-1" tag="" value="" order="10" objectType="2"/>
 		<filter tag="" value="" order="11" objectType="2"/>
 		
-		<group objectType="3" point="false">
+		<group objectType="3" >
 			<filter tag="railway" value="platform" order="30" />
 			<filter tag="railway" value="station" order="30"/>
+			<filter tag="public_transport" value="station" order="30"/>
+			<filter tag="public_transport" value="platform" order="30"/>
+			<groupFilter>
+				<filter point="false" cycle="true"/>
+				<filter point="false" area="true"/>
+			</groupFilter>
 		</group>
 		
 		<group objectType="2" area="false" point="false">
@@ -413,9 +419,15 @@
 		<!-- Railroad -->
 		<filter minzoom="14" maxzoom="14" textSize="12" textColor="#6666ff" textHaloRadius="1" textBold="true" textDy="7" tag="railway" value="station"/>
 			<filter minzoom="15" textSize="13" textColor="#6666ff" textHaloRadius="1" textBold="true" textDy="7" tag="railway" value="station"/>
+			<filter minzoom="14" maxzoom="14" textSize="12" textColor="#6666ff" textHaloRadius="1" textBold="true" textDy="7" tag="public_transport" value="station"/>
+			<filter minzoom="15" textSize="13" textColor="#6666ff" textHaloRadius="1" textBold="true" textDy="7" tag="public_transport" value="station"/>
 		<filter minzoom="14" maxzoom="14" textSize="12" textColor="#6666ff" textHaloRadius="1" textDy="7" tag="railway" value="halt"/>
 			<filter minzoom="15" textSize="12" textColor="#6666ff" textHaloRadius="1" textDy="7" tag="railway" value="halt"/>
 			<filter minzoom="15" textSize="12" textColor="#6666ff" textHaloRadius="1" textDy="7" tag="railway" value="tram_stop"/>
+		<filter minzoom="14" maxzoom="14" textSize="12" textColor="#6666ff" textHaloRadius="1" textBold="true" textDy="7" tag="public_transport" value="platform"/>
+			<filter minzoom="15" textSize="13" textColor="#6666ff" textHaloRadius="1" textBold="true" textDy="7" tag="public_transport" value="platform"/>
+			<filter minzoom="14" maxzoom="14" textSize="12" textColor="#6666ff" textHaloRadius="1" textBold="true" textDy="7" tag="railway" value="platform"/>
+			<filter minzoom="15" textSize="13" textColor="#6666ff" textHaloRadius="1" textBold="true" textDy="7" tag="railway" value="platform"/>
 
 		<!-- Aeroway -->
 		<filter minzoom="11" textSize="12" textColor="#6692da" textHaloRadius="1" textDy="7" tag="aeroway" value="aerodrome"/>
@@ -789,6 +801,15 @@
 
 		<!-- Polygon railway -->
 		<filter minzoom="11" tag="railway" value="station" color="#d4aaaa">
+			<filter nightMode="true" color="#560000"/>
+		</filter>
+		<filter minzoom="11" tag="public_transport" value="station" color="#d4aaaa">
+			<filter nightMode="true" color="#560000"/>
+		</filter>
+		<filter minzoom="15" tag="public_transport" value="platform" color="#bababa">
+			<filter nightMode="true" color="#560000"/>
+		</filter>
+		<filter minzoom="15" tag="railway" value="platform" color="#bababa">
 			<filter nightMode="true" color="#560000"/>
 		</filter>
 
