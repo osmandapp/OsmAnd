@@ -1,6 +1,2 @@
-x86/
-armeabi/
-armeabi-v7a/
-linux-x86/
-win-x86/
-darwin-x86/
+*
+!.gitignore

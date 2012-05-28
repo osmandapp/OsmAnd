@@ -2,7 +2,7 @@ LOCAL_PATH = .
 include ../Makefile.vars
 include Common.mk
 
-PREBUILT_DIR = ../jni-prebuilt/$(os)-$(arch)/
+PREBUILT_DIR = ../jni-prebuilt/$(os)-$(arch)
 LIBNAME := libskia.a
 
 CPP_FILE_EXTENSION = cpp
@@ -31,18 +31,19 @@ CPPFLAGS := -DSK_RELEASE \
 	-fno-rtti \
 	-fno-exceptions \
 	-fPIC \
+	-DSK_BUILD_FOR_UNIX \
 	$(C_INCLUDES)
 	
 LDLIBS = -lpthread
 
 target : $(PREBUILT_DIR)/$(LIBNAME)
 
-$(PREBUILT_DIR)/$(LIBNAME) : build/$(LIBNAME) 
-	cp build/$(LIBNAME) $(PREBUILT_DIR)/$(LIBNAME)
+$(PREBUILT_DIR)/$(LIBNAME) : build/$(LIBNAME)
+	mkdir -p $(PREBUILT_DIR)
+	cp build/$(LIBNAME) $(PREBUILT_DIR)
 
 build/$(LIBNAME): $(OBJECTS) 
 	ar -rf build/$(LIBNAME) $(OBJECTS)
-	cp build/$(LIBNAME) ../jni-prebuilt/linux-x86/$(LIBNAME)
 	
 build/obj-$(os)-$(arch)/%.o : %.$(CPP_FILE_EXTENSION) $(LOCAL_C_INCLUDES)
 	@mkdir -p `dirname $@`
