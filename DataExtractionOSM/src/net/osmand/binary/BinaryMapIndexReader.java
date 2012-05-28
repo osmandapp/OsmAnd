@@ -1039,6 +1039,7 @@ public class BinaryMapIndexReader {
 			dataObject.additionalTypes = new int[0];
 		}
 		dataObject.id = id;
+		dataObject.area = area;
 		dataObject.mapIndex = root;
 		return dataObject;
 	}
