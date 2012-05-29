@@ -114,8 +114,7 @@
   <string name="local_openstreetmap_uploading_poi">Nahrávajú sa POI</string>
   <string name="local_openstreetmap_poi_were_uploaded">{0} POI bolo nahratých</string>
   <string name="local_openstreetmap_uploadall">Nahrať všetky POI</string>
-  <string name="local_openstreetmap_items">
-  </string>
+  <string name="local_openstreetmap_items">" "</string>
   <string name="local_openstreetmap_show_poi">Zobraziť POI na mape</string>
   <string name="local_openstreetmap_upload">Nahrať úpravu na OSM</string>
   <string name="local_openstreetmap_delete">Vymazať úpravu POI</string>
@@ -158,7 +157,7 @@
   <string name="download_files_not_enough_space">Nie je dostatok voľného miesta pre stiahnutie %1$s MB (voľné: %2$s).</string>
   <string name="download_files_question_space">Aktuálne je voľných {2} MB! Stiahnuť {0} súbor(y/ov) ({1} MB)?</string>
   <string name="tip_select_destination_point">Výber cieľového bodu</string>
-  <string name="tip_select_destination_point_t">" \tCieľ môžete určiť priamo na mape (kontextové menu, potom \'Nastaviť ako cieľ\'), vo všetkých hľadacích aktivitách, alebo cez dlhým kliknutím vo Vašom \'Zozname obľúbených bodov\'. \n\tCieľ je označený ako oranžový krúžok na mape a OsmAnd zobrazí vzdialenosť a smer k nemu (oranžový trojuholník). "</string>
+  <string name="tip_select_destination_point_t">"\tCieľ môžete určiť priamo na mape (kontextové menu, potom \'Nastaviť ako cieľ\'), vo všetkých hľadacích aktivitách, alebo cez dlhým kliknutím vo Vašom \'Zozname obľúbených bodov\'. \n\tCieľ je označený ako oranžový krúžok na mape a OsmAnd zobrazí vzdialenosť a smer k nemu (oranžový trojuholník). "</string>
   <string name="tip_recent_changes_0_6_9_t">"Zmeny vo verzii 0.6.9 : \n\t- Vylepšené offline vykresľovanie mapy \n\t- Rýchle natívne offline vykresľovanie - viď experimentálne funkcie (nemusí fungovať na všetkých zariadeniach) \n\t- Veľké zmeny vo vzhľade aplikácie \n\t- Informácie o nadmorskej výške \n\t- Nové preklady (Vietnamský, Polský) \n\t- Iné malé funkcie "</string>
   <string name="show_altitude_info_descr">Zobrazí aktuálnu nadm. výšku na mape</string>
   <string name="show_altitude_info">Zobraziť nadm. výšku</string>
@@ -252,14 +251,13 @@
   <string name="local_index_address_data">Adresné údaje</string>
   <string name="local_index_transport_data">Dopravné údaje</string>
   <string name="local_index_map_data">Mapové údaje</string>
-  <string name="local_index_items">
-  </string>
+  <string name="local_index_items">" "</string>
   <string name="local_indexes_cat_backup">Záloha</string>
   <string name="local_indexes_cat_tts">Hlasové údaje (TTS)</string>
   <string name="local_indexes_cat_voice">Hlasové údaje (mediálne)</string>
   <string name="local_indexes_cat_gpx">GPX údaje</string>
-  <string name="local_indexes_cat_tile">Mapové údaje (dlaždice)</string>
-  <string name="local_indexes_cat_map">Mapové údaje (vektorové)</string>
+  <string name="local_indexes_cat_tile">Údaje online máp</string>
+  <string name="local_indexes_cat_map">Údaje offline máp</string>
   <string name="local_indexes_cat_poi">POI údaje</string>
   <string name="ttsvoice">TTS hlas</string>
   <string name="search_offline_clear_search">Nové hľadanie</string>
@@ -294,7 +292,7 @@
   <string name="overlay_transparency">Priehľadnosť prekrývacej mapy</string>
   <string name="map_transparency_descr">Úprava priehľadnosti základnej mapy</string>
   <string name="map_transparency">Priehľadnosť mapy</string>
-  <string name="modify_transparency">Upravte priehľadnosť</string>
+  <string name="modify_transparency">Upravte priehľadnosť (0 - priehľadný, 255 - nepriehľadný)</string>
   <string name="layer_underlay">Podkladová mapa…</string>
   <string name="map_underlay">Podkladová mapa</string>
   <string name="map_underlay_descr">Výber podkladovej mapy</string>
@@ -318,8 +316,7 @@
   <string name="tip_favorites_t">Ak Vás unavuje hľadať miesta, ktoré často navštevujete, môžete si tieto miesta jednoducho pridať medzi Obľúbené a potom ich používať iba pár kliknutiami. \n\tNa vytvorenie Obľúbeného bodu musíte ísť do Kontextového menu mapy, vybrať možnosť \'Pridať do obľúbených\' a zadať preň vhodné meno. Po uložení potom môžte k nemu jednoducho pristupovať cez \'Hlavné Menu\'-&gt;\'Obľúbené\'. \n\tDlhým kliknutím na obľúbený bod v ponuke \'Obľúbené\', sa môžete navigovať k tomuto bodu, upraviť alebo zmazať ho. \n\tNa zobrazenie všetkých Obľúbených bodov priamo na mape, môžete zapnúť vrstvu \'Obľúbené\' cez \'Kontextové menu mapy\' -&gt; \'Zobrazenie\'.</string>
   <string name="tip_osm_improve">Vylepšovanie Openstreetmap-u</string>
   <string name="tip_osm_improve_t">OsmAnd používa mapy založené na dátach Openstreetmap.org a nie je navrhnutý len pre cestovanie a navigovanie ale aj pre vylepšovanie a pomoc projektu Openstreetmap. Iba pár kliknutiami môžete jednoducho vytvoriť a nahrať nový bod záujmu(POI) alebo OSM chybu! \nAko prvé potrebujete zadať prihlasovacie informácie cez \'Nastavenia\'-&gt;\'Všeobecné nastavenia\'-&gt;\'OSM\'. \n\tNa pridanie nového POI použite možnosť \'Vytvoriť POI\' v kontextovom menu mapy. Potom môžete postupovať so zadávaním informácií o novom POI v dialógu vytvárania POI a na koniec ho Nahrať. \n\tAk nájdete na mape nejakú chybu, môžete to oznámiť Openstreetmap komunite, ktorá potom môže tento problém rýchlejšie odstrániť. \n\tNa pridanie OSM chyby použite možnosť \'Otvoriť OSM chybu\' v kontextovom menu mapy. Potom je otvorený dialóg, kde môžete zadať podrobný popis problému a na koniec ho zverejniť tlačidlom \'Pridať\'. \n\tNezabudnite, že pre používanie týchto funkcií potrebujete internetové pripojenie!</string>
-  <string name="create_poi_link_to_osm_doc">
-    <u>Online OSM</u> mapová klasifikácia s obrázkami</string>
+  <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> mapová klasifikácia s obrázkami"</string>
   <string name="error_doing_search">Prihodila sa chyba pri offline hľadaní</string>
   <string name="search_offline_geo_error">Nedá sa parsovať geo obsah: \'%s\'</string>
   <string name="search_osm_offline">Nájsť adresu použitím stiahnutých máp</string>
@@ -428,7 +425,7 @@
   <string name="reload">Znovu načítať</string>
   <string name="general_settings_descr">Konfigurácia zobrazenia a iných globálnych nastavení</string>
   <string name="general_settings">Všeobecné nastavenia</string>
-  <string name="index_settings_descr">Stiahnutie a správa offline máp a iných údajov ako sú GPX stopy</string>
+  <string name="index_settings_descr">Stiahnutie, zobrazenie podrobností a správca offline máp</string>
   <string name="index_settings">Offline údaje</string>
   <string name="osmand_service">Služba na pozadí</string>
   <string name="osmand_service_descr">Použite pre spustenie OsmAndu počas vypnutej obrazovky</string>
@@ -453,7 +450,7 @@
   <string name="download_type_to_filter">sem zadajte čo chcete nájsť</string>
   <string name="use_high_res_maps">Mapa s vysokým rozlíšením</string>
   <string name="use_high_res_maps_descr">Použitie mapy s vysokým rozlíšením pre zariadenia s vysokou hustotou bodov</string>
-  <string name="unknown_location">Pozícia nie je zatiaľ známa</string>
+  <string name="unknown_location">Umiestnenie zatiaľ nenájdené</string>
   <string name="download_files">Stiahnuť</string>
   <string name="context_menu_item_search_transport">Hľadať prepravu</string>
   <string name="transport_searching_transport">Hľadá sa preprava (bez cieľa)</string>
@@ -548,7 +545,7 @@
   <string name="route_head">Pokračujte rovno</string>
   <string name="first_time_continue">Pokračovať</string>
   <string name="first_time_download">Stiahnuť oblasti</string>
-  <string name="first_time_msg">Ďakujeme, že ste sa rozhodli pre OsmAnd. \nNa použitie všetkých funkcií aplikácie potrebujete indexové súbory, ktoré môžete stiahnuť (Nastavenia -&gt; Údaje) alebo si ich pripraviť sami. Potom budete môcť: vyhľadávať adresy, body zájmov(POI) a verejnú dopravu.</string>
+  <string name="first_time_msg">Na použitie hlavných funkcií tejto aplikácie, potrebujete nejaké regionálne offline údaje, ktoré si môžete stiahnuť (použite Nastavenia, Offline údaje). Potom budete môcť vyhľadávať adresy, body záujmov(POI) a verejnú dopravu.</string>
   <string name="search_poi_location">Hľadá sa signál…</string>
   <string name="search_near_map">Hľadať v blízkosti poslednej pozície</string>
   <string name="search_nearby">Hľadať neďaleko Vás</string>
@@ -613,7 +610,7 @@
   <string name="downloading">Sťahovanie…</string>
   <string name="downloading_list_indexes">Sťahuje sa zoznam dostupných oblastí</string>
   <string name="list_index_files_was_not_loaded">Zoznam oblastí nebol prijatý z osmand.net.</string>
-  <string name="select_index_file_to_download">Ak nemôžete nájsť Vašu oblasť, môžete si ju sami vytvoriť. Viď osmand.net</string>
+  <string name="select_index_file_to_download">Nič sa nenašlo. Ak nemôžete ručne nájsť Vašu oblasť, môžete si ju vlastnoručne vytvoriť (viď osmand.net).</string>
   <string name="show_poi_on_map">Zobraziť na mape</string>
   <string name="fav_points_edited">Obľúbený bod bol upravený</string>
   <string name="fav_points_not_exist">Neexistujú žiadne obľúbené body</string>
@@ -669,8 +666,8 @@
   <string name="auto_zoom_map_descr">Autom. priblíženie mapy podľa Vašej rýchlosti</string>
   <string name="auto_zoom_map">Autom. priblíženie mapy</string>
   <string name="additional_settings">Ďalšie nastavenia</string>
-  <string name="settings_preset_descr">Výber profilu užívateľa. (Nastavenia mapy, stopovania a navigácie môžu byť nižšie prispôsobené pre každý profil.)</string>
-  <string name="settings_preset">Užívateľský režim</string>
+  <string name="settings_preset_descr">Výber profilu užívateľa. Každý profil obsahuje sadu špecifických nastavení.</string>
+  <string name="settings_preset">Užívateľský profil</string>
   <string name="settings">Nastavenia</string>
   <string name="save_current_track_descr">Uloženie aktuálnej stopy na SD kartu</string>
   <string name="save_current_track">Uložiť aktuálnu stopu</string>
@@ -814,14 +811,14 @@
   <string name="edit_filter_delete_message">Filter {0} bol zmazaný</string>
   <string name="edit_filter_create_message">Filter {0} bol vytvorený</string>
   <string name="default_buttons_selectall">Vybrať všetko</string>
-  <string name="download_link_and_local_description">Download or update offline data. \nTo see more details click on the item, to deactivate or delete offline data press and hold. \nCurrent data on device (%1$s free):</string>
-  <string name="unknown_from_location">Start location is not determined yet</string>
-  <string name="context_menu_item_directions">Directions to here</string>
-  <string name="confirm_interrupt_download">Do you want to interrupt file downloading?</string>
-  <string name="basemap_was_selected_to_download">Basemap is required for proper application functioning and was selected to download.</string>
-  <string name="gpx_index_settings_descr">" (includes GPX analyzer)"</string>
-  <string name="favourites_edit_dialog_name">Name</string>
-  <string name="favourites_edit_dialog_category">Category</string>
+  <string name="download_link_and_local_description">Stiahnutie alebo aktualizácia offline údajov.\nNa zobrazenie podrobností kliknite na položku, na deaktiváciu alebo zmazanie offline údaju, kliknite a podržte.\nAktuálne údaje v zariadení (%1$s voľných):</string>
+  <string name="unknown_from_location">Štartovacie umiestnenie zatiaľ nezistené</string>
+  <string name="context_menu_item_directions">Pokyny k tomuto miestu</string>
+  <string name="confirm_interrupt_download">Chcete prerusiť sťahovanie súboru?</string>
+  <string name="basemap_was_selected_to_download">Základná mapa je potrebná pre správne fungovanie aplikácie a bola vybratá na stiahnutie.</string>
+  <string name="gpx_index_settings_descr">"(zahŕňa GPX analyzéra)"</string>
+  <string name="favourites_edit_dialog_name">Názov</string>
+  <string name="favourites_edit_dialog_category">Kategória</string>
   <string name="navigate_point_format_D">DDD.DDDDD</string>
   <string name="navigate_point_format_DM">DDD MM.MMMMM</string>
   <string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
