@@ -34,7 +34,7 @@
 	
 	<string name="osmand_rastermaps_plugin_description">This plugin facilitates using a variety of online or cached tile maps as base map or as overlay / underlay maps. The maps can also be prepared offline and copied to the Osmand folder.</string>
     <string name="osmand_rastermaps_plugin_name">Online Maps</string>
-    <string name="osmand_background_plugin_description">This plugin allows tracking or navigating in power saving (screen off) mode. It provides a background service periodically waking up the GPS to record a track point or play a voice prompt.</string>
+    <string name="osmand_background_plugin_description">This plugin allows tracking or navigation in power saving (screen off) mode by periodically waking up the GPS device to record a track point or play a voice prompt.</string>
     <string name="osmand_background_plugin_name">Screen Off Features</string>
     <string name="osmand_accessibility_description">This plugin configures special accessibility features.</string>
     <string name="osmand_accessibility_name">Accessibility</string>
