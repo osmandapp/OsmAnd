@@ -549,7 +549,7 @@ public class MapActivityActions implements DialogProvider {
 						boolean reverse = props[0];
 						boolean passWholeWay = props[2];
 						boolean useDestination = props[1];
-						GPXRouteParams gpxRoute = new GPXRouteParams(result, reverse);
+						GPXRouteParams gpxRoute = new GPXRouteParams(result, reverse, settings);
 						
 						Location loc = mapActivity.getLastKnownLocation();
 						if(passWholeWay && loc != null){

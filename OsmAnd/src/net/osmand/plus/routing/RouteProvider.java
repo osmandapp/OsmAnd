@@ -30,6 +30,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
@@ -75,8 +76,8 @@ public class RouteProvider {
 		List<Location> points = new ArrayList<Location>();
 		List<RouteDirectionInfo> directions;
 	
-		public GPXRouteParams(GPXFile file, boolean reverse){
-			prepareEverything(file, reverse);
+		public GPXRouteParams(GPXFile file, boolean reverse, OsmandSettings settings){
+			prepareEverything(file, reverse, settings.LEFT_SIDE_NAVIGATION.get());
 		}
 		
 		public void setStartPoint(Location startPoint) {
@@ -100,9 +101,9 @@ public class RouteProvider {
 			return null;
 		}
 		
-		private void prepareEverything(GPXFile file, boolean reverse){
+		private void prepareEverything(GPXFile file, boolean reverse, boolean leftSide){
 			if(file.isCloudmadeRouteFile() || OSMAND_ROUTER.equals(file.author)){
-				directions =  parseCloudmadeRoute(points, file, OSMAND_ROUTER.equals(file.author));
+				directions =  parseCloudmadeRoute(points, file, OSMAND_ROUTER.equals(file.author), leftSide);
 				if(reverse){
 					// clear directions all turns should be recalculated
 					directions = null;
@@ -184,7 +185,7 @@ public class RouteProvider {
 							i.routePointOffset++;
 						}
 						RouteDirectionInfo info = new RouteDirectionInfo();
-						info.turnType = TurnType.valueOf(TurnType.C);
+						info.turnType = TurnType.valueOf(TurnType.C, false);
 						info.routePointOffset = 0;
 						info.descriptionRoute = "" ;//getString(ctx, R.string.route_head); //$NON-NLS-1$
 						directions.add(0, info);
@@ -253,7 +254,7 @@ public class RouteProvider {
 	}
 
 	public RouteCalculationResult calculateRouteImpl(Location start, LatLon end, ApplicationMode mode, RouteService type, Context ctx,
-			GPXRouteParams gpxRoute, boolean fast){
+			GPXRouteParams gpxRoute, boolean fast, boolean leftSide){
 		long time = System.currentTimeMillis();
 		if (start != null && end != null) {
 			if(log.isInfoEnabled()){
@@ -263,13 +264,13 @@ public class RouteProvider {
 				RouteCalculationResult res;
 				if(gpxRoute != null && !gpxRoute.points.isEmpty()){
 					res = calculateGpxRoute(start, end, gpxRoute);
-					addMissingTurnsToRoute(res, start, end, mode, ctx);
+					addMissingTurnsToRoute(res, start, end, mode, ctx, leftSide);
 				} else if (type == RouteService.YOURS) {
 					res = findYOURSRoute(start, end, mode, fast);
-					addMissingTurnsToRoute(res, start, end, mode, ctx);
+					addMissingTurnsToRoute(res, start, end, mode, ctx, leftSide);
 				} else if (type == RouteService.ORS) {
 					res = findORSRoute(start, end, mode, fast);
-					addMissingTurnsToRoute(res, start, end, mode, ctx);
+					addMissingTurnsToRoute(res, start, end, mode, ctx, leftSide);
 //				} else if (type == RouteService.OSMAND) {
 //					res = findVectorMapsRoute(start, end, mode, fast, (OsmandApplication)ctx.getApplicationContext());
 //					addMissingTurnsToRoute(res, start, end, mode, ctx);
@@ -277,9 +278,9 @@ public class RouteProvider {
 					if (type == RouteService.OSMAND) {
 						AccessibleToast.makeText(ctx, R.string.offline_navigation_not_available, Toast.LENGTH_LONG).show();
 					}
-					res = findCloudMadeRoute(start, end, mode, ctx, fast);
+					res = findCloudMadeRoute(start, end, mode, ctx, fast, leftSide);
 					// for test purpose
-					addMissingTurnsToRoute(res, start, end, mode, ctx);
+					addMissingTurnsToRoute(res, start, end, mode, ctx, leftSide);
 				}
 				if(log.isInfoEnabled() && res.locations != null){
 					log.info("Finding route contained " + res.locations.size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -358,7 +359,8 @@ public class RouteProvider {
 		return ctx.getString(resId);
 	}
 	
-	protected void addMissingTurnsToRoute(RouteCalculationResult res, Location start, LatLon end, ApplicationMode mode, Context ctx){
+	protected void addMissingTurnsToRoute(RouteCalculationResult res, Location start, LatLon end, ApplicationMode mode, Context ctx,
+			boolean leftSide){
 		if(!res.isCalculated()){
 			return;
 		}
@@ -383,7 +385,8 @@ public class RouteProvider {
 		int previousLocation = 0;
 		int prevBearingLocation = 0;
 		RouteDirectionInfo previousInfo = new RouteDirectionInfo();
-		previousInfo.turnType = TurnType.valueOf(TurnType.C);
+		
+		previousInfo.turnType = TurnType.valueOf(TurnType.C, leftSide);
 		previousInfo.routePointOffset = 0;
 		previousInfo.descriptionRoute = getString(ctx, R.string.route_head);
 		directions.add(previousInfo);
@@ -436,26 +439,26 @@ public class RouteProvider {
 			if(delta > 45 && delta < 315){
 				
 				if(delta < 60){
-					type = TurnType.valueOf(TurnType.TSLL);
+					type = TurnType.valueOf(TurnType.TSLL, leftSide);
 					description = getString(ctx, R.string.route_tsll);
 				} else if(delta < 120){
-					type = TurnType.valueOf(TurnType.TL);
+					type = TurnType.valueOf(TurnType.TL, leftSide);
 					description = getString(ctx, R.string.route_tl);
 				} else if(delta < 150){
-					type = TurnType.valueOf(TurnType.TSHL);
+					type = TurnType.valueOf(TurnType.TSHL, leftSide);
 					description = getString(ctx, R.string.route_tshl);
 				} else if(delta < 210){
-					type = TurnType.valueOf(TurnType.TU);
+					type = TurnType.valueOf(TurnType.TU, leftSide);
 					description = getString(ctx, R.string.route_tu);
 				} else if(delta < 240){
 					description = getString(ctx, R.string.route_tshr);
-					type = TurnType.valueOf(TurnType.TSHR);
+					type = TurnType.valueOf(TurnType.TSHR, leftSide);
 				} else if(delta < 300){
 					description = getString(ctx, R.string.route_tr);
-					type = TurnType.valueOf(TurnType.TR);
+					type = TurnType.valueOf(TurnType.TR, leftSide);
 				} else {
 					description = getString(ctx, R.string.route_tslr);
-					type = TurnType.valueOf(TurnType.TSLR);
+					type = TurnType.valueOf(TurnType.TSLR, leftSide);
 				}
 				
 				// calculate for previousRoute 
@@ -486,7 +489,7 @@ public class RouteProvider {
 			info.expectedTime = 0;
 			info.distance = 0;
 			info.descriptionRoute = ""; //$NON-NLS-1$
-			info.turnType = TurnType.valueOf(TurnType.C);
+			info.turnType = TurnType.valueOf(TurnType.C, leftSide);
 			info.routePointOffset = locations.size() - 1;
 			directions.add(info);
 		}
@@ -665,7 +668,7 @@ public class RouteProvider {
 	}
 	
 	
-	protected RouteCalculationResult findCloudMadeRoute(Location start, LatLon end, ApplicationMode mode, Context ctx, boolean fast)
+	protected RouteCalculationResult findCloudMadeRoute(Location start, LatLon end, ApplicationMode mode, Context ctx, boolean fast, boolean leftSide)
 			throws MalformedURLException, IOException, ParserConfigurationException, FactoryConfigurationError, SAXException {
 		List<Location> res = new ArrayList<Location>();
 		List<RouteDirectionInfo> directions = null;
@@ -693,12 +696,13 @@ public class RouteProvider {
 		URL url = new URL(uri.toString());
 		URLConnection connection = url.openConnection();
 		GPXFile gpxFile = GPXUtilities.loadGPXFile(ctx, connection.getInputStream(), false);
-		directions = parseCloudmadeRoute(res, gpxFile, false);
+		directions = parseCloudmadeRoute(res, gpxFile, false, leftSide);
 
 		return new RouteCalculationResult(res, directions, start, end, null);
 	}
 
-	private static List<RouteDirectionInfo> parseCloudmadeRoute(List<Location> res, GPXFile gpxFile, boolean osmandRouter) {
+	private static List<RouteDirectionInfo> parseCloudmadeRoute(List<Location> res, GPXFile gpxFile, boolean osmandRouter,
+			boolean leftSide) {
 		List<RouteDirectionInfo> directions = null;
 		if (!osmandRouter) {
 			for (WptPt pt : gpxFile.points) {
@@ -731,9 +735,9 @@ public class RouteProvider {
 					}
 					String stype = item.getExtensionsToRead().get("turn"); //$NON-NLS-1$
 					if (stype != null) {
-						dirInfo.turnType = TurnType.valueOf(stype.toUpperCase());
+						dirInfo.turnType = TurnType.valueOf(stype.toUpperCase(), leftSide);
 					} else {
-						dirInfo.turnType = TurnType.valueOf(TurnType.C);
+						dirInfo.turnType = TurnType.valueOf(TurnType.C, leftSide);
 					}
 					String sturn = item.getExtensionsToRead().get("turn-angle"); //$NON-NLS-1$
 					if (sturn != null) {

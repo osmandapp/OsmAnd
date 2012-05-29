@@ -522,7 +522,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 					if (routingHelper.makeUturnWhenPossible() == true) {
 						if (!showMiniMap) {
 							visible = true;
-							turnType = TurnType.valueOf(TurnType.TU);
+							turnType = TurnType.valueOf(TurnType.TU, view.getSettings().LEFT_SIDE_NAVIGATION.get());
 							TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
 							invalidate();
 						}

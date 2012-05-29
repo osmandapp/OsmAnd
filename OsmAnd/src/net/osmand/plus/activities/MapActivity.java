@@ -357,7 +357,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 
 						@Override
 						protected void onPostExecute(GPXFile result) {
-							final GPXRouteParams gpxRoute = result == null ? null : new GPXRouteParams(result, false);
+							final GPXRouteParams gpxRoute = result == null ? null : new GPXRouteParams(result, false, settings);
 							LatLon endPoint = pointToNavigate != null ? pointToNavigate : gpxRoute.getLastPoint();
 							Location startPoint = gpxRoute == null ? null : gpxRoute.getStartPointForRoute();
 							if (endPoint == null) {

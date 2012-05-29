@@ -602,7 +602,9 @@ public class RoutingHelper {
 					currentRunningJob = new Thread(new Runnable() {
 						@Override
 						public void run() {
-							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, gpxRoute, fastRouteMode);
+							boolean leftSide = settings.LEFT_SIDE_NAVIGATION.get();
+							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, gpxRoute, fastRouteMode, 
+									leftSide);
 							synchronized (RoutingHelper.this) {
 								if (res.isCalculated()) {
 									setNewRoute(res, start);
@@ -720,36 +722,45 @@ public class RoutingHelper {
 		public static String[] predefinedTypes = new String[] {C, KL, KR, TL, TSLL, TSHL, TR, TSLR, TSHR, TU, TRU}; 
 		
 		
-		public static TurnType valueOf(String s){
+		public static TurnType valueOf(String s, boolean leftSide){
 			for(String v : predefinedTypes){
 				if(v.equals(s)){
+					if(leftSide && TU.equals(v)){
+						v = TRU;
+					}
 					return new TurnType(v);
 				}
 			}
 			if (s != null && s.startsWith("EXIT")) { //$NON-NLS-1$
-				return getExitTurn(Integer.parseInt(s.substring(4)), 0);
+				return getExitTurn(Integer.parseInt(s.substring(4)), 0, leftSide);
 			}
 			return null;
 		}
 		
 		private final String value;
 		private int exitOut;
+		private boolean isLeftSide;
 		// calculated CW head rotation if previous direction to NORTH
 		private float turnAngle;
 		
-		public static TurnType getExitTurn(int out, float angle){
-			TurnType r = new TurnType("EXIT", out); //$NON-NLS-1$
+		private static TurnType getExitTurn(int out, float angle, boolean leftSide){
+			TurnType r = new TurnType("EXIT", out, leftSide); //$NON-NLS-1$
 			r.setTurnAngle(angle);
 			return r;
 		}
-		private TurnType(String value, int exitOut){
+		private TurnType(String value, int exitOut, boolean leftSide){
 			this.value = value;
 			this.exitOut = exitOut;
+			this.isLeftSide = leftSide;
 		}
 
 		// calculated CW head rotation if previous direction to NORTH
 		public float getTurnAngle() {
 			return turnAngle;
+		}
+		
+		public boolean isLeftSide(){
+			return isLeftSide;
 		}
 		
 
