@@ -9,8 +9,8 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     -->
     <string name="download_link_and_local_description">Download or update offline data. \nTo see more details click on the item, to deactivate or delete offline data press and hold. \nCurrent data on device (%1$s free):</string>
-    <string name="unknown_from_location">Start location is not determined yet</string>
-    <string name="unknown_location">Location is not found yet</string>
+    <string name="unknown_from_location">Starting location is not yet determined</string>
+    <string name="unknown_location">Position not yet known</string>
     <string name="context_menu_item_directions">Directions to here</string>
     <string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
     <string name="confirm_interrupt_download">Do you want to interrupt file downloading?</string>
@@ -31,19 +31,19 @@
 	
 	<string name="osmand_rastermaps_plugin_description">This plugin facilitates using a variety of online or cached tile maps as base map or as overlay / underlay maps. The maps can also be prepared offline and copied to the Osmand folder.</string>
     <string name="osmand_rastermaps_plugin_name">Online Maps</string>
-    <string name="osmand_background_plugin_description">This plugin allows navigating and tracking in power saving (screen off) mode. It runs a background service periodically waking up the GPS to record a track point or give a navigation prompt.</string>
+    <string name="osmand_background_plugin_description">This plugin allows tracking or navigating in power saving (screen off) mode. It provides a background service periodically waking up the GPS to record a track point or play a voice prompt.</string>
     <string name="osmand_background_plugin_name">Screen Off Features</string>
     <string name="osmand_accessibility_description">This plugin configures special accessibility features.</string>
     <string name="osmand_accessibility_name">Accessibility</string>
-    <string name="extra_settings">Extra settings</string>
+    <string name="extra_settings">Advanced settings</string>
     <string name="osmand_monitoring_description">This plugin facilitates recording your trips to GPX files or live monitoring using a web service.</string>
     <string name="osmand_monitoring_name">Tracking + Monitoring</string>
-    <string name="osmand_extra_settings_description">This plugin facilitates extra customization of the map appearance enables more device-specific settings.</string>
-    <string name="osmand_extra_settings_name">Extra Settings</string>
+    <string name="osmand_extra_settings_description">This plugin provides advanced map configuration and some device-specific settings.</string>
+    <string name="osmand_extra_settings_name">Advanced Settings</string>
     <string name="osmand_development_plugin_description">This plugin enables development and debugging features like animated navigation or rendering performance display.</string>
     <string name="osmand_development_plugin_name">OsmAnd Development</string>
     <string name="plugins_screen">Plugin Manager</string>
-    <string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting Osmand may be required.)</string>
+    <string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting OsmAnd may be required.)</string>
     <string name="prefs_plugins_descr">Plugins provide extra functionality bundled within the application like tracking, tile maps, screen off mode, accessibility settings, and others.</string>
     <string name="prefs_plugins">Plugin Manager</string>
     <string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0 :
@@ -51,7 +51,7 @@
 \n\t- New offline map data support
 \n\t- Lots of bug fixes
 	</string>
-    <string name="osm_editing_plugin_description">This plugin facilitates OSM feedback. It allows to collect/modify OSM POI objects, open/comment OSM bugs, and contribute recorded GPX files (requires OSM credentials).</string>
+    <string name="osm_editing_plugin_description">This plugin facilitates OSM feedback like collecting / modifying OSM POI objects, opening / commenting OSM bugs, and contributing recorded GPX files (requires OSM credentials).</string>
     <string name="osm_editing_plugin_name">OSM Editing</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vector maps may display faster. May not work well on some devices.</string>
 	<string name="simulate_route_progression_manually">Simulate route progression manually</string>
@@ -699,9 +699,9 @@
 	<string name="background_service_int">Wake-up interval</string>
 	<string name="background_service_provider_descr">Choose location provider while running in background mode</string>
 	<string name="background_service_provider">Location provider</string>
-	<string name="background_router_service_descr">Runs OsmAnd in the background to track your location while screen is off</string>
+	<string name="background_router_service_descr">Runs OsmAnd in the background to track your position while screen is off</string>
 	<string name="background_router_service">Run in the background</string>
-	<string name="off_router_service_no_gps_available">The background navigation service requires a location source to be turned on.</string>
+	<string name="off_router_service_no_gps_available">The background navigation service requires a location provider to be turned on.</string>
 	<string name="hide_poi_filter">Hide filter</string>
 	<string name="show_poi_filter">Show filter</string>
 	<string name="search_poi_filter">Filter</string>
