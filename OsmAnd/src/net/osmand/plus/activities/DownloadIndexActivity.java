@@ -24,6 +24,7 @@ import java.util.TreeSet;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
+import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.DownloadOsmandIndexesHelper;
@@ -89,7 +90,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	private Map<String, String> indexActivatedFileNames = null;
 	private TreeMap<String, DownloadEntry> entriesToDownload = new TreeMap<String, DownloadEntry>();
 
-	private String FREE_VERSION_NAME = "net.osmand";
 	private int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 8;
 	 
 	
@@ -158,7 +158,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		} else {
 			downloadIndexList();
 		}
-		if(getPackageName().equals(FREE_VERSION_NAME) && settings.checkFreeDownloadsNumberZero()){
+		if(Version.isFreeVersion(this) && settings.checkFreeDownloadsNumberZero()){
 			Builder msg = new AlertDialog.Builder(this);
 			msg.setTitle(R.string.free_version_title);
 			msg.setMessage(getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS+"", ""));
@@ -449,7 +449,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	}
 
 	protected void downloadFilesCheckFreeVersion() {
-		if (getPackageName().equals(FREE_VERSION_NAME)) {
+		if (Version.isFreeVersion(this)) {
 			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get() + entriesToDownload.size();
 			boolean wiki = false;
 			for (DownloadEntry es : entriesToDownload.values()) {

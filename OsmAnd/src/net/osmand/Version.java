@@ -10,6 +10,7 @@ public class Version {
 	
 	private final String appVersion; 
 	private final String appName;
+	private final static String FREE_VERSION_NAME = "net.osmand";
 	
 	private Version(Context ctx) {
 		appVersion = ctx.getString(R.string.app_version);
@@ -50,6 +51,11 @@ public class Version {
 		} catch (UnsupportedEncodingException e) {
 			throw new IllegalStateException(e);
 		}
+	}
+	
+	public static boolean isFreeVersion(Context ctx){
+		return ctx.getPackageName().equals(FREE_VERSION_NAME);
+		
 	}
 	
 	public static String getVersionForTracker(Context ctx) {

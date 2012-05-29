@@ -508,7 +508,7 @@ public class ResourceManager {
 					progress.startTask(context.getString(R.string.indexing_map) + " " + f.getName(), -1); //$NON-NLS-1$
 					try {
 						BinaryMapIndexReader index = renderer.initializeNewResource(progress, f);
-						if (index == null) {
+						if (index == null || (Version.isFreeVersion(context) && f.getName().contains("_wiki"))) {
 							warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 						} else {
 							if(index.isBasemap()) {
