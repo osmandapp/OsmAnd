@@ -26,6 +26,7 @@ import net.osmand.binary.OsmandOdb.MapData;
 import net.osmand.binary.OsmandOdb.MapDataBlock;
 import net.osmand.data.Boundary;
 import net.osmand.data.MapAlgorithms;
+import net.osmand.data.preparation.MapZooms.MapZoomPair;
 import net.osmand.osm.Entity;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapRenderingTypes.MapRulType;
@@ -397,15 +398,15 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				// search by exact name
 				while (fs.next() && !combined) {
 					if (!visitedWays.contains(fs.getLong(1))) {
-						parseAndSort(temp, rs.getBytes(6));
-						parseAndSort(tempAdd, rs.getBytes(7));
+						parseAndSort(temp, fs.getBytes(6));
+						parseAndSort(tempAdd, fs.getBytes(7));
 						if(temp.equals(typeUse) && tempAdd.equals(addtypeUse)){
 							combined = true;
 							long lid = fs.getLong(1);
 							startNode = fs.getLong(2);
 							visitedWays.add(lid);
 							loadNodes(fs.getBytes(4), list);
-							if(!Algoritms.objectEquals(rs.getString(5), name)){
+							if(!Algoritms.objectEquals(fs.getString(5), name)){
 								name = null;
 							}
 							ArrayList<Float> li = new ArrayList<Float>(list);
@@ -429,12 +430,12 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				ResultSet fs = startStat.executeQuery();
 				while (fs.next() && !combined) {
 					if (!visitedWays.contains(fs.getLong(1))) {
-						parseAndSort(temp, rs.getBytes(6));
-						parseAndSort(tempAdd, rs.getBytes(7));
+						parseAndSort(temp, fs.getBytes(6));
+						parseAndSort(tempAdd, fs.getBytes(7));
 						if(temp.equals(typeUse) && tempAdd.equals(addtypeUse)){
 							combined = true;
 							long lid = fs.getLong(1);
-							if (!Algoritms.objectEquals(rs.getString(5), name)) {
+							if (!Algoritms.objectEquals(fs.getString(5), name)) {
 								name = null;
 							}
 							endNode = fs.getLong(3);
@@ -578,7 +579,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					writeBinaryMapTree(root, rootBounds, rtree, writer, treeHeader);
 					
 					writeBinaryMapBlock(root,  rootBounds, rtree, writer, selectData, treeHeader, new LinkedHashMap<String, Integer>(),
-								new LinkedHashMap<MapRenderingTypes.MapRulType, String>());
+								new LinkedHashMap<MapRenderingTypes.MapRulType, String>(), mapZooms.getLevel(i));
 
 					writer.endWriteMapLevelIndex();
 				}
@@ -635,7 +636,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	}
 
 	public void writeBinaryMapBlock(rtree.Node parent, Rect parentBounds, RTree r, BinaryMapIndexWriter writer, PreparedStatement selectData,
-			TLongObjectHashMap<BinaryFileReference> bounds, Map<String, Integer> tempStringTable, Map<MapRulType, String> tempNames)
+			TLongObjectHashMap<BinaryFileReference> bounds, Map<String, Integer> tempStringTable, Map<MapRulType, String> tempNames, MapZoomPair level)
 			throws IOException, RTreeException, SQLException {
 		Element[] e = parent.getAllElements();
 
@@ -676,7 +677,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					
 					
 					MapData mapData = writer.writeMapData(cid - baseId, parentBounds.getMinX(), parentBounds.getMinY(), rs.getBoolean(1), rs.getBytes(2), rs.getBytes(3),
-							typeUse, addtypeUse, tempNames, tempStringTable, dataBlock);
+							typeUse, addtypeUse, tempNames, tempStringTable, dataBlock, level.getMaxZoom() > 15);
 					if(mapData != null) {
 						dataBlock.addDataObjects(mapData);
 					}
@@ -692,7 +693,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 			if (e[i].getElementType() != rtree.Node.LEAF_NODE) {
 				long ptr = ((NonLeafElement) e[i]).getPtr();
 				rtree.Node ns = r.getReadNode(ptr);
-				writeBinaryMapBlock(ns, e[i].getRect(), r, writer, selectData, bounds, tempStringTable, tempNames);
+				writeBinaryMapBlock(ns, e[i].getRect(), r, writer, selectData, bounds, tempStringTable, tempNames,level);
 			}
 		}
 	}

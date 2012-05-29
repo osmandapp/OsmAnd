@@ -304,7 +304,7 @@ public class BasemapProcessor {
 	}
 
 	private void writeBinaryMapBlock(SimplisticQuadTree simplisticQuadTree, BinaryMapIndexWriter writer,
-			Map<SimplisticQuadTree, BinaryFileReference> refs, MapZoomPair p) throws IOException {
+			Map<SimplisticQuadTree, BinaryFileReference> refs, MapZoomPair level) throws IOException {
 		Iterator<Entry<SimplisticQuadTree, BinaryFileReference>> it = refs.entrySet().iterator();
 		
 		while(it.hasNext()) {
@@ -312,7 +312,7 @@ public class BasemapProcessor {
 			MapDataBlock.Builder dataBlock = MapDataBlock.newBuilder();
 			SimplisticQuadTree quad = e.getKey();
 			Map<String, Integer> stringTable = new LinkedHashMap<String, Integer> ();
-			for (SimplisticBinaryData w : quad.getData(p)) {
+			for (SimplisticBinaryData w : quad.getData(level)) {
 				dataBlock.setBaseId(w.id);
 				int[] wts = null;
 				int[] wats = null;
@@ -330,7 +330,7 @@ public class BasemapProcessor {
 				}
 				MapData mapData = writer.writeMapData(0,
 						quad.x << (31 - quad.zoom), quad.y << (31 - quad.zoom), false,
-						w.coordinates, null, wts, wats, w.names, stringTable, dataBlock);
+						w.coordinates, null, wts, wats, w.names, stringTable, dataBlock, level.getMaxZoom() > 15);
 				if (mapData != null) {
 					dataBlock.addDataObjects(mapData);
 				}

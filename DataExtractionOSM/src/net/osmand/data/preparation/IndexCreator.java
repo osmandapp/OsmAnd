@@ -756,7 +756,7 @@ public class IndexCreator {
 //		creator.setMapFileName("Luxembourg_poi.obf");
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/luxembourg.osm.pbf"),
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/cuba2.osm.bz2"),
-		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/temp/map.osm"),
+		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/temp/slovak.osm"),
 				new ConsoleProgressImplementation(1), null, zooms, rt, log);
 		
 		
