@@ -8,6 +8,9 @@
          If you are making/correcting english translations make sure :
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     -->
+    <string name="offline_navigation_not_available">Osmand offline navigation is temporarily not available.</string>
+    <string name="left_side_navigation">Left Side Navigation</string>
+    <string name="left_side_navigation_descr">Turn on if you navigate in left side countries</string>
     <string name="download_link_and_local_description">Download or update offline data. \nTo see more details click on the item, to deactivate or delete offline data press and hold. \nCurrent data on device (%1$s free):</string>
     <string name="unknown_from_location">Starting location is not yet determined</string>
     <string name="unknown_location">Position not yet known</string>

@@ -25,6 +25,7 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
+import net.osmand.access.AccessibleToast;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -50,6 +51,7 @@ import org.xml.sax.SAXException;
 
 import android.content.Context;
 import android.location.Location;
+import android.widget.Toast;
 
 public class RouteProvider {
 	private static final org.apache.commons.logging.Log log = LogUtil.getLog(RouteProvider.class);
@@ -268,10 +270,13 @@ public class RouteProvider {
 				} else if (type == RouteService.ORS) {
 					res = findORSRoute(start, end, mode, fast);
 					addMissingTurnsToRoute(res, start, end, mode, ctx);
-				} else if (type == RouteService.OSMAND) {
-					res = findVectorMapsRoute(start, end, mode, fast, (OsmandApplication)ctx.getApplicationContext());
-					addMissingTurnsToRoute(res, start, end, mode, ctx);
+//				} else if (type == RouteService.OSMAND) {
+//					res = findVectorMapsRoute(start, end, mode, fast, (OsmandApplication)ctx.getApplicationContext());
+//					addMissingTurnsToRoute(res, start, end, mode, ctx);
 				} else {
+					if (type == RouteService.OSMAND) {
+						AccessibleToast.makeText(ctx, R.string.offline_navigation_not_available, Toast.LENGTH_LONG).show();
+					}
 					res = findCloudMadeRoute(start, end, mode, ctx, fast);
 					// for test purpose
 					addMissingTurnsToRoute(res, start, end, mode, ctx);

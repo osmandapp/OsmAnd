@@ -565,6 +565,8 @@ public class OsmandSettings {
 	// make cloudmade by default why osmand is not stable enough
 	public final OsmandPreference<RouteService> ROUTER_SERVICE = 
 		new EnumIntPreference<RouteService>("router_service", RouteService.CLOUDMADE, false, RouteService.values());
+	
+	public final CommonPreference<Boolean> LEFT_SIDE_NAVIGATION = new BooleanPreference("left_side_navigation", false, true);
 
 
 	// this value string is synchronized with settings_pref.xml preference name

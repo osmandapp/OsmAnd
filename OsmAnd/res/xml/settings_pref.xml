@@ -27,9 +27,12 @@
 		<!-- try without AUTO_FOLLOW_ROUTE_NAV (see forum discussion 'Simplify our navigation preference menu')
 		<CheckBoxPreference android:summary="@string/auto_follow_route_navigation_descr" android:title="@string/auto_follow_route_navigation"
 			android:key="auto_follow_route_navigation"></CheckBoxPreference>
-		-->
 		<CheckBoxPreference android:summary="@string/use_osmand_routing_service_descr" android:title="@string/use_osmand_routing_service"
-			android:key="use_osmand_routing_service"></CheckBoxPreference>	
+			android:key="use_osmand_routing_service"></CheckBoxPreference>
+			-->
+			
+		<CheckBoxPreference android:summary="@string/left_side_navigation_descr" android:title="@string/left_side_navigation"
+			android:key="left_side_navigation"></CheckBoxPreference>	
 	</PreferenceScreen>
 </PreferenceCategory>
 

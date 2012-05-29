@@ -235,7 +235,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerBooleanPreference(osmandSettings.USE_ENGLISH_NAMES,screen); 
 		registerBooleanPreference(osmandSettings.AUTO_ZOOM_MAP,screen); 
 		registerBooleanPreference(osmandSettings.FAST_ROUTE_MODE,screen);
-		registerBooleanPreference(osmandSettings.USE_OSMAND_ROUTING_SERVICE_ALWAYS,screen); 
+		registerBooleanPreference(osmandSettings.USE_OSMAND_ROUTING_SERVICE_ALWAYS,screen);
+		registerBooleanPreference(osmandSettings.LEFT_SIDE_NAVIGATION,screen);
 		
 		
 		registerBooleanPreference(osmandSettings.SHOW_ALTITUDE_INFO,screen);
@@ -508,6 +509,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 						startActivity(intent);
 					} else {
 						getMyApplication().showDialogInitializingCommandPlayer(this, false);
+					}
+				} else if (listPref.getId().equals(osmandSettings.ROUTER_SERVICE.getId())) {
+					// TO Delete when it will be available
+					if (osmandSettings.ROUTER_SERVICE.get() == RouteService.OSMAND) {
+						AccessibleToast.makeText(this, R.string.offline_navigation_not_available, Toast.LENGTH_LONG).show();
 					}
 				} else if (listPref.getId().equals(osmandSettings.APPLICATION_MODE.getId())) {
 					updateAllSettings();
