@@ -353,7 +353,8 @@ public class BinaryMapIndexWriter {
 	private TByteArrayList mapDataBuf = new TByteArrayList();
 
 	public MapData writeMapData(long diffId, int pleft, int ptop, boolean area, byte[] coordinates, byte[] innerPolygonTypes, int[] typeUse,
-			int[] addtypeUse, Map<MapRulType, String> names, Map<String, Integer> stringTable, MapDataBlock.Builder dataBlock)
+			int[] addtypeUse, Map<MapRulType, String> names, Map<String, Integer> stringTable, MapDataBlock.Builder dataBlock,
+			boolean allowCoordinateSimplification)
 			throws IOException {
 
 		MapData.Builder data = MapData.newBuilder();
@@ -372,7 +373,10 @@ public class BinaryMapIndexWriter {
 			writeRawVarint32(mapDataBuf, CodedOutputStream.encodeZigZag32(ty));
 			pcalcx = pcalcx + tx ;
 			pcalcy = pcalcy + ty ;
-			delta = skipSomeNodes(coordinates, len, i, x, y, false);
+			delta = 1;
+			if (allowCoordinateSimplification) {
+				delta = skipSomeNodes(coordinates, len, i, x, y, false);
+			}
 		}
 		COORDINATES_SIZE += CodedOutputStream.computeRawVarint32Size(mapDataBuf.size())
 				+ CodedOutputStream.computeTagSize(MapData.COORDINATES_FIELD_NUMBER) + mapDataBuf.size();
@@ -406,7 +410,10 @@ public class BinaryMapIndexWriter {
 
 					pcalcx = pcalcx + tx ;
 					pcalcy = pcalcy + ty ;
-					delta = skipSomeNodes(innerPolygonTypes, len, i, x, y ,true);
+					delta = 1;
+					if (allowCoordinateSimplification) {
+						delta = skipSomeNodes(innerPolygonTypes, len, i, x, y, true);
+					}
 				}
 			}
 		}
