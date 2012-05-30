@@ -10,7 +10,7 @@ RUNFILE := osmand_main
 LOCAL_SRC_FILES += src/osmand_main.cpp
 
 #LDFLAGS = -Wl,--hash-style=both -fPIC
-LDFLAGS = -Wall -fPIC -Wl,-Bsymbolic
+LDFLAGS := $(LDFLAGS) -Wall -fPIC -Wl,-Bsymbolic
 #LDRUNFLAGS = -Wl,--hash-style=both
 #  --trace -Bsymbolic -Bsymbolic-functions
 
@@ -28,7 +28,7 @@ endif
 
 ifeq ($(java_os),)
 	ifeq ($(findstring CYGWIN,$(shell uname)),CYGWIN)
-		java_os := linux
+		java_os := win32
 	endif
 	ifeq ($(findstring MINGW,$(shell uname)),MINGW)
 		java_os := win32
@@ -45,7 +45,8 @@ CPPFLAGS := \
 	-DGR_RELEASE=1 \
 	-c -fPIC -I"$(FIXED_JAVA_HOME)/include" -I"$(FIXED_JAVA_HOME)/include/$(java_os)" \
 	-DHASH_MAP_GNU \
-	$(C_INCLUDES)
+	$(C_INCLUDES) \
+	$(CPP_OS_FLAGS)
 	
 #target : ../$(RUNFILE)	
 #target : $(PREBUILT_DIR)/$(LIBNAME)
