@@ -1,264 +1,281 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <!--
-    	 Disclaimer : 
-         If you are going to translate strings, please make sure : 
-         1. There is no duplicate strings by name
-         2. Every apostrophe (quote) is preceded by a backslash (see others).
-         If you are making/correcting english translations make sure :
-         1. All your modified/created strings are in the top of the file (to make easier find what's translated).
-    -->
-    <string name="offline_navigation_not_available">Osmand offline navigation is temporarily not available.</string>
-    <string name="left_side_navigation">Left Side Navigation</string>
-    <string name="left_side_navigation_descr">Turn on if you navigate in left side countries</string>
-    <string name="download_link_and_local_description">Download or update offline data. \nTo see more details click on the item, to deactivate or delete offline data press and hold. \nCurrent data on device (%1$s free):</string>
-    <string name="unknown_from_location">Starting location is not yet determined</string>
-    <string name="unknown_location">Position not yet known</string>
-    <string name="context_menu_item_directions">Directions to here</string>
-    <string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
-    <string name="confirm_interrupt_download">Do you want to interrupt file downloading?</string>
-	<string name="first_time_msg">To use the major features of this application, you need some regional offline data, which you can download (use Settings, Offline Data). Afterwards, you will be able to search by address, look up POIs and find public transportation.</string>    
-    <string name="basemap_was_selected_to_download">Basemap is required for proper application functioning and was selected to download.</string>
-    <string name="select_index_file_to_download">Nothing was found. If you can\'t find your region, you can make it yourself (see http://osmand.net).</string>
-    <string name="local_indexes_cat_tile">Online Map data</string>
-	<string name="local_indexes_cat_map">Offline Map data</string>
-    <string name="gpx_index_settings_descr">" (includes GPX analyzer)"</string>
-    <string name="index_settings_descr">Download, view details and manage offline maps</string>
-    <string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
-    <string name="map_online_data">Online maps</string>
-	<string name="map_online_data_descr">Use online maps (download and cache them on SD card)</string>
-    <string name="online_map_settings">Online Map</string>
-	<string name="online_map_settings_descr">Configure online or cached tile map sources</string>
-	<string name="map_settings">- Map Settings</string>
-	<string name="map_settings_descr">Configure the map display</string>
-	
-	<string name="osmand_rastermaps_plugin_description">This plugin facilitates using a variety of online or cached tile maps as base map or as overlay / underlay maps. The maps can also be prepared offline and copied to the Osmand folder.</string>
-    <string name="osmand_rastermaps_plugin_name">Online Maps</string>
-    <string name="osmand_background_plugin_description">This plugin allows tracking or navigation in power saving (screen off) mode by periodically waking up the GPS device to record a track point or play a voice prompt.</string>
-    <string name="osmand_background_plugin_name">Screen Off Features</string>
-    <string name="osmand_accessibility_description">This plugin configures special accessibility features.</string>
-    <string name="osmand_accessibility_name">Accessibility</string>
-    <string name="extra_settings">Advanced settings</string>
-    <string name="osmand_monitoring_description">This plugin facilitates recording your trips to GPX files or live monitoring using a web service.</string>
-    <string name="osmand_monitoring_name">Tracking + Monitoring</string>
-    <string name="osmand_extra_settings_description">This plugin provides advanced map configuration and some device-specific settings.</string>
-    <string name="osmand_extra_settings_name">Advanced Settings</string>
-    <string name="osmand_development_plugin_description">This plugin enables development and debugging features like animated navigation or rendering performance display.</string>
-    <string name="osmand_development_plugin_name">OsmAnd Development</string>
-    <string name="plugins_screen">Plugin Manager</string>
-    <string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting OsmAnd may be required.)</string>
-    <string name="prefs_plugins_descr">Plugins provide extra functionality bundled within the application like tracking, tile maps, screen off mode, accessibility settings, and others.</string>
-    <string name="prefs_plugins">Plugin Manager</string>
-    <string name="tip_recent_changes_0_8_0_t">"Changes in 0.8.0 : \n\t- Plugin functionality \n\t- New offline map data support \n\t- Lots of bug fixes "</string>
-    <string name="osm_editing_plugin_description">This plugin facilitates OSM feedback like collecting / modifying OSM POI objects, opening / commenting OSM bugs, and contributing recorded GPX files (requires OSM credentials).</string>
-    <string name="osm_editing_plugin_name">OSM Editing</string>
-	<string name="vector_maps_may_display_faster_on_some_devices">Vector maps may display faster. May not work well on some devices.</string>
-	<string name="simulate_route_progression_manually">Simulate route progression manually</string>
-	<string name="play_commands_of_currently_selected_voice">Play commands of currently selected voice</string>
-	<string name="debugging_and_development">OsmAnd debugging and development</string>
-	<string name="native_rendering">Native rendering</string>
-	<string name="animate_routing">Animate navigation</string>
-	<string name="test_voice_prompts">Test voice prompts</string>    
-	<string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Offline data), or switch to online maps.</string>
-    <string name="tip_recent_changes_0_7_2_t">"Changes in 0.7.2 : \n\t- Native rendering for all devices \n\t- Offline POI editing \n\t- Accessibility \n\t- Lots of bug fixes "</string>
-    <string name="send_files_to_osm">Send GPX files to OSM?</string>
-    <string name="gpx_visibility_txt">Visibility</string>
-    <string name="gpx_tags_txt">Tags</string>
-    <string name="gpx_description_txt">Description</string>
-    <string name="validate_gpx_upload_name_pwd">Please specify OSM user name and password to upload GPX files.</string>
+    <string name="plugins_screen">Spraudņi</string>
+    <string name="select_plugin_to_activate">Atzīmējiet spraudni, lai to aktivizētu. Lai spraudnis sāktu strādāt, nepieciešams aplikācijas restarts.</string>
+    <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildu funkcionalitāti, tādu kā sekošana, kartes, baterijas saglabāšanas funkcijas, pieejamība un daudzas citas.</string>
+    <string name="prefs_plugins">Spraudņi</string>
+    <string name="tip_recent_changes_0_8_0_t">Izmaiņas 0.8.0 :
+\n\t- Plugin functionality
+\n\t- New offline map data support
+\n\t- Lots of bug fixes
+	</string>
+    <string name="osm_editing_plugin_description">Šis spraudnis ir domāts OSM kvalitātes uzlabošanai. Tas ļauj savākt/modificēt OSM POI objektus, atvērt/komentēt OSM kļūdas un nosūtīt ierakstīto GPX  (nepieciešama OSM ģistrācija).</string>
+    <string name="osm_editing_plugin_name">OSM labošana</string>
+	<string name="vector_maps_may_display_faster_on_some_devices">Vektoru kartes tiek attēlotas ātrāk. Tas var nestrādāt uz dažām iekārtām.</string>
+	<string name="simulate_route_progression_manually">Simulēt progresiju manuāli</string>
+	<string name="play_commands_of_currently_selected_voice">Atskaņot komandas izvēlētai balsij</string>
+	<string name="debugging_and_development">OsmAnd izstrāde un atkļūdošana</string>
+	<string name="native_rendering">Iekļautā renderēšana</string>
+	<string name="animate_routing">Routinga animācija</string>
+	<string name="test_voice_prompts">Pārbaudīt balss komandas</string>    
+	<string name="switch_to_raster_map_to_see">Šajā vietā nav pieejama bezsaistes vektoru karte. Jūs variet lejuplādēt to uzstādījumos (Bezsaistes dati), vai arī pārslēgties uz tiešsaistes karti.</string>
+    <string name="tip_recent_changes_0_7_2_t">Changes in 0.7.2 :
+\n\t- Native rendering for all devices
+\n\t- Offline POI editing
+\n\t- Accessibility
+\n\t- Lots of bug fixes
+	</string>
+    <string name="send_files_to_osm">Sūtīt GPX failus uz OSM?</string>
+    <string name="gpx_visibility_txt">Redzamība</string>
+    <string name="gpx_tags_txt">Iezīmes</string>
+    <string name="gpx_description_txt">Apraksts</string>
+    <string name="validate_gpx_upload_name_pwd">Lūdzu norādiet OSM lietotāja vārdu un paroli, kuru lietot augšuplādējot GPX failus.</string>
     
-    <string name="default_buttons_support">Support</string>
-	<string name="support_new_features">Support new features</string>
+    <string name="default_buttons_support">Atbalsts</string>
+	<string name="support_new_features">Atbalstiet jaunas iespējas</string>
 
-    <string name="show_ruler_level_descr">Display ruler on the map</string>
-	<string name="show_ruler_level">Display ruler</string>
+    <string name="show_ruler_level_descr">Attēlot lineālu uz kartes</string>
+	<string name="show_ruler_level">Attēlot lineālu</string>
 	
 	<string name="info_button">Info</string>
-	<string name="back_to_location">Back to location</string>
-	<string name="help">Help</string>
-    <string name="show_details">Show details</string>
+	<string name="back_to_location">Atpakaļ uz atrašanās vietu</string>
+	<string name="help">Palīdzība</string>
+    <string name="show_details">Rādīt detaļas</string>
 	
-	<string name="accessibility_extensions_descr">Accessibility extensions for old Android versions</string>
-	<string name="accessibility_extensions">Accessibility extensions</string>
-	<string name="accessibility_mode">Accessibility mode</string>
-	<string name="accessibility_mode_descr">Turns on the accessibility features</string>
-	<string name="accessibility_on">On</string>
-	<string name="accessibility_off">Off</string>
-	<string name="accessibility_default">According to the global system setting</string>
+	<string name="accessibility_extensions_descr">Pieejamības paplašinājumi vecākām Android versijām</string>
+	<string name="accessibility_extensions">Pieejamības paplašinājumi</string>
+	<string name="accessibility_mode">Pieejamības režīms</string>
+	<string name="accessibility_mode_descr">Ieslēdz pieejamības iespējas</string>
+	<string name="accessibility_on">Ieslēgts</string>
+	<string name="accessibility_off">Izslēgts</string>
+	<string name="accessibility_default">Atbilstoši sistēmas uzstādījumiem</string>
 	
-	<string name="backToMenu">Back To Menu</string>
-	<string name="zoomOut">Zoom out</string>
-	<string name="zoomIn">Zoom in</string>
-	<string name="zoomIs">Zoom is</string>
+	<string name="backToMenu">Atpakaļ pie izvēlnes</string>
+	<string name="zoomOut">Samazināt</string>
+	<string name="zoomIn">Palielināt</string>
+	<string name="zoomIs">Palielinājums ir</string>
 	
-	<string name="north">north</string>
-	<string name="north_north_east">north-north-east</string>
-	<string name="north_east">north-east</string>
-	<string name="east_north_east">east-north-east</string>
-	<string name="east">east</string>
-	<string name="east_south_east">east-south-east</string>
-	<string name="south_east">south-east</string>
-	<string name="south_south_east">south-south-east</string>
-	<string name="south">south</string>
-	<string name="south_south_west">south-south-west</string>
-	<string name="south_west">south-west</string>
-	<string name="west_south_west">west-south-west</string>
-	<string name="west">west</string>
-	<string name="west_north_west">west-north-west</string>
-	<string name="north_west">north-west</string>
-	<string name="north_north_west">north-north-west</string>
-	<string name="front">Front</string>
-	<string name="front_right">Front right</string>
-	<string name="right">Right</string>
-	<string name="back_right">Back right</string>
-	<string name="back">Back</string>
-	<string name="back_left">Back left</string>
-	<string name="left">Left</string>
-	<string name="front_left">Front left</string>
-	<string name="oclock">o\'clock</string>
-	<string name="towards">towards</string>
-	<string name="accuracy">Accuracy</string>
+	<string name="north">ziemeļi</string>
+	<string name="north_north_east">ziemeļu-ziemeļu-austrumu</string>
+	<string name="north_east">ziemeļu-austrumu</string>
+	<string name="east_north_east">austrumu-ziemeļu-austrumu</string>
+	<string name="east">austrumu</string>
+	<string name="east_south_east">austrumu-dienvidu-austrumu</string>
+	<string name="south_east">dienvidu-austrumu</string>
+	<string name="south_south_east">dienvidu-dienvidu-austrumu</string>
+	<string name="south">dienvidu</string>
+	<string name="south_south_west">dienvidu-dienvidu-rietumu</string>
+	<string name="south_west">dienvidu-rietumu</string>
+	<string name="west_south_west">rietumu-dienvidu-rietumu</string>
+	<string name="west">rietumu</string>
+	<string name="west_north_west">rietumu-ziemeļu-rietumu</string>
+	<string name="north_west">ziemeļu-rietumu</string>
+	<string name="north_north_west">ziemeļu-ziemeļu-rietumu</string>
+	<string name="front">Uz priekšu</string>
+	<string name="front_right">Uz priekšu pa labi</string>
+	<string name="right">Pa labi</string>
+	<string name="back_right">Atpakaļ pa labi</string>
+	<string name="back">Atpakaļ</string>
+	<string name="back_left">Atpakaļ pa kreisi</string>
+	<string name="left">Pa kreisi</string>
+	<string name="front_left">Uz priekšu pa kreisi</string>
+	<string name="oclock">plkst.</string>
+	<string name="towards">uz priekšu</string>
+	<string name="accuracy">Precizitāte</string>
 	<string name="altitude">Altitude</string>
-	<string name="no_info">No info</string>
-	<string name="direction_style_sidewise">Sidewise (8 sectors)</string>
-	<string name="direction_style_clockwise">Clockwise (12 sectors)</string>
-	<string name="settings_direction_style">Direction style</string>
-	<string name="settings_direction_style_descr">Choose style to express relative directions while moving</string>
-	<string name="auto_announce_on">Start autoannouncing</string>
-	<string name="auto_announce_off">Stop autoannouncing</string>
+	<string name="no_info">Nav info</string>
+	<string name="direction_style_sidewise">Sāniski (8 sektori)</string>
+	<string name="direction_style_clockwise">Pulksteņrādītāja (12 sektori)</string>
+	<string name="settings_direction_style">Virziena stils</string>
+	<string name="settings_direction_style_descr">Izvēlaties relatīvās virziena norādes izteiksmes stilus kustības laikā.</string>
+	<string name="auto_announce_on">Sākt autoziņošanu</string>
+	<string name="auto_announce_off">Pārtraukt autoziņošanu</string>
 	<string name="scroll_map_by_gestures_descr">Scroll map by gestures on the touchscreen</string>
-	<string name="scroll_map_by_gestures">Natural map scrolling</string>
-	<string name="i_am_here">I am here</string>
-	<string name="zoom_by_trackball_descr">Change map zooming by horizontal trackball moves</string>
-	<string name="zoom_by_trackball">Use trackball for zoom control</string>
-	<string name="use_short_object_names_descr">Use short object names in touch exploration mode</string>
-	<string name="use_short_object_names">Use object names</string>
-	<string name="accessibility_preferences_descr">Accessibility related preferences</string>
-	<string name="accessibility_preferences">Accessibility</string>
+	<string name="scroll_map_by_gestures">Naturālā kartes rulēšana</string>
+	<string name="i_am_here">Es esmu šeit</string>
+	<string name="zoom_by_trackball_descr">Mainīt kartes palielinājumu ar rulīša kustību</string>
+	<string name="zoom_by_trackball">Lietot peles rullīti kā palielināšanas konroli</string>
+	<string name="use_short_object_names_descr">Lietot īsos objektu nosaukumus pieskārienu skata režīmā</string>
+	<string name="use_short_object_names">Lietot objektu vārdus</string>
+	<string name="accessibility_preferences_descr">Ar pieejamību saistītās izvēles</string>
+	<string name="accessibility_preferences">Pieejamība</string>
 	
-	<string name="rendering_out_of_memory">Not enough process memory to display selected area</string>
-	<string name="use_fluorescent_overlays">Fluorescent overlays</string>
-	<string name="use_fluorescent_overlays_descr">Use fluorescent colors to display tracks and routes</string>
-	<string name="offline_poi_edition">Offline POI editing</string>
-	<string name="offline_poi_edition_descr">Always use offline POI editing</string>
+	<string name="rendering_out_of_memory">Nepietiek procesu atmiņas, lai attēlotu izvēlēto apgabalu</string>
+	<string name="use_fluorescent_overlays">Flurescentie slāņi</string>
+	<string name="use_fluorescent_overlays_descr">Lietot flurescentās krāsas, lai attēlotu pēdas un ceļus</string>
+	<string name="offline_poi_edition">Bezsaistes POI rediģēšana</string>
+	<string name="offline_poi_edition_descr">Viemēr pielietot bezsaistes POI rediģēšanu</string>
 
-	<string name="tip_recent_changes_0_7_1_t">"Changes in 0.7.1 : \n\t- Offline POI editing \n\t- Live Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles) \n\t- Show currently recorded track on map \n\t- Direction detection: \'Make U-turn\' is indicated and announced when heading in opposite direction or after missing a turn \n\t- New voice prompt \'Route recalculated\' \n\t- Optical indication of an imminent turn within 100m by diretion arrow changing color \n\t- Actuality also of deactivated index files now shown on Download screen in dark green and dark blue \n\t- Other changes "</string>
+	<string name="tip_recent_changes_0_7_1_t">Jaumi 0.7.1 versijā :
+\n\t- Bezsaistes POI rediģēšana 
+\n\t- Sekošanas opcija - periodiska koordināšu sūtīšana uz web servisu. (kā izveidot savu web servisu var izlasīt HowTo)
+\n\t- Rādīt pēdas kuras tiek ierakstītas
+\n\t- Virziena noteikšana: Ja brauciet pretējā virzienā vai esiet pabraucis garām pagriezienam tiek paziņots \'Izpildiet U-pagriezienu\'
+\n\t- Jauns bals ziņojums \'Ceļš pārrēķināts\'
+\n\t- Tūlītēja (100m)pagrieziena indikācija ar virziena bultas krāsas maiņu
+\n\t- Deaktivizēto indeksu failu aktualitāte tiek parādīta lejuplādes ekrānā ar tumši zaļu un tumši zilu
+\n\t- Citas izmaiņas
+	</string>
 
-	<string name="update_poi_does_not_change_indexes">POI changes inside application do not affect downloaded map files, changes are saved to local file instead.</string>
-	<string name="local_openstreetmap_uploading_poi">Uploading POI…</string>
-	<string name="local_openstreetmap_poi_were_uploaded">{0} POI were uploaded</string>
-	<string name="local_openstreetmap_uploadall">Upload all POI</string>
+	<string name="update_poi_does_not_change_indexes">POI izmaiņas aplikācijā neietekmē lejuplādētos kartes attēlus, izmaiņas tiek saglabātas atsevišķā failā.</string>
+	<string name="local_openstreetmap_uploading_poi">Lejuplādē POI…</string>
+	<string name="local_openstreetmap_poi_were_uploaded">{0} POI tika lejuplādētji</string>
+	<string name="local_openstreetmap_uploadall">Lejuplādēt visus POI</string>
 	<string name="local_openstreetmap_items"></string>
-	<string name="local_openstreetmap_show_poi">Show POI on map</string>
-	<string name="local_openstreetmap_upload">Upload modification to OSM</string>
-	<string name="local_openstreetmap_delete">Delete POI modification</string>
-	<string name="local_openstreetmap_descr_title">Asynchronous OSM POI Editing:</string>
-	<string name="local_openstreetmap_settings">Locally saved OSM POIs</string>
-	<string name="local_openstreetmap_settings_descr">Show and manage OSM POIs noted in local database</string>
+	<string name="local_openstreetmap_show_poi">Rādīt POI uz kartes</string>
+	<string name="local_openstreetmap_upload">Augšuplādēt izmaiņas uz OSM</string>
+	<string name="local_openstreetmap_delete">Dzēst POI labojumus</string>
+	<string name="local_openstreetmap_descr_title">Asinhronā POI rediģēšana:</string>
+	<string name="local_openstreetmap_settings">Laokāli saglabātie OSM POIs</string>
+	<string name="local_openstreetmap_settings_descr">Rādīt un organizēt lokālajā datubāzē pieejamos OSM POI</string>
 
-	<string name="live_monitoring_descr">Send tracking to a specified web service</string>
-	<string name="live_monitoring">Online live tracking</string>
-	<string name="live_monitoring_interval_descr">Specify live tracking interval</string>
-	<string name="live_monitoring_interval">Live tracking interval</string>
-	<string name="live_monitoring_url_descr">Specify the web address with parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
-	<string name="live_monitoring_url">Live tracking web address</string>
-	<string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX\' Tracking settings</string>
-	<string name="show_current_gpx_title">Show current track</string>
-	<string name="tip_recent_changes_0_7_0_t">"Changes in 0.7.0 : \n\t- Offline wikipedia data with articles \n\t- Updated maps \n\t- Other small features "</string>    
-	<string name="free_version_message">This free OsmAnd version is limited to %1$s downloads %2$s and does not support offline wikipedia articles.</string>
-	<string name="free_version_title">Free version</string>
-	<string name="poi_context_menu_showdescription">Show POI description</string>
+	<string name="live_monitoring_descr">Nosūtīt pēdas uz norādīto web servisu</string>
+	<string name="live_monitoring">Tiešsaistes sekošana</string>
+	<string name="live_monitoring_interval_descr">Norādīt tiešsaistes sekošanas intervālu</string>
+	<string name="live_monitoring_interval">Tiešaistes sekošanas intervāls</string>
+	<string name="live_monitoring_url_descr">Norādiet web adresi ar parametru sintaksi : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+	<string name="live_monitoring_url">Tiešaistes sekošanas web adrese</string>
+	<string name="gpx_monitoring_disabled_warn">Lūdzu ieslēdziet \'Ierakstīt pēdas GPX\' Sekošanas uzstādījumus</string>
+	<string name="show_current_gpx_title">Rādīt tekošās pēdas</string>
+	<string name="tip_recent_changes_0_7_0_t">Jaunumi 0.7.0 versijā :
+	\n\t- Bezsaistes wikipedia dati
+	\n\t- Atjaunotas kartes
+	\n\t- Citi mazi uzlabojumi
+	</string>    
+	<string name="free_version_message">Šajā bezmaksas OsmAnd versijā ir ierobežojums uz %1$ lejuplādētiem %2$ nu tā neatbalsta wikipedia rakstus.</string>
+	<string name="free_version_title">Bezmaksas versija</string>
+	<string name="poi_context_menu_showdescription">Rādīt POI aprakstu</string>
 
-	<string name="index_name_north_america">North America</string>
-	<string name="index_name_us">North America - United States</string>
-	<string name="index_name_central_america">Central America</string>
-	<string name="index_name_south_america">South America</string>
-	<string name="index_name_europe">Europe</string>
-	<string name="index_name_france">Europe - France</string>
-	<string name="index_name_germany">Europe - Germany</string>
-	<string name="index_name_russia">Europe/Asia - Russia</string>
-	<string name="index_name_africa">Africa</string>
-	<string name="index_name_asia">Asia</string>
-	<string name="index_name_oceania">Oceania</string>
-	<string name="index_name_other">Worldwide and topic maps</string>
-	<string name="index_name_wiki">Worldwide Wikipedia</string>
-	<string name="index_name_voice">Voice packs (recorded)</string>
-	<string name="index_name_tts_voice">Voice packs (TTS)</string>
+	<string name="index_name_north_america">Ziemeļ Amerkika</string>
+	<string name="index_name_us">Ziemeļamerika - ASV</string>
+	<string name="index_name_central_america">Centrālamerika</string>
+	<string name="index_name_south_america">Dienvidu Amerika</string>
+	<string name="index_name_europe">Eiropa</string>
+	<string name="index_name_france">Eiropa - Francija</string>
+	<string name="index_name_germany">Eiropa - Vācija</string>
+	<string name="index_name_russia">Eiropa - Krievija / Āzija</string>
+	<string name="index_name_africa">Āfrika</string>
+	<string name="index_name_asia">Āzija</string>
+	<string name="index_name_oceania">Okeānija</string>
+	<string name="index_name_other">Pasaules un tematiskās kartes</string>
+	<string name="index_name_wiki">Pasaules vikipēdija</string>
+	<string name="index_name_voice">Balss pakas (ieraksti)</string>
+	<string name="index_name_tts_voice">Balss pakas (TTS)</string>
 
-	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
-	<string name="amenity_type_user_defined">User defined</string>
-	<string name="fav_export_confirmation">File with previously exported favorites already exists. Do you want to replace it?</string>
+	<string name="amenity_type_wikiosm">Wikipedia (bezsaistes)</string>
+	<string name="amenity_type_user_defined">Lietotāja definēts</string>
+	<string name="fav_export_confirmation">Eksistē fails ar iepriekš eksportētiem favorītiem. Vai vēlaties to pārrakstīt?</string>
 <!-- this block re-worked for new Preferences structure -->
-	<string name="profile_settings">Profile Specific Settings</string>
-	<string name="settings_preset">User Profile</string>
-	<string name="settings_preset_descr">Select a user profile. Each profile contains the set of specific settings.</string>
-	
-	<string name="monitor_preferences">- Tracking</string>
-	<string name="monitor_preferences_descr">Specify tracking settings</string>
-	<string name="routing_settings">- Navigation</string>
-	<string name="routing_settings_descr">Specify navigation options</string>
-	<string name="global_settings">Global Settings</string>
-	<string name="index_settings">Offline Data (Download)</string>
-	<string name="general_settings">General Settings</string>
-	<string name="general_settings_descr">Configure global settings</string>
-	<string name="global_app_settings">Global app settings</string>
-	<string name="user_name">Your OSM user name</string>
-	<string name="user_name_descr">Needed for openstreetmap.org submissions</string>
-	<string name="user_password">Your OSM password</string>
-	<string name="user_password_descr">Needed for openstreetmap.org submissions</string>
-	<string name="osmand_service">Background Settings</string>
-	<string name="osmand_service_descr">Use to run OsmAnd while screen is off</string>
+	<string name="profile_settings">Ar profilu saistītie uzstādījumi</string>
+	<string name="settings_preset">Lietotāju profils</string>
+	<string name="settings_preset_descr">Izvēlaties lietotāja profilu. Katrs profils satur specifiskus uzstādījumus, kurus var mainīt zemāk.</string>
+	<string name="rendering_settings">- Kartes konfigurācija</string>
+	<string name="rendering_settings_descr">Konfigurēt kartes un kartes avotus</string>
+	<string name="appearance_settings">- Kartes izskats</string>
+	<string name="appearance_settings_descr">Konfigurēt kartes attēlošanu</string>
+	<string name="monitor_preferences">- Sekošana</string>
+	<string name="monitor_preferences_descr">Norādīt sekošanas uzstādījumus</string>
+	<string name="routing_settings">- Navigācija</string>
+	<string name="routing_settings_descr">Norādīt navigācijas opcijas</string>
+	<string name="global_settings">Globālie uzstādījumi</string>
+	<string name="index_settings">Bezsaistes dati</string>
+	<string name="index_settings_descr">Lejuplādēt un pārvaldīt bezsaistes kartes un pārējos datus, tādus kā GPX pēdas</string>
+	<string name="general_settings">Vispārīgie uzstādījumi</string>
+	<string name="general_settings_descr">Konfigurēt vispārīgos uzstādījumus</string>
+	<string name="global_app_settings">Globālie aplikācijas uzstādījumi</string>
+	<string name="user_name">OSM lietotāja vārds</string>
+	<string name="user_name_descr">Nepieciešams, lai veiktu openstreetmap.org augšuplādi</string>
+	<string name="user_password">Jūsu OSM parole</string>
+	<string name="user_password_descr">Nepieciešams, lai veiktu openstreetmap.org augšuplādi</string>
+	<string name="osmand_service">Fona uzstādījumi</string>
+	<string name="osmand_service_descr">Lietojiet lai OsmAnd strādātu kā fona process, kad ekrāns ir izslēgts</string>
 
 	 
-	<string name="tip_rotation_switching">Map Orientation</string>
-	<string name="tip_rotation_switching_t">\tYou can choose whether and how the map display is rotated in \'Settings\' -&gt; \'Map appearance\' -&gt; \'Map rotation\'. \n\tThe choices are: \n\t\'Don\'t rotate\' - Map will not be rotated. North will be always up \n\t\'To direction of movement\' - Map will continuously be aligned with your heading \n\t\'To compass\' - Map will continuously be aligned with device compass reading \n\tHint: To quickly change between rotation by compass and the one you selected in settings, you can simply tap on the compass needle in map view.</string>
+	<string name="tip_rotation_switching">Kartes rotēšana</string>
+	<string name="tip_rotation_switching_t">\tJūs variet izvēlēties vai un kā notiks kartes rotācija \'Uzstādījumi\' -> \'Kartes izskats\' -> \'Kartes rotēšana\'.
+	\n\tIzvēle ir:
+	\n\t\'Nerotēt\' - Karte nemainīs orientāciju. Ziemeļi vienmēr būs augšā
+	\n\t\'Kustības virzienā\' - Karte vienmēr pagriezīsies jūsu kustības virzienā
+	\n\t\'Pēc kompasa\' - Karte vienmēr pagriezīsies pēc iekārtas kompasa datiem
+	\n\tPadoms: Lai ātri pārslēgtu starp rotāciju ar kompasu un jūsu izstādījumos norādīto, jūs variet uzspiest uz kompasa kartes skatā.</string>
 
-	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Settings\' -&gt; \'Map configuration\' -&gt; \'Offline vector maps\'.</string>
+	<string name="binary_map_download_success">Lejuplāde ir veiksmīga.\n\t\n\tLai aktivizētu \'Uzstādījumi\' -> \'Kartes konfigurācija\' -> \'Bezsaistes vektoru kartes\'.</string>
 
-	<string name="tip_day_night_mode">Day/Night Mode</string>
-	<string name="tip_day_night_mode_t">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker). \n\tNight colors are safer for night driving. \n\tYou can set a policy for day/night switching in \'Settings\' -&gt; \'Map appearance\' -&gt;\'Day/night mode\'. \n\tChoices are: \n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default) \n\t\'Day\' - always use day mode \n\t\'Night\' - always use night mode \n\t\'Light sensor\' - map appearance is controlled by light sensor of your device (only if equipped)</string>	
+	<string name="tip_day_night_mode">Dienas/Nakts režīms</string>
+	<string name="tip_day_night_mode_t">\tDažām vektoru kartēm izskats var tikt mainīts starp dienas (gaišāku) un nakts (tumšāku).
+	\n\tNakts krāsas ir drošākas braukšanai.
+	\n\tJūs variet izvēlēties noteikumus dienas/nakts pārslēgšana ar \'Uzstādījumi\' -> \'Kartes izskats\' ->\'Dienas/nakts režīms\'.
+	\n\tJūs variet izvēlēties:
+	\n\t\'Ausma/Saulriets\' - automātiskais režīms, kas ir atkarīgs no saules (noklusētais)
+	\n\t\'Diena\' - vienmēr lietot dienas režīmu
+	\n\t\'Night\' - vienmēr lietot nakts režīmu 
+	\n\t\'Gaismas sensors\' - kartes izskats tiek kontrolēts izmantojot jūsu iekārtas gaismas sensoru (ja tāds jūsu iekārtai ir)</string>	
 
-	<string name="tip_osm_improve">Improving OSM Data</string>
-	<string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and navigation- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks! \n\tFor this you need to first provide your OSM login information in \'Settings\' -&gt; \'General settings\' -&gt; \'OSM\'. \n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it. \n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem. \n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button. \n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
+	<string name="tip_osm_improve">OSM datu uzlabošana</string>
+	<string name="tip_osm_improve_t">\tOsmAnd lieto kartes kuras ir bāzētas uz Openstreetmap.org (OSM) datiem un, kopā ar kartes skatīšanos un navigāciju, var tikt izmantota, lai uzlabotu OSM datu kvalitāti. Jūs variet vienkārši augšuplādēt jaunus POI vai OSM kļūdas pieteikumus ar dažām dabībām!
+	\n\tLai tas strādātu jums vispirms ir jānorāda OSM pieslēguma informācija \'Uzstādījumi\' -> \'Vispārīgie uzstādījumi\' -> \'OSM\'.
+	\n\tLai pievienotu jaunu POI lietojiet opciju \'Izveidot POI\' kartes konteksta izvēlnē. Turpiniet ievadot POI informāciju par jauno punktu \'Izveidot POI\' dialogā un pabeidzot darbību apstipriniet ievadu.
+	\n\tJums ir iespēja nekavējoties ziņot par kļūdām kartē ar OSM kļūdas pieteikuma palīdzību, tad OSM kopiena var ātrāk šo kļūdu izlabot.
+	\n\tLai pievienotu OSM kļūdas pieteikumu izmantojiet opciju \'Pieteikt OSM kļūdu\' kartes konteksta izvēlnē. Tad ievadiet detalizētu kļūdas aprakstu un nobeidzot apstipriniet pieteikumu piespiežot pogu \'Pievienot\'.
+	\n\tŅemiet vērā. OSM POI un kļūdu pieteikšanai ir nepieciešams datu savienojums.</string>
 <!-- end of string changes for new Preferences structure -->
 
-	<string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>
-	<string name="download_files_question_space">Free space now {2} MB! Download {0} file(s) ({1} MB)?</string>
+	<string name="download_files_not_enough_space">Nepietiek brīvas vietas lai lejuplādētu %1$s MB (brīvi: %2$i).</string>
+	<string name="download_files_question_space">Patreiz ir brīvi {2} MB! Lejuplādēt {0} failu(s) ({1} MB)?</string>
 	
-	<string name="tip_select_destination_point">Select Destination</string>
-	<string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. \n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).</string> 
+	<string name="tip_select_destination_point">Izvelēties mērķi</string>
+	<string name="tip_select_destination_point_t">\tJūs variet izvēlēties mērķi tieši kartē (konteksta izvēlne, tad \'Uzstādīt kā mērķi\'), visās meklēšanas darbībās, vai arī pieturot piespiestu ierakstu jūsu \'Jūsu favorītu punktu sarakstā\'. 
+\n\tMērķis tiks iezīmēts kā oranžš riņķis kartē un OsmAnd attēlos attālumu līdz tam un virzienu uz to (ar oranžu trijstūri).</string> 
 
-	<string name="tip_recent_changes_0_6_9_t">"Changes in 0.6.9 : \n\t- Improved offline map rendering \n\t- Fast Native offline rendering - look in experimental features (may not work on some devices) \n\t- Massive look and feel changes \n\t- Altitude info \n\t- New translations (Vienamese, Polish) \n\t- Other small features "</string>
+	<string name="tip_recent_changes_0_6_9_t">Izmaiņas versijā 0.6.9 :
+\n\t- Uzlabota kartes renderēšana
+\n\t- Ātra bezsaistes renderēšana - meklējiet eksperimentālās iespējas (var nestrādāt dažās iekārtās)
+\n\t- Pamatīgas izskata izmaiņas
+\n\t- Augstuma informācija
+\n\t- Jauni tulkojumi (Vjetnamiešu, Poļu)
+\n\t- Citi nelieli papildinājumi
+	</string>
 	
-	<string name="show_altitude_info_descr">Show current altitude information on map</string>
-	<string name="show_altitude_info">Show altitude</string>
-	<string name="use_transparent_map_theme_descr">Use transparent map controls</string>
-	<string name="use_transparent_map_theme">Transparent theme</string>
+	<string name="show_altitude_info_descr">Rādīt tekošo augstuma informāciju uz kartes</string>
+	<string name="show_altitude_info">Rādīt augstumu</string>
+	<string name="use_transparent_map_theme_descr">Lietot caurspīdīgas kartes vadības pogas</string>
+	<string name="use_transparent_map_theme">Caurspīdīgā tēma</string>
 
-	<string name="native_library_not_supported">Native library is not supported on this device.</string>
-	<string name="init_native_library">Initializing native library…</string>
-	<string name="choose_auto_follow_route">Auto-center map view</string>
-	<string name="choose_auto_follow_route_descr">Time until map view synchronizes with current position</string>
-	<string name="auto_follow_route_never">Never</string>
-	<string name="auto_follow_route_navigation">Auto-center nav only</string>
-	<string name="auto_follow_route_navigation_descr">Auto-center map view only while navigating.</string>
-	<string name="auto_follow_location_enabled">Auto-center map view in use.</string>
+	<string name="native_library_not_supported">Iekļautā bibliotēka šajā iekārtā netiek atbalstīta.</string>
+	<string name="init_native_library">Inicializēju iekļauto bibliotēku&#8230;</string>
+	<string name="choose_auto_follow_route">Auto-centrēt karti</string>
+	<string name="choose_auto_follow_route_descr">Laiks līdz karte sinhronizējas ar tekošo pozīciju</string>
+	<string name="auto_follow_route_never">Nekad</string>
+	<string name="auto_follow_route_navigation">Autocentrēt tikai ar nav</string>
+	<string name="auto_follow_route_navigation_descr">Autocentrēt karti tikai navigācijas laikā.</string>
+	<string name="auto_follow_location_enabled">Autocentrēt karti pie attēlošanas.</string>
 	
-	<string name="pref_vector_rendering">Vector renderer specific options</string>
-	<string name="pref_overlay">Overlay / underlay</string>
-	<string name="pref_raster_map">Map source settings</string>
-	<string name="pref_vector_map">Vector map settings</string>
-	<string name="delete_confirmation_msg">Delete %1$s?</string>
-	<string name="city_type_suburb">Suburb</string>
-	<string name="city_type_hamlet">Hamlet</string>
-	<string name="city_type_village">Village</string>
-	<string name="city_type_town">Town</string>
-	<string name="city_type_city">City</string>
-	<string name="layer_poi_label">POI labels</string>
-	<string name="animate_route_off">Stop animation</string>
-	<string name="animate_route">Start animation</string>
+	<string name="pref_vector_rendering">Vektoru renderētāja specifiskās opcijas</string>
+	<string name="pref_overlay">Pārklājs / paklājs</string>
+	<string name="pref_raster_map">Kartes avota uzstādījumi</string>
+	<string name="pref_vector_map">Vektoru kartes uzstādījumi</string>
+	<string name="delete_confirmation_msg">Dzēst %1$u?</string>
+	<string name="city_type_suburb">Piepilsēta</string>
+	<string name="city_type_hamlet">Ciems</string>
+	<string name="city_type_village">Apdzīvota vieta</string>
+	<string name="city_type_town">Pilsēta</string>
+	<string name="city_type_city">Rajona pilsēta</string>
+	<string name="layer_poi_label">POI marķējums</string>
+	<string name="animate_route_off">Izslēgt animāciju</string>
+	<string name="animate_route">Ieslēgt animāciju</string>
 	
-	<string name="tip_recent_changes_0_6_8_t">"Changes in 0.6.8 : \n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options. \n\t- Implement POI search by name in big areas (countries) \n\t- Fix flickering map screen for tablets (Issue 641) \n\t- Auto-center map view option (Issue 356) \n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\' \n\t- POI data included in .obf file (all download indexes after 01/10/11) \n\t- Voice prompt fixes (GPS position fix, omitting first command) \n\t- Small improvements "</string>
+	<string name="tip_recent_changes_0_6_8_t">Izmaiņas 0.6.8 versijā :
+\n\t- Pilnībā pārstrādāta meklēšana (POI, Adrese)! Adresu meklēšana ir padarīta daudz ātrāka. Izveiots viena meklēšanas saskarne ar dažādām opcijām.
+\n\t- Implementēta POI meklēšana lielos apgabalos (valstīs) 
+\n\t- Izlabota kartes raustīšanās tablet PC (Pieteikums 641)
+\n\t- Kartes auto-centrēšanas iespēja (Pieteikums 356)
+
+
+\n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\'
+\n\t- POI data included in .obf file (all download indexes after 01/10/11) 
+\n\t- Voice prompt fixes (GPS position fix, omitting first command) 
+\n\t- Small improvements
+	</string>
 	<string name="file_can_not_be_renamed">File can not be renamed.</string>
 	<string name="file_with_name_already_exists">File with that name already exists.</string>
 	<string name="gpx_navigation">GPX route</string>
@@ -275,21 +292,33 @@
 	<string name="show_gpx_route">Show on map</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_select_point">Select</string>
-	<string name="search_position_current_location_search">Searching position…</string>
+	<string name="local_index_description">Download, (de-)activate, or delete offline data. \nCurrent data on device (%1$s free):</string>
+	<string name="search_position_current_location_search">Searching position&#8230;</string>
 	<string name="search_position_current_location_found">Position (Found)</string>
-	<string name="search_position_address">Address…</string>
-	<string name="search_position_favorites">Favorites…</string>
+	<string name="search_position_address">Address&#8230;</string>
+	<string name="search_position_favorites">Favorites&#8230;</string>
 	<string name="search_position_undefined">Undefined</string>
 	<string name="search_position_fixed">Fixed</string>
-	<string name="search_position_current_location">Current position…</string>
+	<string name="search_position_current_location">Current position&#8230;</string>
 	<string name="search_position_map_view">Last map view</string>
 	
 	<string name="select_search_position">Search near :</string>
 	<string name="context_menu_item_search">Search near here</string>
-	<string name="tip_recent_changes_0_6_7_t">"Recent changes for 0.6.7 : \n\t- Offline data manager (download, delete, activate / deactivate offline data directly in Osmand) \n\t- Favorite points and groups (categorize, delete, manage favorites) \n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.) \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts) \n\t- Function to save route as GPX track for offline use \n\t- Improve GPX monitoring (filter some inaccurate position and save accuracy/elevation/speed) \n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/) \n\t- Improve vector rendering \n\t- Improvement of TTS engine (announce exact distance, enable miles) \n\t- Bug fixes "</string>
+	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7 :
+\n\t- Offline data manager (download, delete, activate / deactivate offline data directly in Osmand)
+\n\t- Favorite points and groups (categorize, delete, manage favorites)
+\n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.)
+\n\t- GPX navigation (more options, continue navigation after crash, support roundabouts)
+\n\t- Function to save route as GPX track for offline use
+\n\t- Improve GPX monitoring  (filter some inaccurate position and save accuracy/elevation/speed)
+\n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/)
+\n\t- Improve vector rendering
+\n\t- Improvement of TTS engine (announce exact distance, enable miles)
+\n\t- Bug fixes
+	</string>
 	<string name="save_route_dialog_title">Save route as GPX track</string>
 	<string name="route_successfully_saved_at">Route successfully saved as \'%1$s\'.</string>
-	<string name="filename_input">"File name : "</string>
+	<string name="filename_input">File name : </string>
 	<string name="file_with_name_already_exist">File with same name already exists.</string>
 	<string name="default_buttons_save">Save</string>
 	<string name="menu_save_directions">Save directions</string>
@@ -314,10 +343,10 @@
 	<string name="vector_map_not_needed">No, thanks</string>
 	<string name="basemap_missing">Base world map (covering the whole world at small zooms) is missing. Please consider downloading World_basemap_x.obf for a complete environment.</string>
 	<string name="vector_data_missing">On board (\'offline\') data is missing on SD card. Please consider to download it in order to use maps offline.</string>
-	<string name="local_index_gpx_info_show">"\n\nPress and hold for options"</string>
-	<string name="local_index_gpx_info_speed">"\nAverage speed : %1$s \nMaximum speed : %2$s"</string>
-	<string name="local_index_gpx_info_elevation">"\nAverage altitude : %1$.0f m\nMinimum altitude : %2$.0f m\nMaximum altitude : %3$.0f m\nAscents : %4$.0f m\nDescents : %5$.0f m"</string>
-	<string name="local_index_gpx_info">Subtracks : %1$d\nTotal points : %2$d\nWay points : %3$d\nTotal distance : %4$s\nStart time : %5$tF, %5$tR\nEnd time : %6$tF, %6$tR</string>
+	<string name="local_index_gpx_info_show">\n\nPress and hold for options</string>
+	<string name="local_index_gpx_info_speed">\nAverage speed : %1$s \nMaximum speed : %2$s</string>
+	<string name="local_index_gpx_info_elevation">\nAverage altitude : %1$.0f m\nMinimum altitude : %2$.0f m\nMaximum altitude : %3$.0f m\nAscents : %4$.0f m\nDescents : %5$.0f m</string>
+	<string name="local_index_gpx_info">Subtracks : %1$d\nTotal points : %2$d\nWay points : %3$d\nTotal distance : %4$s\nStart time : %5$tF,  %5$tR\nEnd time : %6$tF,  %6$tR</string>
 	<string name="local_index_installed">Edition</string>
 	<string name="local_index_items_backuped">%1$d of %2$d item(s) successfully deactivated.</string>
 	<string name="local_index_items_deleted">%1$d of %2$d item(s) successfully deleted.</string>
@@ -330,7 +359,7 @@
 	<string name="local_index_mi_backup">Deactivate</string>
 	<string name="local_index_mi_delete">Delete</string>
 	<string name="local_index_mi_reload">Refresh</string>
-	<string name="local_index_download">Download…</string>
+	<string name="local_index_download">Download&#8230;</string>
 	<string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable : %4$s \nZooms downloaded : %5$s</string>
 	<string name="local_index_poi_data">POI data</string>
 	<string name="local_index_address_data">Address data</string>
@@ -341,6 +370,8 @@
 	<string name="local_indexes_cat_tts">Voice data (TTS)</string>
 	<string name="local_indexes_cat_voice">Voice data (recorded)</string>
 	<string name="local_indexes_cat_gpx">GPX data</string>
+	<string name="local_indexes_cat_tile">Map data (tiles)</string>
+	<string name="local_indexes_cat_map">Map data (vector)</string>
 	<string name="local_indexes_cat_poi">POI data</string>
 
 	<string name="ttsvoice">TTS Voice</string>
@@ -350,10 +381,17 @@
 	<string name="trace_rendering">Rendering debug info</string>
 	<string name="trace_rendering_descr">Display rendering performance</string>
 	<string name="tip_recent_changes">Recent changes</string>
-	<string name="tip_recent_changes_0_6_6_t">"Recent changes for 0.6.6 : \n\t- Text To Speech engine for voice navigation \n\t- Make map renderer more detailed \n\t- Basemap for whole world packaged with app \n\t- Tweak offline navigation (still experimental) \n\t- GPX navigation options \n\t- UI update and large bug fixing "</string>
+	<string name="tip_recent_changes_0_6_6_t">Recent changes for 0.6.6 : 
+\n\t- Text To Speech engine for voice navigation
+\n\t- Make map renderer more detailed
+\n\t- Basemap for whole world packaged with app
+\n\t- Tweak offline navigation (still experimental)
+\n\t- GPX navigation options
+\n\t- UI update and large bug fixing
+	</string>
 	<string name="voice_not_use">Do not use</string>
 	<string name="voice_not_specified">None</string>
-	<string name="installing_new_resources">Unpacking new data…</string>
+	<string name="installing_new_resources">Unpacking new data&#8230;</string>
 	<string name="internet_connection_required_for_online_route">An online navigation service is selected but no internet connection is available.</string>
 	<string name="tts_language_not_supported_title">Language not supported</string>
 	<string name="tts_language_not_supported">The selected language is not supported by the installed Android TTS (text-to-speech) engine. Do you want to go to the Market to look for another TTS engine? Otherwise the preset TTS language will be used.</string>
@@ -364,7 +402,7 @@
 	<string name="gpx_option_destination_point">Use current destination</string>
 	<string name="gpx_option_from_start_point">Pass along entire track</string>
 
-	<string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' -&gt; \'Define view\' -&gt; \'Map Source…\' -&gt; \'Offline vector maps\'.</string>
+	<string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' -> \'Define view\' -> \'Map Source&#8230;\' -> \'Offline vector maps\'.</string>
 	<string name="choose_audio_stream">Voice guidance output</string>
 	<string name="choose_audio_stream_descr">Choose channel to play voice guidance (system-dependent)</string>
 	<string name="voice_stream_voice_call">Voice call audio</string>
@@ -375,29 +413,42 @@
 	<string name="overlay_transparency">Overlay transparency</string>
 	<string name="map_transparency_descr">Modify base map transparency</string>
 	<string name="map_transparency">Base map transparency</string>
-	<string name="layer_underlay">Underlay map…</string>
+	<string name="modify_transparency">Modify transparency</string>
+	<string name="layer_underlay">Underlay map&#8230;</string>
 	<string name="map_underlay">Underlay map</string>
 	<string name="map_underlay_descr">Choose underlay map</string>
-	<string name="layer_overlay">Overlay map…</string>
+	<string name="layer_overlay">Overlay map&#8230;</string>
 	<string name="default_none">None</string>
 	<string name="map_overlay">Overlay map</string>
 	<string name="map_overlay_descr">Choose overlay map</string>
+	<string name="map_vector_data">Offline vector maps</string>
+	<string name="map_vector_data_descr">Use downloaded vector maps</string>
 	<string name="tile_source_already_installed">Map is already installed, settings will be updated</string>
 	<string name="select_tile_source_to_install">Select (tile) maps to install or update</string>
 	<string name="internet_not_available">Internet connection required for operation is not available</string>
-	<string name="install_more">Install more…</string>
+	<string name="install_more">Install more&#8230;</string>
 
 	<string name="tip_update_index">Update of Offline Data</string>
-	<string name="tip_update_index_t">\tHaving up-to-date map data is essential. Osmand provides a download manager which can check for available offline data updates. \n\tTo check for updates go to \'Settings\' -&gt; \'Offline data\' -&gt; \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -&gt; \'Filter downloaded\' to indicate updates only for data already on your device. \n\tThe availability of updates is depicted by the following colors: \n\t\'Green\' - indicates data files identical on device and server \n\t\'Blue\' - indicates available updates on server</string>
+	<string name="tip_update_index_t">\tHaving up-to-date map data is essential. Osmand provides a download manager which can check for available offline data updates.
+	\n\tTo check for updates go to \'Settings\' -> \'Offline data\' -> \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -> \'Filter downloaded\' to indicate updates only for data already on your device.
+	\n\tThe availability of updates  is depicted by the following colors:
+	\n\t\'Green\' - indicates data files identical on device and server
+	\n\t\'Blue\' - indicates available updates on server</string>
 
 	<string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector maps</string>
 	<string name="level_to_switch_vector_raster">Min. vector zoom level</string>
 
 	<string name="tip_location_sharing">Location Sharing</string>
-	<string name="tip_location_sharing_t">\tYou can share the location of interesting places on your trip with family or friends. \n\tTo share any location you want: \n\tUse \'Map context menu\' -&gt; \'Share location\' menu. \n\tThen select a way to share your location. The choices are: E-Mail, SMS(text), or just copy location coordinates to clipboard.</string>
+	<string name="tip_location_sharing_t">\tYou can share the location of interesting places on your trip  with family or friends.
+	\n\tTo share any location you want:
+	\n\tUse \'Map context menu\' -> \'Share location\' menu.
+	\n\tThen select a way to share your location. The choices are: E-Mail, SMS(text), or just copy location coordinates to clipboard.</string>
 
 	<string name="tip_favorites">Favorite Points</string>
-	<string name="tip_favorites_t">\tFrequently used points can be saved as Favorites. \n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Menu\' -&gt; \'Favorites\'. \n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to set it as desination, Edit or Delete it. \n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' -&gt;\'Define view\'.</string>
+	<string name="tip_favorites_t">\tFrequently used points can be saved as Favorites.
+\n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Menu\' -> \'Favorites\'.
+\n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to set it as desination, Edit or Delete it.
+\n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' ->\'Define view\'.</string>
 
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
     <string name="error_doing_search">Error occurred in offline search</string>
@@ -409,22 +460,29 @@
 	<string name="preferred_locale">Display language</string>
 
 	<string name="tip_map_switch">Map Source</string>
-	<string name="tip_map_switch_t">\tThe fastest way to change the map source and layers displayed is pressing \'Menu\' -&gt; \'Define view\' in map view. \n\tUnder \'Map source…\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources, or maps manually created using e.g. OsmAndMapCreator on a PC. \n\tOsmAnd also supports custom sources.</string>
+	<string name="tip_map_switch_t">\tThe fastest way to change the map source and layers displayed is pressing \'Menu\' -> \'Define view\' in map view.
+\n\tUnder \'Map source&#8230;\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources, or maps manually created using e.g. OsmAndMapCreator on a PC.
+\n\tOsmAnd also supports custom sources.</string>
 
 	<string name="tip_app_mode">User Profile</string>
-	<string name="tip_app_mode_t">\tOsmAnd supports different (customizable) application profiles for different use cases. \n\tYou can change profiles in \'Menu\' -&gt; \'Settings\' -&gt; \'User Profile\', or when creating a route.</string>
+	<string name="tip_app_mode_t">\tOsmAnd supports different (customizable) application profiles for different use cases.
+\n\tYou can change profiles in \'Menu\' -> \'Settings\' -> \'User Profile\', or when creating a route.</string>
 
 	<string name="tip_navigation">Navigation</string>
-	<string name="tip_navigation_t">\tBefore starting a navigation you need to select a destination. Afterwards press \'Menu\' -&gt; \'Directions\' on map and select the navigation type.</string>
+	<string name="tip_navigation_t">\tBefore starting a navigation you need to select a destination. Afterwards press \'Menu\' -> \'Directions\' on map and select the navigation type.</string>
 
 	<string name="tip_search">Searching</string>
-	<string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite. \n\tPressing \'Search\' in the main menu opens the search activities. For all hits a context menu offers 2 options: \'Set as destination\' or \'Show on map\'.</string>
+	<string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite.
+\n\tPressing \'Search\' in the main menu opens the search activities. For all hits a context menu offers 2 options: \'Set as destination\' or \'Show on map\'.</string>
 
 	<string name="tip_map_context_menu">Map Context Menu</string>
-	<string name="tip_map_context_menu_t">\tThe map context menu is available by pressing and holding on the map or by pressing the trackball button. \n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or press and hold on it to hide the box again.) \n\tThe map context menu contains all actions referring to a point (location).</string>
+	<string name="tip_map_context_menu_t">\tThe map context menu is available by pressing and holding on the map or by pressing the trackball button.
+\n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or press and hold on it to hide the box again.)
+\n\tThe map context menu contains all actions referring to a point (location).</string>
 
 	<string name="tip_initial">Tips and Tricks</string>
-	<string name="tip_initial_t">\tOsmAnd is a navigation application with many features. \n\tAs an basic introduction, some usage tips and tricks are linked on the main menu screen.</string>
+	<string name="tip_initial_t">\tOsmAnd is a navigation application with many features. 
+\n\tAs an basic introduction, some usage tips and tricks are linked on the main menu screen.</string>
 	<string name="next_button">Next</string>
 	<string name="previous_button">Previous</string>
 
@@ -466,10 +524,10 @@
 	<string name="amenity_type_sustenance">Sustenance</string>
 	<string name="amenity_type_tourism">Tourism</string>
 	<string name="amenity_type_transportation">Transportation</string>
-	<string name="indexing_address">Indexing address…</string>
-	<string name="indexing_map">Indexing map…</string>
-	<string name="indexing_poi">Indexing POI…</string>
-	<string name="indexing_transport">Indexing transport…</string>
+	<string name="indexing_address">Indexing address&#8230;</string>
+	<string name="indexing_map">Indexing map&#8230;</string>
+	<string name="indexing_poi">Indexing POI&#8230;</string>
+	<string name="indexing_transport">Indexing transport&#8230;</string>
 	<string name="input_output_error">I/O error occurred</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
@@ -482,12 +540,12 @@
 	<string name="poi_filter_for_tourists">For tourists</string>
 	<string name="poi_filter_fuel">Fuel</string>
 	<string name="poi_filter_namefinder">Online NameFinder</string>
-	<string name="reading_cached_tiles">Reading cached tiles…</string>
+	<string name="reading_cached_tiles">Reading cached tiles&#8230;</string>
 	<string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
 	<string name="version_index_is_not_supported">The version of index \'\'{0}\'\' is not supported</string>
 
-	<string name="use_osmand_routing_service">OsmAnd navigation &gt;20km</string>
-	<string name="use_osmand_routing_service_descr">Use OsmAnd offline navigation applies only to routes &gt; 20 km (experimental)</string>
+	<string name="use_osmand_routing_service">OsmAnd navigation >20km</string>
+	<string name="use_osmand_routing_service_descr">Use OsmAnd offline navigation applies only to routes > 20 km (experimental)</string>
 	<string name="osmand_routing_experimental">OsmAnd offline navigation is an experimental feature and it does not work for distances of more than about 20 km.\n\nNavigation service is temporarily switched to online CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
 	<string name="application_dir">Storage directory</string>
@@ -495,10 +553,10 @@
 
 	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by new the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
-	<string name="downloading_build">Downloading build…</string>
+	<string name="downloading_build">Downloading build&#8230;</string>
 	<string name="install_selected_build">Do you want to install OsmAnd - {0} from {1} {2} MB ?</string>
 	<string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
-	<string name="loading_builds">Loading OsmAnd builds…</string>
+	<string name="loading_builds">Loading OsmAnd builds&#8230;</string>
 	<string name="select_build_to_install">Select one of the OsmAnd builds to install</string>
 	<string name="contribution_activity">Special activity for contribution version</string>
 
@@ -521,7 +579,7 @@
 	<string name="reload">Refresh</string>
 
 	<string name="fast_route_mode">Fastest route</string>
-	<string name="fast_route_mode_descr">"Enable to calculate fastest route or disable for shortest route "</string>
+	<string name="fast_route_mode_descr">Enable to calculate fastest route or disable for shortest route </string>
 	<string name="tiles_to_download_estimated_size">At zoom {0} download {1} tiles ({2} MB)</string>
 	<string name="context_menu_item_download_map">Download map</string>
 	<string name="select_max_zoom_preload_area">Select maximum zoom to preload</string>
@@ -543,6 +601,7 @@
 	<string name="download_type_to_filter">type to filter</string>
 	<string name="use_high_res_maps">High resolution display</string>
 	<string name="use_high_res_maps_descr">Do not stretch (and blur) map tiles on high density displays</string>
+	<string name="unknown_location">Position unknown yet</string>
 	<string name="download_files">Download</string>
 	<string name="context_menu_item_search_transport">Search transport</string>
 	<string name="transport_searching_transport">Transport results (no target):</string>
@@ -556,7 +615,7 @@
 	
 	<string name="map_route_by_gpx">Navigate using GPX</string>
 	<string name="gpx_files_not_found">GPX files not found in /tracks directory</string>
-	<string name="layer_gpx_layer">GPX track…</string>
+	<string name="layer_gpx_layer">GPX track&#8230;</string>
 	<string name="error_reading_gpx">Error reading GPX data</string>
 
 	<string name="vector_data">Offline vector maps</string>
@@ -590,8 +649,8 @@
 	<string name="layer_favorites">Favorites</string>
 	<string name="layer_osm_bugs">OSM bugs</string>
 	<string name="layer_transport">Transport stops</string>
-	<string name="layer_poi">POI…</string>
-	<string name="layer_map">Map source…</string>
+	<string name="layer_poi">POI&#8230;</string>
+	<string name="layer_map">Map source&#8230;</string>
 	<string name="menu_layers">Define view</string>
 	<string name="continue_follow_previous_route">Previous navigation was unfinished. Continue following it?</string>
 	<string name="context_menu_item_search_poi">Search POI</string>
@@ -607,13 +666,13 @@
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">seconds</string>
 	<string name="int_min">min.</string>
-	<string name="background_service_int_descr">"Set wake-up interval used by background "</string>
+	<string name="background_service_int_descr">Set wake-up interval used by background </string>
 	<string name="background_service_int">Wake-up interval</string>
 	<string name="background_service_provider_descr">Choose location provider while running in background mode</string>
 	<string name="background_service_provider">Location provider</string>
-	<string name="background_router_service_descr">Runs OsmAnd in the background to track your position while screen is off</string>
+	<string name="background_router_service_descr">Runs OsmAnd in the background to track your location while screen is off</string>
 	<string name="background_router_service">Run in the background</string>
-	<string name="off_router_service_no_gps_available">The background navigation service requires a location provider to be turned on.</string>
+	<string name="off_router_service_no_gps_available">The background navigation service requires a location source to be turned on.</string>
 	<string name="hide_poi_filter">Hide filter</string>
 	<string name="show_poi_filter">Show filter</string>
 	<string name="search_poi_filter">Filter</string>
@@ -621,14 +680,14 @@
 	<string name="menu_mute_on">Sound is off</string>
 	<string name="voice_provider_descr">Select voice guidance for navigation</string>
 	<string name="voice_provider">Voice guidance</string>
-	<string name="voice_data_initializing">Initializing voice data…</string>
+	<string name="voice_data_initializing">Initializing voice data&#8230;</string>
 	<string name="voice_data_not_supported">Unsupported version of voice data</string>
 	<string name="voice_data_corrupted">Specified voice data is corrupted</string>
 	<string name="voice_data_unavailable">Selected voice data is not available</string>
 	<string name="stop_routing">Stop navigtn.</string>
 	<string name="sd_unmounted">SD card is not accessible.\nYou won\'t be able to see maps or find things.</string>
 	<string name="sd_mounted_ro">SD card is read-only.\nYou can only see the preloaded map and can\'t download from the Internet.</string>
-	<string name="unzipping_file">Unzipping file…</string>
+	<string name="unzipping_file">Unzipping file&#8230;</string>
 	<string name="route_tr">Turn right and go</string>
 	<string name="route_tshr">Turn sharply right and go</string>
 	<string name="route_tslr">Turn slightly right and go</string>
@@ -639,7 +698,8 @@
 	<string name="route_head">Head</string>
 	<string name="first_time_continue">Later</string>
 	<string name="first_time_download">Download regions</string>
-	<string name="search_poi_location">Searching for signal…</string>
+	<string name="first_time_msg">Thank you for choosing OsmAnd. \nTo use the major features of this application, you will need some regional offline data, which you can download (use Settings, Offline Data). Afterwards, you will be able to search by address, look up POIs and find public transportation.</string>
+	<string name="search_poi_location">Searching for signal&#8230;</string>
 	<string name="search_near_map">Search near last map location</string>
 	<string name="search_nearby">Search nearby</string>
 	<string name="map_orientation_default">Same as device</string>
@@ -680,11 +740,11 @@
 	<string name="favorite">Favorite</string>
 	<string name="clear_all">Clear all</string>
 	<string name="history">History</string>
-	<string name="uploading_data">Uploading data…</string>
-	<string name="uploading">Uploading…</string>
+	<string name="uploading_data">Uploading data&#8230;</string>
+	<string name="uploading">Uploading&#8230;</string>
 	<string name="search_nothing_found">Nothing found</string>
-	<string name="searching">Searching…</string>
-	<string name="searching_address">Searching address…</string>
+	<string name="searching">Searching&#8230;</string>
+	<string name="searching_address">Searching address&#8230;</string>
 	<string name="search_osm_nominatim">Search address using OSM Nominatim</string>
 	<string name="hint_search_online">House number, street, city</string>
 	<string name="search_offline_address">Offline</string>
@@ -692,7 +752,7 @@
 	<string name="max_level_download_tile">Max. online zoom</string>
 	<string name="max_level_download_tile_descr">Choose maximum zoom level to download for online map tiles</string>
 	<string name="route_general_information">Total distance %1$s, travelling time %2$d h %3$d m.</string>
-	<string name="router_service_descr">Choose an online or offline navigation service</string>
+	<string name="router_service_descr">Choose online or offline navigation service</string>
 	<string name="router_service">Navigation service</string>
 	<string name="sd_dir_not_accessible">Save directory on SD card not accessible</string>
 	<string name="download_question">Download {0} - {1} ?</string>
@@ -700,10 +760,11 @@
 	<string name="address">Address</string>
 	<string name="download_index_success">Download successful</string>
 	<string name="error_io_error">I/O error occured</string>
-	<string name="downloading_file">Downloading file…</string>
-	<string name="downloading">Downloading…</string>
-	<string name="downloading_list_indexes">Downloading list of available regions…</string>
+	<string name="downloading_file">Downloading file&#8230;</string>
+	<string name="downloading">Downloading&#8230;</string>
+	<string name="downloading_list_indexes">Downloading list of available regions&#8230;</string>
 	<string name="list_index_files_was_not_loaded">The list of regions was not retrieved from osmand.net.</string>
+    <string name="select_index_file_to_download">If you can\'t find your region, you can make it yourself. See osmand.net</string>
 	<string name="show_poi_on_map">Show on map</string>
 	<string name="fav_points_edited">Favorite point was edited</string>
 	<string name="fav_points_not_exist">No favorite points exist</string>
@@ -715,18 +776,18 @@
 	<string name="get_directions">Directions</string>
     <string name="show_gps_status">Show GPS Status</string>
 	<string name="opening_hours">Opening hours</string>
-	<string name="opening_changeset">Opening changeset…</string>
-	<string name="closing_changeset">Closing changeset…</string>
-	<string name="commiting_node">Committing node…</string>
-	<string name="loading_poi_obj">Loading POI…</string>
+	<string name="opening_changeset">Opening changeset&#8230;</string>
+	<string name="closing_changeset">Closing changeset&#8230;</string>
+	<string name="commiting_node">Committing node&#8230;</string>
+	<string name="loading_poi_obj">Loading POI&#8230;</string>
 	<string name="auth_failed">Authorization failed</string>
 	<string name="failed_op">failed</string>
-	<string name="converting_names">Converting native/English names…</string>
-	<string name="loading_streets_buildings">Loading streets/buildings…</string>
-	<string name="loading_postcodes">Loading postcodes…</string>
-	<string name="loading_streets">Loading streets…</string>
-	<string name="loading_cities">Loading cities…</string>
-	<string name="loading">Loading…</string>
+	<string name="converting_names">Converting native/English names&#8230;</string>
+	<string name="loading_streets_buildings">Loading streets/buildings&#8230;</string>
+	<string name="loading_postcodes">Loading postcodes&#8230;</string>
+	<string name="loading_streets">Loading streets&#8230;</string>
+	<string name="loading_cities">Loading cities&#8230;</string>
+	<string name="loading">Loading&#8230;</string>
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">Error while saving GPX</string>
 	<string name="error_calculating_route">Error calculating route</string>
@@ -737,10 +798,10 @@
 	<string name="invalid_locations">Coordinates are invalid!</string>
 	<string name="go_back_to_osmand">Go back to OsmAnd map</string>
 	<string name="close">Close</string>
-	<string name="loading_data">Loading data…</string>
-	<string name="reading_indexes">Reading local data…</string>
+	<string name="loading_data">Loading data&#8230;</string>
+	<string name="reading_indexes">Reading local data&#8230;</string>
 	<string name="previous_run_crashed">Last OsmAnd run crashed. Log file is at {0}. Please report the issue and attach the log file.</string>
-	<string name="saving_gpx_tracks">Saving GPX tracks to SD…</string>
+	<string name="saving_gpx_tracks">Saving GPX tracks to SD&#8230;</string>
 	<string name="finished_task">Finished</string>
     <string name="reload_indexes_descr">Re-read offline vector maps and data from SD card</string>
     <string name="reload_indexes">Re-read offline data</string>
@@ -791,7 +852,7 @@
     
     <string name="show_poi_over_map_description">Show POI over map (use last chosen filter)</string>
     <string name="show_poi_over_map">Show POI</string>
-    <string name="map_tile_source_descr">Choose the source of online or cached map tiles</string>
+    <string name="map_tile_source_descr">Choose the source of online or offline map tiles</string>
     <string name="map_tile_source">Tile map source</string>
     <string name="map_source">Map source</string>
     <string name="use_internet">Use Internet</string>
@@ -809,106 +870,105 @@
 <string name="search_button">Search</string>
 <string name="search_activity">Search</string>
 
-<string name="searchpoi_activity">Choose POI</string>
-<string name="search_POI_level_btn">Find more</string>
-<string name="incremental_search_city">Search city incrementally. To find towns/postcodes, enter the first 3 or more characters.</string>
-<string name="incremental_search_street">Search street incrementally</string>
-<string name="incremental_search_building">Search building incrementally</string>
-<string name="choose_available_region">Choose region from list</string>
-<string name="choose_intersected_street">Choose intersecting street</string>
-<string name="Closest_Amenities">Closest amenities</string>
-<string name="app_mode_default">Default</string>
-<string name="app_mode_car">Car</string>
-<string name="app_mode_bicycle">Bicycle</string>
-<string name="app_mode_pedestrian">Pedestrian</string>
-<string name="position_on_map_center">Center</string>
-<string name="position_on_map_bottom">Bottom</string>
-<string name="navigate_point_top_text">Input latitude &amp; longitude in the selected format (D - degrees, M - minutes, S - seconds)</string>
-<string name="navigate_point_latitude">Latitude</string>
-<string name="navigate_point_longitude">Longitude</string>
-<string name="navigate_point_format_D">DDD.DDDDD</string>
-<string name="navigate_point_format_DM">DDD MM.MMMMM</string>
-<string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
-<string name="search_shown_on_map">Show on map</string>
-<string name="navigate_point_cancel">Cancel</string>
-<string name="search_address_top_text">Select address</string>
-<string name="search_address_region">Region</string>
-<string name="search_address_city">City</string>
-<string name="search_address_street">Street</string>
-<string name="search_address_building">Building</string>
-<string name="search_address_building_option">Building</string>
-<string name="search_address_street_option">Intersecting street</string>
+<string name="searchpoi_activity">Izvēlēties POI</string>
+<string name="search_POI_level_btn">Atrast vairāk</string>
+<string name="incremental_search_city">Pieaugoši meklēt pilsētas. Lai atrastu pilsētu ievadiet 3 vai vairāk simbolus.</string>
+<string name="incremental_search_street">Pieaugoši meklēt ielas. </string>
+<string name="incremental_search_building">Pieaugoši meklēt ēkas.</string>
+<string name="choose_available_region">Izvēlieties reģionu no saraksta</string>
+<string name="choose_intersected_street">Izvēlēties ielu krustojumu</string>
+<string name="Closest_Amenities">Tuvākie servisi</string>
+<string name="app_mode_default">Noklusēti </string>
+<string name="app_mode_car">Auto</string>
+<string name="app_mode_bicycle">Velosipēds</string>
+<string name="app_mode_pedestrian">Kājāmgājējs</string>
+<string name="position_on_map_center">Centrs</string>
+<string name="position_on_map_bottom">Apakša</string>
+<string name="navigate_point_top_text">Ievadiet platumu &amp; garumu izvēlētā formātā (G - grādi , M - minūtes , S - sekundes)</string>
+<string name="navigate_point_latitude">Platums</string>
+<string name="navigate_point_longitude">Garums</string>
+<string name="navigate_point_format_D">GGG.GGGGG</string>
+<string name="navigate_point_format_DM">GGG MM.MMMMM</string>
+<string name="navigate_point_format_DMS">GGG MM SS.SSSSS</string>
+<string name="search_shown_on_map">Rādīt kartē</string>
+<string name="navigate_point_cancel">Atcelt</string>
+<string name="search_address_top_text">Izvēlēties adresi</string>
+<string name="search_address_region">Reģions</string>
+<string name="search_address_city">Pilsēta</string>
+<string name="search_address_street">Iela</string>
+<string name="search_address_building">Ēka</string>
+<string name="search_address_building_option">Ēka</string>
+<string name="search_address_street_option">Krustojums</string>
 
-<string name="search_tabs_location">Location</string>
+<string name="search_tabs_location">Atrašanās vieta</string>
 
-<string name="context_menu_item_navigate_point">Set as destination</string>
-<string name="context_menu_item_add_favorite">Add to favorites</string>
-<string name="context_menu_item_update_map">Update map</string>
-<string name="context_menu_item_open_bug">Open OSM bug</string>
-<string name="context_menu_item_create_poi">Create POI</string>
+<string name="context_menu_item_navigate_point">Uzstādīt kādi galapunktu</string>
+<string name="context_menu_item_add_favorite">Pievienot favorītiem</string>
+<string name="context_menu_item_update_map">Atjaunot karti</string>
+<string name="context_menu_item_open_bug">Atvērt OSM bug</string>
+<string name="context_menu_item_create_poi">Izveidot POI</string>
 
-<string name="default_buttons_yes">Yes</string>
-<string name="default_buttons_cancel">Cancel</string>
-<string name="default_buttons_apply">Apply</string>
-<string name="default_buttons_add">Add</string>
-<string name="default_buttons_no">No</string>
-<string name="add_favorite_dialog_top_text">Enter favorite name</string>
-<string name="add_favorite_dialog_default_favourite_name">Favorite</string>
-<string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>
+<string name="default_buttons_yes">Jā</string>
+<string name="default_buttons_cancel">Atcelt</string>
+<string name="default_buttons_apply">Pielietot</string>
+<string name="default_buttons_add">Pievienot</string>
+<string name="default_buttons_no">Nē</string>
+<string name="add_favorite_dialog_top_text">Ievadiet favorīta nosaukumu</string>
+<string name="add_favorite_dialog_default_favourite_name">Favorīti</string>
+<string name="add_favorite_dialog_favourite_added_template">Favorīta  punkts \'\'{0}\'\' veiksmīgi pievienots.</string>
 
-<string name="favourites_context_menu_navigate">Set as destination</string>
-<string name="favourites_context_menu_edit">Edit favorite</string>
-<string name="favourites_context_menu_delete">Delete favorite</string>
+<string name="favourites_context_menu_navigate">Uzstādīt kā galapunktu</string>
+<string name="favourites_context_menu_edit">Labot favorītus </string>
+<string name="favourites_context_menu_delete">Dzēst favorītus</string>
 
-<string name="favourites_remove_dialog_msg">Remove favorite point \'%s\'?</string>
-<string name="favourites_remove_dialog_success">Favorite point {0} was succesfully deleted.</string>
+ <string name="favourites_remove_dialog_msg">Dzēst favorīta punktu \'%s\'?</string>
+<string name="favourites_remove_dialog_success">Favorīta punkts {0} veiksmīgi dzēsts.</string>
 
-<string name="osb_add_dialog_title">Enter bug text</string>
-<string name="osb_add_dialog_success">Bug successfully created</string>
-<string name="osb_add_dialog_error">Exception occured: bug was not created</string>
+<string name="osb_add_dialog_title">Ievadiet kļūdas tekstu</string>
+<string name="osb_add_dialog_success">Kļūdas pieteikums veiksmīgi izveidots</string>
+<string name="osb_add_dialog_error">Kļūda:pieteikums netika pievienots</string>
 
-<string name="osb_comment_menu_item">Add comment</string>
-<string name="osb_comment_dialog_message">Message</string>
-<string name="osb_comment_dialog_author">Author name</string>
-<string name="osb_comment_dialog_title">Adding comment to bug</string>
-<string name="osb_comment_dialog_add_button">Add comment</string>
-<string name="osb_comment_dialog_success">Comment was successfully added</string>
-<string name="osb_comment_dialog_error">Exception occured: comment was not added</string>
+<string name="osb_comment_menu_item">Pievienot komentāru</string>
+<string name="osb_comment_dialog_message">Ziņa</string>
+<string name="osb_comment_dialog_author">Autora vārds</string>
+<string name="osb_comment_dialog_title">Pievieno komentāru kļūdas pieteikumam</string>
+<string name="osb_comment_dialog_add_button">Pievienot komentāru </string>
+<string name="osb_comment_dialog_success">Komentārs veiksmīgi pievienots</string>
+<string name="osb_comment_dialog_error">Kļūda:komentārs netika pievienots</string>
 
-<string name="osb_close_menu_item">Close bug</string>
-<string name="osb_close_dialog_title">Closing bug</string>
-<string name="osb_close_dialog_close_button">Close bug</string>
-<string name="osb_close_dialog_success">Bug was successfully closed</string>
-<string name="osb_close_dialog_error">Exception occured: bug was not closed</string>
+<string name="osb_close_menu_item">Aizvērt kļūdas pieteikumu</string>
+<string name="osb_close_dialog_title">Aizver kļūdas pieteikumu</string>
+<string name="osb_close_dialog_close_button">Aizvērt kļūdas pieteikumu</string>
+<string name="osb_close_dialog_success">Kļūdas pieteikums veiksmīgi aizvērts</string>
+<string name="osb_close_dialog_error">Kļūda: kļūdas pieteikums netika aizvērts</string>
 
-<string name="poi_edit_title">Edit POI</string>
-<string name="poi_create_title">Create POI</string>
-<string name="poi_error_poi_not_found">Node cannot be found or amenity is not a single node</string>
-<string name="poi_remove_confirm_template">Delete {0} (enter comment)?</string>
-<string name="poi_remove_title">Delete POI</string>
-<string name="default_buttons_delete">Delete</string>
-<string name="poi_remove_success">POI was successfully deleted</string>
-<string name="poi_action_add">add</string>
-<string name="poi_action_change">change</string>
-<string name="poi_action_succeded_template">Action {0} completed successfully.</string>
-<string name="poi_error_unexpected_template">Unexpected error occured while performing action {0}.</string>
-<string name="poi_error_io_error_template">I/O error occured while performing action {0}.</string>
+<string name="poi_edit_title">Labot POI</string>
+<string name="poi_create_title">Izveidot POI</string>
+<string name="poi_error_poi_not_found">Nevar atrast nodi, vai arī serivss nav atzīmēts kā viena node</string>
+<string name="poi_remove_confirm_template">Dzēst {0} (ievadiet komentāru)?</string>
+<string name="poi_remove_title">Dzēst POI</string>
+<string name="default_buttons_delete">Dzēst</string>
+<string name="poi_remove_success">POI tika veiksmīgi izdzēsts</string>
+<string name="poi_action_add">pievienot</string>
+<string name="poi_action_change">mainīt</string>
+<string name="poi_action_succeded_template">Darbība {0} beidzās veiksmīgi.</string>
+<string name="poi_error_unexpected_template">Radās neparedzēta kļūda veicot darbību {0}.</string>
+<string name="poi_error_io_error_template">Radās I/O kļūda veicot darbību {0}.</string>
 
-<string name="poi_error_info_not_loaded">Info about node was not loaded</string>
+<string name="poi_error_info_not_loaded">Informācija par punktu netika ielādēta</string>
 
-<string name="poi_dialog_name">Name</string>
-<string name="poi_dialog_opening_hours">Open</string>
-<string name="poi_dialog_comment">Comment</string>
-<string name="poi_dialog_comment_default">POI changing</string>
-<string name="poi_dialog_other_tags_message">All other tags are preserved</string>
-<string name="default_buttons_commit">Commit</string>
-<string name="default_buttons_reset">Reset</string>
-<string name="filter_current_poiButton">Filter</string>
-<string name="edit_filter_delete_menu_item">Delete</string>
-<string name="edit_filter_save_as_menu_item">Save As</string>
-<string name="edit_filter_delete_dialog_title">Delete selected filter?</string>
-<string name="edit_filter_delete_message">Filter {0} has been deleted</string>
-<string name="edit_filter_create_message">Filter {0} has been created</string>
-<string name="default_buttons_selectall">Select All</string>
-
+<string name="poi_dialog_name">Nosaukums</string>
+ <string name="poi_dialog_opening_hours">Atvērts</string>
+<string name="poi_dialog_comment">Komentārs</string>
+<string name="poi_dialog_comment_default">POI izmaiņas</string>
+<string name="poi_dialog_other_tags_message">Visas citas birkas ir rezervētas</string>
+<string name="default_buttons_commit">Apvienot</string>
+<string name="default_buttons_reset">Atiestatīt</string>
+<string name="filter_current_poiButton">Filtrēt</string>
+<string name="edit_filter_delete_menu_item">Dzēst</string>
+<string name="edit_filter_save_as_menu_item">Saglabāt kā</string>
+<string name="edit_filter_delete_dialog_title">Dzēst izvēlēto filtru?</string>
+<string name="edit_filter_delete_message">Filtrs {0} tika izdzēsts</string>
+<string name="edit_filter_create_message">Filtrs {0} tika izveidots</string>
+<string name="default_buttons_selectall">Izvēlēties visu</string>
 </resources>
