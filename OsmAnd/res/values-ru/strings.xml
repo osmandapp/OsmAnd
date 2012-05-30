@@ -76,8 +76,7 @@
   <string name="local_openstreetmap_uploading_poi">Загрузка POI</string>
   <string name="local_openstreetmap_poi_were_uploaded">{0} POI были загружены</string>
   <string name="local_openstreetmap_uploadall">Загрузить все POI</string>
-  <string name="local_openstreetmap_items">
-  </string>
+  <string name="local_openstreetmap_items">" "</string>
   <string name="local_openstreetmap_show_poi">Показать POI на карте</string>
   <string name="local_openstreetmap_upload">Загрузить изменения в OSM</string>
   <string name="local_openstreetmap_delete">Удалить созданные POI</string>
@@ -202,8 +201,7 @@
   <string name="local_index_address_data">Адрес</string>
   <string name="local_index_transport_data">Транспорт</string>
   <string name="local_index_map_data">Карта</string>
-  <string name="local_index_items">
-  </string>
+  <string name="local_index_items">" "</string>
   <string name="local_indexes_cat_backup">Архив</string>
   <string name="local_indexes_cat_tts">TTS голосовые данные</string>
   <string name="local_indexes_cat_voice">Голосовые данные</string>
@@ -253,8 +251,7 @@
   <string name="level_to_switch_vector_raster">Векторные карты</string>
   <string name="tip_osm_improve">Улучшить Openstreetmap</string>
   <string name="tip_osm_improve_t">OsmAnd использует данные Openstreetmap.org и имеет возможности улучшения этих данных. Вы можете добавить POI или сообщить о неточности на карте! \nПрежде всего необходимо ввести свои инициалы \'Меню\'-&gt;\'Настройки\'-&gt;\'OSM\'. \n\tДля добавления POI используйте \'Добавить POI\' в контекстном меню карты. \n\tЕсли вы нашли неточность на карте, вы можете сообщить об этом Openstreetmap сообществу. \n\tНе забывайте, что для этих функций вам понадобится интернет!</string>
-  <string name="create_poi_link_to_osm_doc">
-    <u>Интернет OSM</u> классификация</string>
+  <string name="create_poi_link_to_osm_doc">" <u>Интернет OSM</u> классификация"</string>
   <string name="error_doing_search">Ошибка автономного поиска</string>
   <string name="search_offline_geo_error">Невозможно разобрать запрос: \'%s\'</string>
   <string name="search_osm_offline">Поиск адреса используя offline карты</string>
@@ -834,4 +831,4 @@
   <string name="tip_favorites_t">\tFrequently used points can be saved as Favorites. \n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Menu\' -&gt; \'Favorites\'. \n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to set it as desination, Edit or Delete it. \n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' -&gt;\'Define view\'.</string>
   <string name="contribution_activity">Special activity for contribution version</string>
   <string name="process_navigation_service">OsmAnd navigation service</string>
-</resources>
+<string name="offline_navigation_not_available">Osmand offline navigation is temporarily not available.</string><string name="left_side_navigation">Left Side Navigation</string><string name="left_side_navigation_descr">Turn on if you navigate in left side countries</string></resources>
