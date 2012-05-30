@@ -469,6 +469,9 @@ public class OsmandSettings {
 	}
 
 	
+	public final OsmandPreference<ApplicationMode> PREV_APPLICATION_MODE = new EnumIntPreference<ApplicationMode>(
+			"prev_application_mode", ApplicationMode.DEFAULT, true, false, ApplicationMode.values());
+	
 	// this value string is synchronized with settings_pref.xml preference name
 	// cache of metrics constants as they are used very often
 	public final OsmandPreference<MetricsConstants> METRIC_SYSTEM = new EnumIntPreference<MetricsConstants>(

@@ -471,6 +471,7 @@ public class MapActivityActions implements DialogProvider {
 				}
 				ApplicationMode mode = getAppMode(buttons, settings);
 				// change global settings
+				settings.PREV_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
 				boolean changed = settings.APPLICATION_MODE.set(mode);
 				if (changed) {
 					mapActivity.updateApplicationModeSettings();	
