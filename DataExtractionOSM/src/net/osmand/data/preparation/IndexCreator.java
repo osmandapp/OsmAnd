@@ -754,9 +754,7 @@ public class IndexCreator {
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
 //		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
 //		creator.setMapFileName("Luxembourg_poi.obf");
-//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/luxembourg.osm.pbf"),
-//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/cuba2.osm.bz2"),
-		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/temp/slovak.osm"),
+		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/temp/map.osm"),
 				new ConsoleProgressImplementation(1), null, zooms, rt, log);
 		
 		

@@ -455,10 +455,10 @@ public class BinaryMapIndexWriter {
 	}
 	
 	private static double orthogonalDistance(int x, int y, int x1, int y1, int x2, int y2) {
-		int A = (x - x1);
-		int B = (y - y1);
-		int C = (x2 - x1);
-		int D = (y2 - y1);
+		long A = (x - x1);
+		long B = (y - y1);
+		long C = (x2 - x1);
+		long D = (y2 - y1);
 		return Math.abs(A * D - C * B) / Math.sqrt(C * C + D * D);
 	}
 
