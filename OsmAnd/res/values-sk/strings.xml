@@ -487,7 +487,7 @@
   <string name="none_region_found">Žiadne regióny neboli nájdené na SD karte. Skúste stiahnuť regióny z internetu.</string>
   <string name="poi_namefinder_query_empty">Vaša požiadavka na nájdenie POI</string>
   <string name="any_poi">Akékoľvek</string>
-  <string name="layer_transport_route">Transport route</string>
+  <string name="layer_transport_route">Trasa hromadnej dopravy</string>
   <string name="thanks_yandex_traffic">Vďaka Yandex-u za dopravné informácie.</string>
   <string name="layer_yandex_traffic">Doprava Yandex</string>
   <string name="layer_route">Cesta</string>
@@ -822,4 +822,4 @@
   <string name="navigate_point_format_D">DDD.DDDDD</string>
   <string name="navigate_point_format_DM">DDD MM.MMMMM</string>
   <string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
-</resources>
+<string name="offline_navigation_not_available">Osmand offline navigácia je dočasne nedostupná.</string><string name="left_side_navigation">Navigácia po ľavej strane</string><string name="left_side_navigation_descr">Zapnite ak chcete navigovať v krajinách s ľavostrannou premávkou</string></resources>
