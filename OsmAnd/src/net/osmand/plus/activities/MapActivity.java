@@ -324,7 +324,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	}
 
 	private void notRestoreRoutingMode(){
-		boolean changed = settings.APPLICATION_MODE.set(ApplicationMode.DEFAULT);
+		boolean changed = settings.APPLICATION_MODE.set(settings.PREV_APPLICATION_MODE.get());
 		updateApplicationModeSettings();
 		routingHelper.clearCurrentRoute(null);
 		mapView.refreshMap(changed);	
@@ -1216,7 +1216,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				if (routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()) {
 					routingHelper.setFinalAndCurrentLocation(null, routingHelper.getCurrentLocation(), routingHelper.getCurrentGPXRoute());
 					// restore default mode
-					boolean changed = settings.APPLICATION_MODE.set(ApplicationMode.DEFAULT);
+					boolean changed = settings.APPLICATION_MODE.set(settings.PREV_APPLICATION_MODE.get());
 					updateApplicationModeSettings();
 					mapView.refreshMap(changed);
 				} else {
