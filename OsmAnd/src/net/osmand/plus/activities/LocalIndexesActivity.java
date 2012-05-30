@@ -175,9 +175,9 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		final List<Integer> menu = new ArrayList<Integer>();
 		if(info.getType() == LocalIndexType.GPX_DATA){
 			menu.add(R.string.show_gpx_route);
-			if(OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) instanceof OsmandDevelopmentPlugin) {
+//			if(OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) instanceof OsmandDevelopmentPlugin) {
 				menu.add(R.string.local_index_mi_upload_gpx);
-			}
+//			}
 			descriptionLoader = new LoadLocalIndexDescriptionTask();
 			descriptionLoader.execute(info);
 		}
@@ -569,9 +569,9 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		menu.add(0, R.string.local_index_mi_restore, 1, getString(R.string.local_index_mi_restore)+"...");
 		menu.add(0, R.string.local_index_mi_delete, 2, getString(R.string.local_index_mi_delete)+"...");
 		menu.add(0, R.string.local_index_mi_reload, 3, R.string.local_index_mi_reload);
-		if(OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) instanceof OsmandDevelopmentPlugin) {
+//		if(OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) instanceof OsmandDevelopmentPlugin) {
 			menu.add(0, R.string.local_index_mi_upload_gpx, 4, getString(R.string.local_index_mi_upload_gpx)+"...");
-		}
+//		}
 		return true;
 	}
 	
