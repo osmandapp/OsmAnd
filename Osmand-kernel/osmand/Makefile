@@ -8,7 +8,7 @@ include Common.mk
 # Set library name
 LIBNAME = $(LIBRARY_PREFIX)osmand
 LIBTYPE = $(DYNAMICLIB_EXT)
-LDLIBS += -l$(LIBRARY_PREFIX)skia -l$(LIBRARY_PREFIX)proto -l$(LIBRARY_PREFIX)pthread -l$(LIBRARY_PREFIX)rt -l$(LIBRARY_PREFIX)ft2 -l$(LIBRARY_PREFIX)expat -l$(LIBRARY_PREFIX)png -l$(LIBRARY_PREFIX)z
+LDLIBS += -lskia -lproto -lpthread -lrt -lft2 -lexpat -lpng -lz
 ifeq ($(findstring CYGWIN,$(shell uname)),CYGWIN)
 	FIXED_JAVA_HOME := $(shell cygpath -u "$(JAVA_HOME)")
 else

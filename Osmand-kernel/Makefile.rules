@@ -73,4 +73,4 @@ build-%/$(LIBNAME).$(STATICLIB_EXT): $$(addprefix build-%/,$(OBJECTS))
 .SECONDEXPANSION:
 build-%/$(LIBNAME).$(DYNAMICLIB_EXT): $$(addprefix build-%/,$(OBJECTS))
 	@mkdir -p `dirname $@`
-	$(CXX) -shared -o $@ $? -L$(PREBUILT_DIR_PREFIX)-$* $(LDFLAGS) $(LDLIBS)
+	$(CXX) -shared -o $@ $? $(LDFLAGS) -L$(PREBUILT_DIR_PREFIX)-$* $(LDLIBS)
