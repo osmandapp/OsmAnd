@@ -55,10 +55,12 @@ public class DownloadOsmandIndexesHelper {
 			File voicePath = settings.extendOsmandPath(ResourceManager.VOICE_PATH);
 			list = amanager.list("voice");
 			String date = "";
+			long dateModified = System.currentTimeMillis();
 			try {
 				ApplicationInfo appInfo = pm.getApplicationInfo(OsmandApplication.class.getPackage().getName(), 0);
 				SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy"); //$NON-NLS-1$
-				Date installed = new Date(new File(appInfo.sourceDir).lastModified());
+				dateModified =  new File(appInfo.sourceDir).lastModified();
+				Date installed = new Date(dateModified);
 				date = format.format(installed);
 			} catch (NameNotFoundException e) {
 				//do nothing...
@@ -67,7 +69,7 @@ public class DownloadOsmandIndexesHelper {
 				File destFile = new File(voicePath, voice + File.separatorChar + "_ttsconfig.p");
 				String key = voice + ext;
 				String assetName = "voice" + File.separatorChar + voice + File.separatorChar + "ttsconfig.p";
-				result.add(key, new AssetIndexItem(key, "voice", date, "0.1", "", assetName, destFile.getPath()));
+				result.add(key, new AssetIndexItem(key, "voice", date, dateModified, "0.1", "", assetName, destFile.getPath()));
 			}
 		} catch (IOException e) {
 			log.error("Error while loading tts files from assets", e); //$NON-NLS-1$
@@ -120,10 +122,12 @@ public class DownloadOsmandIndexesHelper {
 		
 		private final String assetName;
 		private final String destFile;
+		private final long dateModified;
 
 		public AssetIndexItem(String fileName, String description, String date,
-				String size, String parts, String assetName, String destFile) {
+				long dateModified, String size, String parts, String assetName, String destFile) {
 			super(fileName, description, date, size, parts);
+			this.dateModified = dateModified;
 			this.assetName = assetName;
 			this.destFile = destFile;
 		}
@@ -135,7 +139,7 @@ public class DownloadOsmandIndexesHelper {
 		
 		@Override
 		public DownloadEntry createDownloadEntry(Context ctx) {
-			return new AssetDownloadEntry(assetName, destFile);
+			return new AssetDownloadEntry(assetName, destFile, dateModified);
 		}
 	}
 	

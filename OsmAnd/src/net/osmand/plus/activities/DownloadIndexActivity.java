@@ -610,8 +610,9 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 					}
 				}
 				// reindex vector maps all at one time
+				ResourceManager manager = getMyApplication().getResourceManager();
+				manager.indexVoiceFiles(progress);
 				if (vectorMapsToReindex) {
-					ResourceManager manager = getMyApplication().getResourceManager();
 					List<String> warnings = manager.indexingMaps(progress);
 					if (!warnings.isEmpty()) {
 						return warnings.get(0);
@@ -656,7 +657,9 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	}
 	
 	public static class AssetDownloadEntry extends DownloadEntry {
-		public AssetDownloadEntry(String assetName, String fileName) {
+
+		public AssetDownloadEntry(String assetName, String fileName, long dateModified) {
+			this.dateModified = dateModified;
 			fileToUnzip = new File(fileName);
 			fileToSave = new File(assetName);
 		}
@@ -669,6 +672,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				boolean forceWifi, AssetManager assetManager) throws InterruptedException {
 			try {
 				ResourceManager.copyAssets(assetManager, fileToSave.getPath(), fileToUnzip);
+				fileToUnzip.setLastModified(this.dateModified);
 				return true;
 			} catch (IOException e) {
 				return false;

@@ -382,7 +382,30 @@ public class ResourceManager {
 		// indexingImageTiles(progress);
 		warnings.addAll(indexingMaps(progress));
 		warnings.addAll(indexingPoi(progress));
+		warnings.addAll(indexVoiceFiles(progress));
+		
 		return warnings;
+	}
+	
+	public List<String> indexVoiceFiles(IProgress progress){
+		File file = context.getSettings().extendOsmandPath(VOICE_PATH);
+		file.mkdirs();
+		List<String> warnings = new ArrayList<String>();
+		if (file.exists() && file.canRead()) {
+			for (File f : file.listFiles()) {
+				if(f.isDirectory()) {
+					File conf = new File(f, "_config.p");
+					if(!conf.exists()) {
+						conf = new File(f, "_ttsconfig.p");
+					}
+					if(conf.exists()) {
+						indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(conf.lastModified()))); //$NON-NLS-1$
+					}
+				}
+			}
+		}
+		return warnings;
+		
 	}
 	
 	private List<String> checkAssets(IProgress progress) {
