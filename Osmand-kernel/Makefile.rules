@@ -1,0 +1,76 @@
+# Just check if we have everything defined
+ifeq ($(CC_SOURCE_FILES_EXTS),)
+	CC_SOURCE_FILES_EXTS := c cc
+endif
+ifeq ($(CXX_SOURCE_FILES_EXTS),)
+	CXX_SOURCE_FILES_EXTS := cpp cxx
+endif
+
+# Target configuration
+CXXFLAGS_debug := -g -O0
+CFLAGS_debug := -g -O0
+CXXFLAGS_release := -O2
+CFLAGS_release := -O2
+
+# Get the build type
+PREBUILT_DIR_PREFIX = ../lib/$(TARGET)-$(ARCH)
+
+# Collect objects
+OBJECTS = $(foreach sourceFilesExt,$(CC_SOURCE_FILES_EXTS), \
+	$(patsubst %.$(sourceFilesExt),obj-$(TARGET)-$(ARCH)/%.$(sourceFilesExt).cc.o,$(filter %.$(sourceFilesExt),$(LOCAL_SRC_FILES))) \
+) $(foreach sourceFilesExt,$(CXX_SOURCE_FILES_EXTS), \
+	$(patsubst %.$(sourceFilesExt),obj-$(TARGET)-$(ARCH)/%.$(sourceFilesExt).cxx.o,$(filter %.$(sourceFilesExt),$(LOCAL_SRC_FILES))) \
+)
+
+# Default target
+.DEFAULT: installr
+
+# Declare phony targets
+.PHONY: release debug clean installr installd
+
+# Precious targets
+.PRECIOUS: build-release/$(LIBNAME).$(LIBTYPE) build-debug/$(LIBNAME).$(LIBTYPE) $(addprefix build-release/,$(OBJECTS)) $(addprefix build-debug/,$(OBJECTS))
+
+# Route build targets properly
+installr: install-release
+installd: install-debug
+release: build-release/$(LIBNAME).$(LIBTYPE)
+debug: build-debug/$(LIBNAME).$(LIBTYPE)
+
+# Clean removes all objects
+clean:
+	$(RM) -r build-release
+	$(RM) -r build-debug
+
+# This target copies final output file to prebuilt folder
+install-%: %
+	@mkdir -p $(PREBUILT_DIR_PREFIX)-$*
+	cp build-$*/$(LIBNAME).$(LIBTYPE) $(PREBUILT_DIR_PREFIX)-$*/$(LIBNAME).$(LIBTYPE)
+
+# Builds source files using CC compiler
+build-release/obj-$(TARGET)-$(ARCH)/%.cc.o : % $(LOCAL_C_INCLUDES)
+	@mkdir -p `dirname $@`
+	$(CC) -o $@ -c $< $(CFLAGS_release) $(CFLAGS) $(addprefix -I, $(LOCAL_C_INCLUDES)) $(LOCAL_CFLAGS)
+build-debug/obj-$(TARGET)-$(ARCH)/%.cc.o : % $(LOCAL_C_INCLUDES)
+	@mkdir -p `dirname $@`
+	$(CC) -o $@ -c $< $(CFLAGS_debug) $(CFLAGS) $(addprefix -I, $(LOCAL_C_INCLUDES)) $(LOCAL_CFLAGS)
+	
+# Builds source files using CXX compiler
+build-release/obj-$(TARGET)-$(ARCH)/%.cxx.o : % $(LOCAL_C_INCLUDES)
+	@mkdir -p `dirname $@`
+	$(CXX) -o $@ -c $< $(CXXFLAGS_release) $(CFLAGS) $(addprefix -I, $(LOCAL_C_INCLUDES)) $(LOCAL_CFLAGS)
+build-debug/obj-$(TARGET)-$(ARCH)/%.cxx.o : % $(LOCAL_C_INCLUDES)
+	@mkdir -p `dirname $@`
+	$(CXX) -o $@ -c $< $(CXXFLAGS_debug) $(CFLAGS) $(addprefix -I, $(LOCAL_C_INCLUDES)) $(LOCAL_CFLAGS)
+	
+# This target assembles static library
+.SECONDEXPANSION:
+build-%/$(LIBNAME).$(STATICLIB_EXT): $$(addprefix build-%/,$(OBJECTS))
+	@mkdir -p `dirname $@`
+	$(AR) rs $@ $?
+	
+# This target assembles dynamic library
+.SECONDEXPANSION:
+build-%/$(LIBNAME).$(DYNAMICLIB_EXT): $$(addprefix build-%/,$(OBJECTS))
+	@mkdir -p `dirname $@`
+	$(CXX) -shared -o $@ $? -L$(PREBUILT_DIR_PREFIX)-$* $(LDFLAGS) $(LDLIBS)

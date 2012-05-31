@@ -1,11 +1,15 @@
-LOCAL_PATH = .
+# Include tools definitions
 include ../Makefile.vars
+
+# Include project files
+LOCAL_PATH = .
 include Common.mk
 
-PREBUILT_DIR = ../jni-prebuilt/$(os)-$(arch)
-LIBNAME := libskia.a
+# Set library name
+LIBNAME = $(LIBRARY_PREFIX)skia
+LIBTYPE = $(STATICLIB_EXT)
 
-CPP_FILE_EXTENSION = cpp
+# Library content
 LOCAL_SRC_FILES += \
 	$(OSMAND_SKIA_LOC)/src/opts/SkBlitRow_opts_none.cpp \
 	$(OSMAND_SKIA_LOC)/src/opts/SkBitmapProcState_opts_none.cpp \
@@ -20,34 +24,18 @@ LOCAL_SRC_FILES += \
 	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_gamma.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkGlobalInitialization_default.cpp
 	
-OBJECTS = $(LOCAL_SRC_FILES:%.$(CPP_FILE_EXTENSION)=build/obj-$(os)-$(arch)/%.o)
-C_INCLUDES := $(addprefix -I, $(LOCAL_C_INCLUDES))
-
-CPPFLAGS := -DSK_RELEASE \
+SKIAFLAGS = \
+	-DSK_RELEASE \
 	-DGR_RELEASE=1 \
 	-DSK_ENABLE_LIBPNG \
 	-DSK_ALLOW_STATIC_GLOBAL_INITIALIZERS=0 \
 	-DNDEBUG \
 	-fno-rtti \
 	-fno-exceptions \
-	-fPIC \
-	-DSK_BUILD_FOR_UNIX \
-	$(C_INCLUDES)
+	-DSK_BUILD_FOR_UNIX
+
+CFLAGS += $(SKIAFLAGS)
+CXXFLAGS += $(SKIAFLAGS)
 	
-LDLIBS = -lpthread
-
-target : $(PREBUILT_DIR)/$(LIBNAME)
-
-$(PREBUILT_DIR)/$(LIBNAME) : build/$(LIBNAME)
-	mkdir -p $(PREBUILT_DIR)
-	cp build/$(LIBNAME) $(PREBUILT_DIR)
-
-build/$(LIBNAME): $(OBJECTS) 
-	ar -rf build/$(LIBNAME) $(OBJECTS)
-	
-build/obj-$(os)-$(arch)/%.o : %.$(CPP_FILE_EXTENSION) $(LOCAL_C_INCLUDES)
-	@mkdir -p `dirname $@`
-	$(CXX) -o $@ -c $*.$(CPP_FILE_EXTENSION) $(CPPFLAGS)
-
-clean:
-	$(RM) $(OBJECTS) build/$(LIBNAME)
+# Finally, include generic rules
+include ../Makefile.rules

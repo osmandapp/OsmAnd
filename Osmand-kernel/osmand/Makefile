@@ -1,71 +1,40 @@
-LOCAL_PATH := .
+# Include tools definitions
 include ../Makefile.vars
-include ./Common.mk
-PREBUILT_DIR = ../jni-prebuilt/$(os)-$(arch)
-LIBNAME := osmand.lib
-LIBOSNAME := osmand-$(os)-$(arch).lib
 
-RUNFILE := osmand_main
+# Include project files
+LOCAL_PATH = .
+include Common.mk
 
-LOCAL_SRC_FILES += src/osmand_main.cpp
-
-#LDFLAGS = -Wl,--hash-style=both -fPIC
-LDFLAGS := $(LDFLAGS) -Wall -fPIC -Wl,-Bsymbolic
-#LDRUNFLAGS = -Wl,--hash-style=both
-#  --trace -Bsymbolic -Bsymbolic-functions
-
-LDLIBS = -L$(PREBUILT_DIR) -lskia -lproto -lpthread -lrt -lft2 -lexpat -lpng -lz 
-CPP_FILE_EXTENSION = cpp
-OBJECTS = $(LOCAL_SRC_FILES:src/%.$(CPP_FILE_EXTENSION)=build/obj-$(os)-$(arch)/%.o)
-
-C_INCLUDES := $(addprefix -I, $(LOCAL_C_INCLUDES))
-
+# Set library name
+LIBNAME = $(LIBRARY_PREFIX)osmand
+LIBTYPE = $(DYNAMICLIB_EXT)
+LDLIBS += -l$(LIBRARY_PREFIX)skia -l$(LIBRARY_PREFIX)proto -l$(LIBRARY_PREFIX)pthread -l$(LIBRARY_PREFIX)rt -l$(LIBRARY_PREFIX)ft2 -l$(LIBRARY_PREFIX)expat -l$(LIBRARY_PREFIX)png -l$(LIBRARY_PREFIX)z
 ifeq ($(findstring CYGWIN,$(shell uname)),CYGWIN)
 	FIXED_JAVA_HOME := $(shell cygpath -u "$(JAVA_HOME)")
 else
 	FIXED_JAVA_HOME := $(JAVA_HOME)
 endif
-
-ifeq ($(java_os),)
+ifeq ($(JAVA_OS),)
 	ifeq ($(findstring CYGWIN,$(shell uname)),CYGWIN)
-		java_os := win32
+	   JAVA_OS := win32
 	endif
 	ifeq ($(findstring MINGW,$(shell uname)),MINGW)
-		java_os := win32
+	   JAVA_OS := win32
 	endif
 endif
-ifeq ($(os),)
-	java_os := linux
+ifeq ($(JAVA_OS),)
+	JAVA_OS := linux
 endif
-
-CPPFLAGS := \
+OSMAND_FLAGS = \
 	-DGOOGLE_PROTOBUF_NO_RTTI \
 	-DSK_ALLOW_STATIC_GLOBAL_INITIALIZERS=0 \
 	-DSK_RELEASE \
 	-DGR_RELEASE=1 \
-	-c -fPIC -I"$(FIXED_JAVA_HOME)/include" -I"$(FIXED_JAVA_HOME)/include/$(java_os)" \
-	-DHASH_MAP_GNU \
-	$(C_INCLUDES) \
-	$(CPP_OS_FLAGS)
+	-c -I"$(FIXED_JAVA_HOME)/include" -I"$(FIXED_JAVA_HOME)/include/$(JAVA_OS)" \
+	-DHASH_MAP_GNU
 	
-#target : ../$(RUNFILE)	
-#target : $(PREBUILT_DIR)/$(LIBNAME)
-target : $(PREBUILT_DIR)/$(LIBNAME) ../$(RUNFILE)
+CFLAGS += $(OSMAND_FLAGS)
+CXXFLAGS += $(OSMAND_FLAGS)
 
-../$(RUNFILE) : $(OBJECTS) $(PREBUILT_DIR)/libskia.a $(PREBUILT_DIR)/libproto.a Makefile
-	$(CXX) $(LDRUNFLAGS) -o ../$(RUNFILE)  $(OBJECTS) $(LDLIBS)
-	@chmod +x ../$(RUNFILE)
-
-$(PREBUILT_DIR)/$(LIBNAME) : build/$(LIBOSNAME)
-	mkdir -p $(PREBUILT_DIR)
-	cp build/$(LIBOSNAME) $(PREBUILT_DIR)
-
-build/$(LIBOSNAME): $(OBJECTS) $(PREBUILT_DIR)/libskia.a $(PREBUILT_DIR)/libproto.a Makefile
-	$(CXX) -shared -o build/$(LIBOSNAME) $(OBJECTS) $(LDFLAGS) $(LDLIBS)
-	
-build/obj-$(os)-$(arch)/%.o : src/%.$(CPP_FILE_EXTENSION) $(LOCAL_C_INCLUDES) src/textdraw.cpp
-	@mkdir -p `dirname $@`
-	$(CXX) -o $@ -c src/$*.$(CPP_FILE_EXTENSION) $(CPPFLAGS)
-	
-clean:
-	$(RM) $(OBJECTS) build/$(LIBNAME)
+# Finally, include generic rules
+include ../Makefile.rules
