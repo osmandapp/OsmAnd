@@ -738,7 +738,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 	}
 
-	public void setLocation(Location location){
+	public void setLocation(final Location location){
 		if(Log.isLoggable(LogUtil.TAG, Log.DEBUG)){
 			Log.d(LogUtil.TAG, "Location changed " + location.getProvider()); //$NON-NLS-1$
 		}
@@ -772,7 +772,14 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				// Check with delay that gps location is not lost
 				if(location != null && routingHelper.getLeftDistance() > 0){
 					Message msg = Message.obtain(uiHandler, new Runnable() {
-						@Override						public void run() {
+						@Override
+						public void run() {
+							long fixTime = location.getTime();
+							Location lastKnown = getLastKnownLocation();
+							if(lastKnown != null && lastKnown.getTime() - fixTime < LOST_LOCATION_CHECK_DELAY) {
+								// false positive case, still strange how we got here with removeMessages
+								return;
+							}
 							if (routingHelper.getLeftDistance() > 0 && settings.MAP_ACTIVITY_ENABLED.get()) {
 								routingHelper.getVoiceRouter().gpsLocationLost();
 							}

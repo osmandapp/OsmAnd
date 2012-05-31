@@ -183,7 +183,8 @@ public class NavigationService extends Service implements LocationListener {
 					Message msg = Message.obtain(handler, new Runnable() {
     					@Override
     					public void run() {
-							if (routingHelper.getLeftDistance() > 0 && !settings.MAP_ACTIVITY_ENABLED.get()) {
+							if (routingHelper.getLeftDistance() > 0 && !settings.MAP_ACTIVITY_ENABLED.get() &&
+									!handler.hasMessages(LOST_LOCATION_MSG_ID)) {
 								routingHelper.getVoiceRouter().gpsLocationLost();
 							}
     					}
