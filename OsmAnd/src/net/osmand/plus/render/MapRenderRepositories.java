@@ -50,6 +50,7 @@ import org.apache.commons.logging.Log;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Bitmap.Config;
 import android.graphics.RectF;
 import android.os.Handler;
@@ -569,11 +570,11 @@ public class MapRenderRepositories {
 			if (rr != null) {
 				transparent = renderingReq.getIntPropertyValue(rr) > 0;
 			}
-			if(transparent) {
-				bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.ARGB_8888);
-			} else {
+//			if(transparent) {
+//				bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.ARGB_8888);
+//			} else {
 				bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.RGB_565);
-			}
+//			}
 
 			// 1. generate image step by step
 			this.prevBmp = this.bmp;

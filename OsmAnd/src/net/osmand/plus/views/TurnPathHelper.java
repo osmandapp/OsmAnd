@@ -178,6 +178,7 @@ public class TurnPathHelper {
 			float prev = 90;
 			float init = 90;
 			float step = sweepAngle / out;
+			boolean leftSide = turnType.isLeftSide();
 			for (int i = 1; i <= out; i++) {
 				float to = step * i;
 				if (i == out) {

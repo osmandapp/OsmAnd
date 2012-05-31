@@ -68,6 +68,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 	@Override
 	public void registerLayers(MapActivity activity) {
+		createLayers();
+	}
+
+	private void createLayers() {
 		underlayLayer = new MapTileLayer(false);
 		// mapView.addLayer(underlayLayer, -0.5f);
 		overlayLayer = new MapTileLayer(false);
@@ -82,6 +86,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	
 	public void updateMapLayers(OsmandMapTileView mapView, CommonPreference<String> settingsToWarnAboutMap,
 			final MapActivityLayers layers) {
+		if(overlayLayer == null) {
+			createLayers();
+		}
 		overlayLayer.setAlpha(settings.MAP_OVERLAY_TRANSPARENCY.get());
 		updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, 0.7f, settings.MAP_OVERLAY == settingsToWarnAboutMap);
 		updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, -0.5f, settings.MAP_UNDERLAY == settingsToWarnAboutMap);

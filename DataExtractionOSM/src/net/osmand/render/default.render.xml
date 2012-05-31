@@ -799,7 +799,8 @@
 			</groupFilter>
 		</group>
 
-
+    <!--  no polygons -->
+	<group> 
 		<!-- Polygon railway -->
 		<filter minzoom="11" tag="railway" value="station" color="#d4aaaa">
 			<filter nightMode="true" color="#560000"/>
@@ -860,7 +861,6 @@
 		</group>
 
 
-	<group>
 		<!-- Forest, night color 000034 -->
 		<group>
 			<filter minzoom="9" color="#aed1a0" tag="natural" value="wood"/>
@@ -872,7 +872,6 @@
 
 
 	 <group>
-	 	<filter noPolygons="true" tag="natural" value="land" color="#00ffffff"/>
 	 	<filter nightMode="true" tag="natural" value="land" color="#003333"/>
 		<filter tag="natural" value="land" color="#f1eae4"/>
 	 </group>
