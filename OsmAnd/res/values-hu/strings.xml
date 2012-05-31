@@ -79,8 +79,7 @@
   <string name="local_openstreetmap_uploading_poi">POI feltöltése…</string>
   <string name="local_openstreetmap_poi_were_uploaded">{0} POI feltöltve</string>
   <string name="local_openstreetmap_uploadall">Összes POI feltöltése</string>
-  <string name="local_openstreetmap_items">
-  </string>
+  <string name="local_openstreetmap_items">" "</string>
   <string name="local_openstreetmap_show_poi">POI megjelenítése a térképen</string>
   <string name="local_openstreetmap_upload">Módosítások feltöltése OSM-re</string>
   <string name="local_openstreetmap_delete">POI módosítás törlése</string>
@@ -245,8 +244,7 @@
   <string name="local_index_address_data">Cím adat</string>
   <string name="local_index_transport_data">Közlekedési eszköz adat</string>
   <string name="local_index_map_data">Térképadat</string>
-  <string name="local_index_items">
-  </string>
+  <string name="local_index_items">" "</string>
   <string name="local_indexes_cat_backup">Deaktivált</string>
   <string name="local_indexes_cat_tts">Beszédadat (TTS)</string>
   <string name="local_indexes_cat_voice">Beszédadat (felvett)</string>
@@ -304,8 +302,7 @@
   <string name="tip_location_sharing_t">Érdekes helyet találtál az utazásod során és meg akarod osztani a pozíciót a barátoddal, családoddal? \nOsmAnd lehetőséget biztosít, hogy megoszthass másokkal minden helyet amit csak akarsz. \n\tVálaszd a \'Térkép menű\'-&gt;\'Hely megosztása\' pontot. \nEzután meg kell határoznod milyen módon szeretnéd mással megosztani a koordinátákat. Lehetséges választás: E-Mail, SMS vagy a koordináták másolása a vágólapra.</string>
   <string name="tip_favorites">Kedvencek</string>
   <string name="tip_favorites_t">Ha hosszadalmas a sűrűn használt helyek előkeresése, hozzá lehet adni a Kedvencekhez, utána pár kattintással előkereshető. \n\tKedvenc pont hozzáadásához a térképmenüben a \'Hozzáadás a kedvencekhez\'-et kell választani és a pontot egy megfelelő névvel ellátni. Mentés után egyszerűen a főmenü \'Kedvencek\' menüponton keresztül érhető el. \n\tA \'Kedvencek\' menüben a pontra hosszan rányomva beállíthatjuk célpontnak, szerkeszthetjük vagy törölhetjük. \n\tAz összes kedvenc pont térképen megjelenítéséhez engedélyezni kell a \'Kedvencek\' réteget a térképmenü \'Rétegek\' pontjában.</string>
-  <string name="create_poi_link_to_osm_doc">
-    <u>Online OSM</u> map classification with images</string>
+  <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> map classification with images"</string>
   <string name="error_doing_search">Hiba történt a kapcsolat nélküli keresésben</string>
   <string name="search_offline_geo_error">Nem sikerült értelmezni a geo intent által küldött parancsot:\'%s\'</string>
   <string name="search_osm_offline">Cím keresése kapcsolat nélkül működő térképpel</string>
@@ -784,10 +781,10 @@
   <string name="edit_filter_delete_message">{0} szűrő törölve</string>
   <string name="edit_filter_create_message">{0} szűrő létrehozva</string>
   <string name="default_buttons_selectall">Mindet kijelöl</string>
-  <string name="offline_navigation_not_available">Osmand offline navigation is temporarily not available.</string>
-  <string name="left_side_navigation">Left Side Navigation</string>
-  <string name="left_side_navigation_descr">Turn on if you navigate in left side countries</string>
-  <string name="download_link_and_local_description">Download or update offline data. \nTo see more details click on the item, to deactivate or delete offline data press and hold. \nCurrent data on device (%1$s free):</string>
+  <string name="offline_navigation_not_available">Az Osmand offline navigációja átmenetileg nem elérhető.</string>
+  <string name="left_side_navigation">Bal oldali navigáció</string>
+  <string name="left_side_navigation_descr">"Kapcsold be, ha "</string>
+  <string name="download_link_and_local_description">Adat letöltése vagy frissítése kapcsolat nélküli munkához. \nTovábbi információért kattints a lista elemre, használaton kívül helyezéshez vagy törléshez kattints rá és tartsd nyomva. \nAdatok jelenleg az eszközön (%1$s szabad):</string>
   <string name="unknown_from_location">Starting location is not yet determined</string>
   <string name="context_menu_item_directions">Directions to here</string>
   <string name="confirm_interrupt_download">Do you want to interrupt file downloading?</string>
