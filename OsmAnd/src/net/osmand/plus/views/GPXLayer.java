@@ -1,12 +1,9 @@
 package net.osmand.plus.views;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.GPXUtilities.Track;
-import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import android.graphics.Canvas;
@@ -22,16 +19,17 @@ public class GPXLayer extends OsmandMapLayer {
 	
 	private OsmandMapTileView view;
 	
-	private List<List<WptPt>> points = new ArrayList<List<WptPt>>();
 	private Paint paint;
 
 	private Path path;
 
 	private OsmandSettings settings;
+	private boolean fluorescent;
 	
 	
 	private void initUI() {
 		paint = new Paint();
+		fluorescent = view.getSettings().FLUORESCENT_OVERLAYS.get();
 		if (view.getSettings().FLUORESCENT_OVERLAYS.get()) {
 			paint.setColor(view.getResources().getColor(R.color.gpx_track_fluorescent));
 		} else {
@@ -57,10 +55,13 @@ public class GPXLayer extends OsmandMapLayer {
 	
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
-		initUI(); //to change color immediately when needed
-		List<List<WptPt>> points = this.points;
-		if(points.isEmpty()){
+		GPXFile gpxFile = view.getApplication().getGpxFileToDisplay();
+		if(gpxFile == null){
 			return;
+		}
+		List<List<WptPt>> points = gpxFile.processedPointsToDisplay;
+		if(view.getSettings().FLUORESCENT_OVERLAYS.get() != fluorescent) {
+			initUI(); //to change color immediately when needed
 		}
 		
 		for (List<WptPt> l : points) {
@@ -108,41 +109,6 @@ public class GPXLayer extends OsmandMapLayer {
 
 	public boolean isShowingCurrentTrack(){
 		return settings.SHOW_CURRENT_GPX_TRACK.get();
-	}
-	
-	
-	public void clearCurrentGPX(){
-		points.clear();
-	}
-	
-	public void setTracks(List<Track> tracks){
-		if(tracks == null){
-			clearCurrentGPX();
-		} else {
-			List<List<WptPt>> tpoints = new ArrayList<List<WptPt>>();
-			for (Track t : tracks) {
-				for (TrkSegment ts : t.segments) {
-					tpoints.add(ts.points);
-				}
-			}
-			points = tpoints;
-			
-		}
-	}
-	
-	public void addTrackPoint(WptPt pt){
-		if(points.size() == 0){
-			points.add(new ArrayList<WptPt>());
-		}
-		List<WptPt> last = points.get(points.size() - 1);
-		if(last.size() == 0 || last.get(last.size() - 1).time - pt.time < 6 * 60 * 1000) {
-			// 6 minutes same segment
-			last.add(pt);
-		} else {
-			ArrayList<WptPt> l = new ArrayList<WptPt>();
-			l.add(pt);
-			points.add(l);
-		}
 	}
 	
 	

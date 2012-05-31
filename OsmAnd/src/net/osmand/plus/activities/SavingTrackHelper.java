@@ -20,7 +20,6 @@ import net.osmand.plus.ResourceManager;
 
 import org.apache.commons.logging.Log;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -46,17 +45,14 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public final static String POINT_COL_DESCRIPTION = "description"; //$NON-NLS-1$
 	
 	public final static Log log = LogUtil.getLog(SavingTrackHelper.class);
-	
-	
-	
 
 	private String updateScript;
 	private String updatePointsScript;
 	
 	private long lastTimeUpdated = 0;
-	private final Context ctx;
+	private final OsmandApplication ctx;
 	
-	public SavingTrackHelper(Context ctx){
+	public SavingTrackHelper(OsmandApplication ctx){
 		super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
 		this.ctx = ctx;
 		updateScript = "INSERT INTO " + TRACK_NAME + 
@@ -257,6 +253,30 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		if (time - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get() * 1000) {
 			execWithClose(updateScript, new Object[] { lat, lon, alt, speed, hdop, time });
 			lastTimeUpdated = time;
+			if (settings.SHOW_CURRENT_GPX_TRACK.get()) {
+				WptPt pt = new GPXUtilities.WptPt(lat, lon, time,
+						alt, speed, hdop);
+				addTrackPoint(pt);
+			}
+		}
+	}
+	
+	private void addTrackPoint(WptPt pt) {
+		GPXFile file = ctx.getGpxFileToDisplay();
+		if (file != null && ctx.getSettings().SHOW_CURRENT_GPX_TRACK.get()) {
+			List<List<WptPt>> points = file.processedPointsToDisplay;
+			if (points.size() == 0) {
+				points.add(new ArrayList<WptPt>());
+			}
+			List<WptPt> last = points.get(points.size() - 1);
+			if (last.size() == 0 || last.get(last.size() - 1).time - pt.time < 6 * 60 * 1000) {
+				// 6 minutes same segment
+				last.add(pt);
+			} else {
+				ArrayList<WptPt> l = new ArrayList<WptPt>();
+				l.add(pt);
+				points.add(l);
+			}
 		}
 	}
 	

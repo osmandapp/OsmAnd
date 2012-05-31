@@ -24,6 +24,7 @@ import net.osmand.LogUtil;
 import net.osmand.access.AccessibilityMode;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.activities.DayNightHelper;
+import net.osmand.plus.activities.LiveMonitoringHelper;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -71,9 +72,12 @@ public class OsmandApplication extends Application {
 	private List<String> startingWarnings;
 	private Handler uiHandler;
 	private GPXFile gpxFileToDisplay;
+	private SavingTrackHelper savingTrackHelper;
+	private LiveMonitoringHelper liveMonitoringHelper;
 
 	private boolean applicationInitializing = false;
 	private Locale prefferedLocale = null;
+	
 
 	@Override
 	public void onCreate() {
@@ -85,6 +89,8 @@ public class OsmandApplication extends Application {
 		manager = new ResourceManager(this);
 		daynightHelper = new DayNightHelper(this);
 		bidforfix = new BidForFixHelper("osmand.net", getString(R.string.default_buttons_support), getString(R.string.default_buttons_cancel));
+		savingTrackHelper = new SavingTrackHelper(this);
+		liveMonitoringHelper = new LiveMonitoringHelper(this);
 		uiHandler = new Handler();
 		rendererRegistry = new RendererRegistry();
 		checkPrefferedLocale();
@@ -134,6 +140,14 @@ public class OsmandApplication extends Application {
 		return osmandSettings;
 	}
 	
+	public SavingTrackHelper getSavingTrackHelper() {
+		return savingTrackHelper;
+	}
+	
+	public LiveMonitoringHelper getLiveMonitoringHelper() {
+		return liveMonitoringHelper;
+	}
+	
 
 	public PoiFiltersHelper getPoiFilters() {
 		if (poiFilters == null) {
@@ -159,6 +173,7 @@ public class OsmandApplication extends Application {
 				pt.setName(p.name);
 				pts.add(pt);
 			}
+			gpxFileToDisplay.proccessPoints();
 			getFavorites().setFavoritePointsFromGPXFile(pts);
 		}
 	}
@@ -387,12 +402,11 @@ public class OsmandApplication extends Application {
 			}
 			warnings.addAll(manager.reloadIndexes(startDialog));
 			player = null;
-			SavingTrackHelper helper = new SavingTrackHelper(OsmandApplication.this);
-			if (helper.hasDataToSave()) {
+			if (savingTrackHelper.hasDataToSave()) {
 				startDialog.startTask(getString(R.string.saving_gpx_tracks), -1);
-				warnings.addAll(helper.saveDataToGpx());
+				warnings.addAll(savingTrackHelper.saveDataToGpx());
 			}
-			helper.close();
+			savingTrackHelper.close();
 
 			// restore backuped favorites to normal file
 			final File appDir = getSettings().extendOsmandPath(ResourceManager.APP_DIR);

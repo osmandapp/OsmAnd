@@ -102,9 +102,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				SavingTrackHelper helper = new SavingTrackHelper(activity);
+				SavingTrackHelper helper = app.getSavingTrackHelper();
 				if (helper.hasDataToSave()) {
-					saveCurrentTracks(activity);
+					saveCurrentTracks(helper, activity);
 				} else {
 					helper.close();
 				}
@@ -127,14 +127,13 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	}
 	
-	private void saveCurrentTracks(final SettingsActivity activity) {
+	private void saveCurrentTracks(final SavingTrackHelper helper, final SettingsActivity activity) {
 		activity.progressDlg = ProgressDialog.show(activity, activity.getString(R.string.saving_gpx_tracks), activity.getString(R.string.saving_gpx_tracks), true);
 		final ProgressDialogImplementation impl = new ProgressDialogImplementation(activity.progressDlg);
 		impl.setRunnable("SavingGPX", new Runnable() { //$NON-NLS-1$
 					@Override
 					public void run() {
 						try {
-							SavingTrackHelper helper = new SavingTrackHelper(activity);
 							helper.saveDataToGpx();
 							helper.close();
 						} finally {

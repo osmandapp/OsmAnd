@@ -186,7 +186,6 @@ public class MapActivityLayers {
 			}
 		}
 		OsmandPlugin.refreshLayers(mapView, activity);
-		updateGPXLayer();
 	}
 	
 	public void updateMapSource(OsmandMapTileView mapView, CommonPreference<String> settingsToWarnAboutMap){
@@ -262,7 +261,6 @@ public class MapActivityLayers {
 				} else if(itemId == R.string.layer_gpx_layer){
 					if(getApplication().getGpxFileToDisplay() != null){
 						getApplication().setGpxFileToDisplay(null, false);
-						gpxLayer.clearCurrentGPX();
 					} else {
 						dialog.dismiss();
 						showGPXFileLayer(mapView);
@@ -365,20 +363,10 @@ public class MapActivityLayers {
 					mapView.getAnimatedDraggingThread().startMoving(loc.lat, loc.lon, 
 							mapView.getZoom(), true);
 				}
-				updateGPXLayer();
 				mapView.refreshMap();
 				return true;
 			}
 		}, true, true);
-	}
-	
-	private void updateGPXLayer(){
-		GPXFile gpxFileToDisplay = getApplication().getGpxFileToDisplay();
-		if(gpxFileToDisplay == null){
-			gpxLayer.setTracks(null);
-		} else {
-			gpxLayer.setTracks(gpxFileToDisplay.tracks);
-		}
 	}
 	
 	public void selectGPXFileLayer(final CallbackWithObject<GPXFile> callbackWithObject, final boolean convertCloudmade,

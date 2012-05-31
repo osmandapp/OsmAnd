@@ -198,8 +198,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		});
 		
 				
-		savingTrackHelper = new SavingTrackHelper(this);
-		liveMonitoringHelper = new LiveMonitoringHelper(this);
+		savingTrackHelper = getMyApplication().getSavingTrackHelper();
+		liveMonitoringHelper = getMyApplication().getLiveMonitoringHelper();
 		LatLon pointToNavigate = settings.getPointToNavigate();
 		
 		routingHelper = getMyApplication().getRoutingHelper();
@@ -750,11 +750,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				if (settings.SAVE_TRACK_TO_GPX.get()) {
 					savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
 							location.getSpeed(), location.getAccuracy(), locationTime, settings);
-					if (settings.SHOW_CURRENT_GPX_TRACK.get()) {
-						WptPt pt = new GPXUtilities.WptPt(location.getLatitude(), location.getLongitude(), locationTime,
-								location.getAltitude(), location.getSpeed(), location.getAccuracy());
-						mapLayers.getGpxLayer().addTrackPoint(pt);
-					}
 				}
 			}
 			if(settings.LIVE_MONITORING.get()){

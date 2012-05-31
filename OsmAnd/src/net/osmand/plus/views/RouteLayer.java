@@ -3,7 +3,6 @@ package net.osmand.plus.views;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.LogUtil;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.RoutingHelper;
@@ -17,7 +16,6 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.location.Location;
-import android.util.Log;
 
 public class RouteLayer extends OsmandMapLayer {
 	
@@ -30,6 +28,8 @@ public class RouteLayer extends OsmandMapLayer {
 	private Paint paint;
 
 	private Path path;
+
+	private Boolean fluorescent;
 	
 	public RouteLayer(RoutingHelper helper){
 		this.helper = helper;
@@ -40,6 +40,7 @@ public class RouteLayer extends OsmandMapLayer {
 		boundsRect = new Rect(0, 0, view.getWidth(), view.getHeight());
 		tileRect = new RectF();
 		paint = new Paint();
+		fluorescent = view.getSettings().FLUORESCENT_OVERLAYS.get();
 		if (view.getSettings().FLUORESCENT_OVERLAYS.get()) {
 			paint.setColor(view.getResources().getColor(R.color.nav_track_fluorescent));
 		} else {
@@ -63,10 +64,11 @@ public class RouteLayer extends OsmandMapLayer {
 	
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
-		initUI(); //to change color immediately when needed
 		path.reset();
 		if (helper.hasPointsToShow()) {
-			long time = System.currentTimeMillis();
+			if(view.getSettings().FLUORESCENT_OVERLAYS.get() != fluorescent) {
+				initUI(); //to change color immediately when needed
+			}
 			int w = view.getWidth();
 			int h = view.getHeight();
 			if(helper.getCurrentLocation() != null &&
@@ -84,9 +86,6 @@ public class RouteLayer extends OsmandMapLayer {
 			double lat = topLatitude - bottomLatitude + 0.1;
 			double lon = rightLongitude - leftLongitude + 0.1;
 			helper.fillLocationsToShow(topLatitude + lat, leftLongitude - lon, bottomLatitude - lat, rightLongitude + lon, points);
-			if((System.currentTimeMillis() - time) > 80){
-				Log.e(LogUtil.TAG, "Calculate route layer " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
-			}
 			
 			if (points.size() > 0) {
 				int px = view.getMapXForPoint(points.get(0).getLongitude());

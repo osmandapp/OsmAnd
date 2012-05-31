@@ -95,8 +95,8 @@ public class NavigationService extends Service implements LocationListener {
 		serviceOffInterval = settings.SERVICE_OFF_INTERVAL.get();
 		serviceOffProvider = settings.SERVICE_OFF_PROVIDER.get();
 		serviceError = settings.SERVICE_OFF_WAIT_INTERVAL.get();
-		savingTrackHelper = new SavingTrackHelper(this);
-		liveMonitoringHelper = new LiveMonitoringHelper(this);
+		savingTrackHelper = ((OsmandApplication) getApplication()).getSavingTrackHelper();
+		liveMonitoringHelper = ((OsmandApplication) getApplication()).getLiveMonitoringHelper();
 		
 		routingHelper = ((OsmandApplication)getApplication()).getRoutingHelper();
 		((OsmandApplication)getApplication()).setNavigationService(this);
