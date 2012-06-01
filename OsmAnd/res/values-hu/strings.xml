@@ -330,7 +330,7 @@
   <string name="si_km_m">Kilométer/méter</string>
   <string name="yard">yd</string>
   <string name="foot">láb</string>
-  <string name="mile_per_hour">mph</string>
+  <string name="mile_per_hour">mf/ó</string>
   <string name="mile">mi</string>
   <string name="send_location_way_choose_title">Hely megosztásának módja</string>
   <string name="send_location_sms_pattern">Hely : %1$s\n%2$s</string>
@@ -783,9 +783,9 @@
   <string name="default_buttons_selectall">Mindet kijelöl</string>
   <string name="offline_navigation_not_available">Az Osmand offline navigációja átmenetileg nem elérhető.</string>
   <string name="left_side_navigation">Bal oldali navigáció</string>
-  <string name="left_side_navigation_descr">"Kapcsold be, ha "</string>
-  <string name="download_link_and_local_description">Adat letöltése vagy frissítése kapcsolat nélküli munkához. \nTovábbi információért kattints a lista elemre, használaton kívül helyezéshez vagy törléshez kattints rá és tartsd nyomva. \nAdatok jelenleg az eszközön (%1$s szabad):</string>
-  <string name="unknown_from_location">Starting location is not yet determined</string>
+  <string name="left_side_navigation_descr">"Kapcsold be, ha baloldali közlekedésű országban navigálsz"</string>
+  <string name="download_link_and_local_description">Adat letöltése vagy frissítése kapcsolat nélküli munkához. \nTovábbi információért kattints a listaelemre, használaton kívül helyezéshez vagy törléshez kattints rá és tartsd nyomva. \nAdatok jelenleg az eszközön (%1$s szabad):</string>
+  <string name="unknown_from_location">Kezdőpozíció még nem meghatározható</string>
   <string name="context_menu_item_directions">Directions to here</string>
   <string name="confirm_interrupt_download">Do you want to interrupt file downloading?</string>
   <string name="basemap_was_selected_to_download">Basemap is required for proper application functioning and was selected to download.</string>
