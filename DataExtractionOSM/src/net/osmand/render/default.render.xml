@@ -847,7 +847,7 @@
 		<!-- Water, night color 330099 -->
 		<group>
 		   <!-- FIXME delete this block -->
-			<filter minzoom="1" tag="natural" value="coastline" color_2="#ffdd00" strokeWidth_2="1"/>
+			<filter minzoom="1" tag="natural" value="coastline" color_2="#54ff7c00" strokeWidth_2="1"/>
 			<filter minzoom="4" tag="natural" value="water"/>
 			<filter minzoom="4" tag="natural" value="lake"/>
 			<filter minzoom="4" tag="natural" value="bay"/>
@@ -979,7 +979,7 @@
 
 
 	<line>
-		<filter minzoom="1" tag="natural" value="coastline_broken" color="#54ff7c00" strokeWidth="1.5"/>
+		<filter minzoom="1" tag="natural" value="coastline_broken" color="#111111" strokeWidth="1"/>
 		<group>
 			<filter hmRendered="true" tag="highway" value="motorway" maxzoom="13" color="#809bff"/>
 				<filter tag="highway" value="motorway" maxzoom="13" color="#a58dff"/>
