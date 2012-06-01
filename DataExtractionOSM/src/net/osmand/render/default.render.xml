@@ -979,7 +979,7 @@
 
 
 	<line>
-		<filter minzoom="1" tag="natural" value="coastline_broken" color="#111111" strokeWidth="2"/>
+		<filter minzoom="1" tag="natural" value="coastline_broken" color="#54ff7c00" strokeWidth="1.5"/>
 		<group>
 			<filter hmRendered="true" tag="highway" value="motorway" maxzoom="13" color="#809bff"/>
 				<filter tag="highway" value="motorway" maxzoom="13" color="#a58dff"/>
