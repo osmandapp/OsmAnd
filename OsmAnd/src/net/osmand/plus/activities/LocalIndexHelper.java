@@ -283,12 +283,21 @@ public class LocalIndexHelper {
 	
 	private void loadGPXData(File mapPath, List<LocalIndexInfo> result, boolean backup, LoadLocalIndexTask loadTask) {
 		if (mapPath.canRead()) {
+			List<LocalIndexInfo> progress = new ArrayList<LocalIndexHelper.LocalIndexInfo>();
 			for (File gpxFile : listFilesSorted(mapPath)) {
 				if (gpxFile.isFile() && gpxFile.getName().endsWith(".gpx")) {
 					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.GPX_DATA, gpxFile, backup);
 					result.add(info);
-					loadTask.loadFile(info);
+					progress.add(info);
+					if (progress.size() > 7) {
+						loadTask.loadFile(progress.toArray(new LocalIndexInfo[progress.size()]));
+						progress.clear();
+					}
+
 				}
+			}
+			if (!progress.isEmpty()) {
+				loadTask.loadFile(progress.toArray(new LocalIndexInfo[progress.size()]));
 			}
 		}
 	}

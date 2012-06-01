@@ -278,7 +278,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			return helper.getAllLocalIndexData(this);
 		}
 
-		public void loadFile(LocalIndexInfo loaded) {
+		public void loadFile(LocalIndexInfo... loaded) {
 			publishProgress(loaded);
 		}
 
