@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -41,9 +42,11 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	public RegionAddressRepositoryBinary(BinaryMapIndexReader file, String name) {
 		this.file = file;
 		this.region = name;
- 	    this.collator = Collator.getInstance();
+ 	    this.collator = Collator.getInstance(Locale.US);
  	    this.collator.setStrength(Collator.PRIMARY); //ignores also case
-		this.postCodes = new TreeMap<String, City>(collator);
+ 	    Collator sortcollator = Collator.getInstance();
+ 	    sortcollator.setStrength(Collator.PRIMARY); //ignores also case
+		this.postCodes = new TreeMap<String, City>(sortcollator);
 	}
 	
 	@Override
@@ -103,13 +106,9 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		
 	}
 
-
-	// not use ccontains It is really slow, takes about 10 times more than other steps
-	private StringMatcherMode[] streetsCheckMode = new StringMatcherMode[] {StringMatcherMode.CHECK_ONLY_STARTS_WITH,
-			StringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING};
-	
-	
-	
+//	// not use ccontains It is really slow, takes about 10 times more than other steps
+//	private StringMatcherMode[] streetsCheckMode = new StringMatcherMode[] {StringMatcherMode.CHECK_ONLY_STARTS_WITH,
+//			StringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING};
 	
 	@Override
 	public List<MapObject> searchMapObjectsByName(String name, ResultMatcher<MapObject> resultMatcher) {
