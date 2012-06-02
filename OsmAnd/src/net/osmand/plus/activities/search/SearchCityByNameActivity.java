@@ -1,10 +1,16 @@
 package net.osmand.plus.activities.search;
 
+import java.text.Collator;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
+import net.osmand.CollatorStringMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndFormatter;
 import net.osmand.ResultMatcher;
 import net.osmand.data.City;
+import net.osmand.data.City.CityType;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandApplication;
@@ -26,6 +32,44 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 			protected void onPostExecute(List<City> result) {
 				((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_city);
 				progress.setVisibility(View.INVISIBLE);
+				final Collator cs = Collator.getInstance();
+				final boolean en = region.useEnglishNames();
+				final String part = getFilter().toString();
+				final StringMatcherMode startsWith = CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STARTS_WITH;
+				Collections.sort(result, new Comparator<City>() {
+					@Override
+					public int compare(City lhs, City rhs) {
+						int compare = compareCityType(lhs, rhs);
+						if (compare != 0) {
+							return compare;
+						}
+						boolean st1 = CollatorStringMatcher.cmatches(cs, lhs.getName(en), part, startsWith);
+						boolean st2 = CollatorStringMatcher.cmatches(cs, rhs.getName(en), part, startsWith);
+					    if(st1 != st2) {
+					    	return st1 ? 1 : -1;
+					    }
+						compare = cs.compare(lhs.getName(en), rhs.getName(en));
+						if (compare != 0) {
+							return compare;
+						}
+						if (locationToSearch != null) {
+							double d1 = MapUtils.getDistance(locationToSearch, lhs.getLocation());
+							double d2 = MapUtils.getDistance(locationToSearch, rhs.getLocation());
+							return -Double.compare(d1, d2);
+						}
+						return 0;
+					}
+
+					private int compareCityType(City lhs, City rhs) {
+						boolean c1 = lhs.getType() == CityType.CITY || lhs.getType() == CityType.TOWN;
+						boolean c2 = rhs.getType() == CityType.CITY || rhs.getType() == CityType.TOWN;
+						if(c1 == c2){
+							return 0;
+						}
+						return c1? 1 : -1;
+					}
+				});
+				
 				finishInitializing(result);
 			}
 			

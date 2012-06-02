@@ -17,7 +17,7 @@ public class CollatorStringMatcher implements StringMatcher {
 	private final StringMatcherMode mode;
 	private final String part;
 	
-	public enum StringMatcherMode {
+	public static enum StringMatcherMode {
 		CHECK_ONLY_STARTS_WITH,
 		CHECK_STARTS_FROM_SPACE,
 		CHECK_STARTS_FROM_SPACE_NOT_BEGINNING,

@@ -48,7 +48,7 @@ public class BinaryInspector {
 		// test cases show info
 		
 		
-//		 inspector(new String[]{"-vmap", /*"-bbox=-121.785,37.35,-121.744,37.33", */"/home/victor/projects/OsmAnd/data/osm-gen/Map.obf"});
+//		 inspector(new String[]{"-vaddress", /*"-bbox=-121.785,37.35,-121.744,37.33", */"/home/victor/projects/OsmAnd/temp/.obf"});
 		// test case extract parts
 		// test case 
 	}
@@ -439,33 +439,33 @@ public class BinaryInspector {
 			for (int j = 0; j < cityType.length; j++) {
 				int type = cityType[j];
 				for (City c : index.getCities(region, null, type)) {
+					println("\t\t" + c + " " + c.getId() + " (" + c.getStreets().size() + ")");
 					index.preloadStreets(c, null);
-					println("\t\t"  + c + getId(c) + "("+c.getStreets().size()+")");
 					for (Street t : c.getStreets()) {
 						if (verbose.contains(t)) {
 							index.preloadBuildings(t, null);
-							print("\t\t\t" + t.getName() + getId(t) + "("+t.getBuildings().size()+")");
-//										if (type == BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE) {
-								List<Building> buildings = t.getBuildings();
-								if (buildings != null && !buildings.isEmpty()) {
-									print("\t\t (");
-									for (Building b : buildings) {
-										print(b.toString() + ",");
-									}
-									print(")");
+							print("\t\t\t" + t.getName() + getId(t) + " (" + t.getBuildings().size() + ")");
+							// if (type == BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE) {
+							List<Building> buildings = t.getBuildings();
+							if (buildings != null && !buildings.isEmpty()) {
+								print("\t\t (");
+								for (Building b : buildings) {
+									print(b.toString() + ",");
 								}
-								List<Street> streets = t.getIntersectedStreets();
-								if (streets != null && !streets.isEmpty()) {
-									print("\n\t\t\t\t\t\t\t x (");
-									for (Street s : streets) {
-										print(s.getName() +", ");
-									}
-									print(")");
+								print(")");
+							}
+							List<Street> streets = t.getIntersectedStreets();
+							if (streets != null && !streets.isEmpty()) {
+								print("\n\t\t\t\t\t\t\t x (");
+								for (Street s : streets) {
+									print(s.getName() + ", ");
 								}
-//										}
+								print(")");
+							}
+							// }
 							println("");
 						}
-						
+
 					}
 				}
 			}
