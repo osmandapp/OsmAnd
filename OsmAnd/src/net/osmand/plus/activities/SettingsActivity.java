@@ -515,6 +515,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					if (osmandSettings.ROUTER_SERVICE.get() == RouteService.OSMAND) {
 						AccessibleToast.makeText(this, R.string.offline_navigation_not_available, Toast.LENGTH_LONG).show();
 					}
+					routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + osmandSettings.ROUTER_SERVICE.get() + "]");
 				} else if (listPref.getId().equals(osmandSettings.APPLICATION_MODE.getId())) {
 					updateAllSettings();
 				} else if (listPref.getId().equals(osmandSettings.PREFERRED_LOCALE.getId())) {
@@ -525,8 +526,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					startActivity(intent);
 				} else if (listPref.getId().equals(osmandSettings.DAYNIGHT_MODE.getId())) {
 					dayNightModePreference.setSummary(getString(R.string.daynight_descr) + "  [" + osmandSettings.DAYNIGHT_MODE.get().toHumanString(this)  + "]");
-				} else if (listPref.getId().equals(osmandSettings.ROUTER_SERVICE.getId())) {
-					routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + osmandSettings.ROUTER_SERVICE.get() + "]");
 				}
 			}
 			if (listPref.getId().equals(osmandSettings.RENDERER.getId())) {
