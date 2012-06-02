@@ -91,21 +91,21 @@
 	<string name="zoomIn">Zoom in</string>
 	<string name="zoomIs">Zoom is</string>
 	
-	<string name="north">north</string>
+	<string name="north">उत्तर</string>
 	<string name="north_north_east">north-north-east</string>
-	<string name="north_east">north-east</string>
+	<string name="north_east">इशान्य</string>
 	<string name="east_north_east">east-north-east</string>
-	<string name="east">east</string>
+	<string name="east">पुर्व</string>
 	<string name="east_south_east">east-south-east</string>
-	<string name="south_east">south-east</string>
+	<string name="south_east">आग्नेय</string>
 	<string name="south_south_east">south-south-east</string>
-	<string name="south">south</string>
+	<string name="south">दक्षिण</string>
 	<string name="south_south_west">south-south-west</string>
-	<string name="south_west">south-west</string>
+	<string name="south_west">नैऋत्य</string>
 	<string name="west_south_west">west-south-west</string>
-	<string name="west">west</string>
+	<string name="west">पश्चिम</string>
 	<string name="west_north_west">west-north-west</string>
-	<string name="north_west">north-west</string>
+	<string name="north_west">वायव्य</string>
 	<string name="north_north_west">north-north-west</string>
 	<string name="front">Front</string>
 	<string name="front_right">Front right</string>
@@ -169,16 +169,16 @@
 	<string name="free_version_title">Free version</string>
 	<string name="poi_context_menu_showdescription">Show POI description</string>
 
-	<string name="index_name_north_america">North America</string>
-	<string name="index_name_us">North America - United States</string>
-	<string name="index_name_central_america">Central America</string>
-	<string name="index_name_south_america">South America</string>
-	<string name="index_name_europe">Europe</string>
-	<string name="index_name_france">Europe - France</string>
-	<string name="index_name_germany">Europe - Germany</string>
-	<string name="index_name_russia">Europe/Asia - Russia</string>
-	<string name="index_name_africa">Africa</string>
-	<string name="index_name_asia">Asia</string>
+	<string name="index_name_north_america">उत्तर अमेरिका</string>
+	<string name="index_name_us">उत्तर अमेरिका - युनायटेड स्टेट्स</string>
+	<string name="index_name_central_america">मध्य अमेरिका</string>
+	<string name="index_name_south_america">दक्षिण अमेरिका</string>
+	<string name="index_name_europe">युरोप</string>
+	<string name="index_name_france">युरोप - फ्रान्स</string>
+	<string name="index_name_germany">युरोप - जर्मनी</string>
+	<string name="index_name_russia">युरोप/आशिया - रशिया</string>
+	<string name="index_name_africa">अफ्रिका</string>
+	<string name="index_name_asia">आशिया</string>
 	<string name="index_name_oceania">Oceania</string>
 	<string name="index_name_other">Worldwide and topic maps</string>
 	<string name="index_name_wiki">Worldwide Wikipedia</string>
@@ -251,9 +251,9 @@
 	<string name="delete_confirmation_msg">Delete %1$s?</string>
 	<string name="city_type_suburb">Suburb</string>
 	<string name="city_type_hamlet">Hamlet</string>
-	<string name="city_type_village">Village</string>
-	<string name="city_type_town">Town</string>
-	<string name="city_type_city">City</string>
+	<string name="city_type_village">गाव</string>
+	<string name="city_type_town">तालुका</string>
+	<string name="city_type_city">शहर</string>
 	<string name="layer_poi_label">POI labels</string>
 	<string name="animate_route_off">Stop animation</string>
 	<string name="animate_route">Start animation</string>
@@ -550,8 +550,8 @@
 	<string name="transport_search_none">none</string>
 	<string name="transport_search_again">Reset Transport search</string>
 
-	<string name="map_index">Map</string>
-	<string name="voice">Voice</string>
+	<string name="map_index">नकाशा</string>
+	<string name="voice">आवाज</string>
 	<string name="no_vector_map_loaded">Vector maps were not loaded</string>
 	
 	<string name="map_route_by_gpx">Navigate using GPX</string>
@@ -601,12 +601,12 @@
 	<string name="background_service_wait_int_descr">Set maximum waiting time for each background position fix</string>
 	<string name="background_service_wait_int">Maximum wait for fix</string>
 	<string name="service_stop_background_service">Switch off background navigation service</string>
-	<string name="where_am_i">Where am I?</string>
+	<string name="where_am_i">मी कुठे आहे?</string>
 	<string name="process_navigation_service">OsmAnd navigation service</string>
 	<string name="network_provider">Network</string>
 	<string name="gps_provider">GPS</string>
-	<string name="int_seconds">seconds</string>
-	<string name="int_min">min.</string>
+	<string name="int_seconds">सेकंद</string>
+	<string name="int_min">मि.</string>
 	<string name="background_service_int_descr">"Set wake-up interval used by background "</string>
 	<string name="background_service_int">Wake-up interval</string>
 	<string name="background_service_provider_descr">Choose location provider while running in background mode</string>
@@ -617,8 +617,8 @@
 	<string name="hide_poi_filter">Hide filter</string>
 	<string name="show_poi_filter">Show filter</string>
 	<string name="search_poi_filter">Filter</string>
-	<string name="menu_mute_off">Sound is on</string>
-	<string name="menu_mute_on">Sound is off</string>
+	<string name="menu_mute_off">आवाज चालू आहे</string>
+	<string name="menu_mute_on">आवाज बंद आहे</string>
 	<string name="voice_provider_descr">Select voice guidance for navigation</string>
 	<string name="voice_provider">Voice guidance</string>
 	<string name="voice_data_initializing">Initializing voice data…</string>
@@ -794,23 +794,23 @@
     <string name="map_tile_source_descr">Choose the source of online or cached map tiles</string>
     <string name="map_tile_source">Tile map source</string>
     <string name="map_source">Map source</string>
-    <string name="use_internet">Use Internet</string>
-    <string name="show_location">Show location</string>
-    <string name="map_preferences">Map</string>
+    <string name="use_internet">इंटरनेट वापरा</string>
+    <string name="show_location">स्थान दाखवा</string>
+    <string name="map_preferences">नकाशा</string>
     <string name="settings_activity">Settings</string>
     <string name="show_gps_coordinates_text">Show GPS coordinates on map</string>
     <string name="use_internet_to_download_tile">Use Internet to download missing map tiles</string>
     <string name="app_description">Navigation application</string>
 
 <string name="exit_Button">Exit</string>
-<string name="map_Button">Map</string>
+<string name="map_Button">नकाशा</string>
 <string name="settings_Button">Settings</string>
 <string name="favorites_Button">Favorites</string>
-<string name="search_button">Search</string>
-<string name="search_activity">Search</string>
+<string name="search_button">शोधा</string>
+<string name="search_activity">शोधा</string>
 
 <string name="searchpoi_activity">Choose POI</string>
-<string name="search_POI_level_btn">Find more</string>
+<string name="search_POI_level_btn">अजून शोधा</string>
 <string name="incremental_search_city">Search city incrementally. To find towns/postcodes, enter the first 3 or more characters.</string>
 <string name="incremental_search_street">Search street incrementally</string>
 <string name="incremental_search_building">Search building incrementally</string>
@@ -818,28 +818,28 @@
 <string name="choose_intersected_street">Choose intersecting street</string>
 <string name="Closest_Amenities">Closest amenities</string>
 <string name="app_mode_default">Default</string>
-<string name="app_mode_car">Car</string>
-<string name="app_mode_bicycle">Bicycle</string>
+<string name="app_mode_car">कार</string>
+<string name="app_mode_bicycle">सायकल</string>
 <string name="app_mode_pedestrian">Pedestrian</string>
 <string name="position_on_map_center">Center</string>
 <string name="position_on_map_bottom">Bottom</string>
 <string name="navigate_point_top_text">Input latitude &amp; longitude in the selected format (D - degrees, M - minutes, S - seconds)</string>
-<string name="navigate_point_latitude">Latitude</string>
-<string name="navigate_point_longitude">Longitude</string>
+<string name="navigate_point_latitude">अक्षांश</string>
+<string name="navigate_point_longitude">रेखांश</string>
 <string name="navigate_point_format_D">DDD.DDDDD</string>
 <string name="navigate_point_format_DM">DDD MM.MMMMM</string>
 <string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
-<string name="search_shown_on_map">Show on map</string>
+<string name="search_shown_on_map">नकाशावर दाखवा</string>
 <string name="navigate_point_cancel">Cancel</string>
-<string name="search_address_top_text">Select address</string>
-<string name="search_address_region">Region</string>
-<string name="search_address_city">City</string>
-<string name="search_address_street">Street</string>
-<string name="search_address_building">Building</string>
-<string name="search_address_building_option">Building</string>
+<string name="search_address_top_text">पत्ता निवडा</string>
+<string name="search_address_region">प्रदेश</string>
+<string name="search_address_city">शहर</string>
+<string name="search_address_street">रस्ता</string>
+<string name="search_address_building">इमारत</string>
+<string name="search_address_building_option">इमारत</string>
 <string name="search_address_street_option">Intersecting street</string>
 
-<string name="search_tabs_location">Location</string>
+<string name="search_tabs_location">स्थान</string>
 
 <string name="context_menu_item_navigate_point">Set as destination</string>
 <string name="context_menu_item_add_favorite">Add to favorites</string>
@@ -847,11 +847,11 @@
 <string name="context_menu_item_open_bug">Open OSM bug</string>
 <string name="context_menu_item_create_poi">Create POI</string>
 
-<string name="default_buttons_yes">Yes</string>
+<string name="default_buttons_yes">हो</string>
 <string name="default_buttons_cancel">Cancel</string>
 <string name="default_buttons_apply">Apply</string>
 <string name="default_buttons_add">Add</string>
-<string name="default_buttons_no">No</string>
+<string name="default_buttons_no">नाही</string>
 <string name="add_favorite_dialog_top_text">Enter favorite name</string>
 <string name="add_favorite_dialog_default_favourite_name">Favorite</string>
 <string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>
@@ -896,7 +896,7 @@
 
 <string name="poi_error_info_not_loaded">Info about node was not loaded</string>
 
-<string name="poi_dialog_name">Name</string>
+<string name="poi_dialog_name">नाव</string>
 <string name="poi_dialog_opening_hours">Open</string>
 <string name="poi_dialog_comment">Comment</string>
 <string name="poi_dialog_comment_default">POI changing</string>
@@ -909,6 +909,6 @@
 <string name="edit_filter_delete_dialog_title">Delete selected filter?</string>
 <string name="edit_filter_delete_message">Filter {0} has been deleted</string>
 <string name="edit_filter_create_message">Filter {0} has been created</string>
-<string name="default_buttons_selectall">Select All</string>
+<string name="default_buttons_selectall">सर्व निवडा</string>
 
 </resources>
