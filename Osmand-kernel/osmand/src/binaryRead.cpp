@@ -714,6 +714,7 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 	std::vector<MapDataObject*> coastLines;
 	std::vector<MapDataObject*> basemapCoastLines;
 
+	bool basemapExists = false;
 	for (; i != openFiles.end() && !q->publisher->isCancelled(); i++) {
 		BinaryMapFile* file = i->second;
 		fseek(file->f, 0, 0);
@@ -732,6 +733,7 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 				if (q->publisher->isCancelled()) {
 					break;
 				}
+				basemapExists |= file->isBasemap();
 				if (mapLevel->minZoom <= q->zoom && mapLevel->maxZoom >= q->zoom) {
 					if (mapLevel->right >= q->left && q->right >= mapLevel->left && mapLevel->bottom >= q->top
 							&& q->bottom >= mapLevel->top) {
@@ -784,6 +786,7 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 	} else {
 		bool addBasemapCoastlines = true;
 		bool emptyData = q->zoom > BASEMAP_ZOOM && tempResult.empty() && coastLines.empty();
+		bool basemapMissing = q->zoom <= BASEMAP_ZOOM && basemapCoastLines.empty() && !basemapExists;
 		if (!coastLines.empty()) {
 			bool coastlinesWereAdded = processCoastlines(coastLines, q->left, q->right, q->bottom, q->top, q->zoom,
 					basemapCoastLines.empty(), true, tempResult);
@@ -812,7 +815,7 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 			}
 			tempResult.push_back(o);
 		}
-		if (emptyData) {
+		if (emptyData || basemapMissing) {
 			// message
 			// avoid overflow int errors
 			MapDataObject* o = new MapDataObject();

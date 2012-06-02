@@ -204,7 +204,7 @@ public class MapRenderRepositories {
 	}
 
 	public boolean updateMapIsNeeded(RotatedTileBox box, DrawSettings drawSettings) {
-		if (files.isEmpty() || box == null) {
+		if (box == null) {
 			return false;
 		}
 		if (requestedBox == null) {
@@ -305,11 +305,6 @@ public class MapRenderRepositories {
 
 		long now = System.currentTimeMillis();
 
-		if (files.isEmpty()) {
-			cObjectsBox = dataBox;
-			cObjects = new ArrayList<BinaryMapDataObject>();
-			return true;
-		}
 		try {
 			System.gc(); // to clear previous objects
 			int count = 0;
@@ -398,7 +393,8 @@ public class MapRenderRepositories {
 
 			String coastlineTime = "";
 			boolean addBasemapCoastlines = true;
-			boolean emptyData = zoom > BASEMAP_ZOOM && tempResult.isEmpty() && coastLines.isEmpty() ;
+			boolean emptyData = zoom > BASEMAP_ZOOM && tempResult.isEmpty() && coastLines.isEmpty();
+			boolean basemapMissing = zoom <= BASEMAP_ZOOM && basemapCoastLines.isEmpty() && mi == null; 
 			
 			if(!coastLines.isEmpty()) {
 				long ms = System.currentTimeMillis();
@@ -420,14 +416,21 @@ public class MapRenderRepositories {
 				o.setMapIndex(mi);
 				tempResult.add(o);
 			}
-			if(emptyData && tempResult.size() > 0){
+			if(emptyData || basemapMissing){
 				// message
-				BinaryMapDataObject p = tempResult.get(0);
+				MapIndex mapIndex;
+				if(!tempResult.isEmpty()) {
+					mapIndex = tempResult.get(0).getMapIndex();
+				} else {
+					mapIndex = new MapIndex();
+					mapIndex.initMapEncodingRule(0, 1, "natural", "coastline");
+					mapIndex.initMapEncodingRule(0, 2, "name", "");
+				}
 				// avoid overflow int errors
 				BinaryMapDataObject o = new BinaryMapDataObject(new int[] { leftX + (rightX - leftX) / 2, topY + (bottomY - topY) / 2 },
-						new int[] { p.getMapIndex().coastlineEncodingType }, null, -1);
-				o.setMapIndex(p.getMapIndex());
-				o.putObjectName(o.getMapIndex().nameEncodingType, context.getString(R.string.switch_to_raster_map_to_see));
+						new int[] { mapIndex.coastlineEncodingType }, null, -1);
+				o.setMapIndex(mapIndex);
+				o.putObjectName(mapIndex.nameEncodingType, context.getString(R.string.switch_to_raster_map_to_see));
 				tempResult.add(o);
 			}
 			if(zoom <= BASEMAP_ZOOM || emptyData) {

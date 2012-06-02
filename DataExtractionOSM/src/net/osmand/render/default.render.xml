@@ -1101,9 +1101,15 @@
 					<filter minzoom="17" maxzoom="17" strokeWidth="15" strokeWidth_2="13"/>
 					<filter minzoom="18" strokeWidth="20" strokeWidth_2="18"/>
 					<groupFilter>
-						<filter additional="access=no" nightMode="true" color="#ffffff" color_2="#9F9F9F" color_3="#F7D4D4" strokeWidth_3="5" pathEffect_3="10_2"/>
 						<filter nightMode="true" color="#ffffff" color_2="#9F9F9F"/>
-						<filter additional="access=no" color_3="#F7D4D4" strokeWidth_3="5" pathEffect_3="10_2"/>
+						<filter/>
+						<groupFilter>
+							<filter additional="access=no" />
+							<filter additional="access=private" />
+							<groupFilter>
+						 		<filter color_3="#F7D4D4" strokeWidth_3="5" pathEffect_3="10_2"/>
+							</groupFilter>
+						</groupFilter>
 					</groupFilter>
 			 	</filter>
 				<filter>
@@ -1117,11 +1123,17 @@
 					<filter minzoom="17" maxzoom="17" strokeWidth="13"/>
 					<filter minzoom="18" strokeWidth="18"/>
 					<groupFilter>
-						<filter layer="-1" nightMode="true" color="#9F9F9F" color_2="#9F9F9F" pathEffect="4_4" cap="BUTT"/>
+						<!-- <filter layer="-1" nightMode="true" color="#9F9F9F" color_2="#9F9F9F" pathEffect="4_4" cap="BUTT"/>
 						<filter layer="-1" pathEffect="4_4" cap="BUTT"/>
-						<filter additional="access=no" nightMode="true" color="#9F9F9F" color_2="#9F9F9F" color_3="#F7D4D4" strokeWidth_3="5" pathEffect_3="10_2"/>
-						<filter nightMode="true" color="#9F9F9F" color_2="#9F9F9F"/>
-						<filter additional="access=no" color_3="#F7D4D4" strokeWidth_3="5" pathEffect_3="10_2"/>
+						<filter nightMode="true" color="#9F9F9F" color_2="#9F9F9F" />
+						<filter/>
+						<groupFilter>  -->
+							<filter additional="access=no" color_3="#F7D4D4" strokeWidth_3="5" pathEffect_3="10_2"/>
+							<filter additional="access=private" color_3="#F7D4D4" strokeWidth_3="5" pathEffect_3="10_2"/>
+							<groupFilter>
+						 		<filter color_3="#F7D4D4" strokeWidth_3="5" pathEffect_3="10_2"/>
+							</groupFilter>
+					<!-- 	</groupFilter>  -->
 					</groupFilter>
 				</filter>
 			</groupFilter>

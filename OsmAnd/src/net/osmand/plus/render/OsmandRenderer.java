@@ -193,19 +193,19 @@ public class OsmandRenderer {
 	}
 	
 	public void generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, 
-			RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList) {
+				RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList) {
 		long now = System.currentTimeMillis();
-
+		// fill area
+		Canvas cv = new Canvas(bmp);
+		if (rc.defaultColor != 0) {
+			cv.drawColor(rc.defaultColor);
+		}
 		if (objects != null && !objects.isEmpty() && rc.width > 0 && rc.height > 0) {
 			// init rendering context
 			rc.tileDivisor = (int) (1 << (31 - rc.zoom));
 			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
-			// fill area
-			Canvas cv = new Canvas(bmp);
-			if (rc.defaultColor != 0) {
-				cv.drawColor(rc.defaultColor);
-			}
+			
 			// put in order map
 			TIntObjectHashMap<TIntArrayList> orderMap = sortObjectsByProperOrder(rc, objects, render);
 
@@ -273,8 +273,6 @@ public class OsmandRenderer {
 			log.info(rc.renderingDebugInfo);
 
 		}
-
-		return;
 	}
 
 	private void notifyListenersWithDelay(final RenderingContext rc, final List<IMapDownloaderCallback> notifyList, final Handler h) {

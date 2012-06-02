@@ -6,6 +6,9 @@
 	<type tag="oneway" value="yes" minzoom="15" additional="true"/>
 	<type tag="oneway" value="no" minzoom="15" additional="true"/>
 	<type tag="oneway" value="-1" minzoom="15" additional="true"/>
+	<type tag="access" value="no" minzoom="15" additional="true"/>
+	<type tag="access" value="private" minzoom="15" additional="true"/>
+	<type tag="access" value="yes" minzoom="15" additional="true"/>
 	
 	<type tag="layer" value="0" minzoom="10" additional="true"/>
 	<type tag="layer" value="1" minzoom="10" additional="true"/>

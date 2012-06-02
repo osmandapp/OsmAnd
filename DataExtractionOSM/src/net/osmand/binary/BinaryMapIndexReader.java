@@ -1387,7 +1387,7 @@ public class BinaryMapIndexReader {
 			}
 		}
 		
-		private void initMapEncodingRule(int type, int id, String tag, String val) {
+		public void initMapEncodingRule(int type, int id, String tag, String val) {
 			if(!encodingRules.containsKey(tag)){
 				encodingRules.put(tag, new LinkedHashMap<String, Integer>());
 			}
