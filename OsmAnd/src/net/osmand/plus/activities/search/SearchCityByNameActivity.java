@@ -131,12 +131,12 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	public String getText(City obj) {
 		LatLon l = obj.getLocation();
 		if (getFilter().length() > 2 && locationToSearch != null && l != null) {
-			String name =obj.getName(region.useEnglishNames()); 
-			if(obj instanceof City){
-				name += " [" + OsmAndFormatter.toPublicString(((City) obj).getType(), this) + "]";
+			String name = obj.getName(region.useEnglishNames());
+			if (obj.getType() != null) {
+				name += " [" + OsmAndFormatter.toPublicString(obj.getType(), this) + "]";
 			}
-			return  name+ " - " + //$NON-NLS-1$
-					OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(l, locationToSearch), this); 
+			return name + " - " + //$NON-NLS-1$
+					OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(l, locationToSearch), this);
 		} else {
 			return obj.getName(region.useEnglishNames());
 		}
