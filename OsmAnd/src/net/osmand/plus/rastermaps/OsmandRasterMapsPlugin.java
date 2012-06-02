@@ -137,7 +137,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 							if(object == null){
 								if(count == 1){
 									mapPref.set(template.getName());
-									layers.getMapControlsLayer().showAndHideTransparencyBar(transparencyPref, transparencyToChange);
+									layers.getMapControlsLayer().showTransparencyBar(transparencyPref, transparencyToChange);
 									updateMapLayers(mapView, mapPref, layers);
 								} else {
 									selectMapOverlayLayer(mapView, mapPref, transparencyPref, activity, transparencyToChange);
@@ -156,7 +156,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					});
 				} else {
 					mapPref.set(keys.get(which));
-					layers.getMapControlsLayer().showAndHideTransparencyBar(transparencyPref, transparencyToChange);
+					layers.getMapControlsLayer().showTransparencyBar(transparencyPref, transparencyToChange);
 					updateMapLayers(mapView, mapPref, layers);
 				}
 				dialog.dismiss();
@@ -179,6 +179,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					if(overlayLayer.getMap() != null){
 						settings.MAP_OVERLAY.set(null);
 						updateMapLayers(mapView, null, layers);
+						layers.getMapControlsLayer().hideTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
 					} else {
 						dialog.dismiss();
 						selectMapOverlayLayer(mapView, settings.MAP_OVERLAY, settings.MAP_OVERLAY_TRANSPARENCY, mapActivity, 
@@ -188,6 +189,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					if(underlayLayer.getMap() != null){
 						settings.MAP_UNDERLAY.set(null);
 						updateMapLayers(mapView, null, layers);
+						layers.getMapControlsLayer().hideTransparencyBar(settings.MAP_TRANSPARENCY);
 					} else {
 						dialog.dismiss();
 						selectMapOverlayLayer(mapView, settings.MAP_UNDERLAY,settings.MAP_TRANSPARENCY,

@@ -25,15 +25,13 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 
 public class MapControlsLayer extends OsmandMapLayer {
 
-	private static final int SHOW_SEEKBAR_MSG_ID = 2;
-	private static final int SHOW_SEEKBAR_DELAY = 7000;
-	private static final int SHOW_SEEKBAR_SECOND_DELAY = 25000;
-	
 	private static final int SHOW_ZOOM_LEVEL_MSG_ID = 3;
 	private static final int SHOW_ZOOM_LEVEL_DELAY = 2000;
 	
@@ -58,10 +56,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private Drawable rulerDrawable;
 	private TextPaint rulerTextPaint;
 	private final static double screenRulerPercent = 0.25;
-	private SeekBar transparencyBar;
 	private CommonPreference<Integer> settingsToTransparency;
 	private BaseMapLayer[] transparencyLayers;
 	private float scaleCoefficient;
+	
+	private SeekBar transparencyBar;
+	private LinearLayout transparencyBarLayout;
 	
 
 	public MapControlsLayer(MapActivity activity){
@@ -134,6 +134,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private ApplicationMode cacheApplicationMode = null;
 	private Drawable cacheAppModeIcon = null;
+	
 	private void drawApplicationMode(Canvas canvas) {
 		ApplicationMode  appMode = view.getSettings().getApplicationMode();
 		if(appMode != cacheApplicationMode){
@@ -325,58 +326,66 @@ public class MapControlsLayer extends OsmandMapLayer {
 	/////////////////  Transparency bar /////////////////////////
 	private void initTransparencyBar(final OsmandMapTileView view, FrameLayout parent) {
 		int minimumHeight = view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumHeight();
-		android.widget.FrameLayout.LayoutParams params;
-		transparencyBar = new SeekBar(view.getContext());
-		transparencyBar.setVisibility(View.GONE);
-		transparencyBar.setMax(255);
-		params = new FrameLayout.LayoutParams((int) (scaleCoefficient * 100), LayoutParams.WRAP_CONTENT,
+		android.widget.FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 				Gravity.BOTTOM | Gravity.CENTER);
 		params.setMargins(0, 0, 0, minimumHeight + 3);
-		parent.addView(transparencyBar, params);
+		transparencyBarLayout = new LinearLayout(view.getContext());
+		transparencyBarLayout.setVisibility(View.GONE);
+		parent.addView(transparencyBarLayout, params);
+
+		transparencyBar = new SeekBar(view.getContext());
+		transparencyBar.setMax(255);
 		transparencyBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-			
+
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
 			}
-			
+
 			@Override
 			public void onStartTrackingTouch(SeekBar seekBar) {
 			}
-			
+
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				if(settingsToTransparency != null && transparencyLayers != null){
+				if (settingsToTransparency != null && transparencyLayers != null) {
 					settingsToTransparency.set(progress);
-					for(BaseMapLayer base : transparencyLayers){
+					for (BaseMapLayer base : transparencyLayers) {
 						base.setAlpha(progress);
 					}
 					MapControlsLayer.this.view.refreshMap();
-					showAndHideTransparencyBar(settingsToTransparency, transparencyLayers, SHOW_SEEKBAR_SECOND_DELAY);
 				}
 			}
 		});
+		android.widget.LinearLayout.LayoutParams prms = new LinearLayout.LayoutParams((int) (scaleCoefficient * 100),
+				LayoutParams.WRAP_CONTENT);
+		transparencyBarLayout.addView(transparencyBar, prms);
+		ImageButton imageButton = new ImageButton(view.getContext());
+		prms = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		prms.setMargins((int) (2 * scaleCoefficient), (int) (2 * scaleCoefficient), 0, 0);
+		imageButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				transparencyBarLayout.setVisibility(View.GONE);
+			}
+		});
+		imageButton.setContentDescription(view.getContext().getString(R.string.close));
+		imageButton.setBackgroundResource(R.drawable.headliner_close);
+		transparencyBarLayout.addView(imageButton, prms);
 	}
 	
-	public void showAndHideTransparencyBar(CommonPreference<Integer> transparenPreference,
+	public void showTransparencyBar(CommonPreference<Integer> transparenPreference,
 			BaseMapLayer[] layerToChange) {
-		showAndHideTransparencyBar(transparenPreference, layerToChange, SHOW_SEEKBAR_DELAY);
-	}
-	private void showAndHideTransparencyBar(CommonPreference<Integer> transparenPreference,
-			BaseMapLayer[] layerToChange, int delay) {
-		transparencyBar.setVisibility(View.VISIBLE);
+		transparencyBarLayout.setVisibility(View.VISIBLE);
 		transparencyBar.setProgress(transparenPreference.get());
 		this.transparencyLayers = layerToChange;
 		this.settingsToTransparency = transparenPreference;
-		Message msg = Message.obtain(showUIHandler, new Runnable() {
-			@Override
-			public void run() {
-				transparencyBar.setVisibility(View.GONE);
-			}
-
-		});
-		msg.what = SHOW_SEEKBAR_MSG_ID;
-		showUIHandler.removeMessages(SHOW_SEEKBAR_MSG_ID);
-		showUIHandler.sendMessageDelayed(msg, delay);
+	}
+	
+	public void hideTransparencyBar(CommonPreference<Integer> transparenPreference) {
+		if(this.settingsToTransparency  == transparenPreference) {
+			transparencyBarLayout.setVisibility(View.GONE);
+			this.settingsToTransparency = null;
+		}
 	}
 	
 	
