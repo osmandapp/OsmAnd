@@ -23,7 +23,6 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -202,7 +201,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		final LatLon mapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
+//		final LatLon mapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 		favouritesAdapter.synchronizeGroups();
 		
 //		Sort Favs by distance on Search tab, but sort alphabetically here
@@ -283,6 +282,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 				}
 			});
 			builder.create().show();
+			editText.requestFocus();
 			return true;
 		}
 		if (aItem.getItemId() == DELETE_ITEM) {

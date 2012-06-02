@@ -120,8 +120,8 @@ public class MapActivityActions implements DialogProvider {
 				resources.getString(R.string.favorite_default_category));
 		args.putSerializable(KEY_FAVORITE, point);
 		final EditText editText =  (EditText) dialog.findViewById(R.id.Name);
-		editText.requestFocus();
 		editText.setText(point.getName());
+		editText.requestFocus();
 		final AutoCompleteTextView cat =  (AutoCompleteTextView) dialog.findViewById(R.id.Category);
 		cat.setText(point.getCategory());
 	}
