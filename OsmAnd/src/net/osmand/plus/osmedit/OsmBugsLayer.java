@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -54,6 +53,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	private final static int startZoom = 8;
 	private final int SEARCH_LIMIT = 100;
 	
+	private OsmBugsRemoteUtil osmbugsUtil;
 	private OsmandMapTileView view;
 	private Handler handlerToLoop;
 	
@@ -83,7 +83,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	
 	public OsmBugsLayer(MapActivity activity){
 		this.activity = activity;
-		
+		this.osmbugsUtil = new OsmBugsRemoteUtil();
 	}
 	
 	@Override
@@ -254,52 +254,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		cRightLongitude = 0;
 	}
 	
-	public boolean createNewBug(double latitude, double longitude, String text, String authorName){
-		StringBuilder b = new StringBuilder();
-		b.append("http://openstreetbugs.schokokeks.org/api/0.1/addPOIexec?"); //$NON-NLS-1$
-		b.append("lat=").append(latitude); //$NON-NLS-1$
-		b.append("&lon=").append(longitude); //$NON-NLS-1$
-		text = text + " [" + authorName + "]"; //$NON-NLS-1$ //$NON-NLS-2$
-		b.append("&text=").append(URLEncoder.encode(text)); //$NON-NLS-1$
-		b.append("&name=").append(URLEncoder.encode(authorName)); //$NON-NLS-1$
-		return editingPOI(b.toString(), "creating bug"); //$NON-NLS-1$
-	}
-	
-	public boolean addingComment(long id, String text, String authorName){
-		StringBuilder b = new StringBuilder();
-		b.append("http://openstreetbugs.schokokeks.org/api/0.1/editPOIexec?"); //$NON-NLS-1$
-		b.append("id=").append(id); //$NON-NLS-1$
-		text = text + " [" + authorName + "]"; //$NON-NLS-1$ //$NON-NLS-2$
-		b.append("&text=").append(URLEncoder.encode(text)); //$NON-NLS-1$
-		b.append("&name=").append(URLEncoder.encode(authorName)); //$NON-NLS-1$
-		return editingPOI(b.toString(), "adding comment"); //$NON-NLS-1$
-	}
-	
-	public boolean closingBug(long id){
-		StringBuilder b = new StringBuilder();
-		b.append("http://openstreetbugs.schokokeks.org/api/0.1/closePOIexec?"); //$NON-NLS-1$
-		b.append("id=").append(id); //$NON-NLS-1$
-		return editingPOI(b.toString(),"closing bug"); //$NON-NLS-1$
-	}
-	
-	
-	private boolean editingPOI(String urlStr, String debugAction){
-		try {
-			log.debug("Action " + debugAction + " " + urlStr); //$NON-NLS-1$ //$NON-NLS-2$
-			URL url = new URL(urlStr);
-			URLConnection connection = url.openConnection();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-			while(reader.readLine() != null){
-			}
-			log.debug("Action " + debugAction + " successfull"); //$NON-NLS-1$ //$NON-NLS-2$
-			return true;
-		} catch (IOException e) {
-			log.error("Error " +debugAction, e); //$NON-NLS-1$
-		} catch (RuntimeException e) {
-			log.error("Error "+debugAction, e); //$NON-NLS-1$
-		} 
-		return false;
-	}
 	
 	protected List<OpenStreetBug> loadingBugs(double topLatitude, double leftLongitude, double bottomLatitude,double rightLongitude){
 		List<OpenStreetBug> bugs = new ArrayList<OpenStreetBug>();
@@ -367,7 +321,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				String author = ((EditText)openBug.findViewById(R.id.AuthorName)).getText().toString();
 				// do not set name as author it is ridiculous in that case
 				((OsmandApplication) activity.getApplication()).getSettings().USER_OSM_BUG_NAME.set(author);
-				boolean bug = createNewBug(latitude, longitude, text, author);
+				boolean bug = osmbugsUtil.createNewBug(latitude, longitude, text, author);
 		    	if (bug) {
 		    		AccessibleToast.makeText(activity, activity.getResources().getString(R.string.osb_add_dialog_success), Toast.LENGTH_LONG).show();
 					clearCache();
@@ -406,7 +360,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				String text = ((EditText)view.findViewById(R.id.BugMessage)).getText().toString();
 				String author = ((EditText)view.findViewById(R.id.AuthorName)).getText().toString();
 				((OsmandApplication) OsmBugsLayer.this.activity.getApplication()).getSettings().USER_OSM_BUG_NAME.set(author);
-				boolean added = addingComment(bug.getId(), text, author);
+				boolean added = osmbugsUtil.addingComment(bug.getId(), text, author);
 		    	if (added) {
 		    		AccessibleToast.makeText(activity, activity.getResources().getString(R.string.osb_comment_dialog_success), Toast.LENGTH_LONG).show();
 					clearCache();
@@ -438,7 +392,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				OpenStreetBug bug = (OpenStreetBug) args.getSerializable(KEY_BUG);
-				boolean closed = closingBug(bug.getId());
+				boolean closed = osmbugsUtil.closingBug(bug.getId());
 		    	if (closed) {
 		    		AccessibleToast.makeText(activity, activity.getString(R.string.osb_close_dialog_success), Toast.LENGTH_LONG).show();
 					clearCache();
