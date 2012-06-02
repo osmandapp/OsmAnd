@@ -30,7 +30,7 @@
   <string name="map_settings_descr">Настроить отображение карты</string>
   <string name="osmand_rastermaps_plugin_description">Этот плагин позволяет использовать различные источники онлайн карты, а также подготовленные тайловый/растровые карты в качестве базовой карты или подложки. Карты могут быть подготовлены на компьютере и скопированы в папку osmand на scard.</string>
   <string name="osmand_rastermaps_plugin_name">Онлайн карты</string>
-  <string name="osmand_background_plugin_description">Этот плагин предоставляет навигацию и запись маршрутов в энергосберегающем режиме. Плагин работает в фоновом режиме и активизирует PGS через определенные интервалы времени для записи маршрута или воспроизведения голосовых команд.</string>
+  <string name="osmand_background_plugin_description">Этот плагин предоставляет навигацию и запись маршрутов в энергосберегающем режиме. Плагин работает в фоновом режиме и периодически активизирует GPS для записи маршрута или воспроизведения голосовых команд.</string>
   <string name="osmand_background_plugin_name">Действия в фоновом режиме</string>
   <string name="osmand_accessibility_description">Этот плагин содержит настройки для дополнительных возможностей (accessibility).</string>
   <string name="osmand_accessibility_name">Дополнительные возможности (Accessibility)</string>
@@ -400,7 +400,7 @@
   <string name="error_reading_gpx">Ошибка при чтении gpx файла</string>
   <string name="vector_data">Векторные osm карты</string>
   <string name="point_on_map">Координаты\n Ш %1$.5f Д %2$.5f</string>
-  <string name="osb_bug_name">Bug</string>
+  <string name="osb_bug_name">Ошибка</string>
   <string name="poi_context_menu_modify">Редактировать POI</string>
   <string name="poi_context_menu_delete">Удалить POI</string>
   <string name="rotate_map_compass_opt">По направлению компаса</string>
@@ -447,7 +447,7 @@
   <string name="background_service_int">Интервал позиционирования</string>
   <string name="background_service_provider_descr">Выберите источник позиционирования для сервиса</string>
   <string name="background_service_provider">Источник позиционирования</string>
-  <string name="background_router_service_descr">Включить фоновый сервис для обновления через долгий период времени</string>
+  <string name="background_router_service_descr">Запускает OsmAnd в фоновом режиме для отслеживания местоположения с выключенным экраном.</string>
   <string name="background_router_service">Сервис навигации</string>
   <string name="off_router_service_no_gps_available">Сервис маршрутизации OsmAnd включен, если отключить позиционирование, он перестанет вести по маршруту.</string>
   <string name="routing_settings_descr">Изменить настройки навигации</string>
@@ -803,9 +803,9 @@
   <string name="accessibility_preferences_descr">Настройки для невизуального доступа</string>
   <string name="accessibility_preferences">Специальные возможности</string>
   <string name="tip_rotation_switching">Поворот карты</string>
-  <string name="tip_rotation_switching_t">\tYou can choose whether and how the map display is rotated in \'Settings\' -&gt; \'Map appearance\' -&gt; \'Map rotation\'. \n\tThe choices are: \n\t\'Don\'t rotate\' - Map will not be rotated. North will be always up \n\t\'To direction of movement\' - Map will continuously be aligned with your heading \n\t\'To compass\' - Map will continuously be aligned with device compass reading \n\tHint: To quickly change between rotation by compass and the one you selected in settings, you can simply tap on the compass needle in map view.</string>
+  <string name="tip_rotation_switching_t">\tВы можете выбрать как будет вращаться карта в \'Настройки\' -&gt; \'Внешний вид\' -&gt; \'Вращать карту\'. \n\tВарианты: \n\t\'Не вращать\' - Карта не будет вращаться. Север всегда будет вверху. \n\t\'По направлению движения\' - Карта будет поворачиваться по ходу вашего движения. \n\t\'По направлению компаса\' - Карта будет поворачиваться согласно показаниям компаса устройства. \n\tПодсказка: Чтобы быстро переключаться между вращением по направлению компаса и тем режимом что вы выбрали, нажмите на изображение стрелки компаса на карте.</string>
   <string name="tip_day_night_mode">Дневной-Ночной режим</string>
-  <string name="tip_day_night_mode_t">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker). \n\tNight colors are safer for night driving. \n\tYou can set a policy for day/night switching in \'Settings\' -&gt; \'Map appearance\' -&gt;\'Day/night mode\'. \n\tChoices are: \n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default) \n\t\'Day\' - always use day mode \n\t\'Night\' - always use night mode \n\t\'Light sensor\' - map appearance is controlled by light sensor of your device (only if equipped)</string>
+  <string name="tip_day_night_mode_t">\tДля некоторых векторных карт внешний вид карты может меняться между Дневной(ярче) и Ночной (темнее). \n\tНочные цвета безопаснее для вождения ночью. \n\tВы можете установить правило переключния между дневным и ночным режимами в \'Настройки\' -&gt; \'Внешний вид\' -&gt;\'Дневной/ночной режим\'. \n\tВарианты: \n\t\'Восход/закат\' - автоматический режим, использующий положение солнца (по умолчанию) \n\t\'Дневной\' - всегда использовать Дневной режим\n\t\'Ночной\' - всегда использовать Ночной режим\n\t\'Датчик света\' - режим контролируется показаниями датчика света устройства (если датчик присутствует)</string>
   <string name="pref_vector_rendering">Настройки офлайн рендеринга</string>
   <string name="pref_overlay">Дополнительные слои</string>
   <string name="pref_raster_map">Настройки онлайн карт</string>
@@ -823,12 +823,12 @@
   <string name="file_with_name_already_exists">Файл с таким именем уже существует</string>
   <string name="favourites_edit_dialog_name">Имя</string>
   <string name="favourites_edit_dialog_category">Категория</string>
-  <string name="tip_update_index">Update of Offline Data</string>
-  <string name="tip_update_index_t">\tHaving up-to-date map data is essential. Osmand provides a download manager which can check for available offline data updates. \n\tTo check for updates go to \'Settings\' -&gt; \'Offline data\' -&gt; \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -&gt; \'Filter downloaded\' to indicate updates only for data already on your device. \n\tThe availability of updates is depicted by the following colors: \n\t\'Green\' - indicates data files identical on device and server \n\t\'Blue\' - indicates available updates on server</string>
-  <string name="tip_location_sharing">Location Sharing</string>
+  <string name="tip_update_index">Обновление офлайн данных</string>
+  <string name="tip_update_index_t">\tВажно иметь актуальные данные карты. Osmand имеет менеджер офлайн данных, который может проверять обновления загруженных данных. \n\tЧтобы проверить обновления перейдите в \'Настройки\' -&gt; \'Данные\' -&gt; \'Загрузить данные\'. После загрузки списка регионов из интернета вы можете выбрать \'Меню\' -&gt; \'Загруженные\' чтобы отобразить обновления только для уже загруженных данных. \n\tДоступность обновлений отображается цветами: \n\t\'Зелёный\' - данные на устройстве и на сервере идентичны \n\t\'Синий\' - доступны обновления</string>
+  <string name="tip_location_sharing">Поделиться местоположением</string>
   <string name="tip_location_sharing_t">\tYou can share the location of interesting places on your trip with family or friends. \n\tTo share any location you want: \n\tUse \'Map context menu\' -&gt; \'Share location\' menu. \n\tThen select a way to share your location. The choices are: E-Mail, SMS(text), or just copy location coordinates to clipboard.</string>
-  <string name="tip_favorites">Favorite Points</string>
+  <string name="tip_favorites">Избранные точки</string>
   <string name="tip_favorites_t">\tFrequently used points can be saved as Favorites. \n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Menu\' -&gt; \'Favorites\'. \n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to set it as desination, Edit or Delete it. \n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' -&gt;\'Define view\'.</string>
   <string name="contribution_activity">Special activity for contribution version</string>
   <string name="process_navigation_service">OsmAnd navigation service</string>
-<string name="offline_navigation_not_available">Osmand offline navigation is temporarily not available.</string><string name="left_side_navigation">Left Side Navigation</string><string name="left_side_navigation_descr">Turn on if you navigate in left side countries</string></resources>
+<string name="offline_navigation_not_available">Оффлайн навигация Osmand временно недоступна.</string><string name="left_side_navigation">Левосторонняя навигация</string><string name="left_side_navigation_descr">Включите, если пользуетесь навигацией в странах с левосторонним движением</string></resources>
