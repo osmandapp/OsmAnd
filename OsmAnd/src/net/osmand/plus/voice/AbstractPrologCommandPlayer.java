@@ -11,6 +11,8 @@ import java.util.List;
 
 import net.osmand.LogUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 
@@ -48,14 +50,14 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 	/** Must be sorted array! */
 	private final int[] sortedVoiceVersions;
 
-	protected AbstractPrologCommandPlayer(Context ctx, String voiceProvider, String configFile, int[] sortedVoiceVersions)
+	protected AbstractPrologCommandPlayer(Context ctx, OsmandSettings settings, String voiceProvider, String configFile, int[] sortedVoiceVersions)
 		throws CommandPlayerException 
 	{
 		this.sortedVoiceVersions = sortedVoiceVersions;
 		long time = System.currentTimeMillis();
 		try {
 			this.ctx = ctx;
-			prologSystem = new Prolog(getLibraries()); 
+			prologSystem = new Prolog(getLibraries());
 		} catch (InvalidLibraryException e) {
 			log.error("Initializing error", e); //$NON-NLS-1$
 			throw new RuntimeException(e);
@@ -63,7 +65,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 		if (log.isInfoEnabled()) {
 			log.info("Initializing prolog system : " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
 		}
-		init(voiceProvider, configFile);
+		init(voiceProvider, settings, configFile);
 	}
 	
 	public String[] getLibraries(){
@@ -71,7 +73,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 					"alice.tuprolog.lib.ISOLibrary"};
 	}
 
-	private void init(String voiceProvider, String configFile) throws CommandPlayerException {
+	private void init(String voiceProvider, OsmandSettings settings, String configFile) throws CommandPlayerException {
 		prologSystem.clearTheory();
 		voiceDir = null;
 		if (voiceProvider != null) {
@@ -99,7 +101,10 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 				config = new FileInputStream(new File(voiceDir, configFile)); //$NON-NLS-1$
 				// }
 				if (!wrong) {
-					prologSystem.setTheory(new Theory(config));
+					MetricsConstants mc = settings.METRIC_SYSTEM.get();
+					prologSystem.addTheory(new Theory("measure('"+mc.toTTSString()+"')."));
+					prologSystem.addTheory(new Theory(config));
+					
 				}
 			} catch (InvalidTheoryException e) {
 				log.error("Loading voice config exception " + voiceProvider, e); //$NON-NLS-1$

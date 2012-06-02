@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import net.osmand.LogUtil;
-import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 
 import org.apache.commons.logging.Log;
 
@@ -34,13 +34,12 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	private int streamType;
 
 	
-	public MediaCommandPlayerImpl(Context ctx, String voiceProvider)
+	public MediaCommandPlayerImpl(Context ctx, OsmandSettings settings, String voiceProvider)
 		throws CommandPlayerException
 	{
-		super(ctx, voiceProvider, CONFIG_FILE, MEDIA_VOICE_VERSION);
+		super(ctx, settings, voiceProvider, CONFIG_FILE, MEDIA_VOICE_VERSION);
 		mediaPlayer = new MediaPlayer();
-		OsmandApplication osmApp = (OsmandApplication) ctx.getApplicationContext();
-		this.streamType = osmApp.getSettings().AUDIO_STREAM_GUIDANCE.get();  
+		this.streamType = settings.AUDIO_STREAM_GUIDANCE.get();  
 		mediaPlayer.setAudioStreamType(streamType);
 	}
 	

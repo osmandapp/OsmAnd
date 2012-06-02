@@ -1266,17 +1266,24 @@ public class OsmandSettings {
 	}
 	
 	public enum MetricsConstants {
-	    KILOMETERS_AND_METERS(R.string.si_km_m),
-		MILES_AND_YARDS(R.string.si_mi_yard),
-		MILES_AND_FOOTS(R.string.si_mi_foots);
+	    KILOMETERS_AND_METERS(R.string.si_km_m,"km-m"),
+		MILES_AND_YARDS(R.string.si_mi_yard,"mi-y"),
+		MILES_AND_FOOTS(R.string.si_mi_foots,"mi-f");
 		
 		private final int key;
-		MetricsConstants(int key) {
+		private final String ttsString;
+
+		MetricsConstants(int key, String ttsString) {
 			this.key = key;
+			this.ttsString = ttsString;
 		}
 		
 		public String toHumanString(Context ctx){
 			return ctx.getResources().getString(key);
+		}
+		
+		public String toTTSString(){
+			return ttsString;
 		}
 		
 	}

@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import net.osmand.Algoritms;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsActivity;
 import alice.tuprolog.Struct;
@@ -57,9 +58,9 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	private String language;
 	private HashMap<String, String> params = new HashMap<String, String>();
 
-	protected TTSCommandPlayerImpl(Activity ctx, String voiceProvider)
+	protected TTSCommandPlayerImpl(Activity ctx, OsmandSettings settings, String voiceProvider)
 			throws CommandPlayerException {
-		super(ctx, voiceProvider, CONFIG_FILE, TTS_VOICE_VERSION);
+		super(ctx, settings, voiceProvider, CONFIG_FILE, TTS_VOICE_VERSION);
 		final Term langVal = solveSimplePredicate("language");
 		if (langVal instanceof Struct) {
 			language = ((Struct) langVal).getName();
@@ -70,7 +71,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		}
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
 		initializeEngine(app, ctx);
-		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, app.getSettings().AUDIO_STREAM_GUIDANCE.get().toString());
+		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, settings.AUDIO_STREAM_GUIDANCE.get().toString());
 	}
 	
 	
@@ -87,7 +88,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		}
 	}
 
-	private void initializeEngine(final OsmandApplication ctx, final Activity act)
+	private void initializeEngine(final Context ctx, final Activity act)
 	{
 		if (mTts != null && mTtsContext != ctx) {
 			internalClear();
