@@ -1005,4 +1005,5 @@
 <string name="edit_filter_create_message">Filter {0} has been created</string>
 <string name="default_buttons_selectall">Select All</string>
 
+<string name="poi_search_desc">POI - Point Of interest</string>
 </resources>
