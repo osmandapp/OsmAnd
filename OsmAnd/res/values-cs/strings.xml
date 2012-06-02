@@ -73,8 +73,8 @@
   <string name="accessibility_preferences">Usnadnění</string>
   <string name="use_fluorescent_overlays">Fluorescentní barvy</string>
   <string name="use_fluorescent_overlays_descr">Použít fluorescentní barvy pro zobrazení cest a tras</string>
-  <string name="offline_poi_edition">Offline editace POI</string>
-  <string name="offline_poi_edition_descr">Vždy používat offline editaci POI</string>
+  <string name="offline_edition">Offline editace</string>
+  <string name="offline_edition_descr">Vždy používat offline editaci</string>
   <string name="tip_recent_changes_0_7_1_t">"Změny ve verzi 0.7.1 : \n\t- offline editace POI \n\t- přímý přenos pozice - pravidelně posílá souřadnice na webový server (návod jak nastavit vlastní webovou služby je v HowTo článcích) \n\t- Zobrazení momentálně zaznamenávané trasy \n\t- Detekce směru pohybu: indikace a hlášení \'Otočte se zpět\' v případě pohybu směrem od cíle nebo po minutí odbočky \n\t- Obnovené hlasové hlášení \'Přepočítávám cestu\' \n\t- Optická indikace blížící se odbočky během 100m pomocí změny barvy šipky \n\t- Zobrazení aktuálnosti offline dat u deaktivovaných souborů (sekce Download) pomocí tmavě zelené a tmavě modré \n\t- Další změny \n\nSledujte také stránky české podpory osmand.cz "</string>
   <string name="update_poi_does_not_change_indexes">Změny POI bodů v aplikaci nemají vliv na zobrazení stažených map, změny se ukládají do lokálního souboru.</string>
   <string name="local_openstreetmap_uploading_poi">Odesílám POI…</string>

@@ -69,8 +69,8 @@
   <string name="info_button">Информация</string>
   <string name="use_fluorescent_overlays">Флуорисцентные цвета</string>
   <string name="use_fluorescent_overlays_descr">Использовать флуорисцентные цвета для отображения треков</string>
-  <string name="offline_poi_edition">Offline POI редактирование</string>
-  <string name="offline_poi_edition_descr">Всегда использовать offline POI редактирование</string>
+  <string name="offline_edition">Offline редактирование</string>
+  <string name="offline_edition_descr">Всегда использовать offline редактирование</string>
   <string name="tip_recent_changes_0_7_1_t">"Изменения в 0.7.1: \n\t- Offline POI редактирование \n\t- Live Tracking функциональность (использование и настройка web service в HowTo en) \n\t- Показывать текущий записываемый трек на карте \n\t- Другие изменения "</string>
   <string name="update_poi_does_not_change_indexes">Изменение POI в приложении не меняет POI загруженные из интернета, однако все изменения сохраняются в локальный файл.</string>
   <string name="local_openstreetmap_uploading_poi">Загрузка POI</string>

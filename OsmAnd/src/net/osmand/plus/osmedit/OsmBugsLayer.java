@@ -53,7 +53,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	private final static int startZoom = 8;
 	private final int SEARCH_LIMIT = 100;
 	
-	private OsmBugsRemoteUtil osmbugsUtil;
+	private final OsmBugsUtil osmbugsUtil;
 	private OsmandMapTileView view;
 	private Handler handlerToLoop;
 	
@@ -83,7 +83,13 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	
 	public OsmBugsLayer(MapActivity activity){
 		this.activity = activity;
-		this.osmbugsUtil = new OsmBugsRemoteUtil();
+
+		OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
+		if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)){
+			this.osmbugsUtil = new OsmBugsLocalUtil(activity);
+		} else {
+			this.osmbugsUtil = new OsmBugsRemoteUtil();
+		}
 	}
 	
 	@Override

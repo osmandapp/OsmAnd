@@ -76,7 +76,7 @@ public class EditingPOIActivity implements DialogProvider {
 		this.ctx = uiContext;
 
 		settings = ((OsmandApplication) uiContext.getApplication()).getSettings();
-		if(settings.OFFLINE_POI_EDITION.get() || !settings.isInternetConnectionAvailable(true)){
+		if(settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)){
 			this.openstreetmapUtil = new OpenstreetmapLocalUtil(ctx);
 		} else {
 			this.openstreetmapUtil = new OpenstreetmapRemoteUtil(ctx, ctx.getMapView());

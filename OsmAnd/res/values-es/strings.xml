@@ -2,8 +2,8 @@
 <resources>
 <string name="use_fluorescent_overlays">Usar sobrepuestos fluorescentes</string>
 <string name="use_fluorescent_overlays_descr">Usar colores fluorescentes para mostrar trazas y rutas</string>
-<string name="offline_poi_edition">Edición de POI sin conexión</string>
-<string name="offline_poi_edition_descr">Usar siempre edición de POI sin conexión de datos</string>
+<string name="offline_edition">Edición sin conexión</string>
+<string name="offline_edition_descr">Usar siempre edición sin conexión de datos</string>
 
 <string name="tip_recent_changes_0_7_1_t">Cambios en 0.7.1 :
 \n\t- Edición de POI sin conexión

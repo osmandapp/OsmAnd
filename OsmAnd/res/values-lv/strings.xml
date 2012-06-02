@@ -87,8 +87,8 @@
   <string name="rendering_out_of_memory">Nepietiek procesu atmiņas, lai attēlotu izvēlēto apgabalu</string>
   <string name="use_fluorescent_overlays">Flurescentie slāņi</string>
   <string name="use_fluorescent_overlays_descr">Lietot flurescentās krāsas, lai attēlotu pēdas un maršrutus</string>
-  <string name="offline_poi_edition">Bezsaistes POI rediģēšana</string>
-  <string name="offline_poi_edition_descr">Viemēr pielietot bezsaistes POI rediģēšanu</string>
+  <string name="offline_edition">Bezsaistes rediģēšana</string>
+  <string name="offline_edition_descr">Viemēr pielietot bezsaistes rediģēšanu</string>
   <string name="tip_recent_changes_0_7_1_t">"Jaumi 0.7.1 versijā : \n\t- Bezsaistes POI rediģēšana \n\t- Sekošanas opcija - periodiska koordināšu sūtīšana uz web servisu. (kā izveidot savu web servisu var izlasīt HowTo) \n\t- Rādīt pēdas kuras tiek ierakstītas \n\t- Virziena noteikšana: Ja brauciet pretējā virzienā vai esiet pabraucis garām pagriezienam tiek paziņots \'Izpildiet U-pagriezienu\' \n\t- Jauns bals ziņojums \'Maršruts pārrēķināts\' \n\t- Tūlītēja (100m)pagrieziena indikācija ar virziena bultas krāsas maiņu \n\t- Deaktivizēto indeksu failu aktualitāte tiek parādīta lejuplādes ekrānā ar tumši zaļu un tumši zilu \n\t- Citas izmaiņas "</string>
   <string name="update_poi_does_not_change_indexes">POI izmaiņas aplikācijā neietekmē lejuplādētos kartes attēlus, izmaiņas tiek saglabātas atsevišķā failā.</string>
   <string name="local_openstreetmap_uploading_poi">Lejuplādē POI…</string>

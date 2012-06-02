@@ -2,8 +2,8 @@
 <resources>
   <string name="use_fluorescent_overlays">Overlay fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per mostrare tracce e percorsi</string>
-  <string name="offline_poi_edition">Editing offline dei PDI</string>
-  <string name="offline_poi_edition_descr">Usa sempre l\'editing offline dei PDI</string>
+  <string name="offline_edition">Editing offline</string>
+  <string name="offline_edition_descr">Usa sempre l\'editing offline</string>
   <string name="tip_recent_changes_0_7_1_t">"Cambiamenti nella versione 0.7.1 : \n\t- Editing offline dei PDI \n\t- Opzione per il Live Tracking - invia le coordinate periodicamente ad un servizio web (guarda come impostare il tuo servizio personale negli articoli dell\'HowTo) \n\t- Mostra sulla mappa la traccia registrata \n\t- Individuazione della direzione: \'Esegui una svolta ad U\' è indicato e annunciato quando ci si dirige in direzione opposta o dopo aver sbagliato una svolta \n\t- Nuovo avviso vocale \'Ricalcolo percorso\' \n\t- Indicazione visiva di una svolta imminente entro 100 metri tramite il cambio del colore della freccia della direzione \n\t- Viene mostrato in verde e blu scuro nella schermata di Download l\'età dei file di indice disattivati \n\t- Altri cambiamenti "</string>
   <string name="update_poi_does_not_change_indexes">I cambiamenti dei PDI all\'interno dell\'applicazione non si riflettono nelle mappe scaricate, i cambiamenti sono salvati in un file locale.</string>
   <string name="local_openstreetmap_uploading_poi">Caricando i PDI…</string>
