@@ -14,6 +14,9 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPopupMenu;
+
+import net.osmand.osm.LatLon;
 
 public class MapInformationLayer implements MapPanelLayer {
 
@@ -73,6 +76,25 @@ public class MapInformationLayer implements MapPanelLayer {
 		areaButton.setAlignmentY(Component.TOP_ALIGNMENT);
 		zoomOut.setAlignmentY(Component.TOP_ALIGNMENT);
 		zoomIn.setAlignmentY(Component.TOP_ALIGNMENT);
+		
+		JPopupMenu popupMenu = map.getPopupMenu();
+		Action selectMenu= new AbstractAction("Select point...") {
+			private static final long serialVersionUID = -3022499800877796459L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SelectPointDialog dlg = new SelectPointDialog(map, new LatLon(map.getLatitude(), map.getLongitude()));
+				dlg.showDialog();
+				LatLon l = dlg.getResult();
+				if(l != null){
+					map.setLatLon(l.getLatitude(), l.getLongitude());
+					map.setZoom(15);
+				}
+			}
+
+			
+		};
+		popupMenu.add(selectMenu);
 
 	}
 	
