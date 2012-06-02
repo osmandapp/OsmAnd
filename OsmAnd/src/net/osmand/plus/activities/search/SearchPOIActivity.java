@@ -37,10 +37,12 @@ import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandListActivity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
@@ -61,9 +63,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -110,6 +114,9 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	private boolean sensorRegistered = false;
 	private Handler uiHandler;
 	private OsmandSettings settings;
+	private Path directionPath = new Path();
+	private float width = 24;
+	private float height = 24;
 	
 	// never null represents current running task or last finished
 	private SearchAmenityTask currentSearchTask = new SearchAmenityTask(null); 
@@ -130,6 +137,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		searchFilterLayout = findViewById(R.id.SearchFilterLayout);
 		showOnMap = (ImageButton) findViewById(R.id.ShowOnMap);
 		showFilter = (ImageButton) findViewById(R.id.ShowFilter);
+		directionPath = createDirectionPath();
 		
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		
@@ -230,6 +238,33 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		});
 	}
 	
+	private Path createDirectionPath() {
+		int h = 15;
+		int w = 4;
+		float sarrowL = 8; // side of arrow
+		float harrowL = (float) Math.sqrt(2) * sarrowL; // hypotenuse of arrow
+		float hpartArrowL = (float) (harrowL - w) / 2;
+		Path path = new Path();
+		path.moveTo(width / 2, height - (height - h) / 3);
+		path.rMoveTo(w / 2, 0);
+		path.rLineTo(0, -h);
+		path.rLineTo(hpartArrowL, 0);
+		path.rLineTo(-harrowL / 2, -harrowL / 2); // center
+		path.rLineTo(-harrowL / 2, harrowL / 2);
+		path.rLineTo(hpartArrowL, 0);
+		path.rLineTo(0, h);
+		
+		Matrix pathTransform = new Matrix();
+		WindowManager mgr = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+		DisplayMetrics dm = new DisplayMetrics();
+		mgr.getDefaultDisplay().getMetrics(dm);
+		pathTransform.postScale(dm.density, dm.density);
+		path.transform(pathTransform);
+		width *= dm.density;
+		height *= dm.density;
+		return path;
+	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -868,11 +903,8 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	
 	class DirectionDrawable extends Drawable {
 		Paint paintRouteDirection;
-		Path path = new Path();
-		private float angle;
 		
-		private final int width = 24;
-		private final int height = 24;
+		private float angle;
 		
 		public DirectionDrawable(){
 			paintRouteDirection = new Paint();
@@ -880,20 +912,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 			paintRouteDirection.setColor(getResources().getColor(R.color.poi_direction));
 			paintRouteDirection.setAntiAlias(true);
 			
-			int h = 15;
-			int w = 4;
-			float sarrowL = 8; // side of arrow
-			float harrowL = (float) Math.sqrt(2) * sarrowL; // hypotenuse of arrow
-			float hpartArrowL = (float) (harrowL - w) / 2;
 			
-			path.moveTo(width / 2, height - (height - h) / 3);
-			path.rMoveTo(w / 2, 0);
-			path.rLineTo(0, -h);
-			path.rLineTo(hpartArrowL, 0);
-			path.rLineTo(-harrowL / 2, -harrowL / 2); // center
-			path.rLineTo(-harrowL / 2, harrowL / 2);
-			path.rLineTo(hpartArrowL, 0);
-			path.rLineTo(0, h);
 		}
 		
 		public void setOpenedColor(int opened){
@@ -914,7 +933,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		@Override
 		public void draw(Canvas canvas) {
 			canvas.rotate(angle, width/2, height/2);
-			canvas.drawPath(path, paintRouteDirection);
+			canvas.drawPath(directionPath, paintRouteDirection);
 		}
 
 		@Override

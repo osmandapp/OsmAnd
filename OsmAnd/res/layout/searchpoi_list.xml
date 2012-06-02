@@ -4,7 +4,7 @@
 	android:orientation="horizontal">
 
 	<ImageView android:id="@+id/poi_icon" android:layout_width="26dp" android:layout_height="26dp"
-		android:paddingLeft="0dp" android:paddingRight="0dp"
+		android:layout_marginLeft="2dp" android:layout_marginTop="2dp"
 		android:paddingTop="0dp" />
 	
 	<TextView android:id="@+id/poidistance_label"
