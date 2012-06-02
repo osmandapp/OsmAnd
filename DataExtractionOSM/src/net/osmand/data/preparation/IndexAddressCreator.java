@@ -807,7 +807,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		mapConnection.commit();
 
 		writer.startWriteAddressIndex(regionName);
-		Map<CityType, Collection<City>> cities = readCities(mapConnection);
+		Map<CityType, List<City>> cities = readCities(mapConnection);
 		PreparedStatement streetstat = mapConnection.prepareStatement(//
 				"SELECT A.id, A.name, A.name_en, A.latitude, A.longitude, "+ //$NON-NLS-1$
 				"B.id, B.name, B.name_en, B.latitude, B.longitude, B.postcode, A.cityPart, "+ //$NON-NLS-1$
@@ -1138,16 +1138,12 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	}
 	
 
-	public Map<CityType, Collection<City>> readCities(Connection c) throws SQLException{
-		Map<CityType, Collection<City>> cities = new LinkedHashMap<City.CityType, Collection<City>>();
+	public Map<CityType, List<City>> readCities(Connection c) throws SQLException{
+		Map<CityType, List<City>> cities = new LinkedHashMap<City.CityType, List<City>>();
 		for(CityType t : CityType.values()) {
-			cities.put(t, new TreeSet<City>(new Comparator<City>() {
-				@Override
-				public int compare(City o1, City o2) {
-					return Collator.getInstance().compare(o1.getName(), o2.getName());
-				}
-			}));
+			cities.put(t, new ArrayList<City>());
 		}
+		
 		Statement stat = c.createStatement();
 		ResultSet set = stat.executeQuery("select id, latitude, longitude , name , name_en , city_type from city"); //$NON-NLS-1$
 		while(set.next()){
@@ -1169,6 +1165,16 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		}
 		set.close();
 		stat.close();
+		
+		Comparator<City> comparator = new Comparator<City>() {
+			@Override
+			public int compare(City o1, City o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}
+		};
+		for(List<City> t : cities.values()) {
+			Collections.sort(t, comparator);
+		}
 		return cities;
 	}
 }
