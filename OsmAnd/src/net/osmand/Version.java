@@ -58,6 +58,11 @@ public class Version {
 		
 	}
 	
+	public static boolean isDeveloperVersion(Context ctx){
+		return "osmand~".equalsIgnoreCase(getAppName(ctx));
+		
+	}
+	
 	public static String getVersionForTracker(Context ctx) {
 		String v = Version.getAppName(ctx);
 		if(Version.isProductionVersion(ctx)){
