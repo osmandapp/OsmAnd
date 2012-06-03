@@ -1408,6 +1408,10 @@ public class BinaryMapIndexReader {
 				onewayReverseAttribute = id;
 			} else if("ref".equals(tag)){
 				refEncodingType = id;
+			} else if("tunnel".equals(tag)){
+				negativeLayers.add(id);
+			} else if("bridge".equals(tag)){
+				positiveLayers.add(id);
 			} else if("layer".equals(tag)){
 				if(val != null && !val.equals("0") && val.length() > 0) {
 					if(val.startsWith("-")) {
