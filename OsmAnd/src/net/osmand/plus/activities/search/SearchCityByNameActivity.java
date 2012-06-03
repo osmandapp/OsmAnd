@@ -28,7 +28,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	@Override
 	protected Comparator<? super City> createComparator() {
 		final Collator cs = Collator.getInstance();
-		final boolean en = region.useEnglishNames();
+		final boolean en = getMyApplication().getSettings().usingEnglishNames();
 		final StringMatcherMode startsWith = CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STARTS_WITH;
 		return new CityComparator(startsWith, cs,  en);
 	}
