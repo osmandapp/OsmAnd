@@ -178,6 +178,7 @@
 			 <filter layer="1" tag="highway" value="cycleway" order="67"/>
 			<filter appMode="pedestrian" tag="highway" value="cycleway" order="59"/>
 			<filter appMode="bicycle" tag="highway" value="cycleway" order="60"/>
+			<filter appMode="bicycle" tag="cycleway" value="" order="60"/>
 			<filter tag="highway" value="cycleway" order="39"/>
 
 			<!-- byway is deprecated tag, describes UK-only road. Proper tag should be highway=track or highway=path -->
@@ -1191,6 +1192,12 @@
 				<filter hmRendered="true" minzoom="13" strokeWidth="1" />
 				<filter minzoom="14" strokeWidth="1" />
 			</filter>
+			
+			<group>
+				<filter tag="cycleway" value="lane"/>
+				<filter tag="cycleway" value="opposite_lane"/>
+				<groupFilter  minzoom="13" appMode="bicycle" color="#0000ff" pathEffect="8_4" strokeWidth="1" />
+			</group>
 
 			<filter tag="highway" value="footway" color="#fa5073" pathEffect="2_2" >
 				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2" pathEffect="10_3"/>
