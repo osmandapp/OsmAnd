@@ -1,6 +1,8 @@
 package net.osmand.plus.activities.search;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
@@ -14,6 +16,18 @@ import android.widget.Toast;
 public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<RegionAddressRepository> {
 	
 	@Override
+	protected Comparator<? super RegionAddressRepository> createComparator() {
+		return new Comparator<RegionAddressRepository>() {
+			Collator col = Collator.getInstance();
+			@Override
+			public int compare(RegionAddressRepository lhs,
+					RegionAddressRepository rhs) {
+				return col.compare(lhs.getName(), rhs.getName());
+			}
+		};
+	}
+	
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		((TextView)findViewById(R.id.Label)).setText(R.string.choose_available_region);
@@ -21,7 +35,7 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 			AccessibleToast.makeText(this, R.string.none_region_found, Toast.LENGTH_LONG).show();
 		}
 		initialListToFilter = new ArrayList<RegionAddressRepository>(((OsmandApplication)getApplication()).getResourceManager().getAddressRepositories());
-		NamesAdapter namesAdapter = new NamesAdapter(new ArrayList<RegionAddressRepository>(initialListToFilter)); //$NON-NLS-1$
+		NamesAdapter namesAdapter = new NamesAdapter(new ArrayList<RegionAddressRepository>(initialListToFilter),createComparator()); //$NON-NLS-1$
 		setListAdapter(namesAdapter);
 	}
 	

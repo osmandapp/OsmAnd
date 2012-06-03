@@ -2,12 +2,15 @@ package net.osmand.plus.activities.search;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.ResultMatcher;
 import net.osmand.data.City;
+import net.osmand.data.MapObjectComparator;
 import net.osmand.data.Street;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -21,6 +24,10 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	private RegionAddressRepository region;
 	private City city;
 	
+	@Override
+	protected Comparator<? super Street> createComparator() {
+		return new MapObjectComparator(getMyApplication().getSettings().usingEnglishNames());
+	}
 	
 	@Override
 	public AsyncTask<Object, ?, ?> getInitializeTask() {
@@ -67,24 +74,22 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	
 	
 	@Override
-	protected void filterLoop(String query, List<Street> list) {
+	protected void filterLoop(String query, Collection<Street> list) {
 		boolean emptyQuery = query == null || query.length() == 0;
-		for (int i = 0; i < list.size(); i++) {
+		for (Street obj : list) {
 			if (namesFilter.isCancelled) {
 				break;
 			}
-			Street obj = list.get(i);
 			if (emptyQuery || CollatorStringMatcher.cmatches(collator, getText(obj), query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
 				Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, obj);
 				msg.sendToTarget();
 			}
 		}
 		if (!emptyQuery) {
-			for (int i = 0; i < list.size(); i++) {
+			for (Street obj : list) {
 				if (namesFilter.isCancelled) {
 					break;
 				}
-				Street obj = list.get(i);
 				if (CollatorStringMatcher.cmatches(collator, getText(obj), query, StringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING)) {
 					Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, obj);
 					msg.sendToTarget();

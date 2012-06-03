@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.app.ListActivity;
 import android.widget.ListView;
@@ -13,5 +14,9 @@ public abstract class OsmandListActivity extends ListActivity {
 		ListView view = getListView();
 		view.setCacheColorHint(getResources().getColor(R.color.activity_background));
 		view.setDivider(getResources().getDrawable(R.drawable.tab_text_separator));
+	}
+	
+	protected OsmandApplication getMyApplication() {
+		return (OsmandApplication) getApplication();
 	}
 }

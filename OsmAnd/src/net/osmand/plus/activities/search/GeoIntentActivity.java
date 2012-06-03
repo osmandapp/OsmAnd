@@ -270,10 +270,6 @@ public class GeoIntentActivity extends OsmandListActivity {
 		return getMyApplication().getResourceManager();
 	}
 
-	private OsmandApplication getMyApplication() {
-		return ((OsmandApplication) getApplication());
-	}
-
 	private class GeoPointSearch implements MyService {
 
 		private MapObject point;

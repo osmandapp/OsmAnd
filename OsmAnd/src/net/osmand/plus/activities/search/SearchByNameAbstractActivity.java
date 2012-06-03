@@ -2,7 +2,11 @@ package net.osmand.plus.activities.search;
 
 import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -52,8 +56,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	protected Collator collator;
 	protected NamesFilter namesFilter;
 	private String currentFilter = "";
-	private static final Log log = LogUtil.getLog(SearchByNameAbstractActivity.class); 
-	
+	private static final Log log = LogUtil.getLog(SearchByNameAbstractActivity.class);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +68,10 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		initializeTask = getInitializeTask();
 		uiHandler = new UIUpdateHandler();
 		namesFilter = new NamesFilter();
-		NamesAdapter namesAdapter = new NamesAdapter(new ArrayList<T>()); //$NON-NLS-1$
+		NamesAdapter namesAdapter = new NamesAdapter(new ArrayList<T>(),createComparator()); //$NON-NLS-1$
 		setListAdapter(namesAdapter);
 		
-		collator = Collator.getInstance();
+		collator = Collator.getInstance(Locale.US);
  	    collator.setStrength(Collator.PRIMARY); //ignores also case
  	    
 		
@@ -141,6 +144,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		querySearch(searchText.getText().toString());
 	}
 	
+	protected abstract Comparator<? super T> createComparator();
 
 	public abstract String getText(T obj);
 	
@@ -188,12 +192,11 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	}
 	
 	
-	protected void filterLoop(String query, List<T> list) {
-		for (int i = 0; i < list.size(); i++) {
+	protected void filterLoop(String query, Collection<T> list) {
+		for (T obj : list) {
 			if(namesFilter.isCancelled){
 				break;
 			}
-			T obj = list.get(i);
 			if(filterObject(obj, query)){
 				Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, obj);
 				msg.sendToTarget();
@@ -236,7 +239,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				startTime = System.currentTimeMillis();
 				uiHandler.sendEmptyMessage(MESSAGE_CLEAR_LIST);
 				// make link copy
-				List<T> list = initialListToFilter;
+				Collection<T> list = initialListToFilter;
 				filterLoop(query, list);
 				active = false;
 			}
@@ -260,8 +263,15 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	}
 
 	protected class NamesAdapter extends ArrayAdapter<T> {
-		NamesAdapter(List<T> list) {
+		
+		private final Comparator<? super T> cmp;
+		private final List<T> list;
+
+		NamesAdapter(List<T> list, Comparator<? super T> cmp) {
 			super(SearchByNameAbstractActivity.this, R.layout.searchbyname_list, list);
+			this.list = list;
+			this.cmp = cmp;
+			Collections.sort(list, cmp);
 		}
 
 		@Override
@@ -277,5 +287,16 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			label.setText(getText(getItem(position)));
 			return row;
 		}
+		
+		@Override
+		public void add(T object) {
+			int index = Collections.binarySearch(list, object, cmp);
+			if (index < 0) {
+				index = -index-1;
+			}
+			super.insert(object, index);
+		};
+		
+		
 	}
 }
