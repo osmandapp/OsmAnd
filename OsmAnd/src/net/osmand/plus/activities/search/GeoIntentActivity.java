@@ -196,11 +196,17 @@ public class GeoIntentActivity extends OsmandListActivity {
 		private List<String> elements;
 
 		public GeoAddressSearch(String query) {
-			StringTokenizer s = new StringTokenizer(query.substring(query
-					.indexOf("q=") + 2), ",");
-			elements = new ArrayList<String>(s.countTokens());
-			while (s.hasMoreTokens()) {
-				elements.add(s.nextToken().replace('+', ' ').trim());
+			query = query.replaceAll("%20", ",").replaceAll("%0A",",")
+					.replaceAll("\n",",").replaceAll("\t",",")
+					.replaceAll(" ", ",");
+			System.out.println(query);
+			//String is split on each comma
+			String[] s = query.substring(query
+					.indexOf("q=") + 2).split(",");
+			
+			elements = new ArrayList<String>();
+			for (int i = 0;  i<s.length; i++) {
+				elements.add(s[i].replace('+', ' ').trim());
 			}
 		}
 
