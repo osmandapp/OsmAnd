@@ -1267,8 +1267,8 @@ public class OsmandSettings {
 	
 	public enum MetricsConstants {
 	    KILOMETERS_AND_METERS(R.string.si_km_m,"km-m"),
-		MILES_AND_YARDS(R.string.si_mi_yard,"mi-y"),
-		MILES_AND_FOOTS(R.string.si_mi_foots,"mi-f");
+		MILES_AND_FOOTS(R.string.si_mi_foots,"mi-f"),
+		MILES_AND_YARDS(R.string.si_mi_yard,"mi-y");
 		
 		private final int key;
 		private final String ttsString;
