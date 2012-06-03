@@ -57,6 +57,8 @@ public:
 
 	int getSimpleLayer() {
 		std::vector<tag_value>::iterator it = additionalTypes.begin();
+		bool tunnel = false;
+		bool bridge = false;
 		while (it != additionalTypes.end()) {
 			if (it->first == "layer") {
 				if(it->second.length() > 0) {
@@ -65,11 +67,18 @@ public:
 					} else {
 						return 1;
 					}
-				} else {
-					return 0;
 				}
+			} else if (it->first == "tunnel") {
+				tunnel = "yes" == it->second;
+			} else if (it->first == "bridge") {
+				bridge = "yes" == it->second;
 			}
 			it++;
+		}
+		if (tunnel) {
+			return -1;
+		} else if (bridge) {
+			return 1;
 		}
 		return 0;
 	}

@@ -688,11 +688,17 @@ public class OsmandRenderer {
 				}
 				drawPolylineShadow(canvas, rc, path, shadowColor, shadowRadius);
 			} else {
+				boolean update = false;
 				if (updatePaint(render, paint, -2, false, rc)) {
+					update = true;
 					canvas.drawPath(path, paint);
 				}
 				if (updatePaint(render, paint, -1, false, rc)) {
+					update = true;
 					canvas.drawPath(path, paint);
+				}
+				if(update) {
+					updatePaint(render, paint, 0, false, rc);
 				}
 				canvas.drawPath(path, paint);
 				if (updatePaint(render, paint, 1, false, rc)) {

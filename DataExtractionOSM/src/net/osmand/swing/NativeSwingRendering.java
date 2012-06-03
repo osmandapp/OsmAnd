@@ -11,7 +11,6 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.MemoryCacheImageInputStream;
 
-import org.omg.stub.java.rmi._Remote_Stub;
 import org.xml.sax.SAXException;
 
 import resources._R;
@@ -71,6 +70,7 @@ public class NativeSwingRendering extends NativeLibrary {
 				return _R.getIconData(data);
 			}
 		};
+		rctx.nightMode = true;
 		
 		RenderingRuleSearchRequest request = new RenderingRuleSearchRequest(storage);
 		NativeSearchResult res = searchObjectsForRendering(sleft, sright, stop, sbottom, zoom, request, true, 

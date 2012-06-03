@@ -21,8 +21,8 @@
 	<type tag="layer" value="+3" target_value="1" minzoom="10" additional="true"/>
 	<type tag="layer" value="-3" target_value="-1" minzoom="10" additional="true"/>
 	
-	<type tag="bridge" minzoom="10" additional="true"/>
-	<type tag="tunnel" minzoom="10" additional="true"/>
+	<type tag="bridge" value="yes" minzoom="10" additional="true"/>
+	<type tag="tunnel" value="yes" minzoom="10" additional="true"/>
 	
 	<category name="highway">
 		<type tag="highway" value="motorway" minzoom="5" nameTags="ref"/>

@@ -127,11 +127,12 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
         rCap = req->props()->R_CAP_3;
         rPathEff = req->props()->R_PATH_EFFECT_3;
     }
-    paint->setColorFilter(NULL);
-    paint->setShader(NULL);
-    paint->setLooper(NULL);
+
     if (area)
     {
+    	paint->setColorFilter(NULL);
+    	paint->setShader(NULL);
+    	paint->setLooper(NULL);
         paint->setStyle(SkPaint::kStrokeAndFill_Style);
         paint->setStrokeWidth(0);
     }
@@ -140,6 +141,9 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
         float stroke = req->getFloatPropertyValue(rStrokeW);
         if (!(stroke > 0))
             return 0;
+        paint->setColorFilter(NULL);
+        paint->setShader(NULL);
+        paint->setLooper(NULL);
 
         paint->setStyle(SkPaint::kStroke_Style);
         paint->setStrokeWidth(stroke);
@@ -341,6 +345,9 @@ void drawPolyline(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas
 				PROFILE_NATIVE_OPERATION(rc, cv->drawPath(path, *paint));
 			}
 			if (updatePaint(req, paint, -1, 0, rc)) {
+				PROFILE_NATIVE_OPERATION(rc, cv->drawPath(path, *paint));
+			}
+			if (updatePaint(req, paint, 0, 0, rc)) {
 				PROFILE_NATIVE_OPERATION(rc, cv->drawPath(path, *paint));
 			}
 			PROFILE_NATIVE_OPERATION(rc, cv->drawPath(path, *paint));
