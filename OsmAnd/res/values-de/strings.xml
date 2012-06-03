@@ -800,7 +800,7 @@
   <string name="offline_navigation_not_available">Osmand Offline Navigation steht zur Zeit nicht zur Verfügung.</string>
   <string name="left_side_navigation">Linksverkehr-Navigation</string>
   <string name="left_side_navigation_descr">Anschalten, wenn Sie in Ländern mit Linksverkehr navigieren möchten</string>
-  <string name="download_link_and_local_description">Herunterladen oder Aktualisieren von Offline-Daten. \nFür mehr Informationen, klicken Sie auf einen Eintrag, um die Einträge zu deaktivieren oder zu löschen, drücken und halten Sie auf einen Eintrag.. \nAktuelle Daten auf dem Gerät (%1$s frei):</string>
+  <string name="download_link_and_local_description">Hier klicken um Offline-Daten herunterzuladen oder zu aktualisieren. \nKlicken auf bestehende Einträge liefert mehr Informationen, drücken und halten ermöglicht deaktivieren oder löschen. Aktuelle Daten auf dem Gerät (%1$s frei):</string>
   <string name="unknown_from_location">Start wurde noch nicht spezifiziert</string>
   <string name="context_menu_item_directions">Directions to here</string>
   <string name="confirm_interrupt_download">Möchten Sie den Datei-Download abbrechen?</string>
