@@ -590,15 +590,17 @@ bool RenderingRuleSearchRequest::visitRule(RenderingRule* rule, bool loadOutput)
 			} else if (rp == PROPS->R_MAXZOOM) {
 				match = rule->intProperties[i] >= values[rp->id];
 			} else if (rp == PROPS->R_ADDITIONAL) {
-				if(obj == NULL){
-					return true;
+				if (obj == NULL) {
+					match = true;
+				} else {
+					std::string val = storage->getDictionaryValue(rule->intProperties[i]);
+					int i = val.find('=');
+					if (i >= 0) {
+						match = obj->containsAdditional(val.substr(0, i), val.substr(i + 1));
+					} else {
+						match = false;
+					}
 				}
-				std::string val = storage->getDictionaryValue(rule->intProperties[i]);
-				int i = val.find('=');
-				if(i >= 0) {
-					return obj->containsAdditional(val.substr(0, i), val.substr(i+1));
-				}
-				return false;
 			} else {
 				match = rule->intProperties[i] == values[rp->id];
 			}

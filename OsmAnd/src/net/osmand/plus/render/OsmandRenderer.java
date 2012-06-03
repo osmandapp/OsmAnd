@@ -486,10 +486,7 @@ public class OsmandRenderer {
 		RenderingRuleProperty rCap;
 		RenderingRuleProperty rPathEff;
 		
-		p.setShader(null);
-		p.setColorFilter(null);
-		p.clearShadowLayer();
-		if(ind == 0){
+		if (ind == 0) {
 			rColor = req.ALL.R_COLOR;
 			rStrokeW = req.ALL.R_STROKE_WIDTH;
 			rCap = req.ALL.R_CAP;
@@ -499,6 +496,16 @@ public class OsmandRenderer {
 			rStrokeW = req.ALL.R_STROKE_WIDTH_2;
 			rCap = req.ALL.R_CAP_2;
 			rPathEff = req.ALL.R_PATH_EFFECT_2;
+		} else if(ind == -1){
+			rColor = req.ALL.R_COLOR_0;
+			rStrokeW = req.ALL.R_STROKE_WIDTH_0;
+			rCap = req.ALL.R_CAP_0;
+			rPathEff = req.ALL.R_PATH_EFFECT_0;
+		} else if(ind == -2){
+			rColor = req.ALL.R_COLOR__1;
+			rStrokeW = req.ALL.R_STROKE_WIDTH__1;
+			rCap = req.ALL.R_CAP__1;
+			rPathEff = req.ALL.R_PATH_EFFECT__1;
 		} else {
 			rColor = req.ALL.R_COLOR_3;
 			rStrokeW = req.ALL.R_STROKE_WIDTH_3;
@@ -509,12 +516,18 @@ public class OsmandRenderer {
 			if(!req.isSpecified(rColor) && !req.isSpecified(req.ALL.R_SHADER)){
 				return false;
 			}
+			p.setShader(null);
+			p.setColorFilter(null);
+			p.clearShadowLayer();
 			p.setStyle(Style.FILL_AND_STROKE);
 			p.setStrokeWidth(0);
 		} else {
 			if(!req.isSpecified(rStrokeW)){
 				return false;
 			}
+			p.setShader(null);
+			p.setColorFilter(null);
+			p.clearShadowLayer();
 			p.setStyle(Style.STROKE);
 			p.setStrokeWidth(req.getFloatPropertyValue(rStrokeW));
 			String cap = req.getStringPropertyValue(rCap);
@@ -675,12 +688,18 @@ public class OsmandRenderer {
 				}
 				drawPolylineShadow(canvas, rc, path, shadowColor, shadowRadius);
 			} else {
+				if (updatePaint(render, paint, -2, false, rc)) {
+					canvas.drawPath(path, paint);
+				}
+				if (updatePaint(render, paint, -1, false, rc)) {
+					canvas.drawPath(path, paint);
+				}
 				canvas.drawPath(path, paint);
 				if (updatePaint(render, paint, 1, false, rc)) {
 					canvas.drawPath(path, paint);
-					if (updatePaint(render, paint, 2, false, rc)) {
-						canvas.drawPath(path, paint);
-					}
+				}
+				if (updatePaint(render, paint, 2, false, rc)) {
+					canvas.drawPath(path, paint);
 				}
 			}
 			

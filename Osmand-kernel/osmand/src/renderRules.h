@@ -186,15 +186,23 @@ public:
 	RenderingRuleProperty* R_CAP_3;
 	RenderingRuleProperty* R_CAP_2;
 	RenderingRuleProperty* R_CAP;
+	RenderingRuleProperty* R_CAP_0;
+	RenderingRuleProperty* R_CAP__1;
 	RenderingRuleProperty* R_PATH_EFFECT_3;
 	RenderingRuleProperty* R_PATH_EFFECT_2;
 	RenderingRuleProperty* R_PATH_EFFECT;
+	RenderingRuleProperty* R_PATH_EFFECT_0;
+	RenderingRuleProperty* R_PATH_EFFECT__1;
 	RenderingRuleProperty* R_STROKE_WIDTH_3;
 	RenderingRuleProperty* R_STROKE_WIDTH_2;
 	RenderingRuleProperty* R_STROKE_WIDTH;
+	RenderingRuleProperty* R_STROKE_WIDTH_0;
+	RenderingRuleProperty* R_STROKE_WIDTH__1;
 	RenderingRuleProperty* R_COLOR_3;
 	RenderingRuleProperty* R_COLOR;
 	RenderingRuleProperty* R_COLOR_2;
+	RenderingRuleProperty* R_COLOR_0;
+	RenderingRuleProperty* R_COLOR__1;
 	RenderingRuleProperty* R_TEXT_BOLD;
 	RenderingRuleProperty* R_TEXT_ORDER;
 	RenderingRuleProperty* R_TEXT_MIN_DISTANCE;
@@ -330,16 +338,24 @@ public:
 		R_COLOR = registerRuleInternal(RenderingRuleProperty::createOutputColorProperty("color"));
 		R_COLOR_2 = registerRuleInternal(RenderingRuleProperty::createOutputColorProperty("color_2"));
 		R_COLOR_3 = registerRuleInternal(RenderingRuleProperty::createOutputColorProperty("color_3"));
+		R_COLOR_0 = registerRuleInternal(RenderingRuleProperty::createOutputColorProperty("color_0"));
+		R_COLOR__1 = registerRuleInternal(RenderingRuleProperty::createOutputColorProperty("color__1"));
 		R_STROKE_WIDTH = registerRuleInternal(RenderingRuleProperty::createOutputFloatProperty("strokeWidth"));
 		R_STROKE_WIDTH_2 = registerRuleInternal(RenderingRuleProperty::createOutputFloatProperty("strokeWidth_2"));
 		R_STROKE_WIDTH_3 = registerRuleInternal(RenderingRuleProperty::createOutputFloatProperty("strokeWidth_3"));
+		R_STROKE_WIDTH_0 = registerRuleInternal(RenderingRuleProperty::createOutputFloatProperty("strokeWidth_0"));
+		R_STROKE_WIDTH__1 = registerRuleInternal(RenderingRuleProperty::createOutputFloatProperty("strokeWidth__1"));
 
 		R_PATH_EFFECT = registerRuleInternal(RenderingRuleProperty::createOutputStringProperty("pathEffect"));
 		R_PATH_EFFECT_2 = registerRuleInternal(RenderingRuleProperty::createOutputStringProperty("pathEffect_2"));
 		R_PATH_EFFECT_3 = registerRuleInternal(RenderingRuleProperty::createOutputStringProperty("pathEffect_3"));
+		R_PATH_EFFECT_0 = registerRuleInternal(RenderingRuleProperty::createOutputStringProperty("pathEffect_0"));
+		R_PATH_EFFECT__1 = registerRuleInternal(RenderingRuleProperty::createOutputStringProperty("pathEffect__1"));
 		R_CAP = registerRuleInternal(RenderingRuleProperty::createOutputStringProperty("cap"));
 		R_CAP_2 = registerRuleInternal(RenderingRuleProperty::createOutputStringProperty("cap_2"));
 		R_CAP_3 = registerRuleInternal(RenderingRuleProperty::createOutputStringProperty("cap_3"));
+		R_CAP_0 = registerRuleInternal(RenderingRuleProperty::createOutputStringProperty("cap_0"));
+		R_CAP__1 = registerRuleInternal(RenderingRuleProperty::createOutputStringProperty("cap__1"));
 
 		R_SHADER = registerRuleInternal(RenderingRuleProperty::createOutputStringProperty("shader"));
 		R_SHADOW_COLOR = registerRuleInternal(RenderingRuleProperty::createOutputColorProperty("shadowColor"));

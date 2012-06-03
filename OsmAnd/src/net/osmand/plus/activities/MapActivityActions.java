@@ -456,6 +456,7 @@ public class MapActivityActions implements DialogProvider {
 				location.setLatitude(lat);
 				location.setLongitude(lon);
 				routingHelper.setAppMode(mode);
+				settings.PREV_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
 				settings.FOLLOW_THE_ROUTE.set(false);
 				settings.FOLLOW_THE_GPX_ROUTE.set(null);
 				routingHelper.setFollowingMode(false);
