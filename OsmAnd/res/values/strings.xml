@@ -40,7 +40,7 @@
     <string name="osmand_accessibility_description">This plugin configures special accessibility features.</string>
     <string name="osmand_accessibility_name">Accessibility</string>
     <string name="extra_settings">Advanced settings</string>
-    <string name="osmand_monitoring_description">This plugin facilitates recording your trips to GPX files or live monitoring using a web service.</string>
+    <string name="osmand_monitoring_description">This plugin facilitates recording your trips to GPX files or live tracking using a web service.</string>
     <string name="osmand_monitoring_name">Tracking</string>
     <string name="osmand_extra_settings_description">This plugin provides advanced map configuration and some device-specific settings.</string>
     <string name="osmand_extra_settings_name">Advanced Settings</string>
