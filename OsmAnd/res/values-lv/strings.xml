@@ -86,10 +86,10 @@
   <string name="accessibility_preferences">Pieejamība</string>
   <string name="rendering_out_of_memory">Nepietiek procesu atmiņas, lai attēlotu izvēlēto apgabalu</string>
   <string name="use_fluorescent_overlays">Flurescentie slāņi</string>
-  <string name="use_fluorescent_overlays_descr">Lietot flurescentās krāsas, lai attēlotu pēdas un maršrutus</string>
+  <string name="use_fluorescent_overlays_descr">Lietot flurescentās krāsas, lai attēlotu trekus un maršrutus</string>
   <string name="offline_poi_edition">Bezsaistes POI rediģēšana</string>
   <string name="offline_poi_edition_descr">Viemēr pielietot bezsaistes POI rediģēšanu</string>
-  <string name="tip_recent_changes_0_7_1_t">"Jaumi 0.7.1 versijā : \n\t- Bezsaistes POI rediģēšana \n\t- Sekošanas opcija - periodiska koordināšu sūtīšana uz web servisu. (kā izveidot savu web servisu var izlasīt HowTo) \n\t- Rādīt pēdas kuras tiek ierakstītas \n\t- Virziena noteikšana: Ja brauciet pretējā virzienā vai esiet pabraucis garām pagriezienam tiek paziņots \'Izpildiet U-pagriezienu\' \n\t- Jauns bals ziņojums \'Maršruts pārrēķināts\' \n\t- Tūlītēja (100m)pagrieziena indikācija ar virziena bultas krāsas maiņu \n\t- Deaktivizēto indeksu failu aktualitāte tiek parādīta lejuplādes ekrānā ar tumši zaļu un tumši zilu \n\t- Citas izmaiņas "</string>
+  <string name="tip_recent_changes_0_7_1_t">"Jaumi 0.7.1 versijā : \n\t- Bezsaistes POI rediģēšana \n\t- Sekošanas opcija - periodiska koordināšu sūtīšana uz web servisu. (kā izveidot savu web servisu var izlasīt HowTo) \n\t- Parādīt kartē ierakstītos trekus \n\t- Virziena noteikšana: Ja brauciet pretējā virzienā vai esiet pabraucis garām pagriezienam tiek paziņots \'Izpildiet U-pagriezienu\' \n\t- Jauns bals ziņojums \'Maršruts pārrēķināts\' \n\t- Tūlītēja (100m)pagrieziena indikācija ar virziena bultas krāsas maiņu \n\t- Deaktivizēto indeksu failu aktualitāte tiek parādīta lejuplādes ekrānā ar tumši zaļu un tumši zilu \n\t- Citas izmaiņas "</string>
   <string name="update_poi_does_not_change_indexes">POI izmaiņas aplikācijā neietekmē lejuplādētos kartes attēlus, izmaiņas tiek saglabātas atsevišķā failā.</string>
   <string name="local_openstreetmap_uploading_poi">Lejuplādē POI…</string>
   <string name="local_openstreetmap_poi_were_uploaded">{0} POI tika lejuplādētji</string>
@@ -101,14 +101,14 @@
   <string name="local_openstreetmap_descr_title">Asinhronā POI rediģēšana:</string>
   <string name="local_openstreetmap_settings">Laokāli saglabātie OSM POIs</string>
   <string name="local_openstreetmap_settings_descr">Rādīt un organizēt lokālajā datubāzē pieejamos OSM POI</string>
-  <string name="live_monitoring_descr">Nosūtīt pēdas uz norādīto web servisu</string>
+  <string name="live_monitoring_descr">Nosūtīt treku uz norādīto web servisu</string>
   <string name="live_monitoring">Tiešsaistes sekošana</string>
   <string name="live_monitoring_interval_descr">Norādīt tiešsaistes sekošanas intervālu</string>
   <string name="live_monitoring_interval">Tiešaistes sekošanas intervāls</string>
   <string name="live_monitoring_url_descr">Norādiet web adresi ar parametru sintaksi : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
   <string name="live_monitoring_url">Tiešaistes sekošanas web adrese</string>
-  <string name="gpx_monitoring_disabled_warn">Lūdzu ieslēdziet \'Ierakstīt pēdas GPX\' Sekošanas uzstādījumus</string>
-  <string name="show_current_gpx_title">Rādīt tekošās pēdas</string>
+  <string name="gpx_monitoring_disabled_warn">Lūdzu iespējojat \'Ierakstīt treku GPX failā\' Sekošanas uzstādījumos</string>
+  <string name="show_current_gpx_title">Rādīt tekošo treku</string>
   <string name="tip_recent_changes_0_7_0_t">"Jaunumi 0.7.0 versijā : \n\t- Bezsaistes wikipedia dati \n\t- Atjaunotas kartes \n\t- Citi mazi uzlabojumi "</string>
   <string name="free_version_message">Šajā bezmaksas OsmAnd versijā ir ierobežojums uz %1$s lejuplādētiem %2$s nu tā neatbalsta wikipedia rakstus.</string>
   <string name="free_version_title">Bezmaksas versija</string>
@@ -141,7 +141,7 @@
   <string name="routing_settings_descr">Norādīt navigācijas opcijas</string>
   <string name="global_settings">Globālie uzstādījumi</string>
   <string name="index_settings">Bezsaistes dati</string>
-  <string name="index_settings_descr">Lejuplādēt un pārvaldīt bezsaistes kartes un pārējos datus, tādus kā GPX pēdas</string>
+  <string name="index_settings_descr">Lejuplādēt un pārvaldīt bezsaistes kartes un pārējos datus, tādus kā GPX trekus</string>
   <string name="general_settings">Vispārīgie uzstādījumi</string>
   <string name="general_settings_descr">Konfigurēt vispārīgos uzstādījumus</string>
   <string name="global_app_settings">Globālie aplikācijas uzstādījumi</string>
@@ -209,13 +209,13 @@
   <string name="search_position_address">Adrese...</string>
   <string name="search_position_favorites">Izlase...</string>
   <string name="search_position_undefined">Nedefinēts</string>
-  <string name="search_position_fixed">Labots</string>
+  <string name="search_position_fixed">Fiksēts</string>
   <string name="search_position_current_location">Tekošā pozīcija...</string>
   <string name="search_position_map_view">Pēdējais kartes skats</string>
   <string name="select_search_position">Meklēt pie :</string>
   <string name="context_menu_item_search">Meklēt ap šo vietu</string>
   <string name="tip_recent_changes_0_6_7_t">"Izmaiņas 0.6.7 versijā:\n\t- Bezsaistes datu menedžeris (lejuplādēšana, dzēšana un aktivizācija/deaktivizācija neizejot no OsmAnd aplikācijas)\n\t- Izlases punkti un grupas (kategorizēšana, dzēšana, izlases vadība)\n\t- GPX pārlūkošana aplikācijā (skatīt ceļa detaļas, attālumu, vidējo ātrumu, augstuma izmaiņas u.t.t.)\n\t- GPX navigācija (vairāk iespēju, turpināt navigāciju pēc nobrukšanas, loka kustības atbalsts)\n\t- Funkcija GPX ceļa saglabāšanai bezsaistes lietojumam\n\t- Uzlabota GPX monitorēšana (filtrs uz neakurātu pozīciju un saglabāta precizitāte/augstums/ātrums)\n\t- Augšuplādēt GPX uz OSM (http://download.osmand.net/gpx/)\n\t- Uzlabota vektoru renderēšana\n\t- TTS dzinēja uzlabojumi (ziņo precīzu attālumu, jūdžu atbalsts)\n\t- Kļūdu labojumi"</string>
-  <string name="save_route_dialog_title">Saglabāt ceļu kā GPX pēdas</string>
+  <string name="save_route_dialog_title">Saglabāt ceļu kā GPX treku</string>
   <string name="route_successfully_saved_at">Ceļš veiksmīgi saglabāts kā \'%1$s\'.</string>
   <string name="filename_input">"Faila nosaukums : "</string>
   <string name="file_with_name_already_exist">Fails ar šādu nosaukumu jau eksistē.</string>
@@ -252,7 +252,7 @@
   <string name="local_index_mi_backup">Deaktivizēt</string>
   <string name="local_index_mi_delete">Dzēst</string>
   <string name="local_index_mi_reload">Atjaunināt</string>
-  <string name="local_index_download">Lejuplādē...</string>
+  <string name="local_index_download">Lejupielādes...</string>
   <string name="local_index_tile_data">Bilžu dati: %1$s \nMinimālais palielinājums : %2$d\nMaksimālais palielinājums : %3$d\nLejuplādējams : %4$s \nLejuplādēti palielinājumi : %5$s</string>
   <string name="local_index_poi_data">POI dati</string>
   <string name="local_index_address_data">Adresees dati</string>
@@ -365,7 +365,7 @@
   <string name="amenity_type_historic">Vēsturiskās</string>
   <string name="amenity_type_landuse">Lietojums</string>
   <string name="amenity_type_leisure">Atpūta</string>
-  <string name="amenity_type_manmade">Cilvēka veidots</string>
+  <string name="amenity_type_manmade">Mākslīgs</string>
   <string name="amenity_type_military">Militārs</string>
   <string name="amenity_type_natural">Daba</string>
   <string name="amenity_type_office">Ofiss</string>
@@ -464,9 +464,9 @@
   <string name="osb_bug_name">Kļūda</string>
   <string name="poi_context_menu_modify">Labot POI</string>
   <string name="poi_context_menu_delete">Dzēst POI</string>
-  <string name="rotate_map_compass_opt">Uz kompasu</string>
-  <string name="rotate_map_bearing_opt">Uz kustības virzienu</string>
-  <string name="rotate_map_none_opt">Nerotēt</string>
+  <string name="rotate_map_compass_opt">Pēc kompasa</string>
+  <string name="rotate_map_bearing_opt">Kustības virzienā</string>
+  <string name="rotate_map_none_opt">Nemainīt virzienu</string>
   <string name="rotate_map_to_bearing_descr">Izvēlēties kā notiek kartes orientācija</string>
   <string name="rotate_map_to_bearing">Kartes orientācija</string>
   <string name="show_route">Maršruta detaļas</string>
@@ -594,7 +594,7 @@
   <string name="router_service">Maršrutēšanas pakalpojums</string>
   <string name="sd_dir_not_accessible">Saglabāšanas mape SD kartē nav pieejama</string>
   <string name="download_question">Lejupielādēt {0} - {1} ?</string>
-  <string name="download_question_exist">{0} netiešsaites dati jau eksistē  ({1}). Vēlaties atjaunināt? ({2}) ?</string>
+  <string name="download_question_exist">{0} netiešsaites dati jau eksistē ({1}). Vēlaties atjaunināt? ({2}) ?</string>
   <string name="address">Adrese</string>
   <string name="download_index_success">Lejuplāde ir veiksmīga</string>
   <string name="error_io_error">Notika I/O kļūda</string>
