@@ -50,11 +50,11 @@ public abstract class OsmandPlugin {
 		OsmandSettings settings = app.getSettings();
 		OsmandRasterMapsPlugin rasterMapsPlugin = new OsmandRasterMapsPlugin(app);
 		installedPlugins.add(rasterMapsPlugin);
-		installedPlugins.add(new OsmandMonitoringPlugin(app));
-		installedPlugins.add(new OsmEditingPlugin(app));
-		installedPlugins.add(new OsmandBackgroundServicePlugin(app));
-		installedPlugins.add(new AccessibilityPlugin(app));
 		installedPlugins.add(new OsmandExtraSettings(app));
+		installedPlugins.add(new OsmandMonitoringPlugin(app));
+		installedPlugins.add(new OsmandBackgroundServicePlugin(app));
+		installedPlugins.add(new OsmEditingPlugin(app));
+		installedPlugins.add(new AccessibilityPlugin(app));
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
 		
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
