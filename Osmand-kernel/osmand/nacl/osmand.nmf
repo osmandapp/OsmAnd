@@ -1,0 +1,11 @@
+{
+  
+  "program": {
+  	  "x86-64": {
+        "url": "osmand-x64.nexe"
+      },
+      "x86-32": {
+        "url": "osmand-x86.nexe"
+      }
+  }
+}

@@ -68,7 +68,7 @@ static PP_Bool Instance_DidCreate(PP_Instance instance,
                                   const char* argn[],
                                   const char* argv[]) {
   ppb_messaging_interface->PostMessage(instance, 
-                                       CStrToVar("Hello a World (GLIBC)"));
+                                       CStrToVar("Osmand application"));
   return PP_TRUE;
 }
 

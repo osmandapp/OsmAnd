@@ -13,15 +13,15 @@ OSMAND_FLAGS = \
 	-DHASH_MAP_GNU
 LIBNAME = $(LIBRARY_PREFIX)osmand
 LIBTYPE = $(DYNAMICLIB_EXT)
-LDLIBS += -lskia -lproto -lpthread -lft2 -lexpat -lpng
+LDLIBS += -lskia -lproto -lpthread -lft2 -lexpat -lpng -lz
+
 ifeq ($(TARGET),nacl)
-LDLIBS += -L$(TC_PATH)/i686-nacl/usr/lib -lz
 OSMAND_FLAGS += \
 	-DRT_NOT_SUPPORTED
 LOCAL_SRC_FILES += \
-	src/osmand_nacl.c
+	src/osmand_nacl.cpp
 else 
-LDLIBS += -lrt -lz
+LDLIBS += -lrt
 LOCAL_SRC_FILES += \
 	src/java_wrap.cpp
 # Set library name

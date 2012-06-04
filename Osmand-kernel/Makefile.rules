@@ -72,6 +72,8 @@ build-%/$(TARGET)-$(ARCH)/$(LIBNAME).$(STATICLIB_EXT): $$(addprefix build-%/,$(O
 	
 # This target assembles dynamic library
 .SECONDEXPANSION:
+# This target assembles dynamic library
+.SECONDEXPANSION:
 build-%/$(TARGET)-$(ARCH)/$(LIBNAME).$(DYNAMICLIB_EXT): $$(addprefix build-%/,$(OBJECTS))
 	@mkdir -p `dirname $@`
-	$(CXX) -o $@ $? $(LDFLAGS) -L$(PREBUILT_DIR_PREFIX)-$* $(LDLIBS)
+	$(CXX) -o $@ $(addprefix build-$*/,$(OBJECTS)) $(LDFLAGS) -L$(PREBUILT_DIR_PREFIX)-$* $(LDLIBS)
