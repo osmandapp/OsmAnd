@@ -52,20 +52,15 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,6 +69,8 @@ import android.widget.Toast;
  */
 public class MapActivityLayers {
 	
+
+
 	private final MapActivity activity;
 	
 	// the order of layer should be preserved ! when you are inserting new layer
@@ -215,6 +212,55 @@ public class MapActivityLayers {
 		}
 	}
 
+	private final class LayerMenuListener  {
+		private final ContextMenuAdapter adapter;
+		private final OsmandMapTileView mapView;
+		private final OsmandSettings settings;
+		DialogInterface dialog;
+		
+		private LayerMenuListener(ContextMenuAdapter adapter,
+				OsmandMapTileView mapView, OsmandSettings settings) {
+			this.adapter = adapter;
+			this.mapView = mapView;
+			this.settings = settings;
+		}
+
+		public void setDialog(DialogInterface dialog) {
+			this.dialog = dialog;
+		}
+		
+		public void onClick(int item, boolean isChecked) {
+			int itemId = adapter.getItemId(item);
+			OnContextMenuClick clck = adapter.getClickAdapter(item);
+			if(clck != null) {
+				clck.onContextMenuClick(itemId, item, isChecked, dialog);
+			} else if(itemId == R.string.layer_poi){
+				if(isChecked){
+					selectPOIFilterLayer(mapView);
+				}
+				settings.SHOW_POI_OVER_MAP.set(isChecked);
+			} else if(itemId == R.string.layer_poi_label){
+				settings.SHOW_POI_LABEL.set(isChecked);
+			} else if(itemId == R.string.layer_favorites){
+				settings.SHOW_FAVORITES.set(isChecked);
+			} else if(itemId == R.string.layer_gpx_layer){
+				if(getApplication().getGpxFileToDisplay() != null){
+					getApplication().setGpxFileToDisplay(null, false);
+				} else {
+					dialog.dismiss();
+					showGPXFileLayer(mapView);
+				}
+			} else if(itemId == R.string.layer_route){
+				routeInfoLayer.setVisible(isChecked);
+			} else if(itemId == R.string.layer_transport_route){
+				transportInfoLayer.setVisible(isChecked);
+			} else if(itemId == R.string.layer_transport){
+				settings.SHOW_TRANSPORT_OVER_MAP.set(isChecked);
+			}
+			updateLayers(mapView);
+			mapView.refreshMap();
+		}
+	}
 	
 	public void openLayerSelectionDialog(final OsmandMapTileView mapView){
 		final OsmandSettings settings = getApplication().getSettings();
@@ -242,97 +288,56 @@ public class MapActivityLayers {
 		OsmandPlugin.registerLayerContextMenu(mapView, adapter, activity);
 		
 		
-		final OnMultiChoiceClickListener listener = new DialogInterface.OnMultiChoiceClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int item, boolean isChecked) {
-				int itemId = adapter.getItemId(item);
-				OnContextMenuClick clck = adapter.getClickAdapter(item);
-				if(clck != null) {
-					clck.onContextMenuClick(itemId, item, isChecked, dialog);
-				} else if(itemId == R.string.layer_poi){
-					if(isChecked){
-						selectPOIFilterLayer(mapView);
-					}
-					settings.SHOW_POI_OVER_MAP.set(isChecked);
-				} else if(itemId == R.string.layer_poi_label){
-					settings.SHOW_POI_LABEL.set(isChecked);
-				} else if(itemId == R.string.layer_favorites){
-					settings.SHOW_FAVORITES.set(isChecked);
-				} else if(itemId == R.string.layer_gpx_layer){
-					if(getApplication().getGpxFileToDisplay() != null){
-						getApplication().setGpxFileToDisplay(null, false);
-					} else {
-						dialog.dismiss();
-						showGPXFileLayer(mapView);
-					}
-				} else if(itemId == R.string.layer_route){
-					routeInfoLayer.setVisible(isChecked);
-				} else if(itemId == R.string.layer_transport_route){
-					transportInfoLayer.setVisible(isChecked);
-				} else if(itemId == R.string.layer_transport){
-					settings.SHOW_TRANSPORT_OVER_MAP.set(isChecked);
-				}
-				updateLayers(mapView);
-				mapView.refreshMap();
-			}
-		};
+		final LayerMenuListener listener = new LayerMenuListener(adapter, mapView, settings);
 		Builder b = new AlertDialog.Builder(activity);
-		ListView list = new ListView(activity);
-//		list.setBackgroundColor(white);
-		list.setCacheColorHint(activity.getResources().getColor(R.color.color_transparent));
-		b.setView(list);
-		final AlertDialog dlg = b.create();
-		final int minWidth = activity.getResources().getDrawable(R.drawable.list_activities_favorites).getMinimumWidth();
-		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(activity, R.layout.layers_list_activity_item, 
-				adapter.getItemNames()) {
-			@Override
-			public View getView(final int position, View convertView, ViewGroup parent) {
-				View row = activity.getLayoutInflater().inflate(R.layout.layers_list_activity_item, null);
-				((TextView) row.findViewById(R.id.title)).setText(adapter.getItemName(position));
-				if(adapter.getImageId(position) != 0) {
-					Drawable d = activity.getResources().getDrawable(adapter.getImageId(position));
-					((ImageView) row.findViewById(R.id.icon)).setImageDrawable(d);
-				} else {
-					LinearLayout.LayoutParams layoutParams = (android.widget.LinearLayout.LayoutParams) ((ImageView) row.findViewById(R.id.icon)).getLayoutParams();
-					layoutParams.leftMargin = minWidth;
-				}
-				final CheckBox ch = ((CheckBox) row.findViewById(R.id.check_item));
-				if(adapter.getSelection(position) == -1){
-					ch.setVisibility(View.INVISIBLE);
-				} else {
-					ch.setChecked(adapter.getSelection(position) > 0);
-					ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-						@Override
-						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-							listener.onClick(dlg, position, isChecked);
+		
+		ListAdapter listAdapter = new ArrayAdapter<String>(
+			    activity,
+			    R.layout.layers_list_activity_item,
+			    R.id.title,
+			    adapter.getItemNames()){
+			        @Override
+					public View getView(final int position, View convertView, ViewGroup parent) {
+			        	View v = activity.getLayoutInflater().inflate(R.layout.layers_list_activity_item, null);
+			            TextView tv = (TextView)v.findViewById(R.id.title);
+			            tv.setText(adapter.getItemName(position));			            
+
+			            //Put the image on the TextView
+			            if(adapter.getImageId(position) != 0) {
+			            	tv.setCompoundDrawablesWithIntrinsicBounds(adapter.getImageId(position), 0, 0, 0);
+			            } else {
+			            	tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.list_activities_transparent, 0, 0, 0);
+			            }
+
+						final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
+						if(adapter.getSelection(position) == -1){
+							ch.setVisibility(View.INVISIBLE);
+						} else {
+							ch.setChecked(adapter.getSelection(position) > 0);
+							ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+								@Override
+								public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+									listener.onClick(position, isChecked);
+								}
+							});
 						}
-					});
-				}
-//				row.setOnClickListener(new View.OnClickListener() {
-//					@Override
-//					public void onClick(View v) {
-//						if(selectedList.get(position) >= 0) {
-//							ch.setChecked(!ch.isChecked());
-//						} else {
-//							listener.onClick(dlg, position, selectedList.get(position) > 0);
-//						}
-//					}
-//				});
-				return row;
-			}
-		};
-		list.setAdapter(arrayAdapter);
-		list.setOnItemClickListener(new OnItemClickListener() {
+			            return v;
+			        }
+			    };
+
+	    b.setAdapter(listAdapter, new OnClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			public void onClick(DialogInterface dialog, int position) {
 				if(adapter.getSelection(position) >= 0) {
-					CheckBox ch = ((CheckBox) view.findViewById(R.id.check_item));
-					ch.setChecked(!ch.isChecked());
+					listener.onClick(position, !(adapter.getSelection(position) > 0));
 				} else {
-					listener.onClick(dlg, position, adapter.getSelection(position) > 0);
+					listener.onClick(position, adapter.getSelection(position) > 0);
 				}
 			}
 		});
+
+	    final AlertDialog dlg = b.create();
+	    listener.setDialog(dlg); 
 		dlg.setCanceledOnTouchOutside(true);
 		dlg.show();
 	}
