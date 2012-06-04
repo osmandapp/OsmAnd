@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿Osm<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="map_online_plugin_is_not_installed">Aktivieren Sie das Online-Karten-Plugin, um andere Kartenquellen nutzen zu können.</string>
 	<string name="map_online_data">Online-Karten (Kacheln)</string>
@@ -8,19 +8,19 @@
 	<string name="map_settings">- Karteneinstellungen</string>
 	<string name="map_settings_descr">Konfigurieren der Karten-Anzeige</string>
 	
-	<string name="Osmand_rastermaps_plugin_description">Dieses Modul ermöglicht die Verwendung vieler online oder gecachter Kachel-Kartenquellen, auch als Overlay- oder Underlay-Karte. Solche Kachel-Karten können auch offline erstellt und dann in das Osmand-Verzeichnis kopiert werden.</string>
-    <string name="Osmand_rastermaps_plugin_name">Online-Karten</string>
-    <string name="Osmand_background_plugin_description">Dieses Modul ermöglicht das Positions-Logging oder die Navigation während das Gerät im Standby-Modus ist. Dabei wird der GPS-Empfänger periodisch geweckt um einen Punkt aufzuzeichnen oder ein Kommando zu geben.</string>
-    <string name="Osmand_background_plugin_name">Hintergrundservice</string>
-    <string name="Osmand_accessibility_description">Dieses Modul konfiguriert spezielle Barrierefreiheits-Einstellungen.</string>
-    <string name="Osmand_accessibility_name">Barrierefreiheit</string>
+	<string name="osmand_rastermaps_plugin_description">Dieses Modul ermöglicht die Verwendung vieler online oder gecachter Kachel-Kartenquellen, auch als Overlay- oder Underlay-Karte. Solche Kachel-Karten können auch offline erstellt und dann in das Osmand-Verzeichnis kopiert werden.</string>
+    <string name="osmand_rastermaps_plugin_name">Online-Karten</string>
+    <string name="osmand_background_plugin_description">Dieses Modul ermöglicht das Positions-Logging oder die Navigation während das Gerät im Standby-Modus ist. Dabei wird der GPS-Empfänger periodisch geweckt um einen Punkt aufzuzeichnen oder ein Kommando zu geben.</string>
+    <string name="osmand_background_plugin_name">Hintergrundservice</string>
+    <string name="osmand_accessibility_description">Dieses Modul konfiguriert spezielle Barrierefreiheits-Einstellungen.</string>
+    <string name="osmand_accessibility_name">Barrierefreiheit</string>
     <string name="extra_settings">Erweiterte Einstellungen</string>
-    <string name="Osmand_monitoring_description">Dieses Modul ermöglicht die Aufzeichnung zurückgelegter Strecken in GPX-Dateien oder das Live-Tracking via Web-Service.</string>
-    <string name="Osmand_monitoring_name">Positions-Logging</string>
-    <string name="Osmand_extra_settings_description">Dieses Modul ermöglicht erweiterte Kartenkonfiguration und einige gerätespezifische Einstellungen.</string>
-    <string name="Osmand_extra_settings_name">Erweiterte Einstellungen</string>
-    <string name="Osmand_development_plugin_description">Dieses Modul aktivert Entwicklungs- und Fehlersuchhilfen wie simulierte Navigation oder die Messung der Render-Leistung.</string>
-    <string name="Osmand_development_plugin_name">Osmand Entwicklung</string>
+    <string name="osmand_monitoring_description">Dieses Modul ermöglicht die Aufzeichnung zurückgelegter Strecken in GPX-Dateien oder das Live-Tracking via Web-Service.</string>
+    <string name="osmand_monitoring_name">Positions-Logging</string>
+    <string name="osmand_extra_settings_description">Dieses Modul ermöglicht erweiterte Kartenkonfiguration und einige gerätespezifische Einstellungen.</string>
+    <string name="osmand_extra_settings_name">Erweiterte Einstellungen</string>
+    <string name="osmand_development_plugin_description">Dieses Modul aktivert Entwicklungs- und Fehlersuchhilfen wie simulierte Navigation oder die Messung der Render-Leistung.</string>
+    <string name="osmand_development_plugin_name">Osmand Entwicklung</string>
     <string name="plugins_screen">Modul-Manager</string>
     <string name="select_plugin_to_activate">Module zum Aktivieren oder Deaktivieren anklicken. (Ein Neustart von Osmand könnte nötig sein.)</string>
     <string name="prefs_plugins_descr">Module aktivieren Extra-Funktionalität, die bereits in Osmand enthalten ist, wie  z.B. Positions-Logging, Online-Karten, Hintergrundservice, Barrierefreiheits-Erweiterungen und anderes.</string>
@@ -175,8 +175,8 @@
   <string name="user_name_descr">Nötig für openstreetmap.org-Beiträge</string>
   <string name="user_password">OSM-Kennwort</string>
   <string name="user_password_descr">Nötig für openstreetmap.org-Beiträge</string>
-  <string name="Osmand_service">Hintergrundservice</string>
-  <string name="Osmand_service_descr">Für Verwendung von Osmand bei ausgeschalteter Anzeige</string>
+  <string name="osmand_service">Hintergrundservice</string>
+  <string name="osmand_service_descr">Für Verwendung von Osmand bei ausgeschalteter Anzeige</string>
   <string name="tip_rotation_switching">Kartenrotation</string>
   <string name="tip_rotation_switching_t">\tSie können unter \'Einstellungen\' -&gt; \'Kartendarstellung\' -&gt; \'Kartenrotation\' wählen, in welche Richtung die Anzeige der Landkarte ausgerichtet werden soll. \n\tZur Wahl stehen: \n\t\'Keine Rotation\' - Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben \n\t\'Nach Bewegungsrichtung\' - Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt \n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt \n\tTipp: Um schnell zwischen der Kompassnachführung und der in den Einstellungen gewählten Option zu wechseln, einfach auf die Kompassnadel in der Kartenansicht drücken.</string>
   <string name="binary_map_download_success">Download erfolgreich.\n\t\n\tAktivieren unter: \'Einstellungen\' -&gt; \'Kartenkonfiguration\' -&gt; \'Offline-Vektor-Karten\'</string>
@@ -224,7 +224,7 @@
   <string name="poi_filter_by_name">Nach Namen suchen</string>
   <string name="old_poi_file_should_be_deleted">Die POI-Datei \'%1$s\' wird nicht mehr benötigt und kann gelöscht werden.</string>
   <string name="update_poi_file_not_found">Lokale Datei für POI-Änderungen nicht gefunden und konnte nicht erstellt werden.</string>
-  <string name="button_upgrade_Osmandplus">Osmand+ aktualisieren</string>
+  <string name="button_upgrade_osmandplus">Osmand+ aktualisieren</string>
   <string name="map_version_changed_info">Der Server enthält Karten die mit ihrer derzeitigen Anwendungsversion nicht kompatibel sind. Um sie zu laden und zu verwenden, aktualisieren Sie bitte auf die neueste Version.</string>
   <string name="local_index_mi_rename">Umbenennen</string>
   <string name="show_gpx_route">Auf Karte anzeigen</string>
@@ -240,7 +240,7 @@
   <string name="search_position_map_view">Letzte Kartenposition</string>
   <string name="select_search_position">Suche nahe:</string>
   <string name="context_menu_item_search">In der Nähe suchen</string>
-  <string name="tip_recent_changes_0_6_7_t">"Verbesserungen in 0.6.7: \n\t- Offline-Daten Manager (Herunterladen, Löschen, und Aktivieren / Deaktivieren von Offline-Daten direkt in Osmand) \n\t- Favoriten und Favoritengruppen (Kategorisieren, Löschen, Managen von Favoriten) \n\t- GPX Explorer innerhalb der Applikation (Tracks und Track-Daten ansehen) \n\t- GPX Navigation (nützliche Optionen, Fortsetzung der Navigation nach Crash, unterstützt jetzt Kreisverkehre) \n\t- Abspeichern von Routen als GPX-Tracks zur Offline-Verwendung \n\t- Verbessertes GPX Tracking (Filtern von ungenauen Positionen, Abspeichern von Genauigkeit, Höhe, Geschwindigkeit) \n\t- Funktion zum Upload von GPX Dateien zur OSM Community (http://download.Osmand.net/gpx/) \n\t- Verbessertes Vektor-Rendering \n\t- Verbesserung der TTS-Ansagen (genaue Entfernungsansagen, optional auch in Meilen+Fuß) \n\t- Fehlerbehebung "</string>
+  <string name="tip_recent_changes_0_6_7_t">"Verbesserungen in 0.6.7: \n\t- Offline-Daten Manager (Herunterladen, Löschen, und Aktivieren / Deaktivieren von Offline-Daten direkt in Osmand) \n\t- Favoriten und Favoritengruppen (Kategorisieren, Löschen, Managen von Favoriten) \n\t- GPX Explorer innerhalb der Applikation (Tracks und Track-Daten ansehen) \n\t- GPX Navigation (nützliche Optionen, Fortsetzung der Navigation nach Crash, unterstützt jetzt Kreisverkehre) \n\t- Abspeichern von Routen als GPX-Tracks zur Offline-Verwendung \n\t- Verbessertes GPX Tracking (Filtern von ungenauen Positionen, Abspeichern von Genauigkeit, Höhe, Geschwindigkeit) \n\t- Funktion zum Upload von GPX Dateien zur OSM Community (http://download.osmand.net/gpx/) \n\t- Verbessertes Vektor-Rendering \n\t- Verbesserung der TTS-Ansagen (genaue Entfernungsansagen, optional auch in Meilen+Fuß) \n\t- Fehlerbehebung "</string>
   <string name="save_route_dialog_title">Route als GPX-Track speichern</string>
   <string name="route_successfully_saved_at">Route erfolgreich gespeichert als \'%1$s\'.</string>
   <string name="filename_input">"Dateiname: "</string>
@@ -421,13 +421,13 @@
   <string name="reading_cached_tiles">Lese gepufferte Kacheln …</string>
   <string name="version_index_is_big_for_memory">"Nicht genügend Speicher für Index \'\'{0}\'\' "</string>
   <string name="version_index_is_not_supported">Die Index-Version \'\'{0}\'\' wird nicht unterstützt</string>
-  <string name="use_Osmand_routing_service">Osmand Navigation &gt;20km</string>
-  <string name="use_Osmand_routing_service_descr">Osmand Offline-Navigation für große Entfernungen verwenden (experimentell) anstatt automatisch CloudMade zu nehmen</string>
-  <string name="Osmand_routing_experimental">Osmand Offline-Navigation ist noch experimentell und funktioniert nicht gut für Entfernungen über 20 km.\n\nAls Navigationsdienst wird temporär online CloudMade verwendet.</string>
+  <string name="use_osmand_routing_service">Osmand Navigation &gt;20km</string>
+  <string name="use_osmand_routing_service_descr">Osmand Offline-Navigation für große Entfernungen verwenden (experimentell) anstatt automatisch CloudMade zu nehmen</string>
+  <string name="osmand_routing_experimental">Osmand Offline-Navigation ist noch experimentell und funktioniert nicht gut für Entfernungen über 20 km.\n\nAls Navigationsdienst wird temporär online CloudMade verwendet.</string>
   <string name="specified_dir_doesnt_exist">Angegebener Ordner kann nicht gefunden werden.</string>
   <string name="application_dir">Verzeichnis</string>
   <string name="application_dir_change_warning">Das Wechseln des Verzeichnis verschiebt oder löscht keine Daten. Dies muss separat außerhalb von Osmand durchgeführt werden. Dennoch fortfahren?</string>
-  <string name="Osmand_net_previously_installed">Eine Vorversion von Osmand ist installiert. Alle Offline-Daten werden weiter unterstützt. Favoriten müssen aber in der Vorversion exportiert und anschließend in die neue Version importiert werden.</string>
+  <string name="osmand_net_previously_installed">Eine Vorversion von Osmand ist installiert. Alle Offline-Daten werden weiter unterstützt. Favoriten müssen aber in der Vorversion exportiert und anschließend in die neue Version importiert werden.</string>
   <string name="build_installed">Build {0} erfolgreich installiert ({1}).</string>
   <string name="downloading_build">Lade Build …</string>
   <string name="install_selected_build">Installation Osmand - {0} von {1} {2} MB. Fortfahren?</string>
@@ -611,7 +611,7 @@
   <string name="search_nothing_found">Kein Treffer</string>
   <string name="searching">Suchen …</string>
   <string name="searching_address">Adresse suchen …</string>
-  <string name="search_osm_nominatim">Adresse suchen mit Osm Nominatim</string>
+  <string name="search_osm_nominatim">Adresse suchen mit OSM Nominatim</string>
   <string name="hint_search_online">Hausnummer, Straße, Ort</string>
   <string name="search_offline_address">Offline</string>
   <string name="search_online_address">Internet</string>
@@ -629,8 +629,8 @@
   <string name="downloading_file">Herunterladen der Datei …</string>
   <string name="downloading">Herunterladen …</string>
   <string name="downloading_list_indexes">Eine Liste verfügbarer Regionen wird geladen…</string>
-  <string name="list_index_files_was_not_loaded">Die Liste der Regionen wurde von Osmand.net nicht geladen.</string>
-  <string name="select_index_file_to_download">Nicht gefunden. Nicht vorhandene Regionen können selbst erstellt werden, siehe http://Osmand.net.</string>
+  <string name="list_index_files_was_not_loaded">Die Liste der Regionen wurde von osmand.net nicht geladen.</string>
+  <string name="select_index_file_to_download">Nicht gefunden. Nicht vorhandene Regionen können selbst erstellt werden, siehe http://osmand.net.</string>
   <string name="show_poi_on_map">Auf Karte zeigen</string>
   <string name="fav_points_edited">Favorit wurde bearbeitet</string>
   <string name="fav_points_not_exist">Keine Favoriten vorhanden</string>
@@ -662,7 +662,7 @@
   <string name="new_route_calculated_dist">Route neu berechnet, Entfernung</string>
   <string name="arrived_at_destination">Sie haben Ihr Ziel erreicht</string>
   <string name="invalid_locations">Koordinaten sind ungültig!</string>
-  <string name="go_back_to_Osmand">zurück zu Osmand</string>
+  <string name="go_back_to_osmand">zurück zu Osmand</string>
   <string name="close">Schließen</string>
   <string name="loading_data">Daten werden geladen …</string>
   <string name="reading_indexes">Verarbeite Indizes …</string>
