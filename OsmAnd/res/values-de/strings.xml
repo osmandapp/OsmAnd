@@ -1,4 +1,4 @@
-﻿Osm<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="map_online_plugin_is_not_installed">Aktivieren Sie das Online-Karten-Plugin, um andere Kartenquellen nutzen zu können.</string>
 	<string name="map_online_data">Online-Karten (Kacheln)</string>
