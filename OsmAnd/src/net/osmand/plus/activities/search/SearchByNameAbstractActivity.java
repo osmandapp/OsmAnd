@@ -138,7 +138,10 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	}
 	
 	protected void finishInitializing(List<T> list){
+		Comparator<? super T> cmp = createComparator();
+		getListAdapter().sort(cmp);
 		if(list != null){
+			Collections.sort(list,cmp);
 			initialListToFilter = list;
 		}
 		querySearch(searchText.getText().toString());
@@ -250,8 +253,6 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			return null;
 		}
 
-
-
 		@Override
 		protected void publishResults(CharSequence constraint, FilterResults results) {
 			if(results != null && initializeTaskIsFinished()){
@@ -264,13 +265,8 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 
 	protected class NamesAdapter extends ArrayAdapter<T> {
 		
-		private final Comparator<? super T> cmp;
-		private final List<T> list;
-
 		NamesAdapter(List<T> list, Comparator<? super T> cmp) {
 			super(SearchByNameAbstractActivity.this, R.layout.searchbyname_list, list);
-			this.list = list;
-			this.cmp = cmp;
 			Collections.sort(list, cmp);
 		}
 
@@ -287,16 +283,5 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			label.setText(getText(getItem(position)));
 			return row;
 		}
-		
-		@Override
-		public void add(T object) {
-			int index = Collections.binarySearch(list, object, cmp);
-			if (index < 0) {
-				index = -index-1;
-			}
-			super.insert(object, index);
-		};
-		
-		
 	}
 }
