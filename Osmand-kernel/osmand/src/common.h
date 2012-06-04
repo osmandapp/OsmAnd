@@ -13,9 +13,9 @@
 #ifndef ANDROID
 #define GNU_HASH_MAP
 #endif
+
 #include <hash_map>
 #include <hash_set>
-#endif
 
 #endif
 
