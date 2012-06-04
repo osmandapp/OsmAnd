@@ -1,4 +1,4 @@
-projects := protobuf png skia expat freetype osmand
+projects := protobuf zlib png skia expat freetype osmand
 
 .DEFAULT: installr
 .PHONY: release debug clean installr installd

@@ -69,7 +69,11 @@ void ElapsedTimer::start()
 	if (!enableFlag)
 		return;
 	if (!run)
+	#ifndef RT_NOT_SUPPORTED
 		clock_gettime(CLOCK_MONOTONIC, &startInit);
+	#else
+		startInit.tv_nsec =0;
+	#endif
 	run = true;
 }
 
@@ -77,8 +81,11 @@ void ElapsedTimer::pause()
 {
 	if (!run)
 		return;
-
+#ifndef RT_NOT_SUPPORTED
 	clock_gettime(CLOCK_MONOTONIC, &endInit);
+#else
+	endInit.tv_nsec =0;
+#endif
 	int sec = endInit.tv_sec - startInit.tv_sec;
 	if (sec > 0)
 		elapsedTime += 1e9 * sec;

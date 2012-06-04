@@ -16,7 +16,6 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/src \
 	
 LOCAL_SRC_FILES := \
 	src/osmand_log.cpp \
-	src/java_wrap.cpp \
 	src/common.cpp \
 	src/mapObjects.cpp \
 	src/multipolygons.cpp \

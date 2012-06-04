@@ -15,12 +15,13 @@ CFLAGS_release := -O2
 # Get the build type
 PREBUILT_DIR_PREFIX = ../lib/$(TARGET)-$(ARCH)
 
-# Collect objects
-OBJECTS = $(foreach sourceFilesExt,$(CC_SOURCE_FILES_EXTS), \
-	$(patsubst %.$(sourceFilesExt),obj-$(TARGET)-$(ARCH)/%.$(sourceFilesExt).cc.o,$(filter %.$(sourceFilesExt),$(LOCAL_SRC_FILES))) \
+
+OBJECTS_NAMES = $(foreach sourceFilesExt,$(CC_SOURCE_FILES_EXTS), \
+	$(patsubst %.$(sourceFilesExt),%.$(sourceFilesExt).cc.o,$(filter %.$(sourceFilesExt),$(LOCAL_SRC_FILES))) \
 ) $(foreach sourceFilesExt,$(CXX_SOURCE_FILES_EXTS), \
-	$(patsubst %.$(sourceFilesExt),obj-$(TARGET)-$(ARCH)/%.$(sourceFilesExt).cxx.o,$(filter %.$(sourceFilesExt),$(LOCAL_SRC_FILES))) \
+	$(patsubst %.$(sourceFilesExt),%.$(sourceFilesExt).cxx.o,$(filter %.$(sourceFilesExt),$(LOCAL_SRC_FILES))) \
 )
+OBJECTS = $(addprefix obj-$(TARGET)-$(ARCH)/,$(OBJECTS_NAMES))
 
 # Default target
 .DEFAULT: installr
@@ -34,8 +35,8 @@ OBJECTS = $(foreach sourceFilesExt,$(CC_SOURCE_FILES_EXTS), \
 # Route build targets properly
 installr: install-release
 installd: install-debug
-release: build-release/$(LIBNAME).$(LIBTYPE)
-debug: build-debug/$(LIBNAME).$(LIBTYPE)
+release: build-release/$(TARGET)-$(ARCH)/$(LIBNAME).$(LIBTYPE)
+debug: build-debug/$(TARGET)-$(ARCH)/$(LIBNAME).$(LIBTYPE)
 
 # Clean removes all objects
 clean:
@@ -45,32 +46,32 @@ clean:
 # This target copies final output file to prebuilt folder
 install-%: %
 	@mkdir -p $(PREBUILT_DIR_PREFIX)-$*
-	cp build-$*/$(LIBNAME).$(LIBTYPE) $(PREBUILT_DIR_PREFIX)-$*/$(LIBNAME).$(LIBTYPE)
+	cp build-$*/$(TARGET)-$(ARCH)/$(LIBNAME).$(LIBTYPE) $(PREBUILT_DIR_PREFIX)-$*/$(LIBNAME).$(LIBTYPE)
 
 # Builds source files using CC compiler
 build-release/obj-$(TARGET)-$(ARCH)/%.cc.o : % $(LOCAL_C_INCLUDES)
 	@mkdir -p `dirname $@`
-	$(CC) -o $@ -c $< $(CFLAGS_release) $(CFLAGS) $(addprefix -I, $(LOCAL_C_INCLUDES)) $(LOCAL_CFLAGS)
+	$(CC) -o $@ -c $< $(CFLAGS_release) $(CFLAGS) $(addprefix -I, $(LOCAL_C_INCLUDES)) $(LOCAL_CFLAGS) $(GLOBAL_INCLUDES)
 build-debug/obj-$(TARGET)-$(ARCH)/%.cc.o : % $(LOCAL_C_INCLUDES)
 	@mkdir -p `dirname $@`
-	$(CC) -o $@ -c $< $(CFLAGS_debug) $(CFLAGS) $(addprefix -I, $(LOCAL_C_INCLUDES)) $(LOCAL_CFLAGS)
+	$(CC) -o $@ -c $< $(CFLAGS_debug) $(CFLAGS) $(addprefix -I, $(LOCAL_C_INCLUDES)) $(LOCAL_CFLAGS) $(GLOBAL_INCLUDES)
 	
 # Builds source files using CXX compiler
 build-release/obj-$(TARGET)-$(ARCH)/%.cxx.o : % $(LOCAL_C_INCLUDES)
 	@mkdir -p `dirname $@`
-	$(CXX) -o $@ -c $< $(CXXFLAGS_release) $(CFLAGS) $(addprefix -I, $(LOCAL_C_INCLUDES)) $(LOCAL_CFLAGS)
+	$(CXX) -o $@ -c $< $(CXXFLAGS_release) $(CFLAGS) $(addprefix -I, $(LOCAL_C_INCLUDES)) $(LOCAL_CFLAGS) $(GLOBAL_INCLUDES)
 build-debug/obj-$(TARGET)-$(ARCH)/%.cxx.o : % $(LOCAL_C_INCLUDES)
 	@mkdir -p `dirname $@`
-	$(CXX) -o $@ -c $< $(CXXFLAGS_debug) $(CFLAGS) $(addprefix -I, $(LOCAL_C_INCLUDES)) $(LOCAL_CFLAGS)
+	$(CXX) -o $@ -c $< $(CXXFLAGS_debug) $(CFLAGS) $(addprefix -I, $(LOCAL_C_INCLUDES)) $(LOCAL_CFLAGS) $(GLOBAL_INCLUDES)
 	
 # This target assembles static library
 .SECONDEXPANSION:
-build-%/$(LIBNAME).$(STATICLIB_EXT): $$(addprefix build-%/,$(OBJECTS))
+build-%/$(TARGET)-$(ARCH)/$(LIBNAME).$(STATICLIB_EXT): $$(addprefix build-%/,$(OBJECTS))
 	@mkdir -p `dirname $@`
 	$(AR) rs $@ $?
 	
 # This target assembles dynamic library
 .SECONDEXPANSION:
-build-%/$(LIBNAME).$(DYNAMICLIB_EXT): $$(addprefix build-%/,$(OBJECTS))
+build-%/$(TARGET)-$(ARCH)/$(LIBNAME).$(DYNAMICLIB_EXT): $$(addprefix build-%/,$(OBJECTS))
 	@mkdir -p `dirname $@`
-	$(CXX) -shared -o $@ $? $(LDFLAGS) -L$(PREBUILT_DIR_PREFIX)-$* $(LDLIBS)
+	$(CXX) -o $@ $? $(LDFLAGS) -L$(PREBUILT_DIR_PREFIX)-$* $(LDLIBS)

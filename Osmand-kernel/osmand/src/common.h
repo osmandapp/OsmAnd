@@ -9,6 +9,7 @@
 #include <SkPath.h>
 #include <SkBitmap.h>
 #include "osmand_log.h"
+#include "math.h"
 
 
 #ifdef _MSC_VER

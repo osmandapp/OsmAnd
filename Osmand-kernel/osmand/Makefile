@@ -5,10 +5,28 @@ include ../Makefile.vars
 LOCAL_PATH = .
 include Common.mk
 
-# Set library name
+OSMAND_FLAGS = \
+	-DGOOGLE_PROTOBUF_NO_RTTI \
+	-DSK_ALLOW_STATIC_GLOBAL_INITIALIZERS=0 \
+	-DSK_RELEASE \
+	-DGR_RELEASE=1 \
+	-DHASH_MAP_GNU
 LIBNAME = $(LIBRARY_PREFIX)osmand
 LIBTYPE = $(DYNAMICLIB_EXT)
-LDLIBS += -lskia -lproto -lpthread -lrt -lft2 -lexpat -lpng -lz
+LDLIBS += -lskia -lproto -lpthread -lft2 -lexpat -lpng
+ifeq ($(TARGET),nacl)
+LDLIBS += -L$(TC_PATH)/i686-nacl/usr/lib -lz
+OSMAND_FLAGS += \
+	-DRT_NOT_SUPPORTED
+LOCAL_SRC_FILES += \
+	src/osmand_nacl.c
+else 
+LDLIBS += -lrt -lz
+LOCAL_SRC_FILES += \
+	src/java_wrap.cpp
+# Set library name
+
+
 ifeq ($(findstring CYGWIN,$(shell uname)),CYGWIN)
 	FIXED_JAVA_HOME := $(shell cygpath -u "$(JAVA_HOME)")
 else
@@ -25,13 +43,8 @@ endif
 ifeq ($(JAVA_OS),)
 	JAVA_OS := linux
 endif
-OSMAND_FLAGS = \
-	-DGOOGLE_PROTOBUF_NO_RTTI \
-	-DSK_ALLOW_STATIC_GLOBAL_INITIALIZERS=0 \
-	-DSK_RELEASE \
-	-DGR_RELEASE=1 \
-	-c -I"$(FIXED_JAVA_HOME)/include" -I"$(FIXED_JAVA_HOME)/include/$(JAVA_OS)" \
-	-DHASH_MAP_GNU
+OSMAND_FLAGS += -c -I"$(FIXED_JAVA_HOME)/include" -I"$(FIXED_JAVA_HOME)/include/$(JAVA_OS)"
+endif
 	
 CFLAGS += $(OSMAND_FLAGS)
 CXXFLAGS += $(OSMAND_FLAGS)

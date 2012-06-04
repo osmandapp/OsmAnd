@@ -115,7 +115,9 @@
 #endif  // !_MSC_VER
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/stubs/common.h>          // for GOOGLE_PREDICT_TRUE macro
-
+#ifndef INT_MAX
+	#define INT_MAX 0x7FFFFFFF
+#endif
 namespace google {
 
 namespace protobuf {
