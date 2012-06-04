@@ -15,13 +15,16 @@ LIBNAME = $(LIBRARY_PREFIX)osmand
 LIBTYPE = $(DYNAMICLIB_EXT)
 LDLIBS += -lskia -lproto -lpthread -lft2 -lexpat -lpng -lz
 
+ifndef RT_NOT_SUPPORTED
+LDLIBS += -lrt
+endif
+
 ifeq ($(TARGET),nacl)
 OSMAND_FLAGS += \
 	-DRT_NOT_SUPPORTED
 LOCAL_SRC_FILES += \
 	src/osmand_nacl.cpp
 else 
-LDLIBS += -lrt
 LOCAL_SRC_FILES += \
 	src/java_wrap.cpp
 # Set library name
@@ -44,6 +47,7 @@ ifeq ($(JAVA_OS),)
 	JAVA_OS := linux
 endif
 OSMAND_FLAGS += -c -I"$(FIXED_JAVA_HOME)/include" -I"$(FIXED_JAVA_HOME)/include/$(JAVA_OS)"
+
 endif
 	
 CFLAGS += $(OSMAND_FLAGS)

@@ -1,8 +1,6 @@
 OSMAND_PNG_LOC := ./png_library
 
 OSMAND_PNG_ABS := $(LOCAL_PATH)/png_library
-OSMAND_ZLIB_ABS := $(LOCAL_PATH)/../zlib/zlib_library
-
 LOCAL_SRC_FILES:= \
 	$(OSMAND_PNG_LOC)/png.c \
 	$(OSMAND_PNG_LOC)/pngerror.c \
@@ -22,7 +20,6 @@ LOCAL_SRC_FILES:= \
 	$(OSMAND_PNG_LOC)/pngwtran.c \
 	$(OSMAND_PNG_LOC)/pngwutil.c
 
-LOCAL_C_INCLUDES += \
-	$(OSMAND_ZLIB_ABS)/
+LOCAL_C_INCLUDES += 
 
 

@@ -30,4 +30,6 @@ LIBNAME = $(LIBRARY_PREFIX)z
 LIBTYPE = $(STATICLIB_EXT)
 
 # Finally, include generic rules
+ifdef ZLIB_BUILD
 include ../Makefile.rules
+endif

@@ -67,12 +67,12 @@ LOCAL_SRC_FILES := \
 	$(OSMAND_SKIA_LOC)/src/core/SkGraphics.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkLineClipper.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkMallocPixelRef.cpp \
+	$(OSMAND_SKIA_LOC)/src/core/SkMMapStream.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkMask.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkMaskFilter.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkMath.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkMatrix.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkMetaData.cpp \
-	$(OSMAND_SKIA_LOC)/src/core/SkMMapStream.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkPackBits.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkPaint.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkPath.cpp \
@@ -191,7 +191,9 @@ LOCAL_SRC_FILES := \
 	$(OSMAND_SKIA_LOC)/src/utils/SkParsePath.cpp \
 	$(OSMAND_SKIA_LOC)/src/utils/SkProxyCanvas.cpp \
 	$(OSMAND_SKIA_LOC)/src/utils/SkSfntUtils.cpp \
-	$(OSMAND_SKIA_LOC)/src/utils/SkUnitMappers.cpp
+	$(OSMAND_SKIA_LOC)/src/utils/SkUnitMappers.cpp 
+		
+## SkMMapStream is not built in Windows however it is required for Linux version
 
 LOCAL_C_INCLUDES += \
 	$(LOCAL_PATH) \
@@ -206,4 +208,4 @@ LOCAL_C_INCLUDES += \
 	$(OSMAND_PNG_ABS) \
 	$(OSMAND_GIF_ABS) \
 	$(OSMAND_EXPAT_ABS)/lib \
-	$(OSMAND_JPEG_ABS)
+	$(OSMAND_JPEG_ABS) 

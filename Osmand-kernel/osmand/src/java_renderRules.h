@@ -107,8 +107,8 @@ RenderingRule* createRenderingRule(JNIEnv* env, jobject rRule, RenderingRulesSto
 
 void initDictionary(JNIEnv* env, RenderingRulesStorage* storage, jobject javaStorage) {
 	jobject listDictionary = env->GetObjectField(javaStorage, RenderingRulesStorageClass_dictionary);
-	uint sz = env->CallIntMethod(listDictionary, List_size);
-	uint i = 0;
+	uint32 sz = env->CallIntMethod(listDictionary, List_size);
+	uint32 i = 0;
 	for (; i < sz; i++) {
 		jstring st = (jstring) env->CallObjectMethod(listDictionary, List_get, i);
 //			if(st != NULL)
@@ -128,8 +128,8 @@ void initDictionary(JNIEnv* env, RenderingRulesStorage* storage, jobject javaSto
 void initProperties(JNIEnv* env, RenderingRulesStorage* st, jobject javaStorage) {
 	jobject props = env->GetObjectField(javaStorage, RenderingRulesStorage_PROPS);
 	jobject listProps = env->GetObjectField(props, RenderingRuleStorageProperties_rules);
-	uint sz = env->CallIntMethod(listProps, List_size);
-	uint i = 0;
+	uint32 sz = env->CallIntMethod(listProps, List_size);
+	uint32 i = 0;
 	for (; i < sz; i++) {
 		jobject rulePrope = env->CallObjectMethod(listProps, List_get, i);
 		bool input = (env->GetBooleanField(rulePrope, RenderingRuleProperty_input) == JNI_TRUE);

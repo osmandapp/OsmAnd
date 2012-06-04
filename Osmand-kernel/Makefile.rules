@@ -40,8 +40,10 @@ debug: build-debug/$(TARGET)-$(ARCH)/$(LIBNAME).$(LIBTYPE)
 
 # Clean removes all objects
 clean:
-	$(RM) -r build-release
-	$(RM) -r build-debug
+	$(RM) -r build-release/obj-$(TARGET)-$(ARCH)/
+	$(RM) -r build-debug/obj-$(TARGET)-$(ARCH)/
+	$(RM) -r build-release/$(TARGET)-$(ARCH)
+	$(RM) -r build-debug/$(TARGET)-$(ARCH)
 
 # This target copies final output file to prebuilt folder
 install-%: %
@@ -68,7 +70,7 @@ build-debug/obj-$(TARGET)-$(ARCH)/%.cxx.o : % $(LOCAL_C_INCLUDES)
 .SECONDEXPANSION:
 build-%/$(TARGET)-$(ARCH)/$(LIBNAME).$(STATICLIB_EXT): $$(addprefix build-%/,$(OBJECTS))
 	@mkdir -p `dirname $@`
-	$(AR) rs $@ $?
+	$(AR) rs $@ $(addprefix build-$*/,$(OBJECTS))
 	
 # This target assembles dynamic library
 .SECONDEXPANSION:

@@ -529,7 +529,7 @@ HMAP::hash_map<int, std::vector<int> > sortObjectsByProperOrder(std::vector <Map
 		const int size = mapDataObjects.size();
 		int i = 0;
 		for (; i < size; i++) {
-			uint sh = i << 8;
+			uint32 sh = i << 8;
 			MapDataObject* mobj = mapDataObjects[i];
 			size_t sizeTypes = mobj->types.size();
 			size_t j = 0;

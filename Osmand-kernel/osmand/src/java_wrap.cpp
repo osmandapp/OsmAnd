@@ -1,7 +1,9 @@
 #ifndef _JAVA_WRAP_CPP
 #define _JAVA_WRAP_CPP
 
+#ifdef ANDROID_BUILD
 #include <dlfcn.h>
+#endif
 #include <SkBitmap.h>
 #include <SkCanvas.h>
 #include <SkImageDecoder.h>
@@ -19,7 +21,7 @@ void loadJniRenderingContext(JNIEnv* env);
 void loadJniRenderingRules(JNIEnv* env);
 
 static const int simplePngSize = 93;
-static void* simplePng = new uint8[simplePngSize]{
+static uint8 simplePngarray[simplePngSize] = {
 		0x89 ,0x50 ,0x4E ,0x47 ,0x0D ,0x0A ,0x1A ,0x0A ,
 		0x00 ,0x00 ,0x00 ,0x0D ,0x49 ,0x48 ,0x44 ,0x52 ,
 		0x00 ,0x00 ,0x00 ,0x06 ,0x00 ,0x00 ,0x00 ,0x06 ,
@@ -33,6 +35,7 @@ static void* simplePng = new uint8[simplePngSize]{
 		0x1D ,0x00 ,0x00 ,0x00 ,0x00 ,0x49 ,0x45 ,0x4E ,
 		0x44 ,0xAE ,0x42 ,0x60 ,0x82
 };
+static void* simplePng = simplePngarray;
 
 
 extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)

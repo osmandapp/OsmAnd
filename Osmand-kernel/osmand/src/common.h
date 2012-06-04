@@ -4,12 +4,25 @@
 #include <string>
 #include <vector>
 
+#ifdef _Windows
+#include "backward/hash_map.h"
+#include "backward/hash_set.h"
+
+#else
+
+#ifndef ANDROID
+#define GNU_HASH_MAP
 #include <hash_map>
 #include <hash_set>
+#endif
+
+#endif
+
 #include <SkPath.h>
 #include <SkBitmap.h>
 #include "osmand_log.h"
 #include "math.h"
+
 
 
 #ifdef _MSC_VER
@@ -34,7 +47,7 @@ typedef uint32_t uint32;
 typedef uint64_t uint64;
 #endif
 
-#ifndef ANDROID
+#ifdef GNU_HASH_MAP
 
 #define HMAP __gnu_cxx
 namespace __gnu_cxx {
@@ -131,7 +144,7 @@ struct TextDrawInfo {
 	float minDistance;
 	int textColor;
 	int textShadow;
-	uint textWrap;
+	uint32 textWrap;
 	bool bold;
 	std::string shieldRes;
 	int textOrder;
