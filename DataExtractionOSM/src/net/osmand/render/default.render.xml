@@ -1224,13 +1224,13 @@
 
 			<!-- Bridges -->
 			<groupFilter layer="1">
-				<filter nightMode="true" minzoom="14" color__1="#ffffff" strokeWidth__1="6.5" color_0="#000000" strokeWidth_0="5"/>
-				<filter minzoom="14" color__1="#000000" strokeWidth__1="6.5" color_0="#ffffff" strokeWidth_0="5"/>
+				<filter nightMode="true" minzoom="14" color_1="#ffffff" strokeWidth_1="6.5" color_0="#000000" strokeWidth_0="5"/>
+				<filter minzoom="14" color_1="#000000" strokeWidth_1="6.5" color_0="#ffffff" strokeWidth_0="5"/>
 			</groupFilter>
 			<!-- Tunnels -->
 			<groupFilter layer="-1">
-				<filter nightMode="true" minzoom="14" color__1="#ffffff" strokeWidth__1="6.5" pathEffect__1="3_3" color_0="#000000" strokeWidth_0="5"/>
-				<filter minzoom="14" color__1="#000000" strokeWidth__1="6.5" pathEffect__1="3_3" color_0="#ffffff" strokeWidth_0="5"/>
+				<filter nightMode="true" minzoom="14" color_1="#ffffff" strokeWidth_1="6.5" pathEffect_1="3_3" color_0="#000000" strokeWidth_0="5"/>
+				<filter minzoom="14" color_1="#000000" strokeWidth_1="6.5" pathEffect_1="3_3" color_0="#ffffff" strokeWidth_0="5"/>
 			</groupFilter>
 		</group>
 
