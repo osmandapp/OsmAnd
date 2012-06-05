@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten kunnen sneller weergegeven worden. Werkt niet op sommige apparaten.</string>
+  <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
   <string name="simulate_route_progression_manually">Simuleer routeverloop handmatig</string>
   <string name="play_commands_of_currently_selected_voice">Speel instructies af met de geselecteerde stem</string>
   <string name="debugging_and_development">Osmand fout-opsporing en ontwikkeling</string>
@@ -102,7 +102,7 @@
   <string name="gpx_monitoring_disabled_warn">Eerst \'Log track to GPX\' toestaan in Tracking instellingen</string>
   <string name="show_current_gpx_title">Toon huidige track</string>
   <string name="tip_recent_changes_0_7_0_t">"Wijzigingen in 0.7.0 : \n\t- Offline Wikipedia gegevens met artikelen \n\t- Vernieuwde kaarten \n\t- Andere kleine features "</string>
-  <string name="free_version_message">Deze gratis OsmAnd versie is beperkt tot %1$s downloads %2$s en ondersteunt geen offline Wikipedia artikelen.</string>
+  <string name="free_version_message">Deze gratis Osmand versie is beperkt tot %1$s downloads %2$s en ondersteunt geen offline Wikipedia artikelen.</string>
   <string name="free_version_title">Gratis versie</string>
   <string name="poi_context_menu_showdescription">Toon interessepunt-beschrijvingen</string>
   <string name="index_name_north_america">Noord Amerika</string>
@@ -133,7 +133,7 @@
   <string name="routing_settings_descr">Specificeer route-opties</string>
   <string name="global_settings">Algemene instellingen</string>
   <string name="index_settings">Offline gegevens</string>
-  <string name="index_settings_descr">Download, bekijk en beheer offline kaarten en andere gegevens zoals GPX tracks</string>
+  <string name="index_settings_descr">Download, bekijk details en beheer offline kaarten</string>
   <string name="general_settings">Algemene instellingen</string>
   <string name="general_settings_descr">Configureer weergave en andere algemene instellingen</string>
   <string name="global_app_settings">Algemene app instellingen</string>
@@ -149,12 +149,12 @@
   <string name="tip_day_night_mode">Dag/Nacht modus</string>
   <string name="tip_day_night_mode_t">\tDe kaartweegave kan voor sommige vectorkaarten worden ingesteld op dag (helderder) en nacht (donkerder). \n\tNachtkleuren zijn veiliger voor nachtelijke ritten. \n\tU kunt de dag/nacht-omschakeling instellen bij \'Instellingen\' -&gt; \'Kaart uiterlijk\' -&gt;\'Dag/nacht modus\'. \n\tDe keuzes zijn: \n\t\'Zonsopkomst/Zonsondergang\' - automatische modus, gerelateerd aan de positie van de zon (standaardinstelling) \n\t\'Dag\' - gebruik altijd de dag-modus \n\t\'Nacht\' - gebruik altijd de nacht-modus \n\t\'Lichtsensor\' - de kaartweegave wordt bepaald door de lichtsensor van het apparaat (indien aanwezig)</string>
   <string name="tip_osm_improve">Verbeter openstreetmap gegevens</string>
-  <string name="tip_osm_improve_t">\tOsmAnd gebruikt kaarten, gebaseerd op Openstreetmap.org (OSM) gegevens en kan -behalve voor kaartweergave en navigatie- gebruikt worden om de kwaliteit van OSM gegevens te verbeteren. U kunt eenvoudig met een paar klikken interessepunten of OSM foutrapporten uploaden! \n\tHiervoor moet u eerst uw OSM login informatie opgeven bij \'Instellingen\' -&gt; \'Algemene instellingen\' -&gt; \'OSM\'. \n\tOm een nieuw interessepunt toe te voegen, gebruik de optie \'Creëer interessepunt\' in het kaartcontextmenu. Vervolg met het ingeven van de informatie over het interessepunt bij \'Creëer interessepunt\' en sla deze wijziging op. \n\tFouten in de kaarten kunnen direct worden gerapporteerd via OSM bug, de OSM groep kan het probleem dan sneller oplossen. \n\Om een fout te rapporteren, gebruik de optie \'Open OSM bug\' in het kaartcontextmenu. Geef daar een gedetailleerde beschrijving van het probleem en stuur het op met de \'Toevoegen\' knop. \n\tEr is een Internetverbinding nodig voor het aanmelden van bugs en interessepunten.</string>
+  <string name="tip_osm_improve_t">\tOsmand gebruikt kaarten, gebaseerd op Openstreetmap.org (OSM) gegevens en kan -behalve voor kaartweergave en navigatie- gebruikt worden om de kwaliteit van OSM gegevens te verbeteren. U kunt eenvoudig met een paar klikken interessepunten of OSM foutrapporten uploaden! \n\tHiervoor moet u eerst uw OSM login informatie opgeven bij \'Instellingen\' -&gt; \'Algemene instellingen\' -&gt; \'OSM\'. \n\tOm een nieuw interessepunt toe te voegen, gebruik de optie \'Creëer interessepunt\' in het kaartcontextmenu. Vervolg met het ingeven van de informatie over het interessepunt en bevestig de wijziging. \n\tFouten in de kaarten kunnen direct worden gerapporteerd via OSM bug, de OSM groep kan het probleem dan sneller oplossen. \n\Om een fout te rapporteren, gebruik de optie \'Open OSM bug\' in het kaartcontextmenu. Geef daar een gedetailleerde beschrijving van het probleem en stuur het op met de \'Toevoegen\' knop. \n\tEr is een Internetverbinding nodig voor het aanmelden van bugs en interessepunten.</string>
   <!-- end of string wijzigingen for new Preferences structure -->
   <string name="download_files_not_enough_space">Er is niet voldoende vrije ruimte %1$s MB te downloaden (vrij: %2$s).</string>
   <string name="download_files_question_space">Vrije ruimte is nu {2} MB! Download {0} bestand(en) ({1} MB)?</string>
   <string name="tip_select_destination_point">Selecteer bestemming</string>
-  <string name="tip_select_destination_point_t">\tU kunt een bestemming direct opgeven op de kaart (contextmenu, dan \'Instellen als bestemming\'), bij alle zoekactiviteiten, of via lang drukken op een regel in uw \'Lijst van interessepunten\'. \n\tDe bestemming wordt gemarkeerd als een oranje punt op de kaart en OsmAnd toont de afstand en richting hiernaartoe (oranje driehoek).</string>
+  <string name="tip_select_destination_point_t">\tU kunt een bestemming direct opgeven op de kaart (contextmenu, dan \'Zet als bestemming\'), bij alle zoekactiviteiten, of via lang drukken op een regel in uw lijst van interessepunten. \n\tDe bestemming wordt gemarkeerd als een oranje punt op de kaart en OsmAnd toont de afstand en richting hiernaartoe (oranje driehoek).</string>
   <!-- this block not translated, is obsolete -->
   <string name="tip_recent_changes_0_6_9_t">Wijzigingen in 0.6.9 : \n\t- Verbeterde offline kaartweergave\n\t- Snell offline weergave - zie de experimentele opties (werkt niet op sommige apparaten) \n\t- Enorme veranderingen in het uitzicht\n\t- Hoogte info \n\t- Nieuwe vertalingen (Vienamees, Pools) \n\t- Andere kleinigheden</string>
   <!-- End: this block not translated, is obsolete -->
@@ -318,9 +318,9 @@
   <string name="preferred_locale_descr">Selecteer taal</string>
   <string name="preferred_locale">Taal</string>
   <string name="tip_map_switch">Kaartbron</string>
-  <string name="tip_map_switch_t">\tDe snelste manier de kaartbron en de lagen te veranderen is via: \'Menu\' -&gt; \'Definieer beeld\' kaartbeeld. \n\tBij \'Kaartbron…\' kunt een selectie maken met de aanwezige offline vectorkaarten, ingestelde (online) kaartsegmenten, of handmatig vervaardigde kaarten bijvoorbeeld d.m.v OsmAndMapCreator op een PC. \n\tOsmAnd ondersteunt ook eigen kaartbronnen.</string>
+  <string name="tip_map_switch_t">\tDe snelste manier de kaartbron en de lagen te veranderen is via: \'Menu\' -&gt; \'Definieer beeld\'. \n\tBij \'Kaartbron…\' kunt een selectie maken uit de aanwezige offline vectorkaarten, ingestelde (online) kaartsegmenten, of handmatig vervaardigde kaarten bijvoorbeeld d.m.v OsmAndMapCreator op een PC. \n\tOsmand ondersteunt ook eigen kaartbronnen.</string>
   <string name="tip_app_mode">Gebruikersprofiel</string>
-  <string name="tip_app_mode_t">\tOsmAnd ondersteunt verschillende (aanpasbare) programmaprofielen voor verschillende toepassingen. \n\tU kunt profielen wijzigen in \'Menu\' -&gt; \'Instellingen\' -&gt; \'Gebruikersprofiel\', of bij het creëren van een route.</string>
+  <string name="tip_app_mode_t">\tOsmand ondersteunt verschillende (aanpasbare) programmaprofielen voor verschillende toepassingen. \n\tU kunt het profiel instellen in \'Menu\' -&gt; \'Instellingen\' -&gt; \'Gebruiksprofiel\', of bij het creëren van een route.</string>
   <string name="tip_navigation">Navigatie</string>
   <string name="tip_navigation_t">\tVoordat u een navigatie start (routing), moet u eerst een bestemming kiezen. Druk daarna op \'Menu\' -&gt; \'Navigeer\' op de kaart en selecteer het type navigatie.</string>
   <string name="tip_search">Zoeken</string>
@@ -328,7 +328,7 @@
   <string name="tip_map_context_menu">Kaart-ContextMenu</string>
   <string name="tip_map_context_menu_t">\tHet kaart-contextmenu is beschikbaar door een lange druk op de kaart of door op de trackball knop te drukken. \n\tDit toont een venster met de puntcoördinaten. Om de kaart-contextmenu dialoog te openen, druk er op. (Een lange druk verbergt het venster weer) \n\tHet kaart-contextmenu bevat alle acties met betrekking tot een punt (locatie).</string>
   <string name="tip_initial">Tips and Trucs</string>
-  <string name="tip_initial_t">\tOsmAnd is een navigatieprogramma met vele mogelijkheden. \n\tAls introductie, worden sommige tips and trucs getoond op het hoofdmenu scherm.</string>
+  <string name="tip_initial_t">\tOsmand is een navigatieprogramma met vele mogelijkheden. \n\tAls introductie worden sommige tips en trucs getoond op het hoofdmenu scherm.</string>
   <string name="next_button">Volgende</string>
   <string name="previous_button">Vorige</string>
   <string name="unit_of_length_descr">Wijzig eenheden van lengte en snelheid</string>
@@ -388,19 +388,19 @@
   <string name="reading_cached_tiles">Kaartsegmenten worden gelezen…</string>
   <string name="version_index_is_big_for_memory">De index \'\'{0}\'\' paste niet in het geheugen</string>
   <string name="version_index_is_not_supported">De versie van index \'\'{0}\'\' wordt niet ondersteund</string>
-  <string name="use_osmand_routing_service">OsmAnd routing &gt;20km</string>
-  <string name="use_osmand_routing_service_descr">Gebruik OsmAnd offline routing voor lange afstanden (&gt; 20 km, experimenteel)</string>
-  <string name="osmand_routing_experimental">OsmAnd offline routing is een experimentele functie en werkt niet voor afstanden van meer dan ongeveer 20 km.\n\nRouting service is tijdelijk omgeschakeld naar online CloudMade.</string>
+  <string name="use_osmand_routing_service">Osmand routing &gt;20km</string>
+  <string name="use_osmand_routing_service_descr">Gebruik Osmand offline routing voor lange afstanden (&gt; 20 km, experimenteel)</string>
+  <string name="osmand_routing_experimental">Osmand offline routing is een experimentele functie en werkt niet voor afstanden van meer dan ongeveer 20 km.\n\nRouting service is tijdelijk omgeschakeld naar online CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Kan de opgegeven directory niet vinden.</string>
   <string name="application_dir">Opslagdirectory</string>
-  <string name="application_dir_change_warning">Wijziging van de opslagdirectory verplaatst of verwijdert de gegevens niet. Dit moet u afzonderlijk en buiten OsmAnd doen. Toch doorgaan?</string>
-  <string name="osmand_net_previously_installed">Een oudere OsmAnd versie is al geïnstalleerd. Alle offline gegevens worden ondersteund door het nieuwe programma, maar Favorieten moeten worden geëxporteerd in het oude programma en later worden geïmporteerd door het nieuwe.</string>
+  <string name="application_dir_change_warning">Wijziging van de opslagdirectory verplaatst of verwijdert de gegevens niet. Dit moet u afzonderlijk en buiten Osmand doen. Toch doorgaan?</string>
+  <string name="osmand_net_previously_installed">Een oudere Osmand versie is al geïnstalleerd. Alle offline gegevens worden ondersteund door het nieuwe programma, maar Favorieten moeten worden geëxporteerd in het oude programma en later worden geïmporteerd door het nieuwe.</string>
   <string name="build_installed">Versie {0} succesvol geïnstalleerd ({1}).</string>
   <string name="downloading_build">Downloaden versie…</string>
-  <string name="install_selected_build">Doorgaan met de installatie van OsmAnd - {0} van {1} {2} MB ?</string>
-  <string name="loading_builds_failed">Het ophalen van de lijst met de versies van OsmAnd is mislukt</string>
-  <string name="loading_builds">OsmAnd versies… worden geladen</string>
-  <string name="select_build_to_install">Selecteer een van de OsmAnd versies om te installeren</string>
+  <string name="install_selected_build">Doorgaan met de installatie van Osmand - {0} van {1} {2} MB ?</string>
+  <string name="loading_builds_failed">Het ophalen van de lijst met de versies van Osmand is mislukt</string>
+  <string name="loading_builds">Osmand versies worden geladen...</string>
+  <string name="select_build_to_install">Selecteer één van de Osmand versies om te installeren</string>
   <string name="contribution_activity">Speciale actie voor contributie-versies</string>
   <string name="gps_status_app_not_found">GPS Status programma niet geïnstalleerd. Zoeken in Market?</string>
   <string name="voice_is_not_available_msg">Stem-begeleiding is niet aanwezig. Ga naar instellingen, selecteer een stem-gegevens pakket, en download deze.</string>
@@ -494,7 +494,7 @@
   <string name="background_service_wait_int">Maximum wachttijd voor positiebepaling</string>
   <string name="service_stop_background_service">Achtergrond navigatieservice uitschakelen</string>
   <string name="where_am_i">Waar ben ik?</string>
-  <string name="process_navigation_service">OsmAnd navigatieservice</string>
+  <string name="process_navigation_service">Osmand navigatieservice</string>
   <string name="network_provider">Netwerk</string>
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">seconden</string>
@@ -503,7 +503,7 @@
   <string name="background_service_int">Plaatsbepaling-interval</string>
   <string name="background_service_provider_descr">Selecteer achtergrondservice-provider</string>
   <string name="background_service_provider">Achtergrondservice-provider</string>
-  <string name="background_router_service_descr">Gebruik achtergrondservice voor plaatsbepaling over langere tijd</string>
+  <string name="background_router_service_descr">Gebruikt een achtergrondservice voor plaatsbepaling als het scherm uit is</string>
   <string name="background_router_service">Gebruik achtergrondservice</string>
   <string name="off_router_service_no_gps_available">De achtergrondservice vereist een locatiebron om aangezet te kunnen worden.</string>
   <string name="hide_poi_filter">Verberg filter</string>
@@ -539,7 +539,7 @@
   <string name="map_orientation_portrait">Portret</string>
   <string name="map_orientation_landscape">Landschap</string>
   <string name="map_screen_orientation">Kaartscherm-oriëntatie</string>
-  <string name="map_screen_orientation_descr">Selecteer scherm-orientation</string>
+  <string name="map_screen_orientation_descr">Scherm-oriëntatie: staand, liggend of apparaatinstelling</string>
   <string name="opening_hours_not_supported">Openingsuren-formaat kan niet gewijzigd worden</string>
   <string name="add_new_rule">Voeg nieuwe regel toe</string>
   <string name="transport_Routes">Routes</string>
@@ -557,7 +557,7 @@
   <string name="default_buttons_ok">OK</string>
   <string name="show_transport_over_map_description">Toon openbaar vervoer haltes op kaart</string>
   <string name="show_transport_over_map">Toon openbaar vervoer haltes</string>
-  <string name="hello">Navigatieprogamma OsmAnd</string>
+  <string name="hello">Navigatieprogamma Osmand</string>
   <string name="update_poi_success">Interessepunt gegevens succesvol vernieuwd ({0})</string>
   <string name="update_poi_error_local">Fout bij het vernieuwen van de locale lijst met interessepunten</string>
   <string name="update_poi_error_loading">Fout bij het laden van gegevens van server</string>
@@ -628,11 +628,11 @@
   <string name="new_route_calculated_dist">Nieuwe route berekend, afstand</string>
   <string name="arrived_at_destination">U bent aangekomen op uw bestemming</string>
   <string name="invalid_locations">Coördinaten zijn ongeldig!</string>
-  <string name="go_back_to_osmand">Ga terug naar de OsmAnd kaart</string>
+  <string name="go_back_to_osmand">Ga terug naar de Osmand kaart</string>
   <string name="close">Sluiten</string>
   <string name="loading_data">Gegevens worden geladen…</string>
   <string name="reading_indexes">Locale gegevens worden gelezen…</string>
-  <string name="previous_run_crashed">Vorige activteit is gecrashed. Logbestand staat op {0}. Graag dit probleem melden met bijvoeging van het logbestand.</string>
+  <string name="previous_run_crashed">Vorige activiteit is gecrashed. Logbestand staat op {0}. Graag dit probleem melden met bijvoeging van het logbestand.</string>
   <string name="saving_gpx_tracks">GPX tracks worden opgeslagen op SD…</string>
   <string name="finished_task">Gereed</string>
   <string name="reload_indexes_descr">Offline vectorkaarten en gegevens worden van SD kaart herladen</string>
@@ -792,7 +792,7 @@
   <string name="offline_navigation_not_available">Osmand offline navigatie is tijdelijk niet beschikbaar.</string>
   <string name="left_side_navigation">Links verkeer navigatie</string>
   <string name="left_side_navigation_descr">Activeer in een land waar men links rijdt</string>
-  <string name="download_link_and_local_description">"Download of update offline gegevens.\nKlik op de items om meer details te zien, druk lang om ze te deactiveren of te verwijderen.\nHuidige data op apparaat (%1$s vrij): "</string>
+  <string name="download_link_and_local_description">"Download of update offline gegevens.\nKlik op een item om meer details te zien, druk lang om ze te deactiveren, te hernoemen of te verwijderen.\nHuidige data op apparaat (%1$s vrij): "</string>
   <string name="unknown_from_location">Startlocatie is nog niet bepaald</string>
   <string name="context_menu_item_directions">Aanwijzingen naar hier</string>
   <string name="confirm_interrupt_download">Wil je het downloaden afbreken?</string>
