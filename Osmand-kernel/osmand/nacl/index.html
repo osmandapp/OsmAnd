@@ -69,11 +69,19 @@
       appendToEventLog('abort');
     }
 
-    // When the NaCl module has loaded indicate success.
+    var piGenerator = null;
+    var paintInterval = null;
+
+    // Start up the paint timer when the NaCl module has loaded.
     function moduleDidLoad() {
       loadProgressModule = document.getElementById('load_progress');
       appendToEventLog('load');
       updateStatus('SUCCESS');
+      piGenerator = document.getElementById('load_progress');
+      paintInterval = setInterval('load_progress.postMessage("paint")', 50);
+    }
+    function pageDidUnload() {
+      clearInterval(paintInterval);
     }
 
     // Handler that gets called when the NaCl module loading has completed.
@@ -94,7 +102,8 @@
 
     // Handle a message coming from the NaCl module.
     function handleMessage(message_event) {
-      alert(message_event.data);
+      // alert(message_event.data);
+      //document.form.pi.value = message_event.data;
     }
 
     // Set the global status message.  Updates the 'status_field' element with
@@ -195,7 +204,7 @@
   -->
   <embed name="nacl_module"
          id="load_progress"
-         width=0 height=0
+         width=500 height=500
          src="osmand.nmf"
          type="application/x-nacl" />
 

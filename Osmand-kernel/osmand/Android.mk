@@ -11,6 +11,8 @@ LOCAL_MODULE := osmand_neon
 LOCAL_ARM_NEON := true
 endif
 
+LOCAL_SRC_FILES += 	src/java_wrap.cpp
+
 LOCAL_CFLAGS := \
 	-DGOOGLE_PROTOBUF_NO_RTTI \
 	-DANDROID_BUILD \
