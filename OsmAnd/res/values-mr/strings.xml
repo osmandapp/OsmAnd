@@ -9,13 +9,13 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     -->
     <string name="offline_navigation_not_available">Osmand offline navigation is temporarily not available.</string>
-    <string name="left_side_navigation">Left Side Navigation</string>
-    <string name="left_side_navigation_descr">Turn on if you navigate in left side countries</string>
+    <string name="left_side_navigation">Left-Hand Driving</string>
+    <string name="left_side_navigation_descr">Select for countries with left-hand traffic</string>
     <string name="download_link_and_local_description">Download or update offline data. \nTo see more details click on the item, to deactivate or delete offline data press and hold. \nCurrent data on device (%1$s free):</string>
     <string name="unknown_from_location">Starting location is not yet determined</string>
     <string name="unknown_location">Position not yet known</string>
     <string name="context_menu_item_directions">Directions to here</string>
-    <string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
+    <string name="modify_transparency">पारदर्शकता बदला (० - पारदर्शक, 255 - अपारदर्शक)</string>
     <string name="confirm_interrupt_download">Do you want to interrupt file downloading?</string>
 	<string name="first_time_msg">To use the major features of this application, you need some regional offline data, which you can download (use Settings, Offline Data). Afterwards, you will be able to search by address, look up POIs and find public transportation.</string>    
     <string name="basemap_was_selected_to_download">Basemap is required for proper application functioning and was selected to download.</string>
@@ -25,15 +25,15 @@
     <string name="gpx_index_settings_descr">" (includes GPX analyzer)"</string>
     <string name="index_settings_descr">Download, view details and manage offline maps</string>
     <string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
-    <string name="map_online_data">Online maps</string>
-	<string name="map_online_data_descr">Use online maps (download and cache them on SD card)</string>
-    <string name="online_map_settings">Online Map</string>
+    <string name="map_online_data">ऑनलाइन नकाशे</string>
+	<string name="map_online_data_descr">ऑनलाइन नकाशे वापरा (डाउनलोड करून एसडी कार्ड वार साठवा)</string>
+    <string name="online_map_settings">ऑनलाइन नकाशा</string>
 	<string name="online_map_settings_descr">Configure online or cached tile map sources</string>
-	<string name="map_settings">- Map Settings</string>
+	<string name="map_settings">- नकाशाच्या सेटिंग्स</string>
 	<string name="map_settings_descr">Configure the map display</string>
 	
 	<string name="osmand_rastermaps_plugin_description">This plugin facilitates using a variety of online or cached tile maps as base map or as overlay / underlay maps. The maps can also be prepared offline and copied to the Osmand folder.</string>
-    <string name="osmand_rastermaps_plugin_name">Online Maps</string>
+    <string name="osmand_rastermaps_plugin_name">ऑनलाइन नकाशे</string>
     <string name="osmand_background_plugin_description">This plugin allows tracking or navigation in power saving (screen off) mode by periodically waking up the GPS device to record a track point or play a voice prompt.</string>
     <string name="osmand_background_plugin_name">Screen Off Features</string>
     <string name="osmand_accessibility_description">This plugin configures special accessibility features.</string>
@@ -64,10 +64,10 @@
     <string name="send_files_to_osm">Send GPX files to OSM?</string>
     <string name="gpx_visibility_txt">Visibility</string>
     <string name="gpx_tags_txt">Tags</string>
-    <string name="gpx_description_txt">Description</string>
+    <string name="gpx_description_txt">वर्णन</string>
     <string name="validate_gpx_upload_name_pwd">Please specify OSM user name and password to upload GPX files.</string>
     
-    <string name="default_buttons_support">Support</string>
+    <string name="default_buttons_support">सहाय्य</string>
 	<string name="support_new_features">Support new features</string>
 
     <string name="show_ruler_level_descr">नकाशावर पट्टी दाखवा</string>
@@ -82,8 +82,8 @@
 	<string name="accessibility_extensions">Accessibility extensions</string>
 	<string name="accessibility_mode">Accessibility mode</string>
 	<string name="accessibility_mode_descr">Turns on the accessibility features</string>
-	<string name="accessibility_on">On</string>
-	<string name="accessibility_off">Off</string>
+	<string name="accessibility_on">चालू</string>
+	<string name="accessibility_off">बंद</string>
 	<string name="accessibility_default">According to the global system setting</string>
 	
 	<string name="backToMenu">पुन्हा मेनूकडे</string>
@@ -107,19 +107,19 @@
 	<string name="west_north_west">west-north-west</string>
 	<string name="north_west">वायव्य</string>
 	<string name="north_north_west">north-north-west</string>
-	<string name="front">Front</string>
-	<string name="front_right">Front right</string>
+	<string name="front">पुढचा</string>
+	<string name="front_right">पुढील उजवा</string>
 	<string name="right">उजवा</string>
-	<string name="back_right">Back right</string>
-	<string name="back">Back</string>
-	<string name="back_left">Back left</string>
+	<string name="back_right">मागील उजवा</string>
+	<string name="back">मागचा</string>
+	<string name="back_left">मागील डावा</string>
 	<string name="left">डावा</string>
-	<string name="front_left">Front left</string>
+	<string name="front_left">पुढील डावा</string>
 	<string name="oclock">o\'clock</string>
 	<string name="towards">towards</string>
-	<string name="accuracy">Accuracy</string>
+	<string name="accuracy">अचूकता</string>
 	<string name="altitude">Altitude</string>
-	<string name="no_info">No info</string>
+	<string name="no_info">काहि माहिती नाही</string>
 	<string name="direction_style_sidewise">बाजूप्रमाणे (८ भाग)</string>
 	<string name="direction_style_clockwise">घड्याळासारखे (१२ भाग)</string>
 	<string name="settings_direction_style">दिशांचा प्रकार</string>
@@ -306,7 +306,7 @@
 	<string name="favorite_home_category">घर</string>
 	<string name="favorite_friends_category">मित्र</string>
 	<string name="favorite_places_category">ठिकाणे</string>
-	<string name="favorite_default_category">बाकीचे</string>
+	<string name="favorite_default_category">इतर</string>
 	
 	<string name="favourites_edit_dialog_name">नाव</string>
 	<string name="favourites_edit_dialog_category">वर्गीकरण</string>
