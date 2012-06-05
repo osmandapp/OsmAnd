@@ -187,10 +187,10 @@
 			<filter appMode="bicycle" tag="highway" value="byway" order="59"/>
 			<filter tag="highway" value="byway" order="37"/>
 
-		<!-- Additional attributes can be used in this way: additional="tracktype=grade1" -->
 			 <filter layer="1" tag="highway" value="track" order="67"/>
 			<filter appMode="pedestrian" tag="highway" value="track" order="60"/>
 			<filter tag="highway" value="track" order="37"/>
+			<!-- Additional attributes can be used in this way: additional="tracktype=grade1" -->
 
 			 <filter layer="1" tag="highway" value="path" order="67"/>
 			<filter appMode="pedestrian" tag="highway" value="path" order="60"/>
@@ -210,7 +210,8 @@
 			
 			<filter tag="natural" value="coastline_broken" order="35"/>
 			<filter tag="contour" value="" order="15"/>
-			
+
+			<filter tag="waterway" value="" order="6"/>
 		</group>
 
 		<filter tag="barrier" value="" order="20" objectType="2" point="false"/>
