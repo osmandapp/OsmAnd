@@ -210,8 +210,6 @@
 			
 			<filter tag="natural" value="coastline_broken" order="35"/>
 			<filter tag="contour" value="" order="15"/>
-
-			<filter tag="waterway" value="" order="6"/>
 		</group>
 
 		<filter tag="barrier" value="" order="20" objectType="2" point="false"/>
