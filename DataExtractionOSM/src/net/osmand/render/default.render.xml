@@ -1196,10 +1196,10 @@
 			</filter>
 			
 			<filter tag="cycleway" value="lane">
-				<groupFilter  minzoom="13" appMode="bicycle" color="#0000ff" pathEffect="8_4" strokeWidth="2" />
+				<filter appMode="bicycle" minzoom="14" color="#0000ff" strokeWidth="2" pathEffect="8_4" />
 			</filter>
 			<filter tag="cycleway" value="opposite_lane">
-				<groupFilter  minzoom="13" appMode="bicycle" color="#0000ff" pathEffect="8_4" strokeWidth="2" />
+				<filter appMode="bicycle" minzoom="14" color="#0000ff" strokeWidth="2" pathEffect="8_4" />
 			</filter>
 
 			<filter tag="highway" value="footway" color="#fa5073" pathEffect="2_2" >
