@@ -975,6 +975,36 @@ public class OsmandSettings {
 		return add;
 	}
 
+
+	/**
+	 * the location of a parked car
+	 */
+	public final static String PARKING_POINT_LAT = "parking_point_lat"; //$NON-NLS-1$
+	public final static String PARKING_POINT_LON = "parking_point_lon"; //$NON-NLS-1$
+	
+	public LatLon getParkingPosition() {
+		float lat = globalPreferences.getFloat(PARKING_POINT_LAT, 0);
+		float lon = globalPreferences.getFloat(PARKING_POINT_LON, 0);
+		if (lat == 0 && lon == 0) {
+			return null;
+		}
+		return new LatLon(lat, lon);
+	}
+
+	public boolean clearParkingPosition() {
+		return globalPreferences.edit().remove(PARKING_POINT_LAT).remove(PARKING_POINT_LON).commit();
+	}
+
+	public boolean setParkingPosition(double latitude, double longitude, String historyDescription) {
+		boolean add = globalPreferences.edit().putFloat(PARKING_POINT_LAT, (float) latitude).putFloat(PARKING_POINT_LON, (float) longitude).commit();
+		if(add){
+			if(historyDescription != null){
+				SearchHistoryHelper.getInstance().addNewItemToHistory(latitude, longitude, historyDescription, ctx);
+			}
+		}
+		return add;
+	}
+	
 	public static final String LAST_SEARCHED_REGION = "last_searched_region"; //$NON-NLS-1$
 	public static final String LAST_SEARCHED_CITY = "last_searched_city"; //$NON-NLS-1$
 	public static final String LAST_SEARCHED_CITY_NAME = "last_searched_city_name"; //$NON-NLS-1$

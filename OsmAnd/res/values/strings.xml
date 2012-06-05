@@ -44,6 +44,8 @@
     <string name="osmand_monitoring_name">Tracking</string>
     <string name="osmand_extra_settings_description">This plugin provides advanced map configuration and some device-specific settings.</string>
     <string name="osmand_extra_settings_name">Advanced Settings</string>
+    <string name="osmand_parking_position_description">This plugin facilitates a location of a parked car/bycicle.</string>
+    <string name="osmand_parking_position_name">Parking point</string>
     <string name="osmand_development_plugin_description">This plugin enables development and debugging features like animated navigation or rendering performance display.</string>
     <string name="osmand_development_plugin_name">Osmand Development</string>
     <string name="plugins_screen">Plugin Manager</string>
@@ -935,6 +937,7 @@
 
 <string name="context_menu_item_navigate_point">Set as destination</string>
 <string name="context_menu_item_add_favorite">Add to favorites</string>
+<string name="context_menu_item_add_parking_point">Add parking place</string>
 <string name="context_menu_item_update_map">Update map</string>
 <string name="context_menu_item_open_bug">Open OSM bug</string>
 <string name="context_menu_item_create_poi">Create POI</string>

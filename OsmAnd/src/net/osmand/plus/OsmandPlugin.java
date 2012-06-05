@@ -18,6 +18,7 @@ import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.extrasettings.OsmandExtraSettings;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -56,6 +57,7 @@ public abstract class OsmandPlugin {
 		installedPlugins.add(new OsmEditingPlugin(app));
 		installedPlugins.add(new AccessibilityPlugin(app));
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
+		installedPlugins.add(new ParkingPositionPlugin(app));
 		
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
 		for (OsmandPlugin plugin : installedPlugins) {
