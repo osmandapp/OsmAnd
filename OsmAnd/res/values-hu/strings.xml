@@ -811,7 +811,7 @@
   <string name="osmand_development_plugin_description">Ez a bővítmény elérhetővé teszi a fejlesztői és hibakeresési eszközöket, mint szimulált navigáció, vagy teljesítmény kijelzés.</string>
   <string name="osmand_development_plugin_name">OsmAnd fejlesztés</string>
   <string name="plugins_screen">Bővítménykezelő</string>
-  <string name="select_plugin_to_activate">Kiterjesztés bekapcsolása vagy kikapcsolása érintésre történik. (Lehet, hogy az OsmAnd-ot újra kell indítani.)</string>
+  <string name="select_plugin_to_activate">Kiterjesztés bekapcsolása és kikapcsolása érintésre történik. (Lehet, hogy az Osmandot újra kell indítani.)</string>
   <string name="prefs_plugins_descr">A kiterjesztések további lehetőségeket biztosítanak az alkalmazásban mint a útvonal mentés, raszteres térképek, kikapcsolt képernyős lehetőségek, akadálymentesítés és mások.</string>
   <string name="prefs_plugins">Bővítménykezelő</string>
   <string name="tip_recent_changes_0_8_0_t">"A 0.8.0 kiadás változásai:\n\t- Beépülők\n\t- Új offline térképadat formátum\n\t- Sok hibajavítás"</string>
