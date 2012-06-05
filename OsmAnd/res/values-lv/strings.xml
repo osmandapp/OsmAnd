@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
   <string name="plugins_screen">Spraudņi</string>
-  <string name="select_plugin_to_activate">Atzīmējiet spraudni, lai to aktivizētu. Lai spraudnis sāktu strādāt, nepieciešams aplikācijas restarts.</string>
+  <string name="select_plugin_to_activate">Atzīmējiet spraudni, lai to aktivizētu vai deaktivizētu. (Iespējams ir nepieciešams Osmand restarts.)</string>
   <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildu funkcionalitāti, tādu kā sekošana, kartes, baterijas saglabāšanas funkcijas, pieejamība un daudzas citas.</string>
   <string name="prefs_plugins">Spraudņi</string>
   <string name="tip_recent_changes_0_8_0_t">"Izmaiņas 0.8.0 : \n\t- Spraudņu funkcionalitāte \n\t- Jauns bezsaistes kartes atbalsts \n\t- Daudz kļūdu labojumu "</string>
@@ -110,7 +110,7 @@
   <string name="gpx_monitoring_disabled_warn">Lūdzu iespējojat \'Ierakstīt treku GPX failā\' Sekošanas uzstādījumos</string>
   <string name="show_current_gpx_title">Rādīt tekošo treku</string>
   <string name="tip_recent_changes_0_7_0_t">"Jaunumi 0.7.0 versijā : \n\t- Bezsaistes wikipedia dati \n\t- Atjaunotas kartes \n\t- Citi mazi uzlabojumi "</string>
-  <string name="free_version_message">Šajā bezmaksas OsmAnd versijā ir ierobežojums uz %1$s lejuplādētiem %2$s nu tā neatbalsta wikipedia rakstus.</string>
+  <string name="free_version_message">Šajā bezmaksas Osmand versijā ir ierobežojums uz %1$s lejuplādētiem %2$s nu tā neatbalsta bezsaistes wikipedia rakstus.</string>
   <string name="free_version_title">Bezmaksas versija</string>
   <string name="poi_context_menu_showdescription">Rādīt POI aprakstu</string>
   <string name="index_name_north_america">Ziemeļ Amerkika</string>
@@ -141,7 +141,7 @@
   <string name="routing_settings_descr">Norādīt navigācijas opcijas</string>
   <string name="global_settings">Globālie uzstādījumi</string>
   <string name="index_settings">Bezsaistes dati</string>
-  <string name="index_settings_descr">Lejuplādēt un pārvaldīt bezsaistes kartes un pārējos datus, tādus kā GPX trekus</string>
+  <string name="index_settings_descr">Lejuplādēt skata detaļas un pārvaldīt bezsaistes kartes</string>
   <string name="general_settings">Vispārīgie uzstādījumi</string>
   <string name="general_settings_descr">Konfigurēt vispārīgos uzstādījumus</string>
   <string name="global_app_settings">Globālie aplikācijas uzstādījumi</string>
@@ -150,14 +150,14 @@
   <string name="user_password">Jūsu OSM parole</string>
   <string name="user_password_descr">Nepieciešams, lai veiktu openstreetmap.org augšuplādi</string>
   <string name="osmand_service">Fona uzstādījumi</string>
-  <string name="osmand_service_descr">Lietojiet lai OsmAnd strādātu kā fona process, kad ekrāns ir izslēgts</string>
+  <string name="osmand_service_descr">Lietojiet šo, lai Osmand strādātu kad ekrāns ir izslēgts</string>
   <string name="tip_rotation_switching">Kartes rotēšana</string>
   <string name="tip_rotation_switching_t">\tJūs variet izvēlēties vai un kā notiks kartes rotācija \'Uzstādījumi\' -&gt; \'Kartes izskats\' -&gt; \'Kartes rotēšana\'. \n\tIzvēle ir: \n\t\'Nerotēt\' - Karte nemainīs orientāciju. Ziemeļi vienmēr būs augšā \n\t\'Kustības virzienā\' - Karte vienmēr pagriezīsies jūsu kustības virzienā \n\t\'Pēc kompasa\' - Karte vienmēr pagriezīsies pēc iekārtas kompasa datiem \n\tPadoms: Lai ātri pārslēgtu starp rotāciju ar kompasu un jūsu izstādījumos norādīto, jūs variet uzspiest uz kompasa kartes skatā.</string>
   <string name="binary_map_download_success">Lejuplāde ir veiksmīga.\n\t\n\tLai aktivizētu \'Uzstādījumi\' -&gt; \'Kartes konfigurācija\' -&gt; \'Bezsaistes vektoru kartes\'.</string>
   <string name="tip_day_night_mode">Dienas/Nakts režīms</string>
   <string name="tip_day_night_mode_t">\tDažām vektoru kartēm izskats var tikt mainīts starp dienas (gaišāku) un nakts (tumšāku). \n\tNakts krāsas ir drošākas braukšanai. \n\tJūs variet izvēlēties noteikumus dienas/nakts pārslēgšana ar \'Uzstādījumi\' -&gt; \'Kartes izskats\' -&gt;\'Dienas/nakts režīms\'. \n\tJūs variet izvēlēties: \n\t\'Ausma/Saulriets\' - automātiskais režīms, kas ir atkarīgs no saules (noklusētais) \n\t\'Diena\' - vienmēr lietot dienas režīmu \n\t\'Night\' - vienmēr lietot nakts režīmu \n\t\'Gaismas sensors\' - kartes izskats tiek kontrolēts izmantojot jūsu iekārtas gaismas sensoru (ja tāds jūsu iekārtai ir)</string>
   <string name="tip_osm_improve">OSM datu uzlabošana</string>
-  <string name="tip_osm_improve_t">\tOsmAnd lieto kartes kuras ir bāzētas uz Openstreetmap.org (OSM) datiem un, kopā ar kartes skatīšanos un navigāciju, var tikt izmantota, lai uzlabotu OSM datu kvalitāti. Jūs variet vienkārši augšuplādēt jaunus POI vai OSM kļūdas pieteikumus ar dažām dabībām! \n\tLai tas strādātu jums vispirms ir jānorāda OSM pieslēguma informācija \'Uzstādījumi\' -&gt; \'Vispārīgie uzstādījumi\' -&gt; \'OSM\'. \n\tLai pievienotu jaunu POI lietojiet opciju \'Izveidot POI\' kartes konteksta izvēlnē. Turpiniet ievadot POI informāciju par jauno punktu \'Izveidot POI\' dialogā un pabeidzot darbību apstipriniet ievadu. \n\tJums ir iespēja nekavējoties ziņot par kļūdām kartē ar OSM kļūdas pieteikuma palīdzību, tad OSM kopiena var ātrāk šo kļūdu izlabot. \n\tLai pievienotu OSM kļūdas pieteikumu izmantojiet opciju \'Pieteikt OSM kļūdu\' kartes konteksta izvēlnē. Tad ievadiet detalizētu kļūdas aprakstu un nobeidzot apstipriniet pieteikumu piespiežot pogu \'Pievienot\'. \n\tŅemiet vērā. OSM POI un kļūdu pieteikšanai ir nepieciešams datu savienojums.</string>
+  <string name="tip_osm_improve_t">\tOsmand lieto kartes kuras ir bāzētas uz Openstreetmap.org (OSM) datiem un, kopā ar kartes skatīšanos un navigāciju, var tikt izmantota, lai uzlabotu OSM datu kvalitāti. Jūs variet vienkārši augšuplādēt jaunus POI vai OSM kļūdas pieteikumus ar dažām dabībām! \n\tLai tas strādātu jums vispirms ir jānorāda OSM pieslēguma informācija \'Uzstādījumi\' -&gt; \'Vispārīgie uzstādījumi\' -&gt; \'OSM\'. \n\tLai pievienotu jaunu POI lietojiet opciju \'Izveidot POI\' kartes konteksta izvēlnē. Turpiniet ievadot POI informāciju par jauno punktu \'Izveidot POI\' dialogā un pabeidzot darbību apstipriniet ievadu. \n\tJums ir iespēja nekavējoties ziņot par kļūdām kartē ar OSM kļūdas pieteikuma palīdzību, tad OSM kopiena var ātrāk šo kļūdu izlabot. \n\tLai pievienotu OSM kļūdas pieteikumu izmantojiet opciju \'Pieteikt OSM kļūdu\' kartes konteksta izvēlnē. Tad ievadiet detalizētu kļūdas aprakstu un nobeidzot apstipriniet pieteikumu piespiežot pogu \'Pievienot\'. \n\tŅemiet vērā. OSM POI un kļūdu pieteikšanai ir nepieciešams datu savienojums.</string>
   <!-- end of string changes for new Preferences structure -->
   <string name="download_files_not_enough_space">Nepietiek brīvas vietas lai lejuplādētu %1$s MB (brīvi: %2$s).</string>
   <string name="download_files_question_space">Patreiz ir brīvi {2} MB! Lejuplādēt {0} failu(s) ({1} MB)?</string>
@@ -324,9 +324,9 @@
   <string name="preferred_locale_descr">Izvēlēties attēlošanas valodu</string>
   <string name="preferred_locale">Attēlošanas valoda</string>
   <string name="tip_map_switch">Kartes Avots</string>
-  <string name="tip_map_switch_t">\tĀtrākais veids lai mainītu kartes avotu un attēlojuma slāņus ir nospiest \'Izvēlne\' -&gt; \'Definēt skatu\' kartes skatā. \n\tZem \'Kartes avots...\' jūs variet izvēlēties vai lietot lejuplādētās bezsaistes kartes, predefinētās (tiešsaistes) bilžu kartes avotu, vai kartes kas ir pašu veidotas (piemēram ar OsmAndMapCreator uz jūsu datora. \n\tOsmAnd arī atbalsta ārējos avotus.</string>
+  <string name="tip_map_switch_t">\tĀtrākais veids lai mainītu kartes avotu un attēlojuma slāņus ir nospiest \'Izvēlne\' -&gt; \'Definēt skatu\' kartes skatā. \n\tZem \'Kartes avots...\' jūs variet izvēlēties vai lietot lejuplādētās bezsaistes kartes, predefinētās (tiešsaistes) bilžu kartes avotu, vai kartes kas ir pašu veidotas (piemēram ar OsmAndMapCreator uz jūsu datora. \n\tOsmand arī atbalsta ārējos avotus.</string>
   <string name="tip_app_mode">Lietotāja profils</string>
-  <string name="tip_app_mode_t">\tOsmAnd atbalsta dažādus (pielāgojamus) aplikācijas profilus dažādiem pielietojumiem. \n\tJūs variet mainīt profilus ar \'Izvēlne\' -&gt; \'Uzstādījumi\' -&gt; \'Lietotāja profils\', vai arī veidojot maršrutu.</string>
+  <string name="tip_app_mode_t">\tOsmand atbalsta dažādus (pielāgojamus) aplikācijas profilus dažādiem pielietojumiem. \n\tJūs variet mainīt profilus ar \'Izvēlne\' -&gt; \'Uzstādījumi\' -&gt; \'Lietotāja profils\', vai arī veidojot maršrutu.</string>
   <string name="tip_navigation">Navigācija</string>
   <string name="tip_navigation_t">\tPirms sākat navigāciju jums jāizvēlas gala punkts. Pēc tam nospiežat \'Izvēlne\' -&gt; \'Norādes\' uz kartes un izvēlaties navigācijas tipu.</string>
   <string name="tip_search">Meklēju</string>
@@ -334,7 +334,7 @@
   <string name="tip_map_context_menu">Kartes konteksta izvēlne</string>
   <string name="tip_map_context_menu_t">\tKartes konteksta izvēlne ir pieejama nospiežot un turot nospiestu kartes punktu. \n\tPēc darbības kartē parādās iezīme ar koordinātēm. Lai atvērtu kartes konteksta izvēlnes dialogu piespiežat uz tām. (Vai arī pieturiet nospiestu lai koordināšu ieraksts pazustu.) \n\tKartes konteksta izvēlne satur visas darbības kuras saistītas ar punktu (atrašanās vietu).</string>
   <string name="tip_initial">Padomi un triki</string>
-  <string name="tip_initial_t">\tOsmAnd ir navigācijas aplikācija ar daudz iespējām. \n\tIevadam, daži lietošanas padomi ir piesaistīti galvenajai ekrāna izvēlnei.</string>
+  <string name="tip_initial_t">\tOsmand ir navigācijas aplikācija ar daudz iespējām. \n\tIevadam, daži lietošanas padomi ir piesaistīti galvenajai ekrāna izvēlnei.</string>
   <string name="next_button">Tālāk</string>
   <string name="previous_button">Atpakaļ</string>
   <string name="unit_of_length_descr">Izmainīt garuma un ātruma vienības</string>
@@ -394,19 +394,19 @@
   <string name="reading_cached_tiles">Lasa kešotās bildes...</string>
   <string name="version_index_is_big_for_memory">Indekss \'\'{0}\'\' neietilpst atmiņā</string>
   <string name="version_index_is_not_supported">Indeksa versija \'\'{0}\'\' netiek atbalstīta</string>
-  <string name="use_osmand_routing_service">OsmAnd navigācija &gt;20km</string>
-  <string name="use_osmand_routing_service_descr">OsmAnd bezsaistes navigācija darbojas tikai &gt; 20 km gariem maršrutiem (eksperimentāli)</string>
-  <string name="osmand_routing_experimental">OsmAnd bezsaistes navigācija ir eksperimentāla funkcija un tā nestrādā attālumiem kas lielāki par 20 km.\n\nNavigācijas serviss pagaidām ir pārslēgts uz tiešsaistes CloudMade.</string>
+  <string name="use_osmand_routing_service">Osmand navigācija &gt;20km</string>
+  <string name="use_osmand_routing_service_descr">Osmand bezsaistes navigācija darbojas tikai &gt; 20 km gariem maršrutiem (eksperimentāli)</string>
+  <string name="osmand_routing_experimental">Osmand bezsaistes navigācija ir eksperimentāla funkcija un tā nestrādā attālumiem kas lielāki par 20 km.\n\nNavigācijas serviss pagaidām ir pārslēgts uz tiešsaistes CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Nevar atrast norādīto direktoriju.</string>
   <string name="application_dir">Glabātuves direktorija</string>
-  <string name="application_dir_change_warning">Glabātuves direktorijas izmaiņas nepārvietos un nedzēsīs datus. Tas jādara ne ar OsmAnd. Vai turpināt?</string>
-  <string name="osmand_net_previously_installed">Ir instalēta vecākas versijas OsmAnd aplikācija. Visi bezsaistes dati ir atbalstīt ar jauno aplikācijas versiju. Tikai nepieciešams eksportēt Izlases punktus un vēlāk importēt atpakaļ jaunajā aplikācijā.</string>
+  <string name="application_dir_change_warning">Glabātuves direktorijas izmaiņas nepārvietos un nedzēsīs datus. Tas jādara ne ar Osmand. Vai turpināt?</string>
+  <string name="osmand_net_previously_installed">Ir instalēta vecākas versijas Osmand aplikācija. Visi bezsaistes dati ir atbalstīt ar jauno aplikācijas versiju. Tikai nepieciešams eksportēt Izlases punktus un vēlāk importēt atpakaļ jaunajā aplikācijā.</string>
   <string name="build_installed">Būvējums {0} ir veiksmīgi uzinstalēts ({1}).</string>
   <string name="downloading_build">Lejuplādē būvējumu...</string>
-  <string name="install_selected_build">Vēlaties instalēt OsmAnd - {0} no {1} {2} MB ?</string>
-  <string name="loading_builds_failed">OsmAnd būvējumu saraksta saņemšana nav izdevusies</string>
-  <string name="loading_builds">Lejuplādēt OsmAnd būvējumus…</string>
-  <string name="select_build_to_install">Izvēlaties kuru OsmAnd būvējumu instalēt</string>
+  <string name="install_selected_build">Vēlaties instalēt Osmand - {0} no {1} {2} MB ?</string>
+  <string name="loading_builds_failed">Osmand būvējumu saraksta saņemšana nav izdevusies</string>
+  <string name="loading_builds">Lejuplādēju Osmand būvējumus…</string>
+  <string name="select_build_to_install">Izvēlaties kuru Osmand būvējumu instalēt</string>
   <string name="contribution_activity">Speciāla aktivitāte ieguldījuma versijai</string>
   <string name="gps_status_app_not_found">GPS statusa aplikācija nav instalēta. Meklēt marketā?</string>
   <string name="voice_is_not_available_msg">Balss vadība nav pieejama. Lūdzu dodaties uz uzstādījumiem izvēlaties datu pakotni un lejuplādēiet to.</string>
@@ -467,7 +467,7 @@
   <string name="rotate_map_compass_opt">Pēc kompasa</string>
   <string name="rotate_map_bearing_opt">Kustības virzienā</string>
   <string name="rotate_map_none_opt">Nemainīt virzienu</string>
-  <string name="rotate_map_to_bearing_descr">Izvēlēties kā notiek kartes orientācija</string>
+  <string name="rotate_map_to_bearing_descr">Izvēlēties kā notiek ekrāna ieregulēšana</string>
   <string name="rotate_map_to_bearing">Kartes orientācija</string>
   <string name="show_route">Maršruta detaļas</string>
   <string name="fav_imported_sucessfully">Izlase veiksmīgi importēta</string>
@@ -500,7 +500,7 @@
   <string name="background_service_wait_int">Maksimālā gaidīšana līdz labojumam</string>
   <string name="service_stop_background_service">Izslēgt fona navigācijas servisu</string>
   <string name="where_am_i">Kur es atrodos?</string>
-  <string name="process_navigation_service">OsmAnd navigācijas serviss</string>
+  <string name="process_navigation_service">Osmand navigācijas serviss</string>
   <string name="network_provider">Tīkls</string>
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">sekundes</string>
@@ -509,7 +509,7 @@
   <string name="background_service_int">Pamošanās intervāls</string>
   <string name="background_service_provider_descr">Izvēlaties pozīcijas sniedzēju kamēr darbojas fona režīmā</string>
   <string name="background_service_provider">"Pozīcijas sniedzējs"</string>
-  <string name="background_router_service_descr">Darbina OsmAnd fonā lai sekotu jūsu atrašanās vietai kamēr ekrāns ir izslēgts</string>
+  <string name="background_router_service_descr">Darbina Osmand fonā, lai sekotu jūsu atrašanās vietai kamēr ekrāns ir izslēgts</string>
   <string name="background_router_service">Darbināt fonā</string>
   <string name="off_router_service_no_gps_available">Navigācijas servisam fona navigācijas servisam ir jābūt ieslēgtam.</string>
   <string name="hide_poi_filter">Paslēpt filtru</string>
@@ -545,7 +545,7 @@
   <string name="map_orientation_portrait">Portrets</string>
   <string name="map_orientation_landscape">Ainava</string>
   <string name="map_screen_orientation">Ekrāna orientācija</string>
-  <string name="map_screen_orientation_descr">Izvēlēties ekrāna orientāciju</string>
+  <string name="map_screen_orientation_descr">Portrets, ainava vai iekārtas</string>
   <string name="opening_hours_not_supported">Atvēršanas stundas formāts nav domāts labošanai</string>
   <string name="add_new_rule">Pievienot jaunu noteikumu</string>
   <string name="transport_Routes">Maršruti</string>
@@ -563,7 +563,7 @@
   <string name="default_buttons_ok">OK</string>
   <string name="show_transport_over_map_description">Rādīt uz kartes sabiedriskā transporta kartes</string>
   <string name="show_transport_over_map">Rādīt transporta pieturas</string>
-  <string name="hello">Navigācijas programma OsmAnd</string>
+  <string name="hello">Navigācijas programma Osmand</string>
   <string name="update_poi_success">POI dati tika veiksmīgi augšuplādēti ({0} tika ielādēti)</string>
   <string name="update_poi_error_local">Kļūda augšuplādējot lokālo POI sarakstu</string>
   <string name="update_poi_error_loading">Kļūda ielādējot datus no servera</string>
@@ -634,11 +634,11 @@
   <string name="new_route_calculated_dist">Jauns ceļš ir aprēķināts, attālums</string>
   <string name="arrived_at_destination">Esat ieradies galapunktā</string>
   <string name="invalid_locations">Koordinātas nav derīgas!</string>
-  <string name="go_back_to_osmand">Iet atpakaļ uz OsmAnd karti</string>
+  <string name="go_back_to_osmand">Iet atpakaļ uz Osmand karti</string>
   <string name="close">Aizvērt</string>
   <string name="loading_data">Ielādē datus…</string>
   <string name="reading_indexes">Nolasa lokālos datus…</string>
-  <string name="previous_run_crashed">Pēdējā OsmAnd palaišana avarēja. Žurnālfails atrodas {0}. Lūdzu nosūtiet paziņojumu par kļūdu un pievienojot žurnālfailu.</string>
+  <string name="previous_run_crashed">Pēdējā Osmand palaišana avarēja. Žurnālfails atrodas {0}. Lūdzu nosūtiet paziņojumu par kļūdu un pievienojot žurnālfailu.</string>
   <string name="saving_gpx_tracks">Saglabā GPX ceļu uz SD...</string>
   <string name="finished_task">Pabeigts</string>
   <string name="reload_indexes_descr">Pārlasa vektorkartes un datus no SD kartes</string>
@@ -796,9 +796,9 @@
   <string name="edit_filter_create_message">Filtrs {0} tika izveidots</string>
   <string name="default_buttons_selectall">Izvēlēties visu</string>
   <string name="offline_navigation_not_available">Osmand bezsaistes navigācija pagaidām nav pieejama.</string>
-  <string name="left_side_navigation">Kreisās puses navigācija</string>
+  <string name="left_side_navigation">Kreisās rokas navigācija</string>
   <string name="left_side_navigation_descr">Ieslēdziet ja jūs atrodaties valstīs ar kreisās puses kustību</string>
-  <string name="download_link_and_local_description">Lejuplādēt vai atjaunināt bezsaistes datus.\nLai redzētu detaļas uzklikšķiniet uz ieraksta, lai deaktivizētu vai dzēstu bezsaistes datus uzspiežat un turiet piespiestu.\nDatu apjoms (%1$s brīvs):</string>
+  <string name="download_link_and_local_description">Lejuplādēt vai atjaunināt bezsaistes datus.\nLai redzētu detaļas uzklikšķiniet uz ieraksta, lai deaktivizētu vai dzēstu bezsaistes datus uzspiežat un turiet piespiestu. Datu apjoms (%1$s brīvs):</string>
   <string name="unknown_from_location">Sākuma atrašanās vieta vēl nav noteikta</string>
   <string name="context_menu_item_directions">Vadīt uz šo vietu</string>
   <string name="confirm_interrupt_download">Tiešām vēlaties pārtraukt faila lejuplādi?</string>
@@ -806,7 +806,7 @@
   <string name="gpx_index_settings_descr">"(iekļauj GPX analizatoru)"</string>
   <string name="map_online_plugin_is_not_installed">Atļaut kartes spraudnim iezīmēt atšķirīgus kartes avotus</string>
   <string name="map_online_data">Bezsaistes kartes</string>
-  <string name="map_online_data_descr">Lietot tiešaistes kartes (lejuplādējot un saglabājot tās SD kartē)</string>
+  <string name="map_online_data_descr">Lietot tiešaistes kartes (lejuplādējot un kešojot bildes SD kartē)</string>
   <string name="online_map_settings">Tiešsaistes karte</string>
   <string name="online_map_settings_descr">Konfigurēt tiešaistes vai kešotās kartes bildes</string>
   <string name="map_settings">- Kartes uzstādījumi</string>
