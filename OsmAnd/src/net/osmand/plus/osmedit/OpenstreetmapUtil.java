@@ -7,13 +7,11 @@ import android.app.Activity;
 
 public interface OpenstreetmapUtil {
 	
-	public static enum Action {CREATE, MODIFY, DELETE};
-
 	public EntityInfo getEntityInfo();
 	
-	public Node commitNodeImpl(Action action, Node n, EntityInfo info, String comment);
+	public Node commitNodeImpl(OsmPoint.Action action, Node n, EntityInfo info, String comment);
 	
 	public Node loadNode(Amenity n);
 	
-	public void updateNodeInIndexes(Activity ctx, OpenstreetmapUtil.Action action, Node n, Node oldNode);
+	public void updateNodeInIndexes(Activity ctx, OsmPoint.Action action, Node n, Node oldNode);
 }

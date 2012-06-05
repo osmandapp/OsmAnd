@@ -37,7 +37,7 @@ public class OpenstreetmapLocalUtil extends AbstractOpenstreetmapUtil {
 	}
 	
 	@Override
-	public Node commitNodeImpl(Action action, Node n, EntityInfo info, String comment){
+	public Node commitNodeImpl(OsmPoint.Action action, Node n, EntityInfo info, String comment){
 		Node newNode = n;
 		if (n.getId() == -1) {
 			newNode = new Node(n,--nextid); //generate local id for the created node
@@ -46,7 +46,7 @@ public class OpenstreetmapLocalUtil extends AbstractOpenstreetmapUtil {
 		p.setEntity(newNode);
 		p.setAction(action);
 		p.setComment(comment);
-		if (p.getAction() == Action.DELETE && newNode.getId() < 0) { //if it is our local poi
+		if (p.getAction() == OsmPoint.Action.DELETE && newNode.getId() < 0) { //if it is our local poi
 			db.deleteAllPOIModifications(p.getId());
 		} else {
 			db.addOpenstreetmap(p);

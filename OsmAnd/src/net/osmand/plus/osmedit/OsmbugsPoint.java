@@ -2,16 +2,14 @@ package net.osmand.plus.osmedit;
 
 import java.io.Serializable;
 
-public class OsmbugsPoint implements Serializable {
+public class OsmbugsPoint extends OsmPoint implements Serializable {
 	private static final long serialVersionUID = 729654300829771468L;
 
 	private long id;
 	private String text;
 	private double latitude;
 	private double longitude;
-	private OsmBugsUtil.Action action;
 	private String author;
-	private boolean stored = false;
 
 	public OsmbugsPoint(){
 	}
@@ -32,16 +30,8 @@ public class OsmbugsPoint implements Serializable {
 		return longitude;
 	}
 
-	public OsmBugsUtil.Action getAction() {
-		return action;
-	}
-
 	public String getAuthor() {
 		return author;
-	}
-
-	public boolean isStored() {
-		return stored;
 	}
 
 	public void setId(long id) {
@@ -60,20 +50,8 @@ public class OsmbugsPoint implements Serializable {
 		this.longitude = longitude;
 	}
 
-	public void setAction(String action) {
-		this.action = OsmBugsRemoteUtil.actionString.get(action);
-	}
-
-	public void setAction(OsmBugsUtil.Action action) {
-		this.action = action;
-	}
-
 	public void setAuthor(String author) {
 		this.author = author;
-	}
-
-	public void setStored(boolean stored) {
-		this.stored = stored;
 	}
 
 	@Override

@@ -16,16 +16,16 @@
 \n\t- Otros cambios</string>
 
 <string name="update_poi_does_not_change_indexes">Los cambios a POIs dentro de la aplicación no afectan a los archivos de mapa descargados; los cambios se guardan en un archivo local.</string>
-<string name="local_openstreetmap_uploading_poi">Enviando POIs…</string>
-<string name="local_openstreetmap_poi_were_uploaded">{0} POIs enviados</string>
-<string name="local_openstreetmap_uploadall">Enviar todos los POIs</string>
+<string name="local_openstreetmap_uploading">Enviando…</string>
+<string name="local_openstreetmap_were_uploaded">{0} POIs/Bugs enviados</string>
+<string name="local_openstreetmap_uploadall">Enviar todos</string>
 <string name="local_openstreetmap_items"></string>
-<string name="local_openstreetmap_show_poi">Mostrar POI en el mapa</string>
+<string name="local_openstreetmap_show">Mostrar en el mapa</string>
 <string name="local_openstreetmap_upload">Enviar modificación a OSM</string>
-<string name="local_openstreetmap_delete">Suprimir modificación a POI</string>
-<string name="local_openstreetmap_descr_title">Edición asíncrona de POI OSM:</string>
-<string name="local_openstreetmap_settings">Puntos OSM guardados localmente</string>
-<string name="local_openstreetmap_settings_descr">Mostrar y gestionar puntos OSM anotados en base de datos local</string>
+<string name="local_openstreetmap_delete">Suprimir modificación</string>
+<string name="local_openstreetmap_descr_title">Edición asíncrona de OSM:</string>
+<string name="local_openstreetmap_settings">Puntos de Interes/Bugs OSM guardados localmente</string>
+<string name="local_openstreetmap_settings_descr">Mostrar y gestionar puntos de Interes/Bugs OSM anotados en base de datos local</string>
 
 <string name="live_monitoring_descr">Permite el envío de peticiones HTTP a un servicio web especificado</string>
 <string name="live_monitoring">Seguimiento en directo</string>

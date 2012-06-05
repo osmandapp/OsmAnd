@@ -6,12 +6,10 @@ import net.osmand.data.AmenityType;
 import net.osmand.osm.Node;
 import net.osmand.osm.OSMSettings.OSMTagKey;
 
-public class OpenstreetmapPoint implements Serializable {
+public class OpenstreetmapPoint extends OsmPoint implements Serializable {
 	private static final long serialVersionUID = 729654300829771467L;
 	private Node entity;
-	private OpenstreetmapUtil.Action action;
 	private String comment;
-	private boolean stored = false;
 
 	public OpenstreetmapPoint(){
 	}
@@ -62,36 +60,16 @@ public class OpenstreetmapPoint implements Serializable {
 		return entity;
 	}
 
-	public OpenstreetmapUtil.Action getAction() {
-		return action;
-	}
-
 	public String getComment() {
 		return comment;
-	}
-
-	public boolean isStored() {
-		return stored;
 	}
 
 	public void setEntity(Node entity) {
 		this.entity = entity;
 	}
 
-	public void setAction(String action) {
-		this.action = OpenstreetmapRemoteUtil.actionString.get(action);
-	}
-
-	public void setAction(OpenstreetmapUtil.Action action) {
-		this.action = action;
-	}
-
 	public void setComment(String comment) {
 		this.comment = comment;
-	}
-
-	public void setStored(boolean stored) {
-		this.stored = stored;
 	}
 
 	@Override

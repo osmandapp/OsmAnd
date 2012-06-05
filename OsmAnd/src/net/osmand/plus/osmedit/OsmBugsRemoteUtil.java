@@ -6,8 +6,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Map;
 
 import net.osmand.LogUtil;
 
@@ -18,18 +16,6 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 	private static final Log log = LogUtil.getLog(OsmBugsRemoteUtil.class); 
 	
 	private final static String SITE_API = "http://openstreetbugs.schokokeks.org/api/0.1/"; //$NON-NLS-1$
-
-	public static final Map<Action, String> stringAction = new HashMap<Action, String>();
-	public static final Map<String, Action> actionString = new HashMap<String, Action>();
-	static {
-		stringAction.put(Action.CREATE, "create");
-		stringAction.put(Action.MODIFY, "modify");
-		stringAction.put(Action.CLOSE, "close");
-
-		actionString.put("create", Action.CREATE);
-		actionString.put("modify", Action.MODIFY);
-		actionString.put("close", Action.CLOSE);
-	};
 
 	public boolean createNewBug(double latitude, double longitude, String text, String authorName){
 		StringBuilder b = new StringBuilder();

@@ -24,7 +24,7 @@ public class OsmBugsLocalUtil implements OsmBugsUtil {
 		p.setText(text);
 		p.setLatitude(latitude);
 		p.setLongitude(longitude);
-		p.setAction(OsmBugsUtil.Action.CREATE);
+		p.setAction(OsmPoint.Action.CREATE);
 		p.setAuthor(authorName);
 		return db.addOsmbugs(p);
 	}
@@ -33,7 +33,7 @@ public class OsmBugsLocalUtil implements OsmBugsUtil {
 		OsmbugsPoint p = new OsmbugsPoint();
 		p.setId(id);
 		p.setText(text);
-		p.setAction(OsmBugsUtil.Action.MODIFY);
+		p.setAction(OsmPoint.Action.MODIFY);
 		p.setAuthor(authorName);
 		return db.addOsmbugs(p);
 	}
@@ -41,7 +41,7 @@ public class OsmBugsLocalUtil implements OsmBugsUtil {
 	public boolean closingBug(long id){
 		OsmbugsPoint p = new OsmbugsPoint();
 		p.setId(id);
-		p.setAction(OsmBugsUtil.Action.CLOSE);
+		p.setAction(OsmPoint.Action.DELETE);
 		return db.addOsmbugs(p);
 	}
 	
