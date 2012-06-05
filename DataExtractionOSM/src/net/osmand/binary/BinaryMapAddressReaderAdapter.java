@@ -504,8 +504,8 @@ public class BinaryMapAddressReaderAdapter {
 								int old = codedIS.pushLimit(len);
 								LatLon l = obj.getLocation();
 								Street s = new Street(obj);
-								readStreet(s, null, false, MapUtils.get31TileNumberX(l.getLatitude()) >> 7,
-										MapUtils.get31TileNumberY(l.getLongitude()) >> 7, obj.isPostcode() ? obj.getName() : null);
+								readStreet(s, null, false, MapUtils.get31TileNumberX(l.getLongitude()) >> 7,
+										MapUtils.get31TileNumberY(l.getLatitude()) >> 7, obj.isPostcode() ? obj.getName() : null);
 
 								if (matcher.matches(s.getName())) {
 									req.publish(s);
