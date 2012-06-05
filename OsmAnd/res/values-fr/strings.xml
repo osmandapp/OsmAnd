@@ -826,8 +826,8 @@ navigate_point_format_D, DM & DMS
   <string name="use_short_object_names">Utiliser les noms d\'objets</string>
   <string name="accessibility_preferences_descr">Préférences liées à l\'accessibilité</string>
   <string name="accessibility_preferences">Accessibilité</string>
-  <string name="use_fluorescent_overlays">Fluorescent overlays</string>
-  <string name="use_fluorescent_overlays_descr">Use fluorescent colors to display tracks and routes</string>
+  <string name="use_fluorescent_overlays">Sur-couche fluorescente</string>
+  <string name="use_fluorescent_overlays_descr">Utiliser les couleurs fluorescente pour les pistes et routes</string>
   <string name="favourites_edit_dialog_name">Nom</string>
   <string name="favourites_edit_dialog_category">Catégorie</string>
   <string name="navigate_point_format_D">DDD.DDDDD</string>
