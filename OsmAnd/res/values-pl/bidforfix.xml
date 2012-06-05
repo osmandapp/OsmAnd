@@ -2,5 +2,5 @@
 <resources>
     <string name="bidforfix_loading">Ładowanie</string>
     <string name="bidforfix_supporters">%1$d Wspierających</string>
-	<string name="bidforfix_funded">Ufundowane: %d%%</string>    
+	<string name="bidforfix_funded">Ufundowano: %d%%</string>    
 </resources>
