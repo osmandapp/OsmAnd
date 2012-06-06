@@ -1,6 +1,7 @@
 package net.osmand.data.preparation;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 import java.io.ByteArrayOutputStream;
@@ -24,6 +25,8 @@ import net.osmand.IProgress;
 import net.osmand.binary.OsmandOdb.MapData;
 import net.osmand.binary.OsmandOdb.MapDataBlock;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock;
+import net.osmand.binary.OsmandOdb.RestrictionData;
+import net.osmand.binary.OsmandOdb.RestrictionData.Builder;
 import net.osmand.binary.OsmandOdb.RouteData;
 import net.osmand.data.Boundary;
 import net.osmand.data.MapAlgorithms;
@@ -59,7 +62,7 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 
 	private RTree routeTree = null;
 	private MapRoutingTypes routeTypes;
-	private Map<Long, List<Long>> highwayRestrictions = new LinkedHashMap<Long, List<Long>>();
+	private TLongObjectHashMap<TLongArrayList> highwayRestrictions = new TLongObjectHashMap<TLongArrayList>();
 
 	// local purpose to speed up processing cache allocation
 	TIntArrayList outTypes = new TIntArrayList();
@@ -279,7 +282,7 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 						EntityId to = toL.iterator().next();
 						if (from.getType() == EntityType.WAY) {
 							if (!highwayRestrictions.containsKey(from.getId())) {
-								highwayRestrictions.put(from.getId(), new ArrayList<Long>(4));
+								highwayRestrictions.put(from.getId(), new TLongArrayList());
 							}
 							highwayRestrictions.get(from.getId()).add((to.getId() << 3) | (long) type);
 						}
@@ -364,6 +367,17 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 					byte[] pointCoordinates = rs.getBytes(4);
 					int typeInd = 0;
 					RoutePointToWrite[] points = new RoutePointToWrite[pointCoordinates.length / 8];
+					TLongArrayList restrictions = highwayRestrictions.get(cid);
+					if(restrictions != null){
+						Builder restriction = RestrictionData.newBuilder();
+						// TODO ids
+						for(int li = 0; li<restrictions.size(); li++){
+							restriction.setFrom((int) cid);
+							restriction.setTo((int) (restrictions.get(li) >> 3));
+							restriction.setType((int) (restrictions.get(li) & 0x7));
+							dataBlock.addRestrictions(restriction.build());
+						}
+					}
 					for (int j = 0; j < points.length; j++) {
 						points[j] = new RoutePointToWrite();
 						points[j].x = Algoritms.parseIntFromBytes(pointCoordinates, j * 8);
