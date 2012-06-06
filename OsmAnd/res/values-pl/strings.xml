@@ -675,7 +675,7 @@
   <string name="online_map_settings_descr">Skonfiguruj źródła kafelków online i offline</string>
   <string name="map_settings">- Ustawienia map</string>
   <string name="map_settings_descr">Skonfiguruj wyświetlanie map</string>
-  <string name="osmand_rastermaps_plugin_description">Ta wtyczka umożliwia użycie różnych źródeł map kafelków mapowych online oraz offline do mapy bazowej lub jako podkład/nakładka na mapę. Mapy mogą być również przygotowane offline i skopiowane do katalogu Osmand.</string>
+  <string name="osmand_rastermaps_plugin_description">Ta wtyczka umożliwia użycie różnych źródeł kafelków mapowych online oraz offline do mapy bazowej lub jako podkład/nakładka na mapę. Mapy mogą być również przygotowane offline i skopiowane do katalogu Osmand.</string>
   <string name="osmand_rastermaps_plugin_name">Mapy online</string>
   <string name="osmand_background_plugin_description">Ta wtyczka umożliwia zapisywanie trasy oraz nawigację w trybie oszczędzania zasilania (wyłączonego ekranu) przez cykliczne budzenie urządzenia w celu zapisania współrzędnych lub odegrania wskazówki głosowej.</string>
   <string name="osmand_background_plugin_name">Obsługa wyłączonego ekranu</string>
