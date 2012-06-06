@@ -26,6 +26,7 @@ import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
@@ -48,7 +49,7 @@ public class BinaryInspector {
 		// test cases show info
 		
 		
-//		 inspector(new String[]{"-vmap", /*"-bbox=-121.785,37.35,-121.744,37.33", */"/home/victor/projects/OsmAnd/data/osm-gen/Map.obf"});
+		 inspector(new String[]{/*"-vmap", "-bbox=-121.785,37.35,-121.744,37.33", */"/home/victor/projects/OsmAnd/data/osm-gen/Ru-spe.obf"});
 		// test case extract parts
 		// test case 
 	}
@@ -390,6 +391,8 @@ public class BinaryInspector {
 					partname = "Map";
 				} else if(p instanceof TransportIndex){
 					partname = "Transport";
+				} else if(p instanceof RouteRegion){
+					partname = "Route";
 				} else if(p instanceof PoiRegion){
 					partname = "Poi";
 				} else if(p instanceof AddressRegion){

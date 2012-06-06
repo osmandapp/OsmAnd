@@ -177,6 +177,7 @@ void drawWrappedText(RenderingContext* rc, SkCanvas* cv, TextDrawInfo* text, flo
 
 	if(text->text.length() > text->textWrap) {
 		const char* c_str = text->text.c_str();
+
 		int end = text->text.length();
 		int line = 0;
 		int pos = 0;

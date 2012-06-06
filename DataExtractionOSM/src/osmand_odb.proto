@@ -1,3 +1,4 @@
+// Highly coupled with protobuf 2.3.0
 option java_package = "net.osmand.binary";
 //protoc --java_out=DataExtractionOSM/src DataExtractionOSM/src/osmand_odb.proto
 
@@ -489,6 +490,10 @@ message RouteData {
   	required bytes types = 7;
 
   	required int32 routeId = 12; // id internal
+
+    // repeated array<pair<tagId : raw_var_int, indexOfStringInParent : raw_var_int> >
+  	optional bytes stringNames = 14; // in parent block
+
 }
 
 message OsmAndRoutingIndex {
@@ -525,8 +530,10 @@ message OsmAndRoutingIndex {
 	//   required sint32 top = 3; // delta encoded
 	//   required sint32 bottom = 4; // delta encoded
 		optional IdTable idTable = 5;
+		optional StringTable stringTable = 8;
 		repeated RouteData dataObjects = 6;
 		repeated RestrictionData restrictions = 7;
+
 	}
 
 }

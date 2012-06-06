@@ -492,8 +492,7 @@ public class IndexCreator {
 						indexMapCreator.createRTreeFiles(getRTreeMapIndexPackFileName());
 					}
 					if (indexRouting) {
-						// FIXME
-//						indexRouteCreator.createRTreeFiles(getRTreeRouteIndexPackFileName());
+						indexRouteCreator.createRTreeFiles(getRTreeRouteIndexPackFileName());
 					}
 					if (indexTransport) {
 						indexTransportCreator.createRTreeFile(getRTreeTransportStopsPackFileName());
@@ -621,8 +620,7 @@ public class IndexCreator {
 					indexMapCreator.packRtreeFiles(getRTreeMapIndexNonPackFileName(), getRTreeMapIndexPackFileName());
 				}
 				if(indexRouting) {
-					// FIXME
-//					indexRouteCreator.packRtreeFiles(getRTreeRouteIndexNonPackFileName(), getRTreeRouteIndexPackFileName());
+					indexRouteCreator.packRtreeFiles(getRTreeRouteIndexNonPackFileName(), getRTreeRouteIndexPackFileName());
 				}
 
 				if (indexTransport) {
@@ -647,8 +645,7 @@ public class IndexCreator {
 				if (indexRouting) {
 					progress.setGeneralProgress("[95 of 100]");
 					progress.startTask("Writing route index to binary file...", -1);
-					// FIXME
-//					indexRouteCreator.writeBinaryMapIndex(writer, regionName);
+					indexRouteCreator.writeBinaryRouteIndex(writer, regionName);
 				}
 
 				if (indexAddress) {
@@ -744,17 +741,18 @@ public class IndexCreator {
 		creator.setIndexAddress(true);
 		creator.setIndexPOI(true);
 		creator.setIndexTransport(false);
+		creator.setIndexRouting(true);
 
 //		creator.deleteDatabaseIndexes = false;
 //		creator.recreateOnlyBinaryFile = true;
-		creator.deleteOsmDB = false;
+		
+//		creator.deleteOsmDB = false;
 				
 		creator.setZoomWaySmothness(2);
-		MapRenderingTypes rt = MapRenderingTypes.getDefault();// new MapRenderingTypes("/home/victor/projects/OsmAnd/data/testdata/roads_rendering_types.xml");
+		MapRenderingTypes rt = MapRenderingTypes.getDefault();
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
-//		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
-//		creator.setMapFileName("Luxembourg_poi.obf");
-		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/temp/map.osm"),
+		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
+		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/RU-SPE.osm.pbf"),
 				new ConsoleProgressImplementation(1), null, zooms, rt, log);
 		
 		

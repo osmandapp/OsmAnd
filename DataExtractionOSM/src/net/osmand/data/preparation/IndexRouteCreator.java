@@ -2,7 +2,6 @@ package net.osmand.data.preparation;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.set.hash.TLongHashSet;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -15,7 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,8 +23,11 @@ import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.binary.OsmandOdb.MapData;
 import net.osmand.binary.OsmandOdb.MapDataBlock;
+import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock;
+import net.osmand.binary.OsmandOdb.RouteData;
 import net.osmand.data.Boundary;
 import net.osmand.data.MapAlgorithms;
+import net.osmand.data.preparation.BinaryMapIndexWriter.RoutePointToWrite;
 import net.osmand.osm.Entity;
 import net.osmand.osm.Entity.EntityId;
 import net.osmand.osm.Entity.EntityType;
@@ -55,15 +57,16 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 	private Connection mapConnection;
 	private final Log logMapDataWarn;
 
-	private RTree mapTree = null;
+	private RTree routeTree = null;
 	private MapRoutingTypes routeTypes;
 	private Map<Long, List<Long>> highwayRestrictions = new LinkedHashMap<Long, List<Long>>();
 
 	// local purpose to speed up processing cache allocation
 	TIntArrayList outTypes = new TIntArrayList();
 	TLongObjectHashMap<TIntArrayList> pointTypes = new TLongObjectHashMap<TIntArrayList>();
+	Map<MapRoutingTypes.MapRouteType, String> names = new HashMap<MapRoutingTypes.MapRouteType, String>(); 
 
-	private PreparedStatement mapRouteStat;
+	private PreparedStatement mapRouteInsertStat;
 
 
 	public IndexRouteCreator(Log logMapDataWarn) {
@@ -76,41 +79,78 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 	}
 
 
-	private void loadNodes(byte[] nodes, List<Float> toPut) {
-		toPut.clear();
-		for (int i = 0; i < nodes.length;) {
-			int lat = Algoritms.parseIntFromBytes(nodes, i);
-			i += 4;
-			int lon = Algoritms.parseIntFromBytes(nodes, i);
-			i += 4;
-			toPut.add(Float.intBitsToFloat(lat));
-			toPut.add(Float.intBitsToFloat(lon));
-		}
-	}
-	
-	private void parseAndSort(TIntArrayList ts, byte[] bs) {
-		ts.clear();
-		if (bs != null && bs.length > 0) {
-			for (int j = 0; j < bs.length; j += 2) {
-				ts.add(Algoritms.parseSmallIntFromBytes(bs, j));
-			}
-		}
-		ts.sort();
-	}
-
-
-	
-
-	public void iterateMainEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
-		if (e instanceof Way) {
-			// manipulate what kind of way to load
+	public void iterateMainEntity(Entity es, OsmDbAccessorContext ctx) throws SQLException {
+		if (es instanceof Way) {
+			Way e = (Way) es;
 			ctx.loadEntityData(e);
-			boolean encoded = routeTypes.encodeEntity((Way) e, outTypes, pointTypes);
+			boolean encoded = routeTypes.encodeEntity(e, outTypes, pointTypes, names);
 			if (encoded) {
-				
-			}
+				boolean init = false;
+				int minX = Integer.MAX_VALUE;
+				int maxX = 0;
+				int minY = Integer.MAX_VALUE;
+				int maxY = 0;
 
+				ByteArrayOutputStream bcoordinates = new ByteArrayOutputStream();
+				ByteArrayOutputStream bpointIds = new ByteArrayOutputStream();
+				ByteArrayOutputStream bpointTypes = new ByteArrayOutputStream();
+				ByteArrayOutputStream btypes = new ByteArrayOutputStream();
+
+				try {
+					for (int j = 0; j < outTypes.size(); j++) {
+						Algoritms.writeSmallInt(btypes, outTypes.get(j));
+					}
+
+					for (Node n : e.getNodes()) {
+						if (n != null) {
+							// write id
+							Algoritms.writeLongInt(bpointIds, n.getId());
+							// write point type
+							TIntArrayList types = pointTypes.get(n.getId());
+							if (types != null) {
+								for (int j = 0; j < types.size(); j++) {
+									Algoritms.writeSmallInt(bpointTypes, types.get(j));
+								}
+							}
+							Algoritms.writeSmallInt(bpointTypes, 0);
+							// write coordinates
+							int y = MapUtils.get31TileNumberY(n.getLatitude());
+							int x = MapUtils.get31TileNumberX(n.getLongitude());
+							minX = Math.min(minX, x);
+							maxX = Math.max(maxX, x);
+							minY = Math.min(minY, y);
+							maxY = Math.max(maxY, y);
+							init = true;
+							Algoritms.writeInt(bcoordinates, x);
+							Algoritms.writeInt(bcoordinates, y);
+						}
+					}
+
+				} catch (IOException est) {
+					throw new IllegalStateException(est);
+				}
+				if (init) {
+					// conn.prepareStatement("insert into route_objects(id, types, pointTypes, pointIds, pointCoordinates, name) values(?, ?, ?, ?, ?, ?, ?)");
+					mapRouteInsertStat.setLong(1, e.getId());
+					mapRouteInsertStat.setBytes(2, btypes.toByteArray());
+					mapRouteInsertStat.setBytes(3, bpointTypes.toByteArray());
+					mapRouteInsertStat.setBytes(4, bpointIds.toByteArray());
+					mapRouteInsertStat.setBytes(5, bcoordinates.toByteArray());
+					mapRouteInsertStat.setString(6, encodeNames(names));
+
+					addBatch(mapRouteInsertStat, false);
+					try {
+						routeTree.insert(new LeafElement(new Rect(minX, minY, maxX, maxY), e.getId()));
+					} catch (RTreeInsertException e1) {
+						throw new IllegalArgumentException(e1);
+					} catch (IllegalValueException e1) {
+						throw new IllegalArgumentException(e1);
+					}
+				}
+
+			}
 		}
+		
 	}
 
 	private static final char SPECIAL_CHAR = ((char) 0x60000);
@@ -161,117 +201,37 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 
 	public void createDatabaseStructure(Connection mapConnection, DBDialect dialect, String rtreeMapIndexNonPackFileName)
 			throws SQLException, IOException {
-		createRouteIndexStructure(mapConnection);
 		this.mapConnection = mapConnection;
-		mapRouteStat = createStatementRouteObjInsert(mapConnection);
+		Statement stat = mapConnection.createStatement();
+		stat.executeUpdate(CREATETABLE);
+		stat.executeUpdate(CREATE_IND);
+		stat.close();
+		mapRouteInsertStat = createStatementRouteObjInsert(mapConnection);
 		try {
-			mapTree = new RTree(rtreeMapIndexNonPackFileName);
+			routeTree = new RTree(rtreeMapIndexNonPackFileName);
 		} catch (RTreeException e) {
 			throw new IOException(e);
 		}
-		pStatements.put(mapRouteStat, 0);
+		pStatements.put(mapRouteInsertStat, 0);
 	}
+	
+	private static final String CREATETABLE = "create table route_objects (id bigint primary key, "
+			+ "types binary, pointTypes binary, pointIds binary, pointCoordinates binary, name varchar(4096))";
+	private static final String CREATE_IND = "create index route_objects_ind on route_objects (id)";
+	private static final String SELECT_STAT = "SELECT types, pointTypes, pointIds, pointCoordinates, name FROM route_objects WHERE id = ?";
+	private static final String INSERT_STAT = "insert into route_objects(id, types, pointTypes, pointIds, pointCoordinates, name) values(?, ?, ?, ?, ?, ?)";
 
-	private void createRouteIndexStructure(Connection conn) throws SQLException {
-		Statement stat = conn.createStatement();
-		stat.executeUpdate("create table route_objects (id bigint primary key, "
-				+ "types binary, pointTypes binary, pointIds binary, pointCoordinates binary)");
-		stat.executeUpdate("create index route_objects_ind on binary_map_objects (id)");
-		stat.close();
-	}
 
 	private PreparedStatement createStatementRouteObjInsert(Connection conn) throws SQLException {
-		return conn
-				.prepareStatement("insert into route_objects(id, area, coordinates, innerPolygons, types, additionalTypes, name) values(?, ?, ?, ?, ?, ?, ?)");
+		return conn.prepareStatement(INSERT_STAT);
 	}
-
-	private void insertBinaryMapRenderObjectIndex(RTree mapTree, Collection<Node> nodes, List<List<Node>> innerWays,
-			Map<MapRouteType, String> names, long id, boolean area, TIntArrayList types, TIntArrayList addTypes, boolean commit)
-			throws SQLException {
-		boolean init = false;
-		int minX = Integer.MAX_VALUE;
-		int maxX = 0;
-		int minY = Integer.MAX_VALUE;
-		int maxY = 0;
-
-		ByteArrayOutputStream bcoordinates = new ByteArrayOutputStream();
-		ByteArrayOutputStream binnercoord = new ByteArrayOutputStream();
-		ByteArrayOutputStream btypes = new ByteArrayOutputStream();
-		ByteArrayOutputStream badditionalTypes = new ByteArrayOutputStream();
-
-		try {
-			for (int j = 0; j < types.size(); j++) {
-				Algoritms.writeSmallInt(btypes, types.get(j));
-			}
-			for (int j = 0; j < addTypes.size(); j++) {
-				Algoritms.writeSmallInt(badditionalTypes, addTypes.get(j));
-			}
-
-			for (Node n : nodes) {
-				if (n != null) {
-					int y = MapUtils.get31TileNumberY(n.getLatitude());
-					int x = MapUtils.get31TileNumberX(n.getLongitude());
-					minX = Math.min(minX, x);
-					maxX = Math.max(maxX, x);
-					minY = Math.min(minY, y);
-					maxY = Math.max(maxY, y);
-					init = true;
-					Algoritms.writeInt(bcoordinates, x);
-					Algoritms.writeInt(bcoordinates, y);
-				}
-			}
-
-			if (innerWays != null) {
-				for (List<Node> ws : innerWays) {
-					boolean exist = false;
-					if (ws != null) {
-						for (Node n : ws) {
-							if (n != null) {
-								exist = true;
-								int y = MapUtils.get31TileNumberY(n.getLatitude());
-								int x = MapUtils.get31TileNumberX(n.getLongitude());
-								Algoritms.writeInt(binnercoord, x);
-								Algoritms.writeInt(binnercoord, y);
-							}
-						}
-					}
-					if (exist) {
-						Algoritms.writeInt(binnercoord, 0);
-						Algoritms.writeInt(binnercoord, 0);
-					}
-				}
-			}
-		} catch (IOException es) {
-			throw new IllegalStateException(es);
-		}
-		if (init) {
-			// conn.prepareStatement("insert into binary_map_objects(id, area, coordinates, innerPolygons, types, additionalTypes, name) values(?, ?, ?, ?, ?, ?, ?)");
-			mapRouteStat.setLong(1, id);
-			mapRouteStat.setBoolean(2, area);
-			mapRouteStat.setBytes(3, bcoordinates.toByteArray());
-			mapRouteStat.setBytes(4, binnercoord.toByteArray());
-			mapRouteStat.setBytes(5, btypes.toByteArray());
-			mapRouteStat.setBytes(6, badditionalTypes.toByteArray());
-			mapRouteStat.setString(7, encodeNames(names));
-
-			addBatch(mapRouteStat, commit);
-			try {
-				mapTree.insert(new LeafElement(new Rect(minX, minY, maxX, maxY), id));
-			} catch (RTreeInsertException e1) {
-				throw new IllegalArgumentException(e1);
-			} catch (IllegalValueException e1) {
-				throw new IllegalArgumentException(e1);
-			}
-		}
-	}
-
 
 	public void commitAndCloseFiles(String rTreeMapIndexNonPackFileName, String rTreeMapIndexPackFileName, boolean deleteDatabaseIndexes)
 			throws IOException, SQLException {
 
 		// delete map rtree files
-		if (mapTree != null) {
-			RandomAccessFile file = mapTree.getFileHdr().getFile();
+		if (routeTree != null) {
+			RandomAccessFile file = routeTree.getFileHdr().getFile();
 			file.close();
 			if (rTreeMapIndexNonPackFileName != null) {
 				File f = new File(rTreeMapIndexNonPackFileName);
@@ -328,90 +288,101 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 			}
 		}
 	}
+
+	public void createRTreeFiles(String rTreeRouteIndexPackFileName) throws RTreeException {
+		routeTree = new RTree(rTreeRouteIndexPackFileName);
+	}
+
+	public void packRtreeFiles(String rTreeRouteIndexNonPackFileName, String rTreeRouteIndexPackFileName) throws IOException {
+		routeTree = packRtreeFile(routeTree, rTreeRouteIndexNonPackFileName, rTreeRouteIndexPackFileName);
+		
+	}
 	
-	/* FIXME
-	public void writeBinaryMapIndex(BinaryMapIndexWriter writer, String regionName) throws IOException, SQLException {
-		closePreparedStatements(mapBinaryStat, mapLowLevelBinaryStat);
+	public void writeBinaryRouteIndex(BinaryMapIndexWriter writer, String regionName) throws IOException, SQLException {
+		closePreparedStatements(mapRouteInsertStat);
 		mapConnection.commit();
 		try {
-			writer.startWriteMapIndex(regionName);
+			writer.startWriteRouteIndex(regionName);
 			// write map encoding rules
-			
-			writer.writeMapEncodingRules(routeTypes.getEncodingRuleTypes());
 
-			PreparedStatement selectData = mapConnection
-					.prepareStatement("SELECT area, coordinates, innerPolygons, types, additionalTypes, name FROM binary_map_objects WHERE id = ?");
+			writer.writeRouteEncodingRules(routeTypes.getEncodingRuleTypes());
 
+			PreparedStatement selectData = mapConnection.prepareStatement(SELECT_STAT);
 			// write map levels and map index
 			TLongObjectHashMap<BinaryFileReference> treeHeader = new TLongObjectHashMap<BinaryFileReference>();
-			RTree rtree = mapTree;
-			long rootIndex = rtree.getFileHdr().getRootIndex();
-			rtree.Node root = rtree.getReadNode(rootIndex);
+			long rootIndex = routeTree.getFileHdr().getRootIndex();
+			rtree.Node root = routeTree.getReadNode(rootIndex);
 			Rect rootBounds = calcBounds(root);
 			if (rootBounds != null) {
-				writer.startWriteMapLevelIndex(mapZooms.getLevel(i).getMinZoom(), mapZooms.getLevel(i).getMaxZoom(), rootBounds.getMinX(),
-						rootBounds.getMaxX(), rootBounds.getMinY(), rootBounds.getMaxY());
-				writeBinaryMapTree(root, rootBounds, rtree, writer, treeHeader);
-
-				writeBinaryMapBlock(root, rootBounds, rtree, writer, selectData, treeHeader, new LinkedHashMap<String, Integer>(),
-						new LinkedHashMap<MapRenderingTypes.MapRulType, String>());
-
-				writer.endWriteMapLevelIndex();
+				writeBinaryRouteTree(root, rootBounds, routeTree, writer, treeHeader);
+				writeBinaryMapBlock(root, rootBounds, routeTree, writer, selectData, treeHeader, new LinkedHashMap<String, Integer>(),
+						new LinkedHashMap<MapRouteType, String>());
 			}
 
 			selectData.close();
 
-			writer.endWriteMapIndex();
+			writer.endWriteRouteIndex();
 			writer.flush();
 		} catch (RTreeException e) {
 			throw new IllegalStateException(e);
 		}
 	}
-		public void writeBinaryMapBlock(rtree.Node parent, Rect parentBounds, RTree r, BinaryMapIndexWriter writer, PreparedStatement selectData,
-			TLongObjectHashMap<BinaryFileReference> bounds, Map<String, Integer> tempStringTable, Map<MapRulType, String> tempNames)
-			throws IOException, RTreeException, SQLException {
+	
+	
+	
+	public void writeBinaryMapBlock(rtree.Node parent, Rect parentBounds, RTree r, BinaryMapIndexWriter writer, PreparedStatement selectData,
+			TLongObjectHashMap<BinaryFileReference> bounds, Map<String, Integer> tempStringTable, Map<MapRouteType, String> tempNames)
+					throws IOException, RTreeException, SQLException {
 		Element[] e = parent.getAllElements();
 
-		MapDataBlock.Builder dataBlock = null;
+		RouteDataBlock.Builder dataBlock = null;
 		BinaryFileReference ref = bounds.get(parent.getNodeIndex());
-		long baseId = 0;
 		for (int i = 0; i < parent.getTotalElements(); i++) {
 			if (e[i].getElementType() == rtree.Node.LEAF_NODE) {
 				long id = ((LeafElement) e[i]).getPtr();
+				// IndexRouteCreator.SELECT_STAT;
+				// "SELECT types, pointTypes, pointIds, pointCoordinates, name FROM route_objects WHERE id = ?"
 				selectData.setLong(1, id);
-				// selectData = mapConnection.prepareStatement("SELECT area, coordinates, innerPolygons, types, additionalTypes, name FROM binary_map_objects WHERE id = ?");
+
 				ResultSet rs = selectData.executeQuery();
 				if (rs.next()) {
-					long cid = convertGeneratedIdToObfWrite(id);
+					long cid = id;
 					if (dataBlock == null) {
-						baseId = cid;
-						dataBlock = writer.createWriteMapDataBlock(baseId);
+						dataBlock = RouteDataBlock.newBuilder();
 						tempStringTable.clear();
-
 					}
 					tempNames.clear();
-					decodeNames(rs.getString(6), tempNames);
-					byte[] types = rs.getBytes(4);
+					decodeNames(rs.getString(5), tempNames);
+					byte[] types = rs.getBytes(1);
 					int[] typeUse = new int[types.length / 2];
 					for (int j = 0; j < types.length; j += 2) {
 						int ids = Algoritms.parseSmallIntFromBytes(types, j);
 						typeUse[j / 2] = routeTypes.getTypeByInternalId(ids).getTargetId();
 					}
-					byte[] addTypes = rs.getBytes(5);
-					int[] addtypeUse = null ;
-					if (addTypes != null) {
-						addtypeUse = new int[addTypes.length / 2];
-						for (int j = 0; j < addTypes.length; j += 2) {
-							int ids = Algoritms.parseSmallIntFromBytes(addTypes, j);
-							addtypeUse[j / 2] = routeTypes.getTypeByInternalId(ids).getTargetId();
-						}
+					byte[] pointTypes = rs.getBytes(2);
+					byte[] pointIds = rs.getBytes(3);
+					byte[] pointCoordinates = rs.getBytes(4);
+					int typeInd = 0;
+					RoutePointToWrite[] points = new RoutePointToWrite[pointCoordinates.length / 8];
+					for (int j = 0; j < points.length; j++) {
+						points[j] = new RoutePointToWrite();
+						points[j].x = Algoritms.parseIntFromBytes(pointCoordinates, j * 8);
+						points[j].y = Algoritms.parseIntFromBytes(pointCoordinates, j * 8 + 4);
+						points[j].id = Algoritms.parseLongFromBytes(pointIds, j * 8);
+						int type = 0;
+						do {
+							type = Algoritms.parseSmallIntFromBytes(pointTypes, typeInd);
+							typeInd += 2;
+							if (type != 0) {
+								points[j].types.add(routeTypes.getTypeByInternalId(type).getTargetId());
+							}
+						} while (type != 0);
 					}
-					
-					
-					MapData mapData = writer.writeMapData(cid - baseId, parentBounds.getMinX(), parentBounds.getMinY(), rs.getBoolean(1), rs.getBytes(2), rs.getBytes(3),
-							typeUse, addtypeUse, tempNames, tempStringTable, dataBlock);
-					if(mapData != null) {
-						dataBlock.addDataObjects(mapData);
+
+					RouteData routeData = writer.writeRouteData((int) cid, parentBounds.getMinX(), parentBounds.getMinY(), typeUse, points,
+							names, tempStringTable, dataBlock, true);
+					if (routeData != null) {
+						dataBlock.addDataObjects(routeData);
 					}
 				} else {
 					logMapDataWarn.error("Something goes wrong with id = " + id); //$NON-NLS-1$
@@ -419,7 +390,7 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 			}
 		}
 		if (dataBlock != null) {
-			writer.writeMapDataBlock(dataBlock, tempStringTable, ref);
+			writer.writeRouteDataBlock(dataBlock, tempStringTable, ref);
 		}
 		for (int i = 0; i < parent.getTotalElements(); i++) {
 			if (e[i].getElementType() != rtree.Node.LEAF_NODE) {
@@ -430,7 +401,7 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		}
 	}
 
-	public void writeBinaryMapTree(rtree.Node parent, Rect re, RTree r, BinaryMapIndexWriter writer, TLongObjectHashMap<BinaryFileReference> bounds)
+	public void writeBinaryRouteTree(rtree.Node parent, Rect re, RTree r, BinaryMapIndexWriter writer, TLongObjectHashMap<BinaryFileReference> bounds)
 			throws IOException, RTreeException {
 		Element[] e = parent.getAllElements();
 		boolean containsLeaf = false;
@@ -439,17 +410,16 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 				containsLeaf = true;
 			}
 		}
-		BinaryFileReference ref = writer.startMapTreeElement(re.getMinX(), re.getMaxX(), re.getMinY(), re.getMaxY(), containsLeaf);
+		BinaryFileReference ref = writer.startRouteTreeElement(re.getMinX(), re.getMaxX(), re.getMinY(), re.getMaxY(), containsLeaf);
 		if (ref != null) {
 			bounds.put(parent.getNodeIndex(), ref);
 		}
 		for (int i = 0; i < parent.getTotalElements(); i++) {
 			if (e[i].getElementType() != rtree.Node.LEAF_NODE) {
 				rtree.Node chNode = r.getReadNode(((NonLeafElement) e[i]).getPtr());
-				writeBinaryMapTree(chNode, e[i].getRect(), r, writer, bounds);
+				writeBinaryRouteTree(chNode, e[i].getRect(), r, writer, bounds);
 			}
 		}
-		writer.endWriteMapTreeElement();
+		writer.endRouteTreeElement();
 	} 
-	*/
 }

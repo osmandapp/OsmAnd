@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import net.osmand.osm.MapRoutingTypes.MapRouteType;
+
 public class MapRoutingTypes {
 
 	private static Set<String> TAGS_TO_SAVE = new HashSet<String>();
@@ -62,7 +64,11 @@ public class MapRoutingTypes {
 	}
 	
 	
-	public boolean encodeEntity(Way e, TIntArrayList outTypes, TLongObjectHashMap<TIntArrayList> pointTypes){
+	public boolean encodeEntity(Entity et, TIntArrayList outTypes, TLongObjectHashMap<TIntArrayList> pointTypes, Map<MapRouteType, String> names){
+		if (!(et instanceof Way)) {
+			return false;
+		}
+		Way e = (Way) et;
 		boolean init = false;
 		for(String tg : e.getTagKeySet()) {
 			if(TAGS_TO_ACCEPT.contains(tg)){
@@ -105,6 +111,7 @@ public class MapRoutingTypes {
 		String id = constructRuleKey(tag, val);
 		if(!types.containsKey(id)) {
 			MapRouteType rt = new MapRouteType();
+			// first one is always 1
 			rt.id = types.size() + 1;
 			rt.tag = tag;
 			rt.value = val;
@@ -112,12 +119,12 @@ public class MapRoutingTypes {
 			listTypes.add(rt);
 		}
 		MapRouteType type = types.get(id);
-		type.count ++;
+		type.freq ++;
 		return type;
 	}
 	
 	public static class MapRouteType {
-		int count = 0;
+		int freq = 0;
 		int id;
 		int targetId;
 		String tag;
@@ -127,9 +134,29 @@ public class MapRoutingTypes {
 			return id;
 		}
 		
+		public int getFreq() {
+			return freq;
+		}
+		
 		public int getTargetId() {
 			return targetId;
 		}
 		
+		public String getTag() {
+			return tag;
+		}
+		
+		public String getValue() {
+			return value;
+		}
+		
+		public void setTargetId(int targetId) {
+			this.targetId = targetId;
+		}
+		
+	}
+
+	public List<MapRouteType> getEncodingRuleTypes() {
+		return listTypes;
 	}
 }

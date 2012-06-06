@@ -65,6 +65,14 @@ class OsmAndPoiBox;
 class OsmAndPoiCategories;
 class OsmAndPoiBoxData;
 class OsmAndPoiBoxDataAtom;
+class IdTable;
+class RestrictionData;
+class RoutePoint;
+class RouteData;
+class OsmAndRoutingIndex;
+class OsmAndRoutingIndex_RouteEncodingRule;
+class OsmAndRoutingIndex_RouteDataBox;
+class OsmAndRoutingIndex_RouteDataBlock;
 
 // ===================================================================
 
@@ -184,6 +192,18 @@ class OsmAndStructure : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::OsmAndMapIndex >*
       mutable_mapindex();
   
+  // repeated .OsmAndRoutingIndex routingIndex = 9;
+  inline int routingindex_size() const;
+  inline void clear_routingindex();
+  static const int kRoutingIndexFieldNumber = 9;
+  inline const ::OsmAndRoutingIndex& routingindex(int index) const;
+  inline ::OsmAndRoutingIndex* mutable_routingindex(int index);
+  inline ::OsmAndRoutingIndex* add_routingindex();
+  inline const ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex >&
+      routingindex() const;
+  inline ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex >*
+      mutable_routingindex();
+  
   // required uint32 versionConfirm = 32;
   inline bool has_versionconfirm() const;
   inline void clear_versionconfirm();
@@ -202,12 +222,13 @@ class OsmAndStructure : public ::google::protobuf::Message {
   ::google::protobuf::RepeatedPtrField< ::OsmAndTransportIndex > transportindex_;
   ::google::protobuf::RepeatedPtrField< ::OsmAndPoiIndex > poiindex_;
   ::google::protobuf::RepeatedPtrField< ::OsmAndMapIndex > mapindex_;
+  ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex > routingindex_;
   ::google::protobuf::uint32 versionconfirm_;
   friend void  protobuf_AddDesc_src_2fosmand_5fodb_2eproto();
   friend void protobuf_AssignDesc_src_2fosmand_5fodb_2eproto();
   friend void protobuf_ShutdownFile_src_2fosmand_5fodb_2eproto();
   
-  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
   
   // WHY DOES & HAVE LOWER PRECEDENCE THAN != !?
   inline bool _has_bit(int index) const {
@@ -4605,6 +4626,971 @@ class OsmAndPoiBoxDataAtom : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static OsmAndPoiBoxDataAtom* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class IdTable : public ::google::protobuf::Message {
+ public:
+  IdTable();
+  virtual ~IdTable();
+  
+  IdTable(const IdTable& from);
+  
+  inline IdTable& operator=(const IdTable& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+  
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+  
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const IdTable& default_instance();
+  
+  void Swap(IdTable* other);
+  
+  // implements Message ----------------------------------------------
+  
+  IdTable* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const IdTable& from);
+  void MergeFrom(const IdTable& from);
+  void Clear();
+  bool IsInitialized() const;
+  
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  
+  ::google::protobuf::Metadata GetMetadata() const;
+  
+  // nested types ----------------------------------------------------
+  
+  // accessors -------------------------------------------------------
+  
+  // repeated uint64 routeId = 1;
+  inline int routeid_size() const;
+  inline void clear_routeid();
+  static const int kRouteIdFieldNumber = 1;
+  inline ::google::protobuf::uint64 routeid(int index) const;
+  inline void set_routeid(int index, ::google::protobuf::uint64 value);
+  inline void add_routeid(::google::protobuf::uint64 value);
+  inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
+      routeid() const;
+  inline ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
+      mutable_routeid();
+  
+  // repeated uint64 pointId = 2;
+  inline int pointid_size() const;
+  inline void clear_pointid();
+  static const int kPointIdFieldNumber = 2;
+  inline ::google::protobuf::uint64 pointid(int index) const;
+  inline void set_pointid(int index, ::google::protobuf::uint64 value);
+  inline void add_pointid(::google::protobuf::uint64 value);
+  inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
+      pointid() const;
+  inline ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
+      mutable_pointid();
+  
+  // @@protoc_insertion_point(class_scope:IdTable)
+ private:
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  mutable int _cached_size_;
+  
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint64 > routeid_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint64 > pointid_;
+  friend void  protobuf_AddDesc_src_2fosmand_5fodb_2eproto();
+  friend void protobuf_AssignDesc_src_2fosmand_5fodb_2eproto();
+  friend void protobuf_ShutdownFile_src_2fosmand_5fodb_2eproto();
+  
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  
+  // WHY DOES & HAVE LOWER PRECEDENCE THAN != !?
+  inline bool _has_bit(int index) const {
+    return (_has_bits_[index / 32] & (1u << (index % 32))) != 0;
+  }
+  inline void _set_bit(int index) {
+    _has_bits_[index / 32] |= (1u << (index % 32));
+  }
+  inline void _clear_bit(int index) {
+    _has_bits_[index / 32] &= ~(1u << (index % 32));
+  }
+  
+  void InitAsDefaultInstance();
+  static IdTable* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class RestrictionData : public ::google::protobuf::Message {
+ public:
+  RestrictionData();
+  virtual ~RestrictionData();
+  
+  RestrictionData(const RestrictionData& from);
+  
+  inline RestrictionData& operator=(const RestrictionData& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+  
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+  
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RestrictionData& default_instance();
+  
+  void Swap(RestrictionData* other);
+  
+  // implements Message ----------------------------------------------
+  
+  RestrictionData* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const RestrictionData& from);
+  void MergeFrom(const RestrictionData& from);
+  void Clear();
+  bool IsInitialized() const;
+  
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  
+  ::google::protobuf::Metadata GetMetadata() const;
+  
+  // nested types ----------------------------------------------------
+  
+  // accessors -------------------------------------------------------
+  
+  // required int32 type = 1;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 1;
+  inline ::google::protobuf::int32 type() const;
+  inline void set_type(::google::protobuf::int32 value);
+  
+  // required int32 from = 2;
+  inline bool has_from() const;
+  inline void clear_from();
+  static const int kFromFieldNumber = 2;
+  inline ::google::protobuf::int32 from() const;
+  inline void set_from(::google::protobuf::int32 value);
+  
+  // required int32 to = 3;
+  inline bool has_to() const;
+  inline void clear_to();
+  static const int kToFieldNumber = 3;
+  inline ::google::protobuf::int32 to() const;
+  inline void set_to(::google::protobuf::int32 value);
+  
+  // optional int32 via = 4;
+  inline bool has_via() const;
+  inline void clear_via();
+  static const int kViaFieldNumber = 4;
+  inline ::google::protobuf::int32 via() const;
+  inline void set_via(::google::protobuf::int32 value);
+  
+  // @@protoc_insertion_point(class_scope:RestrictionData)
+ private:
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  mutable int _cached_size_;
+  
+  ::google::protobuf::int32 type_;
+  ::google::protobuf::int32 from_;
+  ::google::protobuf::int32 to_;
+  ::google::protobuf::int32 via_;
+  friend void  protobuf_AddDesc_src_2fosmand_5fodb_2eproto();
+  friend void protobuf_AssignDesc_src_2fosmand_5fodb_2eproto();
+  friend void protobuf_ShutdownFile_src_2fosmand_5fodb_2eproto();
+  
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  
+  // WHY DOES & HAVE LOWER PRECEDENCE THAN != !?
+  inline bool _has_bit(int index) const {
+    return (_has_bits_[index / 32] & (1u << (index % 32))) != 0;
+  }
+  inline void _set_bit(int index) {
+    _has_bits_[index / 32] |= (1u << (index % 32));
+  }
+  inline void _clear_bit(int index) {
+    _has_bits_[index / 32] &= ~(1u << (index % 32));
+  }
+  
+  void InitAsDefaultInstance();
+  static RestrictionData* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class RoutePoint : public ::google::protobuf::Message {
+ public:
+  RoutePoint();
+  virtual ~RoutePoint();
+  
+  RoutePoint(const RoutePoint& from);
+  
+  inline RoutePoint& operator=(const RoutePoint& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+  
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+  
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RoutePoint& default_instance();
+  
+  void Swap(RoutePoint* other);
+  
+  // implements Message ----------------------------------------------
+  
+  RoutePoint* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const RoutePoint& from);
+  void MergeFrom(const RoutePoint& from);
+  void Clear();
+  bool IsInitialized() const;
+  
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  
+  ::google::protobuf::Metadata GetMetadata() const;
+  
+  // nested types ----------------------------------------------------
+  
+  // accessors -------------------------------------------------------
+  
+  // required bytes point = 1;
+  inline bool has_point() const;
+  inline void clear_point();
+  static const int kPointFieldNumber = 1;
+  inline const ::std::string& point() const;
+  inline void set_point(const ::std::string& value);
+  inline void set_point(const char* value);
+  inline void set_point(const void* value, size_t size);
+  inline ::std::string* mutable_point();
+  
+  // optional uint32 pointId = 2;
+  inline bool has_pointid() const;
+  inline void clear_pointid();
+  static const int kPointIdFieldNumber = 2;
+  inline ::google::protobuf::uint32 pointid() const;
+  inline void set_pointid(::google::protobuf::uint32 value);
+  
+  // optional bytes types = 4;
+  inline bool has_types() const;
+  inline void clear_types();
+  static const int kTypesFieldNumber = 4;
+  inline const ::std::string& types() const;
+  inline void set_types(const ::std::string& value);
+  inline void set_types(const char* value);
+  inline void set_types(const void* value, size_t size);
+  inline ::std::string* mutable_types();
+  
+  // @@protoc_insertion_point(class_scope:RoutePoint)
+ private:
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  mutable int _cached_size_;
+  
+  ::std::string* point_;
+  static const ::std::string _default_point_;
+  ::google::protobuf::uint32 pointid_;
+  ::std::string* types_;
+  static const ::std::string _default_types_;
+  friend void  protobuf_AddDesc_src_2fosmand_5fodb_2eproto();
+  friend void protobuf_AssignDesc_src_2fosmand_5fodb_2eproto();
+  friend void protobuf_ShutdownFile_src_2fosmand_5fodb_2eproto();
+  
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  
+  // WHY DOES & HAVE LOWER PRECEDENCE THAN != !?
+  inline bool _has_bit(int index) const {
+    return (_has_bits_[index / 32] & (1u << (index % 32))) != 0;
+  }
+  inline void _set_bit(int index) {
+    _has_bits_[index / 32] |= (1u << (index % 32));
+  }
+  inline void _clear_bit(int index) {
+    _has_bits_[index / 32] &= ~(1u << (index % 32));
+  }
+  
+  void InitAsDefaultInstance();
+  static RoutePoint* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class RouteData : public ::google::protobuf::Message {
+ public:
+  RouteData();
+  virtual ~RouteData();
+  
+  RouteData(const RouteData& from);
+  
+  inline RouteData& operator=(const RouteData& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+  
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+  
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RouteData& default_instance();
+  
+  void Swap(RouteData* other);
+  
+  // implements Message ----------------------------------------------
+  
+  RouteData* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const RouteData& from);
+  void MergeFrom(const RouteData& from);
+  void Clear();
+  bool IsInitialized() const;
+  
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  
+  ::google::protobuf::Metadata GetMetadata() const;
+  
+  // nested types ----------------------------------------------------
+  
+  // accessors -------------------------------------------------------
+  
+  // repeated .RoutePoint points = 1;
+  inline int points_size() const;
+  inline void clear_points();
+  static const int kPointsFieldNumber = 1;
+  inline const ::RoutePoint& points(int index) const;
+  inline ::RoutePoint* mutable_points(int index);
+  inline ::RoutePoint* add_points();
+  inline const ::google::protobuf::RepeatedPtrField< ::RoutePoint >&
+      points() const;
+  inline ::google::protobuf::RepeatedPtrField< ::RoutePoint >*
+      mutable_points();
+  
+  // required bytes types = 7;
+  inline bool has_types() const;
+  inline void clear_types();
+  static const int kTypesFieldNumber = 7;
+  inline const ::std::string& types() const;
+  inline void set_types(const ::std::string& value);
+  inline void set_types(const char* value);
+  inline void set_types(const void* value, size_t size);
+  inline ::std::string* mutable_types();
+  
+  // required int32 routeId = 12;
+  inline bool has_routeid() const;
+  inline void clear_routeid();
+  static const int kRouteIdFieldNumber = 12;
+  inline ::google::protobuf::int32 routeid() const;
+  inline void set_routeid(::google::protobuf::int32 value);
+  
+  // optional bytes stringNames = 14;
+  inline bool has_stringnames() const;
+  inline void clear_stringnames();
+  static const int kStringNamesFieldNumber = 14;
+  inline const ::std::string& stringnames() const;
+  inline void set_stringnames(const ::std::string& value);
+  inline void set_stringnames(const char* value);
+  inline void set_stringnames(const void* value, size_t size);
+  inline ::std::string* mutable_stringnames();
+  
+  // @@protoc_insertion_point(class_scope:RouteData)
+ private:
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  mutable int _cached_size_;
+  
+  ::google::protobuf::RepeatedPtrField< ::RoutePoint > points_;
+  ::std::string* types_;
+  static const ::std::string _default_types_;
+  ::google::protobuf::int32 routeid_;
+  ::std::string* stringnames_;
+  static const ::std::string _default_stringnames_;
+  friend void  protobuf_AddDesc_src_2fosmand_5fodb_2eproto();
+  friend void protobuf_AssignDesc_src_2fosmand_5fodb_2eproto();
+  friend void protobuf_ShutdownFile_src_2fosmand_5fodb_2eproto();
+  
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  
+  // WHY DOES & HAVE LOWER PRECEDENCE THAN != !?
+  inline bool _has_bit(int index) const {
+    return (_has_bits_[index / 32] & (1u << (index % 32))) != 0;
+  }
+  inline void _set_bit(int index) {
+    _has_bits_[index / 32] |= (1u << (index % 32));
+  }
+  inline void _clear_bit(int index) {
+    _has_bits_[index / 32] &= ~(1u << (index % 32));
+  }
+  
+  void InitAsDefaultInstance();
+  static RouteData* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class OsmAndRoutingIndex_RouteEncodingRule : public ::google::protobuf::Message {
+ public:
+  OsmAndRoutingIndex_RouteEncodingRule();
+  virtual ~OsmAndRoutingIndex_RouteEncodingRule();
+  
+  OsmAndRoutingIndex_RouteEncodingRule(const OsmAndRoutingIndex_RouteEncodingRule& from);
+  
+  inline OsmAndRoutingIndex_RouteEncodingRule& operator=(const OsmAndRoutingIndex_RouteEncodingRule& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+  
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+  
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const OsmAndRoutingIndex_RouteEncodingRule& default_instance();
+  
+  void Swap(OsmAndRoutingIndex_RouteEncodingRule* other);
+  
+  // implements Message ----------------------------------------------
+  
+  OsmAndRoutingIndex_RouteEncodingRule* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const OsmAndRoutingIndex_RouteEncodingRule& from);
+  void MergeFrom(const OsmAndRoutingIndex_RouteEncodingRule& from);
+  void Clear();
+  bool IsInitialized() const;
+  
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  
+  ::google::protobuf::Metadata GetMetadata() const;
+  
+  // nested types ----------------------------------------------------
+  
+  // accessors -------------------------------------------------------
+  
+  // required string tag = 3;
+  inline bool has_tag() const;
+  inline void clear_tag();
+  static const int kTagFieldNumber = 3;
+  inline const ::std::string& tag() const;
+  inline void set_tag(const ::std::string& value);
+  inline void set_tag(const char* value);
+  inline void set_tag(const char* value, size_t size);
+  inline ::std::string* mutable_tag();
+  
+  // required string value = 5;
+  inline bool has_value() const;
+  inline void clear_value();
+  static const int kValueFieldNumber = 5;
+  inline const ::std::string& value() const;
+  inline void set_value(const ::std::string& value);
+  inline void set_value(const char* value);
+  inline void set_value(const char* value, size_t size);
+  inline ::std::string* mutable_value();
+  
+  // optional uint32 id = 7;
+  inline bool has_id() const;
+  inline void clear_id();
+  static const int kIdFieldNumber = 7;
+  inline ::google::protobuf::uint32 id() const;
+  inline void set_id(::google::protobuf::uint32 value);
+  
+  // @@protoc_insertion_point(class_scope:OsmAndRoutingIndex.RouteEncodingRule)
+ private:
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  mutable int _cached_size_;
+  
+  ::std::string* tag_;
+  static const ::std::string _default_tag_;
+  ::std::string* value_;
+  static const ::std::string _default_value_;
+  ::google::protobuf::uint32 id_;
+  friend void  protobuf_AddDesc_src_2fosmand_5fodb_2eproto();
+  friend void protobuf_AssignDesc_src_2fosmand_5fodb_2eproto();
+  friend void protobuf_ShutdownFile_src_2fosmand_5fodb_2eproto();
+  
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  
+  // WHY DOES & HAVE LOWER PRECEDENCE THAN != !?
+  inline bool _has_bit(int index) const {
+    return (_has_bits_[index / 32] & (1u << (index % 32))) != 0;
+  }
+  inline void _set_bit(int index) {
+    _has_bits_[index / 32] |= (1u << (index % 32));
+  }
+  inline void _clear_bit(int index) {
+    _has_bits_[index / 32] &= ~(1u << (index % 32));
+  }
+  
+  void InitAsDefaultInstance();
+  static OsmAndRoutingIndex_RouteEncodingRule* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class OsmAndRoutingIndex_RouteDataBox : public ::google::protobuf::Message {
+ public:
+  OsmAndRoutingIndex_RouteDataBox();
+  virtual ~OsmAndRoutingIndex_RouteDataBox();
+  
+  OsmAndRoutingIndex_RouteDataBox(const OsmAndRoutingIndex_RouteDataBox& from);
+  
+  inline OsmAndRoutingIndex_RouteDataBox& operator=(const OsmAndRoutingIndex_RouteDataBox& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+  
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+  
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const OsmAndRoutingIndex_RouteDataBox& default_instance();
+  
+  void Swap(OsmAndRoutingIndex_RouteDataBox* other);
+  
+  // implements Message ----------------------------------------------
+  
+  OsmAndRoutingIndex_RouteDataBox* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const OsmAndRoutingIndex_RouteDataBox& from);
+  void MergeFrom(const OsmAndRoutingIndex_RouteDataBox& from);
+  void Clear();
+  bool IsInitialized() const;
+  
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  
+  ::google::protobuf::Metadata GetMetadata() const;
+  
+  // nested types ----------------------------------------------------
+  
+  // accessors -------------------------------------------------------
+  
+  // required sint32 left = 1;
+  inline bool has_left() const;
+  inline void clear_left();
+  static const int kLeftFieldNumber = 1;
+  inline ::google::protobuf::int32 left() const;
+  inline void set_left(::google::protobuf::int32 value);
+  
+  // required sint32 right = 2;
+  inline bool has_right() const;
+  inline void clear_right();
+  static const int kRightFieldNumber = 2;
+  inline ::google::protobuf::int32 right() const;
+  inline void set_right(::google::protobuf::int32 value);
+  
+  // required sint32 top = 3;
+  inline bool has_top() const;
+  inline void clear_top();
+  static const int kTopFieldNumber = 3;
+  inline ::google::protobuf::int32 top() const;
+  inline void set_top(::google::protobuf::int32 value);
+  
+  // required sint32 bottom = 4;
+  inline bool has_bottom() const;
+  inline void clear_bottom();
+  static const int kBottomFieldNumber = 4;
+  inline ::google::protobuf::int32 bottom() const;
+  inline void set_bottom(::google::protobuf::int32 value);
+  
+  // optional fixed32 shiftToData = 5;
+  inline bool has_shifttodata() const;
+  inline void clear_shifttodata();
+  static const int kShiftToDataFieldNumber = 5;
+  inline ::google::protobuf::uint32 shifttodata() const;
+  inline void set_shifttodata(::google::protobuf::uint32 value);
+  
+  // repeated .OsmAndRoutingIndex.RouteDataBox boxes = 7;
+  inline int boxes_size() const;
+  inline void clear_boxes();
+  static const int kBoxesFieldNumber = 7;
+  inline const ::OsmAndRoutingIndex_RouteDataBox& boxes(int index) const;
+  inline ::OsmAndRoutingIndex_RouteDataBox* mutable_boxes(int index);
+  inline ::OsmAndRoutingIndex_RouteDataBox* add_boxes();
+  inline const ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex_RouteDataBox >&
+      boxes() const;
+  inline ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex_RouteDataBox >*
+      mutable_boxes();
+  
+  // @@protoc_insertion_point(class_scope:OsmAndRoutingIndex.RouteDataBox)
+ private:
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  mutable int _cached_size_;
+  
+  ::google::protobuf::int32 left_;
+  ::google::protobuf::int32 right_;
+  ::google::protobuf::int32 top_;
+  ::google::protobuf::int32 bottom_;
+  ::google::protobuf::uint32 shifttodata_;
+  ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex_RouteDataBox > boxes_;
+  friend void  protobuf_AddDesc_src_2fosmand_5fodb_2eproto();
+  friend void protobuf_AssignDesc_src_2fosmand_5fodb_2eproto();
+  friend void protobuf_ShutdownFile_src_2fosmand_5fodb_2eproto();
+  
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+  
+  // WHY DOES & HAVE LOWER PRECEDENCE THAN != !?
+  inline bool _has_bit(int index) const {
+    return (_has_bits_[index / 32] & (1u << (index % 32))) != 0;
+  }
+  inline void _set_bit(int index) {
+    _has_bits_[index / 32] |= (1u << (index % 32));
+  }
+  inline void _clear_bit(int index) {
+    _has_bits_[index / 32] &= ~(1u << (index % 32));
+  }
+  
+  void InitAsDefaultInstance();
+  static OsmAndRoutingIndex_RouteDataBox* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class OsmAndRoutingIndex_RouteDataBlock : public ::google::protobuf::Message {
+ public:
+  OsmAndRoutingIndex_RouteDataBlock();
+  virtual ~OsmAndRoutingIndex_RouteDataBlock();
+  
+  OsmAndRoutingIndex_RouteDataBlock(const OsmAndRoutingIndex_RouteDataBlock& from);
+  
+  inline OsmAndRoutingIndex_RouteDataBlock& operator=(const OsmAndRoutingIndex_RouteDataBlock& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+  
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+  
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const OsmAndRoutingIndex_RouteDataBlock& default_instance();
+  
+  void Swap(OsmAndRoutingIndex_RouteDataBlock* other);
+  
+  // implements Message ----------------------------------------------
+  
+  OsmAndRoutingIndex_RouteDataBlock* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const OsmAndRoutingIndex_RouteDataBlock& from);
+  void MergeFrom(const OsmAndRoutingIndex_RouteDataBlock& from);
+  void Clear();
+  bool IsInitialized() const;
+  
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  
+  ::google::protobuf::Metadata GetMetadata() const;
+  
+  // nested types ----------------------------------------------------
+  
+  // accessors -------------------------------------------------------
+  
+  // optional .IdTable idTable = 5;
+  inline bool has_idtable() const;
+  inline void clear_idtable();
+  static const int kIdTableFieldNumber = 5;
+  inline const ::IdTable& idtable() const;
+  inline ::IdTable* mutable_idtable();
+  
+  // repeated .RouteData dataObjects = 6;
+  inline int dataobjects_size() const;
+  inline void clear_dataobjects();
+  static const int kDataObjectsFieldNumber = 6;
+  inline const ::RouteData& dataobjects(int index) const;
+  inline ::RouteData* mutable_dataobjects(int index);
+  inline ::RouteData* add_dataobjects();
+  inline const ::google::protobuf::RepeatedPtrField< ::RouteData >&
+      dataobjects() const;
+  inline ::google::protobuf::RepeatedPtrField< ::RouteData >*
+      mutable_dataobjects();
+  
+  // repeated .RestrictionData restrictions = 7;
+  inline int restrictions_size() const;
+  inline void clear_restrictions();
+  static const int kRestrictionsFieldNumber = 7;
+  inline const ::RestrictionData& restrictions(int index) const;
+  inline ::RestrictionData* mutable_restrictions(int index);
+  inline ::RestrictionData* add_restrictions();
+  inline const ::google::protobuf::RepeatedPtrField< ::RestrictionData >&
+      restrictions() const;
+  inline ::google::protobuf::RepeatedPtrField< ::RestrictionData >*
+      mutable_restrictions();
+  
+  // optional .StringTable stringTable = 8;
+  inline bool has_stringtable() const;
+  inline void clear_stringtable();
+  static const int kStringTableFieldNumber = 8;
+  inline const ::StringTable& stringtable() const;
+  inline ::StringTable* mutable_stringtable();
+  
+  // @@protoc_insertion_point(class_scope:OsmAndRoutingIndex.RouteDataBlock)
+ private:
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  mutable int _cached_size_;
+  
+  ::IdTable* idtable_;
+  ::google::protobuf::RepeatedPtrField< ::RouteData > dataobjects_;
+  ::google::protobuf::RepeatedPtrField< ::RestrictionData > restrictions_;
+  ::StringTable* stringtable_;
+  friend void  protobuf_AddDesc_src_2fosmand_5fodb_2eproto();
+  friend void protobuf_AssignDesc_src_2fosmand_5fodb_2eproto();
+  friend void protobuf_ShutdownFile_src_2fosmand_5fodb_2eproto();
+  
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  
+  // WHY DOES & HAVE LOWER PRECEDENCE THAN != !?
+  inline bool _has_bit(int index) const {
+    return (_has_bits_[index / 32] & (1u << (index % 32))) != 0;
+  }
+  inline void _set_bit(int index) {
+    _has_bits_[index / 32] |= (1u << (index % 32));
+  }
+  inline void _clear_bit(int index) {
+    _has_bits_[index / 32] &= ~(1u << (index % 32));
+  }
+  
+  void InitAsDefaultInstance();
+  static OsmAndRoutingIndex_RouteDataBlock* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class OsmAndRoutingIndex : public ::google::protobuf::Message {
+ public:
+  OsmAndRoutingIndex();
+  virtual ~OsmAndRoutingIndex();
+  
+  OsmAndRoutingIndex(const OsmAndRoutingIndex& from);
+  
+  inline OsmAndRoutingIndex& operator=(const OsmAndRoutingIndex& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+  
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+  
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const OsmAndRoutingIndex& default_instance();
+  
+  void Swap(OsmAndRoutingIndex* other);
+  
+  // implements Message ----------------------------------------------
+  
+  OsmAndRoutingIndex* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const OsmAndRoutingIndex& from);
+  void MergeFrom(const OsmAndRoutingIndex& from);
+  void Clear();
+  bool IsInitialized() const;
+  
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  
+  ::google::protobuf::Metadata GetMetadata() const;
+  
+  // nested types ----------------------------------------------------
+  
+  typedef OsmAndRoutingIndex_RouteEncodingRule RouteEncodingRule;
+  typedef OsmAndRoutingIndex_RouteDataBox RouteDataBox;
+  typedef OsmAndRoutingIndex_RouteDataBlock RouteDataBlock;
+  
+  // accessors -------------------------------------------------------
+  
+  // required string name = 1;
+  inline bool has_name() const;
+  inline void clear_name();
+  static const int kNameFieldNumber = 1;
+  inline const ::std::string& name() const;
+  inline void set_name(const ::std::string& value);
+  inline void set_name(const char* value);
+  inline void set_name(const char* value, size_t size);
+  inline ::std::string* mutable_name();
+  
+  // repeated .OsmAndRoutingIndex.RouteEncodingRule rules = 2;
+  inline int rules_size() const;
+  inline void clear_rules();
+  static const int kRulesFieldNumber = 2;
+  inline const ::OsmAndRoutingIndex_RouteEncodingRule& rules(int index) const;
+  inline ::OsmAndRoutingIndex_RouteEncodingRule* mutable_rules(int index);
+  inline ::OsmAndRoutingIndex_RouteEncodingRule* add_rules();
+  inline const ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex_RouteEncodingRule >&
+      rules() const;
+  inline ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex_RouteEncodingRule >*
+      mutable_rules();
+  
+  // repeated .OsmAndRoutingIndex.RouteDataBox rootBoxes = 3;
+  inline int rootboxes_size() const;
+  inline void clear_rootboxes();
+  static const int kRootBoxesFieldNumber = 3;
+  inline const ::OsmAndRoutingIndex_RouteDataBox& rootboxes(int index) const;
+  inline ::OsmAndRoutingIndex_RouteDataBox* mutable_rootboxes(int index);
+  inline ::OsmAndRoutingIndex_RouteDataBox* add_rootboxes();
+  inline const ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex_RouteDataBox >&
+      rootboxes() const;
+  inline ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex_RouteDataBox >*
+      mutable_rootboxes();
+  
+  // repeated .OsmAndRoutingIndex.RouteDataBlock blocks = 5;
+  inline int blocks_size() const;
+  inline void clear_blocks();
+  static const int kBlocksFieldNumber = 5;
+  inline const ::OsmAndRoutingIndex_RouteDataBlock& blocks(int index) const;
+  inline ::OsmAndRoutingIndex_RouteDataBlock* mutable_blocks(int index);
+  inline ::OsmAndRoutingIndex_RouteDataBlock* add_blocks();
+  inline const ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex_RouteDataBlock >&
+      blocks() const;
+  inline ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex_RouteDataBlock >*
+      mutable_blocks();
+  
+  // @@protoc_insertion_point(class_scope:OsmAndRoutingIndex)
+ private:
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  mutable int _cached_size_;
+  
+  ::std::string* name_;
+  static const ::std::string _default_name_;
+  ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex_RouteEncodingRule > rules_;
+  ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex_RouteDataBox > rootboxes_;
+  ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex_RouteDataBlock > blocks_;
+  friend void  protobuf_AddDesc_src_2fosmand_5fodb_2eproto();
+  friend void protobuf_AssignDesc_src_2fosmand_5fodb_2eproto();
+  friend void protobuf_ShutdownFile_src_2fosmand_5fodb_2eproto();
+  
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  
+  // WHY DOES & HAVE LOWER PRECEDENCE THAN != !?
+  inline bool _has_bit(int index) const {
+    return (_has_bits_[index / 32] & (1u << (index % 32))) != 0;
+  }
+  inline void _set_bit(int index) {
+    _has_bits_[index / 32] |= (1u << (index % 32));
+  }
+  inline void _clear_bit(int index) {
+    _has_bits_[index / 32] &= ~(1u << (index % 32));
+  }
+  
+  void InitAsDefaultInstance();
+  static OsmAndRoutingIndex* default_instance_;
+};
 // ===================================================================
 
 
@@ -4744,19 +5730,44 @@ OsmAndStructure::mutable_mapindex() {
   return &mapindex_;
 }
 
+// repeated .OsmAndRoutingIndex routingIndex = 9;
+inline int OsmAndStructure::routingindex_size() const {
+  return routingindex_.size();
+}
+inline void OsmAndStructure::clear_routingindex() {
+  routingindex_.Clear();
+}
+inline const ::OsmAndRoutingIndex& OsmAndStructure::routingindex(int index) const {
+  return routingindex_.Get(index);
+}
+inline ::OsmAndRoutingIndex* OsmAndStructure::mutable_routingindex(int index) {
+  return routingindex_.Mutable(index);
+}
+inline ::OsmAndRoutingIndex* OsmAndStructure::add_routingindex() {
+  return routingindex_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex >&
+OsmAndStructure::routingindex() const {
+  return routingindex_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex >*
+OsmAndStructure::mutable_routingindex() {
+  return &routingindex_;
+}
+
 // required uint32 versionConfirm = 32;
 inline bool OsmAndStructure::has_versionconfirm() const {
-  return _has_bit(6);
+  return _has_bit(7);
 }
 inline void OsmAndStructure::clear_versionconfirm() {
   versionconfirm_ = 0u;
-  _clear_bit(6);
+  _clear_bit(7);
 }
 inline ::google::protobuf::uint32 OsmAndStructure::versionconfirm() const {
   return versionconfirm_;
 }
 inline void OsmAndStructure::set_versionconfirm(::google::protobuf::uint32 value) {
-  _set_bit(6);
+  _set_bit(7);
   versionconfirm_ = value;
 }
 
@@ -8777,6 +9788,783 @@ inline ::std::string* OsmAndPoiBoxDataAtom::mutable_note() {
     note_ = new ::std::string;
   }
   return note_;
+}
+
+// -------------------------------------------------------------------
+
+// IdTable
+
+// repeated uint64 routeId = 1;
+inline int IdTable::routeid_size() const {
+  return routeid_.size();
+}
+inline void IdTable::clear_routeid() {
+  routeid_.Clear();
+}
+inline ::google::protobuf::uint64 IdTable::routeid(int index) const {
+  return routeid_.Get(index);
+}
+inline void IdTable::set_routeid(int index, ::google::protobuf::uint64 value) {
+  routeid_.Set(index, value);
+}
+inline void IdTable::add_routeid(::google::protobuf::uint64 value) {
+  routeid_.Add(value);
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
+IdTable::routeid() const {
+  return routeid_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
+IdTable::mutable_routeid() {
+  return &routeid_;
+}
+
+// repeated uint64 pointId = 2;
+inline int IdTable::pointid_size() const {
+  return pointid_.size();
+}
+inline void IdTable::clear_pointid() {
+  pointid_.Clear();
+}
+inline ::google::protobuf::uint64 IdTable::pointid(int index) const {
+  return pointid_.Get(index);
+}
+inline void IdTable::set_pointid(int index, ::google::protobuf::uint64 value) {
+  pointid_.Set(index, value);
+}
+inline void IdTable::add_pointid(::google::protobuf::uint64 value) {
+  pointid_.Add(value);
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
+IdTable::pointid() const {
+  return pointid_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
+IdTable::mutable_pointid() {
+  return &pointid_;
+}
+
+// -------------------------------------------------------------------
+
+// RestrictionData
+
+// required int32 type = 1;
+inline bool RestrictionData::has_type() const {
+  return _has_bit(0);
+}
+inline void RestrictionData::clear_type() {
+  type_ = 0;
+  _clear_bit(0);
+}
+inline ::google::protobuf::int32 RestrictionData::type() const {
+  return type_;
+}
+inline void RestrictionData::set_type(::google::protobuf::int32 value) {
+  _set_bit(0);
+  type_ = value;
+}
+
+// required int32 from = 2;
+inline bool RestrictionData::has_from() const {
+  return _has_bit(1);
+}
+inline void RestrictionData::clear_from() {
+  from_ = 0;
+  _clear_bit(1);
+}
+inline ::google::protobuf::int32 RestrictionData::from() const {
+  return from_;
+}
+inline void RestrictionData::set_from(::google::protobuf::int32 value) {
+  _set_bit(1);
+  from_ = value;
+}
+
+// required int32 to = 3;
+inline bool RestrictionData::has_to() const {
+  return _has_bit(2);
+}
+inline void RestrictionData::clear_to() {
+  to_ = 0;
+  _clear_bit(2);
+}
+inline ::google::protobuf::int32 RestrictionData::to() const {
+  return to_;
+}
+inline void RestrictionData::set_to(::google::protobuf::int32 value) {
+  _set_bit(2);
+  to_ = value;
+}
+
+// optional int32 via = 4;
+inline bool RestrictionData::has_via() const {
+  return _has_bit(3);
+}
+inline void RestrictionData::clear_via() {
+  via_ = 0;
+  _clear_bit(3);
+}
+inline ::google::protobuf::int32 RestrictionData::via() const {
+  return via_;
+}
+inline void RestrictionData::set_via(::google::protobuf::int32 value) {
+  _set_bit(3);
+  via_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// RoutePoint
+
+// required bytes point = 1;
+inline bool RoutePoint::has_point() const {
+  return _has_bit(0);
+}
+inline void RoutePoint::clear_point() {
+  if (point_ != &_default_point_) {
+    point_->clear();
+  }
+  _clear_bit(0);
+}
+inline const ::std::string& RoutePoint::point() const {
+  return *point_;
+}
+inline void RoutePoint::set_point(const ::std::string& value) {
+  _set_bit(0);
+  if (point_ == &_default_point_) {
+    point_ = new ::std::string;
+  }
+  point_->assign(value);
+}
+inline void RoutePoint::set_point(const char* value) {
+  _set_bit(0);
+  if (point_ == &_default_point_) {
+    point_ = new ::std::string;
+  }
+  point_->assign(value);
+}
+inline void RoutePoint::set_point(const void* value, size_t size) {
+  _set_bit(0);
+  if (point_ == &_default_point_) {
+    point_ = new ::std::string;
+  }
+  point_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* RoutePoint::mutable_point() {
+  _set_bit(0);
+  if (point_ == &_default_point_) {
+    point_ = new ::std::string;
+  }
+  return point_;
+}
+
+// optional uint32 pointId = 2;
+inline bool RoutePoint::has_pointid() const {
+  return _has_bit(1);
+}
+inline void RoutePoint::clear_pointid() {
+  pointid_ = 0u;
+  _clear_bit(1);
+}
+inline ::google::protobuf::uint32 RoutePoint::pointid() const {
+  return pointid_;
+}
+inline void RoutePoint::set_pointid(::google::protobuf::uint32 value) {
+  _set_bit(1);
+  pointid_ = value;
+}
+
+// optional bytes types = 4;
+inline bool RoutePoint::has_types() const {
+  return _has_bit(2);
+}
+inline void RoutePoint::clear_types() {
+  if (types_ != &_default_types_) {
+    types_->clear();
+  }
+  _clear_bit(2);
+}
+inline const ::std::string& RoutePoint::types() const {
+  return *types_;
+}
+inline void RoutePoint::set_types(const ::std::string& value) {
+  _set_bit(2);
+  if (types_ == &_default_types_) {
+    types_ = new ::std::string;
+  }
+  types_->assign(value);
+}
+inline void RoutePoint::set_types(const char* value) {
+  _set_bit(2);
+  if (types_ == &_default_types_) {
+    types_ = new ::std::string;
+  }
+  types_->assign(value);
+}
+inline void RoutePoint::set_types(const void* value, size_t size) {
+  _set_bit(2);
+  if (types_ == &_default_types_) {
+    types_ = new ::std::string;
+  }
+  types_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* RoutePoint::mutable_types() {
+  _set_bit(2);
+  if (types_ == &_default_types_) {
+    types_ = new ::std::string;
+  }
+  return types_;
+}
+
+// -------------------------------------------------------------------
+
+// RouteData
+
+// repeated .RoutePoint points = 1;
+inline int RouteData::points_size() const {
+  return points_.size();
+}
+inline void RouteData::clear_points() {
+  points_.Clear();
+}
+inline const ::RoutePoint& RouteData::points(int index) const {
+  return points_.Get(index);
+}
+inline ::RoutePoint* RouteData::mutable_points(int index) {
+  return points_.Mutable(index);
+}
+inline ::RoutePoint* RouteData::add_points() {
+  return points_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::RoutePoint >&
+RouteData::points() const {
+  return points_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::RoutePoint >*
+RouteData::mutable_points() {
+  return &points_;
+}
+
+// required bytes types = 7;
+inline bool RouteData::has_types() const {
+  return _has_bit(1);
+}
+inline void RouteData::clear_types() {
+  if (types_ != &_default_types_) {
+    types_->clear();
+  }
+  _clear_bit(1);
+}
+inline const ::std::string& RouteData::types() const {
+  return *types_;
+}
+inline void RouteData::set_types(const ::std::string& value) {
+  _set_bit(1);
+  if (types_ == &_default_types_) {
+    types_ = new ::std::string;
+  }
+  types_->assign(value);
+}
+inline void RouteData::set_types(const char* value) {
+  _set_bit(1);
+  if (types_ == &_default_types_) {
+    types_ = new ::std::string;
+  }
+  types_->assign(value);
+}
+inline void RouteData::set_types(const void* value, size_t size) {
+  _set_bit(1);
+  if (types_ == &_default_types_) {
+    types_ = new ::std::string;
+  }
+  types_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* RouteData::mutable_types() {
+  _set_bit(1);
+  if (types_ == &_default_types_) {
+    types_ = new ::std::string;
+  }
+  return types_;
+}
+
+// required int32 routeId = 12;
+inline bool RouteData::has_routeid() const {
+  return _has_bit(2);
+}
+inline void RouteData::clear_routeid() {
+  routeid_ = 0;
+  _clear_bit(2);
+}
+inline ::google::protobuf::int32 RouteData::routeid() const {
+  return routeid_;
+}
+inline void RouteData::set_routeid(::google::protobuf::int32 value) {
+  _set_bit(2);
+  routeid_ = value;
+}
+
+// optional bytes stringNames = 14;
+inline bool RouteData::has_stringnames() const {
+  return _has_bit(3);
+}
+inline void RouteData::clear_stringnames() {
+  if (stringnames_ != &_default_stringnames_) {
+    stringnames_->clear();
+  }
+  _clear_bit(3);
+}
+inline const ::std::string& RouteData::stringnames() const {
+  return *stringnames_;
+}
+inline void RouteData::set_stringnames(const ::std::string& value) {
+  _set_bit(3);
+  if (stringnames_ == &_default_stringnames_) {
+    stringnames_ = new ::std::string;
+  }
+  stringnames_->assign(value);
+}
+inline void RouteData::set_stringnames(const char* value) {
+  _set_bit(3);
+  if (stringnames_ == &_default_stringnames_) {
+    stringnames_ = new ::std::string;
+  }
+  stringnames_->assign(value);
+}
+inline void RouteData::set_stringnames(const void* value, size_t size) {
+  _set_bit(3);
+  if (stringnames_ == &_default_stringnames_) {
+    stringnames_ = new ::std::string;
+  }
+  stringnames_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* RouteData::mutable_stringnames() {
+  _set_bit(3);
+  if (stringnames_ == &_default_stringnames_) {
+    stringnames_ = new ::std::string;
+  }
+  return stringnames_;
+}
+
+// -------------------------------------------------------------------
+
+// OsmAndRoutingIndex_RouteEncodingRule
+
+// required string tag = 3;
+inline bool OsmAndRoutingIndex_RouteEncodingRule::has_tag() const {
+  return _has_bit(0);
+}
+inline void OsmAndRoutingIndex_RouteEncodingRule::clear_tag() {
+  if (tag_ != &_default_tag_) {
+    tag_->clear();
+  }
+  _clear_bit(0);
+}
+inline const ::std::string& OsmAndRoutingIndex_RouteEncodingRule::tag() const {
+  return *tag_;
+}
+inline void OsmAndRoutingIndex_RouteEncodingRule::set_tag(const ::std::string& value) {
+  _set_bit(0);
+  if (tag_ == &_default_tag_) {
+    tag_ = new ::std::string;
+  }
+  tag_->assign(value);
+}
+inline void OsmAndRoutingIndex_RouteEncodingRule::set_tag(const char* value) {
+  _set_bit(0);
+  if (tag_ == &_default_tag_) {
+    tag_ = new ::std::string;
+  }
+  tag_->assign(value);
+}
+inline void OsmAndRoutingIndex_RouteEncodingRule::set_tag(const char* value, size_t size) {
+  _set_bit(0);
+  if (tag_ == &_default_tag_) {
+    tag_ = new ::std::string;
+  }
+  tag_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* OsmAndRoutingIndex_RouteEncodingRule::mutable_tag() {
+  _set_bit(0);
+  if (tag_ == &_default_tag_) {
+    tag_ = new ::std::string;
+  }
+  return tag_;
+}
+
+// required string value = 5;
+inline bool OsmAndRoutingIndex_RouteEncodingRule::has_value() const {
+  return _has_bit(1);
+}
+inline void OsmAndRoutingIndex_RouteEncodingRule::clear_value() {
+  if (value_ != &_default_value_) {
+    value_->clear();
+  }
+  _clear_bit(1);
+}
+inline const ::std::string& OsmAndRoutingIndex_RouteEncodingRule::value() const {
+  return *value_;
+}
+inline void OsmAndRoutingIndex_RouteEncodingRule::set_value(const ::std::string& value) {
+  _set_bit(1);
+  if (value_ == &_default_value_) {
+    value_ = new ::std::string;
+  }
+  value_->assign(value);
+}
+inline void OsmAndRoutingIndex_RouteEncodingRule::set_value(const char* value) {
+  _set_bit(1);
+  if (value_ == &_default_value_) {
+    value_ = new ::std::string;
+  }
+  value_->assign(value);
+}
+inline void OsmAndRoutingIndex_RouteEncodingRule::set_value(const char* value, size_t size) {
+  _set_bit(1);
+  if (value_ == &_default_value_) {
+    value_ = new ::std::string;
+  }
+  value_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* OsmAndRoutingIndex_RouteEncodingRule::mutable_value() {
+  _set_bit(1);
+  if (value_ == &_default_value_) {
+    value_ = new ::std::string;
+  }
+  return value_;
+}
+
+// optional uint32 id = 7;
+inline bool OsmAndRoutingIndex_RouteEncodingRule::has_id() const {
+  return _has_bit(2);
+}
+inline void OsmAndRoutingIndex_RouteEncodingRule::clear_id() {
+  id_ = 0u;
+  _clear_bit(2);
+}
+inline ::google::protobuf::uint32 OsmAndRoutingIndex_RouteEncodingRule::id() const {
+  return id_;
+}
+inline void OsmAndRoutingIndex_RouteEncodingRule::set_id(::google::protobuf::uint32 value) {
+  _set_bit(2);
+  id_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// OsmAndRoutingIndex_RouteDataBox
+
+// required sint32 left = 1;
+inline bool OsmAndRoutingIndex_RouteDataBox::has_left() const {
+  return _has_bit(0);
+}
+inline void OsmAndRoutingIndex_RouteDataBox::clear_left() {
+  left_ = 0;
+  _clear_bit(0);
+}
+inline ::google::protobuf::int32 OsmAndRoutingIndex_RouteDataBox::left() const {
+  return left_;
+}
+inline void OsmAndRoutingIndex_RouteDataBox::set_left(::google::protobuf::int32 value) {
+  _set_bit(0);
+  left_ = value;
+}
+
+// required sint32 right = 2;
+inline bool OsmAndRoutingIndex_RouteDataBox::has_right() const {
+  return _has_bit(1);
+}
+inline void OsmAndRoutingIndex_RouteDataBox::clear_right() {
+  right_ = 0;
+  _clear_bit(1);
+}
+inline ::google::protobuf::int32 OsmAndRoutingIndex_RouteDataBox::right() const {
+  return right_;
+}
+inline void OsmAndRoutingIndex_RouteDataBox::set_right(::google::protobuf::int32 value) {
+  _set_bit(1);
+  right_ = value;
+}
+
+// required sint32 top = 3;
+inline bool OsmAndRoutingIndex_RouteDataBox::has_top() const {
+  return _has_bit(2);
+}
+inline void OsmAndRoutingIndex_RouteDataBox::clear_top() {
+  top_ = 0;
+  _clear_bit(2);
+}
+inline ::google::protobuf::int32 OsmAndRoutingIndex_RouteDataBox::top() const {
+  return top_;
+}
+inline void OsmAndRoutingIndex_RouteDataBox::set_top(::google::protobuf::int32 value) {
+  _set_bit(2);
+  top_ = value;
+}
+
+// required sint32 bottom = 4;
+inline bool OsmAndRoutingIndex_RouteDataBox::has_bottom() const {
+  return _has_bit(3);
+}
+inline void OsmAndRoutingIndex_RouteDataBox::clear_bottom() {
+  bottom_ = 0;
+  _clear_bit(3);
+}
+inline ::google::protobuf::int32 OsmAndRoutingIndex_RouteDataBox::bottom() const {
+  return bottom_;
+}
+inline void OsmAndRoutingIndex_RouteDataBox::set_bottom(::google::protobuf::int32 value) {
+  _set_bit(3);
+  bottom_ = value;
+}
+
+// optional fixed32 shiftToData = 5;
+inline bool OsmAndRoutingIndex_RouteDataBox::has_shifttodata() const {
+  return _has_bit(4);
+}
+inline void OsmAndRoutingIndex_RouteDataBox::clear_shifttodata() {
+  shifttodata_ = 0u;
+  _clear_bit(4);
+}
+inline ::google::protobuf::uint32 OsmAndRoutingIndex_RouteDataBox::shifttodata() const {
+  return shifttodata_;
+}
+inline void OsmAndRoutingIndex_RouteDataBox::set_shifttodata(::google::protobuf::uint32 value) {
+  _set_bit(4);
+  shifttodata_ = value;
+}
+
+// repeated .OsmAndRoutingIndex.RouteDataBox boxes = 7;
+inline int OsmAndRoutingIndex_RouteDataBox::boxes_size() const {
+  return boxes_.size();
+}
+inline void OsmAndRoutingIndex_RouteDataBox::clear_boxes() {
+  boxes_.Clear();
+}
+inline const ::OsmAndRoutingIndex_RouteDataBox& OsmAndRoutingIndex_RouteDataBox::boxes(int index) const {
+  return boxes_.Get(index);
+}
+inline ::OsmAndRoutingIndex_RouteDataBox* OsmAndRoutingIndex_RouteDataBox::mutable_boxes(int index) {
+  return boxes_.Mutable(index);
+}
+inline ::OsmAndRoutingIndex_RouteDataBox* OsmAndRoutingIndex_RouteDataBox::add_boxes() {
+  return boxes_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex_RouteDataBox >&
+OsmAndRoutingIndex_RouteDataBox::boxes() const {
+  return boxes_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex_RouteDataBox >*
+OsmAndRoutingIndex_RouteDataBox::mutable_boxes() {
+  return &boxes_;
+}
+
+// -------------------------------------------------------------------
+
+// OsmAndRoutingIndex_RouteDataBlock
+
+// optional .IdTable idTable = 5;
+inline bool OsmAndRoutingIndex_RouteDataBlock::has_idtable() const {
+  return _has_bit(0);
+}
+inline void OsmAndRoutingIndex_RouteDataBlock::clear_idtable() {
+  if (idtable_ != NULL) idtable_->::IdTable::Clear();
+  _clear_bit(0);
+}
+inline const ::IdTable& OsmAndRoutingIndex_RouteDataBlock::idtable() const {
+  return idtable_ != NULL ? *idtable_ : *default_instance_->idtable_;
+}
+inline ::IdTable* OsmAndRoutingIndex_RouteDataBlock::mutable_idtable() {
+  _set_bit(0);
+  if (idtable_ == NULL) idtable_ = new ::IdTable;
+  return idtable_;
+}
+
+// repeated .RouteData dataObjects = 6;
+inline int OsmAndRoutingIndex_RouteDataBlock::dataobjects_size() const {
+  return dataobjects_.size();
+}
+inline void OsmAndRoutingIndex_RouteDataBlock::clear_dataobjects() {
+  dataobjects_.Clear();
+}
+inline const ::RouteData& OsmAndRoutingIndex_RouteDataBlock::dataobjects(int index) const {
+  return dataobjects_.Get(index);
+}
+inline ::RouteData* OsmAndRoutingIndex_RouteDataBlock::mutable_dataobjects(int index) {
+  return dataobjects_.Mutable(index);
+}
+inline ::RouteData* OsmAndRoutingIndex_RouteDataBlock::add_dataobjects() {
+  return dataobjects_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::RouteData >&
+OsmAndRoutingIndex_RouteDataBlock::dataobjects() const {
+  return dataobjects_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::RouteData >*
+OsmAndRoutingIndex_RouteDataBlock::mutable_dataobjects() {
+  return &dataobjects_;
+}
+
+// repeated .RestrictionData restrictions = 7;
+inline int OsmAndRoutingIndex_RouteDataBlock::restrictions_size() const {
+  return restrictions_.size();
+}
+inline void OsmAndRoutingIndex_RouteDataBlock::clear_restrictions() {
+  restrictions_.Clear();
+}
+inline const ::RestrictionData& OsmAndRoutingIndex_RouteDataBlock::restrictions(int index) const {
+  return restrictions_.Get(index);
+}
+inline ::RestrictionData* OsmAndRoutingIndex_RouteDataBlock::mutable_restrictions(int index) {
+  return restrictions_.Mutable(index);
+}
+inline ::RestrictionData* OsmAndRoutingIndex_RouteDataBlock::add_restrictions() {
+  return restrictions_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::RestrictionData >&
+OsmAndRoutingIndex_RouteDataBlock::restrictions() const {
+  return restrictions_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::RestrictionData >*
+OsmAndRoutingIndex_RouteDataBlock::mutable_restrictions() {
+  return &restrictions_;
+}
+
+// optional .StringTable stringTable = 8;
+inline bool OsmAndRoutingIndex_RouteDataBlock::has_stringtable() const {
+  return _has_bit(3);
+}
+inline void OsmAndRoutingIndex_RouteDataBlock::clear_stringtable() {
+  if (stringtable_ != NULL) stringtable_->::StringTable::Clear();
+  _clear_bit(3);
+}
+inline const ::StringTable& OsmAndRoutingIndex_RouteDataBlock::stringtable() const {
+  return stringtable_ != NULL ? *stringtable_ : *default_instance_->stringtable_;
+}
+inline ::StringTable* OsmAndRoutingIndex_RouteDataBlock::mutable_stringtable() {
+  _set_bit(3);
+  if (stringtable_ == NULL) stringtable_ = new ::StringTable;
+  return stringtable_;
+}
+
+// -------------------------------------------------------------------
+
+// OsmAndRoutingIndex
+
+// required string name = 1;
+inline bool OsmAndRoutingIndex::has_name() const {
+  return _has_bit(0);
+}
+inline void OsmAndRoutingIndex::clear_name() {
+  if (name_ != &_default_name_) {
+    name_->clear();
+  }
+  _clear_bit(0);
+}
+inline const ::std::string& OsmAndRoutingIndex::name() const {
+  return *name_;
+}
+inline void OsmAndRoutingIndex::set_name(const ::std::string& value) {
+  _set_bit(0);
+  if (name_ == &_default_name_) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void OsmAndRoutingIndex::set_name(const char* value) {
+  _set_bit(0);
+  if (name_ == &_default_name_) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+}
+inline void OsmAndRoutingIndex::set_name(const char* value, size_t size) {
+  _set_bit(0);
+  if (name_ == &_default_name_) {
+    name_ = new ::std::string;
+  }
+  name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* OsmAndRoutingIndex::mutable_name() {
+  _set_bit(0);
+  if (name_ == &_default_name_) {
+    name_ = new ::std::string;
+  }
+  return name_;
+}
+
+// repeated .OsmAndRoutingIndex.RouteEncodingRule rules = 2;
+inline int OsmAndRoutingIndex::rules_size() const {
+  return rules_.size();
+}
+inline void OsmAndRoutingIndex::clear_rules() {
+  rules_.Clear();
+}
+inline const ::OsmAndRoutingIndex_RouteEncodingRule& OsmAndRoutingIndex::rules(int index) const {
+  return rules_.Get(index);
+}
+inline ::OsmAndRoutingIndex_RouteEncodingRule* OsmAndRoutingIndex::mutable_rules(int index) {
+  return rules_.Mutable(index);
+}
+inline ::OsmAndRoutingIndex_RouteEncodingRule* OsmAndRoutingIndex::add_rules() {
+  return rules_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex_RouteEncodingRule >&
+OsmAndRoutingIndex::rules() const {
+  return rules_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex_RouteEncodingRule >*
+OsmAndRoutingIndex::mutable_rules() {
+  return &rules_;
+}
+
+// repeated .OsmAndRoutingIndex.RouteDataBox rootBoxes = 3;
+inline int OsmAndRoutingIndex::rootboxes_size() const {
+  return rootboxes_.size();
+}
+inline void OsmAndRoutingIndex::clear_rootboxes() {
+  rootboxes_.Clear();
+}
+inline const ::OsmAndRoutingIndex_RouteDataBox& OsmAndRoutingIndex::rootboxes(int index) const {
+  return rootboxes_.Get(index);
+}
+inline ::OsmAndRoutingIndex_RouteDataBox* OsmAndRoutingIndex::mutable_rootboxes(int index) {
+  return rootboxes_.Mutable(index);
+}
+inline ::OsmAndRoutingIndex_RouteDataBox* OsmAndRoutingIndex::add_rootboxes() {
+  return rootboxes_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex_RouteDataBox >&
+OsmAndRoutingIndex::rootboxes() const {
+  return rootboxes_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex_RouteDataBox >*
+OsmAndRoutingIndex::mutable_rootboxes() {
+  return &rootboxes_;
+}
+
+// repeated .OsmAndRoutingIndex.RouteDataBlock blocks = 5;
+inline int OsmAndRoutingIndex::blocks_size() const {
+  return blocks_.size();
+}
+inline void OsmAndRoutingIndex::clear_blocks() {
+  blocks_.Clear();
+}
+inline const ::OsmAndRoutingIndex_RouteDataBlock& OsmAndRoutingIndex::blocks(int index) const {
+  return blocks_.Get(index);
+}
+inline ::OsmAndRoutingIndex_RouteDataBlock* OsmAndRoutingIndex::mutable_blocks(int index) {
+  return blocks_.Mutable(index);
+}
+inline ::OsmAndRoutingIndex_RouteDataBlock* OsmAndRoutingIndex::add_blocks() {
+  return blocks_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex_RouteDataBlock >&
+OsmAndRoutingIndex::blocks() const {
+  return blocks_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::OsmAndRoutingIndex_RouteDataBlock >*
+OsmAndRoutingIndex::mutable_blocks() {
+  return &blocks_;
 }
 
 

@@ -1,2 +1,8 @@
-cd zlib && configure.sh && cd ..
-cd pthread && configure.sh && cd .. 
+chmod +x zlib/configure.sh
+cd zlib
+./configure.sh
+cd ..
+chmod +x pthread/configure.sh
+cd pthread
+./configure.sh 
+cd ..

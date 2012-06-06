@@ -29,6 +29,7 @@ import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.binary.OsmandOdb.MapDataBlock;
 import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapDataBox;
@@ -65,6 +66,7 @@ public class BinaryMapIndexReader {
 	private List<PoiRegion> poiIndexes = new ArrayList<PoiRegion>();
 	private List<AddressRegion> addressIndexes = new ArrayList<AddressRegion>();
 	private List<TransportIndex> transportIndexes = new ArrayList<TransportIndex>();
+	private List<RouteRegion> routingIndexes = new ArrayList<RouteRegion>();
 	private List<BinaryIndexPart> indexes = new ArrayList<BinaryIndexPart>();
 	
 	protected CodedInputStreamRAF codedIS;
@@ -72,6 +74,7 @@ public class BinaryMapIndexReader {
 	private final BinaryMapTransportReaderAdapter transportAdapter;
 	private final BinaryMapPoiReaderAdapter poiAdapter;
 	private final BinaryMapAddressReaderAdapter addressAdapter;
+	private BinaryMapRouteReaderAdapter routeAdapter;
 	
 	private static String BASEMAP_NAME = "basemap";
 
@@ -88,10 +91,12 @@ public class BinaryMapIndexReader {
 		transportAdapter = new BinaryMapTransportReaderAdapter(this);
 		addressAdapter = new BinaryMapAddressReaderAdapter(this);
 		poiAdapter = new BinaryMapPoiReaderAdapter(this);
+		routeAdapter = new BinaryMapRouteReaderAdapter(this);
 		mapIndexes = new ArrayList<BinaryMapIndexReader.MapIndex>(referenceToSameFile.mapIndexes);
 		poiIndexes = new ArrayList<PoiRegion>(referenceToSameFile.poiIndexes);
 		addressIndexes = new ArrayList<AddressRegion>(referenceToSameFile.addressIndexes);
 		transportIndexes = new ArrayList<TransportIndex>(referenceToSameFile.transportIndexes);
+		routingIndexes = new ArrayList<RouteRegion>(referenceToSameFile.routingIndexes);
 		indexes = new ArrayList<BinaryIndexPart>(referenceToSameFile.indexes);
 		basemap = referenceToSameFile.basemap;
 	}
@@ -104,6 +109,7 @@ public class BinaryMapIndexReader {
 			transportAdapter = new BinaryMapTransportReaderAdapter(this);
 			addressAdapter = new BinaryMapAddressReaderAdapter(this);
 			poiAdapter = new BinaryMapPoiReaderAdapter(this);
+			routeAdapter = new BinaryMapRouteReaderAdapter(this);
 		} else {
 			transportAdapter = null;
 			addressAdapter = null;
@@ -174,6 +180,19 @@ public class BinaryMapIndexReader {
 					indexes.add(ind);
 				}
 				codedIS.seek(ind.filePointer + ind.length);
+				break;
+			case OsmandOdb.OsmAndStructure.ROUTINGINDEX_FIELD_NUMBER:
+				RouteRegion routeReg = new RouteRegion();
+				routeReg.length = readInt();
+				routeReg.filePointer = codedIS.getTotalBytesRead();
+				if (routeAdapter != null) {
+					oldLimit = codedIS.pushLimit(routeReg.length);
+					routeAdapter.readRouteIndex(routeReg);
+					codedIS.popLimit(oldLimit);
+					routingIndexes.add(routeReg);
+					indexes.add(routeReg);
+				}
+				codedIS.seek(routeReg.filePointer + routeReg.length);
 				break;
 			case OsmandOdb.OsmAndStructure.POIINDEX_FIELD_NUMBER:
 				PoiRegion poiInd = new PoiRegion();
