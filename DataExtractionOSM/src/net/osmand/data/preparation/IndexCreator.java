@@ -329,15 +329,13 @@ public class IndexCreator {
 	
 	private void createDatabaseIndexesStructure() throws SQLException, IOException {
 		// 2.1 create temporary sqlite database to put temporary results to it
-		if (indexMap || indexAddress || indexTransport || indexPOI) {
-			mapFile = new File(workingDir, getMapFileName());
-			// to save space
-			mapFile.getParentFile().mkdirs();
-			File tempDBMapFile = new File(workingDir, getTempMapDBFileName());
-			mapDBDialect.removeDatabase(tempDBMapFile);
-			mapConnection = (Connection) getDatabaseConnection(tempDBMapFile.getAbsolutePath(), mapDBDialect);
-			mapConnection.setAutoCommit(false);
-		}
+		mapFile = new File(workingDir, getMapFileName());
+		// to save space
+		mapFile.getParentFile().mkdirs();
+		File tempDBMapFile = new File(workingDir, getTempMapDBFileName());
+		mapDBDialect.removeDatabase(tempDBMapFile);
+		mapConnection = (Connection) getDatabaseConnection(tempDBMapFile.getAbsolutePath(), mapDBDialect);
+		mapConnection.setAutoCommit(false);
 
 		// 2.2 create rtree map
 		if (indexMap) {
@@ -572,7 +570,6 @@ public class IndexCreator {
 				}
 
 				// 3.3 MAIN iterate over all entities
-				if (indexPOI || indexAddress || indexMap) {
 					progress.setGeneralProgress("[50 / 100]");
 					progress.startTask(Messages.getString("IndexCreator.PROCESS_OSM_NODES"), accessor.getAllNodes());
 					accessor.iterateOverEntities(progress, EntityType.NODE, new OsmDbVisitor() {
@@ -589,7 +586,6 @@ public class IndexCreator {
 							iterateMainEntity(e, ctx);
 						}
 					});
-				}
 				progress.setGeneralProgress("[85 / 100]");
 				progress.startTask(Messages.getString("IndexCreator.PROCESS_OSM_REL"), accessor.getAllRelations());
 				accessor.iterateOverEntities(progress, EntityType.RELATION, new OsmDbVisitor() {
@@ -631,7 +627,7 @@ public class IndexCreator {
 			}
 
 			// 5. Writing binary file
-			if (indexMap || indexAddress || indexTransport || indexPOI) {
+			if (indexMap || indexAddress || indexTransport || indexPOI || indexRouting) {
 				if (mapFile.exists()) {
 					mapFile.delete();
 				}
@@ -737,9 +733,9 @@ public class IndexCreator {
 	public static void main(String[] args) throws IOException, SAXException, SQLException, InterruptedException {
 		long time = System.currentTimeMillis();
 		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/data/osm-gen/")); //$NON-NLS-1$
-		creator.setIndexMap(true);
-		creator.setIndexAddress(true);
-		creator.setIndexPOI(true);
+		creator.setIndexMap(false);
+		creator.setIndexAddress(false);
+		creator.setIndexPOI(false);
 		creator.setIndexTransport(false);
 		creator.setIndexRouting(true);
 

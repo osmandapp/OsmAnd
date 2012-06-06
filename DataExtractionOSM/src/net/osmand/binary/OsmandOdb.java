@@ -18222,7 +18222,7 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_IdTable_fieldAccessorTable;
     }
     
-    // repeated uint64 routeId = 1;
+    // repeated sint64 routeId = 1;
     public static final int ROUTEID_FIELD_NUMBER = 1;
     private java.util.List<java.lang.Long> routeId_ =
       java.util.Collections.emptyList();
@@ -18234,7 +18234,7 @@ public final class OsmandOdb {
       return routeId_.get(index);
     }
     
-    // repeated uint64 pointId = 2;
+    // repeated sint64 pointId = 2;
     public static final int POINTID_FIELD_NUMBER = 2;
     private java.util.List<java.lang.Long> pointId_ =
       java.util.Collections.emptyList();
@@ -18258,10 +18258,10 @@ public final class OsmandOdb {
                         throws java.io.IOException {
       getSerializedSize();
       for (long element : getRouteIdList()) {
-        output.writeUInt64(1, element);
+        output.writeSInt64(1, element);
       }
       for (long element : getPointIdList()) {
-        output.writeUInt64(2, element);
+        output.writeSInt64(2, element);
       }
       getUnknownFields().writeTo(output);
     }
@@ -18277,7 +18277,7 @@ public final class OsmandOdb {
         int dataSize = 0;
         for (long element : getRouteIdList()) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeUInt64SizeNoTag(element);
+            .computeSInt64SizeNoTag(element);
         }
         size += dataSize;
         size += 1 * getRouteIdList().size();
@@ -18286,7 +18286,7 @@ public final class OsmandOdb {
         int dataSize = 0;
         for (long element : getPointIdList()) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeUInt64SizeNoTag(element);
+            .computeSInt64SizeNoTag(element);
         }
         size += dataSize;
         size += 1 * getPointIdList().size();
@@ -18507,27 +18507,27 @@ public final class OsmandOdb {
               break;
             }
             case 8: {
-              addRouteId(input.readUInt64());
+              addRouteId(input.readSInt64());
               break;
             }
             case 10: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               while (input.getBytesUntilLimit() > 0) {
-                addRouteId(input.readUInt64());
+                addRouteId(input.readSInt64());
               }
               input.popLimit(limit);
               break;
             }
             case 16: {
-              addPointId(input.readUInt64());
+              addPointId(input.readSInt64());
               break;
             }
             case 18: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               while (input.getBytesUntilLimit() > 0) {
-                addPointId(input.readUInt64());
+                addPointId(input.readSInt64());
               }
               input.popLimit(limit);
               break;
@@ -18537,7 +18537,7 @@ public final class OsmandOdb {
       }
       
       
-      // repeated uint64 routeId = 1;
+      // repeated sint64 routeId = 1;
       public java.util.List<java.lang.Long> getRouteIdList() {
         return java.util.Collections.unmodifiableList(result.routeId_);
       }
@@ -18571,7 +18571,7 @@ public final class OsmandOdb {
         return this;
       }
       
-      // repeated uint64 pointId = 2;
+      // repeated sint64 pointId = 2;
       public java.util.List<java.lang.Long> getPointIdList() {
         return java.util.Collections.unmodifiableList(result.pointId_);
       }
@@ -20902,6 +20902,13 @@ public final class OsmandOdb {
       public boolean hasIdTable() { return hasIdTable; }
       public net.osmand.binary.OsmandOdb.IdTable getIdTable() { return idTable_; }
       
+      // optional .StringTable stringTable = 8;
+      public static final int STRINGTABLE_FIELD_NUMBER = 8;
+      private boolean hasStringTable;
+      private net.osmand.binary.OsmandOdb.StringTable stringTable_;
+      public boolean hasStringTable() { return hasStringTable; }
+      public net.osmand.binary.OsmandOdb.StringTable getStringTable() { return stringTable_; }
+      
       // repeated .RouteData dataObjects = 6;
       public static final int DATAOBJECTS_FIELD_NUMBER = 6;
       private java.util.List<net.osmand.binary.OsmandOdb.RouteData> dataObjects_ =
@@ -20925,13 +20932,6 @@ public final class OsmandOdb {
       public net.osmand.binary.OsmandOdb.RestrictionData getRestrictions(int index) {
         return restrictions_.get(index);
       }
-      
-      // optional .StringTable stringTable = 8;
-      public static final int STRINGTABLE_FIELD_NUMBER = 8;
-      private boolean hasStringTable;
-      private net.osmand.binary.OsmandOdb.StringTable stringTable_;
-      public boolean hasStringTable() { return hasStringTable; }
-      public net.osmand.binary.OsmandOdb.StringTable getStringTable() { return stringTable_; }
       
       private void initFields() {
         idTable_ = net.osmand.binary.OsmandOdb.IdTable.getDefaultInstance();
@@ -21170,6 +21170,9 @@ public final class OsmandOdb {
           if (other.hasIdTable()) {
             mergeIdTable(other.getIdTable());
           }
+          if (other.hasStringTable()) {
+            mergeStringTable(other.getStringTable());
+          }
           if (!other.dataObjects_.isEmpty()) {
             if (result.dataObjects_.isEmpty()) {
               result.dataObjects_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.RouteData>();
@@ -21181,9 +21184,6 @@ public final class OsmandOdb {
               result.restrictions_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.RestrictionData>();
             }
             result.restrictions_.addAll(other.restrictions_);
-          }
-          if (other.hasStringTable()) {
-            mergeStringTable(other.getStringTable());
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
@@ -21280,6 +21280,43 @@ public final class OsmandOdb {
         public Builder clearIdTable() {
           result.hasIdTable = false;
           result.idTable_ = net.osmand.binary.OsmandOdb.IdTable.getDefaultInstance();
+          return this;
+        }
+        
+        // optional .StringTable stringTable = 8;
+        public boolean hasStringTable() {
+          return result.hasStringTable();
+        }
+        public net.osmand.binary.OsmandOdb.StringTable getStringTable() {
+          return result.getStringTable();
+        }
+        public Builder setStringTable(net.osmand.binary.OsmandOdb.StringTable value) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          result.hasStringTable = true;
+          result.stringTable_ = value;
+          return this;
+        }
+        public Builder setStringTable(net.osmand.binary.OsmandOdb.StringTable.Builder builderForValue) {
+          result.hasStringTable = true;
+          result.stringTable_ = builderForValue.build();
+          return this;
+        }
+        public Builder mergeStringTable(net.osmand.binary.OsmandOdb.StringTable value) {
+          if (result.hasStringTable() &&
+              result.stringTable_ != net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance()) {
+            result.stringTable_ =
+              net.osmand.binary.OsmandOdb.StringTable.newBuilder(result.stringTable_).mergeFrom(value).buildPartial();
+          } else {
+            result.stringTable_ = value;
+          }
+          result.hasStringTable = true;
+          return this;
+        }
+        public Builder clearStringTable() {
+          result.hasStringTable = false;
+          result.stringTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
           return this;
         }
         
@@ -21382,43 +21419,6 @@ public final class OsmandOdb {
         }
         public Builder clearRestrictions() {
           result.restrictions_ = java.util.Collections.emptyList();
-          return this;
-        }
-        
-        // optional .StringTable stringTable = 8;
-        public boolean hasStringTable() {
-          return result.hasStringTable();
-        }
-        public net.osmand.binary.OsmandOdb.StringTable getStringTable() {
-          return result.getStringTable();
-        }
-        public Builder setStringTable(net.osmand.binary.OsmandOdb.StringTable value) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          result.hasStringTable = true;
-          result.stringTable_ = value;
-          return this;
-        }
-        public Builder setStringTable(net.osmand.binary.OsmandOdb.StringTable.Builder builderForValue) {
-          result.hasStringTable = true;
-          result.stringTable_ = builderForValue.build();
-          return this;
-        }
-        public Builder mergeStringTable(net.osmand.binary.OsmandOdb.StringTable value) {
-          if (result.hasStringTable() &&
-              result.stringTable_ != net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance()) {
-            result.stringTable_ =
-              net.osmand.binary.OsmandOdb.StringTable.newBuilder(result.stringTable_).mergeFrom(value).buildPartial();
-          } else {
-            result.stringTable_ = value;
-          }
-          result.hasStringTable = true;
-          return this;
-        }
-        public Builder clearStringTable() {
-          result.hasStringTable = false;
-          result.stringTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
           return this;
         }
         
@@ -22311,8 +22311,8 @@ public final class OsmandOdb {
       "\022\n\ncategories\030\004 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006nam" +
       "eEn\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\024\n\014openingHours\030\n " +
       "\001(\t\022\014\n\004site\030\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004note",
-      "\030\r \001(\t\"+\n\007IdTable\022\017\n\007routeId\030\001 \003(\004\022\017\n\007po" +
-      "intId\030\002 \003(\004\"F\n\017RestrictionData\022\014\n\004type\030\001" +
+      "\030\r \001(\t\"+\n\007IdTable\022\017\n\007routeId\030\001 \003(\022\022\017\n\007po" +
+      "intId\030\002 \003(\022\"F\n\017RestrictionData\022\014\n\004type\030\001" +
       " \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030\003 \002(\005\022\013\n\003via\030\004 " +
       "\001(\005\";\n\nRoutePoint\022\r\n\005point\030\001 \002(\014\022\017\n\007poin" +
       "tId\030\002 \001(\r\022\r\n\005types\030\004 \001(\014\"]\n\tRouteData\022\033\n" +
@@ -22329,9 +22329,9 @@ public final class OsmandOdb {
       "ottom\030\004 \002(\021\022\023\n\013shiftToData\030\005 \001(\007\022/\n\005boxe" +
       "s\030\007 \003(\0132 .OsmAndRoutingIndex.RouteDataBo" +
       "x\032\227\001\n\016RouteDataBlock\022\031\n\007idTable\030\005 \001(\0132\010." +
-      "IdTable\022\037\n\013dataObjects\030\006 \003(\0132\n.RouteData" +
-      "\022&\n\014restrictions\030\007 \003(\0132\020.RestrictionData",
-      "\022!\n\013stringTable\030\010 \001(\0132\014.StringTableB\023\n\021n" +
+      "IdTable\022!\n\013stringTable\030\010 \001(\0132\014.StringTab" +
+      "le\022\037\n\013dataObjects\030\006 \003(\0132\n.RouteData\022&\n\014r",
+      "estrictions\030\007 \003(\0132\020.RestrictionDataB\023\n\021n" +
       "et.osmand.binary"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
@@ -22681,7 +22681,7 @@ public final class OsmandOdb {
           internal_static_OsmAndRoutingIndex_RouteDataBlock_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndRoutingIndex_RouteDataBlock_descriptor,
-              new java.lang.String[] { "IdTable", "DataObjects", "Restrictions", "StringTable", },
+              new java.lang.String[] { "IdTable", "StringTable", "DataObjects", "Restrictions", },
               net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock.class,
               net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock.Builder.class);
           return null;

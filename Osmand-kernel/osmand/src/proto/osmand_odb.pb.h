@@ -4682,28 +4682,28 @@ class IdTable : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // repeated uint64 routeId = 1;
+  // repeated sint64 routeId = 1;
   inline int routeid_size() const;
   inline void clear_routeid();
   static const int kRouteIdFieldNumber = 1;
-  inline ::google::protobuf::uint64 routeid(int index) const;
-  inline void set_routeid(int index, ::google::protobuf::uint64 value);
-  inline void add_routeid(::google::protobuf::uint64 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
+  inline ::google::protobuf::int64 routeid(int index) const;
+  inline void set_routeid(int index, ::google::protobuf::int64 value);
+  inline void add_routeid(::google::protobuf::int64 value);
+  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
       routeid() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
+  inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
       mutable_routeid();
   
-  // repeated uint64 pointId = 2;
+  // repeated sint64 pointId = 2;
   inline int pointid_size() const;
   inline void clear_pointid();
   static const int kPointIdFieldNumber = 2;
-  inline ::google::protobuf::uint64 pointid(int index) const;
-  inline void set_pointid(int index, ::google::protobuf::uint64 value);
-  inline void add_pointid(::google::protobuf::uint64 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
+  inline ::google::protobuf::int64 pointid(int index) const;
+  inline void set_pointid(int index, ::google::protobuf::int64 value);
+  inline void add_pointid(::google::protobuf::int64 value);
+  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
       pointid() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
+  inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
       mutable_pointid();
   
   // @@protoc_insertion_point(class_scope:IdTable)
@@ -4711,8 +4711,8 @@ class IdTable : public ::google::protobuf::Message {
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   mutable int _cached_size_;
   
-  ::google::protobuf::RepeatedField< ::google::protobuf::uint64 > routeid_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::uint64 > pointid_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int64 > routeid_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int64 > pointid_;
   friend void  protobuf_AddDesc_src_2fosmand_5fodb_2eproto();
   friend void protobuf_AssignDesc_src_2fosmand_5fodb_2eproto();
   friend void protobuf_ShutdownFile_src_2fosmand_5fodb_2eproto();
@@ -5395,6 +5395,13 @@ class OsmAndRoutingIndex_RouteDataBlock : public ::google::protobuf::Message {
   inline const ::IdTable& idtable() const;
   inline ::IdTable* mutable_idtable();
   
+  // optional .StringTable stringTable = 8;
+  inline bool has_stringtable() const;
+  inline void clear_stringtable();
+  static const int kStringTableFieldNumber = 8;
+  inline const ::StringTable& stringtable() const;
+  inline ::StringTable* mutable_stringtable();
+  
   // repeated .RouteData dataObjects = 6;
   inline int dataobjects_size() const;
   inline void clear_dataobjects();
@@ -5419,22 +5426,15 @@ class OsmAndRoutingIndex_RouteDataBlock : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::RestrictionData >*
       mutable_restrictions();
   
-  // optional .StringTable stringTable = 8;
-  inline bool has_stringtable() const;
-  inline void clear_stringtable();
-  static const int kStringTableFieldNumber = 8;
-  inline const ::StringTable& stringtable() const;
-  inline ::StringTable* mutable_stringtable();
-  
   // @@protoc_insertion_point(class_scope:OsmAndRoutingIndex.RouteDataBlock)
  private:
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   mutable int _cached_size_;
   
   ::IdTable* idtable_;
+  ::StringTable* stringtable_;
   ::google::protobuf::RepeatedPtrField< ::RouteData > dataobjects_;
   ::google::protobuf::RepeatedPtrField< ::RestrictionData > restrictions_;
-  ::StringTable* stringtable_;
   friend void  protobuf_AddDesc_src_2fosmand_5fodb_2eproto();
   friend void protobuf_AssignDesc_src_2fosmand_5fodb_2eproto();
   friend void protobuf_ShutdownFile_src_2fosmand_5fodb_2eproto();
@@ -9794,52 +9794,52 @@ inline ::std::string* OsmAndPoiBoxDataAtom::mutable_note() {
 
 // IdTable
 
-// repeated uint64 routeId = 1;
+// repeated sint64 routeId = 1;
 inline int IdTable::routeid_size() const {
   return routeid_.size();
 }
 inline void IdTable::clear_routeid() {
   routeid_.Clear();
 }
-inline ::google::protobuf::uint64 IdTable::routeid(int index) const {
+inline ::google::protobuf::int64 IdTable::routeid(int index) const {
   return routeid_.Get(index);
 }
-inline void IdTable::set_routeid(int index, ::google::protobuf::uint64 value) {
+inline void IdTable::set_routeid(int index, ::google::protobuf::int64 value) {
   routeid_.Set(index, value);
 }
-inline void IdTable::add_routeid(::google::protobuf::uint64 value) {
+inline void IdTable::add_routeid(::google::protobuf::int64 value) {
   routeid_.Add(value);
 }
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
 IdTable::routeid() const {
   return routeid_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
 IdTable::mutable_routeid() {
   return &routeid_;
 }
 
-// repeated uint64 pointId = 2;
+// repeated sint64 pointId = 2;
 inline int IdTable::pointid_size() const {
   return pointid_.size();
 }
 inline void IdTable::clear_pointid() {
   pointid_.Clear();
 }
-inline ::google::protobuf::uint64 IdTable::pointid(int index) const {
+inline ::google::protobuf::int64 IdTable::pointid(int index) const {
   return pointid_.Get(index);
 }
-inline void IdTable::set_pointid(int index, ::google::protobuf::uint64 value) {
+inline void IdTable::set_pointid(int index, ::google::protobuf::int64 value) {
   pointid_.Set(index, value);
 }
-inline void IdTable::add_pointid(::google::protobuf::uint64 value) {
+inline void IdTable::add_pointid(::google::protobuf::int64 value) {
   pointid_.Add(value);
 }
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
 IdTable::pointid() const {
   return pointid_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
 IdTable::mutable_pointid() {
   return &pointid_;
 }
@@ -10379,6 +10379,23 @@ inline ::IdTable* OsmAndRoutingIndex_RouteDataBlock::mutable_idtable() {
   return idtable_;
 }
 
+// optional .StringTable stringTable = 8;
+inline bool OsmAndRoutingIndex_RouteDataBlock::has_stringtable() const {
+  return _has_bit(1);
+}
+inline void OsmAndRoutingIndex_RouteDataBlock::clear_stringtable() {
+  if (stringtable_ != NULL) stringtable_->::StringTable::Clear();
+  _clear_bit(1);
+}
+inline const ::StringTable& OsmAndRoutingIndex_RouteDataBlock::stringtable() const {
+  return stringtable_ != NULL ? *stringtable_ : *default_instance_->stringtable_;
+}
+inline ::StringTable* OsmAndRoutingIndex_RouteDataBlock::mutable_stringtable() {
+  _set_bit(1);
+  if (stringtable_ == NULL) stringtable_ = new ::StringTable;
+  return stringtable_;
+}
+
 // repeated .RouteData dataObjects = 6;
 inline int OsmAndRoutingIndex_RouteDataBlock::dataobjects_size() const {
   return dataobjects_.size();
@@ -10427,23 +10444,6 @@ OsmAndRoutingIndex_RouteDataBlock::restrictions() const {
 inline ::google::protobuf::RepeatedPtrField< ::RestrictionData >*
 OsmAndRoutingIndex_RouteDataBlock::mutable_restrictions() {
   return &restrictions_;
-}
-
-// optional .StringTable stringTable = 8;
-inline bool OsmAndRoutingIndex_RouteDataBlock::has_stringtable() const {
-  return _has_bit(3);
-}
-inline void OsmAndRoutingIndex_RouteDataBlock::clear_stringtable() {
-  if (stringtable_ != NULL) stringtable_->::StringTable::Clear();
-  _clear_bit(3);
-}
-inline const ::StringTable& OsmAndRoutingIndex_RouteDataBlock::stringtable() const {
-  return stringtable_ != NULL ? *stringtable_ : *default_instance_->stringtable_;
-}
-inline ::StringTable* OsmAndRoutingIndex_RouteDataBlock::mutable_stringtable() {
-  _set_bit(3);
-  if (stringtable_ == NULL) stringtable_ = new ::StringTable;
-  return stringtable_;
 }
 
 // -------------------------------------------------------------------

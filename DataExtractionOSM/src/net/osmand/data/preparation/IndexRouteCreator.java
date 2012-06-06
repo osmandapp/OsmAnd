@@ -22,6 +22,7 @@ import java.util.Map;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
+import net.osmand.binary.OsmandOdb.IdTable;
 import net.osmand.binary.OsmandOdb.MapData;
 import net.osmand.binary.OsmandOdb.MapDataBlock;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock;
@@ -59,9 +60,10 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 	
 	private Connection mapConnection;
 	private final Log logMapDataWarn;
-
+	private final static boolean WRITE_POINT_ID = false;
 	private RTree routeTree = null;
 	private MapRoutingTypes routeTypes;
+	
 	private TLongObjectHashMap<TLongArrayList> highwayRestrictions = new TLongObjectHashMap<TLongArrayList>();
 
 	// local purpose to speed up processing cache allocation
@@ -332,6 +334,15 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 	}
 	
 	
+	private int registerId(TLongArrayList ids, long id) {
+		for (int i = 0; i < ids.size(); i++) {
+			if (ids.getQuick(i) == id) {
+				return i;
+			}
+		}
+		ids.add(id);
+		return ids.size() - 1;
+	}
 	
 	public void writeBinaryMapBlock(rtree.Node parent, Rect parentBounds, RTree r, BinaryMapIndexWriter writer, PreparedStatement selectData,
 			TLongObjectHashMap<BinaryFileReference> bounds, Map<String, Integer> tempStringTable, Map<MapRouteType, String> tempNames)
@@ -340,6 +351,8 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 
 		RouteDataBlock.Builder dataBlock = null;
 		BinaryFileReference ref = bounds.get(parent.getNodeIndex());
+		TLongArrayList wayMapIds = new TLongArrayList();
+		TLongArrayList pointMapIds = new TLongArrayList();
 		for (int i = 0; i < parent.getTotalElements(); i++) {
 			if (e[i].getElementType() == rtree.Node.LEAF_NODE) {
 				long id = ((LeafElement) e[i]).getPtr();
@@ -349,11 +362,13 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 
 				ResultSet rs = selectData.executeQuery();
 				if (rs.next()) {
-					long cid = id;
 					if (dataBlock == null) {
 						dataBlock = RouteDataBlock.newBuilder();
 						tempStringTable.clear();
+						wayMapIds.clear();
+						pointMapIds.clear();
 					}
+					int cid = registerId(wayMapIds, id);
 					tempNames.clear();
 					decodeNames(rs.getString(5), tempNames);
 					byte[] types = rs.getBytes(1);
@@ -367,13 +382,13 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 					byte[] pointCoordinates = rs.getBytes(4);
 					int typeInd = 0;
 					RoutePointToWrite[] points = new RoutePointToWrite[pointCoordinates.length / 8];
-					TLongArrayList restrictions = highwayRestrictions.get(cid);
+					TLongArrayList restrictions = highwayRestrictions.get(id);
 					if(restrictions != null){
-						Builder restriction = RestrictionData.newBuilder();
-						// TODO ids
 						for(int li = 0; li<restrictions.size(); li++){
-							restriction.setFrom((int) cid);
-							restriction.setTo((int) (restrictions.get(li) >> 3));
+							Builder restriction = RestrictionData.newBuilder();
+							restriction.setFrom(cid);
+							int toId = registerId(wayMapIds, restrictions.get(li) >> 3);
+							restriction.setTo(toId);
 							restriction.setType((int) (restrictions.get(li) & 0x7));
 							dataBlock.addRestrictions(restriction.build());
 						}
@@ -382,7 +397,9 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 						points[j] = new RoutePointToWrite();
 						points[j].x = Algoritms.parseIntFromBytes(pointCoordinates, j * 8);
 						points[j].y = Algoritms.parseIntFromBytes(pointCoordinates, j * 8 + 4);
-						points[j].id = Algoritms.parseLongFromBytes(pointIds, j * 8);
+						if(WRITE_POINT_ID) {
+							points[j].id = registerId(pointMapIds, Algoritms.parseLongFromBytes(pointIds, j * 8));
+						}
 						int type = 0;
 						do {
 							type = Algoritms.parseSmallIntFromBytes(pointTypes, typeInd);
@@ -393,8 +410,8 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 						} while (type != 0);
 					}
 
-					RouteData routeData = writer.writeRouteData((int) cid, parentBounds.getMinX(), parentBounds.getMinY(), typeUse, points,
-							names, tempStringTable, dataBlock, true);
+					RouteData routeData = writer.writeRouteData(cid, parentBounds.getMinX(), parentBounds.getMinY(), typeUse, points,
+							names, tempStringTable, dataBlock, true, WRITE_POINT_ID);
 					if (routeData != null) {
 						dataBlock.addDataObjects(routeData);
 					}
@@ -404,6 +421,20 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 			}
 		}
 		if (dataBlock != null) {
+			IdTable.Builder idTable = IdTable.newBuilder();
+			long prev = 0;
+			for (int i = 0; i < wayMapIds.size(); i++) {
+				idTable.addRouteId(wayMapIds.getQuick(i) - prev);
+				prev = wayMapIds.getQuick(i);
+			}
+			if (WRITE_POINT_ID) {
+				prev = 0;
+				for (int i = 0; i < pointMapIds.size(); i++) {
+					idTable.addPointId(pointMapIds.getQuick(i) - prev);
+					prev = pointMapIds.getQuick(i);
+				}
+			}
+			dataBlock.setIdTable(idTable.build());
 			writer.writeRouteDataBlock(dataBlock, tempStringTable, ref);
 		}
 		for (int i = 0; i < parent.getTotalElements(); i++) {

@@ -459,13 +459,13 @@ message OsmAndPoiBoxDataAtom {
 /**
  * Id table 1-based. Map of sequential ids to real ids
  * [1,2,3....n] -> [a1, ... an]
- * a1,.. an - sorted set of longs
+ * a1,.. an - (ideally sorted) set of longs
  */
 message IdTable {
    // diff between 2 ids
-   repeated uint64 routeId = 1;
+   repeated sint64 routeId = 1;
    // diff between 2 ids
-   repeated uint64 pointId = 2;
+   repeated sint64 pointId = 2;
 }
 
 message RestrictionData {

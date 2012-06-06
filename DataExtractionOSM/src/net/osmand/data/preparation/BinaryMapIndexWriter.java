@@ -208,9 +208,11 @@ public class BinaryMapIndexWriter {
 		int len = writeInt32Size();
 		log.info("- ROUTE TYPE SIZE SIZE " + BinaryMapIndexWriter.ROUTE_TYPES_SIZE ); //$NON-NLS-1$
 		log.info("- ROUTE COORDINATES SIZE " + BinaryMapIndexWriter.ROUTE_COORDINATES_SIZE + " COUNT " + BinaryMapIndexWriter.ROUTE_COORDINATES_COUNT); //$NON-NLS-1$
+		log.info("- ROUTE POINTS SIZE " + BinaryMapIndexWriter.ROUTE_POINTS_SIZE);
 		log.info("- ROUTE ID SIZE " + BinaryMapIndexWriter.ROUTE_ID_SIZE); //$NON-NLS-1$
 		log.info("-- ROUTE_DATA " + BinaryMapIndexWriter.ROUTE_DATA_SIZE); //$NON-NLS-1$
-		ROUTE_TYPES_SIZE = ROUTE_DATA_SIZE = ROUTE_ID_SIZE = ROUTE_COORDINATES_COUNT = ROUTE_COORDINATES_SIZE = 0;
+		ROUTE_TYPES_SIZE = ROUTE_DATA_SIZE = ROUTE_POINTS_SIZE = ROUTE_ID_SIZE = 
+				ROUTE_COORDINATES_COUNT = ROUTE_COORDINATES_SIZE = 0;
 		log.info("ROUTE INDEX SIZE : " + len);
 	}
 	
@@ -396,6 +398,7 @@ public class BinaryMapIndexWriter {
 	public static int ROUTE_TYPES_SIZE = 0;
 	public static int ROUTE_COORDINATES_SIZE = 0;
 	public static int ROUTE_COORDINATES_COUNT = 0;
+	public static int ROUTE_POINTS_SIZE = 0;
 	public static int ROUTE_DATA_SIZE = 0;
 
 	public MapDataBlock.Builder createWriteMapDataBlock(long baseid) throws IOException {
@@ -408,17 +411,15 @@ public class BinaryMapIndexWriter {
 			throws IOException {
 		
 		checkPeekState(ROUTE_INDEX_INIT);
-		StringTable.Builder bs = OsmandOdb.StringTable.newBuilder();
-		if (stringTable != null) {
-			for (String s : stringTable.keySet()) {
-				bs.addS(s);
-			}
+		
+		if (stringTable != null && stringTable.size() > 0) {
+			StringTable.Builder bs = OsmandOdb.StringTable.newBuilder();
+			StringTable st = bs.build();
+			builder.setStringTable(st);
+			int size = st.getSerializedSize();
+			STRING_TABLE_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapDataBlock.STRINGTABLE_FIELD_NUMBER)
+					+ CodedOutputStream.computeRawVarint32Size(size) + size;
 		}
-		StringTable st = bs.build();
-		builder.setStringTable(st);
-		int size = st.getSerializedSize();
-		STRING_TABLE_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapDataBlock.STRINGTABLE_FIELD_NUMBER)
-				+ CodedOutputStream.computeRawVarint32Size(size) + size;
 		
 		codedOutStream.writeTag(OsmAndMapIndex.MapRootLevel.BLOCKS_FIELD_NUMBER, FieldType.MESSAGE.getWireType());
 		
@@ -451,7 +452,7 @@ public class BinaryMapIndexWriter {
 	
 	public RouteData writeRouteData(int diffId, int pleft, int ptop, int[] types, RoutePointToWrite[] points, 
 			Map<MapRouteType, String> names, Map<String, Integer> stringTable, RouteDataBlock.Builder dataBlock,
-			boolean allowCoordinateSimplification)
+			boolean allowCoordinateSimplification, boolean writePointId)
 			throws IOException {
 		RouteData.Builder builder = RouteData.newBuilder();
 		builder.setRouteId(diffId);
@@ -468,8 +469,9 @@ public class BinaryMapIndexWriter {
 		for(int k=0; k<points.length; k++) {
 			ROUTE_COORDINATES_COUNT++;
 			RoutePoint.Builder point = RoutePoint.newBuilder();
-			// not implemented correctly
-//			point.setPointId(points[j].id);
+			if(writePointId) {
+				point.setPointId(points[k].id);
+			}
 			mapDataBuf.clear();
 			int tx = (points[k].x >> SHIFT_COORDINATES) - pcalcx;
 			int ty = (points[k].y >> SHIFT_COORDINATES) - pcalcy;
@@ -487,22 +489,27 @@ public class BinaryMapIndexWriter {
 			point.setTypes(ByteString.copyFrom(mapDataBuf.toArray()));
 			ROUTE_TYPES_SIZE += CodedOutputStream.computeTagSize(RoutePoint.TYPES_FIELD_NUMBER)
 					+ CodedOutputStream.computeRawVarint32Size(mapDataBuf.size()) + mapDataBuf.size();
-			builder.addPoints(point.build());
+			RoutePoint p = point.build();
+			ROUTE_POINTS_SIZE += p.getSerializedSize() + CodedOutputStream.computeTagSize(RouteData.POINTS_FIELD_NUMBER)
+					+CodedOutputStream.computeRawVarint32Size(p.getSerializedSize());
+			builder.addPoints(p);
 		}
-		mapDataBuf.clear();
-		if (names != null) {
-			for (Entry<MapRouteType, String> s : names.entrySet()) {
-				writeRawVarint32(mapDataBuf, s.getKey().getTargetId());
-				Integer ls = stringTable.get(s.getValue());
-				if (ls == null) {
-					ls = stringTable.size();
-					stringTable.put(s.getValue(), ls);
+		if (names.size() > 0) {
+			mapDataBuf.clear();
+			if (names != null) {
+				for (Entry<MapRouteType, String> s : names.entrySet()) {
+					writeRawVarint32(mapDataBuf, s.getKey().getTargetId());
+					Integer ls = stringTable.get(s.getValue());
+					if (ls == null) {
+						ls = stringTable.size();
+						stringTable.put(s.getValue(), ls);
+					}
+					writeRawVarint32(mapDataBuf, ls);
 				}
-				writeRawVarint32(mapDataBuf, ls);
 			}
+			STRING_TABLE_SIZE += mapDataBuf.size();
+			builder.setStringNames(ByteString.copyFrom(mapDataBuf.toArray()));
 		}
-		STRING_TABLE_SIZE += mapDataBuf.size();
-		builder.setStringNames(ByteString.copyFrom(mapDataBuf.toArray()));
 		
 		return builder.build();
 	}
@@ -638,7 +645,7 @@ public class BinaryMapIndexWriter {
 	
 	public static class RoutePointToWrite {
 		public TIntArrayList types = new TIntArrayList();
-		public long id;
+		public int id;
 		public int x;
 		public int y;
 	}
