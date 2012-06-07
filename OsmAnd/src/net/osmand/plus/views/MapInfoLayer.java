@@ -149,8 +149,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		rightStack = new MapStackControl(view.getContext());
 		rightStack.addStackView(createAltitudeControl());
 		rightStack.addStackView(createDistanceControl());
-//		TODO move this logic to parking plugin package
-//		rightStack.addStackView(createParkingPlaceInfoControl());
 		rightStack.addCollapsedView(createSpeedControl());
 		rightStack.addCollapsedView(createTimeControl());
 		
@@ -667,9 +665,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return statusBar;
 	}
 	
-	public void addRightStack(TextInfoControl control) {
-		rightStack.addStackView(control);
+	public void addRightStack(MapInfoControl v){
+		rightStack.addStackView(v);
 	}
-	
-
 }

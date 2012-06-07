@@ -142,7 +142,7 @@ public class MapActivityLayers {
 		mapView.addLayer(navigationLayer, 7);
 		// 8. parking position layer
 		parkingPositionLayer = new ParkingPositionLayer(activity);
-		mapView.addLayer(parkingPositionLayer, 13);		
+		mapView.addLayer(parkingPositionLayer, 8);		
 		// 9. context menu layer 
 		contextMenuLayer = new ContextMenuLayer(activity);
 		mapView.addLayer(contextMenuLayer, 9);

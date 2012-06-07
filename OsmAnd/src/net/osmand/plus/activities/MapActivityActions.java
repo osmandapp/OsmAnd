@@ -94,12 +94,6 @@ public class MapActivityActions implements DialogProvider {
 		mapActivity.showDialog(DIALOG_ADD_FAVORITE);
 	}
 	
-	
-	public void addParkingPosition(double latitude, double longitude) {
-		settings.setParkingPosition(latitude, longitude, null);
-		mapActivity.getMapLayers().getParkingPositionLayer().setParkingPoint(settings.getParkingPosition());
-	}
-	
 	private Bundle enhance(Bundle aBundle, double latitude, double longitude, String name) {
 		aBundle.putDouble(KEY_LATITUDE, latitude);
 		aBundle.putDouble(KEY_LONGITUDE, longitude);
@@ -730,7 +724,7 @@ public class MapActivityActions implements DialogProvider {
 		});
 		builder.create().show();
 	}
-
+	
 	private Dialog createReloadTitleDialog(final Bundle args) {
     	Builder builder = new AccessibleAlertBuilder(mapActivity);
     	builder.setMessage(R.string.context_menu_item_update_map_confirm);

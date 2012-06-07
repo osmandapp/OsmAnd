@@ -995,14 +995,8 @@ public class OsmandSettings {
 		return globalPreferences.edit().remove(PARKING_POINT_LAT).remove(PARKING_POINT_LON).commit();
 	}
 
-	public boolean setParkingPosition(double latitude, double longitude, String historyDescription) {
-		boolean add = globalPreferences.edit().putFloat(PARKING_POINT_LAT, (float) latitude).putFloat(PARKING_POINT_LON, (float) longitude).commit();
-		if(add){
-			if(historyDescription != null){
-				SearchHistoryHelper.getInstance().addNewItemToHistory(latitude, longitude, historyDescription, ctx);
-			}
-		}
-		return add;
+	public boolean setParkingPosition(double latitude, double longitude) {
+		return globalPreferences.edit().putFloat(PARKING_POINT_LAT, (float) latitude).putFloat(PARKING_POINT_LON, (float) longitude).commit();
 	}
 	
 	public static final String LAST_SEARCHED_REGION = "last_searched_region"; //$NON-NLS-1$

@@ -7,7 +7,6 @@ import java.util.List;
 import net.osmand.Algoritms;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.access.AccessibilityPlugin;
