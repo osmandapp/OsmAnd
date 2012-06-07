@@ -263,8 +263,8 @@
   <string name="local_indexes_cat_tts">Balss dati (TTS)</string>
   <string name="local_indexes_cat_voice">Balss dati (ierakstīti)</string>
   <string name="local_indexes_cat_gpx">GPX dati</string>
-  <string name="local_indexes_cat_tile">Kartes dati (bildes)</string>
-  <string name="local_indexes_cat_map">Kartes dati (vektori)</string>
+  <string name="local_indexes_cat_tile">Tiešsaistes kartes (bildes)</string>
+  <string name="local_indexes_cat_map">Bezsaistes kartes (vektori)</string>
   <string name="local_indexes_cat_poi">POI dati</string>
   <string name="ttsvoice">TTS balss</string>
   <string name="search_offline_clear_search">Jauna meklēšana</string>
@@ -807,7 +807,7 @@
   <string name="map_online_plugin_is_not_installed">Atļaut kartes spraudnim iezīmēt atšķirīgus kartes avotus</string>
   <string name="map_online_data">Bezsaistes kartes</string>
   <string name="map_online_data_descr">Lietot tiešaistes kartes (lejuplādējot un kešojot bildes SD kartē)</string>
-  <string name="online_map_settings">Tiešsaistes karte</string>
+  <string name="online_map_settings">Tiešsaistes kartes</string>
   <string name="online_map_settings_descr">Konfigurēt tiešaistes vai kešotās kartes bildes</string>
   <string name="map_settings">- Kartes uzstādījumi</string>
   <string name="map_settings_descr">Konfigurēt kartes attēlošanu</string>
@@ -819,7 +819,7 @@
   <string name="osmand_accessibility_name">Pieejamība</string>
   <string name="extra_settings">Paplašinātie uzstādījumi</string>
   <string name="osmand_monitoring_description">Šis spraudnis ieraksta jūsu braucienu GPX failā vai arī veic tiešasaistes sekošanu izmantojot web servisu.</string>
-  <string name="osmand_monitoring_name">Sekošana + Ceļa ieraksts</string>
+  <string name="osmand_monitoring_name">Ceļa ieraksts</string>
   <string name="osmand_extra_settings_description">Šis spraudnis ļauj veikt paplašinātu kartes konfigurēšanu norādot dažus iekārtai specifiskus uzstādījumus.</string>
   <string name="osmand_extra_settings_name">Paplašinātie uzstādījumi</string>
   <string name="osmand_development_plugin_description">Šis spraudnis iespējo izstrādes un atkļūdošanas iespējas, kā piemēram animētā navigācija vai renderēšanas novērtējuma attēlošana.</string>
