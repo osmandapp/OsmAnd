@@ -199,7 +199,7 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeTag(OsmandOdb.OsmAndStructure.ROUTINGINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		preserveInt32Size();
 		if (name != null) {
-			codedOutStream.writeString(OsmandOdb.OsmAndMapIndex.NAME_FIELD_NUMBER, name);
+			codedOutStream.writeString(OsmandOdb.OsmAndRoutingIndex.NAME_FIELD_NUMBER, name);
 		}
 	}
 	
