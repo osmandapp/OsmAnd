@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bidforfix_loading">ჩატვირთვა</string>
+    <string name="bidforfix_supporters">%1$d-ის მხარდამჭერები</string>
+	<string name="bidforfix_funded">გადახდილია: %d%%</string>    
+</resources>
