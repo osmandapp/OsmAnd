@@ -714,7 +714,7 @@ navigate_point_format_D, DM & DMS
   <string name="edit_filter_delete_message">Filtre {0} effacé</string>
   <string name="edit_filter_create_message">Le filtre {0} a été créé</string>
   <string name="default_buttons_selectall">Tout sélectionner</string>
-  <string name="offline_navigation_not_available">Navigation hors ligne Osmand temporairement indosponible</string>
+  <string name="offline_navigation_not_available">Navigation hors ligne Osmand temporairement indisponible</string>
   <string name="left_side_navigation">Conduite à gauche</string>
   <string name="left_side_navigation_descr">Activer dans les pays on l\'on conduit à gauche</string>
   <string name="download_link_and_local_description">Télécharger des données hors ligne\nPour plus d\'information, cliquer sur l\'élement, pour le désactiver ou le supprimer, faire appui long.\nEspace actuellement disponible sur l\'appareil (%1$s ):</string>
