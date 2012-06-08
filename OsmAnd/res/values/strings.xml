@@ -9,8 +9,13 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    
     <string name="local_index_routing_data">Routing data</string>
+	<string name="poi_search_desc">POI - Point Of interest</string>
+	<string name="address_search_desc">Address search</string>
+	<string name="navpoint_search_desc">Navigate point</string>
+	<string name="transport_search_desc">Transport search</string>
+	<string name="favourites_search_desc">Favourites search</string>
+	<string name="history_search_desc">Search history</string>
     <string name="offline_navigation_not_available">Osmand offline navigation is temporarily not available.</string>
     <string name="left_side_navigation">Left-Hand Driving</string>
     <string name="left_side_navigation_descr">Select for countries with left-hand traffic</string>
@@ -1004,6 +1009,4 @@
 <string name="edit_filter_delete_message">Filter {0} has been deleted</string>
 <string name="edit_filter_create_message">Filter {0} has been created</string>
 <string name="default_buttons_selectall">Select All</string>
-
-<string name="poi_search_desc">POI - Point Of interest</string>
 </resources>

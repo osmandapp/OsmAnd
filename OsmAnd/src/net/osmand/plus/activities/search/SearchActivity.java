@@ -30,12 +30,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TabHost;
+import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
 
 public class SearchActivity extends TabActivity {
+	private static final String SEARCH_HISTORY = "Search_History";
+	private static final String SEARCH_FAVORITES = "Search_Favorites";
+	private static final String SEARCH_TRANSPORT = "Search_Transport";
+	private static final String SEARCH_LOCATION = "Search_Location";
+	private static final String SEARCH_ADDRESS = "Search_Address";
+	private static final String SEARCH_POI = "Search_POI";
 	public static final int POI_TAB_INDEX = 0;
 	public static final int ADDRESS_TAB_INDEX = 1;
 	public static final int LOCATION_TAB_INDEX = 2;
@@ -99,7 +106,8 @@ public class SearchActivity extends TabActivity {
 				SearchActivity.this.finish();
 			}
 		});
-		
+
+		final TextView tabinfo  = (TextView) findViewById(R.id.textViewADesc);
 		spinner = (Spinner) findViewById(R.id.SpinnerLocation);
 		spinnerAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_text, 
 				new ArrayList<String>(Arrays.asList(new String[]{
@@ -128,21 +136,39 @@ public class SearchActivity extends TabActivity {
 		TabWidget tabs = (TabWidget) findViewById(android.R.id.tabs);
 		tabs.setBackgroundResource(R.drawable.tab_icon_background);
 		TabHost host = getTabHost(); 
-		host.addTab(host.newTabSpec("Search_POI").setIndicator(getTabIndicator(R.drawable.tab_search_poi_icon, R.string.poi)).
+		host.addTab(host.newTabSpec(SEARCH_POI).setIndicator(getTabIndicator(R.drawable.tab_search_poi_icon, R.string.poi)).
 				setContent(new Intent(this, SearchPoiFilterActivity.class))); //$NON-NLS-1$
 		
-		addressSpec = host.newTabSpec("Search_Address").
+		addressSpec = host.newTabSpec(SEARCH_ADDRESS).
                     setIndicator(getTabIndicator(R.drawable.tab_search_address_icon, R.string.address));
 		
 		setAddressSpecContent();
 
 		host.addTab(addressSpec);
-		host.addTab(host.newTabSpec("Search_Location").setIndicator(getTabIndicator(R.drawable.tab_search_location_icon, R.string.search_tabs_location)).setContent(createIntent(NavigatePointActivity.class))); //$NON-NLS-1$
-		TabSpec transportTab = host.newTabSpec("Search_Transport").setIndicator(getTabIndicator(R.drawable.tab_search_transport_icon, R.string.transport)).setContent(createIntent(SearchTransportActivity.class));
+		host.addTab(host.newTabSpec(SEARCH_LOCATION).setIndicator(getTabIndicator(R.drawable.tab_search_location_icon, R.string.search_tabs_location)).setContent(createIntent(NavigatePointActivity.class))); //$NON-NLS-1$
+		TabSpec transportTab = host.newTabSpec(SEARCH_TRANSPORT).setIndicator(getTabIndicator(R.drawable.tab_search_transport_icon, R.string.transport)).setContent(createIntent(SearchTransportActivity.class));
 		host.addTab(transportTab); //$NON-NLS-1$
-		host.addTab(host.newTabSpec("Search_Favorites").setIndicator(getTabIndicator(R.drawable.tab_search_favorites_icon, R.string.favorite)).setContent(createIntent(FavouritesListActivity.class))); //$NON-NLS-1$
-		host.addTab(host.newTabSpec("Search_History").setIndicator(getTabIndicator(R.drawable.tab_search_history_icon, R.string.history)).setContent(createIntent(SearchHistoryActivity.class))); //$NON-NLS-1$
+		host.addTab(host.newTabSpec(SEARCH_FAVORITES).setIndicator(getTabIndicator(R.drawable.tab_search_favorites_icon, R.string.favorite)).setContent(createIntent(FavouritesListActivity.class))); //$NON-NLS-1$
+		host.addTab(host.newTabSpec(SEARCH_HISTORY).setIndicator(getTabIndicator(R.drawable.tab_search_history_icon, R.string.history)).setContent(createIntent(SearchHistoryActivity.class))); //$NON-NLS-1$
 		host.setCurrentTab(POI_TAB_INDEX);
+		host.setOnTabChangedListener(new OnTabChangeListener() {
+			@Override
+			public void onTabChanged(String tabId) {
+				if (SEARCH_POI.equals(tabId)) {
+					tabinfo.setText(R.string.poi_search_desc);
+				} else	if (SEARCH_ADDRESS.equals(tabId)) {
+					tabinfo.setText(R.string.address_search_desc);
+				} else	if (SEARCH_LOCATION.equals(tabId)) {
+					tabinfo.setText(R.string.navpoint_search_desc);
+				} else	if (SEARCH_TRANSPORT.equals(tabId)) {
+					tabinfo.setText(R.string.transport_search_desc);
+				} else	if (SEARCH_FAVORITES.equals(tabId)) {
+					tabinfo.setText(R.string.favourites_search_desc);
+				} else	if (SEARCH_HISTORY.equals(tabId)) {
+					tabinfo.setText(R.string.history_search_desc);
+				} 
+			}
+		});
 		
 		
 		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
