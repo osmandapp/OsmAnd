@@ -54,7 +54,7 @@ public class RouterTestsSuite {
 			if (!properties.containsKey(reg)) {
 				throw new IllegalArgumentException("Region " + reg + " is not found in the source.properties file");
 			}
-			BinaryMapIndexReader r = new BinaryMapIndexReader(new RandomAccessFile((String) properties.get(reg), "r"), true);
+			BinaryMapIndexReader r = new BinaryMapIndexReader(new RandomAccessFile((String) properties.get(reg), "r"), false);
 			readers[i++] = r;
 		}
 

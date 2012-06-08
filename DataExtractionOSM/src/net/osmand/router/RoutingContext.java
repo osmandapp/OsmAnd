@@ -5,9 +5,7 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.TIntSet;
 import gnu.trove.set.hash.TIntHashSet;
 
-import java.util.Collection;
-
-import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteDataObject;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
 
@@ -30,7 +28,6 @@ public class RoutingContext {
 
 	
 	// 2. Routing memory cache
-	TLongObjectMap<BinaryMapDataObject> idObjects = new TLongObjectHashMap<BinaryMapDataObject>();
 	TLongObjectMap<RouteSegment> routes = new TLongObjectHashMap<RouteSegment>();
 	TIntSet loadedTiles = new TIntHashSet();
 
@@ -40,6 +37,8 @@ public class RoutingContext {
 	int visitedSegments = 0;
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
+	// TODO delete this object ?
+	TLongObjectHashMap<RouteDataObject> idObjects = new TLongObjectHashMap<RouteDataObject>();
 	
 	
 	public RouteSegmentVisitor getVisitor() {
@@ -108,10 +107,6 @@ public class RoutingContext {
 
 	public void setUseStrategyOfIncreasingRoadPriorities(boolean useStrategyOfIncreasingRoadPriorities) {
 		this.useStrategyOfIncreasingRoadPriorities = useStrategyOfIncreasingRoadPriorities;
-	}
-
-	public Collection<BinaryMapDataObject> values() {
-		return idObjects.valueCollection();
 	}
 
 	public int roadPriorityComparator(double o1DistanceFromStart, double o1DistanceToEnd, double o2DistanceFromStart, double o2DistanceToEnd) {

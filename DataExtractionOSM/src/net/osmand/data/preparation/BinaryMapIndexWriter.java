@@ -47,7 +47,6 @@ import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBox;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteEncodingRule;
 import net.osmand.binary.OsmandOdb.OsmAndTransportIndex;
-import net.osmand.binary.OsmandOdb.RoutePoint;
 import net.osmand.binary.OsmandOdb.StreetIndex;
 import net.osmand.binary.OsmandOdb.StreetIntersection;
 import net.osmand.binary.OsmandOdb.StringTable;
@@ -457,6 +456,7 @@ public class BinaryMapIndexWriter {
 		RouteData.Builder builder = RouteData.newBuilder();
 		builder.setRouteId(diffId);
 		ROUTE_ID_SIZE += CodedOutputStream.computeInt64Size(RouteData.ROUTEID_FIELD_NUMBER, diffId);
+		// types
 		mapDataBuf.clear();
 		for (int i = 0; i < types.length; i++) {
 			writeRawVarint32(mapDataBuf, types[i]);
@@ -464,36 +464,37 @@ public class BinaryMapIndexWriter {
 		builder.setTypes(ByteString.copyFrom(mapDataBuf.toArray()));
 		ROUTE_TYPES_SIZE += CodedOutputStream.computeTagSize(RouteData.TYPES_FIELD_NUMBER)
 				+ CodedOutputStream.computeRawVarint32Size(mapDataBuf.size()) + mapDataBuf.size();
+		// coordinates and point types
 		int pcalcx = pleft >> SHIFT_COORDINATES;
 		int pcalcy = ptop >> SHIFT_COORDINATES;
+		mapDataBuf.clear();
+		typesDataBuf.clear();
 		for(int k=0; k<points.length; k++) {
 			ROUTE_COORDINATES_COUNT++;
-			RoutePoint.Builder point = RoutePoint.newBuilder();
-			if(writePointId) {
-				point.setPointId(points[k].id);
-			}
-			mapDataBuf.clear();
+			
 			int tx = (points[k].x >> SHIFT_COORDINATES) - pcalcx;
 			int ty = (points[k].y >> SHIFT_COORDINATES) - pcalcy;
 			writeRawVarint32(mapDataBuf, CodedOutputStream.encodeZigZag32(tx));
 			writeRawVarint32(mapDataBuf, CodedOutputStream.encodeZigZag32(ty));
 			pcalcx = pcalcx + tx ;
 			pcalcy = pcalcy + ty ;
-			point.setPoint(ByteString.copyFrom(mapDataBuf.toArray()));
-			ROUTE_COORDINATES_SIZE += CodedOutputStream.computeTagSize(RoutePoint.POINT_FIELD_NUMBER)
-					+ CodedOutputStream.computeRawVarint32Size(mapDataBuf.size()) + mapDataBuf.size();
-			mapDataBuf.clear();
-			for(int ij =0; ij < points[k].types.size(); ij++){
-				writeRawVarint32(mapDataBuf, points[k].types.get(ij));
+			if(points[k].types.size() >0) {
+				typesAddDataBuf.clear();
+				for(int ij =0; ij < points[k].types.size(); ij++){
+					writeRawVarint32(typesAddDataBuf, points[k].types.get(ij));
+				}
+				writeRawVarint32(typesDataBuf, k);
+				writeRawVarint32(typesDataBuf, typesAddDataBuf.size());
+				typesDataBuf.add(typesAddDataBuf.toArray());
 			}
-			point.setTypes(ByteString.copyFrom(mapDataBuf.toArray()));
-			ROUTE_TYPES_SIZE += CodedOutputStream.computeTagSize(RoutePoint.TYPES_FIELD_NUMBER)
-					+ CodedOutputStream.computeRawVarint32Size(mapDataBuf.size()) + mapDataBuf.size();
-			RoutePoint p = point.build();
-			ROUTE_POINTS_SIZE += p.getSerializedSize() + CodedOutputStream.computeTagSize(RouteData.POINTS_FIELD_NUMBER)
-					+CodedOutputStream.computeRawVarint32Size(p.getSerializedSize());
-			builder.addPoints(p);
 		}
+		builder.setPoints(ByteString.copyFrom(mapDataBuf.toArray()));
+		ROUTE_COORDINATES_SIZE += CodedOutputStream.computeTagSize(RouteData.POINTS_FIELD_NUMBER)
+				+ CodedOutputStream.computeRawVarint32Size(mapDataBuf.size()) + mapDataBuf.size();
+		builder.setPointTypes(ByteString.copyFrom(typesDataBuf.toArray()));
+		ROUTE_TYPES_SIZE += CodedOutputStream.computeTagSize(RouteData.POINTTYPES_FIELD_NUMBER)
+						+ CodedOutputStream.computeRawVarint32Size(typesDataBuf.size()) + typesDataBuf.size();
+
 		if (names.size() > 0) {
 			mapDataBuf.clear();
 			if (names != null) {
@@ -540,6 +541,8 @@ public class BinaryMapIndexWriter {
 	}
 
 	private TByteArrayList mapDataBuf = new TByteArrayList();
+	private TByteArrayList typesDataBuf = new TByteArrayList();
+	private TByteArrayList typesAddDataBuf = new TByteArrayList();
 
 	public MapData writeMapData(long diffId, int pleft, int ptop, boolean area, byte[] coordinates, byte[] innerPolygonTypes, int[] typeUse,
 			int[] addtypeUse, Map<MapRulType, String> names, Map<String, Integer> stringTable, MapDataBlock.Builder dataBlock,

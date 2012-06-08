@@ -29,7 +29,9 @@ import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteDataObject;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.binary.OsmandOdb.MapDataBlock;
 import net.osmand.binary.OsmandOdb.OsmAndMapIndex.MapDataBox;
@@ -74,7 +76,7 @@ public class BinaryMapIndexReader {
 	private final BinaryMapTransportReaderAdapter transportAdapter;
 	private final BinaryMapPoiReaderAdapter poiAdapter;
 	private final BinaryMapAddressReaderAdapter addressAdapter;
-	private BinaryMapRouteReaderAdapter routeAdapter;
+	private final BinaryMapRouteReaderAdapter routeAdapter;
 	
 	private static String BASEMAP_NAME = "basemap";
 
@@ -114,6 +116,7 @@ public class BinaryMapIndexReader {
 			transportAdapter = null;
 			addressAdapter = null;
 			poiAdapter = null;
+			routeAdapter = null;
 		}
 		init();
 	}
@@ -241,6 +244,10 @@ public class BinaryMapIndexReader {
 	
 	public List<MapIndex> getMapIndexes() {
 		return mapIndexes;
+	}
+	
+	public List<RouteRegion> getRoutingIndexes() {
+		return routingIndexes;
 	}
 	
 	public boolean isBasemap() {
@@ -1141,7 +1148,7 @@ public class BinaryMapIndexReader {
 		return req.getSearchResults();
 	}
 	
-	private List<String> readStringTable() throws IOException{
+	protected List<String> readStringTable() throws IOException{
 		List<String> list = new ArrayList<String>();
 		while(true){
 			int t = codedIS.readTag();
@@ -1211,6 +1218,18 @@ public class BinaryMapIndexReader {
 		request.bottom = sbottom;
 		request.zoom = zoom;
 		request.poiTypeFilter = poiTypeFilter;
+		request.resultMatcher = matcher;
+		
+		return request;
+	}
+	
+	public static SearchRequest<RouteDataObject> buildSearchRouteRequest(int sleft, int sright, int stop, int sbottom,  
+			ResultMatcher<RouteDataObject> matcher){
+		SearchRequest<RouteDataObject> request = new SearchRequest<RouteDataObject>();
+		request.left = sleft;
+		request.right = sright;
+		request.top = stop;
+		request.bottom = sbottom;
 		request.resultMatcher = matcher;
 		
 		return request;
@@ -1348,6 +1367,14 @@ public class BinaryMapIndexReader {
 		
 		public boolean isLand() {
 			return land;
+		}
+		
+		public boolean intersects(int l, int t, int r, int b){
+			return r >= left && l <= right && t <= bottom && b >= top;
+		}
+		
+		public boolean contains(int l, int t, int r, int b){
+			return r <= right && l >= left && b <= bottom && t >= top;
 		}
 		
 		public void clearSearchResults(){
@@ -1871,6 +1898,16 @@ public class BinaryMapIndexReader {
 				return false;
 			}
 		}));
+	}
+
+	public void searchRouteIndex(SearchRequest<RouteDataObject> req, List<RouteSubregion> list) throws IOException {
+		req.numberOfVisitedObjects = 0;
+		req.numberOfAcceptedObjects = 0;
+		req.numberOfAcceptedSubtrees = 0;
+		req.numberOfReadSubtrees = 0;
+		if(routeAdapter != null){
+			routeAdapter.searchRouteRegion(req, list);
+		}
 	}
 	
 }

@@ -464,8 +464,6 @@ message OsmAndPoiBoxDataAtom {
 message IdTable {
    // diff between 2 ids
    repeated sint64 routeId = 1;
-   // diff between 2 ids
-   repeated sint64 pointId = 2;
 }
 
 message RestrictionData {
@@ -475,17 +473,17 @@ message RestrictionData {
 	optional int32 via = 4;
 }
 
-message RoutePoint {
-	// array of delta x,y sint32 (CodedIinputStream) >> 5
-	// first x delta to Tree.left, y to delta Tree.top (next delta to previous)
-	required bytes point = 1;
-	optional uint32 pointId = 2;
-	// array of raw var int types
-	optional bytes types = 4;
-}
 
 message RouteData {
-  	repeated RoutePoint points = 1;
+	// array of delta x,y sint32 (CodedIinputStream) >> 5
+	// first x delta to Tree.left, y to delta Tree.top (next delta to previous)
+  	required bytes points = 1;
+
+  	// continuous array of pairs
+  	//  [pointIndex - int32, pointTypes - bytes]
+  	// bytes - array of raw var int types
+	optional bytes pointTypes = 4;
+
 	// array of raw var int types
   	required bytes types = 7;
 

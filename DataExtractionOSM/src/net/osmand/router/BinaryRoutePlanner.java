@@ -1,6 +1,5 @@
 package net.osmand.router;
 
-import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.procedure.TObjectProcedure;
 
@@ -9,16 +8,20 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.PriorityQueue;
 
 import net.osmand.LogUtil;
-import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.MapIndex;
-import net.osmand.binary.BinaryMapIndexReader.SearchFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.binary.BinaryMapRouteReaderAdapter;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteDataObject;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
@@ -29,14 +32,23 @@ public class BinaryRoutePlanner {
 	
 	private final static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
 	private final int REVERSE_WAY_RESTRICTION_ONLY = 1024;
-	private final BinaryMapIndexReader[] map;
+	private final Map<BinaryMapIndexReader, List<RouteSubregion>> map = new LinkedHashMap<BinaryMapIndexReader, List<RouteSubregion>>();
 	
 	
 	
 	private static final Log log = LogUtil.getLog(BinaryRoutePlanner.class);
 	
-	public BinaryRoutePlanner(BinaryMapIndexReader... map){
-		this.map = map;
+	public BinaryRoutePlanner(BinaryMapIndexReader... map) {
+		for (BinaryMapIndexReader mr : map) {
+			List<RouteRegion> rr = mr.getRoutingIndexes();
+			List<RouteSubregion> subregions = new ArrayList<BinaryMapRouteReaderAdapter.RouteSubregion>();
+			for (RouteRegion r : rr) {
+				for (RouteSubregion rs : r.getSubregions()) {
+					subregions.add(new RouteSubregion(rs));
+				}
+			}
+			this.map.put(mr, subregions);
+		}
 	}
 	
 	
@@ -63,68 +75,7 @@ public class BinaryRoutePlanner {
 		// translate into meters 
 		return (x1 - x2) * 0.011d;
 	}
-	
-	
-
    
-	public void loadRoutes(final RoutingContext ctx, int tileX, int tileY) throws IOException {
-		int tileC = (tileX << ctx.getZoomToLoadTileWithRoads()) + tileY;
-		if(ctx.loadedTiles.contains(tileC)){
-			return;
-		}
-		long now = System.nanoTime();
-		
-		int zoomToLoad = 31 - ctx.getZoomToLoadTileWithRoads();
-		SearchFilter searchFilter = new BinaryMapIndexReader.SearchFilter(){
-			@Override
-			public boolean accept(TIntArrayList types, MapIndex index) {
-				for (int j = 0; j < types.size(); j++) {
-					int wholeType = types.get(j);
-					TagValuePair pair = index.decodeType(wholeType);
-					if (pair != null) {
-						int t = wholeType & 3;
-						if(t == MapRenderingTypes.POINT_TYPE){
-							if(ctx.getRouter().acceptPoint(pair)){
-								return true;
-							}
-						} else if(t == MapRenderingTypes.POLYLINE_TYPE){
-							if(ctx.getRouter().acceptLine(pair)){
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-			}
-		};
-		SearchRequest<BinaryMapDataObject> request = BinaryMapIndexReader.buildSearchRequest(tileX << zoomToLoad,
-				(tileX + 1) << zoomToLoad, tileY << zoomToLoad, 
-				(tileY + 1) << zoomToLoad, 15, searchFilter);
-		for (BinaryMapIndexReader r : map) {
-			r.searchMapIndex(request);
-			for (BinaryMapDataObject o : request.getSearchResults()) {
-				BinaryMapDataObject old = ctx.idObjects.get(o.getId());
-				// sometimes way are presented only partially in one index
-				if (old != null && old.getPointsLength() >= o.getPointsLength()) {
-					continue;
-				}
-				ctx.idObjects.put(o.getId(), o);
-				for (int j = 0; j < o.getPointsLength(); j++) {
-					long l = (((long) o.getPoint31XTile(j)) << 31) + (long) o.getPoint31YTile(j);
-					RouteSegment segment = new RouteSegment();
-					segment.road = o;
-					segment.segmentEnd = segment.segmentStart = j;
-					if (ctx.routes.get(l) != null) {
-						segment.next = ctx.routes.get(l);
-					}
-					ctx.routes.put(l, segment);
-				}
-			}
-			ctx.loadedTiles.add(tileC);
-			ctx.timeToLoad += (System.nanoTime() - now);
-		}
-	}
-	
 	// calculate distance from C to AB (distnace doesn't calculate 
 	private static double calculateDistance(int xA, int yA, int xB, int yB, int xC, int yC, double distAB){
 	    	// Scalar multiplication between (AB', AC)
@@ -146,30 +97,31 @@ public class BinaryRoutePlanner {
 	}
 	
 	
+	
 	public RouteSegment findRouteSegment(double lat, double lon, RoutingContext ctx) throws IOException {
-		double tileX = MapUtils.getTileNumberX(ctx.getZoomToLoadTileWithRoads(), lon);
-		double tileY = MapUtils.getTileNumberY(ctx.getZoomToLoadTileWithRoads(), lat);
-		loadRoutes(ctx, (int) tileX , (int) tileY);
+		int px = MapUtils.get31TileNumberX(lon);
+		int py = MapUtils.get31TileNumberY(lat);
+		List<RouteDataObject> dataObjects = new ArrayList<RouteDataObject>(); 
+		loadRoutes(ctx, px,py, dataObjects);
 		
 		RouteSegment road = null;
 		double sdist = 0; 
-		int px = MapUtils.get31TileNumberX(lon);
-		int py = MapUtils.get31TileNumberY(lat);
-		for(BinaryMapDataObject r : ctx.values()){
+		
+		for(RouteDataObject r : dataObjects){
 			if(r.getPointsLength() > 1){
-				double priority = ctx.getRouter().getRoadPriorityToCalculateRoute(r);
+//				double priority = ctx.getRouter().getRoadPriorityToCalculateRoute(r);
 				for (int j = 1; j < r.getPointsLength(); j++) {
 					double mDist = squareRootDist(r.getPoint31XTile(j), r.getPoint31YTile(j), r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1));
 					double projection = calculateProjection(r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1), r.getPoint31XTile(j), r.getPoint31YTile(j),
 							px, py, mDist);
 					double currentsDist;
 					if(projection < 0){//TODO: first 2 and last 2 points of a route should be only near and not based on road priority (I.E. a motorway road node unreachable near my house)
-						currentsDist = squareDist(r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1), px, py) / (priority * priority);
+						currentsDist = squareDist(r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1), px, py);// / (priority * priority);
 					} else if(projection > mDist){
-						currentsDist = squareDist(r.getPoint31XTile(j), r.getPoint31YTile(j), px, py) / (priority * priority);
+						currentsDist = squareDist(r.getPoint31XTile(j), r.getPoint31YTile(j), px, py);// / (priority * priority);
 					} else {
 						currentsDist = calculatesquareDistance(r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1), r.getPoint31XTile(j), r.getPoint31YTile(j),
-								px, py, mDist) / (priority * priority);
+								px, py, mDist);// / (priority * priority);
 					}
 					
 					if (road == null || currentsDist < sdist) {
@@ -188,6 +140,8 @@ public class BinaryRoutePlanner {
 	
 	
 	
+
+
 	// TODO write unit tests
 	// TODO add information about turns (?) - probably calculate additional information to show on map
 	// TODO think about u-turn
@@ -327,6 +281,60 @@ public class BinaryRoutePlanner {
 		result += obstaclesTime;
 		return result;
 	}
+	
+	public void loadRoutes(final RoutingContext ctx, int tile31X, int tile31Y, final List<RouteDataObject> toFillIn) {
+		int zoomToLoad = 31 - ctx.getZoomToLoadTileWithRoads();
+		int tileX = tile31X >> zoomToLoad;
+		int tileY = tile31Y >> zoomToLoad;
+		int tileC = (tileX << ctx.getZoomToLoadTileWithRoads()) + tileY;
+		if (ctx.loadedTiles.contains(tileC) && toFillIn == null) {
+			return;
+		}
+		long now = System.nanoTime();
+		ResultMatcher<RouteDataObject> matcher = new ResultMatcher<RouteDataObject>() {
+			@Override
+			public boolean publish(RouteDataObject o) {
+				if (toFillIn != null) {
+					if (ctx.getRouter().acceptLine(o)) {
+						toFillIn.add(o);
+					}
+				}
+				RouteDataObject old = ctx.idObjects.get(o.id);
+				// sometimes way are presented only partially in one index
+				if ((old != null && old.pointsX.size() >= o.pointsX.size()) || (!ctx.getRouter().acceptLine(o))) {
+					return false;
+				}
+				ctx.idObjects.put(o.id, o);
+				for (int j = 0; j < o.pointsX.size(); j++) {
+					long l = (((long) o.pointsX.getQuick(j)) << 31) + (long) o.pointsY.getQuick(j);
+					RouteSegment segment = new RouteSegment();
+					segment.road = o;
+					segment.segmentEnd = segment.segmentStart = j;
+					if (ctx.routes.get(l) != null) {
+						segment.next = ctx.routes.get(l);
+					}
+					ctx.routes.put(l, segment);
+				}
+				return false;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		};
+		SearchRequest<RouteDataObject> request = BinaryMapIndexReader.buildSearchRouteRequest(tileX << zoomToLoad,
+				(tileX + 1) << zoomToLoad, tileY << zoomToLoad, (tileY + 1) << zoomToLoad, matcher);
+		for (Entry<BinaryMapIndexReader,List<RouteSubregion>> r : map.entrySet()) {
+			try {
+				r.getKey().searchRouteIndex(request, r.getValue());
+			} catch (IOException e) {
+				throw new RuntimeException("Loading data exception", e);
+			}
+		}
+		ctx.loadedTiles.add(tileC);
+		ctx.timeToLoad += (System.nanoTime() - now);
+	}
 
 	private void visitAllStartSegments(final RoutingContext ctx, RouteSegment start, PriorityQueue<RouteSegment> graphDirectSegments,
 			TLongObjectHashMap<RouteSegment> visitedSegments, int startX, int startY) throws IOException {
@@ -335,7 +343,7 @@ public class BinaryRoutePlanner {
 		visitedSegments.put(nt, start);
 		graphDirectSegments.add(start);
 		
-		loadRoutes(ctx, (startX >> (31 - ctx.getZoomToLoadTileWithRoads())), (startY >> (31 - ctx.getZoomToLoadTileWithRoads())));
+		loadRoutes(ctx, startX , startY,null);
 		long ls = (((long) startX) << 31) + (long) startY;
 		RouteSegment startNbs = ctx.routes.get(ls);
 		while(startNbs != null) { // startNbs.road.id >> 1, start.road.id >> 1
@@ -359,7 +367,7 @@ public class BinaryRoutePlanner {
 		// Always start from segmentStart (!), not from segmentEnd
 		// It makes difference only for the first start segment
 		// Middle point will always be skipped from observation considering already visited
-		final BinaryMapDataObject road = segment.road;
+		final RouteDataObject road = segment.road;
 		final int middle = segment.segmentStart;
 		int middlex = road.getPoint31XTile(middle);
 		int middley = road.getPoint31YTile(middle);
@@ -375,9 +383,16 @@ public class BinaryRoutePlanner {
 			return new RoutePair(segment, opposite);
 		}
 
-		boolean oneway = ctx.getRouter().isOneWay(road);
-		boolean minusAllowed = !oneway || reverseWaySearch;
-		boolean plusAllowed = !oneway || !reverseWaySearch;
+		int oneway = ctx.getRouter().isOneWay(road);
+		boolean minusAllowed;
+		boolean plusAllowed; 
+		if (!reverseWaySearch) {
+			minusAllowed = oneway <= 0;
+			plusAllowed = oneway >= 0;
+		} else {
+			minusAllowed = oneway >= 0;
+			plusAllowed = oneway <= 0;
+		}
 
 		// +/- diff from middle point
 		int d = plusAllowed ? 1 : -1;
@@ -420,7 +435,7 @@ public class BinaryRoutePlanner {
 			// 2. calculate point and try to load neighbor ways if they are not loaded
 			int x = road.getPoint31XTile(segmentEnd);
 			int y = road.getPoint31YTile(segmentEnd);
-			loadRoutes(ctx, (x >> (31 - ctx.getZoomToLoadTileWithRoads())), (y >> (31 - ctx.getZoomToLoadTileWithRoads())));
+			loadRoutes(ctx, x, y, null);
 			long l = (((long) x) << 31) + (long) y;
 			RouteSegment next = ctx.routes.get(l);
 
@@ -446,7 +461,7 @@ public class BinaryRoutePlanner {
 	private RouteSegment processIntersectionsWithWays(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments,
 			TLongObjectHashMap<RouteSegment> visitedSegments, TLongObjectHashMap<RouteSegment> oppositeSegments,  
 			double distOnRoadToPass, double distToFinalPoint, 
-			RouteSegment segment, BinaryMapDataObject road, boolean firstOfSegment, int segmentEnd, RouteSegment inputNext,
+			RouteSegment segment, RouteDataObject road, boolean firstOfSegment, int segmentEnd, RouteSegment inputNext,
 			boolean reverseWay) {
 
 		// This variables can be in routing context
@@ -488,25 +503,27 @@ public class BinaryRoutePlanner {
 			if ((!alreadyVisited && processRoad) || oppositeConnectionFound) {
 				int type = -1;
 				if (!reverseWay) {
-					for (int i = 0; i < getRestrictionCount(road); i++) {
-						if (getRestriction(road, i) == next.road.getId()) {
-							type = getRestrictionType(road, i);
+					for (int i = 0; i < road.restrictions.size(); i++) {
+						if (road.restrictions.getQuick(i) >> 3 == next.road.id) {
+							type = (int) (road.restrictions.getQuick(i) & 7);
 							break;
 						}
 					}
 				} else {
-					for (int i = 0; i < getRestrictionCount(next.road); i++) {
-						if (getRestriction(next.road, i) == road.getId()) {
-							type = getRestrictionType(next.road, i);
+					for (int i = 0; i < next.road.restrictions.size(); i++) {
+						int rt = (int) (next.road.restrictions.getQuick(i) & 7);
+						if (next.road.restrictions.getQuick(i) >> 3 == road.id) {
+							type = rt;
 							break;
 						}
+						
 						// Check if there is restriction only to the current road
-						if (getRestrictionType(next.road, i) == MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN
-								|| getRestrictionType(next.road, i) == MapRenderingTypes.RESTRICTION_ONLY_LEFT_TURN
-								|| getRestrictionType(next.road, i) == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
+						if (rt == MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN
+								|| rt == MapRenderingTypes.RESTRICTION_ONLY_LEFT_TURN
+								|| rt == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
 							// check if that restriction applies to considered junk
 							RouteSegment foundNext = inputNext;
-							while(foundNext != null && foundNext.getRoad().getId() != getRestriction(next.road, i)){
+							while(foundNext != null && foundNext.getRoad().id != rt){
 								foundNext = foundNext.next;
 							}
 							if(foundNext != null) {
@@ -619,20 +636,6 @@ public class BinaryRoutePlanner {
 
 
 	
-	private int getRestrictionType(BinaryMapDataObject road, int i) {
-		throw new UnsupportedOperationException();
-	}
-
-
-	private long getRestriction(BinaryMapDataObject road, int i) {
-		throw new UnsupportedOperationException();
-	}
-
-
-	private int getRestrictionCount(BinaryMapDataObject road) {
-		throw new UnsupportedOperationException();
-	}
-
 
 	private List<RouteSegmentResult> prepareResult(RoutingContext ctx, RouteSegment start, RouteSegment end, long startNanoTime,
 			RouteSegment finalDirectRoute, RouteSegment finalReverseRoute) {
@@ -697,8 +700,8 @@ public class BinaryRoutePlanner {
 					"    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\">", 
 					startLat+"", startLon+"", endLat+"", endLon+""));
 			for (RouteSegmentResult res : result) {
-				String name = res.object.getName();
-				String ref = res.object.getNameByType(res.object.getMapIndex().refEncodingType);
+				String name = "Uknown";//res.object.getName();
+				String ref = "";//res.object.getNameByType(res.object.getMapIndex().refEncodingType);
 				if(ref != null) {
 					name += " " + ref;
 				}
@@ -715,7 +718,7 @@ public class BinaryRoutePlanner {
 		return result;
 	}
 	
-	private LatLon convertPoint(BinaryMapDataObject o, int ind){
+	private LatLon convertPoint(RouteDataObject o, int ind){
 		return new LatLon(MapUtils.get31LatitudeY(o.getPoint31YTile(ind)), MapUtils.get31LongitudeX(o.getPoint31XTile(ind)));
 	}
 	
@@ -738,7 +741,7 @@ public class BinaryRoutePlanner {
 	public static class RouteSegment {
 		int segmentStart = 0;
 		int segmentEnd = 0;
-		BinaryMapDataObject road;
+		RouteDataObject road;
 		// needed to store intersection of routes
 		RouteSegment next = null;
 		
@@ -759,7 +762,7 @@ public class BinaryRoutePlanner {
 			return segmentStart;
 		}
 		
-		public BinaryMapDataObject getRoad() {
+		public RouteDataObject getRoad() {
 			return road;
 		}
 	}

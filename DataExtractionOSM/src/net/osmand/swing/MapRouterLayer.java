@@ -25,16 +25,16 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.DataTileManager;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Way;
 import net.osmand.router.BinaryRoutePlanner;
+import net.osmand.router.CarRouter;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
+import net.osmand.router.VehicleRouter;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
 
@@ -53,15 +53,13 @@ import org.json.JSONTokener;
 public class MapRouterLayer implements MapPanelLayer {
 
 	private /*final */ static boolean ANIMATE_CALCULATING_ROUTE = true;
-	private /*final */ static int SIZE_OF_ROUTES_TO_ANIMATE = 1;
+	private /*final */ static int SIZE_OF_ROUTES_TO_ANIMATE = 10;
 	
 	
 	private MapPanel map;
-//	private LatLon startRoute;
-//	private LatLon endRoute;
-	// test route purpose
-	private LatLon startRoute = new LatLon(53.9113, 27.5795);
-	private LatLon endRoute = new LatLon(53.95386, 27.68131);
+	private LatLon startRoute ;
+	private LatLon endRoute ;
+	private VehicleRouter routerMode = new CarRouter();
 	
 	
 	@Override
@@ -73,6 +71,8 @@ public class MapRouterLayer implements MapPanelLayer {
 	public void initLayer(MapPanel map) {
 		this.map = map;
 		fillPopupMenuWithActions(map.getPopupMenu());
+		startRoute =  DataExtractionSettings.getSettings().getStartLocation();
+		endRoute =  DataExtractionSettings.getSettings().getEndLocation();
 	}
 
 	public void fillPopupMenuWithActions(JPopupMenu menu) {
@@ -87,6 +87,7 @@ public class MapRouterLayer implements MapPanelLayer {
 				double latitude = MapUtils.getLatitudeFromTile(map.getZoom(), map.getYTile() + fy);
 				double longitude = MapUtils.getLongitudeFromTile(map.getZoom(), map.getXTile() + fx);
 				startRoute = new LatLon(latitude, longitude);
+				DataExtractionSettings.getSettings().saveStartLocation(latitude, longitude);
 				map.repaint();
 			}
 		};
@@ -102,6 +103,7 @@ public class MapRouterLayer implements MapPanelLayer {
 				double latitude = MapUtils.getLatitudeFromTile(map.getZoom(), map.getYTile() + fy);
 				double longitude = MapUtils.getLongitudeFromTile(map.getZoom(), map.getXTile() + fx);
 				endRoute = new LatLon(latitude, longitude);
+				DataExtractionSettings.getSettings().saveEndLocation(latitude, longitude);
 				map.repaint();
 			}
 		};
@@ -473,8 +475,13 @@ public class MapRouterLayer implements MapPanelLayer {
 	public List<Way> selfRoute(LatLon start, LatLon end) {
 		List<Way> res = new ArrayList<Way>();
 		long time = System.currentTimeMillis();
-		// TODO DataExtractionSettings.getSettings().getBinaryFilesDir()
-		File[] files = new File[0];
+		List<File> files = new ArrayList<File>();
+		for(File f :new File(DataExtractionSettings.getSettings().getBinaryFilesDir()).listFiles()){
+			if(f.getName().endsWith(".obf")){
+				files.add(f);
+			}
+		}
+		
 		if(files == null){
 			JOptionPane.showMessageDialog(OsmExtractionUI.MAIN_APP.getFrame(), "Please specify obf file in settings", "Obf file not found", 
 					JOptionPane.ERROR_MESSAGE);
@@ -483,33 +490,30 @@ public class MapRouterLayer implements MapPanelLayer {
 		System.out.println("Self made route from " + start + " to " + end);
 		if (start != null && end != null) {
 			try {
-				BinaryMapIndexReader[] rs = new BinaryMapIndexReader[files.length];
-				for(int i=0; i<files.length; i++){
-					RandomAccessFile raf = new RandomAccessFile(files[i], "r"); //$NON-NLS-1$ //$NON-NLS-2$
-					rs[i] = new BinaryMapIndexReader(raf, true);
-					
+				BinaryMapIndexReader[] rs = new BinaryMapIndexReader[files.size()];
+				int it = 0;
+				for (File f : files) {
+					RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$ //$NON-NLS-2$
+					rs[it++] = new BinaryMapIndexReader(raf, false);
 				}
 				
 				BinaryRoutePlanner router = new BinaryRoutePlanner(rs);
 				RoutingContext ctx = new RoutingContext();
-//				ctx.setPlanRoadDirection(true);
+				ctx.setRouter(this.routerMode);
+				ctx.setPlanRoadDirection(true);
 				
 				// find closest way
 				RouteSegment st = router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);
-				if (st != null) {
-					BinaryMapDataObject road = st.getRoad();
-					TagValuePair pair = road.getTagValue(0);
-					System.out.println("ROAD TO START " + pair.tag + " " + pair.value + " " + road.getName() + " " 
-							+ (road.getId() >> 3));
+				if (st == null) {
+					throw new RuntimeException("Start point to calculate route was not found");
 				}
+				System.out.println("ROAD TO START " + st.getRoad().getHighway() + " " + st.getRoad().id);
 				
 				RouteSegment e = router.findRouteSegment(end.getLatitude(), end.getLongitude(), ctx);
-				if ( e != null) {
-					BinaryMapDataObject road =  e.getRoad();
-					TagValuePair pair = road.getTagValue(0);
-					System.out.println("ROAD TO END " + pair.tag + " " + pair.value + " " + road.getName()+ " " +  
-							+ (road.getId()  >> 3));
+				if (e == null) {
+					throw new RuntimeException("End point to calculate route was not found");
 				}
+				System.out.println("ROAD TO END " + e.getRoad().getHighway() + " " + e.getRoad().id);
 				
 				final DataTileManager<Way> points = new DataTileManager<Way>();
 				points.setZoom(11);
@@ -571,7 +575,7 @@ public class MapRouterLayer implements MapPanelLayer {
 								.get31LongitudeX(s.object.getPoint31XTile(i)), -1);
 						if (prevWayNode != null) {
 							if (MapUtils.getDistance(prevWayNode, n) > 0) {
-								System.out.println("Warning not connected road " + " " + s.object.getName() + " dist "
+								System.out.println("Warning not connected road " + " " + s.object.getHighway() + " dist "
 										+ MapUtils.getDistance(prevWayNode, n));
 							}
 							prevWayNode = null;

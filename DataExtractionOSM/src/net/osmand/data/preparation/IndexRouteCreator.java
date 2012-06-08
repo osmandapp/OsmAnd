@@ -422,7 +422,6 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 			if (WRITE_POINT_ID) {
 				prev = 0;
 				for (int i = 0; i < pointMapIds.size(); i++) {
-					idTable.addPointId(pointMapIds.getQuick(i) - prev);
 					prev = pointMapIds.getQuick(i);
 				}
 			}

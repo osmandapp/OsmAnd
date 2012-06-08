@@ -25,9 +25,10 @@ import javax.swing.SwingUtilities;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteDataObject;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.data.DataTileManager;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -128,7 +129,7 @@ public class MapClusterLayer implements MapPanelLayer {
 		BinaryMapIndexReader[] rs = new BinaryMapIndexReader[files.length];
 		for(int i=0; i<files.length; i++){
 			RandomAccessFile raf = new RandomAccessFile(files[i], "r"); //$NON-NLS-1$ //$NON-NLS-2$
-			rs[i] = new BinaryMapIndexReader(raf, true);
+			rs[i] = new BinaryMapIndexReader(raf, false);
 			
 		}
 		
@@ -138,10 +139,10 @@ public class MapClusterLayer implements MapPanelLayer {
 		// find closest way
 		RouteSegment st = router.findRouteSegment(lat, lon, ctx);
 		if (st != null) {
-			BinaryMapDataObject road = st.getRoad();
-			TagValuePair pair = road.getTagValue(0);
-			log.info("ROAD TO START " + pair.tag + " " + pair.value + " " + road.getName() + " " 
-					+ (road.getId() >> 3));
+			RouteDataObject road = st.getRoad();
+			String highway = getHighway(road);
+			log.info("ROAD TO START " + highway + " " + //road.getName() + " " 
+					+ road.id);
 		}
 		
 		
@@ -208,7 +209,7 @@ public class MapClusterLayer implements MapPanelLayer {
 		Queue<RouteSegment> queue  = new LinkedList<RouteSegment>();
 		TLongHashSet visitedIds = new TLongHashSet();
 		queue.add(st);
-		BinaryMapDataObject startRoad = st.getRoad();
+		RouteDataObject startRoad = st.getRoad();
 		long lstart = (((long) startRoad.getPoint31XTile(st.getSegmentStart())) << 31) + 
 				(long) startRoad.getPoint31YTile(st.getSegmentStart());
 		RouteSegment next = ctx.getLoadedRoutes().get(lstart);
@@ -221,7 +222,7 @@ public class MapClusterLayer implements MapPanelLayer {
 		
 		nextSegment : while(!queue.isEmpty()){
 			RouteSegment segment = queue.poll();
-			BinaryMapDataObject road = segment.getRoad();
+			RouteDataObject road = segment.getRoad();
 			ctx.getVisitor().visitSegment(segment);
 			if(visitedIds.contains(calculateId(segment, segment.getSegmentStart()))){
 				continue;
@@ -278,14 +279,13 @@ public class MapClusterLayer implements MapPanelLayer {
 					w.addNode(new Node(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x), -1), 0);
 				}
 
-				router.loadRoutes(ctx, (x >> (31 - ctx.getZoomToLoadTileWithRoads())),
-						(y >> (31 - ctx.getZoomToLoadTileWithRoads())));
+				router.loadRoutes(ctx, x ,y , null);
 				long l = (((long) x) << 31) + (long) y;
 				next = ctx.getLoadedRoutes().get(l);
 				boolean addToQueue = true;;
 				while (next != null) {
-					TagValuePair pair = next.getRoad().getTagValue(0);
-					if (pair.tag.equals("highway") && roads.contains(pair.value)) {
+					String h = getHighway(next.getRoad());
+					if (roads.contains(h)) {
 						if(currentD > 0){
 							plusAllowed = false;
 						} else {
@@ -325,5 +325,7 @@ public class MapClusterLayer implements MapPanelLayer {
 
 	
 
-
+	public static String getHighway(RouteDataObject road) {
+		return road.getHighway();
+	}
 }

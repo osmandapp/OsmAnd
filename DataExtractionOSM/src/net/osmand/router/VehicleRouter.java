@@ -1,8 +1,8 @@
 package net.osmand.router;
 
-import net.osmand.binary.BinaryMapDataObject;
-import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
-import net.osmand.osm.MapRenderingTypes;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteDataObject;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 
 public abstract class VehicleRouter {
@@ -10,27 +10,28 @@ public abstract class VehicleRouter {
 	/**
 	 * Accepts line to use it for routing
 	 * 
-	 * @param pair
+	 * @param way
 	 * @return
 	 */
-	public abstract boolean acceptLine(TagValuePair pair);
-
-	/**
-	 * Accepts point to use it for routing
-	 * 
-	 * @param pair
-	 * @return
-	 */
-	public abstract boolean acceptPoint(TagValuePair pair);
+	public abstract boolean acceptLine(RouteDataObject way);
 
 	
-	public int getHighwayAttributes(BinaryMapDataObject road){
-		throw new UnsupportedOperationException();
+	public int isOneWay(RouteDataObject road) {
+		RouteRegion reg = road.region;
+		int sz = road.types.size();
+		for(int i=0; i<sz; i++) {
+			RouteTypeRule r = reg.quickGetEncodingRule(road.types.getQuick(i));
+			if(r.onewayDirection() != 0) {
+				return r.onewayDirection();
+			} else if(r.roundabout()) {
+				return 1;
+			}
+		}
+		return 0;
 	}
 	
-	public boolean isOneWay(BinaryMapDataObject road) {
-		int attributes = getHighwayAttributes(road);
-		return MapRenderingTypes.isOneWayWay(attributes) || MapRenderingTypes.isRoundabout(attributes);
+	public String getHighway(RouteDataObject road) {
+		return road.getHighway();
 	}
 	
 	/**
@@ -39,7 +40,7 @@ public abstract class VehicleRouter {
 	 * @param road
 	 * @return
 	 */
-	public double getRoadPriorityHeuristicToIncrease(BinaryMapDataObject road) {
+	public double getRoadPriorityHeuristicToIncrease(RouteDataObject road) {
 		return 1;
 	}
 	
@@ -49,14 +50,14 @@ public abstract class VehicleRouter {
 	 * @param road
 	 * @return
 	 */
-	public double getRoadPriorityToCalculateRoute(BinaryMapDataObject road) {
+	public double getRoadPriorityToCalculateRoute(RouteDataObject road) {
 		return 1;
 	}
 
 	/**
 	 * return delay in seconds
 	 */
-	public double defineObstacle(BinaryMapDataObject road, int point) {
+	public double defineObstacle(RouteDataObject road, int point) {
 		// no obstacles
 		return 0;
 	}
@@ -64,7 +65,7 @@ public abstract class VehicleRouter {
 	/**
 	 * return speed in m/s for vehicle
 	 */
-	public abstract double defineSpeed(BinaryMapDataObject road);
+	public abstract double defineSpeed(RouteDataObject road);
 
 	/**
 	 * Used for A* routing to calculate g(x)

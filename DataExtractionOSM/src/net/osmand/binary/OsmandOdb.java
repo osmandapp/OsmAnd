@@ -18234,18 +18234,6 @@ public final class OsmandOdb {
       return routeId_.get(index);
     }
     
-    // repeated sint64 pointId = 2;
-    public static final int POINTID_FIELD_NUMBER = 2;
-    private java.util.List<java.lang.Long> pointId_ =
-      java.util.Collections.emptyList();
-    public java.util.List<java.lang.Long> getPointIdList() {
-      return pointId_;
-    }
-    public int getPointIdCount() { return pointId_.size(); }
-    public long getPointId(int index) {
-      return pointId_.get(index);
-    }
-    
     private void initFields() {
     }
     @Override
@@ -18259,9 +18247,6 @@ public final class OsmandOdb {
       getSerializedSize();
       for (long element : getRouteIdList()) {
         output.writeSInt64(1, element);
-      }
-      for (long element : getPointIdList()) {
-        output.writeSInt64(2, element);
       }
       getUnknownFields().writeTo(output);
     }
@@ -18281,15 +18266,6 @@ public final class OsmandOdb {
         }
         size += dataSize;
         size += 1 * getRouteIdList().size();
-      }
-      {
-        int dataSize = 0;
-        for (long element : getPointIdList()) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeSInt64SizeNoTag(element);
-        }
-        size += dataSize;
-        size += 1 * getPointIdList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -18447,10 +18423,6 @@ public final class OsmandOdb {
           result.routeId_ =
             java.util.Collections.unmodifiableList(result.routeId_);
         }
-        if (result.pointId_ != java.util.Collections.EMPTY_LIST) {
-          result.pointId_ =
-            java.util.Collections.unmodifiableList(result.pointId_);
-        }
         net.osmand.binary.OsmandOdb.IdTable returnMe = result;
         result = null;
         return returnMe;
@@ -18473,12 +18445,6 @@ public final class OsmandOdb {
             result.routeId_ = new java.util.ArrayList<java.lang.Long>();
           }
           result.routeId_.addAll(other.routeId_);
-        }
-        if (!other.pointId_.isEmpty()) {
-          if (result.pointId_.isEmpty()) {
-            result.pointId_ = new java.util.ArrayList<java.lang.Long>();
-          }
-          result.pointId_.addAll(other.pointId_);
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -18519,19 +18485,6 @@ public final class OsmandOdb {
               input.popLimit(limit);
               break;
             }
-            case 16: {
-              addPointId(input.readSInt64());
-              break;
-            }
-            case 18: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              while (input.getBytesUntilLimit() > 0) {
-                addPointId(input.readSInt64());
-              }
-              input.popLimit(limit);
-              break;
-            }
           }
         }
       }
@@ -18568,40 +18521,6 @@ public final class OsmandOdb {
       }
       public Builder clearRouteId() {
         result.routeId_ = java.util.Collections.emptyList();
-        return this;
-      }
-      
-      // repeated sint64 pointId = 2;
-      public java.util.List<java.lang.Long> getPointIdList() {
-        return java.util.Collections.unmodifiableList(result.pointId_);
-      }
-      public int getPointIdCount() {
-        return result.getPointIdCount();
-      }
-      public long getPointId(int index) {
-        return result.getPointId(index);
-      }
-      public Builder setPointId(int index, long value) {
-        result.pointId_.set(index, value);
-        return this;
-      }
-      public Builder addPointId(long value) {
-        if (result.pointId_.isEmpty()) {
-          result.pointId_ = new java.util.ArrayList<java.lang.Long>();
-        }
-        result.pointId_.add(value);
-        return this;
-      }
-      public Builder addAllPointId(
-          java.lang.Iterable<? extends java.lang.Long> values) {
-        if (result.pointId_.isEmpty()) {
-          result.pointId_ = new java.util.ArrayList<java.lang.Long>();
-        }
-        super.addAll(values, result.pointId_);
-        return this;
-      }
-      public Builder clearPointId() {
-        result.pointId_ = java.util.Collections.emptyList();
         return this;
       }
       
@@ -19038,392 +18957,6 @@ public final class OsmandOdb {
     // @@protoc_insertion_point(class_scope:RestrictionData)
   }
   
-  public static final class RoutePoint extends
-      com.google.protobuf.GeneratedMessage {
-    // Use RoutePoint.newBuilder() to construct.
-    private RoutePoint() {
-      initFields();
-    }
-    private RoutePoint(boolean noInit) {}
-    
-    private static final RoutePoint defaultInstance;
-    public static RoutePoint getDefaultInstance() {
-      return defaultInstance;
-    }
-    
-    @Override
-	public RoutePoint getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return net.osmand.binary.OsmandOdb.internal_static_RoutePoint_descriptor;
-    }
-    
-    @Override
-	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return net.osmand.binary.OsmandOdb.internal_static_RoutePoint_fieldAccessorTable;
-    }
-    
-    // required bytes point = 1;
-    public static final int POINT_FIELD_NUMBER = 1;
-    private boolean hasPoint;
-    private com.google.protobuf.ByteString point_ = com.google.protobuf.ByteString.EMPTY;
-    public boolean hasPoint() { return hasPoint; }
-    public com.google.protobuf.ByteString getPoint() { return point_; }
-    
-    // optional uint32 pointId = 2;
-    public static final int POINTID_FIELD_NUMBER = 2;
-    private boolean hasPointId;
-    private int pointId_ = 0;
-    public boolean hasPointId() { return hasPointId; }
-    public int getPointId() { return pointId_; }
-    
-    // optional bytes types = 4;
-    public static final int TYPES_FIELD_NUMBER = 4;
-    private boolean hasTypes;
-    private com.google.protobuf.ByteString types_ = com.google.protobuf.ByteString.EMPTY;
-    public boolean hasTypes() { return hasTypes; }
-    public com.google.protobuf.ByteString getTypes() { return types_; }
-    
-    private void initFields() {
-    }
-    @Override
-	public final boolean isInitialized() {
-      if (!hasPoint) return false;
-      return true;
-    }
-    
-    @Override
-	public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (hasPoint()) {
-        output.writeBytes(1, getPoint());
-      }
-      if (hasPointId()) {
-        output.writeUInt32(2, getPointId());
-      }
-      if (hasTypes()) {
-        output.writeBytes(4, getTypes());
-      }
-      getUnknownFields().writeTo(output);
-    }
-    
-    private int memoizedSerializedSize = -1;
-    @Override
-	public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-    
-      size = 0;
-      if (hasPoint()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getPoint());
-      }
-      if (hasPointId()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, getPointId());
-      }
-      if (hasTypes()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getTypes());
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-    
-    public static net.osmand.binary.OsmandOdb.RoutePoint parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static net.osmand.binary.OsmandOdb.RoutePoint parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static net.osmand.binary.OsmandOdb.RoutePoint parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static net.osmand.binary.OsmandOdb.RoutePoint parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static net.osmand.binary.OsmandOdb.RoutePoint parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static net.osmand.binary.OsmandOdb.RoutePoint parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    public static net.osmand.binary.OsmandOdb.RoutePoint parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static net.osmand.binary.OsmandOdb.RoutePoint parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static net.osmand.binary.OsmandOdb.RoutePoint parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static net.osmand.binary.OsmandOdb.RoutePoint parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    
-    public static Builder newBuilder() { return Builder.create(); }
-    @Override
-	public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(net.osmand.binary.OsmandOdb.RoutePoint prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    @Override
-	public Builder toBuilder() { return newBuilder(this); }
-    
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> {
-      private net.osmand.binary.OsmandOdb.RoutePoint result;
-      
-      // Construct using net.osmand.binary.OsmandOdb.RoutePoint.newBuilder()
-      private Builder() {}
-      
-      private static Builder create() {
-        Builder builder = new Builder();
-        builder.result = new net.osmand.binary.OsmandOdb.RoutePoint();
-        return builder;
-      }
-      
-      @Override
-	protected net.osmand.binary.OsmandOdb.RoutePoint internalGetResult() {
-        return result;
-      }
-      
-      @Override
-	public Builder clear() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "Cannot call clear() after build().");
-        }
-        result = new net.osmand.binary.OsmandOdb.RoutePoint();
-        return this;
-      }
-      
-      @Override
-	public Builder clone() {
-        return create().mergeFrom(result);
-      }
-      
-      @Override
-	public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return net.osmand.binary.OsmandOdb.RoutePoint.getDescriptor();
-      }
-      
-      @Override
-	public net.osmand.binary.OsmandOdb.RoutePoint getDefaultInstanceForType() {
-        return net.osmand.binary.OsmandOdb.RoutePoint.getDefaultInstance();
-      }
-      
-      @Override
-	public boolean isInitialized() {
-        return result.isInitialized();
-      }
-      @Override
-	public net.osmand.binary.OsmandOdb.RoutePoint build() {
-        if (result != null && !isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return buildPartial();
-      }
-      
-      private net.osmand.binary.OsmandOdb.RoutePoint buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        if (!isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return buildPartial();
-      }
-      
-      @Override
-	public net.osmand.binary.OsmandOdb.RoutePoint buildPartial() {
-        if (result == null) {
-          throw new IllegalStateException(
-            "build() has already been called on this Builder.");
-        }
-        net.osmand.binary.OsmandOdb.RoutePoint returnMe = result;
-        result = null;
-        return returnMe;
-      }
-      
-      @Override
-	public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof net.osmand.binary.OsmandOdb.RoutePoint) {
-          return mergeFrom((net.osmand.binary.OsmandOdb.RoutePoint)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(net.osmand.binary.OsmandOdb.RoutePoint other) {
-        if (other == net.osmand.binary.OsmandOdb.RoutePoint.getDefaultInstance()) return this;
-        if (other.hasPoint()) {
-          setPoint(other.getPoint());
-        }
-        if (other.hasPointId()) {
-          setPointId(other.getPointId());
-        }
-        if (other.hasTypes()) {
-          setTypes(other.getTypes());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-      
-      @Override
-	public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              setPoint(input.readBytes());
-              break;
-            }
-            case 16: {
-              setPointId(input.readUInt32());
-              break;
-            }
-            case 34: {
-              setTypes(input.readBytes());
-              break;
-            }
-          }
-        }
-      }
-      
-      
-      // required bytes point = 1;
-      public boolean hasPoint() {
-        return result.hasPoint();
-      }
-      public com.google.protobuf.ByteString getPoint() {
-        return result.getPoint();
-      }
-      public Builder setPoint(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  result.hasPoint = true;
-        result.point_ = value;
-        return this;
-      }
-      public Builder clearPoint() {
-        result.hasPoint = false;
-        result.point_ = getDefaultInstance().getPoint();
-        return this;
-      }
-      
-      // optional uint32 pointId = 2;
-      public boolean hasPointId() {
-        return result.hasPointId();
-      }
-      public int getPointId() {
-        return result.getPointId();
-      }
-      public Builder setPointId(int value) {
-        result.hasPointId = true;
-        result.pointId_ = value;
-        return this;
-      }
-      public Builder clearPointId() {
-        result.hasPointId = false;
-        result.pointId_ = 0;
-        return this;
-      }
-      
-      // optional bytes types = 4;
-      public boolean hasTypes() {
-        return result.hasTypes();
-      }
-      public com.google.protobuf.ByteString getTypes() {
-        return result.getTypes();
-      }
-      public Builder setTypes(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  result.hasTypes = true;
-        result.types_ = value;
-        return this;
-      }
-      public Builder clearTypes() {
-        result.hasTypes = false;
-        result.types_ = getDefaultInstance().getTypes();
-        return this;
-      }
-      
-      // @@protoc_insertion_point(builder_scope:RoutePoint)
-    }
-    
-    static {
-      defaultInstance = new RoutePoint(true);
-      net.osmand.binary.OsmandOdb.internalForceInit();
-      defaultInstance.initFields();
-    }
-    
-    // @@protoc_insertion_point(class_scope:RoutePoint)
-  }
-  
   public static final class RouteData extends
       com.google.protobuf.GeneratedMessage {
     // Use RouteData.newBuilder() to construct.
@@ -19453,17 +18986,19 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_RouteData_fieldAccessorTable;
     }
     
-    // repeated .RoutePoint points = 1;
+    // required bytes points = 1;
     public static final int POINTS_FIELD_NUMBER = 1;
-    private java.util.List<net.osmand.binary.OsmandOdb.RoutePoint> points_ =
-      java.util.Collections.emptyList();
-    public java.util.List<net.osmand.binary.OsmandOdb.RoutePoint> getPointsList() {
-      return points_;
-    }
-    public int getPointsCount() { return points_.size(); }
-    public net.osmand.binary.OsmandOdb.RoutePoint getPoints(int index) {
-      return points_.get(index);
-    }
+    private boolean hasPoints;
+    private com.google.protobuf.ByteString points_ = com.google.protobuf.ByteString.EMPTY;
+    public boolean hasPoints() { return hasPoints; }
+    public com.google.protobuf.ByteString getPoints() { return points_; }
+    
+    // optional bytes pointTypes = 4;
+    public static final int POINTTYPES_FIELD_NUMBER = 4;
+    private boolean hasPointTypes;
+    private com.google.protobuf.ByteString pointTypes_ = com.google.protobuf.ByteString.EMPTY;
+    public boolean hasPointTypes() { return hasPointTypes; }
+    public com.google.protobuf.ByteString getPointTypes() { return pointTypes_; }
     
     // required bytes types = 7;
     public static final int TYPES_FIELD_NUMBER = 7;
@@ -19490,11 +19025,9 @@ public final class OsmandOdb {
     }
     @Override
 	public final boolean isInitialized() {
+      if (!hasPoints) return false;
       if (!hasTypes) return false;
       if (!hasRouteId) return false;
-      for (net.osmand.binary.OsmandOdb.RoutePoint element : getPointsList()) {
-        if (!element.isInitialized()) return false;
-      }
       return true;
     }
     
@@ -19502,8 +19035,11 @@ public final class OsmandOdb {
 	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      for (net.osmand.binary.OsmandOdb.RoutePoint element : getPointsList()) {
-        output.writeMessage(1, element);
+      if (hasPoints()) {
+        output.writeBytes(1, getPoints());
+      }
+      if (hasPointTypes()) {
+        output.writeBytes(4, getPointTypes());
       }
       if (hasTypes()) {
         output.writeBytes(7, getTypes());
@@ -19524,9 +19060,13 @@ public final class OsmandOdb {
       if (size != -1) return size;
     
       size = 0;
-      for (net.osmand.binary.OsmandOdb.RoutePoint element : getPointsList()) {
+      if (hasPoints()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, element);
+          .computeBytesSize(1, getPoints());
+      }
+      if (hasPointTypes()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getPointTypes());
       }
       if (hasTypes()) {
         size += com.google.protobuf.CodedOutputStream
@@ -19692,10 +19232,6 @@ public final class OsmandOdb {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
         }
-        if (result.points_ != java.util.Collections.EMPTY_LIST) {
-          result.points_ =
-            java.util.Collections.unmodifiableList(result.points_);
-        }
         net.osmand.binary.OsmandOdb.RouteData returnMe = result;
         result = null;
         return returnMe;
@@ -19713,11 +19249,11 @@ public final class OsmandOdb {
       
       public Builder mergeFrom(net.osmand.binary.OsmandOdb.RouteData other) {
         if (other == net.osmand.binary.OsmandOdb.RouteData.getDefaultInstance()) return this;
-        if (!other.points_.isEmpty()) {
-          if (result.points_.isEmpty()) {
-            result.points_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.RoutePoint>();
-          }
-          result.points_.addAll(other.points_);
+        if (other.hasPoints()) {
+          setPoints(other.getPoints());
+        }
+        if (other.hasPointTypes()) {
+          setPointTypes(other.getPointTypes());
         }
         if (other.hasTypes()) {
           setTypes(other.getTypes());
@@ -19755,9 +19291,11 @@ public final class OsmandOdb {
               break;
             }
             case 10: {
-              net.osmand.binary.OsmandOdb.RoutePoint.Builder subBuilder = net.osmand.binary.OsmandOdb.RoutePoint.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addPoints(subBuilder.buildPartial());
+              setPoints(input.readBytes());
+              break;
+            }
+            case 34: {
+              setPointTypes(input.readBytes());
               break;
             }
             case 58: {
@@ -19777,54 +19315,45 @@ public final class OsmandOdb {
       }
       
       
-      // repeated .RoutePoint points = 1;
-      public java.util.List<net.osmand.binary.OsmandOdb.RoutePoint> getPointsList() {
-        return java.util.Collections.unmodifiableList(result.points_);
+      // required bytes points = 1;
+      public boolean hasPoints() {
+        return result.hasPoints();
       }
-      public int getPointsCount() {
-        return result.getPointsCount();
+      public com.google.protobuf.ByteString getPoints() {
+        return result.getPoints();
       }
-      public net.osmand.binary.OsmandOdb.RoutePoint getPoints(int index) {
-        return result.getPoints(index);
-      }
-      public Builder setPoints(int index, net.osmand.binary.OsmandOdb.RoutePoint value) {
+      public Builder setPoints(com.google.protobuf.ByteString value) {
         if (value == null) {
-          throw new NullPointerException();
-        }
-        result.points_.set(index, value);
-        return this;
-      }
-      public Builder setPoints(int index, net.osmand.binary.OsmandOdb.RoutePoint.Builder builderForValue) {
-        result.points_.set(index, builderForValue.build());
-        return this;
-      }
-      public Builder addPoints(net.osmand.binary.OsmandOdb.RoutePoint value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        if (result.points_.isEmpty()) {
-          result.points_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.RoutePoint>();
-        }
-        result.points_.add(value);
-        return this;
-      }
-      public Builder addPoints(net.osmand.binary.OsmandOdb.RoutePoint.Builder builderForValue) {
-        if (result.points_.isEmpty()) {
-          result.points_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.RoutePoint>();
-        }
-        result.points_.add(builderForValue.build());
-        return this;
-      }
-      public Builder addAllPoints(
-          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.RoutePoint> values) {
-        if (result.points_.isEmpty()) {
-          result.points_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.RoutePoint>();
-        }
-        super.addAll(values, result.points_);
+    throw new NullPointerException();
+  }
+  result.hasPoints = true;
+        result.points_ = value;
         return this;
       }
       public Builder clearPoints() {
-        result.points_ = java.util.Collections.emptyList();
+        result.hasPoints = false;
+        result.points_ = getDefaultInstance().getPoints();
+        return this;
+      }
+      
+      // optional bytes pointTypes = 4;
+      public boolean hasPointTypes() {
+        return result.hasPointTypes();
+      }
+      public com.google.protobuf.ByteString getPointTypes() {
+        return result.getPointTypes();
+      }
+      public Builder setPointTypes(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasPointTypes = true;
+        result.pointTypes_ = value;
+        return this;
+      }
+      public Builder clearPointTypes() {
+        result.hasPointTypes = false;
+        result.pointTypes_ = getDefaultInstance().getPointTypes();
         return this;
       }
       
@@ -22163,11 +21692,6 @@ public final class OsmandOdb {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_RestrictionData_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_RoutePoint_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_RoutePoint_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_RouteData_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -22311,28 +21835,26 @@ public final class OsmandOdb {
       "\022\n\ncategories\030\004 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006nam" +
       "eEn\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\024\n\014openingHours\030\n " +
       "\001(\t\022\014\n\004site\030\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004note",
-      "\030\r \001(\t\"+\n\007IdTable\022\017\n\007routeId\030\001 \003(\022\022\017\n\007po" +
-      "intId\030\002 \003(\022\"F\n\017RestrictionData\022\014\n\004type\030\001" +
-      " \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030\003 \002(\005\022\013\n\003via\030\004 " +
-      "\001(\005\";\n\nRoutePoint\022\r\n\005point\030\001 \002(\014\022\017\n\007poin" +
-      "tId\030\002 \001(\r\022\r\n\005types\030\004 \001(\014\"]\n\tRouteData\022\033\n" +
-      "\006points\030\001 \003(\0132\013.RoutePoint\022\r\n\005types\030\007 \002(" +
-      "\014\022\017\n\007routeId\030\014 \002(\005\022\023\n\013stringNames\030\016 \001(\014\"" +
-      "\251\004\n\022OsmAndRoutingIndex\022\014\n\004name\030\001 \002(\t\0224\n\005" +
-      "rules\030\002 \003(\0132%.OsmAndRoutingIndex.RouteEn" +
-      "codingRule\0223\n\trootBoxes\030\003 \003(\0132 .OsmAndRo",
-      "utingIndex.RouteDataBox\0222\n\006blocks\030\005 \003(\0132" +
-      "\".OsmAndRoutingIndex.RouteDataBlock\032;\n\021R" +
-      "outeEncodingRule\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030\005" +
-      " \002(\t\022\n\n\002id\030\007 \001(\r\032\216\001\n\014RouteDataBox\022\014\n\004lef" +
-      "t\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006b" +
-      "ottom\030\004 \002(\021\022\023\n\013shiftToData\030\005 \001(\007\022/\n\005boxe" +
-      "s\030\007 \003(\0132 .OsmAndRoutingIndex.RouteDataBo" +
-      "x\032\227\001\n\016RouteDataBlock\022\031\n\007idTable\030\005 \001(\0132\010." +
-      "IdTable\022!\n\013stringTable\030\010 \001(\0132\014.StringTab" +
-      "le\022\037\n\013dataObjects\030\006 \003(\0132\n.RouteData\022&\n\014r",
-      "estrictions\030\007 \003(\0132\020.RestrictionDataB\023\n\021n" +
-      "et.osmand.binary"
+      "\030\r \001(\t\"\032\n\007IdTable\022\017\n\007routeId\030\001 \003(\022\"F\n\017Re" +
+      "strictionData\022\014\n\004type\030\001 \002(\005\022\014\n\004from\030\002 \002(" +
+      "\005\022\n\n\002to\030\003 \002(\005\022\013\n\003via\030\004 \001(\005\"d\n\tRouteData\022" +
+      "\016\n\006points\030\001 \002(\014\022\022\n\npointTypes\030\004 \001(\014\022\r\n\005t" +
+      "ypes\030\007 \002(\014\022\017\n\007routeId\030\014 \002(\005\022\023\n\013stringNam" +
+      "es\030\016 \001(\014\"\251\004\n\022OsmAndRoutingIndex\022\014\n\004name\030" +
+      "\001 \002(\t\0224\n\005rules\030\002 \003(\0132%.OsmAndRoutingInde" +
+      "x.RouteEncodingRule\0223\n\trootBoxes\030\003 \003(\0132 " +
+      ".OsmAndRoutingIndex.RouteDataBox\0222\n\006bloc" +
+      "ks\030\005 \003(\0132\".OsmAndRoutingIndex.RouteDataB",
+      "lock\032;\n\021RouteEncodingRule\022\013\n\003tag\030\003 \002(\t\022\r" +
+      "\n\005value\030\005 \002(\t\022\n\n\002id\030\007 \001(\r\032\216\001\n\014RouteDataB" +
+      "ox\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003" +
+      " \002(\021\022\016\n\006bottom\030\004 \002(\021\022\023\n\013shiftToData\030\005 \001(" +
+      "\007\022/\n\005boxes\030\007 \003(\0132 .OsmAndRoutingIndex.Ro" +
+      "uteDataBox\032\227\001\n\016RouteDataBlock\022\031\n\007idTable" +
+      "\030\005 \001(\0132\010.IdTable\022!\n\013stringTable\030\010 \001(\0132\014." +
+      "StringTable\022\037\n\013dataObjects\030\006 \003(\0132\n.Route" +
+      "Data\022&\n\014restrictions\030\007 \003(\0132\020.Restriction" +
+      "DataB\023\n\021net.osmand.binary"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -22625,7 +22147,7 @@ public final class OsmandOdb {
           internal_static_IdTable_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_IdTable_descriptor,
-              new java.lang.String[] { "RouteId", "PointId", },
+              new java.lang.String[] { "RouteId", },
               net.osmand.binary.OsmandOdb.IdTable.class,
               net.osmand.binary.OsmandOdb.IdTable.Builder.class);
           internal_static_RestrictionData_descriptor =
@@ -22636,24 +22158,16 @@ public final class OsmandOdb {
               new java.lang.String[] { "Type", "From", "To", "Via", },
               net.osmand.binary.OsmandOdb.RestrictionData.class,
               net.osmand.binary.OsmandOdb.RestrictionData.Builder.class);
-          internal_static_RoutePoint_descriptor =
-            getDescriptor().getMessageTypes().get(31);
-          internal_static_RoutePoint_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_RoutePoint_descriptor,
-              new java.lang.String[] { "Point", "PointId", "Types", },
-              net.osmand.binary.OsmandOdb.RoutePoint.class,
-              net.osmand.binary.OsmandOdb.RoutePoint.Builder.class);
           internal_static_RouteData_descriptor =
-            getDescriptor().getMessageTypes().get(32);
+            getDescriptor().getMessageTypes().get(31);
           internal_static_RouteData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_RouteData_descriptor,
-              new java.lang.String[] { "Points", "Types", "RouteId", "StringNames", },
+              new java.lang.String[] { "Points", "PointTypes", "Types", "RouteId", "StringNames", },
               net.osmand.binary.OsmandOdb.RouteData.class,
               net.osmand.binary.OsmandOdb.RouteData.Builder.class);
           internal_static_OsmAndRoutingIndex_descriptor =
-            getDescriptor().getMessageTypes().get(33);
+            getDescriptor().getMessageTypes().get(32);
           internal_static_OsmAndRoutingIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndRoutingIndex_descriptor,

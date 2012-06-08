@@ -48,9 +48,30 @@ public class DataExtractionSettings {
 		return new LatLon(lat, lon);
 	}
 	
+	public LatLon getStartLocation(){
+		double lat = preferences.getDouble("start_lat",  53.9);
+		double lon = preferences.getDouble("start_lon",  27.56);
+		return new LatLon(lat, lon);
+	}
+	
+	public LatLon getEndLocation(){
+		double lat = preferences.getDouble("end_lat",  53.9);
+		double lon = preferences.getDouble("end_lon",  27.56);
+		return new LatLon(lat, lon);
+	}
+	
 	public void saveDefaultLocation(double lat, double lon){
 		preferences.putDouble("default_lat",  lat);
 		preferences.putDouble("default_lon",  lon);
+	}
+	
+	public void saveStartLocation(double lat, double lon){
+		preferences.putDouble("start_lat",  lat);
+		preferences.putDouble("start_lon",  lon);
+	}
+	public void saveEndLocation(double lat, double lon){
+		preferences.putDouble("end_lat",  lat);
+		preferences.putDouble("end_lon",  lon);
 	}
 	
 	public MapZooms getMapZooms(){

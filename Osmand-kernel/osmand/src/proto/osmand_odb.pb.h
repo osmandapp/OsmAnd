@@ -67,7 +67,6 @@ class OsmAndPoiBoxData;
 class OsmAndPoiBoxDataAtom;
 class IdTable;
 class RestrictionData;
-class RoutePoint;
 class RouteData;
 class OsmAndRoutingIndex;
 class OsmAndRoutingIndex_RouteEncodingRule;
@@ -4694,30 +4693,17 @@ class IdTable : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
       mutable_routeid();
   
-  // repeated sint64 pointId = 2;
-  inline int pointid_size() const;
-  inline void clear_pointid();
-  static const int kPointIdFieldNumber = 2;
-  inline ::google::protobuf::int64 pointid(int index) const;
-  inline void set_pointid(int index, ::google::protobuf::int64 value);
-  inline void add_pointid(::google::protobuf::int64 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
-      pointid() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
-      mutable_pointid();
-  
   // @@protoc_insertion_point(class_scope:IdTable)
  private:
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   mutable int _cached_size_;
   
   ::google::protobuf::RepeatedField< ::google::protobuf::int64 > routeid_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int64 > pointid_;
   friend void  protobuf_AddDesc_src_2fosmand_5fodb_2eproto();
   friend void protobuf_AssignDesc_src_2fosmand_5fodb_2eproto();
   friend void protobuf_ShutdownFile_src_2fosmand_5fodb_2eproto();
   
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
   
   // WHY DOES & HAVE LOWER PRECEDENCE THAN != !?
   inline bool _has_bit(int index) const {
@@ -4848,119 +4834,6 @@ class RestrictionData : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class RoutePoint : public ::google::protobuf::Message {
- public:
-  RoutePoint();
-  virtual ~RoutePoint();
-  
-  RoutePoint(const RoutePoint& from);
-  
-  inline RoutePoint& operator=(const RoutePoint& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-  
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-  
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const RoutePoint& default_instance();
-  
-  void Swap(RoutePoint* other);
-  
-  // implements Message ----------------------------------------------
-  
-  RoutePoint* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const RoutePoint& from);
-  void MergeFrom(const RoutePoint& from);
-  void Clear();
-  bool IsInitialized() const;
-  
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-  
-  ::google::protobuf::Metadata GetMetadata() const;
-  
-  // nested types ----------------------------------------------------
-  
-  // accessors -------------------------------------------------------
-  
-  // required bytes point = 1;
-  inline bool has_point() const;
-  inline void clear_point();
-  static const int kPointFieldNumber = 1;
-  inline const ::std::string& point() const;
-  inline void set_point(const ::std::string& value);
-  inline void set_point(const char* value);
-  inline void set_point(const void* value, size_t size);
-  inline ::std::string* mutable_point();
-  
-  // optional uint32 pointId = 2;
-  inline bool has_pointid() const;
-  inline void clear_pointid();
-  static const int kPointIdFieldNumber = 2;
-  inline ::google::protobuf::uint32 pointid() const;
-  inline void set_pointid(::google::protobuf::uint32 value);
-  
-  // optional bytes types = 4;
-  inline bool has_types() const;
-  inline void clear_types();
-  static const int kTypesFieldNumber = 4;
-  inline const ::std::string& types() const;
-  inline void set_types(const ::std::string& value);
-  inline void set_types(const char* value);
-  inline void set_types(const void* value, size_t size);
-  inline ::std::string* mutable_types();
-  
-  // @@protoc_insertion_point(class_scope:RoutePoint)
- private:
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-  mutable int _cached_size_;
-  
-  ::std::string* point_;
-  static const ::std::string _default_point_;
-  ::google::protobuf::uint32 pointid_;
-  ::std::string* types_;
-  static const ::std::string _default_types_;
-  friend void  protobuf_AddDesc_src_2fosmand_5fodb_2eproto();
-  friend void protobuf_AssignDesc_src_2fosmand_5fodb_2eproto();
-  friend void protobuf_ShutdownFile_src_2fosmand_5fodb_2eproto();
-  
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
-  
-  // WHY DOES & HAVE LOWER PRECEDENCE THAN != !?
-  inline bool _has_bit(int index) const {
-    return (_has_bits_[index / 32] & (1u << (index % 32))) != 0;
-  }
-  inline void _set_bit(int index) {
-    _has_bits_[index / 32] |= (1u << (index % 32));
-  }
-  inline void _clear_bit(int index) {
-    _has_bits_[index / 32] &= ~(1u << (index % 32));
-  }
-  
-  void InitAsDefaultInstance();
-  static RoutePoint* default_instance_;
-};
-// -------------------------------------------------------------------
-
 class RouteData : public ::google::protobuf::Message {
  public:
   RouteData();
@@ -5015,17 +4888,25 @@ class RouteData : public ::google::protobuf::Message {
   
   // accessors -------------------------------------------------------
   
-  // repeated .RoutePoint points = 1;
-  inline int points_size() const;
+  // required bytes points = 1;
+  inline bool has_points() const;
   inline void clear_points();
   static const int kPointsFieldNumber = 1;
-  inline const ::RoutePoint& points(int index) const;
-  inline ::RoutePoint* mutable_points(int index);
-  inline ::RoutePoint* add_points();
-  inline const ::google::protobuf::RepeatedPtrField< ::RoutePoint >&
-      points() const;
-  inline ::google::protobuf::RepeatedPtrField< ::RoutePoint >*
-      mutable_points();
+  inline const ::std::string& points() const;
+  inline void set_points(const ::std::string& value);
+  inline void set_points(const char* value);
+  inline void set_points(const void* value, size_t size);
+  inline ::std::string* mutable_points();
+  
+  // optional bytes pointTypes = 4;
+  inline bool has_pointtypes() const;
+  inline void clear_pointtypes();
+  static const int kPointTypesFieldNumber = 4;
+  inline const ::std::string& pointtypes() const;
+  inline void set_pointtypes(const ::std::string& value);
+  inline void set_pointtypes(const char* value);
+  inline void set_pointtypes(const void* value, size_t size);
+  inline ::std::string* mutable_pointtypes();
   
   // required bytes types = 7;
   inline bool has_types() const;
@@ -5059,7 +4940,10 @@ class RouteData : public ::google::protobuf::Message {
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   mutable int _cached_size_;
   
-  ::google::protobuf::RepeatedPtrField< ::RoutePoint > points_;
+  ::std::string* points_;
+  static const ::std::string _default_points_;
+  ::std::string* pointtypes_;
+  static const ::std::string _default_pointtypes_;
   ::std::string* types_;
   static const ::std::string _default_types_;
   ::google::protobuf::int32 routeid_;
@@ -5069,7 +4953,7 @@ class RouteData : public ::google::protobuf::Message {
   friend void protobuf_AssignDesc_src_2fosmand_5fodb_2eproto();
   friend void protobuf_ShutdownFile_src_2fosmand_5fodb_2eproto();
   
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
   
   // WHY DOES & HAVE LOWER PRECEDENCE THAN != !?
   inline bool _has_bit(int index) const {
@@ -9819,31 +9703,6 @@ IdTable::mutable_routeid() {
   return &routeid_;
 }
 
-// repeated sint64 pointId = 2;
-inline int IdTable::pointid_size() const {
-  return pointid_.size();
-}
-inline void IdTable::clear_pointid() {
-  pointid_.Clear();
-}
-inline ::google::protobuf::int64 IdTable::pointid(int index) const {
-  return pointid_.Get(index);
-}
-inline void IdTable::set_pointid(int index, ::google::protobuf::int64 value) {
-  pointid_.Set(index, value);
-}
-inline void IdTable::add_pointid(::google::protobuf::int64 value) {
-  pointid_.Add(value);
-}
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
-IdTable::pointid() const {
-  return pointid_;
-}
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
-IdTable::mutable_pointid() {
-  return &pointid_;
-}
-
 // -------------------------------------------------------------------
 
 // RestrictionData
@@ -9914,173 +9773,128 @@ inline void RestrictionData::set_via(::google::protobuf::int32 value) {
 
 // -------------------------------------------------------------------
 
-// RoutePoint
+// RouteData
 
-// required bytes point = 1;
-inline bool RoutePoint::has_point() const {
+// required bytes points = 1;
+inline bool RouteData::has_points() const {
   return _has_bit(0);
 }
-inline void RoutePoint::clear_point() {
-  if (point_ != &_default_point_) {
-    point_->clear();
+inline void RouteData::clear_points() {
+  if (points_ != &_default_points_) {
+    points_->clear();
   }
   _clear_bit(0);
 }
-inline const ::std::string& RoutePoint::point() const {
-  return *point_;
+inline const ::std::string& RouteData::points() const {
+  return *points_;
 }
-inline void RoutePoint::set_point(const ::std::string& value) {
+inline void RouteData::set_points(const ::std::string& value) {
   _set_bit(0);
-  if (point_ == &_default_point_) {
-    point_ = new ::std::string;
+  if (points_ == &_default_points_) {
+    points_ = new ::std::string;
   }
-  point_->assign(value);
+  points_->assign(value);
 }
-inline void RoutePoint::set_point(const char* value) {
+inline void RouteData::set_points(const char* value) {
   _set_bit(0);
-  if (point_ == &_default_point_) {
-    point_ = new ::std::string;
+  if (points_ == &_default_points_) {
+    points_ = new ::std::string;
   }
-  point_->assign(value);
+  points_->assign(value);
 }
-inline void RoutePoint::set_point(const void* value, size_t size) {
+inline void RouteData::set_points(const void* value, size_t size) {
   _set_bit(0);
-  if (point_ == &_default_point_) {
-    point_ = new ::std::string;
+  if (points_ == &_default_points_) {
+    points_ = new ::std::string;
   }
-  point_->assign(reinterpret_cast<const char*>(value), size);
+  points_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* RoutePoint::mutable_point() {
+inline ::std::string* RouteData::mutable_points() {
   _set_bit(0);
-  if (point_ == &_default_point_) {
-    point_ = new ::std::string;
+  if (points_ == &_default_points_) {
+    points_ = new ::std::string;
   }
-  return point_;
-}
-
-// optional uint32 pointId = 2;
-inline bool RoutePoint::has_pointid() const {
-  return _has_bit(1);
-}
-inline void RoutePoint::clear_pointid() {
-  pointid_ = 0u;
-  _clear_bit(1);
-}
-inline ::google::protobuf::uint32 RoutePoint::pointid() const {
-  return pointid_;
-}
-inline void RoutePoint::set_pointid(::google::protobuf::uint32 value) {
-  _set_bit(1);
-  pointid_ = value;
-}
-
-// optional bytes types = 4;
-inline bool RoutePoint::has_types() const {
-  return _has_bit(2);
-}
-inline void RoutePoint::clear_types() {
-  if (types_ != &_default_types_) {
-    types_->clear();
-  }
-  _clear_bit(2);
-}
-inline const ::std::string& RoutePoint::types() const {
-  return *types_;
-}
-inline void RoutePoint::set_types(const ::std::string& value) {
-  _set_bit(2);
-  if (types_ == &_default_types_) {
-    types_ = new ::std::string;
-  }
-  types_->assign(value);
-}
-inline void RoutePoint::set_types(const char* value) {
-  _set_bit(2);
-  if (types_ == &_default_types_) {
-    types_ = new ::std::string;
-  }
-  types_->assign(value);
-}
-inline void RoutePoint::set_types(const void* value, size_t size) {
-  _set_bit(2);
-  if (types_ == &_default_types_) {
-    types_ = new ::std::string;
-  }
-  types_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* RoutePoint::mutable_types() {
-  _set_bit(2);
-  if (types_ == &_default_types_) {
-    types_ = new ::std::string;
-  }
-  return types_;
-}
-
-// -------------------------------------------------------------------
-
-// RouteData
-
-// repeated .RoutePoint points = 1;
-inline int RouteData::points_size() const {
-  return points_.size();
-}
-inline void RouteData::clear_points() {
-  points_.Clear();
-}
-inline const ::RoutePoint& RouteData::points(int index) const {
-  return points_.Get(index);
-}
-inline ::RoutePoint* RouteData::mutable_points(int index) {
-  return points_.Mutable(index);
-}
-inline ::RoutePoint* RouteData::add_points() {
-  return points_.Add();
-}
-inline const ::google::protobuf::RepeatedPtrField< ::RoutePoint >&
-RouteData::points() const {
   return points_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::RoutePoint >*
-RouteData::mutable_points() {
-  return &points_;
+
+// optional bytes pointTypes = 4;
+inline bool RouteData::has_pointtypes() const {
+  return _has_bit(1);
+}
+inline void RouteData::clear_pointtypes() {
+  if (pointtypes_ != &_default_pointtypes_) {
+    pointtypes_->clear();
+  }
+  _clear_bit(1);
+}
+inline const ::std::string& RouteData::pointtypes() const {
+  return *pointtypes_;
+}
+inline void RouteData::set_pointtypes(const ::std::string& value) {
+  _set_bit(1);
+  if (pointtypes_ == &_default_pointtypes_) {
+    pointtypes_ = new ::std::string;
+  }
+  pointtypes_->assign(value);
+}
+inline void RouteData::set_pointtypes(const char* value) {
+  _set_bit(1);
+  if (pointtypes_ == &_default_pointtypes_) {
+    pointtypes_ = new ::std::string;
+  }
+  pointtypes_->assign(value);
+}
+inline void RouteData::set_pointtypes(const void* value, size_t size) {
+  _set_bit(1);
+  if (pointtypes_ == &_default_pointtypes_) {
+    pointtypes_ = new ::std::string;
+  }
+  pointtypes_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* RouteData::mutable_pointtypes() {
+  _set_bit(1);
+  if (pointtypes_ == &_default_pointtypes_) {
+    pointtypes_ = new ::std::string;
+  }
+  return pointtypes_;
 }
 
 // required bytes types = 7;
 inline bool RouteData::has_types() const {
-  return _has_bit(1);
+  return _has_bit(2);
 }
 inline void RouteData::clear_types() {
   if (types_ != &_default_types_) {
     types_->clear();
   }
-  _clear_bit(1);
+  _clear_bit(2);
 }
 inline const ::std::string& RouteData::types() const {
   return *types_;
 }
 inline void RouteData::set_types(const ::std::string& value) {
-  _set_bit(1);
+  _set_bit(2);
   if (types_ == &_default_types_) {
     types_ = new ::std::string;
   }
   types_->assign(value);
 }
 inline void RouteData::set_types(const char* value) {
-  _set_bit(1);
+  _set_bit(2);
   if (types_ == &_default_types_) {
     types_ = new ::std::string;
   }
   types_->assign(value);
 }
 inline void RouteData::set_types(const void* value, size_t size) {
-  _set_bit(1);
+  _set_bit(2);
   if (types_ == &_default_types_) {
     types_ = new ::std::string;
   }
   types_->assign(reinterpret_cast<const char*>(value), size);
 }
 inline ::std::string* RouteData::mutable_types() {
-  _set_bit(1);
+  _set_bit(2);
   if (types_ == &_default_types_) {
     types_ = new ::std::string;
   }
@@ -10089,56 +9903,56 @@ inline ::std::string* RouteData::mutable_types() {
 
 // required int32 routeId = 12;
 inline bool RouteData::has_routeid() const {
-  return _has_bit(2);
+  return _has_bit(3);
 }
 inline void RouteData::clear_routeid() {
   routeid_ = 0;
-  _clear_bit(2);
+  _clear_bit(3);
 }
 inline ::google::protobuf::int32 RouteData::routeid() const {
   return routeid_;
 }
 inline void RouteData::set_routeid(::google::protobuf::int32 value) {
-  _set_bit(2);
+  _set_bit(3);
   routeid_ = value;
 }
 
 // optional bytes stringNames = 14;
 inline bool RouteData::has_stringnames() const {
-  return _has_bit(3);
+  return _has_bit(4);
 }
 inline void RouteData::clear_stringnames() {
   if (stringnames_ != &_default_stringnames_) {
     stringnames_->clear();
   }
-  _clear_bit(3);
+  _clear_bit(4);
 }
 inline const ::std::string& RouteData::stringnames() const {
   return *stringnames_;
 }
 inline void RouteData::set_stringnames(const ::std::string& value) {
-  _set_bit(3);
+  _set_bit(4);
   if (stringnames_ == &_default_stringnames_) {
     stringnames_ = new ::std::string;
   }
   stringnames_->assign(value);
 }
 inline void RouteData::set_stringnames(const char* value) {
-  _set_bit(3);
+  _set_bit(4);
   if (stringnames_ == &_default_stringnames_) {
     stringnames_ = new ::std::string;
   }
   stringnames_->assign(value);
 }
 inline void RouteData::set_stringnames(const void* value, size_t size) {
-  _set_bit(3);
+  _set_bit(4);
   if (stringnames_ == &_default_stringnames_) {
     stringnames_ = new ::std::string;
   }
   stringnames_->assign(reinterpret_cast<const char*>(value), size);
 }
 inline ::std::string* RouteData::mutable_stringnames() {
-  _set_bit(3);
+  _set_bit(4);
   if (stringnames_ == &_default_stringnames_) {
     stringnames_ = new ::std::string;
   }

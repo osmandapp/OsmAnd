@@ -1,11 +1,13 @@
 package net.osmand.router;
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import net.osmand.binary.BinaryMapDataObject;
-import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
-import net.osmand.osm.MapRenderingTypes;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteDataObject;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 
 public class CarRouter extends VehicleRouter {
@@ -52,59 +54,38 @@ public class CarRouter extends VehicleRouter {
 	}
 
 	@Override
-	public boolean acceptLine(TagValuePair pair) {
-		if (pair.tag.equals("highway")) {
-			return autoNotDefinedValues.containsKey(pair.value);
-		}
-		return false;
+	public boolean acceptLine(RouteDataObject way) {
+		return autoNotDefinedValues.containsKey(way.getHighway());
 	}
 
-	@Override
-	public boolean acceptPoint(TagValuePair pair) {
-		if (pair.tag.equals("traffic_calming")) {
-			return true;
-		} else if (pair.tag.equals("highway") && pair.value.equals("traffic_signals")) {
-			return true;
-		} else if (pair.tag.equals("highway") && pair.value.equals("speed_camera")) {
-			return true;
-		} else if (pair.tag.equals("railway") && pair.value.equals("crossing")) {
-			return true;
-		} else if (pair.tag.equals("railway") && pair.value.equals("level_crossing")) {
-			return true;
-		}
-		return false;
-	}
 
-	public boolean isOneWay(int highwayAttributes) {
-		return MapRenderingTypes.isOneWayWay(highwayAttributes) || MapRenderingTypes.isRoundabout(highwayAttributes);
-	}
 
 	/**
 	 * return delay in seconds
 	 */
 	@Override
-	public double defineObstacle(BinaryMapDataObject road, int point) {
-		if ((road.getTypes()[0] & 3) == MapRenderingTypes.POINT_TYPE) {
-			// possibly not only first type needed ?
-			TagValuePair pair = road.getTagValue(0);
-			if (pair != null) {
-				if (pair.tag.equals("highway") && pair.value.equals("traffic_signals")) {
-					return 20;
-				} else if (pair.tag.equals("railway") && pair.value.equals("crossing")) {
-					return 25;
-				} else if (pair.tag.equals("railway") && pair.value.equals("level_crossing")) {
-					return 25;
-				}
+	public double defineObstacle(RouteDataObject road, int point) {
+		TIntArrayList pointTypes = road.getPointTypes(point);
+		if(pointTypes == null) {
+			return 0;
+		}
+		RouteRegion reg = road.region;
+		int sz = pointTypes.size();
+		for(int i=0; i<sz; i++) {
+			RouteTypeRule r = reg.quickGetEncodingRule(pointTypes.getQuick(i));
+			if(r.getType() == RouteTypeRule.TRAFFIC_SIGNALS) {
+				return 20;
+			} else if(r.getType() == RouteTypeRule.RAILWAY_CROSSING) {
+				return 25;
 			}
 		}
 		return 0;
 	}
 	
 	@Override
-	public double getRoadPriorityHeuristicToIncrease(BinaryMapDataObject road) {
-		TagValuePair pair = road.getTagValue(0);
-		boolean highway = "highway".equals(pair.tag);
-		double priority = highway && autoPriorityValues.containsKey(pair.value) ? autoPriorityValues.get(pair.value) : 0.5d;
+	public double getRoadPriorityHeuristicToIncrease(RouteDataObject road) {
+		String highway = getHighway(road);
+		double priority = highway !=null && autoPriorityValues.containsKey(highway) ? autoPriorityValues.get(highway) : 0.5d;
 		// allow to get out from motorway to primary roads
 //		if("motorway_link".equals(pair.value) || "trunk".equals(pair.value) ||
 //				"trunk_link".equals(pair.value) || "motorway".equals(pair.value)) {
@@ -122,15 +103,14 @@ public class CarRouter extends VehicleRouter {
 	}
 	
 	@Override
-	public double getRoadPriorityToCalculateRoute(BinaryMapDataObject road) {
-		TagValuePair pair = road.getTagValue(0);
-		boolean highway = "highway".equals(pair.tag);
-		double priority = highway && autoPriorityValues.containsKey(pair.value) ? autoPriorityValues.get(pair.value) : 0.5d;
-		// keep it in boundaries otherwise 
-		//  (it will use first founded exist for trunk even if it in another city and make Uturn there) 
-		if(priority > 1.4){
+	public double getRoadPriorityToCalculateRoute(RouteDataObject road) {
+		String highway = getHighway(road);
+		double priority = highway != null && autoPriorityValues.containsKey(highway) ? autoPriorityValues.get(highway) : 0.5d;
+		// keep it in boundaries otherwise
+		// (it will use first founded exist for trunk even if it in another city and make Uturn there)
+		if (priority > 1.4) {
 			return 1.4d;
-		} else if(priority < 0.5d) {
+		} else if (priority < 0.5d) {
 			return 0.5d;
 		}
 		return priority;
@@ -140,19 +120,25 @@ public class CarRouter extends VehicleRouter {
 	 * return speed in m/s
 	 */
 	@Override
-	public double defineSpeed(BinaryMapDataObject road) {
-		TagValuePair pair = road.getTagValue(0);
-		double speed = MapRenderingTypes.getMaxSpeedIfDefined(getHighwayAttributes(road)) / 3.6d;
-		boolean highway = "highway".equals(pair.tag);
-		double priority = highway && autoPriorityValues.containsKey(pair.value) ? autoPriorityValues.get(pair.value) : 0.5d;
-		if (speed == 0 && highway) {
-			Double value = autoNotDefinedValues.get(pair.value);
-			if (value == null) {
-				value = 50d;
+	public double defineSpeed(RouteDataObject road) {
+		String highway = null;
+		RouteRegion reg = road.region;
+		int sz = road.types.size();
+		for (int i = 0; i < sz; i++) {
+			RouteTypeRule r = reg.quickGetEncodingRule(road.types.getQuick(i));
+			float maxSpeed = r.maxSpeed();
+			if (maxSpeed > 0) {
+				return maxSpeed;
+			} else if (highway == null) {
+				highway = r.highwayRoad();
 			}
-			speed = value / 3.6d;
 		}
-		return speed * priority;
+		double priority = highway != null && autoPriorityValues.containsKey(highway) ? autoPriorityValues.get(highway) : 0.5d;
+		Double value = autoNotDefinedValues.get(highway);
+		if (value == null) {
+			value = 50d;
+		}
+		return value / 3.6d * priority;
 	}
 
 	/**

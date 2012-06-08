@@ -1,11 +1,14 @@
 package net.osmand.router;
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
-import net.osmand.osm.MapRenderingTypes;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteDataObject;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 
 public class BicycleRouter extends VehicleRouter {
@@ -68,56 +71,37 @@ public class BicycleRouter extends VehicleRouter {
 	}
 
 	@Override
-	public boolean acceptLine(TagValuePair pair) {
-		if (pair.tag.equals("highway")) {
-			return bicycleNotDefinedValues.containsKey(pair.value);
-		}
-		return false;
+	public boolean acceptLine(RouteDataObject way) {
+		return bicycleNotDefinedValues.containsKey(way.getHighway());
 	}
 
-	@Override
-	public boolean acceptPoint(TagValuePair pair) {
-		if (pair.tag.equals("highway") && pair.value.equals("traffic_signals")) {
-			return true;
-		} else if (pair.tag.equals("railway") && pair.value.equals("crossing")) {
-			return true;
-		} else if (pair.tag.equals("railway") && pair.value.equals("level_crossing")) {
-			return true;
-		}
-		return false;
-	}
-	
-
-	public boolean isOneWay(int highwayAttributes) {
-		return MapRenderingTypes.isOneWayWay(highwayAttributes) || MapRenderingTypes.isRoundabout(highwayAttributes);
-	}
 
 	/**
 	 * return delay in seconds
 	 */
 	@Override
-	public double defineObstacle(BinaryMapDataObject road, int point) {
-		if ((road.getTypes()[0] & 3) == MapRenderingTypes.POINT_TYPE) {
-			// possibly not only first type needed ?
-			TagValuePair pair = road.getTagValue(0);
-			if (pair != null) {
-				if (pair.tag.equals("highway") && pair.value.equals("traffic_signals")) {
-					return 30;
-				} else if (pair.tag.equals("railway") && pair.value.equals("crossing")) {
-					return 15;
-				} else if (pair.tag.equals("railway") && pair.value.equals("level_crossing")) {
-					return 15;
-				}
+	public double defineObstacle(RouteDataObject road, int point) {
+		TIntArrayList pointTypes = road.getPointTypes(point);
+		if(pointTypes == null) {
+			return 0;
+		}
+		RouteRegion reg = road.region;
+		int sz = pointTypes.size();
+		for(int i=0; i<sz; i++) {
+			RouteTypeRule r = reg.quickGetEncodingRule(pointTypes.getQuick(i));
+			if(r.getType() == RouteTypeRule.TRAFFIC_SIGNALS) {
+				return 30;
+			} else if(r.getType() == RouteTypeRule.RAILWAY_CROSSING) {
+				return 15;
 			}
 		}
 		return 0;
 	}
 	
 	@Override
-	public double getRoadPriorityToCalculateRoute(BinaryMapDataObject road) {
-		TagValuePair pair = road.getTagValue(0);
-		boolean highway = "highway".equals(pair.tag);
-		double priority = highway && bicyclePriorityValues.containsKey(pair.value) ? bicyclePriorityValues.get(pair.value) : 1d;
+	public double getRoadPriorityToCalculateRoute(RouteDataObject road) {
+		String highway = getHighway(road);
+		double priority = highway != null && bicyclePriorityValues.containsKey(highway) ? bicyclePriorityValues.get(highway) : 1d;
 		return priority;
 	}
 
@@ -125,19 +109,16 @@ public class BicycleRouter extends VehicleRouter {
 	 * return speed in m/s
 	 */
 	@Override
-	public double defineSpeed(BinaryMapDataObject road) {
-		TagValuePair pair = road.getTagValue(0);
-		double speed = 4d;
-		boolean highway = "highway".equals(pair.tag);
-		double priority = highway && bicyclePriorityValues.containsKey(pair.value) ? bicyclePriorityValues.get(pair.value) : 1d;
-		if (speed == 0 && highway) {
-			Double value = bicycleNotDefinedValues.get(pair.value);
-			if (value != null) {
-				speed = value;
-			}
+	public double defineSpeed(RouteDataObject road) {
+		String highway = getHighway(road);
+		double priority = highway != null && bicyclePriorityValues.containsKey(highway) ? bicyclePriorityValues.get(highway) : 0.5d;
+		Double value = bicycleNotDefinedValues.get(highway);
+		if (value == null) {
+			value = 4d;
 		}
-		return speed * priority;
+		return value / 3.6d * priority;
 	}
+
 
 	/**
 	 * Used for A* routing to calculate g(x)
