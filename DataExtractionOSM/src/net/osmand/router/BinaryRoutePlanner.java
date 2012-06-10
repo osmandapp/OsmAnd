@@ -190,7 +190,12 @@ public class BinaryRoutePlanner {
 		boolean inverse = false;
 		boolean init = false;
 		
-		PriorityQueue<RouteSegment>  graphSegments = inverse ? graphReverseSegments : graphDirectSegments;
+		PriorityQueue<RouteSegment>  graphSegments;
+		if(inverse) {
+			graphSegments = graphReverseSegments;
+		} else {
+			graphSegments = graphDirectSegments;
+		}
 		while (!graphSegments.isEmpty()) {
 			RouteSegment segment = graphSegments.poll();
 
@@ -224,7 +229,11 @@ public class BinaryRoutePlanner {
 				// different strategy : use onedirectional graph
 				inverse = !ctx.getPlanRoadDirection().booleanValue();
 			}
-			graphSegments = inverse ? graphReverseSegments : graphDirectSegments;
+			if(inverse) {
+				graphSegments = graphReverseSegments;
+			} else {
+				graphSegments = graphDirectSegments;
+			}
 		}
 		
 		

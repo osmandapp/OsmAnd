@@ -262,6 +262,10 @@ public class BinaryMapIndexReader {
 		return poiIndexes.size() > 0;
 	}
 	
+	public boolean containsRouteData(){
+		return routingIndexes.size() > 0;
+	}
+	
 	public boolean containsPoiData(double latitude, double longitude) {
 		for (PoiRegion index : poiIndexes) {
 			if (index.rightLongitude >= longitude && index.leftLongitude <= longitude &&

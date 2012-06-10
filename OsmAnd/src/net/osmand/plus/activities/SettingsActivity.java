@@ -511,10 +511,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 						getMyApplication().showDialogInitializingCommandPlayer(this, false);
 					}
 				} else if (listPref.getId().equals(osmandSettings.ROUTER_SERVICE.getId())) {
-					// TO Delete when it will be available
-					if (osmandSettings.ROUTER_SERVICE.get() == RouteService.OSMAND) {
-						AccessibleToast.makeText(this, R.string.offline_navigation_not_available, Toast.LENGTH_LONG).show();
-					}
 					routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + osmandSettings.ROUTER_SERVICE.get() + "]");
 				} else if (listPref.getId().equals(osmandSettings.APPLICATION_MODE.getId())) {
 					updateAllSettings();

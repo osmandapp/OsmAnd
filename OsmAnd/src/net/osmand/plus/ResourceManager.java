@@ -553,7 +553,7 @@ public class ResourceManager {
 									warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 								}
 							}
-							if(index.containsMapData()){
+							if(index.containsRouteData()) {
 								try {
 									RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
 									routingMapFiles.put(f.getAbsolutePath(), new BinaryMapIndexReader(raf, index));

@@ -3,10 +3,10 @@ package net.osmand.plus.activities.search;
 import java.util.Comparator;
 import java.util.List;
 
+import net.osmand.Algoritms;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Building;
 import net.osmand.data.City;
-import net.osmand.data.MapObjectComparator;
 import net.osmand.data.Street;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -22,7 +22,14 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 	
 	@Override
 	protected Comparator<? super Building> createComparator() {
-		return new MapObjectComparator(getMyApplication().getSettings().usingEnglishNames());
+		return new Comparator<Building>() {
+			@Override
+			public int compare(Building o1, Building o2) {
+				int i1 = Algoritms.extractFirstIntegerNumber(o1.getName());
+				int i2 = Algoritms.extractFirstIntegerNumber(o2.getName());
+				return i1 - i2;
+			}
+		};
 	}
 	
 	@Override
