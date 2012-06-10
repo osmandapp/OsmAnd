@@ -30,6 +30,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.DataTileManager;
+import net.osmand.osm.Entity;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Way;
@@ -558,7 +559,10 @@ public class MapRouterLayer implements MapPanelLayer {
 				BinaryRoutePlanner router = new BinaryRoutePlanner(rs);
 				RoutingContext ctx = new RoutingContext();
 				ctx.setRouter(this.routerMode);
-				ctx.setPlanRoadDirection(true);
+				int dir = DataExtractionSettings.getSettings().getRouteDirection();
+				if(dir != 0) {
+					ctx.setPlanRoadDirection(dir > 0 ? true : false);
+				}
 				
 				// find closest way
 				RouteSegment st = router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);
@@ -573,7 +577,7 @@ public class MapRouterLayer implements MapPanelLayer {
 				}
 				System.out.println("ROAD TO END " + e.getRoad().getHighway() + " " + e.getRoad().id);
 				
-				final DataTileManager<Way> points = new DataTileManager<Way>();
+				final DataTileManager<Entity> points = new DataTileManager<Entity>();
 				points.setZoom(11);
 				map.setPoints(points);
 				ctx.setVisitor(new RouteSegmentVisitor() {
@@ -610,21 +614,7 @@ public class MapRouterLayer implements MapPanelLayer {
 						}
 					}
 
-					private void redraw() {
-						try {
-							SwingUtilities.invokeAndWait(new Runnable() {
-								@Override
-								public void run() {
-									map.prepareImage();
-								}
-							});
-						} catch (InterruptedException e1) {
-						} catch (InvocationTargetException e) {
-							e.printStackTrace();
-						}
-					}
-
-					private void registerObjects(final DataTileManager<Way> points, boolean white, 
+					private void registerObjects(final DataTileManager<Entity> points, boolean white, 
 							List<RouteSegment> registerCache) {
 						for (RouteSegment segment : registerCache) {
 							Way way = new Way(-1);
@@ -633,8 +623,7 @@ public class MapRouterLayer implements MapPanelLayer {
 								way.putTag("color", "white");
 							}
 							for (int i = 0; i < segment.getRoad().getPointsLength(); i++) {
-								net.osmand.osm.Node n = new net.osmand.osm.Node(MapUtils.get31LatitudeY(segment.getRoad()
-										.getPoint31YTile(i)), MapUtils.get31LongitudeX(segment.getRoad().getPoint31XTile(i)), -1);
+								net.osmand.osm.Node n = createNode(segment, i);
 								way.addNode(n);
 							}
 							LatLon n = way.getLatLon();
@@ -643,8 +632,18 @@ public class MapRouterLayer implements MapPanelLayer {
 					}
 
 				});
+				// TODO delete this block after
+				net.osmand.osm.Node ns = createNode(st, st.getSegmentStart());
+				points.registerObject(ns.getLatitude(), ns.getLongitude(), ns);
+				ns = createNode(e, e.getSegmentStart());
+				points.registerObject(ns.getLatitude(), ns.getLongitude(), ns);
+				if (pause && animateRoutingCalculation) {
+					waitNextPress();
+				}
+				// TODO delete this block after
+				
 				List<RouteSegmentResult> searchRoute = router.searchRoute(ctx, st, e);
-				if (pause) {
+				if (pause && animateRoutingCalculation) {
 					nextTurn.setText("FINISH");
 					waitNextPress();
 					nextTurn.setText(">>");
@@ -691,6 +690,26 @@ public class MapRouterLayer implements MapPanelLayer {
 			System.out.println("Finding self routes " + res.size() + " " + (System.currentTimeMillis() - time) + " ms");
 		}
 		return res;
+	}
+	
+	private net.osmand.osm.Node createNode(RouteSegment segment, int i) {
+		net.osmand.osm.Node n = new net.osmand.osm.Node(MapUtils.get31LatitudeY(segment.getRoad().getPoint31YTile(i)),
+				MapUtils.get31LongitudeX(segment.getRoad().getPoint31XTile(i)), -1);
+		return n;
+	}
+	
+	private void redraw() {
+		try {
+			SwingUtilities.invokeAndWait(new Runnable() {
+				@Override
+				public void run() {
+					map.prepareImage();
+				}
+			});
+		} catch (InterruptedException e1) {
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void waitNextPress() {

@@ -126,7 +126,7 @@ public class MapPointsLayer implements MapPanelLayer {
 			}
 			g.drawPolygon(xPoints, yPoints, 4);
 			g.fillPolygon(xPoints, yPoints, 4);
-			if(name != null && map.getZoom() > 16) {
+			if(name != null && map.getZoom() >= 16) {
 				Font prevFont = g.getFont();
 				Color prevColor = g.getColor();
 				AffineTransform prev = g.getTransform();

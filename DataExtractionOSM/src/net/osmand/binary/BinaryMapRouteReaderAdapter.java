@@ -92,6 +92,8 @@ public class BinaryMapRouteReaderAdapter {
 				type = RAILWAY_CROSSING;
 			} else if(t.equalsIgnoreCase("roundabout") && v != null){
 				type = ROUNDABOUT;
+			} else if(t.equalsIgnoreCase("junction") && "roundabout".equalsIgnoreCase(v)){
+				type = ROUNDABOUT;
 			} else if(t.equalsIgnoreCase("highway") && v != null){
 				type = HIGHWAY_TYPE;
 			} else if(t.startsWith("access") && v != null){
@@ -120,6 +122,16 @@ public class BinaryMapRouteReaderAdapter {
 		
 		public RouteDataObject(RouteRegion region) {
 			this.region = region;
+		}
+		
+		public RouteDataObject(RouteDataObject copy) {
+			this.region = copy.region;
+			this.pointsX = new TIntArrayList(copy.pointsX);
+			this.pointsY = new TIntArrayList(copy.pointsY);
+			this.types = new TIntArrayList(copy.types);
+			this.restrictions = new TLongArrayList(copy.restrictions);
+			this.pointTypes = new ArrayList<TIntArrayList>(copy.pointTypes);
+			this.id = copy.id;
 		}
 
 		public TIntArrayList types = new TIntArrayList(); 

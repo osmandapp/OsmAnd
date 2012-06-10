@@ -76,24 +76,11 @@ public class BinaryRoutePlanner {
 		return (x1 - x2) * 0.011d;
 	}
    
-	// calculate distance from C to AB (distnace doesn't calculate 
-	private static double calculateDistance(int xA, int yA, int xB, int yB, int xC, int yC, double distAB){
-	    	// Scalar multiplication between (AB', AC)
-	    	double multiple = (-convert31YToMeters(yB, yA)) * convert31XToMeters(xC,xA) + convert31XToMeters(xB,xA) * convert31YToMeters(yC, yA);
-	    	return multiple / distAB;
-	}
-    
-	    // calculate square distance from C to AB (distance doesn't calculate 
-	private static double calculatesquareDistance(int xA, int yA, int xB, int yB, int xC, int yC, double distAB) {
-    	// Scalar multiplication between (AB', AC)
-		double multiple = (-convert31YToMeters(yB, yA)) * convert31XToMeters(xC,xA) + convert31XToMeters(xB,xA) * convert31YToMeters(yC, yA);
-		return (multiple * multiple) / (distAB*distAB);
-	}
 	
-	private static double calculateProjection(int xA, int yA, int xB, int yB, int xC, int yC, double distAB) {
+	private static double calculateProjection(int xA, int yA, int xB, int yB, int xC, int yC) {
 		// Scalar multiplication between (AB, AC)
 		double multiple = convert31XToMeters(xB, xA) * convert31XToMeters(xC, xA) + convert31YToMeters(yB, yA) * convert31YToMeters(yC, yA);
-		return multiple / distAB;
+		return multiple;
 	}
 	
 	
@@ -109,26 +96,33 @@ public class BinaryRoutePlanner {
 		
 		for(RouteDataObject r : dataObjects){
 			if(r.getPointsLength() > 1){
-//				double priority = ctx.getRouter().getRoadPriorityToCalculateRoute(r);
 				for (int j = 1; j < r.getPointsLength(); j++) {
 					double mDist = squareRootDist(r.getPoint31XTile(j), r.getPoint31YTile(j), r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1));
+					int prx = r.getPoint31XTile(j);
+					int pry = r.getPoint31YTile(j);
 					double projection = calculateProjection(r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1), r.getPoint31XTile(j), r.getPoint31YTile(j),
-							px, py, mDist);
-					double currentsDist;
-					if(projection < 0){//TODO: first 2 and last 2 points of a route should be only near and not based on road priority (I.E. a motorway road node unreachable near my house)
-						currentsDist = squareDist(r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1), px, py);// / (priority * priority);
-					} else if(projection > mDist){
-						currentsDist = squareDist(r.getPoint31XTile(j), r.getPoint31YTile(j), px, py);// / (priority * priority);
+							px, py);
+					if(projection < 0){
+						prx = r.getPoint31XTile(j - 1);
+						pry = r.getPoint31YTile(j - 1);
+					} else if(projection >= mDist * mDist){
+						prx = r.getPoint31XTile(j);
+						pry = r.getPoint31YTile(j);
 					} else {
-						currentsDist = calculatesquareDistance(r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1), r.getPoint31XTile(j), r.getPoint31YTile(j),
-								px, py, mDist);// / (priority * priority);
+						prx = (int) (r.getPoint31XTile(j - 1) + (r.getPoint31XTile(j) - r.getPoint31XTile(j - 1))* (projection / (mDist *mDist)));
+						pry = (int) (r.getPoint31YTile(j - 1) + (r.getPoint31YTile(j) - r.getPoint31YTile(j - 1)) * (projection / (mDist *mDist)));
 					}
-					
+					double currentsDist = squareDist(prx, pry, px, py);
 					if (road == null || currentsDist < sdist) {
-						road = new RouteSegment(r, j-1);
-//TODO: first 2 and last 2 segments should be based on projection. my start/finish point S/F, fake point P between j-1 & j -> SP, PJ; should end at finish point: JP,PF
-
+						RouteDataObject ro = new RouteDataObject(r);
+						road = new RouteSegment(ro, j);
+						ro.pointsX.insert(j, prx);
+						ro.pointsY.insert(j, pry);
+						if(ro.pointTypes.size() > j) {
+							ro.pointTypes.add(j, null);
+						}
 						road.segmentEnd = j;
+						registerRouteDataObject(ctx, ro);
 						sdist = currentsDist;
 					}
 				}
@@ -189,40 +183,41 @@ public class BinaryRoutePlanner {
 		start.distanceToEnd = h(ctx, targetEndX, targetEndY, startX, startY);
 		end.distanceToEnd = start.distanceToEnd;
 		
-		// because first point of the start is not visited do the same as in cycle but only for one point
-		// it matters when start point is intersection of different roads
-		// add start segment to priority queue
-		visitAllStartSegments(ctx, start, graphDirectSegments, visitedDirectSegments, startX, startY);
-		visitAllStartSegments(ctx, end, graphReverseSegments, visitedOppositeSegments, targetEndX, targetEndY);
+		graphDirectSegments.add(start);
+		graphReverseSegments.add(end);
 		
 		// Extract & analyze segment with min(f(x)) from queue while final segment is not found
 		boolean inverse = false;
+		boolean init = false;
 		
 		PriorityQueue<RouteSegment>  graphSegments = inverse ? graphReverseSegments : graphDirectSegments;
-		while(!graphSegments.isEmpty()){
+		while (!graphSegments.isEmpty()) {
 			RouteSegment segment = graphSegments.poll();
-			
-			ctx.visitedSegments ++;
+
+			ctx.visitedSegments++;
 			// for debug purposes
 			if (ctx.visitor != null) {
 				ctx.visitor.visitSegment(segment, true);
 			}
 			boolean routeFound = false;
 			if (!inverse) {
-				routeFound = processRouteSegment(ctx, end, false, graphDirectSegments, visitedDirectSegments, targetEndX,
-						targetEndY, segment, visitedOppositeSegments);
+				routeFound = processRouteSegment(ctx, end, false, graphDirectSegments, visitedDirectSegments, targetEndX, targetEndY,
+						segment, visitedOppositeSegments);
 			} else {
-				routeFound = processRouteSegment(ctx, start, true, graphReverseSegments, visitedOppositeSegments, startX,
-						startY, segment, visitedDirectSegments);
+				routeFound = processRouteSegment(ctx, start, true, graphReverseSegments, visitedOppositeSegments, startX, startY, segment,
+						visitedDirectSegments);
 			}
-			if(graphReverseSegments.isEmpty() || graphDirectSegments.isEmpty() || routeFound){
+			if (graphReverseSegments.isEmpty() || graphDirectSegments.isEmpty() || routeFound) {
 				break;
 			}
-			if(ctx.planRouteIn2Directions()){
+			if(!init) {
+				inverse = !inverse;
+				init = true;
+			} else if (ctx.planRouteIn2Directions()) {
 				inverse = nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) > 0;
 				if (graphDirectSegments.size() * 1.3 > graphReverseSegments.size()) {
 					inverse = true;
-				} else 	if (graphDirectSegments.size() < 1.3 * graphReverseSegments.size()) {
+				} else if (graphDirectSegments.size() < 1.3 * graphReverseSegments.size()) {
 					inverse = false;
 				}
 			} else {
@@ -254,7 +249,44 @@ public class BinaryRoutePlanner {
 		return result; 
 	}
 	
-	
+	private void registerRouteDataObject(final RoutingContext ctx, RouteDataObject o) {
+		RouteDataObject old = ctx.idObjects.get(o.id);
+		// sometimes way are presented only partially in one index
+		if ((old != null && old.pointsX.size() >= o.pointsX.size()) || (!ctx.getRouter().acceptLine(o))) {
+			return;
+		}
+		ctx.idObjects.put(o.id, o);
+		for (int j = 0; j < o.pointsX.size(); j++) {
+			long l = (((long) o.pointsX.getQuick(j)) << 31) + (long) o.pointsY.getQuick(j);
+			RouteSegment segment = new RouteSegment(o , j);
+			segment.segmentEnd = j;
+			RouteSegment prev = ctx.routes.get(l);
+			boolean i = true;
+			if (prev != null) {
+				if (old == null) {
+					segment.next = prev;
+				} else if (prev.road == old) {
+					segment.next = prev.next;
+				} else {
+					// segment somewhere in the middle replace element in linked list
+					RouteSegment rr = prev;
+					while (rr != null) {
+						if (rr.road == old) {
+							prev.next = segment;
+							segment.next = rr.next;
+							break;
+						}
+						prev = rr;
+						rr = rr.next;
+					}
+					i = false;
+				}
+			}
+			if (i) {
+				ctx.routes.put(l, segment);
+			}
+		}
+	}
 	
 	public void loadRoutes(final RoutingContext ctx, int tile31X, int tile31Y, final List<RouteDataObject> toFillIn) {
 		int zoomToLoad = 31 - ctx.getZoomToLoadTileWithRoads();
@@ -273,21 +305,7 @@ public class BinaryRoutePlanner {
 						toFillIn.add(o);
 					}
 				}
-				RouteDataObject old = ctx.idObjects.get(o.id);
-				// sometimes way are presented only partially in one index
-				if ((old != null && old.pointsX.size() >= o.pointsX.size()) || (!ctx.getRouter().acceptLine(o))) {
-					return false;
-				}
-				ctx.idObjects.put(o.id, o);
-				for (int j = 0; j < o.pointsX.size(); j++) {
-					long l = (((long) o.pointsX.getQuick(j)) << 31) + (long) o.pointsY.getQuick(j);
-					RouteSegment segment = new RouteSegment(o , j);
-					segment.segmentEnd = j;
-					if (ctx.routes.get(l) != null) {
-						segment.next = ctx.routes.get(l);
-					}
-					ctx.routes.put(l, segment);
-				}
+				registerRouteDataObject(ctx, o);
 				return false;
 			}
 
@@ -309,30 +327,7 @@ public class BinaryRoutePlanner {
 		ctx.timeToLoad += (System.nanoTime() - now);
 	}
 
-	private void visitAllStartSegments(final RoutingContext ctx, RouteSegment start, PriorityQueue<RouteSegment> graphDirectSegments,
-			TLongObjectHashMap<RouteSegment> visitedSegments, int startX, int startY) throws IOException {
-		// mark as visited code seems to be duplicated
-		long nt = (start.road.getId() << 8l) + start.segmentStart;
-		visitedSegments.put(nt, start);
-		graphDirectSegments.add(start);
-		
-		loadRoutes(ctx, startX , startY,null);
-		long ls = (((long) startX) << 31) + (long) startY;
-		RouteSegment startNbs = ctx.routes.get(ls);
-		while(startNbs != null) { // startNbs.road.id >> 1, start.road.id >> 1
-			if(startNbs.road.getId() != start.road.getId()){
-				startNbs.parentRoute = start;
-				startNbs.parentSegmentEnd = start.segmentStart;
-				startNbs.distanceToEnd = start.distanceToEnd;
-
-				// duplicated to be sure start is added
-				nt = (startNbs.road.getId() << 8l) + startNbs.segmentStart;
-				visitedSegments.put(nt, startNbs);
-				graphDirectSegments.add(startNbs);
-			}
-			startNbs = startNbs.next;
-		}
-	}
+	
 
 
 	private boolean processRouteSegment(final RoutingContext ctx, RouteSegment end, boolean reverseWaySearch,
@@ -542,7 +537,6 @@ public class BinaryRoutePlanner {
 			nextIterator = ctx.segmentsToVisitPrescripted.iterator();
 		}
 		// Calculate possible ways to put into priority queue
-		// for debug next.road.getId() >> 1 == 33911427 && road.getId() >> 1 == 33911442
 		RouteSegment next = inputNext;
 		boolean hasNext = nextIterator == null || nextIterator.hasNext();
 		while (hasNext) {
@@ -565,7 +559,6 @@ public class BinaryRoutePlanner {
 			// Calculate complete distance from start
 			double gDistFromStart = distFromStart + ctx.getRouter().calculateTurnTime(segment, next, segmentEnd);
 			
-			/* next.road.getId() >> 1 (3) != road.getId() >> 1 (3) - used that line for debug with osm map */
 			// road.id could be equal on roundabout, but we should accept them
 			boolean alreadyVisited = visitedSegments.contains(nts);
 			if (!alreadyVisited) {
@@ -666,16 +659,10 @@ public class BinaryRoutePlanner {
 		while(segment != null){
 			RouteSegmentResult res = new RouteSegmentResult();
 			res.object = segment.road;
-			res.endPointIndex = segment.segmentStart;
-			res.startPointIndex = parentSegmentStart;
+			res.startPointIndex = segment.segmentStart;
+			res.endPointIndex = parentSegmentStart;
 			parentSegmentStart = segment.parentSegmentEnd;
 			segment = segment.parentRoute;
-			// reverse start and end point for start if needed
-			// rely that point.segmentStart <= point.segmentEnd for end, start
-			if(segment == null && res.startPointIndex >= res.endPointIndex && 
-					res.endPointIndex < res.object.getPointsLength() - 1){
-				res.endPointIndex ++;
-			}
 			// do not add segments consists from 1 point
 			if(res.startPointIndex != res.endPointIndex) {
 				result.add(res);
@@ -690,16 +677,11 @@ public class BinaryRoutePlanner {
 		while(segment != null){
 			RouteSegmentResult res = new RouteSegmentResult();
 			res.object = segment.road;
-			res.endPointIndex = parentSegmentEnd;
-			res.startPointIndex = segment.segmentStart;
+			res.startPointIndex = parentSegmentEnd;
+			res.endPointIndex = segment.segmentStart;
 			parentSegmentEnd = segment.parentSegmentEnd;
 			
 			segment = segment.parentRoute;
-			// reverse start and end point for start if needed
-			// rely that point.segmentStart <= point.segmentEnd for end, start
-			if(segment == null && res.startPointIndex < res.endPointIndex){
-				res.startPointIndex ++;
-			}
 			// do not add segments consists from 1 point
 			if(res.startPointIndex != res.endPointIndex) {
 				result.add(res);
@@ -707,7 +689,7 @@ public class BinaryRoutePlanner {
 			res.startPoint = convertPoint(res.object, res.startPointIndex);
 			res.endPoint = convertPoint(res.object, res.endPointIndex);
 		}
-		Collections.reverse(result);
+//		Collections.reverse(result);
 		
 		
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
@@ -720,14 +702,13 @@ public class BinaryRoutePlanner {
 					"    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\">", 
 					startLat+"", startLon+"", endLat+"", endLon+""));
 			for (RouteSegmentResult res : result) {
-				String name = "Uknown";//res.object.getName();
+				String name = "Unknown";//res.object.getName();
 				String ref = "";//res.object.getNameByType(res.object.getMapIndex().refEncodingType);
 				if(ref != null) {
 					name += " " + ref;
 				}
-				// (res.object.getId() >> 1)
 				System.out.println(MessageFormat.format("\t<segment id=\"{0}\" start=\"{1}\" end=\"{2}\" name=\"{3}\"/>", 
-						(res.object.getId() >> 1)+"", res.startPointIndex, res.endPointIndex, name));
+						(res.object.getId())+"", res.startPointIndex, res.endPointIndex, name));
 			}
 			System.out.println("</test>");
 		}

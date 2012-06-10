@@ -158,6 +158,14 @@ public class DataExtractionSettings {
 		preferences.put("cityAdminLevel", s);
 	}
 	
+	public int getRouteDirection(){
+		return preferences.getInt("routeDirection", 0);
+	}
+	
+	public void setRouteDirection(int s){
+		preferences.putInt("routeDirection", s);
+	}
+	
 	public String getNativeLibFile(){
 		String fl = preferences.get("nativeLibFile", null);
 		if(fl != null) {

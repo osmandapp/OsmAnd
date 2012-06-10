@@ -19,7 +19,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import net.osmand.data.preparation.MapZooms;
 
 public class OsmExtractionPreferencesDialog extends JDialog {
 	
@@ -31,6 +30,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 	private JTextField streetSuffixes;
 	private JTextField streetDefaultSuffixes;
 	private JTextField mapZooms;
+	private JTextField directionPlanRoute;
 	private JTextField lineSmoothness;
 	private JTextField cityAdminLevel;
 	private JTextField osrmServerAddress;
@@ -41,6 +41,8 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 
 	private JCheckBox useInternet;
 	private JCheckBox animateRouting;
+
+	
 
 	
 //	private JCheckBox supressWarning;
@@ -138,6 +140,27 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		constr.gridx = 1;
 		constr.gridy = gridY++;
 		l.setConstraints(nativeFilesDirectory, constr);
+		
+		label = new JLabel("Direction to plan route (0 - both, 1 - forward, -1 - backward) : ");
+        panel.add(label);
+        constr = new GridBagConstraints();
+        constr.ipadx = 5;
+        constr.gridx = 0;
+        constr.gridy = gridY;
+        constr.anchor = GridBagConstraints.WEST;
+        l.setConstraints(label, constr);
+        
+        directionPlanRoute = new JTextField();
+        
+        directionPlanRoute.setText(DataExtractionSettings.getSettings().getRouteDirection() +"");
+        panel.add(directionPlanRoute);
+        constr = new GridBagConstraints();
+        constr.weightx = 1;
+        constr.fill = GridBagConstraints.HORIZONTAL;
+        constr.ipadx = 5;
+        constr.gridx = 1;
+        constr.gridy = gridY++;
+        l.setConstraints(directionPlanRoute, constr);
 		
 		
 		label = new JLabel("City admin level : ");
@@ -394,6 +417,14 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		}
 		if(!settings.getCityAdminLevel().equals(cityAdminLevel.getText())){
             settings.setCityAdminLevel(cityAdminLevel.getText());
+        }
+		int directionRoute = 0;
+		try {
+			directionRoute = Integer.parseInt(directionPlanRoute.getText());
+		} catch (Exception e) {
+		}
+		if(directionRoute != settings.getRouteDirection()){
+			settings.setRouteDirection(directionRoute);
         }
 		if(!settings.getOsrmServerAddress().equals(osrmServerAddress.getText())){
             settings.setOsrmServerAddress(osrmServerAddress.getText());
