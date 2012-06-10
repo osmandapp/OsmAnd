@@ -121,7 +121,6 @@ public class BinaryRoutePlanner {
 						if(ro.pointTypes.size() > j) {
 							ro.pointTypes.add(j, null);
 						}
-						road.segmentEnd = j;
 						registerRouteDataObject(ctx, ro);
 						sdist = currentsDist;
 					}
@@ -175,12 +174,12 @@ public class BinaryRoutePlanner {
 		TLongObjectHashMap<RouteSegment> visitedDirectSegments = new TLongObjectHashMap<RouteSegment>();
 		TLongObjectHashMap<RouteSegment> visitedOppositeSegments = new TLongObjectHashMap<RouteSegment>();
 		
-		int targetEndX = end.road.getPoint31XTile(end.segmentStart);
-		int targetEndY = end.road.getPoint31YTile(end.segmentStart);
-		int startX = start.road.getPoint31XTile(start.segmentStart);
-		int startY = start.road.getPoint31YTile(start.segmentStart);
+		ctx.targetEndX = end.road.getPoint31XTile(end.segmentStart);
+		ctx.targetEndY = end.road.getPoint31YTile(end.segmentStart);
+		ctx.startX = start.road.getPoint31XTile(start.segmentStart);
+		ctx.startY = start.road.getPoint31YTile(start.segmentStart);
 		// for start : f(start) = g(start) + h(start) = 0 + h(start) = h(start)
-		start.distanceToEnd = h(ctx, targetEndX, targetEndY, startX, startY);
+		start.distanceToEnd = h(ctx, ctx.targetEndX, ctx.targetEndY, ctx.startX, ctx.startY);
 		end.distanceToEnd = start.distanceToEnd;
 		
 		graphDirectSegments.add(start);
@@ -206,10 +205,10 @@ public class BinaryRoutePlanner {
 			}
 			boolean routeFound = false;
 			if (!inverse) {
-				routeFound = processRouteSegment(ctx, end, false, graphDirectSegments, visitedDirectSegments, targetEndX, targetEndY,
+				routeFound = processRouteSegment(ctx, false, graphDirectSegments, visitedDirectSegments, ctx.targetEndX, ctx.targetEndY,
 						segment, visitedOppositeSegments);
 			} else {
-				routeFound = processRouteSegment(ctx, start, true, graphReverseSegments, visitedOppositeSegments, startX, startY, segment,
+				routeFound = processRouteSegment(ctx, true, graphReverseSegments, visitedOppositeSegments, ctx.startX, ctx.startY, segment,
 						visitedDirectSegments);
 			}
 			if (graphReverseSegments.isEmpty() || graphDirectSegments.isEmpty() || routeFound) {
@@ -238,7 +237,7 @@ public class BinaryRoutePlanner {
 		
 		
 		// 4. Route is found : collect all segments and prepare result
-		return prepareResult(ctx, start, end, startNanoTime, ctx.finalDirectRoute, ctx.finalReverseRoute);
+		return prepareResult(ctx, startNanoTime);
 		
 	}
 
@@ -268,7 +267,6 @@ public class BinaryRoutePlanner {
 		for (int j = 0; j < o.pointsX.size(); j++) {
 			long l = (((long) o.pointsX.getQuick(j)) << 31) + (long) o.pointsY.getQuick(j);
 			RouteSegment segment = new RouteSegment(o , j);
-			segment.segmentEnd = j;
 			RouteSegment prev = ctx.routes.get(l);
 			boolean i = true;
 			if (prev != null) {
@@ -339,7 +337,7 @@ public class BinaryRoutePlanner {
 	
 
 
-	private boolean processRouteSegment(final RoutingContext ctx, RouteSegment end, boolean reverseWaySearch,
+	private boolean processRouteSegment(final RoutingContext ctx, boolean reverseWaySearch,
 			PriorityQueue<RouteSegment> graphSegments, TLongObjectHashMap<RouteSegment> visitedSegments, int targetEndX, int targetEndY,
             RouteSegment segment, TLongObjectHashMap<RouteSegment> oppositeSegments) throws IOException {
 		// Always start from segmentStart (!), not from segmentEnd
@@ -356,12 +354,6 @@ public class BinaryRoutePlanner {
 		long nt = (road.getId() << 8l) + middle;
 		// avoid empty segments to connect but mark the point as visited
 		visitedSegments.put(nt, null);
-		if (oppositeSegments.contains(nt) && oppositeSegments.get(nt) != null) {
-			segment.segmentEnd = middle;
-			RouteSegment opposite = oppositeSegments.get(nt);
-			opposite.segmentEnd = middle;
-			return true;
-		}
 
 		int oneway = ctx.getRouter().isOneWay(road);
 		boolean minusAllowed;
@@ -404,13 +396,6 @@ public class BinaryRoutePlanner {
 
 			// if we found end point break cycle
 			long nts = (road.getId() << 8l) + segmentEnd;
-			if (oppositeSegments.contains(nts) && oppositeSegments.get(nt) != null) {
-				segment.segmentEnd = segmentEnd;
-				RouteSegment opposite = oppositeSegments.get(nts);
-				opposite.segmentEnd = segmentEnd;
-				ctx.finalDirectRoute = segment;
-				ctx.finalReverseRoute = opposite;
-			}
 			visitedSegments.put(nts, segment);
 
 			// 2. calculate point and try to load neighbor ways if they are not loaded
@@ -458,7 +443,8 @@ public class BinaryRoutePlanner {
 		}
 		return false;
 	}
-	
+
+
 	private boolean proccessRestrictions(RoutingContext ctx, RouteDataObject road, RouteSegment inputNext, boolean reverseWay) {
 		ctx.segmentsToVisitPrescripted.clear();
 		ctx.segmentsToVisitNotForbidden.clear();
@@ -555,16 +541,21 @@ public class BinaryRoutePlanner {
 			long nts = (next.road.getId() << 8l) + next.segmentStart;
 			
 			// 1. Check if opposite segment found so we can stop calculations
-			boolean oppositeConnectionFound = oppositeSegments.containsKey(nts) && oppositeSegments.get(nts) != null;
-			if (oppositeConnectionFound) {
-				RouteSegment oppSegment = oppositeSegments.get(nts);
-				oppSegment.segmentEnd = next.segmentStart;
-				segment.segmentEnd = segmentEnd;
-				ctx.finalDirectRoute = segment;
-				ctx.finalReverseRoute = oppSegment;
+			if (oppositeSegments.contains(nts) && oppositeSegments.get(nts) != null) {
+				RouteSegment opposite = oppositeSegments.get(nts);
+				if(reverseWay){
+					ctx.finalReverseEndSegment = segmentEnd;
+					ctx.finalReverseRoute = segment;
+					ctx.finalDirectEndSegment = next.segmentStart;
+					ctx.finalDirectRoute = opposite;
+				} else {
+					ctx.finalDirectEndSegment = segmentEnd;
+					ctx.finalDirectRoute = segment;
+					ctx.finalReverseEndSegment = next.segmentStart;
+					ctx.finalReverseRoute = opposite;
+				}
 				return true;
 			}
-			
 			// Calculate complete distance from start
 			double gDistFromStart = distFromStart + ctx.getRouter().calculateTurnTime(segment, next, segmentEnd);
 			
@@ -631,9 +622,6 @@ public class BinaryRoutePlanner {
 		double distanceFromStart = 0;
 		double distanceToEnd = 0;
 		
-		// used only to round up route (TODO remove?)
-		int segmentEnd = 0;
-		
 		public RouteSegment(RouteDataObject road, int segmentStart) {
 			this.road = road;
 			this.segmentStart = segmentStart;
@@ -659,12 +647,11 @@ public class BinaryRoutePlanner {
 	/**
 	 * Helper method to prepare final result 
 	 */
-	private List<RouteSegmentResult> prepareResult(RoutingContext ctx, RouteSegment start, RouteSegment end, long startNanoTime,
-			RouteSegment finalDirectRoute, RouteSegment finalReverseRoute) {
+	private List<RouteSegmentResult> prepareResult(RoutingContext ctx, long startNanoTime) {
 		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
 		
-		RouteSegment segment = finalReverseRoute;
-		int parentSegmentStart = segment == null ? 0 : segment.segmentEnd; 
+		RouteSegment segment = ctx.finalReverseRoute;
+		int parentSegmentStart = ctx.finalReverseEndSegment; 
 		while(segment != null){
 			RouteSegmentResult res = new RouteSegmentResult();
 			res.object = segment.road;
@@ -681,8 +668,8 @@ public class BinaryRoutePlanner {
 		}
 		Collections.reverse(result);
 		
-		segment = finalDirectRoute;
-		int parentSegmentEnd = segment == null ? 0 : segment.segmentEnd;
+		segment = ctx.finalDirectRoute;
+		int parentSegmentEnd = ctx.finalDirectEndSegment;
 		while(segment != null){
 			RouteSegmentResult res = new RouteSegmentResult();
 			res.object = segment.road;
@@ -698,15 +685,14 @@ public class BinaryRoutePlanner {
 			res.startPoint = convertPoint(res.object, res.startPointIndex);
 			res.endPoint = convertPoint(res.object, res.endPointIndex);
 		}
-//		Collections.reverse(result);
 		
 		
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
 			System.out.println("ROUTE : ");
-			double startLat = MapUtils.get31LatitudeY(start.road.getPoint31YTile(start.segmentEnd));
-			double startLon = MapUtils.get31LongitudeX(start.road.getPoint31XTile(start.segmentEnd));
-			double endLat = MapUtils.get31LatitudeY(end.road.getPoint31YTile(end.segmentStart));
-			double endLon = MapUtils.get31LongitudeX(end.road.getPoint31XTile(end.segmentEnd));
+			double startLat = MapUtils.get31LatitudeY(ctx.startY);
+			double startLon = MapUtils.get31LongitudeX(ctx.startX);
+			double endLat = MapUtils.get31LatitudeY(ctx.targetEndY);
+			double endLon = MapUtils.get31LongitudeX(ctx.targetEndX);
 			System.out.println(MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"\" \n" +
 					"    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\">", 
 					startLat+"", startLon+"", endLat+"", endLon+""));

@@ -38,10 +38,18 @@ public class RoutingContext {
 	
 	// 4. Warm object caches
 	TLongSet nonRestrictedIds = new TLongHashSet();
-	RouteSegment finalDirectRoute = null;
-	RouteSegment finalReverseRoute = null;
 	ArrayList<RouteSegment> segmentsToVisitPrescripted = new ArrayList<BinaryRoutePlanner.RouteSegment>(5);
 	ArrayList<RouteSegment> segmentsToVisitNotForbidden = new ArrayList<BinaryRoutePlanner.RouteSegment>(5);
+	
+	public int targetEndX;
+	public int targetEndY;
+	public int startX;
+	public int startY;
+	
+	RouteSegment finalDirectRoute = null;
+	int finalDirectEndSegment = 0;
+	RouteSegment finalReverseRoute = null;
+	int finalReverseEndSegment = 0;
 
 	
 
@@ -51,6 +59,7 @@ public class RoutingContext {
 	int visitedSegments = 0;
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
+	
 	
 
 	
