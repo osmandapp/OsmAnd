@@ -25,6 +25,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.MapRoot;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.data.IndexConstants;
 import net.osmand.map.TileSourceManager;
@@ -372,6 +373,13 @@ public class LocalIndexHelper {
 				} else if(part instanceof PoiRegion){
 					PoiRegion mi = ((PoiRegion) part);
 					builder.append(app.getString(R.string.local_index_poi_data)).append(": ").
+						append(mi.getName()).append("\n");
+					String box = formatLatLonBox(mi.getLeftLongitude(), mi.getRightLongitude(), 
+							mi.getTopLatitude(), mi.getBottomLatitude());
+					builder.append(box).append("\n");
+				} else if(part instanceof RouteRegion){
+					RouteRegion mi = ((RouteRegion) part);
+					builder.append(app.getString(R.string.local_index_routing_data)).append(": ").
 						append(mi.getName()).append("\n");
 					String box = formatLatLonBox(mi.getLeftLongitude(), mi.getRightLongitude(), 
 							mi.getTopLatitude(), mi.getBottomLatitude());

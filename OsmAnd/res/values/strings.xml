@@ -9,6 +9,8 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    
+    <string name="local_index_routing_data">Routing data</string>
     <string name="offline_navigation_not_available">Osmand offline navigation is temporarily not available.</string>
     <string name="left_side_navigation">Left-Hand Driving</string>
     <string name="left_side_navigation_descr">Select for countries with left-hand traffic</string>
