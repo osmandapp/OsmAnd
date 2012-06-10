@@ -710,7 +710,7 @@ public class MapActivityActions implements DialogProvider {
 						AccessibleToast.makeText(mapActivity, R.string.unknown_from_location, Toast.LENGTH_LONG).show();
 					}
 				} else if (standardId == R.string.context_menu_item_search) {
-					Intent intent = new Intent(mapActivity, SearchActivity.class);
+					Intent intent = new Intent(mapActivity, OsmandIntents.getSearchActivity());
 					intent.putExtra(SearchActivity.SEARCH_LAT, latitude);
 					intent.putExtra(SearchActivity.SEARCH_LON, longitude);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

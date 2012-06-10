@@ -1195,6 +1195,15 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		} else if (itemId == R.id.map_show_gps_status) {
 			startGpsStatusIntent();
 			return true;
+		} else if (itemId == R.id.map_specify_point) {
+			Intent newIntent = new Intent(this, OsmandIntents.getSearchActivity());
+			// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			LatLon loc = getMapLocation();
+			newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
+			newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
+			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(newIntent);
+			return true;
 		} else if (itemId == R.id.map_get_directions) {
 			if (routingHelper.isRouteCalculated()) {
 				mapActions.aboutRoute();
