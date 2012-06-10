@@ -112,12 +112,17 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 	}
 	
 	@Override
+	public void loadEntityRelation(Relation e) throws SQLException {
+		loadEntityData(e);
+	}
+	
+	@Override
+	public void loadEntityWay(Way e) throws SQLException {
+		loadEntityData(e);
+	}
+	
 	public void loadEntityData(Entity e) throws SQLException {
 		if (e.isDataLoaded()) { //data was already loaded, nothing to do
-			return;
-		}
-		if (e instanceof Node || (e instanceof Way && !((Way) e).getNodes().isEmpty())) {
-			// do not load tags for nodes inside way
 			return;
 		}
 		if(dialect == DBDialect.NOSQL){

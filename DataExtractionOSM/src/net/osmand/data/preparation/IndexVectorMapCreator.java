@@ -88,7 +88,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 	private void indexMultiPolygon(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		if (e instanceof Relation && "multipolygon".equals(e.getTag(OSMTagKey.TYPE))) { //$NON-NLS-1$
-			ctx.loadEntityData(e);
+			ctx.loadEntityRelation((Relation) e);
 			Map<Entity, String> entities = ((Relation) e).getMemberEntities();
 
 			boolean outerFound = false;
@@ -510,7 +510,6 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	public void iterateMainEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		if (e instanceof Way || e instanceof Node) {
 			// manipulate what kind of way to load
-			ctx.loadEntityData(e);
 			for (int level = 0; level < mapZooms.size(); level++) {
 				boolean area = renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), typeUse, addtypeUse, namesUse,
 						tempNameUse);

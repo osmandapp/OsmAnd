@@ -25,7 +25,7 @@ import com.google.protobuf.WireFormat;
 
 public class BinaryMapRouteReaderAdapter {
 	protected static final Log LOG = LogUtil.getLog(BinaryMapRouteReaderAdapter.class);
-	private static final int SHIFT_COORDINATES = 5;
+	private static final int SHIFT_COORDINATES = 4;
 	
 	public static class RouteTypeRule {
 		private final static int ACCESS = 1;
@@ -377,10 +377,10 @@ public class BinaryMapRouteReaderAdapter {
 					long r = restrictions.get(k);
 					int from = (int) (r >> (RESTRICTION_SHIFT+RESTRICTION_SHIFT));
 					int to = (int) ((r >> RESTRICTION_SHIFT) & RESTRICTION_MASK);
-					int type = (int) (r & RESTRICTION_SHIFT);
-					RouteDataObject i = routeTree.dataObjects.get(from);
-					long val = (idTables.get(to) << 3) | ((long)type);
-					i.restrictions.add(val);
+					int type = (int) (r & RESTRICTION_MASK);
+					long valto = (idTables.get(to) << 3) | ((long)type);
+					RouteDataObject fromr = routeTree.dataObjects.get(from);
+					fromr.restrictions.add(valto);
 				}
 				for (RouteDataObject o : routeTree.dataObjects) {
 					if (o != null) {

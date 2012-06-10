@@ -209,6 +209,15 @@ public class DataExtractionSettings {
 		preferences.putBoolean("supress_duplicated_id", b);
 	}
 	
+	public boolean isAnimateRouting(){
+		return preferences.getBoolean("animate_routing", true);
+	}
+	
+	public void setAnimateRouting(boolean b){
+		preferences.putBoolean("animate_routing", b);
+	}
+	
+	
 	
 	String[] SUFFIXES = new String[] {"av.", "avenue", "просп.", "пер.", "пр.","заул.", "проспект", "переул.", "бул.", "бульвар", "тракт"};
 	String[] DEFAUTL_SUFFIXES = new String[] {"str.", "street", "улица", "ул."};

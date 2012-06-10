@@ -1,6 +1,6 @@
 package net.osmand.swing;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public interface MapPanelLayer {
 	
@@ -10,6 +10,6 @@ public interface MapPanelLayer {
 	
 	public void prepareToDraw();
 	
-	public void paintLayer(Graphics g);
+	public void paintLayer(Graphics2D g);
 	
 }

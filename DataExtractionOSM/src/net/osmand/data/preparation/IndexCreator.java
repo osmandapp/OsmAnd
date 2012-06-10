@@ -386,7 +386,6 @@ public class IndexCreator {
 				accessor.iterateOverEntities(progress, EntityType.NODE, new OsmDbVisitor() {
 					@Override
 					public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
-						ctx.loadEntityData(e);
 						processor.processEntity(e);
 					}
 				});
@@ -395,7 +394,6 @@ public class IndexCreator {
 				accessor.iterateOverEntities(progress, EntityType.WAY, new OsmDbVisitor() {
 					@Override
 					public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
-						ctx.loadEntityData(e);
 						processor.processEntity(e);
 					}
 				});
@@ -748,7 +746,7 @@ public class IndexCreator {
 		MapRenderingTypes rt = MapRenderingTypes.getDefault();
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
 		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
-		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/RU-SPE.osm.pbf"),
+		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/RU-SPE.osm.bz2"),
 				new ConsoleProgressImplementation(1), null, zooms, rt, log);
 		
 		

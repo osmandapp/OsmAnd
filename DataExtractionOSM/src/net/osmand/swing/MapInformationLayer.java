@@ -3,6 +3,7 @@ package net.osmand.swing;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.MessageFormat;
@@ -119,7 +120,7 @@ public class MapInformationLayer implements MapPanelLayer {
 	}
 
 	@Override
-	public void paintLayer(Graphics g) {
+	public void paintLayer(Graphics2D g) {
 		g.setColor(Color.black);
 		g.fillOval((int)map.getCenterPointX() - 2,(int) map.getCenterPointY() - 2, 4, 4);
 		g.drawOval((int)map.getCenterPointX() - 2,(int) map.getCenterPointY() - 2, 4, 4);

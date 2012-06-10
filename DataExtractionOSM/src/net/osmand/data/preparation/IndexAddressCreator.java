@@ -284,7 +284,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			Boundary boundary = null;
 			if (e instanceof Relation) {
 				Relation aRelation = (Relation) e;
-				ctx.loadEntityData(aRelation);
+				ctx.loadEntityRelation(aRelation);
 				boundary = new Boundary(true); //is computed later
 				boundary.setName(aRelation.getTag(OSMTagKey.NAME));
 				boundary.setBoundaryId(aRelation.getId());
@@ -334,7 +334,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				// try to find appropriate city/street
 				City c = null;
 				// load with member ways with their nodes and tags !
-				ctx.loadEntityData(i);
+				ctx.loadEntityRelation(i);
 
 				Collection<Entity> members = i.getMembers("is_in"); //$NON-NLS-1$
 				Relation a3 = null;
@@ -344,16 +344,16 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 						a6 = i;
 					}
 					Entity in = members.iterator().next();
-					ctx.loadEntityData(in);
 					if (in instanceof Relation) {
+						ctx.loadEntityRelation((Relation) in);
 						// go one level up for house
 						if (house) {
 							a6 = (Relation) in;
 							members = ((Relation) in).getMembers("is_in"); //$NON-NLS-1$
 							if (!members.isEmpty()) {
 								in = members.iterator().next();
-								ctx.loadEntityData(in);
 								if (in instanceof Relation) {
+									ctx.loadEntityRelation((Relation) in);
 									a3 = (Relation) in;
 								}
 							}
@@ -698,7 +698,6 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		if (e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER) != null && e.getTag(OSMTagKey.ADDR_STREET) != null) {
 			boolean exist = streetDAO.findBuilding(e);
 			if (!exist) {
-				ctx.loadEntityData(e);
 				LatLon l = e.getLatLon();
 				Set<Long> idsOfStreet = getStreetInCity(e.getIsInNames(), e.getTag(OSMTagKey.ADDR_STREET), null, l);
 				if (!idsOfStreet.isEmpty()) {
@@ -738,7 +737,6 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 
 			// check that street way is not registered already
 			if (!exist) {
-				ctx.loadEntityData(e);
 				LatLon l = e.getLatLon();
 				Set<Long> idsOfStreet = getStreetInCity(e.getIsInNames(), e.getTag(OSMTagKey.NAME), e.getTag(OSMTagKey.NAME_EN), l);
 				if (!idsOfStreet.isEmpty()) {
@@ -748,7 +746,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		}
 		if (e instanceof Relation) {
 			if (e.getTag(OSMTagKey.POSTAL_CODE) != null) {
-				ctx.loadEntityData(e);
+				ctx.loadEntityRelation((Relation) e);
 				postalCodeRelations.add((Relation) e);
 			}
 		}

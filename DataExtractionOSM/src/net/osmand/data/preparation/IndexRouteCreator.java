@@ -79,9 +79,11 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 	public void iterateMainEntity(Entity es, OsmDbAccessorContext ctx) throws SQLException {
 		if (es instanceof Way) {
 			Way e = (Way) es;
-			ctx.loadEntityData(e);
-			boolean encoded = routeTypes.encodeEntity(e, outTypes, pointTypes, names);
+			boolean encoded = routeTypes.encodeEntity(e, outTypes, names);
 			if (encoded) {
+				// Load point with  tags!
+				ctx.loadEntityWay(e);
+				routeTypes.encodePointTypes(e, pointTypes);
 				boolean init = false;
 				int minX = Integer.MAX_VALUE;
 				int maxX = 0;
@@ -268,7 +270,7 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 					type = MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON;
 				}
 				if (type != -1) {
-					ctx.loadEntityData(e);
+					ctx.loadEntityRelation((Relation) e);
 					Collection<EntityId> fromL = ((Relation) e).getMemberIds("from"); //$NON-NLS-1$
 					Collection<EntityId> toL = ((Relation) e).getMemberIds("to"); //$NON-NLS-1$
 					if (!fromL.isEmpty() && !toL.isEmpty()) {

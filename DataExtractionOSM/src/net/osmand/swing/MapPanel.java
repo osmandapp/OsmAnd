@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -407,7 +408,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 			}
 		}
 		for(MapPanelLayer l : layers){
-			l.paintLayer(g);
+			l.paintLayer((Graphics2D) g);
 		}
 		
 		if(selectionArea.isVisible()){

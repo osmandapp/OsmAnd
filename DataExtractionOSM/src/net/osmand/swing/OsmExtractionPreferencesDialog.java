@@ -40,6 +40,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 	private JTextField renderingStyleFile;
 
 	private JCheckBox useInternet;
+	private JCheckBox animateRouting;
 
 	
 //	private JCheckBox supressWarning;
@@ -86,6 +87,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 	
 	private void createGeneralSection(JPanel root) {
 		JPanel panel = new JPanel();
+		int gridY = 0;
 //		panel.setLayout(new GridLayout(3, 1, 5, 5));
 		GridBagLayout l = new GridBagLayout();
 		panel.setLayout(l);
@@ -99,17 +101,29 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		GridBagConstraints constr = new GridBagConstraints();
 		constr.ipadx = 5;
 		constr.gridx = 0;
-		constr.gridy = 0;
+		constr.gridy = gridY++;
 		constr.gridwidth = 2;
 		constr.anchor = GridBagConstraints.WEST;
 		l.setConstraints(useInternet, constr);
+		
+		animateRouting = new JCheckBox();
+		animateRouting.setText("Animate routing"); //$NON-NLS-1$
+		animateRouting.setSelected(DataExtractionSettings.getSettings().isAnimateRouting());
+		panel.add(animateRouting);
+		constr = new GridBagConstraints();
+		constr.ipadx = 5;
+		constr.gridx = 0;
+		constr.gridy = gridY++;
+		constr.gridwidth = 2;
+		constr.anchor = GridBagConstraints.WEST;
+		l.setConstraints(animateRouting, constr);
 		
 		JLabel label = new JLabel("Directory with obf binary files (routing, rendering): ");
 		panel.add(label);
 		constr = new GridBagConstraints();
 		constr.ipadx = 5;
 		constr.gridx = 0;
-		constr.gridy = 1;
+		constr.gridy = gridY;
 		constr.anchor = GridBagConstraints.WEST;
 		l.setConstraints(label, constr);
 		
@@ -122,7 +136,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		constr.fill = GridBagConstraints.HORIZONTAL;
 		constr.ipadx = 5;
 		constr.gridx = 1;
-		constr.gridy = 1;
+		constr.gridy = gridY++;
 		l.setConstraints(nativeFilesDirectory, constr);
 		
 		
@@ -131,7 +145,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
         constr = new GridBagConstraints();
         constr.ipadx = 5;
         constr.gridx = 0;
-        constr.gridy = 2;
+        constr.gridy = gridY;
         constr.anchor = GridBagConstraints.WEST;
         l.setConstraints(label, constr);
         
@@ -144,7 +158,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
         constr.fill = GridBagConstraints.HORIZONTAL;
         constr.ipadx = 5;
         constr.gridx = 1;
-        constr.gridy = 2;
+        constr.gridy = gridY++;
         l.setConstraints(cityAdminLevel, constr);
         
         label = new JLabel(Messages.getString("OsmExtractionPreferencesDialog.OSRM.SERVER.ADDRESS"));
@@ -152,7 +166,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
         constr = new GridBagConstraints();
         constr.ipadx = 5;
         constr.gridx = 0;
-        constr.gridy = 3;
+        constr.gridy = gridY;
         constr.anchor = GridBagConstraints.WEST;
         l.setConstraints(label, constr);
         
@@ -165,7 +179,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
         constr.fill = GridBagConstraints.HORIZONTAL;
         constr.ipadx = 5;
         constr.gridx = 1;
-        constr.gridy = 3;
+        constr.gridy = gridY++;
         l.setConstraints(osrmServerAddress, constr);
         
         label = new JLabel("Rendering style file : ");
@@ -173,7 +187,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
         constr = new GridBagConstraints();
         constr.ipadx = 5;
         constr.gridx = 0;
-        constr.gridy = 4;
+        constr.gridy = gridY;
         constr.anchor = GridBagConstraints.WEST;
         l.setConstraints(label, constr);
         
@@ -185,7 +199,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
         constr.fill = GridBagConstraints.HORIZONTAL;
         constr.ipadx = 5;
         constr.gridx = 1;
-        constr.gridy = 4;
+        constr.gridy = gridY++;
         l.setConstraints(renderingStyleFile, constr);
         
         label = new JLabel("Native lib file (osmand.lib): ");
@@ -193,7 +207,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
         constr = new GridBagConstraints();
         constr.ipadx = 5;
         constr.gridx = 0;
-        constr.gridy = 5;
+        constr.gridy = gridY;
         constr.anchor = GridBagConstraints.WEST;
         l.setConstraints(label, constr);
         
@@ -205,7 +219,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
         constr.fill = GridBagConstraints.HORIZONTAL;
         constr.ipadx = 5;
         constr.gridx = 1;
-        constr.gridy = 5;
+        constr.gridy = gridY++;
         l.setConstraints(nativeLibFile, constr);
 		
 //		supressWarning = new JCheckBox();
@@ -268,7 +282,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		constr.gridy = 1;
 		l.setConstraints(streetDefaultSuffixes, constr);
 		
-		label = new JLabel("Map zooms (specify zoom levels in binary map) example - " + MapZooms.MAP_ZOOMS_DEFAULT); 
+		label = new JLabel("Map zooms (specify zoom levels in binary map) "); 
 		panel.add(label);
 		constr = new GridBagConstraints();
 		constr.ipadx = 5;
@@ -361,6 +375,9 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		}
 		if(settings.useInternetToLoadImages() != useInternet.isSelected()){
 			settings.setUseInterentToLoadImages(useInternet.isSelected());
+		}
+		if(settings.isAnimateRouting() != animateRouting.isSelected()){
+			settings.setAnimateRouting(animateRouting.isSelected());
 		}
 		if(!settings.getNativeLibFile().equals(nativeLibFile.getText())){
 			settings.setNativeLibFile(nativeLibFile.getText());

@@ -1,9 +1,11 @@
 package net.osmand.swing;
 
 import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.Component;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +20,7 @@ import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
@@ -30,6 +33,7 @@ import net.osmand.data.DataTileManager;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Way;
+import net.osmand.osm.OSMSettings.OSMTagKey;
 import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.CarRouter;
 import net.osmand.router.RouteSegmentResult;
@@ -52,14 +56,17 @@ import org.json.JSONTokener;
 
 public class MapRouterLayer implements MapPanelLayer {
 
-	private /*final */ static boolean ANIMATE_CALCULATING_ROUTE = true;
-	private /*final */ static int SIZE_OF_ROUTES_TO_ANIMATE = 10;
-	
-	
 	private MapPanel map;
 	private LatLon startRoute ;
 	private LatLon endRoute ;
 	private VehicleRouter routerMode = new CarRouter();
+	private boolean nextAvailable = true;
+	private boolean pause = true;
+	private boolean stop = false;
+	private int steps = 1;
+	private JButton nextTurn;
+	private JButton playPauseButton;
+	private JButton stopButton;
 	
 	
 	@Override
@@ -73,6 +80,49 @@ public class MapRouterLayer implements MapPanelLayer {
 		fillPopupMenuWithActions(map.getPopupMenu());
 		startRoute =  DataExtractionSettings.getSettings().getStartLocation();
 		endRoute =  DataExtractionSettings.getSettings().getEndLocation();
+		
+		nextTurn = new JButton(">>"); //$NON-NLS-1$
+		nextTurn.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nextAvailable = true;
+				synchronized (MapRouterLayer.this) {
+					MapRouterLayer.this.notify();
+				}
+			}
+		});
+		nextTurn.setVisible(false);
+		nextTurn.setAlignmentY(Component.TOP_ALIGNMENT);
+		map.add(nextTurn, 0);
+		playPauseButton = new JButton("Play"); //$NON-NLS-1$
+		playPauseButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				pause = !pause; 
+				playPauseButton.setText(pause ? "Play" : "Pause");
+				nextAvailable = true;
+				synchronized (MapRouterLayer.this) {
+					MapRouterLayer.this.notify();
+				}
+			}
+		});
+		playPauseButton.setVisible(false);
+		playPauseButton.setAlignmentY(Component.TOP_ALIGNMENT);
+		map.add(playPauseButton, 0);
+		stopButton = new JButton("Stop"); //$NON-NLS-1$
+		stopButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				stop = true;
+				nextAvailable = true;
+				synchronized (MapRouterLayer.this) {
+					MapRouterLayer.this.notify();
+				}
+			}
+		});
+		stopButton.setVisible(false);
+		stopButton.setAlignmentY(Component.TOP_ALIGNMENT);
+		map.add(stopButton);
 	}
 
 	public void fillPopupMenuWithActions(JPopupMenu menu) {
@@ -481,7 +531,15 @@ public class MapRouterLayer implements MapPanelLayer {
 				files.add(f);
 			}
 		}
-		
+		final boolean animateRoutingCalculation = DataExtractionSettings.getSettings().isAnimateRouting();
+		if(animateRoutingCalculation) {
+			nextTurn.setVisible(true);
+			playPauseButton.setVisible(true);
+			stopButton.setVisible(true);
+			pause = true;
+			playPauseButton.setText("Play");
+		}
+		stop = false;
 		if(files == null){
 			JOptionPane.showMessageDialog(OsmExtractionUI.MAIN_APP.getFrame(), "Please specify obf file in settings", "Obf file not found", 
 					JOptionPane.ERROR_MESSAGE);
@@ -521,30 +579,40 @@ public class MapRouterLayer implements MapPanelLayer {
 				ctx.setVisitor(new RouteSegmentVisitor() {
 					
 					private List<RouteSegment> cache = new ArrayList<RouteSegment>();
+					private List<RouteSegment> pollCache = new ArrayList<RouteSegment>();
 					
 					@Override
-					public void visitSegment(RouteSegment s) {
-						if(!ANIMATE_CALCULATING_ROUTE){
+					public void visitSegment(RouteSegment s, boolean poll) {
+						if(stop) {
+							throw new RuntimeException("Interrupted");
+						}
+						if (!animateRoutingCalculation) {
 							return;
 						}
+						if (!poll && pause) {
+							pollCache.add(s);
+							return;
+						}
+
 						cache.add(s);
-						if(cache.size() < SIZE_OF_ROUTES_TO_ANIMATE){
+						if (cache.size() < steps) {
 							return;
 						}
-						for (RouteSegment segment : cache) {
-							Way way = new Way(-1);
-							for (int i = 0; i < segment.getRoad().getPointsLength(); i++) {
-								net.osmand.osm.Node n = new net.osmand.osm.Node(MapUtils.get31LatitudeY(segment.getRoad()
-										.getPoint31YTile(i)), MapUtils.get31LongitudeX(segment.getRoad().getPoint31XTile(i)), -1);
-								way.addNode(n);
-							}
-							LatLon n = way.getLatLon();
-							points.registerObject(n.getLatitude(), n.getLongitude(), way);
+						if(pause) {
+							registerObjects(points, poll, pollCache);
+							pollCache.clear();
 						}
+						registerObjects(points, !poll, cache);
 						cache.clear();
+						redraw();
+						if (pause) {
+							waitNextPress();
+						}
+					}
+
+					private void redraw() {
 						try {
 							SwingUtilities.invokeAndWait(new Runnable() {
-
 								@Override
 								public void run() {
 									map.prepareImage();
@@ -555,15 +623,32 @@ public class MapRouterLayer implements MapPanelLayer {
 							e.printStackTrace();
 						}
 					}
+
+					private void registerObjects(final DataTileManager<Way> points, boolean white, 
+							List<RouteSegment> registerCache) {
+						for (RouteSegment segment : registerCache) {
+							Way way = new Way(-1);
+							way.putTag(OSMTagKey.NAME.getValue(), segment.getTestName());
+							if(white) {
+								way.putTag("color", "white");
+							}
+							for (int i = 0; i < segment.getRoad().getPointsLength(); i++) {
+								net.osmand.osm.Node n = new net.osmand.osm.Node(MapUtils.get31LatitudeY(segment.getRoad()
+										.getPoint31YTile(i)), MapUtils.get31LongitudeX(segment.getRoad().getPoint31XTile(i)), -1);
+								way.addNode(n);
+							}
+							LatLon n = way.getLatLon();
+							points.registerObject(n.getLatitude(), n.getLongitude(), way);
+						}
+					}
+
 				});
 				List<RouteSegmentResult> searchRoute = router.searchRoute(ctx, st, e);
-				if (ANIMATE_CALCULATING_ROUTE) {
-					try {
-						Thread.sleep(2000);
-					} catch (InterruptedException e1) {
-					}
+				if (pause) {
+					nextTurn.setText("FINISH");
+					waitNextPress();
+					nextTurn.setText(">>");
 				}
-
 				net.osmand.osm.Node prevWayNode = null;
 				for (RouteSegmentResult s : searchRoute) {
 					// double dist = MapUtils.getDistance(s.startPoint, s.endPoint);
@@ -597,10 +682,30 @@ public class MapRouterLayer implements MapPanelLayer {
 				}
 			} catch (IOException e) {
 				ExceptionHandler.handle(e);
+			} finally {
+				playPauseButton.setVisible(false);
+				nextTurn.setVisible(false);
+				stopButton.setVisible(false);
+				map.getPoints().clear();
 			}
 			System.out.println("Finding self routes " + res.size() + " " + (System.currentTimeMillis() - time) + " ms");
 		}
 		return res;
+	}
+	
+	private void waitNextPress() {
+		nextTurn.setVisible(true);
+		while (!nextAvailable) {
+			try {
+				synchronized (MapRouterLayer.this) {
+					MapRouterLayer.this.wait();
+				}
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		nextTurn.setVisible(false);
+		nextAvailable = false;
 	}
 	
 	@Override
@@ -609,7 +714,7 @@ public class MapRouterLayer implements MapPanelLayer {
 
 	
 	@Override
-	public void paintLayer(Graphics g) {
+	public void paintLayer(Graphics2D g) {
 		g.setColor(Color.green);
 		if(startRoute != null){
 			int x = map.getMapXForPoint(startRoute.getLongitude());

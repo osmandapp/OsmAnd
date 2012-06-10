@@ -1,9 +1,13 @@
 package net.osmand.router;
 
+import java.util.ArrayList;
+
 import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.TIntSet;
+import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TIntHashSet;
+import gnu.trove.set.hash.TLongHashSet;
 
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteDataObject;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
@@ -18,7 +22,6 @@ public class RoutingContext {
 	// 1. parameters of routing and different tweaks
 	private int heuristicCoefficient = DEFAULT_HEURISTIC_COEFFICIENT;
 	private int zoomToLoadTileWithRoads = ZOOM_TO_LOAD_TILES;
-	private boolean useStrategyOfIncreasingRoadPriorities = true;
 	// null - 2 ways, true - direct way, false - reverse way
 	private Boolean planRoadDirection = null;
 	private VehicleRouter router = new CarRouter();
@@ -30,6 +33,17 @@ public class RoutingContext {
 	// 2. Routing memory cache
 	TLongObjectMap<RouteSegment> routes = new TLongObjectHashMap<RouteSegment>();
 	TIntSet loadedTiles = new TIntHashSet();
+	// TODO delete this object ?
+	TLongObjectHashMap<RouteDataObject> idObjects = new TLongObjectHashMap<RouteDataObject>();
+	
+	// 4. Warm object caches
+	TLongSet nonRestrictedIds = new TLongHashSet();
+	RouteSegment finalDirectRoute = null;
+	RouteSegment finalReverseRoute = null;
+	ArrayList<RouteSegment> segmentsToVisitPrescripted = new ArrayList<BinaryRoutePlanner.RouteSegment>(5);
+	ArrayList<RouteSegment> segmentsToVisitNotForbidden = new ArrayList<BinaryRoutePlanner.RouteSegment>(5);
+
+	
 
 	// 3. debug information (package accessor)
 	long timeToLoad = 0;
@@ -37,8 +51,8 @@ public class RoutingContext {
 	int visitedSegments = 0;
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
-	// TODO delete this object ?
-	TLongObjectHashMap<RouteDataObject> idObjects = new TLongObjectHashMap<RouteDataObject>();
+	
+
 	
 	
 	public RouteSegmentVisitor getVisitor() {
@@ -59,10 +73,6 @@ public class RoutingContext {
 
 	public int getZoomToLoadTileWithRoads() {
 		return zoomToLoadTileWithRoads;
-	}
-	
-	public boolean isUseStrategyOfIncreasingRoadPriorities() {
-		return useStrategyOfIncreasingRoadPriorities && planRoadDirection == null;
 	}
 	
 	public void setUseDynamicRoadPrioritising(boolean useDynamicRoadPrioritising) {
@@ -99,14 +109,6 @@ public class RoutingContext {
 
 	public void setPlanRoadDirection(Boolean planRoadDirection) {
 		this.planRoadDirection = planRoadDirection;
-	}
-
-	public boolean useStrategyOfIncreasingRoadPriorities() {
-		return planRouteIn2Directions() && useStrategyOfIncreasingRoadPriorities;
-	}
-
-	public void setUseStrategyOfIncreasingRoadPriorities(boolean useStrategyOfIncreasingRoadPriorities) {
-		this.useStrategyOfIncreasingRoadPriorities = useStrategyOfIncreasingRoadPriorities;
 	}
 
 	public int roadPriorityComparator(double o1DistanceFromStart, double o1DistanceToEnd, double o2DistanceFromStart, double o2DistanceToEnd) {

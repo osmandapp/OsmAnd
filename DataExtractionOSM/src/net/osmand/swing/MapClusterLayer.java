@@ -3,6 +3,7 @@ package net.osmand.swing;
 import gnu.trove.set.hash.TLongHashSet;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -154,7 +155,7 @@ public class MapClusterLayer implements MapPanelLayer {
 			private List<RouteSegment> cache = new ArrayList<RouteSegment>();
 			
 			@Override
-			public void visitSegment(RouteSegment s) {
+			public void visitSegment(RouteSegment s, boolean poll) {
 				if(!ANIMATE_CLUSTERING){
 					return;
 				}
@@ -186,6 +187,7 @@ public class MapClusterLayer implements MapPanelLayer {
 					e.printStackTrace();
 				}
 			}
+
 		});
 		searchCluster(ctx, st, router, res, roads);
 		if (ANIMATE_CLUSTERING) {
@@ -223,7 +225,7 @@ public class MapClusterLayer implements MapPanelLayer {
 		nextSegment : while(!queue.isEmpty()){
 			RouteSegment segment = queue.poll();
 			RouteDataObject road = segment.getRoad();
-			ctx.getVisitor().visitSegment(segment);
+			ctx.getVisitor().visitSegment(segment, true);
 			if(visitedIds.contains(calculateId(segment, segment.getSegmentStart()))){
 				continue;
 			}
@@ -319,8 +321,7 @@ public class MapClusterLayer implements MapPanelLayer {
 	}
 
 	@Override
-	public void paintLayer(Graphics g) {
-		
+	public void paintLayer(Graphics2D g) {
 	}
 
 	

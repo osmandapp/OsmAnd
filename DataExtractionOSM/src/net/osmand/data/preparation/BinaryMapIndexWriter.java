@@ -78,6 +78,7 @@ public class BinaryMapIndexWriter {
 	private RandomAccessFile raf;
 	private CodedOutputStream codedOutStream;
 	protected static final int SHIFT_COORDINATES = BinaryMapIndexReader.SHIFT_COORDINATES;
+	private static final int ROUTE_SHIFT_COORDINATES = 4;
 	private static Log log = LogFactory.getLog(BinaryMapIndexWriter.class);
 
 	private static class Bounds {
@@ -465,15 +466,15 @@ public class BinaryMapIndexWriter {
 		ROUTE_TYPES_SIZE += CodedOutputStream.computeTagSize(RouteData.TYPES_FIELD_NUMBER)
 				+ CodedOutputStream.computeRawVarint32Size(mapDataBuf.size()) + mapDataBuf.size();
 		// coordinates and point types
-		int pcalcx = pleft >> SHIFT_COORDINATES;
-		int pcalcy = ptop >> SHIFT_COORDINATES;
+		int pcalcx = pleft >> ROUTE_SHIFT_COORDINATES;
+		int pcalcy = ptop >> ROUTE_SHIFT_COORDINATES;
 		mapDataBuf.clear();
 		typesDataBuf.clear();
 		for(int k=0; k<points.length; k++) {
 			ROUTE_COORDINATES_COUNT++;
 			
-			int tx = (points[k].x >> SHIFT_COORDINATES) - pcalcx;
-			int ty = (points[k].y >> SHIFT_COORDINATES) - pcalcy;
+			int tx = (points[k].x >> ROUTE_SHIFT_COORDINATES) - pcalcx;
+			int ty = (points[k].y >> ROUTE_SHIFT_COORDINATES) - pcalcy;
 			writeRawVarint32(mapDataBuf, CodedOutputStream.encodeZigZag32(tx));
 			writeRawVarint32(mapDataBuf, CodedOutputStream.encodeZigZag32(ty));
 			pcalcx = pcalcx + tx ;
