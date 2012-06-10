@@ -273,9 +273,15 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		
 		//getResources().getAssets().getLocales();
 		entrieValues = new String[] { "",
-				"en", "cs", "de", "es", "fr", "hu", "it", "jp", "nl", "pl", "pt", "ru", "sk", "vi" };
+				"en", "cs",  "nl", "fr","ka","de",
+				"hu", "it", "jp", "ko", "lv","mr",
+				"no", "pl", "pt", "ro","ru", "sk", 
+				"es","vi" };
 		entries = new String[] { getString(R.string.system_locale), 
-				"English", "Czech", "German", "Spanish", "French", "Hungarian", "Italian", "Japanese", "Dutch", "Polish", "Portuguese", "Russian", "Slovak", "Vietnamese" };;
+				"English", "Czech",  "Dutch","French","Georgian","German", 
+				"Hungarian", "Italian", "Japanese", "Korean", "Latvian", "Marathi",
+				"Norwegian", "Polish", "Portuguese", "Romanian", "Russian", "Slovak", 
+				"Spanish", "Vietnamese" };
 		registerListPreference(osmandSettings.PREFERRED_LOCALE, screen, entries, entrieValues);
 
 		
