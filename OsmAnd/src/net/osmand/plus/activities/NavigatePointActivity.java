@@ -23,9 +23,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class NavigatePointActivity extends Activity implements SearchActivityChild {
@@ -119,17 +121,26 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 		currentFormat = Location.FORMAT_DEGREES;
 		latEdit.setText(convert(latitude, Location.FORMAT_DEGREES));
 		lonEdit.setText(convert(longitude, Location.FORMAT_DEGREES));
-		((RadioButton)findViewById(R.id.Format1)).setChecked(true);
-		((RadioGroup)findViewById(R.id.RadioGroup)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+		final Spinner format = ((Spinner)findViewById(R.id.Format));
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.my_spinner_text, new String[] {
+				getString(R.string.navigate_point_format_D),
+				getString(R.string.navigate_point_format_DM),
+				getString(R.string.navigate_point_format_DMS)
+		});
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		format.setAdapter(adapter);
+		format.setSelection(0);
+		format.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
-			public void onCheckedChanged(RadioGroup group, int checkedId) {
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				int newFormat = currentFormat;
-				if(checkedId == R.id.Format1){
+				String itm = (String) format.getItemAtPosition(position);
+				if(getString(R.string.navigate_point_format_D).equals(itm)){
 					newFormat = Location.FORMAT_DEGREES;
-				} else if(checkedId == R.id.Format2){
+				} else if(getString(R.string.navigate_point_format_DM).equals(itm)){
 					newFormat = Location.FORMAT_MINUTES;
-				} else if(checkedId == R.id.Format3){
+				} else if(getString(R.string.navigate_point_format_DMS).equals(itm)){
 					newFormat = Location.FORMAT_SECONDS;
 				}
 				currentFormat = newFormat;
@@ -144,8 +155,12 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 					((TextView) findViewById(R.id.ValidateTextView)).setText(R.string.invalid_locations);
 					Log.w(LogUtil.TAG, "Convertion failed", e); //$NON-NLS-1$
 				}
+				
 			}
-			
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
 		});
 		((Button) findViewById(R.id.Cancel)).setOnClickListener(new View.OnClickListener() {
 			@Override
