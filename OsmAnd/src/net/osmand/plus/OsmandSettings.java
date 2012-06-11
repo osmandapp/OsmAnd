@@ -463,11 +463,7 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> USE_INTERNET_TO_DOWNLOAD_TILES =
-		new BooleanPreference("use_internet_to_download_tiles", true, false, true);
-	{
-		USE_INTERNET_TO_DOWNLOAD_TILES.setModeDefaultValue(ApplicationMode.CAR, true);
-	}
-
+		new BooleanPreference("use_internet_to_download_tiles", false, true, true);
 	
 	public final OsmandPreference<ApplicationMode> PREV_APPLICATION_MODE = new EnumIntPreference<ApplicationMode>(
 			"prev_application_mode", ApplicationMode.DEFAULT, true, false, ApplicationMode.values());
@@ -578,13 +574,13 @@ public class OsmandSettings {
 	public static final String LOCAL_INDEXES = "local_indexes"; //$NON-NLS-1$
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX = new BooleanPreference("save_track_to_gpx", false, false);
+	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX = new BooleanPreference("save_track_to_gpx", false, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference("fast_route_mode", true, false);
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference("save_track_interval", 5, false);
+	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference("save_track_interval", 5, true);
 	{
 		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.CAR, 5);
 		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.BICYCLE, 10);
@@ -592,14 +588,14 @@ public class OsmandSettings {
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Boolean> LIVE_MONITORING = new BooleanPreference("live_monitoring", false, false);
+	public final CommonPreference<Boolean> LIVE_MONITORING = new BooleanPreference("live_monitoring", false, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Integer> LIVE_MONITORING_INTERVAL = new IntPreference("live_monitoring_interval", 5, false);
+	public final CommonPreference<Integer> LIVE_MONITORING_INTERVAL = new IntPreference("live_monitoring_interval", 5, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> LIVE_MONITORING_URL = new StringPreference("live_monitoring_url", 
-			"http://example.com?lat={0}&lon={1}&timestamp={2}&hdop={3}&altitude={4}&speed={5}", false);
+			"http://example.com?lat={0}&lon={1}&timestamp={2}&hdop={3}&altitude={4}&speed={5}", true);
 
 
 	// this value string is synchronized with settings_pref.xml preference name
@@ -673,7 +669,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> MAX_LEVEL_TO_DOWNLOAD_TILE = new IntPreference("max_level_download_tile", 18, false, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Integer> LEVEL_TO_SWITCH_VECTOR_RASTER = new IntPreference("level_to_switch_vector_raster", 1, false, true);
+	public final OsmandPreference<Integer> LEVEL_TO_SWITCH_VECTOR_RASTER = new IntPreference("level_to_switch_vector_raster", 1, true, true);
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> MAP_VIEW_3D = new BooleanPreference("map_view_3d", false, false);
@@ -711,7 +707,7 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference("map_tile_sources",
-			TileSourceManager.getMapnikSource().getName(), false);
+			TileSourceManager.getMapnikSource().getName(), true);
 	
 	public List<TileSourceTemplate> getInternetAvailableSourceTemplates(){
 		if(internetAvailableSourceTemplates == null && isInternetConnectionAvailable()){
