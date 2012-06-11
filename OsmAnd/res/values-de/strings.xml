@@ -831,4 +831,4 @@
   <string name="confirm_interrupt_download">Möchten Sie den Datei-Download abbrechen?</string>
   <string name="basemap_was_selected_to_download">Die Basis-Karte wird für die korrekte Benutzung der Applikation benötigt und ist für den Download vorselektiert.</string>
   <string name="gpx_index_settings_descr">" (beinhaltet GPX-Analyse)"</string>
-</resources>
+<string name="local_index_routing_data">Routing data</string><string name="navigate_point_format">Format :</string><string name="poi_search_desc">POI - Point Of interest</string><string name="address_search_desc">Address search</string><string name="navpoint_search_desc">Navigate point</string><string name="transport_search_desc">Transport search</string><string name="favourites_search_desc">Favourites search</string><string name="history_search_desc">Search history</string></resources>
