@@ -49,8 +49,8 @@ public abstract class OsmandPlugin {
 	public static void initPlugins(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		OsmandRasterMapsPlugin rasterMapsPlugin = new OsmandRasterMapsPlugin(app);
-		installedPlugins.add(rasterMapsPlugin);
 		installedPlugins.add(new OsmandExtraSettings(app));
+		installedPlugins.add(rasterMapsPlugin);
 		installedPlugins.add(new OsmandMonitoringPlugin(app));
 		installedPlugins.add(new OsmandBackgroundServicePlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
