@@ -55,6 +55,7 @@
     <string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0 :
 \n\t- Plugin functionality
 \n\t- New offline map data support
+\n\t- Improve usability and simplify Profile concept
 \n\t- Lots of bug fixes
 	</string>
     <string name="osm_editing_plugin_description">This plugin facilitates OSM feedback like collecting / modifying OSM POI objects, opening / commenting OSM bugs, and contributing recorded GPX files (requires OSM credentials).</string>
@@ -215,7 +216,7 @@
 <!-- this block re-worked for new Preferences structure -->
 	<string name="profile_settings">Profile Specific Settings</string>
 	<string name="settings_preset">User Profile</string>
-	<string name="settings_preset_descr">Select a user profile. Each profile contains the set of specific settings.</string>
+	<string name="settings_preset_descr">Select a user profile with customized map and navigation settings.</string>
 	
 	<string name="monitor_preferences">Tracking</string>
 	<string name="monitor_preferences_descr">Specify tracking settings</string>
@@ -855,7 +856,7 @@
     <string name="save_track_interval">Logging interval</string>
     <string name="save_track_interval_descr">Choose positioning interval for tracks</string>
     <string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
-    <string name="save_track_to_gpx">Log track to GPX</string>
+    <string name="save_track_to_gpx">Log track to GPX file</string>
     <string name="navigate_to">Set as destination</string>
     <string name="update_tile">Update map</string>
     <string name="reload_tile">Reload tile</string>
