@@ -9,25 +9,18 @@
 	<string name="map_settings_descr">Konfigurieren der Karten-Anzeige</string>
 	
 	<string name="osmand_rastermaps_plugin_description">Dieses Modul ermöglicht die Verwendung vieler online oder gecachter Kachel-Kartenquellen, auch als Overlay- oder Underlay-Karte. Solche Kachel-Karten können auch offline erstellt und dann in das Osmand-Verzeichnis kopiert werden.</string>
-    <string name="osmand_rastermaps_plugin_name">Online-Karten</string>
     <string name="osmand_background_plugin_description">Dieses Modul ermöglicht das Positions-Logging oder die Navigation während das Gerät im Standby-Modus ist. Dabei wird der GPS-Empfänger periodisch geweckt um einen Punkt aufzuzeichnen oder ein Kommando zu geben.</string>
-    <string name="osmand_background_plugin_name">"Hintergrundservice"</string>
     <string name="osmand_accessibility_description">Dieses Modul konfiguriert spezielle Barrierefreiheits-Einstellungen.</string>
-    <string name="osmand_accessibility_name">Barrierefreiheit</string>
     <string name="extra_settings">Erweiterte Einstellungen</string>
     <string name="osmand_monitoring_description">Dieses Modul ermöglicht die Aufzeichnung zurückgelegter Strecken in GPX-Dateien oder das Live-Tracking via Web-Service.</string>
-    <string name="osmand_monitoring_name">Positions-Logging</string>
     <string name="osmand_extra_settings_description">Dieses Modul ermöglicht erweiterte Kartenkonfiguration und einige gerätespezifische Einstellungen.</string>
-    <string name="osmand_extra_settings_name">Erweiterte Einstellungen</string>
     <string name="osmand_development_plugin_description">Dieses Modul aktivert Entwicklungs- und Fehlersuchhilfen wie simulierte Navigation oder die Messung der Render-Leistung.</string>
-    <string name="osmand_development_plugin_name">Osmand-Entwicklung</string>
     <string name="plugins_screen">Modul-Manager</string>
     <string name="select_plugin_to_activate">Module zum Aktivieren oder Deaktivieren anklicken. (Ein Neustart von Osmand könnte nötig sein.)</string>
     <string name="prefs_plugins_descr">Module aktivieren Extra-Funktionalität, die bereits in Osmand enthalten ist, wie z.B. Positions-Logging, Online-Karten, Hintergrundservice, Barrierefreiheits-Erweiterungen und anderes.</string>
     <string name="prefs_plugins">Modul-Manager</string>
     <string name="tip_recent_changes_0_8_0_t">"Änderungen in 0.8.0 : \n\t- Modul-Funktionalität \n\t- Unterstützung neuer Offline-Karten \n\t- Viele Fehler behoben "</string>
     <string name="osm_editing_plugin_description">Dieses Modul ermöglicht das Erstellen und Bearbeiten von OSM POI Objekten, das Öffnen und Kommentieren von OSM Fehlern, und das Hochladen von GPX-Dateien (benötigt OSM Benutzerkonto).</string>
-    <string name="osm_editing_plugin_name">OSM-Bearbeitung</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektorkarten werden eventuell schneller angezeigt. Funktioniert nur auf manchen Geräten.</string>
   <string name="simulate_route_progression_manually">Simuliere die Navigation</string>
   <string name="play_commands_of_currently_selected_voice">Spiele Ansagen der aktuell ausgewählten Stimme ab</string>
@@ -178,7 +171,7 @@
   <string name="tip_day_night_mode">Tag/Nacht Modus</string>
   <string name="tip_day_night_mode_t">\tDie Anzeige von Offline-Vektor-Karten kann für einige Anzeigemodi zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden. \n\tInsbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer. \n\tDer Umschaltmechanismus kann unter \'Einstellungen\' -&gt; \'Anzeigenkonfiguration\' -&gt; \'Tag/Nacht Modus\' geändert werden. \n\tZur Auswahl stehen: \n\t\'Sonnenaufgang/-untergang\' - automatischer Modus (Voreinstellung) \n\t\'Tag\' - permanente Tagesansicht \n\t\'Nacht\' - permanente Nachtansicht \n\t\'Umgebungslicht-Sensor\' - automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden)</string>
   <string name="tip_osm_improve">OSM Bearbeitung</string>
-  <string name="tip_osm_improve_t">\tOsmand verwendet Daten basierend auf OpenStreetMap.org (OSM), und kann (neben Kartenanzeige und Navigation) auch zur Verbesserung der OSM-Daten verwendet werden. Sie können mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden. \n\tDazu müssen Sie zunächst unter \'Einstellungen\' -&gt; \'Allgemein\' unter dem Menüpunkt \'OSM\' Ihre OSM-Login-Daten hinterlegen. \n\tEinen neuen POI erstellen Sie ganz einfach mittels \'POI erstellen\' im Karten-Kontextmenü. Anschließend die Informationen zum POI eintragen und über die Menüführung zu OSM hochladen. Fertig! \n\tGefundene Fehler auf der Karte können direkt gemeldet werden. \n\tOSM Fehlerberichte erstellen Sie mittels \'OSM Fehlerbericht einsenden\' im Karten-Kontextmenü. \n\tAchtung: Für alle OSM-Aktivitäten wird eine Internetverbindung benötigt.</string>
+  <string name="tip_osm_improve_t">\tOsmand verwendet Daten basierend auf OpenStreetMap.org (OSM), und kann (neben Kartenanzeige und Navigation) auch zur Verbesserung der OSM-Daten verwendet werden. Sie können mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden. \n\tDazu müssen Sie zunächst unter \'Einstellungen\' -&gt; \'Allgemein\' unter dem Menüpunkt \'OSM-Bearbeitung\' Ihre OSM-Login-Daten hinterlegen. \n\tEinen neuen POI erstellen Sie ganz einfach mittels \'POI erstellen\' im Karten-Kontextmenü. Anschließend die Informationen zum POI eintragen und über die Menüführung zu OSM hochladen. Fertig! \n\tGefundene Fehler auf der Karte können direkt gemeldet werden. \n\tOSM Fehlerberichte erstellen Sie mittels \'OSM Fehlerbericht einsenden\' im Karten-Kontextmenü. \n\tAchtung: Für alle OSM-Aktivitäten wird eine Internetverbindung benötigt.</string>
   <!-- end of string changes for new menu structure -->
   <string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
   <string name="download_files_question_space">{2} MB freier Speicher vorhanden! {0} Datei(en) ({1} MB) herunterladen?</string>
@@ -672,7 +665,7 @@
   <string name="data_settings_descr">Dateneinstellungen festlegen: Sprache, Daten laden oder aktualisieren</string>
   <string name="data_settings">Daten</string>
   <string name="map_preferences_descr">Karteneinstellungen festlegen: Kartenquelle, Ausrichtung, Markerposition, Bildschirmausrichtung</string>
-  <string name="osm_settings">OSM</string>
+  <string name="osm_settings">OSM-Bearbeitung</string>
   <string name="auto_zoom_map_descr">Kartenvergrößerung automatisch der Geschwindigkeit anpassen</string>
   <string name="auto_zoom_map">Automatischer Zoom</string>
   <string name="additional_settings">Weitere Einstellungen</string>

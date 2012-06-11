@@ -6,7 +6,6 @@
   <string name="prefs_plugins">Spraudņi</string>
   <string name="tip_recent_changes_0_8_0_t">"Izmaiņas 0.8.0 : \n\t- Spraudņu funkcionalitāte \n\t- Jauns bezsaistes kartes atbalsts \n\t- Daudz kļūdu labojumu "</string>
   <string name="osm_editing_plugin_description">Šis spraudnis ir domāts OSM kvalitātes uzlabošanai. Tas ļauj savākt/modificēt OSM POI objektus, atvērt/komentēt OSM kļūdas un nosūtīt ierakstīto GPX (nepieciešama OSM ģistrācija).</string>
-  <string name="osm_editing_plugin_name">OSM labošana</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektoru kartes tiek attēlotas ātrāk. Tas var nestrādāt uz dažām iekārtām.</string>
   <string name="simulate_route_progression_manually">Simulēt maršruta progresiju manuāli</string>
   <string name="play_commands_of_currently_selected_voice">Atskaņot komandas izvēlētai balsij</string>
@@ -812,16 +811,10 @@
   <string name="map_settings">- Kartes uzstādījumi</string>
   <string name="map_settings_descr">Konfigurēt kartes attēlošanu</string>
   <string name="osmand_rastermaps_plugin_description">Šis spraudnis pārvalda dažādu tiešsaistes karšu attēlus vai arī tās kā kartes slāņus. Kartes arī var sagatavot bezsaistei un nokopēt uz Osman mapi.</string>
-  <string name="osmand_rastermaps_plugin_name">Tiešsaistes kartes</string>
   <string name="osmand_background_plugin_description">Šis spraudnis ļauj veikt sekošanu un navigāciju strāvas sglabāšanas (izslēgts ekrāns) režīmā, periodiski atmodinot GPS iekārtu, lai ierakstītu ceļu vai arī atskaņotu ziņojumu.</string>
-  <string name="osmand_background_plugin_name">Izslēgta ekrāna iespējas</string>
   <string name="osmand_accessibility_description">Šis spraudnis konfigurē speciālās pieejas iespējas.</string>
-  <string name="osmand_accessibility_name">Pieejamība</string>
   <string name="extra_settings">Paplašinātie uzstādījumi</string>
   <string name="osmand_monitoring_description">Šis spraudnis ieraksta jūsu braucienu GPX failā vai arī veic tiešasaistes sekošanu izmantojot web servisu.</string>
-  <string name="osmand_monitoring_name">Ceļa ieraksts</string>
   <string name="osmand_extra_settings_description">Šis spraudnis ļauj veikt paplašinātu kartes konfigurēšanu norādot dažus iekārtai specifiskus uzstādījumus.</string>
-  <string name="osmand_extra_settings_name">Paplašinātie uzstādījumi</string>
   <string name="osmand_development_plugin_description">Šis spraudnis iespējo izstrādes un atkļūdošanas iespējas, kā piemēram animētā navigācija vai renderēšanas novērtējuma attēlošana.</string>
-  <string name="osmand_development_plugin_name">Osmand izstrāde</string>
 <string name="local_index_routing_data">Routing data</string><string name="navigate_point_format">Format :</string><string name="poi_search_desc">POI - Point Of interest</string><string name="address_search_desc">Address search</string><string name="navpoint_search_desc">Navigate point</string><string name="transport_search_desc">Transport search</string><string name="favourites_search_desc">Favourites search</string><string name="history_search_desc">Search history</string></resources>

@@ -34,25 +34,18 @@
 	<string name="map_settings_descr">რუკის ჩვენების გამართვა</string>
 	
 	<string name="osmand_rastermaps_plugin_description"></string>
-    <string name="osmand_rastermaps_plugin_name">მიმდინარე რუკები</string>
     <string name="osmand_background_plugin_description">This plugin allows tracking or navigation in power saving (screen off) mode by periodically waking up the GPS device to record a track point or play a voice prompt.</string>
-    <string name="osmand_background_plugin_name">შესაძლებლობები როდესაც ეკრანი გათიშულია</string>
     <string name="osmand_accessibility_description">ეს ფლაგინი მართავს სპეციალური წვდომის შესაძლებლობებს.</string>
-    <string name="osmand_accessibility_name">წვდომა</string>
     <string name="extra_settings">მეტი პარამეტრები</string>
     <string name="osmand_monitoring_description">This plugin facilitates recording your trips to GPX files or live tracking using a web service.</string>
-    <string name="osmand_monitoring_name">დევნა</string>
     <string name="osmand_extra_settings_description">This plugin provides advanced map configuration and some device-specific settings.</string>
-    <string name="osmand_extra_settings_name">მეტი პარამეტრები</string>
     <string name="osmand_development_plugin_description">This plugin enables development and debugging features like animated navigation or rendering performance display.</string>
-    <string name="osmand_development_plugin_name">Osmand -ის განვითარება</string>
     <string name="plugins_screen">ფლაგინების მმართველი</string>
     <string name="select_plugin_to_activate">შეეხეთ ფლაგინს მის ჩასართავად/გამოსართველად. (შეიძლება საჭირო იყოს Osmand-ს რესტარტი.)</string>
     <string name="prefs_plugins_descr">Plugins provide extra functionality bundled within the application like tracking, tile maps, screen off mode, accessibility settings, and others.</string>
     <string name="prefs_plugins">ფლაგინის მმართველი</string>
     <string name="tip_recent_changes_0_8_0_t">ცვლილებები 0.8.0-ში : \n\t- ფლაგინის შესაძლებლობები\n\t- რუკის გათიშულ რეჟიმში გამოყენების ახალი ფორმატი\n\t- გამოსწორებულია ბევრი შეცდომა</string>
     <string name="osm_editing_plugin_description">This plugin facilitates OSM feedback like collecting / modifying OSM POI objects, opening / commenting OSM bugs, and contributing recorded GPX files (requires OSM credentials).</string>
-    <string name="osm_editing_plugin_name">OSM-ის გამართვა</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">ვექტორული რუკები როგორც წესი ჩანს უფრო სწრაფად. შეიძლება არ იმუშაოს ზოგიერთ მოწყობილობაზე.</string>
 	<string name="simulate_route_progression_manually">გზის გავლის ხელით სიმულირება</string>
 	<string name="play_commands_of_currently_selected_voice">ხმით არჩეული ბრძანებების შესრულება</string>
