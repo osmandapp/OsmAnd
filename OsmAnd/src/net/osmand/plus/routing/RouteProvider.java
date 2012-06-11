@@ -27,7 +27,6 @@ import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -159,6 +158,35 @@ public class RouteProvider {
 			}
 		}
 		
+		public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end) {
+			// TODO put directions information
+			this.directions = null;
+			this.errorMessage = null;
+			this.locations = new ArrayList<Location>();
+			
+			for (RouteSegmentResult s : list) {
+				boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
+				int i = s.getStartPointIndex();
+				while (true) {
+					Location n = new Location(""); //$NON-NLS-1$
+					LatLon point = s.getPoint(i);
+					n.setLatitude(point.getLatitude());
+					n.setLongitude(point.getLongitude());
+					locations.add(n);
+					if (i == s.getEndPointIndex()) {
+						break;
+					}
+					if (plus) {
+						i++;
+					} else {
+						i--;
+					}
+				}
+			}
+			introduceFirstPoint(start);
+			updateListDistanceTime();
+		}
+		
 		public List<Location> getLocations() {
 			return locations;
 		}
@@ -172,55 +200,70 @@ public class RouteProvider {
 		}
 		
 		private void prepareResult(Location start, LatLon end) {
-
 			if (locations != null && !locations.isEmpty()) {
 				// if there is no closest points to start - add it
-				if (locations.get(0).distanceTo(start) > 200) {
-					// add start point
-					locations.add(0, start);
-					if (directions != null) {
-						for (RouteDirectionInfo i : directions) {
-							i.routePointOffset++;
-						}
-						RouteDirectionInfo info = new RouteDirectionInfo();
-						info.turnType = TurnType.valueOf(TurnType.C, false);
-						info.routePointOffset = 0;
-						info.descriptionRoute = "" ;//getString(ctx, R.string.route_head); //$NON-NLS-1$
-						directions.add(0, info);
-					}	
-				}
+				introduceFirstPoint(start);
 				
-				// check points for duplicates (it is very bad for routing) - cloudmade could return it 
-				for (int i = 0; i < locations.size() - 1; ) {
-					if(locations.get(i).distanceTo(locations.get(i+1)) == 0){
-						locations.remove(i);
-						if (directions != null) {
-							for (RouteDirectionInfo info : directions) {
-								if(info.routePointOffset > i){
-									info.routePointOffset--;
-								}
-							}
-						}
+				checkForDuplicatePoints();
+				// Remove unnecessary go straight from CloudMade 
+				// Remove also last direction because it will be added after
+				removeUnnecessaryGoAhead();
+			}
+			
+			updateListDistanceTime();
+		}
+		
+		// Remove unnecessary go straight from CloudMade 
+		// Remove also last direction because it will be added after
+		private void removeUnnecessaryGoAhead() {
+			if(directions != null && directions.size() > 1){
+				for (int i = 1; i < directions.size(); ) {
+					RouteDirectionInfo r = directions.get(i);
+					if(r.turnType.getValue().equals(TurnType.C)){
+						RouteDirectionInfo prev = directions.get(i-1);
+						prev.expectedTime += r.expectedTime;
+						directions.remove(i);
 					} else {
 						i++;
 					}
 				}
-				// Remove unnecessary go straight from CloudMade 
-				// Remove also last direction because it will be added after
-				if(directions != null && directions.size() > 1){
-					for (int i = 1; i < directions.size(); ) {
-						RouteDirectionInfo r = directions.get(i);
-						if(r.turnType.getValue().equals(TurnType.C)){
-							RouteDirectionInfo prev = directions.get(i-1);
-							prev.expectedTime += r.expectedTime;
-							directions.remove(i);
-						} else {
-							i++;
+			}
+		}
+		
+		private void checkForDuplicatePoints() {
+			// check points for duplicates (it is very bad for routing) - cloudmade could return it 
+			for (int i = 0; i < locations.size() - 1; ) {
+				if(locations.get(i).distanceTo(locations.get(i+1)) == 0){
+					locations.remove(i);
+					if (directions != null) {
+						for (RouteDirectionInfo info : directions) {
+							if(info.routePointOffset > i){
+								info.routePointOffset--;
+							}
 						}
 					}
+				} else {
+					i++;
 				}
 			}
-			
+		}
+		private void introduceFirstPoint(Location start) {
+			if (locations.get(0).distanceTo(start) > 200) {
+				// add start point
+				locations.add(0, start);
+				if (directions != null) {
+					for (RouteDirectionInfo i : directions) {
+						i.routePointOffset++;
+					}
+					RouteDirectionInfo info = new RouteDirectionInfo();
+					info.turnType = TurnType.valueOf(TurnType.C, false);
+					info.routePointOffset = 0;
+					info.descriptionRoute = "" ;//getString(ctx, R.string.route_head); //$NON-NLS-1$
+					directions.add(0, info);
+				}	
+			}
+		}
+		private void updateListDistanceTime() {
 			listDistance = new int[locations.size()];
 			if (!locations.isEmpty()) {
 				listDistance[locations.size() - 1] = 0;
@@ -633,29 +676,10 @@ public class RouteProvider {
 		if (en == null) {
 			return new RouteCalculationResult("End point is far from allowed road.");
 		}
-		List<Location> res = new ArrayList<Location>();
 		try {
 			List<RouteSegmentResult> result = router.searchRoute(ctx, st, en);
-			for (RouteSegmentResult s : result) {
-				boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
-				int i = s.getStartPointIndex();
-				while (true) {
-					Location n = new Location(""); //$NON-NLS-1$
-					LatLon point = s.getPoint(i);
-					n.setLatitude(point.getLatitude());
-					n.setLongitude(point.getLongitude());
-					res.add(n);
-					if (i == s.getEndPointIndex()) {
-						break;
-					}
-					if (plus) {
-						i++;
-					} else {
-						i--;
-					}
-				}
-			}
-			return new RouteCalculationResult(res, null, start, end, null);
+			
+			return new RouteCalculationResult(result, start, end);
 		} catch (OutOfMemoryError e) {
 			return new RouteCalculationResult("Not enough process memory");
 		}

@@ -35,6 +35,7 @@ public class RoutingContext {
 	TIntSet loadedTiles = new TIntHashSet();
 	// TODO delete this object ?
 	TLongObjectHashMap<RouteDataObject> idObjects = new TLongObjectHashMap<RouteDataObject>();
+	int relaxedIteration = 0;
 	
 	// 4. Warm object caches
 	TLongSet nonRestrictedIds = new TLongHashSet();
@@ -58,7 +59,6 @@ public class RoutingContext {
 	long timeToCalculate = 0;
 	int visitedSegments = 0;
 	int relaxedSegments = 0;
-	int relaxedIteration = 0;
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
 	

@@ -598,6 +598,8 @@ public class BinaryMapRouteReaderAdapter {
 					req.publish(ro);
 				}
 			}
+			// free objects
+			rs.dataObjects = null;
 		}
 	}
 

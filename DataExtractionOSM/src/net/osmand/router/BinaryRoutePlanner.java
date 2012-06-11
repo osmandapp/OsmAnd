@@ -147,7 +147,7 @@ public class BinaryRoutePlanner {
 	 * return list of segments
 	 */
 	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, RouteSegment start, RouteSegment end) throws IOException {
-		boolean relaxingStrategy = false;
+		boolean relaxingStrategy = true;
 		// measure time
 		ctx.timeToLoad = 0;
 		ctx.visitedSegments = 0;
@@ -308,7 +308,7 @@ public class BinaryRoutePlanner {
 				mine = s.distanceToEnd;
 			}
 		}
-		double d = mine * 2.5;
+		double d = mine * 3;
 		iterator = graphSegments.iterator();
 		while (iterator.hasNext()) {
 			RouteSegment s = iterator.next();
@@ -771,6 +771,7 @@ public class BinaryRoutePlanner {
 		}
 		Collections.reverse(result);
 		// calculate time
+		float completeTime = 0;
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
 			RouteDataObject road = rr.getObject();
@@ -790,6 +791,7 @@ public class BinaryRoutePlanner {
 			// last point turn time can be added
 			// if(i + 1 < result.size()) { distOnRoadToPass += ctx.getRouter().calculateTurnTime(); }
 			rr.setSegmentTime((float) distOnRoadToPass);
+			completeTime += distOnRoadToPass;
 		}
 		
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
@@ -799,8 +801,8 @@ public class BinaryRoutePlanner {
 			double endLat = MapUtils.get31LatitudeY(ctx.targetEndY);
 			double endLon = MapUtils.get31LongitudeX(ctx.targetEndX);
 			System.out.println(MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"\" \n" +
-					"    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\">", 
-					startLat+"", startLon+"", endLat+"", endLon+""));
+					"    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" complete_time=\"{4}\">", 
+					startLat+"", startLon+"", endLat+"", endLon+"", completeTime+""));
 			for (RouteSegmentResult res : result) {
 				String name = "Unknown";//res.object.getName();
 				String ref = "";//res.object.getNameByType(res.object.getMapIndex().refEncodingType);
