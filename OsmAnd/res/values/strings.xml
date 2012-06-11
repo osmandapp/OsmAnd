@@ -13,7 +13,7 @@
     <string name="navigate_point_format">Format :</string>
 	<string name="poi_search_desc">POI - Point Of interest</string>
 	<string name="address_search_desc">Address search</string>
-	<string name="navpoint_search_desc">Navigate point</string>
+	<string name="navpoint_search_desc">Coordinates</string>
 	<string name="transport_search_desc">Transport search</string>
 	<string name="favourites_search_desc">Favourites search</string>
 	<string name="history_search_desc">Search history</string>
