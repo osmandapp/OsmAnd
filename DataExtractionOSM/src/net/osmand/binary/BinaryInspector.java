@@ -49,7 +49,7 @@ public class BinaryInspector {
 		// test cases show info
 		
 		
-		 inspector(new String[]{/*"-vmap", "-bbox=-121.785,37.35,-121.744,37.33", */"/home/victor/projects/OsmAnd/data/osm-gen/Ru-spe.obf"});
+//		 inspector(new String[]{/*"-vmap", "-bbox=-121.785,37.35,-121.744,37.33", */"/home/victor/projects/OsmAnd/data/temp/Belgium_europe_2.obf"});
 		// test case extract parts
 		// test case 
 	}
@@ -363,6 +363,11 @@ public class BinaryInspector {
 		return format.format(new Object[]{l, t, r, b}); 
 	}
 	
+	protected static String formatLatBounds(double l, double r, double t, double b){
+		MessageFormat format = new MessageFormat("(left top - right bottom) : {0}, {1} NE - {2}, {3} NE", Locale.US);
+		return format.format(new Object[]{l, t, r, b}); 
+	}
+	
 	public static void printFileInformation(String fileName,VerboseInfo verbose) throws IOException {
 		File file = new File(fileName);
 		if(!file.exists()){
@@ -371,11 +376,6 @@ public class BinaryInspector {
 		}
 		printFileInformation(file,verbose);
 	}
-	
-	private static void formatPoint(BinaryMapDataObject o, int ind, StringBuilder b){
-		b.append((float)MapUtils.get31LongitudeX(o.getPoint31XTile(ind))).append(",").append((float)MapUtils.get31LatitudeY(o.getPoint31YTile(ind)));
-	}
-	
 	
 	
 
@@ -405,6 +405,10 @@ public class BinaryInspector {
 					int sh = (31 - BinaryMapIndexReader.TRANSPORT_STOP_ZOOM);
 					println("\t Bounds " + formatBounds(ti.getLeft() << sh, ti.getRight() << sh, 
 							ti.getTop() << sh, ti.getBottom() << sh));
+				} else if(p instanceof RouteRegion){
+					RouteRegion ri = ((RouteRegion) p);
+					println("\t Bounds " + formatLatBounds(ri.getLeftLongitude(), ri.getRightLongitude(), 
+							ri.getTopLatitude(), ri.getBottomLatitude()));
 				} else if(p instanceof MapIndex){
 					MapIndex m = ((MapIndex) p);
 					int j = 1;

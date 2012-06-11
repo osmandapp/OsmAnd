@@ -179,8 +179,8 @@ public class BinaryRoutePlanner {
 		ctx.startX = start.road.getPoint31XTile(start.segmentStart);
 		ctx.startY = start.road.getPoint31YTile(start.segmentStart);
 		// for start : f(start) = g(start) + h(start) = 0 + h(start) = h(start)
-		start.distanceToEnd = h(ctx, ctx.targetEndX, ctx.targetEndY, ctx.startX, ctx.startY);
-		end.distanceToEnd = start.distanceToEnd;
+		ctx.estimatedDistance = (float) h(ctx, ctx.targetEndX, ctx.targetEndY, ctx.startX, ctx.startY);
+		end.distanceToEnd = start.distanceToEnd	= ctx.estimatedDistance;
 		
 		graphDirectSegments.add(start);
 		graphReverseSegments.add(end);

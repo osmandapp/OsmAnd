@@ -166,6 +166,14 @@ public class DataExtractionSettings {
 		preferences.putInt("routeDirection", s);
 	}
 	
+	public String getRouteMode(){
+		return preferences.get("routeMode", "car");
+	}
+	
+	public void setRouteMode(String mode){
+		preferences.put("routeMode", mode);
+	}
+	
 	public String getNativeLibFile(){
 		String fl = preferences.get("nativeLibFile", null);
 		if(fl != null) {

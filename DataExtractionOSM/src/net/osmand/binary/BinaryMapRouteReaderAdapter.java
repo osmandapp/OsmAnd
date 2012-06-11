@@ -17,6 +17,8 @@ import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBox;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteEncodingRule;
 import net.osmand.binary.OsmandOdb.RouteData;
+import net.osmand.data.MapAlgorithms;
+import net.osmand.osm.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -308,6 +310,10 @@ public class BinaryMapRouteReaderAdapter {
 				region.getSubregions().add(subregion);
 				codedIS.popLimit(oldLimit);
 				codedIS.seek(subregion.filePointer + subregion.length);
+				region.bottomLatitude = MapUtils.get31LatitudeY(subregion.bottom);
+				region.topLatitude = MapUtils.get31LatitudeY(subregion.top);
+				region.rightLongitude = MapUtils.get31LongitudeX(subregion.right);
+				region.leftLongitude = MapUtils.get31LongitudeX(subregion.left);
 			}	break;
 			
 			default:

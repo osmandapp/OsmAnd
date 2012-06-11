@@ -31,6 +31,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 	private JTextField streetDefaultSuffixes;
 	private JTextField mapZooms;
 	private JTextField directionPlanRoute;
+	private JTextField routingMode;
 	private JTextField lineSmoothness;
 	private JTextField cityAdminLevel;
 	private JTextField osrmServerAddress;
@@ -140,6 +141,27 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		constr.gridx = 1;
 		constr.gridy = gridY++;
 		l.setConstraints(nativeFilesDirectory, constr);
+		
+		label = new JLabel("Routing mode (car/bicycle/pedestrian) : ");
+        panel.add(label);
+        constr = new GridBagConstraints();
+        constr.ipadx = 5;
+        constr.gridx = 0;
+        constr.gridy = gridY;
+        constr.anchor = GridBagConstraints.WEST;
+        l.setConstraints(label, constr);
+        
+        routingMode = new JTextField();
+        
+        routingMode.setText(DataExtractionSettings.getSettings().getRouteMode() +"");
+        panel.add(routingMode);
+        constr = new GridBagConstraints();
+        constr.weightx = 1;
+        constr.fill = GridBagConstraints.HORIZONTAL;
+        constr.ipadx = 5;
+        constr.gridx = 1;
+        constr.gridy = gridY++;
+        l.setConstraints(directionPlanRoute, constr);
 		
 		label = new JLabel("Direction to plan route (0 - both, 1 - forward, -1 - backward) : ");
         panel.add(label);
@@ -436,6 +458,10 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		if(!settings.getRenderXmlPath().equals(renderingStyleFile.getText())){
 			settings.setRenderXmlPath(renderingStyleFile.getText());
 		}
+		if(!settings.getRouteMode().equals(routingMode.getText())){
+			settings.setRouteMode(routingMode.getText());
+		}
+		
 //		if(settings.isSupressWarningsForDuplicatedId() != supressWarning.isSelected()){
 //			settings.setSupressWarningsForDuplicatedId	(supressWarning.isSelected());
 //		}

@@ -28,6 +28,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.DataTileManager;
 import net.osmand.osm.Entity;
@@ -35,8 +36,10 @@ import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Way;
 import net.osmand.osm.OSMSettings.OSMTagKey;
+import net.osmand.router.BicycleRouter;
 import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.CarRouter;
+import net.osmand.router.PedestrianRouter;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.VehicleRouter;
@@ -50,17 +53,19 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
 
 public class MapRouterLayer implements MapPanelLayer {
+	
+	private final static Log log = LogUtil.getLog(MapRouterLayer.class);
 
 	private MapPanel map;
 	private LatLon startRoute ;
 	private LatLon endRoute ;
-	private VehicleRouter routerMode = new CarRouter();
 	private boolean nextAvailable = true;
 	private boolean pause = true;
 	private boolean stop = false;
@@ -558,7 +563,17 @@ public class MapRouterLayer implements MapPanelLayer {
 				
 				BinaryRoutePlanner router = new BinaryRoutePlanner(rs);
 				RoutingContext ctx = new RoutingContext();
-				ctx.setRouter(this.routerMode);
+				String m = DataExtractionSettings.getSettings().getRouteMode();
+				if("pedestrian".equalsIgnoreCase(m)) {
+					ctx.setRouter(new PedestrianRouter());
+					log.info("Use pedestrian mode for routing");
+				} else if("pedestrian".equalsIgnoreCase(m)) {
+					ctx.setRouter(new BicycleRouter());
+					log.info("Use bicycle mode for routing");
+				} else {
+					ctx.setRouter(new CarRouter());
+					log.info("Use car mode for routing");
+				}
 				int dir = DataExtractionSettings.getSettings().getRouteDirection();
 				if(dir != 0) {
 					ctx.setPlanRoadDirection(dir > 0 ? true : false);

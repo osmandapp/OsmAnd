@@ -745,7 +745,7 @@ public class IndexCreator {
 		MapRenderingTypes rt = MapRenderingTypes.getDefault();
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
 		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
-		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/belarus.osm.pbf"),
+		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/temp/map.osm"),
 				new ConsoleProgressImplementation(1), null, zooms, rt, log);
 		
 		

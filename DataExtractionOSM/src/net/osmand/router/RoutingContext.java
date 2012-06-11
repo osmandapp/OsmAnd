@@ -45,6 +45,7 @@ public class RoutingContext {
 	public int targetEndY;
 	public int startX;
 	public int startY;
+	public float estimatedDistance;
 	
 	RouteSegment finalDirectRoute = null;
 	int finalDirectEndSegment = 0;
