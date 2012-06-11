@@ -603,7 +603,7 @@
   <string name="save_current_track">Сохранить путь</string>
   <string name="save_track_interval_descr">Указать интервал между сохранениями пути</string>
   <string name="save_track_interval">Интервал сохранения</string>
-  <string name="monitor_preferences">- Мониторинг</string>
+  <string name="monitor_preferences">Мониторинг</string>
   <string name="save_track_to_gpx_descrp">Сохранять путь в GPX формате в папку track</string>
   <string name="save_track_to_gpx">Мониторить</string>
   <string name="navigate_to">Идти к</string>

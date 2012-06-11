@@ -515,7 +515,7 @@
   <string name="save_current_track">Zapisz bieżący ślad</string>
   <string name="save_track_interval_descr">Wybierz czas pomiędzy sprawdzaniem pozycji dla ścieżek</string>
   <string name="save_track_interval">Czas pomiędzy sprawdzaniem pozycji</string>
-  <string name="monitor_preferences">- Zapisywanie śladów</string>
+  <string name="monitor_preferences">Zapisywanie śladów</string>
   <string name="save_track_to_gpx_descrp">Ślady zostaną zapisane do katalogu grupami wg dni</string>
   <string name="save_track_to_gpx">Zapisuj ślad do GPX</string>
   <string name="navigate_to">Nawiguj do</string>

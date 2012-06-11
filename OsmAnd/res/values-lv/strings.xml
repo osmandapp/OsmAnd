@@ -135,7 +135,7 @@
   <string name="profile_settings">Ar profilu saistītie uzstādījumi</string>
   <string name="settings_preset">Lietotāju profils</string>
   <string name="settings_preset_descr">Izvēlaties lietotāja profilu. Katrs profils satur specifiskus uzstādījumus, kurus var mainīt zemāk.</string>
-  <string name="monitor_preferences">- Sekošana</string>
+  <string name="monitor_preferences">Sekošana</string>
   <string name="monitor_preferences_descr">Norādīt sekošanas uzstādījumus</string>
   <string name="routing_settings">- Navigācija</string>
   <string name="routing_settings_descr">Norādīt navigācijas opcijas</string>

@@ -50,7 +50,7 @@
   <string name="profile_settings">Opciones específicas por perfil</string>
   <string name="settings_preset">Perfil de usuario</string>
   <string name="settings_preset_descr">Selecciona un perfil de uso. (Las opciones de Mapa, Seguimiento y Navegación puede cambiarse para cada perfil)</string>
-  <string name="monitor_preferences">- Seguimiento</string>
+  <string name="monitor_preferences">Seguimiento</string>
   <string name="monitor_preferences_descr">Especifica los parámetros de seguimiento</string>
   <string name="routing_settings">- Navegación</string>
   <string name="routing_settings_descr">Especifica las opciones de ruteo</string>

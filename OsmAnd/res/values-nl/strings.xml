@@ -127,7 +127,7 @@
   <string name="profile_settings">Profielspecifieke instellingen</string>
   <string name="settings_preset">Gebruiksprofiel</string>
   <string name="settings_preset_descr">Selecteer een profiel. (Elke profielinstelling, kaart, tracking en navigatie kan hieronder ingesteld worden.)</string>
-  <string name="monitor_preferences">- Tracking</string>
+  <string name="monitor_preferences">Tracking</string>
   <string name="monitor_preferences_descr">Specifieke tracking instellingen</string>
   <string name="routing_settings">- Navigatie</string>
   <string name="routing_settings_descr">Specificeer route-opties</string>
