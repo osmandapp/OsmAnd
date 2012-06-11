@@ -240,7 +240,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		grp.setSummary(R.string.online_map_settings_descr);
 		grp.setTitle(R.string.online_map_settings);
 		grp.setKey("map_settings");
-		grp.setOrder(0);
+		//grp.setOrder(0);
 		general.addPreference(grp);
 		
 
