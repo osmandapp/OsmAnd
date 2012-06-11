@@ -148,7 +148,7 @@
   <!-- this block re-worked for new menu structure -->
   <string name="profile_settings">Profilspezifische Einstellungen</string>
   <string name="settings_preset">Nutzerprofil</string>
-  <string name="settings_preset_descr">Karten- und Navigationeinstellungen werden je Verwendungszweck separat gespeichert.</string>
+  <string name="settings_preset_descr">Karten- und Navigations-Einstellungen werden je Verwendungszweck separat gespeichert.</string>
   <string name="monitor_preferences">Positions-Logging</string>
   <string name="monitor_preferences_descr">Positions-Logging konfigurieren</string>
   <string name="routing_settings">- Navigation</string>
