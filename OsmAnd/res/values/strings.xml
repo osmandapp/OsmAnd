@@ -50,7 +50,7 @@
     <string name="osmand_development_plugin_description">This plugin enables development and debugging features like animated navigation or rendering performance display.</string>
     <string name="plugins_screen">Plugin Manager</string>
     <string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting Osmand may be required.)</string>
-    <string name="prefs_plugins_descr">Plugins provide extra functionality bundled within the application like tracking, tile maps, screen off mode, accessibility settings, and others.</string>
+    <string name="prefs_plugins_descr">Plugins provide extra functionality bundled within the application like tile maps, tracking, sleep mode operation, accessibility settings, and others.</string>
     <string name="prefs_plugins">Plugin Manager</string>
     <string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0 :
 \n\t- Plugin functionality
