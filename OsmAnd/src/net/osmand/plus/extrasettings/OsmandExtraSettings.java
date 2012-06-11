@@ -81,6 +81,11 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		
 		
 		PreferenceScreen appearance = (PreferenceScreen) screen.findPreference("appearance_settings");
+		PreferenceCategory vectorSettings = new PreferenceCategory(app);
+		vectorSettings.setTitle(R.string.pref_vector_rendering);
+		vectorSettings.setKey("custom_vector_rendering");
+		appearance.addPreference(vectorSettings);
+
 		cat = new PreferenceCategory(app);
 		cat.setTitle(R.string.extra_settings);
 		appearance.addPreference(cat);
@@ -95,11 +100,6 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		cat.addPreference(activity.createListPreference(settings.POSITION_ON_MAP,
 				new String[] { activity.getString(R.string.position_on_map_center), activity.getString(R.string.position_on_map_bottom) },
 				new Integer[] { OsmandSettings.CENTER_CONSTANT, OsmandSettings.BOTTOM_CONSTANT }, R.string.position_on_map,
-				R.string.position_on_map_descr));
-		
-		PreferenceCategory vectorSettings = new PreferenceCategory(app);
-		vectorSettings.setTitle(R.string.pref_vector_rendering);
-		vectorSettings.setKey("custom_vector_rendering");
-		appearance.addPreference(vectorSettings);
+				R.string.position_on_map_descr));		
 	}
 }
