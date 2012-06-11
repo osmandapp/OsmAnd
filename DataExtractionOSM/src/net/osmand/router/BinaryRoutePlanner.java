@@ -11,8 +11,10 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
+import java.util.TreeSet;
 
 import net.osmand.LogUtil;
 import net.osmand.ResultMatcher;
@@ -145,11 +147,11 @@ public class BinaryRoutePlanner {
 	 * return list of segments
 	 */
 	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, RouteSegment start, RouteSegment end) throws IOException {
-		boolean relaxingStrategy = true;
+		boolean relaxingStrategy = false;
 		// measure time
 		ctx.timeToLoad = 0;
 		ctx.visitedSegments = 0;
-		long startNanoTime = System.nanoTime();
+		ctx.timeToCalculate = System.nanoTime();
 
 		// Initializing priority queue to visit way segments 
 		Comparator<RouteSegment> segmentsComparator = new Comparator<RouteSegment>(){
@@ -197,9 +199,6 @@ public class BinaryRoutePlanner {
 		while (!graphSegments.isEmpty()) {
 			RouteSegment segment = graphSegments.poll();
 			
-			if(relaxingStrategy) {
-				relaxNotNeededSegments(ctx, graphSegments, segment);
-			}
 
 			ctx.visitedSegments++;
 			// for debug purposes
@@ -222,12 +221,10 @@ public class BinaryRoutePlanner {
 				init = true;
 			} else if (ctx.planRouteIn2Directions()) {
 				inverse = nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) > 0;
-				if (!relaxingStrategy) {
-					if (graphDirectSegments.size() * 1.3 > graphReverseSegments.size()) {
-						inverse = true;
-					} else if (graphDirectSegments.size() < 1.3 * graphReverseSegments.size()) {
-						inverse = false;
-					}
+				if (graphDirectSegments.size() * 1.3 > graphReverseSegments.size()) {
+					inverse = true;
+				} else if (graphDirectSegments.size() < 1.3 * graphReverseSegments.size()) {
+					inverse = false;
 				}
 			} else {
 				// different strategy : use onedirectional graph
@@ -238,42 +235,93 @@ public class BinaryRoutePlanner {
 			} else {
 				graphSegments = graphDirectSegments;
 			}
+			if (relaxingStrategy) {
+				ctx.relaxedIteration++;
+				if (ctx.relaxedIteration > 100) {
+					ctx.relaxedIteration = 0;
+					relaxNotNeededSegments(ctx, graphDirectSegments, true);
+					relaxNotNeededSegments(ctx, graphReverseSegments, false);
+				}
+			}
 		}
 		printDebugMemoryInformation(ctx, graphDirectSegments, graphReverseSegments, visitedDirectSegments, visitedOppositeSegments);
 		
 		// 4. Route is found : collect all segments and prepare result
-		return prepareResult(ctx, startNanoTime);
+		return prepareResult(ctx);
 		
 	}
+	
+	public static class SegmentStat {
+		String name;
+		Set<Float> set = new TreeSet<Float>();
 
-
-	private void relaxNotNeededSegments(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments, RouteSegment currentSegment) {
-		int before = graphSegments.size();
-		if(before > 100) {
-			double maxd = currentSegment.distanceFromStart;
-			double mine = currentSegment.distanceToEnd;
-			Iterator<RouteSegment> iterator = graphSegments.iterator();
-			while(iterator.hasNext()){
-				RouteSegment s = iterator.next();
-				if(s.distanceToEnd < mine){
-					maxd = s.distanceFromStart;
-					mine = s.distanceToEnd;
-				}
-			}
-			double d  = maxd / 2;
-			iterator = graphSegments.iterator();
-			while(iterator.hasNext()){
-				RouteSegment s = iterator.next();
-				if(s.distanceFromStart < d){
-					ctx.relaxedSegments++;
-					iterator.remove();
-				}
-			}
-			int after = graphSegments.size();
-			println("Relaxing : before " + before +" after " + after);
+		public SegmentStat(String name) {
+			this.name = name;
 		}
+
+		void addNumber(float v) {
+			set.add(v);
+		}
+
+		@Override
+		public String toString() {
+			int segmentation = 7;
+			StringBuilder sb = new StringBuilder();
+			sb.append(name).append(" (").append(set.size()).append(") : ");
+			float s = set.size() / ((float) segmentation);
+			int k = 0, number = 0;
+			float limit = 0, value = 0;
+			Iterator<Float> it = set.iterator();
+			while (it.hasNext()) {
+				k++;
+				number++;
+				value += it.next();
+				if (k >= limit) {
+					limit += s;
+					sb.append(value / number).append(" ");
+					number = 0;
+					value = 0;
+				}
+			}
+			if(number > 0) {
+				sb.append(value / number).append(" ");
+			}
+			return sb.toString();
+		}
+
 	}
 
+
+	private void relaxNotNeededSegments(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments, boolean inverse) {
+		
+		RouteSegment next = graphSegments.peek();
+		double mine = next.distanceToEnd;
+//		int before = graphSegments.size();
+//		SegmentStat statStart = new SegmentStat("Distance from start (" + inverse + ") ");
+//		SegmentStat statEnd = new SegmentStat("Distance to end (" + inverse + ") ");
+		Iterator<RouteSegment> iterator = graphSegments.iterator();
+		while (iterator.hasNext()) {
+			RouteSegment s = iterator.next();
+//			statStart.addNumber((float) s.distanceFromStart);
+//			statEnd.addNumber((float) s.distanceToEnd);
+			if (s.distanceToEnd < mine) {
+				mine = s.distanceToEnd;
+			}
+		}
+		double d = mine * 2.5;
+		iterator = graphSegments.iterator();
+		while (iterator.hasNext()) {
+			RouteSegment s = iterator.next();
+			if (s.distanceToEnd > d) {
+				ctx.relaxedSegments++;
+				iterator.remove();
+			}
+		}
+//		int after = graphSegments.size();
+//		println(statStart.toString());
+//		println(statEnd.toString());
+//		println("Relaxing : before " + before + " after " + after + " maxdiststart " + ((float) maxd) + " minend " + ((float) mine));
+	}
 
 	private double h(final RoutingContext ctx, int targetEndX, int targetEndY,
 			int startX, int startY) {
@@ -336,7 +384,7 @@ public class BinaryRoutePlanner {
 	public void printDebugMemoryInformation(RoutingContext ctx, 
 			PriorityQueue<RouteSegment> graphDirectSegments, PriorityQueue<RouteSegment> graphReverseSegments, 
 			TLongObjectHashMap<RouteSegment> visitedDirectSegments, TLongObjectHashMap<RouteSegment> visitedOppositeSegments){
-		println("Time to calculate : " + ctx.timeToCalculate / 1e6 +", time to load : " + ctx.timeToLoad / 1e6	);
+		println("Time to calculate : " + (System.nanoTime() - ctx.timeToCalculate) / 1e6 +", time to load : " + ctx.timeToLoad / 1e6	);
 		println("Loaded tiles : " + ctx.loadedTiles.size() + ", visited roads " + ctx.visitedSegments);
 		println("Relaxed roads: " + ctx.relaxedSegments);
 		if(graphDirectSegments != null && graphReverseSegments != null) {
@@ -700,7 +748,7 @@ public class BinaryRoutePlanner {
 	/**
 	 * Helper method to prepare final result 
 	 */
-	private List<RouteSegmentResult> prepareResult(RoutingContext ctx, long startNanoTime) {
+	private List<RouteSegmentResult> prepareResult(RoutingContext ctx) {
 		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
 		
 		RouteSegment segment = ctx.finalReverseRoute;
@@ -764,8 +812,6 @@ public class BinaryRoutePlanner {
 			}
 			System.out.println("</test>");
 		}
-		
-		ctx.timeToCalculate = (System.nanoTime() - startNanoTime);
 		return result;
 	}
 	

@@ -58,6 +58,7 @@ public class RoutingContext {
 	long timeToCalculate = 0;
 	int visitedSegments = 0;
 	int relaxedSegments = 0;
+	int relaxedIteration = 0;
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
 	
