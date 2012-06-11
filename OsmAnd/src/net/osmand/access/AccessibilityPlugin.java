@@ -39,7 +39,7 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	}
 	@Override
 	public String getName() {
-		return app.getString(R.string.osmand_accessibility_name);
+		return app.getString(R.string.accessibility_preferences);
 	}
 	@Override
 	public void registerLayers(MapActivity activity) {

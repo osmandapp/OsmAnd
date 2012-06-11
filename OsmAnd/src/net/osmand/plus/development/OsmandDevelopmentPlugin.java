@@ -38,7 +38,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 	@Override
 	public String getName() {
-		return app.getString(R.string.osmand_development_plugin_name);
+		return app.getString(R.string.debugging_and_development);
 	}
 	@Override
 	public void registerLayers(MapActivity activity) {

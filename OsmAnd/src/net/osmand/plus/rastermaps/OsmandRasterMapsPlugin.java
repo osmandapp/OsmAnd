@@ -64,7 +64,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 	@Override
 	public String getName() {
-		return app.getString(R.string.osmand_rastermaps_plugin_name);
+		return app.getString(R.string.online_map_settings);
 	}
 	@Override
 	public void registerLayers(MapActivity activity) {

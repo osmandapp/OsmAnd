@@ -46,7 +46,7 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin {
 	}
 	@Override
 	public String getName() {
-		return app.getString(R.string.osmand_background_plugin_name);
+		return app.getString(R.string.osmand_service);
 	}
 	@Override
 	public void registerLayers(MapActivity activity) {

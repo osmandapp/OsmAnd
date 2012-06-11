@@ -18,7 +18,7 @@
 	<string name="favourites_search_desc">Favourites search</string>
 	<string name="history_search_desc">Search history</string>
     <string name="offline_navigation_not_available">Osmand offline navigation is temporarily not available.</string>
-    <string name="left_side_navigation">Left-Hand Driving</string>
+    <string name="left_side_navigation">Left-hand driving</string>
     <string name="left_side_navigation_descr">Select for countries with left-hand traffic</string>
     <string name="download_link_and_local_description">Click here to download or update offline data. \nClick any existing item to see more details, press and hold to deactivate or delete. Current data on device (%1$s free):</string>
     <string name="unknown_from_location">Starting location is not yet determined</string>
@@ -42,18 +42,12 @@
 	<string name="map_settings_descr">Configure the map display</string>
 	
 	<string name="osmand_rastermaps_plugin_description">This plugin facilitates using a variety of online or cached tile maps as base map or as overlay / underlay maps. These maps can also be prepared offline and copied to the Osmand folder.</string>
-    <string name="osmand_rastermaps_plugin_name">Online Maps</string>
-    <string name="osmand_background_plugin_description">This plugin allows tracking or navigation in power saving (screen off) mode by periodically waking up the GPS device to record a track point or play a voice prompt.</string>
-    <string name="osmand_background_plugin_name">Screen Off Features</string>
+    <string name="osmand_background_plugin_description">This plugin allows tracking or navigation in sleep (screen off) mode by periodically waking up the GPS device to record a track point or play a voice prompt.</string>
     <string name="osmand_accessibility_description">This plugin configures special accessibility features.</string>
-    <string name="osmand_accessibility_name">Accessibility</string>
     <string name="extra_settings">Advanced settings</string>
     <string name="osmand_monitoring_description">This plugin facilitates recording your trips to GPX files or live tracking using a web service.</string>
-    <string name="osmand_monitoring_name">Tracking</string>
     <string name="osmand_extra_settings_description">This plugin provides advanced map configuration and some device-specific settings.</string>
-    <string name="osmand_extra_settings_name">Advanced Settings</string>
     <string name="osmand_development_plugin_description">This plugin enables development and debugging features like animated navigation or rendering performance display.</string>
-    <string name="osmand_development_plugin_name">Osmand Development</string>
     <string name="plugins_screen">Plugin Manager</string>
     <string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting Osmand may be required.)</string>
     <string name="prefs_plugins_descr">Plugins provide extra functionality bundled within the application like tracking, tile maps, screen off mode, accessibility settings, and others.</string>
@@ -64,11 +58,10 @@
 \n\t- Lots of bug fixes
 	</string>
     <string name="osm_editing_plugin_description">This plugin facilitates OSM feedback like collecting / modifying OSM POI objects, opening / commenting OSM bugs, and contributing recorded GPX files (requires OSM credentials).</string>
-    <string name="osm_editing_plugin_name">OSM Editing</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vector maps likely display faster. May not work well on some devices.</string>
 	<string name="simulate_route_progression_manually">Simulate route progression manually</string>
 	<string name="play_commands_of_currently_selected_voice">Play commands of currently selected voice</string>
-	<string name="debugging_and_development">Osmand debugging and development</string>
+	<string name="debugging_and_development">Osmand development</string>
 	<string name="native_rendering">Native rendering</string>
 	<string name="animate_routing">Animate navigation</string>
 	<string name="test_voice_prompts">Test voice prompts</string>    
@@ -224,7 +217,7 @@
 	<string name="settings_preset">User Profile</string>
 	<string name="settings_preset_descr">Select a user profile. Each profile contains the set of specific settings.</string>
 	
-	<string name="monitor_preferences">- Tracking</string>
+	<string name="monitor_preferences">Tracking</string>
 	<string name="monitor_preferences_descr">Specify tracking settings</string>
 	<string name="routing_settings">- Navigation</string>
 	<string name="routing_settings_descr">Specify navigation options</string>
@@ -237,7 +230,7 @@
 	<string name="user_name_descr">Needed for openstreetmap.org submissions</string>
 	<string name="user_password">Your OSM password</string>
 	<string name="user_password_descr">Needed for openstreetmap.org submissions</string>
-	<string name="osmand_service">Background Settings</string>
+	<string name="osmand_service">Sleep Mode Functionality</string>
 	<string name="osmand_service_descr">Use to run Osmand while screen is off</string>
 
 	 
@@ -263,7 +256,7 @@
 
 	<string name="tip_osm_improve">Improving OSM Data</string>
 	<string name="tip_osm_improve_t">\tOsmand uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and navigation- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks!
-	\n\tFor this you need to first provide your OSM login information in \'Settings\' -> \'General settings\' -> \'OSM\'.
+	\n\tFor this you need to first provide your OSM login information in \'Settings\' -> \'General settings\' -> \'OSM Editing\'.
 	\n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it.
 	\n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem.
 	\n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button.
@@ -852,7 +845,7 @@
     <string name="data_settings_descr">Specify language, download/reload data</string>
     <string name="data_settings">Data</string>
     <string name="map_preferences_descr">Specify map settings: map source, rotation, marker position, screen orientation</string>
-    <string name="osm_settings">OSM</string>
+    <string name="osm_settings">OSM Editing</string>
     <string name="auto_zoom_map_descr">Auto zoom map according to your speed</string>
     <string name="auto_zoom_map">Auto zoom map</string>
     <string name="additional_settings">Additional settings</string>

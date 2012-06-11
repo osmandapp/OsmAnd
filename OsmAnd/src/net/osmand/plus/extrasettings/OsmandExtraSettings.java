@@ -39,7 +39,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 	}
 	@Override
 	public String getName() {
-		return app.getString(R.string.osmand_extra_settings_name);
+		return app.getString(R.string.extra_settings);
 	}
 	@Override
 	public void registerLayers(MapActivity activity) {

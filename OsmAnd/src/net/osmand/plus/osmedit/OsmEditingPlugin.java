@@ -158,7 +158,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	@Override
 	public String getName() {
-		return app.getString(R.string.osm_editing_plugin_name);
+		return app.getString(R.string.osm_settings);
 	}
 
 }

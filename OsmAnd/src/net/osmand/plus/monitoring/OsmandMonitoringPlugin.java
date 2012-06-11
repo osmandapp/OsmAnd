@@ -50,7 +50,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 	@Override
 	public String getName() {
-		return app.getString(R.string.osmand_monitoring_name);
+		return app.getString(R.string.monitor_preferences);
 	}
 	@Override
 	public void registerLayers(MapActivity activity) {
