@@ -9,8 +9,7 @@
   <string name="local_openstreetmap_uploading_poi">Enviando POIs…</string>
   <string name="local_openstreetmap_poi_were_uploaded">{0} POIs enviados</string>
   <string name="local_openstreetmap_uploadall">Enviar todos los POIs</string>
-  <string name="local_openstreetmap_items">
-  </string>
+  <string name="local_openstreetmap_items">" "</string>
   <string name="local_openstreetmap_show_poi">Mostrar POI en el mapa</string>
   <string name="local_openstreetmap_upload">Enviar modificación a OSM</string>
   <string name="local_openstreetmap_delete">Suprimir modificación a POI</string>
@@ -175,8 +174,7 @@
   <string name="local_index_address_data">Datos de direcciones</string>
   <string name="local_index_transport_data">Datos de transporte</string>
   <string name="local_index_map_data">Datos de mapa</string>
-  <string name="local_index_items">
-  </string>
+  <string name="local_index_items">" "</string>
   <string name="local_indexes_cat_backup">Desactivado</string>
   <string name="local_indexes_cat_tts">Datos de voz (sintetizado)</string>
   <string name="local_indexes_cat_voice">Datos de voz (grabado)</string>
@@ -234,8 +232,7 @@
   <string name="tip_location_sharing_t">\tPuede compartir la localización de lugares interesantes con su familia y amigos. \n\tPara compartir una localización: \n\tUse \'Menú contextual del mapa\' -&gt; \'Compartir localización\'. \n\tLuego seleccione el modo de compartir la localización. Las opciones son: Correo electrónico, SMS(texto), o copiar las coordenadas de la localización al portapapeles.</string>
   <string name="tip_favorites">Puntos favoritos</string>
   <string name="tip_favorites_t">\tLos puntos usados frecuentemente se pueden guardar como favoritos. \n\tPara guardar un punto como favorito, vaya al menú contextual del mapa, seleccione la opción \'Añadir a favoritos\' y escriba un nombre. Después de guardarlo, es accessible vía \'Menú Principal\' -&gt; \'Favoritos\'. \n\tUna pulsación larga sobre un favorito en el menú \'Favoritos\' proporciona opciones para ponerlo como destino, editarlo o borrarlo. \n\tPara mostrar todos los puntos favoritos directamente en el mapa, active la capa \'Favoritos\' en \'Menú contextual del mapa\' -&gt;\'Representación\'.</string>
-  <string name="create_poi_link_to_osm_doc">
-    <u>OSM en línea</u> clasificación con imágenes</string>
+  <string name="create_poi_link_to_osm_doc">" <u>OSM en línea</u> clasificación con imágenes"</string>
   <string name="error_doing_search">Ocurrió un error en la búsqueda</string>
   <string name="search_offline_geo_error">No se pudo analizar el filtro \'%s\'</string>
   <string name="search_osm_offline">Buscar dirección usando mapas sin conexión</string>
@@ -827,4 +824,4 @@
   <string name="use_short_object_names">Use object names</string>
   <string name="accessibility_preferences_descr">Preferencias de accesibilidad</string>
   <string name="accessibility_preferences">Accesibilidad</string>
-</resources>
+<string name="local_index_routing_data">Routing data</string><string name="navigate_point_format">Format :</string><string name="poi_search_desc">POI - Point Of interest</string><string name="address_search_desc">Address search</string><string name="navpoint_search_desc">Navigate point</string><string name="transport_search_desc">Transport search</string><string name="favourites_search_desc">Favourites search</string><string name="history_search_desc">Search history</string></resources>
