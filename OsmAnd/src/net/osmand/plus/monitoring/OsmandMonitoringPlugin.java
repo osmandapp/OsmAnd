@@ -34,9 +34,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	@Override
 	public boolean init(OsmandApplication app) {
 		settings = app.getSettings();
-		settings.SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.CAR, true);
-		settings.SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.BICYCLE, true);
-		settings.SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
+		//settings.SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.CAR, true);
+		//settings.SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.BICYCLE, true);
+		//settings.SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
 		return true;
 	}
 	
@@ -83,7 +83,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		grp.setTitle(R.string.monitor_preferences);
 		grp.setSummary(R.string.monitor_preferences_descr);
 		grp.setKey("monitor_settings");
-		((PreferenceCategory) screen.findPreference("profile_dep_cat")).addPreference(grp);
+		((PreferenceCategory) screen.findPreference("global_settings")).addPreference(grp);
 
 		PreferenceCategory cat = new PreferenceCategory(activity);
 		cat.setTitle(R.string.save_track_to_gpx);
