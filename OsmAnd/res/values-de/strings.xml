@@ -8,8 +8,8 @@
 	<string name="map_settings">- Karten-Einstellungen</string>
 	<string name="map_settings_descr">Konfigurieren der Karten-Anzeige</string>
 	
-	<string name="osmand_rastermaps_plugin_description">Dieses Modul ermöglicht die Verwendung vieler online oder gecachter Kachel-Kartenquellen, auch als Overlay- oder Underlay-Karte. Solche Kachel-Karten können auch offline erstellt und dann in das Osmand-Verzeichnis kopiert werden.</string>
-    <string name="osmand_background_plugin_description">Dieses Modul ermöglicht das Positions-Logging oder die Navigation während das Gerät im Standby-Modus ist. Dabei wird der GPS-Empfänger periodisch geweckt um einen Punkt aufzuzeichnen oder ein Kommando zu geben.</string>
+	<string name="osmand_rastermaps_plugin_description">Dieses Modul ermöglicht die Verwendung vieler online oder gecachter Kachel-Kartenquellen, auch als Overlay- oder Underlay. Solche Karten können auch offline erstellt und in das Osmand-Verzeichnis kopiert werden.</string>
+    <string name="osmand_background_plugin_description">Dieses Modul ermöglicht das Positions-Logging oder die Navigation während das Gerät im Standby-Modus ist durch periodischen Aufwecken des GPS-Empfängers.</string>
     <string name="osmand_accessibility_description">Dieses Modul konfiguriert spezielle Barrierefreiheits-Einstellungen.</string>
     <string name="extra_settings">Erweiterte Einstellungen</string>
     <string name="osmand_monitoring_description">Dieses Modul ermöglicht die Aufzeichnung zurückgelegter Strecken in GPX-Dateien oder das Live-Tracking via Web-Service.</string>
@@ -24,7 +24,7 @@
   <string name="vector_maps_may_display_faster_on_some_devices">Vektorkarten werden eventuell schneller angezeigt. Funktioniert nur auf manchen Geräten.</string>
   <string name="simulate_route_progression_manually">Simuliere die Navigation</string>
   <string name="play_commands_of_currently_selected_voice">Spiele Ansagen der aktuell ausgewählten Stimme ab</string>
-  <string name="debugging_and_development">Osmand Debugging und Entwicklung</string>
+  <string name="debugging_and_development">Osmand Debugging</string>
   <string name="native_rendering">Natives Rendern</string>
   <string name="animate_routing">Simuliere Navigation</string>
   <string name="test_voice_prompts">Sprachansagen testen</string>
