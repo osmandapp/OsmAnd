@@ -504,7 +504,7 @@
   <string name="data_settings_descr">Ustaw język, pobierz/przeładuj dane</string>
   <string name="data_settings">Dane</string>
   <string name="map_preferences_descr">Zmień ustawienia mapy: źródło mapy, obracanie, pozycję markera, orientację ekranu</string>
-  <string name="osm_settings">OSM</string>
+  <string name="osm_settings">Edycja OSM</string>
   <string name="auto_zoom_map_descr">Dostosuj zoom mapy do Twojej prędkości</string>
   <string name="auto_zoom_map">Autozoom mapy</string>
   <string name="additional_settings">Ustawienia dodatkowe</string>
@@ -813,7 +813,7 @@
   <string name="global_settings">Ustawienia globalne</string>
   <string name="global_app_settings">Ustawienia globalne aplikacji</string>
   <string name="tip_osm_improve">Poprawa danych OSM</string>
-  <string name="tip_osm_improve_t">\tOsmAnd używa map pochodzących z danych Openstreetmap.org (OSM) i, poza wyświetlaniem map oraz nawigacji, może być używany do poprawienia jakości danych OSM. Możesz, używając jedynie kilku kliknięć, łatwo stworzyć i wysłać nowe POI lub zgłosić błąd w danych OSM.\n\tW tym celu najpierw musisz ustawić swój login oraz hasło OSM w \'Ustawienia\' -&gt; \'Ustawienia globalne\' -&gt; \'OSM\'\n\tAby dodać nowe POI, użyj opcji \'Utwórz POI\' w menu kontekstowym mapy. Wpisz informacje na temat nowego POI w oknie dialogowym \'Stwórz POI\' i zatwierdź go.\n\tBłędy w mapach mogą być natychmiast zgłoszone jako błąd OSM, dzięki czemu społeczność OSM może szybciej naprawić problem.\n\tAby dodać błąd OSM użyj opcji \'Zgłoś błąd do OSM\' w menu kontekstowym mapy. Następnie wpisz dokładny opis problemu a następnie wyślij go używając przycisku \'Dodaj\'.\n\tAby dodawać POI OSM lub zgłaszać błędy do OSM, wymagane jest połączenie z Internetem.</string>
+  <string name="tip_osm_improve_t">\tOsmAnd używa map pochodzących z danych Openstreetmap.org (OSM) i, poza wyświetlaniem map oraz nawigacji, może być używany do poprawienia jakości danych OSM. Możesz, używając jedynie kilku kliknięć, łatwo stworzyć i wysłać nowe POI lub zgłosić błąd w danych OSM.\n\tW tym celu najpierw musisz ustawić swój login oraz hasło OSM w \'Ustawienia\' -&gt; \'Ustawienia globalne\' -&gt; \'Edycja OSM\'\n\tAby dodać nowe POI, użyj opcji \'Utwórz POI\' w menu kontekstowym mapy. Wpisz informacje na temat nowego POI w oknie dialogowym \'Stwórz POI\' i zatwierdź go.\n\tBłędy w mapach mogą być natychmiast zgłoszone jako błąd OSM, dzięki czemu społeczność OSM może szybciej naprawić problem.\n\tAby dodać błąd OSM użyj opcji \'Zgłoś błąd do OSM\' w menu kontekstowym mapy. Następnie wpisz dokładny opis problemu a następnie wyślij go używając przycisku \'Dodaj\'.\n\tAby dodawać POI OSM lub zgłaszać błędy do OSM, wymagane jest połączenie z Internetem.</string>
   <string name="download_files_not_enough_space">Nie ma wystarczająco miejsca aby pobrać %1$s MB (dostępne miejsce: %2$s).</string>
   <string name="download_files_question_space">Aktualnie dostępna przestrzeń: {2} MB! Pobrać {0} plik(ów) ({1} MB)?</string>
   <string name="poi_query_by_name_matches_categories">Znaleziono kilka kategorii POI odpowiadających zapytaniu :</string>

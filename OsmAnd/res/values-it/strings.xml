@@ -551,7 +551,7 @@
   <string name="data_settings_descr">Specificare impostazioni dati: lingua, aggiorna dati</string>
   <string name="data_settings">Dati</string>
   <string name="map_preferences_descr">Specificare impostazioni mappa: fonte, rotazione, posizione marker, orientazione schermo</string>
-  <string name="osm_settings">OSM</string>
+  <string name="osm_settings">OSM Editing</string>
   <string name="auto_zoom_map_descr">Zoom automatico relativo alla velocità</string>
   <string name="auto_zoom_map">Zoom automatico mappa</string>
   <string name="additional_settings">Impostazioni aggiuntive</string>
