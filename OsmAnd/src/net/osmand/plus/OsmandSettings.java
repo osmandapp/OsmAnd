@@ -561,13 +561,14 @@ public class OsmandSettings {
 	{
 		DAYNIGHT_MODE.setModeDefaultValue(ApplicationMode.CAR, DayNightMode.AUTO);
 		DAYNIGHT_MODE.setModeDefaultValue(ApplicationMode.BICYCLE, DayNightMode.AUTO);
+		DAYNIGHT_MODE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, DayNightMode.DAY);
 	}
 		
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	// make cloudmade by default why osmand is not stable enough
 	public final OsmandPreference<RouteService> ROUTER_SERVICE = 
-		new EnumIntPreference<RouteService>("router_service", RouteService.CLOUDMADE, false, RouteService.values());
+		new EnumIntPreference<RouteService>("router_service", RouteService.OSMAND, false, RouteService.values());
 	
 	public final CommonPreference<Boolean> LEFT_SIDE_NAVIGATION = new BooleanPreference("left_side_navigation", false, true);
 
@@ -621,9 +622,9 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> SHOW_VIEW_ANGLE = new BooleanPreference("show_view_angle", false, false, true);
 	{
+		SHOW_VIEW_ANGLE.setModeDefaultValue(ApplicationMode.CAR, false);
 		SHOW_VIEW_ANGLE.setModeDefaultValue(ApplicationMode.BICYCLE, true);
 		SHOW_VIEW_ANGLE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
-		SHOW_VIEW_ANGLE.setModeDefaultValue(ApplicationMode.CAR, false);
 	}
 
 	// this value string is synchronized with settings_pref.xml preference name
@@ -634,7 +635,7 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	// seconds to auto_follow 
-	public final CommonPreference<Integer> AUTO_FOLLOW_ROUTE = new IntPreference("auto_follow_route", 0, false);
+	public final CommonPreference<Integer> AUTO_FOLLOW_ROUTE = new IntPreference("auto_follow_route", 10, false);
 	{
 		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.CAR, 10);
 		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.BICYCLE, 10);
@@ -682,7 +683,7 @@ public class OsmandSettings {
 			AudioManager.STREAM_MUSIC, true);
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> USE_ENGLISH_NAMES = new BooleanPreference("use_english_names", false, false);
+	public final OsmandPreference<Boolean> USE_ENGLISH_NAMES = new BooleanPreference("use_english_names", false, true);
 	
 	public boolean usingEnglishNames(){
 		return USE_ENGLISH_NAMES.get();
@@ -1201,7 +1202,7 @@ public class OsmandSettings {
 			new BooleanPreference("fluorescent_overlays", true, false, true);
 
 	public final CommonPreference<Boolean> SHOW_ALTITUDE_INFO = 
-			new BooleanPreference("show_altitude_info", false, false, true);
+			new BooleanPreference("show_altitude_info", true, false, true);
 	{
 		SHOW_ALTITUDE_INFO.setModeDefaultValue(ApplicationMode.CAR, false);
 	}

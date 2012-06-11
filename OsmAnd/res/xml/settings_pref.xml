@@ -29,8 +29,6 @@
 			<CheckBoxPreference android:summary="@string/auto_follow_route_navigation_descr" android:title="@string/auto_follow_route_navigation"
 				android:key="auto_follow_route_navigation"></CheckBoxPreference>
 			-->
-			<CheckBoxPreference android:summary="@string/left_side_navigation_descr" android:title="@string/left_side_navigation"
-				android:key="left_side_navigation"></CheckBoxPreference>	
 			<!-- CheckBoxPreference android:summary="@string/use_osmand_routing_service_descr" android:title="@string/use_osmand_routing_service"
 				android:key="use_osmand_routing_service"></CheckBoxPreference -->
 		</PreferenceScreen>
@@ -44,6 +42,8 @@
 				<CheckBoxPreference android:summary="@string/use_english_names_descr" android:title="@string/use_english_names"
 					android:key="use_english_names"></CheckBoxPreference>
 				<ListPreference android:key="default_metric_system" android:title="@string/unit_of_length" android:summary="@string/unit_of_length_descr"></ListPreference>
+				<CheckBoxPreference android:summary="@string/left_side_navigation_descr" android:title="@string/left_side_navigation"
+					android:key="left_side_navigation"></CheckBoxPreference>
 				<CheckBoxPreference android:key="native_rendering" android:title="@string/native_rendering" android:summary="@string/vector_maps_may_display_faster_on_some_devices"></CheckBoxPreference>
 				<EditTextPreference android:title="@string/application_dir" android:key="external_storage_dir"></EditTextPreference>
 			</PreferenceCategory>
