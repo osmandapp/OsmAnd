@@ -64,8 +64,7 @@ public class IndexCreator {
 	private boolean indexPOI;
 	private boolean indexTransport;
 	private boolean indexAddress;
-	// FIXME
-	private boolean indexRouting /*= true*/;
+	private boolean indexRouting = true;
 
 	private boolean normalizeStreets = true; // true by default
 	private int zoomWaySmothness = 2;
