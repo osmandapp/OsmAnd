@@ -57,7 +57,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
     }
 	
 	public void showDialog(){
-		setSize(700, 500);
+		setSize(700, 570);
         double x = getParent().getBounds().getCenterX();
         double y = getParent().getBounds().getCenterY();
         setLocation((int) x - getWidth() / 2, (int) y - getHeight() / 2);
@@ -161,7 +161,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
         constr.ipadx = 5;
         constr.gridx = 1;
         constr.gridy = gridY++;
-        l.setConstraints(directionPlanRoute, constr);
+        l.setConstraints(routingMode, constr);
 		
 		label = new JLabel("Direction to plan route (0 - both, 1 - forward, -1 - backward) : ");
         panel.add(label);

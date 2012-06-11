@@ -74,36 +74,17 @@ public class CarRouter extends VehicleRouter {
 		for(int i=0; i<sz; i++) {
 			RouteTypeRule r = reg.quickGetEncodingRule(pointTypes.getQuick(i));
 			if(r.getType() == RouteTypeRule.TRAFFIC_SIGNALS) {
-				return 20;
+				return 35;
 			} else if(r.getType() == RouteTypeRule.RAILWAY_CROSSING) {
-				return 25;
+				return 20;
 			}
 		}
 		return 0;
 	}
 	
-	@Override
-	public double getRoadPriorityHeuristicToIncrease(RouteDataObject road) {
-		String highway = getHighway(road);
-		double priority = highway !=null && autoPriorityValues.containsKey(highway) ? autoPriorityValues.get(highway) : 0.5d;
-		// allow to get out from motorway to primary roads
-//		if("motorway_link".equals(pair.value) || "trunk".equals(pair.value) ||
-//				"trunk_link".equals(pair.value) || "motorway".equals(pair.value)) {
-//			return 1.3d;
-//		} else 
-		if(priority >= 1){
-			return 1;
-		} else if(priority >= 0.7){
-			return 0.7;
-		} else if(priority >= 0.5){
-			return 0.5;
-		} else {
-			return 0.3;
-		}
-	}
 	
 	@Override
-	public double getRoadPriorityToCalculateRoute(RouteDataObject road) {
+	public double getFutureRoadPriority(RouteDataObject road) {
 		String highway = getHighway(road);
 		double priority = highway != null && autoPriorityValues.containsKey(highway) ? autoPriorityValues.get(highway) : 0.5d;
 		// keep it in boundaries otherwise
@@ -133,12 +114,19 @@ public class CarRouter extends VehicleRouter {
 				highway = r.highwayRoad();
 			}
 		}
-		double priority = highway != null && autoPriorityValues.containsKey(highway) ? autoPriorityValues.get(highway) : 0.5d;
+		
 		Double value = autoNotDefinedValues.get(highway);
 		if (value == null) {
-			value = 50d;
+			value = 45d;
 		}
-		return value / 3.6d * priority;
+		return value / 3.6d;
+	}
+	
+	@Override
+	public double defineSpeedPriority(RouteDataObject road) {
+		String highway = road.getHighway();
+		double priority = highway != null && autoPriorityValues.containsKey(highway) ? autoPriorityValues.get(highway) : 0.5d;
+		return priority;
 	}
 
 	/**
@@ -148,7 +136,7 @@ public class CarRouter extends VehicleRouter {
 	 */
 	@Override
 	public double getMinDefaultSpeed() {
-		return 9;
+		return 12;
 	}
 
 	/**
@@ -203,7 +191,7 @@ public class CarRouter extends VehicleRouter {
 				double a2 = directionRoute(next, next.segmentStart, true);
 				double diff = Math.abs(a1 - a2);
 				if (diff > Math.PI / 2 && diff < 3 * Math.PI / 2) {
-					return 25;
+					return 20;
 				}
 			}
 			return 0;

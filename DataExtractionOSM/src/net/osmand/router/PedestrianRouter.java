@@ -5,7 +5,6 @@ import gnu.trove.list.array.TIntArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteDataObject;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
@@ -70,14 +69,21 @@ public class PedestrianRouter extends VehicleRouter {
 		pedestrianPriorityValues.put("services", 1d);
 		pedestrianPriorityValues.put("steps", 1.2d);
 	}
+
+	@Override
+	public double getFutureRoadPriority(RouteDataObject road) {
+		String highway = getHighway(road);
+		double priority = pedestrianPriorityValues.containsKey(highway) ? pedestrianPriorityValues.get(highway) : 1d;
+		return priority;
+	}
 	
-		@Override
-		public double getRoadPriorityToCalculateRoute(RouteDataObject road) {
-			String highway = getHighway(road);
-			double priority = highway!= null && pedestrianPriorityValues.containsKey(highway) ? pedestrianPriorityValues.get(highway) : 1d;
-			return priority;
-		}
-	
+	@Override
+	public double defineSpeedPriority(RouteDataObject road) {
+		String highway = getHighway(road);
+		double priority = pedestrianPriorityValues.containsKey(highway) ? pedestrianPriorityValues.get(highway) : 1d;
+		return priority;
+	}
+
 	@Override
 	public int isOneWay(RouteDataObject road) {
 		return 0;
@@ -122,14 +128,13 @@ public class PedestrianRouter extends VehicleRouter {
 	public double defineSpeed(RouteDataObject road) {
 		double speed = 1.5d;
 		String highway = getHighway(road);
-		double priority = highway != null && pedestrianPriorityValues.containsKey(highway) ? pedestrianPriorityValues.get(highway) : 1d;
 		if (highway != null) {
 			Double value = pedestrianNotDefinedValues.get(highway);
 			if (value != null) {
 				speed = value;
 			}
 		}
-		return speed * priority;
+		return speed;
 	}
 
 	/**

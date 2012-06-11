@@ -5,7 +5,6 @@ import gnu.trove.list.array.TIntArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteDataObject;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
@@ -99,9 +98,9 @@ public class BicycleRouter extends VehicleRouter {
 	}
 	
 	@Override
-	public double getRoadPriorityToCalculateRoute(RouteDataObject road) {
+	public double getFutureRoadPriority(RouteDataObject road) {
 		String highway = getHighway(road);
-		double priority = highway != null && bicyclePriorityValues.containsKey(highway) ? bicyclePriorityValues.get(highway) : 1d;
+		double priority = bicyclePriorityValues.containsKey(highway) ? bicyclePriorityValues.get(highway) : 1d;
 		return priority;
 	}
 
@@ -110,13 +109,18 @@ public class BicycleRouter extends VehicleRouter {
 	 */
 	@Override
 	public double defineSpeed(RouteDataObject road) {
-		String highway = getHighway(road);
-		double priority = highway != null && bicyclePriorityValues.containsKey(highway) ? bicyclePriorityValues.get(highway) : 0.5d;
-		Double value = bicycleNotDefinedValues.get(highway);
+		Double value = bicycleNotDefinedValues.get(getHighway(road));
 		if (value == null) {
 			value = 4d;
 		}
-		return value / 3.6d * priority;
+		return value / 3.6d ;
+	}
+	
+	@Override
+	public double defineSpeedPriority(RouteDataObject road) {
+		String highway = getHighway(road);
+		double priority = bicyclePriorityValues.containsKey(highway) ? bicyclePriorityValues.get(highway) : 0.5d;
+		return priority;
 	}
 
 

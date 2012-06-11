@@ -42,7 +42,6 @@ import net.osmand.router.CarRouter;
 import net.osmand.router.PedestrianRouter;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
-import net.osmand.router.VehicleRouter;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
 
@@ -546,7 +545,7 @@ public class MapRouterLayer implements MapPanelLayer {
 			playPauseButton.setText("Play");
 		}
 		stop = false;
-		if(files == null){
+		if(files.isEmpty()){
 			JOptionPane.showMessageDialog(OsmExtractionUI.MAIN_APP.getFrame(), "Please specify obf file in settings", "Obf file not found", 
 					JOptionPane.ERROR_MESSAGE);
 			return null;
@@ -647,18 +646,10 @@ public class MapRouterLayer implements MapPanelLayer {
 					}
 
 				});
-				// TODO delete this block after
-				net.osmand.osm.Node ns = createNode(st, st.getSegmentStart());
-				points.registerObject(ns.getLatitude(), ns.getLongitude(), ns);
-				ns = createNode(e, e.getSegmentStart());
-				points.registerObject(ns.getLatitude(), ns.getLongitude(), ns);
-				if (pause && animateRoutingCalculation) {
-					waitNextPress();
-				}
-				// TODO delete this block after
 				
 				List<RouteSegmentResult> searchRoute = router.searchRoute(ctx, st, e);
-				if (pause && animateRoutingCalculation) {
+				if (animateRoutingCalculation) {
+					playPauseButton.setVisible(false);
 					nextTurn.setText("FINISH");
 					waitNextPress();
 					nextTurn.setText(">>");
@@ -667,20 +658,20 @@ public class MapRouterLayer implements MapPanelLayer {
 				for (RouteSegmentResult s : searchRoute) {
 					// double dist = MapUtils.getDistance(s.startPoint, s.endPoint);
 					Way way = new Way(-1);
-					boolean plus = s.startPointIndex < s.endPointIndex;
-					int i = s.startPointIndex;
+					boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
+					int i = s.getStartPointIndex();
 					while (true) {
-						net.osmand.osm.Node n = new net.osmand.osm.Node(MapUtils.get31LatitudeY(s.object.getPoint31YTile(i)), MapUtils
-								.get31LongitudeX(s.object.getPoint31XTile(i)), -1);
+						LatLon l = s.getPoint(i);
+						net.osmand.osm.Node n = new net.osmand.osm.Node(l.getLatitude(), l.getLongitude(), -1);
 						if (prevWayNode != null) {
 							if (MapUtils.getDistance(prevWayNode, n) > 0) {
-								System.out.println("Warning not connected road " + " " + s.object.getHighway() + " dist "
+								System.out.println("Warning not connected road " + " " + s.getObject().getHighway() + " dist "
 										+ MapUtils.getDistance(prevWayNode, n));
 							}
 							prevWayNode = null;
 						}
 						way.addNode(n);
-						if (i == s.endPointIndex) {
+						if (i == s.getEndPointIndex()) {
 							break;
 						}
 						if (plus) {

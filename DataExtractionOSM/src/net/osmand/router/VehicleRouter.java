@@ -34,25 +34,11 @@ public abstract class VehicleRouter {
 		return road.getHighway();
 	}
 	
-	/**
-	 * Used for algorithm of increasing road priorities (actually make sense only for car routing)
-	 * other routers can increase/decrease road priorities in the middle of route
-	 * @param road
-	 * @return
-	 */
-	public double getRoadPriorityHeuristicToIncrease(RouteDataObject road) {
-		return 1;
-	}
-	
 	
 	/**
-	 * Used for algorithm to estimate end distance
-	 * @param road
-	 * @return
+	 * Used for algorithm to multiply h(x) part A* based on current road
 	 */
-	public double getRoadPriorityToCalculateRoute(RouteDataObject road) {
-		return 1;
-	}
+	public abstract double getFutureRoadPriority(RouteDataObject road);
 
 	/**
 	 * return delay in seconds
@@ -63,9 +49,14 @@ public abstract class VehicleRouter {
 	}
 
 	/**
-	 * return speed in m/s for vehicle
+	 * return speed in m/s for vehicle for specified road
 	 */
 	public abstract double defineSpeed(RouteDataObject road);
+	
+	/**
+	 * define priority to multiply the speed for g(x) A* 
+	 */
+	public abstract double defineSpeedPriority(RouteDataObject road);
 
 	/**
 	 * Used for A* routing to calculate g(x)

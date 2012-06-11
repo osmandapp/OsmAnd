@@ -119,17 +119,17 @@ public class RouterTestsSuite {
 			int expectedStart = Integer.parseInt(segment.getAttribute("start"));
 			int expectedEnd = Integer.parseInt(segment.getAttribute("end"));
 			RouteSegmentResult segmentResult = route.get(i);
-			if (expectedId != segmentResult.object.getId() >> 1) {
+			if (expectedId != segmentResult.getObject().getId() >> 1) {
 				throw new IllegalArgumentException("Test : '" + testDescription + "' on segment " + (i + 1) + " : " + "\n"
-						+ "(expected route id) " + expectedId + " != " + (segmentResult.object.getId() >> 1) + " (actual route id)");
+						+ "(expected route id) " + expectedId + " != " + (segmentResult.getObject().getId() >> 1) + " (actual route id)");
 			}
-			if (expectedStart != segmentResult.startPointIndex) {
+			if (expectedStart != segmentResult.getStartPointIndex()) {
 				throw new IllegalArgumentException("Test : '" + testDescription + "' on segment " + (i + 1) + " : " + "\n"
-						+ "(expected start index) " + expectedStart + " != " + segmentResult.startPointIndex + " (actual start index)");
+						+ "(expected start index) " + expectedStart + " != " + segmentResult.getStartPointIndex() + " (actual start index)");
 			}
-			if (expectedEnd != segmentResult.endPointIndex) {
+			if (expectedEnd != segmentResult.getEndPointIndex()) {
 				throw new IllegalArgumentException("Test : '" + testDescription + "' on segment " + (i + 1) + " : " + "\n"
-						+ "(expected end index) " + expectedEnd + " != " + segmentResult.endPointIndex + " (actual end index)");
+						+ "(expected end index) " + expectedEnd + " != " + segmentResult.getEndPointIndex() + " (actual end index)");
 			}
 
 			i++;

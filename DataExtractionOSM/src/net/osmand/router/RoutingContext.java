@@ -30,7 +30,7 @@ public class RoutingContext {
 	private boolean usingShortestWay = false;
 
 	
-	// 2. Routing memory cache
+	// 2. Routing memory cache (big objects)
 	TLongObjectMap<RouteSegment> routes = new TLongObjectHashMap<RouteSegment>();
 	TIntSet loadedTiles = new TIntHashSet();
 	// TODO delete this object ?
@@ -52,12 +52,12 @@ public class RoutingContext {
 	RouteSegment finalReverseRoute = null;
 	int finalReverseEndSegment = 0;
 
-	
 
 	// 3. debug information (package accessor)
 	long timeToLoad = 0;
 	long timeToCalculate = 0;
 	int visitedSegments = 0;
+	int relaxedSegments = 0;
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
 	

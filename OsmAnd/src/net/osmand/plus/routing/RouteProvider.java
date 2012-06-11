@@ -637,14 +637,15 @@ public class RouteProvider {
 		try {
 			List<RouteSegmentResult> result = router.searchRoute(ctx, st, en);
 			for (RouteSegmentResult s : result) {
-				boolean plus = s.startPointIndex < s.endPointIndex;
-				int i = s.startPointIndex;
+				boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
+				int i = s.getStartPointIndex();
 				while (true) {
 					Location n = new Location(""); //$NON-NLS-1$
-					n.setLatitude(MapUtils.get31LatitudeY(s.object.getPoint31YTile(i)));
-					n.setLongitude(MapUtils.get31LongitudeX(s.object.getPoint31XTile(i)));
+					LatLon point = s.getPoint(i);
+					n.setLatitude(point.getLatitude());
+					n.setLongitude(point.getLongitude());
 					res.add(n);
-					if (i == s.endPointIndex) {
+					if (i == s.getEndPointIndex()) {
 						break;
 					}
 					if (plus) {
