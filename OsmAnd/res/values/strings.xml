@@ -11,17 +11,17 @@
     -->
     <string name="local_index_routing_data">Routing data</string>
     <string name="navigate_point_format">Format :</string>
-	<string name="poi_search_desc">POI - Point Of interest</string>
+	<string name="poi_search_desc">POI (Point of interest) search</string>
 	<string name="address_search_desc">Address search</string>
 	<string name="navpoint_search_desc">Coordinates</string>
 	<string name="transport_search_desc">Transport search</string>
-	<string name="favourites_search_desc">Favourites search</string>
+	<string name="favourites_search_desc">Favorites search</string>
 	<string name="history_search_desc">Search history</string>
     <string name="offline_navigation_not_available">Osmand offline navigation is temporarily not available.</string>
     <string name="left_side_navigation">Left-hand driving</string>
     <string name="left_side_navigation_descr">Select for countries with left-hand traffic</string>
     <string name="download_link_and_local_description">Click here to download or update offline data. \nClick any existing item to see more details, press and hold to deactivate or delete. Current data on device (%1$s free):</string>
-    <string name="unknown_from_location">Starting location is not yet determined</string>
+    <string name="unknown_from_location">Starting point is not yet determined</string>
     <string name="unknown_location">Position not yet known</string>
     <string name="context_menu_item_directions">Directions to here</string>
     <string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
