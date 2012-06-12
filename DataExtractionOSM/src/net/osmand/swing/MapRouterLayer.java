@@ -581,7 +581,7 @@ public class MapRouterLayer implements MapPanelLayer {
 				// find closest way
 				RouteSegment st = router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);
 				if (st == null) {
-					throw new RuntimeException("Start point to calculate route was not found");
+					throw new RuntimeException("Starting point for route not found");
 				}
 				System.out.println("ROAD TO START " + st.getRoad().getHighway() + " " + st.getRoad().id);
 				

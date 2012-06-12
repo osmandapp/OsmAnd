@@ -670,7 +670,7 @@ public class RouteProvider {
 		}
 		RouteSegment st= router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);
 		if (st == null) {
-			return new RouteCalculationResult("Start point is far from allowed road.");
+			return new RouteCalculationResult("Starting point too far from nearest road.");
 		}
 		RouteSegment en = router.findRouteSegment(end.getLatitude(), end.getLongitude(), ctx);
 		if (en == null) {
