@@ -51,7 +51,6 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	
 	@Override
 	public void mapActivityCreate(MapActivity activity) {
-//		activity.addDialogProvider(parkingLayer);
 	}
 	
 	@Override

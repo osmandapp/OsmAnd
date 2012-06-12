@@ -15,7 +15,10 @@ import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TextInfoControl;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -30,7 +33,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-public class ParkingPositionLayer extends OsmandMapLayer implements /*DialogProvider,*/ ContextMenuLayer.IContextMenuProvider{
+public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider{
 	private static final int radius = 16;
 	
 	private Paint bitmapPaint;
@@ -90,6 +93,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements /*DialogProv
 
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
+		parkingPoint = settings.getParkingPosition();
 		if (parkingPoint == null)
 			return;
 		double latitude = parkingPoint.getLatitude();
@@ -129,8 +133,29 @@ public class ParkingPositionLayer extends OsmandMapLayer implements /*DialogProv
 	public boolean onSingleTap(PointF point) {
 		if(isParkingPointPressed(point)){
 			StringBuilder res = new StringBuilder();
-			res.append(R.string.osmand_parking_position_toast);
+			res.append(view.getContext().getString(R.string.osmand_parking_position_toast));
 			AccessibleToast.makeText(view.getContext(), res.toString(), Toast.LENGTH_LONG).show();
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean onLongPressEvent(PointF point) {
+		if (isParkingPointPressed(point)) {
+			Builder confirm = new AlertDialog.Builder(map);
+			confirm.setPositiveButton(R.string.default_buttons_yes,
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							settings.clearParkingPosition();
+							refreshMap();
+						}
+					});
+			confirm.setCancelable(true);
+			confirm.setNegativeButton(R.string.default_buttons_cancel, null);
+			confirm.setMessage("Do you want to remove the parking position?");
+			confirm.show();
 			return true;
 		}
 		return false;
@@ -159,8 +184,8 @@ public class ParkingPositionLayer extends OsmandMapLayer implements /*DialogProv
 	}
 
 	@Override
-	public String getObjectDescription(Object o) {
-		return map.getString(R.string.osmand_parking_position_description);
+	public String getObjectDescription(Object o) {		
+		return "tra-ta-ta";
 	}
 
 	@Override
@@ -230,41 +255,6 @@ public class ParkingPositionLayer extends OsmandMapLayer implements /*DialogProv
 		}
 		return true;
 	}
-
-//	@Override
-//	public Dialog onCreateDialog(int id) {
-//		Builder confirm = new AlertDialog.Builder(map);
-//		confirm.setPositiveButton(R.string.default_buttons_yes,
-//				new DialogInterface.OnClickListener() {
-//					@Override
-//					public void onClick(DialogInterface dialog, int which) {
-//						settings.clearParkingPosition();
-//						view.refreshMap(true);
-//					}
-//				});
-//		confirm.setCancelable(true);
-//		confirm.setNegativeButton(R.string.default_buttons_cancel, null);
-//		confirm.setMessage("Do you want to remove the parking position?");
-//		confirm.show();
-//		return confirm.create();
-//	}
-//
-//	@Override
-//	public void onPrepareDialog(int id, Dialog dialog) {
-//		Builder confirm = new AlertDialog.Builder(map);
-//		confirm.setPositiveButton(R.string.default_buttons_yes,
-//				new DialogInterface.OnClickListener() {
-//					@Override
-//					public void onClick(DialogInterface dialog, int which) {
-//						settings.clearParkingPosition();
-//						refreshMap();
-//					}
-//				});
-//		confirm.setCancelable(true);
-//		confirm.setNegativeButton(R.string.default_buttons_cancel, null);
-//		confirm.setMessage("Do you want to remove the parking position?");
-//		confirm.show();
-//	}
 	
 	public void refreshMap(){
 		if (view != null && view.getLayers().contains(ParkingPositionLayer.this)) {
