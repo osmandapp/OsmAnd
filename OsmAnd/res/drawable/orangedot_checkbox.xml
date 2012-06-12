@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- checked -->
+    <item android:state_checked="true">
+        <bitmap android:gravity="center" android:src="@drawable/list_activities_dot_marker2_pressed" />
+    </item>
+    <!-- unchecked -->
+    <item><bitmap android:gravity="center" android:src="@drawable/list_activities_dot_marker2_unpressed" />
+    </item>
+
+</selector>

@@ -68,7 +68,11 @@ public class ContextMenuAdapter {
 	public void registerSelectedItem(int stringResId, int selected, int icon) {
 		registerSelectedItem(stringResId, selected, icon, null, -1);
 	}
-	
+
+	public void registerItem(int stringResId, int icon) {
+		registerSelectedItem(stringResId, -1, icon);
+	}
+
 	public void registerItem(int stringResId) {
 		registerSelectedItem(stringResId, -1, 0);
 	}

@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingBottom="0dip"
     android:paddingLeft="5dip"
     android:paddingRight="5dip"
-    android:paddingTop="0dip" >
-    <TextView
+    android:paddingTop="0dip"
+    android:weightSum="1" >
+
+    <TextView
         android:id="@+id/title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/check_item"
         android:drawableLeft="@drawable/list_activities_poi"
         android:gravity="center_vertical"
         android:text="@string/layer_poi"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/color_black" />
-
+        android:textColor="@color/color_black" android:layout_weight="1"/>
+
     <CheckBox
         android:id="@+id/check_item"
-        android:layout_width="wrap_content"
+        android:layout_width="25dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-         android:focusable="false" />
+        android:button="@drawable/orangedot_checkbox"
+        android:focusable="false" />
 
-</RelativeLayout>
+</LinearLayout>

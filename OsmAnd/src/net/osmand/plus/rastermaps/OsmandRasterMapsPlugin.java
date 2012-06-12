@@ -222,8 +222,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					}
 				}
 			};
-			adapter.registerItem(R.string.context_menu_item_update_map, 0, listener, -1);
-			adapter.registerItem(R.string.context_menu_item_download_map, 0, listener, -1);
+			adapter.registerItem(R.string.context_menu_item_update_map, R.drawable.list_activities_update_map, listener, -1);
+			adapter.registerItem(R.string.context_menu_item_download_map, R.drawable.list_activities_download_map, listener, -1);
 		}
 	}
 	

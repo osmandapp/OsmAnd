@@ -268,7 +268,7 @@ public class MapActivityLayers {
 		adapter.registerSelectedItem(R.string.layer_poi, settings.SHOW_POI_OVER_MAP.get() ? 1 : 0, 
 				R.drawable.list_activities_poi);
 		adapter.registerSelectedItem(R.string.layer_poi_label, settings.SHOW_POI_LABEL.get() ? 1 : 0, 
-				0);
+				R.drawable.list_activities_poi_labels);
 		adapter.registerSelectedItem(R.string.layer_favorites, settings.SHOW_FAVORITES.get() ? 1 : 0, 
 				R.drawable.list_activities_favorites);
 		adapter.registerSelectedItem(R.string.layer_gpx_layer, 
@@ -290,7 +290,7 @@ public class MapActivityLayers {
 		
 		final LayerMenuListener listener = new LayerMenuListener(adapter, mapView, settings);
 		Builder b = new AlertDialog.Builder(activity);
-		
+
 		ListAdapter listAdapter = new ArrayAdapter<String>(
 			    activity,
 			    R.layout.layers_list_activity_item,
