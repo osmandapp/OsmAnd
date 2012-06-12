@@ -17,7 +17,6 @@ import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBox;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteEncodingRule;
 import net.osmand.binary.OsmandOdb.RouteData;
-import net.osmand.data.MapAlgorithms;
 import net.osmand.osm.MapUtils;
 
 import org.apache.commons.logging.Log;

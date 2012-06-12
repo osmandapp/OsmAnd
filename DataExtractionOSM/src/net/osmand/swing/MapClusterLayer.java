@@ -214,7 +214,8 @@ public class MapClusterLayer implements MapPanelLayer {
 		RouteDataObject startRoad = st.getRoad();
 		long lstart = (((long) startRoad.getPoint31XTile(st.getSegmentStart())) << 31) + 
 				(long) startRoad.getPoint31YTile(st.getSegmentStart());
-		RouteSegment next = ctx.getLoadedRoutes().get(lstart);
+		RouteSegment next = ctx.getRoutingTile((int)lstart>>31, (int) (lstart- (lstart>>31)<<31)).
+				getLoadedRoutes().get(lstart);
 		while (next != null) {
 			if(next.getRoad().getId() != st.getRoad().getId()){
 				queue.add(next);
@@ -283,7 +284,7 @@ public class MapClusterLayer implements MapPanelLayer {
 
 				router.loadRoutes(ctx, x ,y , null);
 				long l = (((long) x) << 31) + (long) y;
-				next = ctx.getLoadedRoutes().get(l);
+				next = ctx.getRoutingTile(x, y).getLoadedRoutes().get(l);
 				boolean addToQueue = true;;
 				while (next != null) {
 					String h = getHighway(next.getRoad());
@@ -300,7 +301,7 @@ public class MapClusterLayer implements MapPanelLayer {
 				}
 				
 				if (addToQueue) {
-					next = ctx.getLoadedRoutes().get(l);
+					next = ctx.getRoutingTile(x, y).getLoadedRoutes().get(l);
 					while (next != null) {
 						if (!visitedIds.contains(calculateId(next, next.getSegmentStart()))) {
 							queue.add(next);
