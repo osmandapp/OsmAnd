@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.osmand.OsmAndFormatter;
 import net.osmand.access.AccessibleToast;
-import net.osmand.data.TransportStop;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -31,11 +30,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider{
-
+public class ParkingPositionLayer extends OsmandMapLayer implements /*DialogProvider,*/ ContextMenuLayer.IContextMenuProvider{
+	private static final int radius = 16;
+	
 	private Paint bitmapPaint;
 
-	protected LatLon parkingPoint = null;
+	private LatLon parkingPoint = null;
 
 	private DisplayMetrics dm;
 	private Bitmap parkingPosition;
@@ -47,6 +47,10 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	private Paint paintText;
 	private Paint paintSubText;
 
+	private OsmandSettings settings;
+
+	private TextInfoControl parkingPlaceControl;
+
 	public ParkingPositionLayer(MapActivity map){
 		this.map = map;
 	}
@@ -54,6 +58,8 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
+		this.settings = ((OsmandApplication) map.getApplication()).getSettings();
+		parkingPoint = settings.getParkingPosition();
 		dm = new DisplayMetrics();
 		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
@@ -76,21 +82,19 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		bitmapPaint.setAntiAlias(true);
 		bitmapPaint.setFilterBitmap(true);
 		parkingPosition = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_parking_pos_no_limit);
-//		TODO		
+		
 		MapInfoLayer mapInfoLayer = map.getMapLayers().getMapInfoLayer();
-		if (mapInfoLayer != null)
+		if ((mapInfoLayer != null) && (parkingPlaceControl == null))
 			mapInfoLayer.addRightStack(createParkingPlaceInfoControl());
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect,
-			DrawSettings nightMode) {
-		if (parkingPoint == null) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
+		if (parkingPoint == null)
 			return;
-		}
 		double latitude = parkingPoint.getLatitude();
 		double longitude = parkingPoint.getLongitude();
-		if (view.isPointOnTheRotatedMap(latitude, longitude)) {
+		if (isLocationVisible(latitude, longitude)) {
 			int marginX = parkingPosition.getWidth() / 3;
 			int marginY = 2 * parkingPosition.getHeight() / 3;
 			int locationX = view.getMapXForPoint(longitude);
@@ -99,14 +103,17 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 			canvas.drawBitmap(parkingPosition, locationX - marginX, locationY - marginY, bitmapPaint);
 		}
 	}
-
-	public LatLon getParkingPoint() {
-		return parkingPoint;
+	
+	public boolean isLocationVisible(double latitude, double longitude){
+		if(parkingPoint == null || view == null){
+			return false;
+		}
+		return view.isPointOnTheRotatedMap(latitude, longitude);
 	}
 
-	public void setParkingPoint(LatLon parkingPosition) {
-		this.parkingPoint = parkingPosition;
-		view.refreshMap();
+	public void setParkingPoint(LatLon point) {
+		this.parkingPoint = point;
+		refreshMap();
 	}
 
 	@Override
@@ -119,29 +126,25 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	@Override
-	public boolean onLongPressEvent(PointF point) {
-		return true;
-	}
-
-	@Override
 	public boolean onSingleTap(PointF point) {
-		if(isParkingPointVisible()){
+		if(isParkingPointPressed(point)){
 			StringBuilder res = new StringBuilder();
-			res.append("The location of your parked car"); //TODO externalize!
+			res.append(R.string.osmand_parking_position_toast);
 			AccessibleToast.makeText(view.getContext(), res.toString(), Toast.LENGTH_LONG).show();
 			return true;
 		}
 		return false;
 	}
 
-	private boolean isParkingPointVisible() {
-		float[] calculations = new float[1];
+	private boolean isParkingPointPressed(PointF point) {
 		if (parkingPoint != null) {
-			OsmandSettings settings = ((OsmandApplication) map.getApplication()).getSettings();
-			Location.distanceBetween(view.getLatitude(), view.getLongitude(),settings.getParkingPosition().getLatitude(),settings.getParkingPosition().getLongitude() , calculations);		
-			//		TODO tune the magic number 5
-			if (calculations[0] < 5)
+			int ex = (int) point.x;
+			int ey = (int) point.y;
+			int x = view.getRotatedMapXForPoint(settings.getParkingPosition().getLatitude(), settings.getParkingPosition().getLongitude());
+			int y = view.getRotatedMapYForPoint(settings.getParkingPosition().getLatitude(), settings.getParkingPosition().getLongitude());
+			if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
 				return true;
+			}
 		}
 		return false;
 	}
@@ -152,11 +155,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
-		LatLon parkingPos = ((OsmandApplication)map.getApplication()).getSettings().getParkingPosition();
-		if(parkingPos != null){
-			return parkingPos;
-		}
-		return null;
+		return settings.getParkingPosition();
 	}
 
 	@Override
@@ -169,18 +168,14 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		return map.getString(R.string.osmand_parking_position_name);
 	}
 	
-	
-//	TODO	
 	private TextInfoControl createParkingPlaceInfoControl() {
-		TextInfoControl parkingPlaceControl = new TextInfoControl(map, 0, paintText, paintSubText) {
+		parkingPlaceControl = new TextInfoControl(map, 0, paintText, paintSubText) {
 			private float[] calculations = new float[1];
-			private int cachedMeters = 0;
-			
+			private int cachedMeters = 0;			
 			
 			@Override
 			public boolean updateInfo() {
-				LatLon parkingPoint = map.getMapLayers().getParkingPositionLayer().getParkingPoint();
-				if (parkingPoint != null) {
+				if( parkingPoint != null) {
 					int d = 0;
 					if (map.getRoutingHelper().isRouterEnabled()) {
 						d = map.getRoutingHelper().getLeftDistance();
@@ -235,5 +230,45 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		}
 		return true;
 	}
+
+//	@Override
+//	public Dialog onCreateDialog(int id) {
+//		Builder confirm = new AlertDialog.Builder(map);
+//		confirm.setPositiveButton(R.string.default_buttons_yes,
+//				new DialogInterface.OnClickListener() {
+//					@Override
+//					public void onClick(DialogInterface dialog, int which) {
+//						settings.clearParkingPosition();
+//						view.refreshMap(true);
+//					}
+//				});
+//		confirm.setCancelable(true);
+//		confirm.setNegativeButton(R.string.default_buttons_cancel, null);
+//		confirm.setMessage("Do you want to remove the parking position?");
+//		confirm.show();
+//		return confirm.create();
+//	}
+//
+//	@Override
+//	public void onPrepareDialog(int id, Dialog dialog) {
+//		Builder confirm = new AlertDialog.Builder(map);
+//		confirm.setPositiveButton(R.string.default_buttons_yes,
+//				new DialogInterface.OnClickListener() {
+//					@Override
+//					public void onClick(DialogInterface dialog, int which) {
+//						settings.clearParkingPosition();
+//						refreshMap();
+//					}
+//				});
+//		confirm.setCancelable(true);
+//		confirm.setNegativeButton(R.string.default_buttons_cancel, null);
+//		confirm.setMessage("Do you want to remove the parking position?");
+//		confirm.show();
+//	}
 	
+	public void refreshMap(){
+		if (view != null && view.getLayers().contains(ParkingPositionLayer.this)) {
+			view.refreshMap();
+		}
+	}
 }

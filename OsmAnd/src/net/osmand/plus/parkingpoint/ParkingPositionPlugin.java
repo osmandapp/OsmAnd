@@ -17,12 +17,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	private static final String ID = "osmand.parking.position";
 	private OsmandApplication app;
 //	private static final Log log = LogUtil.getLog(ParkingPositionPlugin.class);	
-	ParkingPositionLayer parkingLayer;
+	private ParkingPositionLayer parkingLayer;
 	private OsmandSettings settings;
 	
-	public ParkingPositionLayer getParkingLayer() {
-		return parkingLayer;
-	}
 	public ParkingPositionPlugin(OsmandApplication app) {
 		this.app = app;
 	}
@@ -49,19 +46,17 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	
 	@Override
 	public void registerLayers(MapActivity activity) {
-		createParkingLayer(activity);
-	}
-	private void createParkingLayer(MapActivity activity) {
 		parkingLayer = new ParkingPositionLayer(activity);
 	}
-
+	
+	@Override
+	public void mapActivityCreate(MapActivity activity) {
+//		activity.addDialogProvider(parkingLayer);
+	}
+	
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		if(parkingLayer == null){
-			createParkingLayer(activity);
-			mapView.addLayer(parkingLayer, 8);
-		} 
-		if(settings.getParkingPosition() == null){
+		if((settings.getParkingPosition() == null) && (mapView.getLayers().contains(parkingLayer))){
 			mapView.removeLayer(parkingLayer);
 		} else {
 			mapView.addLayer(parkingLayer, 8);
@@ -72,19 +67,17 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
 			public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
-				if (resId == R.string.context_menu_item_add_parking_point) {
+				if (resId == R.string.context_menu_item_add_parking_point){
 					settings.setParkingPosition(latitude, longitude);
-					mapActivity.getMapLayers().getParkingPositionLayer().setParkingPoint(settings.getParkingPosition());
+					if (mapActivity.getMapView().getLayers().contains(parkingLayer))
+						parkingLayer.setParkingPoint(settings.getParkingPosition());
 				}
 			}
 		};
 		adapter.registerItem(R.string.context_menu_item_add_parking_point, 0, listener, -1);
 	}
-	
 
 	@Override
 	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
-//		TODO
 	}
-
 }
