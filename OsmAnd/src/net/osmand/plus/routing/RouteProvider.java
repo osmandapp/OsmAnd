@@ -248,7 +248,7 @@ public class RouteProvider {
 			}
 		}
 		private void introduceFirstPoint(Location start) {
-			if (locations.get(0).distanceTo(start) > 200) {
+			if (!locations.isEmpty() && locations.get(0).distanceTo(start) > 200) {
 				// add start point
 				locations.add(0, start);
 				if (directions != null) {
