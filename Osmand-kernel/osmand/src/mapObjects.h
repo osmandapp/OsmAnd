@@ -64,6 +64,8 @@ public:
 				if(it->second.length() > 0) {
 					if(it->second[0] == '-'){
 						return -1;
+					} else if (it->second[0] == '0'){
+						return 0;
 					} else {
 						return 1;
 					}
