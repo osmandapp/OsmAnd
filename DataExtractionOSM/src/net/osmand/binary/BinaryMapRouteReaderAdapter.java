@@ -1,7 +1,9 @@
 package net.osmand.binary;
 
+import gnu.trove.iterator.TLongObjectIterator;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
+import gnu.trove.map.hash.TLongObjectHashMap;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -118,6 +120,9 @@ public class BinaryMapRouteReaderAdapter {
 		}
 	}
 	
+	private static final int RESTRICTION_SHIFT = 3;
+	private static final int RESTRICTION_MASK = 7;
+	
 	public static class RouteDataObject {
 		public final RouteRegion region; 
 		
@@ -127,18 +132,18 @@ public class BinaryMapRouteReaderAdapter {
 		
 		public RouteDataObject(RouteDataObject copy) {
 			this.region = copy.region;
-			this.pointsX = new TIntArrayList(copy.pointsX);
-			this.pointsY = new TIntArrayList(copy.pointsY);
+			this.pointsX = copy.pointsX;
+			this.pointsY = copy.pointsY;
 			this.types = new TIntArrayList(copy.types);
-			this.restrictions = new TLongArrayList(copy.restrictions);
+			this.restrictions = copy.restrictions;
 			this.pointTypes = new ArrayList<TIntArrayList>(copy.pointTypes);
 			this.id = copy.id;
 		}
 
 		public TIntArrayList types = new TIntArrayList(); 
-		public TIntArrayList pointsX = new TIntArrayList();
-		public TIntArrayList pointsY = new TIntArrayList();
-		public TLongArrayList restrictions = new TLongArrayList();
+		public int[] pointsX ;
+		public int[] pointsY ;
+		public long[] restrictions ;
 		public List<TIntArrayList> pointTypes = new ArrayList<TIntArrayList>();
 		public long id;
 		
@@ -147,13 +152,45 @@ public class BinaryMapRouteReaderAdapter {
 		}
 		
 		public int getPoint31XTile(int i) {
-			return pointsX.getQuick(i);
+			return pointsX[i];
 		}
 		public int getPoint31YTile(int i) {
-			return pointsY.getQuick(i);
+			return pointsY[i];
 		}
 		public int getPointsLength() {
-			return pointsX.size();
+			return pointsX.length;
+		}
+		public int getRestrictionLength(){
+			return restrictions == null ? 0 : restrictions.length;
+		}
+		
+		public int getRestrictionType(int i){
+			return (int) (restrictions[i] & RESTRICTION_MASK);
+		}
+		public long getRestrictionId(int i){
+			return restrictions[i] >> RESTRICTION_SHIFT;
+		}
+		
+		
+		public void insert(int pos, int x31, int y31, TIntArrayList pointTypes) {
+			int[] opointsX = pointsX;
+			int[] opointsY = pointsY;
+			pointsX = new int[pointsX.length + 1];
+			pointsY = new int[pointsY.length + 1];
+			int i = 0;
+			for (; i < pos; i++) {
+				pointsX[i] = opointsX[i];
+				pointsY[i] = opointsY[i];
+			}
+			pointsX[i] = x31;
+			pointsY[i] = y31;
+			for (i = i + 1; i < pointsX.length; i++) {
+				pointsX[i] = opointsX[i-1];
+				pointsY[i] = opointsY[i-1];
+			}
+			if(this.pointTypes.size() > pos) {
+				this.pointTypes.add(pos, pointTypes);
+			}
 		}
 		
 		public TIntArrayList getPointTypes(int ind) {
@@ -324,11 +361,15 @@ public class BinaryMapRouteReaderAdapter {
 	
 	private RouteDataObject readRouteDataObject(RouteRegion reg, int pleftx, int ptopy) throws IOException {
 		RouteDataObject o = new RouteDataObject(reg);
+		TIntArrayList pointsX = new TIntArrayList();
+		TIntArrayList pointsY = new TIntArrayList();
 		while (true) {
 			int ts = codedIS.readTag();
 			int tags = WireFormat.getTagFieldNumber(ts);
 			switch (tags) {
 			case 0:
+				o.pointsX = pointsX.toArray();
+				o.pointsY = pointsY.toArray();
 				return o;
 			case RouteData.TYPES_FIELD_NUMBER:
 				int len = codedIS.readRawVarint32();
@@ -346,8 +387,8 @@ public class BinaryMapRouteReaderAdapter {
 				while(codedIS.getBytesUntilLimit() > 0){
 					int x = (codedIS.readSInt32() ) + px;
 					int y = (codedIS.readSInt32() ) + py;
-					o.pointsX.add(x << SHIFT_COORDINATES);
-					o.pointsY.add(y << SHIFT_COORDINATES);
+					pointsX.add(x << SHIFT_COORDINATES);
+					pointsY.add(y << SHIFT_COORDINATES);
 					px = x;
 					py = y;
 				}
@@ -378,10 +419,8 @@ public class BinaryMapRouteReaderAdapter {
 			}
 		}
 	}
-	private static final int RESTRICTION_SHIFT = 20; 
-	private static final long RESTRICTION_MASK = (1l << RESTRICTION_SHIFT) - 1; 
 	private void readRouteTreeData(RouteSubregion routeTree,  TLongArrayList idTables,
-			TLongArrayList restrictions) throws IOException {
+			TLongObjectHashMap<TLongArrayList> restrictions) throws IOException {
 		routeTree.dataObjects = new ArrayList<RouteDataObject>();
 		idTables.clear();
 		restrictions.clear();
@@ -390,14 +429,17 @@ public class BinaryMapRouteReaderAdapter {
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				for (int k = 0; k < restrictions.size(); k++) {
-					long r = restrictions.get(k);
-					int from = (int) (r >> (RESTRICTION_SHIFT+RESTRICTION_SHIFT));
-					int to = (int) ((r >> RESTRICTION_SHIFT) & RESTRICTION_MASK);
-					int type = (int) (r & RESTRICTION_MASK);
-					long valto = (idTables.get(to) << 3) | ((long)type);
+				TLongObjectIterator<TLongArrayList> it = restrictions.iterator();
+				while (it.hasNext()) {
+					it.advance();
+					int from = (int) it.key();
 					RouteDataObject fromr = routeTree.dataObjects.get(from);
-					fromr.restrictions.add(valto);
+					fromr.restrictions = new long[it.value().size()];
+					for (int k = 0; k < fromr.restrictions.length; k++) {
+						int to = (int) (it.value().get(k) >> RESTRICTION_SHIFT);
+						long valto = (idTables.get(to) << RESTRICTION_SHIFT) | ((long) it.value().get(k) & RESTRICTION_MASK);
+						fromr.restrictions[k] = valto;
+					}
 				}
 				for (RouteDataObject o : routeTree.dataObjects) {
 					if (o != null) {
@@ -441,7 +483,9 @@ public class BinaryMapRouteReaderAdapter {
 			case RouteDataBlock.RESTRICTIONS_FIELD_NUMBER :
 				length = codedIS.readRawVarint32();
 				oldLimit = codedIS.pushLimit(length);
-				long restriction = 0;
+				long from = 0;
+				long to = 0;
+				long type = 0;
 				idLoop : while(true){
 					int ts = codedIS.readTag();
 					int tags = WireFormat.getTagFieldNumber(ts);
@@ -449,23 +493,23 @@ public class BinaryMapRouteReaderAdapter {
 					case 0:
 						break idLoop;
 					case RestrictionData.FROM_FIELD_NUMBER  :
-						long from = codedIS.readInt32();
-						restriction |= (from << (RESTRICTION_SHIFT+RESTRICTION_SHIFT));
+						from = codedIS.readInt32();
 						break;
 					case RestrictionData.TO_FIELD_NUMBER  :
-						long to = codedIS.readInt32();
-						restriction |= (to << RESTRICTION_SHIFT);
+						to = codedIS.readInt32();
 						break;
 					case RestrictionData.TYPE_FIELD_NUMBER  :
-						int type = codedIS.readInt32();
-						restriction |= type;
+						type = codedIS.readInt32();
 						break;
 					default:
 						skipUnknownField(ts);
 						break;
 					}
 				}
-				restrictions.add(restriction);
+				if(!restrictions.containsKey(from)) {
+					restrictions.put(from, new TLongArrayList());
+				}
+				restrictions.get(from).add((to << RESTRICTION_SHIFT) + type);
 				codedIS.popLimit(oldLimit);
 				break;
 			case RouteDataBlock.STRINGTABLE_FIELD_NUMBER :
@@ -583,7 +627,7 @@ public class BinaryMapRouteReaderAdapter {
 			}
 		});
 		TLongArrayList idMap = new TLongArrayList();
-		TLongArrayList restrictionMap = new TLongArrayList();
+		TLongObjectHashMap<TLongArrayList> restrictionMap = new TLongObjectHashMap<TLongArrayList>();
 		for (RouteSubregion rs : toLoad) {
 			if (rs.dataObjects == null) {
 				codedIS.seek(rs.filePointer + rs.shiftToData);

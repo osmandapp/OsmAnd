@@ -138,11 +138,7 @@ public class BinaryRoutePlanner {
 					if (road == null || currentsDist < sdist) {
 						RouteDataObject ro = new RouteDataObject(r);
 						road = new RouteSegment(ro, j);
-						ro.pointsX.insert(j, prx);
-						ro.pointsY.insert(j, pry);
-						if(ro.pointTypes.size() > j) {
-							ro.pointTypes.add(j, null);
-						}
+						ro.insert(j, prx, pry, null);
 						sdist = currentsDist;
 						foundProjX = prx;
 						foundProjY = pry;
@@ -367,12 +363,12 @@ public class BinaryRoutePlanner {
 		RoutingTile tl = suggestedTile;
 		RouteDataObject old = tl.idObjects.get(o.id);
 		// sometimes way is present only partially in one index
-		if (old != null && old.pointsX.size() >= o.pointsX.size()) {
+		if (old != null && old.getPointsLength() >= o.getPointsLength()) {
 			return;
 		};
-		for (int j = 0; j < o.pointsX.size(); j++) {
-			int x = o.pointsX.getQuick(j);
-			int y = o.pointsY.getQuick(j);
+		for (int j = 0; j < o.getPointsLength(); j++) {
+			int x = o.getPoint31XTile(j);
+			int y = o.getPoint31YTile(j);
 			if(!tl.checkContains(x, y)){
 				// don't register in different tiles
 				// in order to throw out tile object easily
@@ -596,22 +592,22 @@ public class BinaryRoutePlanner {
 		ctx.segmentsToVisitNotForbidden.clear();
 		boolean exclusiveRestriction = false;
 		RouteSegment next = inputNext;
-		if (!reverseWay && road.restrictions.isEmpty()) {
+		if (!reverseWay && road.getRestrictionLength() > 0) {
 			return false;
 		}
 		while (next != null) {
 			int type = -1;
 			if (!reverseWay) {
-				for (int i = 0; i < road.restrictions.size(); i++) {
-					if (road.restrictions.getQuick(i) >> 3 == next.road.id) {
-						type = (int) (road.restrictions.getQuick(i) & 7);
+				for (int i = 0; i < road.getRestrictionLength(); i++) {
+					if (road.getRestrictionId(i) == next.road.id) {
+						type = road.getRestrictionType(i);
 						break;
 					}
 				}
 			} else {
-				for (int i = 0; i < next.road.restrictions.size(); i++) {
-					int rt = (int) (next.road.restrictions.getQuick(i) & 7);
-					long restrictedTo = next.road.restrictions.getQuick(i) >> 3;
+				for (int i = 0; i < next.road.getRestrictionLength(); i++) {
+					int rt = next.road.getRestrictionType(i);
+					long restrictedTo = next.road.getRestrictionId(i);
 					if (restrictedTo == road.id) {
 						type = rt;
 						break;
