@@ -216,7 +216,7 @@
 <!-- this block re-worked for new Preferences structure -->
 	<string name="profile_settings">Profile Specific Settings</string>
 	<string name="settings_preset">User Profile</string>
-	<string name="settings_preset_descr">Select a user profile with customized map and navigation settings.</string>
+	<string name="settings_preset_descr">Select a user profile with custom map and navigation settings.</string>
 	
 	<string name="monitor_preferences">Tracking</string>
 	<string name="monitor_preferences_descr">Specify tracking settings</string>
