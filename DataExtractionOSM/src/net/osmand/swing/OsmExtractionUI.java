@@ -128,6 +128,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 	private JCheckBox buildPoiIndex;
 	private JCheckBox buildAddressIndex;
 	private JCheckBox buildMapIndex;
+	private JCheckBox buildRoutingIndex;
 	private JCheckBox buildTransportIndex;
 	private JCheckBox normalizingStreets;
 	private JCheckBox showOfflineIndex;
@@ -191,6 +192,11 @@ public class OsmExtractionUI implements IMapLocationListener {
 		panel.add(buildMapIndex);
 		buildMapIndex.setSelected(true);
 		
+		buildRoutingIndex = new JCheckBox();
+		buildRoutingIndex.setText(Messages.getString("OsmExtractionUI.BUILD_ROUTING")); //$NON-NLS-1$
+		panel.add(buildRoutingIndex);
+		buildRoutingIndex.setSelected(true);
+		
 		buildPoiIndex = new JCheckBox();
 		buildPoiIndex.setText(Messages.getString("OsmExtractionUI.BUILD_POI")); //$NON-NLS-1$
 		panel.add(buildPoiIndex);
@@ -203,7 +209,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 		
 		normalizingStreets = new JCheckBox();
 		normalizingStreets.setText(Messages.getString("OsmExtractionUI.NORMALIZE_STREETS")); //$NON-NLS-1$
-		panel.add(normalizingStreets);
+//		panel.add(normalizingStreets);
 		normalizingStreets.setSelected(true);
 		
 		buildTransportIndex = new JCheckBox();
@@ -483,6 +489,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 						creator.setNormalizeStreets(normalizingStreets.isSelected());
 						creator.setIndexTransport(buildTransportIndex.isSelected());
 						creator.setIndexMap(buildMapIndex.isSelected());
+						creator.setIndexRouting(buildRoutingIndex.isSelected());
 						creator.setCityAdminLevel(DataExtractionSettings.getSettings().getCityAdminLevel());
 						String fn = DataExtractionSettings.getSettings().getMapRenderingTypesFile();
 						MapRenderingTypes types;

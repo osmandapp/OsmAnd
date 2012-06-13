@@ -82,6 +82,7 @@ public class IndexBatchCreator {
 	boolean indexTransport = false;
 	boolean indexAddress = false;
 	boolean indexMap = false;
+	boolean indexRouting = false;
 	
 	private String wget;
 	
@@ -147,6 +148,8 @@ public class IndexBatchCreator {
 		
 		indexPOI = Boolean.parseBoolean(process.getAttribute("indexPOI"));
 		indexMap = Boolean.parseBoolean(process.getAttribute("indexMap"));
+		indexRouting = process.getAttribute("indexRouting") == null || 
+				process.getAttribute("indexRouting").equalsIgnoreCase("true");
 		indexTransport = Boolean.parseBoolean(process.getAttribute("indexTransport"));
 		indexAddress = Boolean.parseBoolean(process.getAttribute("indexAddress"));
 		parseProcessAttributes(process);
@@ -432,6 +435,7 @@ public class IndexBatchCreator {
 			indexCreator.setIndexPOI(indexPOI);
 			indexCreator.setIndexTransport(indexTransport);
 			indexCreator.setIndexMap(indexMap);
+			indexCreator.setIndexRouting(indexRouting);
 			indexCreator.setLastModifiedDate(f.lastModified());
 			indexCreator.setNormalizeStreets(true);
 			indexCreator.setRegionName(rName);

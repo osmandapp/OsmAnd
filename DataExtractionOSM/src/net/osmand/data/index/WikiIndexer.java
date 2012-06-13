@@ -130,6 +130,7 @@ public class WikiIndexer {
 						IndexCreator ic = new IndexCreator(workPath);
 						ic.setIndexPOI(true);
 						ic.setIndexMap(false);
+						ic.setIndexRouting(false);
 						ic.setIndexTransport(false);
 						ic.setIndexAddress(false);
 						ic.generateIndexes(outFile, new ConsoleProgressImplementation(3), null, null, null, log);

@@ -1,15 +1,16 @@
 package net.osmand.data.preparation;
 
-import gnu.trove.list.TLongList;
-import gnu.trove.list.array.TLongArrayList;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -19,47 +20,28 @@ import net.osmand.osm.Entity;
 import net.osmand.osm.Entity.EntityId;
 import net.osmand.osm.Entity.EntityType;
 import net.osmand.osm.Node;
-import net.osmand.osm.OSMSettings.OSMTagKey;
 import net.osmand.osm.Relation;
 import net.osmand.osm.Way;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.json.JSONException;
-
-import com.anvisics.jleveldb.ArraySerializer;
-import com.anvisics.jleveldb.ArraySerializer.EntityValueTokenizer;
-import com.anvisics.jleveldb.ext.DBAccessor;
-import com.anvisics.jleveldb.ext.DBIterator;
-import com.anvisics.jleveldb.ext.ReadOptions;
 
 public class OsmDbAccessor implements OsmDbAccessorContext {
 	
-	private static final Log log = LogFactory.getLog(OsmDbAccessor.class);
+	//private static final Log log = LogFactory.getLog(OsmDbAccessor.class);
 	
 	private PreparedStatement pselectNode;
 	private PreparedStatement pselectWay;
 	private PreparedStatement pselectRelation;
-	private PreparedStatement pselectTags;
 	private int allRelations;
-	private int allBoundaries;
 	private int allWays;
 	private int allNodes;
+	private int allBoundaries;
 	private boolean realCounts = false;
 	private Connection dbConn;
 	private DBDialect dialect;
 	
-	// leveldb
-	private ReadOptions randomAccessOptions;
-	
-	private DBAccessor accessor;
-
 	private PreparedStatement iterateNodes;
-
 	private PreparedStatement iterateWays;
-
 	private PreparedStatement iterateRelations;
-
 	private PreparedStatement iterateWayBoundaries;
 
 	public interface OsmDbVisitor {
@@ -76,26 +58,22 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		this.allWays = allWays;
 		this.allRelations = allRelations;
 		if(this.dialect == DBDialect.NOSQL){
-			accessor = (DBAccessor) dbConnection;
-			randomAccessOptions = new ReadOptions();
+			throw new UnsupportedOperationException();
 		} else {
 			this.dbConn = (Connection) dbConnection;
 			
-			pselectNode = dbConn.prepareStatement("select n.latitude, n.longitude, t.skeys, t.value from node n left join tags t on n.id = t.id and t.type = 0 where n.id = ?"); //$NON-NLS-1$
-			pselectWay = dbConn.prepareStatement("select w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " + //$NON-NLS-1$
-					"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 left join node n on w.node = n.id " + //$NON-NLS-1$
-					"where w.id = ? order by w.ord"); //$NON-NLS-1$
-			pselectRelation = dbConn.prepareStatement("select r.member, r.type, r.role, r.ord, t.skeys, t.value " + //$NON-NLS-1$
-					"from relations r left join tags t on r.id = t.id and t.type = 2 and r.ord = 0 " + //$NON-NLS-1$
-					"where r.id = ? order by r.ord"); //$NON-NLS-1$
-			pselectTags = dbConn.prepareStatement("select skeys, value from tags where id = ? and type = ?"); //$NON-NLS-1$
+			pselectNode = dbConn.prepareStatement("select n.latitude, n.longitude, n.tags from node n where n.id = ?"); //$NON-NLS-1$
+			pselectWay = dbConn.prepareStatement("select w.node, w.ord, w.tags, n.latitude, n.longitude, n.tags " + //$NON-NLS-1$
+					"from ways w left join node n on w.node = n.id where w.id = ? order by w.ord"); //$NON-NLS-1$
+			pselectRelation = dbConn.prepareStatement("select r.member, r.type, r.role, r.ord, r.tags " + //$NON-NLS-1$
+					"from relations r where r.id = ? order by r.ord"); //$NON-NLS-1$
 		
-			iterateNodes = dbConn.prepareStatement("select n.id, n.latitude, n.longitude, t.skeys, t.value from node n inner join tags t on n.id = t.id and t.type = 0 order by n.id"); //$NON-NLS-1$
-			iterateWays  = dbConn.prepareStatement("select w.id, w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " + //$NON-NLS-1$
-					"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 left join node n on w.node = n.id " + //$NON-NLS-1$
-					"order by w.id, w.ord"); //$NON-NLS-1$
-			iterateWayBoundaries = dbConn.prepareStatement("select t.id from tags t where t.skeys = \"" + OSMTagKey.BOUNDARY.getValue() + "\""); //$NON-NLS-1$
-			iterateRelations = dbConn.prepareStatement("select r.id, t.skeys, t.value  from relations r inner join tags t on t.id = r.id and t.type = 2 and r.ord = 0"); //$NON-NLS-1$
+			iterateNodes = dbConn.prepareStatement("select n.id, n.latitude, n.longitude, n.tags from node n where length(n.tags) > 0"); //$NON-NLS-1$
+			iterateWays  = dbConn.prepareStatement("select w.id, w.node, w.ord, w.tags, n.latitude, n.longitude, n.tags " + //$NON-NLS-1$
+					"from ways w left join node n on w.node = n.id order by w.id, w.ord"); //$NON-NLS-1$
+			iterateWayBoundaries  = dbConn.prepareStatement("select w.id, w.node, w.ord, w.tags, n.latitude, n.longitude, n.tags " + //$NON-NLS-1$
+					"from ways w left join node n on w.node = n.id  where w.boundary > 0 order by w.id, w.ord"); //$NON-NLS-1$
+			iterateRelations = dbConn.prepareStatement("select r.id, r.tags from relations r where length(r.tags) > 0"); //$NON-NLS-1$
 		}
 	}
 	
@@ -111,171 +89,134 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		return allWays;
 	}
 	
-	@Override
-	public void loadEntityRelation(Relation e) throws SQLException {
-		loadEntityData(e);
-	}
 	
 	@Override
 	public void loadEntityWay(Way e) throws SQLException {
-		loadEntityData(e);
-	}
-	
-	public void loadEntityData(Entity e) throws SQLException {
-		if (e.isDataLoaded()) { //data was already loaded, nothing to do
-			return;
-		}
-		if(dialect == DBDialect.NOSQL){
-			loadEntityDataNoSQL(e);
-			e.entityDataLoaded();
-			return;
-		}
-		
-		Map<EntityId, Entity> map = new LinkedHashMap<EntityId, Entity>();
-		if (e instanceof Relation && ((Relation) e).getMemberIds().isEmpty()) {
-			pselectRelation.setLong(1, e.getId());
-			if (pselectRelation.execute()) {
-				ResultSet rs = pselectRelation.getResultSet();
-				boolean first = true;
-				while (rs.next()) {
-					int ord = rs.getInt(4);
-					if (ord > 0 || first) {
-						first = false;
-						((Relation) e).addMember(rs.getLong(1), EntityType.values()[rs.getInt(2)], rs.getString(3));
-					}
-				}
-				rs.close();
-			}
-		} else if (e instanceof Way && ((Way) e).getEntityIds().isEmpty()) {
+		if (e.getEntityIds().isEmpty()) {
 			pselectWay.setLong(1, e.getId());
 			if (pselectWay.execute()) {
 				ResultSet rs = pselectWay.getResultSet();
-				boolean first = true;
 				while (rs.next()) {
 					int ord = rs.getInt(2);
-					if (ord > 0 || first) {
-						first = false;
-						if(rs.getObject(5) != null) {
-							((Way) e).addNode(new Node(rs.getDouble(5), rs.getDouble(6), rs.getLong(1)));
-						} else {
-							((Way) e).addNode(rs.getLong(1));
-						}
+					if (ord == 0) {
+						readTags(e, rs.getBytes(3));
+					}
+					if (rs.getObject(5) != null) {
+						Node n = new Node(rs.getDouble(4), rs.getDouble(5), rs.getLong(1));
+						((Way) e).addNode(n);
+						readTags(n, rs.getBytes(6));
+					} else {
+						((Way) e).addNode(rs.getLong(1));
 					}
 				}
 				rs.close();
 			}
 		}
-		Collection<EntityId> ids = e instanceof Relation ? ((Relation) e).getMemberIds() : ((Way) e).getEntityIds();
-
-		for (EntityId i : ids) {
-			// pselectNode = dbConn.prepareStatement("select n.latitude, n.longitude, t.skeys, t.value from node n left join tags t on n.id = t.id and t.type = 0 where n.id = ?");
-			if (i.getType() == EntityType.NODE) {
-				pselectNode.setLong(1, i.getId());
-				if (pselectNode.execute()) {
-					ResultSet rs = pselectNode.getResultSet();
-					Node n = null;
-					while (rs.next()) {
-						if (n == null) {
-							n = new Node(rs.getDouble(1), rs.getDouble(2), i.getId());
-						}
-						if (rs.getObject(3) != null) {
-							n.putTag(rs.getString(3), rs.getString(4));
-						}
+	}
+	
+	@Override
+	public void loadEntityRelation(Relation e) throws SQLException {
+		loadEntityRelation(e, 1);
+	}
+	
+	public void loadEntityRelation(Relation e, int level) throws SQLException {
+		if (e.isDataLoaded()) { //data was already loaded, nothing to do
+			return;
+		}
+		Map<EntityId, Entity> map = new LinkedHashMap<EntityId, Entity>();
+		if (e.getMemberIds().isEmpty()) {
+			pselectRelation.setLong(1, e.getId());
+			if (pselectRelation.execute()) {
+				ResultSet rs = pselectRelation.getResultSet();
+				while (rs.next()) {
+					int ord = rs.getInt(4);
+					if (ord == 0 ) {
+						readTags(e, rs.getBytes(5));
 					}
-					map.put(i, n);
-					rs.close();
+					e.addMember(rs.getLong(1), EntityType.values()[rs.getInt(2)], rs.getString(3));
 				}
-			} else if (i.getType() == EntityType.WAY) {
-				// pselectWay = dbConn.prepareStatement("select w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " +
-				// "from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 inner join node n on w.node = n.id " +
-				// "where w.id = ? order by w.ord");
-				pselectWay.setLong(1, i.getId());
-				if (pselectWay.execute()) {
-					ResultSet rs = pselectWay.getResultSet();
-					Way way = new Way(i.getId());
-					map.put(i, way);
-					boolean first = true;
-					while (rs.next()) {
-						int ord = rs.getInt(2);
-						if (ord > 0 || first) {
-							first = false;
-							if(rs.getObject(5) != null) {
-								way.addNode(new Node(rs.getDouble(5), rs.getDouble(6), rs.getLong(1)));
-							} else {
-								way.addNode(rs.getLong(1));
-							}
-						}
-						if (ord == 0 && rs.getObject(3) != null) {
-							way.putTag(rs.getString(3), rs.getString(4));
-						}
-					}
-					rs.close();
-				}
-			} else if (i.getType() == EntityType.RELATION) {
-				pselectRelation.setLong(1, i.getId());
-				// pselectRelation = dbConn.prepareStatement("select r.member, r.type, r.role, r.ord, t.skeys, t.value" +
-				// "from relations r left join tags t on r.id = t.id and t.type = 2 and r.ord = 0 " +
-				// "where r.id = ? order by r.ord");
-				if (pselectRelation.execute()) {
-					ResultSet rs = pselectRelation.getResultSet();
-					Relation rel = new Relation(i.getId());
-					map.put(i, rel);
-					boolean first = true;
-					while (rs.next()) {
-						int ord = rs.getInt(4);
-						if (ord > 0 || first) {
-							first = false;
-							rel.addMember(rs.getLong(1), EntityType.values()[rs.getInt(2)], rs.getString(3));
-						}
-						if (ord == 0 && rs.getObject(5) != null) {
-							rel.putTag(rs.getString(5), rs.getString(6));
-						}
-					}
-					// do not load relation members recursively ? It is not needed for transport, address, poi before
-					rs.close();
-				}
+				rs.close();
 			}
 		}
+		Collection<EntityId> ids = e.getMemberIds() ;
+		if (level > 0) {
+			for (EntityId i : ids) {
+				if (i.getType() == EntityType.NODE) {
+					pselectNode.setLong(1, i.getId());
+					if (pselectNode.execute()) {
+						ResultSet rs = pselectNode.getResultSet();
+						Node n = null;
+						while (rs.next()) {
+							if (n == null) {
+								n = new Node(rs.getDouble(1), rs.getDouble(2), i.getId());
+								readTags(n, rs.getBytes(3));
+							}
+						}
+						map.put(i, n);
+						rs.close();
+					}
+				} else if (i.getType() == EntityType.WAY) {
+					Way way = new Way(i.getId());
+					loadEntityWay(way);
+					map.put(i, way);
+				} else if (i.getType() == EntityType.RELATION) {
+					Relation rel = new Relation(i.getId());
+					loadEntityRelation(rel, level - 1);
+					map.put(i, rel);
+				}
+			}
 
-		e.initializeLinks(map);
-		e.entityDataLoaded();
+			e.initializeLinks(map);
+			e.entityDataLoaded();
+		}
+	}
+	
+	public void readTags(Entity e, byte[] tags){
+		if (tags != null) {
+			try {
+				int prev = 0;
+				List<String> vs = new ArrayList<String>();
+				for (int i = 0; i < tags.length; i++) {
+					if (tags[i] == 0) {
+						vs.add(new String(tags, prev, i - prev, "UTF-8"));
+						prev = i + 1;
+					}
+				}
+				for(int i=0; i<vs.size(); i+=2) {
+					e.putTag(vs.get(i), vs.get(i+1));
+				}
+			} catch (UnsupportedEncodingException e1) {
+				throw new RuntimeException(e1);
+			}
+		}
 	}
 	
 	
 	public int iterateOverEntities(IProgress progress, EntityType type, OsmDbVisitor visitor) throws SQLException, InterruptedException {
-		if(dialect == DBDialect.NOSQL){
-			return iterateOverEntitiesNoSQL(progress, type, visitor);
-		}
 		Statement statement = dbConn.createStatement();
 		PreparedStatement select;
 		int count = 0;
 		
-		// stat.executeUpdate("create table tags (id "+longType+", type smallint, skeys varchar(1024), value varchar(1024))");
-		// stat.executeUpdate("create table ways (id "+longType+", node "+longType+", ord smallint)");
-//		stat.executeUpdate("create table relations (id "+longType+", member "+longType+", type smallint, role varchar(1024), ord smallint)");
 		computeRealCounts(statement);
 		statement.close();
 		
 		BlockingQueue<Entity> toProcess = new ArrayBlockingQueue<Entity>(100000);
 		AbstractProducer entityProducer = null;
-		if (type == EntityType.WAY_BOUNDARY) {
+		if (type == EntityType.NODE) {
+			// filter out all nodes without tags
+			select = iterateNodes;
+			count = allNodes;
+		} else if (type == EntityType.WAY) {
+			select = iterateWays;
+			count = allWays;
+		} else if (type == EntityType.WAY_BOUNDARY) {
 			select = iterateWayBoundaries;
 			count = allBoundaries;
-			entityProducer = new BoundaryProducer(toProcess, select);
 		} else {
-			if (type == EntityType.NODE) {
-				// filter out all nodes without tags
-				select = iterateNodes;
-				count = allNodes;
-			} else if (type == EntityType.WAY) {
-				select = iterateWays;
-				count = allWays;
-			} else {
-				select = iterateRelations;
-				count = allRelations;
-			}
-			entityProducer = new EntityProducer(toProcess, type, select);
+			select = iterateRelations;
+			count = allRelations;
 		}
+		entityProducer = new EntityProducer(toProcess, type, select);
 		progress.startWork(count);
 		
 		//produce
@@ -297,168 +238,15 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		if (!realCounts) {
 			realCounts = true;
 			// filter out all nodes without tags
-			allNodes = statement.executeQuery("select count(distinct n.id) from node n inner join tags t on n.id = t.id and t.type = 0").getInt(1); //$NON-NLS-1$
+			allNodes = statement.executeQuery("select count(distinct n.id) from node n where length(n.tags) > 0").getInt(1); //$NON-NLS-1$
 			allWays = statement.executeQuery("select count(*) from ways w where w.ord = 0").getInt(1); //$NON-NLS-1$
-			allRelations = statement.executeQuery("select count(distinct r.id) from relations r inner join tags t on t.id = r.id and t.type = 2 and r.ord = 0").getInt(1); //$NON-NLS-1$
-			allBoundaries = statement.executeQuery("select count(distinct t.id) from tags t where t.skeys = \"" + OSMTagKey.BOUNDARY.getValue() + "\"").getInt(1); //$NON-NLS-1$
+			allRelations = statement.executeQuery("select count(distinct r.id) from relations r").getInt(1); //$NON-NLS-1$
+			allBoundaries = statement.executeQuery("select count(*) from ways w where w.ord = 0 and w.boundary > 0").getInt(1); //$NON-NLS-1$
 		}
 	}
 
-	private void loadEntityDataNoSQL(Entity e) {
-		Collection<EntityId> ids = e instanceof Relation ? ((Relation) e).getMemberIds() : ((Way) e).getEntityIds();
-		Map<EntityId, Entity> map = new LinkedHashMap<EntityId, Entity>();
-		for (EntityId i : ids) {
-			char pr = i.getType() == EntityType.NODE ? '0' : (i.getType() == EntityType.WAY ? '1' : '2');
-			String key = pr + "" + i.getId();
-			String value = accessor.get(randomAccessOptions, key);
-			if (value != null && value.length() > 0) {
-				try {
-					Entity es = loadEntityNoSqlFromValue(randomAccessOptions, key, value, false);
-					map.put(i, es);
-				} catch (JSONException e1) {
-					log.warn(key + " - " + e1.getMessage() + " " + value + "("+value.length()+"]", e1);
-				}
-			}
-		}
-		e.initializeLinks(map);
-	}
 	
-	private void assertToken(int expected, int actual, String value){
-		if(expected != actual){
-			System.err.println("Expected token " + expected + " != " + actual +" actual for : " + value);
-		}
-	}
 	
-	private Entity loadEntityNoSqlFromValue(ReadOptions opts,
-			String key, String value, boolean skipIfEmptyTags) throws JSONException{
-		if(value == null){
-			return null;
-		}
-		Entity e = null;
-		long id = Long.parseLong(key.substring(1));
-		ArraySerializer.EntityValueTokenizer tokenizer = new EntityValueTokenizer();
-		tokenizer.tokenize(value);
-		assertToken(ArraySerializer.START_ARRAY, tokenizer.next(), value);
-		
-		int next = tokenizer.next();
-		if(next == ArraySerializer.ELEMENT && skipIfEmptyTags){
-			return null;
-		} 
-		
-		// create e 
-		if (key.charAt(0) == '0') {
-			e = new Node(0, 0, id);
-		} else if (key.charAt(0) == '1') {
-			e = new Way(id);
-		} else if (key.charAt(0) == '2') {
-			e = new Relation(id);
-		}
-		
-		// let's read tags
-		if(next == ArraySerializer.START_ARRAY){
-			int n = tokenizer.next();
-			while(n == ArraySerializer.ELEMENT){
-				String tagKey = tokenizer.value();
-				assertToken(ArraySerializer.ELEMENT, tokenizer.next(), value);
-				String tagValue = tokenizer.value();
-				e.putTag(tagKey, tagValue);
-				n = tokenizer.next();
-			}
-		}
-		
-		if (key.charAt(0) == '0') {
-			try {
-				assertToken(ArraySerializer.ELEMENT, tokenizer.next(), value);
-				double lat = Double.parseDouble(tokenizer.value());
-				assertToken(ArraySerializer.ELEMENT, tokenizer.next(), value);
-				double lon = Double.parseDouble(tokenizer.value());
-				((Node)e).setLatitude(lat);
-				((Node)e).setLongitude(lon);
-			} catch (java.lang.NumberFormatException ex) {
-				log.warn("Cannot parse lat/log for Node with key:" + key + " value:" + value);
-				e = null;
-			}
-		} else if (key.charAt(0) == '1') {
-			assertToken(ArraySerializer.START_ARRAY, tokenizer.next(), value);
-			int n = tokenizer.next();
-			while(n == ArraySerializer.ELEMENT){
-				String pointId = "0"+ tokenizer.value();
-				String pointVal = this.accessor.get(opts, pointId);
-				Node node = (Node) loadEntityNoSqlFromValue(opts, pointId, pointVal, false);
-				if(node != null){
-					((Way) e).addNode(node);
-				}
-				n = tokenizer.next();
-			}
-		} else if (key.charAt(0) == '2') {
-			assertToken(ArraySerializer.START_ARRAY, tokenizer.next(), value);
-			int n = tokenizer.next();
-			while(n == ArraySerializer.ELEMENT){
-				String mkey = tokenizer.value();
-				EntityType t = null;
-				long mid = Long.parseLong(mkey.substring(1));
-				if(mkey.charAt(0) == '0'){
-					t = EntityType.NODE;
-				} else if(mkey.charAt(0) == '1'){
-					t = EntityType.WAY;
-				} else if(mkey.charAt(0) == '2'){
-					t = EntityType.RELATION;
-				}
-				assertToken(ArraySerializer.ELEMENT, tokenizer.next(), value);
-				String role = tokenizer.value();
-				((Relation) e).addMember(mid, t, role);
-				n = tokenizer.next();
-			}
-		}
-		
-		return e;
-	}
-
-	private int iterateOverEntitiesNoSQL(IProgress progress, EntityType type, OsmDbVisitor visitor) throws SQLException {
-		ReadOptions opts = new ReadOptions();
-		DBIterator iterator = accessor.newIterator(opts);
-		String prefix = "0";
-		int count = 0;
-		if (type == EntityType.WAY) {
-			prefix = "1";
-		} else if (type == EntityType.RELATION) {
-			prefix = "2";
-		}
-		
-		iterator.seek(prefix);
-		
-		while(iterator.valid()){
-			String key = iterator.key();
-			if(!key.startsWith(prefix)){
-				break;
-			}
-			String value = iterator.value();
-			try {
-				Entity e = null;
-				if (type == EntityType.NODE) {
-					e = loadEntityNoSqlFromValue(opts, key, value, true);
-				} else if (type == EntityType.WAY) {
-					e = loadEntityNoSqlFromValue(opts, key, value, false);
-				} else {
-					e = loadEntityNoSqlFromValue(opts, key, value, false);
-				}
-				
-				if(e != null){
-					count++;
-					if (progress != null) {
-						progress.progress(1);
-					}
-					visitor.iterateEntity(e, this);
-				}
-			} catch (JSONException e) {
-				log.warn(key + " - " + e.getMessage() + " " + value + "("+value.length()+"]", e);
-			}
-			iterator.next();
-		}
-		iterator.delete();
-		return count;
-	}
-
 	public void closeReadingConnection() throws SQLException {
 		if (dialect != DBDialect.NOSQL) {
 			if (pselectNode != null) {
@@ -469,9 +257,6 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 			}
 			if (pselectRelation != null) {
 				pselectRelation.close();
-			}
-			if (pselectTags != null) {
-				pselectTags.close();
 			}
 			if (iterateNodes != null) {
 				iterateNodes.close();
@@ -497,67 +282,6 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		}
 	}
 	
-	public class BoundaryProducer extends AbstractProducer {
-		private final BlockingQueue<Entity> toProcess;
-		private final PreparedStatement select;
-		
-		public BoundaryProducer(BlockingQueue<Entity> toProcess, PreparedStatement selectIds) {
-					this.toProcess = toProcess;
-					this.select = selectIds;
-					setDaemon(true);
-					setName("BoundaryProducer");
-		}
-		
-		@Override
-		public void run() {
-			ResultSet rs;
-			try {
-				select.execute();
-				rs = select.getResultSet();
-				TLongArrayList boundariesToLoad = new TLongArrayList();
-				while (rs.next()) {
-					boundariesToLoad.add(rs.getLong(1));
-				}
-				rs.close();
-				PreparedStatement iterateWaysByIds = null;
-				int idsSize = 0;
-
-				while (!boundariesToLoad.isEmpty()) {
-					int chunk = Math.min(100, boundariesToLoad.size());
-					if (chunk != idsSize) {
-						if (iterateWaysByIds != null) {
-							iterateWaysByIds.close();
-						}
-						StringBuilder b = new StringBuilder();
-						for (int i = 0; i <= chunk; i++) {
-							b.append('?').append(',');
-						}
-						b.deleteCharAt(b.length()-1);
-						iterateWaysByIds =  dbConn.prepareStatement("select w.id, w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " + //$NON-NLS-1$
-								"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 inner join node n on w.node = n.id where w.id in (" + b.toString() + //$NON-NLS-1$
-								") order by w.id, w.ord"); //$NON-NLS-1$
-						idsSize = chunk;
-					}
-					TLongList subList = boundariesToLoad.subList(0, chunk);
-					for (int i = 0; i < chunk; i++) {
-						iterateWaysByIds.setLong(i+1, subList.get(i));
-					}
-					boundariesToLoad.remove(0, chunk);
-					//load the ways
-					new EntityProducer(toProcess, EntityType.WAY, iterateWaysByIds,false).run();
-				}
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			} finally {
-				try {
-					toProcess.put(getEndingEntity());
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-	}
 	
 	public class EntityProducer extends AbstractProducer {
 
@@ -571,12 +295,12 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		}
 		
 		public EntityProducer(BlockingQueue<Entity> toProcess, EntityType type, PreparedStatement select, boolean putEndingEntity) {
-					this.toProcess = toProcess;
-					this.type = type;
-					this.select = select;
-					this.putEndingEntity = putEndingEntity;
-					setDaemon(true);
-					setName("EntityProducer");
+			this.toProcess = toProcess;
+			this.type = type;
+			this.select = select;
+			this.putEndingEntity = putEndingEntity;
+			setDaemon(true);
+			setName("EntityProducer");
 		}
 
 		@Override
@@ -585,41 +309,34 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 			try {
 				select.execute();
 				rs = select.getResultSet();
-//				rs.setFetchSize(1000); !! not working for SQLite would case troubles probably
+				// rs.setFetchSize(1000); !! not working for SQLite would case troubles probably
 				Entity prevEntity = null;
-
 				long prevId = Long.MIN_VALUE;
 				while (rs.next()) {
 					long curId = rs.getLong(1);
 					boolean newEntity = curId != prevId;
 					Entity e = prevEntity;
 					if (type == EntityType.NODE) {
-						if (newEntity) {
-							e = new Node(rs.getDouble(2), rs.getDouble(3),
-									curId);
-						}
-						e.putTag(rs.getString(4), rs.getString(5));
-					} else if (type == EntityType.WAY) {
+						e = new Node(rs.getDouble(2), rs.getDouble(3), curId);
+						readTags(e, rs.getBytes(4));
+					} else if (type == EntityType.WAY || type == EntityType.WAY_BOUNDARY) {
 						if (newEntity) {
 							e = new Way(curId);
 						}
 						int ord = rs.getInt(3);
-						if (ord == 0 && rs.getObject(4) != null) {
-							e.putTag(rs.getString(4), rs.getString(5));
+						if (ord == 0) {
+							readTags(e, rs.getBytes(4));
 						}
-						if (newEntity || ord > 0) {
-							if(rs.getObject(6) == null) {
-								((Way) e).addNode(rs.getLong(2));
-							} else {
-								((Way) e).addNode(new Node(rs.getDouble(6), rs
-									.getDouble(7), rs.getLong(2)));
-							}
+						if (rs.getObject(6) == null) {
+							((Way) e).addNode(rs.getLong(2));
+						} else {
+							Node n = new Node(rs.getDouble(5), rs.getDouble(6), rs.getLong(2));
+							readTags(n, rs.getBytes(7));
+							((Way) e).addNode(n);
 						}
 					} else {
-						if (newEntity) {
-							e = new Relation(curId);
-						}
-						e.putTag(rs.getString(2), rs.getString(3));
+						e = new Relation(curId);
+						readTags(e, rs.getBytes(2));
 					}
 					if (newEntity) {
 						if (prevEntity != null) {

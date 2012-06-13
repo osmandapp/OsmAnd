@@ -2,7 +2,6 @@ package net.osmand.swing;
 
 import gnu.trove.set.hash.TLongHashSet;
 
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -28,8 +27,6 @@ import org.apache.commons.logging.LogFactory;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteDataObject;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.data.DataTileManager;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -282,7 +279,7 @@ public class MapClusterLayer implements MapPanelLayer {
 					w.addNode(new Node(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x), -1), 0);
 				}
 
-				router.loadRoutes(ctx, x ,y , null);
+				router.loadRoutes(ctx, x, y);
 				long l = (((long) x) << 31) + (long) y;
 				next = ctx.getRoutingTile(x, y).getLoadedRoutes().get(l);
 				boolean addToQueue = true;;
