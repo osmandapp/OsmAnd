@@ -35,6 +35,18 @@ struct MapTreeBounds {
 	}
 };
 
+struct RouteSubregion {
+	uint32 length;
+	uint32 filePointer;
+	uint32 mapDataBlock;
+	uint32 left;
+	uint32 right;
+	uint32 top;
+	uint32 bottom;
+	std::vector<RouteSubregion> subregions;
+};
+
+
 struct MapRoot: MapTreeBounds {
 	int minZoom ;
 	int maxZoom ;
@@ -56,6 +68,30 @@ struct BinaryPartIndex {
 	std::string name;
 
 	BinaryPartIndex(PART_INDEXES tp) : type(tp) {}
+};
+
+struct RoutingIndex : BinaryPartIndex {
+	HMAP::hash_map<int, tag_value > decodingRules;
+	std::vector<RouteSubregion> subregions;
+	RoutingIndex() : BinaryPartIndex(ROUTING_INDEX) {
+	}
+
+	void initRouteEncodingRule(uint32 id, std::string tag, std::string val) {
+		tag_value pair = tag_value(tag, val);
+		// DEFINE hash
+		//encodingRules[pair] = id;
+		decodingRules[id] = pair;
+	}
+};
+
+struct RouteDataObject {
+	RoutingIndex* region;
+	std::vector<uint32> types ;
+	std::vector<uint32> pointsX ;
+	std::vector<uint32> pointsY ;
+	std::vector<uint64> restrictions ;
+	std::vector<std::vector<uint32> > pointTypes;
+	int64 id;
 };
 
 
@@ -129,6 +165,7 @@ struct BinaryMapFile {
 	uint32 version;
 	uint64 dateCreated;
 	std::vector<MapIndex> mapIndexes;
+	std::vector<RoutingIndex> routingIndexes;
 	std::vector<BinaryPartIndex*> indexes;
 	FILE* f;
 	bool basemap;
@@ -178,6 +215,7 @@ struct SearchQuery {
 	int numberOfAcceptedObjects;
 	int numberOfReadSubtrees;
 	int numberOfAcceptedSubtrees;
+	std::vector<RouteDataObject> routeObjects;
 
 	SearchQuery(int l, int r, int t, int b, RenderingRuleSearchRequest* req, ResultPublisher* publisher) :
 			req(req), left(l), right(r), top(t), bottom(b),publisher(publisher) {
@@ -185,12 +223,20 @@ struct SearchQuery {
 		numberOfAcceptedSubtrees = numberOfReadSubtrees = 0;
 		ocean = land = false;
 	}
+	SearchQuery(int l, int r, int t, int b, std::vector<RouteDataObject>& result) :
+				req(req), left(l), right(r), top(t), bottom(b), routeObjects(result) {
+	}
 
 	bool publish(MapDataObject* obj) {
 		return publisher->publish(obj);
 	}
+	bool publishRouteObject(RouteDataObject& obj) {
+		routeObjects.push_back(obj);
+		return true;
+	}
 };
 
+void searchRouteRegion(SearchQuery* q);
 
 ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, std::string msgNothingFound);
 

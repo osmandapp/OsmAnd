@@ -142,6 +142,8 @@ void printFileInformation(const char* fileName, VerboseInfo* verbose) {
 			partname = "Map";
 		} else if (it->type == TRANSPORT_INDEX) {
 			partname = "Transport";
+		} else if (it->type == ROUTING_INDEX) {
+			partname = "Routing";
 		} else if (it->type == POI_INDEX) {
 			partname = "Poi";
 		} else if (it->type == ADDRESS_INDEX) {

@@ -124,7 +124,15 @@ public class BinaryMapRouteReaderAdapter {
 	private static final int RESTRICTION_MASK = 7;
 	
 	public static class RouteDataObject {
-		public final RouteRegion region; 
+		public final RouteRegion region;
+		// all these arrays supposed to be immutable!
+		// These feilds accessible from C++
+		public int[] types ; 
+		public int[] pointsX ;
+		public int[] pointsY ;
+		public long[] restrictions ;
+		public int[][] pointTypes ;
+		public long id;
 		
 		public RouteDataObject(RouteRegion region) {
 			this.region = region;
@@ -140,13 +148,6 @@ public class BinaryMapRouteReaderAdapter {
 			this.id = copy.id;
 		}
 
-		public int[] types ; 
-		public int[] pointsX ;
-		public int[] pointsY ;
-		public long[] restrictions ;
-		public int[][] pointTypes ;
-		public long id;
-		
 		public long getId() {
 			return id;
 		}
