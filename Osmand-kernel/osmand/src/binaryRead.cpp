@@ -1139,19 +1139,23 @@ bool readRouteTreeData(CodedInputStream* input, RouteSubregion* s, std::vector<R
 			uint64 from = 0;
 			uint64 to = 0;
 			uint64 type = 0;
+			int tm;
 			int ts;
 			while ((ts = input->ReadTag()) != 0) {
 				switch (WireFormatLite::GetTagFieldNumber(ts)) {
 				case RestrictionData::kFromFieldNumber: {
-					DO_((WireFormatLite::ReadPrimitive<uint64, WireFormatLite::TYPE_INT32>(input, &from)));
+					DO_((WireFormatLite::ReadPrimitive<int, WireFormatLite::TYPE_INT32>(input, &tm)));
+					from = tm;
 					break;
 				}
 				case RestrictionData::kToFieldNumber: {
-					DO_((WireFormatLite::ReadPrimitive<uint64, WireFormatLite::TYPE_INT32>(input, &to)));
+					DO_((WireFormatLite::ReadPrimitive<int, WireFormatLite::TYPE_INT32>(input, &tm)));
+					to = tm;
 					break;
 				}
 				case RestrictionData::kTypeFieldNumber: {
-					DO_((WireFormatLite::ReadPrimitive<uint64, WireFormatLite::TYPE_INT32>(input, &type)));
+					DO_((WireFormatLite::ReadPrimitive<int, WireFormatLite::TYPE_INT32>(input, &tm)));
+					type = tm;
 					break;
 				}
 				default: {
