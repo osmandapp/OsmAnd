@@ -477,7 +477,7 @@ public class IndexBatchCreator {
 					LogManager.getLogManager().getLogger("").addHandler(fh);
 				}
 				try {
-					indexCreator.generateIndexes(f, new ConsoleProgressImplementation(3), null, mapZooms, types, warningsAboutMapData);
+					indexCreator.generateIndexes(f, new ConsoleProgressImplementation(1), null, mapZooms, types, warningsAboutMapData);
 				} finally {
 					if (fh != null) {
 						LogManager.getLogManager().getLogger("").removeHandler(fh);
