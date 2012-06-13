@@ -1,6 +1,5 @@
 package net.osmand.router;
 
-import gnu.trove.list.array.TIntArrayList;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -65,14 +64,14 @@ public class CarRouter extends VehicleRouter {
 	 */
 	@Override
 	public double defineObstacle(RouteDataObject road, int point) {
-		TIntArrayList pointTypes = road.getPointTypes(point);
+		int[] pointTypes = road.getPointTypes(point);
 		if(pointTypes == null) {
 			return 0;
 		}
 		RouteRegion reg = road.region;
-		int sz = pointTypes.size();
+		int sz = pointTypes.length;
 		for(int i=0; i<sz; i++) {
-			RouteTypeRule r = reg.quickGetEncodingRule(pointTypes.getQuick(i));
+			RouteTypeRule r = reg.quickGetEncodingRule(pointTypes[i]);
 			if(r.getType() == RouteTypeRule.TRAFFIC_SIGNALS) {
 				return 35;
 			} else if(r.getType() == RouteTypeRule.RAILWAY_CROSSING) {
@@ -104,9 +103,9 @@ public class CarRouter extends VehicleRouter {
 	public double defineSpeed(RouteDataObject road) {
 		String highway = null;
 		RouteRegion reg = road.region;
-		int sz = road.types.size();
+		int sz = road.types.length;
 		for (int i = 0; i < sz; i++) {
-			RouteTypeRule r = reg.quickGetEncodingRule(road.types.getQuick(i));
+			RouteTypeRule r = reg.quickGetEncodingRule(road.types[i]);
 			float maxSpeed = r.maxSpeed();
 			if (maxSpeed > 0) {
 				return maxSpeed;

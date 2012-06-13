@@ -138,7 +138,7 @@ public class BinaryRoutePlanner {
 					if (road == null || currentsDist < sdist) {
 						RouteDataObject ro = new RouteDataObject(r);
 						road = new RouteSegment(ro, j);
-						ro.insert(j, prx, pry, null);
+						ro.insert(j, prx, pry);
 						sdist = currentsDist;
 						foundProjX = prx;
 						foundProjY = pry;

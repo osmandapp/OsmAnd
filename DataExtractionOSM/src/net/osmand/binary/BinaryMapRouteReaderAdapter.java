@@ -134,17 +134,17 @@ public class BinaryMapRouteReaderAdapter {
 			this.region = copy.region;
 			this.pointsX = copy.pointsX;
 			this.pointsY = copy.pointsY;
-			this.types = new TIntArrayList(copy.types);
+			this.types = copy.types;
 			this.restrictions = copy.restrictions;
-			this.pointTypes = new ArrayList<TIntArrayList>(copy.pointTypes);
+			this.pointTypes = copy.pointTypes;
 			this.id = copy.id;
 		}
 
-		public TIntArrayList types = new TIntArrayList(); 
+		public int[] types ; 
 		public int[] pointsX ;
 		public int[] pointsY ;
 		public long[] restrictions ;
-		public List<TIntArrayList> pointTypes = new ArrayList<TIntArrayList>();
+		public int[][] pointTypes ;
 		public long id;
 		
 		public long getId() {
@@ -171,47 +171,52 @@ public class BinaryMapRouteReaderAdapter {
 			return restrictions[i] >> RESTRICTION_SHIFT;
 		}
 		
-		
-		public void insert(int pos, int x31, int y31, TIntArrayList pointTypes) {
+		public void insert(int pos, int x31, int y31) {
 			int[] opointsX = pointsX;
 			int[] opointsY = pointsY;
+			int[][] opointTypes = pointTypes;
 			pointsX = new int[pointsX.length + 1];
 			pointsY = new int[pointsY.length + 1];
+			boolean insTypes = this.pointTypes != null && this.pointTypes.length > pos;
+			if(insTypes) {
+				pointTypes = new int[opointTypes.length + 1][];
+			}
 			int i = 0;
 			for (; i < pos; i++) {
 				pointsX[i] = opointsX[i];
 				pointsY[i] = opointsY[i];
+				if(insTypes){
+					pointTypes[i] = opointTypes[i];
+				}
 			}
 			pointsX[i] = x31;
 			pointsY[i] = y31;
+			if(insTypes){
+				pointTypes[i] = null;
+			}
 			for (i = i + 1; i < pointsX.length; i++) {
-				pointsX[i] = opointsX[i-1];
-				pointsY[i] = opointsY[i-1];
+				pointsX[i] = opointsX[i - 1];
+				pointsY[i] = opointsY[i - 1];
+				if (insTypes && i < pointTypes.length) {
+					pointTypes[i] = opointTypes[i - 1];
+				}
 			}
-			if(this.pointTypes.size() > pos) {
-				this.pointTypes.add(pos, pointTypes);
-			}
+			
 		}
 		
-		public TIntArrayList getPointTypes(int ind) {
-			if(ind >= pointTypes.size()){
+		public int[] getPointTypes(int ind) {
+			if(pointTypes == null ||  ind >= pointTypes.length){
 				return null;
 			}
-			return pointTypes.get(ind);
+			return pointTypes[ind];
 		}
 		
-		public void setPointTypes(int ind, TIntArrayList l) {
-			while(ind >= pointTypes.size()){
-				pointTypes.add(null);
-			}
-			pointTypes.set(ind, l);
-		}
 		
 		public String getHighway() {
 			String highway = null;
-			int sz = types.size();
+			int sz = types.length;
 			for (int i = 0; i < sz; i++) {
-				RouteTypeRule r = region.quickGetEncodingRule(types.getQuick(i));
+				RouteTypeRule r = region.quickGetEncodingRule(types[i]);
 				highway = r.highwayRoad();
 				if (highway != null) {
 					break;
@@ -363,6 +368,8 @@ public class BinaryMapRouteReaderAdapter {
 		RouteDataObject o = new RouteDataObject(reg);
 		TIntArrayList pointsX = new TIntArrayList();
 		TIntArrayList pointsY = new TIntArrayList();
+		TIntArrayList types = new TIntArrayList();
+		List<TIntArrayList> globalpointTypes = new ArrayList<TIntArrayList>();
 		while (true) {
 			int ts = codedIS.readTag();
 			int tags = WireFormat.getTagFieldNumber(ts);
@@ -370,12 +377,22 @@ public class BinaryMapRouteReaderAdapter {
 			case 0:
 				o.pointsX = pointsX.toArray();
 				o.pointsY = pointsY.toArray();
+				o.types = types.toArray();
+				if(globalpointTypes.size() > 0){
+					o.pointTypes = new int[globalpointTypes.size()][];
+					for(int k=0; k<o.pointTypes.length; k++) {
+						TIntArrayList l = globalpointTypes.get(k);
+						if(l != null) {
+							o.pointTypes[k] = l.toArray();
+						}
+					}
+				}
 				return o;
 			case RouteData.TYPES_FIELD_NUMBER:
 				int len = codedIS.readRawVarint32();
 				int oldLimit = codedIS.pushLimit(len);
 				while(codedIS.getBytesUntilLimit() > 0) {
-					o.types.add(codedIS.readRawVarint32());
+					types.add(codedIS.readRawVarint32());
 				}
 				codedIS.popLimit(oldLimit);
 				break;
@@ -397,16 +414,20 @@ public class BinaryMapRouteReaderAdapter {
 			case RouteData.POINTTYPES_FIELD_NUMBER:
 				len = codedIS.readRawVarint32();
 				oldLimit = codedIS.pushLimit(len);
-				while(codedIS.getBytesUntilLimit() > 0){
+				while (codedIS.getBytesUntilLimit() > 0) {
 					int pointInd = codedIS.readRawVarint32();
 					TIntArrayList pointTypes = new TIntArrayList();
 					int lens = codedIS.readRawVarint32();
 					int oldLimits = codedIS.pushLimit(lens);
-					while(codedIS.getBytesUntilLimit() > 0){
+					while (codedIS.getBytesUntilLimit() > 0) {
 						pointTypes.add(codedIS.readRawVarint32());
 					}
-					o.setPointTypes(pointInd, pointTypes);
 					codedIS.popLimit(oldLimits);
+					while (pointInd >= globalpointTypes.size()) {
+						globalpointTypes.add(null);
+					}
+					globalpointTypes.set(pointInd, pointTypes);
+					
 				}
 				codedIS.popLimit(oldLimit);
 				break;

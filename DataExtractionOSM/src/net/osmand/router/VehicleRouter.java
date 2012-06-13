@@ -18,9 +18,9 @@ public abstract class VehicleRouter {
 	
 	public int isOneWay(RouteDataObject road) {
 		RouteRegion reg = road.region;
-		int sz = road.types.size();
+		int sz = road.types.length;
 		for(int i=0; i<sz; i++) {
-			RouteTypeRule r = reg.quickGetEncodingRule(road.types.getQuick(i));
+			RouteTypeRule r = reg.quickGetEncodingRule(road.types[i]);
 			if(r.onewayDirection() != 0) {
 				return r.onewayDirection();
 			} else if(r.roundabout()) {
