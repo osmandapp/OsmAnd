@@ -75,7 +75,7 @@ class Download {
 	$dir='indexes/';
     $localFileName='local_list.xml';
 	if (is_dir($dir)) {
-		if (filemtime($dir) > filemtime($localFileName)) {
+		if (filemtime($dir) > filemtime($localFileName) || $update) {
            //echo "Recreating local_list.xml";
 				if ($dh = opendir($dir)) {
 					$output = new DOMDocument();
