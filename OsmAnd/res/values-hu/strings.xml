@@ -710,7 +710,7 @@
   <string name="navigate_point_longitude">Hosszúság</string>
   <string name="navigate_point_format_D">FFF.FFFFF</string>
   <string name="navigate_point_format_DM">FFF PP.PPPPP</string>
-  <string name="navigate_point_format_DMS">FFF PP MM.MMMMM</string>
+  <string name="navigate_point_format_DMS">FFF PP MM.MM</string>
   <string name="search_shown_on_map">Mutasd a térképen</string>
   <string name="navigate_point_cancel">Mégse</string>
   <string name="search_address_top_text">Cím kiválasztása</string>
@@ -805,7 +805,7 @@
   <string name="osmand_extra_settings_description">"Ez a kiterjesztés további térkép és pár eszközre jellemző beállítást tesz lehetővé. "</string>
   <string name="osmand_development_plugin_description">Ez a bővítmény elérhetővé teszi a fejlesztői és hibakeresési eszközöket, mint szimulált navigáció, vagy teljesítmény kijelzés.</string>
   <string name="plugins_screen">Bővítménykezelő</string>
-  <string name="select_plugin_to_activate">Kiterjesztés bekapcsolása és kikapcsolása érintésre történik. (Lehet, hogy az Osmandot újra kell indítani.)</string>
+  <string name="select_plugin_to_activate">Kiterjesztés be- és kikapcsolása érintésre történik. (Lehet, hogy az Osmandot újra kell indítanod.)</string>
   <string name="prefs_plugins_descr">A kiterjesztések további lehetőségeket biztosítanak az alkalmazásban mint a útvonal mentés, raszteres térképek, kikapcsolt képernyős lehetőségek, akadálymentesítés és mások.</string>
   <string name="prefs_plugins">Bővítménykezelő</string>
   <string name="tip_recent_changes_0_8_0_t">"A 0.8.0 kiadás változásai:\n\t- Beépülők\n\t- Új offline térképadat formátum\n\t- Sok hibajavítás"</string>
@@ -817,4 +817,4 @@
   <string name="native_rendering">Natív renderelés</string>
   <string name="animate_routing">Navigáció szimulálása</string>
   <string name="test_voice_prompts">Hangutasítások tesztelése</string>
-<string name="local_index_routing_data">Routing data</string><string name="navigate_point_format">Format :</string><string name="poi_search_desc">POI - Point Of interest</string><string name="address_search_desc">Address search</string><string name="navpoint_search_desc">Navigate point</string><string name="transport_search_desc">Transport search</string><string name="favourites_search_desc">Favourites search</string><string name="history_search_desc">Search history</string></resources>
+<string name="local_index_routing_data">Routing data</string><string name="navigate_point_format">Format :</string><string name="poi_search_desc">POI - Point Of interest</string><string name="address_search_desc">Address search</string><string name="navpoint_search_desc">Koor</string><string name="transport_search_desc">Tömegközlekedés keresése</string><string name="favourites_search_desc">Kedvencek keresése</string><string name="history_search_desc">Search history</string></resources>
