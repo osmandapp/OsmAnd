@@ -12,6 +12,11 @@ import net.osmand.plus.views.OsmandMapTileView;
 import android.content.DialogInterface;
 import android.preference.PreferenceScreen;
 
+/**
+ * 
+ * The plugin facilitates a storage of the location of a parked car 
+ * @author Alena Fedasenka
+ */
 public class ParkingPositionPlugin extends OsmandPlugin {
 
 	private static final String ID = "osmand.parking.position";
@@ -36,12 +41,12 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	
 	@Override
 	public String getDescription() {
-		return app.getString(R.string.osmand_parking_position_description);
+		return app.getString(R.string.osmand_parking_plugin_description);
 	}
 	
 	@Override
 	public String getName() {
-		return app.getString(R.string.osmand_parking_position_name);
+		return app.getString(R.string.osmand_parking_plugin_name);
 	}
 	
 	@Override
@@ -63,17 +68,21 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 	@Override
 	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude, ContextMenuAdapter adapter, Object selectedObj) {
-		OnContextMenuClick listener = new OnContextMenuClick() {
+		OnContextMenuClick addListener = new OnContextMenuClick() {
 			@Override
 			public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
-				if (resId == R.string.context_menu_item_add_parking_point){
+				if (resId == R.string.context_menu_item_add_parking_point) {
 					settings.setParkingPosition(latitude, longitude);
 					if (mapActivity.getMapView().getLayers().contains(parkingLayer))
 						parkingLayer.setParkingPoint(settings.getParkingPosition());
+				} else if ((resId == R.string.context_menu_item_delete_parking_point)){
+					parkingLayer.showDeleteDialog();
 				}
 			}
 		};
-		adapter.registerItem(R.string.context_menu_item_add_parking_point, 0, listener, -1);
+		adapter.registerItem(R.string.context_menu_item_add_parking_point, 0, addListener, -1);
+		if (settings.getParkingPosition() != null)
+			adapter.registerItem(R.string.context_menu_item_delete_parking_point, 0, addListener, -1);
 	}
 
 	@Override
