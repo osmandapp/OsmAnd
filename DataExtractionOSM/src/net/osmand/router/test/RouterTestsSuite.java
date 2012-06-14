@@ -18,6 +18,7 @@ import net.osmand.router.PedestrianRouter;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+import net.osmand.swing.NativeSwingRendering;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -78,7 +79,7 @@ public class RouterTestsSuite {
 	}
 
 	private static void testRoute(Element testCase, BinaryMapIndexReader[] regions) throws IOException {
-		BinaryRoutePlanner planner = new BinaryRoutePlanner(regions);
+		BinaryRoutePlanner planner = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(), regions);
 		RoutingContext ctx = new RoutingContext();
 		String vehicle = testCase.getAttribute("vehicle");
 		String testDescription = testCase.getAttribute("description");

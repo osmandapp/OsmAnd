@@ -1047,9 +1047,9 @@ bool readRouteDataObject(CodedInputStream* input, uint32 left, uint32 top, Route
 			int px = left >> ROUTE_SHIFT_COORDINATES;
 			int py = top >> ROUTE_SHIFT_COORDINATES;
 			while (input->BytesUntilLimit() > 0) {
-				DO_((WireFormatLite::ReadPrimitive<int, WireFormatLite::TYPE_INT32>(input, &s)));
+				DO_((WireFormatLite::ReadPrimitive<int, WireFormatLite::TYPE_SINT32>(input, &s)));
 				uint32 x = s + px;
-				DO_((WireFormatLite::ReadPrimitive<int, WireFormatLite::TYPE_INT32>(input, &s)));
+				DO_((WireFormatLite::ReadPrimitive<int, WireFormatLite::TYPE_SINT32>(input, &s)));
 				uint32 y = s + py;
 
 				obj->pointsX.push_back(x << ROUTE_SHIFT_COORDINATES);
@@ -1073,7 +1073,7 @@ bool readRouteDataObject(CodedInputStream* input, uint32 left, uint32 top, Route
 				int oldLimits = input->PushLimit(lens);
 
 				if (obj->pointTypes.size() <= pointInd) {
-					obj->pointTypes.resize(pointInd, std::vector<uint32>());
+					obj->pointTypes.resize(pointInd + 1, std::vector<uint32>());
 				}
 				while (input->BytesUntilLimit() > 0) {
 					DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &t)));
@@ -1183,7 +1183,7 @@ bool readRouteTreeData(CodedInputStream* input, RouteSubregion* s, std::vector<R
 				switch (WireFormatLite::GetTagFieldNumber(ts)) {
 				case IdTable::kRouteIdFieldNumber: {
 					int64 val;
-					DO_((WireFormatLite::ReadPrimitive<int64, WireFormatLite::TYPE_INT64>(input, &val)));
+					DO_((WireFormatLite::ReadPrimitive<int64, WireFormatLite::TYPE_SINT64>(input, &val)));
 					routeId += val;
 					idTables.push_back(routeId);
 					break;
@@ -1240,7 +1240,7 @@ bool readRouteTreeData(CodedInputStream* input, RouteSubregion* s, std::vector<R
 
 bool sortRouteRegions (const RouteSubregion& i,const RouteSubregion& j) { return (i.mapDataBlock<j.mapDataBlock); }
 
-void searchRouteRegion(SearchQuery* q) {
+void searchRouteRegion(SearchQuery* q, std::vector<RouteDataObject*>& list, RoutingIndex* rs){
 	map<std::string, BinaryMapFile*>::iterator i = openFiles.begin();
 	HMAP::hash_set<long long> ids;
 	int count = 0;
@@ -1258,16 +1258,26 @@ void searchRouteRegion(SearchQuery* q) {
 			if (q->publisher->isCancelled()) {
 				break;
 			}
+			if(rs != NULL && (rs->name != routingIndex->name || rs->filePointer != routingIndex->filePointer)){
+				continue;
+			}
 			std::vector<RouteSubregion> toLoad;
 			searchRouteRegion(&cis, q, &(*routingIndex), routingIndex->subregions, toLoad);
 			sort(toLoad.begin(), toLoad.end(), sortRouteRegions);
-			std::vector<RouteDataObject*> list;
+			;
+			std::vector<RouteDataObject*> iteration;
+			int cnt = 0;
 			for (std::vector<RouteSubregion>::iterator subreg = toLoad.begin(); subreg != toLoad.end(); subreg++) {
 				cis.Seek(subreg->filePointer + subreg->mapDataBlock);
-				uint32 old = cis.PushLimit(subreg->length);
-				readRouteTreeData(&cis, &(*subreg), list);
+				uint32 length;
+				cis.ReadVarint32(&length);
+				uint32 old = cis.PushLimit(length);
+				readRouteTreeData(&cis, &(*subreg), iteration);
+				list.insert(list.end(), iteration.begin(), iteration.end());
+				iteration.clear();
 				cis.PopLimit(old);
 			}
+			std::vector<RouteDataObject*>::iterator rs = list.begin();
 		}
 
 	}

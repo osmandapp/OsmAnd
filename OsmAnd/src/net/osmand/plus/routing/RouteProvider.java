@@ -31,6 +31,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ApplicationMode;
+import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper.TurnType;
 import net.osmand.router.BicycleRouter;
@@ -653,7 +654,7 @@ public class RouteProvider {
 	
 	protected RouteCalculationResult findVectorMapsRoute(Location start, LatLon end, ApplicationMode mode, boolean fast, OsmandApplication app) throws IOException {
 		BinaryMapIndexReader[] files = app.getResourceManager().getRoutingMapFiles();
-		BinaryRoutePlanner router = new BinaryRoutePlanner(files);
+		BinaryRoutePlanner router = new BinaryRoutePlanner(NativeOsmandLibrary.getLoadedLibrary(), files);
 		RoutingContext ctx = new RoutingContext();
 		ctx.setUsingShortestWay(!fast);
 		//ctx.setPlanRoadDirection(null);

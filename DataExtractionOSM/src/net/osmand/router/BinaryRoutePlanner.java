@@ -13,19 +13,20 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
+import java.util.Set;
 import java.util.TreeSet;
 
 import net.osmand.LogUtil;
+import net.osmand.NativeLibrary;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapRouteReaderAdapter;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteDataObject;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 import net.osmand.router.RoutingContext.RoutingTile;
@@ -36,13 +37,14 @@ public class BinaryRoutePlanner {
 	
 	private final static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
 	private final int REVERSE_WAY_RESTRICTION_ONLY = 1024;
+	private final NativeLibrary nativeLib;
 	private final Map<BinaryMapIndexReader, List<RouteSubregion>> map = new LinkedHashMap<BinaryMapIndexReader, List<RouteSubregion>>();
-	
-	
 	
 	protected static final Log log = LogUtil.getLog(BinaryRoutePlanner.class);
 	
-	public BinaryRoutePlanner(BinaryMapIndexReader... map) {
+	
+	public BinaryRoutePlanner(NativeLibrary nativeLib, BinaryMapIndexReader... map) {
+		this.nativeLib = nativeLib;
 		for (BinaryMapIndexReader mr : map) {
 			List<RouteRegion> rr = mr.getRoutingIndexes();
 			List<RouteSubregion> subregions = new ArrayList<BinaryMapRouteReaderAdapter.RouteSubregion>();
@@ -219,7 +221,6 @@ public class BinaryRoutePlanner {
 		}
 		while (!graphSegments.isEmpty()) {
 			RouteSegment segment = graphSegments.poll();
-
 			ctx.visitedSegments++;
 			// for debug purposes
 			if (ctx.visitor != null) {
@@ -462,10 +463,16 @@ public class BinaryRoutePlanner {
 		SearchRequest<RouteDataObject> request = BinaryMapIndexReader.buildSearchRouteRequest(tileX << zoomToLoad,
 				(tileX + 1) << zoomToLoad, tileY << zoomToLoad, (tileY + 1) << zoomToLoad, matcher);
 		for (Entry<BinaryMapIndexReader, List<RouteSubregion>> r : map.entrySet()) {
-			try {
-				r.getKey().searchRouteIndex(request, r.getValue());
-			} catch (IOException e) {
-				throw new RuntimeException("Loading data exception", e);
+			if(nativeLib != null) {
+				for(RouteRegion reg : r.getKey().getRoutingIndexes()) {
+					nativeLoadRegion(request, reg);
+				}
+			} else {
+				try {
+					r.getKey().searchRouteIndex(request, r.getValue());
+				} catch (IOException e) {
+					throw new RuntimeException("Loading data exception", e);
+				}
 			}
 		}
 		ctx.loadedTiles++;
@@ -477,6 +484,27 @@ public class BinaryRoutePlanner {
 	}
 
 	
+
+
+	private void nativeLoadRegion(SearchRequest<RouteDataObject> request, RouteRegion reg) {
+		boolean intersects = false;
+		for(RouteSubregion sub : reg.getSubregions()) {
+			if(request.intersects(sub.left, sub.top, sub.right, sub.bottom)) {
+				intersects = true;
+				break;
+			}
+		}
+		if(intersects) {
+			RouteDataObject[] res = nativeLib.loadRouteRegion(reg, request.getLeft(), request.getRight(), request.getTop(), request.getBottom());
+			if(res != null){
+				for(RouteDataObject ro : res) {
+					if(ro != null) {
+						request.publish(ro);
+					}
+				}
+			}
+		}
+	}
 
 
 	private boolean processRouteSegment(final RoutingContext ctx, boolean reverseWaySearch,

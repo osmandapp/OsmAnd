@@ -560,7 +560,7 @@ public class MapRouterLayer implements MapPanelLayer {
 					rs[it++] = new BinaryMapIndexReader(raf, false);
 				}
 				
-				BinaryRoutePlanner router = new BinaryRoutePlanner(rs);
+				BinaryRoutePlanner router = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(), rs);
 				RoutingContext ctx = new RoutingContext();
 				String m = DataExtractionSettings.getSettings().getRouteMode();
 				if("pedestrian".equalsIgnoreCase(m)) {
@@ -691,7 +691,9 @@ public class MapRouterLayer implements MapPanelLayer {
 				playPauseButton.setVisible(false);
 				nextTurn.setVisible(false);
 				stopButton.setVisible(false);
-				map.getPoints().clear();
+				if(map.getPoints() != null) {
+					map.getPoints().clear();
+				}
 			}
 			System.out.println("Finding self routes " + res.size() + " " + (System.currentTimeMillis() - time) + " ms");
 		}

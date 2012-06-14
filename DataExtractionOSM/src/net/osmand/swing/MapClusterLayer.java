@@ -22,20 +22,20 @@ import javax.swing.Action;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteDataObject;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.data.DataTileManager;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.Way;
 import net.osmand.router.BinaryRoutePlanner;
-import net.osmand.router.RoutingContext;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
+import net.osmand.router.RoutingContext;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 
 public class MapClusterLayer implements MapPanelLayer {
@@ -131,7 +131,7 @@ public class MapClusterLayer implements MapPanelLayer {
 			
 		}
 		
-		BinaryRoutePlanner router = new BinaryRoutePlanner(rs);
+		BinaryRoutePlanner router = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(), rs);
 		RoutingContext ctx = new RoutingContext();
 		
 		// find closest way

@@ -44,6 +44,9 @@ struct RouteSubregion {
 	uint32 top;
 	uint32 bottom;
 	std::vector<RouteSubregion> subregions;
+
+	RouteSubregion() : length(0), filePointer(0), mapDataBlock(0){
+	}
 };
 
 
@@ -215,7 +218,6 @@ struct SearchQuery {
 	int numberOfAcceptedObjects;
 	int numberOfReadSubtrees;
 	int numberOfAcceptedSubtrees;
-	std::vector<RouteDataObject> routeObjects;
 
 	SearchQuery(int l, int r, int t, int b, RenderingRuleSearchRequest* req, ResultPublisher* publisher) :
 			req(req), left(l), right(r), top(t), bottom(b),publisher(publisher) {
@@ -223,20 +225,16 @@ struct SearchQuery {
 		numberOfAcceptedSubtrees = numberOfReadSubtrees = 0;
 		ocean = land = false;
 	}
-	SearchQuery(int l, int r, int t, int b, std::vector<RouteDataObject>& result) :
-				req(req), left(l), right(r), top(t), bottom(b), routeObjects(result) {
+	SearchQuery(int l, int r, int t, int b) :
+				req(req), left(l), right(r), top(t), bottom(b) {
 	}
 
 	bool publish(MapDataObject* obj) {
 		return publisher->publish(obj);
 	}
-	bool publishRouteObject(RouteDataObject& obj) {
-		routeObjects.push_back(obj);
-		return true;
-	}
 };
 
-void searchRouteRegion(SearchQuery* q);
+void searchRouteRegion(SearchQuery* q, std::vector<RouteDataObject*>& list, RoutingIndex* rs = NULL);
 
 ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, std::string msgNothingFound);
 

@@ -11,12 +11,10 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-
 import net.osmand.Algoritms;
 import net.osmand.CollatorStringMatcher;
-import net.osmand.LogUtil;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData;
 import net.osmand.data.Amenity;
@@ -24,6 +22,7 @@ import net.osmand.data.AmenityType;
 import net.osmand.osm.MapUtils;
 import net.sf.junidecode.Junidecode;
 
+import org.apache.commons.logging.Log;
 
 import com.google.protobuf.CodedInputStreamRAF;
 import com.google.protobuf.WireFormat;

@@ -2,6 +2,8 @@ package net.osmand;
 
 import java.nio.ByteBuffer;
 
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 
@@ -55,7 +57,13 @@ public class NativeLibrary {
 	public boolean closeMapFile(String filePath) {
 		return closeBinaryMapFile(filePath);
 	}
+	
+	public RouteDataObject[] loadRouteRegion(RouteRegion reg, int left, int right, int top, int bottom) {
+		return loadRoutingData(reg, reg.getName(), reg.getFilePointer(), left, right, top, bottom);
+	}
 
+	
+	protected static native RouteDataObject[] loadRoutingData(RouteRegion reg, String regName, int fpointer, int left, int right, int top, int bottom); 
 
 	protected static native void deleteSearchResult(long searchResultHandle);
 

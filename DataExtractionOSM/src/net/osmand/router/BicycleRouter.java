@@ -1,13 +1,11 @@
 package net.osmand.router;
 
-import gnu.trove.list.array.TIntArrayList;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteDataObject;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 
 public class BicycleRouter extends VehicleRouter {

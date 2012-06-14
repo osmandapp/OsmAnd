@@ -14,10 +14,10 @@ import java.util.List;
 import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.OsmandOdb.IdTable;
-import net.osmand.binary.OsmandOdb.RestrictionData;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBox;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteEncodingRule;
+import net.osmand.binary.OsmandOdb.RestrictionData;
 import net.osmand.binary.OsmandOdb.RouteData;
 import net.osmand.osm.MapUtils;
 
@@ -119,114 +119,6 @@ public class BinaryMapRouteReaderAdapter {
 			
 		}
 	}
-	
-	private static final int RESTRICTION_SHIFT = 3;
-	private static final int RESTRICTION_MASK = 7;
-	
-	public static class RouteDataObject {
-		public final RouteRegion region;
-		// all these arrays supposed to be immutable!
-		// These feilds accessible from C++
-		public int[] types ; 
-		public int[] pointsX ;
-		public int[] pointsY ;
-		public long[] restrictions ;
-		public int[][] pointTypes ;
-		public long id;
-		
-		public RouteDataObject(RouteRegion region) {
-			this.region = region;
-		}
-		
-		public RouteDataObject(RouteDataObject copy) {
-			this.region = copy.region;
-			this.pointsX = copy.pointsX;
-			this.pointsY = copy.pointsY;
-			this.types = copy.types;
-			this.restrictions = copy.restrictions;
-			this.pointTypes = copy.pointTypes;
-			this.id = copy.id;
-		}
-
-		public long getId() {
-			return id;
-		}
-		
-		public int getPoint31XTile(int i) {
-			return pointsX[i];
-		}
-		public int getPoint31YTile(int i) {
-			return pointsY[i];
-		}
-		public int getPointsLength() {
-			return pointsX.length;
-		}
-		public int getRestrictionLength(){
-			return restrictions == null ? 0 : restrictions.length;
-		}
-		
-		public int getRestrictionType(int i){
-			return (int) (restrictions[i] & RESTRICTION_MASK);
-		}
-		public long getRestrictionId(int i){
-			return restrictions[i] >> RESTRICTION_SHIFT;
-		}
-		
-		public void insert(int pos, int x31, int y31) {
-			int[] opointsX = pointsX;
-			int[] opointsY = pointsY;
-			int[][] opointTypes = pointTypes;
-			pointsX = new int[pointsX.length + 1];
-			pointsY = new int[pointsY.length + 1];
-			boolean insTypes = this.pointTypes != null && this.pointTypes.length > pos;
-			if(insTypes) {
-				pointTypes = new int[opointTypes.length + 1][];
-			}
-			int i = 0;
-			for (; i < pos; i++) {
-				pointsX[i] = opointsX[i];
-				pointsY[i] = opointsY[i];
-				if(insTypes){
-					pointTypes[i] = opointTypes[i];
-				}
-			}
-			pointsX[i] = x31;
-			pointsY[i] = y31;
-			if(insTypes){
-				pointTypes[i] = null;
-			}
-			for (i = i + 1; i < pointsX.length; i++) {
-				pointsX[i] = opointsX[i - 1];
-				pointsY[i] = opointsY[i - 1];
-				if (insTypes && i < pointTypes.length) {
-					pointTypes[i] = opointTypes[i - 1];
-				}
-			}
-			
-		}
-		
-		public int[] getPointTypes(int ind) {
-			if(pointTypes == null ||  ind >= pointTypes.length){
-				return null;
-			}
-			return pointTypes[ind];
-		}
-		
-		
-		public String getHighway() {
-			String highway = null;
-			int sz = types.length;
-			for (int i = 0; i < sz; i++) {
-				RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-				highway = r.highwayRoad();
-				if (highway != null) {
-					break;
-				}
-			}
-			return highway;
-		}
-	}
-	
 	
 	public static class RouteRegion extends BinaryIndexPart {
 		double leftLongitude;
@@ -458,8 +350,8 @@ public class BinaryMapRouteReaderAdapter {
 					RouteDataObject fromr = routeTree.dataObjects.get(from);
 					fromr.restrictions = new long[it.value().size()];
 					for (int k = 0; k < fromr.restrictions.length; k++) {
-						int to = (int) (it.value().get(k) >> RESTRICTION_SHIFT);
-						long valto = (idTables.get(to) << RESTRICTION_SHIFT) | ((long) it.value().get(k) & RESTRICTION_MASK);
+						int to = (int) (it.value().get(k) >> RouteDataObject.RESTRICTION_SHIFT);
+						long valto = (idTables.get(to) << RouteDataObject.RESTRICTION_SHIFT) | ((long) it.value().get(k) & RouteDataObject.RESTRICTION_MASK);
 						fromr.restrictions[k] = valto;
 					}
 				}
@@ -531,7 +423,7 @@ public class BinaryMapRouteReaderAdapter {
 				if(!restrictions.containsKey(from)) {
 					restrictions.put(from, new TLongArrayList());
 				}
-				restrictions.get(from).add((to << RESTRICTION_SHIFT) + type);
+				restrictions.get(from).add((to << RouteDataObject.RESTRICTION_SHIFT) + type);
 				codedIS.popLimit(oldLimit);
 				break;
 			case RouteDataBlock.STRINGTABLE_FIELD_NUMBER :

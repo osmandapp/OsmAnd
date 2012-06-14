@@ -22,14 +22,13 @@ import java.util.Map.Entry;
 
 import net.osmand.Algoritms;
 import net.osmand.CollatorStringMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.LogUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.StringMatcher;
-import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteDataObject;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
@@ -1331,7 +1330,7 @@ public class BinaryMapIndexReader {
 		}
 		
 		
-		protected boolean publish(T obj){
+		public boolean publish(T obj){
 			if(resultMatcher == null || resultMatcher.publish(obj)){
 				searchResults.add(obj);
 				return true;
@@ -1379,6 +1378,22 @@ public class BinaryMapIndexReader {
 		
 		public boolean contains(int l, int t, int r, int b){
 			return r <= right && l >= left && b <= bottom && t >= top;
+		}
+		
+		public int getLeft() {
+			return left;
+		}
+		
+		public int getRight() {
+			return right;
+		}
+		
+		public int getBottom() {
+			return bottom;
+		}
+		
+		public int getTop() {
+			return top;
 		}
 		
 		public void clearSearchResults(){

@@ -1,8 +1,5 @@
 package net.osmand.router;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
@@ -10,7 +7,10 @@ import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TIntHashSet;
 import gnu.trove.set.hash.TLongHashSet;
 
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteDataObject;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import net.osmand.binary.RouteDataObject;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
 

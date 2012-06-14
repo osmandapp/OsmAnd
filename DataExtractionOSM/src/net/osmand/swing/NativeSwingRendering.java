@@ -128,9 +128,15 @@ public class NativeSwingRendering extends NativeLibrary {
 		return loaded;
 	}
 	
-	public static void main(String[] args) throws SAXException, IOException {
-		NativeSwingRendering lib = loadLibrary("/home/victor/projects/OsmAnd/git/Osmand-kernel/jni-prebuilt/linux-x86/osmand.lib");
-		lib.initFilesInDir(new File("/home/victor/projects/OsmAnd/data/version2"));		
-		MapPanel.showMainWindow(512, 512, lib);
+	public static NativeSwingRendering getDefaultFromSettings() {
+		String filename = DataExtractionSettings.getSettings().getNativeLibFile();
+		if(!(new File(filename).exists())) {
+			return null;
+		}
+		NativeSwingRendering lib = NativeSwingRendering.loadLibrary(filename);
+		if(lib != null){
+			lib.initFilesInDir(new File(DataExtractionSettings.getSettings().getBinaryFilesDir()));
+		}
+		return lib;
 	}
 }
