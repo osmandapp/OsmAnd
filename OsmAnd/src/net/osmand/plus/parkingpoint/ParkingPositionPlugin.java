@@ -7,10 +7,8 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.content.DialogInterface;
-import android.preference.PreferenceScreen;
 
 /**
  * 
@@ -21,13 +19,14 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 	private static final String ID = "osmand.parking.position";
 	private OsmandApplication app;
-//	private static final Log log = LogUtil.getLog(ParkingPositionPlugin.class);	
+
 	private ParkingPositionLayer parkingLayer;
 	private OsmandSettings settings;
 	
 	public ParkingPositionPlugin(OsmandApplication app) {
 		this.app = app;
 	}
+	
 	@Override
 	public boolean init(OsmandApplication app) {
 		settings = app.getSettings();
@@ -53,11 +52,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public void registerLayers(MapActivity activity) {
 		parkingLayer = new ParkingPositionLayer(activity);
 	}
-	
-	@Override
-	public void mapActivityCreate(MapActivity activity) {
-	}
-	
+
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
 		if((settings.getParkingPosition() == null) && (mapView.getLayers().contains(parkingLayer))){
@@ -66,6 +61,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			mapView.addLayer(parkingLayer, 8);
 		}
 	}
+	
 	@Override
 	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude, ContextMenuAdapter adapter, Object selectedObj) {
 		OnContextMenuClick addListener = new OnContextMenuClick() {
@@ -83,9 +79,5 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		adapter.registerItem(R.string.context_menu_item_add_parking_point, 0, addListener, -1);
 		if (settings.getParkingPosition() != null)
 			adapter.registerItem(R.string.context_menu_item_delete_parking_point, 0, addListener, -1);
-	}
-
-	@Override
-	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
 	}
 }

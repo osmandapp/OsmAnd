@@ -9,6 +9,13 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osmand_parking_position_description">The position of your parked car.</string>
+    <string name="osmand_parking_position_name">Parking point</string>
+    <string name="osmand_parking_plugin_description">This plugin allows to store the location of your parked car.</string>
+    <string name="osmand_parking_plugin_name">Parking Position Plugin</string>
+    <string name="context_menu_item_add_parking_point">Add location of a parked car</string>
+	<string name="context_menu_item_delete_parking_point">Delete location of a parked car</string>
+ 
     <string name="offline_navigation_not_available">Osmand offline navigation is temporarily not available.</string>
     <string name="left_side_navigation">Left-Hand Driving</string>
     <string name="left_side_navigation_descr">Select for countries with left-hand traffic</string>
@@ -44,10 +51,6 @@
     <string name="osmand_monitoring_name">Tracking</string>
     <string name="osmand_extra_settings_description">This plugin provides advanced map configuration and some device-specific settings.</string>
     <string name="osmand_extra_settings_name">Advanced Settings</string>
-    <string name="osmand_parking_position_description">The position of your parked car.</string>
-    <string name="osmand_parking_position_name">Parking point</string>
-    <string name="osmand_parking_plugin_description">This plugin allows to store the location of your parked car.</string>
-    <string name="osmand_parking_plugin_name">Parking Position Plugin</string>
     <string name="osmand_development_plugin_description">This plugin enables development and debugging features like animated navigation or rendering performance display.</string>
     <string name="osmand_development_plugin_name">Osmand Development</string>
     <string name="plugins_screen">Plugin Manager</string>
@@ -939,8 +942,6 @@
 
 <string name="context_menu_item_navigate_point">Set as destination</string>
 <string name="context_menu_item_add_favorite">Add to favorites</string>
-<string name="context_menu_item_add_parking_point">Add location of a parked car</string>
-<string name="context_menu_item_delete_parking_point">Delete location of a parked car</string>
 <string name="context_menu_item_update_map">Update map</string>
 <string name="context_menu_item_open_bug">Open OSM bug</string>
 <string name="context_menu_item_create_poi">Create POI</string>

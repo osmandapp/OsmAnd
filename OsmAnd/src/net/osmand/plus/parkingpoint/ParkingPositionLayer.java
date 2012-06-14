@@ -117,15 +117,6 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	@Override
-	public void destroyLayer() {
-	}
-
-	@Override
-	public boolean drawInScreenPixels() {
-		return false;
-	}
-
-	@Override
 	public boolean onSingleTap(PointF point) {
 		List <LatLon> parkPos = new ArrayList<LatLon>();
 		getParkingFromPoint(point, parkPos);
@@ -137,9 +128,13 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		}
 		return false;
 	}
-	
+
 	@Override
-	public boolean onLongPressEvent(PointF point) {
+	public void destroyLayer() {
+	}
+
+	@Override
+	public boolean drawInScreenPixels() {
 		return false;
 	}
 
@@ -170,6 +165,26 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		}
 	}
 	
+	/**
+	 * Method creates confirmation dialog for deletion of a parking location 
+	 */
+	public void showDeleteDialog() {
+		Builder confirm = new AlertDialog.Builder(map);
+		confirm.setTitle("Delete parking location");
+		confirm.setMessage("Do you want to remove the location of the parked car?");
+		confirm.setCancelable(true);
+		confirm.setPositiveButton(R.string.default_buttons_yes,
+				new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				settings.clearParkingPosition();
+				map.getMapLayers().getParkingPositionLayer().view.refreshMap();
+			}
+		});
+		confirm.setNegativeButton(R.string.default_buttons_cancel, null);
+		confirm.show();
+	}
+
 	/**
 	 * @param latitude
 	 * @param longitude
@@ -273,22 +288,5 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		parkingPlaceControl.setImageDrawable(view.getResources().getDrawable(R.drawable.poi_parking_pos_info));
 		return parkingPlaceControl;
 	}
-
-	public void showDeleteDialog() {
-		Builder confirm = new AlertDialog.Builder(map);
-		confirm.setTitle("Delete parking location");
-		confirm.setMessage("Do you want to remove the location of the parked car?");
-		confirm.setCancelable(true);
-		confirm.setPositiveButton(R.string.default_buttons_yes,
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-//						TODO refresh map
-						settings.clearParkingPosition();
-					}
-				});
-		confirm.setNegativeButton(R.string.default_buttons_cancel, null);
-		confirm.show();
-	}
-
+	
 }
