@@ -449,6 +449,7 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_loadRout
 	RoutingIndex ind;
 	ind.filePointer = filepointer;
 	ind.name = getString(ienv, regName);
+	jclass jclIntArray = ienv->FindClass("[I");
 
 	std::vector<RouteDataObject*> result;
 	SearchQuery q(left, right, top, bottom);
@@ -457,7 +458,6 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_loadRout
 	for (jint i = 0; i < result.size(); i++) {
 		if (result[i] != NULL) {
 			jobject robj = ienv->NewObject(jclass_RouteDataObject, jmethod_RouteDataObject_init, reg);
-			ienv->NewLocalRef(robj);
 			ienv->SetLongField(robj, jfield_RouteDataObject_id, result[i]->id);
 
 			jintArray types =  ienv->NewIntArray(result[i]->types.size());
@@ -490,7 +490,7 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_loadRout
 			ienv->DeleteLocalRef(restrictions);
 
 
-			jobjectArray pointTypes = ienv->NewObjectArray(result[i]->pointTypes.size(), ienv->FindClass("[I"), NULL);
+			jobjectArray pointTypes = ienv->NewObjectArray(result[i]->pointTypes.size(), jclIntArray, NULL);
 			for(jint k = 0; k < result[i]->pointTypes.size(); k++ ) {
 				std::vector<uint32> ts = result[i]->pointTypes[k];
 				if (ts.size() > 0) {
