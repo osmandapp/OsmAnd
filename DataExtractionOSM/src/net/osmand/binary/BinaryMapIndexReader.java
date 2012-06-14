@@ -1049,6 +1049,13 @@ public class BinaryMapIndexReader {
 				break;
 			}
 		}
+		if(req.cacheCoordinates.size() > 500 && req.cacheTypes.size() > 0) {
+			TagValuePair p = root.decodeType(req.cacheTypes.get(0));
+			if("admin_level".equals(p.tag)) {
+				log.info("TODO Object is ignored due to performance issues " + p.tag + " "+p.value);
+				return null;
+			}
+		}
 		BinaryMapDataObject dataObject = new BinaryMapDataObject();
 		dataObject.area = area;
 		dataObject.coordinates = req.cacheCoordinates.toArray();
