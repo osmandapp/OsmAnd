@@ -37,7 +37,7 @@
   <string name="old_poi_file_should_be_deleted">Plik \'%1$s\' z danymi POI jest nadmiarowy i można go usunąć.</string>
   <string name="update_poi_file_not_found">Nie znaleziono lokalnego pliku z POI i nie może on zostać utworzony.</string>
   <string name="update_poi_does_not_change_indexes">Zmiana POI w aplikacji nie powoduje zmian w mapie, a jedynie jest zapisywana w pliku lokalnym.</string>
-  <string name="button_upgrade_osmandplus">Uaktualnij Osmand+</string>
+  <string name="button_upgrade_osmandplus">Uaktualnij OsmAnd+</string>
   <string name="map_version_changed_info">Na serwerze są mapy, które są niekompatybilne z tą wersją programu. Aby je pobrać i używać, musisz zaktualizować program do nowszej wersji.</string>
   <string name="local_index_mi_rename">Zmień nazwę</string>
   <string name="show_gpx_route">Pokaż na mapie</string>
@@ -53,7 +53,7 @@
   <string name="search_position_map_view">Ostatni widok mapy</string>
   <string name="select_search_position">Pozycja:</string>
   <string name="context_menu_item_search">Znajdź</string>
-  <string name="tip_recent_changes_0_6_7_t">"Zmiany dla wersji 0.6.7: \n\t- możliwość pobrania map bezpośrednio z poziomu aplikacji (pobierz, usuń, zrób kopię zapasową danych bezpośrednio w Osmand) \n\t- ulubione punkty i grupy (kategoryzuj, usuń, zarządzaj ulubionymi) \n\t- GPX Explorer w aplikacji (see tracks, distance, average speed, elevation, etc.) \n\t- nawigacja w oparciu o track GPX (useful options, continue navigation after crash, supports roundabouts) \n\t- możliwość zapisania trasy jako ślad GPX do wykorzystania w trybie offline \n\t- poprawiono monitorowanie GPX (filtruje niektóre nieprecyzyjne położenia i zapisuje precyzję/wysokość/prędkość) \n\t- możliwość wysłania śladu GPX dla społeczności OSM (http://download.osmand.net/gpx/) \n\t- usprawnienie rendera wektorowego \n\t- usprawnienie mechanizmu TTS (dokładny dystans) \n\t- poprawki różnych błędów "</string>
+  <string name="tip_recent_changes_0_6_7_t">"Zmiany dla wersji 0.6.7: \n\t- możliwość pobrania map bezpośrednio z poziomu aplikacji (pobierz, usuń, zrób kopię zapasową danych bezpośrednio w OsmAnd) \n\t- ulubione punkty i grupy (kategoryzuj, usuń, zarządzaj ulubionymi) \n\t- GPX Explorer w aplikacji (see tracks, distance, average speed, elevation, etc.) \n\t- nawigacja w oparciu o track GPX (useful options, continue navigation after crash, supports roundabouts) \n\t- możliwość zapisania trasy jako ślad GPX do wykorzystania w trybie offline \n\t- poprawiono monitorowanie GPX (filtruje niektóre nieprecyzyjne położenia i zapisuje precyzję/wysokość/prędkość) \n\t- możliwość wysłania śladu GPX dla społeczności OSM (http://download.osmand.net/gpx/) \n\t- usprawnienie rendera wektorowego \n\t- usprawnienie mechanizmu TTS (dokładny dystans) \n\t- poprawki różnych błędów "</string>
   <string name="save_route_dialog_title">Zapisz trasę jako ślad GPX</string>
   <string name="route_successfully_saved_at">Trasa została zapisana jako \'%1$s\'.</string>
   <string name="filename_input">"Nazwa pliku: "</string>
@@ -149,7 +149,7 @@
   <string name="internet_not_available">Połączenie internetowe, wymagane dla tej operacji, jest niedostępne</string>
   <string name="install_more">Zainstaluj więcej…</string>
   <string name="tip_update_index">Aktualizacja danych offline</string>
-  <string name="tip_update_index_t">\tPosiadanie aktualnych danych to podstawa. Osmand posiada menedżera pobierania danych offline, który może sprawdzić i pobrać dostępne aktualizacje. \n\tAby sprawdzić aktualizacje: \'Ustawienia\' -&gt; \'Dane offline\' -&gt; \'Pobierz\' \n\tDostępność aktualizacji jest opisana przez następujące kolory: \n\t\'Zielony\' - oznacza dane nieposiadające aktualizacji na serwerze \n\t\'Niebieski\' - oznacza dane do ewentualnej aktualizacji</string>
+  <string name="tip_update_index_t">\tPosiadanie aktualnych danych to podstawa. OsmAnd posiada menedżera pobierania danych offline, który może sprawdzić i pobrać dostępne aktualizacje. \n\tAby sprawdzić aktualizacje: \'Ustawienia\' -&gt; \'Dane offline\' -&gt; \'Pobierz\' \n\tDostępność aktualizacji jest opisana przez następujące kolory: \n\t\'Zielony\' - oznacza dane nieposiadające aktualizacji na serwerze \n\t\'Niebieski\' - oznacza dane do ewentualnej aktualizacji</string>
   <string name="level_to_switch_vector_raster_descr">Minimalny zoom, powyżej którego zostanie użyta mapa wektorowa zamiast mapy kafelkowej</string>
   <string name="level_to_switch_vector_raster">Min. zoom dla mapy wektorowej</string>
   <string name="tip_day_night_mode">Tryb dzień/noc</string>
@@ -240,8 +240,8 @@
   <string name="osmand_routing_experimental">Routing offline OsmAnd-a jest funkcją eksperymentalną i nie działa dobrze dla odległości większych niż 20km.\n\nUsługa routująca jest automatycznie przełączana do CloudMade (online).</string>
   <string name="specified_dir_doesnt_exist">Nie mogę odnaleźć wskazanego katalogu.</string>
   <string name="application_dir">Katalog danych</string>
-  <string name="application_dir_change_warning">Zmiana katalogu danych nie przeniesie ani nie usunie znajdujących się w nim plików. Musisz zrobić do ręcznie poza Osmand. Kontynuować mimo to?</string>
-  <string name="osmand_net_previously_installed">Poprzednia wersja Osmand jest zainstalowana. Wszystkie dane offline są obsługiwane przez nową wersję aplikacji ale punkty ulubione powinny być wyeksportowane w starej wersji aplikacji i zaimportowane w nowej.</string>
+  <string name="application_dir_change_warning">Zmiana katalogu danych nie przeniesie ani nie usunie znajdujących się w nim plików. Musisz zrobić do ręcznie poza OsmAnd. Kontynuować mimo to?</string>
+  <string name="osmand_net_previously_installed">Poprzednia wersja OsmAnd jest zainstalowana. Wszystkie dane offline są obsługiwane przez nową wersję aplikacji ale punkty ulubione powinny być wyeksportowane w starej wersji aplikacji i zaimportowane w nowej.</string>
   <string name="build_installed">Build {0} successfully installed ({1}).</string>
   <string name="downloading_build">Downloading build…</string>
   <string name="install_selected_build">Kontynuować instalację OsmAnd - {0} z {1} {2} MB ?</string>
@@ -659,7 +659,7 @@
   <string name="edit_filter_delete_message">Filtr {0} został usunięty</string>
   <string name="edit_filter_create_message">Filtr {0} został utworzony</string>
   <string name="default_buttons_selectall">Zaznacz wszystko</string>
-  <string name="offline_navigation_not_available">Nawigacja offline w Osmand jest tymczasowo niedostępna.</string>
+  <string name="offline_navigation_not_available">Nawigacja offline w OsmAnd jest tymczasowo niedostępna.</string>
   <string name="left_side_navigation">Nawigacja lewostronna</string>
   <string name="left_side_navigation_descr">Włącz jeśli używasz nawigacji w krajach z ruchem lewostronnym</string>
   <string name="download_link_and_local_description">Pobierz lub zaktualizuj dane offline.\nAby zobaczyć szczegóły danych, kliknij na nie. Aby je zdezaktywować lub usunąć, kliknij i przytrzymaj.\nIstniejące dane offline na urządzeniu (%1$s jest dostępne):</string>
@@ -675,7 +675,7 @@
   <string name="online_map_settings_descr">Skonfiguruj źródła kafelków online i offline</string>
   <string name="map_settings">- Ustawienia map</string>
   <string name="map_settings_descr">Skonfiguruj wyświetlanie map</string>
-  <string name="osmand_rastermaps_plugin_description">Ta wtyczka umożliwia użycie różnych źródeł kafelków mapowych online oraz offline do mapy bazowej lub jako podkład/nakładka na mapę. Mapy mogą być również przygotowane offline i skopiowane do katalogu Osmand.</string>
+  <string name="osmand_rastermaps_plugin_description">Ta wtyczka umożliwia użycie różnych źródeł kafelków mapowych online oraz offline do mapy bazowej lub jako podkład/nakładka na mapę. Mapy mogą być również przygotowane offline i skopiowane do katalogu OsmAnd.</string>
   <string name="osmand_background_plugin_description">Ta wtyczka umożliwia zapisywanie trasy oraz nawigację w trybie oszczędzania zasilania (wyłączonego ekranu) przez cykliczne budzenie urządzenia w celu zapisania współrzędnych lub odegrania wskazówki głosowej.</string>
   <string name="osmand_accessibility_description">Ta wtyczka służy do konfiguracji specjalnych ustawień ułatwiających dostęp.</string>
   <string name="extra_settings">Ustawienia zaawansowane</string>
@@ -691,7 +691,7 @@
   <string name="vector_maps_may_display_faster_on_some_devices">Mapy wektorowe mogą wyświetlać się szybciej. Może nie działać dobrze na niektórych urządzeniach.</string>
   <string name="simulate_route_progression_manually">Simulate route progression manually</string>
   <string name="play_commands_of_currently_selected_voice">Odtwórz komendy w aktualnie wybranym głosie</string>
-  <string name="debugging_and_development">"Debugowanie oraz rozwój Osmand "</string>
+  <string name="debugging_and_development">"Debugowanie oraz rozwój OsmAnd "</string>
   <string name="native_rendering">Renderowanie natywne</string>
   <string name="animate_routing">Nawigacja animowana</string>
   <string name="test_voice_prompts">Przetestuj podpowiedzi głosowe</string>

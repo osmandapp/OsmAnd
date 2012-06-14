@@ -47,7 +47,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="update_poi_file_not_found">Local file to maintain POI changes not found and could not be created.</string>
 	<string name="update_poi_does_not_change_indexes">POI changes inside application do not affect downloaded map files, changes are saved to local file instead.</string>
 
-	<string name="button_upgrade_osmandplus">Nâng cấp Osmand+</string>
+	<string name="button_upgrade_osmandplus">Nâng cấp OsmAnd+</string>
 	<string name="map_version_changed_info">Máy chủ lưu trữ tập tin bản đồ không tương thích với phiên bản hiện tại. Để tải về và dùng được các tập tin này, vui lòng nâng cấp ứng dụng lên phiên bản mới hơn.</string>
 	
 	<string name="local_index_mi_rename">Đổi tên</string>
@@ -66,7 +66,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="select_search_position">Tìm kiếm gần:</string>
 	<string name="context_menu_item_search">Tìm kiếm</string>
 	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7 :
-\n\t- Offline data manager (download, delete, backup offline data directly in Osmand)
+\n\t- Offline data manager (download, delete, backup offline data directly in OsmAnd)
 \n\t- Favorite points and groups (categorize, delete, manage favorites)
 \n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.)
 \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts)
@@ -195,7 +195,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="install_more">Cài đặt thêm…</string>
 
 	<string name="tip_update_index">Cập nhật của dữ liệu Offline</string>
-	<string name="tip_update_index_t">\tOsmand cung cấp trình quản lý download có thể kiểm tra các bản cập nhật cho dữ liệu offline. 
+	<string name="tip_update_index_t">\tOsmAnd cung cấp trình quản lý download có thể kiểm tra các bản cập nhật cho dữ liệu offline. 
 	\n\tĐể kiểm tra cập nhật, truy xuất vào \'Main Menu\' -> \'Settings\' -> \'Offline data\' -> \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -> \'Filter downloaded\' to indicate updates only for data already on your device.
 	\n\tThe availability of updates  is depicted by the following colors:
 	\n\t\'Green\' - indicates data files identical on device and server

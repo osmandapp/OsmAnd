@@ -114,7 +114,7 @@
   <string name="poi_filter_by_name">Búsqueda por nombre</string>
   <string name="old_poi_file_should_be_deleted">El archivo de datos de POI \'%1$s\' es redundante y puede borrarlo.</string>
   <string name="update_poi_file_not_found">El archivo local para guardar cambios a POIs no se ha encontrado ni puede crearse.</string>
-  <string name="button_upgrade_osmandplus">Actualizar Osmand+</string>
+  <string name="button_upgrade_osmandplus">Actualizar OsmAnd+</string>
   <string name="map_version_changed_info">El servidor contiene archivos de mapas incompatibles con la versión actual de la aplicación. Para descargarlos y usarlos, por favor actualice la aplicación a una versión más reciente.</string>
   <string name="local_index_mi_rename">Renombrar</string>
   <string name="show_gpx_route">Mostrar en el mapa</string>
@@ -130,7 +130,7 @@
   <string name="search_position_map_view">Última vista del mapa</string>
   <string name="select_search_position">Buscar cerca:</string>
   <string name="context_menu_item_search">Busca cerca de aquí</string>
-  <string name="tip_recent_changes_0_6_7_t">"Cambios en 0.6.7 : \n\t- Gestor de datos descargados (descargar, borrar, activar/desactivar datos descargados directamente en Osmand) \n\t- Puntos y grupos favoritos (categorizar, borrar, gestionar favoritos) \n\t- Explorador de GPX en la aplicación (ver detalle del trayecto, distancia, velocidad media, elevación, etc.) \n\t- Navegación GPX (más opciones, continuar la navegación tras un fallo de aplicación, soportar rotondas) \n\t- Función para guardar la ruta como traza GPX para uso sin conexión \n\t- Mejora de la monitorización GPX (filtra alguna posición incorrecta y guarda precisión/elevación/velocidad) \n\t- Envía GPX a la comunidad OSM (http://download.osmand.net/gpx/) \n\t- Mejora del dibujo vectorial \n\t- Mejora del motor TTS (anuncia la distancia exacta, permite millas) \n\t- Arreglo de fallos "</string>
+  <string name="tip_recent_changes_0_6_7_t">"Cambios en 0.6.7 : \n\t- Gestor de datos descargados (descargar, borrar, activar/desactivar datos descargados directamente en OsmAnd) \n\t- Puntos y grupos favoritos (categorizar, borrar, gestionar favoritos) \n\t- Explorador de GPX en la aplicación (ver detalle del trayecto, distancia, velocidad media, elevación, etc.) \n\t- Navegación GPX (más opciones, continuar la navegación tras un fallo de aplicación, soportar rotondas) \n\t- Función para guardar la ruta como traza GPX para uso sin conexión \n\t- Mejora de la monitorización GPX (filtra alguna posición incorrecta y guarda precisión/elevación/velocidad) \n\t- Envía GPX a la comunidad OSM (http://download.osmand.net/gpx/) \n\t- Mejora del dibujo vectorial \n\t- Mejora del motor TTS (anuncia la distancia exacta, permite millas) \n\t- Arreglo de fallos "</string>
   <string name="save_route_dialog_title">Guarda la ruta como traza GPX</string>
   <string name="route_successfully_saved_at">Ruta guardada correctamente como \'%1$s\'.</string>
   <string name="filename_input">"Nombre de archivo: "</string>
@@ -225,7 +225,7 @@
   <string name="internet_not_available">No está disponible la conexión a Internet que se necesita para la operación</string>
   <string name="install_more">Instalar más…</string>
   <string name="tip_update_index">Actualizar datos descargados</string>
-  <string name="tip_update_index_t">\tEs esencial tener datos de mapa actualizados. Osmand proporciona un gestor de descargas que puede comprobar la disponibilidad de actualizaciones de los datos descargados. \n\tPara comprobar las actualizaciones vaya a \'Opciones\' -&gt; \'Datos descargados\' -&gt; \'Descargar…\'. Tras recuperar de Internet la lista de regiones, puede seleccionar la opción \'Menú\' -&gt; \'Filtrar descargados\' para buscar actualizaciones sólo para datos que estén ya en su dispositivo. \n\tLa disponibilidad de actualizaciones se indica por los siguientes colores: \n\t\'Verde\' - indica archivos idénticos en el dispositivo y en el servidor \n\t\'Azul\' - indica actualizaciones disponibles en el servidor</string>
+  <string name="tip_update_index_t">\tEs esencial tener datos de mapa actualizados. OsmAnd proporciona un gestor de descargas que puede comprobar la disponibilidad de actualizaciones de los datos descargados. \n\tPara comprobar las actualizaciones vaya a \'Opciones\' -&gt; \'Datos descargados\' -&gt; \'Descargar…\'. Tras recuperar de Internet la lista de regiones, puede seleccionar la opción \'Menú\' -&gt; \'Filtrar descargados\' para buscar actualizaciones sólo para datos que estén ya en su dispositivo. \n\tLa disponibilidad de actualizaciones se indica por los siguientes colores: \n\t\'Verde\' - indica archivos idénticos en el dispositivo y en el servidor \n\t\'Azul\' - indica actualizaciones disponibles en el servidor</string>
   <string name="level_to_switch_vector_raster_descr">Nivel de zoom mínimo para utilizar dibujo de vectores en vez de teselas de mapa</string>
   <string name="level_to_switch_vector_raster">Mín. zoom vectores</string>
   <string name="tip_location_sharing">Compartir localización</string>
@@ -417,7 +417,7 @@
   <string name="background_service_wait_int">Máx. espera lectura</string>
   <string name="service_stop_background_service">Apagar servicio de navegación de fondo</string>
   <string name="where_am_i">¿Dónde estoy?</string>
-  <string name="process_navigation_service">Servicio de navegación Osmand</string>
+  <string name="process_navigation_service">Servicio de navegación OsmAnd</string>
   <string name="network_provider">Red</string>
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">segundos</string>
@@ -728,7 +728,7 @@
   <string name="online_map_settings_descr">Configurar fuentes de teselas de mapa online o cacheado</string>
   <string name="map_settings">- Configuraciones de Mapa</string>
   <string name="map_settings_descr">Configurar pantalla de mapa</string>
-  <string name="osmand_rastermaps_plugin_description">This plugin facilitates using a variety of online or cached tile maps as base map or as overlay / underlay maps. The maps can also be prepared offline and copied to the Osmand folder.</string>
+  <string name="osmand_rastermaps_plugin_description">This plugin facilitates using a variety of online or cached tile maps as base map or as overlay / underlay maps. The maps can also be prepared offline and copied to the OsmAnd folder.</string>
   <string name="osmand_background_plugin_description">Este plugin permite rastrear o navegar en modo de bajo consumo (pantalla off) despertando periódicamente el dispositivo GPS para registrar un punto de la ruta o reproducir un aviso de voz.</string>
   <string name="osmand_accessibility_description">This plugin configures special accessibility features.</string>
   <string name="extra_settings">Configuraciones avanzadas</string>
@@ -736,7 +736,7 @@
   <string name="osmand_extra_settings_description">This plugin provides advanced map configuration and some device-specific settings.</string>
   <string name="osmand_development_plugin_description">This plugin enables development and debugging features like animated navigation or rendering performance display.</string>
   <string name="plugins_screen">Gestor de Plugin</string>
-  <string name="select_plugin_to_activate">Toca un Plugin para activarlo o desactivarlo. (Puede ser necesario reiniciar Osmand.)</string>
+  <string name="select_plugin_to_activate">Toca un Plugin para activarlo o desactivarlo. (Puede ser necesario reiniciar OsmAnd.)</string>
   <string name="prefs_plugins_descr">Plugins provide extra functionality bundled within the application like tracking, tile maps, screen off mode, accessibility settings, and others.</string>
   <string name="prefs_plugins">Gestor de Plugin</string>
   <string name="tip_recent_changes_0_8_0_t">"Cambios en 0.8.0 : \n\t- Funcionalidad de plugins \n\t- Soporte para nuevos datos de mapa offline \n\t- Muchos arreglos de fallos "</string>
@@ -744,7 +744,7 @@
   <string name="vector_maps_may_display_faster_on_some_devices">Los mapas vectoriales pueden mostrarse más rápido. Puede no funciona correctamente en algunos dispositivos.</string>
   <string name="simulate_route_progression_manually">Simular la progresión de la ruta manualmente</string>
   <string name="play_commands_of_currently_selected_voice">Reproducir ordenes de la voz seleccionada actualmente</string>
-  <string name="debugging_and_development">Debug y desarrollo de Osmand</string>
+  <string name="debugging_and_development">Debug y desarrollo de OsmAnd</string>
   <string name="native_rendering">Rendering nativo</string>
   <string name="animate_routing">Animate navigation</string>
   <string name="test_voice_prompts">Probar avisos de voz</string>

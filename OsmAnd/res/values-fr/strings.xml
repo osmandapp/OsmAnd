@@ -112,7 +112,7 @@
   <string name="poi_filter_by_name">Recherche par nom</string>
   <string name="old_poi_file_should_be_deleted">Le fichier de PI \'%1$s\' est obsolète et peut être supprimé.</string>
   <string name="update_poi_file_not_found">Fichier local de gestion des modifications de PI introuvable, et ne peut être créé.</string>
-  <string name="button_upgrade_osmandplus">Mettre à jour Osmand+</string>
+  <string name="button_upgrade_osmandplus">Mettre à jour OsmAnd+</string>
   <string name="map_version_changed_info">Les fichiers de cartes sur le serveur sont incompatibles avec votre version de l\'application. Pour les télécharger et les utiliser, installez une version plus récente de votre application</string>
   <string name="local_index_mi_rename">Renommer</string>
   <string name="show_gpx_route">Afficher sur la carte</string>
@@ -128,7 +128,7 @@
   <string name="search_position_map_view">Dernière vue</string>
   <string name="select_search_position">Recherche autour de :</string>
   <string name="context_menu_item_search">Recherche</string>
-  <string name="tip_recent_changes_0_6_7_t">"Changement pour 0.6.7 : \n\t- Gestionaire de données hors ligne (téléchargement, suppression, sauvegarde des données hors ligne directement dans Osmand) \n\t- Favoris et groupes (categorisation, suppression, gestion) \n\t- Explorateur GPX dans l\'application (voir les itinéraires, distance, vitesse moyenne, altitude, etc.) \n\t- Navigation GPX (options utiles, continuer un itinéraire après plantage, identification des rond-points) \n\t- Fonction d\'enregistrement des itinéraires au format GPX pour utilisation ultérieure hors ligne \n\t- Amélioration gestion GPX (filtrage emplacements imprécis et enregistrement de la précision, altitude et vitesse) \n\t- Téléchargement des traces GPX à la communauté OSM (http://download.osmand.net/gpx/) \n\t- Améliorations du rendu vectoriel \n\t- Améliorations du moteur de synthèse vocale (distance exacte, support des miles) \n\t- Corrections de Bogues "</string>
+  <string name="tip_recent_changes_0_6_7_t">"Changement pour 0.6.7 : \n\t- Gestionaire de données hors ligne (téléchargement, suppression, sauvegarde des données hors ligne directement dans OsmAnd) \n\t- Favoris et groupes (categorisation, suppression, gestion) \n\t- Explorateur GPX dans l\'application (voir les itinéraires, distance, vitesse moyenne, altitude, etc.) \n\t- Navigation GPX (options utiles, continuer un itinéraire après plantage, identification des rond-points) \n\t- Fonction d\'enregistrement des itinéraires au format GPX pour utilisation ultérieure hors ligne \n\t- Amélioration gestion GPX (filtrage emplacements imprécis et enregistrement de la précision, altitude et vitesse) \n\t- Téléchargement des traces GPX à la communauté OSM (http://download.osmand.net/gpx/) \n\t- Améliorations du rendu vectoriel \n\t- Améliorations du moteur de synthèse vocale (distance exacte, support des miles) \n\t- Corrections de Bogues "</string>
   <string name="save_route_dialog_title">Enregistrer l\'itinéraire au format GPX</string>
   <string name="route_successfully_saved_at">Itinéraire correctement enregistré dans \'%1$s\'.</string>
   <string name="filename_input">"Nom du fichier : "</string>
@@ -221,7 +221,7 @@
   <string name="internet_not_available">Connexion Internet nécessaire pour cette opération non disponible</string>
   <string name="install_more">Installer plus…</string>
   <string name="tip_update_index">Mise à jour des cartes locales</string>
-  <string name="tip_update_index_t">Il est très important d\'avoir des données cartographiques à jour. Osmand a un gestionnaire de téléchargements qui permet de vérifier si les cartes locales peuvent être mises à jour. \n\tPour vérifier les mises à jour, aller à \'Menu Principal\'-&gt;\'Paramètres\'-&gt;\'Données hors-ligne\'-&gt;\'Télécharger du contenu\'. Sélectionner l\'option \'Filtrer téléchargé\' dans le menu contextuel. \nLà, seules les cartes déjà téléchargées sur votre système sont affichées, avec les couleurs suivantes: \n\t\'Vert\' - pour les cartes à jour avec le serveur \n\t\'Bleu\' - pour les cartes qui peuvent être mises à jour depuis le serveur</string>
+  <string name="tip_update_index_t">Il est très important d\'avoir des données cartographiques à jour. OsmAnd a un gestionnaire de téléchargements qui permet de vérifier si les cartes locales peuvent être mises à jour. \n\tPour vérifier les mises à jour, aller à \'Menu Principal\'-&gt;\'Paramètres\'-&gt;\'Données hors-ligne\'-&gt;\'Télécharger du contenu\'. Sélectionner l\'option \'Filtrer téléchargé\' dans le menu contextuel. \nLà, seules les cartes déjà téléchargées sur votre système sont affichées, avec les couleurs suivantes: \n\t\'Vert\' - pour les cartes à jour avec le serveur \n\t\'Bleu\' - pour les cartes qui peuvent être mises à jour depuis le serveur</string>
   <string name="level_to_switch_vector_raster_descr">Niveau de zoom maximum pour l\'utilisation du rendu vectoriel au lieu de raster</string>
   <string name="level_to_switch_vector_raster">Niveau de zoom vectoriel</string>
   <string name="tip_location_sharing">Partage d\'emplacement</string>
@@ -714,7 +714,7 @@ navigate_point_format_D, DM & DMS
   <string name="edit_filter_delete_message">Filtre {0} effacé</string>
   <string name="edit_filter_create_message">Le filtre {0} a été créé</string>
   <string name="default_buttons_selectall">Tout sélectionner</string>
-  <string name="offline_navigation_not_available">Navigation hors ligne Osmand temporairement indisponible</string>
+  <string name="offline_navigation_not_available">Navigation hors ligne OsmAnd temporairement indisponible</string>
   <string name="left_side_navigation">Conduite à gauche</string>
   <string name="left_side_navigation_descr">Activer dans les pays on l\'on conduit à gauche</string>
   <string name="download_link_and_local_description">Télécharger des données hors ligne\nPour plus d\'information, cliquer sur l\'élement, pour le désactiver ou le supprimer, faire appui long.\nEspace actuellement disponible sur l\'appareil (%1$s ):</string>
@@ -730,7 +730,7 @@ navigate_point_format_D, DM & DMS
   <string name="online_map_settings_descr">Configurer la source des cartes en ligne ou en cache</string>
   <string name="map_settings">- Paramètres des cartes</string>
   <string name="map_settings_descr">Configurer l\'affichage des cartes</string>
-  <string name="osmand_rastermaps_plugin_description">Ce greffon permet d\'utiliser une grande gamme de cartes au format image en ligne, ou conservée en cache comme carte de base ou comme sur- ou sous-couche de carte. Les cartes peuvent également être préparées hors ligne et copiées dans le dossier Osmand.</string>
+  <string name="osmand_rastermaps_plugin_description">Ce greffon permet d\'utiliser une grande gamme de cartes au format image en ligne, ou conservée en cache comme carte de base ou comme sur- ou sous-couche de carte. Les cartes peuvent également être préparées hors ligne et copiées dans le dossier OsmAnd.</string>
   <string name="osmand_background_plugin_description">Ce greffon permet d\'utiliser l\'enregistrement des traces et la navigation en mode économie (écran éteint) en réveillant périodiquement le GPS pour enregistrer une position ou jouer une instruction vocale.</string>
   <string name="osmand_accessibility_description">Ce greffon configure les fonctionnalités d\'accessibilité</string>
   <string name="extra_settings">Paramètres avancés</string>
@@ -738,7 +738,7 @@ navigate_point_format_D, DM & DMS
   <string name="osmand_extra_settings_description">Ce greffon permet de gérer des paramètres de configuration avancés et propres à certains appareils</string>
   <string name="osmand_development_plugin_description">Ce greffon permet la gestion de paramètres de développement et de déboggage tels que la navigation animée ou l\'affichage des temps de rendu.</string>
   <string name="plugins_screen">Gestionnaire des greffons</string>
-  <string name="select_plugin_to_activate">Toucher un greffon pour l\'activer ou le désactiver (Redémarrage d\'Osmand peut être nécessaire)</string>
+  <string name="select_plugin_to_activate">Toucher un greffon pour l\'activer ou le désactiver (Redémarrage d\'OsmAnd peut être nécessaire)</string>
   <string name="prefs_plugins_descr">Les greffons fournissent des fonctionnalités supplémentaires à l\'application telles que l\'enregistrement des traces, les cartes image, le mode sans affichage, le mode accessibilité et autres.</string>
   <string name="prefs_plugins">Gestionnaire de greffons</string>
   <string name="tip_recent_changes_0_8_0_t">"Changements en 0.8.0 : \n\t- Fonctionnalité des greffons \n\t- Nouvelle gestion des cartes hors ligne\n\t- Multiples corrections de bugs"</string>
@@ -746,7 +746,7 @@ navigate_point_format_D, DM & DMS
   <string name="vector_maps_may_display_faster_on_some_devices">Cartes vectorielles (hors-ligne) peuvent s\'afficher plus rapidement. Peut ne pas fonctionner sur certains appareils</string>
   <string name="simulate_route_progression_manually">Simule la progression sur un itinéraire manuellement</string>
   <string name="play_commands_of_currently_selected_voice">Diffuse les commandes sonores disponibles pour la voix sélectionnée</string>
-  <string name="debugging_and_development">Déboggage et développement Osmand</string>
+  <string name="debugging_and_development">Déboggage et développement OsmAnd</string>
   <string name="native_rendering">Rendu pré-compilé</string>
   <string name="animate_routing">Navigation animée</string>
   <string name="test_voice_prompts">Tester les commandes vocales</string>

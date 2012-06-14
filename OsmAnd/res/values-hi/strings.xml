@@ -8,7 +8,7 @@
          If you are making/correcting english translations make sure :
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     -->
-  <string name="offline_navigation_not_available">Osmand offline navigation is temporarily not available.</string>
+  <string name="offline_navigation_not_available">OsmAnd offline navigation is temporarily not available.</string>
   <string name="left_side_navigation">Left Side Navigation</string>
   <string name="left_side_navigation_descr">Turn on if you navigate in left side countries</string>
   <string name="download_link_and_local_description">Download or update offline data. \nTo see more details click on the item, to deactivate or delete offline data press and hold. \nCurrent data on device (%1$s free):</string>
@@ -31,7 +31,7 @@
   <string name="online_map_settings_descr">Configure online or cached tile map sources</string>
   <string name="map_settings">- Map Settings</string>
   <string name="map_settings_descr">Configure the map display</string>
-  <string name="osmand_rastermaps_plugin_description">This plugin facilitates using a variety of online or cached tile maps as base map or as overlay / underlay maps. The maps can also be prepared offline and copied to the Osmand folder.</string>
+  <string name="osmand_rastermaps_plugin_description">This plugin facilitates using a variety of online or cached tile maps as base map or as overlay / underlay maps. The maps can also be prepared offline and copied to the OsmAnd folder.</string>
   <string name="osmand_background_plugin_description">This plugin allows tracking or navigation in power saving (screen off) mode by periodically waking up the GPS device to record a track point or play a voice prompt.</string>
   <string name="osmand_accessibility_description">This plugin configures special accessibility features.</string>
   <string name="extra_settings">Advanced settings</string>
@@ -234,7 +234,7 @@
   <string name="poi_filter_by_name">Search by name</string>
   <string name="old_poi_file_should_be_deleted">The POI data file \'%1$s\' is redundant and can be deleted.</string>
   <string name="update_poi_file_not_found">Local file to maintain POI changes not found and could not be created.</string>
-  <string name="button_upgrade_osmandplus">Upgrade Osmand+</string>
+  <string name="button_upgrade_osmandplus">Upgrade OsmAnd+</string>
   <string name="map_version_changed_info">Server contains map files not compatible with your current version of the application. To download and use them, please upgrade the application to newer version.</string>
   <string name="local_index_mi_rename">Rename</string>
   <string name="show_gpx_route">Show on map</string>
@@ -250,7 +250,7 @@
   <string name="search_position_map_view">Last map view</string>
   <string name="select_search_position">Search near :</string>
   <string name="context_menu_item_search">Search near here</string>
-  <string name="tip_recent_changes_0_6_7_t">"Recent changes for 0.6.7 : \n\t- Offline data manager (download, delete, activate / deactivate offline data directly in Osmand) \n\t- Favorite points and groups (categorize, delete, manage favorites) \n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.) \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts) \n\t- Function to save route as GPX track for offline use \n\t- Improve GPX monitoring (filter some inaccurate position and save accuracy/elevation/speed) \n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/) \n\t- Improve vector rendering \n\t- Improvement of TTS engine (announce exact distance, enable miles) \n\t- Bug fixes "</string>
+  <string name="tip_recent_changes_0_6_7_t">"Recent changes for 0.6.7 : \n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd) \n\t- Favorite points and groups (categorize, delete, manage favorites) \n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.) \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts) \n\t- Function to save route as GPX track for offline use \n\t- Improve GPX monitoring (filter some inaccurate position and save accuracy/elevation/speed) \n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/) \n\t- Improve vector rendering \n\t- Improvement of TTS engine (announce exact distance, enable miles) \n\t- Bug fixes "</string>
   <string name="save_route_dialog_title">Save route as GPX track</string>
   <string name="route_successfully_saved_at">Route successfully saved as \'%1$s\'.</string>
   <string name="filename_input">"File name : "</string>
@@ -342,7 +342,7 @@
   <string name="internet_not_available">Internet connection required for operation is not available</string>
   <string name="install_more">Install more…</string>
   <string name="tip_update_index">Update of Offline Data</string>
-  <string name="tip_update_index_t">\tHaving up-to-date map data is essential. Osmand provides a download manager which can check for available offline data updates. \n\tTo check for updates go to \'Settings\' -&gt; \'Offline data\' -&gt; \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -&gt; \'Filter downloaded\' to indicate updates only for data already on your device. \n\tThe availability of updates is depicted by the following colors: \n\t\'Green\' - indicates data files identical on device and server \n\t\'Blue\' - indicates available updates on server</string>
+  <string name="tip_update_index_t">\tHaving up-to-date map data is essential. OsmAnd provides a download manager which can check for available offline data updates. \n\tTo check for updates go to \'Settings\' -&gt; \'Offline data\' -&gt; \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -&gt; \'Filter downloaded\' to indicate updates only for data already on your device. \n\tThe availability of updates is depicted by the following colors: \n\t\'Green\' - indicates data files identical on device and server \n\t\'Blue\' - indicates available updates on server</string>
   <string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector maps</string>
   <string name="level_to_switch_vector_raster">Min. vector zoom level</string>
   <string name="tip_location_sharing">Location Sharing</string>

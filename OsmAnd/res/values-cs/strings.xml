@@ -183,7 +183,7 @@
   <string name="poi_filter_by_name">Hledat podle jména</string>
   <string name="old_poi_file_should_be_deleted">Soubor s POI daty \'%1$s\' již není potřeba a může být smazán.</string>
   <string name="update_poi_file_not_found">Lokální soubor pro úpravu POI bodů nebyl nalezen a ani nemohl být vytvořen.</string>
-  <string name="button_upgrade_osmandplus">Upgradovat Osmand+</string>
+  <string name="button_upgrade_osmandplus">Upgradovat OsmAnd+</string>
   <string name="map_version_changed_info">Na serveru jsou mapy nekompatibilní s vaší verzí aplikace. Prosím aktualizujte aplikaci na novější verzi, abyste data mohli používat.</string>
   <string name="local_index_mi_rename">Přejmenovat</string>
   <string name="show_gpx_route">Zobrazit na mapě</string>
@@ -199,7 +199,7 @@
   <string name="search_position_map_view">Posledního místa na mapě</string>
   <string name="select_search_position">Hledat v okolí :</string>
   <string name="context_menu_item_search">Hledat</string>
-  <string name="tip_recent_changes_0_6_7_t">"Poslední změny ve verzi 0.6.7 : \n\t- Správce offline dat (stáhnout, smazat, zálohovat přímo z Osmandu) \n\t- Oblíbené body a skupiny (uložení do kategorií, smazání, správa oblíbených) \n\t- GPX Explorer v aplikaci (zobrazit trasy, vzdálenost, prům. rychlost, nadm. výšku, atd.) \n\t- GPX navigace (užitečné nastavení, pokračovat navigaci po pádu aplikace, podpora kruhových objezdů) \n\t- Funkce na uložení trasy jako GPX track pro použití offline \n\t- Vylepšené monitorování GPX (vyfiltrování nepřesné polohy a uložení přesnosti/nadm. výšky/rychlosti) \n\t- Nahrání GPX do komunity (http://download.osmand.net/gpx/) \n\t- Vylepšený vektorový renderer \n\t- Vylepšený TTS engine (přesná vzdálenost, míle) \n\t- Oprava chyb "</string>
+  <string name="tip_recent_changes_0_6_7_t">"Poslední změny ve verzi 0.6.7 : \n\t- Správce offline dat (stáhnout, smazat, zálohovat přímo z OsmAndu) \n\t- Oblíbené body a skupiny (uložení do kategorií, smazání, správa oblíbených) \n\t- GPX Explorer v aplikaci (zobrazit trasy, vzdálenost, prům. rychlost, nadm. výšku, atd.) \n\t- GPX navigace (užitečné nastavení, pokračovat navigaci po pádu aplikace, podpora kruhových objezdů) \n\t- Funkce na uložení trasy jako GPX track pro použití offline \n\t- Vylepšené monitorování GPX (vyfiltrování nepřesné polohy a uložení přesnosti/nadm. výšky/rychlosti) \n\t- Nahrání GPX do komunity (http://download.osmand.net/gpx/) \n\t- Vylepšený vektorový renderer \n\t- Vylepšený TTS engine (přesná vzdálenost, míle) \n\t- Oprava chyb "</string>
   <string name="save_route_dialog_title">Uložit trasu jako GPX</string>
   <string name="route_successfully_saved_at">Trasa úspěšně uložena jako \'%1$s\'.</string>
   <string name="filename_input">"Jméno souboru : "</string>
@@ -778,7 +778,7 @@
   <string name="edit_filter_delete_message">Filtr {0} byl smazán</string>
   <string name="edit_filter_create_message">Filtr {0} byl vytvořen</string>
   <string name="default_buttons_selectall">Vybrat vše</string>
-  <string name="offline_navigation_not_available">Offline navigace v Osmand je dočasně nedostupná.</string>
+  <string name="offline_navigation_not_available">Offline navigace v OsmAnd je dočasně nedostupná.</string>
   <string name="left_side_navigation">Levostranný provoz</string>
   <string name="left_side_navigation_descr">Zvolte pokud jste v zemi, kde se jezdí vlevo</string>
   <string name="download_link_and_local_description">Klikněte zde pro stažení nebo aktualizaci offline dat.\nKlikněte na položku pro zobrazení více detailů, dlouze stiskněte pro deaktivaci nebo smazání.\nMnožství offline dat v zařízení (%1$s volného místa):</string>
@@ -794,7 +794,7 @@
   <string name="online_map_settings_descr">Nastavení rastrových překryvných nebo podkresových map</string>
   <string name="map_settings">- Mapa</string>
   <string name="map_settings_descr">Nastavení mapového zobrazení</string>
-  <string name="osmand_rastermaps_plugin_description">Modul umožňuje použití mnoha rastrových map jako překryv nebo podkres. Rastrové mapy mohou být získány online nebo připravené offline na SD kartě v adresáři Osmand.</string>
+  <string name="osmand_rastermaps_plugin_description">Modul umožňuje použití mnoha rastrových map jako překryv nebo podkres. Rastrové mapy mohou být získány online nebo připravené offline na SD kartě v adresáři OsmAnd.</string>
   <string name="osmand_background_plugin_description">Tento modul umožňuje záznam trasy nebo navigaci v úsporném režimu (při vypnuté obrazovce). Aplikace pravidelně zapíná GPS přijímač, aby zaznamenala bod trasy nebo přehrála hlasový pokyn.</string>
   <string name="osmand_accessibility_description">Tento modul aktivuje přídavné funkce zpřístupnění pro osoby s omezením zraku.</string>
   <string name="extra_settings">Pokročilá nastavení</string>

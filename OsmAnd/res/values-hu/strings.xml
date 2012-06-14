@@ -135,7 +135,7 @@
   <string name="user_password">OSM jelszavad</string>
   <string name="user_password_descr">openstreetmap.org felé történő adatküldéshez szükséges</string>
   <string name="osmand_service">Háttérszolgáltatás</string>
-  <string name="osmand_service_descr">Osmand kikapcsolt képernyővel való használatához</string>
+  <string name="osmand_service_descr">OsmAnd kikapcsolt képernyővel való használatához</string>
   <string name="tip_rotation_switching">Térkép elforgatása</string>
   <string name="tip_rotation_switching_t">\tBeállítható, hogy mikor és hogyan forduljon el a térkép a \'Beállítások\' -&gt; \'Térkép megjelenítés\' -&gt; \'Térkép forgatása\'. \n\tLehetőségek: \n\t\'Ne forogjon\' - A térkép nem forog. Észak van mindig fönt \n\t\'Mozgás alapján\' - A térkép folyamatosan a mozgás irányába néz \n\t\'Iránytű alapján\' - A térkép mindig a beépített iránytűnek megfelelően fordul el \n\tTanács: A forgás alapjának a kiválasztottról iránytűre és vissza váltásához egyszerűen csak meg kell érinteni a kijelzőn az iránytűt.</string>
   <string name="switch_to_raster_map_to_see">Nincs internet nélkül használható térkép erre a területre. Letölthetsz egyet a Beállításokban (Offilne adatok), vagy átválthatsz online térképekre.</string>
@@ -184,7 +184,7 @@
   <string name="poi_filter_by_name">Név szerinti keresés</string>
   <string name="old_poi_file_should_be_deleted">A(z) \'%1$s\' POI adat fájl fölösleges és törölhető.</string>
   <string name="update_poi_file_not_found">A POI változások tárolásához nem található és nem hozható létre helyi fájl.</string>
-  <string name="button_upgrade_osmandplus">Osmand+ frissítése</string>
+  <string name="button_upgrade_osmandplus">OsmAnd+ frissítése</string>
   <string name="map_version_changed_info">A szerveren található térképek nem kompatibilisek az OsmAnd ezen verziójával. Letöltésükhöz és használatukhoz frissíteni kell az alkalmazást.</string>
   <string name="local_index_mi_rename">Átnevezés</string>
   <string name="show_gpx_route">Mutasd a térképen</string>
@@ -295,7 +295,7 @@
   <string name="internet_not_available">A művelet elvégzéséhez internetelérés szükséges</string>
   <string name="install_more">További telepítése…</string>
   <string name="tip_update_index">Térképadatok frissítése</string>
-  <string name="tip_update_index_t">Fontos az aktuális térképek megléte. Az Osmand program tartalmaz egy letöltéskezelőt amivel egyszerűen ellenőrizhető, hogy létezik-e frissebb a meglévő térképadatokból. \n\tA frissítések ellenőrzéséhez a \'Főmenü\'-&gt;\'Beállítások\'-&gt;\'Offline adatok\'-&gt;\'Térképadatok letöltése\' menüpontot kell választani. A térképadatok internetről való frissítése után a \'Letöltöttek szűrése\' menüt kell választani. \nÍgy most már csak a letöltött térképadatok jelennek meg a következő színekkel jelölve: \n\t\'Zöld\' - azt jelenti, hogy az index állomány megegyezik a szerveren lévővel \n\t\'Kék\' - azt jelenti, hogy újabb verzió tölthető le a szerverről</string>
+  <string name="tip_update_index_t">Fontos az aktuális térképek megléte. Az OsmAnd program tartalmaz egy letöltéskezelőt amivel egyszerűen ellenőrizhető, hogy létezik-e frissebb a meglévő térképadatokból. \n\tA frissítések ellenőrzéséhez a \'Főmenü\'-&gt;\'Beállítások\'-&gt;\'Offline adatok\'-&gt;\'Térképadatok letöltése\' menüpontot kell választani. A térképadatok internetről való frissítése után a \'Letöltöttek szűrése\' menüt kell választani. \nÍgy most már csak a letöltött térképadatok jelennek meg a következő színekkel jelölve: \n\t\'Zöld\' - azt jelenti, hogy az index állomány megegyezik a szerveren lévővel \n\t\'Kék\' - azt jelenti, hogy újabb verzió tölthető le a szerverről</string>
   <string name="level_to_switch_vector_raster_descr">Minimális nagyítási szint vektoros megjelenítéshez térképcsempék helyett</string>
   <string name="level_to_switch_vector_raster">Min. vektoros nagyítás</string>
   <string name="tip_location_sharing">Hely megosztás</string>
@@ -312,7 +312,7 @@
   <string name="tip_map_switch">Térképforrás</string>
   <string name="tip_map_switch_t">A térkép forrásának és rétegeknek a cseréjére a leggyorsabb megoldás a \'menü\'-&gt;\'Rétegek\' menüpont. \n\t\'Térképforrás…\' alatt lehet választani az előre definiált térképek és az OsmAndMapCreator által PC-n készített térképek között. \n\tOsmAnd egyéni forrásokat is támogat.</string>
   <string name="tip_app_mode">Működési mód</string>
-  <string name="tip_app_mode_t">Az Osmand több, személyre szabható megjelenítési módot támogat, különböző felhasználási esetekre. \n\tA mód kiválasztható a \'Főmenü\'-&gt;\'Beállítások\'-&gt;\'Működési mód\' alatt.</string>
+  <string name="tip_app_mode_t">Az OsmAnd több, személyre szabható megjelenítési módot támogat, különböző felhasználási esetekre. \n\tA mód kiválasztható a \'Főmenü\'-&gt;\'Beállítások\'-&gt;\'Működési mód\' alatt.</string>
   <string name="tip_navigation">Navigáció</string>
   <string name="tip_navigation_t">Navigáció indításához először ki kell választani egy célpontot. Ezután a térképmenü \'Útirány\' menütét kell választani és megjelölni a közlekedési módot.</string>
   <string name="tip_search">Cím keresés</string>
@@ -320,7 +320,7 @@
   <string name="tip_map_context_menu">Térképmenü</string>
   <string name="tip_map_context_menu_t">\tA térképmenü a térképen egy pont hosszú megnyomásával vagy a \'trackball\' gombbal érhető el. \n\tA kattintás után megjelenik egy doboz a koordinátákkal, vagy a POI nevével. A térképmenü megnyitásához kattints erre a dobozra (vagstring name=y kattints rá hosszan az eltüntetéséhez). \n\tA térképmenü tartalmaz minden olyan műveletet, amit azzal a ponttal tenni tudsz.</string>
   <string name="tip_initial">Tippek és trükkök</string>
-  <string name="tip_initial_t">\tAz Osmand navigációs alkalmazás sok lehetőséggel rendelkezik. \n\tA gyorsabb megértés érdekében ajánlott a tippek és trükkök elolvasása ami egy linken keresztül elérhető a főmenüből.</string>
+  <string name="tip_initial_t">\tAz OsmAnd navigációs alkalmazás sok lehetőséggel rendelkezik. \n\tA gyorsabb megértés érdekében ajánlott a tippek és trükkök elolvasása ami egy linken keresztül elérhető a főmenüből.</string>
   <string name="next_button">Következő</string>
   <string name="previous_button">Előző</string>
   <string name="unit_of_length_descr">Hosszúság és sebesség mértékegységének megváltoztatása</string>
@@ -381,17 +381,17 @@
   <string name="version_index_is_big_for_memory">A(z) \'\'{0}\'\' indexadat nem fér a memóriába</string>
   <string name="version_index_is_not_supported">\'\'{0}\'\' index verziója nem támogatott</string>
   <string name="osmand_net_previously_installed">Ön már telepített egy korábbi OsmAnd verziót. Minden internettől független adat használható az új alkalmazással. A Kedvenc pontokat a régi alkalmazásból érdemes kimenteni és az újba betölteni</string>
-  <string name="use_osmand_routing_service">Osmand útvonaltervező &gt;20km</string>
-  <string name="use_osmand_routing_service_descr">Osmand offline útvonaltervező használata nagy távolságokra is (kísérleti funkció) CloudMade-re váltás helyett.</string>
+  <string name="use_osmand_routing_service">OsmAnd útvonaltervező &gt;20km</string>
+  <string name="use_osmand_routing_service_descr">OsmAnd offline útvonaltervező használata nagy távolságokra is (kísérleti funkció) CloudMade-re váltás helyett.</string>
   <string name="osmand_routing_experimental">Az OsmAnd offline útvonaltervezője kísérleti funkció és nem működik 20 kilométernél nagyobb távolságban.\n\nÁtmenetileg átállítva online Cluodmade-re.</string>
   <string name="specified_dir_doesnt_exist">Nem található a megadott könyvtár.</string>
   <string name="application_dir">Tárolási könyvtár</string>
-  <string name="application_dir_change_warning">A tárolási könyvtár megváltoztatása nem helyezi át vagy törli az adatokat, ezt kézzel kell megtenni, nem az Osmandban. Biztosan folytatod?</string>
+  <string name="application_dir_change_warning">A tárolási könyvtár megváltoztatása nem helyezi át vagy törli az adatokat, ezt kézzel kell megtenni, nem az OsmAndban. Biztosan folytatod?</string>
   <string name="build_installed">OsmAnd verzió {0} sikeresen telepítve ({1}).</string>
   <string name="downloading_build">OsmAnd verzió letöltése…</string>
-  <string name="install_selected_build">Telepíted az Osmand alkalmazást - {0} innen: {1} {2} MB?</string>
-  <string name="loading_builds_failed">"Az Osmand verziók listájának letöltése nem sikerült "</string>
-  <string name="loading_builds">Osmand verziók töltése…</string>
+  <string name="install_selected_build">Telepíted az OsmAnd alkalmazást - {0} innen: {1} {2} MB?</string>
+  <string name="loading_builds_failed">"Az OsmAnd verziók listájának letöltése nem sikerült "</string>
+  <string name="loading_builds">OsmAnd verziók töltése…</string>
   <string name="select_build_to_install">A telepítéshez válassz egy OsmAnd buildet</string>
   <string name="contribution_activity">Special activity for contribution version</string>
   <string name="gps_status_app_not_found">GPS Státusz alkalmazás nincs telepítve. Megkeresed a Marketen?</string>
@@ -486,7 +486,7 @@
   <string name="background_service_wait_int">Maximális várakozás helymeghatározásra</string>
   <string name="service_stop_background_service">Navigációs háttérszolgáltatás kikapcsolása</string>
   <string name="where_am_i">Hol vagyok?</string>
-  <string name="process_navigation_service">Osmand navigációs szolgáltatás</string>
+  <string name="process_navigation_service">OsmAnd navigációs szolgáltatás</string>
   <string name="network_provider">Hálózat</string>
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">másodperc</string>
@@ -495,7 +495,7 @@
   <string name="background_service_int">Helymeghatározási időköz</string>
   <string name="background_service_provider_descr">Helymeghatározási szolgáltatás kiválasztása a háttérszolgáltatáshoz</string>
   <string name="background_service_provider">Helymeghatározási szolgáltatás</string>
-  <string name="background_router_service_descr">Osmand futtatása a háttérben, hogy kikapcsolt képernyővel is kövesse a pozíciódat\nHosszú idejű pozíciókövetéshez bekapcsolja a háttérszolgáltatást</string>
+  <string name="background_router_service_descr">OsmAnd futtatása a háttérben, hogy kikapcsolt képernyővel is kövesse a pozíciódat\nHosszú idejű pozíciókövetéshez bekapcsolja a háttérszolgáltatást</string>
   <string name="background_router_service">Háttérszolgáltatás pozíciókövetéshez</string>
   <string name="off_router_service_no_gps_available">Helymeghatározó szolgáltatás szükséges a háttérben futó útvonaltervező szolgáltatáshoz.</string>
   <string name="hide_poi_filter">Szűrő elrejtéshez</string>
@@ -549,7 +549,7 @@
   <string name="default_buttons_ok">OK</string>
   <string name="show_transport_over_map_description">Tömegközlekedési megállok mutatása a térképen</string>
   <string name="show_transport_over_map">Tömegközlekedési megállok mutatása</string>
-  <string name="hello">Osmand navigációs alkalmazás</string>
+  <string name="hello">OsmAnd navigációs alkalmazás</string>
   <string name="update_poi_success">POI adatok sikeresen frissítve ({0} db betöltve)</string>
   <string name="update_poi_error_local">Hiba a helyi index állományok frissítésénél</string>
   <string name="update_poi_error_loading">Hiba az adatok szerverről való letöltésekor</string>
@@ -620,11 +620,11 @@
   <string name="new_route_calculated_dist">Új útvonal tervezve, távolság</string>
   <string name="arrived_at_destination">Megérkeztél a célponthoz</string>
   <string name="invalid_locations">Érvénytelen koordináta</string>
-  <string name="go_back_to_osmand">Vissza az Osmand térképhez</string>
+  <string name="go_back_to_osmand">Vissza az OsmAnd térképhez</string>
   <string name="close">Bezár</string>
   <string name="loading_data">Adatok betöltése</string>
   <string name="reading_indexes">Térképadatok olvasása…</string>
-  <string name="previous_run_crashed">Az Osmand legutóbb összeomlott. Naplófájl: {0}. Kérlek jelentsd a hibát és csatolja hozzá a naplófájlt.</string>
+  <string name="previous_run_crashed">Az OsmAnd legutóbb összeomlott. Naplófájl: {0}. Kérlek jelentsd a hibát és csatolja hozzá a naplófájlt.</string>
   <string name="saving_gpx_tracks">GPX útvonalak mentése SD kártyára…</string>
   <string name="finished_task">Befejezve</string>
   <string name="reload_indexes_descr">Térképadatok újraolvasása SD kártyáról</string>
@@ -781,7 +781,7 @@
   <string name="edit_filter_delete_message">{0} szűrő törölve</string>
   <string name="edit_filter_create_message">{0} szűrő létrehozva</string>
   <string name="default_buttons_selectall">Mindet kijelöl</string>
-  <string name="offline_navigation_not_available">Az Osmand offline navigációja átmenetileg nem elérhető.</string>
+  <string name="offline_navigation_not_available">Az OsmAnd offline navigációja átmenetileg nem elérhető.</string>
   <string name="left_side_navigation">Baloldali navigáció</string>
   <string name="left_side_navigation_descr">"Kapcsold be, ha baloldali közlekedésű országban navigálsz"</string>
   <string name="download_link_and_local_description">Offline adatok letöltése vagy frissítése.\nRészletekért kattints a listaelemre, deaktiváláshoz vagy törléshez kattints rá hosszan. Adatok jelenleg az eszközön (%1$s szabad):</string>
@@ -805,7 +805,7 @@
   <string name="osmand_extra_settings_description">"Ez a kiterjesztés további térkép és pár eszközre jellemző beállítást tesz lehetővé. "</string>
   <string name="osmand_development_plugin_description">Ez a bővítmény elérhetővé teszi a fejlesztői és hibakeresési eszközöket, mint szimulált navigáció, vagy teljesítmény kijelzés.</string>
   <string name="plugins_screen">Bővítménykezelő</string>
-  <string name="select_plugin_to_activate">Kiterjesztés be- és kikapcsolása érintésre történik. (Lehet, hogy az Osmandot újra kell indítanod.)</string>
+  <string name="select_plugin_to_activate">Kiterjesztés be- és kikapcsolása érintésre történik. (Lehet, hogy az OsmAndot újra kell indítanod.)</string>
   <string name="prefs_plugins_descr">A kiterjesztések további lehetőségeket biztosítanak az alkalmazásban mint a útvonal mentés, raszteres térképek, kikapcsolt képernyős lehetőségek, akadálymentesítés és mások.</string>
   <string name="prefs_plugins">Bővítménykezelő</string>
   <string name="tip_recent_changes_0_8_0_t">"A 0.8.0 kiadás változásai:\n\t- Beépülők\n\t- Új offline térképadat formátum\n\t- Sok hibajavítás"</string>

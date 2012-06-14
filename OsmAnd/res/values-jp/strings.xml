@@ -78,7 +78,7 @@ name="internet_connection_required_for_online_route">オンライン経路案内
 
      <string name="tip_update_index">オフラインデータの更新</string>
      <string name="tip_update_index_t">\t最新のマップデータを持っていることは
-とても重要です。Osmand は利用できるオフラインデータの更新をチェックできる
+とても重要です。OsmAnd は利用できるオフラインデータの更新をチェックできる
 ダウンロードマネージャを提供しています。
      \n\t更新をチェックするにはこちらへ。\'メインメニュー\' -> \'設定\'
 -> \'オフラインデータ\' -> \'オフラインデータのダウンロード\'。
