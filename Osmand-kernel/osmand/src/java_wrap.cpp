@@ -442,6 +442,7 @@ void pullFromJavaRenderingContext(JNIEnv* env, jobject jrc, JNIRenderingContext*
 }
 
 
+// ElapsedTimer routingTimer;
 
 //RouteDataObject[] loadRoutingData(RouteRegion reg, int left, int right, int top, int bottom)
 extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_loadRoutingData(JNIEnv* ienv,
@@ -454,6 +455,7 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_loadRout
 	std::vector<RouteDataObject*> result;
 	SearchQuery q(left, right, top, bottom);
 	searchRouteRegion(&q, result, &ind);
+
 	jobjectArray res =  ienv->NewObjectArray(result.size(), jclass_RouteDataObject, NULL );
 	for (jint i = 0; i < result.size(); i++) {
 		if (result[i] != NULL) {

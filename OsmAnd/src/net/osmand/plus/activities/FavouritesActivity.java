@@ -4,6 +4,7 @@
 package net.osmand.plus.activities;
 
 import java.io.File;
+import java.text.Collator;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -70,11 +71,21 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 	private boolean selectionMode = false;
 	private Set<FavouritePoint> favoritesToDelete = new LinkedHashSet<FavouritePoint>();
 	private Set<String> groupsToDelete = new LinkedHashSet<String>();
+	private Comparator<FavouritePoint> favoritesComparator;
 	
 
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
+		final Collator collator = Collator.getInstance();
+		collator.setStrength(Collator.SECONDARY);
+		favoritesComparator = new Comparator<FavouritePoint>(){
+
+			@Override
+			public int compare(FavouritePoint object1, FavouritePoint object2) {
+				return collator.compare(object1.getName(), object2.getName());
+			}
+		};
 		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.favourites_activity, R.drawable.tab_favorites_screen_icon);
 		setContentView(R.layout.favourites_list);
 		titleBar.afterSetContentView();
@@ -159,13 +170,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			protected void onPostExecute(String result) {
 				hideProgressBar();
 				favouritesAdapter.synchronizeGroups();
-				favouritesAdapter.sort(new Comparator<FavouritePoint>(){
-
-					@Override
-					public int compare(FavouritePoint object1, FavouritePoint object2) {
-						return object1.getName().compareTo(object2.getName());
-					}
-				});
+				favouritesAdapter.sort(favoritesComparator);
 			};
 			
 			@Override
@@ -205,13 +210,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 		favouritesAdapter.synchronizeGroups();
 		
 //		Sort Favs by distance on Search tab, but sort alphabetically here
-		favouritesAdapter.sort(new Comparator<FavouritePoint>(){
-
-			@Override
-			public int compare(FavouritePoint object1, FavouritePoint object2) {
-				return object1.getName().compareTo(object2.getName());
-			}
-		});
+		favouritesAdapter.sort(favoritesComparator);
 		
 	}
 
@@ -270,13 +269,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 					boolean editied = helper.editFavouriteName(point, editText.getText().toString(), cat.getText().toString());
 					if (editied) {
 						favouritesAdapter.synchronizeGroups();
-						favouritesAdapter.sort(new Comparator<FavouritePoint>(){
-
-							@Override
-							public int compare(FavouritePoint object1, FavouritePoint object2) {
-								return object1.getName().compareTo(object2.getName());
-							}
-						});
+						favouritesAdapter.sort(favoritesComparator);
 					}
 
 				}
@@ -299,13 +292,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 								MessageFormat.format(resources.getString(R.string.favourites_remove_dialog_success), point.getName()),
 								Toast.LENGTH_SHORT).show();
 						favouritesAdapter.synchronizeGroups();
-						favouritesAdapter.sort(new Comparator<FavouritePoint>(){
-
-							@Override
-							public int compare(FavouritePoint object1, FavouritePoint object2) {
-								return object1.getName().compareTo(object2.getName());
-							}
-						});
+						favouritesAdapter.sort(favoritesComparator);
 					}
 
 				}
@@ -448,13 +435,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 							AccessibleToast.makeText(FavouritesActivity.this, warning, Toast.LENGTH_LONG).show();
 						}
 						favouritesAdapter.synchronizeGroups();
-						favouritesAdapter.sort(new Comparator<FavouritePoint>(){
-
-							@Override
-							public int compare(FavouritePoint object1, FavouritePoint object2) {
-								return object1.getName().compareTo(object2.getName());
-							}
-						});
+						favouritesAdapter.sort(favoritesComparator);
 					};
 					
 				}.execute();
