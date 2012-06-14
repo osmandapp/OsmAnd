@@ -62,7 +62,7 @@
   <string name="user_name_descr">Nécessaire pour les contributions openstreetmap.org</string>
   <string name="user_password">Votre mot de passe OSM</string>
   <string name="user_password_descr">Nécessaire pour les contributions openstreetmap.org</string>
-  <string name="osmand_service">Service d\'arrière plan</string>
+  <string name="osmand_service">Service de veille</string>
   <string name="osmand_service_descr">Permet d\'utiliser OsmAnd pendant que l\'écran est désactivé</string>
   <string name="tip_rotation_switching">Rotation de la carte</string>
   <string name="tip_rotation_switching_t">\tVous pouvez choisir quand et comment la carte est tournée dans \'Paramètres\' -&gt; \'Général\' -&gt; \'Rotation de la carte\'. \nLes choix sont: \n\t\'Aucune\' - La carte ne tourne pas. Le Nord est toujours vers le haut \n\t\'Sens du chemin\' - La carte s\'aligne en continu pour suivre la direction du déplacement \n\t\'Boussole\' - La carte s\'aligne en continu pour suivre la boussole de l\'appareil \n\tAstuce: Pour changer rapidement de la rotation par boussole vers celle des paramètres, tapez l\'aiguille de la boussole sur la carte.</string>
@@ -826,4 +826,4 @@ navigate_point_format_D, DM & DMS
   <string name="navigate_point_format_D">DDD.DDDDD</string>
   <string name="navigate_point_format_DM">DDD MM.MMMMM</string>
   <string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
-<string name="local_index_routing_data">Routing data</string><string name="navigate_point_format">Format :</string><string name="poi_search_desc">POI - Point Of interest</string><string name="address_search_desc">Address search</string><string name="navpoint_search_desc">Navigate point</string><string name="transport_search_desc">Transport search</string><string name="favourites_search_desc">Favourites search</string><string name="history_search_desc">Search history</string></resources>
+<string name="local_index_routing_data">Données de navigation</string><string name="navigate_point_format">Format :</string><string name="poi_search_desc">Recherche dans POints d\'Intérêt</string><string name="address_search_desc">Recherche par adresse</string><string name="navpoint_search_desc">Coordonnées</string><string name="transport_search_desc">Recherche dans les transports</string><string name="favourites_search_desc">Recherche dans les favoris</string><string name="history_search_desc">Historique des recherches</string></resources>
