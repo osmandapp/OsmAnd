@@ -18,7 +18,7 @@
   <string name="basemap_was_selected_to_download">Basemap необходима для корректной работы приложения и автоматически была выбрана для загрузки.</string>
   <string name="select_index_file_to_download">Ничего не было найдено. Вы можете создать карту вручную (смотрите на osmand.net).</string>
   <string name="local_indexes_cat_tile">Онлайн карты</string>
-  <string name="local_indexes_cat_map">Офлайн карты</string>
+  <string name="local_indexes_cat_map">Офлайн карты (векторные)</string>
   <string name="gpx_index_settings_descr">" (включая GPX анализ)"</string>
   <string name="index_settings_descr">Загрузить и управлять офлайн картами</string>
   <string name="map_online_plugin_is_not_installed">Активируйте плагин онлайн карт, чтобы выбирать различные источники карт</string>
@@ -823,5 +823,5 @@
   <string name="tip_favorites">Избранные точки</string>
   <string name="tip_favorites_t">\tЧасто используемые точки могут быть сохранены в \"Избранное\"\n\tЧтобы сохранить точку в \"Избранное\" откройте контекстное меню карты, выберите пункт \'Добавить в избранное\' и введите имя для этой точки. После сохранения, эта точка будет доступна через \"Главное меню\" -&gt; \"Избранное\". \n\tДолгое нажатие на точку в \"Избранное\" позволяет установить её как место назначения, редактировать или удалить её. \n\tЧтобы отобразить все избранные точки на карте, включите слой \'Избранное\' в \'Контекстное меню карты\' -&gt;\'Слои\'.</string>
   <string name="contribution_activity">Специальное действие для платной версии</string>
-  <string name="process_navigation_service">OsmAnd navigation service</string>
-<string name="offline_navigation_not_available">Оффлайн навигация Osmand временно недоступна.</string><string name="left_side_navigation">Левосторонняя навигация</string><string name="left_side_navigation_descr">Включите, если пользуетесь навигацией в странах с левосторонним движением</string><string name="local_index_routing_data">Routing data</string><string name="navigate_point_format">Format :</string><string name="poi_search_desc">POI - Point Of interest</string><string name="address_search_desc">Address search</string><string name="navpoint_search_desc">Navigate point</string><string name="transport_search_desc">Transport search</string><string name="favourites_search_desc">Favourites search</string><string name="history_search_desc">Search history</string></resources>
+  <string name="process_navigation_service">Навигационный сервис Osmand</string>
+<string name="offline_navigation_not_available">Оффлайн навигация Osmand временно недоступна.</string><string name="left_side_navigation">Левосторонняя навигация</string><string name="left_side_navigation_descr">Включите, если пользуетесь навигацией в странах с левосторонним движением</string><string name="local_index_routing_data">Данные роутинга</string><string name="navigate_point_format">Формат:</string><string name="poi_search_desc">Поиск POI</string><string name="address_search_desc">Поиск по адресу</string><string name="navpoint_search_desc">Координаты</string><string name="transport_search_desc">Поиск транспорта</string><string name="favourites_search_desc">Поиск в избранном</string><string name="history_search_desc">История поиска</string></resources>
