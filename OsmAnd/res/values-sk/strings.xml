@@ -8,7 +8,7 @@
   <string name="map_settings">- Nastavenia mapy</string>
   <string name="map_settings_descr">Konfigurácia mapového zobrazenia</string>
   <string name="osmand_rastermaps_plugin_description">Tento modul umožní používanie širokej škály online máp ako prekrývacej alebo ako základnej mapy. Mapa môže byť pripravená offline a skopírovaná do zložky osmand.</string>
-  <string name="osmand_background_plugin_description">Tento zás. modul umožní používať navigáciu a stopovanie v úspornom režime s vypnutou obrazovkou. Spustí službu na pozadí, ktorá prebúdza GPS v danom intervale a zaznamenáva GPX alebo hlási hlasové povely.</string>
+  <string name="osmand_background_plugin_description">Tento zás. modul umožňuje stopovanie alebo navigáciu v režime spánku (vypnutá obrazovka) pravidelným prebúdzaním GPS zariadenia.</string>
   <string name="osmand_accessibility_description">Tento zásuvný modul umožňuje špeciálne funkcie pre prístupnosť.</string>
   <string name="extra_settings">Extra nastavenia</string>
   <string name="osmand_monitoring_description">Tento modul Vám umožní zaznamenávať Vaše cesty, ukladať GPX súbory a vykonávať živé sledovanie založené na webovej službe.</string>
@@ -16,14 +16,14 @@
   <string name="osmand_development_plugin_description">Tento zás. modul povolí vývojárske funkci (animovanie rutovania) a zobrazí dodatočné informácie ako vykresľovací čas.</string>
   <string name="plugins_screen">Správca zásuvných modulov</string>
   <string name="select_plugin_to_activate">Ťuknutím na zásuvný modul ho aktivujete. Pre aplikovanie zmien môže byť vyžadovaný reštart.</string>
-  <string name="prefs_plugins_descr">Zás. moduly povoľujú extra funkcie vstavané do aplikácie ako stopovanie, mapové dlaždice, funkcie šetrenia batérie, prístupnosť a mnoho iného.</string>
+  <string name="prefs_plugins_descr">Zás. moduly povoľujú extra funkcie vstavané do aplikácie ako mapy, stopovanie, operácie v režime spánku, nastavenia prístupnosti a iné.</string>
   <string name="prefs_plugins">Správca zásuvných modulov</string>
-  <string name="tip_recent_changes_0_8_0_t">"Zmeny v 0.8.0 : \n\t- Funkcia zásuvných modulov \n\t- Podpora nových offline mapových dát \n\t- Mnoho opravených chýb "</string>
+  <string name="tip_recent_changes_0_8_0_t">"Zmeny v 0.8.0 : \n\t- Funkcia zásuvných modulov \n\t- Podpora nových offline mapových dát\n\t- Vylepšená použiteľnosť a zjednodušenie profilového konceptu\n\t- Mnoho opravených chýb "</string>
   <string name="osm_editing_plugin_description">Tento zás. modul je zameraný na zlepšovanie OSM kvality. Umožňuje zbierať/upravovať OSM POI objekty, otvoriť/komentovať OSM chyby a odosielať zaznamenané GPX (vyžaduje OSM prihlásenie).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektorové mapy môžu byť zobrazované rýchlejšie. Nemusí správne fungovať na niektorých zariadeniach.</string>
   <string name="simulate_route_progression_manually">Ručné simulovanie priebehu cesty</string>
   <string name="play_commands_of_currently_selected_voice">Prehranie povelov pre aktuálne zvolený hlas</string>
-  <string name="debugging_and_development">Osmand ladenie a vývoj</string>
+  <string name="debugging_and_development">Vývoj Osmandu</string>
   <string name="native_rendering">Natívne vykresľovanie</string>
   <string name="animate_routing">Animovať rutovanie</string>
   <string name="test_voice_prompts">Test hlasových povelov</string>
@@ -420,7 +420,7 @@
   <string name="general_settings">Všeobecné nastavenia</string>
   <string name="index_settings_descr">Stiahnutie, zobrazenie podrobností a správa offline máp</string>
   <string name="index_settings">Offline údaje</string>
-  <string name="osmand_service">Služba na pozadí</string>
+  <string name="osmand_service">Funkcia v režime spánku</string>
   <string name="osmand_service_descr">Použite pre beh Osmandu počas vypnutej obrazovky</string>
   <string name="fast_route_mode">Najrýchlejšia trasa</string>
   <string name="fast_route_mode_descr">"Zapnite na výpočet najrýchlejšej trasy alebo vypnite pre najkratšiu trasu "</string>
@@ -659,7 +659,7 @@
   <string name="auto_zoom_map_descr">Autom. priblíženie mapy podľa Vašej rýchlosti</string>
   <string name="auto_zoom_map">Autom. priblíženie mapy</string>
   <string name="additional_settings">Ďalšie nastavenia</string>
-  <string name="settings_preset_descr">Výber profilu užívateľa. Každý profil obsahuje sadu špecifických nastavení.</string>
+  <string name="settings_preset_descr">Výber profilu užívateľa s prispôsobenými nastaveniami mapy a navigácie.</string>
   <string name="settings_preset">Užívateľský profil</string>
   <string name="settings">Nastavenia</string>
   <string name="save_current_track_descr">Uloženie aktuálnej stopy na SD kartu</string>
@@ -668,7 +668,7 @@
   <string name="save_track_interval">Logovací interval</string>
   <string name="monitor_preferences">Stopovanie</string>
   <string name="save_track_to_gpx_descrp">Stopy budú ukladané do adresára stôp, zoskupené podľa dní</string>
-  <string name="save_track_to_gpx">Zaznamenať stopu do GPX</string>
+  <string name="save_track_to_gpx">Logovať stopu do GPX súboru</string>
   <string name="navigate_to">Navigovať sem</string>
   <string name="update_tile">Aktualizovať mapu</string>
   <string name="reload_tile">Znovu načítať dlaždicu</string>
@@ -680,7 +680,7 @@
   <string name="favourites_activity">Obľúbené body</string>
   <string name="add_to_favourite">Pridať do Obľúbených</string>
   <string name="use_english_names_descr">Výber medzi domácimi a anglickými názvami</string>
-  <string name="use_english_names">Použiť anglické názvy</string>
+  <string name="use_english_names">Použiť anglické názvy v mapách</string>
   <string name="app_settings">Nastavenia aplikácie</string>
   <string name="search_address">Hľadať adresu</string>
   <string name="choose_building">Vybrať popisné číslo</string>
@@ -804,15 +804,15 @@
   <string name="edit_filter_delete_message">Filter {0} bol zmazaný</string>
   <string name="edit_filter_create_message">Filter {0} bol vytvorený</string>
   <string name="default_buttons_selectall">Vybrať všetko</string>
-  <string name="download_link_and_local_description">Stiahnutie alebo aktualizácia offline údajov.\nNa zobrazenie podrobností kliknite na položku, na deaktiváciu alebo zmazanie offline údaju, kliknite a podržte.\nAktuálne údaje v zariadení (%1$s voľných):</string>
-  <string name="unknown_from_location">Štartovacie umiestnenie zatiaľ nezistené</string>
+  <string name="download_link_and_local_description">Kliknite sem na stiahnutie alebo aktualizáciu offline údajov.\nNa zobrazenie podrobností kliknite na položku, na deaktiváciu alebo zmazanie offline údaju, kliknite a podržte.\nAktuálne údaje v zariadení (%1$s voľných):</string>
+  <string name="unknown_from_location">Štartovací bod nebol zatiaľ zistený</string>
   <string name="context_menu_item_directions">Pokyny k tomuto miestu</string>
   <string name="confirm_interrupt_download">Chcete prerusiť sťahovanie súboru?</string>
   <string name="basemap_was_selected_to_download">Základná mapa je potrebná pre správne fungovanie aplikácie a bola vybratá na stiahnutie.</string>
   <string name="gpx_index_settings_descr">"(zahŕňa GPX analyzéra)"</string>
   <string name="favourites_edit_dialog_name">Názov</string>
   <string name="favourites_edit_dialog_category">Kategória</string>
-  <string name="navigate_point_format_D">DDD.DDDDD</string>
-  <string name="navigate_point_format_DM">DDD MM.MMMMM</string>
-  <string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
-<string name="offline_navigation_not_available">Osmand offline navigácia je dočasne nedostupná.</string><string name="left_side_navigation">Navigácia po ľavej strane</string><string name="left_side_navigation_descr">Zapnite ak chcete navigovať v krajinách s ľavostrannou premávkou</string><string name="local_index_routing_data">Routing data</string><string name="navigate_point_format">Format :</string><string name="poi_search_desc">POI - Point Of interest</string><string name="address_search_desc">Address search</string><string name="navpoint_search_desc">Navigate point</string><string name="transport_search_desc">Transport search</string><string name="favourites_search_desc">Favourites search</string><string name="history_search_desc">Search history</string></resources>
+  <string name="navigate_point_format_D">DDD.DD</string>
+  <string name="navigate_point_format_DM">DDD MM.MM</string>
+  <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
+<string name="offline_navigation_not_available">Osmand offline navigácia je dočasne nedostupná.</string><string name="left_side_navigation">Navigácia po ľavej strane</string><string name="left_side_navigation_descr">Zapnite ak chcete navigovať v krajinách s ľavostrannou premávkou</string><string name="local_index_routing_data">Navigačné údaje</string><string name="navigate_point_format">Formát :</string><string name="poi_search_desc">Hľadanie POI (Bodu zájmu)</string><string name="address_search_desc">Hľadanie adresy</string><string name="navpoint_search_desc">Súradnice</string><string name="transport_search_desc">Hľadanie hromadnej dopravy</string><string name="favourites_search_desc">Hľadanie obľúbeného bodu</string><string name="history_search_desc">História hľadania</string></resources>
