@@ -245,6 +245,7 @@
 			<filter tag="landuse" value="" order="3"/>
 
 			<filter tag="natural" value="water" order="5"/>
+			<filter tag="waterway" value="riverbank" order="5"/>
 			<filter tag="natural" value="bay" order="5"/>
 			<filter tag="natural" value="land" order="2"/>
 			<filter tag="natural" value="coastline" order="1"/>
