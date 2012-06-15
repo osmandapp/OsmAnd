@@ -156,19 +156,13 @@ LOCAL_SRC_FILES := \
 	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder.cpp \
 	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_Factory.cpp \
 	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_libbmp.cpp \
-	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_libgif.cpp \
-	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_libico.cpp \
-	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_libjpeg.cpp \
 	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_libpng.cpp \
-	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_wbmp.cpp \
 	$(OSMAND_SKIA_LOC)/src/images/SkImageEncoder.cpp \
 	$(OSMAND_SKIA_LOC)/src/images/SkImageEncoder_Factory.cpp \
 	$(OSMAND_SKIA_LOC)/src/images/SkImageRef.cpp \
 	$(OSMAND_SKIA_LOC)/src/images/SkImageRefPool.cpp \
 	$(OSMAND_SKIA_LOC)/src/images/SkImageRef_GlobalPool.cpp \
-	$(OSMAND_SKIA_LOC)/src/images/SkJpegUtility.cpp \
 	$(OSMAND_SKIA_LOC)/src/images/SkMovie.cpp \
-	$(OSMAND_SKIA_LOC)/src/images/SkMovie_gif.cpp \
 	$(OSMAND_SKIA_LOC)/src/images/SkPageFlipper.cpp \
 	$(OSMAND_SKIA_LOC)/src/images/SkScaledBitmapSampler.cpp \
 	$(OSMAND_SKIA_LOC)/src/utils/SkBase64.cpp \
@@ -192,7 +186,16 @@ LOCAL_SRC_FILES := \
 	$(OSMAND_SKIA_LOC)/src/utils/SkProxyCanvas.cpp \
 	$(OSMAND_SKIA_LOC)/src/utils/SkSfntUtils.cpp \
 	$(OSMAND_SKIA_LOC)/src/utils/SkUnitMappers.cpp 
-		
+
+#	$(OSMAND_SKIA_LOC)/src/images/SkMovie_gif.cpp \
+#	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_libbmp.cpp \
+#	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_libgif.cpp \
+#	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_libico.cpp \
+#	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_libjpeg.cpp \
+#	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_libpng.cpp \
+#	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_wbmp.cpp \
+#	$(OSMAND_SKIA_LOC)/src/images/SkJpegUtility.cpp \
+	
 ## SkMMapStream is not built in Windows however it is required for Linux version
 
 LOCAL_C_INCLUDES += \
@@ -202,6 +205,7 @@ LOCAL_C_INCLUDES += \
 	$(OSMAND_SKIA_ABS)/include/config \
 	$(OSMAND_SKIA_ABS)/include/effects \
 	$(OSMAND_SKIA_ABS)/include/images \
+	$(OSMAND_SKIA_ABS)/include/ports \
 	$(OSMAND_SKIA_ABS)/include/utils \
 	$(OSMAND_SKIA_ABS)/include/xml \
 	$(OSMAND_FREETYPE_ABS)/include \

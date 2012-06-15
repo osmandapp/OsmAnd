@@ -3,100 +3,40 @@
 
 #include <string>
 #include <vector>
-
-#ifdef _Windows
-#include "backward/hash_map.h"
-#include "backward/hash_set.h"
-
-#else
-
-#ifndef ANDROID
-#define GNU_HASH_MAP
-#endif
-
-#include <hash_map>
-#include <hash_set>
-
-#endif
+#include <unordered_map>
+#include <unordered_set>
+#include <stdint.h>
+#include <cstdint>
 
 #include <SkPath.h>
 #include <SkBitmap.h>
+
 #include "osmand_log.h"
-#include "math.h"
 
-
-
-#ifdef _MSC_VER
-typedef __int8  int8;
-typedef __int16 int16;
-typedef __int32 int32;
-typedef __int64 int64;
-
-typedef unsigned __int8  uint8;
-typedef unsigned __int16 uint16;
-typedef unsigned __int32 uint32;
-typedef unsigned __int64 uint64;
-#else
-typedef int8_t  int8;
-typedef int16_t int16;
-typedef int32_t int32;
-typedef int64_t int64;
-
-typedef uint8_t  uint8;
-typedef uint16_t uint16;
-typedef uint32_t uint32;
-typedef uint64_t uint64;
+// M_PI is no longer part of math.h/cmath by standart, but some GCC's define them
+#define _USE_MATH_DEFINES
+#include <math.h>
+#if !defined(M_PI)
+const double M_PI = 3.14159265358979323846;
+#endif
+#if !defined(M_PI_2)
+const double M_PI_2 = M_PI / 2.0;
 #endif
 
-#ifdef GNU_HASH_MAP
-
-#define HMAP __gnu_cxx
-namespace __gnu_cxx {
-  template<>
-  struct hash<std::string>
-  {
-    hash<char*> h;
-    size_t operator()(const std::string &s) const
-    {
-      return h(s.c_str());
-    };
-  };
-  template<>
-    struct hash<long long int>
-    {
-      size_t
-      operator()(long long int __x) const
-    { return __x; }
-  };
-
-  template<>
-    struct hash<unsigned long long int>
-    {
-      size_t
-      operator()(unsigned long long int __x) const
-      { return __x; }
-    };
-
-  	  template<>
-      struct hash<void*>
-      {
-        size_t
-        operator()(void* __x) const
-      { return (size_t) __x; }
-    };
-}
-
-
+// Wrapper for unordered classes
+#if defined(ANDROID)
+#	define UNORDERED_NAMESPACE std::tr1
+#	define UNORDERED_map unordered_map
+#	define UNORDERED_set unordered_set
 #else
-
-#define HMAP
-
+#	define UNORDERED_NAMESPACE std
+#	define UNORDERED_map unordered_map
+#	define UNORDERED_set unordered_set
 #endif
+#define UNORDERED(cls) UNORDERED_NAMESPACE::UNORDERED_##cls
 
-
-
+// Better don't do this
 using namespace std;
-
 
 #ifdef PROFILE_NATIVE_OPERATIONS
 	#define PROFILE_NATIVE_OPERATION(rc, op) rc->nativeOperations.pause(); op; rc->nativeOperations.start()
@@ -145,7 +85,7 @@ struct TextDrawInfo {
 	float minDistance;
 	int textColor;
 	int textShadow;
-	uint32 textWrap;
+	uint32_t textWrap;
 	bool bold;
 	std::string shieldRes;
 	int textOrder;

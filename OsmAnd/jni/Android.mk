@@ -1,4 +1,5 @@
-OSMAND_MAKEFILES := ../Osmand-kernel/Android.mk
+# Relative definition of kernel makefile
+OSMAND_MAKEFILES := $(call my-dir)/../../Osmand-kernel/Android.mk
 
 # Protect from previous builds
 ifneq ($(TARGET_ARCH_ABI),armeabi-v7a)

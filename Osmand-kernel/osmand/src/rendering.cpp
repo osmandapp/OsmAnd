@@ -44,7 +44,7 @@ void calcPoint(std::pair<int, int>  c, RenderingContext* rc)
 }
 
 
-HMAP::hash_map<std::string, SkPathEffect*> pathEffects;
+UNORDERED(map)<std::string, SkPathEffect*> pathEffects;
 SkPathEffect* getDashEffect(std::string input)
 {
     if(pathEffects.find(input) != pathEffects.end())
@@ -200,7 +200,7 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
 
 void renderText(MapDataObject* obj, RenderingRuleSearchRequest* req, RenderingContext* rc, std::string tag,
 		std::string value, float xText, float yText, SkPath* path) {
-	HMAP::hash_map<std::string, std::string>::iterator it = obj->objectNames.begin();
+	UNORDERED(map)<std::string, std::string>::iterator it = obj->objectNames.begin();
 	while (it != obj->objectNames.end()) {
 		if (it->second.length() > 0) {
 			std::string name = it->second;
@@ -521,15 +521,15 @@ void drawIconsOverCanvas(RenderingContext* rc, SkCanvas* canvas)
 	}
 }
 
-HMAP::hash_map<int, std::vector<int> > sortObjectsByProperOrder(std::vector <MapDataObject* > mapDataObjects,
+UNORDERED(map)<int, std::vector<int> > sortObjectsByProperOrder(std::vector <MapDataObject* > mapDataObjects,
 	RenderingRuleSearchRequest* req, RenderingContext* rc) {
-	HMAP::hash_map<int, std::vector<int> > orderMap;
+	UNORDERED(map)<int, std::vector<int> > orderMap;
 	if (req != NULL) {
 		req->clearState();
 		const int size = mapDataObjects.size();
 		int i = 0;
 		for (; i < size; i++) {
-			uint32 sh = i << 8;
+			uint32_t sh = i << 8;
 			MapDataObject* mobj = mapDataObjects[i];
 			size_t sizeTypes = mobj->types.size();
 			size_t j = 0;
@@ -570,9 +570,9 @@ void doRendering(std::vector <MapDataObject* > mapDataObjects, SkCanvas* canvas,
 	paint->setAntiAlias(true);
 
 	// put in order map
-	HMAP::hash_map<int, std::vector<int> > orderMap = sortObjectsByProperOrder(mapDataObjects, req, rc);
+	UNORDERED(map)<int, std::vector<int> > orderMap = sortObjectsByProperOrder(mapDataObjects, req, rc);
 	std::set<int> keys;
-	HMAP::hash_map<int, std::vector<int> >::iterator it = orderMap.begin();
+	UNORDERED(map)<int, std::vector<int> >::iterator it = orderMap.begin();
 
 	while (it != orderMap.end()) {
 		keys.insert(it->first);

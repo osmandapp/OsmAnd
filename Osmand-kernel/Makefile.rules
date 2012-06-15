@@ -1,9 +1,9 @@
 # Just check if we have everything defined
 ifeq ($(CC_SOURCE_FILES_EXTS),)
-	CC_SOURCE_FILES_EXTS := c cc
+	CC_SOURCE_FILES_EXTS := c
 endif
 ifeq ($(CXX_SOURCE_FILES_EXTS),)
-	CXX_SOURCE_FILES_EXTS := cpp cxx
+	CXX_SOURCE_FILES_EXTS := cpp cxx cc
 endif
 
 # Target configuration
@@ -14,7 +14,6 @@ CFLAGS_release := -O2
 
 # Get the build type
 PREBUILT_DIR_PREFIX = ../lib/$(TARGET)-$(ARCH)
-
 
 OBJECTS_NAMES = $(foreach sourceFilesExt,$(CC_SOURCE_FILES_EXTS), \
 	$(patsubst %.$(sourceFilesExt),%.$(sourceFilesExt).cc.o,$(filter %.$(sourceFilesExt),$(LOCAL_SRC_FILES))) \
@@ -44,6 +43,7 @@ clean:
 	$(RM) -r build-debug/obj-$(TARGET)-$(ARCH)/
 	$(RM) -r build-release/$(TARGET)-$(ARCH)
 	$(RM) -r build-debug/$(TARGET)-$(ARCH)
+	$(RM) $(PREBUILT_DIR_PREFIX)/$(LIBNAME).$(LIBTYPE)
 
 # This target copies final output file to prebuilt folder
 install-%: %
@@ -61,19 +61,17 @@ build-debug/obj-$(TARGET)-$(ARCH)/%.cc.o : % $(LOCAL_C_INCLUDES)
 # Builds source files using CXX compiler
 build-release/obj-$(TARGET)-$(ARCH)/%.cxx.o : % $(LOCAL_C_INCLUDES)
 	@mkdir -p `dirname $@`
-	$(CXX) -o $@ -c $< $(CXXFLAGS_release) $(CFLAGS) $(addprefix -I, $(LOCAL_C_INCLUDES)) $(LOCAL_CFLAGS) $(GLOBAL_INCLUDES)
+	$(CXX) -o $@ -c $< $(CXXFLAGS_release) $(CXXFLAGS) $(addprefix -I, $(LOCAL_C_INCLUDES)) $(LOCAL_CFLAGS) $(GLOBAL_INCLUDES)
 build-debug/obj-$(TARGET)-$(ARCH)/%.cxx.o : % $(LOCAL_C_INCLUDES)
 	@mkdir -p `dirname $@`
-	$(CXX) -o $@ -c $< $(CXXFLAGS_debug) $(CFLAGS) $(addprefix -I, $(LOCAL_C_INCLUDES)) $(LOCAL_CFLAGS) $(GLOBAL_INCLUDES)
+	$(CXX) -o $@ -c $< $(CXXFLAGS_debug) $(CXXFLAGS) $(addprefix -I, $(LOCAL_C_INCLUDES)) $(LOCAL_CFLAGS) $(GLOBAL_INCLUDES)
 	
 # This target assembles static library
 .SECONDEXPANSION:
 build-%/$(TARGET)-$(ARCH)/$(LIBNAME).$(STATICLIB_EXT): $$(addprefix build-%/,$(OBJECTS))
 	@mkdir -p `dirname $@`
 	$(AR) rs $@ $(addprefix build-$*/,$(OBJECTS))
-	
-# This target assembles dynamic library
-.SECONDEXPANSION:
+
 # This target assembles dynamic library
 .SECONDEXPANSION:
 build-%/$(TARGET)-$(ARCH)/$(LIBNAME).$(DYNAMICLIB_EXT): $$(addprefix build-%/,$(OBJECTS))

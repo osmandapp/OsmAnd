@@ -445,7 +445,7 @@ bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDraw
 	// for text purposes
 //	drawTestBox(cv, &text->bounds, text->pathRotate, paintIcon, text->text, NULL/*paintText*/);
 	boundIntersections.query_in_box(text->bounds, searchText);
-	for (uint32 i = 0; i < searchText.size(); i++) {
+	for (uint32_t i = 0; i < searchText.size(); i++) {
 		TextDrawInfo* t = searchText.at(i);
 		if (intersects(text, t)) {
 			return true;
@@ -456,7 +456,7 @@ bool findTextIntersection(SkCanvas* cv, RenderingContext* rc, quad_tree<TextDraw
 		boundsSearch.inset(-rc->getDensityValue(max(5.0f, text->minDistance)), -rc->getDensityValue(15));
 		boundIntersections.query_in_box(boundsSearch, searchText);
 //		drawTestBox(cv, &boundsSearch, text->pathRotate, paintIcon, text->text, paintText);
-		for (uint32 i = 0; i < searchText.size(); i++) {
+		for (uint32_t i = 0; i < searchText.size(); i++) {
 			TextDrawInfo* t = searchText.at(i);
 			if (t->minDistance > 0 && t->text == text->text && intersects(boundsSearch, text->pathRotate,  t)) {
 				return true;
@@ -496,8 +496,8 @@ void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv) {
 
 	// 1. Sort text using text order
 	std::sort(rc->textToDraw.begin(), rc->textToDraw.end(), textOrder);
-	uint32 size = rc->textToDraw.size();
-	for (uint32 i = 0; i < size; i++) {
+	uint32_t size = rc->textToDraw.size();
+	for (uint32_t i = 0; i < size; i++) {
 		TextDrawInfo* text = rc->textToDraw.at(i);
 		if (text->text.length() > 0) {
 			// sest text size before finding intersection (it is used there)

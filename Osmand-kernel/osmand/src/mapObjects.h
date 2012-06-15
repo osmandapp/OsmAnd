@@ -22,9 +22,9 @@ public:
 	coordinates points;
 	std::vector < coordinates > polygonInnerCoordinates;
 
-	HMAP::hash_map< std::string, unsigned int> stringIds;
+	UNORDERED(map)< std::string, unsigned int> stringIds;
 
-	HMAP::hash_map< std::string, std::string > objectNames;
+	UNORDERED(map)< std::string, std::string > objectNames;
 	bool area;
 	long long id;
 

@@ -1,20 +1,49 @@
 /* config.h.  Generated from config.h.in by configure.  */
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
-/* the name of <hash_set> */
-#define HASH_MAP_CLASS unordered_map
+#if defined(ANDROID)
+	/* the namespace of hash_map/hash_set */
+	#define HASH_NAMESPACE std
 
-/* the location of <hash_map> */
-#define HASH_MAP_H <tr1/unordered_map>
+	/* the name of <hash_set> */
+	#define HASH_MAP_CLASS tr1::unordered_map
 
-/* the namespace of hash_map/hash_set */
-#define HASH_NAMESPACE std::tr1
+	/* the location of <hash_map> */
+	#define HASH_MAP_H <unordered_map>
 
-/* the name of <hash_set> */
-#define HASH_SET_CLASS unordered_set
+	/* the name of <hash_set> */
+	#define HASH_SET_CLASS tr1::unordered_set
 
-/* the location of <hash_set> */
-#define HASH_SET_H <tr1/unordered_set>
+	/* the location of <hash_set> */
+	#define HASH_SET_H <unordered_set>
+
+	/* define if the compiler has hash_map */
+	#define HAVE_HASH_MAP 1
+
+	/* define if the compiler has hash_set */
+	#define HAVE_HASH_SET 1
+#else
+	/* the namespace of hash_map/hash_set */
+	#define HASH_NAMESPACE std
+
+	/* the name of <hash_set> */
+	#define HASH_MAP_CLASS unordered_map
+
+	/* the location of <hash_map> */
+	#define HASH_MAP_H <unordered_map>
+
+	/* the name of <hash_set> */
+	#define HASH_SET_CLASS unordered_set
+
+	/* the location of <hash_set> */
+	#define HASH_SET_H <unordered_set>
+
+	/* define if the compiler has hash_map */
+	#define HAVE_HASH_MAP 1
+
+	/* define if the compiler has hash_set */
+	#define HAVE_HASH_SET 1
+#endif
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #define HAVE_DLFCN_H 1
@@ -24,27 +53,6 @@
 
 /* Define to 1 if you have the `ftruncate' function. */
 #define HAVE_FTRUNCATE 1
-
-#if defined(ANDROID)
-/*
- * TODO: Figure out how to use stlport unordered_map and set.
- * For some reason they don't work when I try to point the
- * HASH_MAP_H and HASH_SET_H to the stlport files, I get
- * compile timer errors.
- */
-
-/* define if the compiler has hash_map */
-#undef HAVE_HASH_MAP
-
-/* define if the compiler has hash_set */
-#undef HAVE_HASH_SET
-#else
-/* define if the compiler has hash_map */
-#define HAVE_HASH_MAP 1
-
-/* define if the compiler has hash_set */
-#define HAVE_HASH_SET 1
-#endif
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1

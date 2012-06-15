@@ -1,7 +1,3 @@
-#ifndef _OSMAND_RENDER_RULES
-#define _OSMAND_RENDER_RULES
-
-
 #include <iterator>
 #include <string>
 #include <vector>
@@ -109,7 +105,7 @@ int RenderingRule::getIntPropertyValue(string property) {
 }
 
 RenderingRule* RenderingRulesStorage::getRule(int state, int itag, int ivalue) {
-	HMAP::hash_map<int, RenderingRule*>::iterator it = (tagValueGlobalRules[state]).find(
+	UNORDERED(map)<int, RenderingRule*>::iterator it = (tagValueGlobalRules[state]).find(
 			(itag << SHIFT_TAG_VAL) | ivalue);
 	if (it == tagValueGlobalRules[state].end()) {
 		return NULL;
@@ -365,7 +361,7 @@ void RenderingRule::printDebugRenderingRule(string indent, RenderingRulesStorage
 	}
 }
 void RenderingRulesStorage::printDebug(int state) {
-	HMAP::hash_map<int, RenderingRule*>::iterator it = tagValueGlobalRules[state].begin();
+	UNORDERED(map)<int, RenderingRule*>::iterator it = tagValueGlobalRules[state].begin();
 	for (; it != tagValueGlobalRules[state].end(); it++) {
 		printf("\n\n%s : %s", getTagString(it->first).c_str(), getValueString(it->first).c_str());
 		it->second->printDebugRenderingRule(string(""), this);
@@ -421,9 +417,9 @@ void RenderingRulesStorage::parseRulesFromXmlInputStream(const char* filename, R
 			if (depends->tagValueGlobalRules[i].empty()) {
 				continue;
 			}
-			HMAP::hash_map<int, RenderingRule*>::iterator it = depends->tagValueGlobalRules[i].begin();
+			UNORDERED(map)<int, RenderingRule*>::iterator it = depends->tagValueGlobalRules[i].begin();
 			for (; it != depends->tagValueGlobalRules[i].end(); it++) {
-				HMAP::hash_map<int, RenderingRule*>::iterator o = tagValueGlobalRules[i].find(it->first);
+				UNORDERED(map)<int, RenderingRule*>::iterator o = tagValueGlobalRules[i].find(it->first);
 				RenderingRule* toInsert = it->second;
 				if (o != tagValueGlobalRules[i].end()) {
 					toInsert = createTagValueRootWrapperRule(it->first, o->second);
@@ -445,7 +441,7 @@ RenderingRuleSearchRequest::RenderingRuleSearchRequest(RenderingRulesStorage* st
 	PROPS = &(this->storage->PROPS);
 	this->values.resize(PROPS->properties.size(), 0);
 	this->fvalues.resize(PROPS->properties.size(), 0);
-	HMAP::hash_map<string, RenderingRuleProperty*>::iterator it = PROPS->properties.begin();
+	UNORDERED(map)<string, RenderingRuleProperty*>::iterator it = PROPS->properties.begin();
 	for (; it != PROPS->properties.end(); it++) {
 		if (!it->second->isColor()) {
 			values[it->second->id] = -1;
@@ -678,7 +674,7 @@ bool RenderingRuleSearchRequest::isSpecified(RenderingRuleProperty* p) {
 void RenderingRuleSearchRequest::printDebugResult() {
 	if (searchResult) {
 		printf("\n Found : ");
-		HMAP::hash_map<string, RenderingRuleProperty*>::iterator it = PROPS->properties.begin();
+		UNORDERED(map)<string, RenderingRuleProperty*>::iterator it = PROPS->properties.begin();
 		for (; it != PROPS->properties.end(); ++it) {
 			RenderingRuleProperty* rp = it->second;
 			if (!rp->input && isSpecified(rp)) {
@@ -700,6 +696,3 @@ void RenderingRuleSearchRequest::printDebugResult() {
 	}
 
 }
-
-
-#endif

@@ -1,6 +1,10 @@
 #ifndef _OSMAND_BINARY_READ_H
 #define _OSMAND_BINARY_READ_H
 
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <stdio.h>
 #include <fstream>
 #include <map>
@@ -21,13 +25,13 @@ static const int BASEMAP_ZOOM = 11;
 
 
 struct MapTreeBounds {
-	uint32 length;
-	uint32 filePointer;
-	uint32 mapDataBlock;
-	uint32 left ;
-	uint32 right ;
-	uint32 top ;
-	uint32 bottom;
+	uint32_t length;
+	uint32_t filePointer;
+	uint32_t mapDataBlock;
+	uint32_t left ;
+	uint32_t right ;
+	uint32_t top ;
+	uint32_t bottom;
 	bool ocean;
 
 	MapTreeBounds() {
@@ -36,13 +40,13 @@ struct MapTreeBounds {
 };
 
 struct RouteSubregion {
-	uint32 length;
-	uint32 filePointer;
-	uint32 mapDataBlock;
-	uint32 left;
-	uint32 right;
-	uint32 top;
-	uint32 bottom;
+	uint32_t length;
+	uint32_t filePointer;
+	uint32_t mapDataBlock;
+	uint32_t left;
+	uint32_t right;
+	uint32_t top;
+	uint32_t bottom;
 	std::vector<RouteSubregion> subregions;
 
 	RouteSubregion() : length(0), filePointer(0), mapDataBlock(0){
@@ -65,7 +69,7 @@ enum PART_INDEXES {
 };
 
 struct BinaryPartIndex {
-	uint32 length;
+	uint32_t length;
 	int filePointer;
 	PART_INDEXES type;
 	std::string name;
@@ -74,12 +78,12 @@ struct BinaryPartIndex {
 };
 
 struct RoutingIndex : BinaryPartIndex {
-	HMAP::hash_map<int, tag_value > decodingRules;
+	UNORDERED(map)< int, tag_value > decodingRules;
 	std::vector<RouteSubregion> subregions;
 	RoutingIndex() : BinaryPartIndex(ROUTING_INDEX) {
 	}
 
-	void initRouteEncodingRule(uint32 id, std::string tag, std::string val) {
+	void initRouteEncodingRule(uint32_t id, std::string tag, std::string val) {
 		tag_value pair = tag_value(tag, val);
 		// DEFINE hash
 		//encodingRules[pair] = id;
@@ -89,12 +93,12 @@ struct RoutingIndex : BinaryPartIndex {
 
 struct RouteDataObject {
 	RoutingIndex* region;
-	std::vector<uint32> types ;
-	std::vector<uint32> pointsX ;
-	std::vector<uint32> pointsY ;
-	std::vector<uint64> restrictions ;
-	std::vector<std::vector<uint32> > pointTypes;
-	int64 id;
+	std::vector<uint32_t> types ;
+	std::vector<uint32_t> pointsX ;
+	std::vector<uint32_t> pointsY ;
+	std::vector<uint64_t> restrictions ;
+	std::vector<std::vector<uint32_t> > pointTypes;
+	int64_t id;
 };
 
 
@@ -103,9 +107,9 @@ struct MapIndex : BinaryPartIndex {
 
 	std::vector<MapRoot> levels;
 
-	HMAP::hash_map<int, tag_value > decodingRules;
+	UNORDERED(map)<int, tag_value > decodingRules;
 	// DEFINE hash
-	//HMAP::hash_map<tag_value, int> encodingRules;
+	//UNORDERED(map)<tag_value, int> encodingRules;
 
 	int nameEncodingType;
 	int refEncodingType;
@@ -114,8 +118,8 @@ struct MapIndex : BinaryPartIndex {
 	int landEncodingType;
 	int onewayAttribute ;
 	int onewayReverseAttribute ;
-	HMAP::hash_set< int > positiveLayers;
-	HMAP::hash_set< int > negativeLayers;
+	UNORDERED(set)< int > positiveLayers;
+	UNORDERED(set)< int > negativeLayers;
 
 	MapIndex() : BinaryPartIndex(MAP_INDEX) {
 		nameEncodingType = refEncodingType = coastlineBrokenEncodingType = coastlineEncodingType = -1;
@@ -132,7 +136,7 @@ struct MapIndex : BinaryPartIndex {
 		}
 	}
 
-	void initMapEncodingRule(uint32 type, uint32 id, std::string tag, std::string val) {
+	void initMapEncodingRule(uint32_t type, uint32_t id, std::string tag, std::string val) {
 		tag_value pair = tag_value(tag, val);
 		// DEFINE hash
 		//encodingRules[pair] = id;
@@ -165,12 +169,12 @@ struct MapIndex : BinaryPartIndex {
 
 struct BinaryMapFile {
 	std::string inputName;
-	uint32 version;
-	uint64 dateCreated;
+	uint32_t version;
+	uint64_t dateCreated;
 	std::vector<MapIndex> mapIndexes;
 	std::vector<RoutingIndex> routingIndexes;
 	std::vector<BinaryPartIndex*> indexes;
-	FILE* f;
+	int fd;
 	bool basemap;
 
 	bool isBasemap(){
@@ -178,7 +182,7 @@ struct BinaryMapFile {
 	}
 
 	~BinaryMapFile() {
-		fclose(f);
+		close(fd);
 	}
 };
 

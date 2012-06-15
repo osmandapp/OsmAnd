@@ -4,7 +4,6 @@
 #include "jni.h"
 #include "binaryRead.h"
 
-
 struct ResultJNIPublisher : ResultPublisher {
 	JNIEnv* env;
 	jobject o;

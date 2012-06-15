@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <map>
+
 #include "common.h"
 #include "mapObjects.h"
 
@@ -232,12 +233,12 @@ public:
 	RenderingRuleProperty* R_ATTR_BOOL_VALUE;
 	RenderingRuleProperty* R_ATTR_STRING_VALUE;
 
-	HMAP::hash_map<string, RenderingRuleProperty*> properties;
+	UNORDERED(map)<string, RenderingRuleProperty*> properties;
 	vector<RenderingRuleProperty*> rules;
 	vector<RenderingRuleProperty*> customRules;
 
 	inline RenderingRuleProperty* getProperty(const char* st) {
-		HMAP::hash_map<std::string, RenderingRuleProperty*>::iterator i = properties.find(st);
+		UNORDERED(map)<std::string, RenderingRuleProperty*>::iterator i = properties.find(st);
 		if (i == properties.end()) {
 			return NULL;
 		}
@@ -245,7 +246,7 @@ public:
 	}
 
 	inline RenderingRuleProperty* getProperty(std::string& st) {
-		HMAP::hash_map<std::string, RenderingRuleProperty*>::iterator i = properties.find(st);
+		UNORDERED(map)<std::string, RenderingRuleProperty*>::iterator i = properties.find(st);
 		if (i == properties.end()) {
 			return NULL;
 		}
@@ -371,13 +372,13 @@ class RenderingRulesStorage
 
 private:
 	friend class RenderingRulesHandler;
-	HMAP::hash_map<std::string, int> dictionaryMap;
+	UNORDERED(map)<std::string, int> dictionaryMap;
 	std::vector<std::string> dictionary;
 	const static int SHIFT_TAG_VAL = 16;
 	// TODO make private
 public:
 	const static int SIZE_STATES = 7;
-	HMAP::hash_map<int, RenderingRule*>* tagValueGlobalRules;
+	UNORDERED(map)<int, RenderingRule*>* tagValueGlobalRules;
 	map<std::string, RenderingRule*> renderingAttributes;
 	std::vector<RenderingRule*> childRules;
 public:
@@ -392,7 +393,7 @@ public:
 	const static int ORDER_RULES = 5;
 	RenderingRulesStorage(const void* storage, bool createDefProperties = true) : storageId(storage),
 			PROPS(createDefProperties) {
-		tagValueGlobalRules = new HMAP::hash_map<int, RenderingRule*>[SIZE_STATES];
+		tagValueGlobalRules = new UNORDERED(map)<int, RenderingRule*>[SIZE_STATES];
 		if(createDefProperties) {
 			getDictionaryValue("");
 		}
@@ -425,7 +426,7 @@ public:
 	}
 
 	inline int getDictionaryValue(std::string s) {
-		HMAP::hash_map<std::string, int>::iterator it = dictionaryMap.find(s);
+		UNORDERED(map)<std::string, int>::iterator it = dictionaryMap.find(s);
 		if(it == dictionaryMap.end()) {
 			return registerString(s);
 		}

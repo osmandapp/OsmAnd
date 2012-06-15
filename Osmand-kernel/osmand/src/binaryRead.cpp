@@ -1,7 +1,9 @@
-#ifndef _OSMAND_BINARY_READ
-#define _OSMAND_BINARY_READ
-
 #include "binaryRead.h"
+
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <algorithm>
 #include "google/protobuf/wire_format_lite.h"
 #include "google/protobuf/io/zero_copy_stream_impl.h"
@@ -19,8 +21,8 @@ using google::protobuf::internal::WireFormatLite;
 
 std::map< std::string, BinaryMapFile* > openFiles;
 
-inline bool readInt(CodedInputStream* input, uint32* sz ){
-	uint8 buf[4];
+inline bool readInt(CodedInputStream* input, uint32_t* sz ){
+	uint8_t buf[4];
 	if (!input->ReadRaw(buf, 4)) {
 		return false;
 	}
@@ -29,7 +31,7 @@ inline bool readInt(CodedInputStream* input, uint32* sz ){
 }
 
 bool skipFixed32(CodedInputStream* input) {
-	uint32 sz;
+	uint32_t sz;
 	if (!readInt(input, &sz)) {
 		return false;
 	}
@@ -53,26 +55,26 @@ bool skipUnknownFields(CodedInputStream* input, int tag) {
 bool readMapTreeBounds(CodedInputStream* input, MapTreeBounds* tree, MapRoot* root) {
 	int init = 0;
 	int tag;
-	int32 si;
+	int32_t si;
 	while ((tag = input->ReadTag()) != 0) {
 		switch (WireFormatLite::GetTagFieldNumber(tag)) {
 		case OsmAndMapIndex_MapDataBox::kLeftFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_SINT32>(input, &si)));
+			DO_((WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_SINT32>(input, &si)));
 			tree->left = si + root->left;
 			break;
 		}
 		case OsmAndMapIndex_MapDataBox::kRightFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_SINT32>(input, &si)));
+			DO_((WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_SINT32>(input, &si)));
 			tree->right = si + root->right;
 			break;
 		}
 		case OsmAndMapIndex_MapDataBox::kTopFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_SINT32>(input, &si)));
+			DO_((WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_SINT32>(input, &si)));
 			tree->top = si + root->top;
 			break;
 		}
 		case OsmAndMapIndex_MapDataBox::kBottomFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_SINT32>(input, &si)));
+			DO_((WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_SINT32>(input, &si)));
 			tree->bottom = si + root->bottom;
 			break;
 		}
@@ -103,30 +105,30 @@ bool readMapLevel(CodedInputStream* input, MapRoot* root) {
 	while ((tag = input->ReadTag()) != 0) {
 		switch (WireFormatLite::GetTagFieldNumber(tag)) {
 		case OsmAndMapIndex_MapRootLevel::kMaxZoomFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_INT32>(input, &root->maxZoom)));
+			DO_((WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_INT32>(input, &root->maxZoom)));
 			break;
 		}
 		case OsmAndMapIndex_MapRootLevel::kMinZoomFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_INT32>(input, &root->minZoom)));
+			DO_((WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_INT32>(input, &root->minZoom)));
 			break;
 		}
 		case OsmAndMapIndex_MapRootLevel::kBottomFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_INT32>(input, &si)));
+			DO_((WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_INT32>(input, &si)));
 			root->bottom = si;
 			break;
 		}
 		case OsmAndMapIndex_MapRootLevel::kTopFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_INT32>(input, &si)));
+			DO_((WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_INT32>(input, &si)));
 			root->top = si;
 			break;
 		}
 		case OsmAndMapIndex_MapRootLevel::kLeftFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_INT32>(input, &si)));
+			DO_((WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_INT32>(input, &si)));
 			root->left = si;
 			break;
 		}
 		case OsmAndMapIndex_MapRootLevel::kRightFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_INT32>(input, &si)));
+			DO_((WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_INT32>(input, &si)));
 			root->right = si;
 			break;
 		}
@@ -161,11 +163,11 @@ bool readMapLevel(CodedInputStream* input, MapRoot* root) {
 	return true;
 }
 
-bool readRouteEncodingRule(CodedInputStream* input, RoutingIndex* index, uint32 id) {
+bool readRouteEncodingRule(CodedInputStream* input, RoutingIndex* index, uint32_t id) {
 	int tag;
 	std::string tagS;
 	std::string value;
-	uint32 type = 0;
+	uint32_t type = 0;
 	while ((tag = input->ReadTag()) != 0) {
 		switch (WireFormatLite::GetTagFieldNumber(tag)) {
 		case OsmAndRoutingIndex_RouteEncodingRule::kValueFieldNumber: {
@@ -177,7 +179,7 @@ bool readRouteEncodingRule(CodedInputStream* input, RoutingIndex* index, uint32 
 			break;
 		}
 		case OsmAndRoutingIndex_RouteEncodingRule::kIdFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &id)));
+			DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &id)));
 			break;
 		}
 		default: {
@@ -196,11 +198,11 @@ bool readRouteEncodingRule(CodedInputStream* input, RoutingIndex* index, uint32 
 	return true;
 }
 
-bool readMapEncodingRule(CodedInputStream* input, MapIndex* index, uint32 id) {
+bool readMapEncodingRule(CodedInputStream* input, MapIndex* index, uint32_t id) {
 	int tag;
 	std::string tagS;
 	std::string value;
-	uint32 type = 0;
+	uint32_t type = 0;
 	while ((tag = input->ReadTag()) != 0) {
 		switch (WireFormatLite::GetTagFieldNumber(tag)) {
 		case OsmAndMapIndex_MapEncodingRule::kValueFieldNumber: {
@@ -212,11 +214,11 @@ bool readMapEncodingRule(CodedInputStream* input, MapIndex* index, uint32 id) {
 			break;
 		}
 		case OsmAndMapIndex_MapEncodingRule::kTypeFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &type)));
+			DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &type)));
 			break;
 		}
 		case OsmAndMapIndex_MapEncodingRule::kIdFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &id)));
+			DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &id)));
 			break;
 		}
 		default: {
@@ -238,34 +240,34 @@ bool readMapEncodingRule(CodedInputStream* input, MapIndex* index, uint32 id) {
 
 bool readRouteTree(CodedInputStream* input, RouteSubregion* thisTree, RouteSubregion* parentTree, int depth, bool readCoordinates) {
 	bool readChildren = depth != 0;
-	uint32 tag;
+	uint32_t tag;
 	int i;
 	while ((tag = input->ReadTag()) != 0) {
 		switch (WireFormatLite::GetTagFieldNumber(tag)) {
 
 		case OsmAndRoutingIndex_RouteDataBox::kLeftFieldNumber: {
-			WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_SINT32>(input, &i);
+			WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_SINT32>(input, &i);
 			if (readCoordinates) {
 				thisTree->left = i + (parentTree != NULL ? parentTree->left : 0);
 			}
 			break;
 		}
 		case OsmAndRoutingIndex_RouteDataBox::kRightFieldNumber: {
-			WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_SINT32>(input, &i);
+			WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_SINT32>(input, &i);
 			if (readCoordinates) {
 				thisTree->right = i + (parentTree != NULL ? parentTree->right : 0);
 			}
 			break;
 		}
 		case OsmAndRoutingIndex_RouteDataBox::kTopFieldNumber: {
-			WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_SINT32>(input, &i);
+			WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_SINT32>(input, &i);
 			if (readCoordinates) {
 				thisTree->top = i + (parentTree != NULL ? parentTree->top : 0);
 			}
 			break;
 		}
 		case OsmAndRoutingIndex_RouteDataBox::kBottomFieldNumber: {
-			WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_SINT32>(input, &i);
+			WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_SINT32>(input, &i);
 			if (readCoordinates) {
 				thisTree->bottom = i + (parentTree != NULL ? parentTree->bottom : 0);
 			}
@@ -302,8 +304,8 @@ bool readRouteTree(CodedInputStream* input, RouteSubregion* thisTree, RouteSubre
 }
 
 bool readRoutingIndex(CodedInputStream* input, RoutingIndex* routingIndex) {
-	uint32 defaultId = 1;
-	uint32 tag;
+	uint32_t defaultId = 1;
+	uint32_t tag;
 	while ((tag = input->ReadTag()) != 0) {
 		switch (WireFormatLite::GetTagFieldNumber(tag)) {
 		case OsmAndRoutingIndex::kNameFieldNumber: {
@@ -312,7 +314,7 @@ bool readRoutingIndex(CodedInputStream* input, RoutingIndex* routingIndex) {
 		}
 		case OsmAndRoutingIndex::kRulesFieldNumber: {
 			int len;
-			WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_INT32>(input, &len);
+			WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_INT32>(input, &len);
 			int oldLimit = input->PushLimit(len);
 			readRouteEncodingRule(input, routingIndex, defaultId++);
 			input->PopLimit(oldLimit);
@@ -344,8 +346,8 @@ bool readRoutingIndex(CodedInputStream* input, RoutingIndex* routingIndex) {
 }
 
 bool readMapIndex(CodedInputStream* input, MapIndex* mapIndex) {
-	uint32 tag;
-	uint32 defaultId = 1;
+	uint32_t tag;
+	uint32_t defaultId = 1;
 	while ((tag = input->ReadTag()) != 0) {
 		switch (WireFormatLite::GetTagFieldNumber(tag)) {
 		case OsmAndMapIndex::kNameFieldNumber: {
@@ -354,7 +356,7 @@ bool readMapIndex(CodedInputStream* input, MapIndex* mapIndex) {
 		}
 		case OsmAndMapIndex::kRulesFieldNumber: {
 			int len;
-			WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_INT32>(input, &len);
+			WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_INT32>(input, &len);
 			int oldLimit = input->PushLimit(len);
 			readMapEncodingRule(input, mapIndex, defaultId++);
 			input->PopLimit(oldLimit);
@@ -390,17 +392,17 @@ bool readMapIndex(CodedInputStream* input, MapIndex* mapIndex) {
 //display google::protobuf::internal::WireFormatLite::GetTagWireType(tag)
 // display google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)
 bool initMapStructure(CodedInputStream* input, BinaryMapFile* file) {
-	uint32 tag;
-	uint32 versionConfirm = -2;
+	uint32_t tag;
+	uint32_t versionConfirm = -2;
 	while ((tag = input->ReadTag()) != 0) {
 		switch (WireFormatLite::GetTagFieldNumber(tag)) {
-		// required uint32 version = 1;
+		// required uint32_t version = 1;
 		case OsmAndStructure::kVersionFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &file->version)));
+			DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &file->version)));
 			break;
 		}
 		case OsmAndStructure::kDateCreatedFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<uint64, WireFormatLite::TYPE_UINT64>(input, &file->dateCreated)));
+			DO_((WireFormatLite::ReadPrimitive<uint64_t, WireFormatLite::TYPE_UINT64>(input, &file->dateCreated)));
 			break;
 		}
 		case OsmAndStructure::kMapIndexFieldNumber: {
@@ -429,7 +431,7 @@ bool initMapStructure(CodedInputStream* input, BinaryMapFile* file) {
 			break;
 		}
 		case OsmAndStructure::kVersionConfirmFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &versionConfirm)));
+			DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &versionConfirm)));
 			break;
 		}
 		default: {
@@ -457,7 +459,7 @@ bool initMapStructure(CodedInputStream* input, BinaryMapFile* file) {
 
 
 bool readStringTable(CodedInputStream* input, std::vector<std::string>& list) {
-	uint32 tag;
+	uint32_t tag;
 	while ((tag = input->ReadTag()) != 0) {
 		switch (WireFormatLite::GetTagFieldNumber(tag)) {
 		case StringTable::kSFieldNumber: {
@@ -508,19 +510,19 @@ bool acceptTypes(SearchQuery* req, std::vector<tag_value>& types, MapIndex* root
 
 MapDataObject* readMapDataObject(CodedInputStream* input, MapTreeBounds* tree, SearchQuery* req,
 			MapIndex* root) {
-	uint32 tag = WireFormatLite::GetTagFieldNumber(input->ReadTag());
+	uint32_t tag = WireFormatLite::GetTagFieldNumber(input->ReadTag());
 	bool area = MapData::kAreaCoordinatesFieldNumber == tag;
 	if(!area && MapData::kCoordinatesFieldNumber != tag) {
 		return NULL;
 	}
 	req->cacheCoordinates.clear();
-	uint32 size;
+	uint32_t size;
 	input->ReadVarint32(&size);
 	int old = input->PushLimit(size);
 	int px = tree->left & MASK_TO_READ;
 	int py = tree->top & MASK_TO_READ;
 	bool contains = false;
-	int64 id = 0;
+	int64_t id = 0;
 	int minX = INT_MAX;
 	int maxX = 0;
 	int minY = INT_MAX;
@@ -529,10 +531,10 @@ MapDataObject* readMapDataObject(CodedInputStream* input, MapTreeBounds* tree, S
 	int x;
 	int y;
 	while (input->BytesUntilLimit() > 0) {
-		if (!WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_SINT32>(input, &x)) {
+		if (!WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_SINT32>(input, &x)) {
 			return NULL;
 		}
-		if (!WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_SINT32>(input, &y)) {
+		if (!WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_SINT32>(input, &y)) {
 			return NULL;
 		}
 		x = (x << SHIFT_COORDINATES) + px;
@@ -564,10 +566,10 @@ MapDataObject* readMapDataObject(CodedInputStream* input, MapTreeBounds* tree, S
 	std::vector< coordinates > innercoordinates;
 	std::vector< tag_value > additionalTypes;
 	std::vector< tag_value > types;
-	HMAP::hash_map< std::string, unsigned int> stringIds;
+	UNORDERED(map)< std::string, unsigned int> stringIds;
 	bool loop = true;
 	while (loop) {
-		uint32 t = input->ReadTag();
+		uint32_t t = input->ReadTag();
 		switch (WireFormatLite::GetTagFieldNumber(t)) {
 		case 0:
 			loop = false;
@@ -580,8 +582,8 @@ MapDataObject* readMapDataObject(CodedInputStream* input, MapTreeBounds* tree, S
 			input->ReadVarint32(&size);
 			old = input->PushLimit(size);
 			while (input->BytesUntilLimit() > 0) {
-				WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_SINT32>(input, &x);
-				WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_SINT32>(input, &y);
+				WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_SINT32>(input, &x);
+				WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_SINT32>(input, &y);
 				x = (x << SHIFT_COORDINATES) + px;
 				y = (y << SHIFT_COORDINATES) + py;
 				polygon.push_back(std::pair<int, int>(x, y));
@@ -596,7 +598,7 @@ MapDataObject* readMapDataObject(CodedInputStream* input, MapTreeBounds* tree, S
 			input->ReadVarint32(&size);
 			old = input->PushLimit(size);
 			while (input->BytesUntilLimit() > 0) {
-				WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_INT32>(input, &x);
+				WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_INT32>(input, &x);
 				if (root->decodingRules.find(x) != root->decodingRules.end()) {
 					tag_value t = root->decodingRules[x];
 					additionalTypes.push_back(t);
@@ -609,7 +611,7 @@ MapDataObject* readMapDataObject(CodedInputStream* input, MapTreeBounds* tree, S
 			input->ReadVarint32(&size);
 			old = input->PushLimit(size);
 			while (input->BytesUntilLimit() > 0) {
-				WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_INT32>(input, &x);
+				WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_INT32>(input, &x);
 				if (root->decodingRules.find(x) != root->decodingRules.end()) {
 					tag_value t = root->decodingRules[x];
 					types.push_back(t);
@@ -623,14 +625,14 @@ MapDataObject* readMapDataObject(CodedInputStream* input, MapTreeBounds* tree, S
 			break;
 		}
 		case MapData::kIdFieldNumber:
-			WireFormatLite::ReadPrimitive<int64, WireFormatLite::TYPE_SINT64>(input, &id);
+			WireFormatLite::ReadPrimitive<int64_t, WireFormatLite::TYPE_SINT64>(input, &id);
 			break;
 		case MapData::kStringNamesFieldNumber:
 			input->ReadVarint32(&size);
 			old = input->PushLimit(size);
 			while (input->BytesUntilLimit() > 0) {
-				WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_INT32>(input, &x);
-				WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_INT32>(input, &y);
+				WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_INT32>(input, &x);
+				WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_INT32>(input, &y);
 				if (root->decodingRules.find(x) != root->decodingRules.end()) {
 					tag_value t = root->decodingRules[x];
 					stringIds[t.first] = y;
@@ -693,27 +695,27 @@ bool searchMapTreeBounds(CodedInputStream* input, MapTreeBounds* current, MapTre
 			}
 		}
 		switch (WireFormatLite::GetTagFieldNumber(tag)) {
-		// required uint32 version = 1;
+		// required uint32_t version = 1;
 		case OsmAndMapIndex_MapDataBox::kLeftFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_SINT32>(input, &si)));
+			DO_((WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_SINT32>(input, &si)));
 			current->left = si + parent->left;
 			init |= 1;
 			break;
 		}
 		case OsmAndMapIndex_MapDataBox::kRightFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_SINT32>(input, &si)));
+			DO_((WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_SINT32>(input, &si)));
 			current->right = si + parent->right;
 			init |= 2;
 			break;
 		}
 		case OsmAndMapIndex_MapDataBox::kTopFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_SINT32>(input, &si)));
+			DO_((WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_SINT32>(input, &si)));
 			current->top = si + parent->top;
 			init |= 4;
 			break;
 		}
 		case OsmAndMapIndex_MapDataBox::kBottomFieldNumber : {
-			DO_((WireFormatLite::ReadPrimitive<int32, WireFormatLite::TYPE_SINT32>(input, &si)));
+			DO_((WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_SINT32>(input, &si)));
 			current->bottom = si +  parent->bottom;
 			init |= 8;
 			break;
@@ -762,7 +764,7 @@ bool searchMapTreeBounds(CodedInputStream* input, MapTreeBounds* current, MapTre
 }
 
 bool readMapDataBlocks(CodedInputStream* input, SearchQuery* req, MapTreeBounds* tree, MapIndex* root) {
-	int64 baseId = 0;
+	int64_t baseId = 0;
 	int tag;
 	std::vector< MapDataObject* > results;
 	while ((tag = input->ReadTag()) != 0) {
@@ -770,14 +772,14 @@ bool readMapDataBlocks(CodedInputStream* input, SearchQuery* req, MapTreeBounds*
 			return false;
 		}
 		switch (WireFormatLite::GetTagFieldNumber(tag)) {
-		// required uint32 version = 1;
+		// required uint32_t version = 1;
 		case MapDataBlock::kBaseIdFieldNumber : {
-			WireFormatLite::ReadPrimitive<int64, WireFormatLite::TYPE_SINT64>(input, &baseId);
+			WireFormatLite::ReadPrimitive<int64_t, WireFormatLite::TYPE_SINT64>(input, &baseId);
 			break;
 		}
 		case MapDataBlock::kStringTableFieldNumber: {
-			uint32 length;
-			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &length)));
+			uint32_t length;
+			DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &length)));
 			int oldLimit = input->PushLimit(length);
 			if(results.size() > 0) {
 				std::vector<std::string> stringTable;
@@ -785,7 +787,7 @@ bool readMapDataBlocks(CodedInputStream* input, SearchQuery* req, MapTreeBounds*
 				MapDataObject* o;
 				for (std::vector<MapDataObject*>::iterator obj = results.begin(); obj != results.end(); obj++) {
 					if ((*obj)->stringIds.size() > 0) {
-						HMAP::hash_map<std::string, unsigned int >::iterator  val=(*obj)->stringIds.begin();
+						UNORDERED(map)<std::string, unsigned int >::iterator  val=(*obj)->stringIds.begin();
 						while(val != (*obj)->stringIds.end()){
 							(*obj)->objectNames[val->first]=stringTable[val->second];
 							val++;
@@ -798,8 +800,8 @@ bool readMapDataBlocks(CodedInputStream* input, SearchQuery* req, MapTreeBounds*
 			break;
 		}
 		case MapDataBlock::kDataObjectsFieldNumber: {
-			uint32 length;
-			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &length)));
+			uint32_t length;
+			DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &length)));
 			int oldLimit = input->PushLimit(length);
 			MapDataObject* mapObject = readMapDataObject(input, tree, req, root);
 			if (mapObject != NULL) {
@@ -845,14 +847,14 @@ void searchMapData(CodedInputStream* input, MapRoot* root, MapIndex* ind, Search
 
 
 		sort(foundSubtrees.begin(), foundSubtrees.end(), sortTreeBounds);
-		uint32 length;
+		uint32_t length;
 		for (std::vector<MapTreeBounds>::iterator tree = foundSubtrees.begin();
 					tree != foundSubtrees.end(); tree++) {
 			if (req->publisher->isCancelled()) {
 				return;
 			}
 			input->Seek(tree->mapDataBlock);
-			WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &length);
+			WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &length);
 			int oldLimit = input->PushLimit(length);
 			readMapDataBlocks(input, req, &(*tree), ind);
 			input->PopLimit(oldLimit);
@@ -866,7 +868,7 @@ void searchMapData(CodedInputStream* input, MapRoot* root, MapIndex* ind, Search
 
 ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, std::string msgNothingFound) {
 	map<std::string, BinaryMapFile*>::iterator i = openFiles.begin();
-	HMAP::hash_set<long long> ids;
+	UNORDERED(set)<long long> ids;
 	int count = 0;
 	bool ocean = false;
 	std::vector<MapDataObject*> basemapResult;
@@ -877,8 +879,8 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 	bool basemapExists = false;
 	for (; i != openFiles.end() && !q->publisher->isCancelled(); i++) {
 		BinaryMapFile* file = i->second;
-		fseek(file->f, 0, 0);
-		FileInputStream input(fileno(file->f));
+		lseek(file->fd, 0, SEEK_SET);
+		FileInputStream input(file->fd);
 		input.SetCloseOnDelete(false);
 		CodedInputStream cis(&input);
 		cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
@@ -1009,7 +1011,7 @@ void searchRouteRegion(CodedInputStream* input, SearchQuery* q, RoutingIndex* in
 				bool contains = subreg->right <= q->right && q->left <= subreg->left && subreg->top <= q->top
 						&& subreg->bottom >=  q->bottom;
 				input->Seek(subreg->filePointer);
-				uint32 old = input -> PushLimit(subreg->length);
+				uint32_t old = input -> PushLimit(subreg->length);
 				readRouteTree(input, &(*subreg), NULL, contains? -1 : 1, false);
 				input->PopLimit(old);
 			}
@@ -1021,17 +1023,17 @@ void searchRouteRegion(CodedInputStream* input, SearchQuery* q, RoutingIndex* in
 	}
 }
 
-bool readRouteDataObject(CodedInputStream* input, uint32 left, uint32 top, RouteDataObject* obj) {
+bool readRouteDataObject(CodedInputStream* input, uint32_t left, uint32_t top, RouteDataObject* obj) {
 	int tag;
 	while ((tag = input->ReadTag()) != 0) {
 		switch (WireFormatLite::GetTagFieldNumber(tag)) {
 		case RouteData::kTypesFieldNumber: {
-			uint32 length;
-			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &length)));
+			uint32_t length;
+			DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &length)));
 			int oldLimit = input->PushLimit(length);
-			uint32 t;
+			uint32_t t;
 			while (input->BytesUntilLimit() > 0) {
-				DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &t)));
+				DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &t)));
 				obj->types.push_back(t);
 
 			}
@@ -1039,22 +1041,22 @@ bool readRouteDataObject(CodedInputStream* input, uint32 left, uint32 top, Route
 			break;
 		}
 		case RouteData::kRouteIdFieldNumber: {
-			DO_((WireFormatLite::ReadPrimitive<int64, WireFormatLite::TYPE_INT64>(input, &obj->id)));
+			DO_((WireFormatLite::ReadPrimitive<int64_t, WireFormatLite::TYPE_INT64>(input, &obj->id)));
 			break;
 		}
 		case RouteData::kPointsFieldNumber: {
-			uint32 length;
-			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &length)));
+			uint32_t length;
+			DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &length)));
 			int oldLimit = input->PushLimit(length);
-			uint32 t;
+			uint32_t t;
 			int s;
 			int px = left >> ROUTE_SHIFT_COORDINATES;
 			int py = top >> ROUTE_SHIFT_COORDINATES;
 			while (input->BytesUntilLimit() > 0) {
 				DO_((WireFormatLite::ReadPrimitive<int, WireFormatLite::TYPE_SINT32>(input, &s)));
-				uint32 x = s + px;
+				uint32_t x = s + px;
 				DO_((WireFormatLite::ReadPrimitive<int, WireFormatLite::TYPE_SINT32>(input, &s)));
-				uint32 y = s + py;
+				uint32_t y = s + py;
 
 				obj->pointsX.push_back(x << ROUTE_SHIFT_COORDINATES);
 				obj->pointsY.push_back(y << ROUTE_SHIFT_COORDINATES);
@@ -1065,22 +1067,22 @@ bool readRouteDataObject(CodedInputStream* input, uint32 left, uint32 top, Route
 			break;
 		}
 		case RouteData::kPointTypesFieldNumber: {
-			uint32 length;
-			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &length)));
+			uint32_t length;
+			DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &length)));
 			int oldLimit = input->PushLimit(length);
 			while (input->BytesUntilLimit() > 0) {
-				uint32 pointInd;
-				uint32 lens;
-				uint32 t;
-				DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &pointInd)));
-				DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &lens)));
+				uint32_t pointInd;
+				uint32_t lens;
+				uint32_t t;
+				DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &pointInd)));
+				DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &lens)));
 				int oldLimits = input->PushLimit(lens);
 
 				if (obj->pointTypes.size() <= pointInd) {
-					obj->pointTypes.resize(pointInd + 1, std::vector<uint32>());
+					obj->pointTypes.resize(pointInd + 1, std::vector<uint32_t>());
 				}
 				while (input->BytesUntilLimit() > 0) {
-					DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &t)));
+					DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &t)));
 					obj->pointTypes[pointInd].push_back(t);
 				}
 				input->PopLimit(oldLimits);
@@ -1108,27 +1110,27 @@ const static int RESTRICTION_SHIFT = 3;
 const static int RESTRICTION_MASK = 7;
 bool readRouteTreeData(CodedInputStream* input, RouteSubregion* s, std::vector<RouteDataObject*>& dataObjects) {
 	int tag;
-	std::vector<int64> idTables;
-	HMAP::hash_map<int64, std::vector<uint64> > restrictions;
+	std::vector<int64_t> idTables;
+	UNORDERED(map)<int64_t, std::vector<uint64_t> > restrictions;
 	while ((tag = input->ReadTag()) != 0) {
 		switch (WireFormatLite::GetTagFieldNumber(tag)) {
-		// required uint32 version = 1;
+		// required uint32_t version = 1;
 		case OsmAndRoutingIndex_RouteDataBlock::kDataObjectsFieldNumber: {
-			uint32 length;
-			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &length)));
+			uint32_t length;
+			DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &length)));
 			int oldLimit = input->PushLimit(length);
 			RouteDataObject* obj = new RouteDataObject;
 			readRouteDataObject(input, s->left, s->top, obj);
 			if(dataObjects.size() <= obj->id ) {
-				dataObjects.resize((uint32) obj->id + 1, NULL);
+				dataObjects.resize((uint32_t) obj->id + 1, NULL);
 			}
 			dataObjects[obj->id] = obj;
 			input->PopLimit(oldLimit);
 			break;
 		}
 		case OsmAndRoutingIndex_RouteDataBlock::kStringTableFieldNumber: {
-			uint32 length;
-			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &length)));
+			uint32_t length;
+			DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &length)));
 			int oldLimit = input->PushLimit(length);
 			// std::vector<std::string> stringTable;
 			// readStringTable(input, stringTable);
@@ -1137,12 +1139,12 @@ bool readRouteTreeData(CodedInputStream* input, RouteSubregion* s, std::vector<R
 			break;
 		}
 		case OsmAndRoutingIndex_RouteDataBlock::kRestrictionsFieldNumber: {
-			uint32 length;
-			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &length)));
+			uint32_t length;
+			DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &length)));
 			int oldLimit = input->PushLimit(length);
-			uint64 from = 0;
-			uint64 to = 0;
-			uint64 type = 0;
+			uint64_t from = 0;
+			uint64_t to = 0;
+			uint64_t type = 0;
 			int tm;
 			int ts;
 			while ((ts = input->ReadTag()) != 0) {
@@ -1178,16 +1180,16 @@ bool readRouteTreeData(CodedInputStream* input, RouteSubregion* s, std::vector<R
 			break;
 		}
 		case OsmAndRoutingIndex_RouteDataBlock::kIdTableFieldNumber: {
-			uint32 length;
-			DO_((WireFormatLite::ReadPrimitive<uint32, WireFormatLite::TYPE_UINT32>(input, &length)));
+			uint32_t length;
+			DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &length)));
 			int oldLimit = input->PushLimit(length);
-			int64 routeId = 0;
+			int64_t routeId = 0;
 			int ts;
 			while ((ts = input->ReadTag()) != 0) {
 				switch (WireFormatLite::GetTagFieldNumber(ts)) {
 				case IdTable::kRouteIdFieldNumber: {
-					int64 val;
-					DO_((WireFormatLite::ReadPrimitive<int64, WireFormatLite::TYPE_SINT64>(input, &val)));
+					int64_t val;
+					DO_((WireFormatLite::ReadPrimitive<int64_t, WireFormatLite::TYPE_SINT64>(input, &val)));
 					routeId += val;
 					idTables.push_back(routeId);
 					break;
@@ -1217,14 +1219,14 @@ bool readRouteTreeData(CodedInputStream* input, RouteSubregion* s, std::vector<R
 		}
 		}
 	}
-	HMAP::hash_map<int64, std::vector<uint64> >::iterator itRestrictions = restrictions.begin();
+	UNORDERED(map)<int64_t, std::vector<uint64_t> >::iterator itRestrictions = restrictions.begin();
 	for (; itRestrictions != restrictions.end(); itRestrictions++) {
 		RouteDataObject* fromr = dataObjects[itRestrictions->first];
 		if (fromr != NULL) {
 			fromr->restrictions = itRestrictions->second;
 			for (int i = 0; i < fromr->restrictions.size(); i++) {
-				uint32 to = fromr->restrictions[i] >> RESTRICTION_SHIFT;
-				uint64 valto = (idTables[to] << RESTRICTION_SHIFT) | ((long) fromr->restrictions[i] & RESTRICTION_MASK);
+				uint32_t to = fromr->restrictions[i] >> RESTRICTION_SHIFT;
+				uint64_t valto = (idTables[to] << RESTRICTION_SHIFT) | ((long) fromr->restrictions[i] & RESTRICTION_MASK);
 				fromr->restrictions[i] = valto;
 			}
 		}
@@ -1246,14 +1248,14 @@ bool sortRouteRegions (const RouteSubregion& i,const RouteSubregion& j) { return
 
 void searchRouteRegion(SearchQuery* q, std::vector<RouteDataObject*>& list, RoutingIndex* rs){
 	map<std::string, BinaryMapFile*>::iterator i = openFiles.begin();
-	HMAP::hash_set<long long> ids;
+	UNORDERED(set)<long long> ids;
 	int count = 0;
 
 	bool basemapExists = false;
 	for (; i != openFiles.end() && !q->publisher->isCancelled(); i++) {
 		BinaryMapFile* file = i->second;
-		fseek(file->f, 0, 0);
-		FileInputStream input(fileno(file->f));
+		lseek(file->fd, 0, SEEK_SET);
+		FileInputStream input(file->fd);
 		input.SetCloseOnDelete(false);
 		CodedInputStream cis(&input);
 		cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
@@ -1273,9 +1275,9 @@ void searchRouteRegion(SearchQuery* q, std::vector<RouteDataObject*>& list, Rout
 			int cnt = 0;
 			for (std::vector<RouteSubregion>::iterator subreg = toLoad.begin(); subreg != toLoad.end(); subreg++) {
 				cis.Seek(subreg->filePointer + subreg->mapDataBlock);
-				uint32 length;
+				uint32_t length;
 				cis.ReadVarint32(&length);
-				uint32 old = cis.PushLimit(length);
+				uint32_t old = cis.PushLimit(length);
 				readRouteTreeData(&cis, &(*subreg), iteration);
 				list.insert(list.end(), iteration.begin(), iteration.end());
 				iteration.clear();
@@ -1305,14 +1307,14 @@ BinaryMapFile* initBinaryMapFile(std::string inputName) {
 		openFiles.erase(iterator);
 	}
 
-	FILE* file = fopen(inputName.c_str(), "r");
-	if (file == NULL) {
+	int fileDescriptor = open(inputName.c_str(), O_RDONLY);
+	if (fileDescriptor < 0) {
 		osmand_log_print(LOG_ERROR, "File could not be open to read from C : %s", inputName.c_str());
 		return NULL;
 	}
 	BinaryMapFile* mapFile = new BinaryMapFile();
-	mapFile->f = file;
-	FileInputStream input(fileno(file));
+	mapFile->fd = fileDescriptor;
+	FileInputStream input(fileDescriptor);
 	input.SetCloseOnDelete(false);
 	CodedInputStream cis(&input);
 	cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
@@ -1326,5 +1328,3 @@ BinaryMapFile* initBinaryMapFile(std::string inputName) {
 	openFiles.insert(std::pair<std::string, BinaryMapFile*>(inputName, mapFile));
 	return mapFile;
 }
-#undef DO_
-#endif

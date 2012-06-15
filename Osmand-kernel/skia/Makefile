@@ -22,6 +22,7 @@ LOCAL_SRC_FILES += \
 	$(OSMAND_SKIA_LOC)/src/ports/SkTime_Unix.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkMemory_malloc.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_gamma.cpp \
+	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_tables.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkGlobalInitialization_default.cpp
 	
 SKIAFLAGS = \

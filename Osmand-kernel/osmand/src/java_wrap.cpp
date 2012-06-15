@@ -1,6 +1,3 @@
-#ifndef _JAVA_WRAP_CPP
-#define _JAVA_WRAP_CPP
-
 #ifdef ANDROID_BUILD
 #include <dlfcn.h>
 #endif
@@ -15,28 +12,9 @@
 #include "binaryRead.h"
 #include "rendering.h"
 
-
 JavaVM* globalJVM = NULL;
 void loadJniRenderingContext(JNIEnv* env);
 void loadJniRenderingRules(JNIEnv* env);
-
-static const int simplePngSize = 93;
-static uint8 simplePngarray[simplePngSize] = {
-		0x89 ,0x50 ,0x4E ,0x47 ,0x0D ,0x0A ,0x1A ,0x0A ,
-		0x00 ,0x00 ,0x00 ,0x0D ,0x49 ,0x48 ,0x44 ,0x52 ,
-		0x00 ,0x00 ,0x00 ,0x06 ,0x00 ,0x00 ,0x00 ,0x06 ,
-		0x08 ,0x03 ,0x00 ,0x00 ,0x00 ,0xD7 ,0x12 ,0x1F ,
-		0x7A ,0x00 ,0x00 ,0x00 ,0x03 ,0x50 ,0x4C ,0x54 ,
-		0x45 ,0x20 ,0x97 ,0xCE ,0xDD ,0xEB ,0x88 ,0x50 ,
-		0x00 ,0x00 ,0x00 ,0x15 ,0x49 ,0x44 ,0x41 ,0x54 ,
-		0x78 ,0xDA ,0x8D ,0xC1 ,0x01 ,0x01 ,0x00 ,0x00 ,
-		0x00 ,0x80 ,0x90 ,0xFE ,0xAF ,0x76 ,0x21 ,0xDA ,
-		0x00 ,0x00 ,0x2A ,0x00 ,0x01 ,0xD0 ,0x79 ,0x58 ,
-		0x1D ,0x00 ,0x00 ,0x00 ,0x00 ,0x49 ,0x45 ,0x4E ,
-		0x44 ,0xAE ,0x42 ,0x60 ,0x82
-};
-static void* simplePng = simplePngarray;
-
 
 extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
 {
@@ -46,17 +24,6 @@ extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
 	globalJVM = vm;
 	loadJniRenderingContext(globalJniEnv);
 	loadJniRenderingRules(globalJniEnv);
-	// Encode and decode png (bug in PC Java linking, currently using -Bsymbolic?)
-	/*SkBitmap* bmp = new SkBitmap();
-	if(!SkImageDecoder::DecodeMemory(simplePng, simplePngSize, bmp)) {
-		osmand_log_print(LOG_INFO, "Initialization jni : decode png failed!");
-		return JNI_VERSION_1_6;
-	}
-	SkImageEncoder* enc = SkImageEncoder::Create(SkImageEncoder::kPNG_Type);
-	SkDynamicMemoryWStream* stream = new SkDynamicMemoryWStream();
-	enc->encodeStream(stream, *bmp, 80);
-	delete stream;
-	delete bmp;*/
 
 	osmand_log_print(LOG_INFO, "JNI_OnLoad completed");
 	return JNI_VERSION_1_6;
@@ -96,7 +63,7 @@ extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_NativeLibrary_initBinaryMa
 
 
 // Global object
-HMAP::hash_map<void*, RenderingRulesStorage*> cachedStorages;
+UNORDERED(map)<void*, RenderingRulesStorage*> cachedStorages;
 
 RenderingRulesStorage* getStorage(JNIEnv* env, jobject storage) {
 	if (cachedStorages.find(storage) == cachedStorages.end()) {
@@ -261,9 +228,6 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 	return resultObject;
 }
 #endif
-
-#endif
-
 
 void* bitmapData = NULL;
 size_t bitmapDataSize = 0;
@@ -494,7 +458,7 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_loadRout
 
 			jobjectArray pointTypes = ienv->NewObjectArray(result[i]->pointTypes.size(), jclIntArray, NULL);
 			for(jint k = 0; k < result[i]->pointTypes.size(); k++ ) {
-				std::vector<uint32> ts = result[i]->pointTypes[k];
+				std::vector<uint32_t> ts = result[i]->pointTypes[k];
 				if (ts.size() > 0) {
 					jintArray tos = ienv->NewIntArray(ts.size());
 					ienv->SetIntArrayRegion(tos, 0, ts.size(), (jint*) &ts[0]);

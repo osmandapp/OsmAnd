@@ -1,16 +1,11 @@
-#include <string>
-#include <vector>
+#include "common.h"
+
 #include <SkPath.h>
 #include <SkBitmap.h>
 #include <SkImageDecoder.h>
 #include <time.h>
-#include <math.h>
 
-
-#include "common.h"
 #include "osmand_log.h"
-
-
 
 TextDrawInfo::TextDrawInfo(std::string itext)
 	: text(itext)
@@ -121,7 +116,7 @@ SkBitmap* RenderingContext::getCachedBitmap(const std::string& bitmapResource) {
 }
 
 
-HMAP::hash_map<std::string, SkBitmap*> cachedBitmaps;
+UNORDERED(map)<std::string, SkBitmap*> cachedBitmaps;
 SkBitmap* getCachedBitmap(RenderingContext* rc, const std::string& bitmapResource)
 {
 
@@ -129,7 +124,7 @@ SkBitmap* getCachedBitmap(RenderingContext* rc, const std::string& bitmapResourc
 		return NULL;
 
 	// Try to find previously cached
-	HMAP::hash_map<std::string, SkBitmap*>::iterator itPreviouslyCachedBitmap = cachedBitmaps.find(bitmapResource);
+	UNORDERED(map)<std::string, SkBitmap*>::iterator itPreviouslyCachedBitmap = cachedBitmaps.find(bitmapResource);
 	if (itPreviouslyCachedBitmap != cachedBitmaps.end())
 		return itPreviouslyCachedBitmap->second;
 	
@@ -142,7 +137,7 @@ SkBitmap* getCachedBitmap(RenderingContext* rc, const std::string& bitmapResourc
 }
 
 void purgeCachedBitmaps() {
-	HMAP::hash_map<std::string, SkBitmap*>::iterator it = cachedBitmaps.begin();
+	UNORDERED(map)<std::string, SkBitmap*>::iterator it = cachedBitmaps.begin();
 	for (; it != cachedBitmaps.end(); it++) {
 		delete it->second;
 	}

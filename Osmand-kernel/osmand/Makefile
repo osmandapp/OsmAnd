@@ -6,14 +6,14 @@ LOCAL_PATH = .
 include Common.mk
 
 OSMAND_FLAGS = \
+	-std=c++0x \
 	-DGOOGLE_PROTOBUF_NO_RTTI \
 	-DSK_ALLOW_STATIC_GLOBAL_INITIALIZERS=0 \
 	-DSK_RELEASE \
-	-DGR_RELEASE=1 \
-	-DHASH_MAP_GNU
+	-DGR_RELEASE=1
 LIBNAME = $(LIBRARY_PREFIX)osmand
 LIBTYPE = $(DYNAMICLIB_EXT)
-LDLIBS += -lskia -lproto -lpthread -lft2 -lexpat -lpng -lz
+LDLIBS += -Wl,--whole-archive -lskia -Wl,--no-whole-archive -lproto -lpthread -lft2 -lexpat -lpng -lz 
 
 ifndef RT_NOT_SUPPORTED
 LDLIBS += -lrt
@@ -27,8 +27,6 @@ LOCAL_SRC_FILES += \
 else 
 LOCAL_SRC_FILES += \
 	src/java_wrap.cpp
-# Set library name
-
 
 ifeq ($(findstring CYGWIN,$(shell uname)),CYGWIN)
 	FIXED_JAVA_HOME := $(shell cygpath -u "$(JAVA_HOME)")
