@@ -316,6 +316,9 @@ public class BinaryInspector {
 					} else if (part instanceof PoiRegion) {
 						ous.writeTag(OsmandOdb.OsmAndStructure.POIINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 						map = "POI";
+					} else if (part instanceof RouteRegion) {
+						ous.writeTag(OsmandOdb.OsmAndStructure.ROUTINGINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+						map = "Routing";
 					} else {
 						throw new UnsupportedOperationException();
 					}
