@@ -153,16 +153,27 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			int dt = info[0].getFileName().indexOf('.');
 			descr.setText(info[0].getFileName().substring(0, dt));
 		}
-		final EditText tags = (EditText) view.findViewById(R.id.TagsText);
-		final EditText vis = (EditText) view.findViewById(R.id.VisibilityText);
+		final EditText tags = (EditText) view.findViewById(R.id.TagsText);		
+		final Spinner visibility = ((Spinner)findViewById(R.id.Visibility));
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.my_spinner_text, new String[] {
+				"Public",
+				"Identifiable",
+				"Trackable",
+				"Private"
+		});
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		visibility.setAdapter(adapter);
+		visibility.setSelection(0);
 		
 		bldr.setView(view);
-		bldr.setNegativeButton(R.string.default_buttons_yes, null);
+		bldr.setNegativeButton(R.string.default_buttons_no, null);
 		bldr.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				new UploadGPXFilesTask(descr.getText().toString(), tags.getText().toString(), vis.getText().toString()).execute(info);
+				new UploadGPXFilesTask(descr.getText().toString(), tags.getText().toString(), 
+				 (String) visibility.getItemAtPosition(visibility.getSelection())
+					).execute(info);
 			}
 		});
 		bldr.show();
