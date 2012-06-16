@@ -1,6 +1,7 @@
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 include $(LOCAL_PATH)/Common.mk
+LOCAL_CFLAGS += -fPIC
 
 # compile in ARM mode, since the glyph loader/renderer is a hotspot
 # when loading complex pages in the browser

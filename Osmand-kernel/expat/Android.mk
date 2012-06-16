@@ -2,6 +2,7 @@ LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
 include $(LOCAL_PATH)/Common.mk
+LOCAL_CFLAGS += -fPIC
 
 ifneq ($(OSMAND_BUILDING_NEON_LIBRARY),true)
 LOCAL_MODULE := expat_static

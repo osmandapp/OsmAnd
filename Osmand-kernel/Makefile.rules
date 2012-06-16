@@ -32,8 +32,8 @@ OBJECTS = $(addprefix obj-$(TARGET)-$(ARCH)/,$(OBJECTS_NAMES))
 .PRECIOUS: build-release/$(LIBNAME).$(LIBTYPE) build-debug/$(LIBNAME).$(LIBTYPE) $(addprefix build-release/,$(OBJECTS)) $(addprefix build-debug/,$(OBJECTS))
 
 # Route build targets properly
-installr: release $(OUTPUT_DIR_PREFIX)-release/$(LIBNAME).$(LIBTYPE)
-installd: debug $(OUTPUT_DIR_PREFIX)-debug/$(LIBNAME).$(LIBTYPE)
+installr: $(OUTPUT_DIR_PREFIX)-release/$(LIBNAME).$(LIBTYPE)
+installd: $(OUTPUT_DIR_PREFIX)-debug/$(LIBNAME).$(LIBTYPE)
 release: $(BUILD_DIR_PREFIX)-release/$(LIBNAME).$(LIBTYPE)
 debug: $(BUILD_DIR_PREFIX)-debug/$(LIBNAME).$(LIBTYPE)
 
@@ -53,7 +53,8 @@ $(OUTPUT_DIR_PREFIX)-%/$(LIBNAME).$(DYNAMICLIB_EXT): $(BUILD_DIR_PREFIX)-%/$(LIB
 	@mkdir -p $(OUTPUT_DIR_PREFIX)-$*
 	cp $(BUILD_DIR_PREFIX)-$*/$(LIBNAME).$(LIBTYPE) $(OUTPUT_DIR_PREFIX)-$*/$(LIBNAME).$(LIBTYPE)
 	
-$(OUTPUT_DIR_PREFIX)-%/$(LIBNAME).$(STATICLIB_EXT):
+$(OUTPUT_DIR_PREFIX)-%/$(LIBNAME).$(STATICLIB_EXT): $(BUILD_DIR_PREFIX)-%/$(LIBNAME).$(LIBTYPE)
+	@echo $@ does not need install
 
 # Builds source files using CC compiler
 build-release/obj-$(TARGET)-$(ARCH)/%.cc.o : % $(LOCAL_C_INCLUDES)
