@@ -12,8 +12,8 @@ CFLAGS_debug := -g -O0
 CXXFLAGS_release := -O2
 CFLAGS_release := -O2
 
-# Get the build type
-PREBUILT_DIR_PREFIX = ../lib/$(TARGET)-$(ARCH)
+OUTPUT_DIR_PREFIX = ../lib/$(TARGET)-$(ARCH)
+BUILD_DIR_PREFIX = ../build/$(TARGET)-$(ARCH)
 
 OBJECTS_NAMES = $(foreach sourceFilesExt,$(CC_SOURCE_FILES_EXTS), \
 	$(patsubst %.$(sourceFilesExt),%.$(sourceFilesExt).cc.o,$(filter %.$(sourceFilesExt),$(LOCAL_SRC_FILES))) \
@@ -22,20 +22,20 @@ OBJECTS_NAMES = $(foreach sourceFilesExt,$(CC_SOURCE_FILES_EXTS), \
 )
 OBJECTS = $(addprefix obj-$(TARGET)-$(ARCH)/,$(OBJECTS_NAMES))
 
+# Declare phony targets
+.PHONY: release debug clean installr installd install-release-$(DYNAMICLIB_EXT) install-debug-$(DYNAMICLIB_EXT) install-release-$(STATICLIB_EXT) install-debug-$(STATICLIB_EXT)
+
 # Default target
 .DEFAULT: installr
-
-# Declare phony targets
-.PHONY: release debug clean installr installd
 
 # Precious targets
 .PRECIOUS: build-release/$(LIBNAME).$(LIBTYPE) build-debug/$(LIBNAME).$(LIBTYPE) $(addprefix build-release/,$(OBJECTS)) $(addprefix build-debug/,$(OBJECTS))
 
 # Route build targets properly
-installr: install-release
-installd: install-debug
-release: build-release/$(TARGET)-$(ARCH)/$(LIBNAME).$(LIBTYPE)
-debug: build-debug/$(TARGET)-$(ARCH)/$(LIBNAME).$(LIBTYPE)
+installr: release $(OUTPUT_DIR_PREFIX)-release/$(LIBNAME).$(LIBTYPE)
+installd: debug $(OUTPUT_DIR_PREFIX)-debug/$(LIBNAME).$(LIBTYPE)
+release: $(BUILD_DIR_PREFIX)-release/$(LIBNAME).$(LIBTYPE)
+debug: $(BUILD_DIR_PREFIX)-debug/$(LIBNAME).$(LIBTYPE)
 
 # Clean removes all objects
 clean:
@@ -43,12 +43,17 @@ clean:
 	$(RM) -r build-debug/obj-$(TARGET)-$(ARCH)/
 	$(RM) -r build-release/$(TARGET)-$(ARCH)
 	$(RM) -r build-debug/$(TARGET)-$(ARCH)
-	$(RM) $(PREBUILT_DIR_PREFIX)/$(LIBNAME).$(LIBTYPE)
+	$(RM) -r $(BUILD_DIR_PREFIX)-release
+	$(RM) -r $(BUILD_DIR_PREFIX)-debug
+	$(RM) $(OUTPUT_DIR_PREFIX)-release/$(LIBNAME).$(LIBTYPE)
+	$(RM) $(OUTPUT_DIR_PREFIX)-debug/$(LIBNAME).$(LIBTYPE)
 
-# This target copies final output file to prebuilt folder
-install-%: %
-	@mkdir -p $(PREBUILT_DIR_PREFIX)-$*
-	cp build-$*/$(TARGET)-$(ARCH)/$(LIBNAME).$(LIBTYPE) $(PREBUILT_DIR_PREFIX)-$*/$(LIBNAME).$(LIBTYPE)
+# This target copies final output file to output directory
+$(OUTPUT_DIR_PREFIX)-%/$(LIBNAME).$(DYNAMICLIB_EXT): $(BUILD_DIR_PREFIX)-%/$(LIBNAME).$(LIBTYPE)
+	@mkdir -p $(OUTPUT_DIR_PREFIX)-$*
+	cp $(BUILD_DIR_PREFIX)-$*/$(LIBNAME).$(LIBTYPE) $(OUTPUT_DIR_PREFIX)-$*/$(LIBNAME).$(LIBTYPE)
+	
+$(OUTPUT_DIR_PREFIX)-%/$(LIBNAME).$(STATICLIB_EXT):
 
 # Builds source files using CC compiler
 build-release/obj-$(TARGET)-$(ARCH)/%.cc.o : % $(LOCAL_C_INCLUDES)
@@ -76,4 +81,9 @@ build-%/$(TARGET)-$(ARCH)/$(LIBNAME).$(STATICLIB_EXT): $$(addprefix build-%/,$(O
 .SECONDEXPANSION:
 build-%/$(TARGET)-$(ARCH)/$(LIBNAME).$(DYNAMICLIB_EXT): $$(addprefix build-%/,$(OBJECTS))
 	@mkdir -p `dirname $@`
-	$(CXX) -o $@ $(addprefix build-$*/,$(OBJECTS)) $(LDFLAGS) -L$(PREBUILT_DIR_PREFIX)-$* $(LDLIBS)
+	$(CXX) -o $@ $(addprefix build-$*/,$(OBJECTS)) $(LDFLAGS) -L$(BUILD_DIR_PREFIX)-$* $(LDLIBS)
+	
+# This is for copying binary files to build directory
+$(BUILD_DIR_PREFIX)-%/$(LIBNAME).$(LIBTYPE): build-%/$(TARGET)-$(ARCH)/$(LIBNAME).$(LIBTYPE)
+	@mkdir -p $(BUILD_DIR_PREFIX)-$*
+	cp build-$*/$(TARGET)-$(ARCH)/$(LIBNAME).$(LIBTYPE) $(BUILD_DIR_PREFIX)-$*/$(LIBNAME).$(LIBTYPE)
