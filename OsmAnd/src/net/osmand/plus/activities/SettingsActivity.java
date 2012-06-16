@@ -400,7 +400,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					ListPreference lp = new ListPreference(this);
 					lp.setOnPreferenceChangeListener(this);
 					lp.setKey(custom.getId());
-					lp.setTitle(getStringPropertyName(custom.getId(), p.getName()));
+					lp.setTitle(getStringPropertyName(p.getAttrName(), p.getName()));
 					lp.setSummary(getStringPropertyDescription(p.getAttrName(), p.getDescription()));
 					cat.addPreference(lp);
 
