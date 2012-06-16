@@ -13,6 +13,8 @@
 	<attribute name="useDynamicRoadPrioritising" value="true" />
 
 	<!-- 1.3 Relaxing strategy -->
+	<!-- If the furthest routing branch passed distance 3 times more than small branches, small will be relaxed-->
+	<!-- Coefficient is configurable -->
 	<attribute name="useRelaxingStrategy" value="true" />
 	<attribute name="iterationsToRelaxRoutes" value="100" />
 	<attribute name="relaxNodesIfStartDistSmallCoeff" value="3.0"/>
@@ -22,6 +24,13 @@
 	<attribute name="planRoadDirection" value="0" />
 
 
+	
+	<!-- highway value="motorway" speed="110" priority="1.5" dynamicPriority="1.4" -->
+        <!-- Highway defines acceptable route for routingProfile, speed  in km/h (if it is not specified on level road)-->
+        <!-- priority is multiplicator for already passed road (consider it is an accelerator of the road) -->
+        <!-- dynamicPriority is multiplicator for future roads used by heuristic useDynamicRoadPrioritising-->
+        
+        <!-- obstacle tag="highway" value="traffic_signals" penalty="35", penalty measured in seconds -->
 	<routingProfile name="car" baseProfile="car" restrictionsAware="true" minDefaultSpeed="45.0" maxDefaultSpeed="110.0" 
 			leftTurn="20.0" rightTurn="10.0" followSpeedLimitations="true" onewayAware="true">
 		<highway value="motorway" speed="110" priority="1.5" dynamicPriority="1.4"/>
