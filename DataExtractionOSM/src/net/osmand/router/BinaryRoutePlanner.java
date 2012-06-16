@@ -221,6 +221,7 @@ public class BinaryRoutePlanner {
 		}
 		while (!graphSegments.isEmpty()) {
 			RouteSegment segment = graphSegments.poll();
+			System.out.println(segment.getRoad().getId() + " " + segment.segmentStart);
 			ctx.visitedSegments++;
 			// for debug purposes
 			if (ctx.visitor != null) {
@@ -747,8 +748,8 @@ public class BinaryRoutePlanner {
 					// put additional information to recover whole route after
 					next.parentRoute = segment;
 					next.parentSegmentEnd = segmentEnd;
+					graphSegments.add(next);
 				}
-				graphSegments.add(next);
 				if (ctx.visitor != null) {
 					ctx.visitor.visitSegment(next, false);
 				}

@@ -36,6 +36,7 @@ public class MapRoutingTypes {
 		TAGS_TO_SAVE.add("toll");
 		TAGS_TO_SAVE.add("tracktype");
 		TAGS_TO_SAVE.add("railway");
+		TAGS_TO_SAVE.add("construction");
 	}
 	
 	private Map<String, MapRouteType> types = new LinkedHashMap<String, MapRoutingTypes.MapRouteType>();

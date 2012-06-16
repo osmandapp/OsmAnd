@@ -44,7 +44,7 @@
 		<highway value="primary_link" speed="45" priority="1.1" dynamicPriority="1"/>
 		
 		<!-- generally linking smaller towns and villages -->
-		<highway value="secondary" speed="50" priority="1.1" dynamicPriority="1.1"/>
+		<highway value="secondary" speed="60" priority="1.1" dynamicPriority="1.1"/>
 		<highway value="secondary_link" speed="40" priority="1" dynamicPriority="1"/>
 		
 		<!-- important urban roads -->
