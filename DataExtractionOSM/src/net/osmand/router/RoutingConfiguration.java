@@ -166,6 +166,10 @@ public class RoutingConfiguration {
 						String key = attributes.getValue("tag") + "$" + attributes.getValue("value");
 						currentRouter.obstacles.put(key, parseSilentDouble(attributes.getValue("penalty"), 
 								0));
+					} else if("avoid".equals(name)) {
+						String key = attributes.getValue("tag") + "$" + attributes.getValue("value");
+						currentRouter.avoidElements.put(key, parseSilentDouble(attributes.getValue("coefficient"), 
+								0));
 					}
 				}
 

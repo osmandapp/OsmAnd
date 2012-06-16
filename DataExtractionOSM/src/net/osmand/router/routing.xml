@@ -48,27 +48,30 @@
 		<highway value="secondary_link" speed="40" priority="1" dynamicPriority="1"/>
 		
 		<!-- important urban roads -->
-		<highway value="tertiary" speed="35" priority="0.85" dynamicPriority="0.8"/>
-		<highway value="tertiary_link" speed="30" priority="0.85" dynamicPriority="0.8"/>
+		<highway value="tertiary" speed="45" priority="0.85" dynamicPriority="0.8"/>
+		<highway value="tertiary_link" speed="35" priority="0.85" dynamicPriority="0.8"/>
 		<!-- lowest form of grid network, usually 90% of urban roads -->
-		<highway value="unclassified" speed="30" priority="0.7" dynamicPriority="0.7"/>
+		<highway value="unclassified" speed="35" priority="0.7" dynamicPriority="0.7"/>
 		<!-- road = no type, no review and may be not accurate -->
-		<highway value="road" speed="30" priority="0.4" dynamicPriority="0.7"/>
+		<highway value="road" speed="35" priority="0.4" dynamicPriority="0.7"/>
 		<!-- primarily for access to properties, small roads with 1/2 intersections -->
-		<highway value="residential" speed="30" priority="0.4" dynamicPriority="0.7"/>
+		<highway value="residential" speed="35" priority="0.4" dynamicPriority="0.7"/>
 		<!-- parking + private roads -->
-		<highway value="service" speed="20" priority="0.5" dynamicPriority="0.7"/>
+		<highway value="service" speed="30" priority="0.5" dynamicPriority="0.7"/>
 		<!-- very bad roads -->
 		<highway value="track" speed="15" priority="0.3" dynamicPriority="0.5"/>
 		<!-- may not be usable by cars!! -->
 		<highway value="path" speed="10" priority="0.2" dynamicPriority="0.5"/>
 		<!-- too small for cars usually -->
-		<highway value="living_street" speed="10" priority="0.1" dynamicPriority="0.5"/>
+		<highway value="living_street" speed="25" priority="0.5" dynamicPriority="0.5"/>
 		<!-- car are able to enter in highway=pedestrian with restrictions -->
 
 		<obstacle tag="highway" value="traffic_signals" penalty="35"/>
 		<obstacle tag="railway" value="crossing" penalty="25"/>
 		<obstacle tag="railway" value="level_crossing" penalty="25"/>
+		
+		<!-- in future can be multiplicator can be added (like coefficient="0.1") -->
+		<avoid tag="access" value="no"/>
 	</routingProfile>
 
 

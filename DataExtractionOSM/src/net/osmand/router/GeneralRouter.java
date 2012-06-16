@@ -12,6 +12,7 @@ public class GeneralRouter extends VehicleRouter {
 	Map<String, Double> highwaySpeed = new LinkedHashMap<String, Double>();
 	Map<String, Double> highwayPriorities = new LinkedHashMap<String, Double>();
 	Map<String, Double> highwayFuturePriorities = new LinkedHashMap<String, Double>();
+	Map<String, Double> avoidElements = new LinkedHashMap<String, Double>();
 	Map<String, Double> obstacles = new LinkedHashMap<String, Double>();
 	boolean followSpeedLimitations = true;
 	boolean restrictionsAware = true;
@@ -30,7 +31,19 @@ public class GeneralRouter extends VehicleRouter {
 
 	@Override
 	public boolean acceptLine(RouteDataObject way) {
-		return highwaySpeed.containsKey(way.getHighway());
+		if(!highwaySpeed.containsKey(way.getHighway())) {
+			return false;
+		}
+		int[] s = way.getTypes();
+		
+		for(int i=0; i<s.length; i++) {
+			RouteTypeRule r = way.region.quickGetEncodingRule(s[i]);
+			String k = r.getTag() + "$" + r.getValue();
+			if(avoidElements.containsKey(k)) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	@Override
