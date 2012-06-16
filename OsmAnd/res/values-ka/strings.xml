@@ -178,7 +178,7 @@
   <string name="routing_settings">- ნავიგაცია</string>
   <string name="routing_settings_descr">მიუთითეთ ნავიგაციის პარამეტრები</string>
   <string name="global_settings">გლობალური პარამეტრები</string>
-  <string name="index_settings">გათიშული მონაცემები (გადმოწერა)</string>
+  <string name="index_settings">გათიშული მონაცემები\n(გადმოწერა)</string>
   <string name="general_settings">მთავარი პარამეტრები</string>
   <string name="general_settings_descr">მთავარი პარამეტრების გამართვა</string>
   <string name="global_app_settings">აპლიკაციის მთავარი პარამეტრები</string>
