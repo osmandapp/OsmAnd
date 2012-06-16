@@ -9,15 +9,15 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-  <string name="offline_navigation_not_available">OsmAnd offline navigation is temporarily not available.</string>
-  <string name="left_side_navigation">Left-Hand Driving</string>
-  <string name="left_side_navigation_descr">Select for countries with left-hand traffic</string>
-  <string name="download_link_and_local_description">Click here to download or update offline data. \nClick any existing item to see more details, press and hold to deactivate or delete. Current data on device (%1$s free):</string>
-  <string name="unknown_from_location">Starting location is not yet determined</string>
-  <string name="unknown_location">Position not yet known</string>
-  <string name="context_menu_item_directions">Directions to here</string>
-  <string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
-  <string name="confirm_interrupt_download">Do you want to interrupt file downloading?</string>
+  <string name="offline_navigation_not_available">Offline nabigazioa zerbitzuz kanpo dago orain.</string>
+  <string name="left_side_navigation">Trafikoa ezkerraldetik</string>
+  <string name="left_side_navigation_descr">Trafikoa ezkerraldetik duten herrialdeentzako hautatu</string>
+  <string name="download_link_and_local_description">Klikatu hemen offlineko datuak deskargatzeko edo eguneratzeko.\nKlikatu edozein elementu xehetasunak ikusteko, klikatu eta mantendu desaktibatzeko edo ezabatzeko. Oraingo datuak (%1$s libre):</string>
+  <string name="unknown_from_location">Hasierako kokapena ez da zehaztu oraindik</string>
+  <string name="unknown_location">Kokapen ezezaguna oraindik</string>
+  <string name="context_menu_item_directions">Jarraibideak hona</string>
+  <string name="modify_transparency">Gardentasuna aldatu (0 - gardena, 255 - opaku)</string>
+  <string name="confirm_interrupt_download">Deskarga bertan behera utzi nahi duzu?</string>
   <string name="first_time_msg">To use the major features of this application, you need some regional offline data, which you can download (use Settings, Offline Data). Afterwards, you will be able to search by address, look up POIs and find public transportation.</string>
   <string name="basemap_was_selected_to_download">Basemap is required for proper application functioning and was selected to download.</string>
   <string name="select_index_file_to_download">Nothing was found. If you can\'t find your region, you can make it yourself (see http://osmand.net).</string>
@@ -132,7 +132,7 @@
   <string name="local_openstreetmap_uploading_poi">Uploading POI…</string>
   <string name="local_openstreetmap_poi_were_uploaded">{0} POI were uploaded</string>
   <string name="local_openstreetmap_uploadall">Upload all POI</string>
-  <string name="local_openstreetmap_items">" "</string>
+  <string name="local_openstreetmap_items">""</string>
   <string name="local_openstreetmap_show_poi">Show POI on map</string>
   <string name="local_openstreetmap_upload">Upload modification to OSM</string>
   <string name="local_openstreetmap_delete">Delete POI modification</string>
@@ -826,12 +826,12 @@
   <string name="edit_filter_delete_message">Filter {0} has been deleted</string>
   <string name="edit_filter_create_message">Filter {0} has been created</string>
   <string name="default_buttons_selectall">Select All</string>
-  <string name="local_index_routing_data">Routing data</string>
-  <string name="navigate_point_format">Format :</string>
-  <string name="poi_search_desc">POI - Point Of interest</string>
-  <string name="address_search_desc">Address search</string>
-  <string name="navpoint_search_desc">Navigate point</string>
-  <string name="transport_search_desc">Transport search</string>
-  <string name="favourites_search_desc">Favourites search</string>
-  <string name="history_search_desc">Search history</string>
+  <string name="local_index_routing_data">Bideratze datuak</string>
+  <string name="navigate_point_format">Formatua :</string>
+  <string name="poi_search_desc">PI (Puntu Interesgarriak) bilatu</string>
+  <string name="address_search_desc">Helbide bilaketa</string>
+  <string name="navpoint_search_desc">Koordenatuak</string>
+  <string name="transport_search_desc">Garraio bilaketa</string>
+  <string name="favourites_search_desc">Ohikoak bilatu</string>
+  <string name="history_search_desc">Bilaketa historikoan</string>
 </resources>

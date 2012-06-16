@@ -21,8 +21,8 @@
   <TableRow android:layout_width="fill_parent">
   <TextView android:id="@+id/TextView" android:layout_marginLeft="5dp"
   			android:layout_height="wrap_content" android:text="@string/gpx_visibility_txt"></TextView>
-  <EditText android:id="@+id/VisibilityText" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
-  			android:layout_height="wrap_content"  android:text="private" android:layout_width="fill_parent"></EditText>
+  <Spinner android:id="@+id/Visibility" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
+  			android:layout_height="wrap_content"  android:layout_width="fill_parent"></Spinner>
   </TableRow>
 
 
