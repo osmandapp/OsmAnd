@@ -72,6 +72,8 @@
 		
 		<!-- in future can be multiplicator can be added (like coefficient="0.1") -->
 		<avoid tag="access" value="no"/>
+		<avoid tag="motorcycle" value="no"/>
+		<avoid tag="motorcar" value="no"/>
 	</routingProfile>
 
 
