@@ -57,7 +57,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import sun.awt.image.FileImageSource;
 
 
 public class MapRouterLayer implements MapPanelLayer {
@@ -555,12 +554,12 @@ public class MapRouterLayer implements MapPanelLayer {
 				}
 				String m = DataExtractionSettings.getSettings().getRouteMode();
 				BinaryRoutePlanner router = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(), rs);
-				RoutingConfiguration config = builder.initConfig(m, true);
+				RoutingConfiguration config = builder.build(m, true);
 				RoutingContext ctx = new RoutingContext(config);
 				log.info("Use " + config.routerName + "mode for routing");
 				
-				int dir = DataExtractionSettings.getSettings().getRouteDirection();
-				ctx.setPlanRoadDirection(dir);
+//				int dir = DataExtractionSettings.getSettings().getRouteDirection();
+//				ctx.setPlanRoadDirection(dir);
 				
 				// find closest way
 				RouteSegment st = router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);

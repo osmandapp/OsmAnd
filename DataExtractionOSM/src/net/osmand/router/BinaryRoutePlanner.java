@@ -164,7 +164,6 @@ public class BinaryRoutePlanner {
 	// TODO write unit tests
 	// TODO add information about turns (?) - probably calculate additional information to show on map
 	// TODO fix roundabout (?) - probably calculate additional information to show on map
-	// TODO access
 	// TODO fastest/shortest way
 	/**
 	 * Calculate route between start.segmentEnd and end.segmentStart (using A* algorithm)
@@ -175,6 +174,17 @@ public class BinaryRoutePlanner {
 		ctx.timeToLoad = 0;
 		ctx.visitedSegments = 0;
 		ctx.timeToCalculate = System.nanoTime();
+		ctx.firstRoadId = (start.getRoad().id << 8) + start.getSegmentStart();
+		if(ctx.config.initialDirection != null) {
+			double plusDir = start.directionRoute(start.segmentStart, true);
+			double diff	 = plusDir - ctx.config.initialDirection;
+			if(Math.abs(MapUtils.alignAngleDifference(diff)) <= Math.PI / 3) {
+				ctx.firstRoadDirection = 1;
+			} else if(Math.abs(MapUtils.alignAngleDifference(diff - Math.PI)) <= Math.PI / 3) {
+				ctx.firstRoadDirection = -1;
+			}
+			
+		}
 
 		// Initializing priority queue to visit way segments 
 		Comparator<RouteSegment> segmentsComparator = new Comparator<RouteSegment>(){
@@ -221,7 +231,6 @@ public class BinaryRoutePlanner {
 		}
 		while (!graphSegments.isEmpty()) {
 			RouteSegment segment = graphSegments.poll();
-			System.out.println(segment.getRoad().getId() + " " + segment.segmentStart);
 			ctx.visitedSegments++;
 			// for debug purposes
 			if (ctx.visitor != null) {
@@ -529,7 +538,10 @@ public class BinaryRoutePlanner {
 		int oneway = ctx.getRouter().isOneWay(road);
 		boolean minusAllowed;
 		boolean plusAllowed; 
-		if (!reverseWaySearch) {
+		if(ctx.firstRoadId == nt) {
+			minusAllowed = ctx.firstRoadDirection <= 0;
+			plusAllowed = ctx.firstRoadDirection >= 0;
+		} else if (!reverseWaySearch) {
 			minusAllowed = oneway <= 0;
 			plusAllowed = oneway >= 0;
 		} else {
@@ -900,6 +912,31 @@ public class BinaryRoutePlanner {
 		
 		public String getTestName(){
 			return String.format("s%.2f e%.2f", ((float)distanceFromStart), ((float)distanceToEnd));
+		}
+		
+		public double directionRoute(int segmentEnd, boolean plus) {
+			int x = road.getPoint31XTile(segmentEnd);
+			int y = road.getPoint31YTile(segmentEnd);
+			int nx = segmentEnd;
+			int px = x;
+			int py = y;
+			do {
+				if (plus) {
+					nx++;
+					if (nx >= road.getPointsLength()) {
+						break;
+					}
+				} else {
+					nx--;
+					if (nx < 0) {
+						break;
+					}
+				}
+				px = road.getPoint31XTile(nx);
+				py = road.getPoint31YTile(nx);
+			} while (Math.abs(px - x) + Math.abs(py - y) < 100);
+
+			return Math.atan2( px - x, py - y);
 		}
 	}
 	

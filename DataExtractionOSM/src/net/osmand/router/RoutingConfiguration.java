@@ -40,6 +40,9 @@ public class RoutingConfiguration {
 	// 1.5 Router specific coefficients and restrictions
 	public VehicleRouter router = new GeneralRouter();
 	public String routerName = "";
+	
+	// 1.6 Used to calculate route in movement
+	public Double initialDirection;
 
 	public static class Builder {
 		// Design time storage
@@ -47,11 +50,15 @@ public class RoutingConfiguration {
 		private Map<String, VehicleRouter> routers = new LinkedHashMap<String, VehicleRouter>();
 		private Map<String, String> attributes = new LinkedHashMap<String, String>();
 
-		public RoutingConfiguration initConfig(String router, boolean useShortestWay) {
+		public RoutingConfiguration build(String router, boolean useShortestWay) {
+			return build(router, useShortestWay, null);
+		}
+		public RoutingConfiguration build(String router, boolean useShortestWay, Double direction) {
 			if (!routers.containsKey(router)) {
 				router = defaultRouter;
 			}
 			RoutingConfiguration i = new RoutingConfiguration();
+			i.initialDirection = direction;
 			i.heuristicCoefficient = parseSilentDouble(getAttribute(router, "heuristicCoefficient"), i.heuristicCoefficient);
 			i.ZOOM_TO_LOAD_TILES = parseSilentInt(getAttribute(router, "zoomToLoadTiles"), i.ZOOM_TO_LOAD_TILES);
 			i.ITERATIONS_TO_RUN_GC = parseSilentInt(getAttribute(router, "iterationsToRunGC"), i.ITERATIONS_TO_RUN_GC);

@@ -663,7 +663,7 @@ public class RouteProvider {
 		} else {
 			p = GeneralRouterProfile.CAR;
 		}
-		RoutingContext ctx = new RoutingContext(config.initConfig(p.name().toLowerCase(), !fast));
+		RoutingContext ctx = new RoutingContext(config.build(p.name().toLowerCase(), !fast, start.hasBearing() ?  start.getBearing() / 180d * Math.PI : null));
 		RouteSegment st= router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);
 		if (st == null) {
 			return new RouteCalculationResult("Starting point too far from nearest road.");

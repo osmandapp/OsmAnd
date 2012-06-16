@@ -79,7 +79,7 @@ public class RouterTestsSuite {
 	private static void testRoute(Element testCase, BinaryMapIndexReader[] regions) throws IOException {
 		BinaryRoutePlanner planner = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(), regions);
 		String vehicle = testCase.getAttribute("vehicle");
-		RoutingContext ctx = new RoutingContext(RoutingConfiguration.getDefault().initConfig(vehicle, true));
+		RoutingContext ctx = new RoutingContext(RoutingConfiguration.getDefault().build(vehicle, true));
 		String testDescription = testCase.getAttribute("description");
 		String skip = testCase.getAttribute("skip_comment");
 		if (skip != null && skip.length() > 0) {

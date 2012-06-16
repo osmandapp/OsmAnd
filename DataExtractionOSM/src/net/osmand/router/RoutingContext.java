@@ -19,9 +19,13 @@ import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
 public class RoutingContext {
 	
 	public final RoutingConfiguration config;
+	// 1. Initial variables
 	private int garbageCollectorIteration = 0;
 	private int relaxingIteration = 0;
+	public long firstRoadId = 0;
+	public int firstRoadDirection = 0;;
 	
+
 	// 2. Routing memory cache (big objects)
 	TIntObjectHashMap<RoutingTile> tiles = new TIntObjectHashMap<RoutingContext.RoutingTile>();
 
