@@ -50,6 +50,14 @@ public class BinaryMapRouteReaderAdapter {
 			analyze();
 		}
 		
+		public String getTag() {
+			return t;
+		}
+		
+		public String getValue(){
+			return v;
+		}
+		
 		public boolean roundabout(){
 			return type == ROUNDABOUT;
 		}

@@ -249,7 +249,7 @@ public class BinaryRoutePlanner {
 				}
 			} else {
 				// different strategy : use onedirectional graph
-				inverse = !ctx.getPlanRoadDirection().booleanValue();
+				inverse = ctx.getPlanRoadDirection() < 0;
 			}
 			if (inverse) {
 				graphSegments = graphReverseSegments;
@@ -258,7 +258,7 @@ public class BinaryRoutePlanner {
 			}
 
 			if(ctx.runTilesGC()) {
-				unloadUnusedTiles(ctx, ctx.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY);
+				unloadUnusedTiles(ctx, ctx.config.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY);
 			}
 			if(ctx.runRelaxingStrategy()) {
 				relaxNotNeededSegments(ctx, graphDirectSegments, true);
@@ -327,7 +327,7 @@ public class BinaryRoutePlanner {
 				mine = s.distanceToEnd;
 			}
 		}
-		double d = mine * 3;
+		double d = mine * ctx.config.ITERATIONS_TO_RELAX_NODES;
 		iterator = graphSegments.iterator();
 		while (iterator.hasNext()) {
 			RouteSegment s = iterator.next();
@@ -623,6 +623,9 @@ public class BinaryRoutePlanner {
 		if (!reverseWay && road.getRestrictionLength() > 0) {
 			return false;
 		}
+		if(!ctx.getRouter().restrictionsAwayre()) {
+			return false;
+		}
 		while (next != null) {
 			int type = -1;
 			if (!reverseWay) {
@@ -831,9 +834,9 @@ public class BinaryRoutePlanner {
 			double startLon = MapUtils.get31LongitudeX(start.road.getPoint31XTile(start.segmentStart));
 			double endLat = MapUtils.get31LatitudeY(end.road.getPoint31YTile(end.segmentStart));
 			double endLon = MapUtils.get31LongitudeX(end.road.getPoint31XTile(end.segmentStart));
-			println(MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"\" \n" +
+			println(MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"{5}\" \n" +
 					"    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" complete_time=\"{4}\">", 
-					startLat+"", startLon+"", endLat+"", endLon+"", completeTime+""));
+					startLat+"", startLon+"", endLat+"", endLon+"", completeTime+"", ctx.config.routerName));
 			for (RouteSegmentResult res : result) {
 				String name = "Unknown";//res.object.getName();
 				String ref = "";//res.object.getNameByType(res.object.getMapIndex().refEncodingType);

@@ -33,12 +33,11 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 	private JTextField directionPlanRoute;
 	private JTextField routingMode;
 	private JTextField lineSmoothness;
-	private JTextField cityAdminLevel;
-	private JTextField osrmServerAddress;
 	private JTextField renderingTypesFile;
 	private JTextField nativeLibFile;
 	private JTextField nativeFilesDirectory;
 	private JTextField renderingStyleFile;
+	private JTextField routingConfigFile;
 
 	private JCheckBox useInternet;
 	private JCheckBox animateRouting;
@@ -163,7 +162,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
         constr.gridy = gridY++;
         l.setConstraints(routingMode, constr);
 		
-		label = new JLabel("Direction to plan route (0 - both, 1 - forward, -1 - backward) : ");
+		label = new JLabel("Direction to plan route (1/0/-1 forw/both/back) :");
         panel.add(label);
         constr = new GridBagConstraints();
         constr.ipadx = 5;
@@ -183,9 +182,8 @@ public class OsmExtractionPreferencesDialog extends JDialog {
         constr.gridx = 1;
         constr.gridy = gridY++;
         l.setConstraints(directionPlanRoute, constr);
-		
-		
-		label = new JLabel("City admin level : ");
+        
+        label = new JLabel("Routing config file (path : ");
         panel.add(label);
         constr = new GridBagConstraints();
         constr.ipadx = 5;
@@ -194,40 +192,19 @@ public class OsmExtractionPreferencesDialog extends JDialog {
         constr.anchor = GridBagConstraints.WEST;
         l.setConstraints(label, constr);
         
-        cityAdminLevel = new JTextField();
-        
-        cityAdminLevel.setText(DataExtractionSettings.getSettings().getCityAdminLevel());
-        panel.add(cityAdminLevel);
+        routingConfigFile = new JTextField();
+        routingConfigFile.setText(DataExtractionSettings.getSettings().getRoutingXmlPath());
+        panel.add(routingConfigFile);
         constr = new GridBagConstraints();
         constr.weightx = 1;
         constr.fill = GridBagConstraints.HORIZONTAL;
         constr.ipadx = 5;
         constr.gridx = 1;
         constr.gridy = gridY++;
-        l.setConstraints(cityAdminLevel, constr);
+        l.setConstraints(routingConfigFile, constr);
+		
         
-        label = new JLabel(Messages.getString("OsmExtractionPreferencesDialog.OSRM.SERVER.ADDRESS"));
-        panel.add(label);
-        constr = new GridBagConstraints();
-        constr.ipadx = 5;
-        constr.gridx = 0;
-        constr.gridy = gridY;
-        constr.anchor = GridBagConstraints.WEST;
-        l.setConstraints(label, constr);
-        
-        osrmServerAddress = new JTextField();
-        
-        osrmServerAddress.setText(DataExtractionSettings.getSettings().getOsrmServerAddress());
-        panel.add(osrmServerAddress);
-        constr = new GridBagConstraints();
-        constr.weightx = 1;
-        constr.fill = GridBagConstraints.HORIZONTAL;
-        constr.ipadx = 5;
-        constr.gridx = 1;
-        constr.gridy = gridY++;
-        l.setConstraints(osrmServerAddress, constr);
-        
-        label = new JLabel("Rendering style file : ");
+        label = new JLabel("Rendering style file (path) : ");
         panel.add(label);
         constr = new GridBagConstraints();
         constr.ipadx = 5;
@@ -266,16 +243,6 @@ public class OsmExtractionPreferencesDialog extends JDialog {
         constr.gridx = 1;
         constr.gridy = gridY++;
         l.setConstraints(nativeLibFile, constr);
-		
-//		supressWarning = new JCheckBox();
-//		supressWarning.setText(Messages.getString("OsmExtractionPreferencesDialog.DUPLICATED.ID")); //$NON-NLS-1$
-//		supressWarning.setSelected(DataExtractionSettings.getSettings().isSupressWarningsForDuplicatedId());
-//		panel.add(supressWarning);
-//		
-//		loadWholeOsmInfo = new JCheckBox();
-//		loadWholeOsmInfo.setText(Messages.getString("OsmExtractionPreferencesDialog.LOAD.WHOLE.OSM")); //$NON-NLS-1$
-//		loadWholeOsmInfo.setSelected(DataExtractionSettings.getSettings().getLoadEntityInfo());
-//		panel.add(loadWholeOsmInfo);
 		
 		panel.setMaximumSize(new Dimension(Short.MAX_VALUE, panel.getPreferredSize().height));
 		
@@ -437,9 +404,6 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		if(!settings.getMapRenderingTypesFile().equals(renderingTypesFile.getText())){
 			settings.setMapRenderingTypesFile(renderingTypesFile.getText());
 		}
-		if(!settings.getCityAdminLevel().equals(cityAdminLevel.getText())){
-            settings.setCityAdminLevel(cityAdminLevel.getText());
-        }
 		int directionRoute = 0;
 		try {
 			directionRoute = Integer.parseInt(directionPlanRoute.getText());
@@ -448,9 +412,6 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		if(directionRoute != settings.getRouteDirection()){
 			settings.setRouteDirection(directionRoute);
         }
-		if(!settings.getOsrmServerAddress().equals(osrmServerAddress.getText())){
-            settings.setOsrmServerAddress(osrmServerAddress.getText());
-        }
 		if(!settings.getBinaryFilesDir().equals(nativeFilesDirectory.getText())){
 			settings.setBinaryFilesDir(nativeFilesDirectory.getText());
 		}
@@ -458,16 +419,12 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		if(!settings.getRenderXmlPath().equals(renderingStyleFile.getText())){
 			settings.setRenderXmlPath(renderingStyleFile.getText());
 		}
+		if(!settings.getRoutingXmlPath().equals(routingConfigFile.getText())){
+			settings.setRoutingXmlPath(routingConfigFile.getText());
+		}
 		if(!settings.getRouteMode().equals(routingMode.getText())){
 			settings.setRouteMode(routingMode.getText());
 		}
-		
-//		if(settings.isSupressWarningsForDuplicatedId() != supressWarning.isSelected()){
-//			settings.setSupressWarningsForDuplicatedId	(supressWarning.isSelected());
-//		}
-//		if(settings.getLoadEntityInfo() != loadWholeOsmInfo.isSelected()){
-//			settings.setLoadEntityInfo(loadWholeOsmInfo.isSelected());
-//		}
 		
 	}
 	

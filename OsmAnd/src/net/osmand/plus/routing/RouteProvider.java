@@ -34,12 +34,11 @@ import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper.TurnType;
-import net.osmand.router.BicycleRouter;
 import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
-import net.osmand.router.CarRouter;
-import net.osmand.router.PedestrianRouter;
+import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
 
 import org.w3c.dom.Document;
@@ -655,20 +654,16 @@ public class RouteProvider {
 	protected RouteCalculationResult findVectorMapsRoute(Location start, LatLon end, ApplicationMode mode, boolean fast, OsmandApplication app) throws IOException {
 		BinaryMapIndexReader[] files = app.getResourceManager().getRoutingMapFiles();
 		BinaryRoutePlanner router = new BinaryRoutePlanner(NativeOsmandLibrary.getLoadedLibrary(), files);
-		RoutingContext ctx = new RoutingContext();
-		ctx.setUsingShortestWay(!fast);
-		//ctx.setPlanRoadDirection(null);
+		RoutingConfiguration.Builder config = RoutingConfiguration.getDefault();
+		GeneralRouterProfile p ;
 		if (mode == ApplicationMode.BICYCLE) {
-			ctx.setRouter(new BicycleRouter());
-			ctx.setUseDynamicRoadPrioritising(true);
+			p = GeneralRouterProfile.BICYCLE;
 		} else if (mode == ApplicationMode.PEDESTRIAN) {
-			ctx.setRouter(new PedestrianRouter());
-			ctx.setUseDynamicRoadPrioritising(false);
-			ctx.setHeuristicCoefficient(2);
+			p = GeneralRouterProfile.PEDESTRIAN;
 		} else {
-			ctx.setRouter(new CarRouter());
-			ctx.setUseDynamicRoadPrioritising(true);
+			p = GeneralRouterProfile.CAR;
 		}
+		RoutingContext ctx = new RoutingContext(config.initConfig(p.name().toLowerCase(), !fast));
 		RouteSegment st= router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);
 		if (st == null) {
 			return new RouteCalculationResult("Starting point too far from nearest road.");

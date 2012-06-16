@@ -1,0 +1,166 @@
+package net.osmand.router;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import net.osmand.binary.RouteDataObject;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+
+public class GeneralRouter extends VehicleRouter {
+	Map<String, Double> highwaySpeed = new LinkedHashMap<String, Double>();
+	Map<String, Double> highwayPriorities = new LinkedHashMap<String, Double>();
+	Map<String, Double> highwayFuturePriorities = new LinkedHashMap<String, Double>();
+	Map<String, Double> obstacles = new LinkedHashMap<String, Double>();
+	boolean followSpeedLimitations = true;
+	boolean restrictionsAware = true;
+	boolean onewayAware = true;
+	double minDefaultSpeed = 10;
+	double maxDefaultSpeed = 10;
+	double leftTurn = 0;
+	double rightTurn = 0;
+	GeneralRouterProfile profile;
+	
+	public enum GeneralRouterProfile {
+		CAR,
+		PEDESTRIAN,
+		BICYCLE
+	}
+
+	@Override
+	public boolean acceptLine(RouteDataObject way) {
+		return highwaySpeed.containsKey(way.getHighway());
+	}
+	
+	@Override
+	public boolean restrictionsAwayre() {
+		return restrictionsAware;
+	}
+	
+	@Override
+	public double defineObstacle(RouteDataObject road, int point) {
+		int[] pointTypes = road.getPointTypes(point);
+		if(pointTypes == null) {
+			return 0;
+		}
+		RouteRegion reg = road.region;
+		int sz = pointTypes.length;
+		for(int i=0; i<sz; i++) {
+			RouteTypeRule r = reg.quickGetEncodingRule(pointTypes[i]);
+			String key = r.getTag() + "$" + r.getValue();
+			Double v = obstacles.get(key);
+			if(v != null ){
+				return v;
+			}
+		}
+		return 0;
+	}
+	
+	@Override
+	public int isOneWay(RouteDataObject road) {
+		if (!onewayAware) {
+			return 0;
+		}
+		return super.isOneWay(road);
+	}
+
+	@Override
+	public double getFutureRoadPriority(RouteDataObject road) {
+		String highway = road.getHighway();
+		double priority = highway != null && highwayFuturePriorities.containsKey(highway) ? highwayFuturePriorities.get(highway) : 1d;
+		return priority;
+	}
+
+	@Override
+	public double defineSpeed(RouteDataObject road) {
+		if (followSpeedLimitations) {
+			RouteRegion reg = road.region;
+			int sz = road.types.length;
+			for (int i = 0; i < sz; i++) {
+				RouteTypeRule r = reg.quickGetEncodingRule(road.types[i]);
+				float maxSpeed = r.maxSpeed();
+				if (maxSpeed > 0) {
+					return maxSpeed;
+				}
+			}
+		}
+
+		Double value = highwaySpeed.get(road.getHighway());
+		if (value == null) {
+			value = minDefaultSpeed;
+		}
+		return value / 3.6d;
+	}
+
+	@Override
+	public double defineSpeedPriority(RouteDataObject road) {
+		String highway = road.getHighway();
+		double priority = highway != null && highwayPriorities.containsKey(highway) ? highwayPriorities.get(highway) : 1d;
+		return priority;
+	}
+
+	@Override
+	public double getMinDefaultSpeed() {
+		return minDefaultSpeed / 3.6d;
+	}
+
+	@Override
+	public double getMaxDefaultSpeed() {
+		return maxDefaultSpeed / 3.6d;
+	}
+
+	private double directionRoute(RouteSegment segment, int segmentEnd, boolean opp){
+		boolean plus = segmentEnd == 0;
+		int x = segment.road.getPoint31XTile(segmentEnd);
+		int y = segment.road.getPoint31YTile(segmentEnd);
+		int nx = segmentEnd;
+		int px = x;
+		int py = y;
+		do {
+			if(plus){
+				nx++;
+				if(nx >= segment.road.getPointsLength()){
+					break;
+				}
+			} else {
+				nx--;
+				if(nx < 0){
+					break;
+				}
+			}
+			px = segment.road.getPoint31XTile(nx);
+			py = segment.road.getPoint31YTile(nx);
+		} while(Math.abs(px - x) + Math.abs(py - y) < 100);
+		
+		if(opp){
+			return Math.atan2(py - y, px - x);
+		} else {
+			return Math.atan2(y - py, x - px);
+		}
+	}
+	@Override
+	public double calculateTurnTime(RouteSegment segment, RouteSegment next, int segmentEnd) {
+		if (leftTurn > 0 || rightTurn > 0) {
+			if (next.road.getPointsLength() > 1) {
+				double a1 = directionRoute(segment, segmentEnd, false);
+				double a2 = directionRoute(next, next.segmentStart, true);
+				double diff = Math.abs(a1 - a2);
+				// more like UT
+				if (diff > 3 * Math.PI / 4 && diff < 5 * Math.PI / 4) {
+					return leftTurn;
+				}
+				if (diff > Math.PI / 3 && diff <= 3 * Math.PI / 4) {
+					return rightTurn;
+				}
+				if (diff < 2 * Math.PI / 3 && diff >= 3 * Math.PI / 4) {
+					return leftTurn;
+				}
+			}
+			return 0;
+		}
+		return 0;
+	}
+	
+
+}

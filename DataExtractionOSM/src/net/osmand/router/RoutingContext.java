@@ -18,33 +18,9 @@ import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
 
 public class RoutingContext {
 	
-	// 1. parameters of routing and different tweaks
-	// Influence on A* : f(x) + heuristicCoefficient*g(X)
-	private double heuristicCoefficient = 1;
-	
-	// 1.1 tile load parameters (should not affect routing)
-	public int ZOOM_TO_LOAD_TILES = 13; //12?, 14?
-	public int ITERATIONS_TO_RUN_GC = 100;
-	public int NUMBER_OF_DESIRABLE_TILES_IN_MEMORY = 25;
+	public final RoutingConfiguration config;
 	private int garbageCollectorIteration = 0;
-	
-	// 1.2 Dynamic road prioritizing (heuristic)
-	private boolean useDynamicRoadPrioritising = true;
-	
-	// 1.3 Relaxing strategy
-	private boolean useRelaxingStrategy = true;
-	public int ITERATIONS_TO_RELAX_NODES = 100;
 	private int relaxingIteration = 0;
-	
-	// 1.4 Build A* graph in backward/forward direction (can affect results)
-	// null - 2 ways, true - direct way, false - reverse way
-	private Boolean planRoadDirection = null;
-
-	// 1.5 Router specific coefficients and restrictions
-	private VehicleRouter router = new CarRouter();
-	
-	// not used right now
-	private boolean usingShortestWay = false;
 	
 	// 2. Routing memory cache (big objects)
 	TIntObjectHashMap<RoutingTile> tiles = new TIntObjectHashMap<RoutingContext.RoutingTile>();
@@ -75,6 +51,10 @@ public class RoutingContext {
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
 	
+	public RoutingContext(RoutingConfiguration config) {
+		this.config = config;
+	}
+	
 	
 	public RouteSegmentVisitor getVisitor() {
 		return visitor;
@@ -93,8 +73,8 @@ public class RoutingContext {
 	
 	public boolean runTilesGC() {
 		garbageCollectorIteration++;
-		int loadedTilesCritical = NUMBER_OF_DESIRABLE_TILES_IN_MEMORY * 3 /2;
-		if (garbageCollectorIteration > ITERATIONS_TO_RUN_GC ||
+		int loadedTilesCritical = config.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY * 3 /2;
+		if (garbageCollectorIteration > config.ITERATIONS_TO_RUN_GC ||
 				getCurrentlyLoadedTiles() > loadedTilesCritical) {
 			garbageCollectorIteration = 0;
 			return true;
@@ -104,7 +84,7 @@ public class RoutingContext {
 	
 	public boolean runRelaxingStrategy(){
 		relaxingIteration++;
-		if(relaxingIteration > ITERATIONS_TO_RELAX_NODES){
+		if(relaxingIteration > config.ITERATIONS_TO_RELAX_NODES){
 			relaxingIteration = 0;
 			return true;
 		}
@@ -117,75 +97,68 @@ public class RoutingContext {
 	}
 
 	public boolean isUseDynamicRoadPrioritising() {
-		return useDynamicRoadPrioritising;
+		return config.useDynamicRoadPrioritising;
 	}
 
 	public boolean isUseRelaxingStrategy() {
-		return useRelaxingStrategy;
+		return config.useRelaxingStrategy;
 	}
 	
 	public void setUseRelaxingStrategy(boolean useRelaxingStrategy) {
-		this.useRelaxingStrategy = useRelaxingStrategy;
+		config.useRelaxingStrategy = useRelaxingStrategy;
 	}
 	
 	public void setUseDynamicRoadPrioritising(boolean useDynamicRoadPrioritising) {
-		this.useDynamicRoadPrioritising = useDynamicRoadPrioritising;
+		config.useDynamicRoadPrioritising = useDynamicRoadPrioritising;
 	}
 	
-	public void setUsingShortestWay(boolean usingShortestWay) {
-		this.usingShortestWay = usingShortestWay;
-	}
-	
-	public boolean isUsingShortestWay() {
-		return usingShortestWay;
-	}
 	
 
 	public void setRouter(VehicleRouter router) {
-		this.router = router;
+		config.router = router;
 	}
 	
 	public void setHeuristicCoefficient(double heuristicCoefficient) {
-		this.heuristicCoefficient = heuristicCoefficient;
+		config.heuristicCoefficient = heuristicCoefficient;
 	}
 
 	public VehicleRouter getRouter() {
-		return router;
+		return config.router;
 	}
 
 	public boolean planRouteIn2Directions() {
-		return planRoadDirection == null;
+		return config.planRoadDirection == 0;
 	}
 
-	public Boolean getPlanRoadDirection() {
-		return planRoadDirection;
+	public int getPlanRoadDirection() {
+		return config.planRoadDirection;
 	}
 
-	public void setPlanRoadDirection(Boolean planRoadDirection) {
-		this.planRoadDirection = planRoadDirection;
+	public void setPlanRoadDirection(int planRoadDirection) {
+		config.planRoadDirection = planRoadDirection;
 	}
 
 	public int roadPriorityComparator(double o1DistanceFromStart, double o1DistanceToEnd, double o2DistanceFromStart, double o2DistanceToEnd) {
 		return BinaryRoutePlanner.roadPriorityComparator(o1DistanceFromStart, o1DistanceToEnd, o2DistanceFromStart, o2DistanceToEnd,
-				heuristicCoefficient);
+				config.heuristicCoefficient);
 	}
 	
 	public RoutingTile getRoutingTile(int x31, int y31){
-		int xloc = x31 >> (31 - ZOOM_TO_LOAD_TILES);
-		int yloc = y31 >> (31 - ZOOM_TO_LOAD_TILES);
-		int l = (xloc << ZOOM_TO_LOAD_TILES) + yloc;
+		int xloc = x31 >> (31 - config.ZOOM_TO_LOAD_TILES);
+		int yloc = y31 >> (31 - config.ZOOM_TO_LOAD_TILES);
+		int l = (xloc << config.ZOOM_TO_LOAD_TILES) + yloc;
 		RoutingTile tl = tiles.get(l);
 		if(tl == null) {
-			tl = new RoutingTile(xloc, yloc, ZOOM_TO_LOAD_TILES);
+			tl = new RoutingTile(xloc, yloc, config.ZOOM_TO_LOAD_TILES);
 			tiles.put(l, tl);
 		}
 		return tiles.get(l);
 	}
 	
 	public void unloadTile(RoutingTile tile, boolean createEmpty){
-		int l = (tile.tileX << ZOOM_TO_LOAD_TILES) + tile.tileY;
+		int l = (tile.tileX << config.ZOOM_TO_LOAD_TILES) + tile.tileY;
 		RoutingTile old = tiles.remove(l);
-		RoutingTile n = new RoutingTile(tile.tileX, tile.tileY, ZOOM_TO_LOAD_TILES);
+		RoutingTile n = new RoutingTile(tile.tileX, tile.tileY, config.ZOOM_TO_LOAD_TILES);
 		n.isLoaded = old.isLoaded;
 		n.setUnloaded();
 		tiles.put(l, n);
