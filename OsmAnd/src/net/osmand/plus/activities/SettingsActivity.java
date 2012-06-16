@@ -1,6 +1,7 @@
 package net.osmand.plus.activities;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -108,6 +109,32 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		p.setOnPreferenceChangeListener(this);
 		screenPreferences.put(b.getId(), p);
 		seekBarPreferences.put(b.getId(), b);
+	}
+	
+	public String getStringPropertyName(String propertyName, String defValue) {
+		try {
+			Field f = R.string.class.getField("rendering_attr_"+propertyName+"_name");
+			if(f != null) {
+				Integer in = (Integer) f.get(null);
+				return getString(in);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return defValue;
+	}
+	
+	public String getStringPropertyDescription(String propertyName, String defValue) {
+		try {
+			Field f = R.string.class.getField("rendering_attr_"+propertyName+"_description");
+			if(f != null) {
+				Integer in = (Integer) f.get(null);
+				return getString(in);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return defValue;
 	}
 	
 	public SeekBarPreference createSeekBarPreference(OsmandPreference<Integer> b, int title, int summary, int dialogTextId,
@@ -373,8 +400,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					ListPreference lp = new ListPreference(this);
 					lp.setOnPreferenceChangeListener(this);
 					lp.setKey(custom.getId());
-					lp.setTitle(p.getName());
-					lp.setSummary(p.getDescription());
+					lp.setTitle(getStringPropertyName(custom.getId(), p.getName()));
+					lp.setSummary(getStringPropertyDescription(p.getAttrName(), p.getDescription()));
 					cat.addPreference(lp);
 
 					LinkedHashMap<String, Object> vals = new LinkedHashMap<String, Object>();
