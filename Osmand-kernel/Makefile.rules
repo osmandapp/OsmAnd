@@ -7,8 +7,8 @@ ifeq ($(CXX_SOURCE_FILES_EXTS),)
 endif
 
 # Target configuration
-CXXFLAGS_debug := -g -O0
-CFLAGS_debug := -g -O0
+CXXFLAGS_debug := -ggdb3 -O0
+CFLAGS_debug := -ggdb3 -O0
 CXXFLAGS_release := -O2
 CFLAGS_release := -O2
 
