@@ -164,7 +164,6 @@ public class BinaryRoutePlanner {
 	// TODO write unit tests
 	// TODO add information about turns (?) - probably calculate additional information to show on map
 	// TODO fix roundabout (?) - probably calculate additional information to show on map
-	// TODO access
 	// TODO fastest/shortest way
 	/**
 	 * Calculate route between start.segmentEnd and end.segmentStart (using A* algorithm)
@@ -175,6 +174,17 @@ public class BinaryRoutePlanner {
 		ctx.timeToLoad = 0;
 		ctx.visitedSegments = 0;
 		ctx.timeToCalculate = System.nanoTime();
+		ctx.firstRoadId = (start.getRoad().id << 8) + start.getSegmentStart();
+		if(ctx.config.initialDirection != null) {
+			double plusDir = start.directionRoute(start.segmentStart, true);
+			double diff	 = plusDir - ctx.config.initialDirection;
+			if(Math.abs(MapUtils.alignAngleDifference(diff)) <= Math.PI / 3) {
+				ctx.firstRoadDirection = 1;
+			} else if(Math.abs(MapUtils.alignAngleDifference(diff - Math.PI)) <= Math.PI / 3) {
+				ctx.firstRoadDirection = -1;
+			}
+			
+		}
 
 		// Initializing priority queue to visit way segments 
 		Comparator<RouteSegment> segmentsComparator = new Comparator<RouteSegment>(){
@@ -249,7 +259,7 @@ public class BinaryRoutePlanner {
 				}
 			} else {
 				// different strategy : use onedirectional graph
-				inverse = !ctx.getPlanRoadDirection().booleanValue();
+				inverse = ctx.getPlanRoadDirection() < 0;
 			}
 			if (inverse) {
 				graphSegments = graphReverseSegments;
@@ -258,7 +268,7 @@ public class BinaryRoutePlanner {
 			}
 
 			if(ctx.runTilesGC()) {
-				unloadUnusedTiles(ctx, ctx.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY);
+				unloadUnusedTiles(ctx, ctx.config.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY);
 			}
 			if(ctx.runRelaxingStrategy()) {
 				relaxNotNeededSegments(ctx, graphDirectSegments, true);
@@ -327,7 +337,7 @@ public class BinaryRoutePlanner {
 				mine = s.distanceToEnd;
 			}
 		}
-		double d = mine * 3;
+		double d = mine * ctx.config.ITERATIONS_TO_RELAX_NODES;
 		iterator = graphSegments.iterator();
 		while (iterator.hasNext()) {
 			RouteSegment s = iterator.next();
@@ -528,7 +538,10 @@ public class BinaryRoutePlanner {
 		int oneway = ctx.getRouter().isOneWay(road);
 		boolean minusAllowed;
 		boolean plusAllowed; 
-		if (!reverseWaySearch) {
+		if(ctx.firstRoadId == nt) {
+			minusAllowed = ctx.firstRoadDirection <= 0;
+			plusAllowed = ctx.firstRoadDirection >= 0;
+		} else if (!reverseWaySearch) {
 			minusAllowed = oneway <= 0;
 			plusAllowed = oneway >= 0;
 		} else {
@@ -621,6 +634,9 @@ public class BinaryRoutePlanner {
 		boolean exclusiveRestriction = false;
 		RouteSegment next = inputNext;
 		if (!reverseWay && road.getRestrictionLength() > 0) {
+			return false;
+		}
+		if(!ctx.getRouter().restrictionsAwayre()) {
 			return false;
 		}
 		while (next != null) {
@@ -744,8 +760,8 @@ public class BinaryRoutePlanner {
 					// put additional information to recover whole route after
 					next.parentRoute = segment;
 					next.parentSegmentEnd = segmentEnd;
+					graphSegments.add(next);
 				}
-				graphSegments.add(next);
 				if (ctx.visitor != null) {
 					ctx.visitor.visitSegment(next, false);
 				}
@@ -831,9 +847,9 @@ public class BinaryRoutePlanner {
 			double startLon = MapUtils.get31LongitudeX(start.road.getPoint31XTile(start.segmentStart));
 			double endLat = MapUtils.get31LatitudeY(end.road.getPoint31YTile(end.segmentStart));
 			double endLon = MapUtils.get31LongitudeX(end.road.getPoint31XTile(end.segmentStart));
-			println(MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"\" \n" +
+			println(MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"{5}\" \n" +
 					"    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" complete_time=\"{4}\">", 
-					startLat+"", startLon+"", endLat+"", endLon+"", completeTime+""));
+					startLat+"", startLon+"", endLat+"", endLon+"", completeTime+"", ctx.config.routerName));
 			for (RouteSegmentResult res : result) {
 				String name = "Unknown";//res.object.getName();
 				String ref = "";//res.object.getNameByType(res.object.getMapIndex().refEncodingType);
@@ -896,6 +912,31 @@ public class BinaryRoutePlanner {
 		
 		public String getTestName(){
 			return String.format("s%.2f e%.2f", ((float)distanceFromStart), ((float)distanceToEnd));
+		}
+		
+		public double directionRoute(int segmentEnd, boolean plus) {
+			int x = road.getPoint31XTile(segmentEnd);
+			int y = road.getPoint31YTile(segmentEnd);
+			int nx = segmentEnd;
+			int px = x;
+			int py = y;
+			do {
+				if (plus) {
+					nx++;
+					if (nx >= road.getPointsLength()) {
+						break;
+					}
+				} else {
+					nx--;
+					if (nx < 0) {
+						break;
+					}
+				}
+				px = road.getPoint31XTile(nx);
+				py = road.getPoint31YTile(nx);
+			} while (Math.abs(px - x) + Math.abs(py - y) < 100);
+
+			return Math.atan2( px - x, py - y);
 		}
 	}
 	

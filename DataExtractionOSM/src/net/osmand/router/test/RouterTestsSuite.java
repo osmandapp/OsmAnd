@@ -11,11 +11,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.router.BicycleRouter;
 import net.osmand.router.BinaryRoutePlanner;
-import net.osmand.router.CarRouter;
-import net.osmand.router.PedestrianRouter;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.swing.NativeSwingRendering;
@@ -80,8 +78,8 @@ public class RouterTestsSuite {
 
 	private static void testRoute(Element testCase, BinaryMapIndexReader[] regions) throws IOException {
 		BinaryRoutePlanner planner = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(), regions);
-		RoutingContext ctx = new RoutingContext();
 		String vehicle = testCase.getAttribute("vehicle");
+		RoutingContext ctx = new RoutingContext(RoutingConfiguration.getDefault().build(vehicle, true));
 		String testDescription = testCase.getAttribute("description");
 		String skip = testCase.getAttribute("skip_comment");
 		if (skip != null && skip.length() > 0) {
@@ -89,13 +87,6 @@ public class RouterTestsSuite {
 			return;
 		}
 		
-		if("bicycle".equals(vehicle)){
-			ctx.setRouter(new BicycleRouter());
-		} else if("pedestrian".equals(vehicle)){
-			ctx.setRouter(new PedestrianRouter());
-		} else {
-			ctx.setRouter(new CarRouter());
-		}
 		double startLat = Double.parseDouble(testCase.getAttribute("start_lat"));
 		double startLon = Double.parseDouble(testCase.getAttribute("start_lon"));
 		RouteSegment startSegment = planner.findRouteSegment(startLat, startLon, ctx);

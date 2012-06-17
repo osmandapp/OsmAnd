@@ -156,7 +156,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			descr.setText(info[0].getFileName().substring(0, dt));
 		}
 		final EditText tags = (EditText) view.findViewById(R.id.TagsText);		
-		final Spinner visibility = ((Spinner)findViewById(R.id.Visibility));
+		final Spinner visibility = ((Spinner)view.findViewById(R.id.Visibility));
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.my_spinner_text, new String[] {
 				"Public",
 				"Identifiable",

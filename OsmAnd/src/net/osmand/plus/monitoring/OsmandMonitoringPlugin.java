@@ -1,19 +1,19 @@
 package net.osmand.plus.monitoring;
 
-import org.apache.commons.logging.Log;
-
 import net.osmand.LogUtil;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
+
+import org.apache.commons.logging.Log;
+
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.preference.Preference;

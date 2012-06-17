@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
@@ -36,11 +37,10 @@ import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Way;
 import net.osmand.osm.OSMSettings.OSMTagKey;
-import net.osmand.router.BicycleRouter;
 import net.osmand.router.BinaryRoutePlanner;
-import net.osmand.router.CarRouter;
-import net.osmand.router.PedestrianRouter;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.router.RoutingConfiguration;
+import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
@@ -56,6 +56,7 @@ import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+
 
 
 public class MapRouterLayer implements MapPanelLayer {
@@ -163,6 +164,30 @@ public class MapRouterLayer implements MapPanelLayer {
 			}
 		};
 		menu.add(end);
+		Action selfRoute = new AbstractAction("Calculate OsmAnd route") {
+			private static final long serialVersionUID = 507156107455281238L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new Thread() {
+					@Override
+					public void run() {
+						List<Way> ways = selfRoute(startRoute, endRoute);
+						if (ways != null) {
+							DataTileManager<Way> points = new DataTileManager<Way>();
+							points.setZoom(11);
+							for (Way w : ways) {
+								LatLon n = w.getLatLon();
+								points.registerObject(n.getLatitude(), n.getLongitude(), w);
+							}
+							map.setPoints(points);
+						}
+					}
+				}.start();
+			}
+		};
+		
+		menu.add(selfRoute);
 		Action route_YOURS = new AbstractAction("Calculate YOURS route") {
 			private static final long serialVersionUID = 507156107455281238L;
 
@@ -205,51 +230,6 @@ public class MapRouterLayer implements MapPanelLayer {
 			}
 		};
 		menu.add(route_CloudMate);
-		Action route_OSRM = new AbstractAction("Calculate OSRM route") {
-			private static final long serialVersionUID = 2292361745482584520L;
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new Thread() {
-					@Override
-					public void run() {
-						List<Way> ways = route_OSRM(startRoute, endRoute);
-						DataTileManager<Way> points = new DataTileManager<Way>();
-						points.setZoom(11);
-						for (Way w : ways) {
-							LatLon n = w.getLatLon();
-							points.registerObject(n.getLatitude(), n.getLongitude(), w);
-						}
-						map.setPoints(points);
-					}
-				}.start();
-			}
-		};
-		menu.add(route_OSRM);
-		Action selfRoute = new AbstractAction("Calculate OsmAnd route") {
-			private static final long serialVersionUID = 507156107455281238L;
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new Thread() {
-					@Override
-					public void run() {
-						List<Way> ways = selfRoute(startRoute, endRoute);
-						if (ways != null) {
-							DataTileManager<Way> points = new DataTileManager<Way>();
-							points.setZoom(11);
-							for (Way w : ways) {
-								LatLon n = w.getLatLon();
-								points.registerObject(n.getLatitude(), n.getLongitude(), w);
-							}
-							map.setPoints(points);
-						}
-					}
-				}.start();
-			}
-		};
-		
-		menu.add(selfRoute);
 
 	}
 	
@@ -536,6 +516,19 @@ public class MapRouterLayer implements MapPanelLayer {
 				files.add(f);
 			}
 		}
+		String xmlPath = DataExtractionSettings.getSettings().getRoutingXmlPath();
+		Builder builder;
+		if(xmlPath.equals("routing.xml")){
+			builder = RoutingConfiguration.getDefault() ;
+		} else{
+			try {
+				builder = RoutingConfiguration.parseFromInputStream(new FileInputStream(xmlPath));
+			} catch (IOException e) {
+				throw new IllegalArgumentException("Error parsing routing.xml file",e);
+			} catch (SAXException e) {
+				throw new IllegalArgumentException("Error parsing routing.xml file",e);
+			}
+		}
 		final boolean animateRoutingCalculation = DataExtractionSettings.getSettings().isAnimateRouting();
 		if(animateRoutingCalculation) {
 			nextTurn.setVisible(true);
@@ -559,24 +552,14 @@ public class MapRouterLayer implements MapPanelLayer {
 					RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$ //$NON-NLS-2$
 					rs[it++] = new BinaryMapIndexReader(raf, false);
 				}
-				
-				BinaryRoutePlanner router = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(), rs);
-				RoutingContext ctx = new RoutingContext();
 				String m = DataExtractionSettings.getSettings().getRouteMode();
-				if("pedestrian".equalsIgnoreCase(m)) {
-					ctx.setRouter(new PedestrianRouter());
-					log.info("Use pedestrian mode for routing");
-				} else if("pedestrian".equalsIgnoreCase(m)) {
-					ctx.setRouter(new BicycleRouter());
-					log.info("Use bicycle mode for routing");
-				} else {
-					ctx.setRouter(new CarRouter());
-					log.info("Use car mode for routing");
-				}
-				int dir = DataExtractionSettings.getSettings().getRouteDirection();
-				if(dir != 0) {
-					ctx.setPlanRoadDirection(dir > 0 ? true : false);
-				}
+				BinaryRoutePlanner router = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(), rs);
+				RoutingConfiguration config = builder.build(m, true);
+				RoutingContext ctx = new RoutingContext(config);
+				log.info("Use " + config.routerName + "mode for routing");
+				
+//				int dir = DataExtractionSettings.getSettings().getRouteDirection();
+//				ctx.setPlanRoadDirection(dir);
 				
 				// find closest way
 				RouteSegment st = router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);

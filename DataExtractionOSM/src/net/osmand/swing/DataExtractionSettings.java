@@ -194,6 +194,14 @@ public class DataExtractionSettings {
 		preferences.put("renderXmlPath", file);
 	}
 	
+	public String getRoutingXmlPath(){
+		return preferences.get("routingXmlPath", "routing.xml");
+	}
+	
+	public void setRoutingXmlPath(String file){
+		preferences.put("routingXmlPath", file);
+	}
+	
 	
 
 	public String getBinaryFilesDir(){

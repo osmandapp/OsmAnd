@@ -226,7 +226,7 @@
   <string name="layer_poi_label">POI ჭდეები</string>
   <string name="animate_route_off">ანიმაციის შეჩერება</string>
   <string name="animate_route">ანიმაციის დაწყება</string>
-  <string name="tip_recent_changes_0_6_8_t">"ცვლილებები 0.6.8-ში : \n\t- მთლიანად შეიცვალა ძებნის ინტერფეისი! ძებნა გახდა უფრო სწრაფი. შეიძლება ერთიდაიგივე რამის ძებნა სხვადასხვა პარამეტრებით.\n\t- POI-ის ძებნა დიდ არეალზე.\n\t- ჩასწორებულია რუქის ციმციმი (შეცდომა 641)\n\t- თვითცენტრირებადი რუქის პარამეტრი (შეცდომა 356)\n\t- GPX ნავიგაცია გადატანილია. \'მიმართულებები\' და \'მიმართულებების შენახვა\' გადატანილია \'გზის შესახებ\'-ში\n\t- POI-ის მონაცემები ინახება .obf ფაილში  (01/10/11-ის შემდეგ ჩამოტვირთულ ინდექსებში) \n\t- ჩასწორებულია ხმოვანი შეტყობინებები (GPS მდებარეობა, პირველი ბრძანების უგულებელყოფა)\n\t- Small improvements "</string>
+  <string name="tip_recent_changes_0_6_8_t">"ცვლილებები 0.6.8-ში : \n\t- მთლიანად შეიცვალა ძებნის ინტერფეისი! ძებნა გახდა უფრო სწრაფი. შეიძლება ერთიდაიგივე რამის ძებნა სხვადასხვა პარამეტრებით.\n\t- POI-ის ძებნა დიდ არეალზე.\n\t- ჩასწორებულია რუქის ციმციმი (შეცდომა 641)\n\t- თვითცენტრირებადი რუქის პარამეტრი (შეცდომა 356)\n\t- GPX ნავიგაცია გადატანილია. \'მიმართულებები\' და \'მიმართულებების შენახვა\' გადატანილია \'გზის შესახებ\'-ში\n\t- POI-ის მონაცემები ინახება .obf ფაილში (01/10/11-ის შემდეგ ჩამოტვირთულ ინდექსებში) \n\t- ჩასწორებულია ხმოვანი შეტყობინებები (GPS მდებარეობა, პირველი ბრძანების უგულებელყოფა)\n\t- Small improvements "</string>
   <string name="file_can_not_be_renamed">ფაილისათვის სახელის გადარქმევა შეუძლებელია.</string>
   <string name="file_with_name_already_exists">ფაილი მოცემული სახელით უკვე არსებობს.</string>
   <string name="gpx_navigation">GPX გზა</string>
@@ -349,7 +349,7 @@
   <string name="tip_location_sharing">მდებარეობის გაზიარება</string>
   <string name="tip_location_sharing_t">\tშეგიძლიათ გააზიაროთ საინტერესო ადგილების მდებარეობა, რომლებიც მეგობრებთან ან ოჯახთან ერთად მოინახულეთ. \n\tიმისათვის რომ გააზიაროთ თქვენი მდებარეობა: \n\t\'რუქის კონტექსტური მენიუ\' -&gt; \'მდებარეობის გაზიარება\'. \n\tდა აირჩიეთ როგორ გნებავთ მდებარეობის გაზიარება. არჩევანი: ელ-ფოსტა, SMS, ან თქვენი მდებარეობის ბუფერში კოპირება.</string>
   <string name="tip_favorites">რჩეული წერტილები</string>
-  <string name="tip_favorites_t">\tშეინახეთ ხშირად გამოყენებული წერტილები რჩეულებში.\n\tშესანახავად გამოიყენეთ პარამეტრი \'რჩეულებში დამატება\' და დაარქვით მას სახელი. შენახვის შემდეგ მისი პოვნა შესაძლებელია \'მთავარი მენიუ\' -&gt; \'რჩეულები\' - ში.\n\tთუ რჩეულს მენიუში დიდხანს დააწვებით, იხილავთ მენიუს სადაც შეგეძლებათ მისი  შეცვლა, სამიზნედ გახდა და წაშლა.\n\tყველა რჩეულის რუქაზე სანახავად, ჩართეთ შრე \'რჩეულები\' რუქის კონტექსტურ მენიუში -&gt; \'ხედვის აღწერა\'.</string>
+  <string name="tip_favorites_t">\tშეინახეთ ხშირად გამოყენებული წერტილები რჩეულებში.\n\tშესანახავად გამოიყენეთ პარამეტრი \'რჩეულებში დამატება\' და დაარქვით მას სახელი. შენახვის შემდეგ მისი პოვნა შესაძლებელია \'მთავარი მენიუ\' -&gt; \'რჩეულები\' - ში.\n\tთუ რჩეულს მენიუში დიდხანს დააწვებით, იხილავთ მენიუს სადაც შეგეძლებათ მისი შეცვლა, სამიზნედ გახდა და წაშლა.\n\tყველა რჩეულის რუქაზე სანახავად, ჩართეთ შრე \'რჩეულები\' რუქის კონტექსტურ მენიუში -&gt; \'ხედვის აღწერა\'.</string>
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> რუქების დალაგება სურათებით"</string>
   <string name="error_doing_search">შეცდომა გათიშული ძებნის დროს</string>
   <string name="search_offline_geo_error">შეუძლებელია დამუშავდეს მოთხოვნა \'%s\'</string>
@@ -834,4 +834,4 @@
   <string name="transport_search_desc">ტრანსპორტის ძებნა</string>
   <string name="favourites_search_desc">რჩეულებში ძებნა</string>
   <string name="history_search_desc">ისტორიაში ძებნა</string>
-</resources>
+<string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string><string name="rendering_attr_noPolygons_name">No polygons</string><string name="rendering_attr_appMode_name">Rendering mode</string><string name="rendering_attr_appMode_description">Map optimization for respective User Profile</string><string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate SRTM-file may be needed.</string><string name="rendering_attr_contourLines_name">Show contour lines</string><string name="rendering_attr_hmRendered_description">Increase amount of map detail shown</string><string name="rendering_attr_hmRendered_name">Show more map detail</string></resources>

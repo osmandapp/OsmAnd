@@ -14,6 +14,8 @@ public abstract class VehicleRouter {
 	 * @return
 	 */
 	public abstract boolean acceptLine(RouteDataObject way);
+	
+	public abstract boolean restrictionsAwayre();
 
 	
 	public int isOneWay(RouteDataObject road) {

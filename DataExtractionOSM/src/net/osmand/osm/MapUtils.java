@@ -418,6 +418,21 @@ public class MapUtils {
 		}
 		return rotate;
 	}
+
+	/**
+	 * @param diff align difference between 2 angles ]-PI, PI] 
+	 * @return 
+	 */
+	public static double alignAngleDifference(double diff) {
+		while(diff > Math.PI) {
+			diff -= 2 * Math.PI;
+		}
+		while(diff <=-Math.PI) {
+			diff += 2 * Math.PI;
+		}
+		return diff;
+		
+	}
 	
 	
 

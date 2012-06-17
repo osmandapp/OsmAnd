@@ -40,8 +40,10 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.content.DialogInterface.OnShowListener;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
@@ -54,12 +56,17 @@ import android.text.Html;
 import android.util.FloatMath;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ListAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -121,9 +128,19 @@ public class MapActivityActions implements DialogProvider {
 		args.putSerializable(KEY_FAVORITE, point);
 		final EditText editText =  (EditText) dialog.findViewById(R.id.Name);
 		editText.setText(point.getName());
-		editText.requestFocus();
 		final AutoCompleteTextView cat =  (AutoCompleteTextView) dialog.findViewById(R.id.Category);
 		cat.setText(point.getCategory());
+		editText.selectAll();
+		dialog.setOnShowListener(new OnShowListener() {
+
+		    @Override
+		    public void onShow(DialogInterface dialog) {
+		        InputMethodManager imm = (InputMethodManager) mapActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+		        if (imm != null) {
+		        	imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+		        }
+		    }
+		});
 	}
 	
 	protected Dialog createAddFavouriteDialog(final Bundle args) {
@@ -678,16 +695,41 @@ public class MapActivityActions implements DialogProvider {
 		Builder builder = new AlertDialog.Builder(mapActivity);
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		
-		adapter.registerItem(R.string.context_menu_item_navigate_point);
-		adapter.registerItem(R.string.context_menu_item_search);
+		adapter.registerItem(R.string.context_menu_item_navigate_point, R.drawable.list_view_set_destination);
+		adapter.registerItem(R.string.context_menu_item_search, R.drawable.list_view_search_near_here);
 		adapter.registerItem(R.string.context_menu_item_directions);
-		adapter.registerItem(R.string.context_menu_item_show_route);
-		adapter.registerItem(R.string.context_menu_item_add_favorite);
-		adapter.registerItem(R.string.context_menu_item_share_location);
+		adapter.registerItem(R.string.context_menu_item_show_route, R.drawable.list_view_show_route_from_here);
+		adapter.registerItem(R.string.context_menu_item_add_favorite, R.drawable.list_activities_favorites);
+		adapter.registerItem(R.string.context_menu_item_share_location, R.drawable.list_view_share_location);
 		
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
 		
-		builder.setItems(adapter.getItemNames(), new DialogInterface.OnClickListener() {
+		ListAdapter listadapter = new ArrayAdapter<String>(
+			    mapActivity,
+			    R.layout.layers_list_activity_item,
+			    R.id.title,
+			    adapter.getItemNames()){
+			        @Override
+					public View getView(int position, View convertView, ViewGroup parent) {
+			            //User super class to create the View
+			            View v = super.getView(position, convertView, parent);
+			            TextView tv = (TextView)v.findViewById(R.id.title);
+			            tv.setText(adapter.getItemName(position));			            
+
+			            //Put the image on the TextView
+			            if(adapter.getImageId(position) != 0) {
+			            	tv.setCompoundDrawablesWithIntrinsicBounds(adapter.getImageId(position), 0, 0, 0);
+			            } else {
+			            	tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.list_activities_transparent, 0, 0, 0);
+			            }
+
+						final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
+						ch.setVisibility(View.GONE);
+			            return v;
+			        }
+			    };
+		
+	    builder.setAdapter(listadapter, new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

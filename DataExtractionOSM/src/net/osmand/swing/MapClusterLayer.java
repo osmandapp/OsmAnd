@@ -132,7 +132,7 @@ public class MapClusterLayer implements MapPanelLayer {
 		}
 		
 		BinaryRoutePlanner router = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(), rs);
-		RoutingContext ctx = new RoutingContext();
+		RoutingContext ctx = new RoutingContext(null);
 		
 		// find closest way
 		RouteSegment st = router.findRouteSegment(lat, lon, ctx);

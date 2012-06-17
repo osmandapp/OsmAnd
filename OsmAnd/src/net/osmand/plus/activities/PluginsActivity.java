@@ -7,17 +7,13 @@ import java.util.Set;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class PluginsActivity extends OsmandListActivity {
 	
@@ -28,7 +24,7 @@ public class PluginsActivity extends OsmandListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.plugins_screen, R.drawable.tab_favorites_screen_icon);
+		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.plugins_screen, R.drawable.tab_plugin_screen_icon);
 		setContentView(R.layout.plugins);
 		
 		availablePlugins = OsmandPlugin.getAvailablePlugins();
@@ -56,7 +52,7 @@ public class PluginsActivity extends OsmandListActivity {
 				restartPlugins.add(item.getId());
 			}
 		}
-		getListAdapter().notifyDataSetInvalidated();
+		getListAdapter().notifyDataSetChanged();
 	}
 	
 	@Override
@@ -64,7 +60,6 @@ public class PluginsActivity extends OsmandListActivity {
 		return (OsmandPluginsAdapter) super.getListAdapter();
 	}
 	
-	private int colorGreen = 0xff23CC6C;
 	protected class OsmandPluginsAdapter extends ArrayAdapter<OsmandPlugin> {
 		
 		public OsmandPluginsAdapter(List<OsmandPlugin> plugins) {
@@ -80,19 +75,14 @@ public class PluginsActivity extends OsmandListActivity {
 			}
 			final View row = v;
 			OsmandPlugin plugin = getItem(position);
-			ImageView imgView = (ImageView) row.findViewById(R.id.plugin_icon);
-			imgView.setImageDrawable(getResources().getDrawable(R.drawable.icon_small));
 			TextView nameView = (TextView) row.findViewById(R.id.plugin_name);
 			nameView.setText(plugin.getName());
 			
 			TextView description = (TextView) row.findViewById(R.id.plugin_descr);
 			description.setText(plugin.getDescription());
-			boolean enabled = enabledPlugins.contains(plugin.getId());
 			boolean toBeEnabled = restartPlugins.contains(plugin.getId());
-			description.setTextColor(toBeEnabled? colorGreen : Color.LTGRAY);
-			nameView.setTextColor(toBeEnabled? colorGreen : Color.LTGRAY);
-//			description.setTypeface(enabled? Typeface.DEFAULT_BOLD : Typeface.DEFAULT);
-			nameView.setTypeface(enabled? Typeface.DEFAULT_BOLD : Typeface.DEFAULT);
+			int right = toBeEnabled ? R.drawable.list_activities_dot_marker2_pressed : R.drawable.list_activities_dot_marker1_pressed;
+			nameView.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.list_activities_plugin_menu_symbol), null, getResources().getDrawable(right), null);
 
 			return row;
 		}

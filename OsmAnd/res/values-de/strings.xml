@@ -8,19 +8,19 @@
 	<string name="map_settings">- Karten-Einstellungen</string>
 	<string name="map_settings_descr">Konfigurieren der Karten-Anzeige</string>
 	
-	<string name="osmand_rastermaps_plugin_description">Dieses Modul ermöglicht die Verwendung vieler online oder gecachter Kachel-Kartenquellen, auch als Overlay- oder Underlay. Solche Karten können auch offline erstellt und in das OsmAnd-Verzeichnis kopiert werden.</string>
-    <string name="osmand_background_plugin_description">Dieses Modul ermöglicht das Positions-Logging oder die Navigation während das Gerät im Standby-Modus ist durch periodischen Aufwecken des GPS-Empfängers.</string>
-    <string name="osmand_accessibility_description">Dieses Modul konfiguriert spezielle Barrierefreiheits-Erweiterungen.</string>
+	<string name="osmand_rastermaps_plugin_description">Zeigt Einstellungen für die Verwendung von online oder gecachter Kachel-Kartenquellen, auch als Overlay- oder Underlay. Solche Karten können auch offline erstellt und in das OsmAnd-Verzeichnis kopiert werden.</string>
+    <string name="osmand_background_plugin_description">Zeigt Einstellungen für das Positions-Logging oder die Navigation während das Gerät im Standby-Modus ist (periodisches Aufwecken des GPS-Empfängers).</string>
+    <string name="osmand_accessibility_description">Zeigt Einstellungen für spezielle Barrierefreiheits-Erweiterungen.</string>
     <string name="extra_settings">Erweiterte Einstellungen</string>
-    <string name="osmand_monitoring_description">Dieses Modul ermöglicht die Aufzeichnung zurückgelegter Strecken in GPX-Dateien oder das Live-Tracking via Web-Service.</string>
-    <string name="osmand_extra_settings_description">Dieses Modul ermöglicht erweiterte Kartenkonfiguration und einige gerätespezifische Einstellungen.</string>
-    <string name="osmand_development_plugin_description">Dieses Modul aktivert Entwicklungs- und Fehlersuchhilfen wie simulierte Navigation oder die Messung der Render-Leistung.</string>
+    <string name="osmand_monitoring_description">Zeigt Einstellungen für die Aufzeichnung zurückgelegter Strecken in GPX-Dateien oder das Live-Tracking via Web-Service.</string>
+    <string name="osmand_extra_settings_description">Zeigt Einstellungen für erweiterte Kartenkonfiguration (z.B. mehr Details) und einige Gerätespezifika.</string>
+    <string name="osmand_development_plugin_description">Zeigt Einstellungen für Entwicklungs- und Fehlersuchhilfen wie simulierte Navigation oder die Messung der Render-Leistung.</string>
     <string name="plugins_screen">Modul-Manager</string>
     <string name="select_plugin_to_activate">Module zum Aktivieren oder Deaktivieren anklicken. (Ein Neustart von OsmAnd könnte nötig sein.)</string>
-    <string name="prefs_plugins_descr">Module aktivieren (bereits enthaltene) Extra-Funktionalität wie Online-Karten, Positions-Logging, Hintergrundservice, Barrierefreiheit und anderes.</string>
+    <string name="prefs_plugins_descr">Module aktivieren Experteneinstellungen und Extra-Funktionalität wie Online-Karten, Positions-Logging, Hintergrundservice, Barrierefreiheit und anderes.</string>
     <string name="prefs_plugins">Modul-Manager</string>
     <string name="tip_recent_changes_0_8_0_t">"Änderungen in 0.8.0 : \n\t- Modul-Funktionalität \n\t- Unterstützung neuer Offline-Karten \n\t- Viele Fehler behoben "</string>
-    <string name="osm_editing_plugin_description">Dieses Modul ermöglicht das Erstellen und Bearbeiten von OSM POI Objekten, das Öffnen und Kommentieren von OSM Fehlern, und das Hochladen von GPX-Dateien (benötigt OSM Benutzerkonto).</string>
+    <string name="osm_editing_plugin_description">Zeigt Einstellungen nötig zum Erstellen und Bearbeiten von OSM POI Objekten, das Öffnen und Kommentieren von OSM Fehlern, und das Hochladen von GPX-Dateien (benötigt OSM Benutzerkonto).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektorkarten werden eventuell schneller angezeigt. Funktioniert nur auf manchen Geräten.</string>
   <string name="simulate_route_progression_manually">Simuliere die Navigation</string>
   <string name="play_commands_of_currently_selected_voice">Spiele Ansagen der aktuell ausgewählten Stimme ab</string>

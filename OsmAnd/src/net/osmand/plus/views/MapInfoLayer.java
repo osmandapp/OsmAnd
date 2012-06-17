@@ -242,7 +242,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 			public boolean updateInfo() {
 				// draw speed
 				if (map.getLastKnownLocation() != null && map.getLastKnownLocation().hasSpeed()) {
-					if (Math.abs(map.getLastKnownLocation().getSpeed() - cachedSpeed) > .3f) {
+					// .3 mps == 1.08 kph
+					float minDelta = .3f;
+					// Update more often at walk/run speeds, since we give higher resolution
+					// and use .02 instead of .03 to account for rounding effects.
+					if (cachedSpeed < 6) minDelta = .015f;
+					if (Math.abs(map.getLastKnownLocation().getSpeed() - cachedSpeed) > minDelta) {
 						cachedSpeed = map.getLastKnownLocation().getSpeed();
 						String ds = OsmAndFormatter.getFormattedSpeed(cachedSpeed, map);
 						int ls = ds.lastIndexOf(' ');

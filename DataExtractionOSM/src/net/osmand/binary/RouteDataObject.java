@@ -98,6 +98,10 @@ public class RouteDataObject {
 		}
 		return pointTypes[ind];
 	}
+	
+	public int[] getTypes() {
+		return types;
+	}
 
 	public String getHighway() {
 		String highway = null;

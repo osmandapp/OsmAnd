@@ -477,7 +477,7 @@
   <string name="download_type_to_filter">type to filter</string>
   <string name="use_high_res_maps">High resolution display</string>
   <string name="use_high_res_maps_descr">Do not stretch (and blur) map tiles on high density displays</string>
-  <string name="download_files">डाउनलोड…</string>
+  <string name="download_files">डाउनलोड</string>
   <string name="context_menu_item_search_transport">Search transport</string>
   <string name="transport_searching_transport">Transport results (no target):</string>
   <string name="transport_searching_route">Transport results ({0} to target):</string>
@@ -496,8 +496,8 @@
   <string name="osb_bug_name">Bug</string>
   <string name="poi_context_menu_modify">Modify POI</string>
   <string name="poi_context_menu_delete">Delete POI</string>
-  <string name="rotate_map_compass_opt">To compass</string>
-  <string name="rotate_map_bearing_opt">To direction of movement</string>
+  <string name="rotate_map_compass_opt">कंपास प्रमाणे</string>
+  <string name="rotate_map_bearing_opt">दिशेप्रमाणे</string>
   <string name="rotate_map_none_opt">Don\'t rotate</string>
   <string name="rotate_map_to_bearing_descr">Select how map is oriented</string>
   <string name="rotate_map_to_bearing">Map orientation</string>
@@ -550,12 +550,12 @@
   <string name="menu_mute_off">आवाज चालू आहे</string>
   <string name="menu_mute_on">आवाज बंद आहे</string>
   <string name="voice_provider_descr">Select voice guidance for navigation</string>
-  <string name="voice_provider">Voice guidance</string>
+  <string name="voice_provider">आवाज मार्गदर्शन</string>
   <string name="voice_data_initializing">Initializing voice data…</string>
   <string name="voice_data_not_supported">Unsupported version of voice data</string>
   <string name="voice_data_corrupted">Specified voice data is corrupted</string>
   <string name="voice_data_unavailable">Selected voice data is not available</string>
-  <string name="stop_routing">Stop navigtn.</string>
+  <string name="stop_routing">मार्गदर्शन थांबवा</string>
   <string name="sd_unmounted">SD card is not accessible.\nYou won\'t be able to see maps or find things.</string>
   <string name="sd_mounted_ro">SD card is read-only.\nYou can only see the preloaded map and can\'t download from the Internet.</string>
   <string name="unzipping_file">Unzipping file…</string>
@@ -578,7 +578,7 @@
   <string name="map_screen_orientation">Screen orientation</string>
   <string name="map_screen_orientation_descr">Choose screen orientation</string>
   <string name="opening_hours_not_supported">Opening hours format is not supported for editing</string>
-  <string name="add_new_rule">Add new rule</string>
+  <string name="add_new_rule">नविन नियम जोडा</string>
   <string name="transport_Routes">Routes</string>
   <string name="transport_Stop">Stop</string>
   <string name="transport_stops">stops</string>
@@ -589,7 +589,7 @@
   <string name="transport_to_go_after">prior distance</string>
   <string name="transport_to_go_before">subsequent distance</string>
   <string name="transport_stops_to_pass">stops to pass</string>
-  <string name="transport_route_distance">Route distance</string>
+  <string name="transport_route_distance">मार्गाचे अंतर</string>
   <string name="transport">Transport</string>
   <string name="default_buttons_ok">ठिक आहे</string>
   <string name="show_transport_over_map_description">सार्वजनिक परिवहन थांबे नकाशावर दाखवा</string>
@@ -604,19 +604,19 @@
   <string name="context_menu_item_update_map_confirm">Update local data via Internet?</string>
   <string name="search_history_city">शहर:\n {0}</string>
   <string name="search_history_street">रस्ता:\n {0}, {1}</string>
-  <string name="search_history_int_streets">Intersection: {0} x {1} in {2}</string>
+  <string name="search_history_int_streets">चौक: {0} x {1} in {2}</string>
   <string name="search_history_building">इमारत: {0}, {1}, {2}</string>
   <string name="favorite">Favorite</string>
   <string name="clear_all">Clear all</string>
   <string name="history">History</string>
-  <string name="uploading_data">Uploading data…</string>
-  <string name="uploading">Uploading…</string>
+  <string name="uploading_data">डेटा अपलोड करत आहे…</string>
+  <string name="uploading">अपलोड करत आहे…</string>
   <string name="search_nothing_found">काही सापडले नाही</string>
   <string name="searching">शोधत आहे…</string>
   <string name="searching_address">पत्ता शोधत आहे…</string>
   <string name="search_osm_nominatim">Search address using OSM Nominatim</string>
   <string name="hint_search_online">House number, street, city</string>
-  <string name="search_offline_address">Offline</string>
+  <string name="search_offline_address">ऑफलाएन</string>
   <string name="search_online_address">इंटरनेट</string>
   <string name="max_level_download_tile">Max. online zoom</string>
   <string name="max_level_download_tile_descr">Choose maximum zoom level to download for online map tiles</string>
@@ -624,10 +624,10 @@
   <string name="router_service_descr">Choose an online or offline navigation service</string>
   <string name="router_service">Navigation service</string>
   <string name="sd_dir_not_accessible">Save directory on SD card not accessible</string>
-  <string name="download_question">Download {0} - {1} ?</string>
+  <string name="download_question">डाउनलोड {0} - {1} ?</string>
   <string name="download_question_exist">Offline data for {0} already exists ({1}). Do you want to update it ({2}) ?</string>
   <string name="address">पत्ता</string>
-  <string name="download_index_success">Download successful</string>
+  <string name="download_index_success">डाउनलोड यशस्वी</string>
   <string name="error_io_error">I/O error occured</string>
   <string name="downloading_file">फाइल डाउनलोड करत आहे…</string>
   <string name="downloading">डाउनलोड करत आहे…</string>
@@ -655,7 +655,7 @@
   <string name="loading_postcodes">Loading postcodes…</string>
   <string name="loading_streets">Loading streets…</string>
   <string name="loading_cities">Loading cities…</string>
-  <string name="loading">Loading…</string>
+  <string name="loading">लोड करत आहे...</string>
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">Error while saving GPX</string>
   <string name="error_calculating_route">Error calculating route</string>
@@ -666,7 +666,7 @@
   <string name="invalid_locations">Coordinates are invalid!</string>
   <string name="go_back_to_osmand">Go back to OsmAnd map</string>
   <string name="close">बंद करा</string>
-  <string name="loading_data">Loading data…</string>
+  <string name="loading_data">डेटा लोड करत आहे…</string>
   <string name="reading_indexes">Reading local data…</string>
   <string name="previous_run_crashed">Last OsmAnd run crashed. Log file is at {0}. Please report the issue and attach the log file.</string>
   <string name="saving_gpx_tracks">Saving GPX tracks to SD…</string>
@@ -674,14 +674,14 @@
   <string name="reload_indexes_descr">Re-read offline vector maps and data from SD card</string>
   <string name="reload_indexes">Re-read offline data</string>
   <string name="download_indexes_descr">Download or update data for offline use from the Internet</string>
-  <string name="download_indexes">Download offline data</string>
+  <string name="download_indexes">ऑफलाइन डेटा डाउनलोड करत आहे</string>
   <string name="use_online_routing_descr">मार्ग गणना करण्य़ासाठी इंटरनेटचा वापर करा</string>
   <string name="use_online_routing">Use online navigation</string>
   <string name="osm_settings_descr">Specify Openstreetmap.org (OSM) settings needed for OSM submissions</string>
   <string name="data_settings_descr">Specify language, download/reload data</string>
-  <string name="data_settings">Data</string>
+  <string name="data_settings">डेटा</string>
   <string name="map_preferences_descr">Specify map settings: map source, rotation, marker position, screen orientation</string>
-  <string name="osm_settings">OSM-Editing</string>
+  <string name="osm_settings">OSM Editing</string>
   <string name="auto_zoom_map_descr">Auto zoom map according to your speed</string>
   <string name="auto_zoom_map">Auto zoom map</string>
   <string name="additional_settings">Additional settings</string>
@@ -833,4 +833,4 @@
   <string name="transport_search_desc">Transport search</string>
   <string name="favourites_search_desc">Favourites search</string>
   <string name="history_search_desc">Search history</string>
-</resources>
+<string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string><string name="rendering_attr_noPolygons_name">No polygons</string><string name="rendering_attr_appMode_name">Rendering mode</string><string name="rendering_attr_appMode_description">Map optimization for respective User Profile</string><string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate SRTM-file may be needed.</string><string name="rendering_attr_contourLines_name">Show contour lines</string><string name="rendering_attr_hmRendered_description">Increase amount of map detail shown</string><string name="rendering_attr_hmRendered_name">Show more map detail</string></resources>

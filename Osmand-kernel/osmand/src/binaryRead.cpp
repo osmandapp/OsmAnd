@@ -50,8 +50,6 @@ bool skipUnknownFields(CodedInputStream* input, int tag) {
 }
 
 
-
-
 bool readMapTreeBounds(CodedInputStream* input, MapTreeBounds* tree, MapRoot* root) {
 	int init = 0;
 	int tag;
@@ -1317,14 +1315,14 @@ BinaryMapFile* initBinaryMapFile(std::string inputName) {
 	FileInputStream input(fileDescriptor);
 	input.SetCloseOnDelete(false);
 	CodedInputStream cis(&input);
-	cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
+	cis.SetTotalBytesLimit(INT_MAX, INT_MAX);
+
 	if (!initMapStructure(&cis, mapFile)) {
 		osmand_log_print(LOG_ERROR, "File not initialised : %s", inputName.c_str());
 		delete mapFile;
 		return NULL;
 	}
 	mapFile->inputName = inputName;
-
 	openFiles.insert(std::pair<std::string, BinaryMapFile*>(inputName, mapFile));
 	return mapFile;
 }

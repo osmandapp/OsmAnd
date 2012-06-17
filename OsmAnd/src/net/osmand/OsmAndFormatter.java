@@ -100,7 +100,13 @@ public class OsmAndFormatter {
 		if(mc == MetricsConstants.KILOMETERS_AND_METERS){
 			return ((int) kmh) + " " + ctx.getString(R.string.km_h);
 		} else {
-			return ((int) (kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE)) + " "+ ctx.getString(R.string.mile_per_hour);
+			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE;
+			if(mph >= 10) {
+				return ((int) (mph)) + " "+ ctx.getString(R.string.mile_per_hour);
+			} else {
+				mph = ((int)mph*10f)/10f;
+				return mph + " "+ ctx.getString(R.string.mile_per_hour);
+			}
 		}
 	}
 	
