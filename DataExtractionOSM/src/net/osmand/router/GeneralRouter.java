@@ -89,14 +89,9 @@ public class GeneralRouter extends VehicleRouter {
 	@Override
 	public double defineSpeed(RouteDataObject road) {
 		if (followSpeedLimitations) {
-			RouteRegion reg = road.region;
-			int sz = road.types.length;
-			for (int i = 0; i < sz; i++) {
-				RouteTypeRule r = reg.quickGetEncodingRule(road.types[i]);
-				float maxSpeed = r.maxSpeed();
-				if (maxSpeed > 0) {
-					return maxSpeed;
-				}
+			float m = road.getMaximumSpeed();
+			if(m > 0) {
+				return m;
 			}
 		}
 

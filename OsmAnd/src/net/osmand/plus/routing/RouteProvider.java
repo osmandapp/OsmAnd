@@ -8,6 +8,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -32,8 +33,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
-import net.osmand.plus.routing.RoutingHelper.TurnType;
 import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
@@ -100,7 +99,7 @@ public class RouteProvider {
 		
 		private void prepareEverything(GPXFile file, boolean reverse, boolean leftSide){
 			if(file.isCloudmadeRouteFile() || OSMAND_ROUTER.equals(file.author)){
-				directions =  parseCloudmadeRoute(points, file, OSMAND_ROUTER.equals(file.author), leftSide);
+				directions =  parseCloudmadeRoute(points, file, OSMAND_ROUTER.equals(file.author), leftSide, 10);
 				if(reverse){
 					// clear directions all turns should be recalculated
 					directions = null;
@@ -140,159 +139,7 @@ public class RouteProvider {
 	}
 	
 	
-	public static class RouteCalculationResult {
-		private final List<Location> locations;
-		private List<RouteDirectionInfo> directions;
-		private final String errorMessage;
-		private int[] listDistance = null;
-		
-		public RouteCalculationResult(String errorMessage) {
-			this(null, null, null, null, errorMessage);
-		}
-		public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, Location start, LatLon end, String errorMessage) {
-			this.directions = directions;
-			this.errorMessage = errorMessage;
-			this.locations = list;
-			if (list != null) {
-				prepareResult(start, end);
-			}
-		}
-		
-		public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end) {
-			// TODO put directions information
-			this.directions = null;
-			this.errorMessage = null;
-			this.locations = new ArrayList<Location>();
-			
-			for (RouteSegmentResult s : list) {
-				boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
-				int i = s.getStartPointIndex();
-				while (true) {
-					Location n = new Location(""); //$NON-NLS-1$
-					LatLon point = s.getPoint(i);
-					n.setLatitude(point.getLatitude());
-					n.setLongitude(point.getLongitude());
-					locations.add(n);
-					if (i == s.getEndPointIndex()) {
-						break;
-					}
-					if (plus) {
-						i++;
-					} else {
-						i--;
-					}
-				}
-			}
-			introduceFirstPoint(start);
-			updateListDistanceTime();
-		}
-		
-		public List<Location> getLocations() {
-			return locations;
-		}
-		
-		public List<RouteDirectionInfo> getDirections() {
-			return directions;
-		}
-		
-		public int[] getListDistance() {
-			return listDistance;
-		}
-		
-		private void prepareResult(Location start, LatLon end) {
-			if (locations != null && !locations.isEmpty()) {
-				// if there is no closest points to start - add it
-				introduceFirstPoint(start);
-				
-				checkForDuplicatePoints();
-				// Remove unnecessary go straight from CloudMade 
-				// Remove also last direction because it will be added after
-				removeUnnecessaryGoAhead();
-			}
-			
-			updateListDistanceTime();
-		}
-		
-		// Remove unnecessary go straight from CloudMade 
-		// Remove also last direction because it will be added after
-		private void removeUnnecessaryGoAhead() {
-			if(directions != null && directions.size() > 1){
-				for (int i = 1; i < directions.size(); ) {
-					RouteDirectionInfo r = directions.get(i);
-					if(r.turnType.getValue().equals(TurnType.C)){
-						RouteDirectionInfo prev = directions.get(i-1);
-						prev.expectedTime += r.expectedTime;
-						directions.remove(i);
-					} else {
-						i++;
-					}
-				}
-			}
-		}
-		
-		private void checkForDuplicatePoints() {
-			// check points for duplicates (it is very bad for routing) - cloudmade could return it 
-			for (int i = 0; i < locations.size() - 1; ) {
-				if(locations.get(i).distanceTo(locations.get(i+1)) == 0){
-					locations.remove(i);
-					if (directions != null) {
-						for (RouteDirectionInfo info : directions) {
-							if(info.routePointOffset > i){
-								info.routePointOffset--;
-							}
-						}
-					}
-				} else {
-					i++;
-				}
-			}
-		}
-		private void introduceFirstPoint(Location start) {
-			if (!locations.isEmpty() && locations.get(0).distanceTo(start) > 200) {
-				// add start point
-				locations.add(0, start);
-				if (directions != null) {
-					for (RouteDirectionInfo i : directions) {
-						i.routePointOffset++;
-					}
-					RouteDirectionInfo info = new RouteDirectionInfo();
-					info.turnType = TurnType.valueOf(TurnType.C, false);
-					info.routePointOffset = 0;
-					info.descriptionRoute = "" ;//getString(ctx, R.string.route_head); //$NON-NLS-1$
-					directions.add(0, info);
-				}	
-			}
-		}
-		private void updateListDistanceTime() {
-			listDistance = new int[locations.size()];
-			if (!locations.isEmpty()) {
-				listDistance[locations.size() - 1] = 0;
-				for (int i = locations.size() - 1; i > 0; i--) {
-					listDistance[i - 1] = (int) locations.get(i - 1).distanceTo(locations.get(i));
-					listDistance[i - 1] += listDistance[i];
-				}
-			}
-			if (directions != null) {
-				int sum = 0;
-				for (int i = directions.size() - 1; i >= 0; i--) {
-					directions.get(i).afterLeftTime = sum;
-					sum += directions.get(i).expectedTime;
-					directions.get(i).distance = listDistance[directions.get(i).routePointOffset];
-					if(i < directions.size() - 1){
-						directions.get(i).distance -=listDistance[directions.get(i + 1).routePointOffset];
-					}
-				}
-			}
-		}
-		public boolean isCalculated(){
-			return locations != null && !locations.isEmpty();
-		}
-		
-		public String getErrorMessage(){
-			return errorMessage;
-		}
-		
-	}
+	
 
 	public RouteCalculationResult calculateRouteImpl(Location start, LatLon end, ApplicationMode mode, RouteService type, Context ctx,
 			GPXRouteParams gpxRoute, boolean fast, boolean leftSide){
@@ -373,10 +220,9 @@ public class RouteProvider {
 			List<RouteDirectionInfo> subdirections = new ArrayList<RouteDirectionInfo>();
 			for (RouteDirectionInfo info : params.directions) {
 				if(info.routePointOffset >= startI && info.routePointOffset < endI){
-					RouteDirectionInfo ch = new RouteDirectionInfo();
+					RouteDirectionInfo ch = new RouteDirectionInfo(info.getAverageSpeed());
 					ch.routePointOffset = info.routePointOffset - startI;
 					ch.descriptionRoute = info.descriptionRoute;
-					ch.expectedTime = info.expectedTime;
 					ch.turnType = info.turnType;
 					
 					// recalculate
@@ -422,7 +268,7 @@ public class RouteProvider {
 		
 		int previousLocation = 0;
 		int prevBearingLocation = 0;
-		RouteDirectionInfo previousInfo = new RouteDirectionInfo();
+		RouteDirectionInfo previousInfo = new RouteDirectionInfo(speed);
 		
 		previousInfo.turnType = TurnType.valueOf(TurnType.C, leftSide);
 		previousInfo.routePointOffset = 0;
@@ -501,10 +347,9 @@ public class RouteProvider {
 				
 				// calculate for previousRoute 
 				previousInfo.distance = listDistance[previousLocation]- listDistance[i];
-				previousInfo.expectedTime = (int) (previousInfo.distance / speed);
 				previousInfo.descriptionRoute += " " + OsmAndFormatter.getFormattedDistance(previousInfo.distance, ctx); //$NON-NLS-1$
 
-				previousInfo = new RouteDirectionInfo();
+				previousInfo = new RouteDirectionInfo(speed);
 				previousInfo.turnType = type;
 				previousInfo.turnType.setTurnAngle(360 - delta);
 				previousInfo.descriptionRoute = description;
@@ -518,13 +363,11 @@ public class RouteProvider {
 		} 
 			
 		previousInfo.distance = listDistance[previousLocation];
-		previousInfo.expectedTime = (int) (previousInfo.distance / speed);
 		previousInfo.descriptionRoute += " " + OsmAndFormatter.getFormattedDistance(previousInfo.distance, ctx); //$NON-NLS-1$
 		
 		// add last direction go straight (to show arrow in screen after all turns)
 		if(previousInfo.distance > 80){
-			RouteDirectionInfo info = new RouteDirectionInfo();
-			info.expectedTime = 0;
+			RouteDirectionInfo info = new RouteDirectionInfo(speed);
 			info.distance = 0;
 			info.descriptionRoute = ""; //$NON-NLS-1$
 			info.turnType = TurnType.valueOf(TurnType.C, leftSide);
@@ -532,15 +375,14 @@ public class RouteProvider {
 			directions.add(info);
 		}
 		
-
 		
-		if(res.directions == null || res.directions.isEmpty()){
-			res.directions = new ArrayList<RouteDirectionInfo>(directions);
+		if (res.directions == null || res.directions.isEmpty()) {
+			res.setDirections(new ArrayList<RouteDirectionInfo>(directions));
 		} else {
-			int currentDirection= 0;
+			int currentDirection = 0;
 			// one more
 			for (int i = 0; i <= res.directions.size() && currentDirection < directions.size(); i++) {
-				while(currentDirection < directions.size()){
+				while (currentDirection < directions.size()) {
 					int distanceAfter = 0;
 					if (i < res.directions.size()) {
 						RouteDirectionInfo resInfo = res.directions.get(i);
@@ -558,37 +400,32 @@ public class RouteProvider {
 							break;
 						}
 					}
-					
+
 					// add turn because it was missed
 					RouteDirectionInfo toAdd = directions.get(currentDirection);
-					float calcSpeed = toAdd.expectedTime == 0 ? speed :((float) toAdd.distance / toAdd.expectedTime);
-					
-					if(i > 0){
+
+					if (i > 0) {
 						// update previous
 						RouteDirectionInfo previous = res.directions.get(i - 1);
-						calcSpeed = previous.expectedTime == 0 ? calcSpeed :((float) previous.distance / previous.expectedTime);
-						previous.distance = listDistance[previous.routePointOffset] - listDistance[toAdd.routePointOffset];
-						previous.expectedTime = (int) ((float) previous.distance / calcSpeed); 
+						toAdd.setAverageSpeed(previous.getAverageSpeed());
 					}
 					toAdd.distance = listDistance[toAdd.routePointOffset] - distanceAfter;
-					toAdd.expectedTime = (int) ((float) toAdd.distance / calcSpeed);
-					if(i < res.directions.size()){
+					if (i < res.directions.size()) {
 						res.directions.add(i, toAdd);
 					} else {
 						res.directions.add(toAdd);
 					}
-					
 					i++;
 					currentDirection++;
 				}
 			}
-			
+
 		}
 		
 		int sum = 0;
 		for (int i = res.directions.size() - 1; i >= 0; i--) {
 			res.directions.get(i).afterLeftTime = sum;
-			sum += res.directions.get(i).expectedTime;
+			sum += res.directions.get(i).getExpectedTime();
 		}
 	}
 
@@ -694,11 +531,14 @@ public class RouteProvider {
 		uri.append(end.getLatitude() + "").append(","); //$NON-NLS-1$//$NON-NLS-2$
 		uri.append(end.getLongitude() + "").append("/"); //$NON-NLS-1$ //$NON-NLS-2$
 
+		float speed = 1.5f;
 		if (ApplicationMode.PEDESTRIAN == mode) {
 			uri.append("foot.gpx"); //$NON-NLS-1$
 		} else if (ApplicationMode.BICYCLE == mode) {
+			speed = 5.5f;
 			uri.append("bicycle.gpx"); //$NON-NLS-1$
 		} else {
+			speed = 15.3f;
 			if (fast) {
 				uri.append("car.gpx"); //$NON-NLS-1$
 			} else {
@@ -710,13 +550,13 @@ public class RouteProvider {
 		URL url = new URL(uri.toString());
 		URLConnection connection = url.openConnection();
 		GPXFile gpxFile = GPXUtilities.loadGPXFile(ctx, connection.getInputStream(), false);
-		directions = parseCloudmadeRoute(res, gpxFile, false, leftSide);
+		directions = parseCloudmadeRoute(res, gpxFile, false, leftSide, speed);
 
 		return new RouteCalculationResult(res, directions, start, end, null);
 	}
 
 	private static List<RouteDirectionInfo> parseCloudmadeRoute(List<Location> res, GPXFile gpxFile, boolean osmandRouter,
-			boolean leftSide) {
+			boolean leftSide, float defSpeed) {
 		List<RouteDirectionInfo> directions = null;
 		if (!osmandRouter) {
 			for (WptPt pt : gpxFile.points) {
@@ -731,6 +571,10 @@ public class RouteProvider {
 				}
 			}
 		}
+		float[] distanceToEnd  = new float[res.size()];
+		for (int i = res.size() - 2; i >= 0; i--) {
+			distanceToEnd[i] = distanceToEnd[i + 1] + res.get(i).distanceTo(res.get(i + 1));
+		}
 
 		Route route = null;
 		if (gpxFile.routes.size() > 0) {
@@ -739,14 +583,30 @@ public class RouteProvider {
 		RouteDirectionInfo previous = null;
 		if (route != null && route.points.size() > 0) {
 			directions = new ArrayList<RouteDirectionInfo>();
-			for (WptPt item :  route.points) {
+			Iterator<WptPt> iterator = route.points.iterator();
+			while(iterator.hasNext()){
+				WptPt item = iterator.next();
 				try {
-					RouteDirectionInfo dirInfo = new RouteDirectionInfo();
-					dirInfo.descriptionRoute = item.desc; //$NON-NLS-1$
 					String stime = item.getExtensionsToRead().get("time");
+					int time  = 0;
 					if (stime != null) {
-						dirInfo.expectedTime = Integer.parseInt(stime);
+						time = Integer.parseInt(stime);
 					}
+					int offset = Integer.parseInt(item.getExtensionsToRead().get("offset")); //$NON-NLS-1$
+					if(directions.size() > 0) {
+						RouteDirectionInfo last = directions.get(directions.size() - 1);
+						// update speed using time and idstance
+						last.setAverageSpeed((distanceToEnd[last.routePointOffset] - distanceToEnd[offset])/last.getAverageSpeed());
+					} 
+					// save time as a speed because we don't know distance of the route segment
+					float avgSpeed = time;
+					if(!iterator.hasNext() && time > 0) {
+						avgSpeed = distanceToEnd[offset] / time;
+					}
+					
+					RouteDirectionInfo dirInfo = new RouteDirectionInfo(avgSpeed);
+					dirInfo.descriptionRoute = item.desc; //$NON-NLS-1$
+					
 					String stype = item.getExtensionsToRead().get("turn"); //$NON-NLS-1$
 					if (stype != null) {
 						dirInfo.turnType = TurnType.valueOf(stype.toUpperCase(), leftSide);
@@ -757,8 +617,6 @@ public class RouteProvider {
 					if (sturn != null) {
 						dirInfo.turnType.setTurnAngle((float) Double.parseDouble(sturn));
 					}
-
-					int offset = Integer.parseInt(item.getExtensionsToRead().get("offset")); //$NON-NLS-1$
 					dirInfo.routePointOffset = offset;
 
 					if (previous != null && previous.turnType != null && !TurnType.C.equals(previous.turnType.getValue()) &&
@@ -881,7 +739,11 @@ public class RouteProvider {
 		return new RouteCalculationResult(res, null, start, end, null);
 	}
 	
-	public GPXFile createOsmandRouterGPX(int currentRoute, List<Location> routeNodes, int currentDirectionInfo, List<RouteDirectionInfo> directionInfo){
+	public GPXFile createOsmandRouterGPX(RouteCalculationResult srcRoute){
+		int currentRoute = srcRoute.currentRoute;
+		List<Location> routeNodes = srcRoute.locations;
+		int currentDirectionInfo = srcRoute.currentDirectionInfo;
+		List<RouteDirectionInfo> directionInfo = srcRoute.directions;
 		GPXFile gpx = new GPXFile();
 		gpx.author = OSMAND_ROUTER;
 		Track track = new Track();
@@ -918,7 +780,7 @@ public class RouteProvider {
 				pt.lon = loc.getLongitude();
 				pt.desc = dirInfo.descriptionRoute;
 				Map<String, String> extensions = pt.getExtensionsToWrite();
-				extensions.put("time", dirInfo.expectedTime + "");
+				extensions.put("time", dirInfo.getExpectedTime() + "");
 				String turnType = dirInfo.turnType.getValue();
 				if (dirInfo.turnType.isRoundAbout()) {
 					turnType += dirInfo.turnType.getExitOut();

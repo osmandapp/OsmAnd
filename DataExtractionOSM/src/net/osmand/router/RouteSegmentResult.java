@@ -10,6 +10,7 @@ public class RouteSegmentResult {
 	private int startPointIndex;
 	private int endPointIndex;
 	private float segmentTime;
+	private float speed;
 	
 	public RouteSegmentResult(RouteDataObject object, int startPointIndex, int endPointIndex) {
 		this.object = object;
@@ -53,4 +54,15 @@ public class RouteSegmentResult {
 	private LatLon convertPoint(RouteDataObject o, int ind){
 		return new LatLon(MapUtils.get31LatitudeY(o.getPoint31YTile(ind)), MapUtils.get31LongitudeX(o.getPoint31XTile(ind)));
 	}
+
+	public void setSegmentSpeed(float speed) {
+		this.speed = speed;
+	}
+	
+	public float getSegmentSpeed() {
+		return speed;
+	}
+	
+	
+	
 }

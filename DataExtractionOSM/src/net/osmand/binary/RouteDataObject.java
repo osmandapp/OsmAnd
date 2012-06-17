@@ -102,6 +102,18 @@ public class RouteDataObject {
 	public int[] getTypes() {
 		return types;
 	}
+	
+	public float getMaximumSpeed(){
+		int sz = types.length;
+		for (int i = 0; i < sz; i++) {
+			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
+			float maxSpeed = r.maxSpeed();
+			if (maxSpeed > 0) {
+				return maxSpeed;
+			}
+		}
+		return 0;
+	}
 
 	public String getHighway() {
 		String highway = null;

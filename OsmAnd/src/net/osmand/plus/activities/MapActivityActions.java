@@ -40,10 +40,8 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
-import android.content.DialogInterface.OnShowListener;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
@@ -57,7 +55,6 @@ import android.util.FloatMath;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -131,16 +128,17 @@ public class MapActivityActions implements DialogProvider {
 		final AutoCompleteTextView cat =  (AutoCompleteTextView) dialog.findViewById(R.id.Category);
 		cat.setText(point.getCategory());
 		editText.selectAll();
-		dialog.setOnShowListener(new OnShowListener() {
-
-		    @Override
-		    public void onShow(DialogInterface dialog) {
-		        InputMethodManager imm = (InputMethodManager) mapActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
-		        if (imm != null) {
-		        	imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
-		        }
-		    }
-		});
+		// PAVOL FIXME android API 8
+//		dialog.setOnShowListener(new OnShowListener() {
+//
+//		    @Override
+//		    public void onShow(DialogInterface dialog) {
+//		        InputMethodManager imm = (InputMethodManager) mapActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+//		        if (imm != null) {
+//		        	imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+//		        }
+//		    }
+//		});
 	}
 	
 	protected Dialog createAddFavouriteDialog(final Bundle args) {

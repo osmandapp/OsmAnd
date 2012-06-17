@@ -968,6 +968,10 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 	};
 	
+	public LocationListener getGpsListener() {
+		return gpsListener;
+	}
+	
 	@Override
 	protected void onPause() {
 		super.onPause();

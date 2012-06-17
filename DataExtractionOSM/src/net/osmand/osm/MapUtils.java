@@ -50,6 +50,31 @@ public class MapUtils {
 		return getDistance(e1.getLatitude(), e1.getLongitude(), point.getLatitude(), point.getLongitude());
 	}
 	
+	private static double scalarMultiplication(double xA, double yA, double xB, double yB, double xC, double yC) {
+		// Scalar multiplication between (AB, AC)
+		double multiple = (xB - xA) * (xC - xA) + (yB- yA) * (yC -yA);
+		return multiple;
+	}
+
+	public static double getOrthogonalDistance(double lat, double lon, double fromLat, double fromLon, double toLat, double toLon) {
+		// not very accurate computation on sphere but for distances < 1000m it is ok
+		double mDist = (fromLat - toLat) * (fromLat - toLat) + (fromLon - toLon) * (fromLon - toLon);
+		double projection = scalarMultiplication(fromLat, fromLon, toLat, toLon, lat, lon);
+		double prlat;
+		double prlon;
+		if (projection < 0) {
+			prlat = fromLat;
+			prlon = fromLon;
+		} else if (projection >= mDist) {
+			prlat = toLat;
+			prlon = toLon;
+		} else {
+			prlat = fromLat + (toLat - fromLat) * (projection / mDist);
+			prlon = fromLon + (toLon - fromLon) * (projection / mDist);
+		}
+		return getDistance(lat, lon, prlat, prlon);
+	}
+	
 	
 	/**
 	 * Gets distance in meters
@@ -434,6 +459,22 @@ public class MapUtils {
 		
 	}
 	
-	
+	/**
+	 * @param diff align difference between 2 angles ]-180, 180] 
+	 * @return 
+	 */
+	public static double degreesDiff(double a1, double a2) {
+		double diff = a1 - a2;
+		while(diff > 180) {
+			diff -= 360;
+		}
+		while(diff <=-180) {
+			diff += 360;
+		}
+		return diff;
+		
+	}	
 
 }
+
+

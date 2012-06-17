@@ -9,8 +9,8 @@ import net.osmand.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.views.TurnPathHelper;
 import android.location.Location;
 import android.os.Bundle;
@@ -119,9 +119,9 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 			((TurnPathHelper.RouteDrawable) icon.getDrawable()).setRouteType(model.turnType);
 			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(model.distance, ShowRouteInfoActivity.this));
 			label.setText(model.descriptionRoute);
-			int seconds = model.expectedTime % 60;
-			int min = (model.expectedTime / 60) % 60;
-			int hours = (model.expectedTime / 3600);
+			int seconds = model.getExpectedTime() % 60;
+			int min = (model.getExpectedTime() / 60) % 60;
+			int hours = (model.getExpectedTime() / 3600);
 			if (hours == 0) {
 				timeLabel.setText(String.format("%02d:%02d", min, seconds)); //$NON-NLS-1$
 			} else {

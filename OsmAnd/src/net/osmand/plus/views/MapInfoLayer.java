@@ -6,9 +6,9 @@ import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
-import net.osmand.plus.routing.RoutingHelper.TurnType;
+import net.osmand.plus.routing.TurnType;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -456,10 +456,17 @@ public class MapInfoLayer extends OsmandMapLayer {
 			public boolean updateInfo() {
 				boolean visible = false;
 				if (routeLayer != null && routingHelper.isRouterEnabled() && routingHelper.isFollowingMode()) {
-					int d = routingHelper.getDistanceToNextNextRouteDirection();
+					boolean uturnWhenPossible = routingHelper.makeUturnWhenPossible();
+					int d;
+					if(uturnWhenPossible) {
+						d = routingHelper.getDistanceToNextRouteDirection() ; 
+					} else {
+						d = routingHelper.getDistanceToNextNextRouteDirection();
+					}
 					if (d > 0 && !showMiniMap) {
 						visible = true;
-						RouteDirectionInfo next = routingHelper.getNextNextRouteDirectionInfo();
+						RouteDirectionInfo next = uturnWhenPossible? routingHelper.getNextRouteDirectionInfo() : 
+							routingHelper.getNextNextRouteDirectionInfo();
 						if (next == null) {
 							if (turnType != null) {
 								turnType = null;
@@ -474,8 +481,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 							invalidate();
 							nextTurnDirection = d;
 						}
-						if (turnImminent != routingHelper.getNextNextTurnImminent()) {
-							turnImminent = routingHelper.getNextNextTurnImminent();
+						int imminent = uturnWhenPossible? routingHelper.getNextTurnImminent() : routingHelper.getNextNextTurnImminent();
+						if (turnImminent != imminent) {
+							turnImminent = imminent;
 							invalidate();
 						}
 					}
@@ -533,7 +541,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 							invalidate();
 						}
 					} else {
-						if (d > 0 && !showMiniMap) {
+						if (d != 0 && !showMiniMap) {
 							visible = true;
 							RouteDirectionInfo next = routeLayer.getHelper().getNextRouteDirectionInfo();
 							if (next == null) {

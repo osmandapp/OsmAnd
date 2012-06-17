@@ -838,6 +838,7 @@ public class BinaryRoutePlanner {
 			// last point turn time can be added
 			// if(i + 1 < result.size()) { distOnRoadToPass += ctx.getRouter().calculateTurnTime(); }
 			rr.setSegmentTime((float) distOnRoadToPass);
+			rr.setSegmentSpeed((float) speed);
 			completeTime += distOnRoadToPass;
 		}
 		

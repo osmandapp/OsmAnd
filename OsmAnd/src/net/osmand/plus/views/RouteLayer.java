@@ -65,7 +65,7 @@ public class RouteLayer extends OsmandMapLayer {
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		path.reset();
-		if (helper.hasPointsToShow()) {
+		if (helper.getFinalLocation() != null && helper.getRoute().isCalculated()) {
 			if(view.getSettings().FLUORESCENT_OVERLAYS.get() != fluorescent) {
 				initUI(); //to change color immediately when needed
 			}
@@ -85,7 +85,7 @@ public class RouteLayer extends OsmandMapLayer {
 			double rightLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.right);
 			double lat = topLatitude - bottomLatitude + 0.1;
 			double lon = rightLongitude - leftLongitude + 0.1;
-			helper.fillLocationsToShow(topLatitude + lat, leftLongitude - lon, bottomLatitude - lat, rightLongitude + lon, points);
+			fillLocationsToShow(topLatitude + lat, leftLongitude - lon, bottomLatitude - lat, rightLongitude + lon);
 			
 			if (points.size() > 0) {
 				int px = view.getMapXForPoint(points.get(0).getLongitude());
@@ -101,6 +101,41 @@ public class RouteLayer extends OsmandMapLayer {
 					path.lineTo(x, y);
 				}
 				canvas.drawPath(path, paint);
+			}
+		}
+	}
+	
+	public synchronized void fillLocationsToShow(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
+		points.clear();
+		boolean previousVisible = false;
+		Location lastFixedLocation = helper.getLastFixedLocation();
+		if (lastFixedLocation != null) {
+			if (leftLongitude <= lastFixedLocation.getLongitude() && lastFixedLocation.getLongitude() <= rightLongitude
+					&& bottomLatitude <= lastFixedLocation.getLatitude() && lastFixedLocation.getLatitude() <= topLatitude) {
+				points.add(lastFixedLocation);
+				previousVisible = true;
+			}
+		}
+		List<Location> routeNodes = helper.getRoute().getNextLocations();
+		for (int i = 0; i < routeNodes.size(); i++) {
+			Location ls = routeNodes.get(i);
+			if (leftLongitude <= ls.getLongitude() && ls.getLongitude() <= rightLongitude && bottomLatitude <= ls.getLatitude()
+					&& ls.getLatitude() <= topLatitude) {
+				points.add(ls);
+				if (!previousVisible) {
+					if (i > 0) {
+						points.add(0, routeNodes.get(i - 1));
+					} else if (lastFixedLocation != null) {
+						points.add(0, lastFixedLocation);
+					}
+				}
+				previousVisible = true;
+			} else if (previousVisible) {
+				points.add(ls);
+				previousVisible = false;
+				// do not continue make method more efficient (because it calls in UI thread)
+				// this break also has logical sense !
+				break;
 			}
 		}
 	}
