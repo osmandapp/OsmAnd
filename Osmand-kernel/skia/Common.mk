@@ -67,7 +67,6 @@ LOCAL_SRC_FILES := \
 	$(OSMAND_SKIA_LOC)/src/core/SkGraphics.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkLineClipper.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkMallocPixelRef.cpp \
-	$(OSMAND_SKIA_LOC)/src/core/SkMMapStream.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkMask.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkMaskFilter.cpp \
 	$(OSMAND_SKIA_LOC)/src/core/SkMath.cpp \
@@ -195,8 +194,6 @@ LOCAL_SRC_FILES := \
 #	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_libpng.cpp \
 #	$(OSMAND_SKIA_LOC)/src/images/SkImageDecoder_wbmp.cpp \
 #	$(OSMAND_SKIA_LOC)/src/images/SkJpegUtility.cpp \
-	
-## SkMMapStream is not built in Windows however it is required for Linux version
 
 LOCAL_C_INCLUDES += \
 	$(LOCAL_PATH) \

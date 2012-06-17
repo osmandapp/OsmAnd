@@ -26,7 +26,6 @@ IconDrawInfo::IconDrawInfo()
 {
 }
 
-
 RenderingContext::~RenderingContext()
 {
 	std::vector<TextDrawInfo*>::iterator itTextToDraw;
@@ -38,8 +37,6 @@ bool RenderingContext::interrupted()
 {
 	return false;
 }
-
-
 
 ElapsedTimer::ElapsedTimer()
 	: elapsedTime(0)
@@ -64,11 +61,13 @@ void ElapsedTimer::start()
 	if (!enableFlag)
 		return;
 	if (!run)
-	#ifndef RT_NOT_SUPPORTED
+	{
+#if defined(WIN32)
+		startInit = timeGetTime();
+#else
 		clock_gettime(CLOCK_MONOTONIC, &startInit);
-	#else
-		startInit.tv_nsec =0;
-	#endif
+#endif
+	}
 	run = true;
 }
 
@@ -76,15 +75,16 @@ void ElapsedTimer::pause()
 {
 	if (!run)
 		return;
-#ifndef RT_NOT_SUPPORTED
-	clock_gettime(CLOCK_MONOTONIC, &endInit);
+#if defined(WIN32)
+	endInit = timeGetTime();
+	elapsedTime += (endInit - startInit) * 1e6;
 #else
-	endInit.tv_nsec =0;
-#endif
+	clock_gettime(CLOCK_MONOTONIC, &endInit);
 	int sec = endInit.tv_sec - startInit.tv_sec;
 	if (sec > 0)
 		elapsedTime += 1e9 * sec;
 	elapsedTime += endInit.tv_nsec - startInit.tv_nsec;
+#endif
 	run = false;
 }
 

@@ -55,10 +55,16 @@ class ElapsedTimer
 private:
 	long elapsedTime;
 	bool enableFlag;
-	timespec startInit;
-	timespec endInit;
 	bool run;
 
+#if defined(WIN32)
+	DWORD startInit;
+	DWORD endInit;
+#else
+	timespec startInit;
+	timespec endInit;
+#endif
+	
 public:
 	ElapsedTimer();
 

@@ -33,6 +33,7 @@ endif
 
 # This file is replacement of $(OSMAND_SKIA_LOC)/src/ports/FontHostConfiguration_android.cpp 
 LOCAL_SRC_FILES += \
+	$(OSMAND_SKIA_LOC)/src/core/SkMMapStream.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkDebug_android.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkGlobalInitialization_default.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_FreeType.cpp \

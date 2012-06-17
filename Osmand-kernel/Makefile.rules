@@ -7,8 +7,14 @@ ifeq ($(CXX_SOURCE_FILES_EXTS),)
 endif
 
 # Target configuration
-CXXFLAGS_debug := -ggdb3 -O0
-CFLAGS_debug := -ggdb3 -O0
+DEBUG_INFO_FORMAT := gdb3
+ifeq ($(TARGET),win)
+	DEBUG_INFO_FORMAT := coff
+else ifeq ($(TARGET),cygwin)
+	DEBUG_INFO_FORMAT := coff
+endif
+CXXFLAGS_debug := -g$(DEBUG_INFO_FORMAT) -O0
+CFLAGS_debug := -g$(DEBUG_INFO_FORMAT) -O0
 CXXFLAGS_release := -O2
 CFLAGS_release := -O2
 

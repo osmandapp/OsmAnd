@@ -14,26 +14,52 @@ LOCAL_SRC_FILES += \
 	$(OSMAND_SKIA_LOC)/src/opts/SkBlitRow_opts_none.cpp \
 	$(OSMAND_SKIA_LOC)/src/opts/SkBitmapProcState_opts_none.cpp \
 	$(OSMAND_SKIA_LOC)/src/opts/SkUtils_opts_none.cpp \
-	$(OSMAND_SKIA_LOC)/src/ports/SkThread_pthread.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkDebug_stdio.cpp \
-	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_FreeType.cpp \
-	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_linux.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkOSFile_stdio.cpp \
-	$(OSMAND_SKIA_LOC)/src/ports/SkTime_Unix.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkMemory_malloc.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_gamma.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_tables.cpp \
 	$(OSMAND_SKIA_LOC)/src/ports/SkGlobalInitialization_default.cpp
 	
-SKIAFLAGS = \
+SKIAFLAGS += \
 	-DSK_RELEASE \
 	-DGR_RELEASE=1 \
 	-DSK_ENABLE_LIBPNG \
 	-DSK_ALLOW_STATIC_GLOBAL_INITIALIZERS=0 \
 	-DNDEBUG \
 	-fno-rtti \
-	-fno-exceptions \
-	-DSK_BUILD_FOR_UNIX
+	-fno-exceptions
+	
+LOCAL_SRC_FILES_WINDOWS = \
+	$(OSMAND_SKIA_LOC)/src/ports/SkThread_win.cpp \
+	$(OSMAND_SKIA_LOC)/src/ports/SkTime_win.cpp \
+	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_win.cpp \
+	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_sandbox_none.cpp
+SKIA_FLAGS_WINDOWS = \
+	-DSK_BUILD_FOR_WIN32 \
+	-DMINGW_HAS_SECURE_API \
+	-DSkUserConfig_DEFINED \
+	-DPICTURE_VERSION_ICS=1 \
+	-DPICTURE_VERSION_JB=2 \
+	-DSK_SCALAR_IS_FLOAT \
+	-DSK_CAN_USE_FLOAT \
+	-DSK_CPU_LENDIAN
+
+ifeq ($(TARGET),win)
+	LOCAL_SRC_FILES += $(LOCAL_SRC_FILES_WINDOWS)
+	SKIAFLAGS += $(SKIA_FLAGS_WINDOWS)
+else ifeq ($(TARGET),cygwin)
+	LOCAL_SRC_FILES += $(LOCAL_SRC_FILES_WINDOWS)
+	SKIAFLAGS += $(SKIA_FLAGS_WINDOWS)
+else
+	LOCAL_SRC_FILES += \
+		$(OSMAND_SKIA_LOC)/src/ports/SkThread_pthread.cpp \
+		$(OSMAND_SKIA_LOC)/src/ports/SkTime_Unix.cpp \
+		$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_FreeType.cpp \
+		$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_linux.cpp
+	SKIAFLAGS += \
+		-DSK_BUILD_FOR_UNIX
+endif
 
 CFLAGS += $(SKIAFLAGS)
 CXXFLAGS += $(SKIAFLAGS)

@@ -15,8 +15,12 @@ LIBNAME = $(LIBRARY_PREFIX)osmand
 LIBTYPE = $(DYNAMICLIB_EXT)
 LDLIBS += -Wl,--whole-archive -lskia -Wl,--no-whole-archive -lproto -lpthread -lft2 -lexpat -lpng -lz 
 
-ifndef RT_NOT_SUPPORTED
-LDLIBS += -lrt
+ifeq ($(TARGET),win)
+	LDLIBS += -lwinmm
+else ifeq ($(TARGET),cygwin)
+	LDLIBS += -lwinmm -lGdi32 -lUsp10
+else
+	LDLIBS += -lrt
 endif
 
 ifeq ($(TARGET),nacl)
