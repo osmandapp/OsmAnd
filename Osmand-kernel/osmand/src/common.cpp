@@ -7,6 +7,11 @@
 
 #include "osmand_log.h"
 
+#if defined(_WIN32)
+#	include <windows.h>
+#	include <mmsystem.h>
+#endif
+
 TextDrawInfo::TextDrawInfo(std::string itext)
 	: text(itext)
 	, drawOnPath(false)
@@ -62,7 +67,7 @@ void ElapsedTimer::start()
 		return;
 	if (!run)
 	{
-#if defined(WIN32)
+#if defined(_WIN32)
 		startInit = timeGetTime();
 #else
 		clock_gettime(CLOCK_MONOTONIC, &startInit);
@@ -75,7 +80,7 @@ void ElapsedTimer::pause()
 {
 	if (!run)
 		return;
-#if defined(WIN32)
+#if defined(_WIN32)
 	endInit = timeGetTime();
 	elapsedTime += (endInit - startInit) * 1e6;
 #else

@@ -8,8 +8,8 @@
 #include <cmath>
 #include <cstring>
 #include <string>
-#include "ppapi/cpp/completion_callback.h"
-#include "ppapi/cpp/var.h"
+#include <ppapi/cpp/completion_callback.h>
+#include <ppapi/cpp/var.h>
 #include <ppapi/cpp/module.h>
 
 #include "osmand_nacl.h"
@@ -216,8 +216,8 @@ void* PiGenerator::ComputePi(void* param) {
       // initialized.
       continue;
     }
-    double x = static_cast<double>(rand_r(&seed)) / RAND_MAX;
-    double y = static_cast<double>(rand_r(&seed)) / RAND_MAX;
+    double x = static_cast<double>(rand()) / RAND_MAX;
+    double y = static_cast<double>(rand()) / RAND_MAX;
     double distance = sqrt(x * x + y * y);
     int px = x * pi_generator->width();
     int py = (1.0 - y) * pi_generator->height();

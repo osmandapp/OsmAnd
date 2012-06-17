@@ -88,7 +88,7 @@ build-%/$(TARGET)-$(ARCH)/$(LIBNAME).$(STATICLIB_EXT): $$(addprefix build-%/,$(O
 .SECONDEXPANSION:
 build-%/$(TARGET)-$(ARCH)/$(LIBNAME).$(DYNAMICLIB_EXT): $$(addprefix build-%/,$(OBJECTS))
 	@mkdir -p `dirname $@`
-	$(CXX) -o $@ $(addprefix build-$*/,$(OBJECTS)) $(LDFLAGS) -L$(BUILD_DIR_PREFIX)-$* $(LDLIBS)
+	$(CXX) -shared -o $@ $(addprefix build-$*/,$(OBJECTS)) $(LDFLAGS) -L$(BUILD_DIR_PREFIX)-$* $(LDLIBS)
 	
 # This is for copying binary files to build directory
 $(BUILD_DIR_PREFIX)-%/$(LIBNAME).$(LIBTYPE): build-%/$(TARGET)-$(ARCH)/$(LIBNAME).$(LIBTYPE)

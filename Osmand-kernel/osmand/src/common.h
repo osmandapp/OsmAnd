@@ -57,7 +57,7 @@ private:
 	bool enableFlag;
 	bool run;
 
-#if defined(WIN32)
+#if defined(_WIN32)
 	DWORD startInit;
 	DWORD endInit;
 #else

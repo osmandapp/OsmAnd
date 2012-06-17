@@ -11,44 +11,59 @@ OSMAND_FLAGS = \
 	-DSK_ALLOW_STATIC_GLOBAL_INITIALIZERS=0 \
 	-DSK_RELEASE \
 	-DGR_RELEASE=1
+
+OSMAND_FLAGS_WINDOWS = \
+	-DSK_BUILD_FOR_WIN32 \
+	-DMINGW_HAS_SECURE_API \
+	-DSkUserConfig_DEFINED \
+	-DPICTURE_VERSION_ICS=1 \
+	-DPICTURE_VERSION_JB=2 \
+	-DSK_SCALAR_IS_FLOAT \
+	-DSK_CAN_USE_FLOAT \
+	-DSK_CPU_LENDIAN
+
 LIBNAME = $(LIBRARY_PREFIX)osmand
 LIBTYPE = $(DYNAMICLIB_EXT)
-LDLIBS += -Wl,--whole-archive -lskia -Wl,--no-whole-archive -lproto -lpthread -lft2 -lexpat -lpng -lz 
+LDLIBS += -Wl,--whole-archive -lskia -Wl,--no-whole-archive -lproto -lft2 -lexpat -lpng -lz 
 
 ifeq ($(TARGET),win)
-	LDLIBS += -lwinmm
+	LDLIBS += -lwinmm -lgdi32 -lusp10
+	OSMAND_FLAGS += $(OSMAND_FLAGS_WINDOWS)
 else ifeq ($(TARGET),cygwin)
-	LDLIBS += -lwinmm -lGdi32 -lUsp10
+	LDLIBS += -lwinmm -lgdi32 -lusp10
+	OSMAND_FLAGS += $(OSMAND_FLAGS_WINDOWS)
+else ifeq ($(TARGET),nacl)
+	LDLIBS += -lpthread
 else
-	LDLIBS += -lrt
+	LDLIBS += -lrt -lpthread
 endif
 
 ifeq ($(TARGET),nacl)
-OSMAND_FLAGS += \
-	-DRT_NOT_SUPPORTED
-LOCAL_SRC_FILES += \
-	src/osmand_nacl.cpp
+	OSMAND_FLAGS += \
+		-DRT_NOT_SUPPORTED
+	LOCAL_SRC_FILES += \
+		src/osmand_nacl.cpp
 else 
-LOCAL_SRC_FILES += \
-	src/java_wrap.cpp
+	LOCAL_SRC_FILES += \
+		src/java_wrap.cpp
 
-ifeq ($(findstring CYGWIN,$(shell uname)),CYGWIN)
-	FIXED_JAVA_HOME := $(shell cygpath -u "$(JAVA_HOME)")
-else
-	FIXED_JAVA_HOME := $(JAVA_HOME)
-endif
-ifeq ($(JAVA_OS),)
 	ifeq ($(findstring CYGWIN,$(shell uname)),CYGWIN)
-	   JAVA_OS := win32
+		FIXED_JAVA_HOME := $(shell cygpath -u "$(JAVA_HOME)")
+	else
+		FIXED_JAVA_HOME := $(JAVA_HOME)
 	endif
-	ifeq ($(findstring MINGW,$(shell uname)),MINGW)
-	   JAVA_OS := win32
+	ifeq ($(JAVA_OS),)
+		ifeq ($(findstring CYGWIN,$(shell uname)),CYGWIN)
+		   JAVA_OS := win32
+		endif
+		ifeq ($(findstring MINGW,$(shell uname)),MINGW)
+		   JAVA_OS := win32
+		endif
 	endif
-endif
-ifeq ($(JAVA_OS),)
-	JAVA_OS := linux
-endif
-OSMAND_FLAGS += -c -I"$(FIXED_JAVA_HOME)/include" -I"$(FIXED_JAVA_HOME)/include/$(JAVA_OS)"
+	ifeq ($(JAVA_OS),)
+		JAVA_OS := linux
+	endif
+	OSMAND_FLAGS += -c -I"$(FIXED_JAVA_HOME)/include" -I"$(FIXED_JAVA_HOME)/include/$(JAVA_OS)"
 
 endif
 	
