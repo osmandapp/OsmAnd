@@ -73,7 +73,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	@Override
 	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
-		Preference offlineData = screen.findPreference("index_settings");
+		Preference offlineData = screen.findPreference("local_indexes");
 		if(offlineData == null) {
 			log.error("OsmandMonitoringPlugin: Index settings preference not found !");
 		} else {

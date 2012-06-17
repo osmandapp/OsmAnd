@@ -235,13 +235,9 @@ public class RoutingHelper {
 		int index = currentRoute;
 		while (iterations > 0 && currentRoute + 1 < routeNodes.size()) {
 			newDist = getOrthogonalDistance(currentLocation, routeNodes.get(currentRoute), routeNodes.get(currentRoute + 1));
-
 			if (newDist < dist) {
 				index = currentRoute;
 				dist = newDist;
-				if (newDist < POSITION_TOLERANCE) {
-					break;
-				}
 			}
 			currentRoute++;
 			iterations--;
@@ -275,7 +271,7 @@ public class RoutingHelper {
 				}
 			} else if (newDist < dist || newDist < 10) {
 				// newDist < 10 (avoid distance 0 till next turn)
-				if (dist > 3 * POSITION_TOLERANCE /2 ) {
+				if (dist > POSITION_TOLERANCE) {
 					processed = true;
 					if (log.isDebugEnabled()) {
 						log.debug("Processed by distance : " + newDist + " " + dist); //$NON-NLS-1$//$NON-NLS-2$
@@ -316,37 +312,6 @@ public class RoutingHelper {
 			clearCurrentRoute(null);
 			return true;
 		}
-
-		// FIXME Probably not needed already
-//		// Double check if turn is passed or not 
-//		// 3.1 check if closest location already passed
-//		if (currentRoute + 1 < routeNodes.size()) {
-//			float bearingRouteNext = routeNodes.get(currentRoute).bearingTo(routeNodes.get(currentRoute + 1));
-//			float bearingToRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
-//			double diff = Math.abs(MapUtils.degreesDiff(bearingToRoute, bearingRouteNext));
-//			// only 40 degrees for that case because it wrong catches sharp turns
-//			if (diff < 40) {
-//				if (log.isDebugEnabled()) {
-//					log.debug("Processed point bearingToRoute : " + bearingToRoute + " bearingRouteNext " + bearingRouteNext); //$NON-NLS-1$ //$NON-NLS-2$
-//				}
-//				route.updateCurrentRoute(currentRoute + 1);
-//			}
-//		}
-//
-//		// 3.2 check that we already pass very sharp turn by missing one point (so our turn is sharper than expected)
-//		// instead of that rule possible could be introduced another if the dist < 5m mark the location as already passed
-//		if (currentRoute + 2 < routeNodes.size()) {
-//			float bearingRouteNextNext = routeNodes.get(currentRoute + 1).bearingTo(routeNodes.get(currentRoute + 2));
-//			float bearingToRouteNext = currentLocation.bearingTo(routeNodes.get(currentRoute + 1));
-//			double diff = Math.abs(MapUtils.degreesDiff(bearingToRouteNext, bearingRouteNextNext));
-//			// only 20 degrees for that case because it wrong catches sharp turns
-//			if (diff < 20) {
-//				if (log.isDebugEnabled()) {
-//					log.debug("Processed point bearingToRouteNext : " + bearingToRouteNext + " bearingRouteNextNext " + bearingRouteNextNext); //$NON-NLS-1$ //$NON-NLS-2$
-//				}
-//				route.updateCurrentRoute(currentRoute + 2);
-//			}
-//		}
 		return false;
 	}
 	

@@ -31,8 +31,8 @@ public class VoiceRouter {
 	// Speed in m/s 
 	protected float DEFAULT_SPEED = 12;
 		
-	protected int PREPARE_LONG_DISTANCE = 3000;
-	protected int PREPARE_LONG_DISTANCE_END = 2000;
+	protected int PREPARE_LONG_DISTANCE = 3500;
+	protected int PREPARE_LONG_DISTANCE_END = 3000;
 	
 	protected int PREPARE_DISTANCE = 0;
 	protected int PREPARE_DISTANCE_END = 0;
@@ -217,7 +217,12 @@ public class VoiceRouter {
 			if (dist > PREPARE_LONG_DISTANCE) {
 				playGoAhead(dist);
 			}
-			nextStatusAfter(STATUS_UNKNOWN);
+			// say long distance message only for long distances > 10 km
+			if(dist > 3 * PREPARE_LONG_DISTANCE) {
+				nextStatusAfter(STATUS_UNKNOWN);
+			} else {
+				nextStatusAfter(STATUS_LONG_PREPARE);
+			}
 		}
 	}
 

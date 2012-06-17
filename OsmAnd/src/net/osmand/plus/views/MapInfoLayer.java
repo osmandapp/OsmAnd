@@ -463,7 +463,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 					} else {
 						d = routingHelper.getDistanceToNextNextRouteDirection();
 					}
-					if (d > 0 && !showMiniMap) {
+					if (d >= 0 && !showMiniMap) {
 						visible = true;
 						RouteDirectionInfo next = uturnWhenPossible? routingHelper.getNextRouteDirectionInfo() : 
 							routingHelper.getNextNextRouteDirectionInfo();
@@ -541,7 +541,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 							invalidate();
 						}
 					} else {
-						if (d > 0 && !showMiniMap) {
+						if (d >= 0 && !showMiniMap) {
 							visible = true;
 							RouteDirectionInfo next = routeLayer.getHelper().getNextRouteDirectionInfo();
 							if (next == null) {
