@@ -75,7 +75,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
 		Preference offlineData = screen.findPreference("index_settings");
 		if(offlineData == null) {
-			log.error("OsmandMonitoringPlugin: Index settings preference not found !!!");
+			log.error("OsmandMonitoringPlugin: Index settings preference not found !");
 		} else {
 			offlineData.setSummary(offlineData.getSummary() + " "+ app.getString(R.string.gpx_index_settings_descr));
 		}
@@ -83,7 +83,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		grp.setTitle(R.string.monitor_preferences);
 		grp.setSummary(R.string.monitor_preferences_descr);
 		grp.setKey("monitor_settings");
-		((PreferenceCategory) screen.findPreference("global_settings")).addPreference(grp);
+		((PreferenceCategory) screen.findPreference("profile_dep_cat")).addPreference(grp);
 
 		PreferenceCategory cat = new PreferenceCategory(activity);
 		cat.setTitle(R.string.save_track_to_gpx);

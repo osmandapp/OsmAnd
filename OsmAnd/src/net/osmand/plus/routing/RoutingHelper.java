@@ -405,7 +405,7 @@ public class RoutingHelper {
 	}
 
 	private synchronized void setNewRoute(RouteCalculationResult res, Location start){
-		final boolean newRoute = !res.isCalculated();
+		final boolean newRoute = !this.route.isCalculated();
 		route = res;
 		if (isFollowingMode) {
 			// try remove false route-recalculated prompts by checking direction to second route node

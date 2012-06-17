@@ -574,13 +574,17 @@ public class OsmandSettings {
 	public static final String LOCAL_INDEXES = "local_indexes"; //$NON-NLS-1$
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX = new BooleanPreference("save_track_to_gpx", false, true);
+	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX = new BooleanPreference("save_track_to_gpx", false, false);
+	{
+		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.BICYCLE, true);
+		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.CAR, true);
+	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference("fast_route_mode", true, false);
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference("save_track_interval", 5, true);
+	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference("save_track_interval", 5, false);
 	{
 		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.CAR, 5);
 		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.BICYCLE, 10);
@@ -1198,9 +1202,11 @@ public class OsmandSettings {
 			new BooleanPreference("fluorescent_overlays", true, false, true);
 
 	public final CommonPreference<Boolean> SHOW_ALTITUDE_INFO = 
-			new BooleanPreference("show_altitude_info", true, false, true);
+			new BooleanPreference("show_altitude_info", false, false, true);
 	{
 		SHOW_ALTITUDE_INFO.setModeDefaultValue(ApplicationMode.CAR, false);
+		SHOW_ALTITUDE_INFO.setModeDefaultValue(ApplicationMode.BICYCLE, true);
+		SHOW_ALTITUDE_INFO.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
 	}
 	
 	public final CommonPreference<Boolean> SHOW_RULER = 
