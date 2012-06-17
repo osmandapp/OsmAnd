@@ -905,6 +905,7 @@
 			<filter minzoom="12" color="#b5e3b5" color_2="#9DB487" strokeWidth_2="1" tag="leisure" value="golf_course"/>
 			<filter minzoom="12" color="#74dcba" color_2="#888888" strokeWidth_2="1" tag="leisure" value="track"/>
 			<filter minzoom="12" color="#8ad3af" color_2="#888888" strokeWidth_2="1" tag="leisure" value="pitch"/>
+			<filter minzoom="12" color="b5d0d0" color_2="#7479ec" strokeWidth_2="1" tag="leisure" value="swimming_pool"/>
 			<filter minzoom="12" tag="leisure" value="recreation_ground" color="#b0b6fdb6"/>
 			<filter minzoom="15" color="#ccfff1" tag="leisure" value="playground"/>
 			<filter minzoom="12" color="#cfeca8" tag="leisure" value="garden"/>
