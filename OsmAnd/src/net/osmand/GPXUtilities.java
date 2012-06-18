@@ -42,7 +42,6 @@ public class GPXUtilities {
 	
 	public static class GPXExtensions {
 		Map<String, String> extensions = null;
-		protected boolean extensionReadMode;
 		
 		public Map<String, String> getExtensionsToRead() {
 			if(extensions == null){
@@ -58,37 +57,6 @@ public class GPXUtilities {
 			return extensions;
 		}
 
-		public void parse(XmlPullParser parser, Stack<GPXExtensions> parserState, SimpleDateFormat format) throws XmlPullParserException, IOException {
-			String tag = parser.getName();
-			if (extensionReadMode) {
-				String value = readText(parser, tag);
-				if (value != null) {
-					getExtensionsToWrite().put(tag, value);
-				}
-			}
-			if (tag.equals("extensions" )) {
-				extensionReadMode = true;
-			}
-		}
-
-		public final boolean parseEnd(String tag, Stack<GPXExtensions> parserState) {
-			if (tag.equals("extensions") && extensionReadMode) {
-				extensionReadMode = false;
-				return true;
-			} else {
-				if (isEndingTag(tag)) {
-					parserState.pop();
-					return true; 
-				} else {
-					return false;
-				}
-			}
-		}
-
-		protected boolean isEndingTag(String tag) {
-			return false;
-		}
-		
 	}
 	
 	public static class WptPt extends GPXExtensions {
@@ -114,73 +82,11 @@ public class GPXUtilities {
 			this.hdop = hdop;
 		}
 		
-		@Override
-		public void parse(XmlPullParser parser, Stack<GPXExtensions> parserState, SimpleDateFormat format)
-				throws XmlPullParserException, IOException {
-			super.parse(parser, parserState, format);
-			String tag = parser.getName();
-			if (tag.equals("name")) {
-				name = readText(parser, "name");
-			} else if (tag.equals("category")) {
-				category = readText(parser, "category");
-			} else if (tag.equals("desc")) {
-				desc = readText(parser, "desc");
-			} else if (tag.equals("ele")) {
-				String text = readText(parser, "ele");
-				if (text != null) {
-					try {
-						ele = Float.parseFloat(text);
-					} catch (NumberFormatException e) {
-					}
-				}
-			} else if (tag.equals("hdop")) {
-				String text = readText(parser, "hdop");
-				if (text != null) {
-					try {
-						hdop = Float.parseFloat(text);
-					} catch (NumberFormatException e) {
-					}
-				}
-			} else if (tag.equals("time")) {
-				String text = readText(parser, "time");
-				if (text != null) {
-					try {
-						time = format.parse(text).getTime();
-					} catch (ParseException e) {
-					}
-				}
-			} else if (tag.equals("speed") && extensionReadMode) {
-				try {
-					speed = Float.parseFloat(getExtensionsToWrite().get(tag));
-				} catch (NumberFormatException e) {
-				}
-			}
-		}
-		
-		@Override
-		public boolean isEndingTag(String tag) {
-			return tag.equals("trkpt") || tag.equals("wpt") || tag.equals("rtept");
-		}
 	}
 	
 	public static class TrkSegment extends GPXExtensions {
 		public List<WptPt> points = new ArrayList<WptPt>();
 		
-		@Override
-		public void parse(XmlPullParser parser, Stack<GPXExtensions> parserState, SimpleDateFormat format)
-				throws XmlPullParserException, IOException {
-			super.parse(parser, parserState, format);
-			if (parser.getName().equals("trkpt")) {
-				WptPt wptPt = parseWptAttributes(parser);
-				points.add(wptPt);
-				parserState.push(wptPt);
-			}
-		}
-		
-		@Override
-		protected boolean isEndingTag(String tag) {
-			return tag.equals("trkseg");
-		}
 	}
 	
 	public static class Track extends GPXExtensions {
@@ -188,26 +94,6 @@ public class GPXUtilities {
 		public String desc = null;
 		public List<TrkSegment> segments = new ArrayList<TrkSegment>();
 		
-		@Override
-		public void parse(XmlPullParser parser, Stack<GPXExtensions> parserState, SimpleDateFormat format)
-				throws XmlPullParserException, IOException {
-			super.parse(parser, parserState, format);
-			String tag = parser.getName();
-			if (tag.equals("name")) {
-				name = readText(parser, "name");
-			} else if (tag.equals("desc")) {
-				desc = readText(parser, "desc");
-			} else 	if (tag.equals("trkseg")) {
-				TrkSegment trkSeg = new TrkSegment();
-				segments.add(trkSeg);
-				parserState.push(trkSeg);
-			}
-		}
-		
-		@Override
-		public boolean isEndingTag(String tag) {
-			return tag.equals("trk");
-		}
 	}
 	
 	public static class Route extends GPXExtensions {
@@ -215,27 +101,6 @@ public class GPXUtilities {
 		public String desc = null;
 		public List<WptPt> points = new ArrayList<WptPt>();
 		
-		@Override
-		public void parse(XmlPullParser parser, Stack<GPXExtensions> parserState, SimpleDateFormat format) 
-				throws XmlPullParserException, IOException 
-		{
-			super.parse(parser, parserState, format);
-			String tag = parser.getName();
-			if (tag.equals("name")) {
-				name = readText(parser, "name");
-			} else if (tag.equals("desc")) {
-				desc = readText(parser, "desc");
-			} else if (tag.equals("rtept")) {
-				WptPt wptPt = parseWptAttributes(parser);
-				points.add(wptPt);
-				parserState.push(wptPt);
-			}
-		}
-		
-		@Override
-		public boolean isEndingTag(String tag) {
-			return tag.equals("trk");
-		}
 	}
 
 	public static class GPXFile extends GPXExtensions {
@@ -285,31 +150,7 @@ public class GPXUtilities {
 			return tracks.isEmpty() && points.isEmpty() && routes.isEmpty();
 		}
 		
-		@Override
-		public void parse(XmlPullParser parser, Stack<GPXExtensions> parserState, SimpleDateFormat format) throws XmlPullParserException, IOException {
-			super.parse(parser, parserState, format);
-			String tag = parser.getName();
-			if (tag.equals("gpx")) {
-				this.author = parser.getAttributeValue("", "creator");
-			} else if (tag.equals("trk")) {
-				Track track = new Track();
-				tracks.add(track);
-				parserState.push(track);
-			} else if (tag.equals("rte")) {
-				Route route = new Route();
-				routes.add(route);
-				parserState.push(route);
-			} else if (tag.equals("wpt")) {
-				WptPt wptPt = parseWptAttributes(parser);
-				points.add(wptPt);
-				parserState.push(wptPt);
-			}
-		}
 		
-		@Override
-		protected boolean isEndingTag(String tag) {
-			return "gpx".equals(tag);
-		}
 	}
 	
 	
@@ -487,18 +328,139 @@ public class GPXUtilities {
 			XmlPullParser parser = Xml.newPullParser();
 			parser.setInput(new InputStreamReader(f)); //$NON-NLS-1$
 			Stack<GPXExtensions> parserState = new Stack<GPXExtensions>();
+			boolean extensionReadMode = false;
 			parserState.push(res);
 			int tok;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
-					GPXExtensions element = parserState.peek();
-					element.parse(parser, parserState,format);
-				} else if (tok == XmlPullParser.END_TAG) {
-					GPXExtensions parse = parserState.peek();
+					Object parse = parserState.peek();
 					String tag = parser.getName();
-					if (!parse.parseEnd(tag,parserState)) {
-						log.debug("Bad ending tag: " + tag + " for element " + parse.getClass());
+					if (extensionReadMode && parse instanceof GPXExtensions) {
+						String value = readText(parser, tag);
+						if (value != null) {
+							((GPXExtensions) parse).getExtensionsToWrite().put(tag, value);
+							if (tag.equals("speed") && parse instanceof WptPt) {
+								try {
+									((WptPt) parse).speed = Float.parseFloat(value);
+								} catch (NumberFormatException e) {
+								}
+							}
+						}
+
+					} else if (parse instanceof GPXExtensions && tag.equals("extensions")) {
+						extensionReadMode = true;
+					} else {
+						if (parse instanceof GPXFile) {
+							if (parser.getName().equals("gpx")) {
+								((GPXFile) parse).author = parser.getAttributeValue("", "creator");
+							}
+							if (parser.getName().equals("trk")) {
+								Track track = new Track();
+								((GPXFile) parse).tracks.add(track);
+								parserState.push(track);
+							}
+							if (parser.getName().equals("rte")) {
+								Route route = new Route();
+								((GPXFile) parse).routes.add(route);
+								parserState.push(route);
+							}
+							if (parser.getName().equals("wpt")) {
+								WptPt wptPt = parseWptAttributes(parser);
+								((GPXFile) parse).points.add(wptPt);
+								parserState.push(wptPt);
+							}
+						} else if (parse instanceof Route) {
+							if (parser.getName().equals("name")) {
+								((Route) parse).name = readText(parser, "name");
+							}
+							if (parser.getName().equals("desc")) {
+								((Route) parse).desc = readText(parser, "desc");
+							}
+							if (parser.getName().equals("rtept")) {
+								WptPt wptPt = parseWptAttributes(parser);
+								((Route) parse).points.add(wptPt);
+								parserState.push(wptPt);
+							}
+						} else if (parse instanceof Track) {
+							if (parser.getName().equals("name")) {
+								((Track) parse).name = readText(parser, "name");
+							}
+							if (parser.getName().equals("desc")) {
+								((Track) parse).desc = readText(parser, "desc");
+							}
+							if (parser.getName().equals("trkseg")) {
+								TrkSegment trkSeg = new TrkSegment();
+								((Track) parse).segments.add(trkSeg);
+								parserState.push(trkSeg);
+							}
+						} else if (parse instanceof TrkSegment) {
+							if (parser.getName().equals("trkpt")) {
+								WptPt wptPt = parseWptAttributes(parser);
+								((TrkSegment) parse).points.add(wptPt);
+								parserState.push(wptPt);
+							}
+							// main object to parse
+						} else if (parse instanceof WptPt) {
+							if (parser.getName().equals("name")) {
+								((WptPt) parse).name = readText(parser, "name");
+							} else if (parser.getName().equals("desc")) {
+								((WptPt) parse).desc = readText(parser, "desc");
+							} else if (tag.equals("category")) {
+								((WptPt) parse).category = readText(parser, "category");
+							} else if (parser.getName().equals("ele")) {
+								String text = readText(parser, "ele");
+								if (text != null) {
+									try {
+										((WptPt) parse).ele = Float.parseFloat(text);
+									} catch (NumberFormatException e) {
+									}
+								}
+							} else if (parser.getName().equals("hdop")) {
+								String text = readText(parser, "hdop");
+								if (text != null) {
+									try {
+										((WptPt) parse).hdop = Float.parseFloat(text);
+									} catch (NumberFormatException e) {
+									}
+								}
+							} else if (parser.getName().equals("time")) {
+								String text = readText(parser, "time");
+								if (text != null) {
+									try {
+										((WptPt) parse).time = format.parse(text).getTime();
+									} catch (ParseException e) {
+									}
+								}
+							}
+						}
 					}
+
+				} else if (tok == XmlPullParser.END_TAG) {
+					Object parse = parserState.peek();
+					String tag = parser.getName();
+					if (parse instanceof GPXExtensions && tag.equals("extensions")) {
+						extensionReadMode = false;
+					}
+					
+					if(tag.equals("trkpt")){
+						Object pop = parserState.pop();
+						assert pop instanceof WptPt;
+					} else if(tag.equals("wpt")){
+						Object pop = parserState.pop();
+						assert pop instanceof WptPt;
+					} else if(tag.equals("rtept")){
+						Object pop = parserState.pop();
+						assert pop instanceof WptPt;
+					} else if(tag.equals("trk")){
+						Object pop = parserState.pop();
+						assert pop instanceof Track;
+					} else if(tag.equals("rte")){
+						Object pop = parserState.pop();
+						assert pop instanceof Route;
+					} else if(tag.equals("trkseg")){
+						Object pop = parserState.pop();
+						assert pop instanceof TrkSegment;
+					} 
 				}
 			}
 			if(convertCloudmadeSource && res.isCloudmadeRouteFile()){
