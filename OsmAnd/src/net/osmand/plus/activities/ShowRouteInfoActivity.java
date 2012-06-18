@@ -116,7 +116,7 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 			if(!(icon.getDrawable() instanceof TurnPathHelper.RouteDrawable)){
 				icon.setImageDrawable(new TurnPathHelper.RouteDrawable(getResources()));
 			}
-			((TurnPathHelper.RouteDrawable) icon.getDrawable()).setRouteType(model.turnType);
+			((TurnPathHelper.RouteDrawable) icon.getDrawable()).setRouteType(model.getTurnType());
 			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(model.distance, ShowRouteInfoActivity.this));
 			label.setText(model.descriptionRoute);
 			int seconds = model.getExpectedTime() % 60;

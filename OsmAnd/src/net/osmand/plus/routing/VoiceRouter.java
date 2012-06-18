@@ -306,12 +306,12 @@ public class VoiceRouter {
 	private void playPrepareTurn(RouteDirectionInfo next, int dist) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
-			String tParam = getTurnType(next.turnType);
+			String tParam = getTurnType(next.getTurnType());
 			if(tParam != null){
 				play.prepareTurn(tParam, dist).play();
-			} else if(next.turnType.isRoundAbout()){
+			} else if(next.getTurnType().isRoundAbout()){
 				play.prepareRoundAbout(dist).play();
-			} else if(next.turnType.getValue().equals(TurnType.TU) || next.turnType.getValue().equals(TurnType.TRU)){
+			} else if(next.getTurnType().getValue().equals(TurnType.TU) || next.getTurnType().getValue().equals(TurnType.TRU)){
 				play.prepareMakeUT(dist).play();
 			} 
 		}
@@ -320,22 +320,22 @@ public class VoiceRouter {
 	private void playMakeTurnIn(RouteDirectionInfo next, int dist, RouteDirectionInfo pronounceNextNext) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if (play != null) {
-			String tParam = getTurnType(next.turnType);
+			String tParam = getTurnType(next.getTurnType());
 			boolean isPlay = true;
 			if (tParam != null) {
 				play.turn(tParam, dist);
-			} else if (next.turnType.isRoundAbout()) {
-				play.roundAbout(dist, next.turnType.getTurnAngle(), next.turnType.getExitOut());
-			} else if (next.turnType.getValue().equals(TurnType.TU) || next.turnType.getValue().equals(TurnType.TRU)) {
+			} else if (next.getTurnType().isRoundAbout()) {
+				play.roundAbout(dist, next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut());
+			} else if (next.getTurnType().getValue().equals(TurnType.TU) || next.getTurnType().getValue().equals(TurnType.TRU)) {
 				play.makeUT(dist);
 			} else {
 				isPlay = false;
 			}
 			// small preparation to next after next
 			if (pronounceNextNext != null) {
-				TurnType t = pronounceNextNext.turnType;
+				TurnType t = pronounceNextNext.getTurnType();
 				isPlay = true;
-				if (next.turnType.getValue().equals(TurnType.C) && 
+				if (next.getTurnType().getValue().equals(TurnType.C) && 
 						!TurnType.C.equals(t.getValue())) {
 					play.goAhead(dist);
 				}
@@ -355,30 +355,30 @@ public class VoiceRouter {
 	private void playMakeTurn(RouteDirectionInfo next, RouteDirectionInfo nextNext) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
-			String tParam = getTurnType(next.turnType);
+			String tParam = getTurnType(next.getTurnType());
 			boolean isplay = true;
 			if(tParam != null){
 				play.turn(tParam);
-			} else if(next.turnType.isRoundAbout()){
-				play.roundAbout(next.turnType.getTurnAngle(), next.turnType.getExitOut());
-			} else if(next.turnType.getValue().equals(TurnType.TU) || next.turnType.getValue().equals(TurnType.TRU)){
+			} else if(next.getTurnType().isRoundAbout()){
+				play.roundAbout(next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut());
+			} else if(next.getTurnType().getValue().equals(TurnType.TU) || next.getTurnType().getValue().equals(TurnType.TRU)){
 				play.makeUT();
 				// do not say it
-//				} else if(next.turnType.getValue().equals(TurnType.C)){
+//				} else if(next.getTurnType().getValue().equals(TurnType.C)){
 //					play.goAhead();
 			} else {
 				isplay = false;
 			}
 			// add turn after next
 			if (nextNext != null) {
-				String t2Param = getTurnType(nextNext.turnType);
+				String t2Param = getTurnType(nextNext.getTurnType());
 				if (t2Param != null) {
 					if(isplay) { play.then(); }
 					play.turn(t2Param, next.distance);
-				} else if (nextNext.turnType.isRoundAbout()) {
+				} else if (nextNext.getTurnType().isRoundAbout()) {
 					if(isplay) { play.then(); }
-					play.roundAbout(next.distance, nextNext.turnType.getTurnAngle(), nextNext.turnType.getExitOut());
-				} else if (nextNext.turnType.getValue().equals(TurnType.TU)) {
+					play.roundAbout(next.distance, nextNext.getTurnType().getTurnAngle(), nextNext.getTurnType().getExitOut());
+				} else if (nextNext.getTurnType().getValue().equals(TurnType.TU)) {
 					if(isplay) { play.then(); }
 					play.makeUT(next.distance);
 				}

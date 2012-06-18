@@ -220,10 +220,9 @@ public class RouteProvider {
 			List<RouteDirectionInfo> subdirections = new ArrayList<RouteDirectionInfo>();
 			for (RouteDirectionInfo info : params.directions) {
 				if(info.routePointOffset >= startI && info.routePointOffset < endI){
-					RouteDirectionInfo ch = new RouteDirectionInfo(info.getAverageSpeed());
+					RouteDirectionInfo ch = new RouteDirectionInfo(info.getAverageSpeed(), info.getTurnType());
 					ch.routePointOffset = info.routePointOffset - startI;
 					ch.descriptionRoute = info.descriptionRoute;
-					ch.turnType = info.turnType;
 					
 					// recalculate
 					ch.distance = 0;
@@ -268,9 +267,7 @@ public class RouteProvider {
 		
 		int previousLocation = 0;
 		int prevBearingLocation = 0;
-		RouteDirectionInfo previousInfo = new RouteDirectionInfo(speed);
-		
-		previousInfo.turnType = TurnType.valueOf(TurnType.C, leftSide);
+		RouteDirectionInfo previousInfo = new RouteDirectionInfo(speed, TurnType.valueOf(TurnType.C, leftSide));
 		previousInfo.routePointOffset = 0;
 		previousInfo.descriptionRoute = getString(ctx, R.string.route_head);
 		directions.add(previousInfo);
@@ -348,10 +345,8 @@ public class RouteProvider {
 				// calculate for previousRoute 
 				previousInfo.distance = listDistance[previousLocation]- listDistance[i];
 				previousInfo.descriptionRoute += " " + OsmAndFormatter.getFormattedDistance(previousInfo.distance, ctx); //$NON-NLS-1$
-
-				previousInfo = new RouteDirectionInfo(speed);
-				previousInfo.turnType = type;
-				previousInfo.turnType.setTurnAngle(360 - delta);
+				type.setTurnAngle(360 - delta);
+				previousInfo = new RouteDirectionInfo(speed, type);
 				previousInfo.descriptionRoute = description;
 				previousInfo.routePointOffset = startTurnPoint;
 				directions.add(previousInfo);
@@ -367,10 +362,9 @@ public class RouteProvider {
 		
 		// add last direction go straight (to show arrow in screen after all turns)
 		if(previousInfo.distance > 80){
-			RouteDirectionInfo info = new RouteDirectionInfo(speed);
+			RouteDirectionInfo info = new RouteDirectionInfo(speed, TurnType.valueOf(TurnType.C, leftSide));
 			info.distance = 0;
 			info.descriptionRoute = ""; //$NON-NLS-1$
-			info.turnType = TurnType.valueOf(TurnType.C, leftSide);
 			info.routePointOffset = locations.size() - 1;
 			directions.add(info);
 		}
@@ -603,29 +597,27 @@ public class RouteProvider {
 					if(!iterator.hasNext() && time > 0) {
 						avgSpeed = distanceToEnd[offset] / time;
 					}
-					
-					RouteDirectionInfo dirInfo = new RouteDirectionInfo(avgSpeed);
-					dirInfo.descriptionRoute = item.desc; //$NON-NLS-1$
-					
 					String stype = item.getExtensionsToRead().get("turn"); //$NON-NLS-1$
+					TurnType turnType;
 					if (stype != null) {
-						dirInfo.turnType = TurnType.valueOf(stype.toUpperCase(), leftSide);
+						turnType = TurnType.valueOf(stype.toUpperCase(), leftSide);
 					} else {
-						dirInfo.turnType = TurnType.valueOf(TurnType.C, leftSide);
+						turnType = TurnType.valueOf(TurnType.C, leftSide);
 					}
 					String sturn = item.getExtensionsToRead().get("turn-angle"); //$NON-NLS-1$
 					if (sturn != null) {
-						dirInfo.turnType.setTurnAngle((float) Double.parseDouble(sturn));
+						turnType.setTurnAngle((float) Double.parseDouble(sturn));
 					}
+					RouteDirectionInfo dirInfo = new RouteDirectionInfo(avgSpeed, turnType);
+					dirInfo.descriptionRoute = item.desc; //$NON-NLS-1$
 					dirInfo.routePointOffset = offset;
-
-					if (previous != null && previous.turnType != null && !TurnType.C.equals(previous.turnType.getValue()) &&
+					if (previous != null && !TurnType.C.equals(previous.getTurnType().getValue()) &&
 							!osmandRouter) {
 						// calculate angle
 						if (previous.routePointOffset > 0) {
 							float paz = res.get(previous.routePointOffset - 1).bearingTo(res.get(previous.routePointOffset));
 							float caz;
-							if (previous.turnType.isRoundAbout() && dirInfo.routePointOffset < res.size() - 1) {
+							if (previous.getTurnType().isRoundAbout() && dirInfo.routePointOffset < res.size() - 1) {
 								caz = res.get(dirInfo.routePointOffset).bearingTo(res.get(dirInfo.routePointOffset + 1));
 							} else {
 								caz = res.get(dirInfo.routePointOffset - 1).bearingTo(res.get(dirInfo.routePointOffset));
@@ -639,8 +631,8 @@ public class RouteProvider {
 							// that magic number helps to fix some errors for turn
 							angle += 75;
 
-							if (previous.turnType.getTurnAngle() < 0.5f) {
-								previous.turnType.setTurnAngle(angle);
+							if (previous.getTurnType().getTurnAngle() < 0.5f) {
+								previous.getTurnType().setTurnAngle(angle);
 							}
 						}
 					}
@@ -655,7 +647,7 @@ public class RouteProvider {
 				}
 			}
 		}
-		if (previous != null && previous.turnType != null && !TurnType.C.equals(previous.turnType.getValue())) {
+		if (previous != null && !TurnType.C.equals(previous.getTurnType().getValue())) {
 			// calculate angle
 			if (previous.routePointOffset > 0 && previous.routePointOffset < res.size() - 1) {
 				float paz = res.get(previous.routePointOffset - 1).bearingTo(res.get(previous.routePointOffset));
@@ -664,8 +656,8 @@ public class RouteProvider {
 				if (angle < 0) {
 					angle += 360;
 				}
-				if (previous.turnType.getTurnAngle() < 0.5f) {
-					previous.turnType.setTurnAngle(angle);
+				if (previous.getTurnType().getTurnAngle() < 0.5f) {
+					previous.getTurnType().setTurnAngle(angle);
 				}
 			}
 		}
@@ -781,13 +773,13 @@ public class RouteProvider {
 				pt.desc = dirInfo.descriptionRoute;
 				Map<String, String> extensions = pt.getExtensionsToWrite();
 				extensions.put("time", dirInfo.getExpectedTime() + "");
-				String turnType = dirInfo.turnType.getValue();
-				if (dirInfo.turnType.isRoundAbout()) {
-					turnType += dirInfo.turnType.getExitOut();
+				String turnType = dirInfo.getTurnType().getValue();
+				if (dirInfo.getTurnType().isRoundAbout()) {
+					turnType += dirInfo.getTurnType().getExitOut();
 				}
 				if(!TurnType.C.equals(turnType)){
 					extensions.put("turn", turnType);
-					extensions.put("turn-angle", dirInfo.turnType.getTurnAngle() + "");
+					extensions.put("turn-angle", dirInfo.getTurnType().getTurnAngle() + "");
 				}
 				extensions.put("offset", (dirInfo.routePointOffset - cRoute) + "");
 				route.points.add(pt);

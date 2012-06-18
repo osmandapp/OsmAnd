@@ -49,7 +49,7 @@ public class RouteCalculationResult {
 			RouteSegmentResult s = list.get(routeInd);
 			boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
 			if (routeInd > 0) {
-				RouteDirectionInfo info = new RouteDirectionInfo(s.getSegmentSpeed());
+//				RouteDirectionInfo info = new RouteDirectionInfo(s.getSegmentSpeed());
 				//					String stype = item.getExtensionsToRead().get("turn"); //$NON-NLS-1$
 				// if (stype != null) {
 				// dirInfo.turnType = TurnType.valueOf(stype.toUpperCase(), leftSide);
@@ -60,7 +60,7 @@ public class RouteCalculationResult {
 				// if (sturn != null) {
 				// dirInfo.turnType.setTurnAngle((float) Double.parseDouble(sturn));
 				// }
-				directions.add(info);
+//				directions.add(info);
 			}
 			int i = s.getStartPointIndex();
 			while (true) {
@@ -98,7 +98,7 @@ public class RouteCalculationResult {
 		if (directions != null && directions.size() > 1) {
 			for (int i = 1; i < directions.size();) {
 				RouteDirectionInfo r = directions.get(i);
-				if (r.turnType.getValue().equals(TurnType.C)) {
+				if (r.getTurnType().getValue().equals(TurnType.C)) {
 					RouteDirectionInfo prev = directions.get(i - 1);
 					prev.setAverageSpeed((prev.distance + r.distance)
 							/ (prev.distance / prev.getAverageSpeed() + r.distance / r.getAverageSpeed()));
@@ -144,8 +144,8 @@ public class RouteCalculationResult {
 				for (RouteDirectionInfo i : directions) {
 					i.routePointOffset++;
 				}
-				RouteDirectionInfo info = new RouteDirectionInfo(directions.get(0).getAverageSpeed());
-				info.turnType = TurnType.valueOf(TurnType.C, false);
+				RouteDirectionInfo info = new RouteDirectionInfo(directions.get(0).getAverageSpeed(),
+						TurnType.valueOf(TurnType.C, false));
 				info.routePointOffset = 0;
 				info.descriptionRoute = "";//getString(ctx, R.string.route_head); //$NON-NLS-1$
 				directions.add(0, info);

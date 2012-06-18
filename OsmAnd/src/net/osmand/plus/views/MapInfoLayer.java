@@ -472,8 +472,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 								turnType = null;
 								invalidate();
 							}
-						} else if (!Algoritms.objectEquals(turnType, next.turnType)) {
-							turnType = next.turnType;
+						} else if (!Algoritms.objectEquals(turnType, next.getTurnType())) {
+							turnType = next.getTurnType();
 							TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
 							invalidate();
 						}
@@ -544,13 +544,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 						if (d >= 0 && !showMiniMap) {
 							visible = true;
 							RouteDirectionInfo next = routeLayer.getHelper().getNextRouteDirectionInfo();
-							if (next == null || next.turnType == null) {
+							if (next == null) {
 								if (turnType != null) {
 									turnType = null;
 									invalidate();
 								}
-							} else if (!Algoritms.objectEquals(turnType, next.turnType)) {
-								turnType = next.turnType;
+							} else if (!Algoritms.objectEquals(turnType, next.getTurnType())) {
+								turnType = next.getTurnType();
 								TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
 								if (turnType.getExitOut() > 0) {
 									exitOut = turnType.getExitOut() + ""; //$NON-NLS-1$
