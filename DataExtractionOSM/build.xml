@@ -79,7 +79,7 @@
 			<fileset dir="${bin.absolute.dir}">
 				<include name="**/*" />
 			</fileset>
-			<fileset dir="${icons.absolute.dir}">
+			<fileset dir="${icons.absolute.dir}/..">
 				<include name="**/*" />
 			</fileset>
 			<fileset dir="${src.absolute.dir}">
