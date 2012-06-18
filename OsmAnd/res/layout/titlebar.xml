@@ -32,7 +32,7 @@
     <net.osmand.plus.activities.FontFitTextView
         android:id="@+id/title_text"
         style="@style/WhiteTitleText"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:layout_centerVertical="true"
