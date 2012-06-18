@@ -22,9 +22,8 @@
 
     <CheckBox
         android:id="@+id/check_item"
-        android:layout_width="25dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:button="@drawable/orangedot_checkbox"
         android:focusable="false" />
 
 </LinearLayout>
