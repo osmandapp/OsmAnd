@@ -73,7 +73,7 @@
   <string name="profile_settings">Opciones específicas por perfil</string>
   <string name="settings_preset">Perfil de usuario</string>
   <string name="settings_preset_descr">Selecciona un perfil de uso con ajustes de mapa y navegación personalizados.</string>
-  <string name="monitor_preferences">Seguimiento</string>
+  <string name="monitor_preferences">- Seguimiento</string>
   <string name="monitor_preferences_descr">Especifica los parámetros de seguimiento</string>
   <string name="routing_settings">- Navegación</string>
   <string name="routing_settings_descr">Especifica opciones de navegación</string>
@@ -836,6 +836,7 @@
   <string name="use_short_object_names">Usar nombre de objetos</string>
   <string name="accessibility_preferences_descr">Preferencias de accesibilidad</string>
   <string name="accessibility_preferences">Accesibilidad</string>
+<<<<<<< HEAD
   <string name="local_index_routing_data">Datos de enrutamiento</string>
   <string name="navigate_point_format">Formato :</string>
   <string name="poi_search_desc">Buscar PDI (Punto De Interes)</string>
@@ -972,4 +973,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 \n\t- \'Sensor de luz\': la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si está equipado)</string>
 <string name="tip_app_mode_t_v2">\﻿tOsmand admite diferentes perfiles de aplicación (personalizable) para diferentes casos de uso.
 \n\tPuedes cambiar perfiles mediante el botón de perfil en la esquina inferior izquierda de la pantalla de mapa (icono de coche, bicicleta o peatón), o al crear una ruta.</string>
+=======
+<string name="local_index_routing_data">Datos de enrutamiento</string><string name="navigate_point_format">Formato :</string><string name="poi_search_desc">Buscar PDI (Punto De Interes)</string><string name="address_search_desc">Buscar dirección</string><string name="navpoint_search_desc">Coordenadas</string><string name="transport_search_desc">Buscar transportes</string><string name="favourites_search_desc">Buscar favorito</string><string name="history_search_desc">Historial de búsqueda</string><string name="rendering_attr_noPolygons_description">Hacer todas las características del terreno transparentes en el mapa</string><string name="rendering_attr_noPolygons_name">Sin polígonos</string><string name="rendering_attr_appMode_name">Modo de renderizado</string><string name="rendering_attr_appMode_description">Optimización de mapa para cada Perfil de Usuario</string><string name="rendering_attr_contourLines_description">Selecciona el nivel de zoom mínimo para mostrar en el mapa si está disponible. Pueden ser necesarios ficheros SRTM independientes.</string><string name="rendering_attr_contourLines_name">Mostrar líneas de contorno</string><string name="rendering_attr_hmRendered_description">Aumentar el detalle del mapa</string><string name="rendering_attr_hmRendered_name">Mostrar más detalle del mapa</string><string name="route_roundabout">Rotonda : coja la %1$d salida y continúe</string><string name="route_kl">Manténgase a la izquierda y continúe</string><string name="route_kr">Manténgase a la derecha y continúe</string><string name="save_route_as_gpx">Guardar ruta como GPX</string><string name="asap">ASAP</string><string name="tip_recent_changes_0_8_1_t">"Cambios en 0.8.1 : "</string><string name="gpxup_public">Public</string><string name="gpxup_identifiable">Identifiable</string><string name="gpxup_trackable">Trackable</string><string name="gpxup_private">Private</string>
+>>>>>>> new image changes
 </resources>
