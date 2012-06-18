@@ -250,12 +250,15 @@ public class BinaryMapRouteReaderAdapter {
 				int oldLimit = codedIS.pushLimit(subregion.length);
 				readRouteTree(subregion, null, 0, true);
 				region.getSubregions().add(subregion);
+				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				codedIS.popLimit(oldLimit);
-				codedIS.seek(subregion.filePointer + subregion.length);
+				
 				region.bottomLatitude = MapUtils.get31LatitudeY(subregion.bottom);
 				region.topLatitude = MapUtils.get31LatitudeY(subregion.top);
 				region.rightLongitude = MapUtils.get31LongitudeX(subregion.right);
 				region.leftLongitude = MapUtils.get31LongitudeX(subregion.left);
+				// Finish reading file!
+				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 			}	break;
 			
 			default:
@@ -527,7 +530,8 @@ public class BinaryMapRouteReaderAdapter {
 					codedIS.popLimit(oldLimit);
 					codedIS.seek(subregion.filePointer + subregion.length);
 				} else {
-					skipUnknownField(t);
+					codedIS.seek(thisTree.filePointer + thisTree.length);
+					// skipUnknownField(t);
 				}
 				break;
 			default:

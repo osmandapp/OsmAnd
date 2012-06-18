@@ -155,7 +155,6 @@ public class BinaryMapIndexReader {
 				indexes.add(mapIndex);
 				break;
 			case OsmandOdb.OsmAndStructure.ADDRESSINDEX_FIELD_NUMBER:
-				
 				AddressRegion region = new AddressRegion();
 				region.length = readInt();
 				region.filePointer = codedIS.getTotalBytesRead();

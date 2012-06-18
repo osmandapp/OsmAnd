@@ -498,7 +498,6 @@ public class BinaryMapAddressReaderAdapter {
 								codedIS.popLimit(old);
 							}
 							if (obj != null) {
-								System.out.println("STREET " + list.get(j) );
 								codedIS.seek(list.get(j));
 								int len = codedIS.readRawVarint32();
 								int old = codedIS.pushLimit(len);

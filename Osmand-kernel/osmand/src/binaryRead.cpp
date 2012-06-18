@@ -327,6 +327,8 @@ bool readRoutingIndex(CodedInputStream* input, RoutingIndex* routingIndex) {
 			input->PopLimit(oldLimit);
 			input->Seek(subregion.filePointer + subregion.length);
 			routingIndex->subregions.push_back(subregion);
+			// Finish reading
+			input->Seek(routingIndex->filePointer + routingIndex->length);
 			break;
 		}
 		default: {
