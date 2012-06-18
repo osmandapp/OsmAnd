@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
@@ -125,20 +126,11 @@ public class MapActivityActions implements DialogProvider {
 		args.putSerializable(KEY_FAVORITE, point);
 		final EditText editText =  (EditText) dialog.findViewById(R.id.Name);
 		editText.setText(point.getName());
+		editText.selectAll();
+		editText.requestFocus();
 		final AutoCompleteTextView cat =  (AutoCompleteTextView) dialog.findViewById(R.id.Category);
 		cat.setText(point.getCategory());
-		editText.selectAll();
-		// PAVOL FIXME android API 8
-//		dialog.setOnShowListener(new OnShowListener() {
-//
-//		    @Override
-//		    public void onShow(DialogInterface dialog) {
-//		        InputMethodManager imm = (InputMethodManager) mapActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
-//		        if (imm != null) {
-//		        	imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
-//		        }
-//		    }
-//		});
+		AndroidUtils.softKeyboardDelayed(editText);
 	}
 	
 	protected Dialog createAddFavouriteDialog(final Bundle args) {
