@@ -23,6 +23,7 @@ public class RouteDirectionInfo {
 		return (int) (distance / averageSpeed);
 	}
 
+	// FIXME How it can be null? (fix by constructor and revert MapInfoLayer)
 	public TurnType turnType;
 	// location when you should action (turn or go ahead)
 	public int routePointOffset;

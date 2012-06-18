@@ -544,7 +544,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 						if (d >= 0 && !showMiniMap) {
 							visible = true;
 							RouteDirectionInfo next = routeLayer.getHelper().getNextRouteDirectionInfo();
-							if (next == null) {
+							if (next == null || next.turnType == null) {
 								if (turnType != null) {
 									turnType = null;
 									invalidate();
