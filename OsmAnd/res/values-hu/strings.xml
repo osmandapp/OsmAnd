@@ -119,7 +119,7 @@
   <!-- this block re-worked for new Preferences structure -->
   <string name="profile_settings">Felhasználási módnak megfelelő beállítások</string>
   <string name="settings_preset">Felhasználási mód</string>
-  <string name="settings_preset_descr">Felhasználási mód kiválasztása. (Minden módban a térkép, útvonalrögzítés és navigáció beállításai alább személyre szabhatók.)</string>
+  <string name="settings_preset_descr">Felhasználási mód kiválasztása egyedi térkép és navigációs beállításokkal.</string>
   <string name="monitor_preferences">Útvonalrögzítés</string>
   <string name="monitor_preferences_descr">Útvonalrögzítés beállításai</string>
   <string name="routing_settings">- Navigáció</string>
@@ -134,7 +134,7 @@
   <string name="user_name_descr">openstreetmap.org felé történő adatküldéshez szükséges</string>
   <string name="user_password">OSM jelszavad</string>
   <string name="user_password_descr">openstreetmap.org felé történő adatküldéshez szükséges</string>
-  <string name="osmand_service">Háttérszolgáltatás</string>
+  <string name="osmand_service">Alvó állaptú használat</string>
   <string name="osmand_service_descr">OsmAnd kikapcsolt képernyővel való használatához</string>
   <string name="tip_rotation_switching">Térkép elforgatása</string>
   <string name="tip_rotation_switching_t">\tBeállítható, hogy mikor és hogyan forduljon el a térkép a \'Beállítások\' -&gt; \'Térkép megjelenítés\' -&gt; \'Térkép forgatása\'. \n\tLehetőségek: \n\t\'Ne forogjon\' - A térkép nem forog. Észak van mindig fönt \n\t\'Mozgás alapján\' - A térkép folyamatosan a mozgás irányába néz \n\t\'Iránytű alapján\' - A térkép mindig a beépített iránytűnek megfelelően fordul el \n\tTanács: A forgás alapjának a kiválasztottról iránytűre és vissza váltásához egyszerűen csak meg kell érinteni a kijelzőn az iránytűt.</string>
@@ -637,7 +637,7 @@
   <string name="data_settings_descr">Nyelv kiválasztása, letölti/újraolvassa az adatokat</string>
   <string name="map_preferences_descr">Térkép beállítás: térkép forrása, forgatás, középpont, kijelző helyzete</string>
   <string name="data_settings">Adat</string>
-  <string name="osm_settings">OpenStreetMap</string>
+  <string name="osm_settings">OSM Szerkesztés</string>
   <string name="auto_zoom_map_descr">Térkép automatikus nagyítása a sebesség függvényében</string>
   <string name="auto_zoom_map">Automatikus nagyítás</string>
   <string name="additional_settings">További beállítások</string>
@@ -647,7 +647,7 @@
   <string name="save_track_interval_descr">Milyen sűrűn rögzítsen pontokat a mentett útvonalba</string>
   <string name="save_track_interval">Rögzítési sűrűség</string>
   <string name="save_track_to_gpx_descrp">Az útvonalak napi csoportosításban kerülnek mentésre a track könyvtárba</string>
-  <string name="save_track_to_gpx">Útvonal mentése GPX-be</string>
+  <string name="save_track_to_gpx">Útvonal mentése GPX fájlba</string>
   <string name="navigate_to">Beállítás célpontnak</string>
   <string name="update_tile">Térkép frissítés</string>
   <string name="reload_tile">Térképcsempe újraolvasása</string>
@@ -797,24 +797,24 @@
   <string name="online_map_settings_descr">Internetes és tárolt raszteres térképek beállításai</string>
   <string name="map_settings">- Térképbeállítások</string>
   <string name="map_settings_descr">"Térképmegjelenítés "</string>
-  <string name="osmand_rastermaps_plugin_description">"Ez a kiterjesztés lehetővé teszi internetes és letöltött raszteres térképek alap, vagy rátét illetve alátét térképként való használatát. A térképeket előre is el lehet készíteni és bemásolni az OsmAnd könyvárába. "</string>
-  <string name="osmand_background_plugin_description">Ez a kiterjesztés lehetővé teszi az útvonal felvételét vagy a navigációt energiatakarékos üzemmódban (kikapcsolt képernyővel) úgy, hogy bizonyos időközönként felébreszti a GPS eszközt és felveszi az aktuális pozíciót az útvonalhoz vagy hangutasítást mond.</string>
-  <string name="osmand_accessibility_description">Ez a kiterjesztés akadálymentesítési beállításokat tesz lehetővé.</string>
+  <string name="osmand_rastermaps_plugin_description">"Ez a bővítmény lehetővé teszi internetes és letöltött raszteres térképek alap, vagy rátét illetve alátét térképként való használatát. A térképeket előre is el lehet készíteni és bemásolni az OsmAnd könyvárába. "</string>
+  <string name="osmand_background_plugin_description">Ez a bővítmény lehetővé teszi az útvonal felvételét vagy a navigációt energiatakarékos üzemmódban (kikapcsolt képernyővel) úgy, hogy bizonyos időközönként felébreszti a GPS eszközt és felveszi az aktuális pozíciót az útvonalhoz vagy hangutasítást mond.</string>
+  <string name="osmand_accessibility_description">Ez a bővítmény akadálymentesítési beállításokat tesz lehetővé.</string>
   <string name="extra_settings">Haladó beállítások</string>
-  <string name="osmand_monitoring_description">Ez a kiterjesztés az útvonal GPX fájlba való felvételét vagy webes alkalmazással való követést tesz lehetővé.</string>
-  <string name="osmand_extra_settings_description">"Ez a kiterjesztés további térkép és pár eszközre jellemző beállítást tesz lehetővé. "</string>
+  <string name="osmand_monitoring_description">Ez a bővítmény az útvonal GPX fájlba való felvételét vagy webes alkalmazással való követést tesz lehetővé.</string>
+  <string name="osmand_extra_settings_description">"Ez a bővítmény további térkép és pár eszközre jellemző beállítást tesz lehetővé. "</string>
   <string name="osmand_development_plugin_description">Ez a bővítmény elérhetővé teszi a fejlesztői és hibakeresési eszközöket, mint szimulált navigáció, vagy teljesítmény kijelzés.</string>
   <string name="plugins_screen">Bővítménykezelő</string>
-  <string name="select_plugin_to_activate">Kiterjesztés be- és kikapcsolása érintésre történik. (Lehet, hogy az OsmAndot újra kell indítanod.)</string>
-  <string name="prefs_plugins_descr">A kiterjesztések további lehetőségeket biztosítanak az alkalmazásban mint a útvonal mentés, raszteres térképek, kikapcsolt képernyős lehetőségek, akadálymentesítés és mások.</string>
+  <string name="select_plugin_to_activate">Bővítmény be- és kikapcsolása érintésre történik. (Lehet, hogy az OsmAndot újra kell indítanod.)</string>
+  <string name="prefs_plugins_descr">A bővítmények további lehetőségeket biztosítanak az alkalmazásban mint útvonal mentés, raszteres térképek, kikapcsolt képernyős lehetőségek, akadálymentesítés és mások.</string>
   <string name="prefs_plugins">Bővítménykezelő</string>
   <string name="tip_recent_changes_0_8_0_t">"A 0.8.0 kiadás változásai:\n\t- Beépülők\n\t- Új offline térképadat formátum\n\t- Sok hibajavítás"</string>
   <string name="osm_editing_plugin_description">Ez a bővítmény lehetővé teszi az OSM fejlesztését: OSM POI objektumok gyűjtése / módosítása, OSM hibajelzések készítése, és felvett GPX fájlok feltöltése. (OSM hitelesítést igényelnek.)</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektoros térképek gyorsabban rajzolódnak. Nem minden eszközön működik.</string>
   <string name="simulate_route_progression_manually">Az útvonalon haladás szimulálása</string>
   <string name="play_commands_of_currently_selected_voice">Hangutasítások kimondása a kiválasztott hanggal</string>
-  <string name="debugging_and_development">OsmAnd hibakeresés és fejlesztés</string>
+  <string name="debugging_and_development">OsmAnd fejlesztés</string>
   <string name="native_rendering">Natív renderelés</string>
   <string name="animate_routing">Navigáció szimulálása</string>
   <string name="test_voice_prompts">Hangutasítások tesztelése</string>
-<string name="local_index_routing_data">Routing data</string><string name="navigate_point_format">Format :</string><string name="poi_search_desc">POI - Point Of interest</string><string name="address_search_desc">Address search</string><string name="navpoint_search_desc">Koor</string><string name="transport_search_desc">Tömegközlekedés keresése</string><string name="favourites_search_desc">Kedvencek keresése</string><string name="history_search_desc">Search history</string></resources>
+<string name="local_index_routing_data">Útvonaltervezési adatok</string><string name="navigate_point_format">Formátum :</string><string name="poi_search_desc">POI - Érdekes helyek</string><string name="address_search_desc">Címkeresés</string><string name="navpoint_search_desc">Koordináták</string><string name="transport_search_desc">Tömegközlekedés keresése</string><string name="favourites_search_desc">Kedvencek keresése</string><string name="history_search_desc">Keresési előzmények</string><string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string><string name="rendering_attr_noPolygons_name">No polygons</string><string name="rendering_attr_appMode_name">Rendering mode</string><string name="rendering_attr_appMode_description">Map optimization for respective User Profile</string><string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate SRTM-file may be needed.</string><string name="rendering_attr_contourLines_name">Show contour lines</string><string name="rendering_attr_hmRendered_description">Increase amount of map detail shown</string><string name="rendering_attr_hmRendered_name">Show more map detail</string></resources>
