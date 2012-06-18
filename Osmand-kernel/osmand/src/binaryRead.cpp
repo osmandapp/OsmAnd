@@ -1305,7 +1305,11 @@ BinaryMapFile* initBinaryMapFile(std::string inputName) {
 		openFiles.erase(iterator);
 	}
 
+#if defined(_WIN32)
 	int fileDescriptor = open(inputName.c_str(), O_RDONLY | O_BINARY);
+#else
+	int fileDescriptor = open(inputName.c_str(), O_RDONLY);
+#endif
 	if (fileDescriptor < 0) {
 		osmand_log_print(LOG_ERROR, "File could not be open to read from C : %s", inputName.c_str());
 		return NULL;
