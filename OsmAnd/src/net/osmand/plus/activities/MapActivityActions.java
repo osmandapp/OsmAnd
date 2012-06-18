@@ -689,8 +689,8 @@ public class MapActivityActions implements DialogProvider {
 		adapter.registerItem(R.string.context_menu_item_navigate_point, R.drawable.list_view_set_destination);
 		adapter.registerItem(R.string.context_menu_item_directions);
 		adapter.registerItem(R.string.context_menu_item_show_route, R.drawable.list_view_show_route_from_here);
-		adapter.registerItem(R.string.context_menu_item_add_favorite, R.drawable.list_activities_favorites);
 		adapter.registerItem(R.string.context_menu_item_share_location, R.drawable.list_view_share_location);
+		adapter.registerItem(R.string.context_menu_item_add_favorite, R.drawable.list_activities_favorites);
 		
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
 		
@@ -747,10 +747,10 @@ public class MapActivityActions implements DialogProvider {
 					if(checkPointToNavigate()) {
 						getDirections(latitude, longitude, false);
 					}
-				} else if (standardId == R.string.context_menu_item_add_favorite) {
-					addFavouritePoint(latitude, longitude);
 				} else if (standardId == R.string.context_menu_item_share_location) {
 					shareLocation(latitude, longitude, mapView.getZoom());
+				} else if (standardId == R.string.context_menu_item_add_favorite) {
+					addFavouritePoint(latitude, longitude);
 				} 
 			}
 		});
