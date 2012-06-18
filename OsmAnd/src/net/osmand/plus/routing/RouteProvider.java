@@ -222,7 +222,7 @@ public class RouteProvider {
 				if(info.routePointOffset >= startI && info.routePointOffset < endI){
 					RouteDirectionInfo ch = new RouteDirectionInfo(info.getAverageSpeed(), info.getTurnType());
 					ch.routePointOffset = info.routePointOffset - startI;
-					ch.descriptionRoute = info.descriptionRoute;
+					ch.setDescriptionRoute(info.getDescriptionRoute());
 					
 					// recalculate
 					ch.distance = 0;
@@ -269,7 +269,7 @@ public class RouteProvider {
 		int prevBearingLocation = 0;
 		RouteDirectionInfo previousInfo = new RouteDirectionInfo(speed, TurnType.valueOf(TurnType.C, leftSide));
 		previousInfo.routePointOffset = 0;
-		previousInfo.descriptionRoute = getString(ctx, R.string.route_head);
+		previousInfo.setDescriptionRoute(getString(ctx, R.string.route_head));
 		directions.add(previousInfo);
 		
 		int distForTurn = 0;
@@ -344,10 +344,11 @@ public class RouteProvider {
 				
 				// calculate for previousRoute 
 				previousInfo.distance = listDistance[previousLocation]- listDistance[i];
-				previousInfo.descriptionRoute += " " + OsmAndFormatter.getFormattedDistance(previousInfo.distance, ctx); //$NON-NLS-1$
+				previousInfo.setDescriptionRoute(previousInfo.getDescriptionRoute()
+						+ " " + OsmAndFormatter.getFormattedDistance(previousInfo.distance, ctx)); //$NON-NLS-1$
 				type.setTurnAngle(360 - delta);
 				previousInfo = new RouteDirectionInfo(speed, type);
-				previousInfo.descriptionRoute = description;
+				previousInfo.setDescriptionRoute(description);
 				previousInfo.routePointOffset = startTurnPoint;
 				directions.add(previousInfo);
 				previousLocation = startTurnPoint;
@@ -358,13 +359,13 @@ public class RouteProvider {
 		} 
 			
 		previousInfo.distance = listDistance[previousLocation];
-		previousInfo.descriptionRoute += " " + OsmAndFormatter.getFormattedDistance(previousInfo.distance, ctx); //$NON-NLS-1$
+		previousInfo.setDescriptionRoute(previousInfo.getDescriptionRoute()
+				+ " " + OsmAndFormatter.getFormattedDistance(previousInfo.distance, ctx)); //$NON-NLS-1$
 		
 		// add last direction go straight (to show arrow in screen after all turns)
 		if(previousInfo.distance > 80){
 			RouteDirectionInfo info = new RouteDirectionInfo(speed, TurnType.valueOf(TurnType.C, leftSide));
 			info.distance = 0;
-			info.descriptionRoute = ""; //$NON-NLS-1$
 			info.routePointOffset = locations.size() - 1;
 			directions.add(info);
 		}
@@ -609,7 +610,7 @@ public class RouteProvider {
 						turnType.setTurnAngle((float) Double.parseDouble(sturn));
 					}
 					RouteDirectionInfo dirInfo = new RouteDirectionInfo(avgSpeed, turnType);
-					dirInfo.descriptionRoute = item.desc; //$NON-NLS-1$
+					dirInfo.setDescriptionRoute(item.desc); //$NON-NLS-1$
 					dirInfo.routePointOffset = offset;
 					if (previous != null && !TurnType.C.equals(previous.getTurnType().getValue()) &&
 							!osmandRouter) {
@@ -770,7 +771,7 @@ public class RouteProvider {
 				WptPt pt = new WptPt();
 				pt.lat = loc.getLatitude();
 				pt.lon = loc.getLongitude();
-				pt.desc = dirInfo.descriptionRoute;
+				pt.desc = dirInfo.getDescriptionRoute();
 				Map<String, String> extensions = pt.getExtensionsToWrite();
 				extensions.put("time", dirInfo.getExpectedTime() + "");
 				String turnType = dirInfo.getTurnType().getValue();

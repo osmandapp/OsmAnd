@@ -1,13 +1,21 @@
 package net.osmand.plus.routing;
 
 public class RouteDirectionInfo {
-	public String descriptionRoute = ""; //$NON-NLS-1$
+	private String descriptionRoute = ""; //$NON-NLS-1$
 	private float averageSpeed;
 
 	// Constructor to verify average speed always > 0
 	public RouteDirectionInfo(float averageSpeed, TurnType turnType) {
 		this.averageSpeed = averageSpeed == 0 ? 1 : averageSpeed;
 		this.turnType = turnType;
+	}
+	
+	public String getDescriptionRoute() {
+		return descriptionRoute;
+	}
+	
+	public void setDescriptionRoute(String descriptionRoute) {
+		this.descriptionRoute = descriptionRoute;
 	}
 
 	public float getAverageSpeed() {

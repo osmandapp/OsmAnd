@@ -147,7 +147,7 @@ public class RouteCalculationResult {
 				RouteDirectionInfo info = new RouteDirectionInfo(directions.get(0).getAverageSpeed(),
 						TurnType.valueOf(TurnType.C, false));
 				info.routePointOffset = 0;
-				info.descriptionRoute = "";//getString(ctx, R.string.route_head); //$NON-NLS-1$
+				// info.setDescriptionRoute(getString(ctx, R.string.route_head));//; //$NON-NLS-1$
 				directions.add(0, info);
 			}
 		}

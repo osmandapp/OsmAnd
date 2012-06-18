@@ -70,8 +70,8 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 					if(routingHelper.getRouteDirections().size() > directionInfo){
 						RouteDirectionInfo info = routingHelper.getRouteDirections().get(directionInfo);
 						Location l = routingHelper.getLocationFromRouteDirection(info);
-						if(info.descriptionRoute != null) {
-							contextMenu.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), info.descriptionRoute);
+						if(info.getDescriptionRoute() != null) {
+							contextMenu.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), info.getDescriptionRoute());
 						}
 						view.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(), view.getZoom(), true);
 					}
@@ -88,8 +88,8 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 					directionInfo++;
 					RouteDirectionInfo info = routingHelper.getRouteDirections().get(directionInfo);
 					Location l = routingHelper.getLocationFromRouteDirection(info);
-					if(info.descriptionRoute != null){
-						contextMenu.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), info.descriptionRoute);
+					if(info.getDescriptionRoute() != null){
+						contextMenu.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), info.getDescriptionRoute());
 					}
 					view.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(), view.getZoom(), true);
 				}

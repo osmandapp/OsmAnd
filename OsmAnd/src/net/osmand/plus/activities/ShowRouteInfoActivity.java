@@ -118,7 +118,7 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 			}
 			((TurnPathHelper.RouteDrawable) icon.getDrawable()).setRouteType(model.getTurnType());
 			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(model.distance, ShowRouteInfoActivity.this));
-			label.setText(model.descriptionRoute);
+			label.setText(model.getDescriptionRoute());
 			int seconds = model.getExpectedTime() % 60;
 			int min = (model.getExpectedTime() / 60) % 60;
 			int hours = (model.getExpectedTime() / 3600);
