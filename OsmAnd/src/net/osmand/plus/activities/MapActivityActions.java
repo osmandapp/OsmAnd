@@ -685,8 +685,8 @@ public class MapActivityActions implements DialogProvider {
 		Builder builder = new AlertDialog.Builder(mapActivity);
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		
-		adapter.registerItem(R.string.context_menu_item_navigate_point, R.drawable.list_view_set_destination);
 		adapter.registerItem(R.string.context_menu_item_search, R.drawable.list_view_search_near_here);
+		adapter.registerItem(R.string.context_menu_item_navigate_point, R.drawable.list_view_set_destination);
 		adapter.registerItem(R.string.context_menu_item_directions);
 		adapter.registerItem(R.string.context_menu_item_show_route, R.drawable.list_view_show_route_from_here);
 		adapter.registerItem(R.string.context_menu_item_add_favorite, R.drawable.list_activities_favorites);
@@ -727,12 +727,14 @@ public class MapActivityActions implements DialogProvider {
 				OnContextMenuClick click = adapter.getClickAdapter(which);
 				if(click != null) {
 					click.onContextMenuClick(standardId, which, false, dialog);
+				} else if (standardId == R.string.context_menu_item_search) {
+					Intent intent = new Intent(mapActivity, OsmandIntents.getSearchActivity());
+					intent.putExtra(SearchActivity.SEARCH_LAT, latitude);
+					intent.putExtra(SearchActivity.SEARCH_LON, longitude);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					mapActivity.startActivity(intent);
 				} else if (standardId == R.string.context_menu_item_navigate_point) {
 					mapActivity.navigateToPoint(new LatLon(latitude, longitude));
-				} else if (standardId == R.string.context_menu_item_show_route) {
-					if(checkPointToNavigate()) {
-						getDirections(latitude, longitude, false);
-					}
 				} else if (standardId == R.string.context_menu_item_directions) {
 					Location loc = mapActivity.getLastKnownLocation();
 					if (loc != null) {
@@ -741,12 +743,10 @@ public class MapActivityActions implements DialogProvider {
 					} else {
 						AccessibleToast.makeText(mapActivity, R.string.unknown_from_location, Toast.LENGTH_LONG).show();
 					}
-				} else if (standardId == R.string.context_menu_item_search) {
-					Intent intent = new Intent(mapActivity, OsmandIntents.getSearchActivity());
-					intent.putExtra(SearchActivity.SEARCH_LAT, latitude);
-					intent.putExtra(SearchActivity.SEARCH_LON, longitude);
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					mapActivity.startActivity(intent);
+				} else if (standardId == R.string.context_menu_item_show_route) {
+					if(checkPointToNavigate()) {
+						getDirections(latitude, longitude, false);
+					}
 				} else if (standardId == R.string.context_menu_item_add_favorite) {
 					addFavouritePoint(latitude, longitude);
 				} else if (standardId == R.string.context_menu_item_share_location) {
