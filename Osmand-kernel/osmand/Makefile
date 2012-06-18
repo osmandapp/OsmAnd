@@ -26,10 +26,7 @@ LIBNAME = $(LIBRARY_PREFIX)osmand
 LIBTYPE = $(DYNAMICLIB_EXT)
 LDLIBS += -Wl,--whole-archive -lskia -Wl,--no-whole-archive -lproto -lft2 -lexpat -lpng -lz 
 
-ifeq ($(TARGET),win)
-	LDLIBS += -lwinmm -lgdi32 -lusp10
-	OSMAND_FLAGS += $(OSMAND_FLAGS_WINDOWS)
-else ifeq ($(TARGET),cygwin)
+ifeq ($(TARGET),windows)
 	LDLIBS += -lwinmm -lgdi32 -lusp10
 	OSMAND_FLAGS += $(OSMAND_FLAGS_WINDOWS)
 else ifeq ($(TARGET),nacl)
