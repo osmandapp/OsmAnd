@@ -31,7 +31,6 @@ import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.parkingpoint.ParkingPositionLayer;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.routing.RoutingHelper;
@@ -85,7 +84,6 @@ public class MapActivityLayers {
 	private TransportInfoLayer transportInfoLayer;
 	private PointLocationLayer locationLayer;
 	private PointNavigationLayer navigationLayer;
-	private ParkingPositionLayer parkingPositionLayer;
 	private MapInfoLayer mapInfoLayer;
 	private ContextMenuLayer contextMenuLayer;
 	private RouteInfoLayer routeInfoLayer;
@@ -140,22 +138,18 @@ public class MapActivityLayers {
 		// 7. point navigation layer
 		navigationLayer = new PointNavigationLayer();
 		mapView.addLayer(navigationLayer, 7);
-		// 8. parking position layer
-		parkingPositionLayer = new ParkingPositionLayer(activity);
-		mapView.addLayer(parkingPositionLayer, 8);		
-		// 9. context menu layer 
+		// 8. context menu layer 
 		contextMenuLayer = new ContextMenuLayer(activity);
-		mapView.addLayer(contextMenuLayer, 9);
-		// 10. map info layer
+		mapView.addLayer(contextMenuLayer, 8);
+		// 9. map info layer
 		mapInfoLayer = new MapInfoLayer(activity, routeLayer);
-		mapView.addLayer(mapInfoLayer, 10);
-		// 11. route info layer
+		mapView.addLayer(mapInfoLayer, 9);
+		// 10. route info layer
 		routeInfoLayer = new RouteInfoLayer(routingHelper, activity, contextMenuLayer);
-		mapView.addLayer(routeInfoLayer, 11);
-		// 12. route info layer
+		mapView.addLayer(routeInfoLayer, 10);
+		// 11. route info layer
 		mapControlsLayer = new MapControlsLayer(activity);
-		mapView.addLayer(mapControlsLayer, 12);
-		
+		mapView.addLayer(mapControlsLayer, 11);
 		
 		OsmandPlugin.createLayers(mapView, activity);
 	}
@@ -604,10 +598,6 @@ public class MapActivityLayers {
 
 	public PointNavigationLayer getNavigationLayer() {
 		return navigationLayer;
-	}
-	
-	public ParkingPositionLayer getParkingPositionLayer() {
-		return parkingPositionLayer;
 	}
 	
 	public GPXLayer getGpxLayer() {

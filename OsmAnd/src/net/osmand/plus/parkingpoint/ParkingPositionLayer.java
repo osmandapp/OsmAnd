@@ -58,9 +58,12 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	private Paint paintText;
 	private Paint paintSubText;
 
-	private Bitmap parkingPosition;
+	private Bitmap parkingNoLimitIcon;
+	private Bitmap parkingLimitIcon;
 	
 	private TextInfoControl parkingPlaceControl;
+
+	private int timeLimit;
 
 	public ParkingPositionLayer(MapActivity map) {
 		this.map = map;
@@ -92,7 +95,9 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		bitmapPaint.setDither(true);
 		bitmapPaint.setAntiAlias(true);
 		bitmapPaint.setFilterBitmap(true);
-		parkingPosition = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_parking_pos_no_limit);
+		parkingNoLimitIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_parking_pos_no_limit);
+		parkingLimitIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_parking_pos_limit);
+		
 		
 		MapInfoLayer mapInfoLayer = map.getMapLayers().getMapInfoLayer();
 		if ((mapInfoLayer != null) && (parkingPlaceControl == null))
@@ -102,17 +107,24 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		parkingPoint = settings.getParkingPosition();
+		timeLimit = settings.getParkingTimeLimit();
+		Bitmap parkingIcon;
+		if (timeLimit == -1) {
+			parkingIcon = parkingNoLimitIcon;
+		} else {
+			parkingIcon = parkingLimitIcon;
+		}
 		if (parkingPoint == null)
 			return;
 		double latitude = parkingPoint.getLatitude();
 		double longitude = parkingPoint.getLongitude();
 		if (isLocationVisible(latitude, longitude)) {
-			int marginX = parkingPosition.getWidth() / 3;
-			int marginY = 2 * parkingPosition.getHeight() / 3;
+			int marginX = parkingNoLimitIcon.getWidth() / 2;
+			int marginY = 2 * parkingNoLimitIcon.getHeight() / 3;
 			int locationX = view.getMapXForPoint(longitude);
 			int locationY = view.getMapYForPoint(latitude);
 			canvas.rotate(-view.getRotate(), locationX, locationY);
-			canvas.drawBitmap(parkingPosition, locationX - marginX, locationY - marginY, bitmapPaint);
+			canvas.drawBitmap(parkingIcon, locationX - marginX, locationY - marginY, bitmapPaint);
 		}
 	}
 
@@ -178,7 +190,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				settings.clearParkingPosition();
-				map.getMapLayers().getParkingPositionLayer().view.refreshMap();
+				view.refreshMap();
 			}
 		});
 		confirm.setNegativeButton(R.string.default_buttons_cancel, null);

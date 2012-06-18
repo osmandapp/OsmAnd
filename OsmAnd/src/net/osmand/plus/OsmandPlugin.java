@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
-
-import android.preference.PreferenceScreen;
-
 import net.osmand.LogUtil;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.plus.activities.MapActivity;
@@ -21,6 +17,10 @@ import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
+
+import org.apache.commons.logging.Log;
+
+import android.preference.PreferenceScreen;
 
 public abstract class OsmandPlugin {
 	
