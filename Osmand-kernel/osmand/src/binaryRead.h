@@ -175,6 +175,7 @@ struct BinaryMapFile {
 	std::vector<RoutingIndex> routingIndexes;
 	std::vector<BinaryPartIndex*> indexes;
 	int fd;
+	int routefd;
 	bool basemap;
 
 	bool isBasemap(){

@@ -1254,8 +1254,8 @@ void searchRouteRegion(SearchQuery* q, std::vector<RouteDataObject*>& list, Rout
 	bool basemapExists = false;
 	for (; i != openFiles.end() && !q->publisher->isCancelled(); i++) {
 		BinaryMapFile* file = i->second;
-		lseek(file->fd, 0, SEEK_SET);
-		FileInputStream input(file->fd);
+		lseek(file->routefd, 0, SEEK_SET);
+		FileInputStream input(file->routefd);
 		input.SetCloseOnDelete(false);
 		CodedInputStream cis(&input);
 		cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
@@ -1309,15 +1309,18 @@ BinaryMapFile* initBinaryMapFile(std::string inputName) {
 
 #if defined(_WIN32)
 	int fileDescriptor = open(inputName.c_str(), O_RDONLY | O_BINARY);
+	int routeDescriptor = open(inputName.c_str(), O_RDONLY | O_BINARY);
 #else
 	int fileDescriptor = open(inputName.c_str(), O_RDONLY);
+	int routeDescriptor = open(inputName.c_str(), O_RDONLY);
 #endif
-	if (fileDescriptor < 0) {
+	if (fileDescriptor < 0 || routeDescriptor < 0) {
 		osmand_log_print(LOG_ERROR, "File could not be open to read from C : %s", inputName.c_str());
 		return NULL;
 	}
 	BinaryMapFile* mapFile = new BinaryMapFile();
 	mapFile->fd = fileDescriptor;
+	mapFile->routefd = routeDescriptor;
 	FileInputStream input(fileDescriptor);
 	input.SetCloseOnDelete(false);
 	CodedInputStream cis(&input);
