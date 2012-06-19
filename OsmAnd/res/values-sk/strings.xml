@@ -10,7 +10,7 @@
   <string name="osmand_rastermaps_plugin_description">Tento modul umožní používanie širokej škály online máp ako prekrývacej alebo ako základnej mapy. Mapa môže byť pripravená offline a skopírovaná do zložky osmand.</string>
   <string name="osmand_background_plugin_description">Tento zás. modul umožňuje stopovanie alebo navigáciu v režime spánku (vypnutá obrazovka) pravidelným prebúdzaním GPS zariadenia.</string>
   <string name="osmand_accessibility_description">Tento zásuvný modul umožňuje špeciálne funkcie pre prístupnosť.</string>
-  <string name="extra_settings">Extra nastavenia</string>
+  <string name="extra_settings">Pokročilé nastavenia</string>
   <string name="osmand_monitoring_description">Tento modul Vám umožní zaznamenávať Vaše cesty, ukladať GPX súbory a vykonávať živé sledovanie založené na webovej službe.</string>
   <string name="osmand_extra_settings_description">Tento zás. modul Vám poskytne vysokú prispôsobiteľnosť aplikácie, podľa použitia a predpokladoch Vášho zariadenia.</string>
   <string name="osmand_development_plugin_description">Tento zás. modul povolí vývojárske funkci (animovanie navigovania) a zobrazí dodatočné informácie ako vykresľovací čas.</string>
@@ -666,7 +666,7 @@
   <string name="save_current_track">Uložiť aktuálnu stopu</string>
   <string name="save_track_interval_descr">Výber umietňovacieho intervalu pre stopy</string>
   <string name="save_track_interval">Logovací interval</string>
-  <string name="monitor_preferences">Stopovanie</string>
+  <string name="monitor_preferences">" - Stopovanie"</string>
   <string name="save_track_to_gpx_descrp">Stopy budú ukladané do adresára stôp, zoskupené podľa dní</string>
   <string name="save_track_to_gpx">Logovať stopu do GPX súboru</string>
   <string name="navigate_to">Navigovať sem</string>
