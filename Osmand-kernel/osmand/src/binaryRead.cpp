@@ -879,8 +879,8 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 	bool basemapExists = false;
 	for (; i != openFiles.end() && !q->publisher->isCancelled(); i++) {
 		BinaryMapFile* file = i->second;
-		lseek(file->routefd, 0, SEEK_SET);
-		FileInputStream input(file->routefd);
+		lseek(file->fd, 0, SEEK_SET);
+		FileInputStream input(file->fd);
 		input.SetCloseOnDelete(false);
 		CodedInputStream cis(&input);
 		cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
@@ -1314,7 +1314,7 @@ BinaryMapFile* initBinaryMapFile(std::string inputName) {
 	int fileDescriptor = open(inputName.c_str(), O_RDONLY);
 	int routeDescriptor = open(inputName.c_str(), O_RDONLY);
 #endif
-	if (fileDescriptor < 0 || routeDescriptor < 0) {
+	if (fileDescriptor < 0 || routeDescriptor < 0 || routeDescriptor == fileDescriptor) {
 		osmand_log_print(LOG_ERROR, "File could not be open to read from C : %s", inputName.c_str());
 		return NULL;
 	}
