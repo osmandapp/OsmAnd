@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="rendering_attr_noPolygons_description">Unterdrückt die Anzeige aller Flächenelemente in der Karte</string>
+	<string name="rendering_attr_noPolygons_name">Transparente Flächen</string>
+	<string name="rendering_attr_appMode_description">Optimierung der Kartendarstellung gemäß Nutzerprofil</string>
+	<string name="rendering_attr_appMode_name">Kartendarstellung</string>
+	<string name="rendering_attr_contourLines_description">Minimale Vergrößerung, ab der Höhenlinien angezegt werden sollen. Höhenlinien müssen meist in Form von zusätzlichen SRTM-Dateien vorhanden sein.</string>
+	<string name="rendering_attr_contourLines_name">Höhenlinien</string>
+	<string name="rendering_attr_hmRendered_description">Erhöht die in der Karte angezeigte Detaildichte</string>
+ 	<string name="rendering_attr_hmRendered_name">Mehr Details in Karte</string>
 	<string name="map_online_plugin_is_not_installed">Aktivieren Sie das Online-Karten-Plugin, um andere Kartenquellen nutzen zu können.</string>
 	<string name="map_online_data">Online-Karten (Kacheln)</string>
 	<string name="map_online_data_descr">Verwende Online-Karten (lade sie herunter und speicher sie temporär auf der SD-Karte)</string>
