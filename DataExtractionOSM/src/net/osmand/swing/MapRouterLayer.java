@@ -641,6 +641,9 @@ public class MapRouterLayer implements MapPanelLayer {
 				for (RouteSegmentResult s : searchRoute) {
 					// double dist = MapUtils.getDistance(s.startPoint, s.endPoint);
 					Way way = new Way(-1);
+					String name = String.format("time %.2f ", s.getSegmentTime());
+//					String name = String.format("beg %.2f end %.2f ", s.getBearingBegin(), s.getBearingEnd());
+					way.putTag(OSMTagKey.NAME.getValue(),name);
 					boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
 					int i = s.getStartPointIndex();
 					while (true) {

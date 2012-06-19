@@ -1,7 +1,13 @@
 package net.osmand.plus.routing;
 
 public class RouteDirectionInfo {
+	// location when you should action (turn or go ahead)
+	public int routePointOffset;
+	// Type of action to take
+	private TurnType turnType;
+	// Description of the turn and route after
 	private String descriptionRoute = ""; //$NON-NLS-1$
+	// Speed after the action till next turn
 	private float averageSpeed;
 
 	// Constructor to verify average speed always > 0
@@ -31,19 +37,17 @@ public class RouteDirectionInfo {
 		return (int) (distance / averageSpeed);
 	}
 
-	private TurnType turnType;
 	
 	public TurnType getTurnType() {
 		return turnType;
 	}
-	// location when you should action (turn or go ahead)
-	public int routePointOffset;
+
 
 	// TODO add from parser
-	public String ref;
-	public String streetName;
-	// speed limit in m/s (should be array of speed limits?)
-	public float speedLimit;
+//	public String ref;
+//	public String streetName;
+//	// speed limit in m/s (should be array of speed limits?)
+//	public float speedLimit;
 
 	// calculated vars
 	// after action (excluding expectedTime)

@@ -127,4 +127,31 @@ public class RouteDataObject {
 		}
 		return highway;
 	}
+
+	// Gives route direction of EAST degrees from NORTH ]-PI, PI]
+	public double directionRoute(int startPoint, boolean plus) {
+		int x = getPoint31XTile(startPoint);
+		int y = getPoint31YTile(startPoint);
+		int nx = startPoint;
+		int px = x;
+		int py = y;
+		double total = 0;
+		do {
+			if (plus) {
+				nx++;
+				if (nx >= getPointsLength()) {
+					break;
+				}
+			} else {
+				nx--;
+				if (nx < 0) {
+					break;
+				}
+			}
+			px = getPoint31XTile(nx);
+			py = getPoint31YTile(nx);
+			total += Math.abs(px - x) + Math.abs(py - y);
+		} while (total < 100);
+		return -Math.atan2( x - px, y - py );
+	}
 }

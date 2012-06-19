@@ -184,6 +184,7 @@ struct BinaryMapFile {
 
 	~BinaryMapFile() {
 		close(fd);
+		close(routefd);
 	}
 };
 

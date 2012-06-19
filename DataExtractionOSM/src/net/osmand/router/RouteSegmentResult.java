@@ -11,6 +11,7 @@ public class RouteSegmentResult {
 	private int endPointIndex;
 	private float segmentTime;
 	private float speed;
+	private float distance;
 	
 	public RouteSegmentResult(RouteDataObject object, int startPointIndex, int endPointIndex) {
 		this.object = object;
@@ -25,6 +26,14 @@ public class RouteSegmentResult {
 	
 	public float getSegmentTime() {
 		return segmentTime;
+	}
+	
+	public float getBearingBegin() {
+		return (float) (object.directionRoute(startPointIndex, startPointIndex < endPointIndex) / Math.PI * 180);
+	}
+	
+	public float getBearingEnd() {
+		return (float) (MapUtils.alignAngleDifference(object.directionRoute(endPointIndex, startPointIndex > endPointIndex) - Math.PI) / Math.PI * 180);
 	}
 	
 	public void setSegmentTime(float segmentTime) {
@@ -61,6 +70,14 @@ public class RouteSegmentResult {
 	
 	public float getSegmentSpeed() {
 		return speed;
+	}
+	
+	public float getDistance() {
+		return distance;
+	}
+	
+	public void setDistance(float distance) {
+		this.distance = distance;
 	}
 	
 	

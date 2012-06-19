@@ -91,7 +91,7 @@
 		<highway value="tertiary_link" speed="21" priority="1" dynamicPriority="1"/>
 		<highway value="road" speed="21" priority="1" dynamicPriority="1"/>
 		<highway value="residential" speed="21" priority="1" dynamicPriority="1"/>
-		<highway value="cycleway" speed="21" priority="1" dynamicPriority="1"/>
+		<highway value="cycleway" speed="21" priority="1.5" dynamicPriority="1.5"/>
 		
 		<highway value="unclassified" speed="15" priority="1" dynamicPriority="1"/>
 		<highway value="service" speed="15" priority="1" dynamicPriority="1"/>

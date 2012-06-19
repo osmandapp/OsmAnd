@@ -65,6 +65,11 @@ public class BinaryRoutePlanner {
 		return Math.sqrt(dx * dx + dy * dy);
 	}
 	
+	private static double measuredDist(int x1, int y1, int x2, int y2) {
+		return MapUtils.getDistance(MapUtils.get31LatitudeY(y1), MapUtils.get31LongitudeX(x1), 
+				MapUtils.get31LatitudeY(y2), MapUtils.get31LongitudeX(x2));
+	}
+	
 	private static double squareDist(int x1, int y1, int x2, int y2) {
 		// translate into meters 
 		double dy = convert31YToMeters(y1, y2);
@@ -162,8 +167,6 @@ public class BinaryRoutePlanner {
 
 
 	// TODO write unit tests
-	// TODO add information about turns (?) - probably calculate additional information to show on map
-	// TODO fix roundabout (?) - probably calculate additional information to show on map
 	// TODO fastest/shortest way
 	/**
 	 * Calculate route between start.segmentEnd and end.segmentStart (using A* algorithm)
@@ -176,7 +179,7 @@ public class BinaryRoutePlanner {
 		ctx.timeToCalculate = System.nanoTime();
 		ctx.firstRoadId = (start.getRoad().id << 8) + start.getSegmentStart();
 		if(ctx.config.initialDirection != null) {
-			double plusDir = start.directionRoute(start.segmentStart, true);
+			double plusDir = start.getRoad().directionRoute(start.segmentStart, true);
 			double diff	 = plusDir - ctx.config.initialDirection;
 			if(Math.abs(MapUtils.alignAngleDifference(diff)) <= Math.PI / 3) {
 				ctx.firstRoadDirection = 1;
@@ -829,16 +832,19 @@ public class BinaryRoutePlanner {
 			}
 			boolean plus = rr.getStartPointIndex() < rr.getEndPointIndex();
 			int next;
+			double distance = 0;
 			for (int j = rr.getStartPointIndex(); j != rr.getEndPointIndex(); j = next) {
 				next = plus ? j + 1 : j - 1;
-				double d = squareRootDist(road.getPoint31XTile(j), road.getPoint31YTile(j), road.getPoint31XTile(next),
+				double d = measuredDist(road.getPoint31XTile(j), road.getPoint31YTile(j), road.getPoint31XTile(next),
 						road.getPoint31YTile(next));
+				distance += d;
 				distOnRoadToPass += d / speed + ctx.getRouter().defineObstacle(road, j);
 			}
 			// last point turn time can be added
 			// if(i + 1 < result.size()) { distOnRoadToPass += ctx.getRouter().calculateTurnTime(); }
 			rr.setSegmentTime((float) distOnRoadToPass);
 			rr.setSegmentSpeed((float) speed);
+			rr.setDistance((float) distance);
 			completeTime += distOnRoadToPass;
 		}
 		
@@ -848,17 +854,19 @@ public class BinaryRoutePlanner {
 			double startLon = MapUtils.get31LongitudeX(start.road.getPoint31XTile(start.segmentStart));
 			double endLat = MapUtils.get31LatitudeY(end.road.getPoint31YTile(end.segmentStart));
 			double endLon = MapUtils.get31LongitudeX(end.road.getPoint31XTile(end.segmentStart));
-			println(MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"{5}\" \n" +
-					"    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" complete_time=\"{4}\">", 
-					startLat+"", startLon+"", endLat+"", endLon+"", completeTime+"", ctx.config.routerName));
+			println(MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"{5}\" \n"
+					+ "    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" complete_time=\"{4}\">",
+					startLat + "", startLon + "", endLat + "", endLon + "", completeTime + "", ctx.config.routerName));
 			for (RouteSegmentResult res : result) {
-				String name = "Unknown";//res.object.getName();
-				String ref = "";//res.object.getNameByType(res.object.getMapIndex().refEncodingType);
-				if(ref != null) {
+				String name = "Unknown";// res.object.getName();
+				String ref = "";// res.object.getNameByType(res.object.getMapIndex().refEncodingType);
+				if (ref != null) {
 					name += " " + ref;
 				}
-				println(MessageFormat.format("\t<segment id=\"{0}\" start=\"{1}\" end=\"{2}\" time=\"{4}\" name=\"{3}\"/>", 
-						(res.getObject().getId())+"", res.getStartPointIndex()+"", res.getEndPointIndex()+"", name, res.getSegmentTime()));
+				println(MessageFormat.format(
+						"\t<segment id=\"{0}\" start=\"{1}\" end=\"{2}\" time=\"{4}\" name=\"{3}\" start_bearing=\"{5}\" end_bearing=\"{5}\" />",
+						(res.getObject().getId()) + "", res.getStartPointIndex() + "", res.getEndPointIndex() + "", name,
+						res.getSegmentTime(), res.getBearingBegin() + "", res.getBearingEnd() + ""));
 			}
 			println("</test>");
 		}
@@ -915,30 +923,6 @@ public class BinaryRoutePlanner {
 			return String.format("s%.2f e%.2f", ((float)distanceFromStart), ((float)distanceToEnd));
 		}
 		
-		public double directionRoute(int segmentEnd, boolean plus) {
-			int x = road.getPoint31XTile(segmentEnd);
-			int y = road.getPoint31YTile(segmentEnd);
-			int nx = segmentEnd;
-			int px = x;
-			int py = y;
-			do {
-				if (plus) {
-					nx++;
-					if (nx >= road.getPointsLength()) {
-						break;
-					}
-				} else {
-					nx--;
-					if (nx < 0) {
-						break;
-					}
-				}
-				px = road.getPoint31XTile(nx);
-				py = road.getPoint31YTile(nx);
-			} while (Math.abs(px - x) + Math.abs(py - y) < 100);
-
-			return Math.atan2( px - x, py - y);
-		}
 	}
 	
 

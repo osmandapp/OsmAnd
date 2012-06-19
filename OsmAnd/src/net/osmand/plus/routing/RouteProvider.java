@@ -160,8 +160,8 @@ public class RouteProvider {
 					res = findORSRoute(start, end, mode, fast);
 					addMissingTurnsToRoute(res, start, end, mode, ctx, leftSide);
 				} else if (type == RouteService.OSMAND) {
-					res = findVectorMapsRoute(start, end, mode, fast, (OsmandApplication)ctx.getApplicationContext());
-					addMissingTurnsToRoute(res, start, end, mode, ctx, leftSide);
+					res = findVectorMapsRoute(start, end, mode, fast, (OsmandApplication)ctx.getApplicationContext(), leftSide);
+					// addMissingTurnsToRoute(res, start, end, mode, ctx, leftSide);
 				} else {
 					res = findCloudMadeRoute(start, end, mode, ctx, fast, leftSide);
 					// for test purpose
@@ -483,7 +483,7 @@ public class RouteProvider {
 		return new RouteCalculationResult(res, null, start, end, null);
 	}
 	
-	protected RouteCalculationResult findVectorMapsRoute(Location start, LatLon end, ApplicationMode mode, boolean fast, OsmandApplication app) throws IOException {
+	protected RouteCalculationResult findVectorMapsRoute(Location start, LatLon end, ApplicationMode mode, boolean fast, OsmandApplication app, boolean leftSide) throws IOException {
 		BinaryMapIndexReader[] files = app.getResourceManager().getRoutingMapFiles();
 		BinaryRoutePlanner router = new BinaryRoutePlanner(NativeOsmandLibrary.getLoadedLibrary(), files);
 		RoutingConfiguration.Builder config = RoutingConfiguration.getDefault();
@@ -506,8 +506,7 @@ public class RouteProvider {
 		}
 		try {
 			List<RouteSegmentResult> result = router.searchRoute(ctx, st, en);
-			
-			return new RouteCalculationResult(result, start, end);
+			return new RouteCalculationResult(result, start, end, app, leftSide);
 		} catch (OutOfMemoryError e) {
 			return new RouteCalculationResult("Not enough process memory");
 		}

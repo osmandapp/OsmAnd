@@ -124,13 +124,13 @@ public class GeneralRouter extends VehicleRouter {
 	public double calculateTurnTime(RouteSegment segment, RouteSegment next, int segmentEnd) {
 		if (leftTurn > 0 || rightTurn > 0) {
 			if (next.road.getPointsLength() > 1) {
-				double a1 = segment.directionRoute(segmentEnd, segment.segmentStart > segmentEnd);
-				double a2 = next.directionRoute(next.segmentStart, next.segmentStart < next.getRoad().getPointsLength() - 1);
-				double diff = Math.abs(MapUtils.alignAngleDifference(a1 - a2));
+				double a1 = segment.getRoad().directionRoute(segmentEnd, segment.segmentStart > segmentEnd);
+				double a2 = next.getRoad().directionRoute(next.segmentStart, next.segmentStart < next.getRoad().getPointsLength() - 1); 
+				double diff = Math.abs(MapUtils.alignAngleDifference(a1 - a2 - Math.PI));
 				// more like UT
 				if (diff < Math.PI / 4) {
 					return leftTurn;
-				} else if (diff < 2 * Math.PI / 3 && diff <= 3 * Math.PI / 4) {
+				} else if (diff < 2 * Math.PI / 3) {
 					return rightTurn;
 				}
 			}
