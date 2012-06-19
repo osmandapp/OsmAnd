@@ -120,7 +120,7 @@
   <string name="profile_settings">Felhasználási módnak megfelelő beállítások</string>
   <string name="settings_preset">Felhasználási mód</string>
   <string name="settings_preset_descr">Felhasználási mód kiválasztása egyedi térkép és navigációs beállításokkal.</string>
-  <string name="monitor_preferences">Útvonalrögzítés</string>
+  <string name="monitor_preferences">- Útvonalrögzítés</string>
   <string name="monitor_preferences_descr">Útvonalrögzítés beállításai</string>
   <string name="routing_settings">- Navigáció</string>
   <string name="routing_settings_descr">Navigáció beállításai</string>
