@@ -879,8 +879,8 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 	bool basemapExists = false;
 	for (; i != openFiles.end() && !q->publisher->isCancelled(); i++) {
 		BinaryMapFile* file = i->second;
-		lseek(file->fd, 0, SEEK_SET);
-		FileInputStream input(file->fd);
+		lseek(file->routefd, 0, SEEK_SET);
+		FileInputStream input(file->routefd);
 		input.SetCloseOnDelete(false);
 		CodedInputStream cis(&input);
 		cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);

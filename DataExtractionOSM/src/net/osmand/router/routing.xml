@@ -76,32 +76,34 @@
 
 
 	
-	<routingProfile name="bicycle" baseProfile="bicycle" restrictionsAware="true" minDefaultSpeed="7" maxDefaultSpeed="21" 
-			leftTurn="15" rightTurn="0" followSpeedLimitations="false" onewayAware="true">
-		<highway value="motorway" speed="21" priority="0.7" dynamicPriority="0.7"/>
-		<highway value="motorway_link" speed="21" priority="0.7" dynamicPriority="0.7"/>
+	<routingProfile name="bicycle" baseProfile="bicycle" restrictionsAware="true" minDefaultSpeed="7" maxDefaultSpeed="16" 
+			leftTurn="0" rightTurn="0" followSpeedLimitations="false" onewayAware="true">
+		<attribute name="relaxNodesIfStartDistSmallCoeff" value="2.5"/>
 		
-		<highway value="trunk" speed="21" priority="0.7" dynamicPriority="0.7"/>
-		<highway value="trunk_link" speed="21" priority="0.7" dynamicPriority="0.7"/>
-		<highway value="primary" speed="21" priority="0.9" dynamicPriority="0.9"/>
-		<highway value="primary_link" speed="21" priority="0.9" dynamicPriority="0.9"/>
-		<highway value="secondary" speed="21" priority="1" dynamicPriority="1"/>
-		<highway value="secondary_link" speed="21" priority="1" dynamicPriority="1"/>
-		<highway value="tertiary" speed="21" priority="1" dynamicPriority="1"/>
-		<highway value="tertiary_link" speed="21" priority="1" dynamicPriority="1"/>
-		<highway value="road" speed="21" priority="1" dynamicPriority="1"/>
-		<highway value="residential" speed="21" priority="1" dynamicPriority="1"/>
-		<highway value="cycleway" speed="21" priority="1.5" dynamicPriority="1.5"/>
+		<highway value="motorway" speed="16" priority="0.7" dynamicPriority="0.7"/>
+		<highway value="motorway_link" speed="16" priority="0.7" dynamicPriority="0.7"/>
 		
-		<highway value="unclassified" speed="15" priority="1" dynamicPriority="1"/>
-		<highway value="service" speed="15" priority="1" dynamicPriority="1"/>
+		<highway value="trunk" speed="16" priority="0.7" dynamicPriority="0.7"/>
+		<highway value="trunk_link" speed="16" priority="0.7" dynamicPriority="0.7"/>
+		<highway value="primary" speed="16" priority="0.9" dynamicPriority="0.9"/>
+		<highway value="primary_link" speed="16" priority="0.9" dynamicPriority="0.9"/>
+		<highway value="secondary" speed="16" priority="1" dynamicPriority="1"/>
+		<highway value="secondary_link" speed="16" priority="1" dynamicPriority="1"/>
+		<highway value="tertiary" speed="16" priority="1" dynamicPriority="1"/>
+		<highway value="tertiary_link" speed="16" priority="1" dynamicPriority="1"/>
+		<highway value="road" speed="16" priority="1" dynamicPriority="1"/>
+		<highway value="residential" speed="16" priority="1" dynamicPriority="1"/>
+		<highway value="cycleway" speed="16" priority="1.5" dynamicPriority="1"/>
+		
+		<highway value="unclassified" speed="13" priority="1" dynamicPriority="1"/>
+		<highway value="service" speed="13" priority="1" dynamicPriority="1"/>
 		<highway value="track" speed="10" priority="0.9" dynamicPriority="0.9"/>
 		<highway value="path" speed="10" priority="0.9" dynamicPriority="0.9"/>
-		<highway value="living_street" speed="15" priority="1" dynamicPriority="1"/>
+		<highway value="living_street" speed="13" priority="1" dynamicPriority="1"/>
 		<highway value="pedestrian" speed="10" priority="0.9" dynamicPriority="0.9"/>
 		<highway value="footway" speed="8" priority="0.9" dynamicPriority="0.9"/>
 		<highway value="byway" speed="8" priority="1" dynamicPriority="1"/>
-		<highway value="services" speed="15" priority="1" dynamicPriority="1"/>
+		<highway value="services" speed="13" priority="1" dynamicPriority="1"/>
 		<highway value="bridleway" speed="8" priority="0.8" dynamicPriority="0.8"/>
 		<highway value="steps" speed="3" priority="0.5" dynamicPriority="0.5"/>
 

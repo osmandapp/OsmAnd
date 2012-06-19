@@ -822,6 +822,7 @@ public class BinaryRoutePlanner {
 		Collections.reverse(result);
 		// calculate time
 		float completeTime = 0;
+		float completeDistance = 0;
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
 			RouteDataObject road = rr.getObject();
@@ -846,6 +847,7 @@ public class BinaryRoutePlanner {
 			rr.setSegmentSpeed((float) speed);
 			rr.setDistance((float) distance);
 			completeTime += distOnRoadToPass;
+			completeDistance += distance;
 		}
 		
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
@@ -855,8 +857,8 @@ public class BinaryRoutePlanner {
 			double endLat = MapUtils.get31LatitudeY(end.road.getPoint31YTile(end.segmentStart));
 			double endLon = MapUtils.get31LongitudeX(end.road.getPoint31XTile(end.segmentStart));
 			println(MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"{5}\" \n"
-					+ "    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" complete_time=\"{4}\">",
-					startLat + "", startLon + "", endLat + "", endLon + "", completeTime + "", ctx.config.routerName));
+					+ "    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" complete_time=\"{4}\" complete_distance=\"{6}\">",
+					startLat + "", startLon + "", endLat + "", endLon + "", completeTime + "", ctx.config.routerName, completeDistance+""));
 			for (RouteSegmentResult res : result) {
 				String name = "Unknown";// res.object.getName();
 				String ref = "";// res.object.getNameByType(res.object.getMapIndex().refEncodingType);
@@ -864,9 +866,9 @@ public class BinaryRoutePlanner {
 					name += " " + ref;
 				}
 				println(MessageFormat.format(
-						"\t<segment id=\"{0}\" start=\"{1}\" end=\"{2}\" time=\"{4}\" name=\"{3}\" start_bearing=\"{5}\" end_bearing=\"{5}\" />",
+						"\t<segment id=\"{0}\" start=\"{1}\" end=\"{2}\" time=\"{4}\" name=\"{3}\" distance=\"{5}\" start_bearing=\"{6}\" end_bearing=\"{7}\" />",
 						(res.getObject().getId()) + "", res.getStartPointIndex() + "", res.getEndPointIndex() + "", name,
-						res.getSegmentTime(), res.getBearingBegin() + "", res.getBearingEnd() + ""));
+						res.getSegmentTime(),res.getDistance(), res.getBearingBegin() + "", res.getBearingEnd() + ""));
 			}
 			println("</test>");
 		}
