@@ -32,8 +32,8 @@
   <string name="online_map_settings_descr">მიმდინარე და დაქეშირებული ნაწილოვანი რუკების წყაროების გამართვა</string>
   <string name="map_settings">- რუკის პარამეტრები</string>
   <string name="map_settings_descr">რუკის ჩვენების გამართვა</string>
-  <string name="osmand_rastermaps_plugin_description">ეს დამატება ამსუბუქებს სხვადასხვა მიმდინარე ან ქეშირებულ ნაწილოვან რუკებს. ისინი შეიძლება მომზადდეს როგორც გათიშული რუკები და შეინახოს Osmand-ის დასტაში.</string>
-  <string name="osmand_background_plugin_description">ეს დამატება გაძლევთ საშუალებს დევნის ან ნავიგაციის მოწყობილობის ძილის დროს პერიოდულად GPS ჩიპის გააქტიურების საშუალებით.</string>
+  <string name="osmand_rastermaps_plugin_description">დამატება ამსუბუქებს სხვადასხვა მიმდინარე ან ქეშირებულ ნაწილოვან რუკებს. ისინი შეიძლება მომზადდეს როგორც გათიშული რუკები და შეინახოს Osmand-ის დასტაში.</string>
+  <string name="osmand_background_plugin_description">დამატება გაძლევთ საშუალებს დევნის ან ნავიგაციის მოწყობილობის ძილის დროს პერიოდულად GPS ჩიპის გააქტიურების საშუალებით.</string>
   <string name="osmand_accessibility_description">დამატება მართავს სპეციალური წვდომის შესაძლებლობებს.</string>
   <string name="extra_settings">მეტი პარამეტრები</string>
   <string name="osmand_monitoring_description">დამატება გაძლევთ საშუალებას ჩაიწეროთ თქვენი მოგზაურობები GPX ფაილებში ან თვალი ადევნოთ მას ვებსერვისის საშუალებით</string>
@@ -173,7 +173,7 @@
   <string name="profile_settings">პროფილის პარამეტრები</string>
   <string name="settings_preset">მომხმარებლის პროფილი</string>
   <string name="settings_preset_descr">აირჩიეთ მომხმარებლის პროფილი რუკისა და ნავიგაციის პარამეტრებით.</string>
-  <string name="monitor_preferences">დევნა</string>
+  <string name="monitor_preferences">- დევნა</string>
   <string name="monitor_preferences_descr">დევნის პარამეტრების მითითება</string>
   <string name="routing_settings">- ნავიგაცია</string>
   <string name="routing_settings_descr">მიუთითეთ ნავიგაციის პარამეტრები</string>
