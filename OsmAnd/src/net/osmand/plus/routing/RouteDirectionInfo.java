@@ -7,7 +7,7 @@ public class RouteDirectionInfo {
 	// Constructor to verify average speed always > 0
 	public RouteDirectionInfo(float averageSpeed, TurnType turnType) {
 		this.averageSpeed = averageSpeed == 0 ? 1 : averageSpeed;
-
+		this.turnType = turnType;
 	}
 
 	public float getAverageSpeed() {
