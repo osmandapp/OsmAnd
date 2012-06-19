@@ -149,7 +149,7 @@
   <string name="internet_not_available">Połączenie internetowe, wymagane dla tej operacji, jest niedostępne</string>
   <string name="install_more">Zainstaluj więcej…</string>
   <string name="tip_update_index">Aktualizacja danych offline</string>
-  <string name="tip_update_index_t">\tPosiadanie aktualnych danych to podstawa. OsmAnd posiada menedżera pobierania danych offline, który może sprawdzić i pobrać dostępne aktualizacje. \n\tAby sprawdzić aktualizacje: \'Ustawienia\' -&gt; \'Dane offline\' -&gt; \'Pobierz\' \n\tDostępność aktualizacji jest opisana przez następujące kolory: \n\t\'Zielony\' - oznacza dane nieposiadające aktualizacji na serwerze \n\t\'Niebieski\' - oznacza dane do ewentualnej aktualizacji</string>
+  <string name="tip_update_index_t">\tPosiadanie aktualnych danych to podstawa. OsmAnd posiada menedżera pobierania danych offline, który może sprawdzić i pobrać dostępne aktualizacje. \n\tAby sprawdzić aktualizacje: \'Ustawienia\' -&gt; \'Dane offline\' -&gt; \'Pobierz\'. Po tym jak zostanie pobrana z Internetu lista regionów, możesz wybrać opcje klikając przycisk \'Menu\' -&gt; \'filtruj pobrane\' aby wybrać uaktualnienia jedynie dla danych znajdujących się już na urządzeniu.\n\tDostępność aktualizacji jest opisana przez następujące kolory: \n\t\'Zielony\' - oznacza dane nieposiadające aktualizacji na serwerze \n\t\'Niebieski\' - oznacza dane do ewentualnej aktualizacji</string>
   <string name="level_to_switch_vector_raster_descr">Minimalny zoom, powyżej którego zostanie użyta mapa wektorowa zamiast mapy kafelkowej</string>
   <string name="level_to_switch_vector_raster">Min. zoom dla mapy wektorowej</string>
   <string name="tip_day_night_mode">Tryb dzień/noc</string>
@@ -165,7 +165,7 @@
   <string name="preferred_locale_descr">Wybierz język interfejsu</string>
   <string name="preferred_locale">Język interfejsu</string>
   <string name="tip_map_switch">Źródło mapy</string>
-  <string name="tip_map_switch_t">\tNajszybszą drogą zmiany źródła mapy jest naciśnięcie i wyświetlanych warstw \'Menu\' -&gt; \'Zdefiniuj widok\'. \n\tPod pozycją \'Źródło mapy…\' możesz wybrać ściągniętą wcześniej mapę wektorową offline, predefiniowane źródła map kafelkowych lub wcześniej utworzone mapy na PC (np. za pomocą programu OsmAndMapCreator). \n\tOsmAnd wspiera także nietypowe źródła map.</string>
+  <string name="tip_map_switch_t">\tNajszybszą drogą zmiany źródła mapy oraz wyświetlanych warstw jest naciśnięcie \'Menu\' -&gt; \'Zdefiniuj widok\' w widoku mapy.\n\tPod pozycją \'Źródło mapy…\' możesz wybrać ściągniętą wcześniej mapę wektorową offline, predefiniowane źródła map kafelkowych lub wcześniej utworzone mapy na PC (np. za pomocą programu OsmAndMapCreator). \n\tOsmAnd wspiera także własne źródła map.</string>
   <string name="tip_app_mode">Profil działania</string>
   <string name="tip_app_mode_t">\tOsmAnd obsługuje różne (konfigurowalne) profile aplikacji dla różnych przypadków użycia.\n\tMożesz zmienić profil w \'Menu\' -&gt; \'Ustawienia\' -&gt; \'Tryb programu\' lub podczas wyznaczania trasy.</string>
   <string name="tip_navigation">Nawigacja</string>
@@ -175,7 +175,7 @@
   <string name="tip_map_context_menu">Menu kontekstowe mapy</string>
   <string name="tip_map_context_menu_t">\tMenu kontekstowe mapy jest dostępne poprzez przyciśnięcie i przytrzymanie na mapie lub poprzez wciśnięcie przycisku na trackballu.\n\tStworzy to chmurkę zawierającą współrzędne danego punktu. Aby otworzyć menu kontekstowe mapy, przyciśnij go. (Albo przyciśnij i przytrzymaj na nim aby go schować.)\n\tMenu kontekstowe mapy zawiera wszystkie akcje związane z punktem (lokalizacją).</string>
   <string name="tip_initial">Porady i sztuczki</string>
-  <string name="tip_initial_t">\tOsmAnd Jest rozbudowanym programem do nawigacji satelitarnej. \n\tNiektóre sztuczki i kruczki są wyświetlane na ekranie w menu głównym.</string>
+  <string name="tip_initial_t">\tOsmAnd jest rozbudowanym programem do nawigacji satelitarnej posiadającym wiele funkcji.\n\tNiektóre sztuczki i kruczki są wyświetlane na ekranie w menu głównym.</string>
   <string name="next_button">Następny</string>
   <string name="previous_button">Poprzedni</string>
   <string name="unit_of_length_descr">Zmień jednostki długości i prędkości</string>
@@ -236,8 +236,8 @@
   <string name="version_index_is_big_for_memory">Index\'\'{0}\'\' nie zmieścił się w pamięci</string>
   <string name="version_index_is_not_supported">"Wersja indeksu \'\'{0}\'\' jest niewspierana. "</string>
   <string name="use_osmand_routing_service">Routing OsmAnd &gt;20km</string>
-  <string name="use_osmand_routing_service_descr">Użyj routingu offline dla długich tras (funkcjonalność eksperymentalna)</string>
-  <string name="osmand_routing_experimental">Routing offline OsmAnd-a jest funkcją eksperymentalną i nie działa dobrze dla odległości większych niż 20km.\n\nUsługa routująca jest automatycznie przełączana do CloudMade (online).</string>
+  <string name="use_osmand_routing_service_descr">Użycie routingu offline dla długich tras działa tylko dla tras &gt; 20 km (funkcjonalność eksperymentalna)</string>
+  <string name="osmand_routing_experimental">Routing offline OsmAnd-a jest funkcją eksperymentalną i nie działa dobrze dla odległości większych niż 20km.\n\nUsługa routująca jest tymczasowo przełączana do CloudMade (online).</string>
   <string name="specified_dir_doesnt_exist">Nie mogę odnaleźć wskazanego katalogu.</string>
   <string name="application_dir">Katalog danych</string>
   <string name="application_dir_change_warning">Zmiana katalogu danych nie przeniesie ani nie usunie znajdujących się w nim plików. Musisz zrobić do ręcznie poza OsmAnd. Kontynuować mimo to?</string>
@@ -268,8 +268,8 @@
   <string name="general_settings">Ustawienia główne</string>
   <string name="index_settings_descr">Pobierz/przeglądaj/zarządzaj mapami i danymi offline</string>
   <string name="index_settings">Dane offline</string>
-  <string name="osmand_service">Usługa w tle</string>
-  <string name="osmand_service_descr">Uruchom usługę działającą w tle, gdy ekran jest wyłączony</string>
+  <string name="osmand_service">Tryb uśpienia</string>
+  <string name="osmand_service_descr">Uruchamiaj OsmAnd kiedy ekran jest wyłączony</string>
   <string name="fast_route_mode">Najszybsza trasa</string>
   <string name="fast_route_mode_descr">Przy wyznaczaniu oblicz najszybszą trasę</string>
   <string name="tiles_to_download_estimated_size">Na poziomie {0} pobrano {1} kafelków ({2} MB)</string>
@@ -396,7 +396,7 @@
   <string name="map_orientation_landscape">Poziomo</string>
   <string name="map_screen_orientation">Orientacja ekranu</string>
   <string name="map_screen_orientation_descr">Wybierz orientację ekranu</string>
-  <string name="opening_hours_not_supported">Opening hours format is not supported for editing</string>
+  <string name="opening_hours_not_supported">Format godzina otwarcia nie jest obsługiwany</string>
   <string name="add_new_rule">Dodaj nową regułę</string>
   <string name="transport_Routes">Trasy</string>
   <string name="transport_Stop">Przystanek</string>
@@ -484,7 +484,7 @@
   <string name="new_route_calculated_dist">Obliczono nową trasę, dystans</string>
   <string name="arrived_at_destination">Dotarłeś do celu</string>
   <string name="invalid_locations">Pozycje są niepoprawne</string>
-  <string name="go_back_to_osmand">Wróć do mapy</string>
+  <string name="go_back_to_osmand">Wróć do mapy OsmAnd</string>
   <string name="close">Zamknij</string>
   <string name="loading_data">Ładowanie danych…</string>
   <string name="reading_indexes">Wczytywanie danych lokalnych…</string>
@@ -508,14 +508,14 @@
   <string name="auto_zoom_map_descr">Dostosuj zoom mapy do Twojej prędkości</string>
   <string name="auto_zoom_map">Autozoom mapy</string>
   <string name="additional_settings">Ustawienia dodatkowe</string>
-  <string name="settings_preset_descr">Wybierz profil nawigacji (ustawienia każdego profilu mogą być zmieniane poniżej).</string>
+  <string name="settings_preset_descr">"Wybierz profil użytkownika zawierający niestandardowe mapy oraz ustawienia nawigacji."</string>
   <string name="settings_preset">Tryb programu</string>
   <string name="settings">Ustawienia</string>
   <string name="save_current_track_descr">Zapisz bieżący ślad do karty SD</string>
   <string name="save_current_track">Zapisz bieżący ślad</string>
   <string name="save_track_interval_descr">Wybierz czas pomiędzy sprawdzaniem pozycji dla ścieżek</string>
   <string name="save_track_interval">Czas pomiędzy sprawdzaniem pozycji</string>
-  <string name="monitor_preferences">Zapisywanie śladów</string>
+  <string name="monitor_preferences">- Zapisywanie śladów</string>
   <string name="save_track_to_gpx_descrp">Ślady zostaną zapisane do katalogu grupami wg dni</string>
   <string name="save_track_to_gpx">Zapisuj ślad do GPX</string>
   <string name="navigate_to">Nawiguj do</string>
@@ -529,7 +529,7 @@
   <string name="favourites_activity">Lista ulubionych punktów</string>
   <string name="add_to_favourite">Dodaj do ulubionych</string>
   <string name="use_english_names_descr">Zaznacz, jeśli chcesz używać angielskich nazw zamiast natywnych</string>
-  <string name="use_english_names">Używaj angielskich nazw</string>
+  <string name="use_english_names">Używaj angielskich nazw na mapie</string>
   <string name="app_settings">Ustawienia programu</string>
   <string name="search_address">Szukaj adresu</string>
   <string name="choose_building">Wybierz nr domu</string>
@@ -660,7 +660,7 @@
   <string name="edit_filter_create_message">Filtr {0} został utworzony</string>
   <string name="default_buttons_selectall">Zaznacz wszystko</string>
   <string name="offline_navigation_not_available">Nawigacja offline w OsmAnd jest tymczasowo niedostępna.</string>
-  <string name="left_side_navigation">Nawigacja lewostronna</string>
+  <string name="left_side_navigation">Nawigacja przy ruchu lewostronnym</string>
   <string name="left_side_navigation_descr">Włącz jeśli używasz nawigacji w krajach z ruchem lewostronnym</string>
   <string name="download_link_and_local_description">Pobierz lub zaktualizuj dane offline.\nAby zobaczyć szczegóły danych, kliknij na nie. Aby je zdezaktywować lub usunąć, kliknij i przytrzymaj.\nIstniejące dane offline na urządzeniu (%1$s jest dostępne):</string>
   <string name="unknown_from_location">Pozycja początkowa nie jest jeszcze wyznaczona.</string>
@@ -675,27 +675,27 @@
   <string name="online_map_settings_descr">Skonfiguruj źródła kafelków online i offline</string>
   <string name="map_settings">- Ustawienia map</string>
   <string name="map_settings_descr">Skonfiguruj wyświetlanie map</string>
-  <string name="osmand_rastermaps_plugin_description">Ta wtyczka umożliwia użycie różnych źródeł kafelków mapowych online oraz offline do mapy bazowej lub jako podkład/nakładka na mapę. Mapy mogą być również przygotowane offline i skopiowane do katalogu OsmAnd.</string>
-  <string name="osmand_background_plugin_description">Ta wtyczka umożliwia zapisywanie trasy oraz nawigację w trybie oszczędzania zasilania (wyłączonego ekranu) przez cykliczne budzenie urządzenia w celu zapisania współrzędnych lub odegrania wskazówki głosowej.</string>
-  <string name="osmand_accessibility_description">Ta wtyczka służy do konfiguracji specjalnych ustawień ułatwiających dostęp.</string>
+  <string name="osmand_rastermaps_plugin_description">Pokaż ustawienia do konfiguracji różnych źródeł kafelków mapowych online oraz offline do mapy bazowej lub jako podkład/nakładka na mapę. Mapy mogą być również przygotowane offline i skopiowane do katalogu OsmAnd.</string>
+  <string name="osmand_background_plugin_description">Pokaż ustawienia do konfiguracji zapisywanie trasy oraz nawigację w trybie oszczędzania zasilania (wyłączonego ekranu) przez cykliczne budzenie urządzenia GPS.</string>
+  <string name="osmand_accessibility_description">Pokaż ustawienia do konfiguracji specjalnych ustawień ułatwiających dostęp.</string>
   <string name="extra_settings">Ustawienia zaawansowane</string>
-  <string name="osmand_monitoring_description">Ta wtyczka umożliwia zapisywanie Twoich wycieczek do plików GPX lub wysyłanie ich na bieżąco do serwera webowego.</string>
-  <string name="osmand_extra_settings_description">Ta wtyczka dostarcza zaawansowanych opcji konfiguracyjnych map oraz opcji specyficznych dla niektórych urządzeń.</string>
-  <string name="osmand_development_plugin_description">Ta wtyczka dodaje funkcjonalności związane z rozwojem aplikacji i usuwaniem błędów, takie jak animowana nawigacja czy wyświetlanie informacji o szybkości renderowania.</string>
+  <string name="osmand_monitoring_description">Pokaż ustawienia do konfiguracji zapisywania Twoich wycieczek do plików GPX lub wysyłanie ich na bieżąco do serwera webowego.</string>
+  <string name="osmand_extra_settings_description">Pokaż ustawienia do konfiguracji zaawansowanych opcji konfiguracyjnych map (jak zwiększenie detali map) oraz opcji specyficznych dla niektórych urządzeń.</string>
+  <string name="osmand_development_plugin_description">Pokaż ustawienia do konfiguracji funkcjonalności związanych z rozwojem aplikacji i usuwaniem błędów, takie jak animowana nawigacja czy wyświetlanie informacji o szybkości renderowania.</string>
   <string name="plugins_screen">Zarządzanie wtyczkami</string>
   <string name="select_plugin_to_activate">Dotknij wtyczki aby ją aktywować lub dezaktywować. (Może być wymagane ponowne uruchomienie OsmAnd.)</string>
-  <string name="prefs_plugins_descr">Wtyczki dostarczają dodatkową funkcjonalność do aplikacji, taką jak zapisywanie ścieżek, kafelki map, tryb wyłączonego ekranu, ustawienia dostępności i inne.</string>
+  <string name="prefs_plugins_descr">Wtyczki dostarczają możliwość ustawienia zaawansowanych ustawień oraz dodatkową funkcjonalność do aplikacji, taką jak zapisywanie ścieżek, kafelki map, tryb wyłączonego ekranu, ustawienia dostępności i inne.</string>
   <string name="prefs_plugins">Zarządzanie wtyczkami</string>
-  <string name="tip_recent_changes_0_8_0_t">"Zmiany w 0.8.0 : \n\t- Obsługa wtyczek\n\t- Obsługa nowego formatu danych offline\n\t- Duża ilość poprawek błędów"</string>
-  <string name="osm_editing_plugin_description">Ta wtyczka umożliwia poprawę danych OSM - zbieranie/modyfikowanie obiektów POI, otwieranie/komentowanie błędów OSM oraz dodawanie zapisanych ścieżek GPX (wymaga danych uwierzytelniających OSM).</string>
+  <string name="tip_recent_changes_0_8_0_t">"Zmiany w 0.8.0 : \n\t- Obsługa wtyczek\n\t- Obsługa nowego formatu danych offline\n\t- Poprawki użyteczności oraz uproszczenie koncepcji profili\n\t- Duża ilość poprawek błędów"</string>
+  <string name="osm_editing_plugin_description">Pokaż ustawienia do konfiguracji poprawiania danych OSM - zbieranie/modyfikowanie obiektów POI, otwieranie/komentowanie błędów OSM oraz dodawanie zapisanych ścieżek GPX (wymaga podania danych uwierzytelniających OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Mapy wektorowe mogą wyświetlać się szybciej. Może nie działać dobrze na niektórych urządzeniach.</string>
   <string name="simulate_route_progression_manually">Simulate route progression manually</string>
   <string name="play_commands_of_currently_selected_voice">Odtwórz komendy w aktualnie wybranym głosie</string>
-  <string name="debugging_and_development">"Debugowanie oraz rozwój OsmAnd "</string>
+  <string name="debugging_and_development">"Rozwój OsmAnd "</string>
   <string name="native_rendering">Renderowanie natywne</string>
   <string name="animate_routing">Nawigacja animowana</string>
   <string name="test_voice_prompts">Przetestuj podpowiedzi głosowe</string>
-  <string name="tip_recent_changes_0_7_2_t">"Changes in 0.7.2 : \n\t- Natywne renderowanie dla wszystkich urządzeń\n\t- Edytowanie POI w trybie offline\n\t- Ułatwienia dostępu\n\t- Wiele poprawek"</string>
+  <string name="tip_recent_changes_0_7_2_t">"Zmiany w 0.7.2 : \n\t- Natywne renderowanie dla wszystkich urządzeń\n\t- Edytowanie POI w trybie offline\n\t- Ułatwienia dostępu\n\t- Wiele poprawek"</string>
   <string name="send_files_to_osm">Wysłać pliki GPX do OSM?</string>
   <string name="gpx_visibility_txt">Widoczność</string>
   <string name="gpx_tags_txt">Tagi</string>
@@ -788,7 +788,7 @@
   <string name="gpx_monitoring_disabled_warn">Proszę włączyć ustawienia \'Zapisuj ślad GPX\'</string>
   <string name="show_current_gpx_title">Pokaż aktualną ścieżkę</string>
   <string name="tip_recent_changes_0_7_0_t">"Changes in 0.7.0 : \n\t- Dane wikipedii z artykułami w trybie offline\n\t- Uaktualnione mapy\n\t- Inne niewielkie funkcjonalności"</string>
-  <string name="free_version_message">Ta darmowa wersja OsmAnd jest ograniczona do %1$s pobrań %2$s oraz nie obsługuje artykułów Wikipedii w trybie offline</string>
+  <string name="free_version_message">Ta darmowa wersja OsmAnd jest ograniczona do %1$s pobrań %2$s oraz nie obsługuje artykułów Wikipedii w trybie offline.</string>
   <string name="free_version_title">Wersja darmowa</string>
   <string name="poi_context_menu_showdescription">Pokaż opis POI</string>
   <string name="index_name_north_america">Ameryka Północna</string>
@@ -821,4 +821,4 @@
   <string name="favourites_edit_dialog_category">Kategoria</string>
   <string name="gpx_option_from_start_point">Przejdź wzdłuż całej ścieżki</string>
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> map classification with images"</string>
-<string name="local_index_routing_data">Routing data</string><string name="navigate_point_format">Format :</string><string name="poi_search_desc">POI - Point Of interest</string><string name="address_search_desc">Address search</string><string name="navpoint_search_desc">Navigate point</string><string name="transport_search_desc">Transport search</string><string name="favourites_search_desc">Favourites search</string><string name="history_search_desc">Search history</string><string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string><string name="rendering_attr_noPolygons_name">No polygons</string><string name="rendering_attr_appMode_name">Rendering mode</string><string name="rendering_attr_appMode_description">Map optimization for respective User Profile</string><string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate SRTM-file may be needed.</string><string name="rendering_attr_contourLines_name">Show contour lines</string><string name="rendering_attr_hmRendered_description">Increase amount of map detail shown</string><string name="rendering_attr_hmRendered_name">Show more map detail</string></resources>
+<string name="local_index_routing_data">Routing data</string><string name="navigate_point_format">Format :</string><string name="poi_search_desc">POI - Point Of interest</string><string name="address_search_desc">Address search</string><string name="navpoint_search_desc">Navigate point</string><string name="transport_search_desc">Transport search</string><string name="favourites_search_desc">Favourites search</string><string name="history_search_desc">Search history</string><string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string><string name="rendering_attr_noPolygons_name">No polygons</string><string name="rendering_attr_appMode_name">Rendering mode</string><string name="rendering_attr_appMode_description">Map optimization for respective User Profile</string><string name="rendering_attr_contourLines_description">"Wybierz minimalny poziom przybliżenia, przy którym będą wyświetlane (jeśli są dostępne). Może być wymagany dodatkowy plik STRM."</string><string name="rendering_attr_contourLines_name">Pokaż kontury</string><string name="rendering_attr_hmRendered_description">Zwiększ ilość detali pokazywanych na mapie</string><string name="rendering_attr_hmRendered_name">Pokaż więcej detali na mapie</string></resources>
