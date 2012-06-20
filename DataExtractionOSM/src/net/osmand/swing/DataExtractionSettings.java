@@ -234,7 +234,7 @@ public class DataExtractionSettings {
 	}
 	
 	public boolean isAnimateRouting(){
-		return preferences.getBoolean("animate_routing", true);
+		return preferences.getBoolean("animate_routing", false);
 	}
 	
 	public void setAnimateRouting(boolean b){

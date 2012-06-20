@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import net.osmand.osm.MapRoutingTypes.MapRouteType;
 
 public class MapRoutingTypes {
 
@@ -22,6 +21,11 @@ public class MapRoutingTypes {
 		TAGS_TO_ACCEPT.add("highway");
 		TAGS_TO_ACCEPT.add("junction");
 		TAGS_TO_ACCEPT.add("cycleway");
+		
+		// TEXT tags
+//		TAGS_TO_SAVE.add("ref");
+//		TAGS_TO_SAVE.add("name");
+//		TAGS_TO_SAVE.add("direction");
 		
 		TAGS_TO_SAVE.add("roundabout");
 		TAGS_TO_SAVE.add("oneway");
@@ -41,6 +45,7 @@ public class MapRoutingTypes {
 		TAGS_TO_SAVE.add("motorcycle");
 		TAGS_TO_SAVE.add("bridge");
 		TAGS_TO_SAVE.add("tunnel");
+		TAGS_TO_SAVE.add("lanes");
 	}
 	
 	private Map<String, MapRouteType> types = new LinkedHashMap<String, MapRoutingTypes.MapRouteType>();
