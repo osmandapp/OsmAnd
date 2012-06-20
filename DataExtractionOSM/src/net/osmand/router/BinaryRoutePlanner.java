@@ -554,6 +554,16 @@ public class BinaryRoutePlanner {
 
 		// +/- diff from middle point
 		int d = plusAllowed ? 1 : -1;
+		if(segment.parentRoute != null) {
+			if(plusAllowed && middle < segment.getRoad().getPointsLength() - 1) {
+				obstaclePlusTime = ctx.getRouter().calculateTurnTime(segment, segment.getRoad().getPointsLength() - 1,  
+					segment.parentRoute, segment.parentSegmentEnd);
+			}
+			if(minusAllowed && middle > 0) {
+				obstacleMinusTime = ctx.getRouter().calculateTurnTime(segment, 0, 
+						segment.parentRoute, segment.parentSegmentEnd);
+			}
+		}
 		// Go through all point of the way and find ways to continue
 		// ! Actually there is small bug when there is restriction to move forward on way (it doesn't take into account)
 		while (minusAllowed || plusAllowed) {
@@ -614,13 +624,14 @@ public class BinaryRoutePlanner {
 				if (speed == 0) {
 					speed = ctx.getRouter().getMinDefaultSpeed() * priority;
 				}
-				double distanceFromStart = segment.distanceFromStart + distOnRoadToPass / speed;
-				distanceFromStart += d > 0? obstaclePlusTime : obstacleMinusTime;
+				
+				double distStartObstacles = segment.distanceFromStart + ( d > 0? obstaclePlusTime : obstacleMinusTime) +
+						 distOnRoadToPass / speed;
 				
 				double distToFinalPoint = squareRootDist(x, y, targetEndX, targetEndY);
 				
 				boolean routeFound = processIntersections(ctx, graphSegments, visitedSegments, oppositeSegments,
-						distanceFromStart, distToFinalPoint, segment, segmentEnd, next, reverseWaySearch);
+						distStartObstacles, distToFinalPoint, segment, segmentEnd, next, reverseWaySearch);
 				if(routeFound){
 					return routeFound;
 				}
@@ -745,16 +756,13 @@ public class BinaryRoutePlanner {
 				}
 				return true;
 			}
-			// Calculate complete distance from start
-			double gDistFromStart = distFromStart + ctx.getRouter().calculateTurnTime(segment, next, segmentEnd);
-			
 			// road.id could be equal on roundabout, but we should accept them
 			boolean alreadyVisited = visitedSegments.contains(nts);
 			if (!alreadyVisited) {
 				double distanceToEnd = h(ctx, distToFinalPoint, next);
 				if (next.parentRoute == null
-						|| ctx.roadPriorityComparator(next.distanceFromStart, next.distanceToEnd, gDistFromStart, distanceToEnd) > 0) {
-					next.distanceFromStart = gDistFromStart;
+						|| ctx.roadPriorityComparator(next.distanceFromStart, next.distanceToEnd, distFromStart, distanceToEnd) > 0) {
+					next.distanceFromStart = distFromStart;
 					next.distanceToEnd = distanceToEnd;
 					if (next.parentRoute != null) {
 						// already in queue remove it
@@ -771,7 +779,7 @@ public class BinaryRoutePlanner {
 			} else {
 				// the segment was already visited! We need to follow better route if it exists
 				// that is very strange situation and almost exception (it can happen when we underestimate distnceToEnd)
-				if (gDistFromStart < next.distanceFromStart) {
+				if (distFromStart < next.distanceFromStart) {
 					// That code is incorrect (when segment is processed itself,
 					// then it tries to make wrong u-turn) - 
 					// this situation should be very carefully checked in future
