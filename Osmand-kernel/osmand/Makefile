@@ -24,7 +24,7 @@ OSMAND_FLAGS_WINDOWS = \
 
 LIBNAME = $(LIBRARY_PREFIX)osmand
 LIBTYPE = $(DYNAMICLIB_EXT)
-LDLIBS += -Wl,--whole-archive -lskia -Wl,--no-whole-archive -lproto -lft2 -lexpat -lpng -lz 
+LDLIBS += -Wl,-Bsymbolic -Wl,--whole-archive -lskia  -lpng -Wl,--no-whole-archive -lproto -lft2 -lexpat -lz 
 
 ifeq ($(TARGET),windows)
 	LDLIBS += -lwinmm -lgdi32 -lusp10

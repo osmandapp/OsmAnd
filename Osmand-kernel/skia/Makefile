@@ -50,10 +50,12 @@ ifeq ($(TARGET),windows)
 	SKIAFLAGS += $(SKIA_FLAGS_WINDOWS)
 else
 	LOCAL_SRC_FILES += \
+		$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_sandbox_none.cpp	\
 		$(OSMAND_SKIA_LOC)/src/ports/SkThread_pthread.cpp \
 		$(OSMAND_SKIA_LOC)/src/ports/SkTime_Unix.cpp \
 		$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_FreeType.cpp \
-		$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_linux.cpp
+		$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_linux.cpp \
+		$(OSMAND_SKIA_LOC)/src/core/SkMMapStream.cpp 
 	SKIAFLAGS += \
 		-DSK_BUILD_FOR_UNIX
 endif
