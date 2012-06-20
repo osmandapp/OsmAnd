@@ -87,6 +87,9 @@ public class RoutingContext {
 	}
 	
 	public boolean runRelaxingStrategy(){
+		if(!isUseRelaxingStrategy()){
+			return false;
+		}
 		relaxingIteration++;
 		if(relaxingIteration > config.ITERATIONS_TO_RELAX_NODES){
 			relaxingIteration = 0;

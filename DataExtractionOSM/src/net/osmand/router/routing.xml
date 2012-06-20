@@ -78,7 +78,7 @@
 	
 	<routingProfile name="bicycle" baseProfile="bicycle" restrictionsAware="true" minDefaultSpeed="7" maxDefaultSpeed="16" 
 			leftTurn="0" rightTurn="0" followSpeedLimitations="false" onewayAware="true">
-		<attribute name="relaxNodesIfStartDistSmallCoeff" value="2.5"/>
+		<!-- <attribute name="relaxNodesIfStartDistSmallCoeff" value="2.5"/>  -->
 		
 		<highway value="motorway" speed="16" priority="0.7" dynamicPriority="0.7"/>
 		<highway value="motorway_link" speed="16" priority="0.7" dynamicPriority="0.7"/>

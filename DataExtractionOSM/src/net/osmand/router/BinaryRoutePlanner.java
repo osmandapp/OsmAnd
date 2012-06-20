@@ -273,7 +273,7 @@ public class BinaryRoutePlanner {
 			if(ctx.runTilesGC()) {
 				unloadUnusedTiles(ctx, ctx.config.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY);
 			}
-			if(ctx.runRelaxingStrategy()) {
+			if(ctx.runRelaxingStrategy() ) {
 				relaxNotNeededSegments(ctx, graphDirectSegments, true);
 				relaxNotNeededSegments(ctx, graphReverseSegments, false);
 			}
@@ -340,7 +340,7 @@ public class BinaryRoutePlanner {
 				mine = s.distanceToEnd;
 			}
 		}
-		double d = mine * ctx.config.ITERATIONS_TO_RELAX_NODES;
+		double d = mine * ctx.config.RELAX_NODES_IF_START_DIST_COEF;
 		iterator = graphSegments.iterator();
 		while (iterator.hasNext()) {
 			RouteSegment s = iterator.next();
