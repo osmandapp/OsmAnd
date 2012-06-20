@@ -67,7 +67,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				}
 			}
 		};
-		adapter.registerItem(R.string.context_menu_item_add_waypoint, 0, listener, -1);
+		adapter.registerItem(R.string.context_menu_item_add_waypoint, R.drawable.list_activities_gpx_waypoint, listener, -1);
 	}
 	
 

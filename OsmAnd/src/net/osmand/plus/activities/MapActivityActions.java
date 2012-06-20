@@ -686,7 +686,7 @@ public class MapActivityActions implements DialogProvider {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		
 		adapter.registerItem(R.string.context_menu_item_navigate_point, R.drawable.list_view_set_destination);
-		adapter.registerItem(R.string.context_menu_item_directions);
+		adapter.registerItem(R.string.context_menu_item_directions, R.drawable.list_view_directions_to_here);
 		adapter.registerItem(R.string.context_menu_item_show_route, R.drawable.list_view_show_route_from_here);
 		adapter.registerItem(R.string.context_menu_item_search, R.drawable.list_view_search_near_here);
 		adapter.registerItem(R.string.context_menu_item_share_location, R.drawable.list_view_share_location);
