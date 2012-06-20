@@ -1,24 +1,50 @@
 package net.osmand.router;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import net.osmand.binary.RouteDataObject;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 
 
 public class RouteSegmentResult {
-	private RouteDataObject object;
-	private int startPointIndex;
-	private int endPointIndex;
+	private final RouteDataObject object;
+	private final int startPointIndex;
+	private final int endPointIndex;
+	private final List<RouteSegmentResult>[] attachedRoutes;
 	private float segmentTime;
 	private float speed;
 	private float distance;
+	private String description = "";
 	
+	@SuppressWarnings("unchecked")
 	public RouteSegmentResult(RouteDataObject object, int startPointIndex, int endPointIndex) {
 		this.object = object;
 		this.startPointIndex = startPointIndex;
 		this.endPointIndex = endPointIndex;
-		
+		int capacity = Math.abs(endPointIndex - startPointIndex) + 1;
+		this.attachedRoutes = new List[capacity];
 	}
+	
+	public void attachRoute(int roadIndex, RouteSegmentResult r){
+		int st = startPointIndex < endPointIndex ? startPointIndex : endPointIndex;
+		if(attachedRoutes[roadIndex - st] == null) {
+			attachedRoutes[roadIndex - st] = new ArrayList<RouteSegmentResult>();
+		}
+		attachedRoutes[roadIndex - st].add(r);
+	}
+	
+	public List<RouteSegmentResult> getAttachedRoutes(int routeInd) {
+		int st = startPointIndex < endPointIndex ? startPointIndex : endPointIndex;
+		List<RouteSegmentResult> list = attachedRoutes[routeInd - st];
+		if(list == null) {
+			return Collections.emptyList();
+		}
+		return list;
+	}
+	
 	
 	public RouteDataObject getObject() {
 		return object;
@@ -78,6 +104,14 @@ public class RouteSegmentResult {
 	
 	public void setDistance(float distance) {
 		this.distance = distance;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	

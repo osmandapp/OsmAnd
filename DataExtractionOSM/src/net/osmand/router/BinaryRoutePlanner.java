@@ -820,6 +820,8 @@ public class BinaryRoutePlanner {
 			result.add(res);
 		}
 		Collections.reverse(result);
+		
+		
 		// calculate time
 		float completeTime = 0;
 		float completeDistance = 0;
@@ -840,14 +842,31 @@ public class BinaryRoutePlanner {
 						road.getPoint31YTile(next));
 				distance += d;
 				distOnRoadToPass += d / speed + ctx.getRouter().defineObstacle(road, j);
+				attachRoadSegments(ctx, result, i, j);
 			}
 			// last point turn time can be added
 			// if(i + 1 < result.size()) { distOnRoadToPass += ctx.getRouter().calculateTurnTime(); }
 			rr.setSegmentTime((float) distOnRoadToPass);
 			rr.setSegmentSpeed((float) speed);
 			rr.setDistance((float) distance);
+			
 			completeTime += distOnRoadToPass;
 			completeDistance += distance;
+		}
+		for (int i = 0; i < result.size(); i++) {
+			result.get(i).setDescription(getDescription(result, i));
+		}
+		// update distance description
+		int toUpdate = 0;
+		for (int i = 1; i < result.size(); i++) {
+			if (result.get(i).getDescription().length() != 0) {
+				float dist = 0;
+				for (int j = toUpdate; j < i; j++) {
+					dist += result.get(j).getDistance();
+				}
+				result.get(toUpdate).setDescription(result.get(toUpdate).getDescription() + String.format(" %.2f meters", dist));
+				toUpdate = i;
+			}
 		}
 		
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
@@ -866,13 +885,139 @@ public class BinaryRoutePlanner {
 					name += " " + ref;
 				}
 				println(MessageFormat.format(
-						"\t<segment id=\"{0}\" start=\"{1}\" end=\"{2}\" time=\"{4}\" name=\"{3}\" distance=\"{5}\" start_bearing=\"{6}\" end_bearing=\"{7}\" />",
+						"\t<segment id=\"{0}\" start=\"{1}\" end=\"{2}\" time=\"{4}\" name=\"{3}\" distance=\"{5}\" start_bearing=\"{6}\" end_bearing=\"{7}\" description=\"{8}\"/>",
 						(res.getObject().getId()) + "", res.getStartPointIndex() + "", res.getEndPointIndex() + "", name,
-						res.getSegmentTime(),res.getDistance(), res.getBearingBegin() + "", res.getBearingEnd() + ""));
+						res.getSegmentTime(),res.getDistance(), res.getBearingBegin() + "", res.getBearingEnd() + "", res.getDescription()+""));
 			}
 			println("</test>");
 		}
 		return result;
+	}
+
+
+	private String getDescription(List<RouteSegmentResult> result, int i) {
+		if (i == 0) {
+			return "Go ahead ";
+		}
+		RouteSegmentResult prev = result.get(i - 1) ;
+		if(prev.getObject().roundabout()) {
+			return "";
+		}
+		RouteSegmentResult rr = result.get(i);
+		if (rr.getObject().roundabout()) {
+			int exit = 1;
+			for (int j = i; j < result.size(); j++) {
+				RouteSegmentResult rnext = result.get(j);
+				if (rnext.getObject().roundabout()) {
+					boolean plus = rnext.getStartPointIndex() < rnext.getEndPointIndex();
+					int k = rnext.getStartPointIndex();
+					if (j == i) {
+						k = plus ? k + 1 : k - 1;
+					}
+					while (k != rnext.getEndPointIndex()) {
+						if (rnext.getAttachedRoutes(k).size() > 0) {
+							exit++;
+						}
+						k = plus ? k + 1 : k - 1;
+					}
+				} else {
+					break;
+				}
+			}
+			// combine all roundabouts
+			return "Round (exit " + exit + ") and go  ";
+		}
+		String description = "";
+		if (prev != null) {
+			// add description about turn
+			double mpi = MapUtils.degreesDiff(prev.getBearingEnd(), rr.getBearingBegin());
+			if (mpi >= 50) {
+				if (mpi < 60) {
+					description = "Turn slightly left and go";
+				} else if (mpi < 120) {
+					description = "Turn left and go";
+				} else if (mpi < 135) {
+					description = "Turn sharply left and go";
+				} else {
+					description = "Make uturn and go";
+				}
+			} else if (mpi < -50) {
+				if (mpi > -60) {
+					description = "Turn slightly right and go";
+				} else if (mpi > -120) {
+					description = "Turn right and go";
+				} else if (mpi > -135) {
+					description = "Turn right left and go";
+				} else {
+					description = "Make uturn and go";
+				}
+			} else {
+				// keep left/right
+				boolean kl = false;
+				boolean kr = false;
+				List<RouteSegmentResult> attachedRoutes = rr.getAttachedRoutes(rr.getStartPointIndex());
+				if(attachedRoutes != null){
+					for(RouteSegmentResult rs : attachedRoutes){
+						double ex = MapUtils.degreesDiff(rs.getBearingBegin(), rr.getBearingBegin());
+						if(ex < 40 && ex >= 0) {
+							kl = true;
+						} else if(ex > -40 && ex <= 0) {
+							kr = true;
+						}
+					}
+				}
+				if (kl) {
+					description = "Keep left and go";
+				} else if(kr){
+					description = "Keep right and go";
+				}
+			}
+		}
+		return description;
+	}
+
+
+	private void attachRoadSegments(RoutingContext ctx, List<RouteSegmentResult> result, int routeInd, int pointInd) {
+		RouteSegmentResult rr = result.get(routeInd);
+		RouteDataObject road = rr.getObject();
+		RoutingTile tl = loadRoutes(ctx, road.getPoint31XTile(pointInd), road.getPoint31YTile(pointInd));
+		long l = (((long) road.getPoint31XTile(pointInd)) << 31) + (long) road.getPoint31YTile(pointInd);
+		
+		// attach additional roads to represent more information about the route
+		RouteSegmentResult previousResult = null;
+		// by default make same as this road id
+		long previousRoadId = road.getId();
+		if (pointInd == rr.getStartPointIndex() && routeInd > 0) {
+			previousResult = result.get(routeInd - 1);
+			previousRoadId = previousResult.getObject().getId();
+			boolean prevPlus = previousResult.getStartPointIndex() < previousResult.getEndPointIndex();
+			if (prevPlus) {
+				if (previousResult.getStartPointIndex() < previousResult.getEndPointIndex() &&  
+						previousResult.getEndPointIndex() < previousResult.getObject().getPointsLength() - 1) {
+					rr.attachRoute(pointInd, new RouteSegmentResult(previousResult.getObject(), 
+							previousResult.getEndPointIndex(), previousResult.getObject().getPointsLength() - 1));
+				} else if (previousResult.getStartPointIndex() > previousResult.getEndPointIndex() &&  
+						previousResult.getEndPointIndex() > 0) {
+					rr.attachRoute(pointInd, new RouteSegmentResult(previousResult.getObject(), 
+							previousResult.getEndPointIndex(), 0));
+				}
+			}
+		}
+		RouteSegment routeSegment = tl.getLoadedRoutes().get(l);
+		// try to attach all segments except with current id
+		while (routeSegment != null) {
+			if (routeSegment.road.getId() != road.getId() && routeSegment.road.getId() != previousRoadId) {
+				RouteDataObject addRoad = routeSegment.road;
+				int oneWay = ctx.getRouter().isOneWay(addRoad);
+				if (oneWay >= 0 && routeSegment.segmentStart < addRoad.getPointsLength() - 1) {
+					rr.attachRoute(pointInd, new RouteSegmentResult(addRoad, routeSegment.segmentStart, addRoad.getPointsLength() - 1));
+				}
+				if (oneWay <= 0 && routeSegment.segmentStart > 0) {
+					rr.attachRoute(pointInd, new RouteSegmentResult(addRoad, routeSegment.segmentStart, 0));
+				}
+			}
+			routeSegment = routeSegment.next;
+		}
 	}
 	
 	

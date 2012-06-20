@@ -114,6 +114,36 @@ public class RouteDataObject {
 		}
 		return 0;
 	}
+	
+	public boolean loop(){
+		return pointsX[0] == pointsX[pointsX.length - 1] && pointsY[0] == pointsY[pointsY.length - 1] ; 
+	}
+	
+	public boolean roundabout(){
+		int sz = types.length;
+		for(int i=0; i<sz; i++) {
+			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
+			if(r.roundabout()) {
+				return true;
+			} else if(r.onewayDirection() != 0 && loop()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public int getOneway(){
+		int sz = types.length;
+		for(int i=0; i<sz; i++) {
+			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
+			if(r.onewayDirection() != 0) {
+				return r.onewayDirection();
+			} else if(r.roundabout()) {
+				return 1;
+			}
+		}
+		return 0;
+	}
 
 	public String getHighway() {
 		String highway = null;

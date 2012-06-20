@@ -1,7 +1,5 @@
 package net.osmand.router;
 
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 
@@ -19,17 +17,7 @@ public abstract class VehicleRouter {
 
 	
 	public int isOneWay(RouteDataObject road) {
-		RouteRegion reg = road.region;
-		int sz = road.types.length;
-		for(int i=0; i<sz; i++) {
-			RouteTypeRule r = reg.quickGetEncodingRule(road.types[i]);
-			if(r.onewayDirection() != 0) {
-				return r.onewayDirection();
-			} else if(r.roundabout()) {
-				return 1;
-			}
-		}
-		return 0;
+		return road.getOneway();
 	}
 	
 	public String getHighway(RouteDataObject road) {

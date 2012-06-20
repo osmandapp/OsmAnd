@@ -114,7 +114,6 @@ public class RouteCalculationResult {
 						description = ctx.getString(R.string.route_tu);
 					}
 				}
-				
 			}
 			if(routeInd == 0 || !turn.getValue().equals(TurnType.C)) {
 				// TODO correlate speed (weight sum) when next turn type is C 
