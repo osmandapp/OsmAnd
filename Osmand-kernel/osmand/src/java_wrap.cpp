@@ -187,6 +187,17 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 	pullFromJavaRenderingContext(ienv, renderingContext, &rc);
 	ResultPublisher* result = ((ResultPublisher*) searchResult);
 	//    std::vector <BaseMapDataObject* > mapDataObjects = marshalObjects(binaryMapDataObjects);
+	req->clearState();
+	req->setIntFilter(req->props()->R_MINZOOM, rc.getZoom());
+	if (req->searchRenderingAttribute("defaultColor")) {
+		rc.setDefaultColor(req->getIntPropertyValue(req->props()->R_ATTR_INT_VALUE));
+	}
+	req->clearState();
+	req->setIntFilter(req->props()->R_MINZOOM, rc.getZoom());
+	if (req->searchRenderingAttribute("shadowRendering")) {
+		rc.setShadowRenderingMode(req->getIntPropertyValue(req->props()->R_ATTR_INT_VALUE));
+		rc.setShadowRenderingColor(req->getIntPropertyValue(req->props()->R_SHADOW_COLOR));
+	}
 
 	osmand_log_print(LOG_INFO, "Rendering image");
 	initObjects.pause();
@@ -269,6 +280,20 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_NativeLibrary_generateRende
 
 	initObjects.pause();
 	// Main part do rendering
+	req->clearState();
+	req->setIntFilter(req->props()->R_MINZOOM, rc.getZoom());
+	if (req->searchRenderingAttribute("defaultColor")) {
+		rc.setDefaultColor(req->getIntPropertyValue(req->props()->R_ATTR_INT_VALUE));
+		osmand_log_print(LOG_INFO, "shadow color %x default %x", rc.getShadowRenderingColor(), rc.getDefaultColor());
+	}
+	req->clearState();
+	req->setIntFilter(req->props()->R_MINZOOM, rc.getZoom());
+	if (req->searchRenderingAttribute("shadowRendering")) {
+		rc.setShadowRenderingMode(req->getIntPropertyValue(req->props()->R_ATTR_INT_VALUE));
+		rc.setShadowRenderingColor(req->getIntPropertyValue(req->props()->R_SHADOW_COLOR));
+		osmand_log_print(LOG_INFO, "shadow color %x default %x", rc.getShadowRenderingColor(), rc.getDefaultColor());
+	}
+
 
 	SkCanvas* canvas = new SkCanvas(*bitmap);
 	canvas->drawColor(rc.getDefaultColor());
@@ -337,6 +362,7 @@ jfieldID jfield_RenderingContext_visible = NULL;
 jfieldID jfield_RenderingContext_allObjects = NULL;
 jfieldID jfield_RenderingContext_density = NULL;
 jfieldID jfield_RenderingContext_shadowRenderingMode = NULL;
+jfieldID jfield_RenderingContext_shadowRenderingColor = NULL;
 jfieldID jfield_RenderingContext_defaultColor = NULL;
 jfieldID jfield_RenderingContext_textRenderingTime = NULL;
 jfieldID jfield_RenderingContext_lastRenderedKey = NULL;
@@ -369,6 +395,7 @@ void loadJniRenderingContext(JNIEnv* env)
 	jfield_RenderingContext_allObjects = getFid(env,  jclass_RenderingContext, "allObjects", "I" );
 	jfield_RenderingContext_density = getFid(env,  jclass_RenderingContext, "density", "F" );
 	jfield_RenderingContext_shadowRenderingMode = getFid(env,  jclass_RenderingContext, "shadowRenderingMode", "I" );
+	jfield_RenderingContext_shadowRenderingColor = getFid(env,  jclass_RenderingContext, "shadowRenderingColor", "I" );
 	jfield_RenderingContext_defaultColor = getFid(env,  jclass_RenderingContext, "defaultColor", "I" );
 	jfield_RenderingContext_textRenderingTime = getFid(env,  jclass_RenderingContext, "textRenderingTime", "I" );
 	jfield_RenderingContext_lastRenderedKey = getFid(env,  jclass_RenderingContext, "lastRenderedKey", "I" );
@@ -401,6 +428,7 @@ void pullFromJavaRenderingContext(JNIEnv* env, jobject jrc, JNIRenderingContext*
 	rc->setRotate(env->GetFloatField( jrc, jfield_RenderingContext_rotate ));
 	rc->setDensityScale(env->GetFloatField( jrc, jfield_RenderingContext_density ));
 	rc->setShadowRenderingMode(env->GetIntField( jrc, jfield_RenderingContext_shadowRenderingMode ));
+	rc->setShadowRenderingColor(env->GetIntField( jrc, jfield_RenderingContext_shadowRenderingColor ));
 	rc->setDefaultColor(env->GetIntField( jrc, jfield_RenderingContext_defaultColor ));
 	rc->setUseEnglishNames(env->GetBooleanField( jrc, jfield_RenderingContext_useEnglishNames ));
 	rc->javaRenderingContext = jrc;

@@ -218,7 +218,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 		buildTransportIndex.setSelected(true);
 		
 		showOfflineIndex = new JCheckBox();
-		showOfflineIndex.setText("Use Offline");
+		showOfflineIndex.setText("Offline Rendering");
 		panel.add(showOfflineIndex);
 		showOfflineIndex.setSelected(false);
 		showOfflineIndex.addActionListener(new ActionListener() {

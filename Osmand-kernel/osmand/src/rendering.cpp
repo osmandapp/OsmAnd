@@ -189,6 +189,9 @@ int updatePaint(RenderingRuleSearchRequest* req, SkPaint* paint, int ind, int ar
     {
         int shadowColor = req->getIntPropertyValue(req->props()->R_SHADOW_COLOR);
         int shadowLayer = req->getIntPropertyValue(req->props()->R_SHADOW_RADIUS);
+        if (shadowColor == 0) {
+			shadowColor = rc->getShadowRenderingColor();
+		}
         if (shadowColor == 0)
             shadowLayer = 0;
 
@@ -339,6 +342,9 @@ void drawPolyline(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas
 		if (drawOnlyShadow) {
 			int shadowColor = req->getIntPropertyValue(req->props()->R_SHADOW_COLOR);
 			int shadowRadius = req->getIntPropertyValue(req->props()->R_SHADOW_RADIUS);
+			if(shadowColor == 0) {
+				shadowColor = rc->getShadowRenderingColor();
+			}
 			drawPolylineShadow(cv, paint, rc, &path, shadowColor, shadowRadius);
 		} else {
 			if (updatePaint(req, paint, -2, 0, rc)) {

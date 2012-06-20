@@ -29,6 +29,7 @@ TextDrawInfo::~TextDrawInfo()
 IconDrawInfo::IconDrawInfo()
 	: bmp(NULL)
 {
+
 }
 
 RenderingContext::~RenderingContext()

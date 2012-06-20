@@ -133,6 +133,7 @@ private :
 	// int shadowRenderingMode = 2; // blur shadow (most CPU, but still reasonable)
 	// int shadowRenderingMode = 3; solid border (CPU use like classic version or even smaller)
 	int shadowRenderingMode;
+	int shadowRenderingColor;
 	string defaultIconsDir;
 
 public:
@@ -165,7 +166,7 @@ public :
 
 public:
 	RenderingContext() : shadowLevelMax(0), shadowLevelMin(256), density(true), useEnglishNames(false), pointCount(0),
-		pointInsideCount(0), visible(0), allObjects(0){
+		pointInsideCount(0), visible(0), allObjects(0), shadowRenderingColor(0xff969696) {
 		setRotate(0);
 		setZoom(15);
 		setDefaultColor(0xfff1eee8);
@@ -207,6 +208,14 @@ public:
 
 	inline int getShadowRenderingMode(){
 		return shadowRenderingMode;
+	}
+
+	int getShadowRenderingColor(){
+		return shadowRenderingColor;
+	}
+
+	void setShadowRenderingColor(int color) {
+		shadowRenderingColor = color;
 	}
 
 	inline int getWidth(){

@@ -81,6 +81,8 @@ public class NativeSwingRendering extends NativeLibrary {
 		rctx.width = (int) ((sright - sleft) / MapUtils.getPowZoom(31 - zoom - 8));
 		rctx.height = (int) ((sbottom - stop) / MapUtils.getPowZoom(31 - zoom - 8));
 		rctx.shadowRenderingMode = 2;
+		rctx.shadowRenderingColor = 0xff969696;
+		rctx.defaultColor = 0xfff1eee8;
 		rctx.zoom = zoom;
 		long search = time + System.currentTimeMillis();
 		final RenderingGenerationResult rres = NativeSwingRendering.generateRenderingIndirect(rctx, res.nativeHandler,  
