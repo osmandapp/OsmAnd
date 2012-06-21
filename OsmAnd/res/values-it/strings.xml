@@ -34,8 +34,8 @@
   <!-- this block re-worked for new menu structure -->
   <string name="profile_settings">Impostazioni particolari per il profilo</string>
   <string name="settings_preset">Profilo d\'uso</string>
-  <string name="settings_preset_descr">Seleziona un profilo d\'uso. (Ogni impostazione del profilo per la Mappa, Tracking, e Navigazione può essere personalizzato sotto.)</string>
-  <string name="monitor_preferences">Tracking</string>
+  <string name="settings_preset_descr">Seleziona un profilo d\'uso con impostazioni per mappa e navigazione personalizzata.</string>
+  <string name="monitor_preferences">- Tracking</string>
   <string name="monitor_preferences_descr">Specifica le impostazioni di tracking</string>
   <string name="routing_settings">- Navigazione</string>
   <string name="routing_settings_descr">Specifica impostazioni di navigazione</string>
@@ -58,12 +58,12 @@
   <string name="tip_day_night_mode">Modo giorno/notte</string>
   <string name="tip_day_night_mode_t">\tL\'aspetto della mappa può essere cambiato per alcune mappe vettoriali tra giorno (più luminoso) e notte (più scuro). \n\tI colori scuri sono più sicuri per la guida notturna. \n\tPuoi impostare una regola per il cambio giorno/notte in \'Impostazioni\' -&gt; \'Aspetto delle mappe\' -&gt; \'Modo giorno/notte\'. \n\tLe scelte sono: \n\t\'Alba/Tramonto\' - automatico, controllato dalla posizione del sole (default) \n\t\'Giorno\' - usa sempre la modalità giorno \n\t\'Notte\' - usa sempre la modalità notte \n\t\'Sensore luminosità\' - l\'aspetto della mappa è controllato dal sensore del tuo device (solo se è presente)</string>
   <string name="tip_osm_improve">Migliorare i dati OSM</string>
-  <string name="tip_osm_improve_t">\tOsmAnd usa mappe basate sui dati di Openstreetmap.org (OSM) e -oltre a visualizzare e navigare le mappe- può essere usato per migliorare la qualità dei dati OSM. Puoi creare e caricare facilmente nuovi PDI o segnalazioni di bug con solo un paio di click! \n\tPer questo devi prima fornire le credenziali d\'accesso ad OSM in \'Impostazioni\' -&gt; \'Impostazioni generali\' -&gt; \'OSM\'. \n\tPer aggiungere un nuovo PDI usa l\'opzione \'Crea un PDI\' nel menù contestuale. Procedi inserendo le informazioni relative al nuovo PDI nella finestra \'Crea PDI\' e infine invialo. \n\tGli errori sulle mappe possono essere immediatamente segnalati tramite un bug OSM, e la comunità OSM può correggere velocemente il problema. \n\tPer aggiungere un bug OSM usa l\'opzione \'Apri un bug OSM\' nel menù contestuale. Inserisci una descrizione dettagliata del problema e infine inviala con il bottone \'Aggiungi\'. \n\tNota che è necessaria la connessione ad Internet per contribuire PDI e bug.</string>
+  <string name="tip_osm_improve_t">\tOsmAnd usa mappe basate sui dati di Openstreetmap.org (OSM) e -oltre a visualizzare e navigare le mappe- può essere usato per migliorare la qualità dei dati OSM. Puoi creare e caricare facilmente nuovi PDI o segnalazioni di bug con solo un paio di click! \n\tPer questo devi prima fornire le credenziali d\'accesso ad OSM in \'Impostazioni\' -&gt; \'Impostazioni generali\' -&gt; \'Editing OSM\'. \n\tPer aggiungere un nuovo PDI usa l\'opzione \'Crea un PDI\' nel menù contestuale. Procedi inserendo le informazioni relative al nuovo PDI nella finestra \'Crea PDI\' e infine invialo. \n\tGli errori sulle mappe possono essere immediatamente segnalati tramite un bug OSM, e la comunità OSM può correggere velocemente il problema. \n\tPer aggiungere un bug OSM usa l\'opzione \'Apri un bug OSM\' nel menù contestuale. Inserisci una descrizione dettagliata del problema e infine inviala con il bottone \'Aggiungi\'. \n\tNota che è necessaria la connessione ad Internet per contribuire PDI e bug.</string>
   <!-- end of string changes for new menu structure -->
   <string name="download_files_not_enough_space">Non c\'è abbastanza spazio per scaricare %1$s MB (liberi: %2$s).</string>
   <string name="download_files_question_space">Lo spazio disponibile è di {2} MB! Scaricare {0} file(s) ({1} MB)?</string>
   <string name="tip_select_destination_point">Seleziona Punto Destinazione</string>
-  <string name="tip_select_destination_point_t">"\n\tPuoi selezionare un punto di destinazione direttamente sulla mappa (menu contestuale, poi \'Naviga verso\'), in qualsiasi ricerca, o premendo a lungo una voce nella \'Lista dei Punti Preferiti\'. \n\tLa destinazione è segnata con un disco arancione sulla mappa e OsmAnd ne mostra distanza e direzione (con un triangolo arancione)."</string>
+  <string name="tip_select_destination_point_t">"\n\tPuoi selezionare un punto di destinazione direttamente sulla mappa (menu contestuale, poi \'Imposta come destinazione\'), in qualsiasi ricerca, o premendo a lungo una voce nella \'Lista dei Punti Preferiti\'. \n\tLa destinazione è segnata con un disco arancione sulla mappa e OsmAnd ne mostra distanza e direzione (con un triangolo arancione)."</string>
   <string name="tip_recent_changes_0_6_9_t">"Cambiamenti nella versione 0.6.9 : \n\t- Improved offline map rendering \n\t- Fast Native offline rendering - look in experimental features (may not work on some devices) \n\t- Massive look and feel changes \n\t- Altitude info \n\t- New translations (Vienamese, Polish) \n\t- Other small features "</string>
   <string name="show_altitude_info_descr">Mostra informazioni sull\'altitudine attuale sulla mappa</string>
   <string name="show_altitude_info">Mostra altitudine</string>
@@ -208,7 +208,7 @@
   <string name="internet_not_available">Connessione internet richiesta ma non disponibile</string>
   <string name="install_more">Installa altro…</string>
   <string name="tip_update_index">Aggiornamento Dati Offline</string>
-  <string name="tip_update_index_t">\tAvere dati aggiornati è importante. OsmAnd fornisce un download manager che controlla gli aggiornamenti disponibili. \n\tPer controllare gli aggiornamenti andare su \'Menu Principale\' -&gt; \'Impostazioni\' -&gt; \'Dati offline\' -&gt; \'Download dati offline\'. Dopo il download della lista delle regioni ti basterà selezionare \'Menu\' -&gt; \'Filtra scaricati\' per indicare aggiornamenti di file già in tuo possesso. \n\tLa disponibilità degli aggiornamenti viene indicata dai colori seguenti: \n\t\'Verde\' - file aggiornato \n\t\'Blu\' - aggiornamento disponibile</string>
+  <string name="tip_update_index_t">\tAvere dati aggiornati è importante. OsmAnd fornisce un download manager che controlla gli aggiornamenti disponibili. \n\tPer controllare gli aggiornamenti andare su \'Impostazioni\' -&gt; \'Dati offline\' -&gt; \'Download dati offline\'. Dopo il download della lista delle regioni ti basterà selezionare \'Menu\' -&gt; \'Filtra scaricati\' per indicare aggiornamenti di file già in tuo possesso. \n\tLa disponibilità degli aggiornamenti viene indicata dai colori seguenti: \n\t\'Verde\' - file aggiornato \n\t\'Blu\' - aggiornamento disponibile</string>
   <string name="level_to_switch_vector_raster_descr">Minimo livello di zoom per usare il rendering vettoriale al posto dei tile mappa</string>
   <string name="level_to_switch_vector_raster">Min. livello zoom</string>
   <string name="tip_location_sharing">Condivisione Posizione</string>
@@ -223,9 +223,9 @@
   <string name="preferred_locale_descr">Seleziona linguaggio display</string>
   <string name="preferred_locale">Linguaggio display</string>
   <string name="tip_map_switch">Fonte Mappa</string>
-  <string name="tip_map_switch_t">\tIl modo più veloce per cambiare la fonte per la mappa e i layers è tramite \'Menu\' -&gt; \'Definisci Vista\' in vista mappa. \n\tSotto \'Fonte mappa…\' puoi scegliere tra le mappe vettoriali pre-caricate, fonti predefinite (online), mappe create manualmente utilizzando OsmAndMapCreator sul PC. \n\tOsmAnd supporta anche fonti personalizzate.</string>
+  <string name="tip_map_switch_t">\tIl modo più veloce per cambiare la fonte della mappa e i layer è tramite \'Menu\' -&gt; \'Definisci Vista\' in vista mappa. \n\tSotto \'Fonte mappa…\' puoi scegliere tra le mappe vettoriali pre-caricate, fonti predefinite (online), p mappe create manualmente utilizzando OsmAndMapCreator sul PC. \n\tOsmAnd supporta anche fonti personalizzate.</string>
   <string name="tip_app_mode">Modo Applicazione</string>
-  <string name="tip_app_mode_t">\tOsmAnd supporta diversi profili personalizzabili per differenti usi. \n\tPuoi cambiare tra i profili su \'Menu\' -&gt; \'Impostazioni\' -&gt; \'Modo applicazione\', o mentre crei un percorso.</string>
+  <string name="tip_app_mode_t">\tOsmAnd supporta diversi profili personalizzabili per differenti usi. \n\tPuoi cambiare tra i profili su \'Menu\' -&gt; \'Impostazioni\' -&gt; \'Profili utente\', o mentre crei un percorso.</string>
   <string name="tip_navigation">Navigazione</string>
   <string name="tip_navigation_t">\tPrima di iniziare la navigazione devi selezionare una destinazione. Dopo averla selezionata premi \'Menu\' -&gt; \'Percorsi\' sulla mappa e seleziona il tipo di navigazione.</string>
   <string name="tip_search">Ricerca</string>
@@ -233,7 +233,7 @@
   <string name="tip_map_context_menu">Menu contestuale</string>
   <string name="tip_map_context_menu_t">\tIl menu contestuale viene visualizzato premendo a lungo sulla mappa o premendo il pulsante trackball. \n\tQuesto visualizza un box con le coordinate del punto. Per aprire il menu, cliccaci sopra. (O premi a lungo per nascondere il menù.) \n\tIl menù contestuale contiene tutte le azioni possibili per quel punto (luogo).</string>
   <string name="tip_initial">Consigli</string>
-  <string name="tip_initial_t">\tOsmAnd è una applicazione di navigazione con molte funzioni. \n\tPer una introduzione base, alcuni consigli sono linkati nel menù principale.</string>
+  <string name="tip_initial_t">\tOsmAnd è una applicazione di navigazione con molte funzioni. \n\tPer una introduzione base, alcuni consigli d\'uso sono linkati nel menù principale.</string>
   <string name="next_button">Prossimo</string>
   <string name="previous_button">Precedente</string>
   <string name="unit_of_length_descr">Cambia le unità di misura per spazio e velocità</string>
@@ -571,7 +571,7 @@
   <string name="favourites_activity">Lista dei punti preferiti</string>
   <string name="add_to_favourite">Aggiungere ai Preferiti</string>
   <string name="use_english_names_descr">Selezionare l\'uso dei nomi locali o inglesi</string>
-  <string name="use_english_names">Utilizzare nomi inglesi</string>
+  <string name="use_english_names">Utilizzare nomi inglesi nelle mappe</string>
   <string name="app_settings">Impostazioni applicazione</string>
   <string name="search_address">Cerca indirizzo</string>
   <string name="choose_building">Scegli numero civico</string>
@@ -628,9 +628,9 @@
   <string name="navigate_point_top_text">Inserire latitudine &amp; longitudine nel formato (G - gradi, M - minuti, S - secondi)</string>
   <string name="navigate_point_latitude">Latitudine</string>
   <string name="navigate_point_longitude">Longitudine</string>
-  <string name="navigate_point_format_D">GGG.GGGGG</string>
-  <string name="navigate_point_format_DM">GGG MM.MMMMM</string>
-  <string name="navigate_point_format_DMS">GGG MM SS.SSSSS</string>
+  <string name="navigate_point_format_D">DDD.DD</string>
+  <string name="navigate_point_format_DM">DDD MM.MM</string>
+  <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
   <string name="search_shown_on_map">Visualizza sulla mappa</string>
   <string name="navigate_point_cancel">Annulla</string>
   <string name="search_address_top_text">Selezionare l\'indirizzo</string>
@@ -718,22 +718,22 @@
   <string name="map_settings">- Impostazioni Mappa</string>
   <string name="map_settings_descr">Configura la visualizzazione della mappa</string>
   <string name="osmand_rastermaps_plugin_description">Questo plugin facilita l\'uso di una serie di mappe online o a tiles (in cache) come mappe di base o overlay / underlay. Le mappe possono essere anche preparate offline e copiate nella cartella di OsmAnd.</string>
-  <string name="osmand_background_plugin_description">"Questo plugin consente il tracking o la navigazione in modalità risparmio energetico (con lo schermo spento) svegliando periodicamente il GPS per registrare un punto della traccia o per enunciare una indicazione vocale."</string>
-  <string name="osmand_accessibility_description">Questo plugin configura funziionalità speciali per l\'accessibilità.</string>
+  <string name="osmand_background_plugin_description">"Mostra le impostazioni per abilitare tracking e navigazione in modalità attesa (a schermo spento) tramite il risveglio periodico del GPS."</string>
+  <string name="osmand_accessibility_description">Mostra impostazioni per funzionalità speciali per l\'accessibilità.</string>
   <string name="extra_settings">Impostazioni avanzate</string>
-  <string name="osmand_monitoring_description">Questo plugin facilita la registrazione dei tuoi movimenti su un file GPX o il live tracking tramite un servizio web.</string>
-  <string name="osmand_extra_settings_description">Questo plugin consente la configurazione avanzata della mappa e altre impostazioni specifiche per i dispositivi.</string>
-  <string name="osmand_development_plugin_description">Questo plugin abilità funzionalità in sviluppo e debug come la navigazione animata o mostrare la performance del rendering.</string>
+  <string name="osmand_monitoring_description">Mostra impostazioni per facilitare la registrazione dei tuoi movimenti su un file GPX o il live tracking tramite un servizio web.</string>
+  <string name="osmand_extra_settings_description">Mostra impostazioni per la configurazione avanzata della mappa (come aumentarne i dettagli) e altre specifiche per i dispositivi.</string>
+  <string name="osmand_development_plugin_description">Mostra impostazioni per funzionalità in sviluppo e debug come la navigazione animata o mostrare la performance del rendering.</string>
   <string name="plugins_screen">Plugin Manager</string>
   <string name="select_plugin_to_activate">Tocca un Plugin per attivarlo o disattivarlo. (Potrebbe essere richiesto il riavvio di OsmAnd.)</string>
   <string name="prefs_plugins_descr">I plugin abilitano funzionalità extra dell\'applicazione come il live tracking, la mappe a tiles, la modalità a schermo spento, impostazioni per l\'accessibilità, ed altro.</string>
   <string name="prefs_plugins">Plugin Manager</string>
-  <string name="tip_recent_changes_0_8_0_t">"Cambiamenti nella 0.8.0 : \n\t- Funzionalità a plugin\n\t- Supporto alle nuove mappe vettoriali offilne \n\t- Svariati bug fix "</string>
+  <string name="tip_recent_changes_0_8_0_t">"Cambiamenti nella 0.8.0 : \n\t- Funzionalità a plugin\n\t- Supporto alle nuove mappe vettoriali offline \n\t- Miglioramento usabilità e semplificazione del concetto di Profili\n\t- Svariati bug fix "</string>
   <string name="osm_editing_plugin_description">Questo plugin facilita il feedback ad OSM come la raccolta/modifica di Punti di interesse, l\'apertura/commento di bug OSM, e l\'invio di tracce registrate (richiede le credenziali OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Le mappe vettoriali dovrebbero apparire più velocemente. Su certi device potrebbe non funzionare bene.</string>
   <string name="simulate_route_progression_manually">Simula l\'avanzamento del tragitto manualmente</string>
   <string name="play_commands_of_currently_selected_voice">Esegui i comandi della voce attualmente selezionata</string>
-  <string name="debugging_and_development">Debugging e sviluppo di OsmAnd</string>
+  <string name="debugging_and_development">Sviluppo di OsmAnd</string>
   <string name="native_rendering">Rendering nativo</string>
   <string name="animate_routing">Animate navigation</string>
   <string name="test_voice_prompts">Prova i comandi vocali</string>
@@ -823,4 +823,4 @@
   <string name="index_name_tts_voice">Dati voce (TTS)</string>
   <string name="favourites_edit_dialog_name">Nome</string>
   <string name="favourites_edit_dialog_category">Categoria</string>
-<string name="local_index_routing_data">Routing data</string><string name="navigate_point_format">Format :</string><string name="poi_search_desc">POI - Point Of interest</string><string name="address_search_desc">Address search</string><string name="navpoint_search_desc">Navigate point</string><string name="transport_search_desc">Transport search</string><string name="favourites_search_desc">Favourites search</string><string name="history_search_desc">Search history</string></resources>
+<string name="local_index_routing_data">Dati per il routing</string><string name="navigate_point_format">Formato :</string><string name="poi_search_desc">Ricerca PDI (Punti di Interesse)</string><string name="address_search_desc">Ricerca degli indirizzi</string><string name="navpoint_search_desc">Coordinate</string><string name="transport_search_desc">Ricerca dei trasporti</string><string name="favourites_search_desc">Ricerca dei preferiti</string><string name="history_search_desc">Cronologia di ricerca</string><string name="rendering_attr_noPolygons_description">Rende trasparenti tutte le aree rappresentanti caratteristiche</string><string name="rendering_attr_noPolygons_name">No poligoni</string><string name="rendering_attr_appMode_name">Modalità di rendering</string><string name="rendering_attr_appMode_description">Ottimizzazione della mappa per i rispettivi Profili Utente</string><string name="rendering_attr_contourLines_description">Mostra lo zoom minimo a cui mostrare la mappa se disponibile. Potrebbe essere necessario un file SRTM separato.</string><string name="rendering_attr_contourLines_name">Mostra curve di livello</string><string name="rendering_attr_hmRendered_description">Aumenta la quantità di dettagli mostrati</string><string name="rendering_attr_hmRendered_name">Mostra più dettagli sulla mappa</string></resources>
