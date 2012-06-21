@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="bidforfix_loading">Nahrávám</string>
-    <string name="bidforfix_supporters">%1$d Sponzorů</string>
+    <string name="bidforfix_supporters">%1$d sponzorů</string>
 	<string name="bidforfix_funded">sponzorováno: %d%%</string>    
 </resources>
