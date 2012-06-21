@@ -357,6 +357,7 @@
 		<type tag="emergency" value="fire_hose" minzoom="15" />
 		<type tag="emergency" value="fire_hydrant" minzoom="15" />
 		<type tag="emergency" value="phone" minzoom="15" />
+		<type tag="amenity" value="emergency_phone" target_tag="emergency" target_value="phone" minzoom="15" />
 		<type tag="emergency" value="siren" minzoom="15" />
 		<type tag="amenity" value="fire_station" minzoom="15" poi_category="emergency"/>
 	</category>
