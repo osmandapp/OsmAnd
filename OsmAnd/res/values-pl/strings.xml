@@ -289,7 +289,7 @@
   <string name="poi_context_menu_call">Pokaż nr tel. tego POI</string>
   <string name="website">strona WWW</string>
   <string name="phone">telefon</string>
-  <string name="download_type_to_filter">type to filter</string>
+  <string name="download_type_to_filter">filtruj wg typu</string>
   <string name="use_high_res_maps">Wysoka rozdzielczość ekranu</string>
   <string name="use_high_res_maps_descr">Poprawia jakość wyświetlania mapy na urządzeniach o dużej rozdzielczości</string>
   <string name="unknown_location">Pozycja GPS jeszcze nieustalona</string>
@@ -464,9 +464,9 @@
   <string name="get_directions">Nawigacja</string>
   <string name="show_gps_status">Pokaż status GPS</string>
   <string name="opening_hours">Godziny otwarcia</string>
-  <string name="opening_changeset">Opening changeset…</string>
-  <string name="closing_changeset">Closing changeset…</string>
-  <string name="commiting_node">Committing node…</string>
+  <string name="opening_changeset">Otwieram zestaw zmian…</string>
+  <string name="closing_changeset">zamykam zestaw zmian…</string>
+  <string name="commiting_node">Zapisuję węzeł…</string>
   <string name="loading_poi_obj">Wczytywanie POI…</string>
   <string name="auth_failed">Autoryzacja nie powiodła się</string>
   <string name="failed_op">nie powiodło się</string>
@@ -821,4 +821,4 @@
   <string name="favourites_edit_dialog_category">Kategoria</string>
   <string name="gpx_option_from_start_point">Przejdź wzdłuż całej ścieżki</string>
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> map classification with images"</string>
-<string name="local_index_routing_data">Routing data</string><string name="navigate_point_format">Format :</string><string name="poi_search_desc">POI - Point Of interest</string><string name="address_search_desc">Address search</string><string name="navpoint_search_desc">Navigate point</string><string name="transport_search_desc">Transport search</string><string name="favourites_search_desc">Favourites search</string><string name="history_search_desc">Search history</string><string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string><string name="rendering_attr_noPolygons_name">No polygons</string><string name="rendering_attr_appMode_name">Rendering mode</string><string name="rendering_attr_appMode_description">Map optimization for respective User Profile</string><string name="rendering_attr_contourLines_description">"Wybierz minimalny poziom przybliżenia, przy którym będą wyświetlane (jeśli są dostępne). Może być wymagany dodatkowy plik STRM."</string><string name="rendering_attr_contourLines_name">Pokaż kontury</string><string name="rendering_attr_hmRendered_description">Zwiększ ilość detali pokazywanych na mapie</string><string name="rendering_attr_hmRendered_name">Pokaż więcej detali na mapie</string></resources>
+<string name="local_index_routing_data">Routing data</string><string name="navigate_point_format">Format :</string><string name="poi_search_desc">"Wyszukaj POI "</string><string name="address_search_desc">Wyszukiwanie adresu</string><string name="navpoint_search_desc">Nawiguj do punktu</string><string name="transport_search_desc">Wyszukaj transport</string><string name="favourites_search_desc">Wyszukaj w ulubionych</string><string name="history_search_desc">Historia wyszukiwania</string><string name="rendering_attr_noPolygons_description">"Ukryj wszystkie elementy mapy będące terenami ziemnymi"</string><string name="rendering_attr_noPolygons_name">No polygons</string><string name="rendering_attr_appMode_name">Rendering mode</string><string name="rendering_attr_appMode_description">Map optimization for respective User Profile</string><string name="rendering_attr_contourLines_description">"Wybierz minimalny poziom przybliżenia, przy którym będą wyświetlane (jeśli są dostępne). Może być wymagany dodatkowy plik STRM."</string><string name="rendering_attr_contourLines_name">Pokaż kontury</string><string name="rendering_attr_hmRendered_description">Zwiększ ilość detali pokazywanych na mapie</string><string name="rendering_attr_hmRendered_name">Pokaż więcej detali na mapie</string></resources>
