@@ -20,6 +20,7 @@ public class Boundary {
 	private List<Way> outerWays = new ArrayList<Way>(1);
 	private List<Way> innerWays = new ArrayList<Way>(0);
 	private boolean closedWay;
+	private long adminCenterId;
 	
 	public Boundary(boolean closedWay){
 		this.closedWay = closedWay;
@@ -164,6 +165,14 @@ public class Boundary {
 	@Override
 	public String toString() {
 		return  getName() + " alevel:" + getAdminLevel() + " type: relation closed:" + isClosedWay();
+	}
+
+	public void setAdminCenterId(long l) {
+		this.adminCenterId = l;
+	}
+	
+	public long getAdminCenterId() {
+		return adminCenterId;
 	}
 
 }

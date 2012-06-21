@@ -58,7 +58,7 @@ public class OSMSettings {
 		URL("url"), //$NON-NLS-1$
 		WIKIPEDIA("wikipedia"), //$NON-NLS-1$
 		
-		ADMIN_LEVEL("admin_level"), //$NON-NLS-1$
+		ADMIN_LEVEL("admin_level") //$NON-NLS-1$
 		;
 		
 		private final String value;

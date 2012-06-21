@@ -17,6 +17,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -142,7 +143,10 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			City cityFound = null;
 			String boundaryName = boundary.getName().toLowerCase();
 			for (City c : citiesToSearch) {
-				if (boundary.containsPoint(c.getLocation())) {
+				if (c.getId() == boundary.getAdminCenterId()) {
+					cityFound = c;
+					break;
+				} else if (boundary.containsPoint(c.getLocation())) {
 					if (boundaryName.equalsIgnoreCase(c.getName())) {
 						cityFound = c;
 						break;
@@ -239,40 +243,50 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	private Boundary putCityBoundary(Boundary boundary, City cityFound) {
 		final Boundary oldBoundary = cityBoundaries.get(cityFound);
 		if (oldBoundary != null) {
+			if (boundary.getAdminCenterId() == cityFound.getId()
+					&& badBoundary(cityFound, oldBoundary)) {
+				cityBoundaries.put(cityFound, boundary);
+				logBoundaryChanged(boundary, cityFound);
+			} else
 			// try to found the biggest area (not small center district)
-			if (oldBoundary.getAdminLevel() > boundary.getAdminLevel() && !oldBoundary.getName().equalsIgnoreCase(cityFound.getName())) {
+			if (oldBoundary.getAdminLevel() > boundary.getAdminLevel()
+					&& badBoundary(cityFound, oldBoundary)) {
 				cityBoundaries.put(cityFound, boundary);
-				String s = "City: " + cityFound.getName() + " boundary: " + boundary.getName();
-				if(logMapDataWarn != null) {
-					logMapDataWarn.info(s);
-				} else {
-					log.info(s);
-				}
-			} else if(boundary.getName().equalsIgnoreCase(cityFound.getName()) && 
-					!oldBoundary.getName().equalsIgnoreCase(cityFound.getName())){
+				logBoundaryChanged(boundary, cityFound);
+			} else if (boundary.getName().equalsIgnoreCase(cityFound.getName())
+					&& badBoundary(cityFound, oldBoundary)) {
 				cityBoundaries.put(cityFound, boundary);
-				String s = "City: " + cityFound.getName() + " boundary: " + boundary.getName();
-				if(logMapDataWarn != null) {
-					logMapDataWarn.info(s);
-				} else {
-					log.info(s);
-				}
-			} else if(oldBoundary.getAdminLevel() == boundary.getAdminLevel() && 
-					oldBoundary != boundary && boundary.getName().equalsIgnoreCase(oldBoundary.getName())){
-				if(!oldBoundary.isClosedWay() && !boundary.isClosedWay()){
+				logBoundaryChanged(boundary, cityFound);
+			} else if (oldBoundary.getAdminLevel() == boundary.getAdminLevel()
+					&& oldBoundary != boundary
+					&& boundary.getName().equalsIgnoreCase(
+							oldBoundary.getName())) {
+				if (!oldBoundary.isClosedWay() && !boundary.isClosedWay()) {
 					oldBoundary.getInnerWays().addAll(boundary.getInnerWays());
 					oldBoundary.getOuterWays().addAll(boundary.getOuterWays());
 				}
 			}
 		} else {
 			cityBoundaries.put(cityFound, boundary);
-			if(logMapDataWarn != null) {
-				logMapDataWarn.info("City: " + cityFound.getName() + " boundary: " + boundary.getName());
-			} else {
-				log.info("City: " + cityFound.getName() + " boundary: " + boundary.getName());
-			}
+			logBoundaryChanged(boundary, cityFound);
 		}
 		return oldBoundary;
+	}
+
+
+	private boolean badBoundary(City cityFound, final Boundary oldBoundary) {
+		return oldBoundary.getAdminCenterId() != cityFound.getId() ||
+				!oldBoundary.getName().equalsIgnoreCase(cityFound.getName());
+	}
+
+
+	private void logBoundaryChanged(Boundary boundary, City cityFound) {
+		String s = "City: " + cityFound.getName() + " boundary: " + boundary.getName();
+		if(logMapDataWarn != null) {
+			logMapDataWarn.info(s);
+		} else {
+			log.info(s);
+		}
 	}
 
 	private boolean isBoundary(Entity e) {
@@ -303,6 +317,8 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 							}
 							boundary.getOuterWays().add((Way) es);
 						}
+					} else if (es instanceof Node && ("admin_centre".equals(entities.get(es)) || "admin_center".equals(entities.get(es)))) {
+						boundary.setAdminCenterId(es.getId());
 					}
 				}
 				boundary.computeIsClosedWay();
@@ -521,7 +537,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		
 		}
 		name = normalizeStreetName(name);
-		Set<City> result = new HashSet<City>();
+		Set<City> result = new LinkedHashSet<City>();
 		List<City> nearestObjects = new ArrayList<City>();
 		nearestObjects.addAll(cityManager.getClosestObjects(location.getLatitude(),location.getLongitude()));
 		nearestObjects.addAll(cityVillageManager.getClosestObjects(location.getLatitude(),location.getLongitude()));
