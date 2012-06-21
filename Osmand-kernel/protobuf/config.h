@@ -22,6 +22,27 @@
 
 	/* define if the compiler has hash_set */
 	#define HAVE_HASH_SET 1
+#elif defined(__APPLE__)
+	/* the namespace of hash_map/hash_set */
+	#define HASH_NAMESPACE std::tr1
+
+	/* the name of <hash_set> */
+	#define HASH_MAP_CLASS unordered_map
+
+	/* the location of <hash_map> */
+	#define HASH_MAP_H <tr1/unordered_map>
+
+	/* the name of <hash_set> */
+	#define HASH_SET_CLASS unordered_set
+
+	/* the location of <hash_set> */
+	#define HASH_SET_H <tr1/unordered_set>
+
+	/* define if the compiler has hash_map */
+	#define HAVE_HASH_MAP 1
+
+	/* define if the compiler has hash_set */
+	#define HAVE_HASH_SET 1
 #else
 	/* the namespace of hash_map/hash_set */
 	#define HASH_NAMESPACE std

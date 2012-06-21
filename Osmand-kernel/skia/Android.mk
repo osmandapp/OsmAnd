@@ -47,7 +47,8 @@ LOCAL_SRC_FILES += \
 	$(OSMAND_SKIA_LOC)/src/ports/SkTime_Unix.cpp \
 	FontHostConfiguration_android.cpp
 LOCAL_C_INCLUDES += \
-	$(OSMAND_SKIA_ABS)/src/ports
+	$(OSMAND_SKIA_ABS)/src/ports \
+	$(OSMAND_SKIA_ABS)/include/utils/android
 	
 ifeq ($(TARGET_ARCH),arm)
 

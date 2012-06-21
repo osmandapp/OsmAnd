@@ -15,7 +15,7 @@ CXXFLAGS_debug := -g$(DEBUG_INFO_FORMAT) -O0
 CFLAGS_debug := -g$(DEBUG_INFO_FORMAT) -O0
 CXXFLAGS_release := -O2
 CFLAGS_release := -O2
-
+	
 OUTPUT_DIR_PREFIX = ../lib/$(TARGET)-$(ARCH)
 BUILD_DIR_PREFIX = ../build/$(TARGET)-$(ARCH)
 
@@ -43,8 +43,8 @@ debug: $(BUILD_DIR_PREFIX)-debug/$(LIBNAME).$(LIBTYPE)
 
 # Clean removes all objects
 clean:
-	$(RM) -r build-release/obj-$(TARGET)-$(ARCH)/
-	$(RM) -r build-debug/obj-$(TARGET)-$(ARCH)/
+	$(RM) -r build-release/obj-$(TARGET)-$(ARCH)
+	$(RM) -r build-debug/obj-$(TARGET)-$(ARCH)
 	$(RM) -r build-release/$(TARGET)-$(ARCH)
 	$(RM) -r build-debug/$(TARGET)-$(ARCH)
 	$(RM) -r $(BUILD_DIR_PREFIX)-release
@@ -86,7 +86,7 @@ build-%/$(TARGET)-$(ARCH)/$(LIBNAME).$(STATICLIB_EXT): $$(addprefix build-%/,$(O
 .SECONDEXPANSION:
 build-%/$(TARGET)-$(ARCH)/$(LIBNAME).$(DYNAMICLIB_EXT): $$(addprefix build-%/,$(OBJECTS))
 	@mkdir -p `dirname $@`
-	$(CXX) -shared -o $@ $(addprefix build-$*/,$(OBJECTS)) $(LDFLAGS) -L$(BUILD_DIR_PREFIX)-$* $(LDLIBS)
+	$(CXX) $(DYNAMICLIB_FLAGS) -o $@ $(addprefix build-$*/,$(OBJECTS)) $(LDFLAGS) -L$(BUILD_DIR_PREFIX)-$* $(LDLIBS)
 	
 # This is for copying binary files to build directory
 $(BUILD_DIR_PREFIX)-%/$(LIBNAME).$(LIBTYPE): build-%/$(TARGET)-$(ARCH)/$(LIBNAME).$(LIBTYPE)

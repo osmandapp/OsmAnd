@@ -44,11 +44,34 @@ SKIA_FLAGS_WINDOWS = \
 	-DSK_SCALAR_IS_FLOAT \
 	-DSK_CAN_USE_FLOAT \
 	-DSK_CPU_LENDIAN
+	
+LOCAL_SRC_FILES_MAC = \
+	$(OSMAND_SKIA_LOC)/src/ports/SkThread_pthread.cpp \
+	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_mac.cpp \
+	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_mac_coretext.cpp \
+	$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_freetype_mac.cpp \
+	$(OSMAND_SKIA_LOC)/src/ports/SkTime_Unix.cpp
 
+SKIA_FLAGS_MAC = \
+	-DSK_BUILD_FOR_MAC \
+	-DSK_USE_CORETEXT \
+	-DSkUserConfig_DEFINED \
+	-DPICTURE_VERSION_ICS=1 \
+	-DPICTURE_VERSION_JB=2 \
+	-DSK_SCALAR_IS_FLOAT \
+	-DSK_CAN_USE_FLOAT \
+	-DSK_CPU_LENDIAN
+	
 ifeq ($(TARGET),windows)
 	LOCAL_SRC_FILES += $(LOCAL_SRC_FILES_WINDOWS)
+	LOCAL_C_INCLUDES += $(OSMAND_SKIA_ABS)/include/utils/win
 	SKIAFLAGS += $(SKIA_FLAGS_WINDOWS)
+else ifeq ($(TARGET),darwin)
+	LOCAL_SRC_FILES += $(LOCAL_SRC_FILES_MAC)
+	LOCAL_C_INCLUDES += $(OSMAND_SKIA_ABS)/include/utils/mac
+	SKIAFLAGS += $(SKIA_FLAGS_MAC)
 else
+	LOCAL_C_INCLUDES += $(OSMAND_SKIA_ABS)/include/utils/unix
 	LOCAL_SRC_FILES += \
 		$(OSMAND_SKIA_LOC)/src/ports/SkFontHost_sandbox_none.cpp	\
 		$(OSMAND_SKIA_LOC)/src/ports/SkThread_pthread.cpp \

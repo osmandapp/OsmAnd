@@ -3,13 +3,16 @@
 #include <SkPath.h>
 #include <SkBitmap.h>
 #include <SkImageDecoder.h>
-#include <time.h>
 
 #include "osmand_log.h"
 
 #if defined(_WIN32)
 #	include <windows.h>
 #	include <mmsystem.h>
+#elif defined(__APPLE__)
+#	include <mach/mach_time.h>|
+#else
+#	include <time.h>
 #endif
 
 TextDrawInfo::TextDrawInfo(std::string itext)
@@ -49,6 +52,9 @@ ElapsedTimer::ElapsedTimer()
 	, enableFlag(true)
 	, run(false)
 {
+#if defined(__APPLE__)
+	mach_timebase_info(&machTimeInfo);
+#endif
 }
 
 void ElapsedTimer::enable()
@@ -70,6 +76,8 @@ void ElapsedTimer::start()
 	{
 #if defined(_WIN32)
 		startInit = timeGetTime();
+#elif defined(__APPLE__)
+		startInit = mach_absolute_time();
 #else
 		clock_gettime(CLOCK_MONOTONIC, &startInit);
 #endif
@@ -84,6 +92,12 @@ void ElapsedTimer::pause()
 #if defined(_WIN32)
 	endInit = timeGetTime();
 	elapsedTime += (endInit - startInit) * 1e6;
+#elif defined(__APPLE__)
+	endInit = mach_absolute_time();
+	uint64_t duration = endInit - startInit;
+	duration *= machTimeInfo.numer;
+	duration /= machTimeInfo.denom;
+	elapsedTime += duration;
 #else
 	clock_gettime(CLOCK_MONOTONIC, &endInit);
 	int sec = endInit.tv_sec - startInit.tv_sec;

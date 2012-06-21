@@ -3,10 +3,21 @@
 
 #include <string>
 #include <vector>
-#include <unordered_map>
-#include <unordered_set>
+#if defined(ANDROID)
+#	include <unordered_map>
+#	include <unordered_set>
+#elif defined(__APPLE__)
+#	include <tr1/unordered_map>
+#	include <tr1/unordered_set>
+#else
+#	include <unordered_map>
+#	include <unordered_set>
+#endif
 #include <stdint.h>
-#include <cstdint>
+
+#if defined(__APPLE__)
+#	include <mach/mach_time.h>|
+#endif
 
 #include <SkPath.h>
 #include <SkBitmap.h>
@@ -17,14 +28,18 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #if !defined(M_PI)
-const double M_PI = 3.14159265358979323846;
+	const double M_PI = 3.14159265358979323846;
 #endif
 #if !defined(M_PI_2)
-const double M_PI_2 = M_PI / 2.0;
+	const double M_PI_2 = M_PI / 2.0;
 #endif
 
 // Wrapper for unordered classes
 #if defined(ANDROID)
+#	define UNORDERED_NAMESPACE std::tr1
+#	define UNORDERED_map unordered_map
+#	define UNORDERED_set unordered_set
+#elif defined(__APPLE__)
 #	define UNORDERED_NAMESPACE std::tr1
 #	define UNORDERED_map unordered_map
 #	define UNORDERED_set unordered_set
@@ -60,6 +75,10 @@ private:
 #if defined(_WIN32)
 	DWORD startInit;
 	DWORD endInit;
+#elif defined(__APPLE__)
+	mach_timebase_info_data_t machTimeInfo;
+	uint64_t startInit;
+	uint64_t endInit;
 #else
 	timespec startInit;
 	timespec endInit;

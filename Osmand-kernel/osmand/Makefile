@@ -6,12 +6,10 @@ LOCAL_PATH = .
 include Common.mk
 
 OSMAND_FLAGS = \
-	-std=c++0x \
 	-DGOOGLE_PROTOBUF_NO_RTTI \
 	-DSK_ALLOW_STATIC_GLOBAL_INITIALIZERS=0 \
 	-DSK_RELEASE \
 	-DGR_RELEASE=1
-
 OSMAND_FLAGS_WINDOWS = \
 	-DSK_BUILD_FOR_WIN32 \
 	-DMINGW_HAS_SECURE_API \
@@ -21,14 +19,30 @@ OSMAND_FLAGS_WINDOWS = \
 	-DSK_SCALAR_IS_FLOAT \
 	-DSK_CAN_USE_FLOAT \
 	-DSK_CPU_LENDIAN
+OSMAND_FLAGS_MAC = \
+	-DSK_BUILD_FOR_MAC \
+	-DSK_USE_CORETEXT \
+	-DSkUserConfig_DEFINED \
+	-DPICTURE_VERSION_ICS=1 \
+	-DPICTURE_VERSION_JB=2 \
+	-DSK_SCALAR_IS_FLOAT \
+	-DSK_CAN_USE_FLOAT \
+	-DSK_CPU_LENDIAN
 
 LIBNAME = $(LIBRARY_PREFIX)osmand
 LIBTYPE = $(DYNAMICLIB_EXT)
-LDLIBS += -Wl,-Bsymbolic -Wl,--whole-archive -lskia  -lpng -Wl,--no-whole-archive -lproto -lft2 -lexpat -lz 
+ifeq ($(TARGET),darwin)
+	LDLIBS += --whole-archive -lskia --no-whole-archive -lproto -lft2 -lexpat -lpng -lz 
+else
+	LDLIBS += -Wl,-Bsymbolic -Wl,--whole-archive -lskia  -lpng -Wl,--no-whole-archive -lproto -lft2 -lexpat -lpng -lz 
+endif
 
 ifeq ($(TARGET),windows)
 	LDLIBS += -lwinmm -lgdi32 -lusp10
 	OSMAND_FLAGS += $(OSMAND_FLAGS_WINDOWS)
+else ifeq ($(TARGET),darwin)
+	OSMAND_FLAGS += $(OSMAND_FLAGS_MAC)
+	LDLIBS += -framework CoreText -lpthread
 else ifeq ($(TARGET),nacl)
 	LDLIBS += -lpthread
 else
@@ -40,6 +54,11 @@ ifeq ($(TARGET),nacl)
 		-DRT_NOT_SUPPORTED
 	LOCAL_SRC_FILES += \
 		src/osmand_nacl.cpp
+else ifeq ($(TARGET),darwin)
+	LOCAL_SRC_FILES += \
+		src/java_wrap.cpp
+		
+	OSMAND_FLAGS += -I"$(JAVA_HOME)"
 else 
 	LOCAL_SRC_FILES += \
 		src/java_wrap.cpp
