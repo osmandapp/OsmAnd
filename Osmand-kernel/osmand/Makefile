@@ -34,7 +34,7 @@ LIBTYPE = $(DYNAMICLIB_EXT)
 ifeq ($(TARGET),darwin)
 	LDLIBS += --whole-archive -lskia --no-whole-archive -lproto -lft2 -lexpat -lpng -lz 
 else
-	LDLIBS += -Wl,-Bsymbolic -Wl,--whole-archive -lskia  -lpng -Wl,--no-whole-archive -lproto -lft2 -lexpat -lpng -lz 
+	LDLIBS += -Wl,--whole-archive -lskia -Wl,--no-whole-archive -lproto -lft2 -lexpat -lpng -lz 
 endif
 
 ifeq ($(TARGET),windows)
