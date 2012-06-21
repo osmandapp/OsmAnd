@@ -18,7 +18,6 @@
 	<string name="online_map_settings_descr">Konfiguration von online oder gecachten Kachel-Kartenquellen</string>
 	<string name="map_settings">- Karten-Einstellungen</string>
 	<string name="map_settings_descr">Konfigurieren der Karten-Anzeige</string>
-	
 	<string name="osmand_rastermaps_plugin_description">Zeigt Einstellungen für die Verwendung von online oder gecachter Kachel-Kartenquellen, auch als Overlay- oder Underlay. Solche Karten können auch offline erstellt und in das OsmAnd-Verzeichnis kopiert werden.</string>
 	<string name="osmand_background_plugin_description">Zeigt Einstellungen für das Positions-Logging oder die Navigation während das Gerät im Standby-Modus ist (periodisches Aufwecken des GPS-Empfängers).</string>
 	<string name="osmand_accessibility_description">Zeigt Einstellungen für spezielle Barrierefreiheits-Erweiterungen.</string>
@@ -160,7 +159,7 @@
 	<string name="profile_settings">Profilspezifische Einstellungen</string>
 	<string name="settings_preset">Nutzerprofil</string>
 	<string name="settings_preset_descr">Karten- und Navigations-Einstellungen werden je Verwendungszweck separat gespeichert.</string>
-	<string name="monitor_preferences">Positions-Logging</string>
+	<string name="monitor_preferences">- Positions-Logging</string>
 	<string name="monitor_preferences_descr">Positions-Logging konfigurieren</string>
 	<string name="routing_settings">- Navigation</string>
 	<string name="routing_settings_descr">Navigationsoptionen</string>
@@ -729,13 +728,7 @@
 	<string name="settings_Button">Einstellungen</string>
 	<string name="favorites_Button">Favoriten</string>
 	<string name="search_button">Suche</string>
-	<color name="menu_background">#FF9030</color>
-	<color name="color_light_gray">#d7d7d7</color>
-	<color name="color_black">#000000</color>
-	<color name="color_transparent">#00000000</color>
 	<string name="search_activity">Suche</string>
-	<color name="color_white">#FFFFFF</color>
-	<color name="color_red">#FF0000</color>
 	<string name="searchpoi_activity">POI wählen</string>
 	<string name="search_POI_level_btn">Finde mehr</string>
 	<string name="incremental_search_city">Suche Stadt inkrementell. Um Städte/Postleitzahlen zu finden mindestens 3 Zeichen eingeben.</string>

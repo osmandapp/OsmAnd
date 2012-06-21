@@ -562,13 +562,7 @@
   <string name="settings_Button">Ustawienia</string>
   <string name="favorites_Button">Ulubione</string>
   <string name="search_button">Szukaj</string>
-  <color name="menu_background">#FF9030</color>
-  <color name="color_light_gray">#d7d7d7</color>
-  <color name="color_black">#000000</color>
-  <color name="color_transparent">#00000000</color>
   <string name="search_activity">Szukaj</string>
-  <color name="color_white">#FFFFFF</color>
-  <color name="color_red">#FF0000</color>
   <string name="searchpoi_activity">Wybierz POI</string>
   <string name="search_POI_level_btn">Znajdź więcej</string>
   <string name="incremental_search_city">Znajdź miejscowość. Aby wyszukać kod pocztowy wprowadź pierwsze 3 (lub więcej) cyfry.</string>

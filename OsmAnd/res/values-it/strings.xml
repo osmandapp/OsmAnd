@@ -604,13 +604,7 @@
   <string name="settings_Button">Impostazioni</string>
   <string name="favorites_Button">Preferiti</string>
   <string name="search_button">Ricerca</string>
-  <color name="menu_background">#FF9030</color>
-  <color name="color_light_gray">#d7d7d7</color>
-  <color name="color_black">#000000</color>
-  <color name="color_transparent">#00000000</color>
   <string name="search_activity">Ricerca</string>
-  <color name="color_white">#FFFFFF</color>
-  <color name="color_red">#FF0000</color>
   <string name="searchpoi_activity">Scegli PDI</string>
   <string name="search_POI_level_btn">Trovarne altri</string>
   <string name="incremental_search_city">Ricerca della città in modo incrementale. Per cercare paesi/CAP inserire più di tre caratteri.</string>

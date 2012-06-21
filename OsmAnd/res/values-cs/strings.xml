@@ -687,10 +687,7 @@
   <string name="settings_Button">Nastavení</string>
   <string name="favorites_Button">Oblíbené</string>
   <string name="search_button">Hledat</string>
-  <color name="menu_background">#FF9030</color>
   <string name="search_activity">Hledat</string>
-  <color name="color_white">#FFFFFF</color>
-  <color name="color_red">#FF0000</color>
   <string name="searchpoi_activity">Zvolit POI</string>
   <string name="search_POI_level_btn">Najít další</string>
   <string name="incremental_search_city">Pro nalezení místa/PSČ zadejte první 3 znaky nebo více.</string>

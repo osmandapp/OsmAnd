@@ -669,13 +669,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <string name="settings_Button">Thiết lập</string>
 <string name="favorites_Button">Ưa thích</string>
 <string name="search_button">Tìm kiếm</string>
-<color name="menu_background">#FF9030</color>
-<color name="color_light_gray">#d7d7d7</color>
-<color name="color_black">#000000</color>
-<color name="color_transparent">#00000000</color>
 <string name="search_activity">Tìm kiếm</string>
-<color name="color_white">#FFFFFF</color>
-<color name="color_red">#FF0000</color>
 <string name="searchpoi_activity">Chọn POI</string>
 <string name="search_POI_level_btn">Tìm thêm</string>
 <string name="incremental_search_city">Tìm tên thành phố tăng dần. Để tìm thị trấn/mã bưu điện, nhập 3 kí tự đầu tiên.</string>

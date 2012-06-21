@@ -713,10 +713,7 @@
   <string name="settings_Button">Nastavenia</string>
   <string name="favorites_Button">Obľúbené</string>
   <string name="search_button">Hľadať</string>
-  <color name="menu_background">#FF9030</color>
   <string name="search_activity">Hľadať</string>
-  <color name="color_white">#FFFFFF</color>
-  <color name="color_red">#FF0000</color>
   <string name="searchpoi_activity">Vybrať POI</string>
   <string name="search_POI_level_btn">Nájsť viac</string>
   <string name="incremental_search_city">Hľadať mestá vzostupne. Pre nájdenie miest/PSČ, zadajte prvých 3 alebo viac znakov.</string>

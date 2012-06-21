@@ -643,10 +643,7 @@
   <string name="settings_Button">Настройки</string>
   <string name="favorites_Button">Избранное</string>
   <string name="search_button">Поиск</string>
-  <color name="menu_background">#FF9030</color>
   <string name="search_activity">Поиск</string>
-  <color name="color_white">#FFFFFF</color>
-  <color name="color_red">#FF0000</color>
   <string name="searchpoi_activity">Выберите poi</string>
   <string name="search_POI_level_btn">Найти еще</string>
   <string name="incremental_search_city">Выберите город. Введите 3 первых буквы, чтобы найти деревню, 2 цифры - индекс.</string>
