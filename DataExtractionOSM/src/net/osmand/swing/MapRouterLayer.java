@@ -630,7 +630,7 @@ public class MapRouterLayer implements MapPanelLayer {
 
 				});
 				
-				List<RouteSegmentResult> searchRoute = router.searchRoute(ctx, st, e);
+				List<RouteSegmentResult> searchRoute = router.searchRoute(ctx, st, e, false);
 				if (animateRoutingCalculation) {
 					playPauseButton.setVisible(false);
 					nextTurn.setText("FINISH");

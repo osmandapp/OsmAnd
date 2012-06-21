@@ -39,6 +39,7 @@ import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
+import net.osmand.router.TurnType;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -505,7 +506,7 @@ public class RouteProvider {
 			return new RouteCalculationResult("End point is far from allowed road.");
 		}
 		try {
-			List<RouteSegmentResult> result = router.searchRoute(ctx, st, en);
+			List<RouteSegmentResult> result = router.searchRoute(ctx, st, en, leftSide);
 			return new RouteCalculationResult(result, start, end, app, leftSide);
 		} catch (OutOfMemoryError e) {
 			return new RouteCalculationResult("Not enough process memory");

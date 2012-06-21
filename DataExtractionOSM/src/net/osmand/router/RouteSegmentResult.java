@@ -18,6 +18,8 @@ public class RouteSegmentResult {
 	private float speed;
 	private float distance;
 	private String description = "";
+	// this make not possible to make turns in between segment result for now
+	private TurnType turnType;
 	
 	@SuppressWarnings("unchecked")
 	public RouteSegmentResult(RouteDataObject object, int startPointIndex, int endPointIndex) {
@@ -45,6 +47,13 @@ public class RouteSegmentResult {
 		return list;
 	}
 	
+	public TurnType getTurnType() {
+		return turnType;
+	}
+	
+	public void setTurnType(TurnType turnType) {
+		this.turnType = turnType;
+	}
 	
 	public RouteDataObject getObject() {
 		return object;

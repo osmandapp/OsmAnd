@@ -4,6 +4,7 @@ import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
+import net.osmand.router.TurnType;
 import android.content.Context;
 import android.location.Location;
 

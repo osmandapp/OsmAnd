@@ -10,6 +10,7 @@ import net.osmand.osm.MapUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.router.TurnType;
 import android.content.Context;
 import android.location.Location;
 
@@ -43,6 +44,35 @@ public class RouteCalculationResult {
 		}
 		
 	}
+	
+	public String toString(TurnType type, Context ctx) {
+		if(type.isRoundAbout()){
+			return ctx.getString(R.string.route_roundabout, type.getExitOut());
+		} else if(type.getValue().equals(TurnType.C)) {
+			return ctx.getString(R.string.route_head);
+		} else if(type.getValue().equals(TurnType.TSLL)) {
+			return ctx.getString(R.string.route_tsll);
+		} else if(type.getValue().equals(TurnType.TL)) {
+			return ctx.getString(R.string.route_tl);
+		} else if(type.getValue().equals(TurnType.TSHL)) {
+			return ctx.getString(R.string.route_tshl);
+		} else if(type.getValue().equals(TurnType.TSLR)) {
+			return ctx.getString(R.string.route_tslr);
+		} else if(type.getValue().equals(TurnType.TR)) {
+			return ctx.getString(R.string.route_tr);
+		} else if(type.getValue().equals(TurnType.TSHR)) {
+			return ctx.getString(R.string.route_tshr);
+		} else if(type.getValue().equals(TurnType.TU)) {
+			return ctx.getString(R.string.route_tu);
+		} else if(type.getValue().equals(TurnType.TRU)) {
+			return ctx.getString(R.string.route_tu);
+		} else if(type.getValue().equals(TurnType.KL)) {
+			return ctx.getString(R.string.route_kl);
+		} else if(type.getValue().equals(TurnType.KR)) {
+			return ctx.getString(R.string.route_kr);
+		}
+		return "";
+	}
 
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, 
 			Context ctx, boolean leftSide) {
@@ -50,6 +80,8 @@ public class RouteCalculationResult {
 		this.errorMessage = null;
 		this.locations = new ArrayList<Location>();
 
+		float prevDirectionTime = 0;
+		float prevDirectionDistance = 0;
 		for (int routeInd = 0; routeInd < list.size(); routeInd++) {
 			RouteSegmentResult s = list.get(routeInd);
 			boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
@@ -74,55 +106,29 @@ public class RouteCalculationResult {
 					i--;
 				}
 			}
-			TurnType turn;
-			String description;
-			if (routeInd == 0) {
-				turn = TurnType.valueOf(TurnType.C, leftSide);
-				description = ctx.getString(R.string.route_head);
-			} else {
-				RouteSegmentResult prev = list.get(routeInd - 1);
-				double mpi = MapUtils.degreesDiff(prev.getBearingEnd(), s.getBearingBegin());
-				
-				turn = TurnType.valueOf(TurnType.C, leftSide);
-				description = ctx.getString(R.string.route_head);
-				if(mpi >= 50) {
-					if(mpi < 60) {
-						turn = TurnType.valueOf(TurnType.TSLL, leftSide);
-						description = ctx.getString(R.string.route_tsll);
-					} else if(mpi < 120) {
-						turn = TurnType.valueOf(TurnType.TL, leftSide);
-						description = ctx.getString(R.string.route_tl);
-					} else if(mpi < 135) {
-						turn = TurnType.valueOf(TurnType.TSHL, leftSide);
-						description = ctx.getString(R.string.route_tshl);
-					} else {
-						turn = TurnType.valueOf(TurnType.TU, leftSide);
-						description = ctx.getString(R.string.route_tu);
-					}
-				} else if (mpi < - 50){
-					if(mpi > - 60) {
-						turn = TurnType.valueOf(TurnType.TSLR, leftSide);
-						description = ctx.getString(R.string.route_tslr);
-					} else if(mpi > - 120) {
-						turn = TurnType.valueOf(TurnType.TR, leftSide);
-						description = ctx.getString(R.string.route_tr);
-					} else if(mpi > - 135) {
-						turn = TurnType.valueOf(TurnType.TSHR, leftSide);
-						description = ctx.getString(R.string.route_tshr);
-					} else {
-						turn = TurnType.valueOf(TurnType.TU, leftSide);
-						description = ctx.getString(R.string.route_tu);
-					}
-				}
-			}
-			if(routeInd == 0 || !turn.getValue().equals(TurnType.C)) {
-				// TODO correlate speed (weight sum) when next turn type is C 
+			TurnType turn = s.getTurnType();
+
+			if(turn != null) {
 				RouteDirectionInfo info = new RouteDirectionInfo(s.getSegmentSpeed(), turn);
-				info.setDescriptionRoute(description +  " " + 
-						OsmAndFormatter.getFormattedDistance(s.getDistance(), ctx));
+				String description = toString(turn, ctx);
+				info.setDescriptionRoute(description);
 				info.routePointOffset = prevLocationSize;
+				if(directions.size() > 0 && prevDirectionTime > 0 && prevDirectionDistance > 0) {
+					RouteDirectionInfo prev = directions.get(directions.size() - 1);
+					prev.setAverageSpeed(prevDirectionDistance / prevDirectionTime);
+					prev.setDescriptionRoute(prev.getDescriptionRoute() + " " + OsmAndFormatter.getFormattedDistance(prevDirectionDistance, ctx));
+					prevDirectionDistance = 0;
+					prevDirectionTime = 0;
+				}
 				directions.add(info);
 			}
+			prevDirectionDistance += s.getDistance();
+			prevDirectionTime += s.getSegmentTime();
+		}
+		if(directions.size() > 0 && prevDirectionTime > 0 && prevDirectionDistance > 0) {
+			RouteDirectionInfo prev = directions.get(directions.size() - 1);
+			prev.setAverageSpeed(prevDirectionDistance / prevDirectionTime);
+			prev.setDescriptionRoute(prev.getDescriptionRoute() + " " + OsmAndFormatter.getFormattedDistance(prevDirectionDistance, ctx));
 		}
 		introduceFirstPoint(start);
 		updateListDistanceTime();

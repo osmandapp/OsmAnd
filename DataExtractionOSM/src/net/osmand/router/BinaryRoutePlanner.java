@@ -172,7 +172,7 @@ public class BinaryRoutePlanner {
 	 * Calculate route between start.segmentEnd and end.segmentStart (using A* algorithm)
 	 * return list of segments
 	 */
-	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, RouteSegment start, RouteSegment end) throws IOException {
+	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, RouteSegment start, RouteSegment end, boolean leftSideNavigation) throws IOException {
 		// measure time
 		ctx.timeToLoad = 0;
 		ctx.visitedSegments = 0;
@@ -281,7 +281,7 @@ public class BinaryRoutePlanner {
 		printDebugMemoryInformation(ctx, graphDirectSegments, graphReverseSegments, visitedDirectSegments, visitedOppositeSegments);
 		
 		// 4. Route is found : collect all segments and prepare result
-		return prepareResult(ctx, start, end);
+		return prepareResult(ctx, start, end, leftSideNavigation);
 		
 	}
 	
@@ -806,7 +806,7 @@ public class BinaryRoutePlanner {
 	/**
 	 * Helper method to prepare final result 
 	 */
-	private List<RouteSegmentResult> prepareResult(RoutingContext ctx, RouteSegment start, RouteSegment end) {
+	private List<RouteSegmentResult> prepareResult(RoutingContext ctx, RouteSegment start, RouteSegment end, boolean leftside) {
 		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
 		
 		RouteSegment segment = ctx.finalReverseRoute;
@@ -861,22 +861,26 @@ public class BinaryRoutePlanner {
 			completeTime += distOnRoadToPass;
 			completeDistance += distance;
 		}
-		for (int i = 0; i < result.size(); i++) {
-			result.get(i).setDescription(getDescription(result, i));
-		}
-		// update distance description
-		int toUpdate = 0;
-		for (int i = 1; i < result.size(); i++) {
-			if (result.get(i).getDescription().length() != 0) {
-				float dist = 0;
-				for (int j = toUpdate; j < i; j++) {
-					dist += result.get(j).getDistance();
+		int toUpdate = -1;
+		float dist = 0;
+		for (int i = 0; i <= result.size(); i++) {
+			TurnType t = null;
+			if (i < result.size()) {
+				t = getTurnInfo(result, i, leftside);
+				result.get(i).setTurnType(t);
+			}
+			if (t != null || i == result.size()) {
+				if (toUpdate >= 0) {
+					result.get(toUpdate).setDescription(
+							result.get(toUpdate).getTurnType().toString() + String.format(" and go %.2f meters", dist));
 				}
-				result.get(toUpdate).setDescription(result.get(toUpdate).getDescription() + String.format(" %.2f meters", dist));
 				toUpdate = i;
+				dist = 0;
+			}
+			if ( i < result.size()) {
+				dist += result.get(i).getDistance();
 			}
 		}
-		
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
 			println("ROUTE : ");
 			double startLat = MapUtils.get31LatitudeY(start.road.getPoint31YTile(start.segmentStart));
@@ -903,20 +907,22 @@ public class BinaryRoutePlanner {
 	}
 
 
-	private String getDescription(List<RouteSegmentResult> result, int i) {
+	private TurnType getTurnInfo(List<RouteSegmentResult> result, int i, boolean leftSide) {
 		if (i == 0) {
-			return "Go ahead ";
+			return TurnType.valueOf(TurnType.C, false);
 		}
 		RouteSegmentResult prev = result.get(i - 1) ;
 		if(prev.getObject().roundabout()) {
-			return "";
+			return null;
 		}
 		RouteSegmentResult rr = result.get(i);
 		if (rr.getObject().roundabout()) {
 			int exit = 1;
+			RouteSegmentResult last = rr;
 			for (int j = i; j < result.size(); j++) {
 				RouteSegmentResult rnext = result.get(j);
 				if (rnext.getObject().roundabout()) {
+					last = rnext;
 					boolean plus = rnext.getStartPointIndex() < rnext.getEndPointIndex();
 					int k = rnext.getStartPointIndex();
 					if (j == i) {
@@ -933,31 +939,34 @@ public class BinaryRoutePlanner {
 				}
 			}
 			// combine all roundabouts
-			return "Round (exit " + exit + ") and go  ";
+			TurnType t = TurnType.valueOf("EXIT"+exit, leftSide);
+			t.setTurnAngle((float) MapUtils.degreesDiff(last.getBearingBegin(), prev.getBearingEnd()));
+			return t;
 		}
-		String description = "";
+		TurnType t = null;
 		if (prev != null) {
 			// add description about turn
 			double mpi = MapUtils.degreesDiff(prev.getBearingEnd(), rr.getBearingBegin());
+			
 			if (mpi >= 50) {
 				if (mpi < 60) {
-					description = "Turn slightly left and go";
+					t = TurnType.valueOf(TurnType.TSLL, leftSide);
 				} else if (mpi < 120) {
-					description = "Turn left and go";
+					t = TurnType.valueOf(TurnType.TL, leftSide);
 				} else if (mpi < 135) {
-					description = "Turn sharply left and go";
+					t = TurnType.valueOf(TurnType.TSHL, leftSide);
 				} else {
-					description = "Make uturn and go";
+					t = TurnType.valueOf(TurnType.TU, leftSide);
 				}
 			} else if (mpi < -50) {
 				if (mpi > -60) {
-					description = "Turn slightly right and go";
+					t = TurnType.valueOf(TurnType.TSLR, leftSide);
 				} else if (mpi > -120) {
-					description = "Turn right and go";
+					t = TurnType.valueOf(TurnType.TR, leftSide);
 				} else if (mpi > -135) {
-					description = "Turn right left and go";
+					t = TurnType.valueOf(TurnType.TSHR, leftSide);
 				} else {
-					description = "Make uturn and go";
+					t = TurnType.valueOf(TurnType.TU, leftSide);
 				}
 			} else {
 				// keep left/right
@@ -967,21 +976,24 @@ public class BinaryRoutePlanner {
 				if(attachedRoutes != null){
 					for(RouteSegmentResult rs : attachedRoutes){
 						double ex = MapUtils.degreesDiff(rs.getBearingBegin(), rr.getBearingBegin());
-						if(ex < 40 && ex >= 0) {
+						if(ex < 30 && ex >= 0) {
 							kl = true;
-						} else if(ex > -40 && ex <= 0) {
+						} else if(ex > -30 && ex <= 0) {
 							kr = true;
 						}
 					}
 				}
 				if (kl) {
-					description = "Keep left and go";
+					t = TurnType.valueOf(TurnType.KL, leftSide);
 				} else if(kr){
-					description = "Keep right and go";
+					t = TurnType.valueOf(TurnType.KR, leftSide);
 				}
 			}
+			if(t != null) {
+				t.setTurnAngle((float) -mpi);
+			}
 		}
-		return description;
+		return t;
 	}
 
 

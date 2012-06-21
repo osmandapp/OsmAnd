@@ -9,6 +9,9 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="route_roundabout">Roundabout : take %1$d exit</string>
+    <string name="route_kl">Keep left</string>
+	<string name="route_kr">Keep right</string>
     <string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string>
     <string name="rendering_attr_noPolygons_name">No polygons</string>
     <string name="rendering_attr_appMode_name">Rendering mode</string>

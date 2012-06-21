@@ -8,7 +8,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.TurnType;
+import net.osmand.router.TurnType;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;

@@ -1,4 +1,4 @@
-package net.osmand.plus.routing;
+package net.osmand.router;
 
 public class TurnType {
 	public static final String C = "C"; // continue (go straight) //$NON-NLS-1$
@@ -74,5 +74,35 @@ public class TurnType {
 
 	public boolean isRoundAbout() {
 		return value.equals("EXIT"); //$NON-NLS-1$
+	}
+	
+	@Override
+	public String toString() {
+		if(isRoundAbout()){
+			return "Take " + getExitOut() + " exit";
+		} else if(value.equals(C)) {
+			return "Go ahead";
+		} else if(value.equals(TSLL)) {
+			return "Turn slightly left";
+		} else if(value.equals(TL)) {
+			return "Turn left";
+		} else if(value.equals(TSHL)) {
+			return "Turn sharply left";
+		} else if(value.equals(TSLR)) {
+			return "Turn slightly right";
+		} else if(value.equals(TR)) {
+			return "Turn right";
+		} else if(value.equals(TSHR)) {
+			return "Turn sharply right";
+		} else if(value.equals(TU)) {
+			return "Make uturn";
+		} else if(value.equals(TRU)) {
+			return "Make uturn";
+		} else if(value.equals(KL)) {
+			return "Keep left";
+		} else if(value.equals(KR)) {
+			return "Keep right";
+		}
+		return super.toString();
 	}
 }

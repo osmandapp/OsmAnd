@@ -100,7 +100,7 @@ public class RouterTestsSuite {
 			throw new IllegalArgumentException("End segment is not found for test : " + testDescription);
 		}
 		
-		List<RouteSegmentResult> route = planner.searchRoute(ctx, startSegment, endSegment);
+		List<RouteSegmentResult> route = planner.searchRoute(ctx, startSegment, endSegment, false);
 		
 		
 		NodeList segments = testCase.getElementsByTagName("segment");

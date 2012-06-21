@@ -1,5 +1,7 @@
 package net.osmand.plus.routing;
 
+import net.osmand.router.TurnType;
+
 public class RouteDirectionInfo {
 	// location when you should action (turn or go ahead)
 	public int routePointOffset;

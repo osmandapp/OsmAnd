@@ -1,7 +1,7 @@
 package net.osmand.plus.activities;
 
-import android.app.Activity;
 import net.osmand.plus.activities.search.SearchActivity;
+import android.app.Activity;
 
 public class OsmandIntents {
 	
