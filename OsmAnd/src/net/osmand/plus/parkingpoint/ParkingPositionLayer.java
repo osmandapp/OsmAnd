@@ -120,7 +120,8 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		double longitude = parkingPoint.getLongitude();
 		if (isLocationVisible(latitude, longitude)) {
 			int marginX = parkingNoLimitIcon.getWidth() / 2;
-			int marginY = 2 * parkingNoLimitIcon.getHeight() / 3;
+//			TODO tune y
+			int marginY = 5 * parkingNoLimitIcon.getHeight() / 6;
 			int locationX = view.getMapXForPoint(longitude);
 			int locationY = view.getMapYForPoint(latitude);
 			canvas.rotate(-view.getRotate(), locationX, locationY);

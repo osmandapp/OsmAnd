@@ -9,12 +9,14 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osmand_parking_time_limit">Time-limited parking</string>
+    <string name="osmand_parking_time_no_limit">Time-unlimited parking</string>
     <string name="osmand_parking_position_description">The position of your parked car.</string>
     <string name="osmand_parking_position_name">Parking point</string>
     <string name="osmand_parking_plugin_description">This plugin allows to store the location of your parked car.</string>
     <string name="osmand_parking_plugin_name">Parking Position Plugin</string>
-    <string name="context_menu_item_add_parking_point">Add location of a parked car</string>
-	<string name="context_menu_item_delete_parking_point">Delete location of a parked car</string>
+    <string name="context_menu_item_add_parking_point">Mark as a parking position</string>
+	<string name="context_menu_item_delete_parking_point">Delete a parking marker</string>
  
     <string name="offline_navigation_not_available">Osmand offline navigation is temporarily not available.</string>
     <string name="left_side_navigation">Left-Hand Driving</string>

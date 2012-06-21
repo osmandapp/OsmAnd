@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <ImageButton
+        android:id="@+id/parking_no_lim_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="50dp"
+        android:contentDescription="@string/osmand_parking_time_no_limit"
+        android:background="@drawable/parking_no_limit_button" />
+
+    <ImageButton
+        android:id="@+id/parking_lim_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="40dp"
+        android:contentDescription="@string/osmand_parking_time_limit"
+        android:layout_toRightOf="@+id/parking_no_lim_button"
+        android:background="@drawable/parking_limit_button" />
+
+</RelativeLayout>

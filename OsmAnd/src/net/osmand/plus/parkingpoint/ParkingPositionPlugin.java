@@ -11,7 +11,8 @@ import net.osmand.plus.views.OsmandMapTileView;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
-import android.widget.Button;
+import android.view.View;
+import android.widget.ImageButton;
 
 /**
  * 
@@ -91,33 +92,36 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * Method creates confirmation dialog for deletion of a parking location 
 	 */
 	public void showAddParkingDialog(final MapActivity mapActivity, final double latitude, final double longitude) {
+		final View addParking = mapActivity.getLayoutInflater().inflate(R.layout.choose_type_of_parking, null);
 		Builder choose = new AlertDialog.Builder(mapActivity);
-		choose.setTitle("Add parking location");
-//		choose.setMessage("Choose the type of your parking (time-limited or unlimited)?");		
-		
-//		Button limitButton= (Button)mapActivity.findViewById();
-//		limitButton.setBackgroundResource(R.drawable.poi_parking_pos_no_limit_menu_pushed);		
-//		Button unLimitButton= (Button)mapActivity.findViewById();
-		
-		choose.setItems(
-				new String[]{ "Time-limited parking position", "Time-unlimited parking position"}, 
-				new DialogInterface.OnClickListener() {
+		choose.setView(addParking);
+		choose.setTitle("Choose the type of parking");
+
+		ImageButton limitButton= (ImageButton) addParking.findViewById(R.id.parking_lim_button);
+		limitButton.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				if (which == 1) {
-					settings.setParkingPosition(latitude, longitude);
-					if (mapActivity.getMapView().getLayers().contains(parkingLayer))
-						parkingLayer.setParkingPoint(settings.getParkingPosition());
-				} else if (which == 0) {
-//					TODO
-					
-				}
+			public void onClick(View v) {
+				settings.setParkingPosition(latitude, longitude);
+				settings.setParkingTimeLimit(1);
+				if (mapActivity.getMapView().getLayers().contains(parkingLayer))
+					parkingLayer.setParkingPoint(settings.getParkingPosition());
 			}
 		});
-//		choose.setPositiveButton(R.string.default_buttons_yes, null);
-//		choose.setNegativeButton(R.string.default_buttons_cancel, null);
+		
+		ImageButton noLimitButton= (ImageButton)addParking.findViewById(R.id.parking_no_lim_button);		
+		noLimitButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				settings.setParkingPosition(latitude, longitude);
+				settings.setParkingTimeLimit(-1);
+				if (mapActivity.getMapView().getLayers().contains(parkingLayer))
+					parkingLayer.setParkingPoint(settings.getParkingPosition());
+			}
+		});
 		choose.create();
 		choose.show();
+	
 	}
 
 }
