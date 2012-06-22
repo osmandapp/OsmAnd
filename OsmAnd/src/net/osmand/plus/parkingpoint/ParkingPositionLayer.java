@@ -63,7 +63,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	
 	private TextInfoControl parkingPlaceControl;
 
-	private int timeLimit;
+	private boolean timeLimit;
 
 	public ParkingPositionLayer(MapActivity map) {
 		this.map = map;
@@ -106,10 +106,11 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
+//		settings.clearParkingPosition();
 		parkingPoint = settings.getParkingPosition();
-		timeLimit = settings.getParkingTimeLimit();
+		timeLimit = settings.getParkingType();
 		Bitmap parkingIcon;
-		if (timeLimit == -1) {
+		if (timeLimit) {
 			parkingIcon = parkingNoLimitIcon;
 		} else {
 			parkingIcon = parkingLimitIcon;

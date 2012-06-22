@@ -981,7 +981,9 @@ public class OsmandSettings {
 	 */
 	public final static String PARKING_POINT_LAT = "parking_point_lat"; //$NON-NLS-1$
 	public final static String PARKING_POINT_LON = "parking_point_lon"; //$NON-NLS-1$
-	public final static String PARKING_LIMIT_TIME = "parking_limit_time"; //$NON-NLS-1$
+	public final static String PARKING_TYPE = "parking_limit_time"; //$NON-NLS-1$
+	public final static String PARKING_TIME_HOUR = "parking_limit_hour"; //$//$NON-NLS-1$
+	public final static String PARKING_TIME_MINUTE = "parking_limit_minute"; //$//$NON-NLS-1$
 	
 	public LatLon getParkingPosition() {
 		float lat = globalPreferences.getFloat(PARKING_POINT_LAT, 0);
@@ -992,20 +994,36 @@ public class OsmandSettings {
 		return new LatLon(lat, lon);
 	}
 	
-	public int getParkingTimeLimit() {
-		return globalPreferences.getInt(PARKING_LIMIT_TIME, -1);
+	public boolean getParkingType() {
+		return globalPreferences.getBoolean(PARKING_TYPE, false);
+	}
+	
+	public int getParkingHour() {
+		return globalPreferences.getInt(PARKING_TIME_HOUR, -1);
+	}
+	
+	public int getParkingMinute() {
+		return globalPreferences.getInt(PARKING_TIME_MINUTE, -1);
 	}
 
 	public boolean clearParkingPosition() {
-		return globalPreferences.edit().remove(PARKING_POINT_LAT).remove(PARKING_POINT_LON).remove(PARKING_LIMIT_TIME).commit();
+		return globalPreferences.edit().remove(PARKING_POINT_LAT).remove(PARKING_POINT_LON).remove(PARKING_TYPE).remove(PARKING_TIME_HOUR).remove(PARKING_TIME_MINUTE).commit();
 	}
 
 	public boolean setParkingPosition(double latitude, double longitude) {
 		return globalPreferences.edit().putFloat(PARKING_POINT_LAT, (float) latitude).putFloat(PARKING_POINT_LON, (float) longitude).commit();
 	}
 	
-	public boolean setParkingTimeLimit(int limit) {
-		return globalPreferences.edit().putInt(PARKING_LIMIT_TIME, limit).commit();
+	public boolean setParkingType(boolean limited) {		
+		return globalPreferences.edit().putBoolean(PARKING_TYPE, limited).commit();
+	}
+	
+	public boolean setParkingHour(int hour) {		
+		return globalPreferences.edit().putInt(PARKING_TIME_HOUR, hour).commit();
+	}
+	
+	public boolean setParkingMinute(int minute) {		
+		return globalPreferences.edit().putInt(PARKING_TIME_MINUTE, minute).commit();
 	}
 	
 	public static final String LAST_SEARCHED_REGION = "last_searched_region"; //$NON-NLS-1$

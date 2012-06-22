@@ -13,6 +13,7 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TimePicker;
 
 /**
  * 
@@ -44,7 +45,14 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	
 	@Override
 	public String getDescription() {
-		return app.getString(R.string.osmand_parking_plugin_description);
+//		TODO
+		StringBuilder res = new StringBuilder();
+		res.append(app.getString(R.string.osmand_parking_plugin_description));
+		if (settings.getParkingType())
+			res.append(settings.getParkingHour());
+			res.append(" ");
+			res.append(settings.getParkingMinute());
+		return res.toString();
 	}
 	
 	@Override
@@ -96,15 +104,36 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		Builder choose = new AlertDialog.Builder(mapActivity);
 		choose.setView(addParking);
 		choose.setTitle("Choose the type of parking");
-
-		ImageButton limitButton= (ImageButton) addParking.findViewById(R.id.parking_lim_button);
+		
+		final AlertDialog create = choose.create();
+		
+		
+		ImageButton limitButton = (ImageButton) addParking.findViewById(R.id.parking_lim_button);
 		limitButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				create.dismiss();
 				settings.setParkingPosition(latitude, longitude);
-				settings.setParkingTimeLimit(1);
+				settings.setParkingType(true);				
 				if (mapActivity.getMapView().getLayers().contains(parkingLayer))
 					parkingLayer.setParkingPoint(settings.getParkingPosition());
+					
+					final View setTimeParking = mapActivity.getLayoutInflater().inflate(R.layout.set_time_of_parking, null);
+					Builder setTime = new AlertDialog.Builder(mapActivity);
+					setTime.setView(setTimeParking);
+					setTime.setTitle("Set the time limit of parking");
+					setTime.setNegativeButton(R.string.default_buttons_cancel, null);
+					setTime.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							create.dismiss();
+							TimePicker timePicker = (TimePicker)setTimeParking.findViewById(R.id.parkingTimePicker);
+							settings.setParkingHour(timePicker.getCurrentHour());
+							settings.setParkingMinute(timePicker.getCurrentMinute());
+						}
+					});
+					setTime.create();
+					setTime.show();
 			}
 		});
 		
@@ -113,13 +142,14 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			
 			@Override
 			public void onClick(View v) {
+				create.dismiss();
 				settings.setParkingPosition(latitude, longitude);
-				settings.setParkingTimeLimit(-1);
+				settings.setParkingType(false);
 				if (mapActivity.getMapView().getLayers().contains(parkingLayer))
 					parkingLayer.setParkingPoint(settings.getParkingPosition());
 			}
 		});
-		choose.create();
+
 		choose.show();
 	
 	}
