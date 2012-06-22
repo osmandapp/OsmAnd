@@ -47,7 +47,7 @@
   <!-- this block re-worked for new menu structure -->
   <string name="profile_settings">Paramètres de profil</string>
   <string name="settings_preset">Profil d\'utilisation</string>
-  <string name="settings_preset_descr">Sélectionner un profil d\'utilisation. (Pour chaque profil, il est possible de configurer une source de carte, le suivi et la navigation, voir plus bas.)</string>
+  <string name="settings_preset_descr">Sélectionner un profil d\'utilisation avec ses réglages de carte et de navigation.</string>
   <string name="monitor_preferences">Traces</string>
   <string name="monitor_preferences_descr">Configurer les paramètres d\'enregistrement du parcours</string>
   <string name="routing_settings">- Navigation</string>
@@ -329,8 +329,8 @@
   <string name="daynight_mode_sensor">Détection de la luminosité</string>
   <string name="daynight_descr">Définir les paramètres de changement jour/nuit</string>
   <string name="daynight">Mode Jour/Nuit</string>
-  <string name="download_files_question">Voulez vous télécharger {0} fichiers?</string>
-  <string name="items_were_selected">{0} objets sont sélectionnés</string>
+  <string name="download_files_question">Voulez vous télécharger {0} fichier(s) ({1} MB)?</string>
+  <string name="items_were_selected">{0} objet(s) sont sélectionnés</string>
   <string name="filter_existing_indexes">Filtre téléchargé</string>
   <string name="deselect_all">Désélectionner tout</string>
   <string name="select_all">Sélectionner tout</string>
@@ -826,4 +826,4 @@ navigate_point_format_D, DM & DMS
   <string name="navigate_point_format_D">DDD.DDDDD</string>
   <string name="navigate_point_format_DM">DDD MM.MMMMM</string>
   <string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
-<string name="local_index_routing_data">Données de navigation</string><string name="navigate_point_format">Format :</string><string name="poi_search_desc">Recherche dans POints d\'Intérêt</string><string name="address_search_desc">Recherche par adresse</string><string name="navpoint_search_desc">Coordonnées</string><string name="transport_search_desc">Recherche dans les transports</string><string name="favourites_search_desc">Recherche dans les favoris</string><string name="history_search_desc">Historique des recherches</string></resources>
+<string name="local_index_routing_data">Données de navigation</string><string name="navigate_point_format">Format :</string><string name="poi_search_desc">Recherche dans POints d\'Intérêt</string><string name="address_search_desc">Recherche par adresse</string><string name="navpoint_search_desc">Coordonnées</string><string name="transport_search_desc">Recherche dans les transports</string><string name="favourites_search_desc">Recherche dans les favoris</string><string name="history_search_desc">Historique des recherches</string><string name="route_roundabout">Roundabout : take %1$d exit</string><string name="route_kl">Keep left</string><string name="route_kr">Keep right</string><string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string><string name="rendering_attr_noPolygons_name">No polygons</string><string name="rendering_attr_appMode_name">Rendering mode</string><string name="rendering_attr_appMode_description">Map optimization for respective User Profile</string><string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate SRTM-file may be needed.</string><string name="rendering_attr_contourLines_name">Show contour lines</string><string name="rendering_attr_hmRendered_description">Increase amount of map detail shown</string><string name="rendering_attr_hmRendered_name">Show more map detail</string></resources>
