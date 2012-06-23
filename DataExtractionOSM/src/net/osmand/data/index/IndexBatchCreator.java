@@ -409,6 +409,7 @@ public class IndexBatchCreator {
 					String name = f.getName().substring(0, i);
 					File bmif = new File(skipExistingIndexes, name + "_" + IndexConstants.BINARY_MAP_VERSION
 							+ IndexConstants.BINARY_MAP_INDEX_EXT_ZIP);
+					log.info("Check if " + bmif.getAbsolutePath() + " exists");
 					if (bmif.exists()) {
 						continue;
 					}
