@@ -221,6 +221,11 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		
 		//produce
 		entityProducer.start();
+		try {
+			// wait a little before starting taking entities from queue
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+		}
 		
 		Entity entityToProcess = null;
 		Entity endEntity = entityProducer.getEndingEntity();
