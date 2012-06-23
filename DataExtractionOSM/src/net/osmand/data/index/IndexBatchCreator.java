@@ -480,14 +480,19 @@ public class IndexBatchCreator {
 					indexCreator.generateIndexes(f, new ConsoleProgressImplementation(1), null, mapZooms, types, warningsAboutMapData);
 				} finally {
 					if (fh != null) {
-						LogManager.getLogManager().getLogger("").removeHandler(fh);
 						fh.close();
+						LogManager.getLogManager().getLogger("").removeHandler(fh);
 					}
 				}
 				File generated = new File(workDir, mapFileName);
 				generated.renameTo(new File(indexDirFiles, generated.getName()));
-
-				logFileName.renameTo(new File(indexDirFiles, logFileName.getName()));
+				File copyLog = new File(indexDirFiles, logFileName.getName());
+				FileOutputStream fout = new FileOutputStream(copyLog);
+				FileInputStream fin = new FileInputStream(logFileName);
+				Algoritms.streamCopy(fin, fout);
+				fin.close();
+				fout.close();
+				//	logFileName.renameTo(new File(indexDirFiles, logFileName.getName()));
 				
 			} catch (Exception e) {
 				log.error("Exception generating indexes for " + f.getName(), e); //$NON-NLS-1$ 
