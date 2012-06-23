@@ -171,14 +171,15 @@ public class RoutingHelper {
 	}
 	
 	
-	public void setCurrentLocation(Location currentLocation) {
+	public Location setCurrentLocation(Location currentLocation) {
 		if (finalLocation == null || currentLocation == null) {
 			makeUturnWhenPossible = false;
-			return;
+			return null;
 		}
 
 		boolean calculateRoute = false;
 		synchronized (this) {
+			Location locationProjection = currentLocation;
 			// 0. Route empty or needs to be extended? Then re-calculate route.
 			if(route.isEmpty()) {
 				calculateRoute = true;
@@ -186,7 +187,7 @@ public class RoutingHelper {
 				// 1. Update current route position status according to latest received location
 				boolean finished = updateCurrentRouteStatus(currentLocation);
 				if (finished) {
-					return;
+					return null;
 				}
 				List<Location> routeNodes = route.locations;
 				int currentRoute = route.currentRoute;
@@ -198,6 +199,12 @@ public class RoutingHelper {
 					if (dist > 2 * POSITION_TOLERANCE) {
 						log.info("Recalculate route, because correlation  : " + dist); //$NON-NLS-1$
 						calculateRoute = true;
+					}
+					if(dist < POSITION_TOLERANCE / 2) {
+						LatLon project = getProject(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
+						// calculate projection of current location
+						locationProjection.setLatitude(project.getLatitude());
+						locationProjection.setLongitude(project.getLongitude());
 					}
 				}
 				// 3. Identify wrong movement direction (very similar to 2?)
@@ -215,16 +222,23 @@ public class RoutingHelper {
 					voiceRouter.updateStatus(currentLocation, uTurnIsNeeded);
 				}
 			}
-			lastFixedLocation = currentLocation;
+			lastFixedLocation = locationProjection;
 		}
 
 		if (calculateRoute) {
 			recalculateRouteInBackground(lastFixedLocation, finalLocation, currentGPXRoute);
 		}
+		return lastFixedLocation;
 	}
 
 	private double getOrthogonalDistance(Location loc, Location from, Location to) {
 		return MapUtils.getOrthogonalDistance(loc.getLatitude(),
+				loc.getLongitude(), from.getLatitude(), from.getLongitude(),
+				to.getLatitude(), to.getLongitude());
+	}
+	
+	private LatLon getProject(Location loc, Location from, Location to) {
+		return MapUtils.getProjection(loc.getLatitude(),
 				loc.getLongitude(), from.getLatitude(), from.getLongitude(),
 				to.getLatitude(), to.getLongitude());
 	}

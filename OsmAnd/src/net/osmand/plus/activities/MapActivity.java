@@ -737,7 +737,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 	}
 
-	public void setLocation(final Location location){
+	public void setLocation( Location location){
 		if(Log.isLoggable(LogUtil.TAG, Log.DEBUG)){
 			Log.d(LogUtil.TAG, "Location changed " + location.getProvider()); //$NON-NLS-1$
 		}
@@ -764,18 +764,17 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	
 		registerUnregisterSensor(location);
 		
-		mapLayers.getLocationLayer().setLastKnownLocation(location);
-		navigationInfo.setLocation(location);
 		if(routingHelper.isFollowingMode()){
 			if(location == null || !location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
-				// Update routing position  
-				routingHelper.setCurrentLocation(location);
+				// Update routing position and get location for sticking mode  
+				Location updatedLocation = routingHelper.setCurrentLocation(location);
+				location = updatedLocation;
 				// Check with delay that gps location is not lost
 				if(location != null && routingHelper.getLeftDistance() > 0){
+					final long fixTime = location.getTime();
 					Message msg = Message.obtain(uiHandler, new Runnable() {
 						@Override
 						public void run() {
-							long fixTime = location.getTime();
 							Location lastKnown = getLastKnownLocation();
 							if(lastKnown != null && lastKnown.getTime() - fixTime < LOST_LOCATION_CHECK_DELAY) {
 								// false positive case, still strange how we got here with removeMessages
@@ -792,6 +791,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				}
 			}
 		}
+		mapLayers.getLocationLayer().setLastKnownLocation(location);
+		navigationInfo.setLocation(location);
 	
 		if (location != null) {
 			if (isMapLinkedToLocation()) {

@@ -57,6 +57,10 @@ public class MapUtils {
 	}
 
 	public static double getOrthogonalDistance(double lat, double lon, double fromLat, double fromLon, double toLat, double toLon) {
+		return getDistance(getProjection(lat, lon, fromLat, fromLon, toLat, toLon), lat, lon);
+	}
+	
+	public static LatLon getProjection(double lat, double lon, double fromLat, double fromLon, double toLat, double toLon) {
 		// not very accurate computation on sphere but for distances < 1000m it is ok
 		double mDist = (fromLat - toLat) * (fromLat - toLat) + (fromLon - toLon) * (fromLon - toLon);
 		double projection = scalarMultiplication(fromLat, fromLon, toLat, toLon, lat, lon);
@@ -72,7 +76,7 @@ public class MapUtils {
 			prlat = fromLat + (toLat - fromLat) * (projection / mDist);
 			prlon = fromLon + (toLon - fromLon) * (projection / mDist);
 		}
-		return getDistance(lat, lon, prlat, prlon);
+		return new LatLon(prlat, prlon);
 	}
 	
 	
