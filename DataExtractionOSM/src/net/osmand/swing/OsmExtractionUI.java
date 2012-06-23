@@ -240,21 +240,25 @@ public class OsmExtractionUI implements IMapLocationListener {
 	}
 	
 	private void initNativeRendering() {
-		NativeSwingRendering lib = NativeSwingRendering.loadLibrary(
-				DataExtractionSettings.getSettings().getNativeLibFile());
-		if(lib != null) {
-			try {
-				lib.initFilesInDir(new File(DataExtractionSettings.getSettings().getBinaryFilesDir()));
-				lib.loadRuleStorage(DataExtractionSettings.getSettings().getRenderXmlPath());
-				mapPanel.setNativeLibrary(lib);
-				mapPanel.repaint();
-			} catch (SAXException e) {
-				log.error(e.getMessage(), e);
-				throw new RuntimeException(e);
-			} catch (IOException e) {
-				log.error(e.getMessage(), e);
-				throw new RuntimeException(e);
+		String fl = DataExtractionSettings.getSettings().getNativeLibFile();
+		if (fl != null) {
+			NativeSwingRendering lib = NativeSwingRendering.loadLibrary(fl);
+			if (lib != null) {
+				try {
+					lib.initFilesInDir(new File(DataExtractionSettings.getSettings().getBinaryFilesDir()));
+					lib.loadRuleStorage(DataExtractionSettings.getSettings().getRenderXmlPath());
+					mapPanel.setNativeLibrary(lib);
+					mapPanel.repaint();
+				} catch (SAXException e) {
+					log.error(e.getMessage(), e);
+					throw new RuntimeException(e);
+				} catch (IOException e) {
+					log.error(e.getMessage(), e);
+					throw new RuntimeException(e);
+				}
 			}
+		} else {
+			JOptionPane.showMessageDialog(frame, "Native library was not configured in settings");
 		}
 	}
 	
