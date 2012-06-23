@@ -404,6 +404,15 @@ public class IndexBatchCreator {
 				continue;
 			}
 			if (f.getName().endsWith(".osm.bz2") || f.getName().endsWith(".osm") || f.getName().endsWith(".osm.pbf")) {
+				if (skipExistingIndexes != null) {
+					int i = f.getName().indexOf(".osm");
+					String name = f.getName().substring(0, i);
+					File bmif = new File(skipExistingIndexes, name + "_" + IndexConstants.BINARY_MAP_VERSION
+							+ IndexConstants.BINARY_MAP_INDEX_EXT_ZIP);
+					if (bmif.exists()) {
+						continue;
+					}
+				}
 				generateIndex(f, null, null, alreadyGeneratedFiles);
 			}
 		}
