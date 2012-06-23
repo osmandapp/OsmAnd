@@ -11,7 +11,7 @@
     -->
     <string name="osmand_parking_time_limit">Time-limited parking</string>
     <string name="osmand_parking_time_no_limit">Time-unlimited parking</string>
-    <string name="osmand_parking_position_description">The position of your parked car.</string>
+    <string name="osmand_parking_position_description">The position of your parked car. %1$s</string>
     <string name="osmand_parking_position_name">Parking point</string>
     <string name="osmand_parking_plugin_description">This plugin allows to store the location of your parked car.</string>
     <string name="osmand_parking_plugin_name">Parking Position Plugin</string>

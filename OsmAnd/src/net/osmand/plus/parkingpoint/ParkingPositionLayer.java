@@ -29,6 +29,7 @@ import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.location.Location;
+import android.text.format.Time;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
@@ -110,7 +111,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		parkingPoint = settings.getParkingPosition();
 		timeLimit = settings.getParkingType();
 		Bitmap parkingIcon;
-		if (timeLimit) {
+		if (!timeLimit) {
 			parkingIcon = parkingNoLimitIcon;
 		} else {
 			parkingIcon = parkingLimitIcon;
@@ -137,7 +138,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		if(!parkPos.isEmpty()){
 			StringBuilder res = new StringBuilder();
 			res.append(view.getContext().getString(R.string.osmand_parking_position_description));
-			AccessibleToast.makeText(view.getContext(), res.toString(), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(view.getContext(), getObjectDescription(null), Toast.LENGTH_LONG).show();
 			return true;
 		}
 		return false;
@@ -161,10 +162,24 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	public LatLon getObjectLocation(Object o) {
 		return parkingPoint;
 	}
-
+	
 	@Override
-	public String getObjectDescription(Object o) {		
-		return view.getContext().getString(R.string.osmand_parking_position_description);
+	public String getObjectDescription(Object o) {	
+		StringBuilder timeLimitDesc = new StringBuilder(); 
+		if (settings.getParkingType()) {
+			long parkingTime = settings.getParkingTime();
+			Time time = new Time();
+			time.set(parkingTime);
+			timeLimitDesc.append("To pick up the car at: ");
+			timeLimitDesc.append(time.hour);
+			timeLimitDesc.append(":");
+			timeLimitDesc.append(time.minute);	
+			if (time.hour>12)
+				timeLimitDesc.append(" p.m.");
+			else
+				timeLimitDesc.append(" a.m.");
+		}
+		return map.getString(R.string.osmand_parking_position_description, timeLimitDesc.toString());
 	}
 
 	@Override
@@ -192,6 +207,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				settings.clearParkingPosition();
+//				TODO Remove the event from Calendar app
 				view.refreshMap();
 			}
 		});
