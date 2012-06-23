@@ -154,12 +154,13 @@ public class DownloadFileHelper {
 				if (unzipToDir) {
 					fileToUnZip.mkdirs();
 				}
-				ZipInputStream zipIn = new ZipInputStream(new FileInputStream(fileToDownload));
+				FileInputStream fin = new FileInputStream(fileToDownload);
+				ZipInputStream zipIn = new ZipInputStream(fin);
 				ZipEntry entry = null;
 				boolean first = true;
+				int len = (int) fileToDownload.length();
+				progress.startTask(ctx.getString(R.string.unzipping_file), len);
 				while ((entry = zipIn.getNextEntry()) != null) {
-					int size = (int)entry.getSize();
-					progress.startTask(ctx.getString(R.string.unzipping_file), size);
 					if(entry.isDirectory() || entry.getName().endsWith(IndexConstants.GEN_LOG_EXT)){
 						continue;
 					}
@@ -189,7 +190,7 @@ public class DownloadFileHelper {
 					byte[] buffer = new byte[BUFFER_SIZE];
 					while ((read = zipIn.read(buffer)) != -1) {
 						out.write(buffer, 0, read);
-						progress.progress(read);
+						progress.remaining(fin.available());
 					}
 					out.close();
 					

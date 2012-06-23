@@ -669,4 +669,8 @@
 	
 	<category name="tiles">
 	</category>
+	 <category name="user_defined" poi_tag="user_defined" poi_category="user_defined">
+		<!-- Here user defined categories could be added -->
+		<!-- <type tag="user_defined" value="wsl" minzoom="10" /> -->
+	</category>
 </osmand_types>

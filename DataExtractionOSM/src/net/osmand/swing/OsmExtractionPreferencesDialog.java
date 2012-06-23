@@ -161,16 +161,6 @@ public class OsmExtractionPreferencesDialog extends JDialog {
         constr.gridy = gridY++;
         l.setConstraints(routingMode, constr);
 		
-		label = new JLabel("Direction to plan route (1/0/-1 forw/both/back) :");
-        panel.add(label);
-        constr = new GridBagConstraints();
-        constr.ipadx = 5;
-        constr.gridx = 0;
-        constr.gridy = gridY;
-        constr.anchor = GridBagConstraints.WEST;
-        l.setConstraints(label, constr);
-        
-        
         label = new JLabel("Routing config file (path : ");
         panel.add(label);
         constr = new GridBagConstraints();
