@@ -265,7 +265,7 @@ public class IndexUploader {
 		}
 		
 		protected boolean fileCanBeUploaded(File f) {
-			if (!f.isFile() && !f.getName().endsWith(IndexBatchCreator.GEN_LOG_EXT)) {
+			if (!f.isFile() || f.getName().endsWith(IndexBatchCreator.GEN_LOG_EXT)) {
 				return false;
 			}
 			boolean matches = internalPatternMatches(f.getName(), matchers);
