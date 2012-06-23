@@ -30,7 +30,6 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 	private JTextField streetSuffixes;
 	private JTextField streetDefaultSuffixes;
 	private JTextField mapZooms;
-	private JTextField directionPlanRoute;
 	private JTextField routingMode;
 	private JTextField lineSmoothness;
 	private JTextField renderingTypesFile;
@@ -171,17 +170,6 @@ public class OsmExtractionPreferencesDialog extends JDialog {
         constr.anchor = GridBagConstraints.WEST;
         l.setConstraints(label, constr);
         
-        directionPlanRoute = new JTextField();
-        
-        directionPlanRoute.setText(DataExtractionSettings.getSettings().getRouteDirection() +"");
-        panel.add(directionPlanRoute);
-        constr = new GridBagConstraints();
-        constr.weightx = 1;
-        constr.fill = GridBagConstraints.HORIZONTAL;
-        constr.ipadx = 5;
-        constr.gridx = 1;
-        constr.gridy = gridY++;
-        l.setConstraints(directionPlanRoute, constr);
         
         label = new JLabel("Routing config file (path : ");
         panel.add(label);
@@ -404,14 +392,6 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		if(!settings.getMapRenderingTypesFile().equals(renderingTypesFile.getText())){
 			settings.setMapRenderingTypesFile(renderingTypesFile.getText());
 		}
-		int directionRoute = 0;
-		try {
-			directionRoute = Integer.parseInt(directionPlanRoute.getText());
-		} catch (Exception e) {
-		}
-		if(directionRoute != settings.getRouteDirection()){
-			settings.setRouteDirection(directionRoute);
-        }
 		if(!settings.getBinaryFilesDir().equals(nativeFilesDirectory.getText())){
 			settings.setBinaryFilesDir(nativeFilesDirectory.getText());
 		}

@@ -25,6 +25,7 @@ import net.osmand.render.RenderingRulesStorage.RenderingRulesStorageResolver;
 public class NativeSwingRendering extends NativeLibrary {
 
 	RenderingRulesStorage storage;
+	private static NativeSwingRendering defaultLoadedLibrary; 
 	
 	public void loadRuleStorage(String path) throws SAXException, IOException{
 		RenderingRulesStorage storage = new RenderingRulesStorage();
@@ -131,6 +132,9 @@ public class NativeSwingRendering extends NativeLibrary {
 	}
 	
 	public static NativeSwingRendering getDefaultFromSettings() {
+		if(defaultLoadedLibrary != null) {
+			return defaultLoadedLibrary;
+		}
 		String filename = DataExtractionSettings.getSettings().getNativeLibFile();
 		if(filename.length() == 0 || !(new File(filename).exists())) {
 			return null;
@@ -138,6 +142,7 @@ public class NativeSwingRendering extends NativeLibrary {
 		NativeSwingRendering lib = NativeSwingRendering.loadLibrary(filename);
 		if(lib != null){
 			lib.initFilesInDir(new File(DataExtractionSettings.getSettings().getBinaryFilesDir()));
+			defaultLoadedLibrary = lib;
 		}
 		return lib;
 	}
