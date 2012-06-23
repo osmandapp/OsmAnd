@@ -179,7 +179,7 @@ public class DataExtractionSettings {
 		if(fl != null) {
 			return fl;
 		}
-		return getDefaultWorkingDir().getAbsolutePath() +"/osmand.lib";
+		return "";
 	}
 	
 	public void setNativeLibFile(String file){
