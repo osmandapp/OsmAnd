@@ -63,6 +63,8 @@
 		<!-- too small for cars usually -->
 		<highway value="living_street" speed="25" priority="0.5" dynamicPriority="0.5"/>
 		<!-- car are able to enter in highway=pedestrian with restrictions -->
+		<!-- Time actually is uknown. Currently unsupported -->
+		<road tag="route" value="ferry" speed="15" priority="0.7" dynamicPriority="0.7"/>
 
 		<obstacle tag="highway" value="traffic_signals" penalty="35"/>
 		<obstacle tag="railway" value="crossing" penalty="25"/>

@@ -730,10 +730,10 @@ public class IndexCreator {
 	public static void main(String[] args) throws IOException, SAXException, SQLException, InterruptedException {
 		long time = System.currentTimeMillis();
 		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/data/osm-gen/")); //$NON-NLS-1$
-		creator.setIndexMap(true);
-		creator.setIndexAddress(true);
-		creator.setIndexPOI(true);
-		creator.setIndexTransport(true);
+		creator.setIndexMap(false);
+		creator.setIndexAddress(false);
+		creator.setIndexPOI(false);
+		creator.setIndexTransport(false);
 		creator.setIndexRouting(true);
 
 //		creator.deleteDatabaseIndexes = false;
@@ -744,7 +744,9 @@ public class IndexCreator {
 		MapRenderingTypes rt = MapRenderingTypes.getDefault();
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
 //		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
-		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/temp/map.osm"),
+//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/temp/map.osm"),
+//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/luxembourg.osm.pbf"),
+		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/RU-SPE.osm.bz2"),
 				new ConsoleProgressImplementation(1), null, zooms, rt, log);
 		
 		

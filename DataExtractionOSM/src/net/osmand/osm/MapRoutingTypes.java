@@ -16,16 +16,19 @@ public class MapRoutingTypes {
 
 	private static Set<String> TAGS_TO_SAVE = new HashSet<String>();
 	private static Set<String> TAGS_TO_ACCEPT = new HashSet<String>();
+	private static Set<String> TAGS_TEXT = new HashSet<String>();
 	private static char TAG_DELIMETER = '/'; //$NON-NLS-1$
 	static {
 		TAGS_TO_ACCEPT.add("highway");
 		TAGS_TO_ACCEPT.add("junction");
 		TAGS_TO_ACCEPT.add("cycleway");
+		TAGS_TO_ACCEPT.add("route");
 		
 		// TEXT tags
-//		TAGS_TO_SAVE.add("ref");
-//		TAGS_TO_SAVE.add("name");
-//		TAGS_TO_SAVE.add("direction");
+		TAGS_TEXT.add("ref");
+		TAGS_TEXT.add("name");
+		TAGS_TEXT.add("direction");
+		TAGS_TEXT.add("duration");
 		
 		TAGS_TO_SAVE.add("roundabout");
 		TAGS_TO_SAVE.add("oneway");
@@ -46,6 +49,9 @@ public class MapRoutingTypes {
 		TAGS_TO_SAVE.add("bridge");
 		TAGS_TO_SAVE.add("tunnel");
 		TAGS_TO_SAVE.add("lanes");
+		TAGS_TO_SAVE.add("route");
+		TAGS_TO_SAVE.add("ferry");
+		TAGS_TO_SAVE.add("foot");
 	}
 	
 	private Map<String, MapRouteType> types = new LinkedHashMap<String, MapRoutingTypes.MapRouteType>();
@@ -74,13 +80,22 @@ public class MapRoutingTypes {
 		return null;
 	}
 	
+	private boolean contains(Set<String> s, String tag, String value) {
+		if(s.contains(tag) || s.contains(tag + TAG_DELIMETER + value)){
+			return true;
+		}
+		return false;
+	}
+	
 	
 	public boolean encodeEntity(Way et, TIntArrayList outTypes, Map<MapRouteType, String> names){
 		Way e = (Way) et;
 		boolean init = false;
-		for(String tg : e.getTagKeySet()) {
-			if(TAGS_TO_ACCEPT.contains(tg)){
-				init  = true;
+		for(Entry<String, String> es : e.getTags().entrySet()) {
+			String tag = es.getKey();
+			String value = es.getValue();
+			if (contains(TAGS_TO_ACCEPT, tag, value)) {
+				init = true;
 				break;
 			}
 		}
@@ -88,11 +103,15 @@ public class MapRoutingTypes {
 			return false;
 		}
 		outTypes.clear();
+		names.clear();
 		for(Entry<String, String> es : e.getTags().entrySet()) {
 			String tag = es.getKey();
 			String value = es.getValue();
-			if(TAGS_TO_ACCEPT.contains(tag) || TAGS_TO_SAVE.contains(tag) || tag.startsWith("access")) {
+			if(contains(TAGS_TO_ACCEPT, tag, value) || contains(TAGS_TO_SAVE, tag, value) || tag.startsWith("access")) {
 				outTypes.add(registerRule(tag, value).id);
+			}
+			if(TAGS_TEXT.contains(tag)) {
+				names.put(registerRule(tag, null), value);
 			}
 		}
 		return true;
@@ -105,7 +124,7 @@ public class MapRoutingTypes {
 				for (Entry<String, String> es : nd.getTags().entrySet()) {
 					String tag = es.getKey();
 					String value = es.getValue();
-					if (TAGS_TO_ACCEPT.contains(tag) || TAGS_TO_SAVE.contains(tag) || tag.startsWith("access")) {
+					if (contains(TAGS_TO_ACCEPT, tag, value) || contains(TAGS_TO_SAVE, tag, value) || tag.startsWith("access")) {
 						if (!pointTypes.containsKey(nd.getId())) {
 							pointTypes.put(nd.getId(), new TIntArrayList());
 						}

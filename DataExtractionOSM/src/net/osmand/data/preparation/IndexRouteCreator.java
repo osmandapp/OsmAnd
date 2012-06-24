@@ -53,8 +53,10 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 	private Connection mapConnection;
 	private final Log logMapDataWarn;
 	private final static boolean WRITE_POINT_ID = false;
+	private final static boolean WRITE_TEXT_TAGS = true;
 	private RTree routeTree = null;
 	private MapRoutingTypes routeTypes;
+	
 	
 	private TLongObjectHashMap<TLongArrayList> highwayRestrictions = new TLongObjectHashMap<TLongArrayList>();
 
@@ -135,7 +137,11 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 					mapRouteInsertStat.setBytes(3, bpointTypes.toByteArray());
 					mapRouteInsertStat.setBytes(4, bpointIds.toByteArray());
 					mapRouteInsertStat.setBytes(5, bcoordinates.toByteArray());
-					mapRouteInsertStat.setString(6, encodeNames(names));
+					if(WRITE_TEXT_TAGS) {
+						mapRouteInsertStat.setString(6, encodeNames(names));
+					} else {
+						mapRouteInsertStat.setString(6, "");
+					}
 
 					addBatch(mapRouteInsertStat, false);
 					try {
@@ -405,7 +411,7 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 					}
 
 					RouteData routeData = writer.writeRouteData(cid, parentBounds.getMinX(), parentBounds.getMinY(), typeUse, points,
-							names, tempStringTable, dataBlock, true, WRITE_POINT_ID);
+							tempNames, tempStringTable, dataBlock, true, WRITE_POINT_ID);
 					if (routeData != null) {
 						dataBlock.addDataObjects(routeData);
 					}

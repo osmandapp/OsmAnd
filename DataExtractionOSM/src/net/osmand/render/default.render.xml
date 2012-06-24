@@ -183,34 +183,35 @@
 			<filter tag="highway" value="cycleway" order="39"/>
 
 			<!-- byway is deprecated tag, describes UK-only road. Proper tag should be highway=track or highway=path -->
-			 <filter layer="1" tag="highway" value="byway" order="67"/>
+			<filter layer="1" tag="highway" value="byway" order="67"/>
 			<filter appMode="pedestrian" tag="highway" value="byway" order="60"/>
 			<filter appMode="bicycle" tag="highway" value="byway" order="59"/>
 			<filter tag="highway" value="byway" order="37"/>
 
-			 <filter layer="1" tag="highway" value="track" order="67"/>
+			<filter layer="1" tag="highway" value="track" order="67"/>
 			<filter appMode="pedestrian" tag="highway" value="track" order="60"/>
 			<filter tag="highway" value="track" order="37"/>
 			<!-- Additional attributes can be used in this way: additional="tracktype=grade1" -->
 
-			 <filter layer="1" tag="highway" value="path" order="67"/>
+			<filter layer="1" tag="highway" value="path" order="67"/>
 			<filter appMode="pedestrian" tag="highway" value="path" order="60"/>
 			<filter tag="highway" value="path" order="37"/>
 
-			 <filter layer="1" tag="highway" value="footway" order="67"/>
+			<filter layer="1" tag="highway" value="footway" order="67"/>
 			<filter appMode="pedestrian" tag="highway" value="footway" order="60"/>
 			<filter tag="highway" value="footway" order="37"/>
 
-			 <filter layer="1" tag="highway" value="steps" order="67"/>
+			<filter layer="1" tag="highway" value="steps" order="67"/>
 			<filter appMode="pedestrian" tag="highway" value="steps" order="61"/>
 			<filter tag="highway" value="steps" order="38"/>
 
-			 <filter layer="1" tag="highway" value="bridleway" order="67"/>
+			<filter layer="1" tag="highway" value="bridleway" order="67"/>
 			<filter appMode="pedestrian" tag="highway" value="bridleway" order="59"/>
 			<filter tag="highway" value="bridleway" order="36"/>
 			
 			<filter tag="natural" value="coastline_broken" order="35"/> 
 			<filter tag="contour" value="" order="15"/>
+			<filter tag="route" value="ferry" order="35"/>
 		</group>
 
 		<filter tag="barrier" value="" order="20" objectType="2" point="false"/>
@@ -370,6 +371,7 @@
 
 		<filter minzoom="3" textSize="14" textColor="#9d6c9d" textWrapWidth="35" tag="natural" value="coastline"/>
 		<filter minzoom="3" textSize="14" textColor="#9d6c9d" textWrapWidth="35" tag="natural" value="land"/>
+		<filter minzoom="3" textSize="14" textColor="#9d6c9d" textWrapWidth="35" tag="route" value="ferry"/>
 		<!-- Location names -->
 		<filter minzoom="3" textSize="14" textColor="#9d6c9d" textWrapWidth="20" tag="place" value="country"/>
 		<filter minzoom="4" textSize="14" textColor="#9d6c9d" textWrapWidth="20" tag="place" value="state"/>
@@ -1249,6 +1251,7 @@
 		<filter contourLines="11" tag="contour" value="elevation" minzoom="11" color="#2Aff7c00" strokeWidth="1"/>
 		<filter contourLines="12" tag="contour" value="elevation" minzoom="12" color="#2Aff7c00" strokeWidth="1"/>
 		<filter contourLines="13" tag="contour" value="elevation" minzoom="13" color="#2Aff7c00" strokeWidth="1"/>
+		<filter tag="route" value="ferry" minzoom="11" color="#0000ff" strokeWidth="2" pathEffect="6_3"/>
 
 		<!-- Barriers -->
 		<filter minzoom="16" color="#333333" strokeWidth="1" tag="highway" value="gate"/>

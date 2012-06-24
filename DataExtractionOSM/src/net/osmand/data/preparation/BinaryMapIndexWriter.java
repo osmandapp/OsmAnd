@@ -209,6 +209,7 @@ public class BinaryMapIndexWriter {
 		log.info("- ROUTE TYPE SIZE SIZE " + BinaryMapIndexWriter.ROUTE_TYPES_SIZE ); //$NON-NLS-1$
 		log.info("- ROUTE COORDINATES SIZE " + BinaryMapIndexWriter.ROUTE_COORDINATES_SIZE + " COUNT " + BinaryMapIndexWriter.ROUTE_COORDINATES_COUNT); //$NON-NLS-1$
 		log.info("- ROUTE POINTS SIZE " + BinaryMapIndexWriter.ROUTE_POINTS_SIZE);
+		log.info("- ROUTE STRING SIZE " + BinaryMapIndexWriter.ROUTE_STRING_DATA_SIZE); //$NON-NLS-1$
 		log.info("- ROUTE ID SIZE " + BinaryMapIndexWriter.ROUTE_ID_SIZE); //$NON-NLS-1$
 		log.info("-- ROUTE_DATA " + BinaryMapIndexWriter.ROUTE_DATA_SIZE); //$NON-NLS-1$
 		ROUTE_TYPES_SIZE = ROUTE_DATA_SIZE = ROUTE_POINTS_SIZE = ROUTE_ID_SIZE = 
@@ -301,6 +302,8 @@ public class BinaryMapIndexWriter {
 			builder.setTag(rule.getTag());
 			if (rule.getValue() != null) {
 				builder.setValue(rule.getValue());
+			} else {
+				builder.setValue("");
 			}
 			RouteEncodingRule rulet = builder.build();
 			codedOutStream.writeMessage(OsmandOdb.OsmAndRoutingIndex.RULES_FIELD_NUMBER, rulet);
@@ -400,6 +403,7 @@ public class BinaryMapIndexWriter {
 	public static int ROUTE_COORDINATES_COUNT = 0;
 	public static int ROUTE_POINTS_SIZE = 0;
 	public static int ROUTE_DATA_SIZE = 0;
+	public static int ROUTE_STRING_DATA_SIZE = 0;
 
 	public MapDataBlock.Builder createWriteMapDataBlock(long baseid) throws IOException {
 		MapDataBlock.Builder builder = MapDataBlock.newBuilder();
@@ -417,7 +421,7 @@ public class BinaryMapIndexWriter {
 			StringTable st = bs.build();
 			builder.setStringTable(st);
 			int size = st.getSerializedSize();
-			STRING_TABLE_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapDataBlock.STRINGTABLE_FIELD_NUMBER)
+			ROUTE_STRING_DATA_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapDataBlock.STRINGTABLE_FIELD_NUMBER)
 					+ CodedOutputStream.computeRawVarint32Size(size) + size;
 		}
 		
@@ -509,7 +513,7 @@ public class BinaryMapIndexWriter {
 					writeRawVarint32(mapDataBuf, ls);
 				}
 			}
-			STRING_TABLE_SIZE += mapDataBuf.size();
+			ROUTE_STRING_DATA_SIZE += mapDataBuf.size();
 			builder.setStringNames(ByteString.copyFrom(mapDataBuf.toArray()));
 		}
 		

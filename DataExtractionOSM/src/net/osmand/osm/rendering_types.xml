@@ -71,6 +71,10 @@
 		<type tag="highway" value="speed_camera" minzoom="16" poi_category="transportation"/>
 		<type tag="highway" value="street_lamp" minzoom="16" />
 	</category>
+	
+	<category name="routes">
+		<type tag="route" value="ferry" minzoom="10" />
+	</category>
 
 	<category name="tracktype">
 		<type tag="tracktype" value="grade1" minzoom="12" additional="true"/>
