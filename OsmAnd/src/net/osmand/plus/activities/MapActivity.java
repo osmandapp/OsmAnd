@@ -44,6 +44,7 @@ import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -164,6 +165,12 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		startProgressDialog = new ProgressDialog(this);
 		startProgressDialog.setCancelable(true);
 		((OsmandApplication) getApplication()).checkApplicationIsBeingInitialized(this, startProgressDialog);
+		startProgressDialog.setOnDismissListener(new OnDismissListener() {
+			@Override
+			public void onDismiss(DialogInterface dialog) {
+				getMapView().refreshMap(true);
+			}
+		});
 		parseLaunchIntentLocation();
 		
 		mapView = (OsmandMapTileView) findViewById(R.id.MapView);

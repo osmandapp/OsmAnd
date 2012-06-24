@@ -433,9 +433,9 @@ public class OsmandApplication extends Application {
 						@Override
 						public void run() {
 							if (toDismiss != null) {
-								//TODO handling this dialog is bad, we need a better standard way
+								// TODO handling this dialog is bad, we need a better standard way
 								toDismiss.dismiss();
-//								toDismiss.getOwnerActivity().dismissDialog(PROGRESS_DIALOG);
+								// toDismiss.getOwnerActivity().dismissDialog(PROGRESS_DIALOG);
 							}
 						}
 					});
