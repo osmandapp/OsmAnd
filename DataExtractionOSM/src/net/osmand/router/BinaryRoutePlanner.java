@@ -898,8 +898,11 @@ public class BinaryRoutePlanner {
 					+ "    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" complete_time=\"{4}\" complete_distance=\"{6}\">",
 					startLat + "", startLon + "", endLat + "", endLon + "", completeTime + "", ctx.config.routerName, completeDistance+""));
 			for (RouteSegmentResult res : result) {
-				String name = "Unknown";// res.object.getName();
-				String ref = "";// res.object.getNameByType(res.object.getMapIndex().refEncodingType);
+				String name = res.getObject().getName();
+				String ref = res.getObject().getRef();
+				if(name == null) {
+					name = "";
+				}
 				if (ref != null) {
 					name += " " + ref;
 				}

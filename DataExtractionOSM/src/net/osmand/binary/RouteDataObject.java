@@ -1,5 +1,6 @@
 package net.osmand.binary;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 
@@ -16,6 +17,7 @@ public class RouteDataObject {
 	public long[] restrictions;
 	public int[][] pointTypes;
 	public long id;
+	public TIntObjectHashMap<String> names;
 
 	public RouteDataObject(RouteRegion region) {
 		this.region = region;
@@ -33,6 +35,20 @@ public class RouteDataObject {
 
 	public long getId() {
 		return id;
+	}
+	
+	public String getName(){
+		if(names != null ) {
+			return names.get(region.nameTypeRule);
+		}
+		return null;
+	}
+	
+	public String getRef(){
+		if(names != null ) {
+			return names.get(region.refTypeRule);
+		}
+		return null;
 	}
 
 	public int getPoint31XTile(int i) {

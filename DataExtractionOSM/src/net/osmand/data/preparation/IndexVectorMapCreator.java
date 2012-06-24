@@ -88,6 +88,10 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 	private void indexMultiPolygon(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		if (e instanceof Relation && "multipolygon".equals(e.getTag(OSMTagKey.TYPE))) { //$NON-NLS-1$
+			if(e.getTag(OSMTagKey.ADMIN_LEVEL) != null) {
+				// don't index boundaries as multipolygon (only areas ideally are multipolygon)
+				return;
+			}
 			ctx.loadEntityRelation((Relation) e);
 			Map<Entity, String> entities = ((Relation) e).getMemberEntities();
 

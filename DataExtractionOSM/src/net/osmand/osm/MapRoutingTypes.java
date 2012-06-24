@@ -25,6 +25,10 @@ public class MapRoutingTypes {
 		TAGS_TO_ACCEPT.add("route");
 		
 		// TEXT tags
+<<<<<<< HEAD
+=======
+		TAGS_TEXT.add("int_ref");
+>>>>>>> Add ferry rendering + add text to route information
 		TAGS_TEXT.add("ref");
 		TAGS_TEXT.add("name");
 		TAGS_TEXT.add("direction");

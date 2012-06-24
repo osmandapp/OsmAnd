@@ -3,6 +3,7 @@ package net.osmand.binary;
 import gnu.trove.iterator.TLongObjectIterator;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 import java.io.IOException;
@@ -137,6 +138,8 @@ public class BinaryMapRouteReaderAdapter {
 		
 		List<RouteSubregion> subregions = new ArrayList<RouteSubregion>();
 		List<RouteTypeRule> routeEncodingRules = new ArrayList<BinaryMapRouteReaderAdapter.RouteTypeRule>();
+		int nameTypeRule = -1;
+		int refTypeRule = -1;
 		
 		public double getLeftLongitude() {
 			return leftLongitude;
@@ -163,6 +166,11 @@ public class BinaryMapRouteReaderAdapter {
 				routeEncodingRules.add(null);
 			}
 			routeEncodingRules.set(id, new RouteTypeRule(tags, val));
+			if(tags.equals("name")) {
+				nameTypeRule = id;
+			} else if(tags.equals("ref")) {
+				refTypeRule = id;
+			}
 		}
 		
 		public List<RouteSubregion> getSubregions(){
@@ -300,6 +308,17 @@ public class BinaryMapRouteReaderAdapter {
 				}
 				codedIS.popLimit(oldLimit);
 				break;
+			case RouteData.STRINGNAMES_FIELD_NUMBER:
+				o.names = new TIntObjectHashMap<String>();
+				int sizeL = codedIS.readRawVarint32();
+				int old = codedIS.pushLimit(sizeL);
+				while (codedIS.getBytesUntilLimit() > 0) {
+					int stag = codedIS.readRawVarint32();
+					int pId = codedIS.readRawVarint32();
+					o.names.put(stag, ((char)pId)+"");
+				}
+				codedIS.popLimit(old);
+				break;
 			case RouteData.POINTS_FIELD_NUMBER:
 				len = codedIS.readRawVarint32();
 				oldLimit = codedIS.pushLimit(len);
@@ -349,6 +368,7 @@ public class BinaryMapRouteReaderAdapter {
 		routeTree.dataObjects = new ArrayList<RouteDataObject>();
 		idTables.clear();
 		restrictions.clear();
+		List<String> stringTable = null;
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -370,6 +390,12 @@ public class BinaryMapRouteReaderAdapter {
 					if (o != null) {
 						if (o.id < idTables.size()) {
 							o.id = idTables.get((int) o.id);
+						}
+						if (o.names != null && stringTable != null) {
+							int[] keys = o.names.keys();
+							for (int j = 0; j < keys.length; j++) {
+								o.names.put(keys[j], stringTable.get(o.names.get(keys[j]).charAt(0)));
+							}
 						}
 					}
 				}
@@ -440,8 +466,8 @@ public class BinaryMapRouteReaderAdapter {
 			case RouteDataBlock.STRINGTABLE_FIELD_NUMBER :
 				length = codedIS.readRawVarint32();
 				oldLimit = codedIS.pushLimit(length);
-//				map.readStringTable();
-				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+				stringTable = map.readStringTable();
+//				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				codedIS.popLimit(oldLimit);
 				break;
 			default:

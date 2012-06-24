@@ -418,6 +418,9 @@ public class BinaryMapIndexWriter {
 		
 		if (stringTable != null && stringTable.size() > 0) {
 			StringTable.Builder bs = OsmandOdb.StringTable.newBuilder();
+			for (String s : stringTable.keySet()) {
+				bs.addS(s);
+			}
 			StringTable st = bs.build();
 			builder.setStringTable(st);
 			int size = st.getSerializedSize();
