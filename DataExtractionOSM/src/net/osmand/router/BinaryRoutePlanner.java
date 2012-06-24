@@ -414,6 +414,7 @@ public class BinaryRoutePlanner {
 			}
 			if (i) {
 				tl.routes.put(l, segment);
+				tl.idObjects.put(o.id, o);
 			}
 		}
 	}
@@ -442,16 +443,21 @@ public class BinaryRoutePlanner {
 	
 	public RoutingTile loadRoutes(final RoutingContext ctx, int tile31X, int tile31Y) {
 		final RoutingTile tile = ctx.getRoutingTile(tile31X, tile31Y);
-		if (tile.isLoaded()) {
-			tile.access++;
-			return tile;
-		}
 		loadTileData(ctx, tile, null);
 		return tile;
 	}
 
 
 	private void loadTileData(final RoutingContext ctx, final RoutingTile tile, final List<RouteDataObject> toFillIn) {
+		if (tile.isLoaded()) {
+			tile.access++;
+			if(toFillIn != null){
+				for(RouteDataObject ro : tile.idObjects.valueCollection()){
+					toFillIn.add(ro);
+				}
+			}
+			return;
+		}
 		long now = System.nanoTime();
 		ResultMatcher<RouteDataObject> matcher = new ResultMatcher<RouteDataObject>() {
 			@Override
@@ -647,7 +653,7 @@ public class BinaryRoutePlanner {
 		ctx.segmentsToVisitNotForbidden.clear();
 		boolean exclusiveRestriction = false;
 		RouteSegment next = inputNext;
-		if (!reverseWay && road.getRestrictionLength() > 0) {
+		if (!reverseWay && road.getRestrictionLength() == 0) {
 			return false;
 		}
 		if(!ctx.getRouter().restrictionsAwayre()) {
@@ -742,8 +748,9 @@ public class BinaryRoutePlanner {
 			
 			// 1. Check if opposite segment found so we can stop calculations
 			if (oppositeSegments.contains(nts) && oppositeSegments.get(nts) != null) {
+				// check restrictions
 				RouteSegment opposite = oppositeSegments.get(nts);
-				if(reverseWay){
+				if (reverseWay) {
 					ctx.finalReverseEndSegment = segmentEnd;
 					ctx.finalReverseRoute = segment;
 					ctx.finalDirectEndSegment = next.segmentStart;
@@ -754,7 +761,6 @@ public class BinaryRoutePlanner {
 					ctx.finalReverseEndSegment = next.segmentStart;
 					ctx.finalReverseRoute = opposite;
 				}
-				return true;
 			}
 			// road.id could be equal on roundabout, but we should accept them
 			boolean alreadyVisited = visitedSegments.contains(nts);
