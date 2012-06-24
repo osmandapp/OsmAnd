@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <batch_process>
-	<process_attributes mapZooms="15" renderingTypesFile="" zoomWaySmoothness="2" 
+	<process_attributes mapZooms="11-12;13-14;15-" renderingTypesFile="" zoomWaySmoothness="2" 
 		osmDbDialect="sqlite" mapDbDialect="sqlite"/>
 	
 	<!-- There are 3 subprocess : 	
@@ -11,7 +11,7 @@
 		 All these subprocess could be ran independently ! So you can create some files check them and after that try to upload on googlecode,
 		 or you can upload any file you have to googlecode (just put into 'directory_for_index_files')
 	 -->
-	 <!-- zoomWaySmoothness - 1-4, typical mapZooms - 8-10;11-12;13-14;15   -->
+	 <!-- zoomWaySmoothness - 1-4, typical mapZooms - 8-10;11-12;13-14;15-   -->
 	<process directory_for_osm_files="/var/lib/jenkins/srtm-proccess" directory_for_index_files="/var/lib/jenkins/indexes" directory_for_generation="/var/lib/jenkins/srtm-proccess/.work"
 		skipExistingIndexesAt="/var/lib/jenkins/indexes/uploaded"	indexPOI="false" indexMap="true" indexRouting="false"	indexTransport="false" indexAddress="false">
 		<!-- Add wget="C:/Program Files/GNUWin32/bin/wget.exe" to process, to use wget for download.
