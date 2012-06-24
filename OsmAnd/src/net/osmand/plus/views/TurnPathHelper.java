@@ -157,18 +157,27 @@ public class TurnPathHelper {
 			} else if (t > 160 && t < 170) {
 				t = 160;
 			}
+			boolean leftSide = turnType.isLeftSide();
 			float sweepAngle = (t - 360) - 180;
 			if (sweepAngle < -360) {
+				sweepAngle += 360;
+			}
+			if(leftSide && sweepAngle < 0) {
 				sweepAngle += 360;
 			}
 			
 			float r1 = ha / 3f - 1;
 			float r2 = r1 - 9;
-			float angleToRot = 0.3f;
+			float angleToRot = leftSide ? -0.3f : 0.3f;
 			int cx = wa / 2 ;
 			int cy = ha / 2 - 2;
-			pathForTurn.moveTo(cx, ha - 1);
-			pathForTurn.lineTo(cx, cy + r1);
+			if (leftSide) {
+				pathForTurn.moveTo(cx - 8, ha - 1);
+				pathForTurn.lineTo(cx - 8, cy + r1);
+			} else {
+				pathForTurn.moveTo(cx, ha - 1);
+				pathForTurn.lineTo(cx, cy + r1);
+			}
 			RectF r = new RectF(cx - r1, cy - r1, cx + r1, cy + r1);
 			
 			int out = turnType.getExitOut();
@@ -177,8 +186,8 @@ public class TurnPathHelper {
 			}
 			float prev = 90;
 			float init = 90;
+			
 			float step = sweepAngle / out;
-			boolean leftSide = turnType.isLeftSide();
 			for (int i = 1; i <= out; i++) {
 				float to = step * i;
 				if (i == out) {
@@ -206,8 +215,13 @@ public class TurnPathHelper {
 			
 			r.set(cx - r2, cy - r2, cx + r2, cy + r2);
 			pathForTurn.arcTo(r, 360 + sweepAngle + 90, -sweepAngle);
-			pathForTurn.lineTo(cx - 8, cy + r2);
-			pathForTurn.lineTo(cx - 8, ha - 1);
+			if (leftSide) {
+				pathForTurn.lineTo(cx, cy + r2);
+				pathForTurn.lineTo(cx, ha - 1);
+			} else {
+				pathForTurn.lineTo(cx - 8, cy + r2);
+				pathForTurn.lineTo(cx - 8, ha - 1);
+			}
 			pathForTurn.close();
 		}
 		pathForTurn.close();
