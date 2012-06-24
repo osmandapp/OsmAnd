@@ -81,7 +81,6 @@ public class MapActivityActions implements DialogProvider {
 	private static final int DIALOG_ADD_WAYPOINT = 102;
 	private static final int DIALOG_RELOAD_TITLE = 103;
 	private static final int DIALOG_SHARE_LOCATION = 104;
-	private static final int DIALOG_ABOUT_ROUTE = 105;
 	private static final int DIALOG_SAVE_DIRECTIONS = 106;
 	private Bundle dialogBundle = new Bundle();
 	
@@ -362,36 +361,11 @@ public class MapActivityActions implements DialogProvider {
     }
     
     protected void aboutRoute() {
-    	mapActivity.showDialog(DIALOG_ABOUT_ROUTE);
+    	Intent intent = new Intent(mapActivity, ShowRouteInfoActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		mapActivity.startActivity(intent);
     }
     
-    private void prepareAboutRouteDialog(Dialog dlg, Bundle args) {
-    	((AlertDialog)dlg).setMessage(mapActivity.getRoutingHelper().getGeneralRouteInformation());
-    }
-    
-    private Dialog createAboutRouteDialog(Bundle args) {
-    	DialogInterface.OnClickListener showRoute = new DialogInterface.OnClickListener(){
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				Intent intent = new Intent(mapActivity, ShowRouteInfoActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				mapActivity.startActivity(intent);
-			}
-		};
-		DialogInterface.OnClickListener saveDirections = new DialogInterface.OnClickListener(){
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				saveDirections();
-			}
-		};
-		Builder builder = new AccessibleAlertBuilder(mapActivity);
-		builder.setTitle(R.string.show_route);
-		builder.setMessage(mapActivity.getRoutingHelper().getGeneralRouteInformation());
-		builder.setPositiveButton(R.string.default_buttons_save, saveDirections);
-		builder.setNeutralButton(R.string.show_route, showRoute);
-		builder.setNegativeButton(R.string.close, null);
-		return builder.create();
-    }
     
     private boolean checkPointToNavigate(){
     	MapActivityLayers mapLayers = mapActivity.getMapLayers();
@@ -616,10 +590,11 @@ public class MapActivityActions implements DialogProvider {
 		mapActivity.showDialog(DIALOG_SAVE_DIRECTIONS);
 	}
 	
-	private Dialog createSaveDirections() {
-		OsmandSettings settings = getMyApplication().getSettings();
+	public static  Dialog createSaveDirections(Activity activity) {
+		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
+		OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
 		final File fileDir = settings.extendOsmandPath(ResourceManager.GPX_PATH);
-		final Dialog dlg = new Dialog(mapActivity);
+		final Dialog dlg = new Dialog(activity);
 		dlg.setTitle(R.string.save_route_dialog_title);
 		dlg.setContentView(R.layout.save_directions_dialog);
 		final EditText edit = (EditText) dlg.findViewById(R.id.FileNameEdit);
@@ -641,7 +616,7 @@ public class MapActivityActions implements DialogProvider {
 					dlg.findViewById(R.id.DuplicateFileName).setVisibility(View.VISIBLE);					
 				} else {
 					dlg.dismiss();
-					new SaveDirectionsAsyncTask().execute(toSave);
+					new SaveDirectionsAsyncTask(app).execute(toSave);
 				}
 			}
 		});
@@ -658,15 +633,21 @@ public class MapActivityActions implements DialogProvider {
 	}
 	
 	
-	private class SaveDirectionsAsyncTask extends AsyncTask<File, Void, String> {
+	private static class SaveDirectionsAsyncTask extends AsyncTask<File, Void, String> {
+		
+		private final OsmandApplication app;
+
+		public SaveDirectionsAsyncTask(OsmandApplication app) {
+			this.app = app;
+		}
 
 		@Override
 		protected String doInBackground(File... params) {
 			if (params.length > 0) {
 				File file = params[0];
-				GPXFile gpx = mapActivity.getRoutingHelper().generateGPXFileWithRoute();
-				GPXUtilities.writeGpxFile(file, gpx, mapActivity);
-				return mapActivity.getString(R.string.route_successfully_saved_at, file.getName());
+				GPXFile gpx = app.getRoutingHelper().generateGPXFileWithRoute();
+				GPXUtilities.writeGpxFile(file, gpx, app);
+				return app.getString(R.string.route_successfully_saved_at, file.getName());
 			}
 			return null;
 		}
@@ -674,7 +655,7 @@ public class MapActivityActions implements DialogProvider {
 		@Override
 		protected void onPostExecute(String result) {
 			if(result != null){
-				AccessibleToast.makeText(mapActivity, result, Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(app, result, Toast.LENGTH_LONG).show();
 			}
 		}
 		
@@ -820,10 +801,8 @@ public class MapActivityActions implements DialogProvider {
 				return createReloadTitleDialog(args);
 			case DIALOG_SHARE_LOCATION:
 				return createShareLocationDialog(args);
-			case DIALOG_ABOUT_ROUTE:
-				return createAboutRouteDialog(args);
 			case DIALOG_SAVE_DIRECTIONS:
-				return createSaveDirections();
+				return createSaveDirections(mapActivity);
 		}
 		return null;
 	}
@@ -843,9 +822,6 @@ public class MapActivityActions implements DialogProvider {
 			} else {
 				v.setText("");
 			}
-			break;
-		case DIALOG_ABOUT_ROUTE:
-			prepareAboutRouteDialog(dialog, args);
 			break;
 		}
 	}
