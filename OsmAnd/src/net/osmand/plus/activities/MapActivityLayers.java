@@ -477,6 +477,7 @@ public class MapActivityLayers {
 					filterId = PoiFiltersHelper.getOsmDefinedFilterId(AmenityType.values()[which - userDefined.size() - 1]);
 				}
 				if(filterId.equals(PoiFilter.CUSTOM_FILTER_ID)){
+					getApplication().getSettings().setPoiFilterForMap(filterId);
 					Intent newIntent = new Intent(activity, EditPOIFilterActivity.class);
 					newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, filterId);
 					newIntent.putExtra(EditPOIFilterActivity.SEARCH_LAT, mapView.getLatitude());
