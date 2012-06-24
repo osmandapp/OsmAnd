@@ -761,6 +761,7 @@ public class BinaryRoutePlanner {
 					ctx.finalReverseEndSegment = next.segmentStart;
 					ctx.finalReverseRoute = opposite;
 				}
+				return true;
 			}
 			// road.id could be equal on roundabout, but we should accept them
 			boolean alreadyVisited = visitedSegments.contains(nts);
