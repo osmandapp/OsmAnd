@@ -9,6 +9,7 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osmand_parking_add_event">Add a notification to Calendar application</string>
     <string name="osmand_parking_time_limit">Time-limited parking</string>
     <string name="osmand_parking_time_no_limit">Time-unlimited parking</string>
     <string name="osmand_parking_position_description">The position of your parked car. %1$s</string>

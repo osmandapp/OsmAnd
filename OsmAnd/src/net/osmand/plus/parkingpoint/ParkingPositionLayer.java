@@ -16,10 +16,7 @@ import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TextInfoControl;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -187,32 +184,11 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		return view.getContext().getString(R.string.osmand_parking_position_name);
 	}
 	
-	public void setParkingPoint(LatLon point) {
+	public void setParkingPointOnLayer(LatLon point) {
 		this.parkingPoint = point;
 		if (view != null && view.getLayers().contains(ParkingPositionLayer.this)) {
 			view.refreshMap();
 		}
-	}
-	
-	/**
-	 * Method creates confirmation dialog for deletion of a parking location 
-	 */
-	public void showDeleteDialog() {
-		Builder confirm = new AlertDialog.Builder(map);
-		confirm.setTitle("Delete parking location");
-		confirm.setMessage("Do you want to remove the location of the parked car?");
-		confirm.setCancelable(true);
-		confirm.setPositiveButton(R.string.default_buttons_yes,
-				new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				settings.clearParkingPosition();
-//				TODO Remove the event from Calendar app
-				view.refreshMap();
-			}
-		});
-		confirm.setNegativeButton(R.string.default_buttons_cancel, null);
-		confirm.show();
 	}
 
 	/**
