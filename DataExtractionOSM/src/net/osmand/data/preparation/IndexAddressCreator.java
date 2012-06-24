@@ -159,7 +159,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				for (City c : citiesToSearch) {
 					if (boundary.containsPoint(c.getLocation())) {
 						String lower = c.getName().toLowerCase();
-						if (boundaryName.startsWith(lower + " ") || boundaryName.endsWith(lower + " ") || boundaryName.contains(" " + lower + " ")) {
+						if (boundaryName.startsWith(lower + " ") || boundaryName.endsWith(" " + lower) || boundaryName.contains(" " + lower + " ")) {
 							cityFound = c;
 							break;
 						}
@@ -293,6 +293,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		return "administrative".equals(e.getTag(OSMTagKey.BOUNDARY)) && (e instanceof Relation || e instanceof Way);
 	}
 	
+	
 	private Boundary extractBoundary(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		if (isBoundary(e)) {
 			Boundary boundary = null;
@@ -308,14 +309,14 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 					if (es instanceof Way) {
 						boolean inner = "inner".equals(entities.get(es)); //$NON-NLS-1$
 						if (inner) {
-							boundary.getInnerWays().add((Way) es);
+							boundary.getInnerWays().add(new Way((Way) es));
 						} else {
 							String wName = es.getTag(OSMTagKey.NAME);
 							// if name are not equal keep the way for further check (it could be different suburb)
 							if (Algoritms.objectEquals(wName, boundary.getName()) || wName == null) {
 								visitedBoundaryWays.add(es.getId());
 							}
-							boundary.getOuterWays().add((Way) es);
+							boundary.getOuterWays().add(new Way((Way) es));
 						}
 					} else if (es instanceof Node && ("admin_centre".equals(entities.get(es)) || "admin_center".equals(entities.get(es)))) {
 						boundary.setAdminCenterId(es.getId());
@@ -332,7 +333,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 					boundary.setName(e.getTag(OSMTagKey.NAME));
 					boundary.setBoundaryId(e.getId());
 					boundary.setAdminLevel(extractBoundaryAdminLevel(e));
-					boundary.getOuterWays().add((Way) e);
+					boundary.getOuterWays().add(new Way((Way) e));
 				}
 			}
 			return boundary;
