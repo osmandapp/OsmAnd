@@ -19,6 +19,8 @@ turn('left_sl', ['odbočte mírně vlevo']).
 turn('right', ['odbočte vpravo']).
 turn('right_sh', ['odbočte ostře vpravo']).
 turn('right_sl', ['odbočte mírně vpravo']).
+turn('right_keep', ['držte se vpravo']).
+turn('left_keep', ['držte se vlevo']).
 
 pturn('left', ['vlevo']).
 pturn('left_sh', ['ostře vlevo']).

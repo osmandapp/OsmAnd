@@ -13,6 +13,8 @@ turn('left_sl', ['skręć lekko w lewo ']).
 turn('right', ['skręć w prawo ']).
 turn('right_sh', ['skręć ostro w prawo ']).
 turn('right_sl', ['skręć lekko w prawo ']).
+turn('right_keep', ['trzymaj się prawej ']).
+turn('left_keep', ['trzymaj się lewej ']).
 
 prepare_turn(Turn, Dist) == ['Za ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn, Dist) == ['Za ', D, M] :- distance(Dist) == D, turn(Turn, M).

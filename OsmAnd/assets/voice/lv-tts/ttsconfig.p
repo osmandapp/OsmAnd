@@ -13,6 +13,8 @@ turn('left_sl', ['pagriezties pa kreisi ']).
 turn('right', ['griezties pa labi ']).
 turn('right_sh', ['strauji pagriezties pa labi ']).
 turn('right_sl', ['pagriezties pa labi ']).
+turn('right_keep', ['turēties pa labi ']).
+turn('left_keep', ['turēties pa kreisi ']).
 
 prepare_turn(Turn, Dist) == ['Pēc ', D, ' gatavoties pa', M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn, Dist) == ['Pēc ', D, M] :- distance(Dist) == D, turn(Turn, M).

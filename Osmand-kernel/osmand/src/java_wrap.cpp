@@ -284,14 +284,12 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_NativeLibrary_generateRende
 	req->setIntFilter(req->props()->R_MINZOOM, rc.getZoom());
 	if (req->searchRenderingAttribute("defaultColor")) {
 		rc.setDefaultColor(req->getIntPropertyValue(req->props()->R_ATTR_INT_VALUE));
-		osmand_log_print(LOG_INFO, "shadow color %x default %x", rc.getShadowRenderingColor(), rc.getDefaultColor());
 	}
 	req->clearState();
 	req->setIntFilter(req->props()->R_MINZOOM, rc.getZoom());
 	if (req->searchRenderingAttribute("shadowRendering")) {
 		rc.setShadowRenderingMode(req->getIntPropertyValue(req->props()->R_ATTR_INT_VALUE));
 		rc.setShadowRenderingColor(req->getIntPropertyValue(req->props()->R_SHADOW_COLOR));
-		osmand_log_print(LOG_INFO, "shadow color %x default %x", rc.getShadowRenderingColor(), rc.getDefaultColor());
 	}
 
 

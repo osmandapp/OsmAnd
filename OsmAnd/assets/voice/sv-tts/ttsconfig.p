@@ -13,6 +13,8 @@ turn('left_sl', ['sväng svagt vänster ']).
 turn('right', ['sväng höger ']).
 turn('right_sh', ['sväng skarpt höger ']).
 turn('right_sl', ['sväng lätt höger ']).
+turn('right_keep', ['håll åt höger ']).
+turn('left_keep', ['håll åt vänster ']).
 
 prepare_turn(Turn, Dist) == [D, ' kvar, sedan ', M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn, Dist) == ['Om ', D, ', ', M] :- distance(Dist) == D, turn(Turn, M).

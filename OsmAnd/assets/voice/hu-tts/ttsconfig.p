@@ -13,6 +13,8 @@ turn('left_sl', ['fordulj enyhén balra ']).
 turn('right', ['fordulj jobbra ']).
 turn('right_sh', ['fordulj élesen jobbra ']).
 turn('right_sl', ['fordulj enyhén jobbra ']).
+turn('right_keep', ['tarts jobbra ']).
+turn('left_keep', ['tarts balra ']).
 
 prepare_turn(Turn, Dist) == [D, ' múlva ', M] :- distance(Dist, no-t) == D, turn(Turn, M).
 turn(Turn, Dist) == [D, 'múlva ', M] :- distance(Dist, no-t) == D, turn(Turn, M).

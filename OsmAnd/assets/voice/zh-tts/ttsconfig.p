@@ -13,6 +13,8 @@ turn('left_sl', ['稍向左轉 ']).
 turn('right', ['右轉 ']).
 turn('right_sh', ['向右急轉 ']).
 turn('right_sl', ['稍向右轉 ']).
+turn('right_keep', ['靠右 ']).
+turn('left_keep', ['靠左 ']).
 
 prepare_turn(Turn, Dist) == ['請準備 ', D, ' 後 ', M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn, Dist) == [D, ' 後 ',M] :- distance(Dist) == D, turn(Turn, M).

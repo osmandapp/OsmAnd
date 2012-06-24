@@ -13,6 +13,8 @@ turn('left_sl', ['links afbuigen  ']).
 turn('right', ['rechts afslaan ']).
 turn('right_sh', ['scherpe bocht naar rechts ']).
 turn('right_sl', ['rechts afbuigen ']).
+turn('right_keep', ['rechts aanhouden ']).
+turn('left_keep', ['links aanhouden ']).
 
 prepare_turn(Turn, Dist) == ['Na ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn, Dist) == ['Na ', D, M] :- distance(Dist) == D, turn(Turn, M).

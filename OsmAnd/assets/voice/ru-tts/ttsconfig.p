@@ -13,6 +13,8 @@ turn('left_sl', ['плавно поверните налево ']).
 turn('right', ['поверните направо ']).
 turn('right_sh', ['резко поверните направо ']).
 turn('right_sl', ['плавно поверните направо ']).
+turn('right_keep', ['держитесь правее ']).
+turn('left_keep', ['держитесь левее ']).
 
 prepare_turn(Turn, Dist) == ['Приготовьтесь через ', D, ' ', M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn, Dist) == ['Через ', D, M] :- distance(Dist) == D, turn(Turn, M).

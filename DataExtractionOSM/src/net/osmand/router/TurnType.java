@@ -76,6 +76,14 @@ public class TurnType {
 		return value.equals("EXIT"); //$NON-NLS-1$
 	}
 	
+	public boolean keepLeft() {
+		return value.equals(KL); 
+	}
+	
+	public boolean keepRight() {
+		return value.equals(KR); 
+	}
+	
 	@Override
 	public String toString() {
 		if(isRoundAbout()){

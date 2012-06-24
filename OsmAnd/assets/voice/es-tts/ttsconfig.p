@@ -14,6 +14,8 @@ turn('left_sl', ['gira levemente a la izquierda ']).
 turn('right', ['gira a la derecha ']).
 turn('right_sh', ['gira fuerte a la derecha ']).
 turn('right_sl', ['gira levemente a la derecha ']).
+turn('right_keep', ['mantente a la derecha']).
+turn('left_keep', ['mantente a la izquierda']).
 
 turn_inf('left', ['girar a la izquierda ']).
 turn_inf('left_sh', ['girar fuerte a la izquierda ']).
@@ -21,6 +23,8 @@ turn_inf('left_sl', ['girar levemente a la izquierda ']).
 turn_inf('right', ['girar a la derecha ']).
 turn_inf('right_sh', ['girar fuerte a la derecha ']).
 turn_inf('right_sl', ['girar levemente a la derecha ']).
+turn_inf('right_keep', ['mantente a la derecha']).
+turn_inf('left_keep', ['mantente a la izquierda']).
 
 prepare_turn(Turn, Dist) == ['Prepárate para ', M, ' tras ', D] :- distance(Dist) == D, turn_inf(Turn, M).
 turn(Turn, Dist) == ['Tras ', D, M] :- distance(Dist) == D, turn(Turn, M).

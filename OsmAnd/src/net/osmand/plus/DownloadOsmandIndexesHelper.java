@@ -66,10 +66,12 @@ public class DownloadOsmandIndexesHelper {
 				//do nothing...
 			}
 			for (String voice : list) {
-				File destFile = new File(voicePath, voice + File.separatorChar + "_ttsconfig.p");
-				String key = voice + ext;
-				String assetName = "voice" + File.separatorChar + voice + File.separatorChar + "ttsconfig.p";
-				result.add(key, new AssetIndexItem(key, "voice", date, dateModified, "0.1", "", assetName, destFile.getPath()));
+				if (voice.endsWith("tts")) {
+					File destFile = new File(voicePath, voice + File.separatorChar + "_ttsconfig.p");
+					String key = voice + ext;
+					String assetName = "voice" + File.separatorChar + voice + File.separatorChar + "ttsconfig.p";
+					result.add(key, new AssetIndexItem(key, "voice", date, dateModified, "0.1", "", assetName, destFile.getPath()));
+				}
 			}
 		} catch (IOException e) {
 			log.error("Error while loading tts files from assets", e); //$NON-NLS-1$
@@ -199,9 +201,6 @@ public class DownloadOsmandIndexesHelper {
 		public String getVisibleName(){
 			int l = fileName.lastIndexOf('_');
 			String name = fileName.substring(0, l < 0 ? fileName.length() : l).replace('_', ' ');
-//			if (fileName.endsWith(".zip")) { //$NON-NLS-1$
-//				name += " (zip)"; //$NON-NLS-1$
-//			}
 			return name;
 		}
 		

@@ -13,6 +13,8 @@ turn('left_sl', [' हलके से बाये ']).
 turn('right', [' दायने ']).
 turn('right_sh', [' तेजी से दायने ']).
 turn('right_sl', [' हलके से दायने ']).
+turn('right_keep', ['दायने रहे ']).
+turn('left_keep', ['बाये रहे  ']).
 
 prepare_turn(Turn, Dist) == [D, ' के बाद ', M, ' मुडने के लिये तयार रहे'] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn, Dist) == [D, ' के बाद ', M, ' मुडिये'] :- distance(Dist) == D, turn(Turn, M).

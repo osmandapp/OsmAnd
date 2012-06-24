@@ -13,6 +13,8 @@ turn('left_sl', ['zahnite mierne doľava']).
 turn('right', ['zahnite doprava']).
 turn('right_sh', ['zahnite prudko doprava']).
 turn('right_sl', ['zahnite mierne doprava']).
+turn('right_keep', ['držte sa vpravo']).
+turn('left_keep', ['držte sa vľavo']).
 
 pturn('left', ['doľava']).
 pturn('left_sh', ['prudko doľava']).

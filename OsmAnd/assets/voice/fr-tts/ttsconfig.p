@@ -13,6 +13,8 @@ turn('left_sl', ['tournez légèrement à gauche ']).
 turn('right', ['tournez à droite ']).
 turn('right_sh', ['tournez immédiatement à droite ']).
 turn('right_sl', ['tournez légèrement à droite ']).
+turn('right_keep', ['serrez à droite ']).
+turn('left_keep', ['serrez à gauche ']).
 
 prepare_turn(Turn, Dist) == ['Dans ', D, ' préparez vous à ', M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn, Dist) == ['Dans ', D, M] :- distance(Dist) == D, turn(Turn, M).

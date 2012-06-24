@@ -43,9 +43,11 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 	public static final String A_LEFT = "left";
 	public static final String A_LEFT_SH = "left_sh";
 	public static final String A_LEFT_SL = "left_sl";
+	public static final String A_LEFT_KEEP = "left_keep";
 	public static final String A_RIGHT = "right";
 	public static final String A_RIGHT_SH = "right_sh";
 	public static final String A_RIGHT_SL = "right_sl";
+	public static final String A_RIGHT_KEEP = "right_keep";
 	protected static final String DELAY_CONST = "delay_";
 	/** Must be sorted array! */
 	private final int[] sortedVoiceVersions;

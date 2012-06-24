@@ -13,6 +13,8 @@ turn('left_sl', ['leicht links abbiegen']).
 turn('right', ['rechts abbiegen ']).
 turn('right_sh', ['scharf rechts abbiegen ']).
 turn('right_sl', ['leicht rechts abbiegen ']).
+turn('right_keep', ['rechts halten ']).
+turn('left_keep', ['links halten ']).
 
 prepare_turn(Turn, Dist) == ['Nach ', D, M] :- distance(Dist, dativ) == D, turn(Turn, M).
 turn(Turn, Dist) == ['Nach ', D, M] :- distance(Dist, dativ) == D, turn(Turn, M).

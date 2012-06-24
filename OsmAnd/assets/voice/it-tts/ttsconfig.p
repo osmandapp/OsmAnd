@@ -13,6 +13,8 @@ turn('left_sl', ['girate leggermente a sinistra ']).
 turn('right', ['girate a destra ']).
 turn('right_sh', ['subito a destra ']).
 turn('right_sl', ['girate leggermente a destra ']).
+turn('right_keep', ['tenersi sulla destra']).
+turn('left_keep', ['tenersi sulla sinistra']).
 
 prepare_turn(Turn, Dist) == ['Prepararsi a ', M,' tra ', D] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn, Dist) == ['Dopo ', D, M] :- distance(Dist) == D, turn(Turn, M).

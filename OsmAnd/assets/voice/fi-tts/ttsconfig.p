@@ -13,6 +13,8 @@ turn('left_sl', ['käänny loivasti vasemmalle ']).
 turn('right', ['käänny oikealle ']).
 turn('right_sh', ['käänny jyrkästi oikealle ']).
 turn('right_sl', ['käänny loivasti oikealle ']).
+turn('right_keep', ['pidä oikea ']).
+turn('left_keep', ['pidä vasen ']).
 
 prepturn('left', ['kääntymään vasemmalle ']).
 prepturn('left_sh', ['kääntymään jyrkästi vasemmalle ']).
@@ -20,6 +22,8 @@ prepturn('left_sl', ['kääntymään loivasti vasemmalle ']).
 prepturn('right', ['kääntymään oikealle ']).
 prepturn('right_sh', ['kääntymään jyrkästi oikealle ']).
 prepturn('right_sl', ['kääntymään loivasti oikealle ']).
+prepturn('right_keep', ['pidä oikea ']).
+prepturn('left_keep', ['pidä vasen ']).
 
 prepare_turn(Turn, Dist) == ['Valmistaudu ', D, ' päästä ', M] :- distance(Dist, metrin) == D, prepturn(Turn, M).
 turn(Turn, Dist) == [D, ' päästä ', M] :- distance(Dist, metrin) == D, turn(Turn, M).

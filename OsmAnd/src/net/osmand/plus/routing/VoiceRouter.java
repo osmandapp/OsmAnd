@@ -312,6 +312,8 @@ public class VoiceRouter {
 				play.prepareTurn(tParam, dist).play();
 			} else if(next.getTurnType().isRoundAbout()){
 				play.prepareRoundAbout(dist).play();
+			} else if(next.getTurnType().keepLeft() || next.getTurnType().keepRight()){
+				play.prepareRoundAbout(dist).play();
 			} else if(next.getTurnType().getValue().equals(TurnType.TU) || next.getTurnType().getValue().equals(TurnType.TRU)){
 				play.prepareMakeUT(dist).play();
 			} 
@@ -341,9 +343,10 @@ public class VoiceRouter {
 					play.goAhead(dist);
 				}
 				if (TurnType.TL.equals(t.getValue()) || TurnType.TSHL.equals(t.getValue()) || TurnType.TSLL.equals(t.getValue())
-						|| TurnType.TU.equals(t.getValue())) {
+						|| TurnType.TU.equals(t.getValue()) || TurnType.KL.equals(t.getValue())) {
 					play.then().bearLeft();
-				} else if (TurnType.TR.equals(t.getValue()) || TurnType.TSHR.equals(t.getValue()) || TurnType.TSLR.equals(t.getValue())) {
+				} else if (TurnType.TR.equals(t.getValue()) || TurnType.TSHR.equals(t.getValue()) || TurnType.TSLR.equals(t.getValue())
+						|| TurnType.KR.equals(t.getValue())) {
 					play.then().bearRight();
 				}
 			}
@@ -360,6 +363,8 @@ public class VoiceRouter {
 			boolean isplay = true;
 			if(tParam != null){
 				play.turn(tParam);
+			} else if(next.getTurnType().keepLeft() || next.getTurnType().keepRight()){
+				isplay = false;
 			} else if(next.getTurnType().isRoundAbout()){
 				play.roundAbout(next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut());
 			} else if(next.getTurnType().getValue().equals(TurnType.TU) || next.getTurnType().getValue().equals(TurnType.TRU)){
@@ -404,6 +409,10 @@ public class VoiceRouter {
 			return AbstractPrologCommandPlayer.A_RIGHT_SH;
 		} else if(TurnType.TSLR.equals(t.getValue())){
 			return AbstractPrologCommandPlayer.A_RIGHT_SL;
+		} else if(TurnType.KL.equals(t.getValue())){
+			return AbstractPrologCommandPlayer.A_LEFT_KEEP;
+		} else if(TurnType.KR.equals(t.getValue())){
+			return AbstractPrologCommandPlayer.A_RIGHT_KEEP;
 		}
 		return null;
 	}

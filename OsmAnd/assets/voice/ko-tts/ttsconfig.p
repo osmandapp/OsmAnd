@@ -13,6 +13,8 @@ turn('left_sl', ['좌회전']).
 turn('right', ['우회전']).
 turn('right_sh', ['크게 우회전']).
 turn('right_sl', ['우회전']).
+turn('right_keep', ['오른쪽에서 계속 가세요 ']).
+turn('left_keep', ['왼쪽에서 계속 가세요 ']).
 
 prepare_turn(Turn, Dist) == [D, ' 앞에서 ', M, '을 준비하세요 '] :- 	distance(Dist) == D, turn(Turn, M).
 turn(Turn, Dist) == [D, ' 앞에서 ', M, '하세요 '] :- 	distance(Dist) == D, turn(Turn, M).
