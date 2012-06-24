@@ -14,6 +14,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
@@ -462,7 +463,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 		List<String> groups = new ArrayList<String>();
 		
 		public void setFavoriteGroups(Map<String, List<FavouritePoint>> favoriteGroups) {
-			this.sourceFavoriteGroups = favoriteGroups;
+			this.sourceFavoriteGroups = new TreeMap<String, List<FavouritePoint>>(favoriteGroups);
 			synchronizeGroups();
 		}
 		

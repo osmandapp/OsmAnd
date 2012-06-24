@@ -1,8 +1,10 @@
 package net.osmand.plus;
 
 
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -141,10 +143,17 @@ public class PoiFiltersHelper {
 	public List<PoiFilter> getOsmDefinedPoiFilters(){
 		if(cacheOsmDefinedFilters == null){
 			cacheOsmDefinedFilters = new ArrayList<PoiFilter>();
-			cacheOsmDefinedFilters.add(new PoiFilter(null, application));
 			for(AmenityType t : AmenityType.values()){
 				cacheOsmDefinedFilters.add(new PoiFilter(t, application));
 			}
+			final Collator instance = Collator.getInstance();
+			Collections.sort(cacheOsmDefinedFilters, new Comparator<PoiFilter>() {
+				@Override
+				public int compare(PoiFilter object1, PoiFilter object2) {
+					return instance.compare(object1.getName(), object2.getName());
+				}
+			});
+			cacheOsmDefinedFilters.add(0, new PoiFilter(null, application));
 		}
 		return Collections.unmodifiableList(cacheOsmDefinedFilters);
 	}
