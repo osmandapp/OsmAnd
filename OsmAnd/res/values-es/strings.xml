@@ -64,7 +64,7 @@
   <string name="user_name_descr">Necesario para envíos a openstreetmap.org</string>
   <string name="user_password">Su clave OSM</string>
   <string name="user_password_descr">Necesario para envíos a openstreetmap.org</string>
-  <string name="osmand_service">Servicio de fondo</string>
+  <string name="osmand_service">Funcionalidad de bajo consumo</string>
   <string name="osmand_service_descr">Para ejecutar OsmAnd mientras la pantalla está apagada</string>
   <string name="tip_rotation_switching">Rotación del mapa</string>
   <string name="tip_rotation_switching_t">\tPuedes elegir si y cómo se rota el mapa en \'Opciones\' -&gt; \'Apariencia del mapa\' -&gt; \'Rotación del mapa\'. \n\tLas opciones son: \n\t\'No rotar\' - No se girará el mapa. El Norte estará siempre arriba \n\t\'A la dirección del movimiento\' - El mapa estará continuamente alineado con la dirección y sentido de su movimiento \n\t\'A la brújula\' - El mapa estará continuamente alineado con la lectura de la brújula del dispositivo \n\tNota: Para cambiar rápidamente entre rotación por brújula y la seleccionada en las opciones, basta con que pulse sobre la aguja de la brújula en el mapa.</string>
@@ -565,7 +565,7 @@
   <string name="use_online_routing_descr">Usar Internet para calcular la ruta</string>
   <string name="use_online_routing">Usar ruteo en línea</string>
   <string name="osm_settings_descr">Especifique las opciones de Openstreetmap.org (OSM) necesarias para envíos a OSM</string>
-  <string name="data_settings_descr">"&amp;gt;Especificar idioma, descarga/recarga de datos "</string>
+  <string name="data_settings_descr">"Especificar idioma, descarga/recarga de datos "</string>
   <string name="data_settings">Datos</string>
   <string name="map_preferences_descr">Especificar opciones del mapa: fuente de datos, rotación, centrado de posición, orientación de pantalla</string>
   <string name="osm_settings">Edición de OSM</string>
@@ -728,9 +728,9 @@
   <string name="online_map_settings_descr">Configurar fuentes de teselas de mapa online o cacheado</string>
   <string name="map_settings">- Configuraciones de Mapa</string>
   <string name="map_settings_descr">Configurar pantalla de mapa</string>
-  <string name="osmand_rastermaps_plugin_description">This plugin facilitates using a variety of online or cached tile maps as base map or as overlay / underlay maps. The maps can also be prepared offline and copied to the OsmAnd folder.</string>
-  <string name="osmand_background_plugin_description">Este plugin permite rastrear o navegar en modo de bajo consumo (pantalla off) despertando periódicamente el dispositivo GPS para registrar un punto de la ruta o reproducir un aviso de voz.</string>
-  <string name="osmand_accessibility_description">This plugin configures special accessibility features.</string>
+  <string name="osmand_rastermaps_plugin_description">Show settings to configure a variety of online or cached tile maps as base map or as overlay / underlay maps. These maps can also be prepared offline and copied to the OsmAnd folder.</string>
+  <string name="osmand_background_plugin_description">Mostrar configuraciones para habilitar rastreo o navegación en modo de bajo consumo (pantalla apagada) despertando periódicamente el dispositivo GPS.</string>
+  <string name="osmand_accessibility_description">Mostrar configuraciones para características especiales de accesibilidad.</string>
   <string name="extra_settings">Configuraciones avanzadas</string>
   <string name="osmand_monitoring_description">Este plugin facilita el registro de tus excursiones a un fichero GPX o monitorizarlo en directo usando un servicio web.</string>
   <string name="osmand_extra_settings_description">This plugin provides advanced map configuration and some device-specific settings.</string>
@@ -744,7 +744,7 @@
   <string name="vector_maps_may_display_faster_on_some_devices">Los mapas vectoriales pueden mostrarse más rápido. Puede no funciona correctamente en algunos dispositivos.</string>
   <string name="simulate_route_progression_manually">Simular la progresión de la ruta manualmente</string>
   <string name="play_commands_of_currently_selected_voice">Reproducir ordenes de la voz seleccionada actualmente</string>
-  <string name="debugging_and_development">Debug y desarrollo de OsmAnd</string>
+  <string name="debugging_and_development">Desarrollo de OsmAnd</string>
   <string name="native_rendering">Rendering nativo</string>
   <string name="animate_routing">Animate navigation</string>
   <string name="test_voice_prompts">Probar avisos de voz</string>
@@ -784,9 +784,9 @@
   <string name="south">sur</string>
   <string name="south_south_west">sudsudoeste</string>
   <string name="south_west">sudoeste</string>
-  <string name="west_south_west">west-south-west</string>
+  <string name="west_south_west">oeste-sudoeste</string>
   <string name="west">oeste</string>
-  <string name="west_north_west">west-north-west</string>
+  <string name="west_north_west">oeste-noroeste</string>
   <string name="north_west">noroeste</string>
   <string name="north_north_west">nornoroeste</string>
   <string name="front">Front</string>
@@ -817,4 +817,4 @@
   <string name="use_short_object_names">Usar nombre de objetos</string>
   <string name="accessibility_preferences_descr">Preferencias de accesibilidad</string>
   <string name="accessibility_preferences">Accesibilidad</string>
-<string name="local_index_routing_data">Datos de enrutamiento</string><string name="navigate_point_format">Formato :</string><string name="poi_search_desc">Buscar PDI (Punto De Interes)</string><string name="address_search_desc">Buscar dirección</string><string name="navpoint_search_desc">Coordenadas</string><string name="transport_search_desc">Buscar transportes</string><string name="favourites_search_desc">Buscar favorito</string><string name="history_search_desc">Historial de búsqueda</string><string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string><string name="rendering_attr_noPolygons_name">No polygons</string><string name="rendering_attr_appMode_name">Rendering mode</string><string name="rendering_attr_appMode_description">Map optimization for respective User Profile</string><string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate SRTM-file may be needed.</string><string name="rendering_attr_contourLines_name">Show contour lines</string><string name="rendering_attr_hmRendered_description">Aumentar el detalle del mapa</string><string name="rendering_attr_hmRendered_name">Mostrar más detalle del mapa</string><string name="route_roundabout">Roundabout : take %1$d exit</string><string name="route_kl">Keep left</string><string name="route_kr">Keep right</string></resources>
+<string name="local_index_routing_data">Datos de enrutamiento</string><string name="navigate_point_format">Formato :</string><string name="poi_search_desc">Buscar PDI (Punto De Interes)</string><string name="address_search_desc">Buscar dirección</string><string name="navpoint_search_desc">Coordenadas</string><string name="transport_search_desc">Buscar transportes</string><string name="favourites_search_desc">Buscar favorito</string><string name="history_search_desc">Historial de búsqueda</string><string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string><string name="rendering_attr_noPolygons_name">Sin polígonos</string><string name="rendering_attr_appMode_name">Modo de renderizado</string><string name="rendering_attr_appMode_description">Optimización de mapa para cada Perfil de Usuario</string><string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate SRTM-file may be needed.</string><string name="rendering_attr_contourLines_name">Mostrar líneas de contorno</string><string name="rendering_attr_hmRendered_description">Aumentar el detalle del mapa</string><string name="rendering_attr_hmRendered_name">Mostrar más detalle del mapa</string><string name="route_roundabout">Glorieta : coja la %1$d salida</string><string name="route_kl">Manténgase a la izquierda</string><string name="route_kr">Manténgase a la derecha</string></resources>
