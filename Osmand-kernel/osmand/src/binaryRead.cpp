@@ -651,10 +651,10 @@ MapDataObject* readMapDataObject(CodedInputStream* input, MapTreeBounds* tree, S
 		}
 		}
 	}
-	if(req->cacheCoordinates.size() > 300 && types.size() > 0 && types[0].first == "admin_level") {
-		osmand_log_print(LOG_INFO, "TODO Object is ignored %llu %s %s", id, types[0].first.c_str(), types[0].second.c_str());
-		return NULL;
-	}
+//	if(req->cacheCoordinates.size() > 300 && types.size() > 0 && types[0].first == "admin_level") {
+//		osmand_log_print(LOG_INFO, "TODO Object is ignored %llu %s %s", id, types[0].first.c_str(), types[0].second.c_str());
+//		return NULL;
+//	}
 
 
 	req->numberOfAcceptedObjects++;
