@@ -73,7 +73,7 @@
 	</category>
 	
 	<category name="routes">
-		<type tag="route" value="ferry" minzoom="10" />
+		<type tag="route" value="ferry" minzoom="8" />
 	</category>
 
 	<category name="tracktype">
