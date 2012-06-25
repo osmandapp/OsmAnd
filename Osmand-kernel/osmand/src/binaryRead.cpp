@@ -509,7 +509,7 @@ bool acceptTypes(SearchQuery* req, std::vector<tag_value>& types, MapIndex* root
 }
 
 MapDataObject* readMapDataObject(CodedInputStream* input, MapTreeBounds* tree, SearchQuery* req,
-			MapIndex* root) {
+			MapIndex* root, uint64_t baseId) {
 	uint32_t tag = WireFormatLite::GetTagFieldNumber(input->ReadTag());
 	bool area = MapData::kAreaCoordinatesFieldNumber == tag;
 	if(!area && MapData::kCoordinatesFieldNumber != tag) {
@@ -651,8 +651,8 @@ MapDataObject* readMapDataObject(CodedInputStream* input, MapTreeBounds* tree, S
 		}
 		}
 	}
-//	if(req->cacheCoordinates.size() > 300 && types.size() > 0 && types[0].first == "admin_level") {
-//		osmand_log_print(LOG_INFO, "TODO Object is ignored %llu %s %s", id, types[0].first.c_str(), types[0].second.c_str());
+//	if(req->cacheCoordinates.size() > 100 && types.size() > 0 /*&& types[0].first == "admin_level"*/) {
+//		osmand_log_print(LOG_INFO, "TODO Object is %llu  (%llu) ignored %s %s", (id + baseId) >> 1, baseId, types[0].first.c_str(), types[0].second.c_str());
 //		return NULL;
 //	}
 
@@ -764,7 +764,7 @@ bool searchMapTreeBounds(CodedInputStream* input, MapTreeBounds* current, MapTre
 }
 
 bool readMapDataBlocks(CodedInputStream* input, SearchQuery* req, MapTreeBounds* tree, MapIndex* root) {
-	int64_t baseId = 0;
+	uint64_t baseId = 0;
 	int tag;
 	std::vector< MapDataObject* > results;
 	while ((tag = input->ReadTag()) != 0) {
@@ -774,7 +774,7 @@ bool readMapDataBlocks(CodedInputStream* input, SearchQuery* req, MapTreeBounds*
 		switch (WireFormatLite::GetTagFieldNumber(tag)) {
 		// required uint32_t version = 1;
 		case MapDataBlock::kBaseIdFieldNumber : {
-			WireFormatLite::ReadPrimitive<int64_t, WireFormatLite::TYPE_SINT64>(input, &baseId);
+			WireFormatLite::ReadPrimitive<uint64_t, WireFormatLite::TYPE_UINT64>(input, &baseId);
 			break;
 		}
 		case MapDataBlock::kStringTableFieldNumber: {
@@ -803,7 +803,7 @@ bool readMapDataBlocks(CodedInputStream* input, SearchQuery* req, MapTreeBounds*
 			uint32_t length;
 			DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &length)));
 			int oldLimit = input->PushLimit(length);
-			MapDataObject* mapObject = readMapDataObject(input, tree, req, root);
+			MapDataObject* mapObject = readMapDataObject(input, tree, req, root, baseId);
 			if (mapObject != NULL) {
 				mapObject->id += baseId;
 				req->publish(mapObject);

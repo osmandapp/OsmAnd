@@ -66,10 +66,16 @@
     <string name="prefs_plugins_descr">Plugins enable expert mode settings and provide extra functionality like tile maps, tracking, sleep mode operation, accessibility settings, and others.</string>
     <string name="prefs_plugins">Plugin Manager</string>
     <string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0 :
-\n\t- Plugin functionality
-\n\t- New offline map data support
-\n\t- Improve usability and simplify Profile concept
-\n\t- Lots of bug fixes
+\n\t- *Plugin functionality*
+\n\t    - Most of functionality is grouped by features and could be disabled/enabled in Plugin Manager.
+You can enable Raster Map sources, Tracking settings and many other new and previously existing features.     
+\n\t- *New offline map data support*
+\n\t    - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed). 
+\n\t    - You need to download completely new offline data (old data will not be supported anymore)
+\n\t- *Offline Routing* 
+\n\t	- Offline routing becomes more robust
+\n\t  *Usability and UI experience*
+\n\t	- Improved in many areas		
 	</string>
     <string name="osm_editing_plugin_description">Show settings needed for OSM feedback like collecting / modifying OSM POI objects, opening / commenting OSM bugs, and contributing recorded GPX files (requires OSM credentials).</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vector maps likely display faster. May not work well on some devices.</string>
