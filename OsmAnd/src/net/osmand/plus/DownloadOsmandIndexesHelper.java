@@ -16,7 +16,6 @@ import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
-import net.osmand.plus.activities.DownloadIndexActivity.AssetDownloadEntry;
 import net.osmand.plus.activities.DownloadIndexActivity.DownloadEntry;
 
 import org.apache.commons.logging.Log;
@@ -52,6 +51,7 @@ public class DownloadOsmandIndexesHelper {
 		String[] list;
 		try {
 			String ext = IndexItem.addVersionToExt(IndexConstants.TTSVOICE_INDEX_EXT_ZIP, IndexConstants.TTSVOICE_VERSION);
+			String extvoice = IndexItem.addVersionToExt(IndexConstants.VOICE_INDEX_EXT_ZIP, IndexConstants.VOICE_VERSION);
 			File voicePath = settings.extendOsmandPath(ResourceManager.VOICE_PATH);
 			list = amanager.list("voice");
 			String date = "";
@@ -71,6 +71,23 @@ public class DownloadOsmandIndexesHelper {
 					String key = voice + ext;
 					String assetName = "voice" + File.separatorChar + voice + File.separatorChar + "ttsconfig.p";
 					result.add(key, new AssetIndexItem(key, "voice", date, dateModified, "0.1", "", assetName, destFile.getPath()));
+				} else {
+					String key = voice + extvoice;
+					IndexItem item = result.getIndexFiles().get(key);
+					if (item != null) {
+						File destFile = new File(voicePath, voice + File.separatorChar + "_config.p");
+						SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy"); //$NON-NLS-1$
+						try {
+							Date d = format.parse(item.getDate());
+							if (d.getTime() > dateModified) {
+								continue;
+							}
+						} catch (Exception es) {
+						}
+						item.date = date;
+						String assetName = "voice" + File.separatorChar + voice + File.separatorChar + "ttsconfig.p";
+						item.attachedItem = new AssetIndexItem(key, "voice", date, dateModified, "0.1", "", assetName, destFile.getPath());
+					}
 				}
 			}
 		} catch (IOException e) {
@@ -141,7 +158,7 @@ public class DownloadOsmandIndexesHelper {
 		
 		@Override
 		public DownloadEntry createDownloadEntry(Context ctx) {
-			return new AssetDownloadEntry(assetName, destFile, dateModified);
+			return new DownloadEntry(assetName, destFile, dateModified);
 		}
 	}
 	
@@ -151,6 +168,7 @@ public class DownloadOsmandIndexesHelper {
 		private String parts;
 		private String fileName;
 		private String size;
+		private IndexItem attachedItem;
 		
 		public IndexItem(String fileName, String description, String date, String size, String parts) {
 			this.fileName = fileName;
@@ -158,6 +176,10 @@ public class DownloadOsmandIndexesHelper {
 			this.date = date;
 			this.size = size;
 			this.parts = parts;
+		}
+		
+		public IndexItem getAttachedItem() {
+			return attachedItem;
 		}
 		
 		public String getVisibleDescription(Context ctx){
@@ -307,6 +329,9 @@ public class DownloadOsmandIndexesHelper {
 				if (backup.exists()) {
 					entry.existingBackupFile = backup;
 				}
+			}
+			if(attachedItem != null) {
+				entry.attachedEntry = attachedItem.createDownloadEntry(ctx);
 			}
 			return entry;
 		}

@@ -645,40 +645,43 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		public String baseName;
 		public int parts;
 		public File existingBackupFile;
+		public DownloadEntry attachedEntry;
+		public boolean isAsset;
 		
-		public boolean downloadFile(DownloadFileHelper downloadFileHelper, String filename, List<File> filesToReindex,
-				IProgress progress, String indexOfAllFiles,
-				DownloadIndexesAsyncTask downloadIndexesAsyncTask,
-				boolean forceWifi, AssetManager assetManager) throws InterruptedException {
-			return 	downloadFileHelper.downloadFile(filename, 
-					fileToSave, fileToUnzip, unzip, progress, dateModified,
-					parts, filesToReindex, indexOfAllFiles, downloadIndexesAsyncTask, forceWifi);
+		public DownloadEntry() {
+			// default
 		}
-	}
-	
-	public static class AssetDownloadEntry extends DownloadEntry {
-
-		public AssetDownloadEntry(String assetName, String fileName, long dateModified) {
+		public DownloadEntry(String assetName, String fileName, long dateModified) {
 			this.dateModified = dateModified;
 			fileToUnzip = new File(fileName);
 			fileToSave = new File(assetName);
+			isAsset = true;
 		}
-
-		@Override
-		public boolean downloadFile(DownloadFileHelper downloadFileHelper,
-				String filename, List<File> filesToReindex, IProgress progress,
-				String indexOfAllFiles,
-				DownloadIndexesAsyncTask downloadIndexesAsyncTask,
-				boolean forceWifi, AssetManager assetManager) throws InterruptedException {
-			try {
-				ResourceManager.copyAssets(assetManager, fileToSave.getPath(), fileToUnzip);
-				fileToUnzip.setLastModified(this.dateModified);
-				return true;
-			} catch (IOException e) {
-				return false;
+		
+		public boolean downloadFile(DownloadFileHelper downloadFileHelper, String filename, List<File> filesToReindex,
+				IProgress progress, String indexOfAllFiles, DownloadIndexesAsyncTask downloadIndexesAsyncTask,
+				boolean forceWifi, AssetManager assetManager)
+				throws InterruptedException {
+			boolean res = false;
+			if (isAsset) {
+				try {
+					ResourceManager.copyAssets(assetManager, fileToSave.getPath(), fileToUnzip);
+					fileToUnzip.setLastModified(this.dateModified);
+					res = true;
+				} catch (IOException e) {
+				}
+			} else {
+				res = downloadFileHelper.downloadFile(filename, fileToSave, fileToUnzip, unzip, progress, dateModified, parts,
+						filesToReindex, indexOfAllFiles, downloadIndexesAsyncTask, forceWifi);
 			}
+			if (res && attachedEntry != null) {
+				return attachedEntry.downloadFile(downloadFileHelper, filename, filesToReindex, progress, indexOfAllFiles,
+						downloadIndexesAsyncTask, forceWifi, assetManager);
+			}
+			return res;
 		}
 	}
+	
 	
 	private static class IndexItemCategory implements Comparable<IndexItemCategory> {
 		public final String name; 
