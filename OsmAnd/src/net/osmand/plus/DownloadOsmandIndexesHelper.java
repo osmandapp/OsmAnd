@@ -85,7 +85,7 @@ public class DownloadOsmandIndexesHelper {
 						} catch (Exception es) {
 						}
 						item.date = date;
-						String assetName = "voice" + File.separatorChar + voice + File.separatorChar + "ttsconfig.p";
+						String assetName = "voice" + File.separatorChar + voice + File.separatorChar + "config.p";
 						item.attachedItem = new AssetIndexItem(key, "voice", date, dateModified, "0.1", "", assetName, destFile.getPath());
 					}
 				}
