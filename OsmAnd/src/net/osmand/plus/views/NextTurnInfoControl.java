@@ -104,7 +104,7 @@ public class NextTurnInfoControl extends MapInfoControl {
 			String subtext = null;
 
 			if (makeUturnWhenPossible == true) {
-				text = "ASAP";
+				text = getResources().getString(R.string.asap);
 			}
 
 			int ls = text.lastIndexOf(' ');
