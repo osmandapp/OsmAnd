@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <batch_process>
-	<process_attributes mapZooms="11-12;13-14;15-" renderingTypesFile="" zoomWaySmoothness="2" 
+	<process_attributes mapZooms="11-12;13-" renderingTypesFile="" zoomWaySmoothness="2" 
 		osmDbDialect="sqlite" mapDbDialect="sqlite"/>
 	
 	<!-- There are 3 subprocess : 	
