@@ -26,6 +26,7 @@ import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.location.Location;
+import android.text.format.DateFormat;
 import android.text.format.Time;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -106,6 +107,8 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 //		settings.clearParkingPosition();
 		parkingPoint = settings.getParkingPosition();
+		if (parkingPoint == null)
+			return;
 		timeLimit = settings.getParkingType();
 		Bitmap parkingIcon;
 		if (!timeLimit) {
@@ -113,8 +116,6 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		} else {
 			parkingIcon = parkingLimitIcon;
 		}
-		if (parkingPoint == null)
-			return;
 		double latitude = parkingPoint.getLatitude();
 		double longitude = parkingPoint.getLongitude();
 		if (isLocationVisible(latitude, longitude)) {
@@ -167,14 +168,13 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 			long parkingTime = settings.getParkingTime();
 			Time time = new Time();
 			time.set(parkingTime);
-			timeLimitDesc.append("To pick up the car at: ");
+			timeLimitDesc.append(map.getString(R.string.osmand_parking_position_description_add));
 			timeLimitDesc.append(time.hour);
 			timeLimitDesc.append(":");
-			timeLimitDesc.append(time.minute);	
-			if (time.hour>12)
-				timeLimitDesc.append(" p.m.");
-			else
-				timeLimitDesc.append(" a.m.");
+			timeLimitDesc.append(time.minute);
+			if (!DateFormat.is24HourFormat(map.getApplicationContext())) {
+				timeLimitDesc.append(time.hour >= 12 ? map.getString(R.string.osmand_parking_pm) : map.getString(R.string.osmand_parking_am));
+		    }
 		}
 		return map.getString(R.string.osmand_parking_position_description, timeLimitDesc.toString());
 	}
