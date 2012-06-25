@@ -1251,7 +1251,7 @@
 		<filter contourLines="11" tag="contour" value="elevation" minzoom="11" color="#2Aff7c00" strokeWidth="1"/>
 		<filter contourLines="12" tag="contour" value="elevation" minzoom="12" color="#2Aff7c00" strokeWidth="1"/>
 		<filter contourLines="13" tag="contour" value="elevation" minzoom="13" color="#2Aff7c00" strokeWidth="1"/>
-		<filter tag="route" value="ferry" minzoom="11" color="#0000ff" strokeWidth="2" pathEffect="6_3"/>
+		<filter tag="route" value="ferry" minzoom="11" color="#7777FF" strokeWidth="2" pathEffect="6_3"/>
 
 		<!-- Barriers -->
 		<filter minzoom="16" color="#333333" strokeWidth="1" tag="highway" value="gate"/>
