@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="save_route_as_gpx">Route als GPX speichern</string>
 	<string name="route_roundabout">Kreisverkehr : Nehmen Sie die %1$d Ausfahrt</string>
 	<string name="route_kl">Links halten</string>
 	<string name="route_kr">Rechts halten</string>
