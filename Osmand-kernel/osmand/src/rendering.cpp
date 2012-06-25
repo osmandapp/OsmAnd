@@ -251,6 +251,7 @@ void drawPolylineShadow(SkCanvas* cv, SkPaint* paint, RenderingContext* rc, SkPa
 }
 
 std::vector<SkPaint> oneWayPaints;
+std::vector<SkPaint> reverseWayPaints;
 SkPaint* oneWayPaint(){
     SkPaint* oneWay = new SkPaint;
     oneWay->setStyle(SkPaint::kStroke_Style);
@@ -258,41 +259,75 @@ SkPaint* oneWayPaint(){
     oneWay->setAntiAlias(true);
     return oneWay;
 }
-void drawOneWayPaints(RenderingContext* rc, SkCanvas* cv, SkPath* p) {
-    if (oneWayPaints.size() == 0) {
-        SkPathEffect* arrowDashEffect1 = new SkDashPathEffect((float []){ 0, 12, 10, 152 }, 4, 0);
-        SkPathEffect* arrowDashEffect2 = new SkDashPathEffect((float[]){ 0, 12, 9, 153 }, 4, 1);
-        SkPathEffect* arrowDashEffect3 = new SkDashPathEffect((float[]){ 0, 18, 2, 154 }, 4, 1);
-        SkPathEffect* arrowDashEffect4 = new SkDashPathEffect((float[]){ 0, 18, 1, 155 }, 4, 1);
+void drawOneWayPaints(RenderingContext* rc, SkCanvas* cv, SkPath* p, int oneway) {
+	if (oneWayPaints.size() == 0) {
+		SkPathEffect* arrowDashEffect1 = new SkDashPathEffect((float []) {0, 12, 10, 152}, 4, 0);
+		SkPathEffect* arrowDashEffect2 = new SkDashPathEffect((float[]) {0, 12, 9, 153}, 4, 1);
+		SkPathEffect* arrowDashEffect3 = new SkDashPathEffect((float[]) {0, 18, 2, 154}, 4, 1);
+		SkPathEffect* arrowDashEffect4 = new SkDashPathEffect((float[]) {0, 18, 1, 155}, 4, 1);
 
-        SkPaint* p = oneWayPaint();
-        p->setStrokeWidth(1);
-        p->setPathEffect(arrowDashEffect1)->unref();
-        oneWayPaints.push_back(*p);
-        delete p;
+		SkPaint* p = oneWayPaint();
+		p->setStrokeWidth(1);
+		p->setPathEffect(arrowDashEffect1)->unref();
+		oneWayPaints.push_back(*p);
+		delete p;
 
-        p = oneWayPaint();
-        p->setStrokeWidth(2);
-        p->setPathEffect(arrowDashEffect2)->unref();
-        oneWayPaints.push_back(*p);
-        delete p;
+		p = oneWayPaint();
+		p->setStrokeWidth(2);
+		p->setPathEffect(arrowDashEffect2)->unref();
+		oneWayPaints.push_back(*p);
+		delete p;
 
-        p = oneWayPaint();
-        p->setStrokeWidth(3);
-        p->setPathEffect(arrowDashEffect3)->unref();
-        oneWayPaints.push_back(*p);
-        delete p;
+		p = oneWayPaint();
+		p->setStrokeWidth(3);
+		p->setPathEffect(arrowDashEffect3)->unref();
+		oneWayPaints.push_back(*p);
+		delete p;
 
-        p = oneWayPaint();
-        p->setStrokeWidth(4);
-        p->setPathEffect(arrowDashEffect4)->unref();
-        oneWayPaints.push_back(*p);
-        delete p;
-    }
+		p = oneWayPaint();
+		p->setStrokeWidth(4);
+		p->setPathEffect(arrowDashEffect4)->unref();
+		oneWayPaints.push_back(*p);
+		delete p;
+	}
+	if (reverseWayPaints.size() == 0) {
+		SkPathEffect* arrowDashEffect1 = new SkDashPathEffect((float []) {0, 12, 10, 152}, 4, 0);
+		SkPathEffect* arrowDashEffect2 = new SkDashPathEffect((float[]) {0, 13, 9, 152}, 4, 1);
+		SkPathEffect* arrowDashEffect3 = new SkDashPathEffect((float[]) {0, 14, 2, 158}, 4, 1);
+		SkPathEffect* arrowDashEffect4 = new SkDashPathEffect((float[]) {0, 15, 1, 158}, 4, 1);
+		SkPaint* p = oneWayPaint();
+		p->setStrokeWidth(1);
+		p->setPathEffect(arrowDashEffect1)->unref();
+		reverseWayPaints.push_back(*p);
+		delete p;
 
-    for (size_t i = 0; i < oneWayPaints.size(); i++) {
-        PROFILE_NATIVE_OPERATION(rc, cv->drawPath(*p, oneWayPaints.at(i)));
-    }
+		p = oneWayPaint();
+		p->setStrokeWidth(2);
+		p->setPathEffect(arrowDashEffect2)->unref();
+		reverseWayPaints.push_back(*p);
+		delete p;
+
+		p = oneWayPaint();
+		p->setStrokeWidth(3);
+		p->setPathEffect(arrowDashEffect3)->unref();
+		reverseWayPaints.push_back(*p);
+		delete p;
+
+		p = oneWayPaint();
+		p->setStrokeWidth(4);
+		p->setPathEffect(arrowDashEffect4)->unref();
+		reverseWayPaints.push_back(*p);
+		delete p;
+	}
+	if (oneway > 0) {
+		for (size_t i = 0; i < oneWayPaints.size(); i++) {
+			PROFILE_NATIVE_OPERATION(rc, cv->drawPath(*p, oneWayPaints.at(i)));
+		}
+	} else {
+		for (size_t i = 0; i < reverseWayPaints.size(); i++) {
+			PROFILE_NATIVE_OPERATION(rc, cv->drawPath(*p, reverseWayPaints.at(i)));
+		}
+	}
 }
 
 
@@ -364,7 +399,7 @@ void drawPolyline(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas
 				PROFILE_NATIVE_OPERATION(rc, cv->drawPath(path, *paint));
 			}
 			if (oneway && !drawOnlyShadow) {
-				drawOneWayPaints(rc, cv, &path);
+				drawOneWayPaints(rc, cv, &path, oneway);
 			}
 			if (!drawOnlyShadow) {
 				renderText(mObj, req, rc, pair.first, pair.second, middlePoint.fX, middlePoint.fY, &path);

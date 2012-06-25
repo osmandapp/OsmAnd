@@ -736,8 +736,8 @@ public class OsmandRenderer {
 		if(reverseOneWay == null){
 			PathEffect arrowDashEffect1 = new DashPathEffect(new float[] { 0, 12, 10, 152 }, 0);
 			PathEffect arrowDashEffect2 = new DashPathEffect(new float[] { 0, 13, 9, 152 }, 1);
-			PathEffect arrowDashEffect3 = new DashPathEffect(new float[] { 0, 14, 2, 148 }, 1);
-			PathEffect arrowDashEffect4 = new DashPathEffect(new float[] { 0, 15, 1, 148 }, 1);
+			PathEffect arrowDashEffect3 = new DashPathEffect(new float[] { 0, 14, 2, 158 }, 1);
+			PathEffect arrowDashEffect4 = new DashPathEffect(new float[] { 0, 15, 1, 158 }, 1);
 			reverseOneWay = new Paint[4];
 			reverseOneWay[0] = oneWayPaint();
 			reverseOneWay[0].setStrokeWidth(1);
