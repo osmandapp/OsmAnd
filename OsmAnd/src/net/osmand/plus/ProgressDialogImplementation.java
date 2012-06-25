@@ -151,10 +151,8 @@ public class ProgressDialogImplementation implements IProgress {
 	
 	@Override
 	public void remaining(int remainingWork) {
-		this.progress = work - remainingWork;
-		if (!isIndeterminate() && dialog != null) {
-			updateProgressMessage(this.progress);
-		}
+		int newprogress = work - remainingWork;
+		progress(newprogress - this.progress);
 	}
 	
 	@Override
