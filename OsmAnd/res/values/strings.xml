@@ -47,7 +47,7 @@
     <string name="gpx_index_settings_descr"> (includes GPX analyzer)</string>
     <string name="index_settings_descr">Download, view details, and manage offline maps</string>
     <string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
-    <string name="map_online_data">Online maps</string>
+    <string name="map_online_data">Online maps (tiles)</string>
 	<string name="map_online_data_descr">Use online maps (download and cache tiles on SD card)</string>
     <string name="online_map_settings">Online Maps</string>
 	<string name="online_map_settings_descr">Configure online or cached tile map sources</string>
@@ -67,8 +67,8 @@
     <string name="prefs_plugins">Plugin Manager</string>
     <string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0 :
 \n\t- *Plugin functionality*
-\n\t    - Most of functionality is grouped by features and could be disabled/enabled in Plugin Manager.
-You can enable Raster Map sources, Tracking settings and many other new and previously existing features.     
+\n\t    - Most functionality is grouped by features and can be enabled/disabled in the Plugin Manager.
+You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.     
 \n\t- *New offline map data support*
 \n\t    - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed). 
 \n\t    - You need to download completely new offline data (old data will not be supported anymore)
