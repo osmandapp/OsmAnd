@@ -188,9 +188,12 @@ public class DownloadFileHelper {
 					out = new FileOutputStream(fs);
 					int read;
 					byte[] buffer = new byte[BUFFER_SIZE];
+					int count = 0;
 					while ((read = zipIn.read(buffer)) != -1) {
 						out.write(buffer, 0, read);
-						progress.remaining(fin.available());
+						if(count++ % 8 == 0) {
+							progress.remaining(fin.available());
+						}
 					}
 					out.close();
 					
