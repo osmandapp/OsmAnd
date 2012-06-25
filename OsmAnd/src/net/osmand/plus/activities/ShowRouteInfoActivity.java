@@ -27,7 +27,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -87,15 +86,16 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 
 	@Override
 	public void onListItemClick(ListView parent, View v, int position, long id) {
-		if(position == 0){
+		// headers are included
+		if(position < 1){
 			return;
 		}
-		RouteDirectionInfo item = ((RouteInfoAdapter)getListAdapter()).getItem(position - 1);
+		RouteDirectionInfo item = ((RouteInfoAdapter)getListAdapter()).getItem(position - 2);
 		Location loc = helper.getLocationFromRouteDirection(item);
 		if(loc != null){
 			OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
 			settings.setMapLocationToShow(loc.getLatitude(),loc.getLongitude(),
-					Math.max(13, settings.getLastKnownMapZoom()));
+					Math.max(13, settings.getLastKnownMapZoom()), null, item.getDescriptionRoute() + " " + getTimeDescription(item), null);
 			MapActivity.launchMapActivityMoveToTop(this);
 		}
 	}
@@ -145,16 +145,24 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 			((TurnPathHelper.RouteDrawable) icon.getDrawable()).setRouteType(model.getTurnType());
 			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(model.distance, ShowRouteInfoActivity.this));
 			label.setText(model.getDescriptionRoute());
-			int seconds = model.getExpectedTime() % 60;
-			int min = (model.getExpectedTime() / 60) % 60;
-			int hours = (model.getExpectedTime() / 3600);
-			if (hours == 0) {
-				timeLabel.setText(String.format("%02d:%02d", min, seconds)); //$NON-NLS-1$
-			} else {
-				timeLabel.setText(String.format("%d:%02d:%02d", hours, min, seconds)); //$NON-NLS-1$ 
-			}
+			String timeText = getTimeDescription(model);
+			timeLabel.setText(timeText);
 			return row;
 		}
+
+
+	}
+	private String getTimeDescription(RouteDirectionInfo model) {
+		int seconds = model.getExpectedTime() % 60;
+		int min = (model.getExpectedTime() / 60) % 60;
+		int hours = (model.getExpectedTime() / 3600);
+		String timeText;
+		if (hours == 0) {
+			timeText = String.format("%02d:%02d", min, seconds); //$NON-NLS-1$
+		} else {
+			timeText = String.format("%d:%02d:%02d", hours, min, seconds); //$NON-NLS-1$ 
+		}
+		return timeText;
 	}
 }
 
