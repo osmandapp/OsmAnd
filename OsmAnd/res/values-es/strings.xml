@@ -49,7 +49,7 @@
   <!-- this block re-worked for new Preferences structure -->
   <string name="profile_settings">Opciones específicas por perfil</string>
   <string name="settings_preset">Perfil de usuario</string>
-  <string name="settings_preset_descr">Selecciona un perfil de uso. (Las opciones de Mapa, Seguimiento y Navegación puede cambiarse para cada perfil)</string>
+  <string name="settings_preset_descr">Selecciona un perfil de uso con ajustes de mapa y navegación personalizados.</string>
   <string name="monitor_preferences">Seguimiento</string>
   <string name="monitor_preferences_descr">Especifica los parámetros de seguimiento</string>
   <string name="routing_settings">- Navegación</string>
@@ -73,7 +73,7 @@
   <string name="tip_day_night_mode">Modo Día/Noche</string>
   <string name="tip_day_night_mode_t">\tLa apariencia del mapa se puede cambiar, para algunos mapas vectoriales, entre Día (más brillante) y Noche (más oscuro). \n\tLos colores Noche son más seguros para la conducción nocturna. \n\tPuede definir la política para cambiar entre Día y Noche en \'Opciones\' -&gt; \'Apariencia del mapa\' -&gt;\'Modo Día/Noche\'. \n\tLas opciones son: \n\t\'Alba/Ocaso\' - modo automático, controlado por la posición del sol (por defecto) \n\t\'Día\' - siempre usa el modo Día \n\t\'Noche\' - siempre usa el modo Noche \n\t\'Sensor de luz\' - la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si lo tiene)</string>
   <string name="tip_osm_improve">Mejora de los datos OSM</string>
-  <string name="tip_osm_improve_t">\tOsmAnd usa mapas basados en datos de Openstreetmap.org (OSM) y, además de para ver mapas y preparar rutas, se puede utilizar para mejorar la calidad de los datos OSM. Puede crear y enviar fácilmente nuevos POI o informes de fallos de OSM tan sólo con unos pocos clicks. \n\tPara ello necesita primero proporcionar su información de conexión OSM en \'Opciones\' -&gt; \'Opciones Generales\' -&gt; \'OSM\'. \n\tPara añadir un nuevo POI use la opción \'Crear POI\' en el menú contextual del mapa. Introduzca la información sobre el nuevo POI en el formulario y por último envíela. \n\tLos errores en los mapas pueden ser notificados inmediatamente mediante fallos OSM, y la comunidad OSM puede resolver el problema más rápidamente. \n\tPara añadir un fallo OSM use la opción \'Abrir fallo OSM\' en el menú contextual del mapa. Luego escriba la descripción detallada del problema y por último envíela pulsando el botón \'Añadir\'. \n\tNecesita conexión a Internet para enviar sus contribuciones a POIs y fallos OSM.</string>
+  <string name="tip_osm_improve_t">\tOsmAnd usa mapas basados en datos de Openstreetmap.org (OSM) y -además de para ver mapas y navegación- se puede utilizar para mejorar la calidad de los datos OSM. Puede crear y enviar fácilmente nuevos POI o informes de fallos de OSM tan sólo con unos pocos clicks. \n\tPara ello necesita primero proporcionar su información de conexión OSM en \'Opciones\' -&gt; \'Opciones Generales\' -&gt; \'Edición OSM\'. \n\tPara añadir un nuevo POI use la opción \'Crear POI\' en el menú contextual del mapa. Introduzca la información sobre el nuevo POI en el formulario \'Crear POI\' y por último envíela. \n\tLos errores en los mapas pueden ser notificados inmediatamente mediante fallos OSM, y la comunidad OSM puede resolver el problema más rápidamente. \n\tPara añadir un fallo OSM use la opción \'Abrir fallo OSM\' en el menú contextual del mapa. Luego escriba la descripción detallada del problema y por último envíela pulsando el botón \'Añadir\'. \n\tNecesita conexión a Internet para enviar sus contribuciones a POIs y fallos OSM.</string>
   <!-- end of string changes for new Preferences structure -->
   <string name="download_files_not_enough_space">No hay suficente espacio vacío para descargar %1$s MB (disponible: %2$s).</string>
   <string name="download_files_question_space">El espacio disponible ahora es {2} MB. ¿Descargar {0} archivo(s) ({1} MB)?</string>
@@ -240,9 +240,9 @@
   <string name="preferred_locale_descr">Selecciona el idioma de visualización</string>
   <string name="preferred_locale">"Idioma de visualización "</string>
   <string name="tip_map_switch">Fuente de mapas</string>
-  <string name="tip_map_switch_t">\tEl modo más rápido de cambiar la fuente del mapa y las capas mostradas es pulsando \'Menú\' -&gt; \'Representación\' en la vista del mapa. \n\tEn \'Fuente del mapa…\' puedes elegir usar los mapas vectoriales descargados, fuentes de teselas predefinidas (con conexión), o mapas creados manualmente, por ejemplo con OsmAndMapCreator en un PC. \n\tOsmAnd también soporta fuentes particulares.</string>
+  <string name="tip_map_switch_t">\tEl modo más rápido de cambiar la fuente del mapa y las capas mostradas es pulsando \'Menú\' -&gt; \'Representación\' en la vista del mapa. \n\tEn \'Fuente del mapa…\' puedes elegir usar los mapas vectoriales descargados, fuentes de teselas predefinidas (con conexión), o mapas creados manualmente, por ejemplo con OsmAndMapCreator en un PC. \n\tOsmAnd también soporta fuentes personalizadas.</string>
   <string name="tip_app_mode">Perfil de usuario</string>
-  <string name="tip_app_mode_t">\tOsmAnd soporta diferentes perfiles de aplicación (configurables) para diferentes usos. \n\tPuede cambiar los perfiles en \'Menú\' -&gt; \'Opciones\' -&gt; \'Opciones específicas de perfil\', o cuando cree una ruta.</string>
+  <string name="tip_app_mode_t">\tOsmAnd soporta diferentes perfiles de aplicación (configurables) para diferentes usos. \n\tPuede cambiar los perfiles en \'Menú\' -&gt; \'Opciones\' -&gt; \'Perfil de usuario\', o cuando cree una ruta.</string>
   <string name="tip_navigation">Navegación</string>
   <string name="tip_navigation_t">\tAntes de empezar una navegación (ruta) necesita seleccionar un destino. Después, pulse \'Menú\' -&gt; \'Indicaciones\' en el mapa y seleccione el tipo de navegación.</string>
   <string name="tip_search">Buscando</string>
@@ -310,17 +310,17 @@
   <string name="reading_cached_tiles">Leyendo teselas en caché…</string>
   <string name="version_index_is_big_for_memory">La versión \'\'{0}\'\' de índices no cabe en memoria</string>
   <string name="version_index_is_not_supported">No se soporta la versión \'\'{0}\'\' de índices</string>
-  <string name="use_osmand_routing_service">Ruteo OsmAnd &gt;20km</string>
-  <string name="use_osmand_routing_service_descr">Usa ruteo sin conexión OsmAnd para larga distancia (experimental) en vez de la alternativa CloudMade</string>
+  <string name="use_osmand_routing_service">Navegación OsmAnd &gt;20km</string>
+  <string name="use_osmand_routing_service_descr">El uso de la navegación sin conexión OsmAnd se aplica solo a rutas &gt; 20 km (experimental)</string>
   <string name="osmand_routing_experimental">El ruteo sin conexión OsmAnd es una característica experimental y no funciona para distancias de más de unos 20 km.\n\nEl servicio de ruteo se cambia temporalmente al servicio con conexión CloudMade.</string>
   <string name="specified_dir_doesnt_exist">No puedo encontrar el directorio especificado.</string>
   <string name="application_dir">Directorio de almacenaje</string>
-  <string name="application_dir_change_warning">Cambiar el directorio de almacenaje no moverá ni borrará los datos. Esto debe realizarse aparte y fuera de OsmAnd. ¿Continuar de todas formas?</string>
-  <string name="osmand_net_previously_installed">Una versión anterior de OsmAnd está instalada. Todos los datos descargados están soportados por la nueva aplicación. Pero los puntos Favoritos deben exportarse desde la aplicación antigua y después importarse en la nueva.</string>
+  <string name="application_dir_change_warning">Cambiar el directorio de almacenamiento no moverá ni borrará los datos. Esto debe realizarse aparte y fuera de OsmAnd. ¿Continuar de todas formas?</string>
+  <string name="osmand_net_previously_installed">Una versión anterior de OsmAnd está instalada. Todos los datos descargados están soportados por la nueva aplicación. Pero los Favoritos deben exportarse desde la aplicación antigua y después importarse en la nueva.</string>
   <string name="build_installed">Compilación {0} correctamente instalada ({1}).</string>
   <string name="downloading_build">Descargando compilación…</string>
-  <string name="install_selected_build">¿ Continuar para instalar OsmAnd - {0} de {1} {2} MB ?</string>
-  <string name="loading_builds_failed">Recuperando la lista de compilaciones OsmAnd fallidas</string>
+  <string name="install_selected_build">¿Desea instalar OsmAnd - {0} de {1} {2} MB ?</string>
+  <string name="loading_builds_failed">Fallo recuperando la lista de compilaciones OsmAnd</string>
   <string name="loading_builds">Cargando compilaciones OsmAnd…</string>
   <string name="select_build_to_install">Seleccione una de las compilaciones OsmAnd a instalar</string>
   <string name="contribution_activity">Actividad guardia auxiliar para versión de aportación</string>
@@ -762,10 +762,10 @@
   <string name="back_to_location">Volver a localización</string>
   <string name="help">Ayuda</string>
   <string name="show_details">Mostrar detalles</string>
-  <string name="accessibility_extensions_descr">Accessibility extensions for old Android versions</string>
-  <string name="accessibility_extensions">Accessibility extensions</string>
-  <string name="accessibility_mode">Accessibility mode</string>
-  <string name="accessibility_mode_descr">Turns on the accessibility features</string>
+  <string name="accessibility_extensions_descr">Extensión de accesibilidad para versiones viejas de Android</string>
+  <string name="accessibility_extensions">Extensiones de accesibilidad</string>
+  <string name="accessibility_mode">Modo accesibilidad</string>
+  <string name="accessibility_mode_descr">Activar las características de accesibilidad</string>
   <string name="accessibility_on">On</string>
   <string name="accessibility_off">Off</string>
   <string name="accessibility_default">Usar valores de configuración globales del sistema</string>
@@ -789,27 +789,27 @@
   <string name="west_north_west">oeste-noroeste</string>
   <string name="north_west">noroeste</string>
   <string name="north_north_west">nornoroeste</string>
-  <string name="front">Front</string>
-  <string name="front_right">Front right</string>
+  <string name="front">Enfrente</string>
+  <string name="front_right">Enfrente a la derecha</string>
   <string name="right">Derecha</string>
-  <string name="back_right">Back right</string>
-  <string name="back">Back</string>
-  <string name="back_left">Back left</string>
+  <string name="back_right">Detrás a la derecha</string>
+  <string name="back">Detrás</string>
+  <string name="back_left">Detrás a la izquierda</string>
   <string name="left">Izquierda</string>
-  <string name="front_left">Front left</string>
+  <string name="front_left">Enfrente a la izquierda</string>
   <string name="oclock">en punto</string>
-  <string name="towards">towards</string>
+  <string name="towards">hacia</string>
   <string name="accuracy">Precisión</string>
   <string name="altitude">Altitud</string>
-  <string name="no_info">No info</string>
-  <string name="direction_style_sidewise">Sidewise (8 sectors)</string>
-  <string name="direction_style_clockwise">Clockwise (12 sectors)</string>
-  <string name="settings_direction_style">Direction style</string>
-  <string name="settings_direction_style_descr">Choose style to express relative directions while moving</string>
+  <string name="no_info">Sin información</string>
+  <string name="direction_style_sidewise">Sentido lateral (8 sectores)</string>
+  <string name="direction_style_clockwise">Sentido horario (12 sectores)</string>
+  <string name="settings_direction_style">Estilo de direcciones</string>
+  <string name="settings_direction_style_descr">Selecciona estilo para expresar direcciones relativas mientras se mueve</string>
   <string name="auto_announce_on">Start autoannouncing</string>
   <string name="auto_announce_off">Stop autoannouncing</string>
-  <string name="scroll_map_by_gestures_descr">Scroll map by gestures on the touchscreen</string>
-  <string name="scroll_map_by_gestures">Natural map scrolling</string>
+  <string name="scroll_map_by_gestures_descr">Desplazar mapa por gestos en la pantalla táctil</string>
+  <string name="scroll_map_by_gestures">Desplazamiento de mapa natural</string>
   <string name="i_am_here">Estoy aquí</string>
   <string name="zoom_by_trackball_descr">Cambiar zoom de mapa con los movimientos horizontales del trackball</string>
   <string name="zoom_by_trackball">Usar trackball para control de zoom</string>
@@ -817,4 +817,4 @@
   <string name="use_short_object_names">Usar nombre de objetos</string>
   <string name="accessibility_preferences_descr">Preferencias de accesibilidad</string>
   <string name="accessibility_preferences">Accesibilidad</string>
-<string name="local_index_routing_data">Datos de enrutamiento</string><string name="navigate_point_format">Formato :</string><string name="poi_search_desc">Buscar PDI (Punto De Interes)</string><string name="address_search_desc">Buscar dirección</string><string name="navpoint_search_desc">Coordenadas</string><string name="transport_search_desc">Buscar transportes</string><string name="favourites_search_desc">Buscar favorito</string><string name="history_search_desc">Historial de búsqueda</string><string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string><string name="rendering_attr_noPolygons_name">Sin polígonos</string><string name="rendering_attr_appMode_name">Modo de renderizado</string><string name="rendering_attr_appMode_description">Optimización de mapa para cada Perfil de Usuario</string><string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate SRTM-file may be needed.</string><string name="rendering_attr_contourLines_name">Mostrar líneas de contorno</string><string name="rendering_attr_hmRendered_description">Aumentar el detalle del mapa</string><string name="rendering_attr_hmRendered_name">Mostrar más detalle del mapa</string><string name="route_roundabout">Glorieta : coja la %1$d salida</string><string name="route_kl">Manténgase a la izquierda</string><string name="route_kr">Manténgase a la derecha</string><string name="save_route_as_gpx">Save route as GPX</string></resources>
+<string name="local_index_routing_data">Datos de enrutamiento</string><string name="navigate_point_format">Formato :</string><string name="poi_search_desc">Buscar PDI (Punto De Interes)</string><string name="address_search_desc">Buscar dirección</string><string name="navpoint_search_desc">Coordenadas</string><string name="transport_search_desc">Buscar transportes</string><string name="favourites_search_desc">Buscar favorito</string><string name="history_search_desc">Historial de búsqueda</string><string name="rendering_attr_noPolygons_description">Hacer todas las características del terreno transparentes en el mapa</string><string name="rendering_attr_noPolygons_name">Sin polígonos</string><string name="rendering_attr_appMode_name">Modo de renderizado</string><string name="rendering_attr_appMode_description">Optimización de mapa para cada Perfil de Usuario</string><string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate SRTM-file may be needed.</string><string name="rendering_attr_contourLines_name">Mostrar líneas de contorno</string><string name="rendering_attr_hmRendered_description">Aumentar el detalle del mapa</string><string name="rendering_attr_hmRendered_name">Mostrar más detalle del mapa</string><string name="route_roundabout">Glorieta : coja la %1$d salida</string><string name="route_kl">Manténgase a la izquierda</string><string name="route_kr">Manténgase a la derecha</string><string name="save_route_as_gpx">Guardar ruta como GPX</string><string name="asap">ASAP</string></resources>
