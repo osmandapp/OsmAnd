@@ -163,9 +163,6 @@ public class BinaryRoutePlanner {
 	
 	
 	// TODO TO-DO U-TURN
-	// TODO TO-DO ADD-INFO 
-
-
 	// TODO write unit tests
 	// TODO fastest/shortest way
 	/**
@@ -177,8 +174,8 @@ public class BinaryRoutePlanner {
 		ctx.timeToLoad = 0;
 		ctx.visitedSegments = 0;
 		ctx.timeToCalculate = System.nanoTime();
-		ctx.firstRoadId = (start.getRoad().id << 8) + start.getSegmentStart();
 		if(ctx.config.initialDirection != null) {
+			ctx.firstRoadId = (start.getRoad().id << 8) + start.getSegmentStart();
 			double plusDir = start.getRoad().directionRoute(start.segmentStart, true);
 			double diff	 = plusDir - ctx.config.initialDirection;
 			if(Math.abs(MapUtils.alignAngleDifference(diff)) <= Math.PI / 3) {
