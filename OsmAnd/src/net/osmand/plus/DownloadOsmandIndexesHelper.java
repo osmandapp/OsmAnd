@@ -83,6 +83,7 @@ public class DownloadOsmandIndexesHelper {
 								continue;
 							}
 						} catch (Exception es) {
+							log.error("Parse exception", es);
 						}
 						item.date = date;
 						String assetName = "voice" + File.separatorChar + voice + File.separatorChar + "config.p";
@@ -297,6 +298,7 @@ public class DownloadOsmandIndexesHelper {
 						new File(parent, ".nomedia").createNewFile();//$NON-NLS-1$	
 					} catch (IOException e) {
 						// swallow io exception
+						log.error("IOException" ,e);
 					} 
 				}
 			}
@@ -315,10 +317,12 @@ public class DownloadOsmandIndexesHelper {
 					Date d = format.parse(item.getDate());
 					entry.dateModified = d.getTime();
 				} catch (ParseException e1) {
+					log.error("ParseException" ,e1);
 				}
 				try {
 					entry.sizeMB = Double.parseDouble(item.getSize());
 				} catch (NumberFormatException e1) {
+					log.error("ParseException" ,e1);
 				}
 				entry.parts = 1;
 				if (item.getParts() != null) {

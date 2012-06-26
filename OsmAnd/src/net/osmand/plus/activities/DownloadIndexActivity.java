@@ -24,6 +24,7 @@ import java.util.TreeSet;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
+import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
@@ -69,6 +70,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class DownloadIndexActivity extends OsmandExpandableListActivity {
+	
+	private static final org.apache.commons.logging.Log log = LogUtil.getLog(DownloadIndexActivity.class);
 	
 	/** menus **/
 	private static final int RELOAD_ID = 0;
@@ -296,6 +299,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 						try {
 							startActivity(intent);
 						} catch (ActivityNotFoundException e) {
+							log.error("Exception", e);
 						}
 					}
 				});
@@ -669,6 +673,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 					fileToUnzip.setLastModified(this.dateModified);
 					res = true;
 				} catch (IOException e) {
+					log.error("Copy exception", e);
 				}
 			} else {
 				res = downloadFileHelper.downloadFile(filename, fileToSave, fileToUnzip, unzip, progress, dateModified, parts,
