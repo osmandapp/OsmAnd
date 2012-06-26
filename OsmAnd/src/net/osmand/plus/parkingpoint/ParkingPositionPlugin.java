@@ -2,6 +2,7 @@ package net.osmand.plus.parkingpoint;
 
 import java.util.Calendar;
 
+import net.osmand.osm.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
@@ -81,23 +82,38 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public void registerMapContextMenuActions(final MapActivity mapActivity,
 			final double latitude, final double longitude,
 			ContextMenuAdapter adapter, Object selectedObj) {
+		boolean isParkingSelected = false;
+		LatLon parkingPosition = settings.getParkingPosition();
+		if (selectedObj instanceof LatLon && parkingLayer != null) {
+			LatLon point = (LatLon)selectedObj;	
+			if ((point.getLatitude() == parkingPosition.getLatitude()) && (point.getLongitude() == parkingPosition.getLongitude()))
+				isParkingSelected = true;
+		}
+		if (isParkingSelected) {
+			OnContextMenuClick removeListener = new OnContextMenuClick() {
+				@Override
+				public void onContextMenuClick(int resId, int pos,
+						boolean isChecked, DialogInterface dialog) {
+					if ((resId == R.string.context_menu_item_delete_parking_point)) {
+						showDeleteDialog(mapActivity);
+					}
+				}
+			};
+			if (parkingPosition != null)
+				adapter.registerItem(R.string.context_menu_item_delete_parking_point, 0, removeListener, 0);
+		}
+		
 		OnContextMenuClick addListener = new OnContextMenuClick() {
 			@Override
 			public void onContextMenuClick(int resId, int pos,
 					boolean isChecked, DialogInterface dialog) {
 				if (resId == R.string.context_menu_item_add_parking_point) {
 					showAddParkingDialog(mapActivity, latitude, longitude);
-				} else if ((resId == R.string.context_menu_item_delete_parking_point)) {
-					showDeleteDialog(mapActivity);
 				}
 			}
 		};
-		adapter.registerItem(R.string.context_menu_item_add_parking_point, 0,
-				addListener, -1);
-		if (settings.getParkingPosition() != null)
-			adapter.registerItem(
-					R.string.context_menu_item_delete_parking_point, 0,
-					addListener, -1);
+		adapter.registerItem(R.string.context_menu_item_add_parking_point, 0, addListener, -1);
+		
 	}
 
 	/**
