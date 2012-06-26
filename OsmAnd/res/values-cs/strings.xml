@@ -8,7 +8,7 @@
   <string name="gpx_description_txt">Popis</string>
   <string name="validate_gpx_upload_name_pwd">Prosím zadejte vaše uživatelské jméno a heslo pro přístup do OSM, aby bylo možné nahrát soubory GPX.</string>
   <string name="default_buttons_support">Podpora</string>
-  <string name="support_new_features">Sponsoring nových funkcí</string>
+  <string name="support_new_features">Sponzoring nových funkcí</string>
   <string name="show_ruler_level_descr">Zobrazovat měřítko na mapě</string>
   <string name="show_ruler_level">Měřítko</string>
   <string name="info_button">Informace</string>
@@ -121,7 +121,7 @@
   <string name="profile_settings">Nastavení profilu</string>
   <string name="settings_preset">Uživatelský profil</string>
   <string name="settings_preset_descr">Vyberte uživatelský profil. V každém profilu je možno upravit vzhled mapy a způsob navigace.</string>
-  <string name="monitor_preferences">Záznam trasy</string>
+  <string name="monitor_preferences">- Záznam trasy</string>
   <string name="monitor_preferences_descr">Nastavení záznamu trasy na SD kartu</string>
   <string name="routing_settings">- Navigace</string>
   <string name="routing_settings_descr">Nastavení způsobu navigace</string>
@@ -172,8 +172,8 @@
   <string name="city_type_town">Malé město</string>
   <string name="city_type_city">Velké město</string>
   <string name="layer_poi_label">POI popisky</string>
-  <string name="animate_route_off">Animaci vypnuta</string>
-  <string name="animate_route">Animace zapnuta</string>
+  <string name="animate_route_off">Vypnout animaci</string>
+  <string name="animate_route">Zapnout animaci</string>
   <string name="tip_recent_changes_0_6_8_t">"Změny ve verzi 0.6.8 : \n\t- kompletní redesign vyhledávání (POI, adresy)! Hledání adres je nyní mnohem rychlejší. Jednotné vyhledávací rozhraní s mnoha různými parametry. \n\t- Vyhledávání POI ve velkých oblastech podle jména (ve státech). \n\t- Opravené blikání mapy na tabletech (Chyba č.641) \n\t- Automatické sledování pohybu (Chyba č.356) \n\t- GPX navigace přesunuta do \'Navigace\' a \'Uložit pokyny\' přesunuto do \'O cestě\' \n\t- POI data jsou nyní součástí .obf souboru (všechny stažené indexy po 01/10/11) \n\t- Opravy v hlasových pokynech (oprava GPS pozice, zapomenutí prvního pokynu) \n\t- Drobná vylepšení "</string>
   <string name="file_can_not_be_renamed">Nelze přejmenovat soubor.</string>
   <string name="file_with_name_already_exists">Soubor tohoto jména již existuje.</string>
@@ -791,19 +791,19 @@
   <string name="online_map_settings_descr">Nastavení rastrových překryvných nebo podkresových map</string>
   <string name="map_settings">- Mapa</string>
   <string name="map_settings_descr">Nastavení mapového zobrazení</string>
-  <string name="osmand_rastermaps_plugin_description">Modul umožňuje použití mnoha rastrových map jako překryv nebo podkres. Rastrové mapy lze získat online nebo připravit pro offline použití v adresáři Osmand na SD kartě.</string>
-  <string name="osmand_background_plugin_description">Tento modul umožňuje záznam trasy nebo navigaci v úsporném režimu (při vypnuté obrazovce). Aplikace pravidelně zapíná GPS přijímač, aby zaznamenala bod trasy nebo přehrála hlasový pokyn.</string>
-  <string name="osmand_accessibility_description">Tento modul aktivuje přídavné funkce zpřístupnění pro osoby s omezením zraku.</string>
+  <string name="osmand_rastermaps_plugin_description">Pokročilá nastavení pro použití mnoha rastrových map jako základní mapu, překryv nebo podkres. Rastrové mapy lze získat online nebo připravit pro offline použití v adresáři Osmand na SD kartě.</string>
+  <string name="osmand_background_plugin_description">Pokročilá nastavení pro záznam trasy nebo navigaci v úsporném režimu (při vypnuté obrazovce). Aplikace pravidelně zapíná GPS přijímač, aby zaznamenala bod trasy nebo přehrála hlasový pokyn.</string>
+  <string name="osmand_accessibility_description">Pokročilá nastavení zpřístupnění pro osoby s omezením zraku.</string>
   <string name="extra_settings">Pokročilá nastavení</string>
-  <string name="osmand_monitoring_description">Tento modul umožňuje zaznamenat vaši trasu do souboru GPX nebo v reálném čase odeslat na webový server.</string>
-  <string name="osmand_extra_settings_description">Tento modul poskytuje rozšířená nastavení mapy a další nastavení specifická pro konkrétní zařízení.</string>
-  <string name="osmand_development_plugin_description">"Tento modul aktivuje vývojové a ladící funkce jako simulace navigace nebo informace o rychlosti vykreslování. "</string>
+  <string name="osmand_monitoring_description">Pokročilá nastavení pro záznam vaší trasy do souboru GPX nebo pro odesílání v reálném čase na webový server.</string>
+  <string name="osmand_extra_settings_description">Rozšířená nastavení mapy a další nastavení specifická pro konkrétní zařízení.</string>
+  <string name="osmand_development_plugin_description">"Pokročilá nastavení vývojových a ladících funkcí jako jsou simulace navigace nebo informace o rychlosti vykreslování. "</string>
   <string name="plugins_screen">Správce modulů</string>
   <string name="select_plugin_to_activate">Kliknutím modul zapnete nebo vypnete. (V některých případech je třeba aplikaci restartovat.)</string>
-  <string name="prefs_plugins_descr">Moduly umožňují zapnout přídavné funkce aplikace jako: záznam trasy, rastrové mapy, běh na pozadí, usnadnění a další.</string>
+  <string name="prefs_plugins_descr">Moduly umožňují zapnout pokročilé nastavení a poskytnout přídavné funkce jako: záznam trasy, rastrové mapy, běh na pozadí, usnadnění a další.</string>
   <string name="prefs_plugins">Moduly</string>
   <string name="tip_recent_changes_0_8_0_t">"Změny ve verzi 0.8.0 : \n\t- Moduly\n\t- Podpora nového formátu offline map\n\t- Opraveno mnoho chyb"</string>
-  <string name="osm_editing_plugin_description">Tento modul umožňuje práci s OSM jako: vytváření a úpravu bodů zájmu (POI), vytváření a komentování OSM chyb a nahrávání zaznamenaných GPX souborů (vyžaduje přihlašovací údaje do OSM).</string>
+  <string name="osm_editing_plugin_description">Nastavení pro práci s OSM jako: vytváření a úpravu bodů zájmu (POI), vytváření a komentování OSM chyb a nahrávání zaznamenaných GPX souborů (vyžaduje přihlašovací údaje do OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">"Akcelerace vykreslování pomocí \'Android native\' knihovny. Vektorové mapy se zpravidla vykreslují rychleji, pokud je tato možnost zaškrtnuta. Avšak na některých zařízeních tato funkce nemusí fungovat."</string>
   <string name="simulate_route_progression_manually">Ručně simulovat postup po trase</string>
   <string name="play_commands_of_currently_selected_voice">Přehrát hlasové pokyny v aktuálně nastaveném hlase.</string>
@@ -818,4 +818,4 @@
   <string name="navigate_point_format_D">SSS.SSSSS</string>
   <string name="navigate_point_format_DM">SSS MM.MMMMM</string>
   <string name="navigate_point_format_DMS">SSS MM ss.sssss</string>
-<string name="local_index_routing_data">Navigační data</string><string name="navigate_point_format">Formát :</string><string name="poi_search_desc">Hledat body zájmu (POI)</string><string name="address_search_desc">Hledat adresu</string><string name="navpoint_search_desc">Souřadnice</string><string name="transport_search_desc">Hledat dopravu</string><string name="favourites_search_desc">Hledat oblíbené místo</string><string name="history_search_desc">Historie hledání</string><string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string><string name="rendering_attr_noPolygons_name">No polygons</string><string name="rendering_attr_appMode_name">Rendering mode</string><string name="rendering_attr_appMode_description">Map optimization for respective User Profile</string><string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate SRTM-file may be needed.</string><string name="rendering_attr_contourLines_name">Show contour lines</string><string name="rendering_attr_hmRendered_description">Increase amount of map detail shown</string><string name="rendering_attr_hmRendered_name">Show more map detail</string></resources>
+<string name="local_index_routing_data">Navigační data</string><string name="navigate_point_format">Formát :</string><string name="poi_search_desc">Hledat body zájmu (POI)</string><string name="address_search_desc">Hledat adresu</string><string name="navpoint_search_desc">Souřadnice</string><string name="transport_search_desc">Hledat dopravu</string><string name="favourites_search_desc">Hledat oblíbené místo</string><string name="history_search_desc">Historie hledání</string><string name="rendering_attr_noPolygons_description">Zobrazit všechny typy půdy průhledně</string><string name="rendering_attr_noPolygons_name">Bez polygonů</string><string name="rendering_attr_appMode_name">Režim vykreslování</string><string name="rendering_attr_appMode_description">Optimizace mapy pro příslušný uživatelský profil</string><string name="rendering_attr_contourLines_description">Zvolte minimální zvětšení, od kterého se budou v mapě zobrazovat vrstevnice. Pro správné zobrazení je případně potřeba nainstalovat příslušný soubor \'SRTM\'.</string><string name="rendering_attr_contourLines_name">Zobrazit vrstevnice</string><string name="rendering_attr_hmRendered_description">Zvýšit počet detailů vyobrazených v mapě</string><string name="rendering_attr_hmRendered_name">Zobrazit více mapových detailů</string><string name="asap">hned</string><string name="save_route_as_gpx">Uložit trasu do souboru GPX</string><string name="route_roundabout">Kruhový objezd : vyjeďte %1$d. výjezdem a pokračujte</string><string name="route_kl">Držte se vlevo a pokračujte</string><string name="route_kr">Držte se vpravo a pokračujte</string></resources>
