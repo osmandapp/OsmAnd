@@ -319,7 +319,7 @@
   <string name="preferred_locale">Taal</string>
   <string name="tip_map_switch">Kaartbron</string>
   <string name="tip_map_switch_t">\tDe snelste manier de kaartbron en de lagen te veranderen is via: \'Menu\' -&gt; \'Definieer beeld\'. \n\tBij \'Kaartbron…\' kunt een selectie maken uit de aanwezige offline vectorkaarten, ingestelde (online) kaartsegmenten, of handmatig vervaardigde kaarten bijvoorbeeld d.m.v OsmAndMapCreator op een PC. \n\tOsmAnd ondersteunt ook eigen kaartbronnen.</string>
-  <string name="tip_app_mode">Gebruikersprofiel</string>
+  <string name="tip_app_mode">Gebruiksprofiel</string>
   <string name="tip_app_mode_t">\tOsmAnd ondersteunt verschillende (aanpasbare) programmaprofielen voor verschillende toepassingen. \n\tU kunt het profiel instellen in \'Menu\' -&gt; \'Instellingen\' -&gt; \'Gebruiksprofiel\', of bij het creëren van een route.</string>
   <string name="tip_navigation">Navigatie</string>
   <string name="tip_navigation_t">\tVoordat u een navigatie start (routing), moet u eerst een bestemming kiezen. Druk daarna op \'Menu\' -&gt; \'Navigeer\' op de kaart en selecteer het type navigatie.</string>
@@ -716,9 +716,9 @@
   <string name="navigate_point_top_text">Voer breedtegraad &amp; lengtegraad in het geselecteerde formaat in (G - graden, M - minuten, S - seconden)</string>
   <string name="navigate_point_latitude">Breedtegraad</string>
   <string name="navigate_point_longitude">Lengtegraad</string>
-  <string name="navigate_point_format_D">GGG.GGGG</string>
-  <string name="navigate_point_format_DM">GGG MM.MMMMM</string>
-  <string name="navigate_point_format_DMS">GGG MM SS.SSSSS</string>
+  <string name="navigate_point_format_D">GGG.GG</string>
+  <string name="navigate_point_format_DM">GGG MM.MM</string>
+  <string name="navigate_point_format_DMS">GGG MM SS.SS</string>
   <string name="search_shown_on_map">Toon op kaart</string>
   <string name="navigate_point_cancel">Annuleer</string>
   <string name="search_address_top_text">Selecteer adres</string>
@@ -811,7 +811,7 @@
   <string name="extra_settings">Geavanceerde instellingen</string>
   <string name="osmand_monitoring_description">Met deze plugin kan je je reizen in GPX bestanden opslaan of live (laten) bekijken via een webservice.</string>
   <string name="osmand_extra_settings_description">Met deze plugin kan je geavanceerde kaartinstellingen en enkele apparaatspecifieke instellingen wijzigen.</string>
-  <string name="osmand_development_plugin_description">Met deze plugin kan je ontwikkeling en debugging opties activeren zoals navigatie met animatie of de kaartgeneratie snelheid.</string>
+  <string name="osmand_development_plugin_description">Met deze plugin kan je ontwikkeling en fout-opsporing opties activeren zoals navigatie met animatie of de kaartgeneratie snelheid.</string>
   <string name="plugins_screen">Plugin manager</string>
   <string name="select_plugin_to_activate">Toets een plugin om deze te (de)activeren. (Het kan nodig zijn om OsmAnd te herstarten).</string>
   <string name="prefs_plugins_descr">Plugins geven extra functionaliteit zoals tracking, rasterkaarten, scherm-uit mode, toegankelijkheidsinstellingen en meer.</string>
@@ -825,4 +825,4 @@
   <string name="search_position_favorites">Favorieten…</string>
   <string name="search_position_undefined">Ongedefinieerd</string>
   <string name="search_position_fixed">Gefixed</string>
-<string name="local_index_routing_data">Routing data</string><string name="navigate_point_format">Format :</string><string name="poi_search_desc">POI - Point Of interest</string><string name="address_search_desc">Address search</string><string name="navpoint_search_desc">Navigate point</string><string name="transport_search_desc">Transport search</string><string name="favourites_search_desc">Favourites search</string><string name="history_search_desc">Search history</string></resources>
+<string name="local_index_routing_data">Navigatiedata</string><string name="navigate_point_format">Formaat:</string><string name="poi_search_desc">Interessepunten of \'Points Of Interest\' (POI)</string><string name="address_search_desc">Adres zoeken</string><string name="navpoint_search_desc">Navigatie punt</string><string name="transport_search_desc">Openbaar vervoer zoeken</string><string name="favourites_search_desc">Favorieten zoeken</string><string name="history_search_desc">Zoekgeschiedenis</string><string name="asap">z.s.m.</string><string name="save_route_as_gpx">Sla route op als GPX bestand</string><string name="route_roundabout">Rotonde: neem afslag %1$d</string><string name="route_kl">Links aanhouden</string><string name="route_kr">Rechts aanhouden</string><string name="rendering_attr_noPolygons_description">Maak alle oppervlaktes op de kaart transparant</string><string name="rendering_attr_noPolygons_name">Geen vlakken</string><string name="rendering_attr_appMode_name">Weergave modus</string><string name="rendering_attr_appMode_description">Kaartoptimalisatie voor dit gebruiksprofiel</string><string name="rendering_attr_contourLines_description">Selecteer minimum zoom-niveau voor weergave in de kaart indien beschikbaar. Een apart SRTM-bestand kan nodig zijn.</string><string name="rendering_attr_contourLines_name">Toon omtrek lijnen</string><string name="rendering_attr_hmRendered_description">Toon meer details op de kaart</string><string name="rendering_attr_hmRendered_name">Toon meer details</string></resources>
