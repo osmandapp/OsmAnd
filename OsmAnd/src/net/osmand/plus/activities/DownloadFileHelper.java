@@ -154,7 +154,7 @@ public class DownloadFileHelper {
 				if (unzipToDir) {
 					fileToUnZip.mkdirs();
 				}
-				FileInputStream fin = new FileInputStream(fileToDownload);
+				CountingInputStream fin = new CountingInputStream(new FileInputStream(fileToDownload));
 				ZipInputStream zipIn = new ZipInputStream(fin);
 				ZipEntry entry = null;
 				boolean first = true;
@@ -188,12 +188,9 @@ public class DownloadFileHelper {
 					out = new FileOutputStream(fs);
 					int read;
 					byte[] buffer = new byte[BUFFER_SIZE];
-					int count = 0;
 					while ((read = zipIn.read(buffer)) != -1) {
 						out.write(buffer, 0, read);
-						if(count++ % 8 == 0) {
-							progress.remaining(fin.available());
-						}
+						progress.progress(fin.lastReadCount());
 					}
 					out.close();
 					
@@ -234,5 +231,94 @@ public class DownloadFileHelper {
 	
 	public boolean isInterruptDownloading() {
 		return interruptDownloading;
+	}
+	
+	private static class CountingInputStream extends InputStream {
+
+		private final InputStream delegate;
+		private int count;
+
+		public CountingInputStream(InputStream delegate) {
+			this.delegate = delegate;
+		}
+		
+		public int lastReadCount() {
+			int last = count;
+			count = 0;
+			return last;
+		}
+		
+		@Override
+		public int available() throws IOException {
+			return delegate.available();
+		}
+
+		@Override
+		public void close() throws IOException {
+			delegate.close();
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			return delegate.equals(o);
+		}
+
+		@Override
+		public int hashCode() {
+			return delegate.hashCode();
+		}
+
+		@Override
+		public void mark(int readlimit) {
+			delegate.mark(readlimit);
+		}
+
+		@Override
+		public boolean markSupported() {
+			return delegate.markSupported();
+		}
+
+		@Override
+		public int read() throws IOException {
+			int read = delegate.read();
+			if (read > 0) {
+				this.count++;;
+			}
+			return read;
+		}
+
+		@Override
+		public int read(byte[] buffer, int offset, int length)
+				throws IOException {
+			int read = delegate.read(buffer, offset, length);
+			if (read > 0) {
+				this.count += read;
+			}
+			return read;
+		}
+
+		@Override
+		public int read(byte[] buffer) throws IOException {
+			int read = delegate.read(buffer);
+			if (read > 0) {
+				this.count += read;
+			}
+			return read;
+		}
+
+		@Override
+		public void reset() throws IOException {
+			delegate.reset();
+		}
+
+		@Override
+		public long skip(long byteCount) throws IOException {
+			return delegate.skip(byteCount);
+		}
+
+		@Override
+		public String toString() {
+			return delegate.toString();
+		}
 	}
 }
