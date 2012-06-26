@@ -25,6 +25,7 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin {
 	private OsmandApplication app;
 	private BroadcastReceiver broadcastReceiver;
 	private CheckBoxPreference routeServiceEnabled;
+	private SettingsActivity activity;
 	
 	public OsmandBackgroundServicePlugin(OsmandApplication app) {
 		this.app = app;
@@ -54,8 +55,13 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin {
 	
 	@Override
 	public void settingsActivityDestroy(final SettingsActivity activity){
-		if(broadcastReceiver != null) {
+		unregisterReceiver(activity);
+	}
+
+	private void unregisterReceiver(final SettingsActivity activity) {
+		if (activity != null && this.activity == activity && broadcastReceiver != null) {
 			activity.unregisterReceiver(broadcastReceiver);
+			broadcastReceiver = null;
 		}
 	}
 	
@@ -74,7 +80,11 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin {
 		grp.setSummary(R.string.osmand_service_descr);
 		((PreferenceCategory) screen.findPreference("global_settings")).addPreference(grp);
 
+		//unregister old service. Note, the order of calls of Create/Destroy is not guaranteed!!
+		unregisterReceiver(this.activity);
+		
 		routeServiceEnabled = new CheckBoxPreference(activity);
+		this.activity = activity;
 		broadcastReceiver = new BroadcastReceiver(){
 			@Override
 			public void onReceive(Context context, Intent intent) {
