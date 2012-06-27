@@ -837,7 +837,7 @@
 	<string name="left_side_navigation_descr">Auswählen für Länder mit Linksverkehr</string>
 	<string name="download_link_and_local_description">Hier klicken um Offline-Daten herunterzuladen oder zu aktualisieren. \nAnklicken bestehender Einträge liefert Details, drücken und halten ermöglicht deaktivieren oder löschen. Aktuelle Daten auf dem Gerät (%1$s frei):</string>
 	<string name="unknown_from_location">Startpunkt ist noch nicht ermittelt</string>
-	<string name="context_menu_item_directions">Als Ziel wählen</string>
+	<string name="context_menu_item_directions">Hierher navigieren</string>
 	<string name="confirm_interrupt_download">Möchten Sie den Datei-Download abbrechen?</string>
 	<string name="basemap_was_selected_to_download">Die Basis-Karte wird für die korrekte Benutzung der Applikation benötigt und ist für den Download vorselektiert.</string>
 	<string name="gpx_index_settings_descr">" (beinhaltet GPX-Analyse)"</string>
