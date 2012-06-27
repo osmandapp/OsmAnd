@@ -113,6 +113,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 			return true;
 	    } else if(itemId == R.id.deletepoimod) {
 			OpenstreetmapPoint info = (OpenstreetmapPoint) listAdapter.getChild(group, child);
+			db.deleteAllPOIModifications(info.getId());
 			listAdapter.delete(info);
 			return true;
 	    } else if(itemId == R.id.uploadpoimods) {
