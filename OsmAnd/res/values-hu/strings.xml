@@ -791,7 +791,7 @@
   <string name="basemap_was_selected_to_download">Az alaptérképre szükség van az alkalmazás megfelelő működéséhez, ezért ki lett jelölve letöltésre.</string>
   <string name="gpx_index_settings_descr">" (GPX elemzőt tartalmaz)"</string>
   <string name="map_online_plugin_is_not_installed">További térképforrások kiválasztásához engedélyezd az online térképek bővítményt</string>
-  <string name="map_online_data">Online térképek</string>
+  <string name="map_online_data">Online térképek (csempék)</string>
   <string name="map_online_data_descr">Internetes térképek használata (letöltés és tárolás az SD kártyán)</string>
   <string name="online_map_settings">Online térkép</string>
   <string name="online_map_settings_descr">Internetes és tárolt raszteres térképek beállításai</string>
@@ -808,7 +808,7 @@
   <string name="select_plugin_to_activate">Bővítmény be- és kikapcsolása érintésre történik. (Lehet, hogy az OsmAndot újra kell indítanod.)</string>
   <string name="prefs_plugins_descr">A bővítmények további lehetőségeket biztosítanak, mint útvonal mentés, raszteres térképek, kikapcsolt képernyős használat, akadálymentesítés és mások.</string>
   <string name="prefs_plugins">Bővítménykezelő</string>
-  <string name="tip_recent_changes_0_8_0_t">"A 0.8.0 kiadás változásai:\n\t- Beépülők\n\t- Új offline térképadat formátum\n\t- Sok hibajavítás"</string>
+  <string name="tip_recent_changes_0_8_0_t">"A 0.8.0 kiadás változásai:\n\t- *Beépülők*\n\t - Egyes funkciók csoportosítva engedélyezhetők és letilthatók a Bővítménykezelőben. Engedélyezhetsz online térképforrásokat, útvonalrögzítést, sok egyéb új és korábban is meglévő eszközt.\n\t- *Új offline térképadat formátum*\n\t - A térképrenderelés gyorsabb és pontosabb lett (a partvonalak hibája javításra került).\n\t - Az offline térképadatokat újra le kell töltened (a régi adatok nem támogatottak).\n\t- *Offline útvonaltervezés*\n\t - Az offline útvonaltervező sokkal gyorsabb lett\n\t- *Felhasználói élmény*\n\t - A felhasználói felület több helyen is csinosodott"</string>
   <string name="osm_editing_plugin_description">Beállítások kezelése OSM POI objektumok gyűjtéséhez / módosításához, OSM hibajelzések készítéséhez, és felvett GPX fájlok feltöltéséhez. (OSM felhasználói név szükséges.)</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektoros térképek gyorsabban rajzolódnak. Nem minden eszközön működik.</string>
   <string name="simulate_route_progression_manually">Az útvonalon haladás szimulálása</string>
