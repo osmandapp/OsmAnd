@@ -121,26 +121,26 @@
 		
 		<highway value="trunk" speed="5" priority="0.7" dynamicPriority="0.7"/>
 		<highway value="trunk_link" speed="5" priority="0.7" dynamicPriority="0.7"/>
-		<highway value="primary" speed="6" priority="0.9" dynamicPriority="0.9"/>
-		<highway value="primary_link" speed="6" priority="0.9" dynamicPriority="0.9"/>
-		<highway value="secondary" speed="6" priority="1" dynamicPriority="1"/>
-		<highway value="secondary_link" speed="6" priority="1" dynamicPriority="1"/>
-		<highway value="tertiary" speed="6" priority="1" dynamicPriority="1"/>
-		<highway value="tertiary_link" speed="6" priority="1" dynamicPriority="1"/>
-		<highway value="road" speed="6" priority="1" dynamicPriority="1"/>
-		<highway value="residential" speed="6" priority="1" dynamicPriority="1"/>
-		<highway value="cycleway" speed="5" priority="1" dynamicPriority="1"/>
+		<highway value="primary" speed="5" priority="0.9" dynamicPriority="0.9"/>
+		<highway value="primary_link" speed="5" priority="0.9" dynamicPriority="0.9"/>
+		<highway value="secondary" speed="5" priority="1" dynamicPriority="1"/>
+		<highway value="secondary_link" speed="5" priority="1" dynamicPriority="1"/>
+		<highway value="tertiary" speed="5" priority="1" dynamicPriority="1"/>
+		<highway value="tertiary_link" speed="5" priority="1" dynamicPriority="1"/>
+		<highway value="road" speed="5" priority="1" dynamicPriority="1"/>
+		<highway value="residential" speed="5" priority="1" dynamicPriority="1"/>
+		<highway value="cycleway" speed="5" priority="1" dynamicPriority="1.1"/>
 		
-		<highway value="unclassified" speed="6" priority="1" dynamicPriority="1"/>
-		<highway value="service" speed="6" priority="1" dynamicPriority="1"/>
-		<highway value="track" speed="6" priority="1" dynamicPriority="1"/>
-		<highway value="path" speed="6" priority="1" dynamicPriority="1"/>
-		<highway value="living_street" speed="6" priority="1" dynamicPriority="1"/>
-		<highway value="pedestrian" speed="6" priority="1.4" dynamicPriority="1.4"/>
-		<highway value="footway" speed="6" priority="1.4" dynamicPriority="1.4"/>
-		<highway value="byway" speed="6" priority="1" dynamicPriority="1"/>
+		<highway value="unclassified" speed="5" priority="1" dynamicPriority="1"/>
+		<highway value="service" speed="5" priority="1" dynamicPriority="1"/>
+		<highway value="track" speed="5" priority="1" dynamicPriority="1"/>
+		<highway value="path" speed="5" priority="1" dynamicPriority="1"/>
+		<highway value="living_street" speed="5" priority="1" dynamicPriority="1"/>
+		<highway value="pedestrian" speed="5" priority="1.4" dynamicPriority="1.1"/>
+		<highway value="footway" speed="5" priority="1.4" dynamicPriority="1.1"/>
+		<highway value="byway" speed="5" priority="1" dynamicPriority="1"/>
 		<highway value="services" speed="5" priority="1" dynamicPriority="1"/>
-		<highway value="bridleway" speed="6" priority="0.8" dynamicPriority="0.8"/>
+		<highway value="bridleway" speed="5" priority="0.8" dynamicPriority="0.8"/>
 		<highway value="steps" speed="4" priority="1.2" dynamicPriority="1"/>
 
 		<obstacle tag="highway" value="traffic_signals" penalty="30"/>
