@@ -785,7 +785,7 @@
   <string name="basemap_was_selected_to_download">Pro správnou funkci aplikace je třeba základní mapa. Proto byla automaticky vybrána ke stažení.</string>
   <string name="gpx_index_settings_descr">" (včetně GPX analyzeru)"</string>
   <string name="map_online_plugin_is_not_installed">Zapněte modul \'Online mapy\' pro výběr různých mapových zdrojů</string>
-  <string name="map_online_data">Online mapy</string>
+  <string name="map_online_data">Online mapy (rastrové)</string>
   <string name="map_online_data_descr">Používat online mapy (stáhnout je a uložit na SD kartě)</string>
   <string name="online_map_settings">Online mapy</string>
   <string name="online_map_settings_descr">Nastavení rastrových překryvných nebo podkresových map</string>
@@ -802,7 +802,7 @@
   <string name="select_plugin_to_activate">Kliknutím modul zapnete nebo vypnete. (V některých případech je třeba aplikaci restartovat.)</string>
   <string name="prefs_plugins_descr">Moduly umožňují zapnout pokročilé nastavení a poskytnout přídavné funkce jako: záznam trasy, rastrové mapy, běh na pozadí, usnadnění a další.</string>
   <string name="prefs_plugins">Moduly</string>
-  <string name="tip_recent_changes_0_8_0_t">"Změny ve verzi 0.8.0 : \n\t- Moduly\n\t- Podpora nového formátu offline map\n\t- Opraveno mnoho chyb"</string>
+  <string name="tip_recent_changes_0_8_0_t">"Změny ve verzi 0.8.0 : \n\t- *Moduly*\n\t- Většina funkcí je uspořádána do skupin, které mohou být zapnuty/vypnuty ve správci modulů. Skupiny: mapová data (online nebo uložená), sledování pozice a mnoho dalších dřívějších funkcí\n\t- *Podpora nového formátu offline map*\n\t- Rychlejší a přesnější vykreslování mapy (problémy s pobřežím a vodní hladinou z větší části vyřešeny)\n\t- Pokud používáte offline mapy, musíte stahnout kompletně nová data, stará nejsou více podporována\n\t- *Offline navigace*\n\t- Robustnější offline navigace\n\t- *Zlepšeno uživatelské rozhraní*\n\t- Opraveno mnoho chyb"</string>
   <string name="osm_editing_plugin_description">Nastavení pro práci s OSM jako: vytváření a úpravu bodů zájmu (POI), vytváření a komentování OSM chyb a nahrávání zaznamenaných GPX souborů (vyžaduje přihlašovací údaje do OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">"Akcelerace vykreslování pomocí \'Android native\' knihovny. Vektorové mapy se zpravidla vykreslují rychleji, pokud je tato možnost zaškrtnuta. Avšak na některých zařízeních tato funkce nemusí fungovat."</string>
   <string name="simulate_route_progression_manually">Ručně simulovat postup po trase</string>
