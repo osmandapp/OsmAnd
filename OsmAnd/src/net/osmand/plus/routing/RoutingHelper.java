@@ -200,7 +200,7 @@ public class RoutingHelper {
 						log.info("Recalculate route, because correlation  : " + dist); //$NON-NLS-1$
 						calculateRoute = true;
 					}
-					if(dist < POSITION_TOLERANCE / 2) {
+					if(dist < POSITION_TOLERANCE * 1.5f) {
 						LatLon project = getProject(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
 						// calculate projection of current location
 						locationProjection.setLatitude(project.getLatitude());
