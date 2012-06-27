@@ -521,13 +521,13 @@
   <string name="sd_unmounted">SD kaart niet toegankelijk.\nU kunt dan geen kaarten zien of gegevens vinden.</string>
   <string name="sd_mounted_ro">SD kaart is alleen-lezen.\nU kunt alleen vooraf geladen kaarten zien en kan niet downloaden van het Internet.</string>
   <string name="unzipping_file">Bestand wordt uitgepakt...</string>
-  <string name="route_tr">Sla rechtsaf en ga door</string>
-  <string name="route_tshr">Sla scherp rechtsaf en ga door</string>
-  <string name="route_tslr">Sla licht rechtsaf en ga door</string>
-  <string name="route_tl">Sla linksaf en ga door</string>
-  <string name="route_tshl">Sla scherp linksaf en ga door</string>
-  <string name="route_tsll">Sla licht linksaf en ga door</string>
-  <string name="route_tu">Keer om en ga dan door</string>
+  <string name="route_tr">Sla rechtsaf en volg</string>
+  <string name="route_tshr">Sla scherp rechtsaf en volg</string>
+  <string name="route_tslr">Sla licht rechtsaf en volg</string>
+  <string name="route_tl">Sla linksaf en volg</string>
+  <string name="route_tshl">Sla scherp linksaf en volg</string>
+  <string name="route_tsll">Sla licht linksaf en volg</string>
+  <string name="route_tu">Keer om en volg</string>
   <string name="route_head">Koers</string>
   <string name="first_time_continue">Ga door</string>
   <string name="first_time_download">Download regio\'s</string>
@@ -799,7 +799,7 @@
   <string name="basemap_was_selected_to_download">De basiskaart is nodig voor het werken met OsmAnd en is geselecteerd.</string>
   <string name="gpx_index_settings_descr">" (inclusief GPX analysering)"</string>
   <string name="map_online_plugin_is_not_installed">Activeer de online kaarten plugin om andere kaartbronnen te kunnen selecteren.</string>
-  <string name="map_online_data">Online kaarten</string>
+  <string name="map_online_data">Online (raster-) kaarten</string>
   <string name="map_online_data_descr">Gebruik online kaarten (download en cache deze op SD kaart)</string>
   <string name="online_map_settings">Online kaarten</string>
   <string name="online_map_settings_descr">Configureer online of gecachete kaartbronnen</string>
@@ -816,7 +816,7 @@
   <string name="select_plugin_to_activate">Toets een plugin om deze te (de)activeren. (Het kan nodig zijn om OsmAnd te herstarten).</string>
   <string name="prefs_plugins_descr">Plugins geven extra functionaliteit zoals tracking, rasterkaarten, scherm-uit mode, toegankelijkheidsinstellingen en meer.</string>
   <string name="prefs_plugins">Plugin manager</string>
-  <string name="tip_recent_changes_0_8_0_t">"Wijzigingen in 0.8.0 : \n\t- Plugin functionaliteit \n\t- Nieuw offline kaart formaat\n\t- Veel bugs opgelost "</string>
+  <string name="tip_recent_changes_0_8_0_t">"Wijzigingen in 0.8.0 : \n\t- Plugin functionaliteit \n\t- De meeste functionaliteit is gegroepeerd op features en kan worden geactiveerd/gedeactiveerd in de Plugin Manager. Dit omvat rasterkaarten (online of opgeslagen), tracking-instellingen en vele andere nieuwe en al eerder bestaande features)\n\t- *Nieuw offline kaartformaat*\n\t- Offline navigatie is sterk verbeterd\n\t- *Meer gebruiksvriendelijk*\n\t- Op vele punten verbeterd"</string>
   <string name="osm_editing_plugin_description">Met deze plugin kan je OSM bewerken zoals verzamelen of wijzigen van OSM POI, openen of extra informatie geven voor OSM bugs en GPX bestanden versturen (OSM login gegevens vereist).</string>
   <string name="north_north_west">noordnoordwest</string>
   <string name="search_position_current_location_search">Positie zoeken...</string>
@@ -825,4 +825,4 @@
   <string name="search_position_favorites">Favorieten…</string>
   <string name="search_position_undefined">Ongedefinieerd</string>
   <string name="search_position_fixed">Gefixed</string>
-<string name="local_index_routing_data">Navigatiedata</string><string name="navigate_point_format">Formaat:</string><string name="poi_search_desc">Interessepunten of \'Points Of Interest\' (POI)</string><string name="address_search_desc">Adres zoeken</string><string name="navpoint_search_desc">Navigatie punt</string><string name="transport_search_desc">Openbaar vervoer zoeken</string><string name="favourites_search_desc">Favorieten zoeken</string><string name="history_search_desc">Zoekgeschiedenis</string><string name="asap">z.s.m.</string><string name="save_route_as_gpx">Sla route op als GPX bestand</string><string name="route_roundabout">Rotonde: neem afslag %1$d</string><string name="route_kl">Links aanhouden</string><string name="route_kr">Rechts aanhouden</string><string name="rendering_attr_noPolygons_description">Maak alle oppervlaktes op de kaart transparant</string><string name="rendering_attr_noPolygons_name">Geen vlakken</string><string name="rendering_attr_appMode_name">Weergave modus</string><string name="rendering_attr_appMode_description">Kaartoptimalisatie voor dit gebruiksprofiel</string><string name="rendering_attr_contourLines_description">Selecteer minimum zoom-niveau voor weergave in de kaart indien beschikbaar. Een apart SRTM-bestand kan nodig zijn.</string><string name="rendering_attr_contourLines_name">Toon omtrek lijnen</string><string name="rendering_attr_hmRendered_description">Toon meer details op de kaart</string><string name="rendering_attr_hmRendered_name">Toon meer details</string></resources>
+<string name="local_index_routing_data">Navigatiedata</string><string name="navigate_point_format">Formaat:</string><string name="poi_search_desc">Interessepunten of \'Points Of Interest\' (POI)</string><string name="address_search_desc">Adres zoeken</string><string name="navpoint_search_desc">Navigatie punt</string><string name="transport_search_desc">Openbaar vervoer zoeken</string><string name="favourites_search_desc">Favorieten zoeken</string><string name="history_search_desc">Zoekgeschiedenis</string><string name="asap">z.s.m.</string><string name="save_route_as_gpx">Sla route op als GPX bestand</string><string name="route_roundabout">Rotonde: neem afslag %1$d en volg</string><string name="route_kl">Links aanhouden en volg</string><string name="route_kr">Rechts aanhouden en volg</string><string name="rendering_attr_noPolygons_description">Maak alle oppervlaktes op de kaart transparant</string><string name="rendering_attr_noPolygons_name">Geen vlakken</string><string name="rendering_attr_appMode_name">Weergave modus</string><string name="rendering_attr_appMode_description">Kaartoptimalisatie voor dit gebruiksprofiel</string><string name="rendering_attr_contourLines_description">Selecteer minimum zoom-niveau voor weergave in de kaart indien beschikbaar. Een apart SRTM-bestand kan nodig zijn.</string><string name="rendering_attr_contourLines_name">Toon omtrek lijnen</string><string name="rendering_attr_hmRendered_description">Toon meer details op de kaart</string><string name="rendering_attr_hmRendered_name">Toon meer details</string></resources>
