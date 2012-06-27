@@ -29,8 +29,6 @@
 			<CheckBoxPreference android:summary="@string/auto_follow_route_navigation_descr" android:title="@string/auto_follow_route_navigation"
 				android:key="auto_follow_route_navigation"></CheckBoxPreference>
 			-->
-			<!-- CheckBoxPreference android:summary="@string/use_osmand_routing_service_descr" android:title="@string/use_osmand_routing_service"
-				android:key="use_osmand_routing_service"></CheckBoxPreference -->
 		</PreferenceScreen>
 	</PreferenceCategory>
 
