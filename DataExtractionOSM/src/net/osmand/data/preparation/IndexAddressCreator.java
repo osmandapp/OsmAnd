@@ -602,13 +602,16 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		boolean found = false;
 		Boundary cityBoundary = cityBoundaries.get(city);
 		if (cityBoundary != null) {
-			for(City subpart : boundariesToCities.get(cityBoundary)){
-				if(subpart != city){
-					Boundary subBoundary = cityBoundaries.get(subpart);
-					if(cityBoundary != null && subBoundary != null &&  subBoundary.getAdminLevel() > cityBoundary.getAdminLevel()){
-						cityPart = findNearestCityOrSuburb(subBoundary, location); //subpart.getName();
-						found = true;
-						break;
+			List<City> subcities = boundariesToCities.get(cityBoundary);
+			if (subcities != null) {
+				for (City subpart : subcities) {
+					if (subpart != city) {
+						Boundary subBoundary = cityBoundaries.get(subpart);
+						if (cityBoundary != null && subBoundary != null && subBoundary.getAdminLevel() > cityBoundary.getAdminLevel()) {
+							cityPart = findNearestCityOrSuburb(subBoundary, location); // subpart.getName();
+							found = true;
+							break;
+						}
 					}
 				}
 			}
