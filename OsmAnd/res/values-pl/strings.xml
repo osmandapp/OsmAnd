@@ -663,7 +663,7 @@
   <string name="basemap_was_selected_to_download">Mapa bazowa jest wymagana do poprawnego działania aplikacji i została zaznaczona do pobrania.</string>
   <string name="gpx_index_settings_descr">"(zawiera analizator GPX)"</string>
   <string name="map_online_plugin_is_not_installed">Aktywuj wtyczkę map online aby wybrać inne źródła mapy</string>
-  <string name="map_online_data">Mapy online</string>
+  <string name="map_online_data">Mapy online (kafelki)</string>
   <string name="map_online_data_descr">Użyj map online (pobierz i zachowaj kafelki map na karcie SD do późniejszego użytku)</string>
   <string name="online_map_settings">Mapy online</string>
   <string name="online_map_settings_descr">Skonfiguruj źródła kafelków online i offline</string>
@@ -680,7 +680,7 @@
   <string name="select_plugin_to_activate">Dotknij wtyczki aby ją aktywować lub dezaktywować. (Może być wymagane ponowne uruchomienie OsmAnd.)</string>
   <string name="prefs_plugins_descr">Wtyczki dostarczają możliwość ustawienia zaawansowanych ustawień oraz dodatkową funkcjonalność do aplikacji, taką jak zapisywanie ścieżek, kafelki map, tryb wyłączonego ekranu, ustawienia dostępności i inne.</string>
   <string name="prefs_plugins">Zarządzanie wtyczkami</string>
-  <string name="tip_recent_changes_0_8_0_t">"Zmiany w 0.8.0 : \n\t- Obsługa wtyczek\n\t- Obsługa nowego formatu danych offline\n\t- Poprawki użyteczności oraz uproszczenie koncepcji profili\n\t- Duża ilość poprawek błędów"</string>
+  <string name="tip_recent_changes_0_8_0_t">"Zmiany w 0.8.0 : \n\t- *Obsługa wtyczek*\n\t - Większość funkcjonalności jest pogrupowana i może być aktywowana/dezaktywowana w Menadżerze Wtyczek. Możesz aktywować źródła map, ustawienia zapisu ścieżek oraz wiele innych wcześniej istniejących i nowych funkcjonalności.\n\t- *Obsługa nowego formatu danych offline*\n\t - Renderowanie map stało się szybsze i bardziej dokładne (problemy z linią brzegową i terenami zalanymi są w większości naprawione).\n\t - Musisz pobrać zupełnie nowe dane offline (stary format danych nie będzie już obsługiwany)\n\t- *Routing offline*\n\t - Routing offline został poprawiony\n\t-  *Poprawki użyteczności oraz UI*\n\t - Poprawione w wielu kwestiach"</string>
   <string name="osm_editing_plugin_description">Pokaż ustawienia do konfiguracji poprawiania danych OSM - zbieranie/modyfikowanie obiektów POI, otwieranie/komentowanie błędów OSM oraz dodawanie zapisanych ścieżek GPX (wymaga podania danych uwierzytelniających OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Mapy wektorowe mogą wyświetlać się szybciej. Może nie działać dobrze na niektórych urządzeniach.</string>
   <string name="simulate_route_progression_manually">Simulate route progression manually</string>
@@ -715,11 +715,11 @@
   <string name="zoomIn">Przybliż</string>
   <string name="zoomIs">Przybliżenie wynosi</string>
   <string name="north">północ</string>
-  <string name="north_north_east">north-north-east</string>
+  <string name="north_north_east">północ-północ-wschód</string>
   <string name="north_east">północny wschód</string>
   <string name="east_north_east">east-north-east</string>
   <string name="east">wschód</string>
-  <string name="east_south_east">east-south-east</string>
+  <string name="east_south_east">wschód-południe-wschód</string>
   <string name="south_east">południowy wschód</string>
   <string name="south_south_east">south-south-east</string>
   <string name="south">południe</string>
@@ -815,4 +815,4 @@
   <string name="favourites_edit_dialog_category">Kategoria</string>
   <string name="gpx_option_from_start_point">Przejdź wzdłuż całej ścieżki</string>
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> map classification with images"</string>
-<string name="local_index_routing_data">Routing data</string><string name="navigate_point_format">Format :</string><string name="poi_search_desc">"Wyszukaj POI "</string><string name="address_search_desc">Wyszukiwanie adresu</string><string name="navpoint_search_desc">Nawiguj do punktu</string><string name="transport_search_desc">Wyszukaj transport</string><string name="favourites_search_desc">Wyszukaj w ulubionych</string><string name="history_search_desc">Historia wyszukiwania</string><string name="rendering_attr_noPolygons_description">"Ukryj wszystkie elementy mapy będące terenami ziemnymi"</string><string name="rendering_attr_noPolygons_name">Bez wielokątów</string><string name="rendering_attr_appMode_name">Tryb renderowania</string><string name="rendering_attr_appMode_description">Map optimization for respective User Profile</string><string name="rendering_attr_contourLines_description">"Wybierz minimalny poziom przybliżenia, przy którym będą wyświetlane (jeśli są dostępne). Może być wymagany dodatkowy plik STRM."</string><string name="rendering_attr_contourLines_name">Pokaż kontury</string><string name="rendering_attr_hmRendered_description">Zwiększ ilość detali pokazywanych na mapie</string><string name="rendering_attr_hmRendered_name">Pokaż więcej detali na mapie</string><string name="route_roundabout">Roundabout : take %1$d exit</string><string name="route_kl">Trzymaj się lewej strony</string><string name="route_kr">Trzymaj się prawej strony</string><string name="save_route_as_gpx">Zapisz ścieżkę jako plik GPX</string><string name="asap">ASAP</string></resources>
+<string name="local_index_routing_data">Dane trasowania</string><string name="navigate_point_format">Format :</string><string name="poi_search_desc">"Wyszukaj POI "</string><string name="address_search_desc">Wyszukiwanie adresu</string><string name="navpoint_search_desc">Nawiguj do punktu</string><string name="transport_search_desc">Wyszukaj transport</string><string name="favourites_search_desc">Wyszukaj w ulubionych</string><string name="history_search_desc">Historia wyszukiwania</string><string name="rendering_attr_noPolygons_description">"Ukryj wszystkie elementy mapy będące terenami ziemnymi"</string><string name="rendering_attr_noPolygons_name">Bez wielokątów</string><string name="rendering_attr_appMode_name">Tryb renderowania</string><string name="rendering_attr_appMode_description">Map optimization for respective User Profile</string><string name="rendering_attr_contourLines_description">"Wybierz minimalny poziom przybliżenia, przy którym będą wyświetlane (jeśli są dostępne). Może być wymagany dodatkowy plik STRM."</string><string name="rendering_attr_contourLines_name">Pokaż kontury</string><string name="rendering_attr_hmRendered_description">Zwiększ ilość detali pokazywanych na mapie</string><string name="rendering_attr_hmRendered_name">Pokaż więcej detali na mapie</string><string name="route_roundabout">Rondo: skręć na %1$d wyjeździe</string><string name="route_kl">Trzymaj się lewej strony</string><string name="route_kr">Trzymaj się prawej strony</string><string name="save_route_as_gpx">Zapisz ścieżkę jako plik GPX</string><string name="asap">ASAP</string></resources>
