@@ -31,18 +31,7 @@
 	<string name="select_plugin_to_activate">Module zum Aktivieren oder Deaktivieren anklicken. (Ein Neustart von OsmAnd könnte nötig sein.)</string>
 	<string name="prefs_plugins_descr">Module aktivieren Experteneinstellungen und Extra-Funktionalität wie Online-Karten, Positions-Logging, Hintergrundservice, Barrierefreiheit und anderes.</string>
 	<string name="prefs_plugins">Modul-Manager</string>
-	<string name="tip_recent_changes_0_8_0_t">Änderungen in 0.8.0 :
-	\n\t- *Modul-Funktionalität*
-	\n\t    - Viele Funktionalitäten könnnen mum blockweise in einem Modul-Manager wahlweise aktiviert oder dekativiert werden.
-	Dort aktiviert man die Einstellungen für Online Kachel-Kartenquellen, Logging-Einstellungen und viele andere existierende Funktionalitäten.     
-	\n\t- *Unterstützung neuer Offline-Karten*
-	\n\t    - Schnellere und präzisere Kartendarstellung (Probleme mit Küstenlinien und \'gefluteten\' Gebieten größtenteils behoben).
-	\n\t    - Alle Offline-Karten müssen neu heruntergeladen werden (das alte Format wird nicht mehr unterstützt)
-	\n\t- *Offline-Navigation* 
-	\n\t	- Offline-Navigation ist jetzt robuster
-	\n\t  *Verbesserter Benutzerführung*
-	\n\t	- Benutzbarkeit in vielen Punkten verbessert		
-	</string>
+	<string name="tip_recent_changes_0_8_0_t">"Änderungen in 0.8.0 : \n\t- *Modul-Funktionalität* \n\t - Viele Funktionalitäten könnnen mum blockweise in einem Modul-Manager wahlweise aktiviert oder dekativiert werden. Dort aktiviert man die Einstellungen für Online Kachel-Kartenquellen, Logging-Einstellungen und viele andere existierende Funktionalitäten. \n\t- *Unterstützung neuer Offline-Karten* \n\t - Schnellere und präzisere Kartendarstellung (Probleme mit Küstenlinien und \'gefluteten\' Gebieten größtenteils behoben). \n\t - Alle Offline-Karten müssen neu heruntergeladen werden (das alte Format wird nicht mehr unterstützt) \n\t- *Offline-Navigation* \n\t - Offline-Navigation ist jetzt robuster \n\t *Verbesserter Benutzerführung* \n\t - Benutzbarkeit in vielen Punkten verbessert "</string>
 	<string name="osm_editing_plugin_description">Zeigt Einstellungen nötig zum Erstellen und Bearbeiten von OSM POI Objekten, das Öffnen und Kommentieren von OSM Fehlern, und das Hochladen von GPX-Dateien (benötigt OSM Benutzerkonto).</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektorkarten werden eventuell schneller angezeigt. Funktioniert nur auf manchen Geräten.</string>
 	<string name="simulate_route_progression_manually">Simuliere die Navigation</string>
@@ -849,4 +838,4 @@
 	<string name="transport_search_desc">ÖPNV-Suche</string>
 	<string name="favourites_search_desc">Favoriten-Suche</string>
 	<string name="history_search_desc">Suchverlauf</string>
-</resources>
+<string name="tip_recent_changes_0_8_1_t">"Changes in 0.8.1 : "</string></resources>
