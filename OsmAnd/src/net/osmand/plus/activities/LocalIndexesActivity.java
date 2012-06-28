@@ -17,6 +17,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
+import net.osmand.plus.activities.EnumAdapter.IEnumWithResource;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexInfo;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.osmedit.OpenstreetmapRemoteUtil;
@@ -44,7 +45,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -155,12 +155,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		}
 		final EditText tags = (EditText) view.findViewById(R.id.TagsText);		
 		final Spinner visibility = ((Spinner)view.findViewById(R.id.Visibility));
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.my_spinner_text, new String[] {
-				"Public",
-				"Identifiable",
-				"Trackable",
-				"Private"
-		});
+		EnumAdapter<UploadVisibility> adapter = new EnumAdapter<UploadVisibility>(this, R.layout.my_spinner_text, UploadVisibility.values());
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		visibility.setAdapter(adapter);
 		visibility.setSelection(0);
@@ -172,7 +167,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				new UploadGPXFilesTask(descr.getText().toString(), tags.getText().toString(), 
-				 ((String) visibility.getItemAtPosition(visibility.getSelectedItemPosition())).toLowerCase()
+				 (UploadVisibility) visibility.getItemAtPosition(visibility.getSelectedItemPosition())
 					).execute(info);
 			}
 		});
@@ -442,6 +437,24 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		}
 	}
 	
+	public enum UploadVisibility implements IEnumWithResource {
+		Public(R.string.gpxup_public),
+		Identifiable(R.string.gpxup_identifiable),
+		Trackable(R.string.gpxup_trackable),
+		Private(R.string.gpxup_private);
+		private final int resourceId;
+
+		private UploadVisibility(int resourceId) {
+			this.resourceId = resourceId;
+		}
+		public String asURLparam() {
+			return name().toLowerCase();
+		}
+		@Override
+		public int stringResource() {
+			return resourceId;
+		}
+	}
 	
 	public class UploadGPXFilesTask extends AsyncTask<LocalIndexInfo, String, String> {
 		
@@ -449,10 +462,10 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		private final String description;
 		private final String tagstring;
 
-		public UploadGPXFilesTask(String description, String tagstring, String visibility){
+		public UploadGPXFilesTask(String description, String tagstring, UploadVisibility visibility){
 			this.description = description;
 			this.tagstring = tagstring;
-			this.visibility = visibility;
+			this.visibility = visibility != null ? visibility.asURLparam() : UploadVisibility.Private.asURLparam();
 			
 		}
 
