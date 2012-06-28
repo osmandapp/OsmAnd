@@ -172,7 +172,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				new UploadGPXFilesTask(descr.getText().toString(), tags.getText().toString(), 
-				 (String) visibility.getItemAtPosition(visibility.getSelectedItemPosition())
+				 ((String) visibility.getItemAtPosition(visibility.getSelectedItemPosition())).toLowerCase()
 					).execute(info);
 			}
 		});
