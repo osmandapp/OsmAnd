@@ -93,7 +93,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	private Map<String, String> indexActivatedFileNames = null;
 	private TreeMap<String, DownloadEntry> entriesToDownload = new TreeMap<String, DownloadEntry>();
 
-	private int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 8;
+	private int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 16;
 	 
 	
     private TextWatcher textWatcher ;
