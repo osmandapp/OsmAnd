@@ -114,8 +114,11 @@
 		<obstacle tag="railway" value="level_crossing" penalty="15"/>
 	</routingProfile>
 	
-	<routingProfile name="pedestrian" baseProfile="pedestrian" restrictionsAware="false" minDefaultSpeed="3" maxDefaultSpeed="6" 
+	<routingProfile name="pedestrian" baseProfile="pedestrian" restrictionsAware="false" minDefaultSpeed="3" maxDefaultSpeed="5" 
 			leftTurn="0" rightTurn="0" followSpeedLimitations="false" onewayAware="false">
+
+<attribute name="heuristicCoefficient" value="1.2" />
+
 		<highway value="motorway" speed="5" priority="0.7" dynamicPriority="0.7"/>
 		<highway value="motorway_link" speed="5" priority="0.7" dynamicPriority="0.7"/>
 		
@@ -136,8 +139,8 @@
 		<highway value="track" speed="5" priority="1" dynamicPriority="1"/>
 		<highway value="path" speed="5" priority="1" dynamicPriority="1"/>
 		<highway value="living_street" speed="5" priority="1" dynamicPriority="1"/>
-		<highway value="pedestrian" speed="5" priority="1.4" dynamicPriority="1.1"/>
-		<highway value="footway" speed="5" priority="1.4" dynamicPriority="1.1"/>
+		<highway value="pedestrian" speed="5" priority="1.2" dynamicPriority="1.1"/>
+		<highway value="footway" speed="5" priority="1.2" dynamicPriority="1.1"/>
 		<highway value="byway" speed="5" priority="1" dynamicPriority="1"/>
 		<highway value="services" speed="5" priority="1" dynamicPriority="1"/>
 		<highway value="bridleway" speed="5" priority="0.8" dynamicPriority="0.8"/>
