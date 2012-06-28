@@ -724,8 +724,9 @@ public class ResourceManager {
 	}
 	
 	public void searchAmenitiesAsync(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, PoiFilter filter, List<Amenity> toFill){
-		if(filter instanceof NameFinderPoiFilter){
-			List<Amenity> amenities = ((NameFinderPoiFilter) filter).getSearchedAmenities();
+		if(filter instanceof NameFinderPoiFilter || filter instanceof SearchByNameFilter){
+			List<Amenity> amenities = filter instanceof NameFinderPoiFilter  ? 
+					((NameFinderPoiFilter) filter).getSearchedAmenities() :((SearchByNameFilter) filter).getSearchedAmenities() ;
 			for(Amenity a : amenities){
 				LatLon l = a.getLocation();
 				if(l != null && l.getLatitude() <= topLatitude && l.getLatitude() >= bottomLatitude && l.getLongitude() >= leftLongitude && l.getLongitude() <= rightLongitude){

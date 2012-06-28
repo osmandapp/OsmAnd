@@ -197,6 +197,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 				} else {
 					searchPOILevel.setEnabled(true);
 					searchPOILevel.setText(R.string.search_button);
+					// Cancel current search request here?
 				}
 			}
 			@Override
@@ -307,7 +308,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 			showFilter.setVisibility(View.VISIBLE);
 			showOnMap.setEnabled(filter != null);
 		}
-		showOnMap.setVisibility(isSearchByNameFilter() ? View.GONE : View.VISIBLE);
+		showOnMap.setVisibility(View.VISIBLE);
 		
 		if (filter != null) {
 			searchArea.setText(filter.getSearchArea());
@@ -632,6 +633,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 				amenityAdapter.setNewModel(result, "");
 				showOnMap.setEnabled(amenityAdapter.getCount() > 0);
 			} else if (isSearchByNameFilter()) {
+				showOnMap.setEnabled(amenityAdapter.getCount() > 0);
 				amenityAdapter.setNewModel(result, "");
 			} else {
 				amenityAdapter.setNewModel(result, searchFilter.getText().toString());

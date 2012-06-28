@@ -39,12 +39,27 @@ public class SearchByNameFilter extends PoiFilter {
 	
 	@Override
 	protected List<Amenity> searchAmenities(double lat, double lon, double topLatitude,
-			double bottomLatitude, double leftLongitude, double rightLongitude, ResultMatcher<Amenity> matcher) {
+			double bottomLatitude, double leftLongitude, double rightLongitude, final ResultMatcher<Amenity> matcher) {
 		searchedAmenities.clear();
-		searchedAmenities = application.getResourceManager().searchAmenitiesByName(query, 
-				topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon, matcher);
 		
-		MapUtils.sortListOfMapObject(searchedAmenities, lat, lon);
+		List<Amenity> result = application.getResourceManager().searchAmenitiesByName(query, 
+				topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon, new ResultMatcher<Amenity>() {
+					@Override
+					public boolean publish(Amenity object) {
+						if(matcher.publish(object)) {
+							searchedAmenities.add(object);
+							return true;
+						}
+						return false;
+					}
+
+					@Override
+					public boolean isCancelled() {
+						return matcher.isCancelled();
+					}
+				});
+		MapUtils.sortListOfMapObject(result, lat, lon);
+		searchedAmenities = result;
 		return searchedAmenities;
 	}
 	
