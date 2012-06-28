@@ -31,7 +31,7 @@
 	<string name="select_plugin_to_activate">Module zum Aktivieren oder Deaktivieren anklicken. (Ein Neustart von OsmAnd könnte nötig sein.)</string>
 	<string name="prefs_plugins_descr">Module aktivieren Experteneinstellungen und Extra-Funktionalität wie Online-Karten, Positions-Logging, Hintergrunddienst, Barrierefreiheit und anderes.</string>
 	<string name="prefs_plugins">Modul-Manager</string>
-	<string name="tip_recent_changes_0_8_0_t">"Änderungen in 0.8.0 : \n\t- *Modul-Funktionalität* \n\t - Viele Funktionalitäten könnnen mum blockweise in einem Modul-Manager wahlweise aktiviert oder dekativiert werden. Dort aktiviert man die Einstellungen für Online Kachel-Kartenquellen, Logging-Einstellungen und viele andere existierende Funktionalitäten. \n\t- *Unterstützung neuer Offline-Karten* \n\t - Schnellere und präzisere Kartendarstellung (Probleme mit Küstenlinien und \'gefluteten\' Gebieten größtenteils behoben). \n\t - Alle Offline-Karten müssen neu heruntergeladen werden (das alte Format wird nicht mehr unterstützt) \n\t- *Offline-Navigation* \n\t - Offline-Navigation ist jetzt robuster \n\t *Verbesserter Benutzerführung* \n\t - Benutzbarkeit in vielen Punkten verbessert "</string>
+	<string name="tip_recent_changes_0_8_0_t">"Änderungen in 0.8.0 : \n\t- *Modul-Funktionalität* \n\t - Viele Funktionalitäten könnnen nun blockweise in einem Modul-Manager aktiviert oder deaktiviert werden. Unter anderem finden Sie dort die Einstellungen für Online Kachel-Kartenquellen, Logging-Einstellungen und vielen anderen existierenden Funktionalitäten. \n\t- *Unterstützung neuer Offline-Karten* \n\t - Schnellere und präzisere Kartendarstellung (Probleme mit Küstenlinien und \'gefluteten\' Gebieten größtenteils behoben). \n\t - Alle Offline-Karten müssen neu heruntergeladen werden (das alte Format wird nicht mehr unterstützt) \n\t- *Offline-Navigation* \n\t - Offline-Navigation ist jetzt robuster \n\t *Verbesserter Benutzerführung* \n\t - Benutzbarkeit in vielen Punkten verbessert "</string>
 	<string name="osm_editing_plugin_description">Zeigt Einstellungen nötig zum Erstellen und Bearbeiten von OSM POI Objekten, das Öffnen und Kommentieren von OSM Fehlern, und das Hochladen von GPX-Dateien (benötigt OSM Benutzerkonto).</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektorkarten werden eventuell schneller angezeigt. Funktioniert nur auf manchen Geräten.</string>
 	<string name="simulate_route_progression_manually">Simuliere die Navigation</string>
@@ -256,7 +256,7 @@
 	<string name="favorite_delete_multiple">Es soll(en) %1$d Favorit(en) und %2$d Favoriten-Gruppe(n) gelöscht werden. Fortfahren?</string>
 	<string name="favorite_home_category">Zu Hause</string>
 	<string name="favorite_friends_category">Freunde</string>
-	<string name="favorite_places_category">Orte</string>
+	<string name="favorite_places_category">Sehenswertes</string>
 	<string name="favorite_default_category">Andere</string>
 	<string name="favourites_edit_dialog_name">Name</string>
 	<string name="favourites_edit_dialog_category">Kategorie</string>
@@ -567,7 +567,7 @@
 	<string name="search_poi_location">Suche Signal …</string>
 	<string name="search_near_map">Suche um Lokation</string>
 	<string name="search_nearby">Suche um Aufenthaltsort</string>
-	<string name="map_orientation_default">je nach Geräteorientierung</string>
+	<string name="map_orientation_default">Lagesensor</string>
 	<string name="map_orientation_portrait">Hochformat</string>
 	<string name="map_orientation_landscape">Querformat</string>
 	<string name="map_screen_orientation">Anzeigeausrichtung</string>
@@ -694,7 +694,7 @@
 	<string name="mark_point">Ziel</string>
 	<string name="show_osm_bugs_descr">OSM-Fehlerberichte anzeigen</string>
 	<string name="show_osm_bugs">OSM-Fehler</string>
-	<string name="favourites_activity">Bevorzugte Punkte</string>
+	<string name="favourites_activity">Markierte Orte</string>
 	<string name="add_to_favourite">Als Favorit speichern</string>
 	<string name="use_english_names_descr">Englische oder einheimische Bezeichnungen in Karten</string>
 	<string name="use_english_names">Englische Bezeichnungen</string>
