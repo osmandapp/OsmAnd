@@ -470,7 +470,8 @@ public class RoutingHelper {
 			}
 			if (dist <= 140) {
 				return 1;
-			} else if (dist <= 3000) {
+			} else if (dist <= 3500) {
+			//Was 3000m, but aligned again with PREPARE_LONG prompt after that was changed
 				return 0;
 			} else {
 				return -1;
