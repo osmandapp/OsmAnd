@@ -29,7 +29,7 @@
 	<string name="osmand_development_plugin_description">Zeigt Einstellungen für Entwicklungs- und Fehlersuchhilfen wie simulierte Navigation oder die Messung der Render-Leistung.</string>
 	<string name="plugins_screen">Modul-Manager</string>
 	<string name="select_plugin_to_activate">Module zum Aktivieren oder Deaktivieren anklicken. (Ein Neustart von OsmAnd könnte nötig sein.)</string>
-	<string name="prefs_plugins_descr">Module aktivieren Experteneinstellungen und Extra-Funktionalität wie Online-Karten, Positions-Logging, Hintergrundservice, Barrierefreiheit und anderes.</string>
+	<string name="prefs_plugins_descr">Module aktivieren Experteneinstellungen und Extra-Funktionalität wie Online-Karten, Positions-Logging, Hintergrunddienst, Barrierefreiheit und anderes.</string>
 	<string name="prefs_plugins">Modul-Manager</string>
 	<string name="tip_recent_changes_0_8_0_t">"Änderungen in 0.8.0 : \n\t- *Modul-Funktionalität* \n\t - Viele Funktionalitäten könnnen mum blockweise in einem Modul-Manager wahlweise aktiviert oder dekativiert werden. Dort aktiviert man die Einstellungen für Online Kachel-Kartenquellen, Logging-Einstellungen und viele andere existierende Funktionalitäten. \n\t- *Unterstützung neuer Offline-Karten* \n\t - Schnellere und präzisere Kartendarstellung (Probleme mit Küstenlinien und \'gefluteten\' Gebieten größtenteils behoben). \n\t - Alle Offline-Karten müssen neu heruntergeladen werden (das alte Format wird nicht mehr unterstützt) \n\t- *Offline-Navigation* \n\t - Offline-Navigation ist jetzt robuster \n\t *Verbesserter Benutzerführung* \n\t - Benutzbarkeit in vielen Punkten verbessert "</string>
 	<string name="osm_editing_plugin_description">Zeigt Einstellungen nötig zum Erstellen und Bearbeiten von OSM POI Objekten, das Öffnen und Kommentieren von OSM Fehlern, und das Hochladen von GPX-Dateien (benötigt OSM Benutzerkonto).</string>
@@ -113,7 +113,7 @@
 	<string name="rendering_out_of_memory">Zu wenig Prozess-Speicher zum Anzeigen des gewählten Gebietes</string>
 	<string name="use_fluorescent_overlays">Fluoreszierende Overlays</string>
 	<string name="use_fluorescent_overlays_descr">Fluoreszierende Anzeige von Tracks und Routen</string>
-	<string name="offline_poi_edition">Offline POI Bearbeitung</string>
+	<string name="offline_poi_edition">Offline-POI-Bearbeitung</string>
 	<string name="offline_poi_edition_descr">Immer Offline-POI-Bearbeitung verwenden</string>
 	<string name="tip_recent_changes_0_7_1_t">"Änderungen in 0.7.1 : \n\t- Offline POI-Bearbeitung \n\t- Live-Tracking Option: Koordinaten periodisch an einen Web-Service schicken (Setup-Anleitung für eigenen Web-Service in den HowTo-Artikeln) \n\t- Anzeige des gegenwärtig aufgezeichneten Tracks möglich \n\t- Richtungsüberprüfung: \'Bitte wenden\' wird jetzt angezeigt und angesagt bei entgegengesetzter Bewegungsrichtung oder bei verpasster Abzweigung \n\t- Neue Ansage \'Strecke neu berechnet\' \n\t- Optische Anzeige eines innerhalb 100m bevorstehenden Abbiegevorgangs durch Farbwechsel des Richtungspfeils \n\t- Die Aktualität auch der deaktivierten Karten wird jetzt im Download-Liste in dunkelgrün und dunkelblau angezeigt \n\t- Weitere Verbesserungen "</string>
 	<string name="update_poi_does_not_change_indexes">Das Bearbeiten von POIs innerhalb der Applikation beeinflusst nicht die Offline-Karten, sondern wird in einer eigenen Datei gespeichert.</string>
@@ -131,7 +131,7 @@
 	<string name="live_monitoring">Live-Tracking aktivieren</string>
 	<string name="live_monitoring_interval_descr">Angabe des Live-Tracking Invervalls</string>
 	<string name="live_monitoring_interval">Live-Tracking Intervall</string>
-	<string name="live_monitoring_url_descr">Spezifikation der Live-Tracking Web-Addresse mit Datenübergabe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+	<string name="live_monitoring_url_descr">Spezifikation der Live-Tracking Web-Adresse mit Datenübergabe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
 	<string name="live_monitoring_url">Live-Tracking Web-Adresse</string>
 	<string name="gpx_monitoring_disabled_warn">Bitte Positions-Logging in den Einstellungen aktivieren</string>
 	<string name="show_current_gpx_title">Aktuellen Track anzeigen</string>
@@ -175,7 +175,7 @@
 	<string name="user_name_descr">Nötig für openstreetmap.org-Beiträge</string>
 	<string name="user_password">OSM-Kennwort</string>
 	<string name="user_password_descr">Nötig für openstreetmap.org-Beiträge</string>
-	<string name="osmand_service">Hintergrundservice</string>
+	<string name="osmand_service">Hintergrunddienst</string>
 	<string name="osmand_service_descr">Für Verwendung von OsmAnd bei ausgeschalteter Anzeige</string>
 	<string name="tip_rotation_switching">Kartenrotation</string>
 	<string name="tip_rotation_switching_t">\tSie können unter \'Einstellungen\' -&gt; \'Kartendarstellung\' -&gt; \'Kartenrotation\' wählen, in welche Richtung die Anzeige der Landkarte ausgerichtet werden soll. \n\tZur Wahl stehen: \n\t\'Keine Rotation\' - Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben \n\t\'Nach Bewegungsrichtung\' - Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt \n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt \n\tTipp: Um schnell zwischen der Kompassnachführung und der in den Einstellungen gewählten Option zu wechseln, einfach auf die Kompassnadel in der Kartenansicht drücken.</string>
@@ -535,7 +535,7 @@
 	<string name="background_service_provider_descr">Art der Hintergrund-Positionsbestimmung</string>
 	<string name="background_service_provider">Positionsbestimmung</string>
 	<string name="background_router_service_descr">Aktiviere OsmAnd-Hintergrunddienst während Anzeige ausgeschaltet ist</string>
-	<string name="background_router_service">Hintergrundservice</string>
+	<string name="background_router_service">Hintergrunddienst</string>
 	<string name="off_router_service_no_gps_available">Die Hintergrundnavigation erfordert aktiviertes GPS.</string>
 	<string name="hide_poi_filter">Filter verstecken</string>
 	<string name="show_poi_filter">Filter zeigen</string>
@@ -833,7 +833,7 @@
 	<string name="local_index_routing_data">Routing-Daten</string>
 	<string name="navigate_point_format">Format :</string>
 	<string name="poi_search_desc">POI-(Point of interest) Suche</string>
-	<string name="address_search_desc">Address-Suche</string>
+	<string name="address_search_desc">Adress-Suche</string>
 	<string name="navpoint_search_desc">Koordinaten</string>
 	<string name="transport_search_desc">ÖPNV-Suche</string>
 	<string name="favourites_search_desc">Favoriten-Suche</string>
