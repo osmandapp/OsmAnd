@@ -304,12 +304,12 @@ public class BinaryMapPoiReaderAdapter {
 	}
 
 	private void readPoiNameIndexDataAtom(TIntLongHashMap offsets, SearchRequest<Amenity> req) throws IOException {
+		int x = 0;
+		int y = 0;
+		int zoom = 15;
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
-			int x = 0;
-			int y = 0;
-			int zoom = 15;
 			switch (tag) {
 			case 0:
 				return;
@@ -323,8 +323,13 @@ public class BinaryMapPoiReaderAdapter {
 				zoom = codedIS.readUInt32();
 				break;
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.SHIFTTO_FIELD_NUMBER :
-				long d = Math.abs(req.x - (x << (31 - zoom))) + Math.abs(req.y - (y << (31 - zoom))); 
-				offsets.put(readInt(), d);
+				int x31 = (x << (31 - zoom));
+				int y31 = (y << (31 - zoom));
+				int shift = readInt();
+				if (req.contains(x31, y31, x31, y31)) {
+					long d = Math.abs(req.x - x31) + Math.abs(req.y - y31);
+					offsets.put(shift, d);
+				}
 				break;
 			default:
 				skipUnknownField(t);

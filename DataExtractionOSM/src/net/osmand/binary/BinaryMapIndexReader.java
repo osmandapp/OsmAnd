@@ -1245,10 +1245,14 @@ public class BinaryMapIndexReader {
 	}
 	
 	
-	public static SearchRequest<Amenity> buildSearchPoiRequest(int x, int y, String nameFilter, ResultMatcher<Amenity> resultMatcher){
+	public static SearchRequest<Amenity> buildSearchPoiRequest(int x, int y, String nameFilter, int sleft, int sright, int stop, int sbottom, ResultMatcher<Amenity> resultMatcher){
 		SearchRequest<Amenity> request = new SearchRequest<Amenity>();
 		request.x = x;
 		request.y = y;
+		request.left = sleft;
+		request.right = sright;
+		request.top = stop;
+		request.bottom = sbottom;
 		request.resultMatcher = resultMatcher;
 		request.nameQuery = nameFilter;
 		return request;
@@ -1665,7 +1669,9 @@ public class BinaryMapIndexReader {
 
 	private static void testPoiSearchByName(BinaryMapIndexReader reader) throws IOException {
 		println("Searching by name...");
-		SearchRequest<Amenity> req = buildSearchPoiRequest(sleft, sright, "kol", null);
+		int tileZ = 31 - 14;
+		SearchRequest<Amenity> req = buildSearchPoiRequest(sleft/2+sright/2, stop/2+sbottom/2, "kol",  
+				sleft - 1<<tileZ, sleft + 1<<tileZ, stop - 1<<tileZ,  stop + 1<<tileZ, null);
 		reader.searchPoiByName(req);
 		for (Amenity a : req.getSearchResults()) {
 			println(a.getType() + " " + a.getSubType() + " " + a.getName() + " " + a.getLocation());

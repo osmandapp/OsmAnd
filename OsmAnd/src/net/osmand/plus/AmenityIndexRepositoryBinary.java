@@ -65,10 +65,10 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	}
 	
 	
-	public List<Amenity> searchAmenitiesByName(int x, int y, String query, ResultMatcher<Amenity> resulMatcher) {
+	public List<Amenity> searchAmenitiesByName(int x, int y, int l, int t, int r, int b, String query, ResultMatcher<Amenity> resulMatcher) {
 		long now = System.currentTimeMillis();
 		List<Amenity> amenities = Collections.emptyList();
-		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(x, y, query, resulMatcher);
+		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(x, y, query, l, r, t, b,resulMatcher);
 		try {
 			amenities = index.searchPoiByName(req);
 			if (log.isDebugEnabled()) {

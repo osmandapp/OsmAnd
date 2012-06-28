@@ -66,7 +66,7 @@ public class OsmandSettings {
 	private static final String SHARED_PREFERENCES_NAME = "net.osmand.settings"; //$NON-NLS-1$
 	
 	/// Settings variables
-	private OsmandApplication ctx;
+	private final OsmandApplication ctx;
 	private SharedPreferences globalPreferences;
 	private SharedPreferences defaultProfilePreferences;
 	private SharedPreferences profilePreferences;
@@ -687,8 +687,15 @@ public class OsmandSettings {
 		return internetAvailableSourceTemplates;
 	}
 	
-	public final CommonPreference<String> PREVIOUS_INSTALLED_VERSION = new StringPreference("previous_installed_version", Version.getAppVersion(ctx)).makeGlobal();
-	
+	private CommonPreference<String> PREVIOUS_INSTALLED_VERSION;
+
+	public CommonPreference<String> previousInstalledVesrion() {
+		if (PREVIOUS_INSTALLED_VERSION == null) {
+			PREVIOUS_INSTALLED_VERSION = new StringPreference("previous_installed_version", Version.getAppVersion(ctx)).makeGlobal();
+		}
+		return PREVIOUS_INSTALLED_VERSION;
+	}
+
 	public ITileSource getMapTileSource(boolean warnWhenSelected) {
 		String tileName = MAP_TILE_SOURCES.get();
 		if (tileName != null) {

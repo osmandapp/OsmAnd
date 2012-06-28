@@ -409,17 +409,17 @@ public class ResourceManager {
 	}
 	
 	private List<String> checkAssets(IProgress progress) {
-		if (!Version.getFullVersion(context).equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get())) {
+		if (!Version.getFullVersion(context).equalsIgnoreCase(context.getSettings().previousInstalledVesrion().get())) {
 			File applicationDataDir = context.getSettings().extendOsmandPath(APP_DIR);
 			applicationDataDir.mkdirs();
 			if(applicationDataDir.canWrite()){
 				try {
 					progress.startTask(context.getString(R.string.installing_new_resources), -1); 
 					AssetManager assetManager = context.getAssets();
-					boolean isFirstInstall = !context.getSettings().PREVIOUS_INSTALLED_VERSION.getPreferences().
-							contains(context.getSettings().PREVIOUS_INSTALLED_VERSION.getId()); 
+					boolean isFirstInstall = !context.getSettings().previousInstalledVesrion().getPreferences().
+							contains(context.getSettings().previousInstalledVesrion().getId()); 
 					unpackBundledAssets(assetManager, applicationDataDir, progress, isFirstInstall);
-					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(Version.getFullVersion(context));
+					context.getSettings().previousInstalledVesrion().set(Version.getFullVersion(context));
 				} catch (IOException e) {
 					log.error(e.getMessage(), e);
 				} catch (XmlPullParserException e) {
@@ -701,7 +701,10 @@ public class ResourceManager {
 			if (matcher != null && matcher.isCancelled()) {
 				break;
 			}
-			List<Amenity> result = index.searchAmenitiesByName(MapUtils.get31TileNumberX(lon), MapUtils.get31TileNumberY(lat), searchQuery, matcher);
+			List<Amenity> result = index.searchAmenitiesByName(MapUtils.get31TileNumberX(lon), MapUtils.get31TileNumberY(lat),
+					MapUtils.get31TileNumberX(leftLongitude), MapUtils.get31TileNumberY(topLatitude),
+					MapUtils.get31TileNumberX(rightLongitude), MapUtils.get31TileNumberY(bottomLatitude),
+					searchQuery, matcher);
 			amenities.addAll(result);
 		}
 
