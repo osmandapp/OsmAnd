@@ -32,9 +32,8 @@ public class VoiceRouter {
 	// Speed in m/s 
 	protected float DEFAULT_SPEED = 12;
 		
-	protected int PREPARE_LONG_DISTANCE = 3500;
-	protected int PREPARE_LONG_DISTANCE_END = 3000;
-	
+	protected int PREPARE_LONG_DISTANCE = 0;
+	protected int PREPARE_LONG_DISTANCE_END = 0;
 	protected int PREPARE_DISTANCE = 0;
 	protected int PREPARE_DISTANCE_END = 0;
 	protected int TURN_IN_DISTANCE = 0;
@@ -86,10 +85,12 @@ public class VoiceRouter {
 	public void updateAppMode(){
 		// turn prompt starts either at distance, or if actual-lead-time(currentSpeed) < maximum-lead-time  
 		// lead time criterion only for TURN_IN and TURN
+		PREPARE_LONG_DISTANCE = 3500;
+		PREPARE_LONG_DISTANCE_END = 3000;
 		if(router.getAppMode() == ApplicationMode.PEDESTRIAN){
-			// prepare distance needed ?
+			// prepare distance is not needed for pedestrian
 			PREPARE_DISTANCE = 200;     //(100 sec)
-			PREPARE_DISTANCE_END = 150; //( 75 sec)
+			PREPARE_DISTANCE_END = 150 + 100; //( 75 sec) + not play
 			TURN_IN_DISTANCE = 100;     //  50 sec
 			TURN_IN_DISTANCE_END = 70;  //  35 sec
 			TURN_DISTANCE = 25;         //  12 sec
@@ -104,10 +105,10 @@ public class VoiceRouter {
 		} else {
 			PREPARE_DISTANCE = 1500;    //(125 sec)
 			PREPARE_DISTANCE_END = 1200;//(100 sec)
-			TURN_IN_DISTANCE = 300;     //  25 sec
-			TURN_IN_DISTANCE_END = 168; //  14 sec
-			TURN_DISTANCE = 60;         //   5 sec 
-			DEFAULT_SPEED = 12;         //  43 km/h
+			TURN_IN_DISTANCE = 390;     //  30 sec
+			TURN_IN_DISTANCE_END = 182; //  14 sec
+			TURN_DISTANCE = 110;         //  8 sec 
+			DEFAULT_SPEED = 13;         //  48 km/h
 		}
 	}
 		
@@ -215,14 +216,19 @@ public class VoiceRouter {
 			nextStatusAfter(STATUS_LONG_PREPARE);
 		} else if (statusNotPassed(STATUS_UNKNOWN)){
 			//if (dist >= PREPARE_LONG_DISTANCE && !isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE)) {
-			if (dist > PREPARE_LONG_DISTANCE) {
+			// say how much to go if there is next turn is a bit far
+			if (!isDistanceLess(speed, dist, TURN_IN_DISTANCE * 1.5)) {
 				playGoAhead(dist);
 			}
 			// say long distance message only for long distances > 10 km
 			if(dist > 3 * PREPARE_LONG_DISTANCE) {
 				nextStatusAfter(STATUS_UNKNOWN);
-			} else {
+			} else if(dist > 1.5 * PREPARE_DISTANCE) {
+				// say prepare message if it is far enough
 				nextStatusAfter(STATUS_LONG_PREPARE);
+			} else {
+				// don't say even prepare message
+				nextStatusAfter(STATUS_PREPARE);
 			}
 		}
 	}
@@ -313,7 +319,7 @@ public class VoiceRouter {
 			} else if(next.getTurnType().isRoundAbout()){
 				play.prepareRoundAbout(dist).play();
 			} else if(next.getTurnType().keepLeft() || next.getTurnType().keepRight()){
-				play.prepareRoundAbout(dist).play();
+				// do not play prepare for keep left/right
 			} else if(next.getTurnType().getValue().equals(TurnType.TU) || next.getTurnType().getValue().equals(TurnType.TRU)){
 				play.prepareMakeUT(dist).play();
 			} 
