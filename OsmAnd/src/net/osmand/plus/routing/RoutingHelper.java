@@ -200,15 +200,19 @@ public class RoutingHelper {
 						log.info("Recalculate route, because correlation  : " + dist); //$NON-NLS-1$
 						calculateRoute = true;
 					}
+					// calculate projection of current location
 					if(dist < POSITION_TOLERANCE * 1.5f) {
+						Location nextLocation = routeNodes.get(currentRoute);
 						LatLon project = getProject(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
-						// calculate projection of current location
+
 						locationProjection.setLatitude(project.getLatitude());
 						locationProjection.setLongitude(project.getLongitude());
+						float bearingTo = locationProjection.bearingTo(nextLocation);
+						// we need to update bearing too
+						locationProjection.setBearing(bearingTo);
 					}
 				}
 				// 3. Identify wrong movement direction (very similar to 2?)
-				// Put 3*POSITION_TOLERANCE/2 in order to avoid sharp turns
 				Location next = route.getNextRouteLocation();
 				boolean wrongMovementDirection = checkWrongMovementDirection(currentLocation, next);
 				if (wrongMovementDirection && currentLocation.distanceTo(routeNodes.get(currentRoute)) > 2 * POSITION_TOLERANCE) {
