@@ -355,7 +355,7 @@
   <string name="app_description">Aplicação de navegação</string>
   <string name="exit_Button">Sair</string>
   <string name="map_Button">Mapa</string>
-  <string name="settings_Button">Configurações</string>
+  <string name="settings_Button">Configuração</string>
   <string name="favorites_Button">Favoritos</string>
   <string name="search_button">Pesquisar</string>
   <string name="search_activity">Pesquisar</string>
@@ -386,7 +386,7 @@
   <string name="search_address_building_option">Edifício</string>
   <string name="search_address_street_option">Rua transversal</string>
   <string name="search_tabs_location">Localização</string>
-  <string name="context_menu_item_navigate_point">Mover-se para o ponto</string>
+  <string name="context_menu_item_navigate_point">Definir como destino</string>
   <string name="context_menu_item_add_favorite">Adicionar aos favoritos</string>
   <string name="context_menu_item_update_map">Atualizar mapa</string>
   <string name="context_menu_item_open_bug">Reportar problema OSM</string>
@@ -629,7 +629,7 @@
   <string name="use_transparent_map_theme_descr">Use transparent map controls</string>
   <string name="use_transparent_map_theme">Transparent theme</string>
   <string name="native_library_not_supported">Native library is not supported on this device.</string>
-  <string name="init_native_library">Initializing native library…</string>
+  <string name="init_native_library">Inicializando biblioteca nativa...</string>
   <string name="choose_auto_follow_route">Auto-center map view</string>
   <string name="choose_auto_follow_route_descr">Time until map view synchronizes with current position</string>
   <string name="auto_follow_route_never">Never</string>
@@ -823,4 +823,4 @@
   <string name="navigate_point_format_D">DDD.DD</string>
   <string name="navigate_point_format_DM">DDD MM.MM</string>
   <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-<string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string><string name="rendering_attr_noPolygons_name">No polygons</string><string name="rendering_attr_appMode_name">Rendering mode</string><string name="rendering_attr_appMode_description">Map optimization for respective User Profile</string><string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate SRTM-file may be needed.</string><string name="rendering_attr_contourLines_name">Show contour lines</string><string name="rendering_attr_hmRendered_description">Increase amount of map detail shown</string><string name="rendering_attr_hmRendered_name">Show more map detail</string><string name="route_roundabout">Roundabout : take %1$d exit</string><string name="route_kl">Keep left</string><string name="route_kr">Keep right</string><string name="save_route_as_gpx">Save route as GPX</string><string name="asap">ASAP</string><string name="tip_recent_changes_0_8_1_t">"Changes in 0.8.1 : "</string></resources>
+<string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string><string name="rendering_attr_noPolygons_name">No polygons</string><string name="rendering_attr_appMode_name">Rendering mode</string><string name="rendering_attr_appMode_description">Map optimization for respective User Profile</string><string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate SRTM-file may be needed.</string><string name="rendering_attr_contourLines_name">Show contour lines</string><string name="rendering_attr_hmRendered_description">Increase amount of map detail shown</string><string name="rendering_attr_hmRendered_name">Show more map detail</string><string name="route_roundabout">Roundabout : take %1$d exit</string><string name="route_kl">Keep left</string><string name="route_kr">Keep right</string><string name="save_route_as_gpx">Salvar rota como GPX</string><string name="asap">Assim que possível</string><string name="tip_recent_changes_0_8_1_t">"Alterações na versão 0.8.1 : "</string><string name="gpxup_public">Public</string><string name="gpxup_identifiable">Identifiable</string><string name="gpxup_trackable">Trackable</string><string name="gpxup_private">Private</string></resources>
