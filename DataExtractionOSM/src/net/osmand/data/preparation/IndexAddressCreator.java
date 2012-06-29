@@ -635,11 +635,13 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			list.addAll(cityManager.getClosestObjects(location.getLatitude(),location.getLongitude()));
 			list.addAll(cityVillageManager.getClosestObjects(location.getLatitude(),location.getLongitude()));
 		}
-		for (City c : list) {
-			double actualDistance = MapUtils.getDistance(location, c.getLocation());
-			if (actualDistance < dist) {
-				result = c.getName();
-				dist = actualDistance;
+		if(list != null) {
+			for (City c : list) {
+				double actualDistance = MapUtils.getDistance(location, c.getLocation());
+				if (actualDistance < dist) {
+					result = c.getName();
+					dist = actualDistance;
+				}
 			}
 		}
 		return result;
