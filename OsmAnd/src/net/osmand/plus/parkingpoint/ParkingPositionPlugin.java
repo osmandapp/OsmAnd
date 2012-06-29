@@ -5,6 +5,7 @@ import java.util.Calendar;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.OptionsMenuHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -17,6 +18,8 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.format.DateFormat;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -84,7 +87,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			ContextMenuAdapter adapter, Object selectedObj) {
 		boolean isParkingSelected = false;
 		LatLon parkingPosition = settings.getParkingPosition();
-		if (selectedObj instanceof LatLon && parkingLayer != null) {
+		if (selectedObj instanceof LatLon && parkingLayer != null && parkingPosition != null) {
 			LatLon point = (LatLon)selectedObj;	
 			if ((point.getLatitude() == parkingPosition.getLatitude()) && (point.getLongitude() == parkingPosition.getLongitude()))
 				isParkingSelected = true;
@@ -137,6 +140,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				}
 				setParkingPosition(mapActivity, latitude, longitude, true);
 				showSetTimeLimitDialog(mapActivity, choose);
+				mapActivity.getMapView().refreshMap();
 			}
 		});
 
@@ -148,8 +152,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				if (wasEventPreviouslyAdded) {
 					showDeleteEventWarning(mapActivity);
 				}
-				settings.addParkingEvent(false);
+				settings.addOrRemoveParkingEvent(false);
 				setParkingPosition(mapActivity, latitude, longitude, false);
+				mapActivity.getMapView().refreshMap();
 			}
 		});
 
@@ -193,21 +198,28 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		final TimePicker timePicker = (TimePicker) setTimeParking.findViewById(R.id.parking_time_picker);
 		
 		//to set the same 24-hour or 12-hour mode as it is set in the device
-		timePicker.setIs24HourView(DateFormat.is24HourFormat(app));
-		timePicker.setCurrentHour(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
+		timePicker.setIs24HourView(true);
+		timePicker.setCurrentHour(0);
+		timePicker.setCurrentMinute(0);
 		
 		setTime.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				choose.dismiss();
 				Calendar cal = Calendar.getInstance();
-				cal.set(Calendar.HOUR, timePicker.getCurrentHour());
-				cal.set(Calendar.MINUTE, timePicker.getCurrentMinute());
+				boolean is24HourFormat = DateFormat.is24HourFormat(app);
+				int hour = cal.get( is24HourFormat? Calendar.HOUR_OF_DAY : Calendar.HOUR);
+				int minute = cal.get(Calendar.MINUTE);
+				cal.set(is24HourFormat? Calendar.HOUR_OF_DAY : Calendar.HOUR, hour + timePicker.getCurrentHour());
+				cal.set(Calendar.MINUTE, minute + timePicker.getCurrentMinute());
 				settings.setParkingTime(cal.getTimeInMillis());
 				CheckBox addCalendarEvent = (CheckBox)setTimeParking.findViewById(R.id.check_event_in_calendar);
-				if (addCalendarEvent.isChecked())
+				if (addCalendarEvent.isChecked()) {
 					addCalendarEvent(setTimeParking);
-					settings.addParkingEvent(true);
+					settings.addOrRemoveParkingEvent(true);
+				} else {
+					settings.addOrRemoveParkingEvent(false);
+					}
 				}
 			});
 		setTime.create();
@@ -259,6 +271,35 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		settings.setParkingType(isLimited);
 		if (mapActivity.getMapView().getLayers().contains(parkingLayer)) {
 			parkingLayer.setParkingPointOnLayer(settings.getParkingPosition());
+		}
+	}
+	
+	@Override
+	public void registerOptionsMenuItems(MapActivity mapActivity, OptionsMenuHelper helper) {
+		if (parkingLayer != null) {
+			//NOTE: R.id.parking_lim_text - is used just as a stub
+			helper.registerOptionsMenuItem(R.id.parking_lim_text, R.string.osmand_parking_delete, android.R.drawable.ic_menu_mylocation);
+		}
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MapActivity mapActivity, int itemId) {
+		if (itemId == R.id.parking_lim_text) {
+			showDeleteDialog(mapActivity);
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public void prepareOptionsMenuItems(MapActivity mapActivity, Menu menu) {
+		MenuItem deleteParkingItem = menu.findItem(R.id.parking_lim_text);
+		if (deleteParkingItem != null) {
+			if (settings.getParkingPosition() != null) {
+				deleteParkingItem.setVisible(true);
+			} else {
+				deleteParkingItem.setVisible(false);
+			}
 		}
 	}
 }

@@ -21,6 +21,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import org.apache.commons.logging.Log;
 
 import android.preference.PreferenceScreen;
+import android.view.Menu;
 
 public abstract class OsmandPlugin {
 	
@@ -109,6 +110,12 @@ public abstract class OsmandPlugin {
 	
 	public void registerMapContextMenuActions(MapActivity mapActivity, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj) {}
 	
+	public void registerOptionsMenuItems(MapActivity mapActivity, OptionsMenuHelper helper) {}
+	
+	public void prepareOptionsMenuItems(MapActivity mapActivity, Menu menu) {}
+
+	public boolean onOptionsItemSelected(MapActivity mapActivity, int itemId) { return false; }
+	
 	public static void refreshLayers(OsmandMapTileView mapView, MapActivity activity) {
 		for (OsmandPlugin plugin : activePlugins) {
 			plugin.updateLayers(mapView, activity);
@@ -193,6 +200,27 @@ public abstract class OsmandPlugin {
 		for (OsmandPlugin plugin : activePlugins) {
 			plugin.registerLayerContextMenuActions(mapView, adapter, mapActivity);
 		}
+	}
+	
+	public static void registerOptionsMenu(MapActivity map, OptionsMenuHelper helper) {
+		for (OsmandPlugin plugin : activePlugins) {
+			plugin.registerOptionsMenuItems(map, helper);
+		}
+	}
+
+	public static void registerOnPrepareOptionsMenu(MapActivity mapActivity, Menu menu) {
+		for (OsmandPlugin plugin : activePlugins) {
+			plugin.prepareOptionsMenuItems(mapActivity, menu);
+		}
+	}
+
+	public static boolean registerOnOptionsMenuItemSelected(MapActivity mapActivity, int itemId) {
+		for (OsmandPlugin plugin : activePlugins) {
+			if (plugin.onOptionsItemSelected(mapActivity, itemId)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

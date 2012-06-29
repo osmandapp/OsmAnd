@@ -1002,7 +1002,7 @@ public class OsmandSettings {
 		return globalPreferences.getBoolean(PARKING_EVENT_ADDED, false);
 	}
 	
-	public boolean addParkingEvent(boolean added) {
+	public boolean addOrRemoveParkingEvent(boolean added) {
 		return globalPreferences.edit().putBoolean(PARKING_EVENT_ADDED, added).commit();
 	}
 	
