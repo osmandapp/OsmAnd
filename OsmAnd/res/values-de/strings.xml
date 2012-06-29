@@ -560,7 +560,7 @@
 	<string name="route_tshl">scharf links abbiegen, dann</string>
 	<string name="route_tsll">halb links abbiegen, dann</string>
 	<string name="route_tu">Wenden</string>
-	<string name="route_head">Kopf</string>
+	<string name="route_head">Geradeaus</string>
 	<string name="first_time_continue">Weiter</string>
 	<string name="first_time_download">Offline-Daten herunterladen</string>
 	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. \nUm alle Funktionen verwenden zu können, sind Offline-Daten erforderlich, die Sie in den Einstellungen unter Offline-Daten herunterladen oder selbst erstellen können. Danach können Sie Adressen, POI und ÖPNV finden.</string>
