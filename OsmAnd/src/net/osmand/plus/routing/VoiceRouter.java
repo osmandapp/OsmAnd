@@ -183,6 +183,23 @@ public class VoiceRouter {
 			// however it should be checked manually ?
 			return;
 		}
+		// say how much to go if there is next turn is a bit far
+		if (currentStatus == STATUS_UNKNOWN) {
+			if (!isDistanceLess(speed, dist, TURN_IN_DISTANCE * 1.3)) {
+				playGoAhead(dist);
+			}
+			// say long distance message only for long distances > 10 km
+			// if (dist >= PREPARE_LONG_DISTANCE && !isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE)) {
+			if (dist > 3 * PREPARE_LONG_DISTANCE) {
+				nextStatusAfter(STATUS_UNKNOWN);
+			} else if (dist > 1.5 * PREPARE_DISTANCE) {
+				// say prepare message if it is far enough
+				nextStatusAfter(STATUS_LONG_PREPARE);
+			} else {
+				// don't say even prepare message
+				nextStatusAfter(STATUS_PREPARE);
+			}
+		}
 		
 		
 		RouteDirectionInfo nextNext = router.getNextNextRouteDirectionInfo();
@@ -215,21 +232,8 @@ public class VoiceRouter {
 			} 
 			nextStatusAfter(STATUS_LONG_PREPARE);
 		} else if (statusNotPassed(STATUS_UNKNOWN)){
-			//if (dist >= PREPARE_LONG_DISTANCE && !isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE)) {
-			// say how much to go if there is next turn is a bit far
-			if (!isDistanceLess(speed, dist, TURN_IN_DISTANCE * 1.5)) {
-				playGoAhead(dist);
-			}
-			// say long distance message only for long distances > 10 km
-			if(dist > 3 * PREPARE_LONG_DISTANCE) {
-				nextStatusAfter(STATUS_UNKNOWN);
-			} else if(dist > 1.5 * PREPARE_DISTANCE) {
-				// say prepare message if it is far enough
-				nextStatusAfter(STATUS_LONG_PREPARE);
-			} else {
-				// don't say even prepare message
-				nextStatusAfter(STATUS_PREPARE);
-			}
+			// strange how we get here but
+			nextStatusAfter(STATUS_UNKNOWN);
 		}
 	}
 
