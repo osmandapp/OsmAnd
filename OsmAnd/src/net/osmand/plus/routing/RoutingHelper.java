@@ -202,16 +202,16 @@ public class RoutingHelper {
 					}
 					// calculate projection of current location
 					
-					double projectDist = mode == ApplicationMode.CAR ?  POSITION_TOLERANCE * 1.5f : POSITION_TOLERANCE ; 
+					double projectDist = mode == ApplicationMode.CAR ?  POSITION_TOLERANCE : POSITION_TOLERANCE / 2 ; 
 					if(dist < projectDist) {
 						Location nextLocation = routeNodes.get(currentRoute);
 						LatLon project = getProject(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
 
 						locationProjection.setLatitude(project.getLatitude());
 						locationProjection.setLongitude(project.getLongitude());
-						float bearingTo = locationProjection.bearingTo(nextLocation);
 						// we need to update bearing too
 						if(locationProjection.hasBearing()) {
+							float bearingTo = locationProjection.bearingTo(nextLocation);
 							locationProjection.setBearing(bearingTo);
 						}
 					}
