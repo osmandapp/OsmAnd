@@ -179,7 +179,6 @@ public class RoutingHelper {
 
 		boolean calculateRoute = false;
 		synchronized (this) {
-			Location locationProjection = currentLocation;
 			// 0. Route empty or needs to be extended? Then re-calculate route.
 			if(route.isEmpty()) {
 				calculateRoute = true;
@@ -200,21 +199,6 @@ public class RoutingHelper {
 						log.info("Recalculate route, because correlation  : " + dist); //$NON-NLS-1$
 						calculateRoute = true;
 					}
-					// calculate projection of current location
-					
-					double projectDist = mode == ApplicationMode.CAR ?  POSITION_TOLERANCE : POSITION_TOLERANCE / 2 ; 
-					if(dist < projectDist) {
-						Location nextLocation = routeNodes.get(currentRoute);
-						LatLon project = getProject(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
-
-						locationProjection.setLatitude(project.getLatitude());
-						locationProjection.setLongitude(project.getLongitude());
-						// we need to update bearing too
-						if(locationProjection.hasBearing()) {
-							float bearingTo = locationProjection.bearingTo(nextLocation);
-							locationProjection.setBearing(bearingTo);
-						}
-					}
 				}
 				// 3. Identify wrong movement direction (very similar to 2?)
 				Location next = route.getNextRouteLocation();
@@ -229,8 +213,27 @@ public class RoutingHelper {
 				if (calculateRoute == false || uTurnIsNeeded == true) {
 					voiceRouter.updateStatus(currentLocation, uTurnIsNeeded);
 				}
+				
+				// calculate projection of current location
+				if (currentRoute > 0) {
+					double dist = getOrthogonalDistance(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
+					double projectDist = mode == ApplicationMode.CAR ? POSITION_TOLERANCE : POSITION_TOLERANCE / 2;
+					Location locationProjection = lastFixedLocation;
+					if (dist < projectDist) {
+						Location nextLocation = routeNodes.get(currentRoute);
+						LatLon project = getProject(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
+						
+						locationProjection.setLatitude(project.getLatitude());
+						locationProjection.setLongitude(project.getLongitude());
+						// we need to update bearing too
+						if (locationProjection.hasBearing()) {
+							float bearingTo = locationProjection.bearingTo(nextLocation);
+							locationProjection.setBearing(bearingTo);
+						}
+					}
+				}
 			}
-			lastFixedLocation = locationProjection;
+			
 		}
 
 		if (calculateRoute) {
@@ -384,7 +387,7 @@ public class RoutingHelper {
 			float bearingToRoute = currentLocation.bearingTo(nextRouteLocation);
 			double diff = MapUtils.degreesDiff(bearingMotion, bearingToRoute);
 			// 6. Suppress turn prompt if prescribed direction of motion is between 45 and 135 degrees off
-			if (Math.abs(diff) > 90f) {
+			if (Math.abs(diff) > 60f) {
 				return true;
 			}
 		}
