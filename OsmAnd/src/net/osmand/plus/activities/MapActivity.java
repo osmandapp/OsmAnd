@@ -774,10 +774,10 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			long now = System.currentTimeMillis();
 			if (isMapLinkedToLocation()) {
 				if(settings.AUTO_ZOOM_MAP.get() && location.hasSpeed()){
-					int z = defineZoomFromSpeed(location.getSpeed(), mapView.getZoom());
-					if(mapView.getZoom() != z && !mapView.mapIsAnimating()){
+					float z = defineZoomFromSpeed(location.getSpeed(), mapView.getZoom());
+					if(Math.abs(mapView.getZoom() - z) > .33f){
 						// prevent ui hysteresis (check time interval for autozoom)
-						if(Math.abs(mapView.getZoom() - z) > 1 || (now - lastTimeAutoZooming) > 6500){
+						if(now - lastTimeAutoZooming > 5000){
 							lastTimeAutoZooming = now;
 							mapView.setZoom(z);
 						}
@@ -794,6 +794,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 						mapView.setRotate(-previousSensorValue);
 					}
 				}
+				mapView.setLatLon(location.getLatitude(), location.getLongitude());
 			} else {
 				if(!mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()){
 					mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(true);
@@ -812,7 +813,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		mapView.refreshMap();
 	}
 
-	public int defineZoomFromSpeed(float speed, int currentZoom){
+	public float defineZoomFromSpeed(float speed, int currentZoom){
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
@@ -820,7 +821,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		//correct for roughly constant "look ahead" distance on different screens, see Issue 914
 		int screenSizeCorrection = (int)Math.round(Math.log(((float)metrics.heightPixels)/320.0f) / Math.log(2.0f)); 
 
-   	 	if(speed < 5f/3.6){
+   	 	if(speed < 7f/3.6){
 			return currentZoom;
 		// less than 23: show zoom 17 
 		} else if(speed < 23f/3.6){
