@@ -18,6 +18,7 @@ import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.osm.LatLon;
+import net.osmand.osm.MapUtils;
 import net.osmand.plus.BusyIndicator;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.FavouritesDbHelper;
@@ -105,7 +106,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	private static final int LONG_KEYPRESS_DELAY = 500;
 	
 	private long lastTimeAutoZooming = 0;
-	
+	private long lastTimeSensorRotation = 0;
 	private long lastTimeGPSLocationFixed = 0;
 	
     /** Called when the activity is first created. */
@@ -119,6 +120,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	private RoutingHelper routingHelper;
 	
 	private boolean sensorRegistered = false;
+	private float previousSensorValue = 0;
 
 	// Notification status
 	private NotificationManager mNotificationManager;
@@ -676,15 +678,16 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 
 
 
-	private void registerUnregisterSensor(Location location){
+	private void registerUnregisterSensor(Location location, boolean overruleRegister){
 		boolean currentShowingAngle = settings.SHOW_VIEW_ANGLE.get(); 
 		int currentMapRotation = settings.ROTATE_MAP.get();
-		boolean show = (currentShowingAngle && location != null) || currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS;
+		boolean show = overruleRegister || (currentShowingAngle && location != null) || currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS;
 		// show point view only if gps enabled
 		if (sensorRegistered && !show) {
 			Log.d(LogUtil.TAG, "Disable sensor"); //$NON-NLS-1$
 			((SensorManager) getSystemService(SENSOR_SERVICE)).unregisterListener(this);
 			sensorRegistered = false;
+			previousSensorValue = 0;
 			mapLayers.getLocationLayer().setHeading(null);
 		} else if (!sensorRegistered && show) {
 			Log.d(LogUtil.TAG, "Enable sensor"); //$NON-NLS-1$
@@ -769,8 +772,9 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			updateSpeedBearing(location);
 		}
 
-	
-		registerUnregisterSensor(location);
+		boolean enableSensorNavigation = routingHelper.isFollowingMode() && location != null? 
+				location.hasBearing() :  false;
+		registerUnregisterSensor(location, enableSensorNavigation);
 		
 		if(routingHelper.isFollowingMode()){
 			if(location == null || !location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
@@ -803,11 +807,11 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		navigationInfo.setLocation(location);
 	
 		if (location != null) {
+			long now = System.currentTimeMillis();
 			if (isMapLinkedToLocation()) {
 				if(settings.AUTO_ZOOM_MAP.get() && location.hasSpeed()){
 					int z = defineZoomFromSpeed(location.getSpeed(), mapView.getZoom());
 					if(mapView.getZoom() != z && !mapView.mapIsAnimating()){
-						long now = System.currentTimeMillis();
 						// prevent ui hysteresis (check time interval for autozoom)
 						if(Math.abs(mapView.getZoom() - z) > 1 || (now - lastTimeAutoZooming) > 6500){
 							lastTimeAutoZooming = now;
@@ -818,8 +822,14 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				int currentMapRotation = settings.ROTATE_MAP.get();
 				if (location.hasBearing() && currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
 					mapView.setRotate(-location.getBearing());
+				} else if(!location.hasBearing() && routingHelper.isFollowingMode() 
+						&& currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
+					if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -previousSensorValue)) > 15
+							&& now - lastTimeSensorRotation > 1500) {
+						lastTimeSensorRotation = now;
+						mapView.setRotate(-previousSensorValue);
+					}
 				}
-				mapView.setLatLon(location.getLatitude(), location.getLongitude());
 			} else {
 				if(!mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()){
 					mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(true);
@@ -1019,7 +1029,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 		routingHelper.setAppMode(settings.getApplicationMode());
 		mapView.setMapPosition(settings.POSITION_ON_MAP.get());
-		registerUnregisterSensor(getLastKnownLocation());
+		registerUnregisterSensor(getLastKnownLocation(), false);
 		mapLayers.getMapInfoLayer().applyTheme();
 		mapLayers.updateLayers(mapView);
 		
@@ -1034,7 +1044,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			vl = (vl + 1) % 3;
 		}
 		settings.ROTATE_MAP.set(vl);
-		registerUnregisterSensor(getLastKnownLocation());
+		registerUnregisterSensor(getLastKnownLocation(), false);
 		if(settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS){
 			mapView.setRotate(0);
 		}
@@ -1128,8 +1138,11 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		if(currentScreenOrientation == 1){
 			val += 90;
 		}
+		previousSensorValue = val;
 		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS) {
-			mapView.setRotate(-val);
+			if(Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 5) {
+				mapView.setRotate(-val);
+			}
 		}
 		if(settings.SHOW_VIEW_ANGLE.get().booleanValue()){
 			if(mapLayers.getLocationLayer().getHeading() == null || Math.abs(mapLayers.getLocationLayer().getHeading() - val) > 10){
