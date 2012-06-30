@@ -718,7 +718,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	}
 
 	// location not null!
-	private void updateSpeedBearing(Location location) {
+	private void updateSpeedBearingEmulator(Location location) {
 		// For network/gps it's bad way (not accurate). It's widely used for testing purposes
 		// possibly keep using only for emulator case
 		PointLocationLayer locationLayer = mapLayers.getLocationLayer();
@@ -768,12 +768,12 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				}
 			
 			}
-			
-			updateSpeedBearing(location);
+			// only for emulator
+			updateSpeedBearingEmulator(location);
 		}
 
-		boolean enableSensorNavigation = routingHelper.isFollowingMode() && location != null? 
-				location.hasBearing() :  false;
+		boolean enableSensorNavigation = routingHelper.isFollowingMode() ? 
+				location == null || !location.hasBearing() :  false;
 		registerUnregisterSensor(location, enableSensorNavigation);
 		
 		if(routingHelper.isFollowingMode()){

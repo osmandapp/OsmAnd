@@ -211,7 +211,9 @@ public class RoutingHelper {
 						locationProjection.setLongitude(project.getLongitude());
 						float bearingTo = locationProjection.bearingTo(nextLocation);
 						// we need to update bearing too
-						locationProjection.setBearing(bearingTo);
+						if(locationProjection.hasBearing()) {
+							locationProjection.setBearing(bearingTo);
+						}
 					}
 				}
 				// 3. Identify wrong movement direction (very similar to 2?)

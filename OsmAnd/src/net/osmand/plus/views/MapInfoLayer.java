@@ -98,14 +98,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 		paintSmallText = new Paint();
 		paintSmallText.setStyle(Style.FILL_AND_STROKE);
 		paintSmallText.setColor(Color.BLACK);
-		paintSmallText.setTextSize(15 * scaleCoefficient);
+		paintSmallText.setTextSize(18 * scaleCoefficient);
 		paintSmallText.setAntiAlias(true);
 		paintSmallText.setStrokeWidth(4);
 
 		paintSmallSubText = new Paint();
 		paintSmallSubText.setStyle(Style.FILL_AND_STROKE);
 		paintSmallSubText.setColor(Color.BLACK);
-		paintSmallSubText.setTextSize(12 * scaleCoefficient);
+		paintSmallSubText.setTextSize(13 * scaleCoefficient);
 		paintSmallSubText.setAntiAlias(true);
 		
 		paintImg = new Paint();
@@ -207,6 +207,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 	
 	@Override
 	public void onDraw(Canvas canvas, RectF latlonBounds, RectF tilesRect, DrawSettings nightMode) {
+		boolean bold = routeLayer.getHelper().isFollowingMode();
+		if(paintText.isFakeBoldText() != bold) {
+			// TODO night view
+			paintText.setFakeBoldText(true);
+			paintSubText.setFakeBoldText(true);
+			paintSmallText.setFakeBoldText(true);
+			paintSmallSubText.setFakeBoldText(true);
+		}
 		// update data on draw
 		rightStack.updateInfo();
 		leftStack.updateInfo();
