@@ -120,7 +120,6 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		double longitude = parkingPoint.getLongitude();
 		if (isLocationVisible(latitude, longitude)) {
 			int marginX = parkingNoLimitIcon.getWidth() / 2;
-//			TODO tune y
 			int marginY = 72;//magic number!
 			int locationX = view.getMapXForPoint(longitude);
 			int locationY = view.getMapYForPoint(latitude);
@@ -168,10 +167,11 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 			long parkingTime = settings.getParkingTime();
 			Time time = new Time();
 			time.set(parkingTime);
-			timeLimitDesc.append(map.getString(R.string.osmand_parking_position_description_add));
+			timeLimitDesc.append(map.getString(R.string.osmand_parking_position_description_add) + " ");
 			timeLimitDesc.append(time.hour);
 			timeLimitDesc.append(":");
-			timeLimitDesc.append(time.minute);
+			int minute = time.minute;
+			timeLimitDesc.append(minute<10 ? "0" + minute : minute);
 			if (!DateFormat.is24HourFormat(map.getApplicationContext())) {
 				timeLimitDesc.append(time.hour >= 12 ? map.getString(R.string.osmand_parking_pm) : map.getString(R.string.osmand_parking_am));
 		    }

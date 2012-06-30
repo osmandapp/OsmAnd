@@ -103,7 +103,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				}
 			};
 			if (parkingPosition != null)
-				adapter.registerItem(R.string.context_menu_item_delete_parking_point, 0, removeListener, 0);
+				adapter.registerItem(R.string.context_menu_item_delete_parking_point, R.drawable.poi_parking_del_ctx_menu, removeListener, 0);
 		}
 		
 		OnContextMenuClick addListener = new OnContextMenuClick() {
@@ -115,7 +115,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				}
 			}
 		};
-		adapter.registerItem(R.string.context_menu_item_add_parking_point, 0, addListener, -1);
+		adapter.registerItem(R.string.context_menu_item_add_parking_point, R.drawable.poi_parking_pos_ctx_menu, addListener, -1);
 		
 	}
 
