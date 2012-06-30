@@ -25,12 +25,14 @@ import net.osmand.plus.AmenityIndexRepositoryOdb;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.OptionsMenuHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.routing.RouteAnimation;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
@@ -41,19 +43,27 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.location.Location;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings.Secure;
 import android.text.ClipboardManager;
 import android.text.Html;
 import android.util.FloatMath;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -69,6 +79,9 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class MapActivityActions implements DialogProvider {
+	
+	private static final String GPS_STATUS_COMPONENT = "com.eclipsim.gpsstatus2"; //$NON-NLS-1$
+	private static final String GPS_STATUS_ACTIVITY = "com.eclipsim.gpsstatus2.GPSStatus"; //$NON-NLS-1$
 	
 	private static final String KEY_LONGITUDE = "longitude";
 	private static final String KEY_LATITUDE = "latitude";
@@ -86,10 +99,13 @@ public class MapActivityActions implements DialogProvider {
 	
 	private final MapActivity mapActivity;
 	private OsmandSettings settings;
+	private RoutingHelper routingHelper;
+	private RouteAnimation routeAnimation = new RouteAnimation();
 
 	public MapActivityActions(MapActivity mapActivity){
 		this.mapActivity = mapActivity;
 		settings = mapActivity.getMyApplication().getSettings();
+		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
 	}
 
 	protected void addFavouritePoint(final double latitude, final double longitude){
@@ -738,6 +754,10 @@ public class MapActivityActions implements DialogProvider {
 		builder.create().show();
 	}
 	
+	public void contextMenuPoint(final double latitude, final double longitude){
+		contextMenuPoint(latitude, longitude, null, null);
+	}
+	
 	private Dialog createReloadTitleDialog(final Bundle args) {
     	Builder builder = new AccessibleAlertBuilder(mapActivity);
     	builder.setMessage(R.string.context_menu_item_update_map_confirm);
@@ -825,5 +845,199 @@ public class MapActivityActions implements DialogProvider {
 			break;
 		}
 	}
+	
+	public boolean onCreateOptionsMenu(Menu menu) {
+//		NOTE: delete not a "menu.xml" because all id-resources are generated to R-class from there
+		OptionsMenuHelper helper = new OptionsMenuHelper(menu);
+		helper.registerOptionsMenuItem(R.id.map_where_am_i, R.string.where_am_i, android.R.drawable.ic_menu_mylocation);
+		helper.registerOptionsMenuItem(R.id.map_layers, R.string.menu_layers, android.R.drawable.ic_menu_mapmode);		
+		helper.registerOptionsMenuItem(R.id.map_show_settings, R.string.settings_Button, android.R.drawable.ic_menu_preferences);		
+		helper.registerOptionsMenuItem(R.id.map_navigate_to_point, R.string.stop_navigation, android.R.drawable.ic_menu_close_clear_cancel, false);		
+		helper.registerOptionsMenuItem(R.id.map_mute, R.string.menu_mute_off, false);		
+		helper.registerOptionsMenuItem(R.id.map_animate_route, R.string.animate_route, false);		
+		helper.registerOptionsMenuItem(R.id.map_get_directions, R.string.get_directions, android.R.drawable.ic_menu_directions);
+		helper.registerOptionsMenuItem(R.id.map_specify_point, R.string.search_button, android.R.drawable.ic_menu_search);
+		helper.registerOptionsMenuItem(R.id.map_show_gps_status, R.string.show_gps_status, android.R.drawable.ic_menu_compass);
+		helper.registerOptionsMenuItem(R.id.map_show_point_options, R.string.show_point_options);		
+		OsmandPlugin.registerOptionsMenu(mapActivity, helper);
+		return true;
+	}
+	
+	public void onPrepareOptionsMenu(Menu menu) {
+		MenuItem navigateToPointMenu = menu.findItem(R.id.map_navigate_to_point);
+		if (navigateToPointMenu != null) {
+			if (settings.getPointToNavigate() != null) {
+				navigateToPointMenu.setTitle((routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || 
+						routingHelper.isRouteBeingCalculated()) ? R.string.stop_routing : R.string.stop_navigation);
+				navigateToPointMenu.setVisible(true);
+			} else {
+				navigateToPointMenu.setVisible(false);
+			}
+		}
+		MenuItem muteMenu = menu.findItem(R.id.map_mute); 
+		if(muteMenu != null){
+			if (routingHelper.getFinalLocation() != null && routingHelper.isFollowingMode()) {
+				muteMenu.setTitle(routingHelper.getVoiceRouter().isMute() ? R.string.menu_mute_on : R.string.menu_mute_off);
+				muteMenu.setVisible(true);
+			} else {
+				muteMenu.setVisible(false);
+			}
+		}
+		MenuItem directions = menu.findItem(R.id.map_get_directions);
+		if(routingHelper.isRouteCalculated()){
+			directions.setTitle(R.string.show_route);
+		} else {
+			directions.setTitle(R.string.get_directions);
+		}
+		
+		MenuItem animateMenu = menu.findItem(R.id.map_animate_route);
+		
+		if (animateMenu != null) {
+			if(settings.TEST_ANIMATE_ROUTING.get()){
+				animateMenu.setTitle(routeAnimation.isRouteAnimating() ? R.string.animate_route_off
+					: R.string.animate_route);
+				animateMenu.setVisible("1".equals(Secure.getString(
+					mapActivity.getContentResolver(), Secure.ALLOW_MOCK_LOCATION))
+					&& settings.getPointToNavigate() != null
+					&& routingHelper.isRouteCalculated());
+				animateMenu.setVisible(true);
+			} else {
+				animateMenu.setVisible(false);
+			}
+		}
+		
+		OsmandPlugin.registerOnPrepareOptionsMenu(mapActivity, menu);
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		final int itemId = item.getItemId();
+		OsmandMapTileView mapView = mapActivity.getMapView();
+		if (itemId == R.id.map_show_settings) {
+			final Intent intentSettings = new Intent(mapActivity, OsmandIntents.getSettingsActivity());
+			mapActivity.startActivity(intentSettings);
+			return true;
+		} else if (itemId == R.id.map_where_am_i) {
+			if (getMyApplication().accessibilityEnabled()) {
+				whereAmIDialog();
+			} else {
+				mapActivity.backToLocationImpl();
+			}
+			return true;
+		} else if (itemId == R.id.map_show_gps_status) {
+			startGpsStatusIntent();
+			return true;
+		} else if (itemId == R.id.map_specify_point) {
+			Intent newIntent = new Intent(mapActivity, OsmandIntents.getSearchActivity());
+			// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			LatLon loc = mapActivity.getMapLocation();
+			newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
+			newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
+			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			mapActivity.startActivity(newIntent);
+			return true;
+		} else {
+			if (itemId == R.id.map_get_directions) {
+				if (routingHelper.isRouteCalculated()) {
+					aboutRoute();
+				} else {
+					Location loc = mapActivity.getLastKnownLocation();
+					if (loc != null) {
+						getDirections(loc.getLatitude(), loc.getLongitude(), true);
+					} else {
+						getDirections(mapView.getLatitude(), mapView.getLongitude(), true);
+					}
+				}
+				return true;
+			} else if (itemId == R.id.map_layers) {
+				mapActivity.getMapLayers().openLayerSelectionDialog(mapView);
+				return true;
+			} else if (itemId == R.id.map_mute) {
+				routingHelper.getVoiceRouter().setMute(!routingHelper.getVoiceRouter().isMute());
+				return true;
+			} else if (itemId == R.id.map_navigate_to_point) {
+				if (mapActivity.getMapLayers().getNavigationLayer().getPointToNavigate() != null) {
+					if (routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()) {
+						routingHelper.setFinalAndCurrentLocation(null, routingHelper.getCurrentLocation(), routingHelper.getCurrentGPXRoute());
+						// restore default mode
+						boolean changed = settings.APPLICATION_MODE.set(settings.PREV_APPLICATION_MODE.get());
+						mapActivity.updateApplicationModeSettings();
+						mapView.refreshMap(changed);
+					} else {
+						mapActivity.navigateToPoint(null);
+					}
+				} else {
+					mapActivity.navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
+				}
+				mapView.refreshMap();
+				return true;
+			} else if (itemId == R.id.map_show_point_options) {
+				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
+				return true;
+			} else if (itemId == R.id.map_animate_route) {
+				// animate moving on route
+				routeAnimation.startStopRouteAnimation(routingHelper, mapActivity);
+				return true;
+			} else {
+				return OsmandPlugin.registerOnOptionsMenuItemSelected(mapActivity, itemId);
+			}
+		}
+	}
 
+	private void startGpsStatusIntent() {
+		Intent intent = new Intent();
+		intent.setComponent(new ComponentName(GPS_STATUS_COMPONENT,
+				GPS_STATUS_ACTIVITY));
+		ResolveInfo resolved = mapActivity.getPackageManager().resolveActivity(intent,
+				PackageManager.MATCH_DEFAULT_ONLY);
+		if (resolved != null) {
+			mapActivity.startActivity(intent);
+		} else {
+			AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
+			builder.setMessage(getString(R.string.gps_status_app_not_found));
+			builder.setPositiveButton(
+					getString(R.string.default_buttons_yes),
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog,
+								int which) {
+							Intent intent = new Intent(Intent.ACTION_VIEW,
+									Uri.parse("market://search?q=pname:"
+											+ GPS_STATUS_COMPONENT));
+							try {
+								mapActivity.startActivity(intent);
+							} catch (ActivityNotFoundException e) {
+							}
+						}
+					});
+			builder.setNegativeButton(
+					getString(R.string.default_buttons_no), null);
+			builder.show();
+		}
+	}
+
+    private void whereAmIDialog() {
+        final List<String> items = new ArrayList<String>();
+        items.add(getString(R.string.show_location));
+        items.add(getString(R.string.show_details));
+        AlertDialog.Builder menu = new AlertDialog.Builder(mapActivity);
+        menu.setItems(items.toArray(new String[items.size()]),
+                      new DialogInterface.OnClickListener() {
+                          @Override
+                          public void onClick(DialogInterface dialog, int item) {
+                              dialog.dismiss();
+                              switch (item) {
+                              case 0:
+                                  mapActivity.backToLocationImpl();
+                                  break;
+                              case 1:
+                                  mapActivity.getNavigationInfo().show(settings.getPointToNavigate(), mapActivity.getMapLayers().
+                                		  getLocationLayer().getHeading());
+                                  break;
+                              default:
+                                  break;
+                              }
+                          }
+                      });
+        menu.show();
+    }
 }

@@ -688,5 +688,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		statusBar.addView(backToLocation, params);
 		return statusBar;
 	}
-
+	
+	public void addRightStack(MapInfoControl v){
+		rightStack.addStackView(v);
+	}
 }

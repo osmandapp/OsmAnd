@@ -276,7 +276,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			if (!selectedObjects.isEmpty()) {
 				showContextMenuForSelectedObjects();
 			} else if (nativeMode) {
-				activity.contextMenuPoint(latLon.getLatitude(), latLon.getLongitude());
+				activity.getMapActions().contextMenuPoint(latLon.getLatitude(), latLon.getLongitude());
 			}
 			return true;
 		}
@@ -299,7 +299,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					for(OsmandMapLayer layer : view.getLayers()) {
 						layer.populateObjectContextMenu(selectedObj, menuAdapter);
 					}
-					activity.contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), menuAdapter, selectedObj);
+					activity.getMapActions().contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), menuAdapter, selectedObj);
 				}
 			});
 			builder.show();
@@ -308,7 +308,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			for(OsmandMapLayer layer : view.getLayers()) {
 				layer.populateObjectContextMenu(selectedObj, menuAdapter);
 			}
-			activity.contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), menuAdapter, selectedObj);
+			activity.getMapActions().contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), menuAdapter, selectedObj);
 		}
 	}
 	

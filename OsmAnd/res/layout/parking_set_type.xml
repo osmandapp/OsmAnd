@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:gravity="center_horizontal" >
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageButton
+            android:id="@+id/parking_no_lim_button"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center_horizontal"
+            android:background="@drawable/poi_parking_pos_no_limit_menu"
+            android:contentDescription="@string/osmand_parking_time_no_limit" />
+
+        <ImageButton
+            android:id="@+id/parking_lim_button"
+            android:layout_column="1"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:gravity="center_horizontal"
+            android:background="@drawable/poi_parking_pos_limit_menu"
+            android:contentDescription="@string/osmand_parking_time_limit" />
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/parking_lim_text"
+            android:layout_column="0"
+            android:layout_marginRight="4dp"
+            android:layout_marginLeft="4dp"
+            android:gravity="center_horizontal"
+            android:text="@string/osmand_parking_no_lim_text" />
+
+        <TextView
+            android:id="@+id/parking_no_lim_text"
+            android:layout_column="1"
+            android:layout_marginRight="4dp"
+            android:layout_marginLeft="4dp"
+            android:gravity="center_horizontal"
+            android:text="@string/osmand_parking_lim_text" />
+    </TableRow>
+
+</TableLayout>
