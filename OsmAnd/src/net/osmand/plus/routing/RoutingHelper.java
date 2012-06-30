@@ -201,7 +201,9 @@ public class RoutingHelper {
 						calculateRoute = true;
 					}
 					// calculate projection of current location
-					if(dist < POSITION_TOLERANCE * 1.5f) {
+					
+					double projectDist = mode == ApplicationMode.CAR ?  POSITION_TOLERANCE * 1.5f : POSITION_TOLERANCE ; 
+					if(dist < projectDist) {
 						Location nextLocation = routeNodes.get(currentRoute);
 						LatLon project = getProject(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
 

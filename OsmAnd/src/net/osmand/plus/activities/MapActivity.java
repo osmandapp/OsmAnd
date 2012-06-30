@@ -737,9 +737,10 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				location.setSpeed(speed);
 			}
 		}
-		if(locationLayer.getLastKnownLocation() != null && location.hasBearing()){
+		if(locationLayer.getLastKnownLocation() != null && !location.hasBearing()){
 			if(locationLayer.getLastKnownLocation().distanceTo(location) > 10 && !isRunningOnEmulator()){
-				location.setBearing(locationLayer.getLastKnownLocation().bearingTo(location));
+				// very innacurate?
+				// location.setBearing(locationLayer.getLastKnownLocation().bearingTo(location));
 			}
 		}
 	}
@@ -841,20 +842,20 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
+		//FIXME victor review
 		//correct for roughly constant "look ahead" distance on different screens, see Issue 914
 		int screenSizeCorrection = (int)Math.round(Math.log(((float)metrics.heightPixels)/320.0f) / Math.log(2.0f)); 
 
-		speed *= 3.6;
-   	 	if(speed < 5){
+   	 	if(speed < 5f/3.6){
 			return currentZoom;
 		// less than 23: show zoom 17 
-		} else if(speed < 23){
+		} else if(speed < 23f/3.6){
 			return 17 + screenSizeCorrection;
-		} else if(speed < 43){
+		} else if(speed < 43f/3.6){
 			return 16 + screenSizeCorrection;
-		} else if(speed < 63){
+		} else if(speed < 63f/3.6){
 			return 15 + screenSizeCorrection;
-		} else if(speed < 83){
+		} else if(speed < 83f/3.6){
 			return 14 + screenSizeCorrection;
 		}
 		return 13 + screenSizeCorrection;
