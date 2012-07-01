@@ -8,22 +8,18 @@ package net.osmand;
 public class ToDoConstants {
 	
 	
-	// MAKE worldwide downloadable by default 
 	
-	// Index
-	// Map QuadTree (skip small areas!!!)
-	// Routing index !!
+	// Map QuadTree index (skip small areas!!!)
 	
-	// ------ TO try & to test ----
 	// Polish UI with new building address search ...(Better completely new address search)
+	
 	// Search for city in all indexes
+	
 	// Test GeoIndexActivity
-	// TODO images in the map index ?
-	// Plugin OsmEditingPlugin Send GPX files
 	
+	// Images in the map index ?
 	
-//	    == Osmand application (TODO 127) ==
-	// TODO prepare C++ version of routing algorithm
+	// Prepare C++ version of routing algorithm	
 
 
 	
