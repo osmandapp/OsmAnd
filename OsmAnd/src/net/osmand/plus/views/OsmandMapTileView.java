@@ -53,6 +53,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	protected final int emptyTileDivisor = 16;
 	
+	public static final float ZOOM_DELTA = 3;
+	public static final float ZOOM_DELTA_1 = 1/3f;
+	
 
 	public interface OnTrackBallListener {
 		public boolean onTrackBallEvent(MotionEvent e);
@@ -329,9 +332,19 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	public int getZoom() {
 		return (int) zoom;
 	}
+	
+	public float getFloatZoom() {
+		return zoom;
+	}
 
 	public boolean isZooming(){
-		return zoom != getZoom();
+		// zooming scale
+		float diff = (zoom - getZoom()) * ZOOM_DELTA;
+		if(Math.abs(diff - Math.round(diff)) < 0.0001) {
+			return false;
+		}
+		return true;
+		// return zoom != getZoom();
 	}
 	
 	public void setMapLocationListener(IMapLocationListener l) {
@@ -391,7 +404,30 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	public void setMapPosition(int type) {
 		this.mapPosition = type;
 	}
-
+	
+	public double calcLongitude(int pixelFromCenter) {
+		return MapUtils.getLongitudeFromTile(getZoom(), getXTile() + pixelFromCenter /  getTileSize());
+	}
+	
+	public double calcLatitude(int pixelFromCenter) {
+		return MapUtils.getLatitudeFromTile(getZoom(), getXTile() + pixelFromCenter /  getTileSize());
+	}
+	
+	public void calculateLatLonRectangle(Rect pixRect, RectF latLonRect) {
+		int z = (int) zoom;
+		float tileX = (float) MapUtils.getTileNumberX(z, getLongitude());
+		float tileY = (float) MapUtils.getTileNumberY(z, getLatitude());
+		float w = getCenterPointX();
+		float h = getCenterPointY();
+		RectF tilesRect = new RectF();
+		calculateTileRectangle(pixRect, w, h, tileX, tileY, tilesRect);
+		
+		latlonRect.top = (float) MapUtils.getLatitudeFromTile(z, tilesRect.top);
+		latlonRect.left = (float) MapUtils.getLongitudeFromTile(z, tilesRect.left);
+		latlonRect.bottom = (float) MapUtils.getLatitudeFromTile(z, tilesRect.bottom);
+		latlonRect.right = (float) MapUtils.getLongitudeFromTile(z, tilesRect.right);
+	}
+	
 
 	public void calculateTileRectangle(Rect pixRect, float cx, float cy, float ctilex, float ctiley, RectF tileRect) {
 		float x1 = calcDiffTileX(pixRect.left - cx, pixRect.top - cy);

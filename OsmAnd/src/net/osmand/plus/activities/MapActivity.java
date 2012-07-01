@@ -41,7 +41,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -156,12 +155,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		startProgressDialog = new ProgressDialog(this);
 		startProgressDialog.setCancelable(true);
 		((OsmandApplication) getApplication()).checkApplicationIsBeingInitialized(this, startProgressDialog);
-		startProgressDialog.setOnDismissListener(new OnDismissListener() {
-			@Override
-			public void onDismiss(DialogInterface dialog) {
-				getMapView().refreshMap(true);
-			}
-		});
 		parseLaunchIntentLocation();
 		
 		mapView = (OsmandMapTileView) findViewById(R.id.MapView);
@@ -177,7 +170,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		startProgressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
 			@Override
 			public void onDismiss(DialogInterface dialog) {
-				mapView.refreshMap();
+				mapView.refreshMap(true);
 			}
 		});
 		
@@ -412,7 +405,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 	}
 
-	public void changeZoom(int newZoom){
+	public void changeZoom(float newZoom){
 		boolean changeLocation = settings.AUTO_ZOOM_MAP.get();
 		mapView.getAnimatedDraggingThread().startZooming(newZoom, changeLocation);
 		if (getMyApplication().accessibilityEnabled())
@@ -672,7 +665,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			if(locationLayer.getLastKnownLocation() != null){
 				Location lastKnownLocation = locationLayer.getLastKnownLocation();
 				AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
-				int fZoom = mapView.getZoom() < 13 ? 13 : mapView.getZoom();
+				float fZoom = mapView.getFloatZoom() < 13 ? 13 : mapView.getFloatZoom();
 				thread.startMoving( lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), fZoom, false);
 			}
 		}
@@ -774,8 +767,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			long now = System.currentTimeMillis();
 			if (isMapLinkedToLocation()) {
 				if(settings.AUTO_ZOOM_MAP.get() && location.hasSpeed()){
-					float z = defineZoomFromSpeed(location.getSpeed(), mapView.getZoom());
-					if(Math.abs(mapView.getZoom() - z) > .33f){
+					float z = defineZoomFromSpeed(location.getSpeed(), mapView.getFloatZoom());
+					if(Math.abs(mapView.getFloatZoom() - z) >= OsmandMapTileView.ZOOM_DELTA_1){
 						// prevent ui hysteresis (check time interval for autozoom)
 						if(now - lastTimeAutoZooming > 5000){
 							lastTimeAutoZooming = now;
@@ -813,7 +806,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		mapView.refreshMap();
 	}
 
-	public float defineZoomFromSpeed(float speed, int currentZoom){
+	public float defineZoomFromSpeed(float speed, float currentZoom){
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
@@ -973,7 +966,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		AnimateDraggingMapThread animatedThread = mapView.getAnimatedDraggingThread();
 		if(animatedThread.isAnimating() && animatedThread.getTargetZoom() != 0){
 			settings.setMapLocationToShow(animatedThread.getTargetLatitude(), animatedThread.getTargetLongitude(), 
-					animatedThread.getTargetZoom());
+					(int) animatedThread.getTargetZoom());
 		}
 		
 		settings.setLastKnownMapZoom(mapView.getZoom());

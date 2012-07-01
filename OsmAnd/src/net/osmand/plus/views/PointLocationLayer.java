@@ -82,8 +82,11 @@ public class PointLocationLayer extends OsmandMapLayer {
 		int locationX = view.getMapXForPoint(lastKnownLocation.getLongitude());
 		int locationY = view.getMapYForPoint(lastKnownLocation.getLatitude());
 		
-		int radius = MapUtils.getLengthXFromMeters(view.getZoom(), view.getLatitude(), view.getLongitude(),
-				lastKnownLocation.getAccuracy(), view.getTileSize(), view.getWidth());
+		double lonLeft = view.calcLongitude(- view.getWidth() / 2);
+		double lonRight = view.calcLongitude(+ view.getWidth() / 2);
+		double dist = MapUtils.getDistance(view.getLatitude(), lonLeft, view.getLatitude(), lonRight);
+		int radius = (int) (((double) view.getWidth()) / dist * lastKnownLocation.getAccuracy());
+		
 		if (radius > RADIUS * dm.density) {
 			int allowedRad = Math.min(view.getWidth() / 2, view.getHeight() / 2);
 			canvas.drawCircle(locationX, locationY, Math.min(radius, allowedRad), area);

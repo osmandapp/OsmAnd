@@ -288,7 +288,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 				AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
 				LatLon parkingPoint = view.getSettings().getParkingPosition();
 				if (parkingPoint != null) {
-					int fZoom = view.getZoom() < 15 ? 15 : view.getZoom();
+					float fZoom = view.getFloatZoom() < 15 ? 15 : view.getFloatZoom();
 					thread.startMoving(parkingPoint.getLatitude(), parkingPoint.getLongitude(), fZoom, true);
 				}
 			}

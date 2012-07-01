@@ -366,7 +366,7 @@ public class MapActivityLayers {
 				WptPt loc = toShow.findPointToShow();
 				if(loc != null){
 					mapView.getAnimatedDraggingThread().startMoving(loc.lat, loc.lon, 
-							mapView.getZoom(), true);
+							mapView.getFloatZoom(), true);
 				}
 				mapView.refreshMap();
 				return true;

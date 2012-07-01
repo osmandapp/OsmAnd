@@ -333,15 +333,6 @@ public class MapUtils {
 		return result;
 	}
 	
-	public static int getLengthXFromMeters(float zoom, double latitude, double longitude,  double meters, float tileSize, int widthOfDisplay) {
-		double tileNumberX = MapUtils.getTileNumberX(zoom, longitude);
-		double tileNumberLeft = tileNumberX - ((double) widthOfDisplay) / (2d * tileSize);
-		double tileNumberRight = tileNumberX + ((double) widthOfDisplay) / (2d * tileSize);
-		double dist = getDistance(latitude, getLongitudeFromTile(zoom, tileNumberLeft), latitude, getLongitudeFromTile(zoom,
-				tileNumberRight));
-
-		return (int) ((double) widthOfDisplay / dist * meters);
-	}
 	
 	public static int getPixelShiftX(int zoom, double long1, double long2, int tileSize){
 		return (int) ((getTileNumberX(zoom, long1) - getTileNumberX(zoom, long2)) * tileSize);

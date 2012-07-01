@@ -23,7 +23,7 @@ public class RouteLayer extends OsmandMapLayer {
 	
 	private final RoutingHelper helper;
 	private Rect boundsRect;
-	private RectF tileRect;
+	private RectF latlonRect;
 	private List<Location> points = new ArrayList<Location>();
 	private Paint paint;
 
@@ -38,7 +38,7 @@ public class RouteLayer extends OsmandMapLayer {
 
 	private void initUI() {
 		boundsRect = new Rect(0, 0, view.getWidth(), view.getHeight());
-		tileRect = new RectF();
+		latlonRect = new RectF();
 		paint = new Paint();
 		fluorescent = view.getSettings().FLUORESCENT_OVERLAYS.get();
 		if (view.getSettings().FLUORESCENT_OVERLAYS.get()) {
@@ -77,12 +77,11 @@ public class RouteLayer extends OsmandMapLayer {
 			} else {
 				boundsRect = new Rect(0, 0, w, h);
 			}
-			view.calculateTileRectangle(boundsRect, view.getCenterPointX(), view.getCenterPointY(), view.getXTile(), view.getYTile(),
-					tileRect);
-			double topLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), tileRect.top);
-			double leftLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.left);
-			double bottomLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), tileRect.bottom);
-			double rightLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.right);
+			view.calculateLatLonRectangle(boundsRect, latlonRect);
+			double topLatitude = latlonRect.top;
+			double leftLongitude = latlonRect.left;
+			double bottomLatitude = latlonRect.bottom;
+			double rightLongitude = latlonRect.right;
 			double lat = topLatitude - bottomLatitude + 0.1;
 			double lon = rightLongitude - leftLongitude + 0.1;
 			fillLocationsToShow(topLatitude + lat, leftLongitude - lon, bottomLatitude - lat, rightLongitude + lon);

@@ -420,7 +420,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
 				LatLon pointToNavigate = view.getSettings().getPointToNavigate();
 				if (pointToNavigate != null) {
-					int fZoom = view.getZoom() < 15 ? 15 : view.getZoom();
+					float fZoom = view.getFloatZoom() < 15 ? 15 : view.getFloatZoom();
 					thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
 				}
 			}

@@ -261,7 +261,7 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 				// in case when it is dialog
 				if(activity != null) {
 					OsmandMapTileView v = activity.getMapView();
-					v.getAnimatedDraggingThread().startMoving(lat, lon, v.getZoom(), true);
+					v.getAnimatedDraggingThread().startMoving(lat, lon, v.getFloatZoom(), true);
 				} else {
 					settings.setMapLocationToShow(lat, lon, Math.max(12, settings.getLastKnownMapZoom()), 
 							getString(R.string.point_on_map, lat, lon));

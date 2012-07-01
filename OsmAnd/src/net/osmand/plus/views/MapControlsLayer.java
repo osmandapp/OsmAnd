@@ -302,20 +302,19 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(view.isZooming()){
-					activity.changeZoom(view.getZoom() + 2);
+				if (view.isZooming()) {
+					activity.changeZoom(view.getZoom() + 2 );
 				} else {
-					activity.changeZoom(view.getZoom() + 1);
+					activity.changeZoom(view.getZoom() + 1 );
 				}
-				
+
 			}
 		});
 		
 		zoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				activity.changeZoom(view.getZoom() - 1);
-				
+				activity.changeZoom(view.getZoom() - 1 );
 			}
 		});
 	}
@@ -392,7 +391,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	/////////////////////// Ruler ///////////////////
 	// cache values for ruler
 	ShadowText cacheRulerText = null;
-	int cacheRulerZoom = 0;
+	float cacheRulerZoom = 0;
 	double cacheRulerTileX = 0;
 	double cacheRulerTileY = 0;
 	float cacheRulerTextLen = 0;	
@@ -401,16 +400,15 @@ public class MapControlsLayer extends OsmandMapLayer {
 		// update cache
 		if (view.isZooming()) {
 			cacheRulerText = null;
-		} else if(view.getZoom() != cacheRulerZoom || 
+		} else if(view.getFloatZoom() != cacheRulerZoom || 
 				Math.abs(view.getXTile() - cacheRulerTileX) +  Math.abs(view.getYTile() - cacheRulerTileY) > 1){
-			cacheRulerZoom = view.getZoom();
+			cacheRulerZoom = view.getFloatZoom();
 			cacheRulerTileX = view.getXTile();
 			cacheRulerTileY = view.getYTile();
 			double latitude = view.getLatitude();
-			double tileNumberLeft = cacheRulerTileX - ((double) view.getWidth()) / (2d * view.getTileSize());
-			double tileNumberRight = cacheRulerTileX + ((double) view.getWidth()) / (2d * view.getTileSize());
-			double dist = MapUtils.getDistance(latitude, MapUtils.getLongitudeFromTile(view.getZoom(), tileNumberLeft), latitude,
-					MapUtils.getLongitudeFromTile(view.getZoom(), tileNumberRight));
+			double leftLon = view.calcLongitude(- view.getWidth() / 2);
+			double rightLon = view.calcLongitude(+ view.getWidth() / 2);
+			double dist = MapUtils.getDistance(latitude, leftLon, latitude, rightLon);
 			double pixDensity = view.getWidth() / dist; 
 			
 			double roundedDist = OsmAndFormatter.calculateRoundedDist(dist * screenRulerPercent, view.getContext());

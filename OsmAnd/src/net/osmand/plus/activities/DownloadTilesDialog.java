@@ -59,22 +59,13 @@ public class DownloadTilesDialog {
 			return;
 		}
 		final int max = mapSource.getMaximumZoomSupported();
+		// get narrow zoom
 		final int zoom = mapView.getZoom();
 		
 		// calculate pixel rectangle
 		Rect boundsRect = new Rect(0, 0, mapView.getWidth(), mapView.getHeight());
-		float tileX = (float) MapUtils.getTileNumberX(zoom, mapView.getLongitude());
-		float tileY = (float) MapUtils.getTileNumberY(zoom, mapView.getLatitude());
-		float w = mapView.getCenterPointX();
-		float h = mapView.getCenterPointY();
-		RectF tilesRect = new RectF();
 		final RectF latlonRect = new RectF();
-		mapView.calculateTileRectangle(boundsRect, w, h, tileX, tileY, tilesRect);
-		
-		latlonRect.top = (float) MapUtils.getLatitudeFromTile(zoom, tilesRect.top);
-		latlonRect.left = (float) MapUtils.getLongitudeFromTile(zoom, tilesRect.left);
-		latlonRect.bottom = (float) MapUtils.getLatitudeFromTile(zoom, tilesRect.bottom);
-		latlonRect.right = (float) MapUtils.getLongitudeFromTile(zoom, tilesRect.right);
+		mapView.calculateLatLonRectangle(boundsRect, latlonRect);
 		
 		Builder builder = new AlertDialog.Builder(ctx);
 		LayoutInflater inflater = (LayoutInflater)ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
