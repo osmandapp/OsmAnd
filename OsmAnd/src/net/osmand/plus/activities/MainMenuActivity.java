@@ -6,6 +6,7 @@ import java.util.Random;
 
 import net.osmand.Version;
 import net.osmand.access.AccessibleAlertBuilder;
+import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -13,8 +14,10 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.render.MapRenderRepositories;
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
+import android.app.ActivityManager;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -36,6 +39,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainMenuActivity extends Activity {
 
@@ -275,6 +279,11 @@ public class MainMenuActivity extends Activity {
 			}
 		}
 		checkPreviousRunsForExceptions(firstTime);
+		
+		ActivityManager activityManager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+		ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+		activityManager.getMemoryInfo(memoryInfo);
+		AccessibleToast.makeText(this, getString(R.string.rendering_out_of_memory) + " (" + memoryInfo.availMem / 1048576L + " MB available) ", Toast.LENGTH_SHORT).show();
 	}
 
 	private void applicationInstalledFirstTime() {

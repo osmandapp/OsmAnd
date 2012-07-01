@@ -48,9 +48,9 @@ import net.osmand.render.RenderingRulesStorage;
 
 import org.apache.commons.logging.Log;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.Bitmap.Config;
 import android.graphics.RectF;
 import android.os.Handler;
@@ -641,7 +641,10 @@ public class MapRenderRepositories {
 			handler.post(new Runnable() {
 				@Override
 				public void run() {
-					AccessibleToast.makeText(context, R.string.rendering_out_of_memory, Toast.LENGTH_SHORT).show();
+					ActivityManager activityManager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+					ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+					activityManager.getMemoryInfo(memoryInfo);
+					AccessibleToast.makeText(context, context.getString(R.string.rendering_out_of_memory) + " (" + memoryInfo.availMem / 1048576L + " MB available", Toast.LENGTH_SHORT).show();
 				}
 			});
 		} finally {

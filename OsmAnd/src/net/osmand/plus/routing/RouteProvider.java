@@ -48,6 +48,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.location.Location;
 
@@ -510,7 +511,10 @@ public class RouteProvider {
 			List<RouteSegmentResult> result = router.searchRoute(ctx, st, en, leftSide);
 			return new RouteCalculationResult(result, start, end, app, leftSide);
 		} catch (OutOfMemoryError e) {
-			return new RouteCalculationResult("Not enough process memory");
+			ActivityManager activityManager = (ActivityManager)app.getSystemService(Context.ACTIVITY_SERVICE);
+			ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+			activityManager.getMemoryInfo(memoryInfo);
+			return new RouteCalculationResult("Not enough process memory "+ "(" + memoryInfo.availMem / 1048576L + " MB available) ");
 		}
 	}
 	
