@@ -87,7 +87,7 @@
 		
 		<highway value="trunk" speed="16" priority="0.7" dynamicPriority="0.7"/>
 		<highway value="trunk_link" speed="16" priority="0.7" dynamicPriority="0.7"/>
-		<highway value="primary" speed="16" priority="0.9" dynamicPriority="0.9"/>
+		<highway value="primary" speed="16" priority="0.7" dynamicPriority="0.9"/>
 		<highway value="primary_link" speed="16" priority="0.9" dynamicPriority="0.9"/>
 		<highway value="secondary" speed="16" priority="1" dynamicPriority="1"/>
 		<highway value="secondary_link" speed="16" priority="1" dynamicPriority="1"/>
@@ -99,8 +99,8 @@
 		
 		<highway value="unclassified" speed="13" priority="1" dynamicPriority="1"/>
 		<highway value="service" speed="13" priority="1" dynamicPriority="1"/>
-		<highway value="track" speed="10" priority="0.9" dynamicPriority="0.9"/>
-		<highway value="path" speed="10" priority="0.9" dynamicPriority="0.9"/>
+		<highway value="track" speed="12" priority="1.5" dynamicPriority="1.5"/>
+		<highway value="path" speed="12" priority="1.5" dynamicPriority="1.5"/>
 		<highway value="living_street" speed="13" priority="1" dynamicPriority="1"/>
 		<highway value="pedestrian" speed="10" priority="0.9" dynamicPriority="0.9"/>
 		<highway value="footway" speed="8" priority="0.9" dynamicPriority="0.9"/>
