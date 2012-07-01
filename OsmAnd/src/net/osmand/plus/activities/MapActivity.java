@@ -1116,7 +1116,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 		previousSensorValue = val;
 		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS) {
-			if(Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 5) {
+			if(Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 15) {
 				mapView.setRotate(-val);
 			}
 		}
