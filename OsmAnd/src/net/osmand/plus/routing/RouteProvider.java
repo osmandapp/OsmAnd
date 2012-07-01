@@ -164,14 +164,13 @@ public class RouteProvider {
 					addMissingTurnsToRoute(res, start, end, mode, ctx, leftSide);
 				} else if (type == RouteService.OSMAND) {
 					res = findVectorMapsRoute(start, end, mode, fast, (OsmandApplication)ctx.getApplicationContext(), leftSide);
-					// addMissingTurnsToRoute(res, start, end, mode, ctx, leftSide);
 				} else {
 					res = findCloudMadeRoute(start, end, mode, ctx, fast, leftSide);
 					// for test purpose
 					addMissingTurnsToRoute(res, start, end, mode, ctx, leftSide);
 				}
-				if(log.isInfoEnabled() && res.locations != null){
-					log.info("Finding route contained " + res.locations.size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				if(log.isInfoEnabled() ){
+					log.info("Finding route contained " + res.getImmutableLocations().size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}
 				return res; 
 			} catch (IOException e) {
@@ -265,7 +264,7 @@ public class RouteProvider {
 
 		List<RouteDirectionInfo> directions = new ArrayList<RouteDirectionInfo>();
 		int[] listDistance = res.getListDistance();
-		List<Location> locations = res.getLocations();
+		List<Location> locations = res.getImmutableLocations();
 		
 		
 		int previousLocation = 0;
@@ -739,7 +738,7 @@ public class RouteProvider {
 	
 	public GPXFile createOsmandRouterGPX(RouteCalculationResult srcRoute){
 		int currentRoute = srcRoute.currentRoute;
-		List<Location> routeNodes = srcRoute.locations;
+		List<Location> routeNodes = srcRoute.getImmutableLocations();
 		int currentDirectionInfo = srcRoute.currentDirectionInfo;
 		List<RouteDirectionInfo> directionInfo = srcRoute.directions;
 		GPXFile gpx = new GPXFile();

@@ -6,7 +6,6 @@ import java.util.List;
 
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.router.RouteSegmentResult;
@@ -15,7 +14,9 @@ import android.content.Context;
 import android.location.Location;
 
 public class RouteCalculationResult {
-	protected final List<Location> locations;
+	// could not be null and immodifiable!
+	private final List<Location> locations;
+	
 	protected List<RouteDirectionInfo> directions;
 	private final String errorMessage;
 	private int[] listDistance = new int[0];
@@ -34,52 +35,32 @@ public class RouteCalculationResult {
 	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, Location start, LatLon end, String errorMessage) {
 		this.directions = directions;
 		this.errorMessage = errorMessage;
-		this.locations = list == null? new ArrayList<Location>():list;
+		List<Location> locations = list == null ? new ArrayList<Location>() : new ArrayList<Location>(list);
 		if (!locations.isEmpty()) {
 			// if there is no closest points to start - add it
-			introduceFirstPoint(start);
-			checkForDuplicatePoints();
+			introduceFirstPoint(locations, start);
+			checkForDuplicatePoints(locations);
 			removeUnnecessaryGoAhead();
 			updateListDistanceTime();
 		}
-		
+		this.locations = Collections.unmodifiableList(locations);
 	}
 	
-	public String toString(TurnType type, Context ctx) {
-		if(type.isRoundAbout()){
-			return ctx.getString(R.string.route_roundabout, type.getExitOut());
-		} else if(type.getValue().equals(TurnType.C)) {
-			return ctx.getString(R.string.route_head);
-		} else if(type.getValue().equals(TurnType.TSLL)) {
-			return ctx.getString(R.string.route_tsll);
-		} else if(type.getValue().equals(TurnType.TL)) {
-			return ctx.getString(R.string.route_tl);
-		} else if(type.getValue().equals(TurnType.TSHL)) {
-			return ctx.getString(R.string.route_tshl);
-		} else if(type.getValue().equals(TurnType.TSLR)) {
-			return ctx.getString(R.string.route_tslr);
-		} else if(type.getValue().equals(TurnType.TR)) {
-			return ctx.getString(R.string.route_tr);
-		} else if(type.getValue().equals(TurnType.TSHR)) {
-			return ctx.getString(R.string.route_tshr);
-		} else if(type.getValue().equals(TurnType.TU)) {
-			return ctx.getString(R.string.route_tu);
-		} else if(type.getValue().equals(TurnType.TRU)) {
-			return ctx.getString(R.string.route_tu);
-		} else if(type.getValue().equals(TurnType.KL)) {
-			return ctx.getString(R.string.route_kl);
-		} else if(type.getValue().equals(TurnType.KR)) {
-			return ctx.getString(R.string.route_kr);
-		}
-		return "";
-	}
-
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, 
 			Context ctx, boolean leftSide) {
 		this.directions = new ArrayList<RouteDirectionInfo>();
 		this.errorMessage = null;
-		this.locations = new ArrayList<Location>();
+		List<Location> locations = new ArrayList<Location>();
+		convertVectorResult(locations, list, ctx);
+		introduceFirstPoint(locations, start);
+		updateListDistanceTime();
+		this.locations = Collections.unmodifiableList(locations);
+	}
 
+	/**
+	 * PREPARATION 
+	 */
+	private void convertVectorResult(List<Location> locations, List<RouteSegmentResult> list, Context ctx) {
 		float prevDirectionTime = 0;
 		float prevDirectionDistance = 0;
 		for (int routeInd = 0; routeInd < list.size(); routeInd++) {
@@ -130,11 +111,38 @@ public class RouteCalculationResult {
 			prev.setAverageSpeed(prevDirectionDistance / prevDirectionTime);
 			prev.setDescriptionRoute(prev.getDescriptionRoute() + " " + OsmAndFormatter.getFormattedDistance(prevDirectionDistance, ctx));
 		}
-		introduceFirstPoint(start);
-		updateListDistanceTime();
+	}
+	
+	
+	public String toString(TurnType type, Context ctx) {
+		if(type.isRoundAbout()){
+			return ctx.getString(R.string.route_roundabout, type.getExitOut());
+		} else if(type.getValue().equals(TurnType.C)) {
+			return ctx.getString(R.string.route_head);
+		} else if(type.getValue().equals(TurnType.TSLL)) {
+			return ctx.getString(R.string.route_tsll);
+		} else if(type.getValue().equals(TurnType.TL)) {
+			return ctx.getString(R.string.route_tl);
+		} else if(type.getValue().equals(TurnType.TSHL)) {
+			return ctx.getString(R.string.route_tshl);
+		} else if(type.getValue().equals(TurnType.TSLR)) {
+			return ctx.getString(R.string.route_tslr);
+		} else if(type.getValue().equals(TurnType.TR)) {
+			return ctx.getString(R.string.route_tr);
+		} else if(type.getValue().equals(TurnType.TSHR)) {
+			return ctx.getString(R.string.route_tshr);
+		} else if(type.getValue().equals(TurnType.TU)) {
+			return ctx.getString(R.string.route_tu);
+		} else if(type.getValue().equals(TurnType.TRU)) {
+			return ctx.getString(R.string.route_tu);
+		} else if(type.getValue().equals(TurnType.KL)) {
+			return ctx.getString(R.string.route_kl);
+		} else if(type.getValue().equals(TurnType.KR)) {
+			return ctx.getString(R.string.route_kr);
+		}
+		return "";
 	}
 
-	
 	public String getErrorMessage() {
 		return errorMessage;
 	}
@@ -165,7 +173,7 @@ public class RouteCalculationResult {
 	 * PREPARATION
 	 * Check points for duplicates (it is very bad for routing) - cloudmade could return it
 	 */
-	private void checkForDuplicatePoints() {
+	private void checkForDuplicatePoints(List<Location> locations) {
 		// 
 		for (int i = 0; i < locations.size() - 1;) {
 			if (locations.get(i).distanceTo(locations.get(i + 1)) == 0) {
@@ -187,7 +195,7 @@ public class RouteCalculationResult {
 	 * PREPARATION
 	 * If beginning is too far from start point, then introduce GO Ahead
 	 */
-	private void introduceFirstPoint(Location start) {
+	private void introduceFirstPoint(List<Location> locations, Location start) {
 		if (!locations.isEmpty() && locations.get(0).distanceTo(start) > 200) {
 			// add start point
 			locations.add(0, start);
@@ -209,7 +217,7 @@ public class RouteCalculationResult {
 	 * At the end always update listDistance local vars and time
 	 */
 	private void updateListDistanceTime() {
-		listDistance = new int[locations == null ? 0 : locations.size()];
+		listDistance = new int[locations.size()];
 		if (listDistance.length > 0) {
 			listDistance[locations.size() - 1] = 0;
 			for (int i = locations.size() - 1; i > 0; i--) {
@@ -232,12 +240,12 @@ public class RouteCalculationResult {
 	
 	//////////////////// MUST BE ALL SYNCHRONIZED ??? //////////////////////
 	
-	public List<Location> getLocations() {
-		return locations;
+	public List<Location> getImmutableLocations() {
+		return Collections.unmodifiableList(locations);
 	}
 	
 	public List<Location> getNextLocations() {
-		if(locations != null && currentRoute < locations.size()) {
+		if(currentRoute < locations.size()) {
 			return locations.subList(currentRoute, locations.size());
 		}
 		return Collections.emptyList();
@@ -251,20 +259,12 @@ public class RouteCalculationResult {
 		return listDistance;
 	}
 
-	public void clear() {
-		this.locations.clear();
-		listDistance = null;
-		if(directions != null) {
-			directions.clear();
-		}
-	}
-	
 	public boolean isCalculated() {
-		return locations != null && !locations.isEmpty();
+		return !locations.isEmpty();
 	}
 	
 	public boolean isEmpty() {
-		return locations == null || locations.isEmpty() || currentRoute >= locations.size();
+		return locations.isEmpty() || currentRoute >= locations.size();
 	}
 	
 	public void setCurrentGPXRoute(GPXRouteParams currentGPXRoute) {

@@ -94,7 +94,7 @@ public class RoutingHelper {
 	}
 	
 	public synchronized void clearCurrentRoute(LatLon newFinalLocation) {
-		route.clear();
+		route = new RouteCalculationResult("");
 		makeUturnWhenPossible = false;
 		evalWaitInterval = 3000;
 		uiHandler.post(new Runnable() {
@@ -120,8 +120,7 @@ public class RoutingHelper {
 	}
 	
 	public List<Location> getCurrentRoute() {
-		return currentGPXRoute == null || currentGPXRoute.points.isEmpty() ? Collections
-				.unmodifiableList(route.locations) : Collections
+		return currentGPXRoute == null || currentGPXRoute.points.isEmpty() ? route.getImmutableLocations() : Collections
 				.unmodifiableList(currentGPXRoute.points);
 	}
 	
@@ -189,7 +188,7 @@ public class RoutingHelper {
 				if (finished) {
 					return null;
 				}
-				List<Location> routeNodes = route.locations;
+				List<Location> routeNodes = route.getImmutableLocations();
 				int currentRoute = route.currentRoute;
 
 				// 2. Analyze if we need to recalculate route
@@ -272,7 +271,7 @@ public class RoutingHelper {
 	}
 
 	private boolean updateCurrentRouteStatus(Location currentLocation) {
-		List<Location> routeNodes = route.locations;
+		List<Location> routeNodes = route.getImmutableLocations();
 		int currentRoute = route.currentRoute;
 		// 1. Try to proceed to next point using orthogonal distance (finding minimum orthogonal dist)
 		while (currentRoute + 1 < routeNodes.size()) {
@@ -563,8 +562,6 @@ public class RoutingHelper {
 							} else {
 								if (res.getErrorMessage() != null) {
 									showMessage(context.getString(R.string.error_calculating_route) + ":\n" + res.getErrorMessage(), Toast.LENGTH_LONG); //$NON-NLS-1$
-								} else if (res.getLocations() == null) {
-									showMessage(context.getString(R.string.error_calculating_route_occured), Toast.LENGTH_LONG);
 								} else {
 									showMessage(context.getString(R.string.empty_route_calculated), Toast.LENGTH_LONG);
 								}
