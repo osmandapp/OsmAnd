@@ -42,8 +42,12 @@ reached_destination == ['you_have_reached_your_destination.ogg'].
 bear_right == ['keep_right-e.ogg'].
 location_lost == ['gps_signal_lost.ogg'].
 bear_left == ['keep_left-e.ogg'].
-route_recalc(_Dist) == []. % 'recalc.ogg'
-route_new_calc(_Dist) == ['have_a_nice_trip_drive_carefully.ogg']. 
+% route_recalc(_Dist) == []. % 'recalc.ogg'
+route_recalc(Dist) == Res :- go_ahead(Dist) == Res .
+% route_new_calc(_Dist) == ['have_a_nice_trip_drive_carefully.ogg'].
+route_new_calc(Dist) == Res :- go_ahead(Dist) == Res .
+
+location_lost == ['gps_signal_lost.ogg']. 
 
 go_ahead(Dist) == ['Drive-n.ogg', D]:- distance(Dist) == D.
 go_ahead == ['continue_straight-e.ogg'].

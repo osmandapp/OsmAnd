@@ -42,8 +42,10 @@ then == ['then.ogg', delay_350].
 reached_destination == ['you_have_reached_your_destination.ogg'].
 bear_right == ['keep_right-e.ogg'].
 bear_left == ['keep_left-e.ogg'].
-route_recalc(_Dist) == []. % ['recalc.ogg'].  %nothing to said possibly beep?	
+route_recalc(_Dist) == ['recalc.ogg'].  %nothing to said possibly beep?	
 route_new_calc(Dist) == ['the_trip_is_more_than.ogg', delay_150, D] :- distance(Dist) == D. % nothing to said possibly beep?
+
+% location_lost == ['gps_signal_lost.ogg'].
 
 go_ahead(Dist) == ['drive_for-h.ogg', delay_250,  D]:- distance(Dist) == D.
 go_ahead == ['continue_straight-e.ogg'].

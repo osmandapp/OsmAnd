@@ -7,6 +7,7 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -903,10 +904,22 @@ public class BinaryRoutePlanner {
 				if (ref != null) {
 					name += " " + ref;
 				}
+				StringBuilder additional = new StringBuilder();
+				additional.append("time = \"").append(res.getSegmentTime()).append("\" ");
+				additional.append("name = \"").append(name).append("\" ");
+				additional.append("distance = \"").append(res.getDistance()).append("\" ");
+				if(res.getTurnType() != null) {
+					additional.append("turn = \"").append(res.getTurnType()).append("\" ");
+					if(res.getTurnType().getLanes() != null) {
+						additional.append("lanes = \"").append(Arrays.toString(res.getTurnType().getLanes())).append("\" ");
+					}
+				}
+				additional.append("start_bearing = \"").append(res.getBearingBegin()).append("\" ");
+				additional.append("end_bearing = \"").append(res.getBearingEnd()).append("\" ");
+				additional.append("description = \"").append(res.getDescription()).append("\" ");
 				println(MessageFormat.format(
-						"\t<segment id=\"{0}\" start=\"{1}\" end=\"{2}\" time=\"{4}\" name=\"{3}\" distance=\"{5}\" start_bearing=\"{6}\" end_bearing=\"{7}\" description=\"{8}\"/>",
-						(res.getObject().getId()) + "", res.getStartPointIndex() + "", res.getEndPointIndex() + "", name,
-						res.getSegmentTime(),res.getDistance(), res.getBearingBegin() + "", res.getBearingEnd() + "", res.getDescription()+""));
+						"\t<segment id=\"{0}\" start=\"{1}\" end=\"{2}\" {3}/>",
+						(res.getObject().getId()) + "", res.getStartPointIndex() + "", res.getEndPointIndex() + "", additional.toString()));
 			}
 			println("</test>");
 		}
@@ -954,7 +967,7 @@ public class BinaryRoutePlanner {
 		if (prev != null) {
 			// add description about turn
 			double mpi = MapUtils.degreesDiff(prev.getBearingEnd(), rr.getBearingBegin());
-			
+			int[] lanes =  null;
 			if (mpi >= 50) {
 				if (mpi < 60) {
 					t = TurnType.valueOf(TurnType.TSLL, leftSide);
@@ -980,16 +993,48 @@ public class BinaryRoutePlanner {
 				boolean kl = false;
 				boolean kr = false;
 				List<RouteSegmentResult> attachedRoutes = rr.getAttachedRoutes(rr.getStartPointIndex());
+				int ls = prev.getObject().getLanes();
+				int left = 0;
+				int right = 0;
+				if (ls > 0) {
+					lanes = new int[ls];
+				}
 				if(attachedRoutes != null){
 					for(RouteSegmentResult rs : attachedRoutes){
 						double ex = MapUtils.degreesDiff(rs.getBearingBegin(), rr.getBearingBegin());
 						if(ex < 30 && ex >= 0) {
 							kl = true;
+							int lns = rs.getObject().getLanes();
+							if (lns > 0) {
+								right += lns;
+							}
 						} else if(ex > -30 && ex <= 0) {
 							kr = true;
+							int lns = rs.getObject().getLanes();
+							if (lns > 0) {
+								left += lns;
+							}
 						}
 					}
 				}
+				int current = rr.getObject().getLanes();
+				if (current <= 0) {
+					current = 1;
+				}
+				if(lanes != null) {
+					if(current + left + right != ls){
+						lanes = null;
+					} else {
+						for(int it=0; it< ls; it++) {
+							if(it < left || it >= left + current) {
+								lanes[it] = 0;
+							} else {
+								lanes[it] = 1;
+							}
+						}
+					}
+				}
+				
 				if (kl) {
 					t = TurnType.valueOf(TurnType.KL, leftSide);
 				} else if(kr){
@@ -998,7 +1043,12 @@ public class BinaryRoutePlanner {
 			}
 			if(t != null) {
 				t.setTurnAngle((float) -mpi);
+				
+				if (lanes != null) {
+					t.setLanes(lanes);
+				}
 			}
+			
 		}
 		return t;
 	}

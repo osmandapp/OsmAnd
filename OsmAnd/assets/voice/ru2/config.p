@@ -45,6 +45,8 @@ bear_left == ['keep_left-e.ogg'].
 route_recalc(_Dist) == []. % ['recalc.ogg'].  %nothing to said possibly beep?	
 route_new_calc(Dist) == ['the_trip_is_more_than.ogg', delay_150, D] :- distance(Dist) == D. % nothing to said possibly beep?
 
+% location_lost == ['no_file.ogg'].
+
 go_ahead(Dist) == ['Drive-n.ogg', delay_250,  D]:- distance(Dist) == D.
 go_ahead == ['continue_straight-e.ogg'].
 

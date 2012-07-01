@@ -34,6 +34,7 @@ public class TurnType {
 	private boolean isLeftSide;
 	// calculated CW head rotation if previous direction to NORTH
 	private float turnAngle;
+	private int[] lanes;
 
 	private static TurnType getExitTurn(int out, float angle, boolean leftSide) {
 		TurnType r = new TurnType("EXIT", out, leftSide); //$NON-NLS-1$
@@ -74,6 +75,17 @@ public class TurnType {
 
 	public boolean isRoundAbout() {
 		return value.equals("EXIT"); //$NON-NLS-1$
+	}
+	
+	// lanes encoded as array of int 
+	// last bit is 1, 0 (should we take this lane)
+	// first bits 0 - left, 1 - straight, 2 - right
+	public void setLanes(int[] lanes) {
+		this.lanes = lanes;
+	}
+	
+	public int[] getLanes() {
+		return lanes;
 	}
 	
 	public boolean keepLeft() {

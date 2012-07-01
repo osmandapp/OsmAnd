@@ -173,6 +173,18 @@ public class RouteDataObject {
 		}
 		return highway;
 	}
+	
+	public int getLanes() {
+		int sz = types.length;
+		for (int i = 0; i < sz; i++) {
+			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
+			int ln = r.lanes();
+			if (ln > 0) {
+				return ln;
+			}
+		}
+		return -1;
+	}
 
 	// Gives route direction of EAST degrees from NORTH ]-PI, PI]
 	public double directionRoute(int startPoint, boolean plus) {

@@ -1,4 +1,5 @@
 bin/
+dist/
 gen/
 local.properties
 raw/
