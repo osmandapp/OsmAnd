@@ -501,7 +501,7 @@ public class RouteProvider {
 		RoutingContext ctx = new RoutingContext(config.build(p.name().toLowerCase(), !fast, start.hasBearing() ?  start.getBearing() / 180d * Math.PI : null));
 		RouteSegment st= router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);
 		if (st == null) {
-			return new RouteCalculationResult("Starting point too far from nearest road.");
+			return new RouteCalculationResult(app.getString(R.string.starting_point_too_far));
 		}
 		RouteSegment en = router.findRouteSegment(end.getLatitude(), end.getLongitude(), ctx);
 		if (en == null) {

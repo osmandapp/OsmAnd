@@ -644,7 +644,7 @@ public class MapRenderRepositories {
 					ActivityManager activityManager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
 					ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
 					activityManager.getMemoryInfo(memoryInfo);
-					AccessibleToast.makeText(context, context.getString(R.string.rendering_out_of_memory) + " (" + memoryInfo.availMem / 1048576L + " MB available", Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(context, context.getString(R.string.rendering_out_of_memory) + " (" + memoryInfo.availMem / 1048576L + " MB available) ", Toast.LENGTH_SHORT).show();
 				}
 			});
 		} finally {
