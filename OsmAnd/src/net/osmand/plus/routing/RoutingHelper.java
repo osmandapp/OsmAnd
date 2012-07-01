@@ -172,9 +172,10 @@ public class RoutingHelper {
 	
 	
 	public Location setCurrentLocation(Location currentLocation) {
+		Location locationProjection = currentLocation;
 		if (finalLocation == null || currentLocation == null) {
 			makeUturnWhenPossible = false;
-			return null;
+			return locationProjection;
 		}
 
 		boolean calculateRoute = false;
@@ -218,7 +219,7 @@ public class RoutingHelper {
 				if (currentRoute > 0) {
 					double dist = getOrthogonalDistance(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
 					double projectDist = mode == ApplicationMode.CAR ? POSITION_TOLERANCE : POSITION_TOLERANCE / 2;
-					Location locationProjection = lastFixedLocation;
+					locationProjection = new Location(locationProjection);
 					if (dist < projectDist) {
 						Location nextLocation = routeNodes.get(currentRoute);
 						LatLon project = getProject(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
@@ -233,13 +234,13 @@ public class RoutingHelper {
 					}
 				}
 			}
-			
+			lastFixedLocation = locationProjection;
 		}
 
 		if (calculateRoute) {
 			recalculateRouteInBackground(lastFixedLocation, finalLocation, currentGPXRoute);
 		}
-		return lastFixedLocation;
+		return locationProjection;
 	}
 
 	private double getOrthogonalDistance(Location loc, Location from, Location to) {

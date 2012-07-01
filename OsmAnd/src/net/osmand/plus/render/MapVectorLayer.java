@@ -49,10 +49,13 @@ public class MapVectorLayer extends BaseMapLayer {
 	}
 	
 	private void updateRotatedTileBox(){
-		float ts = view.getTileSize();
+//		float ts = view.getTileSize();
+		int zm = Math.round(view.getFloatZoom());
 		float xL = view.calcDiffTileX(pixRect.left - view.getCenterPointX(), pixRect.top - view.getCenterPointY()) + view.getXTile();
 		float yT = view.calcDiffTileY(pixRect.left - view.getCenterPointX(), pixRect.top - view.getCenterPointY()) + view.getYTile();
-		rotatedTileBox.set(xL, yT, ((float) pixRect.width()) / ts, ((float) pixRect.height()) / ts, view.getRotate(), view.getZoom());
+		float mult = (float) Math.pow(2, zm - view.getZoom());
+		float ts = (float) (view.getSourceTileSize() * Math.pow(2, view.getFloatZoom() - (int) zm));
+		rotatedTileBox.set(xL * mult, yT * mult, ((float) pixRect.width()) / ts , ((float) pixRect.height()) / ts, view.getRotate(), zm);
 	}
 	
 	public boolean isVectorDataVisible() {

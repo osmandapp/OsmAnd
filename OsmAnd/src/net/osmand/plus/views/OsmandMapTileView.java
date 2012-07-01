@@ -422,10 +422,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		RectF tilesRect = new RectF();
 		calculateTileRectangle(pixRect, w, h, tileX, tileY, tilesRect);
 		
-		latlonRect.top = (float) MapUtils.getLatitudeFromTile(z, tilesRect.top);
-		latlonRect.left = (float) MapUtils.getLongitudeFromTile(z, tilesRect.left);
-		latlonRect.bottom = (float) MapUtils.getLatitudeFromTile(z, tilesRect.bottom);
-		latlonRect.right = (float) MapUtils.getLongitudeFromTile(z, tilesRect.right);
+		latLonRect.top = (float) MapUtils.getLatitudeFromTile(z, tilesRect.top);
+		latLonRect.left = (float) MapUtils.getLongitudeFromTile(z, tilesRect.left);
+		latLonRect.bottom = (float) MapUtils.getLatitudeFromTile(z, tilesRect.bottom);
+		latLonRect.right = (float) MapUtils.getLongitudeFromTile(z, tilesRect.right);
 	}
 	
 

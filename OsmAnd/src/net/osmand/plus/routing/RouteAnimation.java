@@ -5,7 +5,6 @@ import java.util.List;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
-import net.osmand.LatLonUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -41,7 +40,7 @@ public class RouteAnimation {
 						public boolean processResult(GPXUtilities.GPXFile result) {
 							GPXRouteParams prms = new RouteProvider.GPXRouteParams(result, false, ((OsmandApplication) ma.getApplication()).getSettings());
 							mgr.removeUpdates(ma.getGpsListener());
-							startAnimationThread(routingHelper, ma, prms.points);
+							startAnimationThread(routingHelper, ma, prms.points, true, 2);
 							return true;
 						}
 					}, true, false);
@@ -53,7 +52,7 @@ public class RouteAnimation {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					mgr.removeUpdates(ma.getGpsListener());
-					startAnimationThread(routingHelper, ma, new ArrayList<Location>(routingHelper.getCurrentRoute()));
+					startAnimationThread(routingHelper, ma, new ArrayList<Location>(routingHelper.getCurrentRoute()), false, 1);
 					
 				}
 			});
@@ -65,26 +64,43 @@ public class RouteAnimation {
 		}
 	}
 
-	private void startAnimationThread(final RoutingHelper routingHelper, final MapActivity ma, final List<Location> directions) {
-		
+	private void startAnimationThread(final RoutingHelper routingHelper, final MapActivity ma, final List<Location> directions, final boolean useLocationTime, final float coeff) {
+		final float time = 1.5f;
 		routeAnimation = new Thread() {
 			@Override
 			public void run() {
 				Location current = directions.isEmpty() ? null : new Location(directions.remove(0));
-				Location prev = null;
+				Location prev = current;
+				long prevTime = current.getTime();
 				float meters = metersToGoInFiveSteps(directions, current);
 				while (!directions.isEmpty() && routeAnimation != null) {
-					if (current.distanceTo(directions.get(0)) > meters) {
-						current = LatLonUtils.middleLocation(current,
-								directions.get(0), meters);
+					int timeout = (int) (time  * 1000);
+					float intervalTime = time;
+					if(useLocationTime) {
+						current = directions.remove(0);
+						meters = current.distanceTo(prev);
+						if (!directions.isEmpty()) {
+							timeout = (int) (directions.get(0).getTime() - current.getTime());
+							intervalTime = (current.getTime() - prevTime)  / 1000f;
+							prevTime = current.getTime();
+						}
+						
 					} else {
-						current = new Location(directions.remove(0));
-						meters = metersToGoInFiveSteps(directions, current);
+						if (current.distanceTo(directions.get(0)) > meters) {
+							current = middleLocation(current, directions.get(0), meters);
+						} else {
+							current = new Location(directions.remove(0));
+							meters = metersToGoInFiveSteps(directions, current);
+						}
 					}
-					current.setSpeed(meters);
+					if(intervalTime != 0) {
+						current.setSpeed(meters / intervalTime * coeff);	
+					}
 					current.setTime(System.currentTimeMillis());
-					current.setAccuracy(5);
-					if (prev != null) {
+					if(!current.hasAccuracy()) {
+						current.setAccuracy(5);
+					}
+					if (prev != null && prev.distanceTo(current) > 3) {
 						current.setBearing(prev.bearingTo(current));
 					}
 					final Location toset = current;
@@ -95,7 +111,7 @@ public class RouteAnimation {
 						}
 					});
 					try {
-						Thread.sleep(1500);
+						Thread.sleep((long)(timeout / coeff));
 					} catch (InterruptedException e) {
 						// do nothing
 					}
@@ -121,5 +137,32 @@ public class RouteAnimation {
 		if (isRouteAnimating()) {
 			stop();
 		}
+	}
+	
+	public static Location middleLocation(Location start, Location end,
+			float meters) {
+		double lat1 = toRad(start.getLatitude());
+		double lon1 = toRad(start.getLongitude());
+		double R = 6371; // radius of earth in km
+		double d = meters / 1000; // in km
+		float brng = (float) (toRad(start.bearingTo(end)));
+		double lat2 = Math.asin(Math.sin(lat1) * Math.cos(d / R)
+				+ Math.cos(lat1) * Math.sin(d / R) * Math.cos(brng));
+		double lon2 = lon1
+				+ Math.atan2(Math.sin(brng) * Math.sin(d / R) * Math.cos(lat1),
+						Math.cos(d / R) - Math.sin(lat1) * Math.sin(lat2));
+		Location nl = new Location(start);
+		nl.setLatitude(toDegree(lat2));
+		nl.setLongitude(toDegree(lon2));
+		nl.setBearing(brng);
+		return nl;
+	}
+
+	private static double toDegree(double radians) {
+		return radians * 180 / Math.PI;
+	}
+
+	private static double toRad(double degree) {
+		return degree * Math.PI / 180;
 	}
 }

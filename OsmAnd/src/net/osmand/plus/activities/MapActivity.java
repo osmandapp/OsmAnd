@@ -60,7 +60,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -767,12 +766,20 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			long now = System.currentTimeMillis();
 			if (isMapLinkedToLocation()) {
 				if(settings.AUTO_ZOOM_MAP.get() && location.hasSpeed()){
-					float z = defineZoomFromSpeed(location.getSpeed(), mapView.getFloatZoom());
-					if(Math.abs(mapView.getFloatZoom() - z) >= OsmandMapTileView.ZOOM_DELTA_1){
+					float zdelta = defineZoomFromSpeed(location.getSpeed());
+					if(Math.abs(zdelta) >= OsmandMapTileView.ZOOM_DELTA_1){
 						// prevent ui hysteresis (check time interval for autozoom)
-						if(now - lastTimeAutoZooming > 5000){
+						if(zdelta >= 2) {
+							// decrease a bit
+							zdelta -= 3 * OsmandMapTileView.ZOOM_DELTA_1;
+						} else if(zdelta <= -2){
+							// decrease a bit
+							zdelta += 3 * OsmandMapTileView.ZOOM_DELTA_1;
+						}
+						if(now - lastTimeAutoZooming > 4500){
 							lastTimeAutoZooming = now;
-							mapView.setZoom(z);
+							mapView.setZoom(mapView.getFloatZoom() + zdelta);
+							// mapView.getAnimatedDraggingThread().startZooming(mapView.getFloatZoom() + zdelta, false);
 						}
 					}
 				}
@@ -806,27 +813,38 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		mapView.refreshMap();
 	}
 
-	public float defineZoomFromSpeed(float speed, float currentZoom){
-		DisplayMetrics metrics = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(metrics);
-
-		//FIXME victor review
-		//correct for roughly constant "look ahead" distance on different screens, see Issue 914
-		int screenSizeCorrection = (int)Math.round(Math.log(((float)metrics.heightPixels)/320.0f) / Math.log(2.0f)); 
-
-   	 	if(speed < 7f/3.6){
-			return currentZoom;
-		// less than 23: show zoom 17 
-		} else if(speed < 23f/3.6){
-			return 17 + screenSizeCorrection;
-		} else if(speed < 43f/3.6){
-			return 16 + screenSizeCorrection;
-		} else if(speed < 63f/3.6){
-			return 15 + screenSizeCorrection;
-		} else if(speed < 83f/3.6){
-			return 14 + screenSizeCorrection;
+	public float defineZoomFromSpeed(float speed) {
+		// correct for roughly constant "look ahead" distance on different screens, see Issue 914
+		if (speed < 7f / 3.6) {
+			return 0;
 		}
-		return 13 + screenSizeCorrection;
+		double topLat = mapView.calcLatitude(-mapView.getCenterPointY());
+		double cLat = mapView.calcLatitude(0);
+		double visibleDist = MapUtils.getDistance(cLat, mapView.getLongitude(), topLat, mapView.getLongitude());
+		float time = 75f;
+		if (speed < 83f / 3.6) {
+			time = 60f;
+		}
+		double distToSee = speed * time;
+		float zoomDelta = (float) (Math.log(visibleDist / distToSee) / Math.log(2.0f));
+		zoomDelta = Math.round(zoomDelta * OsmandMapTileView.ZOOM_DELTA) * OsmandMapTileView.ZOOM_DELTA_1;
+		// check if 17, 18 is correct?
+		if(zoomDelta + mapView.getFloatZoom() > 18 - OsmandMapTileView.ZOOM_DELTA_1) {
+			return 18 - OsmandMapTileView.ZOOM_DELTA_1 - mapView.getFloatZoom();
+		}
+		return zoomDelta;
+		// less than 23: show zoom 17
+		// int screenSizeCorrection = (int)Math.round(Math.log(((float)getMapView().getHeight())/320.0f) / Math.log(2.0f));
+		// if(speed < 23f/3.6){
+		// return 17 + screenSizeCorrection;
+		// } else if(speed < 43f/3.6){
+		// return 16 + screenSizeCorrection;
+		// } else if(speed < 63f/3.6){
+		// return 15 + screenSizeCorrection;
+		// } else if(speed < 83f/3.6){
+		// return 14 + screenSizeCorrection;
+		// }
+		// return 13 + screenSizeCorrection;
 	}
 
 	public void navigateToPoint(LatLon point){
@@ -1130,21 +1148,21 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 
 	protected void parseLaunchIntentLocation(){
    	 	Intent intent = getIntent();
-		if(intent != null && intent.getData() != null){
+		if (intent != null && intent.getData() != null) {
 			Uri data = intent.getData();
-			if("http".equalsIgnoreCase(data.getScheme()) && "download.osmand.net".equals(data.getHost()) &&
-					"/go".equals( data.getPath())) {
+			if ("http".equalsIgnoreCase(data.getScheme()) && "download.osmand.net".equals(data.getHost()) && "/go".equals(data.getPath())) {
 				String lat = data.getQueryParameter("lat");
 				String lon = data.getQueryParameter("lon");
-					if (lat != null && lon != null) {
+				if (lat != null && lon != null) {
 					try {
 						double lt = Double.parseDouble(lat);
 						double ln = Double.parseDouble(lon);
-						settings.setLastKnownMapLocation((float) lt, (float) ln);
 						String zoom = data.getQueryParameter("z");
-						if(zoom != null){
-							settings.setLastKnownMapZoom(Integer.parseInt(zoom));
+						int z = settings.getLastKnownMapZoom();
+						if (zoom != null) {
+							z = Integer.parseInt(zoom);
 						}
+						settings.setMapLocationToShow(lt, ln, z, getString(R.string.shared_location));
 					} catch (NumberFormatException e) {
 					}
 				}

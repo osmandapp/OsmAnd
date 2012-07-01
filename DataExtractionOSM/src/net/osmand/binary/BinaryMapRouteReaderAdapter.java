@@ -38,7 +38,8 @@ public class BinaryMapRouteReaderAdapter {
 		private final static int MAXSPEED = 4;
 		private final static int ROUNDABOUT = 5;
 		public final static int TRAFFIC_SIGNALS = 6;
-		public final static int RAILWAY_CROSSING = 6;
+		public final static int RAILWAY_CROSSING = 7;
+		private final static int LANES = 8;
 		private final String t;
 		private final String v;
 		private int intValue;
@@ -77,6 +78,13 @@ public class BinaryMapRouteReaderAdapter {
 		public float maxSpeed(){
 			if(type == MAXSPEED){
 				return floatValue;
+			}
+			return -1;
+		}
+		
+		public int lanes(){
+			if(type == LANES){
+				return intValue;
 			}
 			return -1;
 		}
@@ -123,7 +131,15 @@ public class BinaryMapRouteReaderAdapter {
 						floatValue *= 1.6;
 					}
 				}
-				
+			} else if (t.equalsIgnoreCase("lanes") && v != null) {
+				intValue = -1;
+				int i = 0;
+				while (i < v.length() && Character.isDigit(v.charAt(i))) {
+					i++;
+				}
+				if (i > 0) {
+					intValue = Integer.parseInt(v.substring(0, i));
+				}
 			}
 			
 		}

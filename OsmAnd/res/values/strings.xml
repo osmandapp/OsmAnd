@@ -9,6 +9,7 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="shared_location">Shared location</string>
     <string name="osmand_parking_event">Pick up the car from parking</string>
     <string name="osmand_parking_warning">Warning</string>
     <string name="osmand_parking_warning_text">Notification to pick up your car was previously added to your Calendar. It will remain there until you will delete it manually.</string>    

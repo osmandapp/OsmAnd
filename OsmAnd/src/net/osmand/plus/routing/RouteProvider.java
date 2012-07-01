@@ -135,6 +135,7 @@ public class RouteProvider {
 		loc.setLongitude(pt.lon);
 		loc.setSpeed((float) pt.speed);
 		loc.setAltitude(pt.ele);
+		loc.setTime(pt.time);
 		loc.setAccuracy((float) pt.hdop);
 		return loc;
 	}
