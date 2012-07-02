@@ -17,7 +17,7 @@ import android.widget.Toast;
 public abstract class AbstractOpenstreetmapUtil implements OpenstreetmapUtil  {
 
 	@Override
-	public void updateNodeInIndexes(Activity ctx, OpenstreetmapUtil.Action action, Node n, Node oldNode) {
+	public void updateNodeInIndexes(Activity ctx, OsmPoint.Action action, Node n, Node oldNode) {
 		final OsmandApplication app = (OsmandApplication) ctx.getApplication();
 		final AmenityIndexRepositoryOdb repo = app.getResourceManager().getUpdatablePoiDb();
 		ctx.runOnUiThread(new Runnable() {
@@ -42,12 +42,12 @@ public abstract class AbstractOpenstreetmapUtil implements OpenstreetmapUtil  {
 		}
 		
 		// delete all amenities with same id
-		if (OpenstreetmapUtil.Action.DELETE == action || OpenstreetmapUtil.Action.MODIFY == action) {
+		if (OsmPoint.Action.DELETE == action || OsmPoint.Action.MODIFY == action) {
 			repo.deleteAmenities(n.getId() << 1);
 			repo.clearCache();
 		}
 		// add amenities
-		if (OpenstreetmapUtil.Action.DELETE != action) {
+		if (OsmPoint.Action.DELETE != action) {
 			List<Amenity> ams = Amenity.parseAmenities(MapRenderingTypes.getDefault(), n, new ArrayList<Amenity>());
 			for (Amenity a : ams) {
 				repo.addAmenity(a);

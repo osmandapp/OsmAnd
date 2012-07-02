@@ -92,8 +92,8 @@
 	<string name="rendering_out_of_memory">선택 영역을 표시할 충분한 프로세스 메모리가 없습니다.</string>
 	<string name="use_fluorescent_overlays">형광 오버레이</string>
 	<string name="use_fluorescent_overlays_descr">트랙과 경로를 나타내기 위해 형광색을 사용합니다</string>
-	<string name="offline_poi_edition">오프라인 POI 편집</string>
-	<string name="offline_poi_edition_descr">오프라인 POI 편집을 항상 사용합니다</string>
+	<string name="offline_edition">오프라인 편집</string>
+	<string name="offline_edition_descr">오프라인 편집을 항상 사용합니다</string>
 
    	<string name="tip_recent_changes_0_7_1_t">0.7.1 버전에 대한 변경사항들 :
 \n\t- 오프라인 POI 편집 
@@ -107,14 +107,14 @@
 	</string>
 
 	<string name="update_poi_does_not_change_indexes">프로그램 내의 POI 변경은  다운로드된 맵 파일에 영향을 주지 않고, 대신 따로 파일로 저장됩니다.</string>
-	<string name="local_openstreetmap_uploading_poi">POI 업로드 중...</string>
-	<string name="local_openstreetmap_poi_were_uploaded">{0} POI 가 업로드되었습니다</string>
+	<string name="local_openstreetmap_uploading">POI 업로드 중...</string>
+	<string name="local_openstreetmap_were_uploaded">{0} POI/Bugs 가 업로드되었습니다</string>
 	<string name="local_openstreetmap_uploadall">모든 POI 업로드하기</string>
 	<string name="local_openstreetmap_items"></string>
-	<string name="local_openstreetmap_show_poi">맵 상에 POI 표시</string>
+	<string name="local_openstreetmap_show">맵 상에 표시</string>
 	<string name="local_openstreetmap_upload">수정사항을 OSM 으로 업로드</string>
-	<string name="local_openstreetmap_delete">POI 수정사항 삭제</string>
-	<string name="local_openstreetmap_descr_title">비동기적인 Openstreetmap POI 편집:</string>
+	<string name="local_openstreetmap_delete">수정사항 삭제</string>
+	<string name="local_openstreetmap_descr_title">비동기적인 Openstreetmap 편집:</string>
 	<string name="local_openstreetmap_settings">지역 Openstreetmap 지점들</string>
 	<string name="local_openstreetmap_settings_descr">DB에 저장된 지역 지점들</string>
 
