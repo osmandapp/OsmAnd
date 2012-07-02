@@ -53,7 +53,7 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 		if (db != null) {
 			db.execSQL("INSERT INTO " + OSMBUGS_TABLE_NAME +
 					" (" + OSMBUGS_COL_ID + ", " + OSMBUGS_COL_TEXT + ", " + OSMBUGS_COL_LAT + "," + OSMBUGS_COL_LON + "," + OSMBUGS_COL_ACTION + "," + OSMBUGS_COL_AUTHOR + ")" +
-					   " VALUES (?, ?, ?, ?, ?, ?)", new Object[] { p.getId(), p.getText(), p.getLatitude(), p.getLongitude(), OsmBugsRemoteUtil.stringAction.get(p.getAction()), p.getAuthor() }); //$NON-NLS-1$ //$NON-NLS-2$
+					   " VALUES (?, ?, ?, ?, ?, ?)", new Object[] { p.getId(), p.getText(), p.getLatitude(), p.getLongitude(), OsmPoint.stringAction.get(p.getAction()), p.getAuthor() }); //$NON-NLS-1$ //$NON-NLS-2$
 			cachedOsmbugsPoints.add(p);
 			p.setStored(true);
 			return true;
@@ -72,7 +72,7 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 					   OSMBUGS_COL_LON + " = ? AND " +
 					   OSMBUGS_COL_ACTION + " = ? AND " +
 					   OSMBUGS_COL_AUTHOR + " = ?",
-					   new Object[] { p.getId(), p.getText(), p.getLatitude(), p.getLongitude(), OsmBugsRemoteUtil.stringAction.get(p.getAction()), p.getAuthor() }); //$NON-NLS-1$ //$NON-NLS-2$
+					   new Object[] { p.getId(), p.getText(), p.getLatitude(), p.getLongitude(), OsmPoint.stringAction.get(p.getAction()), p.getAuthor() }); //$NON-NLS-1$ //$NON-NLS-2$
 			cachedOsmbugsPoints.remove(p);
 			p.setStored(false);
 			return true;

@@ -134,7 +134,7 @@ public class EditingPOIActivity implements DialogProvider {
 			public void onClick(DialogInterface dialog, int which) {
 				Node n = (Node) args.getSerializable(KEY_AMENITY_NODE);
 				String c = comment.getText().toString();
-				commitNode(OpenstreetmapUtil.Action.DELETE, n, openstreetmapUtil.getEntityInfo(), c, new Runnable(){
+				commitNode(OsmPoint.Action.DELETE, n, openstreetmapUtil.getEntityInfo(), c, new Runnable(){
 					@Override
 					public void run() {
 						AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.poi_remove_success), Toast.LENGTH_LONG).show();
@@ -248,7 +248,7 @@ public class EditingPOIActivity implements DialogProvider {
 				Resources resources = v.getResources();
 				final String msg = n.getId() == -1 ? resources.getString(R.string.poi_action_add) : resources
 						.getString(R.string.poi_action_change);
-				OpenstreetmapUtil.Action action = n.getId() == -1 ? OpenstreetmapUtil.Action.CREATE : OpenstreetmapUtil.Action.MODIFY;
+				OsmPoint.Action action = n.getId() == -1 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
 				Map<AmenityType, Map<String, String>> typeNameToTagVal = MapRenderingTypes.getDefault().getAmenityTypeNameToTagVal();
 				AmenityType type = a.getType();
 				String tag = type.getDefaultTag();
@@ -362,8 +362,8 @@ public class EditingPOIActivity implements DialogProvider {
 	}
 	
 	
-	public void commitNode(final OpenstreetmapUtil.Action action, final Node n, final EntityInfo info, final String comment, final Runnable successAction) {
-		if (info == null && OpenstreetmapUtil.Action.CREATE != action) {
+	public void commitNode(final OsmPoint.Action action, final Node n, final EntityInfo info, final String comment, final Runnable successAction) {
+		if (info == null && OsmPoint.Action.CREATE != action) {
 			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();
 			return;
 		}

@@ -42,11 +42,13 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 
 	private LocalOpenstreetmapAdapter listAdapter;
 
-	private OpenstreetmapsDbHelper db;
+	private OpenstreetmapsDbHelper dbpoi;
+	private OsmBugsDbHelper dbbug;
 
-	private OpenstreetmapRemoteUtil remote;
+	private OpenstreetmapRemoteUtil remotepoi;
+	private OsmBugsRemoteUtil remotebug;
 
-	protected OpenstreetmapPoint[] toUpload;
+	protected OsmPoint[] toUpload;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,9 +73,11 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		});
 		setListAdapter(listAdapter);
 
-		db = new OpenstreetmapsDbHelper(this);
+		dbpoi = new OpenstreetmapsDbHelper(this);
+		dbbug = new OsmBugsDbHelper(this);
 
-		remote = new OpenstreetmapRemoteUtil(this, this.getWindow().getDecorView());
+		remotepoi = new OpenstreetmapRemoteUtil(this, this.getWindow().getDecorView());
+		remotebug = new OsmBugsRemoteUtil();
 
 		findViewById(R.id.UploadAllButton).setOnClickListener(new View.OnClickListener() {
 
@@ -81,7 +85,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 			@Override
 			public void onClick(View v) {
 				//NOTE, the order of upload is important, there can be more edits per one POI!!
-				toUpload = listAdapter.values().toArray(new OpenstreetmapPoint[0]);
+				toUpload = listAdapter.values().toArray(new OsmPoint[0]);
 				showDialog(DIALOG_PROGRESS_UPLOAD);
 			}
 		});
@@ -91,10 +95,14 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 	protected void onResume() {
 		super.onResume();
 		listAdapter.clear();
-		List<OpenstreetmapPoint> l = db.getOpenstreetmapPoints();
-		android.util.Log.d(LogUtil.TAG, "List of POI " + l.size() + " length");
-		for (OpenstreetmapPoint p : l) {
-			listAdapter.addOpenstreetmapPoint(p);
+		List<OpenstreetmapPoint> l1 = dbpoi.getOpenstreetmapPoints();
+		List<OsmbugsPoint> l2 = dbbug.getOsmbugsPoints();
+		android.util.Log.d(LogUtil.TAG, "List " + (l1.size() + l2.size()) + " length");
+		for (OpenstreetmapPoint p : l1) {
+			listAdapter.addOsmPoint(p);
+		}
+		for (OsmbugsPoint p : l2) {
+			listAdapter.addOsmPoint(p);
 		}
 		listAdapter.notifyDataSetChanged();
 	}
@@ -105,21 +113,25 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		int group = ExpandableListView.getPackedPositionGroup(packedPos);
 		int child = ExpandableListView.getPackedPositionChild(packedPos);
 		int itemId = item.getItemId();
-	    if(itemId == R.id.showpoi) {
+		if(itemId == R.id.showmod) {
 			OsmandSettings settings = getMyApplication().getSettings();
-			OpenstreetmapPoint info = (OpenstreetmapPoint) listAdapter.getChild(group, child);
+			OsmPoint info = (OsmPoint) listAdapter.getChild(group, child);
 			settings.setMapLocationToShow(info.getLatitude(), info.getLongitude(), settings.getLastKnownMapZoom());
 			MapActivity.launchMapActivityMoveToTop(LocalOpenstreetmapActivity.this);
 			return true;
-	    } else if(itemId == R.id.deletepoimod) {
-			OpenstreetmapPoint info = (OpenstreetmapPoint) listAdapter.getChild(group, child);
-			db.deleteAllPOIModifications(info.getId());
+		} else if(itemId == R.id.deletemod) {
+			OsmPoint info = (OsmPoint) listAdapter.getChild(group, child);
+			if (info.getGroup() == OsmPoint.Group.POI) {
+				dbpoi.deleteAllPOIModifications(info.getId());
+			} else if (info.getGroup() == OsmPoint.Group.BUG) {
+				dbbug.deleteAllBugModifications(info.getId());
+			}
 			listAdapter.delete(info);
 			return true;
-	    } else if(itemId == R.id.uploadpoimods) {
-			List<OpenstreetmapPoint> list = listAdapter.data.get(group);
+		} else if(itemId == R.id.uploadmods) {
+			List<OsmPoint> list = listAdapter.data.get(group);
 			if (list != null) {
-				toUpload = list.toArray(new OpenstreetmapPoint[] {});
+				toUpload = list.toArray(new OsmPoint[] {});
 				showDialog(DIALOG_PROGRESS_UPLOAD);
 				return true;
 			}
@@ -131,8 +143,11 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		if (db != null) {
-			db.close();
+		if (dbpoi != null) {
+			dbpoi.close();
+		}
+		if (dbbug != null) {
+			dbbug.close();
 		}
 	}
 	
@@ -143,7 +158,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 				return ProgressDialogImplementation.createProgressDialog(
 						LocalOpenstreetmapActivity.this,
 						getString(R.string.uploading),
-						getString(R.string.local_openstreetmap_uploading_poi),
+						getString(R.string.local_openstreetmap_uploading),
 						ProgressDialog.STYLE_HORIZONTAL).getDialog();
 		}
 		return null;
@@ -153,45 +168,63 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 	protected void onPrepareDialog(int id, Dialog dialog, Bundle args) {
 		switch (id) {
 		case DIALOG_PROGRESS_UPLOAD:
-			UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask((ProgressDialog) dialog, remote,
-					toUpload.length);
+			UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask((ProgressDialog) dialog, remotepoi,
+					 remotebug, toUpload.length);
 			uploadTask.execute(toUpload);
 			break;
 		}
 	}
 
-	public class UploadOpenstreetmapPointAsyncTask extends AsyncTask<OpenstreetmapPoint, OpenstreetmapPoint, Integer> {
+	public class UploadOpenstreetmapPointAsyncTask extends AsyncTask<OsmPoint, OsmPoint, Integer> {
 
 		private ProgressDialog progress;
 
-		private OpenstreetmapRemoteUtil remote;
+		private OpenstreetmapRemoteUtil remotepoi;
+
+		private OsmBugsRemoteUtil remotebug;
 
 		private int listSize = 0;
 
 		private boolean interruptUploading = false;
 
 		public UploadOpenstreetmapPointAsyncTask(ProgressDialog progress,
-												 OpenstreetmapRemoteUtil remote,
+												 OpenstreetmapRemoteUtil remotepoi,
+												 OsmBugsRemoteUtil remotebug,
 												 int listSize) {
 			this.progress = progress;
-			this.remote = remote;
+			this.remotepoi = remotepoi;
+			this.remotebug = remotebug;
 			this.listSize = listSize;
 		}
 
 		@Override
-		protected Integer doInBackground(OpenstreetmapPoint... points) {
+		protected Integer doInBackground(OsmPoint... points) {
 			int uploaded = 0;
 
-			for (OpenstreetmapPoint p : points) {
+			for (OsmPoint point : points) {
 				if (interruptUploading) break;
 
-				EntityInfo entityInfo = null;
-				if (OpenstreetmapUtil.Action.CREATE != p.getAction()) {
-					entityInfo = remote.loadNode(p.getEntity());
-				}
-				Node n;
-				if ((n = remote.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo, p.getComment())) != null) {
-					remote.updateNodeInIndexes(LocalOpenstreetmapActivity.this, p.getAction(), n, p.getEntity());
+				if (point.getGroup() == OsmPoint.Group.POI) {
+					OpenstreetmapPoint p = (OpenstreetmapPoint) point;
+					EntityInfo entityInfo = null;
+					if (OsmPoint.Action.CREATE != p.getAction()) {
+						entityInfo = remotepoi.loadNode(p.getEntity());
+					}
+					Node n;
+					if ((n = remotepoi.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo, p.getComment())) != null) {
+						remotepoi.updateNodeInIndexes(LocalOpenstreetmapActivity.this, p.getAction(), n, p.getEntity());
+						publishProgress(p);
+						uploaded++;
+					}
+				} else if (point.getGroup() == OsmPoint.Group.BUG) {
+					OsmbugsPoint p = (OsmbugsPoint) point;
+					if (p.getAction() == OsmPoint.Action.CREATE) {
+						remotebug.createNewBug(p.getLatitude(), p.getLongitude(), p.getText(), p.getAuthor());
+					} else if (p.getAction() == OsmPoint.Action.MODIFY) {
+						remotebug.addingComment(p.getId(), p.getText(), p.getAuthor());
+					} else if (p.getAction() == OsmPoint.Action.DELETE) {
+						remotebug.closingBug(p.getId());
+					}
 					publishProgress(p);
 					uploaded++;
 				}
@@ -219,7 +252,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		protected void onPostExecute(Integer result) {
 			listAdapter.notifyDataSetChanged();
 			if(result != null){
-				AccessibleToast.makeText(LocalOpenstreetmapActivity.this, MessageFormat.format(getString(R.string.local_openstreetmap_poi_were_uploaded), result.intValue()), Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(LocalOpenstreetmapActivity.this, MessageFormat.format(getString(R.string.local_openstreetmap_were_uploaded), result.intValue()), Toast.LENGTH_LONG).show();
 			}
 			removeDialog(DIALOG_PROGRESS_UPLOAD);
 		}
@@ -229,7 +262,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		}
 
 		@Override
-		protected void onProgressUpdate(OpenstreetmapPoint... points) {
+		protected void onProgressUpdate(OsmPoint... points) {
 			listAdapter.delete(points[0]);
 			progress.incrementProgressBy(1);
 		}
@@ -237,7 +270,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 	}
 	
 	protected class LocalOpenstreetmapAdapter extends BaseExpandableListAdapter {
-		Map<Long, List<OpenstreetmapPoint>> data = new LinkedHashMap<Long, List<OpenstreetmapPoint>>();
+		Map<Long, List<OsmPoint>> data = new LinkedHashMap<Long, List<OsmPoint>>();
 		List<Long> category = new ArrayList<Long>();
 		
 
@@ -250,21 +283,26 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 			notifyDataSetChanged();
 		}
 
-		public List<OpenstreetmapPoint> values() {
-			List<OpenstreetmapPoint> values = new ArrayList<OpenstreetmapPoint>();
-			for (List<OpenstreetmapPoint> v : data.values()) {
+		public List<OsmPoint> values() {
+			List<OsmPoint> values = new ArrayList<OsmPoint>();
+			for (List<OsmPoint> v : data.values()) {
 				values.addAll(v);
 			}
 			return values;
 		}
 
-		public void delete(OpenstreetmapPoint i) {
+		public void delete(OsmPoint i) {
 			final AmenityIndexRepositoryOdb repo = getMyApplication().getResourceManager().getUpdatablePoiDb();
 			android.util.Log.d(LogUtil.TAG, "Delete " + i);
-			db.deleteOpenstreetmap(i);
+
+			if (i.getGroup() == OsmPoint.Group.POI) {
+				dbpoi.deleteOpenstreetmap((OpenstreetmapPoint) i);
+			} else if (i.getGroup() == OsmPoint.Group.BUG) {
+				dbbug.deleteOsmbugs((OsmbugsPoint) i);
+			}
 			Long c = i.getId();
 			if(c != null){
-				List<OpenstreetmapPoint> list = data.get(c);
+				List<OsmPoint> list = data.get(c);
 				list.remove(i);
 				if (list.isEmpty()) {
 					data.remove(c);
@@ -272,8 +310,11 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 				}
 				repo.deleteAmenities(i.getId() << 1);
 				// We need to re-insert the POI if it is a delete or modify
-				for (OpenstreetmapPoint p : list) {
-					remote.updateNodeInIndexes(LocalOpenstreetmapActivity.this, p.getAction(), p.getEntity(), p.getEntity());
+				for (OsmPoint point : list) {
+					if (point.getGroup() == OsmPoint.Group.POI) {
+						OpenstreetmapPoint p = (OpenstreetmapPoint) point;
+						remotepoi.updateNodeInIndexes(LocalOpenstreetmapActivity.this, p.getAction(), p.getEntity(), p.getEntity());
+					}
 				}
 				repo.clearCache();
 			}
@@ -284,7 +325,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 			notifyDataSetChanged();
 		}
 		
-		public void addOpenstreetmapPoint(OpenstreetmapPoint info) {
+		public void addOsmPoint(OsmPoint info) {
 			int found = -1;
 			// search from end
 			for (int i = category.size() - 1; i >= 0; i--) {
@@ -299,13 +340,13 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 				category.add(info.getId());
 			}
 			if (!data.containsKey(category.get(found))) {
-				data.put(category.get(found), new ArrayList<OpenstreetmapPoint>());
+				data.put(category.get(found), new ArrayList<OsmPoint>());
 			}
 			data.get(category.get(found)).add(info);
 		}
 
 		@Override
-		public OpenstreetmapPoint getChild(int groupPosition, int childPosition) {
+		public OsmPoint getChild(int groupPosition, int childPosition) {
 			Long cat = category.get(groupPosition);
 			return data.get(cat).get(childPosition);
 		}
@@ -319,18 +360,21 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		@Override
 		public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 			View v = convertView;
-			final OpenstreetmapPoint child = (OpenstreetmapPoint) getChild(groupPosition, childPosition);
+			final OsmPoint child = (OsmPoint) getChild(groupPosition, childPosition);
 			if (v == null ) {
 				LayoutInflater inflater = getLayoutInflater();
 				v = inflater.inflate(net.osmand.plus.R.layout.local_openstreetmap_list_item, parent, false);
 			}
 			TextView viewName = ((TextView) v.findViewById(R.id.local_openstreetmap_name));
-			viewName.setText("(" + child.getSubtype() + ") " + child.getName());
-			if (child.getAction() == OpenstreetmapUtil.Action.CREATE) {
+			if (child.getGroup() == OsmPoint.Group.POI)
+				viewName.setText("(" + ((OpenstreetmapPoint) child).getSubtype() + ") " + ((OpenstreetmapPoint) child).getName());
+			else if (child.getGroup() == OsmPoint.Group.BUG)
+				viewName.setText("(" + ((OsmbugsPoint) child).getAuthor() + ") " + ((OsmbugsPoint) child).getText());
+			if (child.getAction() == OsmPoint.Action.CREATE) {
 				viewName.setTextColor(getResources().getColor(R.color.osm_create));
-			} else if (child.getAction() == OpenstreetmapUtil.Action.MODIFY) {
+			} else if (child.getAction() == OsmPoint.Action.MODIFY) {
 				viewName.setTextColor(getResources().getColor(R.color.osm_modify));
-			} else if (child.getAction() == OpenstreetmapUtil.Action.DELETE) {
+			} else if (child.getAction() == OsmPoint.Action.DELETE) {
 				viewName.setTextColor(getResources().getColor(R.color.osm_delete));
 			}
 
