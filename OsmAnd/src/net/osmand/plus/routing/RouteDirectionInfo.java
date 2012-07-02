@@ -11,6 +11,11 @@ public class RouteDirectionInfo {
 	private String descriptionRoute = ""; //$NON-NLS-1$
 	// Speed after the action till next turn
 	private float averageSpeed;
+	
+	private String ref;
+	
+	private String streetName;
+
 
 	// Constructor to verify average speed always > 0
 	public RouteDirectionInfo(float averageSpeed, TurnType turnType) {
@@ -20,6 +25,22 @@ public class RouteDirectionInfo {
 	
 	public String getDescriptionRoute() {
 		return descriptionRoute;
+	}
+
+	public String getRef() {
+		return ref;
+	}
+
+	public void setRef(String ref) {
+		this.ref = ref;
+	}
+
+	public String getStreetName() {
+		return streetName;
+	}
+
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
 	}
 	
 	public void setDescriptionRoute(String descriptionRoute) {
@@ -44,12 +65,6 @@ public class RouteDirectionInfo {
 		return turnType;
 	}
 
-
-	// TODO add from parser
-//	public String ref;
-//	public String streetName;
-//	// speed limit in m/s (should be array of speed limits?)
-//	public float speedLimit;
 
 	// calculated vars
 	// after action (excluding expectedTime)

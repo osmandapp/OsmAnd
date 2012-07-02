@@ -19,6 +19,7 @@ public class RouteCalculationResult {
 	// could not be null and immodifiable!
 	private final List<Location> locations;
 	private final List<RouteDirectionInfo> directions;
+	private final List<RouteSegmentResult> segments;
 	private final String errorMessage;
 	private final int[] listDistance;
 	
@@ -39,11 +40,12 @@ public class RouteCalculationResult {
 		List<RouteDirectionInfo> localDirections = directions == null? new ArrayList<RouteDirectionInfo>() : new ArrayList<RouteDirectionInfo>(directions);
 		if (!locations.isEmpty()) {
 			// if there is no closest points to start - add it
-			introduceFirstPoint(locations, start);
-			checkForDuplicatePoints(locations);
-			removeUnnecessaryGoAhead();
+			introduceFirstPoint(locations, localDirections, null, start);
+			checkForDuplicatePoints(locations, localDirections);
+			removeUnnecessaryGoAhead(localDirections);
 		}
 		this.locations = Collections.unmodifiableList(locations);
+		this.segments = new ArrayList<RouteSegmentResult>(locations.size());
 		this.listDistance = new int[locations.size()];
 		updateListDistanceTime();
 		
@@ -60,9 +62,10 @@ public class RouteCalculationResult {
 		List<RouteDirectionInfo> computeDirections = new ArrayList<RouteDirectionInfo>();
 		this.errorMessage = null;
 		List<Location> locations = new ArrayList<Location>();
-		convertVectorResult(computeDirections, locations, list, ctx);
-		introduceFirstPoint(locations, start);
+		List<RouteSegmentResult> segments = convertVectorResult(computeDirections, locations, list, ctx);
+		introduceFirstPoint(locations,computeDirections, segments, start);
 		this.locations = Collections.unmodifiableList(locations);
+		this.segments = Collections.unmodifiableList(segments);
 		this.listDistance = new int[locations.size()];
 		updateListDistanceTime();
 		
@@ -73,9 +76,10 @@ public class RouteCalculationResult {
 	/**
 	 * PREPARATION 
 	 */
-	private void convertVectorResult(List<RouteDirectionInfo> directions, List<Location> locations, List<RouteSegmentResult> list, Context ctx) {
+	private List<RouteSegmentResult> convertVectorResult(List<RouteDirectionInfo> directions, List<Location> locations, List<RouteSegmentResult> list, Context ctx) {
 		float prevDirectionTime = 0;
 		float prevDirectionDistance = 0;
+		List<RouteSegmentResult> segmentsToPopulate = new ArrayList<RouteSegmentResult>();
 		for (int routeInd = 0; routeInd < list.size(); routeInd++) {
 			RouteSegmentResult s = list.get(routeInd);
 			boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
@@ -90,10 +94,10 @@ public class RouteCalculationResult {
 					break;
 				}
 				locations.add(n);
+				segmentsToPopulate.add(s);
 				if (i == s.getEndPointIndex() ) {
 					break;
 				}
-				
 				if (plus) {
 					i++;
 				} else {
@@ -124,6 +128,7 @@ public class RouteCalculationResult {
 			prev.setAverageSpeed(prevDirectionDistance / prevDirectionTime);
 			prev.setDescriptionRoute(prev.getDescriptionRoute() + " " + OsmAndFormatter.getFormattedDistance(prevDirectionDistance, ctx));
 		}
+		return segmentsToPopulate;
 	}
 	
 	protected void addMissingTurnsToRoute(List<RouteDirectionInfo> originalDirections, Location start, LatLon end, ApplicationMode mode, Context ctx,
@@ -344,7 +349,7 @@ public class RouteCalculationResult {
 	 * Remove unnecessary go straight from CloudMade.
 	 * Remove also last direction because it will be added after.
 	 */
-	private void removeUnnecessaryGoAhead() {
+	private void removeUnnecessaryGoAhead(List<RouteDirectionInfo> directions) {
 		if (directions != null && directions.size() > 1) {
 			for (int i = 1; i < directions.size();) {
 				RouteDirectionInfo r = directions.get(i);
@@ -364,7 +369,7 @@ public class RouteCalculationResult {
 	 * PREPARATION
 	 * Check points for duplicates (it is very bad for routing) - cloudmade could return it
 	 */
-	private void checkForDuplicatePoints(List<Location> locations) {
+	private void checkForDuplicatePoints(List<Location> locations, List<RouteDirectionInfo> directions) {
 		// 
 		for (int i = 0; i < locations.size() - 1;) {
 			if (locations.get(i).distanceTo(locations.get(i + 1)) == 0) {
@@ -386,10 +391,13 @@ public class RouteCalculationResult {
 	 * PREPARATION
 	 * If beginning is too far from start point, then introduce GO Ahead
 	 */
-	private void introduceFirstPoint(List<Location> locations, Location start) {
+	private void introduceFirstPoint(List<Location> locations, List<RouteDirectionInfo> directions, List<RouteSegmentResult> segs, Location start) {
 		if (!locations.isEmpty() && locations.get(0).distanceTo(start) > 200) {
 			// add start point
 			locations.add(0, start);
+			if(segs != null) {
+				segs.add(0, segs.get(0));
+			}
 			if (directions != null && !directions.isEmpty()) {
 				for (RouteDirectionInfo i : directions) {
 					i.routePointOffset++;
@@ -417,6 +425,10 @@ public class RouteCalculationResult {
 		}
 	}
 	
+	/**
+	 * PREPARATION
+	 * At the end always update listDistance local vars and time
+	 */
 	private void updateDirectionsTime() {
 		int sum = 0;
 		for (int i = directions.size() - 1; i >= 0; i--) {
