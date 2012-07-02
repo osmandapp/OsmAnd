@@ -190,10 +190,10 @@ public class VoiceRouter {
 			}
 			// say long distance message only for long distances > 10 km
 			// if (dist >= PREPARE_LONG_DISTANCE && !isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE)) {
-			if (dist > 3 * PREPARE_LONG_DISTANCE) {
+			if (dist > PREPARE_LONG_DISTANCE + 300) {
 				nextStatusAfter(STATUS_UNKNOWN);
-			} else if (dist > 1.5 * PREPARE_DISTANCE) {
-				// say prepare message if it is far enough
+			} else if (dist > PREPARE_DISTANCE + 300) {
+				// say prepare message if it is far enough and don't say preare long distance
 				nextStatusAfter(STATUS_LONG_PREPARE);
 			} else {
 				// don't say even prepare message

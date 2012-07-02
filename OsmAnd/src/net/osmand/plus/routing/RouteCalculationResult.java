@@ -18,10 +18,9 @@ import android.location.Location;
 public class RouteCalculationResult {
 	// could not be null and immodifiable!
 	private final List<Location> locations;
-	
-	protected List<RouteDirectionInfo> directions;
+	private final List<RouteDirectionInfo> directions;
 	private final String errorMessage;
-	private int[] listDistance = new int[0];
+	private final int[] listDistance;
 	
 
 	// Note always currentRoute > get(currentDirectionInfo).routeOffset, 
@@ -45,6 +44,7 @@ public class RouteCalculationResult {
 			removeUnnecessaryGoAhead();
 		}
 		this.locations = Collections.unmodifiableList(locations);
+		this.listDistance = new int[locations.size()];
 		updateListDistanceTime();
 		
 		if(addMissingTurns) {
@@ -63,6 +63,7 @@ public class RouteCalculationResult {
 		convertVectorResult(computeDirections, locations, list, ctx);
 		introduceFirstPoint(locations, start);
 		this.locations = Collections.unmodifiableList(locations);
+		this.listDistance = new int[locations.size()];
 		updateListDistanceTime();
 		
 		this.directions = Collections.unmodifiableList(computeDirections);
@@ -407,7 +408,6 @@ public class RouteCalculationResult {
 	 * At the end always update listDistance local vars and time
 	 */
 	private void updateListDistanceTime() {
-		listDistance = new int[locations.size()];
 		if (listDistance.length > 0) {
 			listDistance[locations.size() - 1] = 0;
 			for (int i = locations.size() - 1; i > 0; i--) {
