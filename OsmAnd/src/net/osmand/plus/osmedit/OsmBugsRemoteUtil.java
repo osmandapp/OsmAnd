@@ -17,6 +17,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
 	private final static String SITE_API = "http://openstreetbugs.schokokeks.org/api/0.1/"; //$NON-NLS-1$
 
+	@Override
 	public boolean createNewBug(double latitude, double longitude, String text, String authorName){
 		StringBuilder b = new StringBuilder();
 		b.append(SITE_API).append("addPOIexec?"); //$NON-NLS-1$
@@ -28,6 +29,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 		return editingPOI(b.toString(), "creating bug"); //$NON-NLS-1$
 	}
 
+	@Override
 	public boolean addingComment(long id, String text, String authorName){
 		StringBuilder b = new StringBuilder();
 		b.append(SITE_API).append("editPOIexec?"); //$NON-NLS-1$
@@ -38,6 +40,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 		return editingPOI(b.toString(), "adding comment"); //$NON-NLS-1$
 	}
 
+	@Override
 	public boolean closingBug(long id){
 		StringBuilder b = new StringBuilder();
 		b.append(SITE_API).append("closePOIexec?"); //$NON-NLS-1$

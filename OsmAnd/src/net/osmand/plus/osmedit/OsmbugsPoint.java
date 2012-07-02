@@ -14,6 +14,7 @@ public class OsmbugsPoint extends OsmPoint implements Serializable {
 	public OsmbugsPoint(){
 	}
 
+	@Override
 	public long getId() {
 		return id;
 	}
@@ -22,14 +23,17 @@ public class OsmbugsPoint extends OsmPoint implements Serializable {
 		return text;
 	}
 
+	@Override
 	public double getLatitude() {
 		return latitude;
 	}
 
+	@Override
 	public double getLongitude() {
 		return longitude;
 	}
 
+	@Override
 	public Group getGroup() {
 		return Group.BUG;
 	}

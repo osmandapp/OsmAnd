@@ -18,6 +18,7 @@ public class OsmBugsLocalUtil implements OsmBugsUtil {
 		this.db = new OsmBugsDbHelper(ctx);
 	}
 
+	@Override
 	public boolean createNewBug(double latitude, double longitude, String text, String authorName){
 		OsmbugsPoint p = new OsmbugsPoint();
 		p.setId(-1);
@@ -29,6 +30,7 @@ public class OsmBugsLocalUtil implements OsmBugsUtil {
 		return db.addOsmbugs(p);
 	}
 
+	@Override
 	public boolean addingComment(long id, String text, String authorName){
 		OsmbugsPoint p = new OsmbugsPoint();
 		p.setId(id);
@@ -38,6 +40,7 @@ public class OsmBugsLocalUtil implements OsmBugsUtil {
 		return db.addOsmbugs(p);
 	}
 
+	@Override
 	public boolean closingBug(long id){
 		OsmbugsPoint p = new OsmbugsPoint();
 		p.setId(id);

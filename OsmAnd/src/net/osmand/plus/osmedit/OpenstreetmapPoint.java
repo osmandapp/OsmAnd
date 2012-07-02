@@ -14,6 +14,7 @@ public class OpenstreetmapPoint extends OsmPoint implements Serializable {
 	public OpenstreetmapPoint(){
 	}
 
+	@Override
 	public long getId() {
 		return entity.getId();
 	}
@@ -41,14 +42,17 @@ public class OpenstreetmapPoint extends OsmPoint implements Serializable {
 		return entity.getTag(this.getType());
 	}
 
+	@Override
 	public double getLatitude() {
 		return entity.getLatitude();
 	}
 
+	@Override
 	public double getLongitude() {
 		return entity.getLongitude();
 	}
 
+	@Override
 	public Group getGroup() {
 		return Group.POI;
 	}
