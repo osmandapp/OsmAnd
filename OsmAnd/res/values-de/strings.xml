@@ -113,8 +113,8 @@
 	<string name="rendering_out_of_memory">Zu wenig Prozess-Speicher zum Anzeigen des gewählten Gebietes</string>
 	<string name="use_fluorescent_overlays">Fluoreszierende Overlays</string>
 	<string name="use_fluorescent_overlays_descr">Fluoreszierende Anzeige von Tracks und Routen</string>
-	<string name="offline_poi_edition">Offline-POI-Bearbeitung</string>
-	<string name="offline_poi_edition_descr">Immer Offline-POI-Bearbeitung verwenden</string>
+	<string name="offline_edition">Offline-Bearbeitung</string>
+	<string name="offline_edition_descr">Immer Offline-Bearbeitung verwenden</string>
 	<string name="tip_recent_changes_0_7_1_t">"Änderungen in 0.7.1 : \n\t- Offline POI-Bearbeitung \n\t- Live-Tracking Option: Koordinaten periodisch an einen Web-Service schicken (Setup-Anleitung für eigenen Web-Service in den HowTo-Artikeln) \n\t- Anzeige des gegenwärtig aufgezeichneten Tracks möglich \n\t- Richtungsüberprüfung: \'Bitte wenden\' wird jetzt angezeigt und angesagt bei entgegengesetzter Bewegungsrichtung oder bei verpasster Abzweigung \n\t- Neue Ansage \'Strecke neu berechnet\' \n\t- Optische Anzeige eines innerhalb 100m bevorstehenden Abbiegevorgangs durch Farbwechsel des Richtungspfeils \n\t- Die Aktualität auch der deaktivierten Karten wird jetzt im Download-Liste in dunkelgrün und dunkelblau angezeigt \n\t- Weitere Verbesserungen "</string>
 	<string name="update_poi_does_not_change_indexes">Das Bearbeiten von POIs innerhalb der Applikation beeinflusst nicht die Offline-Karten, sondern wird in einer eigenen Datei gespeichert.</string>
 	<string name="local_openstreetmap_uploading_poi">POI hochladen…</string>

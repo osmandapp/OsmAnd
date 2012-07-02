@@ -155,8 +155,8 @@
 	<string name="rendering_out_of_memory">Not enough process memory to display selected area</string>
 	<string name="use_fluorescent_overlays">Fluorescent overlays</string>
 	<string name="use_fluorescent_overlays_descr">Use fluorescent colors to display tracks and routes</string>
-	<string name="offline_poi_edition">Offline POI editing</string>
-	<string name="offline_poi_edition_descr">Always use offline POI editing</string>
+	<string name="offline_edition">Offline editing</string>
+	<string name="offline_edition_descr">Always use offline editing</string>
 
 	<string name="tip_recent_changes_0_7_1_t">"Changes in 0.7.1 : \n\t- Offline POI editing \n\t- Live Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles) \n\t- Show currently recorded track on map \n\t- Direction detection: \'Make U-turn\' is indicated and announced when heading in opposite direction or after missing a turn \n\t- New voice prompt \'Route recalculated\' \n\t- Optical indication of an imminent turn within 100m by diretion arrow changing color \n\t- Actuality also of deactivated index files now shown on Download screen in dark green and dark blue \n\t- Other changes "</string>
 

@@ -79,8 +79,8 @@
   <string name="rendering_out_of_memory">Niet genoeg werkgeheugen voor weergave van het geselecteerde gebied</string>
   <string name="use_fluorescent_overlays">Fluorescerende overlays</string>
   <string name="use_fluorescent_overlays_descr">Gebruik fluorescerende kleuren voor de weergave van tracks and routes</string>
-  <string name="offline_poi_edition">Offline interessepunt-bewerking</string>
-  <string name="offline_poi_edition_descr">Gebruik altijd offline interessepunt-bewerking</string>
+  <string name="offline_edition">Offline bewerking</string>
+  <string name="offline_edition_descr">Gebruik altijd offline bewerking</string>
   <string name="tip_recent_changes_0_7_1_t">"Wijzigingen in 0.7.1 : \n\t- Offline bewerken van interessepunten \n\t- Live Tracking optie - zend coordinaten naar web service (lees voor het opzetten van je eigen webservice de HowTo Artikelen) \n\t- Toon eerder opgenomen tracks op de kaart \n\t- Richtingdetectie: \'Keer terug\' wordt weergegeven bij een koers in de tegengestelde richting of na het missen van een afslag \n\t- Nieuwe stem-instructie \'Route wordt opnieuw berekend\' \n\t- Optische aanduiding van een afslag binnen 100m door een richtingpijl met veranderende kleur \n\t- Weergave van actuele status van gedeactiveerde kaarten nu op het downloadscherm in donker groen en donker blauw \n\t- Andere wijzigingen "</string>
   <string name="update_poi_does_not_change_indexes">Wijzigingen van interessepunten worden niet bewaard in de gedownloade kaartbestanden, maar in een lokaal bestand.</string>
   <string name="local_openstreetmap_uploading_poi">Interessepunt wordt ge-upload</string>

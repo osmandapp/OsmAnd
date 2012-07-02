@@ -2,8 +2,8 @@
 <resources>
   <string name="use_fluorescent_overlays">Usar superpuestos fluorescentes</string>
   <string name="use_fluorescent_overlays_descr">Usar colores fluorescentes para mostrar trazas y rutas</string>
-  <string name="offline_poi_edition">Edición de PDI sin conexión</string>
-  <string name="offline_poi_edition_descr">Usar siempre edición de PDI sin conexión</string>
+  <string name="offline_edition">Edición sin conexión</string>
+  <string name="offline_edition_descr">Usar siempre edición sin conexión</string>
   <string name="tip_recent_changes_0_7_1_t">Cambios en 0.7.1 : \n\t- Edición de POI sin conexión \n\t- Seguimiento en directo opcional - envía las coordenadas a un servicio web periódicamente (lea cómo configurar su propio servicio web en los artículos HowTo) \n\t- Muestra la traza actual en el mapa \n\t- Detección de la dirección : \'Da la vuelta\' se indica y se anuncia cuando se orienta en la dirección opuesta o después de saltarse un giro \n\t- Nuevo anuncio de voz \'Ruta recalculada\' \n\t- Indicación óptica de un giro inminente en menos de 100m por el cambio de color en la flecha de dirección \n\t- Disponibilidad de versión actual también para ficheros de índice desactivados - se muestra en la pantalla de Descarga en verde oscuro y azul oscuro \n\t- Otros cambios</string>
   <string name="update_poi_does_not_change_indexes">Los cambios a PDIs dentro de la aplicación no afectan a los archivos de mapa descargados; los cambios se guardan en un archivo local.</string>
   <string name="local_openstreetmap_uploading_poi">Enviando PDIs…</string>
