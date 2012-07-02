@@ -134,6 +134,7 @@ public class BinaryMapRouteReaderAdapter {
 			} else if (t.equalsIgnoreCase("lanes") && v != null) {
 				intValue = -1;
 				int i = 0;
+				type = LANES;
 				while (i < v.length() && Character.isDigit(v.charAt(i))) {
 					i++;
 				}

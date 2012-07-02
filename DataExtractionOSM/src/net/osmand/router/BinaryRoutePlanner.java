@@ -788,6 +788,8 @@ public class BinaryRoutePlanner {
 					// That code is incorrect (when segment is processed itself,
 					// then it tries to make wrong u-turn) - 
 					// this situation should be very carefully checked in future
+//					System.out.println(segment.getRoad().getName() + " " + next.getRoad().getName());
+//					System.out.println(next.distanceFromStart + " " + distFromStart);
 //					next.distanceFromStart = gDistFromStart;
 //					next.parentRoute = segment;
 //					next.parentSegmentEnd = segmentEnd;
@@ -876,8 +878,12 @@ public class BinaryRoutePlanner {
 			}
 			if (t != null || i == result.size()) {
 				if (toUpdate >= 0) {
-					result.get(toUpdate).setDescription(
-							result.get(toUpdate).getTurnType().toString() + String.format(" and go %.2f meters", dist));
+					String turn = result.get(toUpdate).getTurnType().toString();
+					if(result.get(toUpdate).getTurnType().getLanes() != null) {
+						turn += Arrays.toString(result.get(toUpdate).getTurnType().getLanes());
+					}
+					result.get(toUpdate).setDescription( turn
+							 + String.format(" and go %.2f meters", dist));
 				}
 				toUpdate = i;
 				dist = 0;
@@ -902,7 +908,7 @@ public class BinaryRoutePlanner {
 					name = "";
 				}
 				if (ref != null) {
-					name += " " + ref;
+					name += " (" + ref +") ";
 				}
 				StringBuilder additional = new StringBuilder();
 				additional.append("time = \"").append(res.getSegmentTime()).append("\" ");
@@ -996,9 +1002,6 @@ public class BinaryRoutePlanner {
 				int ls = prev.getObject().getLanes();
 				int left = 0;
 				int right = 0;
-				if (ls > 0) {
-					lanes = new int[ls];
-				}
 				if(attachedRoutes != null){
 					for(RouteSegmentResult rs : attachedRoutes){
 						double ex = MapUtils.degreesDiff(rs.getBearingBegin(), rr.getBearingBegin());
@@ -1017,20 +1020,23 @@ public class BinaryRoutePlanner {
 						}
 					}
 				}
+				if(kr && left == 0) {
+					left = 1;
+				} else if(kl && right == 0) {
+					right = 1;
+				}
 				int current = rr.getObject().getLanes();
 				if (current <= 0) {
 					current = 1;
 				}
-				if(lanes != null) {
-					if(current + left + right != ls){
-						lanes = null;
-					} else {
-						for(int it=0; it< ls; it++) {
-							if(it < left || it >= left + current) {
-								lanes[it] = 0;
-							} else {
-								lanes[it] = 1;
-							}
+				if(ls >= 0 && current + left + right >= ls){
+					lanes = new int[current + left + right];
+					ls = current + left + right;
+					for(int it=0; it< ls; it++) {
+						if(it < left || it >= left + current) {
+							lanes[it] = 0;
+						} else {
+							lanes[it] = 1;
 						}
 					}
 				}

@@ -624,6 +624,11 @@ public class MapActivityLayers {
 		return mapControlsLayer;
 	}
 	
+	public RouteInfoLayer getRouteInfoLayer() {
+		return routeInfoLayer;
+	}
+	
+	
 	public MapTileLayer getMapTileLayer() {
 		return mapTileLayer;
 	}

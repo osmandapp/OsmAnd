@@ -1,6 +1,8 @@
 package net.osmand.plus.views;
 
 
+import java.util.Arrays;
+
 import net.osmand.Algoritms;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
@@ -12,7 +14,9 @@ import net.osmand.router.TurnType;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -61,6 +65,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private MapStackControl rightStack;
 	private MapStackControl leftStack;
 	private ViewGroup statusBar;
+	private MapInfoControl lanesControl;
 
 	
 
@@ -146,6 +151,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 		statusBar = createStatusBar();
 		statusBar.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_top));
 		
+		lanesControl = createLanesControl();
+		lanesControl.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
+		
 		rightStack = new MapStackControl(view.getContext());
 		rightStack.addStackView(createAltitudeControl());
 		rightStack.addStackView(createDistanceControl());
@@ -180,6 +188,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		
 		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.FILL_PARENT,
+				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER_HORIZONTAL | Gravity.TOP);
+		flp.topMargin = (int) (topMargin  + scaleCoefficient * 8);
+		lanesControl.setLayoutParams(flp);
+		
+		
+		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.FILL_PARENT,
 				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.LEFT);
 		flp.leftMargin = STATUS_BAR_MARGIN_X;
 		flp.topMargin = topMargin;
@@ -195,6 +209,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		parent.addView(rightStack);
 		parent.addView(leftStack);
 		parent.addView(statusBar);
+		parent.addView(lanesControl);
 	}
 
 	
@@ -222,6 +237,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			cachedRotate = view.getRotate();
 			compassView.invalidate();
 		}
+		lanesControl.updateInfo();
 	}
 	
 	@Override
@@ -274,6 +290,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				return false;
 			}
 		};
+		speedControl.setImageDrawable(view.getResources().getDrawable(R.drawable.info_speed));
 		speedControl.setText(null, null);
 		return speedControl;
 	}
@@ -605,6 +622,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 //				nextTurnInfo.nextTurnDirection = 580;
 //				TurnPathHelper.calcTurnPath(nextTurnInfo.pathForTurn, nextTurnInfo.turnType,nextTurnInfo.pathTransform);
 				showMiniMap = true;
+				nextTurnInfo.requestLayout();
 				view.refreshMap();
 			}
 		});
@@ -687,6 +705,93 @@ public class MapInfoLayer extends OsmandMapLayer {
 		});
 		statusBar.addView(backToLocation, params);
 		return statusBar;
+	}
+	
+	private static final float miniCoeff = 2f;
+	private MapInfoControl createLanesControl() {
+		final RoutingHelper routingHelper = routeLayer.getHelper();
+		final Path laneStraight = new Path();
+		Matrix pathTransform = new Matrix();
+		pathTransform.postScale(scaleCoefficient / miniCoeff, scaleCoefficient / miniCoeff);
+		TurnPathHelper.calcTurnPath(laneStraight, TurnType.valueOf(TurnType.C, false), pathTransform);
+		final Paint paintBlack = new Paint();
+		paintBlack.setStyle(Style.STROKE);
+		paintBlack.setColor(Color.BLACK);
+		paintBlack.setAntiAlias(true);
+		paintBlack.setStrokeWidth(2.5f);
+		
+		final Paint paintRouteDirection = new Paint();
+		paintRouteDirection.setStyle(Style.FILL);
+		paintRouteDirection.setColor(view.getResources().getColor(R.color.nav_arrow));
+		paintRouteDirection.setAntiAlias(true);
+		final float w = 72 * scaleCoefficient / miniCoeff;
+		
+		final MapInfoControl lanesControl = new MapInfoControl(map) {
+			int[] lanes = null; 
+			
+			
+			@Override
+			protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+				int ls = (int) (lanes == null ? 0 : lanes.length * w);
+				setWDimensions(ls, (int)( w + 3 * scaleCoefficient));
+			}
+
+			@Override
+			protected void onDraw(Canvas canvas) {
+				super.onDraw(canvas);
+				//to change color immediately when needed
+				if (lanes != null && lanes.length > 0) {
+					canvas.save();
+					// canvas.translate((int) (16 * scaleCoefficient), 0);
+					for (int i = 0; i < lanes.length; i++) {
+						if ((lanes[i] & 1) == 1) {
+							paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow));
+						} else {
+							paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
+						}
+						canvas.drawPath(laneStraight, paintBlack);
+						canvas.drawPath(laneStraight, paintRouteDirection);
+						canvas.translate(w, 0);
+					}
+					canvas.restore();
+				}
+			}
+			
+			@Override
+			public boolean updateInfo() {
+				boolean visible = false;
+				RouteDirectionInfo next = null;
+				int dist = 0;
+				if (routeLayer != null && routingHelper.isRouteCalculated()) {
+					if (routingHelper.isRouterEnabled() && routingHelper.isFollowingMode()) {
+						next = routingHelper.getNextRouteDirectionInfo();
+						dist = routingHelper.getDistanceToNextRouteDirection();
+					} else {
+						dist = 0;
+						int di = map.getMapLayers().getRouteInfoLayer().getDirectionInfo();
+						if (di >= 0 && map.getMapLayers().getRouteInfoLayer().isVisible()) {
+							next = routingHelper.getRouteDirections().get(di);
+						}
+					}
+				}
+				if (next == null || dist > 450 || next.getTurnType().getLanes() == null) {
+					if (lanes != null) {
+						lanes = null;
+						requestLayout();
+						invalidate();
+					}
+				} else if (lanes == null || !Arrays.equals(lanes, next.getTurnType().getLanes())) {
+					lanes = next.getTurnType().getLanes();
+					requestLayout();
+					invalidate();
+				}
+				visible = lanes != null && lanes.length > 0;
+				updateVisibility(visible);
+				return true;
+			}
+		};
+		
+		return lanesControl;
 	}
 	
 	public void addRightStack(MapInfoControl v){

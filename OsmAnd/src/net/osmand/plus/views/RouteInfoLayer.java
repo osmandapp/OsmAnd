@@ -158,6 +158,11 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 		this.visible = visible;
 		updateVisibility();
 	}
+	
+	public int getDirectionInfo() {
+		return directionInfo;
+	}
+	
 	@Override
 	public void routeWasCancelled() {
 		directionInfo = -1;
