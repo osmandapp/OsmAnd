@@ -58,7 +58,7 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 		if (db != null) {
 			db.execSQL("INSERT INTO " + OPENSTREETMAP_TABLE_NAME +
 					" (" + OPENSTREETMAP_COL_ID + ", " + OPENSTREETMAP_COL_NAME + ", " + OPENSTREETMAP_COL_TYPE + ", " + OPENSTREETMAP_COL_SUBTYPE + ", " + OPENSTREETMAP_COL_LAT + "," + OPENSTREETMAP_COL_LON + "," + OPENSTREETMAP_COL_ACTION + "," + OPENSTREETMAP_COL_COMMENT + "," + OPENSTREETMAP_COL_OPENINGHOURS + ")" +
-					   " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", new Object[] { p.getId(), p.getName(), p.getType(), p.getSubtype(), p.getLatitude(), p.getLongitude(), OpenstreetmapRemoteUtil.stringAction.get(p.getAction()), p.getComment(), p.getOpeninghours() }); //$NON-NLS-1$ //$NON-NLS-2$
+					   " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", new Object[] { p.getId(), p.getName(), p.getType(), p.getSubtype(), p.getLatitude(), p.getLongitude(), OsmPoint.stringAction.get(p.getAction()), p.getComment(), p.getOpeninghours() }); //$NON-NLS-1$ //$NON-NLS-2$
 			cachedOpenstreetmapPoints.add(p);
 			p.setStored(true);
 			return true;
@@ -80,7 +80,7 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 					   OPENSTREETMAP_COL_ACTION + " = ? AND " +
 					   OPENSTREETMAP_COL_COMMENT + " = ? AND " +
 					   OPENSTREETMAP_COL_OPENINGHOURS + " = ?",
-					   new Object[] { p.getId(), p.getName(), p.getType(), p.getSubtype(), p.getLatitude(), p.getLongitude(), OpenstreetmapRemoteUtil.stringAction.get(p.getAction()), p.getComment(), p.getOpeninghours() }); //$NON-NLS-1$ //$NON-NLS-2$
+					   new Object[] { p.getId(), p.getName(), p.getType(), p.getSubtype(), p.getLatitude(), p.getLongitude(), OsmPoint.stringAction.get(p.getAction()), p.getComment(), p.getOpeninghours() }); //$NON-NLS-1$ //$NON-NLS-2$
 			cachedOpenstreetmapPoints.remove(p);
 			p.setStored(false);
 			return true;

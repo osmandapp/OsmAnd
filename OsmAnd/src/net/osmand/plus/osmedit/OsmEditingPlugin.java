@@ -79,8 +79,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		pwd.getEditText().setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 		cat.addPreference(pwd);
 		
-		CheckBoxPreference poiEdit = activity.createCheckBoxPreference(settings.OFFLINE_POI_EDITION, 
-				R.string.offline_poi_edition, R.string.offline_poi_edition_descr);
+		CheckBoxPreference poiEdit = activity.createCheckBoxPreference(settings.OFFLINE_EDITION,
+				R.string.offline_edition, R.string.offline_edition_descr);
 		cat.addPreference(poiEdit);
 		
 		Preference pref = new Preference(app);

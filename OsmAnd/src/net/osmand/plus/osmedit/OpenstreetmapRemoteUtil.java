@@ -14,7 +14,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.MessageFormat;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -60,18 +59,6 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 	
 //	private final static String SITE_API = "http://api06.dev.openstreetmap.org/";
 	private final static String SITE_API = "http://api.openstreetmap.org/"; //$NON-NLS-1$
-
-	public static final Map<Action, String> stringAction = new HashMap<Action, String>();
-	public static final Map<String, Action> actionString = new HashMap<String, Action>();
-	static {
-		stringAction.put(Action.CREATE, "create");
-		stringAction.put(Action.MODIFY, "modify");
-		stringAction.put(Action.DELETE, "delete");
-
-		actionString.put("create", Action.CREATE);
-		actionString.put("modify", Action.MODIFY);
-		actionString.put("delete", Action.DELETE);
-	};
 
 	private static final long NO_CHANGESET_ID = -1;
 	
@@ -336,7 +323,7 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 	}
 
 	@Override
-	public Node commitNodeImpl(Action action, final Node n, EntityInfo info, String comment){
+	public Node commitNodeImpl(OsmPoint.Action action, final Node n, EntityInfo info, String comment){
 		if (isNewChangesetRequired()){
 			changeSetId = openChangeSet(comment);
 			changeSetTimeStamp = System.currentTimeMillis();
@@ -355,11 +342,11 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 				ser.startTag(null, "osmChange"); //$NON-NLS-1$
 				ser.attribute(null, "version", "0.6");  //$NON-NLS-1$ //$NON-NLS-2$
 				ser.attribute(null, "generator", Version.getAppName(ctx)); //$NON-NLS-1$
-				ser.startTag(null, stringAction.get(action));
+				ser.startTag(null, OsmPoint.stringAction.get(action));
 				ser.attribute(null, "version", "0.6"); //$NON-NLS-1$ //$NON-NLS-2$
 				ser.attribute(null, "generator", Version.getAppName(ctx)); //$NON-NLS-1$
 				writeNode(n, info, ser, changeSetId, settings.USER_NAME.get());
-				ser.endTag(null, stringAction.get(action));
+				ser.endTag(null, OsmPoint.stringAction.get(action));
 				ser.endTag(null, "osmChange"); //$NON-NLS-1$
 				ser.endDocument();
 			} catch (IOException e) {
@@ -369,7 +356,7 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 					writer.getBuffer().toString(), ctx.getString(R.string.commiting_node), true);
 			log.debug(res+""); //$NON-NLS-1$
 			if (res != null) {
-				if (Action.CREATE == action) {
+				if (OsmPoint.Action.CREATE == action) {
 					long newId = n.getId();
 					int i = res.indexOf("new_id=\""); //$NON-NLS-1$
 					if (i > 0) {
