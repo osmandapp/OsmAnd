@@ -25,12 +25,14 @@ public class VoiceRouter {
 	private int currentDirection = 0;
  
 	private int currentStatus = STATUS_UNKNOWN;
+	private float playGoAheadDist = 0;
 
 	private long lastTimeRouteRecalcAnnounced = 0;
 	
 	// default speed to have comfortable announcements (if actual speed is higher than it would be problem)
 	// Speed in m/s 
 	protected float DEFAULT_SPEED = 12;
+	protected float TURN_DEFAULT_SPEED = 5;
 		
 	protected int PREPARE_LONG_DISTANCE = 0;
 	protected int PREPARE_LONG_DISTANCE_END = 0;
@@ -94,26 +96,34 @@ public class VoiceRouter {
 			TURN_IN_DISTANCE = 100;     //  50 sec
 			TURN_IN_DISTANCE_END = 70;  //  35 sec
 			TURN_DISTANCE = 25;         //  12 sec
-			DEFAULT_SPEED = 2f;         //   7,2 km/h
+			TURN_DEFAULT_SPEED = DEFAULT_SPEED = 2f;         //   7,2 km/h
 		} else if(router.getAppMode() == ApplicationMode.BICYCLE){
 			PREPARE_DISTANCE = 500;     //(100 sec)
 			PREPARE_DISTANCE_END = 350; //( 70 sec)
 			TURN_IN_DISTANCE = 225;     //  45 sec
 			TURN_IN_DISTANCE_END = 80;  //  16 sec
 			TURN_DISTANCE = 45;         //   9 sec  
-			DEFAULT_SPEED = 5;          //  18 km/h
+			TURN_DEFAULT_SPEED = DEFAULT_SPEED = 5;          //  18 km/h
 		} else {
 			PREPARE_DISTANCE = 1500;    //(125 sec)
 			PREPARE_DISTANCE_END = 1200;//(100 sec)
 			TURN_IN_DISTANCE = 390;     //  30 sec
 			TURN_IN_DISTANCE_END = 182; //  14 sec
-			TURN_DISTANCE = 110;         //  8 sec 
+			TURN_DISTANCE = 85;         //  10 sec
+			TURN_DEFAULT_SPEED = 8f; 	//  20 km/h
 			DEFAULT_SPEED = 13;         //  48 km/h
 		}
 	}
 		
 	private boolean isDistanceLess(float currentSpeed, double dist, double etalon){
 		if(dist < etalon || ((dist / currentSpeed) < (etalon / DEFAULT_SPEED))){
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean isDistanceLess(float currentSpeed, double dist, double etalon, double defSpeed){
+		if(dist < etalon || ((dist / currentSpeed) < (etalon / defSpeed))){
 			return true;
 		}
 		return false;
@@ -153,6 +163,7 @@ public class VoiceRouter {
 			if (currentStatus != STATUS_UTWP_TOLD) {
 				if(playMakeUTwp()){
 					currentStatus = STATUS_UTWP_TOLD;
+					playGoAheadDist = 0;
 				}
 			}
 			return;
@@ -165,6 +176,7 @@ public class VoiceRouter {
 		if(currentDirection != router.getRoute().currentDirectionInfo){
 			currentDirection = router.getRoute().currentDirectionInfo;
 			currentStatus = STATUS_UNKNOWN;
+			playGoAheadDist = 0;
 		}
 		
 		
@@ -174,6 +186,7 @@ public class VoiceRouter {
 			if(currentStatus <= STATUS_UNKNOWN){
 				if (playGoAheadToDestination()) {
 					currentStatus = STATUS_TOLD;
+					playGoAheadDist = 0;
 				}
 			}
 			return;
@@ -186,7 +199,7 @@ public class VoiceRouter {
 		// say how much to go if there is next turn is a bit far
 		if (currentStatus == STATUS_UNKNOWN) {
 			if (!isDistanceLess(speed, dist, TURN_IN_DISTANCE * 1.3)) {
-				playGoAhead(dist);
+				playGoAheadDist = dist - 80;
 			}
 			// say long distance message only for long distances > 10 km
 			// if (dist >= PREPARE_LONG_DISTANCE && !isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE)) {
@@ -203,7 +216,7 @@ public class VoiceRouter {
 		
 		
 		RouteDirectionInfo nextNext = router.getNextNextRouteDirectionInfo();
-		if(statusNotPassed(STATUS_TURN) && isDistanceLess(speed, dist, TURN_DISTANCE)){
+		if(statusNotPassed(STATUS_TURN) && isDistanceLess(speed, dist, TURN_DISTANCE, TURN_DEFAULT_SPEED)){
 			if(next.distance < TURN_IN_DISTANCE_END) {
 				playMakeTurn(next, nextNext);
 			} else {
@@ -234,6 +247,9 @@ public class VoiceRouter {
 		} else if (statusNotPassed(STATUS_UNKNOWN)){
 			// strange how we get here but
 			nextStatusAfter(STATUS_UNKNOWN);
+		} else if(statusNotPassed(STATUS_TURN_IN) && dist < playGoAheadDist) {
+			playGoAheadDist = 0;
+			playGoAhead(dist);
 		}
 	}
 
