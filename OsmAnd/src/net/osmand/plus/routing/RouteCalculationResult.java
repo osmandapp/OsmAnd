@@ -108,6 +108,12 @@ public class RouteCalculationResult {
 
 			if(turn != null) {
 				RouteDirectionInfo info = new RouteDirectionInfo(s.getSegmentSpeed(), turn);
+				if(routeInd + 1< list.size()) {
+					RouteSegmentResult next = list.get(routeInd);
+					info.setRef(next.getObject().getRef());
+					info.setStreetName(next.getObject().getName());
+				}
+				
 				String description = toString(turn, ctx);
 				info.setDescriptionRoute(description);
 				info.routePointOffset = prevLocationSize;
@@ -448,7 +454,7 @@ public class RouteCalculationResult {
 	}
 	
 	public List<RouteDirectionInfo> getDirections() {
-		return directions ;
+		return directions;
 	}
 	
 	
@@ -458,7 +464,23 @@ public class RouteCalculationResult {
 		}
 		return Collections.emptyList();
 	}
-
+	
+	public RouteSegmentResult getCurrentSegmentResult() {
+		int cs = currentRoute > 0 ? currentRoute - 1 : 0;
+		if(cs < segments.size()) {
+			return segments.get(cs);
+		}
+		return null;
+	}
+	
+	public float getCurrentMaxSpeed() {
+		RouteSegmentResult res = getCurrentSegmentResult();
+		if(res != null) {
+			return res.getObject().getMaximumSpeed();
+		}
+		return 0;
+	}
+	
 
 	public int[] getListDistance() {
 		return listDistance;

@@ -164,6 +164,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		leftStack.addStackView(createNextInfoControl());
 		leftStack.addStackView(createMiniMapControl());
 		leftStack.addStackView(createNextNextInfoControl());
+//		leftStack.addStackView(createAlarmInfoControl());
 		
 		// 2. Preparations
 		Rect topRectPadding = new Rect();
@@ -543,6 +544,55 @@ public class MapInfoLayer extends OsmandMapLayer {
 				view.refreshMap();
 			}
 		});
+		// initial state
+//		nextTurnInfo.setVisibility(View.GONE);
+		return nextTurnInfo;
+	}
+	
+	private NextTurnInfoControl createAlarmInfoControl() {
+		final RoutingHelper routingHelper = routeLayer.getHelper();
+		final NextTurnInfoControl nextTurnInfo = new NextTurnInfoControl(map, paintSmallText, paintSmallSubText, true) {
+			@Override
+			public boolean updateInfo() {
+				boolean visible = false;
+				if (routeLayer != null && routingHelper.isRouterEnabled() && routingHelper.isFollowingMode()) {
+					boolean uturnWhenPossible = routingHelper.makeUturnWhenPossible();
+					int d;
+					if(uturnWhenPossible) {
+						d = routingHelper.getDistanceToNextRouteDirection() ; 
+					} else {
+						d = routingHelper.getDistanceToNextNextRouteDirection();
+					}
+					if (d >= 0 && !showMiniMap) {
+						visible = true;
+						RouteDirectionInfo next = uturnWhenPossible? routingHelper.getNextRouteDirectionInfo() : 
+							routingHelper.getNextNextRouteDirectionInfo();
+						if (next == null) {
+							if (turnType != null) {
+								turnType = null;
+								invalidate();
+							}
+						} else if (!Algoritms.objectEquals(turnType, next.getTurnType())) {
+							turnType = next.getTurnType();
+							TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
+							invalidate();
+						}
+						if (distChanged(d, nextTurnDirection)) {
+							invalidate();
+							nextTurnDirection = d;
+						}
+						int imminent = uturnWhenPossible? routingHelper.getNextTurnImminent() : routingHelper.getNextNextTurnImminent();
+						if (turnImminent != imminent) {
+							turnImminent = imminent;
+							invalidate();
+						}
+					}
+				}
+				updateVisibility(visible);
+
+				return true;
+			}
+		};
 		// initial state
 //		nextTurnInfo.setVisibility(View.GONE);
 		return nextTurnInfo;
