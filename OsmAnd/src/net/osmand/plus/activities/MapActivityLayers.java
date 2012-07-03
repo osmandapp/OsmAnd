@@ -281,7 +281,7 @@ public class MapActivityLayers {
 				R.drawable.list_activities_transport_stops);
 		if(TransportRouteHelper.getInstance().routeIsCalculated()){
 			adapter.registerSelectedItem(R.string.layer_transport_route, 
-					routeInfoLayer.isUserDefinedVisible() ? 1 : 0, 0);
+					routeInfoLayer.isUserDefinedVisible() ? 1 : 0, R.drawable.list_activities_transport_stops);
 		}
 		
 		
