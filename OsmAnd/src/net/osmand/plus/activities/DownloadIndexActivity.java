@@ -18,7 +18,6 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -35,6 +34,7 @@ import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
+import net.osmand.osm.OSMSettings;
 import net.osmand.plus.DownloadOsmandIndexesHelper;
 import net.osmand.plus.DownloadOsmandIndexesHelper.IndexItem;
 import net.osmand.plus.IndexFileList;
@@ -63,6 +63,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StatFs;
+import android.provider.Settings;
+import android.provider.Settings.SettingNotFoundException;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -1007,14 +1009,14 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		}
 	}
 	
-
 	private Map<String, String> getCustomVars(){
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = new LinkedHashMap<String, String>();
 		map.put("App", Version.getFullVersion(this));
 		map.put("Device", Build.DEVICE);
 		map.put("Brand", Build.BRAND);
 		map.put("Model", Build.MODEL);
 		map.put("Package", getPackageName());
+		
 		try {
 			PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
 			if (info != null) {
@@ -1034,7 +1036,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
     final String beaconUrl = "http://www.google-analytics.com/__utm.gif";
     final String analyticsVersion = "4.3"; // Analytics version - AnalyticsVersion
 	public void trackEvent(String category, String action, String label, int value, String trackingAcount) {
-		Map<String, String> parameters = new HashMap<String, String>();
+		Map<String, String> parameters = new LinkedHashMap<String, String>();
 		try {
 			Map<String, String> customVariables = getCustomVars();
 			parameters.put("AnalyticsVersion", analyticsVersion);
@@ -1053,14 +1055,27 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				// "'" => "'0", ')' => "'1", '*' => "'2", '!' => "'3",
 				customVars.append((i + 1) + "!").append((n.getKey() + n.getValue()));
 			}
-			parameters.put("utme", MessageFormat.format("5({0}*{1}*{2})({3})", category, action, label == null ? "" : label, value)
-					+ customVars);
 
 			parameters.put("utmcs", "UTF-8");
 			parameters.put("utmul", "en");
-			parameters.put("utmhid", randomNumber());
+			parameters.put("utmhid", (System.currentTimeMillis()/ 1000) + "");
 			parameters.put("utmac", trackingAcount);
-			parameters.put("utmcc", "");
+			String domainHash = "app.osmand.net".hashCode()+"";
+
+			String utma = domainHash + ".";
+			File fl = getMyApplication().getSettings().extendOsmandPath(ResourceManager.APP_DIR + ".nomedia");
+			if(fl.exists()) {
+				utma += (fl.lastModified())+ ".";
+			} else {
+				utma += (randomNumber())+ ".";
+			}
+			utma += ((System.currentTimeMillis()/ 1000) + ".");
+			utma += ((System.currentTimeMillis()/ 1000) + ".");
+			utma += ((System.currentTimeMillis()/ 1000) + ".");
+			utma += "1";
+			parameters.put("utmcc", "__utma=" + utma + ";");
+			parameters.put("utme", MessageFormat.format("5({0}*{1}*{2})({3})", category, action, label == null ? "" : label, value)
+					+ customVars);
 
 			StringBuilder urlString = new StringBuilder(beaconUrl + "?");
 			Iterator<Entry<String, String>> it = parameters.entrySet().iterator();
@@ -1071,6 +1086,9 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 					urlString.append("&");
 				}
 			}
+			
+
+			log.debug(urlString);
 			URL url = new URL(urlString.toString());
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setConnectTimeout(5000);
