@@ -11,21 +11,31 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.TextInfoControl;
 
 import org.apache.commons.logging.Log;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.graphics.drawable.Drawable;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.view.View;
 
 public class OsmandMonitoringPlugin extends OsmandPlugin {
 	private static final String ID = "osmand.monitoring";
 	private OsmandSettings settings;
 	private OsmandApplication app;
+	private TextInfoControl monitoringControl;
 	private static final Log log = LogUtil.getLog(OsmandMonitoringPlugin.class);
+	private Paint paintText;
+	private Paint paintSubText;
 	
 	public OsmandMonitoringPlugin(OsmandApplication app) {
 		this.app = app;
@@ -54,6 +64,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 	@Override
 	public void registerLayers(MapActivity activity) {
+		MapInfoLayer mapInfoLayer = ((MapActivity)activity).getMapLayers().getMapInfoLayer();
+		if ((mapInfoLayer != null) && (monitoringControl == null))
+			mapInfoLayer.addRightStack(createMonitoringControl(activity));
 	}
 	
 	@Override
@@ -145,5 +158,58 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					}
 				});
 		impl.run();
+	}
+	
+	/**
+	 * @return the control to be added on a MapInfoLayer 
+	 * that shows a monitoring state (recorded/stopped)
+	 */
+	private TextInfoControl createMonitoringControl(final MapActivity mapActivity) {
+		paintText = new Paint();
+		paintText.setStyle(Style.FILL_AND_STROKE);
+		paintText.setColor(Color.BLACK);
+		paintText.setTextSize(23 * MapInfoLayer.scaleCoefficient);
+		paintText.setAntiAlias(true);
+		paintText.setStrokeWidth(4);
+
+		paintSubText = new Paint();
+		paintSubText.setStyle(Style.FILL_AND_STROKE);
+		paintSubText.setColor(Color.BLACK);
+		paintSubText.setTextSize(15 * MapInfoLayer.scaleCoefficient);
+		paintSubText.setAntiAlias(true);
+		
+		final Drawable monitoring_rec = mapActivity.getMapView().getResources().getDrawable(R.drawable.monitoring_rec);
+		final Drawable monitoring = mapActivity.getMapView().getResources().getDrawable(R.drawable.monitoring);
+		
+		monitoringControl = new TextInfoControl(mapActivity, 0, paintText, paintSubText) {
+			@Override
+			public boolean updateInfo() {
+				 //TODO
+				if (settings.SAVE_TRACK_TO_GPX.get()) {
+					setImageDrawable(monitoring);
+					return true;
+				} 
+				setImageDrawable(monitoring_rec);
+				return true;
+			}		
+			
+		};
+		monitoringControl.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Boolean isTrackMonitored = settings.SAVE_TRACK_TO_GPX.get();
+				settings.SAVE_TRACK_TO_GPX.set(!isTrackMonitored);
+				if (isTrackMonitored) {
+					monitoringControl.setImageDrawable(monitoring);
+					monitoringControl.setText("rec", null);
+					return;
+				}
+				monitoringControl.setImageDrawable(monitoring_rec);
+				monitoringControl.setText("pause", null);
+			}
+		});
+		monitoringControl.setText("rec", null);
+		monitoringControl.setImageDrawable(monitoring);
+		return monitoringControl;
 	}
 }
