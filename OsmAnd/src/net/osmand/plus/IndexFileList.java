@@ -14,6 +14,7 @@ import net.osmand.plus.DownloadOsmandIndexesHelper.IndexItem;
 public class IndexFileList implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	private boolean downloadedFromInternet = false;
 	IndexItem basemap;
 	TreeMap<String, IndexItem> indexFiles = new TreeMap<String, IndexItem>(new Comparator<String>(){
 		
@@ -35,6 +36,14 @@ public class IndexFileList implements Serializable {
 	private String mapversion;
 	
 	public IndexFileList() {
+	}
+	
+	public void setDownloadedFromInternet(boolean downloadedFromInternet) {
+		this.downloadedFromInternet = downloadedFromInternet;
+	}
+	
+	public boolean isDownloadedFromInternet() {
+		return downloadedFromInternet;
 	}
 
 	public void setMapVersion(String mapversion) {

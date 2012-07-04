@@ -66,6 +66,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private MapStackControl leftStack;
 	private ViewGroup statusBar;
 	private MapInfoControl lanesControl;
+	private TextView topText;
 
 	
 
@@ -224,8 +225,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 	@Override
 	public void onDraw(Canvas canvas, RectF latlonBounds, RectF tilesRect, DrawSettings nightMode) {
 		boolean bold = routeLayer.getHelper().isFollowingMode();
+		int color = !nightMode.isNightMode() ? Color.BLACK :  Color.BLACK;
+		if(paintText.getColor() != color) {
+			paintText.setColor(color);
+			paintSubText.setColor(color);
+			paintSmallText.setColor(color);
+			paintSmallSubText.setColor(color);
+		}
 		if(paintText.isFakeBoldText() != bold) {
-			// TODO night view
 			paintText.setFakeBoldText(true);
 			paintSubText.setFakeBoldText(true);
 			paintSmallText.setFakeBoldText(true);
@@ -239,6 +246,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 			compassView.invalidate();
 		}
 		lanesControl.updateInfo();
+//		topText.setTextColor(color);
+//		String text = "Пр.Независимости";
+//		float ts = topText.getPaint().measureText(text);
+//		int wth = topText.getRight() /*- compassView.getRight()*/;
+//		while(ts > wth && topText.getTextSize() - 1 > 5) {
+//			topText.setTextSize(topText.getTextSize() - 1);
+//			ts = topText.getPaint().measureText(text);
+//		}
+//		topText.setText(text);
 	}
 	
 	@Override
@@ -709,14 +725,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 		statusBar.addView(compassView, params);
 		
 		// Space (future text)
-		params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1);
-		TextView space = new TextView(view.getContext());
-		statusBar.addView(space, params);
+		params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT, 1);
+		topText = new TextView(view.getContext());
+		topText.setGravity(Gravity.RIGHT);
+		statusBar.addView(topText, params);
 
 		// Map and progress icon
 		Drawable globusDrawable = view.getResources().getDrawable(R.drawable.globus);
 		
-		params = new LinearLayout.LayoutParams(globusDrawable.getMinimumWidth(), globusDrawable.getMinimumHeight());
+		params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		FrameLayout fl = new FrameLayout(view.getContext());
 		statusBar.addView(fl, params);
 		

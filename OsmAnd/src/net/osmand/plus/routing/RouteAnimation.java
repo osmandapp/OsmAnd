@@ -71,7 +71,7 @@ public class RouteAnimation {
 			public void run() {
 				Location current = directions.isEmpty() ? null : new Location(directions.remove(0));
 				Location prev = current;
-				long prevTime = current.getTime();
+				long prevTime = current == null ? 0 : current.getTime();
 				float meters = metersToGoInFiveSteps(directions, current);
 				while (!directions.isEmpty() && routeAnimation != null) {
 					int timeout = (int) (time  * 1000);

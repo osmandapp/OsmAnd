@@ -34,7 +34,6 @@ import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
-import net.osmand.osm.OSMSettings;
 import net.osmand.plus.DownloadOsmandIndexesHelper;
 import net.osmand.plus.DownloadOsmandIndexesHelper.IndexItem;
 import net.osmand.plus.IndexFileList;
@@ -168,7 +167,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			}
 		}
 
-		if(downloadListIndexThread.getCachedIndexFiles() != null){
+		if (downloadListIndexThread.getCachedIndexFiles() != null && downloadListIndexThread.isDownloadedFromInternet()) {
 			setListAdapter(new DownloadIndexAdapter(downloadListIndexThread.getCachedIndexFiles()));
 		} else {
 			downloadIndexList();
@@ -197,7 +196,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		super.onPrepareOptionsMenu(menu);
 		menu.clear();
-		menu.add(0, RELOAD_ID, 0, R.string.reload);
+		menu.add(0, RELOAD_ID, 0, R.string.update_downlod_list);
 		if (getExpandableListAdapter() != null) {
 			// item.setIcon(R.drawable.ic_menu_refresh);
 			menu.add(0, SELECT_ALL_ID, 0, R.string.select_all);
@@ -266,6 +265,10 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		
 		public Map<String, IndexItem> getCachedIndexFiles() {
 			return indexFiles != null ? indexFiles.getIndexFiles() : null;
+		}
+		
+		public boolean isDownloadedFromInternet(){
+			return indexFiles != null && indexFiles.isDownloadedFromInternet();
 		}
 		
 		@Override

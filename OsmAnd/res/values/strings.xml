@@ -9,6 +9,7 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="update_downlod_list">Reload list</string>
     <string name="starting_point_too_far">Starting point too far from nearest road.</string>
     <string name="shared_location">Shared location</string>
     <string name="osmand_parking_event">Pick up the car from parking</string>
@@ -447,7 +448,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="local_index_mi_restore">Activate</string>
 	<string name="local_index_mi_backup">Deactivate</string>
 	<string name="local_index_mi_delete">Delete</string>
-	<string name="local_index_mi_reload">Refresh</string>
+	<string name="local_index_mi_reload">Reload from sdcard</string>
 	<string name="local_index_download">Download&#8230;</string>
 	<string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable : %4$s \nZooms downloaded : %5$s</string>
 	<string name="local_index_poi_data">POI data</string>

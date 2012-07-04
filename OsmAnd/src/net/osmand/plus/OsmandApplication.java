@@ -205,11 +205,12 @@ public class OsmandApplication extends Application {
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-		if (prefferedLocale != null) {
+		if (prefferedLocale != null && !newConfig.locale.getLanguage().equals(prefferedLocale.getLanguage())) {
 			newConfig.locale = prefferedLocale;
 			Locale.setDefault(prefferedLocale);
-			getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
+//			getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
+		} else {
+			super.onConfigurationChanged(newConfig);
 		}
 	}
 

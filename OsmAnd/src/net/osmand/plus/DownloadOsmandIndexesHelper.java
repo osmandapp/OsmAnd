@@ -40,6 +40,8 @@ public class DownloadOsmandIndexesHelper {
 		IndexFileList result = downloadIndexesListFromInternet(versionUrlParam);
 		if (result == null) {
 			result = new IndexFileList();
+		} else {
+			result.setDownloadedFromInternet(true);
 		}
 		//add all tts files from assets
 		listVoiceAssets(result, amanager, pm, ((OsmandApplication) ctx.getApplicationContext()).getSettings());

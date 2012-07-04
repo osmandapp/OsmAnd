@@ -275,7 +275,7 @@ public class MapActivityLayers {
 				getApplication().getGpxFileToDisplay() != null ? 1 : 0,  R.drawable.list_activities_gpx_tracks);
 		if(routeInfoLayer.couldBeVisible()){
 			adapter.registerSelectedItem(R.string.layer_route, 
-					routeInfoLayer.isUserDefinedVisible() ? 1 : 0,  0);
+					routeInfoLayer.isUserDefinedVisible() ? 1 : 0,  R.drawable.list_activities_route);
 		}
 		adapter.registerSelectedItem(R.string.layer_transport, settings.SHOW_TRANSPORT_OVER_MAP.get() ? 1 : 0, 
 				R.drawable.list_activities_transport_stops);
