@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.android.ide.eclipse.adt.debug.LaunchConfigType">
+<intAttribute key="com.android.ide.eclipse.adt.action" value="0"/>
+<stringAttribute key="com.android.ide.eclipse.adt.commandline" value=""/>
+<intAttribute key="com.android.ide.eclipse.adt.delay" value="0"/>
+<booleanAttribute key="com.android.ide.eclipse.adt.nobootanim" value="false"/>
+<intAttribute key="com.android.ide.eclipse.adt.speed" value="0"/>
+<booleanAttribute key="com.android.ide.eclipse.adt.target" value="true"/>
+<booleanAttribute key="com.android.ide.eclipse.adt.wipedata" value="false"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/OsmAnd"/>
+<listEntry value="/OsmAnd/AndroidManifest.xml"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+<listEntry value="1"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+<listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
+<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
+</listAttribute>
+<booleanAttribute key="org.eclipse.jdt.launching.ALLOW_TERMINATE" value="true"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="OsmAnd"/>
+</launchConfiguration>
