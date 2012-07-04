@@ -58,8 +58,7 @@
 		<highway value="service" speed="30" priority="0.5" dynamicPriority="0.7"/>
 		<!-- very bad roads -->
 		<highway value="track" speed="15" priority="0.3" dynamicPriority="0.5"/>
-		<!-- may not be usable by cars!! -->
-		<highway value="path" speed="10" priority="0.2" dynamicPriority="0.5"/>
+		
 		<!-- too small for cars usually -->
 		<highway value="living_street" speed="25" priority="0.5" dynamicPriority="0.5"/>
 		<!-- car are able to enter in highway=pedestrian with restrictions -->
