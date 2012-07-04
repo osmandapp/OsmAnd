@@ -877,7 +877,9 @@ public class MapActivityActions implements DialogProvider {
 		MenuItem muteMenu = menu.findItem(R.id.map_mute); 
 		if(muteMenu != null){
 			if (routingHelper.getFinalLocation() != null && routingHelper.isFollowingMode()) {
-				muteMenu.setTitle(routingHelper.getVoiceRouter().isMute() ? R.string.menu_mute_on : R.string.menu_mute_off);
+				boolean mute = routingHelper.getVoiceRouter().isMute();
+				muteMenu.setTitle(mute ? R.string.menu_mute_on : R.string.menu_mute_off);
+				muteMenu.setIcon(mute ? R.drawable.ic_menu_soundoff : R.drawable.ic_menu_soundon);
 				muteMenu.setVisible(true);
 			} else {
 				muteMenu.setVisible(false);
