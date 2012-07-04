@@ -46,6 +46,11 @@ public class Boundary {
 				// there is one way and last element is equal to the first...
 				List<Node> nodes = getOuterWays().get(0).getNodes();
 				closedWay = getOuterWays().size() == 1 && nodes.get(0).getId() == nodes.get(nodes.size() - 1).getId();
+				//if not closed, but we have only one way, make it close
+				if (!closedWay && getOuterWays().size() == 1) {
+					nodes.add(nodes.get(0));
+					closedWay = true;
+				}
 			}
 		} else {
 			closedWay = false;
@@ -130,11 +135,11 @@ public class Boundary {
 	}
 	
 	
-	public List<Way> getOuterWays() {
+	private List<Way> getOuterWays() {
 		return outerWays;
 	}
 	
-	public List<Way> getInnerWays() {
+	private List<Way> getInnerWays() {
 		return innerWays;
 	}
 	
@@ -173,6 +178,23 @@ public class Boundary {
 	
 	public long getAdminCenterId() {
 		return adminCenterId;
+	}
+
+	public void addInnerWay(Way es) {
+		innerWays.add(new Way(es));
+	}
+
+	public void addOuterWay(Way es) {
+		outerWays.add(new Way(es));
+	}
+
+	public void copyWaysFrom(Boundary boundary) {
+		getInnerWays().addAll(boundary.getInnerWays());
+		getOuterWays().addAll(boundary.getOuterWays());
+	}
+
+	public void addOuterWays(List<Way> ring) {
+		outerWays.addAll(ring);
 	}
 
 }
