@@ -471,6 +471,7 @@
 		
 		<!-- 6. AFRICA [SOURCE: GEOFABRIK.DE] -->
 		<regions siteToDownload="http://download.geofabrik.de/osm/africa/{0}.osm.pbf" region_prefix="" region_suffix="_Africa"  skip="false">
+			<region name="burkina_faso" esize="" />
 			<region name="canary_islands" esize="" />
 			<region name="ethiopia" esize="" />
 			<region name="guinea" esize="" />

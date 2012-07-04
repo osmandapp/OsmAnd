@@ -1212,6 +1212,12 @@
 				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
 				<filter hmRendered="true" minzoom="13" strokeWidth="1"/>
 				<filter minzoom="16" strokeWidth="1"/>
+				<groupFilter>
+					<filter additional="bicycle=yes" pathEffect="6_3"/>
+            				<filter appMode="bicycle" minzoom="14" strokeWidth="2" pathEffect="10_3" />
+					<filter additional="bicycle=designated" pathEffect="6_3" />
+            				<filter appMode="bicycle" minzoom="14" strokeWidth="2" pathEffect="10_3" />
+                		</groupFilter>
 			</filter>
 
 			<filter tag="highway" value="steps" color="#fa5073" pathEffect="1_2" >
