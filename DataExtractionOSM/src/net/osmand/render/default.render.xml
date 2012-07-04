@@ -977,8 +977,8 @@
 		<filter minzoom="12" shader="orchard" color="#100000" tag="landuse" value="orchard"/>
 		<filter minzoom="12" shader="vineyard" color="#abdf96" tag="landuse" value="vineyard"/>	
 		<filter minzoom="12" shader="grave_yard" color="#aacbaf" tag="landuse" value="cemetery"/>
+		<filter minzoom="12" shader="grave_yard" color="#aacbaf" tag="amenity" value="grave_yard"/>
 		<filter minzoom="12" shader="zoo" color="#100000" tag="tourism" value="zoo"/>
-		<filter minzoom="12" shader="grave_yard" color="#aacbaf" tag="landuse" value="grave_yard"/>
 		<filter minzoom="12" shader="quarry2" color="#100000" tag="landuse" value="quarry"/>
 		<filter nightMode="true" minzoom="9" shader="glacier" color="#100000" color_2="#497CAF" strokeWidth_2="2" tag="natural" value="glacier"/>
 		<filter minzoom="9" shader="glacier" color="#100000" color_2="#99ccff" strokeWidth_2="2" tag="natural" value="glacier"/>

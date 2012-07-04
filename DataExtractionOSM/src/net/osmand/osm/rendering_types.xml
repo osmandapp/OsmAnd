@@ -407,7 +407,7 @@
 		<type tag="landuse" value="basin" minzoom="10" poi_category="landuse"/>
 		<type tag="landuse" value="brownfield" minzoom="12" />
 		<type tag="landuse" value="cemetery" minzoom="11" poi_category="landuse"/>
-		<type tag="landuse" value="grave_yard" minzoom="15" poi_category="landuse"/>
+		<!-- landuse=grave_yard should be wrong tagging:   type tag="landuse" value="grave_yard" minzoom="15" poi_category="landuse"/ -->
 		<type tag="landuse" value="commercial" minzoom="10" />
 		<type tag="landuse" value="construction" minzoom="12" />
 		<type tag="landuse" value="farm" minzoom="12" />
