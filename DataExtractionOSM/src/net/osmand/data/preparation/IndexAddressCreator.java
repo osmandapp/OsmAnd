@@ -262,8 +262,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 					&& boundary.getName().equalsIgnoreCase(
 							oldBoundary.getName())) {
 				if (!oldBoundary.isClosedWay() && !boundary.isClosedWay()) {
-					oldBoundary.getInnerWays().addAll(boundary.getInnerWays());
-					oldBoundary.getOuterWays().addAll(boundary.getOuterWays());
+					oldBoundary.copyWaysFrom(boundary);
 				}
 			}
 		} else {
@@ -309,14 +308,14 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 					if (es instanceof Way) {
 						boolean inner = "inner".equals(entities.get(es)); //$NON-NLS-1$
 						if (inner) {
-							boundary.getInnerWays().add(new Way((Way) es));
+							boundary.addInnerWay((Way) es);
 						} else {
 							String wName = es.getTag(OSMTagKey.NAME);
 							// if name are not equal keep the way for further check (it could be different suburb)
 							if (Algoritms.objectEquals(wName, boundary.getName()) || wName == null) {
 								visitedBoundaryWays.add(es.getId());
 							}
-							boundary.getOuterWays().add(new Way((Way) es));
+							boundary.addOuterWay((Way) es);
 						}
 					} else if (es instanceof Node && ("admin_centre".equals(entities.get(es)) || "admin_center".equals(entities.get(es)))) {
 						boundary.setAdminCenterId(es.getId());
@@ -333,7 +332,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 					boundary.setName(e.getTag(OSMTagKey.NAME));
 					boundary.setBoundaryId(e.getId());
 					boundary.setAdminLevel(extractBoundaryAdminLevel(e));
-					boundary.getOuterWays().add(new Way((Way) e));
+					boundary.addOuterWay((Way) e);
 				}
 			}
 			return boundary;

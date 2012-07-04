@@ -227,7 +227,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		for (List<Way> ring : completedRings) {
 			boolean innerType = "inner".equals(entities.get(ring.get(0))); //$NON-NLS-1$
 			if (!innerType) {
-				outerBoundary.getOuterWays().addAll(ring);
+				outerBoundary.addOuterWays(ring);
 			} else {
 				innerWays.add(ring);
 			}
