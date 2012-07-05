@@ -866,4 +866,4 @@
   <string name="context_menu_item_delete_parking_point">Borrar marcador de parking</string>
   <string name="starting_point_too_far">Punto de inicio demasiado lejos de la carretera más cercana.</string>
   <string name="shared_location">Compartir localización</string>
-</resources>
+<string name="update_downlod_list">Reload list</string></resources>
