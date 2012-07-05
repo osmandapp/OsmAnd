@@ -866,4 +866,4 @@
   <string name="context_menu_item_delete_parking_point">Parkolásjelölő törlése</string>
   <string name="starting_point_too_far">Az indulási pont túl messze van a legközelebbi úttól</string>
   <string name="shared_location">Megosztott hely</string>
-</resources>
+<string name="update_downlod_list">Reload list</string></resources>
