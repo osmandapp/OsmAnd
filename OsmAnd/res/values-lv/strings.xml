@@ -536,7 +536,7 @@
   <string name="route_head">Turpināt</string>
   <string name="first_time_continue">Vēlāk</string>
   <string name="first_time_download">Lejuplādēt reģionus</string>
-  <string name="first_time_msg">Paldies, kad izvēlējāties OsmAnd.\nLai izmanotu aplikācijas pamatfunkcijas, ir nepieciešams lejuplādēt reģiona bezsaistes datus. Tos jūs varat lejuplādēt izpildot Uzstādījumi, Bezsaistes dati. Pēc tam jums būs iespēja meklēt pēc adreses, meklēt POI un publisko transportu.</string>
+  <string name="first_time_msg">Paldies, ka izvēlējāties OsmAnd.\nLai izmanotu aplikācijas pamatfunkcijas, ir nepieciešams lejuplādēt reģiona bezsaistes datus. Tos jūs varat lejuplādēt izpildot Uzstādījumi, Bezsaistes dati. Pēc tam jums būs iespēja meklēt pēc adreses, meklēt POI un publisko transportu.</string>
   <string name="search_poi_location">Meklēju signālu...</string>
   <string name="search_near_map">Meklēt netālu no kartes atrašanās vietas</string>
   <string name="search_nearby">Meklēt tuvumā</string>
@@ -866,4 +866,4 @@
   <string name="context_menu_item_delete_parking_point">Nodzēst parkošanās iezīmi</string>
   <string name="starting_point_too_far">Starta punkts atrodas pārāk tālu no tuvākā ceļa.</string>
   <string name="shared_location">Koplietota atrašanās</string>
-</resources>
+<string name="update_downlod_list">Reload list</string></resources>
