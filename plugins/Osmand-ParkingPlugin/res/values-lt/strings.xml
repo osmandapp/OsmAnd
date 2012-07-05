@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_buttons_no">Ne</string>
+    <string name="default_buttons_yes">Taip</string>
+    <string name="osmand_app_not_found">Osmand programa neįdiegta</string>
+    <string name="app_name">OsmAnd parkavimo įskiepis</string>
+    <string name="parking_plugin_installed">OsmAnd Parking Plugin is installed and enabled in OsmAnd settings.</string>
+</resources>
