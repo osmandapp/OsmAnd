@@ -36,7 +36,7 @@ import org.apache.commons.logging.Log;
 
 public class BinaryRoutePlanner {
 	
-	private final static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
+	public static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
 	private final int REVERSE_WAY_RESTRICTION_ONLY = 1024;
 	private final NativeLibrary nativeLib;
 	private final Map<BinaryMapIndexReader, List<RouteSubregion>> map = new LinkedHashMap<BinaryMapIndexReader, List<RouteSubregion>>();
@@ -898,9 +898,13 @@ public class BinaryRoutePlanner {
 			double startLon = MapUtils.get31LongitudeX(start.road.getPoint31XTile(start.segmentStart));
 			double endLat = MapUtils.get31LatitudeY(end.road.getPoint31YTile(end.segmentStart));
 			double endLon = MapUtils.get31LongitudeX(end.road.getPoint31XTile(end.segmentStart));
+			StringBuilder add = new StringBuilder();
+			add.append("loadedTiles = \"").append(ctx.loadedTiles).append("\" ");
+			add.append("visitedSegments = \"").append(ctx.visitedSegments).append("\" ");
+			add.append("complete_distance = \"").append(completeDistance).append("\" ");
 			println(MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"{5}\" \n"
-					+ "    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" complete_time=\"{4}\" complete_distance=\"{6}\">",
-					startLat + "", startLon + "", endLat + "", endLon + "", completeTime + "", ctx.config.routerName, completeDistance+""));
+					+ "    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" complete_time=\"{4}\" {6} >",
+					startLat + "", startLon + "", endLat + "", endLon + "", completeTime + "", ctx.config.routerName, add.toString()));
 			for (RouteSegmentResult res : result) {
 				String name = res.getObject().getName();
 				String ref = res.getObject().getRef();

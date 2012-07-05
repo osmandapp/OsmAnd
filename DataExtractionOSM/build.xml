@@ -97,10 +97,8 @@
 				<include name="OsmAndMapCreator.jar"/>
 				<include name="lib/**"/>
 				<include name="logging.properties"/>
-				<include name="OsmAndMapCreator.bat"/>
-				<include name="OsmAndMapCreator.sh"/>
-				<include name="inspector.bat"/>
-				<include name="inspector.sh"/>
+				<include name="*.bat"/>
+				<include name="*.sh"/>
 				<exclude name="lib/h2*"/>
 			</fileset>
 			<fileset dir="src/net/osmand/osm/">
