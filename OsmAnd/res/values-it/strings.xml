@@ -866,4 +866,4 @@
   <string name="context_menu_item_delete_parking_point">Cancella un marcatore di parcheggio</string>
   <string name="starting_point_too_far">Punto di partenza troppo distante dalla strada più vicina.</string>
   <string name="shared_location">Posizione condivisa</string>
-</resources>
+<string name="update_downlod_list">Reload list</string></resources>
