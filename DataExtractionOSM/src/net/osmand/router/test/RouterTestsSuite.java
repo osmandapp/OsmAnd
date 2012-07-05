@@ -14,6 +14,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
@@ -85,7 +86,7 @@ public class RouterTestsSuite {
 		return false;
 	}
 
-	private static void testRoute(Element testCase, BinaryRoutePlanner planner) throws IOException {
+	private static void testRoute(Element testCase, BinaryRoutePlanner planner) throws IOException, SAXException {
 		String vehicle = testCase.getAttribute("vehicle");
 		int loadedTiles = (int) parseFloat(testCase, "loadedTiles");
 		int visitedSegments = (int) parseFloat(testCase, "visitedSegments");
@@ -97,7 +98,14 @@ public class RouterTestsSuite {
 			System.err.println("\n\n!! Skipped test case '" + testDescription + "' because 'best_percent' attribute is not specified \n\n" );
 			return;
 		}
-		RoutingContext ctx = new RoutingContext(RoutingConfiguration.getDefault().build(vehicle, true));
+		String xmlPath = DataExtractionSettings.getSettings().getRoutingXmlPath();
+		Builder builder;
+		if(xmlPath.equals("routing.xml")){
+			builder = RoutingConfiguration.getDefault() ;
+		} else{
+			builder = RoutingConfiguration.parseFromInputStream(new FileInputStream(xmlPath));
+		}
+		RoutingContext ctx = new RoutingContext(builder.build(vehicle, true));
 		String skip = testCase.getAttribute("skip_comment");
 		if (skip != null && skip.length() > 0) {
 			System.err.println("\n\n!! Skipped test case '" + testDescription + "' because '" + skip + "'\n\n" );
