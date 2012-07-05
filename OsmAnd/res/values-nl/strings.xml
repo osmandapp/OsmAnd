@@ -874,4 +874,4 @@
   <string name="context_menu_item_delete_parking_point">Verwijder parkeerpositie markering</string>
   <string name="starting_point_too_far">Startpunt te ver van de dichtstbijzijnde weg.</string>
   <string name="shared_location">Gedeelde locatie</string>
-</resources>
+<string name="update_downlod_list">Reload list</string></resources>
