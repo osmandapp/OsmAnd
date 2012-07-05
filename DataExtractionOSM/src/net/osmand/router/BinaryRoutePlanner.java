@@ -784,18 +784,18 @@ public class BinaryRoutePlanner {
 			} else {
 				// the segment was already visited! We need to follow better route if it exists
 				// that is very strange situation and almost exception (it can happen when we underestimate distnceToEnd)
-				if (distFromStart < next.distanceFromStart) {
+				if (distFromStart < next.distanceFromStart && next.road.id != segment.road.id) {
 					// That code is incorrect (when segment is processed itself,
 					// then it tries to make wrong u-turn) - 
-					// this situation should be very carefully checked in future
+					// this situation should be very carefully checked in future (seems to be fixed)
 //					System.out.println(segment.getRoad().getName() + " " + next.getRoad().getName());
-//					System.out.println(next.distanceFromStart + " " + distFromStart);
-//					next.distanceFromStart = gDistFromStart;
-//					next.parentRoute = segment;
-//					next.parentSegmentEnd = segmentEnd;
-//					if (ctx.visitor != null) {
-//						ctx.visitor.visitSegment(next, false);
-//					}
+//					System.out.println(next.distanceFromStart + " ! " + distFromStart);
+					next.distanceFromStart = distFromStart;
+					next.parentRoute = segment;
+					next.parentSegmentEnd = segmentEnd;
+					if (ctx.visitor != null) {
+						ctx.visitor.visitSegment(next, false);
+					}
 				}
 			}
 			

@@ -43,6 +43,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Handler;
 import android.text.format.DateFormat;
 import android.view.accessibility.AccessibilityManager;
@@ -202,13 +203,19 @@ public class OsmandApplication extends Application {
 		super.onLowMemory();
 		manager.onLowMemory();
 	}
+	
+	
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		if (prefferedLocale != null && !newConfig.locale.getLanguage().equals(prefferedLocale.getLanguage())) {
-			newConfig.locale = prefferedLocale;
+			super.onConfigurationChanged(newConfig);
+			// ugly fix ! On devices after 4.0 screen is blinking when you rotate device!
+			if(Build.VERSION.SDK_INT < 14 ){
+				newConfig.locale = prefferedLocale;
+			}
+			getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());				
 			Locale.setDefault(prefferedLocale);
-//			getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
 		} else {
 			super.onConfigurationChanged(newConfig);
 		}
