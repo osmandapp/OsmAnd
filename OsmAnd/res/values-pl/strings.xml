@@ -680,7 +680,7 @@
   <string name="select_plugin_to_activate">Dotknij wtyczki aby ją aktywować lub dezaktywować. (Może być wymagane ponowne uruchomienie OsmAnd.)</string>
   <string name="prefs_plugins_descr">Wtyczki dostarczają możliwość ustawienia zaawansowanych ustawień oraz dodatkową funkcjonalność do aplikacji, taką jak zapisywanie ścieżek, kafelki map, tryb wyłączonego ekranu, ustawienia dostępności i inne.</string>
   <string name="prefs_plugins">Zarządzanie wtyczkami</string>
-  <string name="tip_recent_changes_0_8_0_t">"Zmiany w 0.8.0 : \n\t- *Obsługa wtyczek*\n\t - Większość funkcjonalności jest pogrupowana i może być aktywowana/dezaktywowana w Menadżerze Wtyczek. Możesz aktywować źródła map, ustawienia zapisu ścieżek oraz wiele innych wcześniej istniejących i nowych funkcjonalności.\n\t- *Obsługa nowego formatu danych offline*\n\t - Renderowanie map stało się szybsze i bardziej dokładne (problemy z linią brzegową i terenami zalanymi są w większości naprawione).\n\t - Musisz pobrać zupełnie nowe dane offline (stary format danych nie będzie już obsługiwany)\n\t- *Routing offline*\n\t - Routing offline został poprawiony\n\t-  *Poprawki użyteczności oraz UI*\n\t - Poprawione w wielu kwestiach"</string>
+  <string name="tip_recent_changes_0_8_0_t">"Zmiany w 0.8.0 : \n\t- *Obsługa wtyczek*\n\t - Większość funkcjonalności jest pogrupowana i może być aktywowana/dezaktywowana w Menadżerze Wtyczek. Możesz aktywować źródła map, ustawienia zapisu ścieżek oraz wiele innych wcześniej istniejących i nowych funkcjonalności.\n\t- *Obsługa nowego formatu danych offline*\n\t - Renderowanie map stało się szybsze i bardziej dokładne (problemy z linią brzegową i terenami zalanymi są w większości naprawione).\n\t - Musisz pobrać zupełnie nowe dane offline (stary format danych nie będzie już obsługiwany)\n\t- *Routing offline*\n\t - Routing offline został poprawiony\n\t- *Poprawki użyteczności oraz UI*\n\t - Poprawione w wielu kwestiach"</string>
   <string name="osm_editing_plugin_description">Pokaż ustawienia do konfiguracji poprawiania danych OSM - zbieranie/modyfikowanie obiektów POI, otwieranie/komentowanie błędów OSM oraz dodawanie zapisanych ścieżek GPX (wymaga podania danych uwierzytelniających OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Mapy wektorowe mogą wyświetlać się szybciej. Może nie działać dobrze na niektórych urządzeniach.</string>
   <string name="simulate_route_progression_manually">Simulate route progression manually</string>
@@ -864,4 +864,4 @@
   <string name="context_menu_item_delete_parking_point">Delete a parking marker</string>
   <string name="starting_point_too_far">Punkt startowy za daleko do najbliższej drogi.</string>
   <string name="shared_location">Shared location</string>
-</resources>
+<string name="update_downlod_list">Reload list</string></resources>
