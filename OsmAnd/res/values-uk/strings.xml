@@ -875,4 +875,4 @@
   <string name="context_menu_item_delete_parking_point">Delete a parking marker</string>
   <string name="starting_point_too_far">Starting point too far from nearest road.</string>
   <string name="shared_location">Shared location</string>
-</resources>
+<string name="update_downlod_list">Reload list</string></resources>
