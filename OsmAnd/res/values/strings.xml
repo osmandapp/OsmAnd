@@ -9,6 +9,11 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="global_app_allocated_memory_descr">Allocated memory %1$s MB (Android limit %2$s MB, dalvik %3$s MB).</string>
+    <string name="global_app_allocated_memory">Allocated memory</string>
+    <string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (dalvik %2$s MB, other %3$s MB).
+        Proportional memory %4$s MB (Android limit %5$s MB, dalvik %6$s MB).</string>
+    <string name="native_app_allocated_memory">Total native memory</string>
     <string name="update_downlod_list">Reload list</string>
     <string name="starting_point_too_far">Starting point too far from nearest road.</string>
     <string name="shared_location">Shared location</string>

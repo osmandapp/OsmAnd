@@ -36,7 +36,7 @@ import org.apache.commons.logging.Log;
 
 public class BinaryRoutePlanner {
 	
-	private final static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
+	public static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
 	private final int REVERSE_WAY_RESTRICTION_ONLY = 1024;
 	private final NativeLibrary nativeLib;
 	private final Map<BinaryMapIndexReader, List<RouteSubregion>> map = new LinkedHashMap<BinaryMapIndexReader, List<RouteSubregion>>();
@@ -784,18 +784,18 @@ public class BinaryRoutePlanner {
 			} else {
 				// the segment was already visited! We need to follow better route if it exists
 				// that is very strange situation and almost exception (it can happen when we underestimate distnceToEnd)
-				if (distFromStart < next.distanceFromStart) {
+				if (distFromStart < next.distanceFromStart && next.road.id != segment.road.id) {
 					// That code is incorrect (when segment is processed itself,
 					// then it tries to make wrong u-turn) - 
-					// this situation should be very carefully checked in future
+					// this situation should be very carefully checked in future (seems to be fixed)
 //					System.out.println(segment.getRoad().getName() + " " + next.getRoad().getName());
-//					System.out.println(next.distanceFromStart + " " + distFromStart);
-//					next.distanceFromStart = gDistFromStart;
-//					next.parentRoute = segment;
-//					next.parentSegmentEnd = segmentEnd;
-//					if (ctx.visitor != null) {
-//						ctx.visitor.visitSegment(next, false);
-//					}
+//					System.out.println(next.distanceFromStart + " ! " + distFromStart);
+					next.distanceFromStart = distFromStart;
+					next.parentRoute = segment;
+					next.parentSegmentEnd = segmentEnd;
+					if (ctx.visitor != null) {
+						ctx.visitor.visitSegment(next, false);
+					}
 				}
 			}
 			
@@ -898,9 +898,13 @@ public class BinaryRoutePlanner {
 			double startLon = MapUtils.get31LongitudeX(start.road.getPoint31XTile(start.segmentStart));
 			double endLat = MapUtils.get31LatitudeY(end.road.getPoint31YTile(end.segmentStart));
 			double endLon = MapUtils.get31LongitudeX(end.road.getPoint31XTile(end.segmentStart));
+			StringBuilder add = new StringBuilder();
+			add.append("loadedTiles = \"").append(ctx.loadedTiles).append("\" ");
+			add.append("visitedSegments = \"").append(ctx.visitedSegments).append("\" ");
+			add.append("complete_distance = \"").append(completeDistance).append("\" ");
 			println(MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"{5}\" \n"
-					+ "    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" complete_time=\"{4}\" complete_distance=\"{6}\">",
-					startLat + "", startLon + "", endLat + "", endLon + "", completeTime + "", ctx.config.routerName, completeDistance+""));
+					+ "    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" complete_time=\"{4}\" {6} >",
+					startLat + "", startLon + "", endLat + "", endLon + "", completeTime + "", ctx.config.routerName, add.toString()));
 			for (RouteSegmentResult res : result) {
 				String name = res.getObject().getName();
 				String ref = res.getObject().getRef();

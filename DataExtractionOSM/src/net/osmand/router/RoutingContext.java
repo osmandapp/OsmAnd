@@ -45,13 +45,13 @@ public class RoutingContext {
 	// 5. debug information (package accessor)
 	long timeToLoad = 0;
 	long timeToCalculate = 0;
-	int loadedTiles = 0;
+	public int loadedTiles = 0;
 	int maxLoadedTiles = 0;
 	int loadedPrevUnloadedTiles = 0;
 	int unloadedTiles = 0;
 	TIntHashSet distinctUnloadedTiles = new TIntHashSet();
-	int visitedSegments = 0;
-	int relaxedSegments = 0;
+	public int visitedSegments = 0;
+	public int relaxedSegments = 0;
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
 	

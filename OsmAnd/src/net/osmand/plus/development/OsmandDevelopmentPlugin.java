@@ -7,6 +7,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import android.content.Intent;
+import android.os.Debug;
+import android.os.Debug.MemoryInfo;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -72,5 +74,30 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			}
 		});
 		cat.addPreference(pref);
+		
+		pref = new Preference(app);
+		pref.setTitle(R.string.global_app_allocated_memory);
+		
+		long javaAvailMem = (Runtime.getRuntime().totalMemory() -  Runtime.getRuntime().freeMemory())/ (1024*1024l);
+		long javaTotal = Runtime.getRuntime().totalMemory() / (1024*1024l);
+		long dalvikSize = android.os.Debug.getNativeHeapAllocatedSize() / (1024*1024l);
+		pref.setSummary(activity.getString(R.string.global_app_allocated_memory_descr, javaAvailMem, javaTotal, dalvikSize));
+		cat.addPreference(pref);
+		
+//		ActivityManager activityManager = (ActivityManager)activity.getSystemService(Context.ACTIVITY_SERVICE);
+//		ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+//		activityManager.getMemoryInfo(memoryInfo);
+//		long totalSize = memoryInfo.availMem / (1024*1024l);
+		MemoryInfo mem = new Debug.MemoryInfo();
+		Debug.getMemoryInfo(mem);
+		pref = new Preference(app);
+		pref.setTitle(R.string.native_app_allocated_memory);
+		pref.setSummary(activity.getString(R.string.native_app_allocated_memory_descr 
+				, mem.nativePrivateDirty / 1024, mem.dalvikPrivateDirty / 1024 , mem.otherPrivateDirty / 1024
+				, mem.nativePss / 1024, mem.dalvikPss / 1024 , mem.otherPss / 1024));
+		pref.setKey("test_voice_commands");
+		cat.addPreference(pref);
+		
+		
 	}
 }
