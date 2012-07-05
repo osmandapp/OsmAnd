@@ -277,7 +277,7 @@
 	<string name="local_index_mi_restore">Aktivieren</string>
 	<string name="local_index_mi_backup">Deaktivieren</string>
 	<string name="local_index_mi_delete">Löschen</string>
-	<string name="local_index_mi_reload">Aktualisieren</string>
+	<string name="local_index_mi_reload">Liste aktualisieren</string>
 	<string name="local_index_download">Herunterladen …</string>
 	<string name="local_index_tile_data">Kacheldaten: %1$s \nMinimale Vergrößerung: %2$d\nMaximale Vergrößerung: %3$d\nHerunterladbar: %4$s \nHeruntegeladene Vergrößerungen: %5$s</string>
 	<string name="local_index_poi_data">POI-Daten</string>
