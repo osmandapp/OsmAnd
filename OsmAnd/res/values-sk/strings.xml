@@ -864,4 +864,4 @@
   <string name="context_menu_item_delete_parking_point">Zmazať parkovaciu značku</string>
   <string name="starting_point_too_far">Počiatočný bod je príliš ďaleko od najbližšej cesty.</string>
   <string name="shared_location">Zdieľané umiestnenie</string>
-</resources>
+<string name="update_downlod_list">Reload list</string></resources>
