@@ -250,7 +250,7 @@
   <string name="local_index_mi_restore">Aktivizēt</string>
   <string name="local_index_mi_backup">Deaktivizēt</string>
   <string name="local_index_mi_delete">Dzēst</string>
-  <string name="local_index_mi_reload">Atjaunināt</string>
+  <string name="local_index_mi_reload">Nolasīt no sd kartes.</string>
   <string name="local_index_download">Lejupielādes...</string>
   <string name="local_index_tile_data">Bilžu dati: %1$s \nMinimālais palielinājums : %2$d\nMaksimālais palielinājums : %3$d\nLejuplādējams : %4$s \nLejuplādēti palielinājumi : %5$s</string>
   <string name="local_index_poi_data">POI dati</string>
@@ -866,4 +866,4 @@
   <string name="context_menu_item_delete_parking_point">Nodzēst parkošanās iezīmi</string>
   <string name="starting_point_too_far">Starta punkts atrodas pārāk tālu no tuvākā ceļa.</string>
   <string name="shared_location">Koplietota atrašanās</string>
-<string name="update_downlod_list">Reload list</string></resources>
+<string name="update_downlod_list">Pārlasīt sarakstu</string><string name="global_app_allocated_memory_descr">Allocated memory %1$s MB (Android limit %2$s MB, dalvik %3$s MB).</string><string name="global_app_allocated_memory">Allocated memory</string><string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (dalvik %2$s MB, other %3$s MB). Proportional memory %4$s MB (Android limit %5$s MB, dalvik %6$s MB).</string><string name="native_app_allocated_memory">Total native memory</string></resources>
