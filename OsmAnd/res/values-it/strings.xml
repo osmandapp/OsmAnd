@@ -10,12 +10,12 @@
   <string name="local_openstreetmap_were_uploaded">{0} PDI/Bugs sono stati caricati</string>
   <string name="local_openstreetmap_uploadall">Carica tutti</string>
   <string name="local_openstreetmap_items">" "</string>
-  <string name="local_openstreetmap_show">Modifica sulla mappa</string>
+  <string name="local_openstreetmap_show">Mostra sulla mappa</string>
   <string name="local_openstreetmap_upload">Carica in OSM la modifica</string>
   <string name="local_openstreetmap_delete">Cancella la modifica</string>
-  <string name="local_openstreetmap_descr_title">Modifica asincrona dei OSM:</string>
-  <string name="local_openstreetmap_settings">Nodi/Bugs OSM salvati in locale</string>
-  <string name="local_openstreetmap_settings_descr">Mostra e gestisci i nodi/Bugs OSM inseriti nel database locale</string>
+  <string name="local_openstreetmap_descr_title">Modifica asincrona di OSM:</string>
+  <string name="local_openstreetmap_settings">PDI/Bugs OSM salvati in locale</string>
+  <string name="local_openstreetmap_settings_descr">Mostra e gestisci i PDI/Bugs OSM inseriti nel database locale</string>
   <string name="live_monitoring_descr">Abilita l\'invio di richieste HTTP ad un specifico servizio web</string>
   <string name="live_monitoring">Online Live Tracking</string>
   <string name="live_monitoring_interval_descr">Specifica l\'intervallo del Live Tracking</string>
@@ -150,7 +150,7 @@
   <string name="local_index_mi_restore">Ripristina</string>
   <string name="local_index_mi_backup">Backup</string>
   <string name="local_index_mi_delete">Elimina</string>
-  <string name="local_index_mi_reload">Ricarica</string>
+  <string name="local_index_mi_reload">Ricarica dalla scheda sd</string>
   <string name="local_index_download">Scarica…</string>
   <string name="local_index_tile_data">Dati tile: %1$s \nZoom minimo : %2$d\nZoom massimo : %3$d\nScaricabile : %4$s \nZoom scaricati : %5$s</string>
   <string name="local_index_poi_data">Dati PDI</string>
@@ -866,4 +866,4 @@
   <string name="context_menu_item_delete_parking_point">Cancella un marcatore di parcheggio</string>
   <string name="starting_point_too_far">Punto di partenza troppo distante dalla strada più vicina.</string>
   <string name="shared_location">Posizione condivisa</string>
-<string name="update_downlod_list">Reload list</string></resources>
+<string name="update_downlod_list">Ricarica lista</string><string name="global_app_allocated_memory_descr">Allocated memory %1$s MB (Android limit %2$s MB, dalvik %3$s MB).</string><string name="global_app_allocated_memory">Allocated memory</string><string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (dalvik %2$s MB, other %3$s MB). Proportional memory %4$s MB (Android limit %5$s MB, dalvik %6$s MB).</string><string name="native_app_allocated_memory">Total native memory</string></resources>
