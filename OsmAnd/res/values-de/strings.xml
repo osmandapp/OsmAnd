@@ -866,5 +866,9 @@
 	<string name="gpxup_public">Public</string>
 	<string name="gpxup_identifiable">Identifiable</string>
 	<string name="gpxup_trackable">Trackable</string>
-	<string name="gpxup_private">Privat</string>
-<string name="global_app_allocated_memory_descr">Allocated memory %1$s MB (Android limit %2$s MB, dalvik %3$s MB).</string><string name="global_app_allocated_memory">Allocated memory</string><string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (dalvik %2$s MB, other %3$s MB). Proportional memory %4$s MB (Android limit %5$s MB, dalvik %6$s MB).</string><string name="native_app_allocated_memory">Total native memory</string></resources>
+	<string name="gpxup_private">Private</string>
+	<string name="global_app_allocated_memory_descr">Allokierter Speicher %1$s MB (Android Limit %2$s MB, Dalvik %3$s MB).</string>
+	<string name="global_app_allocated_memory">Allokierter Speicher</string>
+	<string name="native_app_allocated_memory_descr">Insgesamt durch App allokierter nativer Speicher %1$s MB (Dalvik %2$s MB, anderer %3$s MB). Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string>
+	<string name="native_app_allocated_memory">Gesamter nativer Speicher</string>
+</resources>
