@@ -233,7 +233,7 @@
   <string name="local_index_mi_restore">Obnovit</string>
   <string name="local_index_mi_backup">Zálohovat</string>
   <string name="local_index_mi_delete">Smazat</string>
-  <string name="local_index_mi_reload">Znovu nahrát</string>
+  <string name="local_index_mi_reload">Znovu nahrát z SD karty</string>
   <string name="local_index_download">Stáhnout…</string>
   <string name="local_index_tile_data">Zdroj map. dlaždic: %1$s \nMinimální zvětšení : %2$d\nMaximální zvětšení : %3$d\nStahovatelné : %4$s \nStažené zvětšení : %5$s</string>
   <string name="local_index_poi_data">Data POI</string>
@@ -867,4 +867,4 @@
   <string name="context_menu_item_delete_parking_point">Smazat místo parkování</string>
   <string name="starting_point_too_far">Počáteční bod je příliš daleko nejbližší silnici.</string>
   <string name="shared_location">Sdílená pozice</string>
-<string name="update_downlod_list">Reload list</string></resources>
+<string name="update_downlod_list">Obnovit seznam</string><string name="global_app_allocated_memory_descr">Allocated memory %1$s MB (Android limit %2$s MB, dalvik %3$s MB).</string><string name="global_app_allocated_memory">Allocated memory</string><string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (dalvik %2$s MB, other %3$s MB). Proportional memory %4$s MB (Android limit %5$s MB, dalvik %6$s MB).</string><string name="native_app_allocated_memory">Total native memory</string></resources>
