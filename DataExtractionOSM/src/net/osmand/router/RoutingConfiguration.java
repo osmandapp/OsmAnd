@@ -27,6 +27,7 @@ public class RoutingConfiguration {
 
 	// 1.2 Dynamic road prioritizing (heuristic)
 	public boolean useDynamicRoadPrioritising = true;
+	public int dynamicRoadPriorityDistance = 0;
 
 	// 1.3 Relaxing strategy
 	public boolean useRelaxingStrategy = true;
@@ -43,6 +44,7 @@ public class RoutingConfiguration {
 	
 	// 1.6 Used to calculate route in movement
 	public Double initialDirection;
+
 
 	public static class Builder {
 		// Design time storage
@@ -67,6 +69,7 @@ public class RoutingConfiguration {
 
 			i.useDynamicRoadPrioritising = parseSilentBoolean(getAttribute(router, "useDynamicRoadPrioritising"), i.useDynamicRoadPrioritising);
 			i.useRelaxingStrategy = parseSilentBoolean(getAttribute(router, "useRelaxingStrategy"), i.useRelaxingStrategy);
+			i.dynamicRoadPriorityDistance = parseSilentInt(getAttribute(router, "dynamicRoadPriorityDistance"), i.dynamicRoadPriorityDistance);
 			i.ITERATIONS_TO_RELAX_NODES = parseSilentInt(getAttribute(router, "iterationsToRelaxRoutes"), i.ITERATIONS_TO_RELAX_NODES);
 			i.RELAX_NODES_IF_START_DIST_COEF = parseSilentDouble(getAttribute(router, "relaxNodesIfStartDistSmallCoeff"), i.RELAX_NODES_IF_START_DIST_COEF);
 			i.planRoadDirection = parseSilentInt(getAttribute(router, "planRoadDirection"), i.planRoadDirection);

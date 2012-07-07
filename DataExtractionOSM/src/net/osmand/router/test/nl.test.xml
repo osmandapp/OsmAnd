@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <router_tests>
-	<test regions="" description="Long route" best_percent="5" vehicle="car" 
+	<test regions="" description="Long route to Maastricht" best_percent="5" vehicle="car" 
     start_lat="52.290868841722975" start_lon="4.831130504608154" target_lat="50.85492897352447" target_lon="5.701689720153809" complete_time="7332.0825" loadedTiles = "165" visitedSegments = "1783" complete_distance = "207917.34"  >
 		<segment id="7366509" start="9" end="11" time="7.7903514" name="" distance="75.739525" turn="Go ahead" start_bearing="115.30754"
 			end_bearing="115.46335" description="Go ahead and go 75.74 meters" />

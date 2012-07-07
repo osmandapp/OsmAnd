@@ -106,6 +106,10 @@ public class RoutingContext {
 	public boolean isUseDynamicRoadPrioritising() {
 		return config.useDynamicRoadPrioritising;
 	}
+	
+	public int getDynamicRoadPriorityDistance() {
+		return config.dynamicRoadPriorityDistance;
+	}
 
 	public boolean isUseRelaxingStrategy() {
 		return config.useRelaxingStrategy;

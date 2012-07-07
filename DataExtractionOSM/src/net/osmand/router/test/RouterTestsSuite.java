@@ -14,7 +14,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
-import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
@@ -27,16 +26,67 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 public class RouterTestsSuite {
-	// TODO add one international test
-	// POLAND/BELARUS (problems with way connection) The best at 100%
-//	Start lat=52.115756035004786 lon=23.56539487838745
-//	END lat=52.03710226357107 lon=23.47106695175171
-//	id=32032589 start=8 end=9
-//	id=32032656 start=0 end=18
-//	id=32031919 start=1 end=0
+	
+	private static class Parameters {
+		public File obfDir;
+		public List<File> tests = new ArrayList<File>();
+		public RoutingConfiguration.Builder configBuilder;
+		
+		public static Parameters init(String[] args) throws SAXException, IOException {
+			Parameters p = new Parameters();
+			String routingXmlFile = null;
+			String obfDirectory = null;
+			BinaryRoutePlanner.PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = false;
+			for (String a : args) {
+				if (a.startsWith("-routingXmlPath=")) {
+					routingXmlFile = a.substring("-routingXmlPath=".length());
+				} else if (a.startsWith("-verbose")) {
+					BinaryRoutePlanner.PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
+				} else if (a.startsWith("-obfDir=")) {
+					obfDirectory = a.substring("-obfDir=".length());
+				} else if (a.startsWith("-testDir=")) {
+					String testDirectory = a.substring("-testDir=".length());
+					for(File f : new File(testDirectory).listFiles()) {
+						if(f.getName().endsWith(".test.xml")){
+							p.tests.add(f);
+						}
+					}
+				} else if(!a.startsWith("-")){
+					p.tests.add(new File(a));
+				}
+			}
+
+			if (obfDirectory == null) {
+				obfDirectory = DataExtractionSettings.getSettings().getBinaryFilesDir();
+			}
+			if (obfDirectory != null && obfDirectory.length() > 0) {
+				p.obfDir = new File(obfDirectory);
+			}
+
+			if (routingXmlFile == null) {
+				routingXmlFile = DataExtractionSettings.getSettings().getRoutingXmlPath();
+			}
+			if (routingXmlFile.equals("routing.xml")) {
+				p.configBuilder = RoutingConfiguration.getDefault();
+			} else {
+				p.configBuilder = RoutingConfiguration.parseFromInputStream(new FileInputStream(routingXmlFile));
+			}
+
+			return p;
+		}
+	}
+	
 	public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
+		Parameters params = Parameters.init(args);
+		if(params.tests.isEmpty() || params.obfDir == null) {
+			println("Run router tests is console utility to test route calculation for osmand.");
+			println("\nUsage for run tests : runTestsSuite [-routingXmlPath=PATH] [-verbose]  [-obfDir=PATH] [-testDir=PATH] {individualTestPath}");
+			return;
+		}
 		List<File> files = new ArrayList<File>();
-		for (File f : new File(DataExtractionSettings.getSettings().getBinaryFilesDir()).listFiles()) {
+		
+		
+		for (File f : params.obfDir.listFiles()) {
 			if (f.getName().endsWith(".obf")) {
 				files.add(f);
 			}
@@ -49,8 +99,9 @@ public class RouterTestsSuite {
 		}
 		
 		boolean allSuccess = true;
-		for(String a : args) {
-			allSuccess &= test(a, rs);	
+		
+		for(File f : params.tests) {
+			allSuccess &= test(new FileInputStream(f), rs, params.configBuilder);	
 		}
 		if (allSuccess) {
 			System.out.println("All is successfull");
@@ -59,17 +110,21 @@ public class RouterTestsSuite {
 	}
 	
 
-	private static boolean test(String file, BinaryMapIndexReader[] rs) throws SAXException, IOException, ParserConfigurationException {
-		InputStream resource = new FileInputStream(file);
+	private static void println(String string) {
+		System.out.println(string);
+	}
+
+
+	public static boolean test(InputStream resource, BinaryMapIndexReader[] rs, RoutingConfiguration.Builder config) throws SAXException, IOException, ParserConfigurationException {
 		Document testSuite = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(resource));
 		NodeList tests = testSuite.getElementsByTagName("test");
-		
-		for(int i=0; i < tests.getLength(); i++){
+
+		for (int i = 0; i < tests.getLength(); i++) {
 			Element e = (Element) tests.item(i);
 			BinaryRoutePlanner router = new BinaryRoutePlanner(null, rs);
-			testRoute(e, router);
+			testRoute(e, router, config);
 		}
-		
+
 		return true;
 	}
 	
@@ -79,14 +134,18 @@ public class RouterTestsSuite {
 		}
 		return Float.parseFloat(e.getAttribute(attr));
 	}
-	private static boolean isIn(float expected, float value, float percent){
+	private static boolean isInOrLess(float expected, float value, float percent){
 		if(Math.abs(value/expected - 1) < percent / 100){
+			return true;
+		}
+		if(value < expected) {
+			System.err.println("Test could be adjusted value "  + value + " is much less then expected " + expected);
 			return true;
 		}
 		return false;
 	}
 
-	private static void testRoute(Element testCase, BinaryRoutePlanner planner) throws IOException, SAXException {
+	private static void testRoute(Element testCase, BinaryRoutePlanner planner, RoutingConfiguration.Builder config) throws IOException, SAXException {
 		String vehicle = testCase.getAttribute("vehicle");
 		int loadedTiles = (int) parseFloat(testCase, "loadedTiles");
 		int visitedSegments = (int) parseFloat(testCase, "visitedSegments");
@@ -98,14 +157,7 @@ public class RouterTestsSuite {
 			System.err.println("\n\n!! Skipped test case '" + testDescription + "' because 'best_percent' attribute is not specified \n\n" );
 			return;
 		}
-		String xmlPath = DataExtractionSettings.getSettings().getRoutingXmlPath();
-		Builder builder;
-		if(xmlPath.equals("routing.xml")){
-			builder = RoutingConfiguration.getDefault() ;
-		} else{
-			builder = RoutingConfiguration.parseFromInputStream(new FileInputStream(xmlPath));
-		}
-		RoutingContext ctx = new RoutingContext(builder.build(vehicle, true));
+		RoutingContext ctx = new RoutingContext(config.build(vehicle, true));
 		String skip = testCase.getAttribute("skip_comment");
 		if (skip != null && skip.length() > 0) {
 			System.err.println("\n\n!! Skipped test case '" + testDescription + "' because '" + skip + "'\n\n" );
@@ -132,16 +184,16 @@ public class RouterTestsSuite {
 			completeTime += route.get(i).getSegmentTime();
 			completeDistance += route.get(i).getDistance();
 		}
-		if(complete_time > 0 && !isIn(complete_time, completeTime, percent)) {
+		if(complete_time > 0 && !isInOrLess(complete_time, completeTime, percent)) {
 			throw new IllegalArgumentException(String.format("Complete time (expected) %s != %s (original) : %s", complete_time, completeTime, testDescription));
 		}
-		if(complete_distance > 0 && !isIn(complete_distance, completeDistance, percent)) {
+		if(complete_distance > 0 && !isInOrLess(complete_distance, completeDistance, percent)) {
 			throw new IllegalArgumentException(String.format("Complete distance (expected) %s != %s (original) : %s", complete_distance, completeDistance, testDescription));
 		}
-		if(visitedSegments > 0 && !isIn(visitedSegments, ctx.visitedSegments, percent)) {
+		if(visitedSegments > 0 && !isInOrLess(visitedSegments, ctx.visitedSegments, percent)) {
 			throw new IllegalArgumentException(String.format("Visited segments (expected) %s != %s (original) : %s", visitedSegments, ctx.visitedSegments, testDescription));
 		}
-		if(loadedTiles > 0 && !isIn(loadedTiles, ctx.loadedTiles, percent)) {
+		if(loadedTiles > 0 && !isInOrLess(loadedTiles, ctx.loadedTiles, percent)) {
 			throw new IllegalArgumentException(String.format("Loaded tiles (expected) %s != %s (original) : %s", loadedTiles, ctx.loadedTiles, testDescription));
 		}
 		
@@ -155,7 +207,7 @@ public class RouterTestsSuite {
 	}
 
 
-	private static NodeList compareBySegment(Element testCase, String testDescription, List<RouteSegmentResult> route) {
+	protected static NodeList compareBySegment(Element testCase, String testDescription, List<RouteSegmentResult> route) {
 		NodeList segments = testCase.getElementsByTagName("segment");
 		int i = 0;
 		while (i < segments.getLength() && i < route.size()) {

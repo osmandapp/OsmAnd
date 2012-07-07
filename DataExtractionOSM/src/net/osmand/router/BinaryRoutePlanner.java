@@ -364,6 +364,12 @@ public class BinaryRoutePlanner {
 		if(ctx.isUseDynamicRoadPrioritising() && next != null){
 			double priority = ctx.getRouter().getFutureRoadPriority(next.road);
 			result /= priority;
+			int dist = ctx.getDynamicRoadPriorityDistance();
+			// only firts 500 m count by dynamic priority
+			if(distToFinalPoint > dist && dist != 0){
+				result = (distToFinalPoint - dist) / ctx.getRouter().getMaxDefaultSpeed() + 
+						dist / (ctx.getRouter().getMaxDefaultSpeed() * priority);
+			}
 		}
 		return result; 
 	}
@@ -815,9 +821,9 @@ public class BinaryRoutePlanner {
 	 */
 	private List<RouteSegmentResult> prepareResult(RoutingContext ctx, RouteSegment start, RouteSegment end, boolean leftside) {
 		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
-		
+
 		RouteSegment segment = ctx.finalReverseRoute;
-		int parentSegmentStart = ctx.finalReverseEndSegment; 
+		int parentSegmentStart = ctx.finalReverseEndSegment;
 		while (segment != null) {
 			RouteSegmentResult res = new RouteSegmentResult(segment.road, parentSegmentStart, segment.segmentStart);
 			parentSegmentStart = segment.parentSegmentEnd;
@@ -825,7 +831,7 @@ public class BinaryRoutePlanner {
 			result.add(res);
 		}
 		Collections.reverse(result);
-		
+
 		segment = ctx.finalDirectRoute;
 		int parentSegmentEnd = ctx.finalDirectEndSegment;
 		while (segment != null) {
@@ -835,8 +841,7 @@ public class BinaryRoutePlanner {
 			result.add(res);
 		}
 		Collections.reverse(result);
-		
-		
+
 		// calculate time
 		float completeTime = 0;
 		float completeDistance = 0;
@@ -864,7 +869,7 @@ public class BinaryRoutePlanner {
 			rr.setSegmentTime((float) distOnRoadToPass);
 			rr.setSegmentSpeed((float) speed);
 			rr.setDistance((float) distance);
-			
+
 			completeTime += distOnRoadToPass;
 			completeDistance += distance;
 		}
@@ -879,60 +884,59 @@ public class BinaryRoutePlanner {
 			if (t != null || i == result.size()) {
 				if (toUpdate >= 0) {
 					String turn = result.get(toUpdate).getTurnType().toString();
-					if(result.get(toUpdate).getTurnType().getLanes() != null) {
+					if (result.get(toUpdate).getTurnType().getLanes() != null) {
 						turn += Arrays.toString(result.get(toUpdate).getTurnType().getLanes());
 					}
-					result.get(toUpdate).setDescription( turn
-							 + String.format(" and go %.2f meters", dist));
+					result.get(toUpdate).setDescription(turn + String.format(" and go %.2f meters", dist));
 				}
 				toUpdate = i;
 				dist = 0;
 			}
-			if ( i < result.size()) {
+			if (i < result.size()) {
 				dist += result.get(i).getDistance();
 			}
 		}
+
+		println("ROUTE : ");
+		double startLat = MapUtils.get31LatitudeY(start.road.getPoint31YTile(start.segmentStart));
+		double startLon = MapUtils.get31LongitudeX(start.road.getPoint31XTile(start.segmentStart));
+		double endLat = MapUtils.get31LatitudeY(end.road.getPoint31YTile(end.segmentStart));
+		double endLon = MapUtils.get31LongitudeX(end.road.getPoint31XTile(end.segmentStart));
+		StringBuilder add = new StringBuilder();
+		add.append("loadedTiles = \"").append(ctx.loadedTiles).append("\" ");
+		add.append("visitedSegments = \"").append(ctx.visitedSegments).append("\" ");
+		add.append("complete_distance = \"").append(completeDistance).append("\" ");
+		println(MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"{5}\" \n"
+				+ "    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" complete_time=\"{4}\" {6} >", startLat
+				+ "", startLon + "", endLat + "", endLon + "", completeTime + "", ctx.config.routerName, add.toString()));
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
-			println("ROUTE : ");
-			double startLat = MapUtils.get31LatitudeY(start.road.getPoint31YTile(start.segmentStart));
-			double startLon = MapUtils.get31LongitudeX(start.road.getPoint31XTile(start.segmentStart));
-			double endLat = MapUtils.get31LatitudeY(end.road.getPoint31YTile(end.segmentStart));
-			double endLon = MapUtils.get31LongitudeX(end.road.getPoint31XTile(end.segmentStart));
-			StringBuilder add = new StringBuilder();
-			add.append("loadedTiles = \"").append(ctx.loadedTiles).append("\" ");
-			add.append("visitedSegments = \"").append(ctx.visitedSegments).append("\" ");
-			add.append("complete_distance = \"").append(completeDistance).append("\" ");
-			println(MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"{5}\" \n"
-					+ "    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" complete_time=\"{4}\" {6} >",
-					startLat + "", startLon + "", endLat + "", endLon + "", completeTime + "", ctx.config.routerName, add.toString()));
 			for (RouteSegmentResult res : result) {
 				String name = res.getObject().getName();
 				String ref = res.getObject().getRef();
-				if(name == null) {
+				if (name == null) {
 					name = "";
 				}
 				if (ref != null) {
-					name += " (" + ref +") ";
+					name += " (" + ref + ") ";
 				}
 				StringBuilder additional = new StringBuilder();
 				additional.append("time = \"").append(res.getSegmentTime()).append("\" ");
 				additional.append("name = \"").append(name).append("\" ");
 				additional.append("distance = \"").append(res.getDistance()).append("\" ");
-				if(res.getTurnType() != null) {
+				if (res.getTurnType() != null) {
 					additional.append("turn = \"").append(res.getTurnType()).append("\" ");
-					if(res.getTurnType().getLanes() != null) {
+					if (res.getTurnType().getLanes() != null) {
 						additional.append("lanes = \"").append(Arrays.toString(res.getTurnType().getLanes())).append("\" ");
 					}
 				}
 				additional.append("start_bearing = \"").append(res.getBearingBegin()).append("\" ");
 				additional.append("end_bearing = \"").append(res.getBearingEnd()).append("\" ");
 				additional.append("description = \"").append(res.getDescription()).append("\" ");
-				println(MessageFormat.format(
-						"\t<segment id=\"{0}\" start=\"{1}\" end=\"{2}\" {3}/>",
-						(res.getObject().getId()) + "", res.getStartPointIndex() + "", res.getEndPointIndex() + "", additional.toString()));
+				println(MessageFormat.format("\t<segment id=\"{0}\" start=\"{1}\" end=\"{2}\" {3}/>", (res.getObject().getId()) + "",
+						res.getStartPointIndex() + "", res.getEndPointIndex() + "", additional.toString()));
 			}
-			println("</test>");
 		}
+		println("</test>");
 		return result;
 	}
 
