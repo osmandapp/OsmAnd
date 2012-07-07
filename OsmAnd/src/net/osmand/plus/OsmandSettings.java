@@ -578,6 +578,8 @@ public class OsmandSettings {
 	public final CommonPreference<String> LIVE_MONITORING_URL = new StringPreference("live_monitoring_url", 
 			"http://example.com?lat={0}&lon={1}&timestamp={2}&hdop={3}&altitude={4}&speed={5}").makeGlobal();
 
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> 	SHOW_MONITORING_CONTROL = new BooleanPreference("show_monitoring_control", false).makeProfile();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SHOW_OSM_BUGS = new BooleanPreference("show_osm_bugs", false).makeGlobal();	
