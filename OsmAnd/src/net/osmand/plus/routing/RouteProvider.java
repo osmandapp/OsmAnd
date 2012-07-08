@@ -1,5 +1,7 @@
 package net.osmand.plus.routing;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -30,6 +32,7 @@ import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.router.BinaryRoutePlanner;
@@ -302,7 +305,18 @@ public class RouteProvider {
 	protected RouteCalculationResult findVectorMapsRoute(Location start, LatLon end, ApplicationMode mode, boolean fast, OsmandApplication app, boolean leftSide) throws IOException {
 		BinaryMapIndexReader[] files = app.getResourceManager().getRoutingMapFiles();
 		BinaryRoutePlanner router = new BinaryRoutePlanner(NativeOsmandLibrary.getLoadedLibrary(), files);
-		RoutingConfiguration.Builder config = RoutingConfiguration.getDefault();
+		File routingXml = app.getSettings().extendOsmandPath(ResourceManager.ROUTING_XML);
+		RoutingConfiguration.Builder config ;
+		if (routingXml.exists() && routingXml.canRead()) {
+			try {
+				config = RoutingConfiguration.parseFromInputStream(new FileInputStream(routingXml));
+			} catch (SAXException e) {
+				throw new IllegalStateException(e);
+			}
+		} else {
+			config = RoutingConfiguration.getDefault();
+		}
+		
 		GeneralRouterProfile p ;
 		if (mode == ApplicationMode.BICYCLE) {
 			p = GeneralRouterProfile.BICYCLE;

@@ -64,6 +64,7 @@ import android.view.WindowManager;
 public class ResourceManager {
 
 	public static final String APP_DIR = "osmand/"; //$NON-NLS-1$
+	public static final String ROUTING_XML = APP_DIR + "routing.xml";
 	public static final String POI_PATH = APP_DIR + IndexConstants.POI_INDEX_DIR; 
 	public static final String VOICE_PATH = APP_DIR + IndexConstants.VOICE_INDEX_DIR;
 	public static final String GPX_PATH = APP_DIR + "tracks";
