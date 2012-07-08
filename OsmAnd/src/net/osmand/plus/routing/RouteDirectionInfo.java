@@ -15,7 +15,7 @@ public class RouteDirectionInfo {
 	private String ref;
 	
 	private String streetName;
-
+	
 
 	// Constructor to verify average speed always > 0
 	public RouteDirectionInfo(float averageSpeed, TurnType turnType) {
@@ -64,7 +64,7 @@ public class RouteDirectionInfo {
 	public TurnType getTurnType() {
 		return turnType;
 	}
-
+	
 
 	// calculated vars
 	// after action (excluding expectedTime)

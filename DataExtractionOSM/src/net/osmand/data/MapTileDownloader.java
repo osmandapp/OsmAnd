@@ -137,7 +137,6 @@ public class MapTileDownloader {
 	}
 	
 	public void refuseAllPreviousRequests(){
-		//FIXME it could cause NPE in android implementation think about different style
 		// That's very strange because exception in impl of queue (possibly wrong impl)
 //		threadPoolExecutor.getQueue().clear();
 		while(!threadPoolExecutor.getQueue().isEmpty()){

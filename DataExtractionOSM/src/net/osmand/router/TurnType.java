@@ -34,6 +34,7 @@ public class TurnType {
 	private boolean isLeftSide;
 	// calculated CW head rotation if previous direction to NORTH
 	private float turnAngle;
+	private boolean skipToSpeak;
 	private int[] lanes;
 
 	private static TurnType getExitTurn(int out, float angle, boolean leftSide) {
@@ -60,7 +61,7 @@ public class TurnType {
 	public void setTurnAngle(float turnAngle) {
 		this.turnAngle = turnAngle;
 	}
-
+	
 	private TurnType(String value) {
 		this.value = value;
 	}
@@ -94,6 +95,13 @@ public class TurnType {
 	
 	public boolean keepRight() {
 		return value.equals(KR); 
+	}
+	
+	public boolean isSkipToSpeak() {
+		return skipToSpeak;
+	}
+	public void setSkipToSpeak(boolean skipToSpeak) {
+		this.skipToSpeak = skipToSpeak;
 	}
 	
 	@Override

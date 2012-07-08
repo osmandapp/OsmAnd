@@ -10,6 +10,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.router.TurnType;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -52,7 +53,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private float cachedRotate = 0;
 	private boolean showArrivalTime = true;
 	private boolean showAltitude = false;
-	private boolean showMiniMap = false;
 	
 	// layout pseudo-constants
 	private int STATUS_BAR_MARGIN_X = 4;
@@ -104,7 +104,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		paintSmallText = new Paint();
 		paintSmallText.setStyle(Style.FILL_AND_STROKE);
 		paintSmallText.setColor(Color.BLACK);
-		paintSmallText.setTextSize(18 * scaleCoefficient);
+		paintSmallText.setTextSize(19 * scaleCoefficient);
 		paintSmallText.setAntiAlias(true);
 		paintSmallText.setStrokeWidth(4);
 
@@ -233,10 +233,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 			paintSmallSubText.setColor(color);
 		}
 		if(paintText.isFakeBoldText() != bold) {
-			paintText.setFakeBoldText(true);
-			paintSubText.setFakeBoldText(true);
-			paintSmallText.setFakeBoldText(true);
-			paintSmallSubText.setFakeBoldText(true);
+			paintText.setFakeBoldText(bold);
+			paintSubText.setFakeBoldText(bold);
+			paintSmallText.setFakeBoldText(bold);
+			paintSmallSubText.setFakeBoldText(bold);
 		}
 		// update data on draw
 		rightStack.updateInfo();
@@ -464,17 +464,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return distanceControl;
 	}
 		
-	private MiniMapControl createMiniMapControl() {
+	protected MiniMapControl createMiniMapControl() {
 		final MiniMapControl miniMapControl = new MiniMapControl(map, view) {
 			@Override
 			public boolean updateInfo() {
 				boolean visible = false;
-				if (routeLayer != null && routeLayer.getHelper().isRouterEnabled()  && routeLayer.getHelper().isFollowingMode()) {
-					if (showMiniMap && !routeLayer.getPath().isEmpty()) {
-						visible = true;
-						miniMapPath = routeLayer.getPath();
-					}
-				}
 				updateVisibility(visible);
 				return super.updateInfo();
 			}
@@ -483,7 +477,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		miniMapControl.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showMiniMap = false;
+//				showMiniMap = false;
 				miniMapControl.invalidate();
 				view.refreshMap();
 			}
@@ -494,36 +488,43 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private NextTurnInfoControl createNextNextInfoControl() {
 		final RoutingHelper routingHelper = routeLayer.getHelper();
 		final NextTurnInfoControl nextTurnInfo = new NextTurnInfoControl(map, paintSmallText, paintSmallSubText, true) {
+			NextDirectionInfo calc1 = new NextDirectionInfo();
 			@Override
 			public boolean updateInfo() {
 				boolean visible = false;
 				if (routeLayer != null && routingHelper.isRouterEnabled() && routingHelper.isFollowingMode()) {
 					boolean uturnWhenPossible = routingHelper.makeUturnWhenPossible();
-					int d;
-					if(uturnWhenPossible) {
-						d = routingHelper.getDistanceToNextRouteDirection() ; 
-					} else {
-						d = routingHelper.getDistanceToNextNextRouteDirection();
+					NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, false);
+					if (!uturnWhenPossible) {
+						if (r != null) {
+							// next turn is very close (show next next with false to speak)
+							if (r.imminent >= 0 && r.imminent < 2) {
+								r = routingHelper.getNextRouteDirectionInfoAfter(r, calc1, false);
+							} else {
+								r = routingHelper.getNextRouteDirectionInfo(calc1, true);
+								if (r != null) {
+									r = routingHelper.getNextRouteDirectionInfoAfter(r, calc1, true);
+								}
+							}
+						}
 					}
-					if (d >= 0 && !showMiniMap) {
+					if (r != null && r.distanceTo > 0) {
 						visible = true;
-						RouteDirectionInfo next = uturnWhenPossible? routingHelper.getNextRouteDirectionInfo() : 
-							routingHelper.getNextNextRouteDirectionInfo();
-						if (next == null) {
+						if (r == null || r.directionInfo == null) {
 							if (turnType != null) {
 								turnType = null;
 								invalidate();
 							}
-						} else if (!Algoritms.objectEquals(turnType, next.getTurnType())) {
-							turnType = next.getTurnType();
+						} else if (!Algoritms.objectEquals(turnType, r.directionInfo.getTurnType())) {
+							turnType = r.directionInfo.getTurnType();
 							TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
 							invalidate();
 						}
-						if (distChanged(d, nextTurnDirection)) {
+						if (distChanged(r.distanceTo, nextTurnDirection)) {
 							invalidate();
-							nextTurnDirection = d;
+							nextTurnDirection = r.distanceTo;
 						}
-						int imminent = uturnWhenPossible? routingHelper.getNextTurnImminent() : routingHelper.getNextNextTurnImminent();
+						int imminent = r.imminent;
 						if (turnImminent != imminent) {
 							turnImminent = imminent;
 							invalidate();
@@ -555,7 +556,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 //				nextTurnInfo.turnImminent = (nextTurnInfo.turnImminent + 1) % 3;
 //				nextTurnInfo.nextTurnDirection = 580;
 //				TurnPathHelper.calcTurnPath(nextTurnInfo.pathForTurn, nexsweepAngletTurnInfo.turnType,nextTurnInfo.pathTransform);
-				
 //				showMiniMap = true;
 				view.refreshMap();
 			}
@@ -565,47 +565,17 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return nextTurnInfo;
 	}
 	
-	private NextTurnInfoControl createAlarmInfoControl() {
+	// FIXME alarm control
+	protected NextTurnInfoControl createAlarmInfoControl() {
 		final RoutingHelper routingHelper = routeLayer.getHelper();
 		final NextTurnInfoControl nextTurnInfo = new NextTurnInfoControl(map, paintSmallText, paintSmallSubText, true) {
 			@Override
 			public boolean updateInfo() {
 				boolean visible = false;
 				if (routeLayer != null && routingHelper.isRouterEnabled() && routingHelper.isFollowingMode()) {
-					boolean uturnWhenPossible = routingHelper.makeUturnWhenPossible();
-					int d;
-					if(uturnWhenPossible) {
-						d = routingHelper.getDistanceToNextRouteDirection() ; 
-					} else {
-						d = routingHelper.getDistanceToNextNextRouteDirection();
-					}
-					if (d >= 0 && !showMiniMap) {
-						visible = true;
-						RouteDirectionInfo next = uturnWhenPossible? routingHelper.getNextRouteDirectionInfo() : 
-							routingHelper.getNextNextRouteDirectionInfo();
-						if (next == null) {
-							if (turnType != null) {
-								turnType = null;
-								invalidate();
-							}
-						} else if (!Algoritms.objectEquals(turnType, next.getTurnType())) {
-							turnType = next.getTurnType();
-							TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
-							invalidate();
-						}
-						if (distChanged(d, nextTurnDirection)) {
-							invalidate();
-							nextTurnDirection = d;
-						}
-						int imminent = uturnWhenPossible? routingHelper.getNextTurnImminent() : routingHelper.getNextNextTurnImminent();
-						if (turnImminent != imminent) {
-							turnImminent = imminent;
-							invalidate();
-						}
-					}
+//					boolean uturnWhenPossible = routingHelper.makeUturnWhenPossible();
 				}
 				updateVisibility(visible);
-
 				return true;
 			}
 		};
@@ -617,32 +587,44 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private NextTurnInfoControl createNextInfoControl() {
 		final RoutingHelper routingHelper = routeLayer.getHelper();
 		final NextTurnInfoControl nextTurnInfo = new NextTurnInfoControl(map, paintText, paintSubText, false) {
+			NextDirectionInfo calc1 = new NextDirectionInfo();
+			TurnType straight = TurnType.valueOf(TurnType.C, true);
+
 			@Override
 			public boolean updateInfo() {
 				boolean visible = false;
 				if (routeLayer != null && routingHelper.isRouterEnabled() && routingHelper.isFollowingMode()) {
-					int d = routeLayer.getHelper().getDistanceToNextRouteDirection();
-
 					makeUturnWhenPossible = routingHelper.makeUturnWhenPossible();
-					if (routingHelper.makeUturnWhenPossible() == true) {
-						if (!showMiniMap) {
-							visible = true;
-							turnImminent = 1;
-							turnType = TurnType.valueOf(TurnType.TU, view.getSettings().LEFT_SIDE_NAVIGATION.get());
-							TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
-							invalidate();
-						}
+					if (makeUturnWhenPossible) {
+						visible = true;
+						turnImminent = 1;
+						turnType = TurnType.valueOf(TurnType.TU, view.getSettings().LEFT_SIDE_NAVIGATION.get());
+						TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
+						invalidate();
 					} else {
-						if (d >= 0 && !showMiniMap) {
+						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, false);
+						boolean showStraight = false;
+						if (r != null) {
+							RouteDirectionInfo toShowWithoutSpeak = r.directionInfo;
+							if (r.imminent >= 0 && r.imminent < 2) {
+								// next turn is very close (show it)
+							} else {
+								r = routingHelper.getNextRouteDirectionInfo(calc1, true);
+								if(calc1.directionInfo != toShowWithoutSpeak){
+									// show straight and grey because it is not the closest turn
+									showStraight = r.imminent == -1;
+								}
+							}
+						}
+						if (r != null && r.distanceTo > 0) {
 							visible = true;
-							RouteDirectionInfo next = routeLayer.getHelper().getNextRouteDirectionInfo();
-							if (next == null) {
+							if (r.directionInfo == null) {
 								if (turnType != null) {
 									turnType = null;
 									invalidate();
 								}
-							} else if (!Algoritms.objectEquals(turnType, next.getTurnType())) {
-								turnType = next.getTurnType();
+							} else if (!Algoritms.objectEquals(turnType, showStraight ? straight : r.directionInfo.getTurnType())) {
+								turnType = showStraight ? straight : r.directionInfo.getTurnType();
 								TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
 								if (turnType.getExitOut() > 0) {
 									exitOut = turnType.getExitOut() + ""; //$NON-NLS-1$
@@ -651,12 +633,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 								}
 								invalidate();
 							}
-							if (distChanged(d, nextTurnDirection)) {
+							if (distChanged(r.distanceTo, nextTurnDirection)) {
 								invalidate();
-								nextTurnDirection = d;
+								nextTurnDirection = r.distanceTo;
 							}
-							if(turnImminent != routingHelper.getNextTurnImminent()){
-								turnImminent = routingHelper.getNextTurnImminent();
+							if (turnImminent != r.imminent) {
+								turnImminent = r.imminent;
 								invalidate();
 							}
 						}
@@ -687,7 +669,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 //				nextTurnInfo.turnImminent = (nextTurnInfo.turnImminent + 1) % 3;
 //				nextTurnInfo.nextTurnDirection = 580;
 //				TurnPathHelper.calcTurnPath(nextTurnInfo.pathForTurn, nextTurnInfo.turnType,nextTurnInfo.pathTransform);
-				showMiniMap = true;
+//				showMiniMap = true;
 				nextTurnInfo.requestLayout();
 				view.refreshMap();
 			}
@@ -776,7 +758,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	
 	private static final float miniCoeff = 2f;
 	private MapInfoControl createLanesControl() {
-		final RoutingHelper routingHelper = routeLayer.getHelper();
 		final Path laneStraight = new Path();
 		Matrix pathTransform = new Matrix();
 		pathTransform.postScale(scaleCoefficient / miniCoeff, scaleCoefficient / miniCoeff);
@@ -793,9 +774,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 		paintRouteDirection.setAntiAlias(true);
 		final float w = 72 * scaleCoefficient / miniCoeff;
 		
+		
+		final RoutingHelper routingHelper = routeLayer.getHelper();
 		final MapInfoControl lanesControl = new MapInfoControl(map) {
 			int[] lanes = null; 
 			
+			boolean imminent = false;
 			
 			@Override
 			protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -812,7 +796,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 					// canvas.translate((int) (16 * scaleCoefficient), 0);
 					for (int i = 0; i < lanes.length; i++) {
 						if ((lanes[i] & 1) == 1) {
-							paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow));
+							paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
 						} else {
 							paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
 						}
@@ -827,32 +811,41 @@ public class MapInfoLayer extends OsmandMapLayer {
 			@Override
 			public boolean updateInfo() {
 				boolean visible = false;
-				RouteDirectionInfo next = null;
-				int dist = 0;
+				int locimminent = -1;
+				int[] loclanes = null;
 				if (routeLayer != null && routingHelper.isRouteCalculated()) {
 					if (routingHelper.isRouterEnabled() && routingHelper.isFollowingMode()) {
-						next = routingHelper.getNextRouteDirectionInfo();
-						dist = routingHelper.getDistanceToNextRouteDirection();
+						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
+						if(r != null && r.directionInfo != null && r.directionInfo.getTurnType() != null) {
+							loclanes  = r.directionInfo.getTurnType().getLanes();
+							locimminent = r.imminent;
+							// Do not show too far 
+							if(locimminent == 2 || locimminent < 0) {
+								loclanes = null;
+							}
+						}
 					} else {
-						dist = 0;
 						int di = map.getMapLayers().getRouteInfoLayer().getDirectionInfo();
 						if (di >= 0 && map.getMapLayers().getRouteInfoLayer().isVisible()) {
-							next = routingHelper.getRouteDirections().get(di);
+							RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
+							if(next != null) {
+								loclanes = next.getTurnType().getLanes();
+							}
 						}
 					}
 				}
-				if (next == null || dist > 450 || next.getTurnType().getLanes() == null) {
-					if (lanes != null) {
-						lanes = null;
+				visible = loclanes != null && loclanes.length > 0;
+				if (visible) {
+					if (!Arrays.equals(lanes, loclanes)) {
+						lanes = loclanes;
 						requestLayout();
 						invalidate();
 					}
-				} else if (lanes == null || !Arrays.equals(lanes, next.getTurnType().getLanes())) {
-					lanes = next.getTurnType().getLanes();
-					requestLayout();
-					invalidate();
+					if ((locimminent == 0) != imminent) {
+						imminent = (locimminent == 0);
+						invalidate();
+					}
 				}
-				visible = lanes != null && lanes.length > 0;
 				updateVisibility(visible);
 				return true;
 			}

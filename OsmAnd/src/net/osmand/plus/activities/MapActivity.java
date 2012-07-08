@@ -563,7 +563,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
         final LatLon point = settings.getPointToNavigate();
         if (point != null) {
             if (routingHelper.isRouteCalculated()) {
-                routingHelper.getVoiceRouter().announceCurrentDirection();
+                routingHelper.getVoiceRouter().announceCurrentDirection(routingHelper.getLastFixedLocation());
             } else {
                 AccessibleToast.makeText(this, getNavigationHint(point), Toast.LENGTH_LONG).show();
             }

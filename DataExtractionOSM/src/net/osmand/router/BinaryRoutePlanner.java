@@ -164,7 +164,6 @@ public class BinaryRoutePlanner {
 	
 	
 	// TODO TO-DO U-TURN
-	// TODO write unit tests
 	// TODO fastest/shortest way
 	/**
 	 * Calculate route between start.segmentEnd and end.segmentStart (using A* algorithm)
@@ -858,11 +857,50 @@ public class BinaryRoutePlanner {
 			double distance = 0;
 			for (int j = rr.getStartPointIndex(); j != rr.getEndPointIndex(); j = next) {
 				next = plus ? j + 1 : j - 1;
+				if(j == rr.getStartPointIndex()) {
+					attachRoadSegments(ctx, result, i, j, plus);
+				}
+				if(next != rr.getEndPointIndex()) {
+					attachRoadSegments(ctx, result, i, next, plus);
+				}
+				
 				double d = measuredDist(road.getPoint31XTile(j), road.getPoint31YTile(j), road.getPoint31XTile(next),
 						road.getPoint31YTile(next));
 				distance += d;
 				distOnRoadToPass += d / speed + ctx.getRouter().defineObstacle(road, j);
-				attachRoadSegments(ctx, result, i, j);
+				
+				List<RouteSegmentResult> attachedRoutes = rr.getAttachedRoutes(next);
+				if (next != rr.getEndPointIndex() && !rr.getObject().roundabout() && attachedRoutes != null) {
+					float before = rr.getBearing(next, !plus);
+					float after = rr.getBearing(next, plus);
+					boolean straight = Math.abs(MapUtils.degreesDiff(before + 180, after)) < 70;
+					boolean split = false;
+					// split if needed
+					for (RouteSegmentResult rs : attachedRoutes) {
+						double diff = MapUtils.degreesDiff(before + 180, rs.getBearingBegin());
+						if (Math.abs(diff) < 50) {
+							split = true;
+						} else if (!straight && Math.abs(diff) < 100) {
+							split = true;
+						}
+					}
+					if (split) {
+						int endPointIndex = rr.getEndPointIndex();
+						RouteSegmentResult splitted = new RouteSegmentResult(rr.getObject(), next, endPointIndex);
+						rr.setSegmentTime((float) distOnRoadToPass);
+						rr.setSegmentSpeed((float) speed);
+						rr.setDistance((float) distance);
+						rr.setEndPointIndex(next);
+
+						result.add(i + 1, splitted);
+						completeTime += distOnRoadToPass;
+						completeDistance += distance;
+						// switch current segment to the splitted
+						rr = splitted;
+						distOnRoadToPass = 0;
+						distance = 0;
+					}
+				}
 			}
 			// last point turn time can be added
 			// if(i + 1 < result.size()) { distOnRoadToPass += ctx.getRouter().calculateTurnTime(); }
@@ -873,29 +911,7 @@ public class BinaryRoutePlanner {
 			completeTime += distOnRoadToPass;
 			completeDistance += distance;
 		}
-		int toUpdate = -1;
-		float dist = 0;
-		for (int i = 0; i <= result.size(); i++) {
-			TurnType t = null;
-			if (i < result.size()) {
-				t = getTurnInfo(result, i, leftside);
-				result.get(i).setTurnType(t);
-			}
-			if (t != null || i == result.size()) {
-				if (toUpdate >= 0) {
-					String turn = result.get(toUpdate).getTurnType().toString();
-					if (result.get(toUpdate).getTurnType().getLanes() != null) {
-						turn += Arrays.toString(result.get(toUpdate).getTurnType().getLanes());
-					}
-					result.get(toUpdate).setDescription(turn + String.format(" and go %.2f meters", dist));
-				}
-				toUpdate = i;
-				dist = 0;
-			}
-			if (i < result.size()) {
-				dist += result.get(i).getDistance();
-			}
-		}
+		addTurnInfo(leftside, result);
 
 		println("ROUTE : ");
 		double startLat = MapUtils.get31LatitudeY(start.road.getPoint31YTile(start.segmentStart));
@@ -938,6 +954,44 @@ public class BinaryRoutePlanner {
 		}
 		println("</test>");
 		return result;
+	}
+
+
+	private void addTurnInfo(boolean leftside, List<RouteSegmentResult> result) {
+		int prevSegment = -1;
+		float dist = 0;
+		for (int i = 0; i <= result.size(); i++) {
+			TurnType t = null;
+			if (i < result.size()) {
+				t = getTurnInfo(result, i, leftside);
+				result.get(i).setTurnType(t);
+			}
+			if (t != null || i == result.size()) {
+				if (prevSegment >= 0) {
+					String turn = result.get(prevSegment).getTurnType().toString();
+					if (result.get(prevSegment).getTurnType().getLanes() != null) {
+						turn += Arrays.toString(result.get(prevSegment).getTurnType().getLanes());
+					}
+					result.get(prevSegment).setDescription(turn + String.format(" and go %.2f meters", dist));
+					if(result.get(prevSegment).getTurnType().isSkipToSpeak()) {
+						result.get(prevSegment).setDescription(result.get(prevSegment).getDescription() +" (*)");
+					}
+				}
+				prevSegment = i;
+				dist = 0;
+			}
+			if (i < result.size()) {
+				dist += result.get(i).getDistance();
+			}
+		}
+	}
+	
+	private boolean highwayLowEnd(String highway) {
+		if (highway == null || highway.endsWith("_link") || highway.endsWith("services") || highway.endsWith("service")
+				|| highway.endsWith("unclassified") || highway.endsWith("road")) {
+			return true;
+		}
+		return false;
 	}
 
 
@@ -1010,21 +1064,24 @@ public class BinaryRoutePlanner {
 				int ls = prev.getObject().getLanes();
 				int left = 0;
 				int right = 0;
+				boolean speak = highwayLowEnd(prev.getObject().getHighway()) || highwayLowEnd(rr.getObject().getHighway());
 				if(attachedRoutes != null){
 					for(RouteSegmentResult rs : attachedRoutes){
 						double ex = MapUtils.degreesDiff(rs.getBearingBegin(), rr.getBearingBegin());
-						if(ex < 30 && ex >= 0) {
+						if(ex < 60 && ex >= 0) {
 							kl = true;
 							int lns = rs.getObject().getLanes();
 							if (lns > 0) {
 								right += lns;
 							}
-						} else if(ex > -30 && ex <= 0) {
+							speak = speak  || !highwayLowEnd(rs.getObject().getHighway());
+						} else if(ex > -60 && ex <= 0) {
 							kr = true;
 							int lns = rs.getObject().getLanes();
 							if (lns > 0) {
 								left += lns;
 							}
+							speak = speak  || !highwayLowEnd(rs.getObject().getHighway());
 						}
 					}
 				}
@@ -1037,7 +1094,7 @@ public class BinaryRoutePlanner {
 				if (current <= 0) {
 					current = 1;
 				}
-				if(ls >= 0 && current + left + right >= ls){
+				if(ls >= 0 /*&& current + left + right >= ls*/){
 					lanes = new int[current + left + right];
 					ls = current + left + right;
 					for(int it=0; it< ls; it++) {
@@ -1051,8 +1108,10 @@ public class BinaryRoutePlanner {
 				
 				if (kl) {
 					t = TurnType.valueOf(TurnType.KL, leftSide);
+					t.setSkipToSpeak(!speak);
 				} else if(kr){
 					t = TurnType.valueOf(TurnType.KR, leftSide);
+					t.setSkipToSpeak(!speak);
 				}
 			}
 			if(t != null) {
@@ -1068,7 +1127,7 @@ public class BinaryRoutePlanner {
 	}
 
 
-	private void attachRoadSegments(RoutingContext ctx, List<RouteSegmentResult> result, int routeInd, int pointInd) {
+	private void attachRoadSegments(RoutingContext ctx, List<RouteSegmentResult> result, int routeInd, int pointInd, boolean plus) {
 		RouteSegmentResult rr = result.get(routeInd);
 		RouteDataObject road = rr.getObject();
 		RoutingTile tl = loadRoutes(ctx, road.getPoint31XTile(pointInd), road.getPoint31YTile(pointInd));
@@ -1076,21 +1135,20 @@ public class BinaryRoutePlanner {
 		
 		// attach additional roads to represent more information about the route
 		RouteSegmentResult previousResult = null;
+		
 		// by default make same as this road id
 		long previousRoadId = road.getId();
 		if (pointInd == rr.getStartPointIndex() && routeInd > 0) {
 			previousResult = result.get(routeInd - 1);
 			previousRoadId = previousResult.getObject().getId();
-			boolean prevPlus = previousResult.getStartPointIndex() < previousResult.getEndPointIndex();
-			if (prevPlus) {
-				if (previousResult.getStartPointIndex() < previousResult.getEndPointIndex() &&  
-						previousResult.getEndPointIndex() < previousResult.getObject().getPointsLength() - 1) {
-					rr.attachRoute(pointInd, new RouteSegmentResult(previousResult.getObject(), 
-							previousResult.getEndPointIndex(), previousResult.getObject().getPointsLength() - 1));
-				} else if (previousResult.getStartPointIndex() > previousResult.getEndPointIndex() &&  
-						previousResult.getEndPointIndex() > 0) {
-					rr.attachRoute(pointInd, new RouteSegmentResult(previousResult.getObject(), 
-							previousResult.getEndPointIndex(), 0));
+			if (previousRoadId != road.getId()) {
+				if (previousResult.getStartPointIndex() < previousResult.getEndPointIndex()
+						&& previousResult.getEndPointIndex() < previousResult.getObject().getPointsLength() - 1) {
+					rr.attachRoute(pointInd, new RouteSegmentResult(previousResult.getObject(), previousResult.getEndPointIndex(),
+							previousResult.getObject().getPointsLength() - 1));
+				} else if (previousResult.getStartPointIndex() > previousResult.getEndPointIndex() 
+						&& previousResult.getEndPointIndex() > 0) {
+					rr.attachRoute(pointInd, new RouteSegmentResult(previousResult.getObject(), previousResult.getEndPointIndex(), 0));
 				}
 			}
 		}
@@ -1099,6 +1157,7 @@ public class BinaryRoutePlanner {
 		while (routeSegment != null) {
 			if (routeSegment.road.getId() != road.getId() && routeSegment.road.getId() != previousRoadId) {
 				RouteDataObject addRoad = routeSegment.road;
+				// TODO restrictions can be considered as well
 				int oneWay = ctx.getRouter().isOneWay(addRoad);
 				if (oneWay >= 0 && routeSegment.segmentStart < addRoad.getPointsLength() - 1) {
 					rr.attachRoute(pointInd, new RouteSegmentResult(addRoad, routeSegment.segmentStart, addRoad.getPointsLength() - 1));

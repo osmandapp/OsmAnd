@@ -85,10 +85,10 @@ public class NextTurnInfoControl extends MapInfoControl {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		if (pathForTurn != null) {
-			if (turnImminent == 1) {
-				paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_imminent));
-			} else if (turnImminent == 0) {
+			if (turnImminent > 0) {
 				paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow));
+			} else if (turnImminent == 0) {
+				paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_imminent));
 			} else {
 				paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
 			}
@@ -117,9 +117,9 @@ public class NextTurnInfoControl extends MapInfoControl {
 			float mt = textPaint.measureText(text);
 			if (!horisontalMini) {
 				float startX = Math.max((getWWidth() - st - mt) / 2, 2 * scaleCoefficient);
-				drawShadowText(canvas, text, startX, getWHeight() - 5 * scaleCoefficient, textPaint);
+				drawShadowText(canvas, text, startX, getWHeight() - 3 * scaleCoefficient, textPaint);
 				if (subtext != null) {
-					drawShadowText(canvas, subtext, startX + 2 * scaleCoefficient + mt, getWHeight() - 5 * scaleCoefficient, subtextPaint);
+					drawShadowText(canvas, subtext, startX + 2 * scaleCoefficient + mt, getWHeight() - 3 * scaleCoefficient, subtextPaint);
 				}
 			} else {
 				drawShadowText(canvas, text, 72 * scaleCoefficient / miniCoeff + 2 * scaleCoefficient,

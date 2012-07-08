@@ -477,7 +477,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 				if (!isCancelled()) {
 					String warning = null;
 					File file = new File(info.getPathToData());
-					// FIXME should be plugin functionality and do not use remote util directly
+					// TODO should be plugin functionality and do not use remote util directly
 					warning = new OpenstreetmapRemoteUtil(LocalIndexesActivity.this, null).uploadGPXFile(tagstring, description, visibility, file);
 					total++;
 					if (warning == null) {

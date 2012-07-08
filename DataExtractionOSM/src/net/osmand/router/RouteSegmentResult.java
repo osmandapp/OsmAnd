@@ -12,7 +12,7 @@ import net.osmand.osm.MapUtils;
 public class RouteSegmentResult {
 	private final RouteDataObject object;
 	private final int startPointIndex;
-	private final int endPointIndex;
+	private int endPointIndex;
 	private final List<RouteSegmentResult>[] attachedRoutes;
 	private float segmentTime;
 	private float speed;
@@ -31,16 +31,16 @@ public class RouteSegmentResult {
 	}
 	
 	public void attachRoute(int roadIndex, RouteSegmentResult r){
-		int st = startPointIndex < endPointIndex ? startPointIndex : endPointIndex;
-		if(attachedRoutes[roadIndex - st] == null) {
-			attachedRoutes[roadIndex - st] = new ArrayList<RouteSegmentResult>();
+		int st = Math.abs(roadIndex - startPointIndex);
+		if(attachedRoutes[st] == null) {
+			attachedRoutes[st] = new ArrayList<RouteSegmentResult>();
 		}
-		attachedRoutes[roadIndex - st].add(r);
+		attachedRoutes[st].add(r);
 	}
 	
 	public List<RouteSegmentResult> getAttachedRoutes(int routeInd) {
-		int st = startPointIndex < endPointIndex ? startPointIndex : endPointIndex;
-		List<RouteSegmentResult> list = attachedRoutes[routeInd - st];
+		int st = Math.abs(routeInd - startPointIndex);
+		List<RouteSegmentResult> list = attachedRoutes[st];
 		if(list == null) {
 			return Collections.emptyList();
 		}
@@ -65,6 +65,10 @@ public class RouteSegmentResult {
 	
 	public float getBearingBegin() {
 		return (float) (object.directionRoute(startPointIndex, startPointIndex < endPointIndex) / Math.PI * 180);
+	}
+	
+	public float getBearing(int point, boolean plus) {
+		return (float) (object.directionRoute(point, plus) / Math.PI * 180);
 	}
 	
 	public float getBearingEnd() {
@@ -103,6 +107,10 @@ public class RouteSegmentResult {
 		this.speed = speed;
 	}
 	
+	public void setEndPointIndex(int endPointIndex) {
+		this.endPointIndex = endPointIndex;
+	}
+	
 	public float getSegmentSpeed() {
 		return speed;
 	}
@@ -122,7 +130,6 @@ public class RouteSegmentResult {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
 	
 	
 }

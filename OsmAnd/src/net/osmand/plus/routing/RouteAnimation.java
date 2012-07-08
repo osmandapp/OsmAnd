@@ -15,6 +15,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.location.Location;
 import android.location.LocationManager;
+import android.view.View;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 public class RouteAnimation {
 
@@ -30,6 +33,12 @@ public class RouteAnimation {
 		if (!isRouteAnimating()) {
 			Builder builder = new AlertDialog.Builder(ma);
 			builder.setTitle("Do you want to use existing GPX file?");
+			final View view = ma.getLayoutInflater().inflate(R.layout.animate_route, null);
+			((TextView)view.findViewById(R.id.MinSpeedup)).setText("1"); //$NON-NLS-1$
+			((TextView)view.findViewById(R.id.MaxSpeedup)).setText("4"); //$NON-NLS-1$
+			final SeekBar speedup = (SeekBar) view.findViewById(R.id.Speedup);
+			speedup.setMax(3);
+			builder.setView(view);
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				
 				@Override
@@ -40,7 +49,7 @@ public class RouteAnimation {
 						public boolean processResult(GPXUtilities.GPXFile result) {
 							GPXRouteParams prms = new RouteProvider.GPXRouteParams(result, false, ((OsmandApplication) ma.getApplication()).getSettings());
 							mgr.removeUpdates(ma.getGpsListener());
-							startAnimationThread(routingHelper, ma, prms.points, true, 2);
+							startAnimationThread(routingHelper, ma, prms.points, true, speedup.getProgress() + 1);
 							return true;
 						}
 					}, true, false);

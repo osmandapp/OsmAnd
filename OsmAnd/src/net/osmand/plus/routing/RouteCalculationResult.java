@@ -6,6 +6,7 @@ import java.util.List;
 
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
+import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -39,20 +40,21 @@ public class RouteCalculationResult {
 		List<Location> locations = list == null ? new ArrayList<Location>() : new ArrayList<Location>(list);
 		List<RouteDirectionInfo> localDirections = directions == null? new ArrayList<RouteDirectionInfo>() : new ArrayList<RouteDirectionInfo>(directions);
 		if (!locations.isEmpty()) {
-			// if there is no closest points to start - add it
-			introduceFirstPoint(locations, localDirections, null, start);
 			checkForDuplicatePoints(locations, localDirections);
-			removeUnnecessaryGoAhead(localDirections);
 		}
+		if(addMissingTurns) {
+			removeUnnecessaryGoAhead(localDirections);
+			OsmandSettings settings = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
+			addMissingTurnsToRoute(locations, localDirections, start, end, settings.getApplicationMode(), ctx, leftSide);
+			// if there is no closest points to start - add it
+			introduceFirstPointAndLastPoint(locations, localDirections, null, start, end);
+		}
+		
 		this.locations = Collections.unmodifiableList(locations);
 		this.segments = new ArrayList<RouteSegmentResult>(locations.size());
 		this.listDistance = new int[locations.size()];
 		updateListDistanceTime();
 		
-		if(addMissingTurns) {
-			OsmandSettings settings = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
-			addMissingTurnsToRoute(localDirections, start, end, settings.getApplicationMode(), ctx, leftSide);
-		}
 		this.directions = Collections.unmodifiableList(localDirections);
 		updateDirectionsTime();
 	}
@@ -63,7 +65,8 @@ public class RouteCalculationResult {
 		this.errorMessage = null;
 		List<Location> locations = new ArrayList<Location>();
 		List<RouteSegmentResult> segments = convertVectorResult(computeDirections, locations, list, ctx);
-		introduceFirstPoint(locations,computeDirections, segments, start);
+		introduceFirstPointAndLastPoint(locations, computeDirections, segments, start, end);
+		
 		this.locations = Collections.unmodifiableList(locations);
 		this.segments = Collections.unmodifiableList(segments);
 		this.listDistance = new int[locations.size()];
@@ -137,9 +140,10 @@ public class RouteCalculationResult {
 		return segmentsToPopulate;
 	}
 	
-	protected void addMissingTurnsToRoute(List<RouteDirectionInfo> originalDirections, Location start, LatLon end, ApplicationMode mode, Context ctx,
+	protected void addMissingTurnsToRoute(List<Location> locations, 
+			List<RouteDirectionInfo> originalDirections, Location start, LatLon end, ApplicationMode mode, Context ctx,
 			boolean leftSide){
-		if(!isCalculated()){
+		if(locations.isEmpty()){
 			return;
 		}
 		// speed m/s
@@ -154,7 +158,13 @@ public class RouteCalculationResult {
 		}
 
 		List<RouteDirectionInfo> computeDirections = new ArrayList<RouteDirectionInfo>();
-		int[] listDistance = getListDistance();
+		
+		int[] listDistance = new int[locations.size()];
+		listDistance[locations.size() - 1] = 0;
+		for (int i = locations.size() - 1; i > 0; i--) {
+			listDistance[i - 1] = (int) locations.get(i - 1).distanceTo(locations.get(i));
+			listDistance[i - 1] += listDistance[i];
+		}
 		
 		int previousLocation = 0;
 		int prevBearingLocation = 0;
@@ -252,15 +262,6 @@ public class RouteCalculationResult {
 		previousInfo.distance = listDistance[previousLocation];
 		previousInfo.setDescriptionRoute(previousInfo.getDescriptionRoute()
 				+ " " + OsmAndFormatter.getFormattedDistance(previousInfo.distance, ctx)); //$NON-NLS-1$
-		
-		// add last direction go straight (to show arrow in screen after all turns)
-		if(previousInfo.distance > 80){
-			RouteDirectionInfo info = new RouteDirectionInfo(speed, TurnType.valueOf(TurnType.C, leftSide));
-			info.distance = 0;
-			info.routePointOffset = locations.size() - 1;
-			computeDirections.add(info);
-		}
-		
 		
 		if (originalDirections.isEmpty()) {
 			originalDirections.addAll(computeDirections);
@@ -396,8 +397,10 @@ public class RouteCalculationResult {
 	/**
 	 * PREPARATION
 	 * If beginning is too far from start point, then introduce GO Ahead
+	 * @param end 
 	 */
-	private void introduceFirstPoint(List<Location> locations, List<RouteDirectionInfo> directions, List<RouteSegmentResult> segs, Location start) {
+	private void introduceFirstPointAndLastPoint(List<Location> locations, List<RouteDirectionInfo> directions, List<RouteSegmentResult> segs, Location start, 
+			LatLon end) {
 		if (!locations.isEmpty() && locations.get(0).distanceTo(start) > 200) {
 			// add start point
 			locations.add(0, start);
@@ -414,6 +417,25 @@ public class RouteCalculationResult {
 				// info.setDescriptionRoute(ctx.getString( R.string.route_head));//; //$NON-NLS-1$
 				directions.add(0, info);
 			}
+		}
+		RouteDirectionInfo lastDirInf = directions.size() > 0 ? directions.get(directions.size() - 1) : null;
+		if((lastDirInf == null || lastDirInf.routePointOffset < locations.size() - 1) && locations.size() - 1 > 0) {
+			String type = TurnType.C;
+			Location prevLast = locations.get(locations.size() - 2);
+			float lastBearing = prevLast.bearingTo(locations.get(locations.size() - 1));
+			float[] compute = new float[2];
+			Location.distanceBetween(prevLast.getLatitude(), prevLast.getLongitude(), 
+					end.getLatitude(), end.getLongitude(), compute);
+			float bearingToEnd = compute[1];
+			double diff = MapUtils.degreesDiff(lastBearing, bearingToEnd);
+			if(Math.abs(diff) > 10) {
+				type = diff > 0 ? TurnType.KL : TurnType.KR; 
+			}
+			RouteDirectionInfo info = new RouteDirectionInfo(1, TurnType.valueOf(type, false));
+			info.distance = 0;
+			info.afterLeftTime = 0;
+			info.routePointOffset = locations.size() - 1;			
+			directions.add(info);
 		}
 	}
 
@@ -481,11 +503,14 @@ public class RouteCalculationResult {
 		return 0;
 	}
 	
-
-	public int[] getListDistance() {
-		return listDistance;
+	
+	public int getWholeDistance() {
+		if(listDistance.length > 0) {
+			return listDistance[0];
+		}
+		return 0;
 	}
-
+	
 	public boolean isCalculated() {
 		return !locations.isEmpty();
 	}
@@ -509,26 +534,66 @@ public class RouteCalculationResult {
 		return null;
 	}
 	
-	public RouteDirectionInfo getNextRouteDirectionInfo(){
-		if(currentDirectionInfo < directions.size() - 1){
-			return directions.get(currentDirectionInfo + 1);
+	
+	/*public */NextDirectionInfo getNextRouteDirectionInfo(NextDirectionInfo info, Location fromLoc, boolean toSpeak) {
+		int dirInfo = currentDirectionInfo;
+		if (dirInfo < directions.size()) {
+			int dist = listDistance[currentRoute];
+			int nextInd = dirInfo + 1;
+			if (toSpeak) {
+				while (nextInd < directions.size()) {
+					RouteDirectionInfo i = directions.get(nextInd);
+					if (i.getTurnType() != null && !i.getTurnType().isSkipToSpeak()) {
+						break;
+					}
+					nextInd++;
+				}
+			}
+			if (fromLoc != null) {
+				dist += fromLoc.distanceTo(locations.get(currentRoute));
+			}
+			if (nextInd < directions.size()) {
+				info.directionInfo = directions.get(nextInd);
+				dist -= listDistance[directions.get(nextInd).routePointOffset];
+			}
+			info.directionInfoInd = nextInd;
+			info.distanceTo = dist;
+			return info;
 		}
+		info.directionInfoInd = -1;
+		info.distanceTo = -1;
+		info.directionInfo = null;
 		return null;
 	}
 	
-	public RouteDirectionInfo getCurrentRouteDirectionInfo(){
-		if(currentDirectionInfo < directions.size()){
-			return directions.get(currentDirectionInfo);
+	/*public */NextDirectionInfo getNextRouteDirectionInfoAfter(NextDirectionInfo prev, NextDirectionInfo next, boolean toSpeak) {
+		int dirInfo = prev.directionInfoInd;
+		if (dirInfo < directions.size() && prev.directionInfo != null) {
+			int dist = listDistance[prev.directionInfo.routePointOffset];
+			int nextInd = dirInfo + 1;
+			if (toSpeak) {
+				while (nextInd < directions.size()) {
+					RouteDirectionInfo i = directions.get(nextInd);
+					if (i.getTurnType() != null && !i.getTurnType().isSkipToSpeak()) {
+						break;
+					}
+					nextInd++;
+				}
+			}
+			if (nextInd < directions.size()) {
+				next.directionInfo = directions.get(nextInd);
+				dist -= listDistance[directions.get(nextInd).routePointOffset];
+			}
+			next.distanceTo = dist;
+			next.directionInfoInd = nextInd;
+			return next;
 		}
+		next.directionInfoInd = -1;
+		next.distanceTo = -1;
+		next.directionInfo = null;
 		return null;
 	}
-	public RouteDirectionInfo getNextNextRouteDirectionInfo(){
-		if(currentDirectionInfo < directions.size() - 2){
-			return directions.get(currentDirectionInfo + 2);
-		}
-		return null;
-	}
-
+	
 	public List<RouteDirectionInfo> getRouteDirections() {
 		if(currentDirectionInfo < directions.size()){
 			if(currentDirectionInfo == 0){
@@ -559,32 +624,6 @@ public class RouteCalculationResult {
 		return currentDirectionInfo < directions.size();
 	}
 	
-	public int getDistanceToNextTurn(Location fromLoc) {
-		if (currentDirectionInfo < directions.size()) {
-			int dist = listDistance[currentRoute];
-			if (currentDirectionInfo < directions.size() - 1) {
-				dist -= listDistance[directions.get(currentDirectionInfo + 1).routePointOffset];
-			}
-			if (fromLoc != null) {
-				dist += fromLoc.distanceTo(locations.get(currentRoute));
-			}
-			return dist;
-		}
-		return -1;
-	}
-	
-	public int getDistanceFromNextToNextNextTurn() {
-		if (currentDirectionInfo < directions.size() - 1) {
-			int dist = listDistance[directions.get(currentDirectionInfo + 1).routePointOffset];
-			if (currentDirectionInfo < directions.size() - 2) {
-				dist -= listDistance[directions.get(currentDirectionInfo + 2).routePointOffset];
-			}
-			return dist;
-		}
-		return -1;
-	}
-	
-	
 	public int getDistanceToFinish(Location fromLoc) {
 		if(listDistance != null && currentRoute < listDistance.length){
 			int dist = listDistance[currentRoute];
@@ -596,6 +635,33 @@ public class RouteCalculationResult {
 		}
 		return 0;
 	}
+	
+	public int getLeftTime(Location fromLoc){
+		int time = 0;
+		if(currentDirectionInfo < directions.size()) {
+			RouteDirectionInfo current = directions.get(currentDirectionInfo);
+			time = current.afterLeftTime;
+			
+			int distanceToNextTurn = listDistance[currentRoute];
+			if(currentDirectionInfo + 1 < directions.size()) {
+				distanceToNextTurn -= listDistance[directions.get(currentDirectionInfo + 1).routePointOffset];
+			}
+			Location l = locations.get(currentRoute);
+			if(fromLoc != null){
+				distanceToNextTurn += fromLoc.distanceTo(l);
+			}
+			time += distanceToNextTurn / current.getAverageSpeed();
+		}
+		return time;
+	}
 
+	
+	public static class NextDirectionInfo {
+		public RouteDirectionInfo directionInfo;
+		public int distanceTo;
+		// 
+		public int imminent;
+		private int directionInfoInd;
+	}
 	
 }

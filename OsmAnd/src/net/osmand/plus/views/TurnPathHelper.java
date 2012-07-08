@@ -34,7 +34,7 @@ public class TurnPathHelper {
 
 		if (TurnType.C.equals(turnType.getValue())) {
 			int h = (int) (ha - hpartArrowL - 16);
-			pathForTurn.rMoveTo(th / 2, 0);
+			pathForTurn.rMoveTo(th, 0);
 			pathForTurn.rLineTo(0, -h);
 			pathForTurn.rLineTo(hpartArrowL, 0);
 			pathForTurn.rLineTo(-harrowL / 2, -harrowL / 2); // center

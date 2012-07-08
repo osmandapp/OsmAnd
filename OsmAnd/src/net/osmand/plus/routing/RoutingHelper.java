@@ -13,6 +13,7 @@ import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ApplicationMode;
+import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.voice.CommandPlayer;
@@ -153,13 +154,9 @@ public class RoutingHelper {
 		return voiceRouter;
 	}
 	
-	
-	
 	public Location getCurrentLocation() {
 		return lastFixedLocation;
 	}
-	
-	
 	
 	public void addListener(IRouteInformationListener l){
 		listeners.add(l);
@@ -443,6 +440,10 @@ public class RoutingHelper {
 		return route.getDistanceToFinish(lastFixedLocation);
 	}
 	
+	public synchronized int getLeftTime() {
+		return route.getLeftTime(lastFixedLocation);
+	}
+	
 	public String getGeneralRouteInformation(){
 		int dist = getLeftDistance();
 		int hours = getLeftTime() / (60 * 60);
@@ -455,72 +456,27 @@ public class RoutingHelper {
 		return route.getLocationFromRouteDirection(i);
 	}
 	
-	public RouteDirectionInfo getNextRouteDirectionInfo(){
-		return route.getNextRouteDirectionInfo();
+	public synchronized NextDirectionInfo getNextRouteDirectionInfo(NextDirectionInfo info, boolean toSpeak){
+		NextDirectionInfo i = route.getNextRouteDirectionInfo(info, lastFixedLocation, toSpeak);
+		if(i != null) {
+			i.imminent =  voiceRouter.calculateImminent(i.distanceTo, lastFixedLocation);
+		}
+		return i;
 	}
-	public RouteDirectionInfo getNextNextRouteDirectionInfo(){
-		return route.getNextNextRouteDirectionInfo();
+	
+	public synchronized NextDirectionInfo getNextRouteDirectionInfoAfter(NextDirectionInfo previous, NextDirectionInfo to, boolean toSpeak){
+		NextDirectionInfo i = route.getNextRouteDirectionInfoAfter(previous, to, toSpeak);
+		if(i != null) {
+			i.imminent =  voiceRouter.calculateImminent(i.distanceTo, null);
+		}
+		return i;
 	}
 	
 	public List<RouteDirectionInfo> getRouteDirections(){
 		return route.getRouteDirections();
 	}
 	
-	public synchronized int getDistanceToNextRouteDirection() {
-		return route.getDistanceToNextTurn(lastFixedLocation);
-	}
 	
-	public synchronized int getNextTurnImminent() {
-		if (route.directionsAvailable()) {
-			int dist = getDistanceToNextRouteDirection();
-			// Show turnImminent for at least 5 sec (changed to 6 for device delay) if moving, cut off at 300m to avoid speed artifacts
-			if (lastFixedLocation != null && lastFixedLocation.hasSpeed()) {
-				if ((dist < (lastFixedLocation.getSpeed() * 6f)) && (dist < 300)) {
-					return 1;
-				}
-			}
-			if (dist <= 140) {
-				return 1;
-			} else if (dist <= 3500) {
-			//Was 3000m, but aligned again with PREPARE_LONG prompt after that was changed
-				return 0;
-			} else {
-				return -1;
-			}
-		}
-		return 0;
-	}
-	
-	public synchronized int getNextNextTurnImminent() {
-		int dist = getDistanceToNextNextRouteDirection();
-		if (dist == 0) {
-			return -1;
-		} else if (dist <= 140) {
-			return 1;
-		} else if (dist <= 3000) {
-			return 0;
-		} else {
-			return -1;
-		}
-	}
-	
-	public synchronized int getDistanceToNextNextRouteDirection() {
-		return route.getDistanceFromNextToNextNextTurn();
-	}
-	
-	public synchronized int getLeftTime() {
-		RouteDirectionInfo next = getNextRouteDirectionInfo();
-		int time = 0;
-		if (next != null) {
-			time += next.afterLeftTime;
-		}
-		RouteDirectionInfo current = route.getCurrentRouteDirectionInfo();
-		int distanceToNextTurn = route.getDistanceToNextTurn(lastFixedLocation);
-		if (current != null) {
-			time += distanceToNextTurn / current.getAverageSpeed();
-		}
-		return time;
-	}
 	
 	private void recalculateRouteInBackground(final Location start, final LatLon end, final GPXRouteParams gpxRoute){
 		if (start == null || end == null) {
@@ -552,10 +508,8 @@ public class RoutingHelper {
 							}
 
 							if (res.isCalculated()) {
-								int[] dist = res.getListDistance();
-								int l = dist != null && dist.length > 0 ? dist[0] : 0;
 								showMessage(context.getString(R.string.new_route_calculated_dist)
-										+ ": " + OsmAndFormatter.getFormattedDistance(l, context)); //$NON-NLS-1$
+										+ ": " + OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), context)); //$NON-NLS-1$
 							} else if (service != RouteService.OSMAND && !settings.isInternetConnectionAvailable()) {
 									showMessage(context.getString(R.string.error_calculating_route)
 										+ ":\n" + context.getString(R.string.internet_connection_required_for_online_route), Toast.LENGTH_LONG); //$NON-NLS-1$

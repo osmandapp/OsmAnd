@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent" android:orientation="vertical">
+  <TextView android:text="@string/select_animate_speedup" android:gravity="center"
+  			android:layout_width="fill_parent" android:layout_height="wrap_content" 
+  			android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginTop="5dp"/> 
+  <SeekBar android:id="@+id/Speedup" android:layout_width="fill_parent" android:layout_height="wrap_content" 
+      android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginTop="5dp"/>
+  <LinearLayout 
+  			android:layout_width="fill_parent" android:layout_height="wrap_content" 
+  			android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginTop="5dp">
+  	<TextView android:text="10" android:gravity="left" android:layout_weight="0.5" android:id="@+id/MinSpeedup"
+  			android:layout_width="wrap_content" android:layout_height="wrap_content"/> 
+  	<TextView android:text="15" android:gravity="right" android:layout_weight="0.5" android:id="@+id/MaxSpeedup"
+  			android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+  </LinearLayout>
+</LinearLayout>
