@@ -13,7 +13,6 @@ import java.util.Date;
 import java.util.List;
 
 import net.osmand.access.AccessibleToast;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 
@@ -28,7 +27,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,18 +51,19 @@ public class ContributionVersionActivity extends OsmandListActivity {
 
 	private List<OsmAndBuild> downloadedBuilds = new ArrayList<OsmAndBuild>();
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-	private File pathToDownload = new File(Environment.getExternalStorageDirectory(), ResourceManager.APP_DIR + "osmandToInstall.apk");
+	private File pathToDownload;
 	private OsmAndBuild currentSelectedBuild = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		pathToDownload = getMyApplication().getSettings().extendOsmandPath(ResourceManager.APP_DIR + "osmandToInstall.apk");
 		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.download_files, R.drawable.tab_download_screen_icon);
 		setContentView(R.layout.download_builds);
 		titleBar.afterSetContentView();
 		
-		String installDate = ((OsmandApplication) getApplicationContext()).getSettings().CONTRIBUTION_INSTALL_APP_DATE.get();
+		String installDate = getMyApplication().getSettings().CONTRIBUTION_INSTALL_APP_DATE.get();
 		if(installDate != null){
 			try {
 				currentInstalledDate = dateFormat.parse(installDate);
@@ -137,7 +136,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 					MessageFormat.format(getString(R.string.build_installed), currentSelectedBuild.tag, dateFormat
 							.format(currentSelectedBuild.date)), Toast.LENGTH_LONG).show();
 		}
-		((OsmandApplication) getApplicationContext()).getSettings().CONTRIBUTION_INSTALL_APP_DATE.set(dateFormat.format(d));
+		getMyApplication().getSettings().CONTRIBUTION_INSTALL_APP_DATE.set(dateFormat.format(d));
 	}
 	
 	protected void executeThreadOperation(int operationId) throws Exception {

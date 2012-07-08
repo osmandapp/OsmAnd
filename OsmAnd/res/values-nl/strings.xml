@@ -243,7 +243,7 @@
   <string name="local_index_mi_restore">Activeer</string>
   <string name="local_index_mi_backup">Deactiveer</string>
   <string name="local_index_mi_delete">Verwijder</string>
-  <string name="local_index_mi_reload">Ververs</string>
+  <string name="local_index_mi_reload">Ververs van sd-kaart</string>
   <string name="local_index_download">Download…</string>
   <string name="local_index_tile_data">Kaartsegmentgegevens: %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nte downloaden : %4$s \nZooms gedownloaded : %5$s</string>
   <string name="local_index_poi_data">Interessepunt-gegevens</string>
@@ -413,7 +413,7 @@
   <string name="daynight">Dag/nacht modus</string>
   <string name="download_files_question">Download {0} bestand(en) ({1} MB)?</string>
   <string name="items_were_selected">{0} item(s) geselecteerd</string>
-  <string name="filter_existing_indexes">Filter gedownloaded</string>
+  <string name="filter_existing_indexes">Toon gedownloade</string>
   <string name="deselect_all">Deselecteer alles</string>
   <string name="select_all">Selecteer alles</string>
   <string name="reload">Ververs</string>
@@ -874,4 +874,4 @@
   <string name="context_menu_item_delete_parking_point">Verwijder parkeerpositie markering</string>
   <string name="starting_point_too_far">Startpunt te ver van de dichtstbijzijnde weg.</string>
   <string name="shared_location">Gedeelde locatie</string>
-<string name="update_downlod_list">Reload list</string></resources>
+<string name="update_downlod_list">Vernieuw lijst</string><string name="global_app_allocated_memory_descr">Beschikbaar werkgeheugen %1$s MB (Android limiet %2$s MB, Dalvik %3$s MB).</string><string name="global_app_allocated_memory">Beschikbaar werkgeheugen</string><string name="native_app_allocated_memory_descr">Werkgeheugen, gereserveerd door app %1$s MB (Dalvik %2$s MB, overig %3$s MB). Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</string><string name="native_app_allocated_memory">"Totaal werkgeheugen "</string><string name="monitoring_info_control">Info Control</string><string name="monitoring_info_control_desc">Show monitoring state on the info pane</string></resources>

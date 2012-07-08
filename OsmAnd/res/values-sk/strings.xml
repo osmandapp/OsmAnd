@@ -237,7 +237,7 @@
   <string name="local_index_mi_restore">Obnoviť</string>
   <string name="local_index_mi_backup">Zálohovať</string>
   <string name="local_index_mi_delete">Vymazať</string>
-  <string name="local_index_mi_reload">Znovu načítať</string>
+  <string name="local_index_mi_reload">Znovu načítať z karty SD</string>
   <string name="local_index_download">Stiahnuť…</string>
   <string name="local_index_tile_data">Údaje dlaždíc : %1$s \nNajmenší zoom : %2$d\nNajväčší zoom : %3$d\nStiahnuteľné : %4$s \nStiahnuté zoomy : %5$s</string>
   <string name="local_index_poi_data">POI údaje</string>
@@ -831,7 +831,7 @@
   <string name="rendering_attr_contourLines_name">Zobraziť vrstevnice</string>
   <string name="rendering_attr_hmRendered_description">Zvýšenie zobrazených detailov mapy</string>
   <string name="rendering_attr_hmRendered_name">Zobraziť podrobnejšiu mapu</string>
-  <string name="route_roundabout">Kruhový objazd : choďte cez %1$d výjazd</string>
+  <string name="route_roundabout">Kruhový objazd : choďte cez %1$d. výjazd</string>
   <string name="route_kl">Držte sa vľavo</string>
   <string name="route_kr">Držte sa vpravo</string>
   <string name="save_route_as_gpx">Uložiť cestu ako GPX súbor</string>
@@ -864,4 +864,4 @@
   <string name="context_menu_item_delete_parking_point">Zmazať parkovaciu značku</string>
   <string name="starting_point_too_far">Počiatočný bod je príliš ďaleko od najbližšej cesty.</string>
   <string name="shared_location">Zdieľané umiestnenie</string>
-<string name="update_downlod_list">Reload list</string></resources>
+<string name="update_downlod_list">Znovu načítať zoznam</string><string name="global_app_allocated_memory_descr">Pridelená pamäť %1$s MB (Android limit %2$s MB, Dalvik %3$s MB).</string><string name="global_app_allocated_memory">Pridelená pamäť</string><string name="native_app_allocated_memory_descr">Celková natívna pamäť pridelená aplikácii %1$s MB (Dalvik %2$s MB, iné %3$s MB). Proporčná pamäť %4$s MB (Android limit %5$s MB, Dalvik %6$s MB).</string><string name="native_app_allocated_memory">Celková natívna pamäť</string><string name="monitoring_info_control">Info Control</string><string name="monitoring_info_control_desc">Show monitoring state on the info pane</string></resources>

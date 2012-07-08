@@ -866,4 +866,4 @@
   <string name="context_menu_item_delete_parking_point">Borrar marcador de parking</string>
   <string name="starting_point_too_far">Punto de inicio demasiado lejos de la carretera más cercana.</string>
   <string name="shared_location">Compartir localización</string>
-<string name="update_downlod_list">Reload list</string></resources>
+<string name="update_downlod_list">Recargar lista</string><string name="global_app_allocated_memory_descr">Memoria asignada %1$s MB (Limite Android %2$s MB, Dalvik %3$s MB).</string><string name="global_app_allocated_memory">Memoria asignada</string><string name="native_app_allocated_memory_descr">Memoria nativa total usada por la app %1$s MB (Dalvik %2$s MB, otros %3$s MB). Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string><string name="native_app_allocated_memory">Memoria nativa total</string><string name="monitoring_info_control">Info Control</string><string name="monitoring_info_control_desc">Show monitoring state on the info pane</string></resources>

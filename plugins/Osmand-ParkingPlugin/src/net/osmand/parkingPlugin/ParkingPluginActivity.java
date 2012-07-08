@@ -27,6 +27,7 @@ public class ParkingPluginActivity extends Activity {
 		intentPlus.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 		ResolveInfo resolved = getPackageManager().resolveActivity(intentPlus, PackageManager.MATCH_DEFAULT_ONLY);
 		if(resolved != null) {
+			stopService(intentPlus);
 			startActivity(intentPlus);
 		} else {
 			Intent intentNormal = new Intent();
@@ -34,6 +35,7 @@ public class ParkingPluginActivity extends Activity {
 			intentNormal.setComponent(new ComponentName(OSMAND_COMPONENT, OSMAND_ACTIVITY));
 			resolved = getPackageManager().resolveActivity(intentNormal, PackageManager.MATCH_DEFAULT_ONLY);
 			if (resolved != null) {
+				stopService(intentNormal);
 				startActivity(intentNormal);
 			} else {
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -43,6 +45,7 @@ public class ParkingPluginActivity extends Activity {
 					public void onClick(DialogInterface dialog, int which) {
 						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:" + OSMAND_COMPONENT_PLUS));
 						try {
+							stopService(intent);
 							startActivity(intent);
 						} catch (ActivityNotFoundException e) {
 						}
