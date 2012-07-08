@@ -69,9 +69,9 @@
 	</path>
 
 	<target name="routetest" depends="compile">
-		<junit >
+		<junit fork="false">
 			<sysproperty key="basedir" value="${basedir}"/>
-			<sysproperty key="obfdir" value="${obfdir}"/>
+			<!-- <sysproperty key="OBF_DIR" value="${obfdir}"/> -->
 			<classpath refid="test.classpath"/>
 			<formatter type="xml" />
 			<test name="net.osmand.router.test.JUnitRouteTest" todir="${basedir}/test-results" />

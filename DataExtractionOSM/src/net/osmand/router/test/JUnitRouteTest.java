@@ -28,7 +28,7 @@ public class JUnitRouteTest  {
 			return;
 		}
 		BinaryRoutePlanner.PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = false;
-		String obfdir = System.getenv("obfdir");
+		String obfdir = System.getenv("OBF_DIR");
 		if(Algoritms.isEmpty(obfdir)){
 			obfdir = DataExtractionSettings.getSettings().getBinaryFilesDir();
 		}
