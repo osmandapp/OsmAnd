@@ -25,40 +25,57 @@
 	</path>
 
 	<target name="-dirs">
-	   <mkdir dir="${bin.absolute.dir}"/>
+		<mkdir dir="${bin.absolute.dir}"/>
 	</target>
-	
+
 	<target name="-copy-resources">
-	   <mkdir dir="${icons.absolute.dir}"/>
+		<mkdir dir="${icons.absolute.dir}"/>
 		<copy todir="${icons.absolute.dir}">
 			<fileset dir="../OsmAnd/res/drawable-mdpi/">
 				<include name="h_*.png"/>
 				<include name="g_*.png"/>
-			 </fileset>
+			</fileset>
 		</copy>
 	</target>
 
 	<target name="-version" if="build.version">
-	   <replace file="src/net/osmand/MapCreatorVersion.java" token="String APP_DESCRIPTION" value="String APP_DESCRIPTION=&quot;${build.version}&quot;;//"/>
+		<replace file="src/net/osmand/MapCreatorVersion.java" token="String APP_DESCRIPTION" value="String APP_DESCRIPTION=&quot;${build.version}&quot;;//"/>
 	</target>
 
 	<target name="clean">
-	   <delete dir="${bin.absolute.dir}"/>
+		<delete dir="${bin.absolute.dir}"/>
 	</target>
 
 	<target name="compile" depends="-copy-resources,-dirs,-version">
-	 <copy todir="${bin.absolute.dir}">
-	   <fileset dir="${src.absolute.dir}">
-		<exclude name="**/*.java" />
-	   </fileset>
-         </copy>
-	 <javac srcdir="${src.absolute.dir}"
+		<copy todir="${bin.absolute.dir}">
+			<fileset dir="${src.absolute.dir}">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+		<javac srcdir="${src.absolute.dir}"
 		 destdir="${bin.absolute.dir}"
 		 encoding="${java.encoding}"
 		 classpathref="build.path"
 		 debug="on"
 		 source="1.6"
 	  />
+	</target>
+
+	<path id="test.classpath">
+		<pathelement location="${bin.absolute.dir}" />
+		<fileset dir="${lib.absolute.dir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<target name="routetest" depends="compile">
+		<junit >
+			<sysproperty key="basedir" value="${basedir}"/>
+			<sysproperty key="obfdir" value="${obfdir}"/>
+			<classpath refid="test.classpath"/>
+			<formatter type="xml" />
+			<test name="net.osmand.router.test.JUnitRouteTest" todir="${basedir}/test-results" />
+		</junit>
 	</target>
 
 	<target name="jar" depends="-copy-resources, -dirs">
@@ -90,7 +107,7 @@
 		<delete file="MANIFEST.MF" />
 	</target>
 
-	<target name="build" depends="jar">
+	<target name="build" depends="jar, routetest">
 		<delete dir="build"/>
 		<copy todir="build">
 			<fileset dir=".">
@@ -119,12 +136,12 @@
 	</target>
 
 	<taskdef name="cpd" classname="net.sourceforge.pmd.cpd.CPDTask" classpathref="ant.lib.path"/>
-	 
+
 	<target name="cpd" description="Search for cut-and-pasted code">
-	  <property name="cpd.report.xml" location="cpd.xml"/>
-	  <cpd minimumTokenCount="100" format="xml" outputFile="${cpd.report.xml}"
+		<property name="cpd.report.xml" location="cpd.xml"/>
+		<cpd minimumTokenCount="100" format="xml" outputFile="${cpd.report.xml}"
 	      ignoreLiterals="true" ignoreIdentifiers="true">
-	    <fileset dir="${src.absolute.dir}" includes="**/*.java"/>
-	  </cpd>
+			<fileset dir="${src.absolute.dir}" includes="**/*.java"/>
+		</cpd>
 	</target>
 </project>

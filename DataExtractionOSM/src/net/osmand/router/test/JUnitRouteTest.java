@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import net.osmand.Algoritms;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.RoutingConfiguration;
@@ -27,9 +28,13 @@ public class JUnitRouteTest  {
 			return;
 		}
 		BinaryRoutePlanner.PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = false;
+		String obfdir = System.getenv("obfdir");
+		if(Algoritms.isEmpty(obfdir)){
+			obfdir = DataExtractionSettings.getSettings().getBinaryFilesDir();
+		}
 		
 		List<File> files = new ArrayList<File>();  
-		for (File f : new File(DataExtractionSettings.getSettings().getBinaryFilesDir()).listFiles()) {
+		for (File f : new File(obfdir).listFiles()) {
 			if (f.getName().endsWith(".obf")) {
 				files.add(f);
 			}
