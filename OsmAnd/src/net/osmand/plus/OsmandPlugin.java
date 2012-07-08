@@ -20,6 +20,10 @@ import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
 
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.preference.PreferenceScreen;
 import android.view.Menu;
 
@@ -28,6 +32,9 @@ public abstract class OsmandPlugin {
 	private static List<OsmandPlugin> installedPlugins = new ArrayList<OsmandPlugin>();  
 	private static List<OsmandPlugin> activePlugins = new ArrayList<OsmandPlugin>();
 	private static final Log LOG = LogUtil.getLog(OsmandPlugin.class);
+	
+	private static final String PARKING_PLUGIN_COMPONENT = "net.osmand.parkingPlugin"; //$NON-NLS-1$
+	private static final String PARKING_PLUGIN_ACTIVITY = "net.osmand.parkingPlugin.ParkingPluginActivity"; //$NON-NLS-1$
 	
 	
 	public abstract String getId();
@@ -58,7 +65,8 @@ public abstract class OsmandPlugin {
 		installedPlugins.add(new AccessibilityPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
-		installedPlugins.add(new ParkingPositionPlugin(app));
+//		installedPlugins.add(parkingPlugin);
+		installParkingPlugin(app);
 		
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
 		for (OsmandPlugin plugin : installedPlugins) {
@@ -223,4 +231,17 @@ public abstract class OsmandPlugin {
 		return false;
 	}
 
+	private static void installParkingPlugin(OsmandApplication app) {
+		Intent parkingIntent = new Intent();
+		parkingIntent.setComponent(new ComponentName(PARKING_PLUGIN_COMPONENT, PARKING_PLUGIN_ACTIVITY));
+		parkingIntent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+		ResolveInfo resolved = app.getPackageManager().resolveActivity(parkingIntent, PackageManager.MATCH_DEFAULT_ONLY);
+		ParkingPositionPlugin parkingPlugin = new ParkingPositionPlugin(app);
+		if(resolved != null) {
+			installedPlugins.add(parkingPlugin);
+			app.getSettings().enablePlugin(parkingPlugin.getId(), true);
+		} else {
+			app.getSettings().enablePlugin(parkingPlugin.getId(), false);
+		}
+	}
 }
