@@ -740,7 +740,18 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 						building.setName(hno.substring(0, i));
 						building.setName2(hno.substring(i + 1));
 					} else {
-						building.setName(hno);
+						int secondNumber = hno.indexOf('/');
+						if(secondNumber == -1 || !(secondNumber < hno.length() - 1)) {
+							building.setName(hno);
+						} else {
+							building.setName(hno.substring(0, secondNumber));
+							Building building2 = new Building(e);
+							building2.setName(hno.substring(secondNumber + 1));
+							Set<Long> ids2OfStreet = getStreetInCity(e.getIsInNames(), e.getTag(OSMTagKey.ADDR_STREET2), null, l);
+							if(!ids2OfStreet.isEmpty()) {
+								streetDAO.writeBuilding(ids2OfStreet, building2);
+							}
+						}
 					}
 					
 					streetDAO.writeBuilding(idsOfStreet, building);
