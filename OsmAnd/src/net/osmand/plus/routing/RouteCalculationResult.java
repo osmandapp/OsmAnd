@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import net.osmand.OsmAndFormatter;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandApplication;
@@ -21,6 +23,7 @@ public class RouteCalculationResult {
 	private final List<Location> locations;
 	private final List<RouteDirectionInfo> directions;
 	private final List<RouteSegmentResult> segments;
+	private final List<AlarmInfo> alarmInfo;
 	private final String errorMessage;
 	private final int[] listDistance;
 	
@@ -29,6 +32,7 @@ public class RouteCalculationResult {
 	//         but currentRoute <= get(currentDirectionInfo+1).routeOffset 
 	protected int currentDirectionInfo = 0;
 	protected int currentRoute = 0;
+	protected int nextAlarmInfo = 0;
 
 	public RouteCalculationResult(String errorMessage) {
 		this(null, null, null, null, errorMessage, null, false, false);
@@ -51,9 +55,10 @@ public class RouteCalculationResult {
 		}
 		
 		this.locations = Collections.unmodifiableList(locations);
-		this.segments = new ArrayList<RouteSegmentResult>(locations.size());
+		this.segments = new ArrayList<RouteSegmentResult>();
 		this.listDistance = new int[locations.size()];
 		updateListDistanceTime();
+		this.alarmInfo = new ArrayList<AlarmInfo>();
 		
 		this.directions = Collections.unmodifiableList(localDirections);
 		updateDirectionsTime();
@@ -64,7 +69,8 @@ public class RouteCalculationResult {
 		List<RouteDirectionInfo> computeDirections = new ArrayList<RouteDirectionInfo>();
 		this.errorMessage = null;
 		List<Location> locations = new ArrayList<Location>();
-		List<RouteSegmentResult> segments = convertVectorResult(computeDirections, locations, list, ctx);
+		ArrayList<AlarmInfo> alarms = new ArrayList<AlarmInfo>();
+		List<RouteSegmentResult> segments = convertVectorResult(computeDirections, locations, list, alarms, ctx);
 		introduceFirstPointAndLastPoint(locations, computeDirections, segments, start, end);
 		
 		this.locations = Collections.unmodifiableList(locations);
@@ -74,12 +80,28 @@ public class RouteCalculationResult {
 		
 		this.directions = Collections.unmodifiableList(computeDirections);
 		updateDirectionsTime();
+		this.alarmInfo = Collections.unmodifiableList(alarms);
+	}
+	
+	private void attachAlarmInfo(List<AlarmInfo> alarms, RouteSegmentResult res, int intId, int locInd) {
+		int[] pointTypes = res.getObject().getPointTypes(intId);
+		RouteRegion reg = res.getObject().region;
+		if (pointTypes != null) {
+			for (int r = 0; r < pointTypes.length; r++) {
+				RouteTypeRule typeRule = reg.quickGetEncodingRule(pointTypes[r]);
+				AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, locInd);
+				if(info != null) {
+					alarms.add(info);
+				}
+			}
+		}
 	}
 
 	/**
 	 * PREPARATION 
 	 */
-	private List<RouteSegmentResult> convertVectorResult(List<RouteDirectionInfo> directions, List<Location> locations, List<RouteSegmentResult> list, Context ctx) {
+	private List<RouteSegmentResult> convertVectorResult(List<RouteDirectionInfo> directions, List<Location> locations, List<RouteSegmentResult> list,
+			List<AlarmInfo> alarms, Context ctx) {
 		float prevDirectionTime = 0;
 		float prevDirectionDistance = 0;
 		List<RouteSegmentResult> segmentsToPopulate = new ArrayList<RouteSegmentResult>();
@@ -97,6 +119,7 @@ public class RouteCalculationResult {
 					break;
 				}
 				locations.add(n);
+				attachAlarmInfo(alarms, s, i, locations.size());
 				segmentsToPopulate.add(s);
 				if (i == s.getEndPointIndex() ) {
 					break;
@@ -524,6 +547,9 @@ public class RouteCalculationResult {
 		this.currentRoute = currentRoute;
 		while (currentDirectionInfo < directions.size() - 1 && directions.get(currentDirectionInfo + 1).routePointOffset < currentRoute) {
 			currentDirectionInfo++;
+		}
+		while (nextAlarmInfo < alarmInfo.size() && alarmInfo.get(nextAlarmInfo).locationIndex < currentRoute) {
+			nextAlarmInfo++;
 		}
 	}
 	

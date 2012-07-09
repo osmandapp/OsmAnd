@@ -116,14 +116,14 @@ public class VoiceRouter {
 		}
 	}
 	
-	private boolean isDistanceLess(float currentSpeed, double dist, double etalon){
+	protected boolean isDistanceLess(float currentSpeed, double dist, double etalon){
 		if(dist < etalon || ((dist / currentSpeed) < (etalon / DEFAULT_SPEED))){
 			return true;
 		}
 		return false;
 	}
 	
-	private boolean isDistanceLess(float currentSpeed, double dist, double etalon, double defSpeed){
+	protected boolean isDistanceLess(float currentSpeed, double dist, double etalon, double defSpeed){
 		if(dist < etalon || ((dist / currentSpeed) < (etalon / defSpeed))){
 			return true;
 		}

@@ -158,13 +158,13 @@ public class RouteDataObject {
 		return false;
 	}
 	
-	public int getOneway(){
+	public int getOneway() {
 		int sz = types.length;
-		for(int i=0; i<sz; i++) {
+		for (int i = 0; i < sz; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			if(r.onewayDirection() != 0) {
+			if (r.onewayDirection() != 0) {
 				return r.onewayDirection();
-			} else if(r.roundabout()) {
+			} else if (r.roundabout()) {
 				return 1;
 			}
 		}
