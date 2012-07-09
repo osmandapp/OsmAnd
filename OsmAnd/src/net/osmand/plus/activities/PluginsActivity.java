@@ -45,18 +45,15 @@ public class PluginsActivity extends OsmandListActivity {
 				
 		OsmandPlugin item = getListAdapter().getItem(position);
 		boolean enable = !restartPlugins.contains(item.getId());
-		if (!enable || clickedPlugins.contains(item.getId())) {
-			boolean ok = OsmandPlugin.enablePlugin(((OsmandApplication) getApplication()), item, enable);
-			if (ok) {
-				if (!enable) {
-					restartPlugins.remove(item.getId());
-				} else {
-					restartPlugins.add(item.getId());
-				}
+		boolean ok = OsmandPlugin.enablePlugin(((OsmandApplication) getApplication()), item, enable);
+		if (ok) {
+			if (!enable) {
+				restartPlugins.remove(item.getId());
+			} else {
+				restartPlugins.add(item.getId());
 			}
-		} else {
-			clickedPlugins.add(item.getId());
 		}
+		clickedPlugins.add(item.getId());
 		getListAdapter().notifyDataSetChanged();
 	}
 	
@@ -89,7 +86,7 @@ public class PluginsActivity extends OsmandListActivity {
 			
 			TextView description = (TextView) row.findViewById(R.id.plugin_descr);
 			description.setText(plugin.getDescription());
-			description.setVisibility(clickedPlugins.contains(plugin.getId()) ? View.VISIBLE : View.GONE);
+			description.setVisibility(clickedPlugins.contains(plugin.getId()) || !restartPlugins.contains(plugin.getId()) ? View.VISIBLE : View.GONE);
 			description.setTextColor(toBeEnabled? colorGreen : Color.LTGRAY);
 
 			return row;
