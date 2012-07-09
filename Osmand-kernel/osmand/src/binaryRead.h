@@ -99,6 +99,9 @@ struct RouteDataObject {
 	std::vector<uint64_t> restrictions ;
 	std::vector<std::vector<uint32_t> > pointTypes;
 	int64_t id;
+
+	UNORDERED(map)<int, std::string > names;
+	vector<pair<uint32_t, uint32_t> > namesIds;
 };
 
 

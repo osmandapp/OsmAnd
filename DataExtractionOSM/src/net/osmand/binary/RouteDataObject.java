@@ -22,6 +22,16 @@ public class RouteDataObject {
 	public RouteDataObject(RouteRegion region) {
 		this.region = region;
 	}
+	
+	public RouteDataObject(RouteRegion region, int[] nameIds, String[] nameValues) {
+		this.region = region;
+		if (nameIds.length > 0) {
+			names = new TIntObjectHashMap<String>();
+		}
+		for (int i = 0; i < nameIds.length; i++) {
+			names.put(nameIds[i], nameValues[i]);
+		}
+	}
 
 	public RouteDataObject(RouteDataObject copy) {
 		this.region = copy.region;

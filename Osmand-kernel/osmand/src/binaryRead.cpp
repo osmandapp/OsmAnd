@@ -1035,7 +1035,6 @@ bool readRouteDataObject(CodedInputStream* input, uint32_t left, uint32_t top, R
 			while (input->BytesUntilLimit() > 0) {
 				DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &t)));
 				obj->types.push_back(t);
-
 			}
 			input->PopLimit(oldLimit);
 			break;
@@ -1064,6 +1063,21 @@ bool readRouteDataObject(CodedInputStream* input, uint32_t left, uint32_t top, R
 				py = y;
 			}
 			input->PopLimit(oldLimit);
+			break;
+		}
+		case RouteData::kStringNamesFieldNumber: {
+			uint32_t length;
+			DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &length)));
+			int oldLimit = input->PushLimit(length);
+			uint32_t s;
+			uint32_t t;
+			while (input->BytesUntilLimit() > 0) {
+				DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &s)));
+				DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &t)));
+
+				obj->namesIds.push_back( pair<uint32_t, uint32_t>(s, t));
+			}
+			input->PopLimit(oldLimit)	;
 			break;
 		}
 		case RouteData::kPointTypesFieldNumber: {
@@ -1112,6 +1126,7 @@ bool readRouteTreeData(CodedInputStream* input, RouteSubregion* s, std::vector<R
 	int tag;
 	std::vector<int64_t> idTables;
 	UNORDERED(map)<int64_t, std::vector<uint64_t> > restrictions;
+	std::vector<std::string> stringTable;
 	while ((tag = input->ReadTag()) != 0) {
 		switch (WireFormatLite::GetTagFieldNumber(tag)) {
 		// required uint32_t version = 1;
@@ -1132,8 +1147,7 @@ bool readRouteTreeData(CodedInputStream* input, RouteSubregion* s, std::vector<R
 			uint32_t length;
 			DO_((WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(input, &length)));
 			int oldLimit = input->PushLimit(length);
-			// std::vector<std::string> stringTable;
-			// readStringTable(input, stringTable);
+			readStringTable(input, stringTable);
 			input->Skip(input->BytesUntilLimit());
 			input->PopLimit(oldLimit);
 			break;
@@ -1236,6 +1250,16 @@ bool readRouteTreeData(CodedInputStream* input, RouteSubregion* s, std::vector<R
 		if (*dobj != NULL) {
 			if ((*dobj)->id < idTables.size()) {
 				(*dobj)->id = idTables[(*dobj)->id];
+			}
+			if ((*dobj)->namesIds.size() > 0) {
+				vector<pair<uint32_t, uint32_t> >::iterator itnames = (*dobj)->namesIds.begin();
+				for(; itnames != (*dobj)->namesIds.end(); itnames++) {
+					if((*itnames).second >= stringTable.size()) {
+						osmand_log_print(LOG_ERROR, "ERROR VALUE string table %d", (*itnames).second );
+					} else {
+						(*dobj)->names[(int) (*itnames).first] = stringTable[(*itnames).second];
+					}
+				}
 			}
 		}
 	}
