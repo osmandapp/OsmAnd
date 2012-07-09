@@ -12,6 +12,7 @@ import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
@@ -462,6 +463,24 @@ public class RoutingHelper {
 			i.imminent =  voiceRouter.calculateImminent(i.distanceTo, lastFixedLocation);
 		}
 		return i;
+	}
+	
+	public synchronized AlarmInfo getMostImportantAlarm(MetricsConstants mc){
+		float mxspeed = route.getCurrentMaxSpeed();
+		AlarmInfo speedAlarm = null;
+		if(mxspeed != 0 && lastFixedLocation != null && lastFixedLocation.hasSpeed()) {
+			float delta = 5f/3.6f; 
+			if(lastFixedLocation.getSpeed() > mxspeed + delta) {
+				int speed;
+				if(mc == MetricsConstants.KILOMETERS_AND_METERS) {
+					speed = Math.round(mxspeed * 3.6f);
+				} else {
+					speed = Math.round(mxspeed * 3.6f / 1.6f);
+				}
+				speedAlarm = AlarmInfo.createSpeedLimit(speed);
+			}
+		}
+		return route.getMostImportantAlarm(lastFixedLocation, speedAlarm);
 	}
 	
 	public synchronized NextDirectionInfo getNextRouteDirectionInfoAfter(NextDirectionInfo previous, NextDirectionInfo to, boolean toSpeak){

@@ -639,6 +639,39 @@ public class RouteCalculationResult {
 		return null;
 	}
 	
+	public AlarmInfo getMostImportantAlarm(Location fromLoc, AlarmInfo speedAlarm) {
+		int aInfo = currentDirectionInfo;
+		int cRoute = currentRoute;
+		AlarmInfo mostImportant = speedAlarm;
+		int value = speedAlarm != null? speedAlarm.updateDistanceAndGetPriority(0, 0) : Integer.MAX_VALUE;
+		if (aInfo < alarmInfo.size()) {
+			int dist = 0;
+			float speed = 0;
+			if (fromLoc != null && fromLoc.hasSpeed()) {
+				speed = fromLoc.getSpeed();
+			}
+			if (fromLoc != null) {
+				dist += fromLoc.distanceTo(locations.get(cRoute));
+			}
+			dist += listDistance[cRoute];
+			while(aInfo < alarmInfo.size()) {
+				AlarmInfo inf = alarmInfo.get(aInfo);
+				int d = dist - listDistance[inf.locationIndex];
+				if(d > 3000){
+					break;
+				}
+				float time = speed > 0 ? d / speed : 0;
+				int vl = inf.updateDistanceAndGetPriority(time, d);
+				if(vl < value){
+					mostImportant = inf;
+					value = vl;
+				}
+				aInfo++;
+			}
+		}
+		return mostImportant;
+	}
+	
 	public Location getNextRouteLocation(int after) {
 		if(currentRoute + after < locations.size()) {
 			return locations.get(currentRoute + after);

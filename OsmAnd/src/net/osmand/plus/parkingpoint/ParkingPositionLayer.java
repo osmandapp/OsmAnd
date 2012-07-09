@@ -236,11 +236,8 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 			
 			@Override
 			public boolean updateInfo() {
-				if( parkingPoint != null) {
+				if( parkingPoint != null && !map.getRoutingHelper().isFollowingMode()) {
 					int d = 0;
-					if (map.getRoutingHelper().isRouterEnabled()) {
-						d = map.getRoutingHelper().getLeftDistance();
-					}
 					if (d == 0) {
 						Location.distanceBetween(view.getLatitude(), view.getLongitude(), parkingPoint.getLatitude(), parkingPoint.getLongitude(), calculations);
 						d = (int) calculations[0];

@@ -6,10 +6,10 @@ public class AlarmInfo {
 	public static int SPEED_CAMERA = 1;
 	public static int SPEED_LIMIT = SPEED_CAMERA + 1;
 	public static int BORDER_CONTROL = SPEED_LIMIT + 1;
-	public static int BARRIER = BORDER_CONTROL + 1;
-	public static int TRAFFIC_CALMING = BARRIER + 1;
+	public static int TRAFFIC_CALMING = BORDER_CONTROL + 1;
 	public static int TOLL_BOOTH = TRAFFIC_CALMING + 1;
 	public static int STOP = TOLL_BOOTH + 1;
+	public static int MAXIMUM = STOP + 1;
 	
 	private int type;
 	private float distance;
@@ -51,12 +51,12 @@ public class AlarmInfo {
 		this.intValue = intValue;
 	}
 	
-	public boolean isSpeedLimit(){
-		return type == SPEED_LIMIT;
-	}
 	
-	public boolean isSpeedCamera(){
-		return type == SPEED_CAMERA;
+	
+	public static AlarmInfo createSpeedLimit(int speed){
+		AlarmInfo info = new AlarmInfo(SPEED_LIMIT, 0);
+		info.setIntValue(speed);
+		return info;
 	}
 	
 	public static AlarmInfo createAlarmInfo(RouteTypeRule ruleType, int locInd) {
@@ -76,6 +76,26 @@ public class AlarmInfo {
 			return new AlarmInfo(TRAFFIC_CALMING, locInd);
 		}
 		return null;
+	}
+	
+	public int updateDistanceAndGetPriority(float time, float distance){
+		this.distance = distance;
+		this.time = time;
+		if(distance > 1500) {
+			return 0;
+		}
+		// 1 level of priorities
+		if((time > 0 && time < 12) || distance < 150 || type == SPEED_LIMIT) {
+			return type;
+		}
+		if(type == SPEED_CAMERA && (time < 20 || distance < 250)) {
+			return type;
+		}
+		// 2nd level
+		if((time > 0 && time < 18) || distance < 300 ) {
+			return type + MAXIMUM;
+		}
+		return 0;
 	}
 
 }

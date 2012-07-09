@@ -66,6 +66,7 @@ public abstract class MapInfoControl extends View {
 				setVisibility(View.GONE);
 			}
 			requestLayout();
+			invalidate();
 			return true;
 		}
 		return false;

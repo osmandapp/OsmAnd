@@ -8,6 +8,7 @@ import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
@@ -18,6 +19,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -66,7 +68,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private MapStackControl leftStack;
 	private ViewGroup statusBar;
 	private MapInfoControl lanesControl;
+	private MapInfoControl alarmControl;
 	private TextView topText;
+
+
 
 	
 
@@ -155,6 +160,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		lanesControl = createLanesControl();
 		lanesControl.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
 		
+		alarmControl = createAlarmInfoControl();
+		
 		rightStack = new MapStackControl(view.getContext());
 		rightStack.addStackView(createAltitudeControl());
 		rightStack.addStackView(createDistanceControl());
@@ -165,7 +172,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		leftStack.addStackView(createNextInfoControl());
 		leftStack.addStackView(createMiniMapControl());
 		leftStack.addStackView(createNextNextInfoControl());
-//		leftStack.addStackView(createAlarmInfoControl());
 		
 		// 2. Preparations
 		Rect topRectPadding = new Rect();
@@ -207,11 +213,20 @@ public class MapInfoLayer extends OsmandMapLayer {
 		flp.rightMargin = STATUS_BAR_MARGIN_X;
 		flp.topMargin = -topRectPadding.top;
 		statusBar.setLayoutParams(flp);
+		
+		flp = new FrameLayout.LayoutParams((int)(78 * scaleCoefficient),
+				(int)(78 * scaleCoefficient), Gravity.RIGHT | Gravity.BOTTOM);
+		flp.rightMargin = STATUS_BAR_MARGIN_X;
+		flp.bottomMargin = (int) (85*scaleCoefficient);
+		alarmControl.setLayoutParams(flp);
 
 		parent.addView(rightStack);
 		parent.addView(leftStack);
 		parent.addView(statusBar);
 		parent.addView(lanesControl);
+		parent.addView(alarmControl);
+		alarmControl.setVisibility(View.GONE);
+		lanesControl.setVisibility(View.GONE);
 	}
 
 	
@@ -246,6 +261,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			compassView.invalidate();
 		}
 		lanesControl.updateInfo();
+		alarmControl.updateInfo();
 //		topText.setTextColor(color);
 //		String text = "Пр.Независимости";
 //		float ts = topText.getPaint().measureText(text);
@@ -519,9 +535,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 							turnType = r.directionInfo.getTurnType();
 							TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
 							invalidate();
+							requestLayout();
 						}
 						if (distChanged(r.distanceTo, nextTurnDirection)) {
 							invalidate();
+							requestLayout();
 							nextTurnDirection = r.distanceTo;
 						}
 						int imminent = r.imminent;
@@ -565,23 +583,64 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return nextTurnInfo;
 	}
 	
-	// FIXME alarm control
-	protected NextTurnInfoControl createAlarmInfoControl() {
+	private MapInfoControl createAlarmInfoControl() {
 		final RoutingHelper routingHelper = routeLayer.getHelper();
-		final NextTurnInfoControl nextTurnInfo = new NextTurnInfoControl(map, paintSmallText, paintSmallSubText, true) {
+		final Paint paintCircle = new Paint();
+		final float th = 11 * scaleCoefficient;
+		paintCircle.setColor(Color.rgb(225, 15, 15));
+		paintCircle.setStrokeWidth(11 * scaleCoefficient);
+		paintCircle.setStyle(Style.STROKE);
+		paintCircle.setAntiAlias(true);
+		final Paint content = new Paint();
+		content.setColor(Color.WHITE);
+		content.setStyle(Style.FILL);
+		final Paint ptext = new Paint();
+		ptext.setTextSize(27 * scaleCoefficient);
+		ptext.setFakeBoldText(true);
+		ptext.setAntiAlias(true);
+		ptext.setTextAlign(Align.CENTER);
+		
+		final MapInfoControl alarm = new MapInfoControl(map) {
+			private String text = "";
 			@Override
 			public boolean updateInfo() {
 				boolean visible = false;
 				if (routeLayer != null && routingHelper.isRouterEnabled() && routingHelper.isFollowingMode()) {
-//					boolean uturnWhenPossible = routingHelper.makeUturnWhenPossible();
+					AlarmInfo alarm = routingHelper.getMostImportantAlarm(view.getSettings().METRIC_SYSTEM.get());
+					if(alarm != null) {
+						if(alarm.getType() == AlarmInfo.SPEED_LIMIT) {
+							text = alarm.getIntValue() +"";
+						} else if(alarm.getType() == AlarmInfo.SPEED_CAMERA) {
+							text = "CAM";
+						} else if(alarm.getType() == AlarmInfo.BORDER_CONTROL) {
+							text = "CLO";
+						} else if(alarm.getType() == AlarmInfo.TOLL_BOOTH) {
+							text = "$";
+						} else if(alarm.getType() == AlarmInfo.TRAFFIC_CALMING) {
+							// temporary omega
+							text = "~^~";
+						} else if(alarm.getType() == AlarmInfo.STOP) {
+							// text = "STOP";
+						}
+						visible = text.length() > 0;
+					}
 				}
 				updateVisibility(visible);
 				return true;
 			}
+
+			@Override
+			protected void onDraw(Canvas canvas) {
+				RectF f = new RectF(th / 2, th / 2, getWidth() - th / 2, getHeight() - th / 2);
+				canvas.drawOval(f, content);
+				canvas.drawOval(f, paintCircle);
+				canvas.drawText(text, getWidth() / 2, getHeight() / 2 + ptext.descent() + 3 * scaleCoefficient, ptext);
+			}
+
 		};
 		// initial state
-//		nextTurnInfo.setVisibility(View.GONE);
-		return nextTurnInfo;
+		// nextTurnInfo.setVisibility(View.GONE);
+		return alarm;
 	}
 	
 	private NextTurnInfoControl createNextInfoControl() {
@@ -631,10 +690,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 								} else {
 									exitOut = null;
 								}
+								requestLayout();
 								invalidate();
 							}
 							if (distChanged(r.distanceTo, nextTurnDirection)) {
 								invalidate();
+								requestLayout();
 								nextTurnDirection = r.distanceTo;
 							}
 							if (turnImminent != r.imminent) {
