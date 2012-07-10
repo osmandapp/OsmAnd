@@ -842,8 +842,6 @@ public class BinaryRoutePlanner {
 		Collections.reverse(result);
 
 		// calculate time
-		float completeTime = 0;
-		float completeDistance = 0;
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
 			RouteDataObject road = rr.getObject();
@@ -893,8 +891,6 @@ public class BinaryRoutePlanner {
 						rr.setEndPointIndex(next);
 
 						result.add(i + 1, splitted);
-						completeTime += distOnRoadToPass;
-						completeDistance += distance;
 						// switch current segment to the splitted
 						rr = splitted;
 						distOnRoadToPass = 0;
@@ -908,10 +904,15 @@ public class BinaryRoutePlanner {
 			rr.setSegmentSpeed((float) speed);
 			rr.setDistance((float) distance);
 
-			completeTime += distOnRoadToPass;
-			completeDistance += distance;
+			
 		}
 		addTurnInfo(leftside, result);
+		float completeTime = 0;
+		float completeDistance = 0;
+		for(RouteSegmentResult r : result) {
+			completeTime += r.getSegmentTime();
+			completeDistance += r.getDistance();
+		}
 
 		println("ROUTE : ");
 		double startLat = MapUtils.get31LatitudeY(start.road.getPoint31YTile(start.segmentStart));
