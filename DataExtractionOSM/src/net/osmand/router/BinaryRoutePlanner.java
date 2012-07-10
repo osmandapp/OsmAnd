@@ -609,10 +609,20 @@ public class BinaryRoutePlanner {
 			RoutingTile tile = loadRoutes(ctx, x, y);
 			
 			// 2.1 calculate possible obstacle plus time
-			if(d > 0){
-				obstaclePlusTime +=  ctx.getRouter().defineObstacle(road, segmentEnd);
-			} else if(d < 0) {
-				obstacleMinusTime +=  ctx.getRouter().defineObstacle(road, segmentEnd);
+			if(segmentEnd > middle){
+				double obstacle = ctx.getRouter().defineObstacle(road, segmentEnd);
+				if(obstacle < 0){
+					plusAllowed = false;
+					continue;
+				}
+				obstaclePlusTime +=  obstacle;
+			} else if(segmentEnd < middle) {
+				double obstacle = ctx.getRouter().defineObstacle(road, segmentEnd);
+				if(obstacle < 0){
+					minusAllowed = false;
+					continue;
+				}
+				obstacleMinusTime +=  obstacle;
 			}
 			
 			
@@ -634,7 +644,7 @@ public class BinaryRoutePlanner {
 					speed = ctx.getRouter().getMinDefaultSpeed() * priority;
 				}
 				
-				double distStartObstacles = segment.distanceFromStart + ( d > 0? obstaclePlusTime : obstacleMinusTime) +
+				double distStartObstacles = segment.distanceFromStart + ( segmentEnd > middle? obstaclePlusTime : obstacleMinusTime) +
 						 distOnRoadToPass / speed;
 				
 				double distToFinalPoint = squareRootDist(x, y, targetEndX, targetEndY);
@@ -865,7 +875,12 @@ public class BinaryRoutePlanner {
 				double d = measuredDist(road.getPoint31XTile(j), road.getPoint31YTile(j), road.getPoint31XTile(next),
 						road.getPoint31YTile(next));
 				distance += d;
-				distOnRoadToPass += d / speed + ctx.getRouter().defineObstacle(road, j);
+				double obstacle = ctx.getRouter().defineObstacle(road, j);
+				if(obstacle >= 0) { 
+					distOnRoadToPass += d / speed + obstacle;
+				} else {
+					System.err.println("Something completely wrong if we pass obstacle < 0 " + Arrays.toString(road.getPointTypes(j)));
+				}
 				
 				List<RouteSegmentResult> attachedRoutes = rr.getAttachedRoutes(next);
 				if (next != rr.getEndPointIndex() && !rr.getObject().roundabout() && attachedRoutes != null) {

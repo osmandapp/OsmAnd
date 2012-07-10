@@ -13,7 +13,7 @@ public class GeneralRouter extends VehicleRouter {
 	Map<String, Double> highwaySpeed = new LinkedHashMap<String, Double>();
 	Map<String, Double> highwayPriorities = new LinkedHashMap<String, Double>();
 	Map<String, Double> highwayFuturePriorities = new LinkedHashMap<String, Double>();
-	Map<String, Double> avoidElements = new LinkedHashMap<String, Double>();
+	Map<String, Double> avoid = new LinkedHashMap<String, Double>();
 	Map<String, Double> obstacles = new LinkedHashMap<String, Double>();
 	boolean followSpeedLimitations = true;
 	boolean restrictionsAware = true;
@@ -40,7 +40,7 @@ public class GeneralRouter extends VehicleRouter {
 		for(int i=0; i<s.length; i++) {
 			RouteTypeRule r = way.region.quickGetEncodingRule(s[i]);
 			String k = r.getTag() + "$" + r.getValue();
-			if(avoidElements.containsKey(k)) {
+			if(avoid.containsKey(k)) {
 				return false;
 			}
 		}
@@ -94,8 +94,19 @@ public class GeneralRouter extends VehicleRouter {
 				return m;
 			}
 		}
-
-		Double value = highwaySpeed.get(road.getHighway());
+		
+		Double value = null;
+		for (int i = 0; i < road.types.length; i++) {
+			RouteTypeRule r = road.region.quickGetEncodingRule(road.types[i]);
+			String highway = r.highwayRoad();
+			if (highway != null && highwaySpeed.containsKey(highway)) {
+				value = highwaySpeed.get(highway);
+				break;
+			} else if(highwaySpeed.containsKey(r.getTag()+"$"+r.getValue())){
+				value = highwaySpeed.get(r.getTag()+"$"+r.getValue());
+				break;
+			}
+		}
 		if (value == null) {
 			value = minDefaultSpeed;
 		}
@@ -104,8 +115,16 @@ public class GeneralRouter extends VehicleRouter {
 
 	@Override
 	public double defineSpeedPriority(RouteDataObject road) {
-		String highway = road.getHighway();
-		double priority = highway != null && highwayPriorities.containsKey(highway) ? highwayPriorities.get(highway) : 1d;
+		double priority = 1;
+		for (int i = 0; i < road.types.length; i++) {
+			RouteTypeRule r = road.region.quickGetEncodingRule(road.types[i]);
+			String highway = r.highwayRoad();
+			if (highway != null && highwayPriorities.containsKey(highway)) {
+				priority *= highwayPriorities.get(highway);
+			} else if(highwayPriorities.containsKey(r.getTag()+"$"+r.getValue())){
+				priority *= highwayPriorities.get(r.getTag()+"$"+r.getValue());
+			}
+		}
 		return priority;
 	}
 
