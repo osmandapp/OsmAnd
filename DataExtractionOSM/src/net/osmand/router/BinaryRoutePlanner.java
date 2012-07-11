@@ -43,6 +43,8 @@ public class BinaryRoutePlanner {
 	
 	protected static final Log log = LogUtil.getLog(BinaryRoutePlanner.class);
 	
+	private static final int ROUTE_POINTS = 11;
+	
 	
 	public BinaryRoutePlanner(NativeLibrary nativeLib, BinaryMapIndexReader... map) {
 		this.nativeLib = nativeLib;
@@ -175,7 +177,7 @@ public class BinaryRoutePlanner {
 		ctx.visitedSegments = 0;
 		ctx.timeToCalculate = System.nanoTime();
 		if(ctx.config.initialDirection != null) {
-			ctx.firstRoadId = (start.getRoad().id << 8) + start.getSegmentStart();
+			ctx.firstRoadId = (start.getRoad().id << ROUTE_POINTS) + start.getSegmentStart();
 			double plusDir = start.getRoad().directionRoute(start.segmentStart, true);
 			double diff	 = plusDir - ctx.config.initialDirection;
 			if(Math.abs(MapUtils.alignAngleDifference(diff)) <= Math.PI / 3) {
@@ -207,6 +209,23 @@ public class BinaryRoutePlanner {
 		// Set to not visit one segment twice (stores road.id << X + segmentStart)
 		TLongObjectHashMap<RouteSegment> visitedDirectSegments = new TLongObjectHashMap<RouteSegment>();
 		TLongObjectHashMap<RouteSegment> visitedOppositeSegments = new TLongObjectHashMap<RouteSegment>();
+		
+		if(ctx.previouslyCalculatedRoute != null && ctx.previouslyCalculatedRoute.size() >0) {
+			RouteSegment previous = null;
+			int previousSegmentEnd = 0;
+			for(RouteSegmentResult rr : ctx.previouslyCalculatedRoute) {
+				RouteSegment segment = new RouteSegment(rr.getObject(), rr.getEndPointIndex());
+				if(previous != null) {
+					segment.parentRoute = previous;
+					segment.parentSegmentEnd = previousSegmentEnd; 
+				}
+				previous = segment;
+				previousSegmentEnd = rr.getStartPointIndex();
+				long t = rr.getObject().getId() << ROUTE_POINTS + rr.getEndPointIndex();
+				visitedOppositeSegments.put(t, segment);
+			}
+			end = previous;
+		}
 		
 		// for start : f(start) = g(start) + h(start) = 0 + h(start) = h(start)
 		int targetEndX = end.road.getPoint31XTile(end.segmentStart);
@@ -247,7 +266,9 @@ public class BinaryRoutePlanner {
 			if (graphReverseSegments.isEmpty() || graphDirectSegments.isEmpty() || routeFound) {
 				break;
 			}
-			if (!init) {
+			if(ctx.previouslyCalculatedRoute != null){
+				// nothing change
+			} else if (!init) {
 				inverse = !inverse;
 				init = true;
 			} else if (ctx.planRouteIn2Directions()) {
@@ -543,7 +564,7 @@ public class BinaryRoutePlanner {
 		double obstacleMinusTime = 0;
 
 		// 0. mark route segment as visited
-		long nt = (road.getId() << 8l) + middle;
+		long nt = (road.getId() << 11l) + middle;
 		// avoid empty segments to connect but mark the point as visited
 		visitedSegments.put(nt, null);
 
@@ -600,7 +621,7 @@ public class BinaryRoutePlanner {
 			}
 
 			// if we found end point break cycle
-			long nts = (road.getId() << 8l) + segmentEnd;
+			long nts = (road.getId() << ROUTE_POINTS) + segmentEnd;
 			visitedSegments.put(nts, segment);
 
 			// 2. calculate point and try to load neighbor ways if they are not loaded
@@ -757,7 +778,7 @@ public class BinaryRoutePlanner {
 			if(nextIterator != null) {
 				next = nextIterator.next();
 			}
-			long nts = (next.road.getId() << 8l) + next.segmentStart;
+			long nts = (next.road.getId() << ROUTE_POINTS) + next.segmentStart;
 			
 			// 1. Check if opposite segment found so we can stop calculations
 			if (oppositeSegments.contains(nts) && oppositeSegments.get(nts) != null) {

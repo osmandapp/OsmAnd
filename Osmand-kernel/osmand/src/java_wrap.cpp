@@ -441,8 +441,8 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_loadRout
 	RoutingIndex ind;
 	ind.filePointer = filepointer;
 	ind.name = getString(ienv, regName);
-	jclass jclIntArray = ienv->FindClass("[I");
-	jclass jclstring = ienv->FindClass("Ljava/lang/String;");
+	jclass jclIntArray = findClass(ienv, "[I");
+	jclass jclstring = findClass(ienv, "java/lang/String");
 
 	std::vector<RouteDataObject*> result;
 	SearchQuery q(left, right, top, bottom);

@@ -9,6 +9,7 @@ import gnu.trove.set.hash.TLongHashSet;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import net.osmand.binary.RouteDataObject;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
@@ -24,6 +25,8 @@ public class RoutingContext {
 	private int relaxingIteration = 0;
 	public long firstRoadId = 0;
 	public int firstRoadDirection = 0;;
+	
+	public List<RouteSegmentResult> previouslyCalculatedRoute;
 	
 
 	// 2. Routing memory cache (big objects)
