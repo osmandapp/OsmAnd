@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <fragment class="net.osmand.plus.fragments.MainMenuFragment"
+            android:id="@+id/MainMenu"
+            android:layout_weight="1" android:layout_width="120dp" android:layout_height="match_parent" />
+    <FrameLayout android:id="@+id/Details"
+    		android:layout_weight="1" android:layout_width="fill_parent" android:layout_height="match_parent"
+            android:background="?android:attr/detailsElementBackground" />
+</LinearLayout>

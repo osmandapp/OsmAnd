@@ -89,7 +89,7 @@ public class NavigationService extends Service implements LocationListener {
 	public void onCreate() {
 		super.onCreate();
 		// initializing variables
-		setForeground(true);
+		//setForeground(true);
 		handler = new Handler();
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		serviceOffInterval = settings.SERVICE_OFF_INTERVAL.get();

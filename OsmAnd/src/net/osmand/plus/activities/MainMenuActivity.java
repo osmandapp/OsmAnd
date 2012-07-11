@@ -164,7 +164,12 @@ public class MainMenuActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		boolean exit = false;
+
+		final Intent mapIndent = new Intent(this, MapActivity.class);
+		startActivityForResult(mapIndent, 0);
+		
+		/*
+                boolean exit = false;
 		if(getIntent() != null){
 			Intent intent = getIntent();
 			if(intent.getExtras() != null && intent.getExtras().containsKey(APP_EXIT_KEY)){
@@ -275,6 +280,7 @@ public class MainMenuActivity extends Activity {
 			}
 		}
 		checkPreviousRunsForExceptions(firstTime);
+		*/
 	}
 
 	private void applicationInstalledFirstTime() {

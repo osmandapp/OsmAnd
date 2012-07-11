@@ -3,12 +3,15 @@ package net.osmand.plus.views;
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.OsmAndFormatter;
+import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.search.SearchActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -43,9 +46,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 	private boolean showZoomLevel = false;
 	
+        private Button zoomInButton;
+        private Button zoomOutButton;
+	private Button routingButton;
+	private Button searchButton;
+	private Button centerButton;
+	private ImageView compassView;
 	
-	private Button zoomInButton;
-	private Button zoomOutButton;
+	private int numInitializedMenuOptions;
+	private float cachedRotate = 0;
+	private boolean isFollowingMode = false;
 	
 	private TextPaint zoomTextPaint;
 	private Drawable zoomShadow;
@@ -88,6 +98,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 		FrameLayout parent = (FrameLayout) view.getParent();
 		showUIHandler = new Handler();
 		
+		numInitializedMenuOptions = 0;
+		initRoutingButton(view, parent);
+		initSearchButton(view, parent);
+		initCenterButton(view, parent);
+		initCompass(view, parent);
 		initZoomButtons(view, parent);
 
 		initBackToMenuButton(view, parent);
@@ -128,6 +143,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 			drawZoomLevel(canvas);
 		} else {
 			drawRuler(canvas);
+		}
+		
+		if(view.getRotate() != cachedRotate) {
+		    cachedRotate = view.getRotate();
+		    compassView.invalidate();
 		}
 	}
 
@@ -227,6 +247,75 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	
+	private void initRuler(OsmandMapTileView view, FrameLayout parent) {
+	    rulerTextPaint = new TextPaint();
+	    rulerTextPaint.setTextSize(20 * scaleCoefficient);
+	    rulerTextPaint.setAntiAlias(true);
+	    rulerDrawable = view.getResources().getDrawable(R.drawable.ruler);
+	}
+
+
+	private double getMinimumButtonHeight(final OsmandMapTileView view) {
+	    return view.getResources().getDrawable(R.drawable.map_zoom_in_vertical).getMinimumHeight() * 1.25;
+        }
+ 
+        private Button addButtonOption(int backgroundResourceId, final OsmandMapTileView view, FrameLayout parent) {
+               Button button = new Button(view.getContext());
+               button.setBackgroundResource(backgroundResourceId);
+               addOption(button, view, parent);
+               return button;
+        }
+
+
+        private void addOption(View menuOptionView, final OsmandMapTileView view, FrameLayout parent) {
+            android.widget.FrameLayout.LayoutParams params =
+                    new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
+                            LayoutParams.WRAP_CONTENT, Gravity.RIGHT);
+            params.setMargins(0, (int)(getMinimumButtonHeight(view) * numInitializedMenuOptions), 0, 0);
+            parent.addView(menuOptionView, params);
+            numInitializedMenuOptions++;
+        }
+
+        private void initRoutingButton(final OsmandMapTileView view, FrameLayout parent) {
+            routingButton = addButtonOption(R.drawable.map_routing, view, parent);
+            routingButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                /*
+                       RoutingFragment fragment = (RoutingFragment)
+                               getFragmentManager().findFragmentById(R.id.Details);
+                       if (fragment == null) {
+                       fragment = new RoutingFragment();
+                       fragment.show(R.id.Details);
+                       }
+                */
+                  
+                    /*
+                    final Dialog dialog = new Dialog(activity, R.style.Dialog_Floating);
+                    dialog.setContentView(R.layout.routing_dialog);
+                    dialog.show();
+                       
+                    Button closeButton = (Button) dialog.findViewById(R.id.closeButton);
+                    closeButton.setOnClickListener(new View.OnClickListener() {                         
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                     */
+                    /*
+                       final Intent routing = new Intent(activity, RoutingActivity.class);
+                               // TODO(natashaj): what happens if map is not loaded yet?
+                               LatLon loc = activity.getMapLocation();
+                               routing.putExtra(RoutingActivity.CURRENT_LATITUDE, loc.getLatitude());
+                               routing.putExtra(RoutingActivity.CURRENT_LONGITUDE, loc.getLongitude());
+                               routing.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                               activity.startActivity(routing);
+                     */
+                }
+            });
+        }
+
 	private void initBackToMenuButton(final OsmandMapTileView view, FrameLayout parent) {
 		android.widget.FrameLayout.LayoutParams params;
 		Context ctx = view.getContext();
@@ -251,51 +340,78 @@ public class MapControlsLayer extends OsmandMapLayer {
 		activity.accessibleContent.add(backToMenuButton);
 	}
 	
-	private void initRuler(OsmandMapTileView view, FrameLayout parent) {
-		rulerTextPaint = new TextPaint();
-		rulerTextPaint.setTextSize(20 * scaleCoefficient);
-		rulerTextPaint.setAntiAlias(true);
-		
-		
-		rulerDrawable = view.getResources().getDrawable(R.drawable.ruler);
-	}
+        private void initSearchButton(final OsmandMapTileView view, FrameLayout parent) {
+            searchButton = addButtonOption(R.drawable.map_search, view, parent);
+            searchButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final Intent search = new Intent(activity, SearchActivity.class);
+                    // TODO(natashaj): what happens if map is not loaded yet?
+                    LatLon loc = activity.getMapLocation();
+                    search.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
+                    search.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
+                    // causes wrong position caching:  search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    search.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    activity.startActivity(search);
+                }
+            });
+        }
+        
+
+       private void initCenterButton(final OsmandMapTileView view, FrameLayout parent) {
+               centerButton = addButtonOption(R.drawable.map_center, view, parent);
+               centerButton.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View v) {
+                               isFollowingMode = !isFollowingMode;
+                               activity.backToLocationImpl();
+                       }
+               });
+        }
+        
+       private void initCompass(final OsmandMapTileView view, FrameLayout parent) {
+               final Drawable compass = view.getResources().getDrawable(R.drawable.map_compass);
+               final int mw = (int) compass.getMinimumWidth() ;
+               final int mh = (int) compass.getMinimumHeight() ;
+               compassView = new ImageView(view.getContext()) {
+                       @Override
+                       protected void onDraw(Canvas canvas) {
+                               canvas.save();
+                               canvas.rotate(view.getRotate(), mw / 2, mh / 2);
+                               compass.draw(canvas);
+                               canvas.restore();
+                       }
+               };
+               compassView.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View v) {
+                               activity.switchRotateMapMode();
+                       }
+               });
+               compassView.setImageDrawable(compass);
+               addOption(compassView, view, parent);
+       }
+
+       // TODO(natashaj) adjust size and height of buttons
+       private void initZoomButtons(final OsmandMapTileView view, FrameLayout parent) {
+               ImageView rightShadow = new ImageView(view.getContext());
+               // TODO(natashaj) add a resource for right_shadow
+               rightShadow.setBackgroundResource(R.drawable.bottom_shadow);
+               android.widget.FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.FILL_PARENT,
+                                       Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+               params.setMargins(0, 0, 0, 0);
+               parent.addView(rightShadow, params);
+               
+               zoomTextPaint = new TextPaint();
+               zoomTextPaint.setTextSize(18 * scaleCoefficient);
+               zoomTextPaint.setAntiAlias(true);
+               zoomTextPaint.setFakeBoldText(true);
+               
+               zoomShadow = view.getResources().getDrawable(R.drawable.zoom_background_vertical);
+               
+               zoomInButton = addButtonOption(R.drawable.map_zoom_in_vertical, view, parent);
+               zoomOutButton = addButtonOption(R.drawable.map_zoom_out_vertical, view, parent);
 	
-	private void initZoomButtons(final OsmandMapTileView view, FrameLayout parent) {
-		int minimumWidth = view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumWidth();
-		
-		Context ctx = view.getContext();
-		ImageView bottomShadow = new ImageView(ctx);
-		bottomShadow.setBackgroundResource(R.drawable.bottom_shadow);
-		android.widget.FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT,
-					Gravity.BOTTOM);
-		params.setMargins(0, 0, 0, 0);
-		parent.addView(bottomShadow, params);
-		
-		zoomTextPaint = new TextPaint();
-		zoomTextPaint.setTextSize(18 * scaleCoefficient);
-		zoomTextPaint.setAntiAlias(true);
-		zoomTextPaint.setFakeBoldText(true);
-		
-		zoomShadow = view.getResources().getDrawable(R.drawable.zoom_background);
-		
-		zoomInButton = new Button(ctx);
-		zoomInButton.setBackgroundResource(R.drawable.map_zoom_in);
-		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
-					Gravity.BOTTOM | Gravity.RIGHT);
-		params.setMargins(0, 0, 0, 0);
-		zoomInButton.setContentDescription(ctx.getString(R.string.zoomIn));
-		parent.addView(zoomInButton, params);
-		
-		
-		zoomOutButton = new Button(ctx);
-		zoomOutButton.setBackgroundResource(R.drawable.map_zoom_out);
-		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
-					Gravity.BOTTOM | Gravity.RIGHT);
-		
-		params.setMargins(0, 0, minimumWidth , 0);
-		zoomOutButton.setContentDescription(ctx.getString(R.string.zoomOut));
-		parent.addView(zoomOutButton, params);
-		
 		activity.accessibleContent.add(zoomInButton);
 		activity.accessibleContent.add(zoomOutButton);
 		
@@ -322,9 +438,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 	}
 	
-
-
-
 	/////////////////  Transparency bar /////////////////////////
 	private void initTransparencyBar(final OsmandMapTileView view, FrameLayout parent) {
 		int minimumHeight = view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumHeight();
@@ -416,13 +529,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 			
 			double roundedDist = OsmAndFormatter.calculateRoundedDist(dist * screenRulerPercent, view.getContext());
 			
-			int cacheRulerDistPix = (int) (pixDensity * roundedDist);
-			cacheRulerText = ShadowText.create(OsmAndFormatter.getFormattedDistance((float) roundedDist, view.getContext()));
+			int cacheRulerDistPix = (int) (pixDensity * roundedDist / 2);
+			cacheRulerText = ShadowText.create(OsmAndFormatter.getFormattedDistance((float) roundedDist / 2, view.getContext()));
 			cacheRulerTextLen = zoomTextPaint.measureText(cacheRulerText.getText());
 			
 			Rect bounds = rulerDrawable.getBounds();
 			bounds.right = (int) (view.getWidth() - 7 * scaleCoefficient);
-			bounds.bottom = (int) (view.getHeight() - view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumHeight());
+			bounds.bottom = (int) (view.getHeight() - rulerDrawable.getMinimumHeight());//view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumHeight());
 			bounds.top = bounds.bottom - rulerDrawable.getMinimumHeight();
 			bounds.left = bounds.right - cacheRulerDistPix;
 			rulerDrawable.setBounds(bounds);

@@ -210,7 +210,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 		parent.addView(rightStack);
 		parent.addView(leftStack);
-		parent.addView(statusBar);
+		//parent.addView(statusBar);
 		parent.addView(lanesControl);
 	}
 
@@ -247,7 +247,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 		lanesControl.updateInfo();
 //		topText.setTextColor(color);
-//		String text = "Пр.Независимости";
+//		String text = "foobar";
 //		float ts = topText.getPaint().measureText(text);
 //		int wth = topText.getRight() /*- compassView.getRight()*/;
 //		while(ts > wth && topText.getTextSize() - 1 > 5) {
@@ -722,12 +722,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		ImageView globus = new ImageView(view.getContext());
 		globus.setImageDrawable(globusDrawable);
-		globus.setOnClickListener(new View.OnClickListener() {
+		/*
+		// TODO(natashaj): no need to change map type (offline vector vs mapnik vs cycle for e.g.)
+                globus.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				map.getMapLayers().selectMapLayer(view);
 			}
 		});
+		*/
 		fl.addView(globus, fparams);
 		
 		fparams = new FrameLayout.LayoutParams(globusDrawable.getMinimumWidth(), globusDrawable.getMinimumHeight());

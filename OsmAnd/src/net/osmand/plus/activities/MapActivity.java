@@ -150,7 +150,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		// Full screen is not used here
 		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.main);
+		setContentView(R.layout.main_map_fragment);
 		startProgressDialog = new ProgressDialog(this);
 		startProgressDialog.setCancelable(true);
 		((OsmandApplication) getApplication()).checkApplicationIsBeingInitialized(this, startProgressDialog);

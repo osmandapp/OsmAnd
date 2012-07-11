@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants" android:focusableInTouchMode="true">
+    <RelativeLayout android:id="@+id/Details" 
+            android:layout_weight="1" android:layout_width="fill_parent" android:layout_height="match_parent" android:background="@color/color_light_gray" android:paddingLeft="10dp" android:paddingTop="10dp" android:paddingRight="10dp" android:paddingBottom="10dp">
+        <AutoCompleteTextView android:id="@+id/destText" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="2" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_alignParentLeft="true" android:layout_alignBottom="@+id/cancelButton" android:layout_toLeftOf="@+id/routeButton" android:hint="@string/enter_destination" android:lines="3" android:gravity="top|left"></AutoCompleteTextView>
+        <Button android:id="@+id/routeButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1" android:layout_below="@+id/textView1" android:layout_alignParentRight="true" android:clickable="false" android:layout_alignLeft="@+id/cancelButton" android:paddingLeft="5dp" android:background="@drawable/box_free" android:textSize="16dp" android:text="@string/route"></Button>
+        <Button android:id="@+id/cancelButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1" android:layout_below="@+id/routeButton" android:layout_alignParentRight="true" android:text="@string/cancel" android:cursorVisible="false" android:paddingLeft="5dp" android:background="@drawable/box_free"></Button>
+        <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="fill_parent" android:layout_below="@+id/destText">
+		    <fragment android:name="net.osmand.plus.fragments.RoutingOptionListFragment"
+		            android:id="@+id/routingListView"
+		            android:layout_weight="1"
+		            android:layout_width="0dp"
+		            android:layout_height="fill_parent" />
+<!-- 
+		    <fragment android:name="net.osmand.plus.fragments.RoutingOptionDetailsFragment"
+		            android:id="@+id/routingDetailsView"
+		            android:layout_weight="2"
+		            android:layout_width="0dp"
+		            android:layout_height="fill_parent" />
+-->		            
+       </LinearLayout>
+ 
+      </RelativeLayout>
+    <!-- 
+        <ListView android:id="@+id/destOptionList" android:layout_width="0px" android:layout_weight="0.3" android:layout_height="fill_parent" android:layout_alignParentBottom="true" android:layout_alignLeft="@+id/destText" android:layout_below="@+id/destText" android:background="@color/color_orange"></ListView>
+        <ExpandableListView android:id="@+id/destOptionDrillDown" android:layout_width="0px" android:layout_weight="0.7" android:layout_height="fill_parent" android:layout_below="@+id/destText" android:layout_toRightOf="@+id/destOptionList" android:background="@color/color_red"></ExpandableListView>
+     -->
+</LinearLayout>

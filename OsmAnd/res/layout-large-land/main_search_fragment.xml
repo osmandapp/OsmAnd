@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <fragment class="net.osmand.plus.fragments.MainMenuFragment"
+            android:id="@+id/MainMenu"
+            android:layout_weight="1" android:layout_width="120dp" android:layout_height="match_parent" />
+    <FrameLayout android:id="@+id/Details" 
+            android:layout_weight="1" android:layout_width="fill_parent" android:layout_height="match_parent" 
+            android:background="?android:attr/detailsElementBackground">
+<TabHost
+    android:id="@android:id/tabhost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" android:orientation="vertical">
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/search_back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="@drawable/tab_back_button"
+                android:text="" />
+
+   		  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+		  android:layout_marginLeft = "3dp" android:text="@string/select_search_position" android:layout_gravity="center_vertical|left">
+   		  </TextView>
+   		  <Spinner
+                android:id="@+id/SpinnerLocation"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/tab_search_panel_selector"
+                />
+		</LinearLayout>
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+		<FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+    </LinearLayout>
+</TabHost>
+</FrameLayout>
+</LinearLayout>

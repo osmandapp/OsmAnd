@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <!-- 
+    <fragment class="net.osmand.plus.fragments.MainMenuFragment"
+            android:id="@+id/MainMenu"
+            android:layout_weight="1" android:layout_width="120dp" android:layout_height="match_parent" />
+    -->
+    <FrameLayout android:id="@+id/Details" 
+            android:layout_weight="1" android:layout_width="fill_parent" android:layout_height="match_parent">
+		<net.osmand.plus.views.OsmandMapTileView
+			android:id="@+id/MapView" 
+			android:layout_width="fill_parent" 
+			android:layout_height="fill_parent"/>
+	    <LinearLayout 
+			android:layout_width="wrap_content" 
+			android:id="@+id/RouteLayout" 
+			android:orientation="horizontal" 
+			android:layout_height="wrap_content" 
+			android:layout_marginBottom="12dp" 
+			android:layout_gravity="bottom|center">		
+			<Button 
+				android:layout_width="wrap_content" 
+				android:id="@+id/PreviousButton" 
+				android:layout_height="wrap_content" 
+				android:background="@android:drawable/ic_media_previous"/>
+			<Button 
+				android:layout_width="wrap_content" 
+				android:id="@+id/InfoButton" 
+				android:layout_height="wrap_content" 
+				android:background="@android:drawable/ic_dialog_info" 
+				android:layout_marginLeft="8dp"/>
+			<Button 
+				android:layout_width="wrap_content" 
+				android:id="@+id/NextButton" 
+				android:layout_height="wrap_content" 
+				android:background="@android:drawable/ic_media_next"
+				android:layout_marginLeft="8dp" 
+				android:layout_marginRight="55dp" />
+		</LinearLayout>
+	</FrameLayout>
+</LinearLayout>

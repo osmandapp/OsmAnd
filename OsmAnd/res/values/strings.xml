@@ -1062,4 +1062,13 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 <string name="edit_filter_delete_message">Filter {0} has been deleted</string>
 <string name="edit_filter_create_message">Filter {0} has been created</string>
 <string name="default_buttons_selectall">Select All</string>
+<string name="music_button">Music</string>
+<string name="phone_button">Phone</string>
+<string name="car_button">Car</string>
+<string name="enter_destination">Enter destination</string>
+<string name="directions">Directions</string>
+<string name="go">Go</string>
+<string name="cancel">Cancel</string>
+<string name="route">Route</string>
+
 </resources>

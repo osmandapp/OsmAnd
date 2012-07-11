@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- When selected, use grey -->
+    <item android:drawable="@drawable/my_car_icon" android:state_selected="true" />
+    <!-- When not selected, use white TODO:natashaj create selected icon -->
+    <item android:drawable="@drawable/my_car_icon" />
+</selector>

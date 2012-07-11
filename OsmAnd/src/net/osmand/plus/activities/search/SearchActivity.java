@@ -96,7 +96,7 @@ public class SearchActivity extends TabActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
-		setContentView(R.layout.search_main);
+		setContentView(R.layout.main_search_fragment);
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		
 		Button backButton = (Button) findViewById(R.id.search_back_button);
