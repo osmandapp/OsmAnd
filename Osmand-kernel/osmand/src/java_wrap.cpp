@@ -454,7 +454,7 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_loadRout
 			jintArray nameInts = ienv->NewIntArray(result[i]->names.size());
 			jobjectArray nameStrings = ienv->NewObjectArray(result[i]->names.size(),
 					jclstring, NULL);
-			jint* ar = ienv->GetIntArrayElements(nameInts, NULL);
+			jint ar[result[i]->names.size()];
 			UNORDERED(map)<int, std::string >::iterator itNames = result[i]->names.begin();
 			jsize sz = 0;
 			for(;itNames != result[i]->names.end(); itNames++, sz++) {
@@ -465,7 +465,6 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_loadRout
 				ar[sz] = itNames->first;
 			}
 			ienv->SetIntArrayRegion(nameInts, 0, result[i]->names.size(),ar);
-			ienv->ReleaseIntArrayElements(nameInts, ar, result[i]->names.size());
 			jobject robj = ienv->NewObject(jclass_RouteDataObject, jmethod_RouteDataObject_init, reg,
 					nameInts, nameStrings);
 			ienv->DeleteLocalRef(nameInts);
@@ -523,6 +522,8 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_loadRout
 			ienv->DeleteLocalRef(robj);
 		}
 	}
+	ienv->DeleteLocalRef(jclIntArray);
+	ienv->DeleteLocalRef(jclstring);
 	for (unsigned int i = 0; i < result.size(); i++) {
 		delete result[i];
 		result[i] = NULL;
