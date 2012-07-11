@@ -15,6 +15,8 @@
 JavaVM* globalJVM = NULL;
 void loadJniRenderingContext(JNIEnv* env);
 void loadJniRenderingRules(JNIEnv* env);
+jclass jclassIntArray ;
+jclass jclassString;
 
 extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
 {
@@ -24,6 +26,8 @@ extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
 	globalJVM = vm;
 	loadJniRenderingContext(globalJniEnv);
 	loadJniRenderingRules(globalJniEnv);
+	jclassIntArray = findClass(globalJniEnv, "[I");
+	jclassString = findClass(globalJniEnv, "java/lang/String");
 
 	osmand_log_print(LOG_INFO, "JNI_OnLoad completed");
 	
@@ -441,8 +445,7 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_loadRout
 	RoutingIndex ind;
 	ind.filePointer = filepointer;
 	ind.name = getString(ienv, regName);
-	jclass jclIntArray = findClass(ienv, "[I");
-	jclass jclstring = findClass(ienv, "java/lang/String");
+
 
 	std::vector<RouteDataObject*> result;
 	SearchQuery q(left, right, top, bottom);
@@ -453,7 +456,7 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_loadRout
 		if (result[i] != NULL) {
 			jintArray nameInts = ienv->NewIntArray(result[i]->names.size());
 			jobjectArray nameStrings = ienv->NewObjectArray(result[i]->names.size(),
-					jclstring, NULL);
+					jclassString, NULL);
 			jint ar[result[i]->names.size()];
 			UNORDERED(map)<int, std::string >::iterator itNames = result[i]->names.begin();
 			jsize sz = 0;
@@ -502,7 +505,7 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_loadRout
 			ienv->DeleteLocalRef(restrictions);
 
 
-			jobjectArray pointTypes = ienv->NewObjectArray(result[i]->pointTypes.size(), jclIntArray, NULL);
+			jobjectArray pointTypes = ienv->NewObjectArray(result[i]->pointTypes.size(), jclassIntArray, NULL);
 			for(jint k = 0; k < result[i]->pointTypes.size(); k++ ) {
 				std::vector<uint32_t> ts = result[i]->pointTypes[k];
 				if (ts.size() > 0) {
@@ -522,8 +525,6 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_loadRout
 			ienv->DeleteLocalRef(robj);
 		}
 	}
-	ienv->DeleteLocalRef(jclIntArray);
-	ienv->DeleteLocalRef(jclstring);
 	for (unsigned int i = 0; i < result.size(); i++) {
 		delete result[i];
 		result[i] = NULL;

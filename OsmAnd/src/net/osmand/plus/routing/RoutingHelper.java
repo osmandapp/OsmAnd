@@ -235,7 +235,8 @@ public class RoutingHelper {
 		}
 
 		if (calculateRoute) {
-			recalculateRouteInBackground(lastFixedLocation, finalLocation, currentGPXRoute);
+			recalculateRouteInBackground(lastFixedLocation, finalLocation, currentGPXRoute,
+					route.isCalculated()? route : null);
 		}
 		return locationProjection;
 	}
@@ -497,7 +498,7 @@ public class RoutingHelper {
 	
 	
 	
-	private void recalculateRouteInBackground(final Location start, final LatLon end, final GPXRouteParams gpxRoute){
+	private void recalculateRouteInBackground(final Location start, final LatLon end, final GPXRouteParams gpxRoute, final RouteCalculationResult previousRoute){
 		if (start == null || end == null) {
 			return;
 		}
@@ -514,7 +515,7 @@ public class RoutingHelper {
 						@Override
 						public void run() {
 							boolean leftSide = settings.LEFT_SIDE_NAVIGATION.get();
-							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, gpxRoute, fastRouteMode, 
+							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, gpxRoute, previousRoute, fastRouteMode, 
 									leftSide);
 							synchronized (RoutingHelper.this) {
 								if (res.isCalculated()) {

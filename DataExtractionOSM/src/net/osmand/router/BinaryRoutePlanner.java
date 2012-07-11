@@ -210,19 +210,19 @@ public class BinaryRoutePlanner {
 		TLongObjectHashMap<RouteSegment> visitedDirectSegments = new TLongObjectHashMap<RouteSegment>();
 		TLongObjectHashMap<RouteSegment> visitedOppositeSegments = new TLongObjectHashMap<RouteSegment>();
 		
-		if(ctx.previouslyCalculatedRoute != null && ctx.previouslyCalculatedRoute.size() >0) {
+		boolean runRecalculation = ctx.previouslyCalculatedRoute != null && ctx.previouslyCalculatedRoute.size() > 0;
+		if (runRecalculation) {
 			RouteSegment previous = null;
-			int previousSegmentEnd = 0;
-			for(RouteSegmentResult rr : ctx.previouslyCalculatedRoute) {
+			for (RouteSegmentResult rr : ctx.previouslyCalculatedRoute) {
 				RouteSegment segment = new RouteSegment(rr.getObject(), rr.getEndPointIndex());
-				if(previous != null) {
-					segment.parentRoute = previous;
-					segment.parentSegmentEnd = previousSegmentEnd; 
+				if (previous != null) {
+					previous.parentRoute = segment;
+					previous.parentSegmentEnd = rr.getStartPointIndex();
+					long t = (rr.getObject().getId() << ROUTE_POINTS) + segment.segmentStart;
+					visitedOppositeSegments.put(t, segment);
 				}
 				previous = segment;
-				previousSegmentEnd = rr.getStartPointIndex();
-				long t = rr.getObject().getId() << ROUTE_POINTS + rr.getEndPointIndex();
-				visitedOppositeSegments.put(t, segment);
+				
 			}
 			end = previous;
 		}
@@ -266,8 +266,9 @@ public class BinaryRoutePlanner {
 			if (graphReverseSegments.isEmpty() || graphDirectSegments.isEmpty() || routeFound) {
 				break;
 			}
-			if(ctx.previouslyCalculatedRoute != null){
-				// nothing change
+			if(runRecalculation) {
+				// nothing to do
+				inverse = false;
 			} else if (!init) {
 				inverse = !inverse;
 				init = true;
@@ -1105,14 +1106,14 @@ public class BinaryRoutePlanner {
 				if(attachedRoutes != null){
 					for(RouteSegmentResult rs : attachedRoutes){
 						double ex = MapUtils.degreesDiff(rs.getBearingBegin(), rr.getBearingBegin());
-						if(ex < 60 && ex >= 0) {
+						if(ex < 45 && ex >= 0) {
 							kl = true;
 							int lns = rs.getObject().getLanes();
 							if (lns > 0) {
 								right += lns;
 							}
 							speak = speak  || !highwayLowEnd(rs.getObject().getHighway());
-						} else if(ex > -60 && ex <= 0) {
+						} else if(ex > -45 && ex <= 0) {
 							kr = true;
 							int lns = rs.getObject().getLanes();
 							if (lns > 0) {

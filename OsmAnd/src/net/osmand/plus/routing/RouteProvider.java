@@ -147,7 +147,7 @@ public class RouteProvider {
 	
 
 	public RouteCalculationResult calculateRouteImpl(Location start, LatLon end, ApplicationMode mode, RouteService type, Context ctx,
-			GPXRouteParams gpxRoute, boolean fast, boolean leftSide){
+			GPXRouteParams gpxRoute, RouteCalculationResult previousToRecalculate, boolean fast, boolean leftSide){
 		long time = System.currentTimeMillis();
 		if (start != null && end != null) {
 			if(log.isInfoEnabled()){
@@ -162,7 +162,11 @@ public class RouteProvider {
 				} else if (type == RouteService.ORS) {
 					res = findORSRoute(start, end, mode, fast, ctx, leftSide);
 				} else if (type == RouteService.OSMAND) {
-					res = findVectorMapsRoute(start, end, mode, fast, (OsmandApplication)ctx.getApplicationContext(), leftSide);
+					List<RouteSegmentResult> originalRoute = null;
+					if(previousToRecalculate != null) {
+						originalRoute = previousToRecalculate.getOriginalRoute();
+					}
+					res = findVectorMapsRoute(start, end, mode, fast, (OsmandApplication)ctx.getApplicationContext(), originalRoute, leftSide);
 				} else {
 					res = findCloudMadeRoute(start, end, mode, ctx, fast, leftSide);
 				}
@@ -302,7 +306,9 @@ public class RouteProvider {
 		return new RouteCalculationResult(res, null, start, end, null, ctx, leftSide, true);
 	}
 	
-	protected RouteCalculationResult findVectorMapsRoute(Location start, LatLon end, ApplicationMode mode, boolean fast, OsmandApplication app, boolean leftSide) throws IOException {
+	protected RouteCalculationResult findVectorMapsRoute(Location start, LatLon end, ApplicationMode mode, boolean fast, OsmandApplication app,
+			List<RouteSegmentResult> previousRoute,
+			boolean leftSide) throws IOException {
 		BinaryMapIndexReader[] files = app.getResourceManager().getRoutingMapFiles();
 		BinaryRoutePlanner router = new BinaryRoutePlanner(NativeOsmandLibrary.getLoadedLibrary(), files);
 		File routingXml = app.getSettings().extendOsmandPath(ResourceManager.ROUTING_XML);
@@ -326,6 +332,7 @@ public class RouteProvider {
 			p = GeneralRouterProfile.CAR;
 		}
 		RoutingContext ctx = new RoutingContext(config.build(p.name().toLowerCase(), !fast, start.hasBearing() ?  start.getBearing() / 180d * Math.PI : null));
+		ctx.previouslyCalculatedRoute = previousRoute;
 		RouteSegment st= router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);
 		if (st == null) {
 			return new RouteCalculationResult(app.getString(R.string.starting_point_too_far));

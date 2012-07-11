@@ -96,6 +96,20 @@ public class RouteCalculationResult {
 			}
 		}
 	}
+	
+	public List<RouteSegmentResult> getOriginalRoute() {
+		if (segments.size() == 0) {
+			return null;
+		}
+		List<RouteSegmentResult> list = new ArrayList<RouteSegmentResult>();
+		list.add(segments.get(0));
+		for (int i = 1; i < segments.size(); i++) {
+			if (segments.get(i - 1) != segments.get(i)) {
+				list.add(segments.get(i));
+			}
+		}
+		return list;
+	}
 
 	/**
 	 * PREPARATION 

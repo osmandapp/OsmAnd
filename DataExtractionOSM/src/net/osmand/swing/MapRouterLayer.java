@@ -591,9 +591,6 @@ public class MapRouterLayer implements MapPanelLayer {
 				ctx.previouslyCalculatedRoute = previousRoute;
 				log.info("Use " + config.routerName + "mode for routing");
 				
-//				int dir = DataExtractionSettings.getSettings().getRouteDirection();
-//				ctx.setPlanRoadDirection(dir);
-				
 				// find closest way
 				RouteSegment st = router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);
 				if (st == null) {
@@ -664,7 +661,7 @@ public class MapRouterLayer implements MapPanelLayer {
 				});
 				
 				List<RouteSegmentResult> searchRoute = router.searchRoute(ctx, st, e, false);
-				previousRoute = searchRoute;
+				this.previousRoute = searchRoute;
 				if (animateRoutingCalculation) {
 					playPauseButton.setVisible(false);
 					nextTurn.setText("FINISH");
