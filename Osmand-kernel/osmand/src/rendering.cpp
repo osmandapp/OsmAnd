@@ -261,10 +261,16 @@ SkPaint* oneWayPaint(){
 }
 void drawOneWayPaints(RenderingContext* rc, SkCanvas* cv, SkPath* p, int oneway) {
 	if (oneWayPaints.size() == 0) {
-		SkPathEffect* arrowDashEffect1 = new SkDashPathEffect((float []) {0, 12, 10, 152}, 4, 0);
-		SkPathEffect* arrowDashEffect2 = new SkDashPathEffect((float[]) {0, 12, 9, 153}, 4, 1);
-		SkPathEffect* arrowDashEffect3 = new SkDashPathEffect((float[]) {0, 18, 2, 154}, 4, 1);
-		SkPathEffect* arrowDashEffect4 = new SkDashPathEffect((float[]) {0, 18, 1, 155}, 4, 1);
+        const float intervals_oneway[4][4] = {
+            {0, 12, 10, 152},
+            {0, 12, 9, 153},
+            {0, 18, 2, 154},
+            {0, 18, 1, 155}
+        };
+		SkPathEffect* arrowDashEffect1 = new SkDashPathEffect(intervals_oneway[0], 4, 0);
+		SkPathEffect* arrowDashEffect2 = new SkDashPathEffect(intervals_oneway[1], 4, 1);
+		SkPathEffect* arrowDashEffect3 = new SkDashPathEffect(intervals_oneway[2], 4, 1);
+		SkPathEffect* arrowDashEffect4 = new SkDashPathEffect(intervals_oneway[3], 4, 1);
 
 		SkPaint* p = oneWayPaint();
 		p->setStrokeWidth(1);
@@ -291,10 +297,16 @@ void drawOneWayPaints(RenderingContext* rc, SkCanvas* cv, SkPath* p, int oneway)
 		delete p;
 	}
 	if (reverseWayPaints.size() == 0) {
-		SkPathEffect* arrowDashEffect1 = new SkDashPathEffect((float []) {0, 12, 10, 152}, 4, 0);
-		SkPathEffect* arrowDashEffect2 = new SkDashPathEffect((float[]) {0, 13, 9, 152}, 4, 1);
-		SkPathEffect* arrowDashEffect3 = new SkDashPathEffect((float[]) {0, 14, 2, 158}, 4, 1);
-		SkPathEffect* arrowDashEffect4 = new SkDashPathEffect((float[]) {0, 15, 1, 158}, 4, 1);
+            const float intervals_reverse[4][4] = {
+                {0, 12, 10, 152},
+                {0, 13, 9, 152},
+                {0, 14, 2, 158},
+                {0, 15, 1, 158}
+            };
+		SkPathEffect* arrowDashEffect1 = new SkDashPathEffect(intervals_reverse[0], 4, 0);
+		SkPathEffect* arrowDashEffect2 = new SkDashPathEffect(intervals_reverse[1], 4, 1);
+		SkPathEffect* arrowDashEffect3 = new SkDashPathEffect(intervals_reverse[2], 4, 1);
+		SkPathEffect* arrowDashEffect4 = new SkDashPathEffect(intervals_reverse[3], 4, 1);
 		SkPaint* p = oneWayPaint();
 		p->setStrokeWidth(1);
 		p->setPathEffect(arrowDashEffect1)->unref();
