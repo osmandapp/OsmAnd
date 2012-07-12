@@ -9,11 +9,13 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.GPXUtilities;
+import net.osmand.OsmAndFormatter;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LogUtil;
+import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ResourceManager;
@@ -23,6 +25,7 @@ import org.apache.commons.logging.Log;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.location.Location;
 import android.text.format.DateFormat;
 
 public class SavingTrackHelper extends SQLiteOpenHelper {
@@ -51,6 +54,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	
 	private long lastTimeUpdated = 0;
 	private final OsmandApplication ctx;
+
+	private LatLon lastPoint;
+	private float distance = 0;
 	
 	public SavingTrackHelper(OsmandApplication ctx){
 		super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
@@ -253,6 +259,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		if (time - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get() * 1000) {
 			execWithClose(updateScript, new Object[] { lat, lon, alt, speed, hdop, time });
 			lastTimeUpdated = time;
+			updateDistance(lat, lon);
 			if (settings.SHOW_CURRENT_GPX_TRACK.get()) {
 				WptPt pt = new GPXUtilities.WptPt(lat, lon, time,
 						alt, speed, hdop);
@@ -294,6 +301,21 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			if (db != null) {
 				db.close();
 			}
+		}
+	}
+	
+	public String getDistance(MapActivity map) {
+		return OsmAndFormatter.getFormattedDistance(distance, map);
+	}
+
+	private void updateDistance (double lat, double lon) {
+		if (lastPoint == null) {
+			lastPoint = new LatLon(lat, lon);
+		} else {
+			float[] lastInterval = new float[1];
+			Location.distanceBetween(lat, lon, lastPoint.getLatitude(), lastPoint.getLongitude(), lastInterval);
+			distance += lastInterval[0];
+			lastPoint = new LatLon(lat, lon);
 		}
 	}
 }

@@ -255,6 +255,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				}		
 			};
 			monitoringControl.updateInfo();
+			
+//			monitoringControl.addView(child);
 			monitoringControl.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -270,8 +272,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			if (!settings.SHOW_MONITORING_CONTROL.get()) 
 				return null;
 			if(settings.SAVE_TRACK_TO_GPX.get()) 
-				return "pause ";
-			return "record";
+				return app.getSavingTrackHelper().getDistance(map);
+			return "start";
 		}
 		
 		private Drawable getMonitoringControlImg(MapActivity mapActivity) {

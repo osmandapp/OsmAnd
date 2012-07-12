@@ -965,6 +965,7 @@ public class OsmandSettings {
 	public final static String PARKING_POINT_LON = "parking_point_lon"; //$NON-NLS-1$
 	public final static String PARKING_TYPE = "parking_type"; //$NON-NLS-1$
 	public final static String PARKING_TIME = "parking_limit_time"; //$//$NON-NLS-1$
+	public final static String PARKING_START_TIME = "parking_time"; //$//$NON-NLS-1$
 	public final static String PARKING_EVENT_ADDED = "parking_event_added"; //$//$NON-NLS-1$
 	
 	public LatLon getParkingPosition() {
@@ -992,9 +993,13 @@ public class OsmandSettings {
 		return globalPreferences.getLong(PARKING_TIME, -1);
 	}
 
+	public long getStartParkingTime() {
+		return globalPreferences.getLong(PARKING_START_TIME, -1);
+	}
+	
 	public boolean clearParkingPosition() {
 		return globalPreferences.edit().remove(PARKING_POINT_LAT).remove(PARKING_POINT_LON).remove(PARKING_TYPE)
-				.remove(PARKING_TIME).remove(PARKING_EVENT_ADDED).commit();
+				.remove(PARKING_TIME).remove(PARKING_EVENT_ADDED).remove(PARKING_START_TIME).commit();
 	}
 
 	public boolean setParkingPosition(double latitude, double longitude) {
@@ -1009,6 +1014,10 @@ public class OsmandSettings {
 	
 	public boolean setParkingTime(long timeInMillis) {		
 		return globalPreferences.edit().putLong(PARKING_TIME, timeInMillis).commit();
+	}
+	
+	public boolean setParkingStartTime(long timeInMillis) {		
+		return globalPreferences.edit().putLong(PARKING_START_TIME, timeInMillis).commit();
 	}
 	
 	public static final String LAST_SEARCHED_REGION = "last_searched_region"; //$NON-NLS-1$

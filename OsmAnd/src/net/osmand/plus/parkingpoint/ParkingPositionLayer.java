@@ -163,22 +163,41 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public String getObjectDescription(Object o) {	
 		StringBuilder timeLimitDesc = new StringBuilder(); 
+		timeLimitDesc.append(map.getString(R.string.osmand_parking_position_description_add_time) + " ");
+		timeLimitDesc.append(getFormattedTime(settings.getStartParkingTime()) + ".");
 		if (settings.getParkingType()) {
-			long parkingTime = settings.getParkingTime();
-			Time time = new Time();
-			time.set(parkingTime);
+//			long parkingTime = settings.getParkingTime();
+//			long parkingStartTime = settings.getStartParkingTime();
+//			Time time = new Time();
+//			time.set(parkingTime);			
+//			timeLimitDesc.append(map.getString(R.string.osmand_parking_position_description_add) + " ");
+//			timeLimitDesc.append(time.hour);
+//			timeLimitDesc.append(":");
+//			int minute = time.minute;
+//			timeLimitDesc.append(minute<10 ? "0" + minute : minute);
+//			if (!DateFormat.is24HourFormat(map.getApplicationContext())) {
+//				timeLimitDesc.append(time.hour >= 12 ? map.getString(R.string.osmand_parking_pm) : map.getString(R.string.osmand_parking_am));
+//		    }
 			timeLimitDesc.append(map.getString(R.string.osmand_parking_position_description_add) + " ");
-			timeLimitDesc.append(time.hour);
-			timeLimitDesc.append(":");
-			int minute = time.minute;
-			timeLimitDesc.append(minute<10 ? "0" + minute : minute);
-			if (!DateFormat.is24HourFormat(map.getApplicationContext())) {
-				timeLimitDesc.append(time.hour >= 12 ? map.getString(R.string.osmand_parking_pm) : map.getString(R.string.osmand_parking_am));
-		    }
+			timeLimitDesc.append(getFormattedTime(settings.getParkingTime()));
 		}
 		return map.getString(R.string.osmand_parking_position_description, timeLimitDesc.toString());
 	}
 
+	private String getFormattedTime(long timeInMillis) {
+		StringBuilder timeStringBuilder = new StringBuilder();
+		Time time = new Time();
+		time.set(timeInMillis);	
+		timeStringBuilder.append(time.hour);
+		timeStringBuilder.append(":");
+		int minute = time.minute;
+		timeStringBuilder.append(minute<10 ? "0" + minute : minute);
+		if (!DateFormat.is24HourFormat(map.getApplicationContext())) {
+			timeStringBuilder.append(time.hour >= 12 ? map.getString(R.string.osmand_parking_pm) : map.getString(R.string.osmand_parking_am));
+	    }
+		return timeStringBuilder.toString();
+	}
+	
 	@Override
 	public String getObjectName(Object o) {
 		return view.getContext().getString(R.string.osmand_parking_position_name);
