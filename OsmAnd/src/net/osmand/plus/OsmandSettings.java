@@ -1160,6 +1160,9 @@ public class OsmandSettings {
 	public final OsmandPreference<String> VOICE_PROVIDER = new StringPreference("voice_provider", null).makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> USE_COMPASS_IN_NAVIGATION = new BooleanPreference("use_compass_navigation", true).makeProfile().cache();
+	
+	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> RENDERER = new StringPreference("renderer", RendererRegistry.DEFAULT_RENDER) {
 		{
 			makeProfile();
