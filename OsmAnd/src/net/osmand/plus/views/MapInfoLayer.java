@@ -514,14 +514,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 					if (!uturnWhenPossible) {
 						if (r != null) {
 							// next turn is very close (show next next with false to speak)
-							if (r.imminent >= 0 && r.imminent < 2) {
-								r = routingHelper.getNextRouteDirectionInfoAfter(r, calc1, false);
-							} else {
+//							if (r.imminent >= 0 && r.imminent < 2) {
+//								r = routingHelper.getNextRouteDirectionInfoAfter(r, calc1, false);
+//							} else {
 								r = routingHelper.getNextRouteDirectionInfo(calc1, true);
 								if (r != null) {
 									r = routingHelper.getNextRouteDirectionInfoAfter(r, calc1, true);
 								}
-							}
+//							}
 						}
 					}
 					if (r != null && r.distanceTo > 0) {
@@ -661,20 +661,23 @@ public class MapInfoLayer extends OsmandMapLayer {
 						TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
 						invalidate();
 					} else {
-						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, false);
+						
 						boolean showStraight = false;
-						if (r != null) {
-							RouteDirectionInfo toShowWithoutSpeak = r.directionInfo;
-							if (r.imminent >= 0 && r.imminent < 2) {
-								// next turn is very close (show it)
-							} else {
-								r = routingHelper.getNextRouteDirectionInfo(calc1, true);
-								if(calc1.directionInfo != toShowWithoutSpeak){
-									// show straight and grey because it is not the closest turn
-									showStraight = r.imminent == -1;
-								}
-							}
-						}
+						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, true);
+						// do not switch information for exits (where to keep left)
+//						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, false);
+//						if (r != null) {
+//							RouteDirectionInfo toShowWithoutSpeak = r.directionInfo;
+//							if (r.imminent >= 0 && r.imminent < 2) {
+//								// next turn is very close (show it)
+//							} else {
+//								r = routingHelper.getNextRouteDirectionInfo(calc1, true);
+//								if(calc1.directionInfo != toShowWithoutSpeak){
+//									// show straight and grey because it is not the closest turn
+//									showStraight = r.imminent == -1;
+//								}
+//							}
+//						}
 						if (r != null && r.distanceTo > 0) {
 							visible = true;
 							if (r.directionInfo == null) {
