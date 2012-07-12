@@ -871,4 +871,4 @@
 	<string name="global_app_allocated_memory">Belegter Speicher</string>
 	<string name="native_app_allocated_memory_descr">Insgesamt durch App belegter nativer Speicher %1$s MB (Dalvik %2$s MB, anderer %3$s MB). Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string>
 	<string name="native_app_allocated_memory">Gesamter nativer Speicher</string>
-<string name="monitoring_info_control">Info Control</string><string name="monitoring_info_control_desc">Show monitoring state on the info pane</string><string name="select_animate_speedup">Select animate route acceleration</string></resources>
+<string name="monitoring_info_control">Info Control</string><string name="monitoring_info_control_desc">Show monitoring state on the info pane</string><string name="select_animate_speedup">Select animate route acceleration</string><string name="osmand_parking_hours">Hours</string><string name="osmand_parking_minutes">Minutes</string><string name="osmand_parking_position_description_add_time">The car was parked at:</string></resources>
