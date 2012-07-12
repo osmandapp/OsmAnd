@@ -311,9 +311,14 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private void updateDistance (double lat, double lon) {
 		if (lastPoint == null) {
 			lastPoint = new LatLon(lat, lon);
+		} 
+		double lastLat = lastPoint.getLatitude();
+		double lastLon = lastPoint.getLongitude();
+		if ((lat == lastLat) && (lon == lastLon)) {
+			return;
 		} else {
 			float[] lastInterval = new float[1];
-			Location.distanceBetween(lat, lon, lastPoint.getLatitude(), lastPoint.getLongitude(), lastInterval);
+			Location.distanceBetween(lat, lon, lastLat, lastLon, lastInterval);
 			distance += lastInterval[0];
 			lastPoint = new LatLon(lat, lon);
 		}

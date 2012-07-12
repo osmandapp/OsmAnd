@@ -198,9 +198,11 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		private Paint paintText;
 		private Paint paintSubText;
 		
+//		private MapInfoControl monitoringControl;
 		private TextInfoControl monitoringControl;
 		private Drawable monitoring_rec;
 		private Drawable monitoring;
+//		private OsmandMapTileView view;
 		
 		public MonitoringLayer(MapActivity map) {
 			this.map = map;
@@ -208,7 +210,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 		@Override
 		public void initLayer(OsmandMapTileView view) {
-			
+//			this.view = view;
 			paintText = new Paint();
 			paintText.setStyle(Style.FILL_AND_STROKE);
 			paintText.setColor(Color.BLACK);
@@ -246,6 +248,51 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		 * that shows a monitoring state (recorded/stopped)
 		 */
 		private MapInfoControl createMonitoringControl(final MapActivity mapActivity) {	
+//				monitoringControl = new MapInfoControl(view.getContext()) {
+//
+//				
+//				@Override
+//				public boolean updateInfo() {
+////					setText(getMonitoringControlTxt(), null);
+////					setImageDrawable(getMonitoringControlImg(mapActivity));
+//					return true;
+//				}
+//				
+//				@Override
+//				protected void onDraw(Canvas canvas) {
+//				}
+//				
+//			};
+//			
+//			monitoringControl.setOrientation(LinearLayout.HORIZONTAL);
+//			monitoringControl.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));  
+//			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+//					LinearLayout.LayoutParams.WRAP_CONTENT, 
+//					LinearLayout.LayoutParams.WRAP_CONTENT);
+//			
+//
+////			ImageView image = new ImageView(monitoringControl.getContext()); 
+////			image.setImageDrawable(mapActivity.getResources().getDrawable(R.drawable.monitoring_rec_big));
+////			monitoringControl.addView(image, layoutParams);
+//			
+//			ImageView monitoringView = new ImageView(view.getContext()) {
+//				@Override
+//				protected void onDraw(Canvas canvas) {
+//					canvas.save();
+//					getMonitoringControlImg(mapActivity).draw(canvas);
+//					canvas.restore();
+//					super.onDraw(canvas);
+//				}
+//			};
+//			monitoringView.setImageDrawable(getMonitoringControlImg(mapActivity));
+//			monitoringControl.addView(monitoringView, layoutParams);
+//			
+//			
+//			TextView text = new TextView(view.getContext());
+//			text.setText(getMonitoringControlTxt());
+//			text.setGravity(Gravity.CENTER);
+//			monitoringControl.addView(text, layoutParams);
+			
 			monitoringControl = new TextInfoControl(mapActivity, 0, paintText, paintSubText) {
 				@Override
 				public boolean updateInfo() {
