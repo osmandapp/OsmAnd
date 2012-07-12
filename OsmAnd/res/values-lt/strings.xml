@@ -95,14 +95,14 @@
     <string name="prefs_plugins_descr">Įskiepiai pateikia eksperto režimo nustatymus ir įgalina papildomą funkcionalumą: parsiųstus žemėlapius, sekimą, veikimą miego režime, prieigos nustatymus ir kita.</string>
     <string name="prefs_plugins">Įskiepių valdymas</string>
     <string name="tip_recent_changes_0_8_0_t">"Pakeitimai 0.8.0 versijoje : \n\t- *Įskiepių funkcionalumas* \n\t - Daugelis funkcijų yra sugrupuotos pagal savo savybes ir gali būti įjungtos/išjungtos Įskiepių valdyme. Jūs galite įjungti žemėlapių (interneto ar išsaugotų) šaltinius, sekimo nustatymus ir daugelį kitų naujų ar anksčiau egzistavusių savybių. \n\t- *Naujas įrenginyje išsaugotų žemėlapių palaikymas* \n\t - Žemėlapių vaizdavimas tapo greitesnis ir tikslesnis (daugelis pakrančių ir apsemtų rajonų problemų pašalintos). \n\t - Jums teks parsisiųsti naujus žemėlapius (senieji daugiau nebebus palaikomi)\n\t- *Maršruto sudarymas be interneto* \n\t - Maršruto sudarymas be interneto tapo lankstesnis \n\t *Naudojimas ir vartotojo sąsaja* \n\t - Patobulinta daugelyje vietų "</string>
-    <string name="osm_editing_plugin_description">Rodyti nustatymus reikalingus ryšiui su OSM pranešti / keisti LV objektus, pranešti / komentuoti OSM klaidas ir prisidėti išsaugotais GPX failais (reikalinga OSM vartotojo sąskaita).</string>
+    <string name="osm_editing_plugin_description">Rodyti ryšio su OSM nustatymus reikalingus pranešti / keisti LV objektus, pranešti / komentuoti OSM klaidas ir prisidėti išsaugotais GPX failais (reikalinga OSM vartotojo sąskaita).</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektoriniai žemėlapiai tikriausiai bus atvaizduojami sparčiau. Kaikuriuose įrenginiuose gali veikti prastai.</string>
-	<string name="simulate_route_progression_manually">Rankiniu būdų simuliuoti maršruto progresą</string>
-	<string name="play_commands_of_currently_selected_voice">Groti šiuo metu pasirinkto balso komandas</string>
+	<string name="simulate_route_progression_manually">Rankiniu būdu simuliuoti maršruto progresą</string>
+	<string name="play_commands_of_currently_selected_voice">Groti pasirinkto balso komandas</string>
 	<string name="debugging_and_development">OsmAnd vystymas</string>
 	<string name="native_rendering">Native atvaizdavimas</string>
 	<string name="animate_routing">Animuoti navigaciją</string>
-	<string name="test_voice_prompts">Patikrinti nurodymus balsu</string>    
+	<string name="test_voice_prompts">Patikrinti balso nurodymus</string>    
 	<string name="switch_to_raster_map_to_see">Šiai vietai nėra parsiųsto vektorinio žemėlapio. Jūs galite jį parsisiųsti Nustatymuose (Parsiųsti duomenys) arba perjungti į interneto žemėlapius.</string>
     <string name="tip_recent_changes_0_7_2_t">"Pakeitimai 0.7.2 versijoje : \n\t- Native atvaizdavimas visuose įrenginiuose \n\t- LV redagavimas be interneto \n\t- Prieiga \n\t- Daug ištaisytų klaidų "</string>
     <string name="send_files_to_osm">Siųsti GPX failus į OSM?</string>
@@ -122,7 +122,7 @@
 	<string name="help">Pagalba</string>
     <string name="show_details">Rodyti detales</string>
 	
-	<string name="accessibility_extensions_descr">Senesnėms Android versijoms skirti prieigos plėtiniai</string>
+	<string name="accessibility_extensions_descr">Prieigos plėtiniai skirti senesnėms Android versijoms</string>
 	<string name="accessibility_extensions">Prieigos plėtiniai</string>
 	<string name="accessibility_mode">Prieigos režimas</string>
 	<string name="accessibility_mode_descr">Įjungia prieigos savybes</string>
@@ -954,4 +954,4 @@
 <string name="edit_filter_delete_message">Filter {0} has been deleted</string>
 <string name="edit_filter_create_message">Filter {0} has been created</string>
 <string name="default_buttons_selectall">Select All</string>
-<string name="update_downlod_list">Atnaujinti sąrašą</string><string name="global_app_allocated_memory_descr">Allocated memory %1$s MB (Android limit %2$s MB, dalvik %3$s MB).</string><string name="global_app_allocated_memory">Allocated memory</string><string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (dalvik %2$s MB, other %3$s MB). Proportional memory %4$s MB (Android limit %5$s MB, dalvik %6$s MB).</string><string name="native_app_allocated_memory">Total native memory</string><string name="monitoring_info_control">Info Control</string><string name="monitoring_info_control_desc">Show monitoring state on the info pane</string><string name="select_animate_speedup">Select animate route acceleration</string></resources>
+<string name="update_downlod_list">Atnaujinti sąrašą</string><string name="global_app_allocated_memory_descr">Allocated memory %1$s MB (Android limit %2$s MB, dalvik %3$s MB).</string><string name="global_app_allocated_memory">Allocated memory</string><string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (dalvik %2$s MB, other %3$s MB). Proportional memory %4$s MB (Android limit %5$s MB, dalvik %6$s MB).</string><string name="native_app_allocated_memory">Total native memory</string><string name="monitoring_info_control">Info Control</string><string name="monitoring_info_control_desc">Show monitoring state on the info pane</string><string name="select_animate_speedup">Select animate route acceleration</string><string name="osmand_parking_hours">Hours</string><string name="osmand_parking_minutes">Minutes</string><string name="osmand_parking_position_description_add_time">The car was parked at:</string></resources>
