@@ -91,7 +91,14 @@
 		<type tag="cycleway:left" target_tag="cycleway" minzoom="12"/>
 		<type tag="cycleway:right" target_tag="cycleway" minzoom="12"/>
 	</category>	
-	
+
+	<category name="bicycle">
+		<type tag="bicycle" value="yes" minzoom="12" additional="true"/>
+		<type tag="bicycle" value="designated" minzoom="12" additional="true"/>
+		<type tag="bicycle" value="no" minzoom="12" additional="true"/>
+		<type tag="bicycle" value="permissive" minzoom="12" additional="true"/>
+		<type tag="bicycle" value="dismount" minzoom="12" additional="true"/>
+	</category>	
 	
 	<category name="traffic_calming" poi_tag="traffic_calming" poi_category="barrier" poi_prefix="traffic_calming_">
 		<type tag="traffic_calming" value="yes" minzoom="16" />
