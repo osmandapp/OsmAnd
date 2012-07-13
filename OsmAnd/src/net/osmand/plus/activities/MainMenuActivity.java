@@ -120,12 +120,12 @@ public class MainMenuActivity extends Activity {
 		
 		View leftview = (View) window.findViewById(R.id.MapButton);
 		leftview.startAnimation(getAnimation(-1, 0));
-		leftview = (View) window.findViewById(R.id.FavoritesButton);
+		leftview = (View) window.findViewById(R.id.MusicButton);
 		leftview.startAnimation(getAnimation(-1, 0));
 		
 		View rightview = (View) window.findViewById(R.id.SettingsButton);
 		rightview.startAnimation(getAnimation(1, 0));
-		rightview = (View) window.findViewById(R.id.SearchButton);
+		rightview = (View) window.findViewById(R.id.PhoneButton);
 		rightview.startAnimation(getAnimation(1, 0));
 		
 		String textVersion = Version.getAppVersion(activity);
@@ -165,10 +165,9 @@ public class MainMenuActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		final Intent mapIndent = new Intent(this, MapActivity.class);
-		startActivityForResult(mapIndent, 0);
+		//final Intent mapIndent = new Intent(this, MapActivity.class);
+		//startActivityForResult(mapIndent, 0);
 		
-		/*
                 boolean exit = false;
 		if(getIntent() != null){
 			Intent intent = getIntent();
@@ -202,15 +201,24 @@ public class MainMenuActivity extends Activity {
 			}
 		});
 
-		View favouritesButton = window.findViewById(R.id.FavoritesButton);
-		favouritesButton.setOnClickListener(new OnClickListener() {
+		View phoneButton = window.findViewById(R.id.PhoneButton);
+		phoneButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent favorites = new Intent(activity, OsmandIntents.getFavoritesActivity());
-				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				activity.startActivity(favorites);
+				final Intent phoneIntent = new Intent(activity, OsmandIntents.getPhoneActivity());
+				phoneIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				activity.startActivity(phoneIntent);
 			}
 		});
+                View musicButton = window.findViewById(R.id.MusicButton);
+                musicButton.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                final Intent musicIntent = new Intent(activity, OsmandIntents.getMusicActivity());
+                                musicIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                activity.startActivity(musicIntent);
+                        }
+                });
 
 		View closeButton = window.findViewById(R.id.CloseButton);
 		closeButton.setOnClickListener(new OnClickListener() {
@@ -228,15 +236,6 @@ public class MainMenuActivity extends Activity {
 			}
 		});
 
-		View searchButton = window.findViewById(R.id.SearchButton);
-		searchButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				final Intent search = new Intent(activity, OsmandIntents.getSearchActivity());
-				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				activity.startActivity(search);
-			}
-		});
 		if(exit){
 			return;
 		}
@@ -280,7 +279,6 @@ public class MainMenuActivity extends Activity {
 			}
 		}
 		checkPreviousRunsForExceptions(firstTime);
-		*/
 	}
 
 	private void applicationInstalledFirstTime() {

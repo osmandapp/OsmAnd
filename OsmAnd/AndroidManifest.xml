@@ -45,6 +45,8 @@
         <activity android:name="net.osmand.plus.activities.FavouritesActivity"></activity>
         <activity android:name="net.osmand.plus.activities.PluginsActivity"></activity>
         <activity android:name="net.osmand.plus.activities.ContributionVersionActivity" android:configChanges="keyboardHidden|orientation" android:label="@string/contribution_activity"></activity>
+        <activity android:name="net.osmand.plus.activities.PhoneActivity"></activity>
+        <activity android:name="net.osmand.plus.activities.MusicActivity"></activity>
         
         
         <activity android:name="net.osmand.plus.activities.search.SearchPOIActivity" android:label="@string/searchpoi_activity"></activity>

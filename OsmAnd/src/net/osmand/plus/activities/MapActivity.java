@@ -447,16 +447,26 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			}
 		});
 
-		View favouritesButton = dlg.findViewById(R.id.FavoritesButton);
-		favouritesButton.setOnClickListener(new OnClickListener() {
+		View phoneButton = dlg.findViewById(R.id.PhoneButton);
+		phoneButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent favorites = new Intent(MapActivity.this, OsmandIntents.getFavoritesActivity());
-				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				MapActivity.this.startActivity(favorites);
+				final Intent phoneIntent = new Intent(MapActivity.this, OsmandIntents.getPhoneActivity());
+				phoneIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				MapActivity.this.startActivity(phoneIntent);
 				dlg.dismiss();
 			}
 		});
+                View musicButton = dlg.findViewById(R.id.MusicButton);
+                musicButton.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                final Intent musicIntent = new Intent(MapActivity.this, OsmandIntents.getMusicActivity());
+                                musicIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                MapActivity.this.startActivity(musicIntent);
+                                dlg.dismiss();
+                        }
+                });
 
 		View closeButton = dlg.findViewById(R.id.CloseButton);
 		closeButton.setOnClickListener(new OnClickListener() {
@@ -479,20 +489,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			}
 		});
 
-		View searchButton = dlg.findViewById(R.id.SearchButton);
-		searchButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				final Intent search = new Intent(MapActivity.this, OsmandIntents.getSearchActivity());
-				LatLon loc = getMapLocation();
-				search.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
-				search.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
-				// causes wrong position caching:  search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				search.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				MapActivity.this.startActivity(search);
-				dlg.dismiss();
-			}
-		});
 		menuView.setOnClickListener(new OnClickListener() {
 
 			@Override

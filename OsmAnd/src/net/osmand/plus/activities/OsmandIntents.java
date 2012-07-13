@@ -33,4 +33,11 @@ public class OsmandIntents {
 		return LocalIndexesActivity.class;
 	}
 
+	public static Class<PhoneActivity> getPhoneActivity() {
+	    return PhoneActivity.class;
+	}
+
+        public static Class<MusicActivity> getMusicActivity() {
+            return MusicActivity.class;
+        }
 }

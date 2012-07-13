@@ -41,11 +41,11 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 					android:layout_height="wrap_content"/>
 	 			</LinearLayout>
 				<LinearLayout android:layout_weight="2" android:layout_height="fill_parent"/>
-				<LinearLayout android:id="@+id/SearchButton" android:background="@drawable/bg_right" 
+				<LinearLayout android:id="@+id/PhoneButton" android:background="@drawable/bg_right" 
 				android:focusable="true" android:clickable="true"
 				android:layout_weight="1" android:layout_height="165dp">
 					<ImageView
-					android:src="@drawable/button_icon_search"
+					android:src="@drawable/button_icon_phone"
 					android:layout_gravity="center|left"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>	
@@ -53,20 +53,20 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 					android:layout_gravity="center_vertical|right"
 					android:layout_weight="1"
 					android:layout_marginRight="15dp"
-					android:text="@string/search_button" android:textColor="#000000" android:typeface="serif"
+					android:text="@string/phone_button" android:textColor="#000000" android:typeface="serif"
 					android:textSize="24sp"/>
 				</LinearLayout>
 			</TableRow>
 			<TableRow android:layout_height = "wrap_content" android:layout_marginTop = "15dp">
-				<LinearLayout android:id="@+id/FavoritesButton" android:background="@drawable/bg_left"
+				<LinearLayout android:id="@+id/MusicButton" android:background="@drawable/bg_left"
 				android:focusable="true" android:clickable="true" 
 				android:layout_weight="1" android:layout_height="165dp">
 					<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
 					android:layout_marginLeft="15dp" android:layout_gravity="center_vertical|left"
-					android:text="@string/favorites_Button" android:textColor="#000000" android:typeface="serif"
+					android:text="@string/music_button" android:textColor="#000000" android:typeface="serif"
 					android:layout_weight="1" android:textSize="24sp"/>
 	 				<ImageView
-					android:src="@drawable/button_icon_favorites"
+					android:src="@drawable/button_icon_music"
 					android:layout_gravity="center|right"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>
