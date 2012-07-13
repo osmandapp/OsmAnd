@@ -103,35 +103,27 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	
 	@Override
 	public void registerMapContextMenuActions(MapActivity mapActivity, final double latitude, final double longitude, ContextMenuAdapter adapter,
-			Object selectedObj) {
-		if(selectedObj instanceof Amenity) {
-			final Amenity a = (Amenity) selectedObj;
-			OnContextMenuClick alist = new OnContextMenuClick() {
-				
-				@Override
-				public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
-					if (resId == R.string.poi_context_menu_delete) {
-						getPoiActions().showDeleteDialog(a);
-					} else if (resId == R.string.poi_context_menu_modify) {
-						getPoiActions().showEditDialog(a);
-					}
-				}
-			};
-			adapter.registerItem(R.string.poi_context_menu_modify, 0, alist, 1);
-			adapter.registerItem(R.string.poi_context_menu_delete, 0, alist, 2);
-		}
+			final Object selectedObj) {
 		OnContextMenuClick listener = new OnContextMenuClick() {
-			
 			@Override
 			public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
 				if (resId == R.string.context_menu_item_create_poi) {
 					poiActions.showCreateDialog(latitude, longitude);
 				} else if (resId == R.string.context_menu_item_open_bug) {
 					osmBugsLayer.openBug(latitude, longitude);
+				} else if (resId == R.string.poi_context_menu_delete) {
+					getPoiActions().showDeleteDialog((Amenity) selectedObj);
+				} else if (resId == R.string.poi_context_menu_modify) {
+					getPoiActions().showEditDialog((Amenity) selectedObj);
 				}
 			}
 		};
-		adapter.registerItem(R.string.context_menu_item_create_poi, R.drawable.list_view_create_poi, listener, -1);
+		if(selectedObj instanceof Amenity) {
+			adapter.registerItem(R.string.poi_context_menu_modify, R.drawable.list_activities_poi_modify, listener, 1);
+			adapter.registerItem(R.string.poi_context_menu_delete, R.drawable.list_activities_poi_remove, listener, 2);
+		} else {
+			adapter.registerItem(R.string.context_menu_item_create_poi, R.drawable.list_view_create_poi, listener, -1);
+		}
 		adapter.registerItem(R.string.context_menu_item_open_bug, R.drawable.list_activities_osm_bugs, listener, -1);
 	}
 

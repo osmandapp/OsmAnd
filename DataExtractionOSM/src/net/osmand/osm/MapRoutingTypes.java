@@ -51,6 +51,7 @@ public class MapRoutingTypes {
 		TAGS_TO_SAVE.add("route");
 		TAGS_TO_SAVE.add("service");
 		TAGS_TO_SAVE.add("toll");
+		TAGS_TO_SAVE.add("toll_booth");
 		TAGS_TO_SAVE.add("tracktype");
 		TAGS_TO_SAVE.add("traffic_calming");
 		TAGS_TO_SAVE.add("turn:lanes");

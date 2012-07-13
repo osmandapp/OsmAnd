@@ -9,6 +9,20 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osmand_parking_hours">Hours</string>
+    <string name="osmand_parking_minutes">Minutes</string>
+    <string name="osmand_parking_position_description_add_time">The car was parked at:</string>
+    <string name="tip_recent_changes_0_8_1_t">Changes in 0.8.1 :
+         	* Smart and fast Route recalculation
+         	* More precise routes (a bit slower)
+         	* Direction by lanes
+         	* Information about bumps, speed cams and speed limits
+         	* Improved voice guidance on highways
+         	* Parking plugin
+         	* Enable/disable monitoring widget
+         </string>
+    <string name="use_compass_navigation_descr">Use compass in navigation when diretion is not detected</string>
+    <string name="use_compass_navigation">Use compass</string>
     <string name="select_animate_speedup">Select animate route acceleration</string>
     <string name="monitoring_info_control">Info Control</string>
     <string name="monitoring_info_control_desc">Show monitoring state on the info pane</string>
@@ -47,7 +61,6 @@
     <string name="gpxup_identifiable">Identifiable</string>
     <string name="gpxup_trackable">Trackable</string>
     <string name="gpxup_private">Private</string>
-    <string name="tip_recent_changes_0_8_1_t">Changes in 0.8.1 : </string>
     <string name="asap">ASAP</string>
     <string name="save_route_as_gpx">Save route as GPX file</string>
     <string name="route_roundabout">Roundabout : take %1$d exit and go</string>

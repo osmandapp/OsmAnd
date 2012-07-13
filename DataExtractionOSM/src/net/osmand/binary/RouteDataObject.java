@@ -22,6 +22,16 @@ public class RouteDataObject {
 	public RouteDataObject(RouteRegion region) {
 		this.region = region;
 	}
+	
+	public RouteDataObject(RouteRegion region, int[] nameIds, String[] nameValues) {
+		this.region = region;
+		if (nameIds.length > 0) {
+			names = new TIntObjectHashMap<String>();
+		}
+		for (int i = 0; i < nameIds.length; i++) {
+			names.put(nameIds[i], nameValues[i]);
+		}
+	}
 
 	public RouteDataObject(RouteDataObject copy) {
 		this.region = copy.region;
@@ -148,13 +158,13 @@ public class RouteDataObject {
 		return false;
 	}
 	
-	public int getOneway(){
+	public int getOneway() {
 		int sz = types.length;
-		for(int i=0; i<sz; i++) {
+		for (int i = 0; i < sz; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			if(r.onewayDirection() != 0) {
+			if (r.onewayDirection() != 0) {
 				return r.onewayDirection();
-			} else if(r.roundabout()) {
+			} else if (r.roundabout()) {
 				return 1;
 			}
 		}

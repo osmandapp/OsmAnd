@@ -854,8 +854,8 @@ public class MapActivityActions implements DialogProvider {
 		helper.registerOptionsMenuItem(R.id.map_show_settings, R.string.settings_Button, android.R.drawable.ic_menu_preferences);		
 		helper.registerOptionsMenuItem(R.id.map_navigate_to_point, R.string.stop_navigation, android.R.drawable.ic_menu_close_clear_cancel, false);		
 		helper.registerOptionsMenuItem(R.id.map_mute, R.string.menu_mute_off, false);		
-		helper.registerOptionsMenuItem(R.id.map_animate_route, R.string.animate_route, false);		
 		helper.registerOptionsMenuItem(R.id.map_get_directions, R.string.get_directions, android.R.drawable.ic_menu_directions);
+		helper.registerOptionsMenuItem(R.id.map_animate_route, R.string.animate_route, false);
 		helper.registerOptionsMenuItem(R.id.map_specify_point, R.string.search_button, android.R.drawable.ic_menu_search);
 		helper.registerOptionsMenuItem(R.id.map_show_gps_status, R.string.show_gps_status, android.R.drawable.ic_menu_compass);
 		helper.registerOptionsMenuItem(R.id.map_show_point_options, R.string.show_point_options);		

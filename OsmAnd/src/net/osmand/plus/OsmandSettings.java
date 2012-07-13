@@ -579,7 +579,12 @@ public class OsmandSettings {
 			"http://example.com?lat={0}&lon={1}&timestamp={2}&hdop={3}&altitude={4}&speed={5}").makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> 	SHOW_MONITORING_CONTROL = new BooleanPreference("show_monitoring_control", false).makeProfile();
+	public final CommonPreference<Boolean> 	SHOW_MONITORING_CONTROL = new BooleanPreference("show_monitoring_control", false).makeProfile();
+	{
+		SHOW_MONITORING_CONTROL.setModeDefaultValue(ApplicationMode.BICYCLE, true);
+		SHOW_MONITORING_CONTROL.setModeDefaultValue(ApplicationMode.CAR, false);
+		SHOW_MONITORING_CONTROL.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SHOW_OSM_BUGS = new BooleanPreference("show_osm_bugs", false).makeGlobal();	
@@ -960,6 +965,7 @@ public class OsmandSettings {
 	public final static String PARKING_POINT_LON = "parking_point_lon"; //$NON-NLS-1$
 	public final static String PARKING_TYPE = "parking_type"; //$NON-NLS-1$
 	public final static String PARKING_TIME = "parking_limit_time"; //$//$NON-NLS-1$
+	public final static String PARKING_START_TIME = "parking_time"; //$//$NON-NLS-1$
 	public final static String PARKING_EVENT_ADDED = "parking_event_added"; //$//$NON-NLS-1$
 	
 	public LatLon getParkingPosition() {
@@ -987,9 +993,13 @@ public class OsmandSettings {
 		return globalPreferences.getLong(PARKING_TIME, -1);
 	}
 
+	public long getStartParkingTime() {
+		return globalPreferences.getLong(PARKING_START_TIME, -1);
+	}
+	
 	public boolean clearParkingPosition() {
 		return globalPreferences.edit().remove(PARKING_POINT_LAT).remove(PARKING_POINT_LON).remove(PARKING_TYPE)
-				.remove(PARKING_TIME).remove(PARKING_EVENT_ADDED).commit();
+				.remove(PARKING_TIME).remove(PARKING_EVENT_ADDED).remove(PARKING_START_TIME).commit();
 	}
 
 	public boolean setParkingPosition(double latitude, double longitude) {
@@ -1004,6 +1014,10 @@ public class OsmandSettings {
 	
 	public boolean setParkingTime(long timeInMillis) {		
 		return globalPreferences.edit().putLong(PARKING_TIME, timeInMillis).commit();
+	}
+	
+	public boolean setParkingStartTime(long timeInMillis) {		
+		return globalPreferences.edit().putLong(PARKING_START_TIME, timeInMillis).commit();
 	}
 	
 	public static final String LAST_SEARCHED_REGION = "last_searched_region"; //$NON-NLS-1$
@@ -1144,6 +1158,9 @@ public class OsmandSettings {
 	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE"; 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<String> VOICE_PROVIDER = new StringPreference("voice_provider", null).makeProfile();
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> USE_COMPASS_IN_NAVIGATION = new BooleanPreference("use_compass_navigation", true).makeProfile().cache();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> RENDERER = new StringPreference("renderer", RendererRegistry.DEFAULT_RENDER) {

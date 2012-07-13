@@ -12,6 +12,7 @@ import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
@@ -234,7 +235,8 @@ public class RoutingHelper {
 		}
 
 		if (calculateRoute) {
-			recalculateRouteInBackground(lastFixedLocation, finalLocation, currentGPXRoute);
+			recalculateRouteInBackground(lastFixedLocation, finalLocation, currentGPXRoute,
+					route.isCalculated()? route : null);
 		}
 		return locationProjection;
 	}
@@ -464,6 +466,24 @@ public class RoutingHelper {
 		return i;
 	}
 	
+	public synchronized AlarmInfo getMostImportantAlarm(MetricsConstants mc){
+		float mxspeed = route.getCurrentMaxSpeed();
+		AlarmInfo speedAlarm = null;
+		if(mxspeed != 0 && lastFixedLocation != null && lastFixedLocation.hasSpeed()) {
+			float delta = 5f/3.6f; 
+			if(lastFixedLocation.getSpeed() > mxspeed + delta) {
+				int speed;
+				if(mc == MetricsConstants.KILOMETERS_AND_METERS) {
+					speed = Math.round(mxspeed * 3.6f);
+				} else {
+					speed = Math.round(mxspeed * 3.6f / 1.6f);
+				}
+				speedAlarm = AlarmInfo.createSpeedLimit(speed);
+			}
+		}
+		return route.getMostImportantAlarm(lastFixedLocation, speedAlarm);
+	}
+	
 	public synchronized NextDirectionInfo getNextRouteDirectionInfoAfter(NextDirectionInfo previous, NextDirectionInfo to, boolean toSpeak){
 		NextDirectionInfo i = route.getNextRouteDirectionInfoAfter(previous, to, toSpeak);
 		if(i != null) {
@@ -478,7 +498,7 @@ public class RoutingHelper {
 	
 	
 	
-	private void recalculateRouteInBackground(final Location start, final LatLon end, final GPXRouteParams gpxRoute){
+	private void recalculateRouteInBackground(final Location start, final LatLon end, final GPXRouteParams gpxRoute, final RouteCalculationResult previousRoute){
 		if (start == null || end == null) {
 			return;
 		}
@@ -495,7 +515,7 @@ public class RoutingHelper {
 						@Override
 						public void run() {
 							boolean leftSide = settings.LEFT_SIDE_NAVIGATION.get();
-							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, gpxRoute, fastRouteMode, 
+							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, gpxRoute, previousRoute, fastRouteMode, 
 									leftSide);
 							synchronized (RoutingHelper.this) {
 								if (res.isCalculated()) {

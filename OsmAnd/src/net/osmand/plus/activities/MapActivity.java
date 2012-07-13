@@ -724,7 +724,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			updateSpeedBearingEmulator(location);
 		}
 
-		boolean enableSensorNavigation = routingHelper.isFollowingMode() ? 
+		boolean enableSensorNavigation = routingHelper.isFollowingMode() && settings.USE_COMPASS_IN_NAVIGATION.get() ? 
 				location == null || !location.hasBearing() :  false;
 		registerUnregisterSensor(location, enableSensorNavigation);
 		

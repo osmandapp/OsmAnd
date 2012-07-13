@@ -15,6 +15,8 @@
 JavaVM* globalJVM = NULL;
 void loadJniRenderingContext(JNIEnv* env);
 void loadJniRenderingRules(JNIEnv* env);
+jclass jclassIntArray ;
+jclass jclassString;
 
 extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
 {
@@ -24,6 +26,8 @@ extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
 	globalJVM = vm;
 	loadJniRenderingContext(globalJniEnv);
 	loadJniRenderingRules(globalJniEnv);
+	jclassIntArray = findClass(globalJniEnv, "[I");
+	jclassString = findClass(globalJniEnv, "java/lang/String");
 
 	osmand_log_print(LOG_INFO, "JNI_OnLoad completed");
 	
@@ -412,7 +416,7 @@ void loadJniRenderingContext(JNIEnv* env)
     jfield_RouteDataObject_restrictions = getFid(env,  jclass_RouteDataObject, "restrictions", "[J" );
     jfield_RouteDataObject_pointTypes = getFid(env,  jclass_RouteDataObject, "pointTypes", "[[I" );
     jfield_RouteDataObject_id = getFid(env,  jclass_RouteDataObject, "id", "J" );
-    jmethod_RouteDataObject_init = env->GetMethodID(jclass_RouteDataObject, "<init>", "(Lnet/osmand/binary/BinaryMapRouteReaderAdapter$RouteRegion;)V");
+    jmethod_RouteDataObject_init = env->GetMethodID(jclass_RouteDataObject, "<init>", "(Lnet/osmand/binary/BinaryMapRouteReaderAdapter$RouteRegion;[I[Ljava/lang/String;)V");
 
 }
 
@@ -441,7 +445,7 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_loadRout
 	RoutingIndex ind;
 	ind.filePointer = filepointer;
 	ind.name = getString(ienv, regName);
-	jclass jclIntArray = ienv->FindClass("[I");
+
 
 	std::vector<RouteDataObject*> result;
 	SearchQuery q(left, right, top, bottom);
@@ -450,7 +454,25 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_loadRout
 	jobjectArray res =  ienv->NewObjectArray(result.size(), jclass_RouteDataObject, NULL );
 	for (jint i = 0; i < result.size(); i++) {
 		if (result[i] != NULL) {
-			jobject robj = ienv->NewObject(jclass_RouteDataObject, jmethod_RouteDataObject_init, reg);
+			jintArray nameInts = ienv->NewIntArray(result[i]->names.size());
+			jobjectArray nameStrings = ienv->NewObjectArray(result[i]->names.size(),
+					jclassString, NULL);
+			jint ar[result[i]->names.size()];
+			UNORDERED(map)<int, std::string >::iterator itNames = result[i]->names.begin();
+			jsize sz = 0;
+			for(;itNames != result[i]->names.end(); itNames++, sz++) {
+				std::string name = itNames->second;
+				jstring js = ienv->NewStringUTF(name.c_str());
+				ienv->SetObjectArrayElement(nameStrings, sz, js);
+				ienv->DeleteLocalRef(js);
+				ar[sz] = itNames->first;
+			}
+			ienv->SetIntArrayRegion(nameInts, 0, result[i]->names.size(),ar);
+			jobject robj = ienv->NewObject(jclass_RouteDataObject, jmethod_RouteDataObject_init, reg,
+					nameInts, nameStrings);
+			ienv->DeleteLocalRef(nameInts);
+			ienv->DeleteLocalRef(nameStrings);
+
 			ienv->SetLongField(robj, jfield_RouteDataObject_id, result[i]->id);
 
 			jintArray types =  ienv->NewIntArray(result[i]->types.size());
@@ -483,7 +505,7 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_loadRout
 			ienv->DeleteLocalRef(restrictions);
 
 
-			jobjectArray pointTypes = ienv->NewObjectArray(result[i]->pointTypes.size(), jclIntArray, NULL);
+			jobjectArray pointTypes = ienv->NewObjectArray(result[i]->pointTypes.size(), jclassIntArray, NULL);
 			for(jint k = 0; k < result[i]->pointTypes.size(); k++ ) {
 				std::vector<uint32_t> ts = result[i]->pointTypes[k];
 				if (ts.size() > 0) {
@@ -493,8 +515,10 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_loadRout
 					ienv->DeleteLocalRef(tos);
 				}
 			}
+
 			ienv->SetObjectField(robj, jfield_RouteDataObject_pointTypes, pointTypes);
 			ienv->DeleteLocalRef(pointTypes);
+
 
 
 			ienv->SetObjectArrayElement(res, i, robj);

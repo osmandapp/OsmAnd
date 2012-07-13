@@ -110,20 +110,20 @@ public class VoiceRouter {
 			PREPARE_DISTANCE_END = 1200;//(100 sec)
 			TURN_IN_DISTANCE = 390;     //  30 sec
 			TURN_IN_DISTANCE_END = 182; //  14 sec
-			TURN_DISTANCE = 85;         //  10 sec
-			TURN_DEFAULT_SPEED = 8f; 	//  20 km/h
+			TURN_DISTANCE = 55;         //  10 sec
+			TURN_DEFAULT_SPEED = 6f; 	//  20 km/h
 			DEFAULT_SPEED = 13;         //  48 km/h
 		}
 	}
 	
-	private boolean isDistanceLess(float currentSpeed, double dist, double etalon){
+	protected boolean isDistanceLess(float currentSpeed, double dist, double etalon){
 		if(dist < etalon || ((dist / currentSpeed) < (etalon / DEFAULT_SPEED))){
 			return true;
 		}
 		return false;
 	}
 	
-	private boolean isDistanceLess(float currentSpeed, double dist, double etalon, double defSpeed){
+	protected boolean isDistanceLess(float currentSpeed, double dist, double etalon, double defSpeed){
 		if(dist < etalon || ((dist / currentSpeed) < (etalon / defSpeed))){
 			return true;
 		}

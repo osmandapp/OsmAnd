@@ -119,6 +119,7 @@ public class BinaryMapRouteReaderAdapter {
 			} else if(t.startsWith("access") && v != null){
 				type = ACCESS;
 			} else if(t.equalsIgnoreCase("maxspeed") && v != null){
+				type = MAXSPEED;
 				floatValue = -1;
 				int i = 0;
 				while(i < v.length() && Character.isDigit(v.charAt(i))) {

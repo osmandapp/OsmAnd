@@ -6,7 +6,7 @@
 
     <TableRow
         android:id="@+id/tableRow1"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
         <ImageButton
@@ -30,7 +30,7 @@
 
     <TableRow
         android:id="@+id/tableRow2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
         <TextView
@@ -39,6 +39,7 @@
             android:layout_marginRight="4dp"
             android:layout_marginLeft="4dp"
             android:gravity="center_horizontal"
+            android:maxWidth="10dp"
             android:text="@string/osmand_parking_no_lim_text" />
 
         <TextView
@@ -47,6 +48,7 @@
             android:layout_marginRight="4dp"
             android:layout_marginLeft="4dp"
             android:gravity="center_horizontal"
+            android:maxWidth="10dp"
             android:text="@string/osmand_parking_lim_text" />
     </TableRow>
 

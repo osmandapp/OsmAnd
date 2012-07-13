@@ -73,6 +73,8 @@ public class MapRouterLayer implements MapPanelLayer {
 	private JButton nextTurn;
 	private JButton playPauseButton;
 	private JButton stopButton;
+
+	private List<RouteSegmentResult> previousRoute;
 	
 	
 	@Override
@@ -172,7 +174,36 @@ public class MapRouterLayer implements MapPanelLayer {
 				new Thread() {
 					@Override
 					public void run() {
-						List<Way> ways = selfRoute(startRoute, endRoute);
+						List<Way> ways = selfRoute(startRoute, endRoute, null);
+						if (ways != null) {
+							DataTileManager<Way> points = new DataTileManager<Way>();
+							points.setZoom(11);
+							for (Way w : ways) {
+								LatLon n = w.getLatLon();
+								points.registerObject(n.getLatitude(), n.getLongitude(), w);
+							}
+							map.setPoints(points);
+						}
+					}
+				}.start();
+			}
+		};
+		
+		Action recalculate = new AbstractAction("Recalculate OsmAnd route") {
+			private static final long serialVersionUID = 507156107455281238L;
+			
+			@Override
+			public boolean isEnabled() {
+//				return previousRoute != null;
+				return true;
+			}
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new Thread() {
+					@Override
+					public void run() {
+						List<Way> ways = selfRoute(startRoute, endRoute, previousRoute);
 						if (ways != null) {
 							DataTileManager<Way> points = new DataTileManager<Way>();
 							points.setZoom(11);
@@ -188,6 +219,7 @@ public class MapRouterLayer implements MapPanelLayer {
 		};
 		
 		menu.add(selfRoute);
+		menu.add(recalculate);
 		Action route_YOURS = new AbstractAction("Calculate YOURS route") {
 			private static final long serialVersionUID = 507156107455281238L;
 
@@ -507,7 +539,7 @@ public class MapRouterLayer implements MapPanelLayer {
 		return res;
 	}
 	
-	public List<Way> selfRoute(LatLon start, LatLon end) {
+	public List<Way> selfRoute(LatLon start, LatLon end, List<RouteSegmentResult> previousRoute) {
 		List<Way> res = new ArrayList<Way>();
 		long time = System.currentTimeMillis();
 		List<File> files = new ArrayList<File>();
@@ -556,10 +588,8 @@ public class MapRouterLayer implements MapPanelLayer {
 				BinaryRoutePlanner router = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(), rs);
 				RoutingConfiguration config = builder.build(m, true);
 				RoutingContext ctx = new RoutingContext(config);
+				ctx.previouslyCalculatedRoute = previousRoute;
 				log.info("Use " + config.routerName + "mode for routing");
-				
-//				int dir = DataExtractionSettings.getSettings().getRouteDirection();
-//				ctx.setPlanRoadDirection(dir);
 				
 				// find closest way
 				RouteSegment st = router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);
@@ -631,6 +661,7 @@ public class MapRouterLayer implements MapPanelLayer {
 				});
 				
 				List<RouteSegmentResult> searchRoute = router.searchRoute(ctx, st, e, false);
+				this.previousRoute = searchRoute;
 				if (animateRoutingCalculation) {
 					playPauseButton.setVisible(false);
 					nextTurn.setText("FINISH");

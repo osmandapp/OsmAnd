@@ -4,10 +4,32 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <TimePicker
-        android:id="@+id/parking_time_picker"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/osmand_parking_hours" />
+
+        <TimePicker
+            android:id="@+id/parking_time_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/osmand_parking_minutes" />
+
+    </LinearLayout>
 
     <CheckBox
         android:id="@+id/check_event_in_calendar"

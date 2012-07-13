@@ -178,8 +178,13 @@ public class RoutingConfiguration {
 								0));
 					} else if("avoid".equals(name)) {
 						String key = attributes.getValue("tag") + "$" + attributes.getValue("value");
-						currentRouter.avoidElements.put(key, parseSilentDouble(attributes.getValue("coefficient"), 
-								0));
+						double priority = parseSilentDouble(attributes.getValue("decreasedPriority"), 
+								0);
+						if(priority == 0) {
+							currentRouter.avoid.put(key, priority);
+						}  else {
+							currentRouter.highwayPriorities.put(key, priority);
+						}
 					}
 				}
 

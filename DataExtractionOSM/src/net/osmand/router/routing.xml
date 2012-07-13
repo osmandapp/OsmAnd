@@ -24,19 +24,27 @@
 	<!-- 0 - 2 ways, 1 - direct way, -1 - reverse way -->
 	<attribute name="planRoadDirection" value="0" />
 
-	<!-- highway value="motorway" speed="110" priority="1.5" dynamicPriority="1.4" -->
-	<!-- Highway defines acceptable route for routingProfile, speed in km/h (if it is not specified on level road) -->
-	<!-- priority is multiplicator for already passed road (consider it is an accelerator of the road) -->
-	<!-- dynamicPriority is multiplicator for future roads used by heuristic useDynamicRoadPrioritising -->
+	<!-- HELP INFORMATION ABOUT FILE -->
+	<!-- 1) Highway defines acceptable route for routingProfile, speed in km/h (if it is not specified on level road) -->
+	<!-- 	priority is multiplicator for already passed road (consider it is an accelerator of the road) -->
+	<!-- 	dynamicPriority is multiplicator for future roads used by heuristic useDynamicRoadPrioritising -->
+	<!-- 		<highway value="living_street" speed="25" priority="0.5" dynamicPriority="0.5"/>  -->
+	<!-- 		<road tag="route" value="ferry" speed="15" priority="1.0" dynamicPriority="0.7"/> -->
+	<!-- 2) Obstacle defines a point of the road and how it could be passed by vehicle -->
+	<!-- 		penalty is measured in time and -1 means it could not be passed! -->
+	<!-- 		<obstacle tag="highway" value="traffic_signals" penalty="35"/>  -->
+	<!-- 3) Avoid describes what road should be completely avoided or passed with multiplied (decreased) priority  -->
+	<!-- 			<avoid tag="access" value="no" decreasedPriority="0.9"/> -->
+	
 
 	<!-- obstacle tag="highway" value="traffic_signals" penalty="35", penalty measured in seconds -->
 	<routingProfile name="car" baseProfile="car" restrictionsAware="true" minDefaultSpeed="45.0" maxDefaultSpeed="110.0" 
 			leftTurn="20" rightTurn="15" followSpeedLimitations="true" onewayAware="true">
-		<highway value="motorway" speed="110" priority="1.5" dynamicPriority="1.4"/>
-		<highway value="motorway_link" speed="80" priority="1.3" dynamicPriority="1.4"/>
+		<highway value="motorway" speed="110" priority="1.2" dynamicPriority="1.4"/>
+		<highway value="motorway_link" speed="80" priority="1.2" dynamicPriority="1.4"/>
 		
-		<highway value="trunk" speed="100" priority="1.4" dynamicPriority="1.3"/>
-		<highway value="trunk_link" speed="75" priority="1.3" dynamicPriority="1.3"/>
+		<highway value="trunk" speed="100" priority="1.2" dynamicPriority="1.3"/>
+		<highway value="trunk_link" speed="75" priority="1.2" dynamicPriority="1.3"/>
 		
 		<!-- generally linking larger towns. -->
 		<highway value="primary" speed="65" priority="1.2" dynamicPriority="1.2"/>
@@ -47,14 +55,14 @@
 		<highway value="secondary_link" speed="50" priority="1" dynamicPriority="1.1"/>
 		
 		<!-- important urban roads -->
-		<highway value="tertiary" speed="45" priority="0.9" dynamicPriority="0.8"/>
-		<highway value="tertiary_link" speed="40" priority="0.9" dynamicPriority="0.8"/>
+		<highway value="tertiary" speed="45" priority="1" dynamicPriority="0.8"/>
+		<highway value="tertiary_link" speed="40" priority="1" dynamicPriority="0.8"/>
 		<!-- lowest form of grid network, usually 90% of urban roads -->
 		<highway value="unclassified" speed="35" priority="0.7" dynamicPriority="0.7"/>
 		<!-- road = no type, no review and may be not accurate -->
-		<highway value="road" speed="35" priority="0.4" dynamicPriority="0.7"/>
+		<highway value="road" speed="35" priority="0.6" dynamicPriority="0.7"/>
 		<!-- primarily for access to properties, small roads with 1/2 intersections -->
-		<highway value="residential" speed="35" priority="0.4" dynamicPriority="0.7"/>
+		<highway value="residential" speed="35" priority="0.6" dynamicPriority="0.7"/>
 		<!-- parking + private roads -->
 		<highway value="service" speed="30" priority="0.5" dynamicPriority="0.7"/>
 		<!-- very bad roads -->
@@ -64,13 +72,18 @@
 		<highway value="living_street" speed="25" priority="0.5" dynamicPriority="0.5"/>
 		<!-- car are able to enter in highway=pedestrian with restrictions -->
 		<!-- Time actually is uknown. Currently unsupported -->
-		<road tag="route" value="ferry" speed="15" priority="0.7" dynamicPriority="0.7"/>
+		<road tag="route" value="ferry" speed="15" priority="1.0" dynamicPriority="0.7"/>
 
 		<obstacle tag="highway" value="traffic_signals" penalty="35"/>
 		<obstacle tag="railway" value="crossing" penalty="25"/>
 		<obstacle tag="railway" value="level_crossing" penalty="25"/>
+		<obstacle tag="motorcar" value="no" penalty="-1"/>  
+		<obstacle tag="barrier" value="lift_gate" penalty="-1"/>
+		<obstacle tag="barrier" value="gate" penalty="-1"/>
+		<obstacle tag="barrier" value="bollard" penalty="-1"/> 
 		
-		<!-- in future can be multiplicator can be added (like coefficient="0.1") -->
+		<!-- -->
+		<avoid tag="tracktype" value="grade5" decreasedPriority="0.6"/>
 		<avoid tag="access" value="no"/>
 		<avoid tag="motorcycle" value="no"/>
 		<avoid tag="motorcar" value="no"/>
@@ -117,7 +130,7 @@
 	<routingProfile name="pedestrian" baseProfile="pedestrian" restrictionsAware="false" minDefaultSpeed="3" maxDefaultSpeed="5" 
 			leftTurn="0" rightTurn="0" followSpeedLimitations="false" onewayAware="false">
 
-<attribute name="heuristicCoefficient" value="1.2" />
+		<attribute name="heuristicCoefficient" value="1.2" />
 
 		<highway value="motorway" speed="5" priority="0.7" dynamicPriority="0.7"/>
 		<highway value="motorway_link" speed="5" priority="0.7" dynamicPriority="0.7"/>

@@ -123,10 +123,10 @@ public class NextTurnInfoControl extends MapInfoControl {
 				}
 			} else {
 				drawShadowText(canvas, text, 72 * scaleCoefficient / miniCoeff + 2 * scaleCoefficient,
-						height / 2 + 5 * scaleCoefficient, textPaint);
+						height / 2 + 7 * scaleCoefficient, textPaint);
 				if (subtext != null) {
 					drawShadowText(canvas, subtext, 72 * scaleCoefficient / miniCoeff +  mt
-							+ 2 * scaleCoefficient, height / 2 + 5 * scaleCoefficient, subtextPaint);
+							+ 2 * scaleCoefficient, height / 2 + 7 * scaleCoefficient, subtextPaint);
 				}
 			}
 		}
