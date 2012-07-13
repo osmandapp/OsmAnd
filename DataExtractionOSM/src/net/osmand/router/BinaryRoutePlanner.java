@@ -46,7 +46,7 @@ public class BinaryRoutePlanner {
 	public BinaryRoutePlanner(NativeLibrary nativeLib, BinaryMapIndexReader... map) {
 		this.nativeLib = nativeLib;
 		if(nativeLib != null) {
-			RoutingConfiguration.DEFAULT_DESIRABLE_TILES_IN_MEMORY = 25;
+			RoutingConfiguration.DEFAULT_DESIRABLE_TILES_IN_MEMORY = 50;
 		}
 		for (BinaryMapIndexReader mr : map) {
 			List<RouteRegion> rr = mr.getRoutingIndexes();

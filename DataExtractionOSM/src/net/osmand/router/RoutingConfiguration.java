@@ -23,7 +23,7 @@ public class RoutingConfiguration {
 	// 1.1 tile load parameters (should not affect routing)
 	public int ZOOM_TO_LOAD_TILES = 13; // 12?, 14?
 	public int ITERATIONS_TO_RUN_GC = 100;
-	public static int DEFAULT_DESIRABLE_TILES_IN_MEMORY = 100;  
+	public static int DEFAULT_DESIRABLE_TILES_IN_MEMORY = 25;  
 	public int NUMBER_OF_DESIRABLE_TILES_IN_MEMORY = DEFAULT_DESIRABLE_TILES_IN_MEMORY;
 
 	// 1.2 Dynamic road prioritizing (heuristic)
