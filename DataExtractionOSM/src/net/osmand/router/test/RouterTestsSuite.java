@@ -11,6 +11,7 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import net.osmand.NativeLibrary;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
@@ -101,7 +102,7 @@ public class RouterTestsSuite {
 		boolean allSuccess = true;
 		
 		for(File f : params.tests) {
-			allSuccess &= test(new FileInputStream(f), rs, params.configBuilder);	
+			allSuccess &= test(null, new FileInputStream(f), rs, params.configBuilder);	
 		}
 		if (allSuccess) {
 			System.out.println("All is successfull");
@@ -115,13 +116,13 @@ public class RouterTestsSuite {
 	}
 
 
-	public static boolean test(InputStream resource, BinaryMapIndexReader[] rs, RoutingConfiguration.Builder config) throws SAXException, IOException, ParserConfigurationException {
+	public static boolean test(NativeLibrary lib, InputStream resource, BinaryMapIndexReader[] rs, RoutingConfiguration.Builder config) throws SAXException, IOException, ParserConfigurationException {
 		Document testSuite = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(resource));
 		NodeList tests = testSuite.getElementsByTagName("test");
 
 		for (int i = 0; i < tests.getLength(); i++) {
 			Element e = (Element) tests.item(i);
-			BinaryRoutePlanner router = new BinaryRoutePlanner(null, rs);
+			BinaryRoutePlanner router = new BinaryRoutePlanner(lib, rs);
 			testRoute(e, router, config);
 		}
 

@@ -7,7 +7,8 @@
 	<!-- 1.1 tile load parameters (should not affect routing) -->
 	<attribute name="zoomToLoadTiles" value="13" />
 	<attribute name="iterationsToRunGC" value="125" />
-	<attribute name="desirableTilesInMemory" value="25" />
+	<!--  by default it is 25 -->
+	<attribute name="desirableTilesInMemory" value="" />
 
 	<!-- 1.2 Dynamic road prioritizing (heuristic) -->
 	<attribute name="useDynamicRoadPrioritising" value="true" />
@@ -78,7 +79,7 @@
 		<obstacle tag="railway" value="crossing" penalty="25"/>
 		<obstacle tag="railway" value="level_crossing" penalty="25"/>
 		<obstacle tag="motorcar" value="no" penalty="-1"/>  
-		<obstacle tag="barrier" value="lift_gate" penalty="-1"/>
+		<obstacle tag="barrier" value="lift_gate" penalty="100"/>
 		<obstacle tag="barrier" value="gate" penalty="-1"/>
 		<obstacle tag="barrier" value="bollard" penalty="-1"/> 
 		

@@ -380,6 +380,9 @@ jfieldID jfield_RouteDataObject_pointTypes = NULL;
 jfieldID jfield_RouteDataObject_id = NULL;
 jmethodID jmethod_RouteDataObject_init = NULL;
 
+jclass jclass_NativeRouteSearchResult = NULL;
+jmethodID jmethod_NativeRouteSearchResult_init = NULL;
+
 void loadJniRenderingContext(JNIEnv* env)
 {
 	jclass_RenderingContext = findClass(env, "net/osmand/RenderingContext");
@@ -409,6 +412,8 @@ void loadJniRenderingContext(JNIEnv* env)
     jmethod_JUnidecode_unidecode = env->GetStaticMethodID(jclass_JUnidecode, "unidecode", "(Ljava/lang/String;)Ljava/lang/String;");
 
     jclass_RouteDataObject = findClass(env, "net/osmand/binary/RouteDataObject");
+    jclass_NativeRouteSearchResult = findClass(env, "net/osmand/NativeLibrary$NativeRouteSearchResult");
+    jmethod_NativeRouteSearchResult_init = env->GetMethodID(jclass_NativeRouteSearchResult, "<init>", "(J[Lnet/osmand/binary/RouteDataObject;)V");
 
     jfield_RouteDataObject_types = getFid(env,  jclass_RouteDataObject, "types", "[I" );
     jfield_RouteDataObject_pointsX = getFid(env,  jclass_RouteDataObject, "pointsX", "[I" );
@@ -439,97 +444,156 @@ void pullFromJavaRenderingContext(JNIEnv* env, jobject jrc, JNIRenderingContext*
 
 // ElapsedTimer routingTimer;
 
-//RouteDataObject[] loadRoutingData(RouteRegion reg, int left, int right, int top, int bottom)
-extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_loadRoutingData(JNIEnv* ienv,
-		jobject obj, jobject reg, jstring regName, jint filepointer, jint left, jint right, jint top, jint bottom) {
+jobject convertRouteDataObjectToJava(JNIEnv* ienv, RouteDataObject* route, jobject reg) {
+	jintArray nameInts = ienv->NewIntArray(route->names.size());
+	jobjectArray nameStrings = ienv->NewObjectArray(route->names.size(), jclassString, NULL);
+	jint ar[route->names.size()];
+	UNORDERED(map)<int, std::string >::iterator itNames = route->names.begin();
+	jsize sz = 0;
+	for (; itNames != route->names.end(); itNames++, sz++) {
+		std::string name = itNames->second;
+		jstring js = ienv->NewStringUTF(name.c_str());
+		ienv->SetObjectArrayElement(nameStrings, sz, js);
+		ienv->DeleteLocalRef(js);
+		ar[sz] = itNames->first;
+	}
+	ienv->SetIntArrayRegion(nameInts, 0, route->names.size(), ar);
+	jobject robj = ienv->NewObject(jclass_RouteDataObject, jmethod_RouteDataObject_init, reg, nameInts, nameStrings);
+	ienv->DeleteLocalRef(nameInts);
+	ienv->DeleteLocalRef(nameStrings);
+
+	ienv->SetLongField(robj, jfield_RouteDataObject_id, route->id);
+
+	jintArray types = ienv->NewIntArray(route->types.size());
+	if (route->types.size() > 0) {
+		ienv->SetIntArrayRegion(types, 0, route->types.size(), (jint*) &route->types[0]);
+	}
+	ienv->SetObjectField(robj, jfield_RouteDataObject_types, types);
+	ienv->DeleteLocalRef(types);
+
+	jintArray pointsX = ienv->NewIntArray(route->pointsX.size());
+	if (route->pointsX.size() > 0) {
+		ienv->SetIntArrayRegion(pointsX, 0, route->pointsX.size(), (jint*) &route->pointsX[0]);
+	}
+	ienv->SetObjectField(robj, jfield_RouteDataObject_pointsX, pointsX);
+	ienv->DeleteLocalRef(pointsX);
+
+	jintArray pointsY = ienv->NewIntArray(route->pointsY.size());
+	if (route->pointsY.size() > 0) {
+		ienv->SetIntArrayRegion(pointsY, 0, route->pointsY.size(), (jint*) &route->pointsY[0]);
+	}
+	ienv->SetObjectField(robj, jfield_RouteDataObject_pointsY, pointsY);
+	ienv->DeleteLocalRef(pointsY);
+
+	jlongArray restrictions = ienv->NewLongArray(route->restrictions.size());
+	if (route->restrictions.size() > 0) {
+		ienv->SetLongArrayRegion(restrictions, 0, route->restrictions.size(), (jlong*) &route->restrictions[0]);
+	}
+	ienv->SetObjectField(robj, jfield_RouteDataObject_restrictions, restrictions);
+	ienv->DeleteLocalRef(restrictions);
+
+	jobjectArray pointTypes = ienv->NewObjectArray(route->pointTypes.size(), jclassIntArray, NULL);
+	for (jint k = 0; k < route->pointTypes.size(); k++) {
+		std::vector<uint32_t> ts = route->pointTypes[k];
+		if (ts.size() > 0) {
+			jintArray tos = ienv->NewIntArray(ts.size());
+			ienv->SetIntArrayRegion(tos, 0, ts.size(), (jint*) &ts[0]);
+			ienv->SetObjectArrayElement(pointTypes, k, tos);
+			ienv->DeleteLocalRef(tos);
+		}
+	}
+
+	ienv->SetObjectField(robj, jfield_RouteDataObject_pointTypes, pointTypes);
+	ienv->DeleteLocalRef(pointTypes);
+	return robj;
+}
+
+class NativeRoutingTile {
+public:
+	std::vector<RouteDataObject*> result;
+	UNORDERED(map)<uint64_t, std::vector<RouteDataObject*> > cachedByLocations;
+};
+
+
+//	protected static native void deleteRouteSearchResult(long searchResultHandle!);
+extern "C" JNIEXPORT void JNICALL Java_net_osmand_NativeLibrary_deleteRouteSearchResult(JNIEnv* ienv,
+		jobject obj, jlong ref) {
+	NativeRoutingTile* t = (NativeRoutingTile*) ref;
+	for (unsigned int i = 0; i < t->result.size(); i++) {
+		delete t->result[i];
+		t->result[i] = NULL;
+	}
+	delete t;
+}
+
+
+//	protected static native RouteDataObject[] getRouteDataObjects(NativeRouteSearchResult rs, int x31, int y31!);
+extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_getRouteDataObjects(JNIEnv* ienv,
+		jobject obj, jobject reg, jlong ref, jint x31, jint y31) {
+
+	NativeRoutingTile* t = (NativeRoutingTile*) ref;
+	uint64_t lr = ((uint64_t) x31 << 31) + y31;
+	std::vector<RouteDataObject*> collected = t->cachedByLocations[lr];
+	jobjectArray res = ienv->NewObjectArray(collected.size(), jclass_RouteDataObject, NULL);
+	for (jint i = 0; i < collected.size(); i++) {
+		jobject robj = convertRouteDataObjectToJava(ienv, collected[i], reg);
+		ienv->SetObjectArrayElement(res, i, robj);
+		ienv->DeleteLocalRef(robj);
+	}
+	return res;
+}
+
+//protected static native NativeRouteSearchResult loadRoutingData(RouteRegion reg, String regName, int fpointer, int left, int right, int top, int bottom,
+//			boolean loadObjects!);
+extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_NativeLibrary_loadRoutingData(JNIEnv* ienv,
+		jobject obj, jobject reg, jstring regName, jint filepointer, jint left, jint right, jint top, jint bottom, jboolean loadObjects) {
 	RoutingIndex ind;
 	ind.filePointer = filepointer;
 	ind.name = getString(ienv, regName);
-
 
 	std::vector<RouteDataObject*> result;
 	SearchQuery q(left, right, top, bottom);
 	searchRouteRegion(&q, result, &ind);
 
-	jobjectArray res =  ienv->NewObjectArray(result.size(), jclass_RouteDataObject, NULL );
-	for (jint i = 0; i < result.size(); i++) {
-		if (result[i] != NULL) {
-			jintArray nameInts = ienv->NewIntArray(result[i]->names.size());
-			jobjectArray nameStrings = ienv->NewObjectArray(result[i]->names.size(),
-					jclassString, NULL);
-			jint ar[result[i]->names.size()];
-			UNORDERED(map)<int, std::string >::iterator itNames = result[i]->names.begin();
-			jsize sz = 0;
-			for(;itNames != result[i]->names.end(); itNames++, sz++) {
-				std::string name = itNames->second;
-				jstring js = ienv->NewStringUTF(name.c_str());
-				ienv->SetObjectArrayElement(nameStrings, sz, js);
-				ienv->DeleteLocalRef(js);
-				ar[sz] = itNames->first;
+
+	if (loadObjects) {
+		jobjectArray res = ienv->NewObjectArray(result.size(), jclass_RouteDataObject, NULL);
+		for (jint i = 0; i < result.size(); i++) {
+			if (result[i] != NULL) {
+				jobject robj = convertRouteDataObjectToJava(ienv, result[i], reg);
+				ienv->SetObjectArrayElement(res, i, robj);
+				ienv->DeleteLocalRef(robj);
 			}
-			ienv->SetIntArrayRegion(nameInts, 0, result[i]->names.size(),ar);
-			jobject robj = ienv->NewObject(jclass_RouteDataObject, jmethod_RouteDataObject_init, reg,
-					nameInts, nameStrings);
-			ienv->DeleteLocalRef(nameInts);
-			ienv->DeleteLocalRef(nameStrings);
-
-			ienv->SetLongField(robj, jfield_RouteDataObject_id, result[i]->id);
-
-			jintArray types =  ienv->NewIntArray(result[i]->types.size());
-			if(result[i]->types.size() > 0) {
-				ienv->SetIntArrayRegion(types, 0, result[i]->types.size(), (jint*) &result[i]->types[0]);
+		}
+		for (unsigned int i = 0; i < result.size(); i++) {
+			if (result[i] != NULL) {
+				delete result[i];
 			}
-			ienv->SetObjectField(robj, jfield_RouteDataObject_types, types);
-			ienv->DeleteLocalRef(types);
-
-			jintArray pointsX = ienv->NewIntArray(result[i]->pointsX.size());
-			if (result[i]->pointsX.size() > 0) {
-				ienv->SetIntArrayRegion(pointsX, 0, result[i]->pointsX.size(), (jint*) &result[i]->pointsX[0]);
-			}
-			ienv->SetObjectField(robj, jfield_RouteDataObject_pointsX, pointsX);
-			ienv->DeleteLocalRef(pointsX);
-
-			jintArray pointsY = ienv->NewIntArray(result[i]->pointsY.size());
-			if (result[i]->pointsY.size() > 0) {
-				ienv->SetIntArrayRegion(pointsY, 0, result[i]->pointsY.size(), (jint*) &result[i]->pointsY[0]);
-			}
-			ienv->SetObjectField(robj, jfield_RouteDataObject_pointsY, pointsY);
-			ienv->DeleteLocalRef(pointsY);
-
-			jlongArray restrictions = ienv->NewLongArray(result[i]->restrictions.size());
-			if (result[i]->restrictions.size() > 0) {
-				ienv->SetLongArrayRegion(restrictions, 0, result[i]->restrictions.size(),
-						(jlong*) &result[i]->restrictions[0]);
-			}
-			ienv->SetObjectField(robj, jfield_RouteDataObject_restrictions, restrictions);
-			ienv->DeleteLocalRef(restrictions);
-
-
-			jobjectArray pointTypes = ienv->NewObjectArray(result[i]->pointTypes.size(), jclassIntArray, NULL);
-			for(jint k = 0; k < result[i]->pointTypes.size(); k++ ) {
-				std::vector<uint32_t> ts = result[i]->pointTypes[k];
-				if (ts.size() > 0) {
-					jintArray tos = ienv->NewIntArray(ts.size());
-					ienv->SetIntArrayRegion(tos, 0, ts.size(), (jint*) &ts[0]);
-					ienv->SetObjectArrayElement(pointTypes, k, tos);
-					ienv->DeleteLocalRef(tos);
+			result[i] = NULL;
+		}
+		return ienv->NewObject(jclass_NativeRouteSearchResult, jmethod_NativeRouteSearchResult_init, ((jlong) 0), res);
+	} else {
+		NativeRoutingTile* r = new NativeRoutingTile();
+		for (jint i = 0; i < result.size(); i++) {
+			if (result[i] != NULL) {
+				r->result.push_back(result[i]);
+				for (jint j = 0; j < result[i]->pointsX.size(); j++) {
+					jint x = result[i]->pointsX[j];
+					jint y = result[i]->pointsY[j];
+					uint64_t lr = ((uint64_t) x << 31) + y;
+					r->cachedByLocations[lr].push_back(result[i]);
 				}
 			}
-
-			ienv->SetObjectField(robj, jfield_RouteDataObject_pointTypes, pointTypes);
-			ienv->DeleteLocalRef(pointTypes);
-
-
-
-			ienv->SetObjectArrayElement(res, i, robj);
-			ienv->DeleteLocalRef(robj);
 		}
+		jlong ref = (jlong) r;
+		if(r->result.size() == 0) {
+			ref = 0;
+			delete r;
+		}
+
+		return ienv->NewObject(jclass_NativeRouteSearchResult, jmethod_NativeRouteSearchResult_init, ref, NULL);
 	}
-	for (unsigned int i = 0; i < result.size(); i++) {
-		delete result[i];
-		result[i] = NULL;
-	}
-	return res;
+
 }
 
 

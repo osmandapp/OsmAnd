@@ -13,6 +13,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.swing.DataExtractionSettings;
+import net.osmand.swing.NativeSwingRendering;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,11 +23,13 @@ import org.xml.sax.SAXException;
 public class JUnitRouteTest  {
 
 	static BinaryMapIndexReader[]  rs;
+	private NativeSwingRendering lib;
 	@Before
 	public void setupFiles() throws IOException {
 		if(rs != null){
 			return;
 		}
+		lib = NativeSwingRendering.getDefaultFromSettings();
 		BinaryRoutePlanner.PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = false;
 		String obfdir = System.getenv("OBF_DIR");
 		if(Algoritms.isEmpty(obfdir)){
@@ -50,12 +53,12 @@ public class JUnitRouteTest  {
 	
 	@Test
 	public void runNL() throws SAXException, IOException, ParserConfigurationException {
-		RouterTestsSuite.test(getClass().getResourceAsStream("nl.test.xml"), rs, RoutingConfiguration.getDefault());
+		RouterTestsSuite.test(lib, getClass().getResourceAsStream("nl.test.xml"), rs, RoutingConfiguration.getDefault());
 	}
 
 	@Test
 	public void runNL2() throws SAXException, IOException, ParserConfigurationException {
-		RouterTestsSuite.test(getClass().getResourceAsStream("nl2.test.xml"), rs, RoutingConfiguration.getDefault());
+		RouterTestsSuite.test(lib, getClass().getResourceAsStream("nl2.test.xml"), rs, RoutingConfiguration.getDefault());
 	}
 	
 }

@@ -7,10 +7,20 @@ import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TIntHashSet;
 import gnu.trove.set.hash.TLongHashSet;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
+import net.osmand.NativeLibrary;
+import net.osmand.NativeLibrary.NativeRouteSearchResult;
+import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
@@ -49,6 +59,7 @@ public class RoutingContext {
 	long timeToLoad = 0;
 	long timeToCalculate = 0;
 	public int loadedTiles = 0;
+	int distinctLoadedTiles = 0;
 	int maxLoadedTiles = 0;
 	int loadedPrevUnloadedTiles = 0;
 	int unloadedTiles = 0;
@@ -180,6 +191,145 @@ public class RoutingContext {
 		distinctUnloadedTiles.add(l);
 	}
 	
+	
+	public void loadTileData(final RoutingTile tile, final List<RouteDataObject> toFillIn, NativeLibrary nativeLib, 
+			Map<BinaryMapIndexReader, List<RouteSubregion>> map) {
+		
+		long now = System.nanoTime();
+		ResultMatcher<RouteDataObject> matcher = new ResultMatcher<RouteDataObject>() {
+			@Override
+			public boolean publish(RouteDataObject o) {
+				if (toFillIn != null) {
+					if (getRouter().acceptLine(o)) {
+						toFillIn.add(o);
+					}
+				}
+				registerRouteDataObject(o, tile);
+				return false;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		};
+		int zoomToLoad = 31 - tile.getZoom();
+		int tileX = tile.getTileX();
+		int tileY = tile.getTileY();
+		boolean loadData = toFillIn != null;
+		List<NativeRouteSearchResult> nativeRouteSearchResults = new ArrayList<NativeRouteSearchResult>();
+		SearchRequest<RouteDataObject> request = BinaryMapIndexReader.buildSearchRouteRequest(tileX << zoomToLoad,
+				(tileX + 1) << zoomToLoad, tileY << zoomToLoad, (tileY + 1) << zoomToLoad, matcher);
+		for (Entry<BinaryMapIndexReader, List<RouteSubregion>> r : map.entrySet()) {
+			if(nativeLib != null) {
+				for(RouteRegion reg : r.getKey().getRoutingIndexes()) {
+					NativeRouteSearchResult rs = nativeLoadRegion(request, reg, nativeLib, loadData);
+					if(rs != null) {
+						if(!loadData){
+							if (rs.nativeHandler != 0) {
+								nativeRouteSearchResults.add(rs);
+							}
+						} else {
+							if(rs.objects != null){
+								for(RouteDataObject ro : rs.objects) {
+									if(ro != null) {
+										request.publish(ro);
+									}
+								}
+							}
+						}
+					}
+				}
+			} else {
+				try {
+					r.getKey().searchRouteIndex(request, r.getValue());
+				} catch (IOException e) {
+					throw new RuntimeException("Loading data exception", e);
+				}
+			}
+		}
+		loadedTiles++;
+		if (tile.isUnloaded()) {
+			loadedPrevUnloadedTiles++;
+		} else {
+			distinctLoadedTiles++;
+		}
+		tile.setLoaded();
+		if(nativeRouteSearchResults.size() > 0) {
+			tile.nativeLib = nativeLib;
+			tile.nativeResults = nativeRouteSearchResults;
+			
+		}
+		timeToLoad += (System.nanoTime() - now);
+	}
+
+	
+
+
+	private NativeRouteSearchResult nativeLoadRegion(SearchRequest<RouteDataObject> request, RouteRegion reg, NativeLibrary nativeLib, boolean loadData) {
+		boolean intersects = false;
+		for(RouteSubregion sub : reg.getSubregions()) {
+			if(request.intersects(sub.left, sub.top, sub.right, sub.bottom)) {
+				intersects = true;
+				break;
+			}
+		}
+		if(intersects) {
+			return nativeLib.loadRouteRegion(reg, request.getLeft(), request.getRight(), request.getTop(), request.getBottom(), loadData);
+		}
+		return null;
+	}
+	
+	
+	/*private */void registerRouteDataObject(RouteDataObject o, RoutingTile suggestedTile ) {
+		if(!getRouter().acceptLine(o)){
+			return;
+		}
+		RoutingTile tl = suggestedTile;
+		RouteDataObject old = tl.idObjects.get(o.id);
+		// sometimes way is present only partially in one index
+		if (old != null && old.getPointsLength() >= o.getPointsLength()) {
+			return;
+		};
+		for (int j = 0; j < o.getPointsLength(); j++) {
+			int x = o.getPoint31XTile(j);
+			int y = o.getPoint31YTile(j);
+			if(!tl.checkContains(x, y)){
+				// don't register in different tiles
+				// in order to throw out tile object easily
+				continue;
+			}
+			long l = (((long) x) << 31) + (long) y;
+			RouteSegment segment = new RouteSegment(o , j);
+			RouteSegment prev = tl.getSegment(l);
+			boolean i = true;
+			if (prev != null) {
+				if (old == null) {
+					segment.next = prev;
+				} else if (prev.road == old) {
+					segment.next = prev.next;
+				} else {
+					// segment somewhere in the middle replace element in linked list
+					RouteSegment rr = prev;
+					while (rr != null) {
+						if (rr.road == old) {
+							prev.next = segment;
+							segment.next = rr.next;
+							break;
+						}
+						prev = rr;
+						rr = rr.next;
+					}
+					i = false;
+				}
+			}
+			if (i) {
+				tl.routes.put(l, segment);
+				tl.idObjects.put(o.id, o);
+			}
+		}
+	}
+	
 	public static class RoutingTile {
 		private int tileX;
 		private int tileY;
@@ -188,8 +338,53 @@ public class RoutingContext {
 		// make it without get/set for fast access
 		public int access;
 		
-		TLongObjectMap<RouteSegment> routes = new TLongObjectHashMap<RouteSegment>();
-		TLongObjectHashMap<RouteDataObject> idObjects = new TLongObjectHashMap<RouteDataObject>();
+		private NativeLibrary nativeLib;
+		// null if it doesn't work with native results
+		private List<NativeRouteSearchResult> nativeResults;
+		private TLongHashSet excludeDuplications = new TLongHashSet();
+		
+		private TLongObjectMap<RouteSegment> routes = new TLongObjectHashMap<RouteSegment>();
+		private TLongObjectHashMap<RouteDataObject> idObjects = new TLongObjectHashMap<RouteDataObject>();
+		
+		public RouteSegment getSegment(long id) {
+			if(nativeResults != null) {
+				RouteSegment original = loadNativeRouteSegment(id);
+				return original;
+			}
+			return routes.get(id);
+		}
+
+		private RouteSegment loadNativeRouteSegment(long id) {
+			int y31 = (int) (id & Integer.MAX_VALUE);
+			int x31 = (int) (id >> 31);
+			excludeDuplications.clear();
+			RouteSegment original = null;
+			RouteSegment prev = null;
+			for (NativeRouteSearchResult rs : nativeResults) {
+				RouteDataObject[] res = nativeLib.getDataObjects(rs, x31, y31);
+				if (res != null) {
+					for (RouteDataObject ro : res) {
+						if (ro != null && !excludeDuplications.contains(ro.id)) {
+							excludeDuplications.add(ro.id);
+							for (int i = 0; i < ro.pointsX.length; i++) {
+								if (ro.getPoint31XTile(i) == x31 && ro.getPoint31YTile(i) == y31) {
+									RouteSegment segment = new RouteSegment(ro, i);
+									if (prev != null) {
+										prev.next = segment;
+										prev = segment;
+									} else {
+										original = segment;
+										prev = segment;
+									}
+								}
+							}
+
+						}
+					}
+				}
+			}
+			return original;
+		}
 		
 		public RoutingTile(int tileX, int tileY, int zoom) {
 			this.tileX = tileX;
@@ -231,6 +426,11 @@ public class RoutingContext {
 			} else {
 				isLoaded = -Math.abs(isLoaded);
 			}
+			if(nativeResults != null) {
+				for(NativeRouteSearchResult rs : nativeResults) {
+					rs.deleteNativeResult();
+				}
+			}
 		}
 		
 		public void setLoaded() {
@@ -242,8 +442,5 @@ public class RoutingContext {
 			return tileX == (x31 >> (31 - zoom)) && tileY == (y31 >> (31 - zoom));
 		}
 		
-		public TLongObjectMap<RouteSegment> getLoadedRoutes() {
-			return routes;
-		}
 	}
 }

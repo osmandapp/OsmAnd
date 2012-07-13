@@ -14,16 +14,13 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.TreeSet;
 
 import net.osmand.LogUtil;
 import net.osmand.NativeLibrary;
-import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
@@ -48,6 +45,9 @@ public class BinaryRoutePlanner {
 	
 	public BinaryRoutePlanner(NativeLibrary nativeLib, BinaryMapIndexReader... map) {
 		this.nativeLib = nativeLib;
+		if(nativeLib != null) {
+			RoutingConfiguration.DEFAULT_DESIRABLE_TILES_IN_MEMORY = 25;
+		}
 		for (BinaryMapIndexReader mr : map) {
 			List<RouteRegion> rr = mr.getRoutingIndexes();
 			List<RouteSubregion> subregions = new ArrayList<BinaryMapRouteReaderAdapter.RouteSubregion>();
@@ -119,7 +119,7 @@ public class BinaryRoutePlanner {
 		List<RouteDataObject> dataObjects = new ArrayList<RouteDataObject>();
 		Iterator<RoutingTile> it = ts.valueCollection().iterator();
 		while(it.hasNext()){
-			loadTileData(ctx, it.next(), dataObjects);
+			ctx.loadTileData(it.next(), dataObjects, nativeLib, map);
 		}
 		RouteSegment road = null;
 		double sdist = 0; 
@@ -158,7 +158,7 @@ public class BinaryRoutePlanner {
 		}
 		if(road != null) {
 			// re-register the best road because one more point was inserted
-			registerRouteDataObject(ctx, road.getRoad(), ctx.getRoutingTile(foundProjX, foundProjY));
+			ctx.registerRouteDataObject(road.getRoad(), ctx.getRoutingTile(foundProjX, foundProjY));
 		}
 		return road;
 	}
@@ -297,11 +297,16 @@ public class BinaryRoutePlanner {
 				relaxNotNeededSegments(ctx, graphReverseSegments, false);
 			}
 		}
-		printDebugMemoryInformation(ctx, graphDirectSegments, graphReverseSegments, visitedDirectSegments, visitedOppositeSegments);
+		println("Result is found");
 		
 		// 4. Route is found : collect all segments and prepare result
-		return prepareResult(ctx, start, end, leftSideNavigation);
-		
+		List<RouteSegmentResult> resultPrepared = prepareResult(ctx, start, end, leftSideNavigation);
+		printDebugMemoryInformation(ctx, graphDirectSegments, graphReverseSegments, visitedDirectSegments, visitedOppositeSegments);
+		Object[] vls = ctx.tiles.values();
+		for(Object tl : vls) {
+			ctx.unloadTile((RoutingTile) tl, false);
+		}
+		return resultPrepared;
 	}
 	
 	private void unloadUnusedTiles(RoutingContext ctx, int desirableSize) {
@@ -334,11 +339,13 @@ public class BinaryRoutePlanner {
 				return v1 < v2 ? -1 : (v1 == v2 ? 0 : 1);
 			}
 		});
-		int toUnload = Math.max(loaded / 5, loaded - desirableSize);
-		for (int i = 0; i < loaded; i++) {
-			list.get(i).access = 0;
-			if (i < toUnload) {
-				ctx.unloadTile(list.get(i), true);
+		if (loaded >= 0.9f * desirableSize) {
+			int toUnload = Math.max(loaded / 5, loaded - desirableSize);
+			for (int i = 0; i < loaded; i++) {
+				list.get(i).access = 0;
+				if (i < toUnload) {
+					ctx.unloadTile(list.get(i), true);
+				}
 			}
 		}
 	}
@@ -395,54 +402,7 @@ public class BinaryRoutePlanner {
 		return result; 
 	}
 	
-	private void registerRouteDataObject(final RoutingContext ctx, RouteDataObject o, RoutingTile suggestedTile ) {
-		if(!ctx.getRouter().acceptLine(o)){
-			return;
-		}
-		RoutingTile tl = suggestedTile;
-		RouteDataObject old = tl.idObjects.get(o.id);
-		// sometimes way is present only partially in one index
-		if (old != null && old.getPointsLength() >= o.getPointsLength()) {
-			return;
-		};
-		for (int j = 0; j < o.getPointsLength(); j++) {
-			int x = o.getPoint31XTile(j);
-			int y = o.getPoint31YTile(j);
-			if(!tl.checkContains(x, y)){
-				// don't register in different tiles
-				// in order to throw out tile object easily
-				continue;
-			}
-			long l = (((long) x) << 31) + (long) y;
-			RouteSegment segment = new RouteSegment(o , j);
-			RouteSegment prev = tl.routes.get(l);
-			boolean i = true;
-			if (prev != null) {
-				if (old == null) {
-					segment.next = prev;
-				} else if (prev.road == old) {
-					segment.next = prev.next;
-				} else {
-					// segment somewhere in the middle replace element in linked list
-					RouteSegment rr = prev;
-					while (rr != null) {
-						if (rr.road == old) {
-							prev.next = segment;
-							segment.next = rr.next;
-							break;
-						}
-						prev = rr;
-						rr = rr.next;
-					}
-					i = false;
-				}
-			}
-			if (i) {
-				tl.routes.put(l, segment);
-				tl.idObjects.put(o.id, o);
-			}
-		}
-	}
+	
 	
 	private static void println(String logMsg) {
 //		log.info(logMsg);
@@ -453,8 +413,8 @@ public class BinaryRoutePlanner {
 			TLongObjectHashMap<RouteSegment> visitedDirectSegments,TLongObjectHashMap<RouteSegment> visitedOppositeSegments) {
 		println("Time to calculate : " + (System.nanoTime() - ctx.timeToCalculate) / 1e6 + ", time to load : " + ctx.timeToLoad / 1e6);
 		println("Current loaded tiles : " + ctx.getCurrentlyLoadedTiles() + ", maximum loaded tiles " + ctx.maxLoadedTiles);
-		println("Loaded tiles : " + ctx.loadedTiles + ", unloaded tiles " + ctx.unloadedTiles + 
-				" (distinct " + ctx.distinctUnloadedTiles.size()+") "+ ", loaded \"unloaded\" tiles "
+		println("Loaded tiles " + ctx.loadedTiles + " (distinct "+ctx.distinctLoadedTiles+ "), unloaded tiles " + ctx.unloadedTiles + 
+				" (distinct " + ctx.distinctUnloadedTiles.size()+") "+ ", loaded more than once same tiles "
 				+ ctx.loadedPrevUnloadedTiles );
 		println("Visited roads, " + ctx.visitedSegments + ", relaxed roads " + ctx.relaxedSegments);
 		if (graphDirectSegments != null && graphReverseSegments != null) {
@@ -468,87 +428,14 @@ public class BinaryRoutePlanner {
 	
 	public RoutingTile loadRoutes(final RoutingContext ctx, int tile31X, int tile31Y) {
 		final RoutingTile tile = ctx.getRoutingTile(tile31X, tile31Y);
-		loadTileData(ctx, tile, null);
+		if (tile.isLoaded()) {
+			tile.access++;
+			return tile;
+		}
+		ctx.loadTileData(tile, null, nativeLib, map);
 		return tile;
 	}
 
-
-	private void loadTileData(final RoutingContext ctx, final RoutingTile tile, final List<RouteDataObject> toFillIn) {
-		if (tile.isLoaded()) {
-			tile.access++;
-			if(toFillIn != null){
-				for(RouteDataObject ro : tile.idObjects.valueCollection()){
-					toFillIn.add(ro);
-				}
-			}
-			return;
-		}
-		long now = System.nanoTime();
-		ResultMatcher<RouteDataObject> matcher = new ResultMatcher<RouteDataObject>() {
-			@Override
-			public boolean publish(RouteDataObject o) {
-				if (toFillIn != null) {
-					if (ctx.getRouter().acceptLine(o)) {
-						toFillIn.add(o);
-					}
-				}
-				registerRouteDataObject(ctx, o, tile);
-				return false;
-			}
-
-			@Override
-			public boolean isCancelled() {
-				return false;
-			}
-		};
-		int zoomToLoad = 31 - tile.getZoom();
-		int tileX = tile.getTileX();
-		int tileY = tile.getTileY();
-		SearchRequest<RouteDataObject> request = BinaryMapIndexReader.buildSearchRouteRequest(tileX << zoomToLoad,
-				(tileX + 1) << zoomToLoad, tileY << zoomToLoad, (tileY + 1) << zoomToLoad, matcher);
-		for (Entry<BinaryMapIndexReader, List<RouteSubregion>> r : map.entrySet()) {
-			if(nativeLib != null) {
-				for(RouteRegion reg : r.getKey().getRoutingIndexes()) {
-					nativeLoadRegion(request, reg);
-				}
-			} else {
-				try {
-					r.getKey().searchRouteIndex(request, r.getValue());
-				} catch (IOException e) {
-					throw new RuntimeException("Loading data exception", e);
-				}
-			}
-		}
-		ctx.loadedTiles++;
-		if (tile.isUnloaded()) {
-			ctx.loadedPrevUnloadedTiles++;
-		}
-		tile.setLoaded();
-		ctx.timeToLoad += (System.nanoTime() - now);
-	}
-
-	
-
-
-	private void nativeLoadRegion(SearchRequest<RouteDataObject> request, RouteRegion reg) {
-		boolean intersects = false;
-		for(RouteSubregion sub : reg.getSubregions()) {
-			if(request.intersects(sub.left, sub.top, sub.right, sub.bottom)) {
-				intersects = true;
-				break;
-			}
-		}
-		if(intersects) {
-			RouteDataObject[] res = nativeLib.loadRouteRegion(reg, request.getLeft(), request.getRight(), request.getTop(), request.getBottom());
-			if(res != null){
-				for(RouteDataObject ro : res) {
-					if(ro != null) {
-						request.publish(ro);
-					}
-				}
-			}
-		}
-	}
 
 
 	private boolean processRouteSegment(final RoutingContext ctx, boolean reverseWaySearch,
@@ -649,7 +536,7 @@ public class BinaryRoutePlanner {
 			
 			
 			long l = (((long) x) << 31) + (long) y;
-			RouteSegment next = tile.routes.get(l);
+			RouteSegment next = tile.getSegment(l);
 			// 3. get intersected ways
 			if (next != null) {
 				// TO-DO U-Turn
@@ -875,6 +762,9 @@ public class BinaryRoutePlanner {
 
 		// calculate time
 		for (int i = 0; i < result.size(); i++) {
+			if(ctx.runTilesGC()) {
+				unloadUnusedTiles(ctx, ctx.config.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY);
+			}
 			RouteSegmentResult rr = result.get(i);
 			RouteDataObject road = rr.getObject();
 			double distOnRoadToPass = 0;
@@ -1190,7 +1080,7 @@ public class BinaryRoutePlanner {
 				}
 			}
 		}
-		RouteSegment routeSegment = tl.getLoadedRoutes().get(l);
+		RouteSegment routeSegment = tl.getSegment(l);
 		// try to attach all segments except with current id
 		while (routeSegment != null) {
 			if (routeSegment.road.getId() != road.getId() && routeSegment.road.getId() != previousRoadId) {

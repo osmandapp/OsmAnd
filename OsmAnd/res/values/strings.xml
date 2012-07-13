@@ -21,7 +21,7 @@
          	* Parking plugin
          	* Enable/disable monitoring widget
          </string>
-    <string name="use_compass_navigation_descr">Use compass in navigation when diretion is not detected</string>
+    <string name="use_compass_navigation_descr">Use compass when direction is not detected</string>
     <string name="use_compass_navigation">Use compass</string>
     <string name="select_animate_speedup">Select animate route acceleration</string>
     <string name="monitoring_info_control">Show logging button</string>
