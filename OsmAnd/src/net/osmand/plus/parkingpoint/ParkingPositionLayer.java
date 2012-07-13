@@ -161,27 +161,31 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	}
 	
 	@Override
-	public String getObjectDescription(Object o) {	
-		StringBuilder timeLimitDesc = new StringBuilder(); 
-		timeLimitDesc.append(map.getString(R.string.osmand_parking_position_description_add_time) + " ");
-		timeLimitDesc.append(getFormattedTime(settings.getStartParkingTime()) + ".");
-		if (settings.getParkingType()) {
-//			long parkingTime = settings.getParkingTime();
-//			long parkingStartTime = settings.getStartParkingTime();
-//			Time time = new Time();
-//			time.set(parkingTime);			
-//			timeLimitDesc.append(map.getString(R.string.osmand_parking_position_description_add) + " ");
-//			timeLimitDesc.append(time.hour);
-//			timeLimitDesc.append(":");
-//			int minute = time.minute;
-//			timeLimitDesc.append(minute<10 ? "0" + minute : minute);
-//			if (!DateFormat.is24HourFormat(map.getApplicationContext())) {
-//				timeLimitDesc.append(time.hour >= 12 ? map.getString(R.string.osmand_parking_pm) : map.getString(R.string.osmand_parking_am));
-//		    }
-			timeLimitDesc.append(map.getString(R.string.osmand_parking_position_description_add) + " ");
-			timeLimitDesc.append(getFormattedTime(settings.getParkingTime()));
+	public String getObjectDescription(Object o) {
+		if (o instanceof LatLon) {
+			StringBuilder timeLimitDesc = new StringBuilder();
+			timeLimitDesc.append(map.getString(R.string.osmand_parking_position_description_add_time) + " ");
+			timeLimitDesc.append(getFormattedTime(settings.getStartParkingTime()) + ".");
+			if (settings.getParkingType()) {
+				// long parkingTime = settings.getParkingTime();
+				// long parkingStartTime = settings.getStartParkingTime();
+				// Time time = new Time();
+				// time.set(parkingTime);
+				// timeLimitDesc.append(map.getString(R.string.osmand_parking_position_description_add) + " ");
+				// timeLimitDesc.append(time.hour);
+				// timeLimitDesc.append(":");
+				// int minute = time.minute;
+				// timeLimitDesc.append(minute<10 ? "0" + minute : minute);
+				// if (!DateFormat.is24HourFormat(map.getApplicationContext())) {
+				// timeLimitDesc.append(time.hour >= 12 ? map.getString(R.string.osmand_parking_pm) :
+				// map.getString(R.string.osmand_parking_am));
+				// }
+				timeLimitDesc.append(map.getString(R.string.osmand_parking_position_description_add) + " ");
+				timeLimitDesc.append(getFormattedTime(settings.getParkingTime()));
+			}
+			return map.getString(R.string.osmand_parking_position_description, timeLimitDesc.toString());
 		}
-		return map.getString(R.string.osmand_parking_position_description, timeLimitDesc.toString());
+		return null;
 	}
 
 	private String getFormattedTime(long timeInMillis) {
@@ -234,9 +238,9 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 			LatLon position = settings.getParkingPosition();
 			int x = view.getRotatedMapXForPoint(position.getLatitude(), position.getLongitude());
 			int y = view.getRotatedMapYForPoint(position.getLatitude(), position.getLongitude());
-			//the width of an image is 40 px, the height is 60 px -> radius = 20, 
-			//the position of a parking point relatively to the icon is at the center of the bottom line of the image 
-			if (Math.abs(x - ex) <= radius && ((y - ey) <= radius*3) && ((y - ey) >= 0)) {
+			// the width of an image is 40 px, the height is 60 px -> radius = 20,
+			// the position of a parking point relatively to the icon is at the center of the bottom line of the image
+			if (Math.abs(x - ex) <= radius && ((y - ey) <= radius * 3) && ((y - ey) >= 0)) {
 				parkingPosition.add(parkingPoint);
 			}
 		}

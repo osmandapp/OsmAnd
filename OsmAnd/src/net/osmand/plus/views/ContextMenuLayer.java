@@ -254,11 +254,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public String getSelectedObjectDescription(){
 		if(!selectedObjects.isEmpty() && selectedContextProvider != null){
 			StringBuilder description = new StringBuilder(); 
-			if (selectedObjects.size() > 1)
+			if (selectedObjects.size() > 1) {
 				description.append("1. ");
+			}
 			description.append(selectedContextProvider.getObjectDescription(selectedObjects.get(0)));
-			for (int i = 1; i < selectedObjects.size(); i++)
+			for (int i = 1; i < selectedObjects.size(); i++) {
 				description.append("\n" + (i + 1) + ". ").append(selectedContextProvider.getObjectDescription(selectedObjects.get(i)));
+			}
 			return description.toString();
 		}
 		return null;

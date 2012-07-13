@@ -208,20 +208,20 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				choose.dismiss();
 				Calendar cal = Calendar.getInstance();
 				boolean is24HourFormat = DateFormat.is24HourFormat(app);
-				int hour = cal.get( is24HourFormat? Calendar.HOUR_OF_DAY : Calendar.HOUR);
+				int hour = cal.get(is24HourFormat ? Calendar.HOUR_OF_DAY : Calendar.HOUR);
 				int minute = cal.get(Calendar.MINUTE);
-				cal.set(is24HourFormat? Calendar.HOUR_OF_DAY : Calendar.HOUR, hour + timePicker.getCurrentHour());
+				cal.set(is24HourFormat ? Calendar.HOUR_OF_DAY : Calendar.HOUR, hour + timePicker.getCurrentHour());
 				cal.set(Calendar.MINUTE, minute + timePicker.getCurrentMinute());
 				settings.setParkingTime(cal.getTimeInMillis());
-				CheckBox addCalendarEvent = (CheckBox)setTimeParking.findViewById(R.id.check_event_in_calendar);
+				CheckBox addCalendarEvent = (CheckBox) setTimeParking.findViewById(R.id.check_event_in_calendar);
 				if (addCalendarEvent.isChecked()) {
 					addCalendarEvent(setTimeParking);
 					settings.addOrRemoveParkingEvent(true);
 				} else {
 					settings.addOrRemoveParkingEvent(false);
-					}
 				}
-			});
+			}
+		});
 		setTime.create();
 		setTime.show();
 	}
