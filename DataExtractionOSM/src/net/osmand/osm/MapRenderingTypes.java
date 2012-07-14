@@ -132,7 +132,7 @@ public class MapRenderingTypes {
 		tempList.clear();
 		tempList.add(nameRuleType);
 
-		boolean area = "yes".equals(e.getTag("area"));
+		boolean area = "yes".equals(e.getTag("area")) || "true".equals(e.getTag("area"));
 
 		Collection<String> tagKeySet = e.getTagKeySet();
 		for (String tag : tagKeySet) {

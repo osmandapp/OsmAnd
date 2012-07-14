@@ -48,6 +48,12 @@ public class BinaryMapRouteReaderAdapter {
 
 		public RouteTypeRule(String t, String v) {
 			this.t = t.intern();
+			if("true".equals(v)) {
+				v = "yes";
+			}
+			if("false".equals(v)) {
+				v = "no";
+			}
 			this.v = v == null? null : v.intern();
 			analyze();
 		}
@@ -101,7 +107,7 @@ public class BinaryMapRouteReaderAdapter {
 				type = ONEWAY;
 				if("-1".equals(v) || "reverse".equals(v)) {
 					intValue = -1;
-				} else if("1".equals(v) || "yes".equals(v) || "true".equals(v)) {
+				} else if("1".equals(v) || "yes".equals(v)) {
 					intValue = 1;
 				} else {
 					intValue = 0;
