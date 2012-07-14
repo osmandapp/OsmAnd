@@ -814,7 +814,22 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	}
 
 	public float defineZoomFromSpeed(float speed) {
-		// correct for roughly constant "look ahead" distance on different screens, see Issue 914
+		//  Hardy's old implementation: correct for roughly constant "look ahead" distance on different screens using screen size correction, see Issue 914
+		//  less than 23: show zoom 17
+		// int screenSizeCorrection = (int)Math.round(Math.log(((float)getMapView().getHeight())/320.0f) / Math.log(2.0f));
+		// if(speed < 23f/3.6){
+		// return 17 + screenSizeCorrection;
+		// } else if(speed < 43f/3.6){
+		// return 16 + screenSizeCorrection;
+		// } else if(speed < 63f/3.6){
+		// return 15 + screenSizeCorrection;
+		// } else if(speed < 83f/3.6){
+		// return 14 + screenSizeCorrection;
+		// }
+		// return 13 + screenSizeCorrection;
+
+		// new implementation
+		// TODO Hardy: verify look ahead distance, there still seems bug in calculation
 		if (speed < 7f / 3.6) {
 			return 0;
 		}
@@ -833,18 +848,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			return 18 - OsmandMapTileView.ZOOM_DELTA_1 - mapView.getFloatZoom();
 		}
 		return zoomDelta;
-		// less than 23: show zoom 17
-		// int screenSizeCorrection = (int)Math.round(Math.log(((float)getMapView().getHeight())/320.0f) / Math.log(2.0f));
-		// if(speed < 23f/3.6){
-		// return 17 + screenSizeCorrection;
-		// } else if(speed < 43f/3.6){
-		// return 16 + screenSizeCorrection;
-		// } else if(speed < 63f/3.6){
-		// return 15 + screenSizeCorrection;
-		// } else if(speed < 83f/3.6){
-		// return 14 + screenSizeCorrection;
-		// }
-		// return 13 + screenSizeCorrection;
 	}
 
 	public void navigateToPoint(LatLon point){
