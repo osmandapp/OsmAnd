@@ -888,10 +888,29 @@ public class BinaryRoutePlanner {
 	private void addTurnInfo(boolean leftside, List<RouteSegmentResult> result) {
 		int prevSegment = -1;
 		float dist = 0;
-		for (int i = 0; i <= result.size(); i++) {
+		int next = 1;
+		for (int i = 0; i <= result.size(); i = next) {
 			TurnType t = null;
+			next = i + 1;
 			if (i < result.size()) {
 				t = getTurnInfo(result, i, leftside);
+				// justify turn
+				if(t != null && i < result.size() - 1) {
+					boolean tl = TurnType.TL.equals(t.getValue());
+					boolean tr = TurnType.TR.equals(t.getValue());
+					if(tl || tr) {
+						TurnType tnext = getTurnInfo(result, i + 1, leftside);
+						if(tnext != null && result.get(i).getDistance() < 55) {
+							if(tl && TurnType.TL.equals(t.getValue()) ) {
+								next = i + 2;
+								t = TurnType.valueOf(TurnType.TU, true);
+							} else if(tr && TurnType.TR.equals(t.getValue()) ) {
+								next = i + 2;
+								t = TurnType.valueOf(TurnType.TU, false);
+							}
+						}
+					}
+				}
 				result.get(i).setTurnType(t);
 			}
 			if (t != null || i == result.size()) {
@@ -929,41 +948,17 @@ public class BinaryRoutePlanner {
 		}
 		RouteSegmentResult prev = result.get(i - 1) ;
 		if(prev.getObject().roundabout()) {
+			// already analyzed!
 			return null;
 		}
 		RouteSegmentResult rr = result.get(i);
 		if (rr.getObject().roundabout()) {
-			int exit = 1;
-			RouteSegmentResult last = rr;
-			for (int j = i; j < result.size(); j++) {
-				RouteSegmentResult rnext = result.get(j);
-				if (rnext.getObject().roundabout()) {
-					last = rnext;
-					boolean plus = rnext.getStartPointIndex() < rnext.getEndPointIndex();
-					int k = rnext.getStartPointIndex();
-					if (j == i) {
-						k = plus ? k + 1 : k - 1;
-					}
-					while (k != rnext.getEndPointIndex()) {
-						if (rnext.getAttachedRoutes(k).size() > 0) {
-							exit++;
-						}
-						k = plus ? k + 1 : k - 1;
-					}
-				} else {
-					break;
-				}
-			}
-			// combine all roundabouts
-			TurnType t = TurnType.valueOf("EXIT"+exit, leftSide);
-			t.setTurnAngle((float) MapUtils.degreesDiff(last.getBearingBegin(), prev.getBearingEnd()));
-			return t;
+			return processRoundaboutTurn(result, i, leftSide, prev, rr);
 		}
 		TurnType t = null;
 		if (prev != null) {
 			// add description about turn
 			double mpi = MapUtils.degreesDiff(prev.getBearingEnd(), rr.getBearingBegin());
-			int[] lanes =  null;
 			if (mpi >= 50) {
 				if (mpi < 60) {
 					t = TurnType.valueOf(TurnType.TSLL, leftSide);
@@ -985,71 +980,106 @@ public class BinaryRoutePlanner {
 					t = TurnType.valueOf(TurnType.TU, leftSide);
 				}
 			} else {
-				// keep left/right
-				boolean kl = false;
-				boolean kr = false;
-				List<RouteSegmentResult> attachedRoutes = rr.getAttachedRoutes(rr.getStartPointIndex());
-				int ls = prev.getObject().getLanes();
-				int left = 0;
-				int right = 0;
-				boolean speak = highwayLowEnd(prev.getObject().getHighway()) || highwayLowEnd(rr.getObject().getHighway());
-				if(attachedRoutes != null){
-					for(RouteSegmentResult rs : attachedRoutes){
-						double ex = MapUtils.degreesDiff(rs.getBearingBegin(), rr.getBearingBegin());
-						if(ex < 45 && ex >= 0) {
-							kl = true;
-							int lns = rs.getObject().getLanes();
-							if (lns > 0) {
-								right += lns;
-							}
-							speak = speak  || !highwayLowEnd(rs.getObject().getHighway());
-						} else if(ex > -45 && ex <= 0) {
-							kr = true;
-							int lns = rs.getObject().getLanes();
-							if (lns > 0) {
-								left += lns;
-							}
-							speak = speak  || !highwayLowEnd(rs.getObject().getHighway());
-						}
-					}
-				}
-				if(kr && left == 0) {
-					left = 1;
-				} else if(kl && right == 0) {
-					right = 1;
-				}
-				int current = rr.getObject().getLanes();
-				if (current <= 0) {
-					current = 1;
-				}
-				if(ls >= 0 /*&& current + left + right >= ls*/){
-					lanes = new int[current + left + right];
-					ls = current + left + right;
-					for(int it=0; it< ls; it++) {
-						if(it < left || it >= left + current) {
-							lanes[it] = 0;
-						} else {
-							lanes[it] = 1;
-						}
-					}
-				}
-				
-				if (kl) {
-					t = TurnType.valueOf(TurnType.KL, leftSide);
-					t.setSkipToSpeak(!speak);
-				} else if(kr){
-					t = TurnType.valueOf(TurnType.KR, leftSide);
-					t.setSkipToSpeak(!speak);
-				}
+				t = attachKeepLeftInfoAndLanes(leftSide, prev, rr, t);
 			}
-			if(t != null) {
+			if (t != null) {
 				t.setTurnAngle((float) -mpi);
-				
-				if (lanes != null) {
-					t.setLanes(lanes);
+			}
+		}
+		return t;
+	}
+
+
+	private TurnType processRoundaboutTurn(List<RouteSegmentResult> result, int i, boolean leftSide, RouteSegmentResult prev,
+			RouteSegmentResult rr) {
+		int exit = 1;
+		RouteSegmentResult last = rr;
+		for (int j = i; j < result.size(); j++) {
+			RouteSegmentResult rnext = result.get(j);
+			if (rnext.getObject().roundabout()) {
+				last = rnext;
+				boolean plus = rnext.getStartPointIndex() < rnext.getEndPointIndex();
+				int k = rnext.getStartPointIndex();
+				if (j == i) {
+					k = plus ? k + 1 : k - 1;
+				}
+				while (k != rnext.getEndPointIndex()) {
+					if (rnext.getAttachedRoutes(k).size() > 0) {
+						exit++;
+					}
+					k = plus ? k + 1 : k - 1;
+				}
+			} else {
+				break;
+			}
+		}
+		// combine all roundabouts
+		TurnType t = TurnType.valueOf("EXIT"+exit, leftSide);
+		t.setTurnAngle((float) MapUtils.degreesDiff(last.getBearingBegin(), prev.getBearingEnd()));
+		return t;
+	}
+
+
+	private TurnType attachKeepLeftInfoAndLanes(boolean leftSide, RouteSegmentResult prev, RouteSegmentResult rr, TurnType t) {
+		// keep left/right
+		int[] lanes =  null;
+		boolean kl = false;
+		boolean kr = false;
+		List<RouteSegmentResult> attachedRoutes = rr.getAttachedRoutes(rr.getStartPointIndex());
+		int ls = prev.getObject().getLanes();
+		int left = 0;
+		int right = 0;
+		boolean speak = highwayLowEnd(prev.getObject().getHighway()) || highwayLowEnd(rr.getObject().getHighway());
+		if(attachedRoutes != null){
+			for(RouteSegmentResult rs : attachedRoutes){
+				double ex = MapUtils.degreesDiff(rs.getBearingBegin(), rr.getBearingBegin());
+				if(ex < 45 && ex >= 0) {
+					kl = true;
+					int lns = rs.getObject().getLanes();
+					if (lns > 0) {
+						right += lns;
+					}
+					speak = speak  || !highwayLowEnd(rs.getObject().getHighway());
+				} else if(ex > -45 && ex <= 0) {
+					kr = true;
+					int lns = rs.getObject().getLanes();
+					if (lns > 0) {
+						left += lns;
+					}
+					speak = speak  || !highwayLowEnd(rs.getObject().getHighway());
 				}
 			}
-			
+		}
+		if(kr && left == 0) {
+			left = 1;
+		} else if(kl && right == 0) {
+			right = 1;
+		}
+		int current = rr.getObject().getLanes();
+		if (current <= 0) {
+			current = 1;
+		}
+		if(ls >= 0 /*&& current + left + right >= ls*/){
+			lanes = new int[current + left + right];
+			ls = current + left + right;
+			for(int it=0; it< ls; it++) {
+				if(it < left || it >= left + current) {
+					lanes[it] = 0;
+				} else {
+					lanes[it] = 1;
+				}
+			}
+		}
+		
+		if (kl) {
+			t = TurnType.valueOf(TurnType.KL, leftSide);
+			t.setSkipToSpeak(!speak);
+		} else if(kr){
+			t = TurnType.valueOf(TurnType.KR, leftSide);
+			t.setSkipToSpeak(!speak);
+		}
+		if (t!= null && lanes != null) {
+			t.setLanes(lanes);
 		}
 		return t;
 	}

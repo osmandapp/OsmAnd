@@ -56,8 +56,8 @@
 		<highway value="secondary_link" speed="50" priority="1" dynamicPriority="1.1"/>
 		
 		<!-- important urban roads -->
-		<highway value="tertiary" speed="45" priority="1" dynamicPriority="0.8"/>
-		<highway value="tertiary_link" speed="40" priority="1" dynamicPriority="0.8"/>
+		<highway value="tertiary" speed="45" priority="0.8" dynamicPriority="0.8"/>
+		<highway value="tertiary_link" speed="40" priority="0.8" dynamicPriority="0.8"/>
 		<!-- lowest form of grid network, usually 90% of urban roads -->
 		<highway value="unclassified" speed="35" priority="0.7" dynamicPriority="0.7"/>
 		<!-- road = no type, no review and may be not accurate -->

@@ -99,9 +99,9 @@ public class BinaryMapRouteReaderAdapter {
 		private void analyze() {
 			if(t.equalsIgnoreCase("oneway")){
 				type = ONEWAY;
-				if("-1".equals(v)) {
+				if("-1".equals(v) || "reverse".equals(v)) {
 					intValue = -1;
-				} else if("1".equals(v) || "yes".equals(v)) {
+				} else if("1".equals(v) || "yes".equals(v) || "true".equals(v)) {
 					intValue = 1;
 				} else {
 					intValue = 0;

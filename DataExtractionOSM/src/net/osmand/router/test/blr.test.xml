@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<router_tests>
+<test regions="" description="" best_percent="" vehicle="car" 
+    start_lat="53.91102495838691" start_lon="27.579245567321777" target_lat="53.908383230651346" target_lon="27.48626947402954" complete_time="1093.2324" loadedTiles = "10" visitedSegments = "832" complete_distance = "9285.089"  >
+	<segment id="40885459" start="3" end="2" time = "10.731602" name = "" distance = "89.43001" turn = "Go ahead" start_bearing = "30.2094" end_bearing = "30.2094" description = "Go ahead and go 89.43 meters" />
+	<segment id="40885456" start="1" end="0" time = "0.7542267" name = "" distance = "6.2852225" turn = "Turn left" start_bearing = "-57.804268" end_bearing = "-57.804268" description = "Turn left and go 47.32 meters" />
+	<segment id="40885457" start="1" end="0" time = "1.6372955" name = "" distance = "13.64413" start_bearing = "-57.47511" end_bearing = "-57.47511" description = "" />
+	<segment id="31691782" start="2" end="0" time = "3.287282" name = "" distance = "27.394016" start_bearing = "-59.641884" end_bearing = "-59.858616" description = "" />
+	<segment id="33911443" start="1" end="6" time = "22.942951" name = "просп. Независимости" distance = "414.24774" turn = "Turn right" start_bearing = "30.876814" end_bearing = "42.998978" description = "Turn right and go 635.18 meters" />
+	<segment id="33911472" start="0" end="2" time = "12.236243" name = "просп. Независимости" distance = "220.93216" start_bearing = "41.969524" end_bearing = "41.436733" description = "" />
+	<segment id="25228007" start="0" end="1" time = "36.176476" name = "" distance = "11.437971" turn = "Turn left" start_bearing = "-46.27303" end_bearing = "-46.27303" description = "Turn left and go 11.44 meters" />
+	<segment id="33911476" start="0" end="1" time = "54.669903" name = "просп. Независимости" distance = "355.151" turn = "Turn left" start_bearing = "-137.84839" end_bearing = "-137.84839" description = "Turn left and go 804.58 meters" />
+	<segment id="33911471" start="0" end="5" time = "24.89128" name = "просп. Независимости" distance = "449.42587" start_bearing = "-143.58362" end_bearing = "-149.44403" description = "" />
+	<segment id="33911401" start="0" end="8" time = "19.800528" name = "просп. Машерова" distance = "357.50955" turn = "Turn right" start_bearing = "-53.686356" end_bearing = "-22.9321" description = "Turn right and go 4360.46 meters" />
+	<segment id="29200977" start="0" end="1" time = "35.731197" name = "просп. Машерова" distance = "13.202153" start_bearing = "-22.988716" end_bearing = "-22.988716" description = "" />
+	<segment id="38571376" start="0" end="7" time = "55.68208" name = "просп. Машерова" distance = "373.42645" start_bearing = "-25.277721" end_bearing = "-61.99082" description = "" />
+	<segment id="37808103" start="0" end="2" time = "46.7727" name = "просп. Машерова" distance = "212.56265" start_bearing = "-74.52867" end_bearing = "-81.035515" description = "" />
+	<segment id="25228815" start="0" end="5" time = "51.711323" name = "просп. Машерова" distance = "301.73218" start_bearing = "-81.045204" end_bearing = "-80.848755" description = "" />
+	<segment id="30858073" start="0" end="6" time = "61.830868" name = "просп. Машерова" distance = "484.44623" start_bearing = "-80.458824" end_bearing = "-79.11447" description = "" />
+	<segment id="36988094" start="0" end="4" time = "48.48783" name = "просп. Машерова" distance = "243.53029" start_bearing = "-80.28675" end_bearing = "-85.36454" description = "" />
+	<segment id="36988096" start="0" end="5" time = "49.378212" name = "просп. Машерова" distance = "279.5764" start_bearing = "-90.96286" end_bearing = "-97.44326" description = "" />
+	<segment id="25379391" start="0" end="1" time = "5.269285" name = "просп. Машерова" distance = "102.45833" start_bearing = "-99.41367" end_bearing = "-99.41367" description = "" />
+	<segment id="25924616" start="0" end="7" time = "32.054688" name = "просп. Машерова" distance = "623.2856" start_bearing = "-100.11034" end_bearing = "-128.10757" description = "" />
+	<segment id="33911070" start="0" end="1" time = "1.2957808" name = "" distance = "17.996956" start_bearing = "-129.32698" end_bearing = "-129.32698" description = "" />
+	<segment id="33911069" start="0" end="8" time = "21.719967" name = "просп. Машерова" distance = "392.16608" start_bearing = "-128.97601" end_bearing = "-114.03429" description = "" />
+	<segment id="28382666" start="0" end="7" time = "22.299809" name = "просп. Машерова" distance = "402.63544" start_bearing = "-110.353226" end_bearing = "-104.80087" description = "" />
+	<segment id="25449141" start="0" end="2" time = "6.281684" name = "просп. Машерова" distance = "113.41929" start_bearing = "-111.887634" end_bearing = "-117.06471" description = "" />
+	<segment id="30813627" start="0" end="8" time = "47.840637" name = "просп. Машерова" distance = "231.84482" start_bearing = "-122.00539" end_bearing = "-150.3215" description = "" />
+	<segment id="25309517" start="0" end="4" time = "7.218898" name = "просп. Машерова" distance = "130.34122" start_bearing = "-155.16142" end_bearing = "-170.82646" description = "" />
+	<segment id="70219519" start="0" end="2" time = "4.4489284" name = "просп. Машерова" distance = "80.32787" start_bearing = "-174.47246" end_bearing = "-179.02898" description = "" />
+	<segment id="25924583" start="0" end="6" time = "8.19895" name = "просп. Машерова" distance = "148.03659" turn = "Keep right" start_bearing = "-162.0875" end_bearing = "-97.71833" description = "Keep right and go 2146.40 meters (*)" />
+	<segment id="25425696" start="0" end="1" time = "0.4735253" name = "Кальварийская ул." distance = "8.549762" start_bearing = "-79.38035" end_bearing = "-79.38035" description = "" />
+	<segment id="145696273" start="0" end="8" time = "23.085945" name = "Кальварийская ул." distance = "416.82956" start_bearing = "-80.37184" end_bearing = "-80.13419" description = "" />
+	<segment id="76769621" start="0" end="10" time = "70.60633" name = "Кальварийская ул." distance = "642.8921" start_bearing = "-77.541756" end_bearing = "-63.78502" description = "" />
+	<segment id="23625153" start="0" end="7" time = "24.953074" name = "ул. Притыцкого" distance = "450.54163" start_bearing = "-74.01036" end_bearing = "-96.74558" description = "" />
+	<segment id="61939976" start="0" end="1" time = "48.15234" name = "ул. Притыцкого" distance = "237.4728" start_bearing = "-96.055466" end_bearing = "-96.055466" description = "" />
+	<segment id="32883063" start="0" end="1" time = "1.8827579" name = "ул. Притыцкого" distance = "33.99424" start_bearing = "-97.457054" end_bearing = "-97.457054" description = "" />
+	<segment id="48470333" start="0" end="1" time = "1.0960325" name = "ул. Притыцкого" distance = "19.789476" start_bearing = "-96.28249" end_bearing = "-96.28249" description = "" />
+	<segment id="48470334" start="0" end="1" time = "1.9557701" name = "ул. Притыцкого" distance = "35.312515" start_bearing = "-95.710594" end_bearing = "-95.710594" description = "" />
+	<segment id="30821121" start="0" end="2" time = "8.472641" name = "ул. Притыцкого" distance = "152.97824" start_bearing = "-97.1709" end_bearing = "-96.88172" description = "" />
+	<segment id="30821121" start="2" end="8" time = "93.19126" name = "ул. Притыцкого" distance = "418.73114" turn = "Keep left" lanes = "[1, 1, 1, 1, 0]" start_bearing = "-96.74975" end_bearing = "-96.74693" description = "Keep left[1, 1, 1, 1, 0] and go 418.73 meters (*)" />
+	<segment id="30821121" start="8" end="10" time = "19.437342" name = "ул. Притыцкого" distance = "350.952" turn = "Keep left" lanes = "[1, 1, 1, 1, 0]" start_bearing = "-96.4875" end_bearing = "-97.1382" description = "Keep left[1, 1, 1, 1, 0] and go 350.95 meters (*)" />
+	<segment id="25231295" start="0" end="1" time = "36.09955" name = "ул. Бельского" distance = "18.32582" turn = "Turn left" start_bearing = "175.64302" end_bearing = "175.64302" description = "Turn left and go 18.33 meters" />
+	<segment id="30813591" start="0" end="1" time = "45.96917" name = "ул. Притыцкого" distance = "198.05447" turn = "Turn left" start_bearing = "83.51464" end_bearing = "83.51464" description = "Turn left and go 198.05 meters" />
+	<segment id="37761053" start="0" end="2" time = "7.0919204" name = "" distance = "59.099335" turn = "Keep right" lanes = "[0, 0, 0, 0, 1]" start_bearing = "116.16157" end_bearing = "115.28797" description = "Keep right[0, 0, 0, 0, 1] and go 73.57 meters" />
+	<segment id="37761055" start="0" end="1" time = "1.7364992" name = "" distance = "14.470827" start_bearing = "116.86981" end_bearing = "116.86981" description = "" />
+	<segment id="37761056" start="0" end="5" time = "11.629894" name = "" distance = "96.91579" turn = "Take 4 exit" start_bearing = "117.78681" end_bearing = "85.515396" description = "Take 4 exit and go 130.65 meters" />
+	<segment id="37761059" start="0" end="1" time = "4.0479445" name = "" distance = "33.732872" start_bearing = "-1.7305776" end_bearing = "-1.7305776" description = "" />
+</test>
+</router_tests>
