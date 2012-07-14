@@ -191,14 +191,15 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	private String getFormattedTime(long timeInMillis) {
 		StringBuilder timeStringBuilder = new StringBuilder();
 		Time time = new Time();
-		time.set(timeInMillis);	
+		time.set(timeInMillis);
 		timeStringBuilder.append(time.hour);
 		timeStringBuilder.append(":");
 		int minute = time.minute;
-		timeStringBuilder.append(minute<10 ? "0" + minute : minute);
-		if (!DateFormat.is24HourFormat(map.getApplicationContext())) {
-			timeStringBuilder.append(time.hour >= 12 ? map.getString(R.string.osmand_parking_pm) : map.getString(R.string.osmand_parking_am));
-	    }
+		timeStringBuilder.append(minute < 10 ? "0" + minute : minute);
+		if (!DateFormat.is24HourFormat(map)) {
+			timeStringBuilder.append(time.hour >= 12 ? map.getString(R.string.osmand_parking_pm) : map
+					.getString(R.string.osmand_parking_am));
+		}
 		return timeStringBuilder.toString();
 	}
 	
