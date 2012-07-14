@@ -334,7 +334,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				adapter.registerItem(R.string.poi_context_menu_call, 0, listener, -1);
 			}
 			if(a.getSite() != null){
-				adapter.registerItem(R.string.poi_context_menu_website, 0, listener, -1);
+				adapter.registerItem(R.string.poi_context_menu_website, R.drawable.list_activities_poi_show_website, listener, -1);
 			}
 		}
 	}
