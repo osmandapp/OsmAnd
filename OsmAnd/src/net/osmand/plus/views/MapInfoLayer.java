@@ -884,7 +884,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 							loclanes  = r.directionInfo.getTurnType().getLanes();
 							locimminent = r.imminent;
 							// Do not show too far 
-							if(locimminent == 2 || locimminent < 0) {
+							if(r.distanceTo > 700 || (r.distanceTo > 1200 && !r.directionInfo.getTurnType().isSkipToSpeak())) {
 								loclanes = null;
 							}
 						}
