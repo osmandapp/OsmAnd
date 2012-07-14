@@ -536,7 +536,7 @@ public class BinaryRoutePlanner {
 			
 			
 			long l = (((long) x) << 31) + (long) y;
-			RouteSegment next = tile.getSegment(l);
+			RouteSegment next = tile.getSegment(l, ctx);
 			// 3. get intersected ways
 			if (next != null) {
 				// TO-DO U-Turn
@@ -1080,7 +1080,7 @@ public class BinaryRoutePlanner {
 				}
 			}
 		}
-		RouteSegment routeSegment = tl.getSegment(l);
+		RouteSegment routeSegment = tl.getSegment(l, ctx);
 		// try to attach all segments except with current id
 		while (routeSegment != null) {
 			if (routeSegment.road.getId() != road.getId() && routeSegment.road.getId() != previousRoadId) {

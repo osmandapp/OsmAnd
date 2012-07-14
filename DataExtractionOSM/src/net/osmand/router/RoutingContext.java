@@ -301,7 +301,7 @@ public class RoutingContext {
 			}
 			long l = (((long) x) << 31) + (long) y;
 			RouteSegment segment = new RouteSegment(o , j);
-			RouteSegment prev = tl.getSegment(l);
+			RouteSegment prev = tl.getSegment(l, this);
 			boolean i = true;
 			if (prev != null) {
 				if (old == null) {
@@ -346,15 +346,15 @@ public class RoutingContext {
 		private TLongObjectMap<RouteSegment> routes = new TLongObjectHashMap<RouteSegment>();
 		private TLongObjectHashMap<RouteDataObject> idObjects = new TLongObjectHashMap<RouteDataObject>();
 		
-		public RouteSegment getSegment(long id) {
+		public RouteSegment getSegment(long id, RoutingContext ctx) {
 			if(nativeResults != null) {
-				RouteSegment original = loadNativeRouteSegment(id);
+				RouteSegment original = loadNativeRouteSegment(id, ctx);
 				return original;
 			}
 			return routes.get(id);
 		}
 
-		private RouteSegment loadNativeRouteSegment(long id) {
+		private RouteSegment loadNativeRouteSegment(long id, RoutingContext ctx) {
 			int y31 = (int) (id & Integer.MAX_VALUE);
 			int x31 = (int) (id >> 31);
 			excludeDuplications.clear();
@@ -364,7 +364,11 @@ public class RoutingContext {
 				RouteDataObject[] res = nativeLib.getDataObjects(rs, x31, y31);
 				if (res != null) {
 					for (RouteDataObject ro : res) {
-						if (ro != null && !excludeDuplications.contains(ro.id)) {
+						boolean accept = ro != null && !excludeDuplications.contains(ro.id);
+						if(ctx != null && accept) {
+							accept = ctx.getRouter().acceptLine(ro);
+						}
+						if (accept) {
 							excludeDuplications.add(ro.id);
 							for (int i = 0; i < ro.pointsX.length; i++) {
 								if (ro.getPoint31XTile(i) == x31 && ro.getPoint31YTile(i) == y31) {
