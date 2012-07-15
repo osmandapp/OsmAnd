@@ -509,8 +509,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 			public boolean updateInfo() {
 				boolean visible = false;
 				if (routeLayer != null && routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
-					boolean uturnWhenPossible = routingHelper.makeUturnWhenPossible();
-					NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, false);
+					boolean uturnWhenPossible = routingHelper.makeUturnWhenPossible() ;
+					NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, true);
 					if (!uturnWhenPossible) {
 						if (r != null) {
 							// next turn is very close (show next next with false to speak)
@@ -652,9 +652,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 			@Override
 			public boolean updateInfo() {
 				boolean visible = false;
-				if (routeLayer != null && routingHelper.isRouteCalculated() ) {
-					boolean follow = routingHelper.isFollowingMode();
-					makeUturnWhenPossible = routingHelper.makeUturnWhenPossible() && follow;
+				if (routeLayer != null && routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
+					makeUturnWhenPossible = routingHelper.makeUturnWhenPossible() ;
 					if (makeUturnWhenPossible) {
 						visible = true;
 						turnImminent = 1;
@@ -663,19 +662,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 						invalidate();
 					} else {
 						boolean showStraight = false;
-						NextDirectionInfo r = null;
-						if(follow) {
-							r = routingHelper.getNextRouteDirectionInfo(calc1, true);
-						} else {
-							int di = map.getMapLayers().getRouteInfoLayer().getDirectionInfo();
-							if (di >= 0 && map.getMapLayers().getRouteInfoLayer().isVisible()) {
-								RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
-								r = new  NextDirectionInfo();
-								r.directionInfo = next;
-								r.distanceTo = 0;
-								r.imminent = 1;
-							}
-						}
+						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, true);
 						if (r != null && r.distanceTo > 0) {
 							visible = true;
 							if (r.directionInfo == null) {
@@ -882,7 +869,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 							loclanes  = r.directionInfo.getTurnType().getLanes();
 							locimminent = r.imminent;
 							// Do not show too far 
-							if(r.distanceTo > 700 || (r.distanceTo > 1200 && !r.directionInfo.getTurnType().isSkipToSpeak())) {
+							if ((r.distanceTo > 700 && r.directionInfo.getTurnType().isSkipToSpeak()) || r.distanceTo > 1200) {
 								loclanes = null;
 							}
 						}

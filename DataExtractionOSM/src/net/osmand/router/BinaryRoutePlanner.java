@@ -904,10 +904,10 @@ public class BinaryRoutePlanner {
 						if(tnext != null && result.get(i).getDistance() < 35) {
 							if(tl && TurnType.TL.equals(tnext.getValue()) ) {
 								next = i + 2;
-								t = TurnType.valueOf(TurnType.TU, true);
+								t = TurnType.valueOf(TurnType.TU, false);
 							} else if(tr && TurnType.TR.equals(tnext.getValue()) ) {
 								next = i + 2;
-								t = TurnType.valueOf(TurnType.TU, false);
+								t = TurnType.valueOf(TurnType.TU, true);
 							}
 						}
 					}
