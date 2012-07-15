@@ -10,7 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
     <string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
-    <string name="shared_location">Shared location</string>
+    <string name="shared_location">Bendrinta vieta</string>
     <string name="osmand_parking_event">Pasiimkite mašiną iš parkavimo vietos</string>
     <string name="osmand_parking_warning">Dėmesio</string>
     <string name="osmand_parking_warning_text">"Perspėjimas pasiimti mašiną jau buvo įtrauktas į jūsų Kalendorių. Perspėjimas ten liks tol, kol jo nepanaikinsite. "</string>    
@@ -33,12 +33,12 @@
     <string name="context_menu_item_add_parking_point">Žymėti parkavimo vietą</string>
 	<string name="context_menu_item_delete_parking_point">Naikinti parkavimo žymę</string>
 	
-    <string name="gpxup_public">Vieša</string>
-    <string name="gpxup_identifiable">Akivaizdu</string>
-    <string name="gpxup_trackable">Sekama</string>
-    <string name="gpxup_private">Privatu</string>
+    <string name="gpxup_public">Public</string>
+    <string name="gpxup_identifiable">Identifiable</string>
+    <string name="gpxup_trackable">Trackable</string>
+    <string name="gpxup_private">Private</string>
     <string name="tip_recent_changes_0_8_1_t">"Pakeitimai 0.8.1 versijoje: "</string>
-    <string name="asap">Nedelsiant</string>
+    <string name="asap">Tuoj pat</string>
     <string name="save_route_as_gpx">Išsaugoti maršrutą GPX faile</string>
     <string name="route_roundabout">Žiedinė sankryža : sukite į %1$d išvažiavimą ir važiuokite</string>
     <string name="route_kl">Laikykitės kairės ir važiuokite</string>
@@ -255,11 +255,11 @@
 
 	 
 	<string name="tip_rotation_switching">Žemėlapio orientacija</string>
-	<string name="tip_rotation_switching_t">\tYou can choose whether and how the map display is rotated in \'Settings\' -&gt; \'Map appearance\' -&gt; \'Map rotation\'. \n\tThe choices are: \n\t\'Don\'t rotate\' - Map will not be rotated. North will be always up \n\t\'To direction of movement\' - Map will continuously be aligned with your heading \n\t\'To compass\' - Map will continuously be aligned with device compass reading \n\tHint: To quickly change between rotation by compass and the one you selected in settings, you can simply tap on the compass needle in map view.</string>
+	<string name="tip_rotation_switching_t">\tNuėję į \'Nustatymai\' -&gt; \'Žemėlapio rodymas\' -&gt; \'Žemėlapio pasukimas\' galite pasirinkti kaip bus rodomas žemėlapis. \n\tTurėsite tokį pasirinkimą: \n\t\'Nesukti\' - Žemėlapis nebus sukamas. Šiaurė visada bus viršuje \n\t\'Pasukti judėjimo kryptimi\' - Žemėlapis visada bus pasuktas judėjimo kryptimi \n\t\'Pagal kompasą\' - Žemėlapis bus pasuktas ta kryptimi, kurią rodo įrenginio kompasas \n\tPastaba: Norėdami greitai perjungti žemėlapio pasukimo režimą tiesiog palieskite kompaso rodyklę vaizduojamą žemėlapio rodinyje.</string>
 
-	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Settings\' -&gt; \'Map configuration\' -&gt; \'Offline vector maps\'.</string>
+	<string name="binary_map_download_success">Parsiųsta sėkmingai.\n\t\n\tTam kad galėtumėte naudoti, aktyvuokite \'Nustatymai\' -&gt; \'Žemėlapio konfigūravimas\' -&gt; \'Parsiųsti vektoriniai žemėlapiai\'.</string>
 
-	<string name="tip_day_night_mode">Day/Night Mode</string>
+	<string name="tip_day_night_mode">Dienos/Nakties režimas</string>
 	<string name="tip_day_night_mode_t">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker). \n\tNight colors are safer for night driving. \n\tYou can set a policy for day/night switching in \'Settings\' -&gt; \'Map appearance\' -&gt;\'Day/night mode\'. \n\tChoices are: \n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default) \n\t\'Day\' - always use day mode \n\t\'Night\' - always use night mode \n\t\'Light sensor\' - map appearance is controlled by light sensor of your device (only if equipped)</string>	
 
 	<string name="tip_osm_improve">Improving OSM Data</string>
@@ -954,4 +954,4 @@
 <string name="edit_filter_delete_message">Filter {0} has been deleted</string>
 <string name="edit_filter_create_message">Filter {0} has been created</string>
 <string name="default_buttons_selectall">Select All</string>
-<string name="update_downlod_list">Atnaujinti sąrašą</string><string name="global_app_allocated_memory_descr">Skirta %1$s MB atminties (Android limitas %2$s MB, dalvik %3$s MB).</string><string name="global_app_allocated_memory">Skirta atmintis</string><string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (dalvik %2$s MB, other %3$s MB). Proportional memory %4$s MB (Android limit %5$s MB, dalvik %6$s MB).</string><string name="native_app_allocated_memory">Total native memory</string><string name="monitoring_info_control">Info valdymas</string><string name="monitoring_info_control_desc">Rodyti stebėjimo statusą info panelėje</string><string name="select_animate_speedup">Pasirinkti anumuotą maršruto pagreitinimą</string><string name="osmand_parking_hours">Valandos</string><string name="osmand_parking_minutes">Minutės</string><string name="osmand_parking_position_description_add_time">Mašina pastatyta:</string><string name="use_compass_navigation_descr">Use compass in navigation when diretion is not detected</string><string name="use_compass_navigation">Use compass</string></resources>
+<string name="update_downlod_list">Atnaujinti sąrašą</string><string name="global_app_allocated_memory_descr">Skirta %1$s MB atminties (Android limitas %2$s MB, dalvik %3$s MB).</string><string name="global_app_allocated_memory">Skirta atmintis</string><string name="native_app_allocated_memory_descr">Bendras skirtos atminties kiekis yra %1$s MB (dalvik %2$s MB, kita %3$s MB). Proporcinės atminties %4$s MB (Androido limitas %5$s MB, dalvik %6$s MB).</string><string name="native_app_allocated_memory">Viso atminties</string><string name="monitoring_info_control">Info valdymas</string><string name="monitoring_info_control_desc">Rodyti stebėjimo statusą info panelėje</string><string name="select_animate_speedup">Pasirinkti anumuotą maršruto pagreitinimą</string><string name="osmand_parking_hours">Valandos</string><string name="osmand_parking_minutes">Minutės</string><string name="osmand_parking_position_description_add_time">Mašina pastatyta:</string><string name="use_compass_navigation_descr">Naudoti kompasą kai neina nustatyti krypties</string><string name="use_compass_navigation">Naudoti kompasą</string></resources>
