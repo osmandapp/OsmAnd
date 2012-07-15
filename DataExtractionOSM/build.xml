@@ -75,6 +75,7 @@
 	<path id="test.classpath">
 		<pathelement location="${bin.absolute.dir}" />
 		<pathelement location="${bintests.dir}" />
+		<pathelement location="${srctests.dir}" />
 		<fileset dir="${lib.absolute.dir}">
 			<include name="*.jar" />
 		</fileset>
