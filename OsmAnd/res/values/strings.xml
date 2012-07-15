@@ -13,14 +13,14 @@
     <string name="osmand_parking_minutes">Minutes</string>
     <string name="osmand_parking_position_description_add_time">The car was parked at:</string>
     <string name="tip_recent_changes_0_8_1_t">Changes in 0.8.1 :
-         	* Smart and fast Route recalculation
-         	* More precise routes (a bit slower)
-         	* Direction by lanes
-         	* Information about bumps, speed cams and speed limits
-         	* Improved voice guidance on highways
-         	* Parking plugin
-         	* Enable/disable monitoring widget
-         </string>
+	\n\t* More precise routes (a bit slower)
+	\n\t* Smart and fast Route recalculation
+	\n\t* Direction by lanes
+	\n\t* Information about speed limits, speed cams, and speed bumps 
+	\n\t* Improved voice guidance on highways
+	\n\t* Parking plugin (\'Where is my car parked at?\')
+	\n\t* Enable/disable logging widget
+    </string>
     <string name="use_compass_navigation_descr">Use compass when direction is not detected</string>
     <string name="use_compass_navigation">Use compass</string>
     <string name="select_animate_speedup">Select animate route acceleration</string>
