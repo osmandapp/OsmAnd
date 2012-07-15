@@ -838,7 +838,7 @@
 	<string name="transport_search_desc">ÖPNV-Suche</string>
 	<string name="favourites_search_desc">Favoriten-Suche</string>
 	<string name="history_search_desc">Suchverlauf</string>
-	<string name="tip_recent_changes_0_8_1_t">"Änderungen in 0.8.1 : "</string>
+	<string name="tip_recent_changes_0_8_1_t">"Änderungen in 0.8.1 : * Neuberechnung der Navigationsroute verbessert und beschleunigt * Anzeige der weiterführenden Fahrspur * Anzeige von Geschwindigkeitsbegrenzungen, Radarfallen und Verkehrsberuhigungen (Schwellen) * Verbesserte Sprachführung auf Autobahnen * Parkplatz-Plugin (\"Wo ist mein Auto?\") * Anzeige zur Streckenaufzeichnung abschaltbar"</string>
 	<string name="update_downlod_list">Liste neu laden</string>
 	<string name="starting_point_too_far">Startpunkt zu weit entfernt von nächster Straße</string>
 	<string name="shared_location">Shared location</string>
@@ -873,10 +873,10 @@
 	<string name="native_app_allocated_memory">Gesamter nativer Speicher</string>
 	<string name="monitoring_info_control">Logging-Taste anzeigen</string>
 	<string name="monitoring_info_control_desc">Logging-Taste in der Kartenansicht einblenden</string>
-	<string name="select_animate_speedup">Animationsbeschleunigung wählen</string>
+	<string name="select_animate_speedup">beschleunigte Routen-Animation auswählen</string>
 	<string name="osmand_parking_hours">Stunde(n)</string>
 	<string name="osmand_parking_minutes">Minuten</string>
 	<string name="osmand_parking_position_description_add_time">Das Auto wurde hier geparkt:</string>
-	<string name="use_compass_navigation_descr">Kompass-Navigation verwenden wenn keine Bewegungsrichtung feststellbar</string>
+	<string name="use_compass_navigation_descr">Verwende Kompass, wenn keine Ortung möglich</string>
 	<string name="use_compass_navigation">Kompass verwenden</string>
 </resources>
