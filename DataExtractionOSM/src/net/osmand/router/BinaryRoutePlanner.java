@@ -746,7 +746,9 @@ public class BinaryRoutePlanner {
 			RouteSegmentResult res = new RouteSegmentResult(segment.road, parentSegmentStart, segment.segmentStart);
 			parentSegmentStart = segment.parentSegmentEnd;
 			segment = segment.parentRoute;
-			result.add(res);
+			if(res.getStartPointIndex() != res.getEndPointIndex()) {
+				result.add(res);
+			}
 		}
 		Collections.reverse(result);
 
@@ -756,7 +758,10 @@ public class BinaryRoutePlanner {
 			RouteSegmentResult res = new RouteSegmentResult(segment.road, segment.segmentStart, parentSegmentEnd);
 			parentSegmentEnd = segment.parentSegmentEnd;
 			segment = segment.parentRoute;
-			result.add(res);
+			// happens in smart recalculation
+			if(res.getStartPointIndex() != res.getEndPointIndex()) {
+				result.add(res);
+			}
 		}
 		Collections.reverse(result);
 

@@ -279,7 +279,7 @@ public class RoutingHelper {
 			// if we are still too far try to proceed many points
 			// if not then look ahead only 3 in order to catch sharp turns
 			boolean longDistance = dist >= 250;
-			int newCurrentRoute = lookAheadFindMinOrthogonalDistance(currentLocation, routeNodes, currentRoute, longDistance ? 10 : 3);
+			int newCurrentRoute = lookAheadFindMinOrthogonalDistance(currentLocation, routeNodes, currentRoute, longDistance ? 15 : 8);
 			double newDist = getOrthogonalDistance(currentLocation, routeNodes.get(newCurrentRoute), 
 					routeNodes.get(newCurrentRoute + 1));
 			if(longDistance) {
