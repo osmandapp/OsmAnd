@@ -906,4 +906,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void addRightStack(MapInfoControl v){
 		rightStack.addStackView(v);
 	}
+	
+	public MapStackControl getRightStack(){
+		return rightStack;
+	}
 }

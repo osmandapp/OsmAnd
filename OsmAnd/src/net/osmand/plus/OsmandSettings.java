@@ -579,7 +579,7 @@ public class OsmandSettings {
 			"http://example.com?lat={0}&lon={1}&timestamp={2}&hdop={3}&altitude={4}&speed={5}").makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Boolean> 	SHOW_MONITORING_CONTROL = new BooleanPreference("show_monitoring_control", false).makeProfile();
+	public final CommonPreference<Boolean> 	SHOW_MONITORING_CONTROL = new BooleanPreference("show_monitoring_control", false).makeProfile().cache();
 	{
 		SHOW_MONITORING_CONTROL.setModeDefaultValue(ApplicationMode.BICYCLE, true);
 		SHOW_MONITORING_CONTROL.setModeDefaultValue(ApplicationMode.CAR, false);

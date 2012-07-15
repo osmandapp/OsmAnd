@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.GPXUtilities;
-import net.osmand.OsmAndFormatter;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
@@ -312,8 +311,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 	}
 	
-	public String getDistance(MapActivity map) {
-		return OsmAndFormatter.getFormattedDistance(distance, map);
+	public float getDistance() {
+		return distance;
 	}
-
+	
+	public long getLastTimeUpdated() {
+		return lastTimeUpdated;
+	}
 }
