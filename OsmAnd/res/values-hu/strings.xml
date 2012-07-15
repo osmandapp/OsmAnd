@@ -835,10 +835,10 @@
   <string name="rendering_attr_hmRendered_name">Több térképrészlet</string>
   <string name="route_roundabout">Körforgalom: %1$d. kijárat, majd menj</string>
   <string name="route_kl">Tarts balra és menj</string>
-  <string name="route_kr">Tarts jobbra</string>
+  <string name="route_kr">Tarts jobbra és menj</string>
   <string name="save_route_as_gpx">Út mentése GPX fájlba</string>
-  <string name="asap">ASAP</string>
-  <string name="tip_recent_changes_0_8_1_t">"A 0.8.1 kiadás változásai:"</string>
+  <string name="asap">MOST</string>
+  <string name="tip_recent_changes_0_8_1_t">"A 0.8.1 kiadás változásai: * Gyors és intelligens útvonal újratervezés * Pontosabb útvonal (egy kicsit lassabb) * Sávonkénti irányok * Információk fekvőrendőrről, traffipaxról, sebességkorlátozásról * Tökéletesített hangnavigáció az autópályán * Parkolási bővítmény * Ki-, bekapcsolható útvonalrögzítés gomb"</string>
   <string name="gpxup_public">Nyilvános</string>
   <string name="gpxup_identifiable">Azonosítható</string>
   <string name="gpxup_trackable">Követhető</string>
@@ -866,4 +866,4 @@
   <string name="context_menu_item_delete_parking_point">Parkolásjelölő törlése</string>
   <string name="starting_point_too_far">Az indulási pont túl messze van a legközelebbi úttól</string>
   <string name="shared_location">Megosztott hely</string>
-<string name="update_downlod_list">Lista újratöltése</string><string name="global_app_allocated_memory_descr">Lefoglalt memória %1$s MB (Android korlát %2$s MB, Dalvik %3$s MB).</string><string name="global_app_allocated_memory">Lefoglalt memória</string><string name="native_app_allocated_memory_descr">Alkalmazás által lefoglalt összes natív memória %1$s MB (dalvik %2$s MB, egyéb %3$s MB). Proportional(?) memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</string><string name="native_app_allocated_memory">Összes natív memória</string><string name="monitoring_info_control">Kezelőpanel</string><string name="monitoring_info_control_desc">Rögzítési állapot megjelenítése az információs panelen</string><string name="select_animate_speedup">Select animate route acceleration</string><string name="osmand_parking_hours">Óra</string><string name="osmand_parking_minutes">Perc</string><string name="osmand_parking_position_description_add_time">Autó leparkolva:</string><string name="use_compass_navigation_descr">Iránytű használata navigáláshoz, ha az irány nem érzékelhető</string><string name="use_compass_navigation">Iránytű használata</string></resources>
+<string name="update_downlod_list">Lista újratöltése</string><string name="global_app_allocated_memory_descr">Lefoglalt memória %1$s MB (Android korlát %2$s MB, Dalvik %3$s MB).</string><string name="global_app_allocated_memory">Lefoglalt memória</string><string name="native_app_allocated_memory_descr">Alkalmazás által lefoglalt összes natív memória %1$s MB (dalvik %2$s MB, egyéb %3$s MB). Proportional(?) memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</string><string name="native_app_allocated_memory">Összes natív memória</string><string name="monitoring_info_control">Útvonalrögzítő gomb megjelenítése</string><string name="monitoring_info_control_desc">Rögzítési állapot megjelenítése az információs panelen</string><string name="select_animate_speedup">Útvonalszimuláció gyorsulása</string><string name="osmand_parking_hours">Óra</string><string name="osmand_parking_minutes">Perc</string><string name="osmand_parking_position_description_add_time">Autó leparkolva:</string><string name="use_compass_navigation_descr">Iránytű használata navigáláshoz, ha az irány nem érzékelhető</string><string name="use_compass_navigation">Iránytű használata</string></resources>
