@@ -143,10 +143,6 @@ public class RoutingHelper {
 		return lastFixedLocation;
 	}
 	
-	
-	public boolean isRouterEnabled(){
-		return finalLocation != null && lastFixedLocation != null;
-	}
 	public boolean isRouteCalculated(){
 		return route.isCalculated();
 	}

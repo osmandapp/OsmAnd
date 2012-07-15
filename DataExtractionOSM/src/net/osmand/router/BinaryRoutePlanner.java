@@ -901,7 +901,7 @@ public class BinaryRoutePlanner {
 					boolean tr = TurnType.TR.equals(t.getValue());
 					if(tl || tr) {
 						TurnType tnext = getTurnInfo(result, i + 1, leftside);
-						if(tnext != null && result.get(i).getDistance() < 55) {
+						if(tnext != null && result.get(i).getDistance() < 35) {
 							if(tl && TurnType.TL.equals(tnext.getValue()) ) {
 								next = i + 2;
 								t = TurnType.valueOf(TurnType.TU, true);

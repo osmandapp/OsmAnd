@@ -83,11 +83,11 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	
 	private static final int SHOW_POSITION_MSG_ID = 7;
 	private static final int SHOW_POSITION_DELAY = 2500;
-	private static final float ACCURACY_FOR_GPX_AND_ROUTING = 50;
+	public static final float ACCURACY_FOR_GPX_AND_ROUTING = 50;
 	
 	private static final int AUTO_FOLLOW_MSG_ID = 8; 
 	private static final int LOST_LOCATION_MSG_ID = 10;
-	private static final long LOST_LOCATION_CHECK_DELAY = 20000;
+	private static final long LOST_LOCATION_CHECK_DELAY = 18000;
 	
 	private static final int LONG_KEYPRESS_MSG_ID = 28;
 	private static final int LONG_KEYPRESS_DELAY = 500;
@@ -703,12 +703,16 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			}
 		}
 	}
+	
+	public boolean isPointAccurateForRouting(Location loc) {
+		return loc != null && loc.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING * 3 /2;
+	}
 
-	public void setLocation( Location location){
-		if(Log.isLoggable(LogUtil.TAG, Log.DEBUG)){
+	public void setLocation(Location location) {
+		if (Log.isLoggable(LogUtil.TAG, Log.DEBUG)) {
 			Log.d(LogUtil.TAG, "Location changed " + location.getProvider()); //$NON-NLS-1$
 		}
-		if(location != null ) {
+		if (location != null) {
 			// use because there is a bug on some devices with location.getTime()
 			long locationTime = System.currentTimeMillis();
 			// write only with 50 meters accuracy
@@ -718,33 +722,44 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 							location.getSpeed(), location.getAccuracy(), locationTime, settings);
 				}
 				// live monitoring is aware of accuracy (it would be good to create an option)
-				if(settings.LIVE_MONITORING.get()){
+				if (settings.LIVE_MONITORING.get()) {
 					liveMonitoringHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
-						location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
+							location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
 				}
-			
+
 			}
 			// only for emulator
 			updateSpeedBearingEmulator(location);
 		}
 
-		boolean enableSensorNavigation = routingHelper.isFollowingMode() && settings.USE_COMPASS_IN_NAVIGATION.get() ? 
-				location == null || !location.hasBearing() :  false;
+		boolean enableSensorNavigation = routingHelper.isFollowingMode() && settings.USE_COMPASS_IN_NAVIGATION.get() ? location == null
+				|| !location.hasBearing() : false;
 		registerUnregisterSensor(location, enableSensorNavigation);
-		
-		if(routingHelper.isFollowingMode()){
-			if(location == null || !location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
-				// Update routing position and get location for sticking mode  
+
+		if (routingHelper.isFollowingMode()) {
+			if (location == null || !location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
+				// Update routing position and get location for sticking mode
 				Location updatedLocation = routingHelper.setCurrentLocation(location);
+				if(!routingHelper.isFollowingMode()) {
+					// finished
+					Message msg = Message.obtain(uiHandler, new Runnable() {
+						@Override
+						public void run() {
+							settings.APPLICATION_MODE.set(settings.PREV_APPLICATION_MODE.get());
+							updateApplicationModeSettings();
+						}
+					});
+					uiHandler.sendMessage(msg);
+				}
 				location = updatedLocation;
 				// Check with delay that gps location is not lost
-				if(location != null && routingHelper.getLeftDistance() > 0){
+				if (location != null && routingHelper.getLeftDistance() > 0) {
 					final long fixTime = location.getTime();
 					Message msg = Message.obtain(uiHandler, new Runnable() {
 						@Override
 						public void run() {
 							Location lastKnown = getLastKnownLocation();
-							if(lastKnown != null && lastKnown.getTime() - fixTime < LOST_LOCATION_CHECK_DELAY) {
+							if (lastKnown != null && lastKnown.getTime() - fixTime < LOST_LOCATION_CHECK_DELAY / 2) {
 								// false positive case, still strange how we got here with removeMessages
 								return;
 							}
@@ -761,22 +776,22 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 		mapLayers.getLocationLayer().setLastKnownLocation(location);
 		navigationInfo.setLocation(location);
-	
+
 		if (location != null) {
 			long now = System.currentTimeMillis();
 			if (isMapLinkedToLocation()) {
-				if(settings.AUTO_ZOOM_MAP.get() && location.hasSpeed()){
+				if (settings.AUTO_ZOOM_MAP.get() && location.hasSpeed()) {
 					float zdelta = defineZoomFromSpeed(location.getSpeed());
-					if(Math.abs(zdelta) >= OsmandMapTileView.ZOOM_DELTA_1){
+					if (Math.abs(zdelta) >= OsmandMapTileView.ZOOM_DELTA_1) {
 						// prevent ui hysteresis (check time interval for autozoom)
-						if(zdelta >= 2) {
+						if (zdelta >= 2) {
 							// decrease a bit
 							zdelta -= 3 * OsmandMapTileView.ZOOM_DELTA_1;
-						} else if(zdelta <= -2){
+						} else if (zdelta <= -2) {
 							// decrease a bit
 							zdelta += 3 * OsmandMapTileView.ZOOM_DELTA_1;
 						}
-						if(now - lastTimeAutoZooming > 4500){
+						if (now - lastTimeAutoZooming > 4500) {
 							lastTimeAutoZooming = now;
 							mapView.setZoom(mapView.getFloatZoom() + zdelta);
 							// mapView.getAnimatedDraggingThread().startZooming(mapView.getFloatZoom() + zdelta, false);
@@ -786,7 +801,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				int currentMapRotation = settings.ROTATE_MAP.get();
 				if (location.hasBearing() && currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
 					mapView.setRotate(-location.getBearing());
-				} else if(!location.hasBearing() && routingHelper.isFollowingMode() 
+				} else if (!location.hasBearing() && routingHelper.isFollowingMode()
 						&& currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
 					if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -previousSensorValue)) > 15
 							&& now - lastTimeSensorRotation > 1500) {
@@ -796,20 +811,19 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				}
 				mapView.setLatLon(location.getLatitude(), location.getLongitude());
 			} else {
-				if(!mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()){
+				if (!mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()) {
 					mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(true);
 				}
-				if (settings.AUTO_FOLLOW_ROUTE.get() > 0 && routingHelper.isFollowingMode()
-						&& !uiHandler.hasMessages(AUTO_FOLLOW_MSG_ID)) {
+				if (settings.AUTO_FOLLOW_ROUTE.get() > 0 && routingHelper.isFollowingMode() && !uiHandler.hasMessages(AUTO_FOLLOW_MSG_ID)) {
 					backToLocationWithDelay(1);
 				}
 			}
 		} else {
-			if(mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()){
+			if (mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()) {
 				mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(false);
 			}
 		}
-		// When location is changed we need to refresh map in order to show movement! 
+		// When location is changed we need to refresh map in order to show movement!
 		mapView.refreshMap();
 	}
 

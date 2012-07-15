@@ -371,7 +371,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			@Override
 			public boolean updateInfo() {
 				int time = 0;
-				if (routeLayer != null && routeLayer.getHelper().isRouterEnabled()) {
+				if (routeLayer != null && routeLayer.getHelper().isRouteCalculated()) {
 					boolean followingMode = routeLayer.getHelper().isFollowingMode();
 					time = routeLayer.getHelper().getLeftTime();
 					if (time != 0) {
@@ -432,7 +432,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			public boolean updateInfo() {
 				if (map.getPointToNavigate() != null) {
 					int d = 0;
-					if (map.getRoutingHelper().isRouterEnabled()) {
+					if (map.getRoutingHelper().isRouteCalculated()) {
 						d = map.getRoutingHelper().getLeftDistance();
 					}
 					if (d == 0) {
@@ -508,7 +508,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			@Override
 			public boolean updateInfo() {
 				boolean visible = false;
-				if (routeLayer != null && routingHelper.isRouterEnabled() && routingHelper.isFollowingMode()) {
+				if (routeLayer != null && routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
 					boolean uturnWhenPossible = routingHelper.makeUturnWhenPossible();
 					NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, false);
 					if (!uturnWhenPossible) {
@@ -605,7 +605,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			@Override
 			public boolean updateInfo() {
 				boolean visible = false;
-				if (routeLayer != null && routingHelper.isRouterEnabled() && routingHelper.isFollowingMode()) {
+				if (routeLayer != null && routingHelper.isFollowingMode()) {
 					AlarmInfo alarm = routingHelper.getMostImportantAlarm(view.getSettings().METRIC_SYSTEM.get());
 					if(alarm != null) {
 						if(alarm.getType() == AlarmInfo.SPEED_LIMIT) {
@@ -652,8 +652,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 			@Override
 			public boolean updateInfo() {
 				boolean visible = false;
-				if (routeLayer != null && routingHelper.isRouterEnabled() && routingHelper.isFollowingMode()) {
-					makeUturnWhenPossible = routingHelper.makeUturnWhenPossible();
+				if (routeLayer != null && routingHelper.isRouteCalculated() ) {
+					boolean follow = routingHelper.isFollowingMode();
+					makeUturnWhenPossible = routingHelper.makeUturnWhenPossible() && follow;
 					if (makeUturnWhenPossible) {
 						visible = true;
 						turnImminent = 1;
@@ -661,23 +662,20 @@ public class MapInfoLayer extends OsmandMapLayer {
 						TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
 						invalidate();
 					} else {
-						
 						boolean showStraight = false;
-						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, true);
-						// do not switch information for exits (where to keep left)
-//						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, false);
-//						if (r != null) {
-//							RouteDirectionInfo toShowWithoutSpeak = r.directionInfo;
-//							if (r.imminent >= 0 && r.imminent < 2) {
-//								// next turn is very close (show it)
-//							} else {
-//								r = routingHelper.getNextRouteDirectionInfo(calc1, true);
-//								if(calc1.directionInfo != toShowWithoutSpeak){
-//									// show straight and grey because it is not the closest turn
-//									showStraight = r.imminent == -1;
-//								}
-//							}
-//						}
+						NextDirectionInfo r = null;
+						if(follow) {
+							r = routingHelper.getNextRouteDirectionInfo(calc1, true);
+						} else {
+							int di = map.getMapLayers().getRouteInfoLayer().getDirectionInfo();
+							if (di >= 0 && map.getMapLayers().getRouteInfoLayer().isVisible()) {
+								RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
+								r = new  NextDirectionInfo();
+								r.directionInfo = next;
+								r.distanceTo = 0;
+								r.imminent = 1;
+							}
+						}
 						if (r != null && r.distanceTo > 0) {
 							visible = true;
 							if (r.directionInfo == null) {
@@ -878,7 +876,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				int locimminent = -1;
 				int[] loclanes = null;
 				if (routeLayer != null && routingHelper.isRouteCalculated()) {
-					if (routingHelper.isRouterEnabled() && routingHelper.isFollowingMode()) {
+					if (routingHelper.isFollowingMode()) {
 						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
 						if(r != null && r.directionInfo != null && r.directionInfo.getTurnType() != null) {
 							loclanes  = r.directionInfo.getTurnType().getLanes();
