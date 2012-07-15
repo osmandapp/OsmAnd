@@ -1,4 +1,4 @@
-package net.osmand.router.test;
+package net.osmand.router;
 
 import java.io.File;
 import java.io.IOException;

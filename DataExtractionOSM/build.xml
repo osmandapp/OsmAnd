@@ -9,10 +9,13 @@
 	<property name="icons.dir" value="icons/resources"/>
 	<property name="icons.absolute.dir" location="${icons.dir}" />
 	<property name="bin.dir" value="bin"/>
+	<property name="bintests.dir" value="bin-tests"/>
 	<property name="bin.absolute.dir" location="${bin.dir}" />
 	<property name="lib.dir" value="lib"/>
 	<property name="lib.absolute.dir" location="${lib.dir}" />
 	<property name="java.encoding" value="UTF-8" />
+	<property name="srctests.dir" value="src-tests"/>
+	<property name="reports.tests" value="${basedir}/test-results" />
 
 	<path id="ant.lib.path">
 		<fileset dir="ant-lib" includes="*.jar" />
@@ -26,6 +29,7 @@
 
 	<target name="-dirs">
 		<mkdir dir="${bin.absolute.dir}"/>
+		<mkdir dir="${bintests.dir}"/>
 	</target>
 
 	<target name="-copy-resources">
@@ -59,22 +63,37 @@
 		 debug="on"
 		 source="1.6"
 	  />
+		<javac srcdir="${srctests.dir}"
+		 destdir="${bintests.dir}"
+		 encoding="${java.encoding}"
+		 classpathref="test.classpath"
+		 debug="on"
+		 source="1.6"
+	  />
 	</target>
 
 	<path id="test.classpath">
 		<pathelement location="${bin.absolute.dir}" />
+		<pathelement location="${bintests.dir}" />
 		<fileset dir="${lib.absolute.dir}">
 			<include name="*.jar" />
 		</fileset>
 	</path>
 
-	<target name="routetest" depends="compile">
+	<target name="junits" depends="compile">
 		<junit fork="false">
 			<sysproperty key="basedir" value="${basedir}"/>
 			<!-- <sysproperty key="OBF_DIR" value="${obfdir}"/> -->
 			<classpath refid="test.classpath"/>
 			<formatter type="xml" />
-			<test name="net.osmand.router.test.JUnitRouteTest" todir="${basedir}/test-results" />
+			<!-- test name="net.osmand.router.test.JUnitRouteTest" todir="${basedir}/test-results" /-->
+		    <batchtest fork="false" todir="${reports.tests}" >
+			     <fileset dir="${srctests.dir}" >
+			        <include name="**/*Test*.java" />
+			        <exclude name="**/AllTests.java" />
+			        <exclude name="**/*Suite*.java" />
+			    </fileset>
+			</batchtest>
 		</junit>
 	</target>
 
@@ -107,7 +126,7 @@
 		<delete file="MANIFEST.MF" />
 	</target>
 
-	<target name="build" depends="jar, routetest">
+	<target name="build" depends="jar, junits">
 		<delete dir="build"/>
 		<copy todir="build">
 			<fileset dir=".">
