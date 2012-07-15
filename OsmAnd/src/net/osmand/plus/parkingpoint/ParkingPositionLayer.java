@@ -135,7 +135,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		if(!parkPos.isEmpty()){
 			StringBuilder res = new StringBuilder();
 			res.append(view.getContext().getString(R.string.osmand_parking_position_description));
-			AccessibleToast.makeText(view.getContext(), getObjectDescription(null), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(view.getContext(), getObjectDescription(parkingPoint), Toast.LENGTH_LONG).show();
 			return true;
 		}
 		return false;
