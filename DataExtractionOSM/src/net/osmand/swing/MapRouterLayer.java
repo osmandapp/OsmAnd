@@ -262,6 +262,18 @@ public class MapRouterLayer implements MapPanelLayer {
 			}
 		};
 		menu.add(route_CloudMate);
+		Action swapLocations = new AbstractAction("Swap locations") {
+			private static final long serialVersionUID = 507156107455281238L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				LatLon l = endRoute;
+				endRoute = startRoute;
+				startRoute = l;
+				map.repaint();
+			}
+		};
+		menu.add(swapLocations);
 
 	}
 	
@@ -674,6 +686,9 @@ public class MapRouterLayer implements MapPanelLayer {
 					Way way = new Way(-1);
 //					String name = String.format("time %.2f ", s.getSegmentTime());
 					String name = s.getDescription();
+					if(s.getTurnType() != null) {
+						name += " (TA " + s.getTurnType().getTurnAngle() + ") ";
+					}
 //					String name = String.format("beg %.2f end %.2f ", s.getBearingBegin(), s.getBearingEnd());
 					way.putTag(OSMTagKey.NAME.getValue(),name);
 					boolean plus = s.getStartPointIndex() < s.getEndPointIndex();

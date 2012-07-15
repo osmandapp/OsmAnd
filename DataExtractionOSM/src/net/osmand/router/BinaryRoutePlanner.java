@@ -869,6 +869,7 @@ public class BinaryRoutePlanner {
 				additional.append("distance = \"").append(res.getDistance()).append("\" ");
 				if (res.getTurnType() != null) {
 					additional.append("turn = \"").append(res.getTurnType()).append("\" ");
+					additional.append("turn_angle = \"").append(res.getTurnType().getTurnAngle()).append("\" ");
 					if (res.getTurnType().getLanes() != null) {
 						additional.append("lanes = \"").append(Arrays.toString(res.getTurnType().getLanes())).append("\" ");
 					}
@@ -901,10 +902,10 @@ public class BinaryRoutePlanner {
 					if(tl || tr) {
 						TurnType tnext = getTurnInfo(result, i + 1, leftside);
 						if(tnext != null && result.get(i).getDistance() < 55) {
-							if(tl && TurnType.TL.equals(t.getValue()) ) {
+							if(tl && TurnType.TL.equals(tnext.getValue()) ) {
 								next = i + 2;
 								t = TurnType.valueOf(TurnType.TU, true);
-							} else if(tr && TurnType.TR.equals(t.getValue()) ) {
+							} else if(tr && TurnType.TR.equals(tnext.getValue()) ) {
 								next = i + 2;
 								t = TurnType.valueOf(TurnType.TU, false);
 							}
@@ -996,8 +997,8 @@ public class BinaryRoutePlanner {
 		RouteSegmentResult last = rr;
 		for (int j = i; j < result.size(); j++) {
 			RouteSegmentResult rnext = result.get(j);
+			last = rnext;
 			if (rnext.getObject().roundabout()) {
-				last = rnext;
 				boolean plus = rnext.getStartPointIndex() < rnext.getEndPointIndex();
 				int k = rnext.getStartPointIndex();
 				if (j == i) {
@@ -1015,7 +1016,7 @@ public class BinaryRoutePlanner {
 		}
 		// combine all roundabouts
 		TurnType t = TurnType.valueOf("EXIT"+exit, leftSide);
-		t.setTurnAngle((float) MapUtils.degreesDiff(last.getBearingBegin(), prev.getBearingEnd()));
+		t.setTurnAngle((float) MapUtils.degreesDiff(last.getBearingBegin(), prev.getBearingEnd())) ;
 		return t;
 	}
 
