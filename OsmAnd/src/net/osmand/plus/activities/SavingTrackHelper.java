@@ -258,8 +258,16 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public void insertData(double lat, double lon, double alt, double speed, double hdop, long time, OsmandSettings settings){
 		if (time - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get() * 1000) {
 			execWithClose(updateScript, new Object[] { lat, lon, alt, speed, hdop, time });
+			if (lastPoint == null || (time - lastTimeUpdated) > 180000) {
+				lastPoint = new LatLon(lat, lon);
+			} 
 			lastTimeUpdated = time;
-			updateDistance(lat, lon);
+			if ((lastPoint.getLatitude() != lat) || (lastPoint.getLongitude() != lon)) {
+				float[] lastInterval = new float[1];
+				Location.distanceBetween(lat, lon, lastPoint.getLatitude(), lastPoint.getLongitude(), lastInterval);
+				distance += lastInterval[0];
+				lastPoint = new LatLon(lat, lon);
+			}
 			if (settings.SHOW_CURRENT_GPX_TRACK.get()) {
 				WptPt pt = new GPXUtilities.WptPt(lat, lon, time,
 						alt, speed, hdop);
@@ -308,19 +316,4 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		return OsmAndFormatter.getFormattedDistance(distance, map);
 	}
 
-	private void updateDistance (double lat, double lon) {
-		if (lastPoint == null) {
-			lastPoint = new LatLon(lat, lon);
-		} 
-		double lastLat = lastPoint.getLatitude();
-		double lastLon = lastPoint.getLongitude();
-		if ((lat == lastLat) && (lon == lastLon)) {
-			return;
-		} else {
-			float[] lastInterval = new float[1];
-			Location.distanceBetween(lat, lon, lastLat, lastLon, lastInterval);
-			distance += lastInterval[0];
-			lastPoint = new LatLon(lat, lon);
-		}
-	}
 }
