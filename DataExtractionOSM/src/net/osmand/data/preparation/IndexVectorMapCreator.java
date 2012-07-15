@@ -222,7 +222,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 	private Node checkOuterWaysEncloseInnerWays(List<List<Way>> completedRings, Map<Entity, String> entities) {
 		List<List<Way>> innerWays = new ArrayList<List<Way>>();
-		Boundary outerBoundary = new Boundary(true);
+		Boundary outerBoundary = new Boundary();
 		Node toReturn = null;
 		for (List<Way> ring : completedRings) {
 			boolean innerType = "inner".equals(entities.get(ring.get(0))); //$NON-NLS-1$
@@ -263,6 +263,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		return w1;
 	}
 
+	//TODO Can the Multipolygon class be the one that replaces this?
 	private void combineMultiPolygons(Way w, List<List<Way>> completedRings, List<List<Way>> incompletedRings) {
 		long lId = w.getEntityIds().get(w.getEntityIds().size() - 1).getId().longValue();
 		long fId = w.getEntityIds().get(0).getId().longValue();
