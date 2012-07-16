@@ -210,7 +210,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 					showDescriptionDialog(a);
 				}
 			};
-			adapter.registerItem(R.string.poi_context_menu_showdescription, 0, listener, -1);
+			adapter.registerItem(R.string.poi_context_menu_showdescription, R.drawable.list_activities_show_poi_description, listener, -1);
 		}
 	}
 
