@@ -781,10 +781,10 @@
   <string name="edit_filter_delete_message">{0} szűrő törölve</string>
   <string name="edit_filter_create_message">{0} szűrő létrehozva</string>
   <string name="default_buttons_selectall">Mindet kijelöl</string>
-  <string name="offline_navigation_not_available">Az OsmAnd offline navigációja átmenetileg nem elérhető.</string>
+  <string name="offline_navigation_not_available">Az OsmAnd kapcsolat nélküli (offline) navigációja átmenetileg nem érhető el.</string>
   <string name="left_side_navigation">Baloldali navigáció</string>
   <string name="left_side_navigation_descr">"Kapcsold be, ha baloldali közlekedésű országban navigálsz"</string>
-  <string name="download_link_and_local_description">Offline adatok letöltése vagy frissítése.\nRészletekért kattints a listaelemre, deaktiváláshoz vagy törléshez kattints rá hosszan. Adatok jelenleg az eszközön (%1$s szabad):</string>
+  <string name="download_link_and_local_description">Offline adatok letöltése vagy frissítése.\nRészletekért kattints a listaelemre, deaktiváláshoz vagy törléshez nyomd meg hosszan. Adatok jelenleg az eszközön (%1$s szabad):</string>
   <string name="unknown_from_location">Kezdőpozíció még nem meghatározható</string>
   <string name="context_menu_item_directions">Útvonal ide</string>
   <string name="confirm_interrupt_download">Meg szeretnéd szakítani a fájlletöltést?</string>
@@ -827,7 +827,7 @@
   <string name="history_search_desc">Keresési előzmények</string>
   <string name="rendering_attr_noPolygons_description">Az összes terület átlátszóvá tétele</string>
   <string name="rendering_attr_noPolygons_name">Poligonok elrejtése</string>
-  <string name="rendering_attr_appMode_name">Renderelési mód</string>
+  <string name="rendering_attr_appMode_name">Megjelenítési mód</string>
   <string name="rendering_attr_appMode_description">Térkép optimalizálása az adott Felhasználási módhoz</string>
   <string name="rendering_attr_contourLines_description">Válaszd ki a legkisebb nagyítási szintet, ahol a szintvonalak megjelennek. Külön SRTM fájlok szükségesek.</string>
   <string name="rendering_attr_contourLines_name">Szintvonalak megjelenítése</string>
@@ -845,7 +845,7 @@
   <string name="gpxup_private">Magán</string>
   <string name="osmand_parking_event">Autót felvenni a parkolóból</string>
   <string name="osmand_parking_warning">Figyelmeztetés</string>
-  <string name="osmand_parking_warning_text">"Az autó felvételére emlékeztetőt állítottál be a naptáradban. Ez az emlékeztető megmarad, amíg ki nem törlöd."</string>
+  <string name="osmand_parking_warning_text">"Az autó felvételére emlékeztető lett beállítva a naptárban. Ez az emlékeztető megmarad, amíg nem lesz kitörölve."</string>
   <string name="osmand_parking_time_limit_title">Parkolási időkorlát beállítása</string>
   <string name="osmand_parking_delete_confirm">Biztosan törlöd a parkolási pozíciót?</string>
   <string name="osmand_parking_delete">Parkolási helyjelző törlése</string>
@@ -855,10 +855,10 @@
   <string name="osmand_parking_add_event">Emlékeztető hozzáadása a Naptár alkalmazáshoz</string>
   <string name="osmand_parking_time_limit">Időkorlátos parkolás</string>
   <string name="osmand_parking_time_no_limit">Korlátlan idejű parkolás</string>
-  <string name="osmand_parking_position_description">A leparkolt autód helye. %1$s</string>
-  <string name="osmand_parking_position_description_add">Autóért menni:</string>
-  <string name="osmand_parking_pm">DU</string>
-  <string name="osmand_parking_am">DE</string>
+  <string name="osmand_parking_position_description">A leparkolt autó helye. %1$s</string>
+  <string name="osmand_parking_position_description_add">Parkolási engedély vége:</string>
+  <string name="osmand_parking_pm">du.</string>
+  <string name="osmand_parking_am">de.</string>
   <string name="osmand_parking_position_name">Parkolási pont</string>
   <string name="osmand_parking_plugin_description">A bővítmény segítségével feljegyezheted, hogy hol parkoltad le az autódat.</string>
   <string name="osmand_parking_plugin_name">Parkolási Hely Bővítmény</string>
@@ -866,4 +866,4 @@
   <string name="context_menu_item_delete_parking_point">Parkolásjelölő törlése</string>
   <string name="starting_point_too_far">Az indulási pont túl messze van a legközelebbi úttól</string>
   <string name="shared_location">Megosztott hely</string>
-<string name="update_downlod_list">Lista újratöltése</string><string name="global_app_allocated_memory_descr">Lefoglalt memória %1$s MB (Android korlát %2$s MB, Dalvik %3$s MB).</string><string name="global_app_allocated_memory">Lefoglalt memória</string><string name="native_app_allocated_memory_descr">Alkalmazás által lefoglalt összes natív memória %1$s MB (dalvik %2$s MB, egyéb %3$s MB). Proportional(?) memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</string><string name="native_app_allocated_memory">Összes natív memória</string><string name="monitoring_info_control">Útvonalrögzítő gomb megjelenítése</string><string name="monitoring_info_control_desc">Rögzítési állapot megjelenítése az információs panelen</string><string name="select_animate_speedup">Útvonalszimuláció gyorsulása</string><string name="osmand_parking_hours">Óra</string><string name="osmand_parking_minutes">Perc</string><string name="osmand_parking_position_description_add_time">Autó leparkolva:</string><string name="use_compass_navigation_descr">Iránytű használata navigáláshoz, ha az irány nem érzékelhető</string><string name="use_compass_navigation">Iránytű használata</string></resources>
+<string name="update_downlod_list">Lista újratöltése</string><string name="global_app_allocated_memory_descr">Lefoglalt memória %1$s MB (Android korlát %2$s MB, Dalvik %3$s MB).</string><string name="global_app_allocated_memory">Lefoglalt memória</string><string name="native_app_allocated_memory_descr">Alkalmazás által lefoglalt összes natív memória %1$s MB (dalvik %2$s MB, egyéb %3$s MB). Proportional(?) memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</string><string name="native_app_allocated_memory">Összes natív memória</string><string name="monitoring_info_control">Útvonalrögzítő gomb megjelenítése</string><string name="monitoring_info_control_desc">Útvonalrögzítés állapotának megjelenítése az információs panelen</string><string name="select_animate_speedup">Útvonalszimuláció gyorsulása</string><string name="osmand_parking_hours">Óra</string><string name="osmand_parking_minutes">Perc</string><string name="osmand_parking_position_description_add_time">Autó leparkolva:</string><string name="use_compass_navigation_descr">Iránytű használata navigáláshoz, ha az irány nem érzékelhető</string><string name="use_compass_navigation">Iránytű használata</string><string name="route_updated_loc_found">Route will be recalculated when location will be found</string></resources>
