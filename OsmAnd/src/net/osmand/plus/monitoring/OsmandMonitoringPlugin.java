@@ -73,7 +73,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		monitoringControl.updateInfo();
+		if(monitoringControl != null) {
+			monitoringControl.updateInfo();
+		}
 	}
 
 	@Override
