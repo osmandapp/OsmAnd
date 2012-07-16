@@ -228,7 +228,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 					NativePreferencesDialog dlg = new NativePreferencesDialog(frame);
 					dlg.showDialog();
 					if(dlg.isOkPressed()) {
-						initNativeRendering();
+						initNativeRendering(NativePreferencesDialog.getRenderingProperties());
 					} else {
 						showOfflineIndex.setSelected(false);
 					}
@@ -239,14 +239,14 @@ public class OsmExtractionUI implements IMapLocationListener {
 		});
 	}
 	
-	private void initNativeRendering() {
+	private void initNativeRendering(String renderingProperties) {
 		String fl = DataExtractionSettings.getSettings().getNativeLibFile();
 		if (fl != null) {
 			NativeSwingRendering lib = NativeSwingRendering.loadLibrary(fl);
 			if (lib != null) {
 				try {
 					lib.initFilesInDir(new File(DataExtractionSettings.getSettings().getBinaryFilesDir()));
-					lib.loadRuleStorage(DataExtractionSettings.getSettings().getRenderXmlPath());
+					lib.loadRuleStorage(DataExtractionSettings.getSettings().getRenderXmlPath(), renderingProperties);
 					mapPanel.setNativeLibrary(lib);
 					mapPanel.repaint();
 				} catch (SAXException e) {
