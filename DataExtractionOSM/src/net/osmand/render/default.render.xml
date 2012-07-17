@@ -92,14 +92,16 @@
 		<filter layer="-1" tag="" value="" order="10" objectType="2"/>
 		<filter tag="" value="" order="11" objectType="2"/>
 		
-		<group objectType="3" >
-			<filter tag="railway" value="platform" order="30" />
-			<filter tag="railway" value="station" order="30"/>
-			<filter tag="public_transport" value="station" order="30"/>
-			<filter tag="public_transport" value="platform" order="30"/>
+		
+		<group>
+			<filter tag="railway" value="platform"/>
+			<filter tag="railway" value="station" />
+			<filter tag="public_transport" value="station"/>
+			<filter tag="public_transport" value="platform"/>
 			<groupFilter>
-				<filter point="false" cycle="true"/>
-				<filter point="false" area="true"/>
+				<filter point="false" cycle="true" objectType="3" order="30"/>
+				<filter point="false" area="true" objectType="3" order="30"/>
+				<filter objectType="2" order="58"/>
 			</groupFilter>
 		</group>
 		
@@ -111,6 +113,7 @@
 			<filter layer="1" tag="railway" value="" order="66"/>
 			<filter tag="railway" value="" order="58"/>
 			<filter tag="public_transport" value="" order="58"/>
+			
 			<filter layer="1" tag="waterway" value="" order="66"/>
 			<filter tag="waterway" value="" order="18"/>
 
@@ -1375,8 +1378,13 @@
 		<filter layer="-1" tag="railway" value="funicular" minzoom="15" color="#666666" strokeWidth="5" pathEffect="5_3" color_2="#cccccc" strokeWidth_2="3"/>
 		<filter tag="railway" value="funicular" minzoom="15" color="#666666" strokeWidth="2"/>
 
-		<filter tag="railway" value="platform" minzoom="15" color="#888888" strokeWidth="3"/>
-		<filter tag="public_transport" value="platform" minzoom="15" color="#888888" strokeWidth="3"/>
+		<group>
+			<filter tag="railway" value="platform"/>
+			<filter tag="public_transport" value="platform"/>
+			<groupFilter  color="#888888" strokeWidth="4" strokeWidth_2="2" color_2="#bababa" minzoom="16">
+				<filter minzoom="18" strokeWidth="6" strokeWidth_2="4" />
+			</groupFilter>
+		</group>
 
 		<!-- Aeroways -->
 		<filter tag="aeroway" value="runway" color="#bbbbcc">

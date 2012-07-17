@@ -33,6 +33,7 @@ public class NativeSwingRendering extends NativeLibrary {
 	private static NativeSwingRendering defaultLoadedLibrary; 
 	
 	public void loadRuleStorage(String path, String renderingProperties) throws SAXException, IOException{
+		RenderingRulesStorage storage2 = new RenderingRulesStorage();
 		RenderingRulesStorage storage = new RenderingRulesStorage();
 		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
 			@Override
@@ -60,7 +61,9 @@ public class NativeSwingRendering extends NativeLibrary {
 				renderingProps.put(s.substring(0, i).trim(), s.substring(i + 1).trim());
 			}
 		}
+		initRenderingRulesStorage(storage);
 		this.storage = storage;
+		
 	}
 	
 	public NativeSwingRendering(){
@@ -118,7 +121,6 @@ public class NativeSwingRendering extends NativeLibrary {
 		
 		if(request.searchRenderingAttribute(RenderingRuleStorageProperties.A_DEFAULT_COLOR)) {
 			rctx.defaultColor = request.getIntPropertyValue(request.ALL.R_ATTR_COLOR_VALUE);
-			System.out.println("!"+ Integer.toHexString(rctx.defaultColor));
 		}
 		request.clearState();
 		request.setIntFilter(request.ALL.R_MINZOOM, zoom);

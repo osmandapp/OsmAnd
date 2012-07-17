@@ -17,6 +17,7 @@ void loadJniRenderingContext(JNIEnv* env);
 void loadJniRenderingRules(JNIEnv* env);
 jclass jclassIntArray ;
 jclass jclassString;
+jmethodID jmethod_Object_toString = NULL;
 
 extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
 {
@@ -68,13 +69,15 @@ extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_NativeLibrary_initBinaryMa
 
 
 // Global object
-UNORDERED(map)<void*, RenderingRulesStorage*> cachedStorages;
+UNORDERED(map)<std::string, RenderingRulesStorage*> cachedStorages;
 
 RenderingRulesStorage* getStorage(JNIEnv* env, jobject storage) {
-	if (cachedStorages.find(storage) == cachedStorages.end()) {
-		cachedStorages[storage] = createRenderingRulesStorage(env, storage);
+	std::string hash = getStringMethod(env, storage, jmethod_Object_toString);
+	if (cachedStorages.find(hash) == cachedStorages.end()) {
+		osmand_log_print(LOG_DEBUG, "Init rendering storage %s ", hash.c_str());
+		cachedStorages[hash] = createRenderingRulesStorage(env, storage);
 	}
-	return cachedStorages[storage];
+	return cachedStorages[hash];
 }
 
 
@@ -383,6 +386,7 @@ jmethodID jmethod_RouteDataObject_init = NULL;
 jclass jclass_NativeRouteSearchResult = NULL;
 jmethodID jmethod_NativeRouteSearchResult_init = NULL;
 
+
 void loadJniRenderingContext(JNIEnv* env)
 {
 	jclass_RenderingContext = findClass(env, "net/osmand/RenderingContext");
@@ -406,6 +410,9 @@ void loadJniRenderingContext(JNIEnv* env)
 	jfield_RenderingContext_lastRenderedKey = getFid(env,  jclass_RenderingContext, "lastRenderedKey", "I" );
 	jmethod_RenderingContext_getIconRawData = env->GetMethodID(jclass_RenderingContext,
 				"getIconRawData", "(Ljava/lang/String;)[B");
+
+	jmethod_Object_toString = env->GetMethodID(findClass(env, "java/lang/Object", true),
+					"toString", "()Ljava/lang/String;");
 
 
 	jclass_JUnidecode = findClass(env, "net/sf/junidecode/Junidecode");
