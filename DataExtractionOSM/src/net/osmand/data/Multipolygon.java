@@ -32,18 +32,20 @@ public class Multipolygon {
 	protected IdentityHashMap<Way,List<Way>> outerInnerMapping;
 	
 	private void addNewPolygonPart(List<Way> polygons, List<Way> closedPolygons, Way newPoly) {
-		if (isClosed(newPoly)) {
-			closedPolygons.add(newPoly); //if closed, put directly to closed polygons
-		} else if (polygons.isEmpty()) { 
-			polygons.add(newPoly); //if open, and first, put to polygons..
-		} else {
-			// now we try to merge the ways to form bigger polygons
-			Stack<Way> wayStack = new Stack<Way>();
-			wayStack.push(newPoly);
-			addAndMergePolygon(polygons, closedPolygons, wayStack);
-		}
-		//reset the mapping
-		outerInnerMapping = null;
+		if (!newPoly.getNodes().isEmpty()) {
+			if (isClosed(newPoly)) {
+				closedPolygons.add(newPoly); //if closed, put directly to closed polygons
+			} else if (polygons.isEmpty()) { 
+				polygons.add(newPoly); //if open, and first, put to polygons..
+			} else {
+				// now we try to merge the ways to form bigger polygons
+				Stack<Way> wayStack = new Stack<Way>();
+				wayStack.push(newPoly);
+				addAndMergePolygon(polygons, closedPolygons, wayStack);
+			}
+			//reset the mapping
+			outerInnerMapping = null;
+		} //else do nothing
 	}
 
 	private boolean isClosed(Way newPoly) {

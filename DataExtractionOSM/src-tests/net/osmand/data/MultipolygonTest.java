@@ -168,6 +168,13 @@ public class MultipolygonTest {
 		assertFalse(testee.hasOpenedPolygons());
 	}
 
-	
+	@Test
+	public void test_firstEmptyWayThanOpenedWay()
+	{
+		testee.addOuterWay(new Way(111));
+		testee.addOuterWay(poly1_1_of_2);
+		assertEquals(1, testee.countOuterPolygons());
+		assertTrue(testee.hasOpenedPolygons());
+	}
 
 }
