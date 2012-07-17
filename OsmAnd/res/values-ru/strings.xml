@@ -886,4 +886,4 @@
   <string name="osmand_parking_position_description_add_time">Автомобиль был припаркован в:</string>
   <string name="use_compass_navigation_descr">Использовать навигацию по компасу, если направление не определено</string>
   <string name="use_compass_navigation">Использовать компас</string>
-</resources>
+<string name="route_updated_loc_found">Route will be recalculated when location will be found</string></resources>
