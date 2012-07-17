@@ -742,8 +742,11 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 							Building building2 = new Building(e);
 							building2.setName(hno.substring(secondNumber + 1));
 							Set<Long> ids2OfStreet = getStreetInCity(e.getIsInNames(), e.getTag(OSMTagKey.ADDR_STREET2), null, l);
+							ids2OfStreet.removeAll(idsOfStreet); //remove duplicated entries!
 							if(!ids2OfStreet.isEmpty()) {
 								streetDAO.writeBuilding(ids2OfStreet, building2);
+							} else {
+								building.setName2(building2.getName());
 							}
 						}
 					}
