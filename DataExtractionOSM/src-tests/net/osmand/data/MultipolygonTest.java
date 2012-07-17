@@ -177,4 +177,31 @@ public class MultipolygonTest {
 		assertTrue(testee.hasOpenedPolygons());
 	}
 
+	@Test
+	public void test_mergingExistingPolygons()
+	{
+		Way part1 = polygon(n(1,1),n(1,2),n(1,3));
+		Way part2 = polygon(n(1,3),n(1,4),n(1,5));
+		Way part3 = polygon(n(1,5),n(1,6),n(1,2));
+		testee.addOuterWay(part1);
+		testee.addOuterWay(part3);
+		testee.addOuterWay(part2);
+		assertEquals(1, testee.countOuterPolygons());
+		assertTrue(testee.hasOpenedPolygons());
+	}
+
+	@Test
+	public void test_mergingExistingPolygonsReversed()
+	{
+		Way part1 = polygon(n(1,3),n(1,2),n(1,1));
+		Way part2 = polygon(n(1,3),n(1,4),n(1,5));
+		Way part3 = polygon(n(1,5),n(1,6),n(1,2));
+		testee.addOuterWay(part1);
+		testee.addOuterWay(part3);
+		testee.addOuterWay(part2);
+		assertEquals(1, testee.countOuterPolygons());
+		assertTrue(testee.hasOpenedPolygons());
+	}
+	
+
 }

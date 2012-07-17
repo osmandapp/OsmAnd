@@ -97,6 +97,8 @@ public class Multipolygon {
 			//if we could not merge the new polygon, and it is not already there, add it!
 			if (workStack.isEmpty() && !polygons.contains(changedWay)) {
 				polygons.add(changedWay);
+			} else if (!workStack.isEmpty()) {
+				polygons.remove(changedWay);
 			}
 		}
 	}
