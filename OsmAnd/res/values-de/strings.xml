@@ -838,7 +838,7 @@
 	<string name="transport_search_desc">ÖPNV-Suche</string>
 	<string name="favourites_search_desc">Favoriten-Suche</string>
 	<string name="history_search_desc">Suchverlauf</string>
-	<string name="tip_recent_changes_0_8_1_t">"\"Änderungen in 0.8.1 : \n\t* Präzisere Routen (etwas langsamere Berechnung) \n\t* Routenneuberechnung verbessert und beschleunigt \n\t* Anzeige der weiterführenden Fahrspur \n\t* Anzeige von Geschwindigkeitsbegrenzungen, Radarfallen und Verkehrsberuhigungen (Schwellen) \n\t* Verbesserte Sprachführung auf Autobahnen \n\t* Parkplatz-Plugin (\'Wo ist mein Auto?\') \n\t* Aufnahmeknopf für Streckenaufzeichnung (optonal)\" "</string>
+	<string name="tip_recent_changes_0_8_1_t">"\"Änderungen in 0.8.1 : \n\t* Präzisere Routen (etwas langsamere Berechnung) \n\t* Routenneuberechnung verbessert und beschleunigt \n\t* Anzeige der weiterführenden Fahrspur \n\t* Anzeige von Geschwindigkeitsbegrenzungen, Radarfallen und Verkehrsberuhigungen (Schwellen) \n\t* Verbesserte Sprachführung auf Autobahnen \n\t* Parkplatz-Plugin (\'Wo ist mein Auto?\') \n\t* Knopf zum De/Aktivieren der Streckenaufzeichnung"</string>
 	<string name="update_downlod_list">Liste neu laden</string>
 	<string name="starting_point_too_far">Startpunkt zu weit entfernt von nächster Straße</string>
 	<string name="shared_location">Shared location</string>
