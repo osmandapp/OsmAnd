@@ -137,9 +137,9 @@ public class VoiceRouter {
 		}
 		if (isDistanceLess(speed, dist, TURN_IN_DISTANCE_END)) {
 			return 0;
-		} else if (isDistanceLess(speed, dist, PREPARE_DISTANCE_END)) {
+		} else if ( dist <= PREPARE_DISTANCE) {
 			return 1;
-		} else if (isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE_END)) {
+		} else if (dist <= PREPARE_LONG_DISTANCE) {
 			return 2;
 		} else {
 			return -1;
