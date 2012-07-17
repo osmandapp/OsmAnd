@@ -23,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 /**
@@ -195,7 +196,34 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		setTime.setView(setTimeParking);
 		setTime.setTitle(mapActivity.getString(R.string.osmand_parking_time_limit_title));
 		setTime.setNegativeButton(R.string.default_buttons_cancel, null);
+//		final TextView  textView = (TextView) setTimeParking.findViewById(R.id.parkTime);
 		final TimePicker timePicker = (TimePicker) setTimeParking.findViewById(R.id.parking_time_picker);
+		
+		timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+			private static final int TIME_PICKER_INTERVAL = 5;
+			private boolean mIgnoreEvent = false;
+//			private Calendar cal = Calendar.getInstance();
+			
+			@Override
+			public void onTimeChanged(TimePicker timePicker, int hourOfDay, int minute) {
+		        if (mIgnoreEvent) {
+		            return;
+		        }
+		        if (minute%TIME_PICKER_INTERVAL != 0) {
+		            int minuteFloor=minute-(minute%TIME_PICKER_INTERVAL);
+		            minute=minuteFloor + (minute == minuteFloor + 1 ? TIME_PICKER_INTERVAL : 0);
+		            if (minute == 60) {
+		                minute = 0;
+		            }
+		            mIgnoreEvent = true;
+		            timePicker.setCurrentMinute(minute);
+		            mIgnoreEvent = false;
+//		            textView.setText("Time to pick up the car: "+  cal.get(Calendar.HOUR_OF_DAY) + hourOfDay + ":" +  cal.get(Calendar.MINUTE) + minute);
+		        }
+
+		    }
+		});
+		
 		
 		//to set the same 24-hour or 12-hour mode as it is set in the device
 		timePicker.setIs24HourView(true);
