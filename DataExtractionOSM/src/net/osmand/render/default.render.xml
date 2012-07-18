@@ -452,6 +452,16 @@
 		<filter minzoom="10" textSize="12" textColor="#6692da" textHaloRadius="1" textBold="true" textDy="7" tag="aeroway" value="airport"/>
 		<filter minzoom="17" textSize="12" textColor="#aa66cc" textWrapWidth="10" tag="aeroway" value="gate" nameTag="ref"/>
 		<filter minzoom="14" textSize="12" textColor="#6666ff" textDy="7" tag="aerialway" value="station"/>
+		
+		<!-- landuse -->
+		<group>
+			<filter minzoom="15" tag="landuse" value="garages"/>
+			<filter minzoom="15" tag="landuse" value="industrial"/>
+			<filter minzoom="15" tag="landuse" value="commercial"/>
+			<groupFilter textSize="12" textColor="#000000" textHaloRadius="1" textWrapWidth="20" textOrder="200">
+				<groupFilter nightMode="true" textColor="#ffffff"/>
+			</groupFilter>
+		</group>
 
 		<!-- Buildings -->
 		<filter minzoom="16" maxzoom="17" textSize="13" textColor="#444444" textWrapWidth="16" textMinDistance="40" tag="building" value=""/>
