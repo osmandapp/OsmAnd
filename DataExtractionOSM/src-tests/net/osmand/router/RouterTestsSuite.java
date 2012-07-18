@@ -123,7 +123,7 @@ public class RouterTestsSuite {
 		for (int i = 0; i < tests.getLength(); i++) {
 			Element e = (Element) tests.item(i);
 			BinaryRoutePlanner router = new BinaryRoutePlanner(lib, rs);
-			RoutingConfiguration.DEFAULT_DESIRABLE_TILES_IN_MEMORY = 50;
+			RoutingConfiguration.DEFAULT_DESIRABLE_TILES_IN_MEMORY = 100;
 			testRoute(e, router, config);
 		}
 

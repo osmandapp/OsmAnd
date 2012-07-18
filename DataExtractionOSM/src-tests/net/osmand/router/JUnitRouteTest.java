@@ -49,7 +49,11 @@ public class JUnitRouteTest  {
 			rs[it++] = new BinaryMapIndexReader(raf, false);
 		}
 	}
-		
+	
+	@Test
+	public void runCZ() throws SAXException, IOException, ParserConfigurationException {
+		RouterTestsSuite.test(lib, getClass().getResourceAsStream("cz.test.xml"), rs, RoutingConfiguration.getDefault());
+	}
 	
 	@Test
 	public void runNL() throws SAXException, IOException, ParserConfigurationException {
@@ -61,10 +65,7 @@ public class JUnitRouteTest  {
 		RouterTestsSuite.test(lib, getClass().getResourceAsStream("nl2.test.xml"), rs, RoutingConfiguration.getDefault());
 	}
 	
-	@Test
-	public void runCZ() throws SAXException, IOException, ParserConfigurationException {
-		RouterTestsSuite.test(lib, getClass().getResourceAsStream("cz.test.xml"), rs, RoutingConfiguration.getDefault());
-	}
+	
 	
 	@Test
 	public void runBLR() throws SAXException, IOException, ParserConfigurationException {
