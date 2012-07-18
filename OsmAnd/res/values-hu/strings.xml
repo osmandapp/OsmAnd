@@ -222,7 +222,7 @@
   <string name="favourites_edit_dialog_category">Kategória</string>
   <string name="vector_map_not_needed">Nem szükséges</string>
   <string name="basemap_missing">Hiányzik az alap világtérkép (alacsony nagyításon az egész Földet lefedi). A teljes környezethez le lehet tölteni a World_basemap.obf -et.</string>
-  <string name="vector_data_missing">Hiányzanak a helyi (\'offline\') adatok az SD kártyáról. Az offline - kapcsolat nélküli használathoz le kell tölteni azokat.</string>
+  <string name="vector_data_missing">Nincsenek offline használható adatok az SD kártyán. A térképek offline használathoz le kell töltened a kívánt területet.</string>
   <string name="local_index_gpx_info_show">"\n\nHosszan megnyomva további lehetőségek"</string>
   <string name="local_index_gpx_info_speed">"\nÁtlagsebesség: %1$s \nLegnagyobb sebesség: %2$s"</string>
   <string name="local_index_gpx_info_elevation">"\nÁtlagos magasság: %1$.0f m\nLegkisebb magasság: %2$.0f m\nLegnagyobb magasság: %3$.0f m\nEreszkedés: %4$.0f m\nEmelkedés: %5$.0f m"</string>
@@ -233,7 +233,7 @@
   <string name="local_index_items_restored">%2$d darabból %1$d sikeresen aktiválva.</string>
   <string name="local_index_no_items_to_do">Nincs elem a művelethez: %1$s</string>
   <string name="local_index_action_do">%2$s darab elemen végre lesz hajtva a %1$s. Folytatod?</string>
-  <string name="local_index_descr_title">Offline - kapcsolat nélküli adat kezelés</string>
+  <string name="local_index_descr_title">Offline - kapcsolat nélküli adatkezelés</string>
   <string name="local_index_mi_restore">Aktiválás</string>
   <string name="local_index_mi_backup">Deaktiválás</string>
   <string name="local_index_mi_delete">Törlés</string>
@@ -303,7 +303,7 @@
   <string name="tip_favorites">Kedvencek</string>
   <string name="tip_favorites_t">Ha hosszadalmas a sűrűn használt helyek előkeresése, hozzá lehet adni a Kedvencekhez, utána pár kattintással előkereshető. \n\tKedvenc pont hozzáadásához a térképmenüben a \'Hozzáadás a kedvencekhez\'-et kell választani és a pontot egy megfelelő névvel ellátni. Mentés után egyszerűen a főmenü \'Kedvencek\' menüponton keresztül érhető el. \n\tA \'Kedvencek\' menüben a pontra hosszan rányomva beállíthatjuk célpontnak, szerkeszthetjük vagy törölhetjük. \n\tAz összes kedvenc pont térképen megjelenítéséhez engedélyezni kell a \'Kedvencek\' réteget a térképmenü \'Rétegek\' pontjában.</string>
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> map classification with images"</string>
-  <string name="error_doing_search">Hiba történt a kapcsolat nélküli keresésben</string>
+  <string name="error_doing_search">Hiba történt az offline keresésben</string>
   <string name="search_offline_geo_error">Nem sikerült értelmezni a geo intent által küldött parancsot:\'%s\'</string>
   <string name="search_osm_offline">Cím keresése offline térképen</string>
   <string name="system_locale">Rendszer nyelve</string>
@@ -571,7 +571,7 @@
   <string name="searching_address">Cím keresés…</string>
   <string name="search_osm_nominatim">Cím keresése OSM Nominatim felhasználásával</string>
   <string name="hint_search_online">Házszám, utca, település</string>
-  <string name="search_offline_address">Kapcsolat nélkül</string>
+  <string name="search_offline_address">Offline</string>
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Max. online nagyítás</string>
   <string name="max_level_download_tile_descr">Maximum nagyítási szint kiválasztása térképcsempék letöltéshez</string>
@@ -781,7 +781,7 @@
   <string name="edit_filter_delete_message">{0} szűrő törölve</string>
   <string name="edit_filter_create_message">{0} szűrő létrehozva</string>
   <string name="default_buttons_selectall">Mindet kijelöl</string>
-  <string name="offline_navigation_not_available">Az OsmAnd kapcsolat nélküli (offline) navigációja átmenetileg nem érhető el.</string>
+  <string name="offline_navigation_not_available">Az Osmand offline navigációja átmenetileg nem elérhető.</string>
   <string name="left_side_navigation">Baloldali navigáció</string>
   <string name="left_side_navigation_descr">"Kapcsold be, ha baloldali közlekedésű országban navigálsz"</string>
   <string name="download_link_and_local_description">Offline adatok letöltése vagy frissítése.\nRészletekért kattints a listaelemre, deaktiváláshoz vagy törléshez nyomd meg hosszan. Adatok jelenleg az eszközön (%1$s szabad):</string>
@@ -838,7 +838,7 @@
   <string name="route_kr">Tarts jobbra és menj</string>
   <string name="save_route_as_gpx">Út mentése GPX fájlba</string>
   <string name="asap">MOST</string>
-  <string name="tip_recent_changes_0_8_1_t">"A 0.8.1 kiadás változásai: * Gyors és intelligens útvonal újratervezés * Pontosabb útvonal (egy kicsit lassabb) * Sávonkénti irányok * Információk fekvőrendőrről, traffipaxról, sebességkorlátozásról * Tökéletesített hangnavigáció az autópályán * Parkolási bővítmény * Ki-, bekapcsolható útvonalrögzítés gomb"</string>
+  <string name="tip_recent_changes_0_8_1_t">"A 0.8.1 kiadás változásai:\n\t* Gyors és intelligens útvonal újratervezés\n\t* Pontosabb útvonal (egy kicsit lassabb)\n\t* Sávonkénti irányok\n\t* Információk fekvőrendőrről, traffipaxról, sebességkorlátozásról\n\t* Tökéletesített hangnavigáció az autópályán\n\t* Parkolási bővítmény (\'Hol van leparkolva az autó?\')\n\t* Ki-, bekapcsolható útvonalrögzítés gomb"</string>
   <string name="gpxup_public">Nyilvános</string>
   <string name="gpxup_identifiable">Azonosítható</string>
   <string name="gpxup_trackable">Követhető</string>
@@ -866,4 +866,4 @@
   <string name="context_menu_item_delete_parking_point">Parkolásjelölő törlése</string>
   <string name="starting_point_too_far">Az indulási pont túl messze van a legközelebbi úttól</string>
   <string name="shared_location">Megosztott hely</string>
-<string name="update_downlod_list">Lista újratöltése</string><string name="global_app_allocated_memory_descr">Lefoglalt memória %1$s MB (Android korlát %2$s MB, Dalvik %3$s MB).</string><string name="global_app_allocated_memory">Lefoglalt memória</string><string name="native_app_allocated_memory_descr">Alkalmazás által lefoglalt összes natív memória %1$s MB (dalvik %2$s MB, egyéb %3$s MB). Proportional(?) memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</string><string name="native_app_allocated_memory">Összes natív memória</string><string name="monitoring_info_control">Útvonalrögzítő gomb megjelenítése</string><string name="monitoring_info_control_desc">Útvonalrögzítés állapotának megjelenítése az információs panelen</string><string name="select_animate_speedup">Útvonalszimuláció gyorsulása</string><string name="osmand_parking_hours">Óra</string><string name="osmand_parking_minutes">Perc</string><string name="osmand_parking_position_description_add_time">Autó leparkolva:</string><string name="use_compass_navigation_descr">Iránytű használata navigáláshoz, ha az irány nem érzékelhető</string><string name="use_compass_navigation">Iránytű használata</string><string name="route_updated_loc_found">Route will be recalculated when location will be found</string></resources>
+<string name="update_downlod_list">Lista újratöltése</string><string name="global_app_allocated_memory_descr">Lefoglalt memória %1$s MB (Android korlát %2$s MB, Dalvik %3$s MB).</string><string name="global_app_allocated_memory">Lefoglalt memória</string><string name="native_app_allocated_memory_descr">Alkalmazás által lefoglalt összes natív memória %1$s MB (dalvik %2$s MB, egyéb %3$s MB). Proportional(?) memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</string><string name="native_app_allocated_memory">Összes natív memória</string><string name="monitoring_info_control">Útvonalrögzítő gomb megjelenítése</string><string name="monitoring_info_control_desc">Útvonalrögzítés állapotának megjelenítése az információs panelen</string><string name="select_animate_speedup">Útvonalszimuláció gyorsulása</string><string name="osmand_parking_hours">Óra</string><string name="osmand_parking_minutes">Perc</string><string name="osmand_parking_position_description_add_time">Autó leparkolva:</string><string name="use_compass_navigation_descr">Iránytű használata navigáláshoz, ha az irány nem érzékelhető</string><string name="use_compass_navigation">Iránytű használata</string><string name="route_updated_loc_found">"Amint megvan a pozíció, az útvonal újra lesz számítva"</string></resources>
