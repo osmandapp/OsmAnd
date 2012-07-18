@@ -188,7 +188,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		return null;
 	}
 
-	private String getFormattedTime(long timeInMillis) {
+	String getFormattedTime(long timeInMillis) {
 		StringBuilder timeStringBuilder = new StringBuilder();
 		Time time = new Time();
 		time.set(timeInMillis);

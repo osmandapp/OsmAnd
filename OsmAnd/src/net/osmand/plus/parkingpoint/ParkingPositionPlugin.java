@@ -196,13 +196,13 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		setTime.setView(setTimeParking);
 		setTime.setTitle(mapActivity.getString(R.string.osmand_parking_time_limit_title));
 		setTime.setNegativeButton(R.string.default_buttons_cancel, null);
-//		final TextView  textView = (TextView) setTimeParking.findViewById(R.id.parkTime);
+		final TextView  textView = (TextView) setTimeParking.findViewById(R.id.parkTime);
 		final TimePicker timePicker = (TimePicker) setTimeParking.findViewById(R.id.parking_time_picker);
 		
 		timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
 			private static final int TIME_PICKER_INTERVAL = 5;
 			private boolean mIgnoreEvent = false;
-//			private Calendar cal = Calendar.getInstance();
+			private Calendar cal = Calendar.getInstance();
 			
 			@Override
 			public void onTimeChanged(TimePicker timePicker, int hourOfDay, int minute) {
@@ -218,7 +218,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		            mIgnoreEvent = true;
 		            timePicker.setCurrentMinute(minute);
 		            mIgnoreEvent = false;
-//		            textView.setText("Time to pick up the car: "+  cal.get(Calendar.HOUR_OF_DAY) + hourOfDay + ":" +  cal.get(Calendar.MINUTE) + minute);
+		            long timeInMillis = cal.getTimeInMillis() + hourOfDay*60*60*1000+ minute*60*1000;
+		            textView.setText(mapActivity.getString(R.string.osmand_parking_position_description_add) 
+		            		+ " "+  parkingLayer.getFormattedTime(timeInMillis));
 		        }
 
 		    }
