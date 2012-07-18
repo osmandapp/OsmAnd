@@ -845,7 +845,7 @@
   <string name="route_kr">Держитесь правее</string>
   <string name="save_route_as_gpx">Сохранить маршрут в файл GPX</string>
   <string name="asap">Скорее</string>
-  <string name="tip_recent_changes_0_8_1_t">"Изменения в 0.8.1 : * Умный и быстрый пересчет маршрута * Более точные маршруты (немного медленнее) * Указания по полосам * Информация о выбоинах, скоростных камерах и ограничениях скорости * Улучшенные голосовые подсказки на шоссе * Парковочный plugin * Включение/выключение следящего виджета"</string>
+  <string name="tip_recent_changes_0_8_1_t">"Изменения в 0.8.1 : \n\t* Более точные маршруты (немного медленнее) \n\t* Умный и быстрый пересчет маршрута \n\t* Указания по полосам \n\t* Информация об ограничениях скорости, скоростных камерах и лежачих полицейских\n\t* Улучшенные голосовые подсказки на шоссе \n\t* Парковочный плагин (\"Где припаркована моя машина?\")\n\t* Включение/выключение следящего виджета"</string>
   <string name="gpxup_public">Общедоступный</string>
   <string name="gpxup_identifiable">Идентифицируемый</string>
   <string name="gpxup_trackable">Отслеживаемый</string>
@@ -874,8 +874,8 @@
   <string name="starting_point_too_far">Начало маршрута слишком далеко от ближайшей дороги.</string>
   <string name="shared_location">Общие места</string>
   <string name="select_animate_speedup">Укажите скорость анимации маршрута</string>
-  <string name="monitoring_info_control">Info Control</string>
-  <string name="monitoring_info_control_desc">Показывает состояние мониторига (записи трека)</string>
+  <string name="monitoring_info_control">Показывать кнопку мониторинга (записи трека)</string>
+  <string name="monitoring_info_control_desc">Показывать кнопку мониторинга (записи трека) на карте</string>
   <string name="global_app_allocated_memory_descr">Выделено памяти %1$s MB (Ограничение Android %2$s MB, Dalvik %3$s MB).</string>
   <string name="global_app_allocated_memory">Выделено памяти</string>
   <string name="native_app_allocated_memory_descr">Всего физической памяти выделено приложению %1$s MB (Dalvik %2$s MB, другое %3$s MB). Proportional memory %4$s MB (Ограничение Android %5$s MB, Dalvik %6$s MB).</string>
@@ -886,4 +886,4 @@
   <string name="osmand_parking_position_description_add_time">Автомобиль был припаркован в:</string>
   <string name="use_compass_navigation_descr">Использовать навигацию по компасу, если направление не определено</string>
   <string name="use_compass_navigation">Использовать компас</string>
-<string name="route_updated_loc_found">Route will be recalculated when location will be found</string></resources>
+<string name="route_updated_loc_found">Маршрут будет пересчитан когда определится местоположение</string></resources>
