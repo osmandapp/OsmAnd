@@ -213,18 +213,30 @@ public class BinaryRoutePlanner {
 		boolean runRecalculation = ctx.previouslyCalculatedRoute != null && ctx.previouslyCalculatedRoute.size() > 0;
 		if (runRecalculation) {
 			RouteSegment previous = null;
-			for (RouteSegmentResult rr : ctx.previouslyCalculatedRoute) {
-				RouteSegment segment = new RouteSegment(rr.getObject(), rr.getEndPointIndex());
-				if (previous != null) {
-					previous.parentRoute = segment;
-					previous.parentSegmentEnd = rr.getStartPointIndex();
-					long t = (rr.getObject().getId() << ROUTE_POINTS) + segment.segmentStart;
-					visitedOppositeSegments.put(t, segment);
+			List<RouteSegmentResult> rlist = new ArrayList<RouteSegmentResult>();
+			// always recalculate first 2.5 km
+			int distanceThreshold = 2500;
+			float threshold = 0;
+			for(RouteSegmentResult rr : ctx.previouslyCalculatedRoute) {
+				threshold += rr.getDistance();
+				if(threshold > distanceThreshold) {
+					rlist.add(rr);
 				}
-				previous = segment;
-				
 			}
-			end = previous;
+			if (rlist.size() > 0) {
+				for (RouteSegmentResult rr : rlist) {
+					RouteSegment segment = new RouteSegment(rr.getObject(), rr.getEndPointIndex());
+					if (previous != null) {
+						previous.parentRoute = segment;
+						previous.parentSegmentEnd = rr.getStartPointIndex();
+						long t = (rr.getObject().getId() << ROUTE_POINTS) + segment.segmentStart;
+						visitedOppositeSegments.put(t, segment);
+					}
+					previous = segment;
+
+				}
+				end = previous;
+			}
 		}
 		
 		// for start : f(start) = g(start) + h(start) = 0 + h(start) = h(start)
