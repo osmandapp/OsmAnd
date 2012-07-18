@@ -235,7 +235,13 @@ public class MainMenuActivity extends Activity {
 		if(exit){
 			return;
 		}
-		
+		OsmandApplication app = ((OsmandApplication) getApplication());
+		// restore follow route mode
+		if(app.getSettings().FOLLOW_THE_ROUTE.get() && !app.getRoutingHelper().isRouteCalculated()){
+			final Intent mapIndent = new Intent(this, OsmandIntents.getMapActivity());
+			startActivityForResult(mapIndent, 0);
+			return;
+		}
 		startProgressDialog = new ProgressDialog(this);
 		getMyApplication().checkApplicationIsBeingInitialized(this, startProgressDialog);
 		SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);

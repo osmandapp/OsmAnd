@@ -34,6 +34,7 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointLocationLayer;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.Notification;
@@ -41,6 +42,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -71,6 +74,9 @@ import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
+import android.widget.FrameLayout.LayoutParams;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MapActivity extends AccessibleActivity implements IMapLocationListener, SensorEventListener {
@@ -169,6 +175,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		startProgressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
 			@Override
 			public void onDismiss(DialogInterface dialog) {
+				getMyApplication().getResourceManager().getRenderer().clearCache();
 				mapView.refreshMap(true);
 			}
 		});
@@ -324,11 +331,65 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		if (pointToNavigate == null && gpxPath == null) {
 			notRestoreRoutingMode();
 		} else {
-			Builder builder = new AccessibleAlertBuilder(MapActivity.this);
-			builder.setMessage(R.string.continue_follow_previous_route);
-			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			Runnable encapsulate = new Runnable() {
+				int delay = 7;
+				boolean quit = false;
+				Runnable delayDisplay = null;
+
 				@Override
-				public void onClick(DialogInterface dialog, int which) {
+				public void run() {
+					Builder builder = new AccessibleAlertBuilder(MapActivity.this);
+					final TextView tv = new TextView(MapActivity.this);
+					tv.setText(getString(R.string.continue_follow_previous_route_auto, delay + ""));
+					tv.setPadding(7, 5, 7, 5);
+					builder.setView(tv);
+					builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							restoreRoutingMode();
+
+						}
+					});
+					builder.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							notRestoreRoutingMode();
+							quit = true;
+						}
+					});
+					final AlertDialog dlg = builder.show();
+					dlg.setOnDismissListener(new OnDismissListener() {
+						@Override
+						public void onDismiss(DialogInterface dialog) {
+							quit = true;
+						}
+					});
+					dlg.setOnCancelListener(new OnCancelListener() {
+						@Override
+						public void onCancel(DialogInterface dialog) {
+							quit = true;
+						}
+					});
+					delayDisplay = new Runnable() {
+						@Override
+						public void run() {
+							if(!quit) {
+								delay --;
+								tv.setText(getString(R.string.continue_follow_previous_route_auto, delay + ""));
+								if(delay <= 0) {
+									dlg.dismiss();
+									restoreRoutingMode();
+								} else {
+									uiHandler.postDelayed(delayDisplay, 1000);
+								}
+							}
+						}
+					};
+					delayDisplay.run();
+				}
+
+				private void restoreRoutingMode() {
+					quit = true;
 					AsyncTask<String, Void, GPXFile> task = new AsyncTask<String, Void, GPXFile>() {
 						@Override
 						protected GPXFile doInBackground(String... params) {
@@ -361,14 +422,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 					task.execute(gpxPath);
 
 				}
-			});
-			builder.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					notRestoreRoutingMode();
-				}
-			});
-			builder.show();
+			};
+			encapsulate.run();
 		}
 
 	}
@@ -383,13 +438,13 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	
 	@Override
 	protected Dialog onCreateDialog(int id) {
-	Dialog dialog = null;
-	for (DialogProvider dp : dialogProviders) {
-		dialog = dp.onCreateDialog(id);
-		if (dialog != null) {
-			return dialog;
+		Dialog dialog = null;
+		for (DialogProvider dp : dialogProviders) {
+			dialog = dp.onCreateDialog(id);
+			if (dialog != null) {
+				return dialog;
+			}
 		}
-	}
 		if (id == OsmandApplication.PROGRESS_DIALOG) {
 			return startProgressDialog;
 		}
