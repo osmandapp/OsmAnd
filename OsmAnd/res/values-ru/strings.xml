@@ -423,7 +423,6 @@
   <string name="layer_poi">POI…</string>
   <string name="layer_map">Источник карты…</string>
   <string name="menu_layers">Слои</string>
-  <string name="continue_follow_previous_route">Предыдущий маршрут не был закончен. Продолжить следовать по нему?</string>
   <string name="context_menu_item_search_poi">Искать POI</string>
   <string name="context_menu_item_show_route">Маршрут отсюда</string>
   <string name="use_trackball_descr">Использовать трекбол, чтобы перемещать карту</string>
@@ -886,4 +885,6 @@
   <string name="osmand_parking_position_description_add_time">Автомобиль был припаркован в:</string>
   <string name="use_compass_navigation_descr">Использовать навигацию по компасу, если направление не определено</string>
   <string name="use_compass_navigation">Использовать компас</string>
-<string name="route_updated_loc_found">Маршрут будет пересчитан когда определится местоположение</string></resources>
+  <string name="route_updated_loc_found">Маршрут будет пересчитан когда определится местоположение</string>
+  <string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
+</resources>
