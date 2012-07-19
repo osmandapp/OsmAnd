@@ -339,7 +339,6 @@
   <string name="layer_poi">POI…</string>
   <string name="layer_map">Źródło mapy…</string>
   <string name="menu_layers">Zdefiniuj widok</string>
-  <string name="continue_follow_previous_route">Poprzednia trasa nie została ukończona. Czy chcesz kontynuować?</string>
   <string name="context_menu_item_search_poi">Szukaj POI</string>
   <string name="context_menu_item_show_route">Trasa z</string>
   <string name="use_trackball_descr">Użyj trackballa do przesuwania mapy</string>
@@ -864,4 +863,19 @@
   <string name="context_menu_item_delete_parking_point">Usuń znacznik parkowania</string>
   <string name="starting_point_too_far">Punkt startowy za daleko do najbliższej drogi.</string>
   <string name="shared_location">Lokalizacja współdzielona</string>
-<string name="update_downlod_list">Przeładuj listę</string><string name="global_app_allocated_memory_descr">Użyta pamięć: %1$s MB (limit Androida %2$s MB, dalvika %3$s MB).</string><string name="global_app_allocated_memory">Użyta pamięć</string><string name="native_app_allocated_memory_descr">Zużycie pamięci natywnej przez aplikację %1$s MB (dalvik %2$s MB, inna %3$s MB). Proportional memory %4$s MB (limit Androida %5$s MB, dalvika %6$s MB).</string><string name="native_app_allocated_memory">Zużycie pamięci natywnej</string><string name="monitoring_info_control">Pokazuj przycisk logowania</string><string name="monitoring_info_control_desc">Pokazuj przycisk logowania na ekranie mapy</string><string name="select_animate_speedup">Select animate route acceleration</string><string name="osmand_parking_hours">Godziny</string><string name="osmand_parking_minutes">Minuty</string><string name="osmand_parking_position_description_add_time">The car was parked at:</string><string name="use_compass_navigation_descr">Użyj kompasu w nawigacji kiedy kierunek nie jest wykryty</string><string name="use_compass_navigation">Użyj kompasu</string><string name="route_updated_loc_found">Trasa będzie przeliczona kiedy lokalizacja zostanie odnaleziona.</string></resources>
+  <string name="update_downlod_list">Przeładuj listę</string>
+  <string name="global_app_allocated_memory_descr">Użyta pamięć: %1$s MB (limit Androida %2$s MB, dalvika %3$s MB).</string>
+  <string name="global_app_allocated_memory">Użyta pamięć</string>
+  <string name="native_app_allocated_memory_descr">Zużycie pamięci natywnej przez aplikację %1$s MB (dalvik %2$s MB, inna %3$s MB). Proportional memory %4$s MB (limit Androida %5$s MB, dalvika %6$s MB).</string>
+  <string name="native_app_allocated_memory">Zużycie pamięci natywnej</string>
+  <string name="monitoring_info_control">Pokazuj przycisk logowania</string>
+  <string name="monitoring_info_control_desc">Pokazuj przycisk logowania na ekranie mapy</string>
+  <string name="select_animate_speedup">Select animate route acceleration</string>
+  <string name="osmand_parking_hours">Godziny</string>
+  <string name="osmand_parking_minutes">Minuty</string>
+  <string name="osmand_parking_position_description_add_time">The car was parked at:</string>
+  <string name="use_compass_navigation_descr">Użyj kompasu w nawigacji kiedy kierunek nie jest wykryty</string>
+  <string name="use_compass_navigation">Użyj kompasu</string>
+  <string name="route_updated_loc_found">Trasa będzie przeliczona kiedy lokalizacja zostanie odnaleziona.</string>
+  <string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
+</resources>
