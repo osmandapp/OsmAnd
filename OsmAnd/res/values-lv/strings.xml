@@ -879,5 +879,5 @@
   <string name="use_compass_navigation_descr">Kad virziens nav noteikts, lietot kompasu</string>
   <string name="use_compass_navigation">Lietot kompasu</string>
   <string name="route_updated_loc_found">Tiko tiks noteiktas koordinātes, ceļš tiks pārrēķināts</string>
-  <string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
+  <string name="continue_follow_previous_route_auto">Iepriekšējā navigācija netika pabeigta. Atsākt norādes? (%1$s sekundes)</string>
 </resources>
