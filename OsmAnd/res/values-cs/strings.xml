@@ -880,5 +880,5 @@
   <string name="use_compass_navigation_descr">Použít kompas při navigaci, když nelze zjistit směr</string>
   <string name="use_compass_navigation">Použít kompas</string>
   <string name="route_updated_loc_found">Trasa bude přepočítána, jakmile bude nalezena pozice</string>
-  <string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
+  <string name="continue_follow_previous_route_auto">Předchozí trasa nebyla dokončena. Chcete pokračovat? (%1$s sekund)</string>
 </resources>
