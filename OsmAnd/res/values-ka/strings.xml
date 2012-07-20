@@ -888,5 +888,5 @@
   <string name="use_compass_navigation_descr">კომპასის გამოყენება მიმართულების დაუდგენლობისას</string>
   <string name="use_compass_navigation">კომპასის გამოყენება</string>
   <string name="route_updated_loc_found">გზის გადათვლა სასურველი წერტილის პოვნის შემთხვევაში</string>
-  <string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
+  <string name="continue_follow_previous_route_auto">წინა გზა არ დასრულებულა. გნებავთ მიდი გაყოლა? (%1$s წმ)</string>
 </resources>
