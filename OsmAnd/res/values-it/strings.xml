@@ -879,5 +879,5 @@
   <string name="use_compass_navigation_descr">Usa la bussola quando la direzione non è individuata</string>
   <string name="use_compass_navigation">Usa la bussola</string>
   <string name="route_updated_loc_found">Il percorso verrà ricalcolato quando verrà individuata la posizione</string>
-  <string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
+  <string name="continue_follow_previous_route_auto">La precedente navigazione non è stata terminata. Continuare a seguirla? (%1$s secondi)</string>
 </resources>
