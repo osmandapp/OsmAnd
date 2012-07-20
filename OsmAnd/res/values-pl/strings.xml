@@ -877,5 +877,5 @@
   <string name="use_compass_navigation_descr">Użyj kompasu w nawigacji kiedy kierunek nie jest wykryty</string>
   <string name="use_compass_navigation">Użyj kompasu</string>
   <string name="route_updated_loc_found">Trasa będzie przeliczona kiedy lokalizacja zostanie odnaleziona.</string>
-  <string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
+  <string name="continue_follow_previous_route_auto">Poprzednia trasa nie została ukończona, kontynuować ją? (%1$s sekund)</string>
 </resources>
