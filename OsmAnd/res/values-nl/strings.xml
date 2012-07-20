@@ -887,5 +887,5 @@
   <string name="use_compass_navigation_descr">Gebruik het kompas bij navigatie als de richting niet gedetecteerd is</string>
   <string name="use_compass_navigation">Gebruik kompas</string>
   <string name="route_updated_loc_found">Route wordt herberekend als de locatie gevonden is</string>
-  <string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
+  <string name="continue_follow_previous_route_auto">Vorige navigatie was nog niet klaar. Nu daarmee doorgaan? (%1$s seconden)</string>
 </resources>
