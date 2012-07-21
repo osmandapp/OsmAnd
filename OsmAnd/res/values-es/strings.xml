@@ -352,8 +352,8 @@
   <string name="show_point_options">Opciones de localización</string>
   <string name="renderer_load_sucess">Se cargó la visualización</string>
   <string name="renderer_load_exception">Error: No se cargó la visualización</string>
-  <string name="renderers">Vector de visualización</string>
-  <string name="renderers_descr">Elegir apariencia de visualización</string>
+  <string name="renderers">Visualización de vectores</string>
+  <string name="renderers_descr">Elige apariencia de visualización de mapas vectoriales</string>
   <string name="poi_context_menu_website">Mostrar sitio web del PDI</string>
   <string name="poi_context_menu_call">Mostrar teléfono del PDI</string>
   <string name="website">sitio web</string>
@@ -384,7 +384,7 @@
   <string name="rotate_map_compass_opt">A la brújula</string>
   <string name="rotate_map_bearing_opt">En dirección al movimiento</string>
   <string name="rotate_map_none_opt">No rotar</string>
-  <string name="rotate_map_to_bearing_descr">Seleccionar alineación del mapa</string>
+  <string name="rotate_map_to_bearing_descr">Selecciona alineación del mapa</string>
   <string name="rotate_map_to_bearing">Orientación del mapa</string>
   <string name="show_route">Detalle de la ruta</string>
   <string name="fav_imported_sucessfully">Favoritos importados correctamente</string>
@@ -837,7 +837,7 @@
   <string name="route_kr">Manténgase a la derecha y continúe</string>
   <string name="save_route_as_gpx">Guardar ruta como fichero GPX</string>
   <string name="asap">En cuanto puedas</string>
-  <string name="tip_recent_changes_0_8_1_t">"Changes in 0.8.1 : * Recálculo inteligente y rápido de la ruta * Rutas más precisas (algo más lento) * Direcciones por carril * Información sobre radares y limites de velocidad * Mejoras en la guía por voz en autopistas * Plugin de parking * Activar/Desactivar widget de monitorización"</string>
+  <string name="tip_recent_changes_0_8_1_t">"Changes in 0.8.1 :\n\t* Rutas más precisas (algo más lento)\n\t* Recálculo inteligente y rápido de la ruta\n\t* Direcciones por carriles\n\t* Información sobre radares y limites de velocidad\n\t* Mejoras en la guía por voz en autopistas\n\t* Plugin de parking (¿Dónde está aparcado mi coche?)\n\t* Activar/Desactivar mecanismo de monitorización"</string>
   <string name="gpxup_public">Público</string>
   <string name="gpxup_identifiable">Identificable</string>
   <string name="gpxup_trackable">Trazable</string>
@@ -870,8 +870,8 @@
   <string name="global_app_allocated_memory">Memoria asignada</string>
   <string name="native_app_allocated_memory_descr">Memoria nativa total usada por la app %1$s MB (Dalvik %2$s MB, otros %3$s MB). Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
   <string name="native_app_allocated_memory">Memoria nativa total</string>
-  <string name="monitoring_info_control">Control Info</string>
-  <string name="monitoring_info_control_desc">Mostrar estado de monitorización en el panel de info</string>
+  <string name="monitoring_info_control">Mostrar botón de registro</string>
+  <string name="monitoring_info_control_desc">Muestra el botón de registro en la pantalla del mapa</string>
   <string name="select_animate_speedup">Seleccionar aceleración de ruta animada</string>
   <string name="osmand_parking_hours">Horas</string>
   <string name="osmand_parking_minutes">Minutos</string>
