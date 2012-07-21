@@ -534,6 +534,7 @@ public class RoutingHelper {
 			RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, gpxRoute, previousRoute, fastRoute, 
 					leftSide, this);
 			if (interrupted) {
+				currentRunningJob = null;
 				return;
 			}
 			
