@@ -405,7 +405,7 @@ public class BinaryRoutePlanner {
 			double priority = ctx.getRouter().getFutureRoadPriority(next.road);
 			result /= priority;
 			int dist = ctx.getDynamicRoadPriorityDistance();
-			// only firts 500 m count by dynamic priority
+			// only first N km-s count by dynamic priority
 			if(distToFinalPoint > dist && dist != 0){
 				result = (distToFinalPoint - dist) / ctx.getRouter().getMaxDefaultSpeed() + 
 						dist / (ctx.getRouter().getMaxDefaultSpeed() * priority);

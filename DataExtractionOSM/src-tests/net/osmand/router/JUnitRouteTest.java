@@ -70,6 +70,11 @@ public class JUnitRouteTest  {
 		RouterTestsSuite.test(lib, getClass().getResourceAsStream("nl_leid.test.xml"), rs, RoutingConfiguration.getDefault());
 	}
 	
+	@Test
+	public void runNLLong() throws SAXException, IOException, ParserConfigurationException {
+		RouterTestsSuite.test(lib, getClass().getResourceAsStream("nl_long.test.xml"), rs, RoutingConfiguration.getDefault());
+	}
+	
 	
 	
 	@Test
