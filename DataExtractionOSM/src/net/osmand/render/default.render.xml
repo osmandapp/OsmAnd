@@ -1212,13 +1212,6 @@
 				<filter hmRendered="true" minzoom="13" strokeWidth="1" />
 				<filter minzoom="14" strokeWidth="1" />
 			</filter>
-			
-			<filter tag="cycleway" value="lane">
-				<filter appMode="bicycle" minzoom="14" color="#0000ff" strokeWidth="2" pathEffect="8_4" />
-			</filter>
-			<filter tag="cycleway" value="opposite_lane">
-				<filter appMode="bicycle" minzoom="14" color="#0000ff" strokeWidth="2" pathEffect="8_4" />
-			</filter>
 
 			<filter tag="highway" value="footway" color="#fa5073" pathEffect="2_2" >
 				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2" pathEffect="10_3"/>
@@ -1254,6 +1247,13 @@
 				<filter minzoom="14" color__1="#000000" strokeWidth__1="6.5" pathEffect__1="3_3" color_0="#ffffff" strokeWidth_0="5"/>
 			</groupFilter>
 		</group>
+
+		<filter tag="cycleway" value="lane">
+			<filter appMode="bicycle" minzoom="14" color="#0000ff" strokeWidth="2" pathEffect="8_4" />
+		</filter>
+		<filter tag="cycleway" value="opposite_lane">
+			<filter appMode="bicycle" minzoom="14" color="#0000ff" strokeWidth="2" pathEffect="8_4" />
+		</filter>
 
 		<filter tag="highway" value="services" minzoom="14" color="#000000" strokeWidth="2"/>
 
