@@ -129,7 +129,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 			listAdapter.delete(info);
 			return true;
 		} else if(itemId == R.id.uploadmods) {
-			List<OsmPoint> list = listAdapter.data.get(group);
+			List<OsmPoint> list = listAdapter.data.get(listAdapter.category.get(group));
 			if (list != null) {
 				toUpload = list.toArray(new OsmPoint[] {});
 				showDialog(DIALOG_PROGRESS_UPLOAD);
@@ -212,6 +212,10 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 					}
 					Node n;
 					if ((n = remotepoi.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo, p.getComment())) != null) {
+						if (point.getId() != n.getId()) {
+							//change all category points...
+							listAdapter.categoryIdChanged(point.getId(), n.getId());
+						}
 						remotepoi.updateNodeInIndexes(LocalOpenstreetmapActivity.this, p.getAction(), n, p.getEntity());
 						publishProgress(p);
 						uploaded++;
@@ -277,6 +281,20 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		public LocalOpenstreetmapAdapter() {
 		}
 		
+		public void categoryIdChanged(long oldID, long newID) {
+			int index = category.indexOf(oldID);
+			if (index != -1) {
+				category.set(index, newID);
+				List<OsmPoint> list = data.remove(oldID);
+				if (list != null) {
+					for (OsmPoint point : list) {
+						point.updateID(newID);
+					}
+					data.put(newID, list);
+				}
+			}
+		}
+
 		public void clear() {
 			data.clear();
 			category.clear();

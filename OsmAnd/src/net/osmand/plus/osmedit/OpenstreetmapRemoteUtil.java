@@ -363,7 +363,7 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 						i = i + "new_id=\"".length(); //$NON-NLS-1$
 						int end = res.indexOf("\"", i); //$NON-NLS-1$
 						if (end > 0) {
-							newId = Long.parseLong(res.substring(i, end));
+							newId = Long.parseLong(res.substring(i, end)); // << 1;
 							newN = new Node(n, newId);
 						}
 					}
@@ -379,7 +379,7 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 	}
 	
 	public EntityInfo loadNode(Node n) {
-		long nodeId = n.getId() >> 1;
+		long nodeId = n.getId(); // >> 1;
 		try {
 			String res = sendRequest(SITE_API + "api/0.6/node/"+nodeId, "GET", null, ctx.getString(R.string.loading_poi_obj) + nodeId, false); //$NON-NLS-1$ //$NON-NLS-2$
 			if(res != null){
