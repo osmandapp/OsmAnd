@@ -163,6 +163,8 @@ public class RoutingConfiguration {
 								currentRouter.maxDefaultSpeed);
 						currentRouter.leftTurn = parseSilentDouble(attributes.getValue("leftTurn"), 
 								currentRouter.leftTurn);
+						currentRouter.roundaboutTurn = parseSilentDouble(attributes.getValue("roundaboutTurn"), 
+								currentRouter.roundaboutTurn);
 						currentRouter.rightTurn = parseSilentDouble(attributes.getValue("rightTurn"), 
 								currentRouter.rightTurn);
 					} else if("highway".equals(name)) {

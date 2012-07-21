@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <router_tests>
-<test regions="" description="" best_percent="10" vehicle="car" 
+<test regions="" description="Route to Antwerpen" best_percent="10" vehicle="car" 
     start_lat="52.29344776082418" start_lon="4.834756851196289" target_lat="51.21717320613008" target_lon="4.402492046356201" complete_time="5690.9644" loadedTiles = "536" visitedSegments = "6868" complete_distance = "162843.0"  >
 	<segment id="7367192" start="1" end="0" time = "1.9570006" name = "" distance = "24.462507" turn = "Go ahead" start_bearing = "108.39158" end_bearing = "108.39158" description = "Go ahead and go 632.96 meters" />
 	<segment id="7367193" start="1" end="0" time = "11.17118" name = "Noorddammerlaan" distance = "139.63974" start_bearing = "109.70903" end_bearing = "109.70903" description = "" />

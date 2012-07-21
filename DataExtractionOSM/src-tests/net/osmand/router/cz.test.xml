@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <router_tests>
-<test regions="" description="" best_percent="10" vehicle="car" 
+<test regions="" description="Czech" best_percent="10" vehicle="car" 
 	    start_lat="50.07577452522076" start_lon="14.45427417755127" target_lat="49.120547036367746" target_lon="16.335017681121826" complete_time="7391.0835" loadedTiles = "195" visitedSegments = "3015" complete_distance = "195659.23"  >
 	<segment id="148483636" start="1" end="3" time = "7.144318" name = "" distance = "69.45865" turn = "Go ahead" turn_angle = "0.0" start_bearing = "-13.969152" end_bearing = "-15.124007" description = "Go ahead and go 69.46 meters" />
 	<segment id="126236317" start="14" end="17" time = "10.751638" name = "Slezská" distance = "104.529816" turn = "Turn left" turn_angle = "-79.51145" start_bearing = "-94.63546" end_bearing = "-94.76364" description = "Turn left and go 104.53 meters" />

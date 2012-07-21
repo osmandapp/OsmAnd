@@ -214,8 +214,8 @@ public class BinaryRoutePlanner {
 		if (runRecalculation) {
 			RouteSegment previous = null;
 			List<RouteSegmentResult> rlist = new ArrayList<RouteSegmentResult>();
-			// always recalculate first 2.5 km
-			int distanceThreshold = 2500;
+			// always recalculate first 7 km
+			int distanceThreshold = 7000;
 			float threshold = 0;
 			for(RouteSegmentResult rr : ctx.previouslyCalculatedRoute) {
 				threshold += rr.getDistance();

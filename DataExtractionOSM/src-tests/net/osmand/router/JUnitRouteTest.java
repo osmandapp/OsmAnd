@@ -65,6 +65,11 @@ public class JUnitRouteTest  {
 		RouterTestsSuite.test(lib, getClass().getResourceAsStream("nl2.test.xml"), rs, RoutingConfiguration.getDefault());
 	}
 	
+	@Test
+	public void runNLLeid() throws SAXException, IOException, ParserConfigurationException {
+		RouterTestsSuite.test(lib, getClass().getResourceAsStream("nl_leid.test.xml"), rs, RoutingConfiguration.getDefault());
+	}
+	
 	
 	
 	@Test
