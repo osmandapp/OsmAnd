@@ -879,5 +879,5 @@
   <string name="use_compass_navigation_descr">Iránytű használata navigáláshoz, ha az irány nem érzékelhető</string>
   <string name="use_compass_navigation">Iránytű használata</string>
   <string name="route_updated_loc_found">"Amint megvan a pozíció, az útvonal újra lesz számítva"</string>
-  <string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
+  <string name="continue_follow_previous_route_auto">Az előző útvonal navigáció még nem ért véget. Folytassuk? (%1$s másodperc)</string>
 </resources>
