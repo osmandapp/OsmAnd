@@ -71,16 +71,13 @@ public class GPXLayer extends OsmandMapLayer {
 			for (int i = 0; i < l.size(); i++) {
 				WptPt ls = l.get(i);
 				if (startIndex == -1) {
-					if (ls.lat >= latLonBounds.bottom && ls.lat <= latLonBounds.top  && ls.lon >= latLonBounds.left 
-							&& ls.lon <= latLonBounds.right ) {
+					if (ls.lat >= latLonBounds.bottom - 0.1 && ls.lat <= latLonBounds.top + 0.1  && ls.lon >= latLonBounds.left - 0.1 
+							&& ls.lon <= latLonBounds.right + 0.1) {
 						startIndex = i > 0 ? i - 1 : i;
 					}
-				} else if (!(latLonBounds.left <= ls.lon + 0.03 && ls.lon - 0.03 <= latLonBounds.right
-						&& latLonBounds.bottom <= ls.lat + 0.03 && ls.lat - 0.03 <= latLonBounds.top)) {
+				} else if (!(latLonBounds.left <= ls.lon + 0.1 && ls.lon - 0.1 <= latLonBounds.right
+						&& latLonBounds.bottom <= ls.lat + 0.1 && ls.lat - 0.1 <= latLonBounds.top)) {
 					drawSegment(canvas, l, startIndex, i);
-					// do not continue make method more efficient (because it calls in UI thread)
-					// this break also has logical sense !
-					// break;
 					startIndex = -1;
 				}
 			}
