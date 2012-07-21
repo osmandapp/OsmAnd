@@ -34,8 +34,9 @@ public class RoutingContext {
 	private int garbageCollectorIteration = 0;
 	private int relaxingIteration = 0;
 	public long firstRoadId = 0;
-	public int firstRoadDirection = 0;;
+	public int firstRoadDirection = 0;
 	
+	public Interruptable interruptable;
 	public List<RouteSegmentResult> previouslyCalculatedRoute;
 	
 

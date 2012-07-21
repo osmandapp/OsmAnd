@@ -308,6 +308,10 @@ public class BinaryRoutePlanner {
 				relaxNotNeededSegments(ctx, graphDirectSegments, true);
 				relaxNotNeededSegments(ctx, graphReverseSegments, false);
 			}
+			// check if interrupted
+			if(ctx.interruptable != null && ctx.interruptable.isCancelled()) {
+				return new ArrayList<RouteSegmentResult>();
+			}
 		}
 		println("Result is found");
 		

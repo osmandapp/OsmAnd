@@ -18,6 +18,7 @@ import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.voice.CommandPlayer;
+import net.osmand.router.Interruptable;
 import android.content.Context;
 import android.location.Location;
 import android.os.Handler;
@@ -48,7 +49,7 @@ public class RoutingHelper {
 	
 	private LatLon finalLocation;
 	private Location lastFixedLocation;
-	private Thread currentRunningJob;
+	private RouteRecalculationThread currentRunningJob;
 	private long lastTimeEvaluatedRoute = 0;
 	private int evalWaitInterval = 3000;
 	
@@ -108,6 +109,9 @@ public class RoutingHelper {
 			}
 		});
 		this.finalLocation = newFinalLocation;
+		if(currentRunningJob != null) {
+			currentRunningJob.stopCalculation();
+		}
 		if (newFinalLocation == null) {
 			settings.FOLLOW_THE_ROUTE.set(false);
 			settings.FOLLOW_THE_GPX_ROUTE.set(null);
@@ -494,56 +498,88 @@ public class RoutingHelper {
 	
 	
 	
+	private class RouteRecalculationThread extends Thread implements Interruptable {
+		
+		private final Location start;
+		private final LatLon end;
+		private final GPXRouteParams gpxRoute;
+		private final RouteCalculationResult previousRoute;
+		private RouteService service;
+		private boolean fastRoute;
+		private boolean interrupted = false;
+
+		public RouteRecalculationThread(String name, 
+				Location start, LatLon end, GPXRouteParams gpxRoute, RouteCalculationResult previousRoute){
+			super(name);
+			this.start = start;
+			this.end = end;
+			this.gpxRoute = gpxRoute;
+			this.previousRoute = previousRoute;
+			service = settings.ROUTER_SERVICE.get();
+			fastRoute = settings.FAST_ROUTE_MODE.get();
+		}
+		
+		public void stopCalculation(){
+			interrupted = true;
+		}
+		
+		@Override
+		public boolean isCancelled() {
+			return interrupted;
+		}
+		
+		@Override
+		public void run() {
+			boolean leftSide = settings.LEFT_SIDE_NAVIGATION.get();
+			RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, gpxRoute, previousRoute, fastRoute, 
+					leftSide, this);
+			if (interrupted) {
+				return;
+			}
+			
+			synchronized (RoutingHelper.this) {
+				if (res.isCalculated()) {
+					setNewRoute(res, start);
+				} else {
+					evalWaitInterval = evalWaitInterval * 3 / 2;
+					evalWaitInterval = Math.min(evalWaitInterval, 120000);
+				}
+				currentRunningJob = null;
+			}
+
+			if (res.isCalculated()) {
+				showMessage(context.getString(R.string.new_route_calculated_dist)
+						+ ": " + OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), context)); //$NON-NLS-1$
+			} else if (service != RouteService.OSMAND && !settings.isInternetConnectionAvailable()) {
+					showMessage(context.getString(R.string.error_calculating_route)
+						+ ":\n" + context.getString(R.string.internet_connection_required_for_online_route), Toast.LENGTH_LONG); //$NON-NLS-1$
+			} else {
+				if (res.getErrorMessage() != null) {
+					showMessage(context.getString(R.string.error_calculating_route) + ":\n" + res.getErrorMessage(), Toast.LENGTH_LONG); //$NON-NLS-1$
+				} else {
+					showMessage(context.getString(R.string.empty_route_calculated), Toast.LENGTH_LONG);
+				}
+			}
+			lastTimeEvaluatedRoute = System.currentTimeMillis();
+		}
+		
+	}
+	
 	private void recalculateRouteInBackground(final Location start, final LatLon end, final GPXRouteParams gpxRoute, final RouteCalculationResult previousRoute){
 		if (start == null || end == null) {
 			return;
 		}
-		
-		RouteService serviceToUse = settings.ROUTER_SERVICE.get();
-		final RouteService service = serviceToUse;
-		
 		if(currentRunningJob == null){
 			// do not evaluate very often
 			if (System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval) {
-				final boolean fastRouteMode = settings.FAST_ROUTE_MODE.get();
 				synchronized (this) {
-					currentRunningJob = new Thread(new Runnable() {
-						@Override
-						public void run() {
-							boolean leftSide = settings.LEFT_SIDE_NAVIGATION.get();
-							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, gpxRoute, previousRoute, fastRouteMode, 
-									leftSide);
-							synchronized (RoutingHelper.this) {
-								if (res.isCalculated()) {
-									setNewRoute(res, start);
-								} else {
-									evalWaitInterval = evalWaitInterval * 3 / 2;
-									evalWaitInterval = Math.min(evalWaitInterval, 120000);
-								}
-								currentRunningJob = null;
-							}
-
-							if (res.isCalculated()) {
-								showMessage(context.getString(R.string.new_route_calculated_dist)
-										+ ": " + OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), context)); //$NON-NLS-1$
-							} else if (service != RouteService.OSMAND && !settings.isInternetConnectionAvailable()) {
-									showMessage(context.getString(R.string.error_calculating_route)
-										+ ":\n" + context.getString(R.string.internet_connection_required_for_online_route), Toast.LENGTH_LONG); //$NON-NLS-1$
-							} else {
-								if (res.getErrorMessage() != null) {
-									showMessage(context.getString(R.string.error_calculating_route) + ":\n" + res.getErrorMessage(), Toast.LENGTH_LONG); //$NON-NLS-1$
-								} else {
-									showMessage(context.getString(R.string.empty_route_calculated), Toast.LENGTH_LONG);
-								}
-							}
-							lastTimeEvaluatedRoute = System.currentTimeMillis();
-						}
-					}, "Calculating route"); //$NON-NLS-1$
+					currentRunningJob = new RouteRecalculationThread("Calculating route", start, end, gpxRoute, previousRoute); //$NON-NLS-1$
 					currentRunningJob.start();
 				}
 			}
 		}
 	}
+	
 	
 	public boolean isRouteBeingCalculated(){
 		return currentRunningJob != null;
