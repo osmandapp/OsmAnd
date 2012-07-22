@@ -33,6 +33,7 @@ public class ExpandableButton extends Button {
 	
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		if(maxWidth >0){
 		if(MeasureSpec.getMode(widthMeasureSpec) == MeasureSpec.UNSPECIFIED) {
 			widthMeasureSpec = MeasureSpec.makeMeasureSpec((int) maxWidth, MeasureSpec.AT_MOST);
 		} else  if(MeasureSpec.getMode(widthMeasureSpec) == MeasureSpec.AT_MOST && (MeasureSpec.getSize(widthMeasureSpec)) > maxWidth){
@@ -40,10 +41,8 @@ public class ExpandableButton extends Button {
 		} else  if(MeasureSpec.getMode(widthMeasureSpec) == MeasureSpec.EXACTLY && (MeasureSpec.getSize(widthMeasureSpec)) > maxWidth){
 			widthMeasureSpec = MeasureSpec.makeMeasureSpec((int) maxWidth, MeasureSpec.EXACTLY);
 		}
+		}
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-//		if(maxWidth != 0 && getMeasuredWidth() > maxWidth) {
-//			setMeasuredDimension((int) maxWidth, getMeasuredHeight());
-//		}
 	}
 
 }
