@@ -66,6 +66,7 @@ public class BinaryRoutePlanner {
 		double dy = convert31YToMeters(y1, y2);
 		double dx = convert31XToMeters(x1, x2);
 		return Math.sqrt(dx * dx + dy * dy);
+//		return measuredDist(x1, y1, x2, y2);
 	}
 	
 	private static double measuredDist(int x1, int y1, int x2, int y2) {
@@ -462,8 +463,6 @@ public class BinaryRoutePlanner {
 		// Middle point will always be skipped from observation considering already visited
 		final RouteDataObject road = segment.road;
 		final int middle = segment.segmentStart;
-		int middlex = road.getPoint31XTile(middle);
-		int middley = road.getPoint31YTile(middle);
 		double obstaclePlusTime = 0;
 		double obstacleMinusTime = 0;
 
@@ -500,10 +499,13 @@ public class BinaryRoutePlanner {
 		}
 		// Go through all point of the way and find ways to continue
 		// ! Actually there is small bug when there is restriction to move forward on way (it doesn't take into account)
+		double posSegmentDist = 0;
+		double negSegmentDist = 0;
 		while (minusAllowed || plusAllowed) {
 			// 1. calculate point not equal to middle
 			// (algorithm should visit all point on way if it is not oneway)
 			int segmentEnd = middle + d;
+			boolean positive = d > 0;
 			if (!minusAllowed && d > 0) {
 				d++;
 			} else if (!plusAllowed && d < 0) {
@@ -523,7 +525,6 @@ public class BinaryRoutePlanner {
 				plusAllowed = false;
 				continue;
 			}
-
 			// if we found end point break cycle
 			long nts = (road.getId() << ROUTE_POINTS) + segmentEnd;
 			visitedSegments.put(nts, segment);
@@ -532,16 +533,23 @@ public class BinaryRoutePlanner {
 			int x = road.getPoint31XTile(segmentEnd);
 			int y = road.getPoint31YTile(segmentEnd);
 			RoutingTile tile = loadRoutes(ctx, x, y);
+			if(positive) {
+				posSegmentDist += squareRootDist(x, y, 
+						road.getPoint31XTile(segmentEnd - 1), road.getPoint31YTile(segmentEnd - 1));
+			} else {
+				negSegmentDist += squareRootDist(x, y, 
+						road.getPoint31XTile(segmentEnd + 1), road.getPoint31YTile(segmentEnd + 1));
+			}
 			
 			// 2.1 calculate possible obstacle plus time
-			if(segmentEnd > middle){
+			if(positive){
 				double obstacle = ctx.getRouter().defineObstacle(road, segmentEnd);
 				if(obstacle < 0){
 					plusAllowed = false;
 					continue;
 				}
 				obstaclePlusTime +=  obstacle;
-			} else if(segmentEnd < middle) {
+			} else {
 				double obstacle = ctx.getRouter().defineObstacle(road, segmentEnd);
 				if(obstacle < 0){
 					minusAllowed = false;
@@ -562,18 +570,17 @@ public class BinaryRoutePlanner {
 				}
 				// Using A* routing algorithm
 				// g(x) - calculate distance to that point and calculate time
-				double distOnRoadToPass = squareRootDist(x, y, middlex, middley);
+				
 				double priority = ctx.getRouter().defineSpeedPriority(road);
 				double speed = ctx.getRouter().defineSpeed(road) * priority;
 				if (speed == 0) {
 					speed = ctx.getRouter().getMinDefaultSpeed() * priority;
 				}
-				
-				double distStartObstacles = segment.distanceFromStart + ( segmentEnd > middle? obstaclePlusTime : obstacleMinusTime) +
+				double distOnRoadToPass = positive? posSegmentDist : negSegmentDist;
+				double distStartObstacles = segment.distanceFromStart + ( positive ? obstaclePlusTime : obstacleMinusTime) +
 						 distOnRoadToPass / speed;
 				
 				double distToFinalPoint = squareRootDist(x, y, targetEndX, targetEndY);
-				
 				boolean routeFound = processIntersections(ctx, graphSegments, visitedSegments, oppositeSegments,
 						distStartObstacles, distToFinalPoint, segment, segmentEnd, next, reverseWaySearch);
 				if(routeFound){

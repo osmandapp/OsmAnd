@@ -41,11 +41,11 @@
 	<!-- obstacle tag="highway" value="traffic_signals" penalty="35", penalty measured in seconds -->
 	<routingProfile name="car" baseProfile="car" restrictionsAware="true" minDefaultSpeed="45.0" maxDefaultSpeed="110.0" 
 			leftTurn="20" rightTurn="15" roundaboutTurn="20" followSpeedLimitations="true" onewayAware="true">
-		<highway value="motorway" speed="110" priority="1.4" dynamicPriority="1.2"/>
-		<highway value="motorway_link" speed="80" priority="1.2" dynamicPriority="1.2"/>
+		<highway value="motorway" speed="110" priority="1.2" dynamicPriority="1"/>
+		<highway value="motorway_link" speed="80" priority="1.2" dynamicPriority="1"/>
 		
-		<highway value="trunk" speed="100" priority="1.2" dynamicPriority="1.2"/>
-		<highway value="trunk_link" speed="75" priority="1.2" dynamicPriority="1.2"/>
+		<highway value="trunk" speed="100" priority="1.2" dynamicPriority="1"/>
+		<highway value="trunk_link" speed="75" priority="1.2" dynamicPriority="1"/>
 		
 		<!-- generally linking larger towns. -->
 		<highway value="primary" speed="65" priority="1.1" dynamicPriority="1"/>

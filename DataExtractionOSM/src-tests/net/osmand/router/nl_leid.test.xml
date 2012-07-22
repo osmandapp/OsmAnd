@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <router_tests>
 <test regions="" description="Amstelveen-Leiden" best_percent="5" vehicle="car" 
-    start_lat="52.291026337270445" start_lon="4.848833084106445" target_lat="52.16400849542039" target_lon="4.478881359100342" complete_time="1845.3511" loadedTiles = "30" visitedSegments = "2028" complete_distance = "41643.367"  >
-	<segment id="48102635" start="9" end="0" time = "22.837849" name = "" distance = "317.19235" turn = "Go ahead" turn_angle = "0.0" start_bearing = "99.7888" end_bearing = "91.18731" description = "Go ahead and go 396.37 meters" />
-	<segment id="7364759" start="0" end="3" time = "34.963142" name = "Sportlaan" distance = "68.932526" start_bearing = "96.78305" end_bearing = "90.0" description = "" />
-	<segment id="48102640" start="0" end="1" time = "0.73741114" name = "Sportlaan" distance = "10.241822" start_bearing = "85.3141" end_bearing = "85.3141" description = "" />
-	<segment id="7364479" start="0" end="4" time = "6.5391197" name = "Van der Hooplaan" distance = "90.82111" turn = "Turn left" turn_angle = "-90.62865" start_bearing = "-5.3145456" end_bearing = "-9.299242" description = "Turn left and go 1083.97 meters" />
-	<segment id="48101493" start="0" end="5" time = "9.828502" name = "Van der Hooplaan" distance = "136.50697" start_bearing = "1.7357045" end_bearing = "1.7899106" description = "" />
-	<segment id="48148915" start="0" end="3" time = "3.348386" name = "Van der Hooplaan" distance = "46.505363" start_bearing = "10.491477" end_bearing = "-2.9356735" description = "" />
-	<segment id="48151127" start="0" end="1" time = "0.7880309" name = "Van der Hooplaan" distance = "10.944875" start_bearing = "-0.0" end_bearing = "0.0" description = "" />
-	<segment id="48148910" start="0" end="2" time = "3.1176965" name = "Van der Hooplaan" distance = "43.301342" start_bearing = "-2.0454085" end_bearing = "-6.340192" description = "" />
-	<segment id="48148907" start="0" end="6" time = "57.12507" name = "Van der Hooplaan" distance = "376.7371" start_bearing = "1.1503631" end_bearing = "2.6324348" description = "" />
-	<segment id="47633925" start="0" end="8" time = "12.109869" name = "Van der Hooplaan" distance = "168.19263" start_bearing = "5.710593" end_bearing = "-9.36019" description = "" />
-	<segment id="48147993" start="0" end="4" time = "4.651856" name = "Van der Hooplaan" distance = "64.609116" start_bearing = "3.865461" end_bearing = "-1.0609117" description = "" />
+    start_lat="52.291026337270445" start_lon="4.848833084106445" target_lat="52.16400849542039" target_lon="4.478881359100342" complete_time="1870.644" loadedTiles = "38" visitedSegments = "2028" complete_distance = "41994.66"  >
+	<segment id="48102635" start="9" end="17" time = "26.337616" name = "" distance = "365.80023" turn = "Go ahead" turn_angle = "0.0" start_bearing = "-80.22256" end_bearing = "-79.69515" description = "Go ahead and go 365.80 meters" />
+	<segment id="7364781" start="0" end="6" time = "69.496864" name = "Handweg" distance = "548.56757" turn = "Turn right" turn_angle = "87.82526" start_bearing = "8.130102" end_bearing = "9.901572" description = "Turn right and go 548.57 meters" />
+	<segment id="7364782" start="1" end="0" time = "31.062386" name = "Keizer Karelweg" distance = "14.755359" turn = "Turn right" turn_angle = "89.328316" start_bearing = "99.22989" end_bearing = "99.22989" description = "Turn right and go 917.26 meters" />
+	<segment id="7364779" start="0" end="5" time = "13.558414" name = "Keizer Karelweg" distance = "188.31131" start_bearing = "96.254036" end_bearing = "66.169136" description = "" />
+	<segment id="7364775" start="1" end="0" time = "4.9813266" name = "Keizer Karelweg" distance = "69.18509" start_bearing = "62.372807" end_bearing = "62.372807" description = "" />
+	<segment id="7364776" start="0" end="1" time = "4.9812937" name = "Keizer Karelweg" distance = "69.18464" start_bearing = "62.334564" end_bearing = "62.334564" description = "" />
+	<segment id="7364778" start="0" end="1" time = "3.806921" name = "Keizer Karelweg" distance = "52.873905" start_bearing = "62.48443" end_bearing = "62.48443" description = "" />
+	<segment id="7364787" start="0" end="1" time = "0.5657692" name = "Keizer Karelweg" distance = "7.8579054" start_bearing = "65.897766" end_bearing = "65.897766" description = "" />
+	<segment id="7364771" start="0" end="1" time = "1.5512005" name = "Keizer Karelweg" distance = "21.544453" start_bearing = "61.50436" end_bearing = "61.50436" description = "" />
+	<segment id="58661684" start="0" end="1" time = "0.6126022" name = "Keizer Karelweg" distance = "8.508364" start_bearing = "61.189205" end_bearing = "61.189205" description = "" />
+	<segment id="7364071" start="0" end="1" time = "4.6289053" name = "Keizer Karelweg" distance = "64.29035" start_bearing = "62.34026" end_bearing = "62.34026" description = "" />
+	<segment id="7364489" start="0" end="1" time = "3.0778131" name = "Keizer Karelweg" distance = "42.747406" start_bearing = "62.333244" end_bearing = "62.333244" description = "" />
+	<segment id="7364488" start="0" end="1" time = "0.8222186" name = "Keizer Karelweg" distance = "11.4197035" start_bearing = "62.19854" end_bearing = "62.19854" description = "" />
+	<segment id="7364487" start="0" end="1" time = "3.6412437" name = "Keizer Karelweg" distance = "50.57283" start_bearing = "63.893307" end_bearing = "63.893307" description = "" />
+	<segment id="7364482" start="0" end="1" time = "2.4905744" name = "Keizer Karelweg" distance = "34.59131" start_bearing = "61.38954" end_bearing = "61.38954" description = "" />
+	<segment id="7364483" start="0" end="1" time = "2.506028" name = "Keizer Karelweg" distance = "34.805946" start_bearing = "57.228592" end_bearing = "57.228592" description = "" />
+	<segment id="48147997" start="0" end="2" time = "2.944532" name = "Keizer Karelweg" distance = "40.89628" start_bearing = "57.707115" end_bearing = "51.679886" description = "" />
+	<segment id="7364498" start="0" end="2" time = "3.2543092" name = "Keizer Karelweg" distance = "45.198742" start_bearing = "52.460567" end_bearing = "70.857735" description = "" />
+	<segment id="7364496" start="0" end="1" time = "1.0199182" name = "Keizer Karelweg" distance = "14.165531" start_bearing = "53.746162" end_bearing = "53.746162" description = "" />
 	<segment id="58384522" start="0" end="4" time = "35.041615" name = "Keizer Karelweg" distance = "70.02242" start_bearing = "9.050722" end_bearing = "19.798876" description = "" />
 	<segment id="7364485" start="0" end="2" time = "5.4958763" name = "Keizer Karelweg" distance = "76.33162" start_bearing = "28.694904" end_bearing = "18.610165" description = "" />
 	<segment id="7365615" start="0" end="3" time = "7.2419686" name = "Keizer Karelweg" distance = "100.5829" turn = "Keep left" turn_angle = "-2.6131277" start_bearing = "15.997037" end_bearing = "11.788183" description = "Keep left and go 165.64 meters" />
@@ -127,6 +135,6 @@
 	<segment id="144375594" start="0" end="10" time = "26.690458" name = "Plesmanlaan" distance = "370.70084" start_bearing = "77.686935" end_bearing = "118.15619" description = "" />
 	<segment id="7450989" start="0" end="2" time = "30.502869" name = "Schipholweg" distance = "9.079578" start_bearing = "80.21759" end_bearing = "73.73979" description = "" />
 	<segment id="149555300" start="6" end="9" time = "31.771402" name = "Morsweg" distance = "22.142519" turn = "Make uturn" turn_angle = "-135.12933" start_bearing = "-61.38954" end_bearing = "-38.884495" description = "Make uturn and go 104.33 meters" />
-	<segment id="7452288" start="0" end="2" time = "5.917617" name = "" distance = "82.189125" start_bearing = "-62.281498" end_bearing = "-69.78361" description = "" />
+	<segment id="7452288" start="0" end="2" time = "5.917617" name = "" distance = "82.189125" start_bearing = "-62.281498" end_bearing = "-69.78357" description = "" />
 </test>
 </router_tests>
