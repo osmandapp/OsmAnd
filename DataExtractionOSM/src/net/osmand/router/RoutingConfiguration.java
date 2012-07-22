@@ -16,6 +16,9 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class RoutingConfiguration {
+	//minimum free heap to continue routing
+	public long MINIMUM_FREE_HEAP = Math.round(4.5 * 1024 * 1024);
+
 	// 1. parameters of routing and different tweaks
 	// Influence on A* : f(x) + heuristicCoefficient*g(X)
 	public double heuristicCoefficient = 1;

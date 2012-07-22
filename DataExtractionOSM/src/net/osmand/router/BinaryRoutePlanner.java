@@ -275,12 +275,27 @@ public class BinaryRoutePlanner {
 				relaxNotNeededSegments(ctx, graphDirectSegments, true);
 				relaxNotNeededSegments(ctx, graphReverseSegments, false);
 			}
+//			if(ctx.dangerForOutOfMemory()){
+//				throwRuntimeExceptionOnLowHeap(ctx);
+//			}
 		}
 		printDebugMemoryInformation(ctx, graphDirectSegments, graphReverseSegments, visitedDirectSegments, visitedOppositeSegments);
 		
 		// 4. Route is found : collect all segments and prepare result
 		return prepareResult(ctx, start, end, leftSideNavigation);
 		
+	}
+
+
+	private void throwRuntimeExceptionOnLowHeap(final RoutingContext ctx)
+			throws RuntimeException {
+		long freeMem = Runtime.getRuntime().freeMemory();
+		log.error(String.format("Heap below threshold: %d kB free, %d kB is minimum", freeMem /1024, ctx.config.MINIMUM_FREE_HEAP/1024));
+		Iterator<RoutingTile> it = ctx.tiles.valueCollection().iterator();
+		while (it.hasNext()) {
+			ctx.unloadTile(it.next(), true);
+		}
+		throw new RuntimeException(String.format("Heap below threshold: %d", freeMem));
 	}
 	
 	private void unloadUnusedTiles(RoutingContext ctx, int desirableSize) {
@@ -456,6 +471,12 @@ public class BinaryRoutePlanner {
 			}
 			return;
 		}
+
+		if(ctx.dangerForOutOfMemory())
+		{
+			throwRuntimeExceptionOnLowHeap(ctx);
+		}
+		
 		long now = System.nanoTime();
 		ResultMatcher<RouteDataObject> matcher = new ResultMatcher<RouteDataObject>() {
 			@Override

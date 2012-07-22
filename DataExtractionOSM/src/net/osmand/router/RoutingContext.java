@@ -86,6 +86,12 @@ public class RoutingContext {
 		return false;
 	}
 	
+	public boolean dangerForOutOfMemory(){
+		long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+		long freeMemory = Runtime.getRuntime().maxMemory() - usedMemory;
+		return (freeMemory < config.MINIMUM_FREE_HEAP);
+	}
+	
 	public boolean runRelaxingStrategy(){
 		if(!isUseRelaxingStrategy()){
 			return false;
