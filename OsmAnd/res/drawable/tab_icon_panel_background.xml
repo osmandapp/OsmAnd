@@ -7,5 +7,4 @@
     <item>
         <bitmap android:src="@drawable/tab_icon_panel_pushed_line" />
     </item>
-
 </layer-list>

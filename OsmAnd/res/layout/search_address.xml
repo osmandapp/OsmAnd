@@ -1,58 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:custom="http://schemas.android.com/apk/res/net.osmand.plus"
+    xmlns:custom2="http://schemas.android.com/apk/res/net.osmand.views"
 			android:layout_width="fill_parent" android:layout_height="fill_parent">
 <LinearLayout
   android:layout_width="fill_parent"
   android:layout_height="fill_parent" android:orientation="vertical">
   
    
-<TextView android:id="@+id/TextView" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center_horizontal"
+<TextView android:id="@+id/TopTextView" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center_horizontal"
 		  android:layout_marginTop = "5dp" android:text="@string/search_address_top_text">
 </TextView>
 
-
-<TableLayout android:id="@+id/TableLayout" android:stretchColumns="1" android:layout_width="fill_parent" android:layout_height="wrap_content">
+<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_horizontal">
+<TableLayout android:id="@+id/TableLayout" android:layout_width="fill_parent" android:stretchColumns="1" android:layout_height="wrap_content" android:gravity="center_horizontal">
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp">
 <TextView android:id="@+id/TextView" android:text="@string/search_address_region">
 </TextView>
-<Button android:id="@+id/CountryButton" android:text="@string/ChooseCountry">
-</Button>
+<net.osmand.view.ExpandableButton android:id="@+id/CountryButton" android:text="@string/ChooseCountry" custom:maxVisibleWidth="500dp"/>
 <ImageButton android:id="@+id/ResetCountry" android:layout_marginRight = "5dp" android:background="@drawable/reset" android:contentDescription="@string/default_buttons_reset">
 </ImageButton>
 </TableRow>
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp" >
 <TextView android:id="@+id/TextView" android:text="@string/search_address_city">
 </TextView>
-<Button android:id="@+id/CityButton" android:text="@string/choose_city">
-</Button>
+<net.osmand.view.ExpandableButton  android:id="@+id/CityButton" android:text="@string/choose_city" custom:maxVisibleWidth="500dp" />
 <ImageButton android:id="@+id/ResetCity" android:layout_marginRight = "5dp" android:background="@drawable/reset" android:contentDescription="@string/default_buttons_reset">
 </ImageButton>
 </TableRow>
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp">
 <TextView android:id="@+id/TextView" android:text="@string/search_address_street">
 </TextView>
-<Button android:id="@+id/StreetButton" android:text="@string/choose_street">
-</Button>
+<net.osmand.view.ExpandableButton android:id="@+id/StreetButton" android:text="@string/choose_street" custom:maxVisibleWidth="500dp"/>
 <ImageButton android:id="@+id/ResetStreet" android:layout_marginRight = "5dp" android:background="@drawable/reset" android:contentDescription="@string/default_buttons_reset">
 </ImageButton>
 </TableRow>
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp">
 <TextView android:id="@+id/BuildingText" android:text="@string/search_address_building">
 </TextView>
-<Button android:id="@+id/BuildingButton" android:text="@string/choose_building">
-</Button>
+<net.osmand.view.ExpandableButton android:id="@+id/BuildingButton" android:text="@string/choose_building" custom:maxVisibleWidth="500dp"/>
 <ImageButton android:id="@+id/ResetBuilding" android:layout_marginRight = "5dp" android:background="@drawable/reset" android:contentDescription="@string/default_buttons_reset">
 </ImageButton>
 </TableRow>
-<TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp" >
-<RadioGroup android:orientation="horizontal" android:layout_span="3" android:id="@+id/RadioGroup" >
+</TableLayout>
+</LinearLayout>
+
+<RadioGroup android:orientation="horizontal" android:layout_span="3" android:id="@+id/RadioGroup" android:layout_marginLeft="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content">
 <RadioButton android:id="@+id/RadioBuilding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/search_address_building_option"></RadioButton>
 <RadioButton android:id="@+id/RadioIntersStreet" android:layout_width="wrap_content" android:layout_marginLeft = "5dp" android:layout_height="wrap_content" android:text="@string/search_address_street_option"></RadioButton>
-
 </RadioGroup>
-</TableRow>
-
-</TableLayout> 
 
 
 
