@@ -34,6 +34,7 @@ public class MapRoutingTypes {
 		TAGS_TEXT.add("duration");
 		
 		TAGS_TO_SAVE.add("barrier");
+		TAGS_TO_SAVE.add("bicycle");
 		TAGS_TO_SAVE.add("bridge");
 		TAGS_TO_SAVE.add("construction");
 		TAGS_TO_SAVE.add("direction");

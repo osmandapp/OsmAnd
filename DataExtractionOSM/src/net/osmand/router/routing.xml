@@ -126,6 +126,8 @@
 		<obstacle tag="highway" value="traffic_signals" penalty="30"/>
 		<obstacle tag="railway" value="crossing" penalty="15"/>
 		<obstacle tag="railway" value="level_crossing" penalty="15"/>
+		
+		<avoid tag="bicycle" value="no"/>
 	</routingProfile>
 	
 	<routingProfile name="pedestrian" baseProfile="pedestrian" restrictionsAware="false" minDefaultSpeed="3" maxDefaultSpeed="5" 
@@ -163,6 +165,9 @@
 		<obstacle tag="highway" value="traffic_signals" penalty="30"/>
 		<obstacle tag="railway" value="crossing" penalty="15"/>
 		<obstacle tag="railway" value="level_crossing" penalty="15"/>
+		
+		<avoid tag="foot" value="no"/>
+		<avoid tag="pedestrian" value="no"/>
 	</routingProfile>
 
 </osmand_routing_config>
