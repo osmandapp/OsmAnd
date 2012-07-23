@@ -704,7 +704,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 					makeUturnWhenPossible = routingHelper.makeUturnWhenPossible() ;
 					if (makeUturnWhenPossible) {
 						visible = true;
-						turnImminent = 1;
+						turnImminent = 0;
 						turnType = TurnType.valueOf(TurnType.TU, view.getSettings().LEFT_SIDE_NAVIGATION.get());
 						TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
 						invalidate();
