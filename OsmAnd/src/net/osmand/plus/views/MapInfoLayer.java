@@ -25,8 +25,10 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
+import android.text.TextPaint;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.MeasureSpec;
@@ -71,11 +73,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private MapInfoControl alarmControl;
 	private TextView topText;
 
-
-
-	
-
-	
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
 		this.routeLayer = layer;
@@ -243,12 +240,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 		int color = !nightMode.isNightMode() ? Color.BLACK :  Color.BLACK;
 		if(paintText.getColor() != color) {
 			paintText.setColor(color);
+			topText.setTextColor(color);
 			paintSubText.setColor(color);
 			paintSmallText.setColor(color);
 			paintSmallSubText.setColor(color);
 		}
 		if(paintText.isFakeBoldText() != bold) {
 			paintText.setFakeBoldText(bold);
+			topText.getPaint().setFakeBoldText(bold);
 			paintSubText.setFakeBoldText(bold);
 			paintSmallText.setFakeBoldText(bold);
 			paintSmallSubText.setFakeBoldText(bold);
@@ -262,15 +261,44 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 		lanesControl.updateInfo();
 		alarmControl.updateInfo();
-//		topText.setTextColor(color);
-//		String text = "Пр.Независимости";
-//		float ts = topText.getPaint().measureText(text);
-//		int wth = topText.getRight() /*- compassView.getRight()*/;
-//		while(ts > wth && topText.getTextSize() - 1 > 5) {
-//			topText.setTextSize(topText.getTextSize() - 1);
-//			ts = topText.getPaint().measureText(text);
-//		}
-//		topText.setText(text);
+		updateTopText();
+	}
+
+	private void updateTopText() {
+		String text = null;
+		RoutingHelper helper = routeLayer.getHelper();
+		if (routeLayer != null && helper.isRouteCalculated()) {
+			if (helper.isFollowingMode()) {
+				text = helper.getCurrentName();
+			} else {
+				int di = map.getMapLayers().getRouteInfoLayer().getDirectionInfo();
+				if (di >= 0 && map.getMapLayers().getRouteInfoLayer().isVisible()) {
+					RouteDirectionInfo next = helper.getRouteDirections().get(di);
+					text = helper.formatStreetName(next.getStreetName(), next.getRef());
+				}
+			}
+		}
+		if(text == null) {
+			text = "";
+		}
+		if (!text.equals(topText.getText().toString())) {
+			TextPaint pp = new TextPaint(topText.getPaint());
+			if (!text.equals("")) {
+				pp.setTextSize(25 * scaleCoefficient);
+				float ts = pp.measureText(text);
+				int wth = topText.getWidth();
+				while (ts > wth && pp.getTextSize() > 7) {
+					pp.setTextSize(pp.getTextSize() - 1);
+					ts = pp.measureText(text);
+				}
+				topText.setTextSize(TypedValue.COMPLEX_UNIT_PX, pp.getTextSize());
+			} else {
+				topText.setTextSize(TypedValue.COMPLEX_UNIT_PX, 7);
+			}
+			topText.setText(text);
+			topText.invalidate();
+		}
+		
 	}
 	
 	@Override
@@ -757,8 +785,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		// Space (future text)
 		params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT, 1);
-		topText = new TextView(view.getContext());
-		topText.setGravity(Gravity.RIGHT);
+		topText = new TextView(view.getContext()) {
+			
+			@Override
+			protected void onDraw(Canvas canvas) {
+				ShadowText.draw(getText().toString(), canvas, topText.getWidth() / 2, topText.getHeight(), topText.getPaint());
+			}
+		};
+		topText.setGravity(Gravity.CENTER);
+		topText.setTextColor(Color.BLACK);
 		statusBar.addView(topText, params);
 
 		// Map and progress icon

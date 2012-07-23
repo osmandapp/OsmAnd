@@ -46,7 +46,7 @@ public abstract class MapInfoControl extends View {
 	}
 	
 	protected void drawShadowText(Canvas cv, String text, float centerX, float centerY, Paint textPaint) {
-		ShadowText.create(text).draw(cv, centerX, centerY, textPaint);
+		ShadowText.draw(text, cv, centerX, centerY, textPaint);
 	}
 	
 	@Override

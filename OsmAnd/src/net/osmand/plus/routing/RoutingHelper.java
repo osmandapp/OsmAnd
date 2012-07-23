@@ -19,6 +19,7 @@ import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.Interruptable;
+import net.osmand.router.RouteSegmentResult;
 import android.content.Context;
 import android.location.Location;
 import android.os.Handler;
@@ -482,6 +483,27 @@ public class RoutingHelper {
 			}
 		}
 		return route.getMostImportantAlarm(lastFixedLocation, speedAlarm);
+	}
+	
+	public String formatStreetName(String name, String ref) {
+		if(name != null && name.length() > 0){
+			if(ref != null && ref.length() > 0) {
+				name += "(" + ref +")";
+			}
+			return name;
+		} else {
+			return ref;
+		}
+	}
+	
+	public synchronized String getCurrentName(){
+		RouteSegmentResult rs = route.getCurrentSegmentResult();
+		if(rs != null) {
+			String nm = rs.getObject().getName();
+			String rf = rs.getObject().getRef();
+			return formatStreetName(nm, rf);
+		}
+		return null;
 	}
 	
 	public synchronized NextDirectionInfo getNextRouteDirectionInfoAfter(NextDirectionInfo previous, NextDirectionInfo to, boolean toSpeak){
