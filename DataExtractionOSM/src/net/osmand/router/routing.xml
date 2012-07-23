@@ -83,11 +83,11 @@
 		<obstacle tag="barrier" value="gate" penalty="-1"/>
 		<obstacle tag="barrier" value="bollard" penalty="-1"/> 
 		
-		<!-- -->
 		<avoid tag="tracktype" value="grade5" decreasedPriority="0.6"/>
 		<avoid tag="access" value="no"/>
 		<avoid tag="motorcycle" value="no"/>
 		<avoid tag="motorcar" value="no"/>
+		<!--  <avoid tag="toll" value="yes"/>  -->
 	</routingProfile>
 
 

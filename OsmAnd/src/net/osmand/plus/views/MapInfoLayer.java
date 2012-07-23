@@ -288,9 +288,18 @@ public class MapInfoLayer extends OsmandMapLayer {
 				pp.setTextSize(25 * scaleCoefficient);
 				float ts = pp.measureText(text);
 				int wth = topText.getWidth();
-				while (ts > wth && pp.getTextSize() > 7) {
+				while (ts > wth && pp.getTextSize() > (14 * scaleCoefficient)) {
 					pp.setTextSize(pp.getTextSize() - 1);
 					ts = pp.measureText(text);
+				}
+				boolean dots = false;
+				while (ts > wth) {
+					dots = true;
+					text = text.substring(0, text.length() - 2);
+					ts = pp.measureText(text);
+				}
+				if (dots) {
+					text += "..";
 				}
 				topText.setTextSize(TypedValue.COMPLEX_UNIT_PX, pp.getTextSize());
 			} else {
@@ -636,8 +645,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 			public boolean updateInfo() {
 				boolean limits = settings.SHOW_SPEED_LIMITS.get();
 				boolean cams = settings.SHOW_CAMERAS.get();
-				boolean visible = limits || cams;
-				if (visible && routeLayer != null && routingHelper.isFollowingMode()) {
+				boolean visible = false;
+				if ((limits || cams) && routeLayer != null && routingHelper.isFollowingMode()) {
 					AlarmInfo alarm = routingHelper.getMostImportantAlarm(view.getSettings().METRIC_SYSTEM.get());
 					if(alarm != null) {
 						if(alarm.getType() == AlarmInfo.SPEED_LIMIT) {
@@ -655,10 +664,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 							// text = "STOP";
 						}
 						visible = text.length() > 0;
-						if(alarm.getType() == AlarmInfo.SPEED_CAMERA) {
-							visible = cams;
-						} else {
-							visible = limits;
+						if (visible) {
+							if (alarm.getType() == AlarmInfo.SPEED_CAMERA) {
+								visible = cams;
+							} else {
+								visible = limits;
+							}
 						}
 					}
 				}
