@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -48,6 +49,7 @@ public class IndexTransportCreator extends AbstractIndexPartCreator {
 	private PreparedStatement transRouteStopsStat;
 	private PreparedStatement transStopsStat;
 	private RTree transportStopsTree;
+	private Map<Long, Relation> masterRoutes = new HashMap<Long, Relation>();
 
 	
 	private static Set<String> acceptedRoutes = new HashSet<String>();
@@ -125,6 +127,16 @@ public class IndexTransportCreator extends AbstractIndexPartCreator {
 
 	public void packRTree(String rtreeTransportStopsFileName, String rtreeTransportStopsPackFileName) throws IOException {
 		transportStopsTree = packRtreeFile(transportStopsTree, rtreeTransportStopsFileName, rtreeTransportStopsPackFileName);
+	}
+	
+	public void indexRelations(Entity e, OsmDbAccessorContext ctx) throws SQLException {
+		if (e instanceof Relation && e.getTag(OSMTagKey.ROUTE_MASTER) != null) {
+			ctx.loadEntityRelation((Relation) e);
+			for (Entry<Entity, String> child : ((Relation) e).getMemberEntities().entrySet()) {
+				Entity entity = child.getKey();
+				masterRoutes.put(entity.getId(), (Relation) e);
+			}	
+		}
 	}
 	
 	public void visitEntityMainStep(Entity e, OsmDbAccessorContext ctx) throws SQLException {
@@ -389,6 +401,17 @@ public class IndexTransportCreator extends AbstractIndexPartCreator {
 		String ref = rel.getTag(OSMTagKey.REF);
 		String route = rel.getTag(OSMTagKey.ROUTE);
 		String operator = rel.getTag(OSMTagKey.OPERATOR);
+		
+		Relation master = masterRoutes.get(rel.getId());
+		if (master != null) {
+			if (ref == null)
+				ref = master.getTag(OSMTagKey.REF);
+			if (route == null)
+				route = master.getTag(OSMTagKey.ROUTE);
+			if (operator == null)
+				operator = master.getTag(OSMTagKey.OPERATOR);
+		}
+		
 		if (route == null || ref == null) {
 			return null;
 		}

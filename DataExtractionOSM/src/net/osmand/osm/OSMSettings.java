@@ -22,6 +22,7 @@ public class OSMSettings {
 		
 		// transport
 		ROUTE("route"), //$NON-NLS-1$
+		ROUTE_MASTER("route_master"), //$NON-NLS-1$
 		OPERATOR("operator"), //$NON-NLS-1$
 		REF("ref"), //$NON-NLS-1$
 		

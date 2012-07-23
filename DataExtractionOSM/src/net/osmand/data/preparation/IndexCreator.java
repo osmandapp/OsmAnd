@@ -536,6 +536,9 @@ public class IndexCreator {
 							if (indexRouting) {
 								indexRouteCreator.indexRelations(e, ctx);
 							}
+							if (indexTransport) {
+								indexTransportCreator.indexRelations(e, ctx);
+							}
 						}
 					});
 					if (indexAddress) {
