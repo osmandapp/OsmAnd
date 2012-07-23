@@ -258,15 +258,18 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 //		bidForFixHelper.generatePreferenceList(screen, getString(R.string.support_new_features), this);
 		OsmandPlugin.onSettingsActivityCreate(this, screen);
 		
-		registerBooleanPreference(osmandSettings.SHOW_VIEW_ANGLE,screen); 
-		registerBooleanPreference(osmandSettings.USE_ENGLISH_NAMES,screen); 
-		registerBooleanPreference(osmandSettings.AUTO_ZOOM_MAP,screen); 
-		registerBooleanPreference(osmandSettings.FAST_ROUTE_MODE,screen);
-		registerBooleanPreference(osmandSettings.USE_COMPASS_IN_NAVIGATION,screen);
-		registerBooleanPreference(osmandSettings.LEFT_SIDE_NAVIGATION,screen);
+		registerBooleanPreference(osmandSettings.SHOW_VIEW_ANGLE, screen);
+		registerBooleanPreference(osmandSettings.USE_ENGLISH_NAMES, screen);
+		registerBooleanPreference(osmandSettings.AUTO_ZOOM_MAP, screen);
+		registerBooleanPreference(osmandSettings.FAST_ROUTE_MODE, screen);
+		registerBooleanPreference(osmandSettings.USE_COMPASS_IN_NAVIGATION, screen);
+		registerBooleanPreference(osmandSettings.LEFT_SIDE_NAVIGATION, screen);
+
+		registerBooleanPreference(osmandSettings.SHOW_CAMERAS, screen);
+		registerBooleanPreference(osmandSettings.SHOW_SPEED_LIMITS, screen);
+		registerBooleanPreference(osmandSettings.AVOID_TOLL_ROADS, screen);
 		
-		
-		registerBooleanPreference(osmandSettings.SHOW_ALTITUDE_INFO,screen);
+		registerBooleanPreference(osmandSettings.SHOW_ALTITUDE_INFO, screen);
 		
 		CheckBoxPreference nativeCheckbox = registerBooleanPreference(osmandSettings.NATIVE_RENDERING,screen);
 		//disable the checkbox if the library cannot be used

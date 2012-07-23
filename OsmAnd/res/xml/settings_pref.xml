@@ -25,6 +25,12 @@
 			<ListPreference android:title="@string/voice_provider" android:key="voice_provider" android:summary="@string/voice_provider_descr"></ListPreference>
 			<ListPreference android:key="auto_follow_route" android:title="@string/choose_auto_follow_route"
 				android:summary="@string/choose_auto_follow_route_descr"></ListPreference>
+			<CheckBoxPreference android:summary="@string/show_speed_limits_descr" android:title="@string/show_speed_limits"
+				android:key="show_speed_limits"></CheckBoxPreference>
+			<CheckBoxPreference android:summary="@string/show_cameras_descr" android:title="@string/show_cameras"
+				android:key="show_cameras"></CheckBoxPreference>
+			<CheckBoxPreference android:summary="@string/avoid_toll_roads_descr" android:title="@string/avoid_toll_roads"
+				android:key="avoid_toll_roads"></CheckBoxPreference>
 			<CheckBoxPreference android:summary="@string/use_compass_navigation_descr" android:title="@string/use_compass_navigation"
 				android:key="use_compass_navigation"></CheckBoxPreference>
 		</PreferenceScreen>

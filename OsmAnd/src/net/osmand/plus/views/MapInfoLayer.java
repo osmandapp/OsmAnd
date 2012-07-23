@@ -6,6 +6,7 @@ import java.util.Arrays;
 import net.osmand.Algoritms;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.AlarmInfo;
@@ -628,12 +629,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 		ptext.setAntiAlias(true);
 		ptext.setTextAlign(Align.CENTER);
 		
+		final OsmandSettings settings = view.getSettings();
 		final MapInfoControl alarm = new MapInfoControl(map) {
 			private String text = "";
 			@Override
 			public boolean updateInfo() {
-				boolean visible = false;
-				if (routeLayer != null && routingHelper.isFollowingMode()) {
+				boolean limits = settings.SHOW_SPEED_LIMITS.get();
+				boolean cams = settings.SHOW_CAMERAS.get();
+				boolean visible = limits || cams;
+				if (visible && routeLayer != null && routingHelper.isFollowingMode()) {
 					AlarmInfo alarm = routingHelper.getMostImportantAlarm(view.getSettings().METRIC_SYSTEM.get());
 					if(alarm != null) {
 						if(alarm.getType() == AlarmInfo.SPEED_LIMIT) {
@@ -651,6 +655,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 							// text = "STOP";
 						}
 						visible = text.length() > 0;
+						if(alarm.getType() == AlarmInfo.SPEED_CAMERA) {
+							visible = cams;
+						} else {
+							visible = limits;
+						}
 					}
 				}
 				updateVisibility(visible);
@@ -789,10 +798,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 			
 			@Override
 			protected void onDraw(Canvas canvas) {
-				ShadowText.draw(getText().toString(), canvas, topText.getWidth() / 2, topText.getHeight(), topText.getPaint());
+				ShadowText.draw(getText().toString(), canvas, topText.getWidth() / 2, topText.getHeight() - 4 * scaleCoefficient, topText.getPaint());
 			}
 		};
-		topText.setGravity(Gravity.CENTER);
+		topText.getPaint().setTextAlign(Align.CENTER);
 		topText.setTextColor(Color.BLACK);
 		statusBar.addView(topText, params);
 
