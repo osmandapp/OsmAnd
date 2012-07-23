@@ -27,7 +27,7 @@ public class VoiceRouter {
 	private int currentStatus = STATUS_UNKNOWN;
 	private float playGoAheadDist = 0;
 
-	private long lastTimeRouteRecalcAnnounced = 0;
+	// private long lastTimeRouteRecalcAnnounced = 0;
 	
 	// default speed to have comfortable announcements (if actual speed is higher than it would be problem)
 	// Speed in m/s 
@@ -478,12 +478,13 @@ public class VoiceRouter {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if (play != null) {
 			if (!newRoute) {
-				// suppress "route recalculated" prompt for 60sec
 				// suppress "route recalculated" prompt for GPX-routing, it makes no sense
-				if (router.getCurrentGPXRoute() == null && (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000)) {
+				// suppress "route recalculated" prompt for 60sec (this workaround now outdated after more intelligent route recalculation and directional voice prompt suppression)
+				// if (router.getCurrentGPXRoute() == null && (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000)) {
+				if (router.getCurrentGPXRoute() == null) {
 					play.routeRecalculated(router.getLeftDistance()).play();
 					currentStatus = STATUS_UNKNOWN;
-					lastTimeRouteRecalcAnnounced = System.currentTimeMillis();
+					// lastTimeRouteRecalcAnnounced = System.currentTimeMillis();
 				}
 			} else {
 				play.newRouteCalculated(router.getLeftDistance()).play();
