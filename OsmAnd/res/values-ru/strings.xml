@@ -887,4 +887,4 @@
   <string name="use_compass_navigation">Использовать компас</string>
   <string name="route_updated_loc_found">Маршрут будет пересчитан когда определится местоположение</string>
   <string name="continue_follow_previous_route_auto">Предыдущий маршрут был не закончен. Продолжить следование по нему? (%1$s секунд)</string>
-</resources>
+<string name="show_cameras_descr">Show speed cameras (may be forbidden in some countries)</string><string name="show_speed_limits_descr">Show speed limits and traffic bumps</string><string name="avoid_toll_roads_descr">Avoid toll roads for route calculation</string><string name="show_cameras">Show speed cameras</string><string name="show_speed_limits">Show speed limits</string><string name="avoid_toll_roads">Avoid toll roads</string><string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Improved Routing "</string></resources>
