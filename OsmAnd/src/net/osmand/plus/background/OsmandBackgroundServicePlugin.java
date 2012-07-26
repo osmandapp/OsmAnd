@@ -1,12 +1,17 @@
 package net.osmand.plus.background;
 
+import java.util.EnumSet;
+
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.views.ImageViewControl;
+import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -29,9 +34,6 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.Spinner;
 
 public class OsmandBackgroundServicePlugin extends OsmandPlugin {
@@ -72,10 +74,17 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin {
 	@Override
 	public void registerLayers(MapActivity activity) {
 		backgroundServiceLayer = new OsmandBackgroundServiceLayer(activity);
+		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
+		ImageViewControl lockView = createBgServiceView( activity.getMapView(), activity);
+		// TODO icon
+		layer.getMapInfoControls().registerTopWidget(lockView, R.drawable.monitoring_rec_big, R.string.map_widget_lock_screen, "lock_view", true, EnumSet.allOf(ApplicationMode.class), 10);
 	}
 	
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
+		if(backgroundServiceLayer == null) {
+			registerLayers(activity);
+		}
 		if (isScreenLocked) {
 			mapView.addLayer(backgroundServiceLayer, mapView.getLayers().size());
 		} else {
@@ -159,16 +168,17 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin {
 
 	/**
 	 * 
-	 * @param statusBar
-	 * @param view
-	 * @param map
 	 */
-	public void createBgServiceView(final LinearLayout statusBar, final OsmandMapTileView view, final MapActivity map) {
+	public ImageViewControl createBgServiceView(final OsmandMapTileView view, final MapActivity map) {
 		// TODO Lock icons
 		final Drawable lock = view.getResources().getDrawable(R.drawable.monitoring_rec_big);
 		final Drawable unLock = view.getResources().getDrawable(R.drawable.monitoring_rec_inactive);
-		
-		final ImageView lockView = new ImageView(view.getContext());
+		final ImageViewControl lockView = new ImageViewControl(view.getContext()) {
+			@Override
+			public boolean updateInfo() {
+				return false;
+			}
+		};
 		
 		if (isScreenLocked) {
 			lockView.setBackgroundDrawable(lock);
@@ -189,7 +199,7 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin {
 			}
 			
 		});
-		statusBar.addView(lockView, new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		return lockView;
 	}
 
 	/**

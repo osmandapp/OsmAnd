@@ -1,5 +1,6 @@
 package net.osmand.plus.views;
 
+import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -7,26 +8,29 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.LinearLayout.LayoutParams;
+
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.ApplicationMode;
-import android.graphics.Paint;
 
 public class MapInfoControls {
 	
 	private Set<MapInfoControlRegInfo> left = new TreeSet<MapInfoControls.MapInfoControlRegInfo>();
 	private Set<MapInfoControlRegInfo> right = new TreeSet<MapInfoControls.MapInfoControlRegInfo>();
+	private Set<MapInfoControlRegInfo> topleft = new TreeSet<MapInfoControls.MapInfoControlRegInfo>();
+	private Set<MapInfoControlRegInfo> topright = new TreeSet<MapInfoControls.MapInfoControlRegInfo>(new Comparator<MapInfoControlRegInfo>() {
+		@Override
+		public int compare(MapInfoControlRegInfo object1, MapInfoControlRegInfo object2) {
+			return -object1.compareTo(object2);
+		}
+	});
 	private Map<ApplicationMode, Set<String>> visibleElements = new LinkedHashMap<ApplicationMode, Set<String>>();
 	private final OsmandSettings settings;
 			
-	
-	public interface MapInfoControlFactoryMethod {
-		
-		/**
-		 * @param mapView
-		 * @param paints array of paints (4) 0 - normal, 1 - subtext, 2 - small, 3 - small subtext
-		 */
-		public MapInfoControl createControl(OsmandMapTileView mapView, Paint[] paints);
-	}
 	
 	public MapInfoControls(OsmandSettings settings) {
 		this.settings = settings;
@@ -44,6 +48,36 @@ public class MapInfoControls {
 			}
 		}
 		
+	}
+	
+	public MapInfoControlRegInfo registerTopWidget(View m, int drawable, int messageId, String key, boolean left,
+			EnumSet<ApplicationMode> appDefaultModes, int priorityOrder) {
+		MapInfoControlRegInfo ii = new MapInfoControlRegInfo();
+		ii.defaultModes = appDefaultModes.clone();
+		ii.defaultCollapsible = null;
+		ii.key = key;
+		ii.visibleModes = EnumSet.noneOf(ApplicationMode.class); 
+		ii.visibleCollapsible = null;
+		for(ApplicationMode ms : ApplicationMode.values() ) {
+			boolean def = appDefaultModes.contains(ms);
+			Set<String> set = visibleElements.get(ms);
+			if(set != null) {
+				def = set.contains(key);
+			}
+			if(def){
+				ii.visibleModes.add(ms);
+			}
+		}
+		ii.drawable = drawable;
+		ii.messageId = messageId;
+		ii.m = m;
+		ii.priorityOrder = priorityOrder;
+		if(left) {
+			this.topleft.add(ii);
+		} else {
+			this.topright.add(ii);
+		}
+		return ii;
 	}
 	
 	
@@ -85,7 +119,7 @@ public class MapInfoControls {
 		for(MapInfoControlRegInfo m : mi){
 			if(m.visibleModes.contains(mode)) {
 				set.add(m.key) ;
-			} else if(m.visibleCollapsible.contains(mode)) {
+			} else if(m.visibleCollapsible != null && m.visibleCollapsible.contains(mode)) {
 				set.add("+"+m.key) ;
 			}  
 		}
@@ -97,14 +131,18 @@ public class MapInfoControls {
 			LinkedHashSet<String> set = new LinkedHashSet<String>();
 			restoreModes(set, left, mode);
 			restoreModes(set, right, mode);
+			restoreModes(set, topleft, mode);
+			restoreModes(set, topright, mode);
 			this.visibleElements.put(mode, set);
 		}
 		this.visibleElements.get(mode).remove(m.key);
 		this.visibleElements.get(mode).remove("+" + m.key);
 		m.visibleModes.remove(mode);
-		m.visibleCollapsible.remove(mode);
+		if(m.visibleCollapsible != null) {
+			m.visibleCollapsible.remove(mode);
+		}
 		if(visible) {
-			if(collapse) {
+			if(collapse && m.visibleCollapsible != null) {
 				m.visibleCollapsible.add(mode);
 				this.visibleElements.get(mode).add("+" + m.key);
 			} else {
@@ -128,28 +166,51 @@ public class MapInfoControls {
 		return right;
 	}
 	
-	public void registerTopBarButton(MapInfoControlFactoryMethod m, int drawable, int messageId, boolean left,
-			EnumSet<ApplicationMode> appModes, int priorityOrder) {
-		
+	public Set<MapInfoControlRegInfo> getTopLeft() {
+		return topleft;
+	}
+	
+	public Set<MapInfoControlRegInfo> getTopRight() {
+		return topright;
 	}
 	
 	public void populateStackControl(MapStackControl stack, OsmandMapTileView v, boolean left){
 		ApplicationMode appMode = settings.getApplicationMode();
 		Set<MapInfoControlRegInfo> st = left ? this.left : this.right;
 		for (MapInfoControlRegInfo r : st) {
-			if (r.visibleCollapsible.contains(appMode)) {
-				stack.addCollapsedView(r.m);
+			if (r.visibleCollapsible != null && r.visibleCollapsible.contains(appMode)) {
+				stack.addCollapsedView((MapInfoControl) r.m);
 			} else if (r.visibleModes.contains(appMode)) {
-				stack.addStackView(r.m);
+				stack.addStackView((MapInfoControl) r.m);
+			}
+		}
+	}
+	
+	public void populateStatusBar(ViewGroup statusBar, TextView topView){
+		ApplicationMode appMode = settings.getApplicationMode();
+		for (MapInfoControlRegInfo r : topleft) {
+			if (r.visibleModes.contains(appMode)) {
+				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+				statusBar.addView((View) r.m, params);
+			}
+		}
+		LayoutParams pms = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT, 1);
+		statusBar.addView(topView, pms);
+		for (MapInfoControlRegInfo r : topright) {
+			if (r.visibleModes.contains(appMode)) {
+				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+				statusBar.addView((View) r.m, params);
 			}
 		}
 	}
 	
 	private void resetDefault(ApplicationMode mode, Set<MapInfoControlRegInfo> set ){
 		for(MapInfoControlRegInfo ri : set) {
-			ri.visibleCollapsible.remove(mode);
+			if(ri.visibleCollapsible != null) { 
+				ri.visibleCollapsible.remove(mode);
+			}
 			ri.visibleModes.remove(mode);
-			if(ri.defaultCollapsible.contains(mode)) {
+			if(ri.defaultCollapsible != null && ri.defaultCollapsible.contains(mode)) {
 				ri.visibleCollapsible.add(mode);
 			}
 			if(ri.defaultModes.contains(mode)) {
@@ -162,6 +223,8 @@ public class MapInfoControls {
 		ApplicationMode appMode = settings.getApplicationMode();
 		resetDefault(appMode, left);
 		resetDefault(appMode, right);
+		resetDefault(appMode, topleft);
+		resetDefault(appMode, topright);
 		this.visibleElements.put(appMode, null);
 		settings.MAP_INFO_CONTROLS.set("");
 	}
@@ -176,7 +239,7 @@ public class MapInfoControls {
 	
 	
 	public static class MapInfoControlRegInfo implements Comparable<MapInfoControlRegInfo>  {
-		public MapInfoControl m;
+		public View m;
 		public int drawable;
 		public int messageId;
 		private String key;
@@ -187,12 +250,24 @@ public class MapInfoControls {
 		public int priorityOrder;
 		
 		public boolean visibleCollapsed(ApplicationMode mode){
-			return visibleCollapsible.contains(mode);
+			return visibleCollapsible != null && visibleCollapsible.contains(mode);
+		}
+		
+		public boolean collapseEnabled(ApplicationMode mode){
+			return visibleCollapsible != null;
 		}
 		
 		public boolean visible(ApplicationMode mode){
 			return visibleModes.contains(mode);
 		}
+		
+		public MapInfoControlRegInfo required(ApplicationMode... modes){
+			for(ApplicationMode ms : modes) {
+				visibleModes.add(ms);
+			}
+			return this;
+		}
+		
 		@Override
 		public int hashCode() {
 			return messageId;

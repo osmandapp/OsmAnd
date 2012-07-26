@@ -4,12 +4,10 @@ package net.osmand.plus.views;
 import java.util.ArrayList;
 import java.util.EnumSet;
 
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.background.OsmandBackgroundServicePlugin;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.MapInfoControls.MapInfoControlRegInfo;
@@ -59,23 +57,19 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private Paint paintSmallSubText;
 	private Paint paintImg;
 	
-	private float cachedRotate = 0;
-	
 	// layout pseudo-constants
 	private int STATUS_BAR_MARGIN_X = -4;
 	
 	private ImageView backToLocation;
-	private ImageView compassView;
 	private View progressBar;
 	
 	// groups
 	private MapStackControl rightStack;
 	private MapStackControl leftStack;
-	private ViewGroup statusBar;
+	private LinearLayout statusBar;
 	private MapInfoControl lanesControl;
 	private MapInfoControl alarmControl;
 	private TextView topText;
-
 	private MapInfoControls mapInfoControls;
 
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
@@ -150,10 +144,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	@Override
 	public void initLayer(final OsmandMapTileView view) {
 		this.view = view;
-				
 		registerAllControls();
 		createControls();
-		applyTheme();
 	}
 	
 	public void applyTheme() {
@@ -179,7 +171,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 	
 	public void registerAllControls(){
-		statusBar = createStatusBar();
+		statusBar = new LinearLayout(view.getContext());
+		statusBar.setOrientation(LinearLayout.HORIZONTAL);
 		RouteInfoControls ric = new RouteInfoControls(scaleCoefficient);
 		lanesControl = ric.createLanesControl(view.getApplication().getRoutingHelper(), view);
 		lanesControl.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
@@ -212,6 +205,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextInfoControl alt = ric.createAltitudeControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(alt, R.drawable.ic_altitude, R.string.map_widget_altitude, "altitude", false, EnumSet.of(ApplicationMode.PEDESTRIAN), none, 20);
 		
+		ImageViewControl compassView = createCompassView(map);
+		mapInfoControls.registerTopWidget(compassView, R.drawable.compass, R.string.map_widget_compass, "compass", true, all, 5);
+		backToLocation = createBackToLocation(map);
+		mapInfoControls.registerTopWidget(backToLocation, R.drawable.default_mode_small, R.string.map_widget_back_to_loc, "back_to_location", false, all, 5);
+		
+		View globusAndProgress = createGlobusAndProgress();
+		mapInfoControls.registerTopWidget(globusAndProgress, R.drawable.globus, R.string.map_widget_map_select, "progress", false, all, 10).required(ApplicationMode.values());
+		
+		topText = new TopTextView(routingHelper, map);
 	}
 	
 	public void recreateControls(){
@@ -222,6 +224,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.populateStackControl(leftStack, view, true);
 		leftStack.requestLayout();
 		rightStack.requestLayout();
+		
+		statusBar.removeAllViews();
+		mapInfoControls.populateStatusBar(statusBar, topText);
 	}
 	
 	public void createControls() {
@@ -233,7 +238,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// 2. Preparations
 		Rect topRectPadding = new Rect();
 		view.getResources().getDrawable(R.drawable.box_top).getPadding(topRectPadding);
-		
+		// for measurement
+		statusBar.addView(backToLocation);		
 		STATUS_BAR_MARGIN_X = (int) (STATUS_BAR_MARGIN_X * scaleCoefficient);
 		statusBar.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 		Rect statusBarPadding = new Rect();
@@ -284,6 +290,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		parent.addView(alarmControl);
 		alarmControl.setVisibility(View.GONE);
 		lanesControl.setVisibility(View.GONE);
+		
+		// update and create controls
 		applyTheme();
 		recreateControls();
 	}
@@ -293,6 +301,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		final ArrayList<Object> list = new ArrayList<Object>();
 		list.add(map.getString(R.string.map_widget_reset));
+		list.add(map.getString(R.string.map_widget_top_stack));
+		list.addAll(mapInfoControls.getTopLeft());
+		list.addAll(mapInfoControls.getTopRight());
 		list.add(map.getString(R.string.map_widget_right_stack));
 		list.addAll(mapInfoControls.getRight());
 		list.add(map.getString(R.string.map_widget_left_stack));
@@ -309,19 +320,20 @@ public class MapInfoLayer extends OsmandMapLayer {
 				if (v == null) {
 					v = map.getLayoutInflater().inflate(R.layout.layers_list_activity_item, null);
 				}
-				TextView tv = (TextView) v.findViewById(R.id.title);
+				final TextView tv = (TextView) v.findViewById(R.id.title);
 				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
 				Object o = list.get(position);
 				if(o instanceof MapInfoControlRegInfo) {
 					final MapInfoControlRegInfo mi = (MapInfoControlRegInfo) o;
-					tv.setText(map.getString(mi.messageId));
+					String s = mi.visibleCollapsed(mode)? " - " : "  ";
+					tv.setText(s +map.getString(mi.messageId) +s);
 					// Put the image on the TextView
 					if (mi.drawable != 0) {
 						tv.setPadding((int) (12 *scaleCoefficient), 0, 0, 0);
 						tv.setCompoundDrawablesWithIntrinsicBounds(mi.drawable, 0, 0, 0);
 					} else {
 						tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-						tv.setPadding((int) (27 *scaleCoefficient), 0, 0, 0);
+						tv.setPadding((int) (30 *scaleCoefficient), 0, 0, 0);
 					}
 					
 					boolean check = mi.visibleCollapsed(mode) || mi.visible(mode);
@@ -331,10 +343,17 @@ public class MapInfoLayer extends OsmandMapLayer {
 						@Override
 						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 							if(!isChecked) {
-								mapInfoControls.changeVisibility(mi, false, false);
+								if(mi.visible(mode) && mi.collapseEnabled(mode)) {
+									mapInfoControls.changeVisibility(mi, true, true);
+									ch.setChecked(true);
+								} else {
+									mapInfoControls.changeVisibility(mi, false, false);
+								}
 							} else {
 								mapInfoControls.changeVisibility(mi, true, false);
 							}
+							String s = mi.visibleCollapsed(mode) ? " - " : "  ";
+							tv.setText(s + map.getString(mi.messageId) + s);
 							recreateControls();
 						}
 					});
@@ -398,60 +417,16 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// update data on draw
 		rightStack.updateInfo();
 		leftStack.updateInfo();
-		if(view.getRotate() != cachedRotate) {
-			cachedRotate = view.getRotate();
-			compassView.invalidate();
-		}
 		lanesControl.updateInfo();
 		alarmControl.updateInfo();
-		updateTopText();
+		for(int i=0; i<statusBar.getChildCount(); i++) {
+			View v = statusBar.getChildAt(i);
+			if(v instanceof MapControlUpdateable)  {
+				((MapControlUpdateable)v).updateInfo();
+			}
+		}
 	}
 
-	private void updateTopText() {
-		String text = null;
-		RoutingHelper helper = routeLayer.getHelper();
-		if (routeLayer != null && helper.isRouteCalculated()) {
-			if (helper.isFollowingMode()) {
-				text = helper.getCurrentName();
-			} else {
-				int di = map.getMapLayers().getRouteInfoLayer().getDirectionInfo();
-				if (di >= 0 && map.getMapLayers().getRouteInfoLayer().isVisible()) {
-					RouteDirectionInfo next = helper.getRouteDirections().get(di);
-					text = helper.formatStreetName(next.getStreetName(), next.getRef());
-				}
-			}
-		}
-		if(text == null) {
-			text = "";
-		}
-		if (!text.equals(topText.getText().toString())) {
-			TextPaint pp = new TextPaint(topText.getPaint());
-			if (!text.equals("")) {
-				pp.setTextSize(25 * scaleCoefficient);
-				float ts = pp.measureText(text);
-				int wth = topText.getWidth();
-				while (ts > wth && pp.getTextSize() > (14 * scaleCoefficient)) {
-					pp.setTextSize(pp.getTextSize() - 1);
-					ts = pp.measureText(text);
-				}
-				boolean dots = false;
-				while (ts > wth) {
-					dots = true;
-					text = text.substring(0, text.length() - 2);
-					ts = pp.measureText(text);
-				}
-				if (dots) {
-					text += "..";
-				}
-				topText.setTextSize(TypedValue.COMPLEX_UNIT_PX, pp.getTextSize());
-			} else {
-				topText.setTextSize(TypedValue.COMPLEX_UNIT_PX, 7);
-			}
-			topText.setText(text);
-			topText.invalidate();
-		}
-		
-	}
 	
 	@Override
 	public void destroyLayer() {
@@ -471,54 +446,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return progressBar;
 	}
 
-	private ViewGroup createStatusBar() {
-		LinearLayout statusBar = new LinearLayout(view.getContext());
-		statusBar.setOrientation(LinearLayout.HORIZONTAL);
-		
-		// Compass icon
-		final Drawable compass = view.getResources().getDrawable(R.drawable.compass);
-		final int mw = (int) compass.getMinimumWidth() ;
-		final int mh = (int) compass.getMinimumHeight() ;
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		compassView = new ImageView(view.getContext()) {
-			@Override
-			protected void onDraw(Canvas canvas) {
-				canvas.save();
-				canvas.rotate(view.getRotate(), mw / 2, mh / 2);
-				compass.draw(canvas);
-				canvas.restore();
-			}
-		};
-		compassView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				map.switchRotateMapMode();
-			}
-		});
-		compassView.setImageDrawable(compass);
-		statusBar.addView(compassView, params);
-		addBgView(statusBar);
-		
-		// Space (future text)
-		params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT, 1);
-		topText = new TextView(view.getContext()) {
-			
-			@Override
-			protected void onDraw(Canvas canvas) {
-				ShadowText.draw(getText().toString(), canvas, topText.getWidth() / 2, topText.getHeight() - 4 * scaleCoefficient, topText.getPaint());
-			}
-		};
-		topText.getPaint().setTextAlign(Align.CENTER);
-		topText.setTextColor(Color.BLACK);
-		statusBar.addView(topText, params);
-
-		// Map and progress icon
+	
+	private View createGlobusAndProgress(){
 		Drawable globusDrawable = view.getResources().getDrawable(R.drawable.globus);
-		
-		params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		FrameLayout fl = new FrameLayout(view.getContext());
-		statusBar.addView(fl, params);
-		
 		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		ImageView globus = new ImageView(view.getContext());
 		globus.setImageDrawable(globusDrawable);
@@ -531,38 +462,133 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		});
 		fl.addView(globus, fparams);
-		
 		fparams = new FrameLayout.LayoutParams(globusDrawable.getMinimumWidth(), globusDrawable.getMinimumHeight());
 		progressBar = new View(view.getContext());
 		progressBar.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				map.getMapLayers().selectMapLayer(view);
+				openViewConfigureDialog();
+//				map.getMapLayers().selectMapLayer(view);
 			}
 		});
 		fl.addView(progressBar, fparams);
-		
-		// Back to location icon 
-		params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		params.leftMargin = (int) (5 * scaleCoefficient);
-		params.rightMargin = (int) (5 * scaleCoefficient);
-		backToLocation = new ImageView(view.getContext());
-		backToLocation.setImageDrawable(view.getResources().getDrawable(R.drawable.back_to_loc));
+		return fl;
+	}
+	
+	private ImageView createBackToLocation(final MapActivity map){
+		ImageView backToLocation = new ImageView(view.getContext());
+		backToLocation.setPadding((int) (5 * scaleCoefficient), 0, (int) (5 * scaleCoefficient), 0);
+		backToLocation.setImageDrawable(map.getResources().getDrawable(R.drawable.back_to_loc));
 		backToLocation.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				map.backToLocationImpl();
 			}
 		});
-		statusBar.addView(backToLocation, params);
-		return statusBar;
+		return backToLocation;
 	}
 	
-	private void addBgView(final LinearLayout statusBar) {
-		final OsmandBackgroundServicePlugin backgroundServicePlugin = OsmandPlugin.getEnabledPlugin(OsmandBackgroundServicePlugin.class);
-		if (backgroundServicePlugin != null) {
-			backgroundServicePlugin.createBgServiceView(statusBar, view, map);
+	
+	private ImageViewControl createCompassView(final MapActivity map){
+		final Drawable compass = map.getResources().getDrawable(R.drawable.compass);
+		final int mw = (int) compass.getMinimumWidth() ;
+		final int mh = (int) compass.getMinimumHeight() ;
+		final OsmandMapTileView view = map.getMapView();
+		ImageViewControl compassView = new ImageViewControl(map) {
+			private float cachedRotate = 0;
+			@Override
+			protected void onDraw(Canvas canvas) {
+				canvas.save();
+				canvas.rotate(view.getRotate(), mw / 2, mh / 2);
+				compass.draw(canvas);
+				canvas.restore();
+			}
+		
+			@Override
+			public boolean updateInfo() {
+				if(view.getRotate() != cachedRotate) {
+					cachedRotate = view.getRotate();
+					invalidate();
+					return true;
+				}
+				return false;
+			}
+		};
+		compassView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				map.switchRotateMapMode();
+			}
+		});
+		compassView.setImageDrawable(compass);
+		return compassView;
+	}
+	
+	private static class TopTextView extends TextView implements MapControlUpdateable {
+		private final RoutingHelper routingHelper;
+		private final MapActivity map;
+
+		public TopTextView(RoutingHelper routingHelper, MapActivity map) {
+			super(map);
+			this.routingHelper = routingHelper;
+			this.map = map;
+			getPaint().setTextAlign(Align.CENTER);
+			setTextColor(Color.BLACK);
 		}
+
+		@Override
+		protected void onDraw(Canvas canvas) {
+			ShadowText.draw(getText().toString(), canvas, getWidth() / 2, getHeight() - 4 * scaleCoefficient,
+					getPaint());
+		}
+
+		@Override
+		public boolean updateInfo() {
+			String text = null;
+			if (routingHelper != null && routingHelper.isRouteCalculated()) {
+				if (routingHelper.isFollowingMode()) {
+					text = routingHelper.getCurrentName();
+				} else {
+					int di = map.getMapLayers().getRouteInfoLayer().getDirectionInfo();
+					if (di >= 0 && map.getMapLayers().getRouteInfoLayer().isVisible()) {
+						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
+						text = routingHelper.formatStreetName(next.getStreetName(), next.getRef());
+					}
+				}
+			}
+			if(text == null) {
+				text = "";
+			}
+			if (!text.equals(getText().toString())) {
+				TextPaint pp = new TextPaint(getPaint());
+				if (!text.equals("")) {
+					pp.setTextSize(25 * scaleCoefficient);
+					float ts = pp.measureText(text);
+					int wth = getWidth();
+					while (ts > wth && pp.getTextSize() > (14 * scaleCoefficient)) {
+						pp.setTextSize(pp.getTextSize() - 1);
+						ts = pp.measureText(text);
+					}
+					boolean dots = false;
+					while (ts > wth) {
+						dots = true;
+						text = text.substring(0, text.length() - 2);
+						ts = pp.measureText(text);
+					}
+					if (dots) {
+						text += "..";
+					}
+					setTextSize(TypedValue.COMPLEX_UNIT_PX, pp.getTextSize());
+				} else {
+					setTextSize(TypedValue.COMPLEX_UNIT_PX, 7);
+				}
+				setText(text);
+				invalidate();
+				return true;
+			}
+			return false;
+		}
+
 	}
 
 

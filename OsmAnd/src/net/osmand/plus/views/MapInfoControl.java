@@ -7,7 +7,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
-public abstract class MapInfoControl extends View {
+public abstract class MapInfoControl extends View implements MapControlUpdateable {
 	int width = 0;
 	int height = 0;
 	Rect padding = new Rect();
@@ -56,6 +56,7 @@ public abstract class MapInfoControl extends View {
 		canvas.clipRect(0, 0, getWWidth(),getWHeight());
 	}
 	
+	@Override
 	public boolean updateInfo() { return false; }
 	
 	protected boolean updateVisibility(boolean visible) {

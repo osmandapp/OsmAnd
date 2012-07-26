@@ -9,6 +9,11 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="map_widget_map_select">Map selection</string>
+    <string name="map_widget_back_to_loc">Where am I</string>
+    <string name="map_widget_lock_screen">Lock screen</string>
+    <string name="map_widget_compass">Compass</string>
+    <string name="map_widget_top_stack">Status bar</string>
     <string name="map_widget_reset">Reset to default</string>
     <string name="map_widget_right_stack">Right side</string>
     <string name="map_widget_left_stack">Left side</string>
