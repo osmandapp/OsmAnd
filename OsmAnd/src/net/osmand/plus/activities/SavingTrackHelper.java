@@ -56,6 +56,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	private LatLon lastPoint;
 	private float distance = 0;
+	private boolean isOnPause = false;
 	
 	public SavingTrackHelper(OsmandApplication ctx){
 		super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
@@ -255,7 +256,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 	
 	public void insertData(double lat, double lon, double alt, double speed, double hdop, long time, OsmandSettings settings){
-		if (time - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get() * 1000) {
+		if ((time - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get() * 1000) && isOnPause) {
 			execWithClose(updateScript, new Object[] { lat, lon, alt, speed, hdop, time });
 			if (lastPoint == null || (time - lastTimeUpdated) > 180000) {
 				lastPoint = new LatLon(lat, lon);
@@ -317,5 +318,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	
 	public long getLastTimeUpdated() {
 		return lastTimeUpdated;
+	}
+
+	public void setOnPause(boolean isOnPause) {
+		this.isOnPause = isOnPause;
 	}
 }

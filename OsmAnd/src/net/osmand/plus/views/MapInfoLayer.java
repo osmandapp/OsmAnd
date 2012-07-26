@@ -7,8 +7,10 @@ import net.osmand.Algoritms;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.background.OsmandBackgroundServicePlugin;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
@@ -802,6 +804,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		});
 		compassView.setImageDrawable(compass);
 		statusBar.addView(compassView, params);
+		addBgView(statusBar);
 		
 		// Space (future text)
 		params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT, 1);
@@ -860,6 +863,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return statusBar;
 	}
 	
+	private void addBgView(final LinearLayout statusBar) {
+		final OsmandBackgroundServicePlugin backgroundServicePlugin = OsmandPlugin.getEnabledPlugin(OsmandBackgroundServicePlugin.class);
+		if (backgroundServicePlugin != null) {
+			backgroundServicePlugin.createBgServiceView(statusBar, view, map);
+		}
+	}
+
 	private static final float miniCoeff = 2f;
 	private MapInfoControl createLanesControl() {
 		final Path laneStraight = new Path();

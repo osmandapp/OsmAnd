@@ -245,6 +245,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				boolean isTrackMonitored = settings.SAVE_TRACK_TO_GPX.get();
 				settings.SAVE_TRACK_TO_GPX.set(!isTrackMonitored);
 				monitoringControl.updateInfo();
+				app.getSavingTrackHelper().setOnPause(settings.SAVE_TRACK_TO_GPX.get());
 			}
 		});
 		return monitoringControl;
