@@ -77,7 +77,7 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin {
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
 		ImageViewControl lockView = createBgServiceView( activity.getMapView(), activity);
 		// TODO icon
-		layer.getMapInfoControls().registerTopWidget(lockView, R.drawable.monitoring_rec_big, R.string.map_widget_lock_screen, "lock_view", true, EnumSet.allOf(ApplicationMode.class), 10);
+		layer.getMapInfoControls().registerTopWidget(lockView, R.drawable.monitoring_rec_small, R.string.map_widget_lock_screen, "lock_view", true, EnumSet.allOf(ApplicationMode.class), 10);
 	}
 	
 	@Override

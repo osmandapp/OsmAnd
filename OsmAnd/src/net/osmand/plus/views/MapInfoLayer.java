@@ -207,11 +207,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		ImageViewControl compassView = createCompassView(map);
 		mapInfoControls.registerTopWidget(compassView, R.drawable.compass, R.string.map_widget_compass, "compass", true, all, 5);
-		backToLocation = createBackToLocation(map);
-		mapInfoControls.registerTopWidget(backToLocation, R.drawable.default_mode_small, R.string.map_widget_back_to_loc, "back_to_location", false, all, 5);
+		View config = createConfiguration();
+		mapInfoControls.registerTopWidget(config, android.R.drawable.ic_menu_preferences, R.string.map_widget_config, "config", true, all, 10).required(ApplicationMode.values());
 		
+		backToLocation = createBackToLocation(map);
+		mapInfoControls.registerTopWidget(backToLocation, R.drawable.location_default, R.string.map_widget_back_to_loc, "back_to_location", false, all, 5);
 		View globusAndProgress = createGlobusAndProgress();
-		mapInfoControls.registerTopWidget(globusAndProgress, R.drawable.globus, R.string.map_widget_map_select, "progress", false, all, 10).required(ApplicationMode.values());
+		mapInfoControls.registerTopWidget(globusAndProgress, R.drawable.globus, R.string.map_widget_map_select, "progress", false, all, 10);
 		
 		topText = new TopTextView(routingHelper, map);
 	}
@@ -447,6 +449,18 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	
+	private View createConfiguration(){
+		final OsmandMapTileView view = map.getMapView();
+		ImageView configuration = new ImageView(map);
+		configuration.setBackgroundDrawable(view.getResources().getDrawable(android.R.drawable.ic_menu_preferences));
+		configuration.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				openViewConfigureDialog();
+			}
+		});
+		return configuration;
+	}
 	private View createGlobusAndProgress(){
 		Drawable globusDrawable = view.getResources().getDrawable(R.drawable.globus);
 		FrameLayout fl = new FrameLayout(view.getContext());
@@ -456,9 +470,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		globus.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO
-				openViewConfigureDialog();
-				// map.getMapLayers().selectMapLayer(view);
+				map.getMapLayers().selectMapLayer(view);
 			}
 		});
 		fl.addView(globus, fparams);
@@ -467,8 +479,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		progressBar.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				openViewConfigureDialog();
-//				map.getMapLayers().selectMapLayer(view);
+				map.getMapLayers().selectMapLayer(view);
 			}
 		});
 		fl.addView(progressBar, fparams);

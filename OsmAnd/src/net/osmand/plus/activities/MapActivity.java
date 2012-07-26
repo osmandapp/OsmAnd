@@ -1076,6 +1076,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		routingHelper.setAppMode(settings.getApplicationMode());
 		mapView.setMapPosition(settings.POSITION_ON_MAP.get());
 		registerUnregisterSensor(getLastKnownLocation(), false);
+		mapLayers.getMapInfoLayer().recreateControls();
 		mapLayers.getMapInfoLayer().applyTheme();
 		mapLayers.updateLayers(mapView);
 		
