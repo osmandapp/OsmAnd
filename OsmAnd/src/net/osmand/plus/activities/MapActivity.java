@@ -426,7 +426,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 
 	}
 
-	OsmandApplication getMyApplication() {
+	public OsmandApplication getMyApplication() {
 		return ((OsmandApplication) getApplication());
 	}
 

@@ -269,7 +269,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerBooleanPreference(osmandSettings.SHOW_SPEED_LIMITS, screen);
 		registerBooleanPreference(osmandSettings.AVOID_TOLL_ROADS, screen);
 		
-		registerBooleanPreference(osmandSettings.SHOW_ALTITUDE_INFO, screen);
 		
 		CheckBoxPreference nativeCheckbox = registerBooleanPreference(osmandSettings.NATIVE_RENDERING,screen);
 		//disable the checkbox if the library cannot be used

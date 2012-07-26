@@ -9,6 +9,19 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="map_widget_reset">Reset to default</string>
+    <string name="map_widget_right_stack">Right side</string>
+    <string name="map_widget_left_stack">Left side</string>
+    <string name="map_widget_parking">Parking</string>
+    <string name="map_widget_monitoring">Monitoring</string>
+    <string name="map_widget_speed">Speed</string>
+    <string name="map_widget_distance">Target</string>
+    <string name="map_widget_altitude">Altitude</string>
+    <string name="map_widget_time">Time to go</string>
+    <string name="map_widget_next_turn">Next turn</string>
+    <string name="map_widget_next_turn_small">Next turn (small)</string>
+    <string name="map_widget_next_next_turn">Second next turn</string>
+    <string name="map_widget_mini_route">Mini route map</string>
     <string name="bg_service_screen_lock">Lock/unlock screen</string>
     <string name="bg_service_screen_lock_toast">The screen is locked</string>
     <string name="bg_service_sleep_mode">Set sleep mode on/off</string>
@@ -39,8 +52,6 @@
     <string name="use_compass_navigation_descr">Use compass when direction is not detected</string>
     <string name="use_compass_navigation">Use compass</string>
     <string name="select_animate_speedup">Select animate route acceleration</string>
-    <string name="monitoring_info_control">Show logging button</string>
-    <string name="monitoring_info_control_desc">Display logging button on the map screen</string>
     
     <string name="global_app_allocated_memory_descr">Allocated memory %1$s MB (Android limit %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Allocated memory</string>
@@ -366,8 +377,6 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 \n\t- Other small features
 	</string>
 	
-	<string name="show_altitude_info_descr">Show current altitude information on map</string>
-	<string name="show_altitude_info">Show altitude</string>
 	<string name="use_transparent_map_theme_descr">Use transparent map controls</string>
 	<string name="use_transparent_map_theme">Transparent theme</string>
 

@@ -989,21 +989,16 @@ public class MapActivityActions implements DialogProvider {
 		} else {
 			AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
 			builder.setMessage(getString(R.string.gps_status_app_not_found));
-			builder.setPositiveButton(
-					getString(R.string.default_buttons_yes),
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog,
-								int which) {
-							Intent intent = new Intent(Intent.ACTION_VIEW,
-									Uri.parse("market://search?q=pname:"
-											+ GPS_STATUS_COMPONENT));
-							try {
-								mapActivity.startActivity(intent);
-							} catch (ActivityNotFoundException e) {
-							}
-						}
-					});
+			builder.setPositiveButton(getString(R.string.default_buttons_yes), new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:" + GPS_STATUS_COMPONENT));
+					try {
+						mapActivity.startActivity(intent);
+					} catch (ActivityNotFoundException e) {
+					}
+				}
+			});
 			builder.setNegativeButton(
 					getString(R.string.default_buttons_no), null);
 			builder.show();

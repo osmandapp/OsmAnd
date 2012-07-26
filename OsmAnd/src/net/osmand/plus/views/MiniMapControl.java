@@ -9,6 +9,7 @@ import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
+import android.view.View;
 
 public class MiniMapControl extends MapInfoControl {
 	private float scaleCoefficient = MapInfoLayer.scaleCoefficient;
@@ -48,7 +49,9 @@ public class MiniMapControl extends MapInfoControl {
 
 	@Override
 	public boolean updateInfo() {
-		invalidate();
+		if(getVisibility() == View.VISIBLE) {
+			invalidate();
+		}
 		return true;
 	}
 

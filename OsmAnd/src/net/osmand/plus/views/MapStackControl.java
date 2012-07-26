@@ -85,12 +85,20 @@ public class MapStackControl extends ViewGroup {
 	
 	public void addStackView(MapInfoControl v) {
 		stackViews.add(v);
-		MapStackControl.this.addView(v, 1);
+		MapStackControl.this.addView(v, getChildCount());
 	}
 
 	public void addCollapsedView(MapInfoControl v) {
 		collapsedViews.add(v);
-		MapStackControl.this.addView(v, 1);
+		MapStackControl.this.addView(v, getChildCount());
+	}
+	
+	public void clearAllViews(){
+		stackViews.clear();
+		collapsedViews.clear();
+		while(getChildCount() > 1){
+			removeViewAt(1);
+		}
 	}
 	
 	public List<MapInfoControl> getStackViews() {

@@ -59,6 +59,8 @@ public class OsmandSettings {
 		
 		boolean set(T obj);
 		
+		T getModeValue(ApplicationMode m);
+		
 		String getId();
 	}
 	
@@ -129,6 +131,11 @@ public class OsmandSettings {
 				switchApplicationMode(oldMode);
 			}
 			return changed;
+		}
+
+		@Override
+		public ApplicationMode getModeValue(ApplicationMode m) {
+			return m;
 		}
 	}; 
 	
@@ -259,6 +266,18 @@ public class OsmandSettings {
 		protected abstract T getValue(SharedPreferences prefs, T defaultValue);
 		
 		protected abstract boolean setValue(SharedPreferences prefs, T val);
+		
+		@Override
+		public T getModeValue(ApplicationMode mode) {
+			if(global) {
+				return get();
+			}
+			T defaultV = defaultValue;
+			if(defaultValues != null && defaultValues.containsKey(currentMode)){
+				defaultV = defaultValues.get(currentMode);
+			}
+			return getValue(getProfilePreferences(mode), defaultV);
+		}
 
 		@Override
 		public T get() {
@@ -587,16 +606,11 @@ public class OsmandSettings {
 	public final CommonPreference<String> LIVE_MONITORING_URL = new StringPreference("live_monitoring_url", 
 			"http://example.com?lat={0}&lon={1}&timestamp={2}&hdop={3}&altitude={4}&speed={5}").makeGlobal();
 
-	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Boolean> 	SHOW_MONITORING_CONTROL = new BooleanPreference("show_monitoring_control", false).makeProfile().cache();
-	{
-		SHOW_MONITORING_CONTROL.setModeDefaultValue(ApplicationMode.BICYCLE, true);
-		SHOW_MONITORING_CONTROL.setModeDefaultValue(ApplicationMode.CAR, false);
-		SHOW_MONITORING_CONTROL.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
-	}
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> SHOW_OSM_BUGS = new BooleanPreference("show_osm_bugs", false).makeGlobal();	
+	public final OsmandPreference<Boolean> SHOW_OSM_BUGS = new BooleanPreference("show_osm_bugs", false).makeGlobal();
+	
+	public final OsmandPreference<String> MAP_INFO_CONTROLS = new StringPreference("map_info_controls", "").makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DEBUG_RENDERING_INFO = new BooleanPreference("debug_rendering", false).makeGlobal();
@@ -1261,13 +1275,6 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> FLUORESCENT_OVERLAYS = 
 			new BooleanPreference("fluorescent_overlays", false).makeGlobal().cache();
 
-	public final CommonPreference<Boolean> SHOW_ALTITUDE_INFO = 
-			new BooleanPreference("show_altitude_info", false).makeProfile().cache();
-	{
-		SHOW_ALTITUDE_INFO.setModeDefaultValue(ApplicationMode.CAR, false);
-		SHOW_ALTITUDE_INFO.setModeDefaultValue(ApplicationMode.BICYCLE, true);
-		SHOW_ALTITUDE_INFO.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
-	}
 	
 	public final CommonPreference<Boolean> SHOW_RULER = 
 			new BooleanPreference("show_ruler", true).makeProfile().cache();

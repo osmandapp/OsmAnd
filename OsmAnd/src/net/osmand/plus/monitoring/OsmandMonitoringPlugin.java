@@ -1,5 +1,7 @@
 package net.osmand.plus.monitoring;
 
+import java.util.EnumSet;
+
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.plus.ContextMenuAdapter;
@@ -9,6 +11,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
@@ -21,11 +24,8 @@ import org.apache.commons.logging.Log;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Paint.Style;
 import android.graphics.drawable.Drawable;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
@@ -66,15 +66,19 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerLayers(MapActivity activity) {
-		monitoringControl = createMonitoringControl(activity);
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
-		layer.addRightStack(monitoringControl);
+		monitoringControl = createMonitoringControl(activity, layer.getPaintText(), layer.getPaintSubText());
+		
+		layer.getMapInfoControls().registerSideWidget(monitoringControl,
+				R.drawable.monitoring_rec_small, R.string.map_widget_monitoring, "monitoring", false,
+				EnumSet.of(ApplicationMode.BICYCLE, ApplicationMode.PEDESTRIAN), EnumSet.noneOf(ApplicationMode.class), 18);
+		layer.recreateControls();
 	}
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		if(monitoringControl != null) {
-			monitoringControl.updateInfo();
+		if(monitoringControl == null) {
+			registerLayers(activity);
 		}
 	}
 
@@ -133,10 +137,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		});
 		cat.addPreference(pref);
 
-		CheckBoxPreference infoControlPreference = activity.createCheckBoxPreference(settings.SHOW_MONITORING_CONTROL,
-				R.string.monitoring_info_control, R.string.monitoring_info_control_desc);
-		cat.addPreference(infoControlPreference);
-
 		cat = new PreferenceCategory(activity);
 		cat.setTitle(R.string.live_monitoring);
 		grp.addPreference(cat);
@@ -174,18 +174,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	/**
 	 * creates (if it wasn't created previously) the control to be added on a MapInfoLayer that shows a monitoring state (recorded/stopped)
 	 */
-	private MapInfoControl createMonitoringControl(final MapActivity map) {
-		Paint paintText = new Paint();
-		paintText.setStyle(Style.FILL_AND_STROKE);
-		paintText.setColor(Color.BLACK);
-		paintText.setTextSize(23 * MapInfoLayer.scaleCoefficient);
-		paintText.setAntiAlias(true);
-		paintText.setStrokeWidth(4);
-		Paint paintSubText = new Paint();
-		paintSubText.setStyle(Style.FILL_AND_STROKE);
-		paintSubText.setColor(Color.BLACK);
-		paintSubText.setTextSize(15 * MapInfoLayer.scaleCoefficient);
-		paintSubText.setAntiAlias(true);
+	private MapInfoControl createMonitoringControl(final MapActivity map, Paint paintText, Paint paintSubText) {
 		final Drawable monitoringBig = map.getResources().getDrawable(R.drawable.monitoring_rec_big);
 		final Drawable monitoringSmall = map.getResources().getDrawable(R.drawable.monitoring_rec_small);
 		final Drawable monitoringInactive = map.getResources().getDrawable(R.drawable.monitoring_rec_inactive);
@@ -193,32 +182,29 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			long lastUpdateTime;
 			@Override
 			public boolean updateInfo() {
-				boolean visible = false;
-				if (settings.SHOW_MONITORING_CONTROL.get()) {
-					visible = true;
-					String txt = "start";
-					String subtxt = null;
-					Drawable d = monitoringInactive;
-					long last = lastUpdateTime;
-					if (settings.SAVE_TRACK_TO_GPX.get()) {
-						float dist = app.getSavingTrackHelper().getDistance();
-						last = app.getSavingTrackHelper().getLastTimeUpdated();
-						String ds = OsmAndFormatter.getFormattedDistance(dist, map);
-						int ls = ds.lastIndexOf(' ');
-						if (ls == -1) {
-							txt = ds;
-						} else {
-							txt = ds.substring(0, ls);
-							subtxt = ds.substring(ls + 1);
-						}
-						d = monitoringBig;
+				boolean visible = true;
+				String txt = "start";
+				String subtxt = null;
+				Drawable d = monitoringInactive;
+				long last = lastUpdateTime;
+				if (settings.SAVE_TRACK_TO_GPX.get()) {
+					float dist = app.getSavingTrackHelper().getDistance();
+					last = app.getSavingTrackHelper().getLastTimeUpdated();
+					String ds = OsmAndFormatter.getFormattedDistance(dist, map);
+					int ls = ds.lastIndexOf(' ');
+					if (ls == -1) {
+						txt = ds;
+					} else {
+						txt = ds.substring(0, ls);
+						subtxt = ds.substring(ls + 1);
 					}
-					setText(txt, subtxt);
-					setImageDrawable(d);
-					if(last != lastUpdateTime) {
-						lastUpdateTime = last;
-						blink();
-					}
+					d = monitoringBig;
+				}
+				setText(txt, subtxt);
+				setImageDrawable(d);
+				if (last != lastUpdateTime) {
+					lastUpdateTime = last;
+					blink();
 				}
 				updateVisibility(visible);
 				return true;

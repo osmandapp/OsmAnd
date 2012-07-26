@@ -16,8 +16,8 @@ import android.graphics.Path;
 public class NextTurnInfoControl extends MapInfoControl {
 
 	private float scaleCoefficient = MapInfoLayer.scaleCoefficient;
-	private final float width;
-	private final float height ;
+	private float width;
+	private float height ;
 	private static final float miniCoeff = 2.5f;
 
 	protected Path pathForTurn = new Path();
@@ -27,20 +27,20 @@ public class NextTurnInfoControl extends MapInfoControl {
 	protected int nextTurnDirection = 0;
 	
 
-	private final Paint textPaint;
-	private final Paint subtextPaint;
+	protected Paint textPaint;
+	protected Paint subtextPaint;
 	private Paint paintBlack;
 	private Paint paintRouteDirection;
 
 	protected boolean makeUturnWhenPossible;
 	protected int turnImminent;
-	private final boolean horisontalMini;
+	protected boolean horisontalMini;
 
 	public NextTurnInfoControl(Context ctx, Paint textPaint, Paint subtextPaint, boolean horisontalMini) {
 		super(ctx);
 		this.textPaint = textPaint;
 		this.subtextPaint = subtextPaint;
-		this.horisontalMini = horisontalMini;
+
 
 		paintBlack = new Paint();
 		paintBlack.setStyle(Style.STROKE);
@@ -54,6 +54,12 @@ public class NextTurnInfoControl extends MapInfoControl {
 		paintRouteDirection.setAntiAlias(true);
 		
 		pathTransform = new Matrix();
+		updateHorisontalMini(horisontalMini);
+		
+	}
+
+	protected void updateHorisontalMini(boolean horisontalMini) {
+		this.horisontalMini = horisontalMini;
 		if (horisontalMini) {
 			pathTransform.postScale(scaleCoefficient / miniCoeff, scaleCoefficient / miniCoeff);
 			width = 72 * scaleCoefficient / miniCoeff;
@@ -63,8 +69,9 @@ public class NextTurnInfoControl extends MapInfoControl {
 			width = 72 * scaleCoefficient;
 			height = 72 * scaleCoefficient;
 		}
-		
+		requestLayout();
 	}
+	
 
 	protected Matrix pathTransform = new Matrix();
 
