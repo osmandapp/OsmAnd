@@ -152,8 +152,6 @@
   <string name="tip_select_destination_point">Výber cieľového bodu</string>
   <string name="tip_select_destination_point_t">"\tCieľ môžete určiť priamo na mape (kontextové menu, potom \'Nastaviť ako cieľ\'), vo všetkých hľadacích aktivitách, alebo dlhým kliknutím vo Vašom \'Zozname obľúbených bodov\'. \n\tCieľ je označený ako oranžový krúžok na mape a OsmAnd zobrazí vzdialenosť a smer k nemu (oranžový trojuholník). "</string>
   <string name="tip_recent_changes_0_6_9_t">"Zmeny vo verzii 0.6.9 : \n\t- Vylepšené offline vykresľovanie mapy \n\t- Rýchle natívne offline vykresľovanie - viď experimentálne funkcie (nemusí fungovať na všetkých zariadeniach) \n\t- Veľké zmeny vo vzhľade aplikácie \n\t- Informácie o nadmorskej výške \n\t- Nové preklady (Vietnamský, Polský) \n\t- Iné malé funkcie "</string>
-  <string name="show_altitude_info_descr">Zobrazí aktuálnu nadm. výšku na mape</string>
-  <string name="show_altitude_info">Zobraziť nadm. výšku</string>
   <string name="use_transparent_map_theme_descr">Použije priehľadné ovládače mapy</string>
   <string name="use_transparent_map_theme">Priehľadná téma</string>
   <string name="native_library_not_supported">Natívna knižnica nie je podporovaná na tomto zariadení.</string>
@@ -868,8 +866,6 @@
   <string name="global_app_allocated_memory">Pridelená pamäť</string>
   <string name="native_app_allocated_memory_descr">Celková natívna pamäť pridelená aplikácii %1$s MB (Dalvik %2$s MB, iné %3$s MB). Proporčná pamäť %4$s MB (Android limit %5$s MB, Dalvik %6$s MB).</string>
   <string name="native_app_allocated_memory">Celková natívna pamäť</string>
-  <string name="monitoring_info_control">Zobraziť logovacie tlačidlo</string>
-  <string name="monitoring_info_control_desc">Zobrazenie logovacieho tlačidla v mapovom zobrazení</string>
   <string name="select_animate_speedup">Vybrať zrýchlenie animovania trasy</string>
   <string name="osmand_parking_hours">Hodín</string>
   <string name="osmand_parking_minutes">Minút</string>
@@ -878,4 +874,35 @@
   <string name="use_compass_navigation">Použiť kompas</string>
   <string name="route_updated_loc_found">Cesta bude prepočítaná, keď sa nájde umiestnenie</string>
   <string name="continue_follow_previous_route_auto">Predošlá navigácia nebola dokončená. Pokračovať v jej nasledovaní? (%1$s sekúnd)</string>
-<string name="show_cameras_descr">Zobrazenie radarov (môže byť zakázané v niektorých krajinách)</string><string name="show_speed_limits_descr">Zobrazenie radarov a spomaľovačov</string><string name="avoid_toll_roads_descr">Vyvarovanie sa plateným cestám pri kalkulácii trasy</string><string name="show_cameras">Zobrazenie radarov</string><string name="show_speed_limits">Zobraziť radary</string><string name="avoid_toll_roads">Vyhnúť sa spoplatneným cestám</string><string name="tip_recent_changes_0_8_2_t">"Zmeny vo verzii 0.8.2 : \n\t* Vylepšená navigácia"</string></resources>
+  <string name="show_cameras_descr">Zobrazenie radarov (môže byť zakázané v niektorých krajinách)</string>
+  <string name="show_speed_limits_descr">Zobrazenie radarov a spomaľovačov</string>
+  <string name="avoid_toll_roads_descr">Vyvarovanie sa plateným cestám pri kalkulácii trasy</string>
+  <string name="show_cameras">Zobrazenie radarov</string>
+  <string name="show_speed_limits">Zobraziť radary</string>
+  <string name="avoid_toll_roads">Vyhnúť sa spoplatneným cestám</string>
+  <string name="tip_recent_changes_0_8_2_t">"Zmeny vo verzii 0.8.2 : \n\t* Vylepšená navigácia"</string>
+  <string name="map_widget_top_text">Street name</string>
+  <string name="map_widget_config">Configuration</string>
+  <string name="map_widget_map_select">Map selection</string>
+  <string name="map_widget_back_to_loc">Where am I</string>
+  <string name="map_widget_lock_screen">Lock screen</string>
+  <string name="map_widget_compass">Compass</string>
+  <string name="map_widget_top_stack">Status bar</string>
+  <string name="map_widget_reset">Reset to default</string>
+  <string name="map_widget_right_stack">Right side</string>
+  <string name="map_widget_left_stack">Left side</string>
+  <string name="map_widget_parking">Parking</string>
+  <string name="map_widget_monitoring">Monitoring</string>
+  <string name="map_widget_speed">Speed</string>
+  <string name="map_widget_distance">Target</string>
+  <string name="map_widget_altitude">Altitude</string>
+  <string name="map_widget_time">Time to go</string>
+  <string name="map_widget_next_turn">Next turn</string>
+  <string name="map_widget_next_turn_small">Next turn (small)</string>
+  <string name="map_widget_next_next_turn">Second next turn</string>
+  <string name="map_widget_mini_route">Mini route map</string>
+  <string name="bg_service_screen_lock">Lock/unlock screen</string>
+  <string name="bg_service_screen_lock_toast">The screen is locked</string>
+  <string name="bg_service_sleep_mode">Set sleep mode on/off</string>
+  <string name="bg_service_interval">Set wake-up interval:</string>
+</resources>
