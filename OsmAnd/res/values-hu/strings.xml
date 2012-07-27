@@ -150,8 +150,6 @@
   <string name="tip_select_destination_point">Beállítás célpontnak</string>
   <string name="tip_select_destination_point_t">\tA célpontot kiválaszthatod közvetlenül a térképről (helyi menü, \'Beállítás célpontnak\'), kereséssel, vagy a \'Kedvencek\' közül hosszú kattintással. \n\tA célpontot a térképen narancssárga pötty jelzi. Az ettől való távolságot a jobb felső sarokban láthatod, irányát pedig egy narancssárga nyíl mutatja.</string>
   <string name="tip_recent_changes_0_6_9_t">"A 0.6.9-es verzió változásai: \n\t- Javított vektoros térkép megjelenítés \n\t- Gyors natív vektoros térkép-megjelenítés - kísérleti állapotban van (egyes eszközökön nem működik) \n\t- Erőteljesen megváltoztatott kinézet \n\t- Magasság információ kijelzése \n\t- Új fordítások (vietnami, lengyel) \n\t- További kisebb fejlesztések "</string>
-  <string name="show_altitude_info_descr">Az aktuális magassági érték kijelzése a térképen</string>
-  <string name="show_altitude_info">Magassági érték kijelzése</string>
   <string name="use_transparent_map_theme_descr">Átlátszó háttér a térképkezelő gombokhoz</string>
   <string name="use_transparent_map_theme">Átlátszó téma</string>
   <string name="native_library_not_supported">A natív renderelő nem támogatott ezen az eszközön.</string>
@@ -870,8 +868,6 @@
   <string name="global_app_allocated_memory">Lefoglalt memória</string>
   <string name="native_app_allocated_memory_descr">Alkalmazás által lefoglalt összes natív memória %1$s MB (dalvik %2$s MB, egyéb %3$s MB). Proportional(?) memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</string>
   <string name="native_app_allocated_memory">Összes natív memória</string>
-  <string name="monitoring_info_control">Útvonalrögzítő gomb megjelenítése</string>
-  <string name="monitoring_info_control_desc">Útvonalrögzítés állapotának megjelenítése az információs panelen</string>
   <string name="select_animate_speedup">Útvonalszimuláció gyorsulása</string>
   <string name="osmand_parking_hours">Óra</string>
   <string name="osmand_parking_minutes">Perc</string>
@@ -880,4 +876,35 @@
   <string name="use_compass_navigation">Iránytű használata</string>
   <string name="route_updated_loc_found">"Amint megvan a pozíció, az útvonal újra lesz számítva"</string>
   <string name="continue_follow_previous_route_auto">Az előző útvonal navigáció még nem ért véget. Folytassuk? (%1$s másodperc)</string>
-<string name="show_cameras_descr">Show speed cameras (may be forbidden in some countries)</string><string name="show_speed_limits_descr">Show speed limits and traffic bumps</string><string name="avoid_toll_roads_descr">Avoid toll roads for route calculation</string><string name="show_cameras">Show speed cameras</string><string name="show_speed_limits">Show speed limits</string><string name="avoid_toll_roads">Avoid toll roads</string><string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Improved Routing "</string></resources>
+  <string name="show_cameras_descr">Show speed cameras (may be forbidden in some countries)</string>
+  <string name="show_speed_limits_descr">Show speed limits and traffic bumps</string>
+  <string name="avoid_toll_roads_descr">Avoid toll roads for route calculation</string>
+  <string name="show_cameras">Show speed cameras</string>
+  <string name="show_speed_limits">Show speed limits</string>
+  <string name="avoid_toll_roads">Avoid toll roads</string>
+  <string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Improved Routing "</string>
+  <string name="map_widget_top_text">Street name</string>
+  <string name="map_widget_config">Configuration</string>
+  <string name="map_widget_map_select">Map selection</string>
+  <string name="map_widget_back_to_loc">Where am I</string>
+  <string name="map_widget_lock_screen">Lock screen</string>
+  <string name="map_widget_compass">Compass</string>
+  <string name="map_widget_top_stack">Status bar</string>
+  <string name="map_widget_reset">Reset to default</string>
+  <string name="map_widget_right_stack">Right side</string>
+  <string name="map_widget_left_stack">Left side</string>
+  <string name="map_widget_parking">Parking</string>
+  <string name="map_widget_monitoring">Monitoring</string>
+  <string name="map_widget_speed">Speed</string>
+  <string name="map_widget_distance">Target</string>
+  <string name="map_widget_altitude">Altitude</string>
+  <string name="map_widget_time">Time to go</string>
+  <string name="map_widget_next_turn">Next turn</string>
+  <string name="map_widget_next_turn_small">Next turn (small)</string>
+  <string name="map_widget_next_next_turn">Second next turn</string>
+  <string name="map_widget_mini_route">Mini route map</string>
+  <string name="bg_service_screen_lock">Lock/unlock screen</string>
+  <string name="bg_service_screen_lock_toast">The screen is locked</string>
+  <string name="bg_service_sleep_mode">Set sleep mode on/off</string>
+  <string name="bg_service_interval">Set wake-up interval:</string>
+</resources>
