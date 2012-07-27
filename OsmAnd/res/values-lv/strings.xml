@@ -163,8 +163,6 @@
   <string name="tip_select_destination_point">Izvelēties galamērķi</string>
   <string name="tip_select_destination_point_t">\tJūs variet izvēlēties galamērķi tieši kartē (konteksta izvēlne, tad \'Uzstādīt kā galamērķi\'), visās meklēšanas darbībās, vai arī pieturot piespiestu ierakstu jūsu \'Jūsu favorītu punktu sarakstā\'. \n\tGalamērķis tiks iezīmēts kā oranžš riņķis kartē un OsmAnd attēlos attālumu līdz tam un virzienu uz to (ar oranžu trijstūri).</string>
   <string name="tip_recent_changes_0_6_9_t">"Izmaiņas versijā 0.6.9 : \n\t- Uzlabota kartes renderēšana \n\t- Ātra bezsaistes renderēšana - meklējiet eksperimentālās iespējas (var nestrādāt dažās iekārtās) \n\t- Pamatīgas izskata izmaiņas \n\t- Augstuma informācija \n\t- Jauni tulkojumi (Vjetnamiešu, Poļu) \n\t- Citi nelieli papildinājumi "</string>
-  <string name="show_altitude_info_descr">Rādīt tekošo augstuma informāciju uz kartes</string>
-  <string name="show_altitude_info">Rādīt augstumu</string>
   <string name="use_transparent_map_theme_descr">Lietot caurspīdīgas kartes vadības pogas</string>
   <string name="use_transparent_map_theme">Caurspīdīgā tēma</string>
   <string name="native_library_not_supported">Iekļautā bibliotēka šajā iekārtā netiek atbalstīta.</string>
@@ -870,8 +868,6 @@
   <string name="global_app_allocated_memory">Izmantotā atmiņa</string>
   <string name="native_app_allocated_memory_descr">Kopā aplikācijai izdalītais atmiņas apjums %1$s MB (dalvik %2$s MB, pārējam %3$s MB). Proporcionāli atmiņa %4$s MB (Android limits %5$s MB, dalvik %6$s MB).</string>
   <string name="native_app_allocated_memory">Kopā ierīces atmiņa</string>
-  <string name="monitoring_info_control">Rādīt ieraksta pogu</string>
-  <string name="monitoring_info_control_desc">Rādīt ieraksta pogu uz kartes</string>
   <string name="select_animate_speedup">Izvēlēties norādījumu animācijas akselerāciju</string>
   <string name="osmand_parking_hours">Stundas</string>
   <string name="osmand_parking_minutes">Minūtes</string>
@@ -880,4 +876,35 @@
   <string name="use_compass_navigation">Lietot kompasu</string>
   <string name="route_updated_loc_found">Tiko tiks noteiktas koordinātes, ceļš tiks pārrēķināts</string>
   <string name="continue_follow_previous_route_auto">Iepriekšējā navigācija netika pabeigta. Atsākt norādes? (%1$s sekundes)</string>
-<string name="show_cameras_descr">Rādīt fotoradarus (var būt aizliegts dažās valstīs)</string><string name="show_speed_limits_descr">"Rādīt ātruma ierobežojumus un ātruma samazināšanas šķēršļus"</string><string name="avoid_toll_roads_descr">Izvairīties no maksas ceļiem maršruta aprēķinā</string><string name="show_cameras">Rādīt radarus</string><string name="show_speed_limits">Rādīt ātruma ierobežojumus</string><string name="avoid_toll_roads">Izvairīties no maksas ceļiem</string><string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Uzlabota navigācija "</string></resources>
+  <string name="show_cameras_descr">Rādīt fotoradarus (var būt aizliegts dažās valstīs)</string>
+  <string name="show_speed_limits_descr">"Rādīt ātruma ierobežojumus un ātruma samazināšanas šķēršļus"</string>
+  <string name="avoid_toll_roads_descr">Izvairīties no maksas ceļiem maršruta aprēķinā</string>
+  <string name="show_cameras">Rādīt radarus</string>
+  <string name="show_speed_limits">Rādīt ātruma ierobežojumus</string>
+  <string name="avoid_toll_roads">Izvairīties no maksas ceļiem</string>
+  <string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Uzlabota navigācija "</string>
+  <string name="map_widget_top_text">Street name</string>
+  <string name="map_widget_config">Configuration</string>
+  <string name="map_widget_map_select">Map selection</string>
+  <string name="map_widget_back_to_loc">Where am I</string>
+  <string name="map_widget_lock_screen">Lock screen</string>
+  <string name="map_widget_compass">Compass</string>
+  <string name="map_widget_top_stack">Status bar</string>
+  <string name="map_widget_reset">Reset to default</string>
+  <string name="map_widget_right_stack">Right side</string>
+  <string name="map_widget_left_stack">Left side</string>
+  <string name="map_widget_parking">Parking</string>
+  <string name="map_widget_monitoring">Monitoring</string>
+  <string name="map_widget_speed">Speed</string>
+  <string name="map_widget_distance">Target</string>
+  <string name="map_widget_altitude">Altitude</string>
+  <string name="map_widget_time">Time to go</string>
+  <string name="map_widget_next_turn">Next turn</string>
+  <string name="map_widget_next_turn_small">Next turn (small)</string>
+  <string name="map_widget_next_next_turn">Second next turn</string>
+  <string name="map_widget_mini_route">Mini route map</string>
+  <string name="bg_service_screen_lock">Lock/unlock screen</string>
+  <string name="bg_service_screen_lock_toast">The screen is locked</string>
+  <string name="bg_service_sleep_mode">Set sleep mode on/off</string>
+  <string name="bg_service_interval">Set wake-up interval:</string>
+</resources>
