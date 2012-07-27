@@ -158,8 +158,6 @@
   <!-- this block not translated, is obsolete -->
   <string name="tip_recent_changes_0_6_9_t">♦</string>
   <!-- End: this block not translated, is obsolete -->
-  <string name="show_altitude_info_descr">Toon huidige hoogte-informatie op kaart</string>
-  <string name="show_altitude_info">Toon hoogte</string>
   <string name="use_transparent_map_theme_descr">Gebruik transparante kaarttoetsen</string>
   <string name="use_transparent_map_theme">Transparant thema</string>
   <string name="native_library_not_supported">Interne bibliotheek wordt niet ondersteund op dit apparaat.</string>
@@ -878,8 +876,6 @@
   <string name="global_app_allocated_memory">Beschikbaar werkgeheugen</string>
   <string name="native_app_allocated_memory_descr">Werkgeheugen, gereserveerd door app %1$s MB (Dalvik %2$s MB, overig %3$s MB). Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</string>
   <string name="native_app_allocated_memory">"Totaal werkgeheugen "</string>
-  <string name="monitoring_info_control">Toon knop voor track-registratie</string>
-  <string name="monitoring_info_control_desc">Toon een knop op het info paneel voor het registreren van de track</string>
   <string name="select_animate_speedup">Selecteer versnelling van de route-animatie</string>
   <string name="osmand_parking_hours">Uur</string>
   <string name="osmand_parking_minutes">Minuten</string>
@@ -888,4 +884,35 @@
   <string name="use_compass_navigation">Gebruik kompas</string>
   <string name="route_updated_loc_found">Route wordt herberekend als de locatie gevonden is</string>
   <string name="continue_follow_previous_route_auto">Vorige navigatie was nog niet klaar. Nu daarmee doorgaan? (%1$s seconden)</string>
-<string name="show_cameras_descr">Toon snelheidscontrole-camera\'s (is mogelijk verboden in sommige landen)</string><string name="show_speed_limits_descr">Toon maximaal toegestane snelheden en verkeersdrempels</string><string name="avoid_toll_roads_descr">Vermijd tolwegen bij routeberekening</string><string name="show_cameras">Toon snelheidscontroles</string><string name="show_speed_limits">Toon maximumsnelheden</string><string name="avoid_toll_roads">Vermijd tolwegen</string><string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Verbeterde routeberekening"</string></resources>
+  <string name="show_cameras_descr">Toon snelheidscontrole-camera\'s (is mogelijk verboden in sommige landen)</string>
+  <string name="show_speed_limits_descr">Toon maximaal toegestane snelheden en verkeersdrempels</string>
+  <string name="avoid_toll_roads_descr">Vermijd tolwegen bij routeberekening</string>
+  <string name="show_cameras">Toon snelheidscontroles</string>
+  <string name="show_speed_limits">Toon maximumsnelheden</string>
+  <string name="avoid_toll_roads">Vermijd tolwegen</string>
+  <string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Verbeterde routeberekening"</string>
+  <string name="map_widget_top_text">Street name</string>
+  <string name="map_widget_config">Configuration</string>
+  <string name="map_widget_map_select">Map selection</string>
+  <string name="map_widget_back_to_loc">Where am I</string>
+  <string name="map_widget_lock_screen">Lock screen</string>
+  <string name="map_widget_compass">Compass</string>
+  <string name="map_widget_top_stack">Status bar</string>
+  <string name="map_widget_reset">Reset to default</string>
+  <string name="map_widget_right_stack">Right side</string>
+  <string name="map_widget_left_stack">Left side</string>
+  <string name="map_widget_parking">Parking</string>
+  <string name="map_widget_monitoring">Monitoring</string>
+  <string name="map_widget_speed">Speed</string>
+  <string name="map_widget_distance">Target</string>
+  <string name="map_widget_altitude">Altitude</string>
+  <string name="map_widget_time">Time to go</string>
+  <string name="map_widget_next_turn">Next turn</string>
+  <string name="map_widget_next_turn_small">Next turn (small)</string>
+  <string name="map_widget_next_next_turn">Second next turn</string>
+  <string name="map_widget_mini_route">Mini route map</string>
+  <string name="bg_service_screen_lock">Lock/unlock screen</string>
+  <string name="bg_service_screen_lock_toast">The screen is locked</string>
+  <string name="bg_service_sleep_mode">Set sleep mode on/off</string>
+  <string name="bg_service_interval">Set wake-up interval:</string>
+</resources>
