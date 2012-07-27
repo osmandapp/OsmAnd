@@ -8,24 +8,39 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.activities.ApplicationMode;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
 
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.activities.ApplicationMode;
-
 public class MapInfoControls {
+	
+	public static final int LEFT_CONTROL = -1;
+	public static final int RIGHT_CONTROL = 1;
+	public static final int MAIN_CONTROL = 0;
 	
 	private Set<MapInfoControlRegInfo> left = new TreeSet<MapInfoControls.MapInfoControlRegInfo>();
 	private Set<MapInfoControlRegInfo> right = new TreeSet<MapInfoControls.MapInfoControlRegInfo>();
-	private Set<MapInfoControlRegInfo> topleft = new TreeSet<MapInfoControls.MapInfoControlRegInfo>();
-	private Set<MapInfoControlRegInfo> topright = new TreeSet<MapInfoControls.MapInfoControlRegInfo>(new Comparator<MapInfoControlRegInfo>() {
+	private Set<MapInfoControlRegInfo> top = new TreeSet<MapInfoControls.MapInfoControlRegInfo>(new Comparator<MapInfoControlRegInfo>() {
 		@Override
 		public int compare(MapInfoControlRegInfo object1, MapInfoControlRegInfo object2) {
-			return -object1.compareTo(object2);
+			if (object1.position != object2.position) {
+				if(object1.position == LEFT_CONTROL) {
+					return -1;
+				} else if(object1.position == RIGHT_CONTROL) {
+					return 1;
+				} else {
+					return object2.position == LEFT_CONTROL ? 1 : -1;
+				}
+			}
+			int cmp = object1.priorityOrder - object2.priorityOrder;
+			if(object1.position == RIGHT_CONTROL) {
+				cmp = -cmp;
+			}
+			return cmp;
 		}
 	});
 	private Map<ApplicationMode, Set<String>> visibleElements = new LinkedHashMap<ApplicationMode, Set<String>>();
@@ -50,7 +65,7 @@ public class MapInfoControls {
 		
 	}
 	
-	public MapInfoControlRegInfo registerTopWidget(View m, int drawable, int messageId, String key, boolean left,
+	public MapInfoControlRegInfo registerTopWidget(View m, int drawable, int messageId, String key, int left,
 			EnumSet<ApplicationMode> appDefaultModes, int priorityOrder) {
 		MapInfoControlRegInfo ii = new MapInfoControlRegInfo();
 		ii.defaultModes = appDefaultModes.clone();
@@ -72,11 +87,8 @@ public class MapInfoControls {
 		ii.messageId = messageId;
 		ii.m = m;
 		ii.priorityOrder = priorityOrder;
-		if(left) {
-			this.topleft.add(ii);
-		} else {
-			this.topright.add(ii);
-		}
+		ii.position = left;
+		this.top.add(ii);
 		return ii;
 	}
 	
@@ -131,8 +143,7 @@ public class MapInfoControls {
 			LinkedHashSet<String> set = new LinkedHashSet<String>();
 			restoreModes(set, left, mode);
 			restoreModes(set, right, mode);
-			restoreModes(set, topleft, mode);
-			restoreModes(set, topright, mode);
+			restoreModes(set, top, mode);
 			this.visibleElements.put(mode, set);
 		}
 		this.visibleElements.get(mode).remove(m.key);
@@ -166,12 +177,8 @@ public class MapInfoControls {
 		return right;
 	}
 	
-	public Set<MapInfoControlRegInfo> getTopLeft() {
-		return topleft;
-	}
-	
-	public Set<MapInfoControlRegInfo> getTopRight() {
-		return topright;
+	public Set<MapInfoControlRegInfo> getTop() {
+		return top;
 	}
 	
 	public void populateStackControl(MapStackControl stack, OsmandMapTileView v, boolean left){
@@ -186,20 +193,16 @@ public class MapInfoControls {
 		}
 	}
 	
-	public void populateStatusBar(ViewGroup statusBar, TextView topView){
+	public void populateStatusBar(ViewGroup statusBar){
 		ApplicationMode appMode = settings.getApplicationMode();
-		for (MapInfoControlRegInfo r : topleft) {
+		for (MapInfoControlRegInfo r : top) {
+			boolean main = r.position == MAIN_CONTROL;
 			if (r.visibleModes.contains(appMode)) {
-				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, main? 1 : 0);
 				statusBar.addView((View) r.m, params);
-			}
-		}
-		LayoutParams pms = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT, 1);
-		statusBar.addView(topView, pms);
-		for (MapInfoControlRegInfo r : topright) {
-			if (r.visibleModes.contains(appMode)) {
-				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-				statusBar.addView((View) r.m, params);
+			} else if (main) {
+				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1);
+				statusBar.addView(new TextView(((View) r.m).getContext()), params);
 			}
 		}
 	}
@@ -223,8 +226,7 @@ public class MapInfoControls {
 		ApplicationMode appMode = settings.getApplicationMode();
 		resetDefault(appMode, left);
 		resetDefault(appMode, right);
-		resetDefault(appMode, topleft);
-		resetDefault(appMode, topright);
+		resetDefault(appMode, top);
 		this.visibleElements.put(appMode, null);
 		settings.MAP_INFO_CONTROLS.set("");
 	}
@@ -243,6 +245,7 @@ public class MapInfoControls {
 		public int drawable;
 		public int messageId;
 		private String key;
+		private int position;
 		private EnumSet<ApplicationMode> defaultModes;
 		private EnumSet<ApplicationMode> defaultCollapsible;
 		private EnumSet<ApplicationMode> visibleModes;
@@ -267,6 +270,7 @@ public class MapInfoControls {
 			}
 			return this;
 		}
+		
 		
 		@Override
 		public int hashCode() {

@@ -77,11 +77,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private LinearLayout statusBar;
 	private MapInfoControl lanesControl;
 	private MapInfoControl alarmControl;
-	private TextView topText;
 	private MapInfoControls mapInfoControls;
 
 	private boolean isScreenLocked = false;
 	private boolean isBgServiceStarted = false;
+	private TopTextView topText;
 
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
@@ -217,21 +217,22 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.registerSideWidget(alt, R.drawable.ic_altitude, R.string.map_widget_altitude, "altitude", false, EnumSet.of(ApplicationMode.PEDESTRIAN), none, 20);
 		
 		ImageViewControl compassView = createCompassView(map);
-		mapInfoControls.registerTopWidget(compassView, R.drawable.compass, R.string.map_widget_compass, "compass", true, all, 5);
+		mapInfoControls.registerTopWidget(compassView, R.drawable.compass, R.string.map_widget_compass, "compass", MapInfoControls.LEFT_CONTROL, all, 5);
 		
 		View config = createConfiguration();
-		mapInfoControls.registerTopWidget(config, android.R.drawable.ic_menu_preferences, R.string.map_widget_config, "config", true, all, 10).required(ApplicationMode.values());
+		mapInfoControls.registerTopWidget(config, android.R.drawable.ic_menu_preferences, R.string.map_widget_config, "config", MapInfoControls.LEFT_CONTROL, all, 10).required(ApplicationMode.values());
 
 //		TODO icons and strings
 		View bgServiceView = createBgServiceView();
-		mapInfoControls.registerTopWidget(bgServiceView, R.drawable.monitoring_rec_big, R.string.bg_service_screen_lock, "bgService", true, all, 15);
+		mapInfoControls.registerTopWidget(bgServiceView, R.drawable.monitoring_rec_big, R.string.bg_service_screen_lock, "bgService", MapInfoControls.LEFT_CONTROL, all, 15);
 		
 		backToLocation = createBackToLocation(map);
-		mapInfoControls.registerTopWidget(backToLocation, R.drawable.location_default, R.string.map_widget_back_to_loc, "back_to_location", false, all, 5);
+		mapInfoControls.registerTopWidget(backToLocation, R.drawable.location_default, R.string.map_widget_back_to_loc, "back_to_location", MapInfoControls.RIGHT_CONTROL, all, 5);
 		View globusAndProgress = createGlobusAndProgress();
-		mapInfoControls.registerTopWidget(globusAndProgress, R.drawable.globus, R.string.map_widget_map_select, "progress", false, all, 10);
+		mapInfoControls.registerTopWidget(globusAndProgress, R.drawable.globus, R.string.map_widget_map_select, "progress", MapInfoControls.RIGHT_CONTROL, all, 10);
 		
 		topText = new TopTextView(routingHelper, map);
+		mapInfoControls.registerTopWidget(topText, R.drawable.arrow_up, R.string.map_widget_top_text, "street_name", MapInfoControls.MAIN_CONTROL, all, 100);
 	}
 	
 	public void recreateControls(){
@@ -244,7 +245,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		rightStack.requestLayout();
 		
 		statusBar.removeAllViews();
-		mapInfoControls.populateStatusBar(statusBar, topText);
+		mapInfoControls.populateStatusBar(statusBar);
 	}
 	
 	public void createControls() {
@@ -320,8 +321,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		final ArrayList<Object> list = new ArrayList<Object>();
 		list.add(map.getString(R.string.map_widget_reset));
 		list.add(map.getString(R.string.map_widget_top_stack));
-		list.addAll(mapInfoControls.getTopLeft());
-		list.addAll(mapInfoControls.getTopRight());
+		list.addAll(mapInfoControls.getTop());
 		list.add(map.getString(R.string.map_widget_right_stack));
 		list.addAll(mapInfoControls.getRight());
 		list.add(map.getString(R.string.map_widget_left_stack));
@@ -437,10 +437,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		leftStack.updateInfo();
 		lanesControl.updateInfo();
 		alarmControl.updateInfo();
-		for(int i=0; i<statusBar.getChildCount(); i++) {
+		for (int i = 0; i < statusBar.getChildCount(); i++) {
 			View v = statusBar.getChildAt(i);
-			if(v instanceof MapControlUpdateable)  {
-				((MapControlUpdateable)v).updateInfo();
+			if (v instanceof MapControlUpdateable) {
+				((MapControlUpdateable) v).updateInfo();
 			}
 		}
 	}

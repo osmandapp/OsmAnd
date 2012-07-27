@@ -497,6 +497,12 @@ public class RoutingHelper {
 	}
 	
 	public synchronized String getCurrentName(){
+		NextDirectionInfo n = getNextRouteDirectionInfo(new NextDirectionInfo(), false);
+		if((n.imminent == 0 || n.imminent == 1) && (n.directionInfo != null)) {
+			String nm = n.directionInfo.getStreetName();
+			String rf = n.directionInfo.getRef();
+			return formatStreetName(nm, rf);
+		}
 		RouteSegmentResult rs = route.getCurrentSegmentResult();
 		if(rs != null) {
 			String nm = rs.getObject().getName();
