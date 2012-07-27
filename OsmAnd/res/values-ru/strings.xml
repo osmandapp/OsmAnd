@@ -117,8 +117,6 @@
   <string name="tip_select_destination_point">Выбор точки назначения</string>
   <string name="tip_select_destination_point_t">" \n\tВы можете выбрать точку назначения в контекстном меню карты \'Идти к\' или в поиске. \n\tВы также можете выбрать избранную точку долгим нажатием в \'Избранных\'."</string>
   <string name="tip_recent_changes_0_6_9_t">"Изменения в 0.6.9: \n\t- Более детальная отрисовка векторных карт \n\t- Быстрая аппаратная отрисовка карт(экспериментальные настройки) \n\t- Существенные изменения внешнего вида \n\t- Информация о высоте \n\t- Исправления ошибок и мелкие улучшения "</string>
-  <string name="show_altitude_info_descr">Показывать текущую высоту на карте</string>
-  <string name="show_altitude_info">Показывать высоты</string>
   <string name="use_transparent_map_theme_descr">Использовать прозрачные информационные элементы на карте</string>
   <string name="use_transparent_map_theme">Прозрачная тема</string>
   <string name="native_library_not_supported">Нативная библиотека не поддерживается на этом устройстве.</string>
@@ -873,8 +871,6 @@
   <string name="starting_point_too_far">Начало маршрута слишком далеко от ближайшей дороги.</string>
   <string name="shared_location">Общие места</string>
   <string name="select_animate_speedup">Укажите скорость анимации маршрута</string>
-  <string name="monitoring_info_control">Показывать кнопку мониторинга (записи трека)</string>
-  <string name="monitoring_info_control_desc">Показывать кнопку мониторинга (записи трека) на карте</string>
   <string name="global_app_allocated_memory_descr">Выделено памяти %1$s MB (Ограничение Android %2$s MB, Dalvik %3$s MB).</string>
   <string name="global_app_allocated_memory">Выделено памяти</string>
   <string name="native_app_allocated_memory_descr">Всего физической памяти выделено приложению %1$s MB (Dalvik %2$s MB, другое %3$s MB). Proportional memory %4$s MB (Ограничение Android %5$s MB, Dalvik %6$s MB).</string>
@@ -887,4 +883,35 @@
   <string name="use_compass_navigation">Использовать компас</string>
   <string name="route_updated_loc_found">Маршрут будет пересчитан когда определится местоположение</string>
   <string name="continue_follow_previous_route_auto">Предыдущий маршрут был не закончен. Продолжить следование по нему? (%1$s секунд)</string>
-<string name="show_cameras_descr">Показать скоростные камеры (может быть запрещено в некоторых странах)</string><string name="show_speed_limits_descr">Показать ограничения скорости и лежачих полицейских</string><string name="avoid_toll_roads_descr">Избегать платных дорог при прокладке маршрута</string><string name="show_cameras">Показать скоростные камеры</string><string name="show_speed_limits">Показать ограничения скорости</string><string name="avoid_toll_roads">Избегать платных дорог</string><string name="tip_recent_changes_0_8_2_t">"Изменения в 0.8.2 : \n\t* Улучшенная прокладка маршрута"</string></resources>
+  <string name="show_cameras_descr">Показать скоростные камеры (может быть запрещено в некоторых странах)</string>
+  <string name="show_speed_limits_descr">Показать ограничения скорости и лежачих полицейских</string>
+  <string name="avoid_toll_roads_descr">Избегать платных дорог при прокладке маршрута</string>
+  <string name="show_cameras">Показать скоростные камеры</string>
+  <string name="show_speed_limits">Показать ограничения скорости</string>
+  <string name="avoid_toll_roads">Избегать платных дорог</string>
+  <string name="tip_recent_changes_0_8_2_t">"Изменения в 0.8.2 : \n\t* Улучшенная прокладка маршрута"</string>
+  <string name="map_widget_top_text">Street name</string>
+  <string name="map_widget_config">Configuration</string>
+  <string name="map_widget_map_select">Map selection</string>
+  <string name="map_widget_back_to_loc">Where am I</string>
+  <string name="map_widget_lock_screen">Lock screen</string>
+  <string name="map_widget_compass">Compass</string>
+  <string name="map_widget_top_stack">Status bar</string>
+  <string name="map_widget_reset">Reset to default</string>
+  <string name="map_widget_right_stack">Right side</string>
+  <string name="map_widget_left_stack">Left side</string>
+  <string name="map_widget_parking">Parking</string>
+  <string name="map_widget_monitoring">Monitoring</string>
+  <string name="map_widget_speed">Speed</string>
+  <string name="map_widget_distance">Target</string>
+  <string name="map_widget_altitude">Altitude</string>
+  <string name="map_widget_time">Time to go</string>
+  <string name="map_widget_next_turn">Next turn</string>
+  <string name="map_widget_next_turn_small">Next turn (small)</string>
+  <string name="map_widget_next_next_turn">Second next turn</string>
+  <string name="map_widget_mini_route">Mini route map</string>
+  <string name="bg_service_screen_lock">Lock/unlock screen</string>
+  <string name="bg_service_screen_lock_toast">The screen is locked</string>
+  <string name="bg_service_sleep_mode">Set sleep mode on/off</string>
+  <string name="bg_service_interval">Set wake-up interval:</string>
+</resources>
