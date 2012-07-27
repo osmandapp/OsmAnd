@@ -201,8 +201,6 @@
   <string name="tip_select_destination_point">აირჩიეთ საბოლოო წერტილი</string>
   <string name="tip_select_destination_point_t">\tთქვენ შეგიძლიათ დანიშნულების წერტილის პირდაპირ რუკაზე მითითება (კონტექსტური მენიუ -&gt; \'დანიშნულების პუნქტად დანიშვნა\'). ან დიდი ხნის დაჭერით თქვენივე სიაში \'რჩეულთა სია\'.\n\tდანიშნულების წერტილი რუკაზე ჩანს როგორც მოყვითალო წრე. OsmAnd გაჩვენებთ დაშორებას და მიმართულებას მისკენ თქვენი მიმდინარე მდებარეობაზე დამოკიდებულებით(მოყვითალო სამკუთხედი).</string>
   <string name="tip_recent_changes_0_6_9_t">"ცვლილებები 0.6.9-ში : \n\t- გაუმჯობესდა გათიშული რუკების რენდერი\n\t- მოყოლილი სწრაფი გათიშული რენდერი - შეიხედეთ ექსპერიმენტალურ მახასიათებლებში(არ მუშაობს ზოგიერთ მოწყობილობაზე)\n\t- მასიურად შეცვლილი ინტერფეისი\n\t- ინფორმაციის ჩვენება სიმაღლის შესახებ\n\t- დაემატა ახალი ენები(ვიეტნამური, პოლონური)\n\t- სხვა პატარა ცვლილებები"</string>
-  <string name="show_altitude_info_descr">რუკაზე სიმაღლის ინფორმაციის ჩვენება</string>
-  <string name="show_altitude_info">ჩვენება სიმაღლისა ზღვის დონიდან</string>
   <string name="use_transparent_map_theme_descr">რუკის კონტროლის გამჭირვალეობა</string>
   <string name="use_transparent_map_theme">გამჭირვალე თემა</string>
   <string name="native_library_not_supported">ადგილობრივი ბიბლიოთეკა მოცემულ მოწყობილობაზე მხარდაჭერილი არაა.</string>
@@ -875,8 +873,6 @@
   <string name="starting_point_too_far">საწყისი წერტილი მეტისმეტად შორსაა უახლოესი გზისაგან.</string>
   <string name="shared_location">გაზიარებული მდებარეობა</string>
   <string name="select_animate_speedup">აირჩიეთ მოძრავი გზის აჩქარება</string>
-  <string name="monitoring_info_control">ჟურნალის ღილაკი</string>
-  <string name="monitoring_info_control_desc">საინფორმაციო პანელზე ჟურნალის ღილაკის ჩვენება</string>
   <string name="global_app_allocated_memory_descr">გამოყოფილი მეხსიერება %1$s მბ (Android-ის ლიმიტი %2$s მბ, Dalvik %3$s მბ).</string>
   <string name="global_app_allocated_memory">გამოყოფილი მეხსიერება</string>
   <string name="native_app_allocated_memory_descr">აპლიკაციის მიერ გამოყენებული ჯამური ადგილობრივი მეხსიერება %1$s მბ (Dalvik %2$s მბ, სხვა %3$s მბ). პროპორციული მეხსიერება %4$s მბ (Android-ის ლიმიტი %5$s მბ, Dalvik %6$s მბ).</string>
@@ -889,4 +885,35 @@
   <string name="use_compass_navigation">კომპასის გამოყენება</string>
   <string name="route_updated_loc_found">გზის გადათვლა სასურველი წერტილის პოვნის შემთხვევაში</string>
   <string name="continue_follow_previous_route_auto">წინა გზა არ დასრულებულა. გნებავთ მიდი გაყოლა? (%1$s წმ)</string>
-<string name="show_cameras_descr">Show speed cameras (may be forbidden in some countries)</string><string name="show_speed_limits_descr">Show speed limits and traffic bumps</string><string name="avoid_toll_roads_descr">Avoid toll roads for route calculation</string><string name="show_cameras">Show speed cameras</string><string name="show_speed_limits">Show speed limits</string><string name="avoid_toll_roads">Avoid toll roads</string><string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Improved Routing "</string></resources>
+  <string name="show_cameras_descr">Show speed cameras (may be forbidden in some countries)</string>
+  <string name="show_speed_limits_descr">Show speed limits and traffic bumps</string>
+  <string name="avoid_toll_roads_descr">Avoid toll roads for route calculation</string>
+  <string name="show_cameras">Show speed cameras</string>
+  <string name="show_speed_limits">Show speed limits</string>
+  <string name="avoid_toll_roads">Avoid toll roads</string>
+  <string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Improved Routing "</string>
+  <string name="map_widget_top_text">Street name</string>
+  <string name="map_widget_config">Configuration</string>
+  <string name="map_widget_map_select">Map selection</string>
+  <string name="map_widget_back_to_loc">Where am I</string>
+  <string name="map_widget_lock_screen">Lock screen</string>
+  <string name="map_widget_compass">Compass</string>
+  <string name="map_widget_top_stack">Status bar</string>
+  <string name="map_widget_reset">Reset to default</string>
+  <string name="map_widget_right_stack">Right side</string>
+  <string name="map_widget_left_stack">Left side</string>
+  <string name="map_widget_parking">Parking</string>
+  <string name="map_widget_monitoring">Monitoring</string>
+  <string name="map_widget_speed">Speed</string>
+  <string name="map_widget_distance">Target</string>
+  <string name="map_widget_altitude">Altitude</string>
+  <string name="map_widget_time">Time to go</string>
+  <string name="map_widget_next_turn">Next turn</string>
+  <string name="map_widget_next_turn_small">Next turn (small)</string>
+  <string name="map_widget_next_next_turn">Second next turn</string>
+  <string name="map_widget_mini_route">Mini route map</string>
+  <string name="bg_service_screen_lock">Lock/unlock screen</string>
+  <string name="bg_service_screen_lock_toast">The screen is locked</string>
+  <string name="bg_service_sleep_mode">Set sleep mode on/off</string>
+  <string name="bg_service_interval">Set wake-up interval:</string>
+</resources>
