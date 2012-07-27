@@ -190,8 +190,6 @@
   <string name="tip_select_destination_point">Ziel wählen</string>
   <string name="tip_select_destination_point_t">\tEin Ziel kann direkt in der Karte gewählt werden via Kontextmenü -&gt; \'Als Ziel wählen\', aus der Such-Funktion heraus oder über die Favoritenliste durch langes Drücken. \n\tDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd in der Karte die Entfernung und die Richtung (oranges Dreieck) an.</string>
   <string name="tip_recent_changes_0_6_9_t">"Änderungen in 0.6.9 : \n\t- Verbesserte Offline-Kartenanzeige \n\t- Schnelles \"Native Rendering\" - siehe Development-Einstellungen (funktioniert evtl. nicht auf jedem Gerät) \n\t- Massive Änderungen am \"Look and Feel\" \n\t- Höhenanzeige \n\t- Neue Sprachversionen (vietnamesisch, polnisch) \n\t- Weitere kleine Funktionalitäten "</string>
-  <string name="show_altitude_info_descr">Anzeige der gegenwärtigen Höhe in der Kartenansicht</string>
-  <string name="show_altitude_info">Höhe anzeigen</string>
   <string name="use_transparent_map_theme_descr">Transparente Schaltflächen verwenden</string>
   <string name="use_transparent_map_theme">Transparentes Layout</string>
   <string name="native_library_not_supported">Native Library wird auf diesem Gerät nicht unterstützt.</string>
@@ -870,8 +868,6 @@
   <string name="global_app_allocated_memory">Belegter Speicher</string>
   <string name="native_app_allocated_memory_descr">Insgesamt durch App belegter nativer Speicher %1$s MB (Dalvik %2$s MB, anderer %3$s MB). Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string>
   <string name="native_app_allocated_memory">Gesamter nativer Speicher</string>
-  <string name="monitoring_info_control">Logging-Taste anzeigen</string>
-  <string name="monitoring_info_control_desc">Logging-Taste in der Kartenansicht einblenden</string>
   <string name="select_animate_speedup">beschleunigte Routen-Animation auswählen</string>
   <string name="osmand_parking_hours">Stunde(n)</string>
   <string name="osmand_parking_minutes">Minuten</string>
@@ -880,4 +876,35 @@
   <string name="use_compass_navigation">Kompass verwenden</string>
   <string name="route_updated_loc_found">Route wird neu berechnet sobald Standort ermittelt</string>
   <string name="continue_follow_previous_route_auto">Vorherige Navigation wurde nicht beendet. Der Route weiter folgen? (%1$s Sekunden)</string>
-<string name="show_cameras_descr">Radarkontrollen anzeigen (in einigen Ländern illegal!)</string><string name="show_speed_limits_descr">Geschwindigkeitsbegrenzungen und Verkehrsberuhigungen anzeigen</string><string name="avoid_toll_roads_descr">Mautpflichtige Straßen vermeiden</string><string name="show_cameras">Radarkontrollen anzeigen</string><string name="show_speed_limits">Geschwindigkeitsbegrenzungen anzeigen</string><string name="avoid_toll_roads">Vermeide Mautstraßen</string><string name="tip_recent_changes_0_8_2_t">"Änderungen in 0.8.2 : \n\t* Improved Routing "</string></resources>
+  <string name="show_cameras_descr">Radarkontrollen anzeigen (in einigen Ländern illegal!)</string>
+  <string name="show_speed_limits_descr">Geschwindigkeitsbegrenzungen und Verkehrsberuhigungen anzeigen</string>
+  <string name="avoid_toll_roads_descr">Mautpflichtige Straßen vermeiden</string>
+  <string name="show_cameras">Radarkontrollen anzeigen</string>
+  <string name="show_speed_limits">Geschwindigkeitsbegrenzungen anzeigen</string>
+  <string name="avoid_toll_roads">Vermeide Mautstraßen</string>
+  <string name="tip_recent_changes_0_8_2_t">"Änderungen in 0.8.2 : \n\t* Improved Routing "</string>
+  <string name="map_widget_top_text">Street name</string>
+  <string name="map_widget_config">Configuration</string>
+  <string name="map_widget_map_select">Map selection</string>
+  <string name="map_widget_back_to_loc">Where am I</string>
+  <string name="map_widget_lock_screen">Lock screen</string>
+  <string name="map_widget_compass">Compass</string>
+  <string name="map_widget_top_stack">Status bar</string>
+  <string name="map_widget_reset">Reset to default</string>
+  <string name="map_widget_right_stack">Right side</string>
+  <string name="map_widget_left_stack">Left side</string>
+  <string name="map_widget_parking">Parking</string>
+  <string name="map_widget_monitoring">Monitoring</string>
+  <string name="map_widget_speed">Speed</string>
+  <string name="map_widget_distance">Target</string>
+  <string name="map_widget_altitude">Altitude</string>
+  <string name="map_widget_time">Time to go</string>
+  <string name="map_widget_next_turn">Next turn</string>
+  <string name="map_widget_next_turn_small">Next turn (small)</string>
+  <string name="map_widget_next_next_turn">Second next turn</string>
+  <string name="map_widget_mini_route">Mini route map</string>
+  <string name="bg_service_screen_lock">Lock/unlock screen</string>
+  <string name="bg_service_screen_lock_toast">The screen is locked</string>
+  <string name="bg_service_sleep_mode">Set sleep mode on/off</string>
+  <string name="bg_service_interval">Set wake-up interval:</string>
+</resources>
