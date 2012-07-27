@@ -250,8 +250,6 @@
   <string name="tip_select_destination_point">Pasirinkti kelionės tikslą</string>
   <string name="tip_select_destination_point_t">"\tKelionės tikslą jūs galite pasirinkti tiesiog žemėlapyje (kontekstiniame meniu pasirinkite \'Kelionės tikslas\'), visose paieškose arba ilgai paspaudus įrašą esantį \'Išsaugotų vietų sąrašas\' sąraše. \n\tKalionės tikslas žemėlapyje būna pažymėtas orandžiniu disku ir OsmAnd rodo kryptį ir atstumą iki jo (oranžinis trikampis). "</string>
   <string name="tip_recent_changes_0_6_9_t">"Pakeitimai 0.6.9 versijoje : \n\t- Patobulintas parsiųstų žemėlapių atvaizdavimas \n\t- Greitas Native parsiųstų žemėlapių vaizdavimas - ieškokite eksperimentinėse sąvybėse (dalyje įrenginių gali neveikti) \n\t- Daug išvaizdos pakeitimų \n\t- Aukščio informacija \n\t- Išversta į naujas kalbas (vietnamiečių, lenkų) \n\t- Kitos smulkios sąvybės "</string>
-  <string name="show_altitude_info_descr">Rodyti dabartinės altitudės informaciją žemėlapyje</string>
-  <string name="show_altitude_info">Rodyti altitudę</string>
   <string name="use_transparent_map_theme_descr">Naudoti permatomas žemėlapio valdymo priemones</string>
   <string name="use_transparent_map_theme">Permatoma tema</string>
   <string name="native_library_not_supported">Native biblioteka šiame įrenginyje nepalaikoma.</string>
@@ -879,8 +877,6 @@
   <string name="global_app_allocated_memory">Skirta atminties</string>
   <string name="native_app_allocated_memory_descr">Bendras skirtos atminties kiekis yra %1$s MB (Dalvik %2$s MB, kita %3$s MB). Proporcinės atminties %4$s MB (Androido limitas %5$s MB, Dalvik %6$s MB).</string>
   <string name="native_app_allocated_memory">Viso atminties</string>
-  <string name="monitoring_info_control">Rodyti informacijos išsaugojimo mygtuką</string>
-  <string name="monitoring_info_control_desc">Rodyti informacijos išsaugojimo mygtuką žemėlapio rodinyje</string>
   <string name="select_animate_speedup">Pasirinkti animuotą maršruto pagreitinimą</string>
   <string name="osmand_parking_hours">Valandos</string>
   <string name="osmand_parking_minutes">Minutės</string>
@@ -889,4 +885,35 @@
   <string name="use_compass_navigation">Naudoti kompasą</string>
   <string name="route_updated_loc_found">Maršrutas bus perskaičiuotas kai bus gauta dabartinė vieta</string>
   <string name="continue_follow_previous_route_auto">Paskutinis maršrutas nebuvo baigtas. Tęsti jį toliau? (%1$s sekundės)</string>
-<string name="show_cameras_descr">Rodyti greičio radarus (kai kuriose šalyse tai draudžiama)</string><string name="show_speed_limits_descr">Rodyti leistinus greičius ir greičio ribotuvus</string><string name="avoid_toll_roads_descr">Skaičiuojant maršrutą vengti mokamų kelių</string><string name="show_cameras">Rodyti greičio radarus</string><string name="show_speed_limits">Rodyti greičio ribojimus</string><string name="avoid_toll_roads">Vengti mokamų kelių</string><string name="tip_recent_changes_0_8_2_t">"Pakeitimai 0.8.2 versijoje : \n\t* Patobulintas maršruto sudarymas "</string></resources>
+  <string name="show_cameras_descr">Rodyti greičio radarus (kai kuriose šalyse tai draudžiama)</string>
+  <string name="show_speed_limits_descr">Rodyti leistinus greičius ir greičio ribotuvus</string>
+  <string name="avoid_toll_roads_descr">Skaičiuojant maršrutą vengti mokamų kelių</string>
+  <string name="show_cameras">Rodyti greičio radarus</string>
+  <string name="show_speed_limits">Rodyti greičio ribojimus</string>
+  <string name="avoid_toll_roads">Vengti mokamų kelių</string>
+  <string name="tip_recent_changes_0_8_2_t">"Pakeitimai 0.8.2 versijoje : \n\t* Patobulintas maršruto sudarymas "</string>
+  <string name="map_widget_top_text">Street name</string>
+  <string name="map_widget_config">Configuration</string>
+  <string name="map_widget_map_select">Map selection</string>
+  <string name="map_widget_back_to_loc">Where am I</string>
+  <string name="map_widget_lock_screen">Lock screen</string>
+  <string name="map_widget_compass">Compass</string>
+  <string name="map_widget_top_stack">Status bar</string>
+  <string name="map_widget_reset">Reset to default</string>
+  <string name="map_widget_right_stack">Right side</string>
+  <string name="map_widget_left_stack">Left side</string>
+  <string name="map_widget_parking">Parking</string>
+  <string name="map_widget_monitoring">Monitoring</string>
+  <string name="map_widget_speed">Speed</string>
+  <string name="map_widget_distance">Target</string>
+  <string name="map_widget_altitude">Altitude</string>
+  <string name="map_widget_time">Time to go</string>
+  <string name="map_widget_next_turn">Next turn</string>
+  <string name="map_widget_next_turn_small">Next turn (small)</string>
+  <string name="map_widget_next_next_turn">Second next turn</string>
+  <string name="map_widget_mini_route">Mini route map</string>
+  <string name="bg_service_screen_lock">Lock/unlock screen</string>
+  <string name="bg_service_screen_lock_toast">The screen is locked</string>
+  <string name="bg_service_sleep_mode">Set sleep mode on/off</string>
+  <string name="bg_service_interval">Set wake-up interval:</string>
+</resources>
