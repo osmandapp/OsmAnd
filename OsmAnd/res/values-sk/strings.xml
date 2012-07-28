@@ -1,5 +1,30 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+    <string name="map_widget_top_text">Názov ulice</string>
+    <string name="map_widget_config">Konfigurácia</string>
+    <string name="map_widget_map_select">Výber mapy</string>
+    <string name="map_widget_back_to_loc">Kde som</string>
+    <string name="map_widget_lock_screen">Zámok obrazovky</string>
+    <string name="map_widget_compass">Kompas</string>
+    <string name="map_widget_top_stack">Stavový panel</string>
+    <string name="map_widget_reset">Znovunastaviť štandardné</string>
+    <string name="map_widget_right_stack">Pravá strana</string>
+    <string name="map_widget_left_stack">Ľavá strana</string>
+    <string name="map_widget_parking">Parkovanie</string>
+    <string name="map_widget_monitoring">Monitorovanie</string>
+    <string name="map_widget_speed">Rýchlosť</string>
+    <string name="map_widget_distance">Cieľ</string>
+    <string name="map_widget_altitude">Nadm. výška</string>
+    <string name="map_widget_time">Čas cesty</string>
+    <string name="map_widget_next_turn">Nasledovná odbočka</string>
+    <string name="map_widget_next_turn_small">Nasledovná odbočka (malá)</string>
+    <string name="map_widget_next_next_turn">Druhá nasledovná odbočka</string>
+    <string name="map_widget_mini_route">Navigačná mini mapa</string>
+    <string name="bg_service_screen_lock">Zamknúť/odomknúť obrazovku</string>
+    <string name="bg_service_screen_lock_toast">Obrazovka je uzamknutá</string>
+    <string name="bg_service_sleep_mode">Zap/vyp režim spánku</string>
+    <string name="bg_service_interval">Nastaviť prebúdzací interval:</string>
+
   <string name="map_online_plugin_is_not_installed">Povoľte zásuvný modul s online mapami na výber rozličných mapových zdrojov</string>
   <string name="map_online_data">Online mapy (dlaždice)</string>
   <string name="map_online_data_descr">Použitie online máp (ich stiahnutie a uloženie na SD kartu)</string>
