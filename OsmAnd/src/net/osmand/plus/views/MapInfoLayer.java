@@ -4,15 +4,10 @@ package net.osmand.plus.views;
 import java.util.ArrayList;
 import java.util.EnumSet;
 
-import net.londatiga.android.ActionItem;
-import net.londatiga.android.QuickAction;
-import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.background.OsmandBackgroundServicePlugin;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.MapInfoControls.MapInfoControlRegInfo;
@@ -20,7 +15,6 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -33,7 +27,6 @@ import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
@@ -46,8 +39,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
@@ -78,9 +69,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private MapInfoControl lanesControl;
 	private MapInfoControl alarmControl;
 	private MapInfoControls mapInfoControls;
-
-	private boolean isScreenLocked = false;
-	private boolean isBgServiceStarted = false;
 	private TopTextView topText;
 
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
@@ -220,10 +208,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.registerTopWidget(compassView, R.drawable.compass, R.string.map_widget_compass, "compass", MapInfoControls.LEFT_CONTROL, all, 5);
 		
 		View config = createConfiguration();
-		mapInfoControls.registerTopWidget(config, android.R.drawable.ic_menu_preferences, R.string.map_widget_config, "config", MapInfoControls.LEFT_CONTROL, all, 10).required(ApplicationMode.values());
+		mapInfoControls.registerTopWidget(config, R.drawable.globus, R.string.map_widget_config, "config", MapInfoControls.LEFT_CONTROL, all, 10).required(ApplicationMode.values());
 
-//		TODO icons and strings
-		View bgServiceView = createBgServiceView();
+		LockInfoControl lockInfoControl = new LockInfoControl();
+		ImageView bgServiceView = lockInfoControl.createLockScreenWidget(view);
 		mapInfoControls.registerTopWidget(bgServiceView, R.drawable.monitoring_rec_big, R.string.bg_service_screen_lock, "bgService", MapInfoControls.LEFT_CONTROL, all, 15);
 		
 		backToLocation = createBackToLocation(map);
@@ -468,7 +456,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private View createConfiguration(){
 		final OsmandMapTileView view = map.getMapView();
 		ImageView configuration = new ImageView(map);
-		configuration.setBackgroundDrawable(view.getResources().getDrawable(android.R.drawable.ic_menu_preferences));
+		configuration.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.globus));
 		configuration.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -618,145 +606,4 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	}
 
-	/**
-	 * 
-	 * @param statusBar
-	 */
-	private ImageView createBgServiceView() {
-		// TODO Lock icons
-		final OsmandMapTileView view = map.getMapView();
-		final ImageView lockView = new ImageView(map);
-		
-		final Drawable lock = view.getResources().getDrawable(R.drawable.monitoring_rec_big);
-		final Drawable unLock = view.getResources().getDrawable(R.drawable.monitoring_rec_inactive);		
-		if (isScreenLocked) {
-			lockView.setBackgroundDrawable(lock);
-		} else {
-			lockView.setBackgroundDrawable(unLock);
-		}
-		lockView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showBgServiceQAction(lockView);
-				if (isScreenLocked) {
-					lockView.setBackgroundDrawable(lock);
-				} else {
-					lockView.setBackgroundDrawable(unLock);
-				}
-//				TODO refresh View
-				lockView.invalidate();
-			}
-		});
-		return lockView;
-	}
-	/**
-	 * 
-	 * @param mapActivity
-	 */
-	public void showBgServiceQAction(ImageView lockView) {	
-		final QuickAction bgAction = new QuickAction(lockView);
-		
-		final View transparentLockView = map.getLayoutInflater().inflate(R.layout.background_service, null);
-		final FrameLayout parent = (FrameLayout) view.getParent();
-		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, Gravity.CENTER);
-		transparentLockView.setLayoutParams(fparams);
-		
-		final ActionItem lockScreenAction = new ActionItem();
-		lockScreenAction.setTitle(view.getResources().getString(R.string.bg_service_screen_lock));
-		lockScreenAction.setIcon(view.getResources().getDrawable(R.drawable.default_mode_small)); //TODO icon
-		lockScreenAction.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (!isScreenLocked) {
-					parent.addView(transparentLockView);
-					transparentLockView.setOnTouchListener(new View.OnTouchListener() {
-						@Override
-						public boolean onTouch(View v, MotionEvent event) {
-//							AccessibleToast.makeText(transparentLockView.getContext(), "Lock", Toast.LENGTH_LONG).show();
-							return true;
-						}
-					});
-				} else {
-					parent.removeView(transparentLockView);
-				}
-				isScreenLocked = !isScreenLocked;
-				bgAction.dismiss();
-			}
-		});
-		bgAction.addActionItem(lockScreenAction);
-		
-		final ActionItem bgServiceAction = new ActionItem();
-		bgServiceAction.setTitle(view.getResources().getString(R.string.bg_service_sleep_mode));
-		bgServiceAction.setIcon(view.getResources().getDrawable(R.drawable.car_small)); //TODO icon
-		bgServiceAction.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent serviceIntent = new Intent(map, NavigationService.class);
-				if (!isBgServiceStarted) {
-					map.startService(serviceIntent);
-				} else {
-					map.stopService(serviceIntent);
-				}
-				isBgServiceStarted = !isBgServiceStarted;
-				bgAction.dismiss();
-			}
-		});
-		bgAction.addActionItem(bgServiceAction);
-		
-		final ActionItem bgServiceIntAction = new ActionItem();
-		bgServiceIntAction.setTitle(view.getResources().getString(R.string.bg_service_interval));
-		bgServiceIntAction.setIcon(view.getResources().getDrawable(R.drawable.bicycle_small)); //TODO icon
-		bgServiceIntAction.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				createIntervalRadioGrp(bgAction);
-				bgAction.dismiss();
-			}
-		});
-		bgAction.addActionItem(bgServiceIntAction);
-		bgAction.setAnimStyle(QuickAction.ANIM_AUTO);
-		bgAction.show();
-	}
-	
-	private void createIntervalRadioGrp(final QuickAction mQuickAction) {
-		final OsmandSettings settings = ((OsmandApplication) map.getApplication()).getSettings();
-		final View bgServiceView = map.getLayoutInflater().inflate(R.layout.background_service_int, null);
-		final FrameLayout parent = (FrameLayout) view.getParent();
-		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, Gravity.CENTER);
-		fparams.setMargins(0, 30, 0, 30);
-		bgServiceView.setLayoutParams(fparams);
-		bgServiceView.setPadding(20, 5, 20, 5);
-		parent.addView(bgServiceView);
-		
-		RadioGroup intRadioGrp = (RadioGroup) bgServiceView.findViewById(R.id.wake_up_int_grp);
-		final int secondsLength = OsmandBackgroundServicePlugin.SECONDS.length;
-    	final int minutesLength = OsmandBackgroundServicePlugin.MINUTES.length;
-    	final int[] SECONDS = OsmandBackgroundServicePlugin.SECONDS;
-    	final int[] MINUTES = OsmandBackgroundServicePlugin.MINUTES;
-    	
-    	final RadioButton[] intButtons = new RadioButton[minutesLength + secondsLength];
-		for (int i = 0; i < secondsLength; i++) {
-			intButtons[i] = new RadioButton(map);
-			intButtons[i].setText(SECONDS[i] + " " + map.getString(R.string.int_seconds));
-			intButtons[i].setTextColor(Color.BLACK);
-			intButtons[i].setId(SECONDS[i] * 1000);
-			intRadioGrp.addView(intButtons[i]);
-		}
-		for (int i = secondsLength; i < secondsLength + minutesLength; i++) {
-			intButtons[i] = new RadioButton(map);
-			intButtons[i].setText(MINUTES[i-secondsLength] + " " + map.getString(R.string.int_min));
-			intButtons[i].setTextColor(Color.BLACK);
-			intButtons[i].setId(MINUTES[i-secondsLength] * 60 * 1000);
-			intRadioGrp.addView(intButtons[i]);
-		}
-		
-		intRadioGrp.check(settings.SERVICE_OFF_INTERVAL.get());
-		intRadioGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) { 
-            	settings.SERVICE_OFF_INTERVAL.set(checkedId);
-            	parent.removeView(bgServiceView);
-            }
-		});
-	}
 }
