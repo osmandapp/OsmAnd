@@ -914,6 +914,9 @@
   <string name="map_widget_mini_route">Mini route map</string>
   <string name="bg_service_screen_lock">Lock/unlock screen</string>
   <string name="bg_service_screen_lock_toast">The screen is locked</string>
-  <string name="bg_service_sleep_mode">Set sleep mode on/off</string>
   <string name="bg_service_interval">Set wake-up interval:</string>
+  <string name="screen_is_locked">To unlock screen press lock icon</string>
+  <string name="bg_service_screen_unlock">Unlock screen</string>
+  <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
+  <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
 </resources>
