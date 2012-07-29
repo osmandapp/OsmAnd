@@ -61,7 +61,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	@Override
 	public String getName() {
-		return app.getString(R.string.monitor_preferences);
+		return app.getString(R.string.map_widget_monitoring);
 	}
 
 	@Override
@@ -105,7 +105,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			offlineData.setSummary(offlineData.getSummary() + " " + app.getString(R.string.gpx_index_settings_descr));
 		}
 		PreferenceScreen grp = screen.getPreferenceManager().createPreferenceScreen(activity);
-		grp.setTitle(R.string.monitor_preferences);
+		grp.setTitle(R.string.map_widget_monitoring);
 		grp.setSummary(R.string.monitor_preferences_descr);
 		grp.setKey("monitor_settings");
 		((PreferenceCategory) screen.findPreference("profile_dep_cat")).addPreference(grp);

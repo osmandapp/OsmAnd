@@ -21,7 +21,7 @@
     <string name="map_widget_right_stack">Right side</string>
     <string name="map_widget_left_stack">Left side</string>
     <string name="map_widget_parking">Parking</string>
-    <string name="map_widget_monitoring">Monitoring</string>
+    <string name="map_widget_monitoring">Tracking</string>
     <string name="map_widget_speed">Speed</string>
     <string name="map_widget_distance">Target</string>
     <string name="map_widget_altitude">Altitude</string>
