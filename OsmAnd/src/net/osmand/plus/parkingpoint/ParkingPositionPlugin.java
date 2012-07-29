@@ -79,6 +79,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public void registerLayers(MapActivity activity) {
 		if(parkingLayer == null) {
 			parkingLayer = new ParkingPositionLayer(activity);
+			activity.getMapView() .addLayer(parkingLayer, 5);
 		}
 		registerWidget(activity);
 	}
@@ -90,10 +91,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		} else {
 			if (parkingLayer == null) {
 				registerLayers(activity);
-				mapView.addLayer(parkingLayer, 5);
 			}
 		}
-		if(parkingPlaceControl == null){
+		if (parkingPlaceControl == null) {
 			registerWidget(activity);
 		}
 	}
