@@ -15,6 +15,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListActivity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -273,7 +274,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 
 	}
 	
-	protected class LocalOpenstreetmapAdapter extends BaseExpandableListAdapter {
+	protected class LocalOpenstreetmapAdapter extends OsmandBaseExpandableListAdapter {
 		Map<Long, List<OsmPoint>> data = new LinkedHashMap<Long, List<OsmPoint>>();
 		List<Long> category = new ArrayList<Long>();
 		
@@ -419,6 +420,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 			}
 			t.append("]");
 			nameView.setText(t.toString());
+			adjustIndicator(groupPosition, isExpanded, v);
 
 			return v;
 		}
