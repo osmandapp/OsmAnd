@@ -79,7 +79,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		CustomTitleBar titleBar = new CustomTitleBarWithExtraButton(this, R.string.local_index_descr_title, R.drawable.tab_download_screen_icon, new View.OnClickListener() {
+		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.local_index_descr_title, R.drawable.tab_download_screen_icon, new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				asyncLoader.setResult(null);

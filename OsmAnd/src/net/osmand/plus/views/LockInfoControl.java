@@ -105,7 +105,7 @@ public class LockInfoControl {
 		final ActionItem bgServiceAction = new ActionItem();
 		final boolean off = view.getApplication().getNavigationService() == null;
 		bgServiceAction.setTitle(view.getResources().getString(off? R.string.bg_service_sleep_mode_on : R.string.bg_service_sleep_mode_off));
-		bgServiceAction.setIcon(view.getResources().getDrawable(R.drawable.car_small)); //TODO icon
+//		bgServiceAction.setIcon(view.getResources().getDrawable(R.drawable.car_small)); //TODO icon
 		bgServiceAction.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

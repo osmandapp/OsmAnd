@@ -26,6 +26,7 @@ import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
+import net.osmand.plus.activities.CustomTitleBar.CustomTitleBarView;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.views.SeekBarPreference;
@@ -50,6 +51,8 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
@@ -195,6 +198,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		return p;
 	}
 	
+	@Override
+	public void setContentView(View view) {
+		super.setContentView(view);
+	}
 	
 	public void registerTimeListPreference(OsmandPreference<Integer> b, PreferenceScreen screen, int[] seconds, int[] minutes, int coeff){
 		int minutesLength = minutes == null? 0 : minutes.length;
@@ -244,10 +251,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-    	CustomTitleBar titleBar = new CustomTitleBar(this, R.string.settings_activity, R.drawable.tab_settings_screen_icon, R.style.CustomTitleTheme_Preference);
+    	CustomTitleBar titleBar = new CustomTitleBar(this, R.string.settings_activity, R.drawable.tab_settings_screen_icon);
+    	setTheme(R.style.CustomTitleTheme_Preference);
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.settings_pref);
 		titleBar.afterSetContentView();
+		
 		
 		String[] entries;
 		String[] entrieValues;
@@ -687,18 +696,47 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
 			Preference preference) {
 		//customize the sub-preference title according the selected profile
+		String title = "";
 		if (preference.getKey() != null && preference instanceof PreferenceScreen && 
 				((PreferenceCategory)findPreference("profile_dep_cat")).findPreference(preference.getKey()) != null) {
 			PreferenceScreen scr = (PreferenceScreen)preference;
-			String title = scr.getTitle().toString();
+			title = scr.getTitle().toString();
 			if(title.startsWith("-")){
 				title = title.substring(1);
 			}
 			scr.getDialog().setTitle("   " + title + " [" + osmandSettings.APPLICATION_MODE.get().toHumanString(this) + "]");
 		} else if(preference instanceof PreferenceScreen){
-			PreferenceScreen scr = (PreferenceScreen)preference;
-			String title = scr.getTitle().toString();
+			final PreferenceScreen scr = (PreferenceScreen)preference;
+			title = scr.getTitle().toString();
 			scr.getDialog().setTitle("   " + title);
+		}
+		if(preference instanceof PreferenceScreen) {
+			final PreferenceScreen scr = (PreferenceScreen)preference;
+			CustomTitleBarView titleBar = new CustomTitleBarView(title, R.drawable.tab_settings_screen_icon, null) {
+				@Override
+				public void backPressed() {
+					scr.getDialog().dismiss();
+				}
+			};
+			
+			View titleView = getLayoutInflater().inflate(titleBar.getTitleBarLayout(), null);
+			titleBar.init(titleView);
+//			View decorView = scr.getDialog().getWindow().getDecorView();
+//			LinearLayout ll = new LinearLayout(titleView.getContext());
+//			scr.getDialog().getWindow().setContentView(ll);
+			View dv = scr.getDialog().getWindow().getDecorView();
+			ListView ls = (ListView) dv.findViewById(android.R.id.list);
+			if(ls != null){
+				ls.addFooterView(titleView);
+			}
+			
+//			LayoutParams lp = new ViewGroup.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+//			scr.getDialog().addContentView(titleView, lp);
+			
+//			ll.setOrientation(LinearLayout.VERTICAL);
+//			ll.addView(titleView);
+//			ll.addView(decorView);
+			
 		}
 		
 		if (preference == applicationDir) {
