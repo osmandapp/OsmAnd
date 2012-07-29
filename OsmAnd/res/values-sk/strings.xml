@@ -20,7 +20,7 @@
   <string name="map_widget_next_turn_small">Nasledovná odbočka (malá)</string>
   <string name="map_widget_next_next_turn">Druhá nasledovná odbočka</string>
   <string name="map_widget_mini_route">Navigačná mini mapa</string>
-  <string name="bg_service_screen_lock">Zamknúť/odomknúť obrazovku</string>
+  <string name="bg_service_screen_lock">Zamknúť obrazovku</string>
   <string name="bg_service_screen_lock_toast">Obrazovka je uzamknutá</string>
   <string name="bg_service_interval">Nastaviť prebúdzací interval:</string>
   <string name="map_online_plugin_is_not_installed">Povoľte zásuvný modul s online mapami na výber rozličných mapových zdrojov</string>
@@ -903,9 +903,11 @@
   <string name="show_cameras">Zobrazenie radarov</string>
   <string name="show_speed_limits">Zobraziť radary</string>
   <string name="avoid_toll_roads">Vyhnúť sa spoplatneným cestám</string>
-  <string name="tip_recent_changes_0_8_2_t">"Zmeny vo verzii 0.8.2 : \n\t* Vylepšená navigácia"</string>
-  <string name="screen_is_locked">To unlock screen press lock icon</string>
-  <string name="bg_service_screen_unlock">Unlock screen</string>
-  <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
-  <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
+  <string name="tip_recent_changes_0_8_2_t">"Zmeny vo verzii 0.8.2 :
+  \n\t* Vylepšená navigácia"</string>
+  \n\t* Dynamické mapové widgety
+  <string name="screen_is_locked">Na odomknutie obrazovky, stlačte ikonu uzamknutia</string>
+  <string name="bg_service_screen_unlock">Odomknúť obrazovku</string>
+  <string name="bg_service_sleep_mode_off">Vypnúť režim spánku</string>
+  <string name="bg_service_sleep_mode_on">Zapnúť režim spánku</string>
 </resources>
