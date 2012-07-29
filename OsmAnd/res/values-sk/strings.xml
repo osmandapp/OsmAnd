@@ -904,8 +904,8 @@
   <string name="show_speed_limits">Zobraziť radary</string>
   <string name="avoid_toll_roads">Vyhnúť sa spoplatneným cestám</string>
   <string name="tip_recent_changes_0_8_2_t">"Zmeny vo verzii 0.8.2 :
-  \n\t* Vylepšená navigácia"</string>
-  \n\t* Dynamické mapové widgety
+  \n\t* Vylepšená navigácia"
+  \n\t* Dynamické mapové widgety</string>
   <string name="screen_is_locked">Na odomknutie obrazovky, stlačte ikonu uzamknutia</string>
   <string name="bg_service_screen_unlock">Odomknúť obrazovku</string>
   <string name="bg_service_sleep_mode_off">Vypnúť režim spánku</string>
