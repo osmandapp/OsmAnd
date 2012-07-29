@@ -4,10 +4,9 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingBottom="0dip"
-    android:paddingLeft="5dip"
-    android:paddingRight="5dip"
-    android:paddingTop="0dip"
+    android:layout_marginTop="2dip"
+    android:layout_marginLeft="5dip"
+    android:layout_marginRight="5dip"
     android:weightSum="1" >
 
     <TextView

@@ -208,19 +208,19 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.registerTopWidget(compassView, R.drawable.compass, R.string.map_widget_compass, "compass", MapInfoControls.LEFT_CONTROL, all, 5);
 		
 		View config = createConfiguration();
-		mapInfoControls.registerTopWidget(config, R.drawable.globus, R.string.map_widget_config, "config", MapInfoControls.LEFT_CONTROL, all, 10).required(ApplicationMode.values());
+		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapInfoControls.RIGHT_CONTROL, all, 10).required(ApplicationMode.values());
 
 		LockInfoControl lockInfoControl = new LockInfoControl();
 		ImageView bgServiceView = lockInfoControl.createLockScreenWidget(view);
-		mapInfoControls.registerTopWidget(bgServiceView, R.drawable.monitoring_rec_big, R.string.bg_service_screen_lock, "bgService", MapInfoControls.LEFT_CONTROL, all, 15);
+		mapInfoControls.registerTopWidget(bgServiceView, R.drawable.lock_enabled, R.string.bg_service_screen_lock, "bgService", MapInfoControls.LEFT_CONTROL, all, 15);
 		
 		backToLocation = createBackToLocation(map);
 		mapInfoControls.registerTopWidget(backToLocation, R.drawable.default_location, R.string.map_widget_back_to_loc, "back_to_location", MapInfoControls.RIGHT_CONTROL, all, 5);
-		View globusAndProgress = createGlobusAndProgress();
-		mapInfoControls.registerTopWidget(globusAndProgress, R.drawable.globus, R.string.map_widget_map_select, "progress", MapInfoControls.RIGHT_CONTROL, all, 10);
+		View globus = createGlobusAndProgress();
+		mapInfoControls.registerTopWidget(globus, R.drawable.globus, R.string.map_widget_map_select, "progress", MapInfoControls.RIGHT_CONTROL, none, 15);
 		
 		topText = new TopTextView(routingHelper, map);
-		mapInfoControls.registerTopWidget(topText, R.drawable.arrow_up, R.string.map_widget_top_text, "street_name", MapInfoControls.MAIN_CONTROL, all, 100);
+		mapInfoControls.registerTopWidget(topText, R.drawable.street_name, R.string.map_widget_top_text, "street_name", MapInfoControls.MAIN_CONTROL, all, 100);
 	}
 	
 	public void recreateControls(){
@@ -455,30 +455,21 @@ public class MapInfoLayer extends OsmandMapLayer {
 	
 	private View createConfiguration(){
 		final OsmandMapTileView view = map.getMapView();
+		
+		FrameLayout fl = new FrameLayout(view.getContext());
+		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+
 		ImageView configuration = new ImageView(map);
-		configuration.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.globus));
+		Drawable drawable = view.getResources().getDrawable(R.drawable.widget_config);
+		configuration.setBackgroundDrawable(drawable);
 		configuration.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				openViewConfigureDialog();
 			}
 		});
-		return configuration;
-	}
-	private View createGlobusAndProgress(){
-		Drawable globusDrawable = view.getResources().getDrawable(R.drawable.globus);
-		FrameLayout fl = new FrameLayout(view.getContext());
-		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		ImageView globus = new ImageView(view.getContext());
-		globus.setImageDrawable(globusDrawable);
-		globus.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				map.getMapLayers().selectMapLayer(view);
-			}
-		});
-		fl.addView(globus, fparams);
-		fparams = new FrameLayout.LayoutParams(globusDrawable.getMinimumWidth(), globusDrawable.getMinimumHeight());
+		fl.addView(configuration, fparams);
+		fparams = new FrameLayout.LayoutParams(drawable.getMinimumWidth(), drawable.getMinimumHeight());
 		progressBar = new View(view.getContext());
 		progressBar.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -488,6 +479,31 @@ public class MapInfoLayer extends OsmandMapLayer {
 		});
 		fl.addView(progressBar, fparams);
 		return fl;
+	}
+	private View createGlobusAndProgress(){
+		Drawable globusDrawable = view.getResources().getDrawable(R.drawable.globus);
+//		FrameLayout fl = new FrameLayout(view.getContext());
+//		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		ImageView globus = new ImageView(view.getContext());
+		globus.setImageDrawable(globusDrawable);
+		globus.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				map.getMapLayers().selectMapLayer(view);
+			}
+		});
+		return globus;
+//		fl.addView(globus, fparams);
+//		fparams = new FrameLayout.LayoutParams(globusDrawable.getMinimumWidth(), globusDrawable.getMinimumHeight());
+//		progressBar = new View(view.getContext());
+//		progressBar.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				map.getMapLayers().selectMapLayer(view);
+//			}
+//		});
+//		fl.addView(progressBar, fparams);
+//		return fl;
 	}
 	
 	private ImageView createBackToLocation(final MapActivity map){

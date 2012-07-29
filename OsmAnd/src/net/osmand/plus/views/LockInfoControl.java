@@ -20,9 +20,13 @@ public class LockInfoControl {
 	
 	protected boolean isScreenLocked;
 	private View transparentLockView;
+	private Drawable lockEnabled;
+	private Drawable lockDisabled;
 	
 	public ImageView createLockScreenWidget(final OsmandMapTileView view) {
 		final ImageView lockView = new ImageView(view.getContext());
+		lockEnabled = view.getResources().getDrawable(R.drawable.lock_enabled);
+		lockDisabled = view.getResources().getDrawable(R.drawable.lock_disabled);
 		updateLockIcon(view, lockView);
 		lockView.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -34,17 +38,14 @@ public class LockInfoControl {
 	}
 
 	private void updateLockIcon(final OsmandMapTileView view, final ImageView lockView) {
-		// TODO Lock icons
-		final Drawable lock = view.getResources().getDrawable(R.drawable.monitoring_rec_big);
-		final Drawable unLock = view.getResources().getDrawable(R.drawable.monitoring_rec_inactive);		
 		if (isScreenLocked) {
-			lockView.setBackgroundDrawable(lock);
+			lockView.setBackgroundDrawable(lockEnabled);
 		} else {
-			lockView.setBackgroundDrawable(unLock);
+			lockView.setBackgroundDrawable(lockDisabled);
 		}
 	}
 
-	public void showBgServiceQAction(final ImageView lockView, final OsmandMapTileView view) {	
+	private void showBgServiceQAction(final ImageView lockView, final OsmandMapTileView view) {	
 		final QuickAction bgAction = new QuickAction(lockView);
 		
 		if (transparentLockView == null) {
@@ -53,12 +54,11 @@ public class LockInfoControl {
 					Gravity.CENTER);
 			transparentLockView.setLayoutParams(fparams);
 		}
-		
 		final FrameLayout parent = (FrameLayout) view.getParent();
 		final ActionItem lockScreenAction = new ActionItem();
 		lockScreenAction.setTitle(view.getResources().getString(
 				isScreenLocked ? R.string.bg_service_screen_unlock : R.string.bg_service_screen_lock));
-		lockScreenAction.setIcon(view.getResources().getDrawable(R.drawable.default_mode_small)); 
+		lockScreenAction.setIcon(view.getResources().getDrawable(isScreenLocked ? R.drawable.lock_enabled : R.drawable.lock_disabled));
 		lockScreenAction.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -74,11 +74,22 @@ public class LockInfoControl {
 									showBgServiceQAction(lockView, view);
 									return true;
 								}
+								blinkIcon();
 								AccessibleToast.makeText(transparentLockView.getContext(), R.string.screen_is_locked, Toast.LENGTH_LONG)
 										.show();
 								return true;
 							}
 							return true;
+						}
+
+						private void blinkIcon() {
+							lockView.setBackgroundDrawable(lockDisabled);
+							view.postDelayed(new Runnable() {
+								@Override
+								public void run() {
+									lockView.setBackgroundDrawable(lockEnabled);
+								}
+							}, 300);
 						}
 					});
 				} else {
