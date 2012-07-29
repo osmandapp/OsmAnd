@@ -77,7 +77,7 @@ public class PluginsActivity extends OsmandListActivity {
 			}
 			OsmandPlugin plugin = getItem(position);
 			boolean toBeEnabled = restartPlugins.contains(plugin.getId());
-			int resourceId = toBeEnabled ? R.drawable.list_activities_dot_marker2_pressed : R.drawable.list_activities_dot_marker1_pressed;
+			int resourceId = toBeEnabled ? R.drawable.marker1_enabled : R.drawable.marker1_disabled;
 			
 			final View row = v;
 			TextView nameView = (TextView) row.findViewById(R.id.plugin_name);
