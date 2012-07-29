@@ -90,8 +90,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		} else {
 			if (parkingLayer == null) {
 				registerLayers(activity);
+				mapView.addLayer(parkingLayer, 5);
 			}
-			mapView.addLayer(parkingLayer, 5);
 		}
 		if(parkingPlaceControl == null){
 			registerWidget(activity);
@@ -103,7 +103,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		if (mapInfoLayer != null) {
 			parkingPlaceControl = createParkingPlaceInfoControl(activity, mapInfoLayer.getPaintText(), mapInfoLayer.getPaintSubText());
 			mapInfoLayer.getMapInfoControls().registerSideWidget(parkingPlaceControl,
-					R.drawable.list_activities_parking_position_menu, R.string.map_widget_parking, "parking", false,
+					R.drawable.list_activities_poi_parking, R.string.map_widget_parking, "parking", false,
 					EnumSet.allOf(ApplicationMode.class), EnumSet.noneOf(ApplicationMode.class), 8);
 			mapInfoLayer.recreateControls();
 		}
@@ -432,7 +432,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			}
 		});
 		parkingPlaceControl.setText(null, null);
-		parkingPlaceControl.setImageDrawable(map.getResources().getDrawable(R.drawable.list_activities_parking_position_menu));
+		parkingPlaceControl.setImageDrawable(map.getResources().getDrawable(R.drawable.list_activities_poi_parking));
 		return parkingPlaceControl;
 	}
 }
