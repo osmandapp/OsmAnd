@@ -11,14 +11,14 @@
   <string name="map_widget_right_stack">Pravá strana</string>
   <string name="map_widget_left_stack">Ľavá strana</string>
   <string name="map_widget_parking">Parkovanie</string>
-  <string name="map_widget_monitoring">Monitorovanie</string>
+  <string name="map_widget_monitoring">Stopovanie</string>
   <string name="map_widget_speed">Rýchlosť</string>
   <string name="map_widget_distance">Cieľ</string>
   <string name="map_widget_altitude">Nadm. výška</string>
-  <string name="map_widget_time">Čas cesty</string>
-  <string name="map_widget_next_turn">Nasledovná odbočka</string>
-  <string name="map_widget_next_turn_small">Nasledovná odbočka (malá)</string>
-  <string name="map_widget_next_next_turn">Druhá nasledovná odbočka</string>
+  <string name="map_widget_time">Trvanie cesty</string>
+  <string name="map_widget_next_turn">Nasledujúca odbočka</string>
+  <string name="map_widget_next_turn_small">Nasled. odbočka (malá)</string>
+  <string name="map_widget_next_next_turn">Druhá nasled. odbočka</string>
   <string name="map_widget_mini_route">Navigačná mini mapa</string>
   <string name="bg_service_screen_lock">Zamknúť obrazovku</string>
   <string name="bg_service_screen_lock_toast">Obrazovka je uzamknutá</string>
@@ -906,7 +906,7 @@
   <string name="tip_recent_changes_0_8_2_t">"Zmeny vo verzii 0.8.2 :
   \n\t* Vylepšená navigácia"
   \n\t* Dynamické mapové widgety</string>
-  <string name="screen_is_locked">Na odomknutie obrazovky, stlačte ikonu uzamknutia</string>
+  <string name="screen_is_locked">Na odomknutie obrazovky, kliknite na ikonu zámky</string>
   <string name="bg_service_screen_unlock">Odomknúť obrazovku</string>
   <string name="bg_service_sleep_mode_off">Vypnúť režim spánku</string>
   <string name="bg_service_sleep_mode_on">Zapnúť režim spánku</string>
