@@ -492,7 +492,7 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> ZOOM_BY_TRACKBALL =
-		new BooleanAccessibilityPreference("zoom_by_trackball", true).makeGlobal();
+		new BooleanAccessibilityPreference("zoom_by_trackball", false).makeGlobal();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SCROLL_MAP_BY_GESTURES =
