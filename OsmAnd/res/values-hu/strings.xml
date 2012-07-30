@@ -882,7 +882,7 @@
   <string name="show_cameras">Traffipaxok megjelenítése</string>
   <string name="show_speed_limits">Sebességhatárok megjelenítése</string>
   <string name="avoid_toll_roads">Fizetős utak elkerülése</string>
-  <string name="tip_recent_changes_0_8_2_t">"0.8.2 verzió változásai : \n\t* Fejlesztett útvonaltervezése "</string>
+  <string name="tip_recent_changes_0_8_2_t">"0.8.2 verzió változásai : \n\t* Fejlesztett útvonaltervezése \n\t* Dinamikus térkép widgetek"</string>
   <string name="map_widget_top_text">Utca neve</string>
   <string name="map_widget_config">Beállítás</string>
   <string name="map_widget_map_select">Térkép kiválasztás</string>
@@ -903,11 +903,11 @@
   <string name="map_widget_next_turn_small">Következő kereszteződés (kicsi)</string>
   <string name="map_widget_next_next_turn">Második kereszteződés</string>
   <string name="map_widget_mini_route">Kis útvonal térkép</string>
-  <string name="bg_service_screen_lock">Képernyőzár</string>
+  <string name="bg_service_screen_lock">Képernyőzár be</string>
   <string name="bg_service_screen_lock_toast">Képernyő zárva</string>
   <string name="bg_service_interval">GPS bekapcsolásának időköze (0 - folyamatosan bekapcsolva)</string>
-  <string name="screen_is_locked">To unlock screen press lock icon</string>
-  <string name="bg_service_screen_unlock">Unlock screen</string>
-  <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
-  <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
+  <string name="screen_is_locked">Képernyőzár feloldása a képernyőzár ikonnal</string>
+  <string name="bg_service_screen_unlock">Képernyőzár ki</string>
+  <string name="bg_service_sleep_mode_off">Alvó mód ki</string>
+  <string name="bg_service_sleep_mode_on">Alvó mód be</string>
 </resources>
