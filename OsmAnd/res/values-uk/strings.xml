@@ -57,7 +57,7 @@
   <string name="osmand_rastermaps_plugin_description">Show settings to configure a variety of online or cached tile maps as base map or as overlay / underlay maps. These maps can also be prepared offline and copied to the OsmAnd folder.</string>
   <string name="osmand_background_plugin_description">Show settings to enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.</string>
   <string name="osmand_accessibility_description">Show settings for special accessibility features.</string>
-  <string name="extra_settings">Advanced settings</string>
+  <string name="extra_settings">Розширені налаштування</string>
   <string name="osmand_monitoring_description">Show settings facilitating to record your trips to GPX files or to live track using a web service.</string>
   <string name="osmand_extra_settings_description">Display settings for advanced map configuration (like increase map details) and some device-specifics.</string>
   <string name="osmand_development_plugin_description">Show settings for development and debugging features like animated navigation or rendering performance display.</string>
