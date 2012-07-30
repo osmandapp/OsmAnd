@@ -489,7 +489,7 @@
   <string name="use_trackball">Gebruik trackball</string>
   <string name="background_service_wait_int_descr">Maximum wachttijd voor elke achtergrond positiebepaling</string>
   <string name="background_service_wait_int">Maximum wachttijd voor positiebepaling</string>
-  <string name="service_stop_background_service">Achtergrond navigatieservice uitschakelen</string>
+  <string name="service_stop_background_service">Stop achtergrond-navigatie</string>
   <string name="where_am_i">Waar ben ik?</string>
   <string name="process_navigation_service">OsmAnd navigatieservice</string>
   <string name="network_provider">Netwerk</string>
@@ -911,11 +911,11 @@
   <string name="map_widget_next_turn_small">Volgende bocht (klein)</string>
   <string name="map_widget_next_next_turn">Tweede volgende bocht</string>
   <string name="map_widget_mini_route">Mini-routekaart</string>
-  <string name="bg_service_screen_lock">Vergrendel/ontgrendel scherm</string>
+  <string name="bg_service_screen_lock">Vergrendel scherm</string>
   <string name="bg_service_screen_lock_toast">Het scherm is vergrendeld</string>
   <string name="bg_service_interval">Zet ontwaak-interval:</string>
-  <string name="screen_is_locked">To unlock screen press lock icon</string>
-  <string name="bg_service_screen_unlock">Unlock screen</string>
-  <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
-  <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
+  <string name="screen_is_locked">Voor ontgrendelen scherm, toets het slot icoon</string>
+  <string name="bg_service_screen_unlock">Ontgrendel scherm</string>
+  <string name="bg_service_sleep_mode_off">Slaap modus uitzetten</string>
+  <string name="bg_service_sleep_mode_on">Slaap modus aanzetten</string>
 </resources>
