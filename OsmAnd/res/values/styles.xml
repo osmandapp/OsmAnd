@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-	<style name="Dialog_Floating" parent="@android:style/Theme.Dialog"> 
-	    <item name="android:windowBackground">@color/color_transparent_white</item>
-	    <item name="android:windowIsFloating">false</item>
-		<item name="android:windowNoTitle">true</item> 
+	<style name="Theme_Dialog_Translucent" parent="@android:Theme.Dialog"> 
+	    <item name="android:windowBackground">@color/color_transparent</item>
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:textSize">25sp</item>
 	</style>
 	<style name="Dialog_Fullscreen" parent="android:Theme"> 
 		<item name="android:windowNoTitle">true</item> 

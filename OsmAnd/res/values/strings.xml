@@ -1083,5 +1083,6 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 <string name="go">Go</string>
 <string name="cancel">Cancel</string>
 <string name="route">Route</string>
+<string name="directionsTo">Directions To</string>
 
 </resources>

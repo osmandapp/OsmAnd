@@ -9,6 +9,7 @@ import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.PlacePickerActivity;
 import net.osmand.plus.activities.search.SearchActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -281,37 +282,10 @@ public class MapControlsLayer extends OsmandMapLayer {
             routingButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                /*
-                       RoutingFragment fragment = (RoutingFragment)
-                               getFragmentManager().findFragmentById(R.id.Details);
-                       if (fragment == null) {
-                       fragment = new RoutingFragment();
-                       fragment.show(R.id.Details);
-                       }
-                */
-                  
-                    /*
-                    final Dialog dialog = new Dialog(activity, R.style.Dialog_Floating);
-                    dialog.setContentView(R.layout.routing_dialog);
-                    dialog.show();
-                       
-                    Button closeButton = (Button) dialog.findViewById(R.id.closeButton);
-                    closeButton.setOnClickListener(new View.OnClickListener() {                         
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                        }
-                    });
-                     */
-                    /*
-                       final Intent routing = new Intent(activity, RoutingActivity.class);
-                               // TODO(natashaj): what happens if map is not loaded yet?
-                               LatLon loc = activity.getMapLocation();
-                               routing.putExtra(RoutingActivity.CURRENT_LATITUDE, loc.getLatitude());
-                               routing.putExtra(RoutingActivity.CURRENT_LONGITUDE, loc.getLongitude());
-                               routing.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                               activity.startActivity(routing);
-                     */
+                    
+                    final Intent placePicker = new Intent(activity, PlacePickerActivity.class);
+                    //search.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    activity.startActivityForResult(placePicker, MapActivity.SELECT_PLACE_FOR_ROUTING);
                 }
             });
         }
@@ -396,7 +370,7 @@ public class MapControlsLayer extends OsmandMapLayer {
        private void initZoomButtons(final OsmandMapTileView view, FrameLayout parent) {
                ImageView rightShadow = new ImageView(view.getContext());
                // TODO(natashaj) add a resource for right_shadow
-               rightShadow.setBackgroundResource(R.drawable.bottom_shadow);
+               rightShadow.setBackgroundResource(R.drawable.right_shadow);
                android.widget.FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.FILL_PARENT,
                                        Gravity.RIGHT | Gravity.CENTER_VERTICAL);
                params.setMargins(0, 0, 0, 0);

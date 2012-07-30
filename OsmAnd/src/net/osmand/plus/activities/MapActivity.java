@@ -91,7 +91,10 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	
 	private static final int LONG_KEYPRESS_MSG_ID = 28;
 	private static final int LONG_KEYPRESS_DELAY = 500;
-	
+
+	public static final int SELECT_PLACE_FOR_ROUTING = 0;
+	public static final int SELECT_PLACE_FOR_DISPLAY = 0;
+
 	private long lastTimeAutoZooming = 0;
 	private long lastTimeSensorRotation = 0;
 	private long lastTimeGPSLocationFixed = 0;
@@ -403,7 +406,18 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			dp.onPrepareDialog(id, dialog);
 		}
 	}
-
+	
+	@Override
+        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+            
+            if (requestCode == SELECT_PLACE_FOR_ROUTING && resultCode == PlacePickerActivity.SELECT_PLACE_RESULT_OK) {
+                // TODO(natashaj): show route to user
+            } else if (requestCode == SELECT_PLACE_FOR_DISPLAY && resultCode == PlacePickerActivity.SELECT_PLACE_RESULT_OK) {
+                // TODO(natashaj): show places to user
+            }
+	}
+	
 	public void changeZoom(float newZoom){
 		boolean changeLocation = settings.AUTO_ZOOM_MAP.get();
 		mapView.getAnimatedDraggingThread().startZooming(newZoom, changeLocation);
