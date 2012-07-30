@@ -1,146 +1,18 @@
 package net.osmand.data;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
-import net.osmand.osm.Node;
-import net.osmand.osm.Way;
 
-public class Boundary {
+public class Boundary 
+	extends Multipolygon 
+{
 	
 	private long boundaryId;
 	private String name;
 	private int adminLevel;
 	
-	
-	// not necessary ready rings
-	private List<Way> outerWays = new ArrayList<Way>(1);
-	private List<Way> innerWays = new ArrayList<Way>(0);
-	private boolean closedWay;
 	private long adminCenterId;
 	
-	public Boundary(boolean closedWay){
-		this.closedWay = closedWay;
-	}
-	
-	public boolean isClosedWay() {
-		return closedWay;
-	}
-	
-	public void setClosedWay(boolean closedWay) {
-		this.closedWay = closedWay;
-	}
-
-	public boolean computeIsClosedWay() {
-		if (getOuterWays().size() > 0) {
-			// now we try to merge the ways until we have only one
-			int oldSize = 0;
-			while (getOuterWays().size() != oldSize && !getOuterWays().isEmpty()) {
-				oldSize = getOuterWays().size();
-				mergeOuterWays();
-			}
-			if (!getOuterWays().isEmpty()) {
-				// there is one way and last element is equal to the first...
-				List<Node> nodes = getOuterWays().get(0).getNodes();
-				closedWay = getOuterWays().size() == 1 && nodes.get(0).getId() == nodes.get(nodes.size() - 1).getId();
-				//if not closed, but we have only one way, make it close
-				if (!closedWay && getOuterWays().size() == 1) {
-					nodes.add(nodes.get(0));
-					closedWay = true;
-				}
-			}
-		} else {
-			closedWay = false;
-		}
-		return closedWay;
-	}
-	
-	
-	private void mergeOuterWays() {
-		Way way = getOuterWays().get(0);
-		List<Node> nodes = way.getNodes();
-		if (!nodes.isEmpty()) {
-			int nodesSize = nodes.size();
-			Node first = nodes.get(0);
-			Node last = nodes.get(nodesSize-1);
-			int size = getOuterWays().size();
-			for (int i = size-1; i >= 1; i--) {
-				//try to find way, that matches the one ...
-				Way anotherWay = getOuterWays().get(i);
-				if (anotherWay.getNodes().isEmpty()) {
-					//remove empty one...
-					getOuterWays().remove(i);
-				} else {
-					if (anotherWay.getNodes().get(0).getId() == first.getId()) {
-						//reverese this way and add it to the actual
-						Collections.reverse(anotherWay.getNodes());
-						way.getNodes().addAll(0,anotherWay.getNodes());
-						getOuterWays().remove(i);
-					} else if (anotherWay.getNodes().get(0).getId() == last.getId()) {
-						way.getNodes().addAll(anotherWay.getNodes());
-						getOuterWays().remove(i);
-					} else if (anotherWay.getNodes().get(anotherWay.getNodes().size()-1).getId() == first.getId()) {
-						//add at begging
-						way.getNodes().addAll(0,anotherWay.getNodes());
-						getOuterWays().remove(i);
-					} else if (anotherWay.getNodes().get(anotherWay.getNodes().size()-1).getId() == last.getId()) {
-						Collections.reverse(anotherWay.getNodes());
-						way.getNodes().addAll(anotherWay.getNodes());
-						getOuterWays().remove(i);
-					}
-				}
-			}
-		} else {
-			//remove way with no nodes!
-			getOuterWays().remove(0);
-		}
-	}
-
-	public boolean containsPoint(LatLon point) {
-		return containsPoint(point.getLatitude(), point.getLongitude());
-	}
-	
-	public boolean containsPoint(double latitude, double longitude) {
-		int intersections = 0;
-		for(Way w : outerWays){
-			for(int i=0; i<w.getNodes().size() - 1; i++){
-				if(MapAlgorithms.ray_intersect_lon(w.getNodes().get(i), w.getNodes().get(i+1), latitude, longitude) != -360d){
-					intersections ++;
-				}
-			}
-		}
-		for(Way w : innerWays){
-			for(int i=0; i<w.getNodes().size() - 1; i++){
-				if(MapAlgorithms.ray_intersect_lon(w.getNodes().get(i), w.getNodes().get(i+1), latitude, longitude) != -360d){
-					intersections ++;
-				}
-			}
-		}
-
-		return intersections % 2 == 1;
-	}
-	
-	public LatLon getCenterPoint(){
-		List<Node> points = new ArrayList<Node>();
-		for(Way w : outerWays){
-			points.addAll(w.getNodes());
-		}
-		for(Way w : innerWays){
-			points.addAll(w.getNodes());
-		}
-		return MapUtils.getWeightCenterForNodes(points);
-	}
-	
-	
-	private List<Way> getOuterWays() {
-		return outerWays;
-	}
-	
-	private List<Way> getInnerWays() {
-		return innerWays;
+	public Boundary() {
 	}
 	
 	public long getBoundaryId() {
@@ -169,7 +41,7 @@ public class Boundary {
 	
 	@Override
 	public String toString() {
-		return  getName() + " alevel:" + getAdminLevel() + " type: relation closed:" + isClosedWay();
+		return  getName() + " alevel:" + getAdminLevel() + " type: has opened polygons:" + hasOpenedPolygons() + " no. of outer polygons:" + countOuterPolygons();
 	}
 
 	public void setAdminCenterId(long l) {
@@ -178,23 +50,6 @@ public class Boundary {
 	
 	public long getAdminCenterId() {
 		return adminCenterId;
-	}
-
-	public void addInnerWay(Way es) {
-		innerWays.add(new Way(es));
-	}
-
-	public void addOuterWay(Way es) {
-		outerWays.add(new Way(es));
-	}
-
-	public void copyWaysFrom(Boundary boundary) {
-		getInnerWays().addAll(boundary.getInnerWays());
-		getOuterWays().addAll(boundary.getOuterWays());
-	}
-
-	public void addOuterWays(List<Way> ring) {
-		outerWays.addAll(ring);
 	}
 
 }

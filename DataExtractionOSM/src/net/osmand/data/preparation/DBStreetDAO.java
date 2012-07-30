@@ -194,6 +194,7 @@ public class DBStreetDAO extends AbstractIndexPartCreator
 	}
 	
 	public boolean removeBuilding(Entity e) throws SQLException {
+		executePendingPreparedStatements(); //ala flush
 		addressRemoveBuildingStat.setLong(1, e.getId());
 		boolean res = addressRemoveBuildingStat.execute();
 		commit();

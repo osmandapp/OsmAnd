@@ -27,7 +27,7 @@ public class VoiceRouter {
 	private int currentStatus = STATUS_UNKNOWN;
 	private float playGoAheadDist = 0;
 
-	private long lastTimeRouteRecalcAnnounced = 0;
+	// private long lastTimeRouteRecalcAnnounced = 0;
 	
 	// default speed to have comfortable announcements (if actual speed is higher than it would be problem)
 	// Speed in m/s 
@@ -110,8 +110,8 @@ public class VoiceRouter {
 			PREPARE_DISTANCE_END = 1200;//(100 sec)
 			TURN_IN_DISTANCE = 390;     //  30 sec
 			TURN_IN_DISTANCE_END = 182; //  14 sec
-			TURN_DISTANCE = 55;         //  10 sec
-			TURN_DEFAULT_SPEED = 6f; 	//  20 km/h
+			TURN_DISTANCE = 50;         //  7 sec
+			TURN_DEFAULT_SPEED = 7f; 	//  25 km/h
 			DEFAULT_SPEED = 13;         //  48 km/h
 		}
 	}
@@ -137,9 +137,9 @@ public class VoiceRouter {
 		}
 		if (isDistanceLess(speed, dist, TURN_IN_DISTANCE_END)) {
 			return 0;
-		} else if (isDistanceLess(speed, dist, PREPARE_DISTANCE_END)) {
+		} else if ( dist <= PREPARE_DISTANCE) {
 			return 1;
-		} else if (isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE_END)) {
+		} else if (dist <= PREPARE_LONG_DISTANCE) {
 			return 2;
 		} else {
 			return -1;
@@ -478,12 +478,13 @@ public class VoiceRouter {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if (play != null) {
 			if (!newRoute) {
-				// suppress "route recalculated" prompt for 60sec
 				// suppress "route recalculated" prompt for GPX-routing, it makes no sense
-				if (router.getCurrentGPXRoute() == null && (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000)) {
+				// suppress "route recalculated" prompt for 60sec (this workaround now outdated after more intelligent route recalculation and directional voice prompt suppression)
+				// if (router.getCurrentGPXRoute() == null && (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000)) {
+				if (router.getCurrentGPXRoute() == null) {
 					play.routeRecalculated(router.getLeftDistance()).play();
 					currentStatus = STATUS_UNKNOWN;
-					lastTimeRouteRecalcAnnounced = System.currentTimeMillis();
+					// lastTimeRouteRecalcAnnounced = System.currentTimeMillis();
 				}
 			} else {
 				play.newRouteCalculated(router.getLeftDistance()).play();

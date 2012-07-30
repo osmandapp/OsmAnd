@@ -23,7 +23,8 @@ public class RoutingConfiguration {
 	// 1.1 tile load parameters (should not affect routing)
 	public int ZOOM_TO_LOAD_TILES = 13; // 12?, 14?
 	public int ITERATIONS_TO_RUN_GC = 100;
-	public int NUMBER_OF_DESIRABLE_TILES_IN_MEMORY = 25;
+	public static int DEFAULT_DESIRABLE_TILES_IN_MEMORY = 25;  
+	public int NUMBER_OF_DESIRABLE_TILES_IN_MEMORY = DEFAULT_DESIRABLE_TILES_IN_MEMORY;
 
 	// 1.2 Dynamic road prioritizing (heuristic)
 	public boolean useDynamicRoadPrioritising = true;
@@ -92,21 +93,21 @@ public class RoutingConfiguration {
 	}
 
 	private static int parseSilentInt(String t, int v) {
-		if (t == null) {
+		if (t == null || t.length() == 0) {
 			return v;
 		}
 		return Integer.parseInt(t);
 	}
 
 	private static boolean parseSilentBoolean(String t, boolean v) {
-		if (t == null) {
+		if (t == null || t.length() == 0) {
 			return v;
 		}
 		return Boolean.parseBoolean(t);
 	}
 
 	private static double parseSilentDouble(String t, double v) {
-		if (t == null) {
+		if (t == null || t.length() == 0) {
 			return v;
 		}
 		return Double.parseDouble(t);
@@ -162,6 +163,8 @@ public class RoutingConfiguration {
 								currentRouter.maxDefaultSpeed);
 						currentRouter.leftTurn = parseSilentDouble(attributes.getValue("leftTurn"), 
 								currentRouter.leftTurn);
+						currentRouter.roundaboutTurn = parseSilentDouble(attributes.getValue("roundaboutTurn"), 
+								currentRouter.roundaboutTurn);
 						currentRouter.rightTurn = parseSilentDouble(attributes.getValue("rightTurn"), 
 								currentRouter.rightTurn);
 					} else if("highway".equals(name)) {

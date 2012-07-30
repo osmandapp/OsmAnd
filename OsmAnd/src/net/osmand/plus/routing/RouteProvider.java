@@ -38,6 +38,7 @@ import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
+import net.osmand.router.Interruptable;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
@@ -147,7 +148,7 @@ public class RouteProvider {
 	
 
 	public RouteCalculationResult calculateRouteImpl(Location start, LatLon end, ApplicationMode mode, RouteService type, Context ctx,
-			GPXRouteParams gpxRoute, RouteCalculationResult previousToRecalculate, boolean fast, boolean leftSide){
+			GPXRouteParams gpxRoute, RouteCalculationResult previousToRecalculate, boolean fast, boolean leftSide, Interruptable interruptable){
 		long time = System.currentTimeMillis();
 		if (start != null && end != null) {
 			if(log.isInfoEnabled()){
@@ -166,7 +167,7 @@ public class RouteProvider {
 					if(previousToRecalculate != null) {
 						originalRoute = previousToRecalculate.getOriginalRoute();
 					}
-					res = findVectorMapsRoute(start, end, mode, fast, (OsmandApplication)ctx.getApplicationContext(), originalRoute, leftSide);
+					res = findVectorMapsRoute(start, end, mode, fast, (OsmandApplication)ctx.getApplicationContext(), originalRoute, leftSide, interruptable);
 				} else {
 					res = findCloudMadeRoute(start, end, mode, ctx, fast, leftSide);
 				}
@@ -308,7 +309,7 @@ public class RouteProvider {
 	
 	protected RouteCalculationResult findVectorMapsRoute(Location start, LatLon end, ApplicationMode mode, boolean fast, OsmandApplication app,
 			List<RouteSegmentResult> previousRoute,
-			boolean leftSide) throws IOException {
+			boolean leftSide, Interruptable interruptable) throws IOException {
 		BinaryMapIndexReader[] files = app.getResourceManager().getRoutingMapFiles();
 		BinaryRoutePlanner router = new BinaryRoutePlanner(NativeOsmandLibrary.getLoadedLibrary(), files);
 		File routingXml = app.getSettings().extendOsmandPath(ResourceManager.ROUTING_XML);
@@ -332,6 +333,7 @@ public class RouteProvider {
 			p = GeneralRouterProfile.CAR;
 		}
 		RoutingContext ctx = new RoutingContext(config.build(p.name().toLowerCase(), !fast, start.hasBearing() ?  start.getBearing() / 180d * Math.PI : null));
+		ctx.interruptable = interruptable;
 		ctx.previouslyCalculatedRoute = previousRoute;
 		RouteSegment st= router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);
 		if (st == null) {

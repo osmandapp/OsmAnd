@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class OsmPoint {
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 729654300829771469L;
 
 	public static enum Group {BUG, POI};
@@ -28,6 +31,8 @@ public abstract class OsmPoint {
 	public OsmPoint(){
 	}
 
+	public abstract void updateID(long newID);
+	
 	public abstract long getId();
 
 	public abstract double getLatitude();
@@ -61,4 +66,5 @@ public abstract class OsmPoint {
 		return new StringBuffer("Osm Point ").append(this.getAction()).append(" ")
 			.toString();
 	}
+
 }

@@ -16,8 +16,8 @@ import android.graphics.Path;
 public class NextTurnInfoControl extends MapInfoControl {
 
 	private float scaleCoefficient = MapInfoLayer.scaleCoefficient;
-	private final float width;
-	private final float height ;
+	private float width;
+	private float height ;
 	private static final float miniCoeff = 2.5f;
 
 	protected Path pathForTurn = new Path();
@@ -27,20 +27,20 @@ public class NextTurnInfoControl extends MapInfoControl {
 	protected int nextTurnDirection = 0;
 	
 
-	private final Paint textPaint;
-	private final Paint subtextPaint;
+	protected Paint textPaint;
+	protected Paint subtextPaint;
 	private Paint paintBlack;
 	private Paint paintRouteDirection;
 
 	protected boolean makeUturnWhenPossible;
 	protected int turnImminent;
-	private final boolean horisontalMini;
+	protected boolean horisontalMini;
 
 	public NextTurnInfoControl(Context ctx, Paint textPaint, Paint subtextPaint, boolean horisontalMini) {
 		super(ctx);
 		this.textPaint = textPaint;
 		this.subtextPaint = subtextPaint;
-		this.horisontalMini = horisontalMini;
+
 
 		paintBlack = new Paint();
 		paintBlack.setStyle(Style.STROKE);
@@ -54,6 +54,12 @@ public class NextTurnInfoControl extends MapInfoControl {
 		paintRouteDirection.setAntiAlias(true);
 		
 		pathTransform = new Matrix();
+		updateHorisontalMini(horisontalMini);
+		
+	}
+
+	protected void updateHorisontalMini(boolean horisontalMini) {
+		this.horisontalMini = horisontalMini;
 		if (horisontalMini) {
 			pathTransform.postScale(scaleCoefficient / miniCoeff, scaleCoefficient / miniCoeff);
 			width = 72 * scaleCoefficient / miniCoeff;
@@ -63,8 +69,9 @@ public class NextTurnInfoControl extends MapInfoControl {
 			width = 72 * scaleCoefficient;
 			height = 72 * scaleCoefficient;
 		}
-		
+		requestLayout();
 	}
+	
 
 	protected Matrix pathTransform = new Matrix();
 
@@ -75,7 +82,7 @@ public class NextTurnInfoControl extends MapInfoControl {
 		if (!horisontalMini) {
 			h = (int) (8 * scaleCoefficient + Math.max(textPaint.getTextSize(), subtextPaint.getTextSize()));
 		} else {
-			h = (int) (6 * scaleCoefficient);
+			h = (int) (7 * scaleCoefficient);
 			w = (int) textPaint.measureText(OsmAndFormatter.getFormattedDistance(nextTurnDirection, getContext()));
 		}
 		setWDimensions((int) width + w, (int) height + h);
@@ -97,8 +104,8 @@ public class NextTurnInfoControl extends MapInfoControl {
 			canvas.drawPath(pathForTurn, paintRouteDirection);
 			canvas.drawPath(pathForTurn, paintBlack);
 			if (exitOut != null && !horisontalMini) {
-				drawShadowText(canvas, exitOut, (getWWidth()) / 2 - 7 * scaleCoefficient, 
-						getWHeight() / 2 - textPaint.getTextSize() / 2 + 3 * scaleCoefficient, textPaint);
+				drawShadowText(canvas, exitOut, width / 2 - 7 * scaleCoefficient, 
+						height / 2 + textPaint.getTextSize() / 2 - 3 * scaleCoefficient, textPaint);
 			}
 			String text = OsmAndFormatter.getFormattedDistance(nextTurnDirection, getContext());
 			String subtext = null;
@@ -119,7 +126,7 @@ public class NextTurnInfoControl extends MapInfoControl {
 				float startX = Math.max((getWWidth() - st - mt) / 2, 2 * scaleCoefficient);
 				drawShadowText(canvas, text, startX, getWHeight() - 3 * scaleCoefficient, textPaint);
 				if (subtext != null) {
-					drawShadowText(canvas, subtext, startX + 2 * scaleCoefficient + mt, getWHeight() - 3 * scaleCoefficient, subtextPaint);
+					drawShadowText(canvas, subtext, startX + 2 * scaleCoefficient + mt, getWHeight() - 4 * scaleCoefficient, subtextPaint);
 				}
 			} else {
 				drawShadowText(canvas, text, 72 * scaleCoefficient / miniCoeff + 2 * scaleCoefficient,

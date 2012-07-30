@@ -12,14 +12,11 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import net.osmand.data.preparation.MapZooms;
 
 public class NativePreferencesDialog extends JDialog {
 	
@@ -31,6 +28,9 @@ public class NativePreferencesDialog extends JDialog {
 	private JTextField nativeFilesDirectory;
 	private JTextField renderingStyleFile;
 	private boolean okPressed;
+
+	private JTextField renderingPropertiesTxt;
+	private static String renderingProperties = "nightMode=false, appMode=default, noPolygons=false, hmRendered=false";
 
 	
 	public NativePreferencesDialog(Component parent){
@@ -119,18 +119,43 @@ public class NativePreferencesDialog extends JDialog {
         constr.gridx = 1;
         constr.gridy = 3;
         l.setConstraints(renderingStyleFile, constr);
+        
+        label = new JLabel("Rendering properties : ");
+        panel.add(label);
+        constr = new GridBagConstraints();
+        constr.ipadx = 5;
+        constr.gridx = 0;
+        constr.gridy = 4;
+        constr.anchor = GridBagConstraints.WEST;
+        l.setConstraints(label, constr);
+        
+        renderingPropertiesTxt = new JTextField();
+        renderingPropertiesTxt.setText(renderingProperties);
+        panel.add(renderingPropertiesTxt);
+        constr = new GridBagConstraints();
+        constr.weightx = 1;
+        constr.fill = GridBagConstraints.HORIZONTAL;
+        constr.ipadx = 5;
+        constr.gridx = 1;
+        constr.gridy = 4;
+        l.setConstraints(renderingPropertiesTxt, constr);
 		
 		panel.setMaximumSize(new Dimension(Short.MAX_VALUE, panel.getPreferredSize().height));
 		
 	}
 
 
+	public static String getRenderingProperties() {
+		return renderingProperties;
+	}
+	
 	private void addListeners(){
 		okButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				saveProperties();
 				okPressed = true;
+				renderingProperties = renderingPropertiesTxt.getText();
 				setVisible(false);
 			}
 			

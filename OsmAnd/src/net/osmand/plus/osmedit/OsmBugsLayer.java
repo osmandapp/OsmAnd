@@ -20,6 +20,7 @@ import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.R.drawable;
 import net.osmand.plus.activities.DialogProvider;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
@@ -426,8 +427,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					}
 				}
 			};
-			adapter.registerItem(R.string.osb_comment_menu_item, 0, listener, -1);
-			adapter.registerItem(R.string.osb_close_menu_item, 0, listener, -1);
+			adapter.registerItem(R.string.osb_comment_menu_item, R.drawable.list_activities_add_comment, listener, -1);
+			adapter.registerItem(R.string.osb_close_menu_item, R.drawable.list_activities_close_bug, listener, -1);
 		}
 	}
 	

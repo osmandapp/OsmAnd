@@ -20,6 +20,8 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 
 public class OsmandBackgroundServicePlugin extends OsmandPlugin {
+	public static final int[] MINUTES = new int[]{2, 3, 5, 10, 15, 30, 45, 60, 90};
+	public static final int[] SECONDS = new int[]{0, 30, 45, 60};
 	private static final String ID = "osmand.backgroundservice";
 	private OsmandSettings settings;
 	private OsmandApplication app;
@@ -113,7 +115,7 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin {
 		});
 		routeServiceEnabled.setTitle(R.string.background_router_service);
 		routeServiceEnabled.setSummary(R.string.background_router_service_descr);
-		routeServiceEnabled.setKey("service_off_enabled");
+		routeServiceEnabled.setKey(OsmandSettings.SERVICE_OFF_ENABLED);
 		grp.addPreference(routeServiceEnabled);
 		
 		String[] entries = new String[]{app.getString(R.string.gps_provider), app.getString(R.string.network_provider)};
@@ -121,10 +123,9 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin {
 		grp.addPreference(activity.createListPreference(settings.SERVICE_OFF_PROVIDER, entries, entrieValues, 
 				R.string.background_service_provider, R.string.background_service_provider_descr));
 		
-		grp.addPreference(activity.createTimeListPreference(settings.SERVICE_OFF_INTERVAL,new int[]{0, 30, 45, 60}, new int[]{2, 3, 5, 10, 15, 30, 45, 60, 90}, 1000,
+		grp.addPreference(activity.createTimeListPreference(settings.SERVICE_OFF_INTERVAL, SECONDS, MINUTES, 1000,
 				R.string.background_service_int, R.string.background_service_int_descr));
 		grp.addPreference(activity.createTimeListPreference(settings.SERVICE_OFF_WAIT_INTERVAL,new int[]{15, 30, 45, 60, 90}, new int[]{2, 3, 5, 10}, 1000,
 				R.string.background_service_wait_int, R.string.background_service_wait_int_descr));
 	}
-	
 }

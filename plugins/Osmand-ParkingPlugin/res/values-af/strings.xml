@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_buttons_no">Nee</string>
+    <string name="default_buttons_yes">Ja</string>
+    <string name="osmand_app_not_found">Osmand is nie geïnstalleer nie</string>
+    <string name="app_name">OsmAnd Parkering Inlegmodule</string>
+    <string name="parking_plugin_installed">OsmAnd Parkering inlegmodule is geïnstalleer en aangeskakel in OsmAnd instellings.</string>
+</resources>

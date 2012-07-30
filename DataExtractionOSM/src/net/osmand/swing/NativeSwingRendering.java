@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
@@ -15,19 +16,24 @@ import org.xml.sax.SAXException;
 
 import resources._R;
 
+import net.osmand.Algoritms;
 import net.osmand.NativeLibrary;
 import net.osmand.RenderingContext;
 import net.osmand.osm.MapUtils;
+import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.render.RenderingRulesStorage.RenderingRulesStorageResolver;
 
 public class NativeSwingRendering extends NativeLibrary {
 
 	RenderingRulesStorage storage;
+	private HashMap<String, String> renderingProps;
 	private static NativeSwingRendering defaultLoadedLibrary; 
 	
-	public void loadRuleStorage(String path) throws SAXException, IOException{
+	public void loadRuleStorage(String path, String renderingProperties) throws SAXException, IOException{
+		RenderingRulesStorage storage2 = new RenderingRulesStorage();
 		RenderingRulesStorage storage = new RenderingRulesStorage();
 		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
 			@Override
@@ -47,12 +53,22 @@ public class NativeSwingRendering extends NativeLibrary {
 		} else {
 			storage.parseRulesFromXmlInputStream(new FileInputStream(path), resolver);
 		}
+		renderingProps = new HashMap<String, String>();
+		String[] props = renderingProperties.split(",");
+		for (String s : props) {
+			int i = s.indexOf('=');
+			if (i > 0) {
+				renderingProps.put(s.substring(0, i).trim(), s.substring(i + 1).trim());
+			}
+		}
+		initRenderingRulesStorage(storage);
 		this.storage = storage;
+		
 	}
 	
 	public NativeSwingRendering(){
 		try {
-			loadRuleStorage(null);
+			loadRuleStorage(null, "");
 		} catch (SAXException e) {
 			throw new RuntimeException(e);
 		} catch (IOException e) {
@@ -71,9 +87,28 @@ public class NativeSwingRendering extends NativeLibrary {
 				return _R.getIconData(data);
 			}
 		};
-		rctx.nightMode = true;
-		
+		rctx.nightMode = "true".equals(renderingProps.get("nightMode"));
 		RenderingRuleSearchRequest request = new RenderingRuleSearchRequest(storage);
+		request.setBooleanFilter(request.ALL.R_NIGHT_MODE, rctx.nightMode);
+		for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
+			String res = renderingProps.get(customProp.getAttrName());
+			if (!Algoritms.isEmpty(res)) {
+				if (customProp.isString()) {
+					request.setStringFilter(customProp, res);
+				} else if (customProp.isBoolean()) {
+					request.setBooleanFilter(customProp, "true".equalsIgnoreCase(res));
+				} else {
+					try {
+						request.setIntFilter(customProp, Integer.parseInt(res));
+					} catch (NumberFormatException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		request.setIntFilter(request.ALL.R_MINZOOM, zoom);
+		request.saveState();
+		
 		NativeSearchResult res = searchObjectsForRendering(sleft, sright, stop, sbottom, zoom, request, true, 
 					rctx, "Nothing found");
 		
@@ -81,9 +116,19 @@ public class NativeSwingRendering extends NativeLibrary {
 		rctx.topY = (float) (((double)stop)/ MapUtils.getPowZoom(31-zoom));
 		rctx.width = (int) ((sright - sleft) / MapUtils.getPowZoom(31 - zoom - 8));
 		rctx.height = (int) ((sbottom - stop) / MapUtils.getPowZoom(31 - zoom - 8));
-		rctx.shadowRenderingMode = 2;
-		rctx.shadowRenderingColor = 0xff969696;
-		rctx.defaultColor = 0xfff1eee8;
+		
+		request.clearState();
+		
+		if(request.searchRenderingAttribute(RenderingRuleStorageProperties.A_DEFAULT_COLOR)) {
+			rctx.defaultColor = request.getIntPropertyValue(request.ALL.R_ATTR_COLOR_VALUE);
+		}
+		request.clearState();
+		request.setIntFilter(request.ALL.R_MINZOOM, zoom);
+		if(request.searchRenderingAttribute(RenderingRuleStorageProperties.A_SHADOW_RENDERING)) {
+			rctx.shadowRenderingMode = request.getIntPropertyValue(request.ALL.R_ATTR_INT_VALUE);
+			rctx.shadowRenderingColor = request.getIntPropertyValue(request.ALL.R_SHADOW_COLOR);
+			
+		}
 		rctx.zoom = zoom;
 		long search = time + System.currentTimeMillis();
 		final RenderingGenerationResult rres = NativeSwingRendering.generateRenderingIndirect(rctx, res.nativeHandler,  

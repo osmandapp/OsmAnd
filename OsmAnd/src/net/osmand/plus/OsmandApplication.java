@@ -15,16 +15,12 @@ import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.PoiFiltersHelper;
-import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.LogUtil;
 import net.osmand.access.AccessibilityMode;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.activities.DayNightHelper;
 import net.osmand.plus.activities.LiveMonitoringHelper;
+import net.osmand.plus.activities.OsmandIntents;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -35,9 +31,11 @@ import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.voice.CommandPlayerFactory;
 import net.osmand.render.RenderingRulesStorage;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Application;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -483,9 +481,12 @@ public class OsmandApplication extends Application {
 	private class DefaultExceptionHandler implements UncaughtExceptionHandler {
 
 		private UncaughtExceptionHandler defaultHandler;
+		private PendingIntent intent;
 
 		public DefaultExceptionHandler() {
 			defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
+			intent = PendingIntent.getActivity(OsmandApplication.this.getBaseContext(), 0,
+		            new Intent(OsmandApplication.this.getBaseContext(), OsmandIntents.getMainMenuActivity()), 0);
 		}
 
 		@Override
@@ -505,6 +506,11 @@ public class OsmandApplication extends Application {
 					BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
 					writer.write(msg.toString());
 					writer.close();
+				}
+				if(routingHelper.isFollowingMode()) {
+					AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+					mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
+					System.exit(2);
 				}
 				defaultHandler.uncaughtException(thread, ex);
 			} catch (Exception e) {

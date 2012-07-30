@@ -158,8 +158,6 @@
   <!-- this block not translated, is obsolete -->
   <string name="tip_recent_changes_0_6_9_t">♦</string>
   <!-- End: this block not translated, is obsolete -->
-  <string name="show_altitude_info_descr">Toon huidige hoogte-informatie op kaart</string>
-  <string name="show_altitude_info">Toon hoogte</string>
   <string name="use_transparent_map_theme_descr">Gebruik transparante kaarttoetsen</string>
   <string name="use_transparent_map_theme">Transparant thema</string>
   <string name="native_library_not_supported">Interne bibliotheek wordt niet ondersteund op dit apparaat.</string>
@@ -485,7 +483,6 @@
   <string name="layer_poi">Interessepunt…</string>
   <string name="layer_map">Kaartbron…</string>
   <string name="menu_layers">Definieer beeld</string>
-  <string name="continue_follow_previous_route">Vorige route was niet beëindigd. Doorgaan met die route?</string>
   <string name="context_menu_item_search_poi">Zoek interessepunt</string>
   <string name="context_menu_item_show_route">Toon route vanaf hier</string>
   <string name="use_trackball_descr">Gebruik trackball om de kaart te verschuiven</string>
@@ -846,7 +843,7 @@
   <string name="rendering_attr_contourLines_name">Toon hoogtelijnen</string>
   <string name="rendering_attr_hmRendered_description">Toon meer details op de kaart</string>
   <string name="rendering_attr_hmRendered_name">Toon meer details</string>
-  <string name="tip_recent_changes_0_8_1_t">"Wijzigingen in 0.8.1 : "</string>
+  <string name="tip_recent_changes_0_8_1_t">"Wijzigingen in 0.8.1 : \n\t* Nauwkeuriger routeberekening (iets trager) \n\t* Slimme en snelle route-herberekening \n\t* Rijstrook begeleiding\n\t* Informatie over maximum snelheden, snelheidscamera\'s en verkeersdrempels\n\t* Verbeterde stembegeleiding op snelwegen \n\t* Parkeer plugin (\"Waar staat mijn auto geparkeerd?\")\n* Toon/verberg track-registratie widget"</string>
   <string name="gpxup_public">Openbaar</string>
   <string name="gpxup_identifiable">Identificeerbaar</string>
   <string name="gpxup_trackable">Traceerbaar</string>
@@ -874,4 +871,51 @@
   <string name="context_menu_item_delete_parking_point">Verwijder parkeerpositie markering</string>
   <string name="starting_point_too_far">Startpunt te ver van de dichtstbijzijnde weg.</string>
   <string name="shared_location">Gedeelde locatie</string>
-<string name="update_downlod_list">Vernieuw lijst</string><string name="global_app_allocated_memory_descr">Beschikbaar werkgeheugen %1$s MB (Android limiet %2$s MB, Dalvik %3$s MB).</string><string name="global_app_allocated_memory">Beschikbaar werkgeheugen</string><string name="native_app_allocated_memory_descr">Werkgeheugen, gereserveerd door app %1$s MB (Dalvik %2$s MB, overig %3$s MB). Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</string><string name="native_app_allocated_memory">"Totaal werkgeheugen "</string><string name="monitoring_info_control">Toon registratieknop</string><string name="monitoring_info_control_desc">Toon een knop op het info paneel voor het registreren van tracks.</string><string name="select_animate_speedup">Selecteer versnelling van de route-animatie</string><string name="osmand_parking_hours">Uren</string><string name="osmand_parking_minutes">Minuten</string><string name="osmand_parking_position_description_add_time">De auto werd geparkeerd om:</string><string name="use_compass_navigation_descr">Use compass in navigation when diretion is not detected</string><string name="use_compass_navigation">Use compass</string></resources>
+  <string name="update_downlod_list">Vernieuw lijst</string>
+  <string name="global_app_allocated_memory_descr">Beschikbaar werkgeheugen %1$s MB (Android limiet %2$s MB, Dalvik %3$s MB).</string>
+  <string name="global_app_allocated_memory">Beschikbaar werkgeheugen</string>
+  <string name="native_app_allocated_memory_descr">Werkgeheugen, gereserveerd door app %1$s MB (Dalvik %2$s MB, overig %3$s MB). Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</string>
+  <string name="native_app_allocated_memory">"Totaal werkgeheugen "</string>
+  <string name="select_animate_speedup">Selecteer versnelling van de route-animatie</string>
+  <string name="osmand_parking_hours">Uur</string>
+  <string name="osmand_parking_minutes">Minuten</string>
+  <string name="osmand_parking_position_description_add_time">De auto werd geparkeerd om:</string>
+  <string name="use_compass_navigation_descr">Gebruik het kompas bij navigatie als de richting niet gedetecteerd is</string>
+  <string name="use_compass_navigation">Gebruik kompas</string>
+  <string name="route_updated_loc_found">Route wordt herberekend als de locatie gevonden is</string>
+  <string name="continue_follow_previous_route_auto">Vorige navigatie was nog niet klaar. Nu daarmee doorgaan? (%1$s seconden)</string>
+  <string name="show_cameras_descr">Toon snelheidscontrole-camera\'s (is mogelijk verboden in sommige landen)</string>
+  <string name="show_speed_limits_descr">Toon maximaal toegestane snelheden en verkeersdrempels</string>
+  <string name="avoid_toll_roads_descr">Vermijd tolwegen bij routeberekening</string>
+  <string name="show_cameras">Toon snelheidscontroles</string>
+  <string name="show_speed_limits">Toon maximumsnelheden</string>
+  <string name="avoid_toll_roads">Vermijd tolwegen</string>
+  <string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Verbeterde routeberekening"</string>
+  <string name="map_widget_top_text">Straatnaam</string>
+  <string name="map_widget_config">Configuratie</string>
+  <string name="map_widget_map_select">Kaartselectie</string>
+  <string name="map_widget_back_to_loc">Waar ben ik</string>
+  <string name="map_widget_lock_screen">Vergrendel scherm</string>
+  <string name="map_widget_compass">Kompas</string>
+  <string name="map_widget_top_stack">Statusbalk</string>
+  <string name="map_widget_reset">Herstel standaardinstelling</string>
+  <string name="map_widget_right_stack">Rechterkant</string>
+  <string name="map_widget_left_stack">Linkerkant</string>
+  <string name="map_widget_parking">Parkeren</string>
+  <string name="map_widget_monitoring">Track registratie</string>
+  <string name="map_widget_speed">Snelheid</string>
+  <string name="map_widget_distance">Afstand tot bestemming</string>
+  <string name="map_widget_altitude">Hoogte</string>
+  <string name="map_widget_time">Resterende tijd</string>
+  <string name="map_widget_next_turn">Volgende bocht</string>
+  <string name="map_widget_next_turn_small">Volgende bocht (klein)</string>
+  <string name="map_widget_next_next_turn">Tweede volgende bocht</string>
+  <string name="map_widget_mini_route">Mini-routekaart</string>
+  <string name="bg_service_screen_lock">Vergrendel/ontgrendel scherm</string>
+  <string name="bg_service_screen_lock_toast">Het scherm is vergrendeld</string>
+  <string name="bg_service_interval">Zet ontwaak-interval:</string>
+  <string name="screen_is_locked">To unlock screen press lock icon</string>
+  <string name="bg_service_screen_unlock">Unlock screen</string>
+  <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
+  <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
+</resources>

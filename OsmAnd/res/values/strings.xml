@@ -9,23 +9,60 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="screen_is_locked">To unlock screen press lock icon</string>
+    <string name="map_widget_top_text">Street name</string>
+    <string name="map_widget_config">Configuration</string>
+    <string name="map_widget_map_select">Map selection</string>
+    <string name="map_widget_back_to_loc">Where am I</string>
+    <string name="map_widget_lock_screen">Lock screen</string>
+    <string name="map_widget_compass">Compass</string>
+    <string name="map_widget_top_stack">Status bar</string>
+    <string name="map_widget_reset">Reset to default</string>
+    <string name="map_widget_right_stack">Right side</string>
+    <string name="map_widget_left_stack">Left side</string>
+    <string name="map_widget_parking">Parking</string>
+    <string name="map_widget_monitoring">Tracking</string>
+    <string name="map_widget_speed">Speed</string>
+    <string name="map_widget_distance">Target</string>
+    <string name="map_widget_altitude">Altitude</string>
+    <string name="map_widget_time">Time to go</string>
+    <string name="map_widget_next_turn">Next turn</string>
+    <string name="map_widget_next_turn_small">Next turn (small)</string>
+    <string name="map_widget_next_next_turn">Second next turn</string>
+    <string name="map_widget_mini_route">Mini route map</string>
+    <string name="bg_service_screen_lock">Lock screen</string>
+    <string name="bg_service_screen_unlock">Unlock screen</string>
+    <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
+    <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
+    <string name="bg_service_screen_lock_toast">The screen is locked</string>
+    <string name="bg_service_interval">Set wake-up interval:</string>
+    <string name="show_cameras_descr">Show speed cameras (may be forbidden in some countries)</string>
+    <string name="show_speed_limits_descr">Show speed limits and traffic bumps</string>
+    <string name="avoid_toll_roads_descr">Avoid toll roads for route calculation</string>
+    <string name="show_cameras">Show speed cameras</string>
+    <string name="show_speed_limits">Show speed limits</string>
+    <string name="avoid_toll_roads">Avoid toll roads</string>
+    <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 :
+    \n\t* Improved Routing
+    \n\t* Dynamic map widgets
+    </string>
+    <string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
+    <string name="route_updated_loc_found">Route will be recalculated when location will be found</string>
     <string name="osmand_parking_hours">Hours</string>
     <string name="osmand_parking_minutes">Minutes</string>
     <string name="osmand_parking_position_description_add_time">The car was parked at:</string>
     <string name="tip_recent_changes_0_8_1_t">Changes in 0.8.1 :
-         	* Smart and fast Route recalculation
-         	* More precise routes (a bit slower)
-         	* Direction by lanes
-         	* Information about bumps, speed cams and speed limits
-         	* Improved voice guidance on highways
-         	* Parking plugin
-         	* Enable/disable monitoring widget
-         </string>
-    <string name="use_compass_navigation_descr">Use compass in navigation when diretion is not detected</string>
+	\n\t* More precise routes (a bit slower)
+	\n\t* Smart and fast Route recalculation
+	\n\t* Direction by lanes
+	\n\t* Information about speed limits, speed cams, and speed bumps 
+	\n\t* Improved voice guidance on highways
+	\n\t* Parking plugin (\'Where is my car parked at?\')
+	\n\t* Enable/disable logging widget
+    </string>
+    <string name="use_compass_navigation_descr">Use compass when direction is not detected</string>
     <string name="use_compass_navigation">Use compass</string>
     <string name="select_animate_speedup">Select animate route acceleration</string>
-    <string name="monitoring_info_control">Info Control</string>
-    <string name="monitoring_info_control_desc">Show monitoring state on the info pane</string>
     
     <string name="global_app_allocated_memory_descr">Allocated memory %1$s MB (Android limit %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Allocated memory</string>
@@ -351,8 +388,6 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 \n\t- Other small features
 	</string>
 	
-	<string name="show_altitude_info_descr">Show current altitude information on map</string>
-	<string name="show_altitude_info">Show altitude</string>
 	<string name="use_transparent_map_theme_descr">Use transparent map controls</string>
 	<string name="use_transparent_map_theme">Transparent theme</string>
 
@@ -758,7 +793,6 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="layer_poi">POI&#8230;</string>
 	<string name="layer_map">Map source&#8230;</string>
 	<string name="menu_layers">Define view</string>
-	<string name="continue_follow_previous_route">Previous navigation was unfinished. Continue following it?</string>
 	<string name="context_menu_item_search_poi">Search POI</string>
 	<string name="context_menu_item_show_route">Show route from here</string>
 	<string name="use_trackball_descr">Use trackball to move map</string>

@@ -21,6 +21,7 @@ public class GeneralRouter extends VehicleRouter {
 	double minDefaultSpeed = 10;
 	double maxDefaultSpeed = 10;
 	double leftTurn = 0;
+	double roundaboutTurn = 0;
 	double rightTurn = 0;
 	GeneralRouterProfile profile;
 	
@@ -141,9 +142,23 @@ public class GeneralRouter extends VehicleRouter {
 	
 	@Override
 	public double calculateTurnTime(RouteSegment segment, int segmentEnd, RouteSegment prev, int prevSegmentEnd) {
+		int[] pt = prev.getRoad().getPointTypes(prevSegmentEnd);
+		if(pt != null) {
+			RouteRegion reg = prev.getRoad().region;
+			for(int i=0; i<pt.length; i++) {
+				RouteTypeRule r = reg.quickGetEncodingRule(pt[i]);
+				if("highway".equals(r.getTag()) && "traffic_signals".equals(r.getValue())) {
+					// traffic signals don't add turn info 
+					return 0;
+				}
+			}
+		}
+		if(roundaboutTurn > 0 && !prev.getRoad().roundabout() && segment.getRoad().roundabout()) {
+			return roundaboutTurn;
+		}
 		if (leftTurn > 0 || rightTurn > 0) {
 			double a1 = segment.getRoad().directionRoute(segment.segmentStart, segment.segmentStart < segmentEnd);
-			double a2 = prev.getRoad().directionRoute(prevSegmentEnd, segmentEnd < prev.segmentStart);
+			double a2 = prev.getRoad().directionRoute(prevSegmentEnd, prevSegmentEnd < prev.segmentStart);
 			double diff = Math.abs(MapUtils.alignAngleDifference(a1 - a2 - Math.PI));
 			// more like UT
 			if (diff > 2 * Math.PI / 3) {

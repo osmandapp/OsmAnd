@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.GPXUtilities;
-import net.osmand.OsmAndFormatter;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
@@ -223,21 +222,26 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				long time = query.getLong(5);
 				pt.time = time;
 				long currentInterval = Math.abs(time - previousTime);
+				boolean newInterval = pt.lat == 0 && pt.lon == 0;
 				
-				if (track != null && (currentInterval < 6 * 60 * 1000 || currentInterval < 10 * previousInterval)) {
+				if (track != null && !newInterval && (currentInterval < 6 * 60 * 1000 || currentInterval < 10 * previousInterval)) {
 					// 6 minute - same segment
 					segment.points.add(pt);
 				} else if (track != null && currentInterval < 2 * 60 * 60 * 1000) {
 					// 2 hour - same track
 					segment = new TrkSegment();
-					segment.points.add(pt);
+					if(!newInterval) {
+						segment.points.add(pt);
+					}
 					track.segments.add(segment);
 				} else {
 					// check if date the same - new track otherwise new file  
 					track = new Track();
 					segment = new TrkSegment();
 					track.segments.add(segment);
-					segment.points.add(pt);
+					if(!newInterval) {
+						segment.points.add(pt);
+					}
 					String date = DateFormat.format("yyyy-MM-dd", time).toString(); //$NON-NLS-1$
 					if (dataTracks.containsKey(date)) {
 						GPXFile gpx = dataTracks.get(date);
@@ -255,34 +259,45 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		query.close();
 	}
 	
+	public void startNewSegment() {
+		lastTimeUpdated = 0;
+		lastPoint = null;
+		execWithClose(updateScript, new Object[] { 0, 0, 0, 0, 0, System.currentTimeMillis()});
+		addTrackPoint(null, true);
+	}
+	
 	public void insertData(double lat, double lon, double alt, double speed, double hdop, long time, OsmandSettings settings){
-		if (time - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get() * 1000) {
+		if ((time - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get() * 1000)) {
 			execWithClose(updateScript, new Object[] { lat, lon, alt, speed, hdop, time });
+			boolean newSegment = false;
+			if (lastPoint == null || (time - lastTimeUpdated) > 180 * 1000) {
+				lastPoint = new LatLon(lat, lon);
+				newSegment = true;
+			} else {
+				float[] lastInterval = new float[1];
+				Location.distanceBetween(lat, lon, lastPoint.getLatitude(), lastPoint.getLongitude(), lastInterval);
+				distance += lastInterval[0];
+				lastPoint = new LatLon(lat, lon);
+			}
 			lastTimeUpdated = time;
-			updateDistance(lat, lon);
 			if (settings.SHOW_CURRENT_GPX_TRACK.get()) {
 				WptPt pt = new GPXUtilities.WptPt(lat, lon, time,
 						alt, speed, hdop);
-				addTrackPoint(pt);
+				addTrackPoint(pt, newSegment);
 			}
 		}
 	}
 	
-	private void addTrackPoint(WptPt pt) {
+	private void addTrackPoint(WptPt pt, boolean newSegment) {
 		GPXFile file = ctx.getGpxFileToDisplay();
 		if (file != null && ctx.getSettings().SHOW_CURRENT_GPX_TRACK.get()) {
 			List<List<WptPt>> points = file.processedPointsToDisplay;
-			if (points.size() == 0) {
+			if (points.size() == 0 || newSegment) {
 				points.add(new ArrayList<WptPt>());
 			}
-			List<WptPt> last = points.get(points.size() - 1);
-			if (last.size() == 0 || last.get(last.size() - 1).time - pt.time < 6 * 60 * 1000) {
-				// 6 minutes same segment
+			if (pt != null) {
+				List<WptPt> last = points.get(points.size() - 1);
 				last.add(pt);
-			} else {
-				ArrayList<WptPt> l = new ArrayList<WptPt>();
-				l.add(pt);
-				points.add(l);
 			}
 		}
 	}
@@ -304,23 +319,12 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 	}
 	
-	public String getDistance(MapActivity map) {
-		return OsmAndFormatter.getFormattedDistance(distance, map);
+	public float getDistance() {
+		return distance;
+	}
+	
+	public long getLastTimeUpdated() {
+		return lastTimeUpdated;
 	}
 
-	private void updateDistance (double lat, double lon) {
-		if (lastPoint == null) {
-			lastPoint = new LatLon(lat, lon);
-		} 
-		double lastLat = lastPoint.getLatitude();
-		double lastLon = lastPoint.getLongitude();
-		if ((lat == lastLat) && (lon == lastLon)) {
-			return;
-		} else {
-			float[] lastInterval = new float[1];
-			Location.distanceBetween(lat, lon, lastLat, lastLon, lastInterval);
-			distance += lastInterval[0];
-			lastPoint = new LatLon(lat, lon);
-		}
-	}
 }

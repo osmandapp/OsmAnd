@@ -210,15 +210,15 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 	
 	private void drawZoomLevel(Canvas canvas) {
-		ShadowText zoomText = ShadowText.create(view.getZoom() + "");
-		float length = zoomTextPaint.measureText(zoomText.getText());
+		String zoomText = view.getZoom() + "";
+		float length = zoomTextPaint.measureText(zoomText);
 		if (zoomShadow.getBounds().width() == 0) {
 			zoomShadow.setBounds(zoomInButton.getLeft() - 2, zoomInButton.getTop() - (int) (18 * scaleCoefficient), zoomInButton.getRight(),
 					zoomInButton.getBottom());
 		}
 		zoomShadow.draw(canvas);
 				
-		zoomText.draw(canvas, zoomInButton.getLeft() + (zoomInButton.getWidth() - length - 2) / 2,
+		ShadowText.draw(zoomText, canvas, zoomInButton.getLeft() + (zoomInButton.getWidth() - length - 2) / 2,
 				zoomInButton.getTop() + 4 * scaleCoefficient, zoomTextPaint);
 	}
 	

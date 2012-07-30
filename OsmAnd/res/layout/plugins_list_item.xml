@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:drawablePadding="10dp"
         android:textStyle="bold"
-        android:textSize="20sp" android:drawableRight="@drawable/list_activities_dot_marker1_pressed" android:drawableLeft="@drawable/list_activities_plugin_menu_symbol" android:text="@string/extra_settings" android:gravity="center_vertical" android:paddingLeft="10dp" android:paddingRight="10dp" android:background="@drawable/ic_background_plugin_listitem">
+        android:textSize="20sp" android:drawableRight="@drawable/marker1_disabled" android:drawableLeft="@drawable/list_activities_plugin_menu_symbol" android:text="@string/extra_settings" android:gravity="center_vertical" android:paddingLeft="10dp" android:paddingRight="10dp" android:background="@drawable/ic_background_plugin_listitem">
     </TextView>
 
     <TextView

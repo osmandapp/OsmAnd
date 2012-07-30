@@ -1,5 +1,28 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+  <string name="map_widget_top_text">Názov ulice</string>
+  <string name="map_widget_config">Konfigurácia</string>
+  <string name="map_widget_map_select">Výber mapy</string>
+  <string name="map_widget_back_to_loc">Kde som</string>
+  <string name="map_widget_lock_screen">Zámok obrazovky</string>
+  <string name="map_widget_compass">Kompas</string>
+  <string name="map_widget_top_stack">Stavový panel</string>
+  <string name="map_widget_reset">Znovunastaviť štandardné</string>
+  <string name="map_widget_right_stack">Pravá strana</string>
+  <string name="map_widget_left_stack">Ľavá strana</string>
+  <string name="map_widget_parking">Parkovanie</string>
+  <string name="map_widget_monitoring">Monitorovanie</string>
+  <string name="map_widget_speed">Rýchlosť</string>
+  <string name="map_widget_distance">Cieľ</string>
+  <string name="map_widget_altitude">Nadm. výška</string>
+  <string name="map_widget_time">Čas cesty</string>
+  <string name="map_widget_next_turn">Nasledovná odbočka</string>
+  <string name="map_widget_next_turn_small">Nasledovná odbočka (malá)</string>
+  <string name="map_widget_next_next_turn">Druhá nasledovná odbočka</string>
+  <string name="map_widget_mini_route">Navigačná mini mapa</string>
+  <string name="bg_service_screen_lock">Zamknúť obrazovku</string>
+  <string name="bg_service_screen_lock_toast">Obrazovka je uzamknutá</string>
+  <string name="bg_service_interval">Nastaviť prebúdzací interval:</string>
   <string name="map_online_plugin_is_not_installed">Povoľte zásuvný modul s online mapami na výber rozličných mapových zdrojov</string>
   <string name="map_online_data">Online mapy (dlaždice)</string>
   <string name="map_online_data_descr">Použitie online máp (ich stiahnutie a uloženie na SD kartu)</string>
@@ -152,8 +175,6 @@
   <string name="tip_select_destination_point">Výber cieľového bodu</string>
   <string name="tip_select_destination_point_t">"\tCieľ môžete určiť priamo na mape (kontextové menu, potom \'Nastaviť ako cieľ\'), vo všetkých hľadacích aktivitách, alebo dlhým kliknutím vo Vašom \'Zozname obľúbených bodov\'. \n\tCieľ je označený ako oranžový krúžok na mape a OsmAnd zobrazí vzdialenosť a smer k nemu (oranžový trojuholník). "</string>
   <string name="tip_recent_changes_0_6_9_t">"Zmeny vo verzii 0.6.9 : \n\t- Vylepšené offline vykresľovanie mapy \n\t- Rýchle natívne offline vykresľovanie - viď experimentálne funkcie (nemusí fungovať na všetkých zariadeniach) \n\t- Veľké zmeny vo vzhľade aplikácie \n\t- Informácie o nadmorskej výške \n\t- Nové preklady (Vietnamský, Polský) \n\t- Iné malé funkcie "</string>
-  <string name="show_altitude_info_descr">Zobrazí aktuálnu nadm. výšku na mape</string>
-  <string name="show_altitude_info">Zobraziť nadm. výšku</string>
   <string name="use_transparent_map_theme_descr">Použije priehľadné ovládače mapy</string>
   <string name="use_transparent_map_theme">Priehľadná téma</string>
   <string name="native_library_not_supported">Natívna knižnica nie je podporovaná na tomto zariadení.</string>
@@ -490,7 +511,6 @@
   <string name="layer_poi">Body záujmu (POI)…</string>
   <string name="layer_map">Zdroj mapy…</string>
   <string name="menu_layers">Zobrazenie</string>
-  <string name="continue_follow_previous_route">Predošlá cesta nebolo ukončená. Pokračovať v jej nasledovaní?</string>
   <string name="context_menu_item_search_poi">Hľadať bod záujmu (POI)</string>
   <string name="context_menu_item_show_route">Zobraziť trasu odtiaľto</string>
   <string name="use_trackball_descr">Použitie trackballu na pohyb po mape</string>
@@ -836,7 +856,7 @@
   <string name="route_kr">Držte sa vpravo</string>
   <string name="save_route_as_gpx">Uložiť cestu ako GPX súbor</string>
   <string name="asap">Ihneď</string>
-  <string name="tip_recent_changes_0_8_1_t">".Zmeny vo verzii 0.8.1 :"</string>
+  <string name="tip_recent_changes_0_8_1_t">"Zmeny vo verzii 0.8.1 :\n\t* Presnejšia kalkulácia ciest (trochu pomalšia)\n\t* Múdre a rýchlejšie prepočítavanie ciest\n\t* Povely podľa jazdných pruhov\n\t* Informácie o maximálnej povolenej rýchlosti, radaroch a spomaľovačoch\n\t* Vylepšené hlasové navádzanie na diaľniciach\n\t* Parkovací zásuvný modul (\'Kde mám zaparkovaný automobil?\')\n\t* Widget pre zapnutie/vypnutie logovania"</string>
   <string name="gpxup_public">Verejná</string>
   <string name="gpxup_identifiable">Identifikovateľná</string>
   <string name="gpxup_trackable">Stopovateľná</string>
@@ -864,4 +884,30 @@
   <string name="context_menu_item_delete_parking_point">Zmazať parkovaciu značku</string>
   <string name="starting_point_too_far">Počiatočný bod je príliš ďaleko od najbližšej cesty.</string>
   <string name="shared_location">Zdieľané umiestnenie</string>
-<string name="update_downlod_list">Znovu načítať zoznam</string><string name="global_app_allocated_memory_descr">Pridelená pamäť %1$s MB (Android limit %2$s MB, Dalvik %3$s MB).</string><string name="global_app_allocated_memory">Pridelená pamäť</string><string name="native_app_allocated_memory_descr">Celková natívna pamäť pridelená aplikácii %1$s MB (Dalvik %2$s MB, iné %3$s MB). Proporčná pamäť %4$s MB (Android limit %5$s MB, Dalvik %6$s MB).</string><string name="native_app_allocated_memory">Celková natívna pamäť</string><string name="monitoring_info_control">Informačná kontrola</string><string name="monitoring_info_control_desc">Zobrazenie monitorovacieho stavu v info paneli</string><string name="select_animate_speedup">Vybrať zrýchlenie animovania trasy</string><string name="osmand_parking_hours">Hodín</string><string name="osmand_parking_minutes">Minút</string><string name="osmand_parking_position_description_add_time">Automobil bol zaparkovaný o:</string><string name="use_compass_navigation_descr">Use compass in navigation when diretion is not detected</string><string name="use_compass_navigation">Use compass</string></resources>
+  <string name="update_downlod_list">Znovu načítať zoznam</string>
+  <string name="global_app_allocated_memory_descr">Pridelená pamäť %1$s MB (Android limit %2$s MB, Dalvik %3$s MB).</string>
+  <string name="global_app_allocated_memory">Pridelená pamäť</string>
+  <string name="native_app_allocated_memory_descr">Celková natívna pamäť pridelená aplikácii %1$s MB (Dalvik %2$s MB, iné %3$s MB). Proporčná pamäť %4$s MB (Android limit %5$s MB, Dalvik %6$s MB).</string>
+  <string name="native_app_allocated_memory">Celková natívna pamäť</string>
+  <string name="select_animate_speedup">Vybrať zrýchlenie animovania trasy</string>
+  <string name="osmand_parking_hours">Hodín</string>
+  <string name="osmand_parking_minutes">Minút</string>
+  <string name="osmand_parking_position_description_add_time">Automobil bol zaparkovaný o:</string>
+  <string name="use_compass_navigation_descr">Použitie kompasu ak nie je zistený smer pohybu</string>
+  <string name="use_compass_navigation">Použiť kompas</string>
+  <string name="route_updated_loc_found">Cesta bude prepočítaná, keď sa nájde umiestnenie</string>
+  <string name="continue_follow_previous_route_auto">Predošlá navigácia nebola dokončená. Pokračovať v jej nasledovaní? (%1$s sekúnd)</string>
+  <string name="show_cameras_descr">Zobrazenie radarov (môže byť zakázané v niektorých krajinách)</string>
+  <string name="show_speed_limits_descr">Zobrazenie radarov a spomaľovačov</string>
+  <string name="avoid_toll_roads_descr">Vyvarovanie sa plateným cestám pri kalkulácii trasy</string>
+  <string name="show_cameras">Zobrazenie radarov</string>
+  <string name="show_speed_limits">Zobraziť radary</string>
+  <string name="avoid_toll_roads">Vyhnúť sa spoplatneným cestám</string>
+  <string name="tip_recent_changes_0_8_2_t">"Zmeny vo verzii 0.8.2 :
+  \n\t* Vylepšená navigácia"
+  \n\t* Dynamické mapové widgety</string>
+  <string name="screen_is_locked">Na odomknutie obrazovky, stlačte ikonu uzamknutia</string>
+  <string name="bg_service_screen_unlock">Odomknúť obrazovku</string>
+  <string name="bg_service_sleep_mode_off">Vypnúť režim spánku</string>
+  <string name="bg_service_sleep_mode_on">Zapnúť režim spánku</string>
+</resources>

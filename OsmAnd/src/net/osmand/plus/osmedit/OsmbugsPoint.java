@@ -18,6 +18,13 @@ public class OsmbugsPoint extends OsmPoint implements Serializable {
 	public long getId() {
 		return id;
 	}
+	
+	@Override
+	public void updateID(long newID) {
+		if (id < 0) {
+			this.id = newID;
+		}
+	}
 
 	public String getText() {
 		return text;

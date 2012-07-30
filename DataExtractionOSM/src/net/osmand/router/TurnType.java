@@ -32,7 +32,7 @@ public class TurnType {
 	private final String value;
 	private int exitOut;
 	private boolean isLeftSide;
-	// calculated CW head rotation if previous direction to NORTH
+	// calculated clockwise head rotation if previous direction to NORTH
 	private float turnAngle;
 	private boolean skipToSpeak;
 	private int[] lanes;
@@ -49,7 +49,7 @@ public class TurnType {
 		this.isLeftSide = leftSide;
 	}
 
-	// calculated CW head rotation if previous direction to NORTH
+	// calculated Clockwise head rotation if previous direction to NORTH
 	public float getTurnAngle() {
 		return turnAngle;
 	}

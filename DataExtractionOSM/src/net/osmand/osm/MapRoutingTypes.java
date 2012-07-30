@@ -34,6 +34,7 @@ public class MapRoutingTypes {
 		TAGS_TEXT.add("duration");
 		
 		TAGS_TO_SAVE.add("barrier");
+		TAGS_TO_SAVE.add("bicycle");
 		TAGS_TO_SAVE.add("bridge");
 		TAGS_TO_SAVE.add("construction");
 		TAGS_TO_SAVE.add("direction");
@@ -112,7 +113,7 @@ public class MapRoutingTypes {
 		names.clear();
 		for(Entry<String, String> es : e.getTags().entrySet()) {
 			String tag = es.getKey();
-			String value = es.getValue();
+			String value = converBooleanValue(es.getValue());
 			if(contains(TAGS_TO_ACCEPT, tag, value) || contains(TAGS_TO_SAVE, tag, value) || tag.startsWith("access")) {
 				outTypes.add(registerRule(tag, value).id);
 			}
@@ -123,13 +124,22 @@ public class MapRoutingTypes {
 		return true;
 	}
 	
+	private String converBooleanValue(String value){
+		if(value.equals("true")) {
+			return "yes";
+		} else if(value.equals("false")) {
+			return "no";
+		}
+		return value;
+	}
+	
 	public void encodePointTypes(Way e, TLongObjectHashMap<TIntArrayList> pointTypes){
 		pointTypes.clear();
 		for(Node nd : e.getNodes() ) {
 			if (nd != null) {
 				for (Entry<String, String> es : nd.getTags().entrySet()) {
 					String tag = es.getKey();
-					String value = es.getValue();
+					String value = converBooleanValue(es.getValue());
 					if (contains(TAGS_TO_ACCEPT, tag, value) || contains(TAGS_TO_SAVE, tag, value) || tag.startsWith("access")) {
 						if (!pointTypes.containsKey(nd.getId())) {
 							pointTypes.put(nd.getId(), new TIntArrayList());

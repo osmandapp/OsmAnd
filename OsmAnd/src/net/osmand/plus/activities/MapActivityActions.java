@@ -392,31 +392,31 @@ public class MapActivityActions implements DialogProvider {
     	return true;
     }
     
-    protected void getDirections(final double lat, final double lon, boolean followEnabled){
-    	
-    	final RoutingHelper routingHelper = mapActivity.getRoutingHelper();
-    	
-    	Builder builder = new AlertDialog.Builder(mapActivity);
-    	
-    	
-    	View view = mapActivity.getLayoutInflater().inflate(R.layout.calculate_route, null);
-    	final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
-    	buttons[ApplicationMode.CAR.ordinal()] = (ToggleButton) view.findViewById(R.id.CarButton);
-    	buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
-    	buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
-    	ApplicationMode appMode = settings.getApplicationMode();
+    
+	protected void getDirections(final Location from, boolean followEnabled) {
+
+		final RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+
+		Builder builder = new AlertDialog.Builder(mapActivity);
+
+		View view = mapActivity.getLayoutInflater().inflate(R.layout.calculate_route, null);
+		final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
+		buttons[ApplicationMode.CAR.ordinal()] = (ToggleButton) view.findViewById(R.id.CarButton);
+		buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
+		buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
+		ApplicationMode appMode = settings.getApplicationMode();
 		for (int i = 0; i < buttons.length; i++) {
-    		if(buttons[i] != null){
-    			final int ind = i;
-    			ToggleButton b = buttons[i];
-    			b.setChecked(appMode == ApplicationMode.values()[i]);
-    			b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+			if (buttons[i] != null) {
+				final int ind = i;
+				ToggleButton b = buttons[i];
+				b.setChecked(appMode == ApplicationMode.values()[i]);
+				b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						if(isChecked){
+						if (isChecked) {
 							for (int j = 0; j < buttons.length; j++) {
 								if (buttons[j] != null) {
-									if(buttons[j].isChecked() != (ind == j)){
+									if (buttons[j].isChecked() != (ind == j)) {
 										buttons[j].setChecked(ind == j);
 									}
 								}
@@ -426,79 +426,90 @@ public class MapActivityActions implements DialogProvider {
 							boolean revert = true;
 							for (int j = 0; j < buttons.length; j++) {
 								if (buttons[j] != null) {
-									if(buttons[j].isChecked()){
+									if (buttons[j].isChecked()) {
 										revert = false;
 										break;
 									}
 								}
 							}
-							if (revert){ 
+							if (revert) {
 								buttons[ind].setChecked(true);
 							}
 						}
 					}
-    			});
-    		}
-    	}
-    	
-    	DialogInterface.OnClickListener onlyShowCall = new DialogInterface.OnClickListener(){
+				});
+			}
+		}
 
+		DialogInterface.OnClickListener onlyShowCall = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				ApplicationMode mode = getAppMode(buttons, settings);
-				if(!checkPointToNavigate()){
+				if (!checkPointToNavigate()) {
 					return;
 				}
-				Location location = new Location("map"); //$NON-NLS-1$
-				location.setLatitude(lat);
-				location.setLongitude(lon);
+				if (from == null) {
+					AccessibleToast.makeText(mapActivity, R.string.unknown_from_location, Toast.LENGTH_LONG).show();
+					return;
+				}
 				routingHelper.setAppMode(mode);
 				settings.PREV_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
 				settings.FOLLOW_THE_ROUTE.set(false);
 				settings.FOLLOW_THE_GPX_ROUTE.set(null);
 				routingHelper.setFollowingMode(false);
-				routingHelper.setFinalAndCurrentLocation(mapActivity.getPointToNavigate(), location);
+				routingHelper.setFinalAndCurrentLocation(mapActivity.getPointToNavigate(), from);
 			}
-    	};
-    	
-    	DialogInterface.OnClickListener followCall = new DialogInterface.OnClickListener(){
+		};
+
+		DialogInterface.OnClickListener followCall = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if(!checkPointToNavigate()){
+				if (!checkPointToNavigate()) {
 					return;
+				}
+				boolean msg = true;
+				Location current = from;
+				if (!mapActivity.isPointAccurateForRouting(from)) {
+					current = null;
+				}
+				Location lastKnownLocation = mapActivity.getLastKnownLocation();
+				if (mapActivity.isPointAccurateForRouting(lastKnownLocation)) {
+					current = lastKnownLocation;
+					msg = false;
+				}
+				if (msg) {
+					AccessibleToast.makeText(mapActivity, R.string.route_updated_loc_found, Toast.LENGTH_LONG).show();
 				}
 				ApplicationMode mode = getAppMode(buttons, settings);
 				// change global settings
 				settings.PREV_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
 				boolean changed = settings.APPLICATION_MODE.set(mode);
 				if (changed) {
-					mapActivity.updateApplicationModeSettings();	
+					mapActivity.updateApplicationModeSettings();
 					mapActivity.getMapView().refreshMap(true);
 				}
-				
-				Location location = getLocationToStartFrom(lat, lon); 
+
 				routingHelper.setAppMode(mode);
 				settings.FOLLOW_THE_ROUTE.set(true);
 				settings.FOLLOW_THE_GPX_ROUTE.set(null);
 				routingHelper.setFollowingMode(true);
-				routingHelper.setFinalAndCurrentLocation(mapActivity.getPointToNavigate(), location);
+				routingHelper.setFinalAndCurrentLocation(mapActivity.getPointToNavigate(), current);
 				dialog.dismiss();
 				getMyApplication().showDialogInitializingCommandPlayer(mapActivity);
 			}
-    	};
-    	
-		
-		DialogInterface.OnClickListener useGpxNavigation = new DialogInterface.OnClickListener(){
+		};
+
+		DialogInterface.OnClickListener useGpxNavigation = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				ApplicationMode mode = getAppMode(buttons, settings);
 				navigateUsingGPX(mode);
 			}
 		};
-    	
-    	builder.setView(view);
-	builder.setTitle(R.string.get_directions);
-    	if (followEnabled) {
+
+		builder.setView(view);
+		builder.setTitle(R.string.get_directions);
+		if (followEnabled) {
 			builder.setPositiveButton(R.string.follow, followCall);
 			builder.setNeutralButton(R.string.gpx_navigation, useGpxNavigation);
 			builder.setNegativeButton(R.string.only_show, onlyShowCall);
@@ -507,23 +518,13 @@ public class MapActivityActions implements DialogProvider {
 			builder.setPositiveButton(R.string.show_gpx_route, onlyShowCall);
 			builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		}
-	builder.show();
-    }
+		builder.show();
+	}
     
     protected OsmandApplication getMyApplication() {
 		return mapActivity.getMyApplication();
 	}
 
-	private Location getLocationToStartFrom(final double lat, final double lon) {
-		Location location = mapActivity.getLastKnownLocation();
-		if(location == null){
-			location = new Location("map"); //$NON-NLS-1$
-			location.setLatitude(lat);
-			location.setLongitude(lon);
-		}
-		return location;
-	}
-    
     public void navigateUsingGPX(final ApplicationMode appMode) {
 		final LatLon endForRouting = mapActivity.getPointToNavigate();
 		final MapActivityLayers mapLayers = mapActivity.getMapLayers();
@@ -678,51 +679,47 @@ public class MapActivityActions implements DialogProvider {
 	}
 	
 	public void contextMenuPoint(final double latitude, final double longitude, final ContextMenuAdapter iadapter, Object selectedObj) {
-		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter(mapActivity) : iadapter;  
+		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter(mapActivity) : iadapter;
 		Builder builder = new AlertDialog.Builder(mapActivity);
-		final OsmandMapTileView mapView = mapActivity.getMapView();
-		
+
 		adapter.registerItem(R.string.context_menu_item_navigate_point, R.drawable.list_view_set_destination);
 		adapter.registerItem(R.string.context_menu_item_directions, R.drawable.list_view_directions_to_here);
 		adapter.registerItem(R.string.context_menu_item_show_route, R.drawable.list_view_show_route_from_here);
 		adapter.registerItem(R.string.context_menu_item_search, R.drawable.list_view_search_near_here);
 		adapter.registerItem(R.string.context_menu_item_share_location, R.drawable.list_view_share_location);
 		adapter.registerItem(R.string.context_menu_item_add_favorite, R.drawable.list_activities_favorites);
-		
+
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
-		
-		ListAdapter listadapter = new ArrayAdapter<String>(
-			    mapActivity,
-			    R.layout.layers_list_activity_item,
-			    R.id.title,
-			    adapter.getItemNames()){
-			        @Override
-					public View getView(int position, View convertView, ViewGroup parent) {
-			            //User super class to create the View
-			            View v = super.getView(position, convertView, parent);
-			            TextView tv = (TextView)v.findViewById(R.id.title);
-			            tv.setText(adapter.getItemName(position));			            
 
-			            //Put the image on the TextView
-			            if(adapter.getImageId(position) != 0) {
-			            	tv.setCompoundDrawablesWithIntrinsicBounds(adapter.getImageId(position), 0, 0, 0);
-			            } else {
-			            	tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.list_activities_transparent, 0, 0, 0);
-			            }
+		ListAdapter listadapter = new ArrayAdapter<String>(mapActivity, R.layout.layers_list_activity_item, R.id.title,
+				adapter.getItemNames()) {
+			@Override
+			public View getView(int position, View convertView, ViewGroup parent) {
+				// User super class to create the View
+				View v = super.getView(position, convertView, parent);
+				TextView tv = (TextView) v.findViewById(R.id.title);
+				tv.setText(adapter.getItemName(position));
 
-						final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
-						ch.setVisibility(View.GONE);
-			            return v;
-			        }
-			    };
-		
-	    builder.setAdapter(listadapter, new DialogInterface.OnClickListener() {
+				// Put the image on the TextView
+				if (adapter.getImageId(position) != 0) {
+					tv.setCompoundDrawablesWithIntrinsicBounds(adapter.getImageId(position), 0, 0, 0);
+				} else {
+					tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.list_activities_transparent, 0, 0, 0);
+				}
+
+				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
+				ch.setVisibility(View.GONE);
+				return v;
+			}
+		};
+
+		builder.setAdapter(listadapter, new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				int standardId = adapter.getItemId(which );
+				int standardId = adapter.getItemId(which);
 				OnContextMenuClick click = adapter.getClickAdapter(which);
-				if(click != null) {
+				if (click != null) {
 					click.onContextMenuClick(standardId, which, false, dialog);
 				} else if (standardId == R.string.context_menu_item_search) {
 					Intent intent = new Intent(mapActivity, OsmandIntents.getSearchActivity());
@@ -734,21 +731,21 @@ public class MapActivityActions implements DialogProvider {
 					mapActivity.navigateToPoint(new LatLon(latitude, longitude));
 				} else if (standardId == R.string.context_menu_item_directions) {
 					Location loc = mapActivity.getLastKnownLocation();
-					if (loc != null) {
-						mapActivity.navigateToPoint(new LatLon(latitude, longitude));
-						getDirections(loc.getLatitude(), loc.getLongitude(), true);
-					} else {
-						AccessibleToast.makeText(mapActivity, R.string.unknown_from_location, Toast.LENGTH_LONG).show();
-					}
+					mapActivity.navigateToPoint(new LatLon(latitude, longitude));
+					// always enable and follow and let calculate it (GPS is not accessible in garage)
+					getDirections(loc, true);
 				} else if (standardId == R.string.context_menu_item_show_route) {
-					if(checkPointToNavigate()) {
-						getDirections(latitude, longitude, false);
+					if (checkPointToNavigate()) {
+						Location loc = new Location("map");
+						loc.setLatitude(latitude);
+						loc.setLongitude(longitude);
+						getDirections(loc, true);
 					}
 				} else if (standardId == R.string.context_menu_item_share_location) {
-					shareLocation(latitude, longitude, mapView.getZoom());
+					shareLocation(latitude, longitude, mapActivity.getMapView().getZoom());
 				} else if (standardId == R.string.context_menu_item_add_favorite) {
 					addFavouritePoint(latitude, longitude);
-				} 
+				}
 			}
 		});
 		builder.create().show();
@@ -943,11 +940,7 @@ public class MapActivityActions implements DialogProvider {
 					aboutRoute();
 				} else {
 					Location loc = mapActivity.getLastKnownLocation();
-					if (loc != null) {
-						getDirections(loc.getLatitude(), loc.getLongitude(), true);
-					} else {
-						getDirections(mapView.getLatitude(), mapView.getLongitude(), true);
-					}
+					getDirections(loc, true);
 				}
 				return true;
 			} else if (itemId == R.id.map_layers) {
@@ -996,21 +989,16 @@ public class MapActivityActions implements DialogProvider {
 		} else {
 			AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
 			builder.setMessage(getString(R.string.gps_status_app_not_found));
-			builder.setPositiveButton(
-					getString(R.string.default_buttons_yes),
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog,
-								int which) {
-							Intent intent = new Intent(Intent.ACTION_VIEW,
-									Uri.parse("market://search?q=pname:"
-											+ GPS_STATUS_COMPONENT));
-							try {
-								mapActivity.startActivity(intent);
-							} catch (ActivityNotFoundException e) {
-							}
-						}
-					});
+			builder.setPositiveButton(getString(R.string.default_buttons_yes), new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:" + GPS_STATUS_COMPONENT));
+					try {
+						mapActivity.startActivity(intent);
+					} catch (ActivityNotFoundException e) {
+					}
+				}
+			});
 			builder.setNegativeButton(
 					getString(R.string.default_buttons_no), null);
 			builder.show();

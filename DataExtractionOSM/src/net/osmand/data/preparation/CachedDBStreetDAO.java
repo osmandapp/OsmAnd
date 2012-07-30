@@ -78,6 +78,11 @@ public class CachedDBStreetDAO extends DBStreetDAO
 	}
 	
 	@Override
+	public boolean removeBuilding(Entity e) throws SQLException {
+		addressBuildingLocalSet.remove(e.getId());
+		return super.removeBuilding(e);
+	}
+	@Override
 	public boolean findStreetNode(Entity e) {
 		return addressStreetNodeLocalSet.contains(e.getId());
 	}

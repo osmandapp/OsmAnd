@@ -4,6 +4,7 @@ import net.osmand.plus.R;
 import android.app.Activity;
 import android.view.View;
 import android.view.Window;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,60 +12,76 @@ import android.widget.TextView;
 public class CustomTitleBar {
 
 	private Activity activity;
-	private int titleStringRes;
-	private int titleImageRes;
+	private CustomTitleBarView vidw;
 
 	public CustomTitleBar(final Activity activity, int titleStringRes, int titleImageRes) {
-		this(activity,titleStringRes,titleImageRes,R.style.CustomTitleTheme);
+		this(activity,titleStringRes,titleImageRes,null);
 	}
 	
-	public CustomTitleBar(final Activity activity, int titleStringRes, int titleImageRes, int style) {
+	
+	public CustomTitleBar(final Activity activity, int titleStringRes, int titleImageRes, OnClickListener click) {
 		this.activity = activity;
-		this.titleStringRes = titleStringRes;
-		this.titleImageRes = titleImageRes;
-		
+		int style = R.style.CustomTitleTheme;
 		this.activity.setTheme(style);
 		this.activity.requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-	}
-	
-	protected int getTitleBarLayout() {
-		return R.layout.titlebar;
-	}
-	
-	public void afterSetContentView() {
-		activity.getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, getTitleBarLayout());
-		
-		initBackButton();
-		initText();
-		initImage();
-	}
-
-	protected void initImage() {
-		ImageView titleImg = (ImageView) activity.findViewById(R.id.title_image);
-		titleImg.setImageResource(titleImageRes);
-	}
-
-	protected void initText() {
-		TextView title = (TextView) activity.findViewById(R.id.title_text);
-		title.setText(titleStringRes);
-	}
-
-	protected void initBackButton() {
-		Button backButton = (Button) activity.findViewById(R.id.back_button);
-		backButton.setContentDescription(activity.getString(R.string.close));
-		backButton.setOnClickListener(new View.OnClickListener() {
+		vidw = new CustomTitleBarView(activity.getString(titleStringRes), titleImageRes, click) {
 			@Override
-			public void onClick(View v) {
+			public void backPressed() {
 				activity.finish();
 			}
-		});
+		};
 	}
 	
-	protected Activity getActivity() {
-		return activity;
+	public void afterSetContentView(){
+		activity.getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, vidw.getTitleBarLayout());
+		vidw.init(activity.getWindow());
 	}
 	
-	protected int getTitleImageRes() {
-		return titleImageRes;
+	public static class CustomTitleBarView {
+		protected String titleString;
+		protected int titleImageRes;
+		protected OnClickListener click;
+		public CustomTitleBarView(String text, int img, OnClickListener cl) {
+			this.titleString = text;
+			this.titleImageRes = img;
+			this.click = cl;
+		}
+		
+		protected int getTitleBarLayout() {
+			return click == null  ? R.layout.titlebar : R.layout.titlebar_extrabutton;
+		}
+		
+		protected int getTitleImageRes() {
+			return titleImageRes;
+		}
+		
+		public String getTitleString() {
+			return titleString;
+		}
+		
+		public void init(Window wnd) {
+			init(wnd.getDecorView());
+		}
+
+		public void init(View wnd) {
+			TextView title = (TextView) wnd.findViewById(R.id.title_text);
+			title.setText(titleString);
+			Button backButton = (Button) wnd.findViewById(R.id.back_button);
+			backButton.setContentDescription(wnd.getContext().getString(R.string.close));
+			backButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					backPressed();
+				}
+			});
+			ImageView titleImg = (ImageView) wnd.findViewById(R.id.title_image);
+			titleImg.setImageResource(titleImageRes);
+			if(click != null) {
+				titleImg.setOnClickListener(click);
+			}
+		}
+		
+		public void backPressed(){
+		}
 	}
 }

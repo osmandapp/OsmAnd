@@ -33,6 +33,7 @@ import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.MapObject;
+import net.osmand.data.Multipolygon;
 import net.osmand.data.Street;
 import net.osmand.data.WayBoundary;
 import net.osmand.data.preparation.DBStreetDAO.SimpleStreet;
@@ -134,7 +135,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	
 	public void indexBoundariesRelation(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		Boundary boundary = extractBoundary(e, ctx);
-		if (boundary != null && boundary.isClosedWay() && boundary.getAdminLevel() >= 4 && boundary.getCenterPoint() != null && !Algoritms.isEmpty(boundary.getName())) {
+		if (boundary != null && boundary.getAdminLevel() >= 4 && boundary.getCenterPoint() != null && !Algoritms.isEmpty(boundary.getName())) {
 			LatLon boundaryCenter = boundary.getCenterPoint();
 			List<City> citiesToSearch = new ArrayList<City>();
 			citiesToSearch.addAll(cityManager.getClosestObjects(boundaryCenter.getLatitude(), boundaryCenter.getLongitude(), 3));
@@ -170,11 +171,11 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				putCityBoundary(boundary, cityFound);
 			}
 			allBoundaries.add(boundary);
-		} else if (boundary != null && !boundary.isClosedWay()){
+		} else if (boundary != null){
 			if(logMapDataWarn != null) {
-				logMapDataWarn.warn("Not using opened boundary: " + boundary);
+				logMapDataWarn.warn("Not using boundary: " + boundary);
 			} else {
-				log.info("Not using opened boundary: " + boundary);
+				log.info("Not using boundary: " + boundary);
 			}
 		}
 	}
@@ -261,9 +262,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 					&& oldBoundary != boundary
 					&& boundary.getName().equalsIgnoreCase(
 							oldBoundary.getName())) {
-				if (!oldBoundary.isClosedWay() && !boundary.isClosedWay()) {
-					oldBoundary.copyWaysFrom(boundary);
-				}
+				oldBoundary.copyPolygonsFrom(boundary);
 			}
 		} else {
 			cityBoundaries.put(cityFound, boundary);
@@ -299,7 +298,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			if (e instanceof Relation) {
 				Relation aRelation = (Relation) e;
 				ctx.loadEntityRelation(aRelation);
-				boundary = new Boundary(true); //is computed later
+				boundary = new Boundary(); //is computed later
 				boundary.setName(aRelation.getTag(OSMTagKey.NAME));
 				boundary.setBoundaryId(aRelation.getId());
 				boundary.setAdminLevel(extractBoundaryAdminLevel(aRelation));
@@ -321,14 +320,9 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 						boundary.setAdminCenterId(es.getId());
 					}
 				}
-				boundary.computeIsClosedWay();
 			} else if (e instanceof Way) {
 				if (!visitedBoundaryWays.contains(e.getId())) {
-					boolean closed = false;
-					if(((Way) e).getNodeIds().size() > 1){
-						closed = ((Way) e).getFirstNodeId() == ((Way) e).getLastNodeId();
-					}
-					boundary = new WayBoundary(closed);
+					boundary = new WayBoundary();
 					boundary.setName(e.getTag(OSMTagKey.NAME));
 					boundary.setBoundaryId(e.getId());
 					boundary.setAdminLevel(extractBoundaryAdminLevel(e));
@@ -543,7 +537,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		nearestObjects.addAll(cityVillageManager.getClosestObjects(location.getLatitude(),location.getLongitude()));
 		//either we found a city boundary the street is in
 		for (City c : nearestObjects) {
-			Boundary boundary = cityBoundaries.get(c);
+			Multipolygon boundary = cityBoundaries.get(c);
 			if (isInNames.contains(c.getName()) || (boundary != null && boundary.containsPoint(location))) {
 				result.add(c);
 			}
@@ -748,8 +742,11 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 							Building building2 = new Building(e);
 							building2.setName(hno.substring(secondNumber + 1));
 							Set<Long> ids2OfStreet = getStreetInCity(e.getIsInNames(), e.getTag(OSMTagKey.ADDR_STREET2), null, l);
+							ids2OfStreet.removeAll(idsOfStreet); //remove duplicated entries!
 							if(!ids2OfStreet.isEmpty()) {
 								streetDAO.writeBuilding(ids2OfStreet, building2);
+							} else {
+								building.setName2(building2.getName());
 							}
 						}
 					}

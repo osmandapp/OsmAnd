@@ -140,7 +140,6 @@ public class BinaryMapIndexReader {
 				break;
 			case OsmandOdb.OsmAndStructure.DATECREATED_FIELD_NUMBER :
 				dateCreated = codedIS.readInt64();
-				log.info("Map was created " +new Date(dateCreated));
 				break;
 			case OsmandOdb.OsmAndStructure.MAPINDEX_FIELD_NUMBER:
 				MapIndex mapIndex = new MapIndex();

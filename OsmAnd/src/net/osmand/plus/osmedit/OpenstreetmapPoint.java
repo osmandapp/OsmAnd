@@ -18,6 +18,13 @@ public class OpenstreetmapPoint extends OsmPoint implements Serializable {
 	public long getId() {
 		return entity.getId();
 	}
+	
+	@Override
+	public void updateID(long newID) {
+		if (getId()  < 0) {
+			entity = new Node(entity, newID);
+		}
+	}
 
 	public String getName() {
 		String ret = entity.getTag(OSMTagKey.NAME.getValue());

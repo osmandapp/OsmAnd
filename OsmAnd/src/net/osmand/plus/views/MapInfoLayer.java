@@ -1,41 +1,45 @@
 package net.osmand.plus.views;
 
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.EnumSet;
 
-import net.osmand.Algoritms;
-import net.osmand.OsmAndFormatter;
-import net.osmand.osm.LatLon;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
-import net.osmand.router.TurnType;
+import net.osmand.plus.views.MapInfoControls.MapInfoControlRegInfo;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.location.Location;
-import android.text.format.DateFormat;
+import android.text.TextPaint;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 public class MapInfoLayer extends OsmandMapLayer {
@@ -52,39 +56,26 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private Paint paintSmallSubText;
 	private Paint paintImg;
 	
-	private float cachedRotate = 0;
-	private boolean showArrivalTime = true;
-	private boolean showAltitude = false;
-	
 	// layout pseudo-constants
-	private int STATUS_BAR_MARGIN_X = 4;
+	private int STATUS_BAR_MARGIN_X = -4;
 	
 	private ImageView backToLocation;
-	private ImageView compassView;
 	private View progressBar;
 	
 	// groups
 	private MapStackControl rightStack;
 	private MapStackControl leftStack;
-	private ViewGroup statusBar;
+	private LinearLayout statusBar;
 	private MapInfoControl lanesControl;
 	private MapInfoControl alarmControl;
-	private TextView topText;
+	private MapInfoControls mapInfoControls;
+	private TopTextView topText;
 
-
-
-	
-
-	
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
 		this.routeLayer = layer;
-	}
-
-	@Override
-	public void initLayer(final OsmandMapTileView view) {
-		this.view = view;
-		WindowManager mgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
+		
+		WindowManager mgr = (WindowManager) map.getSystemService(Context.WINDOW_SERVICE);
 		DisplayMetrics dm = new DisplayMetrics();
 		mgr.getDefaultDisplay().getMetrics(dm);
 		scaleCoefficient = dm.density;
@@ -124,9 +115,36 @@ public class MapInfoLayer extends OsmandMapLayer {
 		paintImg.setFilterBitmap(true);
 		paintImg.setAntiAlias(true);
 		
-		createTopBarElements();
-		
-		applyTheme();
+
+		mapInfoControls = new MapInfoControls(map.getMyApplication().getSettings());
+	}
+	
+	
+	public Paint getPaintSmallSubText() {
+		return paintSmallSubText;
+	}
+	
+	public Paint getPaintText() {
+		return paintText;
+	}
+	
+	public Paint getPaintSmallText() {
+		return paintSmallText;
+	}
+	
+	public Paint getPaintSubText() {
+		return paintSubText;
+	}
+	
+	public MapInfoControls getMapInfoControls() {
+		return mapInfoControls;
+	}
+
+	@Override
+	public void initLayer(final OsmandMapTileView view) {
+		this.view = view;
+		registerAllControls();
+		createControls();
 	}
 	
 	public void applyTheme() {
@@ -149,34 +167,86 @@ public class MapInfoLayer extends OsmandMapLayer {
 		leftStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
 		rightStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
 		statusBar.setBackgroundDrawable(view.getResources().getDrawable(boxTop));
-		showAltitude = view.getSettings().SHOW_ALTITUDE_INFO.get();
 	}
 	
-	public void createTopBarElements() {
-		// 1. Create view groups and controls
-		statusBar = createStatusBar();
-		statusBar.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_top));
-		
-		lanesControl = createLanesControl();
+	public void registerAllControls(){
+		statusBar = new LinearLayout(view.getContext());
+		statusBar.setOrientation(LinearLayout.HORIZONTAL);
+		RouteInfoControls ric = new RouteInfoControls(scaleCoefficient);
+		lanesControl = ric.createLanesControl(view.getApplication().getRoutingHelper(), view);
 		lanesControl.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
 		
-		alarmControl = createAlarmInfoControl();
+		alarmControl = ric.createAlarmInfoControl(view.getApplication().getRoutingHelper(), 
+				view.getContext(), view.getSettings());
+		// register right stack
+		EnumSet<ApplicationMode> all = EnumSet.allOf(ApplicationMode.class);
+		EnumSet<ApplicationMode> bicyclePedestrian = EnumSet.of(ApplicationMode.BICYCLE, ApplicationMode.PEDESTRIAN);
+		EnumSet<ApplicationMode> none = EnumSet.noneOf(ApplicationMode.class);
+		RoutingHelper routingHelper = view.getApplication().getRoutingHelper();
+		NextTurnInfoControl bigInfoControl = ric.createNextInfoControl(routingHelper, view.getApplication(), view.getSettings(), paintText,
+				paintSubText, false);
+		mapInfoControls.registerSideWidget(bigInfoControl, 0, R.string.map_widget_next_turn,"next_turn", true, all, none, 5);
+		NextTurnInfoControl smallInfoControl = ric.createNextInfoControl(routingHelper, view.getApplication(), view.getSettings(),
+				paintSmallText, paintSmallSubText, true);
+		mapInfoControls.registerSideWidget(smallInfoControl, 0, R.string.map_widget_next_turn_small, "next_turn_small", true, bicyclePedestrian, none, 10);
+		NextTurnInfoControl nextNextInfoControl = ric.createNextNextInfoControl(routingHelper, view.getApplication(), view.getSettings(),
+				paintSmallText, paintSmallSubText, true);
+		mapInfoControls.registerSideWidget(nextNextInfoControl, 0, R.string.map_widget_next_next_turn, "next_next_turn",true, all, none, 15);
+		MiniMapControl miniMap = ric.createMiniMapControl(routingHelper, view);
+		mapInfoControls.registerSideWidget(miniMap, 0, R.string.map_widget_mini_route, "mini_route", true, none, none, 20);
+		// right stack
+		TextInfoControl dist = ric.createDistanceControl(map, paintText, paintSubText);
+		mapInfoControls.registerSideWidget(dist, R.drawable.info_target, R.string.map_widget_distance, "distance", false, all, none, 5);
+		TextInfoControl time = ric.createTimeControl(map, paintText, paintSubText);
+		mapInfoControls.registerSideWidget(time, R.drawable.info_time, R.string.map_widget_time, "time",false, all, none,  10);
+		TextInfoControl speed = ric.createSpeedControl(map, paintText, paintSubText);
+		mapInfoControls.registerSideWidget(speed, R.drawable.info_speed, R.string.map_widget_speed, "speed", false, all, none,  15);
+		TextInfoControl alt = ric.createAltitudeControl(map, paintText, paintSubText);
+		mapInfoControls.registerSideWidget(alt, R.drawable.ic_altitude, R.string.map_widget_altitude, "altitude", false, EnumSet.of(ApplicationMode.PEDESTRIAN), none, 20);
 		
+		ImageViewControl compassView = createCompassView(map);
+		mapInfoControls.registerTopWidget(compassView, R.drawable.compass, R.string.map_widget_compass, "compass", MapInfoControls.LEFT_CONTROL, all, 5);
+		
+		View config = createConfiguration();
+		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapInfoControls.RIGHT_CONTROL, all, 10).required(ApplicationMode.values());
+
+		LockInfoControl lockInfoControl = new LockInfoControl();
+		ImageView bgServiceView = lockInfoControl.createLockScreenWidget(view);
+		mapInfoControls.registerTopWidget(bgServiceView, R.drawable.lock_enabled, R.string.bg_service_screen_lock, "bgService", MapInfoControls.LEFT_CONTROL, all, 15);
+		
+		backToLocation = createBackToLocation(map);
+		mapInfoControls.registerTopWidget(backToLocation, R.drawable.default_location, R.string.map_widget_back_to_loc, "back_to_location", MapInfoControls.RIGHT_CONTROL, all, 5);
+		View globus = createGlobusAndProgress();
+		mapInfoControls.registerTopWidget(globus, R.drawable.globus, R.string.map_widget_map_select, "progress", MapInfoControls.RIGHT_CONTROL, none, 15);
+		
+		topText = new TopTextView(routingHelper, map);
+		mapInfoControls.registerTopWidget(topText, R.drawable.street_name, R.string.map_widget_top_text, "street_name", MapInfoControls.MAIN_CONTROL, all, 100);
+	}
+	
+	public void recreateControls(){
+		rightStack.clearAllViews();
+		mapInfoControls.populateStackControl(rightStack, view, false);
+		
+		leftStack.clearAllViews();
+		mapInfoControls.populateStackControl(leftStack, view, true);
+		leftStack.requestLayout();
+		rightStack.requestLayout();
+		
+		statusBar.removeAllViews();
+		mapInfoControls.populateStatusBar(statusBar);
+	}
+	
+	public void createControls() {
+		// 1. Create view groups and controls
+		statusBar.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_top));
 		rightStack = new MapStackControl(view.getContext());
-		rightStack.addStackView(createAltitudeControl());
-		rightStack.addStackView(createDistanceControl());
-		rightStack.addCollapsedView(createSpeedControl());
-		rightStack.addCollapsedView(createTimeControl());
-		
 		leftStack = new MapStackControl(view.getContext());
-		leftStack.addStackView(createNextInfoControl());
-		leftStack.addStackView(createMiniMapControl());
-		leftStack.addStackView(createNextNextInfoControl());
 		
 		// 2. Preparations
 		Rect topRectPadding = new Rect();
 		view.getResources().getDrawable(R.drawable.box_top).getPadding(topRectPadding);
-		
+		// for measurement
+		statusBar.addView(backToLocation);		
 		STATUS_BAR_MARGIN_X = (int) (STATUS_BAR_MARGIN_X * scaleCoefficient);
 		statusBar.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 		Rect statusBarPadding = new Rect();
@@ -227,15 +297,110 @@ public class MapInfoLayer extends OsmandMapLayer {
 		parent.addView(alarmControl);
 		alarmControl.setVisibility(View.GONE);
 		lanesControl.setVisibility(View.GONE);
+		
+		// update and create controls
+		applyTheme();
+		recreateControls();
 	}
 
-	
-	public boolean distChanged(int oldDist, int dist){
-		if(oldDist != 0 && oldDist - dist < 100 && Math.abs(((float) dist - oldDist)/oldDist) < 0.01){
-			return false;
-		}
-		return true;
+	public void openViewConfigureDialog() {
+		final OsmandSettings settings = view.getSettings();
+		
+		final ArrayList<Object> list = new ArrayList<Object>();
+		list.add(map.getString(R.string.map_widget_reset));
+		list.add(map.getString(R.string.map_widget_top_stack));
+		list.addAll(mapInfoControls.getTop());
+		list.add(map.getString(R.string.map_widget_right_stack));
+		list.addAll(mapInfoControls.getRight());
+		list.add(map.getString(R.string.map_widget_left_stack));
+		list.addAll(mapInfoControls.getLeft());
+		
+
+		// final LayerMenuListener listener = new LayerMenuListener(adapter, mapView, settings);
+		Builder b = new AlertDialog.Builder(map);
+		final ApplicationMode mode = settings.getApplicationMode();
+		ListAdapter listAdapter = new ArrayAdapter<Object>(map, R.layout.layers_list_activity_item, R.id.title, list) {
+			@Override
+			public View getView(final int position, View convertView, ViewGroup parent) {
+				View v = convertView;
+				if (v == null) {
+					v = map.getLayoutInflater().inflate(R.layout.layers_list_activity_item, null);
+				}
+				final TextView tv = (TextView) v.findViewById(R.id.title);
+				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
+				Object o = list.get(position);
+				if(o instanceof MapInfoControlRegInfo) {
+					final MapInfoControlRegInfo mi = (MapInfoControlRegInfo) o;
+					String s = mi.visibleCollapsed(mode)? " - " : "  ";
+					tv.setText(s +map.getString(mi.messageId) +s);
+					// Put the image on the TextView
+					if (mi.drawable != 0) {
+						tv.setPadding((int) (12 *scaleCoefficient), 0, 0, 0);
+						tv.setCompoundDrawablesWithIntrinsicBounds(mi.drawable, 0, 0, 0);
+					} else {
+						tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+						tv.setPadding((int) (30 *scaleCoefficient), 0, 0, 0);
+					}
+					
+					boolean check = mi.visibleCollapsed(mode) || mi.visible(mode);
+					ch.setOnCheckedChangeListener(null);
+					ch.setChecked(check);
+					ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+						@Override
+						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+							if(!isChecked) {
+								if(mi.visible(mode) && mi.collapseEnabled(mode)) {
+									mapInfoControls.changeVisibility(mi, true, true);
+									ch.setChecked(true);
+								} else {
+									mapInfoControls.changeVisibility(mi, false, false);
+								}
+							} else {
+								mapInfoControls.changeVisibility(mi, true, false);
+							}
+							String s = mi.visibleCollapsed(mode) ? " - " : "  ";
+							tv.setText(s + map.getString(mi.messageId) + s);
+							recreateControls();
+						}
+					});
+					ch.setVisibility(View.VISIBLE);
+				} else {
+					tv.setText(o.toString());
+					tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+					tv.setPadding((int) (5 *scaleCoefficient), 0, 0, 0);
+					ch.setVisibility(View.INVISIBLE);
+				}
+				
+				return v;
+			}
+		};
+
+		b.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int position) {
+				Object o = list.get(position);
+				if (o instanceof MapInfoControlRegInfo) {
+					final MapInfoControlRegInfo mi = (MapInfoControlRegInfo) o;
+					boolean check = mi.visibleCollapsed(mode) || mi.visible(mode);
+					if (check) {
+						mapInfoControls.changeVisibility(mi, false, false);
+					} else {
+						mapInfoControls.changeVisibility(mi, true, false);
+					}
+					recreateControls();
+				} else if(o.toString().equals(map.getString(R.string.map_widget_reset))) {
+					mapInfoControls.resetToDefault();
+					recreateControls();
+				}
+			}
+		});
+
+		final AlertDialog dlg = b.create();
+		// listener.setDialog(dlg);
+		dlg.setCanceledOnTouchOutside(true);
+		dlg.show();
 	}
+	
 	
 	@Override
 	public void onDraw(Canvas canvas, RectF latlonBounds, RectF tilesRect, DrawSettings nightMode) {
@@ -243,12 +408,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 		int color = !nightMode.isNightMode() ? Color.BLACK :  Color.BLACK;
 		if(paintText.getColor() != color) {
 			paintText.setColor(color);
+			topText.setTextColor(color);
 			paintSubText.setColor(color);
 			paintSmallText.setColor(color);
 			paintSmallSubText.setColor(color);
 		}
 		if(paintText.isFakeBoldText() != bold) {
 			paintText.setFakeBoldText(bold);
+			topText.getPaint().setFakeBoldText(bold);
 			paintSubText.setFakeBoldText(bold);
 			paintSmallText.setFakeBoldText(bold);
 			paintSmallSubText.setFakeBoldText(bold);
@@ -256,22 +423,16 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// update data on draw
 		rightStack.updateInfo();
 		leftStack.updateInfo();
-		if(view.getRotate() != cachedRotate) {
-			cachedRotate = view.getRotate();
-			compassView.invalidate();
-		}
 		lanesControl.updateInfo();
 		alarmControl.updateInfo();
-//		topText.setTextColor(color);
-//		String text = "foobar";
-//		float ts = topText.getPaint().measureText(text);
-//		int wth = topText.getRight() /*- compassView.getRight()*/;
-//		while(ts > wth && topText.getTextSize() - 1 > 5) {
-//			topText.setTextSize(topText.getTextSize() - 1);
-//			ts = topText.getPaint().measureText(text);
-//		}
-//		topText.setText(text);
+		for (int i = 0; i < statusBar.getChildCount(); i++) {
+			View v = statusBar.getChildAt(i);
+			if (v instanceof MapControlUpdateable) {
+				((MapControlUpdateable) v).updateInfo();
+			}
+		}
 	}
+
 	
 	@Override
 	public void destroyLayer() {
@@ -291,474 +452,97 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return progressBar;
 	}
 
-	private TextInfoControl createSpeedControl(){
-		final TextInfoControl speedControl = new TextInfoControl(map, 3, paintText, paintSubText) {
-			private float cachedSpeed = 0;
-
-			@Override
-			public boolean updateInfo() {
-				// draw speed
-				if (map.getLastKnownLocation() != null && map.getLastKnownLocation().hasSpeed()) {
-					// .3 mps == 1.08 kph
-					float minDelta = .3f;
-					// Update more often at walk/run speeds, since we give higher resolution
-					// and use .02 instead of .03 to account for rounding effects.
-					if (cachedSpeed < 6) minDelta = .015f;
-					if (Math.abs(map.getLastKnownLocation().getSpeed() - cachedSpeed) > minDelta) {
-						cachedSpeed = map.getLastKnownLocation().getSpeed();
-						String ds = OsmAndFormatter.getFormattedSpeed(cachedSpeed, map);
-						int ls = ds.lastIndexOf(' ');
-						if (ls == -1) {
-							setText(ds, null);
-						} else {
-							setText(ds.substring(0, ls), ds.substring(ls + 1));
-						}
-						return true;
-					}
-				} else if (cachedSpeed != 0) {
-					cachedSpeed = 0;
-					setText(null, null);
-					return true;
-				}
-				return false;
-			}
-		};
-		speedControl.setImageDrawable(view.getResources().getDrawable(R.drawable.info_speed));
-		speedControl.setText(null, null);
-		return speedControl;
-	}
 	
-	private TextInfoControl createAltitudeControl(){
-		final TextInfoControl altitudeControl = new TextInfoControl(map, 0, paintText, paintSubText) {
-			private int cachedAlt = 0;
-
-			@Override
-			public boolean updateInfo() {
-				// draw speed
-				if (showAltitude &&
-						map.getLastKnownLocation() != null && map.getLastKnownLocation().hasAltitude()) {
-					if (cachedAlt != (int) map.getLastKnownLocation().getAltitude()) {
-						cachedAlt = (int) map.getLastKnownLocation().getAltitude();
-						String ds = OsmAndFormatter.getFormattedAlt(cachedAlt, map);
-						int ls = ds.lastIndexOf(' ');
-						if (ls == -1) {
-							setText(ds, null);
-						} else {
-							setText(ds.substring(0, ls), ds.substring(ls + 1));
-						}
-						return true;
-					}
-				} else if (cachedAlt != 0) {
-					cachedAlt = 0;
-					setText(null, null);
-					return true;
-				}
-				return false;
-			}
-		};
-		altitudeControl.setText(null, null);
-		altitudeControl.setImageDrawable(view.getResources().getDrawable(R.drawable.ic_altitude));
-		return altitudeControl;
-	}
-	
-	private TextInfoControl createTimeControl(){
-		final Drawable time = view.getResources().getDrawable(R.drawable.info_time);
-		final Drawable timeToGo = view.getResources().getDrawable(R.drawable.info_time_to_go);
-		showArrivalTime = view.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME.get();
-		final TextInfoControl leftTimeControl = new TextInfoControl(map, 0, paintText, paintSubText) {
-			private long cachedLeftTime = 0;
-			
-			@Override
-			public boolean updateInfo() {
-				int time = 0;
-				if (routeLayer != null && routeLayer.getHelper().isRouterEnabled()) {
-					boolean followingMode = routeLayer.getHelper().isFollowingMode();
-					time = routeLayer.getHelper().getLeftTime();
-					if (time != 0) {
-						if (followingMode && showArrivalTime) {
-							long toFindTime = time * 1000 + System.currentTimeMillis();
-							if (Math.abs(toFindTime - cachedLeftTime) > 30000) {
-								cachedLeftTime = toFindTime;
-								if (DateFormat.is24HourFormat(map)) {
-									setText(DateFormat.format("k:mm", toFindTime).toString(), null); //$NON-NLS-1$
-								} else {
-									setText(DateFormat.format("h:mm", toFindTime).toString(), 
-											DateFormat.format("aa", toFindTime).toString()); //$NON-NLS-1$
-								}
-								return true;
-							}
-						} else {
-							if (Math.abs(time - cachedLeftTime) > 30) {
-								cachedLeftTime = time;
-								int hours = time / (60 * 60);
-								int minutes = (time / 60) % 60;
-								setText(String.format("%d:%02d", hours, minutes), null); //$NON-NLS-1$
-								return true;
-							}
-						}
-					}
-				}
-				if (time == 0 && cachedLeftTime != 0) {
-					cachedLeftTime = 0;
-					setText(null, null);
-					return true;
-				}
-				return false;
-			};
-		};
-		leftTimeControl.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				showArrivalTime = !showArrivalTime;
-				leftTimeControl.setImageDrawable(showArrivalTime? time : timeToGo);
-				view.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME.set(showArrivalTime);
-				view.refreshMap();
-			}
-			
-		});
-		leftTimeControl.setText(null, null);
-		leftTimeControl.setImageDrawable(showArrivalTime? time : timeToGo);
-		return leftTimeControl;
-	}
-	
-	private TextInfoControl createDistanceControl() {
-		TextInfoControl distanceControl = new TextInfoControl(map, 0, paintText, paintSubText) {
-			private float[] calculations = new float[1];
-			private int cachedMeters = 0;
-			
-			
-			@Override
-			public boolean updateInfo() {
-				if (map.getPointToNavigate() != null) {
-					int d = 0;
-					if (map.getRoutingHelper().isRouterEnabled()) {
-						d = map.getRoutingHelper().getLeftDistance();
-					}
-					if (d == 0) {
-						Location.distanceBetween(view.getLatitude(), view.getLongitude(), map.getPointToNavigate().getLatitude(), map
-								.getPointToNavigate().getLongitude(), calculations);
-						d = (int) calculations[0];
-					}
-					if (distChanged(cachedMeters, d)) {
-						cachedMeters = d;
-						if (cachedMeters <= 20) {
-							cachedMeters = 0;
-							setText(null, null);
-						} else {
-							String ds = OsmAndFormatter.getFormattedDistance(cachedMeters, map);
-							int ls = ds.lastIndexOf(' ');
-							if (ls == -1) {
-								setText(ds, null);
-							} else {
-								setText(ds.substring(0, ls), ds.substring(ls + 1));
-							}
-						}
-						return true;
-					}
-				} else if (cachedMeters != 0) {
-					cachedMeters = 0;
-					setText(null, null);
-					return true;
-				}
-				return false;
-			}
-		};
-		distanceControl.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
-				LatLon pointToNavigate = view.getSettings().getPointToNavigate();
-				if (pointToNavigate != null) {
-					float fZoom = view.getFloatZoom() < 15 ? 15 : view.getFloatZoom();
-					thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
-				}
-			}
-		});
-		distanceControl.setText(null, null);
-		distanceControl.setImageDrawable(view.getResources().getDrawable(R.drawable.info_target));
-		return distanceControl;
-	}
+	private View createConfiguration(){
+		final OsmandMapTileView view = map.getMapView();
 		
-	protected MiniMapControl createMiniMapControl() {
-		final MiniMapControl miniMapControl = new MiniMapControl(map, view) {
-			@Override
-			public boolean updateInfo() {
-				boolean visible = false;
-				updateVisibility(visible);
-				return super.updateInfo();
-			}
-		};
-		miniMapControl.setVisibility(View.GONE);
-		miniMapControl.setOnClickListener(new View.OnClickListener() {
+		FrameLayout fl = new FrameLayout(view.getContext());
+		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+
+		ImageView configuration = new ImageView(map);
+		Drawable drawable = view.getResources().getDrawable(R.drawable.widget_config);
+		configuration.setBackgroundDrawable(drawable);
+		configuration.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-//				showMiniMap = false;
-				miniMapControl.invalidate();
-				view.refreshMap();
+				openViewConfigureDialog();
 			}
 		});
-		return miniMapControl;
-	}
-	
-	private NextTurnInfoControl createNextNextInfoControl() {
-		final RoutingHelper routingHelper = routeLayer.getHelper();
-		final NextTurnInfoControl nextTurnInfo = new NextTurnInfoControl(map, paintSmallText, paintSmallSubText, true) {
-			NextDirectionInfo calc1 = new NextDirectionInfo();
-			@Override
-			public boolean updateInfo() {
-				boolean visible = false;
-				if (routeLayer != null && routingHelper.isRouterEnabled() && routingHelper.isFollowingMode()) {
-					boolean uturnWhenPossible = routingHelper.makeUturnWhenPossible();
-					NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, false);
-					if (!uturnWhenPossible) {
-						if (r != null) {
-							// next turn is very close (show next next with false to speak)
-//							if (r.imminent >= 0 && r.imminent < 2) {
-//								r = routingHelper.getNextRouteDirectionInfoAfter(r, calc1, false);
-//							} else {
-								r = routingHelper.getNextRouteDirectionInfo(calc1, true);
-								if (r != null) {
-									r = routingHelper.getNextRouteDirectionInfoAfter(r, calc1, true);
-								}
-//							}
-						}
-					}
-					if (r != null && r.distanceTo > 0) {
-						visible = true;
-						if (r == null || r.directionInfo == null) {
-							if (turnType != null) {
-								turnType = null;
-								invalidate();
-							}
-						} else if (!Algoritms.objectEquals(turnType, r.directionInfo.getTurnType())) {
-							turnType = r.directionInfo.getTurnType();
-							TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
-							invalidate();
-							requestLayout();
-						}
-						if (distChanged(r.distanceTo, nextTurnDirection)) {
-							invalidate();
-							requestLayout();
-							nextTurnDirection = r.distanceTo;
-						}
-						int imminent = r.imminent;
-						if (turnImminent != imminent) {
-							turnImminent = imminent;
-							invalidate();
-						}
-					}
-				}
-				updateVisibility(visible);
-
-				return true;
-			}
-		};
-		nextTurnInfo.setOnClickListener(new View.OnClickListener() {
-//			int i = 0;
+		fl.addView(configuration, fparams);
+		fparams = new FrameLayout.LayoutParams(drawable.getMinimumWidth(), drawable.getMinimumHeight());
+		progressBar = new View(view.getContext());
+		progressBar.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// uncomment to test turn info rendering
-//				final int l = TurnType.predefinedTypes.length;
-//				final int exits = 5;
-//				i++;
-//				if (i % (l + exits) >= l ) {
-//					nextTurnInfo.turnType = TurnType.valueOf("EXIT" + (i % (l + exits) - l + 1), true);
-//					nextTurnInfo.exitOut = (i % (l + exits) - l + 1)+"";
-//					float a = 180 - (i % (l + exits) - l + 1) * 50;
-//					nextTurnInfo.turnType.setTurnAngle(a < 0 ? a + 360 : a);
-//				} else {
-//					nextTurnInfo.turnType = TurnType.valueOf(TurnType.predefinedTypes[i % (TurnType.predefinedTypes.length + exits)], true);
-//					nextTurnInfo.exitOut = "";
-//				}
-//				nextTurnInfo.turnImminent = (nextTurnInfo.turnImminent + 1) % 3;
-//				nextTurnInfo.nextTurnDirection = 580;
-//				TurnPathHelper.calcTurnPath(nextTurnInfo.pathForTurn, nexsweepAngletTurnInfo.turnType,nextTurnInfo.pathTransform);
-//				showMiniMap = true;
-				view.refreshMap();
+				map.getMapLayers().selectMapLayer(view);
 			}
 		});
-		// initial state
-//		nextTurnInfo.setVisibility(View.GONE);
-		return nextTurnInfo;
+		fl.addView(progressBar, fparams);
+		return fl;
 	}
-	
-	private MapInfoControl createAlarmInfoControl() {
-		final RoutingHelper routingHelper = routeLayer.getHelper();
-		final Paint paintCircle = new Paint();
-		final float th = 11 * scaleCoefficient;
-		paintCircle.setColor(Color.rgb(225, 15, 15));
-		paintCircle.setStrokeWidth(11 * scaleCoefficient);
-		paintCircle.setStyle(Style.STROKE);
-		paintCircle.setAntiAlias(true);
-		final Paint content = new Paint();
-		content.setColor(Color.WHITE);
-		content.setStyle(Style.FILL);
-		final Paint ptext = new Paint();
-		ptext.setTextSize(27 * scaleCoefficient);
-		ptext.setFakeBoldText(true);
-		ptext.setAntiAlias(true);
-		ptext.setTextAlign(Align.CENTER);
-		
-		final MapInfoControl alarm = new MapInfoControl(map) {
-			private String text = "";
-			@Override
-			public boolean updateInfo() {
-				boolean visible = false;
-				if (routeLayer != null && routingHelper.isRouterEnabled() && routingHelper.isFollowingMode()) {
-					AlarmInfo alarm = routingHelper.getMostImportantAlarm(view.getSettings().METRIC_SYSTEM.get());
-					if(alarm != null) {
-						if(alarm.getType() == AlarmInfo.SPEED_LIMIT) {
-							text = alarm.getIntValue() +"";
-						} else if(alarm.getType() == AlarmInfo.SPEED_CAMERA) {
-							text = "CAM";
-						} else if(alarm.getType() == AlarmInfo.BORDER_CONTROL) {
-							text = "CLO";
-						} else if(alarm.getType() == AlarmInfo.TOLL_BOOTH) {
-							text = "$";
-						} else if(alarm.getType() == AlarmInfo.TRAFFIC_CALMING) {
-							// temporary omega
-							text = "~^~";
-						} else if(alarm.getType() == AlarmInfo.STOP) {
-							// text = "STOP";
-						}
-						visible = text.length() > 0;
-					}
-				}
-				updateVisibility(visible);
-				return true;
-			}
-
-			@Override
-			protected void onDraw(Canvas canvas) {
-				RectF f = new RectF(th / 2, th / 2, getWidth() - th / 2, getHeight() - th / 2);
-				canvas.drawOval(f, content);
-				canvas.drawOval(f, paintCircle);
-				canvas.drawText(text, getWidth() / 2, getHeight() / 2 + ptext.descent() + 3 * scaleCoefficient, ptext);
-			}
-
-		};
-		// initial state
-		// nextTurnInfo.setVisibility(View.GONE);
-		return alarm;
-	}
-	
-	private NextTurnInfoControl createNextInfoControl() {
-		final RoutingHelper routingHelper = routeLayer.getHelper();
-		final NextTurnInfoControl nextTurnInfo = new NextTurnInfoControl(map, paintText, paintSubText, false) {
-			NextDirectionInfo calc1 = new NextDirectionInfo();
-			TurnType straight = TurnType.valueOf(TurnType.C, true);
-
-			@Override
-			public boolean updateInfo() {
-				boolean visible = false;
-				if (routeLayer != null && routingHelper.isRouterEnabled() && routingHelper.isFollowingMode()) {
-					makeUturnWhenPossible = routingHelper.makeUturnWhenPossible();
-					if (makeUturnWhenPossible) {
-						visible = true;
-						turnImminent = 1;
-						turnType = TurnType.valueOf(TurnType.TU, view.getSettings().LEFT_SIDE_NAVIGATION.get());
-						TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
-						invalidate();
-					} else {
-						
-						boolean showStraight = false;
-						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, true);
-						// do not switch information for exits (where to keep left)
-//						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, false);
-//						if (r != null) {
-//							RouteDirectionInfo toShowWithoutSpeak = r.directionInfo;
-//							if (r.imminent >= 0 && r.imminent < 2) {
-//								// next turn is very close (show it)
-//							} else {
-//								r = routingHelper.getNextRouteDirectionInfo(calc1, true);
-//								if(calc1.directionInfo != toShowWithoutSpeak){
-//									// show straight and grey because it is not the closest turn
-//									showStraight = r.imminent == -1;
-//								}
-//							}
-//						}
-						if (r != null && r.distanceTo > 0) {
-							visible = true;
-							if (r.directionInfo == null) {
-								if (turnType != null) {
-									turnType = null;
-									invalidate();
-								}
-							} else if (!Algoritms.objectEquals(turnType, showStraight ? straight : r.directionInfo.getTurnType())) {
-								turnType = showStraight ? straight : r.directionInfo.getTurnType();
-								TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
-								if (turnType.getExitOut() > 0) {
-									exitOut = turnType.getExitOut() + ""; //$NON-NLS-1$
-								} else {
-									exitOut = null;
-								}
-								requestLayout();
-								invalidate();
-							}
-							if (distChanged(r.distanceTo, nextTurnDirection)) {
-								invalidate();
-								requestLayout();
-								nextTurnDirection = r.distanceTo;
-							}
-							if (turnImminent != r.imminent) {
-								turnImminent = r.imminent;
-								invalidate();
-							}
-						}
-					}
-				}
-				updateVisibility(visible);
-				return true;
-			}
-		};
-		nextTurnInfo.setOnClickListener(new View.OnClickListener() {
-//			int i = 0;
-//			boolean leftSide = false;
+	private View createGlobusAndProgress(){
+		Drawable globusDrawable = view.getResources().getDrawable(R.drawable.globus);
+//		FrameLayout fl = new FrameLayout(view.getContext());
+//		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		ImageView globus = new ImageView(view.getContext());
+		globus.setImageDrawable(globusDrawable);
+		globus.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// for test rendering purposes
-//				final int l = TurnType.predefinedTypes.length;
-//				final int exits = 5;
-//				i++;
-//				if (i % (l + exits) >= l ) {
-//					nextTurnInfo.turnType = TurnType.valueOf("EXIT" + (i % (l + exits) - l + 1), leftSide);
-//					float a = leftSide?  -180 + (i % (l + exits) - l + 1) * 50:  180 - (i % (l + exits) - l + 1) * 50;
-//					nextTurnInfo.turnType.setTurnAngle(a < 0 ? a + 360 : a);
-//					nextTurnInfo.exitOut = (i % (l + exits) - l + 1)+"";
-//				} else {
-//					nextTurnInfo.turnType = TurnType.valueOf(TurnType.predefinedTypes[i % (TurnType.predefinedTypes.length + exits)], leftSide);
-//					nextTurnInfo.exitOut = "";
-//				}
-//				nextTurnInfo.turnImminent = (nextTurnInfo.turnImminent + 1) % 3;
-//				nextTurnInfo.nextTurnDirection = 580;
-//				TurnPathHelper.calcTurnPath(nextTurnInfo.pathForTurn, nextTurnInfo.turnType,nextTurnInfo.pathTransform);
-//				showMiniMap = true;
-				nextTurnInfo.requestLayout();
-				view.refreshMap();
+				map.getMapLayers().selectMapLayer(view);
 			}
 		});
-		// initial state
-		nextTurnInfo.setVisibility(View.GONE);
-		return nextTurnInfo;
-	}	
+		return globus;
+//		fl.addView(globus, fparams);
+//		fparams = new FrameLayout.LayoutParams(globusDrawable.getMinimumWidth(), globusDrawable.getMinimumHeight());
+//		progressBar = new View(view.getContext());
+//		progressBar.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				map.getMapLayers().selectMapLayer(view);
+//			}
+//		});
+//		fl.addView(progressBar, fparams);
+//		return fl;
+	}
 	
-	private ViewGroup createStatusBar() {
-		LinearLayout statusBar = new LinearLayout(view.getContext());
-		statusBar.setOrientation(LinearLayout.HORIZONTAL);
-		
-		// Compass icon
-		final Drawable compass = view.getResources().getDrawable(R.drawable.compass);
+	private ImageView createBackToLocation(final MapActivity map){
+		ImageView backToLocation = new ImageView(view.getContext());
+		backToLocation.setPadding((int) (5 * scaleCoefficient), 0, (int) (5 * scaleCoefficient), 0);
+		backToLocation.setImageDrawable(map.getResources().getDrawable(R.drawable.back_to_loc));
+		backToLocation.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				map.backToLocationImpl();
+			}
+		});
+		return backToLocation;
+	}
+	
+	
+	private ImageViewControl createCompassView(final MapActivity map){
+		final Drawable compass = map.getResources().getDrawable(R.drawable.compass);
 		final int mw = (int) compass.getMinimumWidth() ;
 		final int mh = (int) compass.getMinimumHeight() ;
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		compassView = new ImageView(view.getContext()) {
+		final OsmandMapTileView view = map.getMapView();
+		ImageViewControl compassView = new ImageViewControl(map) {
+			private float cachedRotate = 0;
 			@Override
 			protected void onDraw(Canvas canvas) {
 				canvas.save();
 				canvas.rotate(view.getRotate(), mw / 2, mh / 2);
 				compass.draw(canvas);
 				canvas.restore();
+			}
+		
+			@Override
+			public boolean updateInfo() {
+				if(view.getRotate() != cachedRotate) {
+					cachedRotate = view.getRotate();
+					invalidate();
+					return true;
+				}
+				return false;
 			}
 		};
 		compassView.setOnClickListener(new View.OnClickListener() {
@@ -768,160 +552,74 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		});
 		compassView.setImageDrawable(compass);
-		statusBar.addView(compassView, params);
-		
-		// Space (future text)
-		params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT, 1);
-		topText = new TextView(view.getContext());
-		topText.setGravity(Gravity.RIGHT);
-		statusBar.addView(topText, params);
-
-		// Map and progress icon
-		Drawable globusDrawable = view.getResources().getDrawable(R.drawable.globus);
-		
-		params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		FrameLayout fl = new FrameLayout(view.getContext());
-		statusBar.addView(fl, params);
-		
-		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		ImageView globus = new ImageView(view.getContext());
-		globus.setImageDrawable(globusDrawable);
-		/*
-		// TODO(natashaj): no need to change map type (offline vector vs mapnik vs cycle for e.g.)
-                globus.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				map.getMapLayers().selectMapLayer(view);
-			}
-		});
-		*/
-		fl.addView(globus, fparams);
-		
-		fparams = new FrameLayout.LayoutParams(globusDrawable.getMinimumWidth(), globusDrawable.getMinimumHeight());
-		progressBar = new View(view.getContext());
-		progressBar.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				map.getMapLayers().selectMapLayer(view);
-			}
-		});
-		fl.addView(progressBar, fparams);
-		
-		// Back to location icon 
-		params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		params.leftMargin = (int) (5 * scaleCoefficient);
-		params.rightMargin = (int) (5 * scaleCoefficient);
-		backToLocation = new ImageView(view.getContext());
-		backToLocation.setImageDrawable(view.getResources().getDrawable(R.drawable.back_to_loc));
-		backToLocation.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				map.backToLocationImpl();
-			}
-		});
-		statusBar.addView(backToLocation, params);
-		return statusBar;
+		return compassView;
 	}
 	
-	private static final float miniCoeff = 2f;
-	private MapInfoControl createLanesControl() {
-		final Path laneStraight = new Path();
-		Matrix pathTransform = new Matrix();
-		pathTransform.postScale(scaleCoefficient / miniCoeff, scaleCoefficient / miniCoeff);
-		TurnPathHelper.calcTurnPath(laneStraight, TurnType.valueOf(TurnType.C, false), pathTransform);
-		final Paint paintBlack = new Paint();
-		paintBlack.setStyle(Style.STROKE);
-		paintBlack.setColor(Color.BLACK);
-		paintBlack.setAntiAlias(true);
-		paintBlack.setStrokeWidth(2.5f);
-		
-		final Paint paintRouteDirection = new Paint();
-		paintRouteDirection.setStyle(Style.FILL);
-		paintRouteDirection.setColor(view.getResources().getColor(R.color.nav_arrow));
-		paintRouteDirection.setAntiAlias(true);
-		final float w = 72 * scaleCoefficient / miniCoeff;
-		
-		
-		final RoutingHelper routingHelper = routeLayer.getHelper();
-		final MapInfoControl lanesControl = new MapInfoControl(map) {
-			int[] lanes = null; 
-			
-			boolean imminent = false;
-			
-			@Override
-			protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-				int ls = (int) (lanes == null ? 0 : lanes.length * w);
-				setWDimensions(ls, (int)( w + 3 * scaleCoefficient));
-			}
+	private static class TopTextView extends TextView implements MapControlUpdateable {
+		private final RoutingHelper routingHelper;
+		private final MapActivity map;
 
-			@Override
-			protected void onDraw(Canvas canvas) {
-				super.onDraw(canvas);
-				//to change color immediately when needed
-				if (lanes != null && lanes.length > 0) {
-					canvas.save();
-					// canvas.translate((int) (16 * scaleCoefficient), 0);
-					for (int i = 0; i < lanes.length; i++) {
-						if ((lanes[i] & 1) == 1) {
-							paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
-						} else {
-							paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
-						}
-						canvas.drawPath(laneStraight, paintBlack);
-						canvas.drawPath(laneStraight, paintRouteDirection);
-						canvas.translate(w, 0);
+		public TopTextView(RoutingHelper routingHelper, MapActivity map) {
+			super(map);
+			this.routingHelper = routingHelper;
+			this.map = map;
+			getPaint().setTextAlign(Align.CENTER);
+			setTextColor(Color.BLACK);
+		}
+
+		@Override
+		protected void onDraw(Canvas canvas) {
+			ShadowText.draw(getText().toString(), canvas, getWidth() / 2, getHeight() - 4 * scaleCoefficient,
+					getPaint());
+		}
+
+		@Override
+		public boolean updateInfo() {
+			String text = null;
+			if (routingHelper != null && routingHelper.isRouteCalculated()) {
+				if (routingHelper.isFollowingMode()) {
+					text = routingHelper.getCurrentName();
+				} else {
+					int di = map.getMapLayers().getRouteInfoLayer().getDirectionInfo();
+					if (di >= 0 && map.getMapLayers().getRouteInfoLayer().isVisible()) {
+						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
+						text = routingHelper.formatStreetName(next.getStreetName(), next.getRef());
 					}
-					canvas.restore();
 				}
 			}
-			
-			@Override
-			public boolean updateInfo() {
-				boolean visible = false;
-				int locimminent = -1;
-				int[] loclanes = null;
-				if (routeLayer != null && routingHelper.isRouteCalculated()) {
-					if (routingHelper.isRouterEnabled() && routingHelper.isFollowingMode()) {
-						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
-						if(r != null && r.directionInfo != null && r.directionInfo.getTurnType() != null) {
-							loclanes  = r.directionInfo.getTurnType().getLanes();
-							locimminent = r.imminent;
-							// Do not show too far 
-							if(locimminent == 2 || locimminent < 0) {
-								loclanes = null;
-							}
-						}
-					} else {
-						int di = map.getMapLayers().getRouteInfoLayer().getDirectionInfo();
-						if (di >= 0 && map.getMapLayers().getRouteInfoLayer().isVisible()) {
-							RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
-							if(next != null) {
-								loclanes = next.getTurnType().getLanes();
-							}
-						}
+			if(text == null) {
+				text = "";
+			}
+			if (!text.equals(getText().toString())) {
+				TextPaint pp = new TextPaint(getPaint());
+				if (!text.equals("")) {
+					pp.setTextSize(25 * scaleCoefficient);
+					float ts = pp.measureText(text);
+					int wth = getWidth();
+					while (ts > wth && pp.getTextSize() > (14 * scaleCoefficient)) {
+						pp.setTextSize(pp.getTextSize() - 1);
+						ts = pp.measureText(text);
 					}
+					boolean dots = false;
+					while (ts > wth) {
+						dots = true;
+						text = text.substring(0, text.length() - 2);
+						ts = pp.measureText(text);
+					}
+					if (dots) {
+						text += "..";
+					}
+					setTextSize(TypedValue.COMPLEX_UNIT_PX, pp.getTextSize());
+				} else {
+					setTextSize(TypedValue.COMPLEX_UNIT_PX, 7);
 				}
-				visible = loclanes != null && loclanes.length > 0;
-				if (visible) {
-					if (!Arrays.equals(lanes, loclanes)) {
-						lanes = loclanes;
-						requestLayout();
-						invalidate();
-					}
-					if ((locimminent == 0) != imminent) {
-						imminent = (locimminent == 0);
-						invalidate();
-					}
-				}
-				updateVisibility(visible);
+				setText(text);
+				invalidate();
 				return true;
 			}
-		};
-		
-		return lanesControl;
+			return false;
+		}
+
 	}
-	
-	public void addRightStack(MapInfoControl v){
-		rightStack.addStackView(v);
-	}
+
 }

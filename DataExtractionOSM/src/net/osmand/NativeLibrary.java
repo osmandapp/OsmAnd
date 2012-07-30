@@ -26,10 +26,39 @@ public class NativeLibrary {
 
 		@Override
 		protected void finalize() throws Throwable {
+			deleteNativeResult();
+			super.finalize();
+		}
+		
+		public void deleteNativeResult() {
 			if (nativeHandler != 0) {
-				super.finalize();
+				deleteSearchResult(nativeHandler);
+				nativeHandler = 0;
 			}
-			deleteSearchResult(nativeHandler);
+		}
+	}
+	
+	public static class NativeRouteSearchResult {
+
+		public long nativeHandler;
+		public RouteDataObject[] objects;
+		public RouteRegion region;
+		public NativeRouteSearchResult(long nativeHandler, RouteDataObject[] objects) {
+			this.nativeHandler = nativeHandler;
+			this.objects = objects;
+		}
+
+		@Override
+		protected void finalize() throws Throwable {
+			deleteNativeResult();
+			super.finalize();
+		}
+		
+		public void deleteNativeResult() {
+			if (nativeHandler != 0) {
+				deleteRouteSearchResult(nativeHandler);
+				nativeHandler = 0;
+			}
 		}
 	}
 	
@@ -42,13 +71,14 @@ public class NativeLibrary {
 		return new NativeSearchResult(searchNativeObjectsForRendering(sleft, sright, stop, sbottom, zoom, request, skipDuplicates,
 				objectWithInterruptedField, msgIfNothingFound));
 	}
-
-	public void deleteSearchResult(NativeSearchResult searchResultHandler) {
-		if (searchResultHandler.nativeHandler != 0) {
-			deleteSearchResult(searchResultHandler.nativeHandler);
-			searchResultHandler.nativeHandler = 0;
+	
+	public RouteDataObject[] getDataObjects(NativeRouteSearchResult rs, int x31, int y31) {
+		if(rs.nativeHandler == 0) {
+			throw new IllegalStateException("Native route handler is 0");
 		}
+		return getRouteDataObjects(rs.region, rs.nativeHandler, x31, y31);
 	}
+
 	
 	public boolean initMapFile(String filePath) {
 		return initBinaryMapFile(filePath);
@@ -58,13 +88,24 @@ public class NativeLibrary {
 		return closeBinaryMapFile(filePath);
 	}
 	
-	public RouteDataObject[] loadRouteRegion(RouteRegion reg, int left, int right, int top, int bottom) {
-		return loadRoutingData(reg, reg.getName(), reg.getFilePointer(), left, right, top, bottom);
+	
+	
+	public NativeRouteSearchResult loadRouteRegion(RouteRegion reg, int left, int right, int top, int bottom, boolean loadObjects) {
+		NativeRouteSearchResult lr = loadRoutingData(reg, reg.getName(), reg.getFilePointer(), left, right, top, bottom, loadObjects);
+		if(lr != null && lr.nativeHandler != 0){
+			lr.region = reg;
+		}
+		return lr;
 	}
 
 	
-	protected static native RouteDataObject[] loadRoutingData(RouteRegion reg, String regName, int fpointer, int left, int right, int top, int bottom); 
-
+	protected static native NativeRouteSearchResult loadRoutingData(RouteRegion reg, String regName, int fpointer, int left, int right, int top, int bottom,
+			boolean loadObjects); 
+	
+	protected static native void deleteRouteSearchResult(long searchResultHandle);
+	
+	protected static native RouteDataObject[] getRouteDataObjects(RouteRegion reg, long rs, int x31, int y31);
+	
 	protected static native void deleteSearchResult(long searchResultHandle);
 
 	protected static native boolean initBinaryMapFile(String filePath);

@@ -2,5 +2,5 @@
 <resources>
     <string name="bidforfix_loading">Загружается</string>
     <string name="bidforfix_supporters">%1$d поддержали</string>
-	<string name="bidforfix_funded">Профинансировано: %d%%</string>    
+	<string name="bidforfix_funded">Собрано: %d%%</string>    
 </resources>

@@ -350,6 +350,7 @@ public class SearchAddressActivity extends Activity {
 		} else {
 			selectAddressMode = false;
 		}
+		findViewById(R.id.TopTextView).setVisibility(selectAddressMode? View.VISIBLE : View.GONE);
 
 		region = null;
 		postcode = null;
