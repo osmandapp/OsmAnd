@@ -1,5 +1,7 @@
 package net.osmand.plus.background;
 
+import net.londatiga.android.ActionItem;
+import net.londatiga.android.QuickAction;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -7,20 +9,29 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.views.LockInfoControl.LockInfoControlActions;
+import net.osmand.plus.views.LockInfoControl.ValueHolder;
+import net.osmand.plus.views.LockInfoControl;
+import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.OsmandMapTileView;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.DialogInterface.OnClickListener;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.view.View;
 
-public class OsmandBackgroundServicePlugin extends OsmandPlugin {
+public class OsmandBackgroundServicePlugin extends OsmandPlugin implements LockInfoControlActions {
 	public static final int[] MINUTES = new int[]{2, 3, 5, 10, 15, 30, 45, 60, 90};
 	public static final int[] SECONDS = new int[]{0, 30, 45, 60};
+	private final static boolean REGISTER_BG_SETTINGS = false;
 	private static final String ID = "osmand.backgroundservice";
 	private OsmandSettings settings;
 	private OsmandApplication app;
@@ -55,6 +66,15 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin {
 	}
 	
 	@Override
+	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
+		MapInfoLayer li = activity.getMapLayers().getMapInfoLayer();
+		LockInfoControl lock = li.getLockInfoControl();
+		if(lock != null && !lock.getLockActions().contains(this)) {
+			lock.getLockActions().add(this);
+		}
+	}
+	
+	@Override
 	public void settingsActivityDestroy(final SettingsActivity activity){
 		unregisterReceiver(activity);
 	}
@@ -76,6 +96,12 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin {
 
 	@Override
 	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
+		if(REGISTER_BG_SETTINGS) {
+			registerBackgroundSettings(activity, screen);
+		}
+	}
+
+	private void registerBackgroundSettings(final SettingsActivity activity, PreferenceScreen screen) {
 		PreferenceScreen grp = screen.getPreferenceManager().createPreferenceScreen(activity);
 		grp.setTitle(R.string.osmand_service);
 		grp.setSummary(R.string.osmand_service_descr);
@@ -119,5 +145,38 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin {
 		
 		grp.addPreference(activity.createTimeListPreference(settings.SERVICE_OFF_INTERVAL, SECONDS, MINUTES, 1000,
 				R.string.background_service_int, R.string.background_service_int_descr));
+	}
+
+	@Override
+	public void addLockActions(final QuickAction qa, final LockInfoControl li, final OsmandMapTileView view) {
+		
+		final ActionItem bgServiceAction = new ActionItem();
+		final boolean off = view.getApplication().getNavigationService() == null;
+		bgServiceAction.setTitle(view.getResources().getString(!off? R.string.bg_service_sleep_mode_on : R.string.bg_service_sleep_mode_off));
+//		bgServiceAction.setIcon(view.getResources().getDrawable(R.drawable.car_small));
+		bgServiceAction.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final Intent serviceIntent = new Intent(view.getContext(), NavigationService.class);
+				if (view.getApplication().getNavigationService() == null) {
+					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
+					vs.value = view.getSettings().SERVICE_OFF_INTERVAL.get();
+					li.showIntervalChooseDialog(view, view.getContext().getString(R.string.gps_wakeup_interval), 
+							view.getContext().getString(R.string.background_router_service), OsmandBackgroundServicePlugin.SECONDS, OsmandBackgroundServicePlugin.MINUTES,
+							vs, new OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							view.getSettings().SERVICE_OFF_INTERVAL.set(vs.value);
+							view.getContext().startService(serviceIntent);	
+						}
+					});
+				} else {
+					view.getContext().stopService(serviceIntent);
+				}
+				qa.dismiss();
+			}
+		});
+		qa.addActionItem(bgServiceAction);
+		
 	}
 }

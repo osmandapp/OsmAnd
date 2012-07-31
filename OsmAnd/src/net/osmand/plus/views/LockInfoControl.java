@@ -1,17 +1,16 @@
 package net.osmand.plus.views;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.access.AccessibleToast;
-import net.osmand.plus.NavigationService;
 import net.osmand.plus.R;
-import net.osmand.plus.background.OsmandBackgroundServicePlugin;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -31,6 +30,21 @@ public class LockInfoControl {
 	private View transparentLockView;
 	private Drawable lockEnabled;
 	private Drawable lockDisabled;
+	private List<LockInfoControlActions> lockActions = new ArrayList<LockInfoControl.LockInfoControlActions>();
+	
+	public interface LockInfoControlActions {
+		
+		public void addLockActions(QuickAction qa, LockInfoControl li, OsmandMapTileView view);
+	}
+	
+	public void addLockActions(LockInfoControlActions la){
+		lockActions.add(la);
+	}
+	
+	
+	public List<LockInfoControlActions> getLockActions() {
+		return lockActions;
+	}
 	
 	public ImageView createLockScreenWidget(final OsmandMapTileView view) {
 		final ImageView lockView = new ImageView(view.getContext());
@@ -55,7 +69,7 @@ public class LockInfoControl {
 	}
 
 	private void showBgServiceQAction(final ImageView lockView, final OsmandMapTileView view) {	
-		final QuickAction bgAction = new QuickAction(lockView);
+		final QuickAction qa = new QuickAction(lockView);
 		
 		if (transparentLockView == null) {
 			transparentLockView = new FrameLayout(view.getContext());
@@ -112,30 +126,16 @@ public class LockInfoControl {
 					parent.removeView(transparentLockView);
 				}
 				isScreenLocked = !isScreenLocked;
-				bgAction.dismiss();
+				qa.dismiss();
 				updateLockIcon(view, lockView);
 			}
 		});
-		bgAction.addActionItem(lockScreenAction);
+		qa.addActionItem(lockScreenAction);
 		
-		final ActionItem bgServiceAction = new ActionItem();
-		final boolean off = view.getApplication().getNavigationService() == null;
-		bgServiceAction.setTitle(view.getResources().getString(off? R.string.bg_service_sleep_mode_on : R.string.bg_service_sleep_mode_off));
-//		bgServiceAction.setIcon(view.getResources().getDrawable(R.drawable.car_small)); //TODO icon
-		bgServiceAction.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent serviceIntent = new Intent(view.getContext(), NavigationService.class);
-				if (view.getApplication().getNavigationService() == null) {
-					startBgService(serviceIntent, view);
-				} else {
-					view.getContext().stopService(serviceIntent);
-				}
-				bgAction.dismiss();
-			}
-		});
-		bgAction.addActionItem(bgServiceAction);
-		bgAction.show();
+		for(LockInfoControlActions la : lockActions){
+			la.addLockActions(qa, this, view);
+		}
+		qa.show();
 		
 	}
 	
@@ -143,7 +143,7 @@ public class LockInfoControl {
 		public T value;
 	}
 	
-	private void showIntervalChooseDialog(final OsmandMapTileView view, final String patternMsg,
+	public void showIntervalChooseDialog(final OsmandMapTileView view, final String patternMsg,
 			String startText, final int[] seconds, final int[] minutes, final ValueHolder<Integer> v, OnClickListener onclick){
 		final Context ctx = view.getContext();
 		Builder dlg = new AlertDialog.Builder(view.getContext());
@@ -206,17 +206,6 @@ public class LockInfoControl {
 		dlg.setNegativeButton(R.string.default_buttons_cancel, null);
 		dlg.show();
 	}
-	private void startBgService(final Intent serviceIntent, final OsmandMapTileView view) {
-		final ValueHolder<Integer> v = new ValueHolder<Integer>();
-		v.value = view.getSettings().SERVICE_OFF_INTERVAL.get();
-		showIntervalChooseDialog(view, view.getContext().getString(R.string.gps_wakeup_interval), 
-				view.getContext().getString(R.string.bg_service_sleep_mode_on), OsmandBackgroundServicePlugin.SECONDS, OsmandBackgroundServicePlugin.MINUTES,
-				v, new OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				view.getSettings().SERVICE_OFF_INTERVAL.set(v.value);
-				view.getContext().startService(serviceIntent);	
-			}
-		});
-	}
+	
+	
 }
