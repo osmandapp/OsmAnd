@@ -12,7 +12,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.location.LocationManager;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -118,14 +117,7 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin {
 		routeServiceEnabled.setKey(OsmandSettings.SERVICE_OFF_ENABLED);
 		grp.addPreference(routeServiceEnabled);
 		
-		String[] entries = new String[]{app.getString(R.string.gps_provider), app.getString(R.string.network_provider)};
-		String[] entrieValues = new String[]{LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER};
-		grp.addPreference(activity.createListPreference(settings.SERVICE_OFF_PROVIDER, entries, entrieValues, 
-				R.string.background_service_provider, R.string.background_service_provider_descr));
-		
 		grp.addPreference(activity.createTimeListPreference(settings.SERVICE_OFF_INTERVAL, SECONDS, MINUTES, 1000,
 				R.string.background_service_int, R.string.background_service_int_descr));
-		grp.addPreference(activity.createTimeListPreference(settings.SERVICE_OFF_WAIT_INTERVAL,new int[]{15, 30, 45, 60, 90}, new int[]{2, 3, 5, 10}, 1000,
-				R.string.background_service_wait_int, R.string.background_service_wait_int_descr));
 	}
 }

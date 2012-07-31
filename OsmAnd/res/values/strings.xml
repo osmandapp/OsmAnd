@@ -9,6 +9,8 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="gps_wakeup_interval">GPS wakeup interval : %s</string>
+    <string name="int_continuosly">Continuously</string>
     <string name="screen_is_locked">To unlock screen press lock icon</string>
     <string name="map_widget_top_text">Street name</string>
     <string name="map_widget_config">Configuration</string>

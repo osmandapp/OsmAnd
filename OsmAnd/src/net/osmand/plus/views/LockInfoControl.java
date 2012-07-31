@@ -5,15 +5,24 @@ import net.londatiga.android.QuickAction;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.R;
+import net.osmand.plus.background.OsmandBackgroundServicePlugin;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class LockInfoControl {
@@ -53,6 +62,41 @@ public class LockInfoControl {
 			FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT,
 					Gravity.CENTER);
 			transparentLockView.setLayoutParams(fparams);
+			transparentLockView.setOnTouchListener(new View.OnTouchListener() {
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					if (event.getAction() == MotionEvent.ACTION_UP) {
+						int[] locs = new int[2];
+						lockView.getLocationOnScreen(locs);
+						int x = (int) event.getX() - locs[0];
+						int y = (int) event.getY() - locs[1];
+						transparentLockView.getLocationOnScreen(locs);
+						x += locs[0];
+						y += locs[1];
+						if(lockView.getWidth() >= x && x >= 0 && 
+								lockView.getHeight() >= y && y >= 0) {
+							showBgServiceQAction(lockView, view);
+							return true;
+						}
+						blinkIcon();
+						AccessibleToast.makeText(transparentLockView.getContext(), R.string.screen_is_locked, Toast.LENGTH_LONG)
+								.show();
+						return true;
+					}
+					return true;
+				}
+
+				private void blinkIcon() {
+					lockView.setBackgroundDrawable(lockDisabled);
+					view.postDelayed(new Runnable() {
+						@Override
+						public void run() {
+							lockView.setBackgroundDrawable(lockEnabled);
+						}
+					}, 300);
+				}
+
+			});
 		}
 		final FrameLayout parent = (FrameLayout) view.getParent();
 		final ActionItem lockScreenAction = new ActionItem();
@@ -64,40 +108,6 @@ public class LockInfoControl {
 			public void onClick(View v) {
 				if (!isScreenLocked) {
 					parent.addView(transparentLockView);
-					transparentLockView.setOnTouchListener(new View.OnTouchListener() {
-						@Override
-						public boolean onTouch(View v, MotionEvent event) {
-							if (event.getAction() == MotionEvent.ACTION_UP) {
-								int[] locs = new int[2];
-								lockView.getLocationOnScreen(locs);
-								int x = (int) event.getX() - locs[0];
-								int y = (int) event.getY() - locs[1];
-								transparentLockView.getLocationOnScreen(locs);
-								x += locs[0];
-								y += locs[1];
-								if(lockView.getWidth() >= x && x >= 0 && 
-										lockView.getHeight() >= y && y >= 0) {
-									showBgServiceQAction(lockView, view);
-									return true;
-								}
-								blinkIcon();
-								AccessibleToast.makeText(transparentLockView.getContext(), R.string.screen_is_locked, Toast.LENGTH_LONG)
-										.show();
-								return true;
-							}
-							return true;
-						}
-
-						private void blinkIcon() {
-							lockView.setBackgroundDrawable(lockDisabled);
-							view.postDelayed(new Runnable() {
-								@Override
-								public void run() {
-									lockView.setBackgroundDrawable(lockEnabled);
-								}
-							}, 300);
-						}
-					});
 				} else {
 					parent.removeView(transparentLockView);
 				}
@@ -117,7 +127,7 @@ public class LockInfoControl {
 			public void onClick(View v) {
 				Intent serviceIntent = new Intent(view.getContext(), NavigationService.class);
 				if (view.getApplication().getNavigationService() == null) {
-					view.getContext().startService(serviceIntent);
+					startBgService(serviceIntent, view);
 				} else {
 					view.getContext().stopService(serviceIntent);
 				}
@@ -128,47 +138,85 @@ public class LockInfoControl {
 		bgAction.show();
 		
 	}
-	/*
-	private void createIntervalRadioGrp(final QuickAction mQuickAction, OsmandMapTileView view) {
-		final OsmandSettings settings = view.getSettings();
-		LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		final View bgServiceView = inflater.inflate(R.layout.background_service_int, null);
-		final FrameLayout parent = (FrameLayout) view.getParent();
-		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, Gravity.CENTER);
-		fparams.setMargins(0, 30, 0, 30);
-		bgServiceView.setLayoutParams(fparams);
-		bgServiceView.setPadding(20, 5, 20, 5);
-		parent.addView(bgServiceView);
-		
-		RadioGroup intRadioGrp = (RadioGroup) bgServiceView.findViewById(R.id.wake_up_int_grp);
-		final int secondsLength = OsmandBackgroundServicePlugin.SECONDS.length;
-    	final int minutesLength = OsmandBackgroundServicePlugin.MINUTES.length;
-    	final int[] SECONDS = OsmandBackgroundServicePlugin.SECONDS;
-    	final int[] MINUTES = OsmandBackgroundServicePlugin.MINUTES;
-    	
-    	final RadioButton[] intButtons = new RadioButton[minutesLength + secondsLength];
-		for (int i = 0; i < secondsLength; i++) {
-			intButtons[i] = new RadioButton(view.getContext());
-			intButtons[i].setText(SECONDS[i] + " " + view.getContext().getString(R.string.int_seconds));
-			intButtons[i].setTextColor(Color.BLACK);
-			intButtons[i].setId(SECONDS[i] * 1000);
-			intRadioGrp.addView(intButtons[i]);
-		}
-		for (int i = secondsLength; i < secondsLength + minutesLength; i++) {
-			intButtons[i] = new RadioButton(view.getContext());
-			intButtons[i].setText(MINUTES[i-secondsLength] + " " + view.getContext().getString(R.string.int_min));
-			intButtons[i].setTextColor(Color.BLACK);
-			intButtons[i].setId(MINUTES[i-secondsLength] * 60 * 1000);
-			intRadioGrp.addView(intButtons[i]);
-		}
-		
-		intRadioGrp.check(settings.SERVICE_OFF_INTERVAL.get());
-		intRadioGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) { 
-            	settings.SERVICE_OFF_INTERVAL.set(checkedId);
-            	parent.removeView(bgServiceView);
-            }
+	
+	public static class ValueHolder<T> {
+		public T value;
+	}
+	
+	private void showIntervalChooseDialog(final OsmandMapTileView view, final String patternMsg,
+			String startText, final int[] seconds, final int[] minutes, final ValueHolder<Integer> v, OnClickListener onclick){
+		final Context ctx = view.getContext();
+		Builder dlg = new AlertDialog.Builder(view.getContext());
+		dlg.setTitle(startText);
+		LinearLayout ll = new LinearLayout(view.getContext());
+		final TextView tv = new TextView(view.getContext());
+		tv.setPadding(7, 3, 7, 0);
+		tv.setText(String.format(patternMsg, ctx.getString(R.string.int_continuosly)));
+		SeekBar sp = new SeekBar(view.getContext());
+		sp.setPadding(7, 5, 7, 0);
+		final int secondsLength = seconds.length;
+    	final int minutesLength = minutes.length;
+    	sp.setMax(secondsLength + minutesLength - 1);
+		sp.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+			}
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+			}
+			
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+				String s;
+				if(progress == 0) {
+					s = ctx.getString(R.string.int_continuosly);
+				} else {
+					if(progress < secondsLength) {
+						s = seconds[progress] + ctx.getString(R.string.int_seconds);
+						v.value = seconds[progress] * 1000;
+					} else {
+						s = minutes[progress - secondsLength] + ctx.getString(R.string.int_min);
+						v.value = minutes[progress - secondsLength] * 60 * 1000;
+					}
+				}
+				tv.setText(String.format(patternMsg, s));
+				
+			}
 		});
-	} */
+		
+    	for(int i=0; i<secondsLength +minutesLength - 1; i++) {
+    		if(i < secondsLength) {
+    			if(v.value <= seconds[i] * 1000) {
+    				sp.setProgress(i);
+    				break;
+    			}
+    		} else {
+    			if(v.value <= minutes[i - secondsLength] * 1000 * 60) {
+    				sp.setProgress(i);
+    				break;
+    			}	
+    		}
+    	}
+		
+		ll.setOrientation(LinearLayout.VERTICAL);
+		ll.addView(tv);
+		ll.addView(sp);
+		dlg.setView(ll);
+		dlg.setPositiveButton(R.string.default_buttons_ok, onclick);
+		dlg.setNegativeButton(R.string.default_buttons_cancel, null);
+		dlg.show();
+	}
+	private void startBgService(final Intent serviceIntent, final OsmandMapTileView view) {
+		final ValueHolder<Integer> v = new ValueHolder<Integer>();
+		v.value = view.getSettings().SERVICE_OFF_INTERVAL.get();
+		showIntervalChooseDialog(view, view.getContext().getString(R.string.gps_wakeup_interval), 
+				view.getContext().getString(R.string.bg_service_sleep_mode_on), OsmandBackgroundServicePlugin.SECONDS, OsmandBackgroundServicePlugin.MINUTES,
+				v, new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				view.getSettings().SERVICE_OFF_INTERVAL.set(v.value);
+				view.getContext().startService(serviceIntent);	
+			}
+		});
+	}
 }

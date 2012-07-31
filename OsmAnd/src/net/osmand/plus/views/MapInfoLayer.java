@@ -71,6 +71,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private MapInfoControls mapInfoControls;
 	private TopTextView topText;
 
+	private LockInfoControl lockInfoControl;
+
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
 		this.routeLayer = layer;
@@ -117,6 +119,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 
 		mapInfoControls = new MapInfoControls(map.getMyApplication().getSettings());
+		lockInfoControl = new LockInfoControl();
 	}
 	
 	
@@ -134,6 +137,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 	
 	public Paint getPaintSubText() {
 		return paintSubText;
+	}
+	
+	public LockInfoControl getLockInfoControl() {
+		return lockInfoControl;
 	}
 	
 	public MapInfoControls getMapInfoControls() {
@@ -210,7 +217,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		View config = createConfiguration();
 		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapInfoControls.RIGHT_CONTROL, all, 10).required(ApplicationMode.values());
 
-		LockInfoControl lockInfoControl = new LockInfoControl();
 		ImageView bgServiceView = lockInfoControl.createLockScreenWidget(view);
 		mapInfoControls.registerTopWidget(bgServiceView, R.drawable.lock_enabled, R.string.bg_service_screen_lock, "bgService", MapInfoControls.LEFT_CONTROL, all, 15);
 		
