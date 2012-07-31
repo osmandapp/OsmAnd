@@ -68,9 +68,15 @@ public class LockInfoControl {
 						@Override
 						public boolean onTouch(View v, MotionEvent event) {
 							if (event.getAction() == MotionEvent.ACTION_UP) {
-								Rect r = new Rect();
-								lockView.getGlobalVisibleRect(r);
-								if (r.contains((int) event.getX(), (int) event.getY())) {
+								int[] locs = new int[2];
+								lockView.getLocationOnScreen(locs);
+								int x = (int) event.getX() - locs[0];
+								int y = (int) event.getY() - locs[1];
+								transparentLockView.getLocationOnScreen(locs);
+								x += locs[0];
+								y += locs[1];
+								if(lockView.getWidth() >= x && x >= 0 && 
+										lockView.getHeight() >= y && y >= 0) {
 									showBgServiceQAction(lockView, view);
 									return true;
 								}
