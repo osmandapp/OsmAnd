@@ -192,15 +192,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 		RoutingHelper routingHelper = view.getApplication().getRoutingHelper();
 		NextTurnInfoControl bigInfoControl = ric.createNextInfoControl(routingHelper, view.getApplication(), view.getSettings(), paintText,
 				paintSubText, false);
-		mapInfoControls.registerSideWidget(bigInfoControl, 0, R.string.map_widget_next_turn,"next_turn", true, all, none, 5);
+		mapInfoControls.registerSideWidget(bigInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn,"next_turn", true, all, none, 5);
 		NextTurnInfoControl smallInfoControl = ric.createNextInfoControl(routingHelper, view.getApplication(), view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
-		mapInfoControls.registerSideWidget(smallInfoControl, 0, R.string.map_widget_next_turn_small, "next_turn_small", true, bicyclePedestrian, none, 10);
+		mapInfoControls.registerSideWidget(smallInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true, bicyclePedestrian, none, 10);
 		NextTurnInfoControl nextNextInfoControl = ric.createNextNextInfoControl(routingHelper, view.getApplication(), view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
-		mapInfoControls.registerSideWidget(nextNextInfoControl, 0, R.string.map_widget_next_next_turn, "next_next_turn",true, all, none, 15);
+		mapInfoControls.registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, all, none, 15);
 		MiniMapControl miniMap = ric.createMiniMapControl(routingHelper, view);
-		mapInfoControls.registerSideWidget(miniMap, 0, R.string.map_widget_mini_route, "mini_route", true, none, none, 20);
+		mapInfoControls.registerSideWidget(miniMap, R.drawable.widget_next_turn, R.string.map_widget_mini_route, "mini_route", true, none, none, 20);
 		// right stack
 		TextInfoControl dist = ric.createDistanceControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(dist, R.drawable.info_target, R.string.map_widget_distance, "distance", false, all, none, 5);
