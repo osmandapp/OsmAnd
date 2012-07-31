@@ -882,7 +882,7 @@
   <string name="show_cameras">Mostra autovelox</string>
   <string name="show_speed_limits">Mostra limiti di velocità</string>
   <string name="avoid_toll_roads">Evita strade a pedaggio</string>
-  <string name="tip_recent_changes_0_8_2_t">"Cambiamenti nella versione 0.8.2 : \n\t* Migliorato il routing"</string>
+  <string name="tip_recent_changes_0_8_2_t">"Cambiamenti nella versione 0.8.2 : \n\t* Migliorato il routing\n\t* Widget dinamici per le mappe"</string>
   <string name="map_widget_top_text">Nome della strada</string>
   <string name="map_widget_config">Configurazione</string>
   <string name="map_widget_map_select">Selezione della mappa</string>
@@ -903,11 +903,11 @@
   <string name="map_widget_next_turn_small">Prossima svolta (piccola)</string>
   <string name="map_widget_next_next_turn">Svolta successiva a questa</string>
   <string name="map_widget_mini_route">Minimappa del percorso</string>
-  <string name="bg_service_screen_lock">Blocca/sblocca schermo</string>
+  <string name="bg_service_screen_lock">Blocca schermo</string>
   <string name="bg_service_screen_lock_toast">Lo schermo è bloccato</string>
   <string name="bg_service_interval">Imposta l\'intervallo di risveglio:</string>
-  <string name="screen_is_locked">To unlock screen press lock icon</string>
-  <string name="bg_service_screen_unlock">Unlock screen</string>
-  <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
-  <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
+  <string name="screen_is_locked">Per sbloccare lo schermo premi l\'icona del lucchetto</string>
+  <string name="bg_service_screen_unlock">Sblocca schermo</string>
+  <string name="bg_service_sleep_mode_off">Disabilita modalità sleep</string>
+  <string name="bg_service_sleep_mode_on">Abilita modalità sleep</string>
 </resources>
