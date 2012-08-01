@@ -1,19 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources>
-  <!--
-    	 Disclaimer : 
-         If you are going to translate strings, please make sure : 
-         1. There is no duplicate strings by name
-         2. Every apostrophe (quote) is preceded by a backslash (see others).
-         If you are making/correcting english translations make sure :
-         1. All your modified/created strings are in the top of the file (to make easier find what's translated).
-    PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
-    -->
-  <string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_event">Pasiimkite mašiną iš parkavimo vietos</string>
   <string name="osmand_parking_warning">Dėmesio</string>
-  <string name="osmand_parking_warning_text">"Perspėjimas pasiimti mašiną jau buvo įtrauktas į jūsų Kalendorių. Perspėjimas ten liks tol, kol jo nepanaikinsite. "</string>
+  <string name="osmand_parking_warning_text">Perspėjimas pasiimti mašiną jau buvo įtrauktas į jūsų Kalendorių. Perspėjimas ten liks tol, kol jo nepanaikinsite.</string>
   <string name="osmand_parking_time_limit_title">Nustatyti parkavimo trukmę</string>
   <string name="osmand_parking_delete_confirm">Ar norite panaikinti mašinos parkavimo vietą?</string>
   <string name="osmand_parking_delete">Panaikinti parkavimo žymę</string>
@@ -218,7 +208,6 @@
   <string name="amenity_type_wikiosm">Wikipedia (įrenginyje)</string>
   <string name="amenity_type_user_defined">Nustatyta vartotojo</string>
   <string name="fav_export_confirmation">"Failas su anksčiau eksportuotomis pamėgtomis vietomis jau egzistuoja. Ar norite jį pakeisti kitu? "</string>
-  <!-- this block re-worked for new Preferences structure -->
   <string name="profile_settings">Specifiniai profilio nustatymai</string>
   <string name="settings_preset">Vartotojo profilis</string>
   <string name="settings_preset_descr">Pasirinkite vartotojo profilį su individualiu žemėlapiu ir navigacijos nustatymais.</string>
@@ -244,7 +233,6 @@
   <string name="tip_day_night_mode_t">"\tDalies vektorinių žemėlapių išvaizdą galima pakeisti perjungiant tarp dienos (šviesesnių) ir nakties (tamsesnių) spalvų derinių. \n\tNaktinės spalvos yra saugesnės vairuojant. \n\tNuėję į \'Nustatymai\' -&gt; \'Žemėlapio išvaizda\' -&gt;\'Dienos/nakties režimas\' galėsite pasirinkti kaip automatiškai bus perjungiamos nakties ir dienos spalvos. \n\tGalėsite pasirinkti: \n\t\'Saulėtekis/Saulėlydis\' - automatinis režimas kai spalvos perjungiamos saulei leidžiantis ir kylant (įjungta pagal nutylėjimą) \n\t\'Diena\' - visada naudotos dienos režimą \n\t\'Naktis\' - visada naudos nakties režimą \n\t\'Šviesos sensorius\' - žemėlapio išvaizda bus valdoma jūsų įrenginyje esančio (jei yra) šviesos sensoriaus "</string>
   <string name="tip_osm_improve">Tobulinami OSM duomenys</string>
   <string name="tip_osm_improve_t">\tOsmAnd naudoja žemėlapius pagamintus Openstreetmap.org (OSM) duomenų pagrindu ir programa šalia žemėlapių peržiūros ar navigacijos gali būti naudojama OSM duomenų kokybei gerinti. Vos keliais paspaudimais jūs galite sukurti ir nusiųsti į OSM naujas LV ar pastebėtas OSM klaidas! \n\tTam pirmiausia jums reikės nuėjus į \'Nustatymai\' -&gt; \'Bendri nustatymai\' -&gt; \'OSM redagavimas\' nurodyti savo OSM prisijungimo informaciją. \n\tNorėdami sukurti naują LV naudokitės \'Sukurti LV\' iš žemėlapio kontekstinio meniu. Įveskite informaciją apie naują LV į atsivėrusį \'Sukurti LV\' dialogą ir galiausiai išsaugokite ją. \n\tApie žemėlapio klaidas galima iš karto pranešti OSM ir OSM bendruomenė galės jas ištaisyti. \n\tNorėdami pranešti apie žemėlapio klaidą pasirinkite \'Pranešti apie OSM klaidą\' žemėlapio kontekstiniame meniu. Įveskite informaciją apie žemėlapio klaidą ir perduokite ją paspausdami \'Pridėti\'. \n\tAtminkite, kad pranešimams apie naujas LV ar žemėlapių klaidas perduoti būtnas interneto ryšys.</string>
-  <!-- end of string changes for new Preferences structure -->
   <string name="download_files_not_enough_space">Neužtenka vietos parsiųsti %1$s MB (laisva: %2$s).</string>
   <string name="download_files_question_space">Dabar laisvos vietos yra {2} MB! Parsiųsti {0} failą(-us) ({1} MB)?</string>
   <string name="tip_select_destination_point">Pasirinkti kelionės tikslą</string>
