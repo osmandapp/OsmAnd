@@ -232,7 +232,7 @@
   <string name="tip_recent_changes_0_6_7_t">"Novinky vo verzii 0.6.7 : \n\t- Manažér offline údajov (sťahovanie, mazanie a záloha offline dát priamo v OsmAnde) \n\t- Obľúbené body a skupiny (kategorizácia, mazanie a organizácia obľúbených bodov) \n\t- GPX prieskumník v aplikácii (zobrazenie stôp, vzdialenosti, priemernej rýchlosti, stúpania, atď.) \n\t- GPX navigácia (užitočné možnosti, pokračovanie v navigovaní po páde, podpora kruhových objazdov) \n\t- Funkcia na uloženie cesty do GPX stopy, pre neskoršie použitie offline \n\t- Vylepšenie GPX stopovania (filtrovanie niektorých nepresných umiestnení a uloženie presnosti/stúpania/rýchlosti) \n\t- Nahrávanie GPX pre OSM komunitu (http://download.osmand.net/gpx/) \n\t- Vylepšenie vektorového vykresľovania \n\t- Vylepšenie TTS jadra (oznamovanie presnej vzdialenosti, povolenie míľ) \n\t- Oprava chýb "</string>
   <string name="save_route_dialog_title">Uložiť cestu ako GPX stopu</string>
   <string name="route_successfully_saved_at">Cesta je úspešne uložená v \'%1$s\'.</string>
-  <string name="filename_input">Názov súboru :</string>
+  <string name="filename_input">Názov súboru : </string>
   <string name="file_with_name_already_exist">Súbor s takýmto názvom už existuje.</string>
   <string name="default_buttons_save">Uložiť</string>
   <string name="menu_save_directions">Uložiť pokyny</string>
@@ -450,7 +450,7 @@
   <string name="osmand_service">Funkcia v režime spánku</string>
   <string name="osmand_service_descr">Použite pre beh OsmAndu počas vypnutej obrazovky</string>
   <string name="fast_route_mode">Najrýchlejšia trasa</string>
-  <string name="fast_route_mode_descr">Zapnite na výpočet najrýchlejšej trasy alebo vypnite pre najkratšiu trasu</string>
+  <string name="fast_route_mode_descr">Zapnite na výpočet najrýchlejšej trasy alebo vypnite pre najkratšiu trasu </string>
   <string name="tiles_to_download_estimated_size">Pri priblížení {0} sa stiahne {1} dlaždíc ({2} Mb )</string>
   <string name="context_menu_item_download_map">Stiahnuť mapu</string>
   <string name="select_max_zoom_preload_area">Vybrať max. priblíženie viditeľnej oblasti na načítanie</string>
